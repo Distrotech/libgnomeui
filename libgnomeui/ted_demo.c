@@ -6,6 +6,12 @@
 #include "gtk-ted.h"
 
 void
+clicked ()
+{
+	printf ("Button clicked\n");
+}
+
+void
 xrandom_widgets (GtkTed *t)
 {
 	GtkWidget *l;
@@ -18,6 +24,7 @@ xrandom_widgets (GtkTed *t)
 		l = gtk_button_new_with_label (buf);
 		gtk_widget_show (l);
 		gtk_ted_add (t, l, buf);
+		gtk_signal_connect (GTK_OBJECT (l), "clicked", GTK_SIGNAL_FUNC (clicked), NULL);
 	}
 
 	l = gtk_label_new ("This is a windowless widget");

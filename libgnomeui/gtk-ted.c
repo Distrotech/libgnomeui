@@ -27,7 +27,7 @@ struct ted_widget_info {
 	GtkWidget *widget;
 	char      *name;
 	GtkWidget *label_span_x, *label_span_y;
-	char start_col, start_row, col_span, row_span;
+	int start_col, start_row, col_span, row_span;
 	int  sticky;
 	int  type;
 };
@@ -1076,9 +1076,6 @@ gtk_ted_new_checkbox (GtkWidget *box, struct ted_widget_info *wi, char *string, 
 static void
 gtk_ted_orient_cb (GtkWidget *w, void *data)
 {
-	struct ted_widget_info *wi = gtk_object_get_data (GTK_OBJECT (w), "ted_wi");
-	int index = (int) gtk_object_get_data (GTK_OBJECT (w), "index");
-
 	/*
 	if (strcmp (data, "Left") == 0){
 		wi->lcr = index;
