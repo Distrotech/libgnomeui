@@ -530,7 +530,7 @@ create_entry(void)
 	GtkWidget *entry;
 
 	app = create_newwin(TRUE,"testGNOME","Entry");
-	entry = gnome_entry_new(NULL);
+	entry = gnome_entry_new("test-entry");
 	g_assert(entry != NULL);
 	bonobo_window_set_contents(BONOBO_WINDOW(app->app), entry);
 	gtk_widget_show(entry);
@@ -945,7 +945,6 @@ create_icon_list(void)
 
 	GTK_WIDGET_SET_FLAGS(iconlist, GTK_CAN_FOCUS);
 	pix = gdk_pixbuf_new_from_xpm_data ((const gchar **)bomb_xpm);
-/*	gdk_imlib_render (pix, pix->rgb_width, pix->rgb_height);*/
 
 	gtk_widget_grab_focus (iconlist);
 
@@ -962,6 +961,386 @@ create_icon_list(void)
 	gnome_icon_list_thaw (GNOME_ICON_LIST (iconlist));
 	gtk_widget_show (iconlist);
 	gtk_widget_show(app->app);
+}
+
+
+/* Used as a callback for menu items in the GnomeAppHelper test; just prints the string contents of
+ * the data pointer.
+ */
+static void
+item_activated (GtkWidget *widget, gpointer data)
+{
+	printf ("%s activated\n", (char *) data);
+}
+
+/* Menu definitions for the GnomeAppHelper test */
+
+static GnomeUIInfo helper_file_menu[] = {
+	{ GNOME_APP_UI_ITEM, "_New", "Create a new file", item_activated, "file/new", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW, 'n', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "_Open...", "Open an existing file", item_activated, "file/open", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, 'o', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "_Save", "Save the current file", item_activated, "file/save", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE, 's', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "Save _as...", "Save the current file with a new name", item_activated, "file/save as", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS, 0, 0, NULL },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, "_Print...", "Print the current file", item_activated, "file/print", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT, 'p', GDK_CONTROL_MASK, NULL },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, "_Close", "Close the current file", item_activated, "file/close", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "E_xit", "Exit the program", item_activated, "file/exit", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'q', GDK_CONTROL_MASK, NULL },
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo helper_edit_menu[] = {
+	{ GNOME_APP_UI_ITEM, "_Undo", "Undo the last operation", item_activated, "edit/undo", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UNDO, 'z', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "_Redo", "Redo the last undo-ed operation", item_activated, "edit/redo", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO, 0, 0, NULL },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, "Cu_t", "Cut the selection to the clipboard", item_activated, "edit/cut", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT, 'x', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "_Copy", "Copy the selection to the clipboard", item_activated, "edit/copy", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY, 'c', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "_Paste", "Paste the contents of the clipboard", item_activated, "edit/paste", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE, 'v', GDK_CONTROL_MASK, NULL },
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo helper_style_radio_items[] = {
+	{ GNOME_APP_UI_ITEM, "_10 points", NULL, item_activated, "style/10 points", NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "_20 points", NULL, item_activated, "style/20 points", NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "_30 points", NULL, item_activated, "style/30 points", NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "_40 points", NULL, item_activated, "style/40 points", NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo helper_style_menu[] = {
+	{ GNOME_APP_UI_TOGGLEITEM, "_Bold", "Make the selection bold", item_activated, "style/bold", NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_TOGGLEITEM, "_Italic", "Make the selection italic", item_activated, "style/bold", NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	GNOMEUIINFO_RADIOLIST (helper_style_radio_items),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo helper_help_menu[] = {
+	{ GNOME_APP_UI_ITEM, "_About...", "Displays information about the program", item_activated, "help/about", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT, 0, 0, NULL },
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo helper_main_menu[] = {
+	{ GNOME_APP_UI_SUBTREE, "_File", "File operations", helper_file_menu, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, "_Edit", "Editing commands", helper_edit_menu, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, "_Style", "Style settings", helper_style_menu, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, "_Help", "Help on the program", helper_help_menu, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	GNOMEUIINFO_END
+};
+
+/* Toolbar definition for the GnomeAppHelper test */
+
+static GnomeUIInfo helper_toolbar_radio_items[] = {
+	{ GNOME_APP_UI_ITEM, "Red", "Set red color", item_activated, "toolbar/red", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_BOOK_RED, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Green", "Set green color", item_activated, "toolbar/green", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_BOOK_GREEN, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Blue", "Set blue color", item_activated, "toolbar/blue", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_BOOK_BLUE, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Yellow", "Set yellow color", item_activated, "toolbar/yellow", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_BOOK_YELLOW, 0, 0, NULL },
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo helper_toolbar[] = {
+	{ GNOME_APP_UI_ITEM, "New", "Create a new file", item_activated, "toolbar/new", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_NEW, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Open", "Open an existing file", item_activated, "toolbar/open", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_OPEN, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Save", "Save the current file", item_activated, "toolbar/save", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SAVE, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Print", "Print the current file", item_activated, "toolbar/print", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PRINT, 0, 0, NULL },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, "Undo", "Undo the last operation", item_activated, "toolbar/undo", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_UNDO, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Redo", "Redo the last undo-ed operation", item_activated, "toolbar/redo", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_REDO, 0, 0, NULL },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, "Cut", "Cut the selection to the clipboard", item_activated, "toolbar/cut", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CUT, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Copy", "Copy the selection to the clipboard", item_activated, "toolbar/copy", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_COPY, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Paste", "Paste the contents of the clipboard", item_activated, "toolbar/paste", NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PASTE, 0, 0, NULL },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	GNOMEUIINFO_RADIOLIST (helper_toolbar_radio_items),
+	GNOMEUIINFO_END
+};
+
+/* These three functions insert some silly text in the GtkEntry specified in the user data */
+
+static void
+insert_red (GtkWidget *widget, gpointer data)
+{
+	int pos;
+	GtkWidget *entry;
+
+	g_print ("in callback, data is: %p\n", data);
+	
+	entry = GTK_WIDGET (data);
+
+	pos = gtk_editable_get_position (GTK_EDITABLE (entry));
+	gtk_editable_insert_text (GTK_EDITABLE (entry), "red book ", strlen ("red book "), &pos);
+}
+
+static void
+insert_green (GtkWidget *widget, gpointer data)
+{
+	int pos;
+	GtkWidget *entry;
+
+	entry = GTK_WIDGET (data);
+
+	pos = gtk_editable_get_position (GTK_EDITABLE (entry));
+	gtk_editable_insert_text (GTK_EDITABLE (entry), "green book ", strlen ("green book "), &pos);
+}
+
+static void
+insert_blue (GtkWidget *widget, gpointer data)
+{
+	int pos;
+	GtkWidget *entry;
+
+	entry = GTK_WIDGET (data);
+
+	pos = gtk_editable_get_position (GTK_EDITABLE (entry));
+	gtk_editable_insert_text (GTK_EDITABLE (entry), "blue book ", strlen ("blue book "), &pos);
+}
+
+/* Shared popup menu definition for the GnomeAppHelper test */
+
+static GnomeUIInfo helper_shared_popup_dup[] = {
+	{ GNOME_APP_UI_ITEM, "Insert a _red book", NULL, insert_red, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Insert a _green book", NULL, insert_green, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Insert a _blue book", NULL, insert_blue, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_BLUE, 0, 0, NULL },
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo helper_shared_popup[] = {
+	{ GNOME_APP_UI_ITEM, "Insert a _red book", NULL, insert_red, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Insert a _green book", NULL, insert_green, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Insert a _blue book", NULL, insert_blue, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_BLUE, 0, 0, NULL },
+        GNOMEUIINFO_SUBTREE("Subtree", helper_shared_popup_dup),
+	GNOMEUIINFO_END
+};
+
+/* These function change the fill color of the canvas item specified in the user data */
+
+static void
+set_cyan (GtkWidget *widget, gpointer data)
+{
+	GnomeCanvasItem *item;
+
+	item = GNOME_CANVAS_ITEM (data);
+
+	gnome_canvas_item_set (item,
+			       "fill_color", "cyan",
+			       NULL);
+}
+
+static void
+set_magenta (GtkWidget *widget, gpointer data)
+{
+	GnomeCanvasItem *item;
+
+	item = GNOME_CANVAS_ITEM (data);
+
+	gnome_canvas_item_set (item,
+			       "fill_color", "magenta",
+			       NULL);
+}
+
+static void
+set_yellow (GtkWidget *widget, gpointer data)
+{
+	GnomeCanvasItem *item;
+
+	item = GNOME_CANVAS_ITEM (data);
+
+	gnome_canvas_item_set (item,
+			       "fill_color", "yellow",
+			       NULL);
+}
+
+/* Explicit popup menu definition for the GnomeAppHelper test */
+
+
+static GnomeUIInfo helper_explicit_popup_dup[] = {
+	{ GNOME_APP_UI_ITEM, "Set color to _cyan", NULL, set_cyan, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Set color to _magenta", NULL, set_magenta, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Set color to _yellow", NULL, set_yellow, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo helper_explicit_popup[] = {
+	{ GNOME_APP_UI_ITEM, "Set color to _cyan", NULL, set_cyan, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Set color to _magenta", NULL, set_magenta, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_ITEM, "Set color to _yellow", NULL, set_yellow, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+        GNOMEUIINFO_SUBTREE("Subtree", helper_explicit_popup_dup),
+	GNOMEUIINFO_END
+};
+
+/* Event handler for canvas items in the explicit popup menu demo */
+
+static gint
+item_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
+{
+	if (!((event->type == GDK_BUTTON_PRESS) && (event->button.button == 3)))
+		return FALSE;
+
+	gnome_popup_menu_do_popup (GTK_WIDGET (data), NULL, NULL, (GdkEventButton *) event, item, NULL);
+
+	return TRUE;
+}
+
+static void
+delete_event (GtkWidget *widget, gpointer data)
+{
+	gtk_widget_destroy(data);
+}
+
+static void
+create_app_helper (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *app;
+	GtkWidget *vbox;
+	GtkWidget *frame;
+	GtkWidget *vbox2;
+	GtkWidget *w;
+	GtkWidget *popup;
+        GnomeAppBar *bar;
+	GnomeCanvasItem *item;
+
+	app = gnome_app_new ("testGNOME", "GnomeAppHelper test");
+	gnome_app_create_menus (GNOME_APP (app), helper_main_menu);
+	gnome_app_create_toolbar (GNOME_APP (app), helper_toolbar);
+
+        bar = GNOME_APPBAR(gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_USER));
+        gnome_app_set_statusbar(GNOME_APP(app), GTK_WIDGET(bar));
+
+        gnome_app_install_appbar_menu_hints(GNOME_APPBAR(bar), helper_main_menu);
+
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
+
+	/* Shared popup menu */
+
+	popup = gnome_popup_menu_new (helper_shared_popup);
+
+	frame = gtk_frame_new ("Shared popup menu");
+	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 0);
+	gtk_widget_show (frame);
+
+	vbox2 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox2), GNOME_PAD_SMALL);
+	gtk_container_add (GTK_CONTAINER (frame), vbox2);
+	gtk_widget_show (vbox2);
+
+	w = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (vbox2), w, FALSE, FALSE, 0);
+	gtk_widget_show (w);
+	gnome_popup_menu_attach (popup, w, w);
+	
+	w = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (vbox2), w, FALSE, FALSE, 0);
+	gtk_widget_show (w);
+	gnome_popup_menu_attach (popup, w, w);
+
+	/* Popup menu explicitly popped */
+
+	popup = gnome_popup_menu_new (helper_explicit_popup);
+
+	frame = gtk_frame_new ("Explicit popup menu");
+	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
+	gtk_widget_show (frame);
+
+	w = gnome_canvas_new ();
+	gtk_widget_set_usize ((w), 200, 100);
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (w), 0.0, 0.0, 200.0, 100.0);
+	gtk_container_add (GTK_CONTAINER (frame), w);
+	gtk_widget_show (w);
+
+	gtk_signal_connect (GTK_OBJECT (w), "destroy",
+			    (GtkSignalFunc) delete_event,
+			    popup);
+
+	item = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (w)),
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", 5.0,
+				      "y1", 5.0,
+				      "x2", 95.0,
+				      "y2", 95.0,
+				      "fill_color", "white",
+				      "outline_color", "black",
+				      NULL);
+	gtk_signal_connect (GTK_OBJECT (item), "event",
+			    (GtkSignalFunc) item_event,
+			    popup);
+
+	item = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (w)),
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", 105.0,
+				      "y1", 0.0,
+				      "x2", 195.0,
+				      "y2", 95.0,
+				      "fill_color", "white",
+				      "outline_color", "black",
+				      NULL);
+	gtk_signal_connect (GTK_OBJECT (item), "event",
+			    (GtkSignalFunc) item_event,
+			    popup);
+
+	gnome_app_set_contents (GNOME_APP (app), vbox);
+	gtk_widget_show (app);
 }
 
 /*
@@ -1047,23 +1426,24 @@ main (int argc, char **argv)
 		void (*func) ();
 	} buttons[] =
 	  {
-		{ "color picker", create_color_picker },
-		{ "date edit", create_date_edit },
+		  { "app window", create_app_helper },
+		  { "color picker", create_color_picker },
+		  { "date edit", create_date_edit },
 /*		{ "ditem edit", create_ditem_edit },*/
 /*		{ "druid", create_druid }, */
-		{ "entry", create_entry },
-		{ "file entry", create_file_entry },
-		{ "pixmap entry", create_pixmap_entry },
-		{ "icon entry", create_icon_entry },
+		  { "entry", create_entry },
+		  { "file entry", create_file_entry },
+		  { "pixmap entry", create_pixmap_entry },
+		  { "icon entry", create_icon_entry },
 /*		{ "font selector", create_font_selector }, */
-		{ "font picker", create_font_picker },
-		{ "href", create_href },
-		{ "icon list", create_icon_list },
+		  { "font picker", create_font_picker },
+		  { "href", create_href },
+		  { "icon list", create_icon_list },
 /*		{ "image entry", create_image_entry }, */
 /*		{ "image selector", create_image_selector },*/
 /*		{ "paper selector", create_papersel },*/
 /*		{ "unit spinner", create_unit_spinner },*/
-		{ "about box", create_about_box }
+		  { "about box", create_about_box }
 	  };
 	int nbuttons = sizeof (buttons) / sizeof (buttons[0]);
 	TestGnomeApp *app;

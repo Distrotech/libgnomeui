@@ -281,7 +281,8 @@ layout_changed (GtkWidget *w, gpointer data)
 	if (app->enable_layout_config) {
 		BonoboDockLayout *layout;
 
-		layout = bonobo_dock_get_layout (BONOBO_DOCK (app->dock));
+		layout = g_object_ref (bonobo_dock_get_layout (BONOBO_DOCK (app->dock)));
+		gtk_object_sink (GTK_OBJECT (layout));
 		write_layout_config (app, layout);
 		gtk_object_unref (GTK_OBJECT (layout));
 	}

@@ -1022,6 +1022,8 @@ gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
 
 	gtk_widget_set_style (gfp->_priv->font_label, style);
 	gtk_style_unref(style);
+
+	gtk_widget_queue_resize (gfp->_priv->font_label);
 } /* gnome_font_picker_set_label_font */
 
 static void

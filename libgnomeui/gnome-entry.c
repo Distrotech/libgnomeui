@@ -62,8 +62,8 @@ struct _GnomeEntryPrivate {
 	GList       *items;
 
 	guint16      max_saved;
-	guint32      changed : 1;
-
+	guint        changed : 1;
+	guint        saving_history : 1; 
 	GConfClient *gconf_client;
 	guint        gconf_notify_id;
 };
@@ -398,6 +398,15 @@ gnome_entry_history_changed (GConfClient* client,
 
 	gentry = GNOME_ENTRY (user_data);
 
+	/* If we're getting a notification from saving our own
+	 * history, don't reload it.
+	 */
+	if (gentry->_priv->saving_history) {
+		gentry->_priv->saving_history = FALSE;
+
+		return;
+	}
+		
 	gnome_entry_load_history (gentry);
 }
 
@@ -725,7 +734,6 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	g_assert (gentry->_priv->gconf_client != NULL);
 
 	key = build_gconf_key (gentry);
-
 	gconf_items = NULL;
 
 	for (n = 0, items = gentry->_priv->items;
@@ -739,6 +747,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	}
 
 	/* Save the list */
+	gentry->_priv->saving_history = TRUE;
 	gconf_client_set_list (gentry->_priv->gconf_client, key, GCONF_VALUE_STRING, gconf_items, NULL);
 	
 	g_free (key);

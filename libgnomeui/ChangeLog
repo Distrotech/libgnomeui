@@ -1,3 +1,14 @@
+2001-11-30  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-font-picker.c (gnome_font_picker_label_use_font_in_label): 
+	Queue a resize after setting the new style.
+
+	* gnome-entry.c: Add saving_history to priv struct.
+	(gnome_entry_history_changed): If we're getting a notification
+	from saving our own history, don't reload it.
+
+	* gnome-app.c (layout_changed): ref/sink the layout.
+
 2001-11-28  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-href.c (gnome_href_realize): Set the cursor on the input
