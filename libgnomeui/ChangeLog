@@ -1,3 +1,8 @@
+2000-06-20  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-dateedit.c: #include <ctype.h> for isdigit().
+	* gtk-ted.c: #if 0'ed out some code to fix a warning.
+	 
 Mon Jun 19 21:14:51 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dock-item.[ch]: add a hidden state.  When the user presses

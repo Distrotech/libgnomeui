@@ -5,6 +5,7 @@
  * Author: Miguel de Icaza
  */
 #include <config.h>
+#include <ctype.h> /* isdigit */
 #include <string.h>
 #include <stdlib.h> /* atoi */
 #include <stdio.h>

@@ -943,6 +943,7 @@ struct gtk_ted_checkbox_info {
 	
 };
 
+#if 0
 static void
 gtk_ted_checkbox_toggled (GtkWidget *widget, struct gtk_ted_checkbox_info *ci)
 {
@@ -983,6 +984,7 @@ gtk_ted_setup_radio (GtkWidget *vbox, GtkWidget *widget, gchar *str, struct ted_
 	gtk_box_pack_start_defaults (GTK_BOX (vbox), widget);
 	gtk_widget_show (widget);
 }
+#endif
 
 static GtkWidget *
 gtk_ted_span_control (char *str, struct ted_widget_info *wi, int is_y)
