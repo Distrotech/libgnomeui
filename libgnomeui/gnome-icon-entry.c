@@ -525,6 +525,8 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 	fs = GTK_FILE_SELECTION(fentry->fsw);
 
 	hbox = fs->file_list;
+	g_return_if_fail (g_object_get_data(G_OBJECT(hbox),"frame") == NULL);
+
 	do {
 		hbox = hbox->parent;
 		if(!hbox) {
