@@ -1,3 +1,11 @@
+Thu Jan 20 00:08:47 2000  George Lebl <jirka@5z.com>
+
+	* gnome-ditem-edit.c: actually ref the ditem in set_ditem.  When
+	  editting a directory type entry, desensitize the widgets that
+	  make no sense.  The type combo doesn't include directory when
+	  the set ditem file isn't a directory.  If the ditem type isn't
+	  one of the standard types we know, add it to the combo box.
+
 2000-01-18  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-about.c (gnome_about_item_cb): Changed URL underlining
