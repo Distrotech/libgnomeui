@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2002-04-19 21:19+0200\n"
+"POT-Creation-Date: 2002-04-22 12:55+0200\n"
 "PO-Revision-Date: 2002-04-19 21:20+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -13,109 +13,109 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: libgnomeui/gnome-about.c:187
+#: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr "Bidragsytere"
 
-#: libgnomeui/gnome-about.c:211
+#: libgnomeui/gnome-about.c:222
 msgid "_Written by"
 msgstr "_Skrevet av"
 
-#: libgnomeui/gnome-about.c:226
+#: libgnomeui/gnome-about.c:237
 msgid "_Documented by"
 msgstr "_Dokumentert av"
 
-#: libgnomeui/gnome-about.c:241
+#: libgnomeui/gnome-about.c:252
 msgid "_Translated by"
 msgstr "Oversa_tt av"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:298
+#: libgnomeui/gnome-about.c:309
 msgid "_Credits"
 msgstr "_Bidragsytere"
 
-#: libgnomeui/gnome-about.c:338
+#: libgnomeui/gnome-about.c:351
 msgid "Program name"
 msgstr "Programnavn"
 
-#: libgnomeui/gnome-about.c:339
+#: libgnomeui/gnome-about.c:352
 msgid "The name of the program"
 msgstr "Navn på programmet"
 
-#: libgnomeui/gnome-about.c:346
+#: libgnomeui/gnome-about.c:359
 msgid "Program version"
 msgstr "Programversjon"
 
-#: libgnomeui/gnome-about.c:347
+#: libgnomeui/gnome-about.c:360
 msgid "The version of the program"
 msgstr "Programmets versjon"
 
-#: libgnomeui/gnome-about.c:353
+#: libgnomeui/gnome-about.c:366
 msgid "Copyright string"
 msgstr "Informasjon om opphavsrett"
 
-#: libgnomeui/gnome-about.c:354
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright information for the program"
 msgstr "Informasjon om opphavsrett for programmet"
 
-#: libgnomeui/gnome-about.c:361
+#: libgnomeui/gnome-about.c:374
 msgid "Comments string"
 msgstr "Kommentarstreng"
 
-#: libgnomeui/gnome-about.c:362
+#: libgnomeui/gnome-about.c:375
 msgid "Comments about the program"
 msgstr "Kommentarer om programmet"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:381
 msgid "Authors"
 msgstr "Forfattere"
 
-#: libgnomeui/gnome-about.c:369
+#: libgnomeui/gnome-about.c:382
 msgid "List of authors of the programs"
 msgstr "Liste over programmets programmerere"
 
-#: libgnomeui/gnome-about.c:371
+#: libgnomeui/gnome-about.c:384
 msgid "Author entry"
 msgstr "Forfatteroppføring"
 
-#: libgnomeui/gnome-about.c:372
+#: libgnomeui/gnome-about.c:385
 msgid "A single author entry"
 msgstr "En enkelt forfatteroppføring"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:392
 msgid "Documenters"
 msgstr "Forfattere av dokumentasjon"
 
-#: libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:393
 msgid "List of people documenting the program"
 msgstr "Liste over forfattere av dokumentasjon til programmet"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:395
 msgid "Documenter entry"
 msgstr "Dokumentasjonsoppføring"
 
-#: libgnomeui/gnome-about.c:383
+#: libgnomeui/gnome-about.c:396
 msgid "A single documenter entry"
 msgstr "En enkelt dokumentasjonsoppføring"
 
-#: libgnomeui/gnome-about.c:391
+#: libgnomeui/gnome-about.c:404
 msgid "Translator credits"
 msgstr "Oversettere"
 
-#: libgnomeui/gnome-about.c:392
+#: libgnomeui/gnome-about.c:405
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "Takk til forfattere. Denne strengen bør også merkes som oversettbar"
 
-#: libgnomeui/gnome-about.c:399 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: libgnomeui/gnome-about.c:400
+#: libgnomeui/gnome-about.c:413
 msgid "A logo for the about box"
 msgstr "En logo for Om-dialogen"
 
-#: libgnomeui/gnome-about.c:479
+#: libgnomeui/gnome-about.c:492
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
@@ -919,11 +919,11 @@ msgstr "GTK-felt"
 msgid "The GTK entry"
 msgstr "GTK-feltet"
 
-#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#: libgnomeui/gnome-file-entry.c:194 libgnomeui/gnome-icon-entry.c:170
 msgid "History ID"
 msgstr "Historikk-ID"
 
-#: libgnomeui/gnome-file-entry.c:191
+#: libgnomeui/gnome-file-entry.c:195
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -931,54 +931,54 @@ msgstr ""
 "Unik identifikator for filoppføringen. Denne brukes til å lagre "
 "historikklisten."
 
-#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+#: libgnomeui/gnome-file-entry.c:203 libgnomeui/gnome-icon-entry.c:179
 msgid "Browse Dialog Title"
 msgstr "Tittel for filvelgerdialogen"
 
-#: libgnomeui/gnome-file-entry.c:200
+#: libgnomeui/gnome-file-entry.c:204
 msgid "Title for the Browse file dialog."
 msgstr "Tittel for filvelgerdialogen"
 
-#: libgnomeui/gnome-file-entry.c:207
+#: libgnomeui/gnome-file-entry.c:211
 msgid "Directory Entry"
 msgstr "Katalogoppføring"
 
-#: libgnomeui/gnome-file-entry.c:208
+#: libgnomeui/gnome-file-entry.c:212
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 "Om filoppføringen brukes til å oppgi katalognavn eller fullstendige filnavn."
 
-#: libgnomeui/gnome-file-entry.c:216
+#: libgnomeui/gnome-file-entry.c:220
 msgid "Modal"
 msgstr "Modal"
 
-#: libgnomeui/gnome-file-entry.c:217
+#: libgnomeui/gnome-file-entry.c:221
 msgid "Whether the Browse file window should be modal."
 msgstr "Om filvelgerdialogen skal være modal."
 
-#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:228 libgnomeui/gnome-icon-entry.c:195
 msgid "Filename"
 msgstr "Filnavn"
 
-#: libgnomeui/gnome-file-entry.c:225
+#: libgnomeui/gnome-file-entry.c:229
 msgid "Filename that should be displayed in the file entry."
 msgstr "Filnavn som skal vises i filoppføringen."
 
-#: libgnomeui/gnome-file-entry.c:233
+#: libgnomeui/gnome-file-entry.c:237
 msgid "Default Path"
 msgstr "Forvalgt sti"
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:238
 msgid "Default path for the Browse file window."
 msgstr "Forvalgt sti for filvelgerdialogen."
 
-#: libgnomeui/gnome-file-entry.c:241
+#: libgnomeui/gnome-file-entry.c:245
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:242
+#: libgnomeui/gnome-file-entry.c:246
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -988,11 +988,11 @@ msgstr ""
 "egenskapen til å hente GnomeEntry hvis du trenger å endre det eller spørre "
 "på noen av dens parametere."
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:256
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:257
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1002,11 +1002,11 @@ msgstr ""
 "egenskapen til å hente GtkEntry hvis du trenger å endre den eller spørre på "
 "noen av dens parametere."
 
-#: libgnomeui/gnome-file-entry.c:481
+#: libgnomeui/gnome-file-entry.c:489
 msgid "Select file"
 msgstr "Velg fil"
 
-#: libgnomeui/gnome-file-entry.c:619
+#: libgnomeui/gnome-file-entry.c:627
 msgid "_Browse..."
 msgstr "_Bla gjennom..."
 
@@ -1097,7 +1097,11 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr "Applikasjonen «%s» forsøkte å endre et aspekt ved din konfigurasjon som din systemadministrator ikke tillater deg å endre. Noen av innstillingene du har valgt vil ikke tre i kraft, eller vil ikke bli gjenopprettet neste gang du bruker denne applikasjonen."
+msgstr ""
+"Applikasjonen «%s» forsøkte å endre et aspekt ved din konfigurasjon som din "
+"systemadministrator ikke tillater deg å endre. Noen av innstillingene du har "
+"valgt vil ikke tre i kraft, eller vil ikke bli gjenopprettet neste gang du "
+"bruker denne applikasjonen."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1108,7 +1112,7 @@ msgstr ""
 "En feil oppsto under lasting eller lagring av konfigurasjonsinformasjon for %"
 "s. Noen av innstillingene virker kanskje ikke riktig."
 
-#: libgnomeui/gnome-icon-entry.c:164
+#: libgnomeui/gnome-icon-entry.c:171
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1116,27 +1120,27 @@ msgstr ""
 "Unik identifikator for ikonoppføringen. Denne brukes til å lagre "
 "historikklisten."
 
-#: libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-icon-entry.c:180
 msgid "Title for the Browse icon dialog."
 msgstr "Tittel for utvalgsdialogboksen for ikon."
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Pixmap Directory"
 msgstr "Bildekatalog"
 
-#: libgnomeui/gnome-icon-entry.c:181
+#: libgnomeui/gnome-icon-entry.c:188
 msgid "Directory that will be searched for icons."
 msgstr "Katalog som gjennomsøkes etter ikoner."
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Filnavn som skal vises i ikonoppføringen."
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:204
 msgid "Picker dialog"
 msgstr "Utvalgsdialog"
 
-#: libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-icon-entry.c:205
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1144,19 +1148,19 @@ msgstr ""
 "Ikonvelgerdialog. Du kan bruke denne egenskapen for å finne GtkDialog hvis "
 "du trenger å endre eller spørre på noen av egenskapene."
 
-#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
+#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:927
 msgid "No Icon"
 msgstr "Uten ikon"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:522 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan ikke finne en hbox, med vanlig filutvalg"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:528 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "Forhåndsvis"
 
-#: libgnomeui/gnome-icon-entry.c:930
+#: libgnomeui/gnome-icon-entry.c:949
 msgid "Browse"
 msgstr "Bla gjennom"
 
