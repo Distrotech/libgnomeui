@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-02-20 02:33+0100\n"
+"POT-Creation-Date: 2004-06-20 22:55+0200\n"
+"PO-Revision-Date: 2004-06-20 22:57+0200\n"
 "Last-Translator: Bojan Suzic <bojans@teol.net>\n"
-"Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
+"Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,6 +34,31 @@ msgstr "2. sadržana stavka"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Savet za 2. stavku"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "Sistem datoteka"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1507
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Neuspešno snimanje obeleživača (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Ne mogu da dobavim podatke o datoteci „%s“: %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Neuspešno otvaranje datoteke „%s“: %s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "Neuspešno učitavanje slike „%s“: razlog nepoznat, verovatno neispravna datoteka slike"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -144,6 +169,7 @@ msgstr "O programu „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -201,6 +227,7 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -391,11 +418,11 @@ msgstr "Podesi program"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O programu"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O ovom programu"
 
@@ -422,7 +449,7 @@ msgstr "Otvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori tekući prozor"
 
@@ -519,9 +546,9 @@ msgid "Text Only"
 msgstr "Samo tekst"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Koristi uobičajeno za sistem (%s)"
+msgstr "Koristi uobičajeno za okruženje (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -623,9 +650,9 @@ msgid "Authentication Required"
 msgstr "Zahteva se identifikacija"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Morate se prijaviti da biste pristupili %s\n"
+msgstr "Morate se prijaviti da biste pristupili %s domena %s\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -810,22 +837,43 @@ msgstr "Postavljena je boja pozadine"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Boja pozadine sadržaja"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Boja pozadine sadržaja"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Boja pozadine sadržaja kao GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Boja pozadine sadržaja postavljena"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Postavljena je boja pozadine sadržaja"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Boja pozadine slike"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Boja pozadine slike"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Boja pozadine slike kao GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Boja pozadine slike postavljena"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Postavljena je boja pozadine slike"
 
@@ -925,9 +973,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete "
-"koristiti ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate "
-"ili izmenite neke njegove parametre."
+"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete koristiti "
+"ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate ili izmenite "
+"neke njegove parametre."
 
 #: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
@@ -1064,8 +1112,8 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Program „%s“ je pokušao da izmeni podešavanja sistema za koja vaš "
-"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. "
-"Neka od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
+"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. Neka "
+"od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
 "narednom pokretanju programa."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1074,8 +1122,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %"
-"s. Neka od vaših postavki možda neće ispravno raditi."
+"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %s. "
+"Neka od vaših postavki možda neće ispravno raditi."
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1411,11 +1459,12 @@ msgstr "_Obavesti programere"
 msgid "_Debug"
 msgstr "_Nađi greške"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Napustite probu"
+
 #~ msgid " domain %s"
 #~ msgstr " domen %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Napustite probu"
 
 #~ msgid "Color Selector"
 #~ msgstr "Izbornik boje"
