@@ -20,6 +20,7 @@
 #include <stdarg.h>
 #include "gnome-messagebox.h"
 #include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-triggers.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18nP.h"
 #include <string.h> /* for strcmp */
@@ -89,6 +90,9 @@ gnome_message_box_new (const gchar           *message,
 	message_box = gtk_type_new (gnome_message_box_get_type ());
 
 	style = gtk_widget_get_style (GTK_WIDGET (message_box));
+
+	/* Make noises, basically */
+	gnome_triggers_vdo(message, message_box_type, NULL);
 
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
