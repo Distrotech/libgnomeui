@@ -1,8 +1,11 @@
+Thu Feb 26 18:07:40 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-about.c: Undefine _ when compiling to avoid clash with
+	i18n definition.
+
 1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
         * gnome-stock.[ch]: New tb_scores pixmap for the games.
-	
-1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
         * gnome-about.c (gnome_about_new): Now uses a stock button for OK.
 	
