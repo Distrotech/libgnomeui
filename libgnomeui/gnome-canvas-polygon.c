@@ -610,8 +610,8 @@ gnome_canvas_polygon_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip
 				width = 0.5;
 		
 			svp = art_svp_vpath_stroke (vpath,
-						    ART_PATH_STROKE_JOIN_MITER,
-						    ART_PATH_STROKE_CAP_BUTT,
+						    ART_PATH_STROKE_JOIN_ROUND,
+						    ART_PATH_STROKE_CAP_ROUND,
 						    width,
 						    4,
 						    0.5);

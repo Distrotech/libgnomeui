@@ -937,11 +937,11 @@ gnome_canvas_line_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_pa
 			width = 0.5;
 		
 		svp = art_svp_vpath_stroke (vpath,
-					    ART_PATH_STROKE_JOIN_MITER,
-					    ART_PATH_STROKE_CAP_BUTT,
+					    gnome_canvas_join_gdk_to_art (line->join),
+					    gnome_canvas_cap_gdk_to_art (line->cap),
 					    width,
 					    4,
-					    0.5);
+					    0.25);
 		art_free (vpath);
 
 		gnome_canvas_item_update_svp_clip (item, &line->fill_svp, svp, clip_path);

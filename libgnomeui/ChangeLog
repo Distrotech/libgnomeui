@@ -1,3 +1,16 @@
+Wed Jun  9 19:20:41 1999  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas-polygon.c (gnome_canvas_polygon_update): Joins
+	and caps are round in aa case, as they have always been for
+	xlib.
+
+	* gnome-canvas-util.h: 
+	* gnome-canvas-util.c: Added gnome_canvas_join_gdk_to_art and
+	gnome_canvas_cap_gdk_to_art convenience functions.
+
+	* gnome-canvas-line.c (gnome_canvas_line_update): Now passes
+	line join and cap options through to libart.
+
 1999-06-08  Ettore Perazzoli  <ettore@comm2000.it>
 
 	Applied patch from Damon Chaplin to handle resizing of floating
@@ -6,6 +19,11 @@
 	floating children too.
 	(gnome_dock_size_allocate): Allocate size for all the floating
 	children too.
+
+Wed Jun  2 22:14:02 1999  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas-util.c (gnome_canvas_render_svp): Correct alpha
+	compositing of partially transparent svp's over solid backgrounds.
 
 1999-06-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

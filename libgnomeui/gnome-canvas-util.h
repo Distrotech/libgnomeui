@@ -13,6 +13,8 @@
 
 #include <libgnome/gnome-defs.h>
 #include <libart_lgpl/art_svp.h>
+#include <libart_lgpl/art_vpath.h>
+#include <libart_lgpl/art_svp_vpath_stroke.h>
 
 
 BEGIN_GNOME_DECLS
@@ -117,6 +119,12 @@ void gnome_canvas_update_bbox (GnomeCanvasItem *item, int x1, int y1, int x2, in
 
 /* Ensure that the buffer is in RGB format, suitable for compositing. */
 void gnome_canvas_buf_ensure_buf (GnomeCanvasBuf *buf);
+
+/* Convert from GDK line join specifier to libart. */
+ArtPathStrokeJoinType gnome_canvas_join_gdk_to_art (GdkJoinStyle gdk_join);
+
+/* Convert from GDK line cap specifier to libart. */
+ArtPathStrokeCapType gnome_canvas_cap_gdk_to_art (GdkCapStyle gdk_cap);
 
 END_GNOME_DECLS
 

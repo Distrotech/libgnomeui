@@ -612,3 +612,48 @@ gnome_canvas_buf_ensure_buf (GnomeCanvasBuf *buf)
 		buf->is_buf = 1;
 	}
 }
+
+/**
+ * gnome_canvas_join_gdk_to_art
+ * @gdk_join: a join type, represented in GDK format
+ *
+ * Convert from GDK line join specifier to libart.
+ *
+ * Return value: The line join specifier in libart format.
+ **/
+ArtPathStrokeJoinType
+gnome_canvas_join_gdk_to_art (GdkJoinStyle gdk_join)
+{
+	switch (gdk_join) {
+	case GDK_JOIN_MITER:
+	default:
+		return ART_PATH_STROKE_JOIN_MITER;
+	case GDK_JOIN_ROUND:
+		return ART_PATH_STROKE_JOIN_ROUND;
+	case GDK_JOIN_BEVEL:
+		return ART_PATH_STROKE_JOIN_BEVEL;
+	}
+}
+
+/**
+ * gnome_canvas_cap_gdk_to_art
+ * @gdk_cap: a cap type, represented in GDK format
+ *
+ * Convert from GDK line cap specifier to libart.
+ *
+ * Return value: The line cap specifier in libart format.
+ **/
+ArtPathStrokeCapType
+gnome_canvas_cap_gdk_to_art (GdkCapStyle gdk_cap)
+{
+	switch (gdk_cap) {
+	case GDK_CAP_BUTT:
+	case GDK_CAP_NOT_LAST:
+	default:
+		return ART_PATH_STROKE_CAP_BUTT;
+	case GDK_CAP_ROUND:
+		return ART_PATH_STROKE_CAP_ROUND;
+	case GDK_CAP_PROJECTING:
+		return ART_PATH_STROKE_CAP_SQUARE;
+	}
+}
