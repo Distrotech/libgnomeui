@@ -1,3 +1,8 @@
+2002-03-25  jacob berkman  <jacob@ximian.com>
+
+	* libgnomeui/gnome-gconf-ui.c: (error_idle_func): set the default
+	reponse for the dialog and add a bevel around the TextView
+
 2002-03-22  Havoc Pennington  <hp@pobox.com>
 
 	* libgnomeui/gnome-gconf-ui.c (_gnomeui_gconf_lazy_init): remove

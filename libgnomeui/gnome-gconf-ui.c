@@ -184,6 +184,7 @@ error_idle_func (gpointer data)
                                                  GTK_BUTTONS_OK,
                                                  fmt,
                                                  gnome_program_get_human_readable_name(gnome_program_get()));
+                gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
                 g_signal_connect (dialog, "response",
                                   G_CALLBACK (gtk_widget_destroy),
                                   NULL);
@@ -192,6 +193,8 @@ error_idle_func (gpointer data)
                 gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
                                                 GTK_POLICY_NEVER,
                                                 GTK_POLICY_AUTOMATIC);
+                gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
+                                                     GTK_SHADOW_IN);
                 current_details = gtk_text_view_new ();
                 gtk_text_view_set_editable (GTK_TEXT_VIEW (current_details),
                                             FALSE);
