@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui cvs\n"
 "POT-Creation-Date: 2002-08-28 17:50+0200\n"
-"PO-Revision-Date: 2002-07-24 16:33+0200\n"
+"PO-Revision-Date: 2002-09-24 16:48GMT\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -107,8 +107,7 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena deberia estar marcada como "
 "traducible"
@@ -466,7 +465,7 @@ msgstr "Uso: gnome_segv2 nombre_de_aplicación número_de_señal\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
-msgstr "Enviar un reporte de fallo"
+msgstr "Enviar un informe de fallo"
 
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
@@ -1123,8 +1122,7 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
-"Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1338,5 +1336,3 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Salir de la prueba"
