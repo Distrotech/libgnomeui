@@ -1886,7 +1886,7 @@ gnome_client_set_global_config_prefix (GnomeClient *client, gchar* prefix)
 
   g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
   
-  client->global_config_prefix = g_srtdup (prefix);
+  client->global_config_prefix = g_strdup (prefix);
 }
 
 /**
