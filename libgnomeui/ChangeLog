@@ -1,3 +1,12 @@
+1998-12-01  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-app-helper.[ch]:
+	Updated API docs a bit.
+
+	(gnome_app_fill_menu, gnome_app_fill_menu_custom):
+	Changed insert_shortcuts to a gboolean.
+	Reformatted surrounding comments to fit in 80 columns.
+
 1998-12-01  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gnome-app-helper.[ch]: use the new gtk_pixmap_menu_item.

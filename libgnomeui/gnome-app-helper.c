@@ -164,7 +164,7 @@ setup_underlined_accelerator (GtkAccelGroup *accel_group,
 static void
 create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, 
 		GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group, 
-		int insert_shortcuts, GtkAccelGroup *menu_accel_group)
+		gboolean insert_shortcuts, GtkAccelGroup *menu_accel_group)
 {
 	GtkWidget *label;
 	GtkWidget *pixmap;
@@ -447,11 +447,17 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name,
  * @pos:
  *
  * Description:
+ * Fills the specified menu shell with items created from the specified
+ * info, inserting them from the item no. pos on.  If the specified
+ * accelgroup is not NULL, then the menu's hotkeys are put into that
+ * accelgroup.  If accel_group is non-NULL and insert_shortcuts is
+ * TRUE, then the shortcut keys (MOD1 + underlined letters) in the
+ * items' labels will be put into the accel group as well.
  **/
 
 void
 gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
-		GtkAccelGroup *accel_group, int insert_shortcuts, 
+		GtkAccelGroup *accel_group, gboolean insert_shortcuts, 
 		gint pos)
 {
 	GnomeUIBuilderData uibdata;
@@ -483,12 +489,21 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
  * @pos:
  *
  * Description:
+ * Fills the specified menu shell with items created from the specified
+ * info, inserting them from item no. pos on and using the specified
+ * builder data -- this is intended for language bindings.  If the
+ * specified accelgroup is not NULL, then the menu's hotkeys are put
+ * into that accelgroup.  If accel_group is non-NULL and
+ * insert_shortcuts is TRUE, then the shortcut keys (MOD1 + underlined
+ * letters) in the items' labels will be put into the accel group as
+ * well (this is useful for toplevel menu bars in which you want MOD1-F
+ * to activate the "_File" menu, for example).
  **/
 
 void
 gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
 		GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group, 
-		int insert_shortcuts, gint pos)
+		gboolean insert_shortcuts, gint pos)
 {
 	GnomeUIBuilderData *orig_uibdata;
 	GtkAccelGroup *menu_accel_group;
@@ -572,10 +587,12 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_menus
- * @app:
+ * @app: Pointer to GNOME app object.
  * @uiinfo:
  *
  * Description:
+ * Constructs a menu bar and attaches it to the specified application
+ * window.
  **/
 
 void
@@ -599,7 +616,7 @@ gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo)
 
 /**
  * gnome_app_create_menus_interp
- * @app:
+ * @app: Pointer to GNOME app object.
  * @uiinfo:
  * @relay_func:
  * @data:
@@ -631,7 +648,7 @@ gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_menus_with_data
- * @app:
+ * @app: Pointer to GNOME app object.
  * @uiinfo:
  * @user_data:
  *
@@ -660,7 +677,7 @@ gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_menus_custom
- * @app:
+ * @app: Pointer to GNOME app object.
  * @uiinfo:
  * @uibdata:
  *
@@ -955,7 +972,7 @@ gnome_app_configure_toolbar (GtkToolbar *toolbar)
 
 /**
  * gnome_app_create_toolbar
- * @app:
+ * @app: Pointer to GNOME app object.
  * @uiinfo:
  *
  * Description:
@@ -983,7 +1000,7 @@ gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo)
 
 /**
  * gnome_app_create_toolbar_interp
- * @app:
+ * @app: Pointer to GNOME app object.
  * @uiinfo:
  * @relay_func:
  * @data:
@@ -1016,7 +1033,7 @@ gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_toolbar_with_data
- * @app:
+ * @app: Pointer to GNOME app object.
  * @uiinfo:
  * @user_data:
  *
@@ -1046,7 +1063,7 @@ gnome_app_create_toolbar_with_data (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_toolbar_custom
- * @app:
+ * @app: Pointer to GNOME app object.
  * @uiinfo:
  * @uibdata:
  *
@@ -1173,7 +1190,7 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 
 /**
  * gnome_app_remove_menus
- * @app:
+ * @app: Pointer to GNOME app object.
  * @path:
  * @items:
  *
@@ -1222,7 +1239,7 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
 
 /**
  * gnome_app_remove_menus
- * @app:
+ * @app: Pointer to GNOME app object.
  * @path:
  * @start:
  * @items:
@@ -1273,7 +1290,7 @@ gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items)
 
 /**
  * gnome_app_insert_menus_custom
- * @app:
+ * @app: Pointer to GNOME app object.
  * @path:
  * @uiinfo:
  * @uibdata:
@@ -1309,7 +1326,7 @@ gnome_app_insert_menus_custom (GnomeApp *app, gchar *path,
 
 /**
  * gnome_app_insert_menus
- * @app:
+ * @app: Pointer to GNOME app object.
  * @path:
  * @menuinfo:
  *
@@ -1333,7 +1350,7 @@ gnome_app_insert_menus (GnomeApp *app,
 
 /**
  * gnome_app_insert_menus_with_data
- * @app:
+ * @app: Pointer to GNOME app object.
  * @path:
  * @menuinfo:
  * @data:
@@ -1359,7 +1376,7 @@ gnome_app_insert_menus_with_data (GnomeApp *app, gchar *path,
 
 /**
  * gnome_app_insert_menus_interp
- * @app:
+ * @app: Pointer to GNOME app object.
  * @path:
  * @menuinfo:
  * @relay_func:
