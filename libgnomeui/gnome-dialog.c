@@ -561,10 +561,11 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
 #ifdef GTK_HAVE_ACCEL_GROUP
 /*FIXME*/
     gtk_widget_add_accelerator(GTK_WIDGET(list->data),
-				   "clicked",
-				   dialog->accelerators,
-				   accelerator_key,
-				   accelerator_mods,0);
+			       "clicked",
+			       dialog->accelerators,
+			       accelerator_key,
+			       accelerator_mods,
+			       GTK_ACCEL_VISIBLE);
 #else
     gtk_widget_install_accelerator(GTK_WIDGET(list->data),
                                    dialog->accelerators,
@@ -721,6 +722,14 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.31  1998/07/10 08:53:22  timj
+  Fri Jul 10 10:19:38 1998  Tim Janik  <timj@gtk.org>
+
+          * gnome-app-helper.c (gnome_app_do_menu_creation):
+          * gnome-stock.c (gnome_stock_menu_item):
+          create GtkAccelLabel if GTK_HAVE_ACCEL_GROUP, so accelerators are
+          visible.
+
   Revision 1.30  1998/07/03 00:51:57  hp
 
 

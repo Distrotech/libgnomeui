@@ -1,3 +1,10 @@
+Fri Jul 10 10:19:38 1998  Tim Janik  <timj@gtk.org>
+
+	* gnome-app-helper.c (gnome_app_do_menu_creation): 
+	* gnome-stock.c (gnome_stock_menu_item): 
+	create GtkAccelLabel if GTK_HAVE_ACCEL_GROUP, so accelerators are
+	visible.
+
 Fri Jul 10 08:08:45 1998  Tim Janik  <timj@gtk.org>
 
 	* gnome-canvas.c:

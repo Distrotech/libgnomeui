@@ -1021,11 +1021,17 @@ gnome_stock_menu_item(const char *type, const char *text)
 		gtk_widget_show(w);
 		gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 0);
 
-		w = gtk_label_new(text);
-		gtk_widget_show(w);
-		gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 0);
-
 		menu_item = gtk_menu_item_new();
+#ifdef	GTK_HAVE_ACCEL_GROUP
+		w = gtk_accel_label_new (text);
+		gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (w), menu_item);
+#else	/* !GTK_HAVE_ACCEL_GROUP */
+		w = gtk_label_new(text);
+#endif	/* !GTK_HAVE_ACCEL_GROUP */
+		gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
+		gtk_widget_show(w);
+		gtk_box_pack_start(GTK_BOX(hbox), w, TRUE, TRUE, 0);
+
 		gtk_container_add(GTK_CONTAINER(menu_item), hbox);
 	} else {
 		menu_item = gtk_menu_item_new_with_label(text);

@@ -137,10 +137,10 @@ gnome_app_do_menu_creation(GnomeApp *app,
 		     case GNOME_APP_PIXMAP_STOCK:
 			    if (has_stock_pixmaps)
 			      menuinfo[i].widget =
-			      gnome_stock_menu_item(menuinfo[i].pixmap_info ?
-						    menuinfo[i].pixmap_info :
-						    GNOME_STOCK_MENU_BLANK,
-						    _(menuinfo[i].label));
+				gnome_stock_menu_item (menuinfo[i].pixmap_info ?
+						       menuinfo[i].pixmap_info :
+						       GNOME_STOCK_MENU_BLANK,
+						       _(menuinfo[i].label));
 			    else
 			      menuinfo[i].widget = gtk_menu_item_new_with_label(_(menuinfo[i].label));
 			    break;
@@ -155,10 +155,16 @@ gnome_app_do_menu_creation(GnomeApp *app,
 			    hbox = gtk_hbox_new(FALSE, 2);
 			    gtk_box_pack_start(GTK_BOX(hbox), pmap, 
 					       FALSE, FALSE, 0);
-			    w = gtk_label_new(_(menuinfo[i].label));
-			    gtk_box_pack_start(GTK_BOX(hbox), w, 
-					       FALSE, FALSE, 0);
 			    menuinfo[i].widget = gtk_menu_item_new();
+#ifdef	GTK_HAVE_ACCEL_GROUP
+			    w = gtk_accel_label_new (_(menuinfo[i].label));
+			    gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (w),
+							      menuinfo[i].widget);
+#else	/* !GTK_HAVE_ACCEL_GROUP */
+			    w = gtk_label_new(_(menuinfo[i].label));
+#endif	/* !GTK_HAVE_ACCEL_GROUP */
+			    gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
+			    gtk_box_pack_start(GTK_BOX(hbox), w, TRUE, TRUE, 0);
 			    gtk_container_add(GTK_CONTAINER(menuinfo[i].widget), hbox);
 			    gtk_widget_show_all(hbox);
 
@@ -647,8 +653,7 @@ gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 				   ag,
 				   menuinfo_item->accelerator_key,
 				   menuinfo_item->ac_mods,
-				   0);
-/* FIXME FIXME FIXME for gtk_widget_add_accelerator last arg */
+				   GTK_ACCEL_VISIBLE);
 #else
   at = gtk_object_get_data(GTK_OBJECT(app),
                            "GtkAcceleratorTable");

@@ -1145,20 +1145,23 @@ gnome_calculator_init (GnomeCalculator *gc)
 						   but);
 #ifdef GTK_HAVE_ACCEL_GROUP
 				if(but->key) {
-					gtk_widget_add_accelerator(w,
-						"clicked",
-						gc->accel,
-						but->key,0,0);
-					gtk_widget_add_accelerator(w,
-						"clicked",
-						gc->accel,
-						but->key,
-						GDK_SHIFT_MASK,0);
-					gtk_widget_add_accelerator(w,
-						"clicked",
-						gc->accel,
-						but->key,
-						GDK_LOCK_MASK,0);
+				  gtk_widget_add_accelerator(w,
+							     "clicked",
+							     gc->accel,
+							     but->key,0,
+							     GTK_ACCEL_VISIBLE);
+				  gtk_widget_add_accelerator(w,
+							     "clicked",
+							     gc->accel,
+							     but->key,
+							     GDK_SHIFT_MASK,
+							     GTK_ACCEL_VISIBLE);
+				  gtk_widget_add_accelerator(w,
+							     "clicked",
+							     gc->accel,
+							     but->key,
+							     GDK_LOCK_MASK,
+							     GTK_ACCEL_VISIBLE);
 				}
 #else
                                 if(but->key) {
