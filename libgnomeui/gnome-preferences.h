@@ -35,6 +35,7 @@ struct _GnomePreferences {
   int toolbar_lines : 1;
   int toolbar_labels : 1;
   int dialog_centered : 1;
+  int menus_have_tearoff : 1;
   int menus_have_icons : 1;
   int disable_imlib_cache : 1;
   GtkWindowType dialog_type;
@@ -116,6 +117,10 @@ void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p)
 /* Whether property box has Apply button.  */
 int               gnome_preferences_get_property_box_apply (void);
 void              gnome_preferences_set_property_box_button_apply (int v);
+
+/* Whether menus can be torn off */
+gboolean          gnome_preferences_get_menus_have_tearoff   (void);
+void              gnome_preferences_set_menus_have_tearoff   (gboolean b);
 
 /* Whether menu items have icons in them or not */
 int               gnome_preferences_get_menus_have_icons (void);

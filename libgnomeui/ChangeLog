@@ -1,3 +1,12 @@
+1998-12-17  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app-helper.c (gnome_app_fill_menu_custom): Prepend a
+	tearoff if preferences tell us to.
+	(gnome_app_find_menu_pos): When checking if menu item is a
+	separator, ignore tear off menu items.
+
+	* gnome-preferences.[ch]: Add preference for menus_have_tearoff.
+
 1998-12-17  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-app.c (gnome_app_realize): Simply show the dock, instead
