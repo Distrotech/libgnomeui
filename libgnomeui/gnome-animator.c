@@ -443,7 +443,7 @@ state_or_style_changed (GnomeAnimator *animator)
 }
 
 static void
-state_changed (GtkWidget *widget, guint previous_state)
+state_changed (GtkWidget *widget, GtkStateType previous_state)
 {
   g_assert (GNOME_IS_ANIMATOR (widget));
   state_or_style_changed (GNOME_ANIMATOR (widget));
