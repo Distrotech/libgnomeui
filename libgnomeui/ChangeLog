@@ -1,3 +1,14 @@
+Mon May 21 00:49:03 2001  George Lebl <jirka@5z.com>
+
+	* gnome-ditem-edit.[ch]:  Make it a widget instead of an object, (this
+	  is all new api anyway so we're allowed to break it if it's broken)
+	  Also whack ALL the accessors for widgets inside as those are
+	  stupid.  And make the ref couting scheme on the ditem a bit saner
+	  (copy on set, ref on get), and update comments and documention
+	  strings througout.  The icon entry stuff doesn't see changes and
+	  would get it wrong anyway, need to talk to martin.  Now for my next
+	  trick I'll try to get this to follow the .desktop standard.
+
 Sun May 20 23:15:50 2001  George Lebl <jirka@5z.com>
 
 	* gnome-image-selector.c, gnome-image-entry.c: include the component
