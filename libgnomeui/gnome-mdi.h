@@ -61,7 +61,8 @@ typedef enum {
   GNOME_MDI_MS = 1,
   GNOME_MDI_NOTEBOOK,
   GNOME_MDI_MODAL,
-  GNOME_MDI_TOPLEVEL
+  GNOME_MDI_TOPLEVEL,
+  GNOME_MDI_REDRAW = -1		/* do not change mode, just ``redraw'' the display it. */
 } GnomeMDIMode;
 
 /* the following keys are used to gtk_object_set_data() copies of the appropriate menu and toolbar templates

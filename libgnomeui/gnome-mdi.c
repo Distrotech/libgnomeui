@@ -1196,7 +1196,9 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, gint mode) {
   g_return_if_fail(mdi != NULL);
   g_return_if_fail(GNOME_IS_MDI(mdi));
 
-  if(mdi->mode == mode)
+  if(mode==-1)
+    mode = mdi->mode;
+  else if(mdi->mode == mode)
     return;
 
   /* remove all views from their parents */
