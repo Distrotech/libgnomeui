@@ -1712,6 +1712,13 @@ gnome_icon_list_freeze (GnomeIconList *gil)
 	g_return_if_fail (IS_GIL (gil));
 
 	gil->frozen++;
+
+	/* We hide the root so that the user will not see any changes while the
+	 * icon list is doing stuff.
+	 */
+
+	if (gil->frozen == 1)
+		gnome_canvas_item_hide (GNOME_CANVAS (gil)->root);
 }
 
 /**
@@ -1736,6 +1743,9 @@ gnome_icon_list_thaw (GnomeIconList *gil)
 
 	gil_layout_all_icons (gil);
 	gil_scrollbar_adjust (gil);
+
+	if (gil->frozen == 0)
+		gnome_canvas_item_show (GNOME_CANVAS (gil)->root);
 }
 
 /**

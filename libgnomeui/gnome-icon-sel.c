@@ -209,7 +209,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	gnome_icon_list_set_icon_data_full(GNOME_ICON_LIST(gis->gil), pos, 
 					   g_strdup(path),
 					   (GtkDestroyNotify) g_free );
-	gdk_imlib_destroy_image(im);
+/* 	gdk_imlib_destroy_image(im); */ /* FIXME: this needs ref/unref capabilities in imlib */
 }
 
 static int sort_file_list( gconstpointer a, gconstpointer b)

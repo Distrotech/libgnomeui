@@ -1,3 +1,15 @@
+1998-12-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_freeze): Hide the root of the
+	canvas while the list is frozen.  This way the user does not see
+	icons loading at the upper left corner.
+	(gnome_icon_list_thaw): Show the canvas root again.
+
+	* gnome-icon-sel.c (append_an_icon): Do not destroy the image that
+	we insert in the icon list.  This is actually not the correct
+	solution.  Imlib needs to provide ref() and unref() functions for
+	its images.
+
 1998-12-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): consider the
