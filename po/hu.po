@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
 "POT-Creation-Date: 2003-08-04 22:23+0200\n"
-"PO-Revision-Date: 2003-08-04 22:23+0200\n"
+"PO-Revision-Date: 2003-08-09 13:01+0200\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -1136,7 +1136,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox nem található, szokásos fájlkiválasztás alkalmazása"
+msgstr "Nem található hbox, normál fájlkiválasztás alkalmazása"
 
 #: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
@@ -1275,7 +1275,7 @@ msgstr "Táblázat kitöltése"
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr "Listajeles felsorolás"
+msgstr "Felsorolás"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
@@ -1295,7 +1295,7 @@ msgstr "Névjegy"
 
 #: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
-msgstr "Használandó X-képernyő"
+msgstr "Használandó X-megjelenítő"
 
 #: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
