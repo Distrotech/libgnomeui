@@ -1,3 +1,13 @@
+Sat Sep 12 13:50:29 1998 Paul Sheer <psheer@obsidian.co.za>
+
+	* gtkcauldron.c: Added inline labels: specified as text between
+	an `(' and a `)' with no space between the `(' and the first 
+	text character.
+
+	* gtkcauldron.c: Added scrollable frames: specify with the v and
+	h options to the `]' of a frame. Eg `]v' or `]vh' or ']h'. See
+	README.gtkcauldron for more details.
+
 1998-09-12 Francisco Bustamante <pancho@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (gnome_app_do_menu_creation): added check for
