@@ -1084,7 +1084,8 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 
 		return pos;
 	}
-
+	g_free (topic_file);
+	
 	/* Read in the help topics and create menu items for them */
 
 	while (fgets (buf, sizeof (buf), file)) {
