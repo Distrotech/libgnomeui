@@ -1,3 +1,7 @@
+Wed Apr 19 04:36:15 2000  George Lebl <jirka@5z.com>
+
+	* gnome-href.c: use GtkArg system and small doc updates
+
 Tue Mar 28 20:41:46 2000  George Lebl <jirka@5z.com>
 
 	* gnome-number-entry.[ch]: add a _set_number method to complement
