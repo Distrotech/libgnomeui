@@ -11,13 +11,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-06 18:41+0200\n"
+"POT-Creation-Date: 2004-03-09 20:31+0100\n"
 "PO-Revision-Date: 2004-03-06 19:04+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -143,7 +143,6 @@ msgstr "Apie %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Byla"
 
@@ -201,7 +200,6 @@ msgid "_Game"
 msgstr "Žai_dimas"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pagalba"
 
@@ -392,11 +390,11 @@ msgstr "Sutvarkyti programą"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Apie"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Apie šią programą"
 
@@ -423,7 +421,7 @@ msgstr "Sukurti naują langą"
 msgid "_Close This Window"
 msgstr "_Uždaryti šį langą"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Uždaryti esamą langą"
 
@@ -948,7 +946,8 @@ msgstr "Naudoti GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Nnaudoti naują GtkFileChooser valdymo elementą ar GtkFileSelection valdymo "
+msgstr ""
+"Nnaudoti naują GtkFileChooser valdymo elementą ar GtkFileSelection valdymo "
 "elementą bylų pasirinkimui."
 
 #: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
@@ -1388,8 +1387,9 @@ msgstr "procesas %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "Jūs galite informuoti kūrėjus apie tai kas atsitiko, kad jie galėtų tai pataisyti.  "
-"Arba Jūs galite tuoj pat perleisti programą."
+msgstr ""
+"Jūs galite informuoti kūrėjus apie tai kas atsitiko, kad jie galėtų tai "
+"pataisyti.  Arba Jūs galite tuoj pat perleisti programą."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1407,9 +1407,8 @@ msgstr "_Informuoti kūrėjus"
 msgid "_Debug"
 msgstr "_Derinti"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Išeiti iš testo"
+#~ msgid "Exit the test"
+#~ msgstr "Išeiti iš testo"
 
 #~ msgid "Color Selector"
 #~ msgstr "Spalvų Pasirinkimas"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-07 22:25-0500\n"
+"POT-Creation-Date: 2004-03-09 20:31+0100\n"
 "PO-Revision-Date: 2004-03-07 22:27-0500\n"
 "Last-Translator: Alexander Winston <alexander.winston@comcast.net>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
@@ -140,7 +140,6 @@ msgstr "About %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -198,7 +197,6 @@ msgid "_Game"
 msgstr "_Game"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Help"
 
@@ -389,11 +387,11 @@ msgstr "Configure the application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_About"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "About this application"
 
@@ -420,7 +418,7 @@ msgstr "Create a new window"
 msgid "_Close This Window"
 msgstr "_Close This Window"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Close the current window"
 
@@ -1405,6 +1403,5 @@ msgstr "_Inform Developers"
 msgid "_Debug"
 msgstr "_Debug"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Exit the test"
+#~ msgid "Exit the test"
+#~ msgstr "Exit the test"

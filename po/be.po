@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-08 04:14+0100\n"
+"POT-Creation-Date: 2004-03-09 20:31+0100\n"
 "PO-Revision-Date: 2004-03-08 15:11+0200\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -121,7 +121,8 @@ msgid "Translator credits"
 msgstr "Зьвесткі пра перакладчыкаў"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Падзякі перакладчыкам. Гэты радок мусьць быць пазначаны для перакладу."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -139,7 +140,6 @@ msgstr "Пра %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -197,7 +197,6 @@ msgid "_Game"
 msgstr "_Гульня"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Даведка"
 
@@ -388,11 +387,11 @@ msgstr "Наладзіць дастасаваньне"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Пра праграму"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Пра праграму"
 
@@ -419,7 +418,7 @@ msgstr "Стварыць новае вакно"
 msgid "_Close This Window"
 msgstr "Зачыніць _гэтае вакно"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Зачыніць бягучае акно"
 
@@ -946,7 +945,9 @@ msgstr "Выкарыстоўваць GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Выкарстоўваць новы віджэт GtkFileChooser для вылучэньня файлаў ці стары GtkFileSelection."
+msgstr ""
+"Выкарстоўваць новы віджэт GtkFileChooser для вылучэньня файлаў ці стары "
+"GtkFileSelection."
 
 #: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
@@ -1385,8 +1386,8 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"Вы можаце паведаміць распрацоўнікам аб тым што здарылася, каб дапамагчы "
-"ім выправіць гэта альбо запусьціць нанова дастасаваньне."
+"Вы можаце паведаміць распрацоўнікам аб тым што здарылася, каб дапамагчы ім "
+"выправіць гэта альбо запусьціць нанова дастасаваньне."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1404,9 +1405,8 @@ msgstr "Пав_едаміць"
 msgid "_Debug"
 msgstr "Ад_ладзіць"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Выйсьці з праверкі"
+#~ msgid "Exit the test"
+#~ msgstr "Выйсьці з праверкі"
 
 #~ msgid "Color Selector"
 #~ msgstr "Выбар колеру"
@@ -1433,4 +1433,3 @@ msgstr "Выйсьці з праверкі"
 
 #~ msgid "_Credits"
 #~ msgstr "_Падзякі"
-

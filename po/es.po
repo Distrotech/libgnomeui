@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-03 23:57+0100\n"
+"POT-Creation-Date: 2004-03-09 20:31+0100\n"
 "PO-Revision-Date: 2004-03-06 20:13+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -126,7 +126,8 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -1027,7 +1028,8 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr ""
+"Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1441,4 +1443,3 @@ msgstr "_Depurar"
 
 #~ msgid "_Credits"
 #~ msgstr "_Créditos"
-
