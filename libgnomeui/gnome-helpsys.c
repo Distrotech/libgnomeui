@@ -356,11 +356,11 @@ GtkWidget *
 gnome_help_view_new(GtkWidget *toplevel, GnomeHelpViewStyle app_style,
 		    GnomeHelpViewStylePriority app_style_priority)
 {
-  return (GtkWidget *)gtk_object_new(gnome_help_view_get_type(),
-				     "toplevel", toplevel,
-				     "app_style", app_style,
-				     "app_style_priority", app_style_priority,
-				     NULL);
+  return (GtkWidget *)g_object_new (gnome_help_view_get_type(),
+				    "toplevel", toplevel,
+				    "app_style", app_style,
+				    "app_style_priority", app_style_priority,
+				    NULL);
 }
 
 void
@@ -369,14 +369,14 @@ gnome_help_view_construct(GnomeHelpView *self,
 			  GnomeHelpViewStyle app_style,
 			  GnomeHelpViewStylePriority app_style_priority)
 {
-	g_return_if_fail(self != NULL);
-	g_return_if_fail(GNOME_IS_HELP_VIEW(self));
+	g_return_if_fail (self != NULL);
+	g_return_if_fail (GNOME_IS_HELP_VIEW (self));
 
-	gtk_object_set(GTK_OBJECT(self),
-		       "toplevel", toplevel,
-		       "app_style", app_style,
-		       "app_style_priority", app_style_priority,
-		       NULL);
+	g_object_set (G_OBJECT (self),
+		      "toplevel", toplevel,
+		      "app_style", app_style,
+		      "app_style_priority", app_style_priority,
+		      NULL);
 }
 
 void

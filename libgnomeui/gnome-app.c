@@ -69,21 +69,27 @@ struct _GnomeAppPrivate
 };
 
 
-static void gnome_app_class_init (GnomeAppClass *class);
-static void gnome_app_init       (GnomeApp      *app);
-static void gnome_app_destroy    (GtkObject     *object);
-static void gnome_app_finalize   (GObject       *object);
-static void gnome_app_show       (GtkWidget *widget);
-static void gnome_app_set_arg (GtkObject      *object,
-			       GtkArg         *arg,
-			       guint	      arg_id);
-static void gnome_app_get_arg (GtkObject      *object,
-			       GtkArg         *arg,
-			       guint	      arg_id);
+static void gnome_app_class_init  (GnomeAppClass *class);
+static void gnome_app_init        (GnomeApp      *app);
+static void gnome_app_destroy     (GtkObject     *object);
+static void gnome_app_finalize    (GObject       *object);
+static void gnome_app_show        (GtkWidget     *widget);
+static void gnome_app_get_param   (GObject       *object,
+				   guint          param_id,
+				   GValue        *value,
+				   GParamSpec    *pspec,
+				   const gchar   *trailer);
+static void gnome_app_set_param   (GObject       *object,
+				   guint          param_id,
+				   GValue        *value,
+				   GParamSpec    *pspec,
+				   const gchar   *trailer);
 
-static gchar *read_layout_config  (GnomeApp *app);
-static void   write_layout_config (GnomeApp *app, GnomeDockLayout *layout);
-static void   layout_changed      (GtkWidget *widget, gpointer data);
+static gchar *read_layout_config  (GnomeApp      *app);
+static void   write_layout_config (GnomeApp      *app,
+				   GnomeDockLayout *layout);
+static void   layout_changed      (GtkWidget     *widget,
+				   gpointer       data);
 
 /* define _get_type and parent_class */
 GNOME_CLASS_BOILERPLATE (GnomeApp, gnome_app,
@@ -116,8 +122,8 @@ write_layout_config (GnomeApp *app, GnomeDockLayout *layout)
 }
 
 enum {
-	ARG_0,
-	ARG_APP_ID
+	PARAM_0,
+	PARAM_APP_ID
 };
 
 static void
@@ -132,45 +138,54 @@ gnome_app_class_init (GnomeAppClass *class)
 	widget_class = (GtkWidgetClass *) class;
 
 	gobject_class->finalize = gnome_app_finalize;
+	gobject_class->set_param = gnome_app_set_param;
+	gobject_class->get_param = gnome_app_get_param;
+
 	object_class->destroy = gnome_app_destroy;
-	object_class->set_arg = gnome_app_set_arg;
-	object_class->get_arg = gnome_app_get_arg;
 
 	widget_class->show = gnome_app_show;
 
-	gtk_object_add_arg_type("GnomeApp::app_id",
-				GTK_TYPE_STRING,
-				GTK_ARG_READWRITE|GTK_ARG_CONSTRUCT,
-				ARG_APP_ID);
+	g_object_class_install_param (gobject_class,
+				      PARAM_APP_ID,
+				      g_param_spec_string ("app_id",
+							   _("App ID"),
+							   _("The application ID string"),
+							   NULL,
+							   (G_PARAM_READABLE |
+							    G_PARAM_WRITABLE)));
 }
 
 static void
-gnome_app_set_arg (GtkObject      *object,
-		   GtkArg         *arg,
-		   guint	      arg_id)
+gnome_app_set_param (GObject       *object,
+		     guint          param_id,
+		     GValue        *value,
+		     GParamSpec    *pspec,
+		     const gchar   *trailer)
 {
-	GnomeApp *app = (GnomeApp *) object;
+	GnomeApp *app = GNOME_APP (object);
 
-	switch(arg_id) {
-	case ARG_APP_ID:
-		g_free(app->name);
-		app->name = g_strdup(GTK_VALUE_STRING(*arg));
-		g_free(app->prefix);
+	switch(param_id) {
+	case PARAM_APP_ID:
+		g_free (app->name);
+		app->name = g_strdup (g_value_get_string (value));
+		g_free (app->prefix);
 		app->prefix = g_strconcat("/", app->name, "/", NULL);
 		break;
 	}
 }
 
 static void
-gnome_app_get_arg (GtkObject      *object,
-		   GtkArg         *arg,
-		   guint	      arg_id)
+gnome_app_get_param (GObject       *object,
+		     guint          param_id,
+		     GValue        *value,
+		     GParamSpec    *pspec,
+		     const gchar   *trailer)
 {
-	GnomeApp *app = (GnomeApp *) object;
+	GnomeApp *app = GNOME_APP (object);
 
-	switch(arg_id) {
-	case ARG_APP_ID:
-		GTK_VALUE_STRING(*arg) = g_strdup(app->name);
+	switch(param_id) {
+	case PARAM_APP_ID:
+		g_value_set_string (value, app->name);
 		break;
 	}
 }
@@ -184,6 +199,9 @@ gnome_app_init (GnomeApp *app)
 	/* XXX: when there is some private stuff enable this
 	app->_priv = g_new0(GnomeAppPrivate, 1);
 	*/
+
+	app->name = NULL;
+	app->prefix = NULL;
 
 	app->accel_group = gtk_accel_group_new ();
 	gtk_window_add_accel_group (GTK_WINDOW (app), app->accel_group);
@@ -203,9 +221,11 @@ gnome_app_init (GnomeApp *app)
 	app->layout = gnome_dock_layout_new ();
 
 	app->enable_layout_config = TRUE;
-	gnome_program_attributes_get(gnome_program_get(), LIBGNOMEUI_PARAM_DEFAULT_ICON, &str, NULL);
-	if(str)
-		gnome_window_set_icon_from_file(GTK_WINDOW(app), str, FALSE);
+	gnome_program_attributes_get (gnome_program_get (),
+				      LIBGNOMEUI_PARAM_DEFAULT_ICON,
+				      &str, NULL);
+	if (str != NULL)
+		gnome_window_set_icon_from_file (GTK_WINDOW (app), str, FALSE);
 }
 
 static void
@@ -276,21 +296,23 @@ layout_changed (GtkWidget *w, gpointer data)
  **/
 
 GtkWidget *
-gnome_app_new(const gchar *appname, const gchar *title)
+gnome_app_new (const gchar *appname, const gchar *title)
 {
 	GtkObject *app;
 
 	g_return_val_if_fail (appname != NULL, NULL);
 
 	if (title != NULL) {
-		app = gtk_object_new (gnome_app_get_type (),
-				      "app_id", appname,
-				      "title", title,
-				      NULL);
+		app = g_object_new (gnome_app_get_type (),
+				    "app_id", appname,
+				    NULL);
+		gtk_object_set (GTK_OBJECT (app),
+				"title", title,
+				NULL);
 	} else {
-		app = gtk_object_new (gnome_app_get_type (),
-				      "app_id", appname,
-				      NULL);
+		app = g_object_new (gnome_app_get_type (),
+				    "app_id", appname,
+				    NULL);
 	}
 	return GTK_WIDGET (app);
 }
@@ -311,14 +333,16 @@ gnome_app_construct (GnomeApp *app, const gchar *appname, const gchar *title)
 	g_return_if_fail (appname != NULL);
 
 	if (title != NULL) {
+		g_object_set (G_OBJECT (app),
+			      "app_id", appname,
+			      NULL);
 		gtk_object_set (GTK_OBJECT (app),
-				"app_id", appname,
 				"title", title,
 				NULL);
 	} else {
-		gtk_object_set (GTK_OBJECT (app),
-				"app_id", appname,
-				NULL);
+		g_object_set (G_OBJECT (app),
+			      "app_id", appname,
+			      NULL);
 	}
 }
 
@@ -339,12 +363,12 @@ gnome_app_destroy (GtkObject *object)
 	g_free (app->prefix);
 	app->prefix = NULL;
 
-	if(app->accel_group) {
+	if (app->accel_group != NULL) {
 		gtk_accel_group_unref (app->accel_group);
 		app->accel_group = NULL;
 	}
 
-	if (app->layout) {
+	if (app->layout != NULL) {
 		gtk_object_unref (GTK_OBJECT (app->layout));
 		app->layout = NULL;
 	}
