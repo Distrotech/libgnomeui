@@ -109,6 +109,15 @@ GnomeDesktopEntry * gnome_dentry_get_dentry(GnomeDEntryEdit * dee);
 gchar *     gnome_dentry_edit_get_icon   (GnomeDEntryEdit * dee);
 gchar *     gnome_dentry_edit_get_name   (GnomeDEntryEdit * dee);
 
+/* These are accessor functions for the widgets that make up the
+   GnomeDEntryEdit widget. */
+GtkWidget * gnome_dentry_get_name_entry      (GnomeDEntryEdit * dee);
+GtkWidget * gnome_dentry_get_comment_entry   (GnomeDEntryEdit * dee);
+GtkWidget * gnome_dentry_get_exec_entry      (GnomeDEntryEdit * dee);
+GtkWidget * gnome_dentry_get_tryexec_entry   (GnomeDEntryEdit * dee);
+GtkWidget * gnome_dentry_get_doc_entry       (GnomeDEntryEdit * dee);
+GtkWidget * gnome_dentry_get_icon_entry      (GnomeDEntryEdit * dee);
+
 END_GNOME_DECLS
    
 #endif /* GNOME_DENTRY_EDIT_H */

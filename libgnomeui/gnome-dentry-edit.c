@@ -513,6 +513,42 @@ gchar *     gnome_dentry_edit_get_name   (GnomeDEntryEdit * dee)
   return g_strdup(name);
 }
 
+GtkWidget *
+gnome_dentry_get_name_entry      (GnomeDEntryEdit * dee)
+{
+  return dee->name_entry;
+}
+
+GtkWidget *
+gnome_dentry_get_comment_entry   (GnomeDEntryEdit * dee)
+{
+  return dee->comment_entry;
+}
+
+GtkWidget *
+gnome_dentry_get_exec_entry      (GnomeDEntryEdit * dee)
+{
+  return dee->exec_entry;
+}
+
+GtkWidget *
+gnome_dentry_get_tryexec_entry   (GnomeDEntryEdit * dee)
+{
+  return dee->tryexec_entry;
+}
+
+GtkWidget *
+gnome_dentry_get_doc_entry       (GnomeDEntryEdit * dee)
+{
+  return dee->doc_entry;
+}
+
+GtkWidget *
+gnome_dentry_get_icon_entry      (GnomeDEntryEdit * dee)
+{
+  return dee->icon_entry;
+}
+
 #ifdef TEST_DENTRY_EDIT
 
 #include "libgnomeui.h"

@@ -1,3 +1,14 @@
+1999-01-25  Nat Friedman  <nat@nat.org>
+
+	* gnome-dentry-edit.c (gnome_dentry_get_name_entry): New function
+ 	to provide access to the Name GtkEntry widget.
+	(gnome_dentry_get_comment_entry): Likewise.
+	(gnome_dentry_get_exec_entry): Likewise.
+	(gnome_dentry_get_tryexec_entry): Likewise.
+	(gnome_dentry_get_doc_entry): Likewise.
+	(gnome_dentry_get_icon_entry): Likewise.
+	* gnome-dentry-edit.h: Prototypes for the above.
+
 1999-01-24  Tomas Ogren  <stric@ing.umu.se>
 
 	* gnome-dock-band.c (gnome_dock_band_get_orientation):
