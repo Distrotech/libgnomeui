@@ -1,5 +1,8 @@
 1998-10-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-icon-list.c: (toggle_icon): Make sure we emit a signal
+	with the correct index.
+	
 	* gnome-icon-list.c (gnome_icon_list_icon_is_visible): Fix wrong
 	return value. 
 

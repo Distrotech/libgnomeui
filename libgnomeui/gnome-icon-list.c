@@ -409,6 +409,19 @@ toggle_icon (Gil *gil, Icon *icon, GdkEvent *event)
 			if ((event->button.button == 1) || (!icon->text->selected))
 				idx = gnome_icon_list_unselect_all (gil, event, icon);
 
+			if (idx == -1){
+				GList *l = gil->icon_list;
+				int i = 0;
+				
+				for (; l; l = l->next, i++){
+					if (l->data == icon){
+						idx = i;
+						break;
+					}
+				}
+			}
+			g_assert (idx != -1);
+			
 			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON], idx, event);
 			gil->last_selected = idx;
 			break;
