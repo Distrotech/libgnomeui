@@ -63,7 +63,7 @@ void
 gnome_app_create_popup_menus_custom (GnomeApp *app,
 		 		     GtkWidget *child,
 		 		     GnomeUIInfo *menuinfo,
-		 		     gpointer *handler,
+		 		     gpointer handler,
 		  		     GnomeUIBuilderData *uibdata)
 
 {
@@ -97,7 +97,7 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 	/* first, get all the args needed for the new child */
 
 	temparg = gtk_container_query_child_args(GTK_WIDGET_TYPE(oldparent), NULL, &nargs);
-	gtk_container_child_getv(oldparent, child, nargs, temparg);
+	gtk_container_child_getv(GTK_CONTAINER(oldparent), child, nargs, temparg);
 
 	/* Now we can remove the child */
 
@@ -130,7 +130,7 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 
 void
 gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child,
-			      GnomeUIInfo *menudata, gpointer *handler)
+			      GnomeUIInfo *menudata, gpointer handler)
 {
 #if GTK_HAVE_ACCEL_GROUP
 
