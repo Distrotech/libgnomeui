@@ -1,5 +1,8 @@
 1998-05-31  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
+	* gnome-about.c: Include "libgnome/gnome-i18nP.h" instead of
+ 	"libgnome/gnome-i18n.h".
+
 	* gnome-client.h: Added 'gnome_client_get_config_prefix' and
  	'gnome_client_get_global_config_prefix' declarations.
 	(struct _GnomeClient): New member 'config_prefix' and
