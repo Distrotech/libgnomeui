@@ -1,5 +1,14 @@
 1999-02-07  Ettore Perazzoli  <ettore@comm2000.it>
 
+	* gnome-app.c (gnome_app_realize): Removed.
+	(gnome_app_show): Same as the removed `gnome_app_realize', but
+ 	invoke the parent class' `show' method (instead of the `realize'
+ 	method) before returning.
+	(gnome_app_class_init): Install `gnome_app_show' as the `show'
+ 	method.
+
+1999-02-07  Ettore Perazzoli  <ettore@comm2000.it>
+
 	* gnome-dock.c (drag_new): Avoid re-grabbing the pointer, as
  	suggested by Jaka.
 	(drag_new): No longer subtract the drag offsets from the current

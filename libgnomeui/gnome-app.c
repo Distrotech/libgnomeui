@@ -34,7 +34,7 @@
 static void gnome_app_class_init (GnomeAppClass *class);
 static void gnome_app_init       (GnomeApp      *app);
 static void gnome_app_destroy    (GtkObject     *object);
-static void gnome_app_realize    (GtkWidget *widget);
+static void gnome_app_show       (GtkWidget *widget);
 
 static gchar *read_layout_config  (GnomeApp *app);
 static void   write_layout_config (GnomeApp *app, GnomeDockLayout *layout);
@@ -112,7 +112,7 @@ gnome_app_class_init (GnomeAppClass *class)
 
 	object_class->destroy = gnome_app_destroy;
 
-	widget_class->realize = gnome_app_realize;
+	widget_class->show = gnome_app_show;
 }
 
 static void
@@ -134,7 +134,7 @@ gnome_app_init (GnomeApp *app)
 }
 
 static void
-gnome_app_realize (GtkWidget *widget)
+gnome_app_show (GtkWidget *widget)
 {
 	GnomeApp *app;
 
@@ -161,13 +161,13 @@ gnome_app_realize (GtkWidget *widget)
 	gtk_object_unref (GTK_OBJECT (app->layout));
 	app->layout = NULL;
 
-	if (GTK_WIDGET_CLASS (parent_class)->realize != NULL)
-		(* GTK_WIDGET_CLASS (parent_class)->realize) (widget);
-
 	gtk_signal_connect (GTK_OBJECT (app->dock),
 			    "layout_changed",
 			    GTK_SIGNAL_FUNC (layout_changed),
 			    (gpointer) app);
+
+	if (GTK_WIDGET_CLASS (parent_class)->show != NULL)
+		(*GTK_WIDGET_CLASS (parent_class)->show) (widget);
 }
 
 static void
