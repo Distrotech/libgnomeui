@@ -1,3 +1,7 @@
+Sun Apr 26 15:40:48 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock: supplied `About' icon for use in buttons
+
 Sun Apr 26 00:18:02 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c (gnome_dialog_init): Pack the dialog's vbox 
@@ -7,6 +11,7 @@ Sun Apr 26 00:18:02 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-file-entry.c (gnome_file_entry_init): Undo the emission of
 	a signal on content change, as GtkText already emitted "changed". 
+
 Sat Apr 25 14:04:55 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock{.c,-imlib.h}: fixed apply/ok stock buttons, added trash
