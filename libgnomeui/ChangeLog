@@ -1,3 +1,8 @@
+Sat Jan 01 18:58:12 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dentry-edit.c: use LC_MESSAGES category instead of LC_ALL
+	  for the message translations of the dentry fields
+
 Wed Dec 29 16:53:35 1999  George Lebl <jirka@5z.com>
 
 	* oafgnome.c: add include for unistd.h and fcntl.h to make this
