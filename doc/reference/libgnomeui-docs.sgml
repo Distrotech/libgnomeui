@@ -25,13 +25,11 @@
 <!ENTITY libgnomeui-GnomePixmap SYSTEM "sgml/gnome-pixmap.sgml">
 <!ENTITY libgnomeui-GnomePropertyBox SYSTEM "sgml/gnome-propertybox.sgml">
 <!ENTITY libgnomeui-GnomeScores SYSTEM "sgml/gnome-scores.sgml">
-<!ENTITY libgnomeui-gnome-ice SYSTEM "sgml/gnome-ice.sgml">
 <!ENTITY libgnomeui-gnome-app-helper SYSTEM "sgml/gnome-app-helper.sgml">
 <!ENTITY libgnomeui-gnome-app-util SYSTEM "sgml/gnome-app-util.sgml">
 <!ENTITY libgnomeui-gnome-mdi-session SYSTEM "sgml/gnome-mdi-session.sgml">
 <!ENTITY libgnomeui-gnome-ui-init SYSTEM "sgml/gnome-ui-init.sgml">
 <!ENTITY libgnomeui-gnome-dialog-util SYSTEM "sgml/gnome-dialog-util.sgml">
-<!ENTITY libgnomeui-gnome-gconf-ui SYSTEM "sgml/gnome-gconf-ui.sgml">
 <!ENTITY libgnomeui-gnome-stock-icons SYSTEM "sgml/gnome-stock-icons.sgml">
 <!ENTITY libgnomeui-gnome-types SYSTEM "sgml/gnome-types.sgml">
 <!ENTITY libgnomeui-gnome-uidefs SYSTEM "sgml/gnome-uidefs.sgml">
@@ -49,20 +47,38 @@
   <chapter>
     <title>GNOME UI Library (libgnomeui)</title>
     <sect1>
-      <title>Application mangement</title>
+      <title>Initialization and session management</title>
+      <para>
+      This section includes functions and parameters used to initialise GNOME
+      applications which use <application>libgnomeui</application> and to
+      handle interactions with whatever session manager is running when the
+      application starts up.
+      </para>
+      <para>
+      A typical application will call <function>gnome_program_init</function>
+      (from <filename>libgnome/libgnome.h</filename>) with parameters from the
+      gnome-ui-init section and will then possibly have further interactions
+      (beyond the initial default setup performed by
+      <function>gnome_program_init</function>) with the session manager.
+      </para>
+      &libgnomeui-gnome-ui-init;
+      &libgnomeui-GnomeClient;
+    </sect1>
+    <sect1>
+      <title>Application management</title>
+      <para>
+      After initializing <application>libgnomeui</application>, a typical
+      application will need to create its main application window, possibly
+      with some non-standard decorations, create its credit (or About) box and
+      get ready to enter the main loop. The functions in this section provide
+      the facility for carrying out all of these operations.
+      </para>
       &libgnomeui-GnomeApp;
       &libgnomeui-GnomeAppBar;
       &libgnomeui-gnome-app-helper;
       &libgnomeui-gnome-app-util;
+      &libgnomeui-gnome-window;
       &libgnomeui-GnomeAbout;
-    </sect1>
-    <sect1>
-      <title>FIXME</title>
-      &libgnomeui-GnomeClient;
-      &libgnomeui-GnomeColorPicker;
-      &libgnomeui-GnomeDateEdit;
-      &libgnomeui-GnomeDialog;
-      &libgnomeui-gnome-dialog-util;
     </sect1>
     <sect1>
       <title>Druids</title>
@@ -73,12 +89,14 @@
     </sect1>
     <sect1>
       <title>FIXME</title>
+      &libgnomeui-GnomeColorPicker;
+      &libgnomeui-GnomeDateEdit;
+      &libgnomeui-GnomeDialog;
+      &libgnomeui-gnome-dialog-util;
       &libgnomeui-GnomeEntry;
       &libgnomeui-GnomeFileEntry;
       &libgnomeui-GnomeFontPicker;
-      &libgnomeui-gnome-gconf-ui;
       &libgnomeui-GnomeHRef;
-      &libgnomeui-gnome-ice;
       &libgnomeui-GnomeIconEntry;
       &libgnomeui-GnomeIconList;
       &libgnomeui-GnomeIconSelection;
@@ -96,9 +114,7 @@
       &libgnomeui-gnometypebuiltins;
       &libgnomeui-gnome-types;
       &libgnomeui-gnome-uidefs;
-      &libgnomeui-gnome-ui-init;
       &libgnomeui-gnome-vfs-util;
-      &libgnomeui-gnome-window;
     </sect1>
     <sect1 id="libgnomeui-objects">
       <title>Object Hierarchy</title>

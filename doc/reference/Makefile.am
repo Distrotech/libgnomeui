@@ -27,7 +27,8 @@ CFILE_GLOB=$(top_srcdir)/libgnomeui/*.c
 # Header files to ignore when scanning.
 IGNORE_HFILES=				\
 	gnome-i18nP.h			\
-	libgnomeuiP.h
+	libgnomeuiP.h			\
+	gnome-gconf-ui.h
 
 # Images to copy into HTML directory.
 HTML_IMAGES =
