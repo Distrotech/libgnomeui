@@ -177,7 +177,6 @@ enum_from_strings(gint * setme, gchar * findme,
     }
   }
 
-  g_free(findme);
   return retval;
 }
 
