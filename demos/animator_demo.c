@@ -45,7 +45,9 @@ main (int argc, char *argv[])
   gtk_signal_connect (GTK_OBJECT (window), "delete_event",
 		      GTK_SIGNAL_FUNC (quit_cb), NULL);
 
-  s = gnome_pixmap_file (ANIMFILE);
+  s = gnome_program_locate_file (gnome_program_get (),
+				 GNOME_FILE_DOMAIN_PIXMAP,
+				 ANIMFILE, TRUE, NULL);
   pixbuf = gdk_pixbuf_new_from_file (s, NULL);
   g_free (s);
   animator = gnome_animator_new_with_size (48, 48);
