@@ -441,6 +441,18 @@ gnome_client_new_without_connection (void)
   return client;
 }
 
+void
+gnome_client_flush (GnomeClient *client)
+{
+  IceConn conn;
+
+  g_return_if_fail (client != NULL);
+  g_return_if_fail (GNOME_CLIENT_CONNECTED (client));
+
+  conn = SmcGetIceConnection (client->smc_conn);
+  IceFlush (conn);
+}
+
 /*****************************************************************************/
 
 #define ERROR_STRING_LENGTH 256
@@ -530,7 +542,9 @@ void
 gnome_client_disconnect (GnomeClient *client)
 {
   g_return_if_fail (client != NULL);
-  
+
+
+  gnome_client_flush (client);
   if (GNOME_CLIENT_CONNECTED (client))
     gtk_signal_emit (GTK_OBJECT (client), client_signals[DISCONNECT]);
 }

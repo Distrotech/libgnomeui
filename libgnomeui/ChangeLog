@@ -1,5 +1,9 @@
 Tue Mar 10 22:27:31 1998  Tom Tromey  <tromey@cygnus.com>
 
+	* gnome-client.c (gnome_client_flush): New function.
+	(gnome_client_disconnect): Flush client.
+	* gnome-client.h (gnome_client_flush): Declare.
+
 	* gnome-client.c (gnome_client_set_restart_command): Don't insert
 	--sm-client-id option if restart_command is NULL.
 	(gnome_real_client_connect): Likewise.

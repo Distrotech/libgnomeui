@@ -278,6 +278,11 @@ void         gnome_client_request_save (GnomeClient        *client,
 					int /* bool */      fast,
 					int /* bool */      global);
 
+/* This will force the underlying connection to the session manager to
+   be flushed.  This is useful if you have some pending changes that
+   you want to make sure get committed.  */
+void         gnome_client_flush (GnomeClient *client);
+
 END_GNOME_DECLS
 
 #endif /* GNOME_CLIENT_H */
