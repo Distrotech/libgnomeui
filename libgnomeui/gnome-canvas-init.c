@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 
 #include <libgnomecanvas/libgnomecanvas.h>
-#include <libgnomebase/libgnomebase.h>
+#include <libgnome/libgnome.h>
 
 static void
 add_gtk_arg_callback (poptContext con, enum poptCallbackReason reason,
@@ -97,9 +97,9 @@ static struct poptOption gtk_options [] = {
 };
 
 static GnomeModuleRequirement gtk_requirements [] = {
-	/* We require libgnomebase setup to be run first as it
+	/* We require libgnome setup to be run first as it
 	 * initializes the type system and some other stuff. */
-	{ VERSION, &libgnomebase_module_info } ,
+	{ VERSION, &libgnome_module_info } ,
 	{ NULL, NULL }
 };
 
