@@ -1,3 +1,8 @@
+2003-05-26  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-app.c: Merge fix for
+	bug #111168 from stable.
+
 2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c: Merge fix for
