@@ -259,7 +259,7 @@ gnome_dock_band_size_request (GtkWidget *widget,
 	      gboolean has_preferred_height;
 	      guint preferred_height;
 
-	      has_preferred_height = check_guint_arg (GTK_OBJECT (c->widget),
+	      has_preferred_height = check_guint_arg (G_OBJECT (c->widget),
 						      "preferred_height",
 						      &preferred_height);
 
