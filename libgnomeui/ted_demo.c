@@ -2,6 +2,7 @@
  * This program ilustrates how the Ted widget is used for GUI design
  *
  */
+#include <config.h>
 #include <gnome.h>
 #include "gtk-ted.h"
 

@@ -17,7 +17,9 @@ lib_LTLIBRARIES = libgnomeui.la
 
 # these files are `autoconf'ed in.
 EXTRA_libgnomeui_la_SOURCES = gnome-canvas.c gnome-canvas.h \
-		gnome-canvas-rect-ellipse.c gnome-canvas-rect-ellipse.h
+		gnome-canvas-rect-ellipse.c
+
+libgnomeui_la_DEPENDENCIES = @GNOME_CANVAS_OBJS@
 
 libgnomeui_la_SOURCES = \
 	gnome-actionarea.c		\
@@ -124,7 +126,7 @@ EXTRA_DIST = \
 	AUTHORS
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
+libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS) @GNOME_CANVAS_OBJS@
 
 gnome_segv_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\

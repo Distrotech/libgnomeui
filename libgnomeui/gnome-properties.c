@@ -1,3 +1,4 @@
+#include <config.h>
 #include <gtk/gtk.h>
 #include <string.h>
 #include "libgnome/gnome-defs.h"
