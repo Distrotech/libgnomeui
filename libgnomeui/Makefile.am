@@ -203,6 +203,8 @@ $(srcdir)/gnometype_inits.c: @REBUILD@ Makefile.am $(gnome_headers)
 	&& cp xgen-gtic $(@F) \
 	&& rm -f xgen-gtic
 
+gnometypes.c: $(srcdir)/gnometype_inits.c
+
 #######################
 
 gnome_segv_SOURCES = gnome_segv.c

@@ -310,7 +310,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         GnomeProgramPrivate_libgnomeui *priv = g_new0(GnomeProgramPrivate_libgnomeui, 1);
 
         gnome_type_init();
-#warning FIXME: here... gtk_rc ...
+        // #warning FIXME: here... gtk_rc ...
         libgnomeui_rc_parse(program_invocation_name);
 
         libgnomeui_segv_setup(TRUE);
