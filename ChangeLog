@@ -1,3 +1,9 @@
+2004-03-22  Anders Carlsson  <andersca@gnome.org>
+
+	* NEWS: Update
+
+	* Makefile.am (EXTRA_DIST): Add NEWS and COPYING.LIB
+
 2004-03-19  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-authentication-manager.c (present_authentication_dialog_nonblocking),

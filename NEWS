@@ -1,54 +1,94 @@
-================
-libgnomeui 2.2.1 (24.05.2003)
-================
+libgnomeui 2.6.0 "Zeb"
+-----------------------
 
-New in this release:
+What's new since 2.4
 
-Library:
-	* Fix toolbars to be consistent (Rodney Dawes)
-	* Fix gnome-segv to not loop when it crashes itself
-	(Malcolm Tredinnick, Damon Chaplin)
-	* Make fonts in icon labels respect font size changes
-	(Pasupathi Duraisamy)
-	* Skip hidden pages in the druid (Ricardo Fern�ndez Pascual)
-	* Fix referencing problem with MDI (Jaka Mocnic)
-	* Fix leaks in session management and score handling
-	(Kjartan Maraas, Arjan Van de Ven)
-	* Bugfix for gnome-icon-theme (Gustavo Giraldez)
-	* Don't crash when double clicking the OK button in
-	the fileselector (Narayana Pattipati)
-	* API documentation fixes (Sebastian Rittau)
-	* Don't return FALSE in pointer functions (Morten Welinder)
-	* Fix compiler warnings and uninitialised vars (Malcolm
-	Tredinnick)
-	* Ask gdk-pixbuf for supported mime types in gnome-icon-lookup.c
-	(Anders Carlsson, Christian Schaller)
-	* Fix leak in the font picker (Kjartan Maraas)
-	* Fix top-left text for icons in nautilus (Alex Larsson)
-	* Fix entry items not being cleared properly (Marco Pesenti Gritti)
+* Improvements:
+	- Mass deprecation of broken widgets (Jonathan Blandford)
+	- Keyring support in authentication manager (Alexander Larsson)
+	- Multi-screen versions of the help and url display methods 
+	  (Mark McLoughlin)
+	- New stock icons (Jakub Steiner)
+	- Deprecate GnomeIconTheme for GtkIconTheme (Alexander Larsson)
+	- Improved crash dialog (Fernando Herrera)
+	- Make entries support the new file chooser (Fernando Hererra, 
+						     Mark McLoughlin, 
+						     Carlos Garnacho Parro)
+	- Gnome VFS file chooser backend (Alexander Larsson, 
+					  Federico Mena Quintero, 
+					  Owen Taylor)
+
+* Bug fixes:
+	- HIG fixes for gnome-scores (Alex Duggan)
+	- Translate program arguments (Hidetoshi Tajima)
+	- Icon list fixes (Federico Mena Quintero, Michael Zucchi)
+	- Session management fixes (Christian Persch)
+	- Handle toolbar orientation in gnome-app-helper (Bryan Forbes)
+	- Various bug fixes (Anders Carlsson, Joe Marcus Clarke, 
+		             Dennis Cranston, Fernando Herrera, Richard Hult, 
+			     Alexander Larsson, George Lebl, Kjartan Maraas, 
+			     Padraig O'Brian, Carlos Romero, Jeffrey Steadfast,
+			     Balamurali Viswanathan)
+
+
+* Translations:
+	- Added Canadian English translation (Adam Weinberger, 
+					      Alexander Winston)
+	- Added Croatian translation (Robert Sedak)
+	- Added Marathi translation (Jitendra Shah)
+	- Added Serbian Jekavian translation (Bojan Suzić)
+	- Added Thai translation (Theppitak Karoonboonyanan, 
+				  Paisa Seeluangsawat)
+
+	- Updated Albanian translation (Laurent Dhima)
+	- Updated Arabic translation (Arafat Medini)
+	- Updated Azerbaijani translation (Mətin Əmirov)
+	- Updated Belarusian translation (Ales Nyakhaychyk)
+	- Updated Bengali translation (Sayamindu Dasgupta)
+	- Updated Brazilian Portuguese translation (Raphael Higino, 
+						    Augusta Margues da Silva)
+	- Updated British English translation (Gareth Owen)
+	- Updated Czech translation (Miloslav Trmac)
+ 	- Updated Danish translation (Ole Laursen)
+	- Updated Dutch translation (Kess van den Broek, Reinout van Schouwen)
+	- Updated Estonian translation (Priit Laes)
+	- Updated Finnish translation (Pauli Virtanen)
 	
-Translations:
+ 	- Updated French translation (Christphe Fergeau, Christophe Merlet)
 
-	am (Daniel Yacob), az (Metin Amiroff), be (Dmitry Mastrukov), 
-	ca (Jordi Mallach), cs (Miloslav Trmac), da (Ole Laursen),
-	de (Christian Meyer), eo (Joel Brich), fa (Roozbeh Pournander),
-	fr (Christophe Merlet), ga (Paul Duffy), hi (Guntapalli Karunkar),
-	id (Mohammad DAMT), is (Samuel Gunnarsson), ja (Takeshi AIHANA),
-	ml (FSF-India), mn (Sanlig Badral), pt (Duarte Loreto), ro (Marius
-	Andreiana), sr (Danilo Yegan), tr (Fatih Demir), yi (Raphael Finkel), 
-	zh_CN (He Qiangqiang), zh_TW (Abel Cheung)
+	- Updated German translation (Christian Neumair)
+	- Updated Greek translation (Nikos Charonitakis, Kostas Papadimas)
 
+	- Updated Hindi translation (Guntupalli Karunakar)
+	- Updated Hungarian translation (Andras Timar)
+	- Updated Irish translation (Alastair McKinstry)
+	- Updated Italian translation (Alesso Frusciante, Francesco Marletta)
 
-August 14, 2001:
-===============
+	- Updated Korean translation (Changwoo Ryu)
+	- Updated Japanese translation (Takeshi AIHANA)
 
-Released libgnomeui 1.102.0 "Roswell".
+	- Updated Latvian translation (Pēteris Krišjānis)
+	- Updated Lithuanian translation (Žygimantas Beručka, Tomas Kuliavas)
+	- Updated Malay translation (Hasbullah Bin Pit)
+	- Updated Mongolian translation (Sanlig Badral)
 
-Outstanding issues:
+	- Updated Norwegian translation (Kjartan Maraas)
+	- Updated Norwegian Nynorsk translation (Åsmund Skjæveland)
 
-- GnomeAbout:
+	- Updated Polish translation (GNOME PL Team)
 
-     Anders Carlsson is currently working on a cool new
-     GnomeAbout dialog.
+	- Updated Portuguese translation (Duarte Loreto)
+	- Updated Romanian translation (Mişu Moldovan)
+	- Updated Russian translation (Russian Team)
+	
+	- Updated Serbian translations (Danilo Šegan, Bojan Suzic)
+	- Updated Simplified Chinese translation (Funda Wang)
 
+	- Updated Slovak translation (Marcel Telka)
 
+	- Updated Spanish translation (Francisco Javier F. Serrador)
+	- Updated Swedish translation (Christian Rose)
+	- Updated Tamil translation (Dinesh Nadarajah)
+	- Updated Ukranian translation (Maxim Dziumanenko)
+
+	- Updated Welsh translation (Dafydd Harries)
