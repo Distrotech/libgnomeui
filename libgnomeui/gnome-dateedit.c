@@ -409,6 +409,20 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 }
 
 /**
+ * gnome_date_edit_set_date:
+ * @gde: the GnomeDateEdit widget
+ * @the_time: The time and date that should be set on the widget
+ *
+ * Changes the displayed date and time in the GnomeDateEdit widget
+ * to be the one represented by @the_time.
+ */
+void
+gnome_date_edit_set_date (GnomeDateEdit *gde, time_t the_time)
+{
+	gnome_date_edit_set_date (gde, the_time);
+}
+
+/**
  * gnome_date_edit_set_popup_range:
  * @gde: The GnomeDateEdit widget
  * @low_hour: low boundary for the time-range display popup.
@@ -556,13 +570,13 @@ gnome_date_edit_new_flags (time_t the_time, GnomeDateEditFlags flags)
 }
 
 /**
- * gnome_date_edit_get_date:
+ * gnome_date_edit_get_time:
  * @gde: The GnomeDateEdit widget
  *
  * Returns the time entered in the GnomeDateEdit widget
  */
 time_t
-gnome_date_edit_get_date (GnomeDateEdit *gde)
+gnome_date_edit_get_time (GnomeDateEdit *gde)
 {
 	struct tm tm;
 	char *str, *flags;
@@ -604,6 +618,18 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 	tm.tm_isdst = -1;
 
 	return mktime (&tm);
+}
+
+/**
+ * gnome_date_edit_get_date:
+ * @gde: The GnomeDateEdit widget
+ *
+ * Returns the time entered in the GnomeDateEdit widget
+ */
+time_t
+gnome_date_edit_get_date (GnomeDateEdit *gde)
+{
+	return gnome_date_edit_get_time (gde);
 }
 
 /**

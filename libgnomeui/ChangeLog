@@ -1,3 +1,10 @@
+1999-09-17  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dateedit.c (gnome_date_edit_set_date): New function, same
+	as `gnome_date_edit_set_time()'.
+	(gnome_date_edit_get_time): New function, same as
+	`gnome_date_edit_get_date()'.
+
 1999-09-17  Havoc Pennington  <hp@pobox.com>
 
 	* gnome_segv.c (main): Don't connect to session manager.
