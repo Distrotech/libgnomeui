@@ -43,53 +43,34 @@
 #include "libgnomeui/gnome-entry.h"
 #include "libgnomeui/gnome-file-entry.h"
 #include "libgnomeui/gnome-font-picker.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gnome-font-selector.h"
-#endif
 #include "libgnomeui/gnome-geometry.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#endif
 #include "libgnomeui/gnome-icon-list.h"
 #include "libgnomeui/gnome-icon-item.h"
 #include "libgnomeui/gnome-icon-sel.h"
 #include "libgnomeui/gnome-icon-entry.h"
 #include "libgnomeui/gnome-init.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
 #include "libgnomeui/gnome-less.h"
-#endif
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-number-entry.h"
 /* Considering moving this to gnome-print, so this file 
    is deprecated but the API isn't */
 #include "libgnomeui/gnome-paper-selector.h"
 #include "libgnomeui/gnome-popup-menu.h"
-/* deprecated? */
 #include "libgnomeui/gnome-popup-help.h"
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-pixmap-entry.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
 #include "libgnomeui/gnome-preferences.h"
-#endif
 #include "libgnomeui/gnome-propertybox.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
+/* The gnome-properties and gnome-property-entries modules should be finished or
+ * deprecated by gnome-2.0 */
 #include "libgnomeui/gnome-properties.h"
 #include "libgnomeui/gnome-property-entries.h"
-#endif
 #include "libgnomeui/gnome-scores.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gnome-spell.h"
-#include "libgnomeui/gnome-startup.h"
-#endif
 #include "libgnomeui/gnome-types.h"
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-client.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gtkcauldron.h"
-#endif
 #include "libgnomeui/gtk-clock.h"
 #include "libgnomeui/gtkdial.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#endif
 #include "libgnomeui/gtkpixmapmenuitem.h"
 #include "libgnomeui/gnome-dateedit.h"
 #include "libgnomeui/gnome-calculator.h"

@@ -28,12 +28,18 @@ INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
 EXTRA_HEADERS = 
 
 libgnomeui10compat_a_SOURCES =\
+	gnome-font-selector.c 		\
 	gnome-guru.c			\
+	gnome-spell.c			\
+	gnome-startup.c			\
 	gtkcauldron.c			\
 	gnome-compat.c
 
 #libgnomeui10compat_a_HEADERS =\
+#	gnome-font-selector.h 		\
 #	gnome-guru.h			\
+#	gnome-spell.h			\
+#	gnome-startup.h			\
 #	gtkcauldron.h			\
 #	gnome-compat.h
 
@@ -74,7 +80,6 @@ libgnomeui_la_SOURCES = \
 	gnome-entry.c			\
 	gnome-file-entry.c		\
         gnome-font-picker.c		\
-	gnome-font-selector.c 		\
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-icon-list.c		\
@@ -99,8 +104,6 @@ libgnomeui_la_SOURCES = \
 	gnome-properties.c		\
 	gnome-property-entries.c	\
 	gnome-scores.c			\
-	gnome-spell.c			\
-	gnome-startup.c			\
 	gnome-stock.c			\
         gnome-winhints.c		\
         gnome-paper-selector.c		\
@@ -148,7 +151,6 @@ gnome_headers = \
 	gnome-entry.h			\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\
-	gnome-font-selector.h 		\
 	gnome-geometry.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
@@ -174,8 +176,6 @@ gnome_headers = \
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
 	gnome-scores.h			\
-	gnome-spell.h			\
-	gnome-startup.h			\
 	gnome-stock.h			\
 	gnome-types.h			\
 	gnome-uidefs.h			\
