@@ -24,9 +24,9 @@
 #include "gnome-macros.h"
 
 #include "gnome-druid.h"
-#include "gnome-stock.h"
 #include "gnome-uidefs.h"
 #include <libgnome/gnome-i18n.h>
+#include <libgnomeui/gnome-stock-icons.h>
 
 struct _GnomeDruidPrivate
 {
