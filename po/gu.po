@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-16 13:40+0200\n"
-"PO-Revision-Date: 2004-08-09 15:44+0530\n"
+"POT-Creation-Date: 2004-08-18 12:09+0200\n"
+"PO-Revision-Date: 2004-08-20 15:53+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "<magnet@magnet-i.com>\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 
@@ -67,8 +67,7 @@ msgstr "ફાઈલ '%s' ખોલવામાં નિષ્ફળ: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "ચિત્ર '%s' લાવવામાં નિષ્ફળ: કારણ જાણતા નથી, કદાચ ચિત્ર બગડેલુ હશે"
 
 #: libgnomeui/gnome-about.c:198
@@ -184,8 +183,7 @@ msgstr ""
 
 # libgnomeui/gnome-about.c:389
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "અનુવાદકને યશ.અા શબ્દમાળાને અનુવાદ માટે યોગ્ય શબ્દમાળા તરીકે ચિન્હિત કરવી"
 
 # libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
@@ -208,6 +206,7 @@ msgstr "%s ના વિશે"
 # test-gnome/testgnome.xml.h:5
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ફાઇલ (_F)"
 
@@ -280,6 +279,7 @@ msgstr "રમત (_G)"
 # libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 # test-gnome/testgnome.xml.h:6
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "મદદ (_H)"
 
@@ -292,7 +292,7 @@ msgstr "વિન્ડો (_W)/"
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
-msgstr "ખોલો... (_O)"
+msgstr "ખોલો (_O)..."
 
 # libgnomeui/gnome-app-helper.c:109
 #: libgnomeui/gnome-app-helper.c:109
@@ -336,7 +336,7 @@ msgstr "ફાઇલની સંગ્રહિત આવૃત્તિ પર
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr "છાપો... (_P)"
+msgstr "છાપો (_P)..."
 
 # libgnomeui/gnome-app-helper.c:131
 #: libgnomeui/gnome-app-helper.c:131
@@ -347,7 +347,7 @@ msgstr "વર્તમાન ફાઇલને છાપો"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "છાપવા માટેનું સુયોજન... (_e)"
+msgstr "છાપવા માટેનું સુયોજન (_e)..."
 
 # libgnomeui/gnome-app-helper.c:137
 #: libgnomeui/gnome-app-helper.c:137
@@ -450,7 +450,7 @@ msgstr "રદ કરાયેલી પ્રક્રિયાને ફરી
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "શોધો... (_F)"
+msgstr "શોધો (_F)..."
 
 # libgnomeui/gnome-app-helper.c:186
 #: libgnomeui/gnome-app-helper.c:186
@@ -471,7 +471,7 @@ msgstr "અેજ શબ્દમાળાને ફરીથી શોધો"
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "થી બદલાે... (_e)"
+msgstr "થી બદલાે (_e)..."
 
 # libgnomeui/gnome-app-helper.c:197
 #: libgnomeui/gnome-app-helper.c:197
@@ -509,12 +509,12 @@ msgstr "કાર્યક્રમની રુપરેખા બનાવો"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "ના વિશે (_A)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "આ કાર્યક્રમ વિશે"
 
@@ -547,7 +547,7 @@ msgid "_Close This Window"
 msgstr "આ વિન્ડો બંધ કરો (_C)"
 
 # libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "વર્તમાન વિન્ડો બંધ કરો"
 
@@ -618,7 +618,7 @@ msgstr "તમારી હવેની ચાલ માટે સંકેત �
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
-msgstr "ગુણ... (_S)"
+msgstr "ગુણ (_S)..."
 
 # libgnomeui/gnome-app-helper.c:280
 #: libgnomeui/gnome-app-helper.c:280
@@ -1122,7 +1122,7 @@ msgstr "સંવાદ શીર્ષક શોધો"
 # libgnomeui/gnome-file-entry.c:200
 #: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
-msgstr "ફાઇલ શોધવા માટેના સંવાદ માટેનું શીર્ષક"
+msgstr "ફાઇલ શોધવા માટેના સંવાદનું શીર્ષક."
 
 # libgnomeui/gnome-file-entry.c:207
 #: libgnomeui/gnome-file-entry.c:246
@@ -1134,8 +1134,7 @@ msgstr "ડીરેક્ટરી પ્રવેશ"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"શું આ ફાઇલ પ્રવેશનો ઉપયોગ ડીરેક્ટરીના નામ અથવા પૂરેપૂરા ફાઇલના નામ નાખવા માટે વપરાય છે."
+msgstr "શું આ ફાઇલ પ્રવેશનો ઉપયોગ ડીરેક્ટરીના નામ અથવા પૂરેપૂરા ફાઇલના નામ નાખવા માટે વપરાય છે."
 
 # libgnomeui/gnome-file-entry.c:216
 #: libgnomeui/gnome-file-entry.c:255
@@ -1165,7 +1164,7 @@ msgstr "મૂળભૂત પથ"
 # libgnomeui/gnome-file-entry.c:234
 #: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
-msgstr "ફાઇલ શોધવા માટેના સંવાદ માટે મૂળભૂત પથ"
+msgstr "ફાઇલ શોધવા માટેના સંવાદ માટે મૂળભૂત પથ."
 
 # libgnomeui/gnome-file-entry.c:241
 #: libgnomeui/gnome-file-entry.c:280
@@ -1229,7 +1228,7 @@ msgstr "ફાઇલ સુધીનો પથ"
 # libgnomeui/gnome-file-entry.c:592
 #: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
-msgstr "શોધો... (_B)"
+msgstr "શોધો (_B)..."
 
 #: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
@@ -1243,7 +1242,7 @@ msgstr "સાંસ ૧૨"
 # libgnomeui/gnome-font-picker.c:67
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "કખગઘચછજઝડઢપફ..."
+msgstr "કખગઘચછજઝટઠડઢણતથદધનપફબભમયરલવસશષહ"
 
 # libgnomeui/gnome-font-picker.c:68
 #: libgnomeui/gnome-font-picker.c:68
@@ -1347,7 +1346,7 @@ msgstr ""
 "\"%s\" કાર્યક્રમે તમારી રુપરેખામાં ફેરફાર કરવાનો પ્રયાસ કર્યો જેની તમારો સિસ્ટમ "
 "વ્યવસ્થાપક કે પછી અૉપરેટીંગ સિસ્ટમ વેચનાર પરવાનગી અાપતા નથી. તમે પસંદ કરેલા અમૂક બદલાવો "
 "અસર નહિ કરે, અથવા તમે બીજી વાર જ્યારે કાર્યક્રમનો ઉપયાેગ કરશો ત્યારે ફરીથી સંગ્રહિત કરી "
-"શકાશે નહિ. "
+"શકાશે નહિ."
 
 # libgnomeui/gnome-gconf-ui.c:176
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1411,8 +1410,7 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ચિહ્નના દાખલા માટેની અનન્ય ઓળખાણ.ઇતિહાસની યાદીનો સંગ્રહ કરવા માટે આનોઉપયોગ થશે."
+msgstr "ચિહ્નના દાખલા માટેની અનન્ય ઓળખાણ.ઇતિહાસની યાદીનો સંગ્રહ કરવા માટે આનોઉપયોગ થશે."
 
 # libgnomeui/gnome-icon-entry.c:173
 #: libgnomeui/gnome-icon-entry.c:187
@@ -1446,7 +1444,7 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 "ચિહ્ન પસંદ કરવાનો સંવાદ.જો તમે GTKસંવાદના ગુણધર્મોને બદલવા ઇચ્છતા હોય અથવાતેના વિશે કંઇક "
-"પ્રશ્ન હોય તો તમે GTKસંવાદ મેળવવા માટે આ ગુણધર્મનો ઉપયોગ કરી શકશો"
+"પ્રશ્ન હોય તો તમે GTKસંવાદ મેળવવા માટે આ ગુણધર્મનો ઉપયોગ કરી શકશો."
 
 # libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
@@ -1537,15 +1535,15 @@ msgstr "સંદેશો"
 
 #: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
-msgstr "વપરાશકર્તાનું નામ: (_U)"
+msgstr "વપરાશકર્તા નામ (_U):"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
-msgstr "પ્રદેશ: (_D)"
+msgstr "પ્રદેશ (_D):"
 
 #: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
-msgstr "પાસવર્ડ: (_P)"
+msgstr "પાસવર્ડ (_P):"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
@@ -1737,5 +1735,7 @@ msgstr "વિકસાવનારાઓને જાણ કરો (_I)"
 msgid "_Debug"
 msgstr "ભૂલ શોધો (_D)"
 
-#~ msgid "Exit the test"
-#~ msgstr "ચકાસણી બંધ કરો"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "ચકાસણી બંધ કરો"
+
