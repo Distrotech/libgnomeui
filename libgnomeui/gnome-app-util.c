@@ -92,6 +92,20 @@ static void gnome_app_message_bar (GnomeApp * app, const gchar * message)
 		     GTK_SIGNAL_FUNC(ack_clear_prompt_cb), NULL);
 }
 
+
+/**
+ * gnome_app_message
+ * @app: Pointer to GNOME app object
+ * @message: Text of message to be displayed
+ *
+ * Description: A simple message, in an OK dialog or the status bar.
+ * Requires confirmation from the user before it goes away.
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
+
 GtkWidget *
 gnome_app_message (GnomeApp * app, const gchar * message)
 {
@@ -117,6 +131,21 @@ gnome_app_error_bar(GnomeApp * app, const gchar * error)
   g_free(s);
 }
 
+
+/**
+ * gnome_app_error
+ * @app: Pointer to GNOME app object
+ * @error: Text of error message to be displayed
+ *
+ * Description:
+ * An important fatal error; if it appears in the statusbar, 
+ * it might gdk_beep() and require acknowledgement.
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
+
 GtkWidget * 
 gnome_app_error (GnomeApp * app, const gchar * error)
 {
@@ -138,6 +167,20 @@ static void gnome_app_warning_bar (GnomeApp * app, const gchar * warning)
   gnome_app_flash(app, s);
   g_free(s);
 }
+
+
+/**
+ * gnome_app_warning
+ * @app: Pointer to GNOME app object
+ * @warning: Text of warning message to be displayed
+ *
+ * Description:
+ * A not-so-important error, but still marked better than a flash
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
 
 GtkWidget * 
 gnome_app_warning (GnomeApp * app, const gchar * warning)
@@ -185,6 +228,18 @@ remove_timeout_cb ( GtkWidget * app, MessageInfo * mi )
 }
 
 static const guint32 flash_length = 3000; /* 3 seconds, I hope */
+
+
+/**
+ * gnome_app_flash
+ * @app: Pointer to GNOME app object
+ * @flash: Text of message to be flashed
+ *
+ * Description:
+ * Flash the message in the statusbar for a few moments; if no
+ * statusbar, do nothing (?). For trivial little status messages,
+ * e.g. "Auto saving..."
+ **/
 
 void 
 gnome_app_flash (GnomeApp * app, const gchar * flash)
@@ -298,6 +353,22 @@ gnome_app_reply_bar(GnomeApp * app, const gchar * question,
 		     GTK_SIGNAL_FUNC(reply_clear_prompt_cb), ri);
 }
 
+
+/**
+ * gnome_app_question
+ * @app: Pointer to GNOME app object
+ * @question: Text of question to be displayed
+ * @callback:
+ * @data:
+ *
+ * Description:
+ * Ask a yes or no question, and call the callback when it's answered.
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
+
 GtkWidget * 
 gnome_app_question (GnomeApp * app, const gchar * question,
 		    GnomeReplyCallback callback, gpointer data)
@@ -316,6 +387,22 @@ gnome_app_question (GnomeApp * app, const gchar * question,
 					  GTK_WINDOW(app));
   }
 }
+
+
+/**
+ * gnome_app_question_modal
+ * @app: Pointer to GNOME app object
+ * @question: Text of question to be displayed
+ * @callback:
+ * @data:
+ *
+ * Description:
+ * Ask a yes or no question, and call the callback when it's answered.
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
 
 GtkWidget * 
 gnome_app_question_modal (GnomeApp * app, const gchar * question,
@@ -336,6 +423,21 @@ gnome_app_question_modal (GnomeApp * app, const gchar * question,
   }
 }
 
+
+/**
+ * gnome_app_ok_cancel
+ * @app: Pointer to GNOME app object
+ * @message: Text of message to be displayed
+ * @callback:
+ * @data:
+ *
+ * Description:
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
+
 GtkWidget * 
 gnome_app_ok_cancel (GnomeApp * app, const gchar * message,
 		     GnomeReplyCallback callback, gpointer data)
@@ -354,6 +456,21 @@ gnome_app_ok_cancel (GnomeApp * app, const gchar * message,
 					   GTK_WINDOW(app));
   }
 }
+
+
+/**
+ * gnome_app_ok_cancel_modal
+ * @app: Pointer to GNOME app object
+ * @message: Text of message to be displayed
+ * @callback:
+ * @data:
+ *
+ * Description:
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
 
 GtkWidget * 
 gnome_app_ok_cancel_modal (GnomeApp * app, const gchar * message,
@@ -441,6 +558,21 @@ gnome_app_request_bar  (GnomeApp * app, const gchar * prompt,
   }
 }
 
+
+/**
+ * gnome_app_request_string
+ * @app: Pointer to GNOME app object
+ * @prompt: Text of prompt to be displayed
+ * @callback:
+ * @data:
+ *
+ * Description:
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
+
 GtkWidget * 
 gnome_app_request_string (GnomeApp * app, const gchar * prompt,
 			  GnomeStringCallback callback, gpointer data)
@@ -460,6 +592,21 @@ gnome_app_request_string (GnomeApp * app, const gchar * prompt,
   }
 }
 
+
+
+/**
+ * gnome_app_request_password
+ * @app: Pointer to GNOME app object
+ * @prompt: Text of prompt to be displayed
+ * @callback:
+ * @data:
+ *
+ * Description:
+ *
+ * Returns:
+ * Pointer to dialog widget, or %NULL if error or message in
+ * status bar.
+ **/
 
 GtkWidget * 
 gnome_app_request_password (GnomeApp * app, const gchar * prompt,
@@ -557,6 +704,20 @@ stop_progress_cb(GnomeApp * app, GnomeAppProgressKey key)
 
 /* FIXME share code between manual and timeout */
 
+/**
+ * gnome_app_progress_timeout
+ * @app:
+ * @description:
+ * @interval:
+ * @percentage_cb:
+ * @cancel_cb:
+ * @data:
+ *
+ * Description:
+ *
+ * Returns:
+ **/
+
 GnomeAppProgressKey 
 gnome_app_progress_timeout (GnomeApp * app, 
 			    const gchar * description,
@@ -599,6 +760,19 @@ gnome_app_progress_timeout (GnomeApp * app,
   return key;
 }
 
+
+/**
+ * gnome_app_progress_manual
+ * @app:
+ * @description:
+ * @cancel_cb:
+ * @data:
+ *
+ * Description:
+ *
+ * Returns:
+ **/
+
 GnomeAppProgressKey 
 gnome_app_progress_manual (GnomeApp * app, 
 			   const gchar * description,
@@ -634,6 +808,14 @@ gnome_app_progress_manual (GnomeApp * app,
   return key;
 }
 
+/**
+ * gnome_app_set_progress
+ * @key:
+ * @percent:
+ *
+ * Description:
+ **/
+
 void gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent)
 {
   ProgressKeyReal * real_key = (GnomeAppProgressKey) key;
@@ -655,6 +837,13 @@ static void progress_timeout_remove(ProgressKeyReal * key)
     key->timeout_tag = INVALID_TIMEOUT;
   }
 }
+
+/**
+ * gnome_app_progress_done
+ * @key:
+ *
+ * Description:
+ **/
 
 void gnome_app_progress_done (GnomeAppProgressKey key)
 {

@@ -426,6 +426,19 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderDat
 				    uibdata->data ? uibdata->data : uiinfo->user_data);
 }
 
+
+/**
+ * gnome_app_fill_menu
+ * @menu_shell:
+ * @uiinfo:
+ * @accel_group:
+ * @insert_shortcuts:
+ * @indent_missing_pixmaps:
+ * @pos:
+ *
+ * Description:
+ **/
+
 void
 gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 		     GtkAccelGroup *accel_group, int insert_shortcuts, int indent_missing_pixmaps, gint pos)
@@ -447,6 +460,20 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 				    indent_missing_pixmaps, pos);
 	return;
 }
+
+
+/**
+ * gnome_app_fill_menu_custom
+ * @menu_shell:
+ * @uiinfo:
+ * @uibdata:
+ * @accel_group:
+ * @insert_shortcuts:
+ * @indent_missing_pixmaps:
+ * @pos:
+ *
+ * Description:
+ **/
 
 void
 gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
@@ -528,6 +555,15 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, Gnome
 	uiinfo->widget = GTK_WIDGET (menu_shell);
 }
 
+
+/**
+ * gnome_app_create_menus
+ * @app:
+ * @uiinfo:
+ *
+ * Description:
+ **/
+
 void
 gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo)
 {
@@ -545,6 +581,18 @@ gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo)
 
 	gnome_app_create_menus_custom (app, uiinfo, &uibdata);
 }
+
+
+/**
+ * gnome_app_create_menus_interp
+ * @app:
+ * @uiinfo:
+ * @relay_func:
+ * @data:
+ * @destroy_func:
+ *
+ * Description:
+ **/
 
 void
 gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo, GtkCallbackMarshal relay_func, gpointer data,
@@ -565,6 +613,16 @@ gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo, GtkCallbackMa
 	gnome_app_create_menus_custom (app, uiinfo, &uibdata);
 }
 
+
+/**
+ * gnome_app_create_menus_with_data
+ * @app:
+ * @uiinfo:
+ * @user_data:
+ *
+ * Description:
+ **/
+
 void
 gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpointer user_data)
 {
@@ -582,6 +640,16 @@ gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpointer u
 
 	gnome_app_create_menus_custom (app, uiinfo, &uibdata);
 }
+
+
+/**
+ * gnome_app_create_menus_custom
+ * @app:
+ * @uiinfo:
+ * @uibdata:
+ *
+ * Description:
+ **/
 
 void
 gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata)
@@ -700,6 +768,16 @@ create_radio_toolbar_items (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GnomeUIBui
 		}
 }
 
+
+/**
+ * gnome_app_fill_toolbar
+ * @toolbar:
+ * @uiinfo:
+ * @accel_group:
+ *
+ * Description:
+ **/
+
 void
 gnome_app_fill_toolbar (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GtkAccelGroup *accel_group)
 {
@@ -717,6 +795,17 @@ gnome_app_fill_toolbar (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GtkAccelGroup 
 
 	gnome_app_fill_toolbar_custom (toolbar, uiinfo, &uibdata, accel_group);
 }
+
+
+/**
+ * gnome_app_fill_toolbar_custom
+ * @toolbar:
+ * @uiinfo:
+ * @uibdata:
+ * @accel_group:
+ *
+ * Description:
+ **/
 
 void
 gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
@@ -754,6 +843,17 @@ gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GnomeUI
 	uiinfo->widget = GTK_WIDGET (toolbar);
 }
 
+
+/**
+ * gnome_app_create_toolbar
+ * @app:
+ * @uiinfo:
+ *
+ * Description:
+ * Constructs a toolbar and attaches it to the specified application
+ * window.
+ **/
+
 void
 gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo)
 {
@@ -771,6 +871,19 @@ gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo)
 
 	gnome_app_create_toolbar_custom (app, uiinfo, &uibdata);
 }
+
+/**
+ * gnome_app_create_toolbar_interp
+ * @app:
+ * @uiinfo:
+ * @relay_func:
+ * @data:
+ * @destroy_func:
+ *
+ * Description:
+ * Constructs a toolbar and attaches it to the specified application
+ * window -- this version is intended for language bindings.
+ **/
 
 void
 gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
@@ -792,6 +905,17 @@ gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 	gnome_app_create_toolbar_custom (app, uiinfo, &uibdata);
 }
 
+/**
+ * gnome_app_create_toolbar_with_data
+ * @app:
+ * @uiinfo:
+ * @user_data:
+ *
+ * Description:
+ * Constructs a toolbar, sets all the user data pointers to
+ * @user_data, and attaches it to @app.
+ **/
+
 void
 gnome_app_create_toolbar_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpointer user_data)
 {
@@ -809,6 +933,17 @@ gnome_app_create_toolbar_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpointer
 
 	gnome_app_create_toolbar_custom (app, uiinfo, &uibdata);
 }
+
+/**
+ * gnome_app_create_toolbar_custom
+ * @app:
+ * @uiinfo:
+ * @uibdata:
+ *
+ * Description:
+ * Constructs a toolbar and attaches it to the @app window,
+ * using @uibdata builder data -- intended for language bindings.
+ **/
 
 void
 gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata)
@@ -836,11 +971,20 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
  * I hope this explains use of the insert/remove functions well enough.
  */
 
-/* finds menu item described by path (see below for details) starting in the GtkMenuShell top
- * and returns its parent GtkMenuShell and the position after this item in pos:
- * gtk_menu_shell_insert(p, w, pos) would then insert widget w in GtkMenuShell p right after
- * the menu item described by path.
- */
+/**
+ * gnome_app_find_menu_pos
+ * @parent: Root menu shell widget containing menu items to be searched
+ * @path: Specifies the target menu item by menu path
+ * @pos: (output) returned item position
+ *
+ * Description:
+ * finds menu item described by path starting
+ * in the GtkMenuShell top and returns its parent GtkMenuShell and the
+ * position after this item in pos:  gtk_menu_shell_insert(p, w, pos)
+ * would then insert widget w in GtkMenuShell p right after the menu item
+ * described by path.
+ **/
+
 GtkWidget *
 gnome_app_find_menu_pos (GtkWidget *parent,
 			 gchar *path,
@@ -911,9 +1055,17 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 	return NULL;
 }
 
-/* removes num items from the existing app's menu structure begining with item described
- * by path
- */
+
+/**
+ * gnome_app_remove_menus
+ * @app:
+ * @path:
+ * @items:
+ *
+ * Description: removes num items from the existing app's menu structure
+ * beginning with item described by path
+ **/
+
 void
 gnome_app_remove_menus(GnomeApp *app,
 		       gchar *path,
@@ -951,12 +1103,20 @@ gnome_app_remove_menus(GnomeApp *app,
 	gtk_widget_queue_resize(parent);
 }
 
-/*
- * Same as the above, except it removes the specified number of items 
- * from the existing app's menu structure begining with item described by path,
- * plus the number specified by start - very useful for adding and removing Recent
- * document items in the File menu.
- */
+
+/**
+ * gnome_app_remove_menus
+ * @app:
+ * @path:
+ * @start:
+ * @items:
+ *
+ * Description:
+ * Same as the gnome_app_remove_menus, except it removes the specified number
+ * of @items from the existing app's menu structure begining with item described
+ * by path, plus the number specified by @start - very useful for adding and
+ * removing Recent document items in the File menu.
+ **/
 
 void
 gnome_app_remove_menu_range (GnomeApp *app,
@@ -998,8 +1158,17 @@ gnome_app_remove_menu_range (GnomeApp *app,
   gtk_widget_queue_resize(parent);
 }
 
-/* inserts menus described by uiinfo in existing app's menu structure right after the item described by path.
- */
+/**
+ * gnome_app_insert_menus_custom
+ * @app:
+ * @path:
+ * @uiinfo:
+ * @uibdata:
+ *
+ * Description: inserts menus described by @uiinfo in existing app's menu
+ * structure right after the item described by @path.
+ **/
+
 void
 gnome_app_insert_menus_custom (GnomeApp *app,
 			       gchar *path,
@@ -1024,6 +1193,16 @@ gnome_app_insert_menus_custom (GnomeApp *app,
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (parent), uiinfo, uibdata, app->accel_group, TRUE, FALSE, pos);
 }
 
+
+/**
+ * gnome_app_insert_menus
+ * @app:
+ * @path:
+ * @menuinfo:
+ *
+ * Description:
+ **/
+
 void
 gnome_app_insert_menus (GnomeApp *app,
 			gchar *path,
@@ -1037,6 +1216,17 @@ gnome_app_insert_menus (GnomeApp *app,
 	
 	gnome_app_insert_menus_custom (app, path, menuinfo, &uidata);
 }
+
+
+/**
+ * gnome_app_insert_menus_with_data
+ * @app:
+ * @path:
+ * @menuinfo:
+ * @data:
+ *
+ * Description:
+ **/
 
 void
 gnome_app_insert_menus_with_data (GnomeApp *app,
@@ -1054,6 +1244,19 @@ gnome_app_insert_menus_with_data (GnomeApp *app,
 	
 	gnome_app_insert_menus_custom (app, path, menuinfo, &uidata);
 }
+
+
+/**
+ * gnome_app_insert_menus_interp
+ * @app:
+ * @path:
+ * @menuinfo:
+ * @relay_func:
+ * @data:
+ * @destroy_func:
+ *
+ * Description:
+ **/
 
 void
 gnome_app_insert_menus_interp (GnomeApp *app,
@@ -1076,3 +1279,4 @@ gnome_app_insert_menus_interp (GnomeApp *app,
 	
 	gnome_app_insert_menus_custom(app, path, menuinfo, &uidata);
 }
+
