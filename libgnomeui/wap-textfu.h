@@ -24,7 +24,7 @@
 #define __WAP_TEXTFU_H__
 
 #include <gtk/gtk.h>
-#include <gnome-xml/parser.h>
+#include <libxml/parser.h>
 #include <pango/pango.h>
 
 #ifdef __cplusplus

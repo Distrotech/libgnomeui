@@ -3859,6 +3859,7 @@ gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy,
 int
 gnome_canvas_get_color (GnomeCanvas *canvas, const char *spec, GdkColor *color)
 {
+	gulong pixel;
 	gint n;
 
 	g_return_val_if_fail (canvas != NULL, FALSE);
@@ -3875,15 +3876,17 @@ gnome_canvas_get_color (GnomeCanvas *canvas, const char *spec, GdkColor *color)
 
 	gdk_color_parse (spec, color);
 
-	color->pixel = 0;
+	pixel = 0;
 	n = 0;
 	gdk_color_context_get_pixels (canvas->cc,
 				      &color->red,
 				      &color->green,
 				      &color->blue,
 				      1,
-				      &color->pixel,
+				      &pixel,
 				      &n);
+
+	color->pixel = pixel;
 
 	return TRUE;
 }
@@ -3903,24 +3906,25 @@ gnome_canvas_get_color_pixel (GnomeCanvas *canvas,
 			      guint        rgba)
 {
 	GdkColor color;
+	gulong pixel;
 	gint n;
 
 	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), 0);
 
-	color.pixel = 0;
 	color.red = ((rgba & 0xff000000) >> 16) + ((rgba & 0xff000000) >> 24);
 	color.green = ((rgba & 0x00ff0000) >> 8) + ((rgba & 0x00ff0000) >> 16);
 	color.blue = (rgba & 0x0000ff00) + ((rgba & 0x0000ff00) >> 8);
+	pixel = 0;
 	n = 0;
 	gdk_color_context_get_pixels (canvas->cc,
 				      &color.red,
 				      &color.green,
 				      &color.blue,
 				      1,
-				      &color.pixel,
+				      &pixel,
 				      &n);
 
-	return color.pixel;
+	return pixel;
 }
 
 

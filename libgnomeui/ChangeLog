@@ -1,3 +1,12 @@
+2000-12-06  Martin Baulig  <baulig@suse.de>
+
+	* gnome-canvas.c (gnome_canvas_get_color): The 7th argument of
+	gdk_color_context_get_pixels() is now a gulong.
+	(gnome_canvas_get_color_pixel): Likewise.
+
+	* wap-textfu.h: #include <libxml/parser.h> instead of
+	<gnome-xml/parser.h>
+
 Wed Dec 06 04:49:27 2000  George Lebl <jirka@5z.com>
 
 	* gnome-mdi.c: correctly get default return values for emitting
