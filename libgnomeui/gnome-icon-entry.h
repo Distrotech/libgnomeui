@@ -95,27 +95,6 @@ void	   gnome_icon_entry_set_preview_size  (GnomeIconEntry *ientry,
 					       guint preview_x,
 					       guint preview_y);
 
-
-#ifndef GNOME_EXCLUDE_DEPRECATED
-/* DEPRECATED routines left for compatibility only, will disapear in
- * some very distant future */
-
-/*by default gnome_pixmap entry sets the default directory to the
-  gnome pixmap directory, this will set it to a subdirectory of that,
-  or one would use the file_entry functions for any other path*/
-void       gnome_icon_entry_set_pixmap_subdir (GnomeIconEntry *ientry,
-					       const gchar *subdir);
-
-/*only return a file if it was possible to load it with gdk-pixbuf*/
-gchar      *gnome_icon_entry_get_filename(GnomeIconEntry *ientry);
-
-/* set the icon to something, returns TRUE on success */
-gboolean   gnome_icon_entry_set_filename(GnomeIconEntry *ientry,
-					 const gchar *filename);
-
-#endif /* not GNOME_EXCLUDE_DEPRECATED */
-
-
 END_GNOME_DECLS
 
 #endif
