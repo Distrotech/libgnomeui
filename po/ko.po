@@ -3,10 +3,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.5.3\n"
+"Project-Id-Version: libgnomeui 2.5.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-24 11:24+0100\n"
-"PO-Revision-Date: 2004-01-31 07:37+0900\n"
+"POT-Creation-Date: 2004-02-24 23:51+0900\n"
+"PO-Revision-Date: 2004-02-24 23:52+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -138,6 +138,7 @@ msgstr "%s 정보"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -172,19 +173,19 @@ msgstr "설정(_S)/"
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
-msgstr "새로운(_N)"
+msgstr "새로 만들기(_N)"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
-msgstr "새로운(_N)/"
+msgstr "새로 만들기(_N)/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "파일들(_L)"
+msgstr "파일 목록(_L)"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "파일들(_L)/"
+msgstr "파일 목록(_L)/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
@@ -195,6 +196,7 @@ msgid "_Game"
 msgstr "게임(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -385,11 +387,11 @@ msgstr "프로그램을 설정합니다"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "정보(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "이 프로그램에 대한 정보"
 
@@ -410,13 +412,13 @@ msgstr "새 창(_W)"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr "새로운 창을 만듭니다"
+msgstr "새 창을 만듭니다"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
 msgstr "창 닫기(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "현재 창을 닫습니다"
 
@@ -555,7 +557,7 @@ msgstr "  - 확인? (예(y) 혹은 아니오(n))"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr "계속"
+msgstr "진행"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
@@ -591,7 +593,7 @@ msgstr "사용자 행동이 필요한 정도."
 
 #: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "설정한 HTTP 프록시는 로그인을 해야 합니다.\n"
+msgstr "이 HTTP 프록시는 로그인을 해야 합니다.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
@@ -631,7 +633,7 @@ msgstr "세션 관리 id 지정"
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
-msgstr "<ID>"
+msgstr "ID"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
@@ -936,13 +938,13 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "GtkFileChooser 사용"
 
 #: libgnomeui/gnome-file-entry.c:300
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "파일을 선택할 때 새로운 GtkFileChooser 위젯을 사용할 지 GtkFileSelection 위젯을 사용할 지"
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -1200,7 +1202,7 @@ msgstr "아이콘 읽어오기..."
 
 #: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
-msgstr "알림"
+msgstr "정보"
 
 #: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
@@ -1260,7 +1262,7 @@ msgstr "현재 지정된 그림의 미리 보기"
 
 #: libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox를 찾을 수 없음, 보통 파일 선택을 사용함"
+msgstr "hbox를 찾을 수 없습니다. 보통 파일 선택을 사용합니다"
 
 #: libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
@@ -1283,7 +1285,7 @@ msgstr "점수"
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr "%Y년 %b %d일 %a %T"
+msgstr "%Y년 %b %-d일 (%a) %T"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
@@ -1323,7 +1325,7 @@ msgstr "이상 종료 대화 상자를 사용하지 않습니다"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
-msgstr "사용할 X display"
+msgstr "사용할 X 디스플레이"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
@@ -1388,22 +1390,17 @@ msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "사용법: gnome_segv2 프로그램명 시그널번호\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "프로그램을 끝냅니다"
+msgstr "프로그램 다시 시작(_R)"
 
 #: libgnomeui/gnome_segv.c:166
-#, fuzzy
 msgid "_Inform Developers"
-msgstr "개발자에게 알리기"
+msgstr "개발자에게 알리기(_I)"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "디버그"
+msgstr "디버깅(_D)"
 
-#~ msgid "Color Selector"
-#~ msgstr "색 선택창"
-
-#~ msgid "Exit the test"
-#~ msgstr "테스트 끝내기"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "테스트 끝내기"
