@@ -71,6 +71,7 @@ libgnomeuiinclude_HEADERS = 		\
 	@GNOME_CANVAS_HED@		\
 	gnome-app.h			\
 	gnome-app-helper.h		\
+	gnome-color-selector.h		\
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
 	gnome-dns.h			\
