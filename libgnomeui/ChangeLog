@@ -1,3 +1,8 @@
+Sun Jan 30 15:44:35 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dentry-edit.c: use gnome_config_assemble_vector instead of
+	  g_flatten_vector to fix bug #1372
+
 2000-01-30  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-file-saver.c (gnome_file_saver_init): use
