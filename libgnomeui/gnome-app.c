@@ -325,9 +325,14 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	 * but don't change the size of the menubar in the process. */
 	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar), GTK_SHADOW_NONE);
 	if (gnome_preferences_get_menubar_relief ()) {
+		guint border_width;
+		
 		gtk_container_set_border_width (GTK_CONTAINER (dock_item), 2);
+		border_width = GTK_CONTAINER (app->menubar)->border_width;
+		if (border_width >= 2)
+			border_width -= 2;
 		gtk_container_set_border_width (GTK_CONTAINER (app->menubar),
-						GTK_CONTAINER (app->menubar)->border_width - 2);
+						border_width);
 	} else
 		gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
 

@@ -1,5 +1,8 @@
 1999-06-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-app.c (gnome_app_set_menus): Apply suggestion from Damon
+	for controlling the border width.
+
 	* gtk-clock.c (gtk_clock_stop): Remove timeout here.  Thanks to
 	Damon for pointing this out.
 
