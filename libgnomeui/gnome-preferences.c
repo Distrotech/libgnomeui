@@ -38,16 +38,16 @@ GnomePreferences gnome_preferences_global =
 /* Tons of defines for where to store the preferences. */
 
 /* Used for global defaults. */
-#define UI_APPNAME "/_Gnome_UI_Prefs"
+#define UI_APPNAME "/Gnome/UI_Prefs"
 
 
 /* ============= Sections ====================== */
-#define GENERAL   "/_Gnome_UI_General"
-#define DIALOGS   "/_Gnome_UI_Dialogs"
+#define GENERAL   "/Gnome/UI_General"
+#define DIALOGS   "/Gnome/UI_Dialogs"
 
 /* ==================== GnomeDialog ===================== */
 
-#define DIALOG_BUTTONS_STYLE_KEY "/DialogButtonsStyle"
+#define DIALOG_BUTTONS_STYLE_KEY "DialogButtonsStyle"
 
 #define DIALOG_BUTTONS_STYLE_DEFAULT "Default"
 #define DIALOG_BUTTONS_STYLE_SPREAD  "Spread"
@@ -57,7 +57,7 @@ GnomePreferences gnome_preferences_global =
 /* ============ Property Box ======================= */
 
 /* ignore this */
-#define _PROPERTY_BOX_BUTTONS "/PropertyBoxButtons"
+#define _PROPERTY_BOX_BUTTONS "PropertyBoxButton"
 
 /* Each of these are bools; better way? */
 #define PROPERTY_BOX_BUTTONS_OK_KEY _PROPERTY_BOX_BUTTONS"OK"
@@ -71,8 +71,6 @@ void gnome_preferences_load(void)
   gboolean b;
   gint i;
   gchar * s;
-
-  gnome_config_push_prefix(UI_APPNAME);
 
   gnome_config_push_prefix(DIALOGS);
 
@@ -126,15 +124,8 @@ void gnome_preferences_load(void)
   gnome_preferences_global.property_box_buttons_help = b;
 
   gnome_config_pop_prefix();
-
-  gnome_config_pop_prefix();
 }
 
 void gnome_preferences_save(void)
 {
-  
-
 }
-
-
-

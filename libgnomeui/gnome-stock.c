@@ -859,7 +859,7 @@ stock_button_from_entry (char *type, GnomeStockPixmapEntry *entry)
 	gtk_widget_show(label);
 	gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
 
-	if (gnome_config_get_int("GnomeStock/Icons/ButtonsUseIcons=1")) {
+	if (gnome_config_get_int("/Gnome/Icons/ButtonsUseIcons=1")) {
 		pixmap = gnome_stock_pixmap_widget(button, type);
 		if (pixmap) {
 			gtk_widget_show(pixmap);
@@ -911,7 +911,7 @@ gnome_stock_menu_item(char *type, char *text)
 	g_return_val_if_fail(text != NULL, NULL);
 
 	if (use_icons == -1) {
-		use_icons = gnome_config_get_int("GnomeStock/Icons/MenusUseIcons=1");
+		use_icons = gnome_config_get_int("Gnome/Icons/MenusUseIcons=1");
 	}
 	if (use_icons) {
 		hbox = gtk_hbox_new(FALSE, 2);
@@ -1080,7 +1080,7 @@ accel_hash(void) {
 		for (p = default_accel_hash; p->type; p++)
 			g_hash_table_insert(hash, p->type, &p->entry);
 		g_hash_table_foreach(hash, accel_read_rc,
-				     "/GnomeStock/Accelerators/");
+				     "/Gnome/Accelerators/");
 	}
 	return hash;
 }
@@ -1322,7 +1322,7 @@ gnome_stock_menu_accel_dlg(char *section)
 
 	if (!section) {
 		gtk_object_set_data(GTK_OBJECT(box), "section",
-				    "/GnomeStock/Accelerators/");
+				    "/Gnome/Accelerators/");
 	} else {
 		gtk_object_set_data(GTK_OBJECT(box), "section", section);
 		/* TODO: maybe add another page for the app's menu accelerator

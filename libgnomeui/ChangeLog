@@ -1,3 +1,18 @@
+Sat May 16 02:12:43 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-preferences.c (gnome_preferences_load): Removed useless
+	prefix push/pop.
+	(UI_APPNAME): Changed value to start with "Gnome".
+	(GENERAL): Likewise.
+	(DIALOGS): Likewise.
+	(_PROPERTY_BOX_BUTTONS): Removed leading "/".
+	(DIALOG_BUTTONS_STYLE_KEY): Likewise.
+	* gnome-stock.c (stock_button_from_entry): Use Gnome and not
+	GnomeStock as file name in config key.
+	(gnome_stock_menu_item): Likewise.
+	(accel_hash): Likewise.
+	(gnome_stock_menu_accel_dlg): Likewise.
+
 1998-05-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-dateedit.c: Add support for 12/24 hour format.
