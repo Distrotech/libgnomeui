@@ -1,3 +1,9 @@
+1999-12-20  JP Rosevear <jpr@arcavia.com>
+
+        * gtkpixmapmenuitem.c (gtk_pixmap_menu_item_size_request): make
+	sure that the GtkRequisition struct width and height are set to zero
+	in case the pixmap is null, otherwise funny sizes are requisitioned
+
 Thu Dec 16 11:11:58 1999  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gtkrc.ko: Changed the default Korean fonts for each styles.
