@@ -887,18 +887,23 @@ iti_init (GnomeIconTextItem *iti)
 
 /**
  * gnome_icon_text_item_configure:
- * @iti: A GnomeIconTextItem object
- * @x: X position in which to place the item
- * @y: Y position in which to place the item
- * @width: Maximum allowed width for this item
- * @fontname: Name of the fontset that should be used to display the text
- * @text: Text that is going to be displayed
- * @is_editable: Whether editing is enabled for this item
- * @is_static: Whether @text points to a static string or not
+ * @iti: An icon text item.
+ * @x: X position in which to place the item.
+ * @y: Y position in which to place the item.
+ * @width: Maximum width allowed for this item, to be used for word wrapping.
+ * @fontname: Name of the fontset that should be used to display the text.
+ * @text: Text that is going to be displayed.
+ * @is_editable: Whether editing is enabled for this item.
+ * @is_static: Whether @text points to a static string or not.
  *
- * This routine is used to configure a GnomeIconTextItem.
+ * This routine is used to configure a &GnomeIconTextItem.
  *
- * @x and @y specify the cordinates where the item is placed inside the canvas
+ * @x and @y specify the cordinates where the item is placed inside the canvas.
+ * The @x coordinate should be the leftmost position that the icon text item can
+ * assume at any one time, that is, the left margin of the column in which the
+ * icon is to be placed.  The @y coordinate specifies the top of the icon text
+ * item.
+ *
  * @width is the maximum width allowed for this icon text item.  The coordinates
  * define the upper-left corner of an icon text item with maximum width; this may
  * actually be outside the bounding box of the item if the text is narrower than
@@ -907,7 +912,7 @@ iti_init (GnomeIconTextItem *iti)
  * If @is_static is true, it means that there is no need for the item to
  * allocate memory for the string (it is a guarantee that the text is allocated
  * by the caller and it will not be deallocated during the lifetime of this
- * item).  This is an optimization to reduce memory usage for large icon lists.
+ * item).  This is an optimization to reduce memory usage for large icon sets.
  */
 void
 gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
@@ -973,11 +978,13 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 
 /**
  * gnome_icon_text_item_setxy:
- * @iti:  A GnomeIconTextItem object
- * @x: X position
- * @y: Y position
+ * @iti:  An icon text item.
+ * @x: X position.
+ * @y: Y position.
  *
- * Sets the upper-left corner position of an icon text item.
+ * Sets the coordinates at which the icon text item should be placed.
+ *
+ * See also: gnome_icon_text_item_configure().
  */
 void
 gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
@@ -998,11 +1005,13 @@ gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
 
 /**
  * gnome_icon_text_item_select:
- * @iti: A GnomeIconTextItem object
- * @sel: Whether the icon text item should be displayed as selected
+ * @iti: An icon text item
+ * @sel: Whether the icon text item should be displayed as selected.
  *
  * This function is used to control whether an icon text item is displayed as
- * selected or not.
+ * selected or not.  Mouse events are ignored by the item when it is unselected;
+ * when the user clicks on a selected icon text item, it will start the text
+ * editing process.
  */
 void
 gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
@@ -1028,9 +1037,9 @@ gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
 
 /**
  * gnome_icon_text_item_get_text:
- * @iti: A GnomeIconTextItem object
+ * @iti: An icon text item.
  *
- * Returns the text contained to a GnomeIconTextItem.  The client should not
+ * Returns the current text string in an icon text item.  The client should not
  * free this string, as it is internal to the icon text item.
  */
 char *
@@ -1052,13 +1061,12 @@ gnome_icon_text_item_get_text (GnomeIconTextItem *iti)
 
 /**
  * gnome_icon_text_item_stop_editing:
- * @iti: A GnomeIconTextItem object
- * @accept: Whether to accept the current text or to discard it
+ * @iti: An icon text item.
+ * @accept: Whether to accept the current text or to discard it.
  *
- * This function terminates the editing state of an icon text item.  The @accept
- * argument controls whether the item's current text should be accepted or
- * discarded.  If it is discarded, then the icon's old text before it was being
- * edited will be restored.
+ * Terminates the editing state of an icon text item.  The @accept argument
+ * controls whether the item's current text should be accepted or discarded.  If
+ * it is discarded, then the icon's original text will be restored.
  **/
 void
 gnome_icon_text_item_stop_editing (GnomeIconTextItem *iti,
