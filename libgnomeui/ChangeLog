@@ -1,3 +1,7 @@
+Wed Apr 22 16:47:49 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock: added new icons by tigert
+
 1998-04-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-calculator.c (gnome_calculator_init): Add padding to

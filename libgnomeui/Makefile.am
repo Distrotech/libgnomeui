@@ -42,7 +42,6 @@ libgnomeui_la_SOURCES = \
 	gtk-clock.c			\
 	gtk-ted.c			\
 	gnome-stock-imlib.h		\
-	gnome-stock-xpm.h		\
 	gtk-plug.c			\
 	gtk-socket.c			\
 	gtkcalendar.c			\
