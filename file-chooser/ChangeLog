@@ -1,3 +1,20 @@
+2003-09-08  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystem.c (gtk_file_info_free): Free the display_key.
+
+	* gtkfilechooserimpldefault.c (list_mtime_data_func): New
+	function.
+	(create_file_list): Add a modification time column; remove the
+	size column.
+	(mtime_sort_func): New callback.
+	(tree_selection_changed): Add a sorting function for the mtime
+	column.  Have the model fetch the modification time as well.
+	(tree_selection_changed): Do allow the file list model to show
+	directories.
+
+	* testfilechooser.c (my_new_from_file_at_size): Do not try to read
+	non-regular files.
+
 2003-09-05  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilechooserimpldefault.c (create_filter): New function.
