@@ -7,6 +7,7 @@ libgnomeuiincludedir = $(includedir)/libgnomeui
 INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir)
 
 lib_LTLIBRARIES = libgnomeui.la
+noinst_PROGRAMS = ted_demo
 
 libgnomeui_la_SOURCES = \
 	gnome-actionarea.c		\
@@ -23,7 +24,8 @@ libgnomeui_la_SOURCES = \
 	gnome-session.c			\
 	gnome-scores.c			\
 	gnome-stock.c			\
-	gtk-clock.c
+	gtk-clock.c			\
+	gtk-ted.c
 
 libgnomeuiinclude_HEADERS = 		\
         gnome-actionarea.h     		\
@@ -40,16 +42,27 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-scores.h			\
 	gnome-stock.h			\
 	gtk-clock.h			\
+	gtk-ted.h			\
 	libgnomeui.h
 
-EXTRA_DIST = \
+ted_demo_SOURCES = ted_demo.c
+
+SGML =	\
+	gtk-ted.sgml
+
+PIXMAPS = \
 	gnome-stock-ok.xpm		\
-	gnome-stock-cancel.xpm
+	gnome-stock-cancel.xpm		\
+
+EXTRA_DIST = \
+	$(PIXMAPS)			\
+	$(SGML)				\
+	AUTHORS
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs)
 
-files:
-        @files=`ls $(DISTFILES) 2> /dev/null `; for p in $$files; do \
-          echo $$p; \
-        done
+ted_demo_LDADD =	\
+	$(top_builddir)/libgnome/libgnome.la 		\
+	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	$(GTK_LIBS) $(X_LIBS) $(x_libs) $(INTLLIBS) $(DL_LIB)

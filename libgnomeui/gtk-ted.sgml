@@ -1,0 +1,59 @@
+<!doctype chapter PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+  <!ENTITY GNOME "GNOME">
+  <!ENTITY GNOME-FULL "GNU Network Object Model Environment">
+]>
+
+<chapter id="gtk-ted-facility">
+  <title>The GTK Ted widget</title>
+  <para>
+    The purpose of this widget (at this point, it is not really a
+    widget. but shouyld be soon) is to facilitate the creation of user
+    interfaces by C programmers.
+  <para>
+    Exising GUI designers either generate source code from a form
+    design which can not be edited and later regenerated or are very
+    complex to allow two way editing. 
+  <para>
+    The approach taken by the Ted widget is very simple:  Ted is
+    <literal>GtkContainer</literal> at which widgets are thrown out,
+    just like a regular container.  The only difference is that you
+    have to use the <literal>gtk_ted_add</literal> routine, which
+    expects every widget to have a string name associated to it.  
+  <para>
+    Ted expects the programmer to create his widgets in the source
+    code and passing names to the <literal>gtk_ted_add</literal>
+    routine.  After the widgets are created, and before attempting to
+    use the Ted container, the <literal>gtk_ted_prepare</literal>
+    routine should be invoked.  
+  <para>
+    The first time Ted is used on a new dialog box, it will find out
+    that there is no layout information defined for the current dialog
+    box (the dialog box name is passed initially to the
+    <literal>gtk_ted_new</literal> routine).  And will thus invoke the
+    Ted GUI editor.  The programmer, can then drag and drop the
+    widgets in the proper locations in the form.  Once the widgets are
+    placed in the desired places, and any further decorations have
+    been added (the programmer can also add frames and separators to
+    the dialog box without creating them in his source file), the
+    programmer just clicks on the <literal/Save/ button and the layout
+    information would then be stored.
+  <para>
+    On the next invocation of the dialog box, Ted, will look in the
+    application specific layout directory for layout information (see
+    the source code for details) for the layout information.  If no
+    layout information is present there, it will try loading the file
+    "layout" from the current directory and use that to place the
+    widgets from the dialog box.
+  <para>
+    If new widgets are added to a dialog box, Ted will automatically
+    switch into GUI-design mode, to let the programmer place the new
+    widgets. 
+  <para>
+    It is also possible to modify the layout of an existing dialog
+    box, to achive this, it is necesarry to set the environment
+    variable <literal/TEDIT/ to the name of the dialog box that you
+    want to modify and invoke the program.
+
+</chapter>
+
+
