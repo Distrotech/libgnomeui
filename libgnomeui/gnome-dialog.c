@@ -30,8 +30,6 @@
 #include "gnome-preferences.h"
 #include "gnome-dialog-util.h"
 
-#define INVALID_BUTTON -1
-
 enum {
   CLICKED,
   CLOSE,
@@ -297,72 +295,52 @@ gnome_dialog_set_modal (GnomeDialog * dialog)
 }
 
 /* Perhaps using set_data would be better; I don't know */
-struct run_modal_info {
-  gint * button_num_p;
-  guint close_connection;
-  guint clicked_connection;
-};
-
 static void
 gnome_dialog_setbutton_callback(GnomeDialog *dialog,
 				gint button_number,
-				struct run_modal_info *info)
+				gint *set_button_number)
 {
-  *(info->button_num_p) = button_number;
-
-  /* This has to be here, in case the dialog is not destroyed
-     after the click. */
-  gtk_signal_disconnect(GTK_OBJECT(dialog), info->close_connection);
-  gtk_signal_disconnect(GTK_OBJECT(dialog), info->clicked_connection);
+  *set_button_number = button_number;
 
   gtk_main_quit();
-}
-
-static gint
-gnome_dialog_mustchoose_callback(GnomeDialog * dialog, gpointer data)
-{
-  gint button_number = *( ((struct run_modal_info *)data)->button_num_p);
-  GtkWidget * ok;
-
-  if (button_number == INVALID_BUTTON) {
-    ok = gnome_ok_dialog(_("You must click on one of the dialog's buttons."));
-    gtk_grab_add(ok);
-    return TRUE;
-  }
-  else return FALSE;
 }
 
 gint
 gnome_dialog_run_modal(GnomeDialog *dialog)
 {
-  gint button_num = INVALID_BUTTON;
-  struct run_modal_info info = {&button_num, 0, 0};
+  gnome_dialog_set_modal(dialog);
+  return gnome_dialog_run(dialog);
+}
 
-  g_return_val_if_fail(dialog != NULL, INVALID_BUTTON);
-  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), INVALID_BUTTON);
+gint
+gnome_dialog_run(GnomeDialog *dialog)
+{
+  gint button_num = -1;
+  gboolean was_modal;
 
-  /* If the dialog is modal anyway, don't screw with it. */
-  if ( ! dialog->modal ) gtk_grab_add(GTK_WIDGET(dialog));
+  g_return_val_if_fail(dialog != NULL, -1);
+  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
-  info.close_connection = 
-    gtk_signal_connect (GTK_OBJECT(dialog), "clicked", 
-			GTK_SIGNAL_FUNC(gnome_dialog_setbutton_callback),
-			&info);
-  info.clicked_connection = 
-    gtk_signal_connect (GTK_OBJECT(dialog), "close",
-			GTK_SIGNAL_FUNC(gnome_dialog_mustchoose_callback),
-			&info);
+  was_modal = dialog->modal;
+  gnome_dialog_set_modal(dialog);
+  gnome_dialog_close_hides(dialog, TRUE);
+  gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
+		     GTK_SIGNAL_FUNC(gnome_dialog_setbutton_callback),
+		     &button_num);
+  gtk_signal_connect(GTK_OBJECT(dialog), "delete_event",
+		     GTK_SIGNAL_FUNC(gtk_main_quit), NULL);
 
-  if ( ! GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog)) ) {
+  if ( ! GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog)) )
     gtk_widget_show(GTK_WIDGET(dialog));
-  }
 
-  /* Is this OK? */
   gtk_main();
 
-  /* If we temporarily modalized for this function, remove the 
-     grab. */
-  if ( ! dialog->modal ) gtk_grab_remove(GTK_WIDGET(dialog));
+  gtk_widget_hide(GTK_WIDGET(dialog));
+  if(!was_modal)
+    {
+      dialog->modal = FALSE;
+      gtk_grab_remove(GTK_WIDGET(dialog));
+    }
 
   return button_num;
 }

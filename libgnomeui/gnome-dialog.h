@@ -77,15 +77,11 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
 /* Make the dialog modal */
 void       gnome_dialog_set_modal      (GnomeDialog *dialog);
 
-/* Block until one of the dialog buttons is clicked. Closing the
- * dialog via window manager or escape will not be permitted. When a
- * button is clicked, this function will return the button number. If
- * the dialog was not already modal, it will not be modal after the
- * call, only during. Closing/destroying the dialog is up to you -
- * click_closes will work though, if you call it beforehand. If the
- * dialog has not been shown, this function will show it. */
-
+/* Run the dialog, return the button # that was pressed or -1 if none.
+ */
 gint       gnome_dialog_run_modal      (GnomeDialog *dialog);
+/* Like run_modal, but does not call set_modal before run */
+gint       gnome_dialog_run	       (GnomeDialog *dialog);
 
 /* Set the default button. - it will have a little highlight, 
    and pressing return will activate it. */
