@@ -9,15 +9,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2004-02-03 11:16+0100\n"
-"PO-Revision-Date: 2003-06-16 20:50+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-05 22:14+0200\n"
+"PO-Revision-Date: 2004-02-01 02:14+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Gnome Finnish Translation Team <gnome-fi-laatu@lists."
 "sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -49,7 +49,7 @@ msgstr "Dokumentoijat"
 
 #: libgnomeui/gnome-about.c:260
 msgid "Translated by"
-msgstr "Kääntäjät"
+msgstr "Suomentajat"
 
 #: libgnomeui/gnome-about.c:323
 msgid "C_redits"
@@ -121,7 +121,7 @@ msgstr "Yksittäisen dokumentoijan tiedot"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "Kääntäjä"
+msgstr "Kääntäjät"
 
 #: libgnomeui/gnome-about.c:432
 msgid ""
@@ -143,6 +143,7 @@ msgstr "Tietoja ohjelmasta %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
@@ -200,6 +201,7 @@ msgid "_Game"
 msgstr "_Peli"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -390,11 +392,11 @@ msgstr "Määrittele ohjelman asetukset"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Tietoja"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Tietoja tästä ohjelmasta"
 
@@ -421,7 +423,7 @@ msgstr "Luo uusi ikkuna"
 msgid "_Close This Window"
 msgstr "_Sulje tämä ikkuna"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Sulje tämä ikkuna"
 
@@ -623,14 +625,12 @@ msgstr "Todennus vaaditaan"
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " verkkoalue %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Osoitteen \"%s\" käyttämiseksi täytyy kirjautua sisään.\n"
-"%s"
+msgstr "Osoitteen \"%s\" käyttämiseksi täytyy kirjautua sisään.\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -663,10 +663,6 @@ msgstr "Peru ulos kirjautuminen"
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Vastaanotti virheellisiä väritietoja\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Värivalitsin"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
@@ -1206,23 +1202,23 @@ msgstr "GnomeIconSelection: hakemisto \"%s\" ei avautunut"
 msgid "Loading Icons..."
 msgstr "Lataa kuvakkeita..."
 
-#: libgnomeui/gnome-messagebox.c:108
+#: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "Tiedoksi"
 
-#: libgnomeui/gnome-messagebox.c:113
+#: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "Varoitus"
 
-#: libgnomeui/gnome-messagebox.c:119
+#: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "Virhe"
 
-#: libgnomeui/gnome-messagebox.c:125
+#: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "Kysymys"
 
-#: libgnomeui/gnome-messagebox.c:130
+#: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "Viesti"
 
@@ -1232,7 +1228,7 @@ msgstr "_Tunnus:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Verkkoalue:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1240,11 +1236,11 @@ msgstr "_Salasana:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Muista salasana tämän istunnon ajan"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Tallenna salasana avainrenkaaseen"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1319,7 +1315,7 @@ msgstr "Tietoja"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Poista kaatumisikkuna käytöstä"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
@@ -1334,12 +1330,14 @@ msgid "GNOME GUI Library"
 msgstr "GNOMEn GUI-asetukset"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:708
+#: libgnomeui/gnome-ui-init.c:707
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Monia muistialueen ylityksiä tapahtui: virheikkunaa ei voi näyttää\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:721
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1366,18 +1364,20 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "Sovellus \"%s\" on sulkeutunut odottamatta."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "prosessi %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
+"Voit ottaa yhteyttä sovelluksen kehittäjiin auttaaksesi heitä korjaamaan "
+"vian. Voit myös käynnistää ohjelman uudestaan nyt."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1385,11 +1385,18 @@ msgstr "Käyttö: gnome_segv sovellus signaali\n"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "Inform Developers"
-msgstr ""
+msgstr "Ota yhteyttä kehittäjiin"
 
 #: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Virheidenetsintä"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Lopeta testi"
+
+#~ msgid "Color Selector"
+#~ msgstr "Värivalitsin"
 
 #~ msgid ""
 #~ "Application \"%s\" (process %d) has crashed\n"
@@ -1407,6 +1414,3 @@ msgstr "Virheidenetsintä"
 
 #~ msgid "Please visit the GNOME Application Crash page for more information"
 #~ msgstr "Käy katsomassa lisätietoja GNOME Application Crash -sivulta."
-
-#~ msgid "Exit the test"
-#~ msgstr "Lopeta testi"
