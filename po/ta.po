@@ -1,154 +1,148 @@
 # Tamil translation of libgnomeui2.
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001.
+# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
+# Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001, 2002, 2003.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
-"PO-Revision-Date: 2001-06-16 00:05-0500\n"
+"Project-Id-Version: libgnomeui2 2.2.0\n"
+"POT-Creation-Date: 2003-04-01 20:33+0200\n"
+"PO-Revision-Date: 2003-04-03 22:03+0600\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
-"Language-Team: Tamil\n"
+"Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libgnomeui/gnome-about.c:194
 msgid "Credits"
-msgstr ""
+msgstr "Ò¸ú¸û"
 
 #: libgnomeui/gnome-about.c:223
 msgid "Written by"
-msgstr ""
+msgstr "±Ø¾¢ÂÅ÷"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "Documented by"
-msgstr "¬Å½Á¡ì¸ø:"
+msgstr "¬Å½Á¡ì¸ø ±Ø¾¢ÂÅ÷"
 
 #: libgnomeui/gnome-about.c:253
 msgid "Translated by"
-msgstr ""
+msgstr "¦Á¡Æ¢¦ÀÂ÷ôÀ¡Ä÷"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
 msgid "_Credits"
-msgstr ""
+msgstr "_Ò¸ú¸û"
 
 #: libgnomeui/gnome-about.c:352
 msgid "Program name"
-msgstr ""
+msgstr "¿¢Ãø ¦ÀÂ÷"
 
 #: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
-msgstr ""
+msgstr "þý¾ ¿¢ÃÄ¢ý ¦ÀÂ÷"
 
 #: libgnomeui/gnome-about.c:360
 msgid "Program version"
-msgstr ""
+msgstr "¿¢ÃÄ¢ý À¾¢ôÒ"
 
 #: libgnomeui/gnome-about.c:361
 msgid "The version of the program"
-msgstr ""
+msgstr "þý¾ ¿¢ÃÄ¢ý À¾¢ôÒ"
 
 #: libgnomeui/gnome-about.c:367
 msgid "Copyright string"
-msgstr ""
+msgstr "ÀÊÔÃ¢¨Áî ºÃõ"
 
 #: libgnomeui/gnome-about.c:368
 msgid "Copyright information for the program"
-msgstr ""
+msgstr "þý¾ ¿¢ÃÄ¢ý ÀÊÔÃ¢¨Áò ¾¸Åø"
 
 #: libgnomeui/gnome-about.c:375
-#, fuzzy
 msgid "Comments string"
-msgstr "ÌÈ¢ôÒ¨Ã"
+msgstr "ÌÈ¢ôÒ¨Ã¸û ºÃõ"
 
 #: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
-msgstr ""
+msgstr "þý¾ ¿¢Ã¨ÄôÀüÈ¢Â¡É ÌÈ¢ôÒ¨Ã¸û"
 
 #: libgnomeui/gnome-about.c:382
-#, fuzzy
 msgid "Authors"
-msgstr "¬º¢¡¢Â÷¸û:"
+msgstr "¬º¢¡¢Â÷¸û"
 
 #: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
-msgstr ""
+msgstr "þý ¿¢Ã¨Ä ±Ø¾¢Â ¬º¢¡¢Â÷¸û"
 
 #: libgnomeui/gnome-about.c:385
-#, fuzzy
 msgid "Author entry"
-msgstr "¬º¢¡¢Â÷¸û: "
+msgstr "¬º¢¡¢Â÷ À¾¢Å¢¼õ"
 
 #: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
-msgstr ""
+msgstr "µÕ ¬º¢¡¢Â÷ À¾¢Å¢¼õ"
 
 #: libgnomeui/gnome-about.c:393
-#, fuzzy
 msgid "Documenters"
-msgstr "¬Å½Á¡ì¸ø:"
+msgstr "¬Å½Á¡ì¸ø ±Ø¾¢§Â¡÷"
 
 #: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
-msgstr ""
+msgstr "þý ¿¢ÃÄ¢ý ¬Å½í¸¨Ç ±ØÐ§Å¡÷"
 
 #: libgnomeui/gnome-about.c:396
-#, fuzzy
 msgid "Documenter entry"
-msgstr "¬Å½Á¡ì¸ø:"
+msgstr "¬Å½Á¡ì¸ø À¾¢Å¢¼õ"
 
 #: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
-msgstr ""
+msgstr "µÕ ¬Å½Á¡ì¸¢ À¾¢Å¢¼õ"
 
 #: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
-msgstr ""
+msgstr "¦Á¡Æ¢¦ÀÂü§È¡÷ Ò¸ú"
 
 #: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "¦Á¡Æ¢¦ÀÂü§È¡÷ Ò¸ú. þîºÃõ ¦Á¡Æ¢¦ÀÂ÷ì¸ìÜÊÂ¾¡¸ ÌÈ¢ì¸ §ÅñÎõ"
 
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
-msgstr ""
+msgstr "º¢ýÉõ"
 
 #: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
-msgstr ""
+msgstr "'ÀüÈ¢' ¦ÀðÊì¸¡É º¢ýÉõ"
 
 #: libgnomeui/gnome-about.c:493
-#, fuzzy, c-format
+#, c-format
 msgid "About %s"
-msgstr "ÀüÈ¢"
+msgstr "%s ÀüÈ¢"
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
-msgstr ""
+msgstr "Óý§ÉüÈõ ¯ñÎ"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr ""
+msgstr "Óý§ÉüÈ Å¢ð¦ºð ´ý¨È ¯ÕÅ¡ìÌ."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
-msgstr ""
+msgstr "¿¢¸ú¿¢¨Ä ¯ñÎ"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr ""
+msgstr "¿¢¸ú¿¢¨Ä Å¢ð¦ºð ¯ÕÅ¡ìÌ."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
-msgstr ""
+msgstr "°¼¡Î¾ø"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
-msgstr ""
+msgstr "§ÅñÊÂ ÀÂÉ÷ ¦ºÂüÀ¡Î «Ç×."
 
 #: libgnomeui/gnome-client.c:860
 msgid "Specify session management ID"
@@ -184,24 +178,24 @@ msgstr "À¢¨ÆÂ¡É Åñ½ò ¾Ã× ¸¢¨¼ì¸ôÀðÎûÇÐ\n"
 
 #: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
-msgstr ""
+msgstr "Åñ½õ ¦¾Ã¢× ¦ºöÔÁ¢¼õ"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "Åñ½ò¨¾ ¦¾Ã¢× ¦ºöÅ¾ðÌ ´÷ ¯¨ÃÂ¡¼¨Äò ¾¢Èì¸×õ"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "´Õ ¿¢Èò¨¾ §¾÷ó¦¾Î"
 
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+#: libgnomeui/gnome-dateedit.c:479
+#: libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "§¿Ãõ"
 
 #: libgnomeui/gnome-dateedit.c:480
-#, fuzzy
 msgid "The time currently selected"
-msgstr "¾ü§À¡Ð §¾÷ó¦¾Îì¸ôÀðÎûÇ §¿Ãõ"
+msgstr "¾ü§À¡Ð ¦¾È¢×¦ºöÂôÀðÎûÇ §¿Ãõ"
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
@@ -217,7 +211,7 @@ msgstr "¸£ú «¨Ã-Á½¢"
 
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
-msgstr ""
+msgstr "§¿Ãõ ¦¾Ã¢Å¢Â¢ø ¸£ú Á½¢"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
@@ -225,7 +219,7 @@ msgstr "§Áø «¨Ã-Á½¢"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr ""
+msgstr "§¿Ãõ ¦¾Ã¢Å¢Â¢ø §Áø Á½¢"
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
@@ -235,19 +229,18 @@ msgstr "¦¾¡¼ì¸ §¿Ãõ"
 msgid "The initial time"
 msgstr "¦¾¡¼ì¸ §¿Ãõ"
 
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-#, fuzzy
+#: libgnomeui/gnome-dateedit.c:739
+#: libgnomeui/gnome-scores.c:97
 msgid "Date"
-msgstr "_´ðÎ"
+msgstr "¾¢¸¾¢"
 
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "Åñ½ò¨¾ò §¾÷× ¦ºö"
+msgstr "¾¢¸¾¢¨Â ¦¾Ã¢×¦ºöÂ×õ"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Àïº¡í¸ò¾¢Ä¢ÕóÐ ¾¢¸¾¢¨Â ¦¾Ã¢×¦ºö"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -255,124 +248,119 @@ msgid "Calendar"
 msgstr "Àïº¡í¸õ"
 
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "Åñ½ò¨¾ò §¾÷× ¦ºö"
+msgstr "§¿Ãò¨¾ ¦¾Ã¢×¦ºöÂ×õ"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "´÷ô ÀðÊÂ¢Ä¢ÕóÐ §¿Ãò¨¾ ¦¾Ã¢×¦ºö"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date ÀÂýÀÎò¾ §Åñ¼¡õ, gnome_date_edit_get_time ÀÂýÀÎò¾×õ"
+msgstr "gnome_date_edit_get_date ÀÂýÀÎò¾ §Åñ¼¡õ, gnome_date_edit_get_time ÀÂýÀÎò¾×õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
-#, fuzzy
 msgid "Title"
-msgstr "§¿Ãõ"
+msgstr "¾¨ÄôÒ"
 
 #: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
-msgstr ""
+msgstr "Druidþý ¾¨ÄôÒ"
 
 #: libgnomeui/gnome-druid-page-standard.c:130
-#, fuzzy
 msgid "Logo image"
-msgstr "¯ÕÅõ ¸¢¨¼Â¡Ð"
+msgstr "º¢ýÉò¾¢ý µÅ¢Âõ"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
-msgstr ""
+msgstr "Ó¾ø Ã¸º¢Â-ÌÈ¢ (Watermark)"
 
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr ""
+msgstr "§ÁÖì¸¡É Ã¸º¢Â «¨¼Â¡Ç ¯ÕÅõ"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
-msgstr ""
+msgstr "¾¨ÄôÀ¢ý ÓýÉ½¢"
 
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
-msgstr ""
+msgstr "¾¨ÄôÀ¢ý ÓýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
-msgstr ""
+msgstr "¾¨ÄôÀ¢ý ÓýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr ""
+msgstr "GdkColorÃ¡¸ ¾¨ÄôÀ¢ý ÓýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
-msgstr ""
+msgstr "¾¨ÄôÀ¢ý ÓýÉ½¢ Åñ½õ «¨Áì¸ôÀðÎûÇÐ"
 
 #: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
-msgstr ""
+msgstr "¾¨ÄôÀ¢ý ÓýÉ½¢ Åñ½õ «¨Áì¸ôÀðÎûÇÐ"
 
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr ""
+msgstr "À¢ýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr ""
+msgstr "À¢ýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr ""
+msgstr "µ÷ GdkColorÃ¡¸ À¢ýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr ""
+msgstr "À¢ýÉ½¢ Åñ½õ «¨Áì¸ôÀðÎûÇÐ"
 
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr ""
+msgstr "À¢ýÉ½¢ Åñ½õ «¨Áì¸ôÀðÎûÇÐ"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
-msgstr ""
+msgstr "º¢ýÉò¾¢ý À¢ýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
-msgstr ""
+msgstr "º¢ýÉò¾¢ý À¢ýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
-msgstr ""
+msgstr "GdkColorÃ¡¸ º¢ýÉò¾¢ý À¢ýÉ½¢ Åñ½õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
-msgstr ""
+msgstr "º¢ýÉò¾¢ý À¢ýÉ½¢ Åñ½õ «¨Áì¸ôÀðÎûÇÐ"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
-msgstr ""
+msgstr "º¢ýÉò¾¢ý À¢ýÉ½¢ Åñ½õ «¨Áì¸ôÀðÎûÇÐ"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr ""
+msgstr "ÓÊ¨Åì ¸¡ñÀ¢"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr ""
+msgstr "'«Îò¾' ¦À¡ò¾¡Ûì¸¡ô À¾¢Ä¡¸ 'ÓÊ' ¦À¡ò¾¡ý ¸¡ðÎ¸"
 
 #: libgnomeui/gnome-druid.c:158
-#, fuzzy
 msgid "Show Help"
-msgstr "¯¾Å¢"
+msgstr "¯¾Å¢¨Âì ¸¡ñÀ¢¸"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "'¯¾Å¢' ¦À¡ò¾¡¨Éì ¸¡ñÀ¢"
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -395,26 +383,22 @@ msgid "End World Hunger"
 msgstr "¯Ì¸ô Àº¢¨Â ¿£ìÌ¸"
 
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Link color"
-msgstr "´Õ ¿¢Èò¨¾ §¾÷ó¦¾Î"
+msgstr "þ¨½ôÀ¢ý Åñ½õ"
 
 #: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
-msgstr ""
+msgstr "þ¨½ô¨À Å¨ÃÅ¾ðÌ ÀÂñÀÎò¾ôÀÎõ Åñ½õ"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
 msgstr ""
 
 #: libgnomeui/gnome-href.c:393
-#, fuzzy
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
+msgid "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"URL ¨¸ôÀ¢Ê¨Â ¦¾¡¼í¸ ÓÂüº¢ò¾ §À¡Ð À¢¨Æ ¿¨¼¦ÀüÈÐ.\n"
-"Control Center'Â¢ø «¨Á×¸û ºÃ¢Â¡ ±ñÚ À¡÷ì¸×õ."
+msgstr "¦¸¡¼¡¿¢¨Ä Å¨Ä §Á§Ä¡Ê¨Â ¦¾¡¼í¸ ÓÂüº¢ò¾§À¡Ð À¢¨Æ.\n"
+"¾Â×¦ºöÐ ¯í¸û 'Å¢ÕôÀÁ¡É ¦ºÂøÀ¡Î' ÀðÊ-¯ÕôÀÊ¨Â ºÃ¢À¡÷ì¸×õ."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -426,7 +410,7 @@ msgstr "¸¡ðº¢"
 
 #: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
-msgstr ""
+msgstr "¸§É¡õ GUI áÄ¸õ"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:617
@@ -435,19 +419,17 @@ msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:631
-#, fuzzy
-msgid ""
-"Segmentation fault!\n"
+msgid "Segmentation fault!\n"
 "Cannot display crash dialog\n"
-msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨ÃÂ¡¼¨Ä ¸¡ñÀ¢ì¸ ÓÊÂ¡Ð\n"
+msgstr "ÀÌ¾¢Â¡ì¸ø ÀØÐ!\n"
+"ÓÈ¢× ¯¨ÃÂ¡¼¨Ä ¸¡ñÀ¢ì¸ ÓÊÂ¡Ð\n"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
+"When you close this dialog, all applications will close and your session will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 
@@ -463,9 +445,8 @@ msgstr ""
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:122
-#, fuzzy
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "¯À§Â¡¸¢ôÒ: gnome_segv ÀÂýÀ¡Î_¦ÀÂ÷ signum\n"
+msgstr "ÒÆíÌ¾ø: gnome_segv ÀÂýÀ¡Î_¦ÀÂ÷ signum\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
@@ -477,7 +458,7 @@ msgstr "À¢¨Æ ¿£ìÌ"
 
 #: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr ""
+msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
@@ -528,161 +509,165 @@ msgid "Hint for item 2"
 msgstr "¯ÕôÀÊ 2'ìÌ ÌÈ¢ôÀ¢Î"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:82
+#: libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
-msgstr ""
+msgstr "_§¸¡ôÒ"
 
 #: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
-msgstr ""
+msgstr "_§¸¡ôÒ/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84
+#: libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr ""
+msgstr "_¦¾¡Ì"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr ""
+msgstr "_¦¾¡Ì/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86
+#: libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr ""
+msgstr "_¸¡ðº¢"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr ""
+msgstr "_¸¡ðº¢/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88
+#: libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr ""
+msgstr "_«¨ÁôÒ¸û"
 
 #: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
-msgstr ""
+msgstr "_«¨ÁôÒ¸û/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90
+#: libgnomeui/gnome-app-helper.h:326
 msgid "_New"
-msgstr ""
+msgstr "_Ò¾¢ÂÐ"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
-msgstr ""
+msgstr "_Ò¾¢ÂÐ/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92
+#: libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr ""
+msgstr "§¸¡_ôÒ¸û"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr ""
+msgstr "§¸¡_ôÒ¸û/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94
+#: libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr ""
+msgstr "_º¡ÇÃí¸û"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
-#, fuzzy
+#: libgnomeui/gnome-app-helper.c:95
+#: libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
-msgstr "¦ÀÂ÷"
+msgstr "_Å¢¨ÇÂ¡ðÎ"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#, fuzzy
+#: libgnomeui/gnome-app-helper.c:96
+#: libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "¯¾Å¢"
+msgstr "_¯¾Å¢"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
-msgstr ""
+msgstr "_º¡ÇÃí¸û/"
 
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
-msgstr ""
+msgstr "_¾¢È..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr ""
+msgstr "´Õ §¸¡ô¨Àò ¾¢È"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
-msgstr ""
+msgstr "_§ºÁ¢"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr ""
+msgstr "¾ü§À¡¨¾Â §¸¡ô¨Àî §ºÁ¢"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr ""
+msgstr "§ÅÚ ¦ÀÂÃ¢ø _§ºÁ¢..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr ""
+msgstr "¾ü§À¡¨¾Â §¸¡ô¨À §ÅÚ ¦ÀÂÃ¢ø §ºÁ¢"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
-#, fuzzy
 msgid "_Revert"
-msgstr "¿£ìÌ"
+msgstr "¿¢¨ÄÁ£ðÎ"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr ""
+msgstr "þó¾ §¸¡ôÀ¢ý §ºÁ¢ò¾ µ÷ À¾¢×ìÌô À¢ý¦ºø"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr ""
+msgstr "_«îº¢Î..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr ""
+msgstr "¾ü§À¡¨¾Â §¸¡ô¨À «îº¢Î"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr ""
+msgstr "«îº¢ÎÅ¨¾ _«¨Á..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr ""
+msgstr "¾ü§À¡¨¾Â «îÍô¦À¡È¢ì¸¡É Àì¸ò¨¾ «¨Á×¦ºö"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
-#, fuzzy
 msgid "_Close"
-msgstr "ãÎ"
+msgstr "_ãÎ"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr ""
+msgstr "¾ü§À¡¨¾Â §¸¡ô¨À ãÎ"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "¦Åð_Î"
+msgstr "¦ÅÇ¢î¦ºø"
 
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "­ó¾ ÀðÊ ¿¢Ãø ÌÈ¢ò¾¾¡"
+msgstr "­ó¾ ¦ºÂøÀ¡ðÊÄ¢ÕóÐ ¦ÅÇ¢î¦ºø"
 
 #.
 #. * The "Edit" menu
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-#, fuzzy
 msgid "Cu_t"
-msgstr "¦Åð_Î"
+msgstr "¦Å_ðÎ"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr ""
+msgstr "¦¾Ã¢×¦ºö¾¨¾ ¦ÅðÎ"
 
 #. 10
 #. Copy
@@ -692,7 +677,7 @@ msgstr "_¿¸ø"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr ""
+msgstr "¦¾Ã¢×¦ºö¾¨¾ ¿¸ø¦ºö"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -701,71 +686,70 @@ msgstr "_´ðÎ"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr ""
+msgstr "À¢ÊôÒô ÀÄ¨¸¨Â ´ðÎ"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
-#, fuzzy
 msgid "C_lear"
-msgstr "ÐôÀÃÅ¡ìÌ"
+msgstr "ÐôÀÃ_Å¡ìÌ"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr ""
+msgstr "¦¾Ã¢×¦ºö¾¨¾ ÐôÀÃÅ¡ìÌ"
 
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr ""
+msgstr "_¸Å¢ø"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr ""
+msgstr "¸¨¼º¢ ¦ºÂ¨Ä ¸Å¢ø¦ºö"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr ""
+msgstr "_Á£ñÎõ"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr ""
+msgstr "¸Å¢ø¦ºö¾ ¦ºÂ¨Ä Á£ñÎõ ¦ºö"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr ""
+msgstr "_¸ñÎÀ¢Ê"
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr ""
+msgstr "ºÃõ ´ýÚì¸¡¸ §¾Î"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "«_Îò¾¨¾ì ¸ñÎÀ¢Ê"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr ""
+msgstr "«§¾ ºÃòÐì¸¡¸ ÁÚÀÊÔõ §¾Î"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr ""
+msgstr "þ_¼Á¡üÚ..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr ""
+msgstr "´Õ ºÃò¨¾ Á¡üÚ"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
-msgstr ""
+msgstr "_ÀñÒ¸û"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr ""
+msgstr "§¸¡ôÀ¢ý ÀñÒ¸¨Ç Á¡üÈ¢Â¨Áì¸×õ"
 
 #.
 #. * The Settings menu
@@ -773,12 +757,11 @@ msgstr ""
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr ""
+msgstr "Å¢ÕôÀí_¸û"
 
 #: libgnomeui/gnome-app-helper.c:212
-#, fuzzy
 msgid "Configure the application"
-msgstr "¿¢Ãø º¡ÇÃò¾¢ðÌû ¯¾Å¢¨Â ¸¡ñÀ¢ì¸×õ"
+msgstr "¦ºÂøÀ¡ð¨¼ «¨Á ÅÊÅôÀÎòÐ"
 
 #. 20
 #.
@@ -786,313 +769,295 @@ msgstr "¿¢Ãø º¡ÇÃò¾¢ðÌû ¯¾Å¢¨Â ¸¡ñÀ¢ì¸×õ"
 #.
 #. About
 #: libgnomeui/gnome-app-helper.c:221
-#, fuzzy
+#: test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "ÀüÈ¢"
 
 #: libgnomeui/gnome-app-helper.c:222
-#, fuzzy
+#: test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "­ó¾ ÀðÊ ¿¢Ãø ÌÈ¢ò¾¾¡"
+msgstr "­ó¾ ¦ºÂøÀ¡ð¨¼ô ÀüÈ¢"
 
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
 msgid "Select _All"
-msgstr "Åñ½ò¨¾ò §¾÷× ¦ºö"
+msgstr "«¨Éò¨¾Ôõ ¦¾Ã¢× ¦ºö¸"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr ""
+msgstr "«¨Éò¨¾Ôõ ¦¾Ã¢× ¦ºö"
 
 #.
 #. * Window menu
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr ""
+msgstr "Ò¾¢Â º¡ÇÃò¨¾ô _À¨¼"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr ""
+msgstr "Ò¾¢Â ´Õ º¡ÇÃò¨¾ô À¨¼"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr ""
+msgstr "_þó¾ º¡ÇÃò¨¾ ãÎ"
 
 #: libgnomeui/gnome-app-helper.c:240
+#: test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr ""
+msgstr "¾ü§À¡¨¾Â º¡ÇÃò¨¾ ãÎ"
 
 #.
 #. * The "Game" menu
 #.
 #: libgnomeui/gnome-app-helper.c:248
-#, fuzzy
 msgid "_New game"
-msgstr "¦ÀÂ÷"
+msgstr "_Ò¾¢Â Å¢¨ÇÂ¡ðÎ"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr ""
+msgstr "Ò¾¢Â Å¢¨ÇÂ¡ðÎ ´ý¨Èò ¦¾¡¼íÌ"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr ""
+msgstr "Å¢¨ÇÂ¡ð¨¼ ¿¢Úò¾¢¨Å"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr ""
+msgstr "Å¢¨ÇÂ¡ð¨¼ ¿¢Úò¾¢¨Å"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
-msgstr ""
+msgstr "_ÁÚÀÊÔõ ¦¾¡¼íÌ"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr ""
+msgstr "Å¢¨ÇÂ¡ð¨¼ ÁÚÀÊÔõ ¦¾¡¼íÌ"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr ""
+msgstr "_¿¸÷¨Å ¸Å¢øî¦ºö"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr ""
+msgstr "¸¨¼º¢ ¿¸÷¨Å ¸Å¢øî¦ºö"
 
 #: libgnomeui/gnome-app-helper.c:268
-#, fuzzy
 msgid "_Redo move"
-msgstr "¿£ìÌ"
+msgstr "_¿¸÷¨Å Á£ñÎõ¦ºö"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr ""
+msgstr "¸Å¢ø¦ºö¾ ¦ºÂ¨Ä Á£ñÎõ ¦ºö"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
-msgstr ""
+msgstr "_ÌÈ¢ôÀ¢Î"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr ""
+msgstr "¯í¸Ç¢ý «Îò¾ ¿¸÷×ìÌ ÌÈ¢ôÀ¢Î ¦ÀÈ×õ"
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
-msgstr ""
+msgstr "_ÒûÇ¢¸û..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr ""
+msgstr "ÒûÇ¢¸¨Ç À¡÷ì¸×õ"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr ""
+msgstr "_Å¢¨ÇÂ¡ð¨¼ ÓÊ"
 
 #: libgnomeui/gnome-app-helper.c:285
-#, fuzzy
 msgid "End the current game"
-msgstr "¾ü§À¡¨¾Â ºð¼¸õ"
+msgstr "¾ü§À¡¨¾Â Å¢¨ÇÂ¡ð¨¼ ÓÊò¾¢Î"
 
 #: libgnomeui/gnome-app-helper.c:1143
-#, fuzzy
 msgid "_Contents"
-msgstr "_­¨¾ô ¦À¡ÕòÐ ¯¾Å¢ ¦ºö"
+msgstr "_¯ûÇ¼ì¸í¸û"
 
 #: libgnomeui/gnome-app-helper.c:1146
-#, fuzzy
 msgid "View help for this application"
-msgstr "­ó¾ ÀðÊ ¿¢Ãø ÌÈ¢ò¾¾¡"
+msgstr "þý¿¢ÃÖì¸¡É ¯¾Å¢¨Âô À¡÷ì¸×õ"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr ""
+msgstr "ÌÚõÀ¼í¸ÙìÌì ¸£ú ¯¨Ã"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr ""
+msgstr "ÌÚõÀ¼í¸ÙìÌ «Õ¸¢ø ÓýÛÃ¢¨Á ¯¨Ã"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
-msgstr ""
+msgstr "ÌÚõÀ¼í¸û ÁðÎõ"
 
 #: libgnomeui/gnome-app-helper.c:2569
-#, fuzzy
 msgid "Text Only"
-msgstr "¯¨Ã"
+msgstr "¯¨Ã ÁðÎõ"
 
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr ""
+msgstr "¦¸¡¼¡¿¢¨Ä ¸½¢§Á¨º¨Âô ÀÂýÀÎò¾×õ (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
-msgstr ""
+msgstr " ('return' «Óò¾×õ)"
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
-msgstr ""
+msgstr "À¢¨Æ: "
 
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr ""
+msgstr "±îºÃ¢ì¨¸: "
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
-msgstr ""
+msgstr "¬"
 
 #: libgnomeui/gnome-app-util.c:317
-#, fuzzy
 msgid "yes"
 msgstr "¬õ"
 
 #: libgnomeui/gnome-app-util.c:320
 msgid "n"
-msgstr ""
+msgstr "þ"
 
 #: libgnomeui/gnome-app-util.c:321
 msgid "no"
-msgstr ""
+msgstr "þø¨Ä"
 
 #: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
-msgstr ""
+msgstr " (¬õ «øÄÐ þø¨Ä)"
 
 #: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
-msgstr ""
+msgstr " - ºÃ¢? (¬õ «øÄÐ þø¨Ä)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr ""
+msgstr "Óý§ÉüÈõ"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr ""
+msgstr "¿¢Ãø ±ñ"
 
 #: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr ""
+msgstr "¿¢ÃÄ¢ý «¨¼Â¡Ç ºÃõ"
 
-#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-entry.c:193
+#: libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr ""
+msgstr "ÅÃÄ¡Ú ±ñ"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr ""
+msgstr "GTK Ñ¨Æ×"
 
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr ""
+msgstr "GTK Ñ¨Æ×"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:220
+#: libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
-msgstr ""
+msgstr "ÅÃÄ¡Ú ±ñ"
 
 #: libgnomeui/gnome-file-entry.c:221
-msgid ""
-"Unique identifier for the file entry.  This will be used to save the history "
-"list."
+msgid "Unique identifier for the file entry.  This will be used to save the history list."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:229
+#: libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr ""
+msgstr "§Á§Ä¡Î ¯¨ÃÂ¡¼ø ¾¨ÄôÒ"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
-msgstr ""
+msgstr "'§¸¡ôÒ §Á§Ä¡Î' ¯¨ÃÂ¡¼Ä¢ý ¾¨ÄôÒ"
 
 #: libgnomeui/gnome-file-entry.c:237
-#, fuzzy
 msgid "Directory Entry"
-msgstr "¾¢¨º"
+msgstr "«¨¼× Ñ¨Æ×"
 
 #: libgnomeui/gnome-file-entry.c:238
-msgid ""
-"Whether the file entry is being used to enter directory names or complete "
-"filenames."
+msgid "Whether the file entry is being used to enter directory names or complete filenames."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
-msgstr ""
+msgstr "Modal"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:254
+#: libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
-msgstr ""
+msgstr "§¸¡ôÒô ¦ÀÂ÷"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
-msgstr ""
+msgstr "§¸¡ôÒ Ñ¨ÇÅ¢ø ¸¡ñÀ¢ì¸ôÀ¼ §ÅñÊö §¸¡ôÒô ¦ÀÂ÷."
 
 #: libgnomeui/gnome-file-entry.c:263
-#, fuzzy
 msgid "Default Path"
-msgstr "¦¸¡¼¡ ¿¢¨Ä..."
+msgstr "¦¸¡¼¡ ¿¢¨Äô À¡¨¾"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "§¸¡ôÒ '§Á§Ä¡Î' º¡ÇÃò¾¢ý ¦¸¡¼¡ ¿¢¨Ä À¡¨¾."
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
-msgstr ""
+msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
-msgid ""
-"GnomeEntry that the file entry uses for entering filenames.  You can use "
-"this property to get the GnomeEntry if you need to modify or query any of "
-"its parameters."
+msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
-msgstr ""
+msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:283
-msgid ""
-"GtkEntry that the file entry uses for entering filenames.  You can use this "
-"property to get the GtkEntry if you need to modify or query any of its "
-"parameters."
+msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:528
-#, fuzzy
 msgid "Select file"
-msgstr "Åñ½ò¨¾ò §¾÷× ¦ºö"
+msgstr "§¸¡ôÒ ¦¾Ã¢×¦ºö¸"
 
 #: libgnomeui/gnome-file-entry.c:649
-#, fuzzy
 msgid "Path"
-msgstr "_´ðÎ"
+msgstr "À¡¨¾"
 
 #: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
-msgstr ""
+msgstr "§¸¡ôÀ¢ý À¡¨¾"
 
 #: libgnomeui/gnome-file-entry.c:676
-#, fuzzy
 msgid "_Browse..."
-msgstr "§Á§Ä¡Î..."
+msgstr "_§Á§Ä¡Î..."
 
 #: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "§¸¡ôÒ ¦¾Ã¢×¦ºöÅ¾üÌ '§¸¡ôÒ ¦¾Ã¢× ¯¨ÃÂ¡¼ø' ¸¡ðÎ¸"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
-msgstr ""
+msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "A«BÀCºD¾EþFÀG¸HI³JK¸LÄMÁNÉO´PÀQ·RÃST¼U¯VÅW¿XYÂZÆ"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1100,640 +1065,241 @@ msgstr "´Õ ±ØòÐ Å¨¸¨Â §¾÷ó¦¾Î"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "¦¾Ã¢×¦ºö¾ø ¯¨ÃÂ¡¼ø ¦ÀðÊÂ¢ý ¾¨ÄôÒ"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr ""
+msgstr "Ó¨È¨Á"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
 msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:174
-#, fuzzy
 msgid "Font name"
-msgstr "«î¦ºØòÐ"
+msgstr "±ØòÐÕ ¦ÀÂ÷"
 
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr ""
+msgstr "¦¾Ã¢× ¦ºöÂôÀðÎûÇ ±ØòÐ Å¨¸Â¢ý ¦ÀÂ÷"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184
+#: libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "«î¦ºØòÐ"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr ""
+msgstr "¦¾Ã¢× ¦ºö¾ GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr ""
+msgstr "Óý¸¡ðº¢ ¯¨Ã"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr ""
+msgstr "¯¨ÃÂ¡¼Ä¢ø ¸¡ñÀ¢ì¸ôÀÎõ Óý¸¡ðº¢ ¯¨Ã"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr ""
+msgstr "«¨¼Â¡Çì ÌÈ¢ôÀ¢ø ±ØòÐ Å¨¸¨Âô ÀÂýÀÎòÐ"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
+msgstr "±ØòÐÕ ¾¸Åø Ó¨È¨ÁÂ¢ø «¨¼Â¡Çò¾¢ø ±ØòÐÕ ÒÆí¸×õ"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr ""
+msgstr "«¨¼Â¡Çì ÌÈ¢ôÀ¢ð¸¡É ±ØòÐ Å¨¸¨ÂÂ¢ý «Ç×"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr ""
+msgstr "±ØòÐÕ ¾¸Åø Ó¨È¨ÁÂ¢ø «¨¼Â¡Çò¾¢ü¸¡É ±ØòÐÕ «Ç×"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr ""
+msgstr "«Ç¨Åì ¸¡ñÀ¢"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr ""
+msgstr "±ØòÐÕ ¾¸Åø Ó¨È¨ÁÂ¢ø «Ç× ¸¡ñÀ¢ì¸×õ"
 
 #: libgnomeui/gnome-gconf-ui.c:61
-#, fuzzy
 msgid "GNOME GConf UI Support"
-msgstr "¸§É¡õ GConf ¬¾ÃÅÇ¢ôÒ"
+msgstr "¸§É¡õ GConf UI ¬¾Ã×"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "_Å¢ÅÃí¸û"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
-msgid ""
-"The application \"%s\" attempted to change an aspect of your configuration "
-"that your system administrator or operating system vendor does not allow you "
-"to change. Some of the settings you have selected may not take effect, or "
-"may not be restored next time you use the application."
+msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
 msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
-msgid ""
-"An error occurred while loading or saving configuration information for %s. "
-"Some of your configuration settings may not work properly."
+msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
 msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:177
-msgid ""
-"Unique identifier for the icon entry.  This will be used to save the history "
-"list."
+msgid "Unique identifier for the icon entry.  This will be used to save the history list."
 msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
-msgstr ""
+msgstr "ÌÚõÀ¼í¸Ùì¸¡¸ §Á§Ä¡Î ¯¨ÃÂ¡¼Ä¢ý ¾¨ÄôÒ"
 
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
-msgstr ""
+msgstr "Pixmap «¨¼×"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr ""
+msgstr "ÌÚõÀ¼í¸Ùì¸¡¸ §¾¼ôÀÎõ «¨¼×"
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
-msgstr ""
+msgstr "ÌÚõÀ¼ Ñ¨ÆÅ¢ø ¸¡ñÀ¢ì¸ôÀ¼ §ÅñÊÂ §¸¡ôÒô ¦ÀÂ÷."
 
 #: libgnomeui/gnome-icon-entry.c:210
-#, fuzzy
 msgid "Picker dialog"
-msgstr "´Õ ¿¢Èò¨¾ §¾÷ó¦¾Î"
+msgstr "¦¾Ã¢×¦ºöÔõ ¯¨ÃÂ¡¼ø"
 
 #: libgnomeui/gnome-icon-entry.c:211
-msgid ""
-"Icon picker dialog.  You can use this property to get the GtkDialog if you "
-"need to modify or query any of its properties."
+msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
-#, fuzzy
+#: libgnomeui/gnome-icon-entry.c:320
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
-msgstr "ÌÚõÀ¼õ:"
+msgstr "ÌÚõÀ¼õ þø¨Ä"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:531
+#: libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
+msgstr "hbox ´ý¨Èì ¸¡½Å¢ø¨Ä, º¡¾¡Ã½ §¸¡ôÒ §¾÷¾ø ÒÆí¸ôÀÎõ"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
-#, fuzzy
+#: libgnomeui/gnome-icon-entry.c:537
+#: libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
-msgstr "ÓýÒ"
+msgstr "Óý¸¡ðº¢"
 
 #: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
-msgstr ""
+msgstr "ÌÚõÀ¼ò §¾÷ó¦¾ÎìÌõ ¯¨ÃÂ¡¼ø"
 
 #: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "¯¨ÃÂ¡¼Ä¢ø ÌÚõÀ¼õ ¦¾Ã¢×¦ºöÂÄ¡õ."
 
 #: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
-msgstr ""
+msgstr "ÌÚõÀ¼ò §¾÷ó¦¾ÎôÀÅ÷"
 
 #: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "¯í¸ÙìÌò §¾¨ÅÂ¡É ÌÚõÀ¼ò¨¾ §¾÷ó¦¾Îì¸×õ"
 
 #: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
-msgstr ""
+msgstr "ÌÚõÀ¼ò §¾÷ó¦¾ÎôÀÅ÷"
 
 #: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "¦À¡ò¾¡ý, ÌÚõÀ¼í¸¨Ç ¦¾Ã¢×¦ºöÅ¾ü¸¡É º¡ÇÃò¨¾ ¾¢ÈìÌõ."
 
 #: libgnomeui/gnome-icon-entry.c:1010
-#, fuzzy
 msgid "Browse"
-msgstr "_§Á§Ä¡Ê"
+msgstr "§Á§Ä¡Î..."
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
-msgstr ""
+msgstr "ÌÚõÀ¼ò¾¢ý À¡¨¾"
 
 #: libgnomeui/gnome-icon-entry.c:1013
-msgid ""
-"Here you should enter the name of the directory where icon images are "
-"located."
-msgstr ""
+msgid "Here you should enter the name of the directory where icon images are located."
+msgstr "ÌÚõÀ¼õ þÕìÌõ «¨¼Å¢ý ¦ÀÂ¨Ã þíÌ ¯ûÇ£¼ §ÅñÎõ."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr ""
+msgstr "GnomeIconSelection: '%s' þø¨Ä «øÄÐ «¨¼× ¸¢¨¼Â¡Ð"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr ""
+msgstr "GnomeIconSelection: '%s' «¨¼× ¾¢Èì¸ ÓÊÂÅ¢ø¨Ä"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr ""
+msgstr "ÌÚõÀ¼í¸û ²üÈôÀÎ¸¢ýÈÉ..."
 
 #: libgnomeui/gnome-messagebox.c:108
-#, fuzzy
 msgid "Information"
-msgstr "ÌÚõÀ¼ò¾¢ý ¾¢¨º"
+msgstr "¾¸Åø"
 
 #: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
-msgstr ""
+msgstr "±îºÃ¢ì¨¸"
 
 #: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
-msgstr ""
+msgstr "À¢¨Æ"
 
 #: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
-msgstr ""
+msgstr "§¸ûÅ¢"
 
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
-msgstr ""
+msgstr "¾¸Åø"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
-#, fuzzy
 msgid "Do Preview"
-msgstr "ÓýÒ"
+msgstr "Óý¸¡ðÎ"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "À¢ìÀ¼õ Ñ¨Ç×ìÌ Óý¸¡ðº¢ þÕì¸§ÅñÎÁ¡."
 
-#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:188
+#: libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "¯ÕÅõ ¸¢¨¼Â¡Ð"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "ÓýÒ"
+msgstr "¯ÕÅ Óý¸¡ðº¢"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
-#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr "¾ü§À¡Ð §¾÷ó¦¾Îì¸ôÀðÎûÇ §¿Ãõ"
+msgstr "¾ü§À¡Ð ÌÈ¢ôÀ¢ð¼ ¯ÕÅò¾¢ý Óý¸¡ðº¢"
 
 #: libgnomeui/gnome-scores.c:78
-#, fuzzy
 msgid "Top Ten"
-msgstr "§Áø-­¼Ð"
+msgstr "Ó¾ø ÀòÐ"
 
 #: libgnomeui/gnome-scores.c:91
-#, fuzzy
 msgid "User"
-msgstr "ÀÂÉ÷ ¦ÀÂ÷:"
+msgstr "ÀÂÉ÷"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr ""
+msgstr "ÒûÇ¢"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr ""
+msgstr "%a %b %d %T %Y"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
-msgstr ""
+msgstr "Sans 14"
 
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "GConf À¢¨ÆÂ¢ý Å¢ÅÃí¸û: %s\n"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "ÀÃ¢§º¡¾¨ÉÂ¢Ä¢ÕóÐ ¦ÅÇ¢§ÂÚ"
 
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Gdk À¢¨Æ-¿£ìÌÅ¾ü¸¡¸ «¨Áì¸ §ÅñÊÂ ¦¸¡Ê¸û"
-
-#~ msgid "FLAGS"
-#~ msgstr "¦¸¡Ê¸û"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Gdk À¢¨Æ-¿£ì¸ ÍÆ¢ôÀÎò¾ §ÅñÊÂ ¦¸¡Ê¸û"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "X «¨ÆôÒ¸¨Ç ´ò¾¢Âì¸î ¦ºö"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "À¸¢÷-¿¢¨ÉÅ¸ ¿£ðÊô¨À X'Â¢ø ¯À§Â¡¸¢ì¸ §Åñ¼¡õ"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "º¡ÇÃ§ÁÄ¡Ç÷ ÀÂýÀÎòÐõ ¿¢Ãø ¦ÀÂ÷"
-
-#~ msgid "NAME"
-#~ msgstr "¦ÀÂ÷"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "º¡ÇÃ§ÁÄ¡Ç÷ ÀÂýÀÎòÐõ ¿¢Ãø ÅÌôÒ"
-
-#~ msgid "CLASS"
-#~ msgstr "ÅÌôÒ"
-
-#~ msgid "HOST"
-#~ msgstr "Å¢Õó§¾¡õÒ"
-
-#~ msgid "PORT"
-#~ msgstr "Ð¨È"
-
-#~ msgid "STYLE"
-#~ msgstr "ÀñÒ"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Gtk+ À¢¨Æ ¿£ì¸ «¨Áì¸ §ÅñÊÂ ¦¸¡Ê¸û"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Gtk+ À¢¨Æ ¿£ì¸ ÍÆ¢ôÀÎò¾ §ÅñÊÂ ¦¸¡Ê¸û"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "«¨ÉòÐ ±îº¡¢ì¨¸¸¨ÇÔõ ¦¸¡ø À¢¨ÆÂ¡ìÌ"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "§ÁÖõ µ÷ Gtk Ü¨È¨Â ²üÚ"
-
-#~ msgid "MODULE"
-#~ msgstr "ÜÚ"
-
-#, fuzzy
-#~ msgid "Author"
-#~ msgstr "¬º¢¡¢Â÷:"
-
-#, fuzzy
-#~ msgid "Background start position"
-#~ msgstr "ÌÚõÀ¼ò¾¢ý ­¼õ"
-
-#, fuzzy
-#~ msgid "Background end position"
-#~ msgstr "ÌÚõÀ¼ò¾¢ý ­¼õ"
-
-#, fuzzy
-#~ msgid "Copyright font"
-#~ msgstr "ÀÊÔÃ¢¨Á (C) 1998"
-
-#, fuzzy
-#~ msgid "Comments font"
-#~ msgstr "ÌÈ¢ôÒ¨Ã"
-
-#, fuzzy
-#~ msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-¾Êò¾-r-­ÂøÒ-*-*-180-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-¾Êò¾-r-­ÂøÒ-*-*-180-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "wmhints-test"
-#~ msgstr "wmhints-§º¡¾¨É"
-
-#~ msgid "winhints-test"
-#~ msgstr "wmhints-§º¡¾¨É"
-
-#~ msgid "Layer:"
-#~ msgstr "«ÎìÌ:"
-
-#~ msgid "Above Dock"
-#~ msgstr "Ð¨ÈÂ¢ý §Áø"
-
-#~ msgid "Dock"
-#~ msgstr "Ð¨È"
-
-#~ msgid "On Top"
-#~ msgstr "§Áø"
-
-#~ msgid "Normal"
-#~ msgstr "º¡¾¡Ã½Á¡¸"
-
-#~ msgid "Below"
-#~ msgstr "¸£§Æ"
-
-#~ msgid "Desktop"
-#~ msgstr "¸É¢§Á¨º"
-
-#~ msgid "Set Layer"
-#~ msgstr "«Îì¨¸¨Â «¨Á"
-
-#~ msgid "Workspaces:"
-#~ msgstr "À½¢Â¢¼ô ÀÃôÒ¸û:"
-
-#~ msgid "Sticky"
-#~ msgstr "´ðìÜÎõ"
-
-#~ msgid "Set Workspace"
-#~ msgstr "À½¢Â¢¼ô ÀÃô¨À «¨Á"
-
-#~ msgid "State Toggles:"
-#~ msgstr "¿¢¨Ä Á¡Úõ:"
-
-#~ msgid "Minimized"
-#~ msgstr "þÁ¢¸º¢Ú¾¡¸¢ÂÐ"
-
-#~ msgid "Maximized Vertical"
-#~ msgstr "¦ºíÌò¾Á¡¸ þÁ¢¸ô¦ÀÕ¾¡¸¢ÂÐ"
-
-#~ msgid "Maximized Horizontal"
-#~ msgstr "¦À¡¢¾¡ì¸¢Â ¸¢¨¼"
-
-#~ msgid "Hidden"
-#~ msgstr "Á¨Èó¾Ð"
-
-#~ msgid "Shaded"
-#~ msgstr "¿¢Èõ ¬ìôÀð¼Ð"
-
-#~ msgid "Fixed Position"
-#~ msgstr "­¼õ Á¡È¡Ð"
-
-#~ msgid "Ignore on Arrange"
-#~ msgstr "'«Îì¸¢ ¨Å' §À¡Ð ÒÈì¸½¢"
-
-#~ msgid "Set State"
-#~ msgstr "¿¢¨Ä «¨Á"
-
-#~ msgid "Skip Toggles:"
-#~ msgstr "Á¡üÈí¸¨Çò ¾Å¢÷ ¦ºö:"
-
-#~ msgid "Skip Focus"
-#~ msgstr "ÌÅ¢ò¾ø ¾Å¢÷ ¦ºö"
-
-#~ msgid "Skip Window Menu"
-#~ msgstr "º¡ÇÃô ÀðÊ¨Âò ¾Å¢÷ ¦ºö"
-
-#~ msgid "Skip Taskbar / WinList"
-#~ msgstr "¦ºÂø-ÀðÊ/º¡ÇÃô-ÀðÊ ¾Å¢÷ ¦ºö"
-
-#~ msgid "Set Skip"
-#~ msgstr "¾Å¢÷ «¨Á"
-
-#~ msgid "WIN_HINTS Test"
-#~ msgstr "WIN_HINTS §º¡¾¨É"
-
-#~ msgid ""
-#~ "Simple test app to check how the WIN_HINTS work.\n"
-#~ "And to test the gnome_win_hints_* functions for errors. :)"
-#~ msgstr ""
-#~ "WIN_HINTS ±ôÀÊ §Å¨Ä¦ºöÔõ ±É §º¡¾¨É ¦ºöÂ µ÷ º¡¾¡Ã½ ¿¢Ãø.\n"
-#~ "ÁüÚõ gnome_win_hints_* º¡÷ÀÄý¸¨Ç À¢¨Æì¸¡¸ §º¡¾¨É ¦ºö. :)"
-
-#~ msgid "Loop type"
-#~ msgstr "¸ñ½¢ Å¨¸"
-
-#~ msgid "The type of loop the GnomeAnimator uses"
-#~ msgstr "GnomeAnimator ÀÂýÀÎòÐõ ¸ñ½¢Â¢ý Å¨¸"
-
-#~ msgid "Animation direction"
-#~ msgstr "«¨ºçð¼ò¾¢ý ¾¢¨º"
-
-#~ msgid "Number of frames"
-#~ msgstr "ºð¼¸í¸Ç¢ý ±ñ½õ"
-
-#~ msgid "Total number of frames in animation"
-#~ msgstr "«¨ºçð¼ò¾¢ø ­ÕìÌõ «¨ÉòÐ ºð¼¸í¸Ç¢ý ±ñ½õ"
-
-#~ msgid "Current frame number"
-#~ msgstr "¾ü§À¡¨¾Â ºð¼¸ò¾¢ý ±ñ½õ"
-
-#~ msgid "Animation status"
-#~ msgstr "«¨ºçð¼ò¾¢ý ¿¢Ä¨Á"
-
-#~ msgid "Speed"
-#~ msgstr "§Å¸õ"
-
-#~ msgid "Animation speed"
-#~ msgstr "«¨ºçð¼ò¾¢ý §Å¸õ"
-
-#~ msgid "Name:"
-#~ msgstr "¦ÀÂ÷:"
-
-#~ msgid "Comment:"
-#~ msgstr "ÌÈ¢ôÒ¨Ã:"
-
-#~ msgid "Command:"
-#~ msgstr "¸ð¼¨Ç"
-
-#~ msgid "Type:"
-#~ msgstr "Å¨¸:"
-
-#~ msgid "Run in Terminal"
-#~ msgstr "Ó¨ÉÂò¾¢ø ¦ºÂøÀÎòÐ"
-
-#~ msgid "Simple drag and drop"
-#~ msgstr "º¡¾¡Ã½ ­ØòÐô §À¡Î¾ø"
-
-#~ msgid "Command for file drops:"
-#~ msgstr "§¸¡ôÒ¸¨Ç §À¡ÎÅ¾ðÌ ¸ð¼¨Ç:"
-
-#~ msgid "Drop one file at a time only."
-#~ msgstr "§¸¡ôÒ¸¨Ç ´ý¦È¡ýÈ¡¸ ÁÊÎ§Á §À¡¼×õ."
-
-#~ msgid "Command for URL drops:"
-#~ msgstr "URL¸¨Ç §À¡ÎÅ¾ðÌ ¸ð¼¨Ç:"
-
-#~ msgid "Drop one URL at a time only."
-#~ msgstr "URL¸¨Ç ´ý¦È¡ýÈ¡¸ ÁÊÎ§Á §À¡¼×õ."
-
-#~ msgid "Try this before using:"
-#~ msgstr "­¨¾ Ó¾ø ÓÂüº¢ ¦ºö:"
-
-#~ msgid "Name/Comment translations:"
-#~ msgstr "¦ÀÂ÷/ÌÈ¢ôÒ¨Ã ¦Á¡Æ¢¦ÀÂ÷ôÒ¸û:"
-
-#~ msgid "Language"
-#~ msgstr "¦Á¡Æ¢"
-
-#~ msgid "Add/Set"
-#~ msgstr "§º÷/«¨Á"
-
-#~ msgid "Basic"
-#~ msgstr "«ÊôÀ¨¼"
-
-#~ msgid "Drag and Drop"
-#~ msgstr "­ØòÐô §À¡Î"
-
-#~ msgid "Advanced"
-#~ msgstr "¯Â÷¿¢¨Ä"
-
-#~ msgid "_Embedded"
-#~ msgstr "_¯ð¦À¡¾¢ó¾Ð"
-
-#~ msgid "Show help in a help browser window"
-#~ msgstr "¯¾Å¢-§Á§Ä¡Ê º¡ÇÃò¾¢ðÌû ¯¾Å¢¨Â ¸¡ñÀ¢ì¸×õ"
-
-#~ msgid "App style"
-#~ msgstr "¿¢Ãø À¡½¢"
-
-#~ msgid "The style of GnomeHelpView"
-#~ msgstr "GnomeHelpView'Â¢ý À¡½¢"
-
-#~ msgid "App style priority"
-#~ msgstr "¿¢Ãø À¡½¢Â¢ý ÓýÛÃ¢¨Á"
-
-#~ msgid "The priority of style of GnomeHelpView"
-#~ msgstr "GnomeHelpView'Â¢ý À¡½¢Â¢ý ÓýÛÃ¢¨Á"
-
-#~ msgid "Orientation"
-#~ msgstr "¾¢¨º «¨Á×"
-
-#~ msgid "Show help for a specific region of the application"
-#~ msgstr "¿£ÃÄ¢ý µ÷ ÌÈ¢ôÀ¢ð¼ Áñ¼Äò¾¢ðÌ ¯¾Å¢¨Â ¸¡ñÀ¢ì¸×õ"
-
-#~ msgid "Style"
-#~ msgstr "Å¨¸"
-
-#~ msgid "Change the way help is displayed"
-#~ msgstr "¯¾Å¢ ¸¡ýÀ¢ì¸ôÀÎõ §À¡ì¨¸ Á¡üÚ"
-
-#~ msgid "No help is available for the selected portion of the application."
-#~ msgstr "¿¢ÃÄ¢ý §¾÷¦¾Îì¸ôÀð¼ Áñ¼Äò¾¢ðÌ ¯¾Å¢ ¸¢¨¼Â¡Ð."
-
-#~ msgid "Cought GnomeURL error: %s"
-#~ msgstr "GnomeURL À¢¨Æ À¢Êì¸ôÀð¼Ð: %s"
-
-#~ msgid "Paper Size"
-#~ msgstr "¾¡û «Ç×"
-
-#~ msgid "Portrait"
-#~ msgstr "¯ÕÅô-À¼õ"
-
-#~ msgid "Landscape"
-#~ msgstr "­Âü¨¸ô-À¼õ"
-
-#~ msgid "Margins"
-#~ msgstr "µÃõ"
-
-#~ msgid "Top:"
-#~ msgstr "§Áø:"
-
-#~ msgid "Bottom:"
-#~ msgstr "«ÊôÀÌ¾¢:"
-
-#~ msgid "Left:"
-#~ msgstr "­¼Ð:"
-
-#~ msgid "Right:"
-#~ msgstr "ÅÄÐ:"
-
-#~ msgid "Scaling"
-#~ msgstr "«Ç×Á¡üÈõ"
-
-#~ msgid "Fit to Page"
-#~ msgstr "¾¡û «Ç×ìÌ ¦À¡ÕòÐ"
-
-#~ msgid "Page Setup"
-#~ msgstr "¾¡û «¨Á×"
-
-#~ msgid "Bottom left"
-#~ msgstr "¸£ú-­¼Ð"
-
-#~ msgid "Top right"
-#~ msgstr "§Áø-ÅÄÐ"
-
-#~ msgid "Bottom right"
-#~ msgstr "¸£ú-ÅÄÐ"
-
-#~ msgid "Horizontal"
-#~ msgstr "¸¢¨¼¾¢¨º"
-
-#~ msgid "Vertical"
-#~ msgstr "¦ºíÌò¾õ"
-
-#~ msgid "Tile children"
-#~ msgstr "§ºö¸¨Ç Å¢ø¨ÄÂ¡¸ «ÎìÌ"
-
-#~ msgid "Cascade children"
-#~ msgstr "§ºö¸¨Ç Å¢Ø¦¾¡¼÷¸Ç¡¸ «ÎìÌ"
-
-#~ msgid "Arrange icons"
-#~ msgstr "ÌÚõÀ¼í¸¨Ç «ÎìÌ"
-
-#~ msgid "Autoarrange icons"
-#~ msgstr "ÌÚõÀ¼í¸¨Ç ¾ýÉ¢Âì¸¾¡¸ «ÎìÌ"
-
-#~ msgid "App Specific"
-#~ msgstr "¿¢Ãø ÌÈ¢ò¾Ð"
-
-#~ msgid "bad GnomeRecentDocument attribute: %s\n"
-#~ msgstr "¦¸ð¼ GnomeRecentDocument ÀñÒ: %s\n"
-
-#~ msgid "Unknown"
-#~ msgstr "¦¾Ã¢Â¡¾Ð"
-
-#~ msgid "Password:"
-#~ msgstr "¸¼×î¦º¡ø:"
-
-#~ msgid "Clear..."
-#~ msgstr "ÐôÀÃÅ¡ìÌ..."
-
-#~ msgid "Add"
-#~ msgstr "§º÷"
-
-#~ msgid "OK"
-#~ msgstr "ºÃ¢"
-
-#~ msgid "Apply"
-#~ msgstr "ÀÂýÀÎòÐ"
-
-#~ msgid "Cancel"
-#~ msgstr "¿£ìÌ"
-
-#~ msgid "No"
-#~ msgstr "­ø¨Ä"
-
-#~ msgid "Next"
-#~ msgstr "«Îò¾Ð"
-
-#~ msgid "Up"
-#~ msgstr "§Á§Ä"
-
-#~ msgid "Down"
-#~ msgstr "¸£ú"
