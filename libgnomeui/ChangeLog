@@ -1,3 +1,7 @@
+Wen Nov 18 1998  Tim Gerla   <timg@means.net>
+
+        * gnome-uidefs.h: Fixed another bug. :P
+
 Wed Nov 18 17:12:07 1998  Raph Levien  <raph@gimp.org>
 
 	* Makefile.am: added links to libart_lgpl
