@@ -105,6 +105,21 @@ gnome_app_init (GnomeApp *app)
 	app->pos_menubar = app->pos_toolbar = GNOME_APP_POS_TOP;
 }
 
+
+/**
+ * gnome_app_new
+ * @appname: Name of program, using in file names and paths.
+ * @title: Window title for application.
+ *
+ * Description:
+ * Create a new (empty) application window.  You must specify the
+ * application's name (used internally as an identifier).
+ * @title can be left as NULL, in which case the window's title will
+ * not be set.
+ *
+ * Returns: Pointer to new GNOME app object
+ **/
+
 GtkWidget *
 gnome_app_new(gchar *appname, char *title)
 {
@@ -117,6 +132,17 @@ gnome_app_new(gchar *appname, char *title)
 
 	return GTK_WIDGET (app);
 }
+
+
+/**
+ * gnome_app_construct
+ * @app: Pointer to newly-created GNOME app object.
+ * @appname: Name of program, using in file names and paths.
+ * @title: Window title for application.
+ *
+ * Description:
+ * Constructor for language bindings; you don't normally need this.
+ **/
 
 void 
 gnome_app_construct (GnomeApp *app, gchar *appname, char *title)
@@ -311,6 +337,19 @@ gnome_app_configure_positions (GnomeApp *app)
 		gnome_app_set_contents(app, app->contents);
 }
 
+
+/**
+ * gnome_app_menu_set_position
+ * @app: Pointer to GNOME app object.
+ * @pos_menubar: Indicates position of menu bar.
+ *
+ * Description:
+ * Sets the position of the tool bar within the GNOME app's main window.
+ * Possible @pos_menubar values
+ * are %GNOME_APP_POS_TOP, %GNOME_APP_POS_BOTTOM, and
+ * %GNOME_APP_POS_FLOATING.
+ **/
+
 void
 gnome_app_menu_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_menubar)
 {
@@ -330,6 +369,19 @@ gnome_app_menu_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_menub
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 }
+
+
+/**
+ * gnome_app_toolbar_set_position
+ * @app: Pointer to GNOME app object.
+ * @pos_toolbar: Indicates position of tool bar.
+ *
+ * Description:
+ * Sets the position of the tool bar within the GNOME app's main window.
+ * Possible @pos_menubar values
+ * are %GNOME_APP_POS_TOP, %GNOME_APP_POS_BOTTOM, %GNOME_APP_POS_LEFT,
+ * %GNOME_APP_POS_RIGHT, and %GNOME_APP_POS_FLOATING.
+ **/
 
 void
 gnome_app_toolbar_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_toolbar)
@@ -382,6 +434,16 @@ static const gint endys[2][4] = {
 	{ 3, 2, 3, 3 },
 	{ 2, 1, 2, 2 }
 };
+
+
+/**
+ * gnome_app_set_contents
+ * @app: Pointer to GNOME app object.
+ * @contents: Widget to be application content area.
+ *
+ * Description:
+ * Sets the content area of the GNOME app's main window.
+ **/
 
 void
 gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
@@ -589,6 +651,16 @@ gnome_app_setpos_activate_toolbar (GtkWidget *menu_item, GnomeApp *app)
 		}
 }
 
+
+/**
+ * gnome_app_set_menus
+ * @app: Pointer to GNOME app object.
+ * @menubar: Menu bar widget for main app window.
+ *
+ * Description:
+ * Sets the menu bar of the application window.
+ **/
+
 void
 gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 {
@@ -641,6 +713,16 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
 	        gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 }
+
+
+/**
+ * gnome_app_set_toolbar
+ * @app: Pointer to GNOME app object.
+ * @toolbar: Toolbar widget for main app window.
+ *
+ * Description:
+ * Sets the main toolbar of the application window.
+ **/
 
 void
 gnome_app_set_toolbar (GnomeApp *app,
@@ -705,6 +787,16 @@ gnome_app_set_toolbar (GnomeApp *app,
 	if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
 	        gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 }
+
+
+/**
+ * gnome_app_set_statusbar
+ * @app: Pointer to GNOME app object
+ * @statusbar: Statusbar widget for main app window
+ *
+ * Description:
+ * Sets the status bar of the application window.
+ **/
 
 void
 gnome_app_set_statusbar (GnomeApp *app,

@@ -1,6 +1,6 @@
 Mon Nov 23 17:11:26 EST 1998  Jeff Garzik  <jgarzik@pobox.com>
 
-	* gnome-animator.c: Documented.
+	* gnome-animator.c, gnome-app.c, gnome-appbar.c: Documented.
 	* gnome-app-helper.c, gnome-app-util.c: added doc stubs, some docs.
 
 Mon Nov 23 02:19:09 PST 1998 Manish Singh <yosh@gimp.org>

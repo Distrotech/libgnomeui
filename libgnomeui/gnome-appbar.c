@@ -228,6 +228,28 @@ gnome_appbar_init (GnomeAppBar *ab)
   ab->prompt         = NULL;
 }
 
+
+/**
+ * gnome_appbar_new
+ * @has_progress: %TRUE if appbar needs progress bar widget, %FALSE if not
+ * @has_status: %TRUE if appbar needs status bar widget, %FALSE if not
+ * @interactivity: Level of user activity required
+ *
+ * Description:
+ * Create a new GNOME application status bar.  If @has_progress is
+ * %TRUE, a small progress bar widget will be created, and placed on the
+ * left side of the appbar.  If @has_status is %TRUE, a status bar,
+ * possible an editable one, is created.
+ *
+ * @interactivity declares the level of interactivity required between
+ * the user and the app.  If it is set to %GNOME_PREFERENCES_NEVER, the
+ * status bar is a label.  If it is set to %GNOME_PREFERENCES_USER or
+ * %GNOME_PREFERENCES_ALWAYS the status bar is created as a text entry
+ * widget.
+ *
+ * Returns:  Pointer to new GNOME appbar widget.
+ **/
+
 GtkWidget* 
 gnome_appbar_new (gboolean has_progress,
 		  gboolean has_status,
@@ -239,6 +261,18 @@ gnome_appbar_new (gboolean has_progress,
 
   return GTK_WIDGET(ab);
 }
+
+
+/**
+ * gnome_appbar_construct
+ * @ab: Pointer to GNOME appbar object.
+ * @has_progress: %TRUE if appbar needs progress bar widget.
+ * @has_status: %TRUE if appbar needs status bar widget.
+ * @interactivity: Level of user activity required.
+ *
+ * Description:
+ * For use to bindings in languages other than C. Don't use.
+ **/
 
 void
 gnome_appbar_construct(GnomeAppBar * ab,
@@ -321,6 +355,18 @@ gnome_appbar_construct(GnomeAppBar * ab,
   if (ab->status) gtk_widget_show (ab->status);
 }
 
+
+/**
+ * gnome_appbar_set_prompt
+ * @appbar: Pointer to GNOME appbar object.
+ * @prompt: Text of the prompt message.
+ * @modal: If %TRUE, grabs input.
+ *
+ * Description:
+ * Put a prompt in the appbar and wait for a response. When the
+ * user responds or cancels, a user_response signal is emitted.
+ **/
+
 void
 gnome_appbar_set_prompt (GnomeAppBar * appbar, 
 			 const gchar * prompt,
@@ -342,6 +388,15 @@ gnome_appbar_set_prompt (GnomeAppBar * appbar,
   gnome_appbar_refresh(appbar);
 }
 
+
+/**
+ * gnome_appbar_clear_prompt
+ * @appbar: Pointer to GNOME appbar object
+ *
+ * Description:
+ * Remove any prompt.
+ **/
+
 void       
 gnome_appbar_clear_prompt    (GnomeAppBar * appbar)
 {
@@ -360,6 +415,18 @@ gnome_appbar_clear_prompt    (GnomeAppBar * appbar)
 		  appbar_signals[CLEAR_PROMPT]);  
 }
 
+
+/**
+ * gnome_appbar_get_response
+ * @appbar: Pointer to GNOME appbar object
+ *
+ * Description:
+ * Get the response to the prompt, if any. Result must be g_free'd.
+ *
+ * Returns:
+ * Text from appbar entry widget, as entered by user.
+ **/
+
 gchar *    
 gnome_appbar_get_response    (GnomeAppBar * appbar)
 {
@@ -372,6 +439,16 @@ gnome_appbar_get_response    (GnomeAppBar * appbar)
 				appbar->editable_start, 
 				GTK_ENTRY(appbar->status)->text_length);
 } 
+
+
+/**
+ * gnome_appbar_refresh
+ * @appbar: Pointer to GNOME appbar object
+ *
+ * Description:
+ * Reflect the current state of stack/default. Useful to force a
+ * set_status to disappear.
+ **/
 
 void 
 gnome_appbar_refresh           (GnomeAppBar * appbar)
@@ -407,6 +484,17 @@ gnome_appbar_refresh           (GnomeAppBar * appbar)
   }
 }
 
+
+/**
+ * gnome_appbar_set_status
+ * @appbar: Pointer to GNOME appbar object.
+ * @status: Text to which status label will be set.
+ *
+ * Description:
+ * Sets the status label without changing widget state; next set or push
+ * will destroy this permanently. 
+ **/
+
 void       
 gnome_appbar_set_status       (GnomeAppBar * appbar,
 			       const gchar * status)
@@ -421,6 +509,16 @@ gnome_appbar_set_status       (GnomeAppBar * appbar,
     gtk_label_set(GTK_LABEL(appbar->status), status);
 }
 
+
+/**
+ * gnome_appbar_set_default
+ * @appbar: Pointer to GNOME appbar object
+ * @default_status: Text for status label
+ *
+ * Description:
+ * What to show when showing nothing else; defaults to nothing.
+ **/
+
 void	   
 gnome_appbar_set_default      (GnomeAppBar * appbar,
 			       const gchar * default_status)
@@ -434,6 +532,17 @@ gnome_appbar_set_default      (GnomeAppBar * appbar,
   gnome_appbar_refresh(appbar);
 }
 
+
+/**
+ * gnome_appbar_push
+ * @appbar: Pointer to GNOME appbar object
+ * @status: Text of status message.
+ *
+ * Description:
+ * Push a new status message onto the status bar stack, and
+ * display it.
+ **/
+
 void       
 gnome_appbar_push             (GnomeAppBar * appbar,
 			       const gchar * status)
@@ -446,6 +555,16 @@ gnome_appbar_push             (GnomeAppBar * appbar,
   gnome_appbar_refresh(appbar);
 }
 
+
+/**
+ * gnome_appbar_pop
+ * @appbar: Pointer to GNOME appbar object
+ *
+ * Description:
+ * Remove current status message, and display previous status
+ * message, if any.  It is OK to call this with an empty stack.
+ **/
+
 void       
 gnome_appbar_pop              (GnomeAppBar * appbar)
 {
@@ -455,6 +574,16 @@ gnome_appbar_pop              (GnomeAppBar * appbar)
   appbar->status_stack = stringstack_pop(appbar->status_stack);
   gnome_appbar_refresh(appbar);
 }
+
+
+/**
+ * gnome_appbar_clear_stack
+ * @appbar: Pointer to GNOME appbar object
+ *
+ * Description:
+ * Remove all status messages from appbar, and display default status
+ * message (if present).
+ **/
 
 void       
 gnome_appbar_clear_stack      (GnomeAppBar * appbar)
@@ -467,6 +596,19 @@ gnome_appbar_clear_stack      (GnomeAppBar * appbar)
   gnome_appbar_refresh(appbar);
 }
 
+
+/**
+ * gnome_appbar_set_progress
+ * @ab: Pointer to GNOME appbar object
+ * @percentage: Percentage to which progress bar should be set.
+ *
+ * Description:
+ * Sets progress bar to the given percentage.
+ * Pure sugar - with a bad name, in light of the get_progress name
+ * which is not the opposite of set_progress. Maybe this function
+ * should die. 
+ **/
+
 void
 gnome_appbar_set_progress(GnomeAppBar *ab,
 			  gfloat percentage)
@@ -477,6 +619,19 @@ gnome_appbar_set_progress(GnomeAppBar *ab,
 
   gtk_progress_bar_update(GTK_PROGRESS_BAR(ab->progress), percentage);
 }
+
+
+/**
+ * gnome_appbar_get_progress
+ * @ab: Pointer to GNOME appbar object
+ *
+ * Description:
+ * Returns &GtkProgress widget pointer, so that the progress bar may be
+ * manipulated further.
+ *
+ * Returns:
+ * Pointer to appbar's progress bar object.
+ **/
 
 GtkProgress* 
 gnome_appbar_get_progress    (GnomeAppBar * ab)
