@@ -27,9 +27,7 @@
 #  include <config.h>
 #endif
 
-#include "gnome-gconf.h"
-
-#include <gconf/gconf-client.h>
+#include <stdio.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdkx.h>
 
@@ -599,6 +597,7 @@ static GnomeStockCursor default_cursors[] = {
 static const gint num_default_cursors = sizeof(default_cursors)/sizeof(GnomeStockCursor);
 
 
+#if 0
 static void
 build_cursor_table (void)
 {
@@ -635,6 +634,7 @@ build_cursor_table (void)
 		g_free (cursorstr);
 	}
 }
+#endif
 
 
 /**
@@ -804,9 +804,11 @@ gnome_stock_cursor_new (const char *cursorname)
 
         /* FIXME if GdkCursor had a refcount we could cache that
            instead of the pixmap/bitmap */
-        
+
+#if 0        
 	if (!cursortable)
 		build_cursor_table ();
+#endif
 	
 	cursor = g_hash_table_lookup (cursortable, cursorname);
 	
@@ -906,8 +908,10 @@ gnome_stock_cursor_register (GnomeStockCursor *cursor)
 {
 	GnomeStockCursor *old_cursor;
         
+#if 0
 	if (!cursortable)
 		build_cursor_table ();
+#endif
 
         g_return_if_fail (cursor != NULL);
         g_return_if_fail (cursor->pmap == NULL);
@@ -933,8 +937,10 @@ gnome_stock_cursor_register (GnomeStockCursor *cursor)
 GnomeStockCursor*
 gnome_stock_cursor_lookup_entry(const char *cursorname)
 {
+#if 0
 	if (!cursortable)
 		build_cursor_table ();
+#endif
 	
 	return g_hash_table_lookup (cursortable, cursorname);
 }

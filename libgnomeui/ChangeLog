@@ -1,5 +1,9 @@
 2001-06-12  Martin Baulig  <baulig@suse.de>
 
+	* gnome-cursors.c (build_cursor_table): Commented this out.
+	(FIXME: gnome-cursors.[ch] will go away, fix all code which is still
+	using it).
+
 	* gnome-gconf.[ch]: Removed.
 
 2001-06-11  Cody Russell  <bratsche@gnome.org>
