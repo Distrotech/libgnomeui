@@ -1,3 +1,10 @@
+2005-01-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-app.c: (gnome_app_instance_init): Make
+	gnome-app mor robust when created without calling
+	gnome_program_init(). Closes bug #164948. Patch from
+	<scott at asofyet org>
+
 2005-01-25  Fernando Herrera  <fherrera@onirica.com>
 
 	* libgnomeui/gnome-thumbnail.c: (expand_thumbnailing_script),

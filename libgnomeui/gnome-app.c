@@ -195,6 +195,7 @@ static void
 gnome_app_instance_init (GnomeApp *app)
 {
 	const char *icons = NULL;
+	GnomeProgram * program;
 		
 	app->_priv = NULL;
 	/* XXX: when there is some private stuff enable this
@@ -216,7 +217,10 @@ gnome_app_instance_init (GnomeApp *app)
 	
 	app->enable_layout_config = TRUE;
 
-	g_object_get (G_OBJECT (gnome_program_get ()),
+	program = gnome_program_get ();
+	if (program == NULL)
+		g_error ("You must call gnome_program_init() before creating a GnomeApp");
+	g_object_get (G_OBJECT (program),
 		      LIBGNOMEUI_PARAM_DEFAULT_ICON, &icons,
 		      NULL);
 
