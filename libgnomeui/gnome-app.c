@@ -409,6 +409,23 @@ gnome_app_set_statusbar_custom (GnomeApp *app,
 	gtk_box_pack_start (GTK_BOX (app->vbox), container, FALSE, FALSE, 0);
 }
 
+/**
+ * gnome_app_add_toolbar:
+ * @app: A &GnomeApp widget
+ * @toolbar: Toolbar to be added to @app's dock
+ * @name: Name for the dock item that will contain @toolbar
+ * @behavior: Behavior for the new dock item
+ * @placement: Placement for the new dock item
+ * @band_num: Number of the band where the dock item should be placed
+ * @band_position: Position of the new dock item in band @band_num
+ * @offset: Offset from the previous dock item in the band; if there is
+ * no previous item, offset from the beginning of the band.
+ *
+ * Create a new &GnomeDockItem widget containing @toolbar, and add it
+ * to @app's dock with the specified layout information.  Notice that,
+ * if automatic layout configuration is enabled, the layout is
+ * overridden by the saved configuration, if any.
+ **/
 void
 gnome_app_add_toolbar (GnomeApp *app,
 		       GtkToolbar *toolbar,
@@ -509,6 +526,20 @@ gnome_app_set_toolbar (GnomeApp *app,
 }
 
 
+/**
+ * gnome_app_add_docked:
+ * @app: A &GnomeApp widget
+ * @item: Dock item to be added to @app's dock.
+ * @placement: Placement for the dock item
+ * @band_num: Number of the band where the dock item should be placed
+ * @band_position: Position of the dock item in band @band_num
+ * @offset: Offset from the previous dock item in the band; if there is
+ * no previous item, offset from the beginning of the band.
+ * 
+ * Add @item according to the specified layout information.  Notice
+ * that, if automatic layout configuration is enabled, the layout is
+ * overridden by the saved configuration, if any.
+ **/
 void
 gnome_app_add_dock_item (GnomeApp *app,
 			 GnomeDockItem *item,
@@ -538,6 +569,23 @@ gnome_app_add_dock_item (GnomeApp *app,
 	}
 }
 
+/**
+ * gnome_app_add_docked:
+ * @app: A &GnomeApp widget
+ * @widget: Widget to be added to the &GnomeApp
+ * @name: Name for the new dock item
+ * @behavior: Behavior for the new dock item
+ * @placement: Placement for the new dock item
+ * @band_num: Number of the band where the dock item should be placed
+ * @band_position: Position of the new dock item in band @band_num
+ * @offset: Offset from the previous dock item in the band; if there is
+ * no previous item, offset from the beginning of the band.
+ * 
+ * Add @widget as a dock item according to the specified layout
+ * information.  Notice that, if automatic layout configuration is
+ * enabled, the layout is overridden by the saved configuration, if
+ * any.
+ **/
 void
 gnome_app_add_docked (GnomeApp *app,
 		      GtkWidget *widget,
@@ -556,12 +604,30 @@ gnome_app_add_docked (GnomeApp *app,
 				 placement, band_num, band_position, offset);
 }
 
+/**
+ * gnome_app_enable_layout_config:
+ * @app: A &GnomeApp widget
+ * @enable: Boolean specifying whether automatic configuration saving
+ * is enabled
+ * 
+ * Specify whether @app should automatically save the dock's
+ * layout configuration via gnome-config whenever it changes or not.
+ **/
 void
 gnome_app_enable_layout_config (GnomeApp *app, gboolean enable)
 {
 	app->enable_layout_config = enable;
 }
 
+/**
+ * gnome_app_get_dock_item_by_name:
+ * @app: A &GnomeApp widget
+ * @name: Name of the dock item to retrieve
+ * 
+ * Retrieve the dock item whose name matches @name.
+ * 
+ * Return value: The retrieved dock item.
+ **/
 GnomeDockItem *
 gnome_app_get_dock_item_by_name (GnomeApp *app,
 				 const gchar *name)
@@ -585,6 +651,14 @@ gnome_app_get_dock_item_by_name (GnomeApp *app,
 	}
 }
 
+/**
+ * gnome_app_get_dock:
+ * @app: A &GnomeApp widget
+ * 
+ * Retrieves the &GnomeDock widget contained in the &GnomeApp.
+ * 
+ * Returns: The &GnomeDock widget.
+ **/
 GnomeDock *
 gnome_app_get_dock (GnomeApp *app)
 {
