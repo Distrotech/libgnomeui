@@ -70,8 +70,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-pixmap.c			\
         gnome-winhints.c		\
 	gnometypes.c			\
-	gtk-clock.c			\
-	gtkdial.c			\
 	gnome-icon-list.c		\
 	gnome-icon-item.c		\
 	gnome-icon-text.c		\
@@ -109,8 +107,6 @@ gnome_headers = \
 	gnome-types.h			\
 	gnome-uidefs.h			\
         gnome-winhints.h		\
-	gtkdial.h			\
-	gtk-clock.h			\
 	gnome-vfs-util.h		\
 	gnome-window.h			\
 	oafgnome.h

@@ -1,5 +1,9 @@
 2001-07-18  Martin Baulig  <baulig@suse.de>
 
+	* gtkdial.[ch], gtk-clock.[ch]: Removed.
+
+2001-07-18  Martin Baulig  <baulig@suse.de>
+
 	* gnome-mdi-child.[ch], gnome-mdi-generic-child.[ch],
 	gnome-mdi-session.[ch], gnome-mdi.[ch], gnome-roo.[ch],
 	gnome-pouch.[ch]: Removed.

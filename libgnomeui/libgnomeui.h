@@ -54,8 +54,6 @@
 #include <libgnomeui/gnome-types.h>
 #include <libgnomeui/gnome-stock-icons.h>
 #include <libgnomeui/gnome-client.h>
-#include <libgnomeui/gtk-clock.h>
-#include <libgnomeui/gtkdial.h>
 #include <libgnomeui/gnome-dateedit.h>
 #include <libgnomeui/gnometypebuiltins.h>
 #include <libgnomeui/gnome-winhints.h>
