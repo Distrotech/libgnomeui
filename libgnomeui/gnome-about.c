@@ -66,11 +66,11 @@ typedef struct
   gint logo_w, logo_h;
   gint w, h;
   GdkColor light_green;
-  GdkFont *font_title, 
-          *font_copyright, 
-          *font_author, 
-          *font_names,
-          *font_comments; 
+  GdkFont *font_title,
+	  *font_copyright,
+	  *font_author,
+	  *font_names,
+	  *font_comments;
 } GnomeAboutInfo;
 
 enum {
@@ -169,6 +169,7 @@ gnome_about_repaint (GtkWidget *widget,
   GdkColor *light_green = &gai->light_green;
   GList *name;
   static GdkGC *gc = NULL;
+  GdkFont *font;
   int h, y, x;
 
   if (gc == NULL)
@@ -451,8 +452,9 @@ gnome_about_calc_size (GnomeAboutInfo *gai)
    DESCRIPTION:	
    ---------------------------------------------------------------------- */
 
-GnomeAboutInfo
-*gnome_fill_info (gchar	*title,
+static GnomeAboutInfo
+*gnome_fill_info (GtkWidget *widget,
+		gchar	*title,
 		gchar	*version,
 		gchar   *copyright,
 		gchar   **authors,
@@ -463,6 +465,7 @@ GnomeAboutInfo
   GdkColor light_green = {0, 51914, 64764, 44718};
   GList *l;
   gchar *s;
+  GtkStyle *style;
 
   /* alloc mem for struct */
   gai = malloc (sizeof(GnomeAboutInfo)); 
@@ -470,12 +473,22 @@ GnomeAboutInfo
     return NULL;
 
   /* Create fonts */
-  gai->font_title = gdk_font_load (HELVETICA_20_BFONT);   
-  gai->font_copyright = gdk_font_load (HELVETICA_14_BFONT);   
-  gai->font_author = gdk_font_load (HELVETICA_12_BFONT);   
-  gai->font_names = gdk_font_load (HELVETICA_12_FONT);   
-  gai->font_comments = gdk_font_load (HELVETICA_10_FONT);   
-
+  /* FIXME: dirty hack, but it solves i18n problem without rewriting the
+     drawing code..  */
+  style = gtk_style_ref (widget->style);
+  gtk_widget_set_name (widget, "Title");
+  gai->font_title = gdk_font_ref (widget->style->font);
+  gtk_widget_set_name (widget, "Copyright");
+  gai->font_copyright = gdk_font_ref (widget->style->font);
+  gtk_widget_set_name (widget, "Author");
+  gai->font_author = gdk_font_ref (widget->style->font);
+  gtk_widget_set_name (widget, "Names");
+  gai->font_names = gdk_font_ref (widget->style->font);
+  gtk_widget_set_name (widget, "Comments");
+  gai->font_comments = gdk_font_ref (widget->style->font);
+  gtk_widget_set_style (widget, style);
+  gtk_style_unref (style);
+  
   /* Add color */
   memcpy (&gai->light_green, &light_green, sizeof (GdkColor));
 /*   gdk_color_alloc (gdk_colormap_get_system (), &gai->light_green); */
@@ -556,6 +569,13 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
   if (gai->comments)
     free (gai->comments);
 
+  /* Free GUI's. */
+  gdk_font_unref (gai->font_title);
+  gdk_font_unref (gai->font_copyright);
+  gdk_font_unref (gai->font_author);
+  gdk_font_unref (gai->font_names);
+  gdk_font_unref (gai->font_comments);
+
   /* Free memory used for authors */
   tmp = gai->names;
   while (tmp)
@@ -615,11 +635,6 @@ gnome_about_new (gchar	*title,
   gtk_window_set_title (GTK_WINDOW (about), _("About"));
   gtk_window_set_policy (GTK_WINDOW (about), FALSE, FALSE, TRUE);
 
-  ai = gnome_fill_info (title, version, 
-			copyright, authors, 
-			comments, logo);
-  
-  w = ai->w; h = ai->h;
   //x = (gdk_screen_width ()  - w) / 2;
   //y = (gdk_screen_height () - h) / 2;   
   //gtk_widget_set_uposition ( GTK_WIDGET (about), x, y);
@@ -639,12 +654,19 @@ gnome_about_new (gchar	*title,
   drawing_area = gtk_drawing_area_new ();
 
   /* Make it have white bg color */
-  style = gtk_style_new ();
-  style->bg[GTK_STATE_NORMAL].red   = (gushort) 65535;
-  style->bg[GTK_STATE_NORMAL].green = (gushort) 65535;
-  style->bg[GTK_STATE_NORMAL].blue  = (gushort) 65535; 
-  gtk_widget_set_style (drawing_area, style);
-  gtk_style_unref(style);
+  gtk_widget_set_name (drawing_area, "DrawingArea");
+  gtk_container_add (GTK_CONTAINER (frame), drawing_area);
+  style = gtk_widget_get_style (drawing_area);
+
+  ai = gnome_fill_info (drawing_area,
+			title, version, 
+			copyright, authors, 
+			comments, logo);
+  
+  w = ai->w; h = ai->h;
+  //x = (gdk_screen_width ()  - w) / 2;
+  //y = (gdk_screen_height () - h) / 2;   
+  //gtk_widget_set_uposition ( GTK_WIDGET (about), x, y);
 
   if (logo)
     {
@@ -667,7 +689,6 @@ gnome_about_new (gchar	*title,
   gtk_signal_connect (GTK_OBJECT (drawing_area), "expose_event",
                       (GtkSignalFunc) gnome_about_repaint, (gpointer) ai);
 
-  gtk_container_add (GTK_CONTAINER (frame), drawing_area);
   gtk_widget_show (drawing_area);
                                                  
 
@@ -676,6 +697,7 @@ gnome_about_new (gchar	*title,
   gtk_widget_show (separator);
 
   hbox = gtk_hbox_new (FALSE, 0);
+
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
   gtk_widget_show (hbox);
 

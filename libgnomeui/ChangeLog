@@ -1,3 +1,10 @@
+Wed Feb 18 17:03:13 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gnome-about.c (gnome_destroy_about): Fixed refcounting.
+	(gnome_fill_info, gnome_about_new): Fixed I18N problem.  (but a
+ 	dirty hack, it uses ONLY the fonts from gtkrc.).
+	* gtkrc: Moved GnomeAbout styles to here.
+
 1998-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-init.c (gnome_init): At last!  The horribly broken
