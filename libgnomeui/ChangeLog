@@ -1,3 +1,8 @@
+1999-06-20  Michael Zucchi  <mzucchi@zedzone.mmc.com.au>
+
+	* Makefile.am (INCLUDES): Added AUDIOFILE/ESD_CFLAGS to includes,
+	so that they can be installed in a different prefix.
+
 1999-06-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-text.c: Reverted Elliot's unportable changes.
