@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
-"PO-Revision-Date: 2002-05-22 22:03+0300\n"
+"POT-Creation-Date: 2002-07-21 05:17+0200\n"
+"PO-Revision-Date: 2002-07-22 20:10+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -107,11 +107,11 @@ msgid "Translator credits"
 msgstr "Kääntäjä"
 
 #: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Ohjelman kääntäjät. Tämä merkkijono pitäisi merkitä käännettäväksi."
 
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
@@ -192,7 +192,8 @@ msgstr "Avaa värinvalintaikkuna"
 msgid "Pick a color"
 msgstr "Valitse väri"
 
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+#: libgnomeui/gnome-dateedit.c:479
+#: libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "Aika"
 
@@ -232,7 +233,8 @@ msgstr "Aika alussa"
 msgid "The initial time"
 msgstr "Alussa näkyvä aika"
 
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:739
+#: libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "Päivämäärä"
 
@@ -259,9 +261,7 @@ msgstr "Valitse aika luettelosta"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date on vanhentunut: käytä gnome_date_edit_get_time'a "
-"sen sijaan."
+msgstr "gnome_date_edit_get_date on vanhentunut: käytä gnome_date_edit_get_time'a sen sijaan."
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -399,11 +399,9 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Tämä painike vie näyttämälleen URI:lle."
 
 #: libgnomeui/gnome-href.c:393
-msgid ""
-"Error occured while trying to launch the URL handler.\n"
+msgid "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
-msgstr ""
-"Virhe tapahtui yrittäessä käynnistää URL-käsittelintä.\n"
+msgstr "Virhe tapahtui yrittäessä käynnistää URL-käsittelintä.\n"
 "Tarkista, että Hallintakeskuksen asetukset ovat oikein."
 
 #: libgnomeui/gnome-ui-init.c:113
@@ -425,11 +423,9 @@ msgstr "Monia muistialueen ylityksiä tapahtui: virheikkunaa ei voi näyttää\n
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:605
-msgid ""
-"Segmentation fault!\n"
+msgid "Segmentation fault!\n"
 "Cannot display crash dialog\n"
-msgstr ""
-"Muistinkäsittelyvirhe!\n"
+msgstr "Muistinkäsittelyvirhe!\n"
 "Ei voi näyttää kaatumisikkunaa\n"
 
 #: libgnomeui/gnome_segv.c:100
@@ -437,16 +433,13 @@ msgstr ""
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
+"When you close this dialog, all applications will close and your session will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 "GNOME-istunnonhallinta (prosessi %d) on kaatunut\n"
 "vakavaan virheeseen (%s).\n"
-"Kun suljet tämän valintaikkunan, kaikki ohjelmat sulkeutuvat ja tämä istunto "
-"loppuu.\n"
-"Tallenna kaikki avoinna olevat tiedostot ennen tämän valintaikkunan "
-"sulkemista."
+"Kun suljet tämän valintaikkunan, kaikki ohjelmat sulkeutuvat ja tämä istunto loppuu.\n"
+"Tallenna kaikki avoinna olevat tiedostot ennen tämän valintaikkunan sulkemista."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -454,8 +447,7 @@ msgid ""
 "Application \"%s\" (process %d) has crashed\n"
 "due to a fatal error.\n"
 "(%s)"
-msgstr ""
-"Sovellus \"%s\" (prosessi %d) on kaatunut vakavaan virheeseen.\n"
+msgstr "Sovellus \"%s\" (prosessi %d) on kaatunut vakavaan virheeseen.\n"
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:122
@@ -523,7 +515,9 @@ msgid "Hint for item 2"
 msgstr "Kohdan 2 vinkki"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:82
+#: libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
@@ -531,7 +525,8 @@ msgstr "_Tiedosto"
 msgid "_File/"
 msgstr "_Tiedosto/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84
+#: libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Muokkaa"
 
@@ -539,7 +534,8 @@ msgstr "_Muokkaa"
 msgid "_Edit/"
 msgstr "_Muokkaa/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86
+#: libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Näytä"
 
@@ -547,7 +543,8 @@ msgstr "_Näytä"
 msgid "_View/"
 msgstr "_Näytä/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88
+#: libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Asetukset"
 
@@ -556,7 +553,8 @@ msgid "_Settings/"
 msgstr "_Asetukset/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90
+#: libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Uusi"
 
@@ -564,7 +562,8 @@ msgstr "_Uusi"
 msgid "_New/"
 msgstr "_Uusi/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92
+#: libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Tie_dostot"
 
@@ -572,15 +571,19 @@ msgstr "Tie_dostot"
 msgid "Fi_les/"
 msgstr "Tie_dostot/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94
+#: libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Ikkunat"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+#: libgnomeui/gnome-app-helper.c:95
+#: libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Peli"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: libgnomeui/gnome-app-helper.c:96
+#: libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -747,8 +750,8 @@ msgstr "Korvaa merkkijono toisella"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
-msgstr "_Ominaisuudet..."
+msgid "_Properties"
+msgstr "_Ominaisuudet"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -759,8 +762,8 @@ msgstr "Muokkaa tiedoston ominaisuuksia"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
-msgstr "_Asetukset..."
+msgid "Prefere_nces"
+msgstr "_Asetukset"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -772,10 +775,12 @@ msgstr "Määrittele ohjelman asetukset"
 #.
 #. About
 #: libgnomeui/gnome-app-helper.c:221
+#: test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Tietoja"
 
 #: libgnomeui/gnome-app-helper.c:222
+#: test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Tietoja tästä ohjelmasta"
 
@@ -803,6 +808,7 @@ msgid "_Close This Window"
 msgstr "_Sulje tämä ikkuna"
 
 #: libgnomeui/gnome-app-helper.c:240
+#: test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Sulje tämä ikkuna"
 
@@ -947,7 +953,8 @@ msgstr "Ohjelman ID"
 msgid "The application ID string"
 msgstr "Ohjelman ID-merkkijono"
 
-#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-entry.c:193
+#: libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Historiikin id"
 
@@ -959,17 +966,17 @@ msgstr "GTK-tekstikenttä"
 msgid "The GTK entry"
 msgstr "GTK-tekstikenttä"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:175
+#: libgnomeui/gnome-file-entry.c:220
+#: libgnomeui/gnome-icon-entry.c:175
 msgid "History ID"
 msgstr "Historiikin ID"
 
 #: libgnomeui/gnome-file-entry.c:221
-msgid ""
-"Unique identifier for the file entry.  This will be used to save the history "
-"list."
+msgid "Unique identifier for the file entry.  This will be used to save the history list."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
+#: libgnomeui/gnome-file-entry.c:229
+#: libgnomeui/gnome-icon-entry.c:184
 msgid "Browse Dialog Title"
 msgstr "Selausikkunan otsikko"
 
@@ -982,9 +989,7 @@ msgid "Directory Entry"
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:238
-msgid ""
-"Whether the file entry is being used to enter directory names or complete "
-"filenames."
+msgid "Whether the file entry is being used to enter directory names or complete filenames."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:246
@@ -995,7 +1000,8 @@ msgstr "Modaalinen"
 msgid "Whether the Browse file window should be modal."
 msgstr "Onko selausikkuna modaalinen."
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:200
+#: libgnomeui/gnome-file-entry.c:254
+#: libgnomeui/gnome-icon-entry.c:200
 msgid "Filename"
 msgstr "Tiedostonimi"
 
@@ -1016,10 +1022,7 @@ msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
-msgid ""
-"GnomeEntry that the file entry uses for entering filenames.  You can use "
-"this property to get the GnomeEntry if you need to modify or query any of "
-"its parameters."
+msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:282
@@ -1027,10 +1030,7 @@ msgid "GtkEntry"
 msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:283
-msgid ""
-"GtkEntry that the file entry uses for entering filenames.  You can use this "
-"property to get the GtkEntry if you need to modify or query any of its "
-"parameters."
+msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:527
@@ -1085,7 +1085,8 @@ msgstr "Kirjasimen nimi"
 msgid "Name of the selected font"
 msgstr "Valitun kirjasimen nimi"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184
+#: libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Kirjasinlaji"
 
@@ -1135,33 +1136,17 @@ msgstr "_Lisätiedot"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
-msgid ""
-"The application \"%s\" attempted to change an aspect of your configuration "
-"that your system administrator or operating system vendor does not allow you "
-"to change. Some of the settings you have selected may not take effect, or "
-"may not be restored next time you use the application."
-msgstr ""
-"Sovellus \"%s\" yritti muuttaa joitakin asetuksistasi, joiden muokkaamista "
-"järjestelmäsi ylläpitäjä tai käyttöjärjestelmän toimittaja ei salli. Eräät "
-"asetuksista eivät välttämättä tule voimaan, tai ne palautuvat takaisin "
-"alkuperäisiksi käyttäessäsi ohjelmaa seuraavan kerran."
+msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
+msgstr "Sovellus \"%s\" yritti muuttaa joitakin asetuksistasi, joiden muokkaamista järjestelmäsi ylläpitäjä tai käyttöjärjestelmän toimittaja ei salli. Eräät asetuksista eivät välttämättä tule voimaan, tai ne palautuvat takaisin alkuperäisiksi käyttäessäsi ohjelmaa seuraavan kerran."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
-msgid ""
-"An error occurred while loading or saving configuration information for %s. "
-"Some of your configuration settings may not work properly."
-msgstr ""
-"Virhe tapahtui ladatessa tai tallentaessa ohjelman %s asetustietoja. Jotkin "
-"asetuksistasi eivät välttämättä toimi kunnolla."
+msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
+msgstr "Virhe tapahtui ladatessa tai tallentaessa ohjelman %s asetustietoja. Jotkin asetuksistasi eivät välttämättä toimi kunnolla."
 
 #: libgnomeui/gnome-icon-entry.c:176
-msgid ""
-"Unique identifier for the icon entry.  This will be used to save the history "
-"list."
-msgstr ""
-"Kuvakekohdan yksilöllinen tunniste. Tätä käytetään historiikkiluettelon "
-"tallentamiseen."
+msgid "Unique identifier for the icon entry.  This will be used to save the history list."
+msgstr "Kuvakekohdan yksilöllinen tunniste. Tätä käytetään historiikkiluettelon tallentamiseen."
 
 #: libgnomeui/gnome-icon-entry.c:185
 msgid "Title for the Browse icon dialog."
@@ -1184,20 +1169,21 @@ msgid "Picker dialog"
 msgstr "Valitsinikkuna"
 
 #: libgnomeui/gnome-icon-entry.c:210
-msgid ""
-"Icon picker dialog.  You can use this property to get the GtkDialog if you "
-"need to modify or query any of its properties."
+msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
+#: libgnomeui/gnome-icon-entry.c:319
+#: libgnomeui/gnome-icon-entry.c:981
 msgid "No Icon"
 msgstr "Ei kuvaketta"
 
-#: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:530
+#: libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Hboxia ei löydy, käytetään tavallista tiedostonvalintaa"
 
-#: libgnomeui/gnome-icon-entry.c:536 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:536
+#: libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Esikatselu"
 
@@ -1234,9 +1220,7 @@ msgid "Icon path"
 msgstr "Kuvakkeen polku"
 
 #: libgnomeui/gnome-icon-entry.c:1011
-msgid ""
-"Here you should enter the name of the directory where icon images are "
-"located."
+msgid "Here you should enter the name of the directory where icon images are located."
 msgstr "Tähän voit kirjoittaa hakemiston, jossa kuvakkeita on."
 
 #: libgnomeui/gnome-icon-sel.c:293
@@ -1281,7 +1265,8 @@ msgstr "Esikatselu"
 msgid "Whether the pixmap entry should have a preview."
 msgstr ""
 
-#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:188
+#: libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "Ei kuvaa"
 
@@ -1316,849 +1301,7 @@ msgstr "%a %d. %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "_Contents"
-#~ msgstr "_Sisältö"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Lopeta testi"
 
-#~ msgid "Exit the test"
-#~ msgstr "Lopeta testi"
-
-#~ msgid "_Print"
-#~ msgstr "T_ulosta"
-
-#~ msgid "C_ut"
-#~ msgstr "_Leikkaa"
-
-#~ msgid "Find _Again"
-#~ msgstr "Etsi uu_destaan"
-
-#~ msgid "_Preferences..."
-#~ msgstr "_Asetukset..."
-
-#~ msgid "Both text and icons"
-#~ msgstr "Sekä teksti että kuvakkeet"
-
-#~ msgid "Both text and icons when horizontal, just icons when vertical"
-#~ msgstr ""
-#~ "Sekä teksti että kuvakkeet kun vaaka-asennossa, pystyssä vain kuvakkeet"
-
-#~ msgid "E_xit"
-#~ msgstr "_Lopeta"
-
-#~ msgid "Exit the program"
-#~ msgstr "Lopeta ohjelma"
-
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "GConfin virhetiedot: %s\n"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Asetettavat Gdk:n vianmääritysliput"
-
-#~ msgid "FLAGS"
-#~ msgstr "LIPUT"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Poistettavat Gdk:n vianmääritysliput"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Tee X-kutsuista synkronisia"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "Älä käytä X:n jaettu muisti -laajennusta"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Ikkunanhallinnan ohjelmasta käyttämä nimi"
-
-#~ msgid "NAME"
-#~ msgstr "NIMI"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Ikkunanhallinnan ohjelmalle määrittämä luokka"
-
-#~ msgid "CLASS"
-#~ msgstr "LUOKKA"
-
-#~ msgid "HOST"
-#~ msgstr "KONE"
-
-#~ msgid "PORT"
-#~ msgstr "PORTTI"
-
-#~ msgid "STYLE"
-#~ msgstr "TYYLI"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Asetettavat Gtk+:n vianmääritysliput"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Poistettavat Gtk+:n vianmääritysliput"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Tee kaikista varoituksista virheitä"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Lataa Gtk-lisämoduuli"
-
-#~ msgid "MODULE"
-#~ msgstr "MODUULI"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
-
-#~ msgid "Author"
-#~ msgstr "Tekijä"
-
-#~ msgid "Background"
-#~ msgstr "Tausta"
-
-#~ msgid "The background pixbuf to use"
-#~ msgstr "Käytettävä taustan kuvapuskuri"
-
-#~ msgid "Background start opacity"
-#~ msgstr "Taustan alun peittävyys"
-
-#~ msgid "Opacity at the start of the background"
-#~ msgstr "Peittävyys taustan alkuosassa"
-
-#~ msgid "Background end opacity"
-#~ msgstr "Taustan lopun peittävyys"
-
-#~ msgid "Opacity at the end of the background"
-#~ msgstr "Peittävyys taustan loppuosassa"
-
-#~ msgid "Background start position"
-#~ msgstr "Taustan alun sijainti"
-
-#~ msgid "Position at the start of the background"
-#~ msgstr "Paikka, josta tausta alkaa"
-
-#~ msgid "Background end position"
-#~ msgstr "Taustan lopun sijainti"
-
-#~ msgid "Position at the end of the background"
-#~ msgstr "Paikka, johon tausta loppuu"
-
-#~ msgid "Logo top padding"
-#~ msgstr "Väli ennen logoa"
-
-#~ msgid "How far the logo is from the top"
-#~ msgstr "Kuinka kaukana logo on ylhäältä"
-
-#~ msgid "Logo right padding"
-#~ msgstr "Väli oikealla"
-
-#~ msgid "How far the logo is from the right"
-#~ msgstr "Kuinka kaukana logo on oikealta"
-
-#~ msgid "Header font"
-#~ msgstr "Otsikon kirjasin"
-
-#~ msgid "Header font description as a string"
-#~ msgstr "Otsikon kirjasinkuvaus merkkijonona"
-
-#~ msgid "Copyright font"
-#~ msgstr "Tekijänoikeuksien kirjasin"
-
-#~ msgid "Copyright font description as a string"
-#~ msgstr "Tekijänoikeustekstin kirjasinkuvaus merkkijonona"
-
-#~ msgid "Comments font"
-#~ msgstr "Kommenttikirjasin"
-
-#~ msgid "Comments font description as a string"
-#~ msgstr "Kommenttien kirjasinkuvaus merkkijonona"
-
-#~ msgid "Name header font"
-#~ msgstr "Nimiotsikon kirjasin"
-
-#~ msgid "Name header font description as a string"
-#~ msgstr "Nimiotsikon kirjasinkuvaus merkkijonona"
-
-#~ msgid "Name list font"
-#~ msgstr "Nimiluettelon kirjasin"
-
-#~ msgid "Name list font description as a string"
-#~ msgstr "Nimiluettelon kirjasinkuvaus merkkijonona"
-
-#~ msgid "get"
-#~ msgstr "hae"
-
-#~ msgid "Get config entry"
-#~ msgstr "Hae asetus"
-
-#~ msgid "CONFIG-PATH"
-#~ msgstr "ASETUSPOLKU"
-
-#~ msgid "set"
-#~ msgstr "aseta"
-
-#~ msgid "Set config entry"
-#~ msgstr "Aseta asetus"
-
-#~ msgid ""
-#~ "Error on option %s: %s.\n"
-#~ "Run '%s --help' to see a full list of available command line options.\n"
-#~ msgstr ""
-#~ "Virhe asetuksessa %s: %s.\n"
-#~ "Suorita '%s --help' nähdäksesi täydellisen luettelon "
-#~ "komentoriviasetuksista.\n"
-
-#~ msgid "Disable sound server usage"
-#~ msgstr "Älä käytä äänipalvelinta."
-
-#~ msgid "Enable sound server usage"
-#~ msgstr "Käytä äänipalvelinta."
-
-#~ msgid "Host:port on which the sound server to use is running"
-#~ msgstr "Host:portti, jolla käytettävä äänipalvelin on käynnissä"
-
-#~ msgid "HOSTNAME:PORT"
-#~ msgstr "HOSTNAME:PORTTI"
-
-#~ msgid "GNOME options"
-#~ msgstr "GNOME-asetukset"
-
-#~ msgid "File/"
-#~ msgstr "Tiedosto/"
-
-#~ msgid "Edit"
-#~ msgstr "Muokkaa"
-
-#~ msgid "Edit/"
-#~ msgstr "Muokkaa/"
-
-#~ msgid "View"
-#~ msgstr "Näytä"
-
-#~ msgid "View/"
-#~ msgstr "Näytä/"
-
-#~ msgid "Settings"
-#~ msgstr "Asetukset"
-
-#~ msgid "Settings/"
-#~ msgstr "Asetukset/"
-
-#~ msgid "New"
-#~ msgstr "Uusi"
-
-#~ msgid "New/"
-#~ msgstr "Uusi/"
-
-#~ msgid "Files"
-#~ msgstr "Tiedostot"
-
-#~ msgid "Files/"
-#~ msgstr "Tiedostot/"
-
-#~ msgid "Windows"
-#~ msgstr "Ikkunat"
-
-#~ msgid "Game"
-#~ msgstr "Peli"
-
-#~ msgid "Windows/"
-#~ msgstr "Ikkunat/"
-
-#~ msgid "_About..."
-#~ msgstr "_Tietoja..."
-
-#~ msgid "DEG"
-#~ msgstr "DEG"
-
-#~ msgid "RAD"
-#~ msgstr "RAD"
-
-#~ msgid "GRAD"
-#~ msgstr "GRAD"
-
-#~ msgid "1/x"
-#~ msgstr "1/x"
-
-#~ msgid "x^2"
-#~ msgstr "x^2"
-
-#~ msgid "SQRT"
-#~ msgstr "SQRT"
-
-#~ msgid "CE/C"
-#~ msgstr "CE/C"
-
-#~ msgid "AC"
-#~ msgstr "AC"
-
-#~ msgid "sin"
-#~ msgstr "sin"
-
-#~ msgid "cos"
-#~ msgstr "cos"
-
-#~ msgid "tan"
-#~ msgstr "tan"
-
-#~ msgid "e"
-#~ msgstr "e"
-
-#~ msgid "EE"
-#~ msgstr "EE"
-
-#~ msgid "log"
-#~ msgstr "lg"
-
-#~ msgid "ln"
-#~ msgstr "ln"
-
-#~ msgid "x^y"
-#~ msgstr "x^y"
-
-#~ msgid "PI"
-#~ msgstr "PI"
-
-#~ msgid "x!"
-#~ msgstr "x!"
-
-#~ msgid "("
-#~ msgstr "("
-
-#~ msgid ")"
-#~ msgstr ")"
-
-#~ msgid "/"
-#~ msgstr "/"
-
-#~ msgid "STO"
-#~ msgstr "STO"
-
-#~ msgid "7"
-#~ msgstr "7"
-
-#~ msgid "8"
-#~ msgstr "8"
-
-#~ msgid "9"
-#~ msgstr "9"
-
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgid "4"
-#~ msgstr "4"
-
-#~ msgid "5"
-#~ msgstr "5"
-
-#~ msgid "6"
-#~ msgstr "6"
-
-#~ msgid "-"
-#~ msgstr "-"
-
-#~ msgid "SUM"
-#~ msgstr "SUM"
-
-#~ msgid "1"
-#~ msgstr "1"
-
-#~ msgid "2"
-#~ msgstr "2"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "+"
-#~ msgstr "+"
-
-#~ msgid "EXC"
-#~ msgstr "EXC"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "."
-#~ msgstr "."
-
-#~ msgid "+/-"
-#~ msgstr "+/-"
-
-#~ msgid "="
-#~ msgstr "="
-
-#~ msgid "INV"
-#~ msgstr "INV"
-
-#~ msgid "Name:"
-#~ msgstr "Nimi:"
-
-#~ msgid "Comment:"
-#~ msgstr "Kommentti:"
-
-#~ msgid "Command:"
-#~ msgstr "Komento:"
-
-#~ msgid "Type:"
-#~ msgstr "Tyyppi:"
-
-#~ msgid "Icon:"
-#~ msgstr "Kuvake:"
-
-#~ msgid "Run in Terminal"
-#~ msgstr "Aja pääteikkunassa"
-
-#~ msgid "Try this before using:"
-#~ msgstr "Kokeile tätä ennen käyttöä:"
-
-#~ msgid "Name/Comment translations:"
-#~ msgstr "Nimen tai kommentin käännökset:"
-
-#~ msgid "Language"
-#~ msgstr "Kieli"
-
-#~ msgid "Name"
-#~ msgstr "Nimi"
-
-#~ msgid "Add/Set"
-#~ msgstr "Lisää tai aseta"
-
-#~ msgid "Remove"
-#~ msgstr "Poista"
-
-#~ msgid "Basic"
-#~ msgstr "Perus"
-
-#~ msgid "Advanced"
-#~ msgstr "Edistyneet"
-
-#~ msgid "Back"
-#~ msgstr "Takaisin"
-
-#~ msgid "GTK options"
-#~ msgstr "GTK-asetukset"
-
-#~ msgid "%s options"
-#~ msgstr "%s-asetukset"
-
-#~ msgid "Calculator"
-#~ msgstr "Laskin"
-
-#~ msgid "Calculator..."
-#~ msgstr "Laskin..."
-
-#~ msgid "Select"
-#~ msgstr "Valitse"
-
-#~ msgid "Select dictionary"
-#~ msgstr "Valitse sanasto"
-
-# , c-format
-#~ msgid ""
-#~ "The word `%s'\n"
-#~ "is not in the dictionary.\n"
-#~ "Proceed anyway?"
-#~ msgstr ""
-#~ "Sanaa `%s'\n"
-#~ "ei ole sanastossa.\n"
-#~ "Haluatko silti jatkaa?"
-
-#~ msgid "Confirm"
-#~ msgstr "Vahvista"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Cancel"
-#~ msgstr "Peruuta"
-
-#~ msgid "Word:"
-#~ msgstr "Sana:"
-
-#~ msgid "Alternatives:"
-#~ msgstr "Vaihtoehdot:"
-
-#~ msgid "Accept"
-#~ msgstr "Hyväksy"
-
-#~ msgid ""
-#~ "Accept the word for\n"
-#~ "this session only"
-#~ msgstr ""
-#~ "Hyväksy sana vain\n"
-#~ "tämän istunnon ajaksi"
-
-#~ msgid "Skip"
-#~ msgstr "Ohita"
-
-#~ msgid ""
-#~ "Ignore this word\n"
-#~ "this time only"
-#~ msgstr ""
-#~ "Sivuuta tämä sana\n"
-#~ "vain tämän kerran"
-
-#~ msgid "Replace"
-#~ msgstr "Korvaa"
-
-#~ msgid "Replace the word"
-#~ msgstr "Korvaa sana"
-
-#~ msgid "Insert"
-#~ msgstr "Lisää"
-
-#~ msgid ""
-#~ "Insert the word\n"
-#~ "in your personal dictionary"
-#~ msgstr ""
-#~ "Lisää sana henkilökohtaiseen\n"
-#~ "sanastoon"
-
-#~ msgid "Insert with case"
-#~ msgstr "Lisää sellaisenaan"
-
-#~ msgid ""
-#~ "Insert the word\n"
-#~ "in your personal dictionary\n"
-#~ "(if mixed-case preserve\n"
-#~ "case-sensitivity)"
-#~ msgstr ""
-#~ "Lisää sana henkilökohtaiseen\n"
-#~ "sanastoon säilyttäen isojen\n"
-#~ "ja pienten kirjainten eron"
-
-#~ msgid "Ispell command:"
-#~ msgstr "Ispell-komento:"
-
-#~ msgid "Main dictionary:"
-#~ msgstr "Pääsanasto:"
-
-#~ msgid "Personal dictionary:"
-#~ msgstr "Henkilökohtainen sanasto:"
-
-#~ msgid "Valid chars in words:"
-#~ msgstr "Sanoihin kelpaavat kirjaimet:"
-
-#~ msgid "Check words longer than:"
-#~ msgstr "Tarkista sanat, jotka ovat pidempiä kuin:"
-
-#~ msgid "Sort by correctness"
-#~ msgstr "Järjestä oikeellisuuden mukaan"
-
-#~ msgid "Accept run-together words"
-#~ msgstr "Hyväksy yhdistetyt sanaparit"
-
-#~ msgid "Discard accepted words on kill"
-#~ msgstr "Hylkää hyväksytyt sanat suljettaessa"
-
-#~ msgid "Enable tooltips"
-#~ msgstr "Näytä vinkit"
-
-#~ msgid "Kill ispell process"
-#~ msgstr "Sulje ispell-prosessi"
-
-#~ msgid "Spell"
-#~ msgstr "Tarkistus"
-
-#~ msgid "Configure"
-#~ msgstr "Asetukset"
-
-#~ msgid "Add"
-#~ msgstr "Lisää"
-
-#~ msgid "Clear"
-#~ msgstr "Tyhjennä"
-
-#~ msgid "Apply"
-#~ msgstr "Toteuta"
-
-#~ msgid "Close"
-#~ msgstr "Sulje"
-
-#~ msgid "Yes"
-#~ msgstr "Kyllä"
-
-#~ msgid "No"
-#~ msgstr "Ei"
-
-#~ msgid "Prev"
-#~ msgstr "Edellinen"
-
-#~ msgid "Up"
-#~ msgstr "Ylös"
-
-#~ msgid "Down"
-#~ msgstr "Alas"
-
-#~ msgid "Menu Accelerator Keys"
-#~ msgstr "Valikon pikavalintanäppäimet"
-
-#~ msgid "Global"
-#~ msgstr "Yleinen"
-
-#~ msgid "Menu Item"
-#~ msgstr "Valikon kohta"
-
-#~ msgid "Accelerator"
-#~ msgstr "Pikavalinta"
-
-#~ msgid "New..."
-#~ msgstr "Uusi..."
-
-#~ msgid "Open..."
-#~ msgstr "Avaa..."
-
-#~ msgid "Save"
-#~ msgstr "Tallenna"
-
-#~ msgid "Save as..."
-#~ msgstr "Tallenna nimellä..."
-
-#~ msgid "Setup Page..."
-#~ msgstr "Sivun asetukset..."
-
-#~ msgid "Undo"
-#~ msgstr "Kumoa"
-
-#~ msgid "Redo"
-#~ msgstr "Tee uudelleen"
-
-#~ msgid "Delete"
-#~ msgstr "Poista"
-
-#~ msgid "Cut"
-#~ msgstr "Leikkaa"
-
-#~ msgid "Copy"
-#~ msgstr "Kopioi"
-
-#~ msgid "Properties..."
-#~ msgstr "Ominaisuudet..."
-
-#~ msgid "Scores..."
-#~ msgstr "Tulokset..."
-
-#~ msgid "wmhints-test"
-#~ msgstr "wmhints-testi"
-
-#~ msgid "winhints-test"
-#~ msgstr "winhints-testi"
-
-#~ msgid "Layer:"
-#~ msgstr "Kerros:"
-
-#~ msgid "Above Dock"
-#~ msgstr "Telakan päällä"
-
-#~ msgid "Dock"
-#~ msgstr "Telakka"
-
-#~ msgid "On Top"
-#~ msgstr "Päällä"
-
-#~ msgid "Normal"
-#~ msgstr "Normaali"
-
-#~ msgid "Below"
-#~ msgstr "Alla"
-
-#~ msgid "Desktop"
-#~ msgstr "Työpöytä"
-
-#~ msgid "Set Layer"
-#~ msgstr "Aseta kerros"
-
-#~ msgid "Workspaces:"
-#~ msgstr "Työtilat:"
-
-#~ msgid "Sticky"
-#~ msgstr "Liimautunut"
-
-#~ msgid "Set Workspace"
-#~ msgstr "Aseta työtila"
-
-#~ msgid "State Toggles:"
-#~ msgstr "Tilavalinnat:"
-
-#~ msgid "Minimized"
-#~ msgstr "Minimoitu"
-
-#~ msgid "Maximized Vertical"
-#~ msgstr "Maksimoitu pystysuunnassa"
-
-#~ msgid "Maximized Horizontal"
-#~ msgstr "Maksimoitu vaakasuunnassa"
-
-#~ msgid "Hidden"
-#~ msgstr "Piilotettu"
-
-#~ msgid "Shaded"
-#~ msgstr "Varjostettu"
-
-#~ msgid "Fixed Position"
-#~ msgstr "Vakiopaikka"
-
-#~ msgid "Ignore on Arrange"
-#~ msgstr "Sivuuta järjestettäessä"
-
-#~ msgid "Set State"
-#~ msgstr "Aseta tila"
-
-#~ msgid "Skip Toggles:"
-#~ msgstr "Ohita valinnat:"
-
-#~ msgid "Skip Focus"
-#~ msgstr "Ohita fokus"
-
-#~ msgid "Skip Window Menu"
-#~ msgstr "Ohita ikkunavalikko"
-
-#~ msgid "Skip Taskbar / WinList"
-#~ msgstr "Ohita tehtäväpalkki/ikkunalista"
-
-#~ msgid "Set Skip"
-#~ msgstr "Aseta ohitus"
-
-#~ msgid "WIN_HINTS Test"
-#~ msgstr "WIN_HINTS-testi"
-
-#~ msgid ""
-#~ "Simple test app to check how the WIN_HINTS work.\n"
-#~ "And to test the gnome_win_hints_* functions for errors. :)"
-#~ msgstr ""
-#~ "Yksinkertainen testiohjelma WIN_HINTS:ien toiminnan,\n"
-#~ "sekä gnome_win_hints_* funktioiden testaamiseen."
-
-#~ msgid "Creating '/GNOME' context %s %d"
-#~ msgstr "Luodaan `/GNOME' konteksti %s %d"
-
-#~ msgid "Creating '/GNOME/Servers' context %s %d"
-#~ msgstr "Luodaan '/GNOME/Servers' konteksti %s %d"
-
-#~ msgid "GOAD ID of the server to activate"
-#~ msgstr "Aktivoitavan palvelimen GOAD ID"
-
-#~ msgid "Repository ID of the server to activate"
-#~ msgstr "Aktivoitavan palvelimen Repository ID"
-
-#~ msgid "REPO-ID"
-#~ msgstr "REPO-ID"
-
-#~ msgid ""
-#~ "I couldn't find any installed services.  Either you don't have\n"
-#~ "any services installed or I don't know the path to find them.\n"
-#~ "In either case, please check your GNOME installation."
-#~ msgstr ""
-#~ "Asennettuja palveluja ei löytynyt. Joko niitä ei ole asennettu,\n"
-#~ "tai niiden polku ei ole tiedossa. Molemmissa tapauksissa\n"
-#~ "tarkista, että GNOME on asennettu kunnolla."
-
-#~ msgid "(Internal use only) GOAD server ID to activate"
-#~ msgstr "(Vain sisäiseen käyttöön) GOAD palvelimen aktivoitava ID"
-
-#~ msgid "(Internal use only) GOAD file descriptor"
-#~ msgstr "(Vain sisäiseen käyttöön) GOAD -tiedostokahva"
-
-#~ msgid "Gnome Object Activation Directory"
-#~ msgstr "Gnome Object Activation Directory"
-
-#~ msgid "ID under which GOAD knows this server"
-#~ msgstr "Tämän palvelimen GOAD-ID"
-
-#~ msgid "GOAD_ID"
-#~ msgstr "GOAD_ID"
-
-#~ msgid "Repository ID under which GOAD knows this server"
-#~ msgstr "Tämän palvelimen Repository-ID"
-
-#~ msgid "REPO_ID"
-#~ msgstr "REPO_ID"
-
-#~ msgid "Failed to open CORBA cookie file (%s) for writing: %s\n"
-#~ msgstr ""
-#~ "CORBAn evästetiedoston (%s) avaaminen kirjoittamista varten epäonnistui: %"
-#~ "s\n"
-
-#~ msgid "Failed to write CORBA cookie file (%s): %s\n"
-#~ msgstr "CORBAn evästetiedoston (%s) kirjoittaminen epäonnistui: %s\n"
-
-#~ msgid "Failed to write CORBA cookie to `%s': %s\n"
-#~ msgstr "CORBAn evästeen kirjoittaminen tiedostoon '%s' epäonnistui: %s\n"
-
-#~ msgid "Failed to open CORBA cookie file `%s': %s\n"
-#~ msgstr "CORBAn evästetiedoston '%s' avaaminen epäonnistui: %s\n"
-
-#~ msgid "Failed to read CORBA cookie file `%s': %s\n"
-#~ msgstr "CORBAn evästetiedoston '%s' lukeminen epäonnistui: %s\n"
-
-#~ msgid "Failed to obtain CORBA authentication cookie, exiting\n"
-#~ msgstr "CORBAn varmistusevästettä ei saatu: lopettaa\n"
-
-#~ msgid "Could not get name service!"
-#~ msgstr "Nimipalvelua ei löytynyt!"
-
-#~ msgid "Unknown system error"
-#~ msgstr "Tuntematon järjestelmävirhe"
-
-# , c-format
-#~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: valitsin `%s' ei ole yksiselitteinen\n"
-
-# , c-format
-#~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: valitsin `--%s' ei tarvitse parametria\n"
-
-# , c-format
-#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: valitsin `%c%s' ei tarvitse parametria\n"
-
-# , c-format
-#~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: valitsin `%s' vaatii parametrin\n"
-
-# , c-format
-#~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: tuntematon valitsin `--%s'\n"
-
-# , c-format
-#~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: tuntematon valitsin `%c%s'\n"
-
-# , c-format
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: tuntematon valitsin -- %c\n"
-
-# , c-format
-#~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: väärä valitsin -- %c\n"
-
-# , c-format
-#~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: valitsin tarvitsee parametrin -- %c\n"
-
-# , c-format
-#~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: valitsin `-W %s' ei ole yksiselitteinen\n"
-
-# , c-format
-#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: valitsin `-W %s' ei tarvitse parametria\n"
-
-#~ msgid "Show this help message"
-#~ msgstr "Näytä tämä ohje"
-
-#~ msgid "Display brief usage message"
-#~ msgstr "Näytä lyhyt käyttöohje"
-
-#~ msgid "If you choose a font it will appear here"
-#~ msgstr "Jos valitset kirjasimen, se ilmestyy tähän"
-
-#~ msgid "Use Font in button with size"
-#~ msgstr "Käytä painikkeessa kirjasinta koolla"
-
-#~ msgid "This is an hbox with pixmap and text"
-#~ msgstr "Tämä on kuvan ja tekstiä sisältävä hbox"
-
-#~ msgid "The user chose Yes/OK with data:\n"
-#~ msgstr "Käyttäjä valitsi Kyllä/OK datalla:\n"
-
-#~ msgid "The user chose No/Cancel with data:\n"
-#~ msgstr "Käyttäjä valitsi Ei/Peruuta datalla:\n"
-
-#~ msgid "Weird number in reply callback"
-#~ msgstr "Outo numero takaisinkutsurutiinissa"
