@@ -31,7 +31,9 @@
 enum {
   ARG_0,
   ARG_SHADOW,
-  ARG_ORIENTATION
+  ARG_ORIENTATION,
+  ARG_PREFERRED_WIDTH,
+  ARG_PREFERRED_HEIGHT
 };
 
 #define DRAG_HANDLE_SIZE 10
@@ -43,6 +45,13 @@ enum {
   DOCK_DETACH,
   LAST_SIGNAL
 };
+
+
+static gboolean  check_guint_arg       (GtkObject     *object,
+					const gchar   *name,
+					guint         *value_return);
+static guint     get_preferred_width   (GnomeDockItem *item);
+static guint     get_preferred_height  (GnomeDockItem *item);
 
 static void gnome_dock_item_class_init     (GnomeDockItemClass *klass);
 static void gnome_dock_item_init           (GnomeDockItem      *dock_item);
@@ -84,6 +93,76 @@ static gint gnome_dock_item_delete_event   (GtkWidget         *widget,
 
 static GtkBinClass *parent_class;
 static guint        dock_item_signals[LAST_SIGNAL] = { 0 };
+
+
+/* Helper functions.  */
+
+static gboolean
+check_guint_arg (GtkObject *object,
+		 const gchar *name,
+		 guint *value_return)
+{
+  GtkArgInfo *info;
+  gchar *error;
+
+  error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (object), name, &info);
+  if (error != NULL)
+    {
+      g_free (error);
+      return FALSE;
+    }
+
+  gtk_object_get (object, name, value_return, NULL);
+  return TRUE;
+}
+
+static guint
+get_preferred_width (GnomeDockItem *dock_item)
+{
+  GtkWidget *child;
+  guint preferred_width;
+
+  child = GTK_BIN (dock_item)->child;
+
+  if (! check_guint_arg (GTK_OBJECT (child), "preferred_width", &preferred_width))
+    {
+      GtkRequisition child_requisition;
+  
+      gtk_widget_get_child_requisition (child, &child_requisition);
+      preferred_width = child_requisition.width;
+    }
+
+  if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
+    preferred_width += GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
+
+  preferred_width += GTK_CONTAINER (dock_item)->border_width * 2;
+
+  return preferred_width;
+}
+
+static guint
+get_preferred_height (GnomeDockItem *dock_item)
+{
+  GtkWidget *child;
+  guint preferred_height;
+
+  child = GTK_BIN (dock_item)->child;
+
+  if (! check_guint_arg (GTK_OBJECT (child), "preferred_height", &preferred_height))
+    {
+      GtkRequisition child_requisition;
+  
+      gtk_widget_get_child_requisition (child, &child_requisition);
+      preferred_height = child_requisition.height;
+    }
+
+  if (dock_item->orientation == GTK_ORIENTATION_VERTICAL)
+    preferred_height += GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
+
+  preferred_height += GTK_CONTAINER (dock_item)->border_width * 2;
+
+  return preferred_height;
+}
 
 
 guint
@@ -130,6 +209,12 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   gtk_object_add_arg_type ("GnomeDockItem::orientation",
                            GTK_TYPE_ORIENTATION, GTK_ARG_READWRITE,
                            ARG_ORIENTATION);
+  gtk_object_add_arg_type ("GnomeDockItem::preferred_width",
+                           GTK_TYPE_UINT, GTK_ARG_READABLE,
+                           ARG_PREFERRED_WIDTH);
+  gtk_object_add_arg_type ("GnomeDockItem::preferred_height",
+                           GTK_TYPE_UINT, GTK_ARG_READABLE,
+                           ARG_PREFERRED_HEIGHT);
 
   object_class->set_arg = gnome_dock_item_set_arg;
   object_class->get_arg = gnome_dock_item_get_arg;
@@ -251,6 +336,12 @@ gnome_dock_item_get_arg (GtkObject *object,
       break;
     case ARG_ORIENTATION:
       GTK_VALUE_ENUM (*arg) = gnome_dock_item_get_orientation (dock_item);
+      break;
+    case ARG_PREFERRED_HEIGHT:
+      GTK_VALUE_UINT (*arg) = get_preferred_height (dock_item);
+      break;
+    case ARG_PREFERRED_WIDTH:
+      GTK_VALUE_UINT (*arg) = get_preferred_width (dock_item);
       break;
     default:
       arg->type = GTK_TYPE_INVALID;

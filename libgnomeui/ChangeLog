@@ -1,3 +1,21 @@
+2000-10-12  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* gnome-dock-item.c: New args "preferred_width" and
+	"preferred_height".
+	(gnome_dock_item_class_init): Set them up.
+	(gnome_dock_item_get_arg): Handle them.
+	(check_guint_arg): New helper function.
+	(get_preferred_width): New helper function.
+	(get_preferred_height): New helper function.
+
+	* gnome-dock-band.c (check_guint_arg): New helper function to get
+	a guint arg only if it exists.
+	(gnome_dock_band_size_request): Calculate the max_preferred_width
+	by checking the "preferred_width" or "preferred_height" arg
+	through `check_guint_arg'.
+	(size_allocate_small): Changed the policy a bit so that we
+	allocate the max_preferred_width if possible.
+
 2000-10-04  Iain Holmes  <iain@helixcode.com>
 
 	* gnome-propertybox.c (dialog_clicked_cb): Check each page for the dirty
