@@ -164,14 +164,12 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
   GtkWidget *label;
   GList *types = NULL;
   GtkWidget *e;
-  GtkWidget *box;
-  GtkWidget *alignment;
 
   label = label_new(_("Name:"));
   table_attach_label(GTK_TABLE(table), label, 0, 1, 0, 1);
 
   dee->name_entry = gtk_entry_new();
-  table_attach_entry(GTK_TABLE(table),dee->name_entry, 1, 2, 0, 1);
+  table_attach_entry(GTK_TABLE(table),dee->name_entry, 1, 3, 0, 1);
   gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->name_entry), "changed",
 					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
 					GTK_OBJECT(dee));
@@ -184,7 +182,7 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
   table_attach_label(GTK_TABLE(table),label, 0, 1, 1, 2);
 
   dee->comment_entry = gtk_entry_new();
-  table_attach_entry(GTK_TABLE(table),dee->comment_entry, 1, 2, 1, 2);
+  table_attach_entry(GTK_TABLE(table),dee->comment_entry, 1, 3, 1, 2);
   gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->comment_entry), "changed",
 					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
 					GTK_OBJECT(dee));
@@ -194,7 +192,7 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
   table_attach_label(GTK_TABLE(table),label, 0, 1, 2, 3);
 
   dee->exec_entry = gtk_entry_new();
-  table_attach_entry(GTK_TABLE(table),dee->exec_entry, 1, 2, 2, 3);
+  table_attach_entry(GTK_TABLE(table),dee->exec_entry, 1, 3, 2, 3);
   gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->exec_entry), "changed",
 					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
 					GTK_OBJECT(dee));
@@ -210,17 +208,11 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
   g_list_free(types);
   gtk_combo_set_value_in_list(GTK_COMBO(dee->type_combo), 
 			      FALSE, TRUE);
-  table_attach_entry(GTK_TABLE(table),dee->type_combo, 1, 2, 3, 4);
+  table_attach_entry(GTK_TABLE(table),dee->type_combo, 1, 3, 3, 4);
   gtk_signal_connect_object_while_alive(GTK_OBJECT(GTK_COMBO(dee->type_combo)->entry), 
 					"changed",
 					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
 					GTK_OBJECT(dee));
-
-  box = gtk_hbox_new(FALSE, GNOME_PAD_BIG);
-  gtk_table_attach(GTK_TABLE(table), box,
-		   1, 2, 4, 5,
-		   GTK_EXPAND | GTK_FILL, GTK_FILL,
-		   0, 0);
 
   label = label_new(_("Icon:"));
   table_attach_label(GTK_TABLE(table), label, 0, 1, 4, 5);
@@ -233,17 +225,18 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
   gtk_signal_connect_object_while_alive(GTK_OBJECT(e),"changed",
 					GTK_SIGNAL_FUNC(gnome_dentry_edit_icon_changed),
 					GTK_OBJECT(dee));
-  gtk_box_pack_start(GTK_BOX(box), dee->icon_entry, FALSE, FALSE, 0);
-
-  alignment = gtk_alignment_new(0.5, 0.5, 0.0, 0.0);
-  gtk_box_pack_start(GTK_BOX(box), alignment, FALSE, FALSE, 0);
+  gtk_table_attach(GTK_TABLE(table),dee->icon_entry, 
+		   1, 2, 4, 5, 0, 0, 0, GNOME_PAD_SMALL);
 
   dee->terminal_button = gtk_check_button_new_with_label (_("Run in Terminal"));
   gtk_signal_connect_object(GTK_OBJECT(dee->terminal_button), 
 			    "clicked",
 			    GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
 			    GTK_OBJECT(dee));
-  gtk_container_add(GTK_CONTAINER(alignment), dee->terminal_button);
+  gtk_table_attach(GTK_TABLE(table), dee->terminal_button,
+		   2, 3, 4, 5,
+		   GTK_EXPAND, 0,
+		   GNOME_PAD_SMALL, GNOME_PAD_SMALL);
 }
 
 static void
@@ -280,7 +273,7 @@ make_page(void)
   frame = gtk_frame_new (NULL);
   gtk_container_set_border_width (GTK_CONTAINER(frame), GNOME_PAD_SMALL);
 
-  page = gtk_table_new (6, 2, FALSE);
+  page = gtk_table_new (5, 3, FALSE);
   gtk_container_set_border_width (GTK_CONTAINER (page), GNOME_PAD_SMALL);
   gtk_table_set_row_spacings (GTK_TABLE (page), GNOME_PAD_SMALL);
   gtk_table_set_col_spacings (GTK_TABLE (page), GNOME_PAD_SMALL);

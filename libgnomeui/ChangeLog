@@ -1,3 +1,10 @@
+1999-02-14 Sergey Panov <sipan@mit.edu>
+
+	* gnome-dentry-edit.c(fill_easy_page,make_page) Get terminal
+	toggle widget to align correctly -- it was not centered, but
+	glued to the icon widget. Achived what, I think, Federico 
+	tried to do but by other means.
+	
 Fri Feb 12 20:59:53 PST 1999 Jay Painter <jpaint@serv.net>
 
 	* gnome-app.c applied patch from Ettore Perazzoli to fix 
