@@ -177,7 +177,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
                 title_prefix = _("Information");
-		s = gnome_pixmap_file("gnome-info.png");
+		s = GNOMEUIPIXMAPDIR "/gnome-info.png";
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);
@@ -186,7 +186,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
                 title_prefix = _("Warning");
-		s = gnome_pixmap_file("gnome-warning.png");
+		s = GNOMEUIPIXMAPDIR "/gnome-warning.png";
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);
@@ -195,7 +195,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
                 title_prefix = _("Error");
-		s = gnome_pixmap_file("gnome-error");
+		s = GNOMEUIPIXMAPDIR "/gnome-error.png";
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);
@@ -204,7 +204,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
                 title_prefix = _("Question");
-		s = gnome_pixmap_file("gnome-question.png");
+		s = GNOMEUIPIXMAPDIR "/gnome-question.png";
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);
@@ -235,7 +235,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 
 	if (pixmap == NULL) {
         	if (pixmap) gtk_widget_destroy(pixmap);
-		s = gnome_pixmap_file("gnome-default.png");
+		s = GNOMEUIPIXMAPDIR "/gnome-default-dlg.png";
          	if (s) {
 			pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);

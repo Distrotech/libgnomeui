@@ -1,3 +1,8 @@
+2001-04-11  Martin Baulig  <baulig@suse.de>
+
+	* gnome-messagebox.c: For images which we install in ../images/,
+	use an absolute filename using GNOMEUIPIXMAPDIR.
+
 Sun Mar 25 15:26:29 2001  George Lebl <jirka@5z.com>
 
 	* gnome-icon-item.c: use the editable interface to get the values
