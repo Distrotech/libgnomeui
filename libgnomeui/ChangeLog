@@ -1,3 +1,7 @@
+2002-01-15  Mark McLoughlin  <mark@skynet.ie>
+
+	* gnome-druid.c: (undefault_button): kill unused.
+
 2002-01-14  jacob berkman  <jacob@ximian.com>
 
 	* gnome-druid-page-edge.c (struct _GnomeDruidPageEdgePrivate):

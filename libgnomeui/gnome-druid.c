@@ -876,19 +876,6 @@ gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 	gtk_widget_set_sensitive (druid->help, help_sensitive);
 }
 
-static void
-undefault_button (GtkWidget *widget)
-{
-	GtkWidget *toplevel;
-
-	toplevel = gtk_widget_get_toplevel (widget);
-
-	if (GTK_IS_WINDOW (toplevel) &&
-	    GTK_WINDOW (toplevel)->default_widget == widget) {
-		gtk_window_set_default (GTK_WINDOW (toplevel), NULL);
-	}
-}
-
 /**
  * gnome_druid_set_show_finish
  * @druid: A Druid widget.
