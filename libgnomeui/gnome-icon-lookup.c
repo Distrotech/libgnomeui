@@ -287,7 +287,8 @@ gnome_icon_lookup (GtkIconTheme               *icon_theme,
     {
       if (flags & GNOME_ICON_LOOKUP_FLAGS_SHOW_SMALL_IMAGES_AS_THEMSELVES &&
 	  (mimetype_supported_by_gdk_pixbuf (mime_type) ||
-	   (strcmp (mime_type, "image/svg") == 0 &&
+	   ((strcmp (mime_type, "image/svg") == 0 ||
+	     strcmp (mime_type, "image/svg+xml") == 0) &&
 	    flags & GNOME_ICON_LOOKUP_FLAGS_ALLOW_SVG_AS_THEMSELVES))  &&
 	  strncmp (file_uri, "file:/", 6) == 0 &&
 	  file_info && file_info->size < SELF_THUMBNAIL_SIZE_THRESHOLD)
