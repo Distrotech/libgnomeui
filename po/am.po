@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "POT-Creation-Date: 2002-10-03 05:33+0200\n"
-"PO-Revision-Date: 2002-12-10 19:37+EDT\n"
+"PO-Revision-Date: 2002-12-12 15:47+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
@@ -1007,11 +1007,11 @@ msgstr "በፋይሉ መግቢያ ላይ መታየት ያለባቸው የፋይ�
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
-msgstr "ነባሩ አቅጣጫ"
+msgstr "ነባሩ መተላለፊያ"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr "ለፋይሉ መስኮት መቃኛ ነባሩ አቅጣጫ "
+msgstr "ለፋይሉ መስኮት መቃኛ ነባሩ መተላለፊያ "
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
@@ -1045,7 +1045,7 @@ msgstr "ፋይል ምረጡ"
 
 #: libgnomeui/gnome-file-entry.c:645
 msgid "Path"
-msgstr "መንገድ"
+msgstr "መተላለፊያ"
 
 #: libgnomeui/gnome-file-entry.c:645
 msgid "Path to file"
@@ -1129,7 +1129,7 @@ msgstr "መጠኑን አሳይ"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "በመረጃው የፊደል ቅርጽ መንገድ ውስጥ መጠንም አሳይ"
+msgstr "በመረጃው የፊደል ቅርጽ መተላለፊያ ውስጥ መጠንም አሳይ"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1236,7 +1236,7 @@ msgstr "ቃኝ"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
-msgstr "የቁልፉ መደብ"
+msgstr "የቁልፉ መተላለፊያ"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
