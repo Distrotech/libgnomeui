@@ -2198,8 +2198,6 @@ gnome_canvas_init (GnomeCanvas *canvas)
 {
 	GTK_WIDGET_SET_FLAGS (canvas, GTK_CAN_FOCUS);
 
-	canvas->idle_id = -1;
-
 	canvas->scroll_x1 = 0.0;
 	canvas->scroll_y1 = 0.0;
 	canvas->scroll_x2 = canvas->layout.width;
@@ -2229,6 +2227,29 @@ gnome_canvas_init (GnomeCanvas *canvas)
 }
 
 static void
+shutdown_transients (GnomeCanvas *canvas)
+{
+	if (canvas->need_redraw || canvas->need_update) {
+		/* We do not turn off the need_update flag so that if the canvas
+		 * is mapped again, it will run the update methods of the items
+		 * that need it.  We do turn need_redraw off because the flag
+		 * will be turned on, anyway, if the canvas is exposed.
+		 */
+		canvas->need_redraw = FALSE;
+		canvas->redraw_x1 = 0;
+		canvas->redraw_y1 = 0;
+		canvas->redraw_x2 = 0;
+		canvas->redraw_y2 = 0;
+		gtk_idle_remove (canvas->idle_id);
+	}
+
+	if (canvas->grabbed_item) {
+		canvas->grabbed_item = NULL;
+		gdk_pointer_ungrab (GDK_CURRENT_TIME);
+	}
+}
+
+static void
 gnome_canvas_destroy (GtkObject *object)
 {
 	GnomeCanvas *canvas;
@@ -2240,6 +2261,8 @@ gnome_canvas_destroy (GtkObject *object)
 
 	gtk_signal_disconnect (GTK_OBJECT (canvas->root), canvas->root_destroy_id);
 	gtk_object_unref (GTK_OBJECT (canvas->root));
+
+	shutdown_transients (canvas);
 
 	gdk_color_context_free (canvas->cc);
 
@@ -2299,29 +2322,6 @@ gnome_canvas_map (GtkWidget *widget)
 
 	if (GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->map)
 		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->map) (canvas->root);
-}
-
-static void
-shutdown_transients (GnomeCanvas *canvas)
-{
-	if (canvas->need_redraw || canvas->need_update) {
-		/* We do not turn off the need_update flag so that if the canvas
-		 * is mapped again, it will run the update methods of the items
-		 * that need it.  We do turn need_redraw off because the flag
-		 * will be turned on, anyway, if the canvas is exposed.
-		 */
-		canvas->need_redraw = FALSE;
-		canvas->redraw_x1 = 0;
-		canvas->redraw_y1 = 0;
-		canvas->redraw_x2 = 0;
-		canvas->redraw_y2 = 0;
-		gtk_idle_remove (canvas->idle_id);
-	}
-
-	if (canvas->grabbed_item) {
-		canvas->grabbed_item = NULL;
-		gdk_pointer_ungrab (GDK_CURRENT_TIME);
-	}
 }
 
 static void
