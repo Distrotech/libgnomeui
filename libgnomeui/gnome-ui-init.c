@@ -25,9 +25,12 @@
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-init.h"
 
-static gboolean relay_gtk_signal(GtkObject *object,
-				 guint signal_id,
-				 GnomeTriggerList *t);
+static gboolean
+relay_gtk_signal(GtkObject *object,
+		 guint signal_id,
+		 guint n_params,
+		 GtkArg *params,
+		 GnomeTriggerList *t);
 
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
@@ -526,7 +529,10 @@ imlib_image_loader(GdkWindow   *window,
 
 static gboolean
 relay_gtk_signal(GtkObject *object,
-		 guint signal_id, GnomeTriggerList *t)
+		 guint signal_id,
+		 guint n_params,
+		 GtkArg *params,
+		 GnomeTriggerList *t)
 {
 #ifdef HAVE_ESD
   /* Yes, this short circuits the rest of the triggers mechanism. It's
