@@ -43,6 +43,7 @@ static const gchar *authors[] = {
 	"Miguel de Icaza",
 	"Jonathan Blandford",
 	"Carlos Perelló Marín",
+	"Martin Baulig",
 	NULL
 };
 
@@ -78,7 +79,8 @@ verb_FileClose_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname
 }
 
 static void
-verb_FileExit_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname){
+verb_FileExit_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname)
+{
 	TestGnomeApp *app = user_data;
 
 	test_exit (app);
@@ -131,8 +133,7 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 	bonobo_ui_component_set_container (app->ui_component,
 					   BONOBO_OBJREF(app->ui_container));
 	bonobo_ui_util_set_ui (app->ui_component, GNOMEUIDATADIR, "testgnome.xml", appname);
-	bonobo_ui_component_add_verb_list_with_data (app->ui_component, verbs,
-						     app->app);
+	bonobo_ui_component_add_verb_list_with_data (app->ui_component, verbs, app);
 	
 	return app;
 }
