@@ -1,3 +1,7 @@
+2000-07-29  Martin Baulig  <baulig@suse.de>
+
+	* gnome-glade.c: Removed.
+
 2000-08-08  Martin Baulig  <baulig@suse.de>
 
 	* gnome-entry.h: Exclude all deprecated functions if
