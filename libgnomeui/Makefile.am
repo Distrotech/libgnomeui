@@ -100,7 +100,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-selectorP.h		\
 	gnome-icon-selector.c		\
 	gnome-file-selector.c		\
-	gnome-file-entry.c		\
         gnome-font-picker.c		\
 	gnome-gconf.c			\
 	gnome-helpsys.c			\
@@ -117,7 +116,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-messagebox.c		\
 	gnome-number-entry.c		\
 	gnome-pixmap.c			\
-	gnome-pixmap-entry.c		\
 	gnome-popup-menu.c		\
 	gnome-popup-help.c		\
 	gnome-pouch.c			\
@@ -181,7 +179,6 @@ gnome_headers = \
 	gnome-druid-page-edge.h		\
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
-	gnome-file-entry.h		\
 	gnome-file-selector.h		\
         gnome-font-picker.h		\
 	gnome-gconf.h			\
@@ -211,7 +208,6 @@ gnome_headers = \
 	gnome-preferences.h		\
 	gnome-propertybox.h		\
 	gnome-pixmap.h			\
-	gnome-pixmap-entry.h		\
 	gnome-roo.h			\
 	gnome-scores.h			\
 	gnome-selector.h		\
