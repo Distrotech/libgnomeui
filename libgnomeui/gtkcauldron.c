@@ -21,8 +21,10 @@
 #define HAVE_GNOME
 #include <gtk/gtk.h>
 #ifdef HAVE_GNOME
+#include <time.h>
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-file-entry.h"
+#include "libgnomeui/gnome-dateedit.h"
 #include "libgnomeui/gnome-number-entry.h"
 #include "libgnomeui/gnome-stock.h"
 #endif
@@ -93,6 +95,12 @@ static void get_entry_result (GtkWidget * w, void *x)
 }
 
 #ifdef HAVE_GNOME
+
+static void get_gnome_date_edit_result (GtkWidget * w, void *x)
+{
+    gdouble *result = (gdouble *) x;
+    *result = (gdouble) gnome_date_edit_get_date (GNOME_DATE_EDIT (w));
+}
 
 /* get text of an gnome entry widget */
 static void get_gnome_entry_result (GtkWidget * w, void *x)
@@ -353,14 +361,14 @@ static gint key_press_event (GtkWidget * window, GdkEventKey * event, struct key
 
 /* {{{ main */
 
-#define new_result(l,f,w,d)						\
-	if (l) {							\
+#define new_result(l,f,w,d)					\
+	if (l) {						\
 	    (l)->next = malloc (sizeof (*(l)));			\
-	    (l)->next->prev = (l);					\
+	    (l)->next->prev = (l);				\
 	    (l) = (l)->next;					\
 	    (l)->next = 0;					\
-	} else {							\
-	    (l) = malloc (sizeof (*(l)));				\
+	} else {						\
+	    (l) = malloc (sizeof (*(l)));			\
 	    (l)->next = 0;					\
 	    (l)->prev = 0;					\
 	}							\
@@ -736,6 +744,26 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		    }
 		    break;
 		}
+#ifdef HAVE_GNOME
+	    case 'D':{
+		gdouble *result;
+		gint flags;
+		next_arg (GTK_CAULDRON_TYPE_DOUBLE_P, user_data, &result);
+		next_arg (GTK_CAULDRON_TYPE_INT, user_data, &flags);
+		w = gnome_date_edit_new_flags ((time_t) *result, flags);
+		if (!result)
+		    g_warning ("gtk_dialog_cauldron(): date edit widget with place to store result = NULL");
+		new_result (r, get_gnome_date_edit_result, w, result);
+		if (option_is_present (p + 1, 'o')) {
+		    f = 0;
+		    get_child_entry (w, &f);
+		}
+		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
+		gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		gtk_widget_show (w);
+		break;
+	    }
+#endif
 	    case 'F':
 	    case 'N':
 	    case 'E':
