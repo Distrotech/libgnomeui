@@ -1,3 +1,8 @@
+2003-09-17  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-icon-lookup.c (gnome_icon_lookup):
+	Handle vfs icons in mime info with absolute paths.
+
 2003-09-15  Not Zed  <NotZed@Ximian.com>
 
 	* libgnomeui/gnome-icon-list.c (real_select_icon): Only add the
