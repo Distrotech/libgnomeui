@@ -1004,16 +1004,16 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_table_attach_defaults(table, w, column, column + 2, row + 2, row + 3);
 #endif
 	column++;
-	w = GTK_WIDGET(gnome_stock_new_with_icon_at_size(FILENAME, 24, 24));
+	w = GTK_WIDGET(gnome_stock_new_with_icon(FILENAME));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
-	w = GTK_WIDGET(gnome_stock_new_with_icon_at_size(FILENAME, 16, 16));
+	w = GTK_WIDGET(gnome_stock_new_with_icon(FILENAME));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
 #ifdef TRY_ENLARGE
 	/* XXX. yikes, that might crash */
 	column++;
-	w = GTK_WIDGET(gnome_stock_new_with_icon_at_size(FILENAME, 64, 64));
+	w = GTK_WIDGET(gnome_stock_new_with_icon(FILENAME));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 2);
 #endif
