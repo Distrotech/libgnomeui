@@ -1,3 +1,8 @@
+1999-03-13  Richard Hult <rhult@hem2.passagen.se>
+
+	* gnome-icon-list.c (icon_event): Ignore button clicks above 3 in
+	the button release and button press event handlers.
+
 1999-03-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (iti_paint_text): Nice offset adjustments.
