@@ -1,5 +1,10 @@
 2000-09-12  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector.c: Switch to GParam and use the boilerplate
+	macros.
+
+2000-09-12  Martin Baulig  <baulig@suse.de>
+
 	* selector-demo.c: Added GnomeIconEntry.
 
 2000-09-12  Martin Baulig  <baulig@suse.de>

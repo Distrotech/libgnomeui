@@ -43,6 +43,7 @@
 #include <gtk/gtkbutton.h>
 #include <gtk/gtksignal.h>
 #include "libgnome/libgnomeP.h"
+#include "gnome-macros.h"
 #include "gnome-selectorP.h"
 #include "gnome-uidefs.h"
 #include "gnome-gconf.h"
@@ -53,12 +54,16 @@ static void gnome_selector_init                (GnomeSelector      *selector);
 static void gnome_selector_destroy             (GtkObject          *object);
 static void gnome_selector_finalize            (GObject            *object);
 
-static void selector_set_arg                   (GtkObject          *object,
-                                                GtkArg             *arg,
-                                                guint               arg_id);
-static void selector_get_arg                   (GtkObject          *object,
-                                                GtkArg             *arg,
-                                                guint               arg_id);
+static void gnome_selector_get_param           (GObject            *object,
+                                                guint               param_id,
+                                                GValue             *value,
+                                                GParamSpec         *pspec,
+                                                const gchar        *trailer);
+static void gnome_selector_set_param           (GObject            *object,
+                                                guint               param_id,
+                                                GValue             *value,
+                                                GParamSpec         *pspec,
+                                                const gchar        *trailer);
 
 static void     update_handler                 (GnomeSelector   *selector);
 static void     browse_handler                 (GnomeSelector   *selector);
@@ -87,10 +92,8 @@ static void     free_entry_func                (gpointer         data,
 
 #define GNOME_SELECTOR_GCONF_DIR "/desktop/standard/gnome-selector"
 
-static GtkVBoxClass *parent_class;
-
 enum {
-    ARG_0,
+    PARAM_0,
 };
 
 enum {
@@ -122,29 +125,15 @@ enum {
 
 static int gnome_selector_signals [LAST_SIGNAL] = {0};
 
-guint
-gnome_selector_get_type (void)
-{
-    static guint selector_type = 0;
+/**
+ * gnome_selector_get_type
+ *
+ * Returns the type assigned to the GnomeSelector widget.
+ **/
+/* The following defines the get_type */
+GNOME_CLASS_BOILERPLATE (GnomeSelector, gnome_selector,
+			 GtkVBox, gtk_vbox)
 
-    if (!selector_type) {
-	GtkTypeInfo selector_info = {
-	    "GnomeSelector",
-	    sizeof (GnomeSelector),
-	    sizeof (GnomeSelectorClass),
-	    (GtkClassInitFunc) gnome_selector_class_init,
-	    (GtkObjectInitFunc) gnome_selector_init,
-	    NULL,
-	    NULL,
-	    NULL
-	};
-
-	selector_type = gtk_type_unique (gtk_vbox_get_type (),
-					 &selector_info);
-    }
-
-    return selector_type;
-}
 
 typedef gpointer (*GtkSignal_POINTER__NONE) (GtkObject * object,
 					     gpointer user_data);
@@ -385,8 +374,8 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
     object_class->destroy = gnome_selector_destroy;
     gobject_class->finalize = gnome_selector_finalize;
-    object_class->get_arg = selector_get_arg;
-    object_class->set_arg = selector_set_arg;
+    gobject_class->get_param = gnome_selector_get_param;
+    gobject_class->set_param = gnome_selector_set_param;
 
     class->browse = browse_handler;
     class->clear = clear_handler;
@@ -405,27 +394,37 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 }
 
 static void
-selector_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_selector_set_param (GObject *object, guint param_id, GValue *value,
+			  GParamSpec *pspec, const gchar *trailer)
 {
-    GnomeSelector *self;
+    GnomeSelector *selector;
 
-    self = GNOME_SELECTOR (object);
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (object));
 
-    switch (arg_id) {
+    selector = GNOME_SELECTOR (object);
+
+    switch (param_id) {
     default:
+	g_assert_not_reached ();
 	break;
     }
 }
 
 static void
-selector_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_selector_get_param (GObject *object, guint param_id, GValue *value,
+			  GParamSpec *pspec, const gchar *trailer)
 {
-    GnomeSelector *self;
+    GnomeSelector *selector;
 
-    self = GNOME_SELECTOR (object);
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (object));
 
-    switch (arg_id) {
+    selector = GNOME_SELECTOR (object);
+
+    switch (param_id) {
     default:
+	g_assert_not_reached ();
 	break;
     }
 }
@@ -875,8 +874,7 @@ gnome_selector_destroy (GtkObject *object)
 	selector->_priv->entry_widget = NULL;
     }
 
-    if (GTK_OBJECT_CLASS (parent_class)->destroy)
-	(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+    GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -905,8 +903,7 @@ gnome_selector_finalize (GObject *object)
     g_free (selector->_priv);
     selector->_priv = NULL;
 
-    if (G_OBJECT_CLASS (parent_class)->finalize)
-	(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+    GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 
