@@ -1,3 +1,8 @@
+2002-05-30  Kristian Rietveld  <kris@gtk.org>
+
+	* glade/glade-gnome.c (gnome_add_dock_item): set the behavior of the
+	dock item.
+
 2002-05-27  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Release 1.117.2

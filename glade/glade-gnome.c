@@ -34,6 +34,11 @@
 
 #include <libbonoboui.h>
 
+/* following function is not public, so we define the prototype here ... */
+void	bonobo_dock_item_set_behavior	(BonoboDockItem         *dock_item,
+					 BonoboDockItemBehavior  behavior);
+
+
 #define INT(s)   (strtol ((s), NULL, 0))
 #define BOOL(s)  (g_ascii_tolower (*(s)) == 't' || g_ascii_tolower (*(s)) == 'y' || INT (s))
 #define FLOAT(s) (g_strtod ((s), NULL))
@@ -221,7 +226,7 @@ gnome_add_dock_item (GladeXML *xml,
 	band = offset = position = 0;
 	placement = BONOBO_DOCK_TOP;
 	behavior  = BONOBO_DOCK_ITEM_BEH_NORMAL;
-	
+
 	for (i = 0; i < childinfo->n_properties; i++) {
 		const char *name  = childinfo->properties[i].name;
 		const char *value = childinfo->properties[i].value;
@@ -245,6 +250,8 @@ gnome_add_dock_item (GladeXML *xml,
 	child = glade_xml_build_widget (xml, childinfo->child);
 
 	toplevel = gtk_widget_get_ancestor (parent, GNOME_TYPE_APP);
+
+	bonobo_dock_item_set_behavior (BONOBO_DOCK_ITEM (child), behavior);
 
 	if (toplevel != NULL) {
 	    gnome_app_add_dock_item (
