@@ -370,6 +370,10 @@ reduce_stack_prec(GnomeCalculator *gc, MathFunction2 func)
         CalculatorStack *stack;
         GList *list;
 
+        stack = gc->stack->data;
+        if ( stack->type != CALCULATOR_NUMBER )
+                return;
+
         list = g_list_next(gc->stack);
         if (!list)
                 return;
