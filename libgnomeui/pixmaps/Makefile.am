@@ -28,7 +28,8 @@ stock_search.png         stock_search_replace.png  stock_spellcheck.png	   \
 stock_stop.png           stock_timer.png           stock_timer_stopped.png \
 stock_top.png            stock_trash.png           stock_trash_full.png    \
 stock_undelete.png	 stock_undo.png            stock_up_arrow.png	   \
-stock_volume.png
+stock_volume.png			 stock_align_left.png	   stock_align_right.png	\
+stock_align_center.png	 stock_align_justify.png
 
 EXTRA_DIST  = $(BITMAPS) $(stock_images)
 
