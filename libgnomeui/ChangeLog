@@ -1,3 +1,7 @@
+Sun Feb 15 21:22:33 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.h: Corrected comment.
+
 Sat Feb 14 17:15:18 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-scores.h (test): Removed declaration.

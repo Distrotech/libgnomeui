@@ -104,8 +104,8 @@ struct _GnomeClient
   gchar             **environment;          /*[  ]*/
   pid_t               process_id;           /*[ s]*/
   gchar              *program;              /*[xs]*/
-  gchar             **resign_command;       /*[xs]*/
-  gchar             **restart_command;      /*[  ]*/
+  gchar             **resign_command;       /*[  ]*/
+  gchar             **restart_command;      /*[xs]*/
   GnomeRestartStyle   restart_style;        /*[  ]*/
   gchar             **shutdown_command;     /*[  ]*/
   gchar              *user_id;              /*[xs]*/
