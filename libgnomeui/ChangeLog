@@ -1,3 +1,6 @@
+1999-09-07  Elliot Lee  <sopwith@redhat.com>
+	* gnome-font-selector.c: Don't use X in class_init()...
+
 1999-09-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (gnome_mdi_remove_child): in MODAL mode automatically
