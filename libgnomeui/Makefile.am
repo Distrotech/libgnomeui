@@ -113,7 +113,7 @@ libgnomeui_2_0_la_SOURCES = \
 	gnome-color-picker.c		\
 	gnome-cursors.c			\
 	gnome-dateedit.c		\
-##	gnome-dentry-edit.c		\
+	gnome-ditem-edit.c		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -189,7 +189,7 @@ gnome_headers = \
 	gnome-color-picker.h		\
 	gnome-cursors.h			\
 	gnome-dateedit.h		\
-##	gnome-dentry-edit.h		\
+	gnome-ditem-edit.h		\
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
 	gnome-dns.h			\

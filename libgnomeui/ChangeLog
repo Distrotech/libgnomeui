@@ -1,3 +1,15 @@
+2000-01-11  Havoc Pennington  <hp@redhat.com>
+
+	* gnome-messagebox.c (gnome_message_box_new): Use human readable
+	name in the message box title.
+	(gnome_message_box_set_default, gnome_message_box_set_modal): 
+	Removed, now obsolete
+
+2000-01-10  Havoc Pennington  <hp@redhat.com>
+
+	* gnome-ditem-edit.c: Finish this up; it compiles; haven't tried
+	it out.
+
 2000-01-12  Martijn van Beers  <martijn@earthling.net>
 
         * gnome-gconf.[ch]: added get/set functions for GtkSpinButton

@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-uidefs.h"
+#include <libgnome/gnomelib-init2.h>
 
 #define GNOME_MESSAGE_BOX_WIDTH  425
 #define GNOME_MESSAGE_BOX_HEIGHT 125
@@ -113,7 +114,9 @@ gnome_message_box_new (const gchar           *message,
 	GtkWidget *alignment;
 	char *s;
 	GtkStyle *style;
-
+        const gchar* title_prefix = NULL;
+        const gchar* appname;
+        
 	va_start (ap, message_box_type);
 	
 	message_box = gtk_type_new (gnome_message_box_get_type ());
@@ -125,7 +128,7 @@ gnome_message_box_new (const gchar           *message,
 
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Information"));
+                title_prefix = _("Information");
 		s = gnome_unconditional_pixmap_file("gnome-info.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
@@ -134,7 +137,7 @@ gnome_message_box_new (const gchar           *message,
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Warning"));
+                title_prefix = _("Warning");
 		s = gnome_unconditional_pixmap_file("gnome-warning.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
@@ -143,7 +146,7 @@ gnome_message_box_new (const gchar           *message,
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Error"));
+                title_prefix = _("Error");
 		s = gnome_unconditional_pixmap_file("gnome-error.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
@@ -152,7 +155,7 @@ gnome_message_box_new (const gchar           *message,
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Question"));
+                title_prefix = _("Question");
 		s = gnome_unconditional_pixmap_file("gnome-question.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
@@ -161,9 +164,22 @@ gnome_message_box_new (const gchar           *message,
 	}
 	else
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Message"));
+                title_prefix = _("Message");
 	}
 
+        g_assert(title_prefix != NULL);
+        s = NULL;
+        appname = gnome_program_get_human_readable_name(gnome_program_get());
+        if (appname) {
+                s = g_strdup_printf("%s: %s", title_prefix, appname);
+        }
+        if (s) {
+                gtk_window_set_title(GTK_WINDOW(message_box), s);
+                g_free(s);
+        } else {
+                gtk_window_set_title(GTK_WINDOW(message_box), title_prefix);
+        }
+                              
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(GNOME_DIALOG(message_box)->vbox),
 			    hbox, TRUE, TRUE, 10);
@@ -326,23 +342,6 @@ gnome_message_box_newv (const gchar           *message,
 				 TRUE );
 
 	return GTK_WIDGET (message_box);
-}
-
-/* These two here for backwards compatibility */
-
-void
-gnome_message_box_set_modal (GnomeMessageBox     *message_box)
-{
-  g_warning("gnome_message_box_set_modal is deprecated.\n");
-  gtk_window_set_modal(GTK_WINDOW(message_box),TRUE);
-}
-
-void
-gnome_message_box_set_default (GnomeMessageBox     *message_box,
-			       gint                button)
-{
-  g_warning("gnome_message_box_set_default is deprecated.\n");
-  gnome_dialog_set_default(GNOME_DIALOG(message_box), button);
 }
 
 GtkWidget *
