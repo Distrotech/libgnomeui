@@ -1,108 +1,98 @@
 Todo and wishlist for libgnomeui. Please feel free to add, remove, or comment.
+You might sync the list to web-devel-2/content/news/status/libs.html 
+if you change stuff.
 
-Some of this may be libgnome rather than libgnomeui, but close enough.
+In all cases, if it becomes apparent that the change would break lots of 
+stuff, we will have to not change it in this version though we may 
+deprecate something.
 
-* Going through Gnome CVS and updating apps to use new libgnomeui features
-  is almost always needed.
+An overall goal is to ask hard questions about how useful things are 
+and reduce some bloat. Also improve elegance and add more truly useful
+functionality.
 
-* g_return_if_fail checks are missing in many functions.
+ * There are far too many image-display widgets. We have: GtkPixmap, 
+   GnomeStock, GnomePixmap, GtkImage, GnomeStockPixmapWidget, etc.
+   Should be fewer widgets with more features per widget. i.e. enhance
+   GnomePixmap to handle the GnomeStock case, at a minimum
 
-* Consistently use gnome-uidefs.h instead of random constants. Better, 
-  devise a general system for padding that works at runtime. Owen Taylor
-  emailed some ideas on this to the list once.
+ * Fold in gdk-pixbuf dependency; remove Imlib
 
-* Documentation, documentation, documentation... both commenting header
-  files and writing real docs would help.
+ * Fold in Bonobo dependency
 
-* a GnomeFileSelection widget is needed; it will have to integrate well
-  with gmc, so might want to talk to Miguel. Also, lots of the 
-  GtkFileSelection functionality isn't in the public interface, but 
-  could be useful; so changing GtkFileSelection to allow sharing its
-  code might be necessary.
+ * Fold in gnome-vfs (move into place or add as dependency?)
 
-* check for (non)use of "const" throughout the library and fix it when needed.
+ * GnomeFileSelection using Bonobo and gnome-vfs
 
-* Silence everything from -Wall
-  [ This is largely done for libgnome and libgnomeui
-    The remaining warnings were left in to remind people to fix the
-    actual underlying problem. ]
+ * Add/use Nat's new Bonobo-friendly menu stuff
 
-* Write a "minibuffer" widget which is a statusbar that can take input, a 
-  la Emacs. Enable gnome-app-util.[hc] to use it. This is sort of 
-  prototyped but it blows right now. Please fix it, please...
+ * Remove at least one keybindings-configurability hack; maybe
+   add a good keybindings-configurability feature
 
-* Fix things that are a pain in the *** to wrap with other languages,
-  like GnomeUIInfo. 
+ * Remove GtkCauldron (replaced by libglade)
 
-* Draw and include nice pixmaps for the different message box flavors -
-  warning, info, error, etc.
+ * Integrate with GnomePrint (i.e. make sure canvas can print,
+   make sure print-related widgets are in gnome-print)
 
-* A GnomeGuru widget like Windows's Wizards. 
+ * Font selection widgets that work with gnome-print (GnomeFont)
 
-* A GnomeAnim or GtkAnim widget, using imlib and making it easy to 
-  include little animations, like a modem dialing or folders opening
-  or the Mozilla spinner. This would add a real professional touch
-  to many apps.
+ * Make canvas able to display GnomeFont
 
-* GnomeLess is a stupid hack on top of GtkText and should be made for real;
-  one idea here from Michael Zucchi is a GnomePage widget, which variously
-  wraps postscript, pdf, html, text widgets but has a unified interface
-  for all of them.
+ * Sync to GTK+ 1.4 and glib 1.4 (hopefully not too hard...)
 
-* The -icon-sel and -dentry-edit aren't finished; they may not be needed,
-  depending on how gmenu/gmc end up handling this issue.
+ * libunicode, Pango, etc. should be integrated and put into use.
 
-* GnomeAbout could probably be more attractive - green doesn't seem to 
-  match anything else.
+ * Color selection enhancement (perhaps in GTK, though GTK can't do 
+   a "custom palette" if we want that since it lacks the config 
+   database)
 
-* There is a lot of enhancement and making coherent that could go on.
+ * Fix antialiased canvas
 
-* GnomeFontSelection and GnomePrintDialog
+ * Make libgnorba display-independent, and some other enhancements
+   as Elliot the CORBA dude sees fit
 
-==================== Done or In Progress =========================
+ * Add a context help thing (like Windows' "What's this", or GtkTipsQuery)
 
-* GnomeApp should have an optional status bar. 
+ * Fix up gnome_init() with something more extensible/customizable
 
-* A GnomeApp API which configurably uses either the status bar (if
-  present) or dialogs for messages. e.g.
+ * Remove or fully implement gnome-app-util.h
 
-    gnome_app_warning (GnomeApp * app, const gchar * message);
-    gnome_app_yes_no_question (GnomeApp * app, const gchar * question);
-    gnome_app_status (GnomeApp * app, const gchar * status); 
+ * Remove gnome-dns.h? I think there's another library that may be better.
+   For that matter gnome-vfs may handle this problem.
 
-  [gnome-app-util.h]
+ * Remove obsolete gnome-font-selector, replaced by GtkFontSelection
 
-* A way to configure libgnomeui. Does this exist? It would allow setting
-  global Gnome preferences. It should use gnome-config and not a gtkrc.
-  Ideally, however, it would allow setting gtkrc-type things, so 
-  editing gtkrc isn't necessary to get flashy color schemes on Gnome apps.
+ * Remove GnomeGuru, replaced by GnomeDruid
 
-  [gnome-preferences.h, not really well-thought-out or finished.]
+ * Remove gnome-pixmap-entry (I think, maybe I mean GnomeIconSel, one 
+   of these things is deprecated IIRC)
 
-* gnome-propertybox could be expanded to allow user configuration.
-  Some (popular -- see gnome list) ideas are to let the user get rid
-  of the Apply button, or the let the user have a per-page Apply button
-  (in this case it would appear inside the notebook page)
-  In theory the API shouldn't change when this is done.
+ * Remove gnome-less (too pointless) 
 
-  [gnome-preferences.h]
+ * Remove gnome-number-entry (ditto)
 
-* gnome-propertybox could also use a way to cause an OK to be aborted
-  This would take the form of a flag that is cleared before a global
-  apply, set via some new function, and checked before closing the
-  window
+ * Remove gnome-preferences.[hc] ?
 
-  [the "close" signal of GnomeDialog can be blocked by returning
-   false from a callback connected to it.]
+ * Remove gnome-properties.[hc] ? 
 
-* gnome-dialog should have a _set_hide method to hide on any click, 
-  instead of destroying. This can be a way to speed up a program's UI,
-  with a space tradeoff of course. gnome_dialog_close() should hide
-  rather than destroy if this flag is set.
+ * Remove gnome-property-entries.[hc] ?
 
-  [gnome_dialog_just_hides]
+ * Remove gnome-spell
 
-* gnome-less.[hc] isn't quite finished, and doesn't build by default
-  due to the feature freeze. Fix this.
- 
-  [Now builds, works except for popup menu.]
+ * Remove gnome-startup if possible
+
+ * Remove gtk-ted
+
+ * Consider a new property box, addressing some problems:
+    - shouldn't be required to have a notebook if there's only 
+      one page
+    - should have try/revert like the control center
+
+ * We need stock icons for try/revert
+
+ * update gnome-winhints to reflect new window manager spec
+
+ * Use AbiWord centerDialog function in gnome_dialog_set_parent(),
+   it's nicer than the dumb thing GnomeDialog does
+
+ * Fix bugs!
+
