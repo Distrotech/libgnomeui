@@ -102,6 +102,7 @@ GtkObject     *gnome_mdi_new                (gchar *, gchar *);
 
 void          gnome_mdi_set_mode            (GnomeMDI *, gint);
 
+/* setting the menu and toolbar stuff */
 void          gnome_mdi_set_menu_template   (GnomeMDI*, GnomeUIInfo *);
 void          gnome_mdi_set_toolbar_template(GnomeMDI*, GnomeUIInfo *);
 void          gnome_mdi_set_child_menu_path (GnomeMDI *, gchar *);

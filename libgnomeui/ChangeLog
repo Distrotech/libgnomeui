@@ -1,3 +1,11 @@
+1998-07-02  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c: the child-specific menu callbacks no longer
+	get their GnomeMDIChild pointer passed as user data.
+	gnome_mdi_get_active_view() (or mdi->active_view) and
+	VIEW_GET_CHILD() macro should be used to get the pointer
+	to the GnomeMDIChild in callbacks.
+	
 1998-07-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_shutdown): Implemented

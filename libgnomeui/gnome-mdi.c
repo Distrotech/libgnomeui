@@ -69,7 +69,7 @@ static gint             count_ui_info_items      (GnomeUIInfo *);
 
 #define DND_TYPE            "mdi/bookpage"
 
-/* key for stuff that we'll assign to our GnomeApps */
+/* keys for stuff that we'll assign to our GnomeApps */
 #define TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
 #define MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
 #define MDI_CHILD_LIST_KEY         "MDIChildList"
@@ -757,16 +757,16 @@ static gint app_close_book(GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi) {
 
       node = child->views;
       while(node) {
-	if(VIEW_GET_WINDOW(node->data) != app)
-	  break;
+        if(VIEW_GET_WINDOW(node->data) != app)
+          break;
 
-	node = g_list_next(node);
+        node = g_list_next(node);
       }
 
       if(node == NULL) {   /* all the views reside in this GnomeApp */
-	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child, &handler_ret);
-	if(handler_ret == FALSE)
-	  return TRUE;
+        gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child, &handler_ret);
+        if(handler_ret == FALSE)
+          return TRUE;
       }
     }
 
@@ -779,9 +779,9 @@ static gint app_close_book(GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi) {
       page_node = g_list_next(page_node);
 
       if(CHILD_LAST_VIEW(child))
-	gnome_mdi_remove_child(mdi, child, TRUE);
+        gnome_mdi_remove_child(mdi, child, TRUE);
       else
-	gnome_mdi_remove_view(mdi, view, TRUE);
+        gnome_mdi_remove_view(mdi, view, TRUE);
     }
   }
 
@@ -825,9 +825,9 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
       /* remove items */
       children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
       while(children && items > 0) {
-	gtk_container_remove(GTK_CONTAINER(parent), GTK_WIDGET(children->data));
-	children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
-	items--;
+        gtk_container_remove(GTK_CONTAINER(parent), GTK_WIDGET(children->data));
+        children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
+        items--;
       }
     }
 
@@ -839,7 +839,7 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
 
     if( child->menu_template &&
         ( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
-      gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
+      gnome_app_insert_menus(app, mdi->child_menu_path, ui_info);
       gtk_object_set_data(GTK_OBJECT(app), MDI_CHILD_MENU_INFO_KEY, ui_info);
       gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, (gpointer)count_ui_info_items(ui_info));
     }
@@ -849,18 +849,18 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
       parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
 
       if(menu_list && parent) {
-	items = 0;
+        items = 0;
 
-	while(menu_list) {
-	  gtk_menu_shell_insert(GTK_MENU_SHELL(parent), GTK_WIDGET(menu_list->data), pos);
-	  menu_list = g_list_remove(menu_list, menu_list->data);
-	  pos++;
-	  items++;
-	}
-
-	gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, (gpointer)items);
-
-	gtk_widget_queue_resize(parent);
+        while(menu_list) {
+          gtk_menu_shell_insert(GTK_MENU_SHELL(parent), GTK_WIDGET(menu_list->data), pos);
+          menu_list = g_list_remove(menu_list, menu_list->data);
+          pos++;
+          items++;
+        }
+        
+        gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, (gpointer)items);
+        
+        gtk_widget_queue_resize(parent);
       }
     }
   }
