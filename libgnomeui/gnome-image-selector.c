@@ -102,11 +102,6 @@ gnome_image_selector_new (void)
 	GnomeImageSelector *iselector;
 
 	iselector = g_object_new (gnome_image_selector_get_type (),
-				  "want-entry-widget", TRUE,
-				  "want-selector-widget", TRUE,
-				  "want-browse-button", TRUE,
-				  "want-clear-button", TRUE,
-				  "want-default-button", TRUE,
 				  NULL);
 
 	return (GtkWidget *) gnome_selector_client_construct

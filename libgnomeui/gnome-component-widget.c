@@ -29,6 +29,7 @@
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-async.h>
+#include <bonobo/bonobo-main.h>
 
 struct _GnomeSelectorClientPrivate {
     GNOME_Selector selector;
@@ -36,11 +37,12 @@ struct _GnomeSelectorClientPrivate {
 
     gchar *browse_dialog_moniker;
 
-    guint32 want_entry_widget : 1;
-    guint32 want_selector_widget : 1;
-    guint32 want_browse_button : 1;
-    guint32 want_clear_button : 1;
-    guint32 want_default_button : 1;
+    GNOME_Tristate  want_entry_widget;
+    GNOME_Tristate  want_selector_widget;
+    GNOME_Tristate  want_browse_dialog;
+    GNOME_Tristate  want_browse_button;
+    GNOME_Tristate  want_clear_button;
+    GNOME_Tristate  want_default_button;
 
     guint32 constructed : 1;
 
@@ -68,6 +70,7 @@ enum {
     /* Construction properties */
     PROP_WANT_ENTRY_WIDGET,
     PROP_WANT_SELECTOR_WIDGET,
+    PROP_WANT_BROWSE_DIALOG,
     PROP_WANT_BROWSE_BUTTON,
     PROP_WANT_CLEAR_BUTTON,
     PROP_WANT_DEFAULT_BUTTON,
@@ -86,40 +89,6 @@ gnome_selector_client_finalize (GObject *object)
 }
 
 static void
-gnome_selector_client_pbag_get_property (BonoboPropertyBag *bag, BonoboArg *arg,
-					 guint arg_id, CORBA_Environment *ev,
-					 gpointer user_data)
-{
-    GnomeSelectorClient *client;
-
-    g_return_if_fail (user_data != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (user_data));
-
-    client = GNOME_SELECTOR_CLIENT (user_data);
-
-    switch (arg_id) {
-    case PROP_WANT_ENTRY_WIDGET:
-	BONOBO_ARG_SET_BOOLEAN (arg, client->_priv->want_entry_widget);
-	break;
-    case PROP_WANT_SELECTOR_WIDGET:
-	BONOBO_ARG_SET_BOOLEAN (arg, client->_priv->want_selector_widget);
-	break;
-    case PROP_WANT_BROWSE_BUTTON:
-	BONOBO_ARG_SET_BOOLEAN (arg, client->_priv->want_browse_button);
-	break;
-    case PROP_WANT_CLEAR_BUTTON:
-	BONOBO_ARG_SET_BOOLEAN (arg, client->_priv->want_clear_button);
-	break;
-    case PROP_WANT_DEFAULT_BUTTON:
-	BONOBO_ARG_SET_BOOLEAN (arg, client->_priv->want_default_button);
-	break;
-    case PROP_BROWSE_DIALOG_MONIKER:
-	BONOBO_ARG_SET_STRING (arg, client->_priv->browse_dialog_moniker);
-	break;
-    }
-}
-
-static void
 gnome_selector_client_set_property (GObject *object, guint param_id,
 				    const GValue *value, GParamSpec *pspec)
 {
@@ -133,23 +102,27 @@ gnome_selector_client_set_property (GObject *object, guint param_id,
     switch (param_id) {
     case PROP_WANT_ENTRY_WIDGET:
 	g_assert (!client->_priv->constructed);
-	client->_priv->want_entry_widget = g_value_get_boolean (value);
+	client->_priv->want_entry_widget = g_value_get_enum (value);
 	break;
     case PROP_WANT_SELECTOR_WIDGET:
 	g_assert (!client->_priv->constructed);
-	client->_priv->want_selector_widget = g_value_get_boolean (value);
+	client->_priv->want_selector_widget = g_value_get_enum (value);
+	break;
+    case PROP_WANT_BROWSE_DIALOG:
+	g_assert (!client->_priv->constructed);
+	client->_priv->want_browse_button = g_value_get_enum (value);
 	break;
     case PROP_WANT_BROWSE_BUTTON:
 	g_assert (!client->_priv->constructed);
-	client->_priv->want_browse_button = g_value_get_boolean (value);
+	client->_priv->want_browse_button = g_value_get_enum (value);
 	break;
     case PROP_WANT_CLEAR_BUTTON:
 	g_assert (!client->_priv->constructed);
-	client->_priv->want_clear_button = g_value_get_boolean (value);
+	client->_priv->want_clear_button = g_value_get_enum (value);
 	break;
     case PROP_WANT_DEFAULT_BUTTON:
 	g_assert (!client->_priv->constructed);
-	client->_priv->want_default_button = g_value_get_boolean (value);
+	client->_priv->want_default_button = g_value_get_enum (value);
 	break;
     case PROP_BROWSE_DIALOG_MONIKER:
 	g_assert (!client->_priv->constructed);
@@ -174,19 +147,22 @@ gnome_selector_client_get_property (GObject *object, guint param_id, GValue *val
 
     switch (param_id) {
     case PROP_WANT_ENTRY_WIDGET:
-	g_value_set_boolean (value, client->_priv->want_entry_widget);
+	g_value_set_enum (value, client->_priv->want_entry_widget);
 	break;
     case PROP_WANT_SELECTOR_WIDGET:
-	g_value_set_boolean (value, client->_priv->want_selector_widget);
+	g_value_set_enum (value, client->_priv->want_selector_widget);
+	break;
+    case PROP_WANT_BROWSE_DIALOG:
+	g_value_set_enum (value, client->_priv->want_browse_button);
 	break;
     case PROP_WANT_BROWSE_BUTTON:
-	g_value_set_boolean (value, client->_priv->want_browse_button);
+	g_value_set_enum (value, client->_priv->want_browse_button);
 	break;
     case PROP_WANT_CLEAR_BUTTON:
-	g_value_set_boolean (value, client->_priv->want_clear_button);
+	g_value_set_enum (value, client->_priv->want_clear_button);
 	break;
     case PROP_WANT_DEFAULT_BUTTON:
-	g_value_set_boolean (value, client->_priv->want_default_button);
+	g_value_set_enum (value, client->_priv->want_default_button);
 	break;
     case PROP_BROWSE_DIALOG_MONIKER:
 	g_value_set_string (value, client->_priv->browse_dialog_moniker);
@@ -212,38 +188,45 @@ gnome_selector_client_class_init (GnomeSelectorClientClass *klass)
     g_object_class_install_property
 	(object_class,
 	 PROP_WANT_ENTRY_WIDGET,
-	 g_param_spec_boolean ("want-entry-widget", NULL, NULL,
-			       FALSE,
-			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
-				G_PARAM_CONSTRUCT_ONLY)));
+	 g_param_spec_enum ("want-entry-widget", NULL, NULL,
+			    GNOME_TYPE_TRISTATE, GNOME_TRISTATE_DEFAULT,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT_ONLY)));
     g_object_class_install_property
 	(object_class,
 	 PROP_WANT_SELECTOR_WIDGET,
-	 g_param_spec_boolean ("want-selector-widget", NULL, NULL,
-			       FALSE,
-			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
-				G_PARAM_CONSTRUCT_ONLY)));
+	 g_param_spec_enum ("want-selector-widget", NULL, NULL,	
+			    GNOME_TYPE_TRISTATE, GNOME_TRISTATE_DEFAULT,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(object_class,
+	 PROP_WANT_BROWSE_DIALOG,
+	 g_param_spec_enum ("want-browse-dialog", NULL, NULL,
+			    GNOME_TYPE_TRISTATE, GNOME_TRISTATE_DEFAULT,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT_ONLY)));
     g_object_class_install_property
 	(object_class,
 	 PROP_WANT_BROWSE_BUTTON,
-	 g_param_spec_boolean ("want-browse-button", NULL, NULL,
-			       FALSE,
-			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
-				G_PARAM_CONSTRUCT_ONLY)));
+	 g_param_spec_enum ("want-browse-button", NULL, NULL,
+			    GNOME_TYPE_TRISTATE, GNOME_TRISTATE_DEFAULT,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT_ONLY)));
     g_object_class_install_property
 	(object_class,
 	 PROP_WANT_CLEAR_BUTTON,
-	 g_param_spec_boolean ("want-clear-button", NULL, NULL,
-			       FALSE,
-			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
-				G_PARAM_CONSTRUCT_ONLY)));
+	 g_param_spec_enum ("want-clear-button", NULL, NULL,
+			    GNOME_TYPE_TRISTATE, GNOME_TRISTATE_DEFAULT,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT_ONLY)));
     g_object_class_install_property
 	(object_class,
 	 PROP_WANT_DEFAULT_BUTTON,
-	 g_param_spec_boolean ("want-default-button", NULL, NULL,
-			       FALSE,
-			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
-				G_PARAM_CONSTRUCT_ONLY)));
+	 g_param_spec_enum ("want-default-button", NULL, NULL,
+			    GNOME_TYPE_TRISTATE, GNOME_TRISTATE_DEFAULT,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT_ONLY)));
     g_object_class_install_property
 	(object_class,
 	 PROP_BROWSE_DIALOG_MONIKER,
@@ -282,13 +265,68 @@ gnome_selector_client_get_type (void)
     return type;
 }
 
+static void
+add_tristate_arg (GnomeSelectorClient *client, GPtrArray *args, const gchar *prop_name)
+{
+    GValue value = { 0, };
+    GNOME_Tristate retval;
+
+    g_value_init (&value, GNOME_TYPE_TRISTATE);
+    g_object_get_property (G_OBJECT (client), prop_name, &value);
+    retval = g_value_get_enum (&value);
+    g_value_unset (&value);
+
+    if (retval == GNOME_TRISTATE_NO)
+	g_ptr_array_add (args, g_strdup_printf ("%s=0", prop_name));
+    else if (retval == GNOME_TRISTATE_YES)
+	g_ptr_array_add (args, g_strdup_printf ("%s=1", prop_name));
+}
+
+static gchar *
+create_moniker_string (GnomeSelectorClient *client, const gchar *moniker)
+{
+    GPtrArray *args;
+    gchar *args_string, *retval;
+    CORBA_Environment ev;
+    gchar *pbag_moniker;
+
+    args = g_ptr_array_new ();
+    add_tristate_arg (client, args, "want-entry-widget");
+    add_tristate_arg (client, args, "want-selector-widget");
+    add_tristate_arg (client, args, "want-browse-dialog");
+    add_tristate_arg (client, args, "want-browse-button");
+    add_tristate_arg (client, args, "want-clear-button");
+    add_tristate_arg (client, args, "want-default-button");
+
+    g_ptr_array_add (args, NULL);
+    args_string = g_strjoinv (";", (gchar **) args->pdata);
+    g_ptr_array_free (args, TRUE);
+
+    CORBA_exception_init (&ev);
+    pbag_moniker = CORBA_ORB_object_to_string (bonobo_orb (),
+					       BONOBO_OBJREF (client->_priv->pbag),
+					       &ev);
+    CORBA_exception_free (&ev);
+
+    if (!args_string || args_string[0] == '\0')
+	retval = g_strdup_printf ("%s!property-bag=%s", moniker, pbag_moniker);
+    else
+	retval = g_strdup_printf ("%s!%s;property-bag=%s", moniker, args_string,
+				  pbag_moniker);
+
+    CORBA_free (pbag_moniker);
+    g_free (args_string);
+
+    return retval;
+}
+
 GnomeSelectorClient *
 gnome_selector_client_construct (GnomeSelectorClient *client, const gchar *moniker,
 				 Bonobo_UIContainer uic)
 {
-    GNOME_SelectorFactory factory;
     GNOME_Selector selector;
     CORBA_Environment ev;
+    gchar *new_moniker;
 
     g_return_val_if_fail (client != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_SELECTOR_CLIENT (client), NULL);
@@ -297,42 +335,16 @@ gnome_selector_client_construct (GnomeSelectorClient *client, const gchar *monik
 
     CORBA_exception_init (&ev);
 
-    g_message (G_STRLOC);
-
-    client->_priv->pbag = bonobo_property_bag_new (gnome_selector_client_pbag_get_property,
-						   NULL, client);
-
-    bonobo_property_bag_add (client->_priv->pbag,
-			     "browse-dialog-moniker", PROP_BROWSE_DIALOG_MONIKER,
-			     BONOBO_ARG_STRING, NULL, NULL, BONOBO_PROPERTY_READABLE);
-    bonobo_property_bag_add (client->_priv->pbag,
-			     "want-entry-widget", PROP_WANT_ENTRY_WIDGET,
-			     BONOBO_ARG_BOOLEAN, NULL, NULL, BONOBO_PROPERTY_READABLE);
-    bonobo_property_bag_add (client->_priv->pbag,
-			     "want-selector-widget", PROP_WANT_SELECTOR_WIDGET,
-			     BONOBO_ARG_BOOLEAN, NULL, NULL, BONOBO_PROPERTY_READABLE);
-    bonobo_property_bag_add (client->_priv->pbag,
-			     "want-browse-button", PROP_WANT_BROWSE_BUTTON,
-			     BONOBO_ARG_BOOLEAN, NULL, NULL, BONOBO_PROPERTY_READABLE);
-    bonobo_property_bag_add (client->_priv->pbag,
-			     "want-default-button", PROP_WANT_DEFAULT_BUTTON,
-			     BONOBO_ARG_BOOLEAN, NULL, NULL, BONOBO_PROPERTY_READABLE);
-    bonobo_property_bag_add (client->_priv->pbag,
-			     "want-clear-button", PROP_WANT_CLEAR_BUTTON,
-			     BONOBO_ARG_BOOLEAN, NULL, NULL, BONOBO_PROPERTY_READABLE);
+    client->_priv->pbag = bonobo_property_bag_new (NULL, NULL, NULL);
 
     bonobo_property_bag_add_gtk_args (client->_priv->pbag, G_OBJECT (client));
 
-    factory = bonobo_get_object (moniker, "GNOME/SelectorFactory", &ev);
-    if (BONOBO_EX (&ev) || (factory == CORBA_OBJECT_NIL)) {
-	g_object_unref (G_OBJECT (client));
-	CORBA_exception_free (&ev);
-	return NULL;
-    }
+    new_moniker = create_moniker_string (client, moniker);
 
-    selector = GNOME_SelectorFactory_createSelector (factory, BONOBO_OBJREF (client->_priv->pbag), &ev);
+    g_message (G_STRLOC " : `%s'", new_moniker);
 
-    if (BONOBO_EX (&ev) || (selector == NULL)) {
+    selector = bonobo_get_object (new_moniker, "GNOME/Selector", &ev);
+    if (BONOBO_EX (&ev) || (selector == CORBA_OBJECT_NIL)) {
 	g_object_unref (G_OBJECT (client));
 	CORBA_exception_free (&ev);
 	return NULL;

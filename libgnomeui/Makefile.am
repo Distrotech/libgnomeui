@@ -82,6 +82,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-geometry.c		\
 	gnome-selector-client.c		\
 	gnome-selector-component.c	\
+	gnome-selector-dialog-client.c	\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
 	gnome-image-entry.c		\
@@ -122,6 +123,7 @@ gnome_headers = \
 	gnome-druid-page-standard.h	\
 	gnome-selector-client.h		\
 	gnome-selector-component.h	\
+	gnome-selector-dialog-client.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
 	gnome-image-entry.h		\

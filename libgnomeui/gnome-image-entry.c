@@ -198,11 +198,6 @@ gnome_image_entry_new_icon_entry (void)
 	GnomeImageEntry *ientry;
 
 	ientry = g_object_new (gnome_image_entry_get_type (),
-			       "want-entry-widget", FALSE,
-			       "want-selector-widget", TRUE,
-			       "want-browse-button", FALSE,
-			       "want-clear-button", FALSE,
-			       "want-default-button", FALSE,
 			       "is-pixmap-entry", FALSE, NULL);
 
 	return (GtkWidget *) gnome_selector_client_construct
@@ -217,11 +212,6 @@ gnome_image_entry_new_pixmap_entry (guint preview_x, guint preview_y)
 	GnomeImageEntry *ientry;
 
 	ientry = g_object_new (gnome_image_entry_get_type (),
-			       "want-entry-widget", TRUE,
-			       "want-selector-widget", TRUE,
-			       "want-browse-button", TRUE,
-			       "want-clear-button", FALSE,
-			       "want-default-button", FALSE,
 			       "preview-x", preview_x, "preview-y", preview_y,
 			       "is-pixmap-entry", TRUE, NULL);
 
