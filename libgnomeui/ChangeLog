@@ -1,3 +1,8 @@
+2002-01-10  jacob berkman  <jacob@ximian.com>
+
+	* gnome-dialog.c (gnome_dialog_init_action_area): use END layout
+	like GtkDialog, remove FIXME
+
 2002-01-08  Richard Hestilow  <hestilow@ximian.com>
 
 	* gnome-ui-init.c: Re-added gtk+/sound event bridge code.
@@ -20,7 +25,6 @@
 
         * gnome-dateedit.c: Fixed a small i18n glitch
 
->>>>>>> 1.1768
 2001-12-28  jacob berkman  <jacob@ximian.com>
 
 	* gnome-vfs-util.h: gnome-vfs-types.h is deprecated, use
