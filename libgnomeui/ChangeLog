@@ -1,3 +1,9 @@
+1998-03-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (gnome_app_do_menu_creation): The activate
+	signal should not be connected to subtree items --- you don't want
+	to call a subtree structure when the user clicks on a submenu, right?
+
 1998-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-app-helper.h: Removed the explicit values from the type
