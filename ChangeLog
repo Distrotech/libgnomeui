@@ -1,3 +1,7 @@
+2002-06-07  Malcolm Tredinnick <malcolm@commsecure.com.au>
+	* libgnomeui/Makefile.am: Fix the last commit by balancing the
+	  quotes.  It builds again now.
+
 2002-06-06  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in:

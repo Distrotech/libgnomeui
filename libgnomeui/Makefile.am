@@ -30,7 +30,7 @@ INCLUDES = \
         -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
         -DGNOMEUIBINDIR=\""$(bindir)"\" 		\
 	-DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
-        -DGNOMEUILOCALEDIR="$(gnomelocaledir)"\"	\
+        -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\"	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMEUI_CFLAGS)
