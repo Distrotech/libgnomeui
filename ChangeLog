@@ -1,3 +1,8 @@
+2005-01-24  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Bump gnome-vfs req to 2.7.3
+	Closes bug #154969. Reported by <foser at gentoo org>
+
 2005-01-08  Anders Carlsson  <andersca@imendio.com>
 
 	* libgnomeui/gnome-thumbnail.c 
