@@ -1,3 +1,7 @@
+1998-11-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c: Updates to the TO-DO list.
+
 1998-11-03  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-child.[ch] (gnome_mdi_active_window): return active_window

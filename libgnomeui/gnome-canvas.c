@@ -21,8 +21,6 @@
  *
  * - GC put functions for items.
  *
- * - Stipple for filling items.
- *
  * - Widget item (finish it).
  *
  * - GList *gnome_canvas_gimme_all_items_contained_in_this_area (GnomeCanvas *canvas, Rectangle area);
