@@ -773,8 +773,6 @@ ientry_browse(GnomeIconEntry *ientry)
 
 		gtk_widget_show_all(priv->pick_dialog);
 
-		gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(priv->icon_sel));
-
 		g_signal_connect (priv->pick_dialog, "response",
 				  G_CALLBACK (dialog_response),
 				  ientry);
@@ -783,6 +781,8 @@ ientry_browse(GnomeIconEntry *ientry)
 		g_signal_connect_after (gil, "select_icon",
 					G_CALLBACK (gil_icon_selected_cb),
 					ientry);
+		gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(priv->icon_sel));
+
 	} else {
 		gtk_window_present (GTK_WINDOW (priv->pick_dialog));
 
