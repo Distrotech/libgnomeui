@@ -1,3 +1,7 @@
+1999-08-28  Karl Eichwalder  <ke@suse.de>
+
+	* winhints_demo.c (about_cb): Avoid too long lines.
+
 1999-08-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-procbar.c (gnome_proc_bar_construct): New function. 
