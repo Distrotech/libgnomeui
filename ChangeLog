@@ -1,3 +1,10 @@
+2002-07-25  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-file-entry.c (browse_clicked): Do not add a
+	grab.  Call gtk_window_set_modal() before showing the window.  Set
+	the file selection dialog to be a transient of the toplevel window
+	of the file entry.  Fixes the libgnomeui part of #88849.
+
 Fri Jul 19 03:14:27 2002  Kristian Rietveld  <kris@gtk.org>
 
 	* glade/glade-gnome.c (dialog_build_children): free label,

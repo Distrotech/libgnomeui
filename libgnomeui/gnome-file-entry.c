@@ -500,9 +500,9 @@ build_filename (GnomeFileEntry *fentry)
 static void
 browse_clicked(GnomeFileEntry *fentry)
 {
-	GtkWidget *fsw;
 	GtkFileSelection *fs;
 	char *p;
+	GtkWidget *toplevel;
 
 	/*if it already exists make sure it's shown and raised*/
 	if(fentry->fsw) {
@@ -522,13 +522,17 @@ browse_clicked(GnomeFileEntry *fentry)
 	}
 
 
-	fsw = gtk_file_selection_new (fentry->_priv->browse_dialog_title
-				      ? fentry->_priv->browse_dialog_title
-				      : _("Select file"));
+	fentry->fsw = gtk_file_selection_new (fentry->_priv->browse_dialog_title
+					      ? fentry->_priv->browse_dialog_title
+					      : _("Select file"));
 
-	g_object_set_data (G_OBJECT (fsw), "gnome_file_entry", fentry);
+	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (fentry));
+	if (GTK_WIDGET_TOPLEVEL (toplevel) && GTK_IS_WINDOW (toplevel))
+		gtk_window_set_transient_for (GTK_WINDOW (fentry->fsw), GTK_WINDOW(toplevel));
 
-	fs = GTK_FILE_SELECTION (fsw);
+	g_object_set_data (G_OBJECT (fentry->fsw), "gnome_file_entry", fentry);
+
+	fs = GTK_FILE_SELECTION (fentry->fsw);
 	gtk_widget_set_sensitive(fs->file_list,
 				 ! fentry->_priv->directory_entry);
 
@@ -543,19 +547,15 @@ browse_clicked(GnomeFileEntry *fentry)
 			  fs);
 	g_signal_connect_swapped (fs->cancel_button, "clicked",
 				  G_CALLBACK (gtk_widget_destroy),
-				  fsw);
-	g_signal_connect (fsw, "destroy",
+				  fentry->fsw);
+	g_signal_connect (fentry->fsw, "destroy",
 			  G_CALLBACK (browse_dialog_kill),
 			  fentry);
 
-	if (gtk_grab_get_current ())
-		gtk_grab_add (fsw);
+	if (fentry->_priv->is_modal)
+		gtk_window_set_modal (GTK_WINDOW (fentry->fsw), TRUE);
 
-	gtk_widget_show (fsw);
-
-	if(fentry->_priv->is_modal)
-		gtk_window_set_modal (GTK_WINDOW (fsw), TRUE);
-	fentry->fsw = fsw;
+	gtk_widget_show (fentry->fsw);
 }
 
 static void
