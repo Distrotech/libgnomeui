@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "POT-Creation-Date: 2003-01-08 06:05+0100\n"
-"PO-Revision-Date: 2003-01-08 07:51+EDT\n"
+"PO-Revision-Date: 2003-01-14 11:02+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
@@ -888,7 +888,7 @@ msgstr "ከምልክቶቹ ጐን ቀዳሚ ጽሑፍ"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
-msgstr "ምልክቶቸን ብቻ"
+msgstr "ምልክቶችን ብቻ"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
@@ -897,7 +897,7 @@ msgstr "ጽሑፉን ብቻ"
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr "ነባሩን ዴስክቶፕ ይጠቀሙ (%s)"
+msgstr "ነባሩን ሠሌዳ ይጠቀሙ (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -1055,7 +1055,7 @@ msgstr "_ቃኝ..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "የፋይል መምረጫ ፋይል ለመምረጥ አሳይ"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1099,11 +1099,11 @@ msgstr "የተመረጠው GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "የጽሑፉ ቅድመ እይታ"
+msgstr "የጽሑፉ ቅድመ ዕይታ"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "በመምረጭው ውስጥ የጽሑፉ ቅድመ እይታው ይታያል"
+msgstr "በመምረጭው ውስጥ የጽሑፉ ቅድመ ዕይታው ይታያል"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1278,11 +1278,11 @@ msgstr "መልእክት"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
-msgstr "ቅድመ እይታውን ተጠቀም"
+msgstr "ቅድመ ዕይታውን ተጠቀም"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr "የቆሻብቀሮቆ መግቢያ ቅድመ እይታ ሊኖረው ይገባው እንደሆነ"
+msgstr "የቆሻብቀሮቆ መግቢያ ቅድመ ዕይታ ሊኖረው ይገባው እንደሆነ"
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
@@ -1290,11 +1290,11 @@ msgstr "ምስል የለም"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "የምስሉ ቅድመ እይታ"
+msgstr "የምስሉ ቅድመ ዕይታ"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
-msgstr "አሁን ለተጠቀሰው ምስል ቅድመ እይታ"
+msgstr "አሁን ለተጠቀሰው ምስል ቅድመ ዕይታ"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
