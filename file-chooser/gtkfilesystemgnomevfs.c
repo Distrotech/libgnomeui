@@ -173,8 +173,8 @@ static void     set_vfs_error     (GnomeVFSResult   result,
 				   GError         **error);
 static gboolean has_valid_scheme  (const char      *uri);
 
-GObjectClass *system_parent_class;
-GObjectClass *folder_parent_class;
+static GObjectClass *system_parent_class;
+static GObjectClass *folder_parent_class;
 
 #define ITEMS_PER_NOTIFICATION 100
 
@@ -182,7 +182,7 @@ GObjectClass *folder_parent_class;
  * GtkFileSystemGnomeVFS
  */
 GType
-_gtk_file_system_gnome_vfs_get_type (void)
+gtk_file_system_gnome_vfs_get_type (void)
 {
   static GType file_system_gnome_vfs_type = 0;
 
@@ -220,7 +220,7 @@ _gtk_file_system_gnome_vfs_get_type (void)
 }
 
 /**
- * _gtk_file_system_gnome_vfs_new:
+ * gtk_file_system_gnome_vfs_new:
  * 
  * Creates a new #GtkFileSystemGnomeVFS object. #GtkFileSystemGnomeVFS
  * implements the #GtkFileSystem interface using the GNOME-VFS
@@ -229,7 +229,7 @@ _gtk_file_system_gnome_vfs_get_type (void)
  * Return value: the new #GtkFileSystemGnomeVFS object
  **/
 GtkFileSystem *
-_gtk_file_system_gnome_vfs_new (void)
+gtk_file_system_gnome_vfs_new (void)
 {
   GtkFileSystemGnomeVFS *system_vfs;
   GtkFilePath *local_path;
@@ -343,8 +343,22 @@ static void
 ensure_types (GtkFileFolderGnomeVFS *folder_vfs,
 	      GtkFileInfoType        types)
 {
-}
+  if ((folder_vfs->types & types) != types)
+    {
+      folder_vfs->types |= types;
 
+      if (folder_vfs->async_handle)
+	gnome_vfs_async_cancel (folder_vfs->async_handle);
+      
+      gnome_vfs_async_load_directory (&folder_vfs->async_handle,
+				      folder_vfs->uri,
+				      get_options (folder_vfs->types),
+				      ITEMS_PER_NOTIFICATION,
+				      GNOME_VFS_PRIORITY_DEFAULT,
+				      directory_load_callback, folder_vfs);
+
+    }
+}
 
 static GtkFileFolder *
 gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
@@ -940,7 +954,7 @@ get_options (GtkFileInfoType types)
 {
   GnomeVFSFileInfoOptions options = GNOME_VFS_FILE_INFO_FOLLOW_LINKS;
 
-  if (types & GTK_FILE_INFO_MIME_TYPE)
+  if ((types & GTK_FILE_INFO_MIME_TYPE) || (types & GTK_FILE_INFO_ICON))
     {
       options |= GNOME_VFS_FILE_INFO_GET_MIME_TYPE;
     }
@@ -979,7 +993,7 @@ info_from_vfs_info (const gchar      *uri,
   gtk_file_info_set_is_hidden (info, vfs_info->name && vfs_info->name[0] == '.');
   gtk_file_info_set_is_folder (info, vfs_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY);
 
-  if (types & GTK_FILE_INFO_MIME_TYPE)
+  if ((types & GTK_FILE_INFO_MIME_TYPE) || (types & GTK_FILE_INFO_ICON))
     {
       gtk_file_info_set_mime_type (info, vfs_info->mime_type);
     }
@@ -987,11 +1001,6 @@ info_from_vfs_info (const gchar      *uri,
   gtk_file_info_set_modification_time (info, vfs_info->mtime);
   gtk_file_info_set_size (info, vfs_info->size);
   
-  if (types & GTK_FILE_INFO_ICON)
-    {
-      /* NOT YET IMPLEMENTED */
-    }
-
   return info;
 }
 
@@ -1060,12 +1069,14 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
 {
   GtkFileFolderGnomeVFS *folder_vfs = user_data;
   GList *tmp_list;
-  GSList *uris = NULL;
+  GSList *added_uris = NULL;
+  GSList *changed_uris = NULL;
 
   for (tmp_list = list; tmp_list; tmp_list = tmp_list->next)
     {
       GnomeVFSFileInfo *vfs_info;
       gchar *uri;
+      gboolean new = FALSE;
 
       vfs_info = tmp_list->data;
       if (strcmp (vfs_info->name, ".") == 0 ||
@@ -1081,18 +1092,32 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
 	  child->info = vfs_info;
 	  gnome_vfs_file_info_ref (child->info);
 
+	  if (!g_hash_table_lookup (folder_vfs->children, child->uri))
+	    new = TRUE;
+	    
 	  g_hash_table_replace (folder_vfs->children,
 				child->uri, child);
-	  
-	  uris = g_slist_prepend (uris, child->uri);
+
+	  if (new)
+	    added_uris = g_slist_prepend (added_uris, child->uri);
+	  else
+	    changed_uris = g_slist_prepend (changed_uris, child->uri);
 	}
     }
 
-  if (uris)
+  if (added_uris)
     {
-      g_signal_emit_by_name (folder_vfs, "files-added", uris);
-      g_slist_free (uris);
+      g_signal_emit_by_name (folder_vfs, "files-added", added_uris);
+      g_slist_free (added_uris);
     }
+  if (changed_uris)
+    {
+      g_signal_emit_by_name (folder_vfs, "files-changed", changed_uris);
+      g_slist_free (changed_uris);
+    }
+
+  if (result != GNOME_VFS_OK)
+    folder_vfs->async_handle = NULL;
 }
 
 static void

@@ -26,14 +26,14 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FILE_SYSTEM_GNOME_VFS             (_gtk_file_system_gnome_vfs_get_type ())
+#define GTK_TYPE_FILE_SYSTEM_GNOME_VFS             (gtk_file_system_gnome_vfs_get_type ())
 #define GTK_FILE_SYSTEM_GNOME_VFS(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_SYSTEM_GNOME_VFS, GtkFileSystemGnomeVFS))
 #define GTK_IS_FILE_SYSTEM_GNOME_VFS(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_SYSTEM_GNOME_VFS))
 
 typedef struct _GtkFileSystemGnomeVFS      GtkFileSystemGnomeVFS;
 
-GtkFileSystem *_gtk_file_system_gnome_vfs_new       (void);
-GType          _gtk_file_system_gnome_vfs_get_type (void);
+GtkFileSystem *gtk_file_system_gnome_vfs_new       (void);
+GType          gtk_file_system_gnome_vfs_get_type (void);
      
 G_END_DECLS
 

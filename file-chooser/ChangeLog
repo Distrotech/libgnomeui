@@ -1,3 +1,24 @@
+Wed Jul 16 16:50:31 2003  Owen Taylor  <otaylor@redhat.com>
+
+	* configure.ac Makefile.am: auto-ize.
+
+	* xdgmime/: Add freedesktop.org MIME spec implementatin
+	by Jonathan Blandford.
+
+	* gtkfilesystem.[ch]: Add gtk_file_info_render_icon()
+	gtk_file_info_set/get_icon_type to do icon handling
+	based on MIME type. Add a simple icon caching system.
+
+	* gtkfilesystemgnomevfs.c: Implement ensure_types()
+	so that extending the set of types for a loaded 
+	directory works. Set the MIME type to get the default
+	icon handling.
+
+	* gtkfilesystemunix.c: Look up the MIME type using
+	xdgmime.
+
+	* gtkfilechooserimpldefault.c: Display icons in the list.
+
 Fri Jul 11 14:37:07 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* gtkfilechooser.[ch] gtkfilechooserprivate.h
