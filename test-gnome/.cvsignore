@@ -2,3 +2,5 @@
 .libs
 *.o
 test-gnome
+Makefile
+Makefile.in

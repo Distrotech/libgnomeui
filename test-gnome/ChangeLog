@@ -1,3 +1,8 @@
+2001-07-02  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* testgnome.[ch]: Some cleanup, but it does not run now :-?. I think
+	that is not my fault, but I'm not sure...
+
 2001-06-17  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* Started the port to Gnome 2.0

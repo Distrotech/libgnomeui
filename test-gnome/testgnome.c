@@ -28,9 +28,6 @@
 
 #include <libgnomeui.h>
 #include <libgnomeui/gnome-window.h>
-/*#include <libgnomeui/gnome-ditem-edit.h>*/
-/* #include <libgnomeui/gnome-paper-selector.h>*/
-#include <liboaf/liboaf.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-win.h>
 #include <bonobo/bonobo-ui-util.h>
@@ -53,8 +50,11 @@ static void
 test_exit (TestGnomeApp *app)
 {
 	bonobo_object_unref (BONOBO_OBJECT (app->ui_container));
+	bonobo_object_unref (BONOBO_OBJECT (app->ui_component));
 
 	gtk_widget_destroy (app->app);
+	
+	g_free (app);
 
 	gtk_main_quit ();
 }
@@ -116,8 +116,6 @@ static TestGnomeApp *
 create_newwin(gboolean normal, gchar *appname, gchar *title)
 {
         TestGnomeApp		*app;
-	Bonobo_UIContainer	corba_container;
-	BonoboUIComponent	*uic;
 
 	app = g_new0 (TestGnomeApp, 1);
 	app->app = bonobo_window_new (appname, title);
@@ -125,18 +123,15 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 		gtk_signal_connect(GTK_OBJECT(app->app), "delete_event",
 				   GTK_SIGNAL_FUNC(quit_test), app);
 	};
-
-	gnome_window_set_icon_from_default (GTK_WINDOW(app->app));
 	app->ui_container = bonobo_ui_container_new ();
 	bonobo_ui_container_set_win (app->ui_container, 
 				     BONOBO_WINDOW (app->app));
-	uic = bonobo_ui_component_new (appname);
-	corba_container = bonobo_object_corba_objref (BONOBO_OBJECT (app->ui_container));
-	bonobo_ui_component_set_container (uic, corba_container);
-	bonobo_ui_component_freeze (uic, NULL);
-	bonobo_ui_util_set_ui (uic, GNOMEUIDATADIR, "testgnome.xml", appname);
-	bonobo_ui_component_thaw (uic, NULL);
-	bonobo_ui_component_add_verb_list_with_data (uic, verbs, app);
+	app->ui_component = bonobo_ui_component_new (appname);
+	bonobo_ui_component_set_container (app->ui_component,
+					   BONOBO_OBJREF(app->ui_container));
+	bonobo_ui_util_set_ui (app->ui_component, GNOMEUIDATADIR, "testgnome.xml", appname);
+	bonobo_ui_component_add_verb_list_with_data (app->ui_component, verbs,
+						     app->app);
 	
 	return app;
 }
@@ -1034,7 +1029,6 @@ main (int argc, char **argv)
 /*		{ "unit spinner", create_unit_spinner },*/
 	  };
 	int nbuttons = sizeof (buttons) / sizeof (buttons[0]);
-	CORBA_Environment ev;
 	TestGnomeApp *app;
 	GtkWidget *box1;
 	GtkWidget *box2;
@@ -1043,14 +1037,12 @@ main (int argc, char **argv)
 	int i;
 
 	
-	CORBA_exception_init (&ev);
-	gnome_program_init ("testGNOME", VERSION, &libgnomeui_module_info, argc, argv, NULL);
+	gnome_program_init ("testGNOME", VERSION, &libgnomeui_module_info,
+			    argc, argv, NULL);
 
 	if (bonobo_init (&argc, argv) == FALSE)
 		g_error ("Could not initialize Bonobo!\n");
-
 	app = create_newwin (FALSE, "testGNOME", "testGNOME");
-
 	gtk_widget_set_usize (app->app, 200, 300);
 	box1 = gtk_vbox_new (FALSE, 0);
 	bonobo_window_set_contents (BONOBO_WINDOW (app->app), box1);
@@ -1067,7 +1059,7 @@ main (int argc, char **argv)
 	box2 = gtk_vbox_new (FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (box2), 10);
 	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), box2);
-	gtk_container_set_focus_vadjustment (GTK_CONTAINER (box2),gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW(scrolled_window)));
+	gtk_container_set_focus_vadjustment (GTK_CONTAINER (box2), gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW(scrolled_window)));
 	gtk_widget_show (box2);
 	for (i = 0; i < nbuttons; i++) {
 		button = gtk_button_new_with_label (buttons[i].label);
