@@ -1,3 +1,11 @@
+1999-01-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (popup_connect_func): Do not test for the
+	callback being NULL here, since it may not work for modal popup menus.
+	(popup_marshal_func): Test for the callback being NULL here.
+	Misc. indentation fixes.  Please keep indentation consistent if
+	you modify a file!
+
 1999-01-25  Nat Friedman  <nat@nat.org>
 
 	* gnome-dentry-edit.c (gnome_dentry_get_name_entry): New function

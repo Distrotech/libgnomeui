@@ -36,27 +36,24 @@ popup_connect_func (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData 
 {
 	g_assert (uibdata->is_interp);
 
-	if (uiinfo->moreinfo)
-          {
-                gtk_object_set_data (GTK_OBJECT (uiinfo->widget), 
-                                     TOPLEVEL_MENUSHELL_KEY, 
-                                     global_menushell_hack);
+	gtk_object_set_data (GTK_OBJECT (uiinfo->widget), 
+			     TOPLEVEL_MENUSHELL_KEY, 
+			     global_menushell_hack);
 
-		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
-					 NULL,
-					 uibdata->relay_func,
-					 uiinfo->moreinfo,
-					 uibdata->destroy_func,
-					 FALSE,
-					 FALSE);
-          }
+	gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
+				 NULL,
+				 uibdata->relay_func,
+				 uiinfo->moreinfo,
+				 uibdata->destroy_func,
+				 FALSE,
+				 FALSE);
 }
 
 static GtkWidget* 
 get_toplevel(GtkWidget* menuitem)
 {
-  return gtk_object_get_data (GTK_OBJECT (menuitem),
-                              TOPLEVEL_MENUSHELL_KEY);
+	return gtk_object_get_data (GTK_OBJECT (menuitem),
+				    TOPLEVEL_MENUSHELL_KEY);
 }
 
 /* Our custom marshaller for menu items.  We need it so that it can extract the per-attachment
@@ -72,11 +69,16 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
 	ActivateFunc func;
 	gpointer user_data;
 
-	func = (ActivateFunc) data;
-	user_data = gtk_object_get_data (GTK_OBJECT (get_toplevel(GTK_WIDGET (object))), "gnome_popup_menu_do_popup_user_data");
+	user_data = gtk_object_get_data (GTK_OBJECT (get_toplevel(GTK_WIDGET (object))),
+					 "gnome_popup_menu_do_popup_user_data");
 
-	gtk_object_set_data (GTK_OBJECT (get_toplevel(GTK_WIDGET (object))), "gnome_popup_menu_active_item", object);
-	(* func) (object, user_data);
+	gtk_object_set_data (GTK_OBJECT (get_toplevel(GTK_WIDGET (object))),
+			     "gnome_popup_menu_active_item",
+			     object);
+
+	func = (ActivateFunc) data;
+	if (func)
+		(* func) (object, user_data);
 }
 
 /**
@@ -140,16 +142,16 @@ gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
 GtkWidget *
 gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 {
-  GtkAccelGroup *accelgroup;
-  GtkWidget *menu;
+	GtkAccelGroup *accelgroup;
+	GtkWidget *menu;
 
-  accelgroup = gtk_accel_group_new();
+	accelgroup = gtk_accel_group_new();
   
-  menu = gnome_popup_menu_new_with_accelgroup(uiinfo, accelgroup);
+	menu = gnome_popup_menu_new_with_accelgroup(uiinfo, accelgroup);
 
-  gtk_accel_group_attach(accelgroup, GTK_OBJECT (menu));
+	gtk_accel_group_attach(accelgroup, GTK_OBJECT (menu));
 
-  return menu;
+	return menu;
 }
 
 /**
@@ -164,21 +166,21 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 GtkAccelGroup *
 gnome_popup_menu_get_accel_group(GtkMenu *menu)
 {
-  GSList *accel_group_list;
+	GSList *accel_group_list;
 
-  accel_group_list = gtk_accel_groups_from_object(GTK_OBJECT (menu));
+	accel_group_list = gtk_accel_groups_from_object(GTK_OBJECT (menu));
 
-  if (accel_group_list == NULL)
-    return NULL;
+	if (accel_group_list == NULL)
+		return NULL;
 
-  /*
-   * It is ok to just return the first element in the list, because
-   * we attach the accelgroup to the menu just after the menu is
-   * created (in gnome_popup_menu_new), and the accelgroup we
-   * created is always going to be the first one.
-   *
-   */
-  return (GtkAccelGroup *) (accel_group_list->data);
+	/*
+	 * It is ok to just return the first element in the list, because
+	 * we attach the accelgroup to the menu just after the menu is
+	 * created (in gnome_popup_menu_new), and the accelgroup we
+	 * created is always going to be the first one.
+	 *
+	 */
+	return (GtkAccelGroup *) (accel_group_list->data);
 }
 
 /* Callback used when a button is pressed in a widget attached to a popup menu.  It decides whether
