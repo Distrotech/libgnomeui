@@ -1,3 +1,9 @@
+2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-icon-entry.c: Fix a crash when
+	doing some crazy stuff with the icon entry. Fixes
+	bug #106298. Patch from Balamurali Viswanathan.
+	
 2003-05-09  Mike Newman  <mike@gtnorthern.demon.co.uk>
 
 	* libgnomeui/gnome-icon-entry.c: (browse_clicked): if a preview
