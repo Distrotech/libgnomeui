@@ -40,7 +40,6 @@
 
 
 /* FIXME: More includes! */
-#define _(x) (x)
 
 struct _GnomeAboutPrivate {
 	gchar *name;
