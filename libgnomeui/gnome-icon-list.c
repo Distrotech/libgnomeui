@@ -45,6 +45,7 @@
 #include "gnome-icon-list.h"
 #include "gnome-icon-item.h"
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
+#include <libgnomecanvas/gnome-canvas-text.h>
 #include <libgnomecanvas/gnome-canvas-rect-ellipse.h>
 
 #include <libgnomeuiP.h>
@@ -90,6 +91,7 @@ static GtkContainerClass *parent_class;
 /* Icon structure */
 typedef struct {
 	/* Icon image and text items */
+	GnomeCanvasGroup *group;
 	GnomeCanvasPixbuf *image;
 	GnomeIconTextItem *text;
 
@@ -216,10 +218,11 @@ icon_line_height (Gil *gil, IconLine *il)
 static void
 icon_get_height (Icon *icon, int *icon_height, int *text_height)
 {
-	double d_icon_height;
+	double d_icon_height, dy1, dy2;
 	gtk_object_get(GTK_OBJECT(icon->image), "height", &d_icon_height, NULL);
+	gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->text), NULL, &dy1, NULL, &dy2);
 	*icon_height = d_icon_height;
-	*text_height = icon->text->ti->height;
+	*text_height = dy2 - dy1;
 }
 
 static int
@@ -280,15 +283,10 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 	else
 		x_offset = 0;
 
-	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
+	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->group),
 			       "x",  (double) (x + x_offset),
 			       "y",  (double) (y + y_offset),
-			       "x_set", TRUE,
-			       "y_set", TRUE,
 			       NULL);
-	gnome_icon_text_item_setxy (icon->text,
-				    x,
-				    y + icon_height + priv->text_spacing);
 }
 
 static void
@@ -966,39 +964,46 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 {
 	GnomeIconListPrivate *priv;
 	GnomeCanvas *canvas;
-	GnomeCanvasGroup *group;
 	Icon *icon;
 
 	priv = gil->_priv;
 	canvas = GNOME_CANVAS (gil);
-	group = GNOME_CANVAS_GROUP (canvas->root);
 
 	icon = g_new0 (Icon, 1);
 
 	icon->icon_filename = g_strdup (icon_filename);
 
+	icon->group = GNOME_CANVAS_GROUP (gnome_canvas_item_new (
+		gnome_canvas_root (canvas),
+		gnome_canvas_group_get_type (),
+		"x", 0.0,
+		"y", 0.0,
+		NULL));
+
 	icon->image = GNOME_CANVAS_PIXBUF (gnome_canvas_item_new (
-		group,
+		icon->group,
 		gnome_canvas_pixbuf_get_type (),
 		"x", 0.0,
 		"y", 0.0,
 		"width", (double) gdk_pixbuf_get_width (im),
 		"height", (double) gdk_pixbuf_get_height (im),
 		"pixbuf", im,
+		"anchor", GTK_ANCHOR_NW,
 		NULL));
 
 	icon->text = GNOME_ICON_TEXT_ITEM (gnome_canvas_item_new (
-		group,
+		icon->group,
 		gnome_icon_text_item_get_type (),
+		"text", text,
+		"x", (double) DEFAULT_TEXT_SPACING,
+		"y", (double) gdk_pixbuf_get_height (im),
+		"width", (double) gdk_pixbuf_get_width (im),
+		"editable", priv->is_editable,
+		"anchor", GTK_ANCHOR_NW,
 		NULL));
 
-	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->text),
-			       "use_broken_event_handling", FALSE,
-			       NULL);
-
-	gnome_icon_text_item_configure (icon->text,
-					0, 0, priv->icon_width, NULL,
-					text, priv->is_editable, priv->static_text);
+        GTK_WIDGET_SET_FLAGS (GTK_WIDGET (canvas), GTK_CAN_FOCUS);
+        gtk_widget_grab_focus (GTK_WIDGET (canvas));
 
 	gtk_signal_connect (GTK_OBJECT (icon->image), "event",
 			    GTK_SIGNAL_FUNC (icon_event),

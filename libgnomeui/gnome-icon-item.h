@@ -36,6 +36,7 @@
 
 #include <gtk/gtkentry.h>
 #include <libgnomecanvas/gnome-canvas.h>
+#include <libgnomecanvas/gnome-canvas-text.h>
 #include <libgnomeui/gnome-icon-text.h>
 
 G_BEGIN_DECLS
@@ -53,23 +54,10 @@ G_BEGIN_DECLS
  * reached another major version and it is "fine" to break binary compatibility.
  */
 typedef struct {
-	GnomeCanvasItem canvas_item;
-
-	/* Font name */
-	char *fontname;
+	GnomeCanvasText canvas_item;
 
 	/* Private data */
-	gpointer priv; /* was GtkEntry *entry */
-
-	/* Actual text */
-	char *text;
-
-	/* Text layout information */
-	GnomeIconTextInfo *ti;
-
-	/* Size and maximum allowed width */
-	int x, y;
-	int width;
+	gpointer priv;
 
 	/* Whether the text is being edited */
 	unsigned int editing : 1;
@@ -82,13 +70,10 @@ typedef struct {
 
 	/* Whether the text is editable */
 	unsigned int is_editable : 1;
-
-	/* Whether the text is allocated by us (FALSE if allocated by the client) */
-	unsigned int is_text_allocated : 1;
 } GnomeIconTextItem;
 
 typedef struct {
-	GnomeCanvasItemClass parent_class;
+	GnomeCanvasTextClass parent_class;
 
 	/* Signals we emit */
 	int  (* text_changed)      (GnomeIconTextItem *iti);

@@ -1,3 +1,7 @@
+2001-06-03  Martin Baulig  <baulig@suse.de>
+
+	* gnome-icon-item.[ch]: Derive from GnomeCanvasText.
+
 2001-06-02  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-client.h (GnomeSelectorClientClass):
