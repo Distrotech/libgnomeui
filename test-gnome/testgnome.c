@@ -937,25 +937,6 @@ create_image_selector (void)
 }
 
 /*
- * Less
- */
-
-static void
-create_less(void)
-{
-	TestGnomeApp *app;
-	GtkWidget *less;
-
-	app = create_newwin(TRUE,"testGNOME","Less");
-	less = gnome_less_new();
-	gnome_less_set_font_fixed (GNOME_LESS(less));
-	bonobo_window_set_contents(BONOBO_WINDOW (app),less);
-	gtk_widget_show(less);
-	gtk_widget_show(app->app);
-	gnome_less_show_command(GNOME_LESS(less),"fortune");
-}
-
-/*
  * GnomePaperSelector
  */
 
@@ -1003,7 +984,6 @@ main (int argc, char **argv)
 		{ "icon list", create_icon_list },
 		{ "image entry", create_image_entry },
 /*		{ "image selector", create_image_selector },*/
-/*		{ "less", create_less }, */
 /*		{ "paper selector", create_papersel },*/
 /*		{ "unit spinner", create_unit_spinner },*/
 	  };

@@ -1,3 +1,7 @@
+2001-07-22  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* testgnome.c: Removed all the references to gnome_less.
+
 2001-07-21  Martin Baulig  <baulig@suse.de>
 
 	* testgnome.c (create_pixmap): Removed.
