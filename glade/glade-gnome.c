@@ -45,6 +45,38 @@
 static const char *get_stock_name (const char *stock_name);
 static gboolean get_stock_uiinfo (const char *stock_name, GnomeUIInfo *info);
 
+static void
+page_mapped (GtkWidget *page, GtkAccelGroup *accel_group)
+{
+	GtkWidget *dialog = gtk_widget_get_toplevel (GTK_WIDGET (page));
+
+	gtk_window_add_accel_group (GTK_WINDOW (dialog), accel_group);
+}
+
+static void
+page_unmapped (GtkWidget *page, GtkAccelGroup *accel_group)
+{
+	GtkWidget *dialog = gtk_widget_get_toplevel (GTK_WIDGET (page));
+
+	gtk_window_remove_accel_group (GTK_WINDOW (dialog), accel_group);
+}
+
+static void page_setup_signals (GtkWidget *page, GtkAccelGroup *accel)
+{
+	gtk_accel_group_ref(accel);
+	gtk_signal_connect_full (GTK_OBJECT (page),
+			    "map",
+			    GTK_SIGNAL_FUNC (page_mapped), NULL, 
+			    accel, (GtkDestroyNotify)gtk_accel_group_unref,
+			    FALSE, FALSE);
+	gtk_accel_group_ref(accel);
+	gtk_signal_connect_full (GTK_OBJECT (page),
+			    "unmap",
+			    GTK_SIGNAL_FUNC (page_unmapped), NULL,
+			    accel, (GtkDestroyNotify)gtk_accel_group_unref,
+			    FALSE, FALSE);
+}
+
 /* -- routines to build the children for containers -- */
 
 static void
@@ -603,7 +635,13 @@ druid_build_children(GladeXML *xml, GtkWidget *w,
 
 	for (tmp = info->children; tmp; tmp = tmp->next) {
 		GladeWidgetInfo *cinfo = tmp->data;
-		GtkWidget *child = glade_xml_build_widget(xml,cinfo, longname);
+		GtkAccelGroup *accel;
+		GtkWidget *child;
+
+		accel = glade_xml_push_accel(xml);
+		child = glade_xml_build_widget(xml, cinfo, longname);
+		page_setup_signals(child, accel);
+		glade_xml_pop_accel(xml);
 
 		gnome_druid_append_page(GNOME_DRUID(w),
 					GNOME_DRUID_PAGE(child));
@@ -631,38 +669,6 @@ pbox_change_page(GtkWidget *child, GtkNotebook *notebook)
 	gtk_notebook_set_page(notebook, page);
 }
 
-static void
-pbox_page_mapped (GtkWidget *page, GtkAccelGroup *accel_group)
-{
-	GtkWidget *dialog = gtk_widget_get_toplevel (GTK_WIDGET (page));
-
-	gtk_window_add_accel_group (GTK_WINDOW (dialog), accel_group);
-}
-
-static void
-pbox_page_unmapped (GtkWidget *page, GtkAccelGroup *accel_group)
-{
-	GtkWidget *dialog = gtk_widget_get_toplevel (GTK_WIDGET (page));
-
-	gtk_window_remove_accel_group (GTK_WINDOW (dialog), accel_group);
-}
-
-static void pbox_page_setup_signals (GtkWidget *page, GtkAccelGroup *accel)
-{
-	gtk_accel_group_ref(accel);
-	gtk_signal_connect_full (GTK_OBJECT (page),
-			    "map",
-			    GTK_SIGNAL_FUNC (pbox_page_mapped), NULL, 
-			    accel, (GtkDestroyNotify)gtk_accel_group_unref,
-			    FALSE, FALSE);
-	gtk_accel_group_ref(accel);
-	gtk_signal_connect_full (GTK_OBJECT (page),
-			    "unmap",
-			    GTK_SIGNAL_FUNC (pbox_page_unmapped), NULL,
-			    accel, (GtkDestroyNotify)gtk_accel_group_unref,
-			    FALSE, FALSE);
-}
-
 
 static void
 propbox_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
@@ -687,7 +693,7 @@ propbox_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 
 		accel = glade_xml_push_accel(xml);
 		child = glade_xml_build_widget (xml,cinfo,longname);
-		pbox_page_setup_signals(child, accel);
+		page_setup_signals(child, accel);
 		glade_xml_pop_accel(xml);
 		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
 			attr = tmp2->data;
