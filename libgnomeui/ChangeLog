@@ -1,3 +1,9 @@
+Wed Jul 07 07:42:23 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.c: correctly fix "leading zero/string of zeros"
+	  problems, fix double digit problem, and correct return types of
+	  signal handlers
+
 1999-07-05 Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
 	
 	* gnome-icon-text.h:
