@@ -330,7 +330,7 @@ typedef struct {
           GNOME_KEY_NAME_REPLACE, GNOME_KEY_MOD_REPLACE, NULL }
 
 #define GNOMEUIINFO_MENU_PROPERTIES_ITEM(cb, data)                          \
-        { GNOME_APP_UI_ITEM, N_("Properties..."),                           \
+        { GNOME_APP_UI_ITEM, N_("_Properties..."),                           \
           N_("Modify the file's properties"),                               \
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,              \
@@ -340,7 +340,7 @@ typedef struct {
  * The Settings menu
  */
 #define GNOMEUIINFO_MENU_PREFERENCES_ITEM(cb, data)                         \
-        { GNOME_APP_UI_ITEM, N_("Preferences..."),                          \
+        { GNOME_APP_UI_ITEM, N_("_Preferences..."),                          \
           N_("Configure the application"),                                  \
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,              \

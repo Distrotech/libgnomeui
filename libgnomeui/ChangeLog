@@ -1,5 +1,11 @@
 1999-01-08  Nat Friedman  <nat@nat.org>
 
+	* gnome-app-helper.h (GNOMEUIINFO_MENU_PREFERENCES_ITEM): Added
+ 	accelerator.
+	(GNOMEUIINFO_MENU_PROPERTIES_ITEM): Likewise.
+
+1999-01-08  Nat Friedman  <nat@nat.org>
+
 	* gnome-app-helper.h (GNOMEUIINFO_MENU_SELECT_ALL_ITEM): New entry.
 
 	* gnome-uidefs.h (GNOME_KEY_NAME_SELECT_ALL): New entry.
