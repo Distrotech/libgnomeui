@@ -23,6 +23,9 @@ xrandom_widgets (GtkTed *t)
 	l = gtk_label_new ("This is a windowless widget");
 	gtk_widget_show (l);
 	gtk_ted_add (t, l, "Label-0");
+	l = gtk_entry_new ();
+	gtk_widget_show (l);
+	gtk_ted_add (t, l, "Entry-0");
 }
 
 int

@@ -28,10 +28,14 @@ struct ted_widget_info {
 	char      *name;
 	GtkWidget *label_span_x, *label_span_y;
 	char start_col, start_row, col_span, row_span;
-	int  flags_x, flags_y;
-	int  tcb, lcr;
+	int  sticky;
 	int  type;
 };
+
+#define STICK_N(x) (x & 1)
+#define STICK_S(x) (x & 2)
+#define STICK_E(x) (x & 4)
+#define STICK_W(x) (x & 8)
 
 typedef struct {
 	int col, row;
@@ -120,13 +124,34 @@ gtk_ted_widget_info_new (GtkWidget *widget, char *name, int col, int row)
 	wi->start_row = row;
 	wi->col_span  = 1;
 	wi->row_span  = 1;
+#if 0
 	wi->flags_x   = GTK_FILL;
 	wi->flags_y   = GTK_FILL;
 	wi->tcb       = 1;
 	wi->lcr       = 1;
+#endif
+	wi->sticky    = 0;
 	wi->type      = user_widget;
 	wi->name      = g_strdup (name);
 	return wi;
+}
+
+static GtkWidget *
+gtk_ted_align_new (GtkWidget *dest, struct ted_widget_info *wi)
+{
+	gfloat x_pos, y_pos, fill_x, fill_y;
+	int s = wi->sticky;
+	
+	if (!dest)
+		dest = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
+
+	x_pos  = (!STICK_E (s) && !STICK_W (s)) ? 0.5 : (STICK_E (s) ? 1.0 : 0.0);
+	y_pos  = (!STICK_N (s) && !STICK_S (s)) ? 0.5 : (STICK_S (s) ? 1.0 : 0.0);
+	fill_x = (STICK_E(s) && STICK_W(s)) ? 1.0 : 0.0;
+	fill_y = (STICK_N(s) && STICK_S(s)) ? 1.0 : 0.0;
+	
+	gtk_alignment_set (GTK_ALIGNMENT (dest), x_pos, y_pos, fill_x, fill_y);
+	return dest;
 }
 
 /*
@@ -148,14 +173,15 @@ gtk_ted_attach (GtkTed *ted, GtkWidget *widget, struct ted_widget_info *wi)
 	gtk_table_attach (GTK_TABLE (ted), align,
 			  1+ wi->start_col * 2, 1+ (wi->start_col * 2)+(wi->col_span * 2)-1,
 			  1+ wi->start_row * 2, 1+ (wi->start_row * 2)+(wi->row_span * 2)-1,
+			  GTK_FILL | GTK_EXPAND, GTK_FILL | GTK_EXPAND,
+/* 
 			  wi->flags_x,
 			  wi->flags_y,
+*/
 			  0, 0);
 
-	gtk_alignment_set (GTK_ALIGNMENT (align),
-			   (wi->lcr == 0 ? 0.0 : (wi->lcr == 1 ? 0.5 : 1.0)),
-			   (wi->tcb == 0 ? 0.0 : (wi->tcb == 1 ? 0.5 : 1.0)),
-			   1.0, 1.0);
+	gtk_ted_align_new (align, wi);
+
 			   
 	/*
 	 * Hackety hack: the frames and separators should be below any regular widget
@@ -447,12 +473,12 @@ static void
 gtk_ted_separator_clicked (GtkWidget *w, row_col_t *rw)
 {
 	if (rw->row == -1){
-		gtk_ted_separator_col (rw->ted, rw->ted->top_col-2, rw->ted->top_row);
+		gtk_ted_separator_col (rw->ted, rw->ted->top_col, rw->ted->top_row);
 		gtk_ted_add_control_col_at (rw->ted, rw->ted->top_col-1);
 		rw->ted->top_col++;
 		gtk_ted_resize_rows (rw->ted);
 	} else {
-		gtk_ted_separator_row (rw->ted, rw->ted->top_row-2, rw->ted->top_col);
+		gtk_ted_separator_row (rw->ted, rw->ted->top_row, rw->ted->top_col);
 		gtk_ted_add_control_row_at (rw->ted, rw->ted->top_row-1);
 		rw->ted->top_row++;
 		gtk_ted_resize_cols (rw->ted);
@@ -618,6 +644,42 @@ gtk_ted_render_flags (int flags, int dir)
 	return buf;
 }
 
+static char *
+gtk_ted_render_pos (int f)
+{
+	static char buf [8];
+	char *p = buf;
+
+	if (STICK_S (f))
+		*p++ = 's';
+	if (STICK_N (f))
+		*p++ = 'n';
+	if (STICK_E (f))
+		*p++ = 'e';
+	if (STICK_W (f))
+		*p++ = 'w';
+	*p = 0;
+	return buf;
+}
+
+static int
+gtk_ted_parse_pos (char *str)
+{
+	int flags;
+
+	for (;*str; str++){
+		if (*str == 'n')
+			flags |= 1;
+		if (*str == 's')
+			flags |= 2;
+		if (*str == 'e')
+			flags |= 4;
+		if (*str == 'w')
+			flags |= 8;
+	}
+	return flags;
+}
+
 static void
 gtk_ted_save (GtkWidget *widget, GtkTed *ted)
 {
@@ -660,9 +722,18 @@ gtk_ted_save (GtkWidget *widget, GtkTed *ted)
 		gnome_config_push_prefix (key);
 		sprintf (buffer, "%d,%d,%d,%d", wi->start_col, wi->start_row, wi->col_span, wi->row_span);
 		gnome_config_set_string ("geometry", buffer);
+#if 0
 		gnome_config_set_string ("flags_x", gtk_ted_render_flags (wi->flags_x, wi->lcr));
 		gnome_config_set_string ("flags_y", gtk_ted_render_flags (wi->flags_y, wi->tcb));
-
+#endif
+		gnome_config_set_string ("flags=", gtk_ted_render_pos (wi->sticky));
+		if (wi->type == label_widget){
+			
+			gnome_config_set_string ("text", GTK_LABEL (GTK_BIN (GTK_BIN (wi->widget)->child)->child)->label);
+		}
+		if (wi->type == frame_widget){
+			gnome_config_set_string ("text", GTK_FRAME (GTK_BIN (GTK_BIN (wi->widget)->child)->child)->label);
+		}
 		g_free (key);
 		gnome_config_pop_prefix ();
 	}
@@ -761,7 +832,7 @@ gtk_ted_load_widget (GtkTed *ted, char *prefix, char *secname)
 {
 	char *full = g_copy_strings (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
 	struct ted_widget_info *wi = g_new (struct ted_widget_info, 1);
-	char *str;
+	char *str, *s;
 	
 	wi->widget = 0;
 	
@@ -769,10 +840,76 @@ gtk_ted_load_widget (GtkTed *ted, char *prefix, char *secname)
 	str = gnome_config_get_string ("geometry");
 	sscanf (str, "%d,%d,%d,%d", &wi->start_col, &wi->start_row, &wi->col_span, &wi->row_span);
 	g_free (str);
-	wi->flags_x = gtk_ted_parse_flags (gnome_config_get_string ("flags_x"), &wi->lcr);
-	wi->flags_y = gtk_ted_parse_flags (gnome_config_get_string ("flags_y"), &wi->tcb);
+	wi->sticky  = gtk_ted_parse_pos (s = gnome_config_get_string ("flags"));
+	g_free (s);
 	wi->type = user_widget;
 	wi->name = g_strdup (secname + 7);
+	gnome_config_pop_prefix ();
+	g_free (full);
+	return wi;
+}
+
+static GtkWidget *
+gtk_ted_wrap (GtkWidget *widget, struct ted_widget_info *wi)
+{
+	GtkWidget *align;
+
+	align = gtk_ted_align_new (NULL, wi);
+	gtk_widget_show (align);
+	gtk_container_add (GTK_CONTAINER (align), widget);
+	gtk_widget_show (widget);
+	return align;
+}
+
+static struct ted_widget_info *
+gtk_ted_load_frame (GtkTed *ted, char *prefix, char *secname)
+{
+	GtkWidget *w;
+	char *full = g_copy_strings (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
+	struct ted_widget_info *wi = g_new (struct ted_widget_info, 1);
+	char *str, *p;
+	
+	wi->widget = 0;
+	
+	gnome_config_push_prefix (full);
+	str = gnome_config_get_string ("geometry");
+	sscanf (str, "%d,%d,%d,%d", &wi->start_col, &wi->start_row, &wi->col_span, &wi->row_span);
+	g_free (str);
+	wi->sticky = gtk_ted_parse_pos (str = gnome_config_get_string ("flags"));
+	g_free (str);
+	wi->type = frame_widget;
+	wi->widget = gtk_ted_wrap (w = gtk_frame_new (p = gnome_config_get_string ("text")), wi);
+	gtk_object_set_data (GTK_OBJECT (wi->widget), "ted_widget_info", wi);
+	gtk_widget_show (wi->widget);
+	g_free (p);
+	wi->name = g_strdup (secname + 6);
+	gnome_config_pop_prefix ();
+	g_free (full);
+	return wi;
+}
+
+static struct ted_widget_info *
+gtk_ted_load_label (GtkTed *ted, char *prefix, char *secname)
+{
+	char *full = g_copy_strings (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
+	struct ted_widget_info *wi = g_new (struct ted_widget_info, 1);
+	char *str, *p;
+	
+	wi->widget = 0;
+	
+	gnome_config_push_prefix (full);
+	str = gnome_config_get_string ("geometry");
+	sscanf (str, "%d,%d,%d,%d", &wi->start_col, &wi->start_row, &wi->col_span, &wi->row_span);
+	g_free (str);
+	wi->sticky = gtk_ted_parse_pos (str = gnome_config_get_string ("flags"));
+	g_free (str);
+	wi->type = frame_widget;
+	wi->widget = gtk_ted_wrap (gtk_label_new (p = gnome_config_get_string ("text")), wi);
+	gtk_object_set_data (GTK_OBJECT (wi->widget), "ted_widget_info", wi);
+	gtk_widget_show (wi->widget);
+	g_free (p);
+	wi->name = g_strdup (secname + 6);
+	gnome_config_pop_prefix ();
 	g_free (full);
 	return wi;
 }
@@ -812,7 +949,6 @@ gtk_ted_load_layout (GtkTed *ted)
 			if (p)
 				*p = '|';
 		}
-#if 0
 		if (strncmp (sec_name+len+1, "Frame-", 6) == 0){
 			wi = gtk_ted_load_frame (ted, layout, sec_name+len+1);
 			g_hash_table_insert (ted->widgets, wi->name, wi);
@@ -825,7 +961,6 @@ gtk_ted_load_layout (GtkTed *ted)
 
 
 		printf ("section name: %s\n", sec_name);
-#endif
 	}
 	g_free (layout);
 }
@@ -889,10 +1024,12 @@ struct gtk_ted_checkbox_info {
 static void
 gtk_ted_checkbox_toggled (GtkWidget *widget, struct gtk_ted_checkbox_info *ci)
 {
+#if 0
 	if (ci->is_y)
 		ci->wi->flags_y ^= ci->value;
 	else
 		ci->wi->flags_x ^= ci->value;
+#endif
 	gtk_ted_update_position (ci->wi);
 }
 
@@ -910,6 +1047,8 @@ gtk_ted_new_checkbox (GtkWidget *box, struct ted_widget_info *wi, char *string, 
 	ci->value = value;
 
 	toggle_val = 0;
+
+#if 0
 	if (is_y){
 		if (wi->flags_y & value)
 			toggle_val = 1;
@@ -917,6 +1056,7 @@ gtk_ted_new_checkbox (GtkWidget *box, struct ted_widget_info *wi, char *string, 
 		if (wi->flags_x & value)
 			toggle_val = 1;
 	}
+#endif
 	
 	check = gtk_check_button_new_with_label (string);
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (check), toggle_val);
@@ -930,12 +1070,14 @@ gtk_ted_orient_cb (GtkWidget *w, void *data)
 {
 	struct ted_widget_info *wi = gtk_object_get_data (GTK_OBJECT (w), "ted_wi");
 	int index = (int) gtk_object_get_data (GTK_OBJECT (w), "index");
-	
+
+	/*
 	if (strcmp (data, "Left") == 0){
 		wi->lcr = index;
 	} else
 		wi->tcb = index;
 	gtk_ted_update_position (wi);
+	*/
 }
 
 static void
@@ -1016,11 +1158,43 @@ gtk_ted_span_control (char *str, struct ted_widget_info *wi, int is_y)
 	gtk_signal_connect (GTK_OBJECT (less), "clicked",
 			    GTK_SIGNAL_FUNC ((is_y? gtk_ted_click_y_less : gtk_ted_click_x_less)), wi);
 
-	gtk_ted_new_checkbox (hbox, wi, "expand", GTK_EXPAND, is_y);
-	gtk_ted_new_checkbox (hbox, wi, "fill",   GTK_FILL,   is_y);
-	gtk_ted_new_checkbox (hbox, wi, "shrink", GTK_SHRINK, is_y);
+	return vbox;
+}
 
+static void
+gtk_ted_pos_toggle (GtkWidget *widget, struct ted_widget_info *wi)
+{
+	int val = (int) gtk_object_get_data (GTK_OBJECT (widget), "value");
+
+	wi->sticky ^= val;
+	gtk_ted_update_position (wi);
+}
+
+static void
+gtk_ted_pos_prep (GtkWidget *box, char *str, int val, struct ted_widget_info *wi)
+{
+	GtkWidget *w;
 	
+	w = gtk_check_button_new_with_label (str);
+	GTK_TOGGLE_BUTTON (w)->active =  (wi->sticky & val) ? 1 : 0;
+	gtk_box_pack_start_defaults (GTK_BOX (box), w);
+	gtk_widget_show (w);
+	gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (gtk_ted_pos_toggle), wi);
+	gtk_object_set_data (GTK_OBJECT (w), "value", (void *) val);
+}
+
+static GtkWidget *
+gtk_ted_pos_control (struct ted_widget_info *wi)
+{
+	GtkWidget *vbox;
+
+	vbox = gtk_vbox_new (0, 0);
+	gtk_ted_pos_prep (vbox, "North", 1, wi);
+	gtk_ted_pos_prep (vbox, "South", 2, wi);
+	gtk_ted_pos_prep (vbox, "East", 4, wi);
+	gtk_ted_pos_prep (vbox, "West", 8, wi);
+
+	gtk_widget_show (vbox);
 	return vbox;
 }
 
@@ -1035,9 +1209,12 @@ gtk_ted_size_control_new (struct ted_widget_info *wi)
 	gtk_box_pack_start (GTK_BOX (vbox), gtk_ted_span_control ("span y", wi, 1), 0, 0, 0);
 	hbox = gtk_hbox_new (0, 0);
 	gtk_widget_show (hbox);
-	
+
+	gtk_box_pack_start_defaults (GTK_BOX (hbox), gtk_ted_pos_control (wi));
+	/*
 	gtk_box_pack_start_defaults (GTK_BOX (hbox), gtk_ted_nse_control (wi, "Top", "Bottom", wi->tcb));
 	gtk_box_pack_start_defaults (GTK_BOX (hbox), gtk_ted_nse_control (wi, "Left", "Right", wi->lcr));
+	*/
 	gtk_box_pack_start_defaults (GTK_BOX (vbox), hbox);
 
 	return vbox;
@@ -1119,6 +1296,7 @@ gtk_ted_add (GtkTed *ted, GtkWidget *widget, char *original_name)
 	
 	if ((wi = g_hash_table_lookup (ted->widgets, name)) != NULL){
 		wi->widget = widget;
+		gtk_ted_align_new (widget, wi);
 	} else {
 		ted->need_gui = 1;
 		wi = gtk_ted_widget_info_new (widget, name, 0, 0);
@@ -1159,12 +1337,9 @@ gtk_ted_setup_layout (gpointer key, gpointer value, gpointer user_data)
 	gtk_table_attach (GTK_TABLE (ted), wi->widget,
 			  wi->start_col, wi->start_col + wi->col_span,
 			  wi->start_row, wi->start_row + wi->row_span,
-			  wi->flags_x, wi->flags_y, 0, 0);
-	gtk_alignment_set (GTK_ALIGNMENT (wi->widget),
-			   (wi->lcr == 0 ? 0.0 : (wi->lcr == 1 ? 0.5 : 1.0)),
-			   (wi->tcb == 0 ? 0.0 : (wi->tcb == 1 ? 0.5 : 1.0)),
-			   1.0, 1.0);
-			   
+			  GTK_FILL | GTK_EXPAND, GTK_FILL | GTK_EXPAND, 0, 0);
+/*			  wi->flags_x, wi->flags_y, 0, 0); */
+	gtk_ted_align_new (wi->widget, wi);
 	ted->top_col = MAX (ted->top_col, wi->start_col + wi->col_span);
 	ted->top_row = MAX (ted->top_row, wi->start_row + wi->row_span);
 }
@@ -1183,8 +1358,8 @@ gtk_ted_prepare (GtkTed *ted)
 		ted->in_gui = 1;
 		g_hash_table_foreach (ted->widgets, gtk_ted_prepare_widgets_edit, ted);
 	} else {
-		gtk_table_set_row_spacings (GTK_TABLE (ted), 6);
-		gtk_table_set_col_spacings (GTK_TABLE (ted), 6);
+		gtk_table_set_row_spacings (GTK_TABLE (ted), 5);
+		gtk_table_set_col_spacings (GTK_TABLE (ted), 5);
 		g_hash_table_foreach (ted->widgets, gtk_ted_setup_layout, ted);
 	}
 }
@@ -1197,7 +1372,32 @@ gtk_ted_new (char *name)
 	ted = gtk_type_new (gtk_ted_get_type ());
 	ted->dialog_name = g_strdup (name);
 	gtk_ted_load_layout (ted);
-
+	gtk_container_border_width (GTK_CONTAINER (ted), 6);
+	
 	return GTK_WIDGET (ted);
 }
 
+
+/*
+  n    	-> align (0.5, 0.0, fill_x, fill_y)
+  s    	-> align (0.5, 1.0, fill_x, fill_y)
+  e    	-> align (1.0, 0.5, fill_x, fill_y)
+  w    	-> align (0.0, 0.5, fill_x, fill_y)
+
+  ns   	-> align (0.5, 0.5, fill_x, fill_y)
+  ew   	-> align (0.5, 0.5, fill_x, fill_y)
+
+  ne    -> align (1.0, 0.0, fill_x, fill_y);
+  nw    -> align (0.0, 0.0, fill_x, fill_y);
+
+  se    -> align (1.0, 1.0, fill_x, fill_y);
+  sw    -> align (0.0, 1.0, fill_x, fill_y);
+
+  nsew  -> align (0.5, 0.5, fill_x, fill_y)
+
+  fill_x = (e && w ? 1.0 : 0.0);
+  fill_y = (n && s ? 1.0 : 0.0);
+
+  x_pos  = (!e && !w) ? 0.5 : (e ? 1.0 : 0.0);
+  y_pos  = (!n && !s) ? 0.5 : (s ? 1.0 : 0.0);
+ */
