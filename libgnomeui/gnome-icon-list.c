@@ -914,8 +914,8 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 	if (gil->icons >= gil->last_selected)
 		gil->last_selected = 0;
 
-	if (gil->icons >= gil->last_clicked)
-		gil->last_clicked = 0;
+	if (gil->last_clicked == icon)
+		gil->last_clicked = NULL;
 
 	icon_destroy (icon);
 
