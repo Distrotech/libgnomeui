@@ -96,7 +96,8 @@ stock_trash_full.png \
 stock_undelete.png \
 stock_undo.png \
 stock_up_arrow.png \
-stock_volume.png
+stock_volume.png \
+stock_midi.png
 
 EXTRA_DIST  = $(BITMAPS) $(stock_images)
 
