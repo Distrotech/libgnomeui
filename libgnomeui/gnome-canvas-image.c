@@ -477,7 +477,7 @@ recalc_if_needed (GnomeCanvasImage *image)
 
 	get_bounds (image, &image->item.x1, &image->item.y1, &image->item.x2, &image->item.y2);
 
-	if (image->im) {
+	if (image->im && image->cwidth != 0 && image->cheight != 0) {
 		gdk_imlib_render (image->im, image->cwidth, image->cheight);
 		
 		image->pixmap = gdk_imlib_move_image (image->im);
@@ -507,14 +507,15 @@ gnome_canvas_image_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	if (image->mask)
 		gdk_gc_set_clip_origin (image->gc, image->cx - x, image->cy - y);
 
-	gdk_draw_pixmap (drawable,
-			 image->gc,
-			 image->pixmap,
-			 0, 0,
-			 image->cx - x,
-			 image->cy - y,
-			 image->cwidth,
-			 image->cheight);
+	if (image->pixmap)
+		gdk_draw_pixmap (drawable,
+				 image->gc,
+				 image->pixmap,
+				 0, 0,
+				 image->cx - x,
+				 image->cy - y,
+				 image->cwidth,
+				 image->cheight);
 }
 
 static double

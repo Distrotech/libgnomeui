@@ -1,3 +1,10 @@
+1999-09-13  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-image.c (recalc_if_needed): Only render the image's
+	pixmap if the final width and height are not zero.
+	(gnome_canvas_image_draw): Take into account the fact that we may
+	not have a pixmap at all.
+
 1999-09-11  Roberto Zunino <zunino@cli.di.unipi.it>
 
 	* gnome-dns.c: Do not cache 0.0.0.0 results (ie, not found).
