@@ -23,6 +23,7 @@
 	* gnome-gconf.c (gnome_file_entry_get/set): Removed.
 	(gnome_icon_entry_get/set): Removed.
 	(gnome_pixmap_entry_get/set): Removed.
+	(gnome_entry_get/set): Removed.
 
 2001-02-23  Martin Baulig  <baulig@suse.de>
 
