@@ -88,14 +88,9 @@ gtk_plug_init (GtkPlug *plug)
   window->type = GTK_WINDOW_TOPLEVEL;
   window->auto_shrink = TRUE;
 }
-
-GtkWidget*
-gtk_plug_new (guint32 socket_id)
+void
+gtk_plug_construct (GtkPlug *plug, guint32 socket_id)
 {
-  GtkPlug *plug;
-
-  plug = GTK_PLUG (gtk_type_new (gtk_plug_get_type ()));
-
   plug->socket_window = gdk_window_lookup (socket_id);
   plug->same_app = TRUE;
 
@@ -104,7 +99,14 @@ gtk_plug_new (guint32 socket_id)
       plug->socket_window = gdk_window_foreign_new (socket_id);
       plug->same_app = FALSE;
     }
-  
+}
+GtkWidget*
+gtk_plug_new (guint32 socket_id)
+{
+  GtkPlug *plug;
+
+  plug = GTK_PLUG (gtk_type_new (gtk_plug_get_type ()));
+  gtk_plug_construct (plug, socket_id);
   return GTK_WIDGET (plug);
 }
 
