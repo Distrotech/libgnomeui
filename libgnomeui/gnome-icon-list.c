@@ -1540,6 +1540,9 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 	if (only_one)
 		return TRUE;
 
+	if (priv->selecting)
+		return FALSE;
+
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &tx, &ty);
 	priv->sel_start_x = tx;
 	priv->sel_start_y = ty;

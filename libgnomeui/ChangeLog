@@ -1,5 +1,8 @@
 1999-08-13  Federico Mena Quintero  <federico@redhat.com>
 
+	* gnome-icon-list.c (gil_button_press): Do not rubberband-select
+	if we are already selecting.
+
 	* gnome-icon-item.c (gnome_icon_text_item_select): If the icon
 	text item gets unselected while it is being edited, ask for
 	acceptance with iti_edition_accept() instead of blindly accepting
