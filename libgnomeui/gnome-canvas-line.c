@@ -113,7 +113,7 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 
 	gtk_object_add_arg_type ("GnomeCanvasLine::points", GTK_TYPE_POINTER, GTK_ARG_READWRITE, ARG_POINTS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_WRITABLE, ARG_FILL_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::cap_style", GTK_TYPE_GDK_CAP_STYLE, GTK_ARG_READWRITE, ARG_CAP_STYLE);
@@ -387,6 +387,7 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasLine *line;
 	GnomeCanvasPoints *points;
+	GdkColor *color;
 
 	line = GNOME_CANVAS_LINE (object);
 
@@ -398,6 +399,12 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			GTK_VALUE_POINTER (*arg) = points;
 		} else
 			GTK_VALUE_POINTER (*arg) = NULL;
+		break;
+
+	case ARG_FILL_COLOR_GDK:
+		color = GTK_VALUE_BOXED (*arg);
+		color->pixel = line->pixel;
+		gdk_color_context_query_color (line->item.canvas->cc, color);
 		break;
 
 	case ARG_CAP_STYLE:

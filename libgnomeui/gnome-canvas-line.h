@@ -36,10 +36,10 @@ BEGIN_GNOME_DECLS
  *								points->coords array, Y coordinates are in
  *								the odd indices.
  * fill_color		string			W		X color specification for line
- * fill_color_gdk	GdkColor*		W		Pointer to an allocated GdkColor
- * width_pixels		uint			RW		Width of the line in pixels.  The line width
+ * fill_color_gdk	GdkColor*		RW		Pointer to an allocated GdkColor
+ * width_pixels		uint			R		Width of the line in pixels.  The line width
  *								will not be scaled when the canvas zoom factor changes.
- * width_units		double			RW		Width of the line in canvas units.  The line width
+ * width_units		double			R		Width of the line in canvas units.  The line width
  *								will be scaled when the canvas zoom factor changes.
  * cap_style		GdkCapStyle		RW		Cap ("endpoint") style for the line.
  * join_style		GdkJoinStyle		RW		Join ("vertex") style for the line.

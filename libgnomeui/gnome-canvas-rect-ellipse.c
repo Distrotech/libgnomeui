@@ -88,9 +88,9 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasRE::x2", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X2);
 	gtk_object_add_arg_type ("GnomeCanvasRE::y2", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y2);
 	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_WRITABLE, ARG_FILL_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasRE::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasRE::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 
@@ -242,6 +242,7 @@ static void
 gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasRE *re;
+	GdkColor *color;
 
 	re = GNOME_CANVAS_RE (object);
 
@@ -260,6 +261,18 @@ gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_Y2:
 		GTK_VALUE_DOUBLE (*arg) = re->y2;
+		break;
+
+	case ARG_FILL_COLOR_GDK:
+		color = GTK_VALUE_BOXED (*arg);
+		color->pixel = re->fill_pixel;
+		gdk_color_context_query_color (re->item.canvas->cc, color);
+		break;
+
+	case ARG_OUTLINE_COLOR_GDK:
+		color = GTK_VALUE_BOXED (*arg);
+		color->pixel = re->outline_pixel;
+		gdk_color_context_query_color (re->item.canvas->cc, color);
 		break;
 
 	default:

@@ -1,3 +1,14 @@
+1998-08-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-line.c (gnome_canvas_line_get_arg): Made the
+	fill_color_gdk argument read/write.
+
+	* gnome-canvas-text.c (gnome_canvas_text_get_arg): Made the
+	font_gdk and fill_color_gdk arguments read/write.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_get_arg): Made the
+	fill_color_gdk and outline_color_gdk arguments read/write.
+
 1998-08-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-text.c (gnome_canvas_text_class_init): The font
