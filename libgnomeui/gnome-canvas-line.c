@@ -1071,7 +1071,7 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	if (line->num_points <= NUM_STATIC_POINTS)
 		points = static_points;
-	else
+	else /* XXX memory leak!!! */
 		points = g_new (GdkPoint, line->num_points);
 
 	gnome_canvas_item_i2c_affine (item, i2c);
