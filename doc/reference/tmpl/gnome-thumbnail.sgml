@@ -35,6 +35,7 @@ GnomeThumbnail
 
 </para>
 
+@parent: 
 
 <!-- ##### FUNCTION gnome_thumbnail_factory_new ##### -->
 <para>

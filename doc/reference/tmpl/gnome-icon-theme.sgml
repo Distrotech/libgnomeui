@@ -19,6 +19,8 @@ GnomeIconTheme
 
 </para>
 
+@parent_class: 
+@changed: 
 
 <!-- ##### STRUCT GnomeIconTheme ##### -->
 <para>

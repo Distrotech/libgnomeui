@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2003-01-08 10:16+0100\n"
+"POT-Creation-Date: 2003-01-21 11:16+0100\n"
 "PO-Revision-Date: 2003-01-14 15:27+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
@@ -108,8 +108,11 @@ msgid "Translator credits"
 msgstr "Gråces po les ratourneus"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come ratournåve."
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come "
+"ratournåve."
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -987,7 +990,9 @@ msgstr "Intrêye po ridants"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "Definixh si l' tchamp d' intrêye po les fitchîs pout esse eployî po taper des nos d' ridants ou rén k' des nos d' fitchî."
+msgstr ""
+"Definixh si l' tchamp d' intrêye po les fitchîs pout esse eployî po taper "
+"des nos d' ridants ou rén k' des nos d' fitchî."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1061,7 +1066,8 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
+msgstr ""
+"Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1236,7 +1242,8 @@ msgstr "Chal vos dvoz mete li no do ridant ki les imådjetes sont-st å dvins."
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
+msgstr ""
+"GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1273,7 +1280,9 @@ msgstr "Permete li vey divant"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Definixh s' i fåt permete di vey divant dins l' boesse d' intrêye po ls imådjes."
+msgstr ""
+"Definixh s' i fåt permete di vey divant dins l' boesse d' intrêye po ls "
+"imådjes."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"

@@ -2,9 +2,6 @@
 
 SUBDIRS = pixmaps
 
-LIB_VERSION=0:0:0
-LIB_VERSION_NUM=0.0.0
-
 #
 # The targets
 #
@@ -249,7 +246,7 @@ EXTRA_DIST =					\
 	libgnomeui-2.0.pc.in
 
 libgnomeui_2_la_LDFLAGS = \
-	-version-info $(LIB_VERSION)		\
+	-version-info $(LIBGNOMEUI_CURRENT:)$(LIBGNOMEUI_REVISION):$(LIBGNOMEUI_AGE) \
 	-export-symbols-regex "^[^_].*"
 
 libgnomeui_2_la_LIBADD = \

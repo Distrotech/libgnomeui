@@ -1,3 +1,8 @@
+2003-01-21  Anders Carlsson  <andersca@codefactory.se>
+
+	* configure.in: Fixup libtool versioning and release
+	2.2.0
+
 2003-01-14  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* configure.in: Added Amharic (am), Arabic (ar),
