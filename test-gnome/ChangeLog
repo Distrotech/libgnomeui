@@ -1,3 +1,9 @@
+2001-07-30  Joe Shaw  <joe@ximian.com>
+
+	* testgnome.c (create_newwin): Get this building again by adding
+	a NULL CORBA environment to the bonobo_ui_component_set_container
+	call.
+
 2001-07-22  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* testgnome.c: Removed all the references to gnome_less.

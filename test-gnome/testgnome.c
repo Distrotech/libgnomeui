@@ -127,7 +127,8 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 
 	app->ui_component = bonobo_ui_component_new (appname);
 	bonobo_ui_component_set_container (app->ui_component,
-					   BONOBO_OBJREF(app->ui_container));
+					   BONOBO_OBJREF(app->ui_container),
+					   NULL);
 	bonobo_ui_util_set_ui (app->ui_component, GNOMEUIDATADIR, "testgnome.xml", appname);
 	bonobo_ui_component_add_verb_list_with_data (app->ui_component, verbs, app);
 	
