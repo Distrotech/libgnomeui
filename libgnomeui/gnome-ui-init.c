@@ -212,7 +212,7 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 			 */
 			gdk_imlib_get_cache_info (&pixmaps, &images);
 
-			if (pixmaps != -1 && images != -1)
+			if (!(pixmaps == -1 || images == -1))
 				gdk_imlib_set_cache_info (0, 1);
 		}
 	  
