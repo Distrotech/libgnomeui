@@ -631,9 +631,8 @@ static const struct poptOption gnome_options[] = {
 static void
 gnome_register_options(void)
 {
-	gnomelib_register_popt_table(gtk_options, "GTK options");
-
-	gnomelib_register_popt_table(gnome_options, "GNOME GUI options");
+	gnomelib_register_popt_table(gtk_options, _("GTK options"));
+	gnomelib_register_popt_table(gnome_options, _("GNOME GUI options"));
 }
 
 /* #define ALLOC_DEBUGGING_HOOKS */
@@ -784,9 +783,9 @@ gnome_init_with_popt_table(const char *app_id,
 	gnome_client_init();
 	
 	if(options) {
-		appdesc = alloca(sizeof(" options") + strlen(app_id));
-		strcpy(appdesc, app_id); strcat(appdesc, " options");
+		appdesc = g_strdup_printf(_("%s options"), app_id);
 		gnomelib_register_popt_table(options, appdesc);
+		g_free(appdesc);
 	}
 	
 	ctx = gnomelib_parse_args(argc, argv, flags);

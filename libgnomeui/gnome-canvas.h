@@ -162,7 +162,7 @@ struct _GnomeCanvasItem {
 	 */
 	double *xform;
 
-	/* Bounding box for this item (in world coordinates) */
+	/* Bounding box for this item (in canvas coordinates) */
 	double x1, y1, x2, y2;
 };
 
