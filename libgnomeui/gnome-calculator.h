@@ -8,7 +8,7 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkvbox.h>
-#include <gtk/gtkfeatures.h>
+
 #include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
