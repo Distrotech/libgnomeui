@@ -107,8 +107,7 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena deberia estar marcada como "
 "traducible"
@@ -119,7 +118,7 @@ msgstr "Logo"
 
 #: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
-msgstr "Un logo para la diálogo \"acerca de\""
+msgstr "Un logo para la diálogo «acerca de»"
 
 #: libgnomeui/gnome-about.c:493
 #, c-format
@@ -356,7 +355,7 @@ msgstr "Mostrar Finalizar"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Mostrar el botón 'Finalizar' en lugar del botón 'Siguiente'"
+msgstr "Mostrar el botón «Finalizar» en lugar del botón «Siguiente»"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
@@ -364,7 +363,7 @@ msgstr "Mostrar Ayuda"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr "Mostrar el botón 'Ayuda'"
+msgstr "Mostrar el botón «Ayuda»"
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -456,7 +455,7 @@ msgid ""
 "due to a fatal error.\n"
 "(%s)"
 msgstr ""
-"La aplicación \"%s\" (proceso %d) ha fallado\n"
+"La aplicación «%s» (proceso %d) ha fallado\n"
 "debido a un error fatal.\n"
 "(%s)"
 
@@ -478,7 +477,7 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Para más información visite la página \"Error en Aplicaciones GNOME\""
+msgstr "Para más información visite la página «Error en Aplicaciones GNOME»"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -584,7 +583,7 @@ msgstr "_Juego"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
-msgstr "_Ayuda"
+msgstr "A_yuda"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -1119,8 +1118,7 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
-"Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1260,12 +1258,12 @@ msgstr ""
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: '%s' no existe o no es un directorio"
+msgstr "GnomeIconSelection: «%s» no existe o no es un directorio"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: no se pudo abrir el directorio '%s'"
+msgstr "GnomeIconSelection: no se pudo abrir el directorio «%s»"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
@@ -1339,3 +1337,4 @@ msgstr "Sans 14"
 
 #~ msgid "Exit the test"
 #~ msgstr "Salir de la prueba"
+
