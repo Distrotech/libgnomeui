@@ -1,3 +1,9 @@
+2000-04-29  Jason Leach  <leach@wam.umd.edu>
+
+	* gnome-about.c (gnome_about_construct): allow the possability of
+	the logo being an absolute path to a pixmap, instead of a file in
+	$gnome_prefix/share/pixmaps
+
 2000-04-28  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_rect_update)

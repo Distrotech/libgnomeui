@@ -623,7 +623,11 @@ gnome_about_construct (GnomeAbout *about,
 
 	if (logo)
 	{
-		filename = gnome_pixmap_file (logo);
+		if (g_path_is_absolute (logo) && g_file_exists (logo))
+			filename = g_strdup (logo);
+		else
+			filename = gnome_pixmap_file (logo);
+
 		if (filename
 		    && gdk_imlib_load_file_to_pixmap (filename, &ai->logo,
 						      &ai->mask))
