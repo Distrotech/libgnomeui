@@ -1,3 +1,10 @@
+2001-08-06  Darin Adler  <darin@bentspoon.com>
+
+	* gnome-remote-bootstrap.c:
+	* libgnomeui.h:
+	A couple more places where gnome-init.h needs to be changed
+	to gnome-ui-init.h.
+
 2001-08-06  Peter Williams  <peterw@ximian.com>
 
 	* Makefile.am, gnome-ui-init.c, gnome-window.c: Track the

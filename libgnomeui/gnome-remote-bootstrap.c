@@ -22,7 +22,7 @@
  */
 
 #include <libgnome.h>
-#include <libgnomeui/gnome-init.h>
+#include <libgnomeui/gnome-ui-init.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
