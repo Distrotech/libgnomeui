@@ -51,7 +51,8 @@ window_destroyed (GtkWindow *w, IconData *data)
 	if (data->pixmap != default_icon.pixmap)
 		icon_unref (data);
 
-	gdk_window_unref (data->window);
+	if (data->window)
+		gdk_window_unref (data->window);
 
 	g_free (data);
 }

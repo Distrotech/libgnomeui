@@ -1,3 +1,7 @@
+2000-05-23  Jacob Berkman  <jacob@helixcode.com>
+
+	* gnome-window-icon.c (window_destroyed): forgot to test for NULL here.
+
 2000-05-22  Jacob Berkman  <jacob@helixcode.com>
 
 	* gnome-window-icon.c (icon_set): don't draw the mini icon when
