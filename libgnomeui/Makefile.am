@@ -34,6 +34,7 @@ INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
         -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(GTK_CFLAGS) $(ORBIT_CFLAGS)			\
+	$(GCONF_CFLAGS)					\
 	-DVERSION=\"$(VERSION)\"
 
 gnome_corba_rexec_built = 		\
@@ -122,12 +123,13 @@ libgnomeui_2_0_la_SOURCES = \
 	gnome-dock-layout.c		\
 	gnome-druid.c			\
 	gnome-druid-page.c		\
-	gnome-druid-page-edge.c	\
+	gnome-druid-page-edge.c		\
 	gnome-druid-page-standard.c	\
 	gnome-geometry.c		\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
         gnome-font-picker.c		\
+	gnome-gconf.c			\
 	gnome-helpsys.c			\
 	gnome-href.c			\
 	gnome-ice.c			\
@@ -197,11 +199,12 @@ gnome_headers = \
 	gnome-dock-layout.h		\
 	gnome-druid.h			\
 	gnome-druid-page.h		\
-	gnome-druid-page-edge.h	\
+	gnome-druid-page-edge.h		\
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\
+	gnome-gconf.h			\
 	gnome-geometry.h		\
 	gnome-helpsys.h			\
 	gnome-href.h			\
@@ -332,6 +335,7 @@ libgnomeui_2_0_la_LDFLAGS = -version-info $(LIB_VERSION)				\
 		$(GDK_PIXBUF_LIBS)							\
 		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome			\
 		$(OAF_LIBS)								\
+		$(GCONF_LIBS)					\
 		$(LIBGNOMEUI_LIBS)
 
 libgnomeui_2_0_la_LIBADD = $(LIBGNOMEUI_LIBS)
