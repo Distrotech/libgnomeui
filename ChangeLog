@@ -1,3 +1,10 @@
+2004-01-21  Anders Carlsson  <andersca@gnome.org>
+
+	* libgnomeui/gnome-client.c: (gnome_client_module_info_get):
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_module_info_get):
+	Fix translation of program arguments. 
+	(#106549, patch by Hidetoshi Tajima).
+
 2004-01-21  Alex Duggan  <aldug@astrolinux.com>
 
 	* libgnomeui/gnome-scores.c: (gnome_scores_instance_init)

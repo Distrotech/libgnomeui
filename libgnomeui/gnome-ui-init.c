@@ -113,10 +113,11 @@ static struct poptOption libgnomeui_options[] = {
         {NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL},
 	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	 &libgnomeui_arg_callback, 0, NULL, NULL},
-	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, ARG_DISABLE_CRASH_DIALOG},
+	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, ARG_DISABLE_CRASH_DIALOG,
+        N_("Disable Crash Dialog"), NULL},
         {"display", '\0', POPT_ARG_STRING|POPT_ARGFLAG_DOC_HIDDEN, NULL, ARG_DISPLAY,
          N_("X display to use"), N_("DISPLAY")},
-	{NULL, '\0', 0, NULL, 0}
+	{NULL, '\0', 0, NULL, 0, NULL, NULL}
 };
 
 const GnomeModuleInfo *
@@ -133,6 +134,8 @@ libgnomeui_module_info_get (void)
 
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[6];
+
+		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
 
 		req[0].required_version = "1.101.2";
 		req[0].module_info = LIBBONOBOUI_MODULE;

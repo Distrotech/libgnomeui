@@ -983,6 +983,8 @@ gnome_client_module_info_get (void)
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[3];
 
+		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+
 		req[0].required_version = "1.3.7";
 		req[0].module_info = gnome_gtk_module_info_get ();
 
