@@ -1,5 +1,14 @@
 2001-04-25  Martin Baulig  <baulig@suse.de>
 
+	* gnome-app-helper.[ch], gnome-app-util.[ch], gnome-cursors.[ch],
+	gnome-dialog-util.[ch], gnome-dialog.[ch], gnome-dock*.[ch],
+	gnome-messagebox.[ch], gnome-preferences.[ch], gnome-propertybox.[ch],
+	gnome-scores.[ch], gnome-stock.[ch], gtkpixmapmenuitem.[ch]:
+	Copied all these files to libcompat/libgnomeui/; they're still here for
+	a while so that we won't break compilation here.
+
+2001-04-25  Martin Baulig  <baulig@suse.de>
+
 	* gnome-dock*.[ch]: Attention! These files have been moved to libbonoboui
 	and renamed to bonobo-dock*.[ch]. We'll provide a compatibility wrapper with
 	#defines in libgnomecompat soon, but at the moment I don't want to break the
