@@ -1,3 +1,13 @@
+2001-06-10  Martin Baulig  <baulig@suse.de>
+
+	* Makefile.am: Disabled gnome-paper-selector.[ch] and gnome-unit-spinner.[ch].
+	We need to move them into libgnomeprint, same for libgnome/gnome-paper.[ch].
+
+2001-06-10  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector-client.c (BONOBO_TYPE_FUNC_FULL): Use Bonobo_Unknown instead
+	of GNOME_SelectorClient so that we can kill this interface.
+
 2001-06-05  Mike Kestner  <mkestner@speakeasy.net>
 
 	* gnome-client.c : #endif token removed
