@@ -49,6 +49,12 @@ typedef enum {
 	SYNC_REMOVE
 } SyncType;
 
+enum {
+	ARG_0,
+	ARG_HADJUSTMENT,
+	ARG_VADJUSTMENT
+};
+
 static guint gil_signals [LAST_SIGNAL] = { 0 };
 
 /* Inheritance */
@@ -1319,10 +1325,7 @@ typedef gboolean (*xGtkSignal_BOOL__INT_POINTER) (GtkObject * object,
 						  gpointer arg2,
 						  gpointer user_data);
 static void 
-xgtk_marshal_BOOL__INT_POINTER (GtkObject * object,
-				GtkSignalFunc func,
-				gpointer func_data,
-				GtkArg * args)
+xgtk_marshal_BOOL__INT_POINTER (GtkObject *object, GtkSignalFunc func, gpointer func_data, GtkArg *args)
 {
   xGtkSignal_BOOL__INT_POINTER rfunc;
   gboolean *return_val;
@@ -1333,6 +1336,52 @@ xgtk_marshal_BOOL__INT_POINTER (GtkObject * object,
 			  GTK_VALUE_INT     (args [0]),
 			  GTK_VALUE_POINTER (args [1]),
 			  func_data);
+}
+
+static void
+gil_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeIconList *gil;
+	GtkAdjustment *adjustment;
+
+	gil = GNOME_ICON_LIST (object);
+
+	switch (arg_id) {
+	case ARG_HADJUSTMENT:
+		adjustment = GTK_VALUE_POINTER (*arg);
+		gnome_icon_list_set_hadjustment (gil, adjustment);
+		break;
+
+	case ARG_VADJUSTMENT:
+		adjustment = GTK_VALUE_POINTER (*arg);
+		gnome_icon_list_set_vadjustment (gil, adjustment);
+		break;
+
+	default:
+		break;
+	}
+}
+
+static void
+gil_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeIconList *gil;
+
+	gil = GNOME_ICON_LIST (object);
+
+	switch (arg_id) {
+	case ARG_HADJUSTMENT:
+		GTK_VALUE_POINTER (*arg) = gil->hadj;
+		break;
+
+	case ARG_VADJUSTMENT:
+		GTK_VALUE_POINTER (*arg) = gil->adj;
+		break;
+
+	default:
+		arg->type = GTK_TYPE_INVALID;
+		break;
+	}
 }
 
 static void
@@ -1348,6 +1397,15 @@ gil_class_init (GilClass *gil_class)
 
 	parent_class = gtk_type_class (gnome_canvas_get_type ());
 
+	gtk_object_add_arg_type ("GnomeIconList::hadjustment",
+				 GTK_TYPE_ADJUSTMENT,
+				 GTK_ARG_READWRITE,
+				 ARG_HADJUSTMENT);
+	gtk_object_add_arg_type ("GnomeIconList::vadjustment",
+				 GTK_TYPE_ADJUSTMENT,
+				 GTK_ARG_READWRITE,
+				 ARG_VADJUSTMENT);
+	
 	gil_signals [SELECT_ICON] =
 		gtk_signal_new (
 			"select_icon",
@@ -1384,7 +1442,9 @@ gil_class_init (GilClass *gil_class)
 	gtk_object_class_add_signals (object_class, gil_signals, LAST_SIGNAL);
 
 	object_class->destroy              = gil_destroy;
-
+	object_class->set_arg              = gil_set_arg;
+	object_class->get_arg              = gil_get_arg;
+	
 	widget_class->size_request         = gil_size_request;
 	widget_class->size_allocate        = gil_size_allocate;
 	widget_class->realize              = gil_realize; 
@@ -1479,6 +1539,70 @@ gil_adj_value_changed (GtkAdjustment *adj, Gil *gil)
 	gnome_canvas_scroll_to (GNOME_CANVAS (gil), 0, adj->value);
 }
 
+void
+gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
+{
+	GtkAdjustment *old_adjustment;
+  
+	/* hadj isn't used but is here for compatibility with GtkScrolledWindow */
+
+	g_return_if_fail (gil != NULL);
+	g_return_if_fail (IS_GIL (gil));
+
+	if (hadj)
+		g_return_if_fail (GTK_IS_ADJUSTMENT (hadj));
+
+	if (gil->hadj == hadj)
+		return;
+
+	old_adjustment = gil->hadj;
+
+	if (gil->hadj)
+		gtk_object_unref (GTK_OBJECT (gil->hadj));
+
+	gil->hadj = hadj;
+
+	if (gil->hadj)
+		gtk_object_ref (GTK_OBJECT (gil->hadj));
+
+	if (!gil->hadj || !old_adjustment)
+		gtk_widget_queue_resize (GTK_WIDGET (gil));
+}
+
+void
+gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
+{
+	GtkAdjustment *old_adjustment;
+
+	g_return_if_fail (gil != NULL);
+	g_return_if_fail (IS_GIL (gil));
+
+	if (vadj)
+		g_return_if_fail (GTK_IS_ADJUSTMENT (vadj));
+
+	if (gil->adj == vadj)
+		return;
+
+	old_adjustment = gil->adj;
+
+	if (gil->adj) {
+		gtk_signal_disconnect_by_data (GTK_OBJECT (gil->adj), gil);
+		gtk_object_unref (GTK_OBJECT (gil->adj));
+	}
+
+	gil->adj = vadj;
+
+	if (gil->adj) {
+		gtk_object_ref (GTK_OBJECT (gil->adj));
+		gtk_object_sink (GTK_OBJECT (gil->adj));
+		gtk_signal_connect (GTK_OBJECT (gil->adj), "value_changed",
+				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
+	}
+
+	if (!gil->adj || !old_adjustment)
+		gtk_widget_queue_resize (GTK_WIDGET (gil));
+}
+
 void           
 gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *adj, gboolean is_editable)
 {
@@ -1488,16 +1612,11 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
 	gnome_icon_list_set_icon_width (gil, icon_width);
 	gil->is_editable = is_editable;
 
-	if (adj)
-		gtk_object_ref (GTK_OBJECT (adj));
-	else
-		adj = GTK_ADJUSTMENT (
-			gtk_adjustment_new (0, 0, 1, 0.1, 0.1, 0.1));
+	if (!adj)
+		adj = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0.1, 0.1));
 			
-	gil->adj = adj;
+	gnome_icon_list_set_vadjustment (gil, adj);
 
-	gtk_signal_connect (GTK_OBJECT (adj), "value_changed",
-			    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
 }
 
 

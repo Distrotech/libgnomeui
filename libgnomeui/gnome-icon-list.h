@@ -39,7 +39,8 @@ typedef struct {
 	GnomeCanvas canvas;
 
 	GtkAdjustment *adj;	/* The scrolling adjustment we use */
-	
+        GtkAdjustment *hadj;	/* dummmy need for GtkScrolledWindow compat */
+  
 	int icons;		/* Number of icons in the IconList */
 	GList *icon_list;	/* The list of icons */
 	
@@ -104,6 +105,12 @@ void           gnome_icon_list_construct           (GnomeIconList *gil,
 						    guint icon_width,
 						    GtkAdjustment *adj,
 						    gboolean is_editable);
+
+void           gnome_icon_list_set_hadjustment    (GnomeIconList *gil,
+						   GtkAdjustment *hadj);
+
+void           gnome_icon_list_set_vadjustment    (GnomeIconList *gil,
+						   GtkAdjustment *vadj);
 
 /* To avoid excesive recomputes during insertion/deletion */
 void           gnome_icon_list_freeze              (GnomeIconList *gil);

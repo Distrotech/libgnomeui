@@ -1,3 +1,11 @@
+1998-11-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c: Applied patch by Samuel Solon
+	<ssolon@usa.net> to make the icon list have hadjustment and
+	vadjustment object arguments, to act in the same way as GtkCList.
+	You now have to insert the GnomeIconList inside a
+	GtkScrolledWindow.
+
 Sat Nov 14 14:55:48 1998  John Ellis  <johne@bellatlantic.net>
 
 	* gone-icon-sel.c(gnome_icon_selection_init): Add scrolled window
