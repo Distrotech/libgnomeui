@@ -1299,6 +1299,17 @@ free_history_item (GnomeSelectorHistoryItem *item, gpointer data)
 	g_free (item);
 }
 
+static gint
+compare_history_items (gconstpointer a, gconstpointer b)
+{
+	GnomeSelectorHistoryItem *ia, *ib;
+
+	ia = (GnomeSelectorHistoryItem *) a;
+	ib = (GnomeSelectorHistoryItem *) b;
+
+	return strcmp (ia->text, ib->text);
+}
+
 static void
 set_history_changed (GnomeSelector *selector)
 {
@@ -1338,11 +1349,12 @@ gnome_selector_set_history_length (GnomeSelector *selector,
 	selector->_priv->max_history_length = history_length;
 }
 
-void
-gnome_selector_prepend_history (GnomeSelector *selector, gboolean save,
-				const gchar *text)
+static void
+gnome_selector_add_history (GnomeSelector *selector, gboolean save,
+			    const gchar *text, gboolean append)
 {
 	GnomeSelectorHistoryItem *item;
+	GSList *node;
 
 	g_return_if_fail (selector != NULL);
 	g_return_if_fail (GNOME_IS_SELECTOR (selector));
@@ -1352,30 +1364,45 @@ gnome_selector_prepend_history (GnomeSelector *selector, gboolean save,
 	item->text = g_strdup (text);
 	item->save = save;
 
-	selector->_priv->history = g_slist_prepend
-		(selector->_priv->history, item);
+	/* if it's already in the history */
+	node = g_slist_find_custom (selector->_priv->history, item,
+				    compare_history_items);
+	if (node) {
+		free_history_item (node->data, selector);
+		selector->_priv->history = g_slist_remove
+			(selector->_priv->history, node->data);
+	}
+
+	if (append)
+		selector->_priv->history = g_slist_append
+			(selector->_priv->history, item);
+	else
+		selector->_priv->history = g_slist_prepend
+			(selector->_priv->history, item);
 
 	set_history_changed (selector);
+}
+
+void
+gnome_selector_prepend_history (GnomeSelector *selector, gboolean save,
+				const gchar *text)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+	g_return_if_fail (text != NULL);
+
+	gnome_selector_add_history (selector, save, text, FALSE);
 }
 
 void
 gnome_selector_append_history (GnomeSelector *selector, gboolean save,
 			       const gchar *text)
 {
-	GnomeSelectorHistoryItem *item;
-
 	g_return_if_fail (selector != NULL);
 	g_return_if_fail (GNOME_IS_SELECTOR (selector));
 	g_return_if_fail (text != NULL);
 
-	item = g_new0 (GnomeSelectorHistoryItem, 1);
-	item->text = g_strdup (text);
-	item->save = save;
-
-	selector->_priv->history = g_slist_append
-		(selector->_priv->history, item);
-
-	set_history_changed (selector);
+	gnome_selector_add_history (selector, save, text, TRUE);
 }
 
 GSList *
