@@ -85,7 +85,7 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 		return;
 	if(!t || !my_g_is_file(t) || !(im = gdk_imlib_load_image (t))) {
 		if(GTK_IS_PIXMAP(pentry->preview)) {
-			gtk_widget_destroy(pentry->preview);
+			gtk_widget_destroy(pentry->preview->parent);
 			pentry->preview = gtk_label_new(_("No Image"));
 			gtk_widget_show(pentry->preview);
 			gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
@@ -100,7 +100,7 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 	if(GTK_IS_PIXMAP(pentry->preview))
 		gtk_pixmap_set(GTK_PIXMAP(pentry->preview),pix,mask);
 	else {
-		gtk_widget_destroy(pentry->preview);
+		gtk_widget_destroy(pentry->preview->parent);
 		pentry->preview = gtk_pixmap_new(pix,mask);
 		gtk_widget_show(pentry->preview);
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),

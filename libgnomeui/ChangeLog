@@ -1,3 +1,14 @@
+Thu Nov 26 01:56:38 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap-entry.c: actually make preview work with the new
+	  scrolled window stuff by destroying the viewport not just the
+	  widget
+
+Thu Nov 26 01:13:51 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-entry.c: use the browse_dialog_title of the file entry
+	  for the icon selection
+
 Thu Nov 26 00:43:48 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-dentry-edit.[ch]: now use icon_entry for the icon

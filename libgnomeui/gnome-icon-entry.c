@@ -296,7 +296,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 		ientry->pick_dialog_dir = p;
 
 		ientry->pick_dialog = 
-			gnome_dialog_new(_("Choose an icon"),
+			gnome_dialog_new(GNOME_FILE_ENTRY(ientry->fentry)->browse_dialog_title,
 					 GNOME_STOCK_BUTTON_OK,
 					 GNOME_STOCK_BUTTON_CANCEL,
 					 NULL);
