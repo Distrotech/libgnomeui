@@ -1,3 +1,10 @@
+2001-03-20  Martin Baulig  <baulig@suse.de>
+
+	* libgnomeui.h (GNOMEUI_INIT): Don't #define this here.
+
+	* gnome-init.c (GNOMEUI_INIT): Moved #define here and don't
+	#include "libgnomeui.h".
+
 2001-03-14  Martin Baulig  <baulig@suse.de>
 
 	* libgnomeui.h: #include "libgnomeui/gnome-icon-selector.h" instead

@@ -46,11 +46,13 @@
 
 #include "libgnome/libgnomeP.h"
 
-#include "libgnomeui/libgnomeui.h"
-#include "libgnomeui/gnome-client.h"
-#include "libgnomeui/gnome-preferences.h"
-#include "libgnomeui/gnome-init.h"
-#include "libgnomeui/gnome-winhints.h"
+#define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT,GNOME_GCONF_INIT
+
+#include "gnome-client.h"
+#include "gnome-preferences.h"
+#include "gnome-init.h"
+#include "gnome-winhints.h"
+#include "gnome-gconf.h"
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-pixmap.h"
