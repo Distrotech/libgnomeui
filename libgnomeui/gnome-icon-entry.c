@@ -437,6 +437,8 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 
 		iconsel = gnome_icon_selection_new();
 
+		gtk_object_set_user_data(GTK_OBJECT(ientry), iconsel);
+
 		gnome_icon_selection_add_directory(GNOME_ICON_SELECTION(iconsel),
 						   ientry->pick_dialog_dir);
 
@@ -465,8 +467,6 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 		gtk_signal_connect_after(GTK_OBJECT(GNOME_ICON_SELECTION(iconsel)->gil), "select_icon",
 					 GTK_SIGNAL_FUNC(gil_icon_selected_cb),
 					 ientry);
-
-		gtk_object_set_user_data(GTK_OBJECT(ientry), iconsel);
 	} else {
 		GnomeIconSelection *gis =
 			gtk_object_get_user_data(GTK_OBJECT(ientry));
