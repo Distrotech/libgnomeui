@@ -1,3 +1,15 @@
+2003-09-02  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystem.h: s/nonexistant/nonexistent
+	* gtkfilesystem.c: Likewise.
+	* gtkfilesystemgnomevfs.c: Likewise.
+	* gtkfilesystemunix.c: Likewise.
+
+2003-08-27  Federico Mena Quintero  <federico@ximian.com>
+
+	* README: The required GtkTreeView patches are already on CVS.
+	Removed the part that mentions them.
+
 Fri Aug 22 15:57:27 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* glib-interface-properties-0.3.patch

@@ -911,7 +911,7 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
     {
       g_set_error (error,
 		   GTK_FILE_SYSTEM_ERROR,
-		   GTK_FILE_SYSTEM_ERROR_NONEXISTANT,
+		   GTK_FILE_SYSTEM_ERROR_NONEXISTENT,
 		   "'%s' does not exist",
 		   uri);
 
@@ -1027,7 +1027,7 @@ set_vfs_error (GnomeVFSResult result,
       g_assert_not_reached ();
       break;
     case GNOME_VFS_ERROR_NOT_FOUND:
-      errcode = GTK_FILE_SYSTEM_ERROR_NONEXISTANT;
+      errcode = GTK_FILE_SYSTEM_ERROR_NONEXISTENT;
       break;
     case GNOME_VFS_ERROR_BAD_PARAMETERS:
     case GNOME_VFS_ERROR_IO:
