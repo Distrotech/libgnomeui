@@ -364,8 +364,8 @@ libgnomeui_rc_parse (gchar *command)
 	
 	/* <gnomedatadir>/gtkrc */
 	file = gnome_datadir_file("gtkrc");
-	if (file) {
-		gtk_rc_add_default_file (file);
+  	if (file) {
+  		gtk_rc_add_default_file (file); 
 		g_free (file);
 	}
 

@@ -1,3 +1,25 @@
+Sat Sep 02 02:31:03 2000  Iain Holmes <terrorist@gegl.org>
+
+	* gnome-about.c (gnome_about_init): Allocate the _priv structure.
+	Neatened all the functions up. Fix memory leaks. Removed needs
+	for AboutInfo structure.
+
+	* gnome-animator.c: Added GParams.
+
+	* gtk-clock.c (gtk_clock_new): Calls gtk_clock_construct.
+
+	* stock-demo.c: Help menu not right justified.
+
+	* gnome-app.c (gnome_app_set_help_view_orientation): Something wrong
+	with the callback, so use the dock-items orientation value instead.
+
+	* gnome-helpsys.c: Use wap-textfu instead of textfu.
+	(help_view_select_help_cb): Removed grab, set cursor to WHATISIT,
+	removed sanity check. Fixed a leak too.
+
+	* wap-textfu.[ch]: Replacements for gnome-textfu. Need renamed once
+	they work to gnome-textfu.[ch].
+
 Sat Sep 02 03:25:46 2000  George Lebl <jirka@5z.com>
 
 	* gnome-druid.c: Eek, yet more minor fixes.  close_on_cancel

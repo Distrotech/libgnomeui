@@ -25,9 +25,21 @@
 
 #include <config.h>
 #include "gnome-macros.h"
-
+#include <gobject/gparam.h>
 #include <gtk/gtkmain.h>
 #include "gnome-animator.h"
+#include "libgnome/gnome-i18nP.h"
+
+enum {
+  ARG_0,
+  ARG_LOOP_TYPE,
+  ARG_DIRECTION,
+  ARG_FRAMES,
+  ARG_TOTAL,
+  ARG_CURRENT,
+  ARG_STATUS,
+  ARG_SPEED
+};
 
 struct _GnomeAnimatorPrivate
 {
@@ -66,6 +78,16 @@ static void gnome_animator_class_init (GnomeAnimatorClass * class);
 static void gnome_animator_init (GnomeAnimator * animator);
 static void destroy (GtkObject * object);
 static void finalize (GObject * object);
+static void set_param (GObject * object, 
+		       guint param_id,
+		       GValue * value,
+		       GParamSpec * pspec,
+		       const gchar * trailer);
+static void get_param (GObject * object,
+		       guint param_id,
+		       GValue *value,
+		       GParamSpec * pspec,
+		       const gchar *trailer);
 static void realize (GtkWidget * widget);
 static void unrealize (GtkWidget * widget);
 static void prepare_aux_pixmaps (GnomeAnimator * animator);
@@ -110,6 +132,63 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
   gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
 
+  parent_class = gtk_type_class (gtk_misc_get_type ());
+
+  g_object_class_install_param (gobject_class,
+				ARG_LOOP_TYPE,
+				g_param_spec_enum ("loop_type",
+						   _("Loop type"),
+						   _("The type of loop the GnomeAnimator uses"),
+						   GTK_TYPE_ENUM,
+						   GNOME_ANIMATOR_LOOP_NONE,
+						   (G_PARAM_READABLE |
+						    G_PARAM_WRITABLE)));
+  g_object_class_install_param (gobject_class,
+				ARG_DIRECTION,
+				g_param_spec_enum ("direction",
+						   _("Direction"),
+						   _("Animation direction"),
+						   GTK_TYPE_ENUM,
+						   GNOME_ANIMATOR_DIRECTION_FORWARD,
+						   (G_PARAM_READABLE |
+						    G_PARAM_WRITABLE)));
+  g_object_class_install_param (gobject_class,
+				ARG_TOTAL,
+				g_param_spec_uint ("num_frames",
+						   _("Number of frames"),
+						   _("Total number of frames in animation"),
+						   0,
+						   0,
+						   0,
+						   G_PARAM_READABLE));
+  g_object_class_install_param (gobject_class,
+				ARG_CURRENT,
+				g_param_spec_uint ("current_frame",
+						   _("Current frame"),
+						   _("Current frame number"),
+						   0,
+						   0,
+						   0,
+						   G_PARAM_READABLE));
+  g_object_class_install_param (gobject_class,
+				ARG_STATUS,
+				g_param_spec_enum ("status",
+						   _("Animation status"),
+						   _("Animation status"),
+						   GTK_TYPE_ENUM,
+						   GNOME_ANIMATOR_STATUS_STOPPED,
+						   (G_PARAM_READABLE |
+						    G_PARAM_WRITABLE)));
+  g_object_class_install_param (gobject_class,
+				ARG_SPEED,
+				g_param_spec_double ("speed",
+						     _("Speed"),
+						     _("Animation speed"),
+						     0.0,
+						     1000.0,
+						     1.0,
+						     (G_PARAM_READABLE |
+						      G_PARAM_WRITABLE )));
   widget_class->draw = draw;
   widget_class->expose_event = expose;
   widget_class->size_allocate = size_allocate;
@@ -118,6 +197,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 
   object_class->destroy = destroy;
   gobject_class->finalize = finalize;
+  gobject_class->set_param = set_param;
+  gobject_class->get_param = get_param;
 }
 
 static void
@@ -171,6 +252,94 @@ finalize (GObject * object)
 	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
+static void
+set_param (GObject * object,
+	   guint param_id,
+	   GValue * value,
+	   GParamSpec * pspec,
+	   const gchar * trailer)
+{
+  GnomeAnimator *animator;
+
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (GNOME_IS_ANIMATOR (object));
+
+  animator = GNOME_ANIMATOR (object);
+  switch (param_id) {
+  case ARG_LOOP_TYPE:
+    gnome_animator_set_loop_type (animator, g_value_get_enum (value));
+    break;
+
+  case ARG_DIRECTION:
+    gnome_animator_set_playback_direction (animator,
+					   g_value_get_enum (value));
+    break;
+
+  case ARG_CURRENT:
+    gnome_animator_goto_frame (animator, g_value_get_uint (value));
+    break;
+
+  case ARG_STATUS: {
+    GnomeAnimatorStatus status = g_value_get_enum (value);
+    if (status == GNOME_ANIMATOR_STATUS_RUNNING)
+      gnome_animator_start (animator);
+    else
+      gnome_animator_stop (animator);
+    
+    break;
+  }
+
+  case ARG_SPEED:
+    gnome_animator_set_playback_speed (animator, g_value_get_double (value));
+    break;
+
+  default:
+    break;
+  }
+}
+
+
+static void
+get_param (GObject * object,
+	   guint param_id,
+	   GValue * value,
+	   GParamSpec * pspec,
+	   const gchar * trailer)
+{
+  GnomeAnimator *animator;
+
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (GNOME_IS_ANIMATOR (object));
+
+  animator = GNOME_ANIMATOR (object);
+
+  switch (param_id) {
+  case ARG_LOOP_TYPE:
+    g_value_set_enum (value, animator->loop_type);
+    break;
+
+  case ARG_DIRECTION:
+    g_value_set_enum (value, animator->playback_direction);
+    break;
+
+  case ARG_TOTAL:
+    g_value_set_uint (value, animator->n_frames);
+    break;
+
+  case ARG_CURRENT:
+    g_value_set_uint (value, animator->frame_num);
+    break;
+
+  case ARG_STATUS:
+    g_value_set_enum (value, animator->status);
+    break;
+
+  case ARG_SPEED:
+    g_value_set_double (value, animator->playback_speed);
+    break;
+  }
+}
+    
 static void
 realize (GtkWidget * widget)
 {

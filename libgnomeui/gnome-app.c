@@ -797,9 +797,12 @@ gnome_app_get_dock (GnomeApp *app)
 }
 
 static void
-gnome_app_set_help_view_orientation(GnomeHelpView *help_view, GtkOrientation new_orientation, GtkWidget *dock_item)
+gnome_app_set_help_view_orientation(GtkWidget *dock_item, GtkOrientation new_orientation, GnomeHelpView *help_view)
 {
-	gnome_help_view_set_orientation(help_view, new_orientation);
+	/* 2000-09-01: Something wrong with new_orientation:
+	   It is always 0. IH */
+	gnome_help_view_set_orientation(help_view, 
+					GNOME_DOCK_ITEM (dock_item)->orientation);
 }
 
 /**
@@ -829,10 +832,12 @@ gnome_app_set_help_view (GnomeApp *app, GtkWidget *help_view)
 
 	gtk_widget_show(help_view);
 
-	item = gnome_dock_item_new (GNOME_APP_HELP_VIEW_NAME, 0);
+	item = gnome_dock_item_new (GNOME_APP_HELP_VIEW_NAME, 
+				    GNOME_DOCK_ITEM_BEH_EXCLUSIVE);
 	gtk_container_add (GTK_CONTAINER (item), help_view);
 	gnome_app_add_dock_item (app, GNOME_DOCK_ITEM (item),
 				 GNOME_DOCK_BOTTOM, 0, 0, 0);
-	gtk_signal_connect_object_while_alive(GTK_OBJECT(item), "orientation_changed",
-					      gnome_app_set_help_view_orientation, GTK_OBJECT(help_view));
+	gtk_signal_connect_while_alive(GTK_OBJECT(item), "orientation_changed",
+				       gnome_app_set_help_view_orientation, 
+				       help_view, GTK_OBJECT(help_view));
 }

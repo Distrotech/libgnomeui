@@ -165,7 +165,7 @@ void gtk_clock_construct(GtkClock *gclock, GtkClockType type)
 	} else {
 		gclock->fmt = g_strdup("%H:%M:%S");
 		gclock->tm = g_new(struct tm, 1);
-		memset(gclock->tm, 0, sizeof(struct tm));
+  		memset(gclock->tm, 0, sizeof(struct tm));
 		gclock->update_interval = 1;
 	}
 
@@ -176,6 +176,7 @@ GtkWidget *gtk_clock_new(GtkClockType type)
 {
 	GtkClock *clock = gtk_type_new(gtk_clock_get_type());
 
+	gtk_clock_construct (clock, type);
 	return GTK_WIDGET(clock);
 }
 

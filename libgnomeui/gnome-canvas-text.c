@@ -1316,7 +1316,7 @@ gnome_canvas_suck_font (GdkFont *font)
 	 * work. -RLL
 	 */
 
-	image = gdk_image_get (pixmap, 0, 0, width, height);
+	image = gdk_image_get (GDK_DRAWABLE (pixmap), 0, 0, width, height);
 	suckfont->bitmap = g_malloc0 ((width >> 3) * height);
 
 	line = suckfont->bitmap;

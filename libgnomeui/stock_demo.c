@@ -315,7 +315,7 @@ create_menu(GtkWidget *window)
 	w = gtk_menu_item_new_with_label(_("Help"));
 	gtk_widget_show(w);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
-	gtk_menu_item_right_justify(GTK_MENU_ITEM(w));
+/*  	gtk_menu_item_right_justify(GTK_MENU_ITEM(w)); */
 	gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
 
 	menu_items[i] = NULL;
