@@ -119,20 +119,20 @@ reduce_stack(GnomeCalculator *gc)
 	if(stack->type==CALCULATOR_PARENTHESIS)
 		return;
 	if(stack->type!=CALCULATOR_FUNCTION) {
-		g_warning("Corrupt GnomeCalculator stack!");
+		g_warning("Corrupt GnomeCalculator stack! (1)");
 		return;
 	}
 	func = stack->d.func;
 
 	list=g_list_next(gc->stack);
 	if(!list) {
-		g_warning("Corrupt GnomeCalculator stack!");
+		g_warning("Corrupt GnomeCalculator stack! (2)");
 		return;
 	}
 
 	stack = list->data;
 	if(stack->type!=CALCULATOR_NUMBER) {
-		g_warning("Corrupt GnomeCalculator stack!");
+		g_warning("Corrupt GnomeCalculator stack! (3)");
 		return;
 	}
 	second = stack->d.number;
@@ -171,7 +171,7 @@ set_result(GnomeCalculator *gc)
 		return;
 
 	gc->result = stack->d.number;
-	g_snprintf(gc->result_string,16,"% 15Lf",gc->result);
+	g_snprintf(gc->result_string,16,"% 15lg",gc->result);
 
 	gtk_label_set(GTK_LABEL(gc->display),gc->result_string);
 }
@@ -333,6 +333,8 @@ add_digit(GtkWidget *w, gpointer data)
 
 	gtk_label_set(GTK_LABEL(gc->display),gc->result_string);
 
+	sscanf(gc->result_string,"%lf",&gc->result);
+
 	return TRUE;
 }
 
@@ -435,10 +437,10 @@ gnome_calculator_init (GnomeCalculator *gc)
 
 	gtk_box_pack_start(GTK_BOX(gc),gc->display,FALSE,FALSE,5);
 
-	table = gtk_table_new(8,5,FALSE);
+	table = gtk_table_new(8,5,TRUE);
 	gtk_widget_show(table);
 
-	gtk_box_pack_start(GTK_BOX(gc),gc->display,FALSE,FALSE,5);
+	gtk_box_pack_start(GTK_BOX(gc),table,FALSE,FALSE,5);
 
 	w=gtk_button_new_with_label("1/x");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",
@@ -622,7 +624,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 			   g_strdup("0"));
 	gtk_object_set_user_data(GTK_OBJECT(w),gc);
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,1,2,8,9);
+	gtk_table_attach_defaults(GTK_TABLE(table),w,1,2,7,8);
 
 	w=gtk_button_new_with_label(".");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",
@@ -630,7 +632,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 			   g_strdup("."));
 	gtk_object_set_user_data(GTK_OBJECT(w),gc);
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,2,3,8,9);
+	gtk_table_attach_defaults(GTK_TABLE(table),w,2,3,7,8);
 
 	w=gtk_button_new_with_label("+/-");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",
@@ -638,7 +640,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 			   gc);
 	gtk_object_set_user_data(GTK_OBJECT(w),gc);
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,3,4,8,9);
+	gtk_table_attach_defaults(GTK_TABLE(table),w,3,4,7,8);
 
 	w=gtk_button_new_with_label("=");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",
@@ -646,7 +648,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 			   gc);
 	gtk_object_set_user_data(GTK_OBJECT(w),gc);
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,8,9);
+	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,7,8);
 }
 
 GtkWidget *
