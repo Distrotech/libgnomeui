@@ -252,13 +252,6 @@ typedef struct {
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,             \
           GNOME_KEY_NAME_PRINT_SETUP,  GNOME_KEY_MOD_PRINT_SETUP, NULL }
 
-#define GNOMEUIINFO_MENU_PREFERENCES_ITEM(cb, data)                         \
-        { GNOME_APP_UI_ITEM, N_("Preferences..."),                          \
-          N_("Configure the application"),                                  \
-          cb, (gpointer)(data),                                             \
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,              \
-          0,  (GdkModifierType) 0, NULL }
-
 #define GNOMEUIINFO_MENU_CLOSE_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM, N_("_Close"), N_("Close the current file"),    \
           cb, (gpointer)(data), NULL,                                       \
@@ -316,6 +309,13 @@ typedef struct {
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,                  \
           GNOME_KEY_NAME_FIND, GNOME_KEY_MOD_FIND, NULL }
 
+#define GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(cb, data)                          \
+        { GNOME_APP_UI_ITEM, N_("_Find Again"),                             \
+          N_("Search again for the same string"),                           \
+          cb, (gpointer)(data), NULL,                                       \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,                  \
+          GNOME_KEY_NAME_FIND_AGAIN, GNOME_KEY_MOD_FIND_AGAIN, NULL }
+
 #define GNOMEUIINFO_MENU_REPLACE_ITEM(cb, data)                             \
         { GNOME_APP_UI_ITEM, N_("_Replace..."), N_("Replace a string"),     \
           cb, (gpointer)(data), NULL,                                       \
@@ -327,6 +327,16 @@ typedef struct {
           N_("Modify the file's properties"),                               \
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,              \
+          0,  (GdkModifierType) 0, NULL }
+
+/*
+ * The Settings menu
+ */
+#define GNOMEUIINFO_MENU_PREFERENCES_ITEM(cb, data)                         \
+        { GNOME_APP_UI_ITEM, N_("Preferences..."),                          \
+          N_("Configure the application"),                                  \
+          cb, (gpointer)(data),                                             \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,              \
           0,  (GdkModifierType) 0, NULL }
 
 /*
@@ -348,11 +358,11 @@ typedef struct {
 #define GNOMEUIINFO_MENU_VIEW_TREE(tree) \
 	{ GNOME_APP_UI_SUBTREE, N_("_View"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
-#define GNOMEUIINFO_MENU_OPTIONS_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Options"), NULL, tree, NULL, NULL, \
+#define GNOMEUIINFO_MENU_SETTINGS_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("_Settings"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_FILES_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("File_s"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("Fi_les"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_WINDOWS_TREE(tree) \
 	{ GNOME_APP_UI_SUBTREE, N_("_Windows"), NULL, tree, NULL, NULL, \
@@ -368,8 +378,8 @@ typedef struct {
 #define GNOME_MENU_EDIT_PATH _("_Edit/")
 #define GNOME_MENU_VIEW_STRING _("_View")
 #define GNOME_MENU_VIEW_PATH _("_View/")
-#define GNOME_MENU_OPTIONS_STRING _("_Options")
-#define GNOME_MENU_OPTIONS_PATH _("_Options/")
+#define GNOME_MENU_SETTINGS_STRING _("_Settings")
+#define GNOME_MENU_SETTINGS_PATH _("_Settings/")
 #define GNOME_MENU_FILES_STRING _("File_s")
 #define GNOME_MENU_FILES_PATH _("File_s/")
 #define GNOME_MENU_WINDOWS_STRING _("_Windows")
