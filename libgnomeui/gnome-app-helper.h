@@ -256,7 +256,7 @@ typedef struct {
         { GNOME_APP_UI_ITEM, N_("Preferences..."),                          \
           N_("Configure the application"),                                  \
           cb, (gpointer)(data),                                             \
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREFERENCES,       \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,             \
           0,  (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_CLOSE_ITEM(cb, data)                               \
@@ -368,12 +368,12 @@ typedef struct {
 #define GNOME_MENU_EDIT_PATH _("_Edit/")
 #define GNOME_MENU_VIEW_STRING _("_View")
 #define GNOME_MENU_VIEW_PATH _("_View/")
+#define GNOME_MENU_OPTIONS_STRING _("_Options")
+#define GNOME_MENU_OPTIONS_PATH _("_Options/")
 #define GNOME_MENU_FILES_STRING _("File_s")
 #define GNOME_MENU_FILES_PATH _("File_s/")
 #define GNOME_MENU_WINDOWS_STRING _("_Windows")
 #define GNOME_MENU_WINDOWS_PATH _("_Windows/")
-
-
 
 /* Types useful to language bindings */
     
