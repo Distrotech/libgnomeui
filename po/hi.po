@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "POT-Creation-Date: 2003-08-05 21:31+0530\n"
-"PO-Revision-Date: 2003-08-05 21:30+0530\n"
+"PO-Revision-Date: 2003-08-06 16:05+0530\n"
 "Last-Translator: Anand Subramanian <anand.subra@wipro.com>\n"
 "Language-Team: Gnome Hindi Team<indlinux-hindi-gnome@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1129,24 +1129,20 @@ msgstr "फाइल चयन करें"
 
 # libgnomeui/gnome-app-helper.c:166
 #: libgnomeui/gnome-file-entry.c:654
-#, fuzzy
 msgid "Path"
-msgstr "चिपकाएं"
+msgstr "पाथ"
 
 # libgnomeui/gnome-app-helper.c:114
 #: libgnomeui/gnome-file-entry.c:654
-#, fuzzy
 msgid "Path to file"
-msgstr "वर्तमान फाइल संग्रहित करें"
+msgstr "फाइल का पाथ"
 
 # libgnomeui/gnome-file-entry.c:592
 #: libgnomeui/gnome-file-entry.c:681
-#, fuzzy
 msgid "_Browse..."
-msgstr "ब्राउज"
+msgstr "ब्राउज (_B)..."
 
 #: libgnomeui/gnome-file-entry.c:682
-#, fuzzy
 msgid "Pop up a file selector to choose a file"
 msgstr "फाइल चयन करने के लिये फाइल सेलेक्टर खोलें"
 
@@ -1313,13 +1309,10 @@ msgid "This button will take you to the URI that it displays."
 msgstr "यह बटन आपको दिखाये हुए URI पर ले जाएगा"
 
 #: libgnomeui/gnome-href.c:393
-#, fuzzy
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"URL नियंत्रणकर्ता को प्रस्तुत करने में त्रुटि क्रिपया कंट्रोल सेन्टर को समायोजन की जांच करें कि "
-"वह सही हो"
 
 # libgnomeui/gnome-icon-entry.c:164
 #: libgnomeui/gnome-icon-entry.c:177
@@ -1380,9 +1373,8 @@ msgstr "पूर्व दर्शन"
 
 # libgnomeui/gnome-font-picker.c:156
 #: libgnomeui/gnome-icon-entry.c:756
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "चयन डायलाग बाक्स का शीर्षक"
+msgstr "आयकॉन चयन डायलाग"
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
@@ -1401,7 +1393,6 @@ msgid "Icon Selector"
 msgstr "आयकन चयनक"
 
 #: libgnomeui/gnome-icon-entry.c:989
-#, fuzzy
 msgid "This button will open a window to let you select an icon."
 msgstr "इस बटन से एक विंडो खुलेगा जहां से आप आयकन चुन सकते हें"
 
@@ -1487,15 +1478,13 @@ msgstr "कोई इमेज नहीं"
 
 # libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "पूर्व दर्शन"
+msgstr "चित्र पूर्व दर्शन"
 
 # libgnomeui/gnome-dateedit.c:469
 #: libgnomeui/gnome-pixmap-entry.c:206
-#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr "वर्तमान में चयनित समय"
+msgstr "वर्तमान में चयनित चित्र का पूर्वदर्शन"
 
 # libgnomeui/gnome-scores.c:78
 #: libgnomeui/gnome-scores.c:78
@@ -1581,7 +1570,7 @@ msgid ""
 msgstr "प्रोग्राम के एक भाग में खराबी संदेश बाक्स प्रदर्शित नहीं किया जा सकता\n"
 
 #: libgnomeui/gnome_segv.c:100
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
@@ -1589,17 +1578,21 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"गनोम सत्र मैनेजर महत्वपूर्ण त्रुटि के कारण (प्रोसेस %d) खराब हो गया है, जब आप इस डायलाग "
-"को बंद करेंगे तब सभी अनुप्रयोग बंद हो जायेंगे तथा आपका सत्र समाप्त हो जाएगा। इस डायलाग "
-"बाक्स को बंद करने से पूर्व क्रिपया अपनी सभी फाइलों को संग्रहित कर लें।"
+"गनोम सत्र मैनेजर महत्वपूर्ण त्रुटि के कारण (प्रोसेस %d) खराब हो गया है\n"
+"(%s)\n"
+"जब आप इस डायलाग को बंद करेंगे तब सभी अनुप्रयोग बंद हो जायेंगे \n"
+"तथा आपका सत्र समाप्त हो जाएगा। \n"
+"इस डायलाग बाक्स को बंद करने से पूर्व क्रिपया अपनी सभी फाइलों को संग्रहित कर लें।"
 
 #: libgnomeui/gnome_segv.c:110
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Application \"%s\" (process %d) has crashed\n"
 "due to a fatal error.\n"
 "(%s)"
-msgstr "महत्वपूर्ण त्रुटि के कारण अनुप्रयोग \"%s\" (प्रोसेस %d) खराब हो गया है"
+msgstr ""
+"महत्वपूर्ण त्रुटि के कारण अनुप्रयोग \"%s\" (प्रोसेस %d) खराब हो गया है"
+"(%s)"
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
