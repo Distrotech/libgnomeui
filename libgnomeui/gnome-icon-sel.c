@@ -23,6 +23,7 @@
 #include <gdk_imlib.h>
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
+#include "libgnome/gnome-mime.h"
 #include "gnome-uidefs.h"
 #include "gnome-icon-list.h"
 
@@ -263,12 +264,14 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
   }
 
   while ( (de = readdir(dp)) != NULL ) {
+    const char *mimetype;
 #ifdef GNOME_ENABLE_DEBUG
     g_print("File: %s\n", de->d_name);
 #endif
     if ( *(de->d_name) == '.' ) continue; /* skip dotfiles */
 
-    if ( g_is_image_filename(de->d_name) ) {
+    mimetype = gnome_mime_type(de->d_name);
+    if ( mimetype && strncmp(mimetype,"image",sizeof("image")-1)==0 ) {
       gchar * full_path = g_concat_dir_and_file(dir, de->d_name);
 #ifdef GNOME_ENABLE_DEBUG
     g_print("Full path: %s\n", full_path);

@@ -1,3 +1,8 @@
+Mon Mar 08 21:55:09 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-sel.c: don't use g_is_image_filename, but use
+	  gnome_mime_type
+
 Mon Mar 08 21:43:19 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-list.c: in SINGLE mode, don't unselect on
