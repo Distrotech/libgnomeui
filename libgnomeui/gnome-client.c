@@ -7,6 +7,7 @@
 #include <pwd.h>
 #include <string.h>
 #include <sys/types.h>
+#include <errno.h>
 
 #include "libgnome/libgnomeP.h"
 #include "gnome-client.h"
@@ -295,7 +296,7 @@ gnome_client_init (void)
 	  gtk_signal_connect (GTK_OBJECT (master_client), "disconnect",
 			      GTK_SIGNAL_FUNC (master_client_disconnect), NULL);
 	  gnome_parse_register_arguments (&parser);
-	  
+
 	  /* Set the master clients environment.  */
 	  for (i= 0; master_environment[i]; i++)
 	    {
@@ -318,10 +319,18 @@ gnome_client_init (void)
 		  g_free (buffer);
 		  i *= 2;
 		  buffer= NULL;
+		  /* ERANGE means that we needed more space in the
+		     buffer.  Other errors mean don't bother setting
+		     the directory information.  */
+		  if (errno != ERANGE)
+		    break;
 		}
 	    }
-	  gnome_client_set_current_directory (master_client, buffer);
-	  g_free (buffer);
+	  if (buffer != NULL)
+	    {
+	      gnome_client_set_current_directory (master_client, buffer);
+	      g_free (buffer);
+	    }
 	}
     }
 }

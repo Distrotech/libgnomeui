@@ -1,3 +1,8 @@
+Mon Jul 20 17:30:12 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.c (gnome_client_init): Only reallocate buffer if
+	errno is ERANGE.
+
 Sun Jul 19 23:07:38 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-propertybox.c: fix the {set,get}_data calls, they now use
