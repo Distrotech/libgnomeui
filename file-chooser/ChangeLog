@@ -1,3 +1,10 @@
+Fri Aug 22 15:57:27 2003  Owen Taylor  <otaylor@redhat.com>
+
+	* glib-interface-properties-0.3.patch
+	glib-interface-properties-0.4.patch: New version of object
+	properties patch, commenting out a part that wasn't
+	working properly.
+
 Wed Jul 23 18:43:20 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* gtkfilesystemmodel.c (_gtk_file_system_model_get_path):
