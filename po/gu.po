@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 18:30+0200\n"
-"PO-Revision-Date: 2004-08-20 15:53+0530\n"
+"POT-Creation-Date: 2004-10-26 12:45+0200\n"
+"PO-Revision-Date: 2004-10-27 10:22+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "<magnet@magnet-i.com>\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -51,7 +51,7 @@ msgstr "%s એ ફોલ્ડર નથી"
 msgid "Filesystem"
 msgstr "ફાઈલસિસ્ટમ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1539
+#: file-chooser/gtkfilesystemgnomevfs.c:1556
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "બુકમાર્ક સંગ્રહવામાં નિષ્ફળ (%s)"
@@ -68,8 +68,7 @@ msgstr "ફાઈલ '%s' ખોલવામાં નિષ્ફળ: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "ચિત્ર '%s' લાવવામાં નિષ્ફળ: કારણ જાણતા નથી, કદાચ ચિત્ર બગડેલુ હશે"
 
 #: libgnomeui/gnome-about.c:198
@@ -175,7 +174,7 @@ msgstr "એકમાત્ર દસ્તાવેજકર્તાનો પ�
 msgid "Translator credits"
 msgstr ""
 "નીરવ <nirav@magnet-i.com>\n"
-"અંકિત <ankit644@linux.net>\n"
+"અંકિત <ankit644@yahoo.com>\n"
 "અંકુર <ankur_surti@linux.net>\n"
 "અતિત <shahatit_84@linux.net>\n"
 "ભાવિન <bhavinshah@linux.net>\n"
@@ -185,9 +184,8 @@ msgstr ""
 
 # libgnomeui/gnome-about.c:389
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr "અનુવાદકને યશ.અા શબ્દમાળાને અનુવાદ માટે યોગ્ય શબ્દમાળા તરીકે ચિન્હિત કરવી"
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "અનુવાદકને યશ. આ શબ્દમાળાને અનુવાદ માટે યોગ્ય શબ્દમાળા તરીકે ચિન્હિત કરવી"
 
 # libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -209,6 +207,7 @@ msgstr "%s ના વિશે"
 # test-gnome/testgnome.xml.h:5
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ફાઇલ (_F)"
 
@@ -281,6 +280,7 @@ msgstr "રમત (_G)"
 # libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 # test-gnome/testgnome.xml.h:6
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "મદદ (_H)"
 
@@ -315,7 +315,7 @@ msgstr "વર્તમાન ફાઇલનો સંગ્રહ કરો"
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "અા નામથી સંગ્રહ કરો (_A) ..."
+msgstr "આ નામથી સંગ્રહ કરો (_A) ..."
 
 # libgnomeui/gnome-app-helper.c:120
 #: libgnomeui/gnome-app-helper.c:120
@@ -353,7 +353,7 @@ msgstr "છાપવા માટેનું સુયોજન (_e)..."
 # libgnomeui/gnome-app-helper.c:137
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "તમારા વર્તમાન પ્રિન્ટર માટે પાનાની સુયાેજના નક્કી કરો"
+msgstr "તમારા વર્તમાન પ્રિન્ટર માટે પાનાની સુયોજના નક્કી કરો"
 
 # libgnomeui/gnome-app-helper.c:142
 #. Close
@@ -466,24 +466,24 @@ msgstr "પછીનું શોધો (_x)"
 # libgnomeui/gnome-app-helper.c:192
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "અેજ શબ્દમાળાને ફરીથી શોધો"
+msgstr "એજ શબ્દમાળાને ફરીથી શોધો"
 
 # libgnomeui/gnome-app-helper.c:197
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "થી બદલાે (_e)..."
+msgstr "થી બદલો (_e)..."
 
 # libgnomeui/gnome-app-helper.c:197
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr "શબ્દમાળાને બદલાે"
+msgstr "શબ્દમાળાને બદલો"
 
 # libgnomeui/gnome-app-helper.c:202
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
-msgstr "ગુણધર્મો... (_P)"
+msgstr "ગુણધર્મો (_P)"
 
 # libgnomeui/gnome-app-helper.c:203
 #: libgnomeui/gnome-app-helper.c:203
@@ -510,12 +510,12 @@ msgstr "કાર્યક્રમની રુપરેખા બનાવો"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "ના વિશે (_A)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "આ કાર્યક્રમ વિશે"
 
@@ -548,7 +548,7 @@ msgid "_Close This Window"
 msgstr "આ વિન્ડો બંધ કરો (_C)"
 
 # libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "વર્તમાન વિન્ડો બંધ કરો"
 
@@ -752,7 +752,7 @@ msgstr "એક સ્થિતિ વિજેટ બનાવો."
 # libgnomeui/gnome-appbar.c:778
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
-msgstr "પારસપરિકતા"
+msgstr "પારસ્પરિકતા"
 
 # libgnomeui/gnome-appbar.c:779
 #: libgnomeui/gnome-appbar.c:764
@@ -774,11 +774,11 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
-msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા વગર માેકલાશે."
+msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા વગર મોકલાશે."
 
 #: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
-msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા પછી માેકલાશે."
+msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા પછી મોકલાશે."
 
 #: libgnomeui/gnome-authentication-manager.c:78
 #: libgnomeui/gnome-authentication-manager.c:307
@@ -926,7 +926,7 @@ msgstr "યાદીમાંથી સમય પસંદ કરો"
 # libgnomeui/gnome-dateedit.c:975
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date deprecated, user gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 
 # libgnomeui/gnome-druid-page-standard.c:121
 # libgnomeui/gnome-font-picker.c:155
@@ -1135,18 +1135,17 @@ msgstr "ડીરેક્ટરી પ્રવેશ"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"શું આ ફાઇલ પ્રવેશનો ઉપયોગ ડીરેક્ટરીના નામ અથવા પૂરેપૂરા ફાઇલના નામ નાખવા માટે વપરાય છે."
+msgstr "શું આ ફાઇલ પ્રવેશનો ઉપયોગ ડીરેક્ટરીના નામ અથવા પૂરેપૂરા ફાઇલના નામ નાખવા માટે વપરાય છે."
 
 # libgnomeui/gnome-file-entry.c:216
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
-msgstr "માેડલ"
+msgstr "મોડલ"
 
 # libgnomeui/gnome-file-entry.c:217
 #: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr "શું ફાઇલ શોધવા માટેની વિન્ડો માેડલ હોવી જાેઇએ."
+msgstr "શું ફાઇલ શોધવા માટેની વિન્ડો મોડલ હોવી જોઇએ."
 
 # libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
@@ -1171,7 +1170,7 @@ msgstr "ફાઇલ શોધવા માટેના સંવાદ મા�
 # libgnomeui/gnome-file-entry.c:241
 #: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
-msgstr "જીનાેમ પ્રવેશ"
+msgstr "જીનોમ પ્રવેશ"
 
 # libgnomeui/gnome-file-entry.c:242
 #: libgnomeui/gnome-file-entry.c:281
@@ -1180,8 +1179,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"જીનાેમ પ્રવેશ જેનાે ઉપયોગ ફાઇલનું નામ અાપવા માટે થાય છે. તમે આ ગુણધર્મનો ઉપયોગજીનોમ પ્રવેશ "
-"મેળવવા માટે કરી શકો છો જો તમારે તેને બદલવાની અથવા તો એના કોઇમાપદંડોને સંબંધિત કાેઇ "
+"જીનોમ પ્રવેશ જેનો ઉપયોગ ફાઇલનું નામ આપવા માટે થાય છે. તમે આ ગુણધર્મનો ઉપયોગજીનોમ પ્રવેશ "
+"મેળવવા માટે કરી શકો છો જો તમારે તેને બદલવાની અથવા તો એના કોઇ માપદંડોને સંબંધિત કોઇ "
 "પ્રશ્ન કરવાની જરૂર પડે."
 
 # libgnomeui/gnome-file-entry.c:252
@@ -1196,8 +1195,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GTKપ્રવેશ જેનાે ઉપયોગ ફાઇલનું નામ અાપવા માટે થાય છે. તમે આ ગુણધર્મનો ઉપયોગ GTKપ્રવેશ "
-"મેળવવા માટે કરી શકો છો જો તમારે તેને બદલવાની અથવા તો એના કોઇ માપદંડોનેસંબંધિત કાેઇ "
+"GTKપ્રવેશ જેનો ઉપયોગ ફાઇલનું નામ આપવા માટે થાય છે. તમે આ ગુણધર્મનો ઉપયોગ GTKપ્રવેશ "
+"મેળવવા માટે કરી શકો છો જો તમારે તેને બદલવાની અથવા તો એના કોઇ માપદંડોને સંબંધિત કોઇ "
 "પ્રશ્ન કરવાની જરૂર પડે."
 
 #: libgnomeui/gnome-file-entry.c:302
@@ -1209,7 +1208,7 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"શંુ પછી ફાઈલો પસંદ કરવા માટે નવુ GtkFileChooser વિજેટ અથવા GtkFileSelection વિજેટ "
+"શું પછી ફાઈલો પસંદ કરવા માટે નવુ GtkFileChooser વિજેટ અથવા GtkFileSelection વિજેટ "
 "વાપરવું."
 
 # libgnomeui/gnome-file-entry.c:418
@@ -1269,22 +1268,22 @@ msgstr "ફોન્ટ પસંદ કરનારની પ્રક્રિ
 # libgnomeui/gnome-font-picker.c:174
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr "ફાેન્ટ નામ"
+msgstr "ફોન્ટ નામ"
 
 # libgnomeui/gnome-font-picker.c:175
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr "પસંદ કરાયેલ ફાેન્ટનું નામ"
+msgstr "પસંદ કરાયેલ ફોન્ટનું નામ"
 
 # libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr "ફાેન્ટ"
+msgstr "ફોન્ટ"
 
 # libgnomeui/gnome-font-picker.c:185
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "પસંદ કરાયેલ GTK ફાેન્ટ"
+msgstr "પસંદ કરાયેલ GTK ફોન્ટ"
 
 # libgnomeui/gnome-font-picker.c:192
 #: libgnomeui/gnome-font-picker.c:192
@@ -1309,12 +1308,12 @@ msgstr "'ફોન્ટ માહિતિ' સ્થિતિમાં લે�
 # libgnomeui/gnome-font-picker.c:210
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "લેબલ માટે ફાેન્ટનું માપ"
+msgstr "લેબલ માટે ફોન્ટનું માપ"
 
 # libgnomeui/gnome-font-picker.c:211
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "'ફોન્ટ માહિતિ' સ્થિતિમાં લેબલ માટે ફાેન્ટનું માપ"
+msgstr "'ફોન્ટ માહિતિ' સ્થિતિમાં લેબલ માટે ફોન્ટનું માપ"
 
 # libgnomeui/gnome-font-picker.c:221
 #: libgnomeui/gnome-font-picker.c:221
@@ -1329,7 +1328,7 @@ msgstr "'ફોન્ટ માહિતિ' સ્થિતિમાં મા�
 # libgnomeui/gnome-gconf-ui.c:61
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr "જીનાેમ જીકૉન્ફ UI આધાર"
+msgstr "જીનોમ જીકૉન્ફ UI આધાર"
 
 # libgnomeui/gnome-gconf-ui.c:96
 #: libgnomeui/gnome-gconf-ui.c:96
@@ -1346,8 +1345,8 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "\"%s\" કાર્યક્રમે તમારી રુપરેખામાં ફેરફાર કરવાનો પ્રયાસ કર્યો જેની તમારો સિસ્ટમ "
-"વ્યવસ્થાપક કે પછી અૉપરેટીંગ સિસ્ટમ વેચનાર પરવાનગી અાપતા નથી. તમે પસંદ કરેલા અમૂક બદલાવો "
-"અસર નહિ કરે, અથવા તમે બીજી વાર જ્યારે કાર્યક્રમનો ઉપયાેગ કરશો ત્યારે ફરીથી સંગ્રહિત કરી "
+"વ્યવસ્થાપક કે પછી ઓપરેટીંગ સિસ્ટમ વેચનાર પરવાનગી આપતા નથી. તમે પસંદ કરેલા અમૂક બદલાવો "
+"અસર નહિ કરે, અથવા તમે બીજી વાર જ્યારે કાર્યક્રમનો ઉપયોગ કરશો ત્યારે ફરીથી સંગ્રહિત કરી "
 "શકાશે નહિ."
 
 # libgnomeui/gnome-gconf-ui.c:176
@@ -1412,8 +1411,7 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ચિહ્નના દાખલા માટેની અનન્ય ઓળખાણ.ઇતિહાસની યાદીનો સંગ્રહ કરવા માટે આનોઉપયોગ થશે."
+msgstr "ચિહ્નના દાખલા માટેની અનન્ય ઓળખાણ. ઇતિહાસની યાદીનો સંગ્રહ કરવા માટે આનો ઉપયોગ થશે."
 
 # libgnomeui/gnome-icon-entry.c:173
 #: libgnomeui/gnome-icon-entry.c:187
@@ -1446,8 +1444,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"ચિહ્ન પસંદ કરવાનો સંવાદ.જો તમે GTKસંવાદના ગુણધર્મોને બદલવા ઇચ્છતા હોય અથવાતેના વિશે કંઇક "
-"પ્રશ્ન હોય તો તમે GTKસંવાદ મેળવવા માટે આ ગુણધર્મનો ઉપયોગ કરી શકશો."
+"ચિહ્ન પસંદ કરવાનો સંવાદ.જો તમે GTKDialogના ગુણધર્મોને બદલવા ઇચ્છતા હોય અથવા તેના વિશે કંઇક "
+"પ્રશ્ન હોય તો તમે GTKDialog મેળવવા માટે આ ગુણધર્મનો ઉપયોગ કરી શકશો."
 
 # libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
@@ -1492,19 +1490,19 @@ msgstr "ચિહ્ન પથ"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "અહીંયા તમારે ડીરેક્ટરીનું નામ આપવુ જાેઇએ જ્યાં ચિહ્નના ચિત્રો સ્થિત છે."
+msgstr "અહીંયા તમારે ડીરેક્ટરીનું નામ આપવુ જોઇએ જ્યાં ચિહ્નના ચિત્રો સ્થિત છે."
 
 # libgnomeui/gnome-icon-sel.c:296
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "જીનાેમ ચિહ્ન પસંદગી: '%s' અસ્તિત્વ ધરાવતી નથી અથવા એ ડીરેક્ટરી નથી"
+msgstr "જીનોમ ચિહ્ન પસંદગી: '%s' અસ્તિત્વ ધરાવતી નથી અથવા એ ડીરેક્ટરી નથી"
 
 # libgnomeui/gnome-icon-sel.c:304
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "જીનાેમ ચિહ્ન પસંદગી: '%s' ડીરેક્ટરીને ખોલી શકાતી નથી"
+msgstr "જીનોમ ચિહ્ન પસંદગી: '%s' ડીરેક્ટરીને ખોલી શકાતી નથી"
 
 # libgnomeui/gnome-icon-sel.c:411
 #: libgnomeui/gnome-icon-sel.c:401
@@ -1572,7 +1570,7 @@ msgstr "પૂર્વદર્શન કરો"
 # libgnomeui/gnome-pixmap-entry.c:119
 #: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr "શું ચિત્ર પ્રવેશ માટે પૂર્વદર્શન હોવું જાેઇએ."
+msgstr "શું ચિત્ર પ્રવેશ માટે પૂર્વદર્શન હોવું જોઇએ."
 
 # libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
 #: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
@@ -1687,7 +1685,7 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-"વિભાગ માં ભૂલ!\n"
+"વિભાગમાં ભૂલ!\n"
 "ભંગાણ સંવાદ દર્શાવી શકતું નથી\n"
 
 #: libgnomeui/gnome_segv.c:101
@@ -1699,9 +1697,9 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"ઘાતક ભૂલના કારણે જીનાેમ સત્ર વ્યવસ્થાપક (પ્રક્રિયા %d) ભાંગી પડ્યુ (%s).\n"
+"ઘાતક ભૂલના કારણે જીનોમ સત્ર વ્યવસ્થાપક (પ્રક્રિયા %d) ભાંગી પડ્યુ (%s).\n"
 "જ્યારે તમે આ સંવાદ બંધ કરશો ત્યારે બધા કાર્યક્રમ બંધ થઇ જશે અને તમારુ સત્ર બહાર નીકળી જશે.\n"
-"સંવાદને બંધ કરતા પહેલા તમારી બધી ફાઇલોને સંગ્રહિત કરી લાે."
+"સંવાદને બંધ કરતા પહેલા તમારી બધી ફાઇલોને સંગ્રહિત કરી લો."
 
 #: libgnomeui/gnome_segv.c:112
 #, c-format
@@ -1738,5 +1736,7 @@ msgstr "વિકસાવનારાઓને જાણ કરો (_I)"
 msgid "_Debug"
 msgstr "ભૂલ શોધો (_D)"
 
-#~ msgid "Exit the test"
-#~ msgstr "ચકાસણી બંધ કરો"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "ચકાસણી બંધ કરો"
+
