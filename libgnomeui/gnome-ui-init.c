@@ -42,7 +42,7 @@
 #include <locale.h>
 #endif
 
-#include <libgnome/libgnome.h>
+#include <libgnome.h>
 #include <libgnomeui/gnome-canvas-init.h>
 
 #include "gnome-client.h"

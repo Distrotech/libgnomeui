@@ -144,7 +144,7 @@ gnome_headers = \
 	wap-textfu.h			\
 	oafgnome.h
 
-lib_headers = \
+libinclude_HEADERS = \
 	libgnomeui.h
 
 libgnomeuiinclude_HEADERS =		\

@@ -21,7 +21,7 @@
   @NOTATION@
  */
 
-#include <libgnome/libgnome.h>
+#include <libgnome.h>
 #include <libgnomeui/gnome-init.h>
 #include <stdio.h>
 #include <unistd.h>

@@ -28,8 +28,8 @@
 #include <gobject/gboxed.h>
 #include <gtk/gtk.h>
 
-#include <libgnomecanvas/libgnomecanvas.h>
-#include <libgnome/libgnome.h>
+#include <libgnomecanvas.h>
+#include <libgnome.h>
 
 static void
 add_gtk_arg_callback (poptContext con, enum poptCallbackReason reason,

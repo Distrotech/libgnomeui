@@ -32,7 +32,7 @@
 #include <gtk/gtktypeutils.h>
 
 
-#include <libgnome/libgnome.h>
+#include <libgnome.h>
 #include "gnome-macros.h"
 #include "gnometypebuiltins.h"
 
