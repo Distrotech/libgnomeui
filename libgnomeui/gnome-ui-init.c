@@ -291,6 +291,103 @@ gnome_register_options(void)
 	gnomelib_register_popt_table(gnome_options, "GNOME GUI options");
 }
 
+/* #define ALLOC_DEBUGGING_HOOKS */
+#ifdef ALLOC_DEBUGGING_HOOKS
+#include <malloc.h>
+#include <sys/time.h>
+
+static struct mallinfo mi1, mi2;
+
+#define AM() mi1 = mallinfo();
+#define PM(x) mi2 = mallinfo(); printf(x ": used %d, now %d\n", \
+mi2.uordblks - mi1.uordblks, mi2.uordblks);
+
+typedef struct {
+  gulong magic;
+  gulong bsize;
+  struct timeval tv;
+} BlkInfo;
+
+static void (*old_free_hook)(__malloc_ptr_t __ptr);
+static __malloc_ptr_t (*old_malloc_hook) (size_t __size);
+static __malloc_ptr_t (*old_realloc_hook) (__malloc_ptr_t __ptr,
+					   size_t __size);
+
+static void my_free_hook(__malloc_ptr_t ptr)
+{
+  char buf[512];
+  BlkInfo *tv;
+  struct timeval now;
+
+  tv = (BlkInfo *)(((char *)ptr) - sizeof(BlkInfo));
+
+  __free_hook = old_free_hook;
+  if(tv->magic != 0xadaedead) {
+    goto out;
+  }
+
+  gettimeofday(&now, NULL);
+  sprintf(buf, "-%p %ld %ld\n", ptr, tv->bsize,
+	  (now.tv_sec*1000000 + now.tv_usec)
+	  - (tv->tv.tv_sec*1000000 + tv->tv.tv_usec));
+  write(1, buf, strlen(buf));
+
+  free(tv);
+ out:
+  __free_hook = my_free_hook;
+}
+
+static __malloc_ptr_t my_malloc_hook(size_t bsize)
+{
+  BlkInfo *newblk;
+  __malloc_ptr_t retval;
+  char buf[512];
+
+  if(!bsize) return NULL;
+
+  __malloc_hook = old_malloc_hook;
+
+  newblk = malloc(bsize+sizeof(BlkInfo));
+
+  if(newblk) {
+    newblk->magic = 0xadaedead;
+    newblk->bsize = bsize;
+    gettimeofday(&newblk->tv, NULL);
+  }
+
+
+  retval = newblk;
+  retval += sizeof(BlkInfo);
+
+  sprintf(buf, "+%p %ld\n", retval, bsize);
+  write(1, buf, strlen(buf));
+
+  __malloc_hook = my_malloc_hook;
+  return retval;
+}
+
+static __malloc_ptr_t my_realloc_hook(__malloc_ptr_t __ptr,
+				      size_t __size)
+{
+  BlkInfo *oldblk, *newblk;
+  __malloc_ptr_t rv;
+
+  __realloc_hook = old_realloc_hook;
+  oldblk = (((char *)__ptr) - sizeof(BlkInfo));
+
+  if(__ptr && oldblk->magic == 0xadaedead) {
+    newblk = realloc(oldblk, __size + sizeof(BlkInfo));
+    rv = newblk + 1;
+    newblk->bsize = __size;
+  } else
+    rv = realloc(__ptr, __size);
+
+  __realloc_hook = my_realloc_hook;
+
+  return rv;
+}
+#endif
+
 /**
  * gnome_init_with_popt_table:
  * @app_id: Application id.
@@ -309,6 +406,7 @@ gnome_register_options(void)
  * a table of popt options (popt is the command line argument parsing
  * library).
  */
+
 int
 gnome_init_with_popt_table(const char *app_id,
 			   const char *app_version,
@@ -319,6 +417,19 @@ gnome_init_with_popt_table(const char *app_id,
 {
 	poptContext ctx;
 	char *appdesc;
+
+#ifdef ALLOC_DEBUGGING_HOOKS
+	appdesc = malloc(10);
+	appdesc = realloc(appdesc, 20);
+	free(appdesc);
+	
+	old_free_hook = __free_hook;
+	old_malloc_hook = __malloc_hook;
+	old_realloc_hook = __realloc_hook;
+	__free_hook = my_free_hook;
+	__malloc_hook = my_malloc_hook;
+	__realloc_hook = my_realloc_hook;
+#endif
 	g_return_val_if_fail(gnome_initialized == FALSE, -1);
 	
 	gnomelib_init (app_id, app_version);
@@ -339,7 +450,11 @@ gnome_init_with_popt_table(const char *app_id,
 		*return_ctx = ctx;
 	else
 		poptFreeContext(ctx);
-	
+
+	/* reduce mem usage (hopefully) */
+	gnome_config_sync();
+	g_blow_chunks();
+
 	return 0;
 }
 
