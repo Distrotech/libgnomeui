@@ -1,5 +1,10 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-#include <gnome.h>
+#include <libgnome.h>
+#include <libgnomeui/gnome-init.h>
+#include <libgnomeui/gnome-mdi.h>
+#include <libgnomeui/gnome-mdi-generic-child.h>
+#include <libgnomeui/gnome-mdi-child.h>
+#include <bonobo/bonobo-ui-component.h>
 
 static GnomeMDI *mdi;
 static gint child_counter = 1;
@@ -8,6 +13,14 @@ static gint child_counter = 1;
 
 static void
 exit_cb(GtkWidget *w, gpointer user_data)
+{
+	gtk_main_quit();
+}
+
+static void
+quit_cmd (BonoboUIComponent *uic,
+		  gpointer           user_data,
+		  const char        *verbname)
 {
 	gtk_main_quit();
 }
@@ -123,7 +136,9 @@ static GnomeUIInfo child_toolbar[] =
 };
 
 static void
-add_child_cb(GtkWidget *w, gpointer user_data)
+add_child_cmd (BonoboUIComponent *uic,
+			   gpointer           user_data,
+			   const char        *verbname)
 {
 	GnomeMDIGenericChild *child;
 	gchar *name;
@@ -146,7 +161,9 @@ add_child_cb(GtkWidget *w, gpointer user_data)
 }
 
 static void
-remove_child_cb(GtkWidget *w, gpointer user_data)
+remove_child_cmd (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const char        *verbname)
 {
 	GtkWidget *view;
 
@@ -178,8 +195,10 @@ GnomeUIInfo mode_menu[] =
 
 GnomeUIInfo mdi_menu[] =
 {
+#if 0
 	GNOMEUIINFO_ITEM("Add child", NULL, add_child_cb, NULL),
 	GNOMEUIINFO_ITEM("Remove child", NULL, remove_child_cb, NULL),
+#endif
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_SUBTREE("Mode", mode_menu),
 	GNOMEUIINFO_SEPARATOR,
@@ -194,17 +213,51 @@ GnomeUIInfo main_menu[] =
 	GNOMEUIINFO_END
 };
 
+static const gchar *menu_xml = 
+"<menu>\n"
+"    <submenu name=\"MDI\" _label=\"_MDI\">\n"
+"        <menuitem name=\"AddChild\" verb=\"\" _label=\"Add Child\"/>\n"
+"        <menuitem name=\"RemoveChild\" verb=\"\" _label=\"Remove Child\"/>\n"
+"        <separator/>"
+"        <menuitem name=\"FileExit\" verb=\"\" _label=\"Exit\"/>\n"
+"    </submenu>\n"
+"    <submenu name=\"Children\" _label=\"_Children\">\n"
+"        <placeholder/>\n"
+"    </submenu>\n"
+"</menu>\n";
+
+BonoboUIVerb verbs [] = {
+    BONOBO_UI_VERB ("FileExit", quit_cmd),
+
+    BONOBO_UI_VERB ("AddChild", add_child_cmd),
+    BONOBO_UI_VERB ("RemoveChild", remove_child_cmd),
+
+    BONOBO_UI_VERB_END
+};
+
+static void
+app_created_cb (GnomeMDI *mdi, BonoboWindow *win, BonoboUIComponent *component)
+{
+	bonobo_ui_component_add_verb_list (component, verbs);
+}
+
 int
 main(int argc, char **argv)
 {
   gnome_program_init ("mdi_demo", "2.0", &libgnomeui_module_info,
 					  argc, argv, NULL);
 
+#if 1
+    g_log_set_always_fatal (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL);
+#endif
+
   mdi = gnome_mdi_new("MDIDemo", "MDI Demo");
   gnome_mdi_set_mode(mdi, GNOME_MDI_TOPLEVEL);
-  gnome_mdi_set_menubar_template(mdi, main_menu);
+  gnome_mdi_set_menubar_template(mdi, menu_xml);
   gnome_mdi_set_child_menu_path(mdi, "MDI");
-  gnome_mdi_set_child_list_path(mdi, "Children/");
+  gnome_mdi_set_child_list_path(mdi, "/menu/Children");
+  g_signal_connectc(G_OBJECT(mdi), "app_created",
+					G_CALLBACK(app_created_cb), NULL, FALSE);
   gtk_signal_connect(GTK_OBJECT(mdi), "destroy",
 					 GTK_SIGNAL_FUNC(exit_cb), NULL);
   gnome_mdi_open_toplevel(mdi);
