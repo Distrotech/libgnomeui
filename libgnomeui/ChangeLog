@@ -1,3 +1,9 @@
+Wed Dec 06 04:49:27 2000  George Lebl <jirka@5z.com>
+
+	* gnome-mdi.c: correctly get default return values for emitting
+	  signals by using g_signal_emitv directly.  Also fix a precondition
+	  on remove_view.
+
 Wed Dec 06 02:57:06 2000  George Lebl <jirka@5z.com>
 
 	* gnome-animator.c: check for nulls.  If no current frame draw black.

@@ -27,6 +27,7 @@
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
+#include <gobject/gobject.h>
 
 #include <config.h>
 #include "libgnome/gnome-defs.h"
@@ -96,6 +97,11 @@ static void            remove_child(GnomeMDI *, GnomeMDIChild *);
 /* convenience functions that call child's "virtual" functions */
 static GList           *child_create_menus(GnomeMDIChild *, GtkWidget *);
 static GtkWidget       *child_set_label(GnomeMDIChild *, GtkWidget *);
+
+static gboolean		emit_boolean_pointer (GnomeMDI *mdi,
+					      int sig,
+					      GtkObject *pointer,
+					      gboolean default_return);
 
 /* a macro for getting the app's pouch (app->scrolledwindow->viewport->pouch) */
 #define get_pouch_from_app(app) \
@@ -1123,8 +1129,7 @@ app_wiw_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 			}
 			
 			if(node == NULL) {   /* all the views reside in this GnomeApp */
-				gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD],
-								child, &ret);
+				ret = emit_boolean_pointer (mdi, REMOVE_CHILD, GTK_OBJECT (child), FALSE);
 				if(!ret)
 					return TRUE;
 			}
@@ -1195,8 +1200,7 @@ app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 			}
 
 			if(node == NULL) {   /* all the views reside in this GnomeApp */
-				gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD],
-								child, &ret);
+				ret = emit_boolean_pointer (mdi, REMOVE_CHILD, GTK_OBJECT (child), FALSE);
 				if(!ret)
 					return TRUE;
 			}
@@ -1635,7 +1639,7 @@ gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
 			return TRUE;
 	}
 
-	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[ADD_VIEW], view, &ret);
+	ret = emit_boolean_pointer (mdi, ADD_VIEW, GTK_OBJECT (view), TRUE);
 
 	if(ret == FALSE) {
 		gnome_mdi_child_remove_view(child, view);
@@ -1731,7 +1735,7 @@ gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
 	if(!view)
 		return FALSE;
 
-	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[ADD_VIEW], view, &ret);
+	ret = emit_boolean_pointer (mdi, ADD_VIEW, GTK_OBJECT (view), TRUE);
 
 	if(ret == FALSE) {
 		gnome_mdi_child_remove_view(child, view);
@@ -1802,7 +1806,7 @@ gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view)
 	g_return_val_if_fail(view != NULL, FALSE);
 	g_return_val_if_fail(GTK_IS_WIDGET(view), FALSE);
 
-	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_VIEW], view, &ret);
+	ret = emit_boolean_pointer (mdi, REMOVE_VIEW, GTK_OBJECT (view), TRUE);
 
 	if(ret == FALSE)
 		return FALSE;
@@ -1838,7 +1842,7 @@ gnome_mdi_add_child (GnomeMDI *mdi, GnomeMDIChild *child)
 	g_return_val_if_fail(child != NULL, FALSE);
 	g_return_val_if_fail(GNOME_IS_MDI_CHILD(child), FALSE);
 
-	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[ADD_CHILD], child, &ret);
+	ret = emit_boolean_pointer (mdi, ADD_CHILD, GTK_OBJECT (child), TRUE);
 
 	if(ret == FALSE)
 		return FALSE;
@@ -1876,7 +1880,7 @@ gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child)
 	g_return_val_if_fail(child != NULL, FALSE);
 	g_return_val_if_fail(GNOME_IS_MDI_CHILD(child), FALSE);
 
-	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child, &ret);
+	ret = emit_boolean_pointer (mdi, REMOVE_CHILD, GTK_OBJECT (child), TRUE);
 
 	if(ret == FALSE)
 		return FALSE;
@@ -1911,8 +1915,9 @@ gnome_mdi_remove_all (GnomeMDI *mdi)
 
 	child_node = mdi->priv->children;
 	while(child_node) {
-		gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD],
-						child_node->data, &handler_ret);
+		handler_ret = emit_boolean_pointer
+			(mdi, REMOVE_CHILD,
+			 GTK_OBJECT (child_node->data), TRUE);
 		child = GNOME_MDI_CHILD(child_node->data);
 		child_node = child_node->next;
 		if(handler_ret)
@@ -2500,4 +2505,35 @@ gnome_mdi_get_view_toolbar_info(GtkWidget *view)
 	g_return_val_if_fail(GTK_IS_WIDGET(view), NULL);
 
 	return gtk_object_get_data(GTK_OBJECT(view), GNOME_MDI_CHILD_TOOLBAR_INFO_KEY);
+}
+
+static gboolean
+emit_boolean_pointer (GnomeMDI *mdi, int sig,
+		      GtkObject *pointer,
+		      gboolean default_return)
+{
+	gboolean retval;
+	GValue params[2];
+	GValue rvalue = { 0, };
+
+	g_return_val_if_fail (GTK_IS_OBJECT (mdi), default_return);
+
+	g_value_init (params + 0, GTK_OBJECT_TYPE (mdi));
+	g_value_set_object (params + 0, G_OBJECT (mdi));
+
+	g_value_init (params + 1, GTK_OBJECT_TYPE (pointer));
+	g_value_set_object (params + 1, G_OBJECT (pointer));
+
+	g_value_init (&rvalue, G_TYPE_BOOLEAN);
+	g_value_set_boolean (&rvalue, default_return);
+
+	g_signal_emitv (params, sig, 0, &rvalue);
+
+	retval = g_value_get_boolean (&rvalue);
+  
+	g_value_unset (params + 0);
+	g_value_unset (params + 1);
+	g_value_unset (&rvalue);
+
+	return retval;
 }

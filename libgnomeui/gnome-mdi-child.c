@@ -245,7 +245,7 @@ gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view)
 	g_return_if_fail(mdi_child != NULL);
 	g_return_if_fail(GNOME_IS_MDI_CHILD(mdi_child));
 	g_return_if_fail(view != NULL);
-	g_return_if_fail(GTK_IS_WIDGET(mdi_child));
+	g_return_if_fail(GTK_IS_WIDGET(view));
 
 	mdi_child->priv->views = g_list_remove(mdi_child->priv->views, view);
 
