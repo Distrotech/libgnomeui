@@ -1,3 +1,8 @@
+2003-11-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* libgnomeui/gnome-color-picker.c: Even though this is
+	deprecated, make it build with GDK_DISABLE_DEPRECATED defined.
+
 2003-10-23  Padraig O'Briain <padraig.obriain@sun.com>
 
         * libgnomeui/libgnomeui.c (_add_atk_relation): Avoid leaking

@@ -294,9 +294,9 @@ render_dither (GnomeColorPicker *cp)
 		}
 	}
 	if (cp->_priv->drawing_area->window)
-		gdk_pixbuf_render_to_drawable (cp->_priv->pixbuf,
-					       cp->_priv->drawing_area->window,
+		gdk_draw_pixbuf (cp->_priv->drawing_area->window,
 					       cp->_priv->gc,
+					       cp->_priv->pixbuf,
 					       0, 0, 0, 0,
 					       COLOR_PICKER_WIDTH,
 					       COLOR_PICKER_HEIGHT,
@@ -347,9 +347,9 @@ expose_event (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 
 	cp = GNOME_COLOR_PICKER (data);
 
-	gdk_pixbuf_render_to_drawable (cp->_priv->pixbuf,
-				       widget->window,
+	gdk_draw_pixbuf (widget->window,
 				       cp->_priv->gc,
+				       cp->_priv->pixbuf,
 				       event->area.x,
 				       event->area.y,
 				       event->area.x,
