@@ -1,5 +1,10 @@
 2001-05-25  Martin Baulig  <baulig@suse.de>
 
+	* gnome-vfs-util.c (load_done): Use gnome_vfs_async_cancel() instead of
+	gnome_vfs_async_close() on error.
+
+2001-05-25  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector-client.c
 	(gnome_selector_client_set_uri): New function.
 	(gnome_selector_client_add_uri): New function.

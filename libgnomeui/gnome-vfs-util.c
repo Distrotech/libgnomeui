@@ -271,7 +271,10 @@ load_done (GnomeGdkPixbufAsyncHandle *handle,
 	   GdkPixbuf *pixbuf)
 {
     if (handle->vfs_handle != NULL) {
-	gnome_vfs_async_close (handle->vfs_handle, file_closed_callback, NULL);
+	if (result != GNOME_VFS_OK)
+	    gnome_vfs_async_cancel (handle->vfs_handle);
+	else
+	    gnome_vfs_async_close (handle->vfs_handle, file_closed_callback, NULL);
     }
     (* handle->load_callback) (handle, result, pixbuf, handle->callback_data);
     free_pixbuf_load_handle (handle);
