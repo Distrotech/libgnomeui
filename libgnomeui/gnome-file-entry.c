@@ -204,7 +204,7 @@ browse_clicked(GnomeFileEntry *fentry)
 
 	gtk_widget_show (fsw);
 	
-	gtk_window_set_modal (GTK_WINDOW (fsw));
+	gtk_window_set_modal (GTK_WINDOW (fsw), TRUE);
 	fentry->fsw = fsw;
 }
 
