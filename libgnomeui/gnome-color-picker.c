@@ -673,6 +673,8 @@ gnome_color_picker_clicked (GtkButton *button)
                                                      GTK_WINDOW(parent));
 
 		csd = GTK_COLOR_SELECTION_DIALOG (cp->_priv->cs_dialog);
+		gtk_color_selection_set_has_palette
+		    (GTK_COLOR_SELECTION (csd->colorsel), TRUE);
 		g_signal_connect (cp->_priv->cs_dialog, "destroy",
 				  G_CALLBACK (cs_destroy), cp);
 

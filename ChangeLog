@@ -1,5 +1,7 @@
 2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-color-picker.c: Merge fix for
+	bug #105730 from stable.
 	* libgnomeui/gnome-entry.c: Merge fix for
 	bug #105388 from branch.
 	* libgnomeui/gnome-ui-init.c: Fix the fix for
