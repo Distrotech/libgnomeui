@@ -1,3 +1,9 @@
+2001-05-01  Martin Baulig  <baulig@suse.de>
+
+	* gnome-entry.h (gnome_entry_construct): New function.
+	(gnome_entry_new_from_selector): This function was formerly known
+	as gnome_entry_construct_from_selector().
+
 2001-04-30  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-client.[ch]: New files.

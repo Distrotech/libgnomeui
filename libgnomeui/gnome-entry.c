@@ -113,9 +113,9 @@ gnome_entry_init (GnomeEntry *gentry)
 }
 
 GtkWidget *
-gnome_entry_construct_from_selector (GnomeEntry *gentry,
-				     GNOME_Selector corba_selector,
-				     Bonobo_UIContainer uic)
+gnome_entry_construct (GnomeEntry *gentry,
+		       GNOME_Selector corba_selector,
+		       Bonobo_UIContainer uic)
 {
 	g_return_val_if_fail (gentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
@@ -181,9 +181,24 @@ gnome_entry_new (const gchar *history_id)
 			       G_CALLBACK (history_changed_handler),
 			       gentry, NULL, FALSE, FALSE);
 
-	return gnome_entry_construct_from_selector
-		(gentry, BONOBO_OBJREF (selector), CORBA_OBJECT_NIL);
+	return gnome_entry_construct (gentry, BONOBO_OBJREF (selector),
+				      CORBA_OBJECT_NIL);
 }
+
+GtkWidget *
+gnome_entry_new_from_selector (GNOME_Selector corba_selector,
+			       Bonobo_UIContainer uic)
+{
+	GnomeEntry *gentry;
+
+	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+
+	gentry = g_object_new (gnome_entry_get_type (), NULL);
+
+	return (GtkWidget *) gnome_selector_client_construct
+		(GNOME_SELECTOR_CLIENT (gentry), corba_selector, uic);
+}
+
 
 static void
 gnome_entry_finalize (GObject *object)

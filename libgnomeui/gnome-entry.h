@@ -64,18 +64,21 @@ struct _GnomeEntryClass {
 };
 
 
-GtkType      gnome_entry_get_type                (void) G_GNUC_CONST;
+GtkType      gnome_entry_get_type          (void) G_GNUC_CONST;
 
-GtkWidget   *gnome_entry_new                     (const gchar        *history_id);
+GtkWidget   *gnome_entry_new               (const gchar        *history_id);
 
-GtkWidget   *gnome_entry_construct_from_selector (GnomeEntry         *gentry,
-                                                  GNOME_Selector      corba_selector,
-                                                  Bonobo_UIContainer  uic);
+GtkWidget   *gnome_entry_new_from_selector (GNOME_Selector      corba_selector,
+                                            Bonobo_UIContainer  uic);
 
-gchar       *gnome_entry_get_text                (GnomeEntry         *gentry);
+GtkWidget   *gnome_entry_construct         (GnomeEntry         *gentry,
+                                            GNOME_Selector      corba_selector,
+                                            Bonobo_UIContainer  uic);
 
-void         gnome_entry_set_text                (GnomeEntry         *gentry,
-                                                  const gchar        *text);
+gchar       *gnome_entry_get_text          (GnomeEntry         *gentry);
+
+void         gnome_entry_set_text          (GnomeEntry         *gentry,
+                                            const gchar        *text);
 
 G_END_DECLS
 
