@@ -315,41 +315,26 @@ relay_gtk_signal(GSignalInvocationHint *hint,
       return TRUE;
   }
 
+  if (gnome_sound_connection_get() < 0)
+    return TRUE;
+
   gnome_triggers_vdo("", NULL, (const char **)pieces);
 
   return TRUE;
-}
-#endif
-
-/* Callback used when the GConf event_sounds key's value changes */
-static void
-event_sounds_changed_cb (GConfClient* client, guint cnxn_id, GConfEntry *entry, gpointer data)
-{
-        use_event_sounds = gconf_value_get_bool (entry->value);
 }
 
 static void
 initialize_gtk_signal_relay (void)
 {
-#ifdef HAVE_ESD
 	gpointer iter_signames;
 	char *signame;
 	char *ctmp, *ctmp2;
-	
-	if (gnome_sound_connection_get () < 0)
-		return;
+        static gboolean initialized = FALSE;
 
-        gconf_client = gconf_client_get_default ();
-        if (!gconf_client)
+        if (initialized)
                 return;
 
-        gconf_client_add_dir (gconf_client, "/desktop/gnome/sound", GCONF_CLIENT_PRELOAD_NONE, NULL);
-
-        gconf_client_notify_add (gconf_client, "/desktop/gnome/sound/event_sounds",
-                                 event_sounds_changed_cb,
-                                 NULL, NULL, NULL);
-	
-        use_event_sounds = gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds");
+        initialized = TRUE;
 	
 	ctmp = gnome_config_file ("/sound/events/gtk-events-2.soundlist");
 	ctmp2 = g_strconcat ("=", ctmp, "=", NULL);
@@ -369,14 +354,14 @@ initialize_gtk_signal_relay (void)
 		 * knowledge of what gtk widgets do what, rather than
 		 * anything based on the info available at runtime.
 		 */
-		if(!strcmp (signame, "activate")){
+		if (!strcmp (signame, "activate")) {
 			g_type_class_unref (g_type_class_ref (gtk_menu_item_get_type ()));
 			signums [0] = g_signal_lookup (signame, gtk_menu_item_get_type ());
 			
 			g_type_class_unref (g_type_class_ref (gtk_entry_get_type ()));
 			signums [1] = g_signal_lookup (signame, gtk_entry_get_type ());
 			nsigs = 2;
-		} else if(!strcmp(signame, "toggled")){
+		} else if (!strcmp(signame, "toggled")) {
 			g_type_class_unref (g_type_class_ref (gtk_toggle_button_get_type ()));
 			signums [0] = g_signal_lookup (signame,
 							 gtk_toggle_button_get_type ());
@@ -385,7 +370,7 @@ initialize_gtk_signal_relay (void)
 			signums [1] = g_signal_lookup (signame,
 							 gtk_check_menu_item_get_type ());
 			nsigs = 2;
-		} else if (!strcmp (signame, "clicked")){
+		} else if (!strcmp (signame, "clicked")) {
 			g_type_class_unref (g_type_class_ref (gtk_button_get_type ()));
 			signums [0] = g_signal_lookup (signame, gtk_button_get_type ());
 			nsigs = 1;
@@ -396,19 +381,61 @@ initialize_gtk_signal_relay (void)
 		}
 
 		used_signame = FALSE;
-		for(i = 0; i < nsigs; i++) {
+		for (i = 0; i < nsigs; i++) {
 			if (signums [i] > 0) {
-				g_signal_add_emission_hook (signums [i], 0,
-							      (GSignalEmissionHook)relay_gtk_signal,
-							      signame, NULL);
+				g_signal_add_emission_hook (
+                                        signums [i], 0,
+                                        (GSignalEmissionHook) relay_gtk_signal,
+                                        signame, NULL);
                                 used_signame = TRUE;
                         }
                 }
 
-                if(!used_signame)
-                        g_free(signame);
+                if (!used_signame)
+                        g_free (signame);
 	}
 	gnome_config_pop_prefix ();
+}
+
+/* Callback used when the GConf event_sounds key's value changes */
+static void
+event_sounds_changed_cb (GConfClient* client, guint cnxn_id, GConfEntry *entry, gpointer data)
+{
+        gboolean new_use_event_sounds;
+
+        new_use_event_sounds = (gnome_gconf_get_bool ("/desktop/gnome/sound/enable_esd") &&
+                                gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds"));
+
+        if (new_use_event_sounds && !use_event_sounds)
+                initialize_gtk_signal_relay ();
+
+        use_event_sounds = new_use_event_sounds;
+}
+#endif
+
+static void
+setup_event_listener (void)
+{
+#ifdef HAVE_ESD
+        gconf_client = gconf_client_get_default ();
+        if (!gconf_client)
+                return;
+
+        gconf_client_add_dir (gconf_client, "/desktop/gnome/sound",
+                              GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+
+        gconf_client_notify_add (gconf_client, "/desktop/gnome/sound/event_sounds",
+                                 event_sounds_changed_cb,
+                                 NULL, NULL, NULL);
+        gconf_client_notify_add (gconf_client, "/desktop/gnome/sound/enable_esd",
+                                 event_sounds_changed_cb,
+                                 NULL, NULL, NULL);
+	
+        use_event_sounds = (gnome_gconf_get_bool ("/desktop/gnome/sound/enable_esd") &&
+                            gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds"));
+
+        if (use_event_sounds)
+                initialize_gtk_signal_relay ();
 #endif
 }
 
@@ -440,7 +467,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 
         _gnome_stock_icons_init ();
 
-	initialize_gtk_signal_relay ();
+        setup_event_listener ();
 }
 
 static void

@@ -64,9 +64,11 @@ ESOUND_MODULE="esound >= 0.2.26"
 PKG_CHECK_MODULES(SOUND_TEST, $ESOUND_MODULE $AUDIOFILE_MODULE, [
 	AC_DEFINE(HAVE_LIBAUDIOFILE)
 	AC_DEFINE(HAVE_ESD)
+	esd_msg=yes
 ],[
 	AUDIOFILE_MODULE=""
 	ESOUND_MODULE=""
+	esd_msg=no
 ])
 
 GNOMEUI_MODULES="libgnome-2.0 >= 2.0.0 libgnomecanvas-2.0 >= 2.0.0 libbonoboui-2.0 >= 2.0.0 gconf-2.0 >= 1.1.11"
@@ -206,4 +208,7 @@ test-gnome/Makefile
 doc/Makefile
 doc/reference/Makefile
 ])
-
+echo "configuration:
+	esd support: ${esd_msg}
+	doc build:   ${enable_gtk_doc}
+"
