@@ -170,7 +170,7 @@ key_press_popup (GtkWidget *widget, GdkEventKey *event, gpointer data)
 
 	if (event->keyval != GDK_Escape)
 		return FALSE;
-
+	
 	gde = data;
 	g_signal_stop_emission_by_name (widget, "key_press_event");
 	hide_popup (gde);
@@ -219,7 +219,11 @@ position_popup (GnomeDateEdit *gde)
 	gtk_widget_size_request (gde->_priv->cal_popup, &req);
 
 	gdk_window_get_origin (gde->_priv->date_button->window, &x, &y);
-	gdk_drawable_get_size (gde->_priv->date_button->window, &bwidth, &bheight);
+
+	x += gde->_priv->date_button->allocation.x;
+	y += gde->_priv->date_button->allocation.y;
+	bwidth = gde->_priv->date_button->allocation.width;
+	bheight = gde->_priv->date_button->allocation.height;
 
 	x += bwidth - req.width;
 	y += bheight;
@@ -283,7 +287,7 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 
 	gtk_widget_show (gde->_priv->cal_popup);
 	gtk_widget_grab_focus (gde->_priv->calendar);
-#if 0
+
 	gtk_grab_add (gde->_priv->cal_popup);
 
 	gdk_pointer_grab (gde->_priv->cal_popup->window, TRUE,
@@ -291,7 +295,6 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 			   | GDK_BUTTON_RELEASE_MASK
 			   | GDK_POINTER_MOTION_MASK),
 			  NULL, NULL, GDK_CURRENT_TIME);
-#endif
 }
 
 typedef struct {
@@ -682,7 +685,7 @@ create_children (GnomeDateEdit *gde)
 	GtkWidget *arrow;
 
 	gde->_priv->date_entry  = gtk_entry_new ();
-	gtk_widget_set_size_request (gde->_priv->date_entry, 90, 0);
+	gtk_widget_set_size_request (gde->_priv->date_entry, 90, -1);
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->date_entry, TRUE, TRUE, 0);
 	gtk_widget_show (gde->_priv->date_entry);
 
@@ -711,7 +714,7 @@ create_children (GnomeDateEdit *gde)
 
 	gde->_priv->time_entry = gtk_entry_new ();
 	gtk_entry_set_max_length (GTK_ENTRY (gde->_priv->time_entry), 12);
-	gtk_widget_set_size_request (gde->_priv->time_entry, 88, 0);
+	gtk_widget_set_size_request (gde->_priv->time_entry, 88, -1);
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->time_entry, TRUE, TRUE, 0);
 
 	gde->_priv->time_popup = gtk_option_menu_new ();
@@ -741,7 +744,7 @@ create_children (GnomeDateEdit *gde)
 	gtk_window_set_resizable (GTK_WINDOW (gde->_priv->cal_popup), FALSE);
 
 	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
 	gtk_container_add (GTK_CONTAINER (gde->_priv->cal_popup), frame);
 	gtk_widget_show (frame);
 

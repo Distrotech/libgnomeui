@@ -1,3 +1,15 @@
+2002-02-26  Richard Hult  <rhult@codefactory.se>
+
+	* libgnomeui/gnome-dateedit.c (select_clicked): Don't #if 0 the
+	grab, otherwise we can't close the popup without selecting a
+	date, and the code to handle Escape won't work either.
+	(create_children): Don't set vertical size request to 0! Change to
+	-1. 
+	Use OUT shadow. IN looks really weird here.
+	(position_popup): Get the width/height from the allocation instead
+	of trying to get it from the window size (which doesn't work
+	because GtkButton is NO_WINDOW now).
+
 2002-02-25  Darin Adler  <darin@bentspoon.com>
 
 	* configure.in: Call ourselves libgnomeui, not gnome-libs.
