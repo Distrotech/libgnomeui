@@ -86,6 +86,12 @@ struct _GnomeDockItem
   guint                 in_drag : 1;
   /* If TRUE, the pointer must be grabbed on "map_event".  */
   guint                 grab_on_map_event : 1;
+  guint                 is_hidden : 1;
+
+  /* when the button is pressed, this is set to 1
+   * if by the time the button is depressed this is 0, which is
+   * set in the motion_event handler */
+  guint                 button_down : 1;
 };
 
 struct _GnomeDockItemClass
@@ -95,6 +101,10 @@ struct _GnomeDockItemClass
   void (* dock_drag_begin) (GnomeDockItem *item);
   void (* dock_drag_motion) (GnomeDockItem *item, gint x, gint y);
   void (* dock_drag_end) (GnomeDockItem *item);
+
+  /* Toggle the hidden state */
+  void (* dock_toggle_state) (GnomeDockItem *item);
+
   void (* dock_detach) (GnomeDockItem *item);
   void (* orientation_changed) (GnomeDockItem *item, GtkOrientation new_orientation);
 };

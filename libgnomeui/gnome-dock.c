@@ -115,6 +115,8 @@ static void     drag_end_bands                 (GList **list,
                                                 GnomeDockItem *item);
 static void     drag_end                       (GtkWidget *widget,
                                                 gpointer data);
+static void     toggle_state                   (GtkWidget *widget,
+                                                gpointer data);
 static gboolean drag_new                       (GnomeDock *dock,
                                                 GnomeDockItem *item,
                                                 GList **area,
@@ -1164,6 +1166,15 @@ drag_motion (GtkWidget *widget,
   drag_snap (GNOME_DOCK (data), widget, x, y);
 }
 
+/* "toggle_state" signal handling.  */
+
+static void
+toggle_state (GtkWidget *widget, gpointer data)
+{
+  /* all we really want to do is notify stuff we changed layout */
+  gtk_signal_emit (GTK_OBJECT (data), dock_signals[LAYOUT_CHANGED]);
+}
+
 
 
 static GnomeDockItem *
@@ -1258,6 +1269,8 @@ connect_drag_signals (GnomeDock *dock,
                           GTK_SIGNAL_FUNC (drag_motion), (gpointer) dock);
       gtk_signal_connect (GTK_OBJECT (item), "dock_drag_end",
                           GTK_SIGNAL_FUNC (drag_end), (gpointer) dock);
+      gtk_signal_connect (GTK_OBJECT (item), "dock_toggle_state",
+                          GTK_SIGNAL_FUNC (toggle_state), (gpointer) dock);
     }
 }
 

@@ -239,6 +239,7 @@ gnome_dock_layout_add_item (GnomeDockLayout *layout,
   new->position.docked.band_num = band_num;
   new->position.docked.band_position = band_position;
   new->position.docked.offset = offset;
+  new->is_hidden = item->is_hidden;
 
   layout->items = g_list_prepend (layout->items, new);
 
@@ -275,6 +276,7 @@ gnome_dock_layout_add_floating_item (GnomeDockLayout *layout,
   new->position.floating.x = x;
   new->position.floating.y = y;
   new->position.floating.orientation = orientation;
+  new->is_hidden = item->is_hidden;
 
   layout->items = g_list_prepend (layout->items, new);
 
@@ -411,6 +413,9 @@ gnome_dock_layout_add_to_dock (GnomeDockLayout *layout,
     {
       item = lp->data;
 
+      /* XXX: We need to add an API to gnome-dock-item to do this */
+      item->item->is_hidden = item->is_hidden;
+
       if (item->placement == GNOME_DOCK_FLOATING)
         {
           gnome_dock_add_floating_item (dock,
@@ -488,19 +493,21 @@ gnome_dock_layout_create_string (GnomeDockLayout *layout)
         }
 
       if (i->placement == GNOME_DOCK_FLOATING)
-        tmp[tmp_count] = g_strdup_printf ("%s\\%d,%d,%d,%d",
+        tmp[tmp_count] = g_strdup_printf ("%s\\%d,%d,%d,%d,%d",
                                           i->item->name,
                                           (gint) i->placement,
                                           i->position.floating.x,
                                           i->position.floating.y,
-                                          i->position.floating.orientation);
+                                          i->position.floating.orientation,
+					  (gint) i->is_hidden);
       else
-        tmp[tmp_count] = g_strdup_printf ("%s\\%d,%d,%d,%d",
+        tmp[tmp_count] = g_strdup_printf ("%s\\%d,%d,%d,%d,%d",
                                           i->item->name,
                                           (gint) i->placement,
                                           i->position.docked.band_num,
                                           i->position.docked.band_position,
-                                          i->position.docked.offset);
+                                          i->position.docked.offset,
+					  (gint) i->is_hidden);
 
       tmp_count++;
     }
@@ -552,13 +559,20 @@ gnome_dock_layout_parse_string (GnomeDockLayout *layout,
       if (lp != NULL)
         {
           GnomeDockLayoutItem *i;
-          gint p1, p2, p3, p4;
+          gint p1, p2, p3, p4, p5;
 
-          if (sscanf (*(p + 1), "%d,%d,%d,%d", &p1, &p2, &p3, &p4) != 4)
+	  /* the hidden attribute was not always there, so we need to
+	   * support the old format as well and just set the fifth
+	   * number to 0 in that case */
+          if (sscanf (*(p + 1), "%d,%d,%d,%d,%d", &p1, &p2, &p3, &p4, &p5) != 5)
             {
-              g_strfreev (tmp);
-              return FALSE;
-            }
+	      p5 = 0;
+              if (sscanf (*(p + 1), "%d,%d,%d,%d", &p1, &p2, &p3, &p4) != 4)
+                {
+                  g_strfreev (tmp);
+                  return FALSE;
+                }
+	    }
 
           if (p1 != (gint) GNOME_DOCK_TOP
               && p1 != (gint) GNOME_DOCK_BOTTOM
@@ -583,6 +597,8 @@ gnome_dock_layout_parse_string (GnomeDockLayout *layout,
               i->position.docked.band_position = p3;
               i->position.docked.offset = p4;
             }
+
+	  i->is_hidden = p5;
         }
 
       p += 2;
