@@ -1,3 +1,8 @@
+2002-10-08  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c (_gnome_thumbnail_load_scaled_jpeg):
+	Handle CMYK jpegs.
+
 2002-10-04  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-theme.c (gnome_icon_theme_list_icons):

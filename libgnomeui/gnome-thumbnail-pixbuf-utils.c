@@ -317,6 +317,39 @@ free_buffer (guchar *pixels, gpointer data)
 	g_free (pixels);
 }
 
+static void
+convert_cmyk_to_rgb (struct jpeg_decompress_struct *cinfo,
+		     guchar *line) 
+{
+	gint i, j;
+	guchar *p;
+
+	g_return_if_fail (cinfo != NULL);
+	g_return_if_fail (cinfo->output_components == 4);
+	g_return_if_fail (cinfo->out_color_space == JCS_CMYK);
+
+	p = line;
+	for (j = 0; j < cinfo->output_width; j++) {
+		int c, m, y, k;
+		c = p[0];
+		m = p[1];
+		y = p[2];
+		k = p[3];
+		if (cinfo->saw_Adobe_marker) {
+			p[0] = k*c / 255;
+			p[1] = k*m / 255;
+			p[2] = k*y / 255;
+		}
+		else {
+			p[0] = (255 - k)*(255 - c) / 255;
+			p[1] = (255 - k)*(255 - m) / 255;
+			p[2] = (255 - k)*(255 - y) / 255;
+		}
+		p[3] = 255;
+		p += 4;
+	}
+}
+
 GdkPixbuf *
 _gnome_thumbnail_load_scaled_jpeg (const char *uri,
 				   int         target_width,
@@ -331,6 +364,7 @@ _gnome_thumbnail_load_scaled_jpeg (const char *uri,
 	guchar *ptr;
 	GnomeVFSResult result;
 	unsigned int i;
+	int out_n_components;
 	
 	result = gnome_vfs_open (&handle,
 				 uri,
@@ -367,10 +401,25 @@ _gnome_thumbnail_load_scaled_jpeg (const char *uri,
 					       target_height);
 	cinfo.dct_method = JDCT_FASTEST;
 	cinfo.do_fancy_upsampling = FALSE;
-	
+
+	jpeg_calc_output_dimensions(&cinfo);
+
+	if (cinfo.out_color_space != JCS_GRAYSCALE &&
+	    cinfo.out_color_space != JCS_RGB &&
+	    cinfo.out_color_space != JCS_CMYK) {
+		jpeg_destroy_decompress (&cinfo);
+		gnome_vfs_close (handle);
+		return NULL;
+	}
+
 	jpeg_start_decompress (&cinfo);
 
-	pixels = g_malloc (cinfo.output_width *	cinfo.output_height * 3);
+	if (cinfo.num_components == 1)
+	  out_n_components = 3;
+	else
+	  out_n_components = cinfo.num_components;
+	
+	pixels = g_malloc (cinfo.output_width * cinfo.output_height * out_n_components);
 
 	ptr = pixels;
 	if (cinfo.num_components == 1) {
@@ -393,22 +442,28 @@ _gnome_thumbnail_load_scaled_jpeg (const char *uri,
 			}
 			ptr += cinfo.output_width * 3;
 		} else {
-			lines[0] += cinfo.output_width * 3;
+			if (cinfo.out_color_space == JCS_CMYK) {
+				convert_cmyk_to_rgb (&cinfo, 
+						     lines[0]);
+			}
+			lines[0] += cinfo.output_width * out_n_components;
 		}
 	}
 
 	g_free (buffer);
 	buffer = NULL;
-	
+
 	jpeg_finish_decompress (&cinfo);
 	jpeg_destroy_decompress (&cinfo);
 	
 	gnome_vfs_close (handle);
 	
-	return gdk_pixbuf_new_from_data (pixels, GDK_COLORSPACE_RGB, FALSE, 8,
+	return gdk_pixbuf_new_from_data (pixels, GDK_COLORSPACE_RGB,
+					 cinfo.out_color_components == 4 ? TRUE : FALSE,
+					 8,
 					 cinfo.output_width,
 					 cinfo.output_height,
-					 cinfo.output_width * 3,
+					 cinfo.output_width * out_n_components,
 					 free_buffer, NULL);
 }
 
