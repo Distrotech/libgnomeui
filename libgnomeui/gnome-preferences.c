@@ -197,6 +197,8 @@ void gnome_preferences_load(void)
 			   dialog_button_styles, NUM_BUTTON_STYLES) ) {
     g_warning("Didn't recognize buttonbox style in libgnomeui config");
   }
+
+  g_free(s);
   
   s = gnome_config_get_string(DIALOG_TYPE_KEY);
 
@@ -205,6 +207,8 @@ void gnome_preferences_load(void)
     g_warning("Didn't recognize dialog type in libgnomeui config");
   }
 
+  g_free(s);
+  
   s = gnome_config_get_string(DIALOG_POSITION_KEY);
 
   if ( ! enum_from_strings((int*) &prefs.dialog_position, s,
@@ -212,6 +216,8 @@ void gnome_preferences_load(void)
     g_warning("Didn't recognize dialog position in libgnomeui config");
   }  
 
+  g_free(s);
+  
   /* Fixme. There's a little problem with no error value from the 
      bool get function. This makes it yucky to do the propertybox 
      thing. The intermediate 'b' variable is only in anticipation
@@ -278,6 +284,8 @@ void gnome_preferences_load(void)
     g_warning("Didn't recognize MDI mode in libgnomeui config");
   }
 
+  g_free(s);
+  
   s = gnome_config_get_string(MDI_TAB_POS_KEY);
 
   if ( ! enum_from_strings((int*) &prefs.mdi_tab_pos, s,
@@ -285,6 +293,8 @@ void gnome_preferences_load(void)
     g_warning("Didn't recognize MDI notebook tab position in libgnomeui config");
   }
 
+  g_free(s);
+  
   gnome_config_pop_prefix();
 }
 
