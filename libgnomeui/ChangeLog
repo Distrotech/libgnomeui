@@ -1,3 +1,8 @@
+1999-02-17  Sergey Panov  <sipan@mit.edu>
+
+        * gnome-canvas-text.c (gnome_canvas_text_set_arg): fontset
+        can be used now to configure font of the canvas text.
+
 1999-02-16  Ulrich Drepper  <drepper@cygnus.com>
 
 	* libgnomeui/gnome-about.c (gnome_about_display_comments): Use

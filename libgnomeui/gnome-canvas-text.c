@@ -31,6 +31,7 @@ enum {
 	ARG_X,
 	ARG_Y,
 	ARG_FONT,
+        ARG_FONTSET,
 	ARG_FONT_GDK,
 	ARG_ANCHOR,
 	ARG_JUSTIFICATION,
@@ -114,6 +115,7 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasText::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
 	gtk_object_add_arg_type ("GnomeCanvasText::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
 	gtk_object_add_arg_type ("GnomeCanvasText::font", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONT);
+	gtk_object_add_arg_type ("GnomeCanvasText::fontset", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONTSET);
 	gtk_object_add_arg_type ("GnomeCanvasText::font_gdk", GTK_TYPE_GDK_FONT, GTK_ARG_READWRITE, ARG_FONT_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasText::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_READWRITE, ARG_ANCHOR);
 	gtk_object_add_arg_type ("GnomeCanvasText::justification", GTK_TYPE_JUSTIFICATION, GTK_ARG_READWRITE, ARG_JUSTIFICATION);
@@ -513,6 +515,25 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		text->font = gdk_font_load (GTK_VALUE_STRING (*arg));
 		if (!text->font) {
 			text->font = gdk_font_load ("fixed");
+			g_assert (text->font != NULL);
+		}
+		if (item->canvas->aa) {
+			if (text->suckfont)
+				gnome_canvas_suck_font_free (text->suckfont);
+			text->suckfont = gnome_canvas_suck_font (text->font);
+		}
+
+		calc_line_widths (text);
+		recalc_bounds (text);
+		break;
+
+	case ARG_FONTSET:
+		if (text->font)
+			gdk_font_unref (text->font);
+
+		text->font = gdk_fontset_load (GTK_VALUE_STRING (*arg));
+		if (!text->font) {
+			text->font = gdk_fontset_load ("-*-fixed-medium-r-semicondensed--13-120-75-75-c-60-*-*");
 			g_assert (text->font != NULL);
 		}
 		if (item->canvas->aa) {
