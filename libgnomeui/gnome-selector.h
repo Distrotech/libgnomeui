@@ -86,6 +86,7 @@ struct _GnomeSelectorClass {
     void      (*update)                    (GnomeSelector *selector);
     void      (*thaw)                      (GnomeSelector *selector);
 
+    gchar *   (*get_filename)              (GnomeSelector *selector);
     gboolean  (*set_filename)              (GnomeSelector *selector,
                                             const gchar   *filename);
 

@@ -65,6 +65,7 @@ static void     browse_handler                 (GnomeSelector   *selector);
 static void     clear_handler                  (GnomeSelector   *selector);
 static void     clear_default_handler          (GnomeSelector   *selector);
 
+static gchar   *get_filename_handler           (GnomeSelector   *selector);
 static gboolean set_filename_handler           (GnomeSelector   *selector,
                                                 const gchar     *filename);
 static gboolean check_filename_handler         (GnomeSelector   *selector,
@@ -93,10 +94,12 @@ enum {
 };
 
 enum {
+    CHANGED_SIGNAL,
     BROWSE_SIGNAL,
     CLEAR_SIGNAL,
     CLEAR_DEFAULT_SIGNAL,
     CHECK_FILENAME_SIGNAL,
+    GET_FILENAME_SIGNAL,
     SET_FILENAME_SIGNAL,
     ADD_FILE_SIGNAL,
     ADD_FILE_DEFAULT_SIGNAL,
@@ -168,6 +171,15 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
     parent_class = gtk_type_class (gtk_vbox_get_type ());
 
+    gnome_selector_signals [CHANGED_SIGNAL] =
+	gtk_signal_new ("changed",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   changed),
+			gtk_signal_default_marshaller,
+			GTK_TYPE_NONE,
+			0);
     gnome_selector_signals [BROWSE_SIGNAL] =
 	gtk_signal_new ("browse",
 			GTK_RUN_LAST,
@@ -231,6 +243,15 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gtk_marshal_BOOL__POINTER,
 			GTK_TYPE_BOOL, 1,
 			GTK_TYPE_STRING);
+    gnome_selector_signals [GET_FILENAME_SIGNAL] =
+	gtk_signal_new ("get_filename",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   get_filename),
+			gtk_marshal_POINTER__NONE,
+			GTK_TYPE_POINTER,
+			0);
     gnome_selector_signals [SET_FILENAME_SIGNAL] =
 	gtk_signal_new ("set_filename",
 			GTK_RUN_LAST,
@@ -373,6 +394,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
     class->update = update_handler;
 
     class->check_filename = check_filename_handler;
+    class->get_filename = get_filename_handler;
     class->set_filename = set_filename_handler;
     class->add_file = add_file_handler;
     class->add_file_default = add_file_default_handler;
@@ -556,12 +578,26 @@ check_filename_handler (GnomeSelector *selector, const gchar *filename)
     return TRUE;
 }
 
+static gchar *
+get_filename_handler (GnomeSelector *selector)
+{
+    g_return_val_if_fail (selector != NULL, FALSE);
+    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
+
+    return gnome_selector_get_entry_text (selector);
+}
+
 static gboolean
 set_filename_handler (GnomeSelector *selector, const gchar *filename)
 {
     g_return_val_if_fail (selector != NULL, FALSE);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (filename != NULL, FALSE);
+
+    if (!filename) {
+	gnome_selector_set_entry_text (selector, NULL);
+	gnome_selector_activate_entry (selector);
+	return TRUE;
+    }
 
     g_message (G_STRLOC ": '%s'", filename);
 
@@ -1241,6 +1277,30 @@ gnome_selector_check_filename (GnomeSelector *selector,
 
 
 /**
+ * gnome_selector_get_filename
+ * @selector: Pointer to GnomeSelector object.
+ *
+ * Description:
+ *
+ * Returns:
+ */
+gchar *
+gnome_selector_get_filename (GnomeSelector *selector)
+{
+    gchar *retval = NULL;
+
+    g_return_val_if_fail (selector != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [GET_FILENAME_SIGNAL],
+		     &retval);
+
+    return retval;
+}
+
+
+/**
  * gnome_selector_set_filename
  * @selector: Pointer to GnomeSelector object.
  * @filename: Filename to set.
@@ -1260,7 +1320,6 @@ gnome_selector_set_filename (GnomeSelector *selector,
 
     g_return_val_if_fail (selector != NULL, FALSE);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (filename != NULL, FALSE);
 
     gnome_selector_freeze (selector);
     gtk_signal_emit (GTK_OBJECT (selector),

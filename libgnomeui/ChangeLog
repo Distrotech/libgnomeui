@@ -1,3 +1,14 @@
+2000-09-12  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector.h (GnomeSelector): Added "get_filename" signal.
+	(gnome_selector_get_filename): New function.
+	(gnome_selector_set_filename): Allow the filename to be NULL.
+
+	* gnome-selector.c (gnome_selector_class_init): Added the missing
+	"changed" signal.
+	(get_filename_handler): Default is to use "get_entry_text".
+	(set_filename_handler): Allow the filename to be NULL.
+
 2000-09-11  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector.h (GnomeSelector): Added "selection_changed" signal.
