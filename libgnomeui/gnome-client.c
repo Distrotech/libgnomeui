@@ -1256,7 +1256,7 @@ client_set_prop_from_string (GnomeClient *client,
   prop.type     = SmARRAY8;
   prop.num_vals = 1;
   prop.vals     = &val;
-  val.length = strlen (value) + 1;
+  val.length = strlen (value);
   val.value  = value;
   proplist[0] = &prop;
   SmcSetProperties (client->smc_conn, 1, proplist);
@@ -1309,7 +1309,7 @@ client_set_prop_from_array (GnomeClient *client,
   vals = g_new (SmPropValue, argc);
   for (ptr = array, i = 0 ; i < argc ; ptr++, i++)
     {
-      vals[i].length = strlen (*ptr) + 1;
+      vals[i].length = strlen (*ptr);
       vals[i].value  = *ptr;
     }
 

@@ -47,7 +47,13 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
 * Documentation, documentation, documentation... both commenting header
   files and writing real docs would help.
 
+* gnome-propertybox could be expanded to allow user configuration.
+  Some (popular -- see gnome list) ideas are to let the user get rid
+  of the Apply button, or the let the user have a per-page Apply button
+  (in this case it would appear inside the notebook page)
+  In theory the API shouldn't change when this is done.
 
-
-
-
+* gnome-propertybox could also use a way to cause an OK to be aborted
+  This would take the form of a flag that is cleared before a global
+  apply, set via some new function, and checked before closing the
+  window

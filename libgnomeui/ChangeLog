@@ -1,3 +1,9 @@
+Thu Apr 30 21:31:43 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.c (client_set_prop_from_string): Don't include
+	trailing \0 in length.
+	(client_set_prop_from_array): Likewise.
+
 Thu Apr 30 23:25:19 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.h (struct _GnomeDialog): New member, 
