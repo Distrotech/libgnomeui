@@ -363,7 +363,7 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
 				req.width, req.height);
 		gdk_gc_destroy(gc);
 		if (GTK_WIDGET(gpixmap)->window)
-			gdk_window_shape_combine_mask(GTK_WIDGET(gpixmap)->window,
+			gtk_widget_shape_combine_mask(GTK_WIDGET(gpixmap),
 						      gpixmap->mask, 0, 0);
 	}
 	/* XXX: this isn't needed always, but I found that in some
@@ -1870,7 +1870,7 @@ gnome_stock_transparent_window (const char *icon, const char *subtype)
 	/* Render the image, return it */
 	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
 	gdk_window_set_back_pixmap (window->window, gdk_imlib_move_image (im), FALSE);
-	gdk_window_shape_combine_mask (window->window, gdk_imlib_move_mask (im), 0, 0);
+	gtk_widget_shape_combine_mask (window, gdk_imlib_move_mask (im), 0, 0);
 
 	gdk_imlib_destroy_image (im);
 	
