@@ -1,5 +1,5 @@
 /* gnome-less.h:
- * Copyright (C) 1998 Free Software Foundation
+ * Copyright (C) 1998,2000 Free Software Foundation
  * All rights reserved.
  *
  * A simple GtkText wrapper with a scroll bar, convenience functions,
@@ -46,53 +46,78 @@ typedef struct _GnomeLessClass   GnomeLessClass;
 #define GNOME_LESS_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_LESS, GnomeLessClass))
 
 struct _GnomeLess {
-  GtkVBox vbox;
+	GtkHBox vbox;
 
-  /*< private >*/
-  GnomeLessPrivate *_priv;
+	/*< public >*/
+	GtkTextView *text_view; 
+	GtkTextBuffer *text_buffer;
+
+	/*< private >*/
+	GnomeLessPrivate *_priv;
 };
 
 struct _GnomeLessClass {
-  GtkVBoxClass parent_class;
+	GtkHBoxClass parent_class;
 };
 
-guint gnome_less_get_type       (void);
+guint    gnome_less_get_type		(void);
 
-GtkWidget * gnome_less_new      (void);
+GtkWidget * gnome_less_new		(void);
+
+/* Sugar new function for program output */
+GtkWidget * gnome_less_new_fixed_font	(int columns);
 
 /* Clear the text */
-void gnome_less_clear (GnomeLess * gl);
+void     gnome_less_clear		(GnomeLess * gl);
 
-/* FIXME maybe add "append" equivalents to these */
+/* Append stuff to the widget.  TRUE on success, FALSE
+ * with errno set on failiure */
+gboolean gnome_less_append_file		(GnomeLess * gl, const gchar * path);
+gboolean gnome_less_append_command	(GnomeLess * gl, const gchar * command_line);
+void     gnome_less_append_string	(GnomeLess * gl, const gchar * s);
+gboolean gnome_less_append_filestream	(GnomeLess * gl, FILE * f);
+gboolean gnome_less_append_fd		(GnomeLess * gl, int file_descriptor);
+
 /* All these clear any existing text and show whatever you pass in. 
    When applicable, they return TRUE on success, FALSE and set errno 
    on failure. */
-gboolean gnome_less_show_file       (GnomeLess * gl, const gchar * path);
-gboolean gnome_less_show_command    (GnomeLess * gl, const gchar * command_line);
-void     gnome_less_show_string     (GnomeLess * gl, const gchar * s);
-gboolean gnome_less_show_filestream (GnomeLess * gl, FILE * f);
-gboolean gnome_less_show_fd         (GnomeLess * gl, int file_descriptor);
+gboolean gnome_less_show_file		(GnomeLess * gl, const gchar * path);
+gboolean gnome_less_show_command	(GnomeLess * gl, const gchar * command_line);
+void     gnome_less_show_string		(GnomeLess * gl, const gchar * s);
+gboolean gnome_less_show_filestream	(GnomeLess * gl, FILE * f);
+gboolean gnome_less_show_fd		(GnomeLess * gl, int file_descriptor);
 
 /* Write a file; returns FALSE and sets errno if either open
    or close fails on the file. write_file overwrites any existing file. */
-gboolean gnome_less_write_file   (GnomeLess * gl, const gchar * path);
-gboolean gnome_less_write_fd     (GnomeLess * gl, int fd);
+gboolean gnome_less_write_file		(GnomeLess * gl, const gchar * path);
+gboolean gnome_less_write_fd		(GnomeLess * gl, int fd);
 
 /* Set an arbitrary font */
-void gnome_less_set_font        (GnomeLess * gl, GdkFont * font);
-
+void     gnome_less_set_font_string	(GnomeLess * gl, const char * font);
 /*
  * Whether to use a fixed font for any future showings. 
  * Recommended for anything that comes in columns, program code,
  * etc. Just loads a fixed font and calls set_font above.
  */
-void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed);
+void     gnome_less_set_font_fixed	(GnomeLess * gl);
+/* Sets the standard string */
+void     gnome_less_set_font_standard	(GnomeLess * gl);
+/* from a pango font description */
+void     gnome_less_set_font_description(GnomeLess * gl,
+					 const PangoFontDescription * font_desc);
 
+void     gnome_less_set_width_columns	(GnomeLess * gl, int columns);
+void     gnome_less_set_wrap_mode	(GnomeLess * gl, GtkWrapMode wrap_mode);
+
+PangoFontDescription *gnome_less_get_font_description(GnomeLess * gl);
+
+#ifndef GNOME_EXCLUDE_DEPRECATED
+/* DEPRECATED */
 /* Re-insert the text with the current font settings. */
-void gnome_less_reshow          (GnomeLess * gl);
-
-/* get the text widget */
-GtkWidget *gnome_less_get_gtk_text(GnomeLess * gl);
+void gnome_less_reshow         		(GnomeLess * gl);
+void gnome_less_set_font		(GnomeLess * gl, GdkFont * font);
+void gnome_less_set_fixed_font		(GnomeLess * gl, gboolean fixed);
+#endif
 
 END_GNOME_DECLS
    

@@ -41,10 +41,11 @@
 #include <fcntl.h>
 
 struct _GnomeLessPrivate {
-  GtkText * text; 
+	GtkTextTag *text_tag;
 
-  GdkFont * font;  /* font that goes to gtk_text_insert_text call,
-		      can be NULL */
+	PangoFontDescription *font_desc;
+
+	int columns;
 };
 
 static void gnome_less_class_init (GnomeLessClass *klass);
@@ -56,7 +57,7 @@ static void gnome_less_finalize   (GObject        *object);
 static GtkWindowClass *parent_class;
 
 guint
-gnome_less_get_type ()
+gnome_less_get_type (void)
 {
   static guint gl_type = 0;
 
@@ -74,7 +75,7 @@ gnome_less_get_type ()
 	NULL
       };
 
-      gl_type = gtk_type_unique (gtk_vbox_get_type (), &gl_info);
+      gl_type = gtk_type_unique (gtk_hbox_get_type (), &gl_info);
     }
 
   return gl_type;
@@ -89,7 +90,7 @@ gnome_less_class_init (GnomeLessClass *klass)
   object_class = (GtkObjectClass*) klass;
   gobject_class = (GObjectClass*) klass;
 
-  parent_class = gtk_type_class (gtk_vbox_get_type ());
+  parent_class = gtk_type_class (gtk_hbox_get_type ());
 
   object_class->destroy = gnome_less_destroy;
   gobject_class->finalize = gnome_less_finalize;
@@ -98,37 +99,53 @@ gnome_less_class_init (GnomeLessClass *klass)
 static void
 gnome_less_init (GnomeLess *gl)
 {
-  GtkWidget * vscroll;
-  GtkWidget * hbox; /* maybe just inherit from hbox? hard to say yet. */
+	GtkWidget * vscroll;
 
-  gl->_priv = g_new0(GnomeLessPrivate, 1);
+	gtk_box_set_homogeneous(GTK_BOX(gl), FALSE);
+	gtk_box_set_spacing(GTK_BOX(gl), 0);
 
-  gl->_priv->text = GTK_TEXT(gtk_text_new(NULL, NULL));
+	gl->_priv = g_new0(GnomeLessPrivate, 1);
 
-  gl->_priv->font = NULL;
-  
-  hbox = gtk_hbox_new(FALSE, 0);
-  vscroll = gtk_vscrollbar_new(gl->_priv->text->vadj);
-  
-  gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(gl->_priv->text),
-		     TRUE, TRUE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), vscroll, FALSE, FALSE, 0);
+	gl->_priv->columns = -1;
 
-  /* Since horizontal scroll doesn't work, use this hack. */
-  gtk_widget_set_usize(GTK_WIDGET(gl->_priv->text), 300, -1); 
+	gl->_priv->font_desc = pango_font_description_copy(GTK_WIDGET(gl)->style->font_desc);
 
-  gtk_widget_show_all(hbox);
+	gl->text_buffer = GTK_TEXT_BUFFER(gtk_text_buffer_new(NULL));
+	gtk_object_ref(GTK_OBJECT(gl->text_buffer));
+	gl->text_view = GTK_TEXT_VIEW(gtk_text_view_new_with_buffer(gl->text_buffer));
+	gtk_object_set(GTK_OBJECT(gl->text_view),
+		       "editable", FALSE,
+		       NULL);
+	gtk_widget_ref(GTK_WIDGET(gl->text_view));
+	gtk_widget_show(GTK_WIDGET(gl->text_view));
 
-  gtk_container_add(GTK_CONTAINER(gl), hbox);
+	/* FIXME: this is because gtktextview is broke! */
+	gtk_widget_set_scroll_adjustments(GTK_WIDGET(gl->text_view), NULL, NULL);
+
+	gl->_priv->text_tag = gtk_text_buffer_create_tag(gl->text_buffer, "text_tag");
+	gtk_object_set(GTK_OBJECT(gl->_priv->text_tag),
+		       "font_desc", gl->_priv->font_desc,
+		       NULL);
+	gtk_text_buffer_apply_tag_to_chars(gl->text_buffer, "text_tag", 0, -1);
+
+	vscroll = gtk_vscrollbar_new(gl->text_view->vadjustment);
+	gtk_widget_show(vscroll);
+
+	gtk_box_pack_start(GTK_BOX(gl), GTK_WIDGET(gl->text_view),
+			   TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(gl), vscroll, FALSE, FALSE, 0);
+
+	/* Since horizontal scroll doesn't work, use this hack. */
+	gtk_widget_set_usize(GTK_WIDGET(gl->text_view), 300, -1); 
+	gtk_text_view_set_wrap_mode(gl->text_view, GTK_WRAPMODE_WORD);
 }
 
 /**
  * gnome_less_new
  *
- * Creates a new GnomeLess widget.
+ * Description:  Creates a new #GnomeLess widget.
  * 
- * Returns:
- * &GtkWidget pointer to a new GNOME less widget
+ * Returns: #GtkWidget pointer to a new #GnomeLess widget
  **/
 
 GtkWidget* gnome_less_new (void)
@@ -138,6 +155,29 @@ GtkWidget* gnome_less_new (void)
   gl = gtk_type_new(gnome_less_get_type());
 
   return GTK_WIDGET (gl);
+}
+
+/**
+ * gnome_less_new_fixed_font:
+ * @columns: the number of visible columns
+ *
+ * Description:  Creates a new #GnomeLess widget with the fixed font
+ * and with the specified number of columns visible.
+ * 
+ * Returns: #GtkWidget pointer to a new #GnomeLess widget
+ **/
+
+GtkWidget *
+gnome_less_new_fixed_font(int columns)
+{
+	GnomeLess * gl;
+
+	gl = gtk_type_new(gnome_less_get_type());
+
+	gnome_less_set_font_fixed(gl);
+	gnome_less_set_width_columns(gl, columns);
+
+	return GTK_WIDGET (gl);
 }
 
 static void gnome_less_destroy (GtkObject *object)
@@ -151,9 +191,17 @@ static void gnome_less_destroy (GtkObject *object)
 
 	gl = GNOME_LESS(object);
 
-	if (gl->_priv->font)
-		gdk_font_unref(gl->_priv->font);
-	gl->_priv->font = NULL;
+	if(gl->text_buffer)
+		gtk_object_unref(GTK_OBJECT(gl->text_buffer));
+	gl->text_buffer = NULL;
+
+	if(gl->text_view)
+		gtk_widget_unref(GTK_WIDGET(gl->text_view));
+	gl->text_view = NULL;
+
+	if(gl->_priv->font_desc)
+		pango_font_description_free(gl->_priv->font_desc);
+	gl->_priv->font_desc = NULL;
 
 	if (GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(object);
@@ -176,18 +224,17 @@ static void gnome_less_finalize (GObject *object)
 }
 
 /**
- * gnome_less_show_file
+ * gnome_less_append_file
  * @gl: Pointer to GnomeLess widget
  * @path: Pathname of file to be displayed
  *
- * Displays a file in a GnomeLess widget. Replaces any text already being displayed
- * in the widget.
+ * Displays a file in a GnomeLess widget.  Appending to any text currently in the widget
  *
  * Returns:
  * %TRUE if successful, %FALSE if not. Error stored in %errno.
  **/
-
-gboolean gnome_less_show_file(GnomeLess * gl, const gchar * path)
+gboolean
+gnome_less_append_file(GnomeLess * gl, const gchar * path)
 {
   FILE * f;
 
@@ -207,7 +254,7 @@ gboolean gnome_less_show_file(GnomeLess * gl, const gchar * path)
     return FALSE;
   }
 
-  if ( ! gnome_less_show_filestream(gl, f) ) {
+  if ( ! gnome_less_append_filestream(gl, f) ) {
     /* Starting to feel like exceptions would be nice. */
     int save_errno = errno;
     fclose(f); /* nothing to do if it fails */
@@ -216,6 +263,68 @@ gboolean gnome_less_show_file(GnomeLess * gl, const gchar * path)
   }
 
   if (fclose(f) != 0) {
+    return FALSE;
+  }
+  else return TRUE;
+}
+
+/**
+ * gnome_less_show_file
+ * @gl: Pointer to GnomeLess widget
+ * @path: Pathname of file to be displayed
+ *
+ * Displays a file in a GnomeLess widget. Replaces any text already being displayed
+ * in the widget.
+ *
+ * Returns:
+ * %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
+gboolean
+gnome_less_show_file(GnomeLess * gl, const gchar * path)
+{
+	g_return_val_if_fail(gl != NULL, FALSE);
+	g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+	g_return_val_if_fail(path != NULL, FALSE);
+
+	gnome_less_clear(gl);
+	return gnome_less_append_file(gl, path);
+}
+
+/**
+ * gnome_less_append_command
+ * @gl: Pointer to GnomeLess widget
+ * @command_line: Command to be executed
+ *
+ * Runs the shell command specified in @command_line, and places the output of that command
+ * in the GnomeLess widget specified by @gl.  Appends to any text currently in the widget.
+ *
+ * Returns:
+ * %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
+gboolean
+gnome_less_append_command(GnomeLess * gl,
+			  const gchar * command_line)
+{
+  FILE * p;
+
+  g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+  g_return_val_if_fail(command_line != NULL, FALSE);
+  
+  p = popen(command_line, "r");
+
+  if ( p == NULL ) {
+    return FALSE;
+  }
+
+  if ( ! gnome_less_append_filestream(gl, p) ) {
+    int save_errno = errno;
+    pclose(p); /* nothing to do if it fails */
+    errno = save_errno; /* Report the root cause of the error */
+    return FALSE;
+  }
+
+  if ( pclose(p) == -1 ) {
     return FALSE;
   }
   else return TRUE;
@@ -234,35 +343,59 @@ gboolean gnome_less_show_file(GnomeLess * gl, const gchar * path)
  * %TRUE if successful, %FALSE if not. Error stored in %errno.
  **/
 
-gboolean gnome_less_show_command(GnomeLess * gl,
-				 const gchar * command_line)
+gboolean
+gnome_less_show_command(GnomeLess * gl,
+			const gchar * command_line)
 {
-  FILE * p;
+	g_return_val_if_fail(gl != NULL, FALSE);
+	g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+	g_return_val_if_fail(command_line != NULL, FALSE);
 
-  g_return_val_if_fail(gl != NULL, FALSE);
-  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
-  g_return_val_if_fail(command_line != NULL, FALSE);
-  
-  p = popen(command_line, "r");
-
-  if ( p == NULL ) {
-    return FALSE;
-  }
-
-  if ( ! gnome_less_show_filestream(gl, p) ) {
-    int save_errno = errno;
-    pclose(p); /* nothing to do if it fails */
-    errno = save_errno; /* Report the root cause of the error */
-    return FALSE;
-  }
-
-  if ( pclose(p) == -1 ) {
-    return FALSE;
-  }
-  else return TRUE;
+	gnome_less_clear(gl);
+	return gnome_less_append_command(gl, command_line);
 }
 
 #define GLESS_BUFSIZE 1024
+
+/**
+ * gnome_less_append_filestream
+ * @gl: Pointer to GnomeLess widget
+ * @f: Filestream to be displayed in the widget
+ *
+ * Reads all of the text from filestream @f, and places it in the GnomeLess widget @gl.
+ * Appends to any text already in the widget
+ *
+ * Returns:
+ * %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
+
+gboolean gnome_less_append_filestream(GnomeLess * gl, FILE * f)
+{
+  gchar buffer [GLESS_BUFSIZE];
+  gchar * s;
+
+  g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+  g_return_val_if_fail(f != NULL, FALSE);
+
+  errno = 0; /* Reset it to detect errors */
+  while (TRUE) {
+	  s = fgets(buffer, GLESS_BUFSIZE, f);
+
+	  if ( s == NULL ) break;
+
+	  gtk_text_buffer_insert_at_char(gl->text_buffer, -1, buffer, strlen(buffer));
+	  gtk_text_buffer_apply_tag_to_chars(gl->text_buffer, "text_tag", 0, -1);
+  }
+
+  if ( errno != 0 ) {
+    /* We quit on an error, not EOF */
+    return FALSE;
+  }
+  else {
+    return TRUE;
+  }
+}
 
 /**
  * gnome_less_show_filestream
@@ -278,35 +411,40 @@ gboolean gnome_less_show_command(GnomeLess * gl,
 
 gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
 {
-  gchar buffer [GLESS_BUFSIZE];
-  gchar * s;
-
   g_return_val_if_fail(gl != NULL, FALSE);
   g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
   g_return_val_if_fail(f != NULL, FALSE);
 
-  gtk_text_freeze(gl->_priv->text);
-  
   gnome_less_clear(gl);
-  
-  errno = 0; /* Reset it to detect errors */
-  while (TRUE) {
-    s = fgets(buffer, GLESS_BUFSIZE, f);
+  return gnome_less_append_filestream(gl, f);
+}
 
-    if ( s == NULL ) break;
-    
-    gtk_text_insert(gl->_priv->text, gl->_priv->font, NULL, NULL, buffer, strlen(s));
-  }
+/**
+ * gnome_less_append_fd
+ * @gl: Pointer to GnomeLess widget
+ * @file_descriptor: Filestream to be displayed in the widget
+ *
+ * Reads all of the text from file descriptor @file_descriptor, and places it in the GnomeLess widget @gl.
+ * Appends to any text already being displayed.
+ *
+ * Returns:
+ * %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
 
-  gtk_text_thaw(gl->_priv->text);
+gboolean
+gnome_less_append_fd(GnomeLess * gl, int file_descriptor)
+{
+  FILE * f;
 
-  if ( errno != 0 ) {
-    /* We quit on an error, not EOF */
-    return FALSE;
-  }
-  else {
+  g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+
+  f = fdopen(file_descriptor, "r");
+
+  if ( f && gnome_less_append_filestream(gl, f) ) {
     return TRUE;
   }
+  else return FALSE;
 }
 
 /**
@@ -321,29 +459,33 @@ gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
  * %TRUE if successful, %FALSE if not. Error stored in %errno.
  **/
 
-gboolean gnome_less_show_fd         (GnomeLess * gl, int file_descriptor)
+gboolean
+gnome_less_show_fd(GnomeLess * gl, int file_descriptor)
 {
-  FILE * f;
+	g_return_val_if_fail(gl != NULL, FALSE);
+	g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
 
-  g_return_val_if_fail(gl != NULL, FALSE);
-  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
-
-  f = fdopen(file_descriptor, "r");
-
-  if ( f && gnome_less_show_filestream(gl, f) ) {
-    return TRUE;
-  }
-  else return FALSE;
+	gnome_less_clear(gl);
+	return gnome_less_append_fd(gl, file_descriptor);
 }
 
-static void gnome_less_append_string(GnomeLess * gl, const gchar * s)
+/**
+ * gnome_less_append_string:
+ * @gl: Pointer to GnomeLess widget
+ * @s: String to be displayed
+ *
+ * Description: Appends the @s string to any string already displayed in the
+ * widget.
+ **/
+void
+gnome_less_append_string(GnomeLess * gl, const gchar * s)
 {
-  g_return_if_fail(gl != NULL);
-  g_return_if_fail(GNOME_IS_LESS(gl));
-  g_return_if_fail(s != NULL);
+	g_return_if_fail(gl != NULL);
+	g_return_if_fail(GNOME_IS_LESS(gl));
+	g_return_if_fail(s != NULL);
 
-  gtk_text_set_point(gl->_priv->text, gtk_text_get_length(gl->_priv->text));
-  gtk_text_insert(gl->_priv->text, gl->_priv->font, NULL, NULL, s, strlen(s)); 
+	gtk_text_buffer_insert_at_char(gl->text_buffer, -1, s, strlen(s));
+	gtk_text_buffer_apply_tag_to_chars(gl->text_buffer, "text_tag", 0, -1);
 }
 
 /**
@@ -362,10 +504,8 @@ void gnome_less_show_string(GnomeLess * gl, const gchar * s)
   g_return_if_fail(GNOME_IS_LESS(gl));
   g_return_if_fail(s != NULL);
 
-  gtk_text_freeze(gl->_priv->text);
   gnome_less_clear(gl);
   gnome_less_append_string(gl, s);
-  gtk_text_thaw(gl->_priv->text);
 }
 
 /**
@@ -380,76 +520,7 @@ void gnome_less_clear (GnomeLess * gl)
   g_return_if_fail(gl != NULL);
   g_return_if_fail(GNOME_IS_LESS(gl));
 
-  gtk_editable_delete_text(GTK_EDITABLE(gl->_priv->text), 0,
-			   gtk_text_get_length(GTK_TEXT(gl->_priv->text)));
-}
-
-/**
- * gnome_less_set_font
- * @gl: Pointer to GnomeLess widget
- * @font: Pointer to GdkFont
- *
- * Sets the font of the text to be displayed in the GnomeLess widget @gl to @font.
- *
- * Note: This will not affect text already being displayed.
- * If you use this function after adding text to the widget, you must show it again
- * by using #gnome_less_reshow or one of the gnome_less_show commands.
- **/
-
-void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
-{
-  g_return_if_fail(gl != NULL);
-  g_return_if_fail(GNOME_IS_LESS(gl));
-
-  /* font is allowed to be NULL */
-
-  if (gl->_priv->font)
-    gdk_font_unref(gl->_priv->font);
-  gl->_priv->font = font;
-  if (gl->_priv->font) {
-    gdk_font_ref(gl->_priv->font);
-  }
-}
-
-/**
- * gnome_less_set_fixed_font
- * @gl: Pointer to GNOME Less widget
- * @fixed: Whether or not to use a fixed font
- *
- * Specifies whether or not new text should be displayed using a fixed font. Pass TRUE
- * in @fixed to use a fixed font, or FALSE to revert to the default GtkText font.
- *
- * Note: This will not affect text already being displayed.
- * If you use this function after adding text to the widget, you must show it again
- * by using #gnome_less_reshow or one of the gnome_less_show commands.
- **/
-  
-void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
-{
-  GdkFont * font;
-  g_return_if_fail(gl != NULL);
-  g_return_if_fail(GNOME_IS_LESS(gl));
-
-  if ( fixed == FALSE ) {
-    font = NULL; /* Note that a NULL string to gtk_text_insert_text 
-		    uses the default font. */
-  }
-  else {
-    /* FIXME maybe try loading a nicer font first? */
-    /* Is this a standard X font in every respect? */
-    /* I'm told that "fixed" is the standard X font, but
-       "fixed" doesn't appear to be fixed-width; courier does though. */
-    font = gdk_fontset_load(
-	_("-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*,"
-	  "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*,*"));
-    
-    if ( font == NULL ) {
-      g_warning("GnomeLess: Couldn't load fixed font\n");
-      return;
-    }
-  }
-
-  gnome_less_set_font(gl, font);  
+  gtk_text_buffer_delete_chars(gl->text_buffer, 0, -1);
 }
 
 /**
@@ -462,29 +533,34 @@ void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
  * Returns: %TRUE if successful, %FALSE if not. Error stored in %errno.
  **/
 
-gboolean gnome_less_write_fd (GnomeLess * gl, int fd)
+gboolean
+gnome_less_write_fd(GnomeLess * gl, int fd)
 {
-  gchar * contents;
-  gint len;
-  gint bytes_written;
+	gchar * contents;
+	gint len;
+	gint bytes_written;
 
-  g_return_val_if_fail(gl != NULL, FALSE);
-  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
-  g_return_val_if_fail(fd >= 0, FALSE);
+	g_return_val_if_fail(gl != NULL, FALSE);
+	g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+	g_return_val_if_fail(fd >= 0, FALSE);
 
-  contents = 
-    gtk_editable_get_chars(GTK_EDITABLE(gl->_priv->text), 0,
-			   gtk_text_get_length(GTK_TEXT(gl->_priv->text)));
-  len = strlen(contents);
+	contents = gtk_text_buffer_get_text_chars(gl->text_buffer, 0, -1, FALSE);
+	if(contents)
+		len = strlen(contents);
+	else
+		len = 0;
 
-  if ( contents && (len > 0)  ) {
-    bytes_written = write (fd, contents, len);
-    g_free(contents); 
-    
-    if ( bytes_written != len ) return FALSE;
-    else return TRUE;
-  }
-  else return TRUE; /* Nothing to write. */
+	if(len > 0)
+		bytes_written = write(fd, contents, len);
+	else
+		bytes_written = 0;
+
+	g_free(contents); 
+
+	if(bytes_written != len)
+		return FALSE;
+	else
+		return TRUE;
 }
 
 /**
@@ -523,44 +599,234 @@ gboolean gnome_less_write_file   (GnomeLess * gl, const gchar * path)
   else return TRUE;
 }
 
-/**
- * gnome_less_reshow
- * @gl: Pointer to GnomeLess widget
- *
- * Re-displays all of the text in the GnomeLess widget @gl. If the font has changed since
- * the last show/reshow of text, it will update the current text to the new font.
- **/
- 
-void gnome_less_reshow          (GnomeLess * gl)
+static void
+setup_columns(GnomeLess *gl)
 {
-  gchar * contents;
+	if(gl->_priv->columns <= 0) {
+		/* Set to 300 pixels if no columns */
+		gtk_widget_set_usize(GTK_WIDGET(gl->text_view), 300, -1); 
+	} else {
+		int i;
+		char *text = g_new(char, gl->_priv->columns + 1);
+		PangoLayout *layout;
+		PangoRectangle rect;
 
-  g_return_if_fail(gl != NULL);
-  g_return_if_fail(GNOME_IS_LESS(gl));
+		for(i = 0; i < gl->_priv->columns; i++)
+			text[i] = 'X';
+		text[i] = '\0';
 
-  contents = gtk_editable_get_chars(GTK_EDITABLE(gl->_priv->text), 0,
-				    gtk_text_get_length(GTK_TEXT(gl->_priv->text)));
+		layout = gtk_widget_create_pango_layout(GTK_WIDGET(gl), text);
+		pango_layout_set_font_description(layout, gl->_priv->font_desc);
 
-  if ( contents && (strlen(contents) != 0)  ) {
-    gnome_less_show_string(gl, contents);
-  }
+		pango_layout_set_width(layout, -1);
+		pango_layout_get_extents(layout, NULL, &rect);
 
-  g_free(contents);
+		gtk_widget_set_usize(GTK_WIDGET(gl->text_view),
+				     PANGO_PIXELS(rect.width) + 6, -1); 
+
+		g_object_unref(G_OBJECT(layout));
+	}
 }
 
 /**
- * gnome_less_get_gtk_text:
+ * gnome_less_set_font_string:
+ * @gl: Pointer to GnomeLess widget
+ * @font: text of the string.
+ *
+ * Description:  Sets the current font of the widget to the @font.
+ * This should be in the format that pango understands such as "Sans 12"
+ **/
+void
+gnome_less_set_font_string(GnomeLess * gl, const gchar * font)
+{
+	g_return_if_fail(gl != NULL);
+	g_return_if_fail(GNOME_IS_LESS(gl));
+	g_return_if_fail(font != NULL);
+
+	pango_font_description_free(gl->_priv->font_desc);
+	gl->_priv->font_desc = pango_font_description_from_string(font);
+
+	gtk_object_set(GTK_OBJECT(gl->_priv->text_tag),
+		       "font_desc", gl->_priv->font_desc,
+		       NULL);
+
+	setup_columns(gl);
+}
+
+/**
+ * gnome_less_set_font_description:
+ * @gl: Pointer to GnomeLess widget
+ * @font_desc: the PangoFontDescription of the text
+ *
+ * Description:  Sets the current font of the widget to the @font_desc.
+ **/
+void
+gnome_less_set_font_description(GnomeLess * gl, const PangoFontDescription * font_desc)
+{
+	g_return_if_fail(gl != NULL);
+	g_return_if_fail(GNOME_IS_LESS(gl));
+	g_return_if_fail(font_desc != NULL);
+
+	pango_font_description_free(gl->_priv->font_desc);
+	gl->_priv->font_desc = pango_font_description_copy(font_desc);
+
+	gtk_object_set(GTK_OBJECT(gl->_priv->text_tag),
+		       "font_desc", gl->_priv->font_desc,
+		       NULL);
+
+	setup_columns(gl);
+}
+
+/**
+ * gnome_less_set_font_fixed:
  * @gl: Pointer to GnomeLess widget
  *
- * Description:  Gets the #GtkText widget inside the GnomeLess widget
- *
- * Returns:  A #GtkWidget pointer to a #GtkText widget
+ * Description:  Sets the current font to the "fixed" font.
+ * This is useful for displaying things that need to be ordered
+ * in columns.
  **/
-GtkWidget *
-gnome_less_get_gtk_text(GnomeLess * gl)
+void
+gnome_less_set_font_fixed(GnomeLess * gl)
+{
+	char *font;
+
+	g_return_if_fail(gl != NULL);
+	g_return_if_fail(GNOME_IS_LESS(gl));
+
+	pango_font_description_free(gl->_priv->font_desc);
+	font = g_strdup_printf("fixed %d", GTK_WIDGET(gl)->style->font_desc->size / PANGO_SCALE);
+	gl->_priv->font_desc = pango_font_description_from_string(font);
+	g_free(font);
+
+	gtk_object_set(GTK_OBJECT(gl->_priv->text_tag),
+		       "font_desc", gl->_priv->font_desc,
+		       NULL);
+
+	setup_columns(gl);
+}
+
+/**
+ * gnome_less_set_font_standard:
+ * @gl: Pointer to GnomeLess widget
+ *
+ * Description:  Sets the current font to the standard font
+ * This is the font that's from the current style of the widget.
+ **/
+void
+gnome_less_set_font_standard(GnomeLess * gl)
+{
+	g_return_if_fail(gl != NULL);
+	g_return_if_fail(GNOME_IS_LESS(gl));
+
+	pango_font_description_free(gl->_priv->font_desc);
+	gl->_priv->font_desc = pango_font_description_copy(GTK_WIDGET(gl)->style->font_desc);
+
+	gtk_object_set(GTK_OBJECT(gl->_priv->text_tag),
+		       "font_desc", gl->_priv->font_desc,
+		       NULL);
+
+	setup_columns(gl);
+}
+
+
+/**
+ * gnome_less_set_width_columns:
+ * @gl: Pointer to GnomeLess widget
+ * @columns: number of columns
+ *
+ * Description:  Sets the number of visible columns.  This will
+ * only work well with fixed width fonts, such as "fixed"
+ **/
+void
+gnome_less_set_width_columns(GnomeLess * gl, int columns)
+{
+	g_return_if_fail(gl != NULL);
+	g_return_if_fail(GNOME_IS_LESS(gl));
+
+	gl->_priv->columns = columns;
+
+	setup_columns(gl);
+}
+
+/**
+ * gnome_less_set_wrap_mode:
+ * @gl: Pointer to GnomeLess widget
+ * @wrap_mode: The wrap mode to set
+ *
+ * Description:  Sets the wrap mode of the internal text widget to
+ * @wrap_mode.
+ **/
+void
+gnome_less_set_wrap_mode(GnomeLess * gl, GtkWrapMode wrap_mode)
+{
+	g_return_if_fail(gl != NULL);
+	g_return_if_fail(GNOME_IS_LESS(gl));
+
+	gtk_text_view_set_wrap_mode(gl->text_view, wrap_mode);
+}
+
+/**
+ * gnome_less_get_font_description:
+ * @gl: Pointer to GnomeLess widget
+ *
+ * Description:  Gets the font description currently used
+ * in the widget;
+ *
+ * Returns:  A new copy of the font description, you should
+ * free it yourself.
+ **/
+PangoFontDescription *
+gnome_less_get_font_description(GnomeLess * gl)
 {
 	g_return_val_if_fail(gl != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_LESS(gl), NULL);
 
-	return GTK_WIDGET(gl->_priv->text);
+	return pango_font_description_copy(gl->_priv->font_desc);
 }
+
+
+/***************************************************************************/
+/* DEPRECATED */
+/**
+ * gnome_less_reshow
+ * @gl: Pointer to GnomeLess widget
+ *
+ * Description: Deprecated
+ **/
+ 
+void gnome_less_reshow(GnomeLess * gl)
+{
+	g_warning("gnome_less_reshow deprecated, font is now updated on the fly");
+}
+
+/**
+ * gnome_less_set_font
+ * @gl: Pointer to GnomeLess widget
+ * @font: Pointer to GdkFont
+ *
+ * Description: Deprecated, use #gnome_less_set_font_string
+ **/
+
+void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
+{
+	g_warning("gnome_less_set_font deprecated, use gnome_less_set_font_string");
+}
+
+/**
+ * gnome_less_set_fixed_font
+ * @gl: Pointer to GNOME Less widget
+ * @fixed: Whether or not to use a fixed font
+ *
+ * Description:  Deprecated, use #gnome_less_set_font_fixed
+ **/
+void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
+{
+	g_warning("gnome_less_set_fixed_font deprecated, use gnome_less_set_font_fixed");
+
+	if(fixed) {
+		gnome_less_set_font_fixed(gl);
+	} else {
+		gnome_less_set_font_standard(gl);
+	}
+}
+

@@ -1,3 +1,12 @@
+Mon Jul 17 23:49:58 2000  George Lebl <jirka@5z.com>
+
+	* gnome-less.[ch]:  Port to the new text widget.  deprecate the font
+	  functions and replace them with new ones which are 1) saner 2)
+	  compatible with the new text widget.  Add a way to set width to
+	  a specified amount of columns.  Derive the widget from HBox rather
+	  then VBox to kill one level of wigetry.  Add append versions of all
+	  the show functions.  Make the text widget pointers public.
+
 2000-07-16  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-appbar.[ch] (gnome_appbar_get_status): new accessor function.
