@@ -55,6 +55,19 @@ static GtkWidget *
 entry_find_internal_child(GladeXML *xml, GtkWidget *parent,
 			  const gchar *childname)
 {
+    if (!strcmp (childname, "entry"))
+	return gnome_entry_gtk_entry (GNOME_ENTRY (parent));
+
+    return NULL;
+}
+
+static GtkWidget *
+file_entry_find_internal_chid(GladeXML *xml, GtkWidget *parent,
+			      const gchar *childname)
+{
+    if (!strcmp (childname, "entry"))
+	return gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (parent));
+
     return NULL;
 }
 
@@ -103,8 +116,8 @@ static GladeWidgetBuildData widget_data[] = {
       gnome_druid_page_standard_get_type, 0, druidpagestandard_find_internal_child },
     { "GnomeEntry", glade_standard_build_widget, glade_standard_build_children,
       gnome_entry_get_type, 0, entry_find_internal_child },
-    { "GnomeFileEntry", glade_standard_build_widget, NULL,
-      gnome_file_entry_get_type },
+    { "GnomeFileEntry", glade_standard_build_widget, glade_standard_build_children,
+      gnome_file_entry_get_type, 0, file_entry_find_internal_chid },
     { "GnomeHRef", glade_standard_build_widget, NULL,
       gnome_href_get_type },
     { "GnomeIconEntry", glade_standard_build_widget, NULL,
