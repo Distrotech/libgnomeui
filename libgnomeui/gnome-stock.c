@@ -1491,14 +1491,12 @@ GtkWidget *
 gnome_stock_menu_item(const char *type, const char *text)
 {
 	GtkWidget *hbox, *w, *menu_item;
-	int use_icons;
 
 	g_return_val_if_fail(type != NULL, NULL);
 	g_return_val_if_fail(gnome_stock_pixmap_checkfor(type, GNOME_STOCK_PIXMAP_REGULAR), NULL);
 	g_return_val_if_fail(text != NULL, NULL);
 
-	use_icons = gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true");
-	if (use_icons) {
+	if(gnome_preferences_get_menus_have_icons()) {
 		hbox = gtk_hbox_new(FALSE, 2);
 		gtk_widget_show(hbox);
 		w = gnome_stock_pixmap_widget(hbox, type);
