@@ -183,7 +183,8 @@ enum_from_strings(gint * setme, gchar * findme,
 void gnome_preferences_load(void)
 {
   /* Probably this function should be rewritten to use the 
-     _preferences_get functions */
+   *  _preferences_get functions
+   */
   gboolean b;
   gchar * s;
 
@@ -226,7 +227,6 @@ void gnome_preferences_load(void)
 					 NULL);
   prefs.dialog_centered = b;
 
-#if 0
   /* This is unused for now */
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_OK_KEY"=true",
 					 NULL);
@@ -243,7 +243,6 @@ void gnome_preferences_load(void)
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_HELP_KEY"=true",
 					 NULL);
   prefs.property_box_buttons_help = b;
-#endif
 
   gnome_config_pop_prefix();
   gnome_config_push_prefix(STATUSBAR);
@@ -455,5 +454,17 @@ GtkPositionType   gnome_preferences_get_mdi_tab_pos          ()
 void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p)
 {
   prefs.mdi_tab_pos = p;
+}
+
+int
+gnome_preferences_get_propery_box_apply (void)
+{
+	return prefs.property_box_buttons_apply;
+}
+
+void
+gnome_preferences_set_property_box_button_apply (int v)
+{
+	prefs.property_box_buttons_apply = v;
 }
 

@@ -1,3 +1,16 @@
+1998-08-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-propertybox.c (gnome_property_box_init): Implement support
+	for OK/CANCEL/HELP vs OK/APPLY/CLOSE/HELP modes. 
+
+	* gnome-preferences.c (gnome_preferences_load): Activate the code
+	for the preference dialog box configuration.
+
+1998-08-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkcauldron.c (gtk_dialog_cauldron_parse): Use
+	gtk_window_position on the created dialog box.
+
 Mon Aug 24 22:51:50 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_realize): Use 
