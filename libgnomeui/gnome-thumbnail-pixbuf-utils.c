@@ -274,15 +274,9 @@ term_source (j_decompress_ptr cinfo)
 }
 
 static void
-vfs_src (j_decompress_ptr cinfo, GnomeVFSHandle *handle)
+vfs_src (j_decompress_ptr cinfo, Source *src, GnomeVFSHandle *handle)
 {
-	Source *src;
-	
-	if (cinfo->src == NULL) {	/* first time for this JPEG object? */
-		cinfo->src = &(g_new (Source, 1))->pub;
-	}
-
-	src = (Source *) cinfo->src;
+	cinfo->src = src;
 	src->pub.init_source = init_source;
 	src->pub.fill_input_buffer = fill_input_buffer;
 	src->pub.skip_input_data = skip_input_data;
@@ -356,6 +350,7 @@ _gnome_thumbnail_load_scaled_jpeg (const char *uri,
 				   int         target_height)
 {
 	struct jpeg_decompress_struct cinfo;
+	Source src;
 	ErrorHandlerData jerr;
 	GnomeVFSHandle *handle;
 	unsigned char *lines[1];
@@ -390,7 +385,7 @@ _gnome_thumbnail_load_scaled_jpeg (const char *uri,
 
 	jpeg_create_decompress (&cinfo);
 
-	vfs_src (&cinfo, handle);
+	vfs_src (&cinfo, &src, handle);
 
 	jpeg_read_header (&cinfo, TRUE);
 

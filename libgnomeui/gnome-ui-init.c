@@ -66,6 +66,7 @@
 #include <gtk/gtkentry.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkcheckmenuitem.h>
+#include <gtk/gtkmessagedialog.h>
 
 /*****************************************************************************
  * libgnomeui
@@ -291,6 +292,83 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 
 #ifdef HAVE_ESD
 static gboolean
+relay_gnome_signal (GSignalInvocationHint *hint,
+              	     guint n_param_values,
+                    const GValue *param_values,
+                    gchar *signame)
+{
+        char *pieces[3] = {"gnome-2", NULL, NULL};
+        static GQuark disable_sound_quark = 0;
+        GObject *object = g_value_get_object (&param_values[0]);
+
+        if (!use_event_sounds)
+                return TRUE;
+
+        if (!disable_sound_quark)
+                disable_sound_quark = g_quark_from_static_string ("gnome_disable_sound_events");
+
+        if (g_object_get_qdata (object, disable_sound_quark))
+                return TRUE;
+
+        if (GTK_IS_WIDGET (object)) {
+
+                if (!GTK_WIDGET_DRAWABLE (object))
+                        return TRUE;
+
+                if (GTK_IS_MESSAGE_DIALOG (object)) {
+                        GtkMessageType message_type;
+                        g_object_get (object, "message_type", &message_type, NULL);
+                        switch (message_type)
+                        {
+                                case GTK_MESSAGE_INFO:
+                                        pieces[1] = "info";
+                                        break;
+
+                                case GTK_MESSAGE_QUESTION:
+                                        pieces[1] = "question";
+                                        break;
+
+                                case GTK_MESSAGE_WARNING:
+                                        pieces[1] = "warning";
+                                        break;
+
+                                case GTK_MESSAGE_ERROR:
+                                        pieces[1] = "error";
+                                        break;
+
+                                default:
+                                        pieces[1] = NULL;
+                        }
+                }
+        }
+
+        if (gnome_sound_connection_get () < 0)
+                return TRUE;
+
+        gnome_triggers_vdo ("", NULL, (const char **) pieces);
+
+        return TRUE;
+}
+
+static void
+initialize_gnome_signal_relay (void)
+{
+        static gboolean initialized = FALSE;
+        int signum;
+
+        if (initialized)
+                return;
+
+        initialized = TRUE;
+
+        signum = g_signal_lookup ("show", GTK_TYPE_MESSAGE_DIALOG);
+        g_signal_add_emission_hook (signum, 0,
+                                    (GSignalEmissionHook) relay_gnome_signal,
+                                    NULL, NULL);
+
+}
+
+static gboolean
 relay_gtk_signal(GSignalInvocationHint *hint,
 		 guint n_param_values,
 		 const GValue *param_values,
@@ -410,8 +488,10 @@ event_sounds_changed_cb (GConfClient* client, guint cnxn_id, GConfEntry *entry, 
         new_use_event_sounds = (gnome_gconf_get_bool ("/desktop/gnome/sound/enable_esd") &&
                                 gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds"));
 
-        if (new_use_event_sounds && !use_event_sounds)
+        if (new_use_event_sounds && !use_event_sounds) {
                 initialize_gtk_signal_relay ();
+                initialize_gnome_signal_relay ();
+	}
 
         use_event_sounds = new_use_event_sounds;
 }
@@ -438,8 +518,10 @@ setup_event_listener (void)
         use_event_sounds = (gnome_gconf_get_bool ("/desktop/gnome/sound/enable_esd") &&
                             gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds"));
 
-        if (use_event_sounds)
+        if (use_event_sounds) {
                 initialize_gtk_signal_relay ();
+                initialize_gnome_signal_relay ();
+	 }
 #endif
 }
 

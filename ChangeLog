@@ -1,3 +1,9 @@
+2003-07-01  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c (vfs_src): Merge
+	fix for bug #114928
+	* libgnomeui/gnome-ui-init.c: Merge fix for bug #111496.
+
 2003-06-25  Thomas Vander Stichele <thomas at apestaart dot org>
 
         * po/az.po: removed \- which was causing msgfmt to break
