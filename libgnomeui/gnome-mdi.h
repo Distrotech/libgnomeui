@@ -149,6 +149,7 @@ gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
 
 GtkWidget     *gnome_mdi_active_view        (GnomeMDI *);
 void          gnome_mdi_set_active_view     (GnomeMDI *, GtkWidget *);
+void          gnome_mdi_set_window_view     (GnomeMDI *, GnomeApp *, GtkWidget *);
 
 /* manipulating children */
 gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
@@ -176,8 +177,9 @@ void          gnome_mdi_unregister          (GnomeMDI *, GtkWidget *);
  * objects associated with a particular view. These obsolete the
  * VIEW_GET_*() macros.
  */
-GnomeApp      *gnome_mdi_get_app_from_view  (GtkWidget *);
-GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *);
+GnomeApp      *gnome_mdi_get_app_from_view    (GtkWidget *);
+GnomeMDIChild *gnome_mdi_get_child_from_view  (GtkWidget *);
+GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *, GnomeApp *);
 
 END_GNOME_DECLS
 

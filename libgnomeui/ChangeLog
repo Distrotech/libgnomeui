@@ -1,3 +1,13 @@
+1998-09-29  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi.c (gnome_mdi_get_view_from_window): New function.
+	(gnome_mdi_set_window_view): New function. This sets the active
+	view of a window without giving focus to that window.
+	* gnome-mdi.h: Add prototypes.
+
+	* gnome-mdi-session.c: We now save and restore window positions,
+	the active view of each window and the active window.
+
 1998-09-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-text.c (gnome_canvas_text_class_init): Added two

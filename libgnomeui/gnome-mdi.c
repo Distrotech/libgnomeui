@@ -1023,6 +1023,18 @@ void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {
   gtk_window_activate_focus(window);
 }
 
+void gnome_mdi_set_window_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+  g_return_if_fail(view != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(view));
+
+  if(mdi->mode == GNOME_MDI_NOTEBOOK)
+    set_page_by_widget(GTK_NOTEBOOK(app->contents), view);
+}
+
 gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
   GtkWidget *view;
   gint ret = TRUE;
@@ -1492,6 +1504,20 @@ GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *view) {
 
 GnomeApp *gnome_mdi_get_app_from_view(GtkWidget *view) {
   return GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(view)));
+}
+
+GtkWidget *gnome_mdi_get_view_from_window(GnomeMDI *mdi, GnomeApp *app) {
+  g_return_val_if_fail(mdi != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+
+  if((mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL))
+    return app->contents;
+  else if((mdi->mode == GNOME_MDI_NOTEBOOK) && GTK_NOTEBOOK(app->contents)->cur_page)
+    return GTK_NOTEBOOK(app->contents)->cur_page->child;
+  else
+    return NULL;
 }
 
 void gnome_mdi_set_tab_pos(GnomeMDI *mdi, GtkPositionType pos) {
