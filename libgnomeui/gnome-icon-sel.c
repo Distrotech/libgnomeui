@@ -83,6 +83,7 @@ static void
 gnome_icon_selection_init (GnomeIconSelection *gis)
 {
 	GtkWidget *box;
+	GtkWidget *frame;
 	GtkWidget *sb;
 	gis->box = gtk_vbox_new(FALSE, 0);
 
@@ -99,14 +100,18 @@ gnome_icon_selection_init (GnomeIconSelection *gis)
 	gtk_box_pack_end(GTK_BOX(box),sb,FALSE,FALSE,0);
 	gtk_widget_show(sb);
 
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+	gtk_box_pack_start (GTK_BOX (box), frame, TRUE, TRUE, 0);
+	gtk_widget_show (frame);
+
 	gis->gil = gnome_icon_list_new(ICON_SIZE+30,
 				       gtk_range_get_adjustment(GTK_RANGE(sb)),
 				       FALSE);
 	gtk_widget_set_usize(gis->gil,350,300);
 	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(gis->gil),
 					   GTK_SELECTION_SINGLE);
-	gtk_box_pack_start(GTK_BOX(box),gis->gil,TRUE,TRUE,0);
-
+	gtk_container_add (GTK_CONTAINER (frame), gis->gil);
 	gtk_widget_show(gis->gil);
 
 	gis->file_list = NULL;

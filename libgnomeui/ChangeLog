@@ -1,3 +1,8 @@
+1998-12-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-sel.c (gnome_icon_selection_init): Put a frame around
+	the icon list to make it look better.
+
 1998-12-18  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-procbar.c (gnome_proc_bar_draw): Calculate total field
