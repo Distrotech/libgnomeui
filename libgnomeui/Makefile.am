@@ -59,6 +59,7 @@ libgnomeui_la_SOURCES = \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
 	gnome-geometry.c		\
+	gnome-guru.c			\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
         gnome-font-picker.c		\
@@ -132,6 +133,7 @@ gnome_headers = \
         gnome-font-picker.h		\
 	gnome-font-selector.h 		\
 	gnome-geometry.h		\
+	gnome-guru.h			\
 	gnome-gtk-utils.h		\
 	gnome-href.h			\
 	gnome-ice.h			\

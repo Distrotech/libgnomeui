@@ -1,3 +1,13 @@
+1998-11-04  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-guru.c, gnome-guru.h: New widget, a simple-minded wizard
+	widget.  
+	* gtkrc: Add a style for the title of each page in the GnomeGuru.
+	It only works with the standalone guru though, not the
+	guru-in-a-dialog. See test-gnome for demo. weird.
+	* libgnomeui.h, Makefile.am: added.
+	* gnome-icon-sel.c: The type of parent_class was wrong.
+
 1998-11-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (iti_class_init): Create the new signal.

@@ -38,7 +38,7 @@ static void gnome_icon_selection_init       (GnomeIconSelection      *messagebox
 
 static void gnome_icon_selection_destroy (GtkObject *gis);
 
-static GtkWindowClass *parent_class;
+static GtkVBoxClass *parent_class;
 
 static int sort_file_list( gconstpointer a, gconstpointer b);
 
