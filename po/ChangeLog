@@ -1,8 +1,6 @@
-2001-08-07  gettextize  <bug-gnu-utils@gnu.org>
+2001-08-07  Darin Adler  <darin@bentspoon.com>
 
-	* Makefile.in.in: Upgrade to gettext-0.10.39.
-	* cat-id-tbl.c: Remove file.
-	* stamp-cat-id: Remove file.
+	* .cvsignore: New file to ignore.
 
 2001-07-26  Peter Williams  <peterw@ximian.com>
 
