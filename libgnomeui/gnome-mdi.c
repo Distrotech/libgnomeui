@@ -620,8 +620,9 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 
 					app = gnome_mdi_get_app_from_view(view);
 					gdk_window_raise(GTK_WIDGET(app)->window);
-		
+
 					if(old_book->cur_page == NULL) {
+						mdi->active_window = app;
 						app = GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(old_book)));
 						mdi->windows = g_list_remove(mdi->windows, app);
 						gtk_widget_destroy(GTK_WIDGET(app));
@@ -655,7 +656,7 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 			new_book = book_create(mdi);
 	
 			book_add_view(GTK_NOTEBOOK(new_book), view);
-				
+
 			gtk_window_set_position(GTK_WINDOW(mdi->active_window), GTK_WIN_POS_MOUSE);
 	
 			gtk_widget_set_usize (view, width, height);
@@ -1319,6 +1320,9 @@ gint gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view, gint force)
 
 	gtk_container_remove(GTK_CONTAINER(parent), view);
 
+	if(view == mdi->active_view)
+		mdi->active_view = NULL;
+
 	if( (mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL) ) {
 		window->contents = NULL;
 
@@ -1437,6 +1441,9 @@ gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
 	mdi->children = g_list_remove(mdi->children, child);
 
 	child_list_menu_remove_item(mdi, child);
+
+	if(child == mdi->active_child)
+		mdi->active_child = NULL;
 
 	gtk_object_unref(GTK_OBJECT(child));
 
