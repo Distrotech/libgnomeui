@@ -208,7 +208,8 @@ prepare_aux_pixmaps (GnomeAnimator *animator)
         }
 
       if (widget->requisition.width > 0
-          && widget->requisition.height > 0)
+          && widget->requisition.height > 0
+          && GTK_WIDGET_REALIZED(widget))
         {
           privat->offscreen_pixmap = gdk_pixmap_new (widget->window,
                                                      widget->requisition.width,
@@ -278,15 +279,17 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
   animator = GNOME_ANIMATOR (widget);
 
-  gdk_window_clear_area (widget->window,
-                         widget->allocation.x, widget->allocation.y,
-                         widget->allocation.width, widget->allocation.height);
+  if (GTK_WIDGET_REALIZED(widget))
+          gdk_window_clear_area (widget->window,
+                                 widget->allocation.x, widget->allocation.y,
+                                 widget->allocation.width, widget->allocation.height);
 
   widget->allocation = *allocation;
 
-  gdk_window_clear_area (widget->window,
-                         widget->allocation.x, widget->allocation.y,
-                         widget->allocation.width, widget->allocation.height);
+  if (GTK_WIDGET_REALIZED(widget))
+          gdk_window_clear_area (widget->window,
+                                 widget->allocation.x, widget->allocation.y,
+                                 widget->allocation.width, widget->allocation.height);
 
   animator->privat->area.x = (widget->allocation.x
                               + (widget->allocation.width
@@ -306,6 +309,17 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 static void
 paint (GnomeAnimator *animator, GdkRectangle *area)
 {
+  /* FIXME this is a bad hack, because I don't want to introduce
+     a new realize()/unrealize() pair in the stable libs right now
+     and risk screwing things up
+  */
+  if (animator->privat->offscreen_pixmap == NULL &&
+      GTK_WIDGET_REALIZED(GTK_WIDGET(animator)))
+    {
+      prepare_aux_pixmaps (animator);
+      draw_background_pixmap (animator);
+    }
+        
   if (animator->num_frames > 0
       && animator->privat->offscreen_pixmap != NULL)
     {

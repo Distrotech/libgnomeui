@@ -154,6 +154,7 @@ gnome_font_picker_init (GnomeFontPicker *gfp)
     gfp->font_name     = NULL;
     gfp->preview_text  = NULL;
     gfp->use_font_in_label     = FALSE;
+    gfp->use_font_in_label_size = 14;
     gfp->show_size     = TRUE;
     gfp->font_dialog   = NULL;
     gfp->title         = g_strdup(_("Pick a Font"));

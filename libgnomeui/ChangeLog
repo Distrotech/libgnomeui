@@ -1,3 +1,26 @@
+1999-09-19  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-animator.c (prepare_aux_pixmaps): only create pixmaps
+	if we are realized
+	(size_allocate): Don't do the gdk_window_clear_area() calls
+	unless we are realized
+	(paint): Create backing store here if necessary... bad hack,
+	need realize/unrealize eventually
+
+	Bug reported by Damon Chaplin
+
+	* gnome-dateedit.c (gnome_date_edit_set_popup_range): Regenerate
+	the popup
+	(gnome_date_edit_set_flags): Use ~ instead of ! for bitwise
+	negation. 
+	(gnome_date_edit_set_flags): Set new flags at the beginning 
+	of the function
+
+	All three bugs reported by Damon Chaplin
+	
+	* gnome-font-picker.c (gnome_font_picker_init): Set a default
+	for use_font_in_label_size, bug reported by Damon Chaplin
+
 1999-09-18  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas.c (scroll_to): Fixed little off-by-one error in

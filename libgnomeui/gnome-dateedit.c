@@ -424,6 +424,8 @@ gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour)
 
 	gde->lower_hour = low_hour;
 	gde->upper_hour = up_hour;
+
+        fill_time_popup(NULL, gde);
 }
 
 static void
@@ -616,10 +618,15 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 void
 gnome_date_edit_set_flags (GnomeDateEdit *gde, GnomeDateEditFlags flags)
 {
+        GnomeDateEditFlags old_flags;
+        
 	g_return_if_fail (gde != NULL);
 	g_return_if_fail (GNOME_IS_DATE_EDIT (gde));
 
-	if ((flags & GNOME_DATE_EDIT_SHOW_TIME) != (gde->flags & GNOME_DATE_EDIT_SHOW_TIME)) {
+        old_flags = gde->flags;
+        gde->flags = flags;
+        
+	if ((flags & GNOME_DATE_EDIT_SHOW_TIME) != (old_flags & GNOME_DATE_EDIT_SHOW_TIME)) {
 		if (flags & GNOME_DATE_EDIT_SHOW_TIME) {
 			gtk_widget_show (gde->cal_label);
 			gtk_widget_show (gde->time_entry);
@@ -631,11 +638,11 @@ gnome_date_edit_set_flags (GnomeDateEdit *gde, GnomeDateEditFlags flags)
 		}
 	}
 
-	if ((flags & GNOME_DATE_EDIT_24_HR) != (gde->flags & GNOME_DATE_EDIT_24_HR))
+	if ((flags & GNOME_DATE_EDIT_24_HR) != (old_flags & GNOME_DATE_EDIT_24_HR))
 		fill_time_popup (GTK_WIDGET (gde), gde); /* This will destroy the old menu properly */
 
 	if ((flags & GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY)
-	    != (gde->flags & GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY)) {
+	    != (old_flags & GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY)) {
 		if (flags & GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY)
 			gtk_calendar_display_options (GTK_CALENDAR (gde->calendar),
 						      (GTK_CALENDAR (gde->calendar)->display_flags
@@ -643,10 +650,8 @@ gnome_date_edit_set_flags (GnomeDateEdit *gde, GnomeDateEditFlags flags)
 		else
 			gtk_calendar_display_options (GTK_CALENDAR (gde->calendar),
 						      (GTK_CALENDAR (gde->calendar)->display_flags
-						       & !GTK_CALENDAR_WEEK_START_MONDAY));
+						       & ~GTK_CALENDAR_WEEK_START_MONDAY));
 	}
-
-	gde->flags = flags;
 }
 
 /**
