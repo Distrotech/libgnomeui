@@ -142,10 +142,6 @@ gnome_message_box_init (GnomeMessageBox *message_box)
 }
 
 
-#define INFO_PIXMAP     "gnome-default.png"
-#define WARNING_PIXMAP  "gnome-default.png"
-#define ERROR_PIXMAP    "gnome-default.png"
-#define QUESTION_PIXMAP "gnome-default.png"
 GtkWidget*
 gnome_message_box_new (gchar           *message,
 		      gchar           *message_box_type, ...)
@@ -156,8 +152,8 @@ gnome_message_box_new (gchar           *message,
 	GtkWidget *vbox;
 	GtkWidget *label;
 	GtkWidget *separator;
-
-	GtkWidget *pixmap;
+	GtkWidget *pixmap = NULL;
+	char *s;
 	GtkStyle *style;
 
 	va_start (ap, message_box_type);
@@ -174,24 +170,31 @@ gnome_message_box_new (gchar           *message,
 
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
-		pixmap = gnome_pixmap_new_from_file(gnome_pixmap_file(INFO_PIXMAP));
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Information"));
+		s = gnome_pixmap_file("gnome-info.png");
+		if (s) pixmap = gnome_pixmap_new_from_file(s);
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
-		pixmap = gnome_pixmap_new_from_file(gnome_pixmap_file(WARNING_PIXMAP));
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Warning"));
+		s = gnome_pixmap_file("gnome-warning.png");
+		if (s) pixmap = gnome_pixmap_new_from_file(s);
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
-		pixmap = gnome_pixmap_new_from_file(gnome_pixmap_file(ERROR_PIXMAP));
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Error"));
+		s = gnome_pixmap_file("gnome-error");
+		if (s) pixmap = gnome_pixmap_new_from_file(s);
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
-		pixmap = gnome_pixmap_new_from_file(gnome_pixmap_file(QUESTION_PIXMAP));
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Question"));
+		s = gnome_pixmap_file("gnome-question.png");
+		if (s) pixmap = gnome_pixmap_new_from_file(s);
 	}
 	else
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), "");
-		pixmap = NULL;
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Message"));
 	}
 
 	vbox = gtk_vbox_new (FALSE, 0);
@@ -202,8 +205,16 @@ gnome_message_box_new (gchar           *message,
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 10);
 	gtk_widget_show (hbox);
 
-	if (pixmap)
-	{
+	if ( (pixmap == NULL) ||
+	     (GNOME_PIXMAP(pixmap)->pixmap == NULL) ) {
+        	if (pixmap) gtk_widget_destroy(pixmap);
+		s = gnome_pixmap_file("gnome-default.png");
+         	if (s)
+			pixmap = gnome_pixmap_new_from_file(s);
+		else
+			pixmap = NULL;
+	}
+	if (pixmap) {
 		gtk_box_pack_start (GTK_BOX (hbox), pixmap, FALSE, TRUE, 0);
 		gtk_widget_show (pixmap);
 	}

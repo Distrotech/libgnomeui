@@ -1,6 +1,12 @@
+Tue Mar 24 23:06:44 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
+
+	* gnome-messagebox.c (gnome_message_box_init): applied patch from
+	robert havoc pennington <rhpennin@midway.uchicago.edu> with some
+	sanity checks and use of gnome_pixmap_file
+
 Tue Mar 24 22:32:11 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
 
-	* gnome-propertybox.c: applied path from Havoc Pennington
+	* gnome-propertybox.c: applied patch from Havoc Pennington
 	<hp@pobox.com>
 
 Tue Mar 24 19:24:23 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
