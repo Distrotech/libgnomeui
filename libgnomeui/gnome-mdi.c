@@ -2028,7 +2028,7 @@ GnomeUIInfo *gnome_mdi_get_toolbar_info (GnomeApp *app)
 }
 
 /**
- * gnome_mdi_get_menubar_info:
+ * gnome_mdi_get_child_menu_info:
  * @app: A pointer to a GnomeApp widget created by the MDI.
  * 
  * Return value: 

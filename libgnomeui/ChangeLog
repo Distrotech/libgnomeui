@@ -1,3 +1,8 @@
+1999-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_get_child_menu_info): fix a typo in
+	documentation comment.
+
 1999-12-15  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-druid.c (gnome_druid_insert_page): only map the page if
