@@ -55,7 +55,8 @@ GtkWidget *gnome_icon_entry_new         (char *history_id,
   or one would use the file_entry functions for any other path*/
 void       gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
 					      const char *subdir);
-
+void       gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
+				     const char *filename);
 GtkWidget *gnome_icon_entry_gnome_file_entry(GnomeIconEntry *ientry);
 GtkWidget *gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry);
 GtkWidget *gnome_icon_entry_gtk_entry   (GnomeIconEntry *ientry);

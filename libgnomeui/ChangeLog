@@ -1,5 +1,8 @@
 1999-01-26  Jonathan Blandford  <jrb@redhat.com>
 
+	* gnome-icon-entry.c (gnome_icon_entry_set_icon): added new
+	function to get around the old braindead way of setting the icon.
+
 	* gnome-dialog.c (gnome_dialog_set_parent): Commented the below
 	change.
 

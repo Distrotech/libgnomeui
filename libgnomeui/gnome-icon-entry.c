@@ -297,7 +297,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 					 NULL);
 		if (GTK_WINDOW (tl)->modal) {
 			gtk_window_set_modal (GTK_WINDOW (ientry->pick_dialog), TRUE);
-			gnome_dialog_set_parent (GNOME_DIALOG (ientry->pick_dialog), GTK_WIDGET (tl)); 
+			gnome_dialog_set_parent (GNOME_DIALOG (ientry->pick_dialog), GTK_WINDOW (tl)); 
 			gnome_file_entry_set_modal (GNOME_FILE_ENTRY (ientry->fentry), TRUE);
 		}
 		gnome_dialog_close_hides(GNOME_DIALOG(ientry->pick_dialog), TRUE);
@@ -523,6 +523,26 @@ gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
 	p = gnome_pixmap_file(subdir);
 	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->fentry),p);
 	g_free(p);
+}
+/**
+ * gnome_icon_entry_set_icon:
+ * @filename: 
+ * 
+ * Description: Sets the icon of GnomeIconEntry to be the one pointed to by
+ * filename.
+ *
+ * Returns:
+ **/
+void
+gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
+			  const char *filename)
+{
+	g_return_if_fail (ientry != NULL);
+	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+
+	/* Setting the text in the entry will actually set the icon */
+	gtk_entry_set_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (ientry)),
+			    filename);
 }
 
 /**
