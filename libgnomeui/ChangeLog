@@ -1,3 +1,16 @@
+2001-04-17  Martin Baulig  <baulig@suse.de>
+
+	* Makefile.am: Don't compile gnome-gconf.c and oafgnome.c.
+
+	* gnome-app-helper.c (gnome_gconf_get_gnome_libs_settings_relative):
+	#define this to NULL (FIXME).
+
+	* gnome-gconf.h (gnome_gconf_module_info): Removed external declaration; this
+	is in libgnome now.
+	(GNOME_GCONF_INIT): Removed.
+	(gnome_get_gconf_client): Made this a macro which uses
+	gnome_program_get_gconf_client (gnome_program_get ()).
+
 2001-04-15  Martin Baulig  <baulig@suse.de>
 
 	* libgnomeuiP.h (gnome_i18n_get_language_list, gnome_i18n_get_preferred_language):

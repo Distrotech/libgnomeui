@@ -2464,6 +2464,9 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
         gtk_toolbar_set_style(toolbar, style);
 }
 
+/* FIXME FIXME FIXME */
+#define gnome_gconf_get_gnome_libs_settings_relative(p) NULL
+
 static void
 toolbar_style_changed_notify(GConfClient            *client,
                              guint                   cnxn_id,

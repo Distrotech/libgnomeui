@@ -66,7 +66,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-selector.c		\
 	gnome-file-selector.c		\
         gnome-font-picker.c		\
-	gnome-gconf.c			\
 	gnome-helpsys.c			\
 	gnome-href.c			\
 	gnome-ice.c			\
@@ -97,7 +96,6 @@ libgnomeui_2_la_SOURCES = \
 	gtk-clock.c			\
 	gtkdial.c			\
 	gtkpixmapmenuitem.c		\
-	oafgnome.c			\
 	gnome-icon-list.c		\
 	gnome-icon-item.c		\
 	gnome-icon-text.c		\
