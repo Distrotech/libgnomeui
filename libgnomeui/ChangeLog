@@ -1,3 +1,10 @@
+Fri Aug 24 07:16:18 2001  George Lebl <jirka@5z.com>
+
+	* gnome-font-picker.[ch]: move all fields to the private struct,
+	  add an accessor for the 'inside', but only if it's a user set
+	  inside.  Change gtkargs to gparams so we get all the new stuff.
+	  Add a fixme here and there and minor doc updates
+
 2001-08-22  Iain Holmes  <iain@ximian.com>
 
 	* Makefile.am: Install gnome-macros.h

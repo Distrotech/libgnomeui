@@ -52,10 +52,6 @@ typedef struct _GnomeFontPickerClass   GnomeFontPickerClass;
 struct _GnomeFontPicker {
         GtkButton button;
     
-	GtkWidget     *font_dialog;
-        GtkWidget     *inside;
-        GtkWidget     *font_label, *vsep, *size_label;
-
 	/*< private >*/
 	GnomeFontPickerPrivate *_priv;
 };
@@ -98,6 +94,7 @@ void       gnome_font_picker_fi_set_show_size (GnomeFontPicker *gfp,
 /* With GNOME_FONT_PICKER_MODE_USER_WIDGET */
 void       gnome_font_picker_uw_set_widget    (GnomeFontPicker *gfp,
                                                GtkWidget       *widget);
+GtkWidget * gnome_font_picker_uw_get_widget    (GnomeFontPicker *gfp);
 
 /* Functions to interface with GtkFontSelectionDialog */
 const gchar* gnome_font_picker_get_font_name  (GnomeFontPicker *gfp);
