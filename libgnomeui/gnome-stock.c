@@ -1663,7 +1663,7 @@ accel_dlg_select_ok(GtkWidget *widget, GtkWindow *window)
 		if (check->active)
 			entry.mod |= GDK_MOD1_MASK;
 	}
-	row = (int)gtk_object_get_data(GTK_OBJECT(window), "row");
+	row = GPOINTER_TO_INT (gtk_object_get_data(GTK_OBJECT(window), "row"));
 	gtk_clist_get_text(GTK_CLIST(gtk_object_get_data(GTK_OBJECT(window), "clist")),
 			   row, 1, &s);
 	if (!s) s = "";
@@ -1680,7 +1680,7 @@ accel_dlg_select_ok(GtkWidget *widget, GtkWindow *window)
 
 
 static void
-accel_dlg_select(GtkCList *widget, int row, int col, GdkEventButton *event)
+accel_dlg_select(GtkCList *widget, gint row, gint col, GdkEventButton *event)
 {
 	AccelEntry entry;
 	GtkTable *table;
@@ -1699,8 +1699,8 @@ accel_dlg_select(GtkCList *widget, int row, int col, GdkEventButton *event)
 	window = gtk_dialog_new();
 	gtk_window_set_title(GTK_WINDOW(window), "Menu Accelerator");
 	gtk_object_set_data(GTK_OBJECT(window), "clist", widget);
-	gtk_object_set_data(GTK_OBJECT(window), "row", (gpointer)row);
-	gtk_object_set_data(GTK_OBJECT(window), "col", (gpointer)col);
+	gtk_object_set_data(GTK_OBJECT(window), "row", GINT_TO_POINTER (row));
+	gtk_object_set_data(GTK_OBJECT(window), "col", GINT_TO_POINTER (col));
 	gtk_object_set_data(GTK_OBJECT(window), "box",
 			    gtk_object_get_data(GTK_OBJECT(widget), "box"));
 

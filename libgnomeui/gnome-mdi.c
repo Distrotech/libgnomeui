@@ -41,6 +41,7 @@
 
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 
 static void            gnome_mdi_class_init     (GnomeMDIClass  *);
 static void            gnome_mdi_init           (GnomeMDI *);

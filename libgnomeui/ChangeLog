@@ -1,3 +1,16 @@
+1998-12-08  Herbert Valerio Riedel  <hvr@hvrlab.ml.org>
+
+	* gtk-ted.c: fixed some cast-warnings
+	* gnome-stock.c: fixed some cast-warnings
+	* gnome-mdi.c: added #include <string.h> for memcpy()
+	* gnome-href.c: added #include <string.h> for strlen()
+	* gnome-font-selector.[ch]: enforced use of const-ness and
+       	glib-typedefs  
+	* gnome-dns.c: GINT_TO_POINTER() instead of a mere (gpointer)
+	(gnome_dns_callback): same
+	* gnome-appbar.c: added #include <string.h> for strlen()
+	* gnome-init.c: added #include <esd.h> if HAVE_ESD
+
 1998-12-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkcauldron.c (get_gnome_number_entry_result): Make static.

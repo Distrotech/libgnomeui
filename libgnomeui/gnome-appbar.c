@@ -29,6 +29,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
+#include <string.h> /* for strlen */
+
 #include "gnome-uidefs.h"
 
 #define GNOME_ENABLE_DEBUG /* to be sure */

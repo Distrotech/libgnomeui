@@ -133,7 +133,7 @@ gnome_dns_server_req (gint server, const char *hostname) {
 	gdk_input_add(dns_server[server].pipefd[0],
 		      GDK_INPUT_READ,
 		      (GdkInputFunction) gnome_dns_callback,
-		      (gpointer) server);
+		      GINT_TO_POINTER (server));
 	write (dns_server[server].pipefd[1], hostname, strlen (hostname) + 1);
 }
 
@@ -293,7 +293,7 @@ static void gnome_dns_callback(gpointer serv_num, gint source,
 	gint j;
 	
 	/* cast it back to an integer */
-	server_num = (int) serv_num;
+	server_num = GPOINTER_TO_INT (serv_num);
 	
 #ifdef VERBOSE    
 	g_printf("callback called!\n");

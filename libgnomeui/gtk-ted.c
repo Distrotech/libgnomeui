@@ -319,7 +319,7 @@ gtk_ted_prepare_editable_widget (struct ted_widget_info *wi, GtkWidget *ted_tabl
 {
 	GtkWidget *w = wi->widget;
 	GtkWidget *window;
-	int tag;
+	gint tag;
 	
 	/* window is the actual widget, as it is packed inside a GtkAdjustment */
 	window = GTK_WIDGET (GTK_BIN (w)->child);
@@ -328,7 +328,7 @@ gtk_ted_prepare_editable_widget (struct ted_widget_info *wi, GtkWidget *ted_tabl
 	 * a gmc-specific hack;  the right fix is to find a way to disconnect the
 	 * "clicked" event
 	 */
-	tag = (int) gtk_object_get_data (GTK_OBJECT (window), "click-signal-tag");
+	tag = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (window), "click-signal-tag"));
 	if (tag)
 		gtk_signal_disconnect (GTK_OBJECT (window), tag);
 	
@@ -1096,7 +1096,7 @@ gtk_ted_orient_cb (GtkWidget *w, void *data)
 }
 
 static void
-gtk_ted_setup_radio (GtkWidget *vbox, GtkWidget *widget, char *str, struct ted_widget_info *wi, int idx, int active)
+gtk_ted_setup_radio (GtkWidget *vbox, GtkWidget *widget, gchar *str, struct ted_widget_info *wi, gint idx, gint active)
 {
 	if (active)
 		gtk_widget_set_state (GTK_WIDGET (widget), GTK_STATE_ACTIVE);
@@ -1106,7 +1106,7 @@ gtk_ted_setup_radio (GtkWidget *vbox, GtkWidget *widget, char *str, struct ted_w
 	gtk_signal_connect (GTK_OBJECT (widget), "toggled",
 			    GTK_SIGNAL_FUNC (gtk_ted_orient_cb), str);
 	gtk_object_set_data (GTK_OBJECT (widget), "ted_wi", wi);
-	gtk_object_set_data (GTK_OBJECT (widget), "index", (void *) idx);
+	gtk_object_set_data (GTK_OBJECT (widget), "index", GINT_TO_POINTER (idx));
 			     
 	gtk_box_pack_start_defaults (GTK_BOX (vbox), widget);
 	gtk_widget_show (widget);
@@ -1179,14 +1179,14 @@ gtk_ted_span_control (char *str, struct ted_widget_info *wi, int is_y)
 static void
 gtk_ted_pos_toggle (GtkWidget *widget, struct ted_widget_info *wi)
 {
-	int val = (int) gtk_object_get_data (GTK_OBJECT (widget), "value");
+	int val = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (widget), "value"));
 
 	wi->sticky ^= val;
 	gtk_ted_update_position (wi);
 }
 
 static void
-gtk_ted_pos_prep (GtkWidget *box, char *str, int val, struct ted_widget_info *wi)
+gtk_ted_pos_prep (GtkWidget *box, gchar *str, gint val, struct ted_widget_info *wi)
 {
 	GtkWidget *w;
 	
@@ -1195,7 +1195,7 @@ gtk_ted_pos_prep (GtkWidget *box, char *str, int val, struct ted_widget_info *wi
 	gtk_box_pack_start_defaults (GTK_BOX (box), w);
 	gtk_widget_show (w);
 	gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (gtk_ted_pos_toggle), wi);
-	gtk_object_set_data (GTK_OBJECT (w), "value", (void *) val);
+	gtk_object_set_data (GTK_OBJECT (w), "value", GINT_TO_POINTER (val));
 }
 
 static GtkWidget *

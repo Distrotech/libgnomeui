@@ -48,14 +48,14 @@
 
 struct _FontInfo
 {
-  char *family;         /* The font family this info struct describes. */
-  int *foundries;       /* An array of valid foundries. */
-  int *weights;         /* An array of valid weights. */
-  int *slants;          /* An array of valid slants. */
-  int *set_widths;      /* An array of valid set widths. */
-  int *spacings;        /* An array of valid spacings */
-  int **combos;         /* An array of valid combinations of the above 5 items */
-  int ncombos;          /* The number of elements in the "combos" array */
+  gchar *family;         /* The font family this info struct describes. */
+  gint *foundries;       /* An array of valid foundries. */
+  gint *weights;         /* An array of valid weights. */
+  gint *slants;          /* An array of valid slants. */
+  gint *set_widths;      /* An array of valid set widths. */
+  gint *spacings;        /* An array of valid spacings */
+  gint **combos;         /* An array of valid combinations of the above 5 items */
+  gint ncombos;          /* The number of elements in the "combos" array */
   GSList *fontnames;   /* An list of valid fontnames.
 			 * This is used to make sure a family/foundry/weight/slant/set_width
 			 *  combination is valid.
@@ -80,23 +80,26 @@ static void       text_set_width_callback (GtkWidget *, gpointer);
 static void       text_spacing_callback   (GtkWidget *, gpointer);
 static gint       text_size_key_function  (GtkWidget *, GdkEventKey *, gpointer);
 static void       text_font_item_update   (GtkWidget *, gpointer);
-static void       text_validate_combo     (GnomeFontSelector *, int);
+static void       text_validate_combo     (GnomeFontSelector *, gint);
 
 static void       text_get_fonts          (GnomeFontSelectorClass *klass);
-static void       text_insert_font        (FontInfo **, int *, char *);
-static GSList*    text_insert_field       (GSList *, char *, int);
-static char*      text_get_field          (char *, int);
-static int        text_field_to_index     (char **, int, char *);
-static int        text_is_xlfd_font_name  (char *);
+static void       text_insert_font        (FontInfo **, gint *, const gchar *);
+static GSList*    text_insert_field       (GSList *, const gchar *, gint);
+static gchar*     text_get_field          (const gchar *, gint);
+static gint       text_field_to_index     (gchar **,
+					   gint, const gchar *);
+static gint       text_is_xlfd_font_name  (const gchar *);
 
-static gchar *    text_get_xlfd           (double, int, char *, char *, char *,
-					   char *, char *, char *);
-static int        text_load_font          (GnomeFontSelector *);
+static gchar *    text_get_xlfd           (gdouble, gint, const gchar *,
+					   const gchar *, const gchar *,
+					   const gchar *, const gchar *,
+					   const gchar *);
+static gint       text_load_font          (GnomeFontSelector *);
 
 typedef GtkSignalFunc MenuItemCallback;
 typedef struct {
-  char *label;
-  int foo, bar;
+  gchar *label;
+  gint foo, bar;
   gpointer cb, cbdata, blah, baz;
   
 } MenuItem;
@@ -639,8 +642,8 @@ text_size_key_function (GtkWidget   *w,
 			gpointer     data)
 {
   GnomeFontSelector *text_tool;
-  char buffer[16];
-  int old_value;
+  gchar buffer[16];
+  gint old_value;
 
   text_tool = (GnomeFontSelector *) data;
 
@@ -662,7 +665,7 @@ text_size_key_function (GtkWidget   *w,
 
 static void
 text_validate_combo (GnomeFontSelector *text_tool,
-		     int       which)
+		     gint       which)
 {
   FontInfo *font;
   int which_val;
@@ -805,13 +808,13 @@ text_validate_combo (GnomeFontSelector *text_tool,
 static void
 text_get_fonts (GnomeFontSelectorClass *klass)
 {
-  char **fontnames;
-  char *fontname;
-  char *field;
+  gchar **fontnames;
+  gchar *fontname;
+  gchar *field;
   GSList * temp_list;
-  int num_fonts;
-  int index;
-  int i, j;
+  gint num_fonts;
+  gint index;
+  gint i, j;
 
   /* construct a valid font pattern */
 
@@ -966,14 +969,14 @@ text_get_fonts (GnomeFontSelectorClass *klass)
 }
 
 static void
-text_insert_font (FontInfo **table,
-		  int       *ntable,
-		  char      *fontname)
+text_insert_font (FontInfo    **table,
+		  gint        *ntable,
+		  const gchar *fontname)
 {
   FontInfo *temp_info;
-  char *family;
-  int lower, upper;
-  int middle, cmp;
+  gchar *family;
+  gint lower, upper;
+  gint middle, cmp;
 
   /* insert a fontname into a table */
   family = text_get_field (fontname, FAMILY);
@@ -1037,15 +1040,15 @@ text_insert_font (FontInfo **table,
 }
 
 static GSList *
-text_insert_field (GSList *  list,
-		   char     *fontname,
-		   int       field_num)
+text_insert_field (GSList      *list,
+		   const gchar *fontname,
+		   gint        field_num)
 {
   GSList *temp_list;
   GSList *prev_list;
   GSList *new_list;
-  char *field;
-  int cmp;
+  gchar *field;
+  gint cmp;
 
   field = text_get_field (fontname, field_num);
   if (!field)
@@ -1094,12 +1097,12 @@ text_insert_field (GSList *  list,
     return new_list;
 }
 
-static char*
-text_get_field (char *fontname,
-		int   field_num)
+static gchar*
+text_get_field (const gchar *fontname,
+		gint   field_num)
 {
-  char *t1, *t2;
-  char *field;
+  const gchar *t1, *t2;
+  gchar *field;
 
   /* we assume this is a valid fontname...that is, it has 14 fields */
 
@@ -1124,11 +1127,11 @@ text_get_field (char *fontname,
 }
 
 static int
-text_field_to_index (char **table,
-		     int    ntable,
-		     char  *field)
+text_field_to_index (gchar **table,
+		     gint  ntable,
+		     const gchar  *field)
 {
-  int i;
+  gint i;
 
   for (i = 0; i < ntable; i++)
     if (strcmp (field, table[i]) == 0)
@@ -1137,10 +1140,10 @@ text_field_to_index (char **table,
   return -1;
 }
 
-static int
-text_is_xlfd_font_name (char *fontname)
+static gint
+text_is_xlfd_font_name (const gchar *fontname)
 {
-  int i;
+  gint i;
 
   i = 0;
   while (*fontname)
@@ -1151,16 +1154,16 @@ text_is_xlfd_font_name (char *fontname)
 }
 
 static gchar *
-text_get_xlfd (double  size,
-	       int     size_type,
-	       char   *foundry,
-	       char   *family,
-	       char   *weight,
-	       char   *slant,
-	       char   *set_width,
-	       char   *spacing)
+text_get_xlfd (gdouble     size,
+	       gint        size_type,
+	       const gchar *foundry,
+	       const gchar *family,
+	       const gchar *weight,
+	       const gchar *slant,
+	       const gchar *set_width,
+	       const gchar *spacing)
 {
-  char pixel_size[12], point_size[12];
+  gchar pixel_size[12], point_size[12];
 
   if (size > 0)
     {
@@ -1190,19 +1193,19 @@ text_get_xlfd (double  size,
     return NULL;
 }
 
-static int
+static gint
 text_load_font (GnomeFontSelector *text_tool)
 {
   GdkFont *font;
   gchar *fontname;
-  double size;
-  char *size_text;
-  char *foundry_str;
-  char *family_str;
-  char *weight_str;
-  char *slant_str;
-  char *set_width_str;
-  char *spacing_str;
+  gdouble size;
+  gchar *size_text;
+  gchar *foundry_str;
+  gchar *family_str;
+  gchar *weight_str;
+  gchar *slant_str;
+  gchar *set_width_str;
+  gchar *spacing_str;
   GnomeFontSelectorClass *klass;
 
   klass = GNOME_FONT_SELECTOR_CLASS(GTK_OBJECT(text_tool)->klass);
@@ -1249,14 +1252,14 @@ text_load_font (GnomeFontSelector *text_tool)
 gchar *
 gnome_font_selector_get_selected (GnomeFontSelector *text_tool)
 {
-  double size;
-  char *size_text;
-  char *foundry_str;
-  char *family_str;
-  char *weight_str;
-  char *slant_str;
-  char *set_width_str;
-  char *spacing_str;
+  gdouble size;
+  gchar *size_text;
+  gchar *foundry_str;
+  gchar *family_str;
+  gchar *weight_str;
+  gchar *slant_str;
+  gchar *set_width_str;
+  gchar *spacing_str;
   GnomeFontSelectorClass *klass;
 
   klass = GNOME_FONT_SELECTOR_CLASS(GTK_OBJECT(text_tool)->klass);

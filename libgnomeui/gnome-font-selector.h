@@ -40,7 +40,7 @@ struct _GnomeFontSelectorClass
   GtkDialogClass parent_class;
 
   FontInfo **font_info;
-  int nfonts;
+  gint nfonts;
 
   GSList *foundries;
   GSList *weights;
@@ -48,19 +48,19 @@ struct _GnomeFontSelectorClass
   GSList *set_widths;
   GSList *spacings;
 
-  char **foundry_array;
-  char **weight_array;
-  char **slant_array;
-  char **set_width_array;
-  char **spacing_array;
+  gchar **foundry_array;
+  gchar **weight_array;
+  gchar **slant_array;
+  gchar **set_width_array;
+  gchar **spacing_array;
 
-  int nfoundries;
-  int nweights;
-  int nslants;
-  int nset_widths;
-  int nspacings;
+  gint nfoundries;
+  gint nweights;
+  gint nslants;
+  gint nset_widths;
+  gint nspacings;
 
-  void *text_options;
+  gpointer text_options;
 };
 
 struct _GnomeFontSelector
@@ -84,13 +84,13 @@ struct _GnomeFontSelector
   GtkWidget **spacing_items;
   GtkWidget *antialias_toggle;
   GdkFont *font;
-  int font_index;
-  int size_type;
-  int foundry;
-  int weight;
-  int slant;
-  int set_width;
-  int spacing;
+  gint font_index;
+  gint size_type;
+  gint foundry;
+  gint weight;
+  gint slant;
+  gint set_width;
+  gint spacing;
 };
 
 guint gnome_font_selector_get_type(void);
@@ -105,3 +105,7 @@ gchar *gnome_font_select_with_default(const gchar *);
 END_GNOME_DECLS
 
 #endif /* __GNOME_FONT_SELECTOR_H__ */
+
+
+
+

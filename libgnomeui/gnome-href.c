@@ -16,6 +16,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <string.h> /* for strlen */
+
 #include <gtk/gtklabel.h>
 #include <libgnome/gnome-url.h>
 #include "gnome-href.h"

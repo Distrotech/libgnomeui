@@ -19,6 +19,10 @@
 #include <alloca.h>
 #endif
 
+#ifdef HAVE_ESD
+#include <esd.h>
+#endif
+
 #include "libgnome/libgnomeP.h"
 #include "libgnome/gnome-popt.h"
 #include "gnome-preferences.h"
