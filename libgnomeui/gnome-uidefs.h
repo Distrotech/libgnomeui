@@ -114,7 +114,7 @@
 #define GNOME_KEY_NAME_UNDO_MOVE        'z'
 #define GNOME_KEY_MOD_UNDO_MOVE         (GDK_CONTROL_MASK)
 
-#define GNOME_KEY_NAME_PAUSE_GAME       0
+#define GNOME_KEY_NAME_PAUSE_GAME       GDK_Pause
 #define GNOME_KEY_MOD_PAUSE_GAME        (0)
 #define GNOME_KEY_NAME_NEW_GAME         'n'
 #define GNOME_KEY_MOD_NEW_GAME          (GDK_CONTROL_MASK)
