@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2002-05-27 16:51+0200\n"
+"POT-Creation-Date: 2002-06-02 11:28+0200\n"
 "PO-Revision-Date: 2002-05-23 15:55+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -168,23 +168,23 @@ msgstr "Fjern forbindelse til sesjonsbehandler"
 msgid "Session management"
 msgstr "Sesjonshåndtering"
 
-#: libgnomeui/gnome-client.c:2510
+#: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
 msgstr "Avbryt utlogging"
 
-#: libgnomeui/gnome-color-picker.c:407
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Mottok ugyldige fargedata\n"
 
-#: libgnomeui/gnome-color-picker.c:457
+#: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
 msgstr "Fargevelger"
 
-#: libgnomeui/gnome-color-picker.c:458
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "Åpne en dialog for å spesifisere fargen"
 
-#: libgnomeui/gnome-color-picker.c:480
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Velg en farge"
 
@@ -253,7 +253,7 @@ msgstr "Velg tid"
 msgid "Select the time from a list"
 msgstr "Velg tiden fra en liste"
 
-#: libgnomeui/gnome-dateedit.c:1001
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date har gått ut, bruk gnome_date_edit_get_time"
 
@@ -392,7 +392,7 @@ msgstr "Farge brukt til å tegne lenken"
 msgid "This button will take you to the URI that it displays."
 msgstr "Denne knappen vil ta deg til URIen som vises."
 
-#: libgnomeui/gnome-href.c:392
+#: libgnomeui/gnome-href.c:393
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -518,6 +518,7 @@ msgstr "Hint for oppføring 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -575,6 +576,7 @@ msgid "_Game"
 msgstr "_Spill"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -765,11 +767,11 @@ msgstr "Konfigurer applikasjonen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om denne applikasjonen"
 
@@ -796,7 +798,7 @@ msgstr "Opprett et nytt vindu"
 msgid "_Close This Window"
 msgstr "L_ukk dette vinduet"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Lukk aktivt vindu"
 
@@ -876,23 +878,23 @@ msgstr "_Innhold"
 msgid "View help for this application"
 msgstr "Vis hjelp for denne applikasjonen"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2520
 msgid "Text Below Icons"
 msgstr "Tekst under ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2519
+#: libgnomeui/gnome-app-helper.c:2521
 msgid "Priority Text Beside Icons"
 msgstr "Prioritetstekst ved siden av ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2522
 msgid "Icons Only"
 msgstr "Kun ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2523
 msgid "Text Only"
 msgstr "Kun tekst"
 
-#: libgnomeui/gnome-app-helper.c:2582
+#: libgnomeui/gnome-app-helper.c:2584
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Bruk forvalg for skrivebord (%s)"
@@ -1249,37 +1251,37 @@ msgid ""
 msgstr ""
 "Her skal du skrive inn navnet på katalogen hvor ikonbildene er lokalisert."
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: «%s» eksisterer ikke eller er ikke en katalog"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: kunne ikke åpne katalog «%s»"
 
-#: libgnomeui/gnome-icon-sel.c:407
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "Laster ikoner..."
 
-#: libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
 msgstr "Informasjon"
 
-#: libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
 msgstr "Advarsel"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
 msgstr "Feil"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
 msgstr "Spørsmål"
 
-#: libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Beskjed"
 
@@ -1322,16 +1324,17 @@ msgstr "Poengsum"
 #. %d is day of month, %m is month number, %T full hour,
 #. %H hours, %M minutes, %S seconds
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:198
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
-#: libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:399
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Avslutt testprogrammet"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avslutt testprogrammet"
 
 #~ msgid "Exit the program"
 #~ msgstr "Avslutt programmet"
