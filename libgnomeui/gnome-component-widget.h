@@ -97,6 +97,23 @@ gnome_selector_client_set_entry_text        (GnomeSelectorClient   *client,
 void
 gnome_selector_client_activate_entry        (GnomeSelectorClient   *client);
 
+void
+gnome_selector_client_check_uri             (GnomeSelectorClient   *client,
+                                             GnomeAsyncHandle     **handle_return,
+                                             const gchar           *uri,
+					     gboolean               directory_ok,
+                                             guint                  timeout_msec,
+                                             GnomeAsyncFunc         async_func,
+                                             gpointer               user_data);
+
+void
+gnome_selector_client_scan_directory        (GnomeSelectorClient   *client,
+                                             GnomeAsyncHandle     **handle_return,
+                                             const gchar           *uri,
+                                             guint                  timeout_msec,
+                                             GnomeAsyncFunc         async_func,
+                                             gpointer               user_data);
+
 /* Get/set URI. */
 
 gchar *

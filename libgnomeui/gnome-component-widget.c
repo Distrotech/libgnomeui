@@ -622,6 +622,67 @@ gnome_selector_client_get_uri (GnomeSelectorClient *client)
 }
 
 void
+gnome_selector_client_check_uri (GnomeSelectorClient  *client,
+				 GnomeAsyncHandle    **async_handle_return,
+				 const gchar          *uri,
+				 gboolean              directory_ok,
+				 guint                 timeout_msec,
+				 GnomeAsyncFunc        async_func,
+				 gpointer              user_data)
+{
+    CORBA_Environment ev;
+    GnomeAsyncHandle *async_handle;
+    GNOME_Selector_AsyncData *async_data;
+
+    g_return_if_fail (client != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (client));
+
+    async_handle = gnome_async_context_get (client->_priv->async_ctx, GNOME_ASYNC_TYPE_CHECK_URI, 
+					    async_func, G_OBJECT (client), uri, user_data,
+					    NULL);
+    if (async_handle_return) {
+	*async_handle_return = async_handle;
+	gnome_async_handle_ref (async_handle);
+    }
+
+    async_data = gnome_selector_client_create_async_data (client, uri, async_handle);
+
+    CORBA_exception_init (&ev);
+    GNOME_Selector_checkURI (client->_priv->selector, uri, directory_ok, async_data, &ev);
+    CORBA_exception_free (&ev);
+}
+
+void
+gnome_selector_client_scan_directory (GnomeSelectorClient  *client,
+				      GnomeAsyncHandle    **async_handle_return,
+				      const gchar          *uri,
+				      guint                 timeout_msec,
+				      GnomeAsyncFunc        async_func,
+				      gpointer              user_data)
+{
+    CORBA_Environment ev;
+    GnomeAsyncHandle *async_handle;
+    GNOME_Selector_AsyncData *async_data;
+
+    g_return_if_fail (client != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (client));
+
+    async_handle = gnome_async_context_get (client->_priv->async_ctx, GNOME_ASYNC_TYPE_SCAN_DIRECTORY, 
+					    async_func, G_OBJECT (client), uri, user_data,
+					    NULL);
+    if (async_handle_return) {
+	*async_handle_return = async_handle;
+	gnome_async_handle_ref (async_handle);
+    }
+
+    async_data = gnome_selector_client_create_async_data (client, uri, async_handle);
+
+    CORBA_exception_init (&ev);
+    GNOME_Selector_scanDirectory (client->_priv->selector, uri, async_data, &ev);
+    CORBA_exception_free (&ev);
+}
+
+void
 gnome_selector_client_set_uri (GnomeSelectorClient  *client,
 			       GnomeAsyncHandle    **async_handle_return,
                                const gchar          *uri,
