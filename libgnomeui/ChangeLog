@@ -1,3 +1,8 @@
+Sun Feb 14 22:12:48 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-entry.c: don't let the file entry expand verticaly when the
+	  window gets resized
+
 1999-02-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dentry-edit.c (fill_easy_page): The terminal toggle should

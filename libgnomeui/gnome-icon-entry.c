@@ -355,7 +355,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 
 
 		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->pick_dialog)->vbox),
-				   ientry->fentry, TRUE, FALSE, 0);
+				   ientry->fentry, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->pick_dialog)->vbox),
 				   iconsel, TRUE, TRUE, 0);
 
