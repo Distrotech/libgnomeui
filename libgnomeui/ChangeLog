@@ -1,3 +1,8 @@
+Sun Jul  1 12:18:32 2001  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page.c (gnome_druid_page_new): Add a way to get a
+	druid.
+
 Tue Jun 26 23:27:58 2001  Jonathan Blandford  <jrb@redhat.com>
  
  	* gnome-druid.c (gnome_druid_set_property): Add Param support.

@@ -57,15 +57,15 @@ GNOME_CLASS_BOILERPLATE (GnomeDruidPage, gnome_druid_page,
 			 GtkBin, gtk_bin)
 
 static void
-gnome_druid_page_class_init (GnomeDruidPageClass *klass)
+gnome_druid_page_class_init (GnomeDruidPageClass *class)
 {
 	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 
-	object_class = (GtkObjectClass*) klass;
-	gobject_class = (GObjectClass*) klass;
-	widget_class = (GtkWidgetClass*) klass;
+	object_class = (GtkObjectClass*) class;
+	gobject_class = (GObjectClass*) class;
+	widget_class = (GtkWidgetClass*) class;
 
 	druid_page_signals[NEXT] = 
 		gtk_signal_new ("next",
@@ -108,18 +108,19 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_WIDGET);
 
-	object_class->destroy = gnome_druid_page_destroy;
 	gobject_class->finalize = gnome_druid_page_finalize;
 
-	klass->next = NULL;
-	klass->prepare = NULL;
-	klass->back = NULL;
-	klass->finish = NULL;
+	object_class->destroy = gnome_druid_page_destroy;
 
 	widget_class->size_request = gnome_druid_page_size_request;
 	widget_class->size_allocate = gnome_druid_page_size_allocate;
 	widget_class->expose_event = gnome_druid_page_expose;
 	widget_class->realize = gnome_druid_page_realize;
+	     
+	class->next = NULL;
+	class->prepare = NULL;
+	class->back = NULL;
+	class->finish = NULL;
 }
 
 
@@ -269,6 +270,24 @@ gnome_druid_page_realize (GtkWidget *widget)
 	widget->style = gtk_style_attach (widget->style, widget->window);
 	gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
 }
+
+
+/**
+ * gnome_druid_page_new:
+ * @void: 
+ * 
+ * Creates a new #GnomeDruidPage.
+ * 
+ * Return value: The newly created #GnomeDruidPage.
+ **/
+GtkWidget *
+gnome_druid_page_new (void)
+{
+     GtkWidget *widget = (GtkWidget *) gtk_type_new (GNOME_TYPE_DRUID_PAGE);
+
+     return widget;
+}
+
 /**
  * gnome_druid_page_next:
  * @druid_page: A DruidPage widget.

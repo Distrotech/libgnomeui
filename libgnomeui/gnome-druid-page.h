@@ -67,14 +67,14 @@ struct _GnomeDruidPageClass
 };
 
 
-GtkType  gnome_druid_page_get_type		(void) G_GNUC_CONST;
-
+GtkType    gnome_druid_page_get_type            (void) G_GNUC_CONST;
+GtkWidget *gnome_druid_page_new                 (void);
 /* These are really to be only called from GnomeDruid */
-gboolean gnome_druid_page_next			(GnomeDruidPage *druid_page);
-void     gnome_druid_page_prepare		(GnomeDruidPage *druid_page);
-gboolean gnome_druid_page_back			(GnomeDruidPage *druid_page);
-gboolean gnome_druid_page_cancel		(GnomeDruidPage *druid_page);
-void     gnome_druid_page_finish		(GnomeDruidPage *druid_page);
+gboolean   gnome_druid_page_next                (GnomeDruidPage *druid_page);
+void       gnome_druid_page_prepare             (GnomeDruidPage *druid_page);
+gboolean   gnome_druid_page_back                (GnomeDruidPage *druid_page);
+gboolean   gnome_druid_page_cancel              (GnomeDruidPage *druid_page);
+void       gnome_druid_page_finish              (GnomeDruidPage *druid_page);
 
 G_END_DECLS
 
