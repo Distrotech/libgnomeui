@@ -496,8 +496,8 @@ gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 			  (gpointer)at);
     }
 
-  gtk_accelerator_table_install(at, GTK_OBJECT(menuinfo_item->widget),
-				signal_name,
-				menuinfo_item->accelerator_key,
-				menuinfo_item->ac_mods);
+  gtk_widget_install_accelerator(GTK_WIDGET(menuinfo_item->widget), at,
+				   signal_name,
+				   menuinfo_item->accelerator_key,
+				   menuinfo_item->ac_mods);
 }
