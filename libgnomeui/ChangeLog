@@ -1,3 +1,7 @@
+2000-01-12  Martijn van Beers  <martijn@earthling.net>
+
+        * gnome-gconf.[ch]: added get/set functions for GtkSpinButton
+
 2000-01-11  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-gconf.h: added more functions.
