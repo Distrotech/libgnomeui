@@ -1,3 +1,7 @@
+1999-06-24    <jrb@redhat.com>
+
+	* gnome-druid*.[ch]:  Added gnome-druid to gnome-libs.
+
 1999-06-24  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-dock.c (gnome_dock_size_allocate): set minimum child
