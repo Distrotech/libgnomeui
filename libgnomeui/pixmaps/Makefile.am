@@ -102,5 +102,5 @@ CLEANFILES = $(BUILT_SOURCES)
 
 gnome-stock-pixbufs.h: @MAKE_INLINE_PIXBUF@ $(stock_images)
 	-rm -f gnome-stock-pixbufs.h
-	vars=`echo "$(stock_images)" | sed -e 's,stock_\([^\.]*\)\.png,stock_\1 stock_\1.png,g'`; @MAKE_INLINE_PIXBUF@ pixbufs-tmp $$vars && cat $(srcdir)/copyright.txt pixbufs-tmp > gnome-stock-pixbufs.h
+	vars=`echo "$(stock_images)" | sed -e 's,stock_\([^\.]*\)\.png,stock_\1 $(srcdir)/stock_\1.png,g'`; @MAKE_INLINE_PIXBUF@ pixbufs-tmp $$vars && cat $(srcdir)/copyright.txt pixbufs-tmp > gnome-stock-pixbufs.h
 	-rm -f pixbufs-tmp
