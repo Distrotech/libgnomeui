@@ -12,3 +12,8 @@ winhints_demo
 stock_demo
 ted_demo
 animator_demo
+gnome.defs
+gnometypebuiltins.h
+gnometypebuiltins_evals.c
+gnometypebuiltins_ids.c
+gnometypebuiltins_vars.c
