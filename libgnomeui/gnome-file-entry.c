@@ -2,7 +2,8 @@
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
- * Author: Federico Mena <federico@nuclecu.unam.mx>
+ * Authors: Federico Mena <federico@nuclecu.unam.mx>
+ *          Miguel de Icaza <miguel@kernel.org>
  */
 
 #include <gtk/gtkbutton.h>
@@ -21,6 +22,12 @@ static void gnome_file_entry_finalize   (GtkObject           *object);
 
 static GtkHBoxClass *parent_class;
 
+enum {
+        VALUE_CHANGED_SIGNAL,
+        LAST_SIGNAL
+};
+
+static gint gnome_file_entry_signals[LAST_SIGNAL] = {0};
 
 guint
 gnome_file_entry_get_type (void)
@@ -50,10 +57,18 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	GtkObjectClass *object_class;
 
 	object_class = (GtkObjectClass *) class;
-
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
-
 	object_class->finalize = gnome_file_entry_finalize;
+
+        gnome_file_entry_signals [VALUE_CHANGED_SIGNAL] =
+                gtk_signal_new("value_changed",
+                               GTK_RUN_LAST,
+                               object_class->type,
+                               GTK_SIGNAL_OFFSET(GnomeFileEntryClass, value_changed),
+			       gtk_signal_default_marshaller, 
+                               GTK_TYPE_NONE, 0);
+	
+	gtk_object_class_add_signals (object_class, gnome_file_entry_signals, LAST_SIGNAL);
 }
 
 static void
@@ -68,7 +83,7 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	entry = gnome_file_entry_gtk_entry (fentry);
 
 	gtk_entry_set_text (GTK_ENTRY (entry), gtk_file_selection_get_filename (fs));
-
+	gtk_signal_emit (GTK_OBJECT (fentry), gnome_file_entry_signals [VALUE_CHANGED_SIGNAL]);
 	gtk_widget_destroy (GTK_WIDGET (fs));
 }
 
@@ -131,6 +146,12 @@ realize (GtkObject *object, GtkEntry *entry)
 }
 
 static void
+entry_changed (GtkWidget *gtkentry, GdkEvent *event, GnomeFileEntry *fentry)
+{
+	gtk_signal_emit (GTK_OBJECT (fentry), gnome_file_entry_signals [VALUE_CHANGED_SIGNAL]);
+}
+
+static void
 gnome_file_entry_init (GnomeFileEntry *fentry)
 {
 	GtkWidget *button, *the_gtk_entry;
@@ -141,6 +162,10 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 
 	fentry->gentry = gnome_entry_new (NULL);
 	the_gtk_entry = gnome_file_entry_gtk_entry (fentry);
+	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "button_press_event",
+			    (entry_changed), fentry);
+	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "key_press_event",
+			    (entry_changed), fentry);
 	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "realize", GTK_SIGNAL_FUNC(realize), the_gtk_entry);
 	
 	gtk_box_pack_start (GTK_BOX (fentry), fentry->gentry, TRUE, TRUE, 0);

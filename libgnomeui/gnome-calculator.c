@@ -111,6 +111,8 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 	GtkObjectClass *object_class;
 
 	object_class = (GtkObjectClass *) class;
+	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	object_class->destroy = gnome_calculator_destroy;
 
 	gnome_calculator_signals[RESULT_CHANGED_SIGNAL] =
 		gtk_signal_new("result_changed",
@@ -123,10 +125,8 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 			       1,
 			       GTK_TYPE_DOUBLE);
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
-
-	object_class->destroy = gnome_calculator_destroy;
 	class->result_changed = NULL;
+	gtk_object_class_add_signals (object_class, gnome_calculator_signals, LAST_SIGNAL);
 }
 
 #if 0 /*only used for debugging*/
