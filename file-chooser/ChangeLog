@@ -1,3 +1,8 @@
+2003-12-10  Federico Mena Quintero  <federico@ximian.com>
+
+	* testfilechooser.c (main): Dramatically improved the usability of
+	the extra widget through careful word choice.
+
 2003-11-18  Federico Mena Quintero  <federico@ximian.com>
 
 	* configure.ac: Added a libgnomeui dependency.
