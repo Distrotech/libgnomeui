@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-01-29 12:22+0100\n"
-"PO-Revision-Date: 2002-01-03 23:00+0000\n"
+"POT-Creation-Date: 2002-02-10 02:20+0000\n"
+"PO-Revision-Date: 2002-02-10 02:20+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <none@none.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Author"
 msgstr "Autor"
 
-#: libgnomeui/gnome-about.c:94 libgnomeui/gnome-about.c:270
+#: libgnomeui/gnome-about.c:94 libgnomeui/gnome-about.c:284
 msgid "Authors"
 msgstr "Autores"
 
@@ -26,85 +26,85 @@ msgstr "Autores"
 msgid "Documenter"
 msgstr "Documentador"
 
-#: libgnomeui/gnome-about.c:118 libgnomeui/gnome-about.c:281
+#: libgnomeui/gnome-about.c:118 libgnomeui/gnome-about.c:295
 msgid "Documenters"
 msgstr "Documentadores"
 
-#: libgnomeui/gnome-about.c:146 libgnomeui/gnome-about.c:293
+#: libgnomeui/gnome-about.c:146 libgnomeui/gnome-about.c:307
 msgid "Translator credits"
 msgstr "Créditos de tradutores"
 
-#: libgnomeui/gnome-about.c:240
+#: libgnomeui/gnome-about.c:254
 msgid "Program name"
 msgstr "Nome aplicação"
 
-#: libgnomeui/gnome-about.c:241
+#: libgnomeui/gnome-about.c:255
 msgid "The name of the program"
 msgstr "O nome da aplicação"
 
-#: libgnomeui/gnome-about.c:248
+#: libgnomeui/gnome-about.c:262
 msgid "Program version"
 msgstr "Versão aplicação"
 
-#: libgnomeui/gnome-about.c:249
+#: libgnomeui/gnome-about.c:263
 msgid "The version of the program"
 msgstr "A versão da aplicação"
 
-#: libgnomeui/gnome-about.c:255
+#: libgnomeui/gnome-about.c:269
 msgid "Copyright string"
 msgstr "Texto de copyright"
 
-#: libgnomeui/gnome-about.c:256
+#: libgnomeui/gnome-about.c:270
 msgid "Copyright information for the program"
 msgstr "Informação de copyright da aplicação"
 
-#: libgnomeui/gnome-about.c:263
+#: libgnomeui/gnome-about.c:277
 msgid "Comments string"
 msgstr "Texto de comentários"
 
-#: libgnomeui/gnome-about.c:264
+#: libgnomeui/gnome-about.c:278
 msgid "Comments about the program"
 msgstr "Comentários sobre a aplicação"
 
-#: libgnomeui/gnome-about.c:271
+#: libgnomeui/gnome-about.c:285
 msgid "List of authors of the programs"
 msgstr "Listagem dos autores da aplicação"
 
-#: libgnomeui/gnome-about.c:273
+#: libgnomeui/gnome-about.c:287
 msgid "Author entry"
 msgstr "Registo autor"
 
-#: libgnomeui/gnome-about.c:274
+#: libgnomeui/gnome-about.c:288
 msgid "A single author entry"
 msgstr "Um registo único de autor"
 
-#: libgnomeui/gnome-about.c:282
+#: libgnomeui/gnome-about.c:296
 msgid "List of people documenting the program"
 msgstr "Listagem de pessoas que documentam a aplicação"
 
-#: libgnomeui/gnome-about.c:284
+#: libgnomeui/gnome-about.c:298
 msgid "Documenter entry"
 msgstr "Registo documentador"
 
-#: libgnomeui/gnome-about.c:285
+#: libgnomeui/gnome-about.c:299
 msgid "A single documenter entry"
 msgstr "Um registo único de documentador"
 
-#: libgnomeui/gnome-about.c:294
+#: libgnomeui/gnome-about.c:308
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Crédito aos tradutores. Esta expressão deverá ser marcada como traduzível"
 
-#: libgnomeui/gnome-about.c:301 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:315 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logotipo"
 
-#: libgnomeui/gnome-about.c:302
+#: libgnomeui/gnome-about.c:316
 msgid "A logo for the about box"
 msgstr "Um logotipo para a caixa sobre"
 
-#: libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:379
 #, c-format
 msgid "About %s"
 msgstr "Sobre %s"
@@ -550,6 +550,7 @@ msgstr "Dica para item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -607,6 +608,7 @@ msgid "_Game"
 msgstr "Jo_go"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -797,11 +799,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -828,7 +830,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Fechar a janela actual"
 
@@ -902,21 +904,20 @@ msgstr "Terminar o jogo actual"
 
 #: libgnomeui/gnome-app-helper.c:2573
 msgid "Both text and icons"
-msgstr ""
+msgstr "Ambos texto e ícones"
 
 #: libgnomeui/gnome-app-helper.c:2574
 msgid "Icons only"
-msgstr ""
+msgstr "Apenas ícones"
 
 #: libgnomeui/gnome-app-helper.c:2575
-#, fuzzy
 msgid "Text only"
-msgstr "Texto"
+msgstr "Apenas texto"
 
 #: libgnomeui/gnome-app-helper.c:2626
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr ""
+msgstr "Utilizar defeito do ambiente de trabalho (%s)"
 
 #: libgnomeui/gnome-app-util.c:103
 msgid " (press return)"
@@ -1174,6 +1175,10 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Sair do teste"
+
 #~ msgid "Background"
 #~ msgstr "Fundo"
 
@@ -1251,6 +1256,3 @@ msgstr "Sans 14"
 
 #~ msgid "Helvetical Medium 12"
 #~ msgstr "Helvetical Médio 12"
-
-#~ msgid "Exit the test"
-#~ msgstr "Sair do teste"
