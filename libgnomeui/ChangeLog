@@ -1,3 +1,10 @@
+2001-02-11  Ettore Perazzoli  <ettore@ximian.com>
+
+	* gnome-dock-item.c (gnome_dock_item_button_changed): When
+	starting a drag, set the "gnome_dock_item_pre_drag_orientation"
+	data to the current orientation value.
+	(gnome_dock_item_detach): Set the orientation to that value.
+
 2001-01-22  Miguel de Icaza  <miguel@ximian.com>
 
 	* gnome-dialog.c (gnome_dialog_set_default): Do not grab focus.

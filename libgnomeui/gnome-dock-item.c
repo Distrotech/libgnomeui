@@ -904,6 +904,10 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
 
           gnome_dock_item_grab_pointer (di);
 
+	  gtk_object_set_data (GTK_OBJECT (di),
+			       "gnome_dock_item_pre_drag_orientation",
+			       GINT_TO_POINTER (di->orientation));
+
           gtk_signal_emit (GTK_OBJECT (widget),
                            dock_item_signals[DOCK_DRAG_BEGIN]);
 
@@ -1274,6 +1278,7 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
 {
   GtkRequisition requisition;
   GtkAllocation allocation;
+  GtkOrientation pre_drag_orientation;
 
   if (item->behavior & GNOME_DOCK_ITEM_BEH_NEVER_FLOATING)
     return FALSE;
@@ -1285,6 +1290,10 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
 
   if (! GTK_WIDGET_REALIZED (item))
     return TRUE;
+
+  pre_drag_orientation = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (item),
+							       "gnome_dock_item_pre_drag_orientation"));
+  gnome_dock_item_set_orientation (item, pre_drag_orientation);
 
   gtk_widget_size_request (GTK_WIDGET (item), &requisition);
 
