@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -52,14 +52,14 @@ typedef struct _GnomeImageSelectorPrivate GnomeImageSelectorPrivate;
 typedef struct _GnomeImageSelectorClass   GnomeImageSelectorClass;
 
 struct _GnomeImageSelector {
-	GnomeSelectorClient client;
+    GnomeSelectorClient client;
 
-	/*< private >*/
-	GnomeImageSelectorPrivate *_priv;
+    /*< private >*/
+    GnomeImageSelectorPrivate *_priv;
 };
 
 struct _GnomeImageSelectorClass {
-	GnomeSelectorClientClass parent_class;
+    GnomeSelectorClientClass parent_class;
 };
 
 

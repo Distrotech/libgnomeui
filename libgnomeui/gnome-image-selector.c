@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -56,87 +56,87 @@ static GnomeSelectorClientClass *parent_class;
 GType
 gnome_image_selector_get_type (void)
 {
-	static GType selector_type = 0;
+    static GType selector_type = 0;
 
-	if (!selector_type) {
-		GtkTypeInfo selector_info = {
-			"GnomeImageSelector",
-			sizeof (GnomeImageSelector),
-			sizeof (GnomeImageSelectorClass),
-			(GtkClassInitFunc) gnome_image_selector_class_init,
-			(GtkObjectInitFunc) gnome_image_selector_init,
-			NULL,
-			NULL,
-			NULL
-		};
+    if (!selector_type) {
+	GtkTypeInfo selector_info = {
+	    "GnomeImageSelector",
+	    sizeof (GnomeImageSelector),
+	    sizeof (GnomeImageSelectorClass),
+	    (GtkClassInitFunc) gnome_image_selector_class_init,
+	    (GtkObjectInitFunc) gnome_image_selector_init,
+	    NULL,
+	    NULL,
+	    NULL
+	};
 
-		selector_type = gtk_type_unique (gnome_selector_client_get_type (), &selector_info);
-	}
+	selector_type = gtk_type_unique (gnome_selector_client_get_type (), &selector_info);
+    }
 
-	return selector_type;
+    return selector_type;
 }
 
 static void
 gnome_image_selector_class_init (GnomeImageSelectorClass *class)
 {
-	GtkObjectClass *object_class;
-	GObjectClass *gobject_class;
+    GtkObjectClass *object_class;
+    GObjectClass *gobject_class;
 
-	object_class = (GtkObjectClass *) class;
-	gobject_class = (GObjectClass *) class;
+    object_class = (GtkObjectClass *) class;
+    gobject_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gnome_selector_client_get_type ());
+    parent_class = gtk_type_class (gnome_selector_client_get_type ());
 
-	gobject_class->finalize = gnome_image_selector_finalize;
+    gobject_class->finalize = gnome_image_selector_finalize;
 }
 
 static void
 gnome_image_selector_init (GnomeImageSelector *gselector)
 {
-	gselector->_priv = g_new0 (GnomeImageSelectorPrivate, 1);
+    gselector->_priv = g_new0 (GnomeImageSelectorPrivate, 1);
 }
 
 GtkWidget *
 gnome_image_selector_new (void)
 {
-	GnomeImageSelector *iselector;
+    GnomeImageSelector *iselector;
 
-	iselector = g_object_new (gnome_image_selector_get_type (),
-				  NULL);
+    iselector = g_object_new (gnome_image_selector_get_type (),
+			      NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct
-		(GNOME_SELECTOR_CLIENT (iselector),
-		 "OAFIID:GNOME_UI_Component_IconSelector",
-		 CORBA_OBJECT_NIL);
+    return (GtkWidget *) gnome_selector_client_construct
+	(GNOME_SELECTOR_CLIENT (iselector),
+	 "OAFIID:GNOME_UI_Component_IconSelector",
+	 CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
 gnome_image_selector_new_from_selector (GNOME_Selector     corba_selector,
 					Bonobo_UIContainer uic)
 {
-	GnomeImageSelector *iselector;
+    GnomeImageSelector *iselector;
 
-	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-	iselector = g_object_new (gnome_image_selector_get_type (), NULL);
+    iselector = g_object_new (gnome_image_selector_get_type (), NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct_from_objref
-		(GNOME_SELECTOR_CLIENT (iselector), corba_selector, uic);
+    return (GtkWidget *) gnome_selector_client_construct_from_objref
+	(GNOME_SELECTOR_CLIENT (iselector), corba_selector, uic);
 }
 
 static void
 gnome_image_selector_finalize (GObject *object)
 {
-	GnomeImageSelector *iselector;
+    GnomeImageSelector *iselector;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_IMAGE_SELECTOR (object));
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_IMAGE_SELECTOR (object));
 
-	iselector = GNOME_IMAGE_SELECTOR (object);
+    iselector = GNOME_IMAGE_SELECTOR (object);
 
-	g_free (iselector->_priv);
-	iselector->_priv = NULL;
+    g_free (iselector->_priv);
+    iselector->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+    if (G_OBJECT_CLASS (parent_class)->finalize)
+	(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
