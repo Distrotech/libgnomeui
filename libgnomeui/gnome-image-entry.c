@@ -39,7 +39,7 @@
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
-#include <libgnomeui/gnome-image-entry-component.h>
+#include <components/gnome-image-entry-component.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include "gnome-image-entry.h"
 

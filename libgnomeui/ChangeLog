@@ -1,3 +1,9 @@
+Sun May 20 23:15:50 2001  George Lebl <jirka@5z.com>
+
+	* gnome-image-selector.c, gnome-image-entry.c: include the component
+	  header from the right directory, components/ to make this beast
+	  compile ... yay!
+
 2001-05-20  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-component.c
