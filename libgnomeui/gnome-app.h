@@ -37,10 +37,10 @@ struct _GnomeApp {
 	GtkWindow parent_object;
 
 	/* Application name. */
-	char *name;
+	gchar *name;
 
 	/* Prefix for gnome-config (used to save the layout).  */
-	char *prefix;
+	gchar *prefix;
 
         /* The dock.  */
         GtkWidget *dock;
@@ -81,10 +81,10 @@ GtkType gnome_app_get_type (void);
  * internally as an identifier).  The window title can be left as NULL, in which case the window's
  * title will not be set.
  */
-GtkWidget *gnome_app_new (gchar *appname, char *title);
+GtkWidget *gnome_app_new (const gchar *appname, const gchar *title);
 
 /* Constructor for language bindings; you don't normally need this. */
-void gnome_app_construct (GnomeApp *app, gchar *appname, char *title);
+void gnome_app_construct (GnomeApp *app, const gchar *appname, const gchar *title);
 
 /* Sets the menu bar of the application window */
 void gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar);

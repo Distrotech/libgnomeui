@@ -411,7 +411,7 @@ gfloat gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper)
 
 void
 gnome_paper_selector_set_name	(GnomePaperSelector *gspaper,
-				 gchar *name)
+				 const gchar *name)
 {
   const GnomePaper *paper;
   const GnomeUnit *unit;

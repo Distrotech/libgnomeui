@@ -146,7 +146,7 @@ GtkWidget *gtk_clock_new(GtkClockType type)
 	return GTK_WIDGET(clock);
 }
 
-void gtk_clock_set_format(GtkClock *clock, gchar *fmt)
+void gtk_clock_set_format(GtkClock *clock, const gchar *fmt)
 {
 	g_return_if_fail(clock != NULL);
 	g_return_if_fail(fmt != NULL);

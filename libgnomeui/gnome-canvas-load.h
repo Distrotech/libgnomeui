@@ -7,7 +7,7 @@
 BEGIN_GNOME_DECLS
 
 /* Note that it will only loads png files */
-GdkImlibImage *gnome_canvas_load_alpha (char *file);
+GdkImlibImage *gnome_canvas_load_alpha (const gchar *file);
 
 void gnome_canvas_destroy_image (GdkImlibImage *image);
 

@@ -1064,7 +1064,7 @@ text_insert_field (GSList      *list,
 
   while (temp_list)
     {
-      cmp = strcmp (field, temp_list->data);
+      cmp = strcmp (field, (gchar*) temp_list->data);
       if (cmp == 0)
 	{
 	  g_free (field);

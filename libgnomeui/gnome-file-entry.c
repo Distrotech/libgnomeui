@@ -312,7 +312,7 @@ gnome_file_entry_finalize (GtkObject *object)
  * Returns: A pointer to the widget, NULL if it cannot be created.
  **/
 GtkWidget *
-gnome_file_entry_new (char *history_id, char *browse_dialog_title)
+gnome_file_entry_new (const char *history_id, const char *browse_dialog_title)
 {
 	GnomeFileEntry *fentry;
 
@@ -377,7 +377,7 @@ gnome_file_entry_gtk_entry (GnomeFileEntry *fentry)
  * Returns: @fentry (the widget itself)
  **/
 void
-gnome_file_entry_set_title (GnomeFileEntry *fentry, char *browse_dialog_title)
+gnome_file_entry_set_title (GnomeFileEntry *fentry, const char *browse_dialog_title)
 {
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
@@ -401,7 +401,7 @@ gnome_file_entry_set_title (GnomeFileEntry *fentry, char *browse_dialog_title)
  * Returns:
  **/
 void
-gnome_file_entry_set_default_path(GnomeFileEntry *fentry, char *path)
+gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 {
 	char rpath[MAXPATHLEN+1];
 	char *p;

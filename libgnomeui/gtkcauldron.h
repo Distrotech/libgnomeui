@@ -20,11 +20,9 @@
 #define __GTK_CAULDRON_H__
 
 #include <gtk/gtkwidget.h>
+#include <libgnome/gnome-defs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
+BEGIN_GNOME_DECLS
 
 #define GTK_CAULDRON_TOPLEVEL	(0x1L<<0)
 #define GTK_CAULDRON_DIALOG		(0x1L<<1)
@@ -94,10 +92,7 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options,
 				  gpointer user_data,
 				  GtkWidget *parent);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __GTK_CAULDRON_H__ */
 

@@ -19,12 +19,9 @@
 
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkmenuitem.h>
+#include <libgnome/gnome-defs.h>
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
+BEGIN_GNOME_DECLS
 
 #define GTK_TYPE_PIXMAP_MENU_ITEM	    (gtk_pixmap_menu_item_get_type ())
 #define GTK_PIXMAP_MENU_ITEM(obj)	    (GTK_CHECK_CAST ((obj), GTK_TYPE_PIXMAP_MENU_ITEM, GtkPixmapMenuItem))
@@ -54,9 +51,6 @@ GtkWidget* gtk_pixmap_menu_item_new	      (void);
 void       gtk_pixmap_menu_item_set_pixmap    (GtkPixmapMenuItem *menu_item,
 					       GtkWidget *pixmap);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __GTK_PIXMAP_MENU_ITEM_H__ */

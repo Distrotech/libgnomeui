@@ -625,7 +625,7 @@ gnome_icon_entry_new (char *history_id, char *browse_dialog_title)
 	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->fentry));
 
 	gnome_entry_set_history_id (GNOME_ENTRY (gentry), history_id);
-	gnome_entry_load_history (gentry);
+	gnome_entry_load_history (GNOME_ENTRY (gentry));
 	gnome_file_entry_set_title (GNOME_FILE_ENTRY(ientry->fentry),
 				    browse_dialog_title);
 	

@@ -24,10 +24,6 @@
 #include <gtk/gtk.h>
 #include <libgnome/gnome-defs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 BEGIN_GNOME_DECLS
 
 #define GNOME_PAPER_SELECTOR(obj)         GTK_CHECK_CAST (obj, gnome_paper_selector_get_type (), GnomePaperSelector)
@@ -69,7 +65,7 @@ gfloat          gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspa
 
   /* These are still only stubs. */
 void		gnome_paper_selector_set_name	(GnomePaperSelector *gspaper,
-						 gchar *name);
+						 const gchar *name);
 void		gnome_paper_selector_set_width	(GnomePaperSelector *gspaper,
 						 gfloat width);
 void		gnome_paper_selector_set_height	(GnomePaperSelector *gspaper,
@@ -77,8 +73,9 @@ void		gnome_paper_selector_set_height	(GnomePaperSelector *gspaper,
 
 END_GNOME_DECLS
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
 #endif 
+
+
+
+
+

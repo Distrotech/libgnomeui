@@ -469,7 +469,7 @@ typedef struct {
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
           GNOME_APP_CONFIGURABLE_ITEM_END_GAME, (GdkModifierType) 0, NULL }
 
-char * gnome_app_helper_gettext (char *string);
+gchar * gnome_app_helper_gettext (const gchar *string);
 
 #ifdef ENABLE_NLS
 #define D_(x) dgettext (PACKAGE, x)
@@ -662,32 +662,32 @@ void gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeU
  * "File/Settings" will insert it after the Setting item in the File menu
  * use of  "File/<Separator>" should be obvious. however this stops after the first separator.
  */
-GtkWidget *gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos);
+GtkWidget *gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos);
 
 /* removes num items from the existing app's menu structure begining with item described
  * by path
  */
-void gnome_app_remove_menus (GnomeApp *app, gchar *path, gint items);
+void gnome_app_remove_menus (GnomeApp *app, const gchar *path, gint items);
 
 /* Same as the above, except it removes the specified number of items 
  * from the existing app's menu structure begining with item described by path,
  * plus the number specified by start - very useful for adding and removing Recent
  * document items in the File menu.
  */
-void gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items);
+void gnome_app_remove_menu_range (GnomeApp *app, const gchar *path, gint start, gint items);
 
 /* inserts menus described by uiinfo in existing app's menu structure right after the item described by path.
  */
-void gnome_app_insert_menus_custom (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo, GnomeUIBuilderData *uibdata);
+void gnome_app_insert_menus_custom (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo, GnomeUIBuilderData *uibdata);
 
 /* FIXME: what does it do? */
-void gnome_app_insert_menus (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo);
+void gnome_app_insert_menus (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo);
 
 /* FIXME: what does it do? */
-void gnome_app_insert_menus_with_data (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo, gpointer data);
+void gnome_app_insert_menus_with_data (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo, gpointer data);
 
 /* FIXME: what does it do? */
-void gnome_app_insert_menus_interp (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo,
+void gnome_app_insert_menus_interp (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo,
 				    GtkCallbackMarshal relay_func, gpointer data,
 				    GtkDestroyNotify destroy_func);
 

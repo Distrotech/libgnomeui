@@ -1,3 +1,16 @@
+1999-08-22  Herbert Valerio Riedel  <hvr@hvrlab.dhs.org>
+
+	* gnome-icon-entry.c (gnome_icon_entry_new): added missing GNOME_ENTRY
+	* gnome-properties.c: added <string.h>
+	* gtkpixmapmenuitem.h, gtkcauldron.h, gtkdial.h, 
+	gnome-druid-page-start.h, gnome-paper-selector.h,
+	gnome-druid-page-standard.h, gnome-druid.h, gnome-druid-page-finish.h, 
+	gnome-druid-page.h: extern "C" replaced by ..._GNOME_DECLS
+	* gnome-canvas-load.[ch], gnome-app-helper.[ch], gnome-app.[ch], 
+	gtk-clock.[ch], gnome-file-entry.[ch], gnome-paper-selector.[ch]: 
+	marked some char* args const
+	* gnome-font-selector.c: strcmp() args casted to (char*)
+	
 1999-08-22  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-icon-sel.c (gnome_icon_selection_show_icons): Check

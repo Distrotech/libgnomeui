@@ -18,7 +18,7 @@
 
 #ifdef HAVE_IMLIB_1_9
 GdkImlibImage *
-gnome_canvas_load_alpha (char *file)
+gnome_canvas_load_alpha (const gchar *file)
 {
 	g_return_val_if_fail (file != NULL, NULL);
 

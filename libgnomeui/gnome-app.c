@@ -199,7 +199,7 @@ layout_changed (GtkWidget *w, gpointer data)
  **/
 
 GtkWidget *
-gnome_app_new(gchar *appname, char *title)
+gnome_app_new(const gchar *appname, const gchar *title)
 {
 	GnomeApp *app;
 
@@ -222,7 +222,7 @@ gnome_app_new(gchar *appname, char *title)
  **/
 
 void 
-gnome_app_construct (GnomeApp *app, gchar *appname, char *title)
+gnome_app_construct (GnomeApp *app, const gchar *appname, const gchar *title)
 {
 	g_return_if_fail (appname != NULL);
 

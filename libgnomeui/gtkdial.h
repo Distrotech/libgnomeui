@@ -22,12 +22,9 @@
 #include <gdk/gdk.h>
 #include <gtk/gtkadjustment.h>
 #include <gtk/gtkwidget.h>
+#include <libgnome/gnome-defs.h>
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
+BEGIN_GNOME_DECLS
 
 #define GTK_DIAL(obj)          GTK_CHECK_CAST (obj, gtk_dial_get_type (), GtkDial)
 #define GTK_DIAL_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gtk_dial_get_type (), GtkDialClass)
@@ -84,9 +81,6 @@ gfloat         gtk_dial_get_value              (GtkDial        *dial);
 void           gtk_dial_set_view_only          (GtkDial        *dial,
 						gboolean       view_only);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __GTK_DIAL_H__ */

@@ -23,10 +23,8 @@
 #include <gdk_imlib.h>
 #include "gnome-canvas.h"
 #include "gnome-druid-page.h"
-#ifdef __cplusplus
-extern "C" {
-#pragma }
-#endif /* __cplusplus */
+
+BEGIN_GNOME_DECLS
 
 #define GNOME_TYPE_DRUID_PAGE_START			(gnome_druid_page_start_get_type ())
 #define GNOME_DRUID_PAGE_START(obj)			(GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID_PAGE_START, GnomeDruidPageStart))
@@ -94,9 +92,6 @@ void gnome_druid_page_start_set_logo          (GnomeDruidPageStart *druid_page_s
 void gnome_druid_page_start_set_watermark     (GnomeDruidPageStart *druid_page_start,
 					       GdkImlibImage *watermark);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __GNOME_DRUID_PAGE_START_H__ */

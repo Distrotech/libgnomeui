@@ -21,9 +21,8 @@
 
 #include <gtk/gtk.h>
 #include "libgnomeui/gnome-druid-page.h"
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+
+BEGIN_GNOME_DECLS
 
 #define GNOME_TYPE_DRUID			(gnome_druid_get_type ())
 #define GNOME_DRUID(obj)			(GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID, GnomeDruid))
@@ -68,9 +67,6 @@ void       gnome_druid_insert_page           (GnomeDruid *druid, GnomeDruidPage 
 void       gnome_druid_append_page           (GnomeDruid *druid, GnomeDruidPage *page);
 void	   gnome_druid_set_page              (GnomeDruid *druid, GnomeDruidPage *page);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __GNOME_DRUID_H__ */
