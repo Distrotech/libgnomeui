@@ -17,6 +17,12 @@ extern char *program_invocation_short_name;
 
 static void gnome_rc_parse(gchar *command);
 static void gnome_segv_handle(int signum);
+static GdkPixmap *imlib_image_loader(GdkWindow   *window,
+				     GdkColormap *colormap,
+				     GdkBitmap  **mask,
+				     GdkColor    *transparent_color,
+				     const gchar *filename);
+
 
 
 
@@ -85,6 +91,8 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 
 		gtk_init (&our_argc, &our_argv);
 		gdk_imlib_init ();
+		gtk_rc_set_image_loader(imlib_image_loader);
+		
 		gnome_rc_parse (program_invocation_name);
 
 		for (i = 0; i < copy_ac; ++i)
@@ -307,4 +315,18 @@ static void gnome_segv_handle(int signum)
 	    program_invocation_name, buf, NULL);
     }
   in_segv--;
+}
+
+static GdkPixmap *
+imlib_image_loader(GdkWindow   *window,
+		   GdkColormap *colormap,
+		   GdkBitmap  **mask,
+		   GdkColor    *transparent_color,
+		   const gchar *filename)
+{
+  GdkPixmap *retval;
+  if(gdk_imlib_load_file_to_pixmap((char *)filename, &retval, mask))
+    return retval;
+  else
+    return NULL;
 }
