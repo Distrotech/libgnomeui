@@ -110,6 +110,7 @@ static void ientry_get_property		(GObject *object, guint param_id,
 					 GValue *value, GParamSpec *pspec);
 static void ientry_browse               (GnomeIconEntry *ientry);
 static gboolean ientry_mnemonic_activate (GtkWidget *widget, gboolean group_cycling);
+static void icon_selected_cb (GnomeIconEntry * ientry);
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
@@ -397,7 +398,7 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 		g_free (priv->picked_file);
 		priv->picked_file = g_strdup (filename);
 
-		update_icon (ientry);
+		icon_selected_cb (ientry);
 		gtk_widget_hide (ientry->_priv->pick_dialog);
 	}
 }
@@ -560,15 +561,12 @@ icon_selected_cb (GnomeIconEntry * ientry)
 	priv = ientry->_priv;
 
 	gnome_icon_selection_stop_loading (GNOME_ICON_SELECTION (priv->icon_sel));
-	icon = gnome_icon_selection_get_icon (GNOME_ICON_SELECTION (priv->icon_sel), TRUE);
 
+	icon = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY (ientry->_priv->fentry), FALSE);
+	
 	if (icon != NULL) {
-		GtkWidget *e = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->_priv->fentry));
-		gtk_entry_set_text (GTK_ENTRY (e), icon);
 		priv->picked_file = icon;
-
 		update_icon (ientry);
-
 		g_signal_emit (ientry, gnome_ientry_signals[CHANGED_SIGNAL], 0);
 	}
 }

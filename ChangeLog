@@ -1,3 +1,8 @@
+2002-08-06  Arvind Samptur <arvind.samptur@wipro.com>
+	* libgnomeui/gnome-icon-entry.c (entry_activated) (icon_selected_cb):
+	The icon to be loaded is picked up from the  file entry widget
+	instead of icon selection widget. Fixes 87599.
+
 2002-08-05  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Release 2.0.2
