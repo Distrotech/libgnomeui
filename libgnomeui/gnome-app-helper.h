@@ -294,6 +294,13 @@ GtkWidget *gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos);
  */
 void gnome_app_remove_menus (GnomeApp *app, gchar *path, gint items);
 
+/* Same as the above, except it removes the specified number of items 
+ * from the existing app's menu structure begining with item described by path,
+ * plus the number specified by start - very useful for adding and removing Recent
+ * document items in the File menu.
+ */
+void gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items);
+
 /* inserts menus described by uiinfo in existing app's menu structure right after the item described by path.
  */
 void gnome_app_insert_menus_custom (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo, GnomeUIBuilderData *uibdata);

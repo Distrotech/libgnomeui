@@ -1,3 +1,11 @@
+1998-11-20  Evan Lawrence <evan@worldpath.net>
+
+	* gnome-app-helper.[ch]: Added a gnome_app_remove_menu_range
+	  function, that allows you to specify a path to a menu to remove,
+	  plus an offset from that menu to begin removing items at -
+	  useful for recent documents in the file menu, see gEdit for
+	  an example.
+
 Fri Nov 20 00:24:00 1998  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-icon-list.c: fixed doc string after CVS conflict

@@ -939,6 +939,53 @@ gnome_app_remove_menus(GnomeApp *app,
 	gtk_widget_queue_resize(parent);
 }
 
+/*
+ * Same as the above, except it removes the specified number of items 
+ * from the existing app's menu structure begining with item described by path,
+ * plus the number specified by start - very useful for adding and removing Recent
+ * document items in the File menu.
+ */
+
+void
+gnome_app_remove_menu_range (GnomeApp *app,
+		       gchar *path,
+		       gint start,
+		       gint items)
+{
+  GtkWidget *parent, *child;
+  GList *children;
+  gint pos;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+
+  /* find the first item (which is actually at position pos-1) to remove */
+  parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
+
+  /* in case of path ".../" remove the first item */
+  if(pos == 0)
+    pos = 1;
+
+  pos += start;
+  
+  if( parent == NULL ) {
+    g_warning("gnome_app_remove_menus: couldn't find first item to remove!");
+    return;
+  }
+
+  /* remove items */
+  children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
+  while(children && items > 0) {
+    child = GTK_WIDGET(children->data);
+    /* children = g_list_next(children); */
+    gtk_container_remove(GTK_CONTAINER(parent), child);
+    children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
+    items--;
+  }
+
+  gtk_widget_queue_resize(parent);
+}
+
 /* inserts menus described by uiinfo in existing app's menu structure right after the item described by path.
  */
 void
