@@ -136,6 +136,8 @@ gint           gnome_mdi_remove_child        (GnomeMDI *mdi, GnomeMDIChild *chil
 gint           gnome_mdi_remove_all          (GnomeMDI *mdi);
 GnomeMDIChild *gnome_mdi_get_active_child    (GnomeMDI *mdi);
 GnomeMDIChild *gnome_mdi_find_child          (GnomeMDI *mdi, const gchar *name);
+const GList   *gnome_mdi_get_children        (GnomeMDI *mdi);
+const GList   *gnome_mdi_get_windows         (GnomeMDI *mdi);
 
 /* manipulating windows */
 void           gnome_mdi_open_toplevel       (GnomeMDI *mdi);
@@ -167,7 +169,7 @@ GtkWidget     *gnome_mdi_get_view_from_window(GnomeMDI *mdi, GnomeApp *app);
 
 /* setting the GnomeUIInfo templates for menu and toolbar */
 void           gnome_mdi_set_menubar_template   (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl);
-void           gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl);
+void           gnome_mdi_set_toolbar_template   (GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl);
 
 /* the following functions are used to obtain pointers to the GnomeUIInfo
  * structures for a specified MDI GnomeApp widget. this might be useful for
@@ -176,16 +178,16 @@ void           gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_t
  * GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees
  * and are non-NULL only if templates are used for menu/toolbar creation.
  */
-GnomeUIInfo   *gnome_mdi_get_menubar_info      (GnomeApp *app);
-GnomeUIInfo   *gnome_mdi_get_toolbar_info      (GnomeApp *app);
-GnomeUIInfo   *gnome_mdi_get_child_menu_info   (GnomeApp *app);
-GnomeUIInfo   *gnome_mdi_get_child_toolbar_info(GnomeApp *app);
+const GnomeUIInfo *gnome_mdi_get_menubar_info      (GnomeApp *app);
+const GnomeUIInfo *gnome_mdi_get_toolbar_info      (GnomeApp *app);
+const GnomeUIInfo *gnome_mdi_get_child_menu_info   (GnomeApp *app);
+const GnomeUIInfo *gnome_mdi_get_child_toolbar_info(GnomeApp *app);
 
 /* extracting the child menu/toolbar GnomeUIInfos (when they are set)
- * via a pointer to a views.
+ * via a pointer to a view.
  */
-GnomeUIInfo   *gnome_mdi_get_view_menu_info    (GtkWidget *view);
-GnomeUIInfo   *gnome_mdi_get_view_toolbar_info (GtkWidget *view);
+const GnomeUIInfo *gnome_mdi_get_view_menu_info    (GtkWidget *view);
+const GnomeUIInfo *gnome_mdi_get_view_toolbar_info (GtkWidget *view);
 
 END_GNOME_DECLS
 

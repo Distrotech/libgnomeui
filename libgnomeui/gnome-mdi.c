@@ -97,10 +97,10 @@ static void            remove_child(GnomeMDI *, GnomeMDIChild *);
 static GList           *child_create_menus(GnomeMDIChild *, GtkWidget *);
 static GtkWidget       *child_set_label(GnomeMDIChild *, GtkWidget *);
 
-static gboolean		emit_boolean_pointer (GnomeMDI *mdi,
-					      int sig,
-					      GtkObject *pointer,
-					      gboolean default_return);
+static gboolean		    emit_boolean_pointer (GnomeMDI *mdi,
+											  int sig,
+											  GtkObject *pointer,
+											  gboolean default_return);
 
 /* a macro for getting the app's pouch (app->scrolledwindow->viewport->pouch) */
 #define get_pouch_from_app(app) \
@@ -121,8 +121,38 @@ enum {
 
 static gint mdi_signals[LAST_SIGNAL];
 
-GNOME_CLASS_BOILERPLATE (GnomeMDI, gnome_mdi,
-			 GtkObject, gtk_object);
+GNOME_CLASS_BOILERPLATE (GnomeMDI, gnome_mdi, GtkObject, gtk_object);
+
+static gboolean
+emit_boolean_pointer (GnomeMDI *mdi, int sig,
+					  GtkObject *pointer,
+					  gboolean default_return)
+{
+	gboolean retval;
+	GValue params[2] = {{0}};
+	GValue rvalue = {0};
+
+	g_return_val_if_fail (GTK_IS_OBJECT (mdi), default_return);
+
+	g_value_init (params + 0, GTK_OBJECT_TYPE (mdi));
+	g_value_set_object (params + 0, G_OBJECT (mdi));
+
+	g_value_init (params + 1, GTK_OBJECT_TYPE (pointer));
+	g_value_set_object (params + 1, G_OBJECT (pointer));
+
+	g_value_init (&rvalue, G_TYPE_BOOLEAN);
+	g_value_set_boolean (&rvalue, default_return);
+
+	g_signal_emitv (params, mdi_signals[sig], 0, &rvalue);
+
+	retval = g_value_get_boolean (&rvalue);
+  
+	g_value_unset (params + 0);
+	g_value_unset (params + 1);
+	g_value_unset (&rvalue);
+
+	return retval;
+}
 
 static void
 gnome_mdi_class_init (GnomeMDIClass *klass)
@@ -557,8 +587,8 @@ set_page_by_widget (GtkNotebook *book, GtkWidget *child)
 		gtk_notebook_set_page(book, i);
 }
 
-static GtkWidget
-*find_item_by_child (GtkMenuShell *shell, GnomeMDIChild *child)
+static GtkWidget *
+find_item_by_child (GtkMenuShell *shell, GnomeMDIChild *child)
 {
 	GList *node;
 
@@ -1963,6 +1993,38 @@ gnome_mdi_find_child (GnomeMDI *mdi, const gchar *name)
 }
 
 /**
+ * gnome_mdi_get_children:
+ * @mdi: A pointer to a #GnomeMDI object.
+ *
+ * Description:
+ * Returns a list of all children handled by the MDI @mdi.
+ * 
+ * Return value: 
+ * A pointer to a GList of all children handled by the MDI @mdi
+ **/
+const GList *
+gnome_mdi_get_children (GnomeMDI *mdi)
+{
+	return mdi->priv->children;
+}
+
+/**
+ * gnome_mdi_get_windows:
+ * @mdi: A pointer to a #GnomeMDI object.
+ *
+ * Description:
+ * Returns a list of all toplevel windows opened by the MDI @mdi.
+ * 
+ * Return value: 
+ * A pointer to a GList of all toplevel windows opened by the MDI @mdi
+ **/
+const GList *
+gnome_mdi_get_windows (GnomeMDI *mdi)
+{
+	return mdi->priv->windows;
+}
+
+/**
  * gnome_mdi_set_mode:
  * @mdi: A pointer to a GnomeMDI object.
  * @mode: New mode.
@@ -2153,7 +2215,8 @@ gnome_mdi_get_active_view (GnomeMDI *mdi)
  * Return value:
  * A pointer to a #GnomeApp that has the focus.
  **/
-GnomeApp *gnome_mdi_get_active_window (GnomeMDI *mdi)
+GnomeApp *
+gnome_mdi_get_active_window (GnomeMDI *mdi)
 {
 	g_return_val_if_fail(mdi != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
@@ -2394,7 +2457,7 @@ gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app)
  * A #GnomeUIInfo array used for menubar in @app if the menubar has been created with a template.
  * %NULL otherwise.
  **/
-GnomeUIInfo *
+const GnomeUIInfo *
 gnome_mdi_get_menubar_info (GnomeApp *app)
 {
 	g_return_val_if_fail(app != NULL, NULL);
@@ -2411,7 +2474,7 @@ gnome_mdi_get_menubar_info (GnomeApp *app)
  * A #GnomeUIInfo array used for toolbar in @app if the toolbar has been created with a template.
  * %NULL otherwise.
  **/
-GnomeUIInfo *
+const GnomeUIInfo *
 gnome_mdi_get_toolbar_info (GnomeApp *app)
 {
 	g_return_val_if_fail(app != NULL, NULL);
@@ -2428,7 +2491,7 @@ gnome_mdi_get_toolbar_info (GnomeApp *app)
  * A #GnomeUIInfo array used for child's menus in @app if they have been created with a template.
  * %NULL otherwise.
  **/
-GnomeUIInfo *
+const GnomeUIInfo *
 gnome_mdi_get_child_menu_info (GnomeApp *app)
 {
 	g_return_val_if_fail(app != NULL, NULL);
@@ -2445,7 +2508,7 @@ gnome_mdi_get_child_menu_info (GnomeApp *app)
  * A #GnomeUIInfo array used for child's toolbar in @app if it has been created
  * with a template. %NULL otherwise.
  **/
-GnomeUIInfo *
+const GnomeUIInfo *
 gnome_mdi_get_child_toolbar_info(GnomeApp *app)
 {
 	g_return_val_if_fail(app != NULL, NULL);
@@ -2462,7 +2525,7 @@ gnome_mdi_get_child_toolbar_info(GnomeApp *app)
  * A #GnomeUIInfo array used for @view's menus if they have been created with a
  * template. %NULL otherwise.
  **/
-GnomeUIInfo *
+const GnomeUIInfo *
 gnome_mdi_get_view_menu_info(GtkWidget *view)
 {
 	g_return_val_if_fail(view != NULL, NULL);
@@ -2479,42 +2542,11 @@ gnome_mdi_get_view_menu_info(GtkWidget *view)
  * A #GnomeUIInfo array used for @view's toolbar if it has been created with a
  * template. %NULL otherwise.
  **/
-GnomeUIInfo *
+const GnomeUIInfo *
 gnome_mdi_get_view_toolbar_info(GtkWidget *view)
 {
 	g_return_val_if_fail(view != NULL, NULL);
 	g_return_val_if_fail(GTK_IS_WIDGET(view), NULL);
 
 	return gtk_object_get_data(GTK_OBJECT(view), GNOME_MDI_CHILD_TOOLBAR_INFO_KEY);
-}
-
-static gboolean
-emit_boolean_pointer (GnomeMDI *mdi, int sig,
-		      GtkObject *pointer,
-		      gboolean default_return)
-{
-	gboolean retval;
-	GValue params[2] = {{0}};
-	GValue rvalue = {0};
-
-	g_return_val_if_fail (GTK_IS_OBJECT (mdi), default_return);
-
-	g_value_init (params + 0, GTK_OBJECT_TYPE (mdi));
-	g_value_set_object (params + 0, G_OBJECT (mdi));
-
-	g_value_init (params + 1, GTK_OBJECT_TYPE (pointer));
-	g_value_set_object (params + 1, G_OBJECT (pointer));
-
-	g_value_init (&rvalue, G_TYPE_BOOLEAN);
-	g_value_set_boolean (&rvalue, default_return);
-
-	g_signal_emitv (params, mdi_signals[sig], 0, &rvalue);
-
-	retval = g_value_get_boolean (&rvalue);
-  
-	g_value_unset (params + 0);
-	g_value_unset (params + 1);
-	g_value_unset (&rvalue);
-
-	return retval;
 }

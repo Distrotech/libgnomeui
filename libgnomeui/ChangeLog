@@ -1,3 +1,10 @@
+2000-12-29  Jaka Mocnik  <jaka@gnu.org>
+
+	* gnome-mdi.[ch] (gnome_mdi_get_children, gnome_mdi_get_windows):
+	new public functions for retrieving the list of children/windows.
+	(gnome_mdi_get_*): constified return arguments where deemed
+	appropriate.
+
 2000-12-28  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector.h (gnome_selector_get_history_id): New function.
