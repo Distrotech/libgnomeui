@@ -570,7 +570,7 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 		
 	if (iti->selected && !iti->editing) 
 		gdk_draw_rectangle (drawable,
-				    style->bg_gc[state],
+				    style->base_gc[state],
 				    TRUE,
 				    xofs + 1, yofs + 1,
 				    w - 2, h - 2);
