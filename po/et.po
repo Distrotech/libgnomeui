@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-30 21:49+0300\n"
-"PO-Revision-Date: 2002-05-30 22:19+0300\n"
+"POT-Creation-Date: 2002-06-06 16:20+0300\n"
+"PO-Revision-Date: 2002-06-06 17:01+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -166,25 +166,25 @@ msgstr ""
 
 #: libgnomeui/gnome-client.c:972
 msgid "Session management"
-msgstr ""
+msgstr "Sessioonihaldus"
 
-#: libgnomeui/gnome-client.c:2510
+#: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
 msgstr ""
 
-#: libgnomeui/gnome-color-picker.c:407
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr ""
 
-#: libgnomeui/gnome-color-picker.c:457
+#: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
-msgstr ""
+msgstr "Värvivalija"
 
-#: libgnomeui/gnome-color-picker.c:458
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr ""
 
-#: libgnomeui/gnome-color-picker.c:480
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Vali värv"
 
@@ -253,7 +253,7 @@ msgstr "Vali aeg"
 msgid "Select the time from a list"
 msgstr "Vali nimekirjast aeg"
 
-#: libgnomeui/gnome-dateedit.c:1001
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr ""
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
-msgstr ""
+msgstr "Lõpeta maailma näljahädad"
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
@@ -392,31 +392,31 @@ msgstr ""
 msgid "This button will take you to the URI that it displays."
 msgstr ""
 
-#: libgnomeui/gnome-href.c:392
+#: libgnomeui/gnome-href.c:393
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:563
+#: libgnomeui/gnome-ui-init.c:591
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:577
+#: libgnomeui/gnome-ui-init.c:605
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -450,15 +450,15 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr ""
+msgstr "Kasutamine: gnome_segv2 programmi_nimi signr\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
-msgstr ""
+msgstr "Saada veateade"
 
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
-msgstr ""
+msgstr "Silu"
 
 #: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
@@ -513,7 +513,7 @@ msgid "Hint for item 2"
 msgstr ""
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 #: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
@@ -522,7 +522,7 @@ msgstr "_Fail"
 msgid "_File/"
 msgstr "_Fail/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Redaktor"
 
@@ -530,7 +530,7 @@ msgstr "_Redaktor"
 msgid "_Edit/"
 msgstr "_Redaktor/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Vaade"
 
@@ -538,7 +538,7 @@ msgstr "_Vaade"
 msgid "_View/"
 msgstr "_Vaade/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Sätted"
 
@@ -547,7 +547,7 @@ msgid "_Settings/"
 msgstr "_Sätted/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Uus"
 
@@ -555,7 +555,7 @@ msgstr "_Uus"
 msgid "_New/"
 msgstr "_Uus/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fai_lid"
 
@@ -563,15 +563,15 @@ msgstr "Fai_lid"
 msgid "Fi_les/"
 msgstr "Fai_lid/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "A_knad"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Mäng"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Abi"
@@ -628,11 +628,11 @@ msgstr "Prindi aktiivne fail"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr ""
+msgstr "Printimise h_äälestus..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr ""
+msgstr "Häälesta paberi sätted oma printerile sobivaks"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -811,11 +811,11 @@ msgstr "Alusta uut mängu"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr ""
+msgstr "_Peata mäng"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr ""
+msgstr "Tee mängu paus"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
@@ -823,7 +823,7 @@ msgstr "_Taasalusta mäng"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "Taasalusta mäng"
+msgstr "Alusta mängu otsast peale"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
@@ -866,34 +866,34 @@ msgstr "_Lõpeta mäng"
 msgid "End the current game"
 msgstr "Lõpeta praegune mäng"
 
-#: libgnomeui/gnome-app-helper.c:1130
+#: libgnomeui/gnome-app-helper.c:1144
 msgid "_Contents"
 msgstr "_Sisukord"
 
-#: libgnomeui/gnome-app-helper.c:1131
+#: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "Sirvi programmi abiinfot"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
 msgstr "Tekst ikoonide all"
 
-#: libgnomeui/gnome-app-helper.c:2519
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
 msgstr "Tähtsam tekst ikoonide kõrval"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Icons Only"
 msgstr "Ainult ikoonid"
 
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Text Only"
 msgstr "Ainult tekst"
 
-#: libgnomeui/gnome-app-helper.c:2582
+#: libgnomeui/gnome-app-helper.c:2629
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr ""
+msgstr "Kasuta töölaua vaikeväärtust (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -985,7 +985,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
-msgstr ""
+msgstr "Modaalne"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
@@ -1001,7 +1001,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
-msgstr ""
+msgstr "Vaikimisi rada"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
@@ -1009,7 +1009,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
-msgstr ""
+msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid ""
@@ -1020,7 +1020,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
-msgstr ""
+msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:283
 msgid ""
@@ -1035,12 +1035,11 @@ msgstr "Vali fail"
 
 #: libgnomeui/gnome-file-entry.c:645
 msgid "Path"
-msgstr ""
+msgstr "Rada"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path to file"
-msgstr "Salvesta aktiivne fail"
+msgstr "Faili rada"
 
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
@@ -1080,7 +1079,7 @@ msgstr "Kirjatüübi nimi"
 
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr ""
+msgstr "Valitud kirjatüübi nimi"
 
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
@@ -1088,7 +1087,7 @@ msgstr "Kirjatüüp"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr ""
+msgstr "Valitud GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
@@ -1096,7 +1095,7 @@ msgstr "Näidistekst"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr ""
+msgstr "Dialoogiaknas näidatav näidistekst"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1116,7 +1115,7 @@ msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr ""
+msgstr "Näita suurust"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
@@ -1180,7 +1179,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
 msgid "No Icon"
-msgstr ""
+msgstr "Ikooni pole"
 
 #: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
@@ -1200,15 +1199,15 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:759
 msgid "Icon selector"
-msgstr ""
+msgstr "Ikoonivalija"
 
 #: libgnomeui/gnome-icon-entry.c:760
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Palun vali ikoon, mida soovid."
 
 #: libgnomeui/gnome-icon-entry.c:984
 msgid "Icon Selector"
-msgstr ""
+msgstr "Ikoonivalija"
 
 #: libgnomeui/gnome-icon-entry.c:985
 msgid "This button will open a window to let you select an icon."
@@ -1220,7 +1219,7 @@ msgstr "Vali"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
-msgstr ""
+msgstr "Ikooni rada"
 
 #: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
@@ -1228,37 +1227,37 @@ msgid ""
 "located."
 msgstr ""
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr ""
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr ""
 
-#: libgnomeui/gnome-icon-sel.c:407
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr ""
+msgstr "Ikoonide laadimine..."
 
-#: libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
 msgstr "Info"
 
-#: libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
 msgstr "Hoiatus"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
 msgstr "Viga"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
 msgstr "Küsimus"
 
-#: libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Teade"
 
@@ -1294,18 +1293,14 @@ msgstr "Kasutaja"
 msgid "Score"
 msgstr "Punkte"
 
-#. the localized string should fit (after replacing the %a %b
-#. etc) in ~18 chars.
-#. %a is abbreviated weekday, %A is full weekday,
-#. %b %B are abbreviated and full monthname, %Y is year,
-#. %d is day of month, %m is month number, %T full hour,
-#. %H hours, %M minutes, %S seconds
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%d. %b %Y %H:%M"
 
-#: libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
@@ -1321,27 +1316,3 @@ msgstr "Välju testprogrammist"
 
 #~ msgid "E_xit"
 #~ msgstr "_Välju"
-
-#~ msgid "FLAGS"
-#~ msgstr "FLAGS"
-
-#~ msgid "NAME"
-#~ msgstr "NAME"
-
-#~ msgid "CLASS"
-#~ msgstr "CLASS"
-
-#~ msgid "HOST"
-#~ msgstr "HOST"
-
-#~ msgid "PORT"
-#~ msgstr "PORT"
-
-#~ msgid "STYLE"
-#~ msgstr "STYLE"
-
-#~ msgid "MODULE"
-#~ msgstr "MODULE"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
