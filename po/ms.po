@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-02-13 03:24+0100\n"
-"PO-Revision-Date: 2002-01-12 17:09+0800\n"
-"Last-Translator: Khairulanuar Abd Majid <khairul@ikhlas.com>\n"
+"POT-Creation-Date: 2002-02-24 17:42+0800\n"
+"PO-Revision-Date: 2002-02-24 17:42+0800\n"
+"Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -15,22 +15,20 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:187
 msgid "Credits"
-msgstr ""
+msgstr "Kredit"
 
 #: libgnomeui/gnome-about.c:210
 msgid "Written by"
-msgstr ""
+msgstr "Ditulis oleh"
 
 # libgnomeui/gnome-dentry-edit.c:374
 #: libgnomeui/gnome-about.c:224
-#, fuzzy
 msgid "Documented by"
-msgstr "Juru Dokumentasi"
+msgstr "Dokumentasi oleh"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "Translated by"
-msgstr "Kredit penterjemah"
+msgstr "Terjemahan oleh"
 
 # libgnomeui/gnome-app-util.c:687
 #: libgnomeui/gnome-about.c:335
@@ -155,41 +153,41 @@ msgid "Level of user activity required."
 msgstr "Tahap aktiviti pengguna diperlukan"
 
 # libgnomeui/gnome-client.c:835
-#: libgnomeui/gnome-client.c:832
+#: libgnomeui/gnome-client.c:833
 msgid "Specify session management ID"
 msgstr "Tentukan ID pengurusan sesi"
 
 # libgnomeui/gnome-client.c:835 libgnorba/goad-browser.c:27
-#: libgnomeui/gnome-client.c:832
+#: libgnomeui/gnome-client.c:833
 msgid "ID"
 msgstr "ID"
 
 # libgnomeui/gnome-client.c:837
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:836
 msgid "Specify prefix of saved configuration"
 msgstr "Nyatakan prefiks fail yang disimpan"
 
 # libgnomeui/gnome-client.c:837
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:836
 msgid "PREFIX"
 msgstr "PREFIKS"
 
 # libgnomeui/gnome-client.c:839
-#: libgnomeui/gnome-client.c:838
+#: libgnomeui/gnome-client.c:839
 msgid "Disable connection to session manager"
 msgstr "Matikan hubungan kepada pengurus sesi"
 
 # libgnomeui/gnome-client.c:968
-#: libgnomeui/gnome-client.c:944
+#: libgnomeui/gnome-client.c:945
 msgid "Session management"
 msgstr "Pengurusan sessi"
 
 # libgnomeui/gnome-client.c:2348
-#: libgnomeui/gnome-client.c:2478
+#: libgnomeui/gnome-client.c:2483
 msgid "Cancel Logout"
 msgstr "Batal Logkeluar"
 
-#: libgnomeui/gnome-color-picker.c:404
+#: libgnomeui/gnome-color-picker.c:405
 msgid "Received invalid color data\n"
 msgstr "Menerima data warna tidak sah\n"
 
@@ -198,54 +196,54 @@ msgstr "Menerima data warna tidak sah\n"
 msgid "Pick a color"
 msgstr "Pilih satu warna"
 
-#: libgnomeui/gnome-dateedit.c:430
+#: libgnomeui/gnome-dateedit.c:425
 msgid "Time"
 msgstr "Masa"
 
 # libgnomeui/gnome-app-helper.c:127
-#: libgnomeui/gnome-dateedit.c:431
+#: libgnomeui/gnome-dateedit.c:426
 msgid "The time currently selected"
 msgstr "Masa yang kini dipilih"
 
-#: libgnomeui/gnome-dateedit.c:443
+#: libgnomeui/gnome-dateedit.c:438
 msgid "DateEdit Flags"
 msgstr "Flag DataEdit"
 
-#: libgnomeui/gnome-dateedit.c:444
+#: libgnomeui/gnome-dateedit.c:439
 msgid "Flags for how DateEdit looks"
 msgstr "Flag bagaimana DataEdit dilihat"
 
-#: libgnomeui/gnome-dateedit.c:453
+#: libgnomeui/gnome-dateedit.c:448
 msgid "Lower Hour"
 msgstr "Jam Rendah"
 
-#: libgnomeui/gnome-dateedit.c:454
+#: libgnomeui/gnome-dateedit.c:449
 msgid "Lower hour in the time popup selector"
 msgstr "Jam rendah pada pemilih popup masa"
 
-#: libgnomeui/gnome-dateedit.c:464
+#: libgnomeui/gnome-dateedit.c:459
 msgid "Upper Hour"
 msgstr "Jam Tinggi"
 
-#: libgnomeui/gnome-dateedit.c:465
+#: libgnomeui/gnome-dateedit.c:460
 msgid "Upper hour in the time popup selector"
 msgstr "Jam tinggi pada pemilih popup masa"
 
-#: libgnomeui/gnome-dateedit.c:475
+#: libgnomeui/gnome-dateedit.c:470
 msgid "Initial Time"
 msgstr "Masa Permulaan"
 
-#: libgnomeui/gnome-dateedit.c:476
+#: libgnomeui/gnome-dateedit.c:471
 msgid "The initial time"
 msgstr "Masa ketika permulaan"
 
 # libgnomeui/gnome-dateedit.c:459
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:700
 msgid "Calendar"
 msgstr "Kalendar"
 
-#: libgnomeui/gnome-dateedit.c:935
+#: libgnomeui/gnome-dateedit.c:930
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date dianaktirikan, guna gnome_date_edit_get_time"
 
@@ -339,21 +337,21 @@ msgid "Logo Background color is set"
 msgstr "Warna Logo Latar Belakang ditetapkan"
 
 # libgnomeui/gnome-druid.c:136
-#: libgnomeui/gnome-druid.c:148
+#: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
 msgstr "Papar Tamat"
 
-#: libgnomeui/gnome-druid.c:149
+#: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Papar butang 'Tamat' selaian Butang 'Seterusnya'"
 
 # libgnomeui/gnome-app-helper.c:109 libgnomeui/gnome-stock.c:843
 # libgnomeui/stock_demo.c:290
-#: libgnomeui/gnome-druid.c:156
+#: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
 msgstr "Papar Bantuan"
 
-#: libgnomeui/gnome-druid.c:157
+#: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
 msgstr "Papar Butang 'Bantuan'"
 
@@ -1041,20 +1039,20 @@ msgstr "_Tamat permainan"
 msgid "End the current game"
 msgstr "Tamatkan permainan ini"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2563
 msgid "Both text and icons"
 msgstr "Kedua-dua teks dan ikon"
 
-#: libgnomeui/gnome-app-helper.c:2579
+#: libgnomeui/gnome-app-helper.c:2564
 msgid "Icons only"
 msgstr "Ikon sahaja"
 
 # libgnomeui/gnome-stock.c:844
-#: libgnomeui/gnome-app-helper.c:2580
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text only"
 msgstr "Teks sahaja"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2616
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Guna default desktop (%s)"
@@ -1105,7 +1103,7 @@ msgid "  - OK? (yes or no)"
 msgstr " - OK? (ya atau tidak)"
 
 # libgnomeui/gnome-app-util.c:687
-#: libgnomeui/gnome-app-util.c:689
+#: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
 msgstr "Perjalanan"
 
@@ -1117,26 +1115,110 @@ msgstr "ID App"
 msgid "The application ID string"
 msgstr "Retetan ID aplikasi"
 
-#: libgnomeui/gnome-entry.c:169 libgnomeui/gnome-entry.c:170
+#: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
 msgid "History id"
 msgstr "id Sejarah"
 
-#: libgnomeui/gnome-entry.c:176
+#: libgnomeui/gnome-entry.c:178
 msgid "GTK entry"
 msgstr "Kemasukan GTK"
 
-#: libgnomeui/gnome-entry.c:177
+#: libgnomeui/gnome-entry.c:179
 msgid "The GTK entry"
 msgstr "Kemasukan GTK"
 
+#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:160
+msgid "History ID"
+msgstr "ID Sejarah"
+
+#: libgnomeui/gnome-file-entry.c:191
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Pengcam unik bagi kemasukan fail. Ianya kan digunakan untuk menyimpan "
+"senarai sejarah"
+
+#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:169
+msgid "Browse Dialog Title"
+msgstr "Tajuk bagi Dialog Pelihat"
+
+#: libgnomeui/gnome-file-entry.c:200
+msgid "Title for the Browse file dialog."
+msgstr "Tajuk bagi Dialog Pelihat Fail."
+
+#: libgnomeui/gnome-file-entry.c:207
+msgid "Directory Entry"
+msgstr "Kemasukan Direktori"
+
+#: libgnomeui/gnome-file-entry.c:208
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"Samada kemasukan fail digunakan untuk memasukkan nama direktori atau "
+"namafail penuh"
+
+#: libgnomeui/gnome-file-entry.c:216
+msgid "Modal"
+msgstr "Modal"
+
+#: libgnomeui/gnome-file-entry.c:217
+msgid "Whether the Browse file window should be modal."
+msgstr "Samada tetingkap Pelihat fail sepatutnya modal."
+
+#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:185
+msgid "Filename"
+msgstr "Namafail"
+
+#: libgnomeui/gnome-file-entry.c:225
+msgid "Filename that should be displayed in the file entry."
+msgstr "Namafail yang patut dipaparkan dalam kemasukan fail."
+
+#: libgnomeui/gnome-file-entry.c:233
+msgid "Default Path"
+msgstr "Path Default"
+
+#: libgnomeui/gnome-file-entry.c:234
+msgid "Default path for the Browse file window."
+msgstr "Path default bagi tetingkap pelihat fail."
+
+#: libgnomeui/gnome-file-entry.c:241
+msgid "GnomeEntry"
+msgstr "KemasukanGnome"
+
+#: libgnomeui/gnome-file-entry.c:242
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"KemasukanGnome yang kemasukan fail gunakan untuk memasukkan namafail. Anda "
+"boleh guna ciri-ciri ini untuk mendapatkan KemasukanGnome jika anda ingin "
+"meubahsuai atau kueri parameternya."
+
+#: libgnomeui/gnome-file-entry.c:252
+msgid "GtkEntry"
+msgstr "KemasukanGtk"
+
+#: libgnomeui/gnome-file-entry.c:253
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"KemasukanGtk yang kemasukan fail gunakan untuk memasukkan namafail. Anda "
+"boleh gunakan ciri-ciri ini untuk mendapatkan KemasukanGtk jika anda ingin "
+"mengubahsuai atau kueri sebarang parameternya."
+
 # libgnomeui/gnome-file-entry.c:152
-#: libgnomeui/gnome-file-entry.c:347
+#: libgnomeui/gnome-file-entry.c:418
 msgid "Select file"
 msgstr "Pilih fail"
 
 # libgnomeui/gnome-file-entry.c:282 libgnomeui/gnome-spell.c:619
 # libgnomeui/gnome-spell.c:636 libgnomeui/gnome-spell.c:653
-#: libgnomeui/gnome-file-entry.c:523
+#: libgnomeui/gnome-file-entry.c:592
 msgid "Browse..."
 msgstr "Layari..."
 
@@ -1250,39 +1332,76 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "Huraian ralat GConf: %s\n"
 
+#: libgnomeui/gnome-icon-entry.c:161
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Pengcam unik bagi kemasukan ikon. Ianya akan digunakan untuk menyimpan "
+"senarai sejarah."
+
+#: libgnomeui/gnome-icon-entry.c:170
+msgid "Title for the Browse icon dialog."
+msgstr "Tajuk bagi dialog Pelihat Ikon"
+
+#: libgnomeui/gnome-icon-entry.c:177
+msgid "Pixmap Directory"
+msgstr "Direktori Pixmap"
+
+#: libgnomeui/gnome-icon-entry.c:178
+msgid "Directory that will be searched for icons."
+msgstr "Direktori dimana ikon akan dicari"
+
+#: libgnomeui/gnome-icon-entry.c:186
+msgid "Filename that should be displayed in the icon entry."
+msgstr "Namafail yang patut dipaparkan pada kemasukan ikon."
+
+# libgnomeui/gnome-color-picker.c:313
+#: libgnomeui/gnome-icon-entry.c:194
+msgid "Picker dialog"
+msgstr "Dialog Pemilih"
+
+#: libgnomeui/gnome-icon-entry.c:195
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Dialog pelihat ikon. Anda boleh gunakan ciri-ciri ini untuk kendapatkan "
+"GtkDialoj jika and aingin mengubahsuai atau kueri sebarang ciri-cirinya."
+
 # libgnomeui/gnome-icon-entry.c:111 libgnomeui/gnome-icon-entry.c:556
-#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
+#: libgnomeui/gnome-icon-entry.c:305 libgnomeui/gnome-icon-entry.c:907
 msgid "No Icon"
 msgstr "Tiada Ikon"
 
 # libgnomeui/gnome-icon-entry.c:274 libgnomeui/gnome-pixmap-entry.c:272
-#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:378
+#: libgnomeui/gnome-icon-entry.c:510 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Tidak dapat mencari hbox, gunakan pilihan fail biasa"
 
 # libgnomeui/gnome-icon-entry.c:280 libgnomeui/gnome-pixmap-entry.c:278
-#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:384
+#: libgnomeui/gnome-icon-entry.c:516 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Prebiu"
 
 # libgnomeui/gnome-file-entry.c:282 libgnomeui/gnome-spell.c:619
 # libgnomeui/gnome-spell.c:636 libgnomeui/gnome-spell.c:653
-#: libgnomeui/gnome-icon-entry.c:882
+#: libgnomeui/gnome-icon-entry.c:929
 msgid "Browse"
 msgstr "Lihat"
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:296
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: %s tak wujud atau ianya direktori"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:304
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: tak dapat membuka direktori '%s'"
 
 # libgnomeui/gnome-icon-sel.c:348
-#: libgnomeui/gnome-icon-sel.c:414
+#: libgnomeui/gnome-icon-sel.c:411
 msgid "Loading Icons..."
 msgstr "Muatkan Ikon..."
 
@@ -1311,8 +1430,17 @@ msgstr "Soalan"
 msgid "Message"
 msgstr "Mesej"
 
+# libgnomeui/gnome-icon-entry.c:280 libgnomeui/gnome-pixmap-entry.c:278
+#: libgnomeui/gnome-pixmap-entry.c:114
+msgid "Do Preview"
+msgstr "lakukan Prebiu"
+
+#: libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr "Samada kemasukan pixmap patut ada prebiu."
+
 # libgnomeui/gnome-pixmap-entry.c:106 libgnomeui/gnome-pixmap-entry.c:387
-#: libgnomeui/gnome-pixmap-entry.c:184 libgnomeui/gnome-pixmap-entry.c:496
+#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
 msgid "No Image"
 msgstr "Tiada Imej"
 
@@ -1356,6 +1484,3 @@ msgstr "Sans 14"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Keluar ujian"
-
-#~ msgid "Author"
-#~ msgstr "Penulis"
