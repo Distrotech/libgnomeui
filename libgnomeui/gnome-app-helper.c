@@ -227,7 +227,7 @@ static GnomeUIInfo menu_defaults[] = {
 	/*
 	 * Window menu
 	 */
-        { GNOME_APP_UI_ITEM, N_("Create _New Window"),
+        { GNOME_APP_UI_ITEM, N_("Create New _Window"),
           N_("Create a new window"),
           NULL, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
