@@ -13,8 +13,6 @@
 /*
  * TO-DO list for the canvas:
  *
- * - Implement hiding/showing of items (visibility flag).
- *
  * - Allow to specify whether GnomeCanvasImage sizes are in units or pixels (scale or don't scale).
  *
  * - Implement a flag for gnome_canvas_item_reparent() that tells the function to keep the item
@@ -82,6 +80,7 @@ static void gnome_canvas_item_marshal_signal_1 (GtkObject     *object,
 						GtkArg        *args);
 
 static void gnome_canvas_item_class_init (GnomeCanvasItemClass *class);
+static void gnome_canvas_item_init       (GnomeCanvasItem      *item);
 static void gnome_canvas_item_shutdown   (GtkObject            *object);
 
 static void gnome_canvas_item_realize   (GnomeCanvasItem *item);
@@ -107,7 +106,7 @@ gnome_canvas_item_get_type (void)
 			sizeof (GnomeCanvasItem),
 			sizeof (GnomeCanvasItemClass),
 			(GtkClassInitFunc) gnome_canvas_item_class_init,
-			(GtkObjectInitFunc) NULL,
+			(GtkObjectInitFunc) gnome_canvas_item_init,
 			NULL, /* reserved_1 */
 			NULL, /* reserved_1 */
 			(GtkClassInitFunc) NULL
@@ -145,6 +144,12 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 	class->unrealize = gnome_canvas_item_unrealize;
 	class->map = gnome_canvas_item_map;
 	class->unmap = gnome_canvas_item_unmap;
+}
+
+static void
+gnome_canvas_item_init (GnomeCanvasItem *item)
+{
+	item->object.flags |= GNOME_CANVAS_ITEM_VISIBLE;
 }
 
 GnomeCanvasItem *
@@ -252,6 +257,14 @@ gnome_canvas_item_constructv(GnomeCanvasItem *item, GnomeCanvasGroup *parent,
 	item_post_create_setup (item);
 }
 
+/* If the item is visible, requests a redraw of it. */
+static void
+redraw_if_visible (GnomeCanvasItem *item)
+{
+	if (item->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+}
+
 static void
 gnome_canvas_item_shutdown (GtkObject *object)
 {
@@ -262,7 +275,7 @@ gnome_canvas_item_shutdown (GtkObject *object)
 
 	item = GNOME_CANVAS_ITEM (object);
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 
 	/* Make the canvas forget about us */
 
@@ -371,7 +384,7 @@ gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name
 		GSList *info;
 		GtkObject *object;
 
-		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+		redraw_if_visible (item);
 
 		object = GTK_OBJECT (item);
 
@@ -380,7 +393,7 @@ gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name
 
 		gtk_args_collect_cleanup (arg_list, info_list);
 
-		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+		redraw_if_visible (item);
 		item->canvas->need_repick = TRUE;
 	}
 }
@@ -389,9 +402,10 @@ gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name
 void
 gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
 {
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 	gtk_object_setv (GTK_OBJECT (item), nargs, args);
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
+
 	item->canvas->need_repick = TRUE;
 }
 
@@ -407,9 +421,10 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 		return;
 	}
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->translate) (item, dx, dy);
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
+
 	item->canvas->need_repick = TRUE;
 }
 
@@ -489,7 +504,7 @@ gnome_canvas_item_raise (GnomeCanvasItem *item, int positions)
 
 	put_item_after (link, before);
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 	item->canvas->need_repick = TRUE;
 }
 
@@ -518,7 +533,7 @@ gnome_canvas_item_lower (GnomeCanvasItem *item, int positions)
 
 	put_item_after (link, before);
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 	item->canvas->need_repick = TRUE;
 }
 
@@ -540,7 +555,7 @@ gnome_canvas_item_raise_to_top (GnomeCanvasItem *item)
 
 	put_item_after (link, parent->item_list_end);
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 	item->canvas->need_repick = TRUE;
 }
 
@@ -562,8 +577,36 @@ gnome_canvas_item_lower_to_bottom (GnomeCanvasItem *item)
 
 	put_item_after (link, NULL);
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 	item->canvas->need_repick = TRUE;
+}
+
+void
+gnome_canvas_item_show (GnomeCanvasItem *item)
+{
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	if (item->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+		return;
+
+	item->object.flags |= GNOME_CANVAS_ITEM_VISIBLE;
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+}
+
+void
+gnome_canvas_item_hide (GnomeCanvasItem *item)
+{
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	if (!(item->object.flags & GNOME_CANVAS_ITEM_VISIBLE))
+		return;
+
+	item->object.flags &= ~GNOME_CANVAS_ITEM_VISIBLE;
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 }
 
 int
@@ -577,6 +620,9 @@ gnome_canvas_item_grab (GnomeCanvasItem *item, guint event_mask, GdkCursor *curs
 
 	if (item->canvas->grabbed_item)
 		return AlreadyGrabbed;
+
+	if (!(item->object.flags & GNOME_CANVAS_ITEM_VISIBLE))
+		return GrabNotViewable;
 
 	retval = gdk_pointer_grab (item->canvas->layout.bin_window,
 				   FALSE,
@@ -695,7 +741,7 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 
 	gtk_object_ref (GTK_OBJECT (item)); /* protect it from the unref in group_remove */
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 
 	if (item->parent)
 		group_remove (GNOME_CANVAS_GROUP (item->parent), item);
@@ -712,7 +758,7 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 
 	/* Redraw and repick */
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	redraw_if_visible (item);
 	item->canvas->need_repick = TRUE;
 
 	gtk_object_unref (GTK_OBJECT (item));
@@ -1056,10 +1102,11 @@ gnome_canvas_group_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, in
 	for (list = group->item_list; list; list = list->next) {
 		i = list->data;
 
-		if (((item->x1 < (x + width))
-		     && (item->y1 < (y + height))
-		     && (item->x2 > x)
-		     && (item->y2 > y))
+		if (((i->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+		     && ((item->x1 < (x + width))
+			 && (item->y1 < (y + height))
+			 && (item->x2 > x)
+			 && (item->y2 > y)))
 		    || ((GTK_OBJECT_FLAGS (item) & GNOME_CANVAS_ITEM_ALWAYS_REDRAW)
 			&& (item->x1 < item->canvas->redraw_x2)
 			&& (item->y1 < item->canvas->redraw_y2)
@@ -1104,7 +1151,8 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 
 		point_item = NULL; /* cater for incomplete item implementations */
 
-		if (GNOME_CANVAS_ITEM_CLASS (child->object.klass)->point) {
+		if ((child->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+		    && GNOME_CANVAS_ITEM_CLASS (child->object.klass)->point) {
 			dist = (* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->point) (child, gx, gy, cx, cy,
 											 &point_item);
 			has_point = TRUE;
@@ -1142,28 +1190,44 @@ static void
 gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
 	GnomeCanvasGroup *group;
+	GnomeCanvasItem *child;
 	GList *list;
 	double tx1, ty1, tx2, ty2;
 	double minx, miny, maxx, maxy;
+	int set;
 
 	group = GNOME_CANVAS_GROUP (item);
 
-	if (!group->item_list) {
-		/* If there are no children, then return the group's origin */
+	/* Get the bounds of the first visible item */
 
+	set = FALSE;
+
+	for (list = group->item_list; list; list = list->next) {
+		child = list->data;
+
+		if (child->object.flags & GNOME_CANVAS_ITEM_VISIBLE) {
+			set = TRUE;
+			gnome_canvas_item_get_bounds (child, &minx, &miny, &maxx, &maxy);
+			break;
+		}
+	}
+
+	/* If there were no visible items, return the group's origin */
+
+	if (!set) {
 		*x1 = *x2 = group->xpos;
 		*y1 = *y2 = group->ypos;
-
 		return;
 	}
 
-	/* Get the bounds of the first item */
-
-	gnome_canvas_item_get_bounds (group->item_list->data, &minx, &miny, &maxx, &maxy);
-
 	/* Now we can grow the bounds using the rest of the items */
 
-	for (list = group->item_list->next; list; list = list->next) {
+	list = list->next;
+
+	for (; list; list = list->next) {
+		if (!(child->object.flags & GNOME_CANVAS_ITEM_VISIBLE))
+			continue;
+
 		gnome_canvas_item_get_bounds (list->data, &tx1, &ty1, &tx2, &ty2);
 
 		if (tx1 < minx)
@@ -1791,7 +1855,6 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 
 		if (!(mask & canvas->grabbed_event_mask))
 			return;
-
 	}
 
 	/*
@@ -1835,12 +1898,12 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
 	 * events.
 	 */
-	for (finished = FALSE; item && !finished; item = item->parent)
-	  {
-		gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
-				 &ev,
-				 &finished);
-	  }
+	for (finished = FALSE; item && !finished; item = item->parent) {
+		if (item->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+			gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
+					 &ev,
+					 &finished);
+	}
 }
 
 static void
@@ -1927,8 +1990,11 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 
 		/* find the closest item */
 
-		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->point) (canvas->root, x, y, cx, cy,
-										 &canvas->new_current_item);
+		if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+			(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->point) (canvas->root, x, y, cx, cy,
+											 &canvas->new_current_item);
+		else
+			canvas->new_current_item = NULL;
 	} else
 		canvas->new_current_item = NULL;
 
@@ -2215,9 +2281,10 @@ paint (GnomeCanvas *canvas)
 
 	/* Draw the items that intersect the area */
 
-	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->draw) (canvas->root, pixmap,
-									draw_x1, draw_y1,
-									width, height);
+	if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->draw) (canvas->root, pixmap,
+										draw_x1, draw_y1,
+										width, height);
 #if 0
 	gdk_draw_line (pixmap,
 		       widget->style->black_gc,

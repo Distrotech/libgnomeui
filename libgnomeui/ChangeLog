@@ -1,3 +1,22 @@
+1998-10-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_show): 
+	(gnome_canvas_item_hide): New public functions to hide/show items
+	in the canvas.  We have a new visibility flag for canvas items.
+	(gnome_canvas_item_init): New private initialization function --
+	makes items start as visible by default.
+	(redraw_if_visible): New convenience function to queue a redraw of
+	an item only if it is visible.  It is used in the places that used
+	to always queue a redraw.
+	(gnome_canvas_item_grab): Return GrabNotViewable if the item is
+	not visible.
+	(gnome_canvas_group_draw): Only draw visible items.
+	(gnome_canvas_group_point): Test only visible children.
+	(gnome_canvas_group_bounds): Only test visible children.
+	(pick_current_item): Only pick if the root is visible.
+	(emit_event): Only emit if the item is visible.
+	(paint): Only draw the root if it is visible.
+
 1998-10-14  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-icon-list.h: BEGIN_GNOME_DECLS, END_GNOME_DECLS so C++

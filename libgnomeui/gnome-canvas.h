@@ -47,7 +47,8 @@ typedef struct _GnomeCanvasGroupClass GnomeCanvasGroupClass;
 enum {
 	GNOME_CANVAS_ITEM_REALIZED      = 1 << 4,
 	GNOME_CANVAS_ITEM_MAPPED        = 1 << 5,
-	GNOME_CANVAS_ITEM_ALWAYS_REDRAW = 1 << 6
+	GNOME_CANVAS_ITEM_ALWAYS_REDRAW = 1 << 6,
+	GNOME_CANVAS_ITEM_VISIBLE       = 1 << 7
 };
 
 #define GNOME_TYPE_CANVAS_ITEM            (gnome_canvas_item_get_type ())
@@ -163,6 +164,12 @@ void gnome_canvas_item_raise_to_top (GnomeCanvasItem *item);
 
 /* Lower an item to the bottom of its parent group's z-order */
 void gnome_canvas_item_lower_to_bottom (GnomeCanvasItem *item);
+
+/* Show an item (make it visible).  If the item is already shown, it has no effect. */
+void gnome_canvas_item_show (GnomeCanvasItem *item);
+
+/* Hide an item (make it invisible).  If the item is already invisible, it has no effect. */
+void gnome_canvas_item_hide (GnomeCanvasItem *item);
 
 /* Grab the mouse for the specified item.  Only the events in event_mask will be reported.  If
  * cursor is non-NULL, it will be used during the duration of the grab.  Time is a proper X event
