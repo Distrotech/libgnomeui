@@ -1,5 +1,24 @@
 2001-07-21  Martin Baulig  <baulig@suse.de>
 
+	* pixmaps/: Removed all icons which are already in GTK+:
+	stock_add.png, stock_align_center.png, stock_align_justify.png,
+	stock_align_left.png, stock_align_right.png, stock_bottom.png,
+	stock_button_apply.png, stock_button_cancel.png, stock_button_close.png,
+	stock_button_no.png, stock_button_ok.png, stock_button_yes.png, stock_cdrom.png,
+	stock_clear.png, stock_close.png, stock_colorselector.png, stock_convert.png,
+	stock_copy.png, stock_cut.png, stock_down_arrow.png, stock_exec.png,
+	stock_exit.png, stock_first.png, stock_font.png, stock_help.png, stock_home.png,
+	stock_index.png, stock_jump_to.png, stock_last.png, stock_left_arrow.png,
+	stock_new.png, stock_open.png, stock_paste.png, stock_preferences.png,
+	stock_print.png, stock_properties.png, stock_redo.png, stock_refresh.png,
+	stock_remove.png, stock_revert.png, stock_right_arrow.png, stock_save.png,
+	stock_save_as.png, stock_search.png, stock_search_replace.png,
+	stock_spellcheck.png, stock_stop.png, stock_text_bold.png, stock_text_italic.png,
+	stock_text_strikeout.png, stock_text_underline.png, stock_top.png,
+	stock_trash.png, stock_undelete.png, stock_undo.png, stock_up_arrow.png.
+
+2001-07-21  Martin Baulig  <baulig@suse.de>
+
 	* gnome-pixmap.[ch]: Removed, this is already in libgnome1-compat.
 
 2001-07-18  Martin Baulig  <baulig@suse.de>
