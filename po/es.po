@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
-"POT-Creation-Date: 2001-09-20 00:48+0200\n"
+"POT-Creation-Date: 2001-09-23 01:57+0200\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -251,7 +251,7 @@ msgstr "DISPLAY"
 
 #: libgnomeui/gnome-ui-init.c:92
 msgid "GNOME GUI Library"
-msgstr ""
+msgstr "GNOME GUI Library"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:450
@@ -340,7 +340,7 @@ msgstr "MODULO"
 
 #: libgnomeui/gnome-ui-init.c:732
 msgid "GTK+"
-msgstr ""
+msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:95
 #, c-format
