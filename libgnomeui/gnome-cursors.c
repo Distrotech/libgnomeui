@@ -296,7 +296,7 @@ static const char hand_open_mask_bits[] = {
    0x80, 0x7f, 0x00, 0x80, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
 
-#define WHITE { 0x0000, 0xff00, 0xff00, 0xff00 }
+#define WHITE { 0x0000, 0xffff, 0xffff, 0xffff }
 #define BLACK { 0x0000, 0x0000, 0x0000, 0x0000 }
 
 
@@ -306,8 +306,8 @@ static GnomeStockCursor default_cursors[] = {
                 default_arrow_xpm, /* cursor_data */
                 NULL,     /* xbm mask */
                 NULL, NULL, /* bitmap/mask */
-                BLACK, /* foreground */
-                WHITE, /* background */
+                WHITE, /* foreground */
+                BLACK, /* background */
                 0, 0,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */
@@ -318,8 +318,8 @@ static GnomeStockCursor default_cursors[] = {
                 blank_xpm, /* cursor_data */
                 NULL, /* xbm mask */
                 NULL, NULL, /* bitmap/mask */
-                BLACK, /* foreground */
-                WHITE, /* background */
+                WHITE, /* foreground */
+                BLACK, /* background */
                 0, 0,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */
@@ -354,8 +354,8 @@ static GnomeStockCursor default_cursors[] = {
                 (gchar*)hand_closed_data_bits, /* cursor_data */
                 (gchar*)hand_closed_mask_bits,
                 NULL, NULL, /* bitmap/mask */
-                BLACK, /* foreground */
-                WHITE, /* background */
+                WHITE, /* foreground */
+                BLACK, /* background */
                 10, 10,     /* hotspot */
                 hand_closed_data_width, hand_closed_data_height,   /* w x h */
                 0,        /* alpha */
@@ -390,8 +390,8 @@ static GnomeStockCursor default_cursors[] = {
                 egg_timer1_xpm, /* cursor_data */
                 NULL, /* xbm mask */
                 NULL, NULL, /* bitmap/mask */
-                BLACK, /* foreground */
-                WHITE, /* background */
+                {0x0, 0xFFFF, 0xFFFF, 0x0, /* foreground */
+                BLACK, /* background */
                 8, 8,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */

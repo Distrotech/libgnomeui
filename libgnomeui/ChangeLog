@@ -1,3 +1,9 @@
+2000-01-14  Iain Holmes  <ih@csd.abdn.ac.uk>
+
+	* gnome-cursors.c: Changed the white value to be full white, changed
+	the background and foreground's round on some of the cursors. Changed 
+	the eggtimers foreground colour to yellow.
+
 2000-01-14  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-cursors.c: Changed the cursor foreground/background WHITE
