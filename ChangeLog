@@ -1,0 +1,7 @@
+2001-03-05  Martin Baulig  <baulig@suse.de>
+
+	* configure.in: Depend on libgnomecanvas and libxml.
+
+	* configure.in: Set package name to `libgnomeui-2-martin' and
+	version number to 1.96.0.
+
