@@ -49,7 +49,7 @@ add_to_menu(GtkWidget* menu, GnomeRecentDocument *doc)
         const gchar* name;
         GtkWidget *label;
         
-        name = gnome_recent_document_get(doc, "menu-text");
+        name = gnome_recent_document_peek(doc, "menu-text");
 
         label = gtk_label_new(name);
         mi = gtk_menu_item_new();
@@ -104,7 +104,7 @@ item_changed(GnomeRecentlyUsed* recently_used, GnomeRecentDocument* doc, gpointe
         const gchar* name;
         GtkWidget *mi;
         
-        name = gnome_recent_document_get(doc, "menu-text");
+        name = gnome_recent_document_peek(doc, "menu-text");
 
         mi = g_hash_table_lookup(doc_to_menuitem, doc);
 

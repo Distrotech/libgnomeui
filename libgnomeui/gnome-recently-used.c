@@ -24,6 +24,7 @@
 */
 
 #include "gnome-recently-used.h"
+#include "gnome-macros.h"
 
 #include <sys/time.h>
 #include <stdlib.h>
@@ -578,9 +579,9 @@ gnome_recently_used_document_changed (GnomeRecentlyUsed   *recently_used,
         GConfValue *val;
         const gchar *key;
 
-        g_return_val_if_fail (recently_used != NULL, NULL);
-        g_return_val_if_fail (GNOME_IS_RECENTLY_USED(recently_used), NULL);
-        g_return_val_if_fail (doc != NULL, NULL);
+        g_return_if_fail (recently_used != NULL);
+        g_return_if_fail (GNOME_IS_RECENTLY_USED(recently_used));
+        g_return_if_fail (doc != NULL);
 
 	/* load data if we haven't done that yet */
 	gnome_recently_used_ensure_data (recently_used);

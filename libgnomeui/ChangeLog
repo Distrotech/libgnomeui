@@ -1,3 +1,14 @@
+2000-09-24  Iain Holmes  <iain@helixcode.com>
+
+	* gnome-file-selector.c (gnome_file_selector_construct): Construct
+	a gnome-selector widget instead of a gnome-entry.
+
+	* gnome-recently-used.c: fix glaring compile errors/warnings :)
+
+	* test-recently-used.c (item_changed): Change gnome_recent_document_get
+	to gnome_recent_document_peek.
+	(add_to_menu): Same.
+
 Sun Sep 24 04:24:34 2000  George Lebl <jirka@5z.com>
 
 	* gnome-canvas-pixmap.c: fix glaring compile errors/warnings
