@@ -63,7 +63,8 @@ gnome_app_interactive_statusbar(GnomeApp * app)
 
 static void gnome_app_activate_statusbar(GnomeApp *app)
 {
-  gtk_window_set_focus(GTK_WINDOW(app), GNOME_APPBAR(app->statusbar)->status);
+  gtk_window_set_focus(GTK_WINDOW(app),
+		       gnome_appbar_get_status(GNOME_APPBAR(app->statusbar)));
   gtk_window_activate_focus(GTK_WINDOW(app));
   gdk_window_raise(GTK_WIDGET(app)->window);
 }

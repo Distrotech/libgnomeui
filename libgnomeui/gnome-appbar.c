@@ -708,10 +708,29 @@ GtkProgress*
 gnome_appbar_get_progress    (GnomeAppBar * appbar)
 {
   g_return_val_if_fail(appbar != NULL, NULL);
-  g_return_val_if_fail(appbar->_priv->progress != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_APPBAR(appbar), NULL);
+  g_return_val_if_fail(appbar->_priv->progress != NULL, NULL);
 
   return GTK_PROGRESS(appbar->_priv->progress);
+}
+
+/**
+ * gnome_appbar_get_status
+ * @appbar: Pointer to GNOME appbar object
+ *
+ * Description:
+ * Returns the statusbar widget.
+ *
+ * Returns:
+ * A pointer to the statusbar widget.
+ **/
+GtkWidget *
+gnome_appbar_get_status    (GnomeAppBar * appbar)
+{
+  g_return_val_if_fail(appbar != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APPBAR(appbar), NULL);
+
+  return (appbar->_priv->status);
 }
 
 static void

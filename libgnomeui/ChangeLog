@@ -1,3 +1,9 @@
+2000-07-16  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-appbar.[ch] (gnome_appbar_get_status): new accessor function.
+	* gnome-app-util.c (gnome_app_activate_statusbar): use
+	gnome_appbar_get_status().
+	
 Fri Jul 14 17:10:54 2000  George Lebl <jirka@5z.com>
 
 	* *.c: fixup the destroy/finalize handlers.  Make sure destroy

@@ -44,8 +44,8 @@ BEGIN_GNOME_DECLS
 #define GNOME_APPBAR_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_APPBAR, GnomeAppBarClass))
 
 /* Used in gnome-app-util to determine the capabilities of the appbar */
-#define GNOME_APPBAR_HAS_STATUS(appbar) (GNOME_APPBAR(appbar)->status != NULL)
-#define GNOME_APPBAR_HAS_PROGRESS(appbar) (GNOME_APPBAR(appbar)->progress != NULL)
+#define GNOME_APPBAR_HAS_STATUS(appbar) (gnome_appbar_get_status(GNOME_APPBAR(appbar)) != NULL)
+#define GNOME_APPBAR_HAS_PROGRESS(appbar) (gnome_appbar_get_progress(GNOME_APPBAR(appbar)) != NULL)
 
 typedef struct _GnomeAppBar        GnomeAppBar;
 typedef struct _GnomeAppBarPrivate GnomeAppBarPrivate;
@@ -82,6 +82,9 @@ GtkWidget* gnome_appbar_new          	(gboolean has_progress,
    will destroy this permanently. */
 void       gnome_appbar_set_status       (GnomeAppBar * appbar,
 					  const gchar * status);
+
+/* get the statusbar */
+GtkWidget* gnome_appbar_get_status       (GnomeAppBar * appbar);
 
 /* What to show when showing nothing else; defaults to nothing */
 void	   gnome_appbar_set_default      (GnomeAppBar * appbar,
