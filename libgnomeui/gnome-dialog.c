@@ -229,9 +229,9 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
     gtk_widget_grab_default (button);
     gtk_widget_show (button);
     
-    gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			(GtkSignalFunc) gnome_dialog_button_clicked,
-			dialog);
+    gtk_signal_connect_after (GTK_OBJECT (button), "clicked",
+			      (GtkSignalFunc) gnome_dialog_button_clicked,
+			      dialog);
     
     dialog->buttons = g_list_append (dialog->buttons, button);
 
