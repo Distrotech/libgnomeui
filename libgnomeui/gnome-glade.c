@@ -1484,9 +1484,6 @@ app_new(GladeXML *xml, GNode *node)
 /* -- routines to initialise these widgets with libglade -- */
 
 static const GladeWidgetBuildData widget_data [] = {
-	/* this one is an alias for the stock button widget */
-	{ "GnomeStockButton", stock_button_new, glade_standard_build_children},
-	/* this is for the stock button hack ... */
 	{ "GtkButton",        stock_button_new, glade_standard_build_children},
 
 	{ "GnomeColorPicker",   color_picker_new,   NULL },
