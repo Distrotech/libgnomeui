@@ -329,7 +329,7 @@ msgstr "Az utolsó művelet visszavonása"
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "_Újra"
+msgstr "Új_ra"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
