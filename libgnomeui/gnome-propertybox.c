@@ -148,7 +148,7 @@ gnome_property_box_init (GnomePropertyBox *property_box)
 
 	property_box->notebook = gtk_notebook_new ();
 
-	if (gnome_preferences_get_propery_box_apply ()){
+	if (gnome_preferences_get_property_box_apply ()){
 		gnome_dialog_append_buttons (GNOME_DIALOG (property_box),
 					     GNOME_STOCK_BUTTON_OK,
 					     GNOME_STOCK_BUTTON_APPLY,
@@ -171,7 +171,7 @@ gnome_property_box_init (GnomePropertyBox *property_box)
 	gtk_widget_set_sensitive (property_box->ok_button, FALSE);
 	button_list = button_list->next;
 	
-	if (gnome_preferences_get_propery_box_apply ()){
+	if (gnome_preferences_get_property_box_apply ()){
 		property_box->apply_button = GTK_WIDGET(button_list->data);
 		button_list = button_list->next;
 		gtk_widget_set_sensitive (property_box->apply_button, FALSE);

@@ -25,6 +25,7 @@ static void gnome_app_setpos_activate_menubar (GtkMenuItem *menu_item,
 					       GnomeApp *app);
 static void gnome_app_setpos_activate_toolbar (GtkMenuItem *menu_item,
 					       GnomeApp *app);
+static void gnome_app_reparent_handle_box     (GtkHandleBox *hb);
 
 static GtkWindowClass *parent_class = NULL;
 

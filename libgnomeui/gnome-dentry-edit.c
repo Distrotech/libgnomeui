@@ -726,7 +726,7 @@ int main (int argc, char * argv[])
   dee = gnome_dentry_edit_new(GTK_NOTEBOOK(notebook));
 
   gnome_dentry_edit_load_file(GNOME_DENTRY_EDIT(dee),
-			      "/usr/local/share/apps/grun.desktop");
+			      "/usr/local/share/gnome/apps/grun.desktop");
 
 #ifdef GNOME_ENABLE_DEBUG
   g_print("Dialog (main): %p\n", GNOME_DENTRY_EDIT(dee)->icon_dialog);

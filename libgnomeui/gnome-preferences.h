@@ -66,6 +66,10 @@ void              gnome_preferences_set_mdi_mode             (GnomeMDIMode m);
 GtkPositionType   gnome_preferences_get_mdi_tab_pos          (void);
 void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p);
 
+/* Whether property box has Apply button.  */
+int               gnome_preferences_get_property_box_apply (void);
+void              gnome_preferences_set_property_box_button_apply (int v);
+
 END_GNOME_DECLS
 
 #endif

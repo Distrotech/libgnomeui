@@ -457,7 +457,7 @@ void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p)
 }
 
 int
-gnome_preferences_get_propery_box_apply (void)
+gnome_preferences_get_property_box_apply (void)
 {
 	return prefs.property_box_buttons_apply;
 }

@@ -1,3 +1,16 @@
+Wed Aug 26 00:50:27 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-app.c (gnome_app_reparent_handle_box): Declare to avoid
+	warnings.
+
+	* gnome-propertybox.c (gnome_property_box_init): Changed calls to
+	reflect typo fix.
+	* gnome-preferences.h: Declare
+	gnome_preferences_get_property_box_apply,
+	gnome_preferences_set_property_box_button_apply.
+	* gnome-preferences.c (gnome_preferences_get_property_box_apply):
+	Renamed to fix typo.
+
 1998-08-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	Fixed a bug waiting to happen on my previous change: Specifically,
