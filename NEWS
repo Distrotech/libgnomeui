@@ -4,6 +4,8 @@ libgnomeui 2.9.1
 What's new since 2.8.1
 
 * Bug fixes:
+	- Portability fixes (TheWrittenWord)
+	- Fix a leak in the file chooser (Christian Persch)
 	- Use correct size for external thumbnailing scripts
 	  (Fernando Herrera)
 	- Fix compiler warnings (Kjartan)
