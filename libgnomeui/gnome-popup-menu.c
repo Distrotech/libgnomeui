@@ -116,7 +116,7 @@ gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
 	  my_accelgroup = gtk_accel_group_new();
 	gtk_menu_set_accel_group (GTK_MENU (menu), my_accelgroup);
 	if(!accelgroup)
-	  gtk_accel_group_unref(my_accelgroup);
+	  g_object_unref (G_OBJECT (my_accelgroup));
 
 	gnome_popup_menu_append (menu, uiinfo);
 

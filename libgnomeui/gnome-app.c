@@ -354,7 +354,7 @@ gnome_app_destroy (GtkObject *object)
 	app = GNOME_APP (object);
 
 	if (app->accel_group != NULL) {
-		gtk_accel_group_unref (app->accel_group);
+		g_object_unref (G_OBJECT (app->accel_group));
 		app->accel_group = NULL;
 	}
 
