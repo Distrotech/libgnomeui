@@ -204,6 +204,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 
 	messagebox->label = gtk_label_new (message);
 	gtk_label_set_justify (GTK_LABEL (messagebox->label), GTK_JUSTIFY_LEFT);
+        gtk_label_set_line_wrap (GTK_LABEL (messagebox->label), TRUE);
 	gtk_misc_set_padding (GTK_MISC (messagebox->label), GNOME_PAD, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), messagebox->label, TRUE, TRUE, 0);
 	gtk_widget_show (messagebox->label);

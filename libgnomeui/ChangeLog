@@ -1,5 +1,14 @@
 2000-01-31  Havoc Pennington  <hp@redhat.com>
 
+	* gnome-messagebox.c (gnome_message_box_construct): turn on line
+	wrap for message boxes
+
+	* gnome-gconf.c (gnome_default_gconf_client_error_handler): Set up
+	the default error handler dialog to display GConf errors that
+	aren't explicitly handled.
+
+2000-01-31  Havoc Pennington  <hp@redhat.com>
+
 	* gtkpixmapmenuitem.h (struct _GtkPixmapMenuItemClass): new class
 	fields to track the number of GtkPixmapMenuItem that actually have
 	pixmaps; if none, then we drop the toggle size to that of a
