@@ -64,20 +64,16 @@ gnome_stock_pixmap_widget_destroy(GtkObject *object)
 	w = GNOME_STOCK_PIXMAP_WIDGET (object);
 	
 	/* free resources */
-	if (w->pixmap) {
-		gtk_container_remove(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
-		w->pixmap = NULL;
-	}
 	if (w->regular) {
-		gtk_widget_unref(GTK_WIDGET(w->regular));
+		gtk_widget_destroy(GTK_WIDGET(w->regular));
 		w->regular = NULL;
 	}
 	if (w->disabled) {
-		gtk_widget_unref(GTK_WIDGET(w->disabled));
+		gtk_widget_destroy(GTK_WIDGET(w->disabled));
 		w->disabled = NULL;
 	}
 	if (w->focused) {
-		gtk_widget_unref(GTK_WIDGET(w->focused));
+		gtk_widget_destroy(GTK_WIDGET(w->focused));
 		w->focused = NULL;
 	}
 	if (w->icon) g_free(w->icon);
@@ -544,15 +540,15 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
 	stock->icon = g_strdup(icon);
 	stock->current = NULL;
 	if (stock->regular) {
-		gtk_widget_unref(GTK_WIDGET(stock->regular));
+		gtk_widget_destroy(GTK_WIDGET(stock->regular));
 		stock->regular = NULL;
 	}
 	if (stock->disabled) {
-		gtk_widget_unref(GTK_WIDGET(stock->disabled));
+		gtk_widget_destroy(GTK_WIDGET(stock->disabled));
 		stock->disabled = NULL;
 	}
 	if (stock->focused) {
-		gtk_widget_unref(GTK_WIDGET(stock->focused));
+		gtk_widget_destroy(GTK_WIDGET(stock->focused));
 		stock->focused = NULL;
 	}
 	gnome_stock_state_changed(GTK_WIDGET(stock), 0);
@@ -1248,6 +1244,7 @@ gnome_stock_pixmap_change(const char *icon, const char *subtype,
 
 	g_return_val_if_fail(NULL != lookup(icon, subtype, 0), 0);
 	g_return_val_if_fail(entry != NULL, 0);
+	/*FIXME: this leaks like nuts*/
 	hash = stock_pixmaps();
 	key = build_hash_key(icon, subtype);
 	g_hash_table_remove(hash, key);
