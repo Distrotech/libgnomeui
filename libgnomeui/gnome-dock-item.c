@@ -862,6 +862,8 @@ gnome_dock_item_add (GtkContainer *container,
                      GtkWidget    *widget)
 {
   GnomeDockItem *dock_item;
+  GtkArgInfo *info_p;
+  gchar *error;
 
   g_return_if_fail (GNOME_IS_DOCK_ITEM (container));
   g_return_if_fail (GTK_BIN (container)->child == NULL);
@@ -872,8 +874,33 @@ gnome_dock_item_add (GtkContainer *container,
   gtk_widget_set_parent_window (widget, dock_item->bin_window);
   GTK_CONTAINER_CLASS (parent_class)->add (container, widget);
 
-  if (GTK_IS_TOOLBAR (widget))
-    gtk_toolbar_set_orientation (GTK_TOOLBAR (widget), dock_item->orientation);
+  error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (widget),
+				   "orientation", &info_p);
+  if (error)
+    g_free (error);
+  else
+    gtk_object_set (GTK_OBJECT (widget),
+		    "orientation", dock_item->orientation,
+		    NULL);
+}
+
+static void
+gnome_dock_item_set_floating (GnomeDockItem *item, gboolean val)
+{
+  item->is_floating = val;
+
+  /* If there is a child and it supports the 'is_floating' flag
+   * set that too.
+   */
+  if (item->bin.child != NULL) {
+    GtkArgInfo *info_p;
+    gchar *error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (item->bin.child),
+					    "is_floating", &info_p);
+    if (error)
+      g_free (error);
+    else
+      gtk_object_set (GTK_OBJECT (item->bin.child), "is_floating", val, NULL);
+  }
 }
 
 static void
@@ -889,7 +916,7 @@ gnome_dock_item_remove (GtkContainer *container,
 
   if (di->is_floating)
     {
-      di->is_floating = FALSE;
+      gnome_dock_item_set_floating (di, FALSE);
       if (GTK_WIDGET_REALIZED (di))
 	{
 	  gdk_window_hide (di->float_window);
@@ -1049,6 +1076,9 @@ gboolean
 gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
                                  GtkOrientation orientation)
 {
+  GtkArgInfo *info_p;
+  gchar *error;
+
   g_return_val_if_fail (dock_item != NULL, FALSE);
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (dock_item), FALSE);
 
@@ -1062,10 +1092,16 @@ gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
 
       dock_item->orientation = orientation;
 
-      if (dock_item->bin.child != NULL
-          && GTK_IS_TOOLBAR (dock_item->bin.child))
-        gtk_toolbar_set_orientation (GTK_TOOLBAR (dock_item->bin.child),
-                                     orientation);
+      if (dock_item->bin.child != NULL) {
+	error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (dock_item->bin.child),
+					 "orientation", &info_p);
+	if (error)
+	  g_free (error);
+	else
+	  gtk_object_set (GTK_OBJECT (dock_item->bin.child),
+			  "orientation", orientation,
+			  NULL);
+      }
       if (GTK_WIDGET_DRAWABLE (dock_item))
         gtk_widget_queue_clear (GTK_WIDGET (dock_item));
       gtk_widget_queue_resize (GTK_WIDGET (dock_item));
@@ -1148,7 +1184,7 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   item->float_x = x;
   item->float_y = y;
 
-  item->is_floating = TRUE;
+  gnome_dock_item_set_floating (item, TRUE);
 
   if (! GTK_WIDGET_REALIZED (item))
     return TRUE;
@@ -1192,7 +1228,7 @@ gnome_dock_item_attach (GnomeDockItem *item, GtkWidget *parent, gint x, gint y)
       gdk_window_show (GTK_WIDGET (item)->window);
 
       item->float_window_mapped = FALSE;
-      item->is_floating = FALSE;
+      gnome_dock_item_set_floating (item, FALSE);
 
       gtk_widget_queue_resize (GTK_WIDGET (item));
 
