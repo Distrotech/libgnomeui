@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-10-14 11:39+0200\n"
+"POT-Creation-Date: 2002-11-01 12:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: George Lebl <jirka@5z.com>\n"
 "Language-Team: cs <cs@li.org>\n"

@@ -165,7 +165,17 @@ should use that function directly.
 @additional_info_markup: 
 
 
-<!-- ##### ARG GnomeDruidPageStandard:title ##### -->
+<!-- ##### ARG GnomeDruidPageStandard:background ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:background-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:background-set ##### -->
 <para>
 
 </para>
@@ -175,7 +185,22 @@ should use that function directly.
 
 </para>
 
-<!-- ##### ARG GnomeDruidPageStandard:top-watermark ##### -->
+<!-- ##### ARG GnomeDruidPageStandard:logo-background ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo-background-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo-background-set ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:title ##### -->
 <para>
 
 </para>
@@ -195,32 +220,7 @@ should use that function directly.
 
 </para>
 
-<!-- ##### ARG GnomeDruidPageStandard:background ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:background-gdk ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:background-set ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:logo-background ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:logo-background-gdk ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:logo-background-set ##### -->
+<!-- ##### ARG GnomeDruidPageStandard:top-watermark ##### -->
 <para>
 
 </para>

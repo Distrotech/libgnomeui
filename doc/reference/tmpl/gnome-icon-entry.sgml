@@ -151,17 +151,7 @@ GnomeIconEntry
 
 @iconentry: the object which received the signal.
 
-<!-- ##### ARG GnomeIconEntry:history-id ##### -->
-<para>
-
-</para>
-
 <!-- ##### ARG GnomeIconEntry:browse-dialog-title ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeIconEntry:pixmap-subdir ##### -->
 <para>
 
 </para>
@@ -171,7 +161,17 @@ GnomeIconEntry
 
 </para>
 
+<!-- ##### ARG GnomeIconEntry:history-id ##### -->
+<para>
+
+</para>
+
 <!-- ##### ARG GnomeIconEntry:pick-dialog ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:pixmap-subdir ##### -->
 <para>
 
 </para>

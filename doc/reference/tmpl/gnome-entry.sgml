@@ -124,12 +124,12 @@ GnomeEntry
 
 @entry: the object which received the signal.
 
-<!-- ##### ARG GnomeEntry:history-id ##### -->
+<!-- ##### ARG GnomeEntry:gtk-entry ##### -->
 <para>
 
 </para>
 
-<!-- ##### ARG GnomeEntry:gtk-entry ##### -->
+<!-- ##### ARG GnomeEntry:history-id ##### -->
 <para>
 
 </para>

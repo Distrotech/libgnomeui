@@ -138,12 +138,12 @@ GnomeDateEdit
 
 @dateedit: the object which received the signal.
 
-<!-- ##### ARG GnomeDateEdit:time ##### -->
+<!-- ##### ARG GnomeDateEdit:dateedit-flags ##### -->
 <para>
 
 </para>
 
-<!-- ##### ARG GnomeDateEdit:dateedit-flags ##### -->
+<!-- ##### ARG GnomeDateEdit:initial-time ##### -->
 <para>
 
 </para>
@@ -153,12 +153,12 @@ GnomeDateEdit
 
 </para>
 
-<!-- ##### ARG GnomeDateEdit:upper-hour ##### -->
+<!-- ##### ARG GnomeDateEdit:time ##### -->
 <para>
 
 </para>
 
-<!-- ##### ARG GnomeDateEdit:initial-time ##### -->
+<!-- ##### ARG GnomeDateEdit:upper-hour ##### -->
 <para>
 
 </para>

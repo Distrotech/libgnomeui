@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-10-14 11:39+0200\n"
+"POT-Creation-Date: 2002-11-01 12:43+0100\n"
 "PO-Revision-Date: 2002-08-20 19:55+0300\n"
 "Last-Translator: Peteris Krisjanis <peteris.krisjanis@os.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"

@@ -94,12 +94,12 @@ GnomeHRef
 @Returns: 
 
 
-<!-- ##### ARG GnomeHRef:url ##### -->
+<!-- ##### ARG GnomeHRef:text ##### -->
 <para>
 
 </para>
 
-<!-- ##### ARG GnomeHRef:text ##### -->
+<!-- ##### ARG GnomeHRef:url ##### -->
 <para>
 
 </para>

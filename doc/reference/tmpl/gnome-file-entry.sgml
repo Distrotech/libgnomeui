@@ -154,12 +154,12 @@ GnomeFileEntry
 
 @fileentry: the object which received the signal.
 
-<!-- ##### ARG GnomeFileEntry:history-id ##### -->
+<!-- ##### ARG GnomeFileEntry:browse-dialog-title ##### -->
 <para>
 
 </para>
 
-<!-- ##### ARG GnomeFileEntry:browse-dialog-title ##### -->
+<!-- ##### ARG GnomeFileEntry:default-path ##### -->
 <para>
 
 </para>
@@ -169,17 +169,7 @@ GnomeFileEntry
 
 </para>
 
-<!-- ##### ARG GnomeFileEntry:modal ##### -->
-<para>
-
-</para>
-
 <!-- ##### ARG GnomeFileEntry:filename ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFileEntry:default-path ##### -->
 <para>
 
 </para>
@@ -190,6 +180,16 @@ GnomeFileEntry
 </para>
 
 <!-- ##### ARG GnomeFileEntry:gtk-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:history-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:modal ##### -->
 <para>
 
 </para>

@@ -171,12 +171,7 @@ GnomeFontPicker
 @fontpicker: the object which received the signal.
 @arg1: 
 
-<!-- ##### ARG GnomeFontPicker:title ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:mode ##### -->
+<!-- ##### ARG GnomeFontPicker:font ##### -->
 <para>
 
 </para>
@@ -186,17 +181,17 @@ GnomeFontPicker
 
 </para>
 
-<!-- ##### ARG GnomeFontPicker:preview-text ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:use-font-in-label ##### -->
-<para>
-
-</para>
-
 <!-- ##### ARG GnomeFontPicker:label-font-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:mode ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:preview-text ##### -->
 <para>
 
 </para>
@@ -206,7 +201,12 @@ GnomeFontPicker
 
 </para>
 
-<!-- ##### ARG GnomeFontPicker:font ##### -->
+<!-- ##### ARG GnomeFontPicker:title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:use-font-in-label ##### -->
 <para>
 
 </para>
