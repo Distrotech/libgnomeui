@@ -1,3 +1,9 @@
+2000-08-01  Martin Baulig  <baulig@suse.de>
+
+	* gnome-stock.c (GnomeStockPixmapEntryPixbufScaled): Inserted
+	`ref_count' field so we can cast it to GnomeStockPixmapEntryAny
+	without getting a core dump.
+
 2000-07-31  Martin Baulig  <baulig@suse.de>
 
 	* gnome-icon-selector.c (gnome_icon_selector_add_defaults): New.

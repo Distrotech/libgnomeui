@@ -311,6 +311,7 @@ struct _GnomeStockPixmapEntryPixbuf {
 /* scales the Pixbuf data to the given size when used (allows scale-on-demand) */
 struct _GnomeStockPixmapEntryPixbufScaled {
         GnomeStockPixmapType type;
+	int ref_count;
         char *label;
         GdkPixbuf *pixbuf;
         int scaled_width, scaled_height;
