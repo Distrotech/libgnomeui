@@ -1,3 +1,7 @@
+Mon Feb 16 11:53:14 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gnome-client.h: Include <gtk/gtkobject.h>.
+
 Sun Feb 15 21:22:33 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* libgnomeui.h: Include gnome-startup.h.

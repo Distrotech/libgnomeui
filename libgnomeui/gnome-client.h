@@ -5,6 +5,7 @@
 #define GNOME_CLIENT_H
 
 #include <unistd.h>
+#include <gtk/gtkobject.h>
 
 /* If we don't have libSM, then we just define bogus values for the
    things we need from SMlib.h.  The values don't matter because this
