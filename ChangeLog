@@ -1,3 +1,11 @@
+2003-12-04  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-icon-lookup.c (gnome_icon_lookup):
+	Fix warning.
+
+	* libgnomeui/gnome-password-dialog.[ch]:
+	Update API for stuff needed for keyring integration.
+
 2003-11-24  Anders Carlsson  <andersca@gnome.org>
 
 	* configure.in: Release 2.5.0

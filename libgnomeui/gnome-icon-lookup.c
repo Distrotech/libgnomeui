@@ -298,8 +298,8 @@ gnome_icon_lookup (GnomeIconTheme             *icon_theme,
     {
       mime_name = get_vfs_mime_name (mime_type);
       if (mime_name &&
-	  ((mime_name[0] == '/' &&  g_file_test (mime_name, G_FILE_TEST_IS_REGULAR) ||
-	    gnome_icon_theme_has_icon (icon_theme, mime_name))))
+	  ((mime_name[0] == '/' &&  g_file_test (mime_name, G_FILE_TEST_IS_REGULAR)) ||
+	   gnome_icon_theme_has_icon (icon_theme, mime_name)))
 	return mime_name;
       g_free (mime_name);
       
