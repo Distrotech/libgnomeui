@@ -1,3 +1,9 @@
+1999-01-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-image.c (gnome_canvas_image_update): Check whether
+	image->im is NULL and do not crash if it is.  Thanks to Erik
+	Andersen <andersen@xmission.com> for pointing this out.
+
 1999-01-13  Felix Bellaby <felix@pooh.u-net.com>
 
 	* gnome-client.c (master_client_clean_up): disconnect the master

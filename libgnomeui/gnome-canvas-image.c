@@ -370,6 +370,7 @@ gnome_canvas_image_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 	GnomeCanvasImage *image;
 	double x1, y1, x2, y2;
 	ArtDRect i_bbox, c_bbox;
+	int w, h;
 
 	image = GNOME_CANVAS_IMAGE (item);
 
@@ -403,10 +404,16 @@ gnome_canvas_image_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 
 	gnome_canvas_update_bbox (item, c_bbox.x0, c_bbox.y0, c_bbox.x1, c_bbox.y1);
 
-	image->affine[0] = (affine[0] * image->width) / image->im->rgb_width;
-	image->affine[1] = (affine[1] * image->height) / image->im->rgb_height;
-	image->affine[2] = (affine[2] * image->width) / image->im->rgb_width;
-	image->affine[3] = (affine[3] * image->height) / image->im->rgb_height;
+	if (image->im) {
+		w = image->im->rgb_width;
+		h = image->im->rgb_height;
+	} else
+		w = h = 1;
+
+	image->affine[0] = (affine[0] * image->width) / w;
+	image->affine[1] = (affine[1] * image->height) / h;
+	image->affine[2] = (affine[2] * image->width) / w;
+	image->affine[3] = (affine[3] * image->height) / h;
 	image->affine[4] = i_bbox.x0 * affine[0] + i_bbox.y0 * affine[2] + affine[4];
 	image->affine[5] = i_bbox.x0 * affine[1] + i_bbox.y0 * affine[3] + affine[5];
 #endif
