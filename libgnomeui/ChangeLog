@@ -1,3 +1,10 @@
+2001-05-09  Martin Baulig  <baulig@suse.de>
+
+	* gnome-entry.h (gnome_entry_new_full): New function.
+
+	* gnome-file-entry.[ch]: New files; this already existed in
+	GNOME 1.x, but we're now using the new GnomeSelector API.
+
 2001-05-08  Martin Baulig  <baulig@suse.de>
 
 	* gnome-entry.[ch]: Reflect latest GnomeSelector API changes.

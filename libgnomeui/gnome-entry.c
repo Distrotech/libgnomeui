@@ -110,13 +110,13 @@ gnome_entry_class_init (GnomeEntryClass *class)
 static void
 gnome_entry_init (GnomeEntry *gentry)
 {
-	gentry->_priv = g_new0(GnomeEntryPrivate, 1);
+	gentry->_priv = g_new0 (GnomeEntryPrivate, 1);
 }
 
 GtkWidget *
-gnome_entry_construct (GnomeEntry *gentry,
-		       GNOME_Selector corba_selector,
-		       Bonobo_UIContainer uic)
+gnome_entry_construct (GnomeEntry         *gentry,
+		       GNOME_Selector      corba_selector,
+		       Bonobo_UIContainer  uic)
 {
 	g_return_val_if_fail (gentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
@@ -138,20 +138,17 @@ gnome_entry_construct (GnomeEntry *gentry,
  * Returns: Newly-created GnomeEntry widget.
  */
 GtkWidget *
-gnome_entry_new (const gchar *history_id)
+gnome_entry_new_full (GnomeSelector      *selector,
+		      Bonobo_UIContainer  uic,
+		      const gchar        *history_id)
 {
-	GnomeSelector *selector;
 	BonoboEventSource *event_source;
-	GnomeEntry *gentry;
 	GtkWidget *entry_widget;
-
-	selector = g_object_new (gnome_selector_get_type (),
-				 "history_id", history_id,
-				 NULL);
-
-	gentry = g_object_new (gnome_entry_get_type (), NULL);
+	GnomeEntry *gentry;
 
 	entry_widget = gtk_combo_new ();
+
+	gentry = g_object_new (gnome_entry_get_type (), NULL);
 
 	gentry->_priv->combo = entry_widget;
 	gentry->_priv->entry = GTK_COMBO (entry_widget)->entry;
@@ -192,6 +189,18 @@ gnome_entry_new (const gchar *history_id)
 }
 
 GtkWidget *
+gnome_entry_new (const gchar *history_id)
+{
+	GnomeSelector *selector;
+
+	selector = g_object_new (gnome_selector_get_type (),
+				 "history_id", history_id,
+				 NULL);
+
+	return gnome_entry_new_full (selector, CORBA_OBJECT_NIL, history_id);
+}
+
+GtkWidget *
 gnome_entry_new_from_selector (GNOME_Selector corba_selector,
 			       Bonobo_UIContainer uic)
 {
@@ -200,9 +209,8 @@ gnome_entry_new_from_selector (GNOME_Selector corba_selector,
 	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
 	gentry = g_object_new (gnome_entry_get_type (), NULL);
-
-	return (GtkWidget *) gnome_selector_client_construct
-		(GNOME_SELECTOR_CLIENT (gentry), corba_selector, uic);
+	
+	return gnome_entry_construct (gentry, corba_selector, uic);
 }
 
 

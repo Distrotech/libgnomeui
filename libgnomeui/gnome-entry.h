@@ -68,6 +68,10 @@ GType        gnome_entry_get_type          (void) G_GNUC_CONST;
 
 GtkWidget   *gnome_entry_new               (const gchar        *history_id);
 
+GtkWidget   *gnome_entry_new_full          (GnomeSelector      *selector,
+                                            Bonobo_UIContainer  uic,
+                                            const gchar        *history_id);
+
 GtkWidget   *gnome_entry_new_from_selector (GNOME_Selector      corba_selector,
                                             Bonobo_UIContainer  uic);
 
