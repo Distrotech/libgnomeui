@@ -304,12 +304,12 @@ gnome_file_entry_finalize (GtkObject *object)
 
 /**
  * gnome_file_entry_new:
- * @history_id: the id given to #gnome_entry_new
- * @browse_dialog_title: title of the browse dialog
+ * @history_id: the id given to #gnome_entry_new (see #GnomeEntry).
+ * @browse_dialog_title: Title for the file dialog window.
  *
- * Description: Creates a new file entry widget
+ * Description: Creates a new #GnomeFileEntry widget.
  *
- * Returns: Returns the new object
+ * Returns: A pointer to the widget, NULL if it cannot be created.
  **/
 GtkWidget *
 gnome_file_entry_new (char *history_id, char *browse_dialog_title)
@@ -327,11 +327,12 @@ gnome_file_entry_new (char *history_id, char *browse_dialog_title)
 
 /**
  * gnome_file_entry_gnome_entry:
- * @fentry: the GnomeFileEntry to work with
+ * @fentry: The GnomeFileEntry widget to work with.
  *
- * Description: Get the GnomeEntry widget that's part of the entry
+ * Description: It returns a pointer to the gnome entry widget of the
+ * widget (see#GnomeEntry).
  *
- * Returns: Returns GnomeEntry widget
+ * Returns: A pointer to the component #GnomeEntry widget 
  **/
 GtkWidget *
 gnome_file_entry_gnome_entry (GnomeFileEntry *fentry)
@@ -344,11 +345,12 @@ gnome_file_entry_gnome_entry (GnomeFileEntry *fentry)
 
 /**
  * gnome_file_entry_gtk_entry:
- * @fentry: the GnomeFileEntry to work with
+ * @fentry: The GnomeFileEntry widget to work with.
  *
- * Description: Get the GtkEntry widget that's part of the entry
+ * Description: Similar to #gnome_file_entry_gnome_entry but 
+ * returns the gtk entry instead of the Gnome entry widget.
  *
- * Returns: Returns GtkEntry widget
+ * Returns: Returns the GtkEntry widget
  **/
 GtkWidget *
 gnome_file_entry_gtk_entry (GnomeFileEntry *fentry)
@@ -361,13 +363,13 @@ gnome_file_entry_gtk_entry (GnomeFileEntry *fentry)
 
 /**
  * gnome_file_entry_set_title:
- * @fentry: the GnomeFileEntry to work with
- * @browse_dialog_title: the title
+ * @fentry: The GnomeFileEntry widget to work with.
+ * @browse_dialog_title: The new title for the file browse dialog window.
  *
- * Description: Set the title of the browse dialog to @browse_dialog_title,
- * this will go into effect the next time the browse button is pressed
+ * Description: Set the title of the browse dialog to @browse_dialog_title.
+ * The new title will go into effect the next time the browse button is pressed.
  *
- * Returns:
+ * Returns: @fentry (the widget itself)
  **/
 void
 gnome_file_entry_set_title (GnomeFileEntry *fentry, char *browse_dialog_title)
@@ -383,13 +385,13 @@ gnome_file_entry_set_title (GnomeFileEntry *fentry, char *browse_dialog_title)
 
 /**
  * gnome_file_entry_set_default_path:
- * @fentry: the GnomeFileEntry to work with
- * @path: path string
+ * @fentry: The GnomeFileEntry widget to work with.
+ * @path: A path string.
  *
  * Description: Set the default path of browse dialog to @path. The
- * default path is only used if the entry is empty or if the contents
- * of the entry is not a full absolute path, in that case the default
- * path is prepended to it before the dialog is started
+ * default path is only used if the entry is empty or if the current path
+ * of the entry is not an absolute path, in which case the default
+ * path is prepended to it before the dialog is started.
  *
  * Returns:
  **/
@@ -418,16 +420,16 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, char *path)
 
 /**
  * gnome_file_entry_get_full_path:
- * @fentry: the GnomeFileEntry to work with
+ * @fentry: The GnomeFileEntry widget to work with.
  * @file_must_exist: boolean
  *
- * Description: Gets the full absolute path of the file from the entry,
- * if @file_must_exist is true, then the path is only returned if the path
+ * Description: Gets the full absolute path of the file from the entry.
+ * If @file_must_exist is false, nothing is tested and the path is returned.
+ * If @file_must_exist is true, then the path is only returned if the path
  * actually exists. In case the entry is a directory entry (see
  * #gnome_file_entry_set_directory), then if the path exists and is a
- * directory then it's returned, if not, it is assumed it was a file so
- * we try to strip it, and try again. This only happens if @file_must_exist
- * is true, if it's false, nothing is tested, it's just returned.
+ * directory then it's returned; if not, it is assumed it was a file so
+ * we try to strip it, and try again. It allocates memory for the returned string.
  *
  * Returns: a newly allocated string with the path or NULL if something went
  * wrong
@@ -473,10 +475,10 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, int file_must_exist)
 
 /**
  * gnome_file_entry_set_modal:
- * @fentry: the GnomeFileEntry to work with
- * @is_modal: boolean
+ * @fentry: The GnomeFileEntry widget to work with.
+ * @is_modal: true if the window is to be modal, false otherwise.
  *
- * Description: Sets the modality of the browse dialog
+ * Description: Sets the modality of the browse dialog.
  *
  * Returns:
  **/
@@ -491,13 +493,13 @@ gnome_file_entry_set_modal(GnomeFileEntry *fentry, int is_modal)
 
 /**
  * gnome_file_entry_set_directory:
- * @fentry: the GnomeFileEntry to work with
+ * @fentry: The GnomeFileEntry widget to work with.
  * @directory_entry: boolean
  *
- * Description: Sets wheather this is a directory only entry, if
+ * Description: Sets whether this is a directory only entry.  If
  * @directory_entry is true, then #gnome_file_entry_get_full_path will
  * check for the file being a directory, and the browse dialog will have
- * the file list disabled
+ * the file list disabled.
  *
  * Returns:
  **/

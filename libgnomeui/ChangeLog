@@ -1,3 +1,8 @@
+1999-07-31    <dmg@csg.uwaterloo.ca>
+
+	* gnome-file-entry.c: Updated the comments in the functions to
+	make them more explicit.
+
 1999-07-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_list_remove): Use icon->selected,
