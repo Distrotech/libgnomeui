@@ -1,3 +1,11 @@
+1999-10-10  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-less.c: Remove the stupid popup menu, breaks binary
+	compatibility.
+	(gnome_less_fixed_font): This was deprecated about a year ago, 
+	removed.
+	(gnome_less_set_font): reformat
+
 1999-10-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-session.c (restore_window): take care of the case when

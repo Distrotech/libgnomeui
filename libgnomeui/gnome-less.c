@@ -40,9 +40,6 @@ static void gnome_less_init       (GnomeLess      *messagebox);
 
 static void gnome_less_destroy (GtkObject *gl);
 
-static gint text_clicked_cb(GtkText * text, GdkEventButton * e, 
-			    GnomeLess * gl);
-
 static GtkWindowClass *parent_class;
 
 guint
@@ -91,16 +88,7 @@ gnome_less_init (GnomeLess *gl)
   gl->text = GTK_TEXT(gtk_text_new(NULL, NULL));
 
   gl->font = NULL;
-
-  gl->popup = GTK_MENU(gtk_menu_new());
-  mi = gtk_menu_item_new_with_label("Doesn't do anything yet");
-  gtk_menu_append(gl->popup, mi);
-  gtk_widget_show(mi);
-
-  gtk_widget_set_events(GTK_WIDGET(gl->text), GDK_BUTTON_PRESS_MASK);
-  gtk_signal_connect(GTK_OBJECT(gl->text), "button_press_event",
-		     GTK_SIGNAL_FUNC(text_clicked_cb), gl);
-
+  
   hbox = gtk_hbox_new(FALSE, 0);
   vscroll = gtk_vscrollbar_new(gl->text->vadj);
   
@@ -372,24 +360,12 @@ void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
 
   /* font is allowed to be NULL */
 
-  if (gl->font) gdk_font_unref(gl->font);
+  if (gl->font)
+    gdk_font_unref(gl->font);
   gl->font = font;
   if (gl->font) {
     gdk_font_ref(gl->font);
   }
-}
-
-/**
- * gnome_less_fixed_font
- * @gl: Pointer to GnomeLess widget
- *
- * This function is obsolete. Please use #gnome_less_set_fixed_font instead.
- **/
-
-void gnome_less_fixed_font(GnomeLess * gl)
-{
-  g_warning("Please use gnome_less_set_fixed_font instead. Sorry!\n");
-  gnome_less_set_fixed_font(gl, TRUE);
 }
 
 /**
@@ -526,18 +502,4 @@ void gnome_less_reshow          (GnomeLess * gl)
   g_free(contents);
 }
 
-static gint text_clicked_cb(GtkText * text, GdkEventButton * e, 
-			    GnomeLess * gl)
-{
-  if (e->button == 1) {
-    /* Ignore button 1 */
-    return TRUE; 
-  }
 
-  /* don't change the selection. */
-  gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "button_press_event");
-
-  gtk_menu_popup(gl->popup, NULL, NULL, NULL,
-                 NULL, e->button, time(NULL));
-  return TRUE; 
-}

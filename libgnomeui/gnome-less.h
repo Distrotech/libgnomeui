@@ -41,8 +41,6 @@ struct _GnomeLess {
 
   GtkText * text; 
 
-  GtkMenu * popup;
-
   GdkFont * font;  /* font that goes to gtk_text_insert_text call,
 		      can be NULL */
 };
@@ -85,9 +83,6 @@ void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed);
 
 /* Re-insert the text with the current font settings. */
 void gnome_less_reshow          (GnomeLess * gl);
-
-/* Replaced by the more versatile set_fixed_font - avoid. */
-void gnome_less_fixed_font      (GnomeLess * gl);
 
 END_GNOME_DECLS
    
