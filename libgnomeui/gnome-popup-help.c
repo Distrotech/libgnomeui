@@ -32,12 +32,13 @@
 #include <gtk/gtkeditable.h>
 #include <gtk/gtkentry.h>
 #include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-i18n.h"
+#include "libgnome/gnome-i18nP.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-stock.h"
 #include "gnome-popup-help.h"
 #include "gnome-popup-menu.h"
+
 /* Prototypes */
 static void help_callback (GtkWidget *widget, gpointer data);
 static void helpwindow_destroy_callback (GtkWidget *widget, gpointer data);

@@ -1,3 +1,10 @@
+Sat Sep 23 17:34:17 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: use the gnome_i18n_push/pop_c_numeric_locale
+
+	* gnome-font-picker.c, gnome-popup-help.c: include gnome-i18nP.h
+	  and not gnome-i18n.h
+
 Mon Sep 18 20:16:45 2000  George Lebl <jirka@5z.com>
 
 	* gnome-recently-used.[ch]: use boilerplates, minor cleanup,
