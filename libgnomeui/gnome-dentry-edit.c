@@ -365,8 +365,13 @@ gnome_dentry_edit_new_notebook (GtkNotebook *notebook)
 static void
 gnome_dentry_edit_destroy (GtkObject *dee)
 {
+  GnomeDEntryEdit *de;
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
+
+  de = GNOME_DENTRY_EDIT(dee);
+
+  gtk_widget_destroy(de->icon_entry);
 
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dee);
