@@ -41,7 +41,6 @@
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-util.h>
 #include <bonobo/bonobo-property-bag-client.h>
-#include "gnome-cursors.h"
 #include <string.h>
 #include <gtk/gtk.h>
 
@@ -1203,8 +1202,6 @@ gnome_about_item_cb (GnomeCanvasItem *item, GdkEvent *event,
 {
 	
 	gchar *url = gtk_object_get_data(GTK_OBJECT(item), "url");
-	GdkCursor *cursor;
-	GdkWindow *window = GTK_WIDGET(item->canvas)->window;
 	static GnomeCanvasItem *underline = NULL;
 
 	if (!url)
@@ -1237,9 +1234,6 @@ gnome_about_item_cb (GnomeCanvasItem *item, GdkEvent *event,
 					gnome_canvas_points_unref (points);
 				}
 			}
-			cursor = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_POINTING_HAND); 
-			gdk_window_set_cursor(window, cursor);
-			gdk_cursor_destroy(cursor);
 		}
 		break;
 	case GDK_LEAVE_NOTIFY:
@@ -1248,7 +1242,6 @@ gnome_about_item_cb (GnomeCanvasItem *item, GdkEvent *event,
 				gtk_object_destroy (GTK_OBJECT (underline));
 				underline = NULL;
 			}
-			gdk_window_set_cursor(window, NULL);
 		}
 		break;
 	case GDK_BUTTON_PRESS:

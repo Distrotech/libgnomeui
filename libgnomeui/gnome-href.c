@@ -28,7 +28,6 @@
 #include <gtk/gtk.h>
 #include <libgnome/gnome-url.h>
 #include "gnome-href.h"
-#include "gnome-cursors.h"
 
 #include <libgnome/gnome-i18n.h>
 
@@ -450,7 +449,7 @@ gnome_href_realize(GtkWidget *widget)
 
 	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
 
-	cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
+	cursor = gdk_cursor_new(GDK_HAND2);
 	gdk_window_set_cursor(widget->window, cursor);
 	gdk_cursor_destroy(cursor);
 }

@@ -73,7 +73,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-canvas-init.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
-	gnome-cursors.c			\
 	gnome-dateedit.c		\
 	gnome-druid.c			\
 	gnome-druid-page.c		\
@@ -109,7 +108,6 @@ gnome_headers = \
 	gnome-canvas-init.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
-	gnome-cursors.h			\
 	gnome-dateedit.h		\
 	gnome-ditem-edit.h		\
 	gnome-druid.h			\

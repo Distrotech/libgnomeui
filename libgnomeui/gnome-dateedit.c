@@ -39,7 +39,6 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
-#include "gnome-cursors.h"
 #include <libgnome/gnome-i18n.h>
 
 struct _GnomeDateEditPrivate {
@@ -218,7 +217,6 @@ static void
 select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 {
 	struct tm mtm = {0};
-	GdkCursor *cursor;
 
         /* This code is pretty much just copied from gtk_date_edit_get_date */
       	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry)), "%d/%d/%d",
@@ -245,15 +243,11 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 	gtk_grab_add (gde->_priv->cal_popup);
 
 
-	cursor = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_DEFAULT);
-
 	gdk_pointer_grab (gde->_priv->cal_popup->window, TRUE,
 			  (GDK_BUTTON_PRESS_MASK
 			   | GDK_BUTTON_RELEASE_MASK
 			   | GDK_POINTER_MOTION_MASK),
-			  NULL, cursor, GDK_CURRENT_TIME);
-
-	gdk_cursor_destroy (cursor);
+			  NULL, NULL, GDK_CURRENT_TIME);
 }
 
 typedef struct {

@@ -1,3 +1,8 @@
+2001-06-14  Martin Baulig  <baulig@suse.de>
+
+	* gnome-cursors.[ch]: Removed. This was a new addition, so we don't
+	need to put it into libcompat.
+
 2001-06-13  Martin Baulig  <baulig@suse.de>
 
 	* gnome-window.c (gnome_window_set_icon_from_default): New function.
