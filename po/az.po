@@ -1029,7 +1029,7 @@ msgstr "_Ətraflı"
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
 msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
-msgstr "\"%s\" proqramı sistem idarəçinizin icazə vermədiyi bir qurğunu dəyişdirməyə cəhd göstərdi. Seçdiyiniz bu qurğlurdan bə'ziləri ya heç işə salınmayacaq ya da bir sonrakı (%s) proqram tə'minatını işə saldığınızda geriyə alına bilməyəcək."
+msgstr "\"%s\" proqramı sistem idarəçinizin icazə vermədiyi bir qurğunu dəyişdirməyə cəhd göstərdi. Seçdiyiniz bu qurğlurdan bə'ziləri ya heç işə salınmayacaq ya da bir sonrakı proqram tə'minatını işə saldığınızda geriyə alına bilməyəcək."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
