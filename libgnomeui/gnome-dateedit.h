@@ -49,10 +49,8 @@ GtkWidget *gnome_date_edit_new            (time_t the_time, int show_time, int u
 GtkWidget *gnome_date_edit_new_flags      (time_t the_time, GnomeDateEditFlags flags);
 
 void      gnome_date_edit_set_time        (GnomeDateEdit *gde, time_t the_time);
-void      gnome_date_edit_set_date        (GnomeDateEdit *gde, time_t the_time);
 void      gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour);
 time_t    gnome_date_edit_get_date        (GnomeDateEdit *gde);
-time_t    gnome_date_edit_get_time        (GnomeDateEdit *gde);
 void      gnome_date_edit_set_flags       (GnomeDateEdit *gde, GnomeDateEditFlags flags);
 int       gnome_date_edit_get_flags       (GnomeDateEdit *gde);
 

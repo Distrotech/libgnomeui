@@ -1,5 +1,13 @@
 1999-09-17  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-dateedit.h, gnome-dateedit.c: Revert the new consistent
+	function names. This patch should be applied, but not in the
+	stable branch just before 1.0.50 because it's forward
+	incompatible. It can go in after we branch the development
+	gnome-libs.
+
+1999-09-17  Havoc Pennington  <hp@pobox.com>
+
 	* gnome_segv.c (main): If the crashing process is called
 	"gnome-session," tell the user that they are totally hosed and 
 	should save docs in all apps.
