@@ -1,3 +1,9 @@
+1999-03-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (emit_event): Remember the item's parent before
+	emitting the event signal, because the item may be destroyed
+	during emission.  This fixes an Important Bug(tm).
+
 1999-03-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-popup-menu.c (gnome_popup_menu_new): Unref the accel group

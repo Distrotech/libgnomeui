@@ -2589,6 +2589,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	GdkEvent ev;
 	gint finished;
 	GnomeCanvasItem *item;
+	GnomeCanvasItem *parent;
 	guint mask;
 
 	/* Perform checks for grabbed items */
@@ -2672,10 +2673,18 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
 	 * events.
 	 */
-	for (finished = FALSE; item && !finished; item = item->parent)
+
+	finished = FALSE;
+
+	while (item && !finished) {
+		parent = item->parent; /* Save the parent here as the item may be destroyed */
+
 		gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
 				 &ev,
 				 &finished);
+
+		item = parent;
+	}
 
 	return finished;
 }
