@@ -40,7 +40,7 @@
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
 #include <libgnome/gnome-portability.h>
-#include "gnome-i18nP.h"
+#include <libgnomebase/gnome-i18n.h>
 #include "gnome-helpsys.h"
 #include "gnome-stock.h"
 #include "gnome-uidefs.h"

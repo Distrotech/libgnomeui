@@ -35,7 +35,7 @@
 
 #include <string.h>
 #include <errno.h>
-#include "gnome-i18nP.h"
+#include <libgnomebase/gnome-i18n.h>
 
 /* The default maximum number of documents */
 #define DEFAULT_MAX 30

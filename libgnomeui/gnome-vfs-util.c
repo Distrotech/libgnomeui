@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtkobject.h>
-#include "gnome-i18nP.h"
+#include <libgnomebase/gnome-i18n.h>
 
 #include "gnome-vfs-util.h"
 

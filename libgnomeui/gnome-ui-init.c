@@ -45,7 +45,7 @@
 #include <libgnome/libgnome.h>
 #include <libgnomecanvas/libgnomecanvas.h>
 
-#include "gnome-i18nP.h"
+#include <libgnomebase/gnome-i18n.h>
 #include "gnome-client.h"
 #include "gnome-preferences.h"
 #include "gnome-init.h"

@@ -34,7 +34,7 @@
 #include "gnome-appbar.h"
 
 #include <libgnome/gnome-util.h>
-#include "gnome-i18nP.h"
+#include <libgnomebase/gnome-i18n.h>
 #include <libgnomeui/gnome-preferences.h>
 
 #include "gnome-uidefs.h"

@@ -29,7 +29,7 @@
 
 #include <string.h>
 
-#include "gnome-i18nP.h"
+#include <libgnomebase/gnome-i18n.h>
 #include <libgnomeui/gnome-uidefs.h>
 
 #include "gnome-paper-selector.h"

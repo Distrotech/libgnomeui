@@ -1,3 +1,7 @@
+2001-04-15  Martin Baulig  <baulig@suse.de>
+
+	* gnome-i18nP.h: Removed; #include <libgnomebase/gnome-i18n.h> instead.
+
 2001-04-14  Martin Baulig  <baulig@suse.de>
 
 	* gnome-init.h (gtk_module_info): Removed external declaration.

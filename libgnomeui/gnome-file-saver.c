@@ -27,7 +27,7 @@
 #include "gnome-gconf.h"
 #include "gnome-pixmap.h"
 #include <gtk/gtk.h>
-#include "gnome-i18nP.h"
+#include <libgnomebase/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 #include "gtkpixmapmenuitem.h"
 #include "gnome-stock.h"

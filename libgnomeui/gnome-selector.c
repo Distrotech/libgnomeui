@@ -42,7 +42,7 @@
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtksignal.h>
-#include "gnome-i18nP.h"
+#include <libgnomebase/gnome-i18n.h>
 #include "gnome-macros.h"
 #include "gnome-selectorP.h"
 #include "gnome-uidefs.h"
