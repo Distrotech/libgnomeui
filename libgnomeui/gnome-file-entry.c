@@ -67,6 +67,10 @@ struct _GnomeFileEntryPrivate {
 	/* FIXME: multiple_entry for entering multiple filenames */
 };
 
+/* Private functions */
+/* Expand files, useful here and in GnomeIconEntry */
+char * _gnome_file_entry_expand_filename (const char *input,
+					  const char *default_dir);
 
 
 static void gnome_file_entry_class_init (GnomeFileEntryClass *class);
@@ -427,30 +431,34 @@ tilde_expand (const char *str)
 static gchar *
 build_filename (GnomeFileEntry *fentry)
 {
-	gchar *p;
-	char *path;
+	const char *text;
+	char *file;
 
-	p = tilde_expand (gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry))));
+	g_return_val_if_fail (fentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
 
-	if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
-		path = g_build_filename (fentry->default_path, p, NULL);
-	} else {
-		path = g_strdup (p);
-	}
-	g_free (p);
-	
+	text = gtk_entry_get_text
+		(GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
+
+	if (text == NULL || text[0] == '\0')
+		return NULL;
+
+	file = _gnome_file_entry_expand_filename (text, fentry->default_path);
+	if (file == NULL)
+		return NULL;
+
 	/* Now append an '/' if it doesn't exist and we're in directory only mode */
-	if (fentry->_priv->directory_entry && strlen(path) > 0 &&
-	    path[strlen (path)] != G_DIR_SEPARATOR ) {
+	if (fentry->_priv->directory_entry && strlen(file) > 0 &&
+	    file[strlen (file)] != G_DIR_SEPARATOR ) {
 		gchar *tmp;
 
-		tmp = g_strconcat (path, "/", NULL);
+		tmp = g_strconcat (file, "/", NULL);
 
-		g_free (path);
+		g_free (file);
 		return tmp;
 	}
 
-	return path;
+	return file;
 }
 
 static void
@@ -794,6 +802,34 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 	fentry->default_path = p;
 }
 
+/* Expand files, useful here and in GnomeIconEntry */
+char *
+_gnome_file_entry_expand_filename (const char *input, const char *default_dir)
+{
+	if (input == NULL) {
+		return NULL;
+	} else if (input[0] == '\0') {
+		return g_strdup ("");
+	} else if (input[0] == G_DIR_SEPARATOR) {
+		return g_strdup (input);
+	} else if (input[0] == '~') {
+		return tilde_expand (input);
+	} else if (default_dir != NULL) {
+		char *ret = g_build_filename (default_dir, input, NULL);
+		if (ret[0] == '~') {
+			char *tmp = tilde_expand (ret);
+			g_free (ret);
+			return tmp;
+		}
+		return ret;
+	} else {
+		char *cwd = g_get_current_dir ();
+		char *ret = g_build_filename (cwd, input, NULL);
+		g_free (cwd);
+		return ret;
+	}
+}
+
 /**
  * gnome_file_entry_get_full_path:
  * @fentry: The GnomeFileEntry widget to work with.
@@ -813,67 +849,45 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 char *
 gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 {
-	char *p;
-	char *t;
+	const char *text;
+	char *file;
 
 	g_return_val_if_fail (fentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
 
-	t = gtk_editable_get_chars (GTK_EDITABLE (gnome_file_entry_gtk_entry (fentry)), 0, -1);
+	text = gtk_entry_get_text
+		(GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 
-	if (!t)
+	if (text == NULL || text[0] == '\0')
 		return NULL;
-	else if (!*t) {
-		g_free (t);
+
+	file = _gnome_file_entry_expand_filename (text, fentry->default_path);
+	if (file == NULL)
 		return NULL;
-	}
-
-	if (*t == G_DIR_SEPARATOR)
-		p = t;
-	else if (*t == '~') {
-		p = tilde_expand (t);
-		g_free (t);
-	} else if (fentry->default_path) {
-		p = g_build_filename (fentry->default_path, t, NULL);
-		g_free (t);
-		if (*p == '~') {
-			t = p;
-			p = tilde_expand (t);
-			g_free (t);
-		}
-	} else {
-		gchar *cwd = g_get_current_dir ();
-
-		p = g_build_filename (cwd, t, NULL);
-		g_free (cwd);
-		g_free (t);
-	}
 
 	if (file_must_exist) {
-		if (!p)
-			return NULL;
-
 		if (fentry->_priv->directory_entry) {
 			char *d;
 
-			if (g_file_test (p, G_FILE_TEST_IS_DIR))
-				return p;
+			if (g_file_test (file, G_FILE_TEST_IS_DIR))
+				return file;
 
-			d = g_path_get_dirname (p);
-			g_free (p);
+			d = g_path_get_dirname (file);
+			g_free (file);
 
 			if (g_file_test (d, G_FILE_TEST_IS_DIR))
 				return d;
+			g_free (d);
 
-			p = d;
-		} else if (g_file_test (p, G_FILE_TEST_EXISTS)) {
-			return p;
+			return NULL;
+		} else if (g_file_test (file, G_FILE_TEST_EXISTS)) {
+			return file;
 		}
 
-		g_free (p);
+		g_free (file);
 		return NULL;
 	} else {
-		return p;
+		return file;
 	}
 }
 

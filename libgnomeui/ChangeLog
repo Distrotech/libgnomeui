@@ -1,3 +1,14 @@
+Fri Apr 19 16:25:18 2002  George Lebl <jirka@5z.com>
+
+	* gnome-file-entry.c, gnome-icon-entry.c: export the file expanding
+	  function from file-entry to icon-entry (underscore prefixed
+	  function not in a header) and use this in icon entry so that
+	  we can store our selection outside of the file entry which changes
+	  often.  This way we fix #76640 and #77215.  Fix a few leaks
+	  in icon entry.  Use gtk_window_present to show the dialog once
+	  hidden.  Always reselect the picked icon on the dialog to have
+	  proper 'Cancel' behaviour.
+
 2002-04-09  jacob berkman  <jacob@ximian.com>
 
 	* gnome-file-entry.c (tilde_expand): move up and fix some warnings
