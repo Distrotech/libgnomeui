@@ -1,3 +1,72 @@
+1998-11-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	Wheee!  Now we have stippling capabilities in the canvas.
+
+	* gnome-canvas.h (GnomeCanvas): Added fields for the offsets of
+	the temporary drawing pixmap.  This is needed by
+	gnome_canvas_set_stipple_origin().
+
+	* gnome-canvas.[ch] (gnome_canvas_set_stipple_origin): New public
+	function to set the stipple origin of an item's gc.  For use only
+	by item implementations.
+
+	* gnome-canvas.c (paint): Set the draw_xofs and draw_yofs fields
+	of the canvas.
+
+	* gnome-canvas-rect-ellipse.h (GnomeCanvasRE): Added fields for
+	the fill and outline stipple patterns.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_class_init): Added
+	the arguments for stippling.
+	(set_stipple): New convenience function to set the stipple pattern
+	of a gc.
+	(gnome_canvas_re_set_arg): Set the fill/outline stipple arguments.
+	(gnome_canvas_re_get_arg): Query the fill/outline stipple
+	arguments.
+	(gnome_canvas_re_reconfigure): Reset the stipples.
+	(gnome_canvas_rect_draw): Set the origin of the stipple patterns
+	as appropriate.
+	(gnome_canvas_ellipse_draw): Likewise.
+	(gnome_canvas_re_destroy): Unref the stipple bitmaps.
+
+	* gnome-canvas-text.h (GnomeCanvasText): Added a stipple field.
+
+	* gnome-canvas-text.c (gnome_canvas_text_class_init): Register the
+	fill_stipple argument.
+	(gnome_canvas_text_destroy): Unref the stipple bitmap.
+	(set_stipple): New convenience function to set the stipple pattern.
+	(gnome_canvas_text_set_arg): Set the fill_stipple argument.
+	(gnome_canvas_text_get_arg): Query the fill_stipple argument.
+	(gnome_canvas_text_draw): Set the stipple origin as appropriate.
+
+	* gnome-canvas-line.h (GnomeCanvasLine): Added a stipple field.
+	Also, removed the arrow_gc field, since it was never used for
+	drawing.
+
+	* gnome-canvas-line.c (gnome_canvas_line_class_init): Add the
+	fill_stipple argument.
+	(gnome_canvas_line_destroy): Unref the stipple if it exists.
+	(set_stipple): New function to set the stipple pattern on the
+	line's gcs.
+	(gnome_canvas_line_set_arg): Set the stipple argument.
+	(gnome_canvas_line_get_arg): Query the stipple argument.
+	(gnome_canvas_line_draw): Set the stipple origin as appropriate.
+
+	* gnome-canvas-polygon.h (GnomeCanvasPolygon): Added fields for
+	fill and outline stipples.
+
+	* gnome-canvas-polygon.c (gnome_canvas_polygon_class_init): Added
+	the arguments for stippling.
+	(set_stipple): New convenience function to set the stipple pattern
+	of a gc.
+	(gnome_canvas_polygon_set_arg): Set the fill/outline stipple arguments.
+	(gnome_canvas_polygon_get_arg): Query the fill/outline stipple
+	arguments.
+	(gnome_canvas_polygon_reconfigure): Reset the stipples.
+	(gnome_canvas_polygon_draw): Set the origin of the stipple patterns
+	as appropriate.
+	(gnome_canvas_polygon_destroy): Unref the stipple bitmaps.
+
 1998-10-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (create_radio_menu_items): Now returns the

@@ -130,10 +130,14 @@ free_pixmap_and_mask (GnomeCanvasImage *image)
 static void
 gnome_canvas_image_destroy (GtkObject *object)
 {
+	GnomeCanvasImage *image;
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_IMAGE (object));
 
-	free_pixmap_and_mask (GNOME_CANVAS_IMAGE (object));
+	image = GNOME_CANVAS_IMAGE (object);
+
+	free_pixmap_and_mask (image);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);

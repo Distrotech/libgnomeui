@@ -37,6 +37,8 @@ BEGIN_GNOME_DECLS
  * outline_color	string			W		X color specification for outline color,
  *								or NULL pointer for no color (transparent).
  * outline_color_gdk	GdkColor*		RW		Allocated GdkColor for outline.
+ * fill_stipple		GdkBitmap*		RW		Stipple pattern for fill
+ * outline_stipple	GdkBitmap*		RW		Stipple pattern for outline
  * width_pixels		uint			RW		Width of the outline in pixels.  The outline will
  *								not be scaled when the canvas zoom factor is changed.
  * width_units		double			RW		Width of the outline in canvas units.  The outline
@@ -56,22 +58,25 @@ typedef struct _GnomeCanvasPolygonClass GnomeCanvasPolygonClass;
 struct _GnomeCanvasPolygon {
 	GnomeCanvasItem item;
 
-	int num_points;		/* Number of points in the polygon */
-	double *coords;		/* Array of coordinates for the polygon's points.  X coords are in
-				 * the even indices, Y coords are in the odd indices.
-				 */
+	int num_points;			/* Number of points in the polygon */
+	double *coords;			/* Array of coordinates for the polygon's points.  X coords
+					 * are in the even indices, Y coords are in the odd indices.
+					 */
 
-	double width;		/* Width of polygon's outline */
+	double width;			/* Width of polygon's outline */
 
-	gulong fill_pixel;	/* Color for fill */
-	gulong outline_pixel;	/* Color for outline */
+	gulong fill_pixel;		/* Color for fill */
+	gulong outline_pixel;		/* Color for outline */
 
-	GdkGC *fill_gc;		/* GC for filling */
-	GdkGC *outline_gc;	/* GC for outline */
+	GdkBitmap *fill_stipple;	/* Stipple for fill */
+	GdkBitmap *outline_stipple;	/* Stipple for outline */
 
-	int fill_set : 1;	/* Is fill color set? */
-	int outline_set : 1;	/* Is outline color set? */
-	int width_pixels : 1;	/* Is outline width specified in pixels or units? */
+	GdkGC *fill_gc;			/* GC for filling */
+	GdkGC *outline_gc;		/* GC for outline */
+
+	int fill_set : 1;		/* Is fill color set? */
+	int outline_set : 1;		/* Is outline color set? */
+	int width_pixels : 1;		/* Is outline width specified in pixels or units? */
 };
 
 struct _GnomeCanvasPolygonClass {

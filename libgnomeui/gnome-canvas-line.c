@@ -40,6 +40,7 @@ enum {
 	ARG_POINTS,
 	ARG_FILL_COLOR,
 	ARG_FILL_COLOR_GDK,
+	ARG_FILL_STIPPLE,
 	ARG_WIDTH_PIXELS,
 	ARG_WIDTH_UNITS,
 	ARG_CAP_STYLE,
@@ -116,6 +117,7 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasLine::points", GTK_TYPE_POINTER, GTK_ARG_READWRITE, ARG_POINTS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasLine::fill_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::cap_style", GTK_TYPE_GDK_CAP_STYLE, GTK_ARG_READWRITE, ARG_CAP_STYLE);
@@ -173,6 +175,9 @@ gnome_canvas_line_destroy (GtkObject *object)
 
 	if (line->last_coords)
 		g_free (line->last_coords);
+
+	if (line->stipple)
+		gdk_bitmap_unref (line->stipple);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -445,7 +450,7 @@ reconfigure_arrows (GnomeCanvasLine *line)
 
 /* Convenience function to set the line's GC's foreground color */
 static void
-set_line_gcs_foreground (GnomeCanvasLine *line)
+set_line_gc_foreground (GnomeCanvasLine *line)
 {
 	GdkColor c;
 
@@ -454,7 +459,6 @@ set_line_gcs_foreground (GnomeCanvasLine *line)
 
 	c.pixel = line->pixel;
 	gdk_gc_set_foreground (line->gc, &c);
-	gdk_gc_set_foreground (line->arrow_gc, &c);
 }
 
 /* Recalculate the line's width and set it in its GC */
@@ -476,6 +480,23 @@ set_line_gc_width (GnomeCanvasLine *line)
 				    line->line_style,
 				    (line->first_arrow || line->last_arrow) ? GDK_CAP_BUTT : line->cap,
 				    line->join);
+}
+
+/* Sets the stipple pattern for the line */
+static void
+set_stipple (GnomeCanvasLine *line, GdkBitmap *stipple, int reconfigure)
+{
+	if (line->stipple && !reconfigure)
+		gdk_bitmap_unref (line->stipple);
+
+	line->stipple = stipple;
+	if (stipple && !reconfigure)
+		gdk_bitmap_ref (stipple);
+
+	if (line->gc) {
+		gdk_gc_set_stipple (line->gc, stipple);
+		gdk_gc_set_fill (line->gc, stipple ? GDK_STIPPLED : GDK_SOLID);
+	}
 }
 
 /* Convenience functions to recalculate the arrows and bounds of the line */
@@ -536,12 +557,16 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_FILL_COLOR:
 		gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color);
 		line->pixel = color.pixel;
-		set_line_gcs_foreground (line);
+		set_line_gc_foreground (line);
 		break;
 
 	case ARG_FILL_COLOR_GDK:
 		line->pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
-		set_line_gcs_foreground (line);
+		set_line_gc_foreground (line);
+		break;
+
+	case ARG_FILL_STIPPLE:
+		set_stipple (line, GTK_VALUE_BOXED (*arg), FALSE);
 		break;
 
 	case ARG_WIDTH_PIXELS:
@@ -637,6 +662,10 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		GTK_VALUE_BOXED (*arg) = color;
 		break;
 
+	case ARG_FILL_STIPPLE:
+		GTK_VALUE_BOXED (*arg) = line->stipple;
+		break;
+
 	case ARG_CAP_STYLE:
 		GTK_VALUE_ENUM (*arg) = line->cap;
 		break;
@@ -693,8 +722,9 @@ gnome_canvas_line_reconfigure (GnomeCanvasItem *item)
 	if (parent_class->reconfigure)
 		(* parent_class->reconfigure) (item);
 
-	set_line_gcs_foreground (line);
+	set_line_gc_foreground (line);
 	set_line_gc_width (line);
+	set_stipple (line, line->stipple, TRUE);
 	reconfigure_arrows_and_bounds (line);
 }
 
@@ -709,7 +739,6 @@ gnome_canvas_line_realize (GnomeCanvasItem *item)
 		(* parent_class->realize) (item);
 
 	line->gc = gdk_gc_new (item->canvas->layout.bin_window);
-	line->arrow_gc = gdk_gc_new (item->canvas->layout.bin_window);
 
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
@@ -722,7 +751,6 @@ gnome_canvas_line_unrealize (GnomeCanvasItem *item)
 	line = GNOME_CANVAS_LINE (item);
 
 	gdk_gc_unref (line->gc);
-	gdk_gc_unref (line->arrow_gc);
 
 	if (parent_class->unrealize)
 		(* parent_class->unrealize) (item);
@@ -767,6 +795,10 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	gnome_canvas_item_i2w (item, &dx, &dy);
 
 	item_to_canvas (item->canvas, line->coords, points, line->num_points, dx, dy, x, y);
+
+	if (line->stipple)
+		gnome_canvas_set_stipple_origin (item->canvas, line->gc);
+
 	gdk_draw_lines (drawable, line->gc, points, line->num_points);
 
 	if (points != static_points)

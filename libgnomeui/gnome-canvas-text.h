@@ -42,6 +42,7 @@ BEGIN_GNOME_DECLS
  * justification	GtkJustification	RW		Justification for multiline text
  * fill_color		string			W		X color specification for text
  * fill_color_gdk	GdkColor*		RW		Pointer to an allocated GdkColor
+ * fill_stipple		GdkBitmap*		RW		Stipple pattern for filling the text
  * clip_width		double			RW		Width of clip rectangle
  * clip_height		double			RW		Height of clip rectangle
  * clip			boolean			RW		Use clipping rectangle?
@@ -79,6 +80,7 @@ struct _GnomeCanvasText {
 	double xofs, yofs;		/* Text offset distance from anchor position */
 
 	gulong pixel;			/* Fill color */
+	GdkBitmap *stipple;		/* Stipple for text */
 	GdkGC *gc;			/* GC for drawing text */
 
 	int cx, cy;			/* Top-left canvas coordinates for text */

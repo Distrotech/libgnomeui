@@ -36,6 +36,7 @@ enum {
 	ARG_Y_OFFSET,
 	ARG_FILL_COLOR,
 	ARG_FILL_COLOR_GDK,
+	ARG_FILL_STIPPLE,
 	ARG_TEXT_WIDTH,
 	ARG_TEXT_HEIGHT
 };
@@ -113,6 +114,7 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasText::y_offset", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y_OFFSET);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasText::fill_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasText::text_width", GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_WIDTH);
 	gtk_object_add_arg_type ("GnomeCanvasText::text_height", GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_HEIGHT);
 
@@ -161,6 +163,9 @@ gnome_canvas_text_destroy (GtkObject *object)
 		g_free (text->lines);
 
 	gdk_font_unref (text->font);
+
+	if (text->stipple)
+		gdk_bitmap_unref (text->stipple);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -346,6 +351,23 @@ set_text_gc_foreground (GnomeCanvasText *text)
 	gdk_gc_set_foreground (text->gc, &c);
 }
 
+/* Sets the stipple pattern for the text */
+static void
+set_stipple (GnomeCanvasText *text, GdkBitmap *stipple, int reconfigure)
+{
+	if (text->stipple && !reconfigure)
+		gdk_bitmap_unref (text->stipple);
+
+	text->stipple = stipple;
+	if (stipple && !reconfigure)
+		gdk_bitmap_ref (stipple);
+
+	if (text->gc) {
+		gdk_gc_set_stipple (text->gc, stipple);
+		gdk_gc_set_fill (text->gc, stipple ? GDK_STIPPLED : GDK_SOLID);
+	}
+}
+
 static void
 gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
@@ -448,6 +470,10 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		set_text_gc_foreground (text);
 		break;
 
+	case ARG_FILL_STIPPLE:
+		set_stipple (text, GTK_VALUE_BOXED (*arg), FALSE);
+		break;
+
 	default:
 		break;
 	}
@@ -513,6 +539,10 @@ gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		GTK_VALUE_BOXED (*arg) = color;
 		break;
 
+	case ARG_FILL_STIPPLE:
+		GTK_VALUE_BOXED (*arg) = text->stipple;
+		break;
+
 	case ARG_TEXT_WIDTH:
 		GTK_VALUE_DOUBLE (*arg) = text->max_width / text->item.canvas->pixels_per_unit;
 		break;
@@ -538,6 +568,7 @@ gnome_canvas_text_reconfigure (GnomeCanvasItem *item)
 		(* parent_class->reconfigure) (item);
 
 	set_text_gc_foreground (text);
+	set_stipple (text, text->stipple, TRUE);
 
 	recalc_bounds (text);
 }
@@ -623,6 +654,9 @@ gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	lines = text->lines;
 	ypos = text->cy + text->font->ascent;
+
+	if (text->stipple)
+		gnome_canvas_set_stipple_origin (item->canvas, text->gc);
 
 	for (i = 0; i < text->num_lines; i++) {
 		if (lines->length != 0) {

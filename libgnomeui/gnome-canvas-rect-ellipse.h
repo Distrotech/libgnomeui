@@ -33,10 +33,13 @@ BEGIN_GNOME_DECLS
  * outline_color	string		W		X color specification for outline color,
  *							or NULL pointer for no color (transparent)
  * outline_color_gdk	GdkColor*	RW		Allocated GdkColor for outline
+ * fill_stipple		GdkBitmap*	RW		Stipple pattern for fill
+ * outline_stipple	GdkBitmap*	RW		Stipple pattern for outline
  * width_pixels		uint		RW		Width of the outline in pixels.  The outline will
  *							not be scaled when the canvas zoom factor is changed.
  * width_units		double		RW		Width of the outline in canvas units.  The outline
- * will be scaled when the canvas zoom factor is changed.  */
+ *							will be scaled when the canvas zoom factor is changed.
+ */
 
 
 #define GNOME_TYPE_CANVAS_RE            (gnome_canvas_re_get_type ())
@@ -61,6 +64,9 @@ struct _GnomeCanvasRE {
 
 	gulong fill_pixel;		/* Fill color */
 	gulong outline_pixel;		/* Outline color */
+
+	GdkBitmap *fill_stipple;	/* Stipple for fill */
+	GdkBitmap *outline_stipple;	/* Stipple for outline */
 
 	GdkGC *fill_gc;			/* GC for filling */
 	GdkGC *outline_gc;		/* GC for outline */

@@ -2255,6 +2255,9 @@ paint (GnomeCanvas *canvas)
 
 	/* Set up the temporary pixmap */
 
+	canvas->draw_xofs = draw_x1;
+	canvas->draw_yofs = draw_y1;
+
 	width = draw_x2 - draw_x1;
 	height = draw_y2 - draw_y1;
 
@@ -2607,4 +2610,14 @@ gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
 				      &n);
 
 	return TRUE;
+}
+
+void
+gnome_canvas_set_stipple_origin (GnomeCanvas *canvas, GdkGC *gc)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+	g_return_if_fail (gc != NULL);
+
+	gdk_gc_set_ts_origin (gc, -canvas->draw_xofs, -canvas->draw_yofs);
 }

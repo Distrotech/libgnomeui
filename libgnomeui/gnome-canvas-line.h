@@ -37,6 +37,7 @@ BEGIN_GNOME_DECLS
  *								the odd indices.
  * fill_color		string			W		X color specification for line
  * fill_color_gdk	GdkColor*		RW		Pointer to an allocated GdkColor
+ * fill_stipple		GdkBitmap*		RW		Stipple pattern for the line
  * width_pixels		uint			R		Width of the line in pixels.  The line width
  *								will not be scaled when the canvas zoom factor changes.
  * width_units		double			R		Width of the line in canvas units.  The line width
@@ -83,6 +84,8 @@ struct _GnomeCanvasLine {
 
 	gulong pixel;		/* Color for line */
 
+	GdkBitmap *stipple;	/* Stipple pattern */
+
 	GdkCapStyle cap;	/* Cap style for line */
 	GdkJoinStyle join;	/* Join style for line */
 	GdkLineStyle line_style;/* Style for the line */
@@ -102,7 +105,6 @@ struct _GnomeCanvasLine {
 	int spline_steps;	/* Number of steps in each spline segment */
 
 	GdkGC *gc;		/* GC for drawing line */
-	GdkGC *arrow_gc;	/* GC for drawing arrowheads */
 };
 
 struct _GnomeCanvasLineClass {

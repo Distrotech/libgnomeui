@@ -26,6 +26,8 @@ enum {
 	ARG_FILL_COLOR_GDK,
 	ARG_OUTLINE_COLOR,
 	ARG_OUTLINE_COLOR_GDK,
+	ARG_FILL_STIPPLE,
+	ARG_OUTLINE_STIPPLE,
 	ARG_WIDTH_PIXELS,
 	ARG_WIDTH_UNITS
 };
@@ -33,6 +35,7 @@ enum {
 
 static void gnome_canvas_re_class_init (GnomeCanvasREClass *class);
 static void gnome_canvas_re_init       (GnomeCanvasRE      *re);
+static void gnome_canvas_re_destroy    (GtkObject          *object);
 static void gnome_canvas_re_set_arg    (GtkObject          *object,
 					GtkArg             *arg,
 					guint               arg_id);
@@ -92,9 +95,12 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasRE::fill_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
+	gtk_object_add_arg_type ("GnomeCanvasRE::outline_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_OUTLINE_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasRE::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasRE::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 
+	object_class->destroy = gnome_canvas_re_destroy;
 	object_class->set_arg = gnome_canvas_re_set_arg;
 	object_class->get_arg = gnome_canvas_re_get_arg;
 
@@ -113,6 +119,26 @@ gnome_canvas_re_init (GnomeCanvasRE *re)
 	re->x2 = 0.0;
 	re->y2 = 0.0;
 	re->width = 0.0;
+}
+
+static void
+gnome_canvas_re_destroy (GtkObject *object)
+{
+	GnomeCanvasRE *re;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_RE (object));
+
+	re = GNOME_CANVAS_RE (object);
+
+	if (re->fill_stipple)
+		gdk_bitmap_unref (re->fill_stipple);
+
+	if (re->outline_stipple)
+		gdk_bitmap_unref (re->outline_stipple);
+
+	if (GTK_OBJECT_CLASS (re_parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (re_parent_class)->destroy) (object);
 }
 
 static void
@@ -160,6 +186,23 @@ set_gc_foreground (GdkGC *gc, gulong pixel)
 
 	c.pixel = pixel;
 	gdk_gc_set_foreground (gc, &c);
+}
+
+/* Sets the stipple pattern for the specified gc */
+static void
+set_stipple (GdkGC *gc, GdkBitmap **internal_stipple, GdkBitmap *stipple, int reconfigure)
+{
+	if (*internal_stipple && !reconfigure)
+		gdk_bitmap_unref (*internal_stipple);
+
+	*internal_stipple = stipple;
+	if (stipple && !reconfigure)
+		gdk_bitmap_ref (stipple);
+
+	if (gc) {
+		gdk_gc_set_stipple (gc, stipple);
+		gdk_gc_set_fill (gc, stipple ? GDK_STIPPLED : GDK_SOLID);
+	}
 }
 
 /* Recalculate the outline width of the rectangle/ellipse and set it in its GC */
@@ -244,6 +287,14 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		set_gc_foreground (re->outline_gc, re->outline_pixel);
 		break;
 
+	case ARG_FILL_STIPPLE:
+		set_stipple (re->fill_gc, &re->fill_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+		break;
+
+	case ARG_OUTLINE_STIPPLE:
+		set_stipple (re->outline_gc, &re->outline_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+		break;
+		
 	case ARG_WIDTH_PIXELS:
 		re->width = GTK_VALUE_UINT (*arg);
 		re->width_pixels = TRUE;
@@ -309,6 +360,14 @@ gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		get_color_arg (re, re->outline_pixel, arg);
 		break;
 
+	case ARG_FILL_STIPPLE:
+		GTK_VALUE_BOXED (*arg) = re->fill_stipple;
+		break;
+
+	case ARG_OUTLINE_STIPPLE:
+		GTK_VALUE_BOXED (*arg) = re->outline_stipple;
+		break;
+
 	default:
 		arg->type = GTK_TYPE_INVALID;
 		break;
@@ -327,6 +386,8 @@ gnome_canvas_re_reconfigure (GnomeCanvasItem *item)
 
 	set_gc_foreground (re->fill_gc, re->fill_pixel);
 	set_gc_foreground (re->outline_gc, re->outline_pixel);
+	set_stipple (re->fill_gc, &re->fill_stipple, re->fill_stipple, TRUE);
+	set_stipple (re->outline_gc, &re->outline_stipple, re->outline_stipple, TRUE);
 	set_outline_gc_width (re);
 
 	recalc_bounds (re);
@@ -460,7 +521,10 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int
 	gnome_canvas_w2c (item->canvas, dx + re->x1, dy + re->y1, &x1, &y1);
 	gnome_canvas_w2c (item->canvas, dx + re->x2, dy + re->y2, &x2, &y2);
 
-	if (re->fill_set)
+	if (re->fill_set) {
+		if (re->fill_stipple)
+			gnome_canvas_set_stipple_origin (item->canvas, re->fill_gc);
+
 		gdk_draw_rectangle (drawable,
 				    re->fill_gc,
 				    TRUE,
@@ -468,8 +532,12 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int
 				    y1 - y,
 				    x2 - x1 + 1,
 				    y2 - y1 + 1);
+	}
 
-	if (re->outline_set)
+	if (re->outline_set) {
+		if (re->outline_stipple)
+			gnome_canvas_set_stipple_origin (item->canvas, re->outline_gc);
+
 		gdk_draw_rectangle (drawable,
 				    re->outline_gc,
 				    FALSE,
@@ -477,6 +545,7 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int
 				    y1 - y,
 				    x2 - x1,
 				    y2 - y1);
+	}
 }
 
 static double
@@ -623,7 +692,10 @@ gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, 
 	gnome_canvas_w2c (item->canvas, dx + re->x1, dy + re->y1, &x1, &y1);
 	gnome_canvas_w2c (item->canvas, dx + re->x2, dy + re->y2, &x2, &y2);
 
-	if (re->fill_set)
+	if (re->fill_set) {
+		if (re->fill_stipple)
+			gnome_canvas_set_stipple_origin (item->canvas, re->fill_gc);
+		
 		gdk_draw_arc (drawable,
 			      re->fill_gc,
 			      TRUE,
@@ -633,8 +705,12 @@ gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, 
 			      y2 - y1,
 			      0 * 64,
 			      360 * 64);
+	}
 
-	if (re->outline_set)
+	if (re->outline_set) {
+		if (re->outline_stipple)
+			gnome_canvas_set_stipple_origin (item->canvas, re->outline_gc);
+
 		gdk_draw_arc (drawable,
 			      re->outline_gc,
 			      FALSE,
@@ -644,6 +720,7 @@ gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, 
 			      y2 - y1,
 			      0 * 64,
 			      360 * 64);
+	}
 }
 
 static double

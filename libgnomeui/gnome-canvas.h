@@ -288,6 +288,8 @@ struct _GnomeCanvas {
 						 * but not (x2, y2) -- specified in canvas pixel units.
 						 */
 
+	int draw_xofs, draw_yofs;		/* Offsets of the temporary drawing pixmap */
+
 	int zoom_xofs, zoom_yofs; 		/* Internal pixel offsets for when zoomed out */
 
 	int width, height;			/* Size of canvas window in pixels */
@@ -387,6 +389,11 @@ void gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double wo
  * string is null, then it returns FALSE. Otherwise, it returns TRUE.
  */
 int gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color);
+
+/* Sets the stipple origin of the specified gc so that it will be aligned with all the stipples used
+ * in the specified canvas.  This is intended for use only by canvas item implementations.
+ */
+void gnome_canvas_set_stipple_origin (GnomeCanvas *canvas, GdkGC *gc);
 
 
 END_GNOME_DECLS

@@ -40,6 +40,8 @@ enum {
 	ARG_FILL_COLOR_GDK,
 	ARG_OUTLINE_COLOR,
 	ARG_OUTLINE_COLOR_GDK,
+	ARG_FILL_STIPPLE,
+	ARG_OUTLINE_STIPPLE,
 	ARG_WIDTH_PIXELS,
 	ARG_WIDTH_UNITS
 };
@@ -108,6 +110,8 @@ gnome_canvas_polygon_class_init (GnomeCanvasPolygonClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
+	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_OUTLINE_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 
@@ -142,6 +146,12 @@ gnome_canvas_polygon_destroy (GtkObject *object)
 
 	if (poly->coords)
 		g_free (poly->coords);
+
+	if (poly->fill_stipple)
+		gdk_bitmap_unref (poly->fill_stipple);
+
+	if (poly->outline_stipple)
+		gdk_bitmap_unref (poly->outline_stipple);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -265,6 +275,23 @@ set_gc_foreground (GdkGC *gc, gulong pixel)
 	gdk_gc_set_foreground (gc, &c);
 }
 
+/* Sets the stipple pattern for the specified gc */
+static void
+set_stipple (GdkGC *gc, GdkBitmap **internal_stipple, GdkBitmap *stipple, int reconfigure)
+{
+	if (*internal_stipple && !reconfigure)
+		gdk_bitmap_unref (*internal_stipple);
+
+	*internal_stipple = stipple;
+	if (stipple && !reconfigure)
+		gdk_bitmap_ref (stipple);
+
+	if (gc) {
+		gdk_gc_set_stipple (gc, stipple);
+		gdk_gc_set_fill (gc, stipple ? GDK_STIPPLED : GDK_SOLID);
+	}
+}
+
 /* Recalculate the outline width of the polygon and set it in its GC */
 static void
 set_outline_gc_width (GnomeCanvasPolygon *poly)
@@ -343,6 +370,14 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		set_gc_foreground (poly->outline_gc, poly->outline_pixel);
 		break;
 
+	case ARG_FILL_STIPPLE:
+		set_stipple (poly->fill_gc, &poly->fill_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+		break;
+
+	case ARG_OUTLINE_STIPPLE:
+		set_stipple (poly->outline_gc, &poly->outline_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+		break;
+
 	case ARG_WIDTH_PIXELS:
 		poly->width = GTK_VALUE_UINT (*arg);
 		poly->width_pixels = TRUE;
@@ -403,6 +438,14 @@ gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		get_color_arg (poly, poly->outline_pixel, arg);
 		break;
 
+	case ARG_FILL_STIPPLE:
+		GTK_VALUE_BOXED (*arg) = poly->fill_stipple;
+		break;
+
+	case ARG_OUTLINE_STIPPLE:
+		GTK_VALUE_BOXED (*arg) = poly->outline_stipple;
+		break;
+
 	default:
 		arg->type = GTK_TYPE_INVALID;
 		break;
@@ -421,6 +464,8 @@ gnome_canvas_polygon_reconfigure (GnomeCanvasItem *item)
 
 	set_gc_foreground (poly->fill_gc, poly->fill_pixel);
 	set_gc_foreground (poly->outline_gc, poly->outline_pixel);
+	set_stipple (poly->fill_gc, &poly->fill_stipple, poly->fill_stipple, TRUE);
+	set_stipple (poly->outline_gc, &poly->outline_stipple, poly->outline_stipple, TRUE);
 	set_outline_gc_width (poly);
 
 	recalc_bounds (poly);
@@ -501,11 +546,19 @@ gnome_canvas_polygon_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	item_to_canvas (item->canvas, poly->coords, points, poly->num_points, dx, dy, x, y);
 
-	if (poly->fill_set)
-		gdk_draw_polygon (drawable, poly->fill_gc, TRUE, points, poly->num_points);
+	if (poly->fill_set) {
+		if (poly->fill_stipple)
+			gnome_canvas_set_stipple_origin (item->canvas, poly->fill_gc);
 
-	if (poly->outline_set)
+		gdk_draw_polygon (drawable, poly->fill_gc, TRUE, points, poly->num_points);
+	}
+
+	if (poly->outline_set) {
+		if (poly->outline_stipple)
+			gnome_canvas_set_stipple_origin (item->canvas, poly->outline_gc);
+
 		gdk_draw_polygon (drawable, poly->outline_gc, FALSE, points, poly->num_points);
+	}
 
 	/* Done */
 
