@@ -319,7 +319,7 @@ typedef struct {
 #define GNOMEUIINFO_MENU_REPLACE_ITEM(cb, data)                             \
         { GNOME_APP_UI_ITEM, N_("_Replace..."), N_("Replace a string"),     \
           cb, (gpointer)(data), NULL,                                       \
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SRCHRPL,               \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SRCHRPL,                 \
           GNOME_KEY_NAME_REPLACE, GNOME_KEY_MOD_REPLACE, NULL }
 
 #define GNOMEUIINFO_MENU_PROPERTIES_ITEM(cb, data)                          \
