@@ -23,6 +23,8 @@
 #include <gdk_imlib.h>
 #endif
 
+BEGIN_GNOME_DECLS
+
 #define GNOME_ICON_LIST(obj)     GTK_CHECK_CAST (obj, gnome_icon_list_get_type (), GnomeIconList)
 #define GNOME_ICON_LIST_CLASS(k) GTK_CHECK_CLASS_CAST (k, gnome_icon_list_get_type (), GnomeIconListClass)
 #define GNOME_IS_ICON_LIST(obj)  GTK_CHECK_TYPE (obj, gnome_icon_list_get_type ())
@@ -171,6 +173,9 @@ GtkVisibility  gnome_icon_list_icon_is_visible     (GnomeIconList *gil,
 int            gnome_icon_list_get_icon_at         (GnomeIconList *gil, int x, int y);
 
 int            gnome_icon_list_get_items_per_line  (GnomeIconList *gil);
+
+END_GNOME_DECLS
+
 #endif /* _GNOME_ICON_LIST_H_ */
 
 

@@ -1,3 +1,8 @@
+1998-10-14  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-icon-list.h: BEGIN_GNOME_DECLS, END_GNOME_DECLS so C++
+	programs will link.
+
 1998-10-14  David Abilleira  <odaf@nexo.es>
 
 	* gnome-font-picker.[ch] New widget for selecting a font from a
@@ -12,7 +17,6 @@
 	* libgnomeui.h: Added gnome-font-picker.h to the list of headers.
 
 	* Makefile.am: Added gnome-font-picker.[ch] to the sources.
-
 
 1998-10-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
