@@ -152,7 +152,7 @@ struct _GnomeClientClass
 {
   GtkObjectClass parent_class;
 
-  gint (* save_yourself)      (GnomeClient        *client,
+  gboolean (* save_yourself)  (GnomeClient        *client,
 			       gint                phase,
 			       GnomeSaveStyle      save_style,
 			       gint                shutdown,

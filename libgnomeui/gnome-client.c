@@ -563,6 +563,7 @@ static void
 client_save_phase_2_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client= (GnomeClient*) client_data;
+  gboolean ret;
 
   client_set_state (client, GNOME_CLIENT_SAVING_PHASE_2);
  
@@ -571,7 +572,8 @@ client_save_phase_2_callback (SmcConn smc_conn, SmPointer client_data)
 		   client->save_style,
 		   client->shutdown,
 		   client->interact_style,
-		   client->fast);
+		   client->fast,
+		   &ret);
 
   client_save_yourself_possibly_done (client);
 }
@@ -595,6 +597,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
   GnomeClient *client= (GnomeClient*) client_data;
   gchar *name, *prefix;
   int fd, len;
+  gboolean ret;
 
   if (!client_grab_widget)
     client_grab_widget = gtk_widget_new (gtk_widget_get_type(), NULL);
@@ -731,7 +734,8 @@ client_save_yourself_callback (SmcConn   smc_conn,
 		   client->save_style, 
 		   shutdown, 
 		   client->interact_style, 
-		   fast);
+		   fast,
+		   &ret);
 
   if (!client->save_yourself_emitted)
     client->save_successfull= FALSE;
@@ -2589,8 +2593,9 @@ gnome_client_request_save (GnomeClient	       *client,
     }
   else 
     {
+      gboolean ret;
       gtk_signal_emit (GTK_OBJECT (client), client_signals[SAVE_YOURSELF],
-		       1, save_style, shutdown, interact_style, fast);
+		       1, save_style, shutdown, interact_style, fast, &ret);
       if (shutdown) 
 	gtk_signal_emit (GTK_OBJECT (client), client_signals[DIE]);
     }
