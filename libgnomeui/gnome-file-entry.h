@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -34,7 +34,7 @@
 
 
 #include <libgnome/gnome-selector.h>
-#include <libgnomeui/gnome-entry.h>
+#include <libgnomeui/gnome-selector-client.h>
 
 
 G_BEGIN_DECLS
@@ -52,14 +52,14 @@ typedef struct _GnomeFileEntryPrivate GnomeFileEntryPrivate;
 typedef struct _GnomeFileEntryClass   GnomeFileEntryClass;
 
 struct _GnomeFileEntry {
-	GnomeEntry entry;
+    GnomeSelectorClient client;
 
-	/*< private >*/
-	GnomeFileEntryPrivate *_priv;
+    /*< private >*/
+    GnomeFileEntryPrivate *_priv;
 };
 
 struct _GnomeFileEntryClass {
-	GnomeEntryClass parent_class;
+    GnomeSelectorClientClass parent_class;
 };
 
 

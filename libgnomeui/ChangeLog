@@ -1,3 +1,11 @@
+2001-05-10  Martin Baulig  <baulig@suse.de>
+
+	* gnome-file-entry.h (GnomeFileEntry): Derive from GnomeSelectorClient.
+	* gnome-file-entry.c (gnome_file_entry_new): Use GnomeSelectorComponent.
+
+	* gnome-image-entry-component.h (GnomeImageEntryComponent): Derive from
+	GnomeSelectorComponent.
+
 2001-05-09  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-component.[ch]: New files.

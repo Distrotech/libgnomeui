@@ -70,7 +70,6 @@ unused_SOURCES = \
 libgnomeui_2_la_SOURCES = \
 	gnome-stock-icons.c		\
 	gnome-about.c			\
-	gnome-animator.c		\
 	gnome-canvas-init.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\

@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -40,6 +40,7 @@
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-file-selector.h>
+#include <libgnomeui/gnome-selector-component.h>
 #include "gnome-macros.h"
 #include "gnome-file-entry.h"
 
@@ -51,49 +52,49 @@ static void   gnome_file_entry_class_init   (GnomeFileEntryClass *class);
 static void   gnome_file_entry_init         (GnomeFileEntry      *gentry);
 static void   gnome_file_entry_finalize     (GObject         *object);
 
-static GnomeEntryClass *parent_class;
+static GnomeSelectorClientClass *parent_class;
 
 GType
 gnome_file_entry_get_type (void)
 {
-	static GType entry_type = 0;
+    static GType entry_type = 0;
 
-	if (!entry_type) {
-		GtkTypeInfo entry_info = {
-			"GnomeFileEntry",
-			sizeof (GnomeFileEntry),
-			sizeof (GnomeFileEntryClass),
-			(GtkClassInitFunc) gnome_file_entry_class_init,
-			(GtkObjectInitFunc) gnome_file_entry_init,
-			NULL,
-			NULL,
-			NULL
-		};
+    if (!entry_type) {
+	GtkTypeInfo entry_info = {
+	    "GnomeFileEntry",
+	    sizeof (GnomeFileEntry),
+	    sizeof (GnomeFileEntryClass),
+	    (GtkClassInitFunc) gnome_file_entry_class_init,
+	    (GtkObjectInitFunc) gnome_file_entry_init,
+	    NULL,
+	    NULL,
+	    NULL
+	};
 
-		entry_type = gtk_type_unique (gnome_entry_get_type (), &entry_info);
-	}
+	entry_type = gtk_type_unique (gnome_selector_client_get_type (), &entry_info);
+    }
 
-	return entry_type;
+    return entry_type;
 }
 
 static void
 gnome_file_entry_class_init (GnomeFileEntryClass *class)
 {
-	GtkObjectClass *object_class;
-	GObjectClass *gobject_class;
+    GtkObjectClass *object_class;
+    GObjectClass *gobject_class;
 
-	object_class = (GtkObjectClass *) class;
-	gobject_class = (GObjectClass *) class;
+    object_class = (GtkObjectClass *) class;
+    gobject_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gnome_entry_get_type ());
+    parent_class = gtk_type_class (gnome_selector_client_get_type ());
 
-	gobject_class->finalize = gnome_file_entry_finalize;
+    gobject_class->finalize = gnome_file_entry_finalize;
 }
 
 static void
 gnome_file_entry_init (GnomeFileEntry *gentry)
 {
-	gentry->_priv = g_new0 (GnomeFileEntryPrivate, 1);
+    gentry->_priv = g_new0 (GnomeFileEntryPrivate, 1);
 }
 
 GtkWidget *
@@ -101,50 +102,56 @@ gnome_file_entry_construct (GnomeFileEntry     *fentry,
 			    GNOME_Selector      corba_selector,
 			    Bonobo_UIContainer  uic)
 {
-	g_return_val_if_fail (fentry != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
-	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+    g_return_val_if_fail (fentry != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
+    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-	return (GtkWidget *) gnome_entry_construct
-		(GNOME_ENTRY (fentry), corba_selector, uic);
+    return (GtkWidget *) gnome_selector_client_construct
+	(GNOME_SELECTOR_CLIENT (fentry), corba_selector, uic);
 }
 
 GtkWidget *
 gnome_file_entry_new (void)
 {
-	GnomeSelector *selector;
+    GnomeSelector *selector;
 
-	selector = g_object_new (gnome_file_selector_get_type (), NULL);
+    selector = g_object_new (gnome_selector_component_get_type (),
+			     "use_default_entry_widget", TRUE,
+			     "want_browse_button", TRUE,
+			     "want_default_button", FALSE,
+			     "want_clear_button", FALSE,
+			     NULL);
 
-	return gnome_entry_new_full (selector, CORBA_OBJECT_NIL);
+    return gnome_file_entry_new_from_selector (BONOBO_OBJREF (selector),
+					       CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
 gnome_file_entry_new_from_selector (GNOME_Selector     corba_selector,
 				    Bonobo_UIContainer uic)
 {
-	GnomeFileEntry *fentry;
+    GnomeFileEntry *fentry;
 
-	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-	fentry = g_object_new (gnome_file_entry_get_type (), NULL);
+    fentry = g_object_new (gnome_file_entry_get_type (), NULL);
 
-	return gnome_file_entry_construct (fentry, corba_selector, uic);
+    return gnome_file_entry_construct (fentry, corba_selector, uic);
 }
 
 static void
 gnome_file_entry_finalize (GObject *object)
 {
-	GnomeFileEntry *gentry;
+    GnomeFileEntry *gentry;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (object));
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_FILE_ENTRY (object));
 
-	gentry = GNOME_FILE_ENTRY (object);
+    gentry = GNOME_FILE_ENTRY (object);
 
-	g_free (gentry->_priv);
-	gentry->_priv = NULL;
+    g_free (gentry->_priv);
+    gentry->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+    if (G_OBJECT_CLASS (parent_class)->finalize)
+	(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
