@@ -276,7 +276,7 @@ gtk_spell_check_replace(GtkSpell* spell, gchar* word) {
 	gchar* buf;
 	gint found = 1;
 
-	buf = alloca(strlen(word)+2);
+	buf = alloca(strlen(word)+3);
 	sprintf(buf, "^%s\n", word);
 	gtk_spell_send_string(spell, buf);
 	while ( (result=gtk_spell_read_string(spell)) && strcmp(result, "\n") ) {
@@ -914,15 +914,12 @@ gtk_spell_fill_info(GtkSpellInfo* sp, gchar* src) {
 	}
 }
 
-/* GtkSpell deve avere due segnali: uno indica quando sono state
-   trovate le alternative alla parola sbagliata e uno quando viene premuto
-   il bottone replace.
-   Nel primo caso esiste una funzione di GtkSpellClass->func che
-   gestisce il segnale e va a modificare la spell->list, spell->word etc.
-   FIXME: C'e' il problema di quando la stessa parola sbagliata viene
-   trovata piu' volte nella stessa riga e alla prima viene accettata,
-   ma si ripresenta perche' l'output da ispell si riferiva a prima....
-   */
+/* 
+   FIXME: there is a problem when you call gtk_spell_check(spell, "bogus bogus"):
+   if you accept bogus the first time, it will be reported again
+   because ispell checked it before...
+   The easiest solution is to spell-check a word at a time (but it's slow).
+*/
 gint
 gtk_spell_check(GtkSpell* spell, gchar* str) {
 	GtkSpellInfo *sp;
@@ -934,7 +931,7 @@ gtk_spell_check(GtkSpell* spell, gchar* str) {
 	g_return_val_if_fail(*str, 0);
 	g_return_val_if_fail(GTK_IS_SPELL(spell), 0);
 
-	buf = alloca(strlen(str)+2);
+	buf = alloca(strlen(str)+3);
 	/* check "\n" */
 	sprintf(buf, "^%s\n", str);
 	result = strchr(buf, '\n');
@@ -999,7 +996,7 @@ gtk_spell_accept(GtkSpell *spell, gchar* word) {
 	g_return_if_fail(word != NULL);
 	g_return_if_fail(GTK_IS_SPELL(spell));
 
-	buf = alloca(strlen(word)+2);
+	buf = alloca(strlen(word)+3);
 
 	if ( check_word(word) ) {
 		g_warning("`%s' not a valid word for ispell", word);
@@ -1021,7 +1018,7 @@ gtk_spell_insert(GtkSpell* spell, gchar* word, gint lowercase) {
 	g_return_if_fail(GTK_IS_SPELL(spell));
 
 	w = alloca(strlen(word)+1);
-	buf = alloca(strlen(word)+2);
+	buf = alloca(strlen(word)+3);
 
 	if ( check_word(word) ) {
 		g_warning("`%s' not a valid word for ispell", word);
