@@ -674,6 +674,31 @@ icon_list_set_selection_mode (GladeXML *xml, GtkWidget *w,
 }
 
 static void
+entry_set_max_saved (GladeXML *xml, GtkWidget *w,
+		     const char *name, const char *value)
+{
+    gnome_entry_set_max_saved (GNOME_ENTRY (w), INT (value));
+}
+
+static void
+file_entry_set_max_saved (GladeXML *xml, GtkWidget *w,
+			  const char *name, const char *value)
+{
+    entry_set_max_saved (xml, 
+			 gnome_file_entry_gnome_entry (GNOME_FILE_ENTRY (w)),
+			 name, value);
+}
+
+static void
+icon_entry_set_max_saved (GladeXML *xml, GtkWidget *w,
+			  const char *name, const char *value)
+{
+    entry_set_max_saved (xml,
+			 gnome_icon_entry_gnome_entry (GNOME_ICON_ENTRY (w)),
+			 name, value);
+}
+
+static void
 icon_list_set_row_spacing (GladeXML *xml, GtkWidget *w,
 			   const char *name, const char *value)
 {
@@ -784,6 +809,9 @@ glade_module_register_widgets (void)
     glade_register_custom_prop (GTK_TYPE_IMAGE_MENU_ITEM, "stock_item", custom_noop);
     glade_register_custom_prop (GTK_TYPE_MENU_ITEM, "stock_item", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_PIXMAP, "filename", pixmap_set_filename);
+    glade_register_custom_prop (GNOME_TYPE_ENTRY, "max_saved", entry_set_max_saved);
+    glade_register_custom_prop (GNOME_TYPE_FILE_ENTRY, "max_saved", file_entry_set_max_saved);
+    glade_register_custom_prop (GNOME_TYPE_ICON_ENTRY, "max_saved", icon_entry_set_max_saved);
 
     glade_register_widget (GNOME_TYPE_ABOUT, NULL, NULL, NULL);
     glade_register_widget (GNOME_TYPE_APP, app_build, app_build_children,

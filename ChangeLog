@@ -1,3 +1,11 @@
+2002-04-19  jacob berkman  <jacob@ximian.com>
+
+	* glade/glade-gnome.c (entry_set_max_saved): 
+	(file_entry_set_max_saved):
+	(icon_entry_set_max_saved): handle the max_saved property
+
+	fixes bug #73747
+
 2002-04-17  Federico Mena Quintero  <federico@ximian.com>
 
 	* libgnomeui/gnome-about.c (gnome_about_display_credits_dialog):
