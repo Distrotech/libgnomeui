@@ -1,3 +1,9 @@
+Thu Aug 20 15:23:58 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gtk-socket.c (gtk_socket_filter_func): We seem to
+	be getting ConfigureRequests before CreateNotify when
+	our plug window is added, so we need to handle them.
+
 Wed Aug 19 18:21:24 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c: Don't process focus requests when we don't have 

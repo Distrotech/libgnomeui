@@ -458,6 +458,23 @@ gtk_socket_send_configure_event (GtkSocket *socket)
 	      False, NoEventMask, &event);
 }
 
+static void
+gtk_socket_add_window (GtkSocket *socket, guint32 xid)
+{
+  socket->plug_window = gdk_window_lookup (xid);
+  socket->same_app = TRUE;
+  
+  if (!socket->plug_window)
+    {
+      socket->plug_window = gdk_window_foreign_new (xid);
+      socket->same_app = FALSE;
+      
+      XSelectInput (GDK_DISPLAY (),
+		    GDK_WINDOW_XWINDOW(socket->plug_window),
+		    StructureNotifyMask);
+    }
+}
+
 static GdkFilterReturn
 gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 {
@@ -478,18 +495,8 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
     case CreateNotify:
       {
 	XCreateWindowEvent *xcwe = &xevent->xcreatewindow;
-	socket->plug_window = gdk_window_lookup (xcwe->window);
-	socket->same_app = TRUE;
-	
-	if (!socket->plug_window)
-	  {
-	    socket->plug_window = gdk_window_foreign_new (xevent->xcreatewindow.window);
-	    socket->same_app = FALSE;
 
-	    XSelectInput (GDK_DISPLAY (),
-			  GDK_WINDOW_XWINDOW(socket->plug_window),
-			  StructureNotifyMask);
-	  }
+	gtk_socket_add_window (socket, xcwe->window);
 	
 	gdk_window_move_resize(socket->plug_window,
 			       0, 0,
@@ -514,6 +521,10 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
     case ConfigureRequest:
       {
 	XConfigureRequestEvent *xcre = &xevent->xconfigurerequest;
+	
+	if (!socket->plug_window)
+	  gtk_socket_add_window (socket, xcre->window);
+	
 	if (xcre->window == GDK_WINDOW_XWINDOW (socket->plug_window))
 	  {
 	    if (xcre->value_mask & (CWWidth | CWHeight))
@@ -542,7 +553,9 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
     case DestroyNotify:
       {
 	XDestroyWindowEvent *xdwe = &xevent->xdestroywindow;
-	if (xdwe->window == GDK_WINDOW_XWINDOW (socket->plug_window))
+
+	if (socket->plug_window &&
+	    (xdwe->window == GDK_WINDOW_XWINDOW (socket->plug_window)))
 	  {
 	    socket->plug_window = NULL;
 	    gtk_widget_destroy (widget);
@@ -577,6 +590,9 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
       return_val = GDK_FILTER_REMOVE;
       break;
     case MapRequest:
+      if (!socket->plug_window)
+	gtk_socket_add_window (socket, xevent->xmaprequest.window);
+	
       if (xevent->xmaprequest.window ==
 	  GDK_WINDOW_XWINDOW (socket->plug_window))
 	{
