@@ -350,7 +350,7 @@ gnome_app_create_menus_custom (GnomeApp *app,
   if (set_accel) {
 #ifdef GTK_HAVE_FEATURES_1_1_0
     ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
-    if (ag)
+    if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
       gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 #else
     at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
@@ -489,7 +489,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
   if (set_accel) {
 #ifdef GTK_HAVE_FEATURES_1_1_0
     ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
-    if (ag)
+    if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
       gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 #else
     at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");

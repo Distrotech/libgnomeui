@@ -769,10 +769,7 @@ static void gnome_dialog_destroy (GtkObject *dialog)
 
   g_list_free(GNOME_DIALOG (dialog)->buttons);
 
-#ifdef GTK_HAVE_FEATURES_1_1_0
-  if (GNOME_DIALOG(dialog)->accelerators) 
-    gtk_window_remove_accel_group(GTK_WINDOW(dialog), GNOME_DIALOG(dialog)->accelerators);
-#else
+#ifndef GTK_HAVE_FEATURES_1_1_0
   if (GNOME_DIALOG(dialog)->accelerators)
     gtk_accelerator_table_unref(GNOME_DIALOG(dialog)->accelerators);
 #endif
@@ -828,6 +825,16 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.37  1998/08/05 15:17:09  owen
+  Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
+
+  	* gnome-dialog.c (gnome_dialog_destroy): Don't remove
+  	  the accelerator group - GTK+ handles it for us.
+
+  	* gnome-app.c gnome-app-helper.c: Added gtk-1.1 code to check
+  	  if AccelGroup is already attached before attaching it
+  	  again.
+
   Revision 1.36  1998/07/27 14:37:10  pavlov
   replaced GTK_HAVE_ACCEL_GROUP with GTK_HAVE_FEATURES_1_1_0
 

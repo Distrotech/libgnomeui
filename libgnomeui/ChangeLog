@@ -1,3 +1,12 @@
+Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-dialog.c (gnome_dialog_destroy): Don't remove
+	  the accelerator group - GTK+ handles it for us.
+
+	* gnome-app.c gnome-app-helper.c: Added gtk-1.1 code to check
+	  if AccelGroup is already attached before attaching it 
+	  again.
+
 1998-08-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtkcauldron.c: Fixup includes.
@@ -26,6 +35,7 @@
 	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Take the
 	absolute value of the width/height arguments.
 
+>>>>>>> 1.365
 1998-08-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_draw): Use the zoom offsets when
