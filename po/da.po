@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
-"POT-Creation-Date: 2002-05-18 12:08+0200\n"
-"PO-Revision-Date: 2002-05-18 12:08+0200\n"
+"POT-Creation-Date: 2002-05-25 21:29+0200\n"
+"PO-Revision-Date: 2002-05-25 21:39+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -150,88 +150,116 @@ msgstr "Interaktiv"
 msgid "Level of user activity required."
 msgstr "Niveau af brugeraktivitet påkrævet"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:860
 msgid "Specify session management ID"
 msgstr "Angiv ID for sessionshåndtering"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:860
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:839
+#: libgnomeui/gnome-client.c:863
 msgid "Specify prefix of saved configuration"
 msgstr "Angiv præfiks for gemt konfiguration"
 
-#: libgnomeui/gnome-client.c:839
+#: libgnomeui/gnome-client.c:863
 msgid "PREFIX"
 msgstr "PRÆFIKS"
 
-#: libgnomeui/gnome-client.c:842
+#: libgnomeui/gnome-client.c:866
 msgid "Disable connection to session manager"
 msgstr "Deaktivér forbindelse til sessionshåndtering"
 
-#: libgnomeui/gnome-client.c:948
+#: libgnomeui/gnome-client.c:972
 msgid "Session management"
 msgstr "Sessionshåndtering"
 
-#: libgnomeui/gnome-client.c:2486
+#: libgnomeui/gnome-client.c:2510
 msgid "Cancel Logout"
 msgstr "Annullér log ud"
 
-#: libgnomeui/gnome-color-picker.c:405
+#: libgnomeui/gnome-color-picker.c:407
 msgid "Received invalid color data\n"
 msgstr "Modtog ugyldige farvedata\n"
 
-#: libgnomeui/gnome-color-picker.c:471
+#: libgnomeui/gnome-color-picker.c:457
+msgid "Color Selector"
+msgstr "Farvevælger"
+
+#: libgnomeui/gnome-color-picker.c:458
+msgid "Open a dialog to specify the color"
+msgstr "Åbn et vindue til at vælge farven"
+
+#: libgnomeui/gnome-color-picker.c:480
 msgid "Pick a color"
 msgstr "Vælg en farve"
 
-#: libgnomeui/gnome-dateedit.c:476
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "Tid"
 
-#: libgnomeui/gnome-dateedit.c:477
+#: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
 msgstr "Den aktuelt valgte tid"
 
-#: libgnomeui/gnome-dateedit.c:489
+#: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
 msgstr "DateEdit-flag"
 
-#: libgnomeui/gnome-dateedit.c:490
+#: libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
 msgstr "Flag for hvordan DateEdit ser ud"
 
-#: libgnomeui/gnome-dateedit.c:499
+#: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
 msgstr "Nedre timetal"
 
-#: libgnomeui/gnome-dateedit.c:500
+#: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
 msgstr "Nedre timetal i vælgeren"
 
-#: libgnomeui/gnome-dateedit.c:510
+#: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
 msgstr "Øvre timetal"
 
-#: libgnomeui/gnome-dateedit.c:511
+#: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
 msgstr "Øvre timetal i vælgeren"
 
-#: libgnomeui/gnome-dateedit.c:521
+#: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
 msgstr "Oprindelig tid"
 
-#: libgnomeui/gnome-dateedit.c:522
+#: libgnomeui/gnome-dateedit.c:525
 msgid "The initial time"
 msgstr "Den oprindelig tid"
 
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Dato"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "Vælg dato"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "Vælg datoen fra en kalender"
+
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:751
+#: libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
 msgstr "Kalender"
 
-#: libgnomeui/gnome-dateedit.c:981
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "Vælg tiden"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "Vælg tiden fra en liste"
+
+#: libgnomeui/gnome-dateedit.c:1001
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date er forældet, brug gnome_date_edit_get_time"
 
@@ -339,35 +367,39 @@ msgstr "Vis Hjælp"
 msgid "Show the 'Help' button"
 msgstr "Vis 'Hjælp'-knappen"
 
-#: libgnomeui/gnome-href.c:121
+#: libgnomeui/gnome-href.c:122
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "The URL that GnomeHRef activates"
 msgstr "Den URL som GnomeHRef aktiverer"
 
-#: libgnomeui/gnome-href.c:129
+#: libgnomeui/gnome-href.c:130
 msgid "Text"
 msgstr "Tekst"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "The text on the button"
 msgstr "Teksten på knappen"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
 msgstr "Gør en ende på verdenshungersnøden"
 
-#: libgnomeui/gnome-href.c:137
+#: libgnomeui/gnome-href.c:138
 msgid "Link color"
 msgstr "Henvisningsfarve"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
 msgstr "Den farve der bruges til at vise henvisninger med"
 
-#: libgnomeui/gnome-href.c:383
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "Denne knap vil bringe dig videre til den adresse den viser."
+
+#: libgnomeui/gnome-href.c:392
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -934,11 +966,11 @@ msgstr "GTK-indtastningsfelt"
 msgid "The GTK entry"
 msgstr "GTK-indtastningsfeltet"
 
-#: libgnomeui/gnome-file-entry.c:218 libgnomeui/gnome-icon-entry.c:174
+#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:175
 msgid "History ID"
 msgstr "Historik-id"
 
-#: libgnomeui/gnome-file-entry.c:219
+#: libgnomeui/gnome-file-entry.c:221
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -946,54 +978,54 @@ msgstr ""
 "Unikt navn til filindtastningen - dette bliver brugt til at gemme "
 "historiklisten"
 
-#: libgnomeui/gnome-file-entry.c:227 libgnomeui/gnome-icon-entry.c:183
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
 msgid "Browse Dialog Title"
 msgstr "Gennemsetitel"
 
-#: libgnomeui/gnome-file-entry.c:228
+#: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
 msgstr "Titel på filvælgervinduet"
 
-#: libgnomeui/gnome-file-entry.c:235
+#: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
 msgstr "Mappeindtastning"
 
-#: libgnomeui/gnome-file-entry.c:236
+#: libgnomeui/gnome-file-entry.c:238
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 "Om filindtastningen bruges til at indtaste mappenavne eller fuldføre filnavne"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
 msgstr "Enerådende"
 
-#: libgnomeui/gnome-file-entry.c:245
+#: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
 msgstr "Om filvælgervinduet skal være enerådende"
 
-#: libgnomeui/gnome-file-entry.c:252 libgnomeui/gnome-icon-entry.c:199
+#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:200
 msgid "Filename"
 msgstr "Filnavn"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
 msgstr "Filnavn som bliver vist i filindtastningen"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
 msgstr "Forvalgt sti"
 
-#: libgnomeui/gnome-file-entry.c:262
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
 msgstr "Den forvalgte sti for filvælgervinduet"
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:270
+#: libgnomeui/gnome-file-entry.c:272
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1003,11 +1035,11 @@ msgstr ""
 "bruge denne egenskab til at få fat i GnomeEntry'en hvis du har behov for at "
 "ændre eller kende nogle af dens parametre"
 
-#: libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:281
+#: libgnomeui/gnome-file-entry.c:283
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1017,13 +1049,25 @@ msgstr ""
 "bruge denne egenskab til at få fat i GtkEntry'en hvis du har behov for at "
 "ændre eller kende nogle af dens parametre"
 
-#: libgnomeui/gnome-file-entry.c:515
+#: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
 msgstr "Vælg fil"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:645
+msgid "Path"
+msgstr "Sti"
+
+#: libgnomeui/gnome-file-entry.c:645
+msgid "Path to file"
+msgstr "Sti til fil"
+
+#: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
 msgstr "_Gennemse..."
+
+#: libgnomeui/gnome-file-entry.c:673
+msgid "Pop up a file selector to choose a file"
+msgstr "Vis et vindue til at vælge en fil"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1127,7 +1171,7 @@ msgstr ""
 "En fejl opstod under indlæsning eller gemning af konfigurationsoplysninger "
 "for %s. Nogle af indstillingerne virker måske ikke korrekt."
 
-#: libgnomeui/gnome-icon-entry.c:175
+#: libgnomeui/gnome-icon-entry.c:176
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1135,27 +1179,27 @@ msgstr ""
 "Unikt navn til ikonindtastningen - dette bliver brugt til at gemme "
 "historiklisten"
 
-#: libgnomeui/gnome-icon-entry.c:184
+#: libgnomeui/gnome-icon-entry.c:185
 msgid "Title for the Browse icon dialog."
 msgstr "Titel på ikonvælgervinduet"
 
-#: libgnomeui/gnome-icon-entry.c:191
+#: libgnomeui/gnome-icon-entry.c:192
 msgid "Pixmap Directory"
 msgstr "Billedmappe"
 
-#: libgnomeui/gnome-icon-entry.c:192
+#: libgnomeui/gnome-icon-entry.c:193
 msgid "Directory that will be searched for icons."
 msgstr "Mappe der bliver søgt i efter ikoner"
 
-#: libgnomeui/gnome-icon-entry.c:200
+#: libgnomeui/gnome-icon-entry.c:201
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Filnavn der skal vises i ikonindtastningen"
 
-#: libgnomeui/gnome-icon-entry.c:208
+#: libgnomeui/gnome-icon-entry.c:209
 msgid "Picker dialog"
 msgstr "Ikonvælgervindue"
 
-#: libgnomeui/gnome-icon-entry.c:209
+#: libgnomeui/gnome-icon-entry.c:210
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1165,35 +1209,69 @@ msgstr ""
 "dens parametre"
 
 # med et linjeskift her kommer det til at passe fint med den forhåndenværende plads
-#: libgnomeui/gnome-icon-entry.c:318 libgnomeui/gnome-icon-entry.c:969
+#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
 msgid "No Icon"
 msgstr ""
 "Intet\n"
 "ikon"
 
-#: libgnomeui/gnome-icon-entry.c:526 libgnomeui/gnome-pixmap-entry.c:380
+#: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan ikke finde en hbox, bruger en almindelig filvælger"
 
-#: libgnomeui/gnome-icon-entry.c:532 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:536 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
-msgstr "Smugkig"
+msgstr "Eksempel"
 
-#: libgnomeui/gnome-icon-entry.c:991
+#: libgnomeui/gnome-icon-entry.c:752
+msgid "Icon selection dialog"
+msgstr "Ikonvælger"
+
+#: libgnomeui/gnome-icon-entry.c:753
+msgid "This dialog box lets you select an icon."
+msgstr "Dette vindue lader dig vælge et ikon"
+
+#: libgnomeui/gnome-icon-entry.c:759
+msgid "Icon selector"
+msgstr "Ikonvælger"
+
+#: libgnomeui/gnome-icon-entry.c:760
+msgid "Please pick the icon you want."
+msgstr "Vælg det ikon du ønsker"
+
+#: libgnomeui/gnome-icon-entry.c:984
+msgid "Icon Selector"
+msgstr "Ikonvælger"
+
+#: libgnomeui/gnome-icon-entry.c:985
+msgid "This button will open a window to let you select an icon."
+msgstr "Denne knap åbner et vindue der lader dig vælge et ikon"
+
+#: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
 msgstr "Gennemse"
 
-#: libgnomeui/gnome-icon-sel.c:296
+#: libgnomeui/gnome-icon-entry.c:1010
+msgid "Icon path"
+msgstr "Ikonsti"
+
+#: libgnomeui/gnome-icon-entry.c:1011
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr "Her kan du indtaste navnet på den mappe hvor ikonbillederne er"
+
+#: libgnomeui/gnome-icon-sel.c:297
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: '%s' eksisterer ikke eller er ikke en mappe"
 
-#: libgnomeui/gnome-icon-sel.c:304
+#: libgnomeui/gnome-icon-sel.c:305
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: kunne ikke åbne mappen '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:406
+#: libgnomeui/gnome-icon-sel.c:407
 msgid "Loading Icons..."
 msgstr "Indlæser ikoner..."
 
@@ -1217,20 +1295,28 @@ msgstr "Spørgsmål"
 msgid "Message"
 msgstr "Besked"
 
-#: libgnomeui/gnome-pixmap-entry.c:111
+#: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
 msgstr "Vis eksempel"
 
-#: libgnomeui/gnome-pixmap-entry.c:112
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Om billedindtastningen skal have et eksempel"
 
 # som "No Icon"
-#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:444
+#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr ""
 "Intet\n"
 "billede"
+
+#: libgnomeui/gnome-pixmap-entry.c:205
+msgid "Image Preview"
+msgstr "Eksempel"
+
+#: libgnomeui/gnome-pixmap-entry.c:206
+msgid "A preview of the image currently specified"
+msgstr "Et smugkig af det aktuelt valgte billede"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1243,10 +1329,6 @@ msgstr "Bruger"
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
 msgstr "Point"
-
-#: libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "Dato"
 
 #. the localized string should fit (after replacing the %a %b
 #. etc) in ~18 chars.
