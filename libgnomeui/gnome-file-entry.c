@@ -557,8 +557,10 @@ browse_clicked(GnomeFileEntry *fentry)
 			if (fw->window)
 				gdk_window_raise (fw->window);
 
-			gtk_file_chooser_set_folder_mode (GTK_FILE_CHOOSER (fw),
-							  fentry->_priv->directory_entry ? TRUE : FALSE);
+			if (fentry->_priv->directory_entry)
+				gtk_file_chooser_set_action (GTK_FILE_CHOOSER (fw), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+			else
+				gtk_file_chooser_set_action (GTK_FILE_CHOOSER (fw), GTK_FILE_CHOOSER_ACTION_OPEN);
 
 			p = build_filename (fentry);
 			if (p) {
@@ -589,6 +591,13 @@ browse_clicked(GnomeFileEntry *fentry)
 
 	/* doesn't exist, create it */
 	if (fentry->_priv->use_filechooser) {
+		GtkFileChooserAction action;
+
+		if (fentry->_priv->directory_entry)
+			action = GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER;
+		else
+			action = GTK_FILE_CHOOSER_ACTION_OPEN;
+
 		fentry->fsw = gtk_file_chooser_dialog_new (fentry->_priv->browse_dialog_title
 							   ? fentry->_priv->browse_dialog_title
 							   : _("Select file"),
@@ -600,9 +609,6 @@ browse_clicked(GnomeFileEntry *fentry)
 		fw = fentry->fsw;
 
 		gtk_dialog_set_default_response (GTK_DIALOG (fw), GTK_RESPONSE_ACCEPT);
-
-		gtk_file_chooser_set_folder_mode (GTK_FILE_CHOOSER (fw),
-						  fentry->_priv->directory_entry ? TRUE : FALSE);
 
 		p = build_filename (fentry);
 		if (p) {

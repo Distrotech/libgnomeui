@@ -1,3 +1,8 @@
+Thu Feb 26 20:01:03 2004  Jonathan Blandford  <jrb@gnome.org>
+
+	* libgnomeui/gnome-file-entry.c (browse_clicked): use modified
+	gtkfilechooser API.
+
 2004-02-25  Danilo Šegan  <dsegan@gmx.net>
 
 	* configure.in: Added sr@ije to ALL_LINGUAS.
