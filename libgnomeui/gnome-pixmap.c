@@ -113,7 +113,7 @@ gnome_pixmap_destroy (GtkObject *object)
 }
 
 GtkWidget *
-gnome_pixmap_new_from_file (char *filename)
+gnome_pixmap_new_from_file (const char *filename)
 {
 	GnomePixmap *gpixmap;
 
@@ -126,7 +126,7 @@ gnome_pixmap_new_from_file (char *filename)
 }
 
 GtkWidget *
-gnome_pixmap_new_from_file_at_size (char *filename, int width, int height)
+gnome_pixmap_new_from_file_at_size (const char *filename, int width, int height)
 {
 	GnomePixmap *gpixmap;
 
@@ -439,7 +439,7 @@ finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int
 }
 
 static void
-load_file (GnomePixmap *gpixmap, char *filename, int scaled, int width, int height)
+load_file (GnomePixmap *gpixmap, const char *filename, int scaled, int width, int height)
 {
 	GdkImlibImage *im;
 
@@ -490,7 +490,7 @@ load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
 }
 
 void
-gnome_pixmap_load_file (GnomePixmap *gpixmap, char *filename)
+gnome_pixmap_load_file (GnomePixmap *gpixmap, const char *filename)
 {
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
@@ -500,7 +500,7 @@ gnome_pixmap_load_file (GnomePixmap *gpixmap, char *filename)
 }
 
 void
-gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap, char *filename, int width, int height)
+gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap, const char *filename, int width, int height)
 {
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));

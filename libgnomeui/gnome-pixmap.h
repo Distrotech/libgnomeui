@@ -32,8 +32,8 @@ struct _GnomePixmapClass {
 
 guint      gnome_pixmap_get_type               (void);
 
-GtkWidget *gnome_pixmap_new_from_file          (char *filename);
-GtkWidget *gnome_pixmap_new_from_file_at_size  (char *filename, int width, int height);
+GtkWidget *gnome_pixmap_new_from_file          (const char *filename);
+GtkWidget *gnome_pixmap_new_from_file_at_size  (const char *filename, int width, int height);
 GtkWidget *gnome_pixmap_new_from_xpm_d         (char **xpm_data);
 GtkWidget *gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height);
 GtkWidget *gnome_pixmap_new_from_rgb_d         (unsigned char *data, unsigned char *alpha,
@@ -46,8 +46,8 @@ GtkWidget *gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned ch
 						int width, int height);
 GtkWidget *gnome_pixmap_new_from_gnome_pixmap  (GnomePixmap *gpixmap);
 
-void       gnome_pixmap_load_file              (GnomePixmap *gpixmap, char *filename);
-void       gnome_pixmap_load_file_at_size      (GnomePixmap *gpixmap, char *filename, int width, int height);
+void       gnome_pixmap_load_file              (GnomePixmap *gpixmap, const char *filename);
+void       gnome_pixmap_load_file_at_size      (GnomePixmap *gpixmap, const char *filename, int width, int height);
 void       gnome_pixmap_load_xpm_d             (GnomePixmap *gpixmap, char **xpm_data);
 void       gnome_pixmap_load_xpm_d_at_size     (GnomePixmap *gpixmap, char **xpm_data, int width, int height);
 void       gnome_pixmap_load_rgb_d             (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,

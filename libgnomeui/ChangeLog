@@ -1,3 +1,12 @@
+Tue Jun 16 15:35:01 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dentry-edit.h, gnome-dentry-edit.c, gnome-icon-sel.h,
+	gnome-icon-sel.c: New files.
+	* gnome-pixmap.h, gnome-pixmap.c (gnome_pixmap_new_from_file, 
+	gnome_pixmap_new_from_file_at_size, load_file,
+	gnome_pixmap_load_file, gnome_pixmap_load_file_at_size):
+	const char * for filename arguments.
+
 Sun Jun 14 13:46:09 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* Makefile.am (INCLUDES): Look in intl source and build
