@@ -226,10 +226,10 @@ popup_attach_widget_destroyed (GtkWidget *widget, gpointer data)
 }
 
 /**
- * gnome_popup_menu_attach
- * @popup
- * @widget
- * @user_data
+ * gnome_popup_menu_attach:
+ * @popup:
+ * @widget:
+ * @user_data:
  *
  * Attaches the specified popup menu to the specified widget.  The
  * menu can then be activated by pressing mouse button 3 over the
@@ -287,12 +287,12 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 }
 
 /**
- * gnome_popup_menu_do_popup
- * @popup
- * @pos_func
- * @pos_data
- * @event
- * @user_data
+ * gnome_popup_menu_do_popup:
+ * @popup:
+ * @pos_func:
+ * @pos_data:
+ * @event:
+ * @user_data:
  *
  *
  * You can use this function to pop up a menu.  When a menu item *
@@ -361,12 +361,12 @@ get_active_index (GtkMenu *menu)
 }
 
 /**
- * gnome_popup_menu_do_popup_modal
- * @popup
- * @pos_func
- * @pos_data
- * @event
- * @user_data
+ * gnome_popup_menu_do_popup_modal:
+ * @popup:
+ * @pos_func:
+ * @pos_data:
+ * @event:
+ * @user_data:
  * 
  * Same as above, but runs the popup menu modally and returns the
  * index of the selected item, or -1 if none.

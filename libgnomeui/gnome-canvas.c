@@ -187,6 +187,7 @@ gnome_canvas_item_init (GnomeCanvasItem *item)
  * @first_arg_name: A list of object argument name/value pairs, NULL-terminated,
  * used to configure the item.  For example, "fill_color", "black",
  * "width_units", 5.0, NULL.
+ * @Varargs: 
  * 
  * Creates a new canvas item with @parent as its parent group.  The item is
  * created at the top of its parent's stack, and starts up as visible.  The item
@@ -543,6 +544,7 @@ gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoin
  * gnome_canvas_item_set:
  * @item: The item to configure.
  * @first_arg_name: The list of object argument name/value pairs used to configure the item.
+ * @Varargs:
  * 
  * Configures a canvas item.  The arguments in the item are set to the specified values,
  * and the item is repainted as appropriate.
@@ -3531,7 +3533,7 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 /**
  * gnome_canvas_w2c_affine:
  * @canvas: The canvas whose coordinates need conversion.
- * @affine
+ * @affine:
  * 
  * Gets the affine transform that converts world coordinates into canvas pixel coordinates.
  **/

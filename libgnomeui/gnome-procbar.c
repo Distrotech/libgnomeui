@@ -104,6 +104,19 @@ gnome_proc_bar_init (GnomeProcBar *pb)
 {
 }
 
+/**
+ * gnome_proc_bar_new:
+ * @label: Either %NULL or a @GtkWidget that will be shown at the left
+ * side of the process bar.
+ * @n: Number of items.
+ * @colors: Pointer to an array of @n @GdkColor elements.
+ * @cb: Callback function to update the process bar.
+ *
+ * Creates a new Gnome Process Bar.
+ *
+ * Returns the newly created @GnomeProcBar widget.
+ */
+
 GtkWidget *
 gnome_proc_bar_new (GtkWidget *label, gint n, GdkColor *colors, gint (*cb)())
 {

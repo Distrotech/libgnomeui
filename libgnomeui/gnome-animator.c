@@ -932,7 +932,7 @@ gnome_animator_append_frames_from_imlib (GnomeAnimator *animator,
 /**
  * gnome_animator_append_frames_from_file_at_size
  * @animator: Animator widget to be updated
- * @image: File path to image containing frames to be added to animator
+ * @name: File path to image containing frames to be added to animator
  * @x_offset: horizontal offset of a frame within animator widget
  * @y_offset: vertical offset of a frame within animator widget
  * @interval: Number of milliseconds to delay before showing next frame
@@ -987,7 +987,7 @@ gnome_animator_append_frames_from_file_at_size (GnomeAnimator *animator,
 /**
  * gnome_animator_append_frames_from_file
  * @animator: Animator widget to be updated
- * @image: File path to image containing frames to be added to animator
+ * @name: File path to image containing frames to be added to animator
  * @x_offset: horizontal offset of a frame within animator widget
  * @y_offset: vertical offset of a frame within animator widget
  * @interval: Number of milliseconds to delay before showing next frame

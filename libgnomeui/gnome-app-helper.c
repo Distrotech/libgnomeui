@@ -325,11 +325,6 @@ static gchar *menu_names[] =
 /* Creates a pixmap appropriate for items.  The window parameter is required 
  * by gnome-stock (bleah) */
 
-/**
- * create_pixmap:
- * @GtkWidget *window:  
- */
-
 static GtkWidget *
 create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, 
 		gpointer pixmap_info)
