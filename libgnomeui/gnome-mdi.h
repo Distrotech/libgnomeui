@@ -24,6 +24,8 @@
 #ifndef __GNOME_MDI_H__
 #define __GNOME_MDI_H__
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
@@ -194,5 +196,7 @@ GnomeUIInfo   *gnome_mdi_get_toolbar_info     (GnomeApp *app);
 GnomeUIInfo   *gnome_mdi_get_child_menu_info  (GnomeApp *app);
 
 G_END_DECLS
+
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 #endif /* __GNOME_MDI_H__ */

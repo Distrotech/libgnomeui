@@ -22,6 +22,9 @@
 */
 
 #include <config.h>
+
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+
 #include <libgnome/gnome-macros.h>
 
 #include <gtk/gtk.h>
@@ -2023,3 +2026,5 @@ GnomeUIInfo *gnome_mdi_get_child_menu_info (GnomeApp *app)
 {
 	return gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
 }
+
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */

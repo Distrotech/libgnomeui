@@ -1,3 +1,8 @@
+Sun Oct 21 13:26:08 2001  George Lebl <jirka@5z.com>
+
+	* gnome-mdi.[ch]: mistakenly this was not marked deprecated when it
+	  in reality IS deprecated
+
 Sun Oct 21 01:56:11 2001  George Lebl <jirka@5z.com>
 
 	* gnome-font-picker.c: fix font size foo, some other small fixes to
