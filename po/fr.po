@@ -1,5 +1,6 @@
 # French translation of libgnomeui.
 # Copyright (C) 2001-2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the libgnomeui package.
 #
 # maintainer: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2001-2004.
 # Christophe Fergeau <teuf@users.sourceforge.net>, 2002
@@ -7,15 +8,15 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.5.2\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
-"PO-Revision-Date: 2004-01-02 21:25+0100\n"
+"Project-Id-Version: libgnomeui 2.5.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-25 01:17+0100\n"
+"PO-Revision-Date: 2004-01-25 00:42+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -143,6 +144,7 @@ msgstr "À propos de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -185,27 +187,28 @@ msgstr "_Nouveau/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "Fi_chiers"
+msgstr "_Fichiers"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "Fi_chiers/"
+msgstr "_Fichiers/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr "_Fenêtres"
+msgstr "Fe_nêtres"
 
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
-msgstr "_Fenêtres/"
+msgstr "Fe_nêtres/"
 
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
@@ -322,11 +325,11 @@ msgstr "Efface la sélection"
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "_Annuler"
+msgstr "A_nnuler"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Annule la dernière opération"
+msgstr "Annule la dernière action"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
@@ -335,7 +338,7 @@ msgstr "_Refaire"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Refait l'opération annulée"
+msgstr "Refait l'action annulée"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -349,11 +352,11 @@ msgstr "Recherche une chaîne"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "_Suivant"
+msgstr "Rechercher le _suivant"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "Rechercher de nouveau la même chaîne"
+msgstr "Recherche de nouveau la même chaîne"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
@@ -390,11 +393,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -421,7 +424,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -454,7 +457,7 @@ msgstr "Recommence la partie"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr "_Annuler le mouvement"
+msgstr "A_nnuler le mouvement"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
@@ -501,23 +504,23 @@ msgstr "_Sommaire"
 msgid "View help for this application"
 msgstr "Affiche l'aide pour cette application"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Texte sous les icônes"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Priorité au texte a coté des icônes"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Icônes seulement"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Texte seulement"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Utiliser la valeur par défaut du bureau (%s)"
@@ -528,11 +531,11 @@ msgstr " (appuyez sur Entrée)"
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
-msgstr "ERREUR :"
+msgstr "ERREUR : "
 
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr "Avertissement :"
+msgstr "Avertissement : "
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
@@ -556,7 +559,7 @@ msgstr " (oui ou non)"
 
 #: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
-msgstr "  - OK ? (oui ou non)"
+msgstr "  - Valider ? (oui ou non)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
@@ -564,11 +567,11 @@ msgstr "Progression"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr "App ID"
+msgstr "ID de l'app."
 
 #: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr "Chaîne d'identification de l'application"
+msgstr "La chaîne d'identification de l'application"
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
@@ -618,7 +621,7 @@ msgstr "Votre mot de passe sera transmis chiffré."
 #: libgnomeui/gnome-authentication-manager.c:69
 #: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
-msgstr "Identification requise"
+msgstr "Authentification requise"
 
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
@@ -654,7 +657,7 @@ msgstr "Désactive la connexion avec le gestionnaire de sessions"
 msgid "Session management"
 msgstr "Gestion de session"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Annuler la demande de fin de session"
 
@@ -978,7 +981,7 @@ msgstr "Choisissez une police"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "Titre de la boîte de dialogue de sélection"
+msgstr "Le titre de la boîte de dialogue de sélection"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -1002,7 +1005,7 @@ msgstr "Police"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "GtkFont sélectionnée"
+msgstr "La GtkFont sélectionnée"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
@@ -1022,11 +1025,11 @@ msgstr "Utiliser la police dans l'étiquette en mode infos police"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "Taille de police pour l'étiquette"
+msgstr "Taille de la police pour l'étiquette"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Taille de police pour l'étiquette dans le mode infos police"
+msgstr "Taille de la police pour l'étiquette dans le mode infos police"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1120,7 +1123,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
-msgstr "Titre pour la boîte de dialogue de parcours d'icônes"
+msgstr "Titre pour la boîte de dialogue de parcours d'icônes."
 
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
@@ -1128,7 +1131,7 @@ msgstr "Répertoire de pixmaps"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr "Répertoire dans lequel chercher les icônes"
+msgstr "Répertoire dans lequel chercher les icônes."
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
@@ -1150,12 +1153,13 @@ msgstr ""
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr ""
-"Pas\n"
-"d'icône"
+"Aucune\n"
+"icône"
 
 #: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox introuvable, utilisation d'un sélecteur de fichiers normal"
+msgstr ""
+"Impossible de trouver un hbox, utilisation d'un sélecteur de fichiers normal"
 
 #: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
@@ -1324,27 +1328,32 @@ msgstr "Désindenter"
 msgid "About"
 msgstr "À propos"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr "Désactiver la boîte de dialogue de crash"
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "Visuel X à utiliser"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "VISUEL"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "Bibliothèque d'interface graphique GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Plusieurs erreurs de segmentation sont survenues ; impossible d'afficher la "
 "boîte de dialogue d'erreur\n"
 
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1352,7 +1361,7 @@ msgstr ""
 "Erreur de segmentation !\n"
 "Impossible d'afficher la boîte de dialogue de blocage\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1368,39 +1377,58 @@ msgstr ""
 "Enregistrez tous vos fichiers en cours avant de fermer cette\n"
 "boîte de dialogue."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"L'application « %s » (processus %d) s'est\n"
-"bloquée à la suite d'une erreur fatale.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "L'application « %s » a quitté inopinément."
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "processus %d : %s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Vous pouvez informer les développeurs de ce qui vient d'arriver pour les "
+"aider à résoudre le problème. Ou vous pouvez redémarrer l'application "
+"maintenant."
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Usage : gnome_segv2 nom-appli num-signal\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Transmettre un rapport d'anomalies"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr "Informer les développeurs"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Débogage"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Quitter le test"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "L'application « %s » (processus %d) s'est\n"
+#~ "bloquée à la suite d'une erreur fatale.\n"
+#~ "(%s)"
 
-#~ msgid "Exit the test"
-#~ msgstr "Quitter le test"
+#~ msgid "Submit a bug report"
+#~ msgstr "Transmettre un rapport d'anomalies"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
 
 #~ msgid "_Credits"
 #~ msgstr "_Crédits"
@@ -1418,9 +1446,6 @@ msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
 
 #~ msgid "E_xit"
 #~ msgstr "_Quitter"
-
-#~ msgid "Exit the program"
-#~ msgstr "Quitter le programme"
 
 #~ msgid "GConf error details: %s\n"
 #~ msgstr "Détails de l'erreur GConf : %s\n"
@@ -1537,9 +1562,6 @@ msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
 
 #~ msgid "Workspaces:"
 #~ msgstr "Espaces de travail :"
-
-#~ msgid "Sticky"
-#~ msgstr "Collé"
 
 #~ msgid "Set Workspace"
 #~ msgstr "Définir l'espace de travail"
@@ -1712,9 +1734,6 @@ msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
 #~ msgid "The priority of style of GnomeHelpView"
 #~ msgstr "La priorité du style de GnomeHelpView"
 
-#~ msgid "Orientation"
-#~ msgstr "Orientation :"
-
 #~ msgid "Toplevel"
 #~ msgstr "1er niveau"
 
@@ -1761,17 +1780,11 @@ msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
 #~ msgid "Right:"
 #~ msgstr "Droite :"
 
-#~ msgid "Scaling"
-#~ msgstr "Échelle"
-
 #~ msgid "Fit to Page"
 #~ msgstr "Ajuster à la page"
 
 #~ msgid "%0.3g%s x %0.3g%s"
 #~ msgstr "%0.3g%s x %0.3g%s"
-
-#~ msgid "Page Setup"
-#~ msgstr "Configuration de la page"
 
 #~ msgid "Bottom left"
 #~ msgstr "Bas gauche"
@@ -1781,12 +1794,6 @@ msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
 
 #~ msgid "Bottom right"
 #~ msgstr "Bas droit"
-
-#~ msgid "Horizontal"
-#~ msgstr "Horizontale"
-
-#~ msgid "Vertical"
-#~ msgstr "Verticale"
 
 #~ msgid "Tile children"
 #~ msgstr "Aligner les fils"
@@ -1826,12 +1833,3 @@ msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
 
 #~ msgid "No"
 #~ msgstr "Non"
-
-#~ msgid "Next"
-#~ msgstr "Suivant"
-
-#~ msgid "Up"
-#~ msgstr "Haut"
-
-#~ msgid "Down"
-#~ msgstr "Bas"
