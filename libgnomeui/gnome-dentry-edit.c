@@ -148,6 +148,16 @@ table_attach_label(GtkTable * table, GtkWidget * w,
 		   0, 0);
 }
 
+static void 
+table_attach_list(GtkTable * table, GtkWidget * w,
+		  gint l, gint r, gint t, gint b)
+{
+  gtk_table_attach(table, w, l, r, t, b,
+		   GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+		   GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+		   0, 0);
+}
+
 static GtkWidget *
 label_new (char *text)
 {
@@ -248,9 +258,64 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
 }
 
 static void
+add_mime_type(GtkWidget *button, GnomeDEntryEdit *dee)
+{
+	int i;
+	char *mime;
+	char *exec;
+	char *text[2];
+	GtkCList *cl = GTK_CLIST(dee->dnd_list);
+	mime = gtk_entry_get_text(GTK_ENTRY(dee->dnd_mime_entry));
+	exec = gtk_entry_get_text(GTK_ENTRY(dee->dnd_exec_entry));
+	if(!mime || !*mime || !exec || !*exec)
+		return;
+	for(i=0;i<cl->rows;i++) {
+		char *s;
+		gtk_clist_get_text(cl,i,0,&s);
+		if(strcmp(mime,s)==0) {
+			gtk_clist_set_text(cl,i,1,exec);
+			gtk_signal_emit(GTK_OBJECT(dee),
+					dentry_edit_signals[CHANGED], NULL);
+			return;
+		}
+	}
+	text[0]=mime;
+	text[1]=exec;
+	gtk_clist_append(cl,text);
+	gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
+}
+static void
+dnd_list_select_row(GtkCList *cl, int row, int column, GdkEvent *event, GnomeDEntryEdit *dee)
+{
+	char *mime;
+	char *exec;
+	gtk_clist_get_text(cl,row,0,&mime);
+	gtk_clist_get_text(cl,row,1,&exec);
+	
+	gtk_entry_set_text(GTK_ENTRY(dee->dnd_mime_entry),
+			   mime);
+	gtk_entry_set_text(GTK_ENTRY(dee->dnd_exec_entry),
+			   exec);
+}
+static void
+remove_mime_type(GtkWidget *button, GnomeDEntryEdit *dee)
+{
+	GtkCList *cl = GTK_CLIST(dee->dnd_list);
+	if(cl->selection == NULL)
+		return;
+	gtk_clist_remove(cl,GPOINTER_TO_INT(cl->selection->data));
+	gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
+}
+
+static void
 fill_advanced_page(GnomeDEntryEdit * dee, GtkWidget * page)
 {
   GtkWidget * label;
+  GtkWidget * button;
+  GtkWidget * box;
+  GtkWidget * entry;
+  GtkWidget * sw;
+  char *titles[2];
 
   label = label_new(_("Try this before using:"));
   table_attach_label(GTK_TABLE(page),label, 0, 1, 0, 1);
@@ -271,6 +336,62 @@ fill_advanced_page(GnomeDEntryEdit * dee, GtkWidget * page)
 			    "changed",
 			    GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
 			    GTK_OBJECT(dee));
+
+  label = label_new(_("WM classes of windows that pop up:"));
+  table_attach_label(GTK_TABLE(page),label, 0, 1, 2, 3);
+
+  dee->wm_classes_entry = gtk_entry_new();
+  table_attach_entry(GTK_TABLE(page),dee->wm_classes_entry, 1, 2, 2, 3);
+  gtk_signal_connect_object(GTK_OBJECT(dee->wm_classes_entry), 
+			    "changed",
+			    GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
+			    GTK_OBJECT(dee));
+
+  label = gtk_label_new(_("Drag and drop actions:"));
+  table_attach_label(GTK_TABLE(page),label, 0, 2, 3, 4);
+  
+  sw = gtk_scrolled_window_new(NULL,NULL);
+  titles[0]=_("Mime type");
+  titles[1]=_("Action");
+  dee->dnd_list = gtk_clist_new_with_titles(2,titles);
+  gtk_clist_column_titles_passive(GTK_CLIST(dee->dnd_list));
+  gtk_signal_connect(GTK_OBJECT(dee->dnd_list),"select_row",
+		     GTK_SIGNAL_FUNC(dnd_list_select_row),
+		     dee);
+  gtk_container_add(GTK_CONTAINER(sw),dee->dnd_list);
+
+  gtk_widget_set_usize(sw,0,100);
+  table_attach_list(GTK_TABLE(page),sw, 0, 2, 4, 5);
+  
+  box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
+  table_attach_entry(GTK_TABLE(page),box, 0, 2, 5, 6);
+
+  label = gtk_label_new(_("Mime:"));
+  gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,0);
+  
+  dee->dnd_mime_entry = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(box),dee->dnd_mime_entry,TRUE,TRUE,0);
+  
+  label = gtk_label_new(_("Exec:"));
+  gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,0);
+  
+  dee->dnd_exec_entry = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(box),dee->dnd_exec_entry,TRUE,TRUE,0);
+
+  dee->dnd_button_box = box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
+  table_attach_entry(GTK_TABLE(page),box, 0, 2, 6, 7);
+  
+  button = gtk_button_new_with_label(_("Add"));
+  gtk_signal_connect(GTK_OBJECT(button),"clicked",
+		     GTK_SIGNAL_FUNC(add_mime_type),
+		     dee);
+  gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
+
+  button = gtk_button_new_with_label(_("Remove"));
+  gtk_signal_connect(GTK_OBJECT(button),"clicked",
+		     GTK_SIGNAL_FUNC(remove_mime_type),
+		     dee);
+  gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
 }
 
 static GtkWidget *
@@ -281,7 +402,8 @@ make_page(void)
   frame = gtk_frame_new (NULL);
   gtk_container_set_border_width (GTK_CONTAINER(frame), GNOME_PAD_SMALL);
 
-  page = gtk_table_new (5, 2, FALSE);
+  /*the rows field will expand as necessary*/
+  page = gtk_table_new (1, 2, FALSE);
   gtk_container_set_border_width (GTK_CONTAINER (page), GNOME_PAD_SMALL);
   gtk_table_set_row_spacings (GTK_TABLE (page), GNOME_PAD_SMALL);
   gtk_table_set_col_spacings (GTK_TABLE (page), GNOME_PAD_SMALL);
@@ -358,6 +480,8 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
 			       GnomeDesktopEntry *dentry)
 {
   gchar * s = NULL;
+  GList *li;
+
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
 
@@ -368,6 +492,8 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
   
   if (dentry->exec)
     s = g_flatten_vector(" ", dentry->exec);
+  else
+    s = NULL;
   gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), s ? s : "");
   g_free(s);
 
@@ -385,6 +511,26 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
 
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->terminal_button),
 			       dentry->terminal);
+  
+  if (dentry->wm_classes)
+    s = g_flatten_vector(" ", dentry->wm_classes);
+  else
+    s = NULL;
+  gtk_entry_set_text(GTK_ENTRY(dee->wm_classes_entry), s ? s : "");
+  g_free(s);
+  
+  gtk_clist_clear(GTK_CLIST(dee->dnd_list));
+  for(li=dentry->dnd_entries;li;li=g_list_next(li)) {
+	  char **argv = li->data;
+	  char *text[2];
+	  if(!argv || !argv[0] || !*argv[0] || !argv[1]) continue;
+	  text[0] = argv[0];
+	  text[1] = g_flatten_vector(" ", &argv[1]);
+	  gtk_clist_append(GTK_CLIST(dee->dnd_list),text);
+	  g_free(text[1]);
+  }
+  gtk_entry_set_text(GTK_ENTRY(dee->dnd_mime_entry),"");
+  gtk_entry_set_text(GTK_ENTRY(dee->dnd_exec_entry),"");
 }
 
 /* Conform dentry to display */
@@ -393,6 +539,7 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
 			      GnomeDesktopEntry *dentry)
 {
   gchar * text;
+  int i;
 
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
@@ -402,28 +549,38 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
   g_free(dentry->name);
   if (text[0] != '\0')
     dentry->name = g_strdup(text);
+  else
+    dentry->name = NULL;
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->comment_entry));
   g_free(dentry->comment);
   if (text[0] != '\0')
     dentry->comment = g_strdup(text);
+  else
+    dentry->comment = NULL;
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->exec_entry));
   g_strfreev(dentry->exec);
   if (text[0] != '\0')
     gnome_config_make_vector(text, &dentry->exec_length, &dentry->exec);
-  else
+  else {
     dentry->exec_length = 0;
+    dentry->exec = NULL;
+  }
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->tryexec_entry));
   g_free(dentry->tryexec);
   if (text[0] != '\0')
     dentry->tryexec = g_strdup(text);
+  else
+    dentry->tryexec = NULL;
   
   text = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(dee->type_combo)->entry));
   g_free(dentry->type);
   if (text[0] != '\0')
     dentry->type = g_strdup(text);
+  else
+    dentry->type = NULL;
   
   g_free(dentry->icon);
   dentry->icon = gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->icon_entry));
@@ -432,6 +589,8 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
   g_free(dentry->docpath);
   if (text[0] != '\0')
     dentry->docpath = g_strdup(text);
+  else
+    dentry->docpath = NULL;
 
   dentry->terminal = GTK_TOGGLE_BUTTON(dee->terminal_button)->active;
 
@@ -439,6 +598,37 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
   dentry->location = NULL;
   g_free(dentry->geometry);
   dentry->geometry = NULL;
+
+  /*maybe in the future we should also edit KDE dentries*/
+  dentry->is_kde = FALSE;
+
+  text = gtk_entry_get_text(GTK_ENTRY(dee->wm_classes_entry));
+  g_strfreev(dentry->wm_classes);
+  if (text[0] != '\0')
+    gnome_config_make_vector(text, &dentry->wm_classes_length, &dentry->wm_classes);
+  else {
+    dentry->wm_classes_length = 0;
+    dentry->wm_classes = NULL;
+  }
+  
+  if(dentry->dnd_entries) {
+	  g_list_foreach(dentry->dnd_entries,(GFunc)g_strfreev,NULL);
+	  g_list_free(dentry->dnd_entries);
+	  dentry->dnd_entries = NULL;
+  }
+  for(i=0;i<GTK_CLIST(dee->dnd_list)->rows;i++) {
+	  char *mime,*exec;
+	  char **argv;
+	  int argc;
+	  gtk_clist_get_text(GTK_CLIST(dee->dnd_list),
+			     i,0,&mime);
+	  gtk_clist_get_text(GTK_CLIST(dee->dnd_list),
+			     i,1,&exec);
+	  text = g_strconcat(mime," ",exec,NULL);
+	  gnome_config_make_vector(text,&argc,&argv);
+	  g_free(text);
+	  dentry->dnd_entries = g_list_append(dentry->dnd_entries,argv);
+  }
 }
 
 void
@@ -499,6 +689,10 @@ gnome_dentry_edit_clear(GnomeDEntryEdit *dee)
   gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), "");  
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), "");
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), "");
+  gtk_entry_set_text(GTK_ENTRY(dee->wm_classes_entry), "");
+  gtk_entry_set_text(GTK_ENTRY(dee->dnd_mime_entry), "");
+  gtk_entry_set_text(GTK_ENTRY(dee->dnd_exec_entry), "");
+  gtk_clist_clear(GTK_CLIST(dee->dnd_list));
   gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry),"");
 }
 

@@ -61,6 +61,13 @@ struct _GnomeDEntryEdit {
   GtkWidget *terminal_button;  
 
   GtkWidget *icon_entry;
+  
+  GtkWidget *wm_classes_entry;
+
+  GtkWidget *dnd_list;
+  GtkWidget *dnd_mime_entry;
+  GtkWidget *dnd_exec_entry;
+  GtkWidget *dnd_button_box;
 };
 
 struct _GnomeDEntryEditClass {
