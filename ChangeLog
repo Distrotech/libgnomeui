@@ -1,5 +1,8 @@
 2004-05-13  James Henstridge  <james@daa.com.au>
 
+	* configure.in (ACLOCAL_AMFLAGS): set so that aclocal gets called
+	with contents of $ACLOCAL_FLAGS environment variable.
+
 	* acconfig.h: remove file since it isn't needed anymore.
 
 	* configure.in: add descriptions to AC_DEFINE() calls.
