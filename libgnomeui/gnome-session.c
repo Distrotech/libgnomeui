@@ -156,7 +156,7 @@ gnome_session_set_restart_style (GnomeRestartStyle style)
   prop.num_vals = 1;
   prop.vals = &val;
   val.length = 1;
-  val.value = &style;
+  val.value = &c;
   proplist[0] = &prop;
   SmcSetProperties (info->connection, 1, proplist);
 #endif /* HAVE_LIBSM */
