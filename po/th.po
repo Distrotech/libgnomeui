@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-08 20:08+0700\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2005-02-08 21:28+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -32,16 +32,16 @@ msgstr "รายการลูกที่ 2"
 msgid "Hint for item 2"
 msgstr "ข้อแนะนำสำหรับรายการที่ 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:696
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ไม่ใช่โฟลเดอร์"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:903
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "ระบบแฟ้ม"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1587
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "บันทึกบุ๊กมาร์กไม่สำเร็จ (%s)"
@@ -60,8 +60,7 @@ msgstr "เปิดแฟ้ม '%s' ไม่สำเร็จ: %s"
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
-"โหลดรูป '%s' ไม่สำเร็จโดยไม่รู้สาเหตุ เป็นไปได้ว่าข้อมูลอาจเสียหาย"
+msgstr "โหลดรูป '%s' ไม่สำเร็จโดยไม่รู้สาเหตุ เป็นไปได้ว่าข้อมูลอาจเสียหาย"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -156,8 +155,7 @@ msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "เครดิตสำหรับผู้แปล ควรตั้งให้เป็นข้อความที่แปลได้"
 
-#: libgnomeui/gnome-about.c:439
-#: libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "โลโก"
 
@@ -172,7 +170,6 @@ msgstr "เกี่ยวกับ %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "แ_ฟ้ม"
 
@@ -230,7 +227,6 @@ msgid "_Game"
 msgstr "เ_กม"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_วิธีใช้"
 
@@ -421,11 +417,11 @@ msgstr "ปรับแต่งโปรแกรม"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "เกี่ยวกับโปรแกรมนี้"
 
@@ -452,7 +448,7 @@ msgstr "สร้างหน้าต่างใหม่"
 msgid "_Close This Window"
 msgstr "ปิ_ดหน้าต่างนี้"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "ปิดหน้าต่างปัจจุบัน"
 
@@ -914,8 +910,7 @@ msgstr "ชื่อประจำแฟ้มเก่า"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ชื่อประจำรายการแฟ้ม ใช้สำหรับบันทึกรายชื่อแฟ้มเก่าที่เคยเลือก"
+msgstr "ชื่อประจำรายการแฟ้ม ใช้สำหรับบันทึกรายชื่อแฟ้มเก่าที่เคยเลือก"
 
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
@@ -969,8 +964,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"วิดเจ็ต GnomeEntry ที่วิดเจ็ตเลือกแฟ้มใช้รับชื่อแฟ้ม "
-"คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GnomeEntry ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
+"วิดเจ็ต GnomeEntry ที่วิดเจ็ตเลือกแฟ้มใช้รับชื่อแฟ้ม คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GnomeEntry "
+"ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
 
 #: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
@@ -982,8 +977,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"วิดเจ็ต GtkEntry ที่วิดเจ็ตเลือกแฟ้มใช้รับชื่อแฟ้ม "
-"คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GtkEntry ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
+"วิดเจ็ต GtkEntry ที่วิดเจ็ตเลือกแฟ้มใช้รับชื่อแฟ้ม คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GtkEntry "
+"ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
@@ -1159,8 +1154,7 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ชื่อประจำรายการไอคอน ใช้สำหรับบันทึกรายชื่อไอคอนเก่าที่เคยเลือก"
+msgstr "ชื่อประจำรายการไอคอน ใช้สำหรับบันทึกรายชื่อไอคอนเก่าที่เคยเลือก"
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1188,7 +1182,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"กล่องโต้ตอบสำหรับเลือกไอคอน คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GtkDialog ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
+"กล่องโต้ตอบสำหรับเลือกไอคอน คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GtkDialog "
+"ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
@@ -1302,8 +1297,7 @@ msgstr "แสดงตัวอย่าง"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "กำหนดว่าวิดเจ็ตเลือกภาพควรแสดงภาพตัวอย่างด้วยหรือไม่"
 
-#: libgnomeui/gnome-pixmap-entry.c:189
-#: libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "ไม่มีรูป"
 
@@ -1435,7 +1429,8 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"คุณสามารถแจ้งไปยังผู้เขียน เพื่อช่วยผู้เขียนแก้ไขข้อผิดพลาดนี้  หรือคุณอาจเรียกใช้โปรแกรมนี้ใหม่ตอนนี้เลยก็ได้"
+"คุณสามารถแจ้งไปยังผู้เขียน เพื่อช่วยผู้เขียนแก้ไขข้อผิดพลาดนี้  "
+"หรือคุณอาจเรียกใช้โปรแกรมนี้ใหม่ตอนนี้เลยก็ได้"
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1453,9 +1448,8 @@ msgstr "แ_จ้งผู้เขียน"
 msgid "_Debug"
 msgstr "_ดีบัก"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ออกจากการทดสอบ"
+#~ msgid "Exit the test"
+#~ msgstr "ออกจากการทดสอบ"
 
 #~ msgid " domain %s"
 #~ msgstr " โดเมน %s"

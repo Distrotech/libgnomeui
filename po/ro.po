@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2004-08-29 17:00+0300\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: <gnomero-list@lists.sourceforge.net>\n"
@@ -32,16 +32,16 @@ msgstr "Element copil 2"
 msgid "Hint for item 2"
 msgstr "Sugestie pentru elementul 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nu este un director"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Sistem de fişiere"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Salvare favorit eşuată (%s)"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-14 04:33+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2005-02-08 13:24+0200\n"
 "Last-Translator: Canonical Ltd <translations@canonical.com>\n"
 "Language-Team: Xhosa <xh-translate@ubuntu.com>\n"
@@ -32,16 +32,16 @@ msgstr "ULandelo loMntwana 2"
 msgid "Hint for item 2"
 msgstr "Icebiso lolandelo 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:677
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ayiyo fowulda"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:884
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Inkqubo yeefayili"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1565
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ugcino lwebhukmakhi aluphumeleli (%s)"
@@ -58,8 +58,11 @@ msgstr "Ayikwazanga ukuvula ifayili '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Ayikwazanga ukufaka umfanekiso '%s': isizathu asaziwa, mhlawumbi ifayili yomfanekiso imoshakele"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Ayikwazanga ukufaka umfanekiso '%s': isizathu asaziwa, mhlawumbi ifayili "
+"yomfanekiso imoshakele"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -150,11 +153,12 @@ msgid "Translator credits"
 msgstr "Iicredit zabaguquli bolwimi"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Iicredit kubaguquli bolwimi. Olu luhlu kufuneka luphawulwe njengoluguqulekayo"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Iicredit kubaguquli bolwimi. Olu luhlu kufuneka luphawulwe njengoluguqulekayo"
 
-#: libgnomeui/gnome-about.c:439
-#: libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Ilogo"
 
@@ -168,9 +172,7 @@ msgid "About %s"
 msgstr "Malunga ne-%s"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82
-#: libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "i_Fayili"
 
@@ -178,8 +180,7 @@ msgstr "i_Fayili"
 msgid "_File/"
 msgstr "i_Fayili/"
 
-#: libgnomeui/gnome-app-helper.c:84
-#: libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Hlela"
 
@@ -187,8 +188,7 @@ msgstr "_Hlela"
 msgid "_Edit/"
 msgstr "_Hlela/"
 
-#: libgnomeui/gnome-app-helper.c:86
-#: libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Okubonakalayo"
 
@@ -196,8 +196,7 @@ msgstr "_Okubonakalayo"
 msgid "_View/"
 msgstr "_Okubonakalayo/"
 
-#: libgnomeui/gnome-app-helper.c:88
-#: libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Imimiselo"
 
@@ -206,8 +205,7 @@ msgid "_Settings/"
 msgstr "_Imimiselo/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90
-#: libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Entsha"
 
@@ -215,8 +213,7 @@ msgstr "_Entsha"
 msgid "_New/"
 msgstr "_Entsha/"
 
-#: libgnomeui/gnome-app-helper.c:92
-#: libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "IiFa_yili"
 
@@ -224,19 +221,15 @@ msgstr "IiFa_yili"
 msgid "Fi_les/"
 msgstr "IiFa_yili/"
 
-#: libgnomeui/gnome-app-helper.c:94
-#: libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Iifestile"
 
-#: libgnomeui/gnome-app-helper.c:95
-#: libgnomeui/gnome-app-helper.h:572
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Umdlalo"
 
-#: libgnomeui/gnome-app-helper.c:96
-#: libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_Uncedo"
 
@@ -316,7 +309,10 @@ msgstr "_Phuma"
 msgid "Quit the application"
 msgstr "Phuma kwinkqubo"
 
+#.
 #. * The "Edit" menu
+#.
+#. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
 msgstr "Si_ka"
@@ -326,6 +322,7 @@ msgid "Cut the selection"
 msgstr "Sika ukhetho"
 
 #. 10
+#. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "_Kopa"
@@ -406,7 +403,10 @@ msgstr "_Iimpawu"
 msgid "Modify the file's properties"
 msgstr "Lungisa iimpawu zefayili"
 
+#.
 #. * The Settings menu
+#.
+#. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
 msgstr "Okukhe_thwayo"
@@ -416,13 +416,15 @@ msgid "Configure the application"
 msgstr "Misa inkqubo"
 
 #. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
 #: libgnomeui/gnome-app-helper.c:221
-#: test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Malunga"
 
 #: libgnomeui/gnome-app-helper.c:222
-#: test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Malunga nale nkqubo"
 
@@ -434,7 +436,9 @@ msgstr "Khetha _Konke"
 msgid "Select everything"
 msgstr "Khetha yonke into"
 
+#.
 #. * Window menu
+#.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "Yenza _iFestile eNtsha"
@@ -448,11 +452,12 @@ msgid "_Close This Window"
 msgstr "_Vala Le Festile"
 
 #: libgnomeui/gnome-app-helper.c:240
-#: test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Vala ifestile ekhoyo"
 
+#.
 #. * The "Game" menu
+#.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
 msgstr "_Umdlalo omtsha"
@@ -695,8 +700,7 @@ msgstr "Vula unxibelelwano ukuphawula umbala"
 msgid "Pick a color"
 msgstr "Khetha umbala"
 
-#: libgnomeui/gnome-dateedit.c:479
-#: libgnomeui/gnome-dateedit.c:776
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "Ixesha"
 
@@ -736,8 +740,7 @@ msgstr "IXesha lokuQala"
 msgid "The initial time"
 msgstr "Ixesha lokuqala"
 
-#: libgnomeui/gnome-dateedit.c:739
-#: libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "Umhla"
 
@@ -891,8 +894,7 @@ msgstr "Bonisa uNcedo"
 msgid "Show the 'Help' button"
 msgstr "Bonisa iqhosha 'loNcedo'"
 
-#: libgnomeui/gnome-entry.c:193
-#: libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "I-id yeMbali"
 
@@ -904,17 +906,19 @@ msgstr "Ufako lwe-GTK"
 msgid "The GTK entry"
 msgstr "Ufako lwe-GTK"
 
-#: libgnomeui/gnome-file-entry.c:229
-#: libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "I-ID yeMbali"
 
 #: libgnomeui/gnome-file-entry.c:230
-msgid "Unique identifier for the file entry.  This will be used to save the history list."
-msgstr "Isiphawuli esisodwa kungeno lwefayili. Oku kuya kusetyenziswa ukugcina uluhlu lwembali."
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Isiphawuli esisodwa kungeno lwefayili. Oku kuya kusetyenziswa ukugcina "
+"uluhlu lwembali."
 
-#: libgnomeui/gnome-file-entry.c:238
-#: libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "ITayitile yoNxibelelwano loKhangelo"
 
@@ -927,8 +931,12 @@ msgid "Directory Entry"
 msgstr "UNgeno looVimba weeFayili"
 
 #: libgnomeui/gnome-file-entry.c:247
-msgid "Whether the file entry is being used to enter directory names or complete filenames."
-msgstr "Noba ngaba ungeno lwefayili luyasetyenziswa ekufakeni amagama oovimba beefayili okanye amagama apheleleyo eefayili."
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"Noba ngaba ungeno lwefayili luyasetyenziswa ekufakeni amagama oovimba "
+"beefayili okanye amagama apheleleyo eefayili."
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
@@ -938,8 +946,7 @@ msgstr "Inkqubo"
 msgid "Whether the Browse file window should be modal."
 msgstr "Nokuba ngaba ifestile yefayili yoKhangelo kufuneka ibe yeyenkqubo."
 
-#: libgnomeui/gnome-file-entry.c:263
-#: libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Igama lefayili"
 
@@ -960,27 +967,42 @@ msgid "GnomeEntry"
 msgstr "I-GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:281
-msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
-msgstr "I-GnomeEntry esetyenziswa lungeno lwefayili ekufakeni amagama eefayili. Ungasebenzisa olu phawu ekufumaneni iGnomeEntry xa ufuna ukulungisa okanye ukubuza nawaphi na amaxabiso ezinto ezijikajikayo."
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"I-GnomeEntry esetyenziswa lungeno lwefayili ekufakeni amagama eefayili. "
+"Ungasebenzisa olu phawu ekufumaneni iGnomeEntry xa ufuna ukulungisa okanye "
+"ukubuza nawaphi na amaxabiso ezinto ezijikajikayo."
 
 #: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "I-GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:292
-msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
-msgstr "I-GtkEntry esetyenziswa lungeno lwefayili ekufakeni amagama eefayili. Ungasebenzisa olu phawu ekufumaneni iGtkEntry xa ufuna ukulungisa okanye ukubuza nawaphi na amaxabiso ezinto ezijikajikayo."
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"I-GtkEntry esetyenziswa lungeno lwefayili ekufakeni amagama eefayili. "
+"Ungasebenzisa olu phawu ekufumaneni iGtkEntry xa ufuna ukulungisa okanye "
+"ukubuza nawaphi na amaxabiso ezinto ezijikajikayo."
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr "Sebenzisa iGtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:303
-msgid "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget to select files."
-msgstr "Nokuba ngaba kungasetyenziswa isixhobo seGtkFileChooser okanye isixhobo seGtkFileSelection ekukhetheni iifayili."
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"Nokuba ngaba kungasetyenziswa isixhobo seGtkFileChooser okanye isixhobo "
+"seGtkFileSelection ekukhetheni iifayili."
 
-#: libgnomeui/gnome-file-entry.c:626
-#: libgnomeui/gnome-file-entry.c:660
+#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Khetha ifayili"
 
@@ -1032,8 +1054,7 @@ msgstr "Igama lefonti"
 msgid "Name of the selected font"
 msgstr "Igama lefonti ekhethiweyo"
 
-#: libgnomeui/gnome-font-picker.c:184
-#: libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Ifonti"
 
@@ -1083,13 +1104,25 @@ msgstr "_Iinkcukacha"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
-msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
-msgstr "Inkqubo \"%s\" ezama ukutshintsha umba othile kwisimo sakho ongavunyelwayo ngumlawuli wenkqubo yakho okanye umthengisi wenkqubo ukuba uwutshintshe. Olunye kumiselo olukhethileyo lusenokungenzeki okanye lungagcineki xa usebenzisa le nkqubo kwixesha elizayo."
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"Inkqubo \"%s\" ezama ukutshintsha umba othile kwisimo sakho ongavunyelwayo "
+"ngumlawuli wenkqubo yakho okanye umthengisi wenkqubo ukuba uwutshintshe. "
+"Olunye kumiselo olukhethileyo lusenokungenzeki okanye lungagcineki xa "
+"usebenzisa le nkqubo kwixesha elizayo."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
-msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
-msgstr "Impazamo yenzekile ngexa kufakwa okanye kugcinwa ingcaciso yesimo se-%s. Olunye umiselo lwakho lwesimo lusenokungasebenzi ngokufanelekileyo."
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"Impazamo yenzekile ngexa kufakwa okanye kugcinwa ingcaciso yesimo se-%s. "
+"Olunye umiselo lwakho lwesimo lusenokungasebenzi ngokufanelekileyo."
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1129,11 +1162,16 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Impazamo yenzekile ngexa kuzanywa ukuqalisa isikhangeli seweb esimisiweyo.\n"
-"Nceda ujonge imimiselo yakho kwisixhobo esikhethiweyo se'Preferred Applications'."
+"Nceda ujonge imimiselo yakho kwisixhobo esikhethiweyo se'Preferred "
+"Applications'."
 
 #: libgnomeui/gnome-icon-entry.c:178
-msgid "Unique identifier for the icon entry.  This will be used to save the history list."
-msgstr "Isiphawuli esisodwa kungeno lomfanekiso womqondiso. Oku kuya kusetyenziswa ukugcina uluhlu lwembali."
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Isiphawuli esisodwa kungeno lomfanekiso womqondiso. Oku kuya kusetyenziswa "
+"ukugcina uluhlu lwembali."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1156,11 +1194,15 @@ msgid "Picker dialog"
 msgstr "Unxibelelwano lokhetho"
 
 #: libgnomeui/gnome-icon-entry.c:212
-msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
-msgstr "Unxibelelwano lokukhetha umfanekiso womqondiso. Ungasebenzisa olu phawu ukufumana iGtkDialog xa ufuna ukulungisa okanye unombuzo ngako nakuphi na kwiipropati zayo."
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Unxibelelwano lokukhetha umfanekiso womqondiso. Ungasebenzisa olu phawu "
+"ukufumana iGtkDialog xa ufuna ukulungisa okanye unombuzo ngako nakuphi na "
+"kwiipropati zayo."
 
-#: libgnomeui/gnome-icon-entry.c:320
-#: libgnomeui/gnome-icon-entry.c:980
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr "Akho Mfanekiso woMqondiso"
 
@@ -1186,7 +1228,8 @@ msgstr "ISikhethi-soMfanekiso woMqondiso"
 
 #: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
-msgstr "Eli qhosha liya kuvula ifestile ukuze ukwazi ukukhetha umfanekiso womqondiso."
+msgstr ""
+"Eli qhosha liya kuvula ifestile ukuze ukwazi ukukhetha umfanekiso womqondiso."
 
 #: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
@@ -1197,8 +1240,12 @@ msgid "Icon path"
 msgstr "Indlela yomfanekiso womqondiso"
 
 #: libgnomeui/gnome-icon-entry.c:1010
-msgid "Here you should enter the name of the directory where icon images are located."
-msgstr "Apha kufuneka ufake igama lovimba wefayili apho imifanekiso ye-aykhoni ikhoyo."
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr ""
+"Apha kufuneka ufake igama lovimba wefayili apho imifanekiso ye-aykhoni "
+"ikhoyo."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1270,8 +1317,7 @@ msgstr "Jonga phambi kokuba uShicilele"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Nokuba ngaba ufako lwepixmap kufuneka lujongwe phambi koshicilelo."
 
-#: libgnomeui/gnome-pixmap-entry.c:189
-#: libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "Akukho Mfanekiso"
 
@@ -1304,6 +1350,8 @@ msgid "Score"
 msgstr "Amanqaku"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
@@ -1360,7 +1408,8 @@ msgstr "IThala leeFayili zeGNOME GUI"
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Ukonakala kweenkqubo ezininzi kwenzekile; ayibonisi bhokisi yampazamo\n"
+msgstr ""
+"Ukonakala kweenkqubo ezininzi kwenzekile; ayibonisi bhokisi yampazamo\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1377,12 +1426,14 @@ msgstr ""
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session will exit.\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 "UMlawuli weGNOME Session (inkqubo %d) wonakele\n"
 "ngenxa yempazamo enobungozi (%s).\n"
-"Xa uvala le bhokisi, zonke iinkqubo ziya kuvala kwaye iseshoni yakho iphume.\n"
+"Xa uvala le bhokisi, zonke iinkqubo ziya kuvala kwaye iseshoni yakho "
+"iphume.\n"
 "Nceda gcina zonke iifayili zakho phambi kokuvala le bhokisi."
 
 #: libgnomeui/gnome_segv.c:112
@@ -1395,10 +1446,13 @@ msgstr "INkqubo \"%s\" iphume ngokungalindelekanga."
 msgid "process %d: %s"
 msgstr "inkqubo %d: %s"
 
-#: libgnomeui/gnome_segv.c:118
-#: libgnomeui/gnome_segv.c:123
-msgid "You can inform the developers of what happened to help them fix it.  Or you can restart the application right now."
-msgstr "Ungabazisa abaphuhlisi malunga nokwenzekileyo ukubanceda balungise oku. Okanye ungaqalisa ngokutsha inkqubo ngoku."
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Ungabazisa abaphuhlisi malunga nokwenzekileyo ukubanceda balungise oku. "
+"Okanye ungaqalisa ngokutsha inkqubo ngoku."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1416,7 +1470,5 @@ msgstr "_Yazisa aBaphuhlisi"
 msgid "_Debug"
 msgstr "_Susa iziphene"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Phuma kuvavanyo"
-
+#~ msgid "Exit the test"
+#~ msgstr "Phuma kuvavanyo"

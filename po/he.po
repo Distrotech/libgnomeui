@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2004-03-25 21:36+0000\n"
 "Last-Translator: Gil Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -35,17 +35,17 @@ msgstr "פריט ילד 2"
 msgid "Hint for item 2"
 msgstr "רמז עבור פריט 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 #, fuzzy
 msgid "Filesystem"
 msgstr "ק_בצים"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2004-09-06 22:06+0000\n"
 "Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -34,16 +34,16 @@ msgstr "Barnoppføring 2"
 msgid "Hint for item 2"
 msgstr "Tips for barnoppføring 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s er ikkje ei mappe"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Filsystem"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Klarte ikkje lagra bokmerke (%s)"

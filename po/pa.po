@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2004-07-22 14:41+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@redhat.com>\n"
 "Language-Team: Punjabi <pa@li.org>\n"
@@ -33,16 +33,16 @@ msgstr "ਚਲਾਇਡ ਇਕਾਈ 2"
 msgid "Hint for item 2"
 msgstr "ਇਕਾਈ 2 ਲਈ ਸੰਕੇਤ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ਇੱਕ ਫੋਲਡਰ ਨਹੀਂ ਹੈ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "ਫਾਇਲਸਿਸਟਮ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "ਬੁੱਕਮਾਰਕ ਨੂੰ ਸੰਭਾਲਣ ਵਿੱਚ ਗਲਤੀ(%s)"

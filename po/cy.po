@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2005-01-31 07:30+0000\n"
 "Last-Translator: Rhys Jones <rhys@sucs.org>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
@@ -36,16 +36,16 @@ msgstr "Eitem Plentyn 1"
 msgid "Hint for item 2"
 msgstr "Awgrymiad ynghylch eitem 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "Nid yw %s yn blygell"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "System Ffeiliau"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Methwyd arbed llyfrnodau (%s)"
@@ -65,8 +65,8 @@ msgstr "Methwyd agor ffeil '%s': %s"
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
-"Methwyd llwytho delwedd '%s': rheswm anhysbys, ffeil delwedd lygredig, "
-"mae'n debyg"
+"Methwyd llwytho delwedd '%s': rheswm anhysbys, ffeil delwedd lygredig, mae'n "
+"debyg"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -1465,8 +1465,8 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"Gallwch ddweud wrth ddatblygwyr y rhaglen beth ddigwyddodd er mwyn eu cynorthwyo "
-"nhw i'w drwsio. Neu gallwch ailgychwyn y rhaglen nawr."
+"Gallwch ddweud wrth ddatblygwyr y rhaglen beth ddigwyddodd er mwyn eu "
+"cynorthwyo nhw i'w drwsio. Neu gallwch ailgychwyn y rhaglen nawr."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"

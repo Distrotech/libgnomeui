@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2004-08-04 17:25+0300\n"
 "Last-Translator: Ayman Hourieh <aymanh@gmail.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -35,16 +35,16 @@ msgstr "العنصر الإبن 2"
 msgid "Hint for item 2"
 msgstr "تلميحة للعنصر 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ليس دليلاً"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "نظام الملفات"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "فشل حفظ العلامة (%s)"

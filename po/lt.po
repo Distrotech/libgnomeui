@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-31 12:35+0200\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2005-01-31 13:20+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -34,16 +34,16 @@ msgstr "Antrinis elementas 2"
 msgid "Hint for item 2"
 msgstr "Patarimas 2-am elementui"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nėra aplankas"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Bylų sistema"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Žymelės išsaugoti nepavyko (%s)"
@@ -174,7 +174,6 @@ msgstr "Apie %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Byla"
 
@@ -232,7 +231,6 @@ msgid "_Game"
 msgstr "Žai_dimas"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pagalba"
 
@@ -423,11 +421,11 @@ msgstr "Sutvarkyti programą"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Apie"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Apie šią programą"
 
@@ -454,7 +452,7 @@ msgstr "Sukurti naują langą"
 msgid "_Close This Window"
 msgstr "_Uždaryti šį langą"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Uždaryti esamą langą"
 
@@ -1164,8 +1162,8 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Bandant paleisti numatytąją tinklo naršyklę įvyko klaida.\n"
-"Patikrinkite naršyklės nustatymus valdymo skydelio „Pageidaujamos "
-"programos“ punkte."
+"Patikrinkite naršyklės nustatymus valdymo skydelio „Pageidaujamos programos“ "
+"punkte."
 
 #: libgnomeui/gnome-icon-entry.c:178
 msgid ""
@@ -1245,8 +1243,7 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Čia jūs turėtumėte nurodyti aplanką, kuriame yra saugomi ikonų "
-"paveikslėliai."
+"Čia jūs turėtumėte nurodyti aplanką, kuriame yra saugomi ikonų paveikslėliai."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1470,6 +1467,5 @@ msgstr "_Informuoti kūrėjus"
 msgid "_Debug"
 msgstr "_Derinti"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Nutraukti bandymą"
+#~ msgid "Exit the test"
+#~ msgstr "Nutraukti bandymą"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.bs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2004-07-31 01:44+0200\n"
 "Last-Translator: Kenan Hadžiavdić <kenan@bgnett.no>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -34,16 +34,16 @@ msgstr "Podređena stavka 2"
 msgid "Hint for item 2"
 msgstr "Savjet za stavku 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nije direktorij"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Datotečni sistem"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Neuspješno snimanje zabilješke (%s)"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2004-08-29 19:22+0545\n"
 "Last-Translator: Pawan Chitrakar <pawan@nplinux.org>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -30,16 +30,16 @@ msgstr "सानोतिनो आइटम २"
 msgid "Hint for item 2"
 msgstr "आइटमको लागि ईशारा २"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "फाइल पद्धति"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "पृष्ठ चिन्ह संग्रह गर्न सकिएन (%s)"

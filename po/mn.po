@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2004-08-08 16:48+0100\n"
 "Last-Translator: Sanlig Badral <badral@users.sf.net>\n"
 "Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
@@ -35,16 +35,16 @@ msgstr "Хүү элемент 2"
 msgid "Hint for item 2"
 msgstr "Хүү элемент 2 -н зөвлөмж"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s хавтас биш"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Файл систем"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Хавчуурга хадгалагдсангүй (%s)"

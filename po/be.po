@@ -9,13 +9,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-12 07:30+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2005-02-14 00:22+0200\n"
 "Last-Translator: Vital Khilko <vk@altlinux.ru>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -33,16 +33,16 @@ msgstr "Элемэнт-нашчадак 2"
 msgid "Hint for item 2"
 msgstr "Падказка для элемэнту 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:696
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s не зьяўляецца тэчкай"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:903
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Файлавая сыстэма"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1587
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Збой захаваньня закладкі (%s)"
@@ -61,7 +61,9 @@ msgstr "Збой адкрыцьця файлу '%s': %s"
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Збой загрузкі відарысу '%s': прычына не вядома, магчыма пашкоджаны файл відарысу"
+msgstr ""
+"Збой загрузкі відарысу '%s': прычына не вядома, магчыма пашкоджаны файл "
+"відарысу"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -171,7 +173,6 @@ msgstr "Пра %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -229,7 +230,6 @@ msgid "_Game"
 msgstr "_Гульня"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Даведка"
 
@@ -420,11 +420,11 @@ msgstr "Дазваляе наладзіць дастасаваньне"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Пра праграму"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Адлюстроўвае зьвесткі аб праграме"
 
@@ -451,7 +451,7 @@ msgstr "Стварае новае акно"
 msgid "_Close This Window"
 msgstr "Закрыць _гэтае акно"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Закрывае гэтае акно"
 
@@ -916,8 +916,8 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Унікальны ідэнтыфікатар файлавага запісу. Ён будзе скарыстаны для "
-"захаваньня сьпісу гісторыі."
+"Унікальны ідэнтыфікатар файлавага запісу. Ён будзе скарыстаны для захаваньня "
+"сьпісу гісторыі."
 
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
@@ -1113,8 +1113,8 @@ msgid ""
 msgstr ""
 "Дастасаваньне \"%s\" спрабавала зьмяніць нешта ў вашых наладках, што не "
 "дазволена зьмяняць сыстэмным адміністратарам ці апэрацыйнай сыстэмай. Пэўныя "
-"з выбраных усталёвак могуць ня мець дзеяньня ці могуць ня быць адноўленыя "
-"ў час наступнага запуску дастасаваньня."
+"з выбраных усталёвак могуць ня мець дзеяньня ці могуць ня быць адноўленыя ў "
+"час наступнага запуску дастасаваньня."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1122,8 +1122,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Адбылася памылка ў часе загрузкі ці захаваньня даньняў наладак %s. Пэўныя "
-"з усталёвак могуць ня дзейнічаць правільна."
+"Адбылася памылка ў часе загрузкі ці захаваньня даньняў наладак %s. Пэўныя з "
+"усталёвак могуць ня дзейнічаць правільна."
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1429,8 +1429,8 @@ msgid ""
 msgstr ""
 "Кіраўнік сэансу GNOME (працэс %d) рухнуў\n"
 "з-за фатальнае памылкі (%s).\n"
-"З закрыцьцём гэтага дыялёгу будуць завершаны ўсе дастасаваньні ды "
-"завершыцца сэанс працы.\n"
+"З закрыцьцём гэтага дыялёгу будуць завершаны ўсе дастасаваньні ды завершыцца "
+"сэанс працы.\n"
 "Калі ласка, захавайце вашы файлы перш чым закрыць гэты дыялёг."
 
 #: libgnomeui/gnome_segv.c:112
@@ -1467,9 +1467,8 @@ msgstr "Пав_едаміць распрацоўнікам"
 msgid "_Debug"
 msgstr "Ад_ладзіць"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Выйсьці з праверкі"
+#~ msgid "Exit the test"
+#~ msgstr "Выйсьці з праверкі"
 
 #~ msgid " domain %s"
 #~ msgstr " маёнтак %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2003-07-01 16:42-0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -31,17 +31,17 @@ msgstr "Idoero 2"
 msgid "Hint for item 2"
 msgstr "Helpindiko por ero 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 #, fuzzy
 msgid "Filesystem"
 msgstr "_Dosiero"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""

@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-08 01:23+0200\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2005-02-08 01:41+0200\n"
 "Last-Translator: Nikos Charonitakis <charosn@her.forthnet.gr>\n"
 "Language-Team:  <team@gnome.gr>\n"
@@ -45,17 +45,17 @@ msgstr "Θυγατρικό αντικείμενο 2"
 msgid "Hint for item 2"
 msgstr "Hint for item 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:696
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "δεν είναι φάκελος το %s"
 
 #
-#: file-chooser/gtkfilesystemgnomevfs.c:903
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Σύστημα Αρχείων"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1587
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Αποτυχία αποθήκευσης σελιδοδείκτη (%s)"
@@ -72,7 +72,8 @@ msgstr "Αποτυχία ανοίγματος αρχείου '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Αποτυχία φόρτωσης εικόνας '%s': άγνωστη αιτία, πιθανό να είναι αλλοιωμένο το "
 "αρχείο της εικόνας"
@@ -169,7 +170,8 @@ msgid "Translator credits"
 msgstr "Μνεία μεταφραστών"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Μνεία στους μεταφραστές. Αυτό το αλφαριθμητικό θα πρέπει να σημειωθεί ως "
 "μεταφράσιμο"
@@ -207,7 +209,6 @@ msgstr "Περί %s"
 #
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
@@ -339,7 +340,6 @@ msgstr "_Παιχνίδι"
 # #-#-#-#-#  gnomemeeting-el.po (gnomemeeting 0.12.2)  #-#-#-#-#
 #
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Βοήθεια"
 
@@ -733,7 +733,7 @@ msgstr "Ρύθμιση της εφαρμογής"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Π_ερί"
 
@@ -744,7 +744,7 @@ msgstr "Π_ερί"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
@@ -788,7 +788,7 @@ msgstr "_Κλείσιμο Αυτού Του Παραθύρου"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Κλείσιμο του τρέχοντος παραθύρου"
 
@@ -1596,7 +1596,8 @@ msgstr "Μέγεθος γραμματοσειράς για την ετικέτα
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
+msgstr ""
+"Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -2090,7 +2091,8 @@ msgstr "Βιβλιοθήκη GNOME GUI"
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
+msgstr ""
+"Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -2169,7 +2171,5 @@ msgstr "Εκσ_φαλμάτωση"
 #
 # #-#-#-#-#  achtung-el.po (achtung 0.99.0)  #-#-#-#-#
 #
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Έξοδος από τη δοκιμή"
-
+#~ msgid "Exit the test"
+#~ msgstr "Έξοδος από τη δοκιμή"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-19 12:30+0100\n"
+"POT-Creation-Date: 2005-03-01 15:43+0100\n"
 "PO-Revision-Date: 2005-02-16 13:35+0330\n"
 "Last-Translator: Alireza Kheirkhahan <alireza@bamdad.org>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -31,16 +31,16 @@ msgstr ""
 msgid "Hint for item 2"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:677
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s پوشه نیست"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:884
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
-msgstr "سیستم پرونده‌ها"	
+msgstr "سیستم پرونده‌ها"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1565
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "ذخیره‌سازی چوب‌الف شکست خورد (%s)"
@@ -59,7 +59,9 @@ msgstr "باز کردن پرونده‌ی «%s» شکست خورد : %s"
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "بار کردن تصویر «%s» شکست خورد: دلیل معلوم نیست، احتمالاً پرونده‌‌ی تصویر مخدوش است"
+msgstr ""
+"بار کردن تصویر «%s» شکست خورد: دلیل معلوم نیست، احتمالاً پرونده‌‌ی تصویر مخدوش "
+"است"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -171,7 +173,6 @@ msgstr "درباره‌ی %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_پرونده"
 
@@ -229,7 +230,6 @@ msgid "_Game"
 msgstr "بازی"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "را_هنما"
 
@@ -420,11 +420,11 @@ msgstr "پیکربندی برنامه"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "درباره"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "درباره‌ی این برنامه"
 
@@ -451,7 +451,7 @@ msgstr "ایجاد یک پنجره‌ی جدید"
 msgid "_Close This Window"
 msgstr "بستن این پنجره"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "بستن پنجره‌ی فعلی"
 
@@ -767,7 +767,8 @@ msgstr "انتخاب زمان از یک فهرست"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date باطل شد، از gnome_date_edit_get_time استفاده کنید."
+msgstr ""
+"gnome_date_edit_get_date باطل شد، از gnome_date_edit_get_time استفاده کنید."
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -913,7 +914,8 @@ msgstr "شناسه‌ی تاریخچه"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr "شناسه‌ای یکتا برای ورودی پرونده.  برای ذخیره‌سازی فهرست تاریخچه به کار می‌رود."
+msgstr ""
+"شناسه‌ای یکتا برای ورودی پرونده.  برای ذخیره‌سازی فهرست تاریخچه به کار می‌رود."
 
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
@@ -932,7 +934,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"این که ورودی پرونده برای وارد کردن نام شاخه‌ها یا نام کامل پرونده‌ها استفاده بشود یا نه."
+"این که ورودی پرونده برای وارد کردن نام شاخه‌ها یا نام کامل پرونده‌ها استفاده "
+"بشود یا نه."
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
@@ -968,8 +971,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry که ورودی پرونده برای وارد کردن نام پرونده‌ها به کار می‌برد. اگر می‌خواهید پارامترهای GnomeEntry را تغییر دهید یا "
-"در آنها پرس و جو کنید، برای به دست آوردن آن می‌توانید از این مشخصه استفاده کنید."
+"GnomeEntry که ورودی پرونده برای وارد کردن نام پرونده‌ها به کار می‌برد. اگر "
+"می‌خواهید پارامترهای GnomeEntry را تغییر دهید یا در آنها پرس و جو کنید، برای "
+"به دست آوردن آن می‌توانید از این مشخصه استفاده کنید."
 
 #: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
@@ -981,8 +985,9 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry که ورودی پرونده برای وارد کردن نام پرونده‌ها به کار می‌برد. اگر می‌خواهید پارامترهای GtkEntry را تغییر دهید یا در آنها پرس و جو کنید، "
-"برای به دست آوردن آن می‌توانید از این مشخصه استفاده کنید."
+"GtkEntry که ورودی پرونده برای وارد کردن نام پرونده‌ها به کار می‌برد. اگر "
+"می‌خواهید پارامترهای GtkEntry را تغییر دهید یا در آنها پرس و جو کنید، برای به "
+"دست آوردن آن می‌توانید از این مشخصه استفاده کنید."
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
@@ -992,7 +997,9 @@ msgstr "استفاده از GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "این که برای انتخاب پرونده‌ها از ویجت جدید GtkFileChooser استفاده شود یا از ویجت GtkFileSelection"
+msgstr ""
+"این که برای انتخاب پرونده‌ها از ویجت جدید GtkFileChooser استفاده شود یا از "
+"ویجت GtkFileSelection"
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1102,16 +1109,19 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"برنامه‌ی «%s» سعی کرد قسمتی از پیکربندی‌ای را که مدیر سیستم یا فروشنده‌ی سیستم عاملتان اجازه‌ی تغییرش را به شما نداده عوض کند. "
-"بعضی از تنظیماتی که انتخاب کرده‌اید ممکن است اثر نکنند، یا شاید دفعه‌ی بعد که از برنامه استفاده می‌کنید بازنگردند."
+"برنامه‌ی «%s» سعی کرد قسمتی از پیکربندی‌ای را که مدیر سیستم یا فروشنده‌ی سیستم "
+"عاملتان اجازه‌ی تغییرش را به شما نداده عوض کند. بعضی از تنظیماتی که انتخاب "
+"کرده‌اید ممکن است اثر نکنند، یا شاید دفعه‌ی بعد که از برنامه استفاده می‌کنید "
+"بازنگردند."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr "در حین بار کردن یا ذخیره‌ی اطلاعات پیکربندی برای %s خطایی رخ داد. "
-"ممکن است بعضی از تنظیمات پیکربندی‌تان درست کار نکنند."
+msgstr ""
+"در حین بار کردن یا ذخیره‌ی اطلاعات پیکربندی برای %s خطایی رخ داد. ممکن است "
+"بعضی از تنظیمات پیکربندی‌تان درست کار نکنند."
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1152,11 +1162,13 @@ msgid ""
 msgstr ""
 "هنگام تلاش برای راه‌اندازی مرورگر وب پیش‌فرض خطایی رخ ‌داد.\n"
 "لطفاً تنظیمات خود را در «Preferred Applicaion» ابزار ترجیحات بررسی کنید."
+
 #: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "شناسه‌ی یکتا برای مدخل شمایل‌ها. برای ذخیره‌سازی فهرست تاریخچه استفاده می‌شود."
+msgstr ""
+"شناسه‌ی یکتا برای مدخل شمایل‌ها. برای ذخیره‌سازی فهرست تاریخچه استفاده می‌شود."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1182,7 +1194,9 @@ msgstr "محاوره‌ی بردارنده"
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr "محاوره‌ی برداشتن شمایل. اگر نیاز به تغییر مشخصه‌های GtkDialog یا پرس و جو در آنان دارید، می‌توانید برای دسترسی به آن از این مشخصه استفاده کنید."
+msgstr ""
+"محاوره‌ی برداشتن شمایل. اگر نیاز به تغییر مشخصه‌های GtkDialog یا پرس و جو در "
+"آنان دارید، می‌توانید برای دسترسی به آن از این مشخصه استفاده کنید."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
@@ -1224,8 +1238,7 @@ msgstr "مسیر شمایل"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"در‌این‌جا باید نام پوشه‌ای که شمایل در آن قرار دارد وارد کنید"
+msgstr "در‌این‌جا باید نام پوشه‌ای که شمایل در آن قرار دارد وارد کنید"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1410,9 +1423,9 @@ msgid ""
 "Please save all your files before closing this dialog."
 msgstr ""
 "مدیریت نشست گنوم (فراروند %Id)\n"
-"به دلیل خطای مهلک (%s) فروپاشی کرد./n"
-"وقتی این محاوره را ببندید، همه‌ی برنامه‌ها بسته می‌شوند و نشست شما پایان می‌یابد./n"
-"لطفاً تمام پرونده‌های خود را قبل از بستن این محاوره ذخیره کنید."
+"به دلیل خطای مهلک (%s) فروپاشی کرد./nوقتی این محاوره را ببندید، همه‌ی "
+"برنامه‌ها بسته می‌شوند و نشست شما پایان می‌یابد./nلطفاً تمام پرونده‌های خود را "
+"قبل از بستن این محاوره ذخیره کنید."
 
 #: libgnomeui/gnome_segv.c:112
 #, c-format
@@ -1428,7 +1441,9 @@ msgstr "فراروند %Id: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "می‌توانید سازندگان را از اتفاقی که افتاده خبردار کنید تا در تعمیر آن به آنها کمک کرده باشید. یا می‌توانید همین حالا برنامه را دوباره آغاز کنید."
+msgstr ""
+"می‌توانید سازندگان را از اتفاقی که افتاده خبردار کنید تا در تعمیر آن به آنها "
+"کمک کرده باشید. یا می‌توانید همین حالا برنامه را دوباره آغاز کنید."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1446,9 +1461,8 @@ msgstr "برنامه‌سازان را باخبر کنید"
 msgid "_Debug"
 msgstr "اشکال‌زدایی"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "خروج از آزمایش"
+#~ msgid "Exit the test"
+#~ msgstr "خروج از آزمایش"
 
 #~ msgid "Color Selector"
 #~ msgstr "انتخابگر رنگ"
@@ -1458,4 +1472,3 @@ msgstr "خروج از آزمایش"
 
 #~ msgid "http://www.gnome.org/application_crashed.shtml"
 #~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
