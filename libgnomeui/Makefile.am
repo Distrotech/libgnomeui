@@ -43,20 +43,6 @@ noinst_HEADERS = \
 EXTRA_PROGRAMS = unused
 
 unused_SOURCES = \
-	gnome-mdi.c			\
-	gnome-mdiP.h			\
-	gnome-mdi-child.c		\
-	gnome-mdi-generic-child.c       \
-	gnome-mdi-session.c		\
-	gnome-pouch.c			\
-	gnome-pouchP.h			\
-	gnome-roo.c			\
-	gnome-mdi.h			\
-	gnome-mdi-child.h		\
-	gnome-mdi-generic-child.h	\
-	gnome-mdi-session.h		\
-	gnome-pouch.h			\
-	gnome-roo.h			\
 	gnome-ditem-edit.c
 
 libgnomeui_2_la_SOURCES = \

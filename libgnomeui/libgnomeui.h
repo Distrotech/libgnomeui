@@ -67,13 +67,6 @@
 #include <libgnomeui/oafgnome.h>
 #include <libgnomeui/gnome-vfs-util.h>
 
-#ifdef FIXME
-#include <libgnomeui/gnome-mdi.h>
-#include <libgnomeui/gnome-mdi-child.h>
-#include <libgnomeui/gnome-mdi-generic-child.h>
-#include <libgnomeui/gnome-mdi-session.h>
-#endif
-
 #ifdef COMPAT_1_0
 #include "compat/1.0/libgnomeui-compat-1.0.h"
 #endif
