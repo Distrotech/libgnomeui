@@ -119,8 +119,12 @@ void gnome_apps_menu_debug_print(GnomeAppsMenu * gam)
 #define GNOME_APPS_MENU_DEBUG_PRINT(x)
 #endif
 
-/* Extract filename from a path, NULL if no filename */
-gchar * g_extract_file(const gchar * path)
+/**********************************
+  gnome-util type things.
+  ********************************/
+
+/* Extract filename from a path, NULL if no filename (i.e. just a dir) */
+gchar * g_filename_from_path(const gchar * path)
 {
   int len, i;
   g_return_val_if_fail(path != NULL, NULL);
@@ -139,6 +143,62 @@ gchar * g_extract_file(const gchar * path)
     return g_strdup(&path[i+1]);
   }
 }
+
+gboolean g_has_extension(const gchar * path, const gchar * ext)
+{
+  int dot_index;
+  
+  g_return_val_if_fail(path != 0, FALSE);
+  g_return_val_if_fail(ext != 0, FALSE);
+  g_return_val_if_fail(ext[0] == '.', FALSE); /* Should have dot */
+
+  dot_index  = strlen(path) - strlen(ext); /* index of start of extension */
+
+  if ( dot_index < 0 ) return FALSE;
+
+  return (strcmp(ext, &path[dot_index]) == 0);
+}
+
+gboolean g_is_dotfile(const gchar * path)
+{
+  gint len;
+
+  if (path[0] == '.') return TRUE;
+  len = strlen(path);
+  while ( len > 0 ) {
+    if ( path[len] == PATH_SEP ) return FALSE; /* no dots */
+    if ( path[len] == '.' ) break;
+    --len;
+  }
+  if ( len == 0 ) return FALSE; /* no dots */
+  /* len is indexing the . */
+  if (path[len - 1] == PATH_SEP) return TRUE;
+  else return FALSE;
+}
+
+/* Return a copy of the file's extension, sans dot. */
+static gchar * g_copy_extension(const gchar * filename)
+{
+  gint len;
+  const gchar * extension = NULL;
+
+  len = strlen(filename);
+
+  while ( len >= 0 ) {
+    --len; /* always skip last character, because if
+	      the filename ends in . it doesn't count. */
+    if (filename[len] == '.') {
+      extension = &filename[len + 1]; /* without period */
+      break;
+    }
+  }
+  
+  if ( extension == NULL ) {
+    return NULL;
+  }
+  else return g_strdup(extension);
+}
+
 
 /****************************************
   Class-handling stuff
@@ -305,7 +365,8 @@ static void dentry_save_func( GnomeAppsMenu * gam,
   g_return_if_fail(directory != NULL);
 
   if ( ((GnomeDesktopEntry *)gam->data)->location ) {
-    filename = g_extract_file( ((GnomeDesktopEntry *)gam->data)->location );
+    filename = 
+      g_filename_from_path( ((GnomeDesktopEntry *)gam->data)->location );
   }
   else if (GNOME_APPS_MENU_IS_DIR(gam)) {
     filename = g_strdup( "."GNOME_APPS_MENU_DENTRY_DIR_EXTENSION );
@@ -413,45 +474,6 @@ static gchar ** get_filename_list(const gchar * directory)
   return filename_list;
 }
 
-static gboolean is_dotfile(const gchar * path)
-{
-  gint len;
-
-  if (path[0] == '.') return TRUE;
-  len = strlen(path);
-  while ( len > 0 ) {
-    if ( path[len] == PATH_SEP ) return FALSE; /* no dots */
-    if ( path[len] == '.' ) break;
-    --len;
-  }
-  if ( len == 0 ) return FALSE; /* no dots */
-  /* len is indexing the . */
-  if (path[len - 1] == PATH_SEP) return TRUE;
-  else return FALSE;
-}
-
-static gchar * get_extension(const gchar * filename)
-{
-  gint len;
-  const gchar * extension = NULL;
-
-  len = strlen(filename);
-
-  while ( len >= 0 ) {
-    --len; /* always skip last character, because if
-	      the filename ends in . it doesn't count. */
-    if (filename[len] == '.') {
-      extension = &filename[len + 1]; /* without period */
-      break;
-    }
-  }
-  
-  if ( extension == NULL ) {
-    return NULL;
-  }
-  else return g_strdup(extension);
-}
-
 /**********************************
   Code to load the GnomeAppsMenu from disk
   ************************************/
@@ -468,7 +490,7 @@ gnome_apps_menu_new_from_file(const gchar * filename)
 
   g_return_val_if_fail(filename != NULL, NULL);
 
-  extension = get_extension(filename);
+  extension = g_copy_extension(filename);
 
   /* The class find would fail anyway; this is just an optimization. */
   if ( strcmp(extension, BACKUP_EXTENSION) == 0 ) {
@@ -476,7 +498,7 @@ gnome_apps_menu_new_from_file(const gchar * filename)
     return NULL;
   }
 
-  is_directory = is_dotfile(filename);
+  is_directory = g_is_dotfile(filename);
 
   c = find_class_by_extension(extension, is_directory);
   
@@ -519,7 +541,7 @@ static GnomeAppsMenu * load_directory_info(gchar ** filename_list)
     ++filename_list;
 
     /* ignore anything that's not a dotfile */
-    if ( ! is_dotfile(filename) ) continue;
+    if ( ! g_is_dotfile(filename) ) continue;
 
     dir_menu = gnome_apps_menu_new_from_file(filename);
 
@@ -572,7 +594,7 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
 
     /* Ignore all dotfiles -- they're meant to describe the 
        directory, not items in it. */
-    if ( is_dotfile(filename) ) {
+    if ( g_is_dotfile(filename) ) {
 #ifdef GNOME_ENABLE_DEBUG
       g_print("Ignoring dotfile %s\n", filename);
 #endif
@@ -682,7 +704,7 @@ static gboolean known_class(const gchar * path,
 {
   gchar * extension;
 
-  extension = get_extension(path);
+  extension = g_copy_extension(path);
 
   if ( extension == NULL ) return FALSE;
 
@@ -694,16 +716,6 @@ static gboolean known_class(const gchar * path,
     g_free(extension);
     return FALSE;
   }
-}
-
-static gboolean is_backup(const gchar * path)
-{
-  int len = strlen(path);
-  int dot_index = len - strlen("."BACKUP_EXTENSION);
-  
-  if ( dot_index < 0 ) return FALSE;
-
-  return (strcmp("."BACKUP_EXTENSION, &path[dot_index]) == 0);
 }
 
 /* Non-recursively create directory if it doesn't exist, if it does
@@ -752,7 +764,7 @@ static gboolean prepare_directory(const gchar * directory)
 
     /* dotfiles are directory info, non-dotfiles aren't. */
     if ( known_class ( filename, 
-		       is_dotfile(filename) ) ) {
+		       g_is_dotfile(filename) ) ) {
 
       new_name = g_copy_strings(filename, 
 				"."BACKUP_EXTENSION, NULL);
@@ -760,7 +772,7 @@ static gboolean prepare_directory(const gchar * directory)
       rename ( filename, new_name );
       g_free(new_name);
     }  
-    else if ( is_backup(filename) ) {
+    else if ( g_has_extension(filename, "."BACKUP_EXTENSION) ) {
       /* Delete old backups */
       unlink(filename);
     }
@@ -798,13 +810,13 @@ gboolean gnome_apps_menu_save(GnomeAppsMenu * gam,
        The root menu goes in the passed-in directory. */
 
     gnome_apps_menu_setup(gam, NULL, &subdir, NULL, NULL);
-  
+#ifdef GNOME_ENABLE_DEBUG  
     g_print("Got subdir %s\n", subdir);
-    
+#endif
     full_subdir = g_concat_dir_and_file(directory, subdir);
-    
+#ifdef GNOME_ENABLE_DEBUG
     g_print("Full: %s\n", full_subdir);  
-
+#endif
     directory = full_subdir; /* alias */
   }
 

@@ -137,7 +137,7 @@ typedef gpointer (*GnomeAppsMenuLoadFunc)(const gchar *);
     GtkSignalFunc * to store callback
     gpointer * to store data for callback
    The function should simply fill in these four bits of information
-   based on the GnomeAppsMenu it receives. If any of the argument
+   based on the GnomeAppsMenu it receives. If any of the arguments
    is NULL, it shouldn't be filled in. */
 
 typedef void (*GnomeAppsMenuSetupFunc)(GnomeAppsMenu *,
@@ -218,3 +218,4 @@ GtkWidget * gtk_menu_item_new_from_apps_menu(GnomeAppsMenu * gam);
 END_GNOME_DECLS
    
 #endif
+
