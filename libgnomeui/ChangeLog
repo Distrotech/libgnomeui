@@ -1,3 +1,8 @@
+1999-10-06  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* gnome_segv.c (main): add a hook for the soon-to-be available
+	bug-buddy program
+
 Tue Oct  5 02:35:47 1999  Owen Taylor  <otaylor@redhat.com>
  
  	* gnome-init.c (initialize_gtk_signal_relay): Free value

@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
                                   NULL);
   
   /* so we don't try to debug bug-buddy */
-  if (getenv("BB_APPNAME") == NULL)
+  if (getenv("GNOME_CRASHED_APPNAME") == NULL)
     {
       bug_buddy_path = gnome_is_program_in_path ("bug-buddy");
       if (bug_buddy_path != NULL)
@@ -100,14 +100,19 @@ int main(int argc, char *argv[])
   if (res == 1)
     {
       gchar *env_str;
-      env_str = g_strdup_printf("BB_APPNAME=%s", appname);
+      int retval;
+      env_str = g_strdup_printf("GNOME_CRASHED_APPNAME=%s", appname);
       putenv(env_str);
       
-      env_str = g_strdup_printf("BB_PID=%d", getppid());
+      env_str = g_strdup_printf("GNOME_CRASHED_PID=%d", getppid());
       putenv(env_str);
 
       g_assert (bug_buddy_path);
-      system(bug_buddy_path);
+      retval = system(bug_buddy_path);
+      if (retval == -1 || retval == 127)
+        {
+          g_warning(g_strerror(errno));
+        }
     }
 
   return 0;
