@@ -117,7 +117,7 @@ void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
 /* The load func takes a filename as argument and returns 
    whatever should go in the data field, above */
 
-typedef gpointer (GnomeAppsMenuLoadFunc *)(gchar *);
+typedef gpointer (GnomeAppsMenuLoadFunc *)(const gchar *);
 
 /* The menuitem-creating function can be NULL, if you don't
    want to create menuitems in gtk_menu_new_from_apps_menu()
@@ -125,17 +125,6 @@ typedef gpointer (GnomeAppsMenuLoadFunc *)(gchar *);
    callbacks. */
 
 typedef GtkWidget * (GnomeAppsMenuGtkMenuItemFunc *)(GnomeAppsMenu *);
-
-typedef struct {
-  gchar * extension;
-  GnomeAppsMenuLoadFunc load_func;
-  GnomeAppsMenuGtkMenuItemFunc menu_item_func;
-} GnomeAppsMenuVariety;
-
-GnomeAppsMenuVariety * 
-gnome_apps_menu_variety_new( gchar * extension,
-			     GnomeAppsMenuLoadFunc load_func,
-			     GnomeAppsMenuGtkMenuItemFunc menu_item_func );
        
 /* The desktop entry variety is already registered by default,
    with gnome_desktop_entry_load () as LoadFunc,
@@ -145,13 +134,23 @@ gnome_apps_menu_variety_new( gchar * extension,
    This function owns and will destroy your variety, so
    no need to. The destroy function isn't even public. */
 
-void gnome_apps_menu_register_variety(GnomeAppsMenuVariety * v);
+void 
+gnome_apps_menu_register_variety( const gchar * extension,
+				  GnomeAppsMenuLoadFunc load_func,
+				  GnomeAppsMenuGtkMenuItemFunc menu_item_func );
 
-/* Load a GnomeAppsMenu, with `directory' as root.  If directory ==
-   NULL load the user's default apps menu.  (window managers, panel,
+/* Load a GnomeAppsMenu, with `directory' as root.  */
+
+GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory);
+
+/* Load the user's default apps menu.  (window managers, panel,
    etc. should use the default for the main "start" menu) */
 
-GnomeAppsMenu * gnome_apps_menu_load(gchar * directory);
+GnomeAppsMenu * gnome_apps_menu_load_default(void);
+
+/* Load the systemwide menu, e.g. share/apps */
+
+GnomeAppsMenu * gnome_apps_menu_load_system(void);
 
 /* Create a GtkMenu from a GnomeAppsMenu, complete with
    callbacks */

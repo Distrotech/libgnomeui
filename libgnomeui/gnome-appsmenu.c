@@ -20,19 +20,20 @@
 
 /* Use a dotfile, so people won't try to edit manually
    unless they really know what they're doing. */
+/* Alternatively, use "apps" to be consistent with share/apps? */
 
-#define GNOME_APPS_MENU_ROOT_DIR ".Gnome Apps Menu"
+#define GNOME_APPS_MENU_DEFAULT_DIR ".Gnome Apps Menu"
 
-static GList * varieties = NULL;
+typedef struct {
+  gchar * extension;
+  GnomeAppsMenuLoadFunc load_func;
+  GnomeAppsMenuGtkMenuItemFunc menu_item_func;
+} GnomeAppsMenuVariety;
 
-void gnome_apps_menu_register_variety(GnomeAppsMenuVariety * v)
-{
-  g_return_if_fail(v != NULL);
-  g_list_append(varieties, v);
-}
+static GList * varieties = NULL; /* list of above struct */
 
-GnomeAppsMenuVariety * 
-gnome_apps_menu_variety_new( gchar * extension,
+static GnomeAppsMenuVariety * 
+gnome_apps_menu_variety_new( const gchar * extension,
 			     GnomeAppsMenuLoadFunc load_func,
 			     GnomeAppsMenuGtkMenuItemFunc menu_item_func )
 {
@@ -50,6 +51,27 @@ gnome_apps_menu_variety_new( gchar * extension,
 
   return v;
 }
+
+
+void 
+gnome_apps_menu_register_variety( const gchar * extension,
+				  GnomeAppsMenuLoadFunc load_func,
+				  GnomeAppsMenuGtkMenuItemFunc menu_item_func )
+{
+
+  GnomeAppsMenuVariety * v;
+
+  v = gnome_apps_menu_variety_new(extension, load_func, 
+				  menu_item_func);
+
+  if ( v == NULL ) {
+    g_warning("AppsMenuVariety registration failed");
+    return;
+  }
+
+  g_list_append(varieties, v);
+}
+
 
 static void 
 gnome_apps_menu_variety_destroy( GnomeAppsMenuVariety * v )
@@ -76,16 +98,12 @@ static void clear_varieties(void)
 
 static void make_default_varieties(void)
 {
-  GnomeAppsMenuVariety * v;
-
-  v = gnome_apps_menu_variety_new( GNOME_APPS_MENU_DENTRY_EXTENSION,
-				   gnome_desktop_entry_load,
-				   NULL /* FIXME */ );
-  
-  gnome_apps_menu_register_variety(v);
+  gnome_apps_menu_register_variety( GNOME_APPS_MENU_DENTRY_EXTENSION,
+				    gnome_desktop_entry_load,
+				    NULL /* FIXME */ );
 }
 
-static GnomeAppsMenuLoadFunc get_func(gchar * filename,
+static GnomeAppsMenuLoadFunc get_func(const gchar * filename,
 				      /* load_func if TRUE,
 					 menu_item_func if FALSE */
 				      gboolean load_func)
@@ -117,10 +135,35 @@ static GnomeAppsMenuLoadFunc get_func(gchar * filename,
 
 /* FIXME these two will be based on the panel/menu.c code */
 
-GnomeAppsMenu * gnome_apps_menu_load(gchar * directory)
+GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
 {
   GnomeAppsMenuLoadFunc load_func;
   g_warning("Not implemented\n");
+}
+
+
+GnomeAppsMenu * gnome_apps_menu_load_default(void)
+{
+  gchar * s;
+
+  s = gnome_util_home_file(GNOME_APPS_MENU_DEFAULT_DIR);
+ 
+  gnome_apps_menu_load(s);
+
+  g_free(s);
+}
+
+
+
+GnomeAppsMenu * gnome_apps_menu_load_system(void);
+{
+  gchar * s;
+
+  s = gnome_datadir_file("apps");
+ 
+  gnome_apps_menu_load(s);
+
+  g_free(s);
 }
 
 GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam)

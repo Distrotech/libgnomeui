@@ -1,3 +1,11 @@
+Sat Apr 11 11:35:24 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h, gnome-appsmenu.c 
+	(gnome_apps_menu_load_system, gnome_apps_menu_load_default):
+	Two new functions.
+	(GnomeAppsMenuVariety): moved from .h to .c
+	(gnome_apps_menu_variety_new): also moved
+	
 1998-04-10  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-app-helper.h (GnomeUIInfoType): New type, extracted from
