@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-05 22:14+0200\n"
-"PO-Revision-Date: 2004-02-01 02:14+0200\n"
+"POT-Creation-Date: 2004-02-11 00:27+0200\n"
+"PO-Revision-Date: 2004-02-07 18:24+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Gnome Finnish Translation Team <gnome-fi-laatu@lists."
 "sourceforge.net>\n"
@@ -337,7 +337,7 @@ msgstr "Tee _uudelleen"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Suorita peruttu toiminto uudestaan"
+msgstr "Tee kumottu toiminto uudestaan"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -440,11 +440,11 @@ msgstr "Aloita uusi peli"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr "_Keskeytä peli"
+msgstr "Pelitau_ko"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Keskeytä peli"
+msgstr "Pidä pelissä tauko"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
@@ -574,11 +574,11 @@ msgstr "Ohjelman ID-merkkijono"
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
-msgstr "Edistyspalkki on"
+msgstr "Edistymispalkki on"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Luo edistyspalkkikomponentti"
+msgstr "Luo edistymispalkkikomponentti"
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
@@ -590,7 +590,7 @@ msgstr "Luo tilakomponentti."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
-msgstr "Interaktiivisuus"
+msgstr "Vuorovaikutteisuus"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
@@ -740,8 +740,8 @@ msgstr "Valitse aika luettelosta"
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
-"gnome_date_edit_get_date on vanhentunut: käytä gnome_date_edit_get_time'a "
-"sen sijaan."
+"gnome_date_edit_get_date on vanhentunut: käytä gnome_date_edit_get_time-"
+"funktiota sen sijaan."
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -750,7 +750,7 @@ msgstr "Otsikko"
 
 #: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
-msgstr "Druidin otsikko"
+msgstr "Ohjatun toiminnon otsikko"
 
 #: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
@@ -778,7 +778,7 @@ msgstr "Otsikon edustaväri"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr "Otsikon edustan väri GdkColor'na."
+msgstr "Otsikon edustan väri GdkColorina."
 
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
@@ -799,7 +799,7 @@ msgstr "Taustaväri"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr "Taustaväri GdkColor'na"
+msgstr "Taustaväri GdkColorina"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
@@ -820,7 +820,7 @@ msgstr "Logon taustan väri"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
-msgstr "Logon taustan väri GdkColor'na"
+msgstr "Logon taustan väri GdkColorina"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
@@ -1279,7 +1279,7 @@ msgstr "Tulos"
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr "%a %d. %b %T %Y"
+msgstr "%a %d. %Bta %T %Y"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
@@ -1381,7 +1381,7 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Käyttö: gnome_segv sovellus signaali\n"
+msgstr "Käyttö: gnome_segv2 sovellus signaali\n"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "Inform Developers"
