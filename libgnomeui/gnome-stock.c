@@ -47,6 +47,7 @@
 #define STOCK_SEP_STR "."
 
 static GnomePixmap *gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype);
+static GnomeStockPixmapEntry *lookup(char *icon, char *subtype, int fallback);
 
 /*
  * GnomeStockPixmapWidget
@@ -127,12 +128,12 @@ gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
         if (pixmap == w->pixmap) return;
         if (w->pixmap) {
                 gtk_container_remove(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
-                gtk_widget_queue_draw(widget);
+		/* gtk_widget_queue_draw(widget); */
         }
         w->pixmap = pixmap;
         if (pixmap) {
                 gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
-                gtk_widget_queue_draw(widget);
+		/* gtk_widget_queue_draw(widget); */
         }
 }
 
@@ -254,6 +255,42 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
 	}
         p->window = window;
 	return w;
+}
+
+
+
+void
+gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
+				   char *icon)
+{
+	GnomeStockPixmapEntry *entry;
+
+	g_return_if_fail(widget != NULL);
+	g_return_if_fail(icon != NULL);
+	g_return_if_fail(GNOME_IS_STOCK_PIXMAP_WIDGET(widget));
+
+	entry = lookup(icon, GNOME_STOCK_PIXMAP_REGULAR, 0);
+	g_return_if_fail(entry != NULL);
+
+	if (widget->icon)
+		if (0 == strcmp(widget->icon, icon))
+			return;
+
+	if (widget->regular) {
+		gtk_widget_unref(GTK_WIDGET(widget->regular));
+		widget->regular = NULL;
+	}
+	if (widget->disabled) {
+		gtk_widget_unref(GTK_WIDGET(widget->disabled));
+		widget->disabled = NULL;
+	}
+	if (widget->focused) {
+		gtk_widget_unref(GTK_WIDGET(widget->focused));
+		widget->focused = NULL;
+	}
+	if (widget->icon) g_free(widget->icon);
+	widget->icon = g_strdup(icon);
+	gnome_stock_pixmap_widget_state_changed(GTK_WIDGET(widget), 0);
 }
 
 
@@ -397,6 +434,8 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_PIXMAP_PREFERENCES, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_preferences, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
         {GNOME_STOCK_PIXMAP_SCORES, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_scores, TB_W, TB_H, TB_W, TB_H},
 	{GNOME_STOCK_PIXMAP_UNDO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_undo, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TIMER, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_timer, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TIMER_STOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_timer_stopped, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
         {GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exit, TB_W, TB_H, TB_W, TB_H},
 	{GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, N_("OK"), imlib_button_ok, TB_W, TB_H, TB_W, TB_H},
 	{GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, N_("Apply"), imlib_button_apply, TB_W, TB_H, TB_W, TB_H},

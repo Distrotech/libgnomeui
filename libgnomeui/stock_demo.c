@@ -1,4 +1,6 @@
+#include <config.h>
 #include <gnome.h>
+#include <string.h>
 
 
 static GtkWidget *menu_items[20], *frame;
@@ -251,10 +253,23 @@ tb_insens(GtkWidget *w, gpointer *data)
 
 
 
-void
+static void
+toggle_button(GtkWidget *button, GnomeStockPixmapWidget *w)
+{
+	if (!w) return;
+	if (!w->icon) return;
+	if (0 == strcmp(w->icon, GNOME_STOCK_PIXMAP_TIMER))
+		gnome_stock_pixmap_widget_set_icon(w, GNOME_STOCK_PIXMAP_TIMER_STOP);
+	else
+		gnome_stock_pixmap_widget_set_icon(w, GNOME_STOCK_PIXMAP_TIMER);
+}
+
+
+
+static void
 fill_table(GtkWidget *window, GtkTable *table)
 {
-	GtkWidget *w;
+	GtkWidget *w, *button;
 
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_HELP));
 	gtk_widget_show(w);
@@ -314,6 +329,24 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_FORWARD));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 4, 5, 2, 3);
+
+	button = gtk_button_new();
+	gtk_widget_show(button);
+	w = gnome_stock_pixmap_widget(button, GNOME_STOCK_PIXMAP_TIMER);
+	gtk_widget_show(w);
+	gtk_container_add(GTK_CONTAINER(button), w);
+	gtk_table_attach_defaults(table, button, 0, 1, 2, 3);
+	gtk_signal_connect(GTK_OBJECT(button), "clicked",
+			   GTK_SIGNAL_FUNC(toggle_button), w);
+
+	button = gtk_toggle_button_new();
+	gtk_widget_show(button);
+	w = gnome_stock_pixmap_widget(button, GNOME_STOCK_PIXMAP_TIMER);
+	gtk_widget_show(w);
+	gtk_container_add(GTK_CONTAINER(button), w);
+	gtk_table_attach_defaults(table, button, 2, 3, 2, 3);
+	gtk_signal_connect(GTK_OBJECT(button), "clicked",
+			   GTK_SIGNAL_FUNC(toggle_button), w);
 }
 
 
@@ -323,10 +356,8 @@ main(int argc, char **argv)
 {
 	GtkWidget *window, *hbox, *vbox, *table, *w;
 
-#ifdef HAS_GDK_IMLIB
-	gdk_imlib_init();
-#endif 
 	gnome_init("stock_demo", NULL, argc, argv, 0, NULL);
+	textdomain(PACKAGE);
 
 	window = gnome_app_new("Gnome Stock Test", "Gnome Stock Test");
 	gtk_window_set_wmclass(GTK_WINDOW(window), "stock_test",

@@ -1,3 +1,13 @@
+1998-03-20  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock-imlib.h: added timer and timer_stopped icons. At least
+	two apps already use timer buttons: gtt and gtop.
+
+	* gnome-stock.[ch]: Added gnome_stock_pixmap_widget_set_icon. See
+	stock_demo.c for an example.
+
+	* stock_demo.c: added an example for the use of ..._set_icon.
+
 1998-03-19  Marc Ewing  <marc@redhat.com>
 
 	* gtk-socket.{c,h}: change "id" parameter name to "wid"

@@ -91,6 +91,8 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_BACK        "Back"
 #define GNOME_STOCK_PIXMAP_FORWARD     "Forward"
 #define GNOME_STOCK_PIXMAP_UNDO        "Undo"
+#define GNOME_STOCK_PIXMAP_TIMER       "Timer"
+#define GNOME_STOCK_PIXMAP_TIMER_STOP  "Timer Stopped"
 #define GNOME_STOCK_PIXMAP_QUIT        "Quit"
 
 #define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
@@ -244,6 +246,10 @@ GnomePixmap           *gnome_stock_pixmap          (GtkWidget *window,
 /* just fetch a GnomeStockPixmapWidget */
 GtkWidget             *gnome_stock_pixmap_widget   (GtkWidget *window,
                                                     char *icon);
+
+/* change the icon/look of a GnomeStockPixmapWidget */
+void gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
+					char *icon);
 
 /* register a pixmap. returns non-zero, if successfull */
 gint                   gnome_stock_pixmap_register (char *icon, char *subtype,
