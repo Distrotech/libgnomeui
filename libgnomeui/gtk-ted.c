@@ -671,6 +671,8 @@ gtk_ted_parse_pos (char *str)
 {
 	int flags;
 
+	flags = 0;
+	
 	for (;*str; str++){
 		if (*str == 'n')
 			flags |= 1;
