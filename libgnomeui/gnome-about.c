@@ -278,32 +278,23 @@ gnome_about_display_comments (GdkWindow *win,
 	/* we need a buffer because strtok will modify the string! */
 	/* strtok is a cool but dangerous function. */
 	buffer = malloc (sizeof(char) * strlen(comments) + 1);
+	if (buffer == NULL)
+		return;
 	strcpy (buffer, comments);
 
 	ypos = y;
 
 	/* Make a list with each paragraph */
 	par = (GList *)NULL;
-	tok = strtok (buffer, "\n\0");
-	p1 = (char *)malloc (sizeof (char) * strlen (tok) + 1);
-	par = g_list_append (NULL, p1);
-	if (p1 != NULL)
-		strcpy (p1, tok);
-	else
-		return; /* error */
-	tok = strtok (NULL, "\n\0");
-	while (tok != (char *)NULL)
-	{
-		/* more than one par */
+
+	for (tok = strtok (buffer, "\n"); tok; tok = strtok (NULL, "\n")) {
 		p1 = (char *)malloc (sizeof (char) * strlen (tok) + 1);
-		g_list_append (par, p1);
-		if (p1 != NULL)
-			strcpy (p1, tok);
-		else
-			return; /* error */
-		tok = strtok (NULL, "\n\0");
-	} 
-    
+		if (p1 == NULL)
+			goto free_list;
+		strcpy (p1, tok);
+		par = g_list_append (par, p1);
+	}
+
 	/* Print each paragraph */
 	tmp = par;
 	while (tmp != NULL)
@@ -353,12 +344,15 @@ gnome_about_display_comments (GdkWindow *win,
 			ypos += font->descent + font->ascent;
 			p2 = p1;
 		}
-		free (tmp->data);
 		tmp = tmp->next;
 		ypos += BASE_LINE_SKIP; /* Skip a bit */
 	}
 
+free_list:
 	/* Free list memory */
+	for (tmp = par; tmp != NULL; tmp = tmp->next) {
+		free (tmp->data);
+	}
 	g_list_free (par);
 	free (buffer);
 

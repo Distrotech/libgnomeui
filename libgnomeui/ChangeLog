@@ -1,3 +1,9 @@
+Sun Mar  1 00:23:29 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-about.c (gnome_about_display_comments): Simplified
+	paragraph splitting.  Don't crash if comments is empty string.
+	Don't leak memory if malloc fails.
+
 Sat Feb 28 17:27:41 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-app.c (gnome_app_new): Set app->name to appname.  Do not
