@@ -27,6 +27,7 @@
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
 #include "gnome-uidefs.h"
+#include "gnome-preferences.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -523,7 +524,7 @@ gdk_pixbuf_new_from_stock_pixmap_entry (GnomeStockPixmapEntry *entry)
                         entry->any.pixbuf = gdk_pixbuf_scale_simple(entry->scaled.unscaled_pixbuf,
                                                                     entry->scaled.scaled_width,
                                                                     entry->scaled.scaled_height,
-                                                                    ART_FILTER_BILINEAR);
+                                                                    GDK_INTERP_BILINEAR);
                 }
                 if (entry->any.pixbuf != NULL &&
                     entry->scaled.unscaled_pixbuf != NULL) {
@@ -814,10 +815,11 @@ stock_pixmaps(void)
                 GnomeStockPixmapEntry *entry;
 
                 pixbuf = gdk_pixbuf_new_from_data ( (guchar*) entries_data[i].rgb_data, /* cast const */
-                                                    ART_PIX_RGB,
+                                                    GDK_COLORSPACE_RGB,
                                                     TRUE,
                                                     entries_data[i].width,
                                                     entries_data[i].height,
+                                                    8,
                                                     /* rowstride */
                                                     entries_data[i].width * 4,
                                                     NULL, /* don't destroy data */

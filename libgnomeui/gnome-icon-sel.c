@@ -196,8 +196,8 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	if(!iml)
 		return;
 	
-	w = iml->art_pixbuf->width;
-	h = iml->art_pixbuf->height;
+	w = gdk_pixbuf_get_width (iml);
+	h = gdk_pixbuf_get_height (iml);
 	if(w>h) {
 		if(w>ICON_SIZE) {
 			h = h*((double)ICON_SIZE/w);
@@ -212,7 +212,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	w = w>0?w:1;
 	h = h>0?h:1;
 	
-	im = gdk_pixbuf_scale_simple(iml, w, h, ART_FILTER_BILINEAR);
+	im = gdk_pixbuf_scale_simple(iml, w, h, GDK_INTERP_BILINEAR);
 	gdk_pixbuf_unref(iml);
 	if(!im)
 		return;

@@ -703,8 +703,8 @@ gnome_about_load_logo(GnomeAboutInfo *ai, const gchar *logo)
 			if (pixbuf != NULL)
 			{
 				ai->logo = pixbuf;
-				ai->logo_w = pixbuf->art_pixbuf->width;
-				ai->logo_h = pixbuf->art_pixbuf->height;
+				ai->logo_w = gdk_pixbuf_get_width (pixbuf);
+				ai->logo_h = gdk_pixbuf_get_height (pixbuf);
 				
 			}
 		}

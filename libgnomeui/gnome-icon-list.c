@@ -952,8 +952,8 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im, const char *text)
 		gnome_canvas_pixbuf_get_type (),
 		"x", 0.0,
 		"y", 0.0,
-		"width", (double) im->art_pixbuf->width,
-		"height", (double) im->art_pixbuf->height,
+		"width", (double) gdk_pixbuf_get_width (im),
+		"height", (double) gdk_pixbuf_get_height (im),
 		"pixbuf", im,
 		NULL));
 
