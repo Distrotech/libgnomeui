@@ -392,7 +392,7 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
 {
   char *basecmd = gnome_config_get_string("/OAF/RemoteCommand=rsh");
   char *ior_string;
-  char *argv[10], iornum_buf[25], display_buf[512];
+  char *argv[10], iornum_buf[25], display_buf[512], langs_buf[512];
   int argc = 0;
   CORBA_Object retval;
 
@@ -410,12 +410,27 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
 
   {
     char *mydisplay = NULL;
-
     gnome_program_attributes_get(gnome_program_get(), LIBGNOMEUI_PARAM_DISPLAY, &mydisplay, NULL);
 
     g_assert(mydisplay);
 
-    sprintf(display_buf, "--display=%s%s", (mydisplay[0]==':')?oaf_hostname_get():"", mydisplay);
+    g_snprintf(display_buf, sizeof(display_buf), "--display=%s%s", (mydisplay[0]==':')?oaf_hostname_get():"", mydisplay);
+    argv[argc++] = display_buf;
+  }
+
+  {
+    GList *langs = gnome_i18n_get_language_list();
+    GString *langparam = g_string_new(langs?langs->data:"");
+
+    if(langs)
+      for(langs = langs->next; langs; langs = langs->next)
+	{
+	  g_string_append_c(langparam, ':');
+	  g_string_append(langparam, langs->data);
+	}
+
+    g_snprintf(langs_buf, sizeof(langs_buf), "--languages=%s", langparam->str);
+    g_string_free(langparam);
     argv[argc++] = display_buf;
   }
 

@@ -44,14 +44,14 @@ typedef struct
 	gchar *comments;
 	GdkPixmap *logo;
 	GdkBitmap *mask;
-	gint logo_w, logo_h;
-	gint w, h;
 	GdkColor light_green;
 	GdkFont *font_title,
-		*font_copyright,
-		*font_author,
-		*font_names,
-		*font_comments;
+	  *font_copyright,
+	  *font_author,
+	  *font_names,
+	  *font_comments;
+	gint16 logo_w, logo_h;
+	gint16 w, h;
 } GnomeAboutInfo;
 
 static void gnome_about_class_init (GnomeAboutClass *klass);

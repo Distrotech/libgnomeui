@@ -50,17 +50,9 @@ struct _GnomeDockBand
 {
   GtkContainer container;
 
-  GtkOrientation orientation;
-
   GList *children;              /* GnomeDockBandChild */
-  guint num_children;
 
   GList *floating_child;        /* GnomeDockBandChild */
-
-  gboolean doing_drag;
-
-  guint max_space_requisition;
-  guint tot_offsets;
 
   /* This used to remember the allocation before the drag begin: it is
      necessary to do so because we actually decide what docking action
@@ -69,7 +61,13 @@ struct _GnomeDockBand
      around).  */
   GtkAllocation drag_allocation;
 
+  guint tot_offsets;
+
+  guint max_space_requisition : 16;
+  guint num_children : 8;
   guint new_for_drag : 1;
+  gboolean doing_drag : 1;
+  GtkOrientation orientation : 1;
 };
 
 struct _GnomeDockBandClass
@@ -81,20 +79,20 @@ struct _GnomeDockBandChild
 {
   GtkWidget *widget;
 
-  /* Maximum (requested) offset from the previous child.  */
-  guint offset;
-
-  /* Actual offset.  */
-  guint real_offset;
-
-  guint drag_offset;
-
   GtkAllocation drag_allocation;
 
-  guint prev_space, foll_space;
-  guint drag_prev_space, drag_foll_space;
+  /* Maximum (requested) offset from the previous child.  */
+  guint16 offset;
 
-  guint max_space_requisition;
+  /* Actual offset.  */
+  guint16 real_offset;
+
+  guint16 drag_offset;
+
+  guint16 prev_space, foll_space;
+  guint16 drag_prev_space, drag_foll_space;
+
+  guint16 max_space_requisition;
 };
 
 GtkWidget     *gnome_dock_band_new              (void);

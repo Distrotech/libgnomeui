@@ -47,6 +47,7 @@ typedef enum
   GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL = 1 << 2,
   GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL = 1 << 3,
   GNOME_DOCK_ITEM_BEH_LOCKED = 1 << 4
+  /* MAINT: Update the size of the bit field in the GnomeDockItem structure if you add items to this */
 } GnomeDockItemBehavior;
 
 /* obsolete, for compatibility; don't use */
@@ -68,21 +69,20 @@ struct _GnomeDockItem
   GdkWindow            *float_window;
   GtkShadowType         shadow_type;
 
-  GtkOrientation        orientation;
-  GnomeDockItemBehavior behavior;
+  /* Start drag position (wrt widget->window).  */
+  gint16                  dragoff_x, dragoff_y;
+
+  /* Position of the floating window.  */
+  gint16                  float_x, float_y;
+
+  GtkOrientation        orientation : 1;
+  GnomeDockItemBehavior behavior : 5;
 
   guint                 float_window_mapped : 1;
   guint                 is_floating : 1;
   guint                 in_drag : 1;
-
-  /* Start drag position (wrt widget->window).  */
-  gint                  dragoff_x, dragoff_y;
-
-  /* Position of the floating window.  */
-  gint                  float_x, float_y;
-
   /* If TRUE, the pointer must be grabbed on "map_event".  */
-  guint                 grab_on_map_event;
+  guint                 grab_on_map_event : 1;
 };
 
 struct _GnomeDockItemClass

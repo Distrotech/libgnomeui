@@ -4,12 +4,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-static char *display = NULL;
+static char *display = NULL, *languages = NULL;
 static int ior_fd = -1;
 
 struct poptOption options[] = {
   {"display", '\0', POPT_ARG_STRING, &display, 0},
   {"ior-fd", '\0', POPT_ARG_INT, &ior_fd, 0},
+  {"languages", '\0', POPT_ARG_STRING, &languages, 0},
   {NULL}
 };
 
@@ -36,6 +37,8 @@ int main(int argc, char **argv)
     }
 
   setenv("DISPLAY", display, TRUE);
+  if(strcmp(languages, "C"))
+    setenv("LANG", languages, TRUE);
 
   memset(&myprog, 0, sizeof(myprog));
   myprog.pipe_fd = -1;
