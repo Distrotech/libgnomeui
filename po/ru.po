@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-13 19:16+0200\n"
-"PO-Revision-Date: 2002-05-04 19:46+0400\n"
+"POT-Creation-Date: 2002-05-19 08:44+0400\n"
+"PO-Revision-Date: 2002-05-19 08:48+0400\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -383,14 +383,14 @@ msgid "GNOME GUI Library"
 msgstr "Библиотека пользовательского интерфейса GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:564
+#: libgnomeui/gnome-ui-init.c:563
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Возникли множественные ошибки сегментации; невозможно отобразить диалог об "
 "ошибке\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:578
+#: libgnomeui/gnome-ui-init.c:577
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -468,7 +468,7 @@ msgstr "Отступ"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Un-Indent"
-msgstr ""
+msgstr "Вернуть отступ"
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "About"
@@ -492,6 +492,7 @@ msgstr "Подсказка для элемента 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -549,6 +550,7 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Справка"
 
@@ -594,7 +596,6 @@ msgstr "Возвратиться к сохранённой версии файл
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
 msgid "_Print..."
 msgstr "На_печатать"
 
@@ -634,7 +635,6 @@ msgstr "Выйти из программы"
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-#, fuzzy
 msgid "Cu_t"
 msgstr "_Вырезать"
 
@@ -700,7 +700,7 @@ msgstr "Найти строку"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "Найти след_ующее"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -708,7 +708,6 @@ msgstr "Повторно найти ту же строку"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
 msgid "R_eplace..."
 msgstr "_Заменить..."
 
@@ -730,7 +729,6 @@ msgstr "Изменить свойства файла"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces..."
 msgstr "_Настроить..."
 
@@ -743,16 +741,15 @@ msgstr "Настроить приложение"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_О программе"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Получить информацию об этой программе"
 
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
 msgid "Select _All"
 msgstr "Выделить вс_ё"
 
@@ -775,7 +772,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "_Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -848,34 +845,30 @@ msgid "End the current game"
 msgstr "Закончить эту игру"
 
 #: libgnomeui/gnome-app-helper.c:1130
-#, fuzzy
 msgid "_Contents"
 msgstr "_Содержание Справки"
 
 #: libgnomeui/gnome-app-helper.c:1131
-#, fuzzy
 msgid "View help for this application"
-msgstr "Получить информацию об этой программе"
+msgstr "Вызвать справку для этого проложения"
 
-#: libgnomeui/gnome-app-helper.c:2515
+#: libgnomeui/gnome-app-helper.c:2518
 msgid "Text Below Icons"
-msgstr ""
+msgstr "Текст под пиктограммами"
 
-#: libgnomeui/gnome-app-helper.c:2516
-msgid "Text Beside Icons"
-msgstr ""
+#: libgnomeui/gnome-app-helper.c:2519
+msgid "Priority Text Beside Icons"
+msgstr "Текст за пиктограммами"
 
-#: libgnomeui/gnome-app-helper.c:2517
-#, fuzzy
+#: libgnomeui/gnome-app-helper.c:2520
 msgid "Icons Only"
 msgstr "Только пиктограммы"
 
-#: libgnomeui/gnome-app-helper.c:2518
-#, fuzzy
+#: libgnomeui/gnome-app-helper.c:2521
 msgid "Text Only"
 msgstr "Только текст"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2582
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Использовать умолчания рабочего стола (%s)"
@@ -940,11 +933,11 @@ msgstr "Строка GTK"
 msgid "The GTK entry"
 msgstr "Строка GTK"
 
-#: libgnomeui/gnome-file-entry.c:217 libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-file-entry.c:218 libgnomeui/gnome-icon-entry.c:174
 msgid "History ID"
 msgstr "Идентификатор истории"
 
-#: libgnomeui/gnome-file-entry.c:218
+#: libgnomeui/gnome-file-entry.c:219
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -952,19 +945,19 @@ msgstr ""
 "Уникальный идентификатор для файловой строки. Он будет использован для "
 "сохранения истории."
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:182
+#: libgnomeui/gnome-file-entry.c:227 libgnomeui/gnome-icon-entry.c:183
 msgid "Browse Dialog Title"
 msgstr "Заголовок диалога выбора файла"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:228
 msgid "Title for the Browse file dialog."
 msgstr "Заголовок для диалога выбора файла."
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:235
 msgid "Directory Entry"
 msgstr "Строка каталога"
 
-#: libgnomeui/gnome-file-entry.c:235
+#: libgnomeui/gnome-file-entry.c:236
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -972,35 +965,35 @@ msgstr ""
 "Будет ли файловая строка использоваться для ввода названия каталога или "
 "полного имени файла."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:244
 msgid "Modal"
 msgstr "Модальный"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:245
 msgid "Whether the Browse file window should be modal."
 msgstr "Должно ли окно выбора файла быть модальным."
 
-#: libgnomeui/gnome-file-entry.c:251 libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-file-entry.c:252 libgnomeui/gnome-icon-entry.c:199
 msgid "Filename"
 msgstr "Имя файла"
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Filename that should be displayed in the file entry."
 msgstr "Имя файла, которое должно быть отображено в строке файла."
 
-#: libgnomeui/gnome-file-entry.c:260
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Default Path"
 msgstr "Путь по умолчанию"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:262
 msgid "Default path for the Browse file window."
 msgstr "Путь по умолчанию для окна выбора файла."
 
-#: libgnomeui/gnome-file-entry.c:268
-msgid "GnomeEntry"
-msgstr ""
-
 #: libgnomeui/gnome-file-entry.c:269
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: libgnomeui/gnome-file-entry.c:270
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1010,11 +1003,11 @@ msgstr ""
 "использовать это свойство для получения GnomeEntry, если необходимо "
 "модифицировать или запросить любой из параметров."
 
-#: libgnomeui/gnome-file-entry.c:279
-msgid "GtkEntry"
-msgstr ""
-
 #: libgnomeui/gnome-file-entry.c:280
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1024,11 +1017,11 @@ msgstr ""
 "использовать это свойство для получения GtkEntry, если необходимо "
 "модифицировать или запросить любой из параметров."
 
-#: libgnomeui/gnome-file-entry.c:514
+#: libgnomeui/gnome-file-entry.c:515
 msgid "Select file"
 msgstr "Выбрать файл"
 
-#: libgnomeui/gnome-file-entry.c:652
+#: libgnomeui/gnome-file-entry.c:656
 msgid "_Browse..."
 msgstr "П_росмотреть..."
 
@@ -1134,7 +1127,7 @@ msgstr ""
 "Произошла ошибка при загрузке или сохранении конфигурационной информации для "
 "%s. Некоторые из установок могут не функционировать правильно."
 
-#: libgnomeui/gnome-icon-entry.c:174
+#: libgnomeui/gnome-icon-entry.c:175
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1142,27 +1135,27 @@ msgstr ""
 "Уникальный идентификатор для строки пиктограммы. Он будет использован для "
 "хранения истории."
 
-#: libgnomeui/gnome-icon-entry.c:183
+#: libgnomeui/gnome-icon-entry.c:184
 msgid "Title for the Browse icon dialog."
 msgstr "Заголовок диалога выбора пиктограммы."
 
-#: libgnomeui/gnome-icon-entry.c:190
+#: libgnomeui/gnome-icon-entry.c:191
 msgid "Pixmap Directory"
 msgstr "Каталог изображений"
 
-#: libgnomeui/gnome-icon-entry.c:191
+#: libgnomeui/gnome-icon-entry.c:192
 msgid "Directory that will be searched for icons."
 msgstr "Каталог, в котором будет производиться поиск пиктограмм."
 
-#: libgnomeui/gnome-icon-entry.c:199
+#: libgnomeui/gnome-icon-entry.c:200
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Имя файла, которое должно быть отображено в строке пиктограммы."
 
-#: libgnomeui/gnome-icon-entry.c:207
+#: libgnomeui/gnome-icon-entry.c:208
 msgid "Picker dialog"
 msgstr "Окно выбора"
 
-#: libgnomeui/gnome-icon-entry.c:208
+#: libgnomeui/gnome-icon-entry.c:209
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1170,19 +1163,19 @@ msgstr ""
 "Диалог выбора пиктограмм. Можно использовать это свойство для получения  "
 "GtkDialog, если необходимо изменить или запросить любое из свойств."
 
-#: libgnomeui/gnome-icon-entry.c:317 libgnomeui/gnome-icon-entry.c:963
+#: libgnomeui/gnome-icon-entry.c:318 libgnomeui/gnome-icon-entry.c:969
 msgid "No Icon"
 msgstr "Нет пиктограммы"
 
-#: libgnomeui/gnome-icon-entry.c:525 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:526 libgnomeui/gnome-pixmap-entry.c:380
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Невозможно найти hbox, используется обычное выделение файлов"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:532 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Preview"
 msgstr "Предварительный просмотр"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:991
 msgid "Browse"
 msgstr "Просмотр"
 
@@ -1220,15 +1213,15 @@ msgstr "Вопрос"
 msgid "Message"
 msgstr "Сообщение"
 
-#: libgnomeui/gnome-pixmap-entry.c:118
+#: libgnomeui/gnome-pixmap-entry.c:111
 msgid "Do Preview"
 msgstr "Просматривать"
 
-#: libgnomeui/gnome-pixmap-entry.c:119
+#: libgnomeui/gnome-pixmap-entry.c:112
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Надо ли показывать изображение предварительного просмотра"
 
-#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:444
 msgid "No Image"
 msgstr "Нет изображения"
 
@@ -1263,6 +1256,10 @@ msgstr "%a, %d %b"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Выйти из теста"
+
 #~ msgid "Find _Again"
 #~ msgstr "Найти _снова"
 
@@ -1276,6 +1273,3 @@ msgstr "Sans 14"
 
 #~ msgid "E_xit"
 #~ msgstr "В_ыйти"
-
-#~ msgid "Exit the program"
-#~ msgstr "Выйти из программы"
