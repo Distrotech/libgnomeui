@@ -1001,7 +1001,7 @@ stock_button_new(GladeXML *xml, GladeWidgetInfo *info)
 		guint key;
                 button = gtk_button_new_with_label("");
 		key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(button)->child),
-					    _(string));
+					    string[0] ? _(string) : "");
 		if (key)
 			gtk_widget_add_accelerator(button, "clicked",
 						   glade_xml_ensure_accel(xml),
