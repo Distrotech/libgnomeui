@@ -1,3 +1,8 @@
+2002-04-08  Wayne Schuller  <k_wayne@linuxpower.org>
+
+	* libgnomeui/gnome-entry.c: (gnome_entry_load_history): 
+	Free the key. http://bugzilla.gnome.org/show_bug.cgi?id=74788
+
 2002-04-04  jacob berkman  <jacob@ximian.com>
 
 	* libgnomeui/gnome-app-helper.c (create_help_entries): just create
