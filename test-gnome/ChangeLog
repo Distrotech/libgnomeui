@@ -1,3 +1,8 @@
+2001-07-18  Darin Adler  <darin@bentspoon.com>
+
+	* testgnome.c: (main): Removed gnome_less part, since Martin
+	removed that class from this library.
+
 2001-07-02  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* testgnome.[ch]: Some cleanup, but it does not run now :-?. I think

@@ -938,7 +938,7 @@ create_image_selector (void)
 {
 
 }
-#endif
+
 /*
  * Less
  */
@@ -958,7 +958,6 @@ create_less(void)
 	gnome_less_show_command(GNOME_LESS(less),"fortune");
 }
 
-#if 0
 /*
  * GnomePaperSelector
  */
@@ -1024,7 +1023,7 @@ main (int argc, char **argv)
 		{ "icon list", create_icon_list },
 		{ "image entry", create_image_entry },
 /*		{ "image selector", create_image_selector },*/
-		{ "less", create_less },
+/*		{ "less", create_less }, */
 /*		{ "paper selector", create_papersel },*/
 		{ "pixmap", create_pixmap },
 /*		{ "unit spinner", create_unit_spinner },*/
