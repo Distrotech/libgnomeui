@@ -1,3 +1,7 @@
+Wed Jul 15 19:14:44 1998  Havoc Pennington  <hp@pobox.com>
+
+	* TODO: Updated.
+
 1998-07-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.h (GnomeCanvas): New field, grabbed_item, points to

@@ -7,20 +7,9 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
 
 * g_return_if_fail checks are missing in many functions.
 
-* Consistently use gnome-uidefs.h instead of random constants.
-
-* There should be stock menu items (not just stock pixmaps) for things like
-  Open..., Save..., Save As..., Copy, Cut, Paste, Clear, Exit, About..., 
-  etc. Stock menu items would include pixmap, label, and accelerator.
-  This is problematic for now, since accelerator support isn't finished 
-  and there seem to be i18n issues.
-
-* It would be even cooler if the API enforced policy on the locations of
-  the menu items: on which menu, in which order.
-
-* Stock accelerators should be configurable, this would be one use for
-  the above config mechanism. Gtk already lets you config accelerators,
-  but only on an app-by-app basis. This would be global.
+* Consistently use gnome-uidefs.h instead of random constants. Better, 
+  devise a general system for padding that works at runtime. Owen Taylor
+  emailed some ideas on this to the list once.
 
 * Documentation, documentation, documentation... both commenting header
   files and writing real docs would help.
@@ -39,7 +28,36 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
     actual underlying problem. ]
 
 * Write a "minibuffer" widget which is a statusbar that can take input, a 
-  la Emacs. Enable gnome-app-util.[hc] to use it.
+  la Emacs. Enable gnome-app-util.[hc] to use it. This is sort of 
+  prototyped but it blows right now. Please fix it, please...
+
+* Fix things that are a pain in the *** to wrap with other languages,
+  like GnomeUIInfo. 
+
+* Draw and include nice pixmaps for the different message box flavors -
+  warning, info, error, etc.
+
+* A GnomeGuru widget like Windows's Wizards. 
+
+* A GnomeAnim or GtkAnim widget, using imlib and making it easy to 
+  include little animations, like a modem dialing or folders opening
+  or the Mozilla spinner. This would add a real professional touch
+  to many apps.
+
+* GnomeLess is a stupid hack on top of GtkText and should be made for real;
+  one idea here from Michael Zucchi is a GnomePage widget, which variously
+  wraps postscript, pdf, html, text widgets but has a unified interface
+  for all of them.
+
+* The -icon-sel and -dentry-edit aren't finished; they may not be needed,
+  depending on how gmenu/gmc end up handling this issue.
+
+* GnomeAbout could probably be more attractive - green doesn't seem to 
+  match anything else.
+
+* There is a lot of enhancement and making coherent that could go on.
+
+* GnomeFontSelection and GnomePrintDialog
 
 ==================== Done or In Progress =========================
 
