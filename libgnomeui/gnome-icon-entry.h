@@ -40,7 +40,7 @@
 
 #include <glib.h>
 #include <libgnome/gnome-defs.h>
-#include "gnome-selector.h"
+#include "gnome-file-selector.h"
 
 
 
@@ -60,14 +60,14 @@ typedef struct _GnomeIconEntryPrivate  GnomeIconEntryPrivate;
 typedef struct _GnomeIconEntryClass    GnomeIconEntryClass;
 
 struct _GnomeIconEntry {
-	GnomeSelector selector;
+	GnomeFileSelector selector;
 	
 	/*< private >*/
 	GnomeIconEntryPrivate *_priv;
 };
 
 struct _GnomeIconEntryClass {
-	GnomeSelectorClass parent_class;
+	GnomeFileSelectorClass parent_class;
 };
 
 

@@ -43,13 +43,14 @@
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-ditem.h"
 #include "libgnome/libgnomeP.h"
+#include "gnome-macros.h"
 #include "gnome-vfs-util.h"
 #include "gnome-icon-selector.h"
 #include "gnome-icon-entry.h"
 #include "gnome-dialog.h"
 #include "gnome-stock.h"
 
-#include <libgnomevfs/gnome-vfs-mime.h>
+#include <libgnomevfs/gnome-vfs-file-info.h>
 
 #define ICON_SIZE 48
 
@@ -85,37 +86,18 @@ static void   drag_data_received           (GtkWidget           *widget,
 static gchar    *get_filename_handler      (GnomeSelector       *selector);
 static gboolean  set_filename_handler      (GnomeSelector       *selector,
                                             const gchar         *filename);
-static gboolean  check_filename_handler    (GnomeSelector       *selector,
-                                            const gchar         *filename);
-
-static GnomeSelectorClass *parent_class;
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
 
-guint
-gnome_icon_entry_get_type (void)
-{
-    static guint icon_entry_type = 0;
-
-    if (!icon_entry_type) {
-	GtkTypeInfo icon_entry_info = {
-	    "GnomeIconEntry",
-	    sizeof (GnomeIconEntry),
-	    sizeof (GnomeIconEntryClass),
-	    (GtkClassInitFunc) gnome_icon_entry_class_init,
-	    (GtkObjectInitFunc) gnome_icon_entry_init,
-	    NULL,
-	    NULL,
-	    NULL
-	};
-
-	icon_entry_type = gtk_type_unique (gnome_selector_get_type (),
-					   &icon_entry_info);
-    }
-
-    return icon_entry_type;
-}
+/**
+ * gnome_icon_entry_get_type
+ *
+ * Returns the type assigned to the GnomeIconEntry widget.
+ **/
+/* The following defines the get_type */
+GNOME_CLASS_BOILERPLATE (GnomeIconEntry, gnome_icon_entry,
+			 GnomeFileSelector, gnome_file_selector)
 
 static void
 gnome_icon_entry_class_init (GnomeIconEntryClass *class)
@@ -128,14 +110,13 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
     object_class = (GtkObjectClass *) class;
     gobject_class = (GObjectClass *) class;
 
-    parent_class = gtk_type_class (gnome_selector_get_type ());
+    parent_class = gtk_type_class (gnome_file_selector_get_type ());
 
     object_class->destroy = gnome_icon_entry_destroy;
     gobject_class->finalize = gnome_icon_entry_finalize;
 
     selector_class->get_filename = get_filename_handler;
     selector_class->set_filename = set_filename_handler;
-    selector_class->check_filename = check_filename_handler;
 }
 
 static void
@@ -195,7 +176,7 @@ set_filename_handler (GnomeSelector *selector, const gchar *uri)
     ientry = GNOME_ICON_ENTRY (selector);
 
     /* Must be valid if it's not NULL */
-    if (uri && !check_filename_handler (selector, uri))
+    if (uri && !gnome_selector_check_filename (selector, uri))
 	return FALSE;
 
     if (ientry->_priv->current_icon)
@@ -274,25 +255,6 @@ set_filename_handler (GnomeSelector *selector, const gchar *uri)
 			       child);
 	}
     }
-
-    return TRUE;
-}
-
-static gboolean
-check_filename_handler (GnomeSelector *selector, const gchar *filename)
-{
-    const char *mimetype;
-
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_ICON_ENTRY (selector), FALSE);
-    g_return_val_if_fail (filename != NULL, FALSE);
-
-    mimetype = gnome_vfs_mime_type_from_name (filename);
-
-    if (!mimetype || strncmp (mimetype, "image", sizeof("image")-1))
-	return FALSE;
-    else
-	return TRUE;
 
     return TRUE;
 }
@@ -404,6 +366,26 @@ drag_data_received (GtkWidget        *widget,
     gnome_uri_list_free_strings (files);
 }
 
+static gboolean
+ientry_directory_filter_func (const GnomeVFSFileInfo *info, gpointer data)
+{
+    GnomeIconEntry *ientry;
+    const gchar *mimetype;
+
+    g_return_val_if_fail (data != NULL, FALSE);
+    g_return_val_if_fail (GNOME_IS_ICON_ENTRY (data), FALSE);
+
+    ientry = GNOME_ICON_ENTRY (data);
+
+    mimetype = gnome_vfs_file_info_get_mime_type ((GnomeVFSFileInfo *) info);
+
+    if (!mimetype || strncmp (mimetype, "image", sizeof("image")-1))
+	return FALSE;
+    else
+	return TRUE;
+}
+
+
 void
 gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 				 const gchar *history_id,
@@ -413,6 +395,7 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 				 GtkWidget *browse_dialog,
 				 guint32 flags)
 {
+    GnomeVFSDirectoryFilter *filter;
     guint32 newflags = flags;
 
     g_return_if_fail (ientry != NULL);
@@ -502,10 +485,19 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 	newflags &= ~GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
     }
 
-    gnome_selector_construct (GNOME_SELECTOR (ientry),
-			      history_id, dialog_title,
-			      entry_widget, selector_widget,
-			      browse_dialog, newflags);
+    gnome_file_selector_construct (GNOME_FILE_SELECTOR (ientry),
+				   history_id, dialog_title,
+				   entry_widget, selector_widget,
+				   browse_dialog, newflags);
+
+    filter = gnome_vfs_directory_filter_new_custom
+	(ientry_directory_filter_func,
+	 GNOME_VFS_DIRECTORY_FILTER_NEEDS_NAME |
+	 GNOME_VFS_DIRECTORY_FILTER_NEEDS_TYPE |
+	 GNOME_VFS_DIRECTORY_FILTER_NEEDS_MIMETYPE,
+	 ientry);
+
+    gnome_file_selector_set_filter (GNOME_FILE_SELECTOR (ientry), filter);
 }
 
 
@@ -561,8 +553,7 @@ gnome_icon_entry_destroy (GtkObject *object)
 	ientry->_priv->current_icon = NULL;
     }
 
-    if (GTK_OBJECT_CLASS (parent_class)->destroy)
-	(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+    GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -578,8 +569,7 @@ gnome_icon_entry_finalize (GObject *object)
     g_free (ientry->_priv);
     ientry->_priv = NULL;
 
-    if (G_OBJECT_CLASS (parent_class)->finalize)
-	(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+    GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**

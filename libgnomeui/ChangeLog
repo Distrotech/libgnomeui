@@ -1,3 +1,19 @@
+2000-09-16  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-icon-entry.h (GnomeIconEntry): Derive from GnomeFileSelector
+	instead of from GnomeSelector.
+
+	* gnome-icon-entry.c (add_file_handler): Removed; we just use the
+	default handler of the "add_file" signal.
+	(ientry_directory_filter_func): This checks whether it's a valid
+	image file [NOTE: when this is invoked from "add_file" signal handler,
+	we already have the GnomeVFSFileInfo so this won't block; that's why
+	it's better to set a filter on the GnomeFileSelector instead of
+	overriding the "check_filename" handle.]
+	(gnome_icon_entry_construct_full): Create a GnomeVFSDirectoryFilter
+	which uses the ientry_directory_filter_func() and call
+	gnome_file_selector_add_filter() on it.
+
 2000-09-12  Martin Baulig  <baulig@suse.de>
 
 	* gnome-icon-entry.h (GnomeIconEntry): Derive this from GnomeSelector.
