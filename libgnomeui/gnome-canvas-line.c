@@ -10,7 +10,9 @@
 
 #include <config.h>
 #include <math.h>
+#include <string.h>
 #include "gnome-canvas-line.h"
+#include "gnome-canvas-util.h"
 
 
 #define DEFAULT_SPLINE_STEPS 12		/* this is what Tk uses */
@@ -140,7 +142,11 @@ gnome_canvas_line_destroy (GtkObject *object)
 static void
 recalc_bounds (GnomeCanvasLine *line)
 {
-	/* FIXME */
+	GnomeCanvasItem *item;
+
+	item = GNOME_CANVAS_ITEM (line);
+
+	
 }
 
 static void
@@ -181,7 +187,7 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_FILL_COLOR:
 		gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color);
-		line->pixel = color->pixel;
+		line->pixel = color.pixel;
 		calc_gcs = TRUE;
 		break;
 
@@ -304,8 +310,48 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			int x, int y, int width, int height)
 {
 	GnomeCanvasLine *line;
+	GdkPoint *points;
+	int i;
+	int cx, cy;
+	double dx, dy;
 
 	line = GNOME_CANVAS_LINE (item);
 
-	
+	if (line->num_points == 0)
+		return;
+
+	/* Build array of canvas pixel coordinates */
+
+	points = g_new (GdkPoint, line->num_points);
+
+	dx = 0.0;
+	dy = 0.0;
+	gnome_canvas_item_i2w (item, &dx, &dy);
+
+	for (i = 0; i < line->num_points; i++) {
+		gnome_canvas_w2c (item->canvas,
+				  dx + line->coords[2 * i],
+				  dy + line->coords[2 * i + 1],
+				  &cx, &cy);
+		points[i].x = cx - x;
+		points[i].y = cy - y;
+	}
+
+	gdk_draw_lines (drawable, line->gc, points, line->num_points);
+
+	g_free (points);
+}
+
+static double
+gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
+			 int cx, int cy, GnomeCanvasItem **actual_item)
+{
+	*actual_item = item;
+	return 10000.0; /* FIXME */
+}
+
+static void
+gnome_canvas_line_translate (GnomeCanvasItem *item, double dx, double dy)
+{
+	/* FIXME */
 }

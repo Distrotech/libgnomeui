@@ -115,12 +115,10 @@ GtkType gnome_canvas_item_get_type (void);
 /* Create a canvas item using the standard Gtk argument mechanism.  The item is automatically
  * inserted at the top of the specified canvas group.
  */
-GnomeCanvasItem *gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent,
-					GtkType type, ...);
+GnomeCanvasItem *gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, ...);
 
 /* Same as above, with parsed args */
-GnomeCanvasItem *gnome_canvas_item_newv (GnomeCanvas *canvas, GnomeCanvasGroup *parent,
-					 GtkType type, guint nargs, GtkArg *args);
+GnomeCanvasItem *gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type, guint nargs, GtkArg *args);
 
 /* Configure an item using the standard Gtk argument mechanism */
 void gnome_canvas_item_set (GnomeCanvasItem *item, ...);
@@ -131,15 +129,23 @@ void gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args);
 /* Move an item by the specified amount */
 void gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy);
 
-/* Raise an item in the z-order of its parent group by the specified number of positions.  If the
- * number is zero, then the item will be made the topmost of its parent group.
+/* Raise an item in the z-order of its parent group by the specified
+ * number of positions.  The specified number must be larger than or
+ * equal to 1.
  */
-void gnome_canvas_item_raise (GnomeCanvasItem *item, guint positions);
+void gnome_canvas_item_raise (GnomeCanvasItem *item, int positions);
 
-/* Lower an item in the z-order of its parent group by the specified number of positions.  If the
- * number is zero, then the item will be made the bottommost of its parent group.
+/* Lower an item in the z-order of its parent group by the specified
+ * number of positions.  The specified number must be larger than or
+ * equal to 1.
  */
-void gnome_canvas_item_lower (GnomeCanvasItem *item, guint positions);
+void gnome_canvas_item_lower (GnomeCanvasItem *item, int positions);
+
+/* Raise an item to the top of its parent group's z-order. */
+void gnome_canvas_item_raise_to_top (GnomeCanvasItem *item);
+
+/* Lower an item to the bottom of its parent group's z-order */
+void gnome_canvas_item_lower_to_bottom (GnomeCanvasItem *item);
 
 /* Grab the mouse for the specified item.  Only the events in event_mask will be reported.  If
  * cursor is non-NULL, it will be used during the duration of the grab.  Time is a proper X event

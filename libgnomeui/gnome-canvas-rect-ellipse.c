@@ -332,25 +332,20 @@ static void
 gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y, int width, int height)
 {
 	GnomeCanvasRE *re;
-	double wx1, wy1, wx2, wy2;
+	double dx, dy;
 	int x1, y1, x2, y2;
 
 	re = GNOME_CANVAS_RE (item);
 
-	/* Get world coordinates */
-
-	wx1 = re->x1;
-	wy1 = re->y1;
-	wx2 = re->x2;
-	wy2 = re->y2;
-
-	gnome_canvas_item_i2w (item, &wx1, &wy1);
-	gnome_canvas_item_i2w (item, &wx2, &wy2);
-
 	/* Get canvas pixel coordinates */
 
-	gnome_canvas_w2c (item->canvas, wx1, wy1, &x1, &y1);
-	gnome_canvas_w2c (item->canvas, wx2, wy2, &x2, &y2);
+	dx = 0.0;
+	dy = 0.0;
+
+	gnome_canvas_item_i2w (item, &dx, &dy);
+
+	gnome_canvas_w2c (item->canvas, dx + re->x1, dy + re->y1, &x1, &y1);
+	gnome_canvas_w2c (item->canvas, dx + re->x2, dy + re->y2, &x2, &y2);
 
 	if (re->fill_set)
 		gdk_draw_rectangle (drawable,
@@ -500,25 +495,20 @@ static void
 gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y, int width, int height)
 {
 	GnomeCanvasRE *re;
-	double wx1, wy1, wx2, wy2;
+	double dx, dy;
 	int x1, y1, x2, y2;
 
 	re = GNOME_CANVAS_RE (item);
 
-	/* Get world coordinates */
-
-	wx1 = re->x1;
-	wy1 = re->y1;
-	wx2 = re->x2;
-	wy2 = re->y2;
-
-	gnome_canvas_item_i2w (item, &wx1, &wy1);
-	gnome_canvas_item_i2w (item, &wx2, &wy2);
-
 	/* Get canvas pixel coordinates */
 
-	gnome_canvas_w2c (item->canvas, wx1, wy1, &x1, &y1);
-	gnome_canvas_w2c (item->canvas, wx2, wy2, &x2, &y2);
+	dx = 0.0;
+	dy = 0.0;
+
+	gnome_canvas_item_i2w (item, &dx, &dy);
+
+	gnome_canvas_w2c (item->canvas, dx + re->x1, dy + re->y1, &x1, &y1);
+	gnome_canvas_w2c (item->canvas, dx + re->x2, dy + re->y2, &x2, &y2);
 
 	if (re->fill_set)
 		gdk_draw_arc (drawable,

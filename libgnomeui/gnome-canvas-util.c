@@ -9,6 +9,7 @@
  */
 
 #include <config.h>
+#include <glib.h>
 #include "gnome-canvas-util.h"
 
 
@@ -17,7 +18,7 @@ gnome_canvas_points_new (int num_points)
 {
 	GnomeCanvasPoints *points;
 
-	g_return_val_if_fail (num_points < 1, NULL);
+	g_return_val_if_fail (num_points > 1, NULL);
 
 	points = g_new (GnomeCanvasPoints, 1);
 	points->num_points = num_points;

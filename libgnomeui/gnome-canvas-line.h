@@ -56,8 +56,8 @@ struct _GnomeCanvasLine {
 	double shape_b;		/* Distance from tip of arrowhead to trailing point, measured along shaft */
 	double shape_c;		/* Distance of trailing points from outside edge of shaft */
 
-	double *first_arrow;	/* Array of points describing polygon for the first arrowhead */
-	double *last_arrow;	/* Array of points describing polygon for the last arrowhead */
+	double *first_coords;	/* Array of points describing polygon for the first arrowhead */
+	double *last_coords;	/* Array of points describing polygon for the last arrowhead */
 
 	int spline_steps;	/* Number of steps in each spline segment */
 

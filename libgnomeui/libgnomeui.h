@@ -14,8 +14,10 @@
 #ifdef GDK_HAVE_FULL_CROSSING_EVENT
 #include "libgnomeui/gnome-canvas.h"
 #include "libgnomeui/gnome-canvas-image.h"
+#include "libgnomeui/gnome-canvas-line.h"
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"
 #include "libgnomeui/gnome-canvas-text.h"
+#include "libgnomeui/gnome-canvas-util.h"
 #endif
 #include "libgnomeui/gnome-color-selector.h"
 #include "libgnomeui/gnome-dentry-edit.h"

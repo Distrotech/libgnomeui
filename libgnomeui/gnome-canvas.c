@@ -156,7 +156,7 @@ item_post_create_setup (GnomeCanvasItem *item)
 }
 
 GnomeCanvasItem *
-gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType type, ...)
+gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, ...)
 {
 	GtkObject *obj;
 	GnomeCanvasItem *item;
@@ -165,8 +165,6 @@ gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType ty
 	GSList *info_list;
 	char *error;
 
-	g_return_val_if_fail (canvas != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), NULL);
 	g_return_val_if_fail (parent != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_CANVAS_GROUP (parent), NULL);
 	g_return_val_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()), NULL);
@@ -174,8 +172,8 @@ gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType ty
 	obj = gtk_type_new (type);
 
 	item = GNOME_CANVAS_ITEM (obj);
-	item->canvas = canvas;
 	item->parent = GNOME_CANVAS_ITEM (parent);
+	item->canvas = item->parent->canvas;
 
 	arg_list = NULL;
 	info_list = NULL;
@@ -202,13 +200,11 @@ gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType ty
 }
 
 GnomeCanvasItem *
-gnome_canvas_item_newv (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType type, guint nargs, GtkArg *args)
+gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type, guint nargs, GtkArg *args)
 {
 	GtkObject *obj;
 	GnomeCanvasItem *item;
 
-	g_return_val_if_fail (canvas != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), NULL);
 	g_return_val_if_fail (parent != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_CANVAS_GROUP (parent), NULL);
 	g_return_val_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()), NULL);
@@ -216,8 +212,8 @@ gnome_canvas_item_newv (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType t
 	obj = gtk_type_new (type);
 
 	item = GNOME_CANVAS_ITEM (obj);
-	item->canvas = canvas;
 	item->parent = GNOME_CANVAS_ITEM (parent);
+	item->canvas = item->parent->canvas;
 
 	gtk_object_setv (obj, nargs, args);
 
@@ -390,13 +386,14 @@ put_item_after (GList *link, GList *before)
 }
 
 void
-gnome_canvas_item_raise (GnomeCanvasItem *item, guint positions)
+gnome_canvas_item_raise (GnomeCanvasItem *item, int positions)
 {
 	GList *link, *before;
 	GnomeCanvasGroup *parent;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (positions >= 1);
 
 	if (!item->parent)
 		return;
@@ -405,26 +402,52 @@ gnome_canvas_item_raise (GnomeCanvasItem *item, guint positions)
 	link = g_list_find (parent->item_list, item);
 	g_assert (link != NULL);
 
-	if (positions == 0)
-		put_item_after (link, parent->item_list_end);
-	else {
-		for (before = link; positions && before; positions--)
-			before = before->next;
+	for (before = link; positions && before; positions--)
+		before = before->next;
 
-		if (!before)
-			before = parent->item_list_end;
+	if (!before)
+		before = parent->item_list_end;
 
-		put_item_after (link, before);
-	}
+	put_item_after (link, before);
 
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	item->canvas->need_repick = TRUE;
 }
 
 void
-gnome_canvas_item_lower (GnomeCanvasItem *item, guint positions)
+gnome_canvas_item_lower (GnomeCanvasItem *item, int positions)
 {
 	GList *link, *before;
+	GnomeCanvasGroup *parent;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (positions >= 1);
+
+	if (!item->parent)
+		return;
+
+	parent = GNOME_CANVAS_GROUP (item->parent);
+	link = g_list_find (parent->item_list, item);
+	g_assert (link != NULL);
+
+
+	if (link->prev)
+		for (before = link->prev; positions && before; positions--)
+			before = before->prev;
+	else
+		before = NULL;
+
+	put_item_after (link, before);
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
+}
+
+void
+gnome_canvas_item_raise_to_top (GnomeCanvasItem *item)
+{
+	GList *link;
 	GnomeCanvasGroup *parent;
 
 	g_return_if_fail (item != NULL);
@@ -437,17 +460,29 @@ gnome_canvas_item_lower (GnomeCanvasItem *item, guint positions)
 	link = g_list_find (parent->item_list, item);
 	g_assert (link != NULL);
 
-	if (positions == 0)
-		put_item_after (link, NULL);
-	else {
-		if (link->prev)
-			for (before = link->prev; positions && before; positions--)
-				before = before->prev;
-		else
-			before = NULL;
+	put_item_after (link, parent->item_list_end);
 
-		put_item_after (link, before);
-	}
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
+}
+
+void
+gnome_canvas_item_lower_to_bottom (GnomeCanvasItem *item)
+{
+	GList *link;
+	GnomeCanvasGroup *parent;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	if (!item->parent)
+		return;
+
+	parent = GNOME_CANVAS_GROUP (item->parent);
+	link = g_list_find (parent->item_list, item);
+	g_assert (link != NULL);
+
+	put_item_after (link, NULL);
 
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	item->canvas->need_repick = TRUE;

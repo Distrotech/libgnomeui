@@ -1,3 +1,23 @@
+1998-07-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_raise
+	gnome_canvas_item_lower): Do not accept values less than 1.
+	(gnome_canvas_item_raise_to_top
+	gnome_canvas_item_lower_to_bottom): New public functions to
+	raise/lower an item to the top/bottom of its parent's z-order,
+	respectively.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_rect_draw
+	gnome_canvas_ellipse_draw): Made a little optimization when
+	converting item coordinates to canvas pixel coordinates.
+
+	* Makefile.am: Added gnome-canvas-line and gnome-canvas-util to the
+	sources.
+
+	* gnome-canvas.c (gnome_canvas_item_new gnome_canvas_item_newv):
+	Removed the canvas parameter passed to these functions.  It is not
+	needed, as we can extract the canvas from the parent item parameter.
+
 1998-07-19  Havoc Pennington <hp@pobox.com>
 
 	* gnome-appbar.h, gnome-appbar.c: Add construct function.
@@ -29,6 +49,10 @@ Sat Jul 18 12:42:09 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-mdi.c: added some g_return_if_*() checks in all the
 	public functions and removed some ancient parts of code that
 	did nothing.
+
+1998-07-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Added gnome-canvas-line.[ch] to the build process.
 
 Fri Jul 17 14:48:14 1998  John Ellis  <johne@bellatlantic.net>
 
