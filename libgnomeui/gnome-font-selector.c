@@ -93,21 +93,16 @@ typedef struct {
   
 } MenuItem;
 
-static GnomeMenuInfo size_metric_items[] =
+static GnomeUIInfo size_metric_items[] =
 {
-  { GNOME_APP_MENU_ITEM, "Pixels", text_pixels_callback, NULL },
-  { GNOME_APP_MENU_ITEM, "Points", text_points_callback, NULL },
-  { GNOME_APP_MENU_ENDOFINFO, NULL, NULL, NULL }
+  { GNOME_APP_UI_ITEM, "Pixels", "Use pixels as the unit of measurement",
+    text_pixels_callback, GNOME_APP_PIXMAP_NONE,
+    NULL, 0, 0, NULL},
+  { GNOME_APP_UI_ITEM, "Points", "Use points as the unit of measurement",
+    text_pixels_callback, GNOME_APP_PIXMAP_NONE,
+    NULL, 0, 0, NULL},
+  { GNOME_APP_UI_ENDOFINFO, NULL, NULL, NULL }
 };
-
-#if 0
-static GnomeMenuInfo size_metric_items[] =
-{
-  { "Pixels", 0, 0, text_pixels_callback, (gpointer) PIXELS, NULL, NULL },
-  { "Points", 0, 0, text_points_callback, (gpointer) POINTS, NULL, NULL },
-  { NULL, 0, 0, NULL, NULL, NULL, NULL }
-};
-#endif
 
 guint gnome_font_selector_get_type(void)
 {
@@ -221,7 +216,7 @@ gnome_font_selector_init(GtkWidget *widget)
 
   /* Create the size menu */
   text_tool->size_menu = gtk_menu_new();
-  for(i = 0; size_metric_items[i].type != GNOME_APP_MENU_ENDOFINFO; i++)
+  for(i = 0; size_metric_items[i].type != GNOME_APP_UI_ENDOFINFO; i++)
     {
       size_metric_items[i].widget = gtk_menu_item_new_with_label(size_metric_items[i].label);
       gtk_signal_connect(GTK_OBJECT(size_metric_items[i].widget),
