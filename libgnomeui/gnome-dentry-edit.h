@@ -61,6 +61,11 @@ struct _GnomeDEntryEdit {
   GtkWidget *terminal_button;  
 
   GtkWidget *icon_entry;
+  
+  GtkWidget *translations;
+  GtkWidget *transl_lang_entry;
+  GtkWidget *transl_name_entry;
+  GtkWidget *transl_comment_entry;
 };
 
 struct _GnomeDEntryEditClass {

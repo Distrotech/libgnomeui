@@ -1,3 +1,8 @@
+Fri Aug 27 10:30:10 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.[ch]: add a way to edit the translations of
+	  name and comment on the advanced page
+
 1999-08-26  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas-util.c (gnome_canvas_update_svp): Free the old
