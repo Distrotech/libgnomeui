@@ -2494,10 +2494,10 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 	toolbar_style = GTK_TOOLBAR_BOTH;
 	menu = gtk_menu_new ();
 
-	both = _("Both text and icons");
-	both_horiz = _("Both text and icons when horizontal, just icons when vertical");
-	icons = _("Icons only");
-	text = _("Text only");
+	both = _("Text Below Icons");
+	both_horiz = _("Text Beside Icons");
+	icons = _("Icons Only");
+	text = _("Text Only");
 
 	both_item = gtk_radio_menu_item_new_with_label (group, both);
 	g_signal_connect (both_item, "activate",
@@ -2506,7 +2506,7 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), both_item);
 
 	both_horiz_item = gtk_radio_menu_item_new_with_label (group, both_horiz);
-	g_signal_connect (both_item, "activate",
+	g_signal_connect (both_horiz_item, "activate",
 			  G_CALLBACK (style_menu_item_activated), GINT_TO_POINTER (GTK_TOOLBAR_BOTH_HORIZ));
 	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (both_horiz_item));
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), both_horiz_item);
