@@ -155,6 +155,7 @@ AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is require
 gnome-libs. You can download the latest version from ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.0.x/]))
 
 AC_CHECK_HEADERS(dlfcn.h dl.h utmp.h locale.h mcheck.h unistd.h)
+AC_CHECK_FUNCS(bind_textdomain_codeset)
 
 dnl This is installed from GTK+ 2.0's gdk-pixbuf
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource)

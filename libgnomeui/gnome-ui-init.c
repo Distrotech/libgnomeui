@@ -442,7 +442,9 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         g_free (filename);
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
-	/*bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");*/
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
 	initialize_gtk_signal_relay ();
 }
 
