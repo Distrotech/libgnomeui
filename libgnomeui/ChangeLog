@@ -1,5 +1,11 @@
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
+	* gtkrc*: Removed.
+
+	* landscape.xpm, portrait.xpm: Removed.
+	
+2001-08-11  Martin Baulig  <baulig@suse.de>
+
 	* gnome-rexec-server.oafinfo: Removed.
 
 	* gnome-remote-bootstrap.c: Removed.

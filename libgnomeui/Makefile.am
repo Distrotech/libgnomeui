@@ -174,20 +174,10 @@ gnometypes.c: $(srcdir)/gnometype_inits.c
 
 gnome_segv_SOURCES = gnome_segv.c
 
-gtkrcdir = $(datadir)
-gtkrc_DATA = gtkrc gtkrc.el gtkrc.eo gtkrc.he gtkrc.hy gtkrc.ja \
-	gtkrc.ko gtkrc.ru gtkrc.tr gtkrc.th gtkrc.uk \
-	gtkrc.iso88592 gtkrc.iso88595 gtkrc.zh_CN gtkrc.zh_TW.Big5 \
-	gtkrc.ka_GE.georgianacademy gtkrc.ka_GE.georgianps \
-	gtkrc.vi_VN.tcvn gtkrc.vi_VN.viscii
-
 EXTRA_DIST =					\
-	$(gtkrc_DATA)				\
 	AUTHORS					\
 	gnome.defs 				\
 	gnome-boxed.defs			\
-	portrait.xpm				\
-	landscape.xpm				\
 	libgnomeui-2.0.pc.in
 
 libgnomeui_2_la_LDFLAGS = \
