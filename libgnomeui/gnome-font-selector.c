@@ -937,31 +937,31 @@ text_get_fonts (GnomeFontSelectorClass *klass)
 	  index = text_field_to_index (klass->foundry_array, klass->nfoundries, field);
 	  klass->font_info[i]->foundries[index] = 1;
 	  klass->font_info[i]->combos[j][0] = index;
-	  free (field);
+	  g_free (field);
 
 	  field = text_get_field (fontname, WEIGHT);
 	  index = text_field_to_index (klass->weight_array, klass->nweights, field);
 	  klass->font_info[i]->weights[index] = 1;
 	  klass->font_info[i]->combos[j][1] = index;
-	  free (field);
+	  g_free (field);
 
 	  field = text_get_field (fontname, SLANT);
 	  index = text_field_to_index (klass->slant_array, klass->nslants, field);
 	  klass->font_info[i]->slants[index] = 1;
 	  klass->font_info[i]->combos[j][2] = index;
-	  free (field);
+	  g_free (field);
 
 	  field = text_get_field (fontname, SET_WIDTH);
 	  index = text_field_to_index (klass->set_width_array, klass->nset_widths, field);
 	  klass->font_info[i]->set_widths[index] = 1;
 	  klass->font_info[i]->combos[j][3] = index;
-	  free (field);
+	  g_free (field);
 
 	  field = text_get_field (fontname, SPACING);
 	  index = text_field_to_index (klass->spacing_array, klass->nspacings, field);
 	  klass->font_info[i]->spacings[index] = 1;
 	  klass->font_info[i]->combos[j][4] = index;
-	  free (field);
+	  g_free (field);
 
 	  j += 1;
 	}
@@ -1062,7 +1062,7 @@ text_insert_field (GSList      *list,
       cmp = strcmp (field, temp_list->data);
       if (cmp == 0)
 	{
-	  free (field);
+	  g_free (field);
 	  return list;
 	}
       else if (cmp < 0)

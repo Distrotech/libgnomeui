@@ -1,3 +1,8 @@
+Tue Mar 23 19:33:52 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-font-selector.c: stuff that got allocated with g_malloc needs
+	  to be g_free'd and vice versa
+
 1999-03-24  Felix Bellaby <felix@pooh.u-net.com>
 	
 	* gnome-client.c (gnome_client_request_save): confirm before logout.
