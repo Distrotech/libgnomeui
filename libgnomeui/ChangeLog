@@ -1,3 +1,7 @@
+Thu Apr 30 21:31:43 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.c (client_parse_func): Set previous_id for client.
+
 1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkcalendar.c: return meaningful values from most routines.  

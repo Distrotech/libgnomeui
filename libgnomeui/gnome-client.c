@@ -169,6 +169,8 @@ client_parse_func (int key, char *arg, struct argp_state *state)
       /* Found our argument.  Set the session id.  */
       g_assert (default_client != NULL);
       gnome_client_set_id (default_client, arg);
+      g_free (default_client->previous_id);
+      default_client->previous_id = g_strdup (arg);
     }
   else if (key == ARGP_KEY_SUCCESS)
     {
@@ -475,12 +477,12 @@ gnome_client_connect (GnomeClient *client)
 #ifdef HAVE_LIBSM
   if (GNOME_CLIENT_CONNECTED (client))
     return;
-  
+
   callbacks.save_yourself.callback      = client_save_yourself_callback;
   callbacks.die.callback                = client_die_callback;
   callbacks.save_complete.callback      = client_save_complete_callback;
   callbacks.shutdown_cancelled.callback = client_shutdown_cancelled_callback;
-  
+
   callbacks.save_yourself.client_data = 
     callbacks.die.client_data =
     callbacks.save_complete.client_data =
@@ -836,7 +838,7 @@ gnome_client_set_id (GnomeClient *client, const gchar *id)
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
   g_return_if_fail (!GNOME_CLIENT_CONNECTED (client));
-  
+
   g_return_if_fail (id != NULL);
 
   g_free (client->client_id);
