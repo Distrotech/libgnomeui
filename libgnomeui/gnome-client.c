@@ -329,8 +329,6 @@ gnome_client_init (void)
 GnomeClient *
 gnome_client_new_default (void)
 {
-  g_warning ("gnome_client_new_default is obsolet.  Use gnome_master_client instead");
-  
   if (! master_client)
     gnome_client_init ();
   return master_client;
