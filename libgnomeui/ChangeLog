@@ -1,3 +1,11 @@
+Sat Mar 21 00:45:10 1998  Tom Tromey  <tromey@cygnus.com>
+
+	Somewhat modified patch from Havoc Pennington:
+	* gnome-messagebox.c (gnome_messagebox_new): Initialize buttons
+	element to NULL, not to a new list.  Call va_end.
+	(gnome_messagebox_set_default): Use g_list_nth.
+	(gnome_messagebox_button_clicked): Now static.
+
 Fri Mar 20 23:02:46 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-messagebox.c (gnome_messagebox_new): Use

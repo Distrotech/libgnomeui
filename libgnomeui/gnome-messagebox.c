@@ -62,6 +62,9 @@ static void gnome_messagebox_marshal_signal_1 (GtkObject         *object,
 static void gnome_messagebox_class_init (GnomeMessageBoxClass *klass);
 static void gnome_messagebox_init       (GnomeMessageBox      *messagebox);
 
+static void gnome_messagebox_button_clicked (GtkWidget   *button, 
+					     GtkWidget   *messagebox);
+
 static GtkWindowClass *parent_class;
 static gint messagebox_signals[LAST_SIGNAL] = { 0 };
 
@@ -227,7 +230,7 @@ gnome_messagebox_new (gchar           *message,
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
 	gtk_widget_show (hbox);
 
-	messagebox->buttons = g_list_alloc ();
+	messagebox->buttons = NULL;
 	for (;;) {
 		GtkWidget *button;
 		char *text = va_arg (ap, char *);
@@ -250,6 +253,8 @@ gnome_messagebox_new (gchar           *message,
 		messagebox->buttons = g_list_append (messagebox->buttons, button);
 	}
 
+	va_end (ap);
+
 	return GTK_WIDGET (messagebox);
 }
 
@@ -264,21 +269,19 @@ void
 gnome_messagebox_set_default (GnomeMessageBox     *messagebox,
                               gint                button)
 {
-	GList *list = messagebox->buttons;
+	GList *list = g_list_nth (messagebox->buttons, button);
 
-	while (button-- && list)
-		list = list->next;
 	if (list && list->data)
 		gtk_widget_grab_default (GTK_WIDGET (list->data));
 }
 
-void
+static void
 gnome_messagebox_button_clicked (GtkWidget   *button, 
 			         GtkWidget   *messagebox)
 {
 	GList *list = GNOME_MESSAGEBOX (messagebox)->buttons;
 	int which = 0;
-	
+
 	while (list){
 		if (list->data == button)
 			gtk_signal_emit (GTK_OBJECT (messagebox), messagebox_signals[CLICKED], which);	

@@ -1,5 +1,5 @@
 /* GNOME GUI Library
- * Copyright (C) 1995-1997 Jay Painter
+ * Copyright (C) 1995-1998 Jay Painter
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -72,8 +72,6 @@ GtkWidget* gnome_messagebox_new            (gchar           *message,
 void       gnome_messagebox_set_modal      (GnomeMessageBox *messagebox);
 void       gnome_messagebox_set_default    (GnomeMessageBox *messagebox,
                                             gint            button);
-void       gnome_messagebox_button_clicked (GtkWidget       *button,
-					    GtkWidget       *messagebox);
 
 END_GNOME_DECLS
 
