@@ -37,6 +37,9 @@
 #define GETTEXT_PACKAGE PACKAGE
 #endif
 
+/* Prototype for a private function */
+void _gnome_stock_icons_init (void);
+
 static void G_GNUC_UNUSED
 add_sized (GtkIconFactory *factory,
            const guchar   *inline_data,
@@ -143,7 +146,7 @@ static GtkStockItem builtin_items [] =
 };
 
 void
-gnome_stock_icons_init (void)
+_gnome_stock_icons_init (void)
 {
     static gboolean initialized = FALSE;
     GtkIconFactory *factory;

@@ -73,6 +73,10 @@ static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_i
 static void libgnomeui_rc_parse (gchar *command);
 static void libgnomeui_segv_setup(gboolean post_arg_parse);
 
+/* Prototype for a private gnome_stock function */
+void _gnome_stock_icons_init (void);
+
+
 enum { ARG_DISABLE_CRASH_DIALOG=1, ARG_DISPLAY };
 
 static struct poptOption libgnomeui_options[] = {
@@ -302,7 +306,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
         priv->constructed = TRUE;
 
-        gnome_stock_icons_init ();
+        _gnome_stock_icons_init ();
 }
 
 static void

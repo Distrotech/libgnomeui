@@ -49,8 +49,8 @@ static void            gnome_mdi_finalize       (GObject *);
 
 static void            child_list_menu_create     (GnomeMDI *, GnomeApp *);
 static void            child_list_activated_cb    (GtkWidget *, GnomeMDI *);
-void                   gnome_mdi_child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
-void                   gnome_mdi_child_list_menu_add_item   (GnomeMDI *, GnomeMDIChild *);
+void                   _gnome_mdi_child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
+void                   _gnome_mdi_child_list_menu_add_item   (GnomeMDI *, GnomeMDIChild *);
 static GtkWidget      *find_item_by_child        (GtkMenuShell *, GnomeMDIChild *);
 
 static void            app_create               (GnomeMDI *, gchar *);
@@ -430,7 +430,7 @@ static void child_list_menu_create (GnomeMDI *mdi, GnomeApp *app)
 }
 
 void
-gnome_mdi_child_list_menu_remove_item (GnomeMDI *mdi, GnomeMDIChild *child)
+_gnome_mdi_child_list_menu_remove_item (GnomeMDI *mdi, GnomeMDIChild *child)
 {
 	GtkWidget *item, *shell;
 	GnomeApp *app;
@@ -460,7 +460,7 @@ gnome_mdi_child_list_menu_remove_item (GnomeMDI *mdi, GnomeMDIChild *child)
 }
 
 void
-gnome_mdi_child_list_menu_add_item (GnomeMDI *mdi, GnomeMDIChild *child)
+_gnome_mdi_child_list_menu_add_item (GnomeMDI *mdi, GnomeMDIChild *child)
 {
 	GtkWidget *item, *submenu, *label;
 	GnomeApp *app;
@@ -1382,7 +1382,7 @@ gint gnome_mdi_add_child (GnomeMDI *mdi, GnomeMDIChild *child)
 
 	mdi->children = g_list_append(mdi->children, child);
 
-	gnome_mdi_child_list_menu_add_item(mdi, child);
+	_gnome_mdi_child_list_menu_add_item(mdi, child);
 
 	return TRUE;
 }
@@ -1430,7 +1430,7 @@ gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
 
 	mdi->children = g_list_remove(mdi->children, child);
 
-	gnome_mdi_child_list_menu_remove_item(mdi, child);
+	_gnome_mdi_child_list_menu_remove_item(mdi, child);
 
 	if(child == mdi->active_child)
 		mdi->active_child = NULL;

@@ -1,3 +1,15 @@
+Thu Oct 11 03:09:08 2001  George Lebl <jirka@5z.com>
+
+	* gnome-mdi.c, gnome-mdi-child.c:  Make
+	  gnome_mdi_child_list_menu_remove_item and 
+	  gnome_mdi_child_list_menu_add_item private by crafty use of
+	  a leading underscore
+
+	* gnome-stock-icons.[ch], gnome-ui-init.c: make
+	  gnome_stock_icons_init private by use of a leading underscore.
+	  This is reminding me to do a sweep to catch all the private
+	  functions and do this trick on them.
+
 2001-10-10  Havoc Pennington  <hp@redhat.com>
 
 	 Fix output of:
