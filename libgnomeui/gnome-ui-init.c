@@ -519,7 +519,7 @@ libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
 	/* <gnomedatadir>/gtkrc */
         file = gnome_program_locate_file (gnome_program_get (),
                                           GNOME_FILE_DOMAIN_DATADIR,
-                                          "gtkrc", TRUE, NULL);
+                                          "gtkrc-2.0", TRUE, NULL);
   	if (file) {
   		gtk_rc_add_default_file (file); 
 		g_free (file);
@@ -535,7 +535,7 @@ libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
         }
 	
 	/* ~/.gnome/gtkrc */
-	file = gnome_util_home_file("gtkrc");
+	file = gnome_util_home_file("gtkrc-2.0");
 	if (file) {
 		gtk_rc_add_default_file (file);
 		g_free (file);
