@@ -1,3 +1,7 @@
+Thu Apr  9 22:12:49 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h: New interface, not yet implemented.
+
 Wed Apr  8 19:17:18 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c, gnome-messagebox.c: Use gnome-uidefs.h
