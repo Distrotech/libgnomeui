@@ -92,6 +92,311 @@ gnome-app-helper
 </para>
 
 
+<!-- ##### STRUCT GnomeUIBuilderData ##### -->
+<para>
+
+</para>
+
+@connect_func: 
+@data: 
+@is_interp: 
+@relay_func: 
+@destroy_func: 
+
+<!-- ##### USER_FUNCTION GnomeUISignalConnectFunc ##### -->
+<para>
+
+</para>
+
+@uiinfo: 
+@signal_name: 
+@uibdata: 
+
+
+<!-- ##### FUNCTION gnome_accelerators_sync ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_app_fill_menu ##### -->
+<para>
+
+</para>
+
+@menu_shell: 
+@uiinfo: 
+@accel_group: 
+@uline_accels: 
+@pos: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_menu_with_data ##### -->
+<para>
+
+</para>
+
+@menu_shell: 
+@uiinfo: 
+@accel_group: 
+@uline_accels: 
+@pos: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_menu_custom ##### -->
+<para>
+
+</para>
+
+@menu_shell: 
+@uiinfo: 
+@uibdata: 
+@accel_group: 
+@uline_accels: 
+@pos: 
+
+
+<!-- ##### FUNCTION gnome_app_ui_configure_configurable ##### -->
+<para>
+
+</para>
+
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_create_menus ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_create_menus_interp ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@relay_func: 
+@data: 
+@destroy_func: 
+
+
+<!-- ##### FUNCTION gnome_app_create_menus_with_data ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gnome_app_create_menus_custom ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@uibdata: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_toolbar ##### -->
+<para>
+
+</para>
+
+@toolbar: 
+@uiinfo: 
+@accel_group: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_toolbar_with_data ##### -->
+<para>
+
+</para>
+
+@toolbar: 
+@uiinfo: 
+@accel_group: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_toolbar_custom ##### -->
+<para>
+
+</para>
+
+@toolbar: 
+@uiinfo: 
+@uibdata: 
+@accel_group: 
+
+
+<!-- ##### FUNCTION gnome_app_create_toolbar ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_create_toolbar_interp ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@relay_func: 
+@data: 
+@destroy_func: 
+
+
+<!-- ##### FUNCTION gnome_app_create_toolbar_with_data ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gnome_app_create_toolbar_custom ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@uibdata: 
+
+
+<!-- ##### FUNCTION gnome_app_find_menu_pos ##### -->
+<para>
+
+</para>
+
+@parent: 
+@path: 
+@pos: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_app_remove_menus ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@items: 
+
+
+<!-- ##### FUNCTION gnome_app_remove_menu_range ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@start: 
+@items: 
+
+
+<!-- ##### FUNCTION gnome_app_insert_menus_custom ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@uiinfo: 
+@uibdata: 
+<!-- # Unused Parameters # -->
+@menuinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_insert_menus ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@menuinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_insert_menus_with_data ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@menuinfo: 
+@data: 
+
+
+<!-- ##### FUNCTION gnome_app_insert_menus_interp ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@menuinfo: 
+@relay_func: 
+@data: 
+@destroy_func: 
+
+
+<!-- ##### FUNCTION gnome_app_install_appbar_menu_hints ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_install_statusbar_menu_hints ##### -->
+<para>
+
+</para>
+
+@bar: 
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_install_menu_hints ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+<!-- # Unused Parameters # -->
+@uinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_setup_toolbar ##### -->
+<para>
+
+</para>
+
+@toolbar: 
+@dock_item: 
+
+
 <!-- ##### MACRO GNOMEUIINFO_KEY_UIDATA ##### -->
 <para>
 
@@ -570,31 +875,6 @@ gnome-app-helper
 @data: 
 
 
-<!-- ##### FUNCTION gnome_app_helper_gettext ##### -->
-<para>
-
-</para>
-
-@string: 
-@Returns: 
-
-
-<!-- ##### MACRO D_ ##### -->
-<para>
-
-</para>
-
-@x: 
-
-
-<!-- ##### MACRO L_ ##### -->
-<para>
-
-</para>
-
-@x: 
-
-
 <!-- ##### MACRO GNOMEUIINFO_MENU_FILE_TREE ##### -->
 <para>
 
@@ -757,308 +1037,28 @@ gnome-app-helper
 
 
 
-<!-- ##### STRUCT GnomeUIBuilderData ##### -->
+<!-- ##### FUNCTION gnome_app_helper_gettext ##### -->
 <para>
 
 </para>
 
-@connect_func: 
-@data: 
-@is_interp: 
-@relay_func: 
-@destroy_func: 
-
-<!-- ##### USER_FUNCTION GnomeUISignalConnectFunc ##### -->
-<para>
-
-</para>
-
-@uiinfo: 
-@signal_name: 
-@uibdata: 
-
-
-<!-- ##### FUNCTION gnome_accelerators_sync ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION gnome_app_fill_menu ##### -->
-<para>
-
-</para>
-
-@menu_shell: 
-@uiinfo: 
-@accel_group: 
-@uline_accels: 
-@pos: 
-
-
-<!-- ##### FUNCTION gnome_app_fill_menu_with_data ##### -->
-<para>
-
-</para>
-
-@menu_shell: 
-@uiinfo: 
-@accel_group: 
-@uline_accels: 
-@pos: 
-@user_data: 
-
-
-<!-- ##### FUNCTION gnome_app_fill_menu_custom ##### -->
-<para>
-
-</para>
-
-@menu_shell: 
-@uiinfo: 
-@uibdata: 
-@accel_group: 
-@uline_accels: 
-@pos: 
-
-
-<!-- ##### FUNCTION gnome_app_ui_configure_configurable ##### -->
-<para>
-
-</para>
-
-@uiinfo: 
-
-
-<!-- ##### FUNCTION gnome_app_create_menus ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-
-
-<!-- ##### FUNCTION gnome_app_create_menus_interp ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-@relay_func: 
-@data: 
-@destroy_func: 
-
-
-<!-- ##### FUNCTION gnome_app_create_menus_with_data ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-@user_data: 
-
-
-<!-- ##### FUNCTION gnome_app_create_menus_custom ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-@uibdata: 
-
-
-<!-- ##### FUNCTION gnome_app_fill_toolbar ##### -->
-<para>
-
-</para>
-
-@toolbar: 
-@uiinfo: 
-@accel_group: 
-
-
-<!-- ##### FUNCTION gnome_app_fill_toolbar_with_data ##### -->
-<para>
-
-</para>
-
-@toolbar: 
-@uiinfo: 
-@accel_group: 
-@user_data: 
-
-
-<!-- ##### FUNCTION gnome_app_fill_toolbar_custom ##### -->
-<para>
-
-</para>
-
-@toolbar: 
-@uiinfo: 
-@uibdata: 
-@accel_group: 
-
-
-<!-- ##### FUNCTION gnome_app_create_toolbar ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-
-
-<!-- ##### FUNCTION gnome_app_create_toolbar_interp ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-@relay_func: 
-@data: 
-@destroy_func: 
-
-
-<!-- ##### FUNCTION gnome_app_create_toolbar_with_data ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-@user_data: 
-
-
-<!-- ##### FUNCTION gnome_app_create_toolbar_custom ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-@uibdata: 
-
-
-<!-- ##### FUNCTION gnome_app_find_menu_pos ##### -->
-<para>
-
-</para>
-
-@parent: 
-@path: 
-@pos: 
+@string: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gnome_app_remove_menus ##### -->
+<!-- ##### MACRO D_ ##### -->
 <para>
 
 </para>
 
-@app: 
-@path: 
-@items: 
+@x: 
 
 
-<!-- ##### FUNCTION gnome_app_remove_menu_range ##### -->
+<!-- ##### MACRO L_ ##### -->
 <para>
 
 </para>
 
-@app: 
-@path: 
-@start: 
-@items: 
-
-
-<!-- ##### FUNCTION gnome_app_insert_menus_custom ##### -->
-<para>
-
-</para>
-
-@app: 
-@path: 
-@uiinfo: 
-@uibdata: 
-<!-- # Unused Parameters # -->
-@menuinfo: 
-
-
-<!-- ##### FUNCTION gnome_app_insert_menus ##### -->
-<para>
-
-</para>
-
-@app: 
-@path: 
-@menuinfo: 
-
-
-<!-- ##### FUNCTION gnome_app_insert_menus_with_data ##### -->
-<para>
-
-</para>
-
-@app: 
-@path: 
-@menuinfo: 
-@data: 
-
-
-<!-- ##### FUNCTION gnome_app_insert_menus_interp ##### -->
-<para>
-
-</para>
-
-@app: 
-@path: 
-@menuinfo: 
-@relay_func: 
-@data: 
-@destroy_func: 
-
-
-<!-- ##### FUNCTION gnome_app_install_appbar_menu_hints ##### -->
-<para>
-
-</para>
-
-@appbar: 
-@uiinfo: 
-
-
-<!-- ##### FUNCTION gnome_app_install_statusbar_menu_hints ##### -->
-<para>
-
-</para>
-
-@bar: 
-@uiinfo: 
-
-
-<!-- ##### FUNCTION gnome_app_install_menu_hints ##### -->
-<para>
-
-</para>
-
-@app: 
-@uiinfo: 
-<!-- # Unused Parameters # -->
-@uinfo: 
-
-
-<!-- ##### FUNCTION gnome_app_setup_toolbar ##### -->
-<para>
-
-</para>
-
-@toolbar: 
-@dock_item: 
+@x: 
 
 

@@ -29,6 +29,12 @@ GnomeIconList
 @GNOME_ICON_LIST_TEXT_BELOW: 
 @GNOME_ICON_LIST_TEXT_RIGHT: 
 
+<!-- ##### STRUCT GnomeIconList ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_icon_list_new ##### -->
 <para>
 

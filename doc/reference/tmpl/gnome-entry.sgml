@@ -20,6 +20,12 @@ GnomeEntry
 </para>
 
 
+<!-- ##### STRUCT GnomeEntry ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_entry_new ##### -->
 <para>
 

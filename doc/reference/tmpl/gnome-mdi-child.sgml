@@ -56,6 +56,12 @@ GnomeMDIChild
 @Returns: 
 
 
+<!-- ##### STRUCT GnomeMDIChild ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_mdi_child_add_view ##### -->
 <para>
 

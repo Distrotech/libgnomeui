@@ -24,6 +24,12 @@ GnomeMDI
 @GNOME_MDI_MODAL: 
 @GNOME_MDI_DEFAULT_MODE: 
 
+<!-- ##### STRUCT GnomeMDI ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_mdi_new ##### -->
 <para>
 

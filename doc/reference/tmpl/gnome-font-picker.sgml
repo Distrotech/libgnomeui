@@ -30,6 +30,12 @@ GnomeFontPicker
 </para>
 
 
+<!-- ##### STRUCT GnomeFontPicker ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_font_picker_new ##### -->
 <para>
 

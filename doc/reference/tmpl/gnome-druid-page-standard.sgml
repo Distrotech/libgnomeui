@@ -14,11 +14,19 @@ GnomeDruidPageStandard
 
 </para>
 
-<!-- ##### STRUCT GnomeDruidPageStandardPrivate ##### -->
+<!-- ##### STRUCT GnomeDruidPageStandard ##### -->
 <para>
 
 </para>
 
+@vbox: 
+@title: 
+@logo: 
+@top_watermark: 
+@title_foreground: 
+@background: 
+@logo_background: 
+@contents_background: 
 
 <!-- ##### MACRO gnome_druid_page_standard_set_bg_color ##### -->
 <para>

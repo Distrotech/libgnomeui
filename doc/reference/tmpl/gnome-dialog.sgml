@@ -14,6 +14,13 @@ GnomeDialog
 
 </para>
 
+<!-- ##### STRUCT GnomeDialog ##### -->
+<para>
+
+</para>
+
+@vbox: 
+
 <!-- ##### FUNCTION gnome_dialog_new ##### -->
 <para>
 

@@ -61,6 +61,12 @@ GnomeMessageBox
 </para>
 
 
+<!-- ##### STRUCT GnomeMessageBox ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_message_box_new ##### -->
 <para>
 

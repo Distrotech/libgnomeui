@@ -30,6 +30,23 @@ GnomeDruidPageEdge
 </para>
 
 
+<!-- ##### STRUCT GnomeDruidPageEdge ##### -->
+<para>
+
+</para>
+
+@title: 
+@text: 
+@logo_image: 
+@watermark_image: 
+@top_watermark_image: 
+@background_color: 
+@textbox_color: 
+@logo_background_color: 
+@title_color: 
+@text_color: 
+@position: 
+
 <!-- ##### FUNCTION gnome_druid_page_edge_new ##### -->
 <para>
 

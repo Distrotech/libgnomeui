@@ -20,6 +20,12 @@ GnomePixmap
 </para>
 
 
+<!-- ##### STRUCT GnomePixmap ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_pixmap_new_from_file ##### -->
 <para>
 

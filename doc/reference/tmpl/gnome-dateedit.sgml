@@ -23,7 +23,7 @@ GnomeDateEdit
 @GNOME_DATE_EDIT_24_HR: 
 @GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY: 
 
-<!-- ##### STRUCT GnomeDateEditPrivate ##### -->
+<!-- ##### STRUCT GnomeDateEdit ##### -->
 <para>
 
 </para>

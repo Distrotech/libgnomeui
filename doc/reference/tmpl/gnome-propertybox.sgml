@@ -21,6 +21,12 @@ GnomePropertyBox
 
 
 
+<!-- ##### STRUCT GnomePropertyBox ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_property_box_new ##### -->
 <para>
 

@@ -20,6 +20,12 @@ GnomeIconEntry
 </para>
 
 
+<!-- ##### STRUCT GnomeIconEntry ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_icon_entry_new ##### -->
 <para>
 
