@@ -107,10 +107,9 @@ struct _GnomeSelectorClass {
                                             const gchar   *text);
     void      (*activate_entry)            (GnomeSelector *selector);
 
-    void      (*update_file_list)          (GnomeSelector *selector);
+    void      (*update_uri_list)           (GnomeSelector *selector);
 
-    GSList *  (*get_file_list)             (GnomeSelector *selector,
-                                            gboolean       directory_listp,
+    GSList *  (*get_uri_list)              (GnomeSelector *selector,
                                             gboolean       defaultp);
 
     void      (*set_selection_mode)        (GnomeSelector *selector,
@@ -212,11 +211,10 @@ void         gnome_selector_add_uri            (GnomeSelector             *selec
 
 
 /* Get/set file list (set will replace the old file list). */
-GSList *     gnome_selector_get_file_list      (GnomeSelector *selector,
-                                                gboolean       directory_list,
+GSList *     gnome_selector_get_uri_list       (GnomeSelector *selector,
                                                 gboolean       defaultp);
-void         gnome_selector_set_file_list      (GnomeSelector *selector,
-                                                GSList        *file_list,
+void         gnome_selector_set_uri_list       (GnomeSelector *selector,
+                                                GSList        *uri_list,
                                                 gboolean       defaultp);
 
 /* set the filename to something, returns TRUE on success. */
@@ -239,7 +237,7 @@ void         gnome_selector_set_directory_list (GnomeSelector *selector,
 
 /* Updates the internal file list. This will also read all the directories
  * from the directory list and add the files to an internal list. */
-void         gnome_selector_update_file_list   (GnomeSelector *selector);
+void         gnome_selector_update_uri_list   (GnomeSelector *selector);
 
 /* Sets the selection mode. */
 void         gnome_selector_set_selection_mode (GnomeSelector *selector,

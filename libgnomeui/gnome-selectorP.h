@@ -46,14 +46,11 @@ struct _GnomeSelectorPrivate {
 
     gchar       *gconf_history_dir;
     gchar       *gconf_history_key;
-    gchar       *gconf_dir_list_key;
-    gchar       *gconf_file_list_key;
+    gchar       *gconf_uri_list_key;
+    gchar       *gconf_default_uri_list_key;
 
-    GSList      *default_dir_list;
-    GSList      *default_file_list;
-
-    GSList      *dir_list;
-    GSList      *file_list;
+    GSList      *default_uri_list;
+    GSList      *uri_list;
 
     GSList      *history;
     guint        max_history_length;

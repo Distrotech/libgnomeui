@@ -36,28 +36,26 @@ quit_cb (void)
 }
 
 static void
-file_list_cb (void)
+default_uri_list_cb (void)
 {
     GSList *list, *c;
 
-    list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector),
-					 FALSE, FALSE);
+    list = gnome_selector_get_uri_list (GNOME_SELECTOR (iselector), TRUE);
 
     for (c = list; c; c = c->next) {
-	g_print ("FILE: `%s'\n", (gchar *) c->data);
+	g_print ("DEFAULT URI: `%s'\n", (gchar *) c->data);
     }
 }
 
 static void
-directory_list_cb (void)
+uri_list_cb (void)
 {
     GSList *list, *c;
 
-    list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector),
-					 TRUE, FALSE);
+    list = gnome_selector_get_uri_list (GNOME_SELECTOR (iselector), FALSE);
 
     for (c = list; c; c = c->next) {
-	g_print ("DIRECTORY: `%s'\n", (gchar *) c->data);
+	g_print ("URI: `%s'\n", (gchar *) c->data);
     }
 }
 
@@ -93,10 +91,11 @@ static GnomeUIInfo file_menu[] = {
 };
 
 static GnomeUIInfo test_menu[] = {
-    { GNOME_APP_UI_ITEM, "Display file list", NULL, file_list_cb, NULL,
-      NULL, GNOME_APP_PIXMAP_NONE, NULL, 'f', GDK_CONTROL_MASK, NULL },
-    { GNOME_APP_UI_ITEM, "Display directory list", NULL, directory_list_cb,
-      NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL, 'd', GDK_CONTROL_MASK, NULL },
+    { GNOME_APP_UI_ITEM, "Display default URI list", NULL,
+      default_uri_list_cb, NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL,
+      'l', GDK_CONTROL_MASK, NULL },
+    { GNOME_APP_UI_ITEM, "Display URI list", NULL, uri_list_cb,
+      NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL, 'u', GDK_CONTROL_MASK, NULL },
     { GNOME_APP_UI_ITEM, "Display selection", NULL, selection_cb, NULL,
       NULL, GNOME_APP_PIXMAP_NONE, NULL, 'c', GDK_CONTROL_MASK, NULL },
     { GNOME_APP_UI_ITEM, "Save history", NULL, save_history_cb, NULL,

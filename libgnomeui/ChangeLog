@@ -1,3 +1,21 @@
+2000-12-08  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector.h (GnomeSelector): Renamed "update_file_list" signal
+	to "update_uri_list"; removed `directory_listp' argument from the
+	"get_file_list" signal and renamed it to "get_uri_list".
+	(gnome_selector_get_file_list): Removed `directory_listp' and renamed
+	to gnome_selector_get_uri_list().
+	(gnome_selector_set_file_list): Removed `directory_listp' and renamed
+	to gnome_selector_set_uri_list().
+	(gnome_selector_update_file_list): Renamed to
+	gnome_selector_update_uri_list().
+
+	* gnome-selectorP.h (GnomeSelectorPrivate): Removed
+	`gconf_dir_list_key', `gconf_file_list_key', `default_dir_list',
+	`default_file_list', `dir_list', `file_list' and added
+	`gconf_uri_list_key', `gconf_default_uri_list_key',
+	`default_uri_list', `uri_list'.
+
 Wed Dec 06 22:16:29 2000  George Lebl <jirka@5z.com>
 
 	* gnome-app-helper.c, gnome-gconf.c, gnome-mdi-child.c: Cleanup,

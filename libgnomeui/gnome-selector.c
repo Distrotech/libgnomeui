@@ -50,6 +50,7 @@
 
 #include "libgnomeuiP.h"
 
+#undef DEBUG_ASYNC_HANDLE
 
 static void gnome_selector_class_init          (GnomeSelectorClass *class);
 static void gnome_selector_init                (GnomeSelector      *selector);
@@ -77,25 +78,16 @@ static void     set_filename_handler           (GnomeSelector            *select
                                                 const gchar              *filename,
 						GnomeSelectorAsyncHandle *async_handle);
 
-static void     add_file_handler               (GnomeSelector            *selector,
-                                                const gchar              *filename,
-                                                gint                      position,
-						GnomeSelectorAsyncHandle *async_handle);
-static void     add_file_default_handler       (GnomeSelector            *selector,
-                                                const gchar              *filename,
-                                                gint                      position,
-						GnomeSelectorAsyncHandle *async_handle);
-static void     add_dir_handler                (GnomeSelector            *selector,
+static void     add_uri_handler                (GnomeSelector            *selector,
                                                 const gchar              *directory,
                                                 gint                      position,
 						GnomeSelectorAsyncHandle *async_handle);
-static void     add_dir_default_handler        (GnomeSelector            *selector,
+static void     add_uri_default_handler        (GnomeSelector            *selector,
                                                 const gchar              *directory,
                                                 gint                      position,
 						GnomeSelectorAsyncHandle *async_handle);
 
-static GSList  *get_file_list_handler          (GnomeSelector   *selector,
-                                                gboolean         directory_listp,
+static GSList  *get_uri_list_handler           (GnomeSelector   *selector,
                                                 gboolean         defaultp);
 static void     free_entry_func                (gpointer         data,
                                                 gpointer         user_data);
@@ -123,7 +115,7 @@ enum {
     ADD_DIRECTORY_DEFAULT_SIGNAL,
     FREEZE_SIGNAL,
     UPDATE_SIGNAL,
-    UPDATE_FILE_LIST_SIGNAL,
+    UPDATE_URI_LIST_SIGNAL,
     THAW_SIGNAL,
     SET_SELECTION_MODE_SIGNAL,
     GET_SELECTION_SIGNAL,
@@ -132,7 +124,7 @@ enum {
     GET_ENTRY_TEXT_SIGNAL,
     ACTIVATE_ENTRY_SIGNAL,
     HISTORY_CHANGED_SIGNAL,
-    GET_FILE_LIST_SIGNAL,
+    GET_URI_LIST_SIGNAL,
     ADD_URI_SIGNAL,
     ADD_URI_DEFAULT_SIGNAL,
     LAST_SIGNAL
@@ -301,12 +293,12 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_TYPE_NONE, 3,
 			GTK_TYPE_STRING, GTK_TYPE_INT,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
-    gnome_selector_signals [UPDATE_FILE_LIST_SIGNAL] =
-	gtk_signal_new ("update_file_list",
+    gnome_selector_signals [UPDATE_URI_LIST_SIGNAL] =
+	gtk_signal_new ("update_uri_list",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   update_file_list),
+					   update_uri_list),
 			gtk_signal_default_marshaller,
 			GTK_TYPE_NONE,
 			0);
@@ -374,15 +366,15 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE,
 			0);
-    gnome_selector_signals [GET_FILE_LIST_SIGNAL] =
-	gtk_signal_new ("get_file_list",
+    gnome_selector_signals [GET_URI_LIST_SIGNAL] =
+	gtk_signal_new ("get_uri_list",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   get_file_list),
-			gnome_marshal_POINTER__INT_INT,
-			GTK_TYPE_POINTER,
-			2, GTK_TYPE_BOOL, GTK_TYPE_BOOL);
+					   get_uri_list),
+			gnome_marshal_POINTER__BOOLEAN,
+			GTK_TYPE_POINTER, 1,
+			GTK_TYPE_BOOL);
     gnome_selector_signals [CHECK_FILENAME_SIGNAL] =
 	gtk_signal_new ("check_filename",
 			GTK_RUN_LAST,
@@ -420,12 +412,10 @@ gnome_selector_class_init (GnomeSelectorClass *class)
     class->get_filename = get_filename_handler;
     class->set_filename = set_filename_handler;
 
-    class->add_file = add_file_handler;
-    class->add_file_default = add_file_default_handler;
-    class->add_directory = add_dir_handler;
-    class->add_directory_default = add_dir_default_handler;
+    class->add_uri = add_uri_handler;
+    class->add_uri_default = add_uri_default_handler;
 
-    class->get_file_list = get_file_list_handler;
+    class->get_uri_list = get_uri_list_handler;
 }
 
 static void
@@ -487,7 +477,7 @@ update_handler (GnomeSelector *selector)
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
     if (selector->_priv->need_rebuild)
-	gnome_selector_update_file_list (selector);
+	gnome_selector_update_uri_list (selector);
 
     if (selector->_priv->history_changed)
 	gtk_signal_emit (GTK_OBJECT (selector),
@@ -527,15 +517,10 @@ clear_handler (GnomeSelector *selector)
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-    g_slist_foreach (selector->_priv->dir_list, free_entry_func,
+    g_slist_foreach (selector->_priv->uri_list, free_entry_func,
 		     selector);
-    g_slist_free (selector->_priv->dir_list);
-    selector->_priv->dir_list = NULL;
-
-    g_slist_foreach (selector->_priv->file_list, free_entry_func,
-		     selector);
-    g_slist_free (selector->_priv->file_list);
-    selector->_priv->file_list = NULL;
+    g_slist_free (selector->_priv->uri_list);
+    selector->_priv->uri_list = NULL;
 }
 
 static void
@@ -544,15 +529,10 @@ clear_default_handler (GnomeSelector *selector)
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-    g_slist_foreach (selector->_priv->default_dir_list, free_entry_func,
+    g_slist_foreach (selector->_priv->default_uri_list, free_entry_func,
 		     selector);
-    g_slist_free (selector->_priv->default_dir_list);
-    selector->_priv->default_dir_list = NULL;
-
-    g_slist_foreach (selector->_priv->default_file_list, free_entry_func,
-		     selector);
-    g_slist_free (selector->_priv->default_file_list);
-    selector->_priv->default_file_list = NULL;
+    g_slist_free (selector->_priv->default_uri_list);
+    selector->_priv->default_uri_list = NULL;
 }
 
 static gchar *
@@ -581,108 +561,58 @@ set_filename_handler (GnomeSelector *selector, const gchar *filename,
 }
 
 static void
-add_file_handler (GnomeSelector *selector, const gchar *filename, gint position,
-		  GnomeSelectorAsyncHandle *async_handle)
-{
-    g_return_if_fail (selector != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR (selector));
-    g_return_if_fail (filename != NULL);
-    g_return_if_fail (position >= -1);
-
-    if (position == -1)
-	selector->_priv->file_list = g_slist_append
-	    (selector->_priv->file_list, g_strdup (filename));
-    else
-	selector->_priv->file_list = g_slist_insert
-	    (selector->_priv->file_list, g_strdup (filename),
-	     position);
-
-    if (async_handle != NULL)
-	_gnome_selector_async_handle_completed (async_handle, TRUE);
-}
-
-static void
-add_file_default_handler (GnomeSelector *selector, const gchar *filename, gint position,
-			  GnomeSelectorAsyncHandle *async_handle)
-{
-    g_return_if_fail (selector != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR (selector));
-    g_return_if_fail (filename != NULL);
-    g_return_if_fail (position >= -1);
- 
-    if (position == -1)
-	selector->_priv->default_file_list = g_slist_append
-	    (selector->_priv->default_file_list, g_strdup (filename));
-    else
-	selector->_priv->default_file_list = g_slist_insert
-	    (selector->_priv->default_file_list, g_strdup (filename),
-	     position);
-
-    if (async_handle != NULL)
-	_gnome_selector_async_handle_completed (async_handle, TRUE);
-}
-
-static void
-add_dir_handler (GnomeSelector *selector, const gchar *directory, gint position,
+add_uri_handler (GnomeSelector *selector, const gchar *uri, gint position,
 		 GnomeSelectorAsyncHandle *async_handle)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
-    g_return_if_fail (directory != NULL);
+    g_return_if_fail (uri != NULL);
     g_return_if_fail (position >= -1);
 
-    if (position == -1)
-	selector->_priv->dir_list = g_slist_append
-	    (selector->_priv->dir_list, g_strdup (directory));
-    else
-	selector->_priv->dir_list = g_slist_insert
-	    (selector->_priv->dir_list, g_strdup (directory),
-	     position);
+    g_message (G_STRLOC ": `%s' - %d", uri, position);
 
-    if (async_handle != NULL)
-	_gnome_selector_async_handle_completed (async_handle, TRUE);
+    if (position == -1)
+	selector->_priv->uri_list = g_slist_append
+	    (selector->_priv->uri_list, g_strdup (uri));
+    else
+	selector->_priv->uri_list = g_slist_insert
+	    (selector->_priv->uri_list, g_strdup (uri),
+	     position);
 }
 
 static void
-add_dir_default_handler (GnomeSelector *selector, const gchar *directory, gint position,
-			 GnomeSelectorAsyncHandle *async_handle)
+add_uri_default_handler (GnomeSelector *selector, const gchar *uri,
+			 gint position, GnomeSelectorAsyncHandle *async_handle)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
-    g_return_if_fail (directory != NULL);
+    g_return_if_fail (uri != NULL);
     g_return_if_fail (position >= -1);
+ 
+    g_message (G_STRLOC ": `%s' - %d", uri, position);
 
     if (position == -1)
-	selector->_priv->default_dir_list = g_slist_append
-	    (selector->_priv->default_dir_list, g_strdup (directory));
+	selector->_priv->default_uri_list = g_slist_append
+	    (selector->_priv->default_uri_list, g_strdup (uri));
     else
-	selector->_priv->default_dir_list = g_slist_insert
-	    (selector->_priv->default_dir_list, g_strdup (directory),
+	selector->_priv->default_uri_list = g_slist_insert
+	    (selector->_priv->default_uri_list, g_strdup (uri),
 	     position);
-
-    if (async_handle != NULL)
-	_gnome_selector_async_handle_completed (async_handle, TRUE);
 }
 
+
 static GSList *
-get_file_list_handler (GnomeSelector *selector, gboolean directory_listp,
-		       gboolean defaultp)
+get_uri_list_handler (GnomeSelector *selector, gboolean defaultp)
 {
     g_return_val_if_fail (selector != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
 
-    g_message (G_STRLOC ": %d - %d", directory_listp, defaultp);
+    g_message (G_STRLOC ": %d", defaultp);
 
-    if (directory_listp)
-	if (defaultp)
-	    return _gnome_selector_copy_list (selector->_priv->default_dir_list);
-	else
-	    return _gnome_selector_copy_list (selector->_priv->dir_list);
+    if (defaultp)
+	return _gnome_selector_copy_list (selector->_priv->default_uri_list);
     else
-	if (defaultp)
-	    return _gnome_selector_copy_list (selector->_priv->default_file_list);
-	else
-	    return _gnome_selector_copy_list (selector->_priv->file_list);
+	return _gnome_selector_copy_list (selector->_priv->uri_list);
 }
 
 
@@ -755,10 +685,10 @@ gnome_selector_construct (GnomeSelector *selector,
 	    (GNOME_SELECTOR_GCONF_DIR, priv->history_id);
 	priv->gconf_history_key = gconf_concat_dir_and_key
 	    (priv->gconf_history_dir, "history");
-	priv->gconf_dir_list_key = gconf_concat_dir_and_key
-	    (priv->gconf_history_dir, "dir-list");
-	priv->gconf_file_list_key = gconf_concat_dir_and_key
-	    (priv->gconf_history_dir, "file-list");
+	priv->gconf_default_uri_list_key = gconf_concat_dir_and_key
+	    (priv->gconf_history_dir, "default-uri-list");
+	priv->gconf_uri_list_key = gconf_concat_dir_and_key
+	    (priv->gconf_history_dir, "uri-list");
 
 	gconf_client_add_dir (priv->client, priv->gconf_history_dir,
 			      GCONF_CLIENT_PRELOAD_NONE, NULL);
@@ -895,20 +825,16 @@ gnome_selector_finalize (GObject *object)
     selector = GNOME_SELECTOR (object);
 
     if (selector->_priv) {
-	g_slist_foreach (selector->_priv->default_file_list,
+	g_slist_foreach (selector->_priv->default_uri_list,
 			 free_entry_func, selector);
-	g_slist_foreach (selector->_priv->file_list,
-			 free_entry_func, selector);
-	g_slist_foreach (selector->_priv->default_dir_list,
-			 free_entry_func, selector);
-	g_slist_foreach (selector->_priv->dir_list,
+	g_slist_foreach (selector->_priv->uri_list,
 			 free_entry_func, selector);
 	g_free (selector->_priv->dialog_title);
 	g_free (selector->_priv->history_id);
 	g_free (selector->_priv->gconf_history_dir);
 	g_free (selector->_priv->gconf_history_key);
-	g_free (selector->_priv->gconf_dir_list_key);
-	g_free (selector->_priv->gconf_file_list_key);
+	g_free (selector->_priv->gconf_default_uri_list_key);
+	g_free (selector->_priv->gconf_uri_list_key);
     }
 
     g_free (selector->_priv);
@@ -965,9 +891,7 @@ gnome_selector_set_dialog_title (GnomeSelector *selector,
 }
 
 GSList *
-gnome_selector_get_file_list (GnomeSelector *selector,
-			      gboolean directory_listp,
-			      gboolean defaultp)
+gnome_selector_get_uri_list (GnomeSelector *selector, gboolean defaultp)
 {
     GSList *retval = NULL;
 
@@ -975,8 +899,8 @@ gnome_selector_get_file_list (GnomeSelector *selector,
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
 
     gtk_signal_emit (GTK_OBJECT (selector),
-		     gnome_selector_signals [GET_FILE_LIST_SIGNAL],
-		     directory_listp, defaultp, &retval);
+		     gnome_selector_signals [GET_URI_LIST_SIGNAL],
+		     defaultp, &retval);
 
     return retval;
 }
@@ -1123,7 +1047,7 @@ gnome_selector_set_filename (GnomeSelector *selector,
 
 
 /**
- * gnome_selector_update_file_list
+ * gnome_selector_update_uri_list
  * @selector: Pointer to GnomeSelector object.
  *
  * Description: Updates the internal file list.
@@ -1131,13 +1055,13 @@ gnome_selector_set_filename (GnomeSelector *selector,
  * Returns:
  */
 void
-gnome_selector_update_file_list (GnomeSelector *selector)
+gnome_selector_update_uri_list (GnomeSelector *selector)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
     gtk_signal_emit (GTK_OBJECT (selector),
-		     gnome_selector_signals [UPDATE_FILE_LIST_SIGNAL]);
+		     gnome_selector_signals [UPDATE_URI_LIST_SIGNAL]);
 }
 
 
@@ -1532,31 +1456,31 @@ gnome_selector_set_to_defaults (GnomeSelector *selector)
 void
 _gnome_selector_save_all (GnomeSelector *selector)
 {
-    GSList *file_list, *dir_list;
+    GSList *default_uri_list, *uri_list;
     gboolean result;
 
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-    if (!selector->_priv->gconf_dir_list_key ||
-	!selector->_priv->gconf_file_list_key)
+    if (!selector->_priv->gconf_default_uri_list_key ||
+	!selector->_priv->gconf_uri_list_key)
 	return;
 
-    dir_list = gnome_selector_get_file_list (selector, TRUE, FALSE);
-    file_list = gnome_selector_get_file_list (selector, FALSE, FALSE);
+    default_uri_list = gnome_selector_get_uri_list (selector, TRUE);
+    uri_list = gnome_selector_get_uri_list (selector, FALSE);
 
     result = gconf_client_set_list (selector->_priv->client,
-				    selector->_priv->gconf_dir_list_key,
-				    GCONF_VALUE_STRING, dir_list,
+				    selector->_priv->gconf_default_uri_list_key,
+				    GCONF_VALUE_STRING, default_uri_list,
 				    NULL);
 
     result = gconf_client_set_list (selector->_priv->client,
-				    selector->_priv->gconf_file_list_key,
-				    GCONF_VALUE_STRING, file_list,
+				    selector->_priv->gconf_uri_list_key,
+				    GCONF_VALUE_STRING, uri_list,
 				    NULL);
 
-    _gnome_selector_free_list (dir_list);
-    _gnome_selector_free_list (file_list);
+    _gnome_selector_free_list (default_uri_list);
+    _gnome_selector_free_list (uri_list);
 }
 
 void
@@ -1565,21 +1489,19 @@ _gnome_selector_load_all (GnomeSelector *selector)
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-    if (!selector->_priv->gconf_dir_list_key ||
-	!selector->_priv->gconf_file_list_key)
+    if (!selector->_priv->gconf_default_uri_list_key ||
+	!selector->_priv->gconf_uri_list_key)
 	return;
 
-#if 0
-    selector->_priv->dir_list = gconf_client_get_list
+    selector->_priv->default_uri_list = gconf_client_get_list
 	(selector->_priv->client,
-	 selector->_priv->gconf_dir_list_key,
+	 selector->_priv->gconf_default_uri_list_key,
 	 GCONF_VALUE_STRING, NULL);
 
-    selector->_priv->file_list = gconf_client_get_list
+    selector->_priv->uri_list = gconf_client_get_list
 	(selector->_priv->client,
-	 selector->_priv->gconf_file_list_key,
+	 selector->_priv->gconf_uri_list_key,
 	 GCONF_VALUE_STRING, NULL);
-#endif
 
     selector->_priv->need_rebuild = TRUE;
 
@@ -1657,8 +1579,10 @@ _gnome_selector_async_handle_remove (GnomeSelectorAsyncHandle *async_handle,
 
 	    g_free (data);
 
+#ifdef DEBUG_ASYNC_HANDLE
 	    g_message (G_STRLOC ": %p - %d - %p", async_handle,
 		       async_handle->completed, async_handle->async_data_list);
+#endif
 
 	    if (async_handle->completed &&
 		async_handle->async_data_list == NULL)
@@ -1682,9 +1606,11 @@ _gnome_selector_async_handle_completed (GnomeSelectorAsyncHandle *async_handle,
 
     selector = async_handle->selector;
 
+#ifdef DEBUG_ASYNC_HANDLE
     g_message (G_STRLOC ": %p - %d - %d - %p", async_handle,
 	       async_handle->completed, success,
 	       async_handle->async_data_list);
+#endif
 
     if (!async_handle->completed)
 	async_handle->success = success;
@@ -1706,7 +1632,9 @@ _gnome_selector_async_handle_destroy (GnomeSelectorAsyncHandle *async_handle)
 
     selector = async_handle->selector;
 
+#ifdef DEBUG_ASYNC_HANDLE
     g_message (G_STRLOC ": %p - %d", async_handle, async_handle->refcount);
+#endif
 
     for (c = async_handle->async_data_list; c; c = c->next) {
 	GnomeSelectorAsyncData *async_data = c->data;
