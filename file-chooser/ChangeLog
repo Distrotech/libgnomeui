@@ -19,6 +19,9 @@ Wed Jul 16 16:50:31 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* gtkfilechooserimpldefault.c: Display icons in the list.
 
+	* glib-interface-properties-0.3.patch: New revision
+	of interface properties patch.
+
 Fri Jul 11 14:37:07 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* gtkfilechooser.[ch] gtkfilechooserprivate.h
