@@ -77,7 +77,6 @@ struct _GnomeAnimator
   {
     GtkWidget widget;
 
-    GnomeAnimatorFrame *frames;
     guint num_frames;
 
     guint current_frame_number;
@@ -88,9 +87,7 @@ struct _GnomeAnimator
 
     gint playback_direction;
 
-    guint timeout_id;
-
-    double playback_speed;
+    gdouble playback_speed;
 
     GnomeAnimatorPrivate *privat;
   };
@@ -230,8 +227,8 @@ GnomeAnimatorStatus gnome_animator_get_status         (GnomeAnimator *animator);
 /* Set/get speed factor (the higher, the faster: the `interval' value
    is divided by this factor before being used).  Default is 1.0.  */
 void     gnome_animator_set_playback_speed            (GnomeAnimator *animator,
-                                                       double speed);
-double   gnome_animator_get_playback_speed            (GnomeAnimator *animator);
+                                                       gdouble speed);
+gdouble  gnome_animator_get_playback_speed            (GnomeAnimator *animator);
 
 END_GNOME_DECLS
 

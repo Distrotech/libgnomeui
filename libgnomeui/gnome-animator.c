@@ -18,7 +18,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* This is a simple widget for adding animations to Gnome
+/* This is a simple widget for adding animations to GNOME
    applications.  It is updated using double buffering for maximum
    smoothness.
    Notice that, although its window is not shaped, the widget tries to
@@ -38,11 +38,15 @@
 /* This is kept private as things might change in the future.  */
 struct _GnomeAnimatorFrame
   {
-    /* Rendered image.  */
-    GdkImage *image;
+    /* Rendered pixmap.  */
+    GdkPixmap *pixmap;
 
     /* Shape mask (NULL if no shape mask).  */
     GdkBitmap *mask;
+
+    /* Size.  */
+    guint width;
+    guint height;
 
     /* X/Y position in the widget.  */
     gint x_offset;
@@ -51,10 +55,16 @@ struct _GnomeAnimatorFrame
     /* Interval for the next frame (as for `gtk_timeout_add()').  This
        value is divided by `playback_speed' before being used.  */
     guint32 interval;
+
+    /* Pointer to the next and previous frames.  */
+    GnomeAnimatorFrame *prev, *next;
   };
 
 struct _GnomeAnimatorPrivate
   {
+    /* Timeout callback ID used for advancing playback.  */
+    guint timeout_id;
+
     /* Pixmap used for drawing offscreen.  */
     GdkPixmap *offscreen_pixmap;
 
@@ -62,6 +72,15 @@ struct _GnomeAnimatorPrivate
        with the parent's window background using the "style_set" and
        "state_changed" signals.  */
     GdkPixmap *background_pixmap;
+
+    /* Pointer to the first frame.  */
+    GnomeAnimatorFrame *first_frame;
+
+    /* Pointer to the last frame.  */
+    GnomeAnimatorFrame *last_frame;
+
+    /* Pointer to the current frame.  */
+    GnomeAnimatorFrame *current_frame;
   };
 
 /* ------------------------------------------------------------------------- */
@@ -96,18 +115,20 @@ init (GnomeAnimator *animator)
 {
   GTK_WIDGET_SET_FLAGS (animator, GTK_BASIC);
 
-  animator->frames = NULL;
   animator->num_frames = 0;
   animator->current_frame_number = 0;
   animator->status = GNOME_ANIMATOR_STATUS_STOPPED;
   animator->loop_type = GNOME_ANIMATOR_LOOP_NONE;
   animator->playback_direction = +1;
-  animator->timeout_id = 0;
   animator->playback_speed = 1.0;
 
   animator->privat = g_new (GnomeAnimatorPrivate, 1);
+  animator->privat->timeout_id = 0;
   animator->privat->offscreen_pixmap = NULL;
   animator->privat->background_pixmap = NULL;
+  animator->privat->first_frame = NULL;
+  animator->privat->last_frame = NULL;
+  animator->privat->current_frame = NULL;
 
   /* This allows us to "emulate" a transparent window, by making our
      background look exactly like the parent's background.  */
@@ -138,21 +159,19 @@ class_init (GnomeAnimatorClass *class)
 static void
 free_all_frames (GnomeAnimator *animator)
 {
-  if (animator->num_frames > 0)
+  GnomeAnimatorFrame *p = animator->privat->first_frame;
+
+  while (p != NULL)
     {
-      guint i;
+      GnomeAnimatorFrame *pnext;
 
-      for (i = 0; i < animator->num_frames; i++)
-        {
-          GnomeAnimatorFrame *frame = animator->frames + i;
+      if (p->pixmap != NULL)
+        gdk_imlib_free_pixmap (p->pixmap);
+      if (p->mask != NULL)
+        gdk_imlib_free_bitmap (p->mask);
 
-          if (frame->image != NULL)
-            gdk_image_destroy (frame->image);
-          if (frame->mask != NULL)
-            gdk_imlib_free_bitmap (frame->mask);
-        }
-
-      g_free (animator->frames);
+      pnext = p->next;
+      g_free (p);
     }
 }
 
@@ -309,16 +328,16 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 static void
 paint (GnomeAnimator *animator, GdkRectangle *area)
 {
-  if (animator->frames != NULL)
+  if (animator->num_frames > 0)
     {
-      GnomeAnimatorFrame *frame; 
-      GtkWidget *widget; 
+      GtkWidget *widget;
       GnomeAnimatorPrivate *privat;
+      GnomeAnimatorFrame *frame;
 
-      frame = (animator->frames + animator->current_frame_number);
       widget = GTK_WIDGET (animator);
       privat = animator->privat;
-      
+      frame = privat->current_frame;
+
       /* Update the window using double buffering to make the
          animation as smooth as possible.  */
 
@@ -335,12 +354,12 @@ paint (GnomeAnimator *animator, GdkRectangle *area)
       gdk_gc_set_clip_mask (widget->style->black_gc, frame->mask);
       gdk_gc_set_clip_origin (widget->style->black_gc,
                               frame->x_offset, frame->y_offset);
-      gdk_draw_image (privat->offscreen_pixmap,
-                      widget->style->black_gc,
-                      frame->image,
-                      area->x, area->y,
-                      frame->x_offset, frame->y_offset,
-                      frame->image->width, frame->image->height);
+      gdk_window_copy_area (privat->offscreen_pixmap,
+                            widget->style->black_gc,
+                            frame->x_offset, frame->y_offset,
+                            frame->pixmap,
+                            area->x, area->y,
+                            frame->width, frame->height);
       gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
 
       /* Copy the offscreen pixmap into the window.  */
@@ -405,14 +424,9 @@ update (GnomeAnimator *animator)
 
   if (GTK_WIDGET_REALIZED (widget))
     {
-      if (animator->frames != NULL)
+      if (animator->num_frames > 0)
         {
-          GnomeAnimatorFrame *frame;
-
-          frame = animator->frames + animator->current_frame_number;
-
           gdk_window_show (widget->window);
-
           gtk_widget_queue_draw (widget);
         }
       else
@@ -463,20 +477,33 @@ setup_window_and_style (GnomeAnimator *animator)
 static GnomeAnimatorFrame *
 append_frame (GnomeAnimator *animator)
 {
+  GnomeAnimatorPrivate *privat = animator->privat;
   GnomeAnimatorFrame *new_frame;
 
-  if (animator->frames == NULL)
-    animator->frames = g_new (GnomeAnimatorFrame, 1);
-  else
-    animator->frames = g_realloc (animator->frames,
-                                  (sizeof (GnomeAnimatorFrame)
-                                   * (animator->num_frames + 1)));
+  new_frame = g_new (GnomeAnimatorFrame, 1);
 
-  new_frame = animator->frames + animator->num_frames;
+  if (privat->first_frame == NULL)
+    {
+      privat->first_frame = privat->last_frame = privat->current_frame
+        = new_frame;
+      new_frame->prev = NULL;
+    }
+  else
+    {
+      privat->last_frame->next = new_frame;
+      new_frame->prev = privat->last_frame;
+      privat->last_frame = new_frame;
+    }
+
+  new_frame->next = 0;
   animator->num_frames++;
 
   return new_frame;
 }
+
+/* ------------------------------------------------------------------------- */
+
+/* Callbacks.  */
 
 static gint
 timer_cb (gpointer data)
@@ -496,7 +523,7 @@ parent_state_changed_cb (GtkWidget *widget, void *data)
   GnomeAnimator *animator;
 
   g_assert (GNOME_IS_ANIMATOR (widget));
-  
+
   animator = GNOME_ANIMATOR (widget);
   prepare_aux_pixmaps (animator);
   draw_background_pixmap (animator);
@@ -508,7 +535,7 @@ parent_style_set_cb (GtkWidget *widget, void *data)
   GnomeAnimator *animator;
 
   g_assert (GNOME_IS_ANIMATOR (widget));
-  
+
   animator = GNOME_ANIMATOR (widget);
   prepare_aux_pixmaps (animator);
   draw_background_pixmap (animator);
@@ -628,19 +655,13 @@ gnome_animator_append_frame_from_imlib_at_size (GnomeAnimator *animator,
   new_frame = append_frame (animator);
 
   gdk_imlib_render (image, width, height);
-  
-  pixmap = gdk_imlib_move_image (image);
 
-  /* FIXME: GDK always creates a non-SHM image this way!  A quick look
-     at the source reveals that GDK can do XShmPutImage, but not
-     XShmGetImage.  So either we get XImage support in Imlib, or this
-     needs to be fixed.  */
-  new_frame->image = gdk_image_get (pixmap, 0, 0, width, height);
-  
+  new_frame->pixmap = gdk_imlib_move_image (image);
   new_frame->mask = gdk_imlib_move_mask (image);
-  
-  gdk_imlib_free_pixmap (pixmap);
-  
+
+  new_frame->width = width;
+  new_frame->height = height;
+
   new_frame->x_offset = x_offset;
   new_frame->y_offset = y_offset;
 
@@ -728,6 +749,7 @@ gnome_animator_append_frames_from_imlib_at_size (GnomeAnimator *animator,
     {
       GdkImlibImage *tmp;
 
+      /* FIXME: This is slow.  */
       tmp = gdk_imlib_crop_and_clone_image (image, i, 0, x_unit,
                                             image->rgb_height);
       gnome_animator_append_frame_from_imlib_at_size (animator,
@@ -820,23 +842,26 @@ gnome_animator_append_frame_from_gnome_pixmap (GnomeAnimator *animator,
 {
   GnomeAnimatorFrame *new_frame;
   guint width, height;
-  
+
   g_return_val_if_fail (animator != NULL, FALSE);
   g_return_val_if_fail (pixmap != NULL, FALSE);
 
   new_frame = append_frame (animator);
 
-  gdk_window_get_size (pixmap->pixmap, &width, &height);
-  
-  new_frame->image = gdk_image_get (pixmap->pixmap, 0, 0, width, height);
-  
+  new_frame->pixmap = gdk_pixmap_ref (pixmap->pixmap);
+  gdk_window_get_size (new_frame->pixmap, &width, &height);
+
   if (pixmap->mask != NULL)
     new_frame->mask = gdk_bitmap_ref (pixmap->mask);
   else
     new_frame->mask = NULL;
-  
+
   new_frame->x_offset = x_offset;
   new_frame->y_offset = y_offset;
+
+  new_frame->width = width;
+  new_frame->height = height;
+
   new_frame->interval = interval;
 
   return TRUE;
@@ -847,7 +872,7 @@ gnome_animator_start (GnomeAnimator *animator)
 {
   g_return_if_fail (animator != NULL);
 
-  if (animator->frames != NULL)
+  if (animator->num_frames > 0)
     {
       animator->status = GNOME_ANIMATOR_STATUS_RUNNING;
 
@@ -862,7 +887,7 @@ gnome_animator_stop (GnomeAnimator *animator)
   g_return_if_fail (animator != NULL);
 
   if (animator->status == GNOME_ANIMATOR_STATUS_RUNNING)
-    gtk_timeout_remove (animator->timeout_id);
+    gtk_timeout_remove (animator->privat->timeout_id);
   animator->status = GNOME_ANIMATOR_STATUS_STOPPED;
 }
 
@@ -904,7 +929,6 @@ gnome_animator_advance (GnomeAnimator *animator, gint num)
            types.  */
         switch (animator->loop_type)
           {
-          default:
           case GNOME_ANIMATOR_LOOP_NONE:
             if (num < 0)
               new_frame = 0;
@@ -956,6 +980,12 @@ gnome_animator_advance (GnomeAnimator *animator, gint num)
             }
             stop = FALSE;
             break;
+          default:
+            g_error ("Unknown GnomeAnimatorLoopType %d",
+                     animator->loop_type);
+            stop = TRUE;
+            new_frame = animator->current_frame_number;
+            break;
           }
     }
 
@@ -967,33 +997,68 @@ gnome_animator_advance (GnomeAnimator *animator, gint num)
   return stop;
 }
 
-/* Jump to the specified `frame_number'.  This is also responsible for
-   setting up the timeout callback for this frame.  */
+/* Jump to the specified `frame_number'.  */
 void
 gnome_animator_goto_frame (GnomeAnimator *animator, guint frame_number)
 {
+  GnomeAnimatorPrivate *privat;
+  GnomeAnimatorFrame *frame;
+  gint dist1;
+  guint dist2;
+  guint i;
+
   g_return_if_fail (animator != NULL);
   g_return_if_fail (frame_number < animator->num_frames);
 
+  privat = animator->privat;
+
+  /* Try to be smart and minimize the number of steps spent walking in
+     the linked list.  */
+
+  dist1 = frame_number - animator->current_frame_number;
+  dist2 = animator->num_frames - 1 - frame_number;
+
+  if (frame_number < (guint) ABS (dist1) && frame_number < dist2)
+    {
+      frame = privat->first_frame;
+      for (i = 0; i < frame_number; i++)
+        frame = frame->next;
+    }
+  else if (dist2 < (guint) ABS (dist1))
+    {
+      frame = privat->last_frame;
+      for (i = 0; i < dist2; i++)
+        frame = frame->prev;
+    }
+  else
+    {
+      frame = privat->current_frame;
+      if (dist1 > 0)
+        for (i = 0; i < (guint) dist1; i++)
+          frame = frame->next;
+      else
+        for (i = 0; i < (guint) -dist1; i++)
+          frame = frame->prev;
+    }
+
   animator->current_frame_number = frame_number;
+  privat->current_frame = frame;
 
   update (animator);
 
   if (animator->status == GNOME_ANIMATOR_STATUS_RUNNING)
     {
       guint32 interval;
-      GnomeAnimatorFrame *frame;
 
-      if (animator->timeout_id != 0)
-        gtk_timeout_remove (animator->timeout_id);
+      if (privat->timeout_id != 0)
+        gtk_timeout_remove (privat->timeout_id);
 
-      frame = animator->frames + animator->current_frame_number;
       interval = (guint32) ((double) frame->interval
                             / animator->playback_speed + .5);
 
-      animator->timeout_id = gtk_timeout_add (interval,
-                                              timer_cb,
-                                              (gpointer) animator);
+      privat->timeout_id = gtk_timeout_add (interval,
+                                            timer_cb,
+                                            (gpointer) animator);
     }
 }
 

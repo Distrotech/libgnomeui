@@ -1,3 +1,37 @@
+1998-09-29  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-animator.h (struct _GnomeAnimator): Removed `frames'
+ 	field.  Type of `playback_speed' changed to gdouble.
+	(gnome_animator_get_playback_speed): Return value changed to
+ 	gdouble.
+
+	* gnome-animator.c: Updated to use GdkPixmaps instead of
+ 	GdkImages, and a linked list instead of a dynamic array.
+	(struct _GnomeAnimatorFrame): Added `width', `height', `prev' and
+ 	`next' fields.  `image' field replaced by a `pixmap' field.
+	(struct _GnomeAnimatorPrivate): `timeout_id' moved here from
+ 	`struct _GnomeAnimator'.  New fields `first_frame', `last_frame'
+ 	and `current_frame'.
+	(init): Initialize new fields in `GnomeAnimator' and
+ 	`GnomeAnimatorPrivate'.
+	(free_all_frames): Free the linked list.
+	(paint): Use the `current_frame' field in `GnomeAnimatorPrivate'
+ 	to get the current frame; updated to draw a GdkPixmap instead of a
+ 	GdkImage.
+	(append_frame): Updated to use the linked list.
+	(gnome_animator_append_frame_from_imlib_at_size): Create a
+ 	GdkPixmap, not a GdkImage.  Set the new `width' and `height'
+ 	fields.
+	(gnome_animator_stop): Take `timeout_id' from
+ 	`GnomeAnimatorPrivate'.
+	(gnome_animator_advance): Warn, with `g_error()', if the
+ 	GnomeAnimatorLoopType is unknown.
+	(gnome_animator_goto_frame): Updated to use the linked list.
+	(gnome_animator_append_frame_from_gnome_pixmap): Take the frame's
+ 	pixmap from the GnomePixmap widget by simply referencing it.  Set
+ 	`width' and `height' in the new frame according to the pixmap's
+ 	size.
+
 1998-09-29  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-mdi.c (gnome_mdi_get_view_from_window): New function.
@@ -100,12 +134,12 @@
 
 1998-09-27  Raja R Harinath  <harinath@cs.umn.edu>
 
-	`automake' 1.3b and older have a bug with handling continuation 
+	`automake' 1.3b and older have a bug with handling continuation
 	lines inside conditionals.
 	* Makefile.am (gtkcal_headers): Don't use continuation lines.
 	(gtkcal_sources): Likewise.
 	(EXTRA_libgnomeui_la_SOURCES): List gtkcalendar.[ch].
-	
+
 1998-09-28  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-messagebox.c (gnome_message_box_new): Fixed some memory
@@ -115,7 +149,7 @@
 
 	* gnome-scores.c (gnome_scores_set_colors,
 	gnome_socres_set_def_color, gnome_scores_new): Use unsigned ints
-	here. 
+	here.
 
 	* gnome-preferences.c (gnome_preferences_set_button_layout):
 	Unsigned int warning fix.
@@ -157,7 +191,7 @@ Sun Sep 27 16:54:33 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 1998-09-27  Michael Lausch  <mla@gams.at>
 
-	* gnome-canvas.c (gnome_canvas_item_reparent): new function. Moves 
+	* gnome-canvas.c (gnome_canvas_item_reparent): new function. Moves
 	a canvas_item from one canvas_item_group to another.
 
 1998-09-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -212,8 +246,8 @@ Wed Sep 23 17:04:05 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	(BUILT_SOURCES): Add `gnome-stock-imlib.h'.
 	(gnome-stock-imlib.h): Don't use wildcards, use $(stock_images).
 
-	* Makefile.am (libgnomeui_la_SOURCES): 
-	Remove `pixmaps/gnome-stock-imlib.h'. 
+	* Makefile.am (libgnomeui_la_SOURCES):
+	Remove `pixmaps/gnome-stock-imlib.h'.
 
 Sun Sep 20 18:40:44 1998  John Ellis  <johne@bellatlantic.net>
 
@@ -267,17 +301,17 @@ Sat Sep 19 12:47:35 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	gtk_signal_connect_full() instead of gtk_signal_connect_interp(),
 	since the latter is obsolete (but works anyway...).
 
-	* stock_demo.c: 
-	* gnome-stock.c: 
-	* gnome-number-entry.c: 
-	* gnome-init.c: 
-	* gnome-dialog.h: 
-	* gnome-dialog.c: 
-	* gnome-dentry-edit.c: 
-	* gnome-client.c (gnome_client_init): 
-	* gnome-calculator.c: 
-	* gnome-app.c: 
-	* libgnomeui.h: Removed occurrences of #ifdef GTK_HAVE_FEATURES_1_1_0.  
+	* stock_demo.c:
+	* gnome-stock.c:
+	* gnome-number-entry.c:
+	* gnome-init.c:
+	* gnome-dialog.h:
+	* gnome-dialog.c:
+	* gnome-dentry-edit.c:
+	* gnome-client.c (gnome_client_init):
+	* gnome-calculator.c:
+	* gnome-app.c:
+	* libgnomeui.h: Removed occurrences of #ifdef GTK_HAVE_FEATURES_1_1_0.
 	We require it, anyways.
 
 	* Makefile.am: Moved all the conditional canvas files into the
@@ -322,9 +356,9 @@ Sat Sep 19 12:47:35 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	(setup_accelerator): Added an argument for the signal name.
 	(gnome_app_fill_toolbar gnome_app_fill_toolbar_custom): New public
 	functions to fill toolbars from a GnomeUIInfo array.
-	(gnome_app_create_toolbar): 
-	(gnome_app_create_toolbar_interp): 
-	(gnome_app_create_toolbar_with_data): 
+	(gnome_app_create_toolbar):
+	(gnome_app_create_toolbar_interp):
+	(gnome_app_create_toolbar_with_data):
 	(gnome_app_create_toolbar_custom): Make these functions use the
 	new fill_toolbar ones.
 	Removed the old #ifdef'ed functions.
@@ -392,7 +426,7 @@ Tue Sep 15 11:22:24 1998  Owen Taylor  <otaylor@redhat.com>
 Sat Sep 12 13:50:29 1998 Paul Sheer <psheer@obsidian.co.za>
 
 	* gtkcauldron.c: Added inline labels: specified as text between
-	an `(' and a `)' with no space between the `(' and the first 
+	an `(' and a `)' with no space between the `(' and the first
 	text character.
 
 	* gtkcauldron.c: Added scrollable frames: specify with the v and
@@ -409,7 +443,7 @@ Sat Sep 12 13:50:29 1998 Paul Sheer <psheer@obsidian.co.za>
 	* gnome-mdi.c, gnome-mdi-child.c: changed some GTK_TYPE_POINTERs
 	in parameters passed to gtk_signal_new() to gtk_widget_get_type()
 	calls.
-	
+
 1998-09-11  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-child.c (gnome_mdi_child_set_name): moved the
@@ -423,7 +457,7 @@ Sat Sep 12 13:50:29 1998 Paul Sheer <psheer@obsidian.co.za>
 	callbacks are passed a pointer to the MDI as data. in a similar
 	manner the child specific menus' callbacks are passed a pointer to
 	the child.
-	
+
 1998-09-09  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-gtk-utils.h: Cleanup. Added copyright (FSF? I guess so.)
@@ -434,7 +468,7 @@ Sat Sep 12 13:50:29 1998 Paul Sheer <psheer@obsidian.co.za>
 1998-09-09  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-dentry-edit.c: Protect inclusion of `gnomesupport.h' with
-	NEED_GNOMESUPPORT_H. 
+	NEED_GNOMESUPPORT_H.
 
 Tue Sep  8 22:54:31 1998  Tom Tromey  <tromey@cygnus.com>
 
@@ -523,9 +557,9 @@ Wed Aug 26 00:50:27 1998  Tom Tromey  <tromey@cygnus.com>
 	Fixed a bug waiting to happen on my previous change: Specifically,
 	UI-properties would have been the only victim (change of the style
 	of a gnome-propertybox while using it).
-	
+
 	* gnome-propertybox.c (gnome_property_box_init): Implement support
-	for OK/CANCEL/HELP vs OK/APPLY/CLOSE/HELP modes. 
+	for OK/CANCEL/HELP vs OK/APPLY/CLOSE/HELP modes.
 
 	* gnome-preferences.c (gnome_preferences_load): Activate the code
 	for the preference dialog box configuration.
@@ -537,7 +571,7 @@ Wed Aug 26 00:50:27 1998  Tom Tromey  <tromey@cygnus.com>
 
 Mon Aug 24 22:51:50 1998  Owen Taylor  <otaylor@redhat.com>
 
-	* gtk-socket.c (gtk_socket_realize): Use 
+	* gtk-socket.c (gtk_socket_realize): Use
 	gtk_widget_get_parent_window() to get the parent window.
 
 Mon Aug 24 19:01:02 1998  Owen Taylor  <otaylor@redhat.com>
@@ -559,7 +593,7 @@ Mon Aug 24 23:43:47 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	* gnome-app.c (gnome_app_rightclick_menubar,
 	gnome_app_rightclick_toolbar):  Make the handleboxes reparent on
 	double click.
-	
+
 Mon Aug 24 07:53:53 1998  Tim Janik  <timj@gtk.org>
 
 	* gnome-canvas.c (gnome_canvas_item_construct): added a
@@ -628,7 +662,7 @@ Thu Aug 20 15:44:22 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_filter_func): Small
 	improvement to CreateNotify handling.
-	
+
 Thu Aug 20 15:23:58 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_filter_func): We seem to
@@ -637,7 +671,7 @@ Thu Aug 20 15:23:58 1998  Owen Taylor  <otaylor@redhat.com>
 
 Wed Aug 19 18:21:24 1998  Owen Taylor  <otaylor@redhat.com>
 
-	* gtk-socket.c: Don't process focus requests when we don't have 
+	* gtk-socket.c: Don't process focus requests when we don't have
 	have a plug.
 
 Wed Aug 19 13:33:31 EDT 1998 The Rasterman <raster@redhat.com>
@@ -649,7 +683,7 @@ Wed Aug 19 13:33:31 EDT 1998 The Rasterman <raster@redhat.com>
 
 	* gnome-propertybox.c (gnome_property_box_append_page): Wonder why
 	this routine was tagged as deprecated.  Make it legal to use
-	again. 
+	again.
 
 1998-08-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -690,7 +724,7 @@ Wed Aug 12 18:33:15 EDT 1998 Gregory McLean <gregm@comstar.net>
 
 Wed Aug 12 14:48:24 1998  Owen Taylor  <otaylor@redhat.com>
 
-	* gnome-stock-imlib.h: Made all gnome stock pixmaps 
+	* gnome-stock-imlib.h: Made all gnome stock pixmaps
 	  const. (Makes >100k more memory shared between gnome apps)
 
 Wed Aug 12 18:01:30 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
@@ -708,7 +742,7 @@ Tue Aug 11 23:35:58 1998  Jonathan Blandford <jrb@mit.edu>
 	canvas->current_item to the grabbed item to force events to go to
 	it.
 
-	* gnome-canvas-widget.h: 
+	* gnome-canvas-widget.h:
 	* gnome-canvas-line.h:
 	* gnome-canvas-image.h:
 	* gnome-canvas-text.h:
@@ -735,10 +769,10 @@ Sun Aug 09 14:37:58 1998  George Lebl  <jirka@5z.com>
 
 1998-08-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_reconfigure): 
-	* gnome-canvas-text.c (gnome_canvas_text_reconfigure): 
-	* gnome-canvas-image.c (gnome_canvas_image_reconfigure): 
-	* gnome-canvas-line.c (gnome_canvas_line_reconfigure): 
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_reconfigure):
+	* gnome-canvas-text.c (gnome_canvas_text_reconfigure):
+	* gnome-canvas-image.c (gnome_canvas_image_reconfigure):
+	* gnome-canvas-line.c (gnome_canvas_line_reconfigure):
 	* gnome-canvas-widget.c (gnome_canvas_widget_reconfigure): Call
 	the parent class reconfigure method at the start of the overriden
 	method.
@@ -749,11 +783,11 @@ Sun Aug 09 14:37:58 1998  George Lebl  <jirka@5z.com>
 	* gnome-mdi.h: changed the GnomeMDIMode enums a bit: this requires
 	recompiling any apps using MDI.
 	* gnome-mdi.c: take UI properties into account.
-	
+
 1998-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* gnome-canvas-line.c: 
-	* gnome-canvas-image.c: 
+	* gnome-canvas-line.c:
+	* gnome-canvas-image.c:
 	* gnome-canvas-text.c:
 	* gnome-canvas-rect-ellipse.c: Call the parent class
 	realize/unrealize/map/unmap methods in the overriden methods.
@@ -769,8 +803,8 @@ Wed Aug  5 12:47:01 1998  Owen Taylor  <otaylor@redhat.com>
 	  is not allowed to changed it's requisition during the
 	  realize() method. Moved initial pixmap setting into
 	  new(). (Past changes have eliminated the need to
-	  have everything realized first.) This should keep 
-	  gtk_vbox_size_allocate() from getting confused. But  
+	  have everything realized first.) This should keep
+	  gtk_vbox_size_allocate() from getting confused. But
 	  the entire widget needs to be rewritten from scratch,
 	  as a bin instead of the current GtkVBox hack.
 
@@ -790,7 +824,7 @@ Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 	  the accelerator group - GTK+ handles it for us.
 
 	* gnome-app.c gnome-app-helper.c: Added gtk-1.1 code to check
-	  if AccelGroup is already attached before attaching it 
+	  if AccelGroup is already attached before attaching it
 	  again.
 
 1998-08-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -804,10 +838,10 @@ Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* libgnomeui.h: #include "gnome-number-entry.h"
 
-	* gnome-canvas.c (gnome_canvas_button): 
-	(gnome_canvas_motion): 
-	(gnome_canvas_expose): 
-	(gnome_canvas_key): 
+	* gnome-canvas.c (gnome_canvas_button):
+	(gnome_canvas_motion):
+	(gnome_canvas_expose):
+	(gnome_canvas_key):
 	(gnome_canvas_crossing): Only do stuff if the event window is the
 	same as the canvas->layout.bin_window.
 
@@ -859,8 +893,8 @@ Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 	before doing any of the stuff.
 	(gnometypebuiltins{.h,_vars.c,_ids.c,_evals.c}: Likewise.
 	* makeenums.pl (parse_entries): `srcdir' is now not passed in the
-	environment. 
-	
+	environment.
+
 1998-07-31  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_set_scroll_region):
@@ -893,7 +927,7 @@ Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 	(find_page_by_widget): new private convenience function.
 	* gnome-mdi-child.c (gnome_mdi_child_set_name): call
 	gnome_mdi_update_child().
-	
+
 1998-07-30  Mark Crichton  <crichton@expert.cc.purdue.edu>
 
 	* gnome-popupmenu.c (gnome_app_create_popup_menus_custom):
@@ -1037,12 +1071,12 @@ Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 	* gnome-canvas.c (gnome_canvas_item_shutdown): Only
 	unmap/unrealize the item if appropriate.
 
-	* gnome-canvas.c (gnome_canvas_group_realize): 
-	(gnome_canvas_group_unrealize): 
-	(gnome_canvas_group_map): 
+	* gnome-canvas.c (gnome_canvas_group_realize):
+	(gnome_canvas_group_unrealize):
+	(gnome_canvas_group_map):
 	(gnome_canvas_group_unmap): Use the realized/mapped flags to see
 	which children to operate on.
-	
+
 	* gnome-canvas.c (gnome_canvas_item_shutdown): Unmap/unrealize the
 	item before unparenting it.
 	(group_remove): Rewrote for sanity's sake.
@@ -1114,13 +1148,13 @@ Sun Jul 26 13:31:27 1998  Tom Tromey  <tromey@cygnus.com>
 
 Fri Jul 24 19:54:43 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-scores.c (gnome_scores_new): Use construct to set 
+	* gnome-scores.c (gnome_scores_new): Use construct to set
 	the title and buttons.
 
-        * gnome-app-util.c: Switch to parented dialogs. 
-	
-	* gnome-dialog-util.h, gnome-dialog-util.c: Added "parented" 
-	versions of these. The old versions are not really necessary 
+        * gnome-app-util.c: Switch to parented dialogs.
+
+	* gnome-dialog-util.h, gnome-dialog-util.c: Added "parented"
+	versions of these. The old versions are not really necessary
 	anymore because you can just pass NULL for parent, but they
 	save typing I guess.
 
@@ -1130,14 +1164,14 @@ Fri Jul 24 19:54:43 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c (gnome_dialog_newv): Remove unused variable.
 	(gnome_dialog_set_parent): New function, allows setting a parent
-	the dialog should be centered over.	
+	the dialog should be centered over.
 
 Sat Jul 25 02:51:12 1998  Simon Kagedal  <simon@sdf.se>
- 
+
  	* gnome-scores.c, gnome-scores.h:
  	made the GnomeScore dialog inherit from GnomeDialog
- 	instead of GtkWindow	
-	
+ 	instead of GtkWindow
+
 1998-07-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (emit_event): When there is a grabbed item, the
@@ -1184,7 +1218,7 @@ Thu Jul 23 00:59:23 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
   	<libgnomeui/gnome-pixmap.h>
 
 	* gnome-pixmap.h: #include gnome-defs.h so that this file
-	can be included without the rest of libgnomeui (e.g. in 
+	can be included without the rest of libgnomeui (e.g. in
 	gnome--)
 
 1998-07-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -1289,8 +1323,8 @@ Sat Jul 18 20:26:40 1998  John Ellis  <johne@bellatlantic.net>
 Sat Jul 18 12:42:09 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c (gnome_dialog_constructv): Use append_button,
-	not append_buttons without NULL termination. 
-	(gnome_dialog_construct): Same.	
+	not append_buttons without NULL termination.
+	(gnome_dialog_construct): Same.
 	(gnome_dialog_new): Reverted last change. Use the construct
  	function rather than cut-and-pasting it.
 
@@ -1331,7 +1365,7 @@ Thu Jul 16 23:14:00 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-about.h, gnome-about.c (gnome_about_new):
  	const-correctness.
 	(gnome_about_construct): new function.
-	
+
 1998-07-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Do not reset
@@ -1350,9 +1384,9 @@ Wed Jul 15 22:31:58 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-popupmenu.h, gnome-popupmenu.c (__GNOME_POPUPMENU_H__):
  	added include guards, and LGPL. The author needs to put in the
-	copyright owner, I didn't want to assume FSF. 
+	copyright owner, I didn't want to assume FSF.
 
-        * gnome-appbar.c (entry_insert_text_cb): Don't use 
+        * gnome-appbar.c (entry_insert_text_cb): Don't use
 	gtk_editable_get_position with Gtk 1.0
 
 1998-07-15  Raja R Harinath  <harinath@cs.umn.edu>
@@ -1411,7 +1445,7 @@ Tue Jul 14 22:47:33 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-app.h, gnome-app.c, gnome-dialog.h, gnome-dialog.c:
 	Added "construct" functions. The gnome-dialog one takes a va_list
-	which is kind of weird; if there's a good alternative I'd like 
+	which is kind of weird; if there's a good alternative I'd like
 	to use it instead.
 
 1998-07-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -1446,21 +1480,21 @@ Sun Jul 12 22:57:55 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-appbar.h, gnome-appbar.c: Try implementing interactive
 	minibuffer with a GtkEntry hack. It doesn't work so good; think of
 	it as a prototype.
-	* gnome-types.h: GnomePreferencesType enum 
+	* gnome-types.h: GnomePreferencesType enum
 	* gnome-dialog-util.c: Use set_modal instead of grab_add for modal
 	dialogs; this fixes a bug (the "modal" dialogs weren't).
 
 Fri Jul 10 10:19:38 1998  Tim Janik  <timj@gtk.org>
 
-	* gnome-app-helper.c (gnome_app_do_menu_creation): 
-	* gnome-stock.c (gnome_stock_menu_item): 
+	* gnome-app-helper.c (gnome_app_do_menu_creation):
+	* gnome-stock.c (gnome_stock_menu_item):
 	create GtkAccelLabel if GTK_HAVE_ACCEL_GROUP, so accelerators are
 	visible.
 
 Fri Jul 10 08:08:45 1998  Tim Janik  <timj@gtk.org>
 
 	* gnome-canvas.c:
- 	(gnome_canvas_item_new): 
+ 	(gnome_canvas_item_new):
 	(gnome_canvas_item_set): adapted the argument collection and setting
  	code to work with the recent gtk changes.
 
@@ -1473,7 +1507,7 @@ Fri Jul 10 08:08:45 1998  Tim Janik  <timj@gtk.org>
 	in these handlers.
 	* gnome-mdi.c (rootwin_drop): open the new GnomeApp at the
 	position of the mouse pointer.
-	
+
 1998-07-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_scroll_to): New public function to
@@ -1507,10 +1541,10 @@ Fri Jul 10 08:08:45 1998  Tim Janik  <timj@gtk.org>
 
 	* gnome-canvas-image.[ch]: New imlib image type for the canvas.
 
-	* libgnomeui.h: 
+	* libgnomeui.h:
 	* Makefile.am: Added gnome-canvas-image.[ch].
 
-	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_realize): 
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_realize):
 	* gnome-canvas-text.c (gnome_canvas_text_realize): Call the
 	reconfigure method instead of the explicit function.
 
@@ -1547,12 +1581,12 @@ Mon Jul  6 22:46:58 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-app.c: #ifdef GTK_RELIEF_NONE around toolbar relief stuff.
 	* gnome-preferences.c: I mispelled the menubar handlebox config
 	key.
-	
+
 1998-07-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): can look for separators.
 	* gnome-mdi.c: some bugfixes.
-	
+
 Sun Jul  5 18:12:24 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-client.c (master_environment): Removed DISPLAY, HOME,
@@ -1562,7 +1596,7 @@ Sun Jul  5 18:12:24 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-mdi.[ch]: added child_changed signal and did some extensive
 	code clean-up ;).
-	
+
 1998-07-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): added a
@@ -1579,7 +1613,7 @@ Sun Jul  5 18:12:24 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-canvas-text.c: New text item for the canvas, still not finished.
 
-	* libgnomeui.h: 
+	* libgnomeui.h:
 	* Makefile.am: Added gnome-canvas-text.[ch].
 
 1998-07-05  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
@@ -1598,17 +1632,17 @@ Sun Jul  5 18:12:24 1998  Tom Tromey  <tromey@cygnus.com>
 
 Fri Jul  3 16:51:31 CDT 1998  Richard Hestilow  <hestgray@ionet.net>
 
-	* gnome-app.c (gnome_app_set_toolbar) : Added check for 
+	* gnome-app.c (gnome_app_set_toolbar) : Added check for
 	Gtk+ support of relief features. (GTK_HAVE_RELIEF_STYLE)
 
 Mon Jun 29 14:10:48 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-preferences.h, gnome-preferences.c 
+	* gnome-preferences.h, gnome-preferences.c
 	(gnome_preferences_get_toolbar_relief,
 	gnome_preferences_set_toolbar_relief): Whether the toolbar buttons
 	have the beveled edge.
 	* gnome-app.c (gnome_app_set_toolbar): Turn off the toolbar button
-	relief if user requested it. 
+	relief if user requested it.
 	* gnome-preferences.c (gnome_preferences_load): Oops, forgot to
 	push a new prefix for the GnomeApp stuff, it was being saved under
 	Dialog prefs.
@@ -1639,14 +1673,14 @@ Thu Jul  2 14:12:14 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	gnome_mdi_get_active_view() (or mdi->active_view) and
 	VIEW_GET_CHILD() macro should be used to get the pointer
 	to the GnomeMDIChild in callbacks.
-	
+
 1998-07-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_shutdown): Implemented
 	shutdown method, mostly stolen from GtkWidget.
 	(gnome_canvas_item_set): Request redraw and repick.
 	(gnome_canvas_item_setv): likewise
-	(gnome_canvas_item_move): likewise 
+	(gnome_canvas_item_move): likewise
 
 	Implemented reference counting for items.  It is still missing in
 	several places.
@@ -1744,7 +1778,7 @@ Mon Jun 29 03:04:30 1998  Havoc Pennington  <hp@pobox.com>
 
 Mon Jun 29 02:58:15 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-preferences.h, gnome-preferences.c 
+	* gnome-preferences.h, gnome-preferences.c
 	(gnome_preferences_get_toolbar_handlebox,
 	gnome_preferences_set_toolbar_handlebox,
 	gnome_preferences_get_menubar_handlebox,
@@ -1775,7 +1809,7 @@ Mon Jun 29 00:35:47 1998  Havoc Pennington  <hp@pobox.com>
 	ui-properties doesn't allow you to turn on interactive statusbar
 	yet, so all the functions should be usable if possibly buggy.
 	Also, many of the functions changed to return the dialog created.
-	* gnome-app.c: Initialize the statusbar member to NULL.	
+	* gnome-app.c: Initialize the statusbar member to NULL.
 	* gnome-preferences.h, gnome-preferences.c: Add statusbar
  	vs. dialog options.
 	* libgnomeui.h: Add gnome-app-util.h
@@ -1795,7 +1829,7 @@ Mon Jun 29 00:35:47 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-mdi-child.[ch]: removed declaration of non-existing
 	gnome_mdi_get_views() and removed some other stale stuff.
-	
+
 1998-06-28  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-scores.c: Included 'gnome-i18nP.h' instead of 'gnome-i18n.h'.
@@ -1840,10 +1874,10 @@ Thu Jun 18 23:52:04 1998  George Lebl  <jirka@5z.com>
 	* gnome-number-entry.c: Fixup includes.
 
 1998-06-18  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
- 	
+
 	* gnome-app-helper.c: changed gnome_app_add_[radio|help]_menu_entries() to
 	return new pos so that insertion works properly.
-	
+
 Thu Jun 18 02:47:26 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-number-entry.[ch]: new entry type modeled after file
@@ -1861,7 +1895,7 @@ Tue Jun 16 15:35:01 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dentry-edit.h, gnome-dentry-edit.c, gnome-icon-sel.h,
 	gnome-icon-sel.c: New files.
-	* gnome-pixmap.h, gnome-pixmap.c (gnome_pixmap_new_from_file, 
+	* gnome-pixmap.h, gnome-pixmap.c (gnome_pixmap_new_from_file,
 	gnome_pixmap_new_from_file_at_size, load_file,
 	gnome_pixmap_load_file, gnome_pixmap_load_file_at_size):
 	const char * for filename arguments.
@@ -1894,7 +1928,7 @@ Sat Jun 13 16:46:18 1998  Tom Tromey  <tromey@cygnus.com>
 
 1998-06-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* gnome-calculator.c: 
+	* gnome-calculator.c:
 	* gnome-properties.c: #include <config.h>
 
 	* gnome-pixmap.[ch]: Removed the *old* gnome_pixmap_* functions
@@ -1920,7 +1954,7 @@ Wed Jun 10 13:07:09 EDT 1998 Gregory McLean <gregm@comstar.net>
 
 	* Wheee libgnomeui now compiles (with the exception of the
 	  canvas stuff) under 1.0.x again. It also compiles under 1.1
-	  for thoose of you that like to bleed. Please please if you 
+	  for thoose of you that like to bleed. Please please if you
 	  add code that _requires_ gtk 1.1 shield it with HAVE_DEVGTK
 	  so us boring folks can continue to get stuff done.
 
@@ -1932,7 +1966,7 @@ Mon Jun  8 20:11:52 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dateedit.c: #include <stdlib.h> for atoi.
 	(day_selected): use g_snprintf, sprintf was undeclared.
-	
+
 	* gnome-mdi-child.c (gnome_mdi_child_destroy): Use g_free, free
 	was undeclared.
 	(gnome_mdi_child_set_name): Use g_strdup, g_free.
@@ -1945,9 +1979,9 @@ Mon Jun  8 20:11:52 1998  Havoc Pennington  <hp@pobox.com>
 	(app_set_active_view): Slight rewrites for "assignment in
 	conditional" warning.
 	(top_add_view): Same.
-	(gnome_mdi_add_child): Use return_val_if_fail, for checks. 
+	(gnome_mdi_add_child): Use return_val_if_fail, for checks.
 	(gnome_mdi_remove_child): Same, and a couple unused variables.
-	
+
 	* gnome-stock.c (gnome_pixmap_button): Use g_snprintf, fixes
 	warning about undeclared sprintf.
 
@@ -1959,7 +1993,7 @@ Mon Jun  8 19:27:17 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-less.h, gnome-less.c: Changed error handling; rather than
 	have the widget report errors, return FALSE from show functions if
 	there is an error and set errno if applicable.
-	(gnome_less_show_file): add return value. 
+	(gnome_less_show_file): add return value.
 	(gnome_less_show_command): add return value.
 	(gnome_less_show_filestream): add return value. Use fgets instead
 	of fread because a book I have here says fread isn't portable. (?)
@@ -1969,7 +2003,7 @@ Mon Jun  8 19:27:17 1998  Havoc Pennington  <hp@pobox.com>
 	(gnome_less_write_fd): New, for file descriptor.
 	(gnome_less_set_font): Put in header, no longer static. Set
 	arbitrary font.
-	(gnome_less_set_fixed_font): allow turning fixed font on and off. 
+	(gnome_less_set_fixed_font): allow turning fixed font on and off.
 	(gnome_less_reshow): Reshow contents with current font, etc.
 	(gnome_less_fixed_font): Deprecated warning.
 
@@ -1985,13 +2019,13 @@ Mon Jun  8 19:19:24 1998  Havoc Pennington  <hp@pobox.com>
 
 Mon Jun  8 19:10:24 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-geometry.h, gnome-geometry.c (gnome_geometry_string): 
+	* gnome-geometry.h, gnome-geometry.c (gnome_geometry_string):
 	New function gets a geometry string which describes a GdkWindow.
 	Code comes from gnomecal.
 	(gnome_parse_geometry): Use the glib types instead of standard C
 	types, since I had to include gdk anyway for GdkWindow. Also, fix
 	spelling of a variable name.
-	
+
 1998-06-08 Arturo Espinosa Aldama <arturo@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (gnome_app_do_menu_creation): The support for
@@ -2096,7 +2130,7 @@ Thu Jun  4 14:53:55 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 1998-06-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* libgnomeui.h: 
+	* libgnomeui.h:
 	* Makefile.am: Removed the canvas stuff from these files, for the
 	upcoming release which will use gtk-1.0.4.  The canvas needs the
 	development branch of Gtk.
@@ -2108,7 +2142,7 @@ Thu Jun  4 14:53:55 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	not to SIGSEGV at separators in menus. Also added a call to
 	gtk_widget_queue_resize() on the parent widget at the end of
 	insertion or removal!
-	
+
 1998-06-01  Seth Alves  <alves@twitch.hungry.com>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): if path is empty,
@@ -2129,7 +2163,7 @@ Mon Jun  1 17:48:28 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	gnome_app_insert_menus_* routines. For the time being they
 	dont set or remove accelerators, since I had no idea how to
 	handle this - especially removal.
-	
+
 1998-05-31  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-about.c: Include "libgnome/gnome-i18nP.h" instead of
@@ -2163,10 +2197,10 @@ Mon Jun  1 17:48:28 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	GNOME_APP_UI_JUSTIFY_RIGHT that notifies app-helper routines that
 	all the menu items from now on should be right justified. This
 	should prove useful for adding help menu to the menubar.
-	
+
 	* gnome-app-helper.c (gnome_app_do_menu_creation): take care
 	of handling GNOME_APP_UI_JUSTIFY_RIGHT GnomeUIInfoType.
-	
+
 1998-05-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c gnome-canvas.h: The GnomeCanvas widget!  This is
@@ -2196,12 +2230,12 @@ Mon, 25 May 1998 10:55:37 +0200 Paolo Molaro <lupus@debian.org>
 
 Sat May 25  1:58:00 1998  Cesar Miquel  <miquel@df.uba.ar>
 
-	* gnome-about.c Applied a patch provided by Changwoo Ryu 
-	<cwryu@adam.kaist.ac.kr> that makes the gnome_about_new's 
+	* gnome-about.c Applied a patch provided by Changwoo Ryu
+	<cwryu@adam.kaist.ac.kr> that makes the gnome_about_new's
 	"logo" argument more convenient to use. It:
 
  		1) Uses gdk_imlib.  Goodbye, xpm.
-		2) Find the logo file in the pixmap 
+		2) Find the logo file in the pixmap
 		   directory (by gnome_pixmap_file).
 
 Sat May 23 21:55:41 1998  Havoc Pennington  <hp@pobox.com>
@@ -2215,10 +2249,10 @@ Sat May 23 21:55:41 1998  Havoc Pennington  <hp@pobox.com>
 	gtk_main_quit() when a button is clicked to avoid piling up
 	gtk_main's and cause the function to actually return. Call
 	gtk_widget_show on the dialog if it has not yet been shown. Use a
-	define instead of -1 for invalid button. 
+	define instead of -1 for invalid button.
 	(gnome_dialog_set_modal): Make it work if the widget has already
 	been shown.
-	
+
 	* gnome-dialog.h: Updated a couple of comments.
 	(GnomeDialogButton): Removed unused typedef.
 
@@ -2343,7 +2377,7 @@ Wed May 20 17:30:19 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	(adjust_scrollbars): now properly adjusts scrollbars when the
 	viewed area expands beyond icon list's width or height due to
 	some change.
-	
+
 Tue May 19 21:38:15 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.c (gnome_pixmap_button): New function. Returns a button
@@ -2375,12 +2409,12 @@ Tue May 19 21:38:15 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	gmc's gtrans.c code here.  Some more code reuse.
 	(gnome_icon_layout_text): The split routine should be improved to
 	split on various other characters to give us a better layout than
-	we currently have. 
+	we currently have.
 
-	Implemented icons with wrapped text. 
+	Implemented icons with wrapped text.
 
 Sun May 17 16:00:21 1998  Havoc Pennington  <hp@pobox.com>
-	
+
 	* gnome-dialog.h, gnome-dialog.c (gnome_dialog_editable_enters):
 	New function, call this if your dialog contains an editable to
 	keep the editable from disabling the Return keyboard shortcut
@@ -2423,7 +2457,7 @@ Sat May 16 16:02:38 1998  Havoc Pennington  <hp@pobox.com>
  	in setup; it needs to be shown *after* the pages are added to
  	it. This makes desktop-properties come up much more nicely.
 	(gnome_property_configurator_destroy): Don't destroy the property
- 	box in _destroy(); it destroys itself on close. 
+ 	box in _destroy(); it destroys itself on close.
 
 Sat May 16 02:12:43 1998  Tom Tromey  <tromey@cygnus.com>
 
@@ -2459,7 +2493,7 @@ Sat May 16 02:12:43 1998  Tom Tromey  <tromey@cygnus.com>
 	not unselect other selected icons. this seems more appropriate to me.
 	* gnome-icon-list.c: changed all initializations of last_selected member from -1 to 0.
 	This prevents segfaults when SHIFT-selecting before any icons have been selected.
-	
+
 Thu May 14 12:31:28 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-dialog.c (gnome_dialog_close): changed type of close_handled
@@ -2486,13 +2520,13 @@ Tue May 12 00:33:10 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-preferences.h, gnome-preferences.c: Hmm, I didn't think
 	about that earlier attempt much. This should work a little better.
-	* testgnome.c: Barest skeletal start. 
+	* testgnome.c: Barest skeletal start.
 
 Sat May  9 15:55:48 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-dialog-util.h, gnome-dialog-util.c: gnome-app-util had 
+	* gnome-dialog-util.h, gnome-dialog-util.c: gnome-app-util had
 	some internal functions to quickly pop up some common dialogs;
-	so I put them here for anyone to use. Probably bloat, if they 
+	so I put them here for anyone to use. Probably bloat, if they
 	weren't used in gnome-app-util anyway.
 	* gnome-app-util.c: #include without the libgnomeui prefix.
 	 Remove most of the code and put it in gnome-dialog-util.c.
@@ -2505,12 +2539,12 @@ Sat May  9 15:55:48 1998  Havoc Pennington  <hp@pobox.com>
 1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-client.c (default_client_init): Use the new macro
-	GTK_HAVE_SIGNAL_INIT 
+	GTK_HAVE_SIGNAL_INIT
 
 1998-05-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkcalendar.c (gtk_calendar_thaw): Added freeze/thaw
-	functionality. 
+	functionality.
 
 Fri May  8 10:06:01 1998  Tom Tromey  <tromey@cygnus.com>
 
@@ -2539,7 +2573,7 @@ Thu May  7 19:13:33 1998  Havoc Pennington  <hp@pobox.com>
 	when the font is changed.
 	* TODO: Check this item off.
 	* gnome-preferences.h: Fiddled around, not important.
-	
+
 Thu May  7 15:47:21 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-about.c (gnome_about_new): Use set_close instead of
@@ -2571,7 +2605,7 @@ Wed May  6 18:54:54 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-app-util.h, gnome-app-util.c: Started on the
 	dialog/statusbar abstraction; status bar part doesn't work
 	yet.
-	* gnome-preferences.h: Define sections and keys for use in 
+	* gnome-preferences.h: Define sections and keys for use in
 	libgnomeui global preferences.
 
 Wed May  6 01:29:33 1998  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
@@ -2579,7 +2613,7 @@ Wed May  6 01:29:33 1998  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 	* gnome-app.[ch]: added gnome_app_set_statusbar() function
 	which simply allows for insertion of another widget in the
 	bottom row of the table.
-	
+
 Sun May  3 10:56:50 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-ice.c (ice_tag): Removed.
@@ -2590,17 +2624,17 @@ Fri May  1 02:52:27 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-dialog.h, gnome-dialog.c: Revert to 1.3 and 1.7
 	respectively, before any accelerator/destroy changes.
 	* gnome-propertybox.c: Revert to 1.8 accordingly.
-	
+
 Fri May  1 02:04:06 1998  Havoc Pennington  <hp@pobox.com>
 
         * gnome-dialog.c (gnome_dialog_clicked): Revert to old destroy
- 	behavior.  
+ 	behavior.
 
 	* gnome-dialog.c (gnome_dialog_key_pressed): Return TRUE if the
  	event was handled (???). Mostly it shouldn't really make a
  	difference though, for this function. Disable Escape functionality
  	for now.
-	
+
 Thu Apr 30 23:13:31 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.[ch]: added an accelerator table and
@@ -2615,7 +2649,7 @@ Thu Apr 30 21:31:43 1998  Tom Tromey  <tromey@cygnus.com>
 
 Thu Apr 30 23:25:19 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-dialog.h (struct _GnomeDialog): New member, 
+	* gnome-dialog.h (struct _GnomeDialog): New member,
 	GtkAcceleratorTable * accelerators
 	* gnome-dialog.h (gnome_dialog_set_accelerator): New function, EZ
  	way to connect an accelerator to a button.
@@ -2625,13 +2659,13 @@ Thu Apr 30 23:25:19 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-propertybox.c (just_close): Use gnome_dialog_close.
 	* gnome-dialog.c: Use gnome-uidefs rather than custom
 	button/border sizes. Implement new gnome-dialog.h interfaces.
-	* gnome-dialog.c (gnome_dialog_key_pressed): New function, 
+	* gnome-dialog.c (gnome_dialog_key_pressed): New function,
 	gnome_dialog_close if GDK_Escape is pressed, otherwise
 	call parent's key_press_event handler.
 	* gnome-dialog.c (gnome_dialog_class_init):
 	widget_class->key_press_event = gnome_dialog_key_pressed;
 	* gnome-dialog.c (gnome_dialog_init): Create accelerator table.
-	* gnome-dialog.c (gnome_dialog_button_clicked): Use 
+	* gnome-dialog.c (gnome_dialog_button_clicked): Use
 	gnome_dialog_closed() to self destruct.
 	* gnome-dialog.c (gnome_dialog_destroy): Unref accelerator table.
 
@@ -2641,7 +2675,7 @@ Thu Apr 30 21:31:43 1998  Tom Tromey  <tromey@cygnus.com>
 
 1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gtkcalendar.c: return meaningful values from most routines.  
+	* gtkcalendar.c: return meaningful values from most routines.
 
 Thu Apr 30 11:45:38 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
@@ -2661,10 +2695,10 @@ Thu Apr 30 00:48:54 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-less.h, gnome-less.c: Added simple widget to display a
  	file or command output. GtkText wrapper. Not included in Makefile
-	due to feature freeze. 
+	due to feature freeze.
 	* gnome-uidefs.h: Added GNOME_BUTTON_WIDTH, GNOME_BUTTON_HEIGHT.
 	Shouldn't break anything.
-	
+
 1998-04-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-color-selector.c (gnome_color_selector_button_clicked):
@@ -2704,13 +2738,13 @@ Sun Apr 26 15:40:48 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 Sun Apr 26 00:18:02 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-dialog.c (gnome_dialog_init): Pack the dialog's vbox 
+	* gnome-dialog.c (gnome_dialog_init): Pack the dialog's vbox
 	with expand set to TRUE.
 
 1998-04-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-entry.c (gnome_file_entry_init): Undo the emission of
-	a signal on content change, as GtkText already emitted "changed". 
+	a signal on content change, as GtkText already emitted "changed".
 
 Sat Apr 25 14:04:55 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
@@ -2749,10 +2783,10 @@ Wed Apr 22 19:29:49 1998  Havoc Pennington  <hp@pobox.com>
 1998-04-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-calculator.c (gnome_calculator_class_init): Register the
-	signals. 
+	signals.
 
 	* gnome-file-entry.c (gnome_file_entry_init): Added emission of a
-	signal when the information on the entry changes. 
+	signal when the information on the entry changes.
 
 Wed Apr 22 16:47:49 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
@@ -2761,7 +2795,7 @@ Wed Apr 22 16:47:49 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 1998-04-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-calculator.c (gnome_calculator_init): Add padding to
-	calculator buttons. 
+	calculator buttons.
 
 	* gtkcalendar.c (gtk_calendar_select_day): Call
 	gtk_calendar_compute_days every time when selecting a day and a
@@ -2779,7 +2813,7 @@ Tue Apr 21 00:04:28 1998  George Lebl  <jirka@5z.com>
 1998-04-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-calculator.c (gnome_calculator_init): Added
-	internationalization. 
+	internationalization.
 
 	* gnome-app-helper.h (GNOMEUIINFO_ITEM_STOCK): New macro, this one
 	uses STOCK pixmaps.
@@ -2798,17 +2832,17 @@ Sat Apr 18 16:32:09 1998  George Lebl  <jirka@5z.com>
 
 Fri Apr 17 19:42:54 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-appsmenu.h: #define GNOME_APPS_MENU_DENTRY_DIR_EXTENSION 
+	* gnome-appsmenu.h: #define GNOME_APPS_MENU_DENTRY_DIR_EXTENSION
 
-	* gnome-appsmenu.c: Saving works now, mostly. Successfully loaded 
+	* gnome-appsmenu.c: Saving works now, mostly. Successfully loaded
 	system menu, saved in .gnome, reloaded, displayed.
 	(GNOME_APPS_MENU_DEBUG_PRINT): debugging macro
-	(g_extract_file): New, reverse of g_concat_dir_and_file (may move 
+	(g_extract_file): New, reverse of g_concat_dir_and_file (may move
 	to gnome-util along with get_extension, is_dotfile?).
 	(dentry_save_func): Implemented.
 	(is_dotfile): Oops, didn't stop at first path separator. Fixed.
 	(gnome_apps_menu_new_from_file): optimized to immediately ignore
-	backup files.	
+	backup files.
 	(gnome_apps_menu_save): Made to work, previously it saved the
  	.directory file in the wrong directory and got confused. Still
  	does symlinks wrong I think (like ftw(), potentially traverses
@@ -2834,17 +2868,17 @@ Fri Apr 17 16:03:36 1998  Havoc Pennington  <hp@pobox.com>
 	(dentry_save_func): New function, just a stub.
 	(gnome_apps_menu_new_from_file): new function.
 	(gnome_apps_menu_load): destroy empty menu, and return NULL,
-	rather than return an empty menu.	
+	rather than return an empty menu.
 	(gnome_apps_menu_save): Removed use of ftw(). Get name of
  	directory AppsMenu and create a matching filesystem
  	directory. Delete empty filesystem directories. Delete old backup
  	files. Still doesn't work, some kind of memory corruption, and
  	likely fails on symlinks or other weird situations.
 	(gnome_apps_menu_new): Init vtable.
-	
+
 1998-04-17  Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
-	* gtkcalendar.[hc]: display option GTK_CALENDAR_NO_MONTH_CHANGE to 
+	* gtkcalendar.[hc]: display option GTK_CALENDAR_NO_MONTH_CHANGE to
 	avoid undesired month changings.
 
 1998-04-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -2868,7 +2902,7 @@ Thu Apr 16 02:06:07 1998  Havoc Pennington  <hp@pobox.com>
 	* gnome-appsmenu.h, gnome-appsmenu.c: Renamed "variety" to
 	"class" throughout, for clarity. Starting on using a vtable
 	instead of whatever dumb thing I was doing.
-	(GnomeAppsMenuGtkMenuItemFunc): Replaced by 
+	(GnomeAppsMenuGtkMenuItemFunc): Replaced by
 	GnomeAppsMenuSetupFunc, this is more versatile and works
 	with GtkTree or whatever as well. Uses of GtkMenuItemFunc
 	changed appropriately.
@@ -2909,13 +2943,13 @@ Wed Apr 15 00:57:30 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h (GNOME_APPS_MENU_IS_DENTRY): Removed unused
  	macros for identifying .desktop-based menus, according to new "no
- 	special cases" policy.	
+ 	special cases" policy.
 
 1998-04-15  Arturo Espinosa Aldama  <arturo@nuclecu.unam.mx>
 
 	* gtkcalendar.c (gtk_calendar_size_allocate): just an if to
 	avoid a warning when not using the header window.
-	
+
 	* gtkcalendar.c (gtk_calendar_select_day): another if for added
 	functionality: gtk_calendar_select_day (my_widget, 0) now eliminates
 	any selected day in the calendar. This was already possible, but
@@ -2978,7 +3012,7 @@ Tue Apr 14 10:27:25 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h, gnome-appsmenu.c: Fixed many little glitches,
 	after first compilation attempt. Compiles, doesn't work. Copyright
-	changed to FSF. 
+	changed to FSF.
 
 Mon Apr 13 00:43:32 1998  George Lebl  <jirka@5z.com>
 
@@ -3026,12 +3060,12 @@ Sat Apr 11 14:20:26 1998  Havoc Pennington  <hp@pobox.com>
 
 Sat Apr 11 11:35:24 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-appsmenu.h, gnome-appsmenu.c 
+	* gnome-appsmenu.h, gnome-appsmenu.c
 	(gnome_apps_menu_load_system, gnome_apps_menu_load_default):
 	Two new functions.
 	(GnomeAppsMenuVariety): moved from .h to .c
 	(gnome_apps_menu_variety_new): also moved
-	
+
 1998-04-10  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-app-helper.h (GnomeUIInfoType): New type, extracted from
@@ -3052,7 +3086,7 @@ Sat Apr 11 11:35:24 1998  Havoc Pennington  <hp@pobox.com>
 
 Fri Apr 10 00:14:03 1998  Havoc Pennington  <hp@pobox.com>
 
-	* gnome-appsmenu.h (gnome_apps_menu_variety_new): 
+	* gnome-appsmenu.h (gnome_apps_menu_variety_new):
 	New function.
 	* gnome-appsmenu.c: Continued implementation. Variety
 	registration is done, load and GtkMenu creation isn't.
@@ -3060,7 +3094,7 @@ Fri Apr 10 00:14:03 1998  Havoc Pennington  <hp@pobox.com>
 Thu Apr  9 23:25:29 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h: Added basic menu-manipulation functions.
-	* gnome-appsmenu.c: New file, began implementation. 
+	* gnome-appsmenu.c: New file, began implementation.
 	Doesn't work yet.
 
 Thu Apr  9 22:12:49 1998  Havoc Pennington  <hp@pobox.com>
@@ -3071,13 +3105,13 @@ Wed Apr  8 19:17:18 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c, gnome-messagebox.c: Use gnome-uidefs.h
 	* libgnomeui.h: #include gnome-uidefs.h
-	* gnome-uidefs.h: New file. 
+	* gnome-uidefs.h: New file.
 
 1998-04-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtk-ted.c (lift_me): I never thought that
 	gtk_signal_emit_stop_by_name was so easy to use :-).
-	This means, GtkTed is now back to functional for GUI editing. 
+	This means, GtkTed is now back to functional for GUI editing.
 
 	(gtk_ted_setup_layout): Handle the case where the widgets do no
 	longer exist in the code, but the layout file still has
@@ -3086,16 +3120,16 @@ Wed Apr  8 19:17:18 1998  Havoc Pennington  <hp@pobox.com>
 	(gtk_ted_init_divisions): New routine, now when editing an
 	existing dialog box, the correct number of control rows/columns
 	are created.
-	
+
 Mon Apr  6 13:10:43 CDT 1998 Havoc Pennington  <hp@pobox.com>
 
 	* gnome-about.h (GnomeAboutButton): typedef removed.
 	* gnome-about.h (GNOME_ABOUT_BUTTON_WIDTH,
 	GNOME_ABOUT_BUTTON_HEIGHT): defines removed.
-	* gnome-about.h, gnome-about.c: GnomeAbout now derives from 
-	GnomeDialog. 
+	* gnome-about.h, gnome-about.c: GnomeAbout now derives from
+	GnomeDialog.
 	* gnome-about.c: Unused signal enum removed.
-	* gnome-about.c (parent_class): Unused global variable 
+	* gnome-about.c (parent_class): Unused global variable
 	removed.
 	* gnome-about.c: Removed button-creating code, since
 	GnomeDialog handles it.
@@ -3104,34 +3138,34 @@ Mon Apr  6 13:10:43 CDT 1998 Havoc Pennington  <hp@pobox.com>
 	* gnome-about.c: Removed border-width code; use default
 	border from GnomeDialog.
 	* gnome-about.c (gnome_destroy_about): Fixed memory leak;
-	function freed uninitialized tmp variable rather than 
+	function freed uninitialized tmp variable rather than
 	gai->names. Removed tmp declaration.
 	* libgnomeui.h: #include <libgnomeui/gnome-dialog.h>
 	* gnome-net.h: use BEGIN_GNOME_DECLS
 	* gnome-net.c (gnome_net_gets): changed if (errno = EAGAIN)
-	to if (errno == EAGAIN). 
-	* gnome-about.c, gnome-net.c, gnome-scores.c, 
+	to if (errno == EAGAIN).
+	* gnome-about.c, gnome-net.c, gnome-scores.c,
 	gnome-propertybox.c: #include specific headers, not <gnome.h>
 	* gnome-propertybox.c, gnome-messagebox.c, gnome-dialog.c:
 	Removed i18n defines; will use new private header.
 	* gnome-actionarea.h: Added a "deprecated" comment.
 	* gnome-dialog.h, gnome-dialog.c (gnome_dialog_set_sensitive):
 	New function to set button sensitivity.
-	* gnome-propertybox.h, gnome-propertybox.c: Now derives from 
+	* gnome-propertybox.h, gnome-propertybox.c: Now derives from
 	GnomeDialog.
 	* gnome-propertybox.c (GNOME_PAD): Removed this #define.
 	* gnome-propertybox.c (dialog_clicked_cb): new function.
 	* gnome-propertybox.c: Changed signature of previous button
-	callbacks. They are now called from dialog_clicked_cb, so 
+	callbacks. They are now called from dialog_clicked_cb, so
 	they have no button argument.
-	* gnome-propertybox.c (gnome_property_box_init): Don't set 
+	* gnome-propertybox.c (gnome_property_box_init): Don't set
 	up button box or vbox, since GnomeDialog now handles that.
 	* gnome-propertybox.c (global_apply): return if
-	property_box->items == NULL. Initialize variable 'item' to 
+	property_box->items == NULL. Initialize variable 'item' to
 	NULL, to make -Wall happy.
-	* gnome-dialog.c (gnome_dialog_button_clicked): Since 
-	PropertyBox destroyed itself when this function emitted 
-	"clicked", and this function then tried to look at a 
+	* gnome-dialog.c (gnome_dialog_button_clicked): Since
+	PropertyBox destroyed itself when this function emitted
+	"clicked", and this function then tried to look at a
 	GnomeDialog struct member, there was a bug. Fixed.
 	* gnome-propertybox.c (gnome_property_box_init): Don't do
 	the 3D frame, since GnomeDialog handles it.
@@ -3145,7 +3179,7 @@ Mon Apr  6 13:10:43 CDT 1998 Havoc Pennington  <hp@pobox.com>
 
 Mon Apr 06 00:57:23 1998  George Lebl  <jirka@5z.com>
 
-	* gtk-{plug,socket}.[ch]: updated to owen's 
+	* gtk-{plug,socket}.[ch]: updated to owen's
 	  plugsocket v0.2
 
 Fri Apr  3 23:29:11 1998  Havoc Pennington <hp@pobox.com>
@@ -3179,14 +3213,14 @@ Fri Apr  3 23:29:11 1998  Havoc Pennington <hp@pobox.com>
 1998-04-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-dateedit.c, gnome-dateedit.h: New widget for editing a
-	date/time. 
+	date/time.
 
 	* gtkcalendar.c (gtk_calendar_class_init): Declare signal
-	"day_selected"; 
+	"day_selected";
 	(gtk_calendar_marshall_date): Marshaller for new signal.
 	(gtk_calendar_main_button): when a click happens in a day, emit
 	the signal day_changed.
-	
+
 1998-04-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtkcalendar.[ch]: Updated to latest version from gcalendar
@@ -3195,7 +3229,7 @@ Fri Apr  3 23:29:11 1998  Havoc Pennington <hp@pobox.com>
 1998-03-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkcalendar.c: Added Shawn's and Cesar's calendar widget to the
-	gnome-libs. 
+	gnome-libs.
 
 1998-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -3231,7 +3265,7 @@ Sat Mar 28 18:12:33 CET 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome_segv.c: included "config.h"
 	(main): Added i18n.
-	
+
 1998-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.h: New files gnome-icon-list.[ch].  This
@@ -3609,9 +3643,9 @@ Sat Mar  7 16:40:08 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.c (create_pixmap_from_data): use
 	gnome_pixmap_new_from_xpm_d_at_size.
-	
+
 	* gnome-stock.h: added new stock icons: print, search, back, forward.
-	
+
 	* gnome-stock-{imlib,xpm}.h: added tigert's icons.
 
 	* stock_demo.c: included new icons
@@ -3702,7 +3736,7 @@ Thu Feb 26 18:07:40 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
         * gnome-stock.[ch]: New tb_scores pixmap for the games.
 
         * gnome-about.c (gnome_about_new): Now uses a stock button for OK.
-	
+
 1998-02-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (gnome_app_add_radio_toolbar_entries): Use
@@ -3745,7 +3779,7 @@ Thu Feb 26 18:07:40 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	(load_xpm_d): New internal function.
 	(load_rgb_d): Likewise.
 
-	* gnome-app-helper.c (gnome_app_do_toolbar_creation): Use 
+	* gnome-app-helper.c (gnome_app_do_toolbar_creation): Use
 	gnome_pixmap_new_from_file() widget instead of
 	gnome_create_pixmap_widget().  I did not replace the
 	g_c_p_widget_d() call because GnomePixmap does not support
@@ -3802,7 +3836,7 @@ Thu Feb 26 18:07:40 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* Gnome-entry.c: First usable version of the GnomeEntry widget.
 
-	* gnome-startup.c: 
+	* gnome-startup.c:
 	* gnome-client.c: Added #include <string.h>
 
 	* libgnomeui.h: Added gnome-entry.h to the includes list.
@@ -3833,7 +3867,7 @@ Wed Feb 18 13:52:00 PST 1998  Christoph Toshok  <toshok@hungry.com>
 	all of them, so the left side of the labels line up.
 	(gnome_app_do_toolbar_creation): Use gnome_stock_pixmap_widget_new
 	to create the toolbar button.
-	
+
 Wed Feb 18 17:03:13 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gnome-about.c (gnome_destroy_about): Fixed refcounting.
@@ -3862,7 +3896,7 @@ Tue Feb 17 00:16:49 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 	functions.
 
 	* gtkrc: New file, the global gtk+ rc file of GNOME.
-	* Makefile.am: Added gtkrc. 
+	* Makefile.am: Added gtkrc.
 
 1998-02-17  Eckehard Berns <eb@berns.prima.de>
 
@@ -3910,7 +3944,7 @@ Sat Feb 14 17:15:18 1998  Tom Tromey  <tromey@cygnus.com>
 1998-02-15  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.h: Two arguments were named 'id'.  This broke
-	the objectiv-c interface, so I named them 'client_id' and 
+	the objectiv-c interface, so I named them 'client_id' and
 	'user_id'.
 
 1998-02-14  Christoph Toshok <toshok@hungry.com>
@@ -3928,7 +3962,7 @@ Sat Feb 14 17:15:18 1998  Tom Tromey  <tromey@cygnus.com>
 	(gnome_app_do_toolbar_create): analogous change for toolbars.
 	* gnome-app-helper.h: wrap with BEGIN_GNOME_DECLS/END_GNOME_DECLS
 	and add GNOME_APP_MENU_HELP enum.
-	
+
 1998-02-14  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* libgnomeui.h: includes the new session management
@@ -3974,7 +4008,7 @@ Fri Feb 13 19:03:21 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 Fri Feb 13 18:23:02 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-messagebox.c: Message boxes now take a variable number of
-	arguments instead of having 3 options at most. 
+	arguments instead of having 3 options at most.
 
 Fri Feb 13 18:09:46 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
