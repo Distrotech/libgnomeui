@@ -1,3 +1,8 @@
+2002-04-09  Jeroen Zwartepoorte  <jeroen@xs4all.nl>
+
+	* libgnomeui/gnome-dateedit.c: (gnome_date_edit_class_init): Removed
+	unused widget_class variable.
+
 2002-04-08  Wayne Schuller  <k_wayne@linuxpower.org>
  
  	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_init): 
