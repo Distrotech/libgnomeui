@@ -1,3 +1,7 @@
+Sun Aug 13 17:07:15 2000  George Lebl <jirka@5z.com>
+
+	* gnome-animator.c: Add REVERT and RETAIN modes of animation.
+
 2000-08-07  Karl Eichwalder  <ke@suse.de>
 
 	* gnome-ditem-edit.c (fill_dnd_page): Beautify string.

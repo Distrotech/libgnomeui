@@ -23,7 +23,7 @@
   @NOTATION@
  */
 
-#include <config.h>
+/*#include <config.h>*/
 #include <gtk/gtkmain.h>
 #include "gnome-animator.h"
 
@@ -301,6 +301,76 @@ draw_background_pixbuf (GnomeAnimator * animator)
     }
 }
 
+
+static GdkPixbuf *
+get_current_frame (GnomeAnimator *animator, int *x_offset, int *y_offset)
+{
+	GnomeAnimatorFrame *frame, *framei;
+	GdkPixbuf *pixbuf;
+	guchar *pixels;
+	int rowstride;
+
+	*x_offset = 0;
+	*y_offset = 0;
+
+	frame = animator->_priv->current_frame;
+	if(frame->prev == NULL ||
+	   frame->prev->action == GDK_PIXBUF_FRAME_DISPOSE) {
+		*x_offset = frame->x_offset;
+		*y_offset = frame->y_offset;
+
+		return gdk_pixbuf_ref (frame->pixbuf);
+	}
+
+	/* This not incredibly efficent and is done for each frame,
+	 * sometime in the future someone should make this efficent
+	 * I guess but I doubt it will ever be a problem */
+
+	pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
+				 animation->_priv->area.width,
+				 animation->_priv->area.height);
+
+	pixels = gdk_pixbuf_get_pixels (pixbuf);
+	rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+
+	/* FIXME: is 0 full transparency or opaqueness? I always get confused */
+	memset(pixels, 0, rowstride * animation->_priv->area.height);
+
+	framei = frame->prev;
+	while (framei->prev != NULL) {
+		if (framei->action == GDK_PIXBUF_FRAME_DISPOSE)
+			break;
+		framei = frame->prev;
+	}
+
+	while (frame != framei) {
+		if (framei->action != GDK_PIXBUF_FRAME_REVERT)
+			gdk_pixbuf_composite(framei->pixbuf,
+					     pixbuf,
+					     framei->x_offset,
+					     framei->y_offset,
+					     gdk_pixbuf_get_width(framei->pixbuf),
+					     gdk_pixbuf_get_height(framei->pixbuf),
+					     0, 0, 1, 1,
+					     GDK_INTERP_NEAREST,
+					     255);
+
+		framei = framei->next;
+	}
+
+	gdk_pixbuf_composite(frame->pixbuf,
+			     pixbuf,
+			     frame->x_offset,
+			     frame->y_offset,
+			     gdk_pixbuf_get_width(frame->pixbuf),
+			     gdk_pixbuf_get_height(frame->pixbuf),
+			     0, 0, 1, 1,
+			     GDK_INTERP_NEAREST,
+			     255);
+
+	return pixbuf;
+}
+
 /*
  * Call draw_background_pixbuf(), then draw background_pixbuf onto
  * the window.
@@ -333,10 +403,7 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
       draw_background_pixbuf (animator);
     }
 
-  draw_source = animator->_priv->current_frame->pixbuf;
-
-  x_off = animator->_priv->current_frame->x_offset;
-  y_off = animator->_priv->current_frame->x_offset;
+  draw_source = get_current_frame (animator, &x_off, &y_off);
 
   width = gdk_pixbuf_get_width (draw_source);
   height = gdk_pixbuf_get_height (draw_source);
@@ -358,6 +425,7 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
     {
       GnomeAnimatorFrame *frame;
 
+      /*FIXME: deal with mask for other then _DISPOSE modes */
       frame = _priv->current_frame;
 
       /* Update the window using double buffering to make the
@@ -474,6 +542,8 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
   else
     gdk_window_clear_area (widget->window,
 			   area->x, area->y, area->width, area->height);
+
+  gdk_pixbuf_unref (draw_source);
 }
 
 static gint
