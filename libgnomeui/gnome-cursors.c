@@ -24,6 +24,7 @@
 #endif
 
 #include <gnome.h>
+#include <gconf/gconf-client.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdkx.h>
 
@@ -597,13 +598,32 @@ static void
 build_cursor_table (void)
 {
 	int i;
+	GConfError *err = NULL;
+	GConfClient *client;
 
         g_assert (cursortable == NULL);
-        
+
+	/* Get the main gnome gconf client */
+        client = gnome_get_gconf_client (); 
+
 	cursortable = g_hash_table_new (g_str_hash, g_str_equal);
 	
-	for (i = 0; i < num_default_cursors; i++)
-		gnome_stock_cursor_register (&default_cursors[i]);
+	for (i = 0; i < num_default_cursors; i++){
+		char *name = default_cursors[i].cursorname;
+		char *key, *cursorstr;
+
+		/* Build key */
+		key = g_strconcat ("/desktop/gnome/cursors/", name, NULL);
+		cursorstr = gconf_client_get_string (client, key, &err);
+		if (cursorstr) {
+			gnome_stock_cursor_register (&default_cursors[i]);
+		} else {
+			gnome_stock_cursor_register (&default_cursors[i]);
+		}
+		
+		g_free (key);
+		g_free (cursorstr);
+	}
 }
 
 
