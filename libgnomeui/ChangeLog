@@ -1,3 +1,17 @@
+1998-02-23  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c (gnome_default_client_init): New function.
+  	Creates a new client without connection to a session manager.
+  	This client is called the 'default client'. (Not used yet)
+	(default_client_connect): New callback function.  This callback is
+ 	registered to the connect signal of the default client and sets
+ 	the SM_CLIENT_ID property to the gdk client leader window.
+	(default_client_disconnect): New callback function.  Removes
+ 	SM_CLIENT_ID property.
+	(gnome_get_default_client): New function.
+
+	* gnome-app-helper.h: Removed comma in pixmap_type.
+
 1998-02-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-entry.c (entry_activated): Now the GnomeEntry pushes a
