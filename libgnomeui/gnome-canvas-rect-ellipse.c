@@ -268,11 +268,10 @@ set_outline_gc_width (GnomeCanvasRE *re)
 		width = (int) re->width;
 	else
 		width = (int) (re->width * re->item.canvas->pixels_per_unit + 0.5);
-	
+
 	gdk_gc_set_line_attributes (re->outline_gc, width,
 				    GDK_LINE_SOLID, GDK_CAP_PROJECTING, GDK_JOIN_MITER);
 }
-
 
 static void
 gnome_canvas_re_set_fill (GnomeCanvasRE *re, gboolean fill_set)
@@ -298,35 +297,38 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasItem *item;
 	GnomeCanvasRE *re;
 	GdkColor color = { 0, 0, 0, 0, };
-	
+	GdkColor *pcolor;
+	int have_pixel;
+
 	item = GNOME_CANVAS_ITEM (object);
 	re = GNOME_CANVAS_RE (object);
-	
+	have_pixel = FALSE;
+
 	switch (arg_id) {
 	case ARG_X1:
 		re->x1 = GTK_VALUE_DOUBLE (*arg);
-		
+
 		gnome_canvas_item_request_update (item);
 		break;
-		
+
 	case ARG_Y1:
 		re->y1 = GTK_VALUE_DOUBLE (*arg);
-		
+
 		gnome_canvas_item_request_update (item);
 		break;
-		
+
 	case ARG_X2:
 		re->x2 = GTK_VALUE_DOUBLE (*arg);
-		
+
 		gnome_canvas_item_request_update (item);
 		break;
-		
+
 	case ARG_Y2:
 		re->y2 = GTK_VALUE_DOUBLE (*arg);
-		
+
 		gnome_canvas_item_request_update (item);
 		break;
-		
+
 	case ARG_FILL_COLOR:
 	case ARG_FILL_COLOR_GDK:
 	case ARG_FILL_COLOR_RGBA:
@@ -337,34 +339,48 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 				gnome_canvas_re_set_fill (re, TRUE);
 			else
 				gnome_canvas_re_set_fill (re, FALSE);
+
 			re->fill_color = ((color.red & 0xff00) << 16 |
 					  (color.green & 0xff00) << 8 |
 					  (color.blue & 0xff00) |
 					  0xff);
 			break;
+
 		case ARG_FILL_COLOR_GDK:
-			gnome_canvas_re_set_fill (re, GTK_VALUE_BOXED (*arg) != NULL);
-			if (GTK_VALUE_BOXED (*arg))
-				color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+			pcolor = GTK_VALUE_BOXED (*arg);
+			gnome_canvas_re_set_fill (re, pcolor != NULL);
+
+			if (pcolor) {
+				color = *pcolor;
+				gdk_color_context_query_color (item->canvas->cc, &color);
+				have_pixel = TRUE;
+			}
+
 			re->fill_color = ((color.red & 0xff00) << 16 |
 					  (color.green & 0xff00) << 8 |
 					  (color.blue & 0xff00) |
 					  0xff);
 			break;
+
 		case ARG_FILL_COLOR_RGBA:
 			gnome_canvas_re_set_fill (re, TRUE);
 			re->fill_color = GTK_VALUE_UINT (*arg);
 			break;
 		}
-#ifdef VERBOSE			       
+#ifdef VERBOSE
 		g_print ("re fill color = %08x\n", re->fill_color);
 #endif
-		re->fill_pixel = gnome_canvas_get_color_pixel (item->canvas, re->fill_color);
+		if (have_pixel)
+			re->fill_pixel = color.pixel;
+		else
+			re->fill_pixel = gnome_canvas_get_color_pixel (item->canvas, re->fill_color);
+
 		if (!item->canvas->aa)
 			set_gc_foreground (re->fill_gc, re->fill_pixel);
+
 		gnome_canvas_item_request_redraw_svp (item, re->fill_svp);
 		break;
-		
+
 	case ARG_OUTLINE_COLOR:
 	case ARG_OUTLINE_COLOR_GDK:
 	case ARG_OUTLINE_COLOR_RGBA:
@@ -375,20 +391,29 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 				gnome_canvas_re_set_outline (re, TRUE);
 			else
 				gnome_canvas_re_set_outline (re, FALSE);
+
 			re->outline_color = ((color.red & 0xff00) << 16 |
 					     (color.green & 0xff00) << 8 |
 					     (color.blue & 0xff00) |
 					     0xff);
 			break;
+
 		case ARG_OUTLINE_COLOR_GDK:
-			gnome_canvas_re_set_outline (re, GTK_VALUE_BOXED (*arg) != NULL);
-			if (GTK_VALUE_BOXED (*arg))
-				color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+			pcolor = GTK_VALUE_BOXED (*arg);
+			gnome_canvas_re_set_outline (re, pcolor != NULL);
+
+			if (pcolor) {
+				color = *pcolor;
+				gdk_color_context_query_color (item->canvas->cc, &color);
+				have_pixel = TRUE;
+			}
+
 			re->outline_color = ((color.red & 0xff00) << 16 |
 					     (color.green & 0xff00) << 8 |
 					     (color.blue & 0xff00) |
 					     0xff);
 			break;
+
 		case ARG_OUTLINE_COLOR_RGBA:
 			gnome_canvas_re_set_outline (re, TRUE);
 			re->outline_color = GTK_VALUE_UINT (*arg);
@@ -397,42 +422,47 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #ifdef VERBOSE
 		g_print ("re outline color %x %x %x\n", color.red, color.green, color.blue);
 #endif
-		re->outline_pixel = gnome_canvas_get_color_pixel (item->canvas, re->outline_color);
+		if (have_pixel)
+			re->outline_pixel = color.pixel;
+		else
+			re->outline_pixel = gnome_canvas_get_color_pixel (item->canvas,
+									  re->outline_color);
+
 		if (!item->canvas->aa)
 			set_gc_foreground (re->outline_gc, re->outline_pixel);
+
 		gnome_canvas_item_request_redraw_svp (item, re->outline_svp);
 		break;
-		
+
 	case ARG_FILL_STIPPLE:
 		if (!item->canvas->aa)
 			set_stipple (re->fill_gc, &re->fill_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+
 		break;
-		
+
 	case ARG_OUTLINE_STIPPLE:
 		if (!item->canvas->aa)
 			set_stipple (re->outline_gc, &re->outline_stipple, GTK_VALUE_BOXED (*arg), FALSE);
 		break;
-		
+
 	case ARG_WIDTH_PIXELS:
 		re->width = GTK_VALUE_UINT (*arg);
 		re->width_pixels = TRUE;
 		if (!item->canvas->aa)
 			set_outline_gc_width (re);
-		
+
 		gnome_canvas_item_request_update (item);
-		
 		break;
-		
+
 	case ARG_WIDTH_UNITS:
 		re->width = fabs (GTK_VALUE_DOUBLE (*arg));
 		re->width_pixels = FALSE;
 		if (!item->canvas->aa)
 			set_outline_gc_width (re);
-		
+
 		gnome_canvas_item_request_update (item);
-		
 		break;
-		
+
 	default:
 		break;
 	}
@@ -525,7 +555,7 @@ gnome_canvas_re_update_shared (GnomeCanvasItem *item, double *affine, ArtSVP *cl
 		set_stipple (re->fill_gc, &re->fill_stipple, re->fill_stipple, TRUE);
 		set_stipple (re->outline_gc, &re->outline_stipple, re->outline_stipple, TRUE);
 		set_outline_gc_width (re);
-	} 
+	}
 
 #ifdef OLD_XFORM
 	recalc_bounds (re);
@@ -712,7 +742,7 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int
 	y1 = c1.y;
 	x2 = c2.x;
 	y2 = c2.y;
-	
+
 	if (re->fill_set) {
 		if (re->fill_stipple)
 			gnome_canvas_set_stipple_origin (item->canvas, re->fill_gc);
@@ -1031,11 +1061,11 @@ gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, 
 	y1 = c1.y;
 	x2 = c2.x;
 	y2 = c2.y;
-	
+
 	if (re->fill_set) {
 		if (re->fill_stipple)
 			gnome_canvas_set_stipple_origin (item->canvas, re->fill_gc);
-		
+
 		gdk_draw_arc (drawable,
 			      re->fill_gc,
 			      TRUE,

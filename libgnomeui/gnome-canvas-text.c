@@ -486,10 +486,15 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasItem *item;
 	GnomeCanvasText *text;
 	GdkColor color = { 0, 0, 0, 0, };
-	gboolean color_changed = FALSE;
+	GdkColor *pcolor;
+	gboolean color_changed;
+	int have_pixel;
 
 	item = GNOME_CANVAS_ITEM (object);
 	text = GNOME_CANVAS_TEXT (object);
+
+	color_changed = FALSE;
+	have_pixel = FALSE;
 
 	switch (arg_id) {
 	case ARG_TEXT:
@@ -584,22 +589,22 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		text->clip_height = fabs (GTK_VALUE_DOUBLE (*arg));
 		recalc_bounds (text);
 		break;
-		
+
 	case ARG_CLIP:
 		text->clip = GTK_VALUE_BOOL (*arg);
 		recalc_bounds (text);
 		break;
-		
+
 	case ARG_X_OFFSET:
 		text->xofs = GTK_VALUE_DOUBLE (*arg);
 		recalc_bounds (text);
 		break;
-		
+
 	case ARG_Y_OFFSET:
 		text->yofs = GTK_VALUE_DOUBLE (*arg);
 		recalc_bounds (text);
 		break;
-		
+
         case ARG_FILL_COLOR:
 		if (GTK_VALUE_STRING (*arg))
 			gdk_color_parse (GTK_VALUE_STRING (*arg), &color);
@@ -609,22 +614,27 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			      0xff);
 		color_changed = TRUE;
 		break;
-		
+
 	case ARG_FILL_COLOR_GDK:
-		if (GTK_VALUE_BOXED (*arg))
-			color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+		pcolor = GTK_VALUE_BOXED (*arg);
+		if (pcolor) {
+			color = *pcolor;
+			gdk_color_context_query_color (item->canvas->cc, &color);
+			have_pixel = TRUE;
+		}
+
 		text->rgba = ((color.red & 0xff00) << 16 |
 			      (color.green & 0xff00) << 8 |
 			      (color.blue & 0xff00) |
 			      0xff);
 		color_changed = TRUE;
 		break;
-		
+
         case ARG_FILL_COLOR_RGBA:
 		text->rgba = GTK_VALUE_UINT (*arg);
 		color_changed = TRUE;
 		break;
-		
+
 	case ARG_FILL_STIPPLE:
 		set_stipple (text, GTK_VALUE_BOXED (*arg), FALSE);
 		break;
@@ -632,11 +642,16 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	default:
 		break;
 	}
-	
+
 	if (color_changed) {
-		text->pixel = gnome_canvas_get_color_pixel (item->canvas, text->rgba);
+		if (have_pixel)
+			text->pixel = color.pixel;
+		else
+			text->pixel = gnome_canvas_get_color_pixel (item->canvas, text->rgba);
+
 		if (item->canvas->aa)
 			set_text_gc_foreground (text);
+
 		gnome_canvas_item_request_update (item);
 	}
 }

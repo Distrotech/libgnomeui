@@ -366,9 +366,12 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasPolygon *poly;
 	GnomeCanvasPoints *points;
 	GdkColor color = { 0, 0, 0, 0, };
+	GdkColor *pcolor;
+	int have_pixel;
 
 	item = GNOME_CANVAS_ITEM (object);
 	poly = GNOME_CANVAS_POLYGON (object);
+	have_pixel = FALSE;
 
 	switch (arg_id) {
 	case ARG_POINTS:
@@ -383,10 +386,10 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			poly->num_points = 0;
 		else
 			set_points (poly, points);
-		
+
 		gnome_canvas_item_request_update (item);
 		break;
-		
+
         case ARG_FILL_COLOR:
 	case ARG_FILL_COLOR_GDK:
 	case ARG_FILL_COLOR_RGBA:
@@ -397,20 +400,29 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 				poly->fill_set = TRUE;
 			else
 				poly->fill_set = FALSE;
+
 			poly->fill_color = ((color.red & 0xff00) << 16 |
 					    (color.green & 0xff00) << 8 |
 					    (color.blue & 0xff00) |
 					    0xff);
 			break;
+
 		case ARG_FILL_COLOR_GDK:
-			poly->fill_set = GTK_VALUE_BOXED (*arg) != NULL;
-			if (GTK_VALUE_BOXED (*arg))
-				color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+			pcolor = GTK_VALUE_BOXED (*arg);
+			poly->fill_set = pcolor != NULL;
+
+			if (pcolor) {
+				color = *pcolor;
+				gdk_color_context_query_color (item->canvas->cc, &color);
+				have_pixel = TRUE;
+			}
+
 			poly->fill_color = ((color.red & 0xff00) << 16 |
 					    (color.green & 0xff00) << 8 |
 					    (color.blue & 0xff00) |
 					    0xff);
 			break;
+
 		case ARG_FILL_COLOR_RGBA:
 			poly->fill_set = TRUE;
 			poly->fill_color = GTK_VALUE_UINT (*arg);
@@ -419,11 +431,16 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #ifdef VERBOSE
 		g_print ("poly fill color = %08x\n", poly->fill_color);
 #endif
-		poly->fill_pixel = gnome_canvas_get_color_pixel (item->canvas, poly->fill_color);
+		if (have_pixel)
+			poly->fill_pixel = color.pixel;
+		else
+			poly->fill_pixel = gnome_canvas_get_color_pixel (item->canvas,
+									 poly->fill_color);
+
 		set_gc_foreground (poly->fill_gc, poly->fill_pixel);
                 gnome_canvas_item_request_redraw_svp (item, poly->fill_svp);
 		break;
-		
+
         case ARG_OUTLINE_COLOR:
 	case ARG_OUTLINE_COLOR_GDK:
 	case ARG_OUTLINE_COLOR_RGBA:
@@ -434,20 +451,29 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 				poly->outline_set = TRUE;
 			else
 				poly->outline_set = FALSE;
+
 			poly->outline_color = ((color.red & 0xff00) << 16 |
 					       (color.green & 0xff00) << 8 |
 					       (color.blue & 0xff00) |
 					       0xff);
 			break;
+
 		case ARG_OUTLINE_COLOR_GDK:
-			poly->outline_set = GTK_VALUE_BOXED (*arg) != NULL;
-			if (GTK_VALUE_BOXED (*arg))
-				color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+			pcolor = GTK_VALUE_BOXED (*arg);
+			poly->outline_set = pcolor != NULL;
+
+			if (pcolor) {
+				color = *pcolor;
+				gdk_color_context_query_color (item->canvas->cc, &color);
+				have_pixel = TRUE;
+			}
+
 			poly->outline_color = ((color.red & 0xff00) << 16 |
 					       (color.green & 0xff00) << 8 |
 					       (color.blue & 0xff00) |
 					       0xff);
 			break;
+
 		case ARG_OUTLINE_COLOR_RGBA:
 			poly->outline_set = TRUE;
 			poly->outline_color = GTK_VALUE_UINT (*arg);
@@ -456,11 +482,16 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #ifdef VERBOSE
 		g_print ("poly outline color = %08x\n", poly->outline_color);
 #endif
-		poly->outline_pixel = gnome_canvas_get_color_pixel (item->canvas, poly->outline_color);
+		if (have_pixel)
+			poly->outline_pixel = color.pixel;
+		else
+			poly->outline_pixel = gnome_canvas_get_color_pixel (item->canvas,
+									    poly->outline_color);
+
 		set_gc_foreground (poly->outline_gc, poly->outline_pixel);
                 gnome_canvas_item_request_redraw_svp (item, poly->outline_svp);
 		break;
-		
+
 	case ARG_FILL_STIPPLE:
 		set_stipple (poly->fill_gc, &poly->fill_stipple, GTK_VALUE_BOXED (*arg), FALSE);
 		gnome_canvas_item_request_update (item);
@@ -534,7 +565,7 @@ gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_FILL_COLOR_GDK:
 		get_color_arg (poly, poly->fill_pixel, arg);
 		break;
-		
+
 	case ARG_OUTLINE_COLOR_GDK:
 		get_color_arg (poly, poly->outline_pixel, arg);
 		break;
@@ -620,10 +651,10 @@ gnome_canvas_polygon_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip
 				width = poly->width;
 			else
 				width = poly->width * item->canvas->pixels_per_unit;
-		
+
 			if (width < 0.5)
 				width = 0.5;
-		
+
 			svp = art_svp_vpath_stroke (vpath,
 						    ART_PATH_STROKE_JOIN_ROUND,
 						    ART_PATH_STROKE_CAP_ROUND,
@@ -703,7 +734,7 @@ item_to_canvas (GnomeCanvas *canvas, double *item_coords, GdkPoint *canvas_coord
 		art_affine_point (&pc, &pi, i2c);
 		canvas_coords->x = floor (pc.x + 0.5);
 		canvas_coords->y = floor (pc.y + 0.5);
-		canvas_coords++; 
+		canvas_coords++;
 	}
 }
 

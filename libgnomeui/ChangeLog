@@ -1,3 +1,15 @@
+1999-07-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_set_arg):
+	ARG_*_COLOR_GDK only take the pixel value into account, not the
+	color->{red,green,blue} values.
+
+	* gnome-canvas-polygon.c (gnome_canvas_polygon_set_arg): Likewise.
+
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Likewise.
+
+	* gnome-canvas-text.c (gnome_canvas_text_set_arg): Likewise.
+
 1999-07-23  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock-item.c (gnome_dock_item_button_changed): Removed
@@ -58,9 +70,9 @@
 	(main): Now there's an URL explaining what the crash means.
 
 	* gnome-init.c (gnome_segv_handle): Always exit, don't check
-	gnome_segv return value; handle any signal, not just segv (though 
+	gnome_segv return value; handle any signal, not just segv (though
 	for now the handler isn't installed for other signals, we probably
-	want sigbus and sigfpe eventually). 
+	want sigbus and sigfpe eventually).
 
 1999-07-14  Havoc Pennington <hp@pobox.com>
 
@@ -74,7 +86,7 @@
 
 	* libgnomeui.h: Include rest of `gnome-druid-page*.h' headers.
 	* gnome-druid.h: Include "libgnome/gnome-druid-page.h" instead of
-	"gnome-druid-page.h". 
+	"gnome-druid-page.h".
 
 Mon Jul 12 06:20:39 1999  George Lebl  <jirka@5z.com>
 
@@ -87,7 +99,7 @@ Mon Jul 12 06:20:39 1999  George Lebl  <jirka@5z.com>
 
 1999-07-10  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
-	* gnome-mdi.c (app_set_view): fixed a problem with 
+	* gnome-mdi.c (app_set_view): fixed a problem with
 	GNOME_MDI_ITEM_COUNT_KEY not being set to NULL when it should be.
 	removed some unused variables.
 
@@ -116,7 +128,7 @@ Tue Jul  6 18:36:35 1999  Tim Janik  <timj@gtk.org>
 	takes over a newly allocated ArtPixBuf to display.
 
 1999-07-05 Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
-	
+
 	* gnome-icon-text.h:
 	* gnome-icon-item.c (iti_paint_text):
 	* gnome-icon-item.c (iti_idx_from_x_y):
@@ -188,13 +200,13 @@ Mon Jul  5 20:11:01 1999  Tim Janik  <timj@gtk.org>
 	before.
 
 1999-06-29  Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
-	
+
 	* gnome-icon-item.c (iti_edition_accept): Don't allocate
 	iti->text if iti->editing is False. This fixes the bug #1311.
-	
+
 	* gnome-less.c: (gnome_less_set_fixed_font): Correct the default
 	fontset pattern. A comma was missing.
-	
+
 1999-06-29    <jrb@redhat.com>
 
 	* gnome-druid-page.c: Wrote more documentation.
