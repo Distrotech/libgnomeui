@@ -1,3 +1,18 @@
+1998-10-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_init): Set the GTK_CAN_FOCUS flag
+	in the widget.
+
+	* gnome-color-picker.c (gnome_color_picker_set_title): Set the
+	title of the color selection dialog if it exists.
+
+	* gnome-init.c (our_gtk_options): Fixed spelling in the option
+	descriptions.
+
+	* gnome-canvas.c (gnome_canvas_item_grab_focus): Set the
+	ev.focus_change.window field to the canvas's bin window.
+	(emit_event): Rearranged some of the focusing tests.
+
 Mon Oct 19 11:57:51 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-mdi.c: Change "drag_data_received" callback

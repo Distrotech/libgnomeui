@@ -568,6 +568,9 @@ gnome_color_picker_set_title (GnomeColorPicker *cp, const char *title)
 		g_free (cp->title);
 
 	cp->title = g_strdup (title);
+
+	if (cp->cs_dialog)
+		gtk_window_set_title (GTK_WINDOW (cp->cs_dialog), cp->title);
 }
 
 static void

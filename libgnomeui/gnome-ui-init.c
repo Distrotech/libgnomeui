@@ -47,8 +47,8 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 static struct argp_option our_gtk_options[] =
 {
 	{ N_("\nGtk+ toolkit options"), -1, NULL, OPTION_DOC,   NULL, -3 },
-	{ "gdk-debug",         -1, N_("FLAGS"),   0,      N_("Gdk debuging flags to set"), 0 },
-	{ "gdk-no-debug",      -2, N_("FLAGS"),   0,      N_("Gdk debuging flags to unset"), 0 },
+	{ "gdk-debug",         -1, N_("FLAGS"),   0,      N_("Gdk debugging flags to set"), 0 },
+	{ "gdk-no-debug",      -2, N_("FLAGS"),   0,      N_("Gdk debugging flags to unset"), 0 },
 	{ "display",           -3, N_("DISPLAY"), 0,	  N_("X display to use"), 0 },
 	{ "sync",              -4, NULL,          OPTION_HIDDEN, NULL, 0 },
 	{ "no-xshm",           -5, NULL,          0,	  N_("Don't use X shared memory extension"), 0 },
@@ -58,10 +58,10 @@ static struct argp_option our_gtk_options[] =
 	{ "gxid_port",         -9, N_("PORT"),    0,	  N_("FIXME"), 0 },
 	{ "xim-preedit",      -10, N_("STYLE"),   0,	  N_("FIXME"), 0 },
 	{ "xim-status",       -11, N_("STYLE"),   0,	  N_("FIXME"), 0 },
-	{ "gtk-debug",        -12, N_("FLAGS"),   0,      N_("Gtk+ debuging flags to set"), 0 },
-	{ "gtk-no-debug",     -13, N_("FLAGS"),   0,      N_("Gtk+ debuging flags to unset"), 0 },
+	{ "gtk-debug",        -12, N_("FLAGS"),   0,      N_("Gtk+ debugging flags to set"), 0 },
+	{ "gtk-no-debug",     -13, N_("FLAGS"),   0,      N_("Gtk+ debugging flags to unset"), 0 },
 	{ "g-fatal-warnings", -14, NULL,          0,      N_("Make all warnings fatal"), 0 },
-	{ "gtk-module",       -15, N_("MODULE"),  0,      N_("Load additional Gtk modules"), 0 },
+	{ "gtk-module",       -15, N_("MODULE"),  0,      N_("Load additional Gtk+ modules"), 0 },
 	{ NULL, 0, NULL, 0, NULL, 0 }
 };
 

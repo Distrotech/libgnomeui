@@ -88,7 +88,7 @@ static void gnome_canvas_item_unrealize (GnomeCanvasItem *item);
 static void gnome_canvas_item_map       (GnomeCanvasItem *item);
 static void gnome_canvas_item_unmap     (GnomeCanvasItem *item);
 
-static void emit_event                  (GnomeCanvas *canvas, GdkEvent *event);
+static void emit_event (GnomeCanvas *canvas, GdkEvent *event);
 
 static guint item_signals[ITEM_LAST_SIGNAL] = { 0 };
 
@@ -296,7 +296,6 @@ gnome_canvas_item_shutdown (GtkObject *object)
 
 	if (item == item->canvas->focused_item) 
 		item->canvas->focused_item = NULL;
-
 	
 	/* Normal destroy stuff */
 
@@ -721,22 +720,17 @@ is_descendant (GnomeCanvasItem *item, GnomeCanvasItem *parent)
 void
 gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 {
-	GnomeCanvasItem *old_parent;
-
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 	g_return_if_fail (new_group != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_GROUP (new_group));
 
 	/* Both items need to be in the same canvas */
-
 	g_return_if_fail (item->canvas == GNOME_CANVAS_ITEM (new_group)->canvas);
 
-	/*
-	 * The group cannot be an inferior of the item or be the item itself -- this also takes care
+	/* The group cannot be an inferior of the item or be the item itself -- this also takes care
 	 * of the case where the item is the root item of the canvas.
 	 */
-
 	g_return_if_fail (!is_descendant (GNOME_CANVAS_ITEM (new_group), item));
 
 	/* Everything is ok, now actually reparent the item */
@@ -745,14 +739,11 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 
 	redraw_if_visible (item);
 
-	if (item->parent)
-		group_remove (GNOME_CANVAS_GROUP (item->parent), item);
-
+	group_remove (GNOME_CANVAS_GROUP (item->parent), item);
 	item->parent = GNOME_CANVAS_ITEM (new_group);
 	group_add (new_group, item);
 
-	/*
-	 * Rebuild the new parent group's bounds.  This will take care of reconfiguring the item and
+	/* Rebuild the new parent group's bounds.  This will take care of reconfiguring the item and
 	 * all its children.
 	 */
 
@@ -777,7 +768,6 @@ gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
 {
 	GnomeCanvasItem *focused_item;
 	GdkEvent ev;
-	gint finished;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
@@ -786,7 +776,8 @@ gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
 	focused_item = item->canvas->focused_item;
 
 	if (focused_item) {
-		ev.type = GDK_FOCUS_CHANGE;
+		ev.focus_change.type = GDK_FOCUS_CHANGE;
+		ev.focus_change.window = GTK_LAYOUT (item->canvas)->bin_window;
 		ev.focus_change.send_event = FALSE;
 		ev.focus_change.in = FALSE;
 
@@ -1485,6 +1476,8 @@ panic_root_destroyed (GtkObject *object, gpointer data)
 static void
 gnome_canvas_init (GnomeCanvas *canvas)
 {
+	GTK_WIDGET_SET_FLAGS (canvas, GTK_CAN_FOCUS);
+
 	canvas->idle_id = -1;
 
 	canvas->scroll_x1 = 0.0;
@@ -1859,8 +1852,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 			return;
 	}
 
-	/*
-	 * Convert to world coordinates -- we have two cases because of diferent offsets of the
+	/* Convert to world coordinates -- we have two cases because of diferent offsets of the
 	 * fields in the event structures.
 	 */
 
@@ -1871,7 +1863,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	case GDK_LEAVE_NOTIFY:
 		gnome_canvas_window_to_world (canvas, ev.crossing.x, ev.crossing.y, &ev.crossing.x, &ev.crossing.y);
 		break;
-		
+
 	case GDK_MOTION_NOTIFY:
 	case GDK_BUTTON_PRESS:
 	case GDK_2BUTTON_PRESS:
@@ -1884,19 +1876,14 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 		break;
 	}
 
-	/*
-	 * Choose where do we send the event
-	 */
+	/* Choose where we send the event */
+
 	item = canvas->current_item;
 	
-	if ((event->type == GDK_KEY_PRESS   ||
-	     event->type == GDK_KEY_RELEASE ||
-	     event->type == GDK_FOCUS_CHANGE) &&
-	    canvas->focused_item)
+	if (canvas->focused_item && ((event->type == GDK_KEY_PRESS) || (event->type == GDK_KEY_RELEASE)))
 		item = canvas->focused_item;
-	    
-	/*
-	 * The event is propagated up the hierarchy (for if someone connected to a group instead of
+
+	/* The event is propagated up the hierarchy (for if someone connected to a group instead of
 	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
 	 * events.
 	 */
