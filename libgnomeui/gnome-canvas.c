@@ -53,8 +53,10 @@
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
 #include "gnome-canvas.h"
-#include "libart_lgpl/art_misc.h"
-#include "libart_lgpl/art_uta.h"
+#include "libart_lgpl/art_rect.h"
+#include "libart_lgpl/art_rect_uta.h"
+#include "libart_lgpl/art_uta_rect.h"
+#include "libart_lgpl/art_uta_ops.h"
 
 
 static void group_add    (GnomeCanvasGroup *group, GnomeCanvasItem *item);
@@ -2452,6 +2454,9 @@ gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
 		return FALSE;
 }
 
+#define IMAGE_WIDTH 512
+#define IMAGE_HEIGHT 512
+
 static void
 paint (GnomeCanvas *canvas)
 {
@@ -2460,82 +2465,98 @@ paint (GnomeCanvas *canvas)
 	int draw_x2, draw_y2;
 	int width, height;
 	GdkPixmap *pixmap;
+	ArtIRect *rects;
+	gint n_rects, i;
 
-	if (!((canvas->redraw_x1 < canvas->redraw_x2) && (canvas->redraw_y1 < canvas->redraw_y2)))
-		return;
+	if (!canvas->need_redraw)
+	  return;
+
+	rects = art_rect_list_from_uta (canvas->redraw_area,
+					IMAGE_WIDTH, IMAGE_HEIGHT, &n_rects);
+
+	art_uta_free (canvas->redraw_area);
+
+	canvas->redraw_area = NULL;
 
 	widget = GTK_WIDGET (canvas);
 
-	/*
-	 * Compute the intersection between the viewport and the area that needs redrawing.  We
-	 * can't simply do this with gdk_rectangle_intersect() because a GdkRectangle only stores
-	 * 16-bit values.
-	 */
+	for (i = 0; i < n_rects; i++)
+	  {
+	    canvas->redraw_x1 = rects[i].x0;
+	    canvas->redraw_y1 = rects[i].y0;
+	    canvas->redraw_x2 = rects[i].x1;
+	    canvas->redraw_y2 = rects[i].y1;
 
-	draw_x1 = DISPLAY_X1 (canvas) - canvas->zoom_xofs;
-	draw_y1 = DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
-	draw_x2 = draw_x1 + canvas->width;
-	draw_y2 = draw_y1 + canvas->height;
+	    draw_x1 = DISPLAY_X1 (canvas) - canvas->zoom_xofs;
+	    draw_y1 = DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
+	    draw_x2 = draw_x1 + canvas->width;
+	    draw_y2 = draw_y1 + canvas->height;
 
-	if (canvas->redraw_x1 > draw_x1)
-		draw_x1 = canvas->redraw_x1;
+	    if (canvas->redraw_x1 > draw_x1)
+	      draw_x1 = canvas->redraw_x1;
+	
+	    if (canvas->redraw_y1 > draw_y1)
+	      draw_y1 = canvas->redraw_y1;
 
-	if (canvas->redraw_y1 > draw_y1)
-		draw_y1 = canvas->redraw_y1;
+	    if (canvas->redraw_x2 < draw_x2)
+	      draw_x2 = canvas->redraw_x2;
 
-	if (canvas->redraw_x2 < draw_x2)
-		draw_x2 = canvas->redraw_x2;
+	    if (canvas->redraw_y2 < draw_y2)
+	      draw_y2 = canvas->redraw_y2;
 
-	if (canvas->redraw_y2 < draw_y2)
-		draw_y2 = canvas->redraw_y2;
+	    if ((draw_x1 < draw_x2) && (draw_y1 < draw_y2))
+	      {
 
-	if ((draw_x1 >= draw_x2) || (draw_y1 >= draw_y2))
-		return;
+		/* Set up the temporary pixmap */
 
-	/* Set up the temporary pixmap */
+		canvas->draw_xofs = draw_x1;
+		canvas->draw_yofs = draw_y1;
 
-	canvas->draw_xofs = draw_x1;
-	canvas->draw_yofs = draw_y1;
+		width = draw_x2 - draw_x1;
+		height = draw_y2 - draw_y1;
 
-	width = draw_x2 - draw_x1;
-	height = draw_y2 - draw_y1;
+		pixmap = gdk_pixmap_new (canvas->layout.bin_window, width, height, gtk_widget_get_visual (widget)->depth);
 
-	pixmap = gdk_pixmap_new (canvas->layout.bin_window, width, height, gtk_widget_get_visual (widget)->depth);
+		gdk_gc_set_foreground (canvas->pixmap_gc, &widget->style->bg[GTK_STATE_NORMAL]);
+		gdk_draw_rectangle (pixmap,
+				    canvas->pixmap_gc,
+				    TRUE,
+				    0, 0,
+				    width, height);
 
-	gdk_gc_set_foreground (canvas->pixmap_gc, &widget->style->bg[GTK_STATE_NORMAL]);
-	gdk_draw_rectangle (pixmap,
-			    canvas->pixmap_gc,
-			    TRUE,
-			    0, 0,
-			    width, height);
+		/* Draw the items that intersect the area */
 
-	/* Draw the items that intersect the area */
-
-	if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
-		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->draw) (canvas->root, pixmap,
-										draw_x1, draw_y1,
+		if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+		  (* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->draw) (canvas->root, pixmap,
+										  draw_x1, draw_y1,
 										width, height);
 #if 0
-	gdk_draw_line (pixmap,
-		       widget->style->black_gc,
-		       0, 0,
-		       width - 1, height - 1);
-	gdk_draw_line (pixmap,
-		       widget->style->black_gc,
-		       width - 1, 0,
-		       0, height - 1);
+		gdk_draw_line (pixmap,
+			       widget->style->black_gc,
+			       0, 0,
+			       width - 1, height - 1);
+		gdk_draw_line (pixmap,
+			       widget->style->black_gc,
+			       width - 1, 0,
+			       0, height - 1);
 #endif
-	/* Copy the pixmap to the window and clean up */
+		/* Copy the pixmap to the window and clean up */
 
-	gdk_draw_pixmap (canvas->layout.bin_window,
-			 canvas->pixmap_gc,
-			 pixmap,
-			 0, 0,
-			 draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
-			 draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
-			 width, height);
+		gdk_draw_pixmap (canvas->layout.bin_window,
+				 canvas->pixmap_gc,
+				 pixmap,
+				 0, 0,
+				 draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
+				 draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
+				 width, height);
 
-	gdk_pixmap_unref (pixmap);
+		gdk_pixmap_unref (pixmap);
+	      }
+	  }
+
+	art_free (rects);
+
+	canvas->need_redraw = FALSE;
 }
 
 static gint
@@ -2800,6 +2821,39 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 
 
 /**
+ * gnome_canvas_request_redraw_uta
+ * @canvas:
+ * @uta:
+ *
+ * Description: Adds a region to the redraw area.
+ **/
+
+void
+gnome_canvas_request_redraw_uta (GnomeCanvas *canvas,
+                                 ArtUta *uta)
+{
+  ArtUta *uta2;
+
+  g_return_if_fail (canvas != NULL);
+  g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+  if (canvas->need_redraw)
+    {
+      uta2 = art_uta_union (uta, canvas->redraw_area);
+      art_uta_free (uta);
+      art_uta_free (canvas->redraw_area);
+      canvas->redraw_area = uta2;
+    }
+  else
+    {
+      canvas->redraw_area = uta;
+      canvas->need_redraw = TRUE;
+      canvas->idle_id = gtk_idle_add (idle_handler, canvas);
+    }
+}
+
+
+/**
  * gnome_canvas_request_redraw
  * @canvas:
  * @x1:
@@ -2813,33 +2867,35 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 void
 gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2)
 {
-	g_return_if_fail (canvas != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+  ArtUta *uta;
+  ArtIRect bbox;
+  ArtIRect visible;
+  ArtIRect clip;
 
-	if (!GTK_WIDGET_DRAWABLE (canvas) || (x1 == x2) || (y1 == y2))
-		return;
+  g_return_if_fail (canvas != NULL);
+  g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
-	if (canvas->need_redraw) {
-		if (x1 < canvas->redraw_x1)
-			canvas->redraw_x1 = x1;
+  if (!GTK_WIDGET_DRAWABLE (canvas) || (x1 == x2) || (y1 == y2))
+    return;
 
-		if (y1 < canvas->redraw_y1)
-			canvas->redraw_y1 = y1;
+  bbox.x0 = x1;
+  bbox.y0 = y1;
+  bbox.x1 = x2;
+  bbox.y1 = y2;
 
-		if (x2 > canvas->redraw_x2)
-			canvas->redraw_x2 = x2;
+  visible.x0 = DISPLAY_X1 (canvas) - canvas->zoom_xofs;
+  visible.y0 = DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
+  visible.x1 = visible.x0 + canvas->width;
+  visible.y1 = visible.y0 + canvas->height;
 
-		if (y2 > canvas->redraw_y2)
-			canvas->redraw_y2 = y2;
-	} else {
-		canvas->redraw_x1 = x1;
-		canvas->redraw_y1 = y1;
-		canvas->redraw_x2 = x2;
-		canvas->redraw_y2 = y2;
+  art_irect_intersect (&clip, &bbox, &visible);
 
-		canvas->need_redraw = TRUE;
-		canvas->idle_id = gtk_idle_add (idle_handler, canvas);
-	}
+  if (!art_irect_empty (&clip))
+    {
+      uta = art_uta_from_irect (&clip);
+
+      gnome_canvas_request_redraw_uta (canvas, uta);
+    }
 }
 
 

@@ -1,3 +1,10 @@
+Wed Dec  2 12:51:54 1998  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas.h:
+	* gnome-canvas.c (gnome_canvas_request_redraw): This is the
+	microtile patch. Added gnome_canvas_request_redraw_uta, and
+	it all works with microtiles now.
+
 1998-12-02  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-properties.c: Added new GnomeProperty code here.

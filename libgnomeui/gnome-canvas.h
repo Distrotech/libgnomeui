@@ -14,6 +14,8 @@
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtklayout.h>
 #include <stdarg.h>
+#include <libart_lgpl/art_misc.h>
+#include <libart_lgpl/art_uta.h>
 
 BEGIN_GNOME_DECLS
 
@@ -287,6 +289,8 @@ struct _GnomeCanvas {
 						 * but not (x2, y2) -- specified in canvas pixel units.
 						 */
 
+	ArtUta *redraw_area;			/* Area that needs redrawing, stored as microtiles */
+
 	int draw_xofs, draw_yofs;		/* Offsets of the temporary drawing pixmap */
 
 	int zoom_xofs, zoom_yofs; 		/* Internal pixel offsets for when zoomed out */
@@ -363,6 +367,12 @@ void gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy);
 
 /* Requests that the canvas be repainted immediately instead of in the idle loop. */
 void gnome_canvas_update_now (GnomeCanvas *canvas);
+
+/* For use only by item type implementations. Request that the canvas
+ * eventually redraw the specified region. The region is specified as
+ * a microtile array. This function takes over responsibility for
+ * freeing the uta argument.  */
+void gnome_canvas_request_redraw_uta (GnomeCanvas *canvas, ArtUta *uta);
 
 /* For use only by item type implementations.  Request that the canvas eventually redraw the
  * specified region.  The region contains (x1, y1) but not (x2, y2).
