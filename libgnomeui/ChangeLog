@@ -1,3 +1,12 @@
+2001-09-19  James Henstridge  <james@daa.com.au>
+
+	* gnome-scores.c (gnome_scores_set_logo_label): use
+	gtk_style_set_font rather than direct structure access.  This
+	needs pangoification.
+
+	* gnome-about.c (gnome_about_draw_names): changes to take into
+	account pango changes.
+
 Tue Sep 18 20:44:26 2001  George Lebl <jirka@5z.com>
 
 	* gnome-app-helper.c, gnome-file-entry.c, gnome-icon-sel.c: use

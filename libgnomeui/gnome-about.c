@@ -598,7 +598,7 @@ gnome_about_draw_names (GnomeAbout *about, GdkRectangle *area)
 {
 	PangoLayout *name_list_layout;
 	PangoContext *context;
-	PangoFontMetrics metrics;
+	PangoFontMetrics *metrics;
 	PangoFontDescription *font_description;
 	GSList *list;
 	gint rows_per_column;
@@ -610,12 +610,12 @@ gnome_about_draw_names (GnomeAbout *about, GdkRectangle *area)
 
 	context = gtk_widget_get_pango_context (GTK_WIDGET (about));
 
-	pango_context_get_metrics (context,
-				   font_description,
-				   pango_context_get_language (context),
-				   &metrics);
+	metrics = pango_context_get_metrics (context,
+					   font_description,
+					   pango_context_get_language (context));
 
-	height = metrics.ascent / PANGO_SCALE + metrics.descent / PANGO_SCALE + 2;
+	height = pango_font_metrics_get_ascent (metrics) / PANGO_SCALE +
+                 pango_font_metrics_get_descent (metrics) / PANGO_SCALE + 2;
 	
 	rows_per_column = gnome_about_get_number_of_undisplayed_entries (about);
 	rows_per_column = rows_per_column / 2 + rows_per_column % 2;

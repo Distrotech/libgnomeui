@@ -417,7 +417,7 @@ gnome_scores_set_logo_label (GnomeScores *gs,
 	}
 
 	if(col)
-		memcpy((void *) &s->fg[0], col, sizeof(GdkColor) );
+		s->fg[0] = *col;
 
 	if( font ) 
 		fo = font;
@@ -425,7 +425,7 @@ gnome_scores_set_logo_label (GnomeScores *gs,
 		fo = _("-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*");
 
 	if(( f = gdk_fontset_load ( fo ) ))
-		s->font = f;
+		gtk_style_set_font(s, f);
 
 	gs->_priv->logo = gtk_label_new(txt);
 	gtk_widget_set_style(GTK_WIDGET(gs->_priv->logo), s);
