@@ -208,14 +208,17 @@ gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e,
 static void
 gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val [])
 {
-    unsigned tot = val [0];
+    unsigned tot = 0;
     gint i;
     gint x;
     gint wr, w;
     GdkGC *gc;
 
-    w = A.width;
+    w = pb->vertical ? A.height : A.width;
     x = 0;
+
+    for (i=0; i<pb->n; i++)
+	tot += val [i+1];
 
     if (!GTK_WIDGET_REALIZED (pb->bar) || !tot)
 	return;
@@ -226,17 +229,24 @@ gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val [])
 	if (i<pb->n-1)
 	    wr = (unsigned) w * ((float)val [i+1]/tot);
 	else
-	    wr = A.width - x;
+	    wr = (pb->vertical ? A.height : A.width) - x;
 
 	gdk_gc_set_foreground (gc,
 			       &pb->colors [i]);
 
-	gdk_draw_rectangle (pb->bs,
-			    gc,
-			    TRUE,
-			    x, 0,
-			    wr, A.height);
-
+	if (pb->vertical)
+	    gdk_draw_rectangle (pb->bs,
+				gc,
+				TRUE,
+				0, A.height - x - wr,
+				A.width, wr);
+	else
+	    gdk_draw_rectangle (pb->bs,
+				gc,
+				TRUE,
+				x, 0,
+				wr, A.height);
+	
 	x += wr;
     }
 		
@@ -278,9 +288,6 @@ gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
 	}
 	pb->last [i] = val [i];
     }
-
-    if (!change || !tot)
-	return;
 
     gnome_proc_bar_draw (pb, val);
 }
