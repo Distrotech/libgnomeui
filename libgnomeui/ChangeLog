@@ -1,5 +1,13 @@
 2001-05-08  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector-client.h (gnome_selector_client_set_uri):
+	Added `GDestroyNotify destroy_fn' argument.
+
+	* gnome-selector-client.c (gnome_selector_client_set_uri):
+	Actually invoke the async_func when we get the event.
+
+2001-05-08  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector-client.h
 	(GnomeSelectorClientAsyncHandle): New typedef.
 	(GnomeSelectorClientAsyncFunc): New typedef.

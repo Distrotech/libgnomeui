@@ -53,13 +53,13 @@ typedef struct _GnomeSelectorClientClass        GnomeSelectorClientClass;
 
 typedef struct _GnomeSelectorClientAsyncHandle  GnomeSelectorClientAsyncHandle;
 
-typedef void (*GnomeSelectorClientAsyncFunc)   (GnomeSelectorClient      *client,
-                                                GnomeSelectorAsyncHandle *async_handle,
-                                                GNOME_Selector_AsyncType  async_type,
-                                                const gchar              *uri,
-                                                const gchar              *error,
-                                                gboolean                  success,
-                                                gpointer                  user_data);
+typedef void (*GnomeSelectorClientAsyncFunc)   (GnomeSelectorClient            *client,
+                                                GnomeSelectorClientAsyncHandle *async_handle,
+                                                GNOME_Selector_AsyncType        async_type,
+                                                const gchar                    *uri,
+                                                const gchar                    *error,
+                                                gboolean                        success,
+                                                gpointer                        user_data);
 
 
 struct _GnomeSelectorClient {
@@ -109,7 +109,8 @@ gnome_selector_client_set_uri            (GnomeSelectorClient             *clien
                                           const gchar                     *uri,
                                           guint                            timeout_msec,
                                           GnomeSelectorClientAsyncFunc     async_func,
-                                          gpointer                         user_data);
+                                          gpointer                         user_data,
+					  GDestroyNotify                   destroy_fn);
 
 G_END_DECLS
 
