@@ -1,3 +1,7 @@
+1998-05-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c: Added dirty flag to the gnome icon list
+
 Wed May 13 00:16:35 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog-util.h, gnome-dialog-util.c: Return the created

@@ -637,7 +637,8 @@ gnome_icon_list_init (GnomeIconList *ilist)
 
 	ilist->mode = GNOME_ICON_LIST_TEXT_BELOW;
 	ilist->frozen = TRUE; /* starts frozen! */
-
+	ilist->dirty  = TRUE;
+	
 	ilist->ilist_window = NULL;
 	ilist->ilist_window_width = 0;
 	ilist->ilist_window_height = 0;
@@ -684,6 +685,7 @@ gnome_icon_list_destroy (GtkObject *object)
 	ilist = GNOME_ICON_LIST (object);
 
 	ilist->frozen = TRUE;
+	ilist->dirty  = TRUE;
 	gnome_icon_list_clear (ilist);
 
 	if (ilist->vscrollbar) {
@@ -866,7 +868,7 @@ gnome_icon_list_unrealize (GtkWidget *widget)
 	ilist = GNOME_ICON_LIST (widget);
 
 	ilist->frozen = TRUE;
-
+	ilist->dirty  = TRUE;
 	gdk_gc_destroy (ilist->fg_gc);
 	gdk_gc_destroy (ilist->bg_gc);
 
@@ -906,6 +908,7 @@ gnome_icon_list_map (GtkWidget *widget)
 		gtk_widget_map (ilist->hscrollbar);
 
 	ilist->frozen = FALSE; /* unfreeze now that we can paint */
+	
 }
 
 static void
@@ -1233,14 +1236,12 @@ gnome_icon_list_unselect_all (GnomeIconList *ilist, GdkEvent *event, void *keep)
 	g_return_if_fail (ilist != NULL);
 	g_return_if_fail (GNOME_IS_ICON_LIST (ilist));
 
-	gnome_icon_list_freeze (ilist);
 	for (i = 0; icon_list ; icon_list = icon_list->next, i++){
 		icon = icon_list->data;
 		
 		if (icon != keep && icon->state == GTK_STATE_SELECTED)
 			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON], i, event);
 	}
-	gnome_icon_list_thaw (ilist);
 }
 
 static void
@@ -1568,7 +1569,8 @@ icon_list_append (GnomeIconList *ilist, Icon *icon)
 	if (!ilist->frozen) {
 		adjust_scrollbars (ilist);
 		draw_icons_area (ilist, NULL);
-	}
+	} else
+		ilist->dirty = TRUE;
 
 	return ilist->icons - 1;
 }
@@ -1648,7 +1650,8 @@ gnome_icon_list_insert (GnomeIconList *ilist, int pos, char *icon_filename, char
 	if (!ilist->frozen) {
 		adjust_scrollbars (ilist);
 		draw_icons_area (ilist, NULL);
-	}
+	} else
+		ilist->dirty = TRUE;
 }
 
 void
@@ -1715,7 +1718,8 @@ gnome_icon_list_remove (GnomeIconList *ilist, int pos)
 	if (!ilist->frozen) {
 		adjust_scrollbars (ilist);
 		draw_icons_area (ilist, NULL);
-	}
+	} else
+		ilist->dirty = TRUE;
 }
 
 void
@@ -1748,7 +1752,8 @@ gnome_icon_list_clear (GnomeIconList *ilist)
 		if (!ilist->frozen) {
 			adjust_scrollbars (ilist);
 			draw_icons_area (ilist, NULL);
-		}
+		} else
+			ilist->dirty = TRUE;
 	}
 }
 
@@ -1916,8 +1921,11 @@ gnome_icon_list_thaw (GnomeIconList *ilist)
 
 	ilist->frozen = FALSE;
 
-	adjust_scrollbars (ilist);
-	draw_icons_area (ilist, NULL);
+	if (ilist->dirty){
+		adjust_scrollbars (ilist);
+		draw_icons_area (ilist, NULL);
+		ilist->dirty = FALSE;
+	}
 }
 
 void
@@ -2003,6 +2011,8 @@ gnome_icon_list_set_foreground (GnomeIconList *ilist, int pos, GdkColor *color)
 
 	if (!ilist->frozen)
 		draw_icon_by_num (ilist, icon, pos);
+	else
+		ilist->dirty = 1;
 }
 
 void
@@ -2026,6 +2036,8 @@ gnome_icon_list_set_background (GnomeIconList *ilist, int pos, GdkColor *color)
 
 	if (!ilist->frozen)
 		draw_icon_by_num (ilist, icon, pos);
+	else
+		ilist->dirty = 1;
 }
 
 void
@@ -2040,7 +2052,8 @@ gnome_icon_list_set_row_spacing (GnomeIconList *ilist, int spacing)
 	if (!ilist->frozen) {
 		adjust_scrollbars (ilist);
 		draw_icons_area (ilist, NULL);
-	}
+	} else
+		ilist->dirty = TRUE;
 }
 
 void
@@ -2055,7 +2068,8 @@ gnome_icon_list_set_col_spacing (GnomeIconList *ilist, int spacing)
 	if (!ilist->frozen) {
 		adjust_scrollbars (ilist);
 		draw_icons_area (ilist, NULL);
-	}
+	} else
+		ilist->dirty = TRUE;
 }
 
 void
@@ -2071,7 +2085,8 @@ gnome_icon_list_set_text_spacing (GnomeIconList *ilist, int spacing)
 		recalc_max_icon_size (ilist);
 		adjust_scrollbars (ilist);
 		draw_icons_area (ilist, NULL);
-	}
+	} else
+		ilist->dirty = TRUE;
 }
 
 void
@@ -2086,8 +2101,9 @@ gnome_icon_list_set_icon_border (GnomeIconList *ilist, int spacing)
 	if (!ilist->frozen) {
 		recalc_max_icon_size (ilist);
 		adjust_scrollbars (ilist);	
-	draw_icons_area (ilist, NULL);
-	}
+		draw_icons_area (ilist, NULL);
+	} else
+		ilist->dirty = TRUE;
 }
 
 void
@@ -2105,7 +2121,8 @@ gnome_icon_list_set_mode (GnomeIconList *ilist, GnomeIconListMode mode)
 		recalc_max_icon_size (ilist);
 		adjust_scrollbars (ilist);
 		draw_icons_area (ilist, NULL);
-	}
+	} else
+		ilist->dirty = 1;
 }
 
 void
@@ -2159,6 +2176,8 @@ real_select_icon (GnomeIconList *ilist, gint num, GdkEvent *event)
 		if (!ilist->frozen
 		    && (gnome_icon_list_icon_is_visible (ilist, num) != GTK_VISIBILITY_NONE))
 			draw_icon_by_num (ilist, icon, num);
+		else
+			ilist->dirty = 1;
 	}
 }
 
@@ -2182,6 +2201,8 @@ real_unselect_icon (GnomeIconList *ilist, gint num, GdkEvent *event)
 		if (!ilist->frozen
 		    && (gnome_icon_list_icon_is_visible (ilist, num) != GTK_VISIBILITY_NONE))
 			draw_icon_by_num (ilist, icon, num);
+		else
+			ilist->dirty = 1;
 	}
 }
 
