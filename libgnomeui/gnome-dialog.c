@@ -258,6 +258,10 @@ gnome_dialog_construct (GnomeDialog * dialog,
     gnome_dialog_append_button( dialog, 
 				button_name);
   };  
+
+  /* argument list may be null if the user wants to do weird things to the
+   * dialog, but we need to make sure this is initialized */
+  gnome_dialog_init_action_area(dialog);
 }
 
 /**
@@ -288,6 +292,10 @@ void gnome_dialog_constructv (GnomeDialog * dialog,
     gnome_dialog_append_button( dialog, 
 				button_name);
   };  
+
+  /* argument list may be null if the user wants to do weird things to the
+   * dialog, but we need to make sure this is initialized */
+  gnome_dialog_init_action_area(dialog);
 }
 
 
@@ -323,10 +331,6 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 
   va_end(ap);
 
-  /* argument list may be null if the user wants to do weird things to the
-   * dialog, but we need to make sure this is initialized */
-  gnome_dialog_init_action_area(dialog);
-  
   return GTK_WIDGET (dialog);
 }
 

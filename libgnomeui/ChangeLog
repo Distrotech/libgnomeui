@@ -1,6 +1,18 @@
+1999-06-14  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-dialog.c: Fix for bug #1453:
+The following patch fixes a problem with gnome-dialog.
+If the no buttons are requested the buttonbox doesn´t get initalized
+when using language bindings as the buttonbox is only initalized
+explicitly in the C part. Moving the code around a bit fixes this.
+	Report & patch from <jan@ifm.uni-hamburg.de>.
+
+	Tested with test-gnome.
+
 1999-06-13  Robert Brady  <rwb197@ecs.soton.ac.uk>
 
-	* gnome-calculator.c (c_fact): fix factorial bug (for real this time).
+	* gnome-calculator.c (c_fact): fix factorial bug (for real this
+ 	time).
 
 Sun Jun 13 01:54:58 1999  Raph Levien  <raph@gimp.org>
 
