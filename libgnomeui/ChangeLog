@@ -1,3 +1,8 @@
+1999-02-03  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-icon-entry.c (entry_changed): oops.  Dumb oneliner,
+	cut'n'paste error.
+
 1999-02-02  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-icon-entry.c: Massive changes.  It now works (fingers

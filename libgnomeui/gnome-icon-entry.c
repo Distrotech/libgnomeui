@@ -88,6 +88,7 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 			gnome_icon_selection_show_icons(gis);
 	} else {
 		/* We pretend like ok has been called */
+		entry_changed (NULL, ientry);
 		gtk_widget_hide (ientry->pick_dialog);
 	}
 }
