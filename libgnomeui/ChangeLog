@@ -1,3 +1,8 @@
+1998-12-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-init.c (gnome_init_cb): Remove the hack mentioned below.
+	A better bug fix is now available in Imlib.
+
 1998-12-13  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-init.c:

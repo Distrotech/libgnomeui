@@ -69,8 +69,27 @@ static const GtkEnumValue _gnome_restart_style_values[] = {
 };
 static const GtkEnumValue _gnome_client_state_values[] = {
   { GNOME_CLIENT_IDLE, "GNOME_CLIENT_IDLE", "idle" },
-  { GNOME_CLIENT_SAVING, "GNOME_CLIENT_SAVING", "saving" },
-  { GNOME_CLIENT_WAITING, "GNOME_CLIENT_WAITING", "waiting" },
+  { GNOME_CLIENT_SAVING_PHASE_1, "GNOME_CLIENT_SAVING_PHASE_1", "saving-phase-1" },
+  { GNOME_CLIENT_WAITING_FOR_PHASE_2, "GNOME_CLIENT_WAITING_FOR_PHASE_2", "waiting-for-phase-2" },
+  { GNOME_CLIENT_SAVING_PHASE_2, "GNOME_CLIENT_SAVING_PHASE_2", "saving-phase-2" },
+  { GNOME_CLIENT_FROZEN, "GNOME_CLIENT_FROZEN", "frozen" },
+  { GNOME_CLIENT_DISCONNECTED, "GNOME_CLIENT_DISCONNECTED", "disconnected" },
+  { 0, NULL, NULL }
+};
+static const GtkEnumValue _gnome_dock_position_type_values[] = {
+  { GNOME_DOCK_POS_LEFT, "GNOME_DOCK_POS_LEFT", "left" },
+  { GNOME_DOCK_POS_RIGHT, "GNOME_DOCK_POS_RIGHT", "right" },
+  { GNOME_DOCK_POS_TOP, "GNOME_DOCK_POS_TOP", "top" },
+  { GNOME_DOCK_POS_BOTTOM, "GNOME_DOCK_POS_BOTTOM", "bottom" },
+  { GNOME_DOCK_POS_DETACHED, "GNOME_DOCK_POS_DETACHED", "detached" },
+  { 0, NULL, NULL }
+};
+static const GtkEnumValue _gnome_dock_item_behavior_values[] = {
+  { GNOME_DOCK_ITEM_BEH_NORMAL, "GNOME_DOCK_ITEM_BEH_NORMAL", "normal" },
+  { GNOME_DOCK_ITEM_BEH_EXCLUSIVE, "GNOME_DOCK_ITEM_BEH_EXCLUSIVE", "exclusive" },
+  { GNOME_DOCK_ITEM_BEH_NEVER_DETACH, "GNOME_DOCK_ITEM_BEH_NEVER_DETACH", "never-detach" },
+  { GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL, "GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL", "never-vertical" },
+  { GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL, "GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL", "never-horizontal" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_font_picker_mode_values[] = {

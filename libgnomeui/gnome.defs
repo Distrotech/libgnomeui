@@ -70,8 +70,29 @@
 
 (define-enum GnomeClientState
    (idle GNOME_CLIENT_IDLE)
-   (saving GNOME_CLIENT_SAVING)
-   (waiting GNOME_CLIENT_WAITING))
+   (saving-phase-1 GNOME_CLIENT_SAVING_PHASE_1)
+   (waiting-for-phase-2 GNOME_CLIENT_WAITING_FOR_PHASE_2)
+   (saving-phase-2 GNOME_CLIENT_SAVING_PHASE_2)
+   (frozen GNOME_CLIENT_FROZEN)
+   (disconnected GNOME_CLIENT_DISCONNECTED))
+
+; enumerations from "gnome-dock.h"
+
+(define-enum GnomeDockPositionType
+   (left GNOME_DOCK_POS_LEFT)
+   (right GNOME_DOCK_POS_RIGHT)
+   (top GNOME_DOCK_POS_TOP)
+   (bottom GNOME_DOCK_POS_BOTTOM)
+   (detached GNOME_DOCK_POS_DETACHED))
+
+; enumerations from "gnome-dock-item.h"
+
+(define-flags GnomeDockItemBehavior
+   (normal GNOME_DOCK_ITEM_BEH_NORMAL)
+   (exclusive GNOME_DOCK_ITEM_BEH_EXCLUSIVE)
+   (never-detach GNOME_DOCK_ITEM_BEH_NEVER_DETACH)
+   (never-vertical GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL)
+   (never-horizontal GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL))
 
 ; enumerations from "gnome-font-picker.h"
 
