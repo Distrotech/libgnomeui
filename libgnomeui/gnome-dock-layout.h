@@ -80,8 +80,6 @@ struct _GnomeDockLayoutClass
   GtkObjectClass parent_class;
 };
 
-
-
 GnomeDockLayout     *gnome_dock_layout_new      (void);
 guint                gnome_dock_layout_get_type (void);
    
