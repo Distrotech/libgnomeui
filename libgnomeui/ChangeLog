@@ -1,3 +1,7 @@
+1998-04-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-geometry.c: New file, provides X geometry string parsing.
+
 1998-04-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-propertybox.c (global_apply): Use correct types for the

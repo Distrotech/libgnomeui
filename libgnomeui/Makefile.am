@@ -22,6 +22,7 @@ libgnomeui_la_SOURCES = \
 	gnome-color-selector.c 		\
 	gnome-dialog.c                  \
 	gnome-dns.c			\
+	gnome-geometry.c		\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
 	gnome-font-selector.c 		\
@@ -59,6 +60,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
 	gnome-font-selector.h 		\
+	gnome-geometry.h		\
 	gnome-ice.h			\
 	gnome-icon-list.h		\
 	gnome-messagebox.h		\
