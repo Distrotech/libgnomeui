@@ -1310,8 +1310,8 @@ static GtkTooltips *tooltips = NULL;
 void
 gnome_widget_set_tooltip (GtkWidget *widget, const char *tiptext)
 {
-	g_return_val_if_fail(widget != NULL, NULL);
-	g_return_val_if_fail(GTK_IS_WIDGET(widget), NULL);
+	g_return_if_fail(widget != NULL);
+	g_return_if_fail(GTK_IS_WIDGET(widget));
 
 	if( ! tooltips)
 		tooltips = gtk_tooltips_new();
