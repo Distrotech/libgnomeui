@@ -1,3 +1,11 @@
+Thu May 18 20:31:16 2000  George Lebl <jirka@5z.com>
+
+	* gnome-ditem-edit.[ch]: fix api naming.  the child1,child2 are now
+	  functions (should ease wrappers) and there's a child3 accessor.
+	  new_notebook now refs/sinks the object, and when the notebook dies
+	  it unrefs it.  This is much saner behaviour and the notebook thus
+	  basically "takes ownership" of the ditem-edit
+
 Thu May 18  Martijn van Beers  <martijn@earthling.net>
 
 	* Makefile.am:
