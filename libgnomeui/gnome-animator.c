@@ -54,7 +54,6 @@ struct _GnomeAnimatorFrame
   int y_offset;
 
   /* Overlay mode */
-  /* FIXME: IMPLEMENT! (either here or in loading from GdkPixbufAnimation) */
   GdkPixbufFrameAction action;
 
   GdkBitmap *mask;
@@ -67,6 +66,8 @@ static void gnome_animator_class_init (GnomeAnimatorClass * class);
 static void gnome_animator_init (GnomeAnimator * animator);
 static void destroy (GtkObject * object);
 static void finalize (GObject * object);
+static void realize (GtkWidget * widget);
+static void unrealize (GtkWidget * widget);
 static void prepare_aux_pixmaps (GnomeAnimator * animator);
 static void draw_background_pixbuf (GnomeAnimator * animator);
 static void draw (GtkWidget * widget, GdkRectangle * area);
@@ -79,6 +80,7 @@ static void state_changed (GtkWidget * widget, GtkStateType previous_state);
 static void style_set (GtkWidget * widget, GtkStyle * previous_style);
 */
 static GnomeAnimatorFrame *append_frame (GnomeAnimator * animator);
+static void free_frame (GnomeAnimatorFrame *frame);
 static gint timer_cb (gpointer data);
 
 GNOME_CLASS_BOILERPLATE (GnomeAnimator, gnome_animator,
@@ -88,6 +90,7 @@ static void
 gnome_animator_init (GnomeAnimator * animator)
 {
   GTK_WIDGET_SET_FLAGS (animator, GTK_NO_WINDOW);
+
   animator->frame_num = 0;
   animator->status = GNOME_ANIMATOR_STATUS_STOPPED;
   animator->loop_type = GNOME_ANIMATOR_LOOP_RESTART;
@@ -110,6 +113,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
   widget_class->draw = draw;
   widget_class->expose_event = expose;
   widget_class->size_allocate = size_allocate;
+  widget_class->realize = realize;
+  widget_class->unrealize = unrealize;
 
   object_class->destroy = destroy;
   gobject_class->finalize = finalize;
@@ -118,30 +123,82 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 static void
 destroy (GtkObject * object)
 {
-  /* remember, destroy can be run multiple times! */
+	GnomeAnimator *self = GNOME_ANIMATOR (object);
+	GnomeAnimatorFrame *frame;
 
-  g_return_if_fail (object != NULL);
-  g_return_if_fail (GNOME_IS_ANIMATOR (object));
+	/* remember, destroy can be run multiple times! */
 
-  GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_ANIMATOR (object));
+
+	if (self->_priv->offscreen_pixmap != NULL) {
+		gdk_pixmap_unref (self->_priv->offscreen_pixmap);
+		self->_priv->offscreen_pixmap = NULL;
+	}
+
+	if (self->_priv->background_pixbuf != NULL) {
+		gdk_pixbuf_unref (self->_priv->background_pixbuf);
+		self->_priv->background_pixbuf = NULL;
+	}
+
+	/* free all frames */
+	frame = self->_priv->first_frame;
+	while (frame != NULL) {
+		GnomeAnimatorFrame *next = frame->next;
+		free_frame (frame);
+		frame = next;
+	}
+	self->_priv->first_frame = NULL;
+	self->_priv->last_frame = NULL;
+	self->_priv->current_frame = NULL;
+
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
 finalize (GObject * object)
 {
-  GnomeAnimator *self;
+	GnomeAnimator *self;
 
-  g_return_if_fail (object != NULL);
-  g_return_if_fail (GNOME_IS_ANIMATOR (object));
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_ANIMATOR (object));
 
-  self = GNOME_ANIMATOR(object);
+	self = GNOME_ANIMATOR(object);
 
-  g_free(self->_priv);
-  self->_priv = NULL;
+	g_free(self->_priv);
+	self->_priv = NULL;
 
-  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
+static void
+realize (GtkWidget * widget)
+{
+	GnomeAnimator *self = GNOME_ANIMATOR (widget);
+
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
+
+	prepare_aux_pixmaps (self);
+	draw_background_pixbuf (self);
+}
+
+static void
+unrealize (GtkWidget * widget)
+{
+	GnomeAnimator *self = GNOME_ANIMATOR (widget);
+
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, unrealize, (widget));
+
+	if (self->_priv->offscreen_pixmap != NULL) {
+		gdk_pixmap_unref (self->_priv->offscreen_pixmap);
+		self->_priv->offscreen_pixmap = NULL;
+	}
+
+	if (self->_priv->background_pixbuf != NULL) {
+		gdk_pixbuf_unref (self->_priv->background_pixbuf);
+		self->_priv->background_pixbuf = NULL;
+	}
+}
 
 static void
 size_allocate (GtkWidget * widget, GtkAllocation * allocation)
@@ -220,18 +277,18 @@ prepare_aux_pixmaps (GnomeAnimator * animator)
 	  widget->requisition.height > 0 && GTK_WIDGET_REALIZED (widget))
 	{
 	  _priv->offscreen_pixmap = gdk_pixmap_new (widget->window,
-						       widget->requisition.
-						       width,
-						       widget->requisition.
-						       height, visual->depth);
+						    widget->requisition.
+						    width,
+						    widget->requisition.
+						    height, visual->depth);
 
 	  _priv->background_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
-							FALSE,
-							8,
-							widget->requisition.
-							width,
-							widget->requisition.
-							height);
+						     FALSE,
+						     8,
+						     widget->requisition.
+						     width,
+						     widget->requisition.
+						     height);
 	}
     }
 }
@@ -332,7 +389,6 @@ get_current_frame (GnomeAnimator *animator, int *x_offset, int *y_offset)
 	pixels = gdk_pixbuf_get_pixels (pixbuf);
 	rowstride = gdk_pixbuf_get_rowstride (pixbuf);
 
-	/* FIXME: is 0 full transparency or opaqueness? I always get confused */
 	memset(pixels, 0, rowstride * animator->_priv->area.height);
 
 	framei = frame->prev;
@@ -390,17 +446,6 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
   widget = GTK_WIDGET (animator);
   misc = GTK_MISC (animator);
   _priv = animator->_priv;
-
-  /* FIXME this is a bad hack, because I don't want to introduce
-   * a new realize()/unrealize() pair in the stable libs right now
-   * and risk screwing things up
-   */
-  if (_priv->offscreen_pixmap == NULL &&
-      GTK_WIDGET_REALIZED (GTK_WIDGET (animator)))
-    {
-      prepare_aux_pixmaps (animator);
-      draw_background_pixbuf (animator);
-    }
 
   draw_source = get_current_frame (animator, &x_off, &y_off);
 
@@ -625,6 +670,15 @@ style_set (GtkWidget * widget, GtkStyle * previous_style)
 }
 */
 
+static void
+free_frame (GnomeAnimatorFrame *frame)
+{
+	if (frame->pixbuf != NULL)
+		gdk_pixbuf_unref (frame->pixbuf);
+	frame->pixbuf = NULL;
+	g_free(frame);
+}
+
 static GnomeAnimatorFrame *
 append_frame (GnomeAnimator * animator)
 {
@@ -638,8 +692,10 @@ append_frame (GnomeAnimator * animator)
 
   if (_priv->first_frame == NULL)
     {
-      _priv->first_frame = _priv->last_frame = _priv->current_frame =
-	new_frame;
+      _priv->first_frame =
+	      _priv->last_frame =
+	      _priv->current_frame =
+	      new_frame;
       new_frame->prev = NULL;
     }
   else
@@ -899,16 +955,6 @@ gnome_animator_append_frames_from_pixbuf_animation (GnomeAnimator * animator,
       frame->y_offset = gdk_pixbuf_frame_get_y_offset(pixbuf_frame);
       frame->interval = gdk_pixbuf_frame_get_delay_time(pixbuf_frame);
       frame->action = gdk_pixbuf_frame_get_action(pixbuf_frame);
-
-      if (frame->action != GDK_PIXBUF_FRAME_DISPOSE)
-        {
-	  static gboolean did_warning = FALSE;
-	  if( ! did_warning)
-	    g_warning("Only GDK_PIXBUF_FRAME_DISPOSE is supported for animations currently");
-	  did_warning = TRUE;
-	  /* FIXME: This needs to be done.  One way to do this is to create new full frames
-	   * here. */
-	}
     }
 
   return TRUE;

@@ -1,3 +1,11 @@
+Fri Sep 01 02:58:58 2000  George Lebl <jirka@5z.com>
+
+	* gnome-animator.c: fix memory leaks, remove old FIXMEs and minor
+	  cleanup
+
+	* gnome-druid.c: Make sure the non-visible button is never the
+	  default one.
+
 Thu Aug 31 15:21:38 2000  George Lebl <jirka@5z.com>
 
 	* gnome-icon-sel.[ch]: use the new gnome-macros stuff and general

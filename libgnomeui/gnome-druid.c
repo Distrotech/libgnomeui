@@ -645,6 +645,20 @@ gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 	gtk_widget_set_sensitive (druid->next, next_sensitive);
 	gtk_widget_set_sensitive (druid->cancel, cancel_sensitive);
 }
+
+static void
+undefault_button (GtkWidget *widget)
+{
+	GtkWidget *toplevel;
+
+	toplevel = gtk_widget_get_toplevel (widget);
+
+	if (GTK_IS_WINDOW (toplevel) &&
+	    GTK_WINDOW (toplevel)->default_widget == widget) {
+		gtk_window_set_default (GTK_WINDOW (toplevel), NULL);
+	}
+}
+
 /**
  * gnome_druid_set_show_finish
  * @druid: A Druid widget.
@@ -662,11 +676,15 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
 	g_return_if_fail (GNOME_IS_DRUID (druid));
 
 	if (show_finish) {
+		undefault_button (druid->next);
+
 		if (GTK_WIDGET_MAPPED (druid->next)) {
 			gtk_widget_unmap (druid->next);
 			gtk_widget_map (druid->finish);
 		}
 	} else {
+		undefault_button (druid->finish);
+
 		if (GTK_WIDGET_MAPPED (druid->finish)) {
 			gtk_widget_unmap (druid->finish);
 			gtk_widget_map (druid->next);
