@@ -1,3 +1,8 @@
+Fri Jul  3 16:51:31 CDT 1998  Richard Hestilow  <hestgray@ionet.net>
+
+	* gnome-app.c (gnome_app_set_toolbar) : Added check for 
+	Gtk+ support of relief features. (GTK_HAVE_RELIEF_STYLE)
+
 Mon Jun 29 14:10:48 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-preferences.h, gnome-preferences.c 
