@@ -1,5 +1,15 @@
 2002-04-17  Federico Mena Quintero  <federico@ximian.com>
 
+	* libgnomeui/gnome-icon-sel.c (gnome_icon_selection_show_icons):
+	Added ATK relation between the "Loading Icons..." label and both
+	the icon selection widget and the progress bar.
+
+	* libgnomeui/gnome-icon-entry.c (ientry_browse): The relation
+	should be between the actual priv->pickbutton and the dialog box,
+	not the icon entry and the dialog box.
+
+2002-04-17  Federico Mena Quintero  <federico@ximian.com>
+
 	* libgnomeui/gnome-icon-entry.c (gnome_icon_entry_instance_init):
 	Added accessible name/description to the icon entry button.
 	(ientry_browse): Added name/description/relation to the pick dialog.

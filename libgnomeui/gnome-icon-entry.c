@@ -697,7 +697,7 @@ ientry_browse(GnomeIconEntry *ientry)
 		_add_atk_name_desc (priv->pick_dialog,
 				    _("Icon selection dialog"),
 				    _("This dialog box lets you select an icon."));
-		_add_atk_relation (GTK_WIDGET (ientry), priv->pick_dialog,
+		_add_atk_relation (priv->pickbutton, priv->pick_dialog,
 				   ATK_RELATION_CONTROLLER_FOR, ATK_RELATION_CONTROLLED_BY);
 
 		priv->icon_sel = gnome_icon_selection_new ();
