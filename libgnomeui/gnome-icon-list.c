@@ -949,7 +949,8 @@ gil_destroy (GtkObject *object)
 	gil->dirty  = TRUE;
 	gnome_icon_list_clear (gil);
 
-	gtk_object_unref (GTK_OBJECT (gil->adj));
+	if (gil->adj)
+		gtk_object_unref (GTK_OBJECT (gil->adj));
 	
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -1390,6 +1391,15 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	return TRUE;
 }
 
+static void gil_set_scroll_adjustments (GtkLayout *layout,
+					GtkAdjustment *hadjustment,
+					GtkAdjustment *vadjustment) {
+	Gil *gil = GIL (layout);
+
+	gnome_icon_list_set_hadjustment (gil, hadjustment);
+	gnome_icon_list_set_vadjustment (gil, vadjustment);
+}
+
 typedef gboolean (*xGtkSignal_BOOL__INT_POINTER) (GtkObject * object,
 						  gint     arg1,
 						  gpointer arg2,
@@ -1459,10 +1469,12 @@ gil_class_init (GilClass *gil_class)
 {
 	GtkObjectClass *object_class;
 	GtkWidgetClass *widget_class;
+	GtkLayoutClass *layout_class;
 	GnomeCanvasClass *canvas_class;
 
 	object_class = (GtkObjectClass *)   gil_class;
 	widget_class = (GtkWidgetClass *)   gil_class;
+	layout_class = (GtkLayoutClass *)   gil_class;
 	canvas_class = (GnomeCanvasClass *) gil_class;
 
 	parent_class = gtk_type_class (gnome_canvas_get_type ());
@@ -1521,6 +1533,12 @@ gil_class_init (GilClass *gil_class)
 	widget_class->button_press_event   = gil_button_press;
 	widget_class->button_release_event = gil_button_release;
 	widget_class->motion_notify_event  = gil_motion_notify;
+
+	/* we override GtkLayout's set_scroll_adjustments signal instead
+	 * of creating a new signal so as to keep binary compatibility.
+	 * Anyway, a widget class only needs one of these signals, and
+	 * this gives the correct implementation for GnomeIconList */
+	layout_class->set_scroll_adjustments = gil_set_scroll_adjustments;
 
 	gil_class->select_icon             = real_select_icon;
 	gil_class->unselect_icon           = real_unselect_icon;

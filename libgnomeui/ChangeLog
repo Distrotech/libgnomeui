@@ -1,5 +1,11 @@
 1999-02-10  James Henstridge  <james@daa.com.au>
 
+	* gnome-icon-list.c: added an implementation for the
+	gtk_widget_set_scroll_adjustments interface.  Rather than creating a
+	new signal, I have overriden GtkLayout's set_scroll_adjustment signal.
+	This keeps binary compatibility and allows you to pack a GnomeIconList
+	into a GtkScrolledWindow and get the correct behaviour again.
+
 	* gnome-app-util.c: The gnome_app_progress_* functions would sometimes
 	cause a segfault.  There was code to make sure that stale progress
 	keys would get destroyed when the associated GnomeApp got destroyed.
