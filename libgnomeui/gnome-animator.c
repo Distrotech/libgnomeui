@@ -40,20 +40,6 @@ struct _GnomeAnimatorPrivate
   GnomeAnimatorFrame *current_frame;
 };
 
-/*
- * enum GdkPixbufFrameAction:
- *    GDK_PIXBUF_FRAME_RETAIN
- *    GDK_PIXBUF_FRAME_DISPOSE
- *    GDK_PIXBUF_FRAME_REVERT
- *
- * struct GdkPixbufFrame:
- *    GdkPixbuf *pixbuf
- *    int x_offset;
- *    int y_offset;
- *    int delay_time;
- *    GdkPixbufFrameAction action;
- */
-
 struct _GnomeAnimatorFrame
 {
   int frame_num;
@@ -142,9 +128,6 @@ size_allocate (GtkWidget * widget, GtkAllocation * allocation)
     }
 
   widget->allocation = *allocation;
-  g_print ("size_allocate(): x %d  y %d  width %d  height %d\n",
-	   allocation->x, allocation->y, allocation->width,
-	   allocation->height);
 
   if (GTK_WIDGET_REALIZED (widget))
     gdk_window_clear_area (widget->window,
