@@ -281,7 +281,8 @@ gnome_password_dialog_new (const char	*dialog_title,
 			    TRUE, TRUE, 0);
 
 	/* Configure the table */
-	gtk_container_set_border_width (table, CAPTION_TABLE_BORDER_WIDTH);
+	gtk_container_set_border_width (GTK_CONTAINER (table),
+					CAPTION_TABLE_BORDER_WIDTH);
 
 	gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 5);
 

@@ -93,6 +93,8 @@ static void libgnomeui_segv_setup	(GnomeProgram *program,
 /* Prototype for a private gnome_stock function */
 void _gnome_stock_icons_init (void);
 
+#ifdef HAVE_ESD
+
 /* Whether to make noises when the user clicks a button, etc.  We cache it
  * in a boolean rather than querying GConf every time.
  */
@@ -100,6 +102,8 @@ static gboolean use_event_sounds;
 
 /* GConf client for monitoring the event sounds option */
 static GConfClient *gconf_client = NULL;
+
+#endif /* HAVE_ESD */
 
 
 enum { ARG_DISABLE_CRASH_DIALOG=1, ARG_DISPLAY };

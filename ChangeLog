@@ -1,3 +1,11 @@
+Wed Jun 04 15:54:18 2003  George Lebl <jirka@5z.com>
+
+	* libgnomeui/gnome-password-dialog.c: fix cast warning
+
+	* libgnomeui/gnome-ui-init.c: things that are normally only
+	  with HAVE_ESD were generating a warning so added #ifdef HAVE_ESD
+	  around those as well.
+
 2003-05-26  Anders Carlsson  <andersca@codefactory.se>
 
 	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok):
