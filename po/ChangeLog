@@ -1,6 +1,7 @@
 2001-07-26  Peter Williams  <peterw@ximian.com>
 
-	* POTFILES.in: Remove gnome-recently-used.c
+	* POTFILES.in: Remove gnome-recently-used.c. Track the
+	rename of gnome-init.c to gnome-ui-init.c
 
 2001-07-19  Michael Meeks  <michael@ximian.com>
 

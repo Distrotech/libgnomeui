@@ -46,7 +46,7 @@
 #include <libgnomeui/gnome-canvas-init.h>
 
 #include "gnome-client.h"
-#include "gnome-init.h"
+#include "gnome-ui-init.h"
 #include "gnome-winhints.h"
 #include "gnome-stock-icons.h"
 

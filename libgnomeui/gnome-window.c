@@ -31,7 +31,7 @@
 #include <gdk/gdkx.h>
 
 #include "gnome-window.h"
-#include "gnome-init.h"
+#include "gnome-ui-init.h"
 
 /**
  * gnome_window_toplevel_set_title:

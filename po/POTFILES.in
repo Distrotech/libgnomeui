@@ -12,7 +12,7 @@ libgnomeui/gnome-druid-page-standard.c
 libgnomeui/gnome-druid.c
 libgnomeui/gnome-font-picker.c
 libgnomeui/gnome-href.c
-libgnomeui/gnome-init.c
+libgnomeui/gnome-ui-init.c
 libgnomeui/gnome-paper-selector.c
 libgnomeui/gnome_segv.c
 libgnomeui/oafgnome.c
