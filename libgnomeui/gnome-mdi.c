@@ -431,6 +431,9 @@ static void child_list_menu_create (GnomeMDI *mdi, GnomeApp *app)
 	
 	submenu = gnome_app_find_menu_pos(app->menubar, mdi->child_list_path, &pos);
 	
+	if(submenu == NULL)
+		return;
+
 	child = mdi->children;
 	while(child) {
 		item = gtk_menu_item_new();
@@ -465,7 +468,8 @@ void child_list_menu_remove_item (GnomeMDI *mdi, GnomeMDIChild *child)
 		app = GNOME_APP(app_node->data);
 		
 		shell = gnome_app_find_menu_pos(app->menubar, mdi->child_list_path, &pos);
-		
+
+
 		if(shell) {
 			item = find_item_by_child(GTK_MENU_SHELL(shell), child);
 			if(item) {
@@ -492,18 +496,21 @@ void child_list_menu_add_item (GnomeMDI *mdi, GnomeMDIChild *child)
 	while(app_node) {
 		app = GNOME_APP(app_node->data);
 		
-		item = gtk_menu_item_new();
-		gtk_signal_connect(GTK_OBJECT(item), "activate",
-						   GTK_SIGNAL_FUNC(child_list_activated_cb), mdi);
-		label = child_set_label(child, NULL);
-		gtk_widget_show(label);
-		gtk_container_add(GTK_CONTAINER(item), label);
-		gtk_object_set_data(GTK_OBJECT(item), GNOME_MDI_CHILD_KEY, child);
-		gtk_widget_show(item);
-		
 		submenu = gnome_app_find_menu_pos(app->menubar, mdi->child_list_path, &pos);
-		gtk_menu_shell_insert(GTK_MENU_SHELL(submenu), item, pos);
-		gtk_widget_queue_resize(submenu);
+
+		if(submenu) {
+			item = gtk_menu_item_new();
+			gtk_signal_connect(GTK_OBJECT(item), "activate",
+							   GTK_SIGNAL_FUNC(child_list_activated_cb), mdi);
+			label = child_set_label(child, NULL);
+			gtk_widget_show(label);
+			gtk_container_add(GTK_CONTAINER(item), label);
+			gtk_object_set_data(GTK_OBJECT(item), GNOME_MDI_CHILD_KEY, child);
+			gtk_widget_show(item);
+			
+			gtk_menu_shell_insert(GTK_MENU_SHELL(submenu), item, pos);
+			gtk_widget_queue_resize(submenu);
+		}
 		
 		app_node = app_node->next;
 	}

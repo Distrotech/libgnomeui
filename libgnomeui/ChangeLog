@@ -1,3 +1,9 @@
+1998-12-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c: added checks for all returns of
+	gnome_app_find_menu_pos, although the programmer should take
+	of using proper paths!
+
 1998-12-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-popup-menu.c (gnome_popup_menu_do_popup_modal): REmoved
