@@ -14,19 +14,6 @@ gnome-stock-icons
 
 </para>
 
-<!-- ##### MACRO GNOME_ICON_SIZE_TOOLBAR ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### VARIABLE gnome_icon_size_toolbar ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### FUNCTION init_gnome_stock_icons ##### -->
 <para>
 

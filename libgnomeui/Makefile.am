@@ -8,7 +8,7 @@ LIB_VERSION_NUM=0.0.0
 #
 # The targets
 #
-bin_PROGRAMS    = gnome_segv
+bin_PROGRAMS    = gnome_segv2
 lib_LTLIBRARIES = libgnomeui-2.la
 
 gnomehdir = $(includedir)/gnome-2.0
@@ -199,7 +199,7 @@ gnometypes.c: $(srcdir)/gnometype_inits.c
 
 #######################
 
-gnome_segv_SOURCES = gnome_segv.c
+gnome_segv2_SOURCES = gnome_segv.c
 
 EXTRA_DIST =					\
 	AUTHORS					\

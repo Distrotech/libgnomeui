@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
   /* in case gnome-session is segfaulting :-) */
   gnome_client_disable_master_connection();
   
-  gnome_init_with_popt_table("gnome_segv", VERSION, argc, argv, NULL, 0, &ctx);
+  gnome_init_with_popt_table("gnome_segv2", VERSION, argc, argv, NULL, 0, &ctx);
 
   memset(&sa, 0, sizeof(sa));
   sa.sa_handler = SIG_IGN;
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
     }
   else
     {
-      fprintf(stderr, _("Usage: gnome_segv appname signum\n"));
+      fprintf(stderr, _("Usage: gnome_segv2 appname signum\n"));
       return 1;
     }
   appname = g_strdup(args[0]);

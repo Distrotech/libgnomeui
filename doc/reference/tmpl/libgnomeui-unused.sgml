@@ -1,0 +1,59 @@
+<!-- ##### MACRO GNOME_CALL_PARENT_HANDLER ##### -->
+<para>
+
+</para>
+
+@parent_class_cast: 
+@name: 
+@args: 
+
+<!-- ##### MACRO GNOME_CALL_PARENT_HANDLER_WITH_DEFAULT ##### -->
+<para>
+
+</para>
+
+@parent_class_cast: 
+@\
+					       name:
+@\
+					       name:
+@\
+					       name:
+@\
+					       name:
+@\
+					       name:
+@args: 
+@def_return: 
+
+<!-- ##### MACRO GNOME_CLASS_BOILERPLATE ##### -->
+<para>
+
+</para>
+
+@type: 
+@type_as_function: 
+@\
+				parent_type:
+@\
+				parent_type:
+@\
+				parent_type:
+@\
+				parent_type:
+@\
+				parent_type:
+@parent_type_as_function: 
+
+<!-- ##### MACRO GNOME_ICON_SIZE_TOOLBAR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE gnome_icon_size_toolbar ##### -->
+<para>
+
+</para>
+
+

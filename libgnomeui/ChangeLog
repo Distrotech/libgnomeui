@@ -1,3 +1,9 @@
+2001-09-18  Havoc Pennington  <hp@redhat.com>
+
+	* Makefile.am (gnome_segv2_SOURCES): rename gnome_segv
+
+	* gnome_segv.c (main): rename gnome_segv to gnome_segv2
+
 2001-09-19  Darin Adler  <darin@bentspoon.com>
 
 	* gnome-about.c: (gnome_about_draw_names): Must unref the
