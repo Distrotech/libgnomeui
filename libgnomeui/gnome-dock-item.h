@@ -73,6 +73,12 @@ struct _GnomeDockItem
   guint                 float_window_mapped : 1;
   guint                 is_floating : 1;
   guint                 in_drag : 1;
+  guint                 is_hidden : 1;
+
+  /* when the button is pressed, this is set to 1
+   * if by the time the button is depressed this is 0, which is
+   * set in the motion_event handler */
+  guint                 button_down : 1;
 
   /* Start drag position (wrt widget->window).  */
   gint                  dragoff_x, dragoff_y;

@@ -1,3 +1,11 @@
+Mon Jun 19 21:14:51 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dock-item.[ch]: add a hidden state.  When the user presses
+	  the mouse button, a hide toggle is expected.  If motion notify is
+	  gotten we start a drag.
+
+	* gnome-dock-layout.[ch]: load and save the is_hidden boolean
+
 2000-06-15  Jody Goldberg <jgoldberg@home.com>
 
 	* gnome-calculator.c (set_result) : setlocale returns a static buffer.

@@ -65,6 +65,8 @@ struct _GnomeDockLayoutItem
     } docked;
 
   } position;
+
+  guint is_hidden:1;
 };
 
 struct _GnomeDockLayout
