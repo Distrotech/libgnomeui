@@ -10,9 +10,9 @@
 
 /* TO-DO list for the canvas:
  *
- * - Have the canvas carry a list of areas to repaint.  If a request_repaint is made for an area
- *   that does not touch any of the areas of the list, queue the new area.  Else, grow the existing,
- *   touched area (see Gnumeric for reasons).
+ * - Implement hiding/showing of items.
+ *
+ * - Implement "all_items_that_are_over_some_other_item_and_overlap_it()"
  *
  * - Implement gnome_canvas_item_reparent().
  *
@@ -20,20 +20,23 @@
  *
  * - Stipple for filling items.
  *
+ * - Widget item (finish it).
+ *
+ * - Have the canvas carry a list of areas to repaint.  If a request_repaint is made for an area
+ *   that does not touch any of the areas of the list, queue the new area.  Else, grow the existing,
+ *   touched area (see Gnumeric for reasons).
+ *
  * - Curve support for line item.
  *
  * - Polygon item.
  *
  * - Arc item.
  *
- * - Widget item.
- *
- * - Text item: wrapped and clipped text, support justification.
+ * - Text item: wrapped and clipped text, support (multiline) justification.
  *
  * - Sane font handling API.
  *
  * - Get_arg methods for items:
- *   - How to query colors?
  *   - How to fetch the outline width and know whether it is in pixels or units?
  *
  * - Talk Raph into using a very similar API for GtkCaanvas.
