@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-11 04:35+0100\n"
-"PO-Revision-Date: 2004-02-11 06:20+0100\n"
+"POT-Creation-Date: 2004-02-18 04:23+0100\n"
+"PO-Revision-Date: 2004-02-18 15:36+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -649,11 +649,11 @@ msgstr "PREFIX"
 msgid "Disable connection to session manager"
 msgstr "Vypnout napojení na správce sezení"
 
-#: libgnomeui/gnome-client.c:974
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Správa sezení"
 
-#: libgnomeui/gnome-client.c:2474
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Zrušit odhlášení"
 
@@ -946,7 +946,9 @@ msgstr "Používat GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Jestli pro výběr souborů používat nový widget GtkFileChooser nebo widget GtkFileSelection."
+msgstr ""
+"Jestli pro výběr souborů používat nový widget GtkFileChooser nebo widget "
+"GtkFileSelection."
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -1338,7 +1340,7 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI knihovna"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
+#: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1346,7 +1348,7 @@ msgstr ""
 "dialog\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:721
+#: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1392,13 +1394,17 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Použití: gnome_segv2 jménoaplikace čsignálu\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "_Restartovat aplikaci"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Informovat vývojáře"
+msgid "_Inform Developers"
+msgstr "_Informovat vývojáře"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Ladit"
+msgid "_Debug"
+msgstr "_Ladit"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
