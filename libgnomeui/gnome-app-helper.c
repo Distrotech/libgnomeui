@@ -155,6 +155,199 @@ setup_underlined_accelerator (GtkAccelGroup *accel_group,
 				menu_accel_group, keyval, 0, 0);
 }
 
+/* Callback to display hint in the statusbar when a menu item is 
+ * activated. For GtkStatusbar.
+ */
+
+static void
+put_hint_in_statusbar(GtkWidget* menuitem, gpointer data)
+{
+  gchar* hint = gtk_object_get_data(GTK_OBJECT(menuitem),
+                                    "apphelper_statusbar_hint");
+  GtkWidget* bar = data;
+  guint id;
+
+  g_return_if_fail (hint != NULL);
+  g_return_if_fail (bar != NULL);
+  g_return_if_fail (GTK_IS_STATUSBAR(bar));
+
+  id = gtk_statusbar_get_context_id(GTK_STATUSBAR(bar),
+                                    "gnome-app-helper:menu-hint");
+
+  gtk_statusbar_push(GTK_STATUSBAR(bar),id,hint);
+}
+
+/* Callback to remove hint when the menu item is deactivated.
+ * For GtkStatusbar.
+ */
+static void
+remove_hint_from_statusbar(GtkWidget* menuitem, gpointer data)
+{
+  GtkWidget* bar = data;
+  guint id;
+
+  g_return_if_fail (bar != NULL);
+  g_return_if_fail (GTK_IS_STATUSBAR(bar));
+
+  id = gtk_statusbar_get_context_id(GTK_STATUSBAR(bar),
+                                    "gnome-app-helper:menu-hint");
+
+  gtk_statusbar_pop(GTK_STATUSBAR(bar), id);
+}
+
+/* Install a hint for a menu item
+ */
+static void
+install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
+{
+  g_return_if_fail (uiinfo != NULL);
+  g_return_if_fail (uiinfo->widget != NULL);
+  g_return_if_fail (GTK_IS_MENU_ITEM(uiinfo->widget));
+
+  /* This is mildly fragile; if someone destroys the appbar
+     but not the menu, chaos will ensue. */
+
+  if (uiinfo->hint)
+    {
+      gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
+                           "apphelper_statusbar_hint",
+                           uiinfo->hint);
+
+      gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
+                          "select",
+                          GTK_SIGNAL_FUNC(put_hint_in_statusbar),
+                          bar);
+      
+      gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
+                          "deselect",
+                          GTK_SIGNAL_FUNC(remove_hint_from_statusbar),
+                          bar);
+    }
+}
+
+void 
+gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
+                                        GnomeUIInfo* uiinfo)
+{
+  g_return_if_fail (bar != NULL);
+  g_return_if_fail (uiinfo != NULL);
+  g_return_if_fail (GTK_IS_STATUSBAR (bar));
+  
+  
+  while (uiinfo->type != GNOME_APP_UI_ENDOFINFO)
+    {
+      switch (uiinfo->type) {
+      case GNOME_APP_UI_SUBTREE:
+        gnome_app_install_statusbar_menu_hints(bar, uiinfo->moreinfo);
+        // FALL THRU
+      case GNOME_APP_UI_ITEM:
+      case GNOME_APP_UI_TOGGLEITEM:
+      case GNOME_APP_UI_SEPARATOR:
+      case GNOME_APP_UI_HELP:
+        install_menuitem_hint_to_statusbar(uiinfo, bar);
+          break;
+      default:
+        ; // nothing
+        break;
+      }
+
+      ++uiinfo;
+    }
+}
+
+
+/* Callback to display hint in the statusbar when a menu item is 
+ * activated. For GnomeAppBar.
+ */
+
+static void
+put_hint_in_appbar(GtkWidget* menuitem, gpointer data)
+{
+  gchar* hint = gtk_object_get_data (GTK_OBJECT(menuitem),
+                                     "apphelper_appbar_hint");
+  GtkWidget* bar = data;
+
+  g_return_if_fail (hint != NULL);
+  g_return_if_fail (bar != NULL);
+  g_return_if_fail (GNOME_IS_APPBAR(bar));
+
+  gnome_appbar_set_status (GNOME_APPBAR(bar), hint);
+}
+
+/* Callback to remove hint when the menu item is deactivated.
+ * For GnomeAppBar.
+ */
+static void
+remove_hint_from_appbar(GtkWidget* menuitem, gpointer data)
+{
+  GtkWidget* bar = data;
+
+  g_return_if_fail (bar != NULL);
+  g_return_if_fail (GNOME_IS_APPBAR(bar));
+
+  gnome_appbar_refresh (GNOME_APPBAR(bar));
+}
+
+/* Install a hint for a menu item
+ */
+static void
+install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
+{
+  g_return_if_fail (uiinfo != NULL);
+  g_return_if_fail (uiinfo->widget != NULL);
+  g_return_if_fail (GTK_IS_MENU_ITEM(uiinfo->widget));
+
+  /* This is mildly fragile; if someone destroys the appbar
+     but not the menu, chaos will ensue. */
+
+  if (uiinfo->hint)
+    {
+      gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
+                           "apphelper_appbar_hint",
+                           uiinfo->hint);
+
+      gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
+                          "select",
+                          GTK_SIGNAL_FUNC(put_hint_in_appbar),
+                          bar);
+      
+      gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
+                          "deselect",
+                          GTK_SIGNAL_FUNC(remove_hint_from_appbar),
+                          bar);
+    }
+}
+
+void
+gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
+                                     GnomeUIInfo* uiinfo)
+{
+  g_return_if_fail (appbar != NULL);
+  g_return_if_fail (uiinfo != NULL);
+  g_return_if_fail (GNOME_IS_APPBAR (appbar));
+  
+  
+  while (uiinfo->type != GNOME_APP_UI_ENDOFINFO)
+    {
+      switch (uiinfo->type) {
+      case GNOME_APP_UI_SUBTREE:
+        gnome_app_install_appbar_menu_hints(appbar, uiinfo->moreinfo);
+        // FALL THRU
+      case GNOME_APP_UI_ITEM:
+      case GNOME_APP_UI_TOGGLEITEM:
+      case GNOME_APP_UI_SEPARATOR:
+      case GNOME_APP_UI_HELP:
+          install_menuitem_hint_to_appbar(uiinfo, appbar);
+          break;
+      default:
+        ; // nothing
+        break;
+      }
+
+      ++uiinfo;
+    }
+}
+
 /* Creates a menu item appropriate for the SEPARATOR, ITEM, TOGGLEITEM, or 
  * SUBTREE types.  If the item is inside a radio group, then a pointer to the 
  * group's list must be specified as well (*radio_group must be NULL for the 

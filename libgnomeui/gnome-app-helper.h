@@ -13,7 +13,9 @@
 #ifndef GNOME_APP_HELPER_H
 #define GNOME_APP_HELPER_H
 
+#include <gtk/gtkstatusbar.h>
 #include <libgnome/gnome-defs.h>
+#include "gnome-appbar.h"
 
 BEGIN_GNOME_DECLS
 
@@ -322,6 +324,15 @@ void gnome_app_insert_menus_interp (GnomeApp *app, gchar *path, GnomeUIInfo *men
 				    GtkCallbackMarshal relay_func, gpointer data,
 				    GtkDestroyNotify destroy_func);
 
+
+/* Activate the menu item hints, displaying in the given appbar.
+   This can't be automatic since we can't reliably find the 
+   appbar. */
+void gnome_app_install_appbar_menu_hints    (GnomeAppBar* appbar,
+                                             GnomeUIInfo* uiinfo);
+
+void gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
+                                             GnomeUIInfo* uiinfo);
 
 END_GNOME_DECLS
 

@@ -1,3 +1,11 @@
+1998-12-07  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-app-helper.c (gnome_app_install_appbar_menu_hints): 
+	Function which connects the hints in a UIInfo menu struct to
+	some GnomeAppBar.
+	(gnome_app_install_statusbar_menu_hints): Same for 
+	GtkStatusbar.
+
 1998-12-08  James Henstridge  <james@daa.com.au>
 
 	* gnome-mdi-generic-child.c: added documentation for this widget.
