@@ -1,8 +1,8 @@
 #include <config.h>
 #include <gnome.h>
 
-/* #define ANIMFILE "mailcheck/email.png" */
-#define ANIMFILE "gnome-ppp-animation-large.png"
+#define ANIMFILE "mailcheck/email.png"
+/* #define ANIMFILE "gnome-ppp-animation-large.png" */
 
 static void quit_cb (GtkWidget * widget, void *data);
 static void toggle_start_stop_cb (GtkWidget * widget, void *data);
