@@ -218,7 +218,7 @@ gnome_add_dock_item (GladeXML *xml,
 	BonoboDockItemBehavior behavior;
 	int i;
 	GtkWidget *child;
-	GtkWindow *toplevel;
+	GtkWidget *toplevel;
 
 	band = offset = position = 0;
 	placement = BONOBO_DOCK_TOP;
@@ -270,10 +270,10 @@ gnome_dock_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info)
 {
 	int i;
 	GtkWidget *child;
-	GtkWindow *toplevel;
+	GtkWidget *toplevel;
 	GladeChildInfo *childinfo;
 
-	toplevel = glade_xml_get_toplevel (xml);
+	toplevel = gtk_widget_get_ancestor (w, GNOME_TYPE_APP);
 
 	for (i = 0; i < info->n_children; i++) {
 		childinfo = &info->children[i];
@@ -288,7 +288,7 @@ gnome_dock_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info)
 		
 		child = glade_xml_build_widget (xml, childinfo->child);
 		
-		if (GNOME_IS_APP (toplevel))
+		if (toplevel != NULL)
 		    gnome_app_set_contents (GNOME_APP (toplevel), child);
 		else
 		    bonobo_dock_set_client_area (BONOBO_DOCK (w), child);
