@@ -28,6 +28,9 @@ AC_SUBST(LDFLAGS)
 
 GNOME_COMPILE_WARNINGS(maximum)
 
+dnl Define GNOME_ENABLE_DEBUG if the --enable-debug switch was given.
+GNOME_DEBUG_CHECK
+
 dnl
 dnl Check for -lSM (for gnome-client)
 dnl
