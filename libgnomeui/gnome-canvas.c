@@ -3458,6 +3458,21 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 
 	gtk_layout_freeze (GTK_LAYOUT (canvas));
 
+	/* Clear the redraw area to avoid creating enormous microtile unions.
+	 * The new area (visible area) will be re-queued when we thaw the
+	 * layout.
+	 */
+
+	if (canvas->need_redraw) {
+		canvas->need_redraw = FALSE;
+		art_uta_free (canvas->redraw_area);
+		canvas->redraw_area = NULL;
+		canvas->redraw_x1 = 0;
+		canvas->redraw_y1 = 0;
+		canvas->redraw_x2 = 0;
+		canvas->redraw_y2 = 0;
+	}
+
 	scroll_to (canvas, x1, y1);
 
 	canvas->need_repick = TRUE;
