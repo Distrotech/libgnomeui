@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-05-02 15:47-0400\n"
+"POT-Creation-Date: 2004-06-02 08:18-0400\n"
+"PO-Revision-Date: 2004-06-02 08:19-0400\n"
 "Last-Translator: Gareth Owen <gowen72@yahoo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -140,6 +140,7 @@ msgstr "About %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -197,6 +198,7 @@ msgid "_Game"
 msgstr "_Game"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Help"
 
@@ -387,11 +389,11 @@ msgstr "Configure the application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_About"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "About this application"
 
@@ -418,7 +420,7 @@ msgstr "Create a new window"
 msgid "_Close This Window"
 msgstr "_Close This Window"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Close the current window"
 
@@ -804,22 +806,43 @@ msgstr "Background colour is set"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Contents Background Colour"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Contents Background colour"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Contents Background colour as a GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Contents Background colour set"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Contents Background colour is set"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Logo Background Colour"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Logo Background colour"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Logo Background colour as a GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Logo Background colour set"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Logo Background colour is set"
 
@@ -1340,13 +1363,11 @@ msgstr "GNOME GUI Library"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Multiple segmentation faults occurred; can't display error dialogue\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1403,8 +1424,9 @@ msgstr "_Inform Developers"
 msgid "_Debug"
 msgstr "_Debug"
 
-#~ msgid "Exit the test"
-#~ msgstr "Exit the test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Exit the test"
 
 #~ msgid " domain %s"
 #~ msgstr " domain %s"
