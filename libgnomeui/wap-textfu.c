@@ -2475,11 +2475,11 @@ wap_textfu_unselect_anchor(WapTextFu *textfu)
   wai = textfu->active_card->active_anchor;
   attr = wai->attr;
   bgcolor = (PangoAttrColor *)attr->bg_color_attr;
-  bgcolor->red = bgcolor->green = bgcolor->blue = 65535;
+  bgcolor->color.red = bgcolor->color.green = bgcolor->color.blue = 65535;
 
   fgcolor = (PangoAttrColor *)attr->fg_color_attr;
-  fgcolor->red = fgcolor->green = 0;
-  fgcolor->blue = 65535;
+  fgcolor->color.red = fgcolor->color.green = 0;
+  fgcolor->color.blue = 65535;
 
   textfu->active_card->active_anchor = NULL;
   pango_layout_set_attributes(textfu->active_card->active_anchor_para->layout, textfu->active_card->active_anchor_para->attrs);
@@ -2500,10 +2500,10 @@ wap_textfu_select_anchor(WapTextFu *textfu, WapParagraphInfo *para, WapAnchorInf
 
   attr = wai->attr;
   bgcolor = (PangoAttrColor *)attr->bg_color_attr;
-  bgcolor->red = bgcolor->green = 0; bgcolor->blue = 65535;
+  bgcolor->color.red = bgcolor->color.green = 0; bgcolor->color.blue = 65535;
 
   fgcolor = (PangoAttrColor *)attr->fg_color_attr;
-  fgcolor->red = fgcolor->green = fgcolor->blue = 65535;
+  fgcolor->color.red = fgcolor->color.green = fgcolor->color.blue = 65535;
 
   textfu->active_card->active_anchor = wai;
   textfu->active_card->active_anchor_para = para;
