@@ -5,26 +5,17 @@ INCLUDES = \
 	-I$(top_builddir)/intl				\
 	-I$(top_srcdir)/libgnomeui			\
 	$(WARN_CFLAGS)					\
-	$(GNOMESUPPORT_CFLAGS)				\
-	$(GLIB_CFLAGS)					\
-	$(GTK_CFLAGS)					\
-	$(OAF_CFLAGS)					\
-	$(LIBART_CFLAGS)				\
+	$(LIBGNOMECANVAS_CFLAGS)			\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
         -DGNOMEBINDIR=\""$(bindir)"\" 			\
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
-	$(ORBIT_CFLAGS)					\
-	$(GCONF_CFLAGS)					\
 	-DVERSION=\"$(VERSION)\"
 
 LDADD =	\
-	$(top_builddir)/libgnomeui/libgnomeui-$(GNOME_INTERFACE_VERSION).la \
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la	\
-        $(LIBGNOMEUI_LIBS)						\
-	$(LIBART_LIBS)							\
+	$(top_builddir)/libgnomeui/libgnomeui-2.la \
 	$(INTLLIBS)
 
 noinst_PROGRAMS = \

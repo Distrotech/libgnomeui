@@ -1,5 +1,12 @@
 2001-03-24  Martin Baulig  <baulig@suse.de>
 
+	* demos/: New directory. This was copied here from
+	gnome-libs/demos with the full CVS history.
+
+	* Makefile.am (SUBDIRS): Added demos.
+
+2001-03-24  Martin Baulig  <baulig@suse.de>
+
 	* configure.in: Set package name to `libgnomeui-2'.
 
 2001-03-05  Martin Baulig  <baulig@suse.de>
