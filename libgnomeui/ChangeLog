@@ -1,3 +1,16 @@
+1998-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c: clone apps layout whenever possible.
+	(gnome_mdi_set_mode): optimized things a bit. also
+	preserve the layout of the active app.
+	* gnome-dock.c (gnome_dock_size_allocate): keep
+	dock->client_area in sync with client_area's allocation
+	or initialize it to proper values if there is no client_area.
+	(drag_begin): no longer need to set values to dock->client_rect, as
+	it is always kept in sync with client_area's allocation, also we
+	don't SIGSEGV anymore if no client_area is set.
+	(drag_floating): prevent a SIGSEGV if there is no client_area.
+
 1998-12-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-init.c: Do not use imlib private data, use the new

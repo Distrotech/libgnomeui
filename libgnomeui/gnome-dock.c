@@ -386,6 +386,8 @@ gnome_dock_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
   child_allocation.x = left_bands_x;
   child_allocation.y = top_bands_y;
 
+  dock->client_rect = child_allocation;
+
   if (dock->client_area != NULL && GTK_WIDGET_VISIBLE (dock->client_area))
     gtk_widget_size_allocate (dock->client_area, &child_allocation);
 }
@@ -773,7 +775,7 @@ drag_new (GnomeDock *dock,
   /* Set the offset of `item' in the band.  */
   if (is_vertical)
     gnome_dock_band_set_child_offset (new->band, GTK_WIDGET (item),
-                                      y - dock->client_area->allocation.y);
+                                      y - dock->client_rect.y);
   else
     gnome_dock_band_set_child_offset (new->band, GTK_WIDGET (item),
                                       x - GTK_WIDGET (dock)->allocation.x);
@@ -814,18 +816,20 @@ drag_floating (GnomeDock *dock,
   if (item_widget->parent != dock_widget)
     {
       GtkAllocation *dock_allocation;
-      GtkAllocation *client_allocation;
+      GtkAllocation *client_allocation = NULL;
 
       /* The item is currently not floating (so it is not our child).
          Make it so if we are outside the docking areas.  */
 
       dock_allocation = &dock_widget->allocation;
-      client_allocation = &dock->client_area->allocation;
+      if(dock->client_area)
+        client_allocation = &dock->client_area->allocation;
+
       if (rel_x < dock_allocation->x
           || rel_x >= dock_allocation->x + dock_allocation->width
           || rel_y < dock_allocation->y
           || rel_y >= dock_allocation->y + dock_allocation->height
-          || (rel_x >= client_allocation->x
+          || (client_allocation && rel_x >= client_allocation->x
               && rel_x < client_allocation->x + client_allocation->width
               && rel_y >= client_allocation->y
               && rel_y < client_allocation->y + client_allocation->height))
@@ -947,7 +951,8 @@ drag_begin (GtkWidget *widget, gpointer data)
   g_list_foreach (dock->right_bands, drag_begin_foreach_func, item);
   g_list_foreach (dock->left_bands, drag_begin_foreach_func, item);
 
-  dock->client_rect = dock->client_area->allocation;
+  /*   if(dock->client_area)
+       dock->client_rect = dock->client_area->allocation; */
 }
 
 
