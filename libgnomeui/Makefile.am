@@ -147,6 +147,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-text.c		\
 	gnome-vfs-util.c		\
 	gnome-textfu.c			\
+	gnome-window.c			\
 	wap-textfu.c			\
 	$(gnorba_built)
 
@@ -229,6 +230,7 @@ gnome_headers = \
 	libgnomeui.h			\
 	gnome-vfs-util.h		\
 	gnome-textfu.h			\
+	gnome-window.h			\
 	wap-textfu.h			\
 	oafgnome.h
 

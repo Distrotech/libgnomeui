@@ -1,3 +1,11 @@
+2000-10-15  Chema Celorio  <chema@celorio.com>
+ 
+ 	* gnome-window.c (gnome_window_toplevel_set_title): new file &
+ 	function. apps should use it to set the tile, so that we can
+ 	have a unform way of setting the window properties (only the
+ 	title for now)
+ 	* gnome-window.h: new file
+ 
 2000-10-15  Martin Baulig  <baulig@suse.de>
 
 	* gnome-gconf.c: Reflect latest GConf API changes.
