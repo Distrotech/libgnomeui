@@ -358,16 +358,7 @@ static int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
 static char *
 build_hash_key(char *icon, char *subtype)
 {
-        char *s;
-
-        s = g_malloc(strlen(icon) + strlen(subtype) + 2);
-        strcpy(s, icon);
-        strcat(s, STOCK_SEP_STR);
-        if (subtype)
-                strcat(s, subtype);
-        else
-                strcat(s, GNOME_STOCK_PIXMAP_REGULAR);
-        return s;
+	return g_copy_strings(icon, STOCK_SEP_STR, subtype ? subtype : GNOME_STOCK_PIXMAP_REGULAR, NULL);
 }
 
 

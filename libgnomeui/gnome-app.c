@@ -11,9 +11,6 @@
 static void gnome_app_class_init     	      (GnomeAppClass *appclass);
 static void gnome_app_destroy        	      (GtkObject     *object);
 static void gnome_app_init           	      (GnomeApp      *app);
-static void gnome_app_rightclick_event        (GtkWidget *widget,
-					       GdkEventButton *event,
-					       GnomeApp *app);
 static void gnome_app_setpos_activate_menubar (GtkMenuItem *menu_item,
 					       GnomeApp *app);
 static void gnome_app_setpos_activate_toolbar (GtkMenuItem *menu_item,
@@ -82,19 +79,16 @@ gnome_app_new(gchar *appname, char *title)
 {
 	GtkWidget *retval;
 	GnomeApp  *app;
-	char      *prefix;
 		
 	retval = gtk_type_new(gnome_app_get_type());
 	app = GNOME_APP (retval);
-	if(app->name)
-	  {
-	    app->name = g_strdup (appname);
-	    app->prefix = g_copy_strings ("/", appname, "/", NULL);
-	  }
-	else
-	  {
-	    app->name = app->prefix = NULL;
-	  }
+
+	if (app->name) {
+		app->name = g_strdup (appname);
+		app->prefix = g_copy_strings ("/", appname, "/", NULL);
+	} else
+		app->name = app->prefix = NULL;
+	
 	if (title)
 		gtk_window_set_title(GTK_WINDOW(retval), title);
 
@@ -121,14 +115,16 @@ gnome_app_destroy(GtkObject *object)
 static void
 gnome_app_configure_positions (GnomeApp *app)
 {
-
 	/* 1.  The menubar: can go on top or bottom */
 	if (app->menubar){
 		GtkWidget *handlebox = app->menubar->parent;
 
 		gtk_widget_ref (handlebox);
-		if (app->menubar->parent->parent) 
+		gtk_widget_hide (handlebox);
+
+		if (app->menubar->parent->parent)
 			gtk_container_remove (GTK_CONTAINER(app->table), handlebox);
+
 		gtk_table_attach(GTK_TABLE(app->table),
 				 handlebox,
 				 0, 3,
@@ -137,6 +133,7 @@ gnome_app_configure_positions (GnomeApp *app)
 				 GTK_EXPAND | GTK_FILL,
 				 GTK_SHRINK,
 				 0, 0);
+		gtk_widget_show (handlebox);
 		gtk_widget_unref (handlebox);
 	}
 	
@@ -146,6 +143,8 @@ gnome_app_configure_positions (GnomeApp *app)
 		int offset = 0;
 
 		gtk_widget_ref (handlebox);
+		gtk_widget_hide (handlebox);
+
 		if (app->toolbar->parent->parent)
 			gtk_container_remove (GTK_CONTAINER(app->table), handlebox);
 
@@ -169,7 +168,7 @@ gnome_app_configure_positions (GnomeApp *app)
 			else
 				moffset = 0;
 			gtk_table_attach(GTK_TABLE(app->table),
-					 app->toolbar->parent,
+					 handlebox,
 					 0, 3,
 					 ((app->pos_toolbar==GNOME_APP_POS_TOP)?0:2) + moffset,
 					 ((app->pos_toolbar==GNOME_APP_POS_TOP)?1:3) + moffset,
@@ -177,10 +176,11 @@ gnome_app_configure_positions (GnomeApp *app)
 					 GTK_SHRINK,
 					 0, 0);
 		}
+		gtk_widget_show (handlebox);
 		gtk_widget_unref (handlebox);
 	}
 	/* Repack any contents of ours */
-	if(app->contents) 
+	if(app->contents)
 		gnome_app_set_contents(app, app->contents);
 }	
 
@@ -198,14 +198,13 @@ gnome_app_menu_set_position(GnomeApp *app, GnomeAppWidgetPositionType pos_menuba
 	gnome_app_configure_positions (app);
 	
 	/* Save the new setting */
-	if(app->prefix)
-	  {
-	    gnome_config_push_prefix (app->prefix);
-	    gnome_config_set_string ("Placement/Menu",
-				     locations [pos_menubar]);
-	    gnome_config_pop_prefix ();
-	    gnome_config_sync ();
-	  }
+	if(app->prefix) {
+		gnome_config_push_prefix (app->prefix);
+		gnome_config_set_string ("Placement/Menu",
+					 locations [pos_menubar]);
+		gnome_config_pop_prefix ();
+		gnome_config_sync ();
+	}
 }
 
 void
@@ -240,22 +239,22 @@ gnome_app_toolbar_set_position(GnomeApp *app, GnomeAppWidgetPositionType pos_too
 
 /* These are used for knowing where to pack the contents into the
    table, so we don't have to recompute every time we set_contents */
-gint startxs[2][4] = {
+static gint startxs[2][4] = {
 	{0, 0, 1, 0},
 	{0, 0, 1, 0}
 };
 
-gint endxs[2][4] = {
+static gint endxs[2][4] = {
 	{3, 3, 3, 2},
 	{3, 3, 3, 2}
 };
 
-gint startys[2][4] = {
+static gint startys[2][4] = {
 	{2, 1, 1, 1},
 	{1, 0, 0, 0}
 };
 
-gint endys[2][4] = {
+static gint endys[2][4] = {
 	{3, 2, 3, 3},
 	{2, 1, 2, 2}
 };
@@ -263,27 +262,31 @@ gint endys[2][4] = {
 void
 gnome_app_set_contents(GnomeApp *app, GtkWidget *contents)
 {
-	g_return_if_fail(app != NULL);
-	g_return_if_fail(GNOME_IS_APP(app));
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP(app));
 
-	if(app->contents != NULL)
-		gtk_container_remove(GTK_CONTAINER(app->table), app->contents);
+	/* We ref the contents in case app->contents == contents, so
+	 * that the container_remove will not destroy the widget.
+	 */
 
 	gtk_widget_ref (contents);
   
-	/* Is this going to work at all? I'll wager not
-	   XXX oops it worked, my mistake :) */
-	gtk_table_attach(GTK_TABLE(app->table),
-			 contents,
-			 startxs[app->pos_menubar][app->pos_toolbar],
-			 endxs[app->pos_menubar][app->pos_toolbar],
-			 startys[app->pos_menubar][app->pos_toolbar],
-			 endys[app->pos_menubar][app->pos_toolbar],
-			 GTK_EXPAND | GTK_FILL,
-			 GTK_EXPAND | GTK_FILL,
-			 0, 0);
+	if (app->contents != NULL)
+		gtk_container_remove (GTK_CONTAINER (app->table), app->contents);
+
+	gtk_table_attach (GTK_TABLE (app->table),
+			  contents,
+			  startxs[app->pos_menubar][app->pos_toolbar],
+			  endxs[app->pos_menubar][app->pos_toolbar],
+			  startys[app->pos_menubar][app->pos_toolbar],
+			  endys[app->pos_menubar][app->pos_toolbar],
+			  GTK_EXPAND | GTK_FILL,
+			  GTK_EXPAND | GTK_FILL,
+			  0, 0);
 	app->contents = contents;
-	gtk_widget_show(contents);
+	gtk_widget_show (contents);
+
+	gtk_widget_unref (contents);
 }
 
 static GtkWidget *toolbar_menu = NULL;
@@ -299,6 +302,7 @@ make_button_menubar(GnomeApp *app)
 	menu_menu = gtk_menu_new();
 	menuitems[0] = gtk_menu_item_new_with_label("Top");
 	menuitems[1] = gtk_menu_item_new_with_label("Bottom");
+
 	for(i = 0; i < 2; i++){
 		gtk_widget_show(menuitems[i]);
 		gtk_menu_append(GTK_MENU(menu_menu), menuitems[i]);
@@ -330,7 +334,6 @@ make_button_toolbar (GnomeApp *app)
 static void
 gnome_app_rightclick_menubar(GtkWidget *widget, GdkEventButton *event, GnomeApp *app)
 {
-	int i;
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 
@@ -345,13 +348,12 @@ gnome_app_rightclick_menubar(GtkWidget *widget, GdkEventButton *event, GnomeApp 
 	gtk_menu_popup(GTK_MENU(menu_menu),
 		       NULL, NULL, NULL, NULL,
 		       event->button,
-		       GDK_CURRENT_TIME);
+		       event->time);
 }
 
 static void
 gnome_app_rightclick_toolbar(GtkWidget *widget, GdkEventButton *event, GnomeApp *app)
 {
-	int i;
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 
@@ -366,7 +368,7 @@ gnome_app_rightclick_toolbar(GtkWidget *widget, GdkEventButton *event, GnomeApp 
 	gtk_menu_popup(GTK_MENU(toolbar_menu),
 		       NULL, NULL, NULL, NULL,
 		       event->button,
-		       GDK_CURRENT_TIME);
+		       event->time);
 }
 
 static void
@@ -382,7 +384,7 @@ gnome_app_setpos_activate_menubar (GtkMenuItem *menu_item, GnomeApp *app)
 	 * since a menubar can only go top
 	 * or bottom
 	 */
-	for(i = 0; i < 2; i++) 
+	for(i = 0; i < 2; i++)
 		if((gpointer)menu_item == (gpointer)menuitems[i]){
 			gnome_app_menu_set_position (app, i);
 			break;
@@ -398,19 +400,20 @@ gnome_app_setpos_activate_toolbar (GtkMenuItem *menu_item, GnomeApp *app)
 
 	gtk_menu_popdown(GTK_MENU(toolbar_menu));
 	
-	for (i = 0; i < 4; i++) 
+	for (i = 0; i < 4; i++)
 		if ((gpointer)menu_item == (gpointer)toolitems[i]){
 			gnome_app_toolbar_set_position (app, i);
 			break;
 		}
 }
 
-void gnome_app_set_menus     (GnomeApp *app,
-			      GtkMenuBar *menubar)
+void
+gnome_app_set_menus (GnomeApp *app,
+		     GtkMenuBar *menubar)
 {
-	GnomeAppWidgetPositionType pos;
+	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
+	char *location = NULL;
 	GtkWidget *hb;
-	char *location;
 
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
@@ -428,26 +431,25 @@ void gnome_app_set_menus     (GnomeApp *app,
 	gtk_container_add(GTK_CONTAINER(hb), app->menubar);
 
 	/* Load the position from the configuration file */
-	if(app->prefix)
-	  {
-	    gnome_config_push_prefix (app->prefix);
-	    location = gnome_config_get_string ("Placement/Menu=top");
-	    pos = get_orientation (location);
-	  }
+	if (app->prefix) {
+		gnome_config_push_prefix (app->prefix);
+		location = gnome_config_get_string ("Placement/Menu=top");
+		pos = get_orientation (location);
+	}
 
 	/* Menus can not go on left or right */
 	if (pos != GNOME_APP_POS_TOP && pos != GNOME_APP_POS_BOTTOM)
 		pos = GNOME_APP_POS_TOP;
 	gnome_app_menu_set_position (app, pos);
-	if(app->prefix)
-	  {
-	    g_free (location);
-	    gnome_config_pop_prefix ();
-	  }
+	if (app->prefix) {
+		g_free (location);
+		gnome_config_pop_prefix ();
+	}
 }
 
-void gnome_app_set_toolbar   (GnomeApp *app,
-			      GtkToolbar *toolbar)
+void
+gnome_app_set_toolbar (GnomeApp *app,
+		       GtkToolbar *toolbar)
 {
 	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
 	GtkWidget *hb;
@@ -467,19 +469,13 @@ void gnome_app_set_toolbar   (GnomeApp *app,
 	gtk_container_add(GTK_CONTAINER(hb), app->toolbar);
 
 	/* Load the position from the configuration file */
-	if(app->prefix)
-	  {
-	    gnome_config_push_prefix (app->prefix);
-	    location = gnome_config_get_string ("Placement/Toolbar=top");
-	    pos = get_orientation (location);
-	    gnome_app_toolbar_set_position (app, pos);
-	    g_free (location);
-	    gnome_config_pop_prefix ();
-	  }
-	else
-	    gnome_app_toolbar_set_position (app, pos);
+	if (app->prefix) {
+		gnome_config_push_prefix (app->prefix);
+		location = gnome_config_get_string ("Placement/Toolbar=top");
+		pos = get_orientation (location);
+		gnome_app_toolbar_set_position (app, pos);
+		g_free (location);
+		gnome_config_pop_prefix ();
+	} else
+		gnome_app_toolbar_set_position (app, pos);
 }
-
-
-
-
