@@ -177,15 +177,33 @@ gnome_druid_destroy (GtkObject *object)
 	g_return_if_fail (GNOME_IS_DRUID (object));
 
 	druid = GNOME_DRUID (object);
-        GTK_OBJECT_CLASS(parent_class)->destroy(object);
 
-	gtk_widget_destroy (druid->back);
-	gtk_widget_destroy (druid->next);
-	gtk_widget_destroy (druid->cancel);
-	gtk_widget_destroy (druid->finish);
-	g_list_free (druid->children);
-        druid->children = NULL;
+	if(druid->back) {
+		gtk_widget_destroy (druid->back);
+		druid->back = NULL;
+	}
+	if(druid->next) {
+		gtk_widget_destroy (druid->next);
+		druid->next = NULL;
+	}
+	if(druid->cancel) {
+		gtk_widget_destroy (druid->cancel);
+		druid->cancel = NULL;
+	}
+	if(druid->finish) {
+		gtk_widget_destroy (druid->finish);
+		druid->finish = NULL;
+	}
 
+	/* Remove all children, we set current to NULL so
+	 * that the remove code doesn't try to do anything funny */
+	druid->_priv->current = NULL;
+	while (druid->_priv->children != NULL) {
+		GnomeDruidPage *child = druid->_priv->children->data;
+		gtk_container_remove (GTK_CONTAINER (druid), GTK_WIDGET(child));
+	}
+
+        GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
 
 static void

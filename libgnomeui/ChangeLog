@@ -1,3 +1,8 @@
+2000-11-28  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid.c (gnome_druid_destroy): Merge in from HEAD the
+	correct destroy function.
+
 1999-11-22  Morten Welinder  <terra@diku.dk>
 
 	* gnome-druid-page-standard.c (gnome_druid_page_standard_init):
