@@ -10,7 +10,6 @@
 #include "libgnome/libgnome.h"
 #include "gnome-calculator.h"
 
-#include "pixmaps/calculator-font.xpm"
 #define FONT_WIDTH 20
 #define FONT_HEIGHT 30
 #define DISPLAY_LEN 13
@@ -21,8 +20,8 @@ typedef enum {
 	CALCULATOR_PARENTHESIS,
 } CalculatorActionType;
 
-typedef gdouble (*MathFunction1) (gdouble arg1);
-typedef gdouble (*MathFunction2) (gdouble arg1, gdouble arg2);
+typedef gdouble (*MathFunction1) (gdouble);
+typedef gdouble (*MathFunction2) (gdouble, gdouble);
 
 typedef struct _CalculatorStack CalculatorStack;
 struct _CalculatorStack {
@@ -41,6 +40,14 @@ static void gnome_calculator_destroy	(GtkObject		*object);
 static GtkVBoxClass *parent_class;
 
 static GdkPixmap * font_pixmap=NULL;
+
+typedef struct _CalculatorButton CalculatorButton;
+struct _CalculatorButton {
+	char *name;
+	GtkSignalFunc signal_func;
+	gpointer data;
+	gpointer invdata;
+};
 
 guint
 gnome_calculator_get_type (void)
@@ -241,6 +248,14 @@ set_result(GnomeCalculator *gc)
 	put_led_font(gc);
 }
 
+static void
+unselect_invert(GnomeCalculator *gc)
+{
+	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(gc->invert_button),
+				    FALSE);
+	gc->invert=FALSE;
+}
+
 static gint
 no_func(GtkWidget *w, gpointer data)
 {
@@ -252,6 +267,8 @@ no_func(GtkWidget *w, gpointer data)
 	reduce_stack(gc);
 	set_result(gc);
 
+	unselect_invert(gc);
+
 	return TRUE;
 }
 
@@ -259,27 +276,38 @@ no_func(GtkWidget *w, gpointer data)
 static gint
 simple_func(GtkWidget *w, gpointer data)
 {
-	MathFunction1 func = data;
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
 	CalculatorStack *stack;
+	CalculatorButton *but = data;
+	MathFunction1 func = but->data;
+	MathFunction1 invfunc = but->invdata;
 
 	g_return_val_if_fail(func!=NULL,TRUE);
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
 	push_input(gc);
 
-	if(!gc->stack)
+	if(!gc->stack) {
+		unselect_invert(gc);
 		return TRUE;
+	}
 
 	stack = gc->stack->data;
-	if(stack->type!=CALCULATOR_NUMBER)
+	if(stack->type!=CALCULATOR_NUMBER) {
+		unselect_invert(gc);
 		return TRUE;
+	}
 
 	reduce_stack(gc);
 
-	stack->d.number = (*func)(stack->d.number);
+	if(!gc->invert || invfunc==NULL)
+		stack->d.number = (*func)(stack->d.number);
+	else
+		stack->d.number = (*invfunc)(stack->d.number);
 
 	set_result(gc);
+
+	unselect_invert(gc);
 
 	return TRUE;
 }
@@ -287,30 +315,41 @@ simple_func(GtkWidget *w, gpointer data)
 static gint
 math_func(GtkWidget *w, gpointer data)
 {
-	MathFunction2 func = data;
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
 	CalculatorStack *stack;
+	CalculatorButton *but = data;
+	MathFunction2 func = but->data;
+	MathFunction2 invfunc = but->invdata;
 
 	g_return_val_if_fail(func!=NULL,TRUE);
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
 	push_input(gc);
 
-	if(!gc->stack)
+	if(!gc->stack) {
+		unselect_invert(gc);
 		return TRUE;
+	}
 
 	stack = gc->stack->data;
-	if(stack->type!=CALCULATOR_NUMBER)
+	if(stack->type!=CALCULATOR_NUMBER) {
+		unselect_invert(gc);
 		return TRUE;
+	}
 
 	reduce_stack(gc);
 	set_result(gc);
 	
 	stack = g_new(CalculatorStack,1);
 	stack->type = CALCULATOR_FUNCTION;
-	stack->d.func = func;
+	if(!gc->invert || invfunc==NULL)
+		stack->d.func = func;
+	else
+		stack->d.func = invfunc;
 
 	gc->stack = g_list_prepend(gc->stack,stack);
+
+	unselect_invert(gc);
 
 	return TRUE;
 }
@@ -318,7 +357,11 @@ math_func(GtkWidget *w, gpointer data)
 static gint
 reset_calc(GtkWidget *w, gpointer data)
 {
-	GnomeCalculator *gc = data;
+	GnomeCalculator *gc;
+	if(w)
+		gc = gtk_object_get_user_data(GTK_OBJECT(w));
+	else
+		gc = data;
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
@@ -329,11 +372,13 @@ reset_calc(GtkWidget *w, gpointer data)
 	strcpy(gc->result_string,"0");
 	gc->memory = 0;
 	gc->mode = GNOME_CALCULATOR_DEG;
-	gc->inverse = FALSE;
+	gc->invert = FALSE;
 
 	gc->add_digit = TRUE;
 	push_input(gc);
 	set_result(gc);
+
+	unselect_invert(gc);
 
 	return TRUE;
 }
@@ -341,7 +386,11 @@ reset_calc(GtkWidget *w, gpointer data)
 static gint
 clear_calc(GtkWidget *w, gpointer data)
 {
-	GnomeCalculator *gc = data;
+	GnomeCalculator *gc;
+	if(w)
+		gc = gtk_object_get_user_data(GTK_OBJECT(w));
+	else
+		gc = data;
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
@@ -350,11 +399,13 @@ clear_calc(GtkWidget *w, gpointer data)
 
 	gc->result = 0;
 	strcpy(gc->result_string,"0");
-	gc->inverse = FALSE;
+	gc->invert = FALSE;
 
 	gc->add_digit = TRUE;
 	push_input(gc);
 	set_result(gc);
+
+	unselect_invert(gc);
 
 	return TRUE;
 }
@@ -362,8 +413,13 @@ clear_calc(GtkWidget *w, gpointer data)
 static gint
 add_digit(GtkWidget *w, gpointer data)
 {
-	gchar *digit = data;
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
+	CalculatorButton *but = data;
+	gchar *digit = but->name;
+
+	/*if the string is set, used for EE*/
+	if(but->data)
+		digit = but->data;
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 	g_return_val_if_fail(digit!=NULL,TRUE);
@@ -377,6 +433,8 @@ add_digit(GtkWidget *w, gpointer data)
 		gc->add_digit = TRUE;
 		gc->result_string[0] = '\0';
 	}
+
+	unselect_invert(gc);
 
 	if(digit[0]=='e') {
 		if(strchr(gc->result_string,'e'))
@@ -418,13 +476,15 @@ c_neg(gdouble arg)
 static gint
 negate_val(GtkWidget *w, gpointer data)
 {
-	GnomeCalculator *gc = data;
+	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
 	char *p;
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
+	unselect_invert(gc);
+
 	if(!gc->add_digit)
-		return simple_func(w,c_neg);
+		return simple_func(w,data);
 
 	if((p=strchr(gc->result_string,'e'))!=NULL) {
 		p++;
@@ -492,6 +552,45 @@ c_pow2(gdouble arg1)
 	return pow(arg1,2);
 }
 
+static gdouble
+c_pow10(gdouble arg1)
+{
+	return pow(10,arg1);
+}
+
+static gdouble
+c_powe(gdouble arg1)
+{
+	return pow(M_E,arg1);
+}
+
+static gdouble
+c_fact(gdouble arg1)
+{
+	return 0; /*FIXME: factorial*/
+}
+
+static gdouble
+set_result_to(GnomeCalculator *gc, gdouble result)
+{
+	gdouble old;
+
+	if(gc->stack==NULL ||
+	   ((CalculatorStack *)gc->stack->data)->type!=CALCULATOR_NUMBER) {
+		gc->add_digit = TRUE;
+		old = gc->result;
+		gc->result = result;
+		push_input(gc);
+	} else {
+		old = ((CalculatorStack *)gc->stack->data)->d.number;
+		((CalculatorStack *)gc->stack->data)->d.number = result;
+	}
+
+	set_result(gc);
+
+	return old;
+}
+
 static gint
 store_m(GtkWidget *w, gpointer data)
 {
@@ -505,6 +604,8 @@ store_m(GtkWidget *w, gpointer data)
 
 	put_led_font(gc);
 
+	unselect_invert(gc);
+
 	return TRUE;
 }
 
@@ -515,15 +616,9 @@ recall_m(GtkWidget *w, gpointer data)
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
-	if(gc->stack==NULL ||
-	   ((CalculatorStack *)gc->stack->data)->type!=CALCULATOR_NUMBER) {
-		gc->add_digit = TRUE;
-		gc->result = gc->memory;
-		push_input(gc);
-	} else
-		((CalculatorStack *)gc->stack->data)->d.number = gc->memory;
+	set_result_to(gc,gc->memory);
 
-	set_result(gc);
+	unselect_invert(gc);
 
 	return TRUE;
 }
@@ -541,6 +636,8 @@ sum_m(GtkWidget *w, gpointer data)
 
 	put_led_font(gc);
 
+	unselect_invert(gc);
+
 	return TRUE;
 }
 
@@ -552,19 +649,24 @@ exchange_m(GtkWidget *w, gpointer data)
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
-	if(gc->stack==NULL ||
-	   ((CalculatorStack *)gc->stack->data)->type!=CALCULATOR_NUMBER) {
-		gc->add_digit = TRUE;
-		tmp = gc->result;
-		gc->result = gc->memory;
-		push_input(gc);
-	} else {
-		tmp = ((CalculatorStack *)gc->stack->data)->d.number;
-		((CalculatorStack *)gc->stack->data)->d.number = gc->memory;
-	}
-	gc->memory = tmp;
+	gc->memory = set_result_to(gc,gc->memory);
 
-	set_result(gc);
+	unselect_invert(gc);
+
+	return TRUE;
+}
+
+static gint
+invert_toggle(GtkWidget *w, gpointer data)
+{
+	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
+
+	g_return_val_if_fail(gc!=NULL,TRUE);
+
+	if(GTK_TOGGLE_BUTTON(w)->active)
+		gc->invert=TRUE;
+	else
+		gc->invert=FALSE;
 
 	return TRUE;
 }
@@ -592,6 +694,8 @@ drg_toggle(GtkWidget *w, gpointer data)
 	else
 		gtk_label_set(GTK_LABEL(label),"GRAD");
 
+	unselect_invert(gc);
+
 	return TRUE;
 }
 
@@ -602,15 +706,9 @@ set_pi(GtkWidget *w, gpointer data)
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
-	if(gc->stack==NULL ||
-	   ((CalculatorStack *)gc->stack->data)->type!=CALCULATOR_NUMBER) {
-		gc->add_digit = TRUE;
-		gc->result = M_PI;
-		push_input(gc);
-	} else
-		((CalculatorStack *)gc->stack->data)->d.number = M_PI;
+	set_result_to(gc,M_PI);
 
-	set_result(gc);
+	unselect_invert(gc);
 
 	return TRUE;
 }
@@ -622,15 +720,33 @@ set_e(GtkWidget *w, gpointer data)
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
-	if(gc->stack==NULL ||
-	   ((CalculatorStack *)gc->stack->data)->type!=CALCULATOR_NUMBER) {
-		gc->add_digit = TRUE;
-		gc->result = M_E;
-		push_input(gc);
-	} else
-		((CalculatorStack *)gc->stack->data)->d.number = M_E;
+	set_result_to(gc,M_E);
 
-	set_result(gc);
+	unselect_invert(gc);
+
+	return TRUE;
+}
+
+static gint
+add_parenth(GtkWidget *w, gpointer data)
+{
+	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
+
+	g_return_val_if_fail(gc!=NULL,TRUE);
+
+	unselect_invert(gc);
+
+	return TRUE;
+}
+
+static gint
+sub_parenth(GtkWidget *w, gpointer data)
+{
+	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
+
+	g_return_val_if_fail(gc!=NULL,TRUE);
+
+	unselect_invert(gc);
 
 	return TRUE;
 }
@@ -642,12 +758,18 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 
 	if(!font_pixmap) {
 		GdkColor black;
+		gchar *file =
+			gnome_unconditional_pixmap_file("calculator-font.xpm");
+
+		if(!file) {
+			g_warning("Can't find calculator-font.xpm");
+			return FALSE;
+		}
 		gdk_color_black(gtk_widget_get_colormap(GTK_WIDGET(gc)),
 							&black);
-		font_pixmap = gdk_pixmap_create_from_xpm_d(GTK_WIDGET(gc)->
-								window,
-							   NULL, &black,
-							   calculator_font_xpm);
+		font_pixmap = gdk_pixmap_create_from_xpm(GTK_WIDGET(gc)->window,
+							 NULL, &black, file);
+		g_free(file);
 	}
 
 	gc->display =  gtk_pixmap_new(gdk_pixmap_new(GTK_WIDGET(gc)->window,
@@ -661,12 +783,66 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 
 	gc->stack = NULL;
 	reset_calc(NULL,gc);
+
+	return FALSE;
 }
+
+static CalculatorButton buttons[8][5] = {
+	{
+		{"1/x",(GtkSignalFunc)simple_func,c_inv,NULL},
+		{"x^2",(GtkSignalFunc)simple_func,c_pow2,sqrt},
+		{"SQRT",(GtkSignalFunc)simple_func,sqrt,c_pow2},
+		{"CE/C",(GtkSignalFunc)clear_calc,NULL,NULL},
+		{"AC",(GtkSignalFunc)reset_calc,NULL,NULL},
+	},{
+		{NULL,NULL,NULL,NULL}, /*inverse button*/
+		{"sin",(GtkSignalFunc)simple_func,sin,asin},
+		{"cos",(GtkSignalFunc)simple_func,cos,acos},
+		{"tan",(GtkSignalFunc)simple_func,tan,atan},
+		{"DEG",(GtkSignalFunc)drg_toggle,NULL,NULL},
+	},{
+		{"e",(GtkSignalFunc)set_e,NULL,NULL},
+		{"EE",(GtkSignalFunc)add_digit,"e+",NULL},
+		{"log",(GtkSignalFunc)simple_func,log10,c_pow10},
+		{"ln",(GtkSignalFunc)simple_func,log,c_powe},
+		{"x^y",(GtkSignalFunc)math_func,pow,NULL},
+	},{
+		{"PI",(GtkSignalFunc)set_pi,NULL,NULL},
+		{"x!",(GtkSignalFunc)simple_func,c_fact,NULL},
+		{"(",(GtkSignalFunc)add_parenth,NULL,NULL},
+		{")",(GtkSignalFunc)sub_parenth,NULL,NULL},
+		{"/",(GtkSignalFunc)math_func,c_div,NULL},
+	},{
+		{"STO",(GtkSignalFunc)store_m,NULL,NULL},
+		{"7",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"8",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"9",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"*",(GtkSignalFunc)math_func,c_mul,NULL},
+	},{
+		{"RCL",(GtkSignalFunc)recall_m,NULL,NULL},
+		{"4",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"5",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"6",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"-",(GtkSignalFunc)math_func,c_sub,NULL},
+	},{
+		{"SUM",(GtkSignalFunc)sum_m,NULL,NULL},
+		{"1",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"2",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"3",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"+",(GtkSignalFunc)math_func,c_add,NULL},
+	},{
+		{"EXC",(GtkSignalFunc)exchange_m,NULL,NULL},
+		{"0",(GtkSignalFunc)add_digit,NULL,NULL},
+		{".",(GtkSignalFunc)add_digit,NULL,NULL},
+		{"+/-",(GtkSignalFunc)negate_val,c_neg,NULL},
+		{"=",(GtkSignalFunc)no_func,NULL,NULL}
+	}
+};
 
 static void
 gnome_calculator_init (GnomeCalculator *gc)
 {
-	gint x,y;
+	gint x,y,n;
 	GtkWidget *table;
 	GtkWidget *w;
 
@@ -676,7 +852,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 	strcpy(gc->result_string,"0");
 	gc->memory = 0;
 	gc->mode = GNOME_CALCULATOR_DEG;
-	gc->inverse = FALSE;
+	gc->invert = FALSE;
 	gc->add_digit = FALSE;
 
 	gtk_signal_connect_after(GTK_OBJECT(gc),"realize",
@@ -688,269 +864,28 @@ gnome_calculator_init (GnomeCalculator *gc)
 
 	gtk_box_pack_end(GTK_BOX(gc),table,TRUE,TRUE,0);
 
-	w=gtk_button_new_with_label("1/x");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(simple_func),
-			   c_inv);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,0,1);
-
-	w=gtk_button_new_with_label("x^2");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(simple_func),
-			   c_pow2);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,1,2,0,1);
-	
-	w=gtk_button_new_with_label("SQRT");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(simple_func),
-			   sqrt);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,2,3,0,1);
-
-	w=gtk_button_new_with_label("CE/C");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(clear_calc),
+	for(x=0;x<5;x++) {
+		for(y=0;y<8;y++) {
+			CalculatorButton *but = &buttons[y][x];
+			if(but->name) {
+				w=gtk_button_new_with_label(but->name);
+				gtk_signal_connect(GTK_OBJECT(w),"clicked",
+						   but->signal_func,
+						   but);
+				gtk_object_set_user_data(GTK_OBJECT(w),gc);
+				gtk_widget_show(w);
+				gtk_table_attach_defaults(GTK_TABLE(table),w,
+							  x,x+1,y,y+1);
+			}
+		}
+	}
+	gc->invert_button=gtk_toggle_button_new_with_label("INV");
+	gtk_signal_connect(GTK_OBJECT(gc->invert_button),"toggled",
+			   GTK_SIGNAL_FUNC(invert_toggle),
 			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,3,4,0,1);
-
-	w=gtk_button_new_with_label("AC");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(reset_calc),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,0,1);
-
-	w=gtk_button_new_with_label("DEG");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(drg_toggle),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,1,2);
-
-	w=gtk_button_new_with_label("e");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(set_e),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,2,3);
-
-	w=gtk_button_new_with_label("EE");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("e+"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,1,2,2,3);
-
-	w=gtk_button_new_with_label("log");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(simple_func),
-			   log10);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,2,3,2,3);
-
-	w=gtk_button_new_with_label("ln");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(simple_func),
-			   log);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,3,4,2,3);
-
-	w=gtk_button_new_with_label("x^y");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(math_func),
-			   pow);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,2,3);
-
-	w=gtk_button_new_with_label("PI");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(set_pi),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,3,4);
-
-	w=gtk_button_new_with_label("/");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(math_func),
-			   c_div);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,3,4);
-
-	w=gtk_button_new_with_label("STO");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(store_m),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,4,5);
-
-	w=gtk_button_new_with_label("7");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("7"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,1,2,4,5);
-
-	w=gtk_button_new_with_label("8");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("8"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,2,3,4,5);
-
-	w=gtk_button_new_with_label("9");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("9"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,3,4,4,5);
-
-	w=gtk_button_new_with_label("*");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(math_func),
-			   c_mul);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,4,5);
-
-	w=gtk_button_new_with_label("RCL");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(recall_m),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,5,6);
-
-	w=gtk_button_new_with_label("4");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("4"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,1,2,5,6);
-
-	w=gtk_button_new_with_label("5");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("5"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,2,3,5,6);
-
-	w=gtk_button_new_with_label("6");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("6"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,3,4,5,6);
-
-	w=gtk_button_new_with_label("-");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(math_func),
-			   c_sub);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,5,6);
-
-	w=gtk_button_new_with_label("SUM");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(sum_m),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,6,7);
-
-	w=gtk_button_new_with_label("1");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("1"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,1,2,6,7);
-
-	w=gtk_button_new_with_label("2");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("2"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,2,3,6,7);
-
-	w=gtk_button_new_with_label("3");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("3"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,3,4,6,7);
-
-	w=gtk_button_new_with_label("+");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(math_func),
-			   c_add);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,6,7);
-
-	w=gtk_button_new_with_label("EXC");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(exchange_m),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,7,8);
-
-	w=gtk_button_new_with_label("0");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("0"));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,1,2,7,8);
-
-	w=gtk_button_new_with_label(".");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(add_digit),
-			   g_strdup("."));
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,2,3,7,8);
-
-	w=gtk_button_new_with_label("+/-");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(negate_val),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,3,4,7,8);
-
-	w=gtk_button_new_with_label("=");
-	gtk_signal_connect(GTK_OBJECT(w),"clicked",
-			   GTK_SIGNAL_FUNC(no_func),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(w),gc);
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,7,8);
+	gtk_object_set_user_data(GTK_OBJECT(gc->invert_button),gc);
+	gtk_widget_show(gc->invert_button);
+	gtk_table_attach_defaults(GTK_TABLE(table),gc->invert_button,0,1,1,2);
 }
 
 GtkWidget *

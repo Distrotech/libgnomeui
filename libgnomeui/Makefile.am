@@ -2,6 +2,8 @@
 
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
+SUBDIRS = pixmaps
+
 INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @GTK_CFLAGS@ @SUPPORTINCS@ \
         -DGNOMELIBDIR=\""$(libdir)"\" \
         -DGNOMEDATADIR=\""$(datadir)"\" \

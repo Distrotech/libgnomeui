@@ -41,10 +41,10 @@ struct _GnomeCalculator {
 
 	gint add_digit;		/*add a digit instead of starting a new
 				  number*/
-	gint inverse;
+	gint invert;
+	GtkWidget *invert_button;
 
 	GList *stack;
-
 };
 
 struct _GnomeCalculatorClass {

@@ -1,3 +1,13 @@
+Mon Apr 13 22:17:02 1998  George Lebl  <jirka@5z.com>
+
+	* Makefile.am: added pixmap subdir
+
+	* pixmaps/Makefile.am: install calcualtor-font.xpm
+
+	* gnome-calculator.[ch]: reduce object size by not
+	  including the font pixmap and redone how buttons are
+	  made
+
 Tue Apr 14 10:27:25 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h, gnome-appsmenu.c: Fixed many little glitches,
