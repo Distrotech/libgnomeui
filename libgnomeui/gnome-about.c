@@ -23,6 +23,7 @@
 #include "gnome-about.h"
 #include <strings.h>
 #include <gtk/gtk.h>
+#include <gnome.h>
 
 /* Library must use dgettext, not gettext.  */
 #ifdef ENABLE_NLS
@@ -701,7 +702,7 @@ gnome_about_new (gchar	*title,
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
   gtk_widget_show (hbox);
 
-  button = gtk_button_new_with_label ( _("OK") );
+  button = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
   GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
   gtk_widget_set_usize (GTK_WIDGET (button), 
 			GNOME_ABOUT_BUTTON_WIDTH,

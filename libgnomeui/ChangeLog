@@ -1,3 +1,13 @@
+1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
+
+        * gnome-about.c (gnome_about_new): Now uses a stock button for OK.
+	
+1998-02-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (gnome_app_add_radio_toolbar_entries): Use
+	the GnomePixmap widget.
+	(gnome_app_do_toolbar_creation): Likewise.
+
 1998-02-25  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-app.c (gnome_app_new): Use "" instead of NULL.  Friendler

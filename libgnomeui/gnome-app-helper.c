@@ -305,16 +305,13 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 	    switch(tbinfo[i].pixmap_type)
 	      {
 	      case GNOME_APP_PIXMAP_DATA:
-		pmap = gnome_create_pixmap_widget_d(GTK_WIDGET(app),
-						    parent_widget,
-						    (char **)tbinfo[i].pixmap_info);
+		pmap = gnome_pixmap_new_from_xpm_d(tbinfo[i].pixmap_info);
 		break;
 	      case GNOME_APP_PIXMAP_FILENAME:
-		pmap = gnome_pixmap_new_from_file((char *)tbinfo[i].pixmap_info);
+		pmap = gnome_pixmap_new_from_file(tbinfo[i].pixmap_info);
 		break;
 	      case GNOME_APP_PIXMAP_STOCK:
-		pmap = gnome_stock_pixmap_widget_new(GTK_WIDGET(app),
-						     (char *)tbinfo[i].pixmap_info);
+		pmap = gnome_stock_pixmap_widget_new(GTK_WIDGET(app), tbinfo[i].pixmap_info);
 		break;
 	      default:
 		pmap = NULL; break;
@@ -362,16 +359,13 @@ gnome_app_add_radio_toolbar_entries(GnomeApp *app,
     while (tbinfo->type != GNOME_APP_UI_ENDOFINFO) {
 	switch(tbinfo->pixmap_type) {
 	  case GNOME_APP_PIXMAP_DATA:
-	    pmap = gnome_create_pixmap_widget_d(GTK_WIDGET(app),
-						parent_widget,
-						(char **)tbinfo->pixmap_info);
+	    pmap = gnome_pixmap_new_from_xpm_d(tbinfo->pixmap_info);
 	    break;
 	  case GNOME_APP_PIXMAP_FILENAME:
 	    pmap = gnome_pixmap_new_from_file((char *)tbinfo->pixmap_info);
 	    break;
 	  case GNOME_APP_PIXMAP_STOCK:
-	    pmap = gnome_stock_pixmap_widget_new(GTK_WIDGET(app),
-						 (char *)tbinfo->pixmap_info);
+	    pmap = gnome_stock_pixmap_widget_new(GTK_WIDGET(app), tbinfo->pixmap_info);
 	    break;
 	  default:
 	    pmap = NULL; break;
