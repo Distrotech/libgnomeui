@@ -605,6 +605,7 @@ libgnomeui_segv_setup (GnomeProgram *program, gboolean post_arg_parse)
 static void libgnomeui_segv_handle(int signum)
 {
 	static int in_segv = 0;
+        struct sigaction sa = { 0 };
 	pid_t pid;
 	
 	in_segv++;
@@ -632,8 +633,12 @@ static void libgnomeui_segv_handle(int signum)
 				   "Cannot display crash dialog\n"));
 
                 /* Don't use app attributes here - a lot of things are probably hosed */
-		if (g_getenv ("GNOME_DUMP_CORE"))
+		if (g_getenv ("GNOME_DUMP_CORE")) {
+                        /* Reset SIGABRT so we don't get called again. */
+                        sa.sa_handler = SIG_DFL;
+                        sigaction (SIGABRT, &sa, NULL);
 	                abort ();
+                }
 
 		_exit(1);
 	} else if (pid > 0) {
@@ -646,8 +651,12 @@ static void libgnomeui_segv_handle(int signum)
 		eret = waitpid(pid, &estatus, 0);
 
                 /* Don't use app attributes here - a lot of things are probably hosed */
-		if(g_getenv("GNOME_DUMP_CORE"))
+		if(g_getenv("GNOME_DUMP_CORE")) {
+                        /* Reset SIGABRT so we don't get called again. */
+                        sa.sa_handler = SIG_DFL;
+                        sigaction (SIGABRT, &sa, NULL);
 	                abort ();
+                }
 
 		_exit(1);
 	} else /* pid == 0 */ {
