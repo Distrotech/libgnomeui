@@ -40,6 +40,7 @@ typedef struct _GnomeMessageBoxButton  GnomeMessageBoxButton;
 struct _GnomeMessageBox
 {
   GnomeDialog dialog;
+  /*< private >*/
   GtkWidget *label;
 };
 
@@ -49,16 +50,21 @@ struct _GnomeMessageBoxClass
 };
 
 
-guint      gnome_message_box_get_type    (void);
-GtkWidget* gnome_message_box_new         (const gchar           *message,
-					  const gchar           *messagebox_type,
-					  ...);
+guint      gnome_message_box_get_type   (void);
+GtkWidget* gnome_message_box_new        (const gchar           *message,
+					 const gchar           *messagebox_type,
+					 ...);
 
-GtkWidget* gnome_message_box_newv        (const gchar           *message,
-					  const gchar           *messagebox_type,
-					  const gchar 	      **buttons);
+GtkWidget* gnome_message_box_newv       (const gchar           *message,
+					 const gchar           *messagebox_type,
+					 const gchar          **buttons);
 
-GtkWidget *gnome_message_box_get_label   (GnomeMessageBox *messagebox);
+void       gnome_message_box_construct  (GnomeMessageBox       *messagebox,
+					 const gchar           *message,
+					 const gchar           *messagebox_type,
+					 const gchar 	      **buttons);
+
+GtkWidget *gnome_message_box_get_label  (GnomeMessageBox       *messagebox);
 
 END_GNOME_DECLS
 

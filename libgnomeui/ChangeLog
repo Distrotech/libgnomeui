@@ -1,3 +1,27 @@
+Sat Jan 22 13:51:51 2000  George Lebl <jirka@5z.com>
+
+	* gnome-messagebox.[ch]: add a _construct method and use it in _new and
+	  _newv.  This fixes some out of sync code.  Also add documentation
+	  for _get_label and mark the label field in the header as
+	  /*< private >*/
+
+	* gnome-entry.[ch]: add a _construct method
+
+	* gnome-icon-entry.[ch]: add a _construct method and use
+	  file_entry_construct inside it
+
+	* gnome-pixmap-entry.c: use file_entry_construct method here which
+	  fixes a problem of history never being loaded here
+
+	* gnome-file-entry.c: call gnome_entry_construct inside it's own
+	  _construct method
+
+	* gnome-dialog.h: s/gint/gboolean/, these were actually already
+	  gboolean in the .c file.
+
+	* gnome-number-entry.[ch]: add a _construct method and fix the
+	  same problem that pixmap-entry had
+
 2000-01-20  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-about.c (gnome_about_parse_name): Cleaned parse code to

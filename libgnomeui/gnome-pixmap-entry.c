@@ -438,8 +438,8 @@ gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
 	GtkWidget *gentry;
 	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->fentry));
 
-	gnome_entry_set_history_id (GNOME_ENTRY (gentry), history_id);
-	gnome_file_entry_set_title (GNOME_FILE_ENTRY(pentry->fentry),
+	gnome_file_entry_construct (GNOME_FILE_ENTRY (pentry->fentry),
+				    history_id,
 				    browse_dialog_title);
 
 	pentry->do_preview = do_preview?1:0;

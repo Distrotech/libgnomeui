@@ -92,23 +92,23 @@ gnome_pixmap_new_from_file_conditional(const gchar* filename)
 }
 
 /**
- * gnome_message_box_new:
+ * gnome_message_box_construct:
+ * @messagebox: The message box to construct
  * @message: The message to be displayed.
  * @message_box_type: The type of the message
- * @...: A NULL terminated list of strings to use in each button.
+ * @buttons: a NULL terminated array with the buttons to insert.
  *
- * Creates a dialog box of type @message_box_type with @message.  A number
- * of buttons are inserted on it.  You can use the GNOME stock identifiers
- * to create gnome-stock-buttons.
+ * For language bindings or subclassing, from C use #gnome_message_box_new or
+ * #gnome_message_box_newv
  *
- * Returns a widget that has the dialog box.
+ * Returns:
  */
-GtkWidget*
-gnome_message_box_new (const gchar           *message,
-		       const gchar           *message_box_type, ...)
+void
+gnome_message_box_construct (GnomeMessageBox       *messagebox,
+			     const gchar           *message,
+			     const gchar           *message_box_type,
+			     const gchar          **buttons)
 {
-	va_list ap;
-	GnomeMessageBox *message_box;
 	GtkWidget *hbox;
 	GtkWidget *pixmap = NULL;
 	GtkWidget *alignment;
@@ -116,12 +116,14 @@ gnome_message_box_new (const gchar           *message,
 	GtkStyle *style;
         const gchar* title_prefix = NULL;
         const gchar* appname;
-        
-	va_start (ap, message_box_type);
-	
-	message_box = gtk_type_new (gnome_message_box_get_type ());
+	gint i = 0;
 
-	style = gtk_widget_get_style (GTK_WIDGET (message_box));
+	g_return_if_fail (messagebox != NULL);
+	g_return_if_fail (GNOME_IS_MESSAGE_BOX (messagebox));
+	g_return_if_fail (message != NULL);
+	g_return_if_fail (message_box_type != NULL);
+
+	style = gtk_widget_get_style (GTK_WIDGET (messagebox));
 
 	/* Make noises, basically */
 	gnome_triggers_vdo(message, message_box_type, NULL);
@@ -129,7 +131,7 @@ gnome_message_box_new (const gchar           *message,
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
                 title_prefix = _("Information");
-		s = gnome_unconditional_pixmap_file("gnome-info.png");
+		s = gnome_pixmap_file("gnome-info.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);
@@ -138,7 +140,7 @@ gnome_message_box_new (const gchar           *message,
 	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
                 title_prefix = _("Warning");
-		s = gnome_unconditional_pixmap_file("gnome-warning.png");
+		s = gnome_pixmap_file("gnome-warning.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);
@@ -147,7 +149,7 @@ gnome_message_box_new (const gchar           *message,
 	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
                 title_prefix = _("Error");
-		s = gnome_unconditional_pixmap_file("gnome-error.png");
+		s = gnome_pixmap_file("gnome-error");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);
@@ -156,7 +158,7 @@ gnome_message_box_new (const gchar           *message,
 	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
                 title_prefix = _("Question");
-		s = gnome_unconditional_pixmap_file("gnome-question.png");
+		s = gnome_pixmap_file("gnome-question.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file_conditional(s);
                         g_free(s);
@@ -174,146 +176,18 @@ gnome_message_box_new (const gchar           *message,
                 s = g_strdup_printf("%s (%s)", title_prefix, appname);
         }
         if (s) {
-                gtk_window_set_title(GTK_WINDOW(message_box), s);
+                gtk_window_set_title(GTK_WINDOW(messagebox), s);
                 g_free(s);
         } else {
-                gtk_window_set_title(GTK_WINDOW(message_box), title_prefix);
+                gtk_window_set_title(GTK_WINDOW(messagebox), title_prefix);
         }
-                              
+
 	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(GNOME_DIALOG(message_box)->vbox),
+	gtk_box_pack_start (GTK_BOX(GNOME_DIALOG(messagebox)->vbox),
 			    hbox, TRUE, TRUE, 10);
 	gtk_widget_show (hbox);
 
-	if ( pixmap == NULL ) {
-        	if (pixmap) gtk_widget_destroy(pixmap);
-		s = gnome_unconditional_pixmap_file ("gnome-default-dlg.png");
-         	if (s) {
-			pixmap = gnome_pixmap_new_from_file_conditional(s);
-                        g_free(s);
-                } else
-			pixmap = NULL;
-	}
-	if (pixmap) {
-		gtk_box_pack_start (GTK_BOX(hbox), 
-				    pixmap, FALSE, TRUE, 0);
-		gtk_widget_show (pixmap);
-	}
-
-	message_box->label = gtk_label_new (message);
-	gtk_label_set_justify (GTK_LABEL (message_box->label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_padding (GTK_MISC (message_box->label), GNOME_PAD, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), message_box->label, TRUE, TRUE, 0);
-	gtk_widget_show (message_box->label);
-
-	/* Add some extra space on the right to balance the pixmap */
-	if (pixmap) {
-		alignment = gtk_alignment_new (0., 0., 0., 0.);
-		gtk_widget_set_usize (alignment, GNOME_PAD, -1);
-		gtk_widget_show (alignment);
-		
-		gtk_box_pack_start (GTK_BOX (hbox), alignment, FALSE, FALSE, 0);
-	}
-	
-	while (TRUE) {
-	  gchar * button_name;
-
-	  button_name = va_arg (ap, gchar *);
-	  
-	  if (button_name == NULL) {
-	    break;
-	  }
-	  
-	  gnome_dialog_append_button ( GNOME_DIALOG(message_box), 
-				       button_name);
-	};
-	
-	va_end (ap);
-
-	gnome_dialog_set_close ( GNOME_DIALOG(message_box),
-				 TRUE );
-
-	return GTK_WIDGET (message_box);
-}
-
-/**
- * gnome_message_box_newv:
- * @message: The message to be displayed.
- * @message_box_type: The type of the message
- * @buttons: a NULL terminated array with the buttons to insert.
- *
- * Creates a dialog box of type @message_box_type with @message.  A number
- * of buttons are inserted on it, the messages come from the @buttons array.
- * You can use the GNOME stock identifiers to create gnome-stock-buttons.
- *
- * Returns a widget that has the dialog box.
- */
-GtkWidget*
-gnome_message_box_newv (const gchar           *message,
-		        const gchar           *message_box_type,
-			const gchar 	     **buttons)
-{
-	GnomeMessageBox *message_box;
-	GtkWidget *label, *hbox;
-	GtkWidget *pixmap = NULL;
-	char *s;
-	GtkStyle *style;
-	gint i = 0;
-
-	message_box = gtk_type_new (gnome_message_box_get_type ());
-
-	style = gtk_widget_get_style (GTK_WIDGET (message_box));
-
-	/* Make noises, basically */
-	gnome_triggers_vdo(message, message_box_type, NULL);
-
-	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
-	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Information"));
-		s = gnome_pixmap_file("gnome-info.png");
-		if (s) {
-                        pixmap = gnome_pixmap_new_from_file_conditional(s);
-                        g_free(s);
-                }
-	}
-	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
-	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Warning"));
-		s = gnome_pixmap_file("gnome-warning.png");
-		if (s) {
-                        pixmap = gnome_pixmap_new_from_file_conditional(s);
-                        g_free(s);
-                }
-	}
-	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
-	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Error"));
-		s = gnome_pixmap_file("gnome-error");
-		if (s) {
-                        pixmap = gnome_pixmap_new_from_file_conditional(s);
-                        g_free(s);
-                }
-	}
-	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
-	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Question"));
-		s = gnome_pixmap_file("gnome-question.png");
-		if (s) {
-                        pixmap = gnome_pixmap_new_from_file_conditional(s);
-                        g_free(s);
-                }
-	}
-	else
-	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Message"));
-	}
-
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(GNOME_DIALOG(message_box)->vbox),
-			    hbox, TRUE, TRUE, 10);
-	gtk_widget_show (hbox);
-
-	if ( pixmap == NULL) {
+	if (pixmap == NULL) {
         	if (pixmap) gtk_widget_destroy(pixmap);
 		s = gnome_pixmap_file("gnome-default.png");
          	if (s) {
@@ -328,22 +202,121 @@ gnome_message_box_newv (const gchar           *message,
 		gtk_widget_show (pixmap);
 	}
 
-	label = gtk_label_new (message);
-	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
-	gtk_widget_show (label);
+	messagebox->label = gtk_label_new (message);
+	gtk_label_set_justify (GTK_LABEL (messagebox->label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_padding (GTK_MISC (messagebox->label), GNOME_PAD, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), messagebox->label, TRUE, TRUE, 0);
+	gtk_widget_show (messagebox->label);
 
-	while (buttons[i]) {
-	  gnome_dialog_append_button ( GNOME_DIALOG(message_box), 
-				       buttons[i]);
-	  i++;
-	};
+	/* Add some extra space on the right to balance the pixmap */
+	if (pixmap) {
+		alignment = gtk_alignment_new (0., 0., 0., 0.);
+		gtk_widget_set_usize (alignment, GNOME_PAD, -1);
+		gtk_widget_show (alignment);
+		
+		gtk_box_pack_start (GTK_BOX (hbox), alignment, FALSE, FALSE, 0);
+	}
+
+	if (buttons) {
+		while (buttons[i]) {
+			gnome_dialog_append_button (GNOME_DIALOG (messagebox), 
+						    buttons[i]);
+			i++;
+		};
+	}
 	
-	gnome_dialog_set_close ( GNOME_DIALOG(message_box),
-				 TRUE );
+	gnome_dialog_set_close (GNOME_DIALOG (messagebox),
+				TRUE );
+}
+
+/**
+ * gnome_message_box_new:
+ * @message: The message to be displayed.
+ * @message_box_type: The type of the message
+ * @...: A NULL terminated list of strings to use in each button.
+ *
+ * Creates a dialog box of type @message_box_type with @message.  A number
+ * of buttons are inserted on it.  You can use the GNOME stock identifiers
+ * to create gnome-stock-buttons.
+ *
+ * Returns a widget that has the dialog box.
+ */
+GtkWidget*
+gnome_message_box_new (const gchar           *message,
+		       const gchar           *message_box_type, ...)
+{
+	va_list ap;
+	GnomeMessageBox *message_box;
+
+	g_return_val_if_fail (message != NULL, NULL);
+	g_return_val_if_fail (message_box_type != NULL, NULL);
+        
+	va_start (ap, message_box_type);
+	
+	message_box = gtk_type_new (gnome_message_box_get_type ());
+
+	gnome_message_box_construct (message_box, message,
+				     message_box_type, NULL);
+	
+	/* we need to add buttons by hand here */
+	while (TRUE) {
+		gchar * button_name;
+
+		button_name = va_arg (ap, gchar *);
+
+		if (button_name == NULL) {
+			break;
+		}
+
+		gnome_dialog_append_button ( GNOME_DIALOG(message_box), 
+					     button_name);
+	}
+	
+	va_end (ap);
 
 	return GTK_WIDGET (message_box);
 }
 
+/**
+ * gnome_message_box_newv:
+ * @message: The message to be displayed.
+ * @message_box_type: The type of the message
+ * @buttons: a NULL terminated array with the buttons to insert.
+ *
+ * Creates a dialog box of type @message_box_type with @message.  A number
+ * of buttons are inserted on it, the messages come from the @buttons array.
+ * You can use the GNOME stock identifiers to create gnome-stock-buttons.
+ * The buttons array can be NULL if you wish to add buttons yourself later.
+ *
+ * Returns a widget that has the dialog box.
+ */
+GtkWidget*
+gnome_message_box_newv (const gchar           *message,
+		        const gchar           *message_box_type,
+			const gchar 	     **buttons)
+{
+	GnomeMessageBox *message_box;
+
+	g_return_val_if_fail (message != NULL, NULL);
+	g_return_val_if_fail (message_box_type != NULL, NULL);
+
+	message_box = gtk_type_new (gnome_message_box_get_type ());
+
+	gnome_message_box_construct (message_box, message,
+				     message_box_type, buttons);
+
+	return GTK_WIDGET (message_box);
+}
+
+/**
+ * gnome_message_box_get_label:
+ * @messagebox: The message box to work on
+ *
+ * Gets the label widget of the message box.  You should use this
+ * function instead of using the structure directly.
+ *
+ * Returns: the widget of the label with the message
+ */
 GtkWidget *
 gnome_message_box_get_label (GnomeMessageBox *messagebox)
 {

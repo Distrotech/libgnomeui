@@ -52,6 +52,11 @@ guint      gnome_icon_entry_get_type    (void);
 GtkWidget *gnome_icon_entry_new         (const gchar *history_id,
 					 const gchar *browse_dialog_title);
 
+/* for language bindings and subclassing, use gnome_icon_entry_new from C */
+void       gnome_icon_entry_construct   (GnomeIconEntry *ientry,
+					 const gchar *history_id,
+					 const gchar *browse_dialog_title);
+
 /*by default gnome_pixmap entry sets the default directory to the
   gnome pixmap directory, this will set it to a subdirectory of that,
   or one would use the file_entry functions for any other path*/

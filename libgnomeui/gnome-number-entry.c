@@ -228,6 +228,30 @@ gnome_number_entry_finalize (GtkObject *object)
 }
 
 /**
+ * gnome_number_entry_construct:
+ * @nentry: Pointer to GnomeNumberEntry widget
+ * @history_id: The history id given to #gnome_entry_new
+ * @calc_dialog_title: Title of the calculator dialog
+ *
+ * Description: For language bindings and subclassing, use 
+ * #gnome_number_entry_new from C instead.
+ *
+ * Returns:
+ **/
+void
+gnome_number_entry_construct (GnomeNumberEntry *nentry,
+			      const gchar *history_id,
+			      const gchar *calc_dialog_title)
+{
+	g_return_if_fail (nentry != NULL);
+	g_return_if_fail (GNOME_IS_NUMBER_ENTRY(nentry));
+
+	gnome_entry_construct (GNOME_ENTRY (nentry->gentry), history_id);
+
+	gnome_number_entry_set_title (nentry, calc_dialog_title);
+}
+
+/**
  * gnome_number_entry_new:
  * @history_id: The history id given to #gnome_entry_new
  * @calc_dialog_title: Title of the calculator dialog
@@ -238,14 +262,14 @@ gnome_number_entry_finalize (GtkObject *object)
  * Returns: New widget
  **/
 GtkWidget *
-gnome_number_entry_new (const gchar *history_id, const gchar *calc_dialog_title)
+gnome_number_entry_new (const gchar *history_id,
+			const gchar *calc_dialog_title)
 {
 	GnomeNumberEntry *nentry;
 
 	nentry = gtk_type_new (gnome_number_entry_get_type ());
 
-	gnome_entry_set_history_id (GNOME_ENTRY (nentry->gentry), history_id);
-	gnome_number_entry_set_title (nentry, calc_dialog_title);
+	gnome_number_entry_construct (nentry, history_id, calc_dialog_title);
 
 	return GTK_WIDGET (nentry);
 }

@@ -28,6 +28,7 @@ typedef struct _GnomeNumberEntryClass GnomeNumberEntryClass;
 struct _GnomeNumberEntry {
 	GtkHBox hbox;
 
+	/*< private >*/
 	gchar *calc_dialog_title;
 	
 	GtkWidget *calc_dlg;
@@ -42,6 +43,11 @@ struct _GnomeNumberEntryClass {
 
 guint      gnome_number_entry_get_type    (void);
 GtkWidget *gnome_number_entry_new         (const gchar *history_id,
+					   const gchar *calc_dialog_title);
+
+/* for language bindings and subclassing use gnome_number_entry_new from C */
+void       gnome_number_entry_construct   (GnomeNumberEntry *nentry,
+					   const gchar *history_id,
 					   const gchar *calc_dialog_title);
 
 GtkWidget *gnome_number_entry_gnome_entry (GnomeNumberEntry *nentry);

@@ -111,6 +111,26 @@ gnome_entry_init (GnomeEntry *gentry)
         gtk_combo_set_case_sensitive (GTK_COMBO (gentry), TRUE);
 }
 
+/**
+ * gnome_entry_construct:
+ * @gentry: Pointer to GnomeEntry object.
+ * @history_id: If not %NULL, the text id under which history data is stored
+ *
+ * Constructs a #GnomeEntry object, for language bindings or subclassing
+ * use #gnome_entry_new from C
+ *
+ * Returns: 
+ */
+void
+gnome_entry_construct (GnomeEntry *gentry, 
+		       const gchar *history_id)
+{
+	g_return_if_fail (gentry != NULL);
+
+	gnome_entry_set_history_id (gentry, history_id);
+	gnome_entry_load_history (gentry);
+}
+
 
 /**
  * gnome_entry_new
@@ -129,12 +149,8 @@ gnome_entry_new (const gchar *history_id)
 
 	gentry = gtk_type_new (gnome_entry_get_type ());
 
-        /* Keep in sync with gnome_icon_entry_new() - or better yet,
-           add a _construct() method once we are in development
-           branch.  */
+	gnome_entry_construct (gentry, history_id);
 
-	gnome_entry_set_history_id (gentry, history_id);
-	gnome_entry_load_history (gentry);
 	return GTK_WIDGET (gentry);
 }
 

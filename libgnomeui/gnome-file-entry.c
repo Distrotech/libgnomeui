@@ -319,13 +319,9 @@ gnome_file_entry_construct (GnomeFileEntry *fentry, const char *history_id, cons
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
-        /* Keep in sync with gnome_entry_new() - or better yet,
-           add a _construct() method once we are in development
-           branch.
-        */
+	gnome_entry_construct (GNOME_ENTRY (fentry->gentry),
+			       history_id);
 
-	gnome_entry_set_history_id (GNOME_ENTRY (fentry->gentry), history_id);
-	gnome_entry_load_history (GNOME_ENTRY(fentry->gentry));
 	gnome_file_entry_set_title (fentry, browse_dialog_title);
 }
 

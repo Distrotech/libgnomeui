@@ -631,6 +631,30 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 }
 
 /**
+ * gnome_icon_entry_construct:
+ * @ientry: the GnomeIconEntry to work with
+ * @history_id: the id given to #gnome_entry_new
+ * @browse_dialog_title: title of the browse dialog and icon selection dialog
+ *
+ * Description: For language bindings and subclassing, from C use
+ * #gnome_icon_entry_new
+ *
+ * Returns:
+ **/
+void
+gnome_icon_entry_construct (GnomeIconEntry *ientry,
+			    const gchar *history_id,
+			    const gchar *browse_dialog_title)
+{
+	g_return_if_fail (ientry != NULL);
+	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+
+	gnome_file_entry_construct (GNOME_FILE_ENTRY (ientry->fentry),
+				    history_id,
+				    browse_dialog_title);
+}
+
+/**
  * gnome_icon_entry_new:
  * @history_id: the id given to #gnome_entry_new
  * @browse_dialog_title: title of the browse dialog and icon selection dialog
@@ -643,21 +667,10 @@ GtkWidget *
 gnome_icon_entry_new (const gchar *history_id, const gchar *browse_dialog_title)
 {
 	GnomeIconEntry *ientry;
-	GtkWidget *gentry;
 
 	ientry = gtk_type_new (gnome_icon_entry_get_type ());
-	
-        /* Keep in sync with gnome_entry_new() - or better yet, 
-           add a _construct() method once we are in development
-           branch. 
-        */
 
-	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->fentry));
-
-	gnome_entry_set_history_id (GNOME_ENTRY (gentry), history_id);
-	gnome_entry_load_history (GNOME_ENTRY (gentry));
-	gnome_file_entry_set_title (GNOME_FILE_ENTRY(ientry->fentry),
-				    browse_dialog_title);
+	gnome_icon_entry_construct (ientry, history_id, browse_dialog_title);
 	
 	return GTK_WIDGET (ientry);
 }
