@@ -1,3 +1,18 @@
+2004-08-30  Federico Mena Quintero  <federico@ximian.com>
+
+	Merged from the gnome-2-6 branch:
+
+	Fix #145200:
+
+	* file-chooser/gtkfilesystemgnomevfs.c (struct
+	_GtkFileSystemGnomeVFS): Added fields to store the signal
+	connection IDs for the volume monitor.
+	(gtk_file_system_gnome_vfs_init): Store the signal connection IDs.
+	Do not create an extra reference to the volume monitor.
+	(gtk_file_system_gnome_vfs_finalize): Disconnect from the volume
+	monitor's signals.  For now, don't unref the monitor.  See
+	http://bugzilla.gnome.org/show_bug.cgi?id=151463 for reference.
+
 =================== 2.7.92 ====================
 
 2004-08-30  Anders Carlsson  <andersca@gnome.org>
