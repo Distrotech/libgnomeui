@@ -1,3 +1,8 @@
+2001-04-18  Martin Baulig  <baulig@suse.de>
+
+	* gnome-icon-entry.c: Comment out gnome_uri_list_extract_filenames() to make
+	it compile [FIXME].
+
 2001-04-17  Martin Baulig  <baulig@suse.de>
 
 	* gnome-init.c: Started to use GnomeProgram properties.
