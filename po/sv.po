@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-11-24 11:30+0100\n"
+"POT-Creation-Date: 2003-12-08 19:36+0100\n"
 "PO-Revision-Date: 2003-05-26 19:20+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -596,11 +596,11 @@ msgstr "Interaktivitet"
 msgid "Level of user activity required."
 msgstr "Nivå på användarinteraktivitet som krävs."
 
-#: libgnomeui/gnome-authentication-manager.c:60
+#: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Din HTTP-proxyserver kräver att du loggar in.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -609,17 +609,30 @@ msgstr ""
 "Du måste logga in för att komma åt \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:64
+#: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
 msgstr "Ditt lösenord kommer att skickas okrypterat."
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
 msgstr "Ditt lösenord kommer att skickas krypterat."
 
-#: libgnomeui/gnome-authentication-manager.c:68
+#: libgnomeui/gnome-authentication-manager.c:69
+#: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
 msgstr "Autentisering krävs"
+
+#: libgnomeui/gnome-authentication-manager.c:265
+#, c-format
+msgid " domain %s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:268
+#, fuzzy, c-format
+msgid "You must log in to access %s\n"
+msgstr ""
+"Du måste logga in för att komma åt \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1219,13 +1232,26 @@ msgstr "Fråga"
 msgid "Message"
 msgstr "Meddelande"
 
-#: libgnomeui/gnome-password-dialog.c:253
+#: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
-#: libgnomeui/gnome-password-dialog.c:254
+#: libgnomeui/gnome-password-dialog.c:221
+#, fuzzy
+msgid "_Domain:"
+msgstr "Kommando:"
+
+#: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
 msgstr "_Lösenord:"
+
+#: libgnomeui/gnome-password-dialog.c:369
+msgid "Remember password for this session"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:371
+msgid "Save password in keyring"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1701,9 +1727,6 @@ msgstr "Besök GNOMEs programkraschsida för mer information"
 
 #~ msgid "Comment:"
 #~ msgstr "Kommentar:"
-
-#~ msgid "Command:"
-#~ msgstr "Kommando:"
 
 #~ msgid "Type:"
 #~ msgstr "Typ:"

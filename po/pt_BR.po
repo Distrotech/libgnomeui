@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-11-24 11:30+0100\n"
+"POT-Creation-Date: 2003-12-08 19:36+0100\n"
 "PO-Revision-Date: 2003-10-01 14:07-0400\n"
 "Last-Translator: David Barzilay <barzilay@redhat.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
@@ -591,11 +591,11 @@ msgstr "Interatividade"
 msgid "Level of user activity required."
 msgstr "Nível de interatividade do usuário necessária."
 
-#: libgnomeui/gnome-authentication-manager.c:60
+#: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Seu proxy HTTP requer que você se logue.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -604,17 +604,30 @@ msgstr ""
 "Você deve se logar para acessar  \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:64
+#: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
 msgstr "Sua senha será transmitida sem criptografia."
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
 msgstr "Sua senha será transmitida criptografada."
 
-#: libgnomeui/gnome-authentication-manager.c:68
+#: libgnomeui/gnome-authentication-manager.c:69
+#: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
 msgstr "Autenticação Necessária"
+
+#: libgnomeui/gnome-authentication-manager.c:265
+#, c-format
+msgid " domain %s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:268
+#, fuzzy, c-format
+msgid "You must log in to access %s\n"
+msgstr ""
+"Você deve se logar para acessar  \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1213,13 +1226,25 @@ msgstr "Questão"
 msgid "Message"
 msgstr "Mensagem"
 
-#: libgnomeui/gnome-password-dialog.c:253
+#: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
 msgstr "Nome do _Usuário:"
 
-#: libgnomeui/gnome-password-dialog.c:254
+#: libgnomeui/gnome-password-dialog.c:221
+msgid "_Domain:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
 msgstr "_Senha:"
+
+#: libgnomeui/gnome-password-dialog.c:369
+msgid "Remember password for this session"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:371
+msgid "Save password in keyring"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"

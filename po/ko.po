@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
-"POT-Creation-Date: 2003-11-24 11:30+0100\n"
+"POT-Creation-Date: 2003-12-08 19:36+0100\n"
 "PO-Revision-Date: 2003-09-24 00:27+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
@@ -588,11 +588,11 @@ msgstr "상호작용 정도"
 msgid "Level of user activity required."
 msgstr "사용자 행동이 필요한 정도."
 
-#: libgnomeui/gnome-authentication-manager.c:60
+#: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "설정한 HTTP 프록시는 로그인을 해야 합니다.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -601,17 +601,30 @@ msgstr ""
 "\"%s\"에 접근하려면 로그인을 해야 합니다.\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:64
+#: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
 msgstr "열쇠글이 암호화되지 않은 상태로 전송됩니다."
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
 msgstr "열쇠글이 암호화된 상태로 전송됩니다."
 
-#: libgnomeui/gnome-authentication-manager.c:68
+#: libgnomeui/gnome-authentication-manager.c:69
+#: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
 msgstr "인증이 필요합니다"
+
+#: libgnomeui/gnome-authentication-manager.c:265
+#, c-format
+msgid " domain %s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:268
+#, fuzzy, c-format
+msgid "You must log in to access %s\n"
+msgstr ""
+"\"%s\"에 접근하려면 로그인을 해야 합니다.\n"
+"%s"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1208,13 +1221,25 @@ msgstr "물음"
 msgid "Message"
 msgstr "메시지"
 
-#: libgnomeui/gnome-password-dialog.c:253
+#: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
 msgstr "사용자이름(_U):"
 
-#: libgnomeui/gnome-password-dialog.c:254
+#: libgnomeui/gnome-password-dialog.c:221
+msgid "_Domain:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
 msgstr "열쇠글(_P):"
+
+#: libgnomeui/gnome-password-dialog.c:369
+msgid "Remember password for this session"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:371
+msgid "Save password in keyring"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"

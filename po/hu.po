@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2003-12-01 14:17+0100\n"
+"POT-Creation-Date: 2003-12-08 19:36+0100\n"
 "PO-Revision-Date: 2003-12-01 14:15+0100\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -139,7 +139,6 @@ msgstr "%s névjegye"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fájl"
 
@@ -197,7 +196,6 @@ msgid "_Game"
 msgstr "_Játék"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Súgó"
 
@@ -388,11 +386,11 @@ msgstr "Az alkalmazás beállítása"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Névjegy"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
@@ -419,7 +417,7 @@ msgstr "Új ablakot hoz létre"
 msgid "_Close This Window"
 msgstr "_Ablak bezárása"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Az aktuális ablak bezárása"
 
@@ -592,11 +590,11 @@ msgstr "Interaktivitás"
 msgid "Level of user activity required."
 msgstr "A felhasználótól elvárható aktivitás"
 
-#: libgnomeui/gnome-authentication-manager.c:60
+#: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "A HTTP-proxy megköveteli a bejelentkezést.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -605,17 +603,30 @@ msgstr ""
 "Be kell jelentkezned a(z) \"%s\" eléréséhez.\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:64
+#: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
 msgstr "A jelszavad titkosítás nélkül kerül átvitelre."
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
 msgstr "A jelszavad titkosítással kerül átvitelre."
 
-#: libgnomeui/gnome-authentication-manager.c:68
+#: libgnomeui/gnome-authentication-manager.c:69
+#: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
 msgstr "Hitelesítés szükséges"
+
+#: libgnomeui/gnome-authentication-manager.c:265
+#, c-format
+msgid " domain %s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:268
+#, fuzzy, c-format
+msgid "You must log in to access %s\n"
+msgstr ""
+"Be kell jelentkezned a(z) \"%s\" eléréséhez.\n"
+"%s"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1214,13 +1225,25 @@ msgstr "Kérdés"
 msgid "Message"
 msgstr "Üzenet"
 
-#: libgnomeui/gnome-password-dialog.c:253
+#: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
 msgstr "_Felhasználói név:"
 
-#: libgnomeui/gnome-password-dialog.c:254
+#: libgnomeui/gnome-password-dialog.c:221
+msgid "_Domain:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
 msgstr "_Jelszó:"
+
+#: libgnomeui/gnome-password-dialog.c:369
+msgid "Remember password for this session"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:371
+msgid "Save password in keyring"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1366,6 +1389,5 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "További információért látogass el a GNOME Application Crash oldalra"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Kilépés a tesztből"
+#~ msgid "Exit the test"
+#~ msgstr "Kilépés a tesztből"

@@ -1,3 +1,7 @@
+2003-12-08  Anders Carlsson  <andersca@gnome.org>
+
+	* configure.in: Release 2.5.1
+
 2003-12-06  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/pixmaps/stock_attach.png:
