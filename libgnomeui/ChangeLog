@@ -1,3 +1,11 @@
+2001-05-19  Martin Baulig  <baulig@suse.de>
+
+	* gnome-image-entry-component.[ch]: Moved to ../components.
+	* gnome-icon-selector-component.[ch]: Likewise.
+
+	* gnome-image-entry.c, gnome-image-selector.c: Use bonobo_get_object()
+	to activate the component.
+
 2001-05-10  Martin Baulig  <baulig@suse.de>
 
 	* gnome-file-entry.h (GnomeFileEntry): Derive from GnomeSelectorClient.

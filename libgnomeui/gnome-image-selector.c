@@ -40,6 +40,7 @@
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-icon-selector-component.h>
+#include <bonobo/bonobo-moniker-util.h>
 #include "gnome-image-selector.h"
 
 struct _GnomeImageSelectorPrivate {
@@ -111,14 +112,15 @@ gnome_image_selector_construct (GnomeImageSelector  *iselector,
 GtkWidget *
 gnome_image_selector_new (void)
 {
-	GnomeSelector *selector;
+	GNOME_Selector selector;
+	CORBA_Environment ev;
 
-	selector = g_object_new (gnome_icon_selector_component_get_type (),
-				 "want_default_behaviour", TRUE,
-				 NULL);
+	CORBA_exception_init (&ev);
+	selector = bonobo_get_object ("OAFIID:GNOME_UI_Component_IconSelector",
+				      "GNOME/Selector", &ev);
+	CORBA_exception_free (&ev);
 
-	return gnome_image_selector_new_from_selector (BONOBO_OBJREF (selector),
-						       CORBA_OBJECT_NIL);
+	return gnome_image_selector_new_from_selector (selector, CORBA_OBJECT_NIL);
 }
 
 GtkWidget *

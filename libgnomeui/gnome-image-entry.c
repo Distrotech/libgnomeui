@@ -40,6 +40,7 @@
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-image-entry-component.h>
+#include <bonobo/bonobo-moniker-util.h>
 #include "gnome-image-entry.h"
 
 struct _GnomeImageEntryPrivate {
@@ -111,28 +112,29 @@ gnome_image_entry_construct (GnomeImageEntry     *ientry,
 GtkWidget *
 gnome_image_entry_new_icon_entry (void)
 {
-	GnomeSelector *selector;
+	GNOME_Selector selector;
+	CORBA_Environment ev;
 
-	selector = g_object_new (gnome_image_entry_component_get_type (),
-				 "want_default_behaviour", TRUE,
-				 "is_pixmap_entry", FALSE, NULL);
+	CORBA_exception_init (&ev);
+	selector = bonobo_get_object ("OAFIID:GNOME_UI_Component_ImageEntry!type=icon",
+				      "GNOME/Selector", &ev);
+	CORBA_exception_free (&ev);
 
-	return gnome_image_entry_new_from_selector (BONOBO_OBJREF (selector),
-						    CORBA_OBJECT_NIL);
+	return gnome_image_entry_new_from_selector (selector, CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
 gnome_image_entry_new_pixmap_entry (guint preview_x, guint preview_y)
 {
-	GnomeSelector *selector;
+	GNOME_Selector selector;
+	CORBA_Environment ev;
 
-	selector = g_object_new (gnome_image_entry_component_get_type (),
-				 "want_default_behaviour", TRUE,
-				 "preview_x", preview_x, "preview_y", preview_y,
-				 "is_pixmap_entry", TRUE, NULL);
+	CORBA_exception_init (&ev);
+	selector = bonobo_get_object ("OAFIID:GNOME_UI_Component_ImageEntry!type=pixmap",
+				      "GNOME/Selector", &ev);
+	CORBA_exception_free (&ev);
 
-	return gnome_image_entry_new_from_selector (BONOBO_OBJREF (selector),
-						    CORBA_OBJECT_NIL);
+	return gnome_image_entry_new_from_selector (selector, CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
