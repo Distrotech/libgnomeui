@@ -10,13 +10,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-13 11:37+0100\n"
-"PO-Revision-Date: 2004-02-13 11:33+0100\n"
-"Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
+"POT-Creation-Date: 2004-02-19 10:20+0100\n"
+"PO-Revision-Date: 2004-02-19 10:20+0100\n"
+"Last-Translator: Christophe Fergeau <teuf@gnome.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -653,11 +653,11 @@ msgstr "PRÉFIXE"
 msgid "Disable connection to session manager"
 msgstr "Désactive la connexion avec le gestionnaire de sessions"
 
-#: libgnomeui/gnome-client.c:974
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Gestion de session"
 
-#: libgnomeui/gnome-client.c:2474
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Annuler la demande de fin de session"
 
@@ -1353,15 +1353,14 @@ msgid "GNOME GUI Library"
 msgstr "Bibliothèque d'interface graphique GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
-#, c-format
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Plusieurs erreurs de segmentation sont survenues ; impossible d'afficher la "
 "boîte de dialogue d'erreur\n"
 
-#: libgnomeui/gnome-ui-init.c:721
-#, c-format
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1369,7 +1368,7 @@ msgstr ""
 "Erreur de segmentation !\n"
 "Impossible d'afficher la boîte de dialogue de blocage\n"
 
-#: libgnomeui/gnome_segv.c:101
+#: libgnomeui/gnome_segv.c:103
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1385,17 +1384,17 @@ msgstr ""
 "Enregistrez tous vos fichiers en cours avant de fermer cette\n"
 "boîte de dialogue."
 
-#: libgnomeui/gnome_segv.c:112
+#: libgnomeui/gnome_segv.c:114
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
 msgstr "L'application « %s » a quitté inopinément."
 
-#: libgnomeui/gnome_segv.c:117
+#: libgnomeui/gnome_segv.c:119
 #, c-format
 msgid "process %d: %s"
 msgstr "processus %d : %s"
 
-#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:120 libgnomeui/gnome_segv.c:125
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
@@ -1404,18 +1403,23 @@ msgstr ""
 "aider à résoudre le problème. Ou vous pouvez redémarrer l'application "
 "maintenant."
 
-#: libgnomeui/gnome_segv.c:137
+#: libgnomeui/gnome_segv.c:139
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Usage : gnome_segv2 nom-appli num-signal\n"
 
-#: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Informer les développeurs"
+#: libgnomeui/gnome_segv.c:156
+msgid "_Restart Application"
+msgstr "_Redémarrer l'application"
 
-#: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Débogage"
+#: libgnomeui/gnome_segv.c:168
+msgid "_Inform Developers"
+msgstr "_Informer les développeurs"
+
+#: libgnomeui/gnome_segv.c:179
+msgid "_Debug"
+msgstr "_Débogage"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Quitter le test"
+
