@@ -104,25 +104,6 @@ static void gnome_process_ice_messages (gpointer client_data,
 					gint source,
 					GdkInputCondition condition);
 
-static void   client_set_prop_from_string   (GnomeClient *client,
-					     gchar       *prop_name,
-					     gchar       *value);
-static void   client_set_prop_from_gchar    (GnomeClient *client,
-					     gchar       *prop_name,
-					     gchar        value);
-static void   client_set_prop_from_glist    (GnomeClient *client,
-					     gchar       *prop_name,
-					     GList       *value);
-static void   client_set_prop_from_array    (GnomeClient *client,
-					     gchar       *prop_name,
-					     gchar       *array[]);
-static void   client_set_prop_from_array_with_arg (GnomeClient *client,
-						   gchar *prop_name,
-						   const gchar *arg_name,
-						   gchar *array[]);
-static void   client_unset_prop             (GnomeClient *client,
-					     gchar       *prop_name);
-
 #endif /* HAVE_LIBSM */
 
 static void   client_unset_config_prefix    (GnomeClient *client);
@@ -131,11 +112,31 @@ static gchar** array_init_from_arg           (gint argc,
 					      gchar *argv[]);
 static gchar** array_copy                    (gchar **source);
 
-/* 'GnomeInteractData' stuff */
 
-typedef struct _GnomeInteractData GnomeInteractData;
+static GtkObjectClass *parent_class = NULL;
+static gint client_signals[LAST_SIGNAL] = { 0 };
 
-struct _GnomeInteractData
+static const char *sm_client_id_arg_name = "--sm-client-id";
+static const char *sm_cloned_id_arg_name = "--sm-cloned-id";
+static const char *sm_client_id_prop="SM_CLIENT_ID";
+
+
+/*****************************************************************************/
+/* Managing the interaction keys. */
+
+/* The following function handle the interaction keys.  Each time an
+   application requests interaction an interaction key is created.  If
+   the session manager decides, that a client may interact now, the
+   application is given the according interaction key.  No other
+   interaction may take place, until the application returns the
+   application key.  */
+
+#ifdef HAVE_LIBSM
+
+typedef struct _InteractionKey InteractionKey;
+
+
+struct _InteractionKey
 {
   gint                   tag;
   GnomeClient           *client;
@@ -147,16 +148,313 @@ struct _GnomeInteractData
   GtkDestroyNotify       destroy;
 };
 
-static void gnome_interaction_remove (GnomeInteractData *interactf);
 
+/* List of all existing interaction keys.  */
 static GList *interact_functions = NULL;
 
-static GtkObjectClass *parent_class = NULL;
-static gint client_signals[LAST_SIGNAL] = { 0 };
 
-static const char *sm_client_id_arg_name = "--sm-client-id";
-static const char *sm_cloned_id_arg_name = "--sm-cloned-id";
-static const char *sm_client_id_prop="SM_CLIENT_ID";
+static InteractionKey *
+interaction_key_new (GnomeClient           *client,
+		     GnomeDialogType        dialog_type,
+		     gboolean               interp,
+		     GnomeInteractFunction  function,
+		     gpointer               data,
+		     GtkDestroyNotify       destroy)
+{
+  static gint tag= 1;
+  
+  InteractionKey *key= g_new (InteractionKey, 1);
+  
+  if (key)
+    {
+      key->tag        = tag++;
+      key->client     = client;
+      key->dialog_type= dialog_type;
+      key->in_use     = FALSE;
+      key->interp     = interp;
+      key->function   = function;
+      key->data       = data;
+      key->destroy    = destroy;
+
+      interact_functions= g_list_append (interact_functions, key);
+    }
+
+  return key;
+}
+
+
+static void
+interaction_key_destroy (InteractionKey *key)
+{
+  interact_functions= g_list_remove (interact_functions, key);
+  
+  if (key->destroy)
+    (key->destroy) (key->data);
+
+  g_free (key);
+}
+
+
+static void
+interaction_key_destroy_if_possible (InteractionKey *key)
+{
+  if (key->in_use)
+    key->client = NULL;
+  else
+    interaction_key_destroy (key);
+}
+
+
+static InteractionKey *
+interaction_key_find_by_tag (gint tag)
+{  
+  InteractionKey *key;
+  GList          *tmp= interact_functions;
+  
+  while (tmp)
+    {
+      key= (InteractionKey *) tmp->data;
+
+      if (key->tag == tag)
+	return key;
+            
+      tmp= tmp->next;
+    }
+
+  return NULL;
+}
+
+
+static void
+interaction_key_use (InteractionKey *key)
+{  
+  key->in_use= TRUE;
+
+  if (!key->interp)
+    key->function (key->client, key->tag, key->dialog_type, key->data);
+  else
+    {
+      GtkArg args[4];
+
+      args[0].name          = NULL;
+      args[0].type          = GTK_TYPE_NONE;
+
+      args[1].name          = NULL;
+      args[1].type          = GTK_TYPE_OBJECT;
+      args[1].d.pointer_data= &key->client;
+      
+      args[2].name          = NULL;
+      args[2].type          = GTK_TYPE_INT;
+      args[2].d.pointer_data= &key->tag;
+
+      args[3].name          = "GnomeDialogType";
+      args[3].type          = GTK_TYPE_ENUM;
+      args[3].d.pointer_data= &key->dialog_type;
+
+      ((GtkCallbackMarshal)key->function) (NULL, key->data, 3, args);
+    }
+}
+
+#endif /* HAVE_LIBSM */
+
+
+/*****************************************************************************/
+/* Helper functions, that set session management properties.  */
+
+/* The following functions are used to set and unset session
+   management properties of a special type.  */
+
+#ifdef HAVE_LIBSM
+
+
+static void
+client_set_value (GnomeClient *client, 
+		  gchar       *name,
+		  char        *type,
+		  int          num_vals,
+		  SmPropValue *vals)
+{
+  SmProp *proplist[1];
+  SmProp prop= {name, type, num_vals, vals};
+
+  proplist[0]= &prop;  
+  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);  
+}
+
+
+static void
+client_set_string (GnomeClient *client, gchar *name, gchar *value)
+{
+  SmPropValue val;
+
+  g_return_if_fail (name);
+
+  if (!GNOME_CLIENT_CONNECTED (client) || (value == NULL))
+    return;  
+
+  val.length = strlen (value)+1;
+  val.value  = value;
+
+  client_set_value (client, name, SmARRAY8, 1, &val);
+}
+
+
+static void
+client_set_gchar (GnomeClient *client, gchar *name, gchar value)
+{
+  SmPropValue val;
+
+  g_return_if_fail (name);
+
+  if (!GNOME_CLIENT_CONNECTED (client))
+    return;  
+
+  val.length = 1;
+  val.value  = &value;
+
+  client_set_value (client, name, SmCARD8, 1, &val);
+}
+
+
+static void
+client_set_ghash0 (gchar *key, gchar *value, SmPropValue **vals)
+{
+  (*vals)->length= strlen (key);
+  (*vals)->value = key;
+  (*vals)++;
+
+  (*vals)->length= strlen (value);
+  (*vals)->value = value;
+  (*vals)++;  
+}
+
+static void
+client_set_ghash (GnomeClient *client, gchar *name, GHashTable *table)
+{
+  gint    argc;
+  SmPropValue *vals;
+  SmPropValue *tmp;
+
+  g_return_if_fail (name);
+  g_return_if_fail (table);
+
+  if (!GNOME_CLIENT_CONNECTED (client))
+    return;
+  
+  argc= g_hash_table_size (table);
+  
+  /* Now initialize the 'vals' array.  */
+  vals= g_new (SmPropValue, argc);
+  tmp = vals;
+  
+  g_hash_table_foreach (table, (GHFunc) client_set_ghash0, &tmp);
+  
+  client_set_value (client, name, SmLISTofARRAY8, argc, vals);
+
+  g_free (vals);
+  
+};
+
+
+static void
+client_set_array (GnomeClient *client, gchar *name, gchar *array[])
+{
+  gint    argc;
+  gchar **ptr;
+  gint    i;
+
+  SmPropValue *vals;
+  
+  g_return_if_fail (name);
+
+  if (!GNOME_CLIENT_CONNECTED (client) || (array == NULL))
+    return;
+
+  /* We count the number of elements in our array.  */
+  for (ptr = array, argc = 0; *ptr ; ptr++, argc++) /* LOOP */;
+
+  /* Now initialize the 'vals' array.  */
+  vals = g_new (SmPropValue, argc);
+  for (ptr = array, i = 0 ; i < argc ; ptr++, i++)
+    {
+      vals[i].length = strlen (*ptr);
+      vals[i].value  = *ptr;
+    }
+
+  client_set_value (client, name, SmLISTofARRAY8, argc, vals);
+
+  g_free (vals);
+}		   
+
+
+static void
+client_set_array_with_arg (GnomeClient *client,
+			   gchar *name,
+			   const gchar *arg_name,
+			   gchar *array[])
+{
+  GList  *temp;
+  gint    argc;
+  gchar **ptr;
+  gint    i;
+
+    SmPropValue *vals;
+  
+  g_return_if_fail (name != NULL);
+  g_return_if_fail (arg_name != NULL);
+
+  if (!GNOME_CLIENT_CONNECTED (client) || (array == NULL))
+    return;
+
+  /* We count the number of elements in our array.  */
+  for (ptr= array, argc= 0; *ptr ; ptr++, argc++) /* LOOP */;
+
+  /* We add an additional client id argument and some some static
+     arguments.  */
+  argc+= 2+g_list_length (client->static_args);
+
+  vals= g_new (SmPropValue, argc);
+
+  /* The program to start.  */
+  vals[0].length= strlen (*array);
+  vals[0].value = *array++;
+
+  /* An argument with the client id.  */
+  vals[1].length= strlen (arg_name);
+  vals[1].value = (char *) arg_name;
+  vals[2].length= strlen (client->client_id);
+  vals[2].value = client->client_id;
+
+  /* Some static arguments.  */
+  for (temp= client->static_args, i= 3; temp; i++, temp= g_list_next (temp))
+    {
+      vals[i].length= strlen ((gchar *)temp->data);
+      vals[i].value = (gchar *)temp->data;
+    }
+  
+  /* Now set the arguments, we must set.  */
+  for (ptr= array; *ptr ; ptr++, i++)
+    {
+      vals[i].length = strlen (*ptr);
+      vals[i].value  = *ptr;
+    }
+
+  client_set_value (client, name, SmLISTofARRAY8, argc, vals);
+  
+  g_free (vals);
+}		   
+
+
+static void
+client_unset (GnomeClient *client, gchar *name)
+{
+  g_return_if_fail (name  != NULL);
+
+  if (GNOME_CLIENT_CONNECTED (client))
+    SmcDeleteProperties ((SmcConn) client->smc_conn, 1, &name);
+}
+
+#endif /* HAVE_LIBSM */
 
 /*****************************************************************************/
 /* Managing the master client */
@@ -510,7 +808,7 @@ gnome_client_object_init (GnomeClient *client)
   client->clone_command     = NULL;
   client->current_directory = NULL;
   client->discard_command   = NULL;
-  client->environment       = NULL;
+  client->environment       = g_hash_table_new (g_str_hash, g_str_equal);
   
   client->process_id        = getpid ();
 
@@ -544,7 +842,16 @@ gnome_client_object_init (GnomeClient *client)
   }
 
   client->state                       = GNOME_CLIENT_IDLE;
-  client->number_of_interact_requests = 0;
+  client->interaction_keys            = NULL;
+}
+
+static gboolean
+environment_entry_remove (gchar *key, gchar *value, gpointer data)
+{
+  g_free (key);
+  g_free (value);
+  
+  return TRUE;
 }
 
 static void
@@ -571,8 +878,11 @@ gnome_real_client_destroy (GtkObject *object)
   g_strfreev (client->clone_command);
   g_free     (client->current_directory);
   g_strfreev (client->discard_command);
-  g_list_foreach (client->environment, (GFunc)g_free, NULL);
-  g_list_free    (client->environment);
+
+  g_hash_table_foreach_remove (client->environment, 
+			       (GHRFunc)environment_entry_remove, NULL);
+  g_hash_table_destroy        (client->environment);
+
   g_free     (client->program);
   g_strfreev (client->resign_command);
   g_strfreev (client->restart_command);
@@ -590,9 +900,12 @@ gnome_real_client_destroy (GtkObject *object)
 /**
  * gnome_client_new
  *
- * Description:
+ * Description: Allocates memory for a new GNOME session management
+ * client object.  After allocating, the client tries to connect to a
+ * session manager.
  *
- * Returns:  Pointer to
+ * Returns: Pointer to a newly allocated GNOME session management
+ * client object.
  **/
 
 GnomeClient *
@@ -611,9 +924,11 @@ gnome_client_new (void)
 /**
  * gnome_client_new_without_connection
  *
- * Description:
+ * Description: Allocates memory for a new GNOME session management
+ * client object.
  *
- * Returns:  Pointer to
+ * Returns: Pointer to a newly allocated GNOME session management
+ * client object.
  **/
 
 GnomeClient *
@@ -823,7 +1138,7 @@ gnome_client_set_clone_command (GnomeClient *client,
 #ifdef HAVE_LIBSM
   if (GNOME_CLIENT_CONNECTED (client) && client->clone_command)
     {
-      client_set_prop_from_array_with_arg (client, 
+      client_set_array_with_arg (client, 
 					   SmCloneCommand, 
 					   sm_cloned_id_arg_name,
 					   client->clone_command);
@@ -854,7 +1169,7 @@ gnome_client_set_current_directory (GnomeClient *client,
     {
       client->current_directory= g_strdup (dir);
 #ifdef HAVE_LIBSM
-      client_set_prop_from_string (client, SmCurrentDirectory, 
+      client_set_string (client, SmCurrentDirectory, 
 				  client->current_directory);
 #endif /* HAVE_LIBSM */
     }
@@ -862,7 +1177,7 @@ gnome_client_set_current_directory (GnomeClient *client,
     {
       client->current_directory= NULL;
 #ifdef HAVE_LIBSM
-      client_unset_prop (client, SmCurrentDirectory);
+      client_unset (client, SmCurrentDirectory);
 #endif /* HAVE_LIBSM */
     }
 }
@@ -892,7 +1207,7 @@ gnome_client_set_discard_command (GnomeClient *client,
       g_strfreev (client->discard_command);
       client->discard_command= NULL;
 #ifdef HAVE_LIBSM
-      client_unset_prop (client, SmDiscardCommand);
+      client_unset (client, SmDiscardCommand);
 #endif /* HAVE_LIBSM */
     }
   else
@@ -901,7 +1216,7 @@ gnome_client_set_discard_command (GnomeClient *client,
       client->discard_command = array_init_from_arg (argc, argv);
       
 #ifdef HAVE_LIBSM
-      client_set_prop_from_array (client, SmDiscardCommand, 
+      client_set_array (client, SmDiscardCommand, 
 				  client->discard_command);
 #endif /* HAVE_LIBSM */
     }
@@ -923,60 +1238,40 @@ gnome_client_set_environment (GnomeClient *client,
 			      const gchar *name,
 			      const gchar *value)
 {
-  GList *temp;
+  gchar *old_name;
+  gchar *old_value;
   
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
   g_return_if_fail (name != NULL);
 
-  /* Look, if 'name' is defined in our environment.  */
-  temp= client->environment;
-  while (temp)
+  if (g_hash_table_lookup_extended (client->environment,
+				    name, 
+				    (gpointer *) &old_name, 
+				    (gpointer *) &old_value))
     {
-      if (strcmp ((gchar *)temp->data, name) == 0)
-	break;
-      
-      temp= g_list_next (temp);
-      g_return_if_fail (temp != NULL);
-      temp= g_list_next (temp);
-    }
-  
-  if (value)
-    {
-      if (temp)
+      if (value)
 	{
-	  /* Change one entry in the environment.  */
-	  temp= g_list_next (temp);
-	  g_return_if_fail (temp != NULL);
-
-	  g_free (temp->data);
-	  temp->data= (gpointer) g_strdup (value);
+	  g_hash_table_insert (client->environment, old_name, 
+			       g_strdup (value));
+	  g_free (old_value);
 	}
       else
 	{
-	  /* Add one entry to the environment.  */
-	  client->environment= g_list_append (client->environment,
-					      g_strdup (name));
-	  client->environment= g_list_append (client->environment,
-					      g_strdup (value));	  
+	  g_hash_table_remove (client->environment, name);
+	  g_free (old_name);
+	  g_free (old_value);
 	}
     }
-  else if (temp)
+  else if (value)
     {
-      /* Remove one entry from the environment.  */
-      GList *temp2= g_list_next (temp);
-      
-      g_free (temp->data);
-      client->environment= g_list_remove (client->environment, temp);
-      g_return_if_fail (temp2 != NULL);
-      g_free (temp2->data);
-      client->environment= g_list_remove (client->environment, temp2);
+      g_hash_table_insert (client->environment, 
+			   g_strdup (name), 
+			   g_strdup (value));
     }
-  else 
-    return;
   
 #ifdef HAVE_LIBSM
-  client_set_prop_from_glist (client, SmEnvironment, client->environment);
+  client_set_ghash (client, SmEnvironment, client->environment);
 #endif /* HAVE_LIBSM */
 }
 
@@ -998,11 +1293,12 @@ gnome_client_set_process_id (GnomeClient *client, pid_t pid)
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
-  client->process_id = pid;
+  client->process_id= pid;
   
   g_snprintf (str_pid, sizeof(str_pid), "%d", client->process_id);
+
 #ifdef HAVE_LIBSM
-  client_set_prop_from_string (client, SmProcessID, str_pid);
+  client_set_string (client, SmProcessID, str_pid);
 #endif /* HAVE_LIBSM */
 }
 
@@ -1031,8 +1327,9 @@ gnome_client_set_program (GnomeClient *client,
   client->program= g_strdup (program);
 
   client_unset_config_prefix (client);  
+
 #ifdef HAVE_LIBSM
-  client_set_prop_from_string (client, SmProgram, client->program);
+  client_set_string (client, SmProgram, client->program);
 #endif /* HAVE_LIBSM */
 }
 
@@ -1060,8 +1357,9 @@ gnome_client_set_resign_command (GnomeClient *client,
       
       g_strfreev (client->resign_command);
       client->resign_command= NULL;
+
 #ifdef HAVE_LIBSM
-      client_unset_prop (client, SmResignCommand);
+      client_unset (client, SmResignCommand);
 #endif /* HAVE_LIBSM */
     }
   else
@@ -1070,8 +1368,7 @@ gnome_client_set_resign_command (GnomeClient *client,
       client->resign_command = array_init_from_arg (argc, argv);
   
 #ifdef HAVE_LIBSM
-      client_set_prop_from_array (client, SmResignCommand, 
-				  client->resign_command);
+      client_set_array (client, SmResignCommand, client->resign_command);
 #endif /* HAVE_LIBSM */
     }
 }
@@ -1105,10 +1402,9 @@ gnome_client_set_restart_command (GnomeClient *client,
 #ifdef HAVE_LIBSM
   if (GNOME_CLIENT_CONNECTED (client) && client->restart_command)
     {
-      client_set_prop_from_array_with_arg (client, 
-					   SmRestartCommand, 
-					   sm_client_id_arg_name,
-					   client->restart_command);
+      client_set_array_with_arg (client, SmRestartCommand, 
+				 sm_client_id_arg_name,
+				 client->restart_command);
     }
 #endif /* HAVE_LIBSM */
 }
@@ -1134,25 +1430,25 @@ gnome_client_set_restart_style (GnomeClient *client,
     {
     case GNOME_RESTART_IF_RUNNING:
 #ifdef HAVE_LIBSM
-      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartIfRunning);
+      client_set_gchar (client, SmRestartStyleHint, SmRestartIfRunning);
       break;
 #endif /* HAVE_LIBSM */
       
     case GNOME_RESTART_ANYWAY:
 #ifdef HAVE_LIBSM
-      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartAnyway);
+      client_set_gchar (client, SmRestartStyleHint, SmRestartAnyway);
       break;
 #endif /* HAVE_LIBSM */
 
     case GNOME_RESTART_IMMEDIATELY:
 #ifdef HAVE_LIBSM
-      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartImmediately);
+      client_set_gchar (client, SmRestartStyleHint, SmRestartImmediately);
       break;
 #endif /* HAVE_LIBSM */
 
     case GNOME_RESTART_NEVER:
 #ifdef HAVE_LIBSM
-      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartNever);
+      client_set_gchar (client, SmRestartStyleHint, SmRestartNever);
 #endif /* HAVE_LIBSM */
       break;
 
@@ -1189,7 +1485,7 @@ gnome_client_set_shutdown_command (GnomeClient *client,
       g_strfreev (client->shutdown_command);
       client->shutdown_command = NULL;
 #ifdef HAVE_LIBSM
-      client_unset_prop (client, SmShutdownCommand);
+      client_unset (client, SmShutdownCommand);
 #endif /* HAVE_LIBSM */
     }
   else
@@ -1198,7 +1494,7 @@ gnome_client_set_shutdown_command (GnomeClient *client,
       client->shutdown_command = array_init_from_arg (argc, argv);
 
 #ifdef HAVE_LIBSM
-      client_set_prop_from_array (client, SmShutdownCommand, 
+      client_set_array (client, SmShutdownCommand, 
 				  client->shutdown_command);
 #endif /* HAVE_LIBSM */
     }
@@ -1228,7 +1524,7 @@ gnome_client_set_user_id (      GnomeClient *client,
   
   client->user_id= g_strdup (id);
 #ifdef HAVE_LIBSM
-  client_set_prop_from_string (client, SmUserID, client->user_id);
+  client_set_string (client, SmUserID, client->user_id);
 #endif /* HAVE_LIBSM */
 }
 
@@ -1255,8 +1551,7 @@ gnome_client_add_static_arg (GnomeClient *client, ...)
   str= va_arg (args, gchar*);
   while (str)
     {
-      client->static_args= g_list_append (client->static_args,
-					  g_strdup(str));
+      client->static_args= g_list_append (client->static_args, g_strdup(str));
       str= va_arg (args, gchar*);
     }
   va_end (args);
@@ -1439,9 +1734,6 @@ gnome_real_client_save_complete (GnomeClient *client)
 static void
 gnome_real_client_shutdown_cancelled (GnomeClient *client)
 {
-  GList             *temp_list;
-  GnomeInteractData *interactf;
-  
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
@@ -1449,19 +1741,18 @@ gnome_real_client_shutdown_cancelled (GnomeClient *client)
   if (client->state == GNOME_CLIENT_SAVING)
     SmcSaveYourselfDone ((SmcConn) client->smc_conn, False);
   
-  client->state = GNOME_CLIENT_IDLE;
-
   /* Free all interation keys but the one in use.  */
-  temp_list = interact_functions;
-  while (temp_list)
+  while (client->interaction_keys)
     {
-      interactf = temp_list->data;
-      temp_list = temp_list->next;
+      GSList *tmp= client->interaction_keys;
       
-      if (interactf->client == client)
-	gnome_interaction_remove (interactf);
+      interaction_key_destroy_if_possible ((InteractionKey *) tmp->data);
+
+      client->interaction_keys= g_slist_remove (tmp, tmp->data);
     }
 #endif /* HAVE_LIBSM */
+
+  client->state = GNOME_CLIENT_IDLE;
 }
 
 static void
@@ -1478,66 +1769,58 @@ gnome_real_client_connect (GnomeClient *client,
   /* We now set all non empty properties.  */
   if (client->clone_command != NULL)
     {
-      client_set_prop_from_array_with_arg (client, 
-					   SmCloneCommand, 
-					   sm_cloned_id_arg_name,
-					   client->clone_command);
+      client_set_array_with_arg (client, SmCloneCommand, 
+				 sm_cloned_id_arg_name,
+				 client->clone_command);
     }
   else
-    client_set_prop_from_array (client, SmCloneCommand, NULL);
+    client_set_array (client, SmCloneCommand, NULL);
 
-  client_set_prop_from_string (client, SmCurrentDirectory,
-			       client->current_directory);
-  client_set_prop_from_array (client, SmDiscardCommand,
-			      client->discard_command);
-  client_set_prop_from_glist (client, SmEnvironment, client->environment);
+  client_set_string (client, SmCurrentDirectory, client->current_directory);
+  client_set_array (client, SmDiscardCommand, client->discard_command);
+  client_set_ghash (client, SmEnvironment, client->environment);
   {
     gchar str_pid[32];
     
     g_snprintf (str_pid, sizeof(str_pid), "%d", client->process_id);
-    client_set_prop_from_string (client, SmProcessID, str_pid);
+    client_set_string (client, SmProcessID, str_pid);
   }
-  client_set_prop_from_string (client, SmProgram,
-			       client->program);
-  client_set_prop_from_array (client, SmResignCommand,
-			      client->resign_command);
+  client_set_string (client, SmProgram, client->program);
+  client_set_array (client, SmResignCommand, client->resign_command);
 
   if (client->restart_command != NULL)
     {
-      client_set_prop_from_array_with_arg (client, 
-					   SmRestartCommand, 
-					   sm_client_id_arg_name,
-					   client->restart_command);
+      client_set_array_with_arg (client, SmRestartCommand, 
+				 sm_client_id_arg_name,
+				 client->restart_command);
     }
   else
-    client_set_prop_from_array (client, SmRestartCommand, NULL);
+    client_set_array (client, SmRestartCommand, NULL);
 
   switch (client->restart_style)
     {
     case GNOME_RESTART_IF_RUNNING:
-      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartIfRunning);
+      client_set_gchar (client, SmRestartStyleHint, SmRestartIfRunning);
       break;
       
     case GNOME_RESTART_ANYWAY:
-      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartAnyway);
+      client_set_gchar (client, SmRestartStyleHint, SmRestartAnyway);
       break;
 
     case GNOME_RESTART_IMMEDIATELY:
-      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartImmediately);
+      client_set_gchar (client, SmRestartStyleHint, SmRestartImmediately);
       break;
 
     case GNOME_RESTART_NEVER:
-      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartNever);
+      client_set_gchar (client, SmRestartStyleHint, SmRestartNever);
       break;
 
     default:
       break;
     }
 
-  client_set_prop_from_array (client, SmShutdownCommand,
-			      client->shutdown_command);
-  client_set_prop_from_string (client, SmUserID,
-			       client->user_id);
+  client_set_array (client, SmShutdownCommand, client->shutdown_command);
+  client_set_string (client, SmUserID, client->user_id);
 #endif /* HAVE_LIBSM */
 }
 
@@ -1545,9 +1828,6 @@ gnome_real_client_connect (GnomeClient *client,
 static void
 gnome_real_client_disconnect (GnomeClient *client)
 {
-  GList             *temp_list;
-  GnomeInteractData *interactf;
-  
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
   
@@ -1563,20 +1843,20 @@ gnome_real_client_disconnect (GnomeClient *client)
       gdk_input_remove (client->input_id);
       client->input_id = 0;
     }
-#endif /* HAVE_LIBSM */
-  
-  client->state = GNOME_CLIENT_IDLE;
-  
+
   /* Free all interation keys but the one in use.  */
-  temp_list = interact_functions;
-  while (temp_list)
+  while (client->interaction_keys)
     {
-      interactf = temp_list->data;
-      temp_list = temp_list->next;
+      GSList *tmp= client->interaction_keys;
       
-      if (interactf->client == client)
-	gnome_interaction_remove (interactf);
+      interaction_key_destroy_if_possible ((InteractionKey *) tmp->data);
+
+      client->interaction_keys= g_slist_remove (tmp, tmp->data);
     }
+
+#endif /* HAVE_LIBSM */
+
+  client->state = GNOME_CLIENT_IDLE;  
 }
 
 /*****************************************************************************/
@@ -1590,8 +1870,7 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
 					   GtkDestroyNotify       destroy) 
 {
 #ifdef HAVE_LIBSM
-  static gint interaction_tag = 1;
-  GnomeInteractData *interactf;
+  InteractionKey *key;
   int _dialog_type;
 #endif
   
@@ -1617,26 +1896,15 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
 
 #ifdef HAVE_LIBSM
   
-  interactf = g_new (GnomeInteractData, 1);
+  key= interaction_key_new (client, dialog_type, interp,
+			    function, data, destroy);
   
-  g_return_if_fail (interactf != NULL);
+  g_return_if_fail (key);
   
-  interactf->tag         = interaction_tag++;
-  interactf->client      = client;
-  interactf->dialog_type = dialog_type;
-  interactf->in_use      = FALSE;
-  interactf->interp      = interp;
-  interactf->function    = function;
-  interactf->data        = data;
-  interactf->destroy     = destroy;
-
-  interact_functions = g_list_append (interact_functions, interactf);
-  client->number_of_interact_requests++;
-
-  SmcInteractRequest ((SmcConn) client->smc_conn, 
-		      _dialog_type, 
-		      client_interact_callback, 
-		      (SmPointer) client);
+  client->interaction_keys= g_slist_prepend (client->interaction_keys, key);
+  
+  SmcInteractRequest ((SmcConn) client->smc_conn, _dialog_type, 
+		      client_interact_callback, (SmPointer) client);
 
 #endif /* HAVE_LIBSM */
 }
@@ -1709,61 +1977,6 @@ gnome_client_request_interaction_interp (GnomeClient *client,
 #endif
 }
 
-static void
-gnome_invoke_interact_function (GnomeInteractData *interactf)
-{
-  interactf->in_use= TRUE;
-
-  if (!interactf->interp)
-    interactf->function (interactf->client, interactf->tag,
-			 interactf->dialog_type, interactf->data);
-  else
-    {
-      GtkArg args[4];
-
-      args[0].name = NULL;
-      args[0].type = GTK_TYPE_NONE;
-
-      args[1].name = NULL;
-      args[1].type = GTK_TYPE_OBJECT;
-      args[1].d.pointer_data = &interactf->client;
-      
-      args[2].name = NULL;
-      args[2].type = GTK_TYPE_INT;
-      args[2].d.pointer_data = &interactf->tag;
-
-      args[3].name = "GnomeDialogType";
-      args[3].type = GTK_TYPE_ENUM;
-      args[3].d.pointer_data = &interactf->dialog_type;
-
-      ((GtkCallbackMarshal)interactf->function) (NULL,
-						 interactf->data,
-						 3, args);
-    }
-}
-
-static void
-gnome_interaction_destroy (GnomeInteractData *interactf)
-{
-  if (interactf->destroy)
-    (interactf->destroy) (interactf->data);
-  g_free (interactf);
-}
-
-static void
-gnome_interaction_remove (GnomeInteractData *interactf)
-{
-  if (interactf->client)
-    interactf->client->number_of_interact_requests--;
-  
-  if (interactf->in_use)
-    interactf->client = NULL;
-  else
-    {
-      interact_functions = g_list_remove (interact_functions, interactf);
-      gnome_interaction_destroy (interactf);
-    }
-}
 
 /*****************************************************************************/
 
@@ -1878,7 +2091,7 @@ gnome_client_request_save (GnomeClient	       *client,
 }
 
 /*****************************************************************************/
-/* 'GnomeInteractData' stuff */
+/* 'InteractionKey' stuff */
 
 
 /**
@@ -1890,33 +2103,19 @@ gnome_client_request_save (GnomeClient	       *client,
  **/
 
 void
-gnome_interaction_key_return (gint     key,
+gnome_interaction_key_return (gint     tag,
 			      gboolean cancel_shutdown)
 {
 #ifdef HAVE_LIBSM
-  GList             *temp_list;
-  GnomeInteractData *interactf = NULL;
-  GnomeClient       *client = NULL;
+  InteractionKey *key;
+  GnomeClient    *client;
 
-  /* Find the first interact function belonging to this key.  */
+  key= interaction_key_find_by_tag (tag);
+  g_return_if_fail (key);
 
-  temp_list = interact_functions;
-  while (temp_list)
-    {
-      interactf = temp_list->data;
-      if (interactf->tag == key)
-	break;
-      
-      temp_list = temp_list->next;
-    }
+  client= key->client;
   
-  g_return_if_fail (interactf);
-
-  client = interactf->client;
-  
-  /* This interact function is not used anymore */  
-  interactf->in_use = FALSE;
-  gnome_interaction_remove (interactf);
+  interaction_key_destroy (key);
 
   /* The case that 'client != NULL' should only occur, if the
      connection to the session manager was closed, while we where
@@ -1925,12 +2124,14 @@ gnome_interaction_key_return (gint     key,
   if (client == NULL)
     return;
   
+  client->interaction_keys= g_slist_remove (client->interaction_keys, key);
+  
   if (cancel_shutdown && !client->shutdown)
     cancel_shutdown= FALSE;
   
   SmcInteractDone ((SmcConn) client->smc_conn, cancel_shutdown);
   
-  if (client->number_of_interact_requests == 0)
+  if (client->interaction_keys == NULL)
     {
       if (client->save_phase_2_requested && (client->phase == 1))
 	{
@@ -1949,211 +2150,6 @@ gnome_interaction_key_return (gint     key,
     } 
 #endif /* HAVE_LIBSM */
 }
-
-/*****************************************************************************/
-/* 'gnome_client' private member functions */
-
-#ifdef HAVE_LIBSM
-
-void
-client_set_prop_from_string (GnomeClient *client,
-			     gchar *prop_name,
-			     gchar *value)
-{
-  SmProp prop, *proplist[1];
-  SmPropValue val;
-
-  g_return_if_fail (prop_name  != NULL);
-
-  if (!GNOME_CLIENT_CONNECTED (client) || (value == NULL))
-    return;  
-
-  prop.name     = prop_name;
-  prop.type     = SmARRAY8;
-  prop.num_vals = 1;
-  prop.vals     = &val;
-  val.length = strlen (value)+1;
-  val.value  = value;
-  proplist[0] = &prop;
-  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
-}
-
-void
-client_set_prop_from_gchar (GnomeClient *client,
-			    gchar *prop_name,
-			    gchar value)
-{
-  SmProp prop, *proplist[1];
-  SmPropValue val;
-
-  g_return_if_fail (prop_name  != NULL);
-
-  if (!GNOME_CLIENT_CONNECTED (client))
-    return;  
-
-  prop.name     = prop_name;
-  prop.type     = SmCARD8;
-  prop.num_vals = 1;
-  prop.vals     = &val;
-  val.length = 1;
-  val.value  = &value;
-  proplist[0] = &prop;
-  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
-}
-
-static void
-client_set_prop_from_glist (GnomeClient *client,
-			    gchar       *prop_name,
-			    GList       *list)
-{
-  gint    argc;
-  gint    i;
-
-  SmProp prop, *proplist[1];
-  SmPropValue *vals;
-  
-  g_return_if_fail (prop_name != NULL);
-
-  if (!GNOME_CLIENT_CONNECTED (client))
-    return;
-
-  if (list == NULL)
-    {
-      SmcDeleteProperties ((SmcConn) client->smc_conn, 1, &prop_name);
-      return;
-    }
-
-  argc= g_list_length (list);
-
-  /* Now initialize the 'vals' array.  */
-  vals = g_new (SmPropValue, argc);
-  for (i= 0 ; list ; list= g_list_next (list), i++)
-    {
-      vals[i].length = strlen ((gchar *)list->data);
-      vals[i].value  = (gchar *)list->data;
-    }
-
-  prop.name     = prop_name;
-  prop.type     = SmLISTofARRAY8;
-  prop.num_vals = argc;
-  prop.vals     = vals;
-  proplist[0]   = &prop;
-  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
-
-  g_free (vals);
-}		   
-
-void
-client_set_prop_from_array (GnomeClient *client,
-			    gchar *prop_name,
-			    gchar *array[])
-{
-  gint    argc;
-  gchar **ptr;
-  gint    i;
-
-  SmProp prop, *proplist[1];
-  SmPropValue *vals;
-  
-  g_return_if_fail (prop_name != NULL);
-
-  if (!GNOME_CLIENT_CONNECTED (client) || (array == NULL))
-    return;
-
-  /* We count the number of elements in our array.  */
-  for (ptr = array, argc = 0; *ptr ; ptr++, argc++) /* LOOP */;
-
-  /* Now initialize the 'vals' array.  */
-  vals = g_new (SmPropValue, argc);
-  for (ptr = array, i = 0 ; i < argc ; ptr++, i++)
-    {
-      vals[i].length = strlen (*ptr);
-      vals[i].value  = *ptr;
-    }
-
-  prop.name     = prop_name;
-  prop.type     = SmLISTofARRAY8;
-  prop.num_vals = argc;
-  prop.vals     = vals;
-  proplist[0]   = &prop;
-  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
-
-  g_free (vals);
-}		   
-
-void
-client_set_prop_from_array_with_arg (GnomeClient *client,
-				     gchar *prop_name,
-				     const gchar *arg_name,
-				     gchar *array[])
-{
-  GList  *temp;
-  gint    argc;
-  gchar **ptr;
-  gint    i;
-
-  SmProp prop, *proplist[1];
-  SmPropValue *vals;
-  
-  g_return_if_fail (prop_name != NULL);
-  g_return_if_fail (arg_name != NULL);
-
-  if (!GNOME_CLIENT_CONNECTED (client) || (array == NULL))
-    return;
-
-  /* We count the number of elements in our array.  */
-  for (ptr= array, argc= 0; *ptr ; ptr++, argc++) /* LOOP */;
-
-  /* We add an additional client id argument and some some static
-     arguments.  */
-  argc+= 2+g_list_length (client->static_args);
-
-  vals= g_new (SmPropValue, argc);
-
-  /* The program to start.  */
-  vals[0].length= strlen (*array);
-  vals[0].value = *array++;
-
-  /* An argument with the client id.  */
-  vals[1].length= strlen (arg_name);
-  vals[1].value = (char *) arg_name;
-  vals[2].length= strlen (client->client_id);
-  vals[2].value = client->client_id;
-
-  /* Some static arguments.  */
-  for (temp= client->static_args, i= 3; temp; i++, temp= g_list_next (temp))
-    {
-      vals[i].length= strlen ((gchar *)temp->data);
-      vals[i].value = (gchar *)temp->data;
-    }
-  
-  /* Now set the arguments, we must set.  */
-  for (ptr= array; *ptr ; ptr++, i++)
-    {
-      vals[i].length = strlen (*ptr);
-      vals[i].value  = *ptr;
-    }
-
-  prop.name     = prop_name;
-  prop.type     = SmLISTofARRAY8;
-  prop.num_vals = argc;
-  prop.vals     = vals;
-  proplist[0]   = &prop;
-  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
-
-  g_free (vals);
-}		   
-
-void
-client_unset_prop (GnomeClient *client, gchar *prop_name)
-{
-  g_return_if_fail (prop_name  != NULL);
-
-  if (GNOME_CLIENT_CONNECTED (client))
-    SmcDeleteProperties ((SmcConn) client->smc_conn, 1, &prop_name);
-}
-
-#endif /* HAVE_LIBSM */
 
 /*****************************************************************************/
 
@@ -2204,7 +2200,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
       client->save_style= GNOME_SAVE_BOTH;
       break;
     }
-  client->shutdown           = (gint)               shutdown;
+  client->shutdown= shutdown;
   switch (interact_style)
     {
     case SmInteractStyleErrors:
@@ -2220,13 +2216,13 @@ client_save_yourself_callback (SmcConn   smc_conn,
       client->interact_style= GNOME_INTERACT_NONE;
       break;
     }
-  client->fast               = (gint)               fast;
-  client->phase              = 1;
+  client->fast = fast;
+  client->phase= 1;
 
-  client->state                     = GNOME_CLIENT_SAVING;
-  client->save_phase_2_requested    = FALSE;
-  client->save_successfull          = TRUE;
-  client->number_of_save_signals    = 0;
+  client->state                 = GNOME_CLIENT_SAVING;
+  client->save_phase_2_requested= FALSE;
+  client->save_successfull      = TRUE;
+  client->save_yourself_emitted = FALSE;
 
   gtk_signal_emit (GTK_OBJECT (client), 
 		   client_signals[SAVE_YOURSELF],
@@ -2236,7 +2232,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
 		   client->interact_style, 
 		   fast);
 
-  if (client->number_of_interact_requests == 0)
+  if (client->interaction_keys  == NULL)
     {
       if (client->save_phase_2_requested)
 	{
@@ -2246,7 +2242,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
 	}
       else 
 	{
-	  if (client->number_of_save_signals == 0)
+	  if (!client->save_yourself_emitted)
 	    client->save_successfull = FALSE;
 
 	  if (client->state == GNOME_CLIENT_SAVING)
@@ -2287,24 +2283,21 @@ client_shutdown_cancelled_callback (SmcConn smc_conn, SmPointer client_data)
 static void 
 client_interact_callback (SmcConn smc_conn, SmPointer client_data)
 {
-  GList             *temp_list;
-  GnomeInteractData *interactf = NULL;
+  GnomeClient *client= (GnomeClient *) client_data;
 
-  /* Find the first interact function belonging to this client.  */
-
-  temp_list = interact_functions;
-  while (temp_list)
+  if (client->interaction_keys)
     {
-      interactf = temp_list->data;
-      if (interactf->client == (GnomeClient*) client_data)
-	break;
+      GSList         *tmp= client->interaction_keys;
+      InteractionKey *key= (InteractionKey *) tmp->data;
       
-      temp_list = temp_list->next;
+      client->interaction_keys= g_slist_remove (tmp, tmp->data);
+      
+      interaction_key_use (key);
     }
-  
-  g_assert (interactf);
-  
-  gnome_invoke_interact_function (interactf);
+  else
+    {
+      /* FIXME: The interaction should finish now.  */
+    }
 }
 
 static void 
@@ -2321,7 +2314,7 @@ client_save_phase_2_callback (SmcConn smc_conn, SmPointer client_data)
 		   client->interact_style,
 		   client->fast);
 
-  if (client->number_of_interact_requests == 0)
+  if (client->interaction_keys == NULL)
     {
       if (client->state == GNOME_CLIENT_SAVING)
 	SmcSaveYourselfDone ((SmcConn) client->smc_conn, 
@@ -2355,7 +2348,8 @@ gnome_client_marshal_signal_1 (GtkObject     *object,
 					GTK_VALUE_ENUM (args[3]),
 					GTK_VALUE_BOOL (args[4]),
 					func_data);
-  client->number_of_save_signals++;
+
+  client->save_yourself_emitted= TRUE;
 }
 
 static void

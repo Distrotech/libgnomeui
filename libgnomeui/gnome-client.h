@@ -109,7 +109,7 @@ struct _GnomeClient
   gchar             **clone_command;        /*[xs]*/
   gchar              *current_directory;    /*[  ]*/
   gchar             **discard_command;      /*[  ]*/
-  GList              *environment;          /*[  ]*/
+  GHashTable         *environment;          /*[  ]*/
   pid_t               process_id;           /*[ s]*/
   gchar              *program;              /*[xs]*/
   gchar             **resign_command;       /*[  ]*/
@@ -120,18 +120,18 @@ struct _GnomeClient
 
   /* values sent with the last SaveYourself message */
   GnomeSaveStyle      save_style;
-  gint                shutdown;
   GnomeInteractStyle  interact_style;
-  gint                fast;
+  gboolean            shutdown;
+  gboolean            fast;
   gint                phase;
 
   /* other internal state information */
   GnomeClientState    state;
-  gint                save_phase_2_requested;
-  gint                save_successfull;
-  gint                number_of_save_signals;
+  gboolean            save_phase_2_requested;
+  gboolean            save_successfull;
+  gboolean            save_yourself_emitted;
 
-  gint                number_of_interact_requests;
+  GSList             *interaction_keys;
 };
 
 

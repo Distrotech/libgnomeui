@@ -1,3 +1,32 @@
+1998-11-28  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c (client_set_value): New function.
+	(client_set_string): Renamed from 'client_set_prop_from_string'.
+	(client_set_gchar): Renamed from 'client_set_prop_from_gchar'.
+	(client_set_array): Renamed from 'client_set_prop_from_array'.
+	(client_set_array_with_arg): Renamed from
+ 	'client_set_prop_from_array_with_arg'.
+	(client_unset): Renamed from 'client_unset_prop'.
+	(client_set_ghash): New function.
+	(client_set_prop_from_glist): Removed.
+
+	* gnome-client.h (struct _GnomeClient): Changed int-typed boolean
+ 	members to gboolean.  Removed 'number_of_interact_requests' and
+ 	replaced it with 'interaction_keys'. Member 'number_of_...'
+  	renamed to 'save_yourself_emitted'. Made 'enviroment' of type
+ 	'GHashTable' instead of 'GList'.
+
+1998-11-26  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c (interaction_key_find_by_tag): New function.
+  	Searchs a interaction key with a given tag.
+	(struct _InteractionKey): Renamed '_GnomeInteractData'.
+	(interaction_key_destroy): Renamed 'gnome_interaction_destroy'.
+	(interaction_key_destroy_if_possible): Renamed
+ 	'gnome_interact_remove'.
+	(interaction_key_new): New function.
+	(interaction_key_use): Renamed 'gnome_invoke_interact_function'.
+
 1998-11-28  Herbert Valerio Riedel  <hvr@hvrlab.ml.org>
 
 	* gtkspell.c, gnome-color-picker.c: added #include <gtk/gtkcompat.h>
