@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
-"PO-Revision-Date: 2004-03-10 19:32+0200\n"
+"POT-Creation-Date: 2004-08-03 14:19+0300\n"
+"PO-Revision-Date: 2004-08-03 19:32+0200\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,31 +31,36 @@ msgstr "Спадкоємний елемент 2"
 msgid "Hint for item 2"
 msgstr "Довідка елемента 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
-#, fuzzy
-msgid "Filesystem"
-msgstr "Фай_ли"
+#: file-chooser/gtkfilesystemgnomevfs.c:650
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s не є текою"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:857
+msgid "Filesystem"
+msgstr "Файлова система"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1521
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Не вдалось зберегти закладку (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Не вдається отримати інформацію про файл '%s': %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Не вдається відкрити файл '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
+"Не вдається завантажити зображення '%s': причина невідома, можливо, файл зображення пошкоджений"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -166,6 +171,7 @@ msgstr "Про програму %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -223,6 +229,7 @@ msgid "_Game"
 msgstr "_Гра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Довідка"
 
@@ -345,11 +352,11 @@ msgstr "Очистити вибране"
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "_Скасувати"
+msgstr "В_ернути"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Скасувати останню дію"
+msgstr "Вернути останню дію"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
@@ -402,7 +409,7 @@ msgstr "Змінити властивості файлу"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr "Н_астройка"
+msgstr "П_араметри"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -413,11 +420,11 @@ msgstr "Настроїти програму"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Про програму"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Про програму"
 
@@ -444,7 +451,7 @@ msgstr "Створити нове вікно"
 msgid "_Close This Window"
 msgstr "_Закрити це вікно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Закрити поточне вікно"
 
@@ -541,7 +548,7 @@ msgid "Text Only"
 msgstr "Лише текст"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Типове для стільниці (%s)"
 
@@ -599,7 +606,7 @@ msgstr "Має рядок перебігу"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Створити віджет перебігу."
+msgstr "Створити вікно перебігу."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
@@ -607,7 +614,7 @@ msgstr "Має рядок стану"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Створити віджет стану."
+msgstr "Створити вікно стану."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -632,7 +639,7 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted unencrypted."
-msgstr "Ваш пароль буде передано незашифрованим."
+msgstr "Ваш пароль буде передано не зашифрованим."
 
 #: libgnomeui/gnome-authentication-manager.c:67
 msgid "Your password will be transmitted encrypted."
@@ -644,9 +651,9 @@ msgid "Authentication Required"
 msgstr "Вимагається реєстрація"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Необхідно ввійти в сеанс, щоб мати доступ до %s\n"
+msgstr "Необхідно ввійти в сеанс, щоб мати доступ до %s у домені %s\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -832,29 +839,24 @@ msgstr "Колір тла встановлено"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Колір тла емблеми"
+msgstr "Колір тла вмісту"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Колір тла емблеми"
+msgstr "Колір тла вмісту"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "Колір тла у вигляді GdkColor"
+msgstr "Колір тла вмісту у вигляді GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Колір тла встановлено"
+msgstr "Колір тла вмісту встановлено"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "Колір тла встановлено"
+msgstr "Колір тла вмісту встановлено"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -1109,7 +1111,7 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Додаток \"%s\" спробувало змінити щось у ваших настройках, що заборонено "
+"Додаток \"%s\" спробував змінити щось у ваших параметрах, що заборонено "
 "змінювати системним адміністратором чи операційною системою. Деякі з "
 "вибраних параметрів можуть не мати ефекту чи не будуть відновлені під час "
 "наступного запуску додатка."
@@ -1162,7 +1164,7 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Помилка під час спроби запустити типовий переглядач веб.\n"
-"Будь ласка, перевірте ваші настройки в утиліті \"Вподобані програми\"."
+"Будь ласка, перевірте ваші параметри в утиліті \"Вподобані програми\"."
 
 #: libgnomeui/gnome-icon-entry.c:178
 msgid ""
@@ -1290,11 +1292,11 @@ msgstr "_Пароль:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Підключатись _анонімно"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Підключатись як _користувач"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1402,6 +1404,7 @@ msgstr "Бібліотека ГІК GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Численні помилки сегментації; неможливо відобразити повідомлення про "
@@ -1409,11 +1412,12 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-"Segmentation fault!!\n"
+"Помилка сегментації!\n"
 "Не вдається відобразити діалог помилки\n"
 
 #: libgnomeui/gnome_segv.c:101
@@ -1465,8 +1469,6 @@ msgstr "_Сповістити розробників"
 msgid "_Debug"
 msgstr "_Налагодження"
 
-#~ msgid " domain %s"
-#~ msgstr " домен  %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Вийти з тесту"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Вийти з тесту"
