@@ -1,5 +1,9 @@
 2004-01-18  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-app-helper.c: Fix for #125323.
+
+2004-01-18  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-icon-theme.h: Added G_BEGIN/END_DECLS.
 	* libgnomeui/gnome-theme-parser.h: Same here. Fixes
 	bug #119788. Patch by Filip Van Raemdonck.
