@@ -1,3 +1,8 @@
+2002-03-01  Darin Adler  <darin@bentspoon.com>
+
+	* sl.po: Hack out multiple msgstrs. Someone who actually
+	speaks the language needs to revisit this file.
+
 2002-03-01  Pauli Virtanen  <pauli.virtanen@hut.fi>
 
 	* fi.po: Updated Finnish translation.

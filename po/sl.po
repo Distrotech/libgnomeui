@@ -16,7 +16,7 @@ msgstr ""
 #: libgnomeui/gnome-about.c:187
 msgid "Credits"
 msgstr "Zasluge"
-msgstr "Zahvale"
+#msgstr "Zahvale"
 
 #: libgnomeui/gnome-about.c:210
 msgid "Written by"
@@ -34,7 +34,7 @@ msgstr ""
 #: libgnomeui/gnome-about.c:295
 msgid "_Credits"
 msgstr "_Zasluge"
-msgstr "Zahvale"
+#msgstr "Zahvale"
 
 #: libgnomeui/gnome-about.c:335
 msgid "Program name"
@@ -169,7 +169,7 @@ msgstr "Izključi povezavo z upravljalnikom seje"
 #: libgnomeui/gnome-client.c:945
 msgid "Session management"
 msgstr "Upravljanje seje"
-msgstr "Ravnanje s prijavami"
+#msgstr "Ravnanje s prijavami"
 
 #: libgnomeui/gnome-client.c:2483
 msgid "Cancel Logout"
@@ -182,13 +182,13 @@ msgstr "Prejel neveljavne podatke o barvi\n"
 #: libgnomeui/gnome-color-picker.c:468
 msgid "Pick a color"
 msgstr "Izberi barvo"
-msgstr "Poberi barvo"
+#msgstr "Poberi barvo"
 
 #: libgnomeui/gnome-dateedit.c:428
 msgid "Time"
 msgstr "Čas"
-msgstr "čas"
-msgstr "Ura"
+#msgstr "čas"
+#msgstr "Ura"
 
 #: libgnomeui/gnome-dateedit.c:429
 msgid "The time currently selected"
@@ -284,12 +284,12 @@ msgstr ""
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr "Barva ozadja"
-msgstr "Barva v ozadju"
+#msgstr "Barva v ozadju"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr "Barva ozadja"
-msgstr "Barva v ozadju"
+#msgstr "Barva v ozadju"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
@@ -351,8 +351,7 @@ msgstr "URL, ki ga aktivira GnomeHRef"
 #: libgnomeui/gnome-href.c:126
 msgid "Text"
 msgstr "Besedilo"
-msgstr "Text"
-msgstr "Vrsta"
+#msgstr "Vrsta"
 
 #: libgnomeui/gnome-href.c:127
 msgid "The text on the button"
@@ -383,10 +382,10 @@ msgstr "X zaslon za uporabo"
 #: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "DISPLAY"
 msgstr "PRIKAZ"
-msgstr "ZASLON"
-msgstr "POKAŮI"
-msgstr "ZASLONSKI"
-msgstr "PORIKAZ"
+#msgstr "ZASLON"
+#msgstr "POKAŮI"
+#msgstr "ZASLONSKI"
+#msgstr "PORIKAZ"
 
 #: libgnomeui/gnome-ui-init.c:111
 msgid "GNOME GUI Library"
@@ -396,7 +395,7 @@ msgstr ""
 #: libgnomeui/gnome-ui-init.c:569
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Pojavilo se je več segmentacijskih napak: ne morem pokazati dialoga za napako\n"
-msgstr "Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z napako\n"
+#msgstr "Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z napako\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:583
@@ -433,8 +432,7 @@ msgstr "Ime programa, kot ga uporablja upravljalnik oken"
 #: libgnomeui/gnome-ui-init.c:736
 msgid "NAME"
 msgstr "IME"
-msgstr "IMENU"
-msgstr "NAME"
+#msgstr "IMENU"
 
 #: libgnomeui/gnome-ui-init.c:739
 msgid "Program class as used by the window manager"
@@ -447,7 +445,7 @@ msgstr "RAZRED"
 #: libgnomeui/gnome-ui-init.c:743
 msgid "HOST"
 msgstr "GOSTITELJ"
-msgstr "STREŮNIK"
+#msgstr "STREŮNIK"
 
 #: libgnomeui/gnome-ui-init.c:747
 msgid "PORT"
@@ -510,10 +508,10 @@ msgstr "Pošlji poročilo o hrošču"
 #: libgnomeui/gnome_segv.c:150
 msgid "Debug"
 msgstr "Razhroščevanje"
-msgstr "Razhrošči"
-msgstr "Razhroščuj"
-msgstr "RazhroŠČuj"
-msgstr "Razhroščevalna"
+#msgstr "Razhrošči"
+#msgstr "Razhroščuj"
+#msgstr "RazhroŠČuj"
+#msgstr "Razhroščevalna"
 
 #: libgnomeui/gnome_segv.c:158
 msgid "http://www.gnome.org/application_crashed.shtml"
@@ -538,12 +536,12 @@ msgstr "Neoštevilčen seznam"
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Numbered List"
 msgstr "Oštevilčen seznam"
-msgstr "Številke"
+#msgstr "Številke"
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Indent"
 msgstr "Zamik"
-msgstr "Zamakni"
+#msgstr "Zamakni"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Un-Indent"
@@ -574,28 +572,26 @@ msgstr ""
 #: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
-msgstr "Datoteka vhod"
-msgstr "Datoteko"
-msgstr "File"
+#msgstr "Datoteka vhod"
+#msgstr "Datoteko"
 
 #: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
 msgstr "_Datoteka/"
-msgstr "Datoteka vhod/"
-msgstr "Datoteko/"
-msgstr "File/"
+#msgstr "Datoteka vhod/"
+#msgstr "Datoteko/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
 msgid "_Edit"
 msgstr "_Uredi"
-msgstr "Ur_edi"
-msgstr "Urejanje"
+#msgstr "Ur_edi"
+#msgstr "Urejanje"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
 msgstr "_Uredi/"
-msgstr "Ur_edi/"
-msgstr "Urejanje/"
+#msgstr "Ur_edi/"
+#msgstr "Urejanje/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
 msgid "_View"
@@ -608,42 +604,42 @@ msgstr "Pogled/"
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
 msgid "_Settings"
 msgstr "_Nastavitve"
-msgstr "Na_stavitve"
+#msgstr "Na_stavitve"
 
 #: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
 msgstr "Na_stavitve/"
-msgstr "_Nastavitve/"
+#msgstr "_Nastavitve/"
 
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
 msgid "_New"
 msgstr "_Nov"
-msgstr "_Nova"
-msgstr "_Novo"
-msgstr "Novi"
+#msgstr "_Nova"
+#msgstr "_Novo"
+#msgstr "Novi"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
 msgstr "_Nov/"
-msgstr "_Nova/"
-msgstr "_Novo/"
-msgstr "Novi/"
+#msgstr "_Nova/"
+#msgstr "_Novo/"
+#msgstr "Novi/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
 msgid "Fi_les"
 msgstr "Da_toteke"
-msgstr "Datotek"
+#msgstr "Datotek"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
 msgstr "Da_toteke/"
-msgstr "Datotek/"
+#msgstr "Datotek/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
 msgid "_Windows"
 msgstr "_Okna"
-msgstr "Ok_na"
+#msgstr "Ok_na"
 
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
 msgid "_Game"
@@ -653,13 +649,13 @@ msgstr "_Igra"
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoč"
-msgstr "Pomoč"
-msgstr "Help"
+#msgstr "Pomoč"
+#msgstr "Help"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
 msgstr "_Okna/"
-msgstr "Ok_na/"
+#msgstr "Ok_na/"
 
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
@@ -687,18 +683,18 @@ msgstr "Shrani kot..."
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
 msgstr "Shrani trenutno datoteko pod drugim imenom"
-msgstr "Shrani trenutno datoteko z drugačnim imenom"
+#msgstr "Shrani trenutno datoteko z drugačnim imenom"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
 msgstr "Povrni"
-msgstr "Razveljavi"
+#msgstr "Razveljavi"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
 msgstr "Odpri shranjeneno različico datatoeke"
-msgstr "Povrni na shranjeno različico datoteke"
+#msgstr "Povrni na shranjeno različico datoteke"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
@@ -717,15 +713,14 @@ msgstr "Nastavitev tiskanja..."
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
 msgstr "Nastavi lastnosti strani za trenutni tiskalnik"
-msgstr "Nastavi lastnosti strani za vaš trenutni tiskalnik"
-msgstr "Nastavi nastavitve strani za vaš trenutni tiskalnik"
-msgstr "Nastavi stran za vaš trenutni tiskalnik"
+#msgstr "Nastavi lastnosti strani za vaš trenutni tiskalnik"
+#msgstr "Nastavi nastavitve strani za vaš trenutni tiskalnik"
+#msgstr "Nastavi stran za vaš trenutni tiskalnik"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
 msgstr "_Zapri"
-msgstr "Close"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
@@ -747,14 +742,14 @@ msgstr "Izhod iz programa"
 #: libgnomeui/gnome-app-helper.c:155
 msgid "C_ut"
 msgstr "_Izreži"
-msgstr "Izrei"
-msgstr "Odreži"
-msgstr "Prereži"
+#msgstr "Izrei"
+#msgstr "Odreži"
+#msgstr "Prereži"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
 msgstr "Izreži izbrano"
-msgstr "Izreži izbiro"
+#msgstr "Izreži izbiro"
 
 #. 10
 #. Copy
@@ -765,14 +760,14 @@ msgstr "Kopiraj"
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
 msgstr "Kopiraj izbrano"
-msgstr "Kopiraj izbiro"
+#msgstr "Kopiraj izbiro"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
 msgstr "_Prilepi"
-msgstr "Pri_lepi"
-msgstr "P_rilepi"
+#msgstr "Pri_lepi"
+#msgstr "P_rilepi"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
@@ -791,8 +786,8 @@ msgstr "Počisti izbrano"
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
 msgstr "_Razveljavi"
-msgstr "Ra_zveljavi"
-msgstr "Prekliči"
+#msgstr "Ra_zveljavi"
+#msgstr "Prekliči"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
@@ -802,15 +797,15 @@ msgstr "Razveljavi zadnje dejanje"
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
 msgstr "_Obnovi"
-msgstr "O_bnovi"
-msgstr "Ponovi"
-msgstr "Ponovno uveljavi"
-msgstr "Uveljavi"
+#msgstr "O_bnovi"
+#msgstr "Ponovi"
+#msgstr "Ponovno uveljavi"
+#msgstr "Uveljavi"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
 msgstr "Obnovi razveljavljeno dejanje"
-msgstr "Obnovi zadnje razveljavljeno dejanje"
+#msgstr "Obnovi zadnje razveljavljeno dejanje"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -825,13 +820,13 @@ msgstr "Išči niz"
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find _Again"
 msgstr "Poišči zn_ova"
-msgstr "Poišči _znova"
-msgstr "Najdi znova"
+#msgstr "Poišči _znova"
+#msgstr "Najdi znova"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
 msgstr "Išči niz znova"
-msgstr "Znova išči enak niz"
+#msgstr "Znova išči enak niz"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
@@ -879,9 +874,9 @@ msgstr "O tem programu"
 #: libgnomeui/gnome-app-helper.c:225
 msgid "_Select All"
 msgstr "Izberi v_se"
-msgstr "_Izberi vse"
-msgstr "Odizberi vse"
-msgstr "Pogled vse"
+#msgstr "_Izberi vse"
+#msgstr "Odizberi vse"
+#msgstr "Pogled vse"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
@@ -901,7 +896,7 @@ msgstr "Ustvari novo okno"
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
 msgstr "_Zapri to okno"
-msgstr "_Zapri to Okno"
+#msgstr "_Zapri to Okno"
 
 #: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
@@ -921,9 +916,9 @@ msgstr "Začni novo igro"
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
 msgstr "_Prekini igro"
-msgstr "Pre_kini igro"
-msgstr "Začasno ustavi igro"
-msgstr "Premor"
+#msgstr "Pre_kini igro"
+#msgstr "Začasno ustavi igro"
+#msgstr "Premor"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
@@ -932,8 +927,8 @@ msgstr "Prekini igro"
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
 msgstr "_Začni igro znova"
-msgstr "_Ponovi igro"
-msgstr "Ponovno začni igro"
+#msgstr "_Ponovi igro"
+#msgstr "Ponovno začni igro"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
@@ -942,9 +937,9 @@ msgstr "Začni igro znova"
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
 msgstr "_Razveljavi premik"
-msgstr "_Prekliči potezo"
-msgstr "Prekliči zadnjo potezo"
-msgstr "Vrni potezo"
+#msgstr "_Prekliči potezo"
+#msgstr "Prekliči zadnjo potezo"
+#msgstr "Vrni potezo"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
@@ -953,7 +948,7 @@ msgstr "Razveljavi zadnji premik"
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
 msgstr "_Obnovi premik"
-msgstr "Ponovi zadnjo potezo"
+#msgstr "Ponovi zadnjo potezo"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
@@ -962,8 +957,8 @@ msgstr "Obnovi razveljalvjen premik"
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
 msgstr "_Namig"
-msgstr "Na_mig"
-msgstr "N_asvet"
+#msgstr "Na_mig"
+#msgstr "N_asvet"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
@@ -977,7 +972,7 @@ msgstr "_Rezultati..."
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
 msgstr "Oglej si rezultate"
-msgstr "Prikaže rezultate"
+#msgstr "Prikaže rezultate"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
@@ -994,12 +989,12 @@ msgstr ""
 #: libgnomeui/gnome-app-helper.c:2564
 msgid "Icons only"
 msgstr "Le ikone"
-msgstr "Samo ikone"
+#msgstr "Samo ikone"
 
 #: libgnomeui/gnome-app-helper.c:2565
 msgid "Text only"
 msgstr "Le besedilo"
-msgstr "Samo besedilo"
+#msgstr "Samo besedilo"
 
 #: libgnomeui/gnome-app-helper.c:2616
 #, c-format
@@ -1021,7 +1016,7 @@ msgstr "Opozorilo: "
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
 msgstr "y"
-msgstr "d"
+#msgstr "d"
 
 #: libgnomeui/gnome-app-util.c:317
 msgid "yes"
@@ -1030,12 +1025,12 @@ msgstr "da"
 #: libgnomeui/gnome-app-util.c:320
 msgid "n"
 msgstr "n"
-msgstr "s"
+#msgstr "s"
 
 #: libgnomeui/gnome-app-util.c:321
 msgid "no"
 msgstr "ne"
-msgstr "Št"
+#msgstr "Št"
 
 #: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
@@ -1052,7 +1047,7 @@ msgstr "Napredek"
 #: libgnomeui/gnome-app.c:150
 msgid "App ID"
 msgstr "ID Progr"
-msgstr "ID progr"
+#msgstr "ID progr"
 
 #: libgnomeui/gnome-app.c:151
 msgid "The application ID string"
@@ -1101,8 +1096,8 @@ msgstr ""
 #: libgnomeui/gnome-file-entry.c:216
 msgid "Modal"
 msgstr "Modalni"
-msgstr "modalni"
-msgstr "Na vrhu"
+#msgstr "modalni"
+#msgstr "Na vrhu"
 
 #: libgnomeui/gnome-file-entry.c:217
 msgid "Whether the Browse file window should be modal."
@@ -1111,8 +1106,8 @@ msgstr ""
 #: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
 msgid "Filename"
 msgstr "Ime datoteke"
-msgstr "Datoteka"
-msgstr "Datoteka:"
+#msgstr "Datoteka"
+#msgstr "Datoteka:"
 
 #: libgnomeui/gnome-file-entry.c:225
 msgid "Filename that should be displayed in the file entry."
@@ -1175,7 +1170,7 @@ msgstr ""
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
 msgstr "Način"
-msgstr "NaČin"
+#msgstr "NaČin"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
@@ -1297,8 +1292,8 @@ msgstr "Ne najdem hbox-a, uporabljam običajno izbiranje datotek"
 #: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Predogled"
-msgstr "Ogled"
-msgstr "Pregled"
+#msgstr "Ogled"
+#msgstr "Pregled"
 
 #: libgnomeui/gnome-icon-entry.c:930
 msgid "Browse"
@@ -1321,9 +1316,9 @@ msgstr "Nalagam ikone..."
 #: libgnomeui/gnome-messagebox.c:110
 msgid "Information"
 msgstr "Podatki"
-msgstr "Informacije"
-msgstr "Obvestilo"
-msgstr "Podatek"
+#msgstr "Informacije"
+#msgstr "Obvestilo"
+#msgstr "Podatek"
 
 #: libgnomeui/gnome-messagebox.c:115
 msgid "Warning"
@@ -1336,12 +1331,11 @@ msgstr "Napaka"
 #: libgnomeui/gnome-messagebox.c:127
 msgid "Question"
 msgstr "Vprašanje"
-msgstr "Question"
 
 #: libgnomeui/gnome-messagebox.c:132
 msgid "Message"
 msgstr "Sporočilo"
-msgstr "SporoČilo"
+#msgstr "SporoČilo"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1362,17 +1356,16 @@ msgstr "Najboljših deset"
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
 msgstr "Uporabnik"
-msgstr "User"
-msgstr "Uporabniki"
+#msgstr "Uporabniki"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
 msgstr "Rezultat"
-msgstr "Točk"
-msgstr "Točke"
-msgstr "Oznaka"
-msgstr "Rezultati"
-msgstr "Točka"
+#msgstr "Točk"
+#msgstr "Točke"
+#msgstr "Oznaka"
+#msgstr "Rezultati"
+#msgstr "Točka"
 
 #: libgnomeui/gnome-scores.c:97
 msgid "Date"
