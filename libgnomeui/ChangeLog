@@ -1,3 +1,25 @@
+Thu Apr 30 23:25:19 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.h (struct _GnomeDialog): New member, 
+	GtkAcceleratorTable * accelerators
+	* gnome-dialog.h (gnome_dialog_set_accelerator): New function, EZ
+ 	way to connect an accelerator to a button.
+	* gnome-dialog.h (gnome_dialog_close): New function. Emits
+	delete_event, hides then destroys only if delete_event isn't
+	handled.
+	* gnome-propertybox.c (just_close): Use gnome_dialog_close.
+	* gnome-dialog.c: Use gnome-uidefs rather than custom
+	button/border sizes. Implement new gnome-dialog.h interfaces.
+	* gnome-dialog.c (gnome_dialog_key_pressed): New function, 
+	gnome_dialog_close if GDK_Escape is pressed, otherwise
+	call parent's key_press_event handler.
+	* gnome-dialog.c (gnome_dialog_class_init):
+	widget_class->key_press_event = gnome_dialog_key_pressed;
+	* gnome-dialog.c (gnome_dialog_init): Create accelerator table.
+	* gnome-dialog.c (gnome_dialog_button_clicked): Use 
+	gnome_dialog_closed() to self destruct.
+	* gnome-dialog.c (gnome_dialog_destroy): Unref accelerator table.
+
 Thu Apr 30 21:31:43 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-client.c (client_parse_func): Set previous_id for client.
