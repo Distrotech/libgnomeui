@@ -33,8 +33,6 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-url.h>
 #include <libgnome/libgnome-init.h>
-#include "gnome-dialog.h"
-#include "gnome-dialog-util.h"
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-line.h>
 #include <libgnomecanvas/gnome-canvas-rect-ellipse.h>
@@ -152,7 +150,7 @@ static void gnome_about_fill_options (GtkWidget *widget,
  **/
 /* here the get_type will be defined */
 GNOME_CLASS_BOILERPLATE (GnomeAbout, gnome_about,
-			 GnomeDialog, gnome_dialog)
+			 GtkDialog, gtk_dialog)
 
 static void
 gnome_about_class_init (GnomeAboutClass *klass)
@@ -1079,7 +1077,7 @@ gnome_about_construct (GnomeAbout *about,
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
 	gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
-	gtk_container_add(GTK_CONTAINER (GNOME_DIALOG(about)->vbox),
+	gtk_container_add(GTK_CONTAINER (GTK_DIALOG(about)->vbox),
 			  GTK_WIDGET(frame));
 	gtk_widget_show (frame);
 
@@ -1100,10 +1098,9 @@ gnome_about_construct (GnomeAbout *about,
 	gnome_about_draw (GNOME_CANVAS(canvas), about->_priv);
 	gtk_widget_show (canvas);
 
-	gnome_dialog_append_button (GNOME_DIALOG (about),
-				    GNOME_STOCK_BUTTON_OK);
-
-	gnome_dialog_set_close (GNOME_DIALOG(about), TRUE);
+	gtk_dialog_add_button (GTK_DIALOG (about),
+			       GTK_STOCK_BUTTON_OK,
+			       GTK_RESPONSE_OK);
 }
 
 static gint
@@ -1162,14 +1159,22 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 		break;
 	case GDK_BUTTON_PRESS:
 		if (url) {
-			if(!gnome_url_show(url))
-				gnome_error_dialog(_("Error occured while "
-						     "trying to launch the "
-						     "URL handler.\n"
-						     "Please check the "
-						     "settings in the "
-						     "Control Center if they "
-						     "are correct."));
+			if(!gnome_url_show(url)) {
+				GtkWidget *dialog;
+
+				dialog = gtk_message_dialog_new (NULL, 0,
+								 GTK_MESSAGE_ERROR,
+								 GTK_BUTTONS_OK,
+								 _("Error occured while "
+								   "trying to launch the "
+								   "URL handler.\n"
+								   "Please check the "
+								   "settings in the "
+								   "Control Center if they "
+								   "are correct."));
+
+				gtk_dialog_run (GTK_DIALOG (dialog));
+			}
 		}
 		break;
 	default:

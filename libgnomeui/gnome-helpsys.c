@@ -43,11 +43,9 @@
 #include "gnome-helpsys.h"
 #include "gnome-stock.h"
 #include "gnome-uidefs.h"
-#include "gnome-app-helper.h"
 #include "gnome-popup-menu.h"
 #include "wap-textfu.h"
 #include "gnome-cursors.h"
-#include "gnome-dialog-util.h"
 #include <libgnome/gnome-program.h>
 #include <gdk/gdkx.h>
 
@@ -922,8 +920,15 @@ gnome_help_view_show_help_for(GnomeHelpView *help_view, GtkWidget *widget)
   if(help_path)
     gnome_help_view_show_help(help_view, help_path, "popup");
   else
-    gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
-			     GTK_WINDOW(gtk_widget_get_toplevel(widget)));
+    {
+      GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(gtk_widget_get_toplevel(widget)),
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_INFO,
+						 GTK_BUTTONS_OK,
+						 _("No help is available for the selected "
+						   "portion of the application."));
+      gtk_dialog_run(GTK_DIALOG(dialog));
+    }
 }
 
 void
@@ -1016,8 +1021,17 @@ gnome_help_view_process_event(GtkWidget *evbox, GdkEvent *event, GnomeHelpView *
       else if(chosen_widget)
 	gnome_help_view_show_help_for(help_view, chosen_widget);
       else
-	gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
-				 GTK_WINDOW(gtk_widget_get_toplevel(help_view->_priv->btn_help)));
+	{
+	  GtkWidget *dialog;
+
+	  dialog = gtk_message_dialog_new(GTK_WINDOW(gtk_widget_get_toplevel(help_view->_priv->btn_help)),
+					  GTK_DIALOG_DESTROY_WITH_PARENT,
+					  GTK_MESSAGE_INFO,
+					  GTK_BUTTONS_OK,
+					  _("No help is available for the selected "
+					    "portion of the application."));
+	  gtk_dialog_run(GTK_DIALOG(dialog));
+	}
     }
 
   return TRUE;

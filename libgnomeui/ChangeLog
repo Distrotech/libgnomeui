@@ -1,5 +1,20 @@
 2001-04-25  Martin Baulig  <baulig@suse.de>
 
+	* gnome-about.[ch]: Use GtkDialog, not GnomeDialog.
+	(GnomeAbout, GnomeAbout): Derive from GtkDialog, not GnomeDialog.
+
+	* gnome-client.[ch]: Likewise.
+	(gnome_client_save_any_dialog, gnome_client_save_error_dialog): Take
+	a GtkDialog as argument, not a GnomeDialog.
+
+	* gnome-helpsys.c, gnome-href.c, gnome-icon-entry.c, gnome_segv.c: Use
+	GtkDialog, not GnomeDialog.
+
+	* gnome-window.c (gnome_window_set_icon, gnome_window_set_icon_from_file):
+	Moved here from gnome-app-util.c.
+
+2001-04-25  Martin Baulig  <baulig@suse.de>
+
 	* gnome-app-helper.[ch], gnome-app-util.[ch], gnome-cursors.[ch],
 	gnome-dialog-util.[ch], gnome-dialog.[ch], gnome-dock*.[ch],
 	gnome-messagebox.[ch], gnome-preferences.[ch], gnome-propertybox.[ch],

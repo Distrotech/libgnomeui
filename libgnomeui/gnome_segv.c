@@ -41,6 +41,12 @@
 #include <string.h>
 #include <stdio.h>
 
+enum {
+  RESPONSE_NULL,
+  RESPONSE_BUG_BUDDY,
+  RESPONSE_DEBUG
+};
+
 int main(int argc, char *argv[])
 {
   GtkWidget *mainwin, *urlbtn;
@@ -106,16 +112,19 @@ int main(int argc, char *argv[])
     }
   appname = g_strdup(args[0]);
 
-  mainwin = gnome_message_box_new(msg,
-                                  GNOME_MESSAGE_BOX_ERROR,
-                                  GNOME_STOCK_BUTTON_CLOSE,
-                                  NULL);
+  mainwin = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+                                    GTK_MESSAGE_ERROR,
+                                    GTK_BUTTONS_CLOSE,
+                                    msg);
+
+
   
   bug_buddy_path = gnome_is_program_in_path ("bug-buddy");
   if (bug_buddy_path != NULL)
     {
-      gnome_dialog_append_button(GNOME_DIALOG(mainwin),
-                                 _("Submit a bug report"));
+      gtk_dialog_add_button(GTK_DIALOG(mainwin),
+                            _("Submit a bug report"),
+                            RESPONSE_BUG_BUDDY);
     }
 
   debugger = g_getenv("GNOME_DEBUGGER");
@@ -124,8 +133,9 @@ int main(int argc, char *argv[])
     debugger_path = gnome_is_program_in_path (debugger);
     if (debugger_path != NULL)
       {
-        gnome_dialog_append_button(GNOME_DIALOG(mainwin),
-                                   _("Debug"));
+        gtk_dialog_add_button(GTK_DIALOG(mainwin),
+                              _("Debug"),
+                              RESPONSE_DEBUG);
       }
   }
   
@@ -140,13 +150,13 @@ int main(int argc, char *argv[])
   urlbtn = gnome_href_new(urlstr,
                           _("Please visit the GNOME Application Crash page for more information"));
   gtk_widget_show(urlbtn);
-  gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(mainwin)->vbox), urlbtn);
+  gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->vbox), urlbtn);
 
   g_free(msg);
 
-  res = gnome_dialog_run(GNOME_DIALOG(mainwin));
+  res = gtk_dialog_run(GTK_DIALOG(mainwin));
 
-  if (res == 1 && (bug_buddy_path != NULL))
+  if (res == RESPONSE_BUG_BUDDY && (bug_buddy_path != NULL))
     {
       gchar *exec_str;
       int retval;
@@ -165,7 +175,7 @@ int main(int argc, char *argv[])
           g_warning("Couldn't run bug-buddy: %s", g_strerror(errno));
         }
     }
-  else if (res == 2 || (res == 1 && (bug_buddy_path == NULL)))
+  else if (res == RESPONSE_DEBUG || (res == RESPONSE_BUG_BUDDY && (bug_buddy_path == NULL)))
     {
       gchar *exec_str;
       int retval;

@@ -35,7 +35,6 @@
 #include <libgnome/gnome-i18n.h>
 #include "gnome-client.h"
 #include "gnome-stock.h"
-#include "gnome-messagebox.h"
 #include "gnome-uidefs.h"
 #include "gnome-ice.h"
 #include "gnome-winhints.h"
@@ -2338,16 +2337,15 @@ static void
 gnome_client_save_dialog_show (GnomeClient *client, gint key,
 			       GnomeDialogType type, gpointer data)
 {
-  GnomeDialog* dialog = GNOME_DIALOG (data);
+  GtkDialog* dialog = GTK_DIALOG (data);
   gboolean shutdown_cancelled;
-  gint cancel_button = g_list_length (dialog->buttons);
 
   if (client->shutdown) 
-    gnome_dialog_append_button (dialog, _("Cancel Logout"));
+    gtk_dialog_add_button (dialog, _("Cancel Logout"), GTK_RESPONSE_CANCEL);
   gtk_widget_show_all (GTK_WIDGET (dialog));
   /* These are SYSTEM modal dialogs so map them above everything else */
   gnome_win_hints_set_layer (GTK_WIDGET (dialog), WIN_LAYER_ABOVE_DOCK);
-  shutdown_cancelled = (cancel_button == gnome_dialog_run_and_close (dialog));
+  shutdown_cancelled = (gtk_dialog_run (dialog) == GTK_RESPONSE_CANCEL);
   gnome_interaction_key_return (key, shutdown_cancelled);
 }
 
@@ -2364,12 +2362,12 @@ gnome_client_save_dialog_show (GnomeClient *client, gint key,
  * will be added during a shutdown.
  **/
 void         
-gnome_client_save_any_dialog (GnomeClient *client, GnomeDialog *dialog)
+gnome_client_save_any_dialog (GnomeClient *client, GtkDialog *dialog)
 {
   g_return_if_fail (client != NULL);
   g_return_if_fail (dialog != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
-  g_return_if_fail (GNOME_IS_DIALOG (dialog));
+  g_return_if_fail (GTK_IS_DIALOG (dialog));
 
   if (client->interact_style == GNOME_INTERACT_ANY)
       gnome_client_request_interaction (client, 
@@ -2391,12 +2389,12 @@ gnome_client_save_any_dialog (GnomeClient *client, GnomeDialog *dialog)
  **/
 
 void         
-gnome_client_save_error_dialog (GnomeClient *client, GnomeDialog *dialog)
+gnome_client_save_error_dialog (GnomeClient *client, GtkDialog *dialog)
 {
   g_return_if_fail (client != NULL);
   g_return_if_fail (dialog != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
-  g_return_if_fail (GNOME_IS_DIALOG (dialog));
+  g_return_if_fail (GTK_IS_DIALOG (dialog));
 
   if (client->interact_style != GNOME_INTERACT_NONE)
     gnome_client_request_interaction (client, 

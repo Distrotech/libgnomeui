@@ -40,7 +40,7 @@
 #define __GNOME_ABOUT_H__
 
 
-#include "gnome-dialog.h"
+#include <gtk/gtkdialog.h>
 
 G_BEGIN_DECLS
 
@@ -58,7 +58,7 @@ typedef struct _GnomeAboutClass   GnomeAboutClass;
 
 struct _GnomeAbout
 {
-  GnomeDialog dialog;
+  GtkDialog dialog;
 
   /*< private >*/
   GnomeAboutPrivate *_priv;
@@ -66,7 +66,7 @@ struct _GnomeAbout
 
 struct _GnomeAboutClass
 {
-  GnomeDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 

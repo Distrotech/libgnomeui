@@ -28,7 +28,6 @@
 #include <gtk/gtk.h>
 #include <libgnome/gnome-url.h>
 #include "gnome-href.h"
-#include "gnome-dialog-util.h"
 #include "gnome-cursors.h"
 
 #include <libgnome/gnome-i18n.h>
@@ -393,11 +392,16 @@ gnome_href_clicked (GtkButton *button)
 
   g_return_if_fail(href->_priv->url != NULL);
 
-  if(!gnome_url_show(href->_priv->url))
-	  gnome_error_dialog(_("Error occured while trying to launch the "
-			       "URL handler.\n"
-			       "Please check the settings in the "
-			       "Control Center if they are correct."));
+  if(!gnome_url_show(href->_priv->url)) {
+      GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 _("Error occured while trying to launch the "
+						   "URL handler.\n"
+						   "Please check the settings in the "
+						   "Control Center if they are correct."));
+
+      gtk_dialog_run(GTK_DIALOG(dialog));
+  }
 }
 
 static void

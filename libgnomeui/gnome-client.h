@@ -29,9 +29,9 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <gtk/gtkobject.h>
+#include <gtk/gtkdialog.h>
 
 #include <libgnome/gnome-program.h>
-#include <libgnomeui/gnome-dialog.h>
 
 G_BEGIN_DECLS
 
@@ -342,7 +342,7 @@ void         gnome_client_set_user_id            (GnomeClient *client,
    unless the interact_style == GNOME_INTERACT_ANY. A "Cancel Logout"
    button will be added during a shutdown. */
 void         gnome_client_save_any_dialog       (GnomeClient *client,
-					         GnomeDialog *dialog);
+					         GtkDialog   *dialog);
 
 /* The following function may be called during a "save_youself" handler
    when an error has occured during the save. The session manager decides 
@@ -350,7 +350,7 @@ void         gnome_client_save_any_dialog       (GnomeClient *client,
    == GNOME_INTERACT_NONE.  A "Cancel Logout" button will be added 
    during a shutdown. */
 void         gnome_client_save_error_dialog      (GnomeClient *client,
-					          GnomeDialog *dialog);
+					          GtkDialog   *dialog);
 
 /* Request the session managaer to emit the "save_yourself" signal for 
    a second time after all the clients in the session have ceased 
