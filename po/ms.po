@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-05-27 16:51+0200\n"
+"POT-Creation-Date: 2002-05-28 03:54+0800\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -198,13 +198,12 @@ msgstr "Menerima data warna tidak sah\n"
 
 # libgnomeui/gnome-app-helper.c:184
 #: libgnomeui/gnome-color-picker.c:457
-#, fuzzy
 msgid "Color Selector"
-msgstr "Terangkan pilihan"
+msgstr "Pemilih Warna"
 
 #: libgnomeui/gnome-color-picker.c:458
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "Buka dialog untuk menyatakan warna"
 
 # libgnomeui/gnome-color-picker.c:313
 #: libgnomeui/gnome-color-picker.c:480
@@ -259,13 +258,12 @@ msgstr "Tarikh"
 
 # libgnomeui/gnome-file-entry.c:152
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "Pilih fail"
+msgstr "Pilih Tarikh"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Pilih tarikh dari kalendar"
 
 # libgnomeui/gnome-dateedit.c:459
 #. Calendar label, only shown if the date editor has a time field
@@ -275,13 +273,12 @@ msgstr "Kalendar"
 
 # libgnomeui/gnome-file-entry.c:152
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "Pilih fail"
+msgstr "Pilih Masa"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Pilih masa dari senarai"
 
 #: libgnomeui/gnome-dateedit.c:1001
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -428,7 +425,7 @@ msgstr "Warna digunakan untuk melukis pautan"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "Butang ini akan membawa anda ke URI yang dipaparkan."
 
 #: libgnomeui/gnome-href.c:392
 msgid ""
@@ -573,6 +570,7 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -635,6 +633,7 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -863,12 +862,12 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Perihal"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -901,7 +900,7 @@ msgid "_Close This Window"
 msgstr "_Tutup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -995,18 +994,16 @@ msgstr "_Kandungan"
 
 # libgnomeui/gnome-app-helper.c:235
 #: libgnomeui/gnome-app-helper.c:1131
-#, fuzzy
 msgid "View help for this application"
-msgstr "Perihal aplikasi ini"
+msgstr "Lihat bantuan bagi aplikasi ini"
 
 #: libgnomeui/gnome-app-helper.c:2518
 msgid "Text Below Icons"
 msgstr "Teks di Bawah Ikon"
 
 #: libgnomeui/gnome-app-helper.c:2519
-#, fuzzy
 msgid "Priority Text Beside Icons"
-msgstr "Teks di Sebelah Ikon"
+msgstr "Teks Prioriti di Sebelah Ikon"
 
 #: libgnomeui/gnome-app-helper.c:2520
 msgid "Icons Only"
@@ -1183,25 +1180,23 @@ msgstr "Pilih fail"
 
 # libgnomeui/gnome-app-helper.c:179 libgnomeui/gnome-popup-help.c:62
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path"
-msgstr "_Tepek"
+msgstr "Path"
 
 # libgnomeui/gnome-app-helper.c:127
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path to file"
-msgstr "Simpan fail ini"
+msgstr "Path ke fail"
 
 # libgnomeui/gnome-file-entry.c:282 libgnomeui/gnome-spell.c:619
 # libgnomeui/gnome-spell.c:636 libgnomeui/gnome-spell.c:653
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
-msgstr "_Lihat..."
+msgstr "_Lungsur..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "Popupkan pemilih fail untuk memilih fail"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1365,45 +1360,45 @@ msgid "Preview"
 msgstr "Prebiu"
 
 #: libgnomeui/gnome-icon-entry.c:752
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "Tajuk kekotak dialog pilihan"
+msgstr "Dialog pemilih ikon"
 
 #: libgnomeui/gnome-icon-entry.c:753
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Kekotak dialog ini membolehkan anda memilih ikon."
 
 #: libgnomeui/gnome-icon-entry.c:759
 msgid "Icon selector"
-msgstr ""
+msgstr "Pemilih ikon"
 
 #: libgnomeui/gnome-icon-entry.c:760
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Sila pilih ikon yang anda mahu."
 
 #: libgnomeui/gnome-icon-entry.c:984
 msgid "Icon Selector"
-msgstr ""
+msgstr "Pemilih Ikon"
 
 #: libgnomeui/gnome-icon-entry.c:985
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Butang ini akan membuka tetingkap supaya membolehkan and memilih ikon"
 
 # libgnomeui/gnome-file-entry.c:282 libgnomeui/gnome-spell.c:619
 # libgnomeui/gnome-spell.c:636 libgnomeui/gnome-spell.c:653
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
-msgstr "Lihat"
+msgstr "Lungsur"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
-msgstr ""
+msgstr "path ikon"
 
 #: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
+"Di sini anda patut masukkan nama direktori dimana imej ikon diletakkan."
 
 #: libgnomeui/gnome-icon-sel.c:297
 #, c-format
@@ -1461,15 +1456,13 @@ msgstr "Tiada Imej"
 
 # libgnomeui/gnome-icon-entry.c:280 libgnomeui/gnome-pixmap-entry.c:278
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "Prebiu"
+msgstr "Prebiu Imej"
 
 # libgnomeui/gnome-app-helper.c:127
 #: libgnomeui/gnome-pixmap-entry.c:206
-#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr "Masa yang kini dipilih"
+msgstr "Prebiu imej yang kini dinyatakan"
 
 # libgnomeui/gnome-scores.c:88
 #: libgnomeui/gnome-scores.c:78
@@ -1503,8 +1496,9 @@ msgid "Sans 14"
 msgstr "Sans 14"
 
 # libgnomeui/gnome-app-helper.c:160
-#~ msgid "Exit the test"
-#~ msgstr "Keluar ujian"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Keluar ujian"
 
 # libgnomeui/gnome-app-helper.c:204
 #~ msgid "Find _Again"
