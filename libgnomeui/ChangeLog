@@ -1,3 +1,8 @@
+2001-06-10  Chema Celorio  <chema@celorio.com>
+
+	* gnome-selector-client.c (gnome_selector_client_construct_from_objref):
+	remove a g_return_if_fail for an unitialized variable
+
 2001-06-10  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am: Disabled gnome-paper-selector.[ch] and gnome-unit-spinner.[ch].
