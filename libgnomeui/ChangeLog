@@ -1,3 +1,7 @@
+2001-12-14  jacob berkman  <jacob@ximian.com>
+
+	* Makefile.am: another attempt at generated files fixage
+
 Fri Dec 14 16:24:04 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* libgnomeui.schemas: remove half-backed schema here.

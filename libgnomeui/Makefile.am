@@ -192,8 +192,6 @@ $(srcdir)/gnometype_inits.c: @REBUILD@ Makefile.am $(gnome_headers)
 	&& cp xgen-gtic $(@F) \
 	&& rm -f xgen-gtic
 
-gnometypes.c: $(srcdir)/gnometype_inits.c
-
 #######################
 
 gnome_segv2_SOURCES = gnome_segv.c
@@ -210,9 +208,18 @@ $(srcdir)/gnome-marshal.c: @REBUILD@ Makefile.am gnome-marshal.list
 	&& cp xgen-gmc gnome-marshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
 
-BUILT_SOURCES =					\
-	gnome-marshal.h				\
-	gnome-marshal.c
+
+# do not use BUILT_SOURCES because of weird semantics
+# i *think* these should actually be stamp-* files
+built_sources = \
+	gnome-marshal.h		\
+	gnome-marshal.c		\
+	gnometype_inits.c	\
+	gnometypebuiltins.h	\
+	gnometypebuiltins.c
+
+# an explicit dependency here so all generated files get built
+$(OBJECTS): $(built_sources)
 
 EXTRA_DIST =					\
 	AUTHORS					\
