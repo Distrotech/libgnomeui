@@ -543,7 +543,7 @@ check_filename_handler (GnomeSelector *selector, const gchar *filename)
 
     g_message (G_STRLOC ": '%s'", filename);
 
-    return g_file_exists (filename);
+    return TRUE;
 }
 
 static gboolean
@@ -573,7 +573,7 @@ check_directory_handler (GnomeSelector *selector, const gchar *directory)
 
     g_message (G_STRLOC ": '%s'", directory);
 
-    return g_file_test (directory, G_FILE_TEST_ISDIR);
+    return TRUE;
 }
 
 static void
@@ -583,11 +583,8 @@ add_file_handler (GnomeSelector *selector, const gchar *filename)
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
     g_return_if_fail (filename != NULL);
 
-    if (!g_file_test (filename, G_FILE_TEST_ISFILE)) {
-	g_warning ("GnomeSelector: '%s' is not a regular file",
-		   filename);
+    if (!gnome_selector_check_filename (selector, filename))
 	return;
-    }
 
     selector->_priv->total_list = g_slist_prepend
 	(selector->_priv->total_list, g_strdup (filename));
@@ -599,77 +596,12 @@ add_file_default_handler (GnomeSelector *selector, const gchar *filename)
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
     g_return_if_fail (filename != NULL);
-
-    if (!g_file_test (filename, G_FILE_TEST_ISFILE)) {
-	g_warning ("GnomeSelector: '%s' is not a regular file",
-		   filename);
+ 
+    if (!gnome_selector_check_filename (selector, filename))
 	return;
-    }
 
     selector->_priv->default_total_list = g_slist_prepend
 	(selector->_priv->default_total_list, g_strdup (filename));
-}
-
-static void
-_add_directory_handler (GnomeSelector *selector, const gchar *directory,
-			gboolean defaultp)
-{
-    struct dirent *de;
-    DIR *dp;
-
-    g_return_if_fail (selector != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR (selector));
-    g_return_if_fail (directory != NULL);
-
-    g_message (G_STRLOC ": '%s'", directory);
-
-    if (!g_file_test (directory, G_FILE_TEST_ISDIR)) {
-	g_warning ("GnomeSelector: '%s' is not a directory",
-		   directory);
-	return;
-    }
-
-    dp = opendir (directory);
-
-    if (dp == NULL) {
-	g_warning ("GnomeSelector: couldn't open directory '%s'",
-		   directory);
-	return;
-    }
-
-    while ((de = readdir (dp)) != NULL) {
-	gchar *full_path = g_concat_dir_and_file
-	    (directory, de->d_name);
-
-	/* skip dotfiles */
-	if (*(de->d_name) == '.') {
-	    g_free (full_path);
-	    continue;
-	}
-
-	if (!g_file_test (full_path, G_FILE_TEST_ISFILE)) {
-	    g_free (full_path);
-	    continue;
-	}
-
-	if (!gnome_selector_check_filename (selector, full_path)) {
-	    g_free (full_path);
-	    continue;
-	}
-
-	if (defaultp)
-	    gtk_signal_emit (GTK_OBJECT (selector),
-			     gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL],
-			     full_path);
-	else
-	    gtk_signal_emit (GTK_OBJECT (selector),
-			     gnome_selector_signals [ADD_FILE_SIGNAL],
-			     full_path);
-
-	g_free (full_path);
-    }
-
-    closedir (dp);
 }
 
 static void
@@ -679,18 +611,26 @@ add_directory_handler (GnomeSelector *selector, const gchar *directory)
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
     g_return_if_fail (directory != NULL);
 
-    _add_directory_handler (selector, directory, FALSE);
+    if (!gnome_selector_check_directory (selector, directory))
+	return;
+
+    selector->_priv->dir_list = g_slist_prepend
+	(selector->_priv->dir_list, g_strdup (directory));
 }
 
 static void
 add_directory_default_handler (GnomeSelector *selector,
-				const gchar *directory)
+			       const gchar *directory)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
     g_return_if_fail (directory != NULL);
 
-    _add_directory_handler (selector, directory, TRUE);
+    if (!gnome_selector_check_directory (selector, directory))
+	return;
+
+    selector->_priv->default_dir_list = g_slist_prepend
+	(selector->_priv->default_dir_list, g_strdup (directory));
 }
 
 

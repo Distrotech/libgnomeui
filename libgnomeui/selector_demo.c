@@ -217,7 +217,7 @@ main (int argc, char **argv)
 
     gtk_widget_destroy (app);
 
-    g_mem_profile ();
+    /* g_mem_profile (); */
 
     return 0;
 }

@@ -1,5 +1,31 @@
 2000-09-06  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector.c: Removed all references to actual files and
+	directories; both the file and directory lists may contain arbitrary
+	text entries which don't need to be actual file or directory names.
+	This is very important to allow us to subclass GnomeSelector for things
+	which aren't files or directories; for instance a GnomeNumberSelector.
+	(check_filename_handler, check_directory_handler): Always return TRUE.
+	(set_filename_handler): Call gnome_selector_check_filename() rather than
+	actually checking whether it's a regular file.
+	(add_file_handler, add_file_default_handler): Likewise.
+	(_add_directory_handler): Removed; such things belong into
+	gnome-file-selector.c.
+	(add_directory_handler, add_directory_default_handler): Call
+	gnome_selector_check_directory() and add it to the directory list on
+	success; don't attempt to actually readdir() the directory.
+
+	* gnome-file-selector.c: This now contains the gnome-vfs code to
+	deal with files and directories.
+	(add_directory_handler, add_directory_default_handler): Added; call
+	_add_directory_handler() with appropriate `defaultp' argument.
+	(_add_directory_handler): Added.
+
+	* gnome-icon-selector.c (append_an_icon): Use
+	gnome_gdk_pixbuf_new_from_uri() instead of gdk_pixbuf_new_from_file().
+
+2000-09-06  Martin Baulig  <baulig@suse.de>
+
 	* gnome-vfs-util.[ch]: New files.
 	These three functions are shamelessy stolen from Nautilus; they
 	use gnome-vfs to load the pixbuf so the URI doesn't need to be
