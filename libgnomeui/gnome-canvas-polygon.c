@@ -450,6 +450,15 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		gnome_canvas_item_request_update (item);
 		break;
 
+	case ARG_OUTLINE_COLOR_RGBA:
+		poly->outline_set = TRUE;
+		poly->outline_rgba = GTK_VALUE_UINT (*arg);
+
+		/* should probably request repaint on the outline_svp */
+		gnome_canvas_item_request_update (item);
+
+		break;
+
 	case ARG_FILL_STIPPLE:
 		set_stipple (poly->fill_gc, &poly->fill_stipple, GTK_VALUE_BOXED (*arg), FALSE);
 		gnome_canvas_item_request_update (item);
@@ -530,6 +539,10 @@ gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_FILL_COLOR_RGBA:
 		GTK_VALUE_UINT (*arg) = poly->fill_color;
+		break;
+
+	case ARG_OUTLINE_COLOR_RGBA:
+		GTK_VALUE_UINT (*arg) = poly->outline_color;
 		break;
 
 	case ARG_FILL_STIPPLE:

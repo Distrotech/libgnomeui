@@ -1,3 +1,8 @@
+Sun Jun 13 01:54:58 1999  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas-polygon.c (gnome_canvas_polygon_[sg]et_arg): added
+	ARG_OUTLINE_COLOR_RGBA, which was missing.
+
 1999-06-12  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-about.c:
