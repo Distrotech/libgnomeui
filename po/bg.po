@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-06-28 03:01+0200\n"
-"PO-Revision-Date: 2002-06-28 03:05+0200\n"
+"POT-Creation-Date: 2002-07-23 15:05+0300\n"
+"PO-Revision-Date: 2002-07-23 15:08+0300\n"
 "Last-Translator: Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
 "MIME-Version: 1.0\n"
@@ -106,8 +106,7 @@ msgstr "Борислав Александров <B.Aleksandrov@cnsys.bg>"
 #: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Благодарности към преводачите. Този низ трябва да е маркиран за превод"
+msgstr "Благодарности към преводачите. Този низ трябва да е маркиран за превод"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -750,8 +749,8 @@ msgstr "Заменя низ"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
-msgstr "_Настройки..."
+msgid "_Properties"
+msgstr "_Настройки"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -762,8 +761,8 @@ msgstr "Модифицира настройките ма файл"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
-msgstr "Кон_фигуриране...."
+msgid "Prefere_nces"
+msgstr "Кон_фигуриране"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
