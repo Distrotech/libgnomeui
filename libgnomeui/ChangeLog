@@ -1,3 +1,8 @@
+1998-06-23  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: new member child_menu_label and function
+	for setting it, so MDI doesn't always display Children.
+
 Sun Jun 21 15:09:04 CEST 1998  Eckehard Berns  <eb@berns.pirma.de>
 
 	* gnome-pixmap.[ch] (gnome_pixmap_new_from_imlib): new function

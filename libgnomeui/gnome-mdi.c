@@ -251,6 +251,8 @@ static void gnome_mdi_destroy(GtkObject *object) {
 
   if(mdi->child_menu_path)
     g_free(mdi->child_menu_path);
+  if(mdi->child_menu_label)
+    g_free(mdi->child_menu_label);
   if(mdi->child_list_path)
     g_free(mdi->child_list_path);
 
@@ -278,6 +280,7 @@ static void gnome_mdi_init (GnomeMDI *mdi) {
   mdi->menu_template = NULL;
   mdi->toolbar_template = NULL;
   mdi->child_menu_path = NULL;
+  mdi->child_menu_label = NULL;
   mdi->child_list_path = NULL;
 }
 
@@ -419,7 +422,7 @@ static GtkWidget *child_list_menu_create(GnomeMDI *mdi) {
   GtkWidget *menu, *item, *title_item;
   GList *child;
 
-  title_item = gtk_menu_item_new_with_label(_("Children"));
+  title_item = gtk_menu_item_new_with_label( (mdi->child_menu_label)?(mdi->child_menu_label):(_("Children")) );
   gtk_widget_show(title_item);
 
   if(mdi->children) {
@@ -1294,6 +1297,13 @@ void gnome_mdi_set_child_menu_path(GnomeMDI *mdi, gchar *path) {
     g_free(mdi->child_menu_path);
 
   mdi->child_menu_path = g_strdup(path);
+}
+
+void gnome_mdi_set_child_menu_label(GnomeMDI *mdi, gchar *label) {
+  if(mdi->child_menu_label)
+    g_free(mdi->child_menu_label);
+
+  mdi->child_menu_label = g_strdup(label);
 }
 
 void gnome_mdi_set_child_list_path(GnomeMDI *mdi, gchar *path) {
