@@ -1,3 +1,14 @@
+2003-03-08  Sebastian Rittau  <srittau@jroger.in-berlin.de>
+
+	Documentation fixes:
+
+	* libgnomeui/gnome-client.c (gnome_client_set_discard_command): Removed
+	doc string and added a comment where the true doc string can be found.
+	(Namely in the corresponding templates file.)
+	* doc/reference/libgnomeui-sections.txt: Inserted *Class definitions
+	in the Standard sections.
+	* doc/reference/libgnomeui-docs.sgml: FIXME -> Miscellaneous Widgets
+
 2003-03-05  Anders Carlsson  <andersca@codefactory.se>
 
 	* libgnomeui/gnome-icon-list.c:

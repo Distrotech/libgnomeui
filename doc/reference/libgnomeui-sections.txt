@@ -7,6 +7,7 @@ GnomeAbout
 gnome_about_new
 gnome_about_construct
 <SUBSECTION Standard>
+GnomeAboutClass
 GNOME_ABOUT
 GNOME_IS_ABOUT
 GNOME_TYPE_ABOUT
@@ -39,6 +40,7 @@ gnome_app_enable_layout_config
 gnome_app_get_dock
 gnome_app_get_dock_item_by_name
 <SUBSECTION Standard>
+GnomeAppClass
 GNOME_APP
 GNOME_IS_APP
 GNOME_TYPE_APP
@@ -73,6 +75,7 @@ gnome_appbar_clear_prompt
 gnome_appbar_get_response
 
 <SUBSECTION Standard>
+GnomeAppBarClass
 GNOME_APPBAR
 GNOME_IS_APPBAR
 GNOME_TYPE_APPBAR
@@ -141,6 +144,7 @@ GNOME_CLIENT_MODULE
 gnome_client_module_info_get
 
 <SUBSECTION Standard>
+GnomeClientClass
 GNOME_CLIENT
 GNOME_IS_CLIENT
 GNOME_TYPE_CLIENT
@@ -168,6 +172,7 @@ gnome_color_picker_get_use_alpha
 gnome_color_picker_set_title
 gnome_color_picker_get_title
 <SUBSECTION Standard>
+GnomeColorPickerClass
 GNOME_COLOR_PICKER
 GNOME_IS_COLOR_PICKER
 GNOME_TYPE_COLOR_PICKER
@@ -196,6 +201,7 @@ gnome_date_edit_get_flags
 gnome_date_edit_get_initial_time
 gnome_date_edit_get_date
 <SUBSECTION Standard>
+GnomeDateEditClass
 GNOME_DATE_EDIT
 GNOME_IS_DATE_EDIT
 GNOME_TYPE_DATE_EDIT
@@ -248,6 +254,7 @@ GNOME_STOCK_BUTTON_UP
 GNOME_STOCK_BUTTON_DOWN
 GNOME_STOCK_BUTTON_FONT
 <SUBSECTION Standard>
+GnomeDialogClass
 GNOME_DIALOG
 GNOME_IS_DIALOG
 GNOME_TYPE_DIALOG
@@ -276,6 +283,7 @@ gnome_druid_page_edge_set_logo
 gnome_druid_page_edge_set_watermark
 gnome_druid_page_edge_set_top_watermark
 <SUBSECTION Standard>
+GnomeDruidPageEdgeClass
 GNOME_DRUID_PAGE_EDGE
 GNOME_IS_DRUID_PAGE_EDGE
 GNOME_TYPE_DRUID_PAGE_EDGE
@@ -307,6 +315,7 @@ gnome_druid_page_standard_set_logo_background
 gnome_druid_page_standard_set_contents_background
 gnome_druid_page_standard_append_item
 <SUBSECTION Standard>
+GnomeDruidPageStandardClass
 GNOME_DRUID_PAGE_STANDARD
 GNOME_IS_DRUID_PAGE_STANDARD
 GNOME_TYPE_DRUID_PAGE_STANDARD
@@ -331,6 +340,7 @@ gnome_druid_page_back
 gnome_druid_page_cancel
 gnome_druid_page_finish
 <SUBSECTION Standard>
+GnomeDruidPageClass
 GNOME_DRUID_PAGE
 GNOME_IS_DRUID_PAGE
 GNOME_TYPE_DRUID_PAGE
@@ -358,6 +368,7 @@ gnome_druid_set_page
 gnome_druid_new_with_window
 gnome_druid_construct_with_window
 <SUBSECTION Standard>
+GnomeDruidClass
 GNOME_DRUID
 GNOME_IS_DRUID
 GNOME_TYPE_DRUID
@@ -387,6 +398,7 @@ gnome_entry_prepend_history
 gnome_entry_append_history
 gnome_entry_clear_history
 <SUBSECTION Standard>
+GnomeEntryClass
 GNOME_ENTRY
 GNOME_IS_ENTRY
 GNOME_TYPE_ENTRY
@@ -414,6 +426,7 @@ gnome_file_entry_set_modal
 gnome_file_entry_get_modal
 gnome_file_entry_set_directory
 <SUBSECTION Standard>
+GnomeFileEntryClass
 GNOME_FILE_ENTRY
 GNOME_IS_FILE_ENTRY
 GNOME_TYPE_FILE_ENTRY
@@ -448,6 +461,7 @@ gnome_font_picker_set_font_name
 gnome_font_picker_get_preview_text
 gnome_font_picker_set_preview_text
 <SUBSECTION Standard>
+GnomeFontPickerClass
 GNOME_FONT_PICKER
 GNOME_IS_FONT_PICKER
 GNOME_TYPE_FONT_PICKER
@@ -470,6 +484,7 @@ gnome_href_get_text
 gnome_href_set_label
 gnome_href_get_label
 <SUBSECTION Standard>
+GnomeHRefClass
 GNOME_HREF
 GNOME_IS_HREF
 GNOME_TYPE_HREF
@@ -501,6 +516,7 @@ gnome_icon_entry_gnome_file_entry
 gnome_icon_entry_gnome_entry
 gnome_icon_entry_gtk_entry
 <SUBSECTION Standard>
+GnomeIconEntryClass
 GNOME_ICON_ENTRY
 GNOME_IS_ICON_ENTRY
 GNOME_TYPE_ICON_ENTRY
@@ -523,6 +539,7 @@ gnome_icon_text_item_start_editing
 gnome_icon_text_item_stop_editing
 gnome_icon_text_item_get_editable
 <SUBSECTION Standard>
+GnomeIconTextItemClass
 GNOME_ICON_TEXT_ITEM
 GNOME_IS_ICON_TEXT_ITEM
 GNOME_TYPE_ICON_TEXT_ITEM
@@ -580,6 +597,7 @@ gnome_icon_list_get_items_per_line
 gnome_icon_list_get_icon_text_item
 gnome_icon_list_get_icon_pixbuf_item
 <SUBSECTION Standard>
+GnomeIconListClass
 GNOME_ICON_LIST
 GNOME_IS_ICON_LIST
 GNOME_TYPE_ICON_LIST
@@ -648,6 +666,7 @@ gnome_icon_selection_stop_loading
 gnome_icon_selection_get_gil
 gnome_icon_selection_get_box
 <SUBSECTION Standard>
+GnomeIconSelectionClass
 GNOME_ICON_SELECTION
 GNOME_IS_ICON_SELECTION
 GNOME_TYPE_ICON_SELECTION
@@ -723,6 +742,7 @@ gnome_mdi_child_remove_view
 gnome_mdi_child_set_name
 gnome_mdi_child_set_menu_template
 <SUBSECTION Standard>
+GnomeMDIChildClass
 GNOME_MDI_CHILD
 GNOME_IS_MDI_CHILD
 GNOME_TYPE_MDI_CHILD
@@ -746,6 +766,7 @@ gnome_mdi_generic_child_set_config_func_full
 gnome_mdi_generic_child_set_label_func
 gnome_mdi_generic_child_set_label_func_full
 <SUBSECTION Standard>
+GnomeMDIGenericChildClass
 GNOME_MDI_GENERIC_CHILD
 GNOME_IS_MDI_GENERIC_CHILD
 GNOME_TYPE_MDI_GENERIC_CHILD
@@ -788,6 +809,7 @@ gnome_mdi_get_menubar_info
 gnome_mdi_get_toolbar_info
 gnome_mdi_get_child_menu_info
 <SUBSECTION Standard>
+GnomeMDIClass
 GNOME_MDI
 GNOME_IS_MDI
 GNOME_TYPE_MDI
@@ -811,6 +833,7 @@ gnome_message_box_newv
 gnome_message_box_construct
 
 <SUBSECTION Standard>
+GnomeMessageBoxClass
 GNOME_MESSAGE_BOX
 GNOME_IS_MESSAGE_BOX
 GNOME_TYPE_MESSAGE_BOX
@@ -841,6 +864,7 @@ gnome_pixmap_entry_set_preview
 gnome_pixmap_entry_set_preview_size
 gnome_pixmap_entry_get_filename
 <SUBSECTION Standard>
+GnomePixmapEntryClass
 GNOME_PIXMAP_ENTRY
 GNOME_IS_PIXMAP_ENTRY
 GNOME_TYPE_PIXMAP_ENTRY
@@ -869,6 +893,7 @@ gnome_pixmap_load_file_at_size
 gnome_pixmap_load_xpm_d
 gnome_pixmap_load_xpm_d_at_size
 <SUBSECTION Standard>
+GnomePixmapClass
 GNOME_PIXMAP
 GNOME_IS_PIXMAP
 GNOME_TYPE_PIXMAP
@@ -889,6 +914,7 @@ gnome_property_box_append_page
 gnome_property_box_set_state
 
 <SUBSECTION Standard>
+GnomePropertyBoxClass
 GNOME_PROPERTY_BOX
 GNOME_IS_PROPERTY_BOX
 GNOME_TYPE_PROPERTY_BOX
@@ -917,6 +943,7 @@ gnome_scores_set_colors
 gnome_scores_set_logo_label_title
 gnome_scores_set_current_player
 <SUBSECTION Standard>
+GnomeScoresClass
 GNOME_SCORES
 GNOME_IS_SCORES
 GNOME_TYPE_SCORES

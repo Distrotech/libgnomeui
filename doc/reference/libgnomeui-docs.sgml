@@ -108,7 +108,7 @@
       &libgnomeui-GnomeDruidPageStandard;
     </sect1>
     <sect1 id="fixme">
-      <title>FIXME</title>
+      <title>Miscellaneous Widgets</title>
       &libgnomeui-GnomeColorPicker;
       &libgnomeui-GnomeDateEdit;
       &libgnomeui-gnome-dialog-util;

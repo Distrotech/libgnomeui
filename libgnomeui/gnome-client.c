@@ -1645,14 +1645,7 @@ gnome_client_set_current_directory (GnomeClient *client,
 }
 
 
-
-/**
- * gnome_client_set_discard_command
- * @client: Pointer to GNOME session client object.
- * @argc: Number of strings in argv.
- * @argv: Vector of strings such as those passed to execv().
- *
- **/
+/* See doc/reference/tmpl/gnome-client.sgml for documentation. */
 
 void
 gnome_client_set_discard_command (GnomeClient *client,
