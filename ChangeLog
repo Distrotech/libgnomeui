@@ -1,3 +1,7 @@
+2001-08-20  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* configure.in: /s/libgnomeui-2/libgnomeui2/
+
 2001-08-14  Martin Baulig  <baulig@suse.de>
 
 	Released libgnomeui 1.102.0 "Roswell".
