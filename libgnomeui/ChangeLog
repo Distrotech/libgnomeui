@@ -1,3 +1,8 @@
+Sun Apr 26 00:18:02 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.c (gnome_dialog_init): Pack the dialog's vbox 
+	with expand set to TRUE.
+
 1998-04-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-entry.c (gnome_file_entry_init): Undo the emission of

@@ -151,7 +151,7 @@ gnome_dialog_init (GnomeDialog *dialog)
 
   dialog->vbox = gtk_vbox_new(FALSE, GNOME_PAD);
   gtk_box_pack_start (GTK_BOX (vbox), dialog->vbox, 
-		      FALSE, TRUE,
+		      TRUE, TRUE,
 		      GNOME_DIALOG_BORDER_WIDTH);
   gtk_widget_show(dialog->vbox);
 
