@@ -378,7 +378,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 			/*get around the g_free/free issue*/
 			gchar *cwd = g_get_current_dir ();
 			p = g_strdup(cwd);
-			free(cwd);
+			g_free(cwd);
 		}
 		gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry))),
 				    p);
