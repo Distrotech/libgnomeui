@@ -1,3 +1,22 @@
+2005-01-31  Federico Mena Quintero  <federico@ximian.com>
+
+	Fixes the libgnomeui part of #164239:
+
+	* file-chooser/gtkfilesystemgnomevfs.c (struct _FolderChild):  Add
+	a "reloaded" flag which we'll set when we (re)read a file's
+	information from within directory_load_callback().  This will let
+	us purge files that don't have the flag set when the load
+	terminates.
+	(folder_child_new): Added a "reloaded" argument.
+	(folder_purge_and_unmark): New utility function.
+	(directory_load_callback): Set the "reloaded" flag on
+	already-existing files and replace their info.  Call
+	folder_purge_and_unmark() when we finish loading the folder.
+	(monitor_callback): Set the "reloaded" flag on already-existing
+	files and replace their info.
+	(remove_all): Renamed to unmark_all_fn.
+	(load_dir): Unmark all the children.
+
 ================= 2.9.1 ======================
 
 2005-01-26  Kjartan Maraas  <kmaraas@gnome.org>

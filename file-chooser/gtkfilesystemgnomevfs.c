@@ -134,7 +134,20 @@ struct _FolderChild
 {
   gchar *uri; /* canonical */
   GnomeVFSFileInfo *info;
+  guint reloaded : 1; /* used when reloading a folder */
 };
+
+/* When getting a folder, we launch two asynchronous processes, the monitor for
+ * changes and the async directory load.  Unfortunately, the monitor will feed
+ * us all the filenames.  So, to avoid duplicate emissions of the "files-added"
+ * signal, we keep a "reloaded" flag in each FolderChild structure.
+ *
+ * If we re-get a live folder, we don't re-create its monitor, but we do restart
+ * its async loader.  When we (re)read the information for a file, we turn on
+ * its "reloaded" flag.  When the async load terminates, we purge out all the
+ * structures which don't have the flag set, and emit "files-removed" signals
+ * for them.
+ */
 
 #ifdef USE_GCONF
 /* GConf paths for the bookmarks; keep these two in sync */
@@ -265,7 +278,8 @@ static void client_notify_cb (GConfClient *client,
 #endif
 
 static FolderChild *folder_child_new (const char       *uri,
-				      GnomeVFSFileInfo *info);
+				      GnomeVFSFileInfo *info,
+				      gboolean          reloaded);
 static void         folder_child_free (FolderChild *child);
 
 static void     set_vfs_error     (GnomeVFSResult   result,
@@ -535,12 +549,15 @@ gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
 }
 
 
-static gboolean
-remove_all  (gpointer  key,
-	     gpointer  value,
-	     gpointer  user_data)
+static void
+unmark_all_fn  (gpointer  key,
+		gpointer  value,
+		gpointer  user_data)
 {
-  return TRUE;
+  FolderChild *child;
+
+  child = value;
+  child->reloaded = FALSE;
 }
 
 static void
@@ -549,10 +566,11 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
   int num_items;
 
   if (folder_vfs->async_handle)
-    gnome_vfs_async_cancel (folder_vfs->async_handle);
+    {
+      gnome_vfs_async_cancel (folder_vfs->async_handle);
+      g_hash_table_foreach (folder_vfs->children, unmark_all_fn, NULL);
+    }
 
-  g_hash_table_foreach_remove (folder_vfs->children,
-			       remove_all, NULL);
   gnome_authentication_manager_push_async ();
 
   if (g_str_has_prefix (folder_vfs->uri, "file:"))
@@ -1907,7 +1925,7 @@ lookup_folder_child_from_uri (GtkFileFolder *folder,
     {
       GSList *uris;
 
-      child = folder_child_new (uri, vfs_info);
+      child = folder_child_new (uri, vfs_info, folder_vfs->async_handle ? TRUE : FALSE);
       gnome_vfs_file_info_unref (vfs_info);
       g_hash_table_replace (folder_vfs->children, child->uri, child);
 
@@ -2091,13 +2109,15 @@ info_from_vfs_info (const gchar      *uri,
 
 static FolderChild *
 folder_child_new (const char       *uri,
-		  GnomeVFSFileInfo *info)
+		  GnomeVFSFileInfo *info,
+		  gboolean          reloaded)
 {
   FolderChild *child;
 
   child = g_new (FolderChild, 1);
   child->uri = g_strdup (uri);
   child->info = info;
+  child->reloaded = reloaded ? TRUE : FALSE;
   gnome_vfs_file_info_ref (child->info);
 
   return child;
@@ -2177,6 +2197,69 @@ drive_connect_disconnect_cb (GnomeVFSVolumeMonitor *monitor,
   g_signal_emit_by_name (system_vfs, "volumes-changed");
 }
 
+struct purge_closure
+{
+  GSList *removed_uris;
+};
+
+/* Used from g_hash_table_foreach() in folder_purge_and_unmark() */
+static gboolean
+purge_fn (gpointer key,
+	  gpointer value,
+	  gpointer data)
+{
+  struct purge_closure *closure;
+  FolderChild *child;
+
+  child = value;
+  closure = data;
+
+  if (child->reloaded)
+    {
+      child->reloaded = FALSE;
+      return FALSE;
+    }
+  else
+    {
+      closure->removed_uris = g_slist_prepend (closure->removed_uris, child->uri);
+
+      if (child->info)
+	gnome_vfs_file_info_unref (child->info);
+
+      g_free (child);
+
+      return TRUE;
+    }
+}
+
+/* Purges out all the files that don't have the "reloaded" flag set */
+static void
+folder_purge_and_unmark (GtkFileFolderGnomeVFS *folder_vfs)
+{
+  struct purge_closure closure;
+
+  closure.removed_uris = NULL;
+  g_hash_table_foreach_steal (folder_vfs->children, purge_fn, folder_vfs);
+
+  if (closure.removed_uris)
+    {
+      GSList *l;
+
+      closure.removed_uris = g_slist_reverse (closure.removed_uris);
+      g_signal_emit_by_name (folder_vfs, "files-removed", closure.removed_uris);
+      
+      for (l = closure.removed_uris; l; l = l->next)
+	{
+	  char *uri;
+
+	  uri = l->data;
+	  g_free (uri);
+	}
+
+      g_slist_free (closure.removed_uris);
+    }
+}
+
 static void
 directory_load_callback (GnomeVFSAsyncHandle *handle,
 			 GnomeVFSResult       result,
@@ -2193,7 +2276,6 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
     {
       GnomeVFSFileInfo *vfs_info;
       gchar *uri;
-      gboolean new = FALSE;
 
       vfs_info = tmp_list->data;
       if (strcmp (vfs_info->name, ".") == 0 ||
@@ -2206,20 +2288,28 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
 	{
 	  FolderChild *child;
 
-	  child = folder_child_new (uri, vfs_info);
+	  child = g_hash_table_lookup (folder_vfs->children, uri);
+	  if (child)
+	    {
+	      child->reloaded = TRUE;
+
+	      if (child->info)
+		gnome_vfs_file_info_unref (child->info);
+
+	      child->info = vfs_info;
+	      gnome_vfs_file_info_ref (child->info);
+
+	      changed_uris = g_slist_prepend (changed_uris, child->uri);
+	    }
+	  else
+	    {
+	      child = folder_child_new (uri, vfs_info, TRUE);
+	      g_hash_table_insert (folder_vfs->children, child->uri, child);
+
+	      added_uris = g_slist_prepend (added_uris, child->uri);
+	    }
 
 	  g_free (uri);
-
-	  if (!g_hash_table_lookup (folder_vfs->children, child->uri))
-	    new = TRUE;
-
-	  g_hash_table_replace (folder_vfs->children,
-				child->uri, child);
-
-	  if (new)
-	    added_uris = g_slist_prepend (added_uris, child->uri);
-	  else
-	    changed_uris = g_slist_prepend (changed_uris, child->uri);
 	}
     }
 
@@ -2239,6 +2329,7 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
       folder_vfs->async_handle = NULL;
 
       g_signal_emit_by_name (folder_vfs, "finished-loading");
+      folder_purge_and_unmark (folder_vfs);
     }
 }
 
@@ -2269,11 +2360,24 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
 	  {
 	    FolderChild *child;
 
-	    child = folder_child_new (info_uri, vfs_info);
-	    gnome_vfs_file_info_unref (vfs_info);
+	    child = g_hash_table_lookup (folder_vfs->children, info_uri);
 
-	    g_hash_table_replace (folder_vfs->children,
-				  child->uri, child);
+	    if (child)
+	      {
+		if (folder_vfs->async_handle)
+		  child->reloaded = TRUE;
+
+		if (child->info)
+		  gnome_vfs_file_info_unref (child->info);
+
+		child->info = vfs_info;
+	      }
+	    else
+	      {
+		child = folder_child_new (info_uri, vfs_info, folder_vfs->async_handle ? TRUE : FALSE);
+		gnome_vfs_file_info_unref (vfs_info);
+		g_hash_table_insert (folder_vfs->children, child->uri, child);
+	      }
 
 	    uris = g_slist_prepend (NULL, (gchar *)info_uri);
 	    if (event_type == GNOME_VFS_MONITOR_EVENT_CHANGED)
