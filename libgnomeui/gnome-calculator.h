@@ -25,7 +25,7 @@ typedef struct _GnomeCalculatorClass GnomeCalculatorClass;
 typedef enum {
 	GNOME_CALCULATOR_DEG,
 	GNOME_CALCULATOR_RAD,
-	GNOME_CALCULATOR_GRAD,
+	GNOME_CALCULATOR_GRAD
 } GnomeCalculatorMode;
 
 struct _GnomeCalculator {
