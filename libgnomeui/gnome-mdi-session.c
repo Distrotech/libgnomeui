@@ -24,6 +24,17 @@ static void		set_active_window	(GnomeMDI *, GHashTable *, glong);
 static gpointer		window_list_func	(gpointer);
 static gpointer		widget_parent_func	(gpointer);
 
+static void             child_get_config_string (GnomeMDIChild *);
+
+static gchar *
+gnome_mdi_child_get_config_string (GnomeMDIChild *child)
+{
+	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->get_config_string)
+		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->get_config_string(child);
+
+	return NULL;
+}
+
 static GPtrArray *
 config_get_list (const gchar *key)
 {
@@ -361,8 +372,7 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 
 		/* Save child configuration. */
 
-		gtk_signal_emit_by_name (GTK_OBJECT (mdi_child),
-					 "get_config_string", &string);
+		string = gnome_mdi_child_get_config_string(mdi_child);
 
 		if (string) {
 			sprintf (key, "%s/mdi_child_config_%lx",

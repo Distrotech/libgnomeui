@@ -1,5 +1,10 @@
 1998-11-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
+	* gnome-mdi-session.c: make it respect latest changes to
+	GnomeMDI.
+
+1998-11-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
 	* gnome-mdi-generic-child.[ch]: new object to allow simple
 	use of GnomeMDI without subclassing GnomeMDIChild.
 	* gnome-mdi-child.h (struct _GnomeMDIChildClass): converted
