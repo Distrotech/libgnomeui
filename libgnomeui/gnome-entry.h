@@ -68,7 +68,6 @@ struct _GnomeEntryClass {
 	GtkComboClass parent_class;
 
 	/* Like the GtkEntry signals */
-	void (* changed) (GnomeEntry *entry);
 	void (* activate) (GnomeEntry *entry);
 
 	gpointer reserved1, reserved2; /* Reserved for future use,

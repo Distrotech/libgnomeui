@@ -132,7 +132,6 @@ gnome_entry_get_type (void)
 }
 
 enum {
-	CHANGED_SIGNAL,
 	ACTIVATE_SIGNAL,
 	LAST_SIGNAL
 };
@@ -147,15 +146,6 @@ gnome_entry_class_init (GnomeEntryClass *class)
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 
-	gnome_entry_signals[CHANGED_SIGNAL] =
-		gtk_signal_new("changed",
-			       GTK_RUN_LAST,
-			       GTK_CLASS_TYPE (object_class),
-			       GTK_SIGNAL_OFFSET(GnomeEntryClass,
-			       			 changed),
-			       gtk_signal_default_marshaller,
-			       GTK_TYPE_NONE,
-			       0);
 	gnome_entry_signals[ACTIVATE_SIGNAL] =
 		gtk_signal_new("activate",
 			       GTK_RUN_LAST,
@@ -166,7 +156,6 @@ gnome_entry_class_init (GnomeEntryClass *class)
 			       GTK_TYPE_NONE,
 			       0);
 
-	class->changed = NULL;
 	class->activate = NULL;
 
 	object_class->destroy = gnome_entry_destroy;
@@ -241,7 +230,7 @@ entry_changed (GtkWidget *widget, gpointer data)
 	gentry = data;
 	gentry->_priv->changed = TRUE;
 
-	gtk_signal_emit (GTK_OBJECT (gentry), gnome_entry_signals[CHANGED_SIGNAL]);
+	gtk_signal_emit_by_name (GTK_OBJECT (gentry), "changed");
 }
 
 static void

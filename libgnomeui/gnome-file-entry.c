@@ -140,7 +140,6 @@ gnome_file_entry_get_type (void)
 
 enum {
 	BROWSE_CLICKED_SIGNAL,
-	CHANGED_SIGNAL,
 	ACTIVATE_SIGNAL,
 	LAST_SIGNAL
 };
@@ -162,15 +161,6 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 			       GTK_CLASS_TYPE (object_class),
 			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
 			       			 browse_clicked),
-			       gtk_signal_default_marshaller,
-			       GTK_TYPE_NONE,
-			       0);
-	gnome_file_entry_signals[CHANGED_SIGNAL] =
-		gtk_signal_new("changed",
-			       GTK_RUN_LAST,
-			       GTK_CLASS_TYPE (object_class),
-			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
-			       			 changed),
 			       gtk_signal_default_marshaller,
 			       GTK_TYPE_NONE,
 			       0);
@@ -223,7 +213,6 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	object_class->set_arg = fentry_set_arg;
 
 	class->browse_clicked = browse_clicked;
-	class->changed = NULL;
 	class->activate = NULL;
 }
 
@@ -433,8 +422,7 @@ browse_clicked_signal (GtkWidget *widget, gpointer data)
 static void
 entry_changed_signal (GtkWidget *widget, gpointer data)
 {
-	gtk_signal_emit (GTK_OBJECT (data),
-			 gnome_file_entry_signals[CHANGED_SIGNAL]);
+	gtk_signal_emit_by_name (GTK_OBJECT (data), "changed");
 }
 
 static void

@@ -81,7 +81,6 @@ struct _GnomeFileEntryClass {
 	void (* browse_clicked) (GnomeFileEntry *fentry);
 
 	/* Like in GtkEntry */
-	void (* changed) (GnomeFileEntry *fentry);
 	void (* activate) (GnomeFileEntry *fentry);
 
 	gpointer reserved1, reserved2; /* Reserved for future use,
