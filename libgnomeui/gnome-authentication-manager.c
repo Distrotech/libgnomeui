@@ -208,6 +208,8 @@ vfs_async_authentication_callback (gconstpointer in, size_t in_size,
 	g_return_if_fail (in != NULL);
 	g_return_if_fail (out != NULL);
 
+	GDK_THREADS_ENTER ();
+	
 	in_real = (GnomeVFSModuleCallbackAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackAuthenticationOut *)out;
 
@@ -226,6 +228,8 @@ vfs_async_authentication_callback (gconstpointer in, size_t in_size,
 	present_authentication_dialog_nonblocking (info);
 
 	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+
+	GDK_THREADS_LEAVE ();
 }
 
 static void /* GnomeVFSModuleCallback */
@@ -243,6 +247,8 @@ vfs_authentication_callback (gconstpointer in, size_t in_size,
 	g_return_if_fail (in != NULL);
 	g_return_if_fail (out != NULL);
 
+	GDK_THREADS_ENTER ();
+	
 	in_real = (GnomeVFSModuleCallbackAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackAuthenticationOut *)out;
 
@@ -253,6 +259,8 @@ vfs_authentication_callback (gconstpointer in, size_t in_size,
 	present_authentication_dialog_blocking (is_proxy_authentication, in_real, out_real);
 
 	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+
+	GDK_THREADS_LEAVE ();
 }
 
 static GnomePasswordDialog *
@@ -435,6 +443,8 @@ vfs_async_full_authentication_callback (gconstpointer in, size_t in_size,
 	g_return_if_fail (in != NULL);
 	g_return_if_fail (out != NULL);
 
+	GDK_THREADS_ENTER ();
+	
 	in_real = (GnomeVFSModuleCallbackFullAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackFullAuthenticationOut *)out;
 
@@ -450,6 +460,8 @@ vfs_async_full_authentication_callback (gconstpointer in, size_t in_size,
 	present_full_authentication_dialog_nonblocking (info);
 
 	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+
+	GDK_THREADS_LEAVE ();
 }
 
 static void /* GnomeVFSModuleCallback */
@@ -466,6 +478,8 @@ vfs_full_authentication_callback (gconstpointer in, size_t in_size,
 	g_return_if_fail (in != NULL);
 	g_return_if_fail (out != NULL);
 
+	GDK_THREADS_ENTER ();
+	
 	in_real = (GnomeVFSModuleCallbackFullAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackFullAuthenticationOut *)out;
 
@@ -474,6 +488,8 @@ vfs_full_authentication_callback (gconstpointer in, size_t in_size,
 	present_full_authentication_dialog_blocking (in_real, out_real);
 
 	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+
+	GDK_THREADS_LEAVE ();
 }
 
 
@@ -703,6 +719,11 @@ vfs_save_authentication_callback (gconstpointer in, size_t in_size,
 	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
 }
 
+/* If you call this, and you use threads with gtk+, you must never
+ * hold the gdk lock while doing synchronous gnome-vfs calls. Otherwise
+ * an authentication callback presenting a dialog could try to grab the
+ * already held gdk lock, causing a deadlock.
+ */
 void
 gnome_authentication_manager_init (void)
 {
