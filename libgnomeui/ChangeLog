@@ -1,3 +1,8 @@
+1998-03-19  Marc Ewing  <marc@redhat.com>
+
+	* gtk-socket.{c,h}: change "id" parameter name to "wid"
+	  so as not to conflict with objc reserved word.
+
 Wed Mar 18 20:40:43 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-stock.c (NOT_ALWAYS_SHADE): Renamed to fix typo.

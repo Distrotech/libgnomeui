@@ -125,13 +125,13 @@ gtk_socket_new ()
 }
 
 void           
-gtk_socket_steal (GtkSocket *socket, guint32 id)
+gtk_socket_steal (GtkSocket *socket, guint32 wid)
 {
   GtkWidget *widget;
 
   widget = GTK_WIDGET (socket);
   
-  socket->plug_window = gdk_window_lookup (id);
+  socket->plug_window = gdk_window_lookup (wid);
 
   if (socket->plug_window && socket->plug_window->user_data)
     {
@@ -143,7 +143,7 @@ gtk_socket_steal (GtkSocket *socket, guint32 id)
     }
   else
     {
-      socket->plug_window = gdk_window_foreign_new (id);
+      socket->plug_window = gdk_window_foreign_new (wid);
       gdk_window_set_user_data (socket->plug_window, socket);
       socket->same_app = FALSE;
       socket->have_size = FALSE;
