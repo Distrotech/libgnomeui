@@ -265,9 +265,13 @@ static void     set_vfs_error     (GnomeVFSResult   result,
 				   const gchar     *uri,
 				   GError         **error);
 static gboolean has_valid_scheme  (const char      *uri);
-static GnomeVFSFileInfo * lookup_vfs_info_in_folder (GtkFileFolder     *folder,
-						     const GtkFilePath *path,
-						     GError           **error);
+
+static FolderChild *lookup_folder_child (GtkFileFolder     *folder,
+					 const GtkFilePath *path,
+					 GError           **error);
+static FolderChild *lookup_folder_child_from_uri (GtkFileFolder     *folder,
+						  const char        *uri,
+						  GError           **error);
 
 static GObjectClass *system_parent_class;
 static GObjectClass *folder_parent_class;
@@ -567,13 +571,13 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 				      GError           **error)
 {
   char *uri;
-  GnomeVFSURI *vfs_uri;
-  gboolean exists;
   GtkFilePath *parent_path;
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
   GtkFileFolderGnomeVFS *folder_vfs;
-  GnomeVFSMonitorHandle *monitor = NULL;
+  GnomeVFSMonitorHandle *monitor;
   GnomeVFSResult result;
+  GnomeVFSFileInfo *vfs_info;
+  GnomeVFSFileType vfs_info_type;
 
   uri = make_uri_canonical (gtk_file_path_get_string (path));
   folder_vfs = g_hash_table_lookup (system_vfs->folders, uri);
@@ -590,22 +594,61 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
       return NULL;
     }
 
-  vfs_uri = gnome_vfs_uri_new (uri);
-  if (!vfs_uri)
+  vfs_info = NULL;
+
+  if (parent_path)
     {
-      set_vfs_error (GNOME_VFS_ERROR_INVALID_URI, uri, error);
+      char *parent_uri;
+      GtkFileFolderGnomeVFS *parent_folder;
+
+      /* If the parent folder is loaded, make sure we exist in it */
+      parent_uri = make_uri_canonical (gtk_file_path_get_string (parent_path));
+      parent_folder = g_hash_table_lookup (system_vfs->folders, parent_uri);
+      g_free (parent_uri);
       gtk_file_path_free (parent_path);
-      g_free (uri);
-      return NULL;
+
+      if (parent_folder)
+	{
+	  FolderChild *child;
+
+	  child = lookup_folder_child_from_uri (GTK_FILE_FOLDER (parent_folder), uri, error);
+	  if (!child)
+	    {
+	      g_free (uri);
+	      return NULL;
+	    }
+
+	  vfs_info = child->info;
+	  g_assert (vfs_info != NULL);
+	}
     }
 
-  exists = gnome_vfs_uri_exists (vfs_uri);
-  gnome_vfs_uri_unref (vfs_uri);
-
-  if (!exists)
+  if (!vfs_info)
     {
-      set_vfs_error (GNOME_VFS_ERROR_NOT_FOUND, uri, error);
-      gtk_file_path_free (parent_path);
+      vfs_info = gnome_vfs_file_info_new ();
+      gnome_authentication_manager_push_sync ();
+      result = gnome_vfs_get_file_info (uri, vfs_info, get_options (GTK_FILE_INFO_IS_FOLDER));
+      gnome_authentication_manager_pop_sync ();
+
+      if (result != GNOME_VFS_OK)
+	{
+	  set_vfs_error (result, uri, error);
+	  gnome_vfs_file_info_unref (vfs_info);
+	  g_free (uri);
+	  return NULL;
+	}
+    }
+
+  vfs_info_type = vfs_info->type;
+  gnome_vfs_file_info_unref (vfs_info);
+
+  if (vfs_info_type != GNOME_VFS_FILE_TYPE_DIRECTORY)
+    {
+      g_set_error (error,
+		   GTK_FILE_SYSTEM_ERROR,
+		   GTK_FILE_SYSTEM_ERROR_NOT_FOLDER,
+		   _("%s is not a folder"),
+		   uri);
       g_free (uri);
       return NULL;
     }
@@ -613,6 +656,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
   folder_vfs = g_object_new (GTK_TYPE_FILE_FOLDER_GNOME_VFS, NULL);
 
   gnome_authentication_manager_push_sync ();
+  monitor = NULL;
   result = gnome_vfs_monitor_add (&monitor,
 				  uri,
 				  GNOME_VFS_MONITOR_DIRECTORY,
@@ -625,6 +669,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
       set_vfs_error (result, uri, error);
       return NULL;
     }
+
   folder_vfs->system = system_vfs;
   folder_vfs->uri = uri; /* takes ownership */
   folder_vfs->types = types;
@@ -636,50 +681,6 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 						(GDestroyNotify) folder_child_free);
 
   g_hash_table_insert (system_vfs->folders, folder_vfs->uri, folder_vfs);
-
-  /* Make sure we exist as a child in the parent folder (if its loaded) */
-  if (parent_path)
-    {
-      char *parent_uri;
-      GtkFileFolderGnomeVFS *parent_folder;
-      GSList *uris;
-
-      parent_uri = make_uri_canonical (gtk_file_path_get_string (parent_path));
-      parent_folder = g_hash_table_lookup (system_vfs->folders, parent_uri);
-      g_free (parent_uri);
-      gtk_file_path_free (parent_path);
-
-      if (parent_folder &&
-	  !g_hash_table_lookup (parent_folder->children, folder_vfs->uri))
-	{
-	  GnomeVFSFileInfo *vfs_info;
-	  FolderChild *child;
-
-	  vfs_info = gnome_vfs_file_info_new ();
-	  gnome_authentication_manager_push_sync ();
-	  result = gnome_vfs_get_file_info (folder_vfs->uri,
-					    vfs_info,
-					    get_options (parent_folder->types));
-	  gnome_authentication_manager_pop_sync ();
-	  if (result != GNOME_VFS_OK)
-	    {
-	      gnome_vfs_file_info_unref (vfs_info);
-	      g_object_unref (folder_vfs);
-	      set_vfs_error (result, folder_vfs->uri, error);
-	      return NULL;
-	    }
-
-	  child = folder_child_new (folder_vfs->uri, vfs_info);
-	  gnome_vfs_file_info_unref (vfs_info);
-
-	  g_hash_table_replace (parent_folder->children,
-				child->uri, child);
-
-	  uris = g_slist_prepend (NULL, child->uri);
-	  g_signal_emit_by_name (parent_folder, "files-added", uris);
-	  g_slist_free (uris);
-	}
-    }
 
   return GTK_FILE_FOLDER (folder_vfs);
 }
@@ -1323,11 +1324,13 @@ get_vfs_info (GtkFileSystem     *file_system,
       if (folder_vfs &&
 	  (folder_vfs->types & types) == types)
 	{
-	  info = lookup_vfs_info_in_folder (GTK_FILE_FOLDER (folder_vfs),
-					    path,
-					    NULL);
-	  if (info)
-	    gnome_vfs_file_info_ref (info);
+	  FolderChild *child;
+	  child = lookup_folder_child (GTK_FILE_FOLDER (folder_vfs), path, NULL);
+	  if (child)
+	    {
+	      info = child->info;
+	      gnome_vfs_file_info_ref (info);
+	    }
 	}
     }
   
@@ -1823,53 +1826,66 @@ gtk_file_folder_gnome_vfs_finalize (GObject *object)
   folder_parent_class->finalize (object);
 }
 
-
-static GnomeVFSFileInfo *
-lookup_vfs_info_in_folder (GtkFileFolder     *folder,
-			   const GtkFilePath *path,
-			   GError           **error)
+/* The URI must be canonicalized already */
+static FolderChild *
+lookup_folder_child_from_uri (GtkFileFolder *folder,
+			      const char    *uri,
+			      GError       **error)
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
-  const gchar *uri;
+  FolderChild *child;
+  GnomeVFSFileInfo *vfs_info;
+  GnomeVFSResult result;
+
+  child = g_hash_table_lookup (folder_vfs->children, uri);
+  if (child)
+    return child;
+
+  /* We may not have loaded the file's information yet.
+   */
+
+  vfs_info = gnome_vfs_file_info_new ();
+  gnome_authentication_manager_push_sync ();
+  result = gnome_vfs_get_file_info (uri, vfs_info, get_options (folder_vfs->types));
+  gnome_authentication_manager_pop_sync ();
+
+  if (result != GNOME_VFS_OK)
+    {
+      set_vfs_error (result, uri, error);
+      gnome_vfs_file_info_unref (vfs_info);
+      return NULL;
+    }
+  else
+    {
+      GSList *uris;
+
+      child = folder_child_new (uri, vfs_info);
+      gnome_vfs_file_info_unref (vfs_info);
+      g_hash_table_replace (folder_vfs->children, child->uri, child);
+
+      uris = g_slist_append (NULL, (char *) uri);
+      g_signal_emit_by_name (folder_vfs, "files-added", uris);
+      g_slist_free (uris);
+
+      return child;
+    }
+}
+
+static FolderChild *
+lookup_folder_child (GtkFileFolder     *folder,
+		     const GtkFilePath *path,
+		     GError           **error)
+{
+  char *uri;
   FolderChild *child;
 
   uri = make_uri_canonical (gtk_file_path_get_string (path));
-  child = g_hash_table_lookup (folder_vfs->children, uri);
-  if (!child)
-    {
-      /* We may not have loaded the file's information yet.
-       */
-      GnomeVFSFileInfo *vfs_info;
-      GnomeVFSResult result;
-      
-      vfs_info = gnome_vfs_file_info_new ();
-      gnome_authentication_manager_push_sync ();
-      result = gnome_vfs_get_file_info (uri, vfs_info, get_options (folder_vfs->types));
-      gnome_authentication_manager_pop_sync ();
-      
-      if (result != GNOME_VFS_OK)
-	set_vfs_error (result, uri, error);
-      else
-	{
-	  GSList *uris;
-	  
-	  child = folder_child_new (uri, vfs_info);
-	  g_hash_table_replace (folder_vfs->children, child->uri, child);
-	  
-	  uris = g_slist_append (NULL, (char *) uri);
-	  g_signal_emit_by_name (folder_vfs, "files-added", uris);
-	  g_slist_free (uris);
-	}
-      
-      gnome_vfs_file_info_unref (vfs_info);
+  child = lookup_folder_child_from_uri (folder, uri, error);
+  g_free (uri);
 
-    }
-
-  if (child)
-    return child->info;
-  
-  return NULL;
+  return child;
 }
+
 static GtkFileInfo *
 gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
 				    const GtkFilePath *path,
@@ -1877,12 +1893,13 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
   const gchar *uri = gtk_file_path_get_string (path);
-  GnomeVFSFileInfo *info;
+  FolderChild *child;
 
   if (!path)
     {
       GnomeVFSURI *vfs_uri;
       GnomeVFSResult result;
+      GnomeVFSFileInfo *info;
       GtkFileInfo *file_info;
 
       vfs_uri = gnome_vfs_uri_new (folder_vfs->uri);
@@ -1906,11 +1923,11 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
       gnome_vfs_file_info_unref (info);
       return file_info;
     }
-  
-  info = lookup_vfs_info_in_folder (folder, path, error);
 
-  if (info)
-    return info_from_vfs_info (uri, info, folder_vfs->types);
+  child = lookup_folder_child (folder, path, error);
+
+  if (child)
+    return info_from_vfs_info (uri, child->info, folder_vfs->types);
   else
     return NULL;
 }

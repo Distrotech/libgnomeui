@@ -1,3 +1,19 @@
+2004-07-20  Federico Mena Quintero  <federico@ximian.com>
+
+	Fix #146185:
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(lookup_folder_child): Renamed from lookup_vfs_info_in_folder();
+	use lookup_folder_child_from_uri().  Return a FolderChild rather
+	than a GnomeVFSFileInfo.
+	(lookup_folder_child_from_uri): New helper function, code
+	moved over from lookup_vfs_info_in_folder().
+	(gtk_file_system_gnome_vfs_get_folder): Reorder things.  First,
+	ensure that we exist as a child in the parent folder; here we can
+	check whether the child is a folder.  Second, if the parent folder
+	is not loaded, ensure that we are a folder.  Third, actually
+	create the new folder_vfs.
+
 =================== 2.7.2 ===================
 
 Mon Jul 19 23:31:18 2004  Jonathan Blandford  <jrb@gnome.org>
