@@ -26,7 +26,6 @@ static void gnome_app_do_menu_creation        (GnomeApp *app,
 					       GnomeUIBuilderData uidata);
 static void gnome_app_do_ui_signal_connect    (GnomeApp *app,
 					       GnomeUIInfo *info_item,
-					       GtkWidget *widget,
 					       gchar *signal_name,
 					       GnomeUIBuilderData uidata);
 static void gnome_app_do_ui_accelerator_setup (GnomeApp *app,
