@@ -1,152 +1,153 @@
 # Copyright (C) 2001-2002 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2001-2002.
+# Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2002
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "POT-Creation-Date: 2002-03-30 00:09+0100\n"
-"PO-Revision-Date: 2002-03-15 14:29+0300\n"
-"Last-Translator: Valek Filippov <frob@df.ru>\n"
+"PO-Revision-Date: 2002-04-16 01:02+0400\n"
+"Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libgnomeui/gnome-about.c:187
 msgid "Credits"
-msgstr "Благодарности"
+msgstr "п▒п╩п╟пЁп╬п╢п╟я─п╫п╬я│я┌п╦"
 
 #: libgnomeui/gnome-about.c:210
 msgid "Written by"
-msgstr "Разработана"
+msgstr "п░п╡я┌п╬я─я▀"
 
 #: libgnomeui/gnome-about.c:224
 msgid "Documented by"
-msgstr "Авторы документации"
+msgstr "п░п╡я┌п╬я─я▀ п╢п╬п╨я┐п╪п╣п╫я┌п╟я├п╦п╦"
 
 #: libgnomeui/gnome-about.c:238
 msgid "Translated by"
-msgstr "Перевод"
+msgstr "п░п╡я┌п╬я─я▀ п©п╣я─п╣п╡п╬п╢п╟"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:295
 msgid "_Credits"
-msgstr "Благодарности"
+msgstr "_п▒п╩п╟пЁп╬п╢п╟я─п╫п╬я│я┌п╦"
 
 #: libgnomeui/gnome-about.c:335
 msgid "Program name"
-msgstr "Название программы"
+msgstr "п²п╟п╦п╪п╣п╫п╬п╡п╟п╫п╦п╣ п©я─п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-about.c:336
 msgid "The name of the program"
-msgstr "Название программы"
+msgstr "п²п╟п╦п╪п╣п╫п╬п╡п╟п╫п╦п╣ п©я─п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-about.c:343
 msgid "Program version"
-msgstr "Версия программы"
+msgstr "п▓п╣я─я│п╦я▐ п©я─п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-about.c:344
 msgid "The version of the program"
-msgstr "Версия программы"
+msgstr "п▓п╣я─я│п╦я▐ п©я─п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-about.c:350
 msgid "Copyright string"
-msgstr "Авторское право"
+msgstr "п░п╡я┌п╬я─я│п╨п╬п╣ п©я─п╟п╡п╬"
 
 #: libgnomeui/gnome-about.c:351
 msgid "Copyright information for the program"
-msgstr "Информация об авторских правах на программу"
+msgstr "п≤п╫я└п╬я─п╪п╟я├п╦я▐ п╬п╠ п╟п╡я┌п╬я─я│п╨п╦я┘ п©я─п╟п╡п╟я┘ п╫п╟ п©я─п╬пЁя─п╟п╪п╪я┐"
 
 #: libgnomeui/gnome-about.c:358
 msgid "Comments string"
-msgstr "Строка комментария"
+msgstr "п║я┌я─п╬п╨п╟ п╨п╬п╪п╪п╣п╫я┌п╟я─п╦я▐"
 
 #: libgnomeui/gnome-about.c:359
 msgid "Comments about the program"
-msgstr "Комментарий о программе"
+msgstr "п п╬п╪п╪п╣п╫я┌п╟я─п╦п╧ п╬ п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: libgnomeui/gnome-about.c:365
 msgid "Authors"
-msgstr "Авторы"
+msgstr "п░п╡я┌п╬я─я▀"
 
 #: libgnomeui/gnome-about.c:366
 msgid "List of authors of the programs"
-msgstr "Список авторов программы"
+msgstr "п║п©п╦я│п╬п╨ п╟п╡я┌п╬я─п╬п╡ п©я─п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-about.c:368
 msgid "Author entry"
-msgstr "Автор"
+msgstr "п░п╡я┌п╬я─"
 
 #: libgnomeui/gnome-about.c:369
 msgid "A single author entry"
-msgstr "Автор программы"
+msgstr "п░п╡я┌п╬я─ п©я─п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-about.c:376
 msgid "Documenters"
-msgstr "Авторы документации"
+msgstr "п░п╡я┌п╬я─я▀ п╢п╬п╨я┐п╪п╣п╫я┌п╟я├п╦п╦"
 
 #: libgnomeui/gnome-about.c:377
 msgid "List of people documenting the program"
-msgstr "Список людей задокументировавших программу"
+msgstr "п║п©п╦я│п╬п╨ п╩я▌п╢п╣п╧, п©п╦я│п╟п╡я┬п╦я┘ п╢п╬п╨я┐п╪п╣п╫я┌п╟я├п╦я▌ п╨ п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: libgnomeui/gnome-about.c:379
 msgid "Documenter entry"
-msgstr "Автор документации"
+msgstr "п░п╡я┌п╬я─ п╢п╬п╨я┐п╪п╣п╫я┌п╟я├п╦п╦"
 
 #: libgnomeui/gnome-about.c:380
 msgid "A single documenter entry"
-msgstr "Автор документации к программе"
+msgstr "п░п╡я┌п╬я─ п╢п╬п╨я┐п╪п╣п╫я┌п╟я├п╦п╦ п╨ п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: libgnomeui/gnome-about.c:388
 msgid "Translator credits"
-msgstr "Благодарности переводчику"
+msgstr "п▒п╩п╟пЁп╬п╢п╟я─п╫п╬я│я┌п╦ п©п╣я─п╣п╡п╬п╢я┤п╦п╨п╟п╪"
 
 #: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
-"Благодарности переводчикам. Эта строка должна быть помечена для перевода"
+"п▒п╩п╟пЁп╬п╢п╟я─п╫п╬я│я┌п╦ п©п╣я─п╣п╡п╬п╢я┤п╦п╨п╟п╪. п╜я┌п╟ я│я┌я─п╬п╨п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п©п╬п╪п╣я┤п╣п╫п╟ п╢п╩я▐ п©п╣я─п╣п╡п╬п╢п╟"
 
 #: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
-msgstr "Эмблема"
+msgstr "п╜п╪п╠п╩п╣п╪п╟"
 
 #: libgnomeui/gnome-about.c:397
 msgid "A logo for the about box"
-msgstr "Эмблема для окна \"О программе\""
+msgstr "п╜п╪п╠п╩п╣п╪п╟ п╢п╩я▐ п╬п╨п╫п╟ \"п· п©я─п╬пЁя─п╟п╪п╪п╣\""
 
 #: libgnomeui/gnome-about.c:476
 #, c-format
 msgid "About %s"
-msgstr "О программе %s"
+msgstr "п· п©я─п╬пЁя─п╟п╪п╪п╣ %s"
 
 #: libgnomeui/gnome-appbar.c:762
 msgid "Has Progress"
-msgstr "Имеет строку продвижения"
+msgstr "п≤п╪п╣п╣я┌ я│я┌я─п╬п╨я┐ п©я─п╬п╢п╡п╦п╤п╣п╫п╦я▐"
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Create a progress widget."
-msgstr "Создать виджет продвижения."
+msgstr "п║п╬п╥п╢п╟п╡п╟я┌я▄ п╡п╦п╢п╤п╣я┌ п©я─п╬п╢п╡п╦п╤п╣п╫п╦я▐."
 
 #: libgnomeui/gnome-appbar.c:770
 msgid "Has Status"
-msgstr "Имеет строку состояния"
+msgstr "п≤п╪п╣п╣я┌ я│я┌я─п╬п╨я┐ я│п╬я│я┌п╬я▐п╫п╦я▐"
 
 #: libgnomeui/gnome-appbar.c:771
 msgid "Create a status widget."
-msgstr "Создать виджет строки состояния."
+msgstr "п║п╬п╥п╢п╟п╡п╟я┌я▄ п╡п╦п╢п╤п╣я┌ я│я┌я─п╬п╨п╦ я│п╬я│я┌п╬я▐п╫п╦я▐."
 
 #: libgnomeui/gnome-appbar.c:778
 msgid "Interactivity"
-msgstr "Интерактивность"
+msgstr "п≤п╫я┌п╣я─п╟п╨я┌п╦п╡п╫п╬я│я┌я▄"
 
 #: libgnomeui/gnome-appbar.c:779
 msgid "Level of user activity required."
-msgstr "Требуемый уровень активности пользователя."
+msgstr "п╒я─п╣п╠я┐п╣я┌я│я▐ п╟п╨я┌п╦п╡п╫п╬я│я┌я▄ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐."
 
 #: libgnomeui/gnome-client.c:833
 msgid "Specify session management ID"
-msgstr "Указать идентификатор управления сеансом"
+msgstr "пёп╨п╟п╥п╟я┌я▄ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я┐п©я─п╟п╡п╩п╣п╫п╦я▐ я│п╣п╟п╫я│п╬п╪"
 
 #: libgnomeui/gnome-client.c:833
 msgid "ID"
@@ -154,184 +155,184 @@ msgstr "ID"
 
 #: libgnomeui/gnome-client.c:836
 msgid "Specify prefix of saved configuration"
-msgstr "Указать префикс сохранённой конфигурации"
+msgstr "пёп╨п╟п╥п╟я┌я▄ п©я─п╣я└п╦п╨я│ я│п╬я┘я─п╟п╫я▒п╫п╫п╬п╧ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╦"
 
 #: libgnomeui/gnome-client.c:836
 msgid "PREFIX"
-msgstr "ПРЕФИКС"
+msgstr "п÷п═п∙п╓п≤п п║"
 
 #: libgnomeui/gnome-client.c:839
 msgid "Disable connection to session manager"
-msgstr "Отключить соединение с диспетчером сеанса"
+msgstr "п·я┌п╨п╩я▌я┤п╦я┌я▄ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ я│ п╢п╦я│п©п╣я┌я┤п╣я─п╬п╪ я│п╣п╟п╫я│п╟"
 
 #: libgnomeui/gnome-client.c:945
 msgid "Session management"
-msgstr "Управление сеансом"
+msgstr "пёп©я─п╟п╡п╩п╣п╫п╦п╣ я│п╣п╟п╫я│п╬п╪"
 
 #: libgnomeui/gnome-client.c:2483
 msgid "Cancel Logout"
-msgstr "Отменить выход"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄ п╡я▀я┘п╬п╢"
 
 #: libgnomeui/gnome-color-picker.c:405
 msgid "Received invalid color data\n"
-msgstr "Получены неправильные данные цвета\n"
+msgstr "п÷п╬п╩я┐я┤п╣п╫я▀ п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╢п╟п╫п╫я▀п╣ я├п╡п╣я┌п╟\n"
 
 #: libgnomeui/gnome-color-picker.c:468
 msgid "Pick a color"
-msgstr "Выбрать цвет"
+msgstr "п▓я▀п╠я─п╟я┌я▄ я├п╡п╣я┌"
 
 #: libgnomeui/gnome-dateedit.c:468
 msgid "Time"
-msgstr "Время"
+msgstr "п▓я─п╣п╪я▐"
 
 #: libgnomeui/gnome-dateedit.c:469
 msgid "The time currently selected"
-msgstr "Выбранное время"
+msgstr "п▓я▀п╠я─п╟п╫п╫п╬п╣ п╡я─п╣п╪я▐"
 
 #: libgnomeui/gnome-dateedit.c:481
 msgid "DateEdit Flags"
-msgstr "Флаги DateEdit"
+msgstr "п╓п╩п╟пЁп╦ DateEdit"
 
 #: libgnomeui/gnome-dateedit.c:482
 msgid "Flags for how DateEdit looks"
-msgstr ""
+msgstr "п╓п╩п╟пЁп╦ п╢п╩я▐ п©я─п╣п╢я│я┌п╟п╡п╩п╣п╫п╦я▐ DateEdit"
 
 #: libgnomeui/gnome-dateedit.c:491
 msgid "Lower Hour"
-msgstr "Нижний час"
+msgstr "п÷п╣я─п╡я▀п╧ я┤п╟я│"
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "Lower hour in the time popup selector"
-msgstr "Нижний час в окне выбора времени"
+msgstr "п║п╟п╪я▀п╧ я─п╟п╫п╫п╦п╧ я┤п╟я│ п╡ п╬п╨п╫п╣ п╡я▀п╠п╬я─п╟ п╡я─п╣п╪п╣п╫п╦"
 
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Upper Hour"
-msgstr "Верхний час"
+msgstr "п÷п╬я│п╩п╣п╢п╫п╦п╧ я┤п╟я│"
 
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Upper hour in the time popup selector"
-msgstr "Верхний час в окне выбора времени"
+msgstr "п║п╟п╪я▀п╧ п©п╬п╥п╢п╫п╦п╧ я┤п╟я│ п╡ п╬п╨п╫п╣ п╡я▀п╠п╬я─п╟ п╡я─п╣п╪п╣п╫п╦"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Initial Time"
-msgstr "Исходное время"
+msgstr "п≤я│я┘п╬п╢п╫п╬п╣ п╡я─п╣п╪я▐"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "The initial time"
-msgstr "Исходное время"
+msgstr "п≤я│я┘п╬п╢п╫п╬п╣ п╡я─п╣п╪я▐"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:745
 msgid "Calendar"
-msgstr "Календарь"
+msgstr "п п╟п╩п╣п╫п╢п╟я─я▄"
 
 #: libgnomeui/gnome-dateedit.c:975
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
-"gnome_date_edit_get_date устарело, используйте gnome_date_edit_get_time"
+"п▓я▀п╥п╬п╡ gnome_date_edit_get_date я┐я│я┌п╟я─п╣п╩, п╦я│п©п╬п╩я▄п╥я┐п╧я┌п╣ gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
 msgid "Title"
-msgstr "Заголовок"
+msgstr "п≈п╟пЁп╬п╩п╬п╡п╬п╨"
 
 #: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
-msgstr "Заголовок помощника"
+msgstr "п≈п╟пЁп╬п╩п╬п╡п╬п╨ п©п╬п╪п╬я┴п╫п╦п╨п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr "Изображение эмблемы"
+msgstr "п≤п╥п╬п╠я─п╟п╤п╣п╫п╦п╣ я█п╪п╠п╩п╣п╪я▀"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
-msgstr ""
+msgstr "п▓п╣я─я┘п╫я▐я▐ п╬я┌п╪п╣я┌п╨п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr ""
+msgstr "п≤п╥п╬п╠я─п╟п╤п╣п╫п╦п╣ п╢п╩я▐ п╡п╣я─я┘п╫п╣п╧ п╬я┌п╪п╣я┌п╨п╦"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
-msgstr "Цвет заголовка"
+msgstr "п╕п╡п╣я┌ п╥п╟пЁп╬п╩п╬п╡п╨п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
-msgstr "Цвет текста заголовка"
+msgstr "п╕п╡п╣я┌ я┌п╣п╨я│я┌п╟ п╥п╟пЁп╬п╩п╬п╡п╨п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
-msgstr "Цвет текста заголовка"
+msgstr "п╕п╡п╣я┌ я┌п╣п╨я│я┌п╟ п╥п╟пЁп╬п╩п╬п╡п╨п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr "Цвет текста заголовка как GdkColor"
+msgstr "п╕п╡п╣я┌ я┌п╣п╨я│я┌п╟ п╥п╟пЁп╬п╩п╬п╡п╨п╟ п╨п╟п╨ GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
-msgstr "Набор цветов фона заголовка"
+msgstr "п²п╟п╠п╬я─ я├п╡п╣я┌п╬п╡ п╥п╟пЁп╬п╩п╬п╡п╨п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
-msgstr "Цвет текста заголовка установлен"
+msgstr "п╕п╡п╣я┌ я┌п╣п╨я│я┌п╟ п╥п╟пЁп╬п╩п╬п╡п╨п╟ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫"
 
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr "Цвет фона"
+msgstr "п╕п╡п╣я┌ я└п╬п╫п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr "Цвет фона"
+msgstr "п╕п╡п╣я┌ я└п╬п╫п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr "Цвет фона как GdkColor"
+msgstr "п╕п╡п╣я┌ я└п╬п╫п╟ п╨п╟п╨ GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr "Набор цветов фона"
+msgstr "п²п╟п╠п╬я─ я├п╡п╣я┌п╬п╡ я└п╬п╫п╟"
 
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr "Цвет фона установлен"
+msgstr "п╕п╡п╣я┌ я└п╬п╫п╟ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
-msgstr "Цвет фона эмблемы"
+msgstr "п╕п╡п╣я┌ я└п╬п╫п╟ я█п╪п╠п╩п╣п╪я▀"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
-msgstr "Цвет фона эмблемы"
+msgstr "п╕п╡п╣я┌ я└п╬п╫п╟ я█п╪п╠п╩п╣п╪я▀"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
-msgstr "Цвет фона эмблемы как GdkColor"
+msgstr "п╕п╡п╣я┌ я└п╬п╫п╟ я█п╪п╠п╩п╣п╪я▀ п╨п╟п╨ GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
-msgstr "Набор цветов фона эмблемы"
+msgstr "п²п╟п╠п╬я─ я├п╡п╣я┌п╬п╡ я└п╬п╫п╟ я█п╪п╠п╩п╣п╪я▀"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
-msgstr "Цвет фона эмблемы установлен"
+msgstr "п╕п╡п╣я┌ я└п╬п╫п╟ я█п╪п╠п╩п╣п╪я▀ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr "Показать \"Завершить\""
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ \"п≈п╟п╡п╣я─я┬п╦я┌я▄\""
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Показать кнопку \"Завершить\" вместо кнопки \"След.\""
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ п╨п╫п╬п©п╨я┐ \"п≈п╟п╡п╣я─я┬п╦я┌я▄\" п╡п╪п╣я│я┌п╬ п╨п╫п╬п©п╨п╦ \"п▓п©п╣я─я▒п╢\""
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr "Показать справку"
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ я│п©я─п╟п╡п╨я┐"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr "Показать кнопку \"Справка\""
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ п╨п╫п╬п©п╨я┐ \"п║п©я─п╟п╡п╨п╟\""
 
 #: libgnomeui/gnome-href.c:118
 msgid "URL"
@@ -339,54 +340,54 @@ msgstr "URL"
 
 #: libgnomeui/gnome-href.c:119
 msgid "The URL that GnomeHRef activates"
-msgstr "URL активируемый GnomeHRef"
+msgstr "URL, п╟п╨я┌п╦п╡п╦я─я┐п╣п╪я▀п╧ GnomeHRef"
 
 #: libgnomeui/gnome-href.c:126
 msgid "Text"
-msgstr "Текст"
+msgstr "п╒п╣п╨я│я┌"
 
 #: libgnomeui/gnome-href.c:127
 msgid "The text on the button"
-msgstr "Текст на кнопке"
+msgstr "п╒п╣п╨я│я┌ п╫п╟ п╨п╫п╬п©п╨п╣"
 
 #: libgnomeui/gnome-href.c:128
 msgid "End World Hunger"
-msgstr "Конец Всемирного Голода"
+msgstr "п п╬п╫п╣я├ п▓я│п╣п╪п╦я─п╫п╬пЁп╬ п⌠п╬п╩п╬п╢п╟"
 
 #: libgnomeui/gnome-href.c:134
 msgid "Link colour"
-msgstr "Цвет ссылки"
+msgstr "п╕п╡п╣я┌ я│я│я▀п╩п╨п╦"
 
 #: libgnomeui/gnome-href.c:135
 msgid "Colour used to draw the link"
-msgstr "Цвет используемый для ссылки"
+msgstr "п╕п╡п╣я┌, п╦я│п©п╬п╩я▄п╥я┐п╣п╪я▀п╧ п╢п╩я▐ я│я│я▀п╩п╨п╦"
 
 #: libgnomeui/gnome-href.c:396
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
-"При попытке запустить обработчик URL возникла ошибка.\n"
-"Проверьте правильность установок в Центре Управления."
+"п÷я─п╦ п©п╬п©я▀я┌п╨п╣ п╥п╟п©я┐я│я┌п╦я┌я▄ п╬п╠я─п╟п╠п╬я┌я┤п╦п╨ URL п╡п╬п╥п╫п╦п╨п╩п╟ п╬я┬п╦п╠п╨п╟.\n"
+"п÷я─п╬п╡п╣я─я▄я┌п╣ п©я─п╟п╡п╦п╩я▄п╫п╬я│я┌я▄ я┐я│я┌п╟п╫п╬п╡п╬п╨ п╡ п╕п╣п╫я┌я─п╣ пёп©я─п╟п╡п╩п╣п╫п╦я▐."
 
 #: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
-msgstr "Используемый X-display"
+msgstr "п≤я│п©п╬п╩я▄п╥я┐п╣п╪я▀п╧ п╢п╦я│п©п╩п╣п╧ X"
 
 #: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
-msgstr "ДИСПЛЕЙ"
+msgstr "п■п≤п║п÷п⌡п∙п≥"
 
 #: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
-msgstr "Библиотека пользовательского интерфейса GNOME"
+msgstr "п▒п╦п╠п╩п╦п╬я┌п╣п╨п╟ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬пЁп╬ п╦п╫я┌п╣я─я└п╣п╧я│п╟ GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"Возникли множественные segfault; невозможно отобразить диалог об ошибке\n"
-"\n"
+"п▓п╬п╥п╫п╦п╨п╩п╦ п╪п╫п╬п╤п╣я│я┌п╡п╣п╫п╫я▀п╣ п╬я┬п╦п╠п╨п╦ я│п╣пЁп╪п╣п╫я┌п╟я├п╦п╦; п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╬п╠я─п╟п╥п╦я┌я▄ п╢п╦п╟п╩п╬пЁ "
+"п╬п╠ п╬я┬п╦п╠п╨п╣\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:578
@@ -395,7 +396,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "Segmentation fault!\n"
-"Невозможно отобразить диалог крушения\n"
+"п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╬п╠я─п╟п╥п╦я┌я▄ п╢п╦п╟п╩п╬пЁ п╨я─я┐я┬п╣п╫п╦я▐\n"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -406,6 +407,11 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
+"п°п╣п╫п╣п╢п╤п╣я─ я│п╣п╟п╫я│п╟ GNOME (п©я─п╬я├п╣я│я│ %d) я─я┐я┘п╫я┐п╩\n"
+"п╦п╥-п╥п╟ я└п╟я┌п╟п╩я▄п╫п╬п╧ п╬я┬п╦п╠п╨п╦ (%s).\n"
+"п п╬пЁп╢п╟ п╡я▀ п╥п╟п╨я─п╬п╣я┌п╣ я█я┌п╬я┌ п╢п╦п╟п╩п╬пЁ, п╡я│п╣ п©я─п╦п╩п╬п╤п╣п╫п╦я▐ п╥п╟п╨я─п╬я▌я┌я│я▐ п╦ п╡п╟я┬п╟ я│п╣я│я│п╦я▐ "
+"п╥п╟п╡п╣я─я┬п╦я┌я│я▐.\n"
+"п÷п╬п╤п╟п╩я┐п╧я│я┌п╟, я│п╬я┘я─п╟п╫п╦я┌п╣ п╡я│п╣ п╡п╟я┬п╦ я└п╟п╧п╩я▀ п©п╣я─п╣п╢ п╥п╟п╨я─я▀я┌п╦п╣п╪ п╢п╦п╟п╩п╬пЁп╟."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -414,21 +420,21 @@ msgid ""
 "due to a fatal error.\n"
 "(%s)"
 msgstr ""
-"Приложение \"%s\" (процесс %d) обрушилось\n"
-"из-за неисправимой ошибки.\n"
+"п÷я─п╦п╩п╬п╤п╣п╫п╦п╣ \"%s\" (п©я─п╬я├п╣я│я│ %d) я─я┐я┘п╫я┐п╩п╬\n"
+"п╦п╥-п╥п╟ я└п╟я┌п╟п╩я▄п╫п╬п╧ п╬я┬п╦п╠п╨п╦.\n"
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Использование: gnome_segv2 appname signum\n"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣: gnome_segv2 appname signum\n"
 
 #: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
-msgstr "Отправить сообщение об ошибке"
+msgstr "п·я┌п©я─п╟п╡п╦я┌я▄ я│п╬п╬п╠я┴п╣п╫п╦п╣ п╬п╠ п╬я┬п╦п╠п╨п╣"
 
 #: libgnomeui/gnome_segv.c:149
 msgid "Debug"
-msgstr "Отладка"
+msgstr "п·я┌п╩п╟п╢п╨п╟"
 
 #: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
@@ -437,28 +443,28 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 #: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
-"Посетите страницу \"Сбой приложения GNOME\" для получения дополнительной "
-"информации"
+"п÷п╬я│п╣я┌п╦я┌п╣ я│я┌я─п╟п╫п╦я├я┐ \"п║п╠п╬п╧ п©я─п╦п╩п╬п╤п╣п╫п╦я▐ GNOME\" п╢п╩я▐ п©п╬п╩я┐я┤п╣п╫п╦я▐ п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╬п╧ "
+"п╦п╫я└п╬я─п╪п╟я├п╦п╦"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
-msgstr "Границы таблицы"
+msgstr "п⌠я─п╟п╫п╦я├я▀ я┌п╟п╠п╩п╦я├я▀"
 
 #: libgnomeui/gnome-stock-icons.c:138
 msgid "Table Fill"
-msgstr "Заполнение таблицы"
+msgstr "п≈п╟п©п╬п╩п╫п╣п╫п╦п╣ я┌п╟п╠п╩п╦я├я▀"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Bulleted List"
-msgstr "Маркированный список"
+msgstr "п°п╟я─п╨п╦я─п╬п╡п╟п╫п╫я▀п╧ я│п©п╦я│п╬п╨"
 
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Numbered List"
-msgstr "Нумерованный список"
+msgstr "п²я┐п╪п╣я─п╬п╡п╟п╫п╫я▀п╧ я│п©п╦я│п╬п╨"
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Indent"
-msgstr "Отступ"
+msgstr "п·я┌я│я┌я┐п©"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Un-Indent"
@@ -466,161 +472,161 @@ msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "About"
-msgstr "О программе"
+msgstr "п· п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr ""
+msgstr "п■п╬я┤п╣я─п╫п╦п╧ я█п╩п╣п╪п╣п╫я┌ 1"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr "Подсказка для элемента 1"
+msgstr "п÷п╬п╢я│п╨п╟п╥п╨п╟ п╢п╩я▐ я█п╩п╣п╪п╣п╫я┌п╟ 1"
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr ""
+msgstr "п■п╬я┤п╣я─п╫п╦п╧ я█п╩п╣п╪п╣п╫я┌ 2"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "Подсказка для элемента 2"
+msgstr "п÷п╬п╢я│п╨п╟п╥п╨п╟ п╢п╩я▐ я█п╩п╣п╪п╣п╫я┌п╟ 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
 msgid "_File"
-msgstr "Файл"
+msgstr "_п╓п╟п╧п╩"
 
 #: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
-msgstr "Файл/"
+msgstr "_п╓п╟п╧п╩/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
 msgid "_Edit"
-msgstr "Правка"
+msgstr "_п÷я─п╟п╡п╨п╟"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr "Правка/"
+msgstr "_п÷я─п╟п╡п╨п╟/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
 msgid "_View"
-msgstr "Вид"
+msgstr "_п▓п╦п╢"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "Вид/"
+msgstr "_п▓п╦п╢/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
 msgid "_Settings"
-msgstr "Установки"
+msgstr "_пёя│я┌п╟п╫п╬п╡п╨п╦"
 
 #: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
-msgstr "Установки/"
+msgstr "_пёя│я┌п╟п╫п╬п╡п╨п╦/"
 
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
 msgid "_New"
-msgstr "Новый"
+msgstr "_п║п╬п╥п╢п╟я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
-msgstr "Новый/"
+msgstr "_п║п╬п╥п╢п╟я┌я▄/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
 msgid "Fi_les"
-msgstr "Файлы"
+msgstr "п╓п╟п╧_п╩я▀"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "Файлы/"
+msgstr "п╓п╟п╧_п╩я▀/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
 msgid "_Windows"
-msgstr "Окна"
+msgstr "_п·п╨п╫п╟"
 
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
 msgid "_Game"
-msgstr "Игра"
+msgstr "_п≤пЁя─п╟"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 msgid "_Help"
-msgstr "Справка"
+msgstr "_п║п©я─п╟п╡п╨п╟"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
-msgstr "Окна/"
+msgstr "_п·п╨п╫п╟/"
 
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
-msgstr "Открыть..."
+msgstr "_п·я┌п╨я─я▀я┌я▄..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr "Открыть файл"
+msgstr "п·я┌п╨я─я▀я┌я▄ я└п╟п╧п╩"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
-msgstr "Сохранить"
+msgstr "п║п╬_я┘я─п╟п╫п╦я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "Сохранить текущий файл"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Сохранить как..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ _п╨п╟п╨..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Сохранить текущий файл под другим именем"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩ п©п╬п╢ п╢я─я┐пЁп╦п╪ п╦п╪п╣п╫п╣п╪"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
-msgstr "Восстановить"
+msgstr "п▓п╬я│я│я┌п╟_п╫п╬п╡п╦я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr "Восстановить из сохранённой версии файла"
+msgstr "п▓п╬п╥п╡я─п╟я┌п╦я┌я▄я│я▐ п╨ я│п╬я┘я─п╟п╫я▒п╫п╫п╬п╧ п╡п╣я─я│п╦п╦ я└п╟п╧п╩п╟"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print"
-msgstr "Печать"
+msgstr "п²п╟_п©п╣я┤п╟я┌п╟я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "Напечатать текущий файл"
+msgstr "п²п╟п©п╣я┤п╟я┌п╟я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Настройка печати..."
+msgstr "_п²п╟я│я┌я─п╬п╦я┌я▄ п©п╣я┤п╟я┌я▄..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Установка настроек страницы для вашего текущего принтера"
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п╫п╟я│я┌я─п╬п╧п╨п╦ я│я┌я─п╟п╫п╦я├я▀ п╢п╩я▐ п╡п╟я┬п╣пЁп╬ я┌п╣п╨я┐я┴п╣пЁп╬ п©я─п╦п╫я┌п╣я─п╟"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
-msgstr "Закрыть"
+msgstr "_п≈п╟п╨я─я▀я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Закрыть текущий файл"
+msgstr "п≈п╟п╨я─я▀я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "E_xit"
-msgstr "Выход"
+msgstr "п▓_я▀п╧я┌п╦"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Exit the program"
-msgstr "Выйти из программы"
+msgstr "п▓я▀п╧я┌п╦ п╦п╥ п©я─п╬пЁя─п╟п╪п╪я▀"
 
 #.
 #. * The "Edit" menu
@@ -628,93 +634,93 @@ msgstr "Выйти из программы"
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "C_ut"
-msgstr "Вырезать"
+msgstr "_п▓я▀я─п╣п╥п╟я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "Вырезать выделение"
+msgstr "п▓я▀я─п╣п╥п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #. 10
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "Скопировать"
+msgstr "п║_п╨п╬п©п╦я─п╬п╡п╟я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Скопировать выделение"
+msgstr "п║п╨п╬п©п╦я─п╬п╡п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
-msgstr "Вставить"
+msgstr "п▓я│я┌_п╟п╡п╦я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "Вставить в буфер обмена"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╦п╥ п╠я┐я└п╣я─п╟ п╬п╠п╪п╣п╫п╟"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
-msgstr "Очистить"
+msgstr "п·_я┤п╦я│я┌п╦я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr "Очистить выделение"
+msgstr "п·я┤п╦я│я┌п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "Откат"
+msgstr "_п·я┌п╨п╟я┌п╦я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Отменить последнее действие"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄ п©п╬я│п╩п╣п╢п╫п╣п╣ п╢п╣п╧я│я┌п╡п╦п╣"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "Возврат"
+msgstr "п▓п╬п╥п╡_я─п╟я┌п╦я┌я▄"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Повторить отменённое действие"
+msgstr "п▓п╬я│я│я┌п╟п╫п╬п╡п╦я┌я▄ п╬я┌п╪п╣п╫я▒п╫п╫п╬п╣ п╢п╣п╧я│я┌п╡п╦п╣"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "Найти..."
+msgstr "_п²п╟п╧я┌п╦..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr "Поиск строки"
+msgstr "п²п╟п╧я┌п╦ я│я┌я─п╬п╨я┐"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find _Again"
-msgstr "Искать снова"
+msgstr "п²п╟п╧я┌п╦ _я│п╫п╬п╡п╟"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "Повторный поиск той же строки"
+msgstr "п÷п╬п╡я┌п╬я─п╫п╬ п╫п╟п╧я┌п╦ я┌я┐ п╤п╣ я│я┌я─п╬п╨я┐"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "_Replace..."
-msgstr "Заменить..."
+msgstr "_п≈п╟п╪п╣п╫п╦я┌я▄..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr "Заменить строку"
+msgstr "п≈п╟п╪п╣п╫п╦я┌я▄ я│я┌я─п╬п╨я┐"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties..."
-msgstr "Свойства..."
+msgstr "_п≤п╥п╪п╣п╫п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟..."
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Изменить свойства файла"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ я└п╟п╧п╩п╟"
 
 #.
 #. * The Settings menu
@@ -722,11 +728,11 @@ msgstr "Изменить свойства файла"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "_Preferences..."
-msgstr "Настройки..."
+msgstr "_п²п╟я│я┌я─п╬п╦я┌я▄..."
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Настроить приложение"
+msgstr "п²п╟я│я┌я─п╬п╦я┌я▄ п©я─п╦п╩п╬п╤п╣п╫п╦п╣"
 
 #. 20
 #.
@@ -735,237 +741,239 @@ msgstr "Настроить приложение"
 #. About
 #: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
-msgstr "О программе"
+msgstr "_п· п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
-msgstr "Об этой программе"
+msgstr "п÷п╬п╩я┐я┤п╦я┌я▄ п╦п╫я└п╬я─п╪п╟я├п╦я▌ п╬п╠ я█я┌п╬п╧ п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "_Select All"
-msgstr "Выделить все"
+msgstr "п▓я▀п╢п╣п╩п╦я┌я▄ п╡я│_я▒"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr "Выделить все"
+msgstr "п▓я▀п╢п╣п╩п╦я┌я▄ п╡я│я▒"
 
 #.
 #. * Window menu
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr "Создать новое окно"
+msgstr "_п║п╬п╥п╢п╟я┌я▄ п╫п╬п╡п╬п╣ п╬п╨п╫п╬"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr "Создать новое окно"
+msgstr "п║п╬п╥п╢п╟я┌я▄ п╫п╬п╡п╬п╣ п╬п╨п╫п╬"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "Закрыть это окно"
+msgstr "_п≈п╟п╨я─я▀я┌я▄ я█я┌п╬ п╬п╨п╫п╬"
 
 #: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
-msgstr "Закрыть текущее окно"
+msgstr "п≈п╟п╨я─я▀я┌я▄ я┌п╣п╨я┐я┴п╣п╣ п╬п╨п╫п╬"
 
 #.
 #. * The "Game" menu
 #.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
-msgstr "Новая игра"
+msgstr "_п²п╟я┤п╟я┌я▄ п╦пЁя─я┐"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Запустить новую игру"
+msgstr "п²п╟я┤п╟я┌я▄ п╫п╬п╡я┐я▌ п╦пЁя─я┐"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr "Пауза в игре"
+msgstr "_п÷я─п╦п╬я│я┌п╟п╫п╬п╡п╦я┌я▄ п╦пЁя─я┐"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Приостановить игру"
+msgstr "п÷я─п╦п╬я│я┌п╟п╫п╬п╡п╦я┌я▄ я█я┌я┐ п╦пЁя─я┐"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
-msgstr "Перезапустить игру"
+msgstr "п÷п╣_я─п╣п╥п╟п©я┐я│я┌п╦я┌я▄ п╦пЁя─я┐"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "Перезапустить игру"
+msgstr "п÷п╣я─п╣п╥п╟п©я┐я│я┌п╦я┌я▄ п╦пЁя─я┐ я│ п╫п╟я┤п╟п╩п╟"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr "Отменить ход"
+msgstr "_п·я┌п╪п╣п╫п╦я┌я▄ я┘п╬п╢"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Отменить последний ход"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄ п©п╬я│п╩п╣п╢п╫п╦п╧ я┘п╬п╢"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "Вернуть ход"
+msgstr "п▓п╬п╥п╡_я─п╟я┌п╦я┌я▄ я┘п╬п╢"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Вернуть отменённый ход"
+msgstr "п▓п╬п╥п╡я─п╟я┌п╦я┌я▄ п╬я┌п╪п╣п╫я▒п╫п╫я▀п╧ я┘п╬п╢"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
-msgstr "Совет"
+msgstr "п÷п╬п╩я┐я┤п╦я┌я▄ _я│п╬п╡п╣я┌"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr "Получить подсказку для следующего хода"
+msgstr "п÷п╬п╩я┐я┤п╦я┌я▄ п©п╬п╢я│п╨п╟п╥п╨я┐ п╢п╩я▐ я│п╩п╣п╢я┐я▌я┴п╣пЁп╬ я┘п╬п╢п╟"
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
-msgstr "Очки..."
+msgstr "_пёп╥п╫п╟я┌я▄ я│я┤я▒я┌..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr "Просмотр очков"
+msgstr "п÷я─п╬я│п╪п╬я┌я─ п╫п╟п╠я─п╟п╫п╫я▀я┘ п╬я┤п╨п╬п╡"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr "Конец игры"
+msgstr "_п≈п╟п╨п╬п╫я┤п╦я┌я▄ п╦пЁя─я┐"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Конец текущей игры"
+msgstr "п≈п╟п╨п╬п╫я┤п╦я┌я▄ я█я┌я┐ п╦пЁя─я┐"
 
 #: libgnomeui/gnome-app-helper.c:2563
 msgid "Both text and icons"
-msgstr "Текст и пиктограммы"
+msgstr "п╒п╣п╨я│я┌ п╦ п©п╦п╨я┌п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-app-helper.c:2564
 msgid "Icons only"
-msgstr "Только пиктограммы"
+msgstr "п╒п╬п╩я▄п╨п╬ п©п╦п╨я┌п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-app-helper.c:2565
 msgid "Text only"
-msgstr "Только текст"
+msgstr "п╒п╬п╩я▄п╨п╬ я┌п╣п╨я│я┌"
 
 #: libgnomeui/gnome-app-helper.c:2616
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr ""
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┐п╪п╬п╩я┤п╟п╫п╦я▐ я─п╟п╠п╬я┤п╣пЁп╬ я│я┌п╬п╩п╟ (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
-msgstr " (нажмите \"Enter\")"
+msgstr " (п╫п╟п╤п╪п╦я┌п╣ \"Enter\")"
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
-msgstr "ОШИБКА:"
+msgstr "п·п╗п≤п▒п п░:"
 
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr "Предупреждение: "
+msgstr "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣: "
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
-msgstr "д"
+msgstr "п╢"
 
 #: libgnomeui/gnome-app-util.c:317
 msgid "yes"
-msgstr "да"
+msgstr "п╢п╟"
 
 #: libgnomeui/gnome-app-util.c:320
 msgid "n"
-msgstr "н"
+msgstr "п╫"
 
 #: libgnomeui/gnome-app-util.c:321
 msgid "no"
-msgstr "нет"
+msgstr "п╫п╣я┌"
 
 #: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
-msgstr " (\"да\" или \"нет\")"
+msgstr " (\"п╢п╟\" п╦п╩п╦ \"п╫п╣я┌\")"
 
 #: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
-msgstr " - ОК? (\"да\" или \"нет\")"
+msgstr " - п·п ? (\"п╢п╟\" п╦п╩п╦ \"п╫п╣я┌\")"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr "Продвижение"
+msgstr "п÷я─п╬п╢п╡п╦п╤п╣п╫п╦п╣"
 
 #: libgnomeui/gnome-app.c:150
 msgid "App ID"
-msgstr "Идентификатор приложения"
+msgstr "п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п©я─п╦п╩п╬п╤п╣п╫п╦я▐"
 
 #: libgnomeui/gnome-app.c:151
 msgid "The application ID string"
-msgstr "Строка идентификатора приложения"
+msgstr "п║я┌я─п╬п╨п╟ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─п╟ п©я─п╦п╩п╬п╤п╣п╫п╦я▐"
 
 #: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
 msgid "History id"
-msgstr "Идентификатор истории"
+msgstr "п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╦я│я┌п╬я─п╦п╦"
 
 #: libgnomeui/gnome-entry.c:178
 msgid "GTK entry"
-msgstr "Запись GTK"
+msgstr "п║я┌я─п╬п╨п╟ GTK"
 
 #: libgnomeui/gnome-entry.c:179
 msgid "The GTK entry"
-msgstr "Запись GTK"
+msgstr "п║я┌я─п╬п╨п╟ GTK"
 
 #: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
 msgid "History ID"
-msgstr "Идентификатор истории"
+msgstr "п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╦я│я┌п╬я─п╦п╦"
 
 #: libgnomeui/gnome-file-entry.c:191
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
+"пёп╫п╦п╨п╟п╩я▄п╫я▀п╧ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╢п╩я▐ я└п╟п╧п╩п╬п╡п╬п╧ я│я┌я─п╬п╨п╦. п·п╫ п╠я┐п╢п╣я┌ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╢п╩я▐ я│п╬я┘я─п╟п╫п╣п╫п╦я▐ "
+"п╦я│я┌п╬я─п╦п╦."
 
 #: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
 msgid "Browse Dialog Title"
-msgstr "Заголовок диалога выбора файла"
+msgstr "п≈п╟пЁп╬п╩п╬п╡п╬п╨ п╢п╦п╟п╩п╬пЁп╟ п╡я▀п╠п╬я─п╟ я└п╟п╧п╩п╟"
 
 #: libgnomeui/gnome-file-entry.c:200
 msgid "Title for the Browse file dialog."
-msgstr "Заголовок диалога выбора файла."
+msgstr "п≈п╟пЁп╬п╩п╬п╡п╬п╨ п╢п╩я▐ п╢п╦п╟п╩п╬пЁп╟ п╡я▀п╠п╬я─п╟ я└п╟п╧п╩п╟."
 
 #: libgnomeui/gnome-file-entry.c:207
 msgid "Directory Entry"
-msgstr "Строка каталога"
+msgstr "п║я┌я─п╬п╨п╟ п╨п╟я┌п╟п╩п╬пЁп╟"
 
 #: libgnomeui/gnome-file-entry.c:208
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Будет ли строка файла использоваться для ввода названия каталога или полного "
-"имени файла."
+"п▒я┐п╢п╣я┌ п╩п╦ я└п╟п╧п╩п╬п╡п╟я▐ я│я┌я─п╬п╨п╟ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄я│я▐ п╢п╩я▐ п╡п╡п╬п╢п╟ п╫п╟п╥п╡п╟п╫п╦я▐ п╨п╟я┌п╟п╩п╬пЁп╟ п╦п╩п╦ п©п╬п╩п╫п╬пЁп╬ "
+"п╦п╪п╣п╫п╦ я└п╟п╧п╩п╟."
 
 #: libgnomeui/gnome-file-entry.c:216
 msgid "Modal"
-msgstr "Модальный"
+msgstr "п°п╬п╢п╟п╩я▄п╫я▀п╧"
 
 #: libgnomeui/gnome-file-entry.c:217
 msgid "Whether the Browse file window should be modal."
-msgstr "Должно ли окно выбора файла быть модальным."
+msgstr "п■п╬п╩п╤п╫п╬ п╩п╦ п╬п╨п╫п╬ п╡я▀п╠п╬я─п╟ я└п╟п╧п╩п╟ п╠я▀я┌я▄ п╪п╬п╢п╟п╩я▄п╫я▀п╪."
 
 #: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
 msgid "Filename"
-msgstr "Имя файла"
+msgstr "п≤п╪я▐ я└п╟п╧п╩п╟"
 
 #: libgnomeui/gnome-file-entry.c:225
 msgid "Filename that should be displayed in the file entry."
-msgstr "Имя файла, которое должно быть отображено в строке файла."
+msgstr "п≤п╪я▐ я└п╟п╧п╩п╟, п╨п╬я┌п╬я─п╬п╣ п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╬я┌п╬п╠я─п╟п╤п╣п╫п╬ п╡ я│я┌я─п╬п╨п╣ я└п╟п╧п╩п╟."
 
 #: libgnomeui/gnome-file-entry.c:233
 msgid "Default Path"
-msgstr "Путь по умолчанию"
+msgstr "п÷я┐я┌я▄ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌"
 
 #: libgnomeui/gnome-file-entry.c:234
 msgid "Default path for the Browse file window."
-msgstr "Путь по умолчанию для окна выбора файла."
+msgstr "п÷я┐я┌я▄ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ п╢п╩я▐ п╬п╨п╫п╟ п╡я▀п╠п╬я─п╟ я└п╟п╧п╩п╟."
 
 #: libgnomeui/gnome-file-entry.c:241
 msgid "GnomeEntry"
@@ -977,6 +985,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
+"GnomeEntry, п╨п╬я┌п╬я─я┐я▌ я└п╟п╧п╩п╬п╡п╟я▐ я│я┌я─п╬п╨п╟ п╦я│п©п╬п╩я▄п╥я┐п╣я┌ п╢п╩я▐ п╡п╡п╬п╢п╟ п╦п╪я▒п╫ я└п╟п╧п╩п╬п╡.  п°п╬п╤п╫п╬ "
+"п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я█я┌п╬ я│п╡п╬п╧я│я┌п╡п╬ п╢п╩я▐ п©п╬п╩я┐я┤п╣п╫п╦я▐ GnomeEntry, п╣я│п╩п╦ п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬ п╪п╬п╢п╦я└п╦я├п╦я─п╬п╡п╟я┌я▄ "
+"п╦п╩п╦ п╥п╟п©я─п╬я│п╦я┌я▄ п╩я▌п╠п╬п╧ п╦п╥ п©п╟я─п╟п╪п╣я┌я─п╬п╡."
 
 #: libgnomeui/gnome-file-entry.c:252
 msgid "GtkEntry"
@@ -988,14 +999,17 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
+"GtkEntry, п╨п╬я┌п╬я─я┐я▌ я└п╟п╧п╩п╬п╡п╟я▐ я│я┌я─п╬п╨п╟ п╦я│п©п╬п╩я▄п╥я┐п╣я┌ п╢п╩я▐ п╡п╡п╬п╢п╟ п╦п╪я▒п╫ я└п╟п╧п╩п╬п╡.  п°п╬п╤п╫п╬ "
+"п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я█я┌п╬ я│п╡п╬п╧я│я┌п╡п╬ п╢п╩я▐ п©п╬п╩я┐я┤п╣п╫п╦я▐ GtkEntry, п╣я│п╩п╦ п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬ п╪п╬п╢п╦я└п╦я├п╦я─п╬п╡п╟я┌я▄ "
+"п╦п╩п╦ п╥п╟п©я─п╬я│п╦я┌я▄ п╩я▌п╠п╬п╧ п╦п╥ п©п╟я─п╟п╪п╣я┌я─п╬п╡."
 
 #: libgnomeui/gnome-file-entry.c:418
 msgid "Select file"
-msgstr "Выбрать файл"
+msgstr "п▓я▀п╠я─п╟я┌я▄ я└п╟п╧п╩"
 
 #: libgnomeui/gnome-file-entry.c:592
 msgid "Browse..."
-msgstr "Просмотр..."
+msgstr "п÷я─п╬я│п╪п╬я┌я─п╣я┌я▄..."
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1003,79 +1017,79 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "В чащах юга жил-был цитрус. Да, но фальшивый экземпляръ!"
+msgstr "п▓ я┤п╟я┴п╟я┘ я▌пЁп╟ п╤п╦п╩-п╠я▀п╩ я├п╦я┌я─я┐я│. п■п╟, п╫п╬ я└п╟п╩я▄я┬п╦п╡я▀п╧ я█п╨п╥п╣п╪п©п╩я▐я─я┼!"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr "Выбрать шрифт"
+msgstr "п▓я▀п╠я─п╟я┌я▄ я┬я─п╦я└я┌"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "Заголовок диалога выбора"
+msgstr "п≈п╟пЁп╬п╩п╬п╡п╬п╨ п╢п╦п╟п╩п╬пЁп╟ п╡я▀п╠п╬я─п╟"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr "Режим"
+msgstr "п═п╣п╤п╦п╪"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr "Режим действия выбора шрифта"
+msgstr "п═п╣п╤п╦п╪ п╢п╣п╧я│я┌п╡п╦я▐ п╡я▀п╠п╬я─п╟ я┬я─п╦я└я┌п╟"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr "Название шрифта"
+msgstr "п²п╟п╥п╡п╟п╫п╦п╣ я┬я─п╦я└я┌п╟"
 
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr "Название выбранного шрифта"
+msgstr "п²п╟п╥п╡п╟п╫п╦п╣ п╡я▀п╠я─п╟п╫п╫п╬пЁп╬ я┬я─п╦я└я┌п╟"
 
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr "Шрифт"
+msgstr "п╗я─п╦я└я┌"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "Выбранный GtkFont"
+msgstr "п▓я▀п╠я─п╟п╫п╫я▀п╧ GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Текст для просмотра"
+msgstr "п╒п╣п╨я│я┌ п╢п╩я▐ п©я─п╬я│п╪п╬я┌я─п╟"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Текст показываемый в строке просмотра"
+msgstr "п╒п╣п╨я│я┌, п©п╬п╨п╟п╥я▀п╡п╟п╣п╪я▀п╧ п╡ я│я┌я─п╬п╨п╣ п©я─п╬я│п╪п╬я┌я─п╟"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "Использовать шрифт в метках"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┬я─п╦я└я┌ п╡ п╪п╣я┌п╨п╟я┘"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Использовать шрифта на метках в режиме информации о шрифте"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┬я─п╦я└я┌ п╡ п╪п╣я┌п╨п╟я┘ п╡ я─п╣п╤п╦п╪п╣ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬ я┬я─п╦я└я┌п╣"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "Размер шрифта для меток"
+msgstr "п═п╟п╥п╪п╣я─ я┬я─п╦я└я┌п╟ п╢п╩я▐ п╪п╣я┌п╬п╨"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Размер шрифта для меток в режиме информации о шрифте"
+msgstr "п═п╟п╥п╪п╣я─ я┬я─п╦я└я┌п╟ п╢п╩я▐ п╪п╣я┌п╬п╨ п╡ я─п╣п╤п╦п╪п╣ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬ я┬я─п╦я└я┌п╣"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "Показывать размер"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ я─п╟п╥п╪п╣я─"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "Показывать размер в режиме информации о шрифте"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ я─п╟п╥п╪п╣я─ п╡ я─п╣п╤п╦п╪п╣ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬ я┬я─п╦я└я┌п╣"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr "Поддержка интерфейса пользователя GNOME GConf"
+msgstr "п÷п╬п╢п╢п╣я─п╤п╨п╟ п╦п╫я┌п╣я─я└п╣п╧я│п╟ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ GNOME GConf"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "п÷п╬_п╢я─п╬п╠п╫п╬"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
@@ -1085,6 +1099,10 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
+"п÷я─п╦п╩п╬п╤п╣п╫п╦п╣ \"%s\" п©п╬п©я▀я┌п╟п╩п╬я│я▄ п╦п╥п╪п╣п╫п╦я┌я▄ я┤я┌п╬-я┌п╬ п╡ п╡п╟я┬п╣п╧ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╦, я┤я┌п╬ п╫п╣ "
+"п©п╬п╥п╡п╬п╩п╣п╫п╬ п╦п╥п╪п╣п╫я▐я┌я▄ я│п╦я│я┌п╣п╪п╫я▀п╪ п╟п╢п╪п╦п╫п╦я│я┌я─п╟я┌п╬я─п╬п╪ п╦п╩п╦ п╬п©п╣я─п╟я├п╦п╬п╫п╫п╬п╧ я│п╦я│я┌п╣п╪п╬п╧. "
+"п²п╣п╨п╬я┌п╬я─я▀п╣ п╦п╥ п╡я▀п╠я─п╟п╫п╫я▀я┘ я┐я│я┌п╟п╫п╬п╡п╬п╨ п╪п╬пЁя┐я┌ п╫п╣ п╦п╪п╣я┌я▄ я█я└я└п╣п╨я┌п╟ п╦п╩п╦ п╪п╬пЁя┐я┌ п╫п╣ п╠я▀я┌я▄ "
+"п╡п╬я│я│я┌п╟п╫п╬п╡п╩п╣п╫я▀ п©я─п╦ я│п╩п╣п╢я┐я▌я┴п╣п╪ п╥п╟п©я┐я│п╨п╣ п©я─п╦п╩п╬п╤п╣п╫п╦я▐."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1092,116 +1110,122 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
+"п÷я─п╬п╦п╥п╬я┬п╩п╟ п╬я┬п╦п╠п╨п╟ п©я─п╦ п╥п╟пЁя─я┐п╥п╨п╣ п╦п╩п╦ я│п╬я┘я─п╟п╫п╣п╫п╦п╦ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫п╬п╧ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╢п╩я▐ %s. "
+"п²п╣п╨п╬я┌п╬я─я▀п╣ п╦п╥ я┐я│я┌п╟п╫п╬п╡п╬п╨ п╪п╬пЁя┐я┌ п╫п╣ я└я┐п╫п╨я├п╦п╬п╫п╦я─п╬п╡п╟я┌я▄ п©я─п╟п╡п╦п╩я▄п╫п╬."
 
 #: libgnomeui/gnome-icon-entry.c:164
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
+"пёп╫п╦п╨п╟п╩я▄п╫я▀п╧ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п╢п╩я▐ я│я┌я─п╬п╨п╦ п©п╦п╨я┌п╬пЁя─п╟п╪п╪я▀. п·п╫ п╠я┐п╢п╣я┌ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╢п╩я▐ я┘я─п╟п╫п╣п╫п╦я▐ "
+"п╦я│я┌п╬я─п╦п╦."
 
 #: libgnomeui/gnome-icon-entry.c:173
 msgid "Title for the Browse icon dialog."
-msgstr "Заголовок диалога выбора пиктограммы."
+msgstr "п≈п╟пЁп╬п╩п╬п╡п╬п╨ п╢п╦п╟п╩п╬пЁп╟ п╡я▀п╠п╬я─п╟ п©п╦п╨я┌п╬пЁя─п╟п╪п╪я▀."
 
 #: libgnomeui/gnome-icon-entry.c:180
 msgid "Pixmap Directory"
-msgstr "Каталог изображений"
+msgstr "п п╟я┌п╟п╩п╬пЁ п╦п╥п╬п╠я─п╟п╤п╣п╫п╦п╧"
 
 #: libgnomeui/gnome-icon-entry.c:181
 msgid "Directory that will be searched for icons."
-msgstr "Каталог, в котором будет производиться поиск пиктограмм."
+msgstr "п п╟я┌п╟п╩п╬пЁ, п╡ п╨п╬я┌п╬я─п╬п╪ п╠я┐п╢п╣я┌ п©я─п╬п╦п╥п╡п╬п╢п╦я┌я▄я│я▐ п©п╬п╦я│п╨ п©п╦п╨я┌п╬пЁя─п╟п╪п╪."
 
 #: libgnomeui/gnome-icon-entry.c:189
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Имя файла, которое должно быть отображено в строке пиктограммы."
+msgstr "п≤п╪я▐ я└п╟п╧п╩п╟, п╨п╬я┌п╬я─п╬п╣ п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╬я┌п╬п╠я─п╟п╤п╣п╫п╬ п╡ я│я┌я─п╬п╨п╣ п©п╦п╨я┌п╬пЁя─п╟п╪п╪я▀."
 
 #: libgnomeui/gnome-icon-entry.c:197
 msgid "Picker dialog"
-msgstr "Окно выбора"
+msgstr "п·п╨п╫п╬ п╡я▀п╠п╬я─п╟"
 
 #: libgnomeui/gnome-icon-entry.c:198
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"п■п╦п╟п╩п╬пЁ п╡я▀п╠п╬я─п╟ п©п╦п╨я┌п╬пЁя─п╟п╪п╪. п°п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я█я┌п╬ я│п╡п╬п╧я│я┌п╡п╬ п╢п╩я▐ п©п╬п╩я┐я┤п╣п╫п╦я▐  "
+"GtkDialog, п╣я│п╩п╦ п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬ п╦п╥п╪п╣п╫п╦я┌я▄ п╦п╩п╦ п╥п╟п©я─п╬я│п╦я┌я▄ п╩я▌п╠п╬п╣ п╦п╥ я│п╡п╬п╧я│я┌п╡."
 
 #: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 msgid "No Icon"
-msgstr "Нет пиктограммы"
+msgstr "п²п╣я┌ п©п╦п╨я┌п╬пЁя─п╟п╪п╪я▀"
 
 #: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Не удалось найти hbox, используется обычное выделение файлов"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╫п╟п╧я┌п╦ hbox, п╦я│п©п╬п╩я▄п╥я┐п╣я┌я│я▐ п╬п╠я▀я┤п╫п╬п╣ п╡я▀п╢п╣п╩п╣п╫п╦п╣ я└п╟п╧п╩п╬п╡"
 
 #: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
-msgstr "Просмотр"
+msgstr "п÷я─п╣п╢п╡п╟я─п╦я┌п╣п╩я▄п╫я▀п╧ п©я─п╬я│п╪п╬я┌я─"
 
 #: libgnomeui/gnome-icon-entry.c:930
 msgid "Browse"
-msgstr "Просмотр"
+msgstr "п÷я─п╬я│п╪п╬я┌я─"
 
 #: libgnomeui/gnome-icon-sel.c:296
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: \"%s\" не существует или не является каталогом"
+msgstr "GnomeIconSelection: \"%s\" п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌ п╦п╩п╦ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╨п╟я┌п╟п╩п╬пЁп╬п╪"
 
 #: libgnomeui/gnome-icon-sel.c:304
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: не удалось открыть каталог \"%s\""
+msgstr "GnomeIconSelection: п╫п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\""
 
 #: libgnomeui/gnome-icon-sel.c:411
 msgid "Loading Icons..."
-msgstr "Загрузка пиктограмм..."
+msgstr "п≈п╟пЁя─я┐п╥п╨п╟ п©п╦п╨я┌п╬пЁя─п╟п╪п╪..."
 
 #: libgnomeui/gnome-messagebox.c:110
 msgid "Information"
-msgstr "Информация"
+msgstr "п≤п╫я└п╬я─п╪п╟я├п╦я▐"
 
 #: libgnomeui/gnome-messagebox.c:115
 msgid "Warning"
-msgstr "Предупреждение"
+msgstr "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣"
 
 #: libgnomeui/gnome-messagebox.c:121
 msgid "Error"
-msgstr "Ошибка"
+msgstr "п·я┬п╦п╠п╨п╟"
 
 #: libgnomeui/gnome-messagebox.c:127
 msgid "Question"
-msgstr "Вопрос"
+msgstr "п▓п╬п©я─п╬я│"
 
 #: libgnomeui/gnome-messagebox.c:132
 msgid "Message"
-msgstr "Сообщение"
+msgstr "п║п╬п╬п╠я┴п╣п╫п╦п╣"
 
 #: libgnomeui/gnome-pixmap-entry.c:118
 msgid "Do Preview"
-msgstr "Просмотривать"
+msgstr "п÷я─п╬я│п╪п╟я┌я─п╦п╡п╟я┌я▄"
 
 #: libgnomeui/gnome-pixmap-entry.c:119
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Надо ли показывать изображение предварительного просмотра"
+msgstr "п²п╟п╢п╬ п╩п╦ п©п╬п╨п╟п╥я▀п╡п╟я┌я▄ п╦п╥п╬п╠я─п╟п╤п╣п╫п╦п╣ п©я─п╣п╢п╡п╟я─п╦я┌п╣п╩я▄п╫п╬пЁп╬ п©я─п╬я│п╪п╬я┌я─п╟"
 
 #: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
 msgid "No Image"
-msgstr "Нет изображения"
+msgstr "п²п╣я┌ п╦п╥п╬п╠я─п╟п╤п╣п╫п╦я▐"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr "Верхние десять"
+msgstr "п▓п╣я─я┘п╫п╦п╣ п╢п╣я│я▐я┌я▄"
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
-msgstr "Пользователь"
+msgstr "п÷п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr "Очки"
+msgstr "п║я┤я▒я┌"
 
 #: libgnomeui/gnome-scores.c:97
 msgid "Date"
-msgstr "Дата"
+msgstr "п■п╟я┌п╟"
 
 #. the localized string should fit (after replacing the %a %b
 #. etc) in ~18 chars.
@@ -1212,47 +1236,9 @@ msgstr "Дата"
 #.
 #: libgnomeui/gnome-scores.c:199
 msgid "%a %b %d %T %Y"
-msgstr "%a %d %b"
+msgstr "%a, %d %b"
 
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "Подробности ошибки GConf: %s\n"
-
-#~ msgid "Exit the test"
-#~ msgstr "Выход из теста"
-
-#~ msgid "FLAGS"
-#~ msgstr "ФЛАГИ"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Название программы используемое диспетчером окон"
-
-#~ msgid "NAME"
-#~ msgstr "НАЗВАНИЕ"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Класс программы используемый диспетчером окон"
-
-#~ msgid "CLASS"
-#~ msgstr "КЛАСС"
-
-#~ msgid "HOST"
-#~ msgstr "ХОСТ"
-
-#~ msgid "PORT"
-#~ msgstr "ПОРТ"
-
-#~ msgid "STYLE"
-#~ msgstr "СТИЛЬ"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Загрузить дополнительный модуль Gtk"
-
-#~ msgid "MODULE"
-#~ msgstr "МОДУЛЬ"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
