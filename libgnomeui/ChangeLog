@@ -1,3 +1,8 @@
+1998-11-25  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* gnome-app-helper.c (gnome_app_configure_toolbar)
+	only replace [hv]separators, not all GTK_TOOLBAR_CHILD_WIDGETs!
+
 1998-11-25  James Henstridge  <james@daa.com.au>
 
 	* gtkcauldron.h (constants): Altered the values of a few of the
