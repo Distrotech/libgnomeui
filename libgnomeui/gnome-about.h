@@ -1,9 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
-
 /* gnome-about.h - An about box widget for gnome.
 
    Copyright (C) 2001 CodeFactory AB
-   Copyright (C) Anders Carlsson <andersca@codefactory.se>
+   Copyright (C) 2001 Anders Carlsson <andersca@codefactory.se>
 
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -38,13 +37,33 @@ G_BEGIN_DECLS
 #define GNOME_ABOUT_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_ABOUT, GnomeAboutClass))
 
 typedef struct _GnomeAbout GnomeAbout;
-typedef struct _GnomeAboutPrivate GnomeAboutPrivate;
 typedef struct _GnomeAboutClass GnomeAboutClass;
 
 struct _GnomeAbout {
 	GtkDialog parent_instance;
 
-	GnomeAboutPrivate *_priv;
+	gchar *name;
+	gchar *version;
+	gchar *copyright;
+	gchar *comments;
+	
+	GSList *authors;
+	GSList *documenters;
+
+	gchar *translator_credits;
+	
+	gint displaying_state;
+	
+	GtkWidget *drawing_area;
+	
+	GdkPixbuf *background_pixbuf;
+	GdkPixbuf *rendered_background_pixbuf;
+	gdouble gradient_start_opacity, gradient_end_opacity;
+	gdouble gradient_start_position, gradient_end_position;
+
+	GdkPixbuf *logo_pixbuf;
+	gint logo_top_padding;
+	gint logo_right_padding;
 };
 
 struct _GnomeAboutClass {
@@ -52,6 +71,15 @@ struct _GnomeAboutClass {
 };
 
 GType gnome_about_get_type (void);
+
+GtkWidget *gnome_about_new (const gchar  *name,
+			    const gchar  *version,
+			    const gchar  *copyright,
+			    const gchar  *comments,
+			    const gchar **authors,
+			    const gchar **documenters,
+			    const gchar  *translator_credits,
+			    GdkPixbuf    *logo_pixbuf);
 
 G_END_DECLS
 

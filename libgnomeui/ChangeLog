@@ -1,3 +1,9 @@
+2001-09-05  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-about.h: Add new GnomeAbout widget.
+
+	* gnome-about.c: Add new GnomeAbout widget.
+
 2001-09-04  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-entry.c: (gnome_entry_class_init), (entry_activated),
