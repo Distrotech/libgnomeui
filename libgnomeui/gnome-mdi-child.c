@@ -8,7 +8,6 @@
 static void gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void gnome_mdi_child_init             (GnomeMDIChild *);
 static void gnome_mdi_child_destroy          (GtkObject *);
-static void gnome_mdi_child_real_changed     (GnomeMDIChild *, gpointer);
 
 enum {
   CREATE_VIEW,
@@ -100,7 +99,6 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *class) {
 static void gnome_mdi_child_init (GnomeMDIChild *mdi_child) {
   mdi_child->name = NULL;
   mdi_child->views = NULL;
-  mdi_child->changed = FALSE;
 }
 
 GnomeMDIChild *gnome_mdi_child_new () {

@@ -35,8 +35,6 @@ struct _GnomeMDIChild
   GList *views;
 
   GnomeUIInfo *menu_template;
-
-  gboolean changed;
 };
 
 struct _GnomeMDIChildClass
@@ -50,7 +48,6 @@ struct _GnomeMDIChildClass
 guint         gnome_mdi_child_get_type         (void);
 
 GnomeMDIChild *gnome_mdi_child_new             (void);
-GList         *gnome_mdi_child_get_views       (GnomeMDIChild *);
 
 GtkWidget     *gnome_mdi_child_add_view        (GnomeMDIChild *);
 void          gnome_mdi_child_remove_view      (GnomeMDIChild *, GtkWidget *view);

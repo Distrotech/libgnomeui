@@ -1,3 +1,8 @@
+1998-06-28  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-child.[ch]: removed declaration of non-existing
+	gnome_mdi_get_views() and removed some other stale stuff.
+	
 1998-06-28  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-scores.c: Included 'gnome-i18nP.h' instead of 'gnome-i18n.h'.
