@@ -74,14 +74,14 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
 
-	gtk_object_add_arg_type ("GnomeCanvasRE::x1",  		 GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X1);
-	gtk_object_add_arg_type ("GnomeCanvasRE::y1",  		 GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y1);
-	gtk_object_add_arg_type ("GnomeCanvasRE::x2",  		 GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X2);
-	gtk_object_add_arg_type ("GnomeCanvasRE::y2",  		 GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y2);
-	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color",    GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
+	gtk_object_add_arg_type ("GnomeCanvasRE::x1", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X1);
+	gtk_object_add_arg_type ("GnomeCanvasRE::y1", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y1);
+	gtk_object_add_arg_type ("GnomeCanvasRE::x2", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X2);
+	gtk_object_add_arg_type ("GnomeCanvasRE::y2", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y2);
+	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasRE::width_pixels",  GTK_TYPE_UINT,   GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
-	gtk_object_add_arg_type ("GnomeCanvasRE::width_units",   GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
+	gtk_object_add_arg_type ("GnomeCanvasRE::width_pixels", GTK_TYPE_UINT,   GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
+	gtk_object_add_arg_type ("GnomeCanvasRE::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 
 	object_class->set_arg = gnome_canvas_re_set_arg;
 
@@ -210,8 +210,7 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 
 	if (calc_gcs)
-		if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure)
-			(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 
 	if (calc_bounds)
 		recalc_bounds (re);

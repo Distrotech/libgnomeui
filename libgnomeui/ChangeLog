@@ -1,3 +1,14 @@
+1998-07-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_update_now): New public function
+	that tells the canvas to redraw itself immediately, instead of
+	waiting for the idle loop.
+
+	* gnome-canvas-text.c: New text item for the canvas, still not finished.
+
+	* libgnomeui.h: 
+	* Makefile.am: Added gnome-canvas-text.[ch].
+
 1998-07-05  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gnome-mdi.c (app_create): Fixed a typo.

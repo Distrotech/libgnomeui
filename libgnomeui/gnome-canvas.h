@@ -285,6 +285,9 @@ void gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n);
 /* Sets the size in pixels of the canvas */
 void gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height);
 
+/* Requests that the canvas be repainted immediately instead of in the idle loop. */
+void gnome_canvas_update_now (GnomeCanvas *canvas);
+
 /* For use only by item type implementations.  Request that the canvas eventually redraw the
  * specified region.  The region contains (x1, y1) but not (x2, y2).
  */

@@ -350,6 +350,9 @@ static double gnome_canvas_group_point       (GnomeCanvasItem *item, double x, d
 static void   gnome_canvas_group_translate   (GnomeCanvasItem *item, double dx, double dy);
 
 
+static GnomeCanvasItemClass *group_parent_class;
+
+
 GtkType
 gnome_canvas_group_get_type (void)
 {
@@ -380,6 +383,8 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
+
+	group_parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
 	gtk_object_add_arg_type ("GnomeCanvasGroup::x", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, GROUP_ARG_X);
 	gtk_object_add_arg_type ("GnomeCanvasGroup::y", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, GROUP_ARG_Y);
@@ -456,7 +461,19 @@ gnome_canvas_group_new (GnomeCanvas *canvas)
 static void
 gnome_canvas_group_destroy (GtkObject *object)
 {
-	/* FIXME */
+	GnomeCanvasGroup *group;
+	GList *list;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_GROUP (object));
+
+	group = GNOME_CANVAS_GROUP (object);
+
+	for (list = group->item_list; list; list = list->next)
+		gtk_object_destroy (list->data);
+
+	if (GTK_OBJECT_CLASS (group_parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (group_parent_class)->destroy) (object);
 }
 
 static void
@@ -648,7 +665,20 @@ gnome_canvas_group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 void
 gnome_canvas_group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
-	/* FIXME */
+	GList *list_item;
+
+	g_return_if_fail (group != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_GROUP (group));
+	g_return_if_fail (item != NULL);
+
+	list_item = g_list_find (group->item_list, item);
+	if (!list_item)
+		return;
+
+	if (!list_item->next)
+		group->item_list_end = list_item->prev;
+
+	group->item_list = g_list_remove_link (group->item_list, list_item);
 }
 
 void
@@ -831,7 +861,7 @@ gnome_canvas_destroy (GtkObject *object)
 
 	canvas = GNOME_CANVAS (object);
 
-	/* FIXME */
+	gtk_object_destroy (GTK_OBJECT (canvas->root));
 
 	if (GTK_OBJECT_CLASS (canvas_parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (canvas_parent_class)->destroy) (object);
@@ -1539,6 +1569,19 @@ gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height)
 	canvas->height = height;
 
 	gtk_widget_queue_resize (GTK_WIDGET (canvas));
+}
+
+void
+gnome_canvas_update_now (GnomeCanvas *canvas)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	if (!canvas->need_redraw)
+		return;
+
+	idle_handler (canvas);
+	gtk_idle_remove (canvas->idle_id);
 }
 
 void

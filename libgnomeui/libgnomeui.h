@@ -13,6 +13,7 @@
 #ifdef GDK_HAVE_FULL_CROSSING_EVENT
 #include "libgnomeui/gnome-canvas.h"
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"
+#include "libgnomeui/gnome-canvas-text.h"
 #endif
 #include "libgnomeui/gnome-color-selector.h"
 #include "libgnomeui/gnome-dialog.h"

@@ -24,9 +24,9 @@ INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) $(GTK_CFLAGS) $(SUPPORTINCS) \
 
 
 # these files are `autoconf'ed in.
-EXTRA_libgnomeui_la_SOURCES = gnome-canvas.c gnome-canvas-rect-ellipse.c
+EXTRA_libgnomeui_la_SOURCES = gnome-canvas.c gnome-canvas-rect-ellipse.c gnome-canvas-text.c
 
-EXTRA_HEADERS = gnome-canvas.h gnome-canvas-rect-ellipse.h
+EXTRA_HEADERS = gnome-canvas.h gnome-canvas-rect-ellipse.h gnome-canvas-text.h
 
 libgnomeui_la_DEPENDENCIES = @GNOME_CANVAS_OBJS@
 
