@@ -126,7 +126,7 @@ gnome_create_pixmap_gtk_d (GtkWidget *window, GdkPixmap **pixmap, GdkBitmap **ma
 
 	style = gtk_widget_get_style (holder);
 
-	*pixmap = gdk_pixmap_create_from_xpm_d (window->window, &mask, &style->bg[GTK_STATE_NORMAL], data);
+	*pixmap = gdk_pixmap_create_from_xpm_d (window->window, mask, &style->bg[GTK_STATE_NORMAL], data);
 }
 
 GtkWidget *
