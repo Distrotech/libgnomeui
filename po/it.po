@@ -1,14 +1,16 @@
 # Italian localization for libgnomeui-2
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Christopher R. Gabriel <cgabriel@cgabriel.org>, 2001
+# Alessio Frusciante <algol@firenze.linux.it>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
-"PO-Revision-Date: 2002-03-03 17:35+0100\n"
-"Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
-"Language-Team: Italian <it@li.org>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-13 10:05+0200\n"
+"PO-Revision-Date: 2003-06-13 11:01+0200\n"
+"Last-Translator: Alessio Frusciante <algol@firenze.linux.it>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,32 +21,29 @@ msgstr "Oggetto Figlio 1"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr "Suggerimenti per l'Oggetto 1"
+msgstr "Suggerimenti per l'oggetto 1"
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr ""
+msgstr "Oggetto figlio 2"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "Oggetto Figlio 2"
+msgstr "Suggerimenti per l'oggetto 2"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr "Autori"
 
 #: libgnomeui/gnome-about.c:230
-#, fuzzy
 msgid "Written by"
 msgstr "Scritto da"
 
 #: libgnomeui/gnome-about.c:245
-#, fuzzy
 msgid "Documented by"
 msgstr "Documentato da"
 
 #: libgnomeui/gnome-about.c:260
-#, fuzzy
 msgid "Translated by"
 msgstr "Tradotto da"
 
@@ -110,6 +109,7 @@ msgid "List of people documenting the program"
 msgstr "Lista delle persone che hanno redatto la documentazione"
 
 #: libgnomeui/gnome-about.c:422
+#, fuzzy
 msgid "Documenter entry"
 msgstr "Documentazione"
 
@@ -142,6 +142,7 @@ msgstr "Informazioni su %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -159,11 +160,11 @@ msgstr "_Modifica/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_Vista"
+msgstr "_Visualizza"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "_Vista/"
+msgstr "_Visualizza/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Gioco"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aiuto"
 
@@ -244,9 +246,8 @@ msgstr "Ripristina alla versione salvata del file"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
 msgid "_Print..."
-msgstr "_Stampa"
+msgstr "_Stampa..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -286,7 +287,6 @@ msgstr "Su questa applicazione"
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-#, fuzzy
 msgid "Cu_t"
 msgstr "_Taglia"
 
@@ -360,9 +360,8 @@ msgstr "Cerca ancora la stessa stringa"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
 msgid "R_eplace..."
-msgstr "_Sostituisci.."
+msgstr "_Sostituisci..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -370,9 +369,8 @@ msgstr "Sostituisce una stringa"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
-msgstr "_Proprietà..."
+msgstr "_Proprietà"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -383,9 +381,8 @@ msgstr "Modifca le proprietà del file"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "_Preferenze..."
+msgstr "_Preferenze"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -396,11 +393,11 @@ msgstr "Configura l'applicazione"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Informazioni"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Su questa applicazione"
 
@@ -428,7 +425,7 @@ msgstr "Crea una nuova finestra"
 msgid "_Close This Window"
 msgstr "_Chiudi questa finestra"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Chiude la finestra corrente"
 
@@ -502,7 +499,7 @@ msgstr "Termina la partita corrente"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr ""
+msgstr "_Sommario"
 
 #: libgnomeui/gnome-app-helper.c:1146
 #, fuzzy
@@ -511,21 +508,19 @@ msgstr "Su questa applicazione"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr ""
+msgstr "Testo sotto le icone"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2568
-#, fuzzy
 msgid "Icons Only"
-msgstr "Solo Icone"
+msgstr "Solo icone"
 
 #: libgnomeui/gnome-app-helper.c:2569
-#, fuzzy
 msgid "Text Only"
-msgstr "Solo Testo"
+msgstr "Solo testo"
 
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
@@ -617,15 +612,15 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "La password sarà trasmessa in chiaro."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "La password sarà trasmessa cifrata."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Autenticazione richiesta"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -660,9 +655,8 @@ msgid "Received invalid color data\n"
 msgstr "Ricevuti dati colore non validi\n"
 
 #: libgnomeui/gnome-color-picker.c:464
-#, fuzzy
 msgid "Color Selector"
-msgstr "Cancella la selezione"
+msgstr "Selezione colori"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
@@ -908,8 +902,9 @@ msgid "Default Path"
 msgstr "Percorso predefinito"
 
 #: libgnomeui/gnome-file-entry.c:264
+#, fuzzy
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "Percorso predefinito per la finestra"
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
@@ -1289,27 +1284,27 @@ msgstr "Non indentare"
 msgid "About"
 msgstr "Informazioni"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "X display to use"
 msgstr "Display X da utilizzare"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:125
 msgid "GNOME GUI Library"
 msgstr "Libreria per la GUI di GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Si sono verificati errori di segmentazione multipli; impossibile "
 "visualizzare la finestre di errore\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:637
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1359,6 +1354,10 @@ msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Per maggiori informazioni visitare la pagina per il crash delle applicazioni "
 "GNOME"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Termina il test"
 
 #~ msgid "_Credits"
 #~ msgstr "_Credits_"
@@ -1428,6 +1427,3 @@ msgstr ""
 
 #~ msgid "GTK+"
 #~ msgstr "GTK+"
-
-#~ msgid "Exit the test"
-#~ msgstr "Termina il test"
