@@ -96,6 +96,7 @@ libgnomeui_la_SOURCES = \
         gnome-winhints.c		\
         gnome-paper-selector.c		\
 	gnome-procbar.c			\
+	gnome-window.c			\
 	gnome-window-icon.c		\
 	gnometypes.c			\
 	gtkcauldron.c			\
@@ -177,6 +178,7 @@ gnome_headers = \
         gnome-winhints.h		\
         gnome-paper-selector.h		\
 	gnome-procbar.h			\
+	gnome-window.h			\
 	gnome-window-icon.h		\
 	gtkcauldron.h			\
 	gtkdial.h			\
