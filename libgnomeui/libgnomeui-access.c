@@ -90,6 +90,7 @@ _add_atk_relation (GtkWidget *widget1, GtkWidget *widget2,
 	relation = atk_relation_new (targets, 1, w1_to_w2);
 	atk_relation_set_add (relation_set, relation);
 	g_object_unref (relation);
+	g_object_unref (relation_set);
 
 	/* Create the widget2 -> widget1 relation */
 	relation_set = atk_object_ref_relation_set (atk_widget2);
@@ -97,6 +98,7 @@ _add_atk_relation (GtkWidget *widget1, GtkWidget *widget2,
 	relation = atk_relation_new (targets, 1, w2_to_w1);
 	atk_relation_set_add (relation_set, relation);
 	g_object_unref (relation);
+	g_object_unref (relation_set);
 }
 
 
