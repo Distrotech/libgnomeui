@@ -52,9 +52,9 @@ BEGIN_GNOME_DECLS
 
 #define GNOME_TYPE_APP            (gnome_app_get_type ())
 #define GNOME_APP(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_APP, GnomeApp))
-//#define GNOME_APP_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_APP, GnomeAppClass))
+#define GNOME_APP_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_APP, GnomeAppClass))
 #define GNOME_IS_APP(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_APP))
-//#define GNOME_IS_APP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_APP))
+#define GNOME_IS_APP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_APP))
 
 
 typedef struct _GnomeApp       GnomeApp;
