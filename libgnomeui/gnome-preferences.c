@@ -22,6 +22,36 @@
 #include "libgnome/gnome-config.h"
 #include <string.h>
 
+
+typedef struct _GnomePreferences GnomePreferences;
+
+struct _GnomePreferences {
+  GtkButtonBoxStyle dialog_buttons_style;
+  int property_box_buttons_ok : 1;
+  int property_box_buttons_apply : 1;
+  int property_box_buttons_close : 1;
+  int property_box_buttons_help : 1;
+  int statusbar_not_dialog : 1;
+  int statusbar_is_interactive : 1;
+  int statusbar_meter_on_right : 1;
+  int menubar_detachable : 1;
+  int menubar_relief : 1;
+  int toolbar_detachable : 1;
+  int toolbar_relief : 1;
+  int toolbar_relief_btn : 1;
+  int toolbar_lines : 1;
+  int toolbar_labels : 1;
+  int dialog_centered : 1;
+  int menus_have_tearoff : 1;
+  int menus_have_icons : 1;
+  int disable_imlib_cache : 1;
+  GtkWindowType dialog_type;
+  GtkWindowPosition dialog_position;
+  GnomeMDIMode mdi_mode;
+  GtkPositionType mdi_tab_pos;
+};
+
+
 /* 
  * Variable holds current preferences.  
  */

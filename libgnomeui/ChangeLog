@@ -1,3 +1,14 @@
+1999-12-14  Havoc Pennington  <hp@redhat.com>
+
+	* libgnomeui.schemas: schemas file for UI Preferences.
+
+	* libgnomeui.h: GNOME_EXCLUDE_DEPRECATED on gnome-preferences.h
+
+	* gnome-preferences.h: Comment that says this stuff is deprecated.
+
+	* gnome-preferences.c: Move GnomePreferences struct back into .c
+	file; with GConf, it should not be public.
+
 1999-12-13  Havoc Pennington  <hp@redhat.com>
 
 	* gnome-cursors.c (gnome_stock_cursor_new): support standard X

@@ -65,7 +65,9 @@
 #include "libgnomeui/gnome-popup-help.h"
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-pixmap-entry.h"
+#ifndef GNOME_EXCLUDE_DEPRECATED
 #include "libgnomeui/gnome-preferences.h"
+#endif
 #include "libgnomeui/gnome-propertybox.h"
 /* The gnome-properties and gnome-property-entries modules should be finished or
  * deprecated by gnome-2.0 */
