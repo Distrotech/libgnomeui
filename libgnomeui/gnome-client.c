@@ -2099,7 +2099,7 @@ gnome_client_set_global_config_prefix (GnomeClient *client, gchar* prefix)
  * @client: Pointer to GNOME session client object.
  *
  * Description: Get the config prefix that will be returned by
- * <function>gnome_client_get_config_prefix()</function> for clients
+ * #gnome_client_get_config_prefix() for clients
  * which have NOT been restarted or cloned (i.e. for clients started
  * by the user without `--sm-' options). This config prefix may be
  * used to write the user's preferred config for these "new" clients.
@@ -2109,7 +2109,7 @@ gnome_client_set_global_config_prefix (GnomeClient *client, gchar* prefix)
  * app. However, this practice limits the users freedom to configure
  * each instance in a different way so it should be used with caution.
  *
- * Returns:  Pointer to
+ * Returns:  The config prefix as a newly allocated string
  **/
 
 gchar *

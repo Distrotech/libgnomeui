@@ -1,3 +1,9 @@
+Sat Aug 21 11:13:54 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-client.c: touched up docs for
+	  gnome_client_get_global_config_prefix, still this file has
+	  a bunch of things that need fixing in the docs
+
 Sat Aug 21 11:06:57 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-app.c: fix so that documentation for gnome_app_add_dock_item
