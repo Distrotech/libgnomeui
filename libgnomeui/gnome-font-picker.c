@@ -808,8 +808,10 @@ void gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
 
     /* Load font */
     font=gdk_font_load(pStr);
-    if (!font)
+    if (!font) {
+      g_free (pStr);
       return; /* Use widget default */
+    }
 
     g_return_if_fail( font != NULL );
 
