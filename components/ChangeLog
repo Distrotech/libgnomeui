@@ -1,3 +1,10 @@
+2001-06-13  Martin Baulig  <baulig@suse.de>
+
+	* gnome-entry-component.[ch]: Moved to libgnome-extras/components.
+	* gnome-icon-selector-component.[ch]: Likewise.
+	* gnome-image-entry-component.[ch]: Likewise.
+	* selector-components.xmldb: Likewise.
+
 2001-06-04  Martin Baulig  <baulig@suse.de>
 
 	* gnome-entry-component.c (PROP_IS_FILE_ENTRY): New property.

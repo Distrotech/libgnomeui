@@ -32,60 +32,7 @@
 #include <bonobo/bonobo-ui-main.h>
 #include <bonobo/bonobo-shlib-factory.h>
 #include <bonobo/bonobo-item-handler.h>
-#include <libgnome/gnome-selector-factory.h>
-#include "gnome-icon-selector-component.h"
-#include "gnome-image-entry-component.h"
-#include "gnome-entry-component.h"
-
-static Bonobo_Unknown
-image_entry_get_object_fn (BonoboItemHandler *h, const char *item_name,
-			   gboolean only_if_exists, gpointer data,
-			   CORBA_Environment *ev)
-{
-    GSList *options, *c;
-    gboolean is_pixmap_entry = FALSE;
-    guint preview_x = 0, preview_y = 0;
-    GnomeSelector *selector = NULL;
-
-    options = bonobo_item_option_parse (item_name);
-
-    for (c = options; c; c = c->next) {
-	BonoboItemOption *option = c->data;
-
-	if (!strcmp (option->key, "type")) {
-	    is_pixmap_entry = !strcmp (option->value, "pixmap");
-	} else if (!strcmp (option->key, "preview-x")) {
-	    preview_x = atoi (option->value);
-	} else if (!strcmp (option->key, "preview-y")) {
-	    preview_y = atoi (option->value);
-	} else {
-	    g_warning (G_STRLOC ": unknown option `%s'", option->key);
-	}
-    }
-
-    if (is_pixmap_entry) {
-	if ((preview_x > 0) && (preview_y) > 0)
-	    selector = g_object_new (gnome_image_entry_component_get_type (),
-				     "is_pixmap_entry", TRUE,
-				     "preview_x", preview_x,
-				     "preview_y", preview_y,
-				     NULL);
-	else
-	    selector = g_object_new (gnome_image_entry_component_get_type (),
-				     "is_pixmap_entry", TRUE,
-				     NULL);
-    } else {
-	selector = g_object_new (gnome_image_entry_component_get_type (),
-				 "is_pixmap_entry", FALSE,
-				 NULL);
-    }
-
-    bonobo_item_options_free (options);
-
-    bonobo_object_dump_interfaces (BONOBO_OBJECT (selector));
-
-    return BONOBO_OBJREF (selector);
-}
+#include <libbonobo.h>
 
 static BonoboObject *
 libgnomeui_components_factory (BonoboGenericFactory *this, 
@@ -98,50 +45,7 @@ libgnomeui_components_factory (BonoboGenericFactory *this,
 	initialized = TRUE;             
     }
 
-    if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_IconSelectorFactory")) {
-	GnomeSelectorFactory *factory;
-
-	factory = gnome_selector_factory_new (gnome_icon_selector_component_get_type ());
-
-	return BONOBO_OBJECT (factory);
-    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_IconSelector")) {
-	GnomeSelector *selector;
-
-	selector = g_object_new (gnome_icon_selector_component_get_type (), NULL);
-
-	return BONOBO_OBJECT (selector);
-    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_ImageEntry")) {
-	GnomeSelectorFactory *factory;
-
-	factory = gnome_selector_factory_new (gnome_image_entry_component_get_type ());
-
-	return BONOBO_OBJECT (factory);
-    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_ImageEntry_Item")) {
-	BonoboItemHandler *item_handler;
-
-	item_handler = bonobo_item_handler_new (NULL, image_entry_get_object_fn, NULL);
-
-	return BONOBO_OBJECT (item_handler);
-    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_EntryFactory")) {
-	GnomeSelectorFactory *factory;
-
-	factory = gnome_selector_factory_new (gnome_entry_component_get_type ());
-
-	return BONOBO_OBJECT (factory);
-    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_Entry")) {
-	GnomeSelector *selector;
-
-	selector = g_object_new (gnome_entry_component_get_type (), "is-file-entry", FALSE, NULL);
-
-	return BONOBO_OBJECT (selector);
-    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_FileEntry")) {
-	GnomeSelector *selector;
-
-	selector = g_object_new (gnome_entry_component_get_type (), "is-file-entry", TRUE, NULL);
-
-	return BONOBO_OBJECT (selector);
-    } else
-	g_warning ("Failing to manufacture a '%s'", object_id);
+    g_warning ("Failing to manufacture a '%s'", object_id);
         
     return NULL;
 }
