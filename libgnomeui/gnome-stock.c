@@ -445,7 +445,7 @@ build_disabled_pixmap(GnomePixmap **inout_pixmap)
         GdkGC *gc;
         GdkWindow *pixmap = (*inout_pixmap)->pixmap;
         GtkStyle *style;
-        gint w, h, x, y;
+        gint w, h, x, y, n;
         GdkGCValues vals;
         GdkVisual *visual;
         GdkImage *image;
@@ -454,15 +454,27 @@ build_disabled_pixmap(GnomePixmap **inout_pixmap)
         GdkColormap *cmap;
         gint32 red, green, blue;
 
-	if (!GTK_WIDGET_REALIZED(*inout_pixmap))
-		gtk_widget_realize(*inout_pixmap);
-
-        style = gtk_widget_get_style(*inout_pixmap);
-        gc = style->bg_gc[GTK_STATE_INSENSITIVE];
         gdk_window_get_size(pixmap, &w, &h);
-        visual = gtk_widget_get_visual(*inout_pixmap);
-        cmap = gtk_widget_get_colormap(*inout_pixmap);
+        visual = gtk_widget_get_visual(GTK_WIDGET(*inout_pixmap));
+        cmap = gtk_widget_get_colormap(GTK_WIDGET(*inout_pixmap));
         cc = gdk_color_context_new(visual, cmap);
+        gc = gdk_gc_new (pixmap);
+
+	/* FIXME: this uses a hardcoded gray color, which is the same
+	 * default background for Gtk widgets.  It should really be
+	 * using the color from the widget's style.  Unfortunately, we
+	 * can't use the widget style as the widget may not have been
+	 * realized yet.  If you force-realize it here, you'll get
+	 * unparented windows.
+	 */
+
+	color.red = color.green = color.blue = 0xd6d6;
+	color.pixel = 0;
+	n = 0;
+	gdk_color_context_get_pixels (cc, &color.red, &color.green, &color.blue, 1,
+				      &color.pixel, &n);
+
+	gdk_gc_set_foreground (gc, &color);
 #ifdef NOT_ALLWAYS_SHADE
         if ((cc->mode != GDK_CC_MODE_TRUE) &&
             (cc->mode != GDK_CC_MODE_MY_GRAY)) {

@@ -12,6 +12,9 @@
 	has not been parented yet, and looks extremely ugly, and doesn't
 	work.
 
+	(build_disabled_pixmap): OK, I now use a color context to paint
+	the stipple, so realization is not needed.
+
 1998-02-26  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.[ch]: made gnome-stock use gnome-pixmap.
