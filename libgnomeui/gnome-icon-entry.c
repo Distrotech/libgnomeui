@@ -394,6 +394,9 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 		gnome_icon_selection_show_icons (GNOME_ICON_SELECTION (priv->icon_sel));
 	} else {
 		/* We pretend like ok has been called */
+		g_free (priv->picked_file);
+		priv->picked_file = g_strdup (filename);
+
 		update_icon (ientry);
 		gtk_widget_hide (ientry->_priv->pick_dialog);
 	}
@@ -537,8 +540,6 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 	g_object_set_data(G_OBJECT(w),"fs",fs);
 
 	g_object_set_data(G_OBJECT(fs->file_list),"frame",w);
-	g_signal_connect (fs->file_list, "select_row",
-			  G_CALLBACK (setup_preview), NULL);
 	g_object_set_data(G_OBJECT(fs->selection_entry),"frame",w);
 
 	closure = g_cclosure_new (G_CALLBACK (setup_preview), NULL, NULL);

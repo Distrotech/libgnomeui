@@ -1,3 +1,20 @@
+2002-05-23  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-icon-entry.c (entry_activated): Set the
+	priv->picked_file if we have a full filename so that update_icon
+	will pick it up.  Fixes #82681.
+
+2002-05-22  Federico Mena Quintero  <federico@ximian.com>
+
+	[Falta ver qué pasa con "activate" en el entry del GnomeFileEntry,
+	porque emite esa señal cuando dan double-click en el file selector
+	o pican OK]
+
+	* libgnomeui/gnome-icon-entry.c (browse_clicked): Connect to
+	"changed" on the selection of the file selector's file list; this
+	widget is no longer a GtkCList and thus we don't have a
+	"select_row" signal anymore.  Fixes bug #82681.
+
 2002-05-22  Federico Mena Quintero  <federico@ximian.com>
 
 	* libgnomeui/gnome-file-entry.c (build_filename): Append a "/" to
