@@ -178,6 +178,9 @@ void gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime);
 void gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y);
 void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
 
+/* Remove the iterm from its group and append it to the new group
+ */
+void gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup* new_group);
 
 /* GnomeCanvasGroup - a group of canvas items
  *

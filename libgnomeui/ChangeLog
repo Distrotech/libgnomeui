@@ -1,3 +1,8 @@
+1998-09-27  Michael Lausch  <mla@gams.at>
+
+	* gnome-canvas.c (gnome_canvas_item_reparent): new function. Moves 
+	a canvas_item from one canvas_item_group to another.
+
 1998-09-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-popup-menu.c (popup_marshal_func): Fixed stupid bug in the

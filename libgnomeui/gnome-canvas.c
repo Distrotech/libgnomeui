@@ -47,7 +47,7 @@
  *
  * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
  */
-
+#include <stdio.h>
 #include <config.h>
 #include <math.h>
 #include <gdk/gdkprivate.h>
@@ -647,6 +647,18 @@ gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
 	}
 }
 
+void
+gnome_canvas_item_reparent(GnomeCanvasItem* item, GnomeCanvasGroup* new_group)
+{
+  gtk_object_ref(item);		/* protect it from the unref in group_remove */
+  if (item->parent)
+    group_remove(item->parent, item);
+  item->parent = new_group;
+  group_add(new_group, item);
+  gtk_object_unref(item);
+}
+
+  
 
 /*** GnomeCanvasGroup ***/
 
@@ -1645,11 +1657,12 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
 	 * events.
 	 */
-
 	for (finished = FALSE, item = canvas->current_item; item && !finished; item = item->parent)
+	  {
 		gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
 				 &ev,
 				 &finished);
+	  }
 }
 
 static void
