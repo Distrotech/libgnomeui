@@ -640,7 +640,7 @@ gnome_dock_band_remove (GtkContainer *container, GtkWidget *widget)
         band->floating_child = NULL;
 
       was_visible = GTK_WIDGET_VISIBLE (widget);
-      widget->parent = NULL;    /* FIXME? */
+      gtk_widget_unparent (widget);
 
       band->children = g_list_remove_link (band->children, child);
       g_free (child->data);

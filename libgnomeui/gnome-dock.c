@@ -533,6 +533,9 @@ draw_widget (GtkWidget *widget, GdkRectangle *area)
 static void
 draw_band_list (GList *list, GdkRectangle *area)
 {
+  DEBUG (("entering function -- %p %d %d %d %d",
+	  list, area->x, area->y, area->width, area->height));
+
   while (list != NULL)
     {
       GtkWidget *w;
@@ -595,6 +598,7 @@ expose_band_list (GList *list, GdkEventExpose *event)
 static gint
 gnome_dock_expose (GtkWidget *widget, GdkEventExpose *event)
 {
+  DEBUG (("Entering function"));
   if (GTK_WIDGET_DRAWABLE (widget))
     {
       GnomeDock *dock;
@@ -900,16 +904,20 @@ drag_floating (GnomeDock *dock,
         {
           gtk_widget_ref (item_widget);
 
-          gnome_dock_item_detach (item, x, y);
-
-          if (item->in_drag)
-            gnome_dock_item_grab_pointer (item);
-
           gtk_container_remove (GTK_CONTAINER (item_widget->parent),
                                 item_widget);
           gtk_widget_set_parent (item_widget, dock_widget);
+
           dock->floating_children = g_list_prepend (dock->floating_children,
                                                     item);
+
+	  gtk_widget_realize (item_widget);
+	  gtk_widget_map (item_widget);
+	  gtk_widget_queue_resize (item_widget);
+
+	  gnome_dock_item_detach (item, x, y);
+          if (item->in_drag)
+            gnome_dock_item_grab_pointer (item);
 
           gtk_widget_unref (item_widget);
         }

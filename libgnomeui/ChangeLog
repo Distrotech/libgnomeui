@@ -1,3 +1,16 @@
+1999-10-03  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock.c (drag_floating): Realize, map and queue_resize the
+	new child manually.
+
+	* gnome-dock-band.c (gnome_dock_band_remove): Do
+	`gtk_widget_unparent' on the removed widget instead of just
+	NULLing the `parent' member.  This way refcounting on the
+	GnomeDockBand children should be done right.  Many many thanks to
+	Morten who detected there was a leak somewhere in the GnomeDock*
+	widgets.  (And some curses to the author who had even put a
+	`FIXME' comment in that code and forgot to correct it. ;-))
+
 1999-09-30  Miguel de Icaza  <miguel@gnu.org>
 
 	* gnome-icon-entry.c (show_icon_selection): Replace getcwd with
@@ -63,9 +76,8 @@ Fri Sep 24 01:24:40 1999  Tim Janik  <timj@gtk.org>
 
 1999-09-20  Ettore Perazzoli  <ettore@comm2000.it>
 
-	* gnome-propertybox.c (gnome_property_box_init): Make
-	(gnome_property_box_init): Set the `OK' button as the default one,
-	and do not set it insensitive anymore.
+	* gnome-propertybox.c (gnome_property_box_init): Set the `OK'
+	button as the default one, and do not set it insensitive anymore.
 	(set_sensitive): Do not change sensitivity of the `OK' button
 	anymore.
 	(dialog_clicked_cb): Check the dirty flag for the current page.
