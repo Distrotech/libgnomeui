@@ -8,7 +8,7 @@ LIB_VERSION_NUM=0.0.0
 #
 # The targets
 #
-bin_PROGRAMS    = gnome_segv2
+libexec_PROGRAMS    = gnome_segv2
 lib_LTLIBRARIES = libgnomeui-2.la
 
 gnomehdir = $(includedir)/libgnomeui-2.0
@@ -28,7 +28,7 @@ INCLUDES = \
         -DGNOMEUILIBDIR=\""$(libdir)"\" 		\
         -DGNOMEUIDATADIR=\""$(datadir)"\" 		\
         -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
-        -DGNOMEUIBINDIR=\""$(bindir)"\" 		\
+        -DGNOMEUISERVERDIR=\""$(libexecdir)"\" 		\
 	-DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\"	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
