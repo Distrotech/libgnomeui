@@ -62,6 +62,8 @@ struct _GnomeMDIChild
 	GList *views;
 
 	GnomeUIInfo *menu_template;
+
+	gpointer reserved;
 };
 
 typedef GtkWidget *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);

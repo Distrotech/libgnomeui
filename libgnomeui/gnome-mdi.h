@@ -79,6 +79,8 @@ struct _GnomeMDI {
        gnome-app-helper routines */
 	gchar *child_menu_path; 
 	gchar *child_list_path;
+
+	gpointer reserved;
 };
 
 struct _GnomeMDIClass {

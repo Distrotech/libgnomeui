@@ -63,6 +63,8 @@ struct _GnomeMDIGenericChild {
 		               get_config_string_dn, set_label_dn;
 	gpointer           create_view_data, create_menus_data,
 		               get_config_string_data, set_label_data;
+
+	gpointer reserved;
 };
 
 struct _GnomeMDIGenericChildClass {

@@ -1,3 +1,9 @@
+Fri Aug 31 17:24:25 2001  George Lebl <jirka@5z.com>
+
+	* gnome-mdi.h, gnome-mdi-child.h, gnome-mdi-generic-child.h:  Add a
+	  reserved pointer to the struct, just in case we'd need a private
+	  struct.
+
 Fri Aug 31 16:07:13 2001  George Lebl <jirka@5z.com>
 
 	* gnome-mdi*.[ch], libgnomeui.h, Makefile.am: Do a port of the 1.0
