@@ -25,6 +25,26 @@
 #include "gnome-file-selector.h"
 #include "gnome-icon-selector.h"
 
+static void
+quit_cb (void)
+{
+        gtk_main_quit ();
+}
+
+static GnomeUIInfo file_menu[] = {
+	{ GNOME_APP_UI_ITEM, "Exit", NULL, quit_cb, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'X',
+	  GDK_CONTROL_MASK, NULL },
+        { GNOME_APP_UI_ENDOFINFO }
+};
+
+static GnomeUIInfo main_menu[] = {
+        { GNOME_APP_UI_SUBTREE, ("File"), NULL, file_menu, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+        { GNOME_APP_UI_ENDOFINFO }
+};
+
+
 #if 0
 
 static void
@@ -97,9 +117,9 @@ main (int argc, char **argv)
     gnome_program_init ("selector_demo", "1.0", argc, argv,
 			GNOMEUI_INIT, NULL);
 
-    app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title (GTK_WINDOW (app), "Selector Demo!");
+    app = gnome_app_new ("selector-demo", "Selector Demo");
     gtk_window_set_default_size (GTK_WINDOW (app), 400, 400);
+    gnome_app_create_menus (GNOME_APP (app), main_menu);
 
     vbox = gtk_vbox_new (FALSE, GNOME_PAD);
 
@@ -126,18 +146,21 @@ main (int argc, char **argv)
     pixmap_dir = gnome_unconditional_datadir_file ("pixmaps");
   
     gnome_selector_add_directory (GNOME_SELECTOR (iselector), pixmap_dir);
-    gnome_selector_update_file_list (GNOME_SELECTOR (iselector));
 
     g_free(pixmap_dir);
 
     gtk_container_add (GTK_CONTAINER (frame2), iselector);
 
-    gtk_container_add (GTK_CONTAINER (app), vbox);
+    gnome_app_set_contents (GNOME_APP (app), vbox);
 
     /* test_canvas (); */
 
     gtk_widget_show_all (app);
     gtk_main ();
+
+    gtk_widget_destroy (app);
+
+    g_mem_profile ();
 
     return 0;
 }
