@@ -157,7 +157,7 @@ static struct argp_option arguments[] =
   { "sm-client-id", -1, N_("ID"), OPTION_HIDDEN,
     N_("Specify session management id"), -2 },
   { "sm-cloned-id", -2, N_("ID"), OPTION_HIDDEN,
-    N_("Specify id of cloned cliend"), -2 },
+    N_("Specify id of cloned client"), -2 },
   { "sm-disable", -3, NULL, OPTION_HIDDEN,
     N_("Disable connetion to session manager"), -2},
   { NULL, 0, NULL, 0, NULL, 0 }
