@@ -39,6 +39,7 @@ noinst_HEADERS = \
 	libgnomeuiP.h
 
 libgnomeui_2_la_SOURCES = \
+	gnome-stock-icons.c		\
 	gnome-about.c			\
 	gnome-animator.c		\
 	gnome-app.c			\

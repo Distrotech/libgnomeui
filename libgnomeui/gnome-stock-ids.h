@@ -30,6 +30,11 @@
 
 G_BEGIN_DECLS
 
+#define GNOME_ICON_SIZE_TOOLBAR gnome_icon_size_toolbar
+GtkIconSize gnome_icon_size_toolbar;
+
+extern void init_gnome_stock_icons (void);
+
 /* The names of `well known' icons. I define these strings mainly to
    prevent errors due to typos. */
 

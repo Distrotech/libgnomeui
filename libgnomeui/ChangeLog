@@ -1,3 +1,13 @@
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
+	* gnome-stock-icons.c: New file; we'll most likely move all
+	the icons from the pixmaps/ directory into GTK+ very soon,
+	this file is the first step in this direction.
+	(init_gnome_stock_icons): This function puts all our icons into
+	a new GtkIconFactory and gtk_icon_factory_add_default()s it.
+
+	* gnome-stock-ids.h (GNOME_ICON_SIZE_TOOLBAR): New icon size.
+
 2001-04-26  Martin Baulig  <baulig@suse.de>
 
 	* gnome-app-helper.c: Use GtkImageMenuItem, not GtkPixmapMenuItem.
