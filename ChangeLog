@@ -1,3 +1,38 @@
+2002-05-21  Federico Mena Quintero  <federico@ximian.com>
+
+	Accessibility support for libgnomeui, by several people at Ximian.
+
+	* libgnomeui/libgnomeui-access.[ch]: New files with utility
+	functions for accessibility.
+
+	* libgnomeui/Makefile.am (libgnomeui_2_la_SOURCES): Added
+	libgnomeui-access.[ch].
+
+	* libgnomeui/gnome-color-picker.c
+	(gnome_color_picker_instance_init): Added ATK name/description.
+
+	* libgnomeui/gnome-dateedit.c (create_children): Added ATK
+	name/description/relations.
+
+	* libgnomeui/gnome-file-entry.c (gnome_file_entry_init): Added ATK
+	name/description/relation.
+
+	* libgnomeui/gnome-href.c (gnome_href_instance_init): Added ATK
+	name/description.
+
+	* libgnomeui/gnome-icon-entry.c (ientry_browse): Added ATK
+	name/description.
+	(gnome_icon_entry_instance_init): Likewise.
+
+	* libgnomeui/gnome-icon-list.c: Implemented accessibility
+	interfaces for the icon list widget.
+
+	* libgnomeui/gnome-icon-sel.c (gnome_icon_selection_show_icons):
+	Added ATK relation.
+
+	* libgnomeui/gnome-pixmap-entry.c (refresh_preview): Added ATK
+	name/description.
+
 Mon May 20 17:07:42 2002  George Lebl <jirka@5z.com>
 
 	* configure.in: add cs to languages

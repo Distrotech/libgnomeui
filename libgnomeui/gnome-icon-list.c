@@ -50,6 +50,7 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <libgnomeuiP.h>
+#include "libgnomeui-access.h"
 
 /* Aliases to minimize screen use in my laptop */
 #define GIL(x)       GNOME_ICON_LIST(x)
@@ -221,6 +222,9 @@ struct _GnomeIconListPrivate {
 	/* Whether the icon that is pending selection was selected to begin with */
 	guint select_pending_was_selected : 1;
 };
+
+
+static GType gil_accessible_get_type (void);
 
 
 static inline int
@@ -1058,6 +1062,7 @@ icon_list_append (Gil *gil, Icon *icon)
 {
 	GnomeIconListPrivate *priv;
 	int pos;
+	AtkObject *accessible;
 
 	priv = gil->_priv;
 
@@ -1080,6 +1085,17 @@ icon_list_append (Gil *gil, Icon *icon)
 	} else
 		priv->dirty = TRUE;
 
+	/* Notify the accessible object
+	 *
+	 * FIXME: do we need to pass the accessible object for the new child
+	 * as one of the signal parameters?
+	 */
+
+	accessible = _accessibility_get_atk_object (gil);
+	if (accessible)
+		g_signal_emit_by_name (accessible, "children_changed::add",
+				       priv->icons - 1, NULL, NULL);
+
 	return priv->icons - 1;
 }
 
@@ -1087,6 +1103,7 @@ static void
 icon_list_insert (Gil *gil, int pos, Icon *icon)
 {
 	GnomeIconListPrivate *priv;
+	AtkObject *accessible;
 
 	priv = gil->_priv;
 
@@ -1117,6 +1134,17 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 		priv->dirty = TRUE;
 
 	sync_selection (gil, pos, SYNC_INSERT);
+
+	/* Notify the accessible object
+	 *
+	 * FIXME: do we need to pass the accessible object for the new child
+	 * as one of the signal parameters?
+	 */
+
+	accessible = _accessibility_get_atk_object (gil);
+	if (accessible)
+		g_signal_emit_by_name (accessible, "children_changed::add",
+				       pos, NULL, NULL);
 }
 
 /**
@@ -1249,6 +1277,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 	GnomeIconListPrivate *priv;
 	int was_selected;
 	Icon *icon;
+	AtkObject *accessible;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
@@ -1312,6 +1341,16 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 		gil_scrollbar_adjust (gil);
 	} else
 		priv->dirty = TRUE;
+
+	/* Notify the accessibility object
+	 *
+	 * FIXME: the child no longer exists!  Do we still need to pass its
+	 * corresponding accessible object as one of the signal parameters?
+	 */
+	accessible = _accessibility_get_atk_object (gil);
+	if (accessible)
+		g_signal_emit_by_name (accessible, "children_changed::remove",
+				       pos, NULL, NULL);
 }
 
 /**
@@ -1327,6 +1366,7 @@ gnome_icon_list_clear (GnomeIconList *gil)
 {
 	GnomeIconListPrivate *priv;
 	int i;
+	AtkObject *accessible;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
@@ -1351,6 +1391,12 @@ gnome_icon_list_clear (GnomeIconList *gil)
 		gil_scrollbar_adjust (gil);
 	} else
 		priv->dirty = TRUE;
+
+	/* Notify the accessible object */
+
+	accessible = _accessibility_get_atk_object (gil);
+	if (accessible)
+		g_signal_emit_by_name (accessible, "children_changed", 0, NULL, NULL);
 }
 
 static void
@@ -1632,6 +1678,22 @@ real_toggle_cursor_selection (Gil *gil)
 		gnome_icon_list_select_icon (gil, priv->focus_icon);
 }
 
+/* Used from g_list_insert_sorted() */
+static gint
+selection_list_compare_cb (gconstpointer a, gconstpointer b)
+{
+	int ia, ib;
+
+	ia = GPOINTER_TO_INT (a);
+	ib = GPOINTER_TO_INT (b);
+
+	if (ia < ib)
+		return -1;
+	else if (ia > ib)
+		return 1;
+	else
+		return 0;
+}
 
 static void
 real_select_icon (Gil *gil, gint num, GdkEvent *event)
@@ -1652,7 +1714,8 @@ real_select_icon (Gil *gil, gint num, GdkEvent *event)
 
 	icon->selected = TRUE;
 	gnome_icon_text_item_select (icon->text, TRUE);
-	priv->selection = g_list_append (priv->selection, GINT_TO_POINTER (num));
+	priv->selection = g_list_insert_sorted (priv->selection, GINT_TO_POINTER (num),
+						selection_list_compare_cb);
 }
 
 static void
@@ -2111,6 +2174,19 @@ gil_scroll (GtkWidget *widget, GdkEventScroll *event)
 	return TRUE;
 }
 
+static AtkObject *
+gil_get_accessible (GtkWidget *widget)
+{
+	AtkObject *accessible;
+
+	if ((accessible = _accessibility_get_atk_object (widget)) != NULL)
+		return accessible;
+
+	accessible = g_object_new (gil_accessible_get_type (), NULL);
+
+	return _accessibility_set_atk_object_return (widget, accessible);
+}
+
 static void
 gnome_icon_list_class_init (GilClass *gil_class)
 {
@@ -2215,6 +2291,7 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	widget_class->focus_out_event = gil_focus_out;
 	widget_class->key_press_event = gil_key_press;
 	widget_class->scroll_event = gil_scroll;
+	widget_class->get_accessible = gil_get_accessible;
 
 	/* we override GtkLayout's set_scroll_adjustments signal instead
 	 * of creating a new signal so as to keep binary compatibility.
@@ -3027,5 +3104,305 @@ gnome_icon_list_get_icon_pixbuf_item (GnomeIconList *gil,
 	icon = g_array_index (gil->_priv->icon_list, Icon*, idx);
 
 	return icon->image;
+}
+
+
+
+/*** Accessible object for GnomeIconList ***/
+
+static void selection_interface_init (AtkSelectionIface *iface);
+
+static void gil_accessible_class_init (AtkObjectClass *class);
+
+/* AtkObjectClass implementations */
+static gint impl_get_n_children (AtkObject *accessible);
+static AtkObject *impl_ref_child (AtkObject *accessible, gint i);
+static void impl_initialize (AtkObject *accessible, gpointer data);
+
+/* AtkSelectionIface implementations */
+static gboolean impl_selection_add_selection (AtkSelection *selection, gint i);
+static gboolean impl_selection_clear_selection (AtkSelection *selection);
+static AtkObject* impl_selection_ref_selection (AtkSelection *selection, gint i);
+static gint impl_selection_get_selection_count (AtkSelection *selection);
+static gboolean impl_selection_is_child_selected (AtkSelection *selection, gint i);
+static gboolean impl_selection_remove_selection (AtkSelection *selection, gint i);
+static gboolean impl_selection_select_all_selection (AtkSelection *selection);
+
+static gpointer accessible_parent_class = NULL;
+
+
+/* get_type() function for the accessible object */
+static GType
+gil_accessible_get_type (void)
+{
+	static GType type;
+
+	if (!type) {
+		static GInterfaceInfo selection_info = {
+			(GInterfaceInitFunc) selection_interface_init,
+			NULL, /* interface_finalize */
+			NULL /* interface_data */
+		};
+
+		type = _accessibility_create_derived_type (
+			"GnomeIconListAccessible",
+			GNOME_TYPE_CANVAS,
+			gil_accessible_class_init);
+
+		g_type_add_interface_static (type, ATK_TYPE_SELECTION, &selection_info);
+	}
+
+	return type;
+}
+
+/* Fills the ATK selection interface vtable */
+static void
+selection_interface_init (AtkSelectionIface *iface)
+{
+	iface->add_selection = impl_selection_add_selection;
+	iface->clear_selection = impl_selection_clear_selection;
+	iface->ref_selection = impl_selection_ref_selection;
+	iface->get_selection_count = impl_selection_get_selection_count;
+	iface->is_child_selected = impl_selection_is_child_selected;
+	iface->remove_selection = impl_selection_remove_selection;
+	iface->select_all_selection = impl_selection_select_all_selection;
+}
+
+/* Class initialization function for the accessible object */
+static void
+gil_accessible_class_init (AtkObjectClass *class)
+{
+	accessible_parent_class = g_type_class_peek_parent (class);
+
+	class->get_n_children = impl_get_n_children;
+	class->ref_child = impl_ref_child;
+	class->initialize = impl_initialize;
+}
+
+
+
+/* AtkSelectionIface implementation */
+
+static gboolean
+impl_selection_add_selection (AtkSelection *selection, gint i)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+	if (!widget)
+		return FALSE;
+
+	gil = GNOME_ICON_LIST (widget);
+	gnome_icon_list_select_icon (gil, i);
+	return TRUE;
+}
+
+static gboolean
+impl_selection_clear_selection (AtkSelection *selection)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+	if (!widget)
+		return FALSE;
+
+	gil = GNOME_ICON_LIST (widget);
+	gnome_icon_list_unselect_all (gil);
+	return TRUE;
+}
+
+static AtkObject *
+impl_selection_ref_selection (AtkSelection *selection, gint i)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+	GList *sel, *l;
+	int n;
+	GnomeIconTextItem *iti;
+	AtkObject *atk_object;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+	if (!widget)
+		return FALSE;
+
+	gil = GNOME_ICON_LIST (widget);
+
+	sel = gnome_icon_list_get_selection (gil);
+	l = g_list_nth (sel, i);
+	if (!l)
+		return NULL;
+
+	n = GPOINTER_TO_INT (l->data);
+	iti = gnome_icon_list_get_icon_text_item (gil, n);
+	if (!iti)
+		return NULL;
+
+	/* FIXME: is this what we need to return?  How do we distinguish between
+	 * the icon text item and the pixbuf?
+	 */
+	atk_object = atk_gobject_accessible_for_object (G_OBJECT (iti));
+	g_object_ref (atk_object);
+	return atk_object;
+}
+
+static gint
+impl_selection_get_selection_count (AtkSelection *selection)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+	GList *sel;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+	if (!widget)
+		return FALSE;
+
+	gil = GNOME_ICON_LIST (widget);
+	sel = gnome_icon_list_get_selection (gil);
+	return g_list_length (sel);
+}
+
+static gboolean
+impl_selection_is_child_selected (AtkSelection *selection, gint i)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+	GList *l;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+	if (!widget)
+		return FALSE;
+
+	gil = GNOME_ICON_LIST (widget);
+	for (l = gnome_icon_list_get_selection (gil); l; l = l->next) {
+		int k;
+
+		k = GPOINTER_TO_INT (l->data);
+		if (k == i)
+			return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean
+impl_selection_remove_selection (AtkSelection *selection, gint i)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+	GList *sel, *l;
+	int n;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+	if (!widget)
+		return FALSE;
+
+	gil = GNOME_ICON_LIST (widget);
+
+	sel = gnome_icon_list_get_selection (gil);
+	l = g_list_nth (sel, i);
+	if (!l)
+		return FALSE;
+
+	n = GPOINTER_TO_INT (l->data);
+
+	gnome_icon_list_unselect_icon (gil, n);
+	return TRUE;
+}
+
+static gboolean
+impl_selection_select_all_selection (AtkSelection *selection)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+	int n, i;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+	if (!widget)
+		return FALSE;
+
+	gil = GNOME_ICON_LIST (widget);
+
+	if (gnome_icon_list_get_selection_mode (gil) != GTK_SELECTION_MULTIPLE)
+		return FALSE;
+
+	n = gnome_icon_list_get_num_icons (gil);
+
+	for (i = 0; i < n; i++)
+		gnome_icon_list_select_icon (gil, i);
+
+	return TRUE;
+}
+
+
+
+/* AtkObjectClass implementations */
+
+static gint
+impl_get_n_children (AtkObject *accessible)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+
+	widget = GTK_ACCESSIBLE (accessible)->widget;
+	if (!widget)
+		return 0;
+
+	gil = GNOME_ICON_LIST (widget);
+
+	return gnome_icon_list_get_num_icons (gil);
+}
+
+static AtkObject *
+impl_ref_child (AtkObject *accessible, gint i)
+{
+	GtkWidget *widget;
+	GnomeIconList *gil;
+	GnomeIconTextItem *iti;
+	AtkObject *atk_object;
+
+	widget = GTK_ACCESSIBLE (accessible)->widget;
+	if (!widget)
+		return NULL;
+
+	gil = GNOME_ICON_LIST (widget);
+
+	iti = gnome_icon_list_get_icon_text_item (gil, i);
+	if (!iti)
+		return NULL;
+
+	/* FIXME: is this what we need to return?  How do we distinguish between
+	 * the icon text item and the pixbuf?
+	 */
+	atk_object = atk_gobject_accessible_for_object (G_OBJECT (iti));
+	g_object_ref (atk_object);
+	return atk_object;
+}
+
+/* Callback used when an icon changes its selection status */
+static void
+select_icon_cb (GnomeIconList *gil, gint num, GdkEvent *event, gpointer data)
+{
+	AtkObject *accessible;
+
+	accessible = ATK_OBJECT (data);
+	g_signal_emit_by_name (accessible, "selection_changed");
+}
+
+static void
+impl_initialize (AtkObject *accessible, gpointer data)
+{
+	GnomeIconList *gil;
+
+	ATK_OBJECT_CLASS (accessible_parent_class)->initialize (accessible, data);
+
+	gil = GNOME_ICON_LIST (GTK_ACCESSIBLE (accessible)->widget);
+
+	/* We use the same callback for both signals as the handler would do the
+	 * same thing for both.
+	 */
+	g_signal_connect (gil, "select_icon", G_CALLBACK (select_icon_cb), accessible);
+	g_signal_connect (gil, "unselect_icon", G_CALLBACK (select_icon_cb), accessible);
 }
 

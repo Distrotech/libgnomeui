@@ -58,6 +58,8 @@
 #include <libgnomevfs/gnome-vfs-uri.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
+#include "libgnomeui-access.h"
+
 struct _GnomePixmapEntryPrivate {
 	GtkWidget *preview;
 	GtkWidget *preview_sw;
@@ -199,6 +201,10 @@ refresh_preview(GnomePixmapEntry *pentry)
         } else {
 		gtk_widget_destroy(pentry->_priv->preview->parent);
 		pentry->_priv->preview = gtk_image_new_from_pixbuf (pixbuf);
+		_add_atk_name_desc (pentry->_priv->preview,
+				    _("Image Preview"),
+				    _("A preview of the image currently specified"));
+
 		gtk_widget_show(pentry->_priv->preview);
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->_priv->preview_sw),
 						      pentry->_priv->preview);

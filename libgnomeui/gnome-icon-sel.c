@@ -39,6 +39,7 @@
 #include "gnome-uidefs.h"
 
 #include "gnome-icon-sel.h"
+#include "libgnomeui-access.h"
 
 #include <libgnomevfs/gnome-vfs-ops.h>
 
@@ -404,6 +405,8 @@ gnome_icon_selection_show_icons (GnomeIconSelection * gis)
 		return;
 
 	label = gtk_label_new (_("Loading Icons..."));
+	_add_atk_relation (GTK_WIDGET (gis), label,
+			   ATK_RELATION_LABELLED_BY, ATK_RELATION_LABEL_FOR);
 	gtk_box_pack_start (GTK_BOX (gis->_priv->box),
 			    label, FALSE, FALSE, 0);
 	gtk_widget_show (label);
@@ -412,6 +415,8 @@ gnome_icon_selection_show_icons (GnomeIconSelection * gis)
 			  &label);
 
 	progressbar = gtk_progress_bar_new ();
+	_add_atk_relation (progressbar, label,
+			   ATK_RELATION_LABELLED_BY, ATK_RELATION_LABEL_FOR);
 	gtk_box_pack_start (GTK_BOX (gis->_priv->box),
 			    progressbar, FALSE, FALSE, 0);
 	gtk_widget_show (progressbar);

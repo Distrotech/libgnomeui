@@ -38,6 +38,8 @@ INCLUDES = \
 EXTRA_HEADERS = 
 
 libgnomeui_2_la_SOURCES = \
+	libgnomeui-access.c		\
+	libgnomeui-access.h		\
 	gnometypebuiltins.h		\
 	gnometypebuiltins.c		\
 	gnome-about.c			\

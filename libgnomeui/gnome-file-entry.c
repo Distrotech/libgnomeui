@@ -52,6 +52,8 @@
 #include <libgnome/gnome-util.h>
 #include "libgnomeuiP.h"
 
+#include "libgnomeui-access.h"
+
 #include "gnome-file-entry.h"
 
 struct _GnomeFileEntryPrivate {
@@ -628,6 +630,8 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 	fentry->_priv->directory_entry = FALSE;
 
 	fentry->_priv->gentry = gnome_entry_new (NULL);
+	_add_atk_name_desc (fentry->_priv->gentry, _("Path"), _("Path to file"));
+
 	the_gtk_entry = gnome_file_entry_gtk_entry (fentry);
 
 	g_signal_connect (the_gtk_entry, "changed",
@@ -654,11 +658,17 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 	gtk_widget_show (fentry->_priv->gentry);
 
 	button = gtk_button_new_with_mnemonic (_("_Browse..."));
+	_add_atk_description (button, _("Pop up a file selector to choose a file"));
+
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (browse_clicked_signal),
 			  fentry);
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_widget_show (button);
+
+	_add_atk_relation (button, the_gtk_entry,
+			   ATK_RELATION_CONTROLLER_FOR,
+			   ATK_RELATION_CONTROLLED_BY);
 }
 
 static void

@@ -45,6 +45,9 @@
 #include <libgnome/gnome-i18n.h>
 
 #include "gnometypebuiltins.h"
+
+#include "libgnomeui-access.h"
+
 struct _GnomeDateEditPrivate {
 	GtkWidget *date_entry;
 	GtkWidget *date_button;
@@ -733,14 +736,23 @@ create_children (GnomeDateEdit *gde)
 	GtkWidget *arrow;
 
 	gde->_priv->date_entry  = gtk_entry_new ();
+	_add_atk_name_desc (GTK_WIDGET (gde->_priv->date_entry), _("Date"), NULL);
+
 	gtk_widget_set_size_request (gde->_priv->date_entry, 90, -1);
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->date_entry, TRUE, TRUE, 0);
 	gtk_widget_show (gde->_priv->date_entry);
+
 
 	gde->_priv->date_button = gtk_button_new ();
 	g_signal_connect (gde->_priv->date_button, "clicked",
 			  G_CALLBACK (select_clicked), gde);
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->date_button, FALSE, FALSE, 0);
+
+	_add_atk_name_desc (GTK_WIDGET (gde->_priv->date_button),
+			    _("Select Date"), _("Select the date from a calendar"));
+
+	_add_atk_relation (gde->_priv->date_button, gde->_priv->date_entry,
+			   ATK_RELATION_CONTROLLER_FOR, ATK_RELATION_CONTROLLED_BY);
 
 	hbox = gtk_hbox_new (FALSE, 3);
 	gtk_container_add (GTK_CONTAINER (gde->_priv->date_button), hbox);
@@ -761,11 +773,19 @@ create_children (GnomeDateEdit *gde)
 	gtk_widget_show (gde->_priv->date_button);
 
 	gde->_priv->time_entry = gtk_entry_new ();
+	_add_atk_name_desc (GTK_WIDGET (gde->_priv->time_entry), _("Time"), NULL);
+
 	gtk_entry_set_max_length (GTK_ENTRY (gde->_priv->time_entry), 12);
 	gtk_widget_set_size_request (gde->_priv->time_entry, 88, -1);
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->time_entry, TRUE, TRUE, 0);
 
 	gde->_priv->time_popup = gtk_option_menu_new ();
+	_add_atk_name_desc (GTK_WIDGET (gde->_priv->time_popup),
+			    _("Select Time"), _("Select the time from a list"));
+
+	_add_atk_relation (GTK_WIDGET (gde->_priv->time_popup), GTK_WIDGET (gde->_priv->time_entry),
+			   ATK_RELATION_CONTROLLED_BY, ATK_RELATION_CONTROLLER_FOR);
+
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->time_popup, FALSE, FALSE, 0);
 
 	/* We do not create the popup menu with the hour range until we are
