@@ -755,11 +755,11 @@ msgstr "Vis avkom side-ved-side"
 
 #: libgnomeui/gnome-pouch.c:813
 msgid "Arrange icons"
-msgstr "Plassér ikoner"
+msgstr "Plasser ikoner"
 
 #: libgnomeui/gnome-pouch.c:814
 msgid "Autoarrange icons"
-msgstr "Plassér ikoner automatisk"
+msgstr "Plasser ikoner automatisk"
 
 #: libgnomeui/gnome-recently-used.c:111
 msgid "App Specific"
@@ -880,11 +880,11 @@ msgstr "Nummerert liste"
 
 #: libgnomeui/gnome-stock-icons.c:266
 msgid "Indent"
-msgstr "Indentér"
+msgstr "Indenter"
 
 #: libgnomeui/gnome-stock-icons.c:267
 msgid "Un-Indent"
-msgstr "Av-indentér"
+msgstr "Av-indenter"
 
 #: libgnomeui/gnome-stock-icons.c:268
 msgid "OK"
