@@ -1,4 +1,13 @@
+2002-01-08  jacob berkman  <jacob@ximian.com>
+
+	* gnome-dialog.c (gnome_dialog_init): remove declaration of 'bf'
+
 2002-01-07  jacob berkman  <jacob@ximian.com>
+
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_size_allocate): remove
+	(gnome_druid_page_standard_class_init): remove size allocate
+	handler
 
 	* gnome-dialog.c (gnome_dialog_init): remove the bevel border to
 	be consistent with GtkDialog

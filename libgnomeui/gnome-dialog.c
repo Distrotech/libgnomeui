@@ -128,7 +128,6 @@ static void
 gnome_dialog_init (GnomeDialog *dialog)
 {
   GtkWidget * vbox;
-  GtkWidget * bf;
 
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
