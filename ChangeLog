@@ -1,3 +1,11 @@
+2003-03-02  Anders Carlsson  <andersca@codefactory.se>
+
+	* libgnomeui/gnome-icon-lookup.c:
+	(mimetype_supported_by_gdk_pixbuf), (gnome_icon_lookup):
+	* libgnomeui/gnome-thumbnail.c: (mimetype_supported_by_gdk_pixbuf):
+	Ask gdk-pixbuf for supported mime types, fixes #106609, reported by
+	Christian Schaller.
+	
 2003-02-21  Roozbeh Pournader  <roozbeh@sharif.edu>
 
 	* configure.in: Added "fa" to ALL_LINGUAS.

@@ -696,29 +696,38 @@ static gboolean
 mimetype_supported_by_gdk_pixbuf (const char *mime_type)
 {
 	guint i;
-	static GHashTable *formats = NULL;
-	static const char *types [] = {
-	  "image/x-bmp", "image/x-ico", "image/jpeg", "image/gif",
-	  "image/png", "image/pnm", "image/ras", "image/tga",
-	  "image/tiff", "image/wbmp", "image/x-xbitmap",
-	  "image/x-xpixmap"
-	};
+	static GHashTable *formats_hash = NULL;
 
-	if (!formats) {
-		formats = g_hash_table_new (g_str_hash, g_str_equal);
+	if (!formats_hash) {
+		GSList *formats, *list;
+		
+		formats_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
-		for (i = 0; i < G_N_ELEMENTS (types); i++)
-			g_hash_table_insert (formats,
-					     (gpointer) types [i],
-					     GUINT_TO_POINTER (1));	
+		formats = gdk_pixbuf_get_formats ();
+		list = formats;
+		
+		while (list) {
+			GdkPixbufFormat *format = list->data;
+			gchar **mime_types;
+			
+			mime_types = gdk_pixbuf_format_get_mime_types (format);
+
+			for (i = 0; mime_types[i] != NULL; i++)
+				g_hash_table_insert (formats_hash,
+						     (gpointer) g_strdup (mime_types[i]),
+						     GUINT_TO_POINTER (1));	
+				
+			g_strfreev (mime_types);
+			list = list->next;
+		}
+		g_slist_free (formats);
 	}
 
-	if (g_hash_table_lookup (formats, mime_type))
+	if (g_hash_table_lookup (formats_hash, mime_type))
 		return TRUE;
 
 	return FALSE;
 }
-
 
 /**
  * gnome_thumbnail_factory_can_thumbnail:
