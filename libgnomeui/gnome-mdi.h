@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* gnome-mdi.h - definition of a Gnome MDI object
 
-   Copyright (C) 1997, 1998 Free Software Foundation
+   Copyright (C) 1997, 1998, 1999 Free Software Foundation
 
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -47,6 +47,8 @@ typedef enum {
 	GNOME_MDI_DEFAULT_MODE = 42
 } GnomeMDIMode;
 
+/* all of the GnomeMDI members are considered private and should
+   only be accessed using the provided public API */
 struct _GnomeMDI {
 	GtkObject object;
 
@@ -81,13 +83,13 @@ struct _GnomeMDI {
 struct _GnomeMDIClass {
 	GtkObjectClass parent_class;
 
-	gint        (*add_child)(GnomeMDI *, GnomeMDIChild *); 
-	gint        (*remove_child)(GnomeMDI *, GnomeMDIChild *); 
-	gint        (*add_view)(GnomeMDI *, GtkWidget *); 
-	gint        (*remove_view)(GnomeMDI *, GtkWidget *); 
-	void        (*child_changed)(GnomeMDI *, GnomeMDIChild *);
-	void        (*view_changed)(GnomeMDI *, GtkWidget *);
-	void        (*app_created)(GnomeMDI *, GnomeApp *);
+	gint        (*add_child)     (GnomeMDI *mdi, GnomeMDIChild *child);
+	gint        (*remove_child)  (GnomeMDI *mdi, GnomeMDIChild *child);
+	gint        (*add_view)      (GnomeMDI *mdi, GtkWidget *view);
+	gint        (*remove_view)   (GnomeMDI *mdi, GtkWidget *view);
+	void        (*child_changed) (GnomeMDI *mdi, GnomeMDIChild *app);
+	void        (*view_changed)  (GnomeMDI *mdi, GtkWidget *old_view);
+	void        (*app_created)   (GnomeMDI *mdi, GnomeApp *app);
 };
 
 /*
@@ -95,66 +97,65 @@ struct _GnomeMDIClass {
  *
  * gint add_child(GnomeMDI *, GnomeMDIChild *)
  * gint add_view(GnomeMDI *, GtkWidget *)
- *   are called before actually adding a mdi_child or a view to the MDI. if the handler returns
- *   TRUE, the action proceeds otherwise the mdi_child or view are not added.
+ *   are called before actually adding a mdi_child or a view to the MDI. if the
+ *   handler returns TRUE, the action proceeds otherwise the child or the view
+ *   are not added and are destroyed.
  *
  * gint remove_child(GnomeMDI *, GnomeMDIChild *)
  * gint remove_view(GnomeMDI *, GtkWidget *)
- *   are called before removing mdi_child or view. the handler should return true if the object
- *   is to be removed from MDI
+ *   are called before removing a child or a view. the handler should return
+ *   true if the object is to be removed from MDI
  *
  * void child_changed(GnomeMDI *, GnomeMDIChild *)
- *   gets called each time when active child is changed with the second argument
- *   pointing to the old child. mdi->active_view and mdi->active_child still already
- *   hold the new values
+ *   gets called each time when active child is changed with the second
+ *   argument pointing to the old child. mdi->active_view and
+ *   mdi->active_child still already hold the new values
  *
  * void view_changed(GnomeMDI *, GtkWidget *)
- *   is emitted whenever a view is changed, regardless of it being the view of the same child as
- *   the old view or not. the second argument points to the old view, mdi->active_view and
- *   mdi->active_child hold the new values. if the child has also been changed, this signal is
- *   emitted after the child_changed signal.
+ *   is emitted whenever a view is changed, regardless of it being the view of
+ *   the same child as the old view or not. the second argument points to the
+ *   old view, mdi->active_view and mdi->active_child hold the new values.
+ *   if the child has also been changed, this signal is emitted after the
+ *   child_changed signal.
  * 
  * void app_created(GnomeMDI *, GnomeApp *)
- *   is called with each newly created GnomeApp to allow the MDI user to customize it (add a
- *   statusbar, toolbars or menubar if the method with GnomeUIInfo templates is not sufficient,
- *   etc.).
- *   no contents may be set since GnomeMDI uses them for storing either a view of a child
- *   or a notebook
+ *   is called with each newly created GnomeApp to allow the MDI user to
+ *   customize it (add a statusbar, toolbars or menubar if the method with
+ *   GnomeUIInfo templates is not sufficient, etc.).
+ *   no contents may be set since GnomeMDI uses them for storing either a
+ *   view of a child or a notebook
  */
 
-guint         gnome_mdi_get_type            (void);
+guint          gnome_mdi_get_type            (void);
 
-GtkObject     *gnome_mdi_new                (const gchar *appname, const gchar *title);
+GtkObject     *gnome_mdi_new                 (const gchar *appname, const gchar *title);
 
-void          gnome_mdi_set_mode            (GnomeMDI *mdi, GnomeMDIMode mode);
+/* setting the mdi mode */
+void           gnome_mdi_set_mode            (GnomeMDI *mdi, GnomeMDIMode mode);
 
 /* setting the menu and toolbar stuff */
-void          gnome_mdi_set_menubar_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl);
-void          gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl);
-void          gnome_mdi_set_child_menu_path (GnomeMDI *mdi, const gchar *path);
-void          gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path);
+void           gnome_mdi_set_menubar_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl);
+void           gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl);
+void           gnome_mdi_set_child_menu_path (GnomeMDI *mdi, const gchar *path);
+void           gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path);
 
 /* manipulating views */
-gint          gnome_mdi_add_view            (GnomeMDI *mdi, GnomeMDIChild *child);
-gint          gnome_mdi_add_toplevel_view   (GnomeMDI *mdi, GnomeMDIChild *child);
-gint          gnome_mdi_remove_view         (GnomeMDI *mdi, GtkWidget *view, gint force);
-
-GtkWidget     *gnome_mdi_get_active_view    (GnomeMDI *mdi);
-void          gnome_mdi_set_active_view     (GnomeMDI *mdi, GtkWidget *view);
+gint           gnome_mdi_add_view            (GnomeMDI *mdi, GnomeMDIChild *child);
+gint           gnome_mdi_add_toplevel_view   (GnomeMDI *mdi, GnomeMDIChild *child);
+gint           gnome_mdi_remove_view         (GnomeMDI *mdi, GtkWidget *view);
+GtkWidget     *gnome_mdi_get_active_view     (GnomeMDI *mdi);
+void           gnome_mdi_set_active_view     (GnomeMDI *mdi, GtkWidget *view);
 
 /* manipulating children */
-gint          gnome_mdi_add_child           (GnomeMDI *mdi, GnomeMDIChild *child);
-gint          gnome_mdi_remove_child        (GnomeMDI *mdi, GnomeMDIChild *child, gint force);
-gint          gnome_mdi_remove_all          (GnomeMDI *mdi, gint force);
+gint           gnome_mdi_add_child           (GnomeMDI *mdi, GnomeMDIChild *child);
+gint           gnome_mdi_remove_child        (GnomeMDI *mdi, GnomeMDIChild *child);
+gint           gnome_mdi_remove_all          (GnomeMDI *mdi);
+GnomeMDIChild *gnome_mdi_get_active_child    (GnomeMDI *mdi);
+GnomeMDIChild *gnome_mdi_find_child          (GnomeMDI *mdi, const gchar *name);
 
-void          gnome_mdi_open_toplevel       (GnomeMDI *mdi);
-
-void          gnome_mdi_update_child        (GnomeMDI *mdi, GnomeMDIChild *child);
-
-GnomeMDIChild *gnome_mdi_get_active_child   (GnomeMDI *mdi);
-GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *mdi, const gchar *name);
-
-GnomeApp      *gnome_mdi_get_active_window  (GnomeMDI *mdi);
+/* manipulating windows */
+void           gnome_mdi_open_toplevel       (GnomeMDI *mdi);
+GnomeApp      *gnome_mdi_get_active_window   (GnomeMDI *mdi);
 
 /*
  * the following two functions are here to make life easier if an application

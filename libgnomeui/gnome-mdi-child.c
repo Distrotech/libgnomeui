@@ -28,6 +28,9 @@
 #include "gnome-app-helper.h"
 #include "gnome-mdi-child.h"
 #include "gnome-mdi.h"
+#include "gnome-mdiP.h"
+
+#define GNOME_ENABLE_DEBUG
 
 static void       gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void       gnome_mdi_child_init             (GnomeMDIChild *);
@@ -36,10 +39,6 @@ static void       gnome_mdi_child_finalize         (GtkObject *);
 
 static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *, gpointer);
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
-
-/* declare the functions from gnome-mdi.c that we need but are not public */
-void child_list_menu_remove_item (GnomeMDI *, GnomeMDIChild *);
-void child_list_menu_add_item    (GnomeMDI *, GnomeMDIChild *);
 
 static GtkObjectClass *parent_class = NULL;
 
@@ -86,6 +85,14 @@ static void gnome_mdi_child_init (GnomeMDIChild *mdi_child)
 	mdi_child->name = NULL;
 	mdi_child->parent = NULL;
 	mdi_child->views = NULL;
+}
+
+static GtkWidget *gnome_mdi_child_create_view (GnomeMDIChild *child)
+{
+	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view)
+		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view(child, NULL);
+
+	return NULL;
 }
 
 /* the default set_label function: returns a GtkLabel with child->name
@@ -169,7 +176,7 @@ GtkWidget *gnome_mdi_child_add_view (GnomeMDIChild *mdi_child)
 	if(view) {
 		mdi_child->views = g_list_append(mdi_child->views, view);
 
-		gtk_object_set_data(GTK_OBJECT(view), "GnomeMDIChild", mdi_child);
+		gtk_object_set_data(GTK_OBJECT(view), GNOME_MDI_CHILD_KEY, mdi_child);
 	}
 
 	return view;
@@ -206,7 +213,7 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
 	gchar *old_name = mdi_child->name;
 
 	if(mdi_child->parent)
-		child_list_menu_remove_item(GNOME_MDI(mdi_child->parent), mdi_child);
+		gnome_mdi_child_list_remove(GNOME_MDI(mdi_child->parent), mdi_child);
 
 	mdi_child->name = (gchar *)g_strdup(name);
 
@@ -214,7 +221,7 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
 		g_free(old_name);
 
 	if(mdi_child->parent) {
-		child_list_menu_add_item(GNOME_MDI(mdi_child->parent), mdi_child);
+		gnome_mdi_child_list_add(GNOME_MDI(mdi_child->parent), mdi_child);
 		gnome_mdi_update_child(GNOME_MDI(mdi_child->parent), mdi_child);
 	}
 }
@@ -235,12 +242,4 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
 void gnome_mdi_child_set_menu_template (GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl)
 {
 	mdi_child->menu_template = menu_tmpl;
-}
-
-static GtkWidget *gnome_mdi_child_create_view (GnomeMDIChild *child)
-{
-	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view)
-		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view(child, NULL);
-
-	return NULL;
 }

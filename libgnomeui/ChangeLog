@@ -1,3 +1,24 @@
+1999-12-20  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: major source compatibilty mayhem;
+	(gnome_mdi_remove_view, gnome_mdi_remove_child): drop the force
+	parameter. always respect the return from the corresponding
+	signal handler.
+	(gnome_mdi_new_toplevel): new function.
+	(gnome_mdi_app_create, gnome_mdi_view_changed): new default signal
+	handlers. both these signals now RUN_FIRST.
+	(gnome_mdi_update_child): not public any more.
+	lots of fixes and simplifications of the code;
+	* gnome-mdi-child.c: #include<gnome-mdiP.h> and use the new
+	functions
+	* gnome-mdi-session.c: #include<gnome-mdiP.h>
+	(restore_window_child): show the window _after_ it has been messed
+	with.
+	* gnome-mdiP.h: a private header with stuff shared between all
+	gnome-mdi-* modules.
+	* Makefile.am: put gnome-mdiP.h in libgnomeui_la_SOURCES as this
+	does not install it.
+
 1999-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (gnome_mdi_get_child_menu_info): fix a typo in

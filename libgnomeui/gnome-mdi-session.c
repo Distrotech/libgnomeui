@@ -5,7 +5,7 @@
 
 #include "gnome-dock-layout.h"
 #include "gnome-mdi-session.h"
-
+#include "gnome-mdiP.h"
 
 static GPtrArray *	config_get_list		(const gchar *);
 static void		config_set_list		(const gchar *, GList *,
@@ -96,6 +96,7 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 {
 	GPtrArray *windows, *views;
 	GnomeMDIChild *mdi_child;
+	GtkWidget *new_window = NULL;
 	guint k;
 
 	windows = g_hash_table_lookup (child_windows, (gpointer) child);
@@ -114,7 +115,9 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 		if (*init)
 			gnome_mdi_add_view (mdi, mdi_child);
 		else {
-			gnome_mdi_add_toplevel_view (mdi, mdi_child);
+			new_window = gnome_mdi_new_toplevel (mdi);
+
+			gnome_mdi_add_view (mdi, mdi_child);
 			
 			gtk_widget_set_usize
 				(GTK_WIDGET (mdi->active_window),
@@ -133,6 +136,9 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 		g_hash_table_insert (view_hash,
 				     views->pdata [k],
 				     mdi->active_view);
+
+		if(new_window)
+			gtk_widget_show(new_window);
 	}
 }
 
@@ -182,8 +188,6 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 	{
 		GnomeApp *app = mdi->active_window;
 		GnomeDockLayout *layout;
-
-		printf("app->layout == %08lx\n", app->layout);
 
 		/* this should be a nasty hack before dock-layout gets a bit better
 		   don't even know if it works, though ;) */
