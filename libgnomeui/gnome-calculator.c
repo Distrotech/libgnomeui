@@ -324,6 +324,68 @@ reduce_stack(GnomeCalculator *gc)
 	}
 }
 
+/* Move these up for find_precedence(). */
+static gdouble
+c_add(gdouble arg1, gdouble arg2)
+{
+	return arg1+arg2;
+}
+
+static gdouble
+c_sub(gdouble arg1, gdouble arg2)
+{
+	return arg1-arg2;
+}
+
+static gdouble
+c_mul(gdouble arg1, gdouble arg2)
+{
+	return arg1*arg2;
+}
+
+static gdouble
+c_div(gdouble arg1, gdouble arg2)
+{
+	if(arg2==0) {
+		errno=ERANGE;
+		return 0;
+	}
+	return arg1/arg2;
+}
+
+static int
+find_precedence(MathFunction2 f)
+{
+        if ( f == NULL || f == c_add || f == c_sub)
+                return 0;
+        else if ( f == c_mul || f == c_div )
+                return 1;
+        else
+                return 2;
+}
+
+static void
+reduce_stack_prec(GnomeCalculator *gc, MathFunction2 func)
+{
+        CalculatorStack *stack;
+        GList *list;
+
+        list = g_list_next(gc->stack);
+        if (!list)
+                return;
+
+        stack = list->data;
+        if ( stack->type == CALCULATOR_PARENTHESIS )
+                return;
+
+        if ( find_precedence(func) <= find_precedence(stack->d.func) ) {
+                reduce_stack(gc);
+                reduce_stack_prec(gc,func);
+        }
+
+        return;
+}
+
 static void
 push_input(GnomeCalculator *gc)
 {
@@ -415,7 +477,7 @@ no_func(GtkWidget *w, gpointer data)
 		return;
 
 	push_input(gc);
-	reduce_stack(gc);
+	reduce_stack_prec(gc,NULL);
 	if(gc->error) return;
 	set_result(gc);
 
@@ -506,7 +568,7 @@ math_func(GtkWidget *w, gpointer data)
 		return;
 	}
 
-	reduce_stack(gc);
+	reduce_stack_prec(gc,func);
 	if(gc->error) return;
 	set_result(gc);
 
@@ -694,34 +756,6 @@ negate_val(GtkWidget *w, gpointer data)
 	sscanf(gc->result_string,"%lf",&gc->result);
 
 	put_led_font(gc);
-}
-
-static gdouble
-c_add(gdouble arg1, gdouble arg2)
-{
-	return arg1+arg2;
-}
-
-static gdouble
-c_sub(gdouble arg1, gdouble arg2)
-{
-	return arg1-arg2;
-}
-
-static gdouble
-c_mul(gdouble arg1, gdouble arg2)
-{
-	return arg1*arg2;
-}
-
-static gdouble
-c_div(gdouble arg1, gdouble arg2)
-{
-	if(arg2==0) {
-		errno=ERANGE;
-		return 0;
-	}
-	return arg1/arg2;
 }
 
 static gdouble
@@ -1000,7 +1034,7 @@ sub_parenth(GtkWidget *w, gpointer data)
 		return;
 
 	push_input(gc);
-	reduce_stack(gc);
+	reduce_stack_prec(gc,NULL);
 	if(gc->error) return;
 	set_result(gc);
 
