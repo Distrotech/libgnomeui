@@ -1,0 +1,276 @@
+		Porting GNOME 1.0 Applications to GNOME 2.0
+
+
+[this document is still work-in-progress.]
+
+Notation
+========
+
+* MODIFIED
+
+  The file/widget/feature has been modified in a source incompatible way,
+  but it is possible to reuse old code without completely rewriting it
+  (compatibility layer exists, fixable by scripts, ....)
+
+* CHANGED API
+
+  The API of this file/widget/feature has completely changed; it is not
+  possible to reuse old code without rewriting at least large parts of it.
+
+* ADDED FUNCTIONALITY
+
+  There is some added functionality over GNOME 1.x.
+
+* OBSOLETE
+
+  The file/widget/feature is obsolete and it has been moved to libcompat.
+
+* REMOVED
+
+  The file/widget/feature has been completely removed, it is not in libcompat.
+  This normally means that it is easier to fix code which was using this than
+  to provide a compatibility layer.
+
+* NEW
+
+  The file/widget/feature is completely new in GNOME 2.0.
+
+* UNKNOWN
+
+  I don't know what's up with this.
+
+
+How to prepare your GNOME 1.0 Applications for GNOME 2.0
+========================================================
+
+There are some things which you can do in your GNOME 1.0 Application
+to make it easier to port them to GNOME 2.0 while still keeping
+compatible with the GNOME 1.x platform.
+
+We will add some new functions to the stable version of gnome-libs
+after GNOME 1.4 which will help you to archive this. The most important
+thing is to use accessor functions rather than accessing widget data
+directly whereever it's possible. These new functions will help you
+doing this.
+
+* GnomeEntry - MODIFIED
+
+  - this is isn't a GtkCombo any longer, but a GnomeSelector.
+
+  The following functions have been removed:
+
+  - gnome_entry_gtk_entry()
+
+    GnomeEntry isn't a GtkCombo/GtkEntry anymore; use
+    gnome_entry_get_text() and gnome_entry_set_text() to access
+    the entry text.
+
+  - gnome_entry_construct() - you can now use g_object_new() etc.
+
+  The following functions are deprecated:
+
+  - gnome_entry_get_history_id, gnome_entry_set_history_id
+    gnome_entry_get_history_id, gnome_entry_set_max_saved
+    gnome_entry_get_max_saved, gnome_entry_prepend_history
+    gnome_entry_append_history, gnome_entry_load_history
+    gnome_entry_save_history, gnome_entry_clear_history
+
+    Use the corresponding functions in GnomeSelector.
+
+  The following new functions have been added:
+
+  - gnome_entry_get_text(), gnome_entry_set_text()
+
+  These functions will be added to the stable gnome-libs after GNOME 1.4;
+  in all existing code. To prepare things in GNOME 1.x:
+
+  - use gnome_entry_get/set_text() rather than gnome_entry_gtk_entry()
+
+  - try not to access any of the 'changed', 'history_id', 'items' and
+    'max_saved' fields in the GnomeEntry directly, they will be private
+    in GNOME 2.0.
+
+* GnomeFileEntry - OBSOLETE
+
+  - this has been replaced by GnomeFileSelector.
+
+* GnomeIconEntry - MODIFIED + ADDED FUNCTIONALITY
+
+  - this is now derived from GnomeFileSelector instead of GtkVBox.
+  - previously, the difference between GnomeIconEntry and GnomePixmapEntry
+    was that you could specify the size of the preview in a GnomePixmapEntry;
+    this functionality has been moved into GnomeIconEntry so that
+    GnomePixmapEntry is now obsolete.
+
+  The following functions have been removed:
+
+  - gnome_icon_entry_construct() - you can now use g_object_new() etc.
+  - gnome_icon_entry_gnome_file_entry(): use parent class
+  - gnome_icon_entry_gnome_entry (): use parent class
+  - gnome_icon_entry_gtk_entry (): don't suck things out of this directly
+
+  The following functions are deprecated:
+
+  - gnome_icon_entry_set_pixmap_subdir(): Fixme, Fixme.
+  - gnome_icon_entry_set_icon(): use gnome_selector_set_uri().
+
+  The following new functions have been added:
+
+  - gnome_icon_entry_get_icon_selector ()
+  - gnome_icon_entry_set_preview_size (): formerly in GnomePixmapEntry.
+
+  Other source incompatible changes:
+
+  - `fentry', `pickbutton', `pick_dialog', `pick_dialog_dir' have been
+    removed from the GnomeIconEntry instance struct.
+
+* GnomePixmapEntry - OBSOLETE
+
+  - this has been obsoleted by GnomeIconEntry.
+
+  - we can implement this in libcompat, but I don't think this is necessary;
+    all you need to do to get a pixmap entry is something like
+
+    pentry = g_object_new (gnome_icon_entry_get_type (),
+			   "preview_x", 200, "preview_y", 200,
+			   "is_pixmap_entry", TRUE,
+			   NULL);
+
+    and it will look and behave like the old GnomePixmapEntry.
+
+    [FIXME: We may want to rename GnomeIconEntry -> GnomePixmapEntry.]
+
+* GnomeCalculator - REMOVED
+
+  - this has been moved to libcompat for the moment; it should go somewhere
+    else, but not in libgnomeui.
+
+* GnomeNumberEntry - REMOVED
+
+  - this was using GnomeCalculator and has been moved to libcompat as well.
+
+* GnomeProcBar - REMOVED
+
+  - this was only used in GTop and some applets; it has been moved into GTop.
+  - the three applets will be moved into GTop as well to share some code with
+    it for GNOME 2.0.
+
+* gnome-properties, gnome-property-entries - REMOVED
+
+  - this was only used in GTop and some applets; it is totally obsolete due
+    to GConf.
+
+* GnomeAbout - ADDED FUNCTIONALITY
+
+  - some things have been added; it doesn't look finished to me.
+
+* GnomeAnimator - UNKNOWN
+
+  - I think this should be removed from libgnomeui.
+
+* GnomeAppBar - MODIFIED
+
+  The following functions have been renamed:
+
+  - gnome_appbar_set_progress() -> gnome_appbar_set_progress_percentage().
+
+  The following new functions have been added:
+
+  - gnome_appbar_get_status()
+
+  Other source incompatible changes:
+
+  - all fields have been removed from the GnomeAppBar instance struct.
+
+* gnome-dentry-edit - OBSOLETE
+
+* gnome-dns - OBSOLETE
+
+* gnome-guru - OBSOLETE
+
+* gnome-spell - OBSOLETE
+
+* gnome-startup - OBSOLETE
+
+* gtkcauldron - OBSOLETE
+
+* gnome-druid-page-start, gnome-druid-page-finish: OBSOLETE
+
+* gtk-ted - REMOVED
+
+* gnome-font-selector - OBSOLETE
+
+* gnome-color-picker - MODIFIED
+
+  The following functions have been added:
+
+  - gnome_color_picker_get_dither ()
+  - gnome_color_picker_get_use_alpha ()
+  - gnome_color_picker_get_title ()
+ 
+  - all fields have been removed from the GnomeColorPicker instance struct.
+
+* gnome-date-edit - MODIFIED
+
+  - all fields have been removed from the GnomeDateEdit instance struct.
+
+  The following functions have been renamed:
+
+  - gnome_date_edit_get_date() -> gnome_date_edit_get_time()
+
+  The following functions have been added:
+
+  - gnome_date_edit_get_initial_time()
+
+- gnome-font-picker - MODIFIED
+
+  - private fields have been removed from the GnomeFontPicker instance struct.
+
+  The following functions have been added:
+
+  - gnome_font_picker_get_font_name()
+
+- gnome-href - MODIFIED
+
+  - all fields have been removed from the GnomeHRef instance struct.
+
+  The following functions have been renamed:
+
+  - gnome_href_get_label() -> gnome_href_get_text()
+  - gnome_href_set_label() -> gnome_href_set_text()
+
+- gnome-icon-list - MODIFIED and ADDED FUNCTIONALITY
+
+  - all fields have been removed from the GnomeIconList instance struct.
+
+  The following functions have a different API:
+
+  - gnome_icon_list_new() - removed `GtkAdjustment *adj' argument
+  - gnome_icon_list_unselect_all() - removed `GdkEvent *event' and
+  `gpointer keep' arguments.
+
+  The following functions have been removed:
+
+  - gnome_icon_list_new_flags()
+  - gnome_icon_list_set_hadjustment()
+  - gnome_icon_list_set_vadjustment()
+  - gnome_icon_list_insert_imlib()
+  - gnome_icon_list_append_imlib()
+
+  The following new functions have been added:
+
+  - gnome_icon_list_insert_pixbuf()
+  - gnome_icon_list_append_pixbuf()
+  - gnome_icon_list_get_selection_mode()
+  - gnome_icon_list_get_selectinon()
+  - gnome_icon_list_get_icon_filename()
+  - gnome_icon_list_find_icon_from_filename()
+
+* gnome-icon-sel - OBSOLETE
+
+  Use GnomeIconSelector.
+
+
+Last changed Feb 25, 2001.
+Martin Baulig <baulig@suse.de>
+George Lebl <jirka@5z.com>
