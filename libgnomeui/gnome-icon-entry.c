@@ -597,6 +597,18 @@ do_construct_handler (GnomeSelector *selector)
 
     ientry = GNOME_ICON_ENTRY (selector);
 
+    if (get_value_boolean (ientry, "want_default_behaviour")) {
+	g_object_set (G_OBJECT (ientry),
+		      "want_default_behaviour", FALSE,
+		      "use_default_entry_widget", TRUE,
+		      "use_default_selector_widget", FALSE,
+		      "use_default_browse_dialog", TRUE,
+		      "want_browse_button", FALSE,
+		      "want_clear_button", FALSE,
+		      "want_default_button", FALSE,
+		      NULL);
+    }
+
     /* Create the default browser dialog if requested. */
     if (get_value_boolean (ientry, "use_default_browse_dialog") &&
 	!has_value_widget (ientry, "browse_dialog")) {

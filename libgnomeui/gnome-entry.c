@@ -166,6 +166,16 @@ do_construct_handler (GnomeSelector *selector)
 
 	g_message (G_STRLOC);
 
+	if (get_value_boolean (gentry, "want_default_behaviour")) {
+		g_object_set (G_OBJECT (gentry),
+			      "want_default_behaviour", FALSE,
+			      "use_default_entry_widget", TRUE,
+			      "want_browse_button", FALSE,
+			      "want_clear_button", FALSE,
+			      "want_default_button", FALSE,
+			      NULL);
+	}
+
 	if (get_value_boolean (gentry, "use_default_entry_widget") &&
 	    !has_value_widget (gentry, "entry_widget")) {
 		GtkWidget *entry_widget;

@@ -1,5 +1,21 @@
 2001-02-26  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector.c (PROP_WANT_DEFAULT_BEHAVIOUR): New boolean property.
+	If it's set, then each of the GnomeSelector subclasses will show its
+	default behaviour, ie. whether it'll have a "Browse" button etc.
+	The default for this property is TRUE so that you can now do a
+	g_object_new (GNOME_TYPE_ICON_ENTRY, ....) and get an object which
+	actually looks like a GnomeIconEntry.
+
+	If you want to set any of PROP_ENTRY_WIDGET, PROP_SELECTOR_WIDGET,
+	PROP_BROWSE_DIALOG, PROP_USE_DEFAULT_ENTRY_WIDGET,
+	PROP_USE_DEFAULT_SELECTOR_WIDGET, PROP_USE_DEFAULT_BROWSE_DIALOG,
+	PROP_WANT_BROWSE_BUTTON, PROP_WANT_CLEAR_BUTTON or
+	PROP_WANT_DEFAULT_BUTTON in g_object_new(), you need to set
+	PROP_WANT_DEFAULT_BEHAVIOUR to FALSE to have this take effect.
+
+2001-02-26  Martin Baulig  <baulig@suse.de>
+
 	For GnomeSelector and its subclasses, you can now use g_object_new()
 	to create a new instance.
 

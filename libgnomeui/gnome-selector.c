@@ -83,6 +83,7 @@ struct _GnomeSelectorPrivate {
 
     guint32      flags;
 
+    guint32      want_default_behaviour : 1;
     guint32      use_default_entry_widget : 1;
     guint32      use_default_selector_widget : 1;
     guint32      use_default_browse_dialog : 1;
@@ -216,6 +217,7 @@ enum {
     PROP_ENTRY_WIDGET,
     PROP_SELECTOR_WIDGET,
     PROP_BROWSE_DIALOG,
+    PROP_WANT_DEFAULT_BEHAVIOUR,
     PROP_USE_DEFAULT_ENTRY_WIDGET,
     PROP_USE_DEFAULT_SELECTOR_WIDGET,
     PROP_USE_DEFAULT_BROWSE_DIALOG,
@@ -532,6 +534,13 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			       G_PARAM_CONSTRUCT_ONLY)));
     g_object_class_install_property
 	(gobject_class,
+	 PROP_WANT_DEFAULT_BEHAVIOUR,
+	 g_param_spec_boolean ("want_default_behaviour", NULL, NULL,
+			       TRUE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
 	 PROP_USE_DEFAULT_ENTRY_WIDGET,
 	 g_param_spec_boolean ("use_default_entry_widget", NULL, NULL,
 			       TRUE,
@@ -660,6 +669,10 @@ gnome_selector_set_property (GObject *object, guint param_id,
 	if (selector->_priv->browse_dialog)
 	    gtk_widget_ref (selector->_priv->browse_dialog);
 	break;
+    case PROP_WANT_DEFAULT_BEHAVIOUR:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->want_default_behaviour = g_value_get_boolean (value);
+	break;
     case PROP_USE_DEFAULT_ENTRY_WIDGET:
 	g_assert (!selector->_priv->constructed);
 	selector->_priv->use_default_entry_widget = g_value_get_boolean (value);
@@ -727,6 +740,9 @@ gnome_selector_get_property (GObject *object, guint param_id, GValue *value,
 	break;
     case PROP_BROWSE_DIALOG:
 	g_value_set_object (value, (GObject *) selector->_priv->browse_dialog);
+	break;
+    case PROP_WANT_DEFAULT_BEHAVIOUR:
+	g_value_set_boolean (value, selector->_priv->want_default_behaviour);
 	break;
     case PROP_USE_DEFAULT_ENTRY_WIDGET:
 	g_value_set_boolean (value, selector->_priv->use_default_entry_widget);
