@@ -59,7 +59,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-druid-page.c		\
 	gnome-druid-page-edge.c		\
 	gnome-druid-page-standard.c	\
-	gnome-component-widget.c	\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
 	gnome-gconf-ui.c		\
@@ -95,7 +94,6 @@ gnome_headers = \
 	gnome-druid-page.h		\
 	gnome-druid-page-edge.h		\
 	gnome-druid-page-standard.h	\
-	gnome-component-widget.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
 	gnome-gconf-ui.h		\

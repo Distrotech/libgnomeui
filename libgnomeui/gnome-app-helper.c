@@ -55,6 +55,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-gconf.h>
 #include <libgnome/gnome-program.h>
+#include <libgnome/gnome-init.h>
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"
