@@ -10,7 +10,7 @@
 
 /* Use of gdk_imlib can be disabled here.
  */
-#undef USE_GDK_IMLIB
+#define USE_GDK_IMLIB
 
 
 #include <libgnome/gnome-defs.h>
@@ -96,7 +96,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_SEARCH      "Search"
 #define GNOME_STOCK_PIXMAP_BACK        "Back"
 #define GNOME_STOCK_PIXMAP_FORWARD     "Forward"
-#define GNOME_STOCK_PIXMAP_EXIT        "Exit"
+#define GNOME_STOCK_PIXMAP_QUIT        "Quit"
+
+#define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
 
 
 /* The basic pixmap version of an icon. */
@@ -124,7 +126,8 @@ typedef enum {
         GNOME_STOCK_PIXMAP_TYPE_WIDGET
 #ifdef USE_GDK_IMLIB
 	,
-	GNOME_STOCK_PIXMAP_TYPE_IMLIB
+	GNOME_STOCK_PIXMAP_TYPE_IMLIB,
+	GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED
 #endif /* USE_GDK_IMLIB */
 } GnomeStockPixmapType;
 
@@ -144,6 +147,16 @@ struct _GnomeStockPixmapEntryImlib {
 	int width, height;
         gchar *rgb_data;
 	GdkImlibColor shape;
+};
+
+/* a scalable version */
+typedef struct _GnomeStockPixmapEntryImlibScaled GnomeStockPixmapEntryImlibScaled;
+struct _GnomeStockPixmapEntryImlibScaled {
+        GnomeStockPixmapType type;
+	int width, height;
+        gchar *rgb_data;
+	GdkImlibColor shape;
+	int scaled_width, scaled_height;
 };
 #endif
 
@@ -184,6 +197,7 @@ union _GnomeStockPixmapEntry {
         GnomeStockPixmapEntryWidget widget;
 #ifdef USE_GDK_IMLIB
 	GnomeStockPixmapEntryImlib imlib;
+	GnomeStockPixmapEntryImlibScaled imlib_s;
 #endif /* USE_GDK_IMLIB */ 
 };
 
@@ -223,9 +237,14 @@ GtkWidget *gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon);
 /* just fetch a pixmap */
 /* window isn't needed for pixmap creation but for the style
  * when a disabled icon is automatically created */
+/* okay, since there are many problems with this function (realization issues),
+ * don't use it. Use gnome_stock_pixmap_widget instead -- it's far more save and
+ * the result is the same */
+#if 0
 GnomePixmap           *gnome_stock_pixmap          (GtkWidget *window,
                                                     char *icon,
                                                     char *subtype);
+#endif
 
 /* just fetch a GnomeStockPixmapWidget */
 GtkWidget             *gnome_stock_pixmap_widget   (GtkWidget *window,
@@ -251,7 +270,7 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
 #define GNOME_STOCK_BUTTON_CANCEL "Button_Cancel"
 #define GNOME_STOCK_BUTTON_YES    "Button_Yes"
 #define GNOME_STOCK_BUTTON_NO     "Button_No"
-#define GNOME_STOCK_BUTTON_CLOSE  "Button_Exit"
+#define GNOME_STOCK_BUTTON_CLOSE  "Button_Close"
 #define GNOME_STOCK_BUTTON_APPLY  "Button_Apply"
 #define GNOME_STOCK_BUTTON_HELP   "Button_Help"
 
@@ -264,14 +283,18 @@ GtkWidget             *gnome_stock_button          (char *type);
 #define GNOME_STOCK_MENU_NEW      "Menu_New"
 #define GNOME_STOCK_MENU_SAVE     "Menu_Save"
 #define GNOME_STOCK_MENU_OPEN     "Menu_Open"
-#define GNOME_STOCK_MENU_EXIT     "Menu_Exit"
+#define GNOME_STOCK_MENU_QUIT     "Menu_Quit"
 #define GNOME_STOCK_MENU_CUT      "Menu_Cut"
 #define GNOME_STOCK_MENU_COPY     "Menu_Copy"
 #define GNOME_STOCK_MENU_PASTE    "Menu_Paste"
 #define GNOME_STOCK_MENU_PROP     "Menu_Properties"
+#define GNOME_STOCK_MENU_PREF     "Menu_Preferences"
 #define GNOME_STOCK_MENU_ABOUT    "Menu_About"
 #define GNOME_STOCK_MENU_SCORES   "Menu_Scores"
 #define GNOME_STOCK_MENU_BLANK    "Menu_"
+
+#define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT
+
 
 /* returns a GtkMenuItem with an stock icon and text */
 GtkWidget             *gnome_stock_menu_item       (char *type, char *text);

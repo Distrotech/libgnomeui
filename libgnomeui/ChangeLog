@@ -1,3 +1,13 @@
+1998-03-16  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock*.[ch]: Added new icons for yes/no buttons. Added a
+	quick and durty scale_down function to convert the toolbar icons for
+	the menus. Hope it works on all mashines. Removed external reference
+	to gnome_stock_pixmap - use gnome_stock_pixmap_widget instead.
+
+	* gnome-pixmap.[ch]: Added gnome_pixmap_new_from_rgb_d_shaped to
+	support imlib's shape_color for gnome-stock.
+
 1998-03-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-rootwin.h: New widget GnomeRootWin.  This is a widget that

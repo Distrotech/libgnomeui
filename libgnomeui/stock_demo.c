@@ -61,7 +61,7 @@ create_menu(GtkWidget *window)
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_EXIT, _("Exit"));
+        w = gnome_stock_menu_item(GNOME_STOCK_MENU_QUIT, _("Quit"));
         gtk_widget_show(w);
         gtk_widget_install_accelerator(w, accel, "activate",
                                        'Q', GDK_CONTROL_MASK);
@@ -291,6 +291,16 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = gtk_label_new("Preferences");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 5, 6, 1, 2);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_NEW));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 0, 1, 2, 3);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_OPEN));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 1, 2, 2, 3);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_PASTE));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 2, 3, 2, 3);
 }
 
 
@@ -318,7 +328,7 @@ main(int argc, char **argv)
 	gtk_widget_show(vbox);
 	w = gtk_label_new("Click on `Cancel' to disable the toolbar and menu items\n"
 			  "Click on `OK' to enable the toolbar and menu items\n"
-			  "Select File->Exit or the Exit button to exit the app");
+			  "Select File->Quit or the Close button to exit the app");
 	gtk_widget_show(w);
 	gtk_box_pack_start(GTK_BOX(vbox), w, TRUE, TRUE, 2);
 
@@ -343,6 +353,14 @@ main(int argc, char **argv)
 				  GTK_OBJECT(window));
 
 	w = gnome_stock_button(GNOME_STOCK_BUTTON_HELP);
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_NO);
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_YES);
 	gtk_widget_show(w);
 	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
 

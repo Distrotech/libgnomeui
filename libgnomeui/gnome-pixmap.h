@@ -4,6 +4,7 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwidget.h>
+#include <gdk_imlib.h>
 
 
 BEGIN_GNOME_DECLS
@@ -37,6 +38,9 @@ GtkWidget *gnome_pixmap_new_from_xpm_d         (char **xpm_data);
 GtkWidget *gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height);
 GtkWidget *gnome_pixmap_new_from_rgb_d         (unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height);
+GtkWidget *gnome_pixmap_new_from_rgb_d_shaped  (unsigned char *data, unsigned char *alpha,
+						int rgb_width, int rgb_height,
+						GdkImlibColor *shape_color);
 GtkWidget *gnome_pixmap_new_from_rgb_d_at_size (char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						int width, int height);
@@ -47,6 +51,9 @@ void       gnome_pixmap_load_xpm_d             (GnomePixmap *gpixmap, char **xpm
 void       gnome_pixmap_load_xpm_d_at_size     (GnomePixmap *gpixmap, char **xpm_data, int width, int height);
 void       gnome_pixmap_load_rgb_d             (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height);
+void       gnome_pixmap_load_rgb_d_shaped      (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
+						int rgb_width, int rgb_height,
+						GdkImlibColor *shape_color);
 void       gnome_pixmap_load_rgb_d_at_size     (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						int width, int height);
