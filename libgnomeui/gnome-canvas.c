@@ -53,6 +53,7 @@
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
 #include "gnome-canvas.h"
+#include "libart_lgpl/art_misc.h"
 
 
 static void group_add    (GnomeCanvasGroup *group, GnomeCanvasItem *item);
