@@ -1,3 +1,7 @@
+2005-01-24  Kjartan Maraas  <kmaraas@gnome.org>
+
+	configure.in: Merge fix for bug #154969.
+
 2004-12-03  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: (load_dir):
