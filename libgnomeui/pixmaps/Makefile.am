@@ -10,7 +10,7 @@ noinst_HEADERS = gnome-stock-imlib.h
 
 CLEANFILES = gnome-stock-imlib.h tmp.h
 
-gnome-stock-imlib.h: Makefile stock_*.xpm
+gnome-stock-imlib.h: Makefile stock_*.png
 	@echo "/* gnome stock icons in Imlib usable rgb data" >tmp.h
 	@echo " *" >>tmp.h
 	@echo " * Copyright (C) 1997 the Free Software Foundation" >>tmp.h
@@ -25,7 +25,7 @@ gnome-stock-imlib.h: Makefile stock_*.xpm
 	@echo " * are Copyright (C) 1998 Tuomas Kuosmanen" >>tmp.h
 	@echo " */" >>tmp.h
 	@echo >>tmp.h
-	../../tools/convertrgb/convertrgb -n -a=tmp.h stock_*.xpm
+	../../tools/convertrgb/convertrgb -n -a=tmp.h stock_*.png
 	sed -e 's/stock_\(.*\)_rgb/imlib_\1/' <tmp.h >gnome-stock-imlib.h ; \
 		rm -f tmp.h
 

@@ -1,3 +1,8 @@
+Sun Sep 20 15:26:41 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* pixmaps/: use PNG images instead of XPMs.
+	* puxmaps/Makefile.am: updated to use PNGs.
+
 Sat Sep 19 19:37:13 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.c (gnome_stock_paint): added gtk_widget_queue_draw
