@@ -1,3 +1,9 @@
+Wed May 06 22:42:40 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-dialog.c: emitting the close signal passed a NULL
+	  where a pointer to retval was supposed to be producing
+	  a segfault
+
 Wed May  6 18:54:54 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.h, gnome-dialog.c: Recommit of April 30 changes;

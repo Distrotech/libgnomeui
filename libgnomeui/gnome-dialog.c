@@ -529,7 +529,7 @@ void gnome_dialog_close(GnomeDialog * dialog)
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
   gtk_signal_emit (GTK_OBJECT(dialog), dialog_signals[CLOSE],
-		   NULL, &close_handled);
+		   &close_handled);
 
   if ( ! close_handled ) {
     gnome_dialog_close_real(dialog);
