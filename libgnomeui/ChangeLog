@@ -1,3 +1,19 @@
+2002-03-07  James Henstridge  <james@daa.com.au>
+
+	* Makefile.am ($(libgnomeui_2_la_OBJECTS)): change target from
+	$(OBJECTS), to give automake 1.5 compatibility.
+
+2002-01-21  James Henstridge  <james@daa.com.au>
+
+	* gnome-client.c (gnome_client_module_info_get): fix up reference
+	to gnome_gtk_module_info_get().
+
+	* gnome-ui-init.c (libgnomeui_module_info_get): use the gtk
+	GnomeModuleInfo from libbonoboui.
+
+	* gnome-ui-init.h (GNOME_GTK_MODULE): define this to
+	BONOBO_GTK_MODULE for compatibility.
+
 2002-02-27  Mark McLoughlin  <mark@skynet.ie>
 
 	* gnome-entry.c: (set_combo_items): don't set the popdown

@@ -222,7 +222,7 @@ built_sources = \
 	gnometypebuiltins.c
 
 # an explicit dependency here so all generated files get built
-$(OBJECTS): $(built_sources)
+$(libgnomeui_2_la_OBJECTS): $(built_sources)
 
 EXTRA_DIST =					\
 	AUTHORS					\
