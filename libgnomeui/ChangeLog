@@ -1,3 +1,8 @@
+1998-12-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (gnome_popup_menu_do_popup_modal): REmoved
+	bogus assert.
+
 1998-12-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-number-entry.c (calc_dialog_destroyed): Fix signal
