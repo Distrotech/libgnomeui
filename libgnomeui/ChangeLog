@@ -1,3 +1,10 @@
+1998-08-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-preferences.[ch]: added MDI preferences.
+	* gnome-mdi.h: changed the GnomeMDIMode enums a bit: this requires
+	recompiling any apps using MDI.
+	* gnome-mdi.c: take UI properties into account.
+	
 1998-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-line.c: 

@@ -22,6 +22,7 @@
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-stock.h"
+#include "gnome-preferences.h"
 #include "gnome-mdi.h"
 #include "gnome-mdi-child.h"
 
@@ -256,8 +257,10 @@ static void gnome_mdi_destroy(GtkObject *object) {
 static void gnome_mdi_init (GnomeMDI *mdi) {
   gchar hostname[128] = "\0", pid[12];
 
-  mdi->mode = 0;
-  mdi->tab_pos = GTK_POS_TOP;
+  mdi->mode = GNOME_MDI_DEFAULT_MODE;
+  mdi->tab_pos = gnome_preferences_get_mdi_tab_pos();
+
+  printf("tp: %d\n", mdi->tab_pos);
 
   mdi->children = NULL;
   mdi->windows = NULL;
@@ -1233,10 +1236,15 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
   g_return_if_fail(mdi != NULL);
   g_return_if_fail(GNOME_IS_MDI(mdi));
 
-  if(mode==-1)
+  if(mode == GNOME_MDI_DEFAULT_MODE)
+    mode = gnome_preferences_get_mdi_mode();
+
+  if(mode == GNOME_MDI_REDRAW)
     mode = mdi->mode;
   else if(mdi->mode == mode)
     return;
+
+  printf("mode: %d\n", mode);
 
   /* remove all views from their parents */
   child_node = mdi->children;

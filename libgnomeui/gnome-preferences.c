@@ -37,7 +37,9 @@ struct _GnomePreferences {
   int toolbar_relief : 1;
   int dialog_centered : 1;
   GtkWindowType dialog_type;
-  GtkWindowPosition dialog_position; 
+  GtkWindowPosition dialog_position;
+  GnomeMDIMode mdi_mode;
+  GtkPositionType mdi_tab_pos;
 };
 
 /* 
@@ -59,7 +61,9 @@ static GnomePreferences prefs =
   TRUE,               /* Toolbar buttons are relieved */
   TRUE,               /* Center dialogs over apps when possible */
   GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
-  GTK_WIN_POS_MOUSE   /* Put dialogs at mouse pointer. */
+  GTK_WIN_POS_MOUSE,  /* Put dialogs at mouse pointer. */
+  GNOME_MDI_NOTEBOOK, /* Use notebook MDI mode. */
+  GTK_POS_TOP         /* Show tabs on top of MDI notebooks. */
 };
 
 /* Tons of defines for where to store the preferences. */
@@ -72,6 +76,7 @@ static GnomePreferences prefs =
 #define DIALOGS   "/Gnome/UI_Dialogs/"
 #define STATUSBAR "/Gnome/UI_StatusBar/"
 #define APP       "/Gnome/UI_GnomeApp/"
+#define MDI       "/Gnome/UI_MDI/"
 
 /* ==================== GnomeDialog ===================== */
 
@@ -128,6 +133,28 @@ static const gchar * const dialog_positions [] = {
 #define MENUBAR_HANDLEBOX_KEY      "Menubar_has_Handlebox"
 
 #define TOOLBAR_RELIEF_KEY         "Toolbar_relieved_buttons"
+
+/* =========== MDI ================================= */
+
+#define MDI_MODE_KEY               "MDI_mode"
+#define MDI_TAB_POS_KEY            "MDI_tab_pos"
+
+static const gchar * const mdi_modes [] = {
+  "Notebook",
+  "Toplevel",
+  "Modal"
+};
+
+#define NUM_MDI_MODES 3
+
+static const gchar * const tab_positions [] = {
+  "Left",
+  "Right",
+  "Top",
+  "Bottom"
+};
+
+#define NUM_TAB_POSITIONS 4
 
 static gboolean 
 enum_from_strings(gint * setme, gchar * findme, 
@@ -242,6 +269,23 @@ void gnome_preferences_load(void)
   prefs.toolbar_relief = b;
 
   gnome_config_pop_prefix();
+  gnome_config_push_prefix(MDI);
+
+  s = gnome_config_get_string(MDI_MODE_KEY);
+
+  if ( ! enum_from_strings((int*) &prefs.mdi_mode, s,
+			   mdi_modes, NUM_MDI_MODES) ) {
+    g_warning("Didn't recognize MDI mode in libgnomeui config");
+  }
+
+  s = gnome_config_get_string(MDI_TAB_POS_KEY);
+
+  if ( ! enum_from_strings((int*) &prefs.mdi_tab_pos, s,
+			   tab_positions, NUM_TAB_POSITIONS) ) {
+    g_warning("Didn't recognize MDI notebook tab position in libgnomeui config");
+  }
+
+  gnome_config_pop_prefix();
 }
 
 void gnome_preferences_save(void)
@@ -281,6 +325,13 @@ void gnome_preferences_save(void)
 			prefs.toolbar_relief);
 
   gnome_config_pop_prefix();
+  gnome_config_push_prefix(MDI);
+
+  gnome_config_set_string(MDI_MODE_KEY, mdi_modes[prefs.mdi_mode]);
+  gnome_config_set_string(MDI_TAB_POS_KEY, tab_positions[prefs.mdi_tab_pos]);
+
+  gnome_config_pop_prefix();
+
   gnome_config_sync();
 }
 
@@ -375,5 +426,25 @@ GtkWindowPosition gnome_preferences_get_dialog_position      ()
 void              gnome_preferences_set_dialog_position      (GtkWindowPosition p)
 {
   prefs.dialog_position = p;
+}
+
+GnomeMDIMode      gnome_preferences_get_mdi_mode             ()
+{
+  return prefs.mdi_mode;
+}
+
+void              gnome_preferences_set_mdi_mode             (GnomeMDIMode m)
+{
+  prefs.mdi_mode = m;
+}
+
+GtkPositionType   gnome_preferences_get_mdi_tab_pos          ()
+{
+  return prefs.mdi_tab_pos;
+}
+
+void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p)
+{
+  prefs.mdi_tab_pos = p;
 }
 

@@ -58,10 +58,11 @@ typedef struct _GnomeMDI       GnomeMDI;
 typedef struct _GnomeMDIClass  GnomeMDIClass;
 
 typedef enum {
-  GNOME_MDI_MS = 1,
   GNOME_MDI_NOTEBOOK,
-  GNOME_MDI_MODAL,
   GNOME_MDI_TOPLEVEL,
+  GNOME_MDI_MODAL,
+  GNOME_MDI_MS,
+  GNOME_MDI_DEFAULT_MODE = 42,
   GNOME_MDI_REDRAW = -1		/* do not change mode, just ``redraw'' the display */
 } GnomeMDIMode;
 

@@ -11,6 +11,8 @@
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkbbox.h>
 
+#include "gnome-mdi.h"
+
 BEGIN_GNOME_DECLS
 
 /* Global config choices. App-specific choices are handled in GnomeApp. */
@@ -57,6 +59,12 @@ void              gnome_preferences_set_dialog_type          (GtkWindowType t);
    GTK_WIN_POS_MOUSE */
 GtkWindowPosition gnome_preferences_get_dialog_position      ();
 void              gnome_preferences_set_dialog_position      (GtkWindowPosition p);
+
+/* default MDI mode and MDI notebook tab position */
+GnomeMDIMode      gnome_preferences_get_mdi_mode             ();
+void              gnome_preferences_set_mdi_mode             (GnomeMDIMode m);
+GtkPositionType   gnome_preferences_get_mdi_tab_pos          ();
+void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p);
 
 END_GNOME_DECLS
 
