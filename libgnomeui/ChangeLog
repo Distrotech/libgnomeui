@@ -1,5 +1,9 @@
 2001-04-17  Martin Baulig  <baulig@suse.de>
 
+	* gnome-init.c: Started to use GnomeProgram properties.
+
+2001-04-17  Martin Baulig  <baulig@suse.de>
+
 	* Makefile.am: Don't compile gnome-gconf.c and oafgnome.c.
 
 	* gnome-app-helper.c (gnome_gconf_get_gnome_libs_settings_relative):

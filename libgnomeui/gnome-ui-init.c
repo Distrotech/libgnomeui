@@ -45,7 +45,6 @@
 #include <libgnome/libgnome.h>
 #include <libgnomecanvas/libgnomecanvas.h>
 
-#include <libgnomebase/gnome-i18n.h>
 #include "gnome-client.h"
 #include "gnome-preferences.h"
 #include "gnome-init.h"
@@ -55,17 +54,16 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-pixmap.h"
 
-#include <libgnomeuiP.h>
-
-const char libgnomeui_param_crash_dialog[]="B:libgnomeui/show_crash_dialog";
-const char libgnomeui_param_display[]="S:libgnomeui/display";
-const char libgnomeui_param_default_icon[]="S:libgnomeui/default_icon";
+#include "libgnomeuiP.h"
 
 /******************* libgnomeui module ***********************/
 static void libgnomeui_arg_callback(poptContext con,
                                     enum poptCallbackReason reason,
                                     const struct poptOption * opt,
                                     const char * arg, void * data);
+static void libgnomeui_constructor(GType type, guint n_construct_properties,
+                                   GObjectConstructParam *construct_properties,
+                                   const GnomeModuleInfo *mod_info);
 static void libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_rc_parse (gchar *command);
@@ -98,8 +96,80 @@ GnomeModuleInfo libgnomeui_module_info = {
         "libgnomeui", VERSION, "GNOME GUI Library",
         libgnomeui_requirements,
         libgnomeui_pre_args_parse, libgnomeui_post_args_parse,
-        libgnomeui_options
+        libgnomeui_options,
+        NULL, libgnomeui_constructor,
+        NULL, NULL
 };
+
+static void
+libgnomeui_get_property (GObject *object, guint param_id, GValue *value,
+                         GParamSpec *pspec)
+{
+        GnomeProgram *program;
+
+        g_return_if_fail(object != NULL);
+        g_return_if_fail(GNOME_IS_PROGRAM (object));
+
+        program = GNOME_PROGRAM(object);
+
+        switch(param_id) {
+        default:
+                g_message(G_STRLOC);
+                G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
+                break;
+        }
+}
+
+static void
+libgnomeui_set_property (GObject *object, guint param_id,
+                         const GValue *value, GParamSpec *pspec)
+{
+        GnomeProgram *program;
+
+        g_return_if_fail(object != NULL);
+        g_return_if_fail(GNOME_IS_PROGRAM (object));
+
+        program = GNOME_PROGRAM(object);
+
+        switch(param_id) {
+        default:
+                g_message(G_STRLOC);
+                G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
+                break;
+        }
+}
+
+static void
+libgnomeui_constructor (GType type, guint n_construct_properties,
+                        GObjectConstructParam *construct_properties,
+                        const GnomeModuleInfo *mod_info)
+{
+        GnomeProgramClass *pclass;
+
+        pclass = GNOME_PROGRAM_CLASS(g_type_class_peek(type));
+
+        gnome_program_install_property(pclass,
+                                       libgnomeui_get_property,
+                                       libgnomeui_set_property,
+                                       g_param_spec_boolean("show_crash_dialog", NULL, NULL,
+                                                            TRUE,
+                                                            (G_PARAM_READABLE | G_PARAM_WRITABLE |
+                                                             G_PARAM_CONSTRUCT_ONLY)));
+        gnome_program_install_property(pclass,
+                                       libgnomeui_get_property,
+                                       libgnomeui_set_property,
+                                       g_param_spec_string("display", NULL, NULL,
+                                                           NULL,
+                                                           (G_PARAM_READABLE | G_PARAM_WRITABLE |
+                                                            G_PARAM_CONSTRUCT_ONLY)));
+        gnome_program_install_property(pclass,
+                                       libgnomeui_get_property,
+                                       libgnomeui_set_property,
+                                       g_param_spec_string("default_icon", NULL, NULL,
+                                                           NULL,
+                                                           (G_PARAM_READABLE | G_PARAM_WRITABLE |
+                                                            G_PARAM_CONSTRUCT_ONLY)));
+}
 
 static void
 libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
@@ -393,7 +463,9 @@ int gnome_init_with_popt_table(const char *app_id,
 			       int flags,
 			       poptContext *return_ctx)
 {
-        gnome_program_init(app_id, app_version, argc, argv, LIBGNOMEUI_INIT,
+        gnome_program_init(app_id, app_version, argc, argv,
+                           GNOME_PARAM_MODULE_INFO,
+                           libgnomeui_module_info,
                            GNOME_PARAM_POPT_TABLE, options,
                            GNOME_PARAM_POPT_FLAGS, flags,
                            NULL);
