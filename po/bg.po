@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-30 21:34+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-07-01 17:09+0300\n"
 "Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -32,11 +32,11 @@ msgstr "Синовен елемент 2"
 msgid "Hint for item 2"
 msgstr "Подсещане за елемент 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:855
+#: file-chooser/gtkfilesystemgnomevfs.c:856
 msgid "Filesystem"
 msgstr "Файлова система"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Запазването на отметката е неуспешно (%s)"
@@ -56,7 +56,8 @@ msgstr "Неуспех при отварянето на файла '%s': %s"
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
-"Неуспех при зареждането на изображението '%s': причината е неизвестна, най-вероятно файлът е развален"
+"Неуспех при зареждането на изображението '%s': причината е неизвестна, най-"
+"вероятно файлът е развален"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -151,8 +152,7 @@ msgstr ""
 #: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Благодарности към преводачите. Този низ трябва да е маркиран за превод"
+msgstr "Благодарности към преводачите. Този низ трябва да е маркиран за превод"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -169,7 +169,6 @@ msgstr "Относно %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -227,7 +226,6 @@ msgid "_Game"
 msgstr "_Игри"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Помощ"
 
@@ -418,11 +416,11 @@ msgstr "Конфигуриране на програмата"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Относно"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Относно тази програма"
 
@@ -449,7 +447,7 @@ msgstr "Създава нов прозорец"
 msgid "_Close This Window"
 msgstr "_Затваряне на Този Прозорец"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Затваря текущия прозорец"
 
@@ -997,8 +995,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Дали да се използва новия GtkFileChooser·widget или GtkFileSelection·widget за "
-"да избирате файлове."
+"Дали да се използва новия GtkFileChooser·widget или GtkFileSelection·widget "
+"за да избирате файлове."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1109,9 +1107,9 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Програмата \"%s\" се опита да промени вашата конфигурация, което системният "
-"администратор или операционна система не позволява. Някои от избраните настройки, "
-"могат да нямат ефект или да бъдат възстановени следващият път когато използвате"
-" програмата."
+"администратор или операционна система не позволява. Някои от избраните "
+"настройки, могат да нямат ефект или да бъдат възстановени следващият път "
+"когато използвате програмата."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1400,14 +1398,13 @@ msgstr "GUI Библиотека на GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"Намерени са много грешки в сегментацията; диалога за грешки не може да бъде показан\n"
+"Намерени са много грешки в сегментацията; диалога за грешки не може да бъде "
+"показан\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1464,9 +1461,8 @@ msgstr "_Информиране на Разработчиците"
 msgid "_Debug"
 msgstr "_Поправяне на грешки"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Излизане от теста"
+#~ msgid "Exit the test"
+#~ msgstr "Излизане от теста"
 
 #~ msgid " domain %s"
 #~ msgstr " домейн·%s"

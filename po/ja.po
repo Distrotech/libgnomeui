@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-03 00:20+0900\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-06-03 00:19+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -33,6 +33,32 @@ msgstr "子アイテム 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "アイテム 2 のヒント"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:856
+#, fuzzy
+msgid "Filesystem"
+msgstr "ファイル(_L)"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -142,7 +168,6 @@ msgstr "%s について"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ファイル(_F)"
 
@@ -200,7 +225,6 @@ msgid "_Game"
 msgstr "ゲーム(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
@@ -391,11 +415,11 @@ msgstr "アプリケーションの設定を変更します"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "情報(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "このアプリケーションの情報を表示します"
 
@@ -422,7 +446,7 @@ msgstr "新規にウインドウを生成します"
 msgid "_Close This Window"
 msgstr "ウインドウを閉じる(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "このウインドウを閉じます"
 
@@ -1242,23 +1266,31 @@ msgstr "質問"
 msgid "Message"
 msgstr "メッセージ"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "ユーザ名(_U):"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "ドメイン(_D):"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "パスワード(_P):"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "このセッションのパスワードを記憶する"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "パスワードをキーリングに保存する"
 
@@ -1359,7 +1391,6 @@ msgstr "GNOME GUI ライブラリ"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "セグメンテーション・フォルトが複数回発生しました; エラー・ダイログを表示でき"
@@ -1367,7 +1398,6 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1424,6 +1454,5 @@ msgstr "開発者へ通知する(_I)"
 msgid "_Debug"
 msgstr "デバッグする(_D)"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "テストの終了"
+#~ msgid "Exit the test"
+#~ msgstr "テストの終了"

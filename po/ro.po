@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-03-18 13:28+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: <gnomero-list@lists.sourceforge.net>\n"
@@ -31,6 +31,32 @@ msgstr "Element copil 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Sugestie pentru elementul 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:856
+#, fuzzy
+msgid "Filesystem"
+msgstr "Fişie_re"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -805,22 +831,48 @@ msgstr "Culoarea fundalului este setată"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
+#, fuzzy
+msgid "Contents Background Color"
 msgstr "Culoare fundalului siglei"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
+#, fuzzy
+msgid "Contents Background color"
 msgstr "Culoarea de fundal pentru siglă"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
+#, fuzzy
+msgid "Contents Background color as a GdkColor"
+msgstr "Culoarea fundalului ca valoare GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+#, fuzzy
+msgid "Contents Background color set"
+msgstr "Culoarea fundalului setată"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+#, fuzzy
+msgid "Contents Background color is set"
+msgstr "Culoarea fundalului este setată"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "Culoare fundalului siglei"
+
+#: libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "Culoarea de fundal pentru siglă"
+
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Culoarea de fundal pentru siglă ca valoare GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Culoarea de fundal pentru siglă setată"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Culoarea de fundal pentru siglă este setată"
 
@@ -1226,23 +1278,31 @@ msgstr "Întrebare"
 msgid "Message"
 msgstr "Mesaj"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "Nume _utilizator:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Domeniu:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Parola:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Reţine parola pentru această sesiune"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "Salvează parola într-un „keyring”"
 
@@ -1343,7 +1403,6 @@ msgstr "Biblioteca GNOME GUI"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Au intervenit mai multe erori de segmentare. Nu pot afişa dialogul de "
@@ -1351,7 +1410,6 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

@@ -1,3 +1,18 @@
+libgnomeui 2.7.2
+----------------
+
+What's new since 2.7.1
+
+* Bug fixes:
+	- Fix GnomeDruid to be theme compliant (Rodney Dawes)
+	- Fixes to the VFS file-chooser backend (Federico Quintero,
+	Colin Walters)
+	- Support for anonymous logins in authentication manager (Laszlo
+	Kovacs)
+
+* Translations:
+	- Various updated translations (ne)
+
 libgnomeui 2.7.1
 ----------------
 

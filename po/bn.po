@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libGNOMEui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-03-14 09:33+0530\n"
 "Last-Translator: Sayamindu Dasgupta <unmadindu@bengalinux.org> \n"
 "Language-Team: Bangla <gnome-translation@bengalinux.org>\n"
@@ -30,6 +30,32 @@ msgstr "দুই নম্বর চাইল্ড বস্তু"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "দুই নম্বর বস্তুর জন্য ইঙ্গিত"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:856
+#, fuzzy
+msgid "Filesystem"
+msgstr "ফাইল_সমূহ"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -804,22 +830,48 @@ msgstr "পটভূমির রং নির্ধারিত হয়েছে
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
+#, fuzzy
+msgid "Contents Background Color"
 msgstr "প্রতীক চিহ্নের পটভূমির রং"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
+#, fuzzy
+msgid "Contents Background color"
 msgstr "প্রতীক চিহ্নের পটভূমির রং"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
+#, fuzzy
+msgid "Contents Background color as a GdkColor"
+msgstr "GdkColor হিসাবে পটভূমির রং"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+#, fuzzy
+msgid "Contents Background color set"
+msgstr "পটভূমির রং নির্ধারিত হয়েছে"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+#, fuzzy
+msgid "Contents Background color is set"
+msgstr "পটভূমির রং নির্ধারিত হয়েছে"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "প্রতীক চিহ্নের পটভূমির রং"
+
+#: libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "প্রতীক চিহ্নের পটভূমির রং"
+
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "GdkColor হিসাবে প্রতীক চিহ্নের পটভূমির রং"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "প্রতীক চিহ্নের পটভূমির রং নির্ধারিত হয়েছে"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "প্রতীক চিহ্নের পটভূমির রং নির্ধারিত হয়েছে"
 
@@ -1219,23 +1271,31 @@ msgstr "প্রশ্ন"
 msgid "Message"
 msgstr "বার্তা"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_ব্যবহারকারীর নাম:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_ডোমেন:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_পাসওয়ার্ড:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "এই সেশনের জন্য পাসওয়ার্ড মনে রাখো"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "কি-রিঙে পাসওয়ার্ড সেভ করে রাখো"
 
@@ -1336,13 +1396,11 @@ msgstr "গুহ্‌নোম জি ইউ আই লাইব্রের�
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "অনেকগুলি সেগমেন্টেশন ফল্ট হয়েছে; ত্রুটি বার্তা দেখানো সম্ভব হচ্ছে না\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

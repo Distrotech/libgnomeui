@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-03-21 14:41+0000\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -30,6 +30,32 @@ msgstr "Mír Paisti a 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Leathfhocal le haighaidh mír a 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:856
+#, fuzzy
+msgid "Filesystem"
+msgstr "Comha_d"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -807,22 +833,48 @@ msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
+#, fuzzy
+msgid "Contents Background Color"
 msgstr "Dáth an Cúlra atá ag an Siombail"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
+#, fuzzy
+msgid "Contents Background color"
 msgstr "Dáth an Cúlra atá ag an Siombail"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
+#, fuzzy
+msgid "Contents Background color as a GdkColor"
 msgstr "Dáth an Cúlra atá ag an Siombail mar GdlDáth"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
+#, fuzzy
+msgid "Contents Background color set"
+msgstr "Dáth an Cúlra atá ag an Siombail"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+#, fuzzy
+msgid "Contents Background color is set"
+msgstr "Dáth an Cúlra atá ag an Siombail"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "Dáth an Cúlra atá ag an Siombail"
+
+#: libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "Dáth an Cúlra atá ag an Siombail"
+
+#: libgnomeui/gnome-druid-page-standard.c:225
+msgid "Logo Background color as a GdkColor"
+msgstr "Dáth an Cúlra atá ag an Siombail mar GdlDáth"
+
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr ""
 
@@ -1202,23 +1254,31 @@ msgstr "Ceist"
 msgid "Message"
 msgstr "Teachtaireacht"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_Úsáideoir"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Pasfhocal:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr ""
 
@@ -1319,13 +1379,11 @@ msgstr "Leabharlann GUI le haighaidh GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

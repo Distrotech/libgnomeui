@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-07-13 16:59+0530\n"
 "Last-Translator: Amanpreet Singh Alam <amanlinux@netscape.net>\n"
 "Language-Team: Punjabi <indlinux-punjabi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -31,6 +31,32 @@ msgstr "ਚਲਾਇਡ ਇਕਾਈ 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "ਇਕਾਈ 2 ਲਈ ਸੰਕੇਤ"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:856
+#, fuzzy
+msgid "Filesystem"
+msgstr "ਫਾਇਲ"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr ""
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -804,22 +830,48 @@ msgstr "ਪਿੱਠਭੂਮੀ ਰੰਗ ਨਿਰਧਾਰਿਤ ਹੈ"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
+#, fuzzy
+msgid "Contents Background Color"
 msgstr "ਲੋਗੋ ਦਾ ਪਿੱਠਭੂਮੀ ਰੰਗ"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
+#, fuzzy
+msgid "Contents Background color"
 msgstr "ਲੋਗੋ ਦਾ ਪਿੱਠਭੂਮੀ ਰੰਗ"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
+#, fuzzy
+msgid "Contents Background color as a GdkColor"
+msgstr "ਪਿੱਠਭੂਮੀ ਰੰਗ GdkColor ਵਾਂਗ"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+#, fuzzy
+msgid "Contents Background color set"
+msgstr "ਪਿੱਠਭੂਮੀ ਰੰਗ ਨਿਰਧਾਰਨ"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+#, fuzzy
+msgid "Contents Background color is set"
+msgstr "ਪਿੱਠਭੂਮੀ ਰੰਗ ਨਿਰਧਾਰਿਤ ਹੈ"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "ਲੋਗੋ ਦਾ ਪਿੱਠਭੂਮੀ ਰੰਗ"
+
+#: libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "ਲੋਗੋ ਦਾ ਪਿੱਠਭੂਮੀ ਰੰਗ"
+
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "ਲੋਗੋ ਦਾ ਪਿੱਠਭੂਮੀ ਰੰਗ GdkColor ਵਾਂਗ"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "ਲੋਗੋ ਦਾ ਪਿੱਠਭੂਮੀ ਰੰਗ ਨਿਰਧਾਰਰਿਤ ਕਰੋ"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "ਲੋਗੋ ਦਾ ਪਿੱਠਭੂਮੀ ਰੰਗ ਨਿਰਧਾਰਿਤ ਹੈ"
 
@@ -938,8 +990,7 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"ਕੀ ਚੁਣੀਆਂ ਫਾਇਲ਼ਾਂ ਲਈ ਨਵਾਂ GtkFileChooser ਵਿਦਗਿਟ ਜਾਂ GtkFileSelection ਵਿਦਗਿਟ"
-"ਵਰਤਣਾ ਹੈ"
+"ਕੀ ਚੁਣੀਆਂ ਫਾਇਲ਼ਾਂ ਲਈ ਨਵਾਂ GtkFileChooser ਵਿਦਗਿਟ ਜਾਂ GtkFileSelection ਵਿਦਗਿਟਵਰਤਣਾ ਹੈ"
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1212,23 +1263,31 @@ msgstr "ਸਵਾਲ"
 msgid "Message"
 msgstr "ਸੁਨੇਹਾ"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "ਉਪਭੋਗਤਾ ਦਾ ਨਾਉਃ"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "ਡੋਮੇਨਃ"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "ਗੁਪਤ-ਕੋਡਃ"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "ਇਸ ਅਜਲਾਸ ਲਈ ਗੁਪਤ-ਕੋਡ ਨੂੰ ਯਾਦ ਰੱਖੋ"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "ਕੀਰਿੰਗ ਵਿੱਚ ਗੁਪਤ-ਕੋਡ ਸੰਭਾਲੋ"
 
@@ -1329,13 +1388,11 @@ msgstr "ਗਨੋਮ ਜੀਯੂਆਈ ਲਾਇਬਰੇਰੀ"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ਬਹੁ ਸਿਗਮਿਨਟੇਸ਼ਨ ਤਰੁੱਟੀ ਆਈ ਹੈ; ਗਲਤੀ ਤਖਤੀ ਨਹੀ ਵੇਖਾ ਸਕਦਾ ਹੈ\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1391,12 +1448,11 @@ msgstr "ਵਿਕਾਸਵਾਦੀਆਂ ਲਈ ਜਾਣਕਾਰੀ "
 msgid "_Debug"
 msgstr "ਡੀਬੱਗ "
 
-msgid " domain %s"
-msgstr " ਡੋਮੇਨ %s"
+#~ msgid " domain %s"
+#~ msgstr " ਡੋਮੇਨ %s"
 
-msgid "Exit the test"
-msgstr "ਜਾਂਚ ਤੋ ਬਾਹਰ"
+#~ msgid "Exit the test"
+#~ msgstr "ਜਾਂਚ ਤੋ ਬਾਹਰ"
 
-msgid "Color Selector"
-msgstr "ਰੰਗ ਚੋਣਕਾਰ"
-
+#~ msgid "Color Selector"
+#~ msgstr "ਰੰਗ ਚੋਣਕਾਰ"

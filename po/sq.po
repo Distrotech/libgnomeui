@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-04 21:21+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-06-29 11:17+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -32,11 +32,11 @@ msgstr "Objekt bir 2"
 msgid "Hint for item 2"
 msgstr "Propozime për objektin 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:855
+#: file-chooser/gtkfilesystemgnomevfs.c:856
 msgid "Filesystem"
 msgstr "File i sistemit"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ruajtja e libërshënuesit dështoi (%s)"
@@ -167,7 +167,6 @@ msgstr "Informacione mbi %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -225,7 +224,6 @@ msgid "_Game"
 msgstr "_Loja"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ndihmë"
 
@@ -416,11 +414,11 @@ msgstr "Konfiguro programin"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Informacione"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Informacione mbi këtë program"
 
@@ -447,7 +445,7 @@ msgstr "Krijo një dritare të re"
 msgid "_Close This Window"
 msgstr "_Mbylle këtë dritare"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Mbyll dritaren aktuale"
 
@@ -527,7 +525,6 @@ msgstr "_Përmbajtja"
 msgid "View help for this application"
 msgstr "Shiko ndihmën në lidhje me këtë program"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Tekst poshtë ikonave"
@@ -557,7 +554,6 @@ msgstr " (shtyp return)"
 msgid "ERROR: "
 msgstr "GABIM:"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
 msgstr "Kujdes: "
@@ -1401,7 +1397,6 @@ msgstr "Libraria GUI e GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "U verifikuan  gabime shumëfishe segmentimi; e pamundur shfaqja e dritares së "
@@ -1409,7 +1404,6 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1467,7 +1461,5 @@ msgstr "_Informo zhvilluesit"
 msgid "_Debug"
 msgstr "_Debug"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Përfundo provën"
-
+#~ msgid "Exit the test"
+#~ msgstr "Përfundo provën"

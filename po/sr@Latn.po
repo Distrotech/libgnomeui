@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-29 19:00+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-06-29 19:00+0200\n"
 "Last-Translator: Bojan Suzic <bojans@teol.net>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
@@ -35,11 +35,11 @@ msgstr "2. sadržana stavka"
 msgid "Hint for item 2"
 msgstr "Savet za 2. stavku"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:855
+#: file-chooser/gtkfilesystemgnomevfs.c:856
 msgid "Filesystem"
 msgstr "Sistem datoteka"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Neuspešno snimanje obeleživača (%s)"
@@ -171,7 +171,6 @@ msgstr "O programu „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -229,7 +228,6 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -420,11 +418,11 @@ msgstr "Podesi program"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_O programu"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "O ovom programu"
 
@@ -451,7 +449,7 @@ msgstr "Otvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zatvori tekući prozor"
 
@@ -975,9 +973,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete koristiti "
-"ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate ili izmenite "
-"neke njegove parametre."
+"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete "
+"koristiti ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate "
+"ili izmenite neke njegove parametre."
 
 #: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
@@ -1114,8 +1112,8 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Program „%s“ je pokušao da izmeni podešavanja sistema za koja vaš "
-"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. Neka "
-"od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
+"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. "
+"Neka od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
 "narednom pokretanju programa."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1124,8 +1122,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %s. "
-"Neka od vaših postavki možda neće ispravno raditi."
+"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %"
+"s. Neka od vaših postavki možda neće ispravno raditi."
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1404,7 +1402,6 @@ msgstr "Gnomova biblioteka za korisničko sučelje"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Došlo je do nekoliko nepravilnih pristupa memoriji (SIGSEGV); ne može da "
@@ -1412,7 +1409,6 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1469,9 +1465,8 @@ msgstr "_Obavesti programere"
 msgid "_Debug"
 msgstr "_Nađi greške"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Napustite probu"
+#~ msgid "Exit the test"
+#~ msgstr "Napustite probu"
 
 #~ msgid " domain %s"
 #~ msgstr " domen %s"

@@ -1,14 +1,14 @@
-#
+# 
 # Nepali translation of libgnomeui.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the libgnomeui package.
 # Pawan Chitrakar <pawan@nplinux.org> , 2004
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-04 21:21+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-04-05 04:07+0500\n"
 "Last-Translator: Pawan Chitrakar <pawan@mpp.org.np>\n"
 "Language-Team: Nepali <nlp@mpp.org.np>\n"
@@ -32,11 +32,11 @@ msgstr "सानोतिनो आइटम २"
 msgid "Hint for item 2"
 msgstr "आइटमको लागि ईशारा २"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:855
+#: file-chooser/gtkfilesystemgnomevfs.c:856
 msgid "Filesystem"
 msgstr "फाइलसिस्टम"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "पृष्ठ चिन्ह संग्रह गर्न सकिएन (%s)"
@@ -165,7 +165,6 @@ msgstr "बारेमा %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_फाईल"
 
@@ -223,7 +222,6 @@ msgid "_Game"
 msgstr "_खेल"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_सहयोग"
 
@@ -414,11 +412,11 @@ msgstr "अनुरोधपत्र मिलाऊ"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_बारेमा"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "यो अनुरोधपत्रको बारेमा"
 
@@ -445,7 +443,7 @@ msgstr "एउटा नयाँ विन्डो बनाउ"
 msgid "_Close This Window"
 msgstr "यो विन्डो _बन्द गर"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "अहिलेको विन्डो बन्द गर"
 
@@ -1388,13 +1386,11 @@ msgstr "जीनोम जीयुआई पुस्तकालय"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "अनेक किसिमका खराब तत्वहरु भटियो; गल्ती संबाद देखाउन सकिँदैन\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1449,9 +1445,8 @@ msgstr "सूचना विकासकर्ता"
 msgid "_Debug"
 msgstr "_सच्याउनु"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "परीक्षणबाट बाहिर निक्ल"
+#~ msgid "Exit the test"
+#~ msgstr "परीक्षणबाट बाहिर निक्ल"
 
 #~ msgid " domain %s"
 #~ msgstr "डोमेन %s"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-06 20:20+0200\n"
+"POT-Creation-Date: 2004-07-19 23:37-0400\n"
 "PO-Revision-Date: 2004-07-06 20:22+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -34,11 +34,11 @@ msgstr "Afkom-element 2"
 msgid "Hint for item 2"
 msgstr "Tip til element 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:855
+#: file-chooser/gtkfilesystemgnomevfs.c:856
 msgid "Filesystem"
 msgstr "Filsystem"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#: file-chooser/gtkfilesystemgnomevfs.c:1518
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Bogmærkegemning mislykkedes (%s)"
@@ -57,7 +57,9 @@ msgstr "Kunne ikke åbne fil '%s': %s"
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Kunne ikke indlæse billede '%s': grund ikke kendt, formodentlig en ødelagt billedfil"
+msgstr ""
+"Kunne ikke indlæse billede '%s': grund ikke kendt, formodentlig en ødelagt "
+"billedfil"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -167,7 +169,6 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -225,7 +226,6 @@ msgid "_Game"
 msgstr "_Spil"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjælp"
 
@@ -416,11 +416,11 @@ msgstr "Konfigurér programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Om dette program"
 
@@ -447,7 +447,7 @@ msgstr "Opret et nyt vindue"
 msgid "_Close This Window"
 msgstr "L_uk dette vindue"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Luk det aktuelle vindue"
 
@@ -1405,13 +1405,11 @@ msgstr "Gnome GUI-bibliotek"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmentfejl opstod; kan ikke vise fejlvinduet\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1468,9 +1466,8 @@ msgstr "_Informér udviklere"
 msgid "_Debug"
 msgstr "_Fejlanalysering"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Afslut testprogrammet"
+#~ msgid "Exit the test"
+#~ msgstr "Afslut testprogrammet"
 
 #~ msgid " domain %s"
 #~ msgstr " domæne %s"
