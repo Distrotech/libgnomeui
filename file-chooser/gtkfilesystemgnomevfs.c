@@ -876,8 +876,6 @@ gtk_file_system_gnome_vfs_set_bookmarks (GtkFileSystem *file_system,
       path = l->data;
       str = gtk_file_path_get_string (path);
 
-      /* FIXME: this should be a list of GConfValue */
-
       list = g_slist_prepend (list, (gpointer) str);
     }
 
@@ -1016,16 +1014,49 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
   child = g_hash_table_lookup (folder_vfs->children, uri);
   if (!child)
     {
-      g_set_error (error,
-		   GTK_FILE_SYSTEM_ERROR,
-		   GTK_FILE_SYSTEM_ERROR_NONEXISTENT,
-		   "'%s' does not exist",
-		   uri);
+      if (folder_vfs->async_handle)
+	{
+	  /* Loading the directory is in progress, so we may not have loaded the
+	   * file's information yet.
+	   */
+	  GnomeVFSFileInfo *vfs_info;
+	  GnomeVFSResult result;
 
-      return FALSE;
+	  vfs_info = gnome_vfs_file_info_new ();
+	  result = gnome_vfs_get_file_info (uri, vfs_info, get_options (folder_vfs->types));
+
+	  if (result != GNOME_VFS_OK)
+	    set_vfs_error (result, uri, error);
+	  else
+	    {
+	      GSList *uris;
+
+	      child = g_new (FolderChild, 1);
+	      child->uri = g_strdup (uri);
+	      child->info = vfs_info;
+	      gnome_vfs_file_info_ref (vfs_info);
+
+	      g_hash_table_replace (folder_vfs->children, child->uri, child);
+
+	      uris = g_slist_append (NULL, (char *) uri);
+	      g_signal_emit_by_name (folder_vfs, "files-added", uris);
+	      g_slist_free (uris);
+	    }
+
+	  gnome_vfs_file_info_unref (vfs_info);
+	}
+      else
+	g_set_error (error,
+		     GTK_FILE_SYSTEM_ERROR,
+		     GTK_FILE_SYSTEM_ERROR_NONEXISTENT,
+		     "'%s' does not exist",
+		     uri);
     }
-  
-  return info_from_vfs_info (uri, child->info, folder_vfs->types);
+
+  if (child)
+    return info_from_vfs_info (uri, child->info, folder_vfs->types);
+  else
+    return NULL;
 }
 
 static void

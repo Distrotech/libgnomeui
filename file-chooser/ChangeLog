@@ -1,3 +1,22 @@
+2003-10-12  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c (gtk_file_folder_gnome_vfs_get_info):
+	Read the file's information from gnome-vfs if we haven't finished
+	loading the directory yet.
+
+	* gtkfilechooserimpldefault.c (tree_selection_changed): Set the
+	sensitivity of the bookmarks button depending on whether the
+	current folder already exists in the bookmarks list.
+	(shortcuts_selection_changed): Re-select the appropriate shortcuts
+	folder if the user clicks on the separator row.
+	(set_list_model): New function; moved the code from
+	tree_selection_changed().
+	(tree_selection_changed): Use set_list_model().
+	(create_folder_tree): Show the tree model only if we are in folder
+	mode.
+	(create_file_list): Show the list model only if we are not in
+	folder mode.
+
 2003-10-08  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilechooserimpldefault.c (tree_selection_changed): Autosize
