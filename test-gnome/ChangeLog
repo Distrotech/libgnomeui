@@ -1,3 +1,8 @@
+Tue Aug 28 02:08:17 2001  George Lebl <jirka@5z.com>
+
+	* test-gnome.c:  re-enable the test for gnome-file-entry.  For some
+	  reason the druid one isn't working but there is testdruid now.
+
 Sat Aug 25 20:18:48 2001  George Lebl <jirka@5z.com>
 
 	* testdruid.c: fix "unused" warning

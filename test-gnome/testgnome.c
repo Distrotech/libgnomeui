@@ -516,7 +516,6 @@ create_druid(void)
 	gnome_druid_set_page (GNOME_DRUID (druid), GNOME_DRUID_PAGE (page_start));
 	gtk_widget_show_all (window);
 }
-
 #endif
 
 /*
@@ -541,8 +540,6 @@ create_entry(void)
 /*
  * FileEntry
  */
-
-#if 0
 
 static void
 file_entry_update_files(GtkWidget *w, GnomeFileEntry *fentry)
@@ -622,8 +619,6 @@ create_file_entry(void)
 	bonobo_window_set_contents (BONOBO_WINDOW(app->app), box);
 	gtk_widget_show_all(app->app);
 }
-
-#endif
 
 /*
  * FontPicker
@@ -982,9 +977,9 @@ main (int argc, char **argv)
 		{ "color picker", create_color_picker },
 		{ "date edit", create_date_edit },
 /*		{ "ditem edit", create_ditem_edit },*/
-/*		{ "druid", create_druid },*/
+/*		{ "druid", create_druid }, */
 		{ "entry", create_entry },
-/*		{ "file entry", create_file_entry },*/
+		{ "file entry", create_file_entry },
 /*		{ "font picker", create_font_picker },*/
 		{ "href", create_href },
 		{ "icon list", create_icon_list },
