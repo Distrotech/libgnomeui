@@ -354,13 +354,15 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y, GtkJustification 
 	sgc = style->fg_gc [GTK_STATE_SELECTED];
 	bsgc = style->bg_gc [GTK_STATE_SELECTED];
 
-        for (item = ti->rows; item; item = item->next, len += strlen (row->text)){
+        for (item = ti->rows; item; item = item->next, len += (row ? strlen (row->text) : 0)){
 		char *text;
 		
 		row = item->data;
 
-                if (!row)
+                if (!row) {
 			y += ti->baseline_skip / 2;
+			continue;
+		}
 		
 		text = row->text;
 		

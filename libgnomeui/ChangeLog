@@ -1,3 +1,7 @@
+1998-11-24  James Henstridge  <james@daa.com.au>
+
+	* gnome-icon-item.c (iti_paint_text): Do not dereference null pointer.
+
 1998-11-24  Andrew T. Veliath  <andrewtv@usa.net>
 
 	* gnome-app.c (gnome_app_set_toolbar):
