@@ -26,6 +26,8 @@
 #ifndef GNOME_CURSORS_H
 #define GNOME_CURSORS_H
 
+#include <gdk/gdk.h>
+
 typedef enum  {
 	/* Update bitfield size in struct when adding enums */
 	GNOME_CURSOR_FILE,

@@ -39,6 +39,7 @@ struct _GnomeDruidPageStandardPrivate
 	GtkWidget *side_bar;
 	GnomeCanvasItem *logoframe_item;
 	GnomeCanvasItem *logo_item;
+	GnomeCanvasItem *top_watermark_item;
 	GnomeCanvasItem *title_item;
 	GnomeCanvasItem *background_item;
 };
@@ -101,7 +102,8 @@ void
 gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard,
 				     gboolean		     antialiased,
 				     const gchar	    *title,
-				     GdkPixbuf		    *logo)
+				     GdkPixbuf		    *logo,
+				     GdkPixbuf              *top_watermark)
 {
 	GtkWidget *canvas;
 	GtkRcStyle *rc_style;
@@ -126,6 +128,10 @@ gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard
 	if (logo != NULL)
 		gdk_pixbuf_ref (logo);
 	druid_page_standard->logo_image = logo;
+
+	if (top_watermark != NULL)
+		gdk_pixbuf_ref (top_watermark);
+	druid_page_standard->top_watermark_image = top_watermark;
 
 	/* Set up the widgets */
 	vbox = gtk_vbox_new (FALSE, 0);
@@ -162,15 +168,19 @@ gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard
 }
 
 static void
-gnome_druid_page_standard_destroy(GtkObject *object)
+gnome_druid_page_standard_destroy (GtkObject *object)
 {
-	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD(object);
+	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD (object);
 
 	/* remember, destroy can be run multiple times! */
 
 	if (druid_page_standard->logo_image != NULL)
 		gdk_pixbuf_unref (druid_page_standard->logo_image);
 	druid_page_standard->logo_image = NULL;
+
+	if (druid_page_standard->top_watermark_image != NULL)
+		gdk_pixbuf_unref (druid_page_standard->top_watermark_image);
+	druid_page_standard->top_watermark_image = NULL;
 
 	g_free (druid_page_standard->title);
 	druid_page_standard->title = NULL;
@@ -254,10 +264,27 @@ gnome_druid_page_standard_setup (GnomeDruidPageStandard *druid_page_standard)
 		gnome_canvas_item_hide (druid_page_standard->_priv->logoframe_item);
 	}
 
+	druid_page_standard->_priv->top_watermark_item =
+		gnome_canvas_item_new (gnome_canvas_root (canvas),
+				       gnome_canvas_pixbuf_get_type (),
+				       "x", 0.0,
+				       "y", 0.0,
+				       "x_set", TRUE,
+				       "y_set", TRUE,
+				       NULL);
+
+	if (druid_page_standard->top_watermark_image != NULL) {
+		gnome_canvas_item_set (druid_page_standard->_priv->top_watermark_item,
+				       "pixbuf", druid_page_standard->top_watermark_image,
+				       NULL);
+	}
+
+
 	druid_page_standard->_priv->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
 				       gnome_canvas_pixbuf_get_type (),
-				       "x_set", TRUE, "y_set", TRUE,
+				       "x_set", TRUE,
+				       "y_set", TRUE,
 				       NULL);
 
 	if (druid_page_standard->logo_image != NULL) {
@@ -325,6 +352,7 @@ gnome_druid_page_standard_new (void)
 	gnome_druid_page_standard_construct (retval,
 					     FALSE,
 					     NULL,
+					     NULL,
 					     NULL);
 
 	return GTK_WIDGET (retval);
@@ -340,13 +368,17 @@ gnome_druid_page_standard_new_aa (void)
 	gnome_druid_page_standard_construct (retval,
 					     TRUE,
 					     NULL,
+					     NULL,
 					     NULL);
 
 	return GTK_WIDGET (retval);
 }
 
 GtkWidget *
-gnome_druid_page_standard_new_with_vals (gboolean antialiased, const gchar *title, GdkPixbuf *logo)
+gnome_druid_page_standard_new_with_vals (gboolean antialiased,
+					 const gchar *title,
+					 GdkPixbuf *logo,
+					 GdkPixbuf *top_watermark)
 {
 	GnomeDruidPageStandard *retval;
 
@@ -355,14 +387,15 @@ gnome_druid_page_standard_new_with_vals (gboolean antialiased, const gchar *titl
 	gnome_druid_page_standard_construct (retval,
 					     antialiased,
 					     title,
-					     logo);
+					     logo,
+					     top_watermark);
 
 	return GTK_WIDGET (retval);
 }
 
 void
-gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_standard,
-					     GdkColor *color)
+gnome_druid_page_standard_set_bg_color (GnomeDruidPageStandard *druid_page_standard,
+					GdkColor *color)
 {
 	guint32 fill_color;
 
@@ -421,9 +454,10 @@ gnome_druid_page_standard_set_logo_bg_color (GnomeDruidPageStandard *druid_page_
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
+
 void
-gnome_druid_page_standard_set_title_color   (GnomeDruidPageStandard *druid_page_standard,
-					  GdkColor *color)
+gnome_druid_page_standard_set_title_color (GnomeDruidPageStandard *druid_page_standard,
+					   GdkColor *color)
 {
 	guint32 fill_color;
 
@@ -442,8 +476,8 @@ gnome_druid_page_standard_set_title_color   (GnomeDruidPageStandard *druid_page_
 }
 
 void
-gnome_druid_page_standard_set_title         (GnomeDruidPageStandard *druid_page_standard,
-					     const gchar *title)
+gnome_druid_page_standard_set_title (GnomeDruidPageStandard *druid_page_standard,
+				     const gchar *title)
 {
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
@@ -454,9 +488,18 @@ gnome_druid_page_standard_set_title         (GnomeDruidPageStandard *druid_page_
 			       "text", druid_page_standard->title,
 			       NULL);
 }
+
+/**
+ * gnome_druid_page_standard_set_logo:
+ * @druid_page_standard: the #GnomeDruidPageStandard to work on
+ * @logo_image: The #GdkPixbuf to use as a logo
+ *
+ * Description:  Sets a #GdkPixbuf as the logo in the top right corner.
+ * If %NULL, then no logo will be displayed.
+ **/
 void
-gnome_druid_page_standard_set_logo          (GnomeDruidPageStandard *druid_page_standard,
-					     GdkPixbuf*logo_image)
+gnome_druid_page_standard_set_logo (GnomeDruidPageStandard *druid_page_standard,
+				    GdkPixbuf *logo_image)
 {
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
@@ -468,5 +511,33 @@ gnome_druid_page_standard_set_logo          (GnomeDruidPageStandard *druid_page_
 	if (logo_image != NULL)
 		gdk_pixbuf_ref (logo_image);
 	gnome_canvas_item_set (druid_page_standard->_priv->logo_item,
-			       "pixbuf", druid_page_standard->logo_image, NULL);
+			       "pixbuf", druid_page_standard->logo_image,
+			       NULL);
+}
+
+/**
+ * gnome_druid_page_standard_set_top_watermark:
+ * @druid_page_standard: the #GnomeDruidPageStandard to work on
+ * @top_watermark_image: The #GdkPixbuf to use as a top watermark
+ *
+ * Description:  Sets a #GdkPixbuf as the watermark on top of the top
+ * strip on the druid.  If #top_watermark_image is %NULL, it is reset
+ * to the normal color.
+ **/
+void
+gnome_druid_page_standard_set_top_watermark (GnomeDruidPageStandard *druid_page_standard,
+					     GdkPixbuf *top_watermark_image)
+{
+	g_return_if_fail (druid_page_standard != NULL);
+	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
+
+	if (druid_page_standard->top_watermark_image)
+		gdk_pixbuf_unref (druid_page_standard->top_watermark_image);
+
+	druid_page_standard->top_watermark_image = top_watermark_image;
+	if (top_watermark_image != NULL)
+		gdk_pixbuf_ref (top_watermark_image);
+	gnome_canvas_item_set (druid_page_standard->_priv->top_watermark_item,
+			       "pixbuf", druid_page_standard->top_watermark_image,
+			       NULL);
 }

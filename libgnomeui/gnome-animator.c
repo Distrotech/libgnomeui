@@ -23,7 +23,9 @@
   @NOTATION@
  */
 
-/*#include <config.h>*/
+#include <config.h>
+#include "gnome-macros.h"
+
 #include <gtk/gtkmain.h>
 #include "gnome-animator.h"
 
@@ -61,8 +63,8 @@ struct _GnomeAnimatorFrame
   GnomeAnimatorFrame *prev;
 };
 
-static void class_init (GnomeAnimatorClass * class);
-static void init (GnomeAnimator * animator);
+static void gnome_animator_class_init (GnomeAnimatorClass * class);
+static void gnome_animator_init (GnomeAnimator * animator);
 static void destroy (GtkObject * object);
 static void finalize (GObject * object);
 static void prepare_aux_pixmaps (GnomeAnimator * animator);
@@ -79,10 +81,11 @@ static void style_set (GtkWidget * widget, GtkStyle * previous_style);
 static GnomeAnimatorFrame *append_frame (GnomeAnimator * animator);
 static gint timer_cb (gpointer data);
 
-static GtkWidgetClass *parent_class;
+GNOME_CLASS_BOILERPLATE (GnomeAnimator, gnome_animator,
+			 GtkMisc, gtk_misc)
 
 static void
-init (GnomeAnimator * animator)
+gnome_animator_init (GnomeAnimator * animator)
 {
   GTK_WIDGET_SET_FLAGS (animator, GTK_NO_WINDOW);
   animator->frame_num = 0;
@@ -94,7 +97,7 @@ init (GnomeAnimator * animator)
 }
 
 static void
-class_init (GnomeAnimatorClass * class)
+gnome_animator_class_init (GnomeAnimatorClass * class)
 {
   GtkObjectClass *object_class;
   GObjectClass *gobject_class;
@@ -103,8 +106,6 @@ class_init (GnomeAnimatorClass * class)
   object_class = (GtkObjectClass *) class;
   gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
-
-  parent_class = gtk_type_class (gtk_misc_get_type ());
 
   widget_class->draw = draw;
   widget_class->expose_event = expose;
@@ -122,8 +123,7 @@ destroy (GtkObject * object)
   g_return_if_fail (object != NULL);
   g_return_if_fail (GNOME_IS_ANIMATOR (object));
 
-  if (GTK_OBJECT_CLASS (parent_class)->destroy)
-    (*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+  GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -139,8 +139,7 @@ finalize (GObject * object)
   g_free(self->_priv);
   self->_priv = NULL;
 
-  if (G_OBJECT_CLASS (parent_class)->finalize)
-    (*G_OBJECT_CLASS (parent_class)->finalize) (object);
+  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 
@@ -678,29 +677,6 @@ timer_cb (gpointer data)
 /* ------------------------------------------------------------------------- */
 
 /* Public interface.  */
-
-guint
-gnome_animator_get_type (void)
-{
-  static guint animator_type = 0;
-
-  if (!animator_type)
-    {
-      GtkTypeInfo animator_info = {
-	"GnomeAnimator",
-	sizeof (GnomeAnimator),
-	sizeof (GnomeAnimatorClass),
-	(GtkClassInitFunc) class_init,
-	(GtkObjectInitFunc) init,
-	NULL,
-	NULL
-      };
-
-      animator_type = gtk_type_unique (gtk_misc_get_type (), &animator_info);
-    }
-
-  return animator_type;
-}
 
 /*
  * FIXME:  I think we should get rid of this function and set

@@ -22,13 +22,22 @@
 */
 /* Written by Elliot Lee <sopwith@redhat.com>. This code is pretty aweful, but so is all my other code. */
 
-#include <gnome.h>
+#include <config.h>
+#include "gnome-macros.h"
+
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "gnome-textfu.h"
 #include <ctype.h>
+
+#include <libgnome/gnome-util.h>
+#include "gnome-cursors.h"
+#include "gnome-helpsys.h"
+#include "gnome-pixmap.h"
+
+#include "gnome-textfu.h"
 
 #define my_isspace(x) (isspace(x) || (x) == '\r' || (x) == '\n')
 #define LINE_SPACING 4
@@ -68,8 +77,11 @@ static gint gnome_textfu_expose             (GtkWidget      *widget,
 static gint gnome_textfu_button_release_event(GtkWidget *widget, GdkEventButton *event);
 static gint gnome_textfu_motion_notify_event(GtkWidget *widget, GdkEventMotion *event);
 
-static GtkWidgetClass *parent_class = NULL;
 static guint textfu_signals[LAST_SIGNAL] = { 0 };
+
+/* Define boilerplate such as parent_class and _get_type */
+GNOME_CLASS_BOILERPLATE (GnomeTextFu, gnome_textfu,
+			 GtkLayout, gtk_layout)
 
 static GnomeTextFuItemContainer *
 gnome_textfu_item_container_new(void)
@@ -166,7 +178,7 @@ IMPL_CTAG(ulink);
   int i;
   for(i = 0; attrs[i]; i++)
     {
-      if(!strncasecmp(attrs[i], "url=", strlen("url=")))
+      if(!g_strncasecmp(attrs[i], "url=", strlen("url=")))
 	{
 	  char *link_ptr;
 	  int slen;
@@ -289,31 +301,6 @@ handler_img(GnomeTextFu *textfu, const char *tag, guint16 tag_id, char **attrs)
   return (GnomeTextFuItem *)gnome_textfu_item_widget_new(pmap);
 }
 
-GtkType
-gnome_textfu_get_type (void)
-{
-  static GtkType textfu_type = 0;
-
-  if (!textfu_type)
-    {
-      static const GtkTypeInfo textfu_info =
-      {
-        "GnomeTextFu",
-        sizeof (GnomeTextFu),
-        sizeof (GnomeTextFuClass),
-        (GtkClassInitFunc) gnome_textfu_class_init,
-        (GtkObjectInitFunc) gnome_textfu_init,
-        /* reserved_1 */ NULL,
-        /* reserved_2 */ NULL,
-        (GtkClassInitFunc) NULL,
-      };
-
-      textfu_type = gtk_type_unique (gtk_layout_get_type (), &textfu_info);
-    }
-
-  return textfu_type;
-}
-
 static void
 gnome_textfu_class_init (GnomeTextFuClass *klass)
 {
@@ -323,8 +310,6 @@ gnome_textfu_class_init (GnomeTextFuClass *klass)
   object_class = (GtkObjectClass*) klass;
 
   widget_class = (GtkWidgetClass*) klass;
-
-  parent_class = gtk_type_class(g_type_parent(GTK_CLASS_TYPE(object_class)));
 
   textfu_signals[ACTIVATE_URI] = 
     gtk_signal_new ("activate_uri",
@@ -418,24 +403,21 @@ gnome_real_textfu_activate_uri (GnomeTextFu *textfu, const char *uri)
 static void
 gnome_textfu_map(GtkWidget *widget)
 {
-  if(parent_class->map)
-    parent_class->map(widget);
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, map, (widget));
 
-  gtk_widget_queue_draw(widget);
+	gtk_widget_queue_draw(widget);
 }
 
 static void
 gnome_textfu_realize(GtkWidget      *widget)
 {
-  if(parent_class->realize)
-    parent_class->realize(widget);
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
 }
 
 static void
 gnome_textfu_unrealize(GtkWidget      *widget)
 {
-  if(parent_class->unrealize)
-    parent_class->unrealize(widget);
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, unrealize, (widget));
 }
 
 static TextRegionInfo *
@@ -476,10 +458,10 @@ gnome_textfu_button_release_event(GtkWidget *widget, GdkEventButton *event)
     gtk_signal_emit(GTK_OBJECT(widget), textfu_signals[ACTIVATE_URI], info->link_to);
 
  default_handling:
-  if(parent_class->button_release_event)
-    return parent_class->button_release_event(widget, event);
-  else
-    return info?TRUE:FALSE;
+  return GNOME_CALL_PARENT_HANDLER_WITH_DEFAULT (GTK_WIDGET_CLASS,
+						 button_release_event,
+						 (widget, event),
+						 (info ? TRUE : FALSE));
 }
 
 static gint
@@ -513,10 +495,10 @@ gnome_textfu_motion_notify_event(GtkWidget *widget, GdkEventMotion *event)
     }
 
  default_handling:
-  if(parent_class->motion_notify_event)
-    return parent_class->motion_notify_event(widget, event);
-  else
-    return FALSE;
+  return GNOME_CALL_PARENT_HANDLER_WITH_DEFAULT (GTK_WIDGET_CLASS,
+						 motion_notify_event,
+						 (widget, event),
+						 FALSE);
 }
 
 /* This data structure is really used for drawing just as much as sizing */
@@ -701,9 +683,9 @@ gnome_textfu_text_free_region_info(TextRegionInfo *info, GnomeTextFu *textfu)
 static void
 gnome_textfu_text_free_region(GnomeTextFu *textfu, TextRegionInfo *info)
 {
-  gnome_textfu_text_free_region_info(info, textfu);
-
   textfu->link_regions = g_list_remove(textfu->link_regions, info);
+
+  gnome_textfu_text_free_region_info(info, textfu);
 }
 
 static void
@@ -719,7 +701,7 @@ gnome_textfu_text_set_region(GnomeTextFu *textfu, GnomeTextFuItemText *item, cha
 {
   TextRegionInfo *info = NULL;
 
-  if(item->link_region)
+  if(item->link_region != NULL)
     gnome_textfu_text_free_region(textfu, item->link_region);
 
   if(link_to)
@@ -994,8 +976,9 @@ gnome_textfu_size_request(GtkWidget      *widget,
 
   textfu = GNOME_TEXTFU(widget);
 
-  if(parent_class->size_request)
-    parent_class->size_request(widget, requisition);
+  GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS,
+			     size_request,
+			     (widget, requisition));
 
   if(textfu->item_tree)
     {
@@ -1016,8 +999,9 @@ gnome_textfu_size_allocate(GtkWidget      *widget,
 
   textfu = GNOME_TEXTFU(widget);
 
-  if(parent_class->size_allocate)
-    parent_class->size_allocate(widget, allocation);
+  GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS,
+			     size_allocate,
+			     (widget, allocation));
 
   if(textfu->width != allocation->width)
     {
@@ -1033,8 +1017,9 @@ static void
 gnome_textfu_draw(GtkWidget      *widget, 
 		  GdkRectangle   *area)
 {
-  if(parent_class->draw)
-    parent_class->draw(widget, area);
+  GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS,
+			     draw,
+			     (widget, area));
 
   gnome_textfu_determine_size(GNOME_TEXTFU(widget), NULL, TRUE);
 }
@@ -1043,7 +1028,10 @@ static gint
 gnome_textfu_expose(GtkWidget      *widget, 
 		    GdkEventExpose *event)
 {
-  parent_class->expose_event(widget, event);
+  GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS,
+			     expose_event,
+			     (widget, event));
+
   gnome_textfu_determine_size(GNOME_TEXTFU(widget), NULL, TRUE);
 
   return TRUE;
@@ -1209,7 +1197,7 @@ gnome_textfu_parse(GnomeTextFu *textfu)
   int fd;
   int bracecount, quotecount, in_comment;
   struct stat sbuf;
-  char *mem, *tag_start = NULL, *tag_end, *text_start;
+  char *mem = NULL, *tag_start = NULL, *tag_end, *text_start;
   int size_left, n = 0;
   char tag_name[32];
   char *attrs[32]; /* Ick. Hardcoded maximum of 32 attributes */
@@ -1228,7 +1216,7 @@ gnome_textfu_parse(GnomeTextFu *textfu)
 
   fstat(fd, &sbuf);
 
-  mem = g_alloca(sbuf.st_size + 1);
+  mem = g_malloc(sbuf.st_size + 1);
   size_left = sbuf.st_size;
   while((size_left > 0) && (n = read(fd, mem + sbuf.st_size - size_left, size_left)) > 0)
     size_left -= n;
@@ -1319,6 +1307,7 @@ gnome_textfu_parse(GnomeTextFu *textfu)
     text_start = handle_text(textfu, stack, stack_cur, text_start, tag_end);
 
  out:
+  g_free (mem);
   close(fd);
   return retval;
 }
@@ -1326,7 +1315,7 @@ gnome_textfu_parse(GnomeTextFu *textfu)
 static void
 gnome_textfu_item_destroy(GnomeTextFuItem *textfu)
 {
-  if(!textfu)
+  if(textfu == NULL)
     return;
 
   switch(textfu->type)
@@ -1334,6 +1323,7 @@ gnome_textfu_item_destroy(GnomeTextFuItem *textfu)
     case TEXTFU_ITEM_CONTAINER:
       g_slist_foreach(((GnomeTextFuItemContainer *)textfu)->children, (GFunc)gnome_textfu_item_destroy, NULL);
       g_slist_free(((GnomeTextFuItemContainer *)textfu)->children);
+      ((GnomeTextFuItemContainer *)textfu)->children = NULL;
       break;
     default:
       break;
@@ -1382,7 +1372,8 @@ gnome_textfu_load_file(GnomeTextFu *textfu, const char *filename)
   g_return_if_fail (GNOME_IS_TEXTFU (textfu));
 
   /* out with old */
-  gnome_textfu_item_destroy(textfu->item_tree); textfu->item_tree = NULL;
+  gnome_textfu_item_destroy(textfu->item_tree);
+  textfu->item_tree = NULL;
 
   gnome_textfu_text_free_regions(textfu);
 

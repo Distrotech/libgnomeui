@@ -1,3 +1,15 @@
+Wed Aug 30 21:59:43 2000  George Lebl <jirka@5z.com>
+
+	* gnome-animator.c, gnome-cursors.c, gnome-textfu.c: make
+	  dependencies more fine grained then <gnome.h>
+
+	* gnome-textfu.c, gnome-animator.c, gnome-app.c: minor cleanups,
+	  use gnome-macros.h
+
+	* gnome-druid-page-edge.[ch], gnome-druid-page-standard.[ch]:
+	  add an argument so that we can add the toplevel watermark like
+	  rp3 has.  Plus a couple of docs added/updated.
+
 2000-08-30  Federico Mena Quintero  <federico@helixcode.com>
 
 	* gnome-dock-item.c (gnome_dock_item_size_allocate): Fix unsigned

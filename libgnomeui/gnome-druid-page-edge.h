@@ -59,6 +59,7 @@ struct _GnomeDruidPageEdge
 	gchar *text;
 	GdkPixbuf *logo_image;
 	GdkPixbuf *watermark_image;
+	GdkPixbuf *top_watermark_image;
 
 	GdkColor background_color;
 	GdkColor textbox_color;
@@ -85,14 +86,16 @@ GtkWidget *gnome_druid_page_edge_new_with_vals     (GnomeEdgePosition   position
 						    const gchar        *title,
 						    const gchar        *text,
 						    GdkPixbuf          *logo,
-						    GdkPixbuf          *watermark);
+						    GdkPixbuf          *watermark,
+						    GdkPixbuf	       *top_watermark);
 void       gnome_druid_page_edge_construct         (GnomeDruidPageEdge *druid_page_edge,
 						    GnomeEdgePosition   position,
 						    gboolean            antialiaed,
 						    const gchar        *title,
 						    const gchar        *text,
 						    GdkPixbuf          *logo,
-						    GdkPixbuf          *watermark);
+						    GdkPixbuf          *watermark,
+						    GdkPixbuf          *top_watermark);
 void       gnome_druid_page_edge_set_bg_color      (GnomeDruidPageEdge *druid_page_edge,
 						    GdkColor           *color);
 void       gnome_druid_page_edge_set_textbox_color (GnomeDruidPageEdge *druid_page_edge,
@@ -111,6 +114,8 @@ void       gnome_druid_page_edge_set_logo          (GnomeDruidPageEdge *druid_pa
 						    GdkPixbuf          *logo_image);
 void       gnome_druid_page_edge_set_watermark     (GnomeDruidPageEdge *druid_page_edge,
 						    GdkPixbuf          *watermark);
+void       gnome_druid_page_edge_set_top_watermark (GnomeDruidPageEdge *druid_page_edge,
+						    GdkPixbuf          *top_watermark);
 
 END_GNOME_DECLS
 

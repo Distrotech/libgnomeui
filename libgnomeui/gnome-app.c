@@ -39,6 +39,8 @@
  */
 
 #include "config.h"
+#include "gnome-macros.h"
+
 #include <string.h>
 #include <gtk/gtk.h>
 #include "libgnome/gnomelib-init2.h"
@@ -83,7 +85,9 @@ static gchar *read_layout_config  (GnomeApp *app);
 static void   write_layout_config (GnomeApp *app, GnomeDockLayout *layout);
 static void   layout_changed      (GtkWidget *widget, gpointer data);
 
-static GtkWindowClass *parent_class;
+/* define _get_type and parent_class */
+GNOME_CLASS_BOILERPLATE (GnomeApp, gnome_app,
+			 GtkWindow, gtk_window)
 
 static gchar *
 read_layout_config (GnomeApp *app)
@@ -111,29 +115,6 @@ write_layout_config (GnomeApp *app, GnomeDockLayout *layout)
 	g_free (s);
 }
 
-GtkType
-gnome_app_get_type (void)
-{
-	static GtkType gnome_program_type = 0;
-
-	if (!gnome_program_type) {
-		GtkTypeInfo gnome_program_info = {
-			"GnomeApp",
-			sizeof (GnomeApp),
-			sizeof (GnomeAppClass),
-			(GtkClassInitFunc) gnome_app_class_init,
-			(GtkObjectInitFunc) gnome_app_init,
-			NULL, /* reserved_1 */
-			NULL, /* reserved_2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		gnome_program_type = gtk_type_unique (gtk_window_get_type (), &gnome_program_info);
-	}
-
-	return gnome_program_type;
-}
-
 enum {
 	ARG_0,
 	ARG_APP_ID
@@ -149,8 +130,6 @@ gnome_app_class_init (GnomeAppClass *class)
 	gobject_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
-
-	parent_class = gtk_type_class (gtk_window_get_type ());
 
 	gobject_class->finalize = gnome_app_finalize;
 	object_class->destroy = gnome_app_destroy;
@@ -260,8 +239,7 @@ gnome_app_show (GtkWidget *widget)
 	gtk_widget_show (app->vbox);
 	gtk_widget_show (app->dock);
 
-	if (GTK_WIDGET_CLASS (parent_class)->show != NULL)
-		(*GTK_WIDGET_CLASS (parent_class)->show) (widget);
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, show, (widget));
 }
 
 static void
@@ -300,9 +278,21 @@ layout_changed (GtkWidget *w, gpointer data)
 GtkWidget *
 gnome_app_new(const gchar *appname, const gchar *title)
 {
+	GtkObject *app;
+
 	g_return_val_if_fail (appname != NULL, NULL);
-		
-	return GTK_WIDGET(gtk_object_new(gnome_app_get_type(), "app_id", appname, title?"title":NULL, title, NULL));
+
+	if (title != NULL) {
+		app = gtk_object_new (gnome_app_get_type (),
+				      "app_id", appname,
+				      "title", title,
+				      NULL);
+	} else {
+		app = gtk_object_new (gnome_app_get_type (),
+				      "app_id", appname,
+				      NULL);
+	}
+	return GTK_WIDGET (app);
 }
 
 /**
@@ -320,7 +310,16 @@ gnome_app_construct (GnomeApp *app, const gchar *appname, const gchar *title)
 {
 	g_return_if_fail (appname != NULL);
 
-	gtk_object_set(GTK_OBJECT(app), "app_id", appname, title?"title":NULL, title, NULL);
+	if (title != NULL) {
+		gtk_object_set (GTK_OBJECT (app),
+				"app_id", appname,
+				"title", title,
+				NULL);
+	} else {
+		gtk_object_set (GTK_OBJECT (app),
+				"app_id", appname,
+				NULL);
+	}
 }
 
 static void
@@ -350,8 +349,7 @@ gnome_app_destroy (GtkObject *object)
 		app->layout = NULL;
 	}
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -368,8 +366,7 @@ gnome_app_finalize (GObject *object)
 	g_free(app->_priv);
 	app->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /* Callback for an app's contents' parent_set signal.  We set the app->contents
@@ -459,10 +456,12 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 
 	app->menubar = GTK_WIDGET (menubar);
 
-	/* To have menubar relief agree with the toolbar (and have the relief outside of
-	 * smaller handles), substitute the dock item's relief for the menubar's relief,
-	 * but don't change the size of the menubar in the process. */
-	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar), GTK_SHADOW_NONE);
+	/* To have menubar relief agree with the toolbar (and have the relief
+	 * outside of smaller handles), substitute the dock item's relief for
+	 * the menubar's relief, but don't change the size of the menubar in
+	 * the process. */
+	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar),
+				      GTK_SHADOW_NONE);
 	if (gnome_preferences_get_menubar_relief ()) {
 		guint border_width;
 		
@@ -473,7 +472,8 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 		gtk_container_set_border_width (GTK_CONTAINER (app->menubar),
 						border_width);
 	} else
-		gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
+		gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item),
+						 GTK_SHADOW_NONE);
 
 	if (app->layout != NULL)
 		gnome_dock_layout_add_item (app->layout,
@@ -823,7 +823,9 @@ gnome_app_set_help_view (GnomeApp *app, GtkWidget *help_view)
 		return;
 
 	if(help_view == NULL)
-		help_view = gnome_help_view_new(GTK_WIDGET(app), GNOME_HELP_POPUP, G_PRIORITY_LOW);
+		help_view = gnome_help_view_new(GTK_WIDGET(app),
+						GNOME_HELP_POPUP,
+						G_PRIORITY_LOW);
 
 	gtk_widget_show(help_view);
 

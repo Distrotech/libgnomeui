@@ -45,8 +45,10 @@ struct _GnomeDruidPageStandard
 {
 	GnomeDruidPage parent;
 
+	/*< public >*/
 	GtkWidget *vbox;
 	GdkPixbuf *logo_image;
+	GdkPixbuf *top_watermark_image;
 
 	gchar *title;
 
@@ -66,23 +68,27 @@ struct _GnomeDruidPageStandardClass
 GtkType    gnome_druid_page_standard_get_type      (void);
 GtkWidget *gnome_druid_page_standard_new           (void);
 GtkWidget *gnome_druid_page_standard_new_aa        (void);
-GtkWidget *gnome_druid_page_standard_new_with_vals (gboolean antialiased,
-						    const gchar *title,
-						    GdkPixbuf *logo);
+GtkWidget *gnome_druid_page_standard_new_with_vals (gboolean		 antialiased,
+						    const gchar		*title,
+						    GdkPixbuf		*logo,
+						    GdkPixbuf		*top_watermark);
 void       gnome_druid_page_standard_construct     (GnomeDruidPageStandard *druid_page_standard,
-						    gboolean antialiased,
-						    const gchar *title,
-						    GdkPixbuf *logo);
+						    gboolean		 antialiased,
+						    const gchar		*title,
+						    GdkPixbuf		*logo,
+						    GdkPixbuf		*top_watermark);
 void       gnome_druid_page_standard_set_bg_color  (GnomeDruidPageStandard *druid_page_standard,
-						    GdkColor *color);
+						    GdkColor		*color);
 void       gnome_druid_page_standard_set_logo_bg_color(GnomeDruidPageStandard *druid_page_standard,
-						    GdkColor *color);
+						    GdkColor		*color);
 void       gnome_druid_page_standard_set_title_color(GnomeDruidPageStandard *druid_page_standard,
-						    GdkColor *color);
+						    GdkColor		*color);
 void       gnome_druid_page_standard_set_title     (GnomeDruidPageStandard *druid_page_standard,
-						    const gchar *title);
+						    const gchar		*title);
 void       gnome_druid_page_standard_set_logo      (GnomeDruidPageStandard *druid_page_standard,
-						    GdkPixbuf *logo_image);
+						    GdkPixbuf		*logo_image);
+void       gnome_druid_page_standard_set_top_watermark(GnomeDruidPageStandard *druid_page_standard,
+						    GdkPixbuf		*top_watermark_image);
 
 END_GNOME_DECLS
 

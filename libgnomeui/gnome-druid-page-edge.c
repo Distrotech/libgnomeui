@@ -43,6 +43,7 @@ struct _GnomeDruidPageEdgePrivate
 	GnomeCanvasItem *logo_item;
 	GnomeCanvasItem *logoframe_item;
 	GnomeCanvasItem *watermark_item;
+	GnomeCanvasItem *top_watermark_item;
 	GnomeCanvasItem *title_item;
 };
 
@@ -106,6 +107,11 @@ gnome_druid_page_edge_init (GnomeDruidPageEdge *druid_page_edge)
 	druid_page_edge->text_color.blue = 0;
 }
 
+/**
+ * gnome_druid_page_edge_construct:
+ *
+ * Description:  Useful for subclassing and binding only
+ **/
 void
 gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge,
 				 GnomeEdgePosition   position,
@@ -113,7 +119,8 @@ gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge,
 				 const gchar        *title,
 				 const gchar        *text,
 				 GdkPixbuf          *logo,
-				 GdkPixbuf          *watermark)
+				 GdkPixbuf          *watermark,
+				 GdkPixbuf          *top_watermark)
 {
 	GtkWidget *canvas;
 
@@ -143,6 +150,10 @@ gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge,
 	if (watermark != NULL)
 		gdk_pixbuf_ref (watermark);
 	druid_page_edge->watermark_image = watermark;
+
+	if (top_watermark != NULL)
+		gdk_pixbuf_ref (top_watermark);
+	druid_page_edge->top_watermark_image = top_watermark;
 
 	/* Set up the canvas */
 	gtk_container_set_border_width (GTK_CONTAINER (druid_page_edge), 0);
@@ -295,10 +306,25 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 		gnome_canvas_item_hide (druid_page_edge->_priv->logoframe_item);
 	}
 
+	druid_page_edge->_priv->top_watermark_item =
+		gnome_canvas_item_new (gnome_canvas_root (canvas),
+				       gnome_canvas_pixbuf_get_type (),
+				       "x", 0.0,
+				       "y", 0.0,
+				       "x_set", TRUE,
+				       "y_set", TRUE,
+				       NULL);
+
+	if (druid_page_edge->top_watermark_image != NULL)
+		gnome_canvas_item_set (druid_page_edge->_priv->top_watermark_item,
+				       "pixbuf", druid_page_edge->top_watermark_image,
+				       NULL);
+
 	druid_page_edge->_priv->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
 				       gnome_canvas_pixbuf_get_type (),
-				       "x_set", TRUE, "y_set", TRUE,
+				       "x_set", TRUE,
+				       "y_set", TRUE,
 				       NULL);
 
 	if (druid_page_edge->logo_image != NULL)
@@ -308,7 +334,8 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 	druid_page_edge->_priv->watermark_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
 				       gnome_canvas_pixbuf_get_type (),
-				       "x_set", TRUE, "y_set", TRUE,
+				       "x_set", TRUE,
+				       "y_set", TRUE,
 				       NULL);
 
 	if (druid_page_edge->watermark_image != NULL)
@@ -340,6 +367,7 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 			    gnome_druid_page_edge_prepare,
 			    NULL);
 }
+
 static void
 gnome_druid_page_edge_prepare (GnomeDruidPage *page,
 			       GtkWidget *druid,
@@ -363,7 +391,6 @@ gnome_druid_page_edge_prepare (GnomeDruidPage *page,
 		break;
 	}
 }
-
 
 static void
 gnome_druid_page_edge_size_allocate   (GtkWidget               *widget,
@@ -408,6 +435,7 @@ gnome_druid_page_edge_new (GnomeEdgePosition position)
 					 NULL,
 					 NULL,
 					 NULL,
+					 NULL,
 					 NULL);
 
 	return GTK_WIDGET (retval);
@@ -439,6 +467,7 @@ gnome_druid_page_edge_new_aa (GnomeEdgePosition position)
 					 NULL,
 					 NULL,
 					 NULL,
+					 NULL,
 					 NULL);
 
 	return GTK_WIDGET (retval);
@@ -452,6 +481,7 @@ gnome_druid_page_edge_new_aa (GnomeEdgePosition position)
  * @text: The introduction text.
  * @logo: The logo in the upper right corner.
  * @watermark: The watermark on the left.
+ * @top_watermark: The watermark on the left.
  *
  * Description: This will create a new GNOME Druid Edge page, with the values
  * given.  It is acceptable for any of them to be %NULL.
@@ -466,7 +496,8 @@ gnome_druid_page_edge_new_with_vals (GnomeEdgePosition position,
 				     const gchar *title,
 				     const gchar* text,
 				     GdkPixbuf *logo,
-				     GdkPixbuf *watermark)
+				     GdkPixbuf *watermark,
+				     GdkPixbuf *top_watermark)
 {
 	GnomeDruidPageEdge *retval;
 
@@ -481,7 +512,8 @@ gnome_druid_page_edge_new_with_vals (GnomeEdgePosition position,
 					 title,
 					 text,
 					 logo,
-					 watermark);
+					 watermark,
+					 top_watermark);
 	return GTK_WIDGET (retval);
 }
 
@@ -490,9 +522,8 @@ gnome_druid_page_edge_new_with_vals (GnomeEdgePosition position,
  * @druid_page_edge: A DruidPageEdge.
  * @color: The new background color.
  *
- * This will set the background color to be the @color.  You do not
- * need to allocate the color, as the @druid_page_edge will do it for
- * you.
+ * Description:  This will set the background color to be the @color.  You do
+ * not need to allocate the color, as the @druid_page_edge will do it for you.
  **/
 void
 gnome_druid_page_edge_set_bg_color      (GnomeDruidPageEdge *druid_page_edge,
@@ -554,6 +585,7 @@ gnome_druid_page_edge_set_logo_bg_color (GnomeDruidPageEdge *druid_page_edge,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
+
 void
 gnome_druid_page_edge_set_title_color   (GnomeDruidPageEdge *druid_page_edge,
 					 GdkColor *color)
@@ -573,6 +605,7 @@ gnome_druid_page_edge_set_title_color   (GnomeDruidPageEdge *druid_page_edge,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
+
 void
 gnome_druid_page_edge_set_text_color    (GnomeDruidPageEdge *druid_page_edge,
 					 GdkColor *color)
@@ -592,9 +625,10 @@ gnome_druid_page_edge_set_text_color    (GnomeDruidPageEdge *druid_page_edge,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
+
 void
-gnome_druid_page_edge_set_text          (GnomeDruidPageEdge *druid_page_edge,
-					 const gchar *text)
+gnome_druid_page_edge_set_text (GnomeDruidPageEdge *druid_page_edge,
+				const gchar *text)
 {
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
@@ -605,6 +639,7 @@ gnome_druid_page_edge_set_text          (GnomeDruidPageEdge *druid_page_edge,
 			       "text", druid_page_edge->text,
 			       NULL);
 }
+
 void
 gnome_druid_page_edge_set_title         (GnomeDruidPageEdge *druid_page_edge,
 					 const gchar *title)
@@ -618,9 +653,18 @@ gnome_druid_page_edge_set_title         (GnomeDruidPageEdge *druid_page_edge,
 			       "text", druid_page_edge->title,
 			       NULL);
 }
+
+/**
+ * gnome_druid_page_edge_set_logo:
+ * @druid_page_edge: the #GnomeDruidPageEdge to work on
+ * @logo_image: The #GdkPixbuf to use as a logo
+ *
+ * Description:  Sets a #GdkPixbuf as the logo in the top right corner.
+ * If %NULL, then no logo will be displayed.
+ **/
 void
-gnome_druid_page_edge_set_logo          (GnomeDruidPageEdge *druid_page_edge,
-					 GdkPixbuf *logo_image)
+gnome_druid_page_edge_set_logo (GnomeDruidPageEdge *druid_page_edge,
+				GdkPixbuf *logo_image)
 {
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
@@ -633,11 +677,22 @@ gnome_druid_page_edge_set_logo          (GnomeDruidPageEdge *druid_page_edge,
 	if (logo_image != NULL )
 		gdk_pixbuf_ref (logo_image);
 	gnome_canvas_item_set (druid_page_edge->_priv->logo_item,
-			       "pixbuf", druid_page_edge->logo_image, NULL);
+			       "pixbuf", druid_page_edge->logo_image,
+			       NULL);
 }
+
+/**
+ * gnome_druid_page_edge_set_watermark:
+ * @druid_page_edge: the #GnomeDruidPageEdge to work on
+ * @top_watermark_image: The #GdkPixbuf to use as a watermark
+ *
+ * Description:  Sets a #GdkPixbuf as the watermark on the left
+ * strip on the druid.  If #top_watermark_image is %NULL, it is reset
+ * to the normal color.
+ **/
 void
-gnome_druid_page_edge_set_watermark     (GnomeDruidPageEdge *druid_page_edge,
-					 GdkPixbuf *watermark)
+gnome_druid_page_edge_set_watermark (GnomeDruidPageEdge *druid_page_edge,
+				     GdkPixbuf *watermark)
 {
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
@@ -650,5 +705,33 @@ gnome_druid_page_edge_set_watermark     (GnomeDruidPageEdge *druid_page_edge,
 	if (watermark != NULL )
 		gdk_pixbuf_ref (watermark);
 	gnome_canvas_item_set (druid_page_edge->_priv->watermark_item,
-			       "pixbuf", druid_page_edge->watermark_image, NULL);
+			       "pixbuf", druid_page_edge->watermark_image,
+			       NULL);
+}
+
+/**
+ * gnome_druid_page_edge_set_top_watermark:
+ * @druid_page_edge: the #GnomeDruidPageEdge to work on
+ * @top_watermark_image: The #GdkPixbuf to use as a top watermark
+ *
+ * Description:  Sets a #GdkPixbuf as the watermark on top of the top
+ * strip on the druid.  If #top_watermark_image is %NULL, it is reset
+ * to the normal color.
+ **/
+void
+gnome_druid_page_edge_set_top_watermark (GnomeDruidPageEdge *druid_page_edge,
+					 GdkPixbuf *top_watermark_image)
+{
+	g_return_if_fail (druid_page_edge != NULL);
+	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
+
+	if (druid_page_edge->top_watermark_image)
+		gdk_pixbuf_unref (druid_page_edge->top_watermark_image);
+
+	druid_page_edge->top_watermark_image = top_watermark_image;
+	if (top_watermark_image != NULL)
+		gdk_pixbuf_ref (top_watermark_image);
+	gnome_canvas_item_set (druid_page_edge->_priv->top_watermark_item,
+			       "pixbuf", druid_page_edge->top_watermark_image,
+			       NULL);
 }
