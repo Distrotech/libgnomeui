@@ -317,9 +317,6 @@ gnome_property_box_append_page (GnomePropertyBox *property_box,
 				GtkWidget *child,
 				GtkWidget *tab_label)
 {
-	g_warning("Use of gnome_property_box_append_page is depreciated, "
-		  "please use gtk_notebook_append_page instead!");
-
 	gtk_notebook_append_page (GTK_NOTEBOOK (property_box->notebook),
 				  child, tab_label);
 

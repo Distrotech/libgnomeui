@@ -1,3 +1,9 @@
+1998-08-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-propertybox.c (gnome_property_box_append_page): Wonder why
+	this routine was tagged as deprecated.  Make it legal to use
+	again. 
+
 1998-08-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-line.c (gnome_canvas_line_get_arg):
