@@ -10,6 +10,7 @@
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-actionarea.h"
+#include "libgnomeui/gnome-scores.h"
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gtk-clock.h"
 

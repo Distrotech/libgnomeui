@@ -20,6 +20,7 @@ libgnomeui_la_SOURCES = \
 	gnome-pixmap.c			\
 	gnome-properties.c		\
 	gnome-session.c			\
+	gnome-scores.c			\
 	gnome-stock.c			\
 	gtk-clock.c
 
@@ -34,12 +35,13 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
 	gnome-session.h			\
+	gnome-scores.h			\
 	gnome-stock.h			\
 	gtk-clock.h			\
 	libgnomeui.h
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(GTK_LIBS)
+libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs)
 
 files:
         @files=`ls $(DISTFILES) 2> /dev/null `; for p in $$files; do \
