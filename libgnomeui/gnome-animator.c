@@ -1207,7 +1207,8 @@ gnome_animator_advance (GnomeAnimator *animator, gint num)
             stop = FALSE;
             break;
           default:
-            g_error ("Unknown GnomeAnimatorLoopType %d", animator->loop_type);
+            g_warning ("Unknown GnomeAnimatorLoopType %d",
+		       animator->loop_type);
             stop = TRUE;
             new_frame = animator->current_frame_number;
             break;
