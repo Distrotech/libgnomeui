@@ -1,3 +1,10 @@
+1999-06-24  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+
+	* Added gtkrc.* files for all encodings I know of. Still missing is
+	to modify the Makefile.am so that at install time the gtkrc.iso88592,
+	gtkrc.iso88595 are hardlinked/copyied into the gtkrc.$LANG for
+	the various languages using them.
+
 1999-06-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (selection_many_icon_event): Sigh, we did need
