@@ -1,5 +1,10 @@
 1999-12-13  Havoc Pennington  <hp@redhat.com>
 
+	* gnome-cursors.c (gnome_stock_cursor_new): support standard X
+	cursors (you can make a stock cursor that specifies their color).
+
+1999-12-13  Havoc Pennington  <hp@redhat.com>
+
 	* gnome-cursors.c: New module, stock cursors from Iain Holmes.
 
 Sun Dec 12 10:57:40 1999  George Lebl <jirka@5z.com>
