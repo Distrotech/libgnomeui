@@ -1,3 +1,9 @@
+2000-01-30  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c (clear_provided_state_image): Apply patch 
+	from Peter Wainwright to free the mask as well as the pixbuf,
+	closes bug 5687
+
 2000-01-28  Havoc Pennington  <hp@redhat.com>
 
 	* gtkpixmapmenuitem.c (gtk_pixmap_menu_item_set_pixmap): The

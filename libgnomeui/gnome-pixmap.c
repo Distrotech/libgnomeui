@@ -944,7 +944,12 @@ clear_provided_state_image (GnomePixmap *gpixmap,
         if (gpixmap->provided[state].pixbuf != NULL) {
                 gdk_pixbuf_unref(gpixmap->provided[state].pixbuf);
                 gpixmap->provided[state].pixbuf = NULL;
-        }        
+        }
+        
+        if (gpixmap->provided[state].mask != NULL) {
+                gdk_bitmap_unref(gpixmap->provided[state].mask);
+                gpixmap->provided[state].mask = NULL;
+        }
 }
 
 static void
