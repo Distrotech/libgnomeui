@@ -397,7 +397,7 @@ gnome_canvas_widget_point (GnomeCanvasItem *item, double x, double y,
 	else
 		dy = 0.0;
 
-	return hypot(dx, dy);
+	return sqrt (dx * dx + dy * dy);
 }
 
 static void

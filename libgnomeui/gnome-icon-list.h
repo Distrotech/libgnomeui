@@ -10,18 +10,9 @@
 #ifndef _GNOME_ICON_LIST_H_
 #define _GNOME_ICON_LIST_H_
 
-/*
- * This define should be removed after GnomeLibs 0.40 has been released
- * and any code depending on the old ICON_LIST code should be fixed by then.
- */
-#define GNOME_ICON_LIST_VERSION2
-
 #include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-canvas.h>
-
-#ifndef __GDK_IMLIB_H__
 #include <gdk_imlib.h>
-#endif
 
 BEGIN_GNOME_DECLS
 
@@ -35,62 +26,52 @@ typedef enum {
 	GNOME_ICON_LIST_TEXT_RIGHT
 } GnomeIconListMode;
 
+/* This structure has been converted to use public and private parts.  To avoid
+ * breaking binary compatibility, the slots for private fields have been
+ * replaced with padding.  Please remove these fields when gnome-libs has
+ * reached another major version and it is "fine" to break binary compatibility.
+ */
 typedef struct {
 	GnomeCanvas canvas;
 
-	GtkAdjustment *adj;	/* The scrolling adjustment we use */
-        GtkAdjustment *hadj;	/* dummmy need for GtkScrolledWindow compat */
-  
-	int icons;		/* Number of icons in the IconList */
-	GList *icon_list;	/* The list of icons */
-	
-	int frozen;		/* frozen count */
-	int dirty;		/* dirty flag */
+	/* Private data */
+	gpointer priv; /* was GtkAdjustment *adj */
 
-	/* Various display spacing configuration */
-	int row_spacing;
-	int col_spacing;
-	int text_spacing;
-	int icon_border;
+	gpointer pad1; /* was GtkAdjustment *hadj */
 
-	/* Separators used to wrap the text displayed below the icon */
-	char *separators;
+	/* Number of icons in the list */
+	int icons;
 
-	/* Display mode */
-	GnomeIconListMode mode;
+	gpointer pad2; /* was GList *icon_list */
+	int pad3; /* was int frozen */
+	int pad4; /* was int dirty */
+	int pad5; /* was int row_spacing */
+	int pad6; /* was int col_spacing */
+	int pad7; /* was int text_spacing */
+	int pad8; /* was int icon_border */
+	gpointer pad9; /* was char *separators */
+	GnomeIconListMode pad10; /* was GnomeIconListMode mode */
 
-	/* Selection  */
-	GtkSelectionMode selection_mode;
+	GtkSelectionMode pad11; /* was GtkSelectionMode selection_mode */
 
-	/* A list of integers with the indexes of the current selection */
+	/* A list of integers with the indices of the currently selected icons */
 	GList *selection;
 
-	/* Internal: used during band-selection */
-	GList *preserve_selection; 
-
-	int icon_width;		/* The icon width */
-
-	unsigned int is_editable:1;	/* Whether the icon names are editable or not  */
-	unsigned int static_text:1;     /* Whether we need to make a copy of the names */
-	
-	int last_selected;	/* Last icon selected */
-	void *last_clicked;	/* Icon * */
-
-	/* Timed scrolling */
-	int timer_tag;		/* timeout tag for autoscrolling */
-	int value_diff;		/* change the adjustment value by this */
-	gdouble event_last_x;	/* The X position last time we read it */
-	gdouble event_last_y;	/* The Y position last time we read it */
-	
-	/* Opaque to the user */
-	GList *lines;
-	int total_height;	/* Max of the height of all the icon rows and window height */
-
-	/* Mouse band selection state */
-	double sel_start_x;
-	double sel_start_y;
-
-	GnomeCanvasItem *sel_rect;
+	gpointer pad12; /* was GList *preserve_selection */
+	int pad13; /* was int icon_width */
+	unsigned int pad14 : 1; /* was unsigned int is_editable : 1 */
+	unsigned int pad15 : 1; /* was unsigned int static_text : 1 */
+	int pad16; /* was int last_selected */
+	gpointer pad17; /* was void *last_clicked */
+	int pad18; /* was int timer_tag */
+	int pad19; /* was int value_diff */
+	gdouble pad20; /* was gdouble event_last_x */
+	gdouble pad21; /* was gdouble event_last_y */
+	gpointer pad22; /* was GList *lines */
+	int pad23; /* was int total_height */
+	double pad24; /* was double sel_start_x */
+	double pad25; /* was double sel_start_y */
+	gpointer pad26; /* was GnomeCanvasItem *sel_rect */
 } GnomeIconList;
 
 typedef struct {
@@ -106,10 +87,10 @@ typedef struct {
 
 guint          gnome_icon_list_get_type            (void);
 
-GtkWidget     *gnome_icon_list_new                 (guint         icon_width, 
+GtkWidget     *gnome_icon_list_new                 (guint         icon_width,
 						    GtkAdjustment *adj,
 						    gboolean      is_editable);
-GtkWidget     *gnome_icon_list_new_flags           (guint         icon_width, 
+GtkWidget     *gnome_icon_list_new_flags           (guint         icon_width,
 						    GtkAdjustment *adj,
 						    int           flags);
 void           gnome_icon_list_construct           (GnomeIconList *gil,
@@ -155,7 +136,7 @@ void           gnome_icon_list_select_icon         (GnomeIconList *gil,
 void           gnome_icon_list_unselect_icon       (GnomeIconList *gil,
 						    int pos);
 int            gnome_icon_list_unselect_all        (GnomeIconList *gil,
-						    GdkEvent *event, void *keep);
+						    GdkEvent *event, gpointer keep);
 
 /* Setting the spacing values */
 void           gnome_icon_list_set_icon_width      (GnomeIconList *gil,
@@ -195,7 +176,3 @@ int            gnome_icon_list_get_items_per_line  (GnomeIconList *gil);
 END_GNOME_DECLS
 
 #endif /* _GNOME_ICON_LIST_H_ */
-
-
-
-

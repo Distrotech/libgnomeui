@@ -11,16 +11,18 @@
  * <federico@nuclecu.unam.mx> to be based on a GnomeCanvas, and
  * to support banding selection and allow inline icon renaming.
  */
-#include <gdk_imlib.h>
+
+#include <config.h>
+#include <string.h>
+#include <stdio.h>
 #include <gtk/gtkadjustment.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmain.h>
-#include <libgnomeui/gnome-icon-list.h>
-#include <libgnomeui/gnome-icon-item.h>
-#include <libgnomeui/gnome-canvas-image.h>
-#include <libgnomeui/gnome-canvas-rect-ellipse.h>
-#include <string.h>
-#include <stdio.h>
+#include "gnome-icon-list.h"
+#include "gnome-icon-item.h"
+#include "gnome-canvas-image.h"
+#include "gnome-canvas-rect-ellipse.h"
+
 
 /* Aliases to minimize screen use in my laptop */
 #define GIL(x)       GNOME_ICON_LIST(x)
@@ -30,11 +32,16 @@
 typedef GnomeIconList Gil;
 typedef GnomeIconListClass GilClass;
 
+
 /* default spacings */
 #define DEFAULT_ROW_SPACING  4
 #define DEFAULT_COL_SPACING  2
 #define DEFAULT_TEXT_SPACING 2
 #define DEFAULT_ICON_BORDER  2
+
+/* Autoscroll timeout in milliseconds */
+#define SCROLL_TIMEOUT 30
+
 
 /* Signals */
 enum {
@@ -55,31 +62,119 @@ enum {
 	ARG_VADJUSTMENT
 };
 
-static guint gil_signals [LAST_SIGNAL] = { 0 };
+static guint gil_signals[LAST_SIGNAL] = { 0 };
 
-/* Inheritance */
+
 static GtkContainerClass *parent_class;
 
-typedef struct {
-	GnomeCanvasImage  *image;
-	GnomeIconTextItem *text;
-	GtkStateType state;
 
+/* Icon structure */
+typedef struct {
+	/* Icon image and text items */
+	GnomeCanvasImage *image;
+	GnomeIconTextItem *text;
+
+	/* User data and destroy notify function */
 	gpointer data;
 	GtkDestroyNotify destroy;
+
+	/* ID for the text item's event signal handler */
+	guint text_event_id;
+
+	/* Whether the icon is selected, and temporary storage for rubberband
+         * selections.
+	 */
+	guint selected : 1;
+	guint tmp_selected : 1;
 } Icon;
 
+/* A row of icons */
 typedef struct {
 	int y;
 	int icon_height, text_height;
 	GList *line_icons;
 } IconLine;
 
+/* Private data of the GnomeIconList structure */
+typedef struct {
+	/* Adjustment we use and dummy adjustment for the scrolled window */
+	GtkAdjustment *adj;
+	GtkAdjustment *hadj;
+
+	/* List of icons and list of rows of icons */
+	GList *icon_list;
+	GList *lines;
+
+	/* Max of the height of all the icon rows and window height */
+	int total_height;
+
+	/* Selection mode */
+	GtkSelectionMode selection_mode;
+
+	/* Freeze count */
+	int frozen;
+
+	/* Width allocated for icons */
+	int icon_width;
+
+	/* Spacing values */
+	int row_spacing;
+	int col_spacing;
+	int text_spacing;
+	int icon_border;
+
+	/* Separators used to wrap the text below icons */
+	char *separators;
+
+	/* Index and pointer to last selected icon */
+	int last_selected_idx;
+	Icon *last_selected_icon;
+
+	/* Timeout ID for autoscrolling */
+	guint timer_tag;
+
+	/* Change the adjustment value by this amount when autoscrolling */
+	int value_diff;
+
+	/* Mouse position for autoscrolling */
+	int event_last_x;
+	int event_last_y;
+
+	/* Selection start position */
+	int sel_start_x;
+	int sel_start_y;
+
+	/* Modifier state when the selection began */
+	guint sel_state;
+
+	/* Rubberband rectangle */
+	GnomeCanvasItem *sel_rect;
+
+	/* Whether the icon texts are editable */
+	guint is_editable : 1;
+
+	/* Whether the icon texts need to be copied */
+	guint static_text : 1;
+
+	/* Whether the icons need to be laid out */
+	guint dirty : 1;
+
+	/* Whether the user is performing a rubberband selection */
+	guint selecting : 1;
+
+	/* Whether the user clicked on an unselected icon's text */
+	guint select_on_text : 1;
+} GilPrivate;
+
+
 static inline int
 icon_line_height (Gil *gil, IconLine *il)
 {
-	return il->icon_height + il->text_height +
-		gil->row_spacing + gil->text_spacing;
+	GilPrivate *priv;
+
+	priv = gil->priv;
+
+	return il->icon_height + il->text_height + priv->row_spacing + priv->text_spacing;
 }
 
 static void
@@ -92,9 +187,12 @@ icon_get_height (Icon *icon, int *icon_height, int *text_height)
 static int
 gil_get_items_per_line (Gil *gil)
 {
+	GilPrivate *priv;
 	int items_per_line;
-	
-	items_per_line = GTK_WIDGET (gil)->allocation.width / (gil->icon_width + gil->col_spacing);
+
+	priv = gil->priv;
+
+	items_per_line = GTK_WIDGET (gil)->allocation.width / (priv->icon_width + priv->col_spacing);
 	if (items_per_line == 0)
 		items_per_line = 1;
 
@@ -119,35 +217,41 @@ gnome_icon_list_get_items_per_line (GnomeIconList *gil)
 static void
 gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 {
+	GilPrivate *priv;
 	int y_offset;
-	
+
+	priv = gil->priv;
+
 	if (icon_height > icon->image->height)
 		y_offset = (icon_height - icon->image->height) / 2;
 	else
 		y_offset = 0;
-	
+
 	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
-			       "x",  (double) x + gil->icon_width/2,
+			       "x",  (double) x + priv->icon_width / 2,
 			       "y",  (double) y + y_offset,
 			       "anchor", GTK_ANCHOR_N,
 			       NULL);
-	gnome_icon_text_item_setxy (
-		icon->text, x,
-		y + icon_height + gil->text_spacing);
+	gnome_icon_text_item_setxy (icon->text,
+				    x,
+				    y + icon_height + priv->text_spacing);
 }
 
 static void
 gil_layout_line (Gil *gil, IconLine *il)
 {
+	GilPrivate *priv;
 	GList *l;
 	int x;
 
+	priv = gil->priv;
+
 	x = 0;
-	for (l = il->line_icons; l; l = l->next){
+	for (l = il->line_icons; l; l = l->next) {
 		Icon *icon = l->data;
-		
+
 		gil_place_icon (gil, icon, x, il->y, il->icon_height);
-		x += gil->icon_width + gil->col_spacing;
+		x += priv->icon_width + priv->col_spacing;
 	}
 }
 
@@ -155,185 +259,202 @@ static void
 gil_add_and_layout_line (Gil *gil, GList *line_icons, int y,
 			 int icon_height, int text_height)
 {
+	GilPrivate *priv;
 	IconLine *il;
-	
+
+	priv = gil->priv;
+
 	il = g_new (IconLine, 1);
 	il->line_icons = line_icons;
 	il->y = y;
 	il->icon_height = icon_height;
 	il->text_height = text_height;
-	
+
 	gil_layout_line (gil, il);
-	gil->lines = g_list_append (gil->lines, il);
+	priv->lines = g_list_append (priv->lines, il);
 }
 
 static void
 gil_relayout_icons_at (Gil *gil, int pos, int y)
 {
+	GilPrivate *priv;
 	int col, row, text_height, icon_height;
 	int items_per_line, n;
 	GList *line_icons, *l;
-		
+
+	priv = gil->priv;
 	items_per_line = gil_get_items_per_line (gil);
 
 	col = row = text_height = icon_height = 0;
 	line_icons = NULL;
 
-	l = g_list_nth (gil->icon_list, pos);
+	l = g_list_nth (priv->icon_list, pos);
 
-	for (n = pos; l; l = l->next, n++){
+	for (n = pos; l; l = l->next, n++) {
 		Icon *icon = l->data;
 		int ih, th;
 
-		if (!(n % items_per_line)){
-			if (line_icons){
-				gil_add_and_layout_line (
-					gil, line_icons, y,
-					icon_height, text_height);
+		if (!(n % items_per_line)) {
+			if (line_icons) {
+				gil_add_and_layout_line (gil, line_icons, y,
+							 icon_height, text_height);
 				line_icons = NULL;
-				
-				y += icon_height + text_height +
-					gil->row_spacing + gil->text_spacing;
+
+				y += (icon_height + text_height
+				      + priv->row_spacing + priv->text_spacing);
 			}
-			
+
 			icon_height = 0;
 			text_height = 0;
 		}
 
 		icon_get_height (icon, &ih, &th);
-		
+
 		icon_height = MAX (ih, icon_height);
 		text_height = MAX (th, text_height);
 
 		line_icons = g_list_append (line_icons, icon);
 	}
-	if (line_icons){
-		gil_add_and_layout_line (
-			gil, line_icons, y, icon_height, text_height);
-	}
+
+	if (line_icons)
+		gil_add_and_layout_line (gil, line_icons, y, icon_height, text_height);
 }
 
 static void
 gil_free_line_info (Gil *gil)
 {
-	GList *l = gil->lines;
+	GilPrivate *priv;
+	GList *l;
 
-	for (l = gil->lines; l; l = l->next){
+	priv = gil->priv;
+
+	for (l = priv->lines; l; l = l->next) {
 		IconLine *il = l->data;
 
 		g_list_free (il->line_icons);
 		g_free (il);
 	}
-	g_list_free (gil->lines);
-	gil->lines = NULL;
-	gil->total_height = 0;
+
+	g_list_free (priv->lines);
+	priv->lines = NULL;
+	priv->total_height = 0;
 }
 
 static void
 gil_free_line_info_from (Gil *gil, int first_line)
 {
+	GilPrivate *priv;
 	GList *l, *ll;
 
-	ll = g_list_nth (gil->lines, first_line);
+	priv = gil->priv;
+	ll = g_list_nth (priv->lines, first_line);
 
-	for (l = ll; l; l = l->next){
+	for (l = ll; l; l = l->next) {
 		IconLine *il = l->data;
-		
+
 		g_list_free (il->line_icons);
 		g_free (il);
 	}
-	if (gil->lines){
+
+	if (priv->lines) {
 		if (ll->prev)
 			ll->prev->next = NULL;
 		else
-			gil->lines = NULL;
+			priv->lines = NULL;
 	}
+
 	g_list_free (ll);
 }
 
 static void
 gil_layout_from_line (Gil *gil, int line)
 {
+	GilPrivate *priv;
 	GList *l;
 	int height;
-	
+
+	priv = gil->priv;
+
 	gil_free_line_info_from (gil, line);
 
 	height = 0;
-	for (l = gil->lines; l; l = l->next){
+	for (l = priv->lines; l; l = l->next) {
 		IconLine *il = l->data;
 
 		height += icon_line_height (gil, il);
 	}
+
 	gil_relayout_icons_at (gil, line * gil_get_items_per_line (gil), height);
 }
 
 static void
 gil_layout_all_icons (Gil *gil)
 {
+	GilPrivate *priv;
+
+	priv = gil->priv;
+
 	if (!GTK_WIDGET_REALIZED (gil))
 		return;
-	
+
 	gil_free_line_info (gil);
 	gil_relayout_icons_at (gil, 0, 0);
-	gil->dirty = FALSE;
-}
-
-static int
-gil_icon_to_index (Gil *gil, Icon *icon)
-{
-	GList *l;
-	int n;
-	
-	n = 0;
-	for (l = gil->icon_list; l; n++, l = l->next){
-		if (l->data == icon){
-			return n;
-		}
-	}
-
-	return 0;
+	priv->dirty = FALSE;
 }
 
 static void
 gil_scrollbar_adjust (Gil *gil)
 {
+	GilPrivate *priv;
 	GList *l;
 	double wx, wy;
 	int height, step_increment;
-	
+
+	priv = gil->priv;
+
 	if (!GTK_WIDGET_REALIZED (gil))
 		return;
 
 	height = 0;
 	step_increment = 0;
-	for (l = gil->lines; l; l = l->next){
+	for (l = priv->lines; l; l = l->next) {
 		IconLine *il = l->data;
 
 		height += icon_line_height (gil, il);
-		
-		if (l == gil->lines)
+
+		if (l == priv->lines)
 			step_increment = height;
 	}
+
 	if (!step_increment)
 		step_increment = 10;
 
-	gil->total_height = MAX (height, GTK_WIDGET (gil)->allocation.height);
+	priv->total_height = MAX (height, GTK_WIDGET (gil)->allocation.height);
 
 	wx = wy = 0;
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), 0, 0, &wx, &wy);
 
-	gil->adj->upper = height;
-	gil->adj->step_increment = step_increment;
-	gil->adj->page_increment = GTK_WIDGET (gil)->allocation.height;
-	gil->adj->page_size = GTK_WIDGET (gil)->allocation.height;
+	priv->adj->upper = height;
+	priv->adj->step_increment = step_increment;
+	priv->adj->page_increment = GTK_WIDGET (gil)->allocation.height;
+	priv->adj->page_size = GTK_WIDGET (gil)->allocation.height;
 
-	if (wy > gil->adj->upper - gil->adj->page_size)
-		wy = gil->adj->upper - gil->adj->page_size;
+	if (wy > priv->adj->upper - priv->adj->page_size)
+		wy = priv->adj->upper - priv->adj->page_size;
 
-	gil->adj->value = wy;
+	priv->adj->value = wy;
 
-	gtk_adjustment_changed (gil->adj);
+	gtk_adjustment_changed (priv->adj);
+}
+
+/* Emits the select_icon or unselect_icon signals as appropriate */
+static void
+emit_select (Gil *gil, int sel, int i, GdkEvent *event)
+{
+	gtk_signal_emit (GTK_OBJECT (gil),
+			 gil_signals[sel ? SELECT_ICON : UNSELECT_ICON],
+			 i,
+			 event);
 }
 
 /**
@@ -342,59 +463,64 @@ gil_scrollbar_adjust (Gil *gil)
  * @event: event which triggered this action (might be NULL)
  * @keep:  pointer to an icon to keep (might be NULL).
  *
- * Unselects all of the icons in the GIL icon list.  EVENT is the event
+ * Unselects all of the icons in the GIL icon list.  @event is the event
  * that triggered the unselect action (or NULL if the event is not available).
  *
- * The keep parameter is only used internally in the Icon LIst code, it can be NULL. 
+ * The keep parameter is only used internally in the Icon List code, it should be NULL.
  */
 int
-gnome_icon_list_unselect_all (GnomeIconList *gil, GdkEvent *event, void *keep)
+gnome_icon_list_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep)
 {
-	GList *icon_list = gil->icon_list;
+	GilPrivate *priv;
+	GList *l;
 	Icon *icon;
 	int i, idx = 0;
-	
+
 	g_return_val_if_fail (gil != NULL, 0);
 	g_return_val_if_fail (IS_GIL (gil), 0);
 
-	for (i = 0; icon_list; icon_list = icon_list->next, i++){
-		icon = icon_list->data;
+	priv = gil->priv;
+
+	for (l = priv->icon_list, i = 0; l; l = l->next, i++) {
+		icon = l->data;
 
 		if (icon == keep)
 			idx = i;
-		
-		if (icon != keep && icon->text->selected)
-			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [UNSELECT_ICON], i, event);
+		else if (icon->selected)
+			emit_select (gil, FALSE, i, event);
 	}
 
 	return idx;
 }
-
+#if 0
 static void
 toggle_icon (Gil *gil, Icon *icon, GdkEvent *event)
 {
+	GilPrivate *priv;
 	gint n, count, idx;
 	GList *l;
 	Icon *selected_icon;
+
+	priv = gil->priv;
 
 	n = 0;
 	idx = -1;
 	selected_icon = NULL;
 
-	switch (gil->selection_mode){
-	case GTK_SELECTION_SINGLE: 
+	switch (priv->selection_mode) {
+	case GTK_SELECTION_SINGLE:
 		selected_icon = icon;
-		
-		for (l = gil->icon_list; l; l = l->next, n++){
+
+		for (l = priv->icon_list; l; l = l->next, n++) {
 			Icon *i = l->data;
 
-			if (i == icon){
+			if (i == icon) {
 				idx = n;
 				continue;
 			}
 
 			if (i->text->selected && event->button.button == 1)
-				gtk_signal_emit (GTK_OBJECT (gil), gil_signals[UNSELECT_ICON], n, event);
+				emit_select (gil, FALSE, n, event);
 		}
 
 		/*if it's a double or tripple click don't unselect, we want to
@@ -404,94 +530,89 @@ toggle_icon (Gil *gil, Icon *icon, GdkEvent *event)
 		    selected_icon &&
 		    (selected_icon->text->selected) &&
 		    (event->button.button == 1))
-			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [UNSELECT_ICON], idx, event);
+			emit_select (gil, FALSE, idx, event);
 		else if (event->button.button == 1)
-			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON], idx, event);
+			emit_select (gil, TRUE, idx, event);
 		break;
 
 	case GTK_SELECTION_BROWSE:
-		for (l = gil->icon_list; l; l = l->next, n++){
+		for (l = priv->icon_list; l; l = l->next, n++) {
 			Icon *i = l->data;
 
-			if (i == icon){
+			if (i == icon) {
 				idx = n;
 				continue;
 			}
-			
+
 			if (icon->text->selected && (event->button.button == 1))
-				gtk_signal_emit (GTK_OBJECT (gil), gil_signals [UNSELECT_ICON], n, event);
+				emit_select (gil, FALSE, n, event);
 		}
 
 		if (event->button.button == 1)
-			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON], idx, event);
+			emit_select (gil, TRUE, idx, event);
 
 		break;
 
 	case GTK_SELECTION_MULTIPLE:
 		/* If neither the shift or control keys are pressed, clear the selection */
-		if (!(event->button.state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK))){
-			
+		if (!(event->button.state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK))) {
 			if ((event->button.button == 1) || (!icon->text->selected))
 				idx = gnome_icon_list_unselect_all (gil, event, icon);
 
-			if (idx == -1){
-				GList *l = gil->icon_list;
+			if (idx == -1) {
+				GList *l = priv->icon_list;
 				int i = 0;
-				
-				for (; l; l = l->next, i++){
-					if (l->data == icon){
+
+				for (; l; l = l->next, i++) {
+					if (l->data == icon) {
 						idx = i;
 						break;
 					}
 				}
 			}
+
 			g_assert (idx != -1);
-			
-			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON], idx, event);
-			gil->last_selected = idx;
+
+			emit_select (gil, TRUE, idx, event);
+			priv->last_selected = idx;
 			break;
 		}
 
 		/* If we have not looked up the index for this Icon yet, look it up */
-		if (idx == -1){
-			for (idx = 0, l = gil->icon_list; l; l = l->next, idx++){
+		if (idx == -1)
+			for (idx = 0, l = priv->icon_list; l; l = l->next, idx++)
 				if (l->data == icon)
 					break;
-			}
-		}
 
 		g_return_if_fail (idx != -1);
-		
-		if ((event->button.state & GDK_SHIFT_MASK) && (event->button.button == 1)){
+
+		if ((event->button.state & GDK_SHIFT_MASK) && (event->button.button == 1)) {
 			int first, last, pos;
 
-			if (gil->last_selected < idx){
-				first = gil->last_selected;
+			if (priv->last_selected < idx) {
+				first = priv->last_selected;
 				last  = idx;
 			} else {
 				first = idx;
-				last  = gil->last_selected;
+				last  = priv->last_selected;
 			}
 
 			count = last - first + 1;
-			l = g_list_nth (gil->icon_list, first);
+			l = g_list_nth (priv->icon_list, first);
 			pos = first;
-			while (count--){
+			while (count--) {
 				icon = l->data;
 
 				if (!icon->text->selected)
-					gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON], pos, event);
+					emit_select (gil, TRUE, pos, event);
 
 				l = l->next;
 				pos++;
 			}
-		} else if ((event->button.state & GDK_CONTROL_MASK) && (event->button.button == 1)){
-			int signal;
-			
-			signal = icon->text->selected ? UNSELECT_ICON : SELECT_ICON;
-			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [signal], idx, event);
-		}
-		gil->last_selected = idx;
+		} else if ((event->button.state & GDK_CONTROL_MASK) && (event->button.button == 1))
+			emit_select (gil, !icon->text->selected, idx, event);
+
+		priv->last_selected = idx;
 		break;
 
 	case GTK_SELECTION_EXTENDED:
@@ -501,23 +622,26 @@ toggle_icon (Gil *gil, Icon *icon, GdkEvent *event)
 		break;
 	}
 }
-
+#endif
 static void
 sync_selection (Gil *gil, int pos, SyncType type)
 {
+	GilPrivate *priv;
 	GList *list;
 
-	for (list = gil->icon_list; list; list = list->next) {
-		if (GPOINTER_TO_INT (list->data) >= pos){
+	priv = gil->priv;
+
+	for (list = priv->icon_list; list; list = list->next) {
+		if (GPOINTER_TO_INT (list->data) >= pos) {
 			int i = GPOINTER_TO_INT (list->data);
-		
+
 			switch (type) {
 			case SYNC_INSERT:
-				list->data = GINT_TO_POINTER (i+1);
+				list->data = GINT_TO_POINTER (i + 1);
 				break;
 
 			case SYNC_REMOVE:
-				list->data = GINT_TO_POINTER (i-1);
+				list->data = GINT_TO_POINTER (i - 1);
 				break;
 
 			default:
@@ -528,45 +652,70 @@ sync_selection (Gil *gil, int pos, SyncType type)
 }
 
 static int
-icon_event (Gil *gil, Icon *icon, GdkEvent *event)
+gil_icon_to_index (Gil *gil, Icon *icon)
 {
+	GilPrivate *priv;
 	GList *l;
 	int n;
-	
-	switch (event->type){
+
+	priv = gil->priv;
+
+	n = 0;
+	for (l = priv->icon_list; l; n++, l = l->next)
+		if (l->data == icon)
+			return n;
+
+	g_assert_not_reached ();
+	return -1; /* Shut up the compiler */
+}
+
+#if 0
+
+static gint
+icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
+{
+	Icon *icon;
+	Gil *gil;
+	GilPrivate *priv;
+	GList *l;
+	int n;
+
+	icon = data;
+	gil = GIL (item->canvas);
+	priv = gil->priv;
+
+	switch (event->type) {
 	case GDK_BUTTON_PRESS:
-		gil->last_clicked = icon;
+		priv->last_clicked = icon;
 
 		if (event->button.button > 3)
 			return FALSE;
-		
-		if (icon->text->selected && (event->button.button == 1 || event->button.button == 3)){
-			gil->last_clicked = icon;
-		
-			for (n = 0, l = gil->icon_list; l; l = l->next, n++)
-				if (l->data == icon)
-					break;
-			
-			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON], n, event);
+
+		if (icon->text->selected
+		    && (event->button.button == 1 || event->button.button == 3)) {
+			priv->last_clicked = icon;
+
+			n = gil_icon_to_index (gil, icon);
+			emit_select (gil, TRUE, n, event);
 		} else {
-			gil->last_clicked = NULL;
+			priv->last_clicked = NULL;
 			toggle_icon (gil, icon, event);
 		}
 		return TRUE;
 
 	case GDK_2BUTTON_PRESS:
-		gil->last_clicked = NULL;
+		priv->last_clicked = NULL;
 		toggle_icon (gil, icon, event);
 		return TRUE;
-		
+
 	case GDK_BUTTON_RELEASE:
-		if (gil->last_clicked == NULL)
+		if (priv->last_clicked == NULL)
 			return FALSE;
 
 		if (event->button.button > 3)
 			return FALSE;
 
-		toggle_icon (gil, gil->last_clicked, event);
+		toggle_icon (gil, priv->last_clicked, event);
 		return TRUE;
 
 	default:
@@ -574,55 +723,292 @@ icon_event (Gil *gil, Icon *icon, GdkEvent *event)
 	}
 }
 
-static int
-image_event (GnomeCanvasImage *img, GdkEvent *event, Icon *icon)
-{
-	Gil *gil = GIL (GNOME_CANVAS_ITEM (icon->text)->canvas);
+#endif
 
-	if (icon_event (gil, icon, event))
-		return 1;
-	
-	return 0;
+/* Event handler for icons when we are in SINGLE or BROWSE mode */
+static gint
+selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *event)
+{
+	GilPrivate *priv;
+	int retval;
+	int do_sel;
+
+	priv = gil->priv;
+	retval = FALSE;
+
+	switch (event->type) {
+	case GDK_BUTTON_PRESS:
+		/* Ignore wheel mouse clicks for now */
+		if (event->button.button > 3)
+			break;
+
+		if (!icon->selected) {
+			gnome_icon_list_unselect_all (gil, NULL, NULL);
+
+			if (on_text)
+				priv->select_on_text = TRUE;
+
+			do_sel = TRUE;
+		} else {
+			if (priv->selection_mode == GTK_SELECTION_SINGLE
+			    && (event->button.state & GDK_CONTROL_MASK)) {
+				do_sel = FALSE;
+
+				if (on_text)
+					priv->select_on_text = TRUE;
+			} else
+				do_sel = TRUE;
+		}
+
+		emit_select (gil, do_sel, idx, event);
+		retval = TRUE;
+		break;
+
+	case GDK_2BUTTON_PRESS:
+	case GDK_3BUTTON_PRESS:
+		/* Ignore wheel mouse clicks for now */
+		if (event->button.button > 3)
+			break;
+
+		emit_select (gil, TRUE, idx, event);
+		retval = TRUE;
+		break;
+
+	case GDK_BUTTON_RELEASE:
+		if (on_text && priv->select_on_text) {
+			priv->select_on_text = FALSE;
+			retval = TRUE;
+		}
+
+		break;
+
+	default:
+		break;
+	}
+
+	/* If the click was on the text and we actually did something, stop the
+	 * icon text item's own handler from executing.
+	 */
+	if (on_text && retval)
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (icon->text), "event");
+
+	return retval;
 }
 
-static int
-text_event (GnomeIconTextItem *iti, GdkEvent *event, Icon *icon)
+/* Handles range selections when clicking on an icon */
+static void
+select_range (Gil *gil, Icon *icon, int idx, GdkEvent *event)
 {
-	Gil *gil = GIL (GNOME_CANVAS_ITEM (icon->text)->canvas);
-				      
-	if (icon_event (gil, icon, event))
-		return 1;
+	GilPrivate *priv;
+	int a, b;
+	GList *l;
+	Icon *i;
 
-	return 0;
+	priv = gil->priv;
+
+	if (priv->last_selected_idx == -1) {
+		priv->last_selected_idx = idx;
+		priv->last_selected_icon = icon;
+	}
+
+	if (idx < priv->last_selected_idx) {
+		a = idx;
+		b = priv->last_selected_idx;
+	} else {
+		a = priv->last_selected_idx;
+		b = idx;
+	}
+
+	l = g_list_nth (priv->icon_list, a);
+
+	for (; a <= b; a++, l = l->next) {
+		i = l->data;
+
+		if (!i->selected)
+			emit_select (gil, TRUE, a, NULL);
+	}
+}
+
+/* Handles icon selection for MULTIPLE or EXTENDED selection modes */
+static void
+do_select_many (Gil *gil, Icon *icon, int idx, GdkEvent *event)
+{
+	GilPrivate *priv;
+	int range, additive;
+
+	priv = gil->priv;
+
+	range = (event->button.state & GDK_SHIFT_MASK) != 0;
+	additive = (event->button.state & GDK_CONTROL_MASK) != 0;
+
+	if (!additive) {
+		if (icon->selected)
+			gnome_icon_list_unselect_all (gil, NULL, icon);
+		else
+			gnome_icon_list_unselect_all (gil, NULL, NULL);
+	}
+
+	if (!range) {
+		if (additive)
+			emit_select (gil, !icon->selected, idx, event);
+		else
+			emit_select (gil, TRUE, idx, event);
+
+		priv->last_selected_idx = idx;
+		priv->last_selected_icon = icon;
+	} else
+		select_range (gil, icon, idx, event);
+}
+
+/* Event handler for icons when we are in MULTIPLE or EXTENDED mode */
+static gint
+selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *event)
+{
+	GilPrivate *priv;
+	int retval;
+	int has_modifier;
+
+	priv = gil->priv;
+	retval = FALSE;
+	has_modifier = event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK);
+
+	switch (event->type) {
+	case GDK_BUTTON_PRESS:
+		/* Ignore wheel mouse clicks for now */
+		if (event->button.button > 3)
+			break;
+
+		if (!on_text || !icon->selected || has_modifier) {
+			if (on_text && (!icon->selected || has_modifier))
+				priv->select_on_text = TRUE;
+
+			do_select_many (gil, icon, idx, event);
+			retval = TRUE;
+		}
+
+		break;
+
+	case GDK_2BUTTON_PRESS:
+	case GDK_3BUTTON_PRESS:
+		/* Ignore wheel mouse clicks for now */
+		if (event->button.button > 3)
+			break;
+
+		emit_select (gil, TRUE, idx, event);
+		retval = TRUE;
+		break;
+
+	case GDK_BUTTON_RELEASE:
+		if (on_text && priv->select_on_text) {
+			priv->select_on_text = FALSE;
+			retval = TRUE;
+		}
+
+		break;
+
+	default:
+		break;
+	}
+
+	/* If the click was on the text and we actually did something, stop the
+	 * icon text item's own handler from executing.
+	 */
+	if (on_text && retval)
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (icon->text), "event");
+
+	return retval;
+}
+
+/* Event handler for icons in the icon list */
+static gint
+icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
+{
+	Icon *icon;
+	Gil *gil;
+	GilPrivate *priv;
+	int idx;
+	int on_text;
+
+	icon = data;
+	gil = GIL (item->canvas);
+	priv = gil->priv;
+	idx = gil_icon_to_index (gil, icon);
+	on_text = item == GNOME_CANVAS_ITEM (icon->text);
+
+	switch (priv->selection_mode) {
+	case GTK_SELECTION_SINGLE:
+	case GTK_SELECTION_BROWSE:
+		return selection_one_icon_event (gil, icon, idx, on_text, event);
+
+	case GTK_SELECTION_MULTIPLE:
+	case GTK_SELECTION_EXTENDED:
+		return selection_many_icon_event (gil, icon, idx, on_text, event);
+
+	default:
+		g_assert_not_reached ();
+		return FALSE; /* Shut up the compiler */
+	}
+}
+
+/* Handler for the editing_started signal of an icon text item.  We block the
+ * event handler so that it will not be called while the text is being edited.
+ */
+static void
+editing_started (GnomeIconTextItem *iti, gpointer data)
+{
+	Icon *icon;
+
+	icon = data;
+	gtk_signal_handler_block (GTK_OBJECT (iti), icon->text_event_id);
+	gnome_icon_list_unselect_all (GIL (GNOME_CANVAS_ITEM (iti)->canvas), NULL, icon);
+}
+
+/* Handler for the editing_stopped signal of an icon text item.  We unblock the
+ * event handler so that we can get events from it again.
+ */
+static void
+editing_stopped (GnomeIconTextItem *iti, gpointer data)
+{
+	Icon *icon;
+
+	icon = data;
+	gtk_signal_handler_unblock (GTK_OBJECT (iti), icon->text_event_id);
 }
 
 static gboolean
 text_changed (GnomeCanvasItem *item, Icon *icon)
 {
-	Gil *gil = GIL (item->canvas);
-	gboolean accept = TRUE;
+	Gil *gil;
+	gboolean accept;
 	int idx;
+
+	gil = GIL (item->canvas);
+	accept = TRUE;
 
 	idx = gil_icon_to_index (gil, icon);
 	gtk_signal_emit (GTK_OBJECT (gil),
-			 gil_signals [TEXT_CHANGED],
+			 gil_signals[TEXT_CHANGED],
 			 idx, gnome_icon_text_item_get_text (icon->text),
 			 &accept);
-	
+
 	return accept;
 }
 
 static void
 height_changed (GnomeCanvasItem *item, Icon *icon)
 {
-	Gil *gil = GIL (item->canvas);
+	Gil *gil;
+	GilPrivate *priv;
 	int n;
-	
+
+	gil = GIL (item->canvas);
+	priv = gil->priv;
+
 	if (!GTK_WIDGET_REALIZED (gil))
 		return;
 
-	if (gil->frozen){
-		gil->dirty = TRUE;
+	if (priv->frozen) {
+		priv->dirty = TRUE;
 		return;
 	}
 
@@ -634,20 +1020,25 @@ height_changed (GnomeCanvasItem *item, Icon *icon)
 static Icon *
 icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 {
-	GnomeCanvas *canvas = GNOME_CANVAS (gil);
-	GnomeCanvasGroup *group = GNOME_CANVAS_GROUP (canvas->root);
+	GilPrivate *priv;
+	GnomeCanvas *canvas;
+	GnomeCanvasGroup *group;
 	Icon *icon;
 
-	icon = g_new (Icon, 1);
+	priv = gil->priv;
+	canvas = GNOME_CANVAS (gil);
+	group = GNOME_CANVAS_GROUP (canvas->root);
+
+	icon = g_new0 (Icon, 1);
 
 	icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
 		group,
 		gnome_canvas_image_get_type (),
-		"x",      (double) 0,
-		"y",      (double) 0,
-		"width",  (double) im->rgb_width,
+		"x", 0.0,
+		"y", 0.0,
+		"width", (double) im->rgb_width,
 		"height", (double) im->rgb_height,
-		"image",  im,
+		"image", im,
 		NULL));
 
 	icon->text = GNOME_ICON_TEXT_ITEM (gnome_canvas_item_new (
@@ -655,26 +1046,38 @@ icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 		gnome_icon_text_item_get_type (),
 		NULL));
 
-	gnome_icon_text_item_configure (
-		icon->text,
-		0, 0, gil->icon_width, NULL,
-		text, gil->is_editable, gil->static_text);
+	gnome_icon_text_item_configure (icon->text,
+					0, 0, priv->icon_width, NULL,
+					text, priv->is_editable, priv->static_text);
 
-	icon->data = NULL;
-	icon->destroy = NULL;
+	gtk_signal_connect (GTK_OBJECT (icon->image), "event",
+			    GTK_SIGNAL_FUNC (icon_event),
+			    icon);
+	icon->text_event_id = gtk_signal_connect (GTK_OBJECT (icon->text), "event",
+						  GTK_SIGNAL_FUNC (icon_event),
+						  icon);
 
-	gtk_signal_connect (
-		GTK_OBJECT (icon->image), "event",
-		GTK_SIGNAL_FUNC (image_event), icon);
-	gtk_signal_connect_after (
-		GTK_OBJECT (icon->text) , "event",
-		GTK_SIGNAL_FUNC (text_event), icon);
-	gtk_signal_connect (
-		GTK_OBJECT (icon->text), "text_changed",
-		GTK_SIGNAL_FUNC (text_changed), icon);
-	gtk_signal_connect (
-		GTK_OBJECT (icon->text), "height_changed",
-		GTK_SIGNAL_FUNC (height_changed), icon);
+	gtk_signal_connect (GTK_OBJECT (icon->text), "editing_started",
+			    GTK_SIGNAL_FUNC (editing_started),
+			    icon);
+	gtk_signal_connect (GTK_OBJECT (icon->text), "editing_stopped",
+			    GTK_SIGNAL_FUNC (editing_stopped),
+			    icon);
+#if 0
+	gtk_signal_connect (GTK_OBJECT (icon->image), "event",
+			    GTK_SIGNAL_FUNC (image_event),
+			    icon);
+	gtk_signal_connect_after (GTK_OBJECT (icon->text) , "event",
+				  GTK_SIGNAL_FUNC (text_event),
+				  icon);
+#endif
+
+	gtk_signal_connect (GTK_OBJECT (icon->text), "text_changed",
+			    GTK_SIGNAL_FUNC (text_changed),
+			    icon);
+	gtk_signal_connect (GTK_OBJECT (icon->text), "height_changed",
+			    GTK_SIGNAL_FUNC (height_changed),
+			    icon);
 	return icon;
 }
 
@@ -684,35 +1087,39 @@ icon_new (Gil *gil, const char *icon_filename, const char *text)
 	GdkImlibImage *im;
 
 	if (icon_filename)
-		im = gdk_imlib_load_image ((char *)icon_filename);
+		im = gdk_imlib_load_image ((char *) icon_filename);
 	else
 		im = NULL;
+
 	return icon_new_from_imlib (gil, im, text);
 }
 
 static int
 icon_list_append (Gil *gil, Icon *icon)
 {
+	GilPrivate *priv;
 	int pos;
-	
+
+	priv = gil->priv;
+
 	pos = gil->icons++;
-	gil->icon_list = g_list_append (gil->icon_list, icon);
-	
-	switch (gil->selection_mode) {
+	priv->icon_list = g_list_append (priv->icon_list, icon);
+
+	switch (priv->selection_mode) {
 	case GTK_SELECTION_BROWSE:
 		gnome_icon_list_select_icon (gil, 0);
 		break;
-		
+
 	default:
 		break;
 	}
 
-	if (!gil->frozen){
+	if (!priv->frozen) {
 		/* FIXME: this should only layout the last line */
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
 	} else
-		gil->dirty = TRUE;
+		priv->dirty = TRUE;
 
 	return gil->icons - 1;
 }
@@ -720,31 +1127,35 @@ icon_list_append (Gil *gil, Icon *icon)
 static void
 icon_list_insert (Gil *gil, int pos, Icon *icon)
 {
-	if (pos == gil->icons){
+	GilPrivate *priv;
+
+	priv = gil->priv;
+
+	if (pos == gil->icons) {
 		icon_list_append (gil, icon);
 		return;
 	}
-	gil->icon_list = g_list_insert (gil->icon_list, icon, pos);
+
+	priv->icon_list = g_list_insert (priv->icon_list, icon, pos);
 	gil->icons++;
 
-	switch (gil->selection_mode) {
+	switch (priv->selection_mode) {
 	case GTK_SELECTION_BROWSE:
 		gnome_icon_list_select_icon (gil, 0);
 		break;
-		
+
 	default:
 		break;
 	}
 
-	if (!gil->frozen){
-		/*
-		 * FIXME: this should only layout the lines from then
-		 * one containing the Icon to the end.
+	if (!priv->frozen) {
+		/* FIXME: this should only layout the lines from then one
+		 * containing the Icon to the end.
 		 */
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
 	} else
-		gil->dirty = TRUE;
+		priv->dirty = TRUE;
 
 	sync_selection (gil, pos, SYNC_INSERT);
 }
@@ -803,7 +1214,7 @@ gnome_icon_list_insert (GnomeIconList *gil, int pos, const char *icon_filename, 
  * @im:   Imlib image containing the icons
  * @text: text to display for the icon
  *
- * Appends to the GIL icon list an icon which is on the IM 
+ * Appends to the GIL icon list an icon which is on the IM
  * Imlib image and with the TEXT string as its label.
  */
 int
@@ -829,7 +1240,7 @@ gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, char *text)
  * icon_filename and with the TEXT string as its label.
  */
 int
-gnome_icon_list_append (GnomeIconList *gil, const char *icon_filename, 
+gnome_icon_list_append (GnomeIconList *gil, const char *icon_filename,
 			 const char *text)
 {
 	Icon *icon;
@@ -845,7 +1256,7 @@ static void
 icon_destroy (Icon *icon)
 {
 	if (icon->destroy)
-		(*icon->destroy)(icon->data);
+		(* icon->destroy) (icon->data);
 
 	gtk_object_destroy (GTK_OBJECT (icon->image));
 	gtk_object_destroy (GTK_OBJECT (icon->text));
@@ -862,6 +1273,7 @@ icon_destroy (Icon *icon)
 void
 gnome_icon_list_remove (GnomeIconList *gil, int pos)
 {
+	GilPrivate *priv;
 	int was_selected;
 	GList *list;
 	Icon *icon;
@@ -870,15 +1282,17 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (pos >= 0 && pos < gil->icons);
 
+	priv = gil->priv;
+
 	was_selected = FALSE;
 
-	list = g_list_nth (gil->icon_list, pos);
+	list = g_list_nth (priv->icon_list, pos);
 	icon = list->data;
 
-	if (icon->text->selected){
+	if (icon->text->selected) {
 		was_selected = TRUE;
 
-		switch (gil->selection_mode) {
+		switch (priv->selection_mode) {
 		case GTK_SELECTION_SINGLE:
 		case GTK_SELECTION_BROWSE:
 		case GTK_SELECTION_MULTIPLE:
@@ -890,14 +1304,14 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 		}
 	}
 
-	gil->icon_list = g_list_remove_link (gil->icon_list, list);
+	priv->icon_list = g_list_remove_link (priv->icon_list, list);
 	g_list_free_1(list);
 	gil->icons--;
 
 	sync_selection (gil, pos, SYNC_REMOVE);
 
 	if (was_selected) {
-		switch (gil->selection_mode) {
+		switch (priv->selection_mode) {
 		case GTK_SELECTION_BROWSE:
 			if (pos == gil->icons)
 				gnome_icon_list_select_icon (gil, pos - 1);
@@ -911,22 +1325,20 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 		}
 	}
 
-	if (gil->icons >= gil->last_selected)
-		gil->last_selected = 0;
+	if (gil->icons >= priv->last_selected_idx)
+		priv->last_selected_idx = -1;
 
-	if (gil->last_clicked == icon)
-		gil->last_clicked = NULL;
+	if (priv->last_selected_icon == icon)
+		priv->last_selected_icon = NULL;
 
 	icon_destroy (icon);
 
-	if (!gil->frozen) {
-		/*
-		 * FIXME: Optimize, only re-layout from pos to end
-		 */
+	if (!priv->frozen) {
+		/* FIXME: Optimize, only re-layout from pos to end */
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
 	} else
-		gil->dirty = TRUE;
+		priv->dirty = TRUE;
 }
 
 /**
@@ -938,47 +1350,55 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 void
 gnome_icon_list_clear (GnomeIconList *gil)
 {
+	GilPrivate *priv;
 	GList *l;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 
-	for (l = gil->icon_list; l; l = l->next)
+	priv = gil->priv;
+
+	for (l = priv->icon_list; l; l = l->next)
 		icon_destroy (l->data);
 
 	gil_free_line_info (gil);
 
 	g_list_free (gil->selection);
 	gil->selection = NULL;
-	gil->icon_list = NULL;
+	priv->icon_list = NULL;
 	gil->icons = 0;
-	gil->last_selected = 0;
-	gil->last_clicked = 0;
+	priv->last_selected_idx = -1;
+	priv->last_selected_icon = NULL;
 }
 
 static void
 gil_destroy (GtkObject *object)
 {
 	Gil *gil;
-	
-	gil = GIL (object);
-	
-	g_free (gil->separators);
+	GilPrivate *priv;
 
-	gil->frozen = 1;
-	gil->dirty  = TRUE;
+	gil = GIL (object);
+	priv = gil->priv;
+
+	g_free (priv->separators);
+
+	priv->frozen = 1;
+	priv->dirty  = TRUE;
 	gnome_icon_list_clear (gil);
 
-	if (gil->timer_tag != -1) {
-		gtk_timeout_remove (gil->timer_tag);
-		gil->timer_tag = -1;
+	if (priv->timer_tag != 0) {
+		gtk_timeout_remove (priv->timer_tag);
+		priv->timer_tag = 0;
 	}
 
-	if (gil->adj)
-		gtk_object_unref (GTK_OBJECT (gil->adj));
-	if (gil->hadj)
-		gtk_object_unref (GTK_OBJECT (gil->hadj));
-	
+	if (priv->adj)
+		gtk_object_unref (GTK_OBJECT (priv->adj));
+
+	if (priv->hadj)
+		gtk_object_unref (GTK_OBJECT (priv->hadj));
+
+	g_free (priv);
+
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
@@ -986,34 +1406,32 @@ gil_destroy (GtkObject *object)
 static void
 select_icon (Gil *gil, int pos, GdkEvent *event)
 {
+	GilPrivate *priv;
 	gint i;
 	GList *list;
 	Icon *icon;
 
-	switch (gil->selection_mode) {
+	priv = gil->priv;
+
+	switch (priv->selection_mode) {
 	case GTK_SELECTION_SINGLE:
 	case GTK_SELECTION_BROWSE:
 		i = 0;
 
-		for (list = gil->icon_list; list; list = list->next) {
+		for (list = priv->icon_list; list; list = list->next) {
 			icon = list->data;
 
-			if ((i != pos) && (icon->text->selected))
-				gtk_signal_emit (
-					GTK_OBJECT (gil),
-					gil_signals [UNSELECT_ICON],
-					i, event);
+			if (i != pos && icon->text->selected)
+				emit_select (gil, FALSE, i, event);
+
 			i++;
 		}
 
-		gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON],
-				 pos, event);
-
+		emit_select (gil, TRUE, pos, event);
 		break;
 
 	case GTK_SELECTION_MULTIPLE:
-		gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON],
-				 pos, event);
+		emit_select (gil, TRUE, pos, event);
 		break;
 
 	case GTK_SELECTION_EXTENDED:
@@ -1044,12 +1462,15 @@ gnome_icon_list_select_icon (GnomeIconList *gil, int pos)
 static void
 unselect_icon (Gil *gil, int pos, GdkEvent *event)
 {
-	switch (gil->selection_mode) {
+	GilPrivate *priv;
+
+	priv = gil->priv;
+
+	switch (priv->selection_mode) {
 	case GTK_SELECTION_SINGLE:
 	case GTK_SELECTION_BROWSE:
 	case GTK_SELECTION_MULTIPLE:
-		gtk_signal_emit (GTK_OBJECT (gil), gil_signals[UNSELECT_ICON],
-				 pos, event);
+		emit_select (gil, FALSE, pos, event);
 		break;
 
 	case GTK_SELECTION_EXTENDED:
@@ -1087,13 +1508,18 @@ gil_size_request (GtkWidget *widget, GtkRequisition *requisition)
 static void
 gil_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
-	Gil *gil = GIL (widget);
-	
+	Gil *gil;
+	GilPrivate *priv;
+
+	gil = GIL (widget);
+	priv = gil->priv;
+
 	if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
-		(* GTK_WIDGET_CLASS (parent_class)->size_allocate)
-			(widget, allocation);
-	if (gil->frozen)
+		(* GTK_WIDGET_CLASS (parent_class)->size_allocate) (widget, allocation);
+
+	if (priv->frozen)
 		return;
+
 	gil_layout_all_icons (gil);
 	gil_scrollbar_adjust (gil);
 }
@@ -1101,16 +1527,20 @@ gil_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 static void
 gil_realize (GtkWidget *widget)
 {
-	Gil *gil = GIL (widget);
+	Gil *gil;
+	GilPrivate *priv;
 	GtkStyle *style;
 
-	gil->frozen++;
+	gil = GIL (widget);
+	priv = gil->priv;
+
+	priv->frozen++;
 
 	if (GTK_WIDGET_CLASS (parent_class)->realize)
-		(* GTK_WIDGET_CLASS (parent_class)->realize)(widget);
+		(* GTK_WIDGET_CLASS (parent_class)->realize) (widget);
 
-	gil->frozen--;
-	
+	priv->frozen--;
+
 	/* Change the style to use the base color as the background */
 
 	style = gtk_style_copy (gtk_widget_get_style (widget));
@@ -1120,10 +1550,10 @@ gil_realize (GtkWidget *widget)
 	gdk_window_set_background (GTK_LAYOUT (gil)->bin_window,
 				   &widget->style->bg[GTK_STATE_NORMAL]);
 
-	if (gil->frozen)
+	if (priv->frozen)
 		return;
 
-	if (gil->dirty) {
+	if (priv->dirty) {
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
 	}
@@ -1132,87 +1562,180 @@ gil_realize (GtkWidget *widget)
 static void
 real_select_icon (Gil *gil, gint num, GdkEvent *event)
 {
+	GilPrivate *priv;
 	Icon *icon;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (num >= 0 && num < gil->icons);
 
-	icon = g_list_nth (gil->icon_list, num)->data;
+	priv = gil->priv;
 
-	if (!icon->text->selected){
-		gnome_icon_text_item_select (icon->text, 1);
-		gil->selection = g_list_append (gil->selection, GINT_TO_POINTER (num));
-	}
+	icon = g_list_nth (priv->icon_list, num)->data;
+
+	if (icon->selected)
+		return;
+
+	icon->selected = TRUE;
+	gnome_icon_text_item_select (icon->text, TRUE);
+	gil->selection = g_list_append (gil->selection, GINT_TO_POINTER (num));
 }
 
 static void
 real_unselect_icon (Gil *gil, gint num, GdkEvent *event)
 {
+	GilPrivate *priv;
 	Icon *icon;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (num >= 0 && num < gil->icons);
 
-	icon = g_list_nth (gil->icon_list, num)->data;
+	priv = gil->priv;
 
-	if (icon->text->selected){
-		gnome_icon_text_item_select (icon->text, 0);
+	icon = g_list_nth (priv->icon_list, num)->data;
 
-		gil->selection = g_list_remove (gil->selection, GINT_TO_POINTER (num));
+	if (!icon->selected)
+		return;
+
+	icon->selected = FALSE;
+	gnome_icon_text_item_select (icon->text, FALSE);
+	gil->selection = g_list_remove (gil->selection, GINT_TO_POINTER (num));
+}
+
+/* Saves the selection of the icon list to temporary storage */
+static void
+store_temp_selection (Gil *gil)
+{
+	GilPrivate *priv;
+	GList *l;
+	Icon *icon;
+
+	priv = gil->priv;
+
+	for (l = priv->icon_list; l; l = l->next) {
+		icon = l->data;
+
+		icon->tmp_selected = icon->selected;
 	}
 }
 
-/*
- * This routine could use some enhancements, for example, we could invoke
- * the item->point method to figure out if the rectangle is actually touching
- * a non-transparent pixel on the image. 
+#define gray50_width 2
+#define gray50_height 2
+static const char gray50_bits[] = {
+  0x02, 0x01, };
+
+/* Button press handler for the icon list */
+static gint
+gil_button_press (GtkWidget *widget, GdkEventButton *event)
+{
+	Gil *gil;
+	GilPrivate *priv;
+	int only_one;
+	GdkBitmap *stipple;
+	double tx, ty;
+
+	gil = GIL (widget);
+	priv = gil->priv;
+
+	/* Invoke the canvas event handler and see if an item picks up the event */
+
+	if ((* GTK_WIDGET_CLASS (parent_class)->button_press_event) (widget, event))
+		return TRUE;
+
+	if (!(event->type == GDK_BUTTON_PRESS
+	      && event->button == 1
+	      && priv->selection_mode != GTK_SELECTION_BROWSE))
+		return FALSE;
+
+	only_one = priv->selection_mode == GTK_SELECTION_SINGLE;
+
+	if (only_one || (event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) == 0)
+		gnome_icon_list_unselect_all (gil, NULL, NULL);
+
+	if (only_one)
+		return TRUE;
+
+	gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &tx, &ty);
+	priv->sel_start_x = tx;
+	priv->sel_start_y = ty;
+	priv->sel_state = event->state;
+	priv->selecting = TRUE;
+
+	store_temp_selection (gil);
+
+	stipple = gdk_bitmap_create_from_data (NULL, gray50_bits, gray50_width, gray50_height);
+	priv->sel_rect = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (gil)),
+						gnome_canvas_rect_get_type (),
+						"x1", tx,
+						"y1", ty,
+						"x2", tx,
+						"y2", ty,
+						"outline_color", "black",
+						"width_pixels", 1,
+						"outline_stipple", stipple,
+						NULL);
+	gdk_bitmap_unref (stipple);
+
+	gnome_canvas_item_grab (priv->sel_rect, GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
+				NULL, event->time);
+	return TRUE;
+}
+
+/* Returns whether the specified icon is at least partially inside the specified
+ * rectangle.
  */
 static int
-touches_item (GnomeCanvasItem *item, double x1, double y1, double x2, double y2)
+icon_is_in_area (Icon *icon, int x1, int y1, int x2, int y2)
 {
 	double ix1, iy1, ix2, iy2;
-	
-	gnome_canvas_item_get_bounds (item, &ix1, &iy1, &ix2, &iy2);
 
-	return (MAX (x1, ix1) <= MIN (x2, ix2) && MAX (y1, iy1) <= MIN (y2, iy2));
+	if (x1 == y1 && x2 == y2)
+		return FALSE;
+
+	gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->image), &ix1, &iy1, &ix2, &iy2);
+
+	if (ix1 <= x2 && iy1 <= y2 && ix2 >= x1 && iy2 >= y1)
+		return TRUE;
+
+	gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->text), &ix1, &iy1, &ix2, &iy2);
+
+	if (ix1 <= x2 && iy1 <= y2 && ix2 >= x1 && iy2 >= y1)
+		return TRUE;
+
+	return FALSE;
 }
 
-static GList *
-gil_get_icons_in_region (Gil *gil, double x1, double y1, double x2, double y2)
-{
-	GList *icons, *l;
-
-	icons = NULL;
-
-	if (x1 == x2 || y1 == y2)
-		return icons;
-	
-	for (l = gil->icon_list; l; l = l->next){
-		Icon *icon = l->data;
-		GnomeCanvasItem *image = GNOME_CANVAS_ITEM (icon->image);
-		GnomeCanvasItem *text = GNOME_CANVAS_ITEM (icon->text);
-		
-		if (touches_item (image, x1, y1, x2, y2) ||
-		    touches_item (text,  x1, y1, x2, y2))
-			icons = g_list_prepend (icons, icon);
-	}
-	
-	return g_list_reverse (icons); /* return it in sorted order */
-}
-
+/* Updates the rubberband selection to the specified point */
 static void
-gil_mark_region (Gil *gil, GdkEvent *event, double x, double y)
+update_drag_selection (Gil *gil, int x, int y)
 {
-	GList *icons, *i, *l;
-	double x1, x2, y1, y2;
-	int idx;
-	
-	x1 = MIN (gil->sel_start_x, x);
-	y1 = MIN (gil->sel_start_y, y);
-	x2 = MAX (gil->sel_start_x, x);
-	y2 = MAX (gil->sel_start_y, y);
+	GilPrivate *priv;
+	int x1, x2, y1, y2;
+	GList *l;
+	int i;
+	Icon *icon;
+	int additive, invert;
+
+	priv = gil->priv;
+
+	/* Update rubberband */
+
+	if (priv->sel_start_x < x) {
+		x1 = priv->sel_start_x;
+		x2 = x;
+	} else {
+		x1 = x;
+		x2 = priv->sel_start_x;
+	}
+
+	if (priv->sel_start_y < y) {
+		y1 = priv->sel_start_y;
+		y2 = y;
+	} else {
+		y1 = y;
+		y2 = priv->sel_start_y;
+	}
 
 	if (x1 < 0)
 		x1 = 0;
@@ -1223,202 +1746,145 @@ gil_mark_region (Gil *gil, GdkEvent *event, double x, double y)
 	if (x2 >= GTK_WIDGET (gil)->allocation.width)
 		x2 = GTK_WIDGET (gil)->allocation.width - 1;
 
-	if (y2 >= gil->total_height)
-		y2 = gil->total_height - 1;
+	if (y2 >= priv->total_height)
+		y2 = priv->total_height - 1;
 
-	gnome_canvas_item_set (gil->sel_rect,
-			       "x1", x1,
-			       "y1", y1,
-			       "x2", x2,
-			       "y2", y2,
+	gnome_canvas_item_set (priv->sel_rect,
+			       "x1", (double) x1,
+			       "y1", (double) y1,
+			       "x2", (double) x2,
+			       "y2", (double) y2,
 			       NULL);
 
-	icons = gil_get_icons_in_region (gil, x1, y1, x2, y2);
-		
-	for (l = gil->icon_list, i = icons, idx = 0; l; l = l->next, idx++){
-		Icon *icon = l->data;
+	/* Select or unselect icons as appropriate */
 
-		if (i && i->data == icon){
-			if (!icon->text->selected)
-				gtk_signal_emit (
-					GTK_OBJECT (gil),
-					gil_signals [SELECT_ICON],
-					idx, event);
-			i = i->next;
-		} else if (icon->text->selected){
-			int deselect = FALSE;
-			
-			if (gil->preserve_selection){
-				void *v = GINT_TO_POINTER (idx);
-				
-				if (!g_list_find (gil->preserve_selection, v))
-					deselect = TRUE;
-			} else
-				deselect = TRUE;
+	additive = priv->sel_state & GDK_SHIFT_MASK;
+	invert = priv->sel_state & GDK_CONTROL_MASK;
 
-			if (deselect)
-				gtk_signal_emit (
-					GTK_OBJECT (gil),
-					gil_signals [UNSELECT_ICON],
-					idx, event);
-		}
+	for (l = priv->icon_list, i = 0; l; l = l->next, i++) {
+		icon = l->data;
+
+		if (icon_is_in_area (icon, x1, y1, x2, y2)) {
+			if (invert) {
+				if (icon->selected == icon->tmp_selected)
+					emit_select (gil, !icon->selected, i, NULL);
+			} else if (additive) {
+				if (!icon->selected)
+					emit_select (gil, TRUE, i, NULL);
+			} else {
+				if (!icon->selected)
+					emit_select (gil, TRUE, i, NULL);
+			}
+		} else if (icon->selected != icon->tmp_selected)
+			emit_select (gil, icon->tmp_selected, i, NULL);
 	}
-	g_list_free (icons);
 }
 
-#define gray50_width 2
-#define gray50_height 2
-static const char gray50_bits[] = {
-  0x02, 0x01, };
-
-static gint
-gil_button_press (GtkWidget *widget, GdkEventButton *event)
-{
-	Gil *gil = GIL (widget);
-	int v;
-	GdkBitmap *stipple;
-
-	v = (*GTK_WIDGET_CLASS (parent_class)->button_press_event) (widget, event);
-
-	if (v || event->button != 1)
-		return TRUE;
-
-	if (gil->selection_mode != GTK_SELECTION_MULTIPLE)
-		return FALSE;
-
-	if (gil->sel_rect)     /* Already selecting */
-	        return FALSE;
-
-	gnome_canvas_window_to_world (GNOME_CANVAS (gil),
-				      event->x, event->y, 
-				      &gil->sel_start_x, &gil->sel_start_y);
-
-	/*
-	 * If the Shift or control keys are pressed, then keep a list
-	 * of the current selection
-	 */
-	if (event->state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK)) {
-		GList *l = NULL;
-
-		for (l = gil->selection; l; l = l->next) {
-			void *data = l->data;
-			
-			gil->preserve_selection = g_list_prepend (gil->preserve_selection, data);
-		}
-	}
-
-	stipple = gdk_bitmap_create_from_data (NULL, gray50_bits, gray50_width, gray50_height);
-	gil->sel_rect = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (gil)),
-					       gnome_canvas_rect_get_type (),
-					       "x1", (double) event->x,
-					       "y1", (double) event->y,
-					       "x2", (double) event->x,
-					       "y2", (double) event->y,
-					       "outline_color", "black",
-					       "width_pixels", 1,
-					       "outline_stipple", stipple,
-					       NULL);
-	gdk_bitmap_unref (stipple);
-
-	gnome_canvas_item_grab (gil->sel_rect, GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
-				NULL, event->time);
-	return TRUE;
-}
-
+/* Button release handler for the icon list */
 static gint
 gil_button_release (GtkWidget *widget, GdkEventButton *event)
 {
-	Gil *gil = GIL (widget);
+	Gil *gil;
+	GilPrivate *priv;
 	double x, y;
 
-	if (gil->sel_rect){
-		gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &x, &y);
-		gil_mark_region (gil, (GdkEvent *) event, x, y);
-		gnome_canvas_item_ungrab (gil->sel_rect, event->time);
-		gtk_object_destroy (GTK_OBJECT (gil->sel_rect));
-		gil->sel_rect = NULL;
-	}
+	gil = GIL (widget);
+	priv = gil->priv;
 
-	g_list_free (gil->preserve_selection);
-	gil->preserve_selection = NULL;
+	if (!priv->selecting)
+		return (* GTK_WIDGET_CLASS (parent_class)->button_release_event) (widget, event);
 
-	if (gil->timer_tag != -1){
-		gtk_timeout_remove (gil->timer_tag);
-		gil->timer_tag = -1;
+	if (event->button != 1)
+		return FALSE;
+
+	gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &x, &y);
+	update_drag_selection (gil, x, y);
+
+	gnome_canvas_item_ungrab (priv->sel_rect, event->time);
+	gtk_object_destroy (GTK_OBJECT (priv->sel_rect));
+	priv->sel_rect = NULL;
+	priv->selecting = FALSE;
+
+	if (priv->timer_tag != 0) {
+		gtk_timeout_remove (priv->timer_tag);
+		priv->timer_tag = 0;
 	}
-	
-	(*GTK_WIDGET_CLASS (parent_class)->button_release_event) (widget, event);
 
 	return TRUE;
 }
 
+/* Autoscroll timeout handler for the icon list */
 static gint
 scroll_timeout (gpointer data)
 {
-	Gil *gil = data;
+	Gil *gil;
+	GilPrivate *priv;
 	double x, y;
 	int value;
 
-	GDK_THREADS_ENTER ();
-	
-	value = gil->adj->value + gil->value_diff;
-	if (value > gil->adj->upper - gil->adj->page_size)
-		value = gil->adj->upper - gil->adj->page_size;
+	gil = data;
+	priv = gil->priv;
 
-	gtk_adjustment_set_value (gil->adj, value);
+	GDK_THREADS_ENTER ();
+
+	value = priv->adj->value + priv->value_diff;
+	if (value > priv->adj->upper - priv->adj->page_size)
+		value = priv->adj->upper - priv->adj->page_size;
+
+	gtk_adjustment_set_value (priv->adj, value);
 
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil),
-				      gil->event_last_x, gil->event_last_y,
+				      priv->event_last_x, priv->event_last_y,
 				      &x, &y);
-	gil_mark_region (gil, NULL, x, y);
+	update_drag_selection (gil, x, y);
 
 	GDK_THREADS_LEAVE();
 
 	return TRUE;
 }
 
+/* Motion event handler for the icon list */
 static gint
 gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 {
-	Gil *gil = GIL (widget);
+	Gil *gil;
+	GilPrivate *priv;
 	double x, y;
-	
-	if (!gil->sel_rect)
-		return FALSE;
+	int v;
+
+	gil = GIL (widget);
+	priv = gil->priv;
+
+	if (!priv->selecting)
+		return (* GTK_WIDGET_CLASS (parent_class)->motion_notify_event) (widget, event);
 
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &x, &y);
-	gil_mark_region (gil, (GdkEvent *) event, x, y);
-	
-	/*
-	 * If we are out of bounds, schedule a timeout that will do
-	 * the scrolling
-	 */
-	if (event->y < 0 || event->y > widget->allocation.height){
-		if (gil->timer_tag == -1){
-			gil->timer_tag = gtk_timeout_add (
-				30, scroll_timeout, gil);
-		}
+	update_drag_selection (gil, x, y);
+
+	/* If we are out of bounds, schedule a timeout that will do the scrolling */
+
+	if (event->y < 0 || event->y > widget->allocation.height) {
+		if (priv->timer_tag == 0)
+			priv->timer_tag = gtk_timeout_add (SCROLL_TIMEOUT, scroll_timeout, gil);
 
 		if (event->y < 0)
-			gil->value_diff = event->y;
+			priv->value_diff = event->y;
 		else
-			gil->value_diff = event->y - widget->allocation.height;
+			priv->value_diff = event->y - widget->allocation.height;
 
-		gil->event_last_x = event->x;
-		gil->event_last_y = event->y;
-		
-		/*
-		 * Make the steppings be relative to the mouse distance
-		 * from the canvas.  Also notice the timeout above is small
-		 * to give a more smooth movement
+		priv->event_last_x = event->x;
+		priv->event_last_y = event->y;
+
+		/* Make the steppings be relative to the mouse distance from the
+		 * canvas.  Also notice the timeout above is small to give a
+		 * more smooth movement.
 		 */
-		gil->value_diff /= 5;
-	} else {
-		if (gil->timer_tag != -1){
-			gtk_timeout_remove (gil->timer_tag);
-			gil->timer_tag = -1;
-		}
+		priv->value_diff /= 5;
+	} else if (priv->timer_tag != 0) {
+		gtk_timeout_remove (priv->timer_tag);
+		priv->timer_tag = 0;
 	}
+
 	return TRUE;
 }
 
@@ -1437,17 +1903,18 @@ typedef gboolean (*xGtkSignal_BOOL__INT_POINTER) (GtkObject * object,
 						  gint     arg1,
 						  gpointer arg2,
 						  gpointer user_data);
-static void 
-xgtk_marshal_BOOL__INT_POINTER (GtkObject *object, GtkSignalFunc func, gpointer func_data, GtkArg *args)
+static void
+xgtk_marshal_BOOL__INT_POINTER (GtkObject *object, GtkSignalFunc func, gpointer func_data,
+				GtkArg *args)
 {
   xGtkSignal_BOOL__INT_POINTER rfunc;
   gboolean *return_val;
-  
+
   return_val = GTK_RETLOC_BOOL (args[2]);
   rfunc = (xGtkSignal_BOOL__INT_POINTER) func;
   *return_val = (*rfunc) (object,
-			  GTK_VALUE_INT     (args [0]),
-			  GTK_VALUE_POINTER (args [1]),
+			  GTK_VALUE_INT (args[0]),
+			  GTK_VALUE_POINTER (args[1]),
 			  func_data);
 }
 
@@ -1479,16 +1946,18 @@ static void
 gil_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeIconList *gil;
+	GilPrivate *priv;
 
 	gil = GNOME_ICON_LIST (object);
+	priv = gil->priv;
 
 	switch (arg_id) {
 	case ARG_HADJUSTMENT:
-		GTK_VALUE_POINTER (*arg) = gil->hadj;
+		GTK_VALUE_POINTER (*arg) = priv->hadj;
 		break;
 
 	case ARG_VADJUSTMENT:
-		GTK_VALUE_POINTER (*arg) = gil->adj;
+		GTK_VALUE_POINTER (*arg) = priv->adj;
 		break;
 
 	default:
@@ -1520,8 +1989,8 @@ gil_class_init (GilClass *gil_class)
 				 GTK_TYPE_ADJUSTMENT,
 				 GTK_ARG_READWRITE,
 				 ARG_VADJUSTMENT);
-	
-	gil_signals [SELECT_ICON] =
+
+	gil_signals[SELECT_ICON] =
 		gtk_signal_new (
 			"select_icon",
 			GTK_RUN_FIRST,
@@ -1531,8 +2000,8 @@ gil_class_init (GilClass *gil_class)
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_INT,
 			GTK_TYPE_GDK_EVENT);
-	
-	gil_signals [UNSELECT_ICON] =
+
+	gil_signals[UNSELECT_ICON] =
 		gtk_signal_new (
 			"unselect_icon",
 			GTK_RUN_FIRST,
@@ -1543,7 +2012,7 @@ gil_class_init (GilClass *gil_class)
 			GTK_TYPE_INT,
 			GTK_TYPE_GDK_EVENT);
 
-	gil_signals [TEXT_CHANGED] =
+	gil_signals[TEXT_CHANGED] =
 		gtk_signal_new (
 			"text_changed",
 			GTK_RUN_LAST,
@@ -1556,16 +2025,16 @@ gil_class_init (GilClass *gil_class)
 
 	gtk_object_class_add_signals (object_class, gil_signals, LAST_SIGNAL);
 
-	object_class->destroy              = gil_destroy;
-	object_class->set_arg              = gil_set_arg;
-	object_class->get_arg              = gil_get_arg;
-	
-	widget_class->size_request         = gil_size_request;
-	widget_class->size_allocate        = gil_size_allocate;
-	widget_class->realize              = gil_realize;
-	widget_class->button_press_event   = gil_button_press;
+	object_class->destroy = gil_destroy;
+	object_class->set_arg = gil_set_arg;
+	object_class->get_arg = gil_get_arg;
+
+	widget_class->size_request = gil_size_request;
+	widget_class->size_allocate = gil_size_allocate;
+	widget_class->realize = gil_realize;
+	widget_class->button_press_event = gil_button_press;
 	widget_class->button_release_event = gil_button_release;
-	widget_class->motion_notify_event  = gil_motion_notify;
+	widget_class->motion_notify_event = gil_motion_notify;
 
 	/* we override GtkLayout's set_scroll_adjustments signal instead
 	 * of creating a new signal so as to keep binary compatibility.
@@ -1573,33 +2042,29 @@ gil_class_init (GilClass *gil_class)
 	 * this gives the correct implementation for GnomeIconList */
 	layout_class->set_scroll_adjustments = gil_set_scroll_adjustments;
 
-	gil_class->select_icon             = real_select_icon;
-	gil_class->unselect_icon           = real_unselect_icon;
+	gil_class->select_icon = real_select_icon;
+	gil_class->unselect_icon = real_unselect_icon;
 }
-
 
 static void
 gil_init (Gil *gil)
 {
-	gil->row_spacing = DEFAULT_ROW_SPACING;
-	gil->col_spacing = DEFAULT_COL_SPACING;
-	gil->text_spacing = DEFAULT_TEXT_SPACING;
-	gil->icon_border = DEFAULT_ICON_BORDER;
-	gil->separators = g_strdup (" ");
+	GilPrivate *priv;
 
+	priv = g_new0 (GilPrivate, 1);
+	gil->priv = priv;
 
-	gil->mode = GNOME_ICON_LIST_TEXT_BELOW;
-	gil->selection_mode = GTK_SELECTION_SINGLE;
-	gil->frozen = 0;
-	gil->dirty  = TRUE;
-	gil->timer_tag = -1;
+	priv->row_spacing = DEFAULT_ROW_SPACING;
+	priv->col_spacing = DEFAULT_COL_SPACING;
+	priv->text_spacing = DEFAULT_TEXT_SPACING;
+	priv->icon_border = DEFAULT_ICON_BORDER;
+	priv->separators = g_strdup (" ");
 
-	/*
-	 * FIXME: Figure out exactly why using canvas->height
-	 * and canvas->width does not work
-	 */
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (gil),
-					0, 0, 1000000, 1000000);
+	priv->selection_mode = GTK_SELECTION_SINGLE;
+	priv->dirty = TRUE;
+
+	/* FIXME:  Make the icon list use the normal canvas/layout adjustments */
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (gil), 0.0, 0.0, 1000000.0, 1000000.0);
 	gnome_canvas_scroll_to (GNOME_CANVAS (gil), 0, 0);
 }
 
@@ -1641,15 +2106,20 @@ gnome_icon_list_get_type (void)
 void
 gnome_icon_list_set_icon_width (GnomeIconList *gil, int w)
 {
+	GilPrivate *priv;
+
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 
-	gil->icon_width  = w;
+	priv = gil->priv;
 
-	if (gil->frozen){
-		gil->dirty = TRUE;
+	priv->icon_width  = w;
+
+	if (priv->frozen) {
+		priv->dirty = TRUE;
 		return;
 	}
+
 	gil_layout_all_icons (gil);
 	gil_scrollbar_adjust (gil);
 }
@@ -1663,8 +2133,9 @@ gil_adj_value_changed (GtkAdjustment *adj, Gil *gil)
 void
 gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 {
+	GilPrivate *priv;
 	GtkAdjustment *old_adjustment;
-  
+
 	/* hadj isn't used but is here for compatibility with GtkScrolledWindow */
 
 	g_return_if_fail (gil != NULL);
@@ -1673,37 +2144,40 @@ gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 	if (hadj)
 		g_return_if_fail (GTK_IS_ADJUSTMENT (hadj));
 
-	if (gil->hadj == hadj)
+	priv = gil->priv;
+
+	if (priv->hadj == hadj)
 		return;
 
-	old_adjustment = gil->hadj;
+	old_adjustment = priv->hadj;
 
-	if (gil->hadj)
-		gtk_object_unref (GTK_OBJECT (gil->hadj));
+	if (priv->hadj)
+		gtk_object_unref (GTK_OBJECT (priv->hadj));
 
-	gil->hadj = hadj;
+	priv->hadj = hadj;
 
-	if (gil->hadj) {
-		gtk_object_ref (GTK_OBJECT (gil->hadj));
-		/* the horizontal adjustment is not used, so set some default
-		 * values to indicate that everything is visible horizontally
+	if (priv->hadj) {
+		gtk_object_ref (GTK_OBJECT (priv->hadj));
+		/* The horizontal adjustment is not used, so set some default
+		 * values to indicate that everything is visible horizontally.
 		 */
-		gil->hadj->lower = 0.0;
-		gil->hadj->upper = 1.0;
-		gil->hadj->value = 0.0;
-		gil->hadj->step_increment = 1.0;
-		gil->hadj->page_increment = 1.0;
-		gil->hadj->page_size = 1.0;
-		gtk_adjustment_changed (gil->hadj);
+		priv->hadj->lower = 0.0;
+		priv->hadj->upper = 1.0;
+		priv->hadj->value = 0.0;
+		priv->hadj->step_increment = 1.0;
+		priv->hadj->page_increment = 1.0;
+		priv->hadj->page_size = 1.0;
+		gtk_adjustment_changed (priv->hadj);
 	}
 
-	if (!gil->hadj || !old_adjustment)
+	if (!priv->hadj || !old_adjustment)
 		gtk_widget_queue_resize (GTK_WIDGET (gil));
 }
 
 void
 gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 {
+	GilPrivate *priv;
 	GtkAdjustment *old_adjustment;
 
 	g_return_if_fail (gil != NULL);
@@ -1712,44 +2186,50 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 	if (vadj)
 		g_return_if_fail (GTK_IS_ADJUSTMENT (vadj));
 
-	if (gil->adj == vadj)
+	priv = gil->priv;
+
+	if (priv->adj == vadj)
 		return;
 
-	old_adjustment = gil->adj;
+	old_adjustment = priv->adj;
 
-	if (gil->adj) {
-		gtk_signal_disconnect_by_data (GTK_OBJECT (gil->adj), gil);
-		gtk_object_unref (GTK_OBJECT (gil->adj));
+	if (priv->adj) {
+		gtk_signal_disconnect_by_data (GTK_OBJECT (priv->adj), gil);
+		gtk_object_unref (GTK_OBJECT (priv->adj));
 	}
 
-	gil->adj = vadj;
+	priv->adj = vadj;
 
-	if (gil->adj) {
-		gtk_object_ref (GTK_OBJECT (gil->adj));
-		gtk_object_sink (GTK_OBJECT (gil->adj));
-		gtk_signal_connect (GTK_OBJECT (gil->adj), "value_changed",
+	if (priv->adj) {
+		gtk_object_ref (GTK_OBJECT (priv->adj));
+		gtk_object_sink (GTK_OBJECT (priv->adj));
+		gtk_signal_connect (GTK_OBJECT (priv->adj), "value_changed",
 				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
-		gtk_signal_connect (GTK_OBJECT (gil->adj), "changed",
+		gtk_signal_connect (GTK_OBJECT (priv->adj), "changed",
 				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
 	}
 
-	if (!gil->adj || !old_adjustment)
+	if (!priv->adj || !old_adjustment)
 		gtk_widget_queue_resize (GTK_WIDGET (gil));
 }
 
-void           
+void
 gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *adj, int flags)
 {
+	GilPrivate *priv;
+
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 
+	priv = gil->priv;
+
 	gnome_icon_list_set_icon_width (gil, icon_width);
-	gil->is_editable = (flags & GNOME_ICON_LIST_IS_EDITABLE) != 0;
-	gil->static_text = (flags & GNOME_ICON_LIST_STATIC_TEXT) != 0;
-	
+	priv->is_editable = (flags & GNOME_ICON_LIST_IS_EDITABLE) != 0;
+	priv->static_text = (flags & GNOME_ICON_LIST_STATIC_TEXT) != 0;
+
 	if (!adj)
 		adj = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0.1, 0.1));
-			
+
 	gnome_icon_list_set_vadjustment (gil, adj);
 
 }
@@ -1761,10 +2241,10 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
  * @adj:        Scrolling adjustment.
  * @flags:      flags that control the icon list creation
  *
- * Creates a new GnomeIconList widget.  Icons will be assumed to be at 
+ * Creates a new GnomeIconList widget.  Icons will be assumed to be at
  * most ICON_WIDTH pixels of width.  Any text displayed for those icons
  * will be wrapped at this width as well.
- * 
+ *
  * The adjustment is used to pass an existing adjustment to be used to
  * control the icon list display.  If ADJ is NULL, then a new adjustment
  * will be created.
@@ -1777,7 +2257,7 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
  * changes the "text_changed" signal will be emitted.
  *
  * if flags has the %GNOME_ICON_LIST_STATIC_TEXT flags set, then the
- * text 
+ * text
  *
  * Please note that the GnomeIconList starts life in Frozen state.  You are
  * supposed to fall gnome_icon_list_thaw on it as soon as possible.
@@ -1793,7 +2273,7 @@ gnome_icon_list_new_flags (guint icon_width, GtkAdjustment *adj, int flags)
 	gil = GIL (gtk_type_new (gnome_icon_list_get_type ()));
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
-	
+
 	gnome_icon_list_construct (gil, icon_width, adj, flags);
 
 	return GTK_WIDGET (gil);
@@ -1821,16 +2301,20 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, int flags)
 void
 gnome_icon_list_freeze (GnomeIconList *gil)
 {
+	GilPrivate *priv;
+
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 
-	gil->frozen++;
+	priv = gil->priv;
+
+	priv->frozen++;
 
 	/* We hide the root so that the user will not see any changes while the
 	 * icon list is doing stuff.
 	 */
 
-	if (gil->frozen == 1)
+	if (priv->frozen == 1)
 		gnome_canvas_item_hide (GNOME_CANVAS (gil)->root);
 }
 
@@ -1845,19 +2329,24 @@ gnome_icon_list_freeze (GnomeIconList *gil)
 void
 gnome_icon_list_thaw (GnomeIconList *gil)
 {
+	GilPrivate *priv;
+
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (gil->frozen > 0);
 
-	gil->frozen--;
+	priv = gil->priv;
 
-	if (!gil->dirty)
+	g_return_if_fail (priv->frozen > 0);
+
+	priv->frozen--;
+
+	if (!priv->dirty)
 		return;
 
 	gil_layout_all_icons (gil);
 	gil_scrollbar_adjust (gil);
 
-	if (gil->frozen == 0)
+	if (priv->frozen == 0)
 		gnome_canvas_item_show (GNOME_CANVAS (gil)->root);
 }
 
@@ -1872,11 +2361,16 @@ gnome_icon_list_thaw (GnomeIconList *gil)
 void
 gnome_icon_list_set_selection_mode (GnomeIconList *gil, GtkSelectionMode mode)
 {
+	GilPrivate *priv;
+
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 
-	gil->selection_mode = mode;
-	gil->last_selected = 0;
+	priv = gil->priv;
+
+	priv->selection_mode = mode;
+	priv->last_selected_idx = -1;
+	priv->last_selected_icon = NULL;
 }
 
 /**
@@ -1892,16 +2386,19 @@ gnome_icon_list_set_selection_mode (GnomeIconList *gil, GtkSelectionMode mode)
  */
 void
 gnome_icon_list_set_icon_data_full (GnomeIconList *gil,
-				     int pos, gpointer data,
-				     GtkDestroyNotify destroy)
+				    int pos, gpointer data,
+				    GtkDestroyNotify destroy)
 {
+	GilPrivate *priv;
 	Icon *icon;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (pos >= 0 && pos < gil->icons);
 
-	icon = g_list_nth (gil->icon_list, pos)->data;
+	priv = gil->priv;
+
+	icon = g_list_nth (priv->icon_list, pos)->data;
 	icon->data = data;
 	icon->destroy = destroy;
 }
@@ -1923,20 +2420,23 @@ gnome_icon_list_set_icon_data (GnomeIconList *gil, int pos, gpointer data)
 /**
  * gnome_icon_list_get_icon_data:
  * @gil: The GnomeIconList
- * @pos: icon index. 
+ * @pos: icon index.
  *
  * Returns the per-icon data associated with the icon at index position POS
  */
 gpointer
 gnome_icon_list_get_icon_data (GnomeIconList *gil, int pos)
 {
+	GilPrivate *priv;
 	Icon *icon;
 
 	g_return_val_if_fail (gil != NULL, NULL);
 	g_return_val_if_fail (IS_GIL (gil), NULL);
 	g_return_val_if_fail (pos >= 0 && pos < gil->icons, NULL);
-	
-	icon = g_list_nth (gil->icon_list, pos)->data;
+
+	priv = gil->priv;
+
+	icon = g_list_nth (priv->icon_list, pos)->data;
 	return icon->data;
 }
 
@@ -1951,6 +2451,7 @@ gnome_icon_list_get_icon_data (GnomeIconList *gil, int pos)
 int
 gnome_icon_list_find_icon_from_data (GnomeIconList *gil, gpointer data)
 {
+	GilPrivate *priv;
 	GList *list;
 	int n;
 	Icon *icon;
@@ -1958,7 +2459,9 @@ gnome_icon_list_find_icon_from_data (GnomeIconList *gil, gpointer data)
 	g_return_val_if_fail (gil != NULL, -1);
 	g_return_val_if_fail (IS_GIL (gil), -1);
 
-	for (n = 0, list = gil->icon_list; list; n++, list = list->next) {
+	priv = gil->priv;
+
+	for (n = 0, list = priv->icon_list; list; n++, list = list->next) {
 		icon = list->data;
 		if (icon->data == data)
 			return n;
@@ -1967,26 +2470,20 @@ gnome_icon_list_find_icon_from_data (GnomeIconList *gil, gpointer data)
 	return -1;
 }
 
+/* Sets an integer value in the private structure of the icon list, and updates it */
 static void
-gil_set_if (Gil *gil, int n, int offset)
+set_value (GnomeIconList *gil, GilPrivate *priv, int *dest, int val)
 {
-	int *v;
-
-	g_return_if_fail (gil != NULL);
-	g_return_if_fail (IS_GIL (gil));
-
-	v = (int *)(((char *)gil) + offset);
-
-	if (*v == n)
+	if (val == *dest)
 		return;
 
-	*v = n;
+	*dest = val;
 
-	if (!gil->frozen){
+	if (!priv->frozen) {
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
 	} else
-		gil->dirty = TRUE;
+		priv->dirty = TRUE;
 }
 
 /**
@@ -1999,7 +2496,13 @@ gil_set_if (Gil *gil, int n, int offset)
 void
 gnome_icon_list_set_row_spacing (GnomeIconList *gil, int pixels)
 {
-	gil_set_if (gil, pixels, GTK_STRUCT_OFFSET (Gil, row_spacing));
+	GilPrivate *priv;
+
+	g_return_if_fail (gil != NULL);
+	g_return_if_fail (IS_GIL (gil));
+
+	priv = gil->priv;
+	set_value (gil, priv, &priv->row_spacing, pixels);
 }
 
 /**
@@ -2012,7 +2515,13 @@ gnome_icon_list_set_row_spacing (GnomeIconList *gil, int pixels)
 void
 gnome_icon_list_set_col_spacing (GnomeIconList *gil, int pixels)
 {
-	gil_set_if (gil, pixels, GTK_STRUCT_OFFSET (Gil, col_spacing));
+	GilPrivate *priv;
+
+	g_return_if_fail (gil != NULL);
+	g_return_if_fail (IS_GIL (gil));
+
+	priv = gil->priv;
+	set_value (gil, priv, &priv->col_spacing, pixels);
 }
 
 /**
@@ -2025,7 +2534,13 @@ gnome_icon_list_set_col_spacing (GnomeIconList *gil, int pixels)
 void
 gnome_icon_list_set_text_spacing (GnomeIconList *gil, int pixels)
 {
-	gil_set_if (gil, pixels, GTK_STRUCT_OFFSET (Gil, text_spacing));
+	GilPrivate *priv;
+
+	g_return_if_fail (gil != NULL);
+	g_return_if_fail (IS_GIL (gil));
+
+	priv = gil->priv;
+	set_value (gil, priv, &priv->text_spacing, pixels);
 }
 
 /**
@@ -2038,7 +2553,13 @@ gnome_icon_list_set_text_spacing (GnomeIconList *gil, int pixels)
 void
 gnome_icon_list_set_icon_border (GnomeIconList *gil, int pixels)
 {
-	gil_set_if (gil, pixels, GTK_STRUCT_OFFSET (Gil, icon_border));
+	GilPrivate *priv;
+
+	g_return_if_fail (gil != NULL);
+	g_return_if_fail (IS_GIL (gil));
+
+	priv = gil->priv;
+	set_value (gil, priv, &priv->icon_border, pixels);
 }
 
 /**
@@ -2052,18 +2573,24 @@ gnome_icon_list_set_icon_border (GnomeIconList *gil, int pixels)
 void
 gnome_icon_list_set_separators (GnomeIconList *gil, const char *sep)
 {
+	GilPrivate *priv;
+
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (sep != NULL);
 
-	if (gil->separators)
-		g_free (gil->separators);
-	gil->separators = g_strdup (sep);
+	priv = gil->priv;
 
-	if (gil->frozen){
-		gil->dirty = TRUE;
+	if (priv->separators)
+		g_free (priv->separators);
+
+	priv->separators = g_strdup (sep);
+
+	if (priv->frozen) {
+		priv->dirty = TRUE;
 		return;
 	}
+
 	gil_layout_all_icons (gil);
 	gil_scrollbar_adjust (gil);
 }
@@ -2081,28 +2608,32 @@ gnome_icon_list_set_separators (GnomeIconList *gil, const char *sep)
 void
 gnome_icon_list_moveto (GnomeIconList *gil, int pos, double yalign)
 {
+	GilPrivate *priv;
 	IconLine *il;
 	GList *l;
 	int i, y, uh, line;
-	
+
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (pos >= 0 && pos < gil->icons);
 	g_return_if_fail (yalign >= 0.0 && yalign <= 1.0);
-	g_return_if_fail (gil->lines != NULL);
-	
+
+	priv = gil->priv;
+
+	g_return_if_fail (priv->lines != NULL);
+
 	line = pos / gil_get_items_per_line (gil);
 
 	y = 0;
-	for (i = 0, l = gil->lines; l && i < line; l = l->next, i++){
+	for (i = 0, l = priv->lines; l && i < line; l = l->next, i++) {
 		il = l->data;
-
 		y += icon_line_height (gil, il);
 	}
+
 	il = l->data;
 
 	uh = GTK_WIDGET (gil)->allocation.height - icon_line_height (gil,il);
-	gtk_adjustment_set_value (gil->adj, y - uh * yalign);
+	gtk_adjustment_set_value (priv->adj, y - uh * yalign);
 }
 
 /**
@@ -2117,33 +2648,36 @@ gnome_icon_list_moveto (GnomeIconList *gil, int pos, double yalign)
 GtkVisibility
 gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 {
+	GilPrivate *priv;
 	IconLine *il;
 	GList *l;
 	int line, y1, y2, i;
-	
+
 	g_return_val_if_fail (gil != NULL, GTK_VISIBILITY_NONE);
 	g_return_val_if_fail (IS_GIL (gil), GTK_VISIBILITY_NONE);
 	g_return_val_if_fail (pos >= 0 && pos < gil->icons, GTK_VISIBILITY_NONE);
 
-	if (gil->lines == NULL)
+	priv = gil->priv;
+
+	if (priv->lines == NULL)
 		return GTK_VISIBILITY_NONE;
-	
+
 	line = pos / gil_get_items_per_line (gil);
 	y1 = 0;
-	for (i = 0, l = gil->lines; l && i < line; l = l->next, i++){
+	for (i = 0, l = priv->lines; l && i < line; l = l->next, i++) {
 		il = l->data;
-
 		y1 += icon_line_height (gil, il);
 	}
+
 	y2 = y1 + icon_line_height (gil, (IconLine *) l->data);
 
-	if (y2 < gil->adj->value)
+	if (y2 < priv->adj->value)
 		return GTK_VISIBILITY_NONE;
 
-	if (y1 > gil->adj->value + GTK_WIDGET (gil)->allocation.height)
+	if (y1 > priv->adj->value + GTK_WIDGET (gil)->allocation.height)
 		return GTK_VISIBILITY_NONE;
-	
-	if (y2 <= gil->adj->value + GTK_WIDGET (gil)->allocation.height)
+
+	if (y2 <= priv->adj->value + GTK_WIDGET (gil)->allocation.height)
 		return GTK_VISIBILITY_FULL;
 
 	return GTK_VISIBILITY_PARTIAL;
@@ -2161,6 +2695,7 @@ gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 int
 gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 {
+	GilPrivate *priv;
 	GList *l;
 	double wx, wy;
 	double dx, dy;
@@ -2172,16 +2707,18 @@ gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 	g_return_val_if_fail (gil != NULL, -1);
 	g_return_val_if_fail (IS_GIL (gil), -1);
 
+	priv = gil->priv;
+
 	dx = x;
 	dy = y;
 
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), dx, dy, &wx, &wy);
 	gnome_canvas_w2c (GNOME_CANVAS (gil), wx, wy, &cx, &cy);
 
-	for (n = 0, l = gil->icon_list; l; l = l->next, n++){
+	for (n = 0, l = priv->icon_list; l; l = l->next, n++) {
 		Icon *icon = l->data;
 		GnomeCanvasItem *image = GNOME_CANVAS_ITEM (icon->image);
-		GnomeCanvasItem *text  = GNOME_CANVAS_ITEM (icon->text);
+		GnomeCanvasItem *text = GNOME_CANVAS_ITEM (icon->text);
 
 		if (wx >= image->x1 && wx <= image->x2 && wy >= image->y1 && wy <= image->y2) {
 			dist = (* GNOME_CANVAS_ITEM_CLASS (image->object.klass)->point) (

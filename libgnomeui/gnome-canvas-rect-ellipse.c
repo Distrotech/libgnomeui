@@ -841,7 +841,7 @@ gnome_canvas_rect_point (GnomeCanvasItem *item, double x, double y, int cx, int 
 	else
 		dy = 0.0;
 
-	return hypot(dx, dy);
+	return sqrt (dx * dx + dy * dy);
 }
 
 static void
@@ -1115,11 +1115,11 @@ gnome_canvas_ellipse_point (GnomeCanvasItem *item, double x, double y, int cx, i
 
 	dx = x - (re->x1 + re->x2) / 2.0;
 	dy = y - (re->y1 + re->y2) / 2.0;
-	center_dist = hypot(dx, dy);
+	center_dist = sqrt (dx * dx + dy * dy);
 
 	a = dx / ((re->x2 + width - re->x1) / 2.0);
 	b = dy / ((re->y2 + width - re->y1) / 2.0);
-	scaled_dist = hypot(a, b);
+	scaled_dist = sqrt (a * a + b * b);
 
 	/* If the scaled distance is greater than 1, then we are outside.  Compute the distance from
 	 * the point to the edge of the circle, then scale back to the original un-scaled coordinate
