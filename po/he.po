@@ -1,22 +1,23 @@
 # translation of libgnomeui.HEAD.he.po to Hebrew
 # translation of libgnomeui.gnome-2-0.he.po to Hebrew
 # This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# Gil Osher <dolfin@rpg.org.il>, 2002
-# Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002,2003
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Gil Osher <dolfin@rpg.org.il>, 2002, 2004.
+# Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002,2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 02:11+0100\n"
-"PO-Revision-Date: 2003-06-19 23:27+0300\n"
-"Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
+"POT-Creation-Date: 2004-03-23 04:10+0100\n"
+"PO-Revision-Date: 2004-03-25 21:36+0000\n"
+"Last-Translator: Gil Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.1\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -123,8 +124,7 @@ msgid "Translator credits"
 msgstr "תודות למתרגמים"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "תודות למתרגמים. מחרוזת זו צריכה להיות מסומנת כניתנת לתרגום"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -142,6 +142,7 @@ msgstr "אודות %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_קובץ"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_משחק"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_עזרה"
 
@@ -389,11 +391,11 @@ msgstr "הגדר את היישום"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_אודות"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "אודות יישום זה"
 
@@ -420,7 +422,7 @@ msgstr "יוצר חלון חדש"
 msgid "_Close This Window"
 msgstr "_סגור חלון זה"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "סוגר את החלון הנוכחי"
 
@@ -622,14 +624,12 @@ msgstr "אישור דרוש"
 #: libgnomeui/gnome-authentication-manager.c:282
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " תחום %s"
 
 #: libgnomeui/gnome-authentication-manager.c:285
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"אתה חייב להתחבר כדי לגשת ל \"%s\".\n"
-"%s"
+msgstr "אתה חייב להתחבר כדי לגשת ל %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -937,13 +937,13 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "השתמש ב GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "האם להשתמש בפריט GtkFileChooser החדש או בפריט GtkFileSelection כדי לבחור קבצים."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -971,8 +971,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz אבגדהוזחטיכלמנסעפצקרשת"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz אבגדהוזחטיכלמנסעפצקרשת"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1223,7 +1222,7 @@ msgstr "_שם משתמש:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_תחום:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1231,11 +1230,11 @@ msgstr "_סיסמה:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "זכור סיסמה לתצורת הפעלה זו"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "שמור סיסמה בצרור המפתחות"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1318,7 +1317,7 @@ msgstr "אודות"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "כבה את מסך ההתרסקות"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
@@ -1365,60 +1364,38 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "היישום \"%s\" הסתיים באופן לא צפוי."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "תהליך %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
+"אתה יכול לדווח למפתחים מה שקרה כדי לעזור להם לתקן את זה.  או שאתה "
+"יכול להפעיל מחדש את היישום עכשיו."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "שימוש: gnome_segv2 appname signum\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "יוצא מהיישום"
+msgstr "ה_פעל מחדש את היישום"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
-msgstr ""
+msgstr "_דווח למפתחים"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "נפה"
+msgstr "_נפה"
 
-#~ msgid "Color Selector"
-#~ msgstr "בחירת צבע"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "יציאה מהבדיקה"
 
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "היישום \"%s\" (תהליך %d) התרסק\n"
-#~ "עקב שגיאה חמורה.\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "שלח דו\"ח באג"
-
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr "אנא בקר בעמוד ריסוק היישומים של GNOME לעוד מידע"
-
-#~ msgid "Exit the test"
-#~ msgstr "יציאה מהבדיקה"
-
-#~ msgid "_Credits"
-#~ msgstr "_תודות"
