@@ -40,11 +40,17 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+struct _GnomeLessPrivate {
+  GtkText * text; 
+
+  GdkFont * font;  /* font that goes to gtk_text_insert_text call,
+		      can be NULL */
+};
 
 static void gnome_less_class_init (GnomeLessClass *klass);
 static void gnome_less_init       (GnomeLess      *messagebox);
 
-static void gnome_less_destroy (GtkObject *gl);
+static void gnome_less_destroy    (GtkObject      *object);
 
 static GtkWindowClass *parent_class;
 
@@ -90,19 +96,21 @@ gnome_less_init (GnomeLess *gl)
   GtkWidget * vscroll;
   GtkWidget * hbox; /* maybe just inherit from hbox? hard to say yet. */
 
-  gl->text = GTK_TEXT(gtk_text_new(NULL, NULL));
+  gl->_priv = g_new0(GnomeLessPrivate, 1);
 
-  gl->font = NULL;
+  gl->_priv->text = GTK_TEXT(gtk_text_new(NULL, NULL));
+
+  gl->_priv->font = NULL;
   
   hbox = gtk_hbox_new(FALSE, 0);
-  vscroll = gtk_vscrollbar_new(gl->text->vadj);
+  vscroll = gtk_vscrollbar_new(gl->_priv->text->vadj);
   
-  gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(gl->text),
+  gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(gl->_priv->text),
 		     TRUE, TRUE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), vscroll, FALSE, FALSE, 0);
 
   /* Since horizontal scroll doesn't work, use this hack. */
-  gtk_widget_set_usize(GTK_WIDGET(gl->text), 300, -1); 
+  gtk_widget_set_usize(GTK_WIDGET(gl->_priv->text), 300, -1); 
 
   gtk_widget_show_all(hbox);
 
@@ -127,15 +135,24 @@ GtkWidget* gnome_less_new (void)
   return GTK_WIDGET (gl);
 }
 
-static void gnome_less_destroy (GtkObject *gl)
+static void gnome_less_destroy (GtkObject *object)
 {
-  g_return_if_fail(gl != NULL);
-  g_return_if_fail(GNOME_IS_LESS(gl));
+	GnomeLess *gl;
 
-  if (GNOME_LESS(gl)->font) gdk_font_unref(GNOME_LESS(gl)->font);
+	g_return_if_fail(object != NULL);
+	g_return_if_fail(GNOME_IS_LESS(object));
 
-  if (GTK_OBJECT_CLASS(parent_class)->destroy)
-    (* (GTK_OBJECT_CLASS(parent_class)->destroy))(gl);
+	gl = GNOME_LESS(object);
+
+	if (gl->_priv->font)
+		gdk_font_unref(gl->_priv->font);
+	gl->_priv->font = NULL;
+
+	g_free(gl->_priv);
+	gl->_priv = NULL;
+
+	if (GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(object);
 }
 
 /**
@@ -248,7 +265,7 @@ gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
   g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
   g_return_val_if_fail(f != NULL, FALSE);
 
-  gtk_text_freeze(gl->text);
+  gtk_text_freeze(gl->_priv->text);
   
   gnome_less_clear(gl);
   
@@ -258,10 +275,10 @@ gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
 
     if ( s == NULL ) break;
     
-    gtk_text_insert(gl->text, gl->font, NULL, NULL, buffer, strlen(s));
+    gtk_text_insert(gl->_priv->text, gl->_priv->font, NULL, NULL, buffer, strlen(s));
   }
 
-  gtk_text_thaw(gl->text);
+  gtk_text_thaw(gl->_priv->text);
 
   if ( errno != 0 ) {
     /* We quit on an error, not EOF */
@@ -305,8 +322,8 @@ static void gnome_less_append_string(GnomeLess * gl, const gchar * s)
   g_return_if_fail(GNOME_IS_LESS(gl));
   g_return_if_fail(s != NULL);
 
-  gtk_text_set_point(gl->text, gtk_text_get_length(gl->text));
-  gtk_text_insert(gl->text, gl->font, NULL, NULL, s, strlen(s)); 
+  gtk_text_set_point(gl->_priv->text, gtk_text_get_length(gl->_priv->text));
+  gtk_text_insert(gl->_priv->text, gl->_priv->font, NULL, NULL, s, strlen(s)); 
 }
 
 /**
@@ -325,10 +342,10 @@ void gnome_less_show_string(GnomeLess * gl, const gchar * s)
   g_return_if_fail(GNOME_IS_LESS(gl));
   g_return_if_fail(s != NULL);
 
-  gtk_text_freeze(gl->text);
+  gtk_text_freeze(gl->_priv->text);
   gnome_less_clear(gl);
   gnome_less_append_string(gl, s);
-  gtk_text_thaw(gl->text);
+  gtk_text_thaw(gl->_priv->text);
 }
 
 /**
@@ -343,8 +360,8 @@ void gnome_less_clear (GnomeLess * gl)
   g_return_if_fail(gl != NULL);
   g_return_if_fail(GNOME_IS_LESS(gl));
 
-  gtk_editable_delete_text(GTK_EDITABLE(gl->text), 0,
-			   gtk_text_get_length(GTK_TEXT(gl->text)));
+  gtk_editable_delete_text(GTK_EDITABLE(gl->_priv->text), 0,
+			   gtk_text_get_length(GTK_TEXT(gl->_priv->text)));
 }
 
 /**
@@ -366,11 +383,11 @@ void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
 
   /* font is allowed to be NULL */
 
-  if (gl->font)
-    gdk_font_unref(gl->font);
-  gl->font = font;
-  if (gl->font) {
-    gdk_font_ref(gl->font);
+  if (gl->_priv->font)
+    gdk_font_unref(gl->_priv->font);
+  gl->_priv->font = font;
+  if (gl->_priv->font) {
+    gdk_font_ref(gl->_priv->font);
   }
 }
 
@@ -403,8 +420,8 @@ void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
     /* I'm told that "fixed" is the standard X font, but
        "fixed" doesn't appear to be fixed-width; courier does though. */
     font = gdk_fontset_load(
-	"-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*,"
-	"-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*,*");
+	_("-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*,"
+	  "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*,*"));
     
     if ( font == NULL ) {
       g_warning("GnomeLess: Couldn't load fixed font\n");
@@ -436,8 +453,8 @@ gboolean gnome_less_write_fd (GnomeLess * gl, int fd)
   g_return_val_if_fail(fd >= 0, FALSE);
 
   contents = 
-    gtk_editable_get_chars(GTK_EDITABLE(gl->text), 0,
-			   gtk_text_get_length(GTK_TEXT(gl->text)));
+    gtk_editable_get_chars(GTK_EDITABLE(gl->_priv->text), 0,
+			   gtk_text_get_length(GTK_TEXT(gl->_priv->text)));
   len = strlen(contents);
 
   if ( contents && (len > 0)  ) {
@@ -501,8 +518,8 @@ void gnome_less_reshow          (GnomeLess * gl)
   g_return_if_fail(gl != NULL);
   g_return_if_fail(GNOME_IS_LESS(gl));
 
-  contents = gtk_editable_get_chars(GTK_EDITABLE(gl->text), 0,
-				    gtk_text_get_length(GTK_TEXT(gl->text)));
+  contents = gtk_editable_get_chars(GTK_EDITABLE(gl->_priv->text), 0,
+				    gtk_text_get_length(GTK_TEXT(gl->_priv->text)));
 
   if ( contents && (strlen(contents) != 0)  ) {
     gnome_less_show_string(gl, contents);
@@ -525,5 +542,5 @@ gnome_less_get_gtk_text(GnomeLess * gl)
 	g_return_val_if_fail(gl != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_LESS(gl), NULL);
 
-	return GTK_WIDGET(gl->text);
+	return GTK_WIDGET(gl->_priv->text);
 }

@@ -35,8 +35,9 @@
 
 BEGIN_GNOME_DECLS
 
-typedef struct _GnomeLess GnomeLess;
-typedef struct _GnomeLessClass GnomeLessClass;
+typedef struct _GnomeLess        GnomeLess;
+typedef struct _GnomeLessPrivate GnomeLessPrivate;
+typedef struct _GnomeLessClass   GnomeLessClass;
 
 #define GNOME_TYPE_LESS            (gnome_less_get_type ())
 #define GNOME_LESS(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_LESS, GnomeLess))
@@ -48,10 +49,7 @@ struct _GnomeLess {
   GtkVBox vbox;
 
   /*< private >*/
-  GtkText * text; 
-
-  GdkFont * font;  /* font that goes to gtk_text_insert_text call,
-		      can be NULL */
+  GnomeLessPrivate *_priv;
 };
 
 struct _GnomeLessClass {

@@ -47,18 +47,15 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_NUMBER_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_NUMBER_ENTRY))
 
 
-typedef struct _GnomeNumberEntry      GnomeNumberEntry;
-typedef struct _GnomeNumberEntryClass GnomeNumberEntryClass;
+typedef struct _GnomeNumberEntry        GnomeNumberEntry;
+typedef struct _GnomeNumberEntryPrivate GnomeNumberEntryPrivate;
+typedef struct _GnomeNumberEntryClass   GnomeNumberEntryClass;
 
 struct _GnomeNumberEntry {
 	GtkHBox hbox;
 
 	/*< private >*/
-	gchar *calc_dialog_title;
-	
-	GtkWidget *calc_dlg;
-
-	GtkWidget *gentry;
+	GnomeNumberEntryPrivate *_priv;
 };
 
 struct _GnomeNumberEntryClass {

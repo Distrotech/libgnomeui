@@ -1,3 +1,19 @@
+Sun Jun 25 18:15:36 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.[ch]: put privates into a private structure.  Add
+	  an accessor for the internal string representation
+
+	* gnome-number-entry.c: use the gnome-calculator accessors instead of
+	  looking directly into the structure
+
+	* gnome-icon-sel.[ch]: put privates into a private structure
+
+	* gnome-less.[ch]: put privates into a private structure, also mark
+	  the fixed font set for translation
+
+	* gnome-number-entry.[ch]: use private structure for private members,
+	  change finalize into destroy
+
 Sun Jun 25 17:35:07 2000  George Lebl <jirka@5z.com>
 
 	* gnome-ditem-entry.[ch]: Put private members into a private

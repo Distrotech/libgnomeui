@@ -44,10 +44,17 @@
 #include "gnome-dialog.h"
 #include "gnome-stock.h"
 
+struct _GnomeNumberEntryPrivate {
+	gchar *calc_dialog_title;
+	
+	GtkWidget *calc_dlg;
+
+	GtkWidget *gentry;
+};
 
 static void gnome_number_entry_class_init (GnomeNumberEntryClass *class);
 static void gnome_number_entry_init       (GnomeNumberEntry      *nentry);
-static void gnome_number_entry_finalize   (GtkObject             *object);
+static void gnome_number_entry_destroy    (GtkObject             *object);
 
 
 static GtkHBoxClass *parent_class;
@@ -81,7 +88,7 @@ gnome_number_entry_class_init (GnomeNumberEntryClass *class)
 
 	object_class = (GtkObjectClass *) class;
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
-	object_class->finalize = gnome_number_entry_finalize;
+	object_class->destroy = gnome_number_entry_destroy;
 
 }
 
@@ -95,15 +102,18 @@ calc_dialog_clicked (GtkWidget *widget, int button, gpointer data)
 	if(button == 0) {
 		GnomeNumberEntry *nentry;
 		GtkWidget *entry;
+		char *result_string;
+
 		nentry = GNOME_NUMBER_ENTRY (gtk_object_get_data (GTK_OBJECT (dlg),"entry"));
 		entry = gnome_number_entry_gtk_entry (nentry);
 
-		if(*calc->result_string!=' ')
-			gtk_entry_set_text (GTK_ENTRY (entry),
-					    calc->result_string);
-		else
-			gtk_entry_set_text (GTK_ENTRY (entry),
-					    &calc->result_string[1]);
+		result_string = g_strdup(gnome_calculator_get_result_string(calc));
+		if(result_string) {
+			g_strstrip(result_string);
+			gtk_entry_set_text (GTK_ENTRY (entry), result_string);
+			g_free(result_string);
+		} else
+			gtk_entry_set_text (GTK_ENTRY (entry), "");
 	}
 	gtk_widget_destroy (widget);
 }
@@ -165,7 +175,7 @@ calc_dialog_destroyed(GtkWidget *w, GnomeNumberEntry *nentry)
 	g_return_if_fail (nentry != NULL);
 	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (nentry));
 
-	nentry->calc_dlg = NULL;
+	nentry->_priv->calc_dlg = NULL;
 }
 
 static void
@@ -175,6 +185,7 @@ browse_clicked (GtkWidget *widget, gpointer data)
 	GtkWidget *dlg;
 	GtkWidget *calc;
         GtkWidget *parent;
+	GtkAccelGroup *accel;
         
 	g_return_if_fail (data != NULL);
 	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (data));
@@ -182,11 +193,11 @@ browse_clicked (GtkWidget *widget, gpointer data)
 	nentry = GNOME_NUMBER_ENTRY (data);
 	
 	/*if dialog already exists, make sure it's shown and raised*/
-	if(nentry->calc_dlg) {
-		gtk_widget_show(nentry->calc_dlg);
-		if(nentry->calc_dlg->window)
-			gdk_window_raise(nentry->calc_dlg->window);
-		calc = gtk_object_get_data (GTK_OBJECT (nentry->calc_dlg),
+	if(nentry->_priv->calc_dlg) {
+		gtk_widget_show(nentry->_priv->calc_dlg);
+		if(nentry->_priv->calc_dlg->window)
+			gdk_window_raise(nentry->_priv->calc_dlg->window);
+		calc = gtk_object_get_data (GTK_OBJECT (nentry->_priv->calc_dlg),
 					    "calc");
 		gnome_calculator_set(GNOME_CALCULATOR(calc),
 				     gnome_number_entry_get_number(nentry));
@@ -195,8 +206,8 @@ browse_clicked (GtkWidget *widget, gpointer data)
 
         parent = gtk_widget_get_toplevel(GTK_WIDGET(nentry));
         
-	dlg = gnome_dialog_new (nentry->calc_dialog_title
-				? nentry->calc_dialog_title
+	dlg = gnome_dialog_new (nentry->_priv->calc_dialog_title
+				? nentry->_priv->calc_dialog_title
 				: _("Calculator"),
 				GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL,
@@ -226,12 +237,12 @@ browse_clicked (GtkWidget *widget, gpointer data)
 
 	/* add calculator accels to our window*/
 
-	gtk_window_add_accel_group(GTK_WINDOW(dlg),
-				   GNOME_CALCULATOR(calc)->accel);
+	accel = gnome_calculator_get_accel_group(GNOME_CALCULATOR(calc));
+	gtk_window_add_accel_group(GTK_WINDOW(dlg), accel);
 
 	gtk_widget_show_all (dlg);
 	
-	nentry->calc_dlg = dlg;
+	nentry->_priv->calc_dlg = dlg;
 }
 
 static void
@@ -242,16 +253,18 @@ gnome_number_entry_init (GnomeNumberEntry *nentry)
 	g_return_if_fail (nentry != NULL);
 	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (nentry));
 
-	nentry->calc_dialog_title = NULL;
+	nentry->_priv = g_new0(GnomeNumberEntryPrivate, 1);
+
+	nentry->_priv->calc_dialog_title = NULL;
 
 	gtk_box_set_spacing (GTK_BOX (nentry), 4);
 
-	nentry->gentry = gnome_entry_new (NULL);
+	nentry->_priv->gentry = gnome_entry_new (NULL);
 
-	nentry->calc_dlg = NULL;
+	nentry->_priv->calc_dlg = NULL;
 	
-	gtk_box_pack_start (GTK_BOX (nentry), nentry->gentry, TRUE, TRUE, 0);
-	gtk_widget_show (nentry->gentry);
+	gtk_box_pack_start (GTK_BOX (nentry), nentry->_priv->gentry, TRUE, TRUE, 0);
+	gtk_widget_show (nentry->_priv->gentry);
 
 	button = gtk_button_new_with_label (_("Calculator..."));
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
@@ -262,7 +275,7 @@ gnome_number_entry_init (GnomeNumberEntry *nentry)
 }
 
 static void
-gnome_number_entry_finalize (GtkObject *object)
+gnome_number_entry_destroy (GtkObject *object)
 {
 	GnomeNumberEntry *nentry;
 
@@ -271,13 +284,18 @@ gnome_number_entry_finalize (GtkObject *object)
 
 	nentry = GNOME_NUMBER_ENTRY (object);
 
-	if (nentry->calc_dlg)
-		gtk_widget_destroy(nentry->calc_dlg);
+	if (nentry->_priv->calc_dlg)
+		gtk_widget_destroy(nentry->_priv->calc_dlg);
+	nentry->_priv->calc_dlg = NULL;
 
-	if (nentry->calc_dialog_title)
-		g_free (nentry->calc_dialog_title);
+	g_free (nentry->_priv->calc_dialog_title);
+	nentry->_priv->calc_dialog_title = NULL;
 
-	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
+	g_free(nentry->_priv);
+	nentry->_priv = NULL;
+
+	if(GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 /**
@@ -299,7 +317,7 @@ gnome_number_entry_construct (GnomeNumberEntry *nentry,
 	g_return_if_fail (nentry != NULL);
 	g_return_if_fail (GNOME_IS_NUMBER_ENTRY(nentry));
 
-	gnome_entry_construct (GNOME_ENTRY (nentry->gentry), history_id);
+	gnome_entry_construct (GNOME_ENTRY (nentry->_priv->gentry), history_id);
 
 	gnome_number_entry_set_title (nentry, calc_dialog_title);
 }
@@ -342,7 +360,7 @@ gnome_number_entry_gnome_entry (GnomeNumberEntry *nentry)
 	g_return_val_if_fail (nentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_NUMBER_ENTRY (nentry), NULL);
 
-	return nentry->gentry;
+	return nentry->_priv->gentry;
 }
 
 /**
@@ -360,7 +378,7 @@ gnome_number_entry_gtk_entry (GnomeNumberEntry *nentry)
 	g_return_val_if_fail (nentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_NUMBER_ENTRY (nentry), NULL);
 
-	return gnome_entry_gtk_entry (GNOME_ENTRY (nentry->gentry));
+	return gnome_entry_gtk_entry (GNOME_ENTRY (nentry->_priv->gentry));
 }
 
 /**
@@ -379,8 +397,8 @@ gnome_number_entry_set_title (GnomeNumberEntry *nentry, const gchar *calc_dialog
 	g_return_if_fail (nentry != NULL);
 	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (nentry));
 
-	if (nentry->calc_dialog_title)
-		g_free (nentry->calc_dialog_title);
+	if (nentry->_priv->calc_dialog_title)
+		g_free (nentry->_priv->calc_dialog_title);
 
-	nentry->calc_dialog_title = g_strdup (calc_dialog_title); /* handles NULL correctly */
+	nentry->_priv->calc_dialog_title = g_strdup (calc_dialog_title); /* handles NULL correctly */
 }

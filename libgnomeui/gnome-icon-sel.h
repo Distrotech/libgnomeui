@@ -31,8 +31,9 @@
 
 BEGIN_GNOME_DECLS
 
-typedef struct _GnomeIconSelection GnomeIconSelection;
-typedef struct _GnomeIconSelectionClass GnomeIconSelectionClass;
+typedef struct _GnomeIconSelection        GnomeIconSelection;
+typedef struct _GnomeIconSelectionPrivate GnomeIconSelectionPrivate;
+typedef struct _GnomeIconSelectionClass   GnomeIconSelectionClass;
 
 #define GNOME_TYPE_ICON_SELECTION            (gnome_icon_selection_get_type ())
 #define GNOME_ICON_SELECTION(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ICON_SELECTION, GnomeIconSelection))
@@ -44,13 +45,7 @@ struct _GnomeIconSelection {
   GtkVBox vbox;
 
   /*< private >*/
-  GtkWidget * box;
-
-  GtkWidget * gil;
-
-  GList * file_list;
-  
-  gboolean stop_loading; /* a flag set to stop the loading of images in midprocess */
+  GnomeIconSelectionPrivate *_priv;
 };
 
 struct _GnomeIconSelectionClass {

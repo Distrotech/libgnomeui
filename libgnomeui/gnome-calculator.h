@@ -46,8 +46,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_CALCULATOR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_CALCULATOR))
 
 
-typedef struct _GnomeCalculator      GnomeCalculator;
-typedef struct _GnomeCalculatorClass GnomeCalculatorClass;
+typedef struct _GnomeCalculator        GnomeCalculator;
+typedef struct _GnomeCalculatorPrivate GnomeCalculatorPrivate;
+typedef struct _GnomeCalculatorClass   GnomeCalculatorClass;
 
 typedef enum {
 	GNOME_CALCULATOR_DEG,
@@ -59,25 +60,7 @@ struct _GnomeCalculator {
 	GtkVBox vbox;
 
 	/*< private >*/
-	GtkWidget *display;
-
-	GtkWidget *invert_button;
-	GtkWidget *drg_button;
-
-	GList *stack;
-	GtkAccelGroup *accel;
-
-	gdouble result;
-	gdouble memory;
-
-	gchar result_string[13];
-
-	GnomeCalculatorMode mode : 2;
-
-	guint add_digit : 1;	/*add a digit instead of starting a new
-				  number*/
-	guint error : 1;
-	guint invert : 1;
+	GnomeCalculatorPrivate *_priv;
 };
 
 struct _GnomeCalculatorClass {
@@ -96,6 +79,7 @@ void		 gnome_calculator_set		(GnomeCalculator *gc,
 						 gdouble result);
 gdouble		 gnome_calculator_get_result	(GnomeCalculator *gc);
 GtkAccelGroup   *gnome_calculator_get_accel_group(GnomeCalculator *gc);
+const char	*gnome_calculator_get_result_string(GnomeCalculator *gc);
 
 END_GNOME_DECLS
 

@@ -55,6 +55,28 @@ typedef void (*sighandler_t)(int);
 #define FONT_HEIGHT 30
 #define DISPLAY_LEN 13
 
+struct _GnomeCalculatorPrivate {
+	GtkWidget *display;
+
+	GtkWidget *invert_button;
+	GtkWidget *drg_button;
+
+	GList *stack;
+	GtkAccelGroup *accel;
+
+	gdouble result;
+	gdouble memory;
+
+	gchar result_string[13];
+
+	GnomeCalculatorMode mode : 2;
+
+	guint add_digit : 1;	/*add a digit instead of starting a new
+				  number*/
+	guint error : 1;
+	guint invert : 1;
+};
+
 typedef enum {
 	CALCULATOR_NUMBER,
 	CALCULATOR_FUNCTION,
@@ -178,7 +200,7 @@ dump_stack(GnomeCalculator *gc)
 	GList *list;
 
 	puts("STACK_DUMP start");
-	for(list = gc->stack;list!=NULL;list = g_list_next(list)) {
+	for(list = gc->_priv->stack;list!=NULL;list = g_list_next(list)) {
 		stack = list->data;
 		if(stack == NULL)
 			puts("NULL");
@@ -219,9 +241,9 @@ stack_pop(GList **stack)
 static void
 do_error(GnomeCalculator *gc)
 {
-	gc->error = TRUE;
-	strcpy(gc->result_string,"e");
-	gtk_widget_queue_draw (gc->display);
+	gc->_priv->error = TRUE;
+	strcpy(gc->_priv->result_string,"e");
+	gtk_widget_queue_draw (gc->_priv->display);
 }
 
 /*we handle sigfpe's so that we can find all the errors*/
@@ -241,16 +263,16 @@ reduce_stack(GnomeCalculator *gc)
 	gdouble first;
 	gdouble second;
 
-	if(!gc->stack)
+	if(!gc->_priv->stack)
 		return;
 
-	stack = gc->stack->data;
+	stack = gc->_priv->stack->data;
 	if(stack->type!=CALCULATOR_NUMBER)
 		return;
 
 	second = stack->d.number;
 
-	list=g_list_next(gc->stack);
+	list=g_list_next(gc->_priv->stack);
 	if(!list)
 		return;
 
@@ -276,8 +298,8 @@ reduce_stack(GnomeCalculator *gc)
 	}
 	first = stack->d.number;
 
-	stack_pop(&gc->stack);
-	stack_pop(&gc->stack);
+	stack_pop(&gc->_priv->stack);
+	stack_pop(&gc->_priv->stack);
 
 	errno = 0;
 
@@ -340,11 +362,11 @@ reduce_stack_prec(GnomeCalculator *gc, MathFunction2 func)
         CalculatorStack *stack;
         GList *list;
 
-        stack = gc->stack->data;
+        stack = gc->_priv->stack->data;
         if ( stack->type != CALCULATOR_NUMBER )
                 return;
 
-        list = g_list_next(gc->stack);
+        list = g_list_next(gc->_priv->stack);
         if (!list)
                 return;
 
@@ -363,13 +385,13 @@ reduce_stack_prec(GnomeCalculator *gc, MathFunction2 func)
 static void
 push_input(GnomeCalculator *gc)
 {
-	if(gc->add_digit) {
+	if(gc->_priv->add_digit) {
 		CalculatorStack *stack;
 		stack = g_new(CalculatorStack,1);
 		stack->type = CALCULATOR_NUMBER;
-		stack->d.number = gc->result;
-		gc->stack = g_list_prepend(gc->stack,stack);
-		gc->add_digit = FALSE;
+		stack->d.number = gc->_priv->result;
+		gc->_priv->stack = g_list_prepend(gc->_priv->stack,stack);
+		gc->_priv->add_digit = FALSE;
 	}
 }
 
@@ -384,14 +406,14 @@ set_result(GnomeCalculator *gc)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(!gc->stack)
+	if(!gc->_priv->stack)
 		return;
 
-	stack = gc->stack->data;
+	stack = gc->_priv->stack->data;
 	if(stack->type!=CALCULATOR_NUMBER)
 		return;
 
-	gc->result = stack->d.number;
+	gc->_priv->result = stack->d.number;
 
         /* make sure put values in a consistent manner */
 	/* XXX: perhaps we can make sure the calculator works on all locales,
@@ -400,21 +422,21 @@ set_result(GnomeCalculator *gc)
         setlocale (LC_NUMERIC, "C");
 	for(i=12;i>0;i--) {
 		g_snprintf(format, sizeof(format), "%c .%dg", '%', i);
-		g_snprintf(buf, sizeof(buf), format, gc->result);
+		g_snprintf(buf, sizeof(buf), format, gc->_priv->result);
 		if(strlen(buf)<=12)
 			break;
 	}
         setlocale (LC_NUMERIC, old_locale);
 	g_free (old_locale);
 
-	strncpy(gc->result_string,buf,12);
-	gc->result_string[12]='\0';
+	strncpy(gc->_priv->result_string,buf,12);
+	gc->_priv->result_string[12]='\0';
 
-	gtk_widget_queue_draw (gc->display);
+	gtk_widget_queue_draw (gc->_priv->display);
 
 	gtk_signal_emit(GTK_OBJECT(gc),
 			gnome_calculator_signals[RESULT_CHANGED_SIGNAL],
-			gc->result);
+			gc->_priv->result);
 
 }
 
@@ -423,11 +445,11 @@ unselect_invert(GnomeCalculator *gc)
 {
 	g_return_if_fail(gc != NULL);
 	g_return_if_fail(GNOME_IS_CALCULATOR(gc));
-	g_return_if_fail(gc->invert_button);
+	g_return_if_fail(gc->_priv->invert_button);
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gc->invert_button),
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gc->_priv->invert_button),
 				    FALSE);
-	gc->invert=FALSE;
+	gc->_priv->invert=FALSE;
 }
 
 static void
@@ -437,13 +459,13 @@ setup_drg_label(GnomeCalculator *gc)
 
 	g_return_if_fail(gc != NULL);
 	g_return_if_fail(GNOME_IS_CALCULATOR(gc));
-	g_return_if_fail(gc->drg_button);
+	g_return_if_fail(gc->_priv->drg_button);
 
-	label = GTK_BUTTON(gc->drg_button)->child;
+	label = GTK_BUTTON(gc->_priv->drg_button)->child;
 
-	if(gc->mode == GNOME_CALCULATOR_DEG)
+	if(gc->_priv->mode == GNOME_CALCULATOR_DEG)
 		gtk_label_set_text(GTK_LABEL(label), _("DEG"));
-	else if(gc->mode == GNOME_CALCULATOR_RAD)
+	else if(gc->_priv->mode == GNOME_CALCULATOR_RAD)
 		gtk_label_set_text(GTK_LABEL(label), _("RAD"));
 	else
 		gtk_label_set_text(GTK_LABEL(label), _("GRAD"));
@@ -478,19 +500,19 @@ no_func(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	push_input(gc);
 
 	/* if no stack, nothing happens */
-	if(!gc->stack) {
+	if(!gc->_priv->stack) {
 		unselect_invert(gc);
 		return;
 	}
 
 	reduce_stack_prec(gc,NULL);
-	if(gc->error) return;
+	if(gc->_priv->error) return;
 	set_result(gc);
 
 	unselect_invert(gc);
@@ -508,32 +530,32 @@ simple_func(GtkWidget *w, gpointer data)
 	g_return_if_fail(func!=NULL);
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	push_input(gc);
 
-	if(!gc->stack) {
+	if(!gc->_priv->stack) {
 		unselect_invert(gc);
 		return;
 	}
 
-	stack = gc->stack->data;
+	stack = gc->_priv->stack->data;
 	if(stack->type!=CALCULATOR_NUMBER) {
 		unselect_invert(gc);
 		return;
 	}
 
 	/*only convert non inverting functions*/
-	if(!gc->invert && but->convert_to_rad)
+	if(!gc->_priv->invert && but->convert_to_rad)
 		stack->d.number = convert_num(stack->d.number,
-					      gc->mode,
+					      gc->_priv->mode,
 					      GNOME_CALCULATOR_RAD);
 
 	errno = 0;
 	{
 		sighandler_t old = signal(SIGFPE,sigfpe_handler);
-		if(!gc->invert || invfunc==NULL)
+		if(!gc->_priv->invert || invfunc==NULL)
 			stack->d.number = (*func)(stack->d.number);
 		else
 			stack->d.number = (*invfunc)(stack->d.number);
@@ -548,10 +570,10 @@ simple_func(GtkWidget *w, gpointer data)
 	}
 
 	/*we are converting back from rad to mode*/
-	if(gc->invert && but->convert_to_rad)
+	if(gc->_priv->invert && but->convert_to_rad)
 		stack->d.number = convert_num(stack->d.number,
 					      GNOME_CALCULATOR_RAD,
-					      gc->mode);
+					      gc->_priv->mode);
 
 	set_result(gc);
 
@@ -570,21 +592,21 @@ math_func(GtkWidget *w, gpointer data)
 	g_return_if_fail(func!=NULL);
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	push_input(gc);
 
-	if(!gc->stack) {
+	if(!gc->_priv->stack) {
 		unselect_invert(gc);
 		return;
 	}
 
 	reduce_stack_prec(gc,func);
-	if(gc->error) return;
+	if(gc->_priv->error) return;
 	set_result(gc);
 
-	stack = gc->stack->data;
+	stack = gc->_priv->stack->data;
 	if(stack->type!=CALCULATOR_NUMBER) {
 		unselect_invert(gc);
 		return;
@@ -592,12 +614,12 @@ math_func(GtkWidget *w, gpointer data)
 
 	stack = g_new(CalculatorStack,1);
 	stack->type = CALCULATOR_FUNCTION;
-	if(!gc->invert || invfunc==NULL)
+	if(!gc->_priv->invert || invfunc==NULL)
 		stack->d.func = func;
 	else
 		stack->d.func = invfunc;
 
-	gc->stack = g_list_prepend(gc->stack,stack);
+	gc->_priv->stack = g_list_prepend(gc->_priv->stack,stack);
 
 	unselect_invert(gc);
 }
@@ -613,17 +635,17 @@ reset_calc(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	while(gc->stack)
-		stack_pop(&gc->stack);
+	while(gc->_priv->stack)
+		stack_pop(&gc->_priv->stack);
 
-	gc->result = 0;
-	strcpy(gc->result_string, " 0");
-	gc->memory = 0;
-	gc->mode = GNOME_CALCULATOR_DEG;
-	gc->invert = FALSE;
-	gc->error = FALSE;
+	gc->_priv->result = 0;
+	strcpy(gc->_priv->result_string, " 0");
+	gc->_priv->memory = 0;
+	gc->_priv->mode = GNOME_CALCULATOR_DEG;
+	gc->_priv->invert = FALSE;
+	gc->_priv->error = FALSE;
 
-	gc->add_digit = TRUE;
+	gc->_priv->add_digit = TRUE;
 	push_input(gc);
 	set_result(gc);
 
@@ -640,17 +662,17 @@ clear_calc(GtkWidget *w, gpointer data)
 
 	/* if in add digit mode, just clear the number, otherwise clear
 	 * state as well */
-	if(!gc->add_digit) {
-		while(gc->stack)
-			stack_pop(&gc->stack);
+	if(!gc->_priv->add_digit) {
+		while(gc->_priv->stack)
+			stack_pop(&gc->_priv->stack);
 	}
 
-	gc->result = 0;
-	strcpy(gc->result_string, " 0");
-	gc->error = FALSE;
-	gc->invert = FALSE;
+	gc->_priv->result = 0;
+	strcpy(gc->_priv->result_string, " 0");
+	gc->_priv->error = FALSE;
+	gc->_priv->invert = FALSE;
 
-	gc->add_digit = TRUE;
+	gc->_priv->add_digit = TRUE;
 	push_input(gc);
 	set_result(gc);
 
@@ -685,7 +707,7 @@ add_digit(GtkWidget *w, gpointer data)
 	gchar *digit = but->name;
 	char *old_locale;
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	/*if the string is set, used for EE*/
@@ -695,48 +717,48 @@ add_digit(GtkWidget *w, gpointer data)
 	g_return_if_fail(gc!=NULL);
 	g_return_if_fail(digit!=NULL);
 
-	if(!gc->add_digit) {
-		if(gc->stack) {
-			CalculatorStack *stack=gc->stack->data;
+	if(!gc->_priv->add_digit) {
+		if(gc->_priv->stack) {
+			CalculatorStack *stack=gc->_priv->stack->data;
 			if(stack->type==CALCULATOR_NUMBER)
-				stack_pop(&gc->stack);
+				stack_pop(&gc->_priv->stack);
 		}
-		gc->add_digit = TRUE;
-		gc->result_string[0] = '\0';
+		gc->_priv->add_digit = TRUE;
+		gc->_priv->result_string[0] = '\0';
 	}
 
 	unselect_invert(gc);
 
 	if(digit[0]=='e') {
-		if(strchr(gc->result_string,'e'))
+		if(strchr(gc->_priv->result_string,'e'))
 			return;
-		else if(strlen(gc->result_string)>9)
+		else if(strlen(gc->_priv->result_string)>9)
 			return;
-		else if(gc->result_string[0]=='\0')
-			strcpy(gc->result_string," 1");
+		else if(gc->_priv->result_string[0]=='\0')
+			strcpy(gc->_priv->result_string," 1");
 	} else if(digit[0]=='.') {
-		if(strchr(gc->result_string,'.'))
+		if(strchr(gc->_priv->result_string,'.'))
 			return;
-		else if(strlen(gc->result_string)>10)
+		else if(strlen(gc->_priv->result_string)>10)
 			return;
-		else if(gc->result_string[0]=='\0')
-			strcpy(gc->result_string," 0");
+		else if(gc->_priv->result_string[0]=='\0')
+			strcpy(gc->_priv->result_string," 0");
 	} else { /*numeric*/
-		if(strlen(gc->result_string)>11)
+		if(strlen(gc->_priv->result_string)>11)
 			return;
-		else if (strcmp (gc->result_string, " 0") == 0 ||
-			 gc->result_string[0]=='\0')
-			strcpy(gc->result_string," ");
+		else if (strcmp (gc->_priv->result_string, " 0") == 0 ||
+			 gc->_priv->result_string[0]=='\0')
+			strcpy(gc->_priv->result_string," ");
 	}
 
-	strcat(gc->result_string,digit);
+	strcat(gc->_priv->result_string,digit);
 
-	gtk_widget_queue_draw (gc->display);
+	gtk_widget_queue_draw (gc->_priv->display);
 
         /* make sure get values in a consistent manner */
         old_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
         setlocale (LC_NUMERIC, "C");
-	sscanf(gc->result_string, "%lf", &gc->result);
+	sscanf(gc->_priv->result_string, "%lf", &gc->_priv->result);
         setlocale (LC_NUMERIC, old_locale);
 	g_free (old_locale);
 }
@@ -757,37 +779,37 @@ negate_val(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	unselect_invert(gc);
 
-	if(!gc->add_digit) {
+	if(!gc->_priv->add_digit) {
 		simple_func(w,data);
 		return;
 	}
 
-	if((p=strchr(gc->result_string,'e'))!=NULL) {
+	if((p=strchr(gc->_priv->result_string,'e'))!=NULL) {
 		p++;
 		if(*p=='-')
 			*p='+';
 		else
 			*p='-';
 	} else {
-		if(gc->result_string[0]=='-')
-			gc->result_string[0]=' ';
+		if(gc->_priv->result_string[0]=='-')
+			gc->_priv->result_string[0]=' ';
 		else
-			gc->result_string[0]='-';
+			gc->_priv->result_string[0]='-';
 	}
 
         /* make sure get values in a consistent manner */
         old_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
         setlocale (LC_NUMERIC, "C");
-	sscanf(gc->result_string, "%lf", &gc->result);
+	sscanf(gc->_priv->result_string, "%lf", &gc->_priv->result);
         setlocale (LC_NUMERIC, old_locale);
 	g_free (old_locale);
 
-	gtk_widget_queue_draw (gc->display);
+	gtk_widget_queue_draw (gc->_priv->display);
 }
 
 static gdouble
@@ -843,15 +865,15 @@ set_result_to(GnomeCalculator *gc, gdouble result)
 {
 	gdouble old;
 
-	if(gc->stack==NULL ||
-	   ((CalculatorStack *)gc->stack->data)->type!=CALCULATOR_NUMBER) {
-		gc->add_digit = TRUE;
-		old = gc->result;
-		gc->result = result;
+	if(gc->_priv->stack==NULL ||
+	   ((CalculatorStack *)gc->_priv->stack->data)->type!=CALCULATOR_NUMBER) {
+		gc->_priv->add_digit = TRUE;
+		old = gc->_priv->result;
+		gc->_priv->result = result;
 		push_input(gc);
 	} else {
-		old = ((CalculatorStack *)gc->stack->data)->d.number;
-		((CalculatorStack *)gc->stack->data)->d.number = result;
+		old = ((CalculatorStack *)gc->_priv->stack->data)->d.number;
+		((CalculatorStack *)gc->_priv->stack->data)->d.number = result;
 	}
 
 	set_result(gc);
@@ -882,14 +904,14 @@ store_m(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	push_input(gc);
 
-	gc->memory = gc->result;
+	gc->_priv->memory = gc->_priv->result;
 
-	gtk_widget_queue_draw (gc->display);
+	gtk_widget_queue_draw (gc->_priv->display);
 
 	unselect_invert(gc);
 }
@@ -901,10 +923,10 @@ recall_m(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
-	set_result_to(gc,gc->memory);
+	set_result_to(gc,gc->_priv->memory);
 
 	unselect_invert(gc);
 }
@@ -916,14 +938,14 @@ sum_m(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	push_input(gc);
 
-	gc->memory += gc->result;
+	gc->_priv->memory += gc->_priv->result;
 
-	gtk_widget_queue_draw (gc->display);
+	gtk_widget_queue_draw (gc->_priv->display);
 
 	unselect_invert(gc);
 }
@@ -935,10 +957,10 @@ exchange_m(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
-	gc->memory = set_result_to(gc,gc->memory);
+	gc->_priv->memory = set_result_to(gc,gc->_priv->memory);
 
 	unselect_invert(gc);
 }
@@ -950,13 +972,13 @@ invert_toggle(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	if(GTK_TOGGLE_BUTTON(w)->active)
-		gc->invert=TRUE;
+		gc->_priv->invert=TRUE;
 	else
-		gc->invert=FALSE;
+		gc->_priv->invert=FALSE;
 }
 
 static void
@@ -967,27 +989,27 @@ drg_toggle(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
-	oldmode = gc->mode;
+	oldmode = gc->_priv->mode;
 
-	if(gc->mode==GNOME_CALCULATOR_DEG)
-		gc->mode=GNOME_CALCULATOR_RAD;
-	else if(gc->mode==GNOME_CALCULATOR_RAD)
-		gc->mode=GNOME_CALCULATOR_GRAD;
+	if(gc->_priv->mode==GNOME_CALCULATOR_DEG)
+		gc->_priv->mode=GNOME_CALCULATOR_RAD;
+	else if(gc->_priv->mode==GNOME_CALCULATOR_RAD)
+		gc->_priv->mode=GNOME_CALCULATOR_GRAD;
 	else
-		gc->mode=GNOME_CALCULATOR_DEG;
+		gc->_priv->mode=GNOME_CALCULATOR_DEG;
 
 	setup_drg_label(gc);
 
 	/*convert if invert is on*/
-	if(gc->invert) {
+	if(gc->_priv->invert) {
 		CalculatorStack *stack;
 		push_input(gc);
-		stack = gc->stack->data;
+		stack = gc->_priv->stack->data;
 		stack->d.number = convert_num(stack->d.number,
-					      oldmode,gc->mode);
+					      oldmode,gc->_priv->mode);
 		set_result(gc);
 	}
 
@@ -1001,7 +1023,7 @@ set_pi(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	set_result_to(gc,M_PI);
@@ -1016,7 +1038,7 @@ set_e(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	set_result_to(gc,M_E);
@@ -1031,18 +1053,18 @@ add_parenth(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
-	if(gc->stack &&
-	   ((CalculatorStack *)gc->stack->data)->type==CALCULATOR_NUMBER)
-		((CalculatorStack *)gc->stack->data)->type =
+	if(gc->_priv->stack &&
+	   ((CalculatorStack *)gc->_priv->stack->data)->type==CALCULATOR_NUMBER)
+		((CalculatorStack *)gc->_priv->stack->data)->type =
 			CALCULATOR_PARENTHESIS;
 	else {
 		CalculatorStack *stack;
 		stack = g_new(CalculatorStack,1);
 		stack->type = CALCULATOR_PARENTHESIS;
-		gc->stack = g_list_prepend(gc->stack,stack);
+		gc->_priv->stack = g_list_prepend(gc->_priv->stack,stack);
 	}
 
 	unselect_invert(gc);
@@ -1054,23 +1076,23 @@ sub_parenth(GtkWidget *w, gpointer data)
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
 	g_return_if_fail(gc!=NULL);
 
-	if(gc->error)
+	if(gc->_priv->error)
 		return;
 
 	push_input(gc);
 	reduce_stack_prec(gc,NULL);
-	if(gc->error) return;
+	if(gc->_priv->error) return;
 	set_result(gc);
 
-	if(gc->stack) {
-		CalculatorStack *stack = gc->stack->data;
+	if(gc->_priv->stack) {
+		CalculatorStack *stack = gc->_priv->stack->data;
 		if(stack->type==CALCULATOR_PARENTHESIS)
-			stack_pop(&gc->stack);
-		else if(g_list_next(gc->stack)) {
-			stack = g_list_next(gc->stack)->data;
+			stack_pop(&gc->_priv->stack);
+		else if(g_list_next(gc->_priv->stack)) {
+			stack = g_list_next(gc->_priv->stack)->data;
 			if(stack->type==CALCULATOR_PARENTHESIS) {
-				GList *n = g_list_next(gc->stack);
-				gc->stack = g_list_remove_link(gc->stack,n);
+				GList *n = g_list_next(gc->_priv->stack);
+				gc->_priv->stack = g_list_remove_link(gc->_priv->stack,n);
 				g_list_free_1(n);
 			}
 		}
@@ -1200,8 +1222,8 @@ display_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 
 	calc = GNOME_CALCULATOR (data);
 
-	window = calc->display->window;
-	gc = calc->display->style->black_gc;
+	window = calc->_priv->display->window;
+	gc = calc->_priv->display->style->black_gc;
 
 	gdk_draw_rectangle (window, gc, TRUE, 0, 0, -1, -1);
 
@@ -1209,11 +1231,11 @@ display_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 	if (!calc_font)
 		return TRUE;
 
-	if (calc->memory != 0)
+	if (calc->_priv->memory != 0)
 		gdk_draw_pixmap (window, gc, calc_font,
 				 13 * FONT_WIDTH, 0, 0, 0, FONT_WIDTH, FONT_HEIGHT);
 
-	text = calc->result_string;
+	text = calc->_priv->result_string;
 	i = strlen (text) - 1;
 	for (x = 12; i >= 0; x--, i--) {
 		if (text[i] >= '0' && text[i] <= '9')
@@ -1263,16 +1285,16 @@ create_button(GnomeCalculator *gc, GtkWidget *table, int x, int y)
 
 	for(i=0;but->keys[i]!=0;i++) {
 		gtk_widget_add_accelerator(w, "clicked",
-					   gc->accel,
+					   gc->_priv->accel,
 					   but->keys[i], 0,
 					   GTK_ACCEL_VISIBLE);
 		gtk_widget_add_accelerator(w, "clicked",
-					   gc->accel,
+					   gc->_priv->accel,
 					   but->keys[i],
 					   GDK_SHIFT_MASK,
 					   GTK_ACCEL_VISIBLE);
 		gtk_widget_add_accelerator(w, "clicked",
-					   gc->accel,
+					   gc->_priv->accel,
 					   but->keys[i],
 					   GDK_LOCK_MASK,
 					   GTK_ACCEL_VISIBLE);
@@ -1287,7 +1309,7 @@ create_button(GnomeCalculator *gc, GtkWidget *table, int x, int y)
 
 	/* if this is the DRG button, remember it's pointer */
 	if(but->signal_func == drg_toggle)
-		gc->drg_button = w;
+		gc->_priv->drg_button = w;
 }
 
 static void
@@ -1296,32 +1318,34 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gint x,y;
 	GtkWidget *table;
 
+	gc->_priv = g_new0(GnomeCalculatorPrivate, 1);
+
 	ref_font ();
 
 	gtk_widget_push_visual (gdk_rgb_get_visual ());
 	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 
-	gc->display = gtk_drawing_area_new ();
-	gtk_drawing_area_size (GTK_DRAWING_AREA (gc->display), DISPLAY_LEN * FONT_WIDTH, FONT_HEIGHT);
+	gc->_priv->display = gtk_drawing_area_new ();
+	gtk_drawing_area_size (GTK_DRAWING_AREA (gc->_priv->display), DISPLAY_LEN * FONT_WIDTH, FONT_HEIGHT);
 
 	gtk_widget_pop_colormap ();
 	gtk_widget_pop_visual ();
 
-	gtk_signal_connect (GTK_OBJECT (gc->display), "expose_event",
+	gtk_signal_connect (GTK_OBJECT (gc->_priv->display), "expose_event",
 			    GTK_SIGNAL_FUNC (display_expose),
 			    gc);
 
-	gtk_box_pack_start (GTK_BOX (gc), gc->display, FALSE, FALSE, 0);
-	gtk_widget_show (gc->display);
+	gtk_box_pack_start (GTK_BOX (gc), gc->_priv->display, FALSE, FALSE, 0);
+	gtk_widget_show (gc->_priv->display);
 
-	gc->stack = NULL;
-	gc->result = 0;
-	strcpy(gc->result_string," 0");
-	gc->memory = 0;
-	gc->mode = GNOME_CALCULATOR_DEG;
-	gc->invert = FALSE;
-	gc->add_digit = TRUE;
-	gc->accel = gtk_accel_group_new();
+	gc->_priv->stack = NULL;
+	gc->_priv->result = 0;
+	strcpy(gc->_priv->result_string," 0");
+	gc->_priv->memory = 0;
+	gc->_priv->mode = GNOME_CALCULATOR_DEG;
+	gc->_priv->invert = FALSE;
+	gc->_priv->add_digit = TRUE;
+	gc->_priv->accel = gtk_accel_group_new();
 
 	table = gtk_table_new(8,5,TRUE);
 	gtk_widget_show(table);
@@ -1333,12 +1357,12 @@ gnome_calculator_init (GnomeCalculator *gc)
 			create_button(gc, table, x, y);
 		}
 	}
-	gc->invert_button = gtk_toggle_button_new_with_label(_("INV"));
-	gtk_signal_connect(GTK_OBJECT(gc->invert_button), "toggled",
+	gc->_priv->invert_button = gtk_toggle_button_new_with_label(_("INV"));
+	gtk_signal_connect(GTK_OBJECT(gc->_priv->invert_button), "toggled",
 			   GTK_SIGNAL_FUNC(invert_toggle), gc);
-	gtk_object_set_user_data(GTK_OBJECT(gc->invert_button), gc);
-	gtk_widget_show(gc->invert_button);
-	gtk_table_attach_defaults(GTK_TABLE(table), gc->invert_button,
+	gtk_object_set_user_data(GTK_OBJECT(gc->_priv->invert_button), gc);
+	gtk_widget_show(gc->_priv->invert_button);
+	gtk_table_attach_defaults(GTK_TABLE(table), gc->_priv->invert_button,
 				  0, 1, 1, 2);
 }
 
@@ -1372,10 +1396,13 @@ gnome_calculator_destroy (GtkObject *object)
 
 	gc = GNOME_CALCULATOR (object);
 
-	while(gc->stack)
-		stack_pop(&gc->stack);
+	while(gc->_priv->stack)
+		stack_pop(&gc->_priv->stack);
 
 	unref_font ();
+
+	g_free(gc->_priv);
+	gc->_priv = NULL;
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -1398,7 +1425,7 @@ gnome_calculator_get_result (GnomeCalculator *gc)
 	g_return_val_if_fail (gc, 0.0);
 	g_return_val_if_fail (GNOME_IS_CALCULATOR (gc), 0.0);
 
-	return gc->result;
+	return gc->_priv->result;
 }
 
 /**
@@ -1418,5 +1445,21 @@ gnome_calculator_get_accel_group(GnomeCalculator *gc)
 	g_return_val_if_fail (gc, NULL);
 	g_return_val_if_fail (GNOME_IS_CALCULATOR (gc), NULL);
 
-	return gc->accel;
+	return gc->_priv->accel;
+}
+/**
+ * gnome_calculator_get_result_string:
+ * @gc: Pointer to GNOME calculator widget
+ *
+ * Description:  Gets the internal string representation of the result.
+ *
+ * Returns:  Internal string pointer, do not free
+ **/
+const char *
+gnome_calculator_get_result_string(GnomeCalculator *gc)
+{
+	g_return_val_if_fail (gc, NULL);
+	g_return_val_if_fail (GNOME_IS_CALCULATOR (gc), NULL);
+
+	return gc->_priv->result_string;
 }
