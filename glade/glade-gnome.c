@@ -42,6 +42,16 @@ druidpagestandard_find_internal_child(GladeXML *xml, GtkWidget *parent,
 }
 
 static GtkWidget *
+dialog_find_internal_child(GladeXML *xml, GtkWidget *parent,
+			   const gchar *childname)
+{
+    if (!strcmp(childname, "vbox"))
+	return GNOME_DIALOG(parent)->vbox;
+    g_warning ("Internal '%s'", childname);
+    return NULL;
+}
+
+static GtkWidget *
 entry_find_internal_child(GladeXML *xml, GtkWidget *parent,
 			  const gchar *childname)
 {
@@ -81,6 +91,8 @@ static GladeWidgetBuildData widget_data[] = {
       gnome_color_picker_get_type },
     { "GnomeDateEdit", glade_standard_build_widget, NULL,
       gnome_date_edit_get_type },
+    { "GnomeDialog", glade_standard_build_widget, NULL,
+      gnome_dialog_get_type, 0, dialog_find_internal_child },
     { "GnomeDruid", glade_standard_build_widget, glade_standard_build_children,
       gnome_druid_get_type },
     { "GnomeDruidPage", glade_standard_build_widget, glade_standard_build_children,
