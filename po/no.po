@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-01-21 22:09+0100\n"
-"PO-Revision-Date: 2004-01-21 22:17+0100\n"
+"PO-Revision-Date: 2004-01-26 13:48+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -252,7 +252,7 @@ msgstr "Skriv ut aktiv fil"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Skriveropps_ett"
+msgstr "Skriveropps_ett..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -529,7 +529,7 @@ msgstr "FEIL: "
 
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr "Advarsel:"
+msgstr "Advarsel: "
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
@@ -873,7 +873,7 @@ msgstr "Tittel for filvelgerdialogen"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
-msgstr "Tittel for filvelgerdialogen"
+msgstr "Tittel for filvelgerdialogen."
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
@@ -968,7 +968,7 @@ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr "Velg en skrifttype"
+msgstr "Velg en skrift"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -980,19 +980,19 @@ msgstr "Modus"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr "Operasjonsmodus for skrifttypevelgeren"
+msgstr "Operasjonsmodus for skriftvelgeren"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr "Skrifttypenavn"
+msgstr "Navn på skrift"
 
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr "Navn på valgt skrifttype"
+msgstr "Navn på valgt skrift"
 
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr "Skrifttype"
+msgstr "Skrift"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
@@ -1008,11 +1008,11 @@ msgstr "Forhåndsvisningstekst vist i dialogen"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "Bruk skrifttype i etikett"
+msgstr "Bruk skrift i etikett"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Bruk skrifttype i etikett i infomodus for skrifttype"
+msgstr "Bruk skrift i etikett i infomodus for skrift"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1028,7 +1028,7 @@ msgstr "Vis størrelse"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "Vis størrelse i infomodus for skrifttype"
+msgstr "Vis størrelse i infomodus for skrift"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1223,7 +1223,7 @@ msgstr "Beskjed"
 
 #: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
-msgstr "Br_ukernavn"
+msgstr "Br_ukernavn:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
@@ -1231,7 +1231,7 @@ msgstr "_Domene:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
-msgstr "_Passord"
+msgstr "_Passord:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
