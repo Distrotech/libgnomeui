@@ -379,9 +379,8 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y, GtkJustification 
 			
 		default:
                                 /* Anyone care to implement GTK_JUSTIFY_FILL? */
-			g_warning ("Justification type %d not supported.  Using left-justif
-ication.",
-				   (int) just);
+		  g_warning ("Justification type %d not supported.  Using "
+			     "left-justification.", (int) just);
 			xpos = 0;
 		}
 

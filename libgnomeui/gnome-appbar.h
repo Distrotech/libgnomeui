@@ -53,7 +53,7 @@ struct _GnomeAppBar
      all up in the air for now. */
   GtkWidget * progress;
   GtkWidget * status;
-  gint interactive : 1; /* This means status is an entry rather than a
+  guint interactive : 1; /* This means status is an entry rather than a
 			   label, for the moment. */
   gint editable_start; /* The first editable position in the interactive
 			  buffer. */

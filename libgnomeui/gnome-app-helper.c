@@ -441,8 +441,10 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	uibdata.relay_func = NULL;
 	uibdata.destroy_func = NULL;
 
-	return gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata, accel_group, insert_shortcuts,
-					   indent_missing_pixmaps, pos);
+	gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata,
+				    accel_group, insert_shortcuts,
+				    indent_missing_pixmaps, pos);
+	return;
 }
 
 void

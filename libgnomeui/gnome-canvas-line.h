@@ -90,10 +90,10 @@ struct _GnomeCanvasLine {
 	GdkJoinStyle join;	/* Join style for line */
 	GdkLineStyle line_style;/* Style for the line */
 
-	int width_pixels : 1;	/* Is the width specified in pixels or units? */
-	int first_arrow : 1;	/* Draw first arrowhead? */
-	int last_arrow : 1;	/* Draw last arrowhead? */
-	int smooth : 1;		/* Smooth line (with parabolic splines)? */
+	guint width_pixels : 1;	/* Is the width specified in pixels or units? */
+	guint first_arrow : 1;	/* Draw first arrowhead? */
+	guint last_arrow : 1;	/* Draw last arrowhead? */
+	guint smooth : 1;	/* Smooth line (with parabolic splines)? */
 
 	double shape_a;		/* Distance from tip of arrowhead to center */
 	double shape_b;		/* Distance from tip of arrowhead to trailing point, measured along shaft */

@@ -314,10 +314,10 @@ struct _GnomeCanvas {
 	GdkColorContext *cc;			/* Color context used for color allocation */
 	GdkGC *pixmap_gc;			/* GC for temporary pixmap */
 
-	int need_redraw : 1;			/* Will redraw at next idle loop iteration */
-	int need_repick : 1;			/* Will repick current item at next idle loop iteration */
-	int left_grabbed_item : 1;		/* For use by the internal pick_event function */
-	int in_repick : 1;			/* For use by the internal pick_event function */
+	unsigned int need_redraw : 1;		/* Will redraw at next idle loop iteration */
+	unsigned int need_repick : 1;		/* Will repick current item at next idle loop iteration */
+	unsigned int left_grabbed_item : 1;	/* For use by the internal pick_event function */
+	unsigned int in_repick : 1;		/* For use by the internal pick_event function */
 };
 
 struct _GnomeCanvasClass {

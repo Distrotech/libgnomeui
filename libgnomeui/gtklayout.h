@@ -56,7 +56,7 @@ struct _GtkLayout {
   gint scroll_x;
   gint scroll_y;
 
-  gint frozen : 1;
+  guint frozen : 1;
 };
 
 struct _GtkLayoutClass {

@@ -89,7 +89,7 @@ struct _GnomeCanvasText {
 	int max_width;			/* Maximum width of text lines */
 	int height;			/* Rendered text height in pixels */
 
-	int clip : 1;			/* Use clip rectangle? */
+	guint clip : 1;			/* Use clip rectangle? */
 };
 
 struct _GnomeCanvasTextClass {

@@ -39,10 +39,10 @@ struct _GnomeCalculator {
 
 	GnomeCalculatorMode mode;
 
-	gint add_digit:1;	/*add a digit instead of starting a new
+	guint add_digit : 1;	/*add a digit instead of starting a new
 				  number*/
-	gint error:1;
-	gint invert:1;
+	guint error : 1;
+	guint invert : 1;
 	GtkWidget *invert_button;
 
 	GList *stack;

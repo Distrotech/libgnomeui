@@ -48,8 +48,8 @@ struct _GnomeColorPicker {
 
 	char *title;		/* Title for the color selection window */
 
-	int dither : 1;		/* Dither or just paint a solid color? */
-	int use_alpha : 1;	/* Use alpha or not */
+	guint dither : 1;	/* Dither or just paint a solid color? */
+	guint use_alpha : 1;	/* Use alpha or not */
 };
 
 struct _GnomeColorPickerClass {

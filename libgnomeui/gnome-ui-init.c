@@ -16,6 +16,10 @@
 
 #include <popt.h>
 
+#ifdef HAVE_ALLOCA_H
+#include <alloca.h>
+#endif
+
 #include "libgnome/libgnomeP.h"
 #include "gnome-preferences.h"
 #include "libgnomeui/gnome-client.h"

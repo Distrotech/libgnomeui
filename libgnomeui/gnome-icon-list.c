@@ -735,7 +735,8 @@ gnome_icon_list_insert_imlib (GnomeIconList *gil, int pos, GdkImlibImage *im, co
 	g_return_if_fail (IS_GIL (gil));
 
 	icon = icon_new_from_imlib (gil, im, text);
-	return icon_list_insert (gil, pos, icon);
+	icon_list_insert (gil, pos, icon);
+	return;
 }
 
 /**
@@ -758,7 +759,8 @@ gnome_icon_list_insert (GnomeIconList *gil, int pos, const char *icon_filename, 
 	g_return_if_fail (IS_GIL (gil));
 
 	icon = icon_new (gil, icon_filename, text);
-	return icon_list_insert (gil, pos, icon);
+	icon_list_insert (gil, pos, icon);
+	return;
 }
 
 /**

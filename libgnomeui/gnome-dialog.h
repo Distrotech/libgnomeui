@@ -48,8 +48,8 @@ struct _GnomeDialog
   GList *buttons;
   GtkAccelGroup * accelerators;
 
-  int click_closes : 1;
-  int just_hide : 1;
+  unsigned int click_closes : 1;
+  unsigned int just_hide : 1;
 
   GtkWindow * parent;
 };

@@ -74,9 +74,9 @@ struct _GnomeCanvasPolygon {
 	GdkGC *fill_gc;			/* GC for filling */
 	GdkGC *outline_gc;		/* GC for outline */
 
-	int fill_set : 1;		/* Is fill color set? */
-	int outline_set : 1;		/* Is outline color set? */
-	int width_pixels : 1;		/* Is outline width specified in pixels or units? */
+	guint fill_set : 1;		/* Is fill color set? */
+	guint outline_set : 1;		/* Is outline color set? */
+	guint width_pixels : 1;		/* Is outline width specified in pixels or units? */
 };
 
 struct _GnomeCanvasPolygonClass {

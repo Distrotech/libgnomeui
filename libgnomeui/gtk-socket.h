@@ -43,10 +43,10 @@ struct _GtkSocket
   guint16 current_height;
   
   GdkWindow *plug_window;
-  gint same_app : 1;
-  gint focus_in : 1;
-  gint have_size : 1;
-  gint need_map : 1;
+  guint same_app : 1;
+  guint focus_in : 1;
+  guint have_size : 1;
+  guint need_map : 1;
 };
 
 struct _GtkSocketClass

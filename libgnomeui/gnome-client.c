@@ -1376,15 +1376,15 @@ gnome_invoke_interact_function (GnomeInteractData *interactf)
 
       args[1].name = NULL;
       args[1].type = GTK_TYPE_OBJECT;
-      GTK_RETLOC_OBJECT(args[1]) = &interactf->client;
+      args[1].d.pointer_data = &interactf->client;
       
       args[2].name = NULL;
       args[2].type = GTK_TYPE_INT;
-      GTK_RETLOC_INT(args[2]) = &interactf->tag;
+      args[2].d.pointer_data = &interactf->tag;
 
       args[3].name = "GnomeDialogType";
       args[3].type = GTK_TYPE_ENUM;
-      GTK_RETLOC_ENUM(args[3]) = &interactf->dialog_type;
+      args[3].d.pointer_data = &interactf->dialog_type;
 
       ((GtkCallbackMarshal)interactf->function) (NULL,
 						 interactf->data,

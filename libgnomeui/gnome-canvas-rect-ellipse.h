@@ -58,9 +58,9 @@ struct _GnomeCanvasRE {
 	double x1, y1, x2, y2;		/* Corners of item */
 	double width;			/* Outline width */
 
-	int fill_set : 1;		/* Is fill color set? */
-	int outline_set : 1;		/* Is outline color set? */
-	int width_pixels : 1;		/* Is outline width specified in pixels or units? */
+	unsigned int fill_set : 1;	/* Is fill color set? */
+	unsigned int outline_set : 1;	/* Is outline color set? */
+	unsigned int width_pixels : 1;	/* Is outline width specified in pixels or units? */
 
 	gulong fill_pixel;		/* Fill color */
 	gulong outline_pixel;		/* Outline color */

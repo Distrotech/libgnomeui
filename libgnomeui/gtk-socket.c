@@ -242,7 +242,7 @@ gtk_socket_unrealize (GtkWidget *widget)
     }
 
   if (GTK_WIDGET_CLASS (parent_class)->unrealize)
-    return (* GTK_WIDGET_CLASS (parent_class)->unrealize) (widget);
+    (* GTK_WIDGET_CLASS (parent_class)->unrealize) (widget);
 }
   
 static void 

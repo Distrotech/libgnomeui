@@ -53,7 +53,7 @@ struct _GnomeGuru {
   GtkWidget * page_box;
   GtkWidget * buttonbox;
 
-  int has_dialog : 1;
+  guint has_dialog : 1;
 };
 
 struct _GnomeGuruClass {
