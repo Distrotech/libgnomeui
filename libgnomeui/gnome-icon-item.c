@@ -525,7 +525,7 @@ iti_idx_from_x_y (Iti *iti, int x, int y)
 	row = g_list_nth (iti->ti->rows, line)->data;
 	col = 0;
 	if (row != NULL){
-		int first_char = (iti->width - row->width)/2;
+		int first_char = ((iti->canvas_item.x2 - iti->canvas_item.x1) - row->width)/2;
 		int last_char  = first_char + row->width;
 		
 		if (x < first_char){
@@ -573,6 +573,7 @@ iti_start_selecting (Iti *iti, int idx, guint32 event_time)
 	gtk_editable_select_region (e, idx, idx);
 	e->current_pos = e->selection_start_pos;
 	e->has_selection = TRUE;
+	iti->selecting = TRUE;
 
 	iti_queue_redraw (iti);
 }
@@ -590,6 +591,7 @@ iti_stop_selecting (Iti *iti, guint32 event_time)
 
 	gnome_canvas_item_ungrab (item, event_time);
 	e->has_selection = FALSE;
+	iti->selecting = FALSE;
 
 	iti_queue_redraw (iti);
 }
@@ -646,14 +648,14 @@ iti_event (GnomeCanvasItem *item, GdkEvent *event)
 		if (!iti->is_editable)
 			return FALSE;
 
-		if (!iti->selected)
+		if (!iti->selected) {
+			iti->unselected_click = TRUE;
 			return FALSE;
-		
-		if (!iti->editing){
-			gnome_canvas_item_grab_focus (item);
-			iti_start_editing (iti);
-			iti_queue_redraw (iti);
 		} else {
+			iti->unselected_click = FALSE;
+		}
+		
+		if (iti->editing){
 			x = event->button.x - item->x1;
 			y = event->button.y - item->y1;
 			idx = iti_idx_from_x_y (iti, x, y);
@@ -669,7 +671,7 @@ iti_event (GnomeCanvasItem *item, GdkEvent *event)
 		if (!iti->entry)
 			return FALSE;
 
-		if (!GTK_EDITABLE (iti->entry)->has_selection)
+		if (!iti->selecting)
 			return FALSE;
 
 		x = event->motion.x - item->x1;
@@ -682,10 +684,17 @@ iti_event (GnomeCanvasItem *item, GdkEvent *event)
 		if (!iti->is_editable)
 			return FALSE;
 
-		if (!iti->entry)
-			return FALSE;
-				      
-		iti_stop_selecting (iti, event->button.time);
+		if (!iti->entry) {
+			if (iti->unselected_click || iti->editing)
+				return FALSE;
+
+			gnome_canvas_item_grab_focus (item);
+			iti_start_editing (iti);
+			iti_queue_redraw (iti);
+		} else {
+			iti_stop_selecting (iti, event->button.time);
+		}
+
 		break;
 		
 	case GDK_FOCUS_CHANGE:
@@ -900,6 +909,19 @@ gnome_icon_text_item_get_text (GnomeIconTextItem *iti)
 		return gtk_entry_get_text (iti->entry);
 	else
 		return iti->text;
+}
+
+void
+gnome_icon_text_item_stop_editing (GnomeIconTextItem *iti,
+				   gboolean accept)
+{
+	g_return_if_fail (iti != NULL);
+	g_return_if_fail (IS_ITI (iti));
+
+	if (accept)
+		iti_edition_accept (iti);
+	else
+		iti_stop_editing (iti);
 }
 
 GtkType

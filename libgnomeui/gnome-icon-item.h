@@ -28,6 +28,10 @@ typedef struct {
 	/* Flags */
 	unsigned int editing:1; /* true if it is being edited */
 	unsigned int selected:1;/* true if it should be displayed as selected */
+        /* true if current click is on unselected icon */
+	unsigned int unselected_click:1;
+        /* true if current selecting text with mouse */
+	unsigned int selecting:1;
 
 	/* Hack: create an offscreen window, and place the entry there */
 	GtkEntry  *entry;
@@ -53,20 +57,22 @@ typedef struct {
 	void (* editing_stopped)  (GnomeIconTextItem *iti);
 } GnomeIconTextItemClass;
 
-GtkType  gnome_icon_text_item_get_type  (void);
-void     gnome_icon_text_item_configure (GnomeIconTextItem *iti,
-					 int         x,
-					 int         y,
-					 int         width,
-					 const char *fontname,
-					 const char *text,
-					 gboolean is_editable);
-void     gnome_icon_text_item_setxy     (GnomeIconTextItem *iti,
-					 int      x,
-					 int      y);
-void     gnome_icon_text_item_select    (GnomeIconTextItem *iti,
-					 int      sel);
-char    *gnome_icon_text_item_get_text  (GnomeIconTextItem *iti);
+GtkType  gnome_icon_text_item_get_type     (void);
+void     gnome_icon_text_item_configure    (GnomeIconTextItem *iti,
+					    int         x,
+					    int         y,
+					    int         width,
+					    const char *fontname,
+					    const char *text,
+					    gboolean is_editable);
+void     gnome_icon_text_item_setxy        (GnomeIconTextItem *iti,
+					    int      x,
+					    int      y);
+void     gnome_icon_text_item_select       (GnomeIconTextItem *iti,
+					    int      sel);
+char    *gnome_icon_text_item_get_text     (GnomeIconTextItem *iti);
+void     gnome_icon_text_item_stop_editing (GnomeIconTextItem *iti,
+					    gboolean accept);
 
 
 END_GNOME_DECLS

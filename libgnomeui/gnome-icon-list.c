@@ -638,7 +638,7 @@ icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 	gtk_signal_connect (
 		GTK_OBJECT (icon->image), "event",
 		GTK_SIGNAL_FUNC (image_event), icon);
-	gtk_signal_connect (
+	gtk_signal_connect_after (
 		GTK_OBJECT (icon->text) , "event",
 		GTK_SIGNAL_FUNC (text_event), icon);
 	gtk_signal_connect (
