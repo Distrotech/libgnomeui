@@ -1,3 +1,8 @@
+1999-01-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (create_menu_item): Crude special case for
+	this. 
+
 1999-01-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-app-helper.c, gnome-app-helper.h: New approach.  We now

@@ -743,8 +743,14 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	/* Translate configurable menu items to normal menu items. */
 
 	if (uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE){
+		int type = uiinfo->accelerator_key;
+		
 	        gnome_app_ui_configure_configurable( uiinfo );
-		use_gnome_libs_catalog = 1;
+
+		if (type == GNOME_APP_CONFIGURABLE_ITEM_NEW)
+			use_gnome_libs_catalog = 0;
+		else
+			use_gnome_libs_catalog = 1;
 	} else
 		use_gnome_libs_catalog = 0;
 
