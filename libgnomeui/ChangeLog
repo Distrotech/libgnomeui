@@ -1,5 +1,9 @@
 1998-06-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-app.c (make_button_toolbar): i18n strings marked;  Added
+	code that still does not work for configuring toolbar settings (we
+	should configure pictures/text-pictures/text-only/tooltips).
+
 	* gnome-client.c (gnome_client_new_default): Until someone
 	documents what is the procedure to use the new client stuff, I am
 	removing this warning, as it apparently does the right thing.
