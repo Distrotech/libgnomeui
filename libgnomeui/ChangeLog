@@ -1,3 +1,8 @@
+Thu Jul  2 14:12:14 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock*: new icons by tigert.
+	stock_demo.c: added search-replace sample icons
+
 1998-07-02  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c: the child-specific menu callbacks no longer
