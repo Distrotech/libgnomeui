@@ -44,15 +44,12 @@ libgnomeui_2_la_SOURCES = \
 	gnome-app.c			\
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
-	gnome-app-util.c		\
 	gnome-canvas-init.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
 	gnome-cursors.c			\
 	gnome-dateedit.c		\
 	gnome-ditem-edit.c		\
-	gnome-dialog.c                  \
-	gnome-dialog-util.c		\
 	gnome-dock.c			\
 	gnome-dock-band.c		\
 	gnome-dock-item.c		\
@@ -79,16 +76,13 @@ libgnomeui_2_la_SOURCES = \
 	gnome-mdi-child.c		\
 	gnome-mdi-generic-child.c       \
 	gnome-mdi-session.c		\
-	gnome-messagebox.c		\
 	gnome-pixmap.c			\
 	gnome-popup-menu.c		\
 	gnome-popup-help.c		\
 	gnome-pouch.c			\
 	gnome-pouchP.h			\
 	gnome-preferences.c		\
-	gnome-propertybox.c		\
 	gnome-roo.c			\
-	gnome-scores.c			\
 	gnome-stock.c			\
 	gnome-stock-ids.c		\
         gnome-winhints.c		\
@@ -115,15 +109,12 @@ gnome_headers = \
 	gnome-app.h			\
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
-	gnome-app-util.h		\
 	gnome-canvas-init.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-cursors.h			\
 	gnome-dateedit.h		\
 	gnome-ditem-edit.h		\
-	gnome-dialog.h                  \
-	gnome-dialog-util.h		\
 	gnome-dock.h			\
 	gnome-dock-band.h		\
 	gnome-dock-item.h		\
@@ -148,7 +139,6 @@ gnome_headers = \
 	gnome-init.h			\
 	gnome-less.h			\
 	gnome-macros.h			\
-	gnome-messagebox.h		\
 	gnome-mdi.h			\
 	gnome-mdi-child.h		\
 	gnome-mdi-generic-child.h	\
@@ -158,10 +148,8 @@ gnome_headers = \
 	gnome-pouch.h			\
         gnome-paper-selector.h		\
 	gnome-preferences.h		\
-	gnome-propertybox.h		\
 	gnome-pixmap.h			\
 	gnome-roo.h			\
-	gnome-scores.h			\
 	gnome-selector.h		\
 	gnome-stock.h			\
 	gnome-stock-ids.h		\
