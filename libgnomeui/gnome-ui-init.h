@@ -3,7 +3,7 @@
 
 BEGIN_GNOME_DECLS
 
-#include <popt.h>
+#include "libgnome/gnome-popt.h"
 
 /* After these functions return, gnome is initialized and you can do
    whatever you like. */

@@ -15,13 +15,12 @@
 #include <gtk/gtk.h>
 #include <gdk_imlib.h>
 
-#include <popt.h>
-
 #ifdef HAVE_ALLOCA_H
 #include <alloca.h>
 #endif
 
 #include "libgnome/libgnomeP.h"
+#include "libgnome/gnome-popt.h"
 #include "gnome-preferences.h"
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-init.h"
