@@ -1,3 +1,8 @@
+1999-07-09  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-font-picker.c (gnome_font_picker_label_use_font_in_label):
+	Add fallback mechanism for the case where the font is not defined.
+
 Fri Jul 09 06:57:07 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.c: add inline docs

@@ -794,6 +794,8 @@ void gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
 
     /* Load font */
     font=gdk_font_load(pStr);
+    if (!font)
+	    font = gdk_font_load ("fixed");
 
     /* Change label style */
     gtk_widget_ensure_style(gfp->font_label);
