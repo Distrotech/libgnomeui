@@ -1,3 +1,8 @@
+Fri Jul 14 05:39:40 2000  George Lebl <jirka@5z.com>
+
+	* gnome-messagebox.c: handle a case where no buttons were added.
+	  This makes gnome_segv work again, woohoo!
+
 Fri Jul 14 05:33:16 2000  George Lebl <jirka@5z.com>
 
 	* gnome-about.c, gnome-animator.c, gnome-animator.h, gnome-app.c,

@@ -252,8 +252,9 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 		};
 	}
 
-	gtk_widget_grab_focus(
-		g_list_last (GNOME_DIALOG (messagebox)->buttons)->data);
+	if(GNOME_DIALOG(messagebox)->buttons)
+		gtk_widget_grab_focus(
+			g_list_last (GNOME_DIALOG (messagebox)->buttons)->data);
 	
 	gnome_dialog_set_close (GNOME_DIALOG (messagebox),
 				TRUE );
