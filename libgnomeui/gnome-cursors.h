@@ -62,20 +62,21 @@ GdkCursor *gnome_stock_cursor_new         (const char *cursorname);
  * tnen destroy it with gdk_cursor_destroy()
  */
 
-#define GNOME_STOCK_CURSOR_DEFAULT "default-arrow"
-#define GNOME_STOCK_CURSOR_BLANK "blank"
-#define GNOME_STOCK_CURSOR_HAND_OPEN "hand-open"
-#define GNOME_STOCK_CURSOR_HAND_CLOSE "hand-close"
-#define GNOME_STOCK_CURSOR_ZOOM_IN "zoom-in"
-#define GNOME_STOCK_CURSOR_ZOOM_OUT "zoom-out"
-#define GNOME_STOCK_CURSOR_EGG_1 "egg-timer-1"
-#define GNOME_STOCK_CURSOR_POINTING_HAND "pointing-hand"
+#define GNOME_STOCK_CURSOR_DEFAULT "gnome-default-arrow"
+#define GNOME_STOCK_CURSOR_BLANK "gnome-blank"
+#define GNOME_STOCK_CURSOR_HAND_OPEN "gnome-hand-open"
+#define GNOME_STOCK_CURSOR_HAND_CLOSE "gnome-hand-close"
+#define GNOME_STOCK_CURSOR_ZOOM_IN "gnome-zoom-in"
+#define GNOME_STOCK_CURSOR_ZOOM_OUT "gnome-zoom-out"
+#define GNOME_STOCK_CURSOR_EGG_1 "gnome-egg-timer-1"
+#define GNOME_STOCK_CURSOR_POINTING_HAND "gnome-pointing-hand"
 #define GNOME_STOCK_CURSOR_HORIZONTAL "gnome-horizontal-arrow"
 #define GNOME_STOCK_CURSOR_VERTICAL "gnome-vertical-arrow"
-#define GNOME_STOCK_CURSOR_NE_SW "gnome-northeast-southwest-arrow"
-#define GNOME_STOCK_CURSOR_NW_SE "gnome-northwest-southeast-arrow"
+#define GNOME_STOCK_CURSOR_NE_SW "gnome-northeast-southwest"
+#define GNOME_STOCK_CURSOR_NW_SE "gnome-northwest-southeast"
 #define GNOME_STOCK_CURSOR_FLEUR "gnome-fleur"
-#define GNOME_STOCK_CURSOR_CORNERS "gnome-corners-arrow"
+#define GNOME_STOCK_CURSOR_CORNERS "gnome-corner-arrow"
 #define GNOME_STOCK_CURSOR_WHATISIT "gnome-what-is-it"
+#define GNOME_STOCK_CURSOR_XTERM "gnome-xterm"
 
 #endif /* GNOME_CURSORS_H */
