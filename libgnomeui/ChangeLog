@@ -1,3 +1,9 @@
+1998-08-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-app.c (gnome_app_rightclick_menubar,
+	gnome_app_rightclick_toolbar):  Make the handleboxes reparent on
+	double click.
+	
 Mon Aug 24 07:53:53 1998  Tim Janik  <timj@gtk.org>
 
 	* gnome-canvas.c (gnome_canvas_item_construct): added a
