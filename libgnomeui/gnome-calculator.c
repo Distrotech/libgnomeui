@@ -341,8 +341,8 @@ set_result(GnomeCalculator *gc)
 	gc->result = stack->d.number;
 
 	for(i=12;i>0;i--) {
-		g_snprintf(format,20,"%c .%dlg",'%',i);
-		g_snprintf(buf,80,format,gc->result);
+		g_snprintf(format, sizeof(format), "%c .%dlg", '%', i);
+		g_snprintf(buf, sizeof(buf), format, gc->result);
 		if(strlen(buf)<=12)
 			break;
 	}

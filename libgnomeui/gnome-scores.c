@@ -98,7 +98,7 @@ gnome_scores_new (  guint n_scores,
 		gtk_widget_show ( gs->label_names[i] );
 		gtk_table_attach_defaults ( table, gs->label_names[i], 0, 1, i+1, i+2);
 
-		g_snprintf(tmp,10,"%5.2f", scores[i]);
+		g_snprintf(tmp,sizeof(tmp),"%5.2f", scores[i]);
 		gs->label_scores[i] = gtk_label_new ( tmp );
 		gtk_widget_show ( gs->label_scores[i] );
 		gtk_table_attach_defaults ( table, gs->label_scores[i], 1, 2, i+1, i+2);

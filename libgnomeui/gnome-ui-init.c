@@ -350,7 +350,7 @@ gnome_rc_parse (gchar *command)
 		buf = g_strdup (command);
 	
 	apprc = g_malloc (strlen(buf) + 3);
-	sprintf(apprc, "%src", buf);
+	g_snprintf(apprc, strlen(buf) + 3, "%src", buf);
 	
 	g_free(buf);
 	
@@ -435,7 +435,7 @@ static void gnome_segv_handle(int signum)
 		}
 	} else {
 		char buf[32];
-		snprintf(buf, sizeof(buf), "%ld", eip);
+		g_snprintf(buf, sizeof(buf), "%ld", eip);
 		/* Child process */
 		execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
 		      program_invocation_name, buf, NULL);

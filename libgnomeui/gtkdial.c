@@ -721,8 +721,8 @@ gtk_dial_paint (GtkDial *dial)
 
      t_x = xc + c * dial->radius;
      t_y = yc - s * dial->radius;
-     snprintf (buf, sizeof(buf), "%3.0f%%", 
-	       (dial->percentage * 100.0));
+     g_snprintf (buf, sizeof(buf), "%3.0f%%", 
+	         (dial->percentage * 100.0));
 
      i = gdk_string_width (widget->style->font, buf) / 2;
      gdk_draw_string (dial->offscreen_pixmap,

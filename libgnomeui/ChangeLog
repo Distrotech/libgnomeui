@@ -1,3 +1,15 @@
+1998-11-27  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-calculator.c, gnome-client.c, gnome-dateedit.c,
+	gnome-entry.c, gnome-font-picker.c, gnome-font-selector.c,
+	gnome-geometry.c, gnome-init.c, gnome-mdi-session.c,
+	gnome-scores.c, gnome-stock.c, gtk-ted.c,
+	gtkdial.c, gtkspell.c, stock_demo.c, ted_demo.c,
+	winhints_demo.c:
+
+        Replaced sprintf calls with g_snprintf.
+        Updated a couple hardcoded length values to instead of sizeof().
+
 Thu Nov 26 21:20:10 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap-entry.c: added inline docs

@@ -332,7 +332,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	g_free (prefix);
 
 	for (n = 0; ; n++) {
-		sprintf (key, "%d", n);
+		g_snprintf (key, sizeof(key), "%d", n);
 		value = gnome_config_get_string (key);
 		if (!value)
 			break;
@@ -379,7 +379,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 		item = items->data;
 
 		if (item->save) {
-			sprintf (key, "%d", n++);
+			g_snprintf (key, sizeof(key), "%d", n++);
 			gnome_config_set_string (key, item->text);
 		}
 	}

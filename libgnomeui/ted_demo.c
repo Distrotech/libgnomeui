@@ -21,7 +21,7 @@ xrandom_widgets (GtkTed *t)
 	for (i = 0; i < 4; i++){
 		char buf [40];
 
-		sprintf (buf, "Button-%d", i);
+		g_snprintf (buf, sizeof(buf), "Button-%d", i);
 		l = gtk_button_new_with_label (buf);
 		gtk_widget_show (l);
 		gtk_ted_add (t, l, buf);

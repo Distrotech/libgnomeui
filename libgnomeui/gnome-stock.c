@@ -1140,7 +1140,7 @@ gnome_stock_pixmap_widget_at_size(GtkWidget *window, const char *icon,
 	char name[512];
 
 	g_return_val_if_fail(icon != NULL, NULL);
-	g_snprintf(name, 511, "%s%ux%u", icon, width, height);
+	g_snprintf(name, sizeof(name), "%s%ux%u", icon, width, height);
 	entry = lookup(name, GNOME_STOCK_PIXMAP_REGULAR, 0);
 	if (entry)
 		return gnome_stock_new_with_icon(name);
@@ -1323,7 +1323,7 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 			entry->any.height = req.height;
 			entry->any.label = NULL;
 			entry->gpixmap.pixmap = GNOME_PIXMAP(pixmap);
-			g_snprintf(s, 32, "%lx", (long)pixmap);
+			g_snprintf(s, sizeof(s), "%lx", (long)pixmap);
 			gnome_stock_pixmap_register(s, GNOME_STOCK_PIXMAP_REGULAR, entry);
 			pixmap = gnome_stock_pixmap_widget(button, s);
 		}

@@ -651,7 +651,7 @@ text_size_key_function (GtkWidget   *w,
       old_value = atoi (gtk_entry_get_text (GTK_ENTRY (text_tool->size_text)));
       if (!text_load_font (text_tool))
 	{
-	  sprintf (buffer, "%d", old_value);
+	  g_snprintf (buffer, sizeof(buffer), "%d", old_value);
 	  gtk_entry_set_text (GTK_ENTRY (text_tool->size_text), buffer);
 	}
       return TRUE;
@@ -1167,12 +1167,12 @@ text_get_xlfd (double  size,
       switch (size_type)
 	{
 	case PIXELS:
-	  sprintf (pixel_size, "%d", (int) size);
-	  sprintf (point_size, "*");
+	  g_snprintf (pixel_size, sizeof(pixel_size), "%d", (int) size);
+	  g_snprintf (point_size, sizeof(point_size), "*");
 	  break;
 	case POINTS:
-	  sprintf (pixel_size, "*");
-	  sprintf (point_size, "%d", (int) (size * 10));
+	  g_snprintf (pixel_size, sizeof(pixel_size), "*");
+	  g_snprintf (point_size, sizeof(point_size), "%d", (int) (size * 10));
 	  break;
 	}
 
@@ -1461,7 +1461,7 @@ gchar *gnome_font_select_with_default(const gchar *default_font)
 	
 	text_tool->size_type = old_value;
 	
-	sprintf (buffer, "%d", old_size);
+	g_snprintf (buffer, sizeof(buffer), "%d", old_size);
 	gtk_entry_set_text (GTK_ENTRY (text_tool->size_text), buffer);
       }
     }

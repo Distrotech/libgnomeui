@@ -243,7 +243,7 @@ gtk_spell_ask(gchar* word) {
 	GtkWidget* button;
 	gchar buf[1024];
 
-	sprintf(buf, "The word `%s'\nis not in the dictionary.\nProceed anyway?", word);
+	g_snprintf(buf, sizeof(buf), "The word `%s'\nis not in the dictionary.\nProceed anyway?", word);
 
 	if ( !ask_dialog ) {
 		ask_dialog = gtk_dialog_new();
@@ -281,7 +281,7 @@ gtk_spell_check_replace(GtkSpell* spell, gchar* word) {
 	gint found = 1;
 
 	buf = alloca(strlen(word)+3);
-	sprintf(buf, "^%s\n", word);
+	g_snprintf(buf, strlen(word) + 3, "^%s\n", word);
 	gtk_spell_send_string(spell, buf);
 	while ( (result=gtk_spell_read_string(spell)) && strcmp(result, "\n") ) {
 		found = 0;
@@ -937,7 +937,7 @@ gtk_spell_check(GtkSpell* spell, gchar* str) {
 
 	buf = alloca(strlen(str)+3);
 	/* check "\n" */
-	sprintf(buf, "^%s\n", str);
+	g_snprintf(buf, strlen(str) + 3, "^%s\n", str);
 	result = strchr(buf, '\n');
 	++result;
 	*result = 0;
@@ -1006,7 +1006,7 @@ gtk_spell_accept(GtkSpell *spell, gchar* word) {
 		g_warning("`%s' not a valid word for ispell", word);
 		return;
 	}
-	sprintf(buf, "@%s\n", word);
+	g_snprintf(buf, strlen(word) + 3, "@%s\n", word);
 	/* mettere in awords */
 	spell->awords = g_slist_prepend(spell->awords, g_strdup(word));
 	gtk_spell_send_string(spell, buf);
@@ -1035,7 +1035,7 @@ gtk_spell_insert(GtkSpell* spell, gchar* word, gint lowercase) {
 	}
 	/*  if ispell dies in a bad way it dosen't save the dictionary.
 		save it at every update? (append "#\n" to the string below) */
-	sprintf(buf, "*%s\n", w);
+	g_snprintf(buf, strlen(word) + 3, "*%s\n", w);
 	gtk_spell_send_string(spell, buf);
 }
 

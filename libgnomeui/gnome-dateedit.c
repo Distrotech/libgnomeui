@@ -73,7 +73,7 @@ day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 
 	gtk_calendar_get_date (calendar, &year, &month, &day);
 
-	g_snprintf (buffer, 40, "%d/%d/%d", month + 1, day, year); /* FIXME: internationalize this - strftime()*/
+	g_snprintf (buffer, sizeof(buffer), "%d/%d/%d", month + 1, day, year); /* FIXME: internationalize this - strftime()*/
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
 }
@@ -341,7 +341,10 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	mytm = localtime (&the_time);
 
 	/* Set the date */
-	sprintf (buffer, "%d/%d/%d", mytm->tm_mon + 1, mytm->tm_mday, 1900 + mytm->tm_year);
+	g_snprintf (buffer, sizeof(buffer), "%d/%d/%d",
+		    mytm->tm_mon + 1,
+		    mytm->tm_mday,
+		    1900 + mytm->tm_year);
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 
 	if (gde->time_entry) {

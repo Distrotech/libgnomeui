@@ -354,7 +354,7 @@ GList *get_workspaces()
     {
       item = gtk_list_item_new_with_label(ptr->data);
       gtk_widget_show(item);
-      sprintf(tmpbuf, "%d", i++);
+      g_snprintf(tmpbuf, sizeof(tmpbuf), "%d", i++);
       gtk_object_set_data(GTK_OBJECT(item), "ws", g_strdup(tmpbuf));
       tmp_list2 = g_list_append(tmp_list2, item);
       ptr = ptr->next;

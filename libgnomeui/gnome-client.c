@@ -1000,7 +1000,7 @@ gnome_client_set_process_id (GnomeClient *client, pid_t pid)
 
   client->process_id = pid;
   
-  sprintf (str_pid, "%d", client->process_id);
+  g_snprintf (str_pid, sizeof(str_pid), "%d", client->process_id);
 #ifdef HAVE_LIBSM
   client_set_prop_from_string (client, SmProcessID, str_pid);
 #endif /* HAVE_LIBSM */
@@ -1494,7 +1494,7 @@ gnome_real_client_connect (GnomeClient *client,
   {
     gchar str_pid[32];
     
-    sprintf (str_pid, "%d", client->process_id);
+    g_snprintf (str_pid, sizeof(str_pid), "%d", client->process_id);
     client_set_prop_from_string (client, SmProcessID, str_pid);
   }
   client_set_prop_from_string (client, SmProgram,

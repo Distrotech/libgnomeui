@@ -388,7 +388,7 @@ gtk_ted_add_control_col_at (GtkTed *t, int col)
 	GtkWidget *l;
 	char buf [40];
 
-	sprintf (buf, "%d", col);
+	g_snprintf (buf, sizeof(buf), "%d", col);
 	l = gtk_label_new (buf);
 	gtk_table_attach (GTK_TABLE (t), l,
 			  MAP_WIDGET_COL (col), MAP_WIDGET_COL (col)+1,
@@ -403,7 +403,7 @@ gtk_ted_add_control_row_at (GtkTed *t, int row)
 	GtkWidget *l;
 	char buf [40];
 
-	sprintf (buf, "%d", row);
+	g_snprintf (buf, sizeof(buf), "%d", row);
 	l = gtk_label_new (buf);
 	gtk_table_attach (GTK_TABLE (t), l,
 			  0, 1,
@@ -571,7 +571,7 @@ gtk_ted_add_frame (GtkWidget *widget, GtkTed *ted)
 	gtk_widget_show (f);
 	gtk_container_add (GTK_CONTAINER (e), f);
 
-	sprintf (my_name, "Frame-%d", frame_count++);
+	g_snprintf (my_name, sizeof(my_name), "Frame-%d", frame_count++);
 	wi = gtk_ted_widget_info_new (e, my_name, 0, 0);
 	wi->type = frame_widget;
 	gtk_object_set_data (GTK_OBJECT (e), "ted_widget_info", wi);
@@ -597,7 +597,7 @@ gtk_ted_add_label (GtkWidget *widget, GtkTed *ted)
 	gtk_widget_show (f);
 	gtk_container_add (GTK_CONTAINER (e), f);
 
-	sprintf (my_name, "Label-%d", label_count++);
+	g_snprintf (my_name, sizeof(my_name), "Label-%d", label_count++);
 	wi = gtk_ted_widget_info_new (e, my_name, 0, 0);
 	g_hash_table_insert (ted->widgets, wi->name, wi);
 	wi->type = label_widget;
@@ -619,7 +619,7 @@ gtk_ted_add_separator (GtkWidget *widget, GtkTed *ted)
 	gtk_widget_show (s);
 	gtk_container_add (GTK_CONTAINER (e), s);
 
-	sprintf (my_name, "Separator-%d", sep_count++);
+	g_snprintf (my_name, sizeof(my_name), "Separator-%d", sep_count++);
 	wi = gtk_ted_widget_info_new (e, my_name, 0, 0);
 	g_hash_table_insert (ted->widgets, wi->name, wi);
 	wi->type = sep_widget;
@@ -730,7 +730,9 @@ gtk_ted_save (GtkWidget *widget, GtkTed *ted)
 
 		key = g_copy_strings ("=", filename, "=/", ted->dialog_name, "-", kind, "-", wi->name, "/", NULL);
 		gnome_config_push_prefix (key);
-		sprintf (buffer, "%d,%d,%d,%d", wi->start_col, wi->start_row, wi->col_span, wi->row_span);
+		g_snprintf (buffer, sizeof(buffer), "%d,%d,%d,%d",
+			    wi->start_col, wi->start_row,
+			    wi->col_span, wi->row_span);
 		gnome_config_set_string ("geometry", buffer);
 #if 0
 		gnome_config_set_string ("flags_x", gtk_ted_render_flags (wi->flags_x, wi->lcr));
@@ -991,9 +993,9 @@ gtk_ted_update_position (struct ted_widget_info *wi)
 		gtk_ted_attach (ted, wi->widget, wi);
 		gtk_widget_unref (wi->widget);
 
-		sprintf (buf, "%d", wi->col_span);
+		g_snprintf (buf, sizeof(buf), "%d", wi->col_span);
 		gtk_label_set (GTK_LABEL (wi->label_span_x), buf);
-		sprintf (buf, "%d", wi->row_span);
+		g_snprintf (buf, sizeof(buf), "%d", wi->row_span);
 		gtk_label_set (GTK_LABEL (wi->label_span_y), buf);
 	}
 }
@@ -1153,7 +1155,7 @@ gtk_ted_span_control (char *str, struct ted_widget_info *wi, int is_y)
 	gtk_widget_show (more);
 	gtk_box_pack_end_defaults (GTK_BOX (hbox), more);
 
-	sprintf (buf, "%d", is_y ? wi->row_span : wi->col_span);
+	g_snprintf (buf, sizeof(buf), "%d", is_y ? wi->row_span : wi->col_span);
 	label = gtk_label_new (buf);
 	gtk_box_pack_end_defaults (GTK_BOX (hbox), label);
 	gtk_widget_show (label);

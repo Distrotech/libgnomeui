@@ -49,7 +49,7 @@ prop_apply(GtkWidget *box, int n)
 	char s[256];
 
 	if (n != -1) {
-		sprintf(s, "Applied changed on page #%d", n + 1);
+		g_snprintf(s, sizeof(s), "Applied changed on page #%d", n + 1);
 		gtk_widget_show(gnome_message_box_new(s, "info",
 				GNOME_STOCK_BUTTON_OK, NULL));
 	}

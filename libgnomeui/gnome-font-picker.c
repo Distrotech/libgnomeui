@@ -625,7 +625,7 @@ void gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
     
     /* Change size */
     pStr=g_strdup(gfp->font_name);
-    sprintf(size,"%d",gfp->use_font_in_label_size);
+    g_snprintf(size, sizeof(size), "%d",gfp->use_font_in_label_size);
     gnome_font_picker_font_set_attr(&pStr,size,7);
 
 
