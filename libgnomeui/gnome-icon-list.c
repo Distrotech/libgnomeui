@@ -517,16 +517,22 @@ sync_selection (Gil *gil, int pos, SyncType type)
 static int
 icon_event (Gil *gil, Icon *icon, GdkEvent *event)
 {
+	GList *l;
+	int n;
+	
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		gil->last_clicked = icon;
-		/*
-		 * FIXME:
-		 * Would it be ok to never set last_clicked to NULL here?
-		 */
-		if (icon->text->selected && (event->button.button == 1 || event->button.button == 3))
+
+		if (icon->text->selected && (event->button.button == 1 || event->button.button == 3)){
 			gil->last_clicked = icon;
-		else {
+		
+			for (n = 0, l = gil->icon_list; l; l = l->next, n++)
+				if (l->data == icon)
+					break;
+			
+			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON], n, event);
+		} else {
 			gil->last_clicked = NULL;
 			toggle_icon (gil, icon, event);
 		}
