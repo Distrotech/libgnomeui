@@ -1105,7 +1105,7 @@ main (int argc, char **argv)
 
 	gtk_widget_show (app->app);
 
-	bonobo_main ();
+	gtk_main ();
 
 	return 0;
 }
