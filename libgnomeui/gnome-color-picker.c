@@ -421,8 +421,12 @@ gnome_color_picker_clicked (GtkButton *button)
 
 	/* FIXME: do something about the help button */
 
-	gtk_window_position (GTK_WINDOW (cp->cs_dialog), GTK_WIN_POS_MOUSE);
-	gtk_window_set_modal (GTK_WINDOW (cp->cs_dialog), TRUE); /* Yes!  Modal!  So sue me! */
+        gtk_window_position (GTK_WINDOW (cp->cs_dialog), GTK_WIN_POS_MOUSE);
+        
+        /* If there is a grabed window, set new dialog as modal */
+        if (gtk_grab_get_current())
+            gtk_window_set_modal(GTK_WINDOW(cp->cs_dialog),TRUE);
+        
 	gtk_widget_show (cp->cs_dialog);
 }
 

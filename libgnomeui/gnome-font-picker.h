@@ -23,10 +23,6 @@
 #include <gtk/gtkbutton.h>
 #include <libgnome/gnome-defs.h>
 
-#ifdef _cplusplus
-extern C {
-#endif
-
 BEGIN_GNOME_DECLS
 
 /* GnomeFontPicker is a button widget that allow user to select a font.
@@ -122,8 +118,5 @@ void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
 
 END_GNOME_DECLS
 
-#ifdef _cplusplus
-}
-#endif
     
 #endif /* GNOME_FONT_PICKER_H */
