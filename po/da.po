@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
-"POT-Creation-Date: 2002-05-25 21:29+0200\n"
+"POT-Creation-Date: 2002-05-29 12:54+0200\n"
 "PO-Revision-Date: 2002-05-25 21:39+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -715,11 +715,11 @@ msgstr "Fortryd den sidste handling"
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "_Gentag"
+msgstr "_Omgør"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Gentag den fortrudte handling"
+msgstr "Omgør den fortrudte handling"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -846,11 +846,11 @@ msgstr "Fortryd sidste træk"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "_Gentag træk"
+msgstr "_Omgør træk"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Gentag det fortrudte træk"
+msgstr "Omgør det fortrudte træk"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
