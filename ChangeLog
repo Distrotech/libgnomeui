@@ -1,3 +1,8 @@
+2004-08-13  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Add this stuff.
+	* po/nb.po: Same.
+
 2004-08-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: #include <config.h>
