@@ -27,15 +27,14 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
+#include <libgnome/gnome-i18n.h>
+
 #include "gnome-stock-ids.h"
 #include "pixmaps/gnome-stock-pixbufs.h"
 
-#define TB_W 20
-#define TB_H 20
-#define TIGERT_W 24
-#define TIGERT_H 24
-#define MENU_W 16
-#define MENU_H 16
+#ifndef GETTEXT_PACKAGE
+#define GETTEXT_PACKAGE PACKAGE
+#endif
 
 static void G_GNUC_UNUSED
 add_sized (GtkIconFactory *factory,
@@ -254,6 +253,33 @@ get_default_icons (GtkIconFactory *factory)
     add_sized (factory, stock_menu_scores, GNOME_ICON_SIZE_TOOLBAR, GNOME_STOCK_MENU_SCORES);
 }
 
+static GtkStockItem builtin_items [] =
+{
+    { GTK_STOCK_DIALOG_INFO, N_("Information"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_ADD, N_("Add"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_CLEAR, N_("Clear"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_COLORSELECTOR, N_("Select Color"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_REMOVE, N_("Remove"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_TABLE_BORDERS, N_("Table Borders"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_TABLE_FILL, N_("Table Fill"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_TEXT_BULLETED_LIST, N_("Bulleted List"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_TEXT_NUMBERED_LIST, N_("Numbered List"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_TEXT_INDENT, N_("Indent"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_PIXMAP_TEXT_UNINDENT, N_("Un-Indent"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_OK, N_("OK"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_APPLY, N_("Apply"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_CANCEL, N_("Cancel"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_CLOSE, N_("Close"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_YES, N_("Yes"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_NO, N_("No"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_HELP, N_("Help"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_NEXT, N_("Next"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_PREV, N_("Prev"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_UP, N_("Up"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_DOWN, N_("Down"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_BUTTON_FONT, N_("Font"), 0, 0, GETTEXT_PACKAGE },
+};
+
 void
 init_gnome_stock_icons (void)
 {
@@ -270,4 +296,6 @@ init_gnome_stock_icons (void)
     get_default_icons (factory);
 
     gtk_icon_factory_add_default (factory);
+
+    gtk_stock_add_static (builtin_items, G_N_ELEMENTS (builtin_items));
 }
