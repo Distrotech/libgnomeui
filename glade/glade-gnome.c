@@ -563,43 +563,8 @@ druidpage_build_children(GladeXML *xml, GtkWidget *w,
 	GList *tmp;
 	GladeWidgetInfo *cinfo = info->children->data;
 	GtkBox *vbox= GTK_BOX(GNOME_DRUID_PAGE_STANDARD(w)->vbox);
-	gchar *vboxname = g_strconcat(longname, ".", cinfo->name, NULL);
 
-	for (tmp = cinfo->children; tmp; tmp = tmp->next) {
-		GList *tmp2;
-		GtkWidget *child;
-		gboolean expand = TRUE, fill = TRUE, start = TRUE;
-		gint padding = 0;
-		cinfo = tmp->data;
-
-		child = glade_xml_build_widget(xml, cinfo, vboxname);
-		for (tmp2 = cinfo->child_attributes; tmp2; tmp2 = tmp2->next) {
-			GladeAttribute *attr = tmp2->data;
-
-			switch(attr->name[0]) {
-			case 'e':
-				if (!strcmp(attr->name, "expand"))
-					expand = attr->value[0] == 'T';
-				break;
-			case 'f':
-				if (!strcmp(attr->name, "fill"))
-					fill = attr->value[0] == 'T';
-				break;
-			case 'p':
-				if (!strcmp(attr->name, "padding"))
-					padding = strtol(attr->value, NULL, 0);
-				else if (!strcmp(attr->name, "pack"))
-					start = strcmp(attr->value,
-						       "GTK_PACK_START") == 0;
-				break;
-			}
-		}
-		if (start)
-			gtk_box_pack_start(vbox, child, expand, fill, padding);
-		else
-			gtk_box_pack_end(vbox, child, expand, fill, padding);
-	}
-	g_free(vboxname);
+	glade_xml_set_common_params(xml, vbox, cinfo, longname);
 }
 
 static void pbox_change_page(GtkWidget *child, GtkNotebook *notebook)
