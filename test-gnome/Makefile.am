@@ -22,7 +22,8 @@ noinst_HEADERS = \
 	testgnome.h
 
 noinst_PROGRAMS = \
-	test-gnome test-druid test-entry test-iconlist
+	test-gnome test-druid test-entry test-iconlist test-password-dialog
+
 
 test_gnome_SOURCES =		\
 	testgnome.c		\
@@ -30,6 +31,9 @@ test_gnome_SOURCES =		\
 
 test_druid_SOURCES =	\
 	testdruid.c
+
+test_password_dialog_SOURCES =	\
+	test-password-dialog.c
 
 test_entry_SOURCES = 	\
 	testentry.c

@@ -1,3 +1,40 @@
+2003-05-26  Anders Carlsson  <andersca@codefactory.se>
+
+	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok):
+	Fix a warning.
+	
+	* libgnomeui/Makefile.am:
+	* libgnomeui/gnome-authentication-manager.c:
+	(construct_password_dialog),
+	(present_authentication_dialog_blocking),
+	(mark_callback_completed), (authentication_dialog_button_clicked),
+	(authentication_dialog_closed), (authentication_dialog_destroyed),
+	(present_authentication_dialog_nonblocking),
+	(vfs_async_authentication_callback), (vfs_authentication_callback),
+	(gnome_authentication_manager_init):
+	* libgnomeui/gnome-authentication-manager.h:
+	* libgnomeui/gnome-password-dialog.c:
+	(gnome_password_dialog_get_type),
+	(gnome_password_dialog_class_init), (gnome_password_dialog_init),
+	(gnome_password_dialog_finalize), (dialog_show_callback),
+	(dialog_close_callback), (add_row), (username_entry_activate),
+	(gnome_password_dialog_new), (gnome_password_dialog_run_and_block),
+	(gnome_password_dialog_set_username),
+	(gnome_password_dialog_set_password),
+	(gnome_password_dialog_set_readonly_username),
+	(gnome_password_dialog_get_username),
+	(gnome_password_dialog_get_password):
+	* libgnomeui/gnome-password-dialog.h:
+	* libgnomeui/gnome-stock-icons.c: (get_default_icons):
+	* libgnomeui/gnome-stock-icons.h:
+	* libgnomeui/libgnomeui.h:
+	* libgnomeui/pixmaps/Makefile.am:
+	* test-gnome/Makefile.am:
+	* test-gnome/test-password-dialog.c: (authenticate_boink_callback),
+	(exit_callback), (main):
+	Add authentication callbacks, a password dialog, and a authentication
+	stock icon.
+	
 2003-05-26  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-app.c: Merge fix for

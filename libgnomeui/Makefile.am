@@ -89,6 +89,10 @@ libgnomeui_2_la_SOURCES = \
 	gnome-i18nP.h			\
 	gnome-gconf-ui.h		\
 	libgnomeuiP.h			\
+	gnome-password-dialog.c         \
+	gnome-password-dialog.h         \
+	gnome-authentication-manager.c  \
+	gnome-authentication-manager.h  \
 	gnome-client.c
 
 ## this lists all the non-generated headers
@@ -98,6 +102,7 @@ gnome_headers = \
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
 	gnome-appbar.h			\
+	gnome-authentication-manager.h  \
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-dateedit.h		\
@@ -123,6 +128,7 @@ gnome_headers = \
 	gnome-mdi-child.h		\
 	gnome-mdi-generic-child.h	\
 	gnome-mdi-session.h		\
+	gnome-password-dialog.h         \
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
 	gnome-popup-menu.h		\

@@ -130,6 +130,8 @@ get_default_icons (GtkIconFactory *factory)
     add_sized (factory, stock_scores, GTK_ICON_SIZE_SMALL_TOOLBAR, GNOME_STOCK_SCORES);
 
     add_sized (factory, stock_multiple_file, GTK_ICON_SIZE_DND, GNOME_STOCK_MULTIPLE_FILE);
+    
+    add_sized (factory, stock_authentication, GTK_ICON_SIZE_DIALOG, GNOME_STOCK_AUTHENTICATION);
 }
 
 static GtkStockItem builtin_items [] =

@@ -71,6 +71,8 @@ G_BEGIN_DECLS
 #define GNOME_STOCK_TEXT_BULLETED_LIST "gnome-stock-text-bulleted-list"
 #define GNOME_STOCK_TEXT_NUMBERED_LIST "gnome-stock-text-numbered-list"
 
+#define GNOME_STOCK_AUTHENTICATION "gnome-stock-authentication"
+
 /* And now for some deprecated items, you should use the GTK_STOCK_
  * equivalents for these.  Note that the BUTTON ones are now defined
  * in gnome-dialog.h and also deprecated in favour of the GTK_STOCK_

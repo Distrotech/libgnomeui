@@ -35,6 +35,7 @@
 #include <libgnomeui/gnome-app-helper.h>
 #include <libgnomeui/gnome-app-util.h>
 #include <libgnomeui/gnome-appbar.h>
+#include <libgnomeui/gnome-authentication-manager.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-line.h>
@@ -79,5 +80,6 @@
 #include <libgnomeui/gnome-popup-menu.h>
 #include <libgnomeui/gnome-propertybox.h>
 #include <libgnomeui/gnome-window-icon.h>
+#include <libgnomeui/gnome-password-dialog.h>
 
 #endif

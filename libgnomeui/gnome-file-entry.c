@@ -394,7 +394,7 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	GtkFileSelection *fs;
 	GnomeFileEntry *fentry;
 	GtkWidget *entry;
-	gchar *locale_filename;
+	const gchar *locale_filename;
 	gchar *utf8_filename;
 
 	fs = GTK_FILE_SELECTION (data);

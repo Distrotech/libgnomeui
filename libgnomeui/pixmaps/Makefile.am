@@ -30,7 +30,8 @@ stock_images = \
 	stock_trash.png \
 	stock_trash_full.png \
 	stock_volume.png \
-	stock_midi.png
+	stock_midi.png \
+	stock_authentication.png
 
 EXTRA_DIST = \
 	$(stock_images)	\
