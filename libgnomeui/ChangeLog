@@ -1,3 +1,9 @@
+Sun Jan 23 16:54:39 2000  George Lebl <jirka@5z.com>
+
+	* gnome-less.[ch]: mark all fields as private and add an accessor
+	  for the text field.  Also add a bunch of preconditions.  Remove
+	  an unused variable.
+
 Sun Jan 23 14:05:55 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dialog-util.c: add inline docs

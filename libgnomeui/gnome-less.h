@@ -39,6 +39,7 @@ typedef struct _GnomeLessClass GnomeLessClass;
 struct _GnomeLess {
   GtkVBox vbox;
 
+  /*< private >*/
   GtkText * text; 
 
   GdkFont * font;  /* font that goes to gtk_text_insert_text call,
@@ -83,6 +84,9 @@ void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed);
 
 /* Re-insert the text with the current font settings. */
 void gnome_less_reshow          (GnomeLess * gl);
+
+/* get the text widget */
+GtkWidget *gnome_less_get_gtk_text(GnomeLess * gl);
 
 END_GNOME_DECLS
    

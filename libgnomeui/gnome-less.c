@@ -83,7 +83,6 @@ gnome_less_init (GnomeLess *gl)
 {
   GtkWidget * vscroll;
   GtkWidget * hbox; /* maybe just inherit from hbox? hard to say yet. */
-  GtkWidget * mi;
 
   gl->text = GTK_TEXT(gtk_text_new(NULL, NULL));
 
@@ -284,6 +283,7 @@ gboolean gnome_less_show_fd         (GnomeLess * gl, int file_descriptor)
   FILE * f;
 
   g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
 
   f = fdopen(file_descriptor, "r");
 
@@ -426,6 +426,7 @@ gboolean gnome_less_write_fd (GnomeLess * gl, int fd)
   gint bytes_written;
 
   g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
   g_return_val_if_fail(fd >= 0, FALSE);
 
   contents = 
@@ -458,6 +459,7 @@ gboolean gnome_less_write_file   (GnomeLess * gl, const gchar * path)
   int fd;
 
   g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
   g_return_val_if_fail(path != NULL, FALSE);
   
   fd = open( path, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR );
@@ -491,6 +493,7 @@ void gnome_less_reshow          (GnomeLess * gl)
   gchar * contents;
 
   g_return_if_fail(gl != NULL);
+  g_return_if_fail(GNOME_IS_LESS(gl));
 
   contents = gtk_editable_get_chars(GTK_EDITABLE(gl->text), 0,
 				    gtk_text_get_length(GTK_TEXT(gl->text)));
@@ -502,4 +505,19 @@ void gnome_less_reshow          (GnomeLess * gl)
   g_free(contents);
 }
 
+/**
+ * gnome_less_get_gtk_text:
+ * @gl: Pointer to GnomeLess widget
+ *
+ * Description:  Gets the #GtkText widget inside the GnomeLess widget
+ *
+ * Returns:  A #GtkWidget pointer to a #GtkText widget
+ **/
+GtkWidget *
+gnome_less_get_gtk_text(GnomeLess * gl)
+{
+	g_return_val_if_fail(gl != NULL, NULL);
+	g_return_val_if_fail(GNOME_IS_LESS(gl), NULL);
 
+	return GTK_WIDGET(gl->text);
+}
