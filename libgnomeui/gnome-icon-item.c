@@ -1050,10 +1050,10 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 		g_object_unref (priv->layout);
 	priv->layout = gtk_widget_create_pango_layout (GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas), iti->text);
 
+	pango_layout_set_font_description (priv->layout, GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas)->style->font_desc);
+	
 	pango_layout_set_alignment (priv->layout, PANGO_ALIGN_CENTER);
 	update_pango_layout (iti);
-
-	/* FIXME: Should we update font stuff here? */
 
 	priv->need_pos_update = TRUE;
 	priv->need_font_update = TRUE;
