@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.113.0\n"
-"POT-Creation-Date: 2002-03-26 13:47-0500\n"
+"POT-Creation-Date: 2002-03-30 00:09+0100\n"
 "PO-Revision-Date: 2002-03-28 06:59+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -189,53 +189,53 @@ msgstr "收到不合規格的色彩資料\n"
 msgid "Pick a color"
 msgstr "選取一個色彩"
 
-#: libgnomeui/gnome-dateedit.c:428
+#: libgnomeui/gnome-dateedit.c:468
 msgid "Time"
 msgstr "時間"
 
-#: libgnomeui/gnome-dateedit.c:429
+#: libgnomeui/gnome-dateedit.c:469
 #, fuzzy
 msgid "The time currently selected"
 msgstr "目前選定的時間"
 
-#: libgnomeui/gnome-dateedit.c:441
+#: libgnomeui/gnome-dateedit.c:481
 msgid "DateEdit Flags"
 msgstr "日期元件選項"
 
-#: libgnomeui/gnome-dateedit.c:442
+#: libgnomeui/gnome-dateedit.c:482
 msgid "Flags for how DateEdit looks"
 msgstr "設定日期元件顯示時的外觀"
 
-#: libgnomeui/gnome-dateedit.c:451
+#: libgnomeui/gnome-dateedit.c:491
 msgid "Lower Hour"
 msgstr "時間下限"
 
-#: libgnomeui/gnome-dateedit.c:452
+#: libgnomeui/gnome-dateedit.c:492
 msgid "Lower hour in the time popup selector"
 msgstr "彈出式時間元件的時間下限"
 
-#: libgnomeui/gnome-dateedit.c:462
+#: libgnomeui/gnome-dateedit.c:502
 msgid "Upper Hour"
 msgstr "時間上限"
 
-#: libgnomeui/gnome-dateedit.c:463
+#: libgnomeui/gnome-dateedit.c:503
 msgid "Upper hour in the time popup selector"
 msgstr "彈出式時間元件的時間上限"
 
-#: libgnomeui/gnome-dateedit.c:473
+#: libgnomeui/gnome-dateedit.c:513
 msgid "Initial Time"
 msgstr "初始時間"
 
-#: libgnomeui/gnome-dateedit.c:474
+#: libgnomeui/gnome-dateedit.c:514
 msgid "The initial time"
 msgstr "初始時所顯示的時間"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:745
 msgid "Calendar"
 msgstr "日曆"
 
-#: libgnomeui/gnome-dateedit.c:933
+#: libgnomeui/gnome-dateedit.c:975
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date 已停用，請使用 gnome_date_edit_get_time"
 
@@ -496,7 +496,6 @@ msgstr "項目二的提示"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "檔案 (_F)"
 
@@ -554,7 +553,6 @@ msgid "_Game"
 msgstr "遊戲 (_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "說明 (_H)"
 
@@ -745,11 +743,11 @@ msgstr "設定這個程式"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "關於 (_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "顯示有關這個程式的資訊"
 
@@ -776,7 +774,7 @@ msgstr "建立一個新的視窗"
 msgid "_Close This Window"
 msgstr "關閉目前視窗 (_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "將目前視窗關閉"
 
@@ -1151,11 +1149,11 @@ msgstr ""
 msgid "No Icon"
 msgstr "無圖示"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "無法找到水平容器元件，使用一般的檔案選取對話盒"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "預覽"
 
@@ -1197,16 +1195,16 @@ msgstr "問題"
 msgid "Message"
 msgstr "訊息"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:118
 #, fuzzy
 msgid "Do Preview"
 msgstr "預覽"
 
-#: libgnomeui/gnome-pixmap-entry.c:115
+#: libgnomeui/gnome-pixmap-entry.c:119
 msgid "Whether the pixmap entry should have a preview."
 msgstr ""
 
-#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
+#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
 msgid "No Image"
 msgstr "無影像"
 
@@ -1241,9 +1239,8 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr ""
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "結束測試"
+#~ msgid "Exit the test"
+#~ msgstr "結束測試"
 
 #~ msgid "GConf error details: %s\n"
 #~ msgstr "GConf 詳細錯誤：%s\n"

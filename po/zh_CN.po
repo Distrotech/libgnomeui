@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs\n"
-"POT-Creation-Date: 2002-03-18 15:41+0100\n"
+"POT-Creation-Date: 2002-03-30 00:09+0100\n"
 "PO-Revision-Date: 2002-02-17 23:52+0800\n"
 "Last-Translator: Wang Li <charlesw1234@163.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -181,52 +181,52 @@ msgstr "收到无效的颜色数据\n"
 msgid "Pick a color"
 msgstr "选取颜色"
 
-#: libgnomeui/gnome-dateedit.c:428
+#: libgnomeui/gnome-dateedit.c:468
 msgid "Time"
 msgstr "时间"
 
-#: libgnomeui/gnome-dateedit.c:429
+#: libgnomeui/gnome-dateedit.c:469
 msgid "The time currently selected"
 msgstr "当前选中的时间"
 
-#: libgnomeui/gnome-dateedit.c:441
+#: libgnomeui/gnome-dateedit.c:481
 msgid "DateEdit Flags"
 msgstr "日期编辑标志"
 
-#: libgnomeui/gnome-dateedit.c:442
+#: libgnomeui/gnome-dateedit.c:482
 msgid "Flags for how DateEdit looks"
 msgstr "关于日期编辑外观的标志"
 
-#: libgnomeui/gnome-dateedit.c:451
+#: libgnomeui/gnome-dateedit.c:491
 msgid "Lower Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:452
+#: libgnomeui/gnome-dateedit.c:492
 msgid "Lower hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:462
+#: libgnomeui/gnome-dateedit.c:502
 msgid "Upper Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:463
+#: libgnomeui/gnome-dateedit.c:503
 msgid "Upper hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:473
+#: libgnomeui/gnome-dateedit.c:513
 msgid "Initial Time"
 msgstr "初始化时间"
 
-#: libgnomeui/gnome-dateedit.c:474
+#: libgnomeui/gnome-dateedit.c:514
 msgid "The initial time"
 msgstr "初始化时间"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:745
 msgid "Calendar"
 msgstr "日历"
 
-#: libgnomeui/gnome-dateedit.c:933
+#: libgnomeui/gnome-dateedit.c:975
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date 已过时，使用 gnome_date_edit_get_time"
 
@@ -1076,29 +1076,28 @@ msgstr "显示字体信息模式中的尺寸"
 msgid "GNOME GConf UI Support"
 msgstr "GNOME GConf UI 支持"
 
-#: libgnomeui/gnome-gconf-ui.c:107
-#, c-format
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr ""
+
+#: libgnomeui/gnome-gconf-ui.c:169
+#, fuzzy, c-format
 msgid ""
-"You attempted to change an aspect of your configuration that your system "
-"administrator or operating system vendor does not allow you to change. Some "
-"of the settings you have selected may not take effect, or may not be "
-"restored next time you use this application (%s)."
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
 msgstr ""
 "您试图修改您的系统管理员或操作系统供应商不允许您修改的配置。部分您选定了的选"
 "项可能不会生效，或者会在您下次使用该应用程序 (%s) 的时候恢复原值。"
 
-#: libgnomeui/gnome-gconf-ui.c:115
+#: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
 "在为 %s 装入或保存配置信息时发生错误。您的某些配置设置可能不能正常工作。"
-
-#: libgnomeui/gnome-gconf-ui.c:139
-#, c-format
-msgid "GConf error details: %s\n"
-msgstr "GConf 错误详情：%s\n"
 
 #: libgnomeui/gnome-icon-entry.c:164
 msgid ""
@@ -1138,11 +1137,11 @@ msgstr ""
 msgid "No Icon"
 msgstr "无图标"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "无法找到 hbox，使用普通文件选择"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "预览"
 
@@ -1184,16 +1183,16 @@ msgstr "问题"
 msgid "Message"
 msgstr "消息"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:118
 #, fuzzy
 msgid "Do Preview"
 msgstr "预览"
 
-#: libgnomeui/gnome-pixmap-entry.c:115
+#: libgnomeui/gnome-pixmap-entry.c:119
 msgid "Whether the pixmap entry should have a preview."
 msgstr ""
 
-#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
+#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
 msgid "No Image"
 msgstr "无图像"
 
@@ -1227,6 +1226,9 @@ msgstr "%Y-%m-%d(%a) %T"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "GConf error details: %s\n"
+#~ msgstr "GConf 错误详情：%s\n"
 
 #~ msgid "Gdk debugging flags to set"
 #~ msgstr "设置 Gdk 调试标志"

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-03-18 15:41+0100\n"
+"POT-Creation-Date: 2002-03-30 00:09+0100\n"
 "PO-Revision-Date: 2002-03-15 14:29+0300\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -180,52 +180,52 @@ msgstr "Получены неправильные данные цвета\n"
 msgid "Pick a color"
 msgstr "Выбрать цвет"
 
-#: libgnomeui/gnome-dateedit.c:428
+#: libgnomeui/gnome-dateedit.c:468
 msgid "Time"
 msgstr "Время"
 
-#: libgnomeui/gnome-dateedit.c:429
+#: libgnomeui/gnome-dateedit.c:469
 msgid "The time currently selected"
 msgstr "Выбранное время"
 
-#: libgnomeui/gnome-dateedit.c:441
+#: libgnomeui/gnome-dateedit.c:481
 msgid "DateEdit Flags"
 msgstr "Флаги DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:442
+#: libgnomeui/gnome-dateedit.c:482
 msgid "Flags for how DateEdit looks"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:451
+#: libgnomeui/gnome-dateedit.c:491
 msgid "Lower Hour"
 msgstr "Нижний час"
 
-#: libgnomeui/gnome-dateedit.c:452
+#: libgnomeui/gnome-dateedit.c:492
 msgid "Lower hour in the time popup selector"
 msgstr "Нижний час в окне выбора времени"
 
-#: libgnomeui/gnome-dateedit.c:462
+#: libgnomeui/gnome-dateedit.c:502
 msgid "Upper Hour"
 msgstr "Верхний час"
 
-#: libgnomeui/gnome-dateedit.c:463
+#: libgnomeui/gnome-dateedit.c:503
 msgid "Upper hour in the time popup selector"
 msgstr "Верхний час в окне выбора времени"
 
-#: libgnomeui/gnome-dateedit.c:473
+#: libgnomeui/gnome-dateedit.c:513
 msgid "Initial Time"
 msgstr "Исходное время"
 
-#: libgnomeui/gnome-dateedit.c:474
+#: libgnomeui/gnome-dateedit.c:514
 msgid "The initial time"
 msgstr "Исходное время"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:745
 msgid "Calendar"
 msgstr "Календарь"
 
-#: libgnomeui/gnome-dateedit.c:933
+#: libgnomeui/gnome-dateedit.c:975
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date устарело, используйте gnome_date_edit_get_time"
@@ -1073,26 +1073,25 @@ msgstr "Показывать размер в режиме информации о шрифте"
 msgid "GNOME GConf UI Support"
 msgstr "Поддержка интерфейса пользователя GNOME GConf"
 
-#: libgnomeui/gnome-gconf-ui.c:107
-#, c-format
-msgid ""
-"You attempted to change an aspect of your configuration that your system "
-"administrator or operating system vendor does not allow you to change. Some "
-"of the settings you have selected may not take effect, or may not be "
-"restored next time you use this application (%s)."
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
 msgstr ""
 
-#: libgnomeui/gnome-gconf-ui.c:115
+#: libgnomeui/gnome-gconf-ui.c:169
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+
+#: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-
-#: libgnomeui/gnome-gconf-ui.c:139
-#, c-format
-msgid "GConf error details: %s\n"
-msgstr "Подробности ошибки GConf: %s\n"
 
 #: libgnomeui/gnome-icon-entry.c:164
 msgid ""
@@ -1130,11 +1129,11 @@ msgstr ""
 msgid "No Icon"
 msgstr "Нет пиктограммы"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Не удалось найти hbox, используется обычное выделение файлов"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "Просмотр"
 
@@ -1176,15 +1175,15 @@ msgstr "Вопрос"
 msgid "Message"
 msgstr "Сообщение"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:118
 msgid "Do Preview"
 msgstr "Просмотривать"
 
-#: libgnomeui/gnome-pixmap-entry.c:115
+#: libgnomeui/gnome-pixmap-entry.c:119
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Надо ли показывать изображение предварительного просмотра"
 
-#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
+#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
 msgid "No Image"
 msgstr "Нет изображения"
 
@@ -1218,6 +1217,9 @@ msgstr "%a %d %b"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "GConf error details: %s\n"
+#~ msgstr "Подробности ошибки GConf: %s\n"
 
 #~ msgid "Exit the test"
 #~ msgstr "Выход из теста"

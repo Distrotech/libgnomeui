@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2002-03-18 15:41+0100\n"
+"POT-Creation-Date: 2002-03-30 00:09+0100\n"
 "PO-Revision-Date: 2002-03-06 16:54+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -180,52 +180,52 @@ msgstr "Mottok ugyldige fargedata\n"
 msgid "Pick a color"
 msgstr "Velg en farge"
 
-#: libgnomeui/gnome-dateedit.c:428
+#: libgnomeui/gnome-dateedit.c:468
 msgid "Time"
 msgstr "Tid"
 
-#: libgnomeui/gnome-dateedit.c:429
+#: libgnomeui/gnome-dateedit.c:469
 msgid "The time currently selected"
 msgstr "Valgt tid"
 
-#: libgnomeui/gnome-dateedit.c:441
+#: libgnomeui/gnome-dateedit.c:481
 msgid "DateEdit Flags"
 msgstr "DateEdit flagg"
 
-#: libgnomeui/gnome-dateedit.c:442
+#: libgnomeui/gnome-dateedit.c:482
 msgid "Flags for how DateEdit looks"
 msgstr "Flagg for hvordanm DateEdit ser ut"
 
-#: libgnomeui/gnome-dateedit.c:451
+#: libgnomeui/gnome-dateedit.c:491
 msgid "Lower Hour"
 msgstr "Laveste tid"
 
-#: libgnomeui/gnome-dateedit.c:452
+#: libgnomeui/gnome-dateedit.c:492
 msgid "Lower hour in the time popup selector"
 msgstr "Laveste timetall i velgeren"
 
-#: libgnomeui/gnome-dateedit.c:462
+#: libgnomeui/gnome-dateedit.c:502
 msgid "Upper Hour"
 msgstr "Øvre tid"
 
-#: libgnomeui/gnome-dateedit.c:463
+#: libgnomeui/gnome-dateedit.c:503
 msgid "Upper hour in the time popup selector"
 msgstr "Øvre time i velgeren"
 
-#: libgnomeui/gnome-dateedit.c:473
+#: libgnomeui/gnome-dateedit.c:513
 msgid "Initial Time"
 msgstr "Opprinnelig tid"
 
-#: libgnomeui/gnome-dateedit.c:474
+#: libgnomeui/gnome-dateedit.c:514
 msgid "The initial time"
 msgstr "Opprinnelig tid"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:745
 msgid "Calendar"
 msgstr "Kalender"
 
-#: libgnomeui/gnome-dateedit.c:933
+#: libgnomeui/gnome-dateedit.c:975
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date har gått ut, bruk gnome_date_edit_get_time"
 
@@ -1080,20 +1080,24 @@ msgstr "Vis størrelse i infomodus for skrifttype"
 msgid "GNOME GConf UI Support"
 msgstr "GNOME GConf UI-støtte"
 
-#: libgnomeui/gnome-gconf-ui.c:107
-#, c-format
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr ""
+
+#: libgnomeui/gnome-gconf-ui.c:169
+#, fuzzy, c-format
 msgid ""
-"You attempted to change an aspect of your configuration that your system "
-"administrator or operating system vendor does not allow you to change. Some "
-"of the settings you have selected may not take effect, or may not be "
-"restored next time you use this application (%s)."
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
 msgstr ""
 "Du forsøkte å endre et aspekt ved din konfigurasjon som din "
 "systemadministrator ikke tillater deg å endre. Noen av innstillingene du har "
 "valgt vil ikke tre i kraft, eller vil ikke bli gjenopprettet neste gang du "
 "bruker denne applikasjonen (%s)."
 
-#: libgnomeui/gnome-gconf-ui.c:115
+#: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1101,11 +1105,6 @@ msgid ""
 msgstr ""
 "En feil oppsto under lasting eller lagring av konfigurasjonsinformasjon for %"
 "s. Noen av innstillingene virker kanskje ikke riktig."
-
-#: libgnomeui/gnome-gconf-ui.c:139
-#, c-format
-msgid "GConf error details: %s\n"
-msgstr "Detaljer om GConf feil: %s\n"
 
 #: libgnomeui/gnome-icon-entry.c:164
 msgid ""
@@ -1147,11 +1146,11 @@ msgstr ""
 msgid "No Icon"
 msgstr "Uten ikon"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan ikke finne en hbox, med vanlig filutvalg"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "Forhåndsvis"
 
@@ -1193,15 +1192,15 @@ msgstr "Spørsmål"
 msgid "Message"
 msgstr "Beskjed"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:118
 msgid "Do Preview"
 msgstr "Forhåndsvis"
 
-#: libgnomeui/gnome-pixmap-entry.c:115
+#: libgnomeui/gnome-pixmap-entry.c:119
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Om bildeoppføringen skal forhåndsvises."
 
-#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
+#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
 msgid "No Image"
 msgstr "Uten bilde"
 
@@ -1235,6 +1234,9 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "GConf error details: %s\n"
+#~ msgstr "Detaljer om GConf feil: %s\n"
 
 #~ msgid "Gdk debugging flags to set"
 #~ msgstr "Gdk avlusingsflagg som skal slås på"

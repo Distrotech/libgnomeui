@@ -1,3 +1,7 @@
+2002-03-30  Anders Carlsson  <andersca@gnu.org>
+
+	* Release 1.114.0
+
 2002-03-29  Mark McLoughlin  <mark@skynet.ie>
 
 	* libgnomeui/gnome-pixmap-entry.c:
