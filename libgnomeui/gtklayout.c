@@ -1027,6 +1027,7 @@ gtk_layout_gravity_works (void)
   attr.y = 0;
   attr.width = 100;
   attr.height = 100;
+  attr.event_mask = 0;
   
   parent = gdk_window_new (NULL, &attr, GDK_WA_X | GDK_WA_Y);
 
