@@ -1562,7 +1562,7 @@ pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 	GtkWidget *wid;
 	GList *tmp;
 	char *label = NULL;
-	const char *stock_icon = NULL;
+	const char *stock_icon = NULL, *user_icon = NULL;
 	gboolean right = FALSE;
 
 	for (tmp = info->attributes; tmp; tmp = tmp->next) {
@@ -1574,6 +1574,8 @@ pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 			stock_icon = get_stock_name(attr->value);
 		else if (!strcmp(attr->name, "right_justify"))
 			right = attr->value[0] == 'T';
+		else if (!strcmp(attr->name, "icon"))
+			user_icon = attr->value;
 	}
 	wid = gtk_pixmap_menu_item_new();
 	if (label) {
@@ -1603,6 +1605,13 @@ pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 	}
 	if (stock_icon) {
 		GtkWidget *iconw = gnome_stock_new_with_icon(stock_icon);
+		gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(wid),
+						iconw);
+		gtk_widget_show(iconw);
+	} else if (user_icon) {
+		gchar *iconfile = glade_xml_relative_file(xml, user_icon);
+		GtkWidget *iconw = gnome_pixmap_new_from_file(iconfile);
+
 		gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(wid),
 						iconw);
 		gtk_widget_show(iconw);
