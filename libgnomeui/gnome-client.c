@@ -956,8 +956,7 @@ gnome_client_module_class_init (GnomeProgramClass *klass, const GnomeModuleInfo 
                 gnome_client_module_set_property,
                 g_param_spec_boolean (GNOME_CLIENT_PARAM_SM_CONNECT, NULL, NULL,
                                       sm_connect_default,
-				      (G_PARAM_READABLE | G_PARAM_WRITABLE |
-				       G_PARAM_CONSTRUCT_ONLY)));
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 }
 
 static void

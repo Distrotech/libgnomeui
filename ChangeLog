@@ -1,3 +1,10 @@
+2004-02-10  Christian Persch  <chpe@cvs.gnome.org>
+
+	* libgnomeui/gnome-client.c: (gnome_client_module_class_init): Remove
+	G_PARAM_CONSTRUCT_ONLY flag from the paramspec of the sm-connect
+	proprety, since it's set after construct time when the args are parsed
+	(Bug #131867).
+
 2004-02-09  Fernando Herrera  <fherrera@onirica.com>
 
 	* glade/glade-gnome.c: (file_entry_set_use_filechooser),
