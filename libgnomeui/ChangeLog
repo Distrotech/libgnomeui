@@ -1,3 +1,46 @@
+2002-01-14  jacob berkman  <jacob@ximian.com>
+
+	* gnome-druid-page-edge.c (struct _GnomeDruidPageEdgePrivate):
+	remove canvas items and replace with widgets
+	(gnome_druid_page_edge_instance_init): dupicate layout of
+	GnomeDruidPageStandard - don't use the canvas
+	(gnome_druid_page_edge_construct): just call various setting
+	functions
+	(gnome_druid_page_edge_configure_canvas):
+	(gnome_druid_page_edge_setup): remove
+	(gnome_druid_page_edge_set_color): set the color like in
+	GnomeDruidPageStandard - use the theme
+	(gnome_druid_page_edge_set_*): rewrite all color things to use the
+	widgets
+	(gnome_druid_page_edge_style_set): 
+	(gnome_druid_page_edge_realize): update the color for themes
+
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_instance_init): redo with a different
+	layout.  use a GtkTable rather than a GtkLayout - makes things
+	much simpler, not lockup when shown, and fix RTL layout
+	(gnome_druid_page_standard_get_property): fix memory leaks with
+	boxed properties
+	(gnome_druid_page_standard_set_property): remove redundant
+	notifies
+	(gnome_druid_page_standard_set_*): simplify the color setting code
+	(gnome_druid_page_standard_set_color): simplify and update for new
+	layout
+
+	* gnome-druid.c (gnome_druid_instance_init): pack the button in a
+	bbox rather than placing them manually (fixes RTL issues)
+	(gnome_druid_destroy): destroy the bbox rather than individual
+	buttons
+	(gnome_druid_size_request): #if 0 out the old layout, and size
+	request the bbox
+	(gnome_druid_size_allocate): same
+	(gnome_druid_map): map the bbox rather than individual buttons
+	(gnome_druid_add): same
+	(gnome_druid_forall):
+	(gnome_druid_expose): same sort of thing
+	(gnome_druid_set_show_help): fix a typo such that this actually
+	works correctly
+
 Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-app.h gnome-client.h: Fix gboolean : 1 uses. (gboolean

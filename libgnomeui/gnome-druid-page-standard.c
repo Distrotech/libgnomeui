@@ -41,14 +41,10 @@
 
 struct _GnomeDruidPageStandardPrivate
 {
-	GtkWidget *top_bar;
+	GtkWidget *background;
 	GtkWidget *watermark;
 	GtkWidget *logo;
 	GtkWidget *title_label;
-
-	GtkWidget *left_line;
-	GtkWidget *right_line;
-	GtkWidget *bottom_line;
 
 	GtkWidget *evbox;
 
@@ -74,14 +70,7 @@ static void gnome_druid_page_standard_style_set     (GtkWidget                  
 						     GtkStyle                    *old_style);
 static void gnome_druid_page_standard_prepare       (GnomeDruidPage              *page,
 						     GtkWidget                   *druid);
-static void gnome_druid_page_standard_size_allocate (GtkWidget                   *widget,
-						     GtkAllocation               *allocation);
-static void gnome_druid_page_standard_layout_setup  (GnomeDruidPageStandard      *druid_page_standard);
 static void gnome_druid_page_standard_set_color     (GnomeDruidPageStandard      *druid_page_standard);
-
-
-#define LOGO_WIDTH 48
-#define DRUID_PAGE_WIDTH 508
 
 enum {
 	PROP_0,
@@ -122,7 +111,6 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *class)
 	gobject_class->set_property = gnome_druid_page_standard_set_property;
 	gobject_class->finalize = gnome_druid_page_standard_finalize;
 	object_class->destroy = gnome_druid_page_standard_destroy;
-	widget_class->size_allocate = gnome_druid_page_standard_size_allocate;
 	widget_class->realize = gnome_druid_page_standard_realize;
 	widget_class->style_set = gnome_druid_page_standard_style_set;
 	druid_page_class->prepare = gnome_druid_page_standard_prepare;
@@ -227,60 +215,43 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *class)
 static void
 gnome_druid_page_standard_instance_init (GnomeDruidPageStandard *druid_page_standard)
 {
-
-	GtkWidget *vbox;
-	GtkWidget *hbox;
+	GtkWidget *table;
 
 	druid_page_standard->_priv = g_new0(GnomeDruidPageStandardPrivate, 1);
 
-	/* Top VBox */
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (druid_page_standard), vbox);
-	gtk_widget_show (vbox);
+	/* FIXME: we should be a windowed widget, so we can set the
+	 * style on ourself rather than doing this eventbox hack 
+	 */
+
+	/* Top bar background */
+	druid_page_standard->_priv->background = gtk_event_box_new ();
+	gtk_container_add (GTK_CONTAINER (druid_page_standard),
+			   druid_page_standard->_priv->background);
+	gtk_widget_show (druid_page_standard->_priv->background);
 
 	/* Top bar layout widget */
-	druid_page_standard->_priv->top_bar = gtk_layout_new (NULL, NULL);
-	gtk_box_pack_start (GTK_BOX (vbox),
-			    druid_page_standard->_priv->top_bar,
-	                    FALSE, FALSE, 0);
-	gtk_widget_set_size_request (druid_page_standard->_priv->top_bar, -1, 52);
-	gtk_widget_show (druid_page_standard->_priv->top_bar);
+	table = gtk_table_new (2, 2, FALSE);
+	gtk_container_add (GTK_CONTAINER (druid_page_standard->_priv->background),
+			   table);
+	gtk_widget_show (table);
 
 	/* Top Bar Watermark */
-	druid_page_standard->_priv->watermark = gtk_image_new_from_pixbuf (NULL);
-	gtk_layout_put (GTK_LAYOUT (druid_page_standard->_priv->top_bar),
-	                druid_page_standard->_priv->watermark, 0, 0);
+	druid_page_standard->_priv->watermark = gtk_image_new ();
+	gtk_misc_set_alignment (GTK_MISC (druid_page_standard->_priv->watermark), 0.0, 0.0);
 	gtk_widget_show (druid_page_standard->_priv->watermark);
-
+	
 	/* Title label */
 	druid_page_standard->_priv->title_label = gtk_label_new (NULL);
-	gtk_layout_put (GTK_LAYOUT (druid_page_standard->_priv->top_bar),
-	                druid_page_standard->_priv->title_label, 16, 2);
-	gtk_widget_set_size_request (druid_page_standard->_priv->title_label, -1, LOGO_WIDTH);
+	gtk_misc_set_alignment (GTK_MISC (druid_page_standard->_priv->title_label), 0.0, 0.5);
 	gtk_widget_show (druid_page_standard->_priv->title_label);
 
 	/* Top bar logo*/
-	druid_page_standard->_priv->logo = gtk_image_new_from_pixbuf (NULL);
-	gtk_layout_put (GTK_LAYOUT (druid_page_standard->_priv->top_bar),
-	                druid_page_standard->_priv->logo,
-	                (DRUID_PAGE_WIDTH - (LOGO_WIDTH + 2)), 2);
+	druid_page_standard->_priv->logo = gtk_image_new ();
+	gtk_misc_set_alignment (GTK_MISC (druid_page_standard->_priv->logo), 1.0, 0.5);
 	gtk_widget_show (druid_page_standard->_priv->logo);
-
-	/* HBox for contents row */
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show (hbox);
-
-	/* Left line */
-	druid_page_standard->_priv->left_line = gtk_drawing_area_new ();
-	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->_priv->left_line), 1, 1);
-	gtk_box_pack_start (GTK_BOX (hbox), druid_page_standard->_priv->left_line,
-	                    FALSE, FALSE, 0);
-	gtk_widget_show (druid_page_standard->_priv->left_line);
 
 	/* Contents Event Box (used for styles) */
 	druid_page_standard->_priv->evbox = gtk_event_box_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), druid_page_standard->_priv->evbox, TRUE, TRUE, 0);
 	gtk_widget_show (druid_page_standard->_priv->evbox);
 
 	/* Contents Vbox */
@@ -289,32 +260,34 @@ gnome_druid_page_standard_instance_init (GnomeDruidPageStandard *druid_page_stan
 	gtk_container_add (GTK_CONTAINER (druid_page_standard->_priv->evbox), druid_page_standard->vbox);
 	gtk_widget_show (druid_page_standard->vbox);
 
-	/* Right line */
-	druid_page_standard->_priv->right_line = gtk_drawing_area_new ();
-	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->_priv->right_line),
-	                       1, 1);
-	gtk_box_pack_start (GTK_BOX (hbox), druid_page_standard->_priv->right_line,
-	                    FALSE, FALSE, 0);
-	gtk_widget_show (druid_page_standard->_priv->right_line);
+	/* do this order exactly, so that it displays with the correct
+	 * z-ordering */
+	gtk_table_attach (GTK_TABLE (table),
+			  druid_page_standard->_priv->logo,
+			  1, 2, 0, 1,
+			  GTK_FILL, GTK_FILL,
+			  5, 5);
 
-	/* Bottom line */
-	druid_page_standard->_priv->bottom_line = gtk_drawing_area_new ();
-	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->_priv->bottom_line),
-	                       1, 1);
-	gtk_box_pack_start (GTK_BOX (vbox), druid_page_standard->_priv->bottom_line,
-	                    FALSE, FALSE, 0);
-	gtk_widget_show (druid_page_standard->_priv->bottom_line);
-}
+	gtk_table_attach (GTK_TABLE (table),
+			  druid_page_standard->_priv->title_label,
+			  0, 1, 0, 1,
+			  GTK_EXPAND | GTK_FILL,
+			  GTK_FILL,
+			  5, 5);
 
-static void
-get_color_arg (GValue *value, GdkColor *orig)
-{
-  GdkColor *color;
+	gtk_table_attach (GTK_TABLE (table),
+			  druid_page_standard->_priv->watermark,
+			  0, 2, 0, 1, 
+			  GTK_EXPAND | GTK_FILL,
+			  GTK_FILL,
+			  0, 0);
 
-  color = g_new (GdkColor, 1);
-  *color = *orig;
-  g_value_init (value, GDK_TYPE_COLOR);
-  g_value_set_boxed (value, color);
+	gtk_table_attach (GTK_TABLE (table),
+			  druid_page_standard->_priv->evbox,
+			  0, 2, 1, 2,
+			  GTK_EXPAND | GTK_FILL,
+			  GTK_EXPAND | GTK_FILL,
+			  1, 1);
 }
 
 static void
@@ -336,25 +309,25 @@ gnome_druid_page_standard_get_property (GObject    *object,
 		g_value_set_object (value, druid_page_standard->top_watermark);
 		break;
 	case PROP_TITLE_FOREGROUND_GDK:
-		get_color_arg (value, & (druid_page_standard->title_foreground));
+		g_value_set_boxed (value, &druid_page_standard->title_foreground);
 		break;
 	case PROP_TITLE_FOREGROUND_SET:
 		g_value_set_boolean (value, druid_page_standard->_priv->title_foreground_set);
 		break;
 	case PROP_BACKGROUND_GDK:
-		get_color_arg (value, & (druid_page_standard->background));
+		g_value_set_boxed (value, &druid_page_standard->background);
 		break;
 	case PROP_BACKGROUND_SET:
 		g_value_set_boolean (value, druid_page_standard->_priv->background_set);
 		break;
 	case PROP_LOGO_BACKGROUND_GDK:
-		get_color_arg (value, & (druid_page_standard->logo_background));
+		g_value_set_boxed (value, &druid_page_standard->logo_background);
 		break;
 	case PROP_LOGO_BACKGROUND_SET:
 		g_value_set_boolean (value, druid_page_standard->_priv->logo_background_set);
 		break;
 	case PROP_CONTENTS_BACKGROUND_GDK:
-		get_color_arg (value, & (druid_page_standard->contents_background));
+		g_value_set_boxed (value, &druid_page_standard->contents_background);
 		break;
 	case PROP_CONTENTS_BACKGROUND_SET:
 		g_value_set_boolean (value, druid_page_standard->_priv->contents_background_set);
@@ -363,8 +336,6 @@ gnome_druid_page_standard_get_property (GObject    *object,
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;
 	}
-
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, get_property, (object, prop_id, value, pspec));
 }
 
 static void
@@ -397,10 +368,6 @@ gnome_druid_page_standard_set_property (GObject      *object,
 			break;
 		}
 		gnome_druid_page_standard_set_title_foreground (druid_page_standard, &color);
-		if (druid_page_standard->_priv->title_foreground_set == FALSE) {
-			druid_page_standard->_priv->title_foreground_set = TRUE;
-			g_object_notify (object, "title_foreground_set");
-		}
 		break;
 	case PROP_TITLE_FOREGROUND_SET:
 		druid_page_standard->_priv->title_foreground_set = g_value_get_boolean (value);
@@ -414,10 +381,6 @@ gnome_druid_page_standard_set_property (GObject      *object,
 			break;
 		}
 		gnome_druid_page_standard_set_background (druid_page_standard, &color);
-		if (druid_page_standard->_priv->background_set == FALSE) {
-			druid_page_standard->_priv->background_set = TRUE;
-			g_object_notify (object, "background_set");
-		}
 		break;
 	case PROP_BACKGROUND_SET:
 		druid_page_standard->_priv->background_set = g_value_get_boolean (value);
@@ -431,10 +394,6 @@ gnome_druid_page_standard_set_property (GObject      *object,
 			break;
 		}
 		gnome_druid_page_standard_set_logo_background (druid_page_standard, &color);
-		if (druid_page_standard->_priv->logo_background_set == FALSE) {
-			druid_page_standard->_priv->logo_background_set = TRUE;
-			g_object_notify (object, "logo_background_set");
-		}
 		break;
 	case PROP_LOGO_BACKGROUND_SET:
 		druid_page_standard->_priv->logo_background_set = g_value_get_boolean (value);
@@ -448,10 +407,6 @@ gnome_druid_page_standard_set_property (GObject      *object,
 			break;
 		}
 		gnome_druid_page_standard_set_contents_background (druid_page_standard, &color);
-		if (druid_page_standard->_priv->contents_background_set == FALSE) {
-			druid_page_standard->_priv->contents_background_set = TRUE;
-			g_object_notify (object, "contents_background_set");
-		}
 		break;
 	case PROP_CONTENTS_BACKGROUND_SET:
 		druid_page_standard->_priv->contents_background_set = g_value_get_boolean (value);
@@ -460,8 +415,6 @@ gnome_druid_page_standard_set_property (GObject      *object,
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;
 	}
-
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, set_property, (object, prop_id, value, pspec));
 }
 
 static void
@@ -640,9 +593,7 @@ gnome_druid_page_standard_set_title_foreground (GnomeDruidPageStandard *druid_pa
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 	g_return_if_fail (color != NULL);
 
-	druid_page_standard->title_foreground.red = color->red;
-	druid_page_standard->title_foreground.green = color->green;
-	druid_page_standard->title_foreground.blue = color->blue;
+	druid_page_standard->title_foreground = *color;
 
 	gtk_widget_modify_fg (druid_page_standard->_priv->title_label, GTK_STATE_NORMAL, color);
 
@@ -660,15 +611,9 @@ gnome_druid_page_standard_set_background (GnomeDruidPageStandard *druid_page_sta
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 	g_return_if_fail (color != NULL);
 
-	druid_page_standard->background.red = color->red;
-	druid_page_standard->background.green = color->green;
-	druid_page_standard->background.blue = color->blue;
+	druid_page_standard->background = *color;
 
-	gtk_widget_modify_bg (druid_page_standard->_priv->top_bar, GTK_STATE_NORMAL, color);
-	gtk_widget_modify_bg (druid_page_standard->_priv->left_line, GTK_STATE_NORMAL, color);
-	gtk_widget_modify_bg (druid_page_standard->_priv->right_line, GTK_STATE_NORMAL, color);
-	gtk_widget_modify_bg (druid_page_standard->_priv->bottom_line, GTK_STATE_NORMAL, color);
-
+	gtk_widget_modify_bg (druid_page_standard->_priv->background, GTK_STATE_NORMAL, color);
 	g_object_notify (G_OBJECT (druid_page_standard), "background");
 	if (druid_page_standard->_priv->background_set == FALSE) {
 		druid_page_standard->_priv->background_set = TRUE;
@@ -683,9 +628,7 @@ gnome_druid_page_standard_set_logo_background (GnomeDruidPageStandard *druid_pag
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 	g_return_if_fail (color != NULL);
 
-	druid_page_standard->logo_background.red = color->red;
-	druid_page_standard->logo_background.green = color->green;
-	druid_page_standard->logo_background.blue = color->blue;
+	druid_page_standard->logo_background = *color;
 
 	gtk_widget_modify_bg (druid_page_standard->_priv->logo, GTK_STATE_NORMAL, color);
 	g_object_notify (G_OBJECT (druid_page_standard), "logo_background");
@@ -703,9 +646,7 @@ gnome_druid_page_standard_set_contents_background (GnomeDruidPageStandard *druid
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 	g_return_if_fail (color != NULL);
 
-	druid_page_standard->contents_background.red = color->red;
-	druid_page_standard->contents_background.green = color->green;
-	druid_page_standard->contents_background.blue = color->blue;
+	druid_page_standard->contents_background = *color;
 
 	gtk_widget_modify_bg (druid_page_standard->_priv->evbox, GTK_STATE_NORMAL, color);
 
@@ -780,56 +721,23 @@ gnome_druid_page_standard_append_item (GnomeDruidPageStandard *druid_page_standa
 }
 
 static void
-gnome_druid_page_standard_size_allocate (GtkWidget *widget,
-					 GtkAllocation *allocation)
-{
-	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, size_allocate,
-				   (widget, allocation));
-	gnome_druid_page_standard_layout_setup (GNOME_DRUID_PAGE_STANDARD (widget));
-}
-
-static void
-gnome_druid_page_standard_layout_setup (GnomeDruidPageStandard *druid_page_standard)
-{
-	g_return_if_fail (druid_page_standard != NULL);
-	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
-
-	gtk_layout_move (GTK_LAYOUT (druid_page_standard->_priv->top_bar),
-	                 druid_page_standard->_priv->logo,
-	                 (druid_page_standard->_priv->top_bar->allocation.width - (LOGO_WIDTH + 2)), 2);
-	gtk_layout_move (GTK_LAYOUT (druid_page_standard->_priv->top_bar),
-	                 druid_page_standard->_priv->title_label, 16, 2);
-}
-
-static void
 gnome_druid_page_standard_set_color (GnomeDruidPageStandard *druid_page_standard)
 {
 	GtkWidget *widget = GTK_WIDGET (druid_page_standard);
 	if (druid_page_standard->_priv->background_set == FALSE) {
-		druid_page_standard->background.red = widget->style->bg[GTK_STATE_SELECTED].red;
-		druid_page_standard->background.green = widget->style->bg[GTK_STATE_SELECTED].green;
-		druid_page_standard->background.blue = widget->style->bg[GTK_STATE_SELECTED].blue;
+		druid_page_standard->background = widget->style->bg[GTK_STATE_SELECTED];
 	}
 	if (druid_page_standard->_priv->logo_background_set == FALSE) {
-		druid_page_standard->logo_background.red = widget->style->bg[GTK_STATE_SELECTED].red;
-		druid_page_standard->logo_background.green = widget->style->bg[GTK_STATE_SELECTED].green;
-		druid_page_standard->logo_background.blue = widget->style->bg[GTK_STATE_SELECTED].blue;
+		druid_page_standard->logo_background = widget->style->bg[GTK_STATE_SELECTED];
 	}
 	if (druid_page_standard->_priv->title_foreground_set == FALSE) {
-		druid_page_standard->title_foreground.red = widget->style->fg[GTK_STATE_SELECTED].red;
-		druid_page_standard->title_foreground.green = widget->style->fg[GTK_STATE_SELECTED].green;
-		druid_page_standard->title_foreground.blue = widget->style->fg[GTK_STATE_SELECTED].blue;
+		druid_page_standard->title_foreground = widget->style->fg[GTK_STATE_SELECTED];
 	}
 	if (druid_page_standard->_priv->contents_background_set == FALSE) {
-		druid_page_standard->contents_background.red = widget->style->bg[GTK_STATE_PRELIGHT].red;
-		druid_page_standard->contents_background.green = widget->style->bg[GTK_STATE_PRELIGHT].green;
-		druid_page_standard->contents_background.blue = widget->style->bg[GTK_STATE_PRELIGHT].blue;
+		druid_page_standard->contents_background = widget->style->bg[GTK_STATE_PRELIGHT];
 	}
 
 	gtk_widget_modify_fg (druid_page_standard->_priv->title_label, GTK_STATE_NORMAL, &(druid_page_standard->title_foreground));
-	gtk_widget_modify_bg (druid_page_standard->_priv->top_bar, GTK_STATE_NORMAL, &(druid_page_standard->background));
-	gtk_widget_modify_bg (druid_page_standard->_priv->left_line, GTK_STATE_NORMAL, &(druid_page_standard->background));
-	gtk_widget_modify_bg (druid_page_standard->_priv->right_line, GTK_STATE_NORMAL, &(druid_page_standard->background));
-	gtk_widget_modify_bg (druid_page_standard->_priv->bottom_line, GTK_STATE_NORMAL, &(druid_page_standard->background));
+	gtk_widget_modify_bg (druid_page_standard->_priv->background, GTK_STATE_NORMAL, &(druid_page_standard->background));
 	gtk_widget_modify_bg (druid_page_standard->_priv->evbox, GTK_STATE_NORMAL,&(druid_page_standard->contents_background));
 }

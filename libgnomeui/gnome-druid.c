@@ -36,6 +36,8 @@ struct _GnomeDruidPrivate
 	GnomeDruidPage *current;
 	GList *children;
 
+	GtkWidget *bbox;
+
 	gboolean show_finish : 1; /* if TRUE, then we are showing the finish button instead of the next button */
 	gboolean show_help : 1;
 };
@@ -178,16 +180,35 @@ gnome_druid_instance_init (GnomeDruid *druid)
 	GTK_WIDGET_SET_FLAGS (druid->finish, GTK_CAN_DEFAULT);
 	druid->help = gtk_button_new_from_stock (GTK_STOCK_HELP);
 	GTK_WIDGET_SET_FLAGS (druid->help, GTK_CAN_DEFAULT);
-	gtk_widget_set_parent (druid->back, GTK_WIDGET (druid));
-	gtk_widget_set_parent (druid->next, GTK_WIDGET (druid));
-	gtk_widget_set_parent (druid->cancel, GTK_WIDGET (druid));
-	gtk_widget_set_parent (druid->finish, GTK_WIDGET (druid));
-	gtk_widget_set_parent (druid->help, GTK_WIDGET (druid));
 	gtk_widget_show (druid->back);
 	gtk_widget_show (druid->next);
 	gtk_widget_show (druid->cancel);
-	gtk_widget_show (druid->finish);
-	gtk_widget_show (druid->help);
+
+	druid->_priv->bbox = gtk_hbutton_box_new ();
+	gtk_button_box_set_layout (GTK_BUTTON_BOX (druid->_priv->bbox),
+				   GTK_BUTTONBOX_END);
+	/* FIXME: use a style property for these */
+	gtk_box_set_spacing (GTK_BOX (druid->_priv->bbox), 10);
+	gtk_container_set_border_width (GTK_CONTAINER (druid->_priv->bbox), 5);
+	gtk_widget_set_parent (druid->_priv->bbox, GTK_WIDGET (druid));
+	gtk_widget_show (druid->_priv->bbox);
+
+	gtk_box_pack_end (GTK_BOX (druid->_priv->bbox), druid->help,
+			  FALSE, TRUE, 0);
+	gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (druid->_priv->bbox),
+					    druid->help, TRUE);
+
+	gtk_box_pack_end (GTK_BOX (druid->_priv->bbox), druid->cancel,
+			  FALSE, TRUE, 0);
+
+	gtk_box_pack_end (GTK_BOX (druid->_priv->bbox), druid->back,
+			  FALSE, TRUE, 0);
+
+	gtk_box_pack_end (GTK_BOX (druid->_priv->bbox), druid->next,
+			  FALSE, TRUE, 0);
+
+	gtk_box_pack_end (GTK_BOX (druid->_priv->bbox), druid->finish,
+			  FALSE, TRUE, 0);
 
 	/* other flags */
 	druid->_priv->current = NULL;
@@ -231,24 +252,13 @@ gnome_druid_destroy (GtkObject *object)
 
 	druid = GNOME_DRUID (object);
 
-	if(druid->back) {
-		gtk_widget_destroy (druid->back);
+	if(druid->_priv->bbox) {
+		gtk_widget_destroy (druid->_priv->bbox);
+		druid->_priv->bbox = NULL;
 		druid->back = NULL;
-	}
-	if(druid->next) {
-		gtk_widget_destroy (druid->next);
 		druid->next = NULL;
-	}
-	if(druid->cancel) {
-		gtk_widget_destroy (druid->cancel);
 		druid->cancel = NULL;
-	}
-	if(druid->finish) {
-		gtk_widget_destroy (druid->finish);
 		druid->finish = NULL;
-	}
-	if(druid->help) {
-		gtk_widget_destroy (druid->help);
 		druid->help = NULL;
 	}
 
@@ -352,6 +362,7 @@ gnome_druid_size_request (GtkWidget *widget,
         requisition->width = temp_width + 2 * border;
         requisition->height = temp_height + 2 * border;
 
+#if 0
 	/* In an Attempt to show how the widgets are packed,
 	 * here's a little diagram.
 	 * 
@@ -389,10 +400,13 @@ gnome_druid_size_request (GtkWidget *widget,
 	temp_height += GNOME_PAD_SMALL;
 
 	temp_width = temp_width * 21/4  + GNOME_PAD_SMALL * 3;
+#endif
+
+	gtk_widget_size_request (druid->_priv->bbox, &child_requisition);
 
 	/* pick which is bigger, the buttons, or the GnomeDruidPages */
-	requisition->width = MAX (temp_width, requisition->width);
-	requisition->height += temp_height + GNOME_PAD_SMALL * 2;
+	requisition->width = MAX (child_requisition.width, requisition->width);
+	requisition->height += child_requisition.height + GNOME_PAD_SMALL * 2;
 }
 
 static void
@@ -413,6 +427,7 @@ gnome_druid_size_allocate (GtkWidget *widget,
 
 	border = GTK_CONTAINER(widget)->border_width;
 
+#if 0
 	/* deal with the buttons */
 	child_allocation.width = child_allocation.height = 0;
 	child_allocation.width = druid->back->requisition.width;
@@ -443,6 +458,13 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	gtk_widget_size_allocate (druid->back, &child_allocation);
 	child_allocation.x = allocation->x + border;
 	gtk_widget_size_allocate (druid->help, &child_allocation);
+#endif
+	button_height = druid->_priv->bbox->requisition.height;
+	child_allocation.x = allocation->x;
+	child_allocation.y = allocation->y + allocation->height - button_height;
+	child_allocation.height = button_height;
+	child_allocation.width = allocation->width;
+	gtk_widget_size_allocate (druid->_priv->bbox, &child_allocation);
 	
 	/* Put up the GnomeDruidPage */
 	child_allocation.x = allocation->x + border;
@@ -478,6 +500,7 @@ gnome_druid_map (GtkWidget *widget)
 	druid = GNOME_DRUID (widget);
 	GTK_WIDGET_SET_FLAGS (druid, GTK_MAPPED);
 
+#if 0
 	gtk_widget_map (druid->back);
 	if (druid->_priv->show_finish)
 		gtk_widget_map (druid->finish);
@@ -486,6 +509,8 @@ gnome_druid_map (GtkWidget *widget)
 	if (druid->_priv->show_help)
 		gtk_widget_map (druid->help);
 	gtk_widget_map (druid->cancel);
+#endif
+	gtk_widget_map (druid->_priv->bbox);
 	if (druid->_priv->current &&
 	    GTK_WIDGET_VISIBLE (druid->_priv->current) &&
 	    !GTK_WIDGET_MAPPED (druid->_priv->current)) {
@@ -503,7 +528,7 @@ gnome_druid_unmap (GtkWidget *widget)
 
 	druid = GNOME_DRUID (widget);
 	GTK_WIDGET_UNSET_FLAGS (druid, GTK_MAPPED);
-
+#if 0
 	gtk_widget_unmap (druid->back);
 	if (druid->_priv->show_finish)
 		gtk_widget_unmap (druid->finish);
@@ -512,6 +537,8 @@ gnome_druid_unmap (GtkWidget *widget)
 	gtk_widget_unmap (druid->cancel);	
 	if (druid->_priv->show_help)
 		gtk_widget_unmap (druid->help);
+#endif
+	gtk_widget_unmap (druid->_priv->bbox);
 	if (druid->_priv->current &&
 	    GTK_WIDGET_VISIBLE (druid->_priv->current) &&
 	    GTK_WIDGET_MAPPED (druid->_priv->current))
@@ -579,11 +606,15 @@ gnome_druid_forall (GtkContainer *container,
 		(* callback) (GTK_WIDGET (child), callback_data);
 	}
 	if (include_internals) {
+		/* FIXME: should this be gtk_contianer_forall() ? */
+		(* callback) (druid->_priv->bbox, callback_data);
+#if 0
 		(* callback) (druid->back, callback_data);
 		(* callback) (druid->next, callback_data);
 		(* callback) (druid->cancel, callback_data);
 		(* callback) (druid->finish, callback_data);
 		(* callback) (druid->help, callback_data);
+#endif
 	}
 }
 
@@ -611,6 +642,9 @@ gnome_druid_expose (GtkWidget      *widget,
 							child, event);
 		}
 		gtk_container_propagate_expose (GTK_CONTAINER (widget),
+						druid->_priv->bbox, event);
+#if 0
+		gtk_container_propagate_expose (GTK_CONTAINER (widget),
 						druid->back, event);
 		gtk_container_propagate_expose (GTK_CONTAINER (widget),
 						druid->next, event);
@@ -620,6 +654,7 @@ gnome_druid_expose (GtkWidget      *widget,
 						druid->finish, event);
 		gtk_container_propagate_expose (GTK_CONTAINER (widget),
 						druid->help, event);
+#endif
 	}
 	return FALSE;
 }
@@ -872,19 +907,11 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
 		return;
 
 	if (show_finish) {
-		undefault_button (druid->next);
-
-		if (GTK_WIDGET_MAPPED (druid->next)) {
-			gtk_widget_unmap (druid->next);
-			gtk_widget_map (druid->finish);
-		}
+		gtk_widget_hide (druid->next);
+		gtk_widget_show (druid->finish);
 	} else {
-		undefault_button (druid->finish);
-
-		if (GTK_WIDGET_MAPPED (druid->finish)) {
-			gtk_widget_unmap (druid->finish);
-			gtk_widget_map (druid->next);
-		}
+		gtk_widget_hide (druid->finish);
+		gtk_widget_show (druid->next);
 	}
 	druid->_priv->show_finish = show_finish?TRUE:FALSE;
 }
@@ -906,14 +933,11 @@ gnome_druid_set_show_help (GnomeDruid *druid,
 		return;
 
 	if (show_help) {
-		if (GTK_WIDGET_MAPPED (druid))
-			gtk_widget_map (druid->help);
+		gtk_widget_show (druid->help);
 	} else {
-		undefault_button (druid->help);
-		if (GTK_WIDGET_MAPPED (druid->help))
-			gtk_widget_unmap (druid->help);
+		gtk_widget_hide (druid->help);
 	}
-	druid->_priv->show_finish = show_help?TRUE:FALSE;
+	druid->_priv->show_help = show_help?TRUE:FALSE;
 }
 
 
