@@ -4,6 +4,10 @@
 	Clean up todo list
 	Canonicalize uris for folder lookup
 	Add filesystem volume
+	Better default permissions for new folders
+	Better display names for drives
+	Cache icons
+	Use previously read stat info for icon lookup
 	Various small fixes
 	
 2004-02-17  Alexander Larsson  <alexl@redhat.com>
