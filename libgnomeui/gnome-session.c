@@ -246,8 +246,9 @@ gnome_session_set_program (char *name)
 #endif /* HAVE_LIBSM */
 }
 
-void
-gnome_session_set_discard_command (int argc, char *argv[])
+/* Helper.  */
+static void
+set_prop_from_argv (char *property, int argc, char *argv[])
 {
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
@@ -257,7 +258,7 @@ gnome_session_set_discard_command (int argc, char *argv[])
   if (! info)
     return;
 
-  prop.name = SmDiscardCommand;
+  prop.name = property;
   prop.type = SmLISTofARRAY8;
 
   vals = (SmPropValue *) malloc (argc * sizeof (SmPropValue));
@@ -275,68 +276,30 @@ gnome_session_set_discard_command (int argc, char *argv[])
 
   free (vals);
 #endif /* HAVE_LIBSM */
+}
+
+void
+gnome_session_set_discard_command (int argc, char *argv[])
+{
+  set_prop_from_argv (SmDiscardCommand, argc, argv);
 }
 
 void
 gnome_session_set_restart_command (int argc, char *argv[])
 {
-#ifdef HAVE_LIBSM
-  SmProp prop, *proplist[1];
-  SmPropValue *vals;
-  int i;
-
-  if (! info)
-    return;
-
-  prop.name = SmRestartCommand;
-  prop.type = SmLISTofARRAY8;
-
-  vals = (SmPropValue *) malloc (argc * sizeof (SmPropValue));
-  for (i = 0; i < argc; ++i)
-    {
-      vals[i].length = strlen (argv[i]) + 1;
-      vals[i].value = argv[i];
-    }
-
-  prop.num_vals = argc;
-  prop.vals = vals;
-  proplist[0] = &prop;
-
-  SmcSetProperties (info->connection, 1, proplist);
-
-  free (vals);
-#endif /* HAVE_LIBSM */
+  set_prop_from_argv (SmRestartCommand, argc, argv);
 }
 
 void
 gnome_session_set_clone_command (int argc, char *argv[])
 {
-#ifdef HAVE_LIBSM
-  SmProp prop, *proplist[1];
-  SmPropValue *vals;
-  int i;
+  set_prop_from_argv (SmCloneCommand, argc, argv);
+}
 
-  if (! info)
-    return;
-
-  prop.name = SmCloneCommand;
-  prop.type = SmLISTofARRAY8;
-
-  vals = (SmPropValue *) malloc (argc * sizeof (SmPropValue));
-  for (i = 0; i < argc; ++i)
-    {
-      vals[i].length = strlen (argv[i]) + 1;
-      vals[i].value = argv[i];
-    }
-
-  prop.num_vals = argc;
-  prop.vals = vals;
-  proplist[0] = &prop;
-
-  SmcSetProperties (info->connection, 1, proplist);
-
-  free (vals);
-#endif /* HAVE_LIBSM */
+void
+gnome_session_set_initialization_command (int argc, char *argv[])
+{
+  set_prop_from_argv (GNOME_SM_INIT_COMMAND, argc, argv);
 }
 
 #ifdef HAVE_LIBSM

@@ -25,6 +25,10 @@ BEGIN_GNOME_DECLS
 #define SmRestartNever		3
 #endif /* HAVE_LIBSM */
 
+/* Name of the initialization command property.  */
+#define GNOME_SM_INIT_COMMAND "InitializationCommand"
+
+
 /* Some redefinitions so we can use familiar names.  */
 typedef enum
 {
@@ -98,6 +102,11 @@ void gnome_session_set_restart_command (int argc, char *argv[]);
 /* Set the clone command.  This is like the restart command but
    doesn't preserve session id info.  */
 void gnome_session_set_clone_command (int argc, char *argv[]);
+
+/* Set the initialization command.  This is a Gnome-specific
+   extension.  When a session starts, each initialization command gets
+   run exactly once (duplicates are trimmed).  */
+void gnome_session_set_initialization_command (int argc, char *argv[]);
 
 /* Set the program name.  The argument should just be ARGV[0].  */
 void gnome_session_set_program (char *name);
