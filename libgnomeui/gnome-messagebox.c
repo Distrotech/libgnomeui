@@ -50,6 +50,10 @@ static void gnome_message_box_class_init (GnomeMessageBoxClass *klass);
 static void gnome_message_box_init       (GnomeMessageBox      *messagebox);
 static void gnome_message_box_destroy    (GtkObject            *object);
 static void gnome_message_box_finalize   (GObject              *object);
+static void gnome_message_box_construct  (GnomeMessageBox      *messagebox,
+					  const gchar          *message,
+					  const gchar          *message_box_type,
+					  const gchar         **buttons);
 
 static GnomeDialogClass *parent_class;
 
@@ -134,7 +138,7 @@ gnome_message_box_finalize(GObject *object)
  *
  * Returns:
  */
-void
+static void
 gnome_message_box_construct (GnomeMessageBox       *messagebox,
 			     const gchar           *message,
 			     const gchar           *message_box_type,

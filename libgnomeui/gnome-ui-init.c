@@ -51,7 +51,6 @@
 #include "gnome-client.h"
 #include "gnome-gconf-ui.h"
 #include "gnome-ui-init.h"
-#include "gnome-winhints.h"
 #include "gnome-stock-icons.h"
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -510,11 +509,13 @@ static void libgnomeui_segv_handle(int signum)
                 program = gnome_program_get();
 
 		/* Child process */
-		execl(GNOMEUIBINDIR "/gnome_segv", GNOMEUIBINDIR "/gnome_segv",
-		      gnome_program_get_name(program), buf, gnome_program_get_version(program), NULL);
+		execl (GNOMEUIBINDIR "/gnome_segv", GNOMEUIBINDIR "/gnome_segv",
+		       gnome_program_get_app_id (program), buf,
+		       gnome_program_get_app_version (program), NULL);
 
-                execlp("gnome_segv", "gnome_segv", gnome_program_get_name(program), buf,
-                       gnome_program_get_version(program), NULL);
+                execlp ("gnome_segv", "gnome_segv",
+			gnome_program_get_app_id (program), buf,
+			gnome_program_get_app_version (program), NULL);
 
                 _exit(99);
 	}

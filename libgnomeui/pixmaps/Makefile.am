@@ -32,6 +32,7 @@ stock_images = \
 	stock_text_unindent.png \
 	stock_timer.png \
 	stock_timer_stopped.png \
+	stock_trash.png \
 	stock_trash_full.png \
 	stock_volume.png \
 	stock_midi.png

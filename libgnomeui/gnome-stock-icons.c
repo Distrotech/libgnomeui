@@ -102,6 +102,7 @@ get_default_icons (GtkIconFactory *factory)
     
     add_sized (factory, stock_timer, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_TIMER);
     add_sized (factory, stock_timer_stopped, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_TIMER_STOP);
+    add_sized (factory, stock_trash, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_TRASH);
     add_sized (factory, stock_trash_full, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_TRASH_FULL);
 
     add_sized (factory, stock_mail, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_MAIL);

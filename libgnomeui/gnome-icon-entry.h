@@ -39,11 +39,10 @@
 
 
 #include <gtk/gtkvbox.h>
-#include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-file-entry.h>
 
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 
 #define GNOME_TYPE_ICON_ENTRY            (gnome_icon_entry_get_type ())
@@ -114,6 +113,6 @@ GtkWidget *gnome_icon_entry_gtk_entry   (GnomeIconEntry *ientry);
 #endif
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

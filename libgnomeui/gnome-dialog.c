@@ -798,6 +798,35 @@ gnome_dialog_set_default (GnomeDialog *dialog,
 }
 
 /**
+ * gnome_dialog_grab_focus: Makes a button grab the focus. T
+ * @dialog: #GnomeDialog to affect.
+ * @button: Number of the default button.
+ * 
+ * The button @button will grab the focus.  Use this for dialogs
+ * Where only buttons are displayed and you want to change the 
+ * default button.
+ **/
+void
+gnome_dialog_grab_focus (GnomeDialog *dialog, gint button)
+{
+  GList *list;
+
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  list = g_list_nth (dialog->buttons, button);
+
+  if (list && list->data){
+    gtk_widget_grab_focus (GTK_WIDGET (list->data));
+    return;
+  }
+#ifdef GNOME_ENABLE_DEBUG
+  /* If we didn't find the button, complain */
+  g_warning("Button number %d does not appear to exist\n", button); 
+#endif
+}
+
+/**
  * gnome_dialog_set_close: Whether to call gnome_dialog_close() when a button is clicked.
  * @dialog: #GnomeDialog to affect.
  * @click_closes: TRUE if clicking any button should call gnome_dialog_close().
@@ -1016,45 +1045,27 @@ gnome_dialog_button_clicked (GtkWidget   *button,
 
   while (list){
     if (list->data == button) {
-      gnome_dialog_clicked(GNOME_DIALOG(dialog), which);
-      /* Dialog may now be destroyed... */
-      break;
+	      gboolean click_closes;
+  
+	      click_closes = GNOME_DIALOG(dialog)->_priv->click_closes;
+
+	      gtk_signal_emit (GTK_OBJECT (dialog), dialog_signals[CLICKED], 
+			       which);
+
+	      /* The dialog may have been destroyed by the clicked signal, which
+		 is why we had to save the click_closes flag.  Users should be
+		 careful not to set click_closes and then destroy the dialog
+		 themselves too. */
+
+	      if (click_closes) {
+		      gnome_dialog_close(GNOME_DIALOG(dialog));
+	      }
+
+	      /* Dialog may now be destroyed... */
+	      break;
     }
     list = list->next;
     ++which;
-  }
-}
-
-/**
- * gnome_dialog_close: Emit the "clicked" signal as if a button was pressed.
- * @dialog: #GnomeDialog to click.
- * @button_num: button number to pass to the "clicked" signal.
- * 
- * This function emits the "clicked" signal, simulating a click
- * on the dialog buttons.
- * 
- **/
-void
-gnome_dialog_clicked (GnomeDialog *dialog,
-                      gint button_num)
-{
-  gboolean click_closes;
-  
-  g_return_if_fail(dialog != NULL);
-  g_return_if_fail(GNOME_IS_DIALOG(dialog));
-
-  click_closes = GNOME_DIALOG(dialog)->_priv->click_closes;
-  
-  gtk_signal_emit (GTK_OBJECT (dialog), dialog_signals[CLICKED], 
-                   button_num);
-          
-  /* The dialog may have been destroyed by the clicked signal, which
-     is why we had to save the click_closes flag.  Users should be
-     careful not to set click_closes and then destroy the dialog
-     themselves too. */
-
-  if (click_closes) {
-    gnome_dialog_close(GNOME_DIALOG(dialog));
   }
 }
 

@@ -126,7 +126,10 @@ error_idle_func (gpointer data)
 					 GTK_BUTTONS_OK,
 					 fmt,
 					 gnome_program_get_human_readable_name(gnome_program_get()));
-        gtk_widget_show_all(dialog);
+	gtk_signal_connect_object (GTK_OBJECT (dialog), "response",
+				   GTK_SIGNAL_FUNC (gtk_widget_destroy),
+				   GTK_OBJECT (dialog));
+        gtk_widget_show_all (dialog);
 
 
         /* FIXME put this in a "Technical Details" optional part of the dialog

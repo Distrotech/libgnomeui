@@ -59,20 +59,26 @@ libgnomeui_2_la_SOURCES = \
 	gnome-druid-page.c		\
 	gnome-druid-page-edge.c		\
 	gnome-druid-page-standard.c	\
-	gnome-component-widget.c	\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
 	gnome-gconf-ui.c		\
-	gnome-image-entry.c		\
-	gnome-image-selector.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-i18nP.h			\
 	gnome-messagebox.c		\
+	gnome-mdi.c			\
+	gnome-mdi-child.c		\
+	gnome-mdi-generic-child.c	\
+	gnome-mdi-session.c		\
+	gnome-pixmap.c			\
+	gnome-pixmap-entry.c		\
+	gnome-propertybox.c		\
+	gnome-scores.c			\
 	gnome-ui-init.c			\
-        gnome-winhints.c		\
 	gnometypes.c			\
+	gnome-icon-entry.c		\
 	gnome-icon-list.c		\
+	gnome-icon-sel.c		\
 	gnome-vfs-util.c		\
 	gnome-window.c			\
 	$(noinst_HEADERS)
@@ -93,22 +99,28 @@ gnome_headers = \
 	gnome-druid-page.h		\
 	gnome-druid-page-edge.h		\
 	gnome-druid-page-standard.h	\
-	gnome-component-widget.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
 	gnome-gconf-ui.h		\
-	gnome-image-entry.h		\
-	gnome-image-selector.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
+	gnome-icon-entry.h		\
 	gnome-icon-list.h		\
+	gnome-icon-sel.h		\
 	gnome-macros.h			\
 	gnome-messagebox.h		\
+	gnome-mdi.h			\
+	gnome-mdi-child.h		\
+	gnome-mdi-generic-child.h	\
+	gnome-mdi-session.h		\
+	gnome-pixmap.h			\
+	gnome-pixmap-entry.h		\
+	gnome-propertybox.h		\
+	gnome-scores.h			\
 	gnome-ui-init.h			\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
 	gnome-uidefs.h			\
-        gnome-winhints.h		\
 	gnome-vfs-util.h		\
 	gnome-window.h
 

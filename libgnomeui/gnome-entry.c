@@ -29,6 +29,7 @@
  */
 
 #include <config.h>
+#include "gnome-macros.h"
 
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
@@ -79,31 +80,50 @@ static void gnome_entry_set_property (GObject        *object,
 				      guint           param_id,
 				      const GValue   *value,
 				      GParamSpec     *pspec);
+static void gnome_entry_editable_init (GtkEditableClass *iface);
 
-static GtkComboClass *parent_class;
-
-guint
+/* Note, can't use boilerplate with interfaces yet,
+ * should get sorted out */
+static GtkComboClass *parent_class = NULL;
+GtkType
 gnome_entry_get_type (void)
 {
-	static guint entry_type = 0;
-
-	if (!entry_type) {
-		GtkTypeInfo entry_info = {
+	static GtkType object_type = 0;
+	if (object_type == 0) {
+		GtkType type_of_parent;
+		static const GtkTypeInfo object_info = {
 			"GnomeEntry",
 			sizeof (GnomeEntry),
 			sizeof (GnomeEntryClass),
 			(GtkClassInitFunc) gnome_entry_class_init,
 			(GtkObjectInitFunc) gnome_entry_init,
-			NULL,
-			NULL,
-			NULL
+			/* reserved_1 */ NULL,
+			/* reserved_2 */ NULL,
+			(GtkClassInitFunc) NULL
 		};
+		static const GInterfaceInfo editable_info =
+		{
+			(GInterfaceInitFunc) gnome_entry_editable_init,	 /* interface_init */
+			NULL,			                         /* interface_finalize */
+			NULL			                         /* interface_data */
+		};
+		type_of_parent = gtk_combo_get_type ();
+		object_type = gtk_type_unique (type_of_parent, &object_info);
+		parent_class = gtk_type_class (type_of_parent);
 
-		entry_type = gtk_type_unique (gtk_combo_get_type (), &entry_info);
+		g_type_add_interface_static (object_type,
+					     GTK_TYPE_EDITABLE,
+					     &editable_info);
 	}
-
-	return entry_type;
+	return object_type;
 }
+
+enum {
+	CHANGED_SIGNAL,
+	ACTIVATE_SIGNAL,
+	LAST_SIGNAL
+};
+static int gnome_entry_signals[LAST_SIGNAL] = {0};
 
 static void
 gnome_entry_class_init (GnomeEntryClass *class)
@@ -114,8 +134,28 @@ gnome_entry_class_init (GnomeEntryClass *class)
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_combo_get_type ());
-	
+	gnome_entry_signals[CHANGED_SIGNAL] =
+		gtk_signal_new("changed",
+			       GTK_RUN_LAST,
+			       GTK_CLASS_TYPE (object_class),
+			       GTK_SIGNAL_OFFSET(GnomeEntryClass,
+			       			 changed),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE,
+			       0);
+	gnome_entry_signals[ACTIVATE_SIGNAL] =
+		gtk_signal_new("activate",
+			       GTK_RUN_LAST,
+			       GTK_CLASS_TYPE (object_class),
+			       GTK_SIGNAL_OFFSET(GnomeEntryClass,
+			       			 activate),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE,
+			       0);
+
+	class->changed = NULL;
+	class->activate = NULL;
+
 	object_class->destroy = gnome_entry_destroy;
 		
 	gobject_class->finalize = gnome_entry_finalize;
@@ -188,6 +228,8 @@ entry_changed (GtkWidget *widget, gpointer data)
 
 	gentry = data;
 	gentry->_priv->changed = TRUE;
+
+	gtk_signal_emit (GTK_OBJECT (gentry), gnome_entry_signals[CHANGED_SIGNAL]);
 }
 
 static void
@@ -202,10 +244,11 @@ entry_activated (GtkWidget *widget, gpointer data)
 
 	if (!gentry->_priv->changed || (strcmp (text, "") == 0)) {
 		gentry->_priv->changed = FALSE;
-		return;
+	} else {
+		gnome_entry_prepend_history (gentry, TRUE, gtk_entry_get_text (GTK_ENTRY (widget)));
 	}
 
-	gnome_entry_prepend_history (gentry, TRUE, gtk_entry_get_text (GTK_ENTRY (widget)));
+	gtk_signal_emit (GTK_OBJECT (gentry), gnome_entry_signals[ACTIVATE_SIGNAL]);
 }
 
 static void
@@ -452,7 +495,7 @@ static char *
 build_prefix (GnomeEntry *gentry, gboolean trailing_slash)
 {
 	return g_strconcat ("/",
-			       gnome_program_get_name(gnome_program_get()),
+			       gnome_program_get_app_id (gnome_program_get()),
 			       "/History: ",
 			       gentry->_priv->history_id,
 			       trailing_slash ? "/" : "",
@@ -612,7 +655,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gnome_program_get_name(gnome_program_get()) && gentry->_priv->history_id))
+	if (!(gnome_program_get_app_id (gnome_program_get()) && gentry->_priv->history_id))
 		return;
 
 	free_items (gentry);
@@ -700,7 +743,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gnome_program_get_name(gnome_program_get()) && gentry->_priv->history_id))
+	if (!(gnome_program_get_app_id (gnome_program_get()) && gentry->_priv->history_id))
 		return;
 
 	prefix = build_prefix (gentry, TRUE);
@@ -732,4 +775,90 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	gnome_config_sync_file (prefix);
 	g_free (prefix);
 #endif
+}
+
+static void
+insert_text (GtkEditable    *editable,
+	     const gchar    *text,
+	     gint            length,
+	     gint           *position)
+{
+	GtkWidget *entry = gnome_entry_gtk_entry (GNOME_ENTRY (editable));
+	gtk_editable_insert_text (GTK_EDITABLE (entry),
+				  text,
+				  length,
+				  position);
+}
+
+static void
+delete_text (GtkEditable    *editable,
+	     gint            start_pos,
+	     gint            end_pos)
+{
+	GtkWidget *entry = gnome_entry_gtk_entry (GNOME_ENTRY (editable));
+	gtk_editable_delete_text (GTK_EDITABLE (entry),
+				  start_pos,
+				  end_pos);
+}
+
+static gchar*
+get_chars (GtkEditable    *editable,
+	   gint            start_pos,
+	   gint            end_pos)
+{
+	GtkWidget *entry = gnome_entry_gtk_entry (GNOME_ENTRY (editable));
+	return gtk_editable_get_chars (GTK_EDITABLE (entry),
+				       start_pos,
+				       end_pos);
+}
+
+static void
+set_selection_bounds (GtkEditable    *editable,
+		      gint            start_pos,
+		      gint            end_pos)
+{
+	GtkWidget *entry = gnome_entry_gtk_entry (GNOME_ENTRY (editable));
+	gtk_editable_select_region (GTK_EDITABLE (entry),
+				    start_pos,
+				    end_pos);
+}
+
+static gboolean
+get_selection_bounds (GtkEditable    *editable,
+		      gint           *start_pos,
+		      gint           *end_pos)
+{
+	GtkWidget *entry = gnome_entry_gtk_entry (GNOME_ENTRY (editable));
+	return gtk_editable_get_selection_bounds (GTK_EDITABLE (entry),
+						  start_pos,
+						  end_pos);
+}
+
+static void
+set_position (GtkEditable    *editable,
+	      gint            position)
+{
+	GtkWidget *entry = gnome_entry_gtk_entry (GNOME_ENTRY (editable));
+	gtk_editable_set_position (GTK_EDITABLE (entry),
+				   position);
+}
+
+static gint
+get_position (GtkEditable    *editable)
+{
+	GtkWidget *entry = gnome_entry_gtk_entry (GNOME_ENTRY (editable));
+	return gtk_editable_get_position (GTK_EDITABLE (entry));
+}
+
+static void
+gnome_entry_editable_init (GtkEditableClass *iface)
+{
+	/* Just proxy to the GtkEntry */
+	iface->insert_text = insert_text;
+	iface->delete_text = delete_text;
+	iface->get_chars = get_chars;
+	iface->set_selection_bounds = set_selection_bounds;
+	iface->get_selection_bounds = get_selection_bounds;
+	iface->set_position = set_position;
+	iface->get_position = get_position;
 }

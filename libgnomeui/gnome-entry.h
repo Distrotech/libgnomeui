@@ -35,6 +35,7 @@
 
 #include <glib.h>
 #include <gtk/gtkcombo.h>
+#include <gtk/gtkeditable.h>
 
 
 G_BEGIN_DECLS
@@ -46,6 +47,10 @@ G_BEGIN_DECLS
 #define GNOME_IS_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ENTRY))
 #define GNOME_IS_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ENTRY))
 #define GNOME_ENTRY_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_ENTRY, GnomeEntryClass))
+
+/* This also supports the GtkEditable interface so
+ * to get text use the gtk_editable_get_chars method
+ * on this object */
 
 
 typedef struct _GnomeEntry        GnomeEntry;
@@ -61,6 +66,14 @@ struct _GnomeEntry {
 
 struct _GnomeEntryClass {
 	GtkComboClass parent_class;
+
+	/* Like the GtkEntry signals */
+	void (* changed) (GnomeEntry *entry);
+	void (* activate) (GnomeEntry *entry);
+
+	gpointer reserved1, reserved2; /* Reserved for future use,
+					  we'll need to proxy insert_text
+					  and delete_text signals */
 };
 
 

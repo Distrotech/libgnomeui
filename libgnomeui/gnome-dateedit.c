@@ -45,6 +45,7 @@
 #include "gnome-dateedit.h"
 #include <libgnome/gnome-i18n.h>
 
+#include "gnometypebuiltins.h"
 struct _GnomeDateEditPrivate {
 	GtkWidget *date_entry;
 	GtkWidget *date_button;
@@ -405,59 +406,68 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 
 	object_class = (GtkObjectClass*) class;
 
+	container_class->forall = gnome_date_edit_forall;
+
+	object_class->destroy = gnome_date_edit_destroy;
+
+	gobject_class->finalize = gnome_date_edit_finalize;
+	gobject_class->get_property = gnome_date_edit_get_property;
+	gobject_class->set_property = gnome_date_edit_set_property;
+
 	g_object_class_install_property (gobject_class,
-				      PROP_TIME,
-				      g_param_spec_ulong ("time",
-							  _("Time"),
-							  _("The time currently"
-							    "selected"),
-							  0, G_MAXULONG,
-							  0,
-						          (G_PARAM_READABLE |
-							   G_PARAM_WRITABLE)));
+					 PROP_TIME,
+					 g_param_spec_ulong ("time",
+							     _("Time"),
+							     _("The time currently"
+							       "selected"),
+							     0, G_MAXULONG,
+							     0,
+							     (G_PARAM_READABLE |
+							      G_PARAM_WRITABLE)));
+	
 	/* FIXME: Not sure G_TYPE_FLAGS is right here, perhaps we
 	 * need a new type, Also think of a better name then "dateedit_flags" */
 	g_object_class_install_property (gobject_class,
-				      PROP_DATEEDIT_FLAGS,
-				      g_param_spec_flags ("dateedit_flags",
-							  _("DateEdit Flags"),
-							  _("Flags for how "
-							    "DateEdit looks"),
-							  G_TYPE_FLAGS,
-							  GNOME_DATE_EDIT_SHOW_TIME,
-						          (G_PARAM_READABLE |
-							   G_PARAM_WRITABLE)));
+					 PROP_DATEEDIT_FLAGS,
+					 g_param_spec_flags ("dateedit_flags",
+							     _("DateEdit Flags"),
+							     _("Flags for how "
+							       "DateEdit looks"),
+							     GNOME_TYPE_DATE_EDIT_FLAGS,
+							     GNOME_DATE_EDIT_SHOW_TIME,
+							     (G_PARAM_READABLE |
+							      G_PARAM_WRITABLE)));
 	g_object_class_install_property (gobject_class,
-				      PROP_LOWER_HOUR,
-				      g_param_spec_int ("lower_hour",
-							_("Lower Hour"),
-							_("Lower hour in "
-							  "the time popup "
-							  "selector"),
-							0, 24,
-							7,
-							(G_PARAM_READABLE |
-							 G_PARAM_WRITABLE)));
+					 PROP_LOWER_HOUR,
+					 g_param_spec_int ("lower_hour",
+							   _("Lower Hour"),
+							   _("Lower hour in "
+							     "the time popup "
+							     "selector"),
+							   0, 24,
+							   7,
+							   (G_PARAM_READABLE |
+							    G_PARAM_WRITABLE)));
 	g_object_class_install_property (gobject_class,
-				      PROP_UPPER_HOUR,
-				      g_param_spec_int ("upper_hour",
-							_("Upper Hour"),
-							_("Upper hour in "
-							  "the time popup "
-							  "selector"),
-							0, 24,
-							19,
-							(G_PARAM_READABLE |
-							 G_PARAM_WRITABLE)));
+					 PROP_UPPER_HOUR,
+					 g_param_spec_int ("upper_hour",
+							   _("Upper Hour"),
+							   _("Upper hour in "
+							     "the time popup "
+							     "selector"),
+							   0, 24,
+							   19,
+							   (G_PARAM_READABLE |
+							    G_PARAM_WRITABLE)));
 	g_object_class_install_property (gobject_class,
-				      PROP_INITIAL_TIME,
-				      g_param_spec_ulong ("initial_time",
-							  _("Initial Time"),
-							  _("The initial time"),
-							  0, G_MAXULONG,
-							  0,
-						          (G_PARAM_READABLE |
-							   G_PARAM_WRITABLE)));
+					 PROP_INITIAL_TIME,
+					 g_param_spec_ulong ("initial_time",
+							     _("Initial Time"),
+							     _("The initial time"),
+							     0, G_MAXULONG,
+							     0,
+							     (G_PARAM_READABLE |
+							      G_PARAM_WRITABLE)));
 	
 	date_edit_signals [TIME_CHANGED] =
 		gtk_signal_new ("time_changed",
@@ -475,14 +485,6 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 				gtk_signal_default_marshaller,
 				GTK_TYPE_NONE, 0);
 	
-	container_class->forall = gnome_date_edit_forall;
-
-	object_class->destroy = gnome_date_edit_destroy;
-
-	gobject_class->finalize = gnome_date_edit_finalize;
-	gobject_class->get_property = gnome_date_edit_get_property;
-	gobject_class->set_property = gnome_date_edit_set_property;
-
 	class->date_changed = NULL;
 	class->time_changed = NULL;
 }

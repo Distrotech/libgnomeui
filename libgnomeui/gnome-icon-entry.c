@@ -52,12 +52,12 @@
 #include "gnome-i18nP.h"
 
 #include <libgnome/gnome-util.h>
+#include <libgnomevfs/gnome-vfs-mime.h>
 
 #include "gnome-file-entry.h"
 #include "gnome-icon-list.h"
 #include "gnome-icon-sel.h"
 #include "gnome-icon-entry.h"
-#include "gnome-pixmap.h"
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
@@ -170,8 +170,7 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 			       			 browse),
 			       gtk_signal_default_marshaller,
 			       GTK_TYPE_NONE, 0);
-	gtk_object_class_add_signals (object_class, gnome_ientry_signals,
-				      LAST_SIGNAL);
+
 	class->changed = NULL;
 	class->browse = ientry_browse;
 
@@ -264,7 +263,7 @@ static void
 entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 {
 	gchar *t;
-        GdkPixbuf *pixbuf;
+        GdkPixbuf *pixbuf, *scaled;
 	GtkWidget *child;
 	int w,h;
 
@@ -276,9 +275,9 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 
 	child = GTK_BIN(ientry->_priv->pickbutton)->child;
 	
-	if(!t || !g_file_test (t, G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(pixbuf = gdk_pixbuf_new_from_file (t))) {
-		if(GNOME_IS_PIXMAP(child)) {
+	if(!t || !g_file_test (t, G_FILE_TEST_IS_SYMLINK | G_FILE_TEST_IS_REGULAR) ||
+	   !(pixbuf = gdk_pixbuf_new_from_file (t, NULL))) {
+		if(GTK_IS_IMAGE(child)) {
 			gtk_drag_source_unset (ientry->_priv->pickbutton);
 			gtk_widget_destroy(child);
 			child = gtk_label_new(_("No Icon"));
@@ -303,13 +302,15 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 			h = 48;
 		}
 	}
-	if(GNOME_IS_PIXMAP(child)) {
-                gnome_pixmap_clear(GNOME_PIXMAP(child));
-		gnome_pixmap_set_pixbuf(GNOME_PIXMAP(child), pixbuf);
-		gnome_pixmap_set_pixbuf_size (GNOME_PIXMAP(child), w, h);
+	scaled = gdk_pixbuf_scale_simple
+		(pixbuf, w, h, GDK_INTERP_BILINEAR);
+        gdk_pixbuf_unref(pixbuf);
+
+	if (GTK_IS_IMAGE (child)) {
+                gtk_image_set_from_pixbuf (GTK_IMAGE (child), scaled);
         } else {
-		gtk_widget_destroy(child);
-		child = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
+		gtk_widget_destroy (child);
+                child = gtk_image_new_from_pixbuf (scaled);
 		gtk_widget_show(child);
 		gtk_container_add(GTK_CONTAINER(ientry->_priv->pickbutton), child);
 
@@ -322,7 +323,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 					     GDK_ACTION_COPY);
 		}
 	}
-        gdk_pixbuf_unref(pixbuf);
+	gdk_pixbuf_unref (scaled);
 	gtk_drag_source_set (ientry->_priv->pickbutton,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drop_types, 1,
@@ -334,7 +335,7 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 {
 	struct stat buf;
 	GnomeIconSelection * gis;
-	gchar *filename;
+	const gchar *filename;
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_ENTRY (widget));
@@ -362,10 +363,10 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 static void
 setup_preview(GtkWidget *widget)
 {
-	gchar *p;
+	const gchar *p;
 	GList *l;
 	GtkWidget *pp = NULL;
-        GdkPixbuf *pixbuf;
+        GdkPixbuf *pixbuf, *scaled;
 	int w,h;
 	GtkWidget *frame;
 	GtkFileSelection *fs;
@@ -376,7 +377,7 @@ setup_preview(GtkWidget *widget)
 	frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
 	fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
 
-	if((l = gtk_container_children(GTK_CONTAINER(frame))) != NULL) {
+	if((l = gtk_container_get_children(GTK_CONTAINER(frame))) != NULL) {
 		pp = l->data;
 		g_list_free(l);
 	}
@@ -385,8 +386,8 @@ setup_preview(GtkWidget *widget)
 		gtk_widget_destroy(pp);
 	
 	p = gtk_file_selection_get_filename(fs);
-	if(!p || !g_file_test (p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(pixbuf = gdk_pixbuf_new_from_file (p)))
+	if(!p || !g_file_test (p,G_FILE_TEST_IS_SYMLINK | G_FILE_TEST_IS_REGULAR) ||
+	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL)))
 		return;
 
 	w = gdk_pixbuf_get_width(pixbuf);
@@ -402,11 +403,14 @@ setup_preview(GtkWidget *widget)
 			h = 100;
 		}
 	}
-	pp = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
+
+	scaled = gdk_pixbuf_scale_simple (pixbuf, w, h, GDK_INTERP_BILINEAR);
+        gdk_pixbuf_unref (pixbuf);
+	pp = gtk_image_new_from_pixbuf (scaled);
+        gdk_pixbuf_unref (scaled);
+
 	gtk_widget_show(pp);
 	gtk_container_add(GTK_CONTAINER(frame),pp);
-
-        gdk_pixbuf_unref(pixbuf);
 }
 
 static void
@@ -601,9 +605,9 @@ ientry_browse(GnomeIconEntry *ientry)
 	tl = gtk_widget_get_toplevel (GTK_WIDGET (ientry->_priv->pickbutton));
 	
 	if(!p) {
-		if(fe->default_path)
+		if(fe->default_path) {
 			p = g_strdup(fe->default_path);
-		else {
+		} else {
 			/*get around the g_free/free issue*/
 			gchar *cwd = g_get_current_dir ();
 			p = g_strdup(cwd);
@@ -614,16 +618,16 @@ ientry_browse(GnomeIconEntry *ientry)
 	}
 
 	/*figure out the directory*/
-	if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
+	if(!g_file_test (p,G_FILE_TEST_IS_DIR)) {
 		gchar *d;
 		d = g_path_get_dirname (p);
 		g_free (p);
 		p = d;
-		if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
+		if(!g_file_test (p,G_FILE_TEST_IS_DIR)) {
 			g_free (p);
-			if(fe->default_path)
+			if(fe->default_path) {
 				p = g_strdup(fe->default_path);
-			else {
+			} else {
 				/*get around the g_free/free issue*/
 				gchar *cwd = g_get_current_dir ();
 				p = g_strdup(cwd);
@@ -631,7 +635,7 @@ ientry_browse(GnomeIconEntry *ientry)
 			}
 			gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->_priv->fentry))),
 				    p);
-			g_return_if_fail(g_file_test (p,G_FILE_TEST_ISDIR));
+			g_return_if_fail(g_file_test (p,G_FILE_TEST_IS_DIR));
 		}
 	}
 	
@@ -673,9 +677,9 @@ ientry_browse(GnomeIconEntry *ientry)
 						   ientry->_priv->pick_dialog_dir);
 
 
-		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->_priv->pick_dialog)->vbox),
+		gtk_box_pack_start(GTK_BOX(GTK_DIALOG(ientry->_priv->pick_dialog)->vbox),
 				   ientry->_priv->fentry, FALSE, FALSE, 0);
-		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->_priv->pick_dialog)->vbox),
+		gtk_box_pack_start(GTK_BOX(GTK_DIALOG(ientry->_priv->pick_dialog)->vbox),
 				   iconsel, TRUE, TRUE, 0);
 
 		gtk_widget_show_all(ientry->_priv->pick_dialog);
@@ -727,20 +731,21 @@ drag_data_received (GtkWidget        *widget,
 		    guint32           time,
 		    GnomeIconEntry   *ientry)
 {
-	GList *files, *li;
-
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+	GList *uris, *li;
+	GnomeVFSURI *uri = NULL;
 
 	/*here we extract the filenames from the URI-list we recieved*/
-	files = gnome_uri_list_extract_filenames(selection_data->data);
-	/*if there's isn't a file*/
-	if(!files) {
-		gtk_drag_finish(context,FALSE,FALSE,time);
-		return;
-	}
+	uris = gnome_vfs_uri_list_parse (selection_data->data);
 
-	for(li = files; li!=NULL; li = li->next) {
+	/* FIXME: Support multiple files */
+	/* FIXME: Support executable entries (smack files after others) */
+	for (li = uris; li != NULL; li = li->next) {
+		uri = li->data;
+		/* FIXME: Support non-local files */
+		if ( ! gnome_vfs_uri_is_local (uri)) {
+			uri = NULL;
+			continue;
+		}
 		/* FIXME! we have to do this by hand nowdays, no ditem */
 #ifdef FIXME
 		const char *mimetype;
@@ -766,13 +771,25 @@ drag_data_received (GtkWidget        *widget,
 				break;
 			}
 			gnome_desktop_item_unref(item);
+		} else
 #endif
-		} else if(gnome_icon_entry_set_filename(ientry, li->data))
+		if(gnome_icon_entry_set_filename(ientry,
+						 gnome_vfs_uri_get_path (uri))) {
 			break;
+		}
+		uri = NULL;
+	}
+
+	/*if there's isn't a file*/
+	if (uri == NULL) {
+		gtk_drag_finish (context, FALSE, FALSE, time);
+		/*free the list of files we got*/
+		gnome_vfs_uri_list_free (uris);
+		return;
 	}
 
 	/*free the list of files we got*/
-	gnome_uri_list_free_strings (files);
+	gnome_vfs_uri_list_free (uris);
 }
 
 static void  
@@ -855,7 +872,11 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 
 	gtk_widget_show (ientry->_priv->fentry);
 	
-	p = gnome_pixmap_file(".");
+	p = gnome_program_locate_file (NULL /* program */,
+				       GNOME_FILE_DOMAIN_PIXMAP,
+				       ".",
+				       FALSE /* only_if_exists */,
+				       NULL /* ret_locations */);
 	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),p);
 	g_free(p);
 	
@@ -942,7 +963,11 @@ gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
 	if(g_path_is_absolute(subdir)) {
 		gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->_priv->fentry), subdir);
 	} else {
-		gchar *p = gnome_pixmap_file(subdir);
+		char *p = gnome_program_locate_file (NULL /* program */,
+						     GNOME_FILE_DOMAIN_PIXMAP,
+						     subdir,
+						     FALSE /* only_if_exists */,
+						     NULL /* ret_locations */);
 		gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->_priv->fentry), p);
 		g_free(p);
 	}
@@ -978,7 +1003,7 @@ gnome_icon_entry_set_filename(GnomeIconEntry *ientry,
 
 	child = GTK_BIN(ientry->_priv->pickbutton)->child;
 	/* this happens if it doesn't exist or isn't an image */
-	if(!GNOME_IS_PIXMAP(child))
+	if ( ! GTK_IS_IMAGE (child))
 		return FALSE;
 
 	return TRUE;
@@ -1006,7 +1031,7 @@ gnome_icon_entry_get_filename(GnomeIconEntry *ientry)
 	child = GTK_BIN(ientry->_priv->pickbutton)->child;
 	
 	/* this happens if it doesn't exist or isn't an image */
-	if( ! GNOME_IS_PIXMAP(child))
+	if ( ! GTK_IS_IMAGE (child))
 		return NULL;
 	
 	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),

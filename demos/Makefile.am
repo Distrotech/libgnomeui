@@ -19,14 +19,9 @@ LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui-2.la \
 	$(LIBGNOMEUI_DEMOS_LIBS)
 
-noinst_PROGRAMS = \
-	winhints_demo
-
 EXTRA_PROGRAMS = \
 	mdi_demo		\
 	animator_demo
-
-winhints_demo_SOURCES = winhints_demo.c
 
 animator_demo_SOURCES = animator_demo.c
 

@@ -1,3 +1,8 @@
+2001-08-30  Anders Carlsson  <andersca@gnu.org>
+
+	* Makefile.am (animator_demo_SOURCES): Remove
+	winhints-demo.
+
 2001-08-01  Darin Adler  <darin@bentspoon.com>
 
 	* winhints_demo.c: Update for changes to GnomeAbout.

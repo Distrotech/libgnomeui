@@ -1,3 +1,149 @@
+Sun Sep 02 02:46:07 2001  George Lebl <jirka@5z.com>
+
+	* libgnomeui.h: add gnome-scores.h
+
+Sun Sep 02 00:55:54 2001  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.c, gnome-entry.c, gnome-ui-init.c:
+	  gnome_program_get_name is now gnome_program_get_app_id and
+	  gnome_program_get_version is now gnome_program_get_app_version
+
+Sat Sep 01 23:38:29 2001  George Lebl <jirka@5z.com>
+
+	* Makefile.am, gnome-scores.[ch]:  Port to GtkDialog and bring back
+	  to life
+
+Sat Sep 01 17:41:16 2001  George Lebl <jirka@5z.com>
+
+	* gnome-dialog.[ch]: bring to strict 1.0 API level, dump clicked
+	  method and add grab_focus
+
+	* gnome-messagebox.[ch]: bring to strict 1.0 API leve, dump the
+	  public construct method
+
+2001-09-01  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-window.c, gnome-window.h:
+	Remove icon setter functions since better ones now exist in gtk+.
+
+Fri Aug 31 17:24:25 2001  George Lebl <jirka@5z.com>
+
+	* gnome-mdi.h, gnome-mdi-child.h, gnome-mdi-generic-child.h:  Add a
+	  reserved pointer to the struct, just in case we'd need a private
+	  struct.
+
+Fri Aug 31 16:07:13 2001  George Lebl <jirka@5z.com>
+
+	* gnome-mdi*.[ch], libgnomeui.h, Makefile.am: Do a port of the 1.0
+	  version of gnome-mdi.  Of course all deprecated.
+
+Fri Aug 31 03:59:37 2001  George Lebl <jirka@5z.com>
+
+	* gnome-pixmap-entry.c, gnome-icon-entry.c: a bit of fixup for new
+	  GTK+ api
+
+Fri Aug 31 03:16:44 2001  George Lebl <jirka@5z.com>
+
+	* gnome-icon-entry.h, gnome-icon-sel.h, gnome-pixmap-entry.h:  Remove
+	  the include of gnome-defs.h.  Damn includes mess.  I wasn't seeing
+	  this issue.
+
+2001-08-31  Anders Carlsson  <andersca@gnu.org>
+
+	* Makefile.am: Remove gnome-component-widget.[ch]
+	
+	* gnome-app-helper.c: Include gnome-init.h
+	
+	* gnome-component-widget.c: Remove.
+	
+	* gnome-component-widget.h: Remove.
+	
+	* gnome-dateedit.c: (gnome_date_edit_class_init): Set
+	get_property and set_property before adding properties.
+
+Thu Aug 30 19:50:09 2001  George Lebl <jirka@5z.com>
+
+	* gnome-propertybox.[ch], libgnomeui.h, Makefile.am:  Add the
+	  deprecated gnome-propertybox widget.  Exactly the same as 1.0
+	  version and all under _DISABLE_DEPRECATED
+
+	* gnome-entry.h, gnome-file-entry.h:  In case it will at some point
+	  be possible to add insert_text and delete_text signals and have
+	  the filtering semantics work, added two reserved pointers in the
+	  class structures.
+
+Thu Aug 30 18:51:12 2001  George Lebl <jirka@5z.com>
+
+	* gnome-macros.h: Fix typo in parent_class declaration
+
+	* gnome-pixmap-entry.[ch]:  Make this subclassed from
+	  GnomeFileEntry.  This means that a bunch of code could
+	  disappear and some methods can be deprecated.
+
+	* gnome-file-entry.[ch], gnome-entry.[ch]:  Make these things
+	  have the GtkEditable interface so that they are more standard
+	  entry widgets, and thus easy to use.  Also make them have the
+	  "changed" and "activate" signals so that accessing the GtkEntry
+	  directly basically isn't necessary at all now.  Also it will
+	  easily plug into all code that can handle GtkEditables.
+
+Thu Aug 30 16:04:02 2001  George Lebl <jirka@5z.com>
+
+	* gnome-stock-icons.[ch], pixmaps/stock_trash.png,
+	  pixmaps/Makefile.am: Add the trash icon so that now we have
+	  the full set of icons as in 1.0, that is mapped to the GTK ones.
+
+	* pixmaps/copyright.txt: comically this still mentioned Imlib
+
+Thu Aug 30 15:55:09 2001  George Lebl <jirka@5z.com>
+
+	* gnome-stock-icons.h: add all the deprecated gnome-stock id's and
+	  map them to the corresponding gtk-stock id's.  We're only missing
+	  TRASH right now
+
+Thu Aug 30 14:38:35 2001  George Lebl <jirka@5z.com>
+
+	* gnome-pixmap-entry.[ch], libgnomeui.h, Makefile.am:  Add back the
+	  pixmap entry.  Still needs a little bit of love but pretty much
+	  there and sane
+
+	* gnome-image-selector.[ch], gnome-image-entry.[ch], Makefile.am,
+	  libgnomeui.h:  This is an uncontraversial change, this this now
+	  should live in bonobo extra apparently.
+
+2001-08-30  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-href.c (gnome_href_class_init): Make the properties 
+	actually work.
+	(gnome_href_construct): Remove this function, since we can
+	do everything with properties now.
+	(gnome_href_new): Use g_object_new.
+
+Thu Aug 30 05:42:06 2001  George Lebl <jirka@5z.com>
+
+	* gnome-winhints.[ch], gnome-client.c, gnome-ui-init.c: drop
+	  this module according to plan.  We should all rejoice,
+	  all rastercode is now gone from gnome-libs.
+
+	* gnome-file-entry.[ch], gnome-icon-entry.c, libgnomeui.h,
+	  Makefile.am:  The uncontraversial change apparently.  Finish
+	  gnome-icon-entry and make it use non-deprecated widgets.
+
+	* gnome-pixmap.c: use GNOME_DISABLE_DEPRECATED_SOURCE on the
+	  entire source.
+
+Thu Aug 30 04:08:18 2001  George Lebl <jirka@5z.com>
+
+	* gnome-pixmap.[ch]:  put the deprecated widget back here.
+	  Implements about 2/3's (The non imlib stuff) from 1.0 GnomePixmap
+	  and it's just a thin wrapper around GtkImage.  I took it originally
+	  from libgnome1-compat where the version is completely screwed since
+	  it didn't resemble the gnome1 widget at all :)
+
+Tue Aug 28 22:38:38 2001  George Lebl <jirka@5z.com>
+
+	* gnome-gconf-ui.c: Make the OK button close the dialog
+
 2001-08-28  Seth Nickell  <snickell@stanford.edu>
 
 	* gnome-icon-list.c:
