@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include "libgnome/libgnome.h"
-#include "gnome-colors.h"
 
 static void gnome_rc_parse(gchar *command);
 
@@ -16,7 +15,6 @@ gnome_init (gint *argc, gchar ***argv)
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_set_locale();
 	gtk_init(argc, argv);
-	gnome_colors_init();
 	
 	gnome_rc_parse(*argv[0]);
 

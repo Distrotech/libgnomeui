@@ -1,3 +1,11 @@
+1998-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-init.c (gnome_init): At last!  The horribly broken
+	gnome_colors goes to hell now that we have imlib and the
+	GdkColorContext :-)
+
+	* libgnomeui.h: Removed gnome-colors include.
+
 Tue Feb 17 00:16:49 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gnome-messagebox.c (gnome_messagebox_button_clicked): Fixed
