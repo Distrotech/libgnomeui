@@ -1,3 +1,11 @@
+2001-01-05  John Harper  <jsh@eazel.com>
+
+	* gnome-canvas.c (gnome_canvas_focus_in,
+	gnome_canvas_focus_out): added code to set and unset the
+	HAS_FOCUS flag (which all focusable widgets should do). Without
+	this patch the canvas (and thus the focused canvas item) will
+	not receive focus out events
+
 2000-12-29  Jaka Mocnik  <jaka@gnu.org>
 
 	* gnome-mdi.[ch] (gnome_mdi_get_children, gnome_mdi_get_windows):
