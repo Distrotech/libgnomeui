@@ -1,3 +1,8 @@
+Wed Aug 12 14:48:24 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-stock-imlib.h: Made all gnome stock pixmaps 
+	  const. (Makes >100k more memory shared between gnome apps)
+
 Wed Aug 12 18:01:30 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.[ch]: 1st go at a rewrite of the gnome stock widget.
@@ -21,6 +26,7 @@ Tue Aug 11 23:35:58 1998  Jonathan Blandford <jrb@mit.edu>
 	* gnome-canvas.h: Documentation fixes and additions.  Added
 	descriptions of object arguments.
 
+>>>>>>> 1.378
 1998-08-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_set_arg): Added
