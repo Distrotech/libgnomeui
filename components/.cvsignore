@@ -1,0 +1,11 @@
+*.la
+*.lo
+.deps
+.libs
+Makefile
+Makefile.in
+_libs
+so_locations
+.exrc
+GNOME_UI_Components.oaf
+libgnomeui-components

@@ -1,0 +1,9 @@
+2001-05-19  Martin Baulig  <baulig@suse.de>
+
+	* gnome-image-entry-component.[ch]: Moved here from ../libgnomeui.
+	* gnome-icon-selector-component.[ch]: Likewise.
+
+	* libgnomeui-components.c: New file.
+
+	* GNOME_UI_Components.oaf.in: New file.
+

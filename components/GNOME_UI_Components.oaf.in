@@ -1,0 +1,27 @@
+<oaf_info>
+
+<oaf_server iid="OAFIID:GNOME_UI_Components_Factory" type="shlib" location="@COMPONENTS_LIBDIR@/libgnomeui-components-2.so">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:GNOME/GenericFactory:1.0"/>
+	</oaf_attribute>
+
+	<oaf_attribute name="name" type="string" value="GNOME UI Components Factory"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:GNOME_UI_Component_IconSelector" type="factory" location="OAFIID:GNOME_UI_Components_Factory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:GNOME/Selector:1.0"/>
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="GNOME Icon Selector"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:GNOME_UI_Component_ImageEntry" type="factory" location="OAFIID:GNOME_UI_Components_Factory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/ItemContainer:1.0"/>
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="GNOME Image Entry"/>
+</oaf_server>
+
+</oaf_info>
