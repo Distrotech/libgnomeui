@@ -34,7 +34,6 @@
 
 #include <libgnome/gnome-i18n.h>
 #include "gnome-app.h"
-#include "gnome-app-helper.h"
 #include "gnome-stock.h"
 #include "gnome-popup-help.h"
 #include "gnome-popup-menu.h"

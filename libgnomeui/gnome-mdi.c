@@ -34,7 +34,6 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 #include "gnome-app.h"
-#include "gnome-app-helper.h"
 #include "gnome-cursors.h"
 #include "gnome-dock-layout.h"
 #include "gnome-stock.h"

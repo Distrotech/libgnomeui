@@ -34,7 +34,6 @@
 #include <gdk/gdk.h>
 
 #include "gnome-app.h"
-#include "gnome-app-helper.h"
 
 #include "gnome-mdi.h"
 #include "gnome-mdi-child.h"
