@@ -567,13 +567,10 @@ clear_calc(GtkWidget *w, gpointer data)
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
-	while(gc->stack)
-		stack_pop(&gc->stack);
-
 	gc->result = 0;
 	strcpy(gc->result_string,"0");
-	gc->invert = FALSE;
 	gc->error = FALSE;
+	gc->invert = FALSE;
 
 	gc->add_digit = TRUE;
 	push_input(gc);

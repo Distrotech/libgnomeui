@@ -1,3 +1,8 @@
+Sat Jan 16 21:47:03 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.c: on C/CE just clear the current display
+	  not the stack, this is not 100% correct but close
+
 1999-01-15  Chris Lahey  <clahey@umich.edu>
 
 	* gnome-popup-menu.c (gnome_popup_menu_new): Altered this so that
