@@ -333,12 +333,28 @@ typedef struct {
 #define GNOMEUIINFO_MENU_VIEW_TREE(tree) \
 	{ GNOME_APP_UI_SUBTREE, N_("_View"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_FILES_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("File_s"), NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_WINDOWS_TREE(tree) \
 	{ GNOME_APP_UI_SUBTREE, N_("_Windows"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_HELP_TREE(tree) \
 	{ GNOME_APP_UI_SUBTREE, N_("_Help"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+		
+/*these are strings to be used for paths when working with the menus stuff*/
+#define GNOME_MENU_FILE_STRING _("_File")
+#define GNOME_MENU_FILE_PATH _("_File/")
+#define GNOME_MENU_EDIT_STRING _("_Edit")
+#define GNOME_MENU_EDIT_PATH _("_Edit/")
+#define GNOME_MENU_VIEW_STRING _("_View")
+#define GNOME_MENU_VIEW_PATH _("_View/")
+#define GNOME_MENU_FILES_STRING _("File_s")
+#define GNOME_MENU_FILES_PATH _("File_s/")
+#define GNOME_MENU_WINDOWS_STRING _("_Windows")
+#define GNOME_MENU_WINDOWS_PATH _("_Windows/")
+
 
 
 /* Types useful to language bindings */

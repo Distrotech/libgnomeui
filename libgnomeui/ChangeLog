@@ -1,3 +1,9 @@
+Wed Jan 06 21:13:54 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-app-helper.h: Added strings for use in menu path
+	  for inserting,deleting,mdi,etc..., and added a standard
+	  "File_s" toplevel menu
+
 1999-01-07  Nat Friedman  <nat@nat.org>
 
 	* gnome-app-helper.h (GNOMEUIINFO_MENU_PRINT_ITEM): Corrected a
