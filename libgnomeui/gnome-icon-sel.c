@@ -266,7 +266,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 
 static int sort_file_list( gconstpointer a, gconstpointer b)
 {
-	return strcmp( (gchar *)a, (gchar *)b );
+	return strcoll( (gchar *)a, (gchar *)b );
 }
 
 /**

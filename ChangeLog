@@ -1,3 +1,8 @@
+2004-02-11  Anders Carlsson  <andersca@gnome.org>
+
+	* libgnomeui/gnome-icon-sel.c (sort_file_list): Use strcoll
+	instead of strcmp.
+
 2004-02-10  Christian Persch  <chpe@cvs.gnome.org>
 
 	* libgnomeui/gnome-client.c: (gnome_client_module_class_init): Remove
