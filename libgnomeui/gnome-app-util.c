@@ -55,6 +55,13 @@ gnome_app_interactive_statusbar(GnomeApp * app)
 	  gnome_preferences_get_statusbar_interactive() );
 }
 
+static void gnome_app_activate_statusbar(GnomeApp *app)
+{
+  gtk_window_set_focus(GTK_WINDOW(app), GNOME_APPBAR(app->statusbar)->status);
+  gtk_window_activate_focus(GTK_WINDOW(app));
+  gdk_window_raise(GTK_WIDGET(app)->window);
+}
+
 /* ================================================================== */
 
 /* =================================================================== */
@@ -85,6 +92,7 @@ static void gnome_app_message_bar (GnomeApp * app, const gchar * message)
 {
   gchar * prompt = g_copy_strings(message, _(" (press return)"), NULL);
   gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, FALSE);
+  gnome_app_activate_statusbar(app);
   g_free(prompt);
   gtk_signal_connect(GTK_OBJECT(app->statusbar), "user_response",
 		     GTK_SIGNAL_FUNC(ack_cb), NULL);
@@ -341,6 +349,7 @@ gnome_app_reply_bar(GnomeApp * app, const gchar * question,
   prompt = g_copy_strings(question, yes_or_ok ? _(" (yes or no)") : 
 			  _("  - OK? (yes or no)"), NULL);
   gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, modal);
+  gnome_app_activate_statusbar(app);
   g_free(prompt);
   
   ri = g_new(ReplyInfo, 1);

@@ -1,3 +1,10 @@
+1998-12-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-util.c (gnome_app_activate_statusbar): new private
+	function: raises the app, sets focus to statusbar and activate it.
+	(gnome_app_error_bar, gnome_app_message_bar, gnome_app_reply_bar):
+	activate the statusbar.
+	
 1998-12-13  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-property-entries.c (gnome_property_entry_colors): New
