@@ -1,17 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Latvian translation of libgnomeui.
+# Copyright (C) 2003 Free Software Foundation, Inc.
+# Artis Trops <hornet@navigator.lv>, 2003.
+# Artis Trops <hornet@navigator.lv>, 2003.
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-08-25 20:29+0200\n"
-"PO-Revision-Date: 2002-12-20 01:37+0200\n"
-"Last-Translator: Artis Trops <hornet@navigator.lv>\n"
-"Language-Team: Latvian <ll10nt@os.lv>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-12 21:40+0200\n"
+"PO-Revision-Date: 2003-09-13 10:29+0300\n"
+"Last-Translator: Peteris Krisjanis <peteris.krisjanis@os.lv>\n"
+"Language-Team: Latvian <ll10nt@laka.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -46,9 +49,8 @@ msgid "Translated by"
 msgstr "Tūlkojuši"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Kredīti"
+msgstr "K_redīti"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -138,6 +140,7 @@ msgstr "Par %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fails"
 
@@ -195,6 +198,7 @@ msgid "_Game"
 msgstr "_Spēle"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Palīdzība"
 
@@ -385,11 +389,11 @@ msgstr "Konfigurēt šo aplikāciju"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Par"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Par šo aplikāciju"
 
@@ -416,7 +420,7 @@ msgstr "Izveidot jaunu logu"
 msgid "_Close This Window"
 msgstr "_Aizvērt Šo Logu"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Aizvērt pašreizējo logu"
 
@@ -591,26 +595,27 @@ msgstr "Pieprasītais lietotāja aktivitātes līmenis."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Jūsu HTTP starpniekserveris pieprasa jums pieteikties.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
-msgstr ""
+msgstr "Jums jāpiesakās lai atvērtu \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Jūsu parole tiks pārraidīta nešifrētā veidā."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Jūsu parole tiks"
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Pierasīta autentifikācija"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1211,11 +1216,11 @@ msgstr "Ziņojums"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Lietotājvārds:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Parole:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1363,8 +1368,9 @@ msgstr ""
 "Lūdzu apmeklējiet GNOME Aplikāciju Avāriju lapu, lai saņemtu vairāk "
 "informācijas"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Iziet no testa"
+
 #~ msgid "_Credits"
 #~ msgstr "_Kredīti"
-
-#~ msgid "Exit the test"
-#~ msgstr "Iziet no testa"
