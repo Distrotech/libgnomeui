@@ -1,3 +1,7 @@
+1998-08-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c: Fixed the new compiler warnings.
+
 1998-08-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkcauldron.c (gtk_cauldron_button_exit): Used gtk_main_quit for

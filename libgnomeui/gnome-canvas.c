@@ -1486,7 +1486,7 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 	if (changed)
 		gtk_layout_freeze (GTK_LAYOUT (canvas));
 
-	if ((scroll_maxx != canvas->layout.width) || (scroll_maxy != canvas->layout.height))
+	if ((scroll_maxx != (int) canvas->layout.width) || (scroll_maxy != (int) canvas->layout.height))
 		gtk_layout_set_size (GTK_LAYOUT (canvas), scroll_maxx, scroll_maxy);
 
 	if (changed_x) {
