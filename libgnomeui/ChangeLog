@@ -1,3 +1,9 @@
+1998-12-29  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-procbar.c (gnome_proc_bar_destroy): New static function.
+	(gnome_proc_bar_class_init): Added `destroy' handler.
+	(gnome_proc_bar_start): Remove old timeout handler first.
+
 Mon Dec 28 20:56:18 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-dentry.c: use the same function for breaking strings
