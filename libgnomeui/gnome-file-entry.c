@@ -385,6 +385,33 @@ browse_dialog_kill (GtkWidget *widget, gpointer data)
 	fentry->fsw = NULL;
 }
 
+static gchar *
+build_filename (GnomeFileEntry *fentry)
+{
+	const gchar *p;
+	char *path;
+	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
+
+	if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
+		path = g_build_filename (fentry->default_path, p, NULL);
+	} else {
+		path = g_strdup (p);
+	}
+
+	/* Now append an '/' if it doesn't exist and we're in directory only mode */
+	if (fentry->_priv->directory_entry && strlen(path) > 0 &&
+	    path[strlen (path)] != G_DIR_SEPARATOR ) {
+		gchar *tmp;
+
+		tmp = g_strconcat (path, "/", NULL);
+
+		g_free (path);
+		return tmp;
+	}
+
+	return path;
+}
+
 static void
 browse_clicked(GnomeFileEntry *fentry)
 {
@@ -401,14 +428,10 @@ browse_clicked(GnomeFileEntry *fentry)
 		fs = GTK_FILE_SELECTION(fentry->fsw);
 		gtk_widget_set_sensitive(fs->file_list,
 					 ! fentry->_priv->directory_entry);
-		p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
-		if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
-			char *dp = g_build_filename (fentry->default_path, p, NULL);
-			gtk_file_selection_set_filename (fs, dp);
-			g_free(dp);
-		} else {
-			gtk_file_selection_set_filename (fs, p);
-		}
+
+		p = build_filename (fentry);
+		gtk_file_selection_set_filename (fs, p);
+		g_free (p);
 		return;
 	}
 
@@ -416,37 +439,6 @@ browse_clicked(GnomeFileEntry *fentry)
 	fsw = gtk_file_selection_new (fentry->_priv->browse_dialog_title
 				      ? fentry->_priv->browse_dialog_title
 				      : _("Select file"));
-	/* BEGIN UGLINESS.  This code is stolen from gnome_dialog_set_parent.
-	 * We want its functionality, but it takes a GnomeDialog as its argument.
-	 * So we copy it )-: */
-	parent = gtk_widget_get_toplevel (GTK_WIDGET (fentry));
-	gtk_window_set_transient_for (GTK_WINDOW(fsw), GTK_WINDOW (parent));
-
-	/* FIXME! */
-	if ( 1 ) { /*gnome_preferences_get_dialog_centered() ) { */
-
-		/* User wants us to center over parent */
-
-		gint x, y, w, h, dialog_x, dialog_y;
-
-		if ( ! GTK_WIDGET_VISIBLE(parent)) return; /* Can't get its
-							      size/pos */
-
-		/* Throw out other positioning */
-		gtk_window_set_position(GTK_WINDOW(fsw),GTK_WIN_POS_NONE);
-
-		gdk_window_get_origin (GTK_WIDGET(parent)->window, &x, &y);
-		gdk_drawable_get_size   (GTK_WIDGET(parent)->window, &w, &h);
-
-		/* The problem here is we don't know how big the dialog is.
-		   So "centered" isn't really true. We'll go with
-		   "kind of more or less on top" */
-
-		dialog_x = x + w/4;
-		dialog_y = y + h/4;
-
-		gtk_window_move (GTK_WINDOW (fsw), dialog_x, dialog_y);
-	}
 
 	g_object_set_data (G_OBJECT (fsw), "gnome_file_entry", fentry);
 
@@ -454,14 +446,9 @@ browse_clicked(GnomeFileEntry *fentry)
 	gtk_widget_set_sensitive(fs->file_list,
 				 ! fentry->_priv->directory_entry);
 
-	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
-	if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
-		char *dp = g_build_filename (fentry->default_path, p, NULL);
-		gtk_file_selection_set_filename (fs, dp);
-		g_free(dp);
-	} else {
-		gtk_file_selection_set_filename (fs, p);
-	}
+	p = build_filename (fentry);
+	gtk_file_selection_set_filename (fs, p);
+	g_free (p);
 
 	g_signal_connect (fs->ok_button, "clicked",
 			  G_CALLBACK (browse_dialog_ok),
