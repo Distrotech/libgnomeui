@@ -144,7 +144,7 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 }
 
 GnomeCanvasItem *
-gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, ...)
+gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, const gchar *first_arg_name, ...)
 {
 	GnomeCanvasItem *item;
 	va_list args;
@@ -153,10 +153,10 @@ gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, ...)
 	g_return_val_if_fail (GNOME_IS_CANVAS_GROUP (parent), NULL);
 	g_return_val_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()), NULL);
 
-	item = GNOME_CANVAS_ITEM(gtk_type_new (type));
+	item = GNOME_CANVAS_ITEM (gtk_type_new (type));
 
-	va_start (args, type);
-	gnome_canvas_item_construct (item, parent, args);
+	va_start (args, first_arg_name);
+	gnome_canvas_item_construct (item, parent, first_arg_name, args);
 	va_end (args);
 
 	return item;
@@ -192,7 +192,7 @@ item_post_create_setup (GnomeCanvasItem *item)
 }
 
 void
-gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, va_list args)
+gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar *first_arg_name, va_list args)
 {
         GtkObject *obj;
 	GSList *arg_list;
@@ -210,7 +210,7 @@ gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, va
 	arg_list = NULL;
 	info_list = NULL;
 
-	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj), &arg_list, &info_list, &args);
+	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj), &arg_list, &info_list, first_arg_name, args);
 
 	if (error) {
 		g_warning ("gnome_canvas_item_construct(): %s", error);
@@ -331,7 +331,7 @@ gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoin
 }
 
 void
-gnome_canvas_item_set (GnomeCanvasItem *item, ...)
+gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 {
 	va_list args;
 	GSList *arg_list;
@@ -344,8 +344,8 @@ gnome_canvas_item_set (GnomeCanvasItem *item, ...)
 	arg_list = NULL;
 	info_list = NULL;
 
-	va_start (args, item);
-	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item), &arg_list, &info_list, &args);
+	va_start (args, first_arg_name);
+	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item), &arg_list, &info_list, first_arg_name, args);
 	va_end (args);
 
 	if (error) {

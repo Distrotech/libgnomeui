@@ -15,7 +15,6 @@
 /* `g_string_length' doesn't appear in the CVS version of `gtk+/glib',
    and I can't find a reference to it in its ChangeLog */
 #define g_string_length(pGString_x) ((pGString_x)->len)
-extern char* g_vsprintf (gchar *fmt, va_list *args, va_list *args2);
 
 static struct NetSocketData *sockets = NULL;
 static max_sockets = 0;
@@ -175,15 +174,18 @@ gint gnome_net_gets(gint sock, GString *gs)
 
 gint gnome_net_printf(gint sock, gchar *format, ...)
 {
-	va_list args, args2;
-	char *buf;
+        va_list args;
+	gchar *buf;
+	gint return_val;
 
 	va_start(args, format);
-	va_start(args2, format);
-	buf = g_vsprintf(format, &args, &args2);
+	buf = g_strdup_vprintf(format, args);
 	va_end(args);
-	va_end(args2);
-	return write(sock, buf, strlen(buf));
+
+	return_val = write(sock, buf, strlen(buf));
+	g_free (buf);
+
+	return return_val;
 }
 
 void gnome_net_close(gint sock)

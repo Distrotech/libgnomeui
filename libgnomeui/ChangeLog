@@ -1,3 +1,17 @@
+Mon Aug 24 07:53:53 1998  Tim Janik  <timj@gtk.org>
+
+	* gnome-canvas.c (gnome_canvas_item_construct): added a
+ 	const gchar *first_arg_name, to the prototype which is required by
+	gtk_object_args_collect(). pass va_list by value. unfortunately this
+ 	change is source incompatible ;(
+	(gnome_canvas_item_new): added first_arg_name, to pass to
+	gnome_canvas_item_construct, source compatile change.
+	(gnome_canvas_item_set): added first_arg_name, to pass to
+	gtk_object_args_collect. pass va_list by value.
+
+	* gnome-net.c (gnome_net_printf): use g_strdup_vprintf() instead of
+	g_vprintf().
+
 1998-08-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c: Fixed the new compiler warnings.
