@@ -1,3 +1,8 @@
+1998-11-03  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-child.[ch] (gnome_mdi_active_window): return active_window
+	member.
+
 1998-11-02  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-child.[ch]: added "set_book_label" signal, giving the user

@@ -176,6 +176,8 @@ void          gnome_mdi_update_child        (GnomeMDI *, GnomeMDIChild *);
 GnomeMDIChild *gnome_mdi_active_child       (GnomeMDI *);
 GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
 
+GnomeApp      *gnome_mdi_active_window      (GnomeMDI *);
+
 /*
  * the following two functions are here to make life easier if an application opens windows
  * that should "keep the app alive" even if there are no MDI windows open. any such windows

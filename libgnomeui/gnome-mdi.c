@@ -1463,6 +1463,13 @@ GtkWidget *gnome_mdi_active_view(GnomeMDI *mdi) {
 	return mdi->active_view;
 }
 
+GnomeApp *gnome_mdi_active_window(GnomeMDI *mdi) {
+	g_return_val_if_fail(mdi != NULL, NULL);
+	g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
+
+	return mdi->active_window;
+}
+
 void gnome_mdi_set_menu_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl) {
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
