@@ -1,3 +1,9 @@
+1999-09-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (top_add_view, gnome_mdi_add_view,
+	gnome_mdi_add_toplevel_view): show view prior to setting it an
+	app content.
+	
 1999-09-13  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas-image.c (recalc_if_needed): Only render the image's

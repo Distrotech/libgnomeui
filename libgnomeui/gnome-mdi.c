@@ -1187,6 +1187,9 @@ gint gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
 	   to gnome_mdi_child_remove_view() */
 	gtk_widget_ref(view);
 
+	if(!GTK_WIDGET_VISIBLE(view))
+		gtk_widget_show(view);
+
 	if(mdi->mode == GNOME_MDI_NOTEBOOK) {
 		if(mdi->active_window->contents == NULL)
 			book_create(mdi);
@@ -1201,12 +1204,10 @@ gint gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
 			gnome_mdi_remove_view(mdi, mdi->active_window->contents, TRUE);
 			mdi->active_window->contents = NULL;
 		}
-		
+
 		gnome_app_set_contents(mdi->active_window, view);
 		app_set_view(mdi, mdi->active_window, view);
 	}
-
-	gtk_widget_show(view);
 
 	return TRUE;
 }
@@ -1262,6 +1263,9 @@ gint gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
 	   to gnome_mdi_child_remove_view() */
 	gtk_widget_ref(view);
 
+	if(!GTK_WIDGET_VISIBLE(view))
+		gtk_widget_show(view);
+
 	if(mdi->mode == GNOME_MDI_NOTEBOOK)
 		book_add_view(GTK_NOTEBOOK(mdi->active_window->contents), view);
 	else if(mdi->mode == GNOME_MDI_TOPLEVEL)
@@ -1278,8 +1282,6 @@ gint gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
 		app_set_view(mdi, mdi->active_window, view);
 	}
 	
-	gtk_widget_show(view);
-
 	return TRUE;
 }
 
