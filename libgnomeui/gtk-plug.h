@@ -1,5 +1,5 @@
 /* GTK - The GIMP Toolkit
- * Copyright (C) 1995-1998 Peter Mattis, Spencer Kimball and Josh MacDonald
+ * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -52,7 +52,7 @@ struct _GtkPlugClass
 };
 
 
-guint      gtk_plug_get_type (void);
+guint      gtk_plug_get_type ();
 GtkWidget* gtk_plug_new      (guint32 socket_id);
 
 

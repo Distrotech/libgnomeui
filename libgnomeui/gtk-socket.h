@@ -1,5 +1,5 @@
 /* GTK - The GIMP Toolkit
- * Copyright (C) 1995-1998 Peter Mattis, Spencer Kimball and Josh MacDonald
+ * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -46,6 +46,7 @@ struct _GtkSocket
   gint same_app : 1;
   gint focus_in : 1;
   gint have_size : 1;
+  gint need_map : 1;
 };
 
 struct _GtkSocketClass
@@ -56,8 +57,8 @@ struct _GtkSocketClass
 
 GtkWidget*     gtk_socket_new      ();
 guint          gtk_socket_get_type (void );
-void           gtk_socket_steal    (GtkSocket *gsocket,
-				    guint32 wid);
+void           gtk_socket_steal    (GtkSocket *socket,
+				    guint32 id);
 
 #ifdef __cplusplus
 }

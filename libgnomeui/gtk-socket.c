@@ -15,6 +15,9 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
+/* By Owen Taylor <otaylor@gtk.org>              98/4/4 */
+
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkwidget.h>
@@ -25,9 +28,7 @@
 
 static void gtk_socket_class_init               (GtkSocketClass    *klass);
 static void gtk_socket_init                     (GtkSocket         *socket);
-static void gtk_socket_destroy                  (GtkObject        *object);
 static void gtk_socket_realize                  (GtkWidget        *widget);
-static void gtk_socket_unrealize                (GtkWidget        *widget);
 static void gtk_socket_size_request             (GtkWidget      *widget,
 					       GtkRequisition *requisition);
 static void gtk_socket_size_allocate            (GtkWidget     *widget,
@@ -43,6 +44,12 @@ static gint gtk_socket_focus                    (GtkContainer *container,
 static GdkFilterReturn gtk_socket_filter_func   (GdkXEvent *gdk_xevent, 
 						 GdkEvent *event, 
 						 gpointer data);
+
+#ifdef DEBUG_PLUGSOCKET
+#define DPRINTF(arg) g_print arg
+#else
+#define DPRINTF(arg)
+#endif
 
 /* From Tk */
 #define EMBEDDED_APP_WANTS_FOCUS NotifyNormal+20
@@ -66,7 +73,7 @@ gtk_socket_get_type ()
 	(GtkClassInitFunc) gtk_socket_class_init,
 	(GtkObjectInitFunc) gtk_socket_init,
 	(GtkArgSetFunc) NULL,
-	(GtkArgGetFunc) NULL,
+	(GtkArgGetFunc) NULL
       };
 
       socket_type = gtk_type_unique (gtk_container_get_type (), &socket_info);
@@ -88,10 +95,7 @@ gtk_socket_class_init (GtkSocketClass *class)
 
   parent_class = gtk_type_class (gtk_widget_get_type ());
 
-  object_class->destroy = gtk_socket_destroy;
-
   widget_class->realize = gtk_socket_realize;
-  widget_class->unrealize = gtk_socket_unrealize;
   widget_class->size_request = gtk_socket_size_request;
   widget_class->size_allocate = gtk_socket_size_allocate;
   widget_class->focus_in_event = gtk_socket_focus_in_event;
@@ -112,6 +116,7 @@ gtk_socket_init (GtkSocket *socket)
   socket->same_app = FALSE;
   socket->focus_in = FALSE;
   socket->have_size = FALSE;
+  socket->need_map = FALSE;
 }
 
 GtkWidget*
@@ -125,13 +130,13 @@ gtk_socket_new ()
 }
 
 void           
-gtk_socket_steal (GtkSocket *socket, guint32 wid)
+gtk_socket_steal (GtkSocket *socket, guint32 id)
 {
   GtkWidget *widget;
 
   widget = GTK_WIDGET (socket);
   
-  socket->plug_window = gdk_window_lookup (wid);
+  socket->plug_window = gdk_window_lookup (id);
 
   if (socket->plug_window && socket->plug_window->user_data)
     {
@@ -143,8 +148,7 @@ gtk_socket_steal (GtkSocket *socket, guint32 wid)
     }
   else
     {
-      socket->plug_window = gdk_window_foreign_new (wid);
-      gdk_window_set_user_data (socket->plug_window, socket);
+      socket->plug_window = gdk_window_foreign_new (id);
       socket->same_app = FALSE;
       socket->have_size = FALSE;
 
@@ -153,20 +157,7 @@ gtk_socket_steal (GtkSocket *socket, guint32 wid)
 
   gdk_window_hide (socket->plug_window);
   gdk_window_reparent (socket->plug_window, widget->window, 0, 0);
-  gdk_window_resize (socket->plug_window,
-		     widget->allocation.width, 
-		     widget->allocation.height);
-  gdk_window_show (socket->plug_window);
-}
-
-static void
-gtk_socket_destroy (GtkObject *object)
-{
-  g_return_if_fail (object != NULL);
-  g_return_if_fail (GTK_IS_SOCKET (object));
-
-  if (GTK_OBJECT_CLASS (parent_class)->destroy)
-    (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+  socket->need_map = TRUE;
 }
 
 static void
@@ -213,23 +204,6 @@ gtk_socket_realize (GtkWidget *widget)
   gdk_window_add_filter (widget->window, gtk_socket_filter_func, widget);
 
   GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
-}
-
-static void
-gtk_socket_unrealize (GtkWidget *widget)
-{
-  g_return_if_fail (widget != NULL);
-  g_return_if_fail (GTK_IS_SOCKET (widget));
-
-  if (GTK_WIDGET_MAPPED (widget))
-    gtk_widget_unmap(widget);
-  
-  GTK_WIDGET_UNSET_FLAGS (widget, GTK_REALIZED);
-
-  gdk_window_set_user_data (widget->window, NULL);
-  gdk_window_destroy (widget->window);
-
-  widget->window = NULL;
 }
 
 static void 
@@ -301,23 +275,31 @@ gtk_socket_size_allocate (GtkWidget     *widget,
 
       if (socket->plug_window)
 	{
-	  if ((allocation->width == socket->current_width) &&
+	  if (!socket->need_map &&
+	      (allocation->width == socket->current_width) &&
 	      (allocation->height == socket->current_height))
 	    {
 	      gtk_socket_send_configure_event (socket);
-	      fprintf(stderr, "No change: %d %d\n",
-		      allocation->width, allocation->height);
+	      DPRINTF(( "No change: %d %d\n",
+		      allocation->width, allocation->height));
 	    }
 	  else
 	    {
 	      gdk_window_move_resize (socket->plug_window,
 				      0, 0,
 				      allocation->width, allocation->height);
-	      fprintf(stderr, "configuring: %d %d\n",
-		      allocation->width, allocation->height);
+	      DPRINTF(("configuring: %d %d\n",
+		      allocation->width, allocation->height));
 	      socket->current_width = allocation->width;
 	      socket->current_height = allocation->height;
 	    }
+
+	  if (socket->need_map)
+	    {
+	      gdk_window_show (socket->plug_window);
+	      socket->need_map = FALSE;
+	    }
+
 	}
     }
 }
@@ -329,7 +311,7 @@ gtk_socket_focus_in_event (GtkWidget *widget, GdkEventFocus *event)
   g_return_val_if_fail (GTK_IS_SOCKET (widget), FALSE);
   socket = GTK_SOCKET (widget);
 
-  fprintf(stderr, "Got focus\n");
+  DPRINTF (( "Got focus\n"));
 
   if (socket->focus_in)
     XSetInputFocus (GDK_DISPLAY (),
@@ -460,8 +442,8 @@ gtk_socket_send_configure_event (GtkSocket *socket)
 
   event.xconfigure.x = 0;
   event.xconfigure.y = 0;
-  event.xconfigure.width = socket->request_width;
-  event.xconfigure.height = socket->request_height;
+  event.xconfigure.width = GTK_WIDGET(socket)->allocation.width;
+  event.xconfigure.height = GTK_WIDGET(socket)->allocation.height;
 
   event.xconfigure.border_width = 0;
   event.xconfigure.above = None;
@@ -490,25 +472,36 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
   switch (xevent->type)
     {
     case CreateNotify:
-
-      socket->plug_window = gdk_window_lookup (xevent->xcreatewindow.window);
-      socket->same_app = TRUE;
-      
-      if (!socket->plug_window)
-	{
-	  socket->plug_window = gdk_window_foreign_new (xevent->xcreatewindow.window);
-	  gdk_window_set_user_data (socket->plug_window, socket);
-	  socket->same_app = FALSE;
-	}
-      
-      gdk_window_move_resize(socket->plug_window,
-			     0, 0,
-			     widget->allocation.width, 
-			     widget->allocation.height);
-
-      return_val = GDK_FILTER_REMOVE;
-
-      break;
+      {
+	XCreateWindowEvent *xcwe = &xevent->xcreatewindow;
+	socket->plug_window = gdk_window_lookup (xcwe->window);
+	socket->same_app = TRUE;
+	
+	if (!socket->plug_window)
+	  {
+	    socket->plug_window = gdk_window_foreign_new (xevent->xcreatewindow.window);
+	    socket->same_app = FALSE;
+	  }
+	
+	gdk_window_move_resize(socket->plug_window,
+			       0, 0,
+			       widget->allocation.width, 
+			       widget->allocation.height);
+	
+	socket->request_width = xcwe->width;
+	socket->request_height = xcwe->height;
+	socket->have_size = TRUE;
+	
+	DPRINTF(("Window created with size: %d %d\n",
+		socket->request_width,
+		socket->request_height));
+	
+	gtk_widget_queue_resize (widget);
+	
+	return_val = GDK_FILTER_REMOVE;
+	
+	break;
+      }
 
     case ConfigureRequest:
       {
@@ -521,23 +514,39 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 		socket->request_height = xcre->height;
 		socket->have_size = TRUE;
 		
-		fprintf(stderr, "Configure request: %d %d\n",
-		      socket->request_width,
-			socket->request_height);
+		DPRINTF(("Configure request: %d %d\n",
+			socket->request_width,
+			socket->request_height));
 		
 		gtk_widget_queue_resize (widget);
 	      }
-	    else if (xcre->value_mask & (CWWidth | CWHeight))
+	    else if (xcre->value_mask & (CWX | CWY))
 	      {
 		gtk_socket_send_configure_event (socket);
 	      }
-	    /* Ignore stacking requests. FIXME: might some programs
-	     * wait for confirmation ? */
+	    /* Ignore stacking requests. */
 	    
 	    return_val = GDK_FILTER_REMOVE;
 	  }
 	break;
       }
+
+    case DestroyNotify:
+      {
+	XDestroyWindowEvent *xdwe = &xevent->xdestroywindow;
+	if (xdwe->window == GDK_WINDOW_XWINDOW (socket->plug_window))
+	  {
+	    gdk_window_destroy_notify (socket->plug_window);
+	    gdk_window_destroy (socket->plug_window);
+	    socket->plug_window = NULL;
+
+	    gtk_widget_destroy (widget);
+	    
+	    return_val = GDK_FILTER_REMOVE;
+	  }
+	break;
+    }
+      
     case FocusIn:
       if (xevent->xfocus.mode == EMBEDDED_APP_WANTS_FOCUS)
 	{

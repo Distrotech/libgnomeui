@@ -1,3 +1,8 @@
+Mon Apr 06 00:57:23 1998  George Lebl  <jirka@5z.com>
+
+	* gtk-{plug,socket}.[ch]: updated to owen's 
+	  plugsocket v0.2
+
 Fri Apr  3 23:29:11 1998  Havoc Pennington <hp@pobox.com>
 
 	* gnome-messagebox.c, gnome-messagebox.h: Now derived from

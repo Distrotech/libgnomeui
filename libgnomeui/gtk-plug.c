@@ -15,6 +15,9 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
+/* By Owen Taylor <otaylor@gtk.org>              98/4/4 */
+
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
 #include "gtk-plug.h"
@@ -49,7 +52,7 @@ gtk_plug_get_type ()
 	(GtkClassInitFunc) gtk_plug_class_init,
 	(GtkObjectInitFunc) gtk_plug_init,
 	(GtkArgSetFunc) NULL,
-	(GtkArgGetFunc) NULL,
+	(GtkArgGetFunc) NULL
       };
 
       plug_type = gtk_type_unique (gtk_window_get_type (), &plug_info);
