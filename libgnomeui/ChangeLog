@@ -1,3 +1,7 @@
+Wed Jan 06 22:32:03 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-app-helper.h: fix properties/preferences stock icons
+
 1999-01-07  Nat Friedman  <nat@nat.org>
 
 	* gnome-app-helper.h Added GNOME_MENU_OPTIONS_STRING and _PATH.

@@ -256,7 +256,7 @@ typedef struct {
         { GNOME_APP_UI_ITEM, N_("Preferences..."),                          \
           N_("Configure the application"),                                  \
           cb, (gpointer)(data),                                             \
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,             \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,              \
           0,  (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_CLOSE_ITEM(cb, data)                               \
@@ -326,7 +326,7 @@ typedef struct {
         { GNOME_APP_UI_ITEM, N_("Properties..."),                           \
           N_("Modify the file's properties"),                               \
           cb, (gpointer)(data),                                             \
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROPERTIES,        \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,              \
           0,  (GdkModifierType) 0, NULL }
 
 /*
