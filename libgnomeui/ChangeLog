@@ -1,3 +1,7 @@
+Thu Nov 26 19:09:46 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-file-entry.c: add inline documentation
+
 1998-11-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-entry.c (show_icon_selection): Fixed spacing.

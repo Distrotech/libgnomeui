@@ -244,6 +244,15 @@ gnome_file_entry_finalize (GtkObject *object)
 	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
+/**
+ * gnome_file_entry_new:
+ * @history_id: the id given to #gnome_entry_new
+ * @browse_dialog_title: title of the browse dialog
+ *
+ * Description: Creates a new file entry widget
+ *
+ * Returns: Returns the new object
+ **/
 GtkWidget *
 gnome_file_entry_new (char *history_id, char *browse_dialog_title)
 {
@@ -257,6 +266,14 @@ gnome_file_entry_new (char *history_id, char *browse_dialog_title)
 	return GTK_WIDGET (fentry);
 }
 
+/**
+ * gnome_file_entry_gnome_entry:
+ * @fentry: the GnomeFileEntry to work with
+ *
+ * Description: Get the GnomeEntry widget that's part of the entry
+ *
+ * Returns: Returns GnomeEntry widget
+ **/
 GtkWidget *
 gnome_file_entry_gnome_entry (GnomeFileEntry *fentry)
 {
@@ -266,6 +283,14 @@ gnome_file_entry_gnome_entry (GnomeFileEntry *fentry)
 	return fentry->gentry;
 }
 
+/**
+ * gnome_file_entry_gtk_entry:
+ * @fentry: the GnomeFileEntry to work with
+ *
+ * Description: Get the GtkEntry widget that's part of the entry
+ *
+ * Returns: Returns GtkEntry widget
+ **/
 GtkWidget *
 gnome_file_entry_gtk_entry (GnomeFileEntry *fentry)
 {
@@ -275,6 +300,16 @@ gnome_file_entry_gtk_entry (GnomeFileEntry *fentry)
 	return gnome_entry_gtk_entry (GNOME_ENTRY (fentry->gentry));
 }
 
+/**
+ * gnome_file_entry_set_title:
+ * @fentry: the GnomeFileEntry to work with
+ * @browse_dialog_title: the title
+ *
+ * Description: Set the title of the browse dialog to @browse_dialog_title,
+ * this will go into effect the next time the browse button is pressed
+ *
+ * Returns:
+ **/
 void
 gnome_file_entry_set_title (GnomeFileEntry *fentry, char *browse_dialog_title)
 {
@@ -287,6 +322,18 @@ gnome_file_entry_set_title (GnomeFileEntry *fentry, char *browse_dialog_title)
 	fentry->browse_dialog_title = g_strdup (browse_dialog_title); /* handles NULL correctly */
 }
 
+/**
+ * gnome_file_entry_set_default_path:
+ * @fentry: the GnomeFileEntry to work with
+ * @path: path string
+ *
+ * Description: Set the default path of browse dialog to @path. The
+ * default path is only used if the entry is empty or if the contents
+ * of the entry is not a full absolute path, in that case the default
+ * path is prepended to it before the dialog is started
+ *
+ * Returns:
+ **/
 void
 gnome_file_entry_set_default_path(GnomeFileEntry *fentry, char *path)
 {
@@ -310,9 +357,24 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, char *path)
 	fentry->default_path = p;
 }
 
+/**
+ * gnome_file_entry_get_full_path:
+ * @fentry: the GnomeFileEntry to work with
+ * @file_must_exist: boolean
+ *
+ * Description: Gets the full absolute path of the file from the entry,
+ * if @file_must_exist is true, then the path is only returned if the path
+ * actually exists. In case the entry is a directory entry (see
+ * #gnome_file_entry_set_directory), then if the path exists and is a
+ * directory then it's returned, if not, it is assumed it was a file so
+ * we try to strip it, and try again. This only happens if @file_must_exist
+ * is true, if it's false, nothing is tested, it's just returned.
+ *
+ * Returns: a newly allocated string with the path or NULL if something went
+ * wrong
+ **/
 char *
-gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
-			       int file_must_exist)
+gnome_file_entry_get_full_path(GnomeFileEntry *fentry, int file_must_exist)
 {
 	char *p;
 	char *t;
@@ -350,6 +412,15 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
 	return NULL;
 }
 
+/**
+ * gnome_file_entry_set_modal:
+ * @fentry: the GnomeFileEntry to work with
+ * @is_modal: boolean
+ *
+ * Description: Sets the modality of the browse dialog
+ *
+ * Returns:
+ **/
 void
 gnome_file_entry_set_modal(GnomeFileEntry *fentry, int is_modal)
 {
@@ -359,6 +430,18 @@ gnome_file_entry_set_modal(GnomeFileEntry *fentry, int is_modal)
 	fentry->is_modal = is_modal;
 }
 
+/**
+ * gnome_file_entry_set_directory:
+ * @fentry: the GnomeFileEntry to work with
+ * @directory_entry: boolean
+ *
+ * Description: Sets wheather this is a directory only entry, if
+ * @directory_entry is true, then #gnome_file_entry_get_full_path will
+ * check for the file being a directory, and the browse dialog will have
+ * the file list disabled
+ *
+ * Returns:
+ **/
 void
 gnome_file_entry_set_directory(GnomeFileEntry *fentry, int directory_entry)
 {
