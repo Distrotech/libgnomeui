@@ -47,54 +47,47 @@
 #include <stdio.h>
 #include <string.h>
 
-static void            gnome_mdi_class_init  (GnomeMDIClass  *);
-static void            gnome_mdi_init        (GnomeMDI *);
-static void            gnome_mdi_destroy     (GtkObject *);
-static void            gnome_mdi_finalize    (GtkObject *);
-static void            gnome_mdi_app_create  (GnomeMDI *, GnomeApp *);
+static void            gnome_mdi_class_init(GnomeMDIClass  *);
+static void            gnome_mdi_init(GnomeMDI *);
+static void            gnome_mdi_destroy(GtkObject *);
+static void            gnome_mdi_finalize(GtkObject *);
+static void            gnome_mdi_app_create(GnomeMDI *, GnomeApp *);
 static void            gnome_mdi_view_changed(GnomeMDI *, GtkWidget *);
 
-static void            child_list_create  (GnomeMDI *, GnomeApp *);
-static void            child_list_activated_cb (GtkWidget *, GnomeMDI *);
-static GtkWidget       *find_item_by_child     (GtkMenuShell *, GnomeMDIChild *);
+static void            child_list_create(GnomeMDI *, GnomeApp *);
+static void            child_list_activated_cb(GtkWidget *, GnomeMDI *);
+static GtkWidget       *find_item_by_child(GtkMenuShell *, GnomeMDIChild *);
 
-static GtkWidget       *app_create     (GnomeMDI *);
-static GtkWidget       *app_clone      (GnomeMDI *, GnomeApp *);
-static void            app_destroy     (GnomeApp *, GnomeMDI *);
+static GtkWidget       *app_create(GnomeMDI *);
+static GtkWidget       *app_clone(GnomeMDI *, GnomeApp *);
+static void            app_destroy(GnomeApp *, GnomeMDI *);
+static gint            app_toplevel_delete_event(GnomeApp *, GdkEventAny *, GnomeMDI *);
+static gint            app_book_delete_event(GnomeApp *, GdkEventAny *, GnomeMDI *);
+static void            app_focus_in_event(GnomeApp *, GdkEventFocus *, GnomeMDI *);
 
-static gint            app_close_top   (GnomeApp *, GdkEventAny *, GnomeMDI *);
-static gint            app_close_book  (GnomeApp *, GdkEventAny *, GnomeMDI *);
-
-static GtkWidget       *book_create        (GnomeMDI *);
-static void            book_switch_page    (GtkNotebook *, GtkNotebookPage *,
-										    gint, GnomeMDI *);
-static gint            book_motion         (GtkWidget *widget, GdkEventMotion *e,
-										    gpointer data);
-static gint            book_button_press   (GtkWidget *widget, GdkEventButton *e,
-										    gpointer data);
-static gint            book_button_release (GtkWidget *widget, GdkEventButton *e,
-										    gpointer data);
-static void            book_add_view       (GtkNotebook *, GtkWidget *);
-static void            set_page_by_widget  (GtkNotebook *, GtkWidget *);
+static GtkWidget       *book_create(GnomeMDI *);
+static void            book_switch_page(GtkNotebook *, GtkNotebookPage *, gint, GnomeMDI *);
+static gint            book_motion(GtkWidget *widget, GdkEventMotion *e, gpointer data);
+static gint            book_button_press(GtkWidget *widget, GdkEventButton *e, gpointer data);
+static gint            book_button_release(GtkWidget *widget, GdkEventButton *e, gpointer data);
+static void            book_add_view(GtkNotebook *, GtkWidget *);
+static void            set_page_by_widget(GtkNotebook *, GtkWidget *);
 static GtkNotebookPage *find_page_by_widget(GtkNotebook *, GtkWidget *);
 
-static void            toplevel_focus (GnomeApp *, GdkEventFocus *, GnomeMDI *);
 
-static void            top_add_view   (GnomeMDI *, GtkWidget *,
-									   GnomeMDIChild *, GtkWidget *);
-
+static void            top_add_view(GnomeMDI *, GtkWidget *, GnomeMDIChild *, GtkWidget *);
 static void            set_active_view(GnomeMDI *, GtkWidget *);
 
-static GnomeUIInfo     *copy_ui_info_tree  (const GnomeUIInfo *);
-static void            free_ui_info_tree   (GnomeUIInfo *);
-static gint            count_ui_info_items (const GnomeUIInfo *);
+static GnomeUIInfo     *copy_ui_info_tree(const GnomeUIInfo *);
+static void            free_ui_info_tree(GnomeUIInfo *);
+static gint            count_ui_info_items(const GnomeUIInfo *);
 
 static void            remove_view(GnomeMDI *, GtkWidget *);
 static void            remove_child(GnomeMDI *, GnomeMDIChild *);
 
 /* convenience functions that call child's "virtual" functions */
-static GList           *child_create_menus (GnomeMDIChild *, GtkWidget *);
-static GtkWidget       *child_set_label    (GnomeMDIChild *, GtkWidget *);
+static GList           *child_create_menus(GnomeMDIChild *, GtkWidget *);
+static GtkWidget       *child_set_label(GnomeMDIChild *, GtkWidget *);
 
 static GdkCursor *drag_cursor = NULL;
 
@@ -228,7 +221,7 @@ static void gnome_mdi_class_init (GnomeMDIClass *klass)
 	parent_class = gtk_type_class (gtk_object_get_type ());
 }
 
-static void gnome_mdi_view_changed(GnomeMDI *mdi, GtkWidget *old_view)
+static void gnome_mdi_view_changed (GnomeMDI *mdi, GtkWidget *old_view)
 {
 	GList *menu_list = NULL, *children;
 	GtkWidget *parent = NULL, *view = mdi->active_view;
@@ -882,7 +875,7 @@ static void book_add_view (GtkNotebook *book, GtkWidget *view)
 		set_page_by_widget(book, view);
 }
 
-static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page_num, GnomeMDI *mdi)
+static void book_switch_page (GtkNotebook *book, GtkNotebookPage *page, gint page_num, GnomeMDI *mdi)
 {
 #ifdef GNOME_ENABLE_DEBUG
 	g_message("GnomeMDI: switching pages");
@@ -896,7 +889,7 @@ static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page
 		set_active_view(mdi, NULL);  
 }
 
-static void toplevel_focus (GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi)
+static void app_focus_in_event (GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi)
 {
 	/* updates active_view and active_child when a new toplevel receives focus */
 	g_return_if_fail(GNOME_IS_APP(app));
@@ -914,7 +907,7 @@ static void toplevel_focus (GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi)
 	mdi->active_window = app;
 }
 
-static GtkWidget *app_clone(GnomeMDI *mdi, GnomeApp *app)
+static GtkWidget *app_clone (GnomeMDI *mdi, GnomeApp *app)
 {
 	GnomeDockLayout *layout;
 	gchar *layout_string = NULL;
@@ -937,7 +930,7 @@ static GtkWidget *app_clone(GnomeMDI *mdi, GnomeApp *app)
 	return new_app;
 }
 
-static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
+static gint app_toplevel_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 {
 	GnomeMDIChild *child = NULL;
 	
@@ -966,11 +959,15 @@ static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 			if(!gnome_mdi_remove_view(mdi, app->contents))
 				return TRUE;
 	}
+	else {
+		mdi->windows = g_list_remove(mdi->windows, app);
+		gtk_widget_destroy(GTK_WIDGET(app));
+	}
 
 	return FALSE;
 }
 
-static gint app_close_book (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
+static gint app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 {
 	GnomeMDIChild *child;
 	GtkWidget *view;
@@ -992,6 +989,12 @@ static gint app_close_book (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 	else {
 		/* first check if all the children in this notebook can be removed */
 		page_node = GTK_NOTEBOOK(app->contents)->children;
+		if(!page_node) {
+			mdi->windows = g_list_remove(mdi->windows, app);
+			gtk_widget_destroy(GTK_WIDGET(app));
+			return FALSE;
+		}
+
 		while(page_node) {
 			view = ((GtkNotebookPage *)page_node->data)->child;
 			child = gnome_mdi_get_child_from_view(view);
@@ -1061,7 +1064,7 @@ static GtkWidget *app_create (GnomeMDI *mdi)
 {
 	GtkWidget *window;
 	GnomeApp *app;
-	GtkSignalFunc func = (GtkSignalFunc)app_close_top;
+	GtkSignalFunc func = (GtkSignalFunc)app_toplevel_delete_event;
 
 	window = gnome_app_new(mdi->appname, mdi->title);
 	app = GNOME_APP(window);
@@ -1076,12 +1079,12 @@ static GtkWidget *app_create (GnomeMDI *mdi)
 	mdi->windows = g_list_append(mdi->windows, window);
 
 	if(mdi->mode == GNOME_MDI_NOTEBOOK)
-		func = GTK_SIGNAL_FUNC(app_close_book);
+		func = GTK_SIGNAL_FUNC(app_book_delete_event);
 	
 	gtk_signal_connect(GTK_OBJECT(window), "delete_event",
 					   func, mdi);
 	gtk_signal_connect(GTK_OBJECT(window), "focus_in_event",
-					   GTK_SIGNAL_FUNC(toplevel_focus), mdi);
+					   GTK_SIGNAL_FUNC(app_focus_in_event), mdi);
 	gtk_signal_connect(GTK_OBJECT(window), "destroy",
 					   GTK_SIGNAL_FUNC(app_destroy), mdi);
 
@@ -1090,7 +1093,7 @@ static GtkWidget *app_create (GnomeMDI *mdi)
 	return window;
 }
 
-static void remove_view(GnomeMDI *mdi, GtkWidget *view)
+static void remove_view (GnomeMDI *mdi, GtkWidget *view)
 {
 	GtkWidget *parent;
 	GnomeApp *window;
@@ -1137,7 +1140,7 @@ static void remove_view(GnomeMDI *mdi, GtkWidget *view)
 		gnome_mdi_child_remove_view(child, view);
 }
 
-static void remove_child(GnomeMDI *mdi, GnomeMDIChild *child)
+static void remove_child (GnomeMDI *mdi, GnomeMDIChild *child)
 {
 	GList *view_node;
 	GtkWidget *view;
@@ -1219,7 +1222,7 @@ static void set_active_view (GnomeMDI *mdi, GtkWidget *view)
 
 /* the functions below are supposed to be non-static but are not part
    of the public API */
-GtkWidget *gnome_mdi_new_toplevel(GnomeMDI *mdi)
+GtkWidget *gnome_mdi_new_toplevel (GnomeMDI *mdi)
 {
 	GtkWidget *book, *app;
 
@@ -1288,7 +1291,7 @@ void gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
  * Return value:
  * A pointer to a new GnomeMDI object.
  **/
-GtkObject *gnome_mdi_new(const gchar *appname, const gchar *title)
+GtkObject *gnome_mdi_new (const gchar *appname, const gchar *title)
 {
 	GnomeMDI *mdi;
 	
@@ -1777,17 +1780,17 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 
 		if( (mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL))
 			gtk_signal_disconnect_by_func(GTK_OBJECT(mdi->active_window),
-										  GTK_SIGNAL_FUNC(app_close_top), mdi);
+										  GTK_SIGNAL_FUNC(app_toplevel_delete_event), mdi);
 		else if(mdi->mode == GNOME_MDI_NOTEBOOK)
 			gtk_signal_disconnect_by_func(GTK_OBJECT(mdi->active_window),
-										  GTK_SIGNAL_FUNC(app_close_book), mdi);
+										  GTK_SIGNAL_FUNC(app_book_delete_event), mdi);
 
 		if( (mode == GNOME_MDI_TOPLEVEL) || (mode == GNOME_MDI_MODAL))
 			gtk_signal_connect(GTK_OBJECT(mdi->active_window), "delete_event",
-							   GTK_SIGNAL_FUNC(app_close_top), mdi);
+							   GTK_SIGNAL_FUNC(app_toplevel_delete_event), mdi);
 		else if(mode == GNOME_MDI_NOTEBOOK)
 			gtk_signal_connect(GTK_OBJECT(mdi->active_window), "delete_event",
-							   GTK_SIGNAL_FUNC(app_close_book), mdi);
+							   GTK_SIGNAL_FUNC(app_book_delete_event), mdi);
 
 		mdi->windows = g_list_append(NULL, mdi->active_window);
 
@@ -1872,7 +1875,7 @@ GnomeMDIChild *gnome_mdi_get_active_child (GnomeMDI *mdi)
  * Return value: 
  * A pointer to a GtkWidget *.
  **/
-GtkWidget *gnome_mdi_get_active_view(GnomeMDI *mdi)
+GtkWidget *gnome_mdi_get_active_view (GnomeMDI *mdi)
 {
 	g_return_val_if_fail(mdi != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
@@ -2031,7 +2034,7 @@ void gnome_mdi_unregister (GnomeMDI *mdi, GtkObject *object)
  * Return value:
  * A pointer to the GnomeMDIChild the view belongs to.
  **/
-GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *view)
+GnomeMDIChild *gnome_mdi_get_child_from_view (GtkWidget *view)
 {
 	gpointer child;
 
@@ -2051,7 +2054,7 @@ GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *view)
  * Return value:
  * A pointer to the GnomeApp containg the specified view.
  **/
-GnomeApp *gnome_mdi_get_app_from_view(GtkWidget *view)
+GnomeApp *gnome_mdi_get_app_from_view (GtkWidget *view)
 {
 	GtkWidget *app;
 

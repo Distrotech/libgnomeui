@@ -1,3 +1,9 @@
+2000-01-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (app_book_delete_event, app_toplevel_delete_event):
+	fixed a bug that kept a deleted empty toplevel in windows list,
+	causing occasional warnings & segfaults.
+	
 2000-01-06  Elliot Lee  <sopwith@redhat.com>
 
 	* gnome-icon-list.[ch]: Port to gdk-pixbuf. Switch from a linked list to an array for storing the icons (faster!)
