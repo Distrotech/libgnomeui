@@ -1,3 +1,9 @@
+1999-06-29    <jrb@redhat.com>
+
+	* gnome-druid-page.c: Wrote more documentation.
+
+	* gnome-druid.c: Finished embedded documentation.
+
 1999-06-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-text.c: Finished all documentation comments.  The

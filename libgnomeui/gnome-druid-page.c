@@ -218,6 +218,16 @@ gnome_druid_page_realize (GtkWidget *widget)
 	widget->style = gtk_style_attach (widget->style, widget->window);
 	gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
 }
+/**
+ * gnome_druid_page_next:
+ * @druid_page: A DruidPage widget.
+ * 
+ * Description: This will emit the "next" signal for that particular page.  It
+ * is called by gnome-druid exclusively.  It is expected that non-linear Druid's
+ * will override this signal and return TRUE if it handles changing pages.
+ * 
+ * Return value: This function will return FALSE by default.
+ **/
 /* Public functions */
 gboolean
 gnome_druid_page_next     (GnomeDruidPage *druid_page)
@@ -228,6 +238,13 @@ gnome_druid_page_next     (GnomeDruidPage *druid_page)
 	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [NEXT], GTK_WIDGET (druid_page)->parent, &retval);
 	return retval;
 }
+/**
+ * gnome_druid_page_prepare:
+ * @druid_page: A DruidPage widget.
+ * 
+ * Description: This emits the "prepare" signal for the page.  It is called by
+ * gnome-druid exclusively.
+ **/
 void
 gnome_druid_page_prepare  (GnomeDruidPage *druid_page)
 {
@@ -236,6 +253,16 @@ gnome_druid_page_prepare  (GnomeDruidPage *druid_page)
 
 	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [PREPARE], GTK_WIDGET (druid_page)->parent);
 }
+/**
+ * gnome_druid_page_back:
+ * @druid_page: A DruidPage widget.
+ * 
+ * Description: This will emit the "back" signal for that particular page.  It
+ * is called by gnome-druid exclusively.  It is expected that non-linear Druid's
+ * will override this signal and return TRUE if it handles changing pages.
+ * 
+ * Return value: This function will return FALSE by default.
+ **/
 gboolean
 gnome_druid_page_back     (GnomeDruidPage *druid_page)
 {
@@ -246,6 +273,13 @@ gnome_druid_page_back     (GnomeDruidPage *druid_page)
 	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [BACK], GTK_WIDGET (druid_page)->parent, &retval);
 	return retval;
 }
+/**
+ * gnome_druid_page_finish:
+ * @druid_page: A DruidPage widget.
+ * 
+ * Description: This emits the "finish" signal for the page.  It is called by
+ * gnome-druid exclusively.
+ **/
 void
 gnome_druid_page_finish   (GnomeDruidPage *druid_page)
 {
@@ -254,6 +288,16 @@ gnome_druid_page_finish   (GnomeDruidPage *druid_page)
   
 	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [FINISH], GTK_WIDGET (druid_page)->parent);
 }
+/**
+ * gnome_druid_page_cancel:
+ * @druid_page: A DruidPage widget.
+ * 
+ * Description: This will emit the "cancel" signal for that particular page.  It
+ * is called by gnome-druid exclusively.  It is expected that a Druid will
+ * override this signal and return TRUE if it does not want to exit.
+ * 
+ * Return value: This function will return FALSE by default.
+ **/
 gboolean
 gnome_druid_page_cancel   (GnomeDruidPage *druid_page)
 {
