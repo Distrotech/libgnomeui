@@ -502,8 +502,9 @@ gtk_layout_size_allocate (GtkWidget     *widget,
       gdk_window_move_resize (widget->window,
 			      allocation->x, allocation->y,
 			      allocation->width, allocation->height);
-      gdk_window_resize (GTK_LAYOUT(widget)->bin_window,
-			 allocation->width, allocation->height);
+      gdk_window_move_resize (GTK_LAYOUT(widget)->bin_window,
+			      0, 0,
+			      allocation->width, allocation->height);
     }
 
   layout->hadjustment->page_size = allocation->width;

@@ -1,3 +1,10 @@
+1998-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtklayout.c (gtk_layout_size_allocate): Move_resize the
+	bin_window, not just resize it.  This is for when we have parents
+	that do funky size allocation, because the bin_window may not act
+	as expected as it has the gravity bits set.
+
 Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-dialog.c (gnome_dialog_destroy): Don't remove
