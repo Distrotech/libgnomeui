@@ -1,3 +1,9 @@
+1998-10-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (gnome_popup_menu_attach): Use
+	gtk_widget_add_events() instead of set_events() -- this lets us
+	operate even on realized widgets.
+
 1998-10-29    <jrb@aware-of-vacuity.labs.redhat.com>
 
 	* gtk-socket.c: Remove #define DEBUG_PLUGSOCKET

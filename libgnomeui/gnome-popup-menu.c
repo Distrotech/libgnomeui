@@ -147,10 +147,7 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget, gpointer user_data
 	 * shouted by gtk_widget_set_events().
 	 */
 
-	event_mask = gtk_widget_get_events (widget);
-
-	if (!(event_mask & GDK_BUTTON_PRESS_MASK))
-		gtk_widget_set_events (widget, event_mask & GDK_BUTTON_PRESS_MASK);
+	gtk_widget_add_events (widget, GDK_BUTTON_PRESS_MASK);
 
 	gtk_signal_connect (GTK_OBJECT (widget), "button_press_event",
 			    (GtkSignalFunc) popup_button_pressed,
