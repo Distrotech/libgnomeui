@@ -70,11 +70,8 @@ libgnomeui_2_la_SOURCES = \
         gnome-winhints.c		\
 	gnometypes.c			\
 	gnome-icon-list.c		\
-	gnome-icon-item.c		\
-	gnome-icon-text.c		\
 	gnome-vfs-util.c		\
 	gnome-window.c			\
-	oafgnome.c			\
 	$(noinst_HEADERS)
 
 ## this lists all the non-generated headers
@@ -97,9 +94,7 @@ gnome_headers = \
 	gnome-geometry.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
-	gnome-icon-item.h		\
 	gnome-icon-list.h		\
-	gnome-icon-text.h		\
 	gnome-ui-init.h			\
 	gnome-macros.h			\
 	gnome-stock-icons.h		\
@@ -107,8 +102,7 @@ gnome_headers = \
 	gnome-uidefs.h			\
         gnome-winhints.h		\
 	gnome-vfs-util.h		\
-	gnome-window.h			\
-	oafgnome.h
+	gnome-window.h
 
 libinclude_HEADERS = \
 	libgnomeui.h

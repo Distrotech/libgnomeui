@@ -1,3 +1,15 @@
+2001-08-11  Martin Baulig  <baulig@suse.de>
+
+	* gnome-icon-item.[ch]: Removed.
+	* gnome-icon-text.[ch]: Removed.
+
+	* gnome-icon-list.c: Use the new GnomeCanvasRichText.
+	(FIXME: Incomplete).
+
+2001-08-11  Martin Baulig  <baulig@suse.de>
+
+	* oafgnome.[ch]: Removed.
+
 2001-08-09  Michael Meeks  <michael@ximian.com>
 
 	* gnome-paper-selector.[ch]: Kill, now in libgnomeprintui.

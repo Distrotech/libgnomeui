@@ -43,10 +43,10 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 #include "gnome-icon-list.h"
-#include "gnome-icon-item.h"
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-text.h>
 #include <libgnomecanvas/gnome-canvas-rect-ellipse.h>
+#include <libgnomecanvas/gnome-canvas-rich-text.h>
 
 #include <libgnomeuiP.h>
 
@@ -93,7 +93,7 @@ typedef struct {
 	/* Icon image and text items */
 	GnomeCanvasGroup *group;
 	GnomeCanvasPixbuf *image;
-	GnomeIconTextItem *text;
+	GnomeCanvasRichText *text;
 
 	/* Filename of the icon file. */
 	gchar *icon_filename;
@@ -416,7 +416,7 @@ gil_free_line_info_from (Gil *gil, int first_line)
 	g_list_free (ll);
 }
 
-static void
+static void G_GNUC_UNUSED
 gil_layout_from_line (Gil *gil, int line)
 {
 	GnomeIconListPrivate *priv;
@@ -601,17 +601,10 @@ static gint
 selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *event)
 {
 	GnomeIconListPrivate *priv;
-	GnomeIconTextItem *text;
 	int retval;
 
 	priv = gil->_priv;
 	retval = FALSE;
-
-	/* We use a separate variable and ref the object because it may be
-	 * destroyed by one of the signal handlers.
-	 */
-	text = icon->text;
-	gtk_object_ref (GTK_OBJECT (text));
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
@@ -649,25 +642,12 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 		break;
 
 	case GDK_BUTTON_RELEASE:
-		if (priv->edit_pending) {
-			gnome_icon_text_item_start_editing (text);
-			priv->edit_pending = FALSE;
-		}
-
 		retval = TRUE;
 		break;
 
 	default:
 		break;
 	}
-
-	/* If the click was on the text and we actually did something, stop the
-	 * icon text item's own handler from executing.
-	 */
-	if (on_text && retval)
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "event");
-
-	gtk_object_unref (GTK_OBJECT (text));
 
 	return retval;
 }
@@ -742,19 +722,12 @@ static gint
 selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *event)
 {
 	GnomeIconListPrivate *priv;
-	GnomeIconTextItem *text;
 	int retval;
 	int additive, range;
 	int do_select;
 
 	priv = gil->_priv;
 	retval = FALSE;
-
-	/* We use a separate variable and ref the object because it may be
-	 * destroyed by one of the signal handlers.
-	 */
-	text = icon->text;
-	gtk_object_ref (GTK_OBJECT (text));
 
 	range = (event->button.state & GDK_SHIFT_MASK) != 0;
 	additive = (event->button.state & GDK_CONTROL_MASK) != 0;
@@ -825,11 +798,6 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 			retval = TRUE;
 		}
 
-		if (priv->edit_pending) {
-			gnome_icon_text_item_start_editing (text);
-			priv->edit_pending = FALSE;
-			retval = TRUE;
-		}
 #if 0
 		if (priv->select_pending) {
 			icon->selected = priv->select_pending_was_selected;
@@ -848,14 +816,6 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 	default:
 		break;
 	}
-
-	/* If the click was on the text and we actually did something, stop the
-	 * icon text item's own handler from executing.
-	 */
-	if (on_text && retval)
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "event");
-
-	gtk_object_unref (GTK_OBJECT (text));
 
 	return retval;
 }
@@ -891,10 +851,11 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 	}
 }
 
+#if 0
 /* Handler for the editing_started signal of an icon text item.  We block the
  * event handler so that it will not be called while the text is being edited.
  */
-static void
+static void G_GNUC_UNUSED
 editing_started (GnomeIconTextItem *iti, gpointer data)
 {
 	Icon *icon;
@@ -907,7 +868,7 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 /* Handler for the editing_stopped signal of an icon text item.  We unblock the
  * event handler so that we can get events from it again.
  */
-static void
+static void G_GNUC_UNUSED
 editing_stopped (GnomeIconTextItem *iti, gpointer data)
 {
 	Icon *icon;
@@ -916,26 +877,28 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 	gtk_signal_handler_unblock (GTK_OBJECT (iti), icon->text_event_id);
 }
 
-static gboolean
+static gboolean G_GNUC_UNUSED
 text_changed (GnomeCanvasItem *item, Icon *icon)
 {
 	Gil *gil;
 	gboolean accept;
+	gchar *text = NULL;
 	int idx;
 
 	gil = GIL (item->canvas);
 	accept = TRUE;
 
 	idx = gil_icon_to_index (gil, icon);
+	g_object_get (G_OBJECT (icon->text), "text", &text, NULL);
 	gtk_signal_emit (GTK_OBJECT (gil),
 			 gil_signals[TEXT_CHANGED],
-			 idx, gnome_icon_text_item_get_text (icon->text),
+			 idx, text,
 			 &accept);
 
 	return accept;
 }
 
-static void
+static void G_GNUC_UNUSED
 height_changed (GnomeCanvasItem *item, Icon *icon)
 {
 	Gil *gil;
@@ -957,6 +920,7 @@ height_changed (GnomeCanvasItem *item, Icon *icon)
 	gil_layout_from_line (gil, n / gil_get_items_per_line (gil));
 	gil_scrollbar_adjust (gil);
 }
+#endif
 
 static Icon *
 icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
@@ -991,6 +955,7 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 		"anchor", GTK_ANCHOR_NW,
 		NULL));
 
+#if 0
 	icon->text = GNOME_ICON_TEXT_ITEM (gnome_canvas_item_new (
 		icon->group,
 		gnome_icon_text_item_get_type (),
@@ -999,6 +964,17 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 		"y", (double) gdk_pixbuf_get_height (im),
 		"width", (double) gdk_pixbuf_get_width (im),
 		"editable", priv->is_editable,
+		"anchor", GTK_ANCHOR_NW,
+		NULL));
+#endif
+
+	icon->text = GNOME_CANVAS_RICH_TEXT (gnome_canvas_item_new (
+		icon->group,
+		gnome_canvas_rich_text_get_type (),
+		"text", text,
+		"x", (double) DEFAULT_TEXT_SPACING,
+		"y", (double) gdk_pixbuf_get_height (im),
+		"clip_width", (double) gdk_pixbuf_get_width (im),
 		"anchor", GTK_ANCHOR_NW,
 		NULL));
 
@@ -1012,6 +988,7 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 						  GTK_SIGNAL_FUNC (icon_event),
 						  icon);
 
+#if 0
 	gtk_signal_connect (GTK_OBJECT (icon->text), "editing_started",
 			    GTK_SIGNAL_FUNC (editing_started),
 			    icon);
@@ -1025,6 +1002,7 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 	gtk_signal_connect (GTK_OBJECT (icon->text), "height_changed",
 			    GTK_SIGNAL_FUNC (height_changed),
 			    icon);
+#endif
 
 	return icon;
 }
@@ -1547,7 +1525,6 @@ real_select_icon (Gil *gil, gint num, GdkEvent *event)
 		return;
 
 	icon->selected = TRUE;
-	gnome_icon_text_item_select (icon->text, TRUE);
 	priv->selection = g_list_append (priv->selection, GINT_TO_POINTER (num));
 }
 
@@ -1569,7 +1546,6 @@ real_unselect_icon (Gil *gil, gint num, GdkEvent *event)
 		return;
 
 	icon->selected = FALSE;
-	gnome_icon_text_item_select (icon->text, FALSE);
 	priv->selection = g_list_remove (priv->selection, GINT_TO_POINTER (num));
 }
 

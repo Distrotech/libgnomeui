@@ -46,7 +46,6 @@
 #include <libgnomeui/gnome-geometry.h>
 
 #include <libgnomeui/gnome-icon-list.h>
-#include <libgnomeui/gnome-icon-item.h>
 #include <libgnomeui/gnome-canvas-init.h>
 #include <libgnomeui/gnome-ui-init.h>
 #include <libgnomeui/gnome-macros.h>
@@ -61,7 +60,6 @@
 #include <libgnomeui/gnome-druid-page.h>
 #include <libgnomeui/gnome-druid-page-edge.h>
 #include <libgnomeui/gnome-druid-page-standard.h>
-#include <libgnomeui/oafgnome.h>
 #include <libgnomeui/gnome-vfs-util.h>
 
 #ifdef COMPAT_1_0
