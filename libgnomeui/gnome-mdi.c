@@ -1169,8 +1169,8 @@ gint gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
  * 
  * Description:
  * Creates a new view of the child and adds it to the MDI; it behaves the
- * same way as gnome_mdi_add_view in GNOME_MDI_MODAL and GNOME_MDI_TOPLEVEL
- * modes, but in GNOME_MDI_NOTEBOOK mode, the view is added in a new
+ * same way as gnome_mdi_add_view in %GNOME_MDI_MODAL and %GNOME_MDI_TOPLEVEL
+ * modes, but in %GNOME_MDI_NOTEBOOK mode, the view is added in a new
  * toplevel window unless the active one has no views in it. 
  * 
  * Return value: 
@@ -1427,7 +1427,7 @@ gint gnome_mdi_remove_all (GnomeMDI *mdi, gint force)
  * @mdi: A pointer to a GnomeMDI object.
  * 
  * Description:
- * Opens a new toplevel window (unless in GNOME_MDI_MODAL mode and a
+ * Opens a new toplevel window (unless in %GNOME_MDI_MODAL mode and a
  * toplevel window is already open). This is usually used only for opening
  * the initial window on startup (just before calling gtkmain()) if no
  * windows were open because a session was restored or children were added
@@ -1530,7 +1530,8 @@ GnomeMDIChild *gnome_mdi_find_child (GnomeMDI *mdi, gchar *name)
  * @mode: New mode.
  *
  * Description:
- * Sets the MDI mode to mode.
+ * Sets the MDI mode to mode. Possible values are %GNOME_MDI_TOPLEVEL,
+ * %GNOME_MDI_NOTEBOOK and %GNOME_MDI_MODAL.
  **/
 void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 {
@@ -1684,7 +1685,7 @@ GnomeApp *gnome_mdi_active_window (GnomeMDI *mdi)
  * gnome_app_create_menus_with_data() function with mdi as the callback
  * user data. Finally, the pointer to the copy is assigned to the new
  * toplevel window (a GnomeApp widget) as data with key
- * GNOME_MDI_MENUBAR_INFO_KEY. 
+ * %GNOME_MDI_MENUBAR_INFO_KEY. 
  **/
 void gnome_mdi_set_menubar_template (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl)
 {
@@ -1705,7 +1706,7 @@ void gnome_mdi_set_menubar_template (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl)
  * this structure is copied, the toolbar is created with
  * gnome_app_create_toolbar_with_data() function with mdi as the callback
  * user data. Finally, the pointer to the copy is assigned to the new toplevel
- * window (a GnomeApp widget) as data with key GNOME_MDI_TOOLBAR_INFO_KEY. 
+ * window (a GnomeApp widget) as data with key %GNOME_MDI_TOOLBAR_INFO_KEY. 
  **/
 void gnome_mdi_set_toolbar_template (GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl)
 {

@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* gnome-mdi-child.h - definition of a Gnome MDI Child object
+/* gnome-mdi-child.h - definition of an abstract MDI child class.
 
    Copyright (C) 1997, 1998 Free Software Foundation
 
@@ -39,6 +39,14 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeMDIChild       GnomeMDIChild;
 typedef struct _GnomeMDIChildClass  GnomeMDIChildClass;
 
+/* GnomeMDIChild
+ *
+ * is an abstract class. In order to use it, you have to either derive a
+ * new class from it and set the proper virtual functions in its parent
+ * GnomeMDIChildClass structure or use the GnomeMDIGenericChild class
+ * that allows to specify the relevant functions on a per-instance basis
+ * and can directly be used with GnomeMDI.
+ */
 struct _GnomeMDIChild
 {
 	GtkObject object;

@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* gnome-mdi-child.c - implementation of the base class for MDI children
+/* gnome-mdi-child.c - implementation of an abstract class for MDI children
 
    Copyright (C) 1997, 1998 Free Software Foundation
 
@@ -36,12 +36,13 @@ static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
 
 /* declare the functions from gnome-mdi.c that we need but are not public */
-void child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
-void child_list_menu_add_item(GnomeMDI *, GnomeMDIChild *);
+void child_list_menu_remove_item (GnomeMDI *, GnomeMDIChild *);
+void child_list_menu_add_item    (GnomeMDI *, GnomeMDIChild *);
 
 static GtkObjectClass *parent_class = NULL;
 
-guint gnome_mdi_child_get_type () {
+guint gnome_mdi_child_get_type ()
+{
 	static guint mdi_child_type = 0;
   
 	if (!mdi_child_type) {
@@ -61,7 +62,8 @@ guint gnome_mdi_child_get_type () {
 	return mdi_child_type;
 }
 
-static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass) {
+static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
+{
 	GtkObjectClass *object_class;
 
 	object_class = (GtkObjectClass*)klass;
@@ -76,7 +78,8 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass) {
 	parent_class = gtk_type_class (gtk_object_get_type ());
 }
 
-static void gnome_mdi_child_init (GnomeMDIChild *mdi_child) {
+static void gnome_mdi_child_init (GnomeMDIChild *mdi_child)
+{
 	mdi_child->name = NULL;
 	mdi_child->parent = NULL;
 	mdi_child->views = NULL;
@@ -87,7 +90,8 @@ static void gnome_mdi_child_init (GnomeMDIChild *mdi_child) {
  * parameter is NULL and modify and return the old widget otherwise. it
  * should (obviously) NOT call the parent class handler!
  */
-static GtkWidget *gnome_mdi_child_set_label(GnomeMDIChild *child, GtkWidget *old_label, gpointer data) {
+static GtkWidget *gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *old_label, gpointer data)
+{
 #ifdef GNOME_ENABLE_DEBUG
 	printf("GnomeMDIChild: default set_label handler called!\n");
 #endif
@@ -100,7 +104,8 @@ static GtkWidget *gnome_mdi_child_set_label(GnomeMDIChild *child, GtkWidget *old
 		return gtk_label_new(child->name);
 }
 
-static void gnome_mdi_child_destroy(GtkObject *obj) {
+static void gnome_mdi_child_destroy (GtkObject *obj)
+{
 	GnomeMDIChild *mdi_child;
 
 #ifdef GNOME_ENABLE_DEBUG
@@ -119,7 +124,21 @@ static void gnome_mdi_child_destroy(GtkObject *obj) {
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(GTK_OBJECT(mdi_child));
 }
 
-GtkWidget *gnome_mdi_child_add_view(GnomeMDIChild *mdi_child) {
+/**
+ * gnome_mdi_child_add_view:
+ * @mdi_child: A pointer to a GnomeMDIChild object.
+ * 
+ * Description:
+ * Creates a new view of a child (a GtkWidget) adds it to the list
+ * of the views and returns a pointer to it. Virtual function
+ * that has to be specified for classes derived from GnomeMDIChild
+ * is used to create the new view.
+ * 
+ * Return value:
+ * A pointer to the new view.
+ **/
+GtkWidget *gnome_mdi_child_add_view (GnomeMDIChild *mdi_child)
+{
 	GtkWidget *view = NULL;
 
 	view = gnome_mdi_child_create_view(mdi_child);
@@ -135,13 +154,34 @@ GtkWidget *gnome_mdi_child_add_view(GnomeMDIChild *mdi_child) {
 	return view;
 }
 
-void gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view) {
+/**
+ * gnome_mdi_child_remove_view:
+ * @mdi_child: A pointer to a GnomeMDIChild object.
+ * @view: View to be destroyed.
+ * 
+ * Description:
+ * Removes view @view from the list of @mdi_child's views and
+ * destroys it.
+ **/
+void gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view)
+{
 	mdi_child->views = g_list_remove(mdi_child->views, view);
 
 	gtk_widget_destroy(view);
 }
 
-void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name) {
+/**
+ * gnome_mdi_child_set_name:
+ * @mdi_child: A pointer to a GnomeMDIChild object.
+ * @name: String containing the new name for the child.
+ * 
+ * Description:
+ * Changes name of @mdi_child to @name. @name is duplicated and stored
+ * in @mdi_child. If @mdi_child has already been added to GnomeMDI,
+ * it also takes care of updating it.
+ **/
+void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name)
+{
 	gchar *old_name = mdi_child->name;
 
 	if(mdi_child->parent)
@@ -158,11 +198,26 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name) {
 	}
 }
 
-void gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl) {
+/**
+ * gnome_mdi_child_set_menu_template:
+ * @mdi_child: A pointer to a GnomeMDIChild object.
+ * @menu_tmpl: A GnomeUIInfo array describing the child specific menus.
+ * 
+ * Description:
+ * Sets the template for menus that are added and removed when differrent
+ * children get activated. This way, each child can modify the MDI menubar
+ * to suit its needs. If no template is set, the create_menus virtual
+ * function will be used for creating these menus (it has to return a
+ * GList of menu items). If no such function is specified, the menubar will
+ * be unchanged by MDI children.
+ **/
+void gnome_mdi_child_set_menu_template (GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl)
+{
 	mdi_child->menu_template = menu_tmpl;
 }
 
-static GtkWidget *gnome_mdi_child_create_view(GnomeMDIChild *child) {
+static GtkWidget *gnome_mdi_child_create_view (GnomeMDIChild *child)
+{
 	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view)
 		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view(child, NULL);
 

@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* gnome-mdi-generic-child.h - definition of a Gnome MDI generic child class
+/* gnome-mdi-generic-child.h - definition of a generic MDI child class
 
    Copyright (C) 1997, 1998 Free Software Foundation
 

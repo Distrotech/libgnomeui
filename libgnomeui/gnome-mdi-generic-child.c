@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* gnome-mdi-generic-child.c - implementation of a generic MDI child class
+/* gnome-mdi-generic-child.c - implementation of a generic MDI child class.
 
    Copyright (C) 1997, 1998 Free Software Foundation
 
@@ -41,7 +41,8 @@ static GtkWidget  *gnome_mdi_generic_child_set_label        (GnomeMDIGenericChil
 
 static GnomeMDIChildClass *parent_class = NULL;
 
-guint gnome_mdi_generic_child_get_type() {
+guint gnome_mdi_generic_child_get_type()
+{
 	static guint mdi_gen_child_type = 0;
   
 	if (!mdi_gen_child_type) {
@@ -61,7 +62,8 @@ guint gnome_mdi_generic_child_get_type() {
 	return mdi_gen_child_type;
 }
 
-static void gnome_mdi_generic_child_class_init(GnomeMDIGenericChildClass *klass) {
+static void gnome_mdi_generic_child_class_init (GnomeMDIGenericChildClass *klass)
+{
 	GnomeMDIChildClass *mdi_child_klass;
 	GtkObjectClass *object_klass;
 
@@ -78,7 +80,8 @@ static void gnome_mdi_generic_child_class_init(GnomeMDIGenericChildClass *klass)
 	parent_class = gtk_type_class(gnome_mdi_child_get_type());
 }
 
-static void gnome_mdi_generic_child_init(GnomeMDIGenericChild *child) {
+static void gnome_mdi_generic_child_init (GnomeMDIGenericChild *child)
+{
 	child->create_view = NULL;
 	child->create_menus = NULL;
 	child->set_label = NULL;
@@ -100,7 +103,8 @@ static void gnome_mdi_generic_child_init(GnomeMDIGenericChild *child) {
 	child->get_config_string_data = NULL;
 }
 
-GnomeMDIGenericChild *gnome_mdi_generic_child_new(gchar *name) {
+GnomeMDIGenericChild *gnome_mdi_generic_child_new (gchar *name)
+{
 	GnomeMDIGenericChild *child;
 
 	child = gtk_type_new(gnome_mdi_generic_child_get_type ());
@@ -110,17 +114,19 @@ GnomeMDIGenericChild *gnome_mdi_generic_child_new(gchar *name) {
 	return child;
 }
 
-void gnome_mdi_generic_child_set_view_creator(GnomeMDIGenericChild *child,
-											  GnomeMDIChildViewCreator func,
-											  gpointer data) {
+void gnome_mdi_generic_child_set_view_creator (GnomeMDIGenericChild *child,
+											   GnomeMDIChildViewCreator func,
+											   gpointer data)
+{
         gnome_mdi_generic_child_set_view_creator_full(child,func,NULL,data,NULL);
 }
 
-void gnome_mdi_generic_child_set_view_creator_full(GnomeMDIGenericChild *child,
-												   GnomeMDIChildViewCreator func,
-												   GtkCallbackMarshal marshal,
-												   gpointer data,
-												   GtkDestroyNotify notify) {
+void gnome_mdi_generic_child_set_view_creator_full (GnomeMDIGenericChild *child,
+												    GnomeMDIChildViewCreator func,
+													GtkCallbackMarshal marshal,
+													gpointer data,
+													GtkDestroyNotify notify)
+{
 	if(child->create_view_dn)
 		child->create_view_dn(child->create_view_data);
 	child->create_view = func;
@@ -129,17 +135,19 @@ void gnome_mdi_generic_child_set_view_creator_full(GnomeMDIGenericChild *child,
 	child->create_view_dn = notify;
 }
 
-void gnome_mdi_generic_child_set_menu_creator(GnomeMDIGenericChild *child,
-											  GnomeMDIChildMenuCreator func,
-											  gpointer data) {
+void gnome_mdi_generic_child_set_menu_creator (GnomeMDIGenericChild *child,
+											   GnomeMDIChildMenuCreator func,
+											   gpointer data)
+{
 	gnome_mdi_generic_child_set_menu_creator_full(child,func,NULL,data,NULL);
 }
 
-void gnome_mdi_generic_child_set_menu_creator_full(GnomeMDIGenericChild *child,
-												   GnomeMDIChildMenuCreator func,
-												   GtkCallbackMarshal marshal,
-												   gpointer data,
-												   GtkDestroyNotify notify) {
+void gnome_mdi_generic_child_set_menu_creator_full (GnomeMDIGenericChild *child,
+													GnomeMDIChildMenuCreator func,
+													GtkCallbackMarshal marshal,
+													gpointer data,
+													GtkDestroyNotify notify)
+{
 	if(child->create_menus_dn)
 		child->create_menus_dn(child->create_menus_data);
 	child->create_menus = func;
@@ -148,17 +156,19 @@ void gnome_mdi_generic_child_set_menu_creator_full(GnomeMDIGenericChild *child,
 	child->create_menus_dn = notify;
 }
 
-void gnome_mdi_generic_child_set_config_func(GnomeMDIGenericChild *child,
-											 GnomeMDIChildConfigFunc func,
-											 gpointer data) {
+void gnome_mdi_generic_child_set_config_func (GnomeMDIGenericChild *child,
+											  GnomeMDIChildConfigFunc func,
+											  gpointer data)
+{
 	gnome_mdi_generic_child_set_config_func_full(child,func,NULL,data,NULL);
 }
 
-void gnome_mdi_generic_child_set_config_func_full(GnomeMDIGenericChild *child,
-												  GnomeMDIChildConfigFunc func,
-												  GtkCallbackMarshal marshal,
-												  gpointer data,
-												  GtkDestroyNotify notify) {
+void gnome_mdi_generic_child_set_config_func_full (GnomeMDIGenericChild *child,
+												   GnomeMDIChildConfigFunc func,
+												   GtkCallbackMarshal marshal,
+												   gpointer data,
+												   GtkDestroyNotify notify)
+{
 	if(child->get_config_string_dn)
 		child->get_config_string_dn(child->get_config_string_data);
 	child->get_config_string = func;
@@ -167,17 +177,18 @@ void gnome_mdi_generic_child_set_config_func_full(GnomeMDIGenericChild *child,
 	child->get_config_string_dn = notify;
 }
 
-void gnome_mdi_generic_child_set_label_func(GnomeMDIGenericChild *child,
-											GnomeMDIChildLabelFunc func,
-											gpointer data) {
+void gnome_mdi_generic_child_set_label_func (GnomeMDIGenericChild *child,
+											 GnomeMDIChildLabelFunc func,
+											 gpointer data)
+{
 	gnome_mdi_generic_child_set_label_func_full(child,func,NULL,data,NULL);
 }
 
-void gnome_mdi_generic_child_set_label_func_full(GnomeMDIGenericChild *child,
-												 GnomeMDIChildLabelFunc func,
-												 GtkCallbackMarshal marshal,
-												 gpointer data,
-												 GtkDestroyNotify notify) {
+void gnome_mdi_generic_child_set_label_func_full (GnomeMDIGenericChild *child,
+												  GnomeMDIChildLabelFunc func,
+												  GtkCallbackMarshal marshal,
+												  gpointer data,
+												  GtkDestroyNotify notify) {
 	if(child->set_label_dn)
 		child->set_label_dn(child->set_label_data);
 	child->set_label = func;
@@ -186,7 +197,8 @@ void gnome_mdi_generic_child_set_label_func_full(GnomeMDIGenericChild *child,
 	child->set_label_dn = notify;
 }
 
-static GtkWidget *gnome_mdi_generic_child_create_view(GnomeMDIGenericChild *child) {
+static GtkWidget *gnome_mdi_generic_child_create_view (GnomeMDIGenericChild *child)
+{
 	if(!child->create_view && !child->create_view_cbm) {
 		g_error("GnomeMDIGenericChild: No method for creating views was provided!");
 		return NULL;
@@ -210,7 +222,8 @@ static GtkWidget *gnome_mdi_generic_child_create_view(GnomeMDIGenericChild *chil
 								  child->create_view_data);
 }
 
-static GList *gnome_mdi_generic_child_create_menus(GnomeMDIGenericChild *child, GtkWidget *view) {
+static GList *gnome_mdi_generic_child_create_menus(GnomeMDIGenericChild *child, GtkWidget *view)
+{
 	if(!child->create_menus && !child->create_menus_cbm)
 		return NULL;
 
@@ -235,7 +248,8 @@ static GList *gnome_mdi_generic_child_create_menus(GnomeMDIGenericChild *child, 
 								   child->create_menus_data);
 }
 
-static gchar *gnome_mdi_generic_child_get_config_string(GnomeMDIGenericChild *child) {
+static gchar *gnome_mdi_generic_child_get_config_string (GnomeMDIGenericChild *child)
+{
 	if(!child->get_config_string && !child->get_config_string_cbm)
 		return NULL;
 
@@ -258,7 +272,8 @@ static gchar *gnome_mdi_generic_child_get_config_string(GnomeMDIGenericChild *ch
 										child->get_config_string_data);
 }
 
-static GtkWidget *gnome_mdi_generic_child_set_label(GnomeMDIGenericChild *child, GtkWidget *old_label) {
+static GtkWidget *gnome_mdi_generic_child_set_label (GnomeMDIGenericChild *child, GtkWidget *old_label)
+{
 	if(!child->set_label && !child->set_label_cbm)
 		return parent_class->set_label(GNOME_MDI_CHILD(child), old_label, NULL);
 
@@ -283,7 +298,8 @@ static GtkWidget *gnome_mdi_generic_child_set_label(GnomeMDIGenericChild *child,
 								child->set_label_data);
 }
 
-static void gnome_mdi_generic_child_destroy(GtkObject *obj) {
+static void gnome_mdi_generic_child_destroy (GtkObject *obj)
+{
 	GnomeMDIGenericChild *child = GNOME_MDI_GENERIC_CHILD(obj);
 
 	if(child->create_view_dn)
