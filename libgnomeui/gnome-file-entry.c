@@ -106,7 +106,7 @@ gnome_file_entry_construct (GnomeFileEntry     *fentry,
     g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
     g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-    return (GtkWidget *) gnome_selector_client_construct
+    return (GtkWidget *) gnome_selector_client_construct_from_objref
 	(GNOME_SELECTOR_CLIENT (fentry), corba_selector, uic);
 }
 

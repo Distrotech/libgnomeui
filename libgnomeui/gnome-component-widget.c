@@ -26,12 +26,16 @@
 
 #include <config.h>
 #include <libgnomeui/gnome-entry.h>
+#include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-async.h>
 
 struct _GnomeSelectorClientPrivate {
     GNOME_Selector selector;
     Bonobo_EventSource_ListenerId listener_id;
+    gboolean constructed;
+
+    BonoboPropertyBag *pbag;
 
     GNOME_Selector_ClientID client_id;
 
@@ -49,6 +53,10 @@ static BonoboWidgetClass *gnome_selector_client_parent_class;
 
 static GNOME_Selector_AsyncID last_async_id = 0;
 
+enum {
+    PROP_0
+};
+
 static void
 gnome_selector_client_finalize (GObject *object)
 {
@@ -61,6 +69,42 @@ gnome_selector_client_finalize (GObject *object)
 }
 
 static void
+gnome_selector_client_set_property (GObject *object, guint param_id,
+				    const GValue *value, GParamSpec *pspec)
+{
+    GnomeSelectorClient *client;
+
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (object));
+
+    client = GNOME_SELECTOR_CLIENT (object);
+
+    switch (param_id) {
+    default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	break;
+    }
+}
+
+static void
+gnome_selector_client_get_property (GObject *object, guint param_id, GValue *value,
+				    GParamSpec *pspec)
+{
+    GnomeSelectorClient *client;
+
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (object));
+
+    client = GNOME_SELECTOR_CLIENT (client);
+
+    switch (param_id) {
+    default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	break;
+    }
+}
+
+static void
 gnome_selector_client_class_init (GnomeSelectorClientClass *klass)
 {
     GObjectClass *object_class = (GObjectClass *) klass;
@@ -68,6 +112,9 @@ gnome_selector_client_class_init (GnomeSelectorClientClass *klass)
     gnome_selector_client_parent_class = g_type_class_peek_parent (klass);
 
     object_class->finalize = gnome_selector_client_finalize;
+
+    object_class->get_property = gnome_selector_client_get_property;
+    object_class->set_property = gnome_selector_client_set_property;
 }
 
 static void
@@ -100,8 +147,47 @@ gnome_selector_client_get_type (void)
 }
 
 GnomeSelectorClient *
-gnome_selector_client_construct (GnomeSelectorClient *client, GNOME_Selector corba_selector,
+gnome_selector_client_construct (GnomeSelectorClient *client, const gchar *moniker,
 				 Bonobo_UIContainer uic)
+{
+    GNOME_SelectorFactory factory;
+    GNOME_Selector selector;
+    CORBA_Environment ev;
+
+    g_return_val_if_fail (client != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_SELECTOR_CLIENT (client), NULL);
+    g_return_val_if_fail (moniker != NULL, NULL);
+    g_return_val_if_fail (!client->_priv->constructed, NULL);
+
+    CORBA_exception_init (&ev);
+
+    client->_priv->pbag = bonobo_property_bag_new (NULL, NULL, client);
+    bonobo_property_bag_add_gtk_args (client->_priv->pbag, G_OBJECT (client));
+
+    factory = bonobo_get_object (moniker, "GNOME/SelectorFactory", &ev);
+    if (BONOBO_EX (&ev) || (factory == CORBA_OBJECT_NIL)) {
+	g_object_unref (G_OBJECT (client));
+	CORBA_exception_free (&ev);
+	return NULL;
+    }
+
+    selector = GNOME_SelectorFactory_createSelector (factory, BONOBO_OBJREF (client->_priv->pbag), &ev);
+
+    if (BONOBO_EX (&ev) || (selector == NULL)) {
+	g_object_unref (G_OBJECT (client));
+	CORBA_exception_free (&ev);
+	return NULL;
+    }
+
+    CORBA_exception_free (&ev);
+
+    return gnome_selector_client_construct_from_objref (client, selector, uic);
+}
+
+GnomeSelectorClient *
+gnome_selector_client_construct_from_objref (GnomeSelectorClient *client,
+					     GNOME_Selector corba_selector,
+					     Bonobo_UIContainer uic)
 {
     Bonobo_Control corba_control;
     Bonobo_EventSource event_source;
@@ -109,11 +195,24 @@ gnome_selector_client_construct (GnomeSelectorClient *client, GNOME_Selector cor
 
     g_return_val_if_fail (client != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_SELECTOR_CLIENT (client), NULL);
-    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+    g_return_val_if_fail (corba_selector != NULL, NULL);
+    g_return_val_if_fail (!client->_priv->constructed, NULL);
+
+    client->_priv->constructed = TRUE;
 
     CORBA_exception_init (&ev);
 
-    corba_control = GNOME_Selector_getControl (corba_selector, &ev);
+    client->_priv->pbag = bonobo_property_bag_new (NULL, NULL, client);
+    bonobo_property_bag_add_gtk_args (client->_priv->pbag, G_OBJECT (client));
+
+    client->_priv->selector = bonobo_object_dup_ref (corba_selector, &ev);
+    if (BONOBO_EX (&ev)) {
+	g_object_unref (G_OBJECT (client));
+	CORBA_exception_free (&ev);
+	return NULL;
+    }
+
+    corba_control = GNOME_Selector_getControl (client->_priv->selector, &ev);
     if (BONOBO_EX (&ev) || (corba_control == CORBA_OBJECT_NIL)) {
 	g_object_unref (G_OBJECT (client));
 	CORBA_exception_free (&ev);
@@ -121,13 +220,6 @@ gnome_selector_client_construct (GnomeSelectorClient *client, GNOME_Selector cor
     }
 
     if (!bonobo_widget_construct_control_from_objref (BONOBO_WIDGET (client), corba_control, uic)) {
-	g_object_unref (G_OBJECT (client));
-	CORBA_exception_free (&ev);
-	return NULL;
-    }
-
-    client->_priv->selector = bonobo_object_dup_ref (corba_selector, &ev);
-    if (BONOBO_EX (&ev)) {
 	g_object_unref (G_OBJECT (client));
 	CORBA_exception_free (&ev);
 	return NULL;
@@ -163,7 +255,19 @@ gnome_selector_client_construct (GnomeSelectorClient *client, GNOME_Selector cor
 }
 
 GnomeSelectorClient *
-gnome_selector_client_new (GNOME_Selector corba_selector, Bonobo_UIContainer uic)
+gnome_selector_client_new (const gchar *moniker, Bonobo_UIContainer uic)
+{
+    GnomeSelectorClient *client;
+
+    g_return_val_if_fail (moniker != NULL, NULL);
+
+    client = g_object_new (gnome_selector_client_get_type (), NULL);
+
+    return gnome_selector_client_construct (client, moniker, uic);
+}
+
+GnomeSelectorClient *
+gnome_selector_client_new_from_objref (GNOME_Selector corba_selector, Bonobo_UIContainer uic)
 {
     GnomeSelectorClient *client;
 
@@ -171,7 +275,7 @@ gnome_selector_client_new (GNOME_Selector corba_selector, Bonobo_UIContainer uic
 
     client = g_object_new (gnome_selector_client_get_type (), NULL);
 
-    return gnome_selector_client_construct (client, corba_selector, uic);
+    return gnome_selector_client_construct_from_objref (client, corba_selector, uic);
 }
 
 gchar *

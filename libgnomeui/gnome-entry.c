@@ -122,7 +122,7 @@ gnome_entry_construct (GnomeEntry         *gentry,
 	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
 	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct
+	return (GtkWidget *) gnome_selector_client_construct_from_objref
 		(GNOME_SELECTOR_CLIENT (gentry), corba_selector, uic);
 }
 
@@ -154,7 +154,7 @@ gnome_entry_new_full (GnomeSelector      *selector,
 
 	event_source = bonobo_event_source_new ();
 
-	gnome_selector_construct (selector, event_source);
+	gnome_selector_construct (selector, event_source, CORBA_OBJECT_NIL);
 
 	gnome_selector_bind_to_control (selector,
 					BONOBO_OBJECT (gentry->_priv->control));
