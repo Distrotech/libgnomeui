@@ -654,7 +654,9 @@ add_digit(GtkWidget *w, gpointer data)
 	}
 
 	strcat(gc->result_string,digit);
-
+	if ((strcmp (gc->result_string, "0") != 0) || (strcmp (digit, "0") != 0))
+		strcat (gc->result_string, digit);
+	
 	put_led_font(gc);
 
 	sscanf(gc->result_string,"%lf",&gc->result);

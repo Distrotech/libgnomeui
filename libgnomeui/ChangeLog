@@ -1,3 +1,8 @@
+1999-06-01  Robert Brady  <rwb197@ecs.soton.ac.uk>
+	
+	* gnome-calc.c: Stoped it from being possible to enter arbritrarily
+	strings of zeroes.
+
 1999-06-17  Elliot Lee  <sopwith@redhat.com>
 
 	* gnome-canvas*.c: Use hypot(x, y) instead of sqrt(x*x + y*y)
