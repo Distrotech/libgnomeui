@@ -1,6 +1,6 @@
 /* GnomePixmapEntry widget - Combo box with "Browse" button for files and
  *			     preview space for pixmaps and a file picker in
- *			     electric eyes style
+ *			     electric eyes style (well kind of)
  *
  * Copyright (C) 1998 The Free Software Foundation
  *

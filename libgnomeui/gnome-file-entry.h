@@ -41,6 +41,10 @@ struct _GnomeFileEntry {
 struct _GnomeFileEntryClass {
 	GtkHBoxClass parent_class;
 	
+	/*if you want to modify the browse dialog, bind this with
+	  connect_after and modify object->fsw, or you could just 
+	  create your own and set it to object->fsw in a normally
+	  connected handler, it has to be a gtk_file_selection though*/
 	void (* browse_clicked)(GnomeFileEntry *fentry);
 };
 

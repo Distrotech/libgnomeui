@@ -1,6 +1,6 @@
 /* GnomePixmapEntry widget - Combo box with "Browse" button for files and
  *			     preview space for pixmaps and a file picker in
- *			     electric eyes style
+ *			     electric eyes style (well kind of)
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
@@ -14,6 +14,8 @@
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkfilesel.h>
+#include <gtk/gtkframe.h>
+#include <gtk/gtklabel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkpixmap.h>
@@ -78,19 +80,27 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 	GdkImlibImage *im;
 	GdkPixmap *pix;
 	GdkBitmap *mask;
+	
+	if(!pentry->preview)
+		return;
 	if(!t || !my_g_is_file(t) || !(im = gdk_imlib_load_image (t))) {
-		if(pentry->preview)
+		if(GTK_IS_PIXMAP(pentry->preview)) {
 			gtk_widget_destroy(pentry->preview);
-		pentry->preview = NULL;
+			pentry->preview = gtk_label_new(_("No Image"));
+			gtk_widget_show(pentry->preview);
+			gtk_container_add(GTK_CONTAINER(pentry->preview_sw),
+					  pentry->preview);
+		}
 		return;
 	}
 	gdk_imlib_render (im, im->rgb_width,im->rgb_height);
 	pix = gdk_imlib_move_image (im);
 	mask = gdk_imlib_move_mask (im);
 
-	if(pentry->preview)
+	if(GTK_IS_PIXMAP(pentry->preview))
 		gtk_pixmap_set(GTK_PIXMAP(pentry->preview),pix,mask);
 	else {
+		gtk_widget_destroy(pentry->preview);
 		pentry->preview = gtk_pixmap_new(pix,mask);
 		gtk_widget_show(pentry->preview);
 		gtk_container_add(GTK_CONTAINER(pentry->preview_sw),
@@ -101,12 +111,107 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 }
 
 static void
+setup_preview(GtkWidget *widget)
+{
+	char *p;
+	GList *l;
+	GtkWidget *pp = NULL;
+	GdkImlibImage *im;
+	GdkPixmap *pix;
+	GdkBitmap *mask;
+	int w,h;
+	GtkWidget *frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
+	GtkFileSelection *fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
+
+	if((l = gtk_container_children(GTK_CONTAINER(frame))) != NULL) {
+		pp = l->data;
+		g_list_free(l);
+	}
+
+	if(pp)
+		gtk_widget_destroy(pp);
+	
+	p = gtk_file_selection_get_filename(fs);
+	if(!p || !my_g_is_file(p) || !(im = gdk_imlib_load_image (p)))
+		return;
+
+	w = im->rgb_width;
+	h = im->rgb_height;
+	if(w>h) {
+		if(w>100) {
+			h = h*(100.0/w);
+			w = 100;
+		}
+	} else {
+		if(h>100) {
+			w = w*(100.0/h);
+			h = 100;
+		}
+	}
+	gdk_imlib_render(im,w,h);
+	pix = gdk_imlib_move_image(im);
+	mask = gdk_imlib_move_mask(im);
+
+	pp = gtk_pixmap_new(pix,mask);
+	gtk_widget_show(pp);
+	gtk_container_add(GTK_CONTAINER(frame),pp);
+
+	gdk_imlib_destroy_image(im);
+}
+
+static int
+pentry_destroy(GnomePixmapEntry *pentry)
+{
+	pentry->preview = NULL;
+	return FALSE;
+}
+
+
+static void
+browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
+{
+	GtkWidget *w;
+	GtkWidget *hbox;
+
+	GtkFileSelection *fs;
+	if(!fentry->fsw)
+		return;
+	fs = GTK_FILE_SELECTION(fentry->fsw);
+	
+	hbox = fs->file_list;
+	do {
+		hbox = hbox->parent;
+		if(!hbox) {
+			g_warning(_("Can't find an hbox, using a normal file "
+				    "selection"));
+			return;
+		}
+	} while(!GTK_IS_HBOX(hbox));
+
+	w = gtk_frame_new(_("Preview"));
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox),w,FALSE,FALSE,0);
+	gtk_widget_set_usize(w,110,110);
+	gtk_object_set_data(GTK_OBJECT(w),"fs",fs);
+	
+	gtk_object_set_data(GTK_OBJECT(fs->file_list),"frame",w);
+	gtk_signal_connect(GTK_OBJECT(fs->file_list),"select_row",
+			   GTK_SIGNAL_FUNC(setup_preview),NULL);
+	gtk_object_set_data(GTK_OBJECT(fs->selection_entry),"frame",w);
+	gtk_signal_connect(GTK_OBJECT(fs->selection_entry),"changed",
+			   GTK_SIGNAL_FUNC(setup_preview),NULL);
+}
+
+static void
 gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 {
 	GtkWidget *w;
 	char *p;
 
 	gtk_box_set_spacing (GTK_BOX (pentry), 4);
+	
+	gtk_signal_connect(GTK_OBJECT(pentry),"destroy",
+			   GTK_SIGNAL_FUNC(pentry_destroy), NULL);
 	
 	pentry->do_preview = TRUE;
 	
@@ -118,10 +223,15 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 	gtk_widget_set_usize(pentry->preview_sw,100,100);
 	gtk_widget_show (pentry->preview_sw);
 
-	/*this will be added whn there is an existing file to load*/
-	pentry->preview = NULL;
+	pentry->preview = gtk_label_new(_("No Image"));
+	gtk_widget_show(pentry->preview);
+	gtk_container_add(GTK_CONTAINER(pentry->preview_sw),
+			  pentry->preview);
 
 	pentry->fentry = gnome_file_entry_new (NULL,NULL);
+	gtk_signal_connect_after(GTK_OBJECT(pentry->fentry),"browse_clicked",
+				 GTK_SIGNAL_FUNC(browse_clicked),
+				 pentry);
 	gtk_box_pack_start (GTK_BOX (pentry), pentry->fentry, FALSE, FALSE, 0);
 	gtk_widget_show (pentry->fentry);
 	
@@ -133,6 +243,9 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 	gtk_signal_connect(GTK_OBJECT(w),"changed",
 			   GTK_SIGNAL_FUNC(entry_changed),
 			   pentry);
+
+	/*just in case there is a default that is an image*/
+	entry_changed(w,pentry);
 }
 
 GtkWidget *
@@ -226,8 +339,8 @@ gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 char *
 gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)
 {
-	/*this happens if it doesn't exist or isn't a pixmap*/
-	if(!pentry->preview)
+	/*this happens if it doesn't exist or isn't an image*/
+	if(!GTK_IS_PIXMAP(pentry->preview))
 		return NULL;
 	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
 					      TRUE);

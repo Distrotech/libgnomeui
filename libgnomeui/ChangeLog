@@ -1,3 +1,10 @@
+Sun Nov 22 01:11:26 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap-entry.[ch]: added a simple preview for the pixmaps
+	  to the file selection dialog
+
+	* gnome-file-entry.h: added comment about browse_clicked signal
+
 Sat Nov 21 22:57:15 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.c: don't reset the calculator on realize, just
