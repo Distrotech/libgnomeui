@@ -1,3 +1,8 @@
+2002-02-10  Cody Russell  <bratsche@gnome.org>
+
+	* gnome-about.c: Fixed a bug in set_value_array_from_list().
+	Pass &tmp_value instead of &value.
+
 2002-02-11  Anders Carlsson  <andersca@gnu.org>
 
 	* images/gnome-about-logo.png: Add.

@@ -540,7 +540,7 @@ set_value_array_from_list (GValue *value, GSList *list)
 		
 		g_value_init (&tmp_value, G_TYPE_STRING);
 		g_value_set_string (&tmp_value, str);
-		g_value_array_append (array, &value);
+		g_value_array_append (array, &tmp_value);
 	}
 
 	g_value_set_boxed (value, array);
