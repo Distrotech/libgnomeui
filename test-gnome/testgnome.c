@@ -1022,10 +1022,9 @@ static GnomeUIInfo helper_file_menu[] = {
 
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_ITEM, "_Close", "Close the current file", item_activated, "file/close", NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE, 0, 0, NULL },
-	{ GNOME_APP_UI_ITEM, "E_xit", "Exit the program", item_activated, "file/exit", NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'q', GDK_CONTROL_MASK, NULL },
+	GNOMEUIINFO_MENU_CLOSE_ITEM(item_activated, "file/close"),
+	GNOMEUIINFO_MENU_EXIT_ITEM(item_activated, "file/exit"),
+
 	GNOMEUIINFO_END
 };
 
