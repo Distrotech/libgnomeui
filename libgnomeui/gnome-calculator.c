@@ -232,7 +232,7 @@ do_error(GnomeCalculator *gc)
 	put_led_font(gc);
 }
 
-/*we handle sigfpe's so that we can fidn all the errors*/
+/*we handle sigfpe's so that we can find all the errors*/
 static void
 sigfpe_handler(int type)
 {
