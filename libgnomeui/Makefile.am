@@ -11,13 +11,13 @@ LIB_VERSION_NUM=0.0.0
 bin_PROGRAMS    = gnome_segv2
 lib_LTLIBRARIES = libgnomeui-2.la
 
-gnomehdir = $(includedir)/gnome-2.0
+gnomehdir = $(includedir)/libgnomeui-2.0
 gnomeh_HEADERS = gnome.h
 
 #
 # Install location for header files
 #
-libgnomeuiincludedir = $(includedir)/gnome-2.0/libgnomeui
+libgnomeuiincludedir = $(includedir)/libgnomeui-2.0/libgnomeui
 
 INCLUDES = \
 	-I$(top_builddir)				\
