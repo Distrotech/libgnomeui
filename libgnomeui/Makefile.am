@@ -81,6 +81,7 @@ libgnomeui_la_SOURCES = \
 	gnome-stock-imlib.h		\
 	gnometypes.c			\
 	gtkcalendar.c			\
+	gtklayout.c			\
 	gtkspell.c			\
 	gtk-clock.c			\
 	gtk-plug.c			\
@@ -133,6 +134,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gtkcalendar.h			\
 	gtkcauldron.h			\
 	gtkdial.h			\
+	gtklayout.h			\
 	gtkspell.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\

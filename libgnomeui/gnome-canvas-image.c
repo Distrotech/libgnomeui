@@ -326,7 +326,7 @@ gnome_canvas_image_realize (GnomeCanvasItem *item)
 
 	image = GNOME_CANVAS_IMAGE (item);
 
-	image->gc = gdk_gc_new (GTK_WIDGET (item->canvas)->window);
+	image->gc = gdk_gc_new (item->canvas->layout.bin_window);
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
 

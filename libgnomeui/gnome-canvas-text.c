@@ -338,7 +338,7 @@ gnome_canvas_text_realize (GnomeCanvasItem *item)
 
 	text = GNOME_CANVAS_TEXT (item);
 
-	text->gc = gdk_gc_new (GTK_WIDGET (item->canvas)->window);
+	text->gc = gdk_gc_new (item->canvas->layout.bin_window);
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
 

@@ -43,9 +43,7 @@
  * - item_class->output (item, "bridge_to_raph's_canvas")
  *
  * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
- *
- * - Make gnome_canvas_scroll_to() use XCopyArea instead of repainting everything.
- *   Or use the Mozilla scrolling code for when we have widgets in the canvas.  */
+ */
 
 #include <config.h>
 #include <math.h>
@@ -565,7 +563,7 @@ gnome_canvas_item_grab (GnomeCanvasItem *item, guint event_mask, GdkCursor *curs
 	if (item->canvas->grabbed_item)
 		return AlreadyGrabbed;
 
-	retval = gdk_pointer_grab (GTK_WIDGET (item->canvas)->window,
+	retval = gdk_pointer_grab (item->canvas->layout.bin_window,
 				   FALSE,
 				   event_mask,
 				   NULL,
@@ -1149,7 +1147,11 @@ static gint gnome_canvas_crossing       (GtkWidget        *widget,
 					 GdkEventCrossing *event);
 
 
-static GtkContainerClass *canvas_parent_class;
+static GtkLayoutClass *canvas_parent_class;
+
+
+#define DISPLAY_X1(canvas) ((int) GNOME_CANVAS (canvas)->layout.hadjustment->value)
+#define DISPLAY_Y1(canvas) ((int) GNOME_CANVAS (canvas)->layout.vadjustment->value)
 
 
 GtkType
@@ -1168,7 +1170,7 @@ gnome_canvas_get_type (void)
 			(GtkArgGetFunc) NULL
 		};
 
-		canvas_type = gtk_type_unique (gtk_container_get_type (), &canvas_info);
+		canvas_type = gtk_type_unique (gtk_layout_get_type (), &canvas_info);
 	}
 
 	return canvas_type;
@@ -1183,7 +1185,7 @@ gnome_canvas_class_init (GnomeCanvasClass *class)
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
 
-	canvas_parent_class = gtk_type_class (gtk_container_get_type ());
+	canvas_parent_class = gtk_type_class (gtk_layout_get_type ());
 
 	object_class->destroy = gnome_canvas_destroy;
 
@@ -1205,21 +1207,45 @@ gnome_canvas_class_init (GnomeCanvasClass *class)
 }
 
 static void
+panic_root_destroyed (GtkObject *object, gpointer data)
+{
+	g_error ("Eeeek, root item %p of canvas %p was destroyed!", object, data);
+}
+
+static void
 gnome_canvas_init (GnomeCanvas *canvas)
 {
-	GTK_WIDGET_UNSET_FLAGS (canvas, GTK_NO_WINDOW);
-
 	canvas->idle_id = -1;
 
 	canvas->scroll_x1 = 0.0;
 	canvas->scroll_y1 = 0.0;
-	canvas->scroll_x2 = 100.0; /* not unreasonable defaults, I hope */
-	canvas->scroll_y2 = 100.0;
+	canvas->scroll_x2 = canvas->layout.width;
+	canvas->scroll_y2 = canvas->layout.height;
 
 	canvas->pixels_per_unit = 1.0;
 
-	canvas->width  = 100;
+	canvas->width  = 100; /* default window size */
 	canvas->height = 100;
+
+	gtk_layout_set_hadjustment (GTK_LAYOUT (canvas), NULL);
+	gtk_layout_set_vadjustment (GTK_LAYOUT (canvas), NULL);
+
+	canvas->cc = gdk_color_context_new (gtk_widget_get_visual (GTK_WIDGET (canvas)),
+					    gtk_widget_get_colormap (GTK_WIDGET (canvas)));
+
+	/* Create the root item as a special case */
+
+	canvas->root = GNOME_CANVAS_ITEM (gtk_type_new (gnome_canvas_group_get_type ()));
+	canvas->root->canvas = canvas;
+
+	gtk_object_ref (GTK_OBJECT (canvas->root));
+	gtk_object_sink (GTK_OBJECT (canvas->root));
+
+	canvas->root_destroy_id = gtk_signal_connect (GTK_OBJECT (canvas->root), "destroy",
+						      (GtkSignalFunc) panic_root_destroyed,
+						      canvas);
+
+	canvas->need_repick = TRUE;
 }
 
 static void
@@ -1240,49 +1266,9 @@ gnome_canvas_destroy (GtkObject *object)
 }
 
 GtkWidget *
-gnome_canvas_new (GdkVisual *visual, GdkColormap *colormap)
+gnome_canvas_new (void)
 {
-	GnomeCanvas *canvas;
-
-	g_return_val_if_fail (visual != NULL, NULL);
-	g_return_val_if_fail (colormap != NULL, NULL);
-
-	canvas = GNOME_CANVAS (gtk_type_new (gnome_canvas_get_type ()));
-	gnome_canvas_construct (canvas, visual, colormap);
-	return GTK_WIDGET (canvas);
-}
-
-static void
-panic_root_destroyed (GtkObject *object, gpointer data)
-{
-	g_error ("Eeeek, root item %p of canvas %p was destroyed!", object, data);
-}
-
-void
-gnome_canvas_construct (GnomeCanvas *canvas, GdkVisual *visual, GdkColormap *colormap)
-{
-	g_return_if_fail (canvas != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS (canvas));
-	g_return_if_fail (visual != NULL);
-	g_return_if_fail (colormap != NULL);
-
-	canvas->visual = visual;
-	canvas->colormap = colormap;
-	canvas->cc = gdk_color_context_new (visual, colormap);
-
-	/* Create the root item as a special case */
-
-	canvas->root = GNOME_CANVAS_ITEM (gtk_type_new (gnome_canvas_group_get_type ()));
-	canvas->root->canvas = canvas;
-
-	gtk_object_ref (GTK_OBJECT (canvas->root));
-	gtk_object_sink (GTK_OBJECT (canvas->root));
-
-	canvas->root_destroy_id = gtk_signal_connect (GTK_OBJECT (canvas->root), "destroy",
-						      (GtkSignalFunc) panic_root_destroyed,
-						      canvas);
-
-	canvas->need_repick = TRUE;
+	return GTK_WIDGET (gtk_type_new (gnome_canvas_get_type ()));
 }
 
 static void
@@ -1292,9 +1278,6 @@ gnome_canvas_map (GtkWidget *widget)
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (widget));
-
-	if (GTK_WIDGET_MAPPED (widget))
-		return;
 
 	/* Normal widget mapping stuff */
 
@@ -1354,29 +1337,19 @@ static void
 gnome_canvas_realize (GtkWidget *widget)
 {
 	GnomeCanvas *canvas;
-	GdkWindowAttr attributes;
-	gint attributes_mask;
-	int border_width;
-	GdkColor c;
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (widget));
 
+	/* Normal widget realization stuff */
+
+	if (GTK_WIDGET_CLASS (canvas_parent_class)->realize)
+		(* GTK_WIDGET_CLASS (canvas_parent_class)->realize) (widget);
+
 	canvas = GNOME_CANVAS (widget);
 
-	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
-
-	border_width = GTK_CONTAINER (widget)->border_width;
-
-	attributes.window_type = GDK_WINDOW_CHILD;
-	attributes.x = widget->allocation.x + (widget->allocation.width - canvas->width) / 2;
-	attributes.y = widget->allocation.y + (widget->allocation.height - canvas->height) / 2;
-	attributes.width = canvas->width;
-	attributes.height = canvas->height;
-	attributes.wclass = GDK_INPUT_OUTPUT;
-	attributes.visual = canvas->visual;
-	attributes.colormap = canvas->colormap;
-	attributes.event_mask = (gtk_widget_get_events (widget)
+	gdk_window_set_events (canvas->layout.bin_window,
+			       (gdk_window_get_events (canvas->layout.bin_window)
 				 | GDK_EXPOSURE_MASK
 				 | GDK_BUTTON_PRESS_MASK
 				 | GDK_BUTTON_RELEASE_MASK
@@ -1384,26 +1357,11 @@ gnome_canvas_realize (GtkWidget *widget)
 				 | GDK_KEY_PRESS_MASK
 				 | GDK_KEY_RELEASE_MASK
 				 | GDK_ENTER_NOTIFY_MASK
-				 | GDK_LEAVE_NOTIFY_MASK);
+				 | GDK_LEAVE_NOTIFY_MASK));
 
-	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
+	/* Create our own temporary pixmap gc and realize all the items */
 
-	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget),
-					 &attributes,
-					 attributes_mask);
-	gdk_window_set_user_data (widget->window, canvas);
-
-	widget->style = gtk_style_attach (widget->style, widget->window);
-
-	if (canvas->bg_set) {
-		c.pixel = canvas->bg_pixel;
-		gdk_window_set_background (widget->window, &c);
-	} else
-		gdk_window_set_background (widget->window, &widget->style->bg[GTK_STATE_NORMAL]);
-
-	canvas->pixmap_gc = gdk_gc_new (widget->window);
-
-	/* Realize items */
+	canvas->pixmap_gc = gdk_gc_new (canvas->layout.bin_window);
 
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->realize) (canvas->root);
 }
@@ -1420,7 +1378,7 @@ gnome_canvas_unrealize (GtkWidget *widget)
 
 	shutdown_transients (canvas);
 
-	/* Unrealize items */
+	/* Unrealize items and parent widget */
 
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->unrealize) (canvas->root);
 
@@ -1435,8 +1393,6 @@ static void
 gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 {
 	GnomeCanvas *canvas;
-	GdkRectangle rect;
-	int border_width;
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (widget));
@@ -1446,76 +1402,57 @@ gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 
 	canvas = GNOME_CANVAS (widget);
 
-	if (!area) {
-		rect.x = 0;
-		rect.y = 0;
-		rect.width = canvas->width;
-		rect.height = canvas->height;
-	} else {
-		border_width = GTK_CONTAINER (widget)->border_width;
-
-		rect = *area;
-		rect.x -= border_width;
-		rect.y -= border_width;
-	}
-
 	gnome_canvas_request_redraw (canvas,
-				     rect.x + canvas->display_x1,
-				     rect.y + canvas->display_y1,
-				     rect.x + rect.width + canvas->display_x1,
-				     rect.y + rect.height + canvas->display_y1);
+				     area->x + DISPLAY_X1 (canvas),
+				     area->y + DISPLAY_Y1 (canvas),
+				     area->x + area->width + DISPLAY_X1 (canvas),
+				     area->y + area->height + DISPLAY_Y1 (canvas));
 }
 
 static void
 gnome_canvas_size_request (GtkWidget *widget, GtkRequisition *requisition)
 {
 	GnomeCanvas *canvas;
-	int border_width;
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (widget));
 	g_return_if_fail (requisition != NULL);
 
+	if (GTK_WIDGET_CLASS (canvas_parent_class)->size_request)
+		(* GTK_WIDGET_CLASS (canvas_parent_class)->size_request) (widget, requisition);
+
 	canvas = GNOME_CANVAS (widget);
 
-	border_width = GTK_CONTAINER (widget)->border_width;
+	if (requisition->width < canvas->width)
+		requisition->width = canvas->width;
 
-	requisition->width = canvas->width + 2 * border_width;
-	requisition->height = canvas->height + 2 * border_width;
+	if (requisition->height < canvas->height)
+		requisition->height = canvas->height;
 }
 
 static void
 gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
 	GnomeCanvas *canvas;
-	int border_width;
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (widget));
 	g_return_if_fail (allocation != NULL);
 
+	if (GTK_WIDGET_CLASS (canvas_parent_class)->size_allocate)
+		(* GTK_WIDGET_CLASS (canvas_parent_class)->size_allocate) (widget, allocation);
+
 	canvas = GNOME_CANVAS (widget);
 
-	widget->allocation = *allocation;
-
-	border_width = GTK_CONTAINER (widget)->border_width;
-
-	canvas->width = allocation->width - 2 * border_width;
-	canvas->height = allocation->height - 2 * border_width;
-
-	if (GTK_WIDGET_REALIZED (widget))
-		gdk_window_move_resize (widget->window,
-					allocation->x + border_width,
-					allocation->y + border_width,
-					canvas->width,
-					canvas->height);
+	canvas->width = allocation->width;
+	canvas->height = allocation->height;
 }
 
 static void
 window_to_world (GnomeCanvas *canvas, double *x, double *y)
 {
-	*x = canvas->scroll_x1 + (*x + canvas->display_x1) / canvas->pixels_per_unit;
-	*y = canvas->scroll_y1 + (*y + canvas->display_y1) / canvas->pixels_per_unit;
+	*x = canvas->scroll_x1 + (*x + DISPLAY_X1 (canvas)) / canvas->pixels_per_unit;
+	*y = canvas->scroll_y1 + (*y + DISPLAY_Y1 (canvas)) / canvas->pixels_per_unit;
 }
 
 static int
@@ -1680,11 +1617,11 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		/* these fields don't have the same offsets in both types of events */
 
 		if (canvas->pick_event.type == GDK_ENTER_NOTIFY) {
-			x = canvas->pick_event.crossing.x + canvas->display_x1;
-			y = canvas->pick_event.crossing.y + canvas->display_y1;
+			x = canvas->pick_event.crossing.x + DISPLAY_X1 (canvas);
+			y = canvas->pick_event.crossing.y + DISPLAY_Y1 (canvas);
 		} else {
-			x = canvas->pick_event.motion.x + canvas->display_x1;
-			y = canvas->pick_event.motion.y + canvas->display_y1;
+			x = canvas->pick_event.motion.x + DISPLAY_X1 (canvas);
+			y = canvas->pick_event.motion.y + DISPLAY_Y1 (canvas);
 		}
 
 		/* canvas pixel coords */
@@ -1724,11 +1661,6 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		canvas->in_repick = TRUE;
 		emit_event (canvas, &new_event);
 		canvas->in_repick = FALSE;
-
-		/* Check whether someone deleted the current event */
-
-		if ((item == canvas->current_item) && !button_down)
-			/*remove_tag (item, GNOME_CANVAS_CURRENT)*/; /* really nothing to do? */
 	}
 
 	/* new_current_item may have been set to NULL during the call to emit_event() above */
@@ -1851,10 +1783,10 @@ gnome_canvas_expose (GtkWidget *widget, GdkEventExpose *event)
 	canvas = GNOME_CANVAS (widget);
 
 	gnome_canvas_request_redraw (canvas,
-				     event->area.x + canvas->display_x1,
-				     event->area.y + canvas->display_y1,
-				     event->area.x + event->area.width + canvas->display_x1,
-				     event->area.y + event->area.height + canvas->display_y1);
+				     event->area.x + DISPLAY_X1 (canvas),
+				     event->area.y + DISPLAY_Y1 (canvas),
+				     event->area.x + event->area.width + DISPLAY_X1 (canvas),
+				     event->area.y + event->area.height + DISPLAY_Y1 (canvas));
 
 	return FALSE;
 }
@@ -1900,7 +1832,6 @@ paint (GnomeCanvas *canvas)
 	int draw_x2, draw_y2;
 	int width, height;
 	GdkPixmap *pixmap;
-	GdkColor c;
 
 	if (!((canvas->redraw_x1 < canvas->redraw_x2) && (canvas->redraw_y1 < canvas->redraw_y2)))
 		return;
@@ -1912,10 +1843,10 @@ paint (GnomeCanvas *canvas)
 	 * 16-bit values.
 	 */
 
-	draw_x1 = canvas->display_x1;
-	draw_y1 = canvas->display_y1;
-	draw_x2 = canvas->display_x1 + widget->allocation.width;
-	draw_y2 = canvas->display_y1 + widget->allocation.height;
+	draw_x1 = DISPLAY_X1 (canvas);
+	draw_y1 = DISPLAY_Y1 (canvas);
+	draw_x2 = DISPLAY_X1 (canvas) + canvas->width;
+	draw_y2 = DISPLAY_Y1 (canvas) + canvas->height;
 
 	if (canvas->redraw_x1 > draw_x1)
 		draw_x1 = canvas->redraw_x1;
@@ -1937,14 +1868,9 @@ paint (GnomeCanvas *canvas)
 	width = draw_x2 - draw_x1;
 	height = draw_y2 - draw_y1;
 
-	pixmap = gdk_pixmap_new (widget->window, width, height, gtk_widget_get_visual (widget)->depth);
+	pixmap = gdk_pixmap_new (canvas->layout.bin_window, width, height, gtk_widget_get_visual (widget)->depth);
 
-	if (canvas->bg_set) {
-		c.pixel = canvas->bg_pixel;
-		gdk_gc_set_foreground (canvas->pixmap_gc, &c);
-	} else
-		gdk_gc_set_foreground (canvas->pixmap_gc, &widget->style->bg[GTK_STATE_NORMAL]);
-
+	gdk_gc_set_foreground (canvas->pixmap_gc, &widget->style->bg[GTK_STATE_NORMAL]);
 	gdk_draw_rectangle (pixmap,
 			    canvas->pixmap_gc,
 			    TRUE,
@@ -1968,11 +1894,11 @@ paint (GnomeCanvas *canvas)
 #endif
 	/* Copy the pixmap to the window and clean up */
 
-	gdk_draw_pixmap (widget->window,
+	gdk_draw_pixmap (canvas->layout.bin_window,
 			 canvas->pixmap_gc,
 			 pixmap,
 			 0, 0,
-			 draw_x1 - canvas->display_x1, draw_y1 - canvas->display_y1,
+			 draw_x1 - DISPLAY_X1 (canvas), draw_y1 - DISPLAY_Y1 (canvas),
 			 width, height);
 
 	gdk_pixmap_unref (pixmap);
@@ -2020,6 +1946,8 @@ gnome_canvas_root (GnomeCanvas *canvas)
 void
 gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, double x2, double y2)
 {
+	int xmax, ymax;
+
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
@@ -2028,18 +1956,25 @@ gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, doubl
 	canvas->scroll_x2 = x2;
 	canvas->scroll_y2 = y2;
 
-	canvas->display_x1 = 0;
-	canvas->display_y1 = 0;
+	gnome_canvas_w2c (canvas, x2, y2, &xmax, &ymax);
+	gtk_layout_set_size (GTK_LAYOUT (canvas), xmax, ymax);
+
+	canvas->layout.hadjustment->value = 0.0;
+	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.hadjustment), "value_changed");
+
+	canvas->layout.vadjustment->value = 0.0;
+	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "value_changed");
 
 	canvas->need_repick = TRUE;
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->reconfigure) (canvas->root);
-	gtk_widget_draw (GTK_WIDGET (canvas), NULL);
 }
 
 void
 gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 {
 	double cx, cy;
+	int x1, y1;
+	int xmax, ymax;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
@@ -2048,8 +1983,8 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 	/* Re-center view */
 
 	gnome_canvas_c2w (canvas,
-			  canvas->display_x1 + canvas->width / 2,
-			  canvas->display_y1 + canvas->height / 2,
+			  DISPLAY_X1 (canvas) + canvas->width / 2,
+			  DISPLAY_Y1 (canvas) + canvas->height / 2,
 			  &cx,
 			  &cy);
 
@@ -2058,12 +1993,19 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 	gnome_canvas_w2c (canvas,
 			  cx - (canvas->width / (2.0 * n)),
 			  cy - (canvas->height / (2.0 * n)),
-			  &canvas->display_x1,
-			  &canvas->display_y1);
+			  &x1, &y1);
+
+	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2, &xmax, &ymax);
+	gtk_layout_set_size (GTK_LAYOUT (canvas), xmax, ymax);
+
+	canvas->layout.hadjustment->value = x1;
+	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.hadjustment), "value_changed");
+
+	canvas->layout.vadjustment->value = y1;
+	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "value_changed");
 
 	canvas->need_repick = TRUE;
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->reconfigure) (canvas->root);
-	gtk_widget_draw (GTK_WIDGET (canvas), NULL);
 }
 
 void
@@ -2078,18 +2020,6 @@ gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height)
 	canvas->height = height;
 
 	gtk_widget_queue_resize (GTK_WIDGET (canvas));
-}
-
-void
-gnome_canvas_scroll_to (GnomeCanvas *canvas, int x, int y)
-{
-	g_return_if_fail (canvas != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS (canvas));
-
-	canvas->display_x1 = x;
-	canvas->display_y1 = y;
-
-	gtk_widget_draw (GTK_WIDGET (canvas), NULL);
 }
 
 void

@@ -13,6 +13,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkcontainer.h>
+#include <libgnomeui/gtklayout.h>
 #include <stdarg.h>
 
 BEGIN_GNOME_DECLS
@@ -231,7 +232,7 @@ void gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *
 
 
 struct _GnomeCanvas {
-	GtkContainer container;
+	GtkLayout layout;
 
 	guint idle_id;				/* Idle handler ID */
 
@@ -242,10 +243,6 @@ struct _GnomeCanvas {
 	double scroll_x2, scroll_y2;
 
 	double pixels_per_unit;			/* scaling factor to be used for display */
-
-	int display_x1, display_y1;		/* Top-left projection coordinates in
-						 * canvas pixel coordinates
-						 */
 
 	int redraw_x1, redraw_y1;
 	int redraw_x2, redraw_y2;		/* Area that needs redrawing.  Contains (x1, y1)
@@ -269,35 +266,33 @@ struct _GnomeCanvas {
 
 	int close_enough;			/* Tolerance distance for picking items */
 
-	GdkVisual *visual;			/* Visual and colormap to use */
-	GdkColormap *colormap;
 	GdkColorContext *cc;			/* Color context used for color allocation */
-	gulong bg_pixel;			/* Background color pixel value */
 	GdkGC *pixmap_gc;			/* GC for temporary pixmap */
 
 	int need_redraw : 1;			/* Will redraw at next idle loop iteration */
 	int need_repick : 1;			/* Will repick current item at next idle loop iteration */
 	int left_grabbed_item : 1;		/* For use by the internal pick_event function */
 	int in_repick : 1;			/* For use by the internal pick_event function */
-	int bg_set : 1;				/* Background color is set */
 };
 
 struct _GnomeCanvasClass {
-	GtkContainerClass parent_class;
+	GtkLayoutClass parent_class;
 };
 
 
 /* Standard Gtk function */
 GtkType gnome_canvas_get_type (void);
 
-/* Creates a new canvas with the specified visual and colormap.  We cannot default to imlib's
- * visual and colormap because that could be expensive if the user never used imlib images in
- * the canvas.
+/* Creates a new canvas.  You should check that the canvas is created with the proper visual and
+ * colormap if you want to insert imlib images into it.  You can do this by doing
+ * gtk_widget_push_visual(gdk_imlib_get_visual()) and
+ * gtk_widget_push_colormap(gdk_imlib_get_colormap()) before calling gnome_canvas_new().  After
+ * calling it, you should do gtk_widget_pop_visual() and gtk_widget_pop_colormap().
+ *
+ * You should call gnome_canvas_set_scroll_region() soon after calling this function to set the
+ * desired scrolling limits for the canvas.
  */
-GtkWidget *gnome_canvas_new (GdkVisual *visual, GdkColormap *colormap);
-
-/* Constructor useful for derived classes and language wrappers */
-void gnome_canvas_construct (GnomeCanvas *canvas, GdkVisual *visual, GdkColormap *colormap);
+GtkWidget *gnome_canvas_new (void);
 
 /* Returns the root canvas item group of the canvas */
 GnomeCanvasItem *gnome_canvas_root (GnomeCanvas *canvas);
@@ -308,11 +303,8 @@ void gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, 
 /* Sets the number of pixels that correspond to one unit in world coordinates */
 void gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n);
 
-/* Sets the size in pixels of the canvas */
+/* Sets the size in pixels of the canvas window */
 void gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height);
-
-/* Scrolls the canvas so that (x, y) canvas pixel coordinate is on the top-left corner of the window */
-void gnome_canvas_scroll_to (GnomeCanvas *canvas, int x, int y);
 
 /* Requests that the canvas be repainted immediately instead of in the idle loop. */
 void gnome_canvas_update_now (GnomeCanvas *canvas);

@@ -634,8 +634,8 @@ gnome_canvas_line_realize (GnomeCanvasItem *item)
 
 	line = GNOME_CANVAS_LINE (item);
 
-	line->gc = gdk_gc_new (GTK_WIDGET (item->canvas)->window);
-	line->arrow_gc = gdk_gc_new (GTK_WIDGET (item->canvas)->window);
+	line->gc = gdk_gc_new (item->canvas->layout.bin_window);
+	line->arrow_gc = gdk_gc_new (item->canvas->layout.bin_window);
 
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }

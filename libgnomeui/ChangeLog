@@ -1,3 +1,59 @@
+1998-07-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	OK, some semi-major changes.  The canvas is now a descendant of
+	GtkLayout, which does smooth scrolling a la Mozilla (so that
+	subwindows of the window you are scrolling do not trail behind
+	when you scroll).
+
+	There are some problems left with setting the adjustments to
+	reasonable values when the canvas is zoomed in; I will be fixing
+	that shortly.
+
+	Please read the changes below to see what needs to be done for
+	stuff derived from the canvas.
+
+	* gtklayout.[ch]: Added the supercool GtkLayout container to the
+	source tree.
+
+	* gtklayout.c (gtk_layout_adjustment_changed): Do not do any
+	window-related operations if the widget is not mapped.
+
+	* Makefile.am: Added gtklayout.[ch] to the sources.
+
+	* libgnomeui.h: Added gtklayout.h to the list of headers.
+
+	* gnome-canvas.[ch]: The GnomeCanvas widget now descends from
+	GtkLayout.  Made the necessary changes to the Gtk-related
+	functions to make this happen.
+
+	* gnome-canvas.h (struct _GnomeCanvas): Removed the bg_pixel and
+	bg_set fields.  Also, removed the display_x1 and display_y1 fields
+	-- these can now be queried from the
+	canvas->layout.hadjustment->value and vadjustment fields.
+
+	* gnome-canvas.h: Removed the gnome_canvas_scroll_to() function.
+	The scroll offset can now be set using the parent layout's
+	adjustments.
+
+	* gnome-canvas.h (struct _GnomeCanvas): Removed the visual and
+	colormap fields.
+
+	* gnome-canvas.h: gnome_canvas_new() now takes zero arguments --
+	it will use the proper Gtk visual and colormap (settable by using
+	gtk_widget_push_visual() and gtk_widget_push_colormap()).
+
+	* gnome-canvas.h: Removed the gnome_canvas_construct() function.
+
+	* gnome-canvas.c (gnome_canvas_construct): Removed this function
+	and moved the useful parts to gnome_canvas_init().
+	(gnome_canvas_new): Now just creates the object and returns it as
+	is -- now all initialization can be done in gnome_canvas_init().
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_realize): Use the
+	canvas->layout.bin_window.
+	* gnome-canvas-text.c (gnome_canvas_text_realize): Likewise.
+	* gnome-canvas-image.c (gnome_canvas_image_realize): Likewise.
+
 1998-07-29  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (EXTRA_DIST): Add `gnome.defs', make{types,enums}
