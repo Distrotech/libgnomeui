@@ -56,6 +56,7 @@ gnome_app_do_menu_creation(GnomeApp *app,
 {
   int i;
   int has_stock_pixmaps = FALSE;
+  int justify_right = FALSE;
 
   /* first check if any of them use the stock pixmaps, because if
      they do we need to use gnome_stock_menu_item for all of them
@@ -73,6 +74,10 @@ gnome_app_do_menu_creation(GnomeApp *app,
     {
       switch(menuinfo[i].type)
 	{
+
+	case GNOME_APP_UI_JUSTIFY_RIGHT:
+	  justify_right = TRUE;
+	  break;
 
 	case GNOME_APP_UI_HELP:
 	  gnome_app_add_help_menu_entries(app, parent_widget, &menuinfo[i]);
@@ -108,6 +113,10 @@ gnome_app_do_menu_creation(GnomeApp *app,
 		menuinfo[i].widget = gtk_menu_item_new_with_label(_(menuinfo[i].label));
 
 	    gtk_widget_show(menuinfo[i].widget);
+
+	    if(justify_right)
+	      gtk_menu_item_right_justify(GTK_MENU_ITEM(menuinfo[i].widget));
+
 	    gtk_menu_shell_append(GTK_MENU_SHELL(parent_widget), menuinfo[i].widget);
 
 	    /* Only connect the signal if the item is not a subtree */

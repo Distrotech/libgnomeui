@@ -16,7 +16,8 @@ typedef enum {
   GNOME_APP_UI_RADIOITEMS, /* no toolbar support */
   GNOME_APP_UI_SUBTREE,
   GNOME_APP_UI_SEPARATOR,
-  GNOME_APP_UI_HELP
+  GNOME_APP_UI_HELP,
+  GNOME_APP_UI_JUSTIFY_RIGHT /* this should right justify all the following entries */
 } GnomeUIInfoType;
 
 typedef enum {

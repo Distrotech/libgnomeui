@@ -1,3 +1,13 @@
+1998-05-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.h: added new GnomeUIInfoType
+	GNOME_APP_UI_JUSTIFY_RIGHT that notifies app-helper routines that
+	all the menu items from now on should be right justified. This
+	should prove useful for adding help menu to the menubar.
+	
+	* gnome-app-helper.c (gnome_app_do_menu_creation): take care
+	of handling GNOME_APP_UI_JUSTIFY_RIGHT GnomeUIInfoType.
+	
 1998-05-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c gnome-canvas.h: The GnomeCanvas widget!  This is
