@@ -78,8 +78,8 @@ gnome_scores_instance_init (GnomeScores *gs)
 	gtk_window_set_title (GTK_WINDOW (gs), _("Top Ten"));
 
 	gtk_dialog_add_button (GTK_DIALOG (gs),
-			       GTK_STOCK_OK,
-			       GTK_RESPONSE_OK);
+			       GTK_STOCK_CLOSE,
+			       GTK_RESPONSE_CLOSE);
 
 	gs->_priv->logo = NULL;
 	gs->_priv->but_clear = NULL;

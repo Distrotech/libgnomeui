@@ -1,3 +1,9 @@
+2004-01-21  Alex Duggan  <aldug@astrolinux.com>
+
+	* libgnomeui/gnome-scores.c: (gnome_scores_instance_init)
+	Use a close button instead of an OK button in the gnome
+	scores dialog.  Fixes #116440
+
 2004-01-20  Fernando Herrera  <fherrera@onirica.com>
 
 	* libgnomeui/gnome_segv.c: (main): Add a button for restarting
