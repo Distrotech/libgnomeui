@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2002-05-17 01:06+0200\n"
+"POT-Creation-Date: 2002-05-20 11:57+0200\n"
 "PO-Revision-Date: 2002-05-17 01:06+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -381,12 +381,12 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibliotek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:564
+#: libgnomeui/gnome-ui-init.c:563
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmenteringsfeil oppstod; kan ikke vise feildialogen\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:578
+#: libgnomeui/gnome-ui-init.c:577
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -486,7 +486,6 @@ msgstr "Hint for oppføring 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -544,7 +543,6 @@ msgid "_Game"
 msgstr "_Spill"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -735,11 +733,11 @@ msgstr "Konfigurer applikasjonen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Om denne applikasjonen"
 
@@ -766,7 +764,7 @@ msgstr "Opprett et nytt vindu"
 msgid "_Close This Window"
 msgstr "L_ukk dette vinduet"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Lukk aktivt vindu"
 
@@ -1249,9 +1247,8 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Avslutt testprogrammet"
+#~ msgid "Exit the test"
+#~ msgstr "Avslutt testprogrammet"
 
 #~ msgid "Exit the program"
 #~ msgstr "Avslutt programmet"

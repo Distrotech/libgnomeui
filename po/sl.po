@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-13 19:16+0200\n"
+"POT-Creation-Date: 2002-05-20 11:57+0200\n"
 "PO-Revision-Date: 2001-07-29 12:32+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -382,14 +382,14 @@ msgid "GNOME GUI Library"
 msgstr "Knjižnjica grafičnega vmesnika Gnome"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:564
+#: libgnomeui/gnome-ui-init.c:563
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z "
 "napako\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:578
+#: libgnomeui/gnome-ui-init.c:577
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -853,25 +853,25 @@ msgstr "_Vsebina pomoči"
 msgid "View help for this application"
 msgstr "O tem programu"
 
-#: libgnomeui/gnome-app-helper.c:2515
+#: libgnomeui/gnome-app-helper.c:2518
 msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2516
-msgid "Text Beside Icons"
+#: libgnomeui/gnome-app-helper.c:2519
+msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2517
+#: libgnomeui/gnome-app-helper.c:2520
 #, fuzzy
 msgid "Icons Only"
 msgstr "Le ikone"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2521
 #, fuzzy
 msgid "Text Only"
 msgstr "Le besedilo"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2582
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Privzeto po namizju (%s)"
@@ -936,11 +936,11 @@ msgstr "GTK vnos"
 msgid "The GTK entry"
 msgstr "GTK vnos"
 
-#: libgnomeui/gnome-file-entry.c:217 libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-file-entry.c:218 libgnomeui/gnome-icon-entry.c:174
 msgid "History ID"
 msgstr "Id zgodovine"
 
-#: libgnomeui/gnome-file-entry.c:218
+#: libgnomeui/gnome-file-entry.c:219
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -948,19 +948,19 @@ msgstr ""
 "Edinstven identifikator za ta vnos datoteke.  To bo uporabljeno za "
 "shranjevanje seznama zgodovine."
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:182
+#: libgnomeui/gnome-file-entry.c:227 libgnomeui/gnome-icon-entry.c:183
 msgid "Browse Dialog Title"
 msgstr "Naziv brskalnega dialoga"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:228
 msgid "Title for the Browse file dialog."
 msgstr "Naziv dialoga za brksanje datotek."
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:235
 msgid "Directory Entry"
 msgstr "Vnos imenika"
 
-#: libgnomeui/gnome-file-entry.c:235
+#: libgnomeui/gnome-file-entry.c:236
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -968,35 +968,35 @@ msgstr ""
 "Ali je vnos datoteke namenjen za vnos imen imenikov ali popolnih imen "
 "datotek."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:244
 msgid "Modal"
 msgstr "Na vrhu"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:245
 msgid "Whether the Browse file window should be modal."
 msgstr "Ali naj bo okno brskalnika datotek na vrhu."
 
-#: libgnomeui/gnome-file-entry.c:251 libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-file-entry.c:252 libgnomeui/gnome-icon-entry.c:199
 msgid "Filename"
 msgstr "Ime datoteke"
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Filename that should be displayed in the file entry."
 msgstr "Ime datoteke, ki naj bo prikazano v vpisu datoteke."
 
-#: libgnomeui/gnome-file-entry.c:260
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Default Path"
 msgstr "Privzeta pot"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:262
 msgid "Default path for the Browse file window."
 msgstr "Privzeta pot za okno brskalnika datotek"
 
-#: libgnomeui/gnome-file-entry.c:268
+#: libgnomeui/gnome-file-entry.c:269
 msgid "GnomeEntry"
 msgstr "GnomeVnos"
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:270
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1006,11 +1006,11 @@ msgstr ""
 "lastnost lahko uporabite za pridobitev GnomeVnos, če morate spremeniti ali "
 "poizvedeti po njegovih parametrih."
 
-#: libgnomeui/gnome-file-entry.c:279
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GtkEntry"
 msgstr "GtkVnos"
 
-#: libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1020,11 +1020,11 @@ msgstr ""
 "lahko uporabite za pridobitev GtkVnos, če morate spremeniti ali poizvedeti "
 "po njegovih parametrih."
 
-#: libgnomeui/gnome-file-entry.c:514
+#: libgnomeui/gnome-file-entry.c:515
 msgid "Select file"
 msgstr "Izberi datoteko"
 
-#: libgnomeui/gnome-file-entry.c:652
+#: libgnomeui/gnome-file-entry.c:656
 msgid "_Browse..."
 msgstr "_Brskaj..."
 
@@ -1130,7 +1130,7 @@ msgstr ""
 "Med nalaganjem ali shranjevanjem podatkov za %s se je zgodila napaka. Možno "
 "je, da nekatere nastavitve ne bodo delovale pravilno."
 
-#: libgnomeui/gnome-icon-entry.c:174
+#: libgnomeui/gnome-icon-entry.c:175
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1138,27 +1138,27 @@ msgstr ""
 "Edinstven identifikator za vnos ikone.  To bo uporabljeno za shranitev "
 "seznama zgodovine."
 
-#: libgnomeui/gnome-icon-entry.c:183
+#: libgnomeui/gnome-icon-entry.c:184
 msgid "Title for the Browse icon dialog."
 msgstr "Naziv dialoga za brksanje ikon"
 
-#: libgnomeui/gnome-icon-entry.c:190
+#: libgnomeui/gnome-icon-entry.c:191
 msgid "Pixmap Directory"
 msgstr "Imenik slik"
 
-#: libgnomeui/gnome-icon-entry.c:191
+#: libgnomeui/gnome-icon-entry.c:192
 msgid "Directory that will be searched for icons."
 msgstr "Imenik v katerem naj se iščejo ikone"
 
-#: libgnomeui/gnome-icon-entry.c:199
+#: libgnomeui/gnome-icon-entry.c:200
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Ime datoteke, ki naj bo prikazano v vnosu ikone."
 
-#: libgnomeui/gnome-icon-entry.c:207
+#: libgnomeui/gnome-icon-entry.c:208
 msgid "Picker dialog"
 msgstr "Dialog izbirnika"
 
-#: libgnomeui/gnome-icon-entry.c:208
+#: libgnomeui/gnome-icon-entry.c:209
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1167,19 +1167,19 @@ msgstr ""
 "GtkDialog, če morate spremeniti ali poizvedeti po katerikoli od njegovih "
 "lastnosti."
 
-#: libgnomeui/gnome-icon-entry.c:317 libgnomeui/gnome-icon-entry.c:963
+#: libgnomeui/gnome-icon-entry.c:318 libgnomeui/gnome-icon-entry.c:969
 msgid "No Icon"
 msgstr "Brez"
 
-#: libgnomeui/gnome-icon-entry.c:525 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:526 libgnomeui/gnome-pixmap-entry.c:380
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Ne najdem hbox-a, uporabljam običajno izbiranje datotek"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:532 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Preview"
 msgstr "Predogled"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:991
 msgid "Browse"
 msgstr "Brskaj"
 
@@ -1217,15 +1217,15 @@ msgstr "Vprašanje"
 msgid "Message"
 msgstr "Sporočilo"
 
-#: libgnomeui/gnome-pixmap-entry.c:118
+#: libgnomeui/gnome-pixmap-entry.c:111
 msgid "Do Preview"
 msgstr "Naredi predogled"
 
-#: libgnomeui/gnome-pixmap-entry.c:119
+#: libgnomeui/gnome-pixmap-entry.c:112
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Ali naj ima vnos slike predogled."
 
-#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:444
 msgid "No Image"
 msgstr "Ni slike"
 

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-14 19:22+0200\n"
+"POT-Creation-Date: 2002-05-20 11:57+0200\n"
 "PO-Revision-Date: 2002-05-14 19:22+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -385,12 +385,12 @@ msgid "GNOME GUI Library"
 msgstr "GNOME-bibliotek för grafiska användargränssnitt"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:564
+#: libgnomeui/gnome-ui-init.c:563
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:578
+#: libgnomeui/gnome-ui-init.c:577
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -490,7 +490,6 @@ msgstr "Tips för objekt 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -548,7 +547,6 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -739,11 +737,11 @@ msgstr "Konfigurera programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Om detta program"
 
@@ -770,7 +768,7 @@ msgstr "Skapa ett nytt fönster"
 msgid "_Close This Window"
 msgstr "_Stäng detta fönster"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Stäng det aktuella fönstret"
 
@@ -931,11 +929,11 @@ msgstr "GTK-post"
 msgid "The GTK entry"
 msgstr "GTK-posten"
 
-#: libgnomeui/gnome-file-entry.c:217 libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-file-entry.c:218 libgnomeui/gnome-icon-entry.c:174
 msgid "History ID"
 msgstr "Historik-id"
 
-#: libgnomeui/gnome-file-entry.c:218
+#: libgnomeui/gnome-file-entry.c:219
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -943,19 +941,19 @@ msgstr ""
 "Unik identifierare för filposten. Detta kommer att användas för att spara "
 "historiklistan."
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:182
+#: libgnomeui/gnome-file-entry.c:227 libgnomeui/gnome-icon-entry.c:183
 msgid "Browse Dialog Title"
 msgstr "Bläddra dialiogtitel"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:228
 msgid "Title for the Browse file dialog."
 msgstr "Titel för filbläddringsdialogen."
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:235
 msgid "Directory Entry"
 msgstr "Katalogpost"
 
-#: libgnomeui/gnome-file-entry.c:235
+#: libgnomeui/gnome-file-entry.c:236
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -963,35 +961,35 @@ msgstr ""
 "Huruvida filposten används för att ange katalognamn eller fullständiga "
 "filnamn."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:244
 msgid "Modal"
 msgstr "Modal"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:245
 msgid "Whether the Browse file window should be modal."
 msgstr "Huruvida filbläddringsfönstret ska vara modalt."
 
-#: libgnomeui/gnome-file-entry.c:251 libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-file-entry.c:252 libgnomeui/gnome-icon-entry.c:199
 msgid "Filename"
 msgstr "Filnamn"
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Filename that should be displayed in the file entry."
 msgstr "Filnamn som ska visas i filposten."
 
-#: libgnomeui/gnome-file-entry.c:260
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Default Path"
 msgstr "Standardsökväg"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:262
 msgid "Default path for the Browse file window."
 msgstr "Standardsökväg för filbläddringsfönstret."
 
-#: libgnomeui/gnome-file-entry.c:268
+#: libgnomeui/gnome-file-entry.c:269
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:270
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1001,11 +999,11 @@ msgstr ""
 "denna egenskap för att få tag i den GnomeEntry som du behöver för att "
 "modifiera eller undersöka någon av dess parametrar."
 
-#: libgnomeui/gnome-file-entry.c:279
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1015,11 +1013,11 @@ msgstr ""
 "denna egenskap för att få tag i den GtkEntry som du behöver för att "
 "modifiera eller undersöka någon av dess parametrar."
 
-#: libgnomeui/gnome-file-entry.c:514
+#: libgnomeui/gnome-file-entry.c:515
 msgid "Select file"
 msgstr "Välj fil"
 
-#: libgnomeui/gnome-file-entry.c:652
+#: libgnomeui/gnome-file-entry.c:656
 msgid "_Browse..."
 msgstr "Bläddra..."
 
@@ -1126,7 +1124,7 @@ msgstr ""
 "för %s. En del av dina konfigurationsinställningar kommer kanske inte att "
 "fungera korrekt."
 
-#: libgnomeui/gnome-icon-entry.c:174
+#: libgnomeui/gnome-icon-entry.c:175
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1134,27 +1132,27 @@ msgstr ""
 "Unik identifierare för ikonposten. Detta kommer att användas för att spara "
 "historiklistan."
 
-#: libgnomeui/gnome-icon-entry.c:183
+#: libgnomeui/gnome-icon-entry.c:184
 msgid "Title for the Browse icon dialog."
 msgstr "Titel för ikonbläddringsdialogen."
 
-#: libgnomeui/gnome-icon-entry.c:190
+#: libgnomeui/gnome-icon-entry.c:191
 msgid "Pixmap Directory"
 msgstr "Pixmapkatalog"
 
-#: libgnomeui/gnome-icon-entry.c:191
+#: libgnomeui/gnome-icon-entry.c:192
 msgid "Directory that will be searched for icons."
 msgstr "Katalog som ikoner kommer att sökas i."
 
-#: libgnomeui/gnome-icon-entry.c:199
+#: libgnomeui/gnome-icon-entry.c:200
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Filnamn som ska visas i ikonposten."
 
-#: libgnomeui/gnome-icon-entry.c:207
+#: libgnomeui/gnome-icon-entry.c:208
 msgid "Picker dialog"
 msgstr "Väljardialog"
 
-#: libgnomeui/gnome-icon-entry.c:208
+#: libgnomeui/gnome-icon-entry.c:209
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1162,19 +1160,19 @@ msgstr ""
 "Ikonväljardialog. Du kan använda denna egenskap för att få tag i GtkDialog "
 "om du behöver ändra eller undersöka någon av dess egenskaper."
 
-#: libgnomeui/gnome-icon-entry.c:317 libgnomeui/gnome-icon-entry.c:963
+#: libgnomeui/gnome-icon-entry.c:318 libgnomeui/gnome-icon-entry.c:969
 msgid "No Icon"
 msgstr "Ingen ikon"
 
-#: libgnomeui/gnome-icon-entry.c:525 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:526 libgnomeui/gnome-pixmap-entry.c:380
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan inte hitta en hbox, använder vanligt filval"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:532 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Preview"
 msgstr "Förhandsgranska"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:991
 msgid "Browse"
 msgstr "Bläddra"
 
@@ -1212,15 +1210,15 @@ msgstr "Fråga"
 msgid "Message"
 msgstr "Meddelande"
 
-#: libgnomeui/gnome-pixmap-entry.c:118
+#: libgnomeui/gnome-pixmap-entry.c:111
 msgid "Do Preview"
 msgstr "Förhandsgranska"
 
-#: libgnomeui/gnome-pixmap-entry.c:119
+#: libgnomeui/gnome-pixmap-entry.c:112
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Huruvida pixmapposten ska ha en förhandsgranskning."
 
-#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:444
 msgid "No Image"
 msgstr "Ingen bild"
 
@@ -1255,9 +1253,8 @@ msgstr "%a %d %b %H.%M %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Avsluta testet"
+#~ msgid "Exit the test"
+#~ msgstr "Avsluta testet"
 
 #~ msgid "Find _Again"
 #~ msgstr "Sök _igen"

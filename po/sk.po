@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-13 19:16+0200\n"
+"POT-Creation-Date: 2002-05-20 11:57+0200\n"
 "PO-Revision-Date: 2002-05-13 09:47+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -383,14 +383,14 @@ msgid "GNOME GUI Library"
 msgstr "Kni¾nica GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:564
+#: libgnomeui/gnome-ui-init.c:563
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Vyskytli sa viacnásobné chyby segmentácie; nemô¾em zobrazi» dialógové okno s "
 "chybou\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:578
+#: libgnomeui/gnome-ui-init.c:577
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -848,23 +848,24 @@ msgstr "_Obsah"
 msgid "View help for this application"
 msgstr "Zobrazi» pomocníka pre túto aplikáciu"
 
-#: libgnomeui/gnome-app-helper.c:2515
+#: libgnomeui/gnome-app-helper.c:2518
 msgid "Text Below Icons"
 msgstr "Text pod ikonami"
 
-#: libgnomeui/gnome-app-helper.c:2516
-msgid "Text Beside Icons"
+#: libgnomeui/gnome-app-helper.c:2519
+#, fuzzy
+msgid "Priority Text Beside Icons"
 msgstr "Text vedµa ikon"
 
-#: libgnomeui/gnome-app-helper.c:2517
+#: libgnomeui/gnome-app-helper.c:2520
 msgid "Icons Only"
 msgstr "Len ikony"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2521
 msgid "Text Only"
 msgstr "Len text"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2582
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Pou¾i» predvolenú pracovnú plochu (%s)"
@@ -929,11 +930,11 @@ msgstr "Polo¾ka GTK"
 msgid "The GTK entry"
 msgstr "Polo¾ka GTK"
 
-#: libgnomeui/gnome-file-entry.c:217 libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-file-entry.c:218 libgnomeui/gnome-icon-entry.c:174
 msgid "History ID"
 msgstr "Identifikátor histórie"
 
-#: libgnomeui/gnome-file-entry.c:218
+#: libgnomeui/gnome-file-entry.c:219
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -941,19 +942,19 @@ msgstr ""
 "Unikátny identifikátor pre polo¾ku súboru. Toto bude pou¾ité na ukladanie "
 "zoznamu histórie."
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:182
+#: libgnomeui/gnome-file-entry.c:227 libgnomeui/gnome-icon-entry.c:183
 msgid "Browse Dialog Title"
 msgstr "Titulok dialógového okna perhliadaèa"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:228
 msgid "Title for the Browse file dialog."
 msgstr "Titulok dialógového okna prehliadaèa súboru."
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:235
 msgid "Directory Entry"
 msgstr "Adresárová polo¾ka"
 
-#: libgnomeui/gnome-file-entry.c:235
+#: libgnomeui/gnome-file-entry.c:236
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -961,35 +962,35 @@ msgstr ""
 "Èi je polo¾ka súboru pou¾itá na zadávanie názvov adresárov alebo na "
 "zostavovanie názvov súborov."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:244
 msgid "Modal"
 msgstr "Modálne"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:245
 msgid "Whether the Browse file window should be modal."
 msgstr "Èi okno prehliadaèa súborov má by» modálne."
 
-#: libgnomeui/gnome-file-entry.c:251 libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-file-entry.c:252 libgnomeui/gnome-icon-entry.c:199
 msgid "Filename"
 msgstr "Názov súboru"
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Filename that should be displayed in the file entry."
 msgstr "Meno súboru, ktoré má by» zobrazené v polo¾ke súboru."
 
-#: libgnomeui/gnome-file-entry.c:260
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Default Path"
 msgstr "Predvolená cesta"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:262
 msgid "Default path for the Browse file window."
 msgstr "Predvolená cesta pre okno prehliadaèa súboru."
 
-#: libgnomeui/gnome-file-entry.c:268
+#: libgnomeui/gnome-file-entry.c:269
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:270
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -999,11 +1000,11 @@ msgstr ""
 "pou¾i» túto vlastnos» na získanie GnomeEntry, ak potrebujete zmeni» alebo "
 "zisti» niektoré z jej parametrov."
 
-#: libgnomeui/gnome-file-entry.c:279
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1013,11 +1014,11 @@ msgstr ""
 "pou¾i» túto vlastnos» na získanie GtkEntry, ak potrebujete zmeni» alebo "
 "zisti» niektoré z jej parametrov."
 
-#: libgnomeui/gnome-file-entry.c:514
+#: libgnomeui/gnome-file-entry.c:515
 msgid "Select file"
 msgstr "Vybra» súbor"
 
-#: libgnomeui/gnome-file-entry.c:652
+#: libgnomeui/gnome-file-entry.c:656
 msgid "_Browse..."
 msgstr "_Prezera»..."
 
@@ -1123,7 +1124,7 @@ msgstr ""
 "Vyskytla sa chyba pri naèítavaní alebo ukladaní konfiguraènej informácie pre "
 "%s. Niektoré z va¹ich konfiguraèných nastavení nemusia pracova» správne."
 
-#: libgnomeui/gnome-icon-entry.c:174
+#: libgnomeui/gnome-icon-entry.c:175
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1131,27 +1132,27 @@ msgstr ""
 "Unikátny identifikátor pre polo¾ku ikony. Toto bude pou¾ité pri ukladaní "
 "zoznamu histórie."
 
-#: libgnomeui/gnome-icon-entry.c:183
+#: libgnomeui/gnome-icon-entry.c:184
 msgid "Title for the Browse icon dialog."
 msgstr "Titulok dialógového okna prehliadaèa ikon."
 
-#: libgnomeui/gnome-icon-entry.c:190
+#: libgnomeui/gnome-icon-entry.c:191
 msgid "Pixmap Directory"
 msgstr "Adresár pixmap"
 
-#: libgnomeui/gnome-icon-entry.c:191
+#: libgnomeui/gnome-icon-entry.c:192
 msgid "Directory that will be searched for icons."
 msgstr "Adresár, v ktorom budú vyhµadávané ikony."
 
-#: libgnomeui/gnome-icon-entry.c:199
+#: libgnomeui/gnome-icon-entry.c:200
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Názov súboru, ktorý má by» zobrazený v polo¾ke ikony."
 
-#: libgnomeui/gnome-icon-entry.c:207
+#: libgnomeui/gnome-icon-entry.c:208
 msgid "Picker dialog"
 msgstr "Dialógové okno výberu"
 
-#: libgnomeui/gnome-icon-entry.c:208
+#: libgnomeui/gnome-icon-entry.c:209
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1159,19 +1160,19 @@ msgstr ""
 "Dialógové okno výberu ikony. Mô¾ete pou¾i» túto vlastnos», aby ste získali "
 "GtkDialog, ak potrebujete zmeni» alebo zisti» niektoré z jeho vlastností."
 
-#: libgnomeui/gnome-icon-entry.c:317 libgnomeui/gnome-icon-entry.c:963
+#: libgnomeui/gnome-icon-entry.c:318 libgnomeui/gnome-icon-entry.c:969
 msgid "No Icon"
 msgstr "Bez ikony"
 
-#: libgnomeui/gnome-icon-entry.c:525 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:526 libgnomeui/gnome-pixmap-entry.c:380
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nemô¾em nájs» hbox, pou¾ijem normálny výber písma"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:532 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Preview"
 msgstr "Náhµad"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:991
 msgid "Browse"
 msgstr "Prezera»"
 
@@ -1209,15 +1210,15 @@ msgstr "Otázka"
 msgid "Message"
 msgstr "Správa"
 
-#: libgnomeui/gnome-pixmap-entry.c:118
+#: libgnomeui/gnome-pixmap-entry.c:111
 msgid "Do Preview"
 msgstr "Spravi» náhµad"
 
-#: libgnomeui/gnome-pixmap-entry.c:119
+#: libgnomeui/gnome-pixmap-entry.c:112
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Èi má ma» polo¾ka pixmap náhµad."
 
-#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:444
 msgid "No Image"
 msgstr "Bez obrázka"
 
