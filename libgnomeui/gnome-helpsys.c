@@ -92,14 +92,13 @@ static void gnome_help_view_init (GnomeHelpView *help_view);
 static void gnome_help_view_destroy (GtkObject *obj);
 static void gnome_help_view_finalize (GObject *obj);
 static void gnome_help_view_get_property	(GObject *object,
-					 guint param_id,
-					 GValue *value,
-					 GParamSpec * pspec);
+						 guint param_id,
+						 GValue *value,
+						 GParamSpec * pspec);
 static void gnome_help_view_set_property	(GObject *object,
-					 guint param_id,
-					 const GValue * value,
-					 GParamSpec * pspec,
-					 const gchar * trailer);
+						 guint param_id,
+						 const GValue * value,
+						 GParamSpec * pspec);
 static void gnome_help_view_size_request  (GtkWidget      *widget,
 					   GtkRequisition *requisition);
 static void gnome_help_view_size_allocate (GtkWidget      *widget,
@@ -284,10 +283,9 @@ gnome_help_view_finalize (GObject *obj)
 
 static void
 gnome_help_view_set_property (GObject *object,
-			   guint param_id,
-			   const GValue * value,
-			   GParamSpec * pspec,
-			   const gchar * trailer)
+			      guint param_id,
+			      const GValue * value,
+			      GParamSpec * pspec)
 {
 	static gboolean set_style = FALSE;
 	static gboolean set_priority = FALSE;

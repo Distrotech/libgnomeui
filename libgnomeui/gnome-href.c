@@ -50,8 +50,7 @@ static void gnome_href_get_property	(GObject *object,
 static void gnome_href_set_property	(GObject *object,
 					 guint param_id,
 					 const GValue * value,
-					 GParamSpec * pspec,
-					 const gchar * trailer);
+					 GParamSpec * pspec);
 static void gnome_href_realize		(GtkWidget *widget);
 static void drag_data_get    		(GnomeHRef          *href,
 					 GdkDragContext     *context,
@@ -454,10 +453,9 @@ gnome_href_realize(GtkWidget *widget)
 
 static void
 gnome_href_set_property (GObject *object,
-		      guint param_id,
-		      const GValue * value,
-		      GParamSpec * pspec,
-		      const gchar * trailer)
+			 guint param_id,
+			 const GValue * value,
+			 GParamSpec * pspec)
 {
 	GnomeHRef *self;
 
