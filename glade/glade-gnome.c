@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <glade/glade.h>
 #include <glade/glade-build.h>
 #include <tree.h>
 
@@ -947,4 +948,25 @@ static const GladeWidgetBuildData widget_data [] = {
 void glade_init_gnome_widgets(void)
 {
 	glade_register_widgets(widget_data);
+}
+
+/**
+ * glade_gnome_init
+ *
+ * This function performs initialisation of glade, similar to what glade_init
+ * does (in fact it calls glade_init for you).  The difference is that it
+ * also initialises the GNOME widget building routines.
+ *
+ * As well as calling this initialisation function, GNOME programs should
+ * also link with the libglade-gnome library, which contains all the
+ * GNOME libglade stuff.
+ */
+void glade_gnome_init(void)
+{
+	static gboolean initialised = FALSE;
+
+	if (initialised) return;
+	initialised = TRUE;
+	glade_init();
+	glade_init_gnome_widgets();
 }
