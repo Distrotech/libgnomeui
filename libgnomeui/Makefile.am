@@ -31,7 +31,7 @@ INCLUDES = \
 	-I$(top_srcdir)					\
 	-I$(top_srcdir)/intl				\
 	-I$(top_builddir)/intl				\
-	$(SUPPORTINCS) 					\
+	$(GNOMESUPPORT_CFLAGS)				\
 	$(GLIB_CFLAGS)					\
 	$(GTK_CFLAGS)					\
 	$(OAF_CFLAGS)					\
@@ -67,6 +67,9 @@ $(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
 gnorba_built = $(gnome_unknown_built) $(gnome_corba_rexec_built)
 
 EXTRA_HEADERS = 
+
+noinst_HEADERS = \
+	libgnomeuiP.h
 
 libgnomeui_2_la_SOURCES = \
 	gnome-about.c			\
@@ -148,7 +151,9 @@ libgnomeui_2_la_SOURCES = \
 	gnome-vfs-util.c		\
 	gnome-textfu.c			\
 	gnome-window.c			\
+	gnomemarshal-main.c		\
 	wap-textfu.c			\
+	$(noinst_HEADERS)		\
 	$(gnorba_built)
 
 ## this lists all the non-generated headers
@@ -255,6 +260,8 @@ BUILT_SOURCES = \
 	gnometypebuiltins_evals.c	\
 	gnometypebuiltins_ids.c		\
 	gnometypebuiltins_vars.c	\
+	gnomemarshal.h			\
+	gnomemarshal.c			\
 	$(gnorba_built)
 
 # generate gnome.defs file from gnome-boxed.defs and *.h
@@ -287,6 +294,18 @@ gnometypebuiltins_evals.c: @REBUILD@ makeenums.pl gnome.defs
 	cd $(srcdir) \
 	&& $(PERL) makeenums.pl arrays $(gnome_headers) > gtbe.tmp \
 	&& mv gtbe.tmp gnometypebuiltins_evals.c
+
+stamp-gnomemarshal.h: @REBUILD@ gnomemarshal.list gnomemarshal.h
+	cd $(srcdir) \
+	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --header >> xgen-gmh \
+	&& (cmp -s xgen-gmh gnomemarshal.h || cp xgen-gmh gnomemarshal.h) \
+	&& rm -f xgen-gmh xgen-gmh~ \
+	&& echo timestamp > $(@F)
+gnomemarshal.c: @REBUILD@ stamp-gnomemarshal.h
+	cd $(srcdir) \
+	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --body >> xgen-gmc \
+	&& cp xgen-gmc gnomemarshal.c \
+	&& rm -f xgen-gmc xgen-gmc~
 
 #######################
 

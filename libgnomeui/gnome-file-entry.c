@@ -726,13 +726,13 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 		if (fentry->_priv->directory_entry) {
 			char *d;
 
-			if (g_file_test (p, G_FILE_TEST_ISDIR))
+			if (g_file_test (p, G_FILE_TEST_IS_DIR))
 				return p;
 
 			d = g_path_get_dirname (p);
 			g_free (p);
 
-			if (g_file_test (d, G_FILE_TEST_ISDIR))
+			if (g_file_test (d, G_FILE_TEST_IS_DIR))
 				return d;
 
 			p = d;

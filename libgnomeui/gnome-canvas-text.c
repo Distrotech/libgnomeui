@@ -915,7 +915,7 @@ get_line_xpos_item_relative (GnomeCanvasText *text, struct line *line)
 static double
 get_line_ypos_item_relative (GnomeCanvasText *text)
 {
-	double x, y;
+	double y;
 
 	y = text->y;
 
@@ -1026,7 +1026,6 @@ gnome_canvas_text_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 {
 	GnomeCanvasText *text;
 	guint32 fg_color;
-	double x_start, y_start;
 	double xpos, ypos;
 	struct line *lines;
 	int i, j;
@@ -1261,7 +1260,7 @@ gnome_canvas_suck_font (GdkFont *font)
 	GdkColor black, white;
 	GdkImage *image;
 	GdkGC *gc;
-	guchar *bitmap, *line;
+	guchar *line;
 	int width, height;
 	int black_pixel, pixel;
 

@@ -41,15 +41,8 @@ enum
 	LAST_SIGNAL
 };
 
-typedef void (*GnomePropertyBoxSignal) (GtkObject *object,
-					gint arg, gpointer data);
-
 static void gnome_property_box_class_init     (GnomePropertyBoxClass *klass);
 static void gnome_property_box_init           (GnomePropertyBox *property_box);
-static void gnome_property_box_marshal_signal (GtkObject *object,
-					       GtkSignalFunc func,
-					       gpointer func_data,
-					       GtkArg *args);
 static void gnome_property_box_destroy        (GtkObject *object);
 
 /*
@@ -89,7 +82,7 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomePropertyBoxClass,
 						   apply),
-				gnome_property_box_marshal_signal,
+				gtk_marshal_VOID__INT,
 				GTK_TYPE_NONE, 1, GTK_TYPE_INT);
 	property_box_signals[HELP] =
 		gtk_signal_new ("help",
@@ -97,7 +90,7 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomePropertyBoxClass,
 						   help),
-				gnome_property_box_marshal_signal,
+				gtk_marshal_VOID__INT,
 				GTK_TYPE_NONE, 1, GTK_TYPE_INT);
 
 	gtk_object_class_add_signals (object_class, property_box_signals,
@@ -105,18 +98,6 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 
 	klass->apply = NULL;
 	klass->help = NULL;
-}
-
-static void
-gnome_property_box_marshal_signal (GtkObject *object,
-				   GtkSignalFunc func,
-				   gpointer func_data,
-				   GtkArg *args)
-{
-	GnomePropertyBoxSignal rfunc;
-
-	rfunc = (GnomePropertyBoxSignal) func;
-	(* rfunc) (object, GTK_VALUE_INT (args[0]), func_data);
 }
 
 static void

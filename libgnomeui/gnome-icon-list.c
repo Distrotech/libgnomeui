@@ -47,6 +47,7 @@
 #include "gnome-canvas-pixbuf.h"
 #include "gnome-canvas-rect-ellipse.h"
 
+#include "libgnomeuiP.h"
 
 /* Aliases to minimize screen use in my laptop */
 #define GIL(x)       GNOME_ICON_LIST(x)
@@ -1034,7 +1035,7 @@ icon_new (Gil *gil, const char *icon_filename, const char *text)
 	Icon *retval;
 
 	if (icon_filename)
-		im = gdk_pixbuf_new_from_file (icon_filename);
+		im = gdk_pixbuf_new_from_file (icon_filename, NULL);
 	else
 		im = NULL;
 
@@ -1861,25 +1862,6 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	return TRUE;
 }
 
-typedef gboolean (*xGtkSignal_BOOL__INT_POINTER) (GtkObject * object,
-						  gint     arg1,
-						  gpointer arg2,
-						  gpointer user_data);
-static void
-xgtk_marshal_BOOL__INT_POINTER (GtkObject *object, GtkSignalFunc func, gpointer func_data,
-				GtkArg *args)
-{
-  xGtkSignal_BOOL__INT_POINTER rfunc;
-  gboolean *return_val;
-
-  return_val = GTK_RETLOC_BOOL (args[2]);
-  rfunc = (xGtkSignal_BOOL__INT_POINTER) func;
-  *return_val = (*rfunc) (object,
-			  GTK_VALUE_INT (args[0]),
-			  GTK_VALUE_POINTER (args[1]),
-			  func_data);
-}
-
 static void
 gil_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
@@ -1932,7 +1914,7 @@ gil_class_init (GilClass *gil_class)
 			GTK_RUN_FIRST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, select_icon),
-			gtk_marshal_NONE__INT_POINTER,
+			gnome_marshal_VOID__INT_POINTER,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_INT,
 			GTK_TYPE_GDK_EVENT);
@@ -1943,7 +1925,7 @@ gil_class_init (GilClass *gil_class)
 			GTK_RUN_FIRST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, unselect_icon),
-			gtk_marshal_NONE__INT_POINTER,
+			gnome_marshal_VOID__INT_POINTER,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_INT,
 			GTK_TYPE_GDK_EVENT);
@@ -1954,7 +1936,7 @@ gil_class_init (GilClass *gil_class)
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, text_changed),
-			xgtk_marshal_BOOL__INT_POINTER,
+			gnome_marshal_BOOLEAN__INT_POINTER,
 			GTK_TYPE_BOOL, 2,
 			GTK_TYPE_INT,
 			GTK_TYPE_POINTER);

@@ -32,3 +32,6 @@ gnome-corba-rexec-common.c
 gnome-corba-rexec.h
 gnome-remote-bootstrap
 gnome-rexec-server
+gnomemarshal.h
+gnomemarshal.c
+stamp-gnomemarshal.h

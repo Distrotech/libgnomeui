@@ -216,7 +216,15 @@ gnome_pixmap_set_arg (GtkObject *object,
 		break;
 	case ARG_FILE: {
 		GdkPixbuf *pixbuf;
-		pixbuf = gdk_pixbuf_new_from_file (GTK_VALUE_STRING (*arg));
+                GError *error = NULL;
+
+		pixbuf = gdk_pixbuf_new_from_file (GTK_VALUE_STRING (*arg),
+                                                   &error);
+                if (error != NULL) {
+                        g_warning (G_STRLOC ": cannot open %s: %s",
+                                   GTK_VALUE_STRING (*arg), error->message);
+                        g_error_free (error);
+                }
 		if (pixbuf != NULL) {
 			gnome_pixmap_set_pixbuf (self, pixbuf);
 			gdk_pixbuf_unref (pixbuf);
@@ -601,9 +609,17 @@ gnome_pixmap_new_from_file          (const char *filename)
 {
 	GtkWidget *retval = NULL;
 	GdkPixbuf *pixbuf;
+        GError *error;
+
 	g_return_val_if_fail (filename != NULL, NULL);
 
-	pixbuf = gdk_pixbuf_new_from_file (filename);
+        error = NULL;
+	pixbuf = gdk_pixbuf_new_from_file (filename, &error);
+        if (error != NULL) {
+                g_warning (G_STRLOC ": cannot open %s: %s",
+                           filename, error->message);
+                g_error_free (error);
+        }
 	if (pixbuf != NULL) {
 		retval = gnome_pixmap_new_from_pixbuf (pixbuf);
 		gdk_pixbuf_unref (pixbuf);

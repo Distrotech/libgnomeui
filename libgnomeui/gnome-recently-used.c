@@ -75,7 +75,7 @@ static void                 gnome_recently_used_get_param          (GObject     
 								    const gchar            *trailer);
 static void                 gnome_recently_used_set_param          (GObject                *object,
 								    guint                   param_id,
-								    GValue                 *value,
+								    const GValue           *value,
 								    GParamSpec             *pspec,
 								    const gchar            *trailer);
 
@@ -89,9 +89,7 @@ static void                 gnome_recent_document_set_gconf_key    (GnomeRecentD
 static const gchar*         gnome_recent_document_get_gconf_key    (GnomeRecentDocument    *doc);
 static void                 documents_changed_notify               (GConfClient            *client,
                                                                     guint                   cnxn_id,
-                                                                    const gchar            *key,
-                                                                    GConfValue             *value,
-                                                                    gboolean                is_default,
+                                                                    GConfEntry             *entry,
                                                                     gpointer                user_data);
 
 
@@ -224,10 +222,10 @@ gnome_recently_used_ensure_data (GnomeRecentlyUsed *recently_used)
                 gchar* full_key;
                 GnomeRecentDocument *doc;
                 
-                full_key = gconf_concat_key_and_dir (recently_used->_priv->key_root,
-						     gconf_entry_key(entry));
+                full_key = gconf_concat_dir_and_key (recently_used->_priv->key_root,
+                                                     gconf_entry_get_key(entry));
 
-                doc = gnome_recent_document_from_gconf_value (gconf_entry_value (entry));
+                doc = gnome_recent_document_from_gconf_value (gconf_entry_get_value (entry));
 
                 if (doc != NULL) {
                         gnome_recent_document_ref (doc);
@@ -239,7 +237,7 @@ gnome_recently_used_ensure_data (GnomeRecentlyUsed *recently_used)
                 }
 
                 g_free (full_key);
-                gconf_entry_destroy (entry);
+                gconf_entry_free (entry);
                 
                 iter = g_slist_next (iter);
         }
@@ -348,7 +346,7 @@ gnome_recently_used_get_param (GObject      *object,
 static void
 gnome_recently_used_set_param (GObject      *object,
 			       guint         param_id,
-			       GValue       *value,
+			       const GValue *value,
 			       GParamSpec   *pspec,
 			       const gchar  *trailer)
 {
@@ -372,7 +370,6 @@ static void
 gnome_recently_used_destroy (GtkObject* object)
 {
         GnomeRecentlyUsed* recently_used;
-        GSList *iter;
 
 	/* remember, destroy can be run multiple times! */
 
@@ -411,11 +408,10 @@ gnome_recently_used_truncate (GnomeRecentlyUsed *recently_used,
 {
         gchar *full_key;
 	int max, size;
-	gboolean is_default;
 	GConfValue *value;
 	GSList *list, *li;
-        
-        full_key = gconf_concat_key_and_dir(recently_used->_priv->key_root,
+
+        full_key = gconf_concat_dir_and_key(recently_used->_priv->key_root,
                                             "MaximumSize");
 
 	value = gconf_client_get (recently_used->_priv->conf,
@@ -425,8 +421,8 @@ gnome_recently_used_truncate (GnomeRecentlyUsed *recently_used,
 
 	/* use DEFAULT_MAX */
 	if (value != NULL) {
-		max = gconf_value_int (value);
-		gconf_value_destroy (value);
+		max = gconf_value_get_int (value);
+		gconf_value_free (value);
 	} else {
 		max = DEFAULT_MAX;
 	}
@@ -489,7 +485,7 @@ gnome_recently_used_add (GnomeRecentlyUsed   *recently_used,
 
         key = gconf_unique_key ();
 
-        full_key = gconf_concat_key_and_dir(recently_used->_priv->key_root,
+        full_key = gconf_concat_dir_and_key(recently_used->_priv->key_root,
                                             key);
 
         g_free(key);
@@ -503,7 +499,7 @@ gnome_recently_used_add (GnomeRecentlyUsed   *recently_used,
 			  val,
 			  NULL);
 
-        gconf_value_destroy(val);
+        gconf_value_free(val);
 
         g_free (full_key);
 
@@ -600,18 +596,22 @@ gnome_recently_used_document_changed (GnomeRecentlyUsed   *recently_used,
                          val,
                          NULL);
 
-        gconf_value_destroy(val);        
+        gconf_value_free(val);        
 
         gnome_recent_document_unref(doc);
 }
 
 static void
 documents_changed_notify(GConfClient* client, guint cnxn_id,
-                         const gchar* key, GConfValue* value,
-                         gboolean is_default, gpointer user_data)
+                         GConfEntry *entry, gpointer user_data)
 {
         GnomeRecentlyUsed *recently_used;
         GnomeRecentDocument *doc;
+        GConfValue *value;
+        const gchar *key;
+
+        value = gconf_entry_get_value (entry);
+        key = gconf_entry_get_key (entry);
         
         recently_used = GNOME_RECENTLY_USED(user_data);
 
@@ -1058,10 +1058,10 @@ fill_doc(GnomeRecentDocument **docp, GConfValue *val)
         if (val->type != GCONF_VALUE_LIST)
                 return FALSE;
 
-        if (gconf_value_list_type(val) != GCONF_VALUE_STRING)
+        if (gconf_value_get_list_type(val) != GCONF_VALUE_STRING)
                 return FALSE;
         
-        iter = gconf_value_list(val);
+        iter = gconf_value_get_list(val);
 
         while (iter != NULL) {
                 GConfValue *elem;
@@ -1075,7 +1075,7 @@ fill_doc(GnomeRecentDocument **docp, GConfValue *val)
                         gchar* arg = NULL;
                         gchar* argval = NULL;
                         
-                        encoded = gconf_value_string(elem);
+                        encoded = gconf_value_get_string(elem);
 
                         decode_arg(encoded, &arg, &argval);
 

@@ -248,8 +248,8 @@ refresh_preview(GnomePixmapEntry *pentry)
 		g_free(t);
 		return;
 	}
-	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(pixbuf = gdk_pixbuf_new_from_file (t))) {
+	if(!t || !g_file_test(t,G_FILE_TEST_IS_SYMLINK|G_FILE_TEST_IS_REGULAR) ||
+	   !(pixbuf = gdk_pixbuf_new_from_file (t, NULL))) {
 		if(GNOME_IS_PIXMAP(pentry->_priv->preview)) {
 			gtk_drag_source_unset (pentry->_priv->preview_sw);
 			gtk_widget_destroy(pentry->_priv->preview->parent);
@@ -362,8 +362,8 @@ setup_preview(GtkWidget *widget)
 		gtk_widget_destroy(pp);
 
 	p = gtk_file_selection_get_filename(fs);
-	if(!p || !g_file_test(p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(pixbuf = gdk_pixbuf_new_from_file (p)))
+	if(!p || !g_file_test(p,G_FILE_TEST_IS_SYMLINK|G_FILE_TEST_IS_REGULAR) ||
+	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL)))
 		return;
 
 	w = gdk_pixbuf_get_width(pixbuf);

@@ -118,8 +118,15 @@ gnome_pixmap_new_from_file_conditional(const gchar* filename)
 {
         GdkPixbuf *pixbuf;
         GtkWidget *gpixmap;
+	GError *error;
         
-        pixbuf = gdk_pixbuf_new_from_file(filename);
+	error = NULL;
+        pixbuf = gdk_pixbuf_new_from_file(filename, &error);
+	if (error != NULL) {
+		g_warning (G_STRLOC ": cannot open %s: %s",
+			   filename, error->message);
+		g_error_free (error);
+	}
 
         if (pixbuf != NULL) {
                 gpixmap = gnome_pixmap_new_from_pixbuf(pixbuf);

@@ -47,22 +47,6 @@ enum {
   LAST_SIGNAL
 };
 
-typedef void (*GnomeDialogSignal1) (GtkObject *object,
-				    gint       arg1,
-				    gpointer   data);
-
-typedef gboolean (*GnomeDialogSignal2) (GtkObject *object,
-					gpointer   data);
-
-static void gnome_dialog_marshal_signal_1 (GtkObject         *object,
-					   GtkSignalFunc      func,
-					   gpointer           func_data,
-					   GtkArg            *args);
-static void gnome_dialog_marshal_signal_2 (GtkObject         *object,
-					   GtkSignalFunc      func,
-					   gpointer           func_data,
-					   GtkArg            *args);
-
 static void gnome_dialog_class_init       (GnomeDialogClass *klass);
 static void gnome_dialog_init             (GnomeDialog * dialog);
 static void gnome_dialog_init_action_area (GnomeDialog * dialog);
@@ -125,7 +109,7 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
 		    GTK_RUN_LAST,
 		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeDialogClass, close),
-		    gnome_dialog_marshal_signal_2,
+		    gtk_marshal_INT__NONE,
 		    GTK_TYPE_INT, 0);
 
   dialog_signals[CLICKED] =
@@ -133,7 +117,7 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
 		    GTK_RUN_LAST,
 		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeDialogClass, clicked),
-		    gnome_dialog_marshal_signal_1,
+		    gtk_marshal_VOID__INT,
 		    GTK_TYPE_NONE, 1, GTK_TYPE_INT);
 
   gtk_object_class_add_signals (object_class, dialog_signals, 
@@ -146,35 +130,6 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
   widget_class->key_press_event = gnome_dialog_key_pressed;
   widget_class->delete_event = gnome_dialog_delete_event;
   widget_class->show = gnome_dialog_show;
-}
-
-static void
-gnome_dialog_marshal_signal_1 (GtkObject      *object,
-			       GtkSignalFunc   func,
-			       gpointer        func_data,
-			       GtkArg         *args)
-{
-  GnomeDialogSignal1 rfunc;
-
-  rfunc = (GnomeDialogSignal1) func;
-
-  (* rfunc) (object, GTK_VALUE_INT (args[0]), func_data);
-}
-
-static void
-gnome_dialog_marshal_signal_2 (GtkObject	    *object,
-			       GtkSignalFunc        func,
-			       gpointer	            func_data,
-			       GtkArg	            *args)
-{
-  GnomeDialogSignal2 rfunc;
-  gint * return_val;
-  
-  rfunc = (GnomeDialogSignal2) func;
-  return_val = GTK_RETLOC_INT (args[0]);
-  
-  *return_val = (* rfunc) (object,
-			   func_data);
 }
 
 static void

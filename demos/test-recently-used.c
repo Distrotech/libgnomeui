@@ -69,7 +69,7 @@ add_to_menu(GtkWidget* menu, GnomeRecentDocument *doc)
         g_hash_table_insert(doc_to_menuitem, doc, mi);
         
         /* FIXME actually we'd want to sort by time... */
-        gtk_menu_append(GTK_MENU (menu), mi);
+        gtk_menu_shell_append(GTK_MENU_SHELL (menu), mi);
 }
 
 static void

@@ -70,16 +70,7 @@ enum {
 	ARG_PREVIEW_TEXT
 };
 
-typedef void (* GnomeFontPickerSignal1) (GtkObject *object,
-					  gchar    *font_name,
-                                          gpointer data);
-
-/* Prototipes */
-static void gnome_font_picker_marshal_signal_1 (GtkObject     *object,
-						 GtkSignalFunc  func,
-						 gpointer       func_data,
-						 GtkArg        *args);
-
+/* Prototypes */
 static void gnome_font_picker_class_init (GnomeFontPickerClass *class);
 static void gnome_font_picker_init       (GnomeFontPicker      *cp);
 static void gnome_font_picker_destroy    (GtkObject            *object);
@@ -188,7 +179,7 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 				GTK_RUN_FIRST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeFontPickerClass, font_set),
-				gnome_font_picker_marshal_signal_1,
+				gtk_marshal_VOID__STRING,
 				GTK_TYPE_NONE, 1,
 				GTK_TYPE_STRING);
 
@@ -722,17 +713,6 @@ void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
 /* ************************************************************************
  Internal functions
  **************************************************************************/
-
-static void
-gnome_font_picker_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpointer func_data, GtkArg *args)
-{
-	GnomeFontPickerSignal1 rfunc;
-
-	rfunc = (GnomeFontPickerSignal1) func;
-	(* rfunc) (object,
-		   GTK_VALUE_POINTER (args[0]),
-		   func_data);
-} /* gnome_font_picker_marshal_signal_1 */
 
 static void
 gnome_font_picker_clicked(GtkButton *button)

@@ -24,6 +24,7 @@
 
 #include <config.h>
 #include <glib.h>
+#include <string.h>
 #include <gtk/gtkwindow.h>
 #include <libgnome/gnome-defs.h>
 

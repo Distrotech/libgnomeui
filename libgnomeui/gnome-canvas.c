@@ -102,13 +102,6 @@ enum {
 static void gnome_canvas_request_update (GnomeCanvas *canvas);
 
 
-typedef gint (* GnomeCanvasItemSignal1) (GtkObject *item, gpointer arg1, gpointer data);
-
-static void gnome_canvas_item_marshal_signal_1 (GtkObject     *object,
-						GtkSignalFunc  func,
-						gpointer       func_data,
-						GtkArg        *args);
-
 static void gnome_canvas_item_class_init (GnomeCanvasItemClass *class);
 static void gnome_canvas_item_init       (GnomeCanvasItem      *item);
 static void gnome_canvas_item_shutdown   (GObject              *object);
@@ -175,7 +168,7 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeCanvasItemClass, event),
-				gnome_canvas_item_marshal_signal_1,
+				gtk_marshal_BOOLEAN__BOXED,
 				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_GDK_EVENT);
 
@@ -551,25 +544,6 @@ gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int c
 	return (* GNOME_CANVAS_ITEM_GET_CLASS (item)->point) (
 		item, x, y, cx, cy, actual_item);
 }
-
-/* Marshaler for the "event" signal of canvas items */
-static void
-gnome_canvas_item_marshal_signal_1 (GtkObject *object,
-				    GtkSignalFunc func,
-				    gpointer func_data,
-				    GtkArg *args)
-{
-	GnomeCanvasItemSignal1 rfunc;
-	gint *return_val;
-
-	rfunc = (GnomeCanvasItemSignal1) func;
-	return_val = GTK_RETLOC_BOOL (args[1]);
-
-	*return_val = (* rfunc) (object,
-				 GTK_VALUE_BOXED (args[0]),
-				 func_data);
-}
-
 
 /**
  * gnome_canvas_item_set:

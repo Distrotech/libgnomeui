@@ -126,7 +126,9 @@ gtk_pixmap_menu_item_class_init (GtkPixmapMenuItemClass *klass)
   container_class->forall = gtk_pixmap_menu_item_forall;
   container_class->remove = gtk_pixmap_menu_item_remove;
 
+#if 0 /* FIXME */
   klass->orig_toggle_size = menu_item_class->toggle_size;
+#endif
   klass->have_pixmap_count = 0;
 }
 
@@ -339,6 +341,7 @@ gtk_pixmap_menu_item_remove (GtkContainer *container,
 static void
 changed_have_pixmap_status (GtkPixmapMenuItem *menu_item)
 {
+#if 0 /* FIXME */
   if (menu_item->pixmap != NULL) {
     GTK_PIXMAP_MENU_ITEM_GET_CLASS(menu_item)->have_pixmap_count += 1;
 
@@ -354,6 +357,7 @@ changed_have_pixmap_status (GtkPixmapMenuItem *menu_item)
       GTK_MENU_ITEM_GET_CLASS(menu_item)->toggle_size = GTK_PIXMAP_MENU_ITEM_GET_CLASS(menu_item)->orig_toggle_size;    
     }
   }
+#endif
 
   /* Note that we actually need to do this for _all_ GtkPixmapMenuItem
      whenever the klass->toggle_size changes; but by doing it anytime

@@ -90,7 +90,7 @@ static void gnome_date_edit_forall       (GtkContainer       *container,
 					  gpointer	      callbabck_data);
 static void gnome_date_edit_set_param    (GObject            *object,
 					  guint               param_id,
-					  GValue             *value,
+					  const GValue       *value,
 					  GParamSpec         *pspec,
 					  const gchar        *trailer);
 static void gnome_date_edit_get_param    (GObject            *object,
@@ -312,7 +312,7 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 		hit->gde  = gde;
 
 		item = gtk_menu_item_new_with_label (buffer);
-		gtk_menu_append (GTK_MENU (menu), item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 #if 0
 		gtk_signal_connect (GTK_OBJECT (item), "activate",
 				    GTK_SIGNAL_FUNC (set_time), hit);
@@ -336,7 +336,7 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 			hit->gde  = gde;
 
 			mins = gtk_menu_item_new_with_label (buffer);
-			gtk_menu_append (GTK_MENU (submenu), mins);
+			gtk_menu_shell_append (GTK_MENU_SHELL (submenu), mins);
 			gtk_signal_connect (GTK_OBJECT (mins), "activate",
 					    GTK_SIGNAL_FUNC (set_time), hit);
 			gtk_signal_connect (GTK_OBJECT (item), "destroy",
@@ -506,7 +506,7 @@ gnome_date_edit_forall (GtkContainer *container, gboolean include_internals,
 static void
 gnome_date_edit_set_param (GObject            *object,
 			   guint               param_id,
-			   GValue             *value,
+			   const GValue       *value,
 			   GParamSpec         *pspec,
 			   const gchar        *trailer)
 {

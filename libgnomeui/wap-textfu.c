@@ -22,10 +22,6 @@
 */
 /* Written by Elliot Lee <sopwith@redhat.com>. This code is pretty aweful, but you should see my other code. */
 
-#ifndef g_alloca
-#define g_alloca alloca
-#endif
-
 #define BULLET_WIDTH 20
 #define BULLET_HEIGHT 20
 #define BASIC_INDENT 25
@@ -46,6 +42,10 @@
 #include <gtk/gdk-pixbuf-loader.h>
 #include <gdk/gdkkeysyms.h>
 #include "wap-textfu.h"
+
+#ifndef g_alloca
+#define g_alloca alloca
+#endif
 
 #define my_isspace(x) (isspace(x) || (x) == '\r' || (x) == '\n')
 #define LINE_SPACING 4
@@ -2046,6 +2046,7 @@ typedef struct {
   GdkBitmap *bitmap;
 } PixmapLoaderInfo;
 
+#if 0
 static void wap_pixmap_prepared(GdkPixbufLoader *loader,
 				PixmapLoaderInfo *pli)
 {
@@ -2085,6 +2086,7 @@ static void wap_pixmap_closed(GdkPixbufLoader *loader,
 {
   wap_pixmap_prepared(loader, pli); /* Do it all again */
 }
+#endif
 
 #if 0
 static void wap_pixmap_start(WapStreamHandle handle, const char *mime_type, gpointer user_data)
@@ -3017,11 +3019,14 @@ wml_startElement(void *ctx, const xmlChar *name,
   WapTextFu *textfu = WAP_TEXTFU(ctx);
   TagRegistration *tr;
   WapTextFuClass *klass;
+  gchar *lowercase_name;
 
-  g_strdown(name);
+  lowercase_name = g_strdup (name);
+  g_strdown(lowercase_name);
   klass = WAP_TEXTFU_CLASS(gtk_type_class(wap_textfu_get_type()));
 
-  tr = g_hash_table_lookup(klass->tag_handlers, name);
+  tr = g_hash_table_lookup(klass->tag_handlers, lowercase_name);
+  g_free(lowercase_name);
   if(!tr)
     return;
 
@@ -3038,11 +3043,14 @@ wml_endElement(void *ctx, const xmlChar *name)
   WapTextFu *textfu = WAP_TEXTFU(ctx);
   TagRegistration *tr;
   WapTextFuClass *klass;
+  gchar *lowercase_name;
 
-  g_strdown(name);
+  lowercase_name = g_strdup (name);
+  g_strdown(lowercase_name);
   klass = WAP_TEXTFU_CLASS(gtk_type_class(wap_textfu_get_type()));
 
-  tr = g_hash_table_lookup(klass->tag_handlers, name);
+  tr = g_hash_table_lookup(klass->tag_handlers, lowercase_name);
+  g_free(lowercase_name);
   if(!tr)
      return;
 
@@ -3127,7 +3135,7 @@ wml_characters(void *ctx, const xmlChar *ch,
 static void
 wml_error(void *ctx, const char *msg, ...)
 {
-  WapTextFu *textfu = WAP_TEXTFU(ctx);
+  /* WapTextFu *textfu = WAP_TEXTFU(ctx); */
   va_list args;
 
   va_start(args, msg);
@@ -3140,7 +3148,7 @@ wml_error(void *ctx, const char *msg, ...)
 static void
 wml_fatalError(void *ctx, const char *msg, ...)
 {
-  WapTextFu *textfu = WAP_TEXTFU(ctx);
+  /* WapTextFu *textfu = WAP_TEXTFU(ctx); */
   va_list args;
 
   va_start(args, msg);
@@ -3175,7 +3183,6 @@ static xmlSAXHandler wml_handler = {
   NULL,
   wml_error,
   wml_fatalError,
-  NULL,
   NULL,
   NULL
 };

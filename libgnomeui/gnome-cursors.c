@@ -603,7 +603,7 @@ static void
 build_cursor_table (void)
 {
 	int i;
-	GConfError *err = NULL;
+	GError *err = NULL;
 	GConfClient *client;
 
         g_assert (cursortable == NULL);
@@ -624,6 +624,11 @@ build_cursor_table (void)
 			gnome_stock_cursor_register (&default_cursors[i]);
 		} else {
 			gnome_stock_cursor_register (&default_cursors[i]);
+		}
+
+		if (err) {
+			g_warning (err->message);
+			g_error_free (err);
 		}
 		
 		g_free (key);
@@ -832,8 +837,19 @@ gnome_stock_cursor_new (const char *cursorname)
                 case GNOME_CURSOR_FILE:
                 {
                         GdkPixbuf *pixbuf;
-		
-                        pixbuf = gdk_pixbuf_new_from_file (cursor->cursor_data);
+			GError *error;
+
+			error = NULL;
+			pixbuf = gdk_pixbuf_new_from_file (cursor->cursor_data,
+							   &error);
+			if (error != NULL) {
+				g_warning (G_STRLOC ": can't load %s: %s",
+					   (gchar *) cursor->cursor_data,
+					   error->message);
+				g_error_free (error);
+				return NULL;
+			}
+
                         gnome_cursor_create_from_pixbuf (pixbuf,
                                                          cursor->alpha_threshhold,
                                                          &pmap, &mask);

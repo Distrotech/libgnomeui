@@ -97,7 +97,7 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
      */
     local_path = gnome_vfs_get_local_path_from_uri (uri);
     if (local_path != NULL) {
-	pixbuf = gdk_pixbuf_new_from_file (local_path);
+	pixbuf = gdk_pixbuf_new_from_file (local_path, NULL);
 	g_free (local_path);
 	return pixbuf;
     }
@@ -123,7 +123,8 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
 	}
 	if (!gdk_pixbuf_loader_write (loader,
 				      buffer,
-				      bytes_read)) {
+				      bytes_read,
+				      NULL)) {
 	    result = GNOME_VFS_ERROR_WRONG_FORMAT;
 	    break;
 	}
@@ -210,7 +211,8 @@ file_read_callback (GnomeVFSAsyncHandle *vfs_handle,
     if (result == GNOME_VFS_OK && bytes_read != 0) {
 	if (!gdk_pixbuf_loader_write (handle->loader,
 				      buffer,
-				      bytes_read)) {
+				      bytes_read,
+				      NULL)) {
 	    result = GNOME_VFS_ERROR_WRONG_FORMAT;
 	}
 	gnome_vfs_async_read (handle->vfs_handle,

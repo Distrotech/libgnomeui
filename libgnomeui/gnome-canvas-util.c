@@ -444,7 +444,7 @@ void
 gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp)
 {
 	ArtSVP *old_svp;
-	ArtSVP *diff;
+	ArtSVP *diff G_GNUC_UNUSED;
 	ArtUta *repaint_uta;
 
 	old_svp = *p_svp;

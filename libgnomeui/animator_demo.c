@@ -46,7 +46,7 @@ main (int argc, char *argv[])
 		      GTK_SIGNAL_FUNC (quit_cb), NULL);
 
   s = gnome_pixmap_file (ANIMFILE);
-  pixbuf = gdk_pixbuf_new_from_file (s);
+  pixbuf = gdk_pixbuf_new_from_file (s, NULL);
   g_free (s);
   animator = gnome_animator_new_with_size (48, 48);
   gnome_animator_append_frames_from_pixbuf (GNOME_ANIMATOR (animator),

@@ -43,6 +43,8 @@
 #include <gdk/gdkprivate.h>
 #include <X11/Xatom.h>
 
+#include "libgnomeuiP.h"
+
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
 
@@ -61,26 +63,6 @@ enum {
   DISCONNECT,
   LAST_SIGNAL
 };
-
-typedef gint (*GnomeClientSignal1) (GnomeClient        *client,
-				    gint                phase,
-				    GnomeSaveStyle      save_style,
-				    gint                shutdown,
-				    GnomeInteractStyle  interact_style,
-				    gint                fast,
-				    gpointer            client_data);
-typedef void (*GnomeClientSignal2) (GnomeClient        *client,
-				    gint                restarted,
-				    gpointer            client_data);
-
-static void gnome_client_marshal_signal_1 (GtkObject     *object,
-					   GtkSignalFunc  func,
-					   gpointer       func_data,
-					   GtkArg        *args);
-static void gnome_client_marshal_signal_2 (GtkObject     *object,
-					   GtkSignalFunc  func,
-					   gpointer       func_data,
-					   GtkArg        *args);
 
 static void gnome_client_class_init              (GnomeClientClass *klass);
 static void gnome_client_object_init             (GnomeClient      *client);
@@ -106,8 +88,8 @@ static gchar** array_init_from_arg           (gint argc,
 static GtkObjectClass *parent_class = NULL;
 static gint client_signals[LAST_SIGNAL] = { 0 };
 
-static const char *sm_client_id_arg_name = "--sm-client-id";
-static const char *sm_config_prefix_arg_name = "--sm-config-prefix";
+static const char *sm_client_id_arg_name G_GNUC_UNUSED = "--sm-client-id";
+static const char *sm_config_prefix_arg_name G_GNUC_UNUSED = "--sm-config-prefix";
 
 /* The master client.  */
 static GnomeClient *master_client= NULL;
@@ -241,7 +223,7 @@ interaction_key_use (InteractionKey *key)
       args[2].d.pointer_data= &key->tag;
 
       args[3].name          = "GnomeDialogType";
-      args[3].type          = GTK_TYPE_ENUM;
+      args[3].type          = GTK_TYPE_GNOME_DIALOG_TYPE;
       args[3].d.pointer_data= &key->dialog_type;
 
       ((GtkCallbackMarshal)key->function) (NULL, key->data, 3, args);
@@ -906,6 +888,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
   /* Make sure the Gtk+ type system is initialized.  */
   gtk_type_init ();
   gtk_signal_init ();
+  gnome_type_init ();
 
   /* Create the master client.  */
   master_client = gnome_client_new_without_connection ();
@@ -1069,12 +1052,12 @@ gnome_client_class_init (GnomeClientClass *klass)
 		    GTK_RUN_LAST,
 		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, save_yourself),
-		    gnome_client_marshal_signal_1,
+		    gnome_marshal_BOOLEAN__INT_ENUM_BOOLEAN_ENUM_BOOLEAN,
 		    GTK_TYPE_BOOL, 5,
 		    GTK_TYPE_INT,
-		    GTK_TYPE_ENUM,
+		    GTK_TYPE_GNOME_SAVE_STYLE,
 		    GTK_TYPE_BOOL,
-		    GTK_TYPE_ENUM,
+		    GTK_TYPE_GNOME_INTERACT_STYLE,
 		    GTK_TYPE_BOOL);
   client_signals[DIE] =
     gtk_signal_new ("die",
@@ -1102,7 +1085,7 @@ gnome_client_class_init (GnomeClientClass *klass)
 		    GTK_RUN_FIRST,
 		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, connect),
-		    gnome_client_marshal_signal_2,
+		    gtk_marshal_VOID__BOOLEAN,
 		    GTK_TYPE_NONE, 1,
 		    GTK_TYPE_BOOL);
   client_signals[DISCONNECT] =
@@ -2669,46 +2652,6 @@ gnome_interaction_key_return (gint     tag,
   
   client_save_yourself_possibly_done (client);
 #endif /* HAVE_LIBSM */
-}
-
-/*****************************************************************************/
-
-static void
-gnome_client_marshal_signal_1 (GtkObject     *object,
-			       GtkSignalFunc  func,
-			       gpointer       func_data,
-			       GtkArg        *args)
-{
-  GnomeClient        *client;
-  GnomeClientSignal1  rfunc;
-  
-  client = (GnomeClient*)object;
-  rfunc  = (GnomeClientSignal1) func;
-  
-  client->save_successfull = (* rfunc) (client,
-					GTK_VALUE_INT (args[0]),
-					GTK_VALUE_ENUM (args[1]),
-					GTK_VALUE_BOOL (args[2]),
-					GTK_VALUE_ENUM (args[3]),
-					GTK_VALUE_BOOL (args[4]),
-					func_data);
-
-  client->save_yourself_emitted= TRUE;
-}
-
-static void
-gnome_client_marshal_signal_2 (GtkObject     *object,
-			       GtkSignalFunc  func,
-			       gpointer       func_data,
-			       GtkArg        *args)
-{
-  GnomeClientSignal2  rfunc;
-  
-  rfunc = (GnomeClientSignal2) func;
-  
-  (* rfunc) ((GnomeClient*)object,
-	     GTK_VALUE_BOOL (args[0]),
-	     func_data);
 }
 
 /*****************************************************************************/

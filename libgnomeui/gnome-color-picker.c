@@ -42,6 +42,8 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkbutton.h>
 
+#include "libgnomeuiP.h"
+
 /* These are the dimensions of the color sample in the color picker */
 #define COLOR_PICKER_WIDTH  20
 #define COLOR_PICKER_HEIGHT 12
@@ -82,18 +84,6 @@ enum {
 	COLOR_SET,
 	LAST_SIGNAL
 };
-
-typedef void (* GnomeColorPickerSignal1) (GtkObject *object,
-					  gint       arg1,
-					  gint       arg2,
-					  gint       arg3,
-					  gint       arg4,
-					  gpointer   data);
-
-static void gnome_color_picker_marshal_signal_1 (GtkObject     *object,
-						 GtkSignalFunc  func,
-						 gpointer       func_data,
-						 GtkArg        *args);
 
 static void gnome_color_picker_class_init (GnomeColorPickerClass *class);
 static void gnome_color_picker_init       (GnomeColorPicker      *cp);
@@ -173,7 +163,7 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 				GTK_RUN_FIRST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeColorPickerClass, color_set),
-				gnome_color_picker_marshal_signal_1,
+				gnome_marshal_VOID__UINT_UINT_UINT_UINT,
 				GTK_TYPE_NONE, 4,
 				GTK_TYPE_UINT,
 				GTK_TYPE_UINT,
@@ -1007,20 +997,6 @@ gnome_color_picker_get_title (GnomeColorPicker *cp)
 	g_return_val_if_fail (GNOME_IS_COLOR_PICKER (cp), NULL);
 
 	return cp->_priv->title;
-}
-
-static void
-gnome_color_picker_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpointer func_data, GtkArg *args)
-{
-	GnomeColorPickerSignal1 rfunc;
-
-	rfunc = (GnomeColorPickerSignal1) func;
-	(* rfunc) (object,
-		   GTK_VALUE_UINT (args[0]),
-		   GTK_VALUE_UINT (args[1]),
-		   GTK_VALUE_UINT (args[2]),
-		   GTK_VALUE_UINT (args[3]),
-		   func_data);
 }
 
 static void

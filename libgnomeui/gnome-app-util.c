@@ -955,12 +955,23 @@ void
 gnome_window_set_icon_from_file(GtkWindow *window, const char *filename, gboolean overwrite)
 {
   GdkPixbuf *pb;
+  GError *error;
 
-  pb = gdk_pixbuf_new_from_file(filename);
+  error = NULL;
+  pb = gdk_pixbuf_new_from_file(filename, &error);
+  if (error != NULL) {
+      g_warning (error->message);
+      g_error_free (error);
+  }
   if(!pb)
     {
+      error = NULL;
       filename = gnome_pixmap_file(filename);
-      pb = gdk_pixbuf_new_from_file(filename);
+      pb = gdk_pixbuf_new_from_file(filename, &error);
+      if (error != NULL) {
+	g_warning (error->message);
+	g_error_free (error);
+      }
       g_free((gpointer)filename);
     }
   if(!pb)

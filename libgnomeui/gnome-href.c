@@ -50,7 +50,7 @@ static void gnome_href_get_param	(GObject *object,
 					 const gchar *trailer);
 static void gnome_href_set_param	(GObject *object,
 					 guint param_id,
-					 GValue * value,
+					 const GValue * value,
 					 GParamSpec * pspec,
 					 const gchar * trailer);
 static void gnome_href_realize		(GtkWidget *widget);
@@ -452,7 +452,7 @@ gnome_href_realize(GtkWidget *widget)
 static void
 gnome_href_set_param (GObject *object,
 		      guint param_id,
-		      GValue * value,
+		      const GValue * value,
 		      GParamSpec * pspec,
 		      const gchar * trailer)
 {

@@ -736,7 +736,16 @@ gnome_about_load_logo(GnomeAboutPrivate *priv,
 		
 		if (filename != NULL) {
 			GdkPixbuf *pixbuf;
-			pixbuf = gdk_pixbuf_new_from_file(filename);
+			GError *error;
+
+			error = NULL;
+			pixbuf = gdk_pixbuf_new_from_file(filename, &error);
+			if (error != NULL) {
+				g_warning (G_STRLOC ": cannot load `%s': %s",
+					   filename, error->message);
+				g_error_free (error);
+			}
+
 			if (pixbuf != NULL) {
 				priv->logo = pixbuf;
 				priv->logo_width = gdk_pixbuf_get_width (pixbuf);
@@ -828,7 +837,7 @@ static void gnome_about_fill_options (GtkWidget *widget,
 {
 	GtkStyle *style;
     
-	GConfError *err = NULL;
+	GError *err = NULL;
 	GConfClient *client = gnome_get_gconf_client ();
 
 	g_return_if_fail (priv != NULL);

@@ -81,7 +81,7 @@ static void gnome_app_get_param   (GObject       *object,
 				   const gchar   *trailer);
 static void gnome_app_set_param   (GObject       *object,
 				   guint          param_id,
-				   GValue        *value,
+				   const GValue  *value,
 				   GParamSpec    *pspec,
 				   const gchar   *trailer);
 
@@ -158,7 +158,7 @@ gnome_app_class_init (GnomeAppClass *class)
 static void
 gnome_app_set_param (GObject       *object,
 		     guint          param_id,
-		     GValue        *value,
+		     const GValue  *value,
 		     GParamSpec    *pspec,
 		     const gchar   *trailer)
 {

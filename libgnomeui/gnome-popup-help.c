@@ -385,6 +385,8 @@ popup_pre_callback (GtkWidget *widget, GdkEventButton *event, GnomeUIInfo *cutpt
         if (event->button != 3)
 		return FALSE;
 
+#if 0 /* FIXME !!! FIXME !!! FIXME */
+
         if (GTK_EDITABLE (widget)->selection_start_pos == GTK_EDITABLE (widget)->selection_end_pos) {
                 gtk_widget_set_sensitive (cutptr[0].widget, FALSE);
                 gtk_widget_set_sensitive (cutptr[1].widget, FALSE);
@@ -397,6 +399,8 @@ popup_pre_callback (GtkWidget *widget, GdkEventButton *event, GnomeUIInfo *cutpt
                 gtk_widget_set_sensitive (cutptr[2].widget, TRUE);
         else
                 gtk_widget_set_sensitive (cutptr[2].widget, FALSE);
+
+#endif
         
         return FALSE;
 }

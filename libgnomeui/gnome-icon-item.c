@@ -463,10 +463,12 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y)
 
 		xpos = (ti->width - row->width) / 2;
 
+#if 0 /* FIXME */
 		sel_start = GTK_EDITABLE (priv->entry)->selection_start_pos - len;
 		sel_end = GTK_EDITABLE (priv->entry)->selection_end_pos - len;
 		offset = 0;
 		cursor = GTK_EDITABLE (priv->entry)->current_pos - len;
+#endif
 
 		for (i = 0; *text_wc; text_wc++, i++) {
 			int size, px;
@@ -679,10 +681,12 @@ iti_start_selecting (Iti *iti, int idx, guint32 event_time)
 				ibeam, event_time);
 	gdk_cursor_destroy (ibeam);
 
+#if 0 /* FIXME */
 	gtk_editable_select_region (e, idx, idx);
 	e->current_pos = e->selection_start_pos;
 	e->has_selection = TRUE;
 	iti->selecting = TRUE;
+#endif
 
 	priv->need_state_update = TRUE;
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (iti));
@@ -703,7 +707,9 @@ iti_stop_selecting (Iti *iti, guint32 event_time)
 	e = GTK_EDITABLE (priv->entry);
 
 	gnome_canvas_item_ungrab (item, event_time);
+#if 0 /* FIXME */
 	e->has_selection = FALSE;
+#endif
 	iti->selecting = FALSE;
 
 	priv->need_state_update = TRUE;
@@ -721,6 +727,7 @@ iti_selection_motion (Iti *iti, int idx)
 	priv = iti->priv;
 	e = GTK_EDITABLE (priv->entry);
 
+#if 0 /* FIXME */
 	if (idx < e->current_pos) {
 		e->selection_start_pos = idx;
 		e->selection_end_pos   = e->current_pos;
@@ -728,6 +735,7 @@ iti_selection_motion (Iti *iti, int idx)
 		e->selection_start_pos = e->current_pos;
 		e->selection_end_pos  = idx;
 	}
+#endif
 
 	priv->need_state_update = TRUE;
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (iti));

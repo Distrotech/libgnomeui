@@ -368,14 +368,15 @@ create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info)
 static void
 showing_pixmaps_changed_notify(GConfClient            *client,
                                guint                   cnxn_id,
-                               const gchar            *key,
-                               GConfValue             *value,
-                               gboolean                is_default,
+			       GConfEntry             *entry,
                                gpointer                user_data)
 {
         gboolean new_setting = TRUE;
         GtkWidget *w = user_data;
         GtkPixmapMenuItem *mi = GTK_PIXMAP_MENU_ITEM(w);
+	GConfValue *value;
+
+	value = gconf_entry_get_value (entry);
 
         if (value && value->type == GCONF_VALUE_BOOL) {
                 new_setting = gconf_value_get_bool(value);
@@ -1147,7 +1148,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 		return pos;
 	}
 
-#warning FIXME: this needs to use helpsys!!!!
+	/* #warning FIXME: this needs to use helpsys!!!! */
 	topics = NULL;
 	/* topics = gnome_help_app_topics ((const char *)uiinfo->moreinfo);*/
 
@@ -1165,7 +1166,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 	    setup_uline_accel (menu_shell, NULL, item, keyval);
 	    gtk_widget_lock_accelerators (item);
 
-#warning FIXME: this needs to use helpsys!!!!
+	    /* #warning FIXME: this needs to use helpsys!!!! */
 	    /*
 	    gtk_signal_connect_full (GTK_OBJECT (item), "activate",
 				     (GtkSignalFunc) gnome_help_view_display_callback, NULL,
@@ -1380,7 +1381,7 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 				if (gnome_preferences_get_menus_have_tearoff ()) {
 					tearoff = gtk_tearoff_menu_item_new ();
 					gtk_widget_show (tearoff);
-					gtk_menu_prepend (GTK_MENU (menu), tearoff);
+					gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), tearoff);
 				}
 			}
 			pos++;
@@ -2320,14 +2321,13 @@ set_bevels(GnomeDockItem *dock_item, gboolean bevels)
 static void
 dockitem_bevels_changed_notify(GConfClient            *client,
                                guint                   cnxn_id,
-                               const gchar            *key,
-                               GConfValue             *value,
-                               gboolean                is_default,
+			       GConfEntry             *entry,
                                gpointer                user_data)
 {
         gboolean bevels = TRUE;
         GtkWidget *w = user_data;
         GnomeDockItem *dock_item = GNOME_DOCK_ITEM(w);
+	GConfValue *value = gconf_entry_get_value (entry);
 
         if (value &&
             value->type == GCONF_VALUE_BOOL) {
@@ -2352,14 +2352,13 @@ set_separators(GtkToolbar *toolbar, gboolean separators)
 static void
 toolbar_separators_changed_notify(GConfClient            *client,
                                   guint                   cnxn_id,
-                                  const gchar            *key,
-                                  GConfValue             *value,
-                                  gboolean                is_default,
+				  GConfEntry             *entry,
                                   gpointer                user_data)
 {
         gboolean separators = TRUE;
         GtkWidget *w = user_data;
         GtkToolbar *toolbar = GTK_TOOLBAR(w);
+	GConfValue *value = gconf_entry_get_value (entry);
 
         if (value &&
             value->type == GCONF_VALUE_BOOL) {
@@ -2378,14 +2377,13 @@ static GConfEnumStringPair toolbar_reliefs[] = {
 static void
 toolbar_relief_changed_notify(GConfClient            *client,
                               guint                   cnxn_id,
-                              const gchar            *key,
-                              GConfValue             *value,
-                              gboolean                is_default,
+			      GConfEntry             *entry,
                               gpointer                user_data)
 {
         GtkReliefStyle style = GTK_RELIEF_NONE;
         GtkWidget *w = user_data;
         GtkToolbar *toolbar = GTK_TOOLBAR(w);
+	GConfValue *value = gconf_entry_get_value (entry);
 
         if (value &&
             value->type == GCONF_VALUE_STRING &&
@@ -2407,15 +2405,14 @@ static GConfEnumStringPair toolbar_styles[] = {
 static void
 per_app_toolbar_style_changed_notify(GConfClient            *client,
                                      guint                   cnxn_id,
-                                     const gchar            *key,
-                                     GConfValue             *value,
-                                     gboolean                is_default,
+				     GConfEntry             *entry,
                                      gpointer                user_data)
 {
         GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
         GtkWidget *w = user_data;
         GtkToolbar *toolbar = GTK_TOOLBAR(w);
         gboolean got_it = FALSE;
+	GConfValue *value = gconf_entry_get_value (entry);
 
         if (value &&
             value->type == GCONF_VALUE_STRING &&
@@ -2451,9 +2448,7 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
 static void
 toolbar_style_changed_notify(GConfClient            *client,
                              guint                   cnxn_id,
-                             const gchar            *key,
-                             GConfValue             *value,
-                             gboolean                is_default,
+			     GConfEntry             *entry,
                              gpointer                user_data)
 {
         GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
@@ -2462,6 +2457,7 @@ toolbar_style_changed_notify(GConfClient            *client,
         gchar *per_app_key;
         gchar *str;
         gboolean got_it = FALSE;
+	GConfValue *value;
 
         /* Check for app-specific override */
         per_app_key = gnome_gconf_get_gnome_libs_settings_relative("toolbar-style");
@@ -2476,6 +2472,8 @@ toolbar_style_changed_notify(GConfClient            *client,
                 }
                 g_free(str);
         }
+
+	value = gconf_entry_get_value (entry);
 
         /* If no per-app setting use this new global setting */
         if (!got_it &&

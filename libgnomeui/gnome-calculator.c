@@ -29,8 +29,6 @@
 
 #include <config.h>
 
-#include "gnome-macros.h"
-
 /* needed for values of M_E and M_PI under 'gcc -ansi -pedantic'
  * on GNU/Linux */
 #ifndef _BSD_SOURCE
@@ -48,6 +46,8 @@
 #include "libgnome/libgnomeP.h"
 #include "gnome-calculator.h"
 #include <gdk-pixbuf/gdk-pixbuf.h>
+
+#include "libgnomeuiP.h"
 
 typedef void (*sighandler_t)(int);
 
@@ -135,20 +135,6 @@ GNOME_CLASS_BOILERPLATE (GnomeCalculator, gnome_calculator,
 			 GtkVBox, gtk_vbox)
 
 static void
-gnome_calculator_marshal_signal_result_changed (GtkObject * object,
-						GtkSignalFunc func,
-						gpointer func_data,
-						GtkArg * args)
-{
-	GnomeCalcualtorResultChangedSignal rfunc;
-
-	rfunc = (GnomeCalcualtorResultChangedSignal) func;
-
-	(*rfunc) (object, GTK_VALUE_DOUBLE (args[0]),
-		  func_data);
-}
-
-static void
 gnome_calculator_class_init (GnomeCalculatorClass *class)
 {
 	GtkObjectClass *object_class;
@@ -165,7 +151,7 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 			       GTK_CLASS_TYPE(object_class),
 			       GTK_SIGNAL_OFFSET(GnomeCalculatorClass,
 			       			 result_changed),
-			       gnome_calculator_marshal_signal_result_changed,
+			       gnome_marshal_VOID__DOUBLE,
 			       GTK_TYPE_NONE,
 			       1,
 			       GTK_TYPE_DOUBLE);
@@ -1132,6 +1118,7 @@ ref_font (void)
 {
 	char *filename;
 	GdkPixbuf *pb;
+	GError *error;
 
 	if (calc_font) {
 		g_assert (calc_font_ref_count > 0);
@@ -1148,12 +1135,16 @@ ref_font (void)
 		return;
 	}
 
-	pb = gdk_pixbuf_new_from_file(filename);
-	g_free (filename);
+	error = NULL;
+	pb = gdk_pixbuf_new_from_file(filename, &error);
 	if (!pb) {
-		g_message ("ref_font(): could not load calculator-font.png");
+		g_message (G_STRLOC ": could not load %s: %s", filename,
+			   error->message);
+		g_free (filename);
+		g_error_free (error);
 		return;
 	}
+	g_free (filename);
 
 	gdk_pixbuf_render_pixmap_and_mask(pb, &calc_font, NULL, 128);
 	gdk_pixbuf_unref (pb);

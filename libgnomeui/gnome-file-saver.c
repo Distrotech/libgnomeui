@@ -69,7 +69,7 @@ static void gnome_file_saver_finalize (GObject* object);
 static void gnome_file_saver_set_arg (GtkObject* object, GtkArg* arg, guint arg_id);
 static void gnome_file_saver_get_arg (GtkObject* object, GtkArg* arg, guint arg_id);
 
-static void locations_changed_notify(GConfClient* client, guint cnxn_id, const gchar* key, GConfValue* value, gboolean is_default, gpointer user_data);
+static void locations_changed_notify(GConfClient* client, guint cnxn_id, GConfEntry * entry, gpointer user_data);
 
 static void
 gnome_file_saver_remove_location(GnomeFileSaver* file_saver,
@@ -272,16 +272,16 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
                 GConfEntry *entry = iter->data;
                 gchar* full_key;
 
-                full_key = gconf_concat_key_and_dir("/desktop/standard/save-locations",
-                                                    gconf_entry_key(entry));
+                full_key = gconf_concat_dir_and_key("/desktop/standard/save-locations",
+                                                    gconf_entry_get_key(entry));
 
                 
                 gnome_file_saver_update_location(file_saver,
                                                  full_key,
-                                                 gconf_entry_value(entry));
+                                                 gconf_entry_get_value(entry));
 
                 g_free(full_key);
-                gconf_entry_destroy(entry);
+                gconf_entry_free(entry);
                 
                 iter = g_slist_next(iter);
         }
@@ -425,7 +425,7 @@ type_chosen_cb(GtkWidget* mi, GnomeFileSaver* file_saver)
 
         if (icon_file) {
                 printf("file %s\n", icon_file);
-                pixbuf = gdk_pixbuf_new_from_file(icon_file);
+                pixbuf = gdk_pixbuf_new_from_file(icon_file, NULL);
         } else {
                 pixbuf = NULL;
         }
@@ -494,8 +494,8 @@ gnome_file_saver_add_mime_type(GnomeFileSaver *file_saver,
         
         gtk_widget_show_all(mi);
 
-        gtk_menu_append(GTK_MENU(file_saver->_priv->type_menu),
-                        mi);        
+        gtk_menu_shell_append(GTK_MENU_SHELL(file_saver->_priv->type_menu),
+                              mi);        
 }
 
 void
@@ -629,8 +629,8 @@ gnome_file_saver_update_location(GnomeFileSaver* file_saver,
                 return;
         }
         
-        car = gconf_value_car(value);
-        cdr = gconf_value_cdr(value);
+        car = gconf_value_get_car(value);
+        cdr = gconf_value_get_cdr(value);
 
         if (car == NULL || car->type != GCONF_VALUE_STRING ||
             cdr == NULL || cdr->type != GCONF_VALUE_STRING) {
@@ -640,8 +640,8 @@ gnome_file_saver_update_location(GnomeFileSaver* file_saver,
                 return;
         }
         
-        human_name = gconf_value_string(car);
-        dirname = gconf_value_string(cdr);
+        human_name = gconf_value_get_string(car);
+        dirname = gconf_value_get_string(cdr);
 
         if (human_name == NULL ||
             dirname == NULL) {
@@ -689,17 +689,21 @@ gnome_file_saver_update_location(GnomeFileSaver* file_saver,
 			g_slist_insert(file_saver->_priv->locations,
 				       mi, count);
 
-                gtk_menu_insert(GTK_MENU(file_saver->_priv->location_menu),
-                                mi, count);
+                gtk_menu_shell_insert(GTK_MENU_SHELL(file_saver->_priv->location_menu),
+                                      mi, count);
         }
 }
                 
 static void
 locations_changed_notify(GConfClient* client, guint cnxn_id,
-                         const gchar* key, GConfValue* value,
-                         gboolean is_default, gpointer user_data)
+                         GConfEntry *entry, gpointer user_data)
 {
         GnomeFileSaver *file_saver;
+        GConfValue *value;
+        const gchar *key;
+
+        value = gconf_entry_get_value (entry);
+        key = gconf_entry_get_key (entry);
 
         file_saver = GNOME_FILE_SAVER(user_data);
         

@@ -79,7 +79,9 @@ static gint gnome_unit_spinner_button_press (GtkWidget *widget,
 					     GdkEventButton *ev);
 static gint gnome_unit_spinner_key_press    (GtkWidget *widget,
 					     GdkEventKey *event);
+#if 0 /* FIXME */
 static void gnome_unit_spinner_activate     (GtkEditable *editable);
+#endif
 
 static void
 gnome_unit_spinner_class_init(GnomeUnitSpinnerClass *class)
@@ -95,7 +97,9 @@ gnome_unit_spinner_class_init(GnomeUnitSpinnerClass *class)
   widget_class->focus_out_event    = gnome_unit_spinner_focus_out;
   widget_class->button_press_event = gnome_unit_spinner_button_press;
   widget_class->key_press_event    = gnome_unit_spinner_key_press;
+#if 0 /* FIXME */
   editable_class->activate         = gnome_unit_spinner_activate;
+#endif
 
   parent_class = gtk_type_class(GTK_TYPE_SPIN_BUTTON);
   entry_class  = gtk_type_class(GTK_TYPE_ENTRY);
@@ -307,8 +311,10 @@ gnome_unit_spinner_focus_out(GtkWidget *widget, GdkEventFocus *event)
   g_return_val_if_fail(widget != NULL, 0);
   g_return_val_if_fail(GNOME_IS_UNIT_SPINNER(widget), 0);
 
+#if 0 /* FIXME */
   if (GTK_EDITABLE(widget)->editable)
     gnome_unit_spinner_update(GNOME_UNIT_SPINNER(widget));
+#endif
   return GTK_WIDGET_CLASS(entry_class)->focus_out_event(widget, event);
 }
 
@@ -325,17 +331,21 @@ gnome_unit_spinner_button_press(GtkWidget *widget, GdkEventButton *event)
 static gint
 gnome_unit_spinner_key_press(GtkWidget *widget, GdkEventKey *event)
 {
-  gint key = event->keyval;
+  /* gint key = event->keyval; */
 
   g_return_val_if_fail(widget != NULL, 0);
   g_return_val_if_fail(GNOME_IS_UNIT_SPINNER(widget), 0);
 
+#if 0 /* FIXME */
   if (GTK_EDITABLE (widget)->editable &&
       (key == GDK_Up || key == GDK_Down || 
        key == GDK_Page_Up || key == GDK_Page_Down))
     gnome_unit_spinner_update (GNOME_UNIT_SPINNER(widget));
+#endif
   return GTK_WIDGET_CLASS(parent_class)->key_press_event(widget, event);
 }
+
+#if 0 /* FIXME */
 
 static void
 gnome_unit_spinner_activate(GtkEditable *editable)
@@ -347,3 +357,4 @@ gnome_unit_spinner_activate(GtkEditable *editable)
     gnome_unit_spinner_update(GNOME_UNIT_SPINNER(editable));
 }
 
+#endif

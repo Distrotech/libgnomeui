@@ -98,7 +98,7 @@ static void gnome_help_view_get_param	(GObject *object,
 					 const gchar *trailer);
 static void gnome_help_view_set_param	(GObject *object,
 					 guint param_id,
-					 GValue * value,
+					 const GValue * value,
 					 GParamSpec * pspec,
 					 const gchar * trailer);
 static void gnome_help_view_size_request  (GtkWidget      *widget,
@@ -284,7 +284,7 @@ gnome_help_view_finalize (GObject *obj)
 static void
 gnome_help_view_set_param (GObject *object,
 			   guint param_id,
-			   GValue * value,
+			   const GValue * value,
 			   GParamSpec * pspec,
 			   const gchar * trailer)
 {
@@ -816,7 +816,7 @@ gtk_widget_destroy_2(GtkWidget *x, GnomeHelpView *help_view)
   help_view->_priv->content = NULL;
 }
 
-static void
+static void G_GNUC_UNUSED
 gnome_help_view_popup_activate_uri(WapTextFu *tf, const char *uri, GnomeHelpView *help_view)
 {
   gnome_help_view_show_url(help_view, uri, URL_GENERAL_HELPSYSTEM);

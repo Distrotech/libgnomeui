@@ -208,7 +208,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	int w, h;
 	char *base;
 	
-	pixbuf = gdk_pixbuf_new_from_file(path);
+	pixbuf = gdk_pixbuf_new_from_file(path, NULL);
 	/*if I can't load it, ignore it*/
 	if(pixbuf == NULL)
 		return;
@@ -275,7 +275,7 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
   g_return_if_fail(gis != NULL);
   g_return_if_fail(dir != NULL);
 
-  if ( ! g_file_test (dir, G_FILE_TEST_ISDIR)) {
+  if ( ! g_file_test (dir, G_FILE_TEST_IS_DIR)) {
 	  g_warning(_("GnomeIconSelection: '%s' does not exist or is not "
 		      "a directory"), dir);
 	  return;
@@ -302,7 +302,7 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
 #ifdef GNOME_ENABLE_DEBUG
       g_print("Full path: %s\n", full_path);
 #endif
-      if (g_file_test (full_path, G_FILE_TEST_ISFILE)) {
+      if (g_file_test (full_path, G_FILE_TEST_IS_REGULAR)) {
 	      /* Image filename, exists, regular file, go for it. */
 	      gis->_priv->file_list =
 		      g_list_insert_sorted(gis->_priv->file_list,

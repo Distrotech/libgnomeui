@@ -557,7 +557,7 @@ gnome_stock_pixmap_entry_get_gdk_pixbuf (GnomeStockPixmapEntry *entry)
                 g_assert(entry->file.filename != NULL);
                 
                 pathname = gnome_pixmap_file(entry->file.filename);
-                entry->any.pixbuf = gdk_pixbuf_new_from_file(pathname);
+                entry->any.pixbuf = gdk_pixbuf_new_from_file(pathname, NULL);
                 g_free(pathname);
                 /* drop some memory */
                 if (entry->any.pixbuf != NULL) {
@@ -570,7 +570,7 @@ gnome_stock_pixmap_entry_get_gdk_pixbuf (GnomeStockPixmapEntry *entry)
         case GNOME_STOCK_PIXMAP_TYPE_PATH:
                 g_assert(entry->path.pathname != NULL);
                 
-                entry->any.pixbuf = gdk_pixbuf_new_from_file(entry->path.pathname);
+                entry->any.pixbuf = gdk_pixbuf_new_from_file(entry->path.pathname, NULL);
                 /* drop some memory */
                 if (entry->any.pixbuf != NULL) {
                         g_free(entry->path.pathname);
@@ -880,7 +880,7 @@ stock_pixmaps(void)
                 GnomeStockPixmapEntry *entry;
 
                 pixbuf = gdk_pixbuf_new_from_inline (entries_data[i].inline_pixbuf,
-                                                     FALSE, -1);
+                                                     FALSE, -1, NULL);
                 
                 
                 entry = gnome_stock_pixmap_entry_new_from_gdk_pixbuf_at_size (pixbuf,

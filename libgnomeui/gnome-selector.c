@@ -48,6 +48,7 @@
 #include "gnome-uidefs.h"
 #include "gnome-gconf.h"
 
+#include "libgnomeuiP.h"
 
 static void gnome_selector_class_init          (GnomeSelectorClass *class);
 static void gnome_selector_init                (GnomeSelector      *selector);
@@ -61,7 +62,7 @@ static void gnome_selector_get_param           (GObject            *object,
                                                 const gchar        *trailer);
 static void gnome_selector_set_param           (GObject            *object,
                                                 guint               param_id,
-                                                GValue             *value,
+                                                const GValue       *value,
                                                 GParamSpec         *pspec,
                                                 const gchar        *trailer);
 
@@ -148,39 +149,6 @@ GNOME_CLASS_BOILERPLATE (GnomeSelector, gnome_selector,
 			 GtkVBox, gtk_vbox)
 
 
-typedef gpointer (*GtkSignal_POINTER__NONE) (GtkObject * object,
-					     gpointer user_data);
-static void
-gtk_marshal_POINTER__NONE (GtkObject * object,
-			   GtkSignalFunc func, gpointer func_data, GtkArg * args)
-{
-    GtkSignal_POINTER__NONE rfunc;
-    gpointer *return_val;
-
-    return_val = GTK_RETLOC_POINTER (args[0]);
-    rfunc = (GtkSignal_POINTER__NONE) func;
-    *return_val = (*rfunc) (object, func_data);
-}
-
-typedef gpointer (*GtkSignal_POINTER__INT_INT) (GtkObject * object,
-						gint arg1,
-						gint arg2,
-						gpointer user_data);
-static void
-gtk_marshal_POINTER__INT_INT (GtkObject * object,
-			      GtkSignalFunc func, gpointer func_data, GtkArg * args)
-{
-    GtkSignal_POINTER__INT_INT rfunc;
-    gpointer *return_val;
-
-    return_val = GTK_RETLOC_POINTER (args[2]);
-    rfunc = (GtkSignal_POINTER__INT_INT) func;
-    *return_val = (*rfunc) (object,
-			    GTK_VALUE_INT (args[0]),
-			    GTK_VALUE_INT (args[1]),
-			    func_data);
-}
-
 static void
 gnome_selector_class_init (GnomeSelectorClass *class)
 {
@@ -259,7 +227,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   check_filename),
-			gtk_marshal_BOOL__POINTER,
+			gtk_marshal_BOOLEAN__POINTER,
 			GTK_TYPE_BOOL, 1,
 			GTK_TYPE_STRING);
     gnome_selector_signals [GET_FILENAME_SIGNAL] =
@@ -268,7 +236,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   get_filename),
-			gtk_marshal_POINTER__NONE,
+			gtk_marshal_POINTER__VOID,
 			GTK_TYPE_POINTER,
 			0);
     gnome_selector_signals [SET_FILENAME_SIGNAL] =
@@ -277,7 +245,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   set_filename),
-			gtk_marshal_BOOL__POINTER,
+			gtk_marshal_BOOLEAN__POINTER,
 			GTK_TYPE_BOOL, 1,
 			GTK_TYPE_STRING);
     gnome_selector_signals [ADD_FILE_SIGNAL] =
@@ -286,7 +254,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_file),
-			gtk_marshal_NONE__POINTER_INT,
+			gtk_marshal_VOID__POINTER_INT,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL] =
@@ -295,7 +263,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_file_default),
-			gtk_marshal_NONE__POINTER_INT,
+			gtk_marshal_VOID__POINTER_INT,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [CHECK_DIRECTORY_SIGNAL] =
@@ -304,7 +272,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   check_directory),
-			gtk_marshal_BOOL__POINTER,
+			gtk_marshal_BOOLEAN__POINTER,
 			GTK_TYPE_BOOL, 1,
 			GTK_TYPE_STRING);
     gnome_selector_signals [ADD_DIRECTORY_SIGNAL] =
@@ -313,7 +281,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_directory),
-			gtk_marshal_NONE__POINTER_INT,
+			gtk_marshal_VOID__POINTER_INT,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [ADD_DIRECTORY_DEFAULT_SIGNAL] =
@@ -322,7 +290,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_directory_default),
-			gtk_marshal_NONE__POINTER_INT,
+			gtk_marshal_VOID__POINTER_INT,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [UPDATE_FILE_LIST_SIGNAL] =
@@ -340,7 +308,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   set_selection_mode),
-			gtk_marshal_NONE__INT,
+			gtk_marshal_VOID__INT,
 			GTK_TYPE_NONE,
 			1, GTK_TYPE_INT);
     gnome_selector_signals [GET_SELECTION_SIGNAL] =
@@ -349,7 +317,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   get_selection),
-			gtk_marshal_POINTER__NONE,
+			gtk_marshal_POINTER__VOID,
 			GTK_TYPE_POINTER,
 			0);
     gnome_selector_signals [SELECTION_CHANGED_SIGNAL] =
@@ -367,7 +335,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   get_entry_text),
-			gtk_marshal_POINTER__NONE,
+			gtk_marshal_POINTER__VOID,
 			GTK_TYPE_POINTER,
 			0);
     gnome_selector_signals [SET_ENTRY_TEXT_SIGNAL] =
@@ -376,7 +344,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   set_entry_text),
-			gtk_marshal_NONE__POINTER,
+			gtk_marshal_VOID__POINTER,
 			GTK_TYPE_NONE,
 			1,
 			GTK_TYPE_STRING);
@@ -386,7 +354,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   activate_entry),
-			gtk_marshal_NONE__NONE,
+			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE,
 			0);
     gnome_selector_signals [HISTORY_CHANGED_SIGNAL] =
@@ -395,7 +363,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   history_changed),
-			gtk_marshal_NONE__NONE,
+			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE,
 			0);
     gnome_selector_signals [GET_FILE_LIST_SIGNAL] =
@@ -404,7 +372,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   get_file_list),
-			gtk_marshal_POINTER__INT_INT,
+			gnome_marshal_POINTER__INT_INT,
 			GTK_TYPE_POINTER,
 			2, GTK_TYPE_BOOL, GTK_TYPE_BOOL);
     gnome_selector_signals [DO_ADD_FILE_SIGNAL] =
@@ -413,7 +381,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   do_add_file),
-			gtk_marshal_NONE__INT_POINTER,
+			gnome_marshal_VOID__INT_POINTER,
 			GTK_TYPE_NONE,
 			2, GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [DO_ADD_FILE_DEFAULT_SIGNAL] =
@@ -422,7 +390,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   do_add_file_default),
-			gtk_marshal_NONE__INT_POINTER,
+			gnome_marshal_VOID__INT_POINTER,
 			GTK_TYPE_NONE,
 			2, GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [DO_ADD_DIRECTORY_SIGNAL] =
@@ -431,7 +399,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   do_add_directory),
-			gtk_marshal_NONE__INT_POINTER,
+			gnome_marshal_VOID__INT_POINTER,
 			GTK_TYPE_NONE,
 			2, GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [DO_ADD_DIRECTORY_DEFAULT_SIGNAL] =
@@ -440,7 +408,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   do_add_directory_default),
-			gtk_marshal_NONE__INT_POINTER,
+			gnome_marshal_VOID__INT_POINTER,
 			GTK_TYPE_NONE,
 			2, GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [STOP_LOADING_SIGNAL] =
@@ -479,8 +447,9 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 }
 
 static void
-gnome_selector_set_param (GObject *object, guint param_id, GValue *value,
-			  GParamSpec *pspec, const gchar *trailer)
+gnome_selector_set_param (GObject *object, guint param_id,
+			  const GValue *value, GParamSpec *pspec,
+			  const gchar *trailer)
 {
     GnomeSelector *selector;
 

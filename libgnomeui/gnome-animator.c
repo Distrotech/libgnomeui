@@ -79,7 +79,7 @@ static void destroy (GtkObject * object);
 static void finalize (GObject * object);
 static void set_param (GObject * object, 
 		       guint param_id,
-		       GValue * value,
+		       const GValue * value,
 		       GParamSpec * pspec,
 		       const gchar * trailer);
 static void get_param (GObject * object,
@@ -252,7 +252,7 @@ finalize (GObject * object)
 static void
 set_param (GObject * object,
 	   guint param_id,
-	   GValue * value,
+	   const GValue * value,
 	   GParamSpec * pspec,
 	   const gchar * trailer)
 {

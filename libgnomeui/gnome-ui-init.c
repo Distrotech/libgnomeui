@@ -403,10 +403,17 @@ libgnomeui_pixbuf_image_loader(GdkWindow   *window,
 	GdkPixmap *retval = NULL;
         GdkBitmap *mask = NULL;
         GdkPixbuf *pixbuf;
+        GError *error;
 
         /* FIXME we are ignoring colormap and transparent color */
         
-        pixbuf = gdk_pixbuf_new_from_file(filename);
+        error = NULL;
+        pixbuf = gdk_pixbuf_new_from_file(filename, &error);
+        if (error != NULL) {
+                g_warning (G_STRLOC ": cannot load %s: %s", filename,
+                           error->message);
+                g_error_free (error);
+        }
 
         if (pixbuf == NULL)
                 return NULL;
@@ -502,7 +509,7 @@ static void libgnomeui_segv_handle(int signum)
 	in_segv--;
 }
 
-#warning "Solve the sound events situation"
+/* #warning "Solve the sound events situation" */
 
 /* backwards compat */
 int gnome_init_with_popt_table(const char *app_id,

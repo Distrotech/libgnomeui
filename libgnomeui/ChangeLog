@@ -1,3 +1,33 @@
+2000-12-01  Martin Baulig  <baulig@suse.de>
+
+	A bunch of changes to make if work with the latest libraries
+	again; some of them contain FIXMEs so if someone is feeling boring
+	sometimes ....
+
+	* gnomemarshal.list, gnomemarshal-main.c: New files.
+	* libgnomeuiP.h: New file.
+
+	- removed all signal marshalling functions and use the new
+	glib-genmarshal tool to autogen them.
+
+	- gdk_pixbuf_new_from_file() now takes an additional GError **
+	argument [FIXME: We should find a good way to deal with such
+	error conditions].
+
+	- the GObject's "set_param" signal has a changed prototype; it now
+	takes a `const GConfValue *' instead of a `GConfValue *'.
+
+	- gnome_client_notify_add() - the prototype of the callback function
+	has changed.
+
+	- GtkEditable has changed a lot; I #ifdef'ed most of this stuff out,
+	someone with a clue must have a look at this.
+
+	* gnome-boxed.defs (GdkImlibImage): Removed.
+	(GnomeCanvasPoints): Added copy/free functions.
+
+	* maketypes.awk, gnometypes.c: Merged the boxed stuff from GTK+.
+
 Sat Nov 04 22:14:02 2000  George Lebl <jirka@5z.com>
 
 	* merge some patches from stable, here are the entries:
