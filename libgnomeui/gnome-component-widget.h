@@ -84,6 +84,9 @@ gnome_selector_client_construct_from_objref (GnomeSelectorClient   *client,
                                              GNOME_Selector         corba_selector,
                                              Bonobo_UIContainer     uic);
 
+GNOME_Selector
+gnome_selector_client_get_selector          (GnomeSelectorClient   *client);
+
 /* If the entry widget is derived from GtkEditable, then we can use this
  * function to send an "activate" signal to it. */
 void

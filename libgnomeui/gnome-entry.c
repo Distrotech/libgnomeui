@@ -255,7 +255,7 @@ activate_entry_handler (GnomeSelector *selector, GnomeEntry *gentry)
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
 	text = gtk_entry_get_text (GTK_ENTRY (gentry->_priv->entry));
-	gnome_selector_prepend_history (selector, TRUE, text);
+	gnome_selector_prepend_history (selector, text);
 }
 
 static void

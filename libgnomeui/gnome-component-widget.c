@@ -709,3 +709,12 @@ gnome_selector_client_add_uri (GnomeSelectorClient  *client,
     GNOME_Selector_addURI (client->_priv->selector, uri, position, list_id, async_data, &ev);
     CORBA_exception_free (&ev);
 }
+
+GNOME_Selector
+gnome_selector_client_get_selector (GnomeSelectorClient *client)
+{
+    g_return_val_if_fail (client != NULL, CORBA_OBJECT_NIL);
+    g_return_val_if_fail (GNOME_IS_SELECTOR_CLIENT (client), CORBA_OBJECT_NIL);
+
+    return client->_priv->selector;
+}

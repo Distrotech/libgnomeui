@@ -1,6 +1,15 @@
 2001-06-01  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-client.c
+	(gnome_selector_client_get_selector): New function.
+
+	* gnome-selector-component.c
+	(activate_entry_handler): Removed, don't override this.
+	(do_construct_handler): Hook into the selector's "history_changed" signal.
+
+2001-06-01  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector-client.c
 	(gnome_selector_client_get_entry_text, gnome_selector_client_set_entry_text):
 	Removed, use the PropertyBag.
 
