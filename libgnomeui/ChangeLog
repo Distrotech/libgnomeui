@@ -1,6 +1,12 @@
 1998-10-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gnome-icon-item.c (iti_realize): Remove unused Window
+	* gnome-icon-item.c (iti_bounds): Realize the item if we are asked
+	for the bounds before realization.  Federico, this fixes the
+	problem you had without having to connect to the realize signal
+	(which should be very expensive in terms of memory use for every
+	icon). 
+
+	(iti_realize): Remove unused Window
 	parameter. 
 
 Mon Oct 26 16:53:04 1998  Owen Taylor  <otaylor@redhat.com>

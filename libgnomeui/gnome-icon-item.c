@@ -685,6 +685,12 @@ iti_event (GnomeCanvasItem *item, GdkEvent *event)
 static void
 iti_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
+	Iti *iti = ITI (item);
+
+	/* If we have not been realized, realize us */
+	if (iti->ti == NULL)
+		iti_realize (item);
+	
 	*x1 = item->x1;
 	*y1 = item->y1;
 	*x2 = item->x2;
