@@ -1,3 +1,15 @@
+1998-12-12  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (set_page_by_widget): don't touch GtkNotebook's
+	members, only use public functions.
+	(book_create): don't explicitly realize GtkNotebook.
+	(app_create): likewise for GnomeApps. this probably remained from
+	the old DnD protocol.
+	(app_set_view): only queue a resize for the parent menushell once.
+	(gnome_mdi_set_tab_pos): removed. this should only be set on a
+	per-user (via ui-properties) and not per-app basis.
+	* gnome-mdi.h (gnome_mdi_set_tab_pos): removed.
+
 Fri Dec 11 21:45:32 1998 Gregory McLean <gregm@comstar.net>
 	
 	* *.[c|h] : FSF address update.. (Had the old Mass Ave addy)

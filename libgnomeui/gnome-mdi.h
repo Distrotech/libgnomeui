@@ -128,8 +128,6 @@ GtkObject     *gnome_mdi_new                (gchar *, gchar *);
 
 void          gnome_mdi_set_mode            (GnomeMDI *, GnomeMDIMode);
 
-void          gnome_mdi_set_tab_pos         (GnomeMDI *, GtkPositionType);
-
 /* setting the menu and toolbar stuff */
 void          gnome_mdi_set_menubar_template(GnomeMDI *, GnomeUIInfo *);
 void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *);

@@ -43,17 +43,17 @@
 #include <stdio.h>
 #include <string.h>
 
+/* #define GNOME_ENABLE_DEBUG */
+
 static void            gnome_mdi_class_init     (GnomeMDIClass  *);
 static void            gnome_mdi_init           (GnomeMDI *);
 static void            gnome_mdi_destroy        (GtkObject *);
-static void            set_active_view          (GnomeMDI *, GtkWidget *);
-
-static GtkWidget       *find_item_by_child      (GtkMenuShell *, GnomeMDIChild *);
 
 static void            child_list_menu_create     (GnomeMDI *, GnomeApp *);
 static void            child_list_activated_cb    (GtkWidget *, GnomeMDI *);
 void                   child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
 void                   child_list_menu_add_item   (GnomeMDI *, GnomeMDIChild *);
+static GtkWidget       *find_item_by_child        (GtkMenuShell *, GnomeMDIChild *);
 
 static void            app_create               (GnomeMDI *);
 static void            app_destroy              (GnomeApp *);
@@ -61,9 +61,6 @@ static void            app_set_view             (GnomeMDI *, GnomeApp *, GtkWidg
 
 static gint            app_close_top            (GnomeApp *, GdkEventAny *, GnomeMDI *);
 static gint            app_close_book           (GnomeApp *, GdkEventAny *, GnomeMDI *);
-
-static void            set_page_by_widget       (GtkNotebook *, GtkWidget *);
-static GtkNotebookPage *find_page_by_widget     (GtkNotebook *, GtkWidget *);
 
 static GtkWidget       *book_create             (GnomeMDI *);
 static void            book_switch_page         (GtkNotebook *, GtkNotebookPage *,
@@ -75,18 +72,22 @@ static gint            book_button_press        (GtkWidget *widget, GdkEventButt
 static gint            book_button_release      (GtkWidget *widget, GdkEventButton *e,
 												 gpointer data);
 static void            book_add_view            (GtkNotebook *, GtkWidget *);
+static void            set_page_by_widget       (GtkNotebook *, GtkWidget *);
+static GtkNotebookPage *find_page_by_widget     (GtkNotebook *, GtkWidget *);
 
 static void            toplevel_focus           (GnomeApp *, GdkEventFocus *, GnomeMDI *);
 
 static void            top_add_view             (GnomeMDI *, GnomeMDIChild *, GtkWidget *);
+
+static void            set_active_view          (GnomeMDI *, GtkWidget *);
 
 static GnomeUIInfo     *copy_ui_info_tree       (const GnomeUIInfo *);
 static void            free_ui_info_tree        (GnomeUIInfo *);
 static gint            count_ui_info_items      (const GnomeUIInfo *);
 
 /* convenience functions that call child's "virtual" functions */
-static GList           *child_create_menus       (GnomeMDIChild *, GtkWidget *);
-static GtkWidget       *child_set_label          (GnomeMDIChild *, GtkWidget *);
+static GList           *child_create_menus      (GnomeMDIChild *, GtkWidget *);
+static GtkWidget       *child_set_label         (GnomeMDIChild *, GtkWidget *);
 
 /* keys for stuff that we'll assign to our GnomeApps */
 #define GNOME_MDI_TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
@@ -362,26 +363,15 @@ static void free_ui_info_tree (GnomeUIInfo *root)
 
 static void set_page_by_widget (GtkNotebook *book, GtkWidget *child)
 {
-	GList *page_node;
-	gint i = 0;
+	gint i;
 
 #ifdef GNOME_ENABLE_DEBUG
 	g_message("GnomeMDI: set_page_by_widget");
 #endif
 	
-	page_node = book->children;
-	while(page_node) {
-		if( ((GtkNotebookPage *)page_node->data)->child == child &&
-		    (GtkNotebookPage *)page_node->data != book->cur_page ) {
-			gtk_notebook_set_page(book, i);
-			return;
-		}
-		
-		i++;
-		page_node = g_list_next(page_node);
-	}
-	
-	return;
+	i = gtk_notebook_page_num(book, child);
+	if(i != gtk_notebook_get_current_page(book))
+		gtk_notebook_set_page(book, i);
 }
 
 static GtkNotebookPage *find_page_by_widget (GtkNotebook *book, GtkWidget *child)
@@ -520,14 +510,11 @@ void child_list_menu_add_item (GnomeMDI *mdi, GnomeMDIChild *child)
 static gint book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 {
 	GnomeMDI *mdi;
-	guint32 time;
 
 	mdi = GNOME_MDI(data);
 
 	if(!drag_cursor)
 		drag_cursor = gdk_cursor_new(GDK_HAND2);
-
-	time = gdk_event_get_time((GdkEvent *)e);
 
 	if(e->window == widget->window) {
 		mdi->in_drag = TRUE;
@@ -535,7 +522,7 @@ static gint book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 		gdk_pointer_grab(widget->window, FALSE,
 						 GDK_POINTER_MOTION_MASK |
 						 GDK_BUTTON_RELEASE_MASK, NULL,
-						 drag_cursor, time);
+						 drag_cursor, GDK_CURRENT_TIME);
 		if(mdi->signal_id) {
 			gtk_signal_disconnect(GTK_OBJECT(widget), mdi->signal_id);
 			mdi->signal_id = 0;
@@ -578,7 +565,7 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 		GtkNotebook *old_book = GTK_NOTEBOOK(widget);
 
 		mdi->in_drag = FALSE;
-		gdk_pointer_ungrab(e->time);
+		gdk_pointer_ungrab(GDK_CURRENT_TIME);
 		gtk_grab_remove(widget);
 
 		window = gdk_window_at_pointer(&x, &y);
@@ -599,7 +586,7 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 				if(old_book->cur_page) {
 					view = old_book->cur_page->child;
 					gtk_container_remove(GTK_CONTAINER(old_book), view);
-		
+
 					book_add_view(GTK_NOTEBOOK(new_book), view);
 
 					app = gnome_mdi_get_app_from_view(view);
@@ -618,10 +605,10 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 			child = child->next;
 		}
 
-		/* they want us to create a new toplevel! */
 		if(g_list_length(old_book->children) == 1)
 			return FALSE;
-			
+
+		/* create a new toplevel */
 		if(old_book->cur_page) {
 			gint width, height;
 				
@@ -650,7 +637,6 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 	return FALSE;
 }
 
-
 static GtkWidget *book_create (GnomeMDI *mdi)
 {
 	GtkWidget *us, *rw;
@@ -661,7 +647,7 @@ static GtkWidget *book_create (GnomeMDI *mdi)
 	
 	gnome_app_set_contents(mdi->active_window, us);
 	
-	gtk_widget_realize(us);
+	/* gtk_widget_realize(us); */
 	
 	gtk_widget_add_events(us, GDK_BUTTON1_MOTION_MASK);
 
@@ -734,6 +720,7 @@ static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 	gint handler_ret = TRUE;
 	
 	if(g_list_length(mdi->windows) == 1) {
+#if 0
 		/* since this is the last window, we only close it and destroy the MDI if
 		   ALL the remaining children can be closed, which we check in advance */
 		child_node = mdi->children;
@@ -747,6 +734,9 @@ static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 		}
 		
 		gnome_mdi_remove_all(mdi, TRUE);
+#else
+		gnome_mdi_remove_all(mdi, FALSE);
+#endif
 		mdi->windows = g_list_remove(mdi->windows, app);
 		gtk_widget_destroy(GTK_WIDGET(app));
 		
@@ -853,10 +843,11 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 	}
 	ui_info = NULL;
 	
+	parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
+
 	/* remove old child-specific menus */
 	items = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY));
 	if( items > 0 ) {
-		parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
 		if(parent != NULL) {
 			/* remove items */
 			children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
@@ -865,9 +856,9 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 				children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
 				items--;
 			}
+
+			/* gtk_widget_queue_resize(parent); */
 		}
-		
-		gtk_widget_queue_resize(parent);
 	}
 	
 	if(view) {
@@ -892,13 +883,13 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 			gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
 			gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
 			gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(count_ui_info_items(ui_info)));
-			gtk_widget_queue_resize(app->menubar);
+			/* gtk_widget_queue_resize(app->menubar); */
 		}
 		else {
 			menu_list = child_create_menus(child, view);
 			
 			if(menu_list) {
-				parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
+				/* parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos); */
 				
 				if(parent) {
 					GList *menu;
@@ -914,7 +905,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 					
 					gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
 					
-					gtk_widget_queue_resize(parent);
+					/* gtk_widget_queue_resize(parent); */
 				}
 
 				g_list_free(menu_list);
@@ -925,7 +916,10 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 		gtk_window_set_title(GTK_WINDOW(app), mdi->title);
 		gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, NULL);
 	}
-	
+
+	if(parent)
+		gtk_widget_queue_resize(parent);
+
 	set_active_view(mdi, view);
 }
 
@@ -965,7 +959,7 @@ static void app_create (GnomeMDI *mdi)
   
 	gtk_window_set_policy(GTK_WINDOW(window), TRUE, TRUE, FALSE);
   
-	gtk_widget_realize(window);
+	/* gtk_widget_realize(window); */
 
 	mdi->windows = g_list_append(mdi->windows, window);
 
@@ -1524,7 +1518,7 @@ GnomeMDIChild *gnome_mdi_find_child (GnomeMDI *mdi, gchar *name)
  *
  * Description:
  * Sets the MDI mode to mode. Possible values are %GNOME_MDI_TOPLEVEL,
- * %GNOME_MDI_NOTEBOOK and %GNOME_MDI_MODAL.
+ * %GNOME_MDI_NOTEBOOK, %GNOME_MDI_MODAL and %GNOME_MDI_DEFAULT.
  **/
 void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 {
@@ -1552,13 +1546,13 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 
 			gtk_container_remove(GTK_CONTAINER(view->parent), view);
 
-			view_node = g_list_next(view_node);
+			view_node = view_node->next;
 
 			/* if we are to change mode to MODAL, destroy all views except the active one */
 			if( (mode == GNOME_MDI_MODAL) && (view != mdi->active_view) )
 				gnome_mdi_child_remove_view(child, view);
 		}
-		child_node = g_list_next(child_node);
+		child_node = child_node->next;
 	}
 
 	/* remove all GnomeApps */
@@ -1606,9 +1600,11 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 				app_set_view(mdi, mdi->active_window, view);
 			}
 
-			view_node = g_list_next(view_node);
+			gtk_widget_set_usize(view, view->allocation.width, view->allocation.height);
+
+			view_node = view_node->next;
 		}
-		child_node = g_list_next(child_node);
+		child_node = child_node->next;
 	}
 }
 
@@ -1848,37 +1844,6 @@ GtkWidget *gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app)
 		return GTK_NOTEBOOK(app->contents)->cur_page->child;
 	else
 		return NULL;
-}
-
-/**
- * gnome_mdi_set_tab_pos:
- * @mdi: A pointer to a GnomeMDI object.
- * @pos: Indicates where the notebook tabs should be positioned.
- * 
- * Description:
- * Sets the desired position of MDI notebook tabs to @pos, which can be one
- * %GTK_POS_TOP, %GTK_POS_LEFT, %GTK_POS_BOTTOM or %GTK_POS_RIGHT.
- **/
-void gnome_mdi_set_tab_pos (GnomeMDI *mdi, GtkPositionType pos)
-{
-	GList *app_node;
-
-	g_return_if_fail(mdi != NULL);
-	g_return_if_fail(GNOME_IS_MDI(mdi));
-
-	if(mdi->tab_pos == pos)
-		return;
-
-	mdi->tab_pos = pos;
-
-	if(mdi->mode != GNOME_MDI_NOTEBOOK)
-		return;
-
-	app_node = mdi->windows;
-	while(app_node) {
-		gtk_notebook_set_tab_pos(GTK_NOTEBOOK(GNOME_APP(app_node->data)->contents), pos);
-		app_node = g_list_next(app_node);
-	}
 }
 
 /**
