@@ -28,6 +28,8 @@
     GTK_TYPE_ENUM, _gnome_icon_list_mode_values },
   { "GnomeMDIMode", &GTK_TYPE_GNOME_MDI_MODE,
     GTK_TYPE_ENUM, _gnome_mdi_mode_values },
+  { "GnomePropertyRequest", &GTK_TYPE_GNOME_PROPERTY_REQUEST,
+    GTK_TYPE_ENUM, _gnome_property_request_values },
   { "GnomeStockPixmapType", &GTK_TYPE_GNOME_STOCK_PIXMAP_TYPE,
     GTK_TYPE_ENUM, _gnome_stock_pixmap_type_values },
   { "GnomePreferencesType", &GTK_TYPE_GNOME_PREFERENCES_TYPE,

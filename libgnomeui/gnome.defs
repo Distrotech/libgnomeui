@@ -31,7 +31,6 @@
    (subtree GNOME_APP_UI_SUBTREE)
    (separator GNOME_APP_UI_SEPARATOR)
    (help GNOME_APP_UI_HELP)
-   (justify-right GNOME_APP_UI_JUSTIFY_RIGHT)
    (builder-data GNOME_APP_UI_BUILDER_DATA))
 
 (define-enum GnomeUIPixmapType
@@ -96,6 +95,14 @@
    (modal GNOME_MDI_MODAL)
    (default-mode GNOME_MDI_DEFAULT_MODE)
    (redraw GNOME_MDI_REDRAW))
+
+; enumerations from "gnome-properties.h"
+
+(define-enum GnomePropertyRequest
+   (read GNOME_PROPERTY_READ)
+   (write GNOME_PROPERTY_WRITE)
+   (apply GNOME_PROPERTY_APPLY)
+   (setup GNOME_PROPERTY_SETUP))
 
 ; enumerations from "gnome-stock.h"
 

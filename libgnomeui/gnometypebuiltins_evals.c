@@ -27,7 +27,6 @@ static const GtkEnumValue _gnome_ui_info_type_values[] = {
   { GNOME_APP_UI_SUBTREE, "GNOME_APP_UI_SUBTREE", "subtree" },
   { GNOME_APP_UI_SEPARATOR, "GNOME_APP_UI_SEPARATOR", "separator" },
   { GNOME_APP_UI_HELP, "GNOME_APP_UI_HELP", "help" },
-  { GNOME_APP_UI_JUSTIFY_RIGHT, "GNOME_APP_UI_JUSTIFY_RIGHT", "justify-right" },
   { GNOME_APP_UI_BUILDER_DATA, "GNOME_APP_UI_BUILDER_DATA", "builder-data" },
   { 0, NULL, NULL }
 };
@@ -92,6 +91,13 @@ static const GtkEnumValue _gnome_mdi_mode_values[] = {
   { GNOME_MDI_MODAL, "GNOME_MDI_MODAL", "modal" },
   { GNOME_MDI_DEFAULT_MODE, "GNOME_MDI_DEFAULT_MODE", "default-mode" },
   { GNOME_MDI_REDRAW, "GNOME_MDI_REDRAW", "redraw" },
+  { 0, NULL, NULL }
+};
+static const GtkEnumValue _gnome_property_request_values[] = {
+  { GNOME_PROPERTY_READ, "GNOME_PROPERTY_READ", "read" },
+  { GNOME_PROPERTY_WRITE, "GNOME_PROPERTY_WRITE", "write" },
+  { GNOME_PROPERTY_APPLY, "GNOME_PROPERTY_APPLY", "apply" },
+  { GNOME_PROPERTY_SETUP, "GNOME_PROPERTY_SETUP", "setup" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_stock_pixmap_type_values[] = {

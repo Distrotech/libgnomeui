@@ -1207,34 +1207,13 @@ gil_get_icons_in_region (Gil *gil, double x1, double y1, double x2, double y2)
 	return icons;
 }
 
-static gint
-scroll_timeout (gpointer data)
+static void
+gil_mark_region (Gil *gil, GdkEventMotion *event, double x, double y)
 {
-	Gil *gil = data;
-
-	if (gil->adj->value + gil->value_diff > gil->adj->upper)
-		return TRUE;
-	
-	gtk_adjustment_set_value (gil->adj, gil->adj->value + gil->value_diff);
-
-	return TRUE;
-}
-
-static gint
-gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
-{
-	Gil *gil = GIL (widget);
-	double x1, x2, y1, y2, x, y;
 	GList *icons, *l;
+	double x1, x2, y1, y2;
 	int idx;
 	
-	if (!gil->sel_rect)
-		return FALSE;
-
-	gnome_canvas_window_to_world (
-		GNOME_CANVAS (gil),
-		event->x, event->y, &x, &y);
-
 	x1 = MIN (gil->sel_start_x, x);
 	y1 = MIN (gil->sel_start_y, y);
 	x2 = MAX (gil->sel_start_x, x);
@@ -1280,7 +1259,43 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 		}
 	}
 	g_list_free (icons);
+}
 
+static gint
+scroll_timeout (gpointer data)
+{
+	Gil *gil = data;
+	double x, y;
+
+	if (gil->adj->value + gil->value_diff > gil->adj->upper)
+		return TRUE;
+	
+	gtk_adjustment_set_value (gil->adj, gil->adj->value + gil->value_diff);
+
+	gnome_canvas_window_to_world (
+		gil,
+		gil->event_last_x, gil->event_last_y,
+		&x, &y);
+	gil_mark_region (gil, NULL, x, y);
+
+	return TRUE;
+}
+
+static gint
+gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
+{
+	Gil *gil = GIL (widget);
+	double x, y;
+	
+	if (!gil->sel_rect)
+		return FALSE;
+
+	gnome_canvas_window_to_world (
+		GNOME_CANVAS (gil),
+		event->x, event->y, &x, &y);
+
+	gil_mark_region (gil, event, x, y);
+	
 	/*
 	 * If we are out of bounds, schedule a timeout that will do
 	 * the scrolling
@@ -1296,6 +1311,9 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 		else
 			gil->value_diff = event->y - widget->allocation.height;
 
+		gil->event_last_x = event->x;
+		gil->event_last_y = event->y;
+		
 		/*
 		 * Make the steppings be relative to the mouse distance
 		 * from the canvas.  Also notice the timeout above is small

@@ -1,3 +1,10 @@
+1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gil_mark_region): New routine.  Expand the
+	selection on the timeout handler as well.  This makes the banding
+	selection in the GnomeIconList much nicer when the mouse is
+	outside of the window.
+
 1998-12-01  Justin Maurer  <justin@openprojects.net>
 
 	* gnome-paper-selector.[ch]: i f'ed up. checking in old versions. 

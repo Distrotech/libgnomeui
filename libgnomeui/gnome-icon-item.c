@@ -1,12 +1,11 @@
 /*
- * text-item.c: implements the text display and editing Canvas Item
- * for the Gnome Icon List.
+ * text-item.c: implements a wrapping text display and editing Canvas
+ * Item for the Gnome Icon List.  
  *
  * Author:
  *   Miguel de Icaza (miguel@gnu.org).
  *
- * Fixme: Provide a ref-count fontname caching like thing.
- */
+ * Fixme: Provide a ref-count fontname caching like thing.  */
 #include <gnome.h>
 #include <gdk/gdkkeysyms.h>
 #include <libgnomeui/gnome-icon-item.h>
@@ -176,7 +175,7 @@ layout_text (Iti *iti)
 }
 
 /*
- * iti_stop_editing
+ * iti_stop_editing:
  *
  * Puts the Iti on the editing = FALSE state
  */
@@ -791,6 +790,15 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 	gtk_object_class_add_signals (object_class, iti_signals, LAST_SIGNAL);
 }
 
+/**
+ * gnome_icon_text_item_setxy:
+ * @iti:  The GnomeIconTextItem object
+ * @x: canvas x position
+ * @y: canvas y position
+ *
+ * Puts the GnomeIconTextItem in the canvas location specified by
+ * the @x and @y parameters
+ */
 void
 gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
 {
@@ -805,6 +813,18 @@ gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
 	iti_queue_redraw (iti);
 }
 
+/**
+ * gnome_icon_text_item_configure:
+ * @iti:   The GnomeIconTextItem object
+ * @x:     Canvas position to place the object
+ * @y:     Canvas position to place the object
+ * @width: The allowed width for this object, in pixels
+ * @fontname: Font that should be used to display the text
+ * @text:   The text that is going to be displayed.
+ * @is_editable: Whether editing is enabled for this item
+ *
+ * This routine is used to configure a GnomeIconTextItem.
+ */
 void
 gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 				int width, const char *fontname,
@@ -838,6 +858,15 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 	}
 }
 
+/**
+ * gnome_icon_text_item_select:
+ * @iti: The GnomeIconTextItem object
+ * @sel: boolean flag, if true the text should be displayed as selected
+ *       otherwise not
+ *
+ * This is used to control the way the selection is displayed for a 
+ * GnomeIconTextItem object
+ */
 void
 gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
 {
@@ -855,6 +884,12 @@ gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
 	iti_queue_redraw (iti);
 }
 
+/**
+ * gnome_icon_text_item_get_text:
+ * @iti: The GnomeIconTextItem object
+ *
+ * Returns the text contained to a GnomeIconTextItem
+ */
 char *
 gnome_icon_text_item_get_text (GnomeIconTextItem *iti)
 {

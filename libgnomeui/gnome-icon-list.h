@@ -77,6 +77,8 @@ typedef struct {
 	/* Timed scrolling */
 	int timer_tag;		/* timeout tag for autoscrolling */
 	int value_diff;		/* change the adjustment value by this */
+	gdouble event_last_x;	/* The X position last time we read it */
+	gdouble event_last_y;	/* The Y position last time we read it */
 	
 	/* Opaque to the user */
 	GList *lines;
@@ -84,6 +86,7 @@ typedef struct {
 	/* Mouse band selection state */
 	double sel_start_x;
 	double sel_start_y;
+
 	GnomeCanvasItem *sel_rect;
 } GnomeIconList;
 
