@@ -277,14 +277,15 @@ gnome_druid_page_start_new (void)
 }
 /**
  * gnome_druid_page_start_new_with_vals:
- * @title: 
- * @text: 
- * @logo: 
- * @watermark: 
+ * @title: The title.
+ * @text: The introduction text.
+ * @logo: The logo in the upper right corner.
+ * @watermark: The watermark on the left.
  * 
+ * This will create a new GNOME Druid start page, with the values
+ * given.  It is acceptable for any of them to be %NULL.
  * 
- * 
- * Return value: 
+ * Return value: GtkWidget pointer to new GnomeDruidPageStart.
  **/
 GtkWidget *
 gnome_druid_page_start_new_with_vals (gchar *title, gchar* text, GdkImlibImage *logo, GdkImlibImage *watermark)
@@ -297,6 +298,16 @@ gnome_druid_page_start_new_with_vals (gchar *title, gchar* text, GdkImlibImage *
 	gnome_druid_page_start_construct (GNOME_DRUID_PAGE_START (retval));
 	return retval;
 }
+
+/**
+ * gnome_druid_page_start_set_bg_color:
+ * @druid_page_start: A DruidPageStart.
+ * @color: The new background color.
+ * 
+ * This will set the background color to be the @color.  You do not
+ * need to allocate the color, as the @druid_page_start will do it for
+ * you.
+ **/
 void
 gnome_druid_page_start_set_bg_color      (GnomeDruidPageStart *druid_page_start,
 					  GdkColor *color)
