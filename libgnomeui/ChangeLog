@@ -1,3 +1,17 @@
+2001-10-10  Havoc Pennington  <hp@redhat.com>
+
+	 Fix output of:
+	 nm -g -l .libs/libgnomeui-2.so | grep ' T ' | grep -v ' gnome_' |
+	 grep -v ' GNOME_'
+	
+	* gnome-stock-icons.c (gnome_stock_icons_init): renamed from 
+	init_gnome_stock_icons, to be in the right namespace.	
+	
+	* gnome-mdi.c (child_list_menu_remove_item):
+	(child_list_menu_add_item): rename with gnome_mdi prefix
+
+	* gnome-mdi-child.c: fixes for renames
+	
 2001-10-10  jacob berkman  <jacob@ximian.com>
 
 	* gnome-stock-icons.c (add_unsized): 

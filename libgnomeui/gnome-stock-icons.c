@@ -143,7 +143,7 @@ static GtkStockItem builtin_items [] =
 };
 
 void
-init_gnome_stock_icons (void)
+gnome_stock_icons_init (void)
 {
     static gboolean initialized = FALSE;
     GtkIconFactory *factory;

@@ -45,8 +45,8 @@ static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
 
 /* declare the functions from gnome-mdi.c that we need but are not public */
-void child_list_menu_remove_item (GnomeMDI *, GnomeMDIChild *);
-void child_list_menu_add_item    (GnomeMDI *, GnomeMDIChild *);
+void gnome_mdi_child_list_menu_remove_item (GnomeMDI *, GnomeMDIChild *);
+void gnome_mdi_child_list_menu_add_item    (GnomeMDI *, GnomeMDIChild *);
 
 GNOME_CLASS_BOILERPLATE (GnomeMDIChild, gnome_mdi_child,
 			 GtkObject, gtk_object, GTK_TYPE_OBJECT)
@@ -194,7 +194,7 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
 	gchar *old_name = mdi_child->name;
 
 	if(mdi_child->parent)
-		child_list_menu_remove_item(GNOME_MDI(mdi_child->parent), mdi_child);
+		gnome_mdi_child_list_menu_remove_item(GNOME_MDI(mdi_child->parent), mdi_child);
 
 	mdi_child->name = (gchar *)g_strdup(name);
 
@@ -202,7 +202,7 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
 		g_free(old_name);
 
 	if(mdi_child->parent) {
-		child_list_menu_add_item(GNOME_MDI(mdi_child->parent), mdi_child);
+		gnome_mdi_child_list_menu_add_item(GNOME_MDI(mdi_child->parent), mdi_child);
 		gnome_mdi_update_child(GNOME_MDI(mdi_child->parent), mdi_child);
 	}
 }

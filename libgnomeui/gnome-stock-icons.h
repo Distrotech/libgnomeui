@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-extern void init_gnome_stock_icons (void);
+extern void gnome_stock_icons_init (void);
 
 #define GNOME_STOCK_TIMER "gnome-stock-timer"
 #define GNOME_STOCK_TIMER_STOP "gnome-stock-timer-stop"

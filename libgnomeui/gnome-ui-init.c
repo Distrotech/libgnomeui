@@ -302,7 +302,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
         priv->constructed = TRUE;
 
-        init_gnome_stock_icons ();
+        gnome_stock_icons_init ();
 }
 
 static void
