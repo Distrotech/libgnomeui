@@ -1,3 +1,7 @@
+1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-geometry.c (get_number): Handle the case +-10.
+
 Thu Apr 30 00:48:54 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-less.h, gnome-less.c: Added simple widget to display a
