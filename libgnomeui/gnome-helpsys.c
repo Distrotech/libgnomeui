@@ -22,6 +22,7 @@
 #include "gnome-cursors.h"
 #include "gnome-dialog-util.h"
 #include <libgnome/gnomelib-init2.h>
+#include <gdk/gdkx.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -51,13 +52,10 @@ static void gnome_help_view_size_allocate (GtkWidget      *widget,
 static void gnome_help_view_select_help(GtkWidget *btn, GnomeHelpView *help_view);
 static void gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view);
 static char *gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id);
-static const char *gnome_help_view_find_widget_id(GnomeHelpView *help_view, GtkWidget *widget);
-static char *gnome_help_view_get_base_url(void);
 static void gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType type);
 static void gnome_help_view_set_style_popup(gpointer dummy, GnomeHelpView *help_view);
 static void gnome_help_view_set_style_embedded(gpointer dummy, GnomeHelpView *help_view);
 static void gnome_help_view_set_style_browser(gpointer dummy, GnomeHelpView *help_view);
-static gint popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data); 
 static gint gnome_help_view_process_event(GtkWidget *btn, GdkEvent *event, GnomeHelpView *help_view);
 
 static GnomeUIInfo popup_style_menu_items[] = {
@@ -97,6 +95,8 @@ gnome_help_view_get_type(void)
 }
 
 static GtkObjectClass *parent_class = NULL;
+
+static GdkAtom atom_explain_query = 0, atom_explain_request = 0, atom_explain_query_reply = 0;
 
 static void
 gnome_help_view_class_init (GnomeHelpViewClass *class)
@@ -141,11 +141,17 @@ gnome_help_view_init (GnomeHelpView *help_view)
 						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_PREFERENCES),
 						gnome_help_view_select_style, help_view);
 
+  help_view->evbox = gtk_event_box_new();
+  gtk_widget_add_events(help_view->evbox,
+			GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK|GDK_POINTER_MOTION_MASK|GDK_KEY_PRESS_MASK);
+
   gtk_box_pack_start(GTK_BOX(help_view), help_view->toolbar, TRUE, TRUE, GNOME_PAD_SMALL);
+  gtk_box_pack_start(GTK_BOX(help_view), help_view->evbox, FALSE, FALSE, 0);
 
   gtk_widget_show(help_view->toolbar);
   gtk_widget_show(help_view->btn_style);
   gtk_widget_show(help_view->btn_help);
+  gtk_widget_show(help_view->evbox);
 
   gnome_help_view_set_style(help_view, help_view->app_style, help_view->app_style_priority);
   gnome_help_view_set_orientation(help_view, GTK_ORIENTATION_HORIZONTAL);
@@ -731,22 +737,59 @@ gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation orienta
     }
 }
 
+/* The wonderful what-is-this protocol:
+   Source:
+     _EXPLAIN_QUERY - ask if help is supported
+     _EXPLAIN_REQUEST - user has requested for an explanation
+
+   Target:
+     _EXPLAIN_QUERY_REPLY - affirm that help is supported
+ */
+typedef struct {
+  GnomeHelpView *help_view;
+
+  Window cur_toplevel;
+  gboolean sent_query : 1, got_reply : 1;
+} SourceState;
+
 static GdkCursor *choose_cursor = NULL;
 
+#if 0
+static GdkFilterReturn
+gnome_help_view_process_event(GdkXEvent *xevent, GdkEvent *event, GnomeHelpView *help_view)
+{
+  XEvent *xev = (XEvent *)xevent;
+
+  gtk_signal_emit_stop_by_name(GTK_OBJECT(btn), "event");
+
+  switch(xev->type)
+    {
+    case ClientMessage:
+      if(!atom_explain_query_reply)
+	atom_explain_query_reply = gdk_atom_intern("_EXPLAIN_QUERY_REPLY", FALSE);
+      break;
+    case MotionNotify:
+      break;
+    case ButtonPress:
+      break;
+    case ButtonRelease:
+      break;
+    }
+}
+#else
 static gint
-gnome_help_view_process_event(GtkWidget *btn, GdkEvent *event, GnomeHelpView *help_view)
+gnome_help_view_process_event(GtkWidget *evbox, GdkEvent *event, GnomeHelpView *help_view)
 {
   GdkEventButton *evb;
   GtkWidget *chosen_widget;
 
-  gtk_signal_emit_stop_by_name(GTK_OBJECT(btn), "event");
-
   if(event->type != GDK_BUTTON_RELEASE)
     return TRUE;
-
+  
   evb = (GdkEventButton *)event;
-  gtk_signal_disconnect_by_func(GTK_OBJECT(btn), GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
-  gtk_grab_remove(btn);
+  gtk_signal_disconnect_by_func(GTK_OBJECT(help_view->evbox), GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
+  gtk_signal_emit_stop_by_name(GTK_OBJECT(evbox), "event");
+  gtk_grab_remove(help_view->evbox);
   gdk_pointer_ungrab(evb->time);
   gdk_flush();
 
@@ -754,24 +797,41 @@ gnome_help_view_process_event(GtkWidget *btn, GdkEvent *event, GnomeHelpView *he
     {
       gdk_window_get_user_data(evb->window, (gpointer *)&chosen_widget);
 
-      if(chosen_widget)
+      if(help_view->btn_help && (chosen_widget == help_view->btn_help))
+	/* do nothing - they canceled out of it */;
+      else if(chosen_widget)
 	gnome_help_view_show_help_for(help_view, chosen_widget);
-      else if(chosen_widget != help_view->btn_help)
+      else
 	gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
-				 gtk_widget_get_toplevel(help_view->btn_help));
+				 GTK_WIDGET(gtk_widget_get_toplevel(help_view->btn_help)));
     }
 
   return TRUE;
+#endif
 }
 
 static void
 gnome_help_view_select_help(GtkWidget *btn, GnomeHelpView *help_view)
 {
+  g_return_if_fail(!help_view->evbox->window);
+
+#if 0
+  SourceState *ss;
+
+  ss = g_new0(SourceState, 1);
+  ss->help_view = help_view;
+  ss->cur_toplevel = None;
+
+  gdk_window_add_filter(help_view->evbox->window, gnome_help_view_process_event, ss);
+#else
+  gtk_signal_connect(GTK_OBJECT(help_view->evbox), "event", GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
+#endif
   if(!choose_cursor)
     choose_cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
-  gtk_signal_connect(GTK_OBJECT(btn), "event", gnome_help_view_process_event, help_view);
-  gtk_grab_add(btn);
-  gdk_pointer_grab(btn->window, TRUE, GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK, NULL, choose_cursor, GDK_CURRENT_TIME);
+  gtk_grab_add(help_view->evbox);
+  gdk_pointer_grab(help_view->evbox->window, TRUE,
+		   GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK|GDK_KEY_PRESS_MASK|GDK_POINTER_MOTION_MASK,
+		   NULL, choose_cursor, GDK_CURRENT_TIME);
 }
 
 static void

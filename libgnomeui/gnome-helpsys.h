@@ -27,7 +27,7 @@ struct _GnomeHelpView {
   GtkBox parent_object;
 
   GtkWidget *toplevel;
-  GtkWidget *toolbar, *content, *btn_help, *btn_style;
+  GtkWidget *toolbar, *content, *btn_help, *btn_style, *evbox;
 
   GnomeURLDisplayContext url_ctx;
 
