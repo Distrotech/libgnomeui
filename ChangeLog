@@ -1,3 +1,10 @@
+2002-10-15  Anders Carlsson  <andersca@gnu.org>
+
+	* configure.in (LIBGNOMEUI_COMPONENTS_CFLAGS): Require pango 1.1.2
+
+	* libgnomeui/gnome-icon-item.c (update_pango_layout): Use 
+	PANGO_WRAP_WORD_CHAR.
+
 2002-10-14  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Release libgnomeui 2.1.1

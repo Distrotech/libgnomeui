@@ -149,7 +149,7 @@ update_pango_layout (GnomeIconTextItem *iti)
 		text = iti->text;
 	}
 
-	pango_layout_set_wrap (priv->layout, PANGO_WRAP_WORD);
+	pango_layout_set_wrap (priv->layout, PANGO_WRAP_WORD_CHAR);
 	pango_layout_set_text (priv->layout, text, strlen (text));
 	pango_layout_set_width (priv->layout, iti->width * PANGO_SCALE);
 
@@ -159,11 +159,6 @@ update_pango_layout (GnomeIconTextItem *iti)
 	 */
 
 	pango_layout_get_pixel_extents (iti->_priv->layout, NULL, &bounds);
-
-	if (bounds.width > iti->width) {
-		pango_layout_set_wrap (priv->layout, PANGO_WRAP_CHAR);
-		pango_layout_get_pixel_extents (iti->_priv->layout, NULL, &bounds);
-	}
 
 	priv->layout_width = bounds.width;
 	priv->layout_height = bounds.height;
