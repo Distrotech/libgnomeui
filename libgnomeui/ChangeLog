@@ -1,3 +1,22 @@
+1998-11-24  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app-helper.h: Add gnome_app_configure_toolbar public
+	prototype below gnome_app_fill_toolbar_custom.
+
+	* gnome-app-helper.c (gnome_app_fill_{menu,toolbar}_custom):
+	Configure any gnome app preferences which can be set here as well.
+
+	* gnome-app-helper.c (gnome_app_configure_toolbar):
+	gnome_app_configure_toolbar_separators from gnome-app.c moved to
+	public function here.  Useful for toolbars created with
+	gnome_app_fill_toolbar.
+	(create_toolbar_item): Listen to toolbar orientation for
+	separators at creation time.
+
+	* gnome-app.c (gnome_app_configure_positions): Call
+	gnome_app_configure_toolbar gnome-app-helper function instead of
+	gnome_app_configure_toolbar_separators.
+
 1998-11-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_destroy): Free the color context

@@ -257,6 +257,11 @@ void gnome_app_fill_toolbar (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GtkAccelG
 void gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
 				    GtkAccelGroup *accel_group);
 
+/* Configures the toolbar, changing any separators to the proper type if the orientation
+ * has changed, for example.
+ */
+void gnome_app_configure_toolbar (GtkToolbar *toolbar);
+
 /* Constructs a toolbar and attaches it to the specified application window */
 void gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo);
 

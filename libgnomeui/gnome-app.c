@@ -175,54 +175,6 @@ gnome_app_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
-/* Configure toolbar separators for orientation */
-static void
-gnome_app_configure_toolbar_separators (GtkToolbar *toolbar)
-{
-	GList *list;
-	int index;
-	GtkOrientation orientation;
-
-	g_return_if_fail (toolbar != NULL);
-	g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
-
-	orientation = GTK_TOOLBAR (toolbar)->orientation;
-
-	for (index = 0, list = toolbar->children; list; ++index) {
-		GtkToolbarChild *child = list->data;
-		GtkWidget *widget;
-		GtkWidget *separator;
-
-		list = list->next;
-		
-		if (!child || !child->widget ||
-		    child->type != GTK_TOOLBAR_CHILD_WIDGET ||
-		    ((orientation == GTK_ORIENTATION_VERTICAL &&
-		      GTK_IS_HSEPARATOR (child->widget)) ||
-		     (orientation == GTK_ORIENTATION_HORIZONTAL &&
-		      GTK_IS_VSEPARATOR (child->widget))))
-			continue;
-
-		widget = child->widget;
-		
-		/* Remove widget from toolbar */
-		gtk_container_remove (GTK_CONTAINER (toolbar), widget);
-		
-		/* Create new separator */
-		if (orientation == GTK_ORIENTATION_VERTICAL) {
-			separator = gtk_hseparator_new ();
-			gtk_widget_set_usize (separator, GNOME_PAD * 2, 0);
-		} else {
-			separator = gtk_vseparator_new ();
-			gtk_widget_set_usize (separator, 0, GNOME_PAD * 2);
-		}
-		gtk_widget_show (separator);
-
-		/* Insert into current position */
-		gtk_toolbar_insert_widget (toolbar, separator, NULL, NULL, index);
-	}
-}
-
 /* Rearranges the children of the application window to their newly- configured positions */
 static void
 gnome_app_configure_positions (GnomeApp *app)
@@ -290,8 +242,8 @@ gnome_app_configure_positions (GnomeApp *app)
 					  0,
 					  0, 0);
 		}
-		gnome_app_configure_toolbar_separators (GTK_TOOLBAR (app->toolbar));
 
+		gnome_app_configure_toolbar (GTK_TOOLBAR (app->toolbar));
 		gtk_widget_show (handlebox);
 		gtk_widget_unref (handlebox);
 	}
