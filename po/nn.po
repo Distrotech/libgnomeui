@@ -1,17 +1,21 @@
+# translation of nn.po to Norwegian Nynorsk
 # Norwegian translation of gnome-libs (bokmål dialect).
-# Copyright (C) 1998-2000 Free Software Foundation, Inc.
+# Copyright (C) 1998-2000, 2003 Free Software Foundation, Inc.
 # Kjartan Maraas <kmaraas@online.no>, 1998-2000.
+# Åsmund Skjæveland <aasmunds@fys.uio.no>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-libs 1.2.7\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
-"PO-Revision-Date: 2002-01-25 06:21+0100\n"
-"Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
-"Language-Team: nynorsk <nn@li.org>\n"
+"Project-Id-Version: nn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-25 01:51+0100\n"
+"PO-Revision-Date: 2003-12-26 17:26+0100\n"
+"Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
+"Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -31,26 +35,23 @@ msgstr "Tips for barnoppføring 2"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
-msgstr ""
+msgstr "Heider og ære"
 
 #: libgnomeui/gnome-about.c:230
 msgid "Written by"
-msgstr ""
+msgstr "Skrive av"
 
 #: libgnomeui/gnome-about.c:245
-#, fuzzy
 msgid "Documented by"
-msgstr "Dokumenterar"
+msgstr "Dokumentert av"
 
 #: libgnomeui/gnome-about.c:260
-#, fuzzy
 msgid "Translated by"
-msgstr "Omsetjarkreditering"
+msgstr "Sett om av"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "R_ediger"
+msgstr "Heide_r og ære"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -121,8 +122,7 @@ msgid "Translator credits"
 msgstr "Omsetjarkreditering"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Kreditéring til omsetjarar. Denne streng bør merkast som omsetjbar"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -140,6 +140,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -197,6 +198,7 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -242,9 +244,8 @@ msgstr "Gå tilbake til lagret versjon av filen"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
 msgid "_Print..."
-msgstr "S_kriv ut"
+msgstr "S_kriv ut ..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -270,23 +271,20 @@ msgstr "Lukk aktiv fil"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "Kl_ipp ut"
+msgstr "_Avslutt"
 
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "Om dette programmet"
+msgstr "Avslutt programmet"
 
 #.
 #. * The "Edit" menu
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-#, fuzzy
 msgid "Cu_t"
-msgstr "Kl_ipp ut"
+msgstr "Klipp u_t"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
@@ -350,7 +348,7 @@ msgstr "Søk etter ein tekststreng"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "Finn nes_te"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -358,9 +356,8 @@ msgstr "Søk etter den same tekststrengen om att"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
 msgid "R_eplace..."
-msgstr "_Erstatt ..."
+msgstr "_Byt ut ..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -368,9 +365,8 @@ msgstr "Erstatt ein tekststreng"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
-msgstr "Ei_genskapar ..."
+msgstr "Ei_genskapar"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -381,9 +377,8 @@ msgstr "Endre eigenskapar for fila "
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "_Innstillingar ..."
+msgstr "_Brukarval"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -394,18 +389,17 @@ msgstr "Set opp programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om dette programmet"
 
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
 msgid "Select _All"
-msgstr "_Vel alt"
+msgstr "Vel _alt"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
@@ -426,7 +420,7 @@ msgstr "Lag eit nytt vindauge"
 msgid "_Close This Window"
 msgstr "L_ukk dette vindauget"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Lukk dette vindauget"
 
@@ -500,30 +494,27 @@ msgstr "Avslutt aktivt spel"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr ""
+msgstr "_Innhald"
 
 #: libgnomeui/gnome-app-helper.c:1146
-#, fuzzy
 msgid "View help for this application"
-msgstr "Om dette programmet"
+msgstr "Vis hjelp til dette programmet"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr ""
+msgstr "Tekst under ikon"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2568
-#, fuzzy
 msgid "Icons Only"
 msgstr "Berre ikon"
 
 #: libgnomeui/gnome-app-helper.c:2569
-#, fuzzy
 msgid "Text Only"
-msgstr "Kun tekst"
+msgstr "Berre tekst"
 
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
@@ -604,7 +595,7 @@ msgstr "Nivå av brukaraktivitet påkrevd."
 
 #: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "HTTP-mellomtenaren din krev at du loggar inn.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
@@ -612,33 +603,35 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Du må logga på for å få tilgjenge til «%s».\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Passordet ditt vil overførast i klartekst."
 
 #: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Passordet ditt vil overførast kryptert."
 
 #: libgnomeui/gnome-authentication-manager.c:69
 #: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
-msgstr ""
+msgstr "Autentisering krevst"
 
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " domene %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
+msgstr "Du må logga på for å få tilgjenge til %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
-msgstr "Spesifiser ID for sesjonskontroll"
+msgstr "Oppgje ID for økthandsaming"
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
@@ -654,7 +647,7 @@ msgstr "PREFIX"
 
 #: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
-msgstr "Fjern forbindelse til sesjonsbehandler"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:975
 msgid "Session management"
@@ -666,20 +659,19 @@ msgstr "Avbryt utlogging"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr "Mottok ugyldig farge data\n"
+msgstr "Mottok ugyldige fargedata\n"
 
 #: libgnomeui/gnome-color-picker.c:464
-#, fuzzy
 msgid "Color Selector"
-msgstr "Slett valet"
+msgstr "Fargeveljar"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "Opna ein dialog for å velja farge"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
-msgstr "Velj ein farge"
+msgstr "Vel ein farge"
 
 #: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
@@ -726,13 +718,12 @@ msgid "Date"
 msgstr "Dato"
 
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "Vel fil"
+msgstr "Vel dato"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Vel dato frå ein kalender"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -740,13 +731,12 @@ msgid "Calendar"
 msgstr "Kalender"
 
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "Vel fil"
+msgstr "Vel tid"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Vel tida frå ei liste"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -868,65 +858,62 @@ msgid "The GTK entry"
 msgstr "GTK-oppføringa"
 
 #: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
-#, fuzzy
 msgid "History ID"
-msgstr "Historikk id"
+msgstr "Logg-ID"
 
 #: libgnomeui/gnome-file-entry.c:221
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
+msgstr "Unikt kjenneteikn på filoppføringa. Vert brukt til å lagra logglista."
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+#, fuzzy
+# TRN: Feilmeld: Kan ikkje brukast på begge på norsk
 msgid "Browse Dialog Title"
-msgstr ""
+msgstr "Tittel på bla gjennom-dialogen"
 
 #: libgnomeui/gnome-file-entry.c:230
-#, fuzzy
 msgid "Title for the Browse file dialog."
-msgstr "Tittelen på valdialogboksa"
+msgstr "Tittel på filveljardialogen."
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr ""
+msgstr "Mappeoppføring"
 
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
+msgstr "Om filoppføringa vert brukt til å oppgje katalognamn eller heile filnamn."
 
 #: libgnomeui/gnome-file-entry.c:246
-#, fuzzy
 msgid "Modal"
-msgstr "Modus"
+msgstr "Modal"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr ""
+msgstr "Om filveljardialogen skal vera modal."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
-#, fuzzy
 msgid "Filename"
-msgstr "_Fil"
+msgstr "Filnamn"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
-msgstr ""
+msgstr "Filnamn som skal visast i filoppføringa."
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
-msgstr ""
+msgstr "Standardsti."
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "Standardsti i filveljardialogen."
 
 #: libgnomeui/gnome-file-entry.c:271
-#, fuzzy
 msgid "GnomeEntry"
-msgstr "GTK-oppføring"
+msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid ""
@@ -934,10 +921,14 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
+"GnomeEntry som vert brukt til å oppgje filnamn. "
+"Du kan bruka denne eigenskapen til å henta ein "
+"GnomeEntry-referanse dersom du vil endra eller spørja etter "
+"eigenskapane til dialogen."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
-msgstr ""
+msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:283
 msgid ""
@@ -945,29 +936,30 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
+"GtkEntry som vert brukt til å oppgje filnamn. "
+"Du kan bruka denne eigenskapen til å henta ein "
+"GtkEntry-referanse dersom du vil endra eller spørja etter "
+"eigenskapane til dialogen."
 
 #: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "Vel fil"
 
 #: libgnomeui/gnome-file-entry.c:654
-#, fuzzy
 msgid "Path"
-msgstr "_Lim inn"
+msgstr "Sti"
 
 #: libgnomeui/gnome-file-entry.c:654
-#, fuzzy
 msgid "Path to file"
-msgstr "Lagre aktiv fil"
+msgstr "Sti til fila"
 
 #: libgnomeui/gnome-file-entry.c:681
-#, fuzzy
 msgid "_Browse..."
-msgstr "Bla gjennom ... "
+msgstr "_Bla gjennom ..."
 
 #: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "Opna ein filveljar for å velja ei fil"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -979,7 +971,7 @@ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÆæØøÅå"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr "Velj ei skrifttype"
+msgstr "Vel ein skrifttype"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -1047,20 +1039,20 @@ msgstr "GNOME GConf brukargrensesnitt-støtte"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "_Detaljar"
 
 #: libgnomeui/gnome-gconf-ui.c:169
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Du prøvde å endre noko av oppsettet ditt som systemadminstratoren eller "
-"opertivsystemleverandøren ikkje tillet deg å endre. Noko av endringane du "
-"har valt kjem ikkje til å verte tekne i bruk, eller kan ikkje bli kalla fram "
-"neste gang du brukar dette programmet (%s)."
+"Programmet «%s» prøvde å endra ein del av oppsettet ditt som "
+"systemadminstratoren eller operativsystemleverandøren ikkje let "
+"deg endra. Nokre av endringane du har valt kjem ikkje til å verta "
+"tekne i bruk, eller vil forsvinna neste gong du brukar dette programmet."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1092,61 +1084,59 @@ msgid "End World Hunger"
 msgstr "Gjer slutt på verdssvolten"
 
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Link color"
 msgstr "Lenkjefarge"
 
 #: libgnomeui/gnome-href.c:139
-#, fuzzy
 msgid "Color used to draw the link"
-msgstr "Farge brukt for å teikne lenkja"
+msgstr "Farge brukt til å teikna lenkja"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "Denne knappen tek deg til adressa som han viser."
 
 #: libgnomeui/gnome-href.c:393
-#, fuzzy
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Ein feil oppstod ved forsøk på å starta URL handteraren.\n"
-"Sjekk om instillingane i Kontrollpanelet stemmer."
+"Ein feil oppstod under freistnad på å starta standardnettlesaren.\n"
+"Kontroller innstillingane dine under «Foretrukne program»."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
+msgstr "Unikt kjenneteikn på ikonoppføringa. Dette vert brukt til å lagra logglista."
 
 #: libgnomeui/gnome-icon-entry.c:186
-#, fuzzy
 msgid "Title for the Browse icon dialog."
-msgstr "Tittelen på valdialogboksa"
+msgstr "Tittel på ikonveljardialogen."
 
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
-msgstr ""
+msgstr "Biletemappe"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr ""
+msgstr "Mappe å leita etter ikon i."
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
-msgstr ""
+msgstr "Filnamn å visa i ikonoppføringa."
 
 #: libgnomeui/gnome-icon-entry.c:210
-#, fuzzy
 msgid "Picker dialog"
-msgstr "Velj ein farge"
+msgstr "Veljardialog"
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"Ikonveljardialog. Du kan bruka denne eigenskapen til å henta ein "
+"GdkDialog-referanse dersom du vil endra eller spørja etter "
+"eigenskapane til dialogen."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
@@ -1161,29 +1151,28 @@ msgid "Preview"
 msgstr "Førehandsvisning"
 
 #: libgnomeui/gnome-icon-entry.c:756
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "Tittelen på valdialogboksa"
+msgstr "Ikonveljardialog"
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Denne dialogen let deg velja eit ikon."
 
 #: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
-msgstr ""
+msgstr "Ikonveljar"
 
 #: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Vel ikonet du vil ha."
 
 #: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
-msgstr ""
+msgstr "Ikonveljar"
 
 #: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Denne knappen opnar eit vindauge som let deg velja eit ikon."
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
@@ -1191,13 +1180,13 @@ msgstr "Bla gjennom "
 
 #: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
-msgstr ""
+msgstr "Ikonsti"
 
 #: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
+msgstr "Her skal du skriva inn namnet på mappa der ikonbileta ligg."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1235,46 +1224,43 @@ msgstr "Melding"
 
 #: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
-msgstr ""
+msgstr "Br_ukarnamn:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Domene:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
-msgstr ""
+msgstr "_Passord:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Hugs passordet denne økta"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Lagra passordet på nøkkelringen"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
-#, fuzzy
 msgid "Do Preview"
-msgstr "Førehandsvisning"
+msgstr "Førehandsvis"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "Om bileteoppføringa skal ha ei førehandsframvising."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "Utan bilete"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "Førehandsvisning"
+msgstr "Førehandsframvising av bilete"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
-#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr "Tida som er vald"
+msgstr "Ei førehandsframvising av det valde biletet"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1362,11 +1348,11 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"GNOME's sesjonhåndterer (prosess %d) har krasjet\n"
-"pga en fatal feil (%s).\n"
-"Når du lukker denne dialogen vil alle applikasjoner lukkes og din sesjon \n"
-"vil avslutte.\n"
-"Vennligst lagre alle åpne filer før du lukker denne dialogen."
+"Økthandsamaren til GNOME (prosess %d) har krasja\n"
+"på grunn av ein uoppretteleg feil (%s).\n"
+"Når du avsluttar denne dialogen, vil alle programma verta avslutta, og "
+"økta di tek slutt.\n"
+"Lagra alle filene dine før du lukkar denne dialogen."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -1398,6 +1384,10 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Gå til GNOME programkrasj-siden for meir informasjon"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avslutt testen"
 
 #~ msgid "Find _Again"
 #~ msgstr "Finn _igjen"
@@ -1467,9 +1457,6 @@ msgstr "Gå til GNOME programkrasj-siden for meir informasjon"
 
 #~ msgid "GTK+"
 #~ msgstr "GTK+"
-
-#~ msgid "Exit the test"
-#~ msgstr "Avslutt testen"
 
 #~ msgid "Author"
 #~ msgstr "Forfattar"
@@ -1581,3 +1568,4 @@ msgstr "Gå til GNOME programkrasj-siden for meir informasjon"
 
 #~ msgid "Bonobo UI"
 #~ msgstr "Bonobo bg/UI"
+
