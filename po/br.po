@@ -1,316 +1,310 @@
-# Translation into the walloon language.
-#
-# Si vos voloz donner on côp di spale pol ratournaedje di Gnome (ou des
-# ôtes libes programes) sicrijhoz mu a l' adresse emile
-# <srtxg@chanae.alphanet.ch>; nos avans co bråmint di l' ovraedje a fé.
-#
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Pablo Saratxaga <srtxg@chanae.alphanet.ch> 2001-2003
-# Pablo Saratxaga <pablo@walon.org>, 2003, 2004.
+# Breton (brezhoneg) translation of the  libGNOMEui package
+# Copyright (C) 2004 Thierry Vignaud <tvignaud@mandrakesoft.com>.
+# This file is distributed under the same license as the libGNOMEui package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 1.96.0\n"
+"Project-Id-Version: libGNOMEui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-05 20:29+0200\n"
-"PO-Revision-Date: 2004-08-05 21:47+0200\n"
-"Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
-"Language-Team: Walloon <linux-wa@walon.org>\n"
+"PO-Revision-Date: 2004-08-04 15:55+0200\n"
+"Last-Translator: Thierry Vignaud <tvignaud@mandrakesoft.com>\n"
+"Language-Team: br <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "Cayet efant 1"
+msgstr ""
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr "Racsegne pol cayet 1"
+msgstr ""
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr "Cayet efant 2"
+msgstr ""
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "Racsegne pol cayet 2"
+msgstr ""
 
 #: file-chooser/gtkfilesystemgnomevfs.c:650
 #, c-format
 msgid "%s is not a folder"
-msgstr "%s n' est nén on ridant"
+msgstr ""
 
 #: file-chooser/gtkfilesystemgnomevfs.c:857
 msgid "Filesystem"
-msgstr "Sistinme di fitchîs"
+msgstr "Reizhiad-restr"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:1521
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr "Li schapaedje del rimåke a fwait berwete (%s)"
+msgstr ""
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "Dji n' a nén savou aveur des informåcions pol fitchî «%s»: %s"
+msgstr ""
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr "Dji n' a savou drovi li fitchî «%s»: %s"
+msgstr "Fazi en ur zigeriñ « %s »: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Dji n' a savou tcherdjî l' imådje «%s»: li råjhon n' est nén cnoxhowe, motoit bén on cron fitchî"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
-msgstr "Gråces"
+msgstr "Garedon"
 
 #: libgnomeui/gnome-about.c:230
 msgid "Written by"
-msgstr "Sicrît pa"
+msgstr "Skrivet gant"
 
 #: libgnomeui/gnome-about.c:245
 msgid "Documented by"
-msgstr "Documinté pa"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:260
 msgid "Translated by"
-msgstr "Ratourné pa"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:323
 msgid "C_redits"
-msgstr "_Gråces"
+msgstr "_Garedon"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
-msgstr "No do programe"
+msgstr "Anv ar meziant"
 
 #: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
-msgstr "Li no do programe"
+msgstr "Ar anv ar meziant"
 
 #: libgnomeui/gnome-about.c:386
 msgid "Program version"
-msgstr "Modêye do programe"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:387
 msgid "The version of the program"
-msgstr "Li modêye do programe"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
-msgstr "Tchinne di copyright"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
-msgstr "Informåcion so ls abondroets do programe"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:401
 msgid "Comments string"
-msgstr "Tchinne di rawete"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
-msgstr "Rawetes åd fwait do programe"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:408
 msgid "Authors"
-msgstr "Oteurs"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
-msgstr "Djivêye des oteurs do programe"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:411
 msgid "Author entry"
-msgstr "Intrêye oteur"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
-msgstr "Ene intrêye po èn oteur"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:419
 msgid "Documenters"
-msgstr "Documintåcion"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
-msgstr "Djiveye des djins k' on fwait li documintåcion do programe"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
-msgstr "Intrêye fijheu d' documintåcion"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
-msgstr "Ene intrêye po on fjheu d' documintåcion"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "Gråces po les ratourneus"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
-"Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come "
-"ratournåve."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
-msgstr "Imådjete"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
-msgstr "Ene imådjete pol purnea «åd fwait»"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
-msgstr "Åd fwait di %s"
+msgstr "Diwar-benn %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 #: test-gnome/testgnome.xml.h:5
 msgid "_File"
-msgstr "_Fitchî"
+msgstr "_Restr"
 
 #: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
-msgstr "_Fitchî/"
+msgstr "_Restr/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "_Candjî"
+msgstr "_Aozañ"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr "_Candjî/"
+msgstr "_Aozañ/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_Vey"
+msgstr "_Gwel"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "_Vey/"
+msgstr "_Gwel/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr "A_pontiaedjes"
+msgstr "_Dibarzhoù"
 
 #: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
-msgstr "A_pontiaedjes/"
+msgstr "_Dibarzhoù/"
 
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
-msgstr "_Novea"
+msgstr "_Nevez"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
-msgstr "_Novea/"
+msgstr "_Nevez/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "_Fitchîs"
+msgstr "_Restroù"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "_Fitchîs/"
+msgstr "_Restroù/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr "_Purneas"
+msgstr "_Prenestrer"
 
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
-msgstr "_Djeu"
+msgstr "_C'hoari"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "_Aidance"
+msgstr "_Skoazell"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
-msgstr "_Purneas/"
+msgstr "_Prenestrer/"
 
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
-msgstr "_Drovi..."
+msgstr "_Digeriñ ..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr "Drovi on fitchî"
+msgstr "Digeriñ ur restr"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
-msgstr "_Schaper"
+msgstr "_Enrollañ"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "Schaper li fitchî do moumint"
+msgstr ""
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Schaper et r_lomer..."
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Schaper ci fitchî ci dzo on novea no"
+msgstr ""
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
-msgstr "_Rivni en erî"
+msgstr "_Stumm diaraog"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr "Rivni a ene modêye dedja schapêye do fitchî"
+msgstr ""
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr "_Imprimer..."
+msgstr "_Moulañ ..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "Imprimer li fitchî do moumint"
+msgstr ""
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "A_pontiaedje del sicrirece..."
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Apontyî li pådje po vosse sicrirece do moumint"
+msgstr ""
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
-msgstr "_Clôre"
+msgstr "S_erriñ"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Clôre ci fitchî chal"
+msgstr ""
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr "Moussî _foû"
+msgstr "_Kuitaat"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
-msgstr "Moussî foû di ci programe chal"
+msgstr ""
 
 #.
 #. * The "Edit" menu
@@ -318,93 +312,93 @@ msgstr "Moussî foû di ci programe chal"
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
-msgstr "Cô_per"
+msgstr "_Troc'hañ"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "Côper li tchuze"
+msgstr ""
 
 #. 10
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "_Copyî"
+msgstr "_Eilañ"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Copyî li tchuze"
+msgstr ""
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
-msgstr "C_laper"
+msgstr "_Pegañ"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "Aclaper çu k' i gn a e tchapea emacralé"
+msgstr ""
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
-msgstr "_Netyî"
+msgstr "_Goullonderiñ"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr "Netyî li tchuze"
+msgstr ""
 
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "_Disfé"
+msgstr "_Freuzañ"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Disfé li dierinne accion"
+msgstr ""
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "_Rifé"
+msgstr "_Adober"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Rifé l' ovraedje disfé"
+msgstr ""
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "_Trover..."
+msgstr "_Kavout ..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr "Cweri ene tchinne"
+msgstr ""
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "Trover _shuvant"
+msgstr "Kavout a-_heul"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "Cweri co on côp li minme tchinne"
+msgstr ""
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "R_eplaecî..."
+msgstr "_Erlec'hiañ ..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr "Mete ene tchinne el plaece d' ene ôte"
+msgstr ""
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
-msgstr "_Prôpietés"
+msgstr "_Perzhioù"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Candjî les prôpietés do fitchî"
+msgstr ""
 
 #.
 #. * The Settings menu
@@ -412,11 +406,11 @@ msgstr "Candjî les prôpietés do fitchî"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr "Preferi_nces"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Apontyî li programe"
+msgstr ""
 
 #. 20
 #.
@@ -425,155 +419,155 @@ msgstr "Apontyî li programe"
 #. About
 #: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "Å_d fwait"
+msgstr "_A-brepoz"
 
 #: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Åd fwait di ç' programe chal"
+msgstr "A-brepoz ar meziant-mañ"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
-msgstr "Tchoezi _tot"
+msgstr "Diuz an &Holl"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr "Tchoezi totafwait"
+msgstr ""
 
 #.
 #. * Window menu
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr "Fé on novea _purnea"
+msgstr "Krouiñ ur _Prenestr Nevez"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr "Fé on novea purnea"
+msgstr "Krouiñ ur prenestr nevez"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "_Clôre ci purnea chal"
+msgstr "Serriñ ar _Prenestr-mañ"
 
 #: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "Clôre ci purnea chal"
+msgstr ""
 
 #.
 #. * The "Game" menu
 #.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
-msgstr "_Novea djeu"
+msgstr "_C'hoari nevez"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Comincî on novea djeu"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr "_Djoker li djeu"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Djoker li djeu"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
-msgstr "_Renonder li djeu"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "Renonder li djeu"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr "Ri_vni en erî"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Rivni en erî, come vos n' årîz nén djouwé"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "_Rifé li dierin côp"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Rifé çou ki vos avîz disfwait tot rivnant en erî"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
-msgstr "_Racsegne"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr "Dimander ene racsegne pol côp ki vint"
+msgstr ""
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
-msgstr "_Meyeus..."
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr "Vey les meyeus rzultats"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr "_Fini l' djeu"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Fini l' djeu do moumint"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr "Å_dvins"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr "Vey l' aidance po ç' programe chal"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
-msgstr "Tecse pa dzo les imådjetes"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
-msgstr "Prumiristé å tecse purade k' åzès imådjetes"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
-msgstr "Rén k' les imådjetes"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
-msgstr "Rén kel tecse"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2634
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Eployî l' prémetowe valixhance do scribanne (%s)"
+msgstr ""
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
-msgstr " (tchôkîz return)"
+msgstr ""
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
-msgstr "AROKE: "
+msgstr "FAZI :"
 
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr "Adviertixhmint: "
+msgstr "Kemenn :"
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
-msgstr "o"
+msgstr "y"
 
 #: libgnomeui/gnome-app-util.c:317
 msgid "yes"
-msgstr "oyi"
+msgstr "ya"
 
 #: libgnomeui/gnome-app-util.c:320
 msgid "n"
@@ -581,55 +575,55 @@ msgstr "n"
 
 #: libgnomeui/gnome-app-util.c:321
 msgid "no"
-msgstr "neni"
+msgstr "n'eo ket"
 
 #: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
-msgstr " (oyi ou neni)"
+msgstr ""
 
 #: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
-msgstr "  - I va? (oyi ou neni)"
+msgstr "  - Mat eo ? (ya pe n'eo ket)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr "Avançmint"
+msgstr ""
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr "ID do programe"
+msgstr ""
 
 #: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr "Li tchinne di l' idintifiant do programe"
+msgstr ""
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
-msgstr "Avou bår d' avançmint"
+msgstr ""
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Fé ene ahesse ki mostere l' avançmint."
+msgstr ""
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
-msgstr "Avou bår di messaedjes"
+msgstr ""
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Fé ene ahesse ki mostere les messaedjes el bår di messaedjes."
+msgstr ""
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
-msgstr "Interactivité"
+msgstr ""
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
-msgstr "Livea d' activité d' uzeu k' i fåt."
+msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:62
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "Vosse procsi HTTP dimande ki vs soeyoz elodjî.\n"
+msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:63
 #, c-format
@@ -637,79 +631,77 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
-"Vos vs divoz elodjî po-z aveur accès a «%s».\n"
-"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted unencrypted."
-msgstr "Vosse sicret serè-st evoyî nén ecripté."
+msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:67
 msgid "Your password will be transmitted encrypted."
-msgstr "Vosse sicret serè-st evoyî ecripté."
+msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:70
 #: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
-msgstr "Otintifiaedje obligatwere"
+msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Vos vs divoz elodjî po-z aveur accès å dominne %s %s\n"
+msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "Vos vs divoz elodjî po-z aveur accès a %s\n"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
-msgstr "Dire l' ID pol manaedjmint del session"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
-msgstr "Dire li betchete di l' apontiaedje schapé"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
-msgstr "BETCHETE"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
-msgstr "Essocter l' adjondaedje å manaedjeu di sessions"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:975
 msgid "Session management"
-msgstr "Manaedjmint des sessions"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
-msgstr "Rinoncî a moussî foû"
+msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr "Dinêye di coleur nén valide di rçuvowe\n"
+msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "Drovi on purnea po tchoezi l' coleur"
+msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
-msgstr "Tchoezixhoz ene coleur"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
-msgstr "Eure"
+msgstr "Eur"
 
 #: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
-msgstr "L' eure tchoezeye pol moumint"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
@@ -721,71 +713,69 @@ msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
-msgstr "Eure li pus timpe"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
-msgstr "L' eure li pus timpe pol purnea di tchoezixhaedje di l' eure"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
-msgstr "Eure li pus tård"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr "L' eure li pus tård pol purnea di tchoezixhaedje di l' eure"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
-msgstr "Eure di cminçmint:"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:525
 msgid "The initial time"
-msgstr "L' eure di cminçmint"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
 msgid "Date"
-msgstr "Date"
+msgstr "Deiziad"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select Date"
-msgstr "Tchoezi l' date"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr "Tchoezixhoz l' date dins l' calindrî"
+msgstr ""
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
-msgstr "Calindrî"
+msgstr "Deiziadur"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
-msgstr "Tchoezi l' eure"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr "Tchoezixhoz l' eure dins l' djivêye"
+msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
-"gnome_date_edit_get_date a stî abandné, eployîz purade "
-"gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
 msgid "Title"
-msgstr "Tite"
+msgstr "Titl"
 
 #: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
-msgstr "Tite do macrea"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr "Imådje"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
@@ -797,172 +787,170 @@ msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
-msgstr "Coleur do tite"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
-msgstr "Coleur di dvant pol tite"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
-msgstr "Coleur di dvant pol tite"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr "Coleur di dvant pol tite come valixhance GdkColor"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
-msgstr "Coleur di dvant pol tite metowe"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
-msgstr "Li coleur di dvant pol tite a stî metowe"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr "Coleur di fond"
+msgstr "Liv an Drekleur"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr "Coleur di fond"
+msgstr "Liv an drekleur"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr "Coleur di fond come valixhance GdkColor"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr "Coleur di fond pol tite metowe"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr "Li coleur di fond pol tite a stî metowe"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Contents Background Color"
-msgstr "Coleur di fond pol contnou"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Contents Background color"
-msgstr "Coleur di fond pol contnou"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
-msgstr "Coleur di fond do contnou come valixhance GdkColor"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Contents Background color set"
-msgstr "Coleur di fond pol contnou metowe"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Contents Background color is set"
-msgstr "Li coleur di fond pol contnou a stî metowe"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
-msgstr "Coleur di fond po l' imådjete"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
-msgstr "Coleur di fond po l' imådjete"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
-msgstr "Coleur di fond po l' imådjete come ene valixhance GdkColor"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
-msgstr "Coleur di fond po l' imådjete metowe"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
-msgstr "Li coleur di fond po l' imådjete a stî metowe"
+msgstr ""
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr "Mostrer «Fini»"
+msgstr ""
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Mostrer li boton «Fini» el plaece do boton «Shuvant»"
+msgstr ""
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr "Mostrer «Aidance»"
+msgstr ""
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr "Mostrer li boton «Aidance»"
+msgstr ""
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr "ID d' l' istwere"
+msgstr ""
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr "Intrêye GTK"
+msgstr ""
 
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr "L' intrêye GTK"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
-msgstr "ID d' l' istwere"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr "Idintifiant unike po l' intrêye do fitchî.  I serè-st eployî po schaper l' djivêye di l'  istwere."
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
-msgstr "Tite do purnea di foytaedje"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
-msgstr "Tite pol purnea di foytaedje di fitchîs."
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
-msgstr "Intrêye po ridants"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Definixh si l' tchamp d' intrêye po les fitchîs pout esse eployî po taper "
-"des nos d' ridants ou rén k' des nos d' fitchî."
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
-msgstr "Modå"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr "Definixh si l' purnea di foytaedje di fitchîs doet esse modå."
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
-msgstr "No do fitchî"
+msgstr "Anv ar restr"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
-msgstr "No do fitchî ki doet esse håyné dins l' intrêye do fitchî"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
-msgstr "Prémetou tchmin"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
-msgstr "Li prémetou tchmin pol purnea di foytaedje des fitchîs."
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
@@ -988,35 +976,33 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
-msgstr "Eployî l' novea tchoezixheu d' fitchîs"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Definixhe s' i fåt eployî l' novea tchoezixheu d' fitchîs (GtkFileChooser) "
-"oudonbén l' vî (GtkFileSelection) pol tchoezixhaedje des fitchîs."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
-msgstr "Tchoezi fitchî"
+msgstr "Diuzit ar restr"
 
 #: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
-msgstr "Tchimin"
+msgstr "Hent"
 
 #: libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
-msgstr "Tchimin po-z ariver å fitchî"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
-msgstr "_Foyter..."
+msgstr "_Furchal ..."
 
 #: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
-msgstr "Drovi on purnea po tchoezi les fitchîs"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1024,79 +1010,80 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
+msgstr "AaBbDdEeFfGgHhIiJjKkLlMmNnÑñOoPpQqRrSsTtUuVvWwYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr "Tchoezixhoz ene fonte"
+msgstr "Dibabit ur Nodrez"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "Li tite do purnea di tchoezixhaedje"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:164
+#, fuzzy
 msgid "Mode"
-msgstr "Môde"
+msgstr "Gobari"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr "Li môde d' operance do tchoezixheu di fontes"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr "No del fonte"
+msgstr "Anv an nodrez"
 
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr "No del tchoezeye fonte"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr "Fonte"
+msgstr "Nodrez"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "Li tchoezi GtkFont"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Tecse d' egzimpe"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Tecse d' egzimpe ki mostere çou ki l' fonte ravize"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "Eployî fonte po l' etikete"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Eployî fonte po l' etikete en on môde d' informåcion sol fonte"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "Grandeu del fonte po l' etikete"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Grandeu del fonte po l' etikete en on môde d' informåcion sol fonte"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "Mostrer l' grandeu"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "Mostrer l' grandeu en on môde d' informåcion sol fonte"
+msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr "Sopoirt po l' apontiaedje di l' eterface avou GConf"
+msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr "_Detays"
+msgstr "_Munudoù"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
@@ -1106,11 +1093,6 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Li programe «%s» a sayî d' candjî ene sacwè di vost apontiaedje ki "
-"l' manaedjeu do sistinme da vosse oudonbén l' vindeu do sistinme d' operance "
-"ni vs permete nén d' candjî. Sacwants des apontiaedjes ki vos avoz tchoezi "
-"pôrént èn nén prinde efet, ou èn nén esse rapexhîs l' côp ki vént ki vos "
-"eployrîz l' programe."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1118,238 +1100,227 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Åk n' a nén stî tot tcherdjant ou schapant des informåcions d' apontiaedje "
-"po %s. Sacwants di vos apontiaedjes polèt èn nén ovrer comifåt."
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
-msgstr "Hårdêye"
+msgstr "URL"
 
 #: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
-msgstr "Li hårdêye ki GnomeHRef mete en alaedje"
+msgstr ""
 
 #: libgnomeui/gnome-href.c:131
 msgid "Text"
-msgstr "Tecse"
+msgstr "Skrid"
 
 #: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
-msgstr "Li tecse el boton"
+msgstr ""
 
 #: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
-msgstr "Fini avou l' fwin dins l' monde"
+msgstr ""
 
 #: libgnomeui/gnome-href.c:139
 msgid "Link color"
-msgstr "Coleur do loyén"
+msgstr ""
 
 #: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
-msgstr "Coleur eployeye po dessiner l' loyén"
+msgstr ""
 
 #: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
-msgstr "Ci boton chal vos frè potchî al hårdêye k' i mostere."
+msgstr ""
 
 #: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Åk n' a nén stî tot sayant d' enonder li prémetou betchteu waibe.\n"
-"Verifyîz vos apontiaedjes avou l' usteye «Programes favorits» s' i vs plait."
 
 #: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Idintifiant unike po l' intrêye di l' imådjete.  Çouchal serè-st eployî po "
-"schaper li djivêye di l' istwere."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
-msgstr "Tite pol purnea di foytaedje des imådjetes."
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
-msgstr "Ridant des imådjetes"
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
-msgstr "Li ridant wice ki les imådjetes sont cwerowes."
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
-msgstr "No do fitchî a esse håyné po l' intrêye di l' imådjete."
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
-msgstr "Purnea di tchoezixhaedje"
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Purnea di tchoezixhaedje des imådjetes. Vos ploz eployî cisse prôpieté po-z "
-"aveur li purnea GtkDialog si vos avoz mezåjhe di candjî ou dmander ene di "
-"ses prôpietés."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
-msgstr "Nole imådjete"
+msgstr "Arlun ebet"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
-msgstr "Purnea di tchoezixhaedje des imådjetes"
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr "Ci purnea chal vos permete di tchoezi ene imådjete."
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
-msgstr "Tchoezixheu d' imådjetes"
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr "Tchoezixhoz l' imådjete ki vos vloz, s' i vs plait."
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
-msgstr "Tchoezixheu d' imådjetes"
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
-msgstr "Ci boton chal drovrè on purnea por vos tchoezi ene imådjete."
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
-msgstr "Foyter"
+msgstr "Furchal"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
-msgstr "Tchimin d' l' imådjete"
+msgstr "Hent an arlun"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Chal vos dvoz mete li no do ridant ki les imådjetes sont-st å dvins."
+msgstr ""
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
+msgstr ""
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: dji n' a savou drovi l' ridant «%s»"
+msgstr ""
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr "Dji tchedje les imådjetes..."
+msgstr "O kargañ Arlunioù ..."
 
 #: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
-msgstr "Informåcion"
+msgstr "Titouroù"
 
 #: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
-msgstr "Adviertixhmint"
+msgstr "Diwallit"
 
 #: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
-msgstr "Aroke"
+msgstr "Fazi"
 
 #: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
-msgstr "Kesse"
+msgstr "Goulenn"
 
 #: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
-msgstr "Messaedje"
+msgstr "Kemennad"
 
 #: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
-msgstr "No d' _uzeu:"
+msgstr "Anv _arveriad :"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
-msgstr "_Dominne:"
+msgstr ""
 
 #: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
-msgstr "_Sicret:"
+msgstr "_Tremenger :"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr "Si raloyî _anonimmint"
+msgstr ""
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr "Si raloyî come _uzeu:"
+msgstr ""
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
-msgstr "Si rmimbrer do scret po cisse session ci"
+msgstr ""
 
 #: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
-msgstr "Schaper l' sicret dins l' anea des clés"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
-msgstr "Permete li vey divant"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr ""
-"Definixh s' i fåt permete di vey divant dins l' boesse d' intrêye po ls "
-"imådjes."
 
 #: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
-msgstr "Nole Imådje"
+msgstr "Skeudenn ebet"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
-msgstr "Vey divant"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
-msgstr "Vey divant l' imådje tchoezeye"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Dji n' trove nou hbox; dji prind ene tchuze di fitchîs normåle"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
-msgstr "Vey divant"
+msgstr ""
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr "Dijh meyeus"
+msgstr ""
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
-msgstr "Uzeu"
+msgstr "Arveriad"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr "Ponts"
+msgstr "Merk"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr "%d di %B %Y a %H e"
+msgstr ""
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
@@ -1357,31 +1328,31 @@ msgstr "Sans 14"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr "Boirds del tåve"
+msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
-msgstr "Rimplixhaedje del tåve"
+msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr "Djivêye avou des ponts"
+msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr "Djivêye avou des limeros"
+msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr "Ritrait"
+msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr "Disfé li rtrait"
+msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
-msgstr "Åd fwait"
+msgstr "Diwar-benn"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
@@ -1389,23 +1360,21 @@ msgstr ""
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
-msgstr "Håynaedje X a eployî"
+msgstr ""
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
-msgstr "HÅYNAEDJE"
+msgstr ""
 
 #: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
-msgstr "Livreye di l' eterface grafike di GNOME"
+msgstr ""
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"I gn a yeu pus d' ene aroke di segmintåcion; dji n' pou mostrer li purnea "
-"d' aroke\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1414,8 +1383,6 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-"I gn a yeu pus d' ene aroke di segmintåcion!\n"
-"Dji n' pou mostrer li purnea d' aroke\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1426,11 +1393,6 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"Li Manaedjeu di Session di GNOME (processus lº %d) s' a crashé\n"
-"a cåze d' ene aroke moirt (%s).\n"
-"Cwand vos alez clôre ci purnea chal, tos les ôtes programes et vosse session "
-"vont esse cloyous eto.\n"
-"Schapez tos vos fitchîs dvant di clôre ci purnea chal."
 
 #: libgnomeui/gnome_segv.c:112
 #, c-format
@@ -1440,33 +1402,31 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr "process %d: %s"
+msgstr ""
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"Vos ploz åzès programeus çou k' ç' a passé, po les aidî a coridjî "
-"l' problinme.  Oudonbén vos ploz djusse renonder l' programe."
 
+# FIXME 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Po s' è siervi: gnome_segv2 nodoprograme limsign\n"
+msgstr ""
 
 #: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
-msgstr "_Renonder l' programe"
+msgstr ""
 
 #: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
-msgstr "El d_ire åzès programeus"
+msgstr ""
 
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
-msgstr "_Disbugaedje"
+msgstr ""
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
-msgstr "Moussî foû do sayaedje"
-
+msgstr ""

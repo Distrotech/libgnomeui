@@ -1,3 +1,7 @@
+2004-08-05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* configure.in: Added Breton (br) to ALL_LINGUAS
+
 2004-07-28  Glynn Foster  <glynn.foster@sun.com>
 
 	* libgnomeui/gnome-druid.c: (gnome_druid_set_page): Patch 
