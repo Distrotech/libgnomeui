@@ -776,6 +776,7 @@ gnome_thumbnail_factory_can_thumbnail (GnomeThumbnailFactory *factory,
 
 static char *
 expand_thumbnailing_script (const char *script,
+			    const int   size, 
 			    const char *inuri,
 			    const char *outfile)
 {
@@ -820,7 +821,7 @@ expand_thumbnailing_script (const char *script,
 	p++;
 	break;
       case 's':
-	g_string_append (str, "128");
+	g_string_append_printf (str, "%d", size);
 	p++;
 	break;
       case '%':
@@ -891,7 +892,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 	{
 	  close (fd);
 
-	  expanded_script = expand_thumbnailing_script (script, uri, tmpname);
+	  expanded_script = expand_thumbnailing_script (script, size, uri, tmpname);
 	  if (expanded_script != NULL &&
 	      g_spawn_command_line_sync (expanded_script,
 					 NULL, NULL, &exit_status, NULL) &&
