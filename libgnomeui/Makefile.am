@@ -49,6 +49,8 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-stock.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\
+	gnome-stock-imlib.h		\
+	gnome-stock-xpm.h		\
 	libgnomeui.h
 
 ted_demo_SOURCES = ted_demo.c
