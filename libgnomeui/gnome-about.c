@@ -2,6 +2,7 @@
 /*
  * Copyright (C) 1998 Cesar Miquel <miquel@df.uba.ar>
  * Based in gnome-about, copyright (C) 1998 Horacio J. Peña
+ * Rewrite (C) 2000-2001 Gergõ Érdi <cactus@cactus.rulez.org>
  * All rights reserved.
  *
  * This file is part of the Gnome Library.
@@ -48,6 +49,9 @@
 #define GNOME_ABOUT_MAX_WIDTH                   600
 #define BASE_LINE_SKIP                          0
 
+/* Font size */
+#define GNOME_ABOUT_TITLE_SIZE 1.5
+
 /* Layout */
 #define GNOME_ABOUT_PADDING_X 1
 #define GNOME_ABOUT_PADDING_Y 1
@@ -77,11 +81,21 @@
 
 #define GNOME_ABOUT_COMMENTS_INDENT 3
 
+/* Colors */
+#define GNOME_ABOUT_TITLE_BG "black"
+#define GNOME_ABOUT_TITLE_FG "white"
+
+#define GNOME_ABOUT_CONTENTS_BG "#76A184"
+#define GNOME_ABOUT_CONTENTS_FG "black"
+
 /* Options */
-#define GNOME_ABOUT_SHOW_URLS (priv->show_urls)
-#define GNOME_ABOUT_SHOW_LOGO (priv->show_logo)
+#define GNOME_ABOUT_SHOW_URLS (about->_priv->show_urls)
+#define GNOME_ABOUT_SHOW_LOGO (about->_priv->show_logo)
 
 struct _GnomeAboutPrivate {
+
+	GnomeCanvas *canvas;
+	
 	gchar *title; /* Program title */
 	gchar *url; /* Homepage URL */
 	gchar *copyright; /* Copyright */
@@ -94,8 +108,15 @@ struct _GnomeAboutPrivate {
 
 	gint16 logo_width;
 	gint16 logo_height;
+
+	gint16 title_text_width;
+	gint16 title_text_height;
+	gint16 title_url_width;
+	gint16 title_url_height;
+	
 	gint16 title_width;
 	gint16 title_height;
+	
 	gint16 width;
 	gint16 height;
 
@@ -107,15 +128,6 @@ struct _GnomeAboutPrivate {
 
 	gboolean show_urls;
 	gboolean show_logo;
-
-	/* Fonts */
-	GdkFont *font_title;
-	GdkFont *font_url;
-	GdkFont *font_copyright;
-	GdkFont *font_author;
-	GdkFont *font_names;
-	GdkFont *font_names_url;
-	GdkFont *font_comments;
 };
 
 static void gnome_about_class_init (GnomeAboutClass *klass);
@@ -123,24 +135,32 @@ static void gnome_about_init       (GnomeAbout      *about);
 static void gnome_about_destroy    (GtkObject       *object);
 static void gnome_about_finalize   (GObject         *object);
 
-static void gnome_about_calc_size (GnomeAboutPrivate *priv);
+static void gnome_about_calc_size (GnomeAbout *about);
 
-static void gnome_about_draw (GnomeCanvas *canvas, GnomeAboutPrivate *priv);
+static void gnome_about_draw      (GnomeAbout *about);
 
-static void gnome_about_load_logo (GnomeAboutPrivate *priv, const gchar *logo);
+static void gnome_about_load_logo (GnomeAbout *about,
+				   const gchar *logo);
 
-static void gnome_about_display_comments (GnomeCanvasGroup *group,
-					  GdkFont *font,
-					  GdkColor *color,
-					  gdouble x, gdouble y, gdouble w,
+static void gnome_about_display_comments (GnomeAbout  *about,
+					  gdouble      x,
+					  gdouble      y,
+					  gdouble      w,
 					  const gchar *comments);
 
-static gint gnome_about_item_cb (GnomeCanvasItem *item, GdkEvent
-				 *event, gpointer data);
-static void gnome_about_parse_name (gchar **name, gchar **email);
+static gint gnome_about_item_cb (GnomeCanvasItem *item,
+				 GdkEvent *event,
+				 gpointer data);
 
-static void gnome_about_fill_options (GtkWidget *widget,
-				      GnomeAboutPrivate *priv);
+static void gnome_about_parse_name (gchar **name,
+				    gchar **email);
+
+static void gnome_about_fill_style (GnomeAbout *about);
+
+static int get_text_width (GtkWidget *widget,
+			   gchar     *text);
+
+static int get_text_height (GtkWidget *widget);
 
 /**
  * gnome_about_get_type
@@ -172,8 +192,7 @@ gnome_about_init (GnomeAbout *about)
 
 
 static void
-gnome_about_draw (GnomeCanvas *canvas, 
-		  GnomeAboutPrivate *priv)
+gnome_about_draw (GnomeAbout *about)
 {
 	GnomeCanvasGroup *root;
 	GnomeCanvasItem *item, *item_email;
@@ -181,7 +200,9 @@ gnome_about_draw (GnomeCanvas *canvas,
 	GList *name, *name_url = 0, *name_email;
 	gchar *tmp;
 
-	root = gnome_canvas_root(canvas);
+	GnomeAboutPrivate *priv = about->_priv;
+	
+	root = gnome_canvas_root(priv->canvas);
 
 	x = GNOME_ABOUT_PADDING_X;
 	y = GNOME_ABOUT_PADDING_Y;
@@ -197,18 +218,22 @@ gnome_about_draw (GnomeCanvas *canvas,
 					      "x_set", TRUE, 
 					      "y", y,
 					      "y_set", TRUE, NULL);
-		if (priv->url) {
+
+		if (priv->url)
+		{
 			gtk_signal_connect (GTK_OBJECT(item), "event",
 					    (GtkSignalFunc) gnome_about_item_cb,
 					    NULL);
 			gtk_object_set_data (GTK_OBJECT(item), "url",
 					     priv->url);
 		}
+		
 		y += priv->logo_height + GNOME_ABOUT_LOGO_PADDING_Y;
 	}
 	
 	/* Draw the title */
 	if (priv->title) {
+
 		/* Title background */
 		x = GNOME_ABOUT_PADDING_X + GNOME_ABOUT_TITLE_PADDING_X;
 		y += GNOME_ABOUT_TITLE_PADDING_Y;
@@ -222,30 +247,30 @@ gnome_about_draw (GnomeCanvas *canvas,
 				       "y1", y,
 				       "x2", x2,
 				       "y2", y2,
-				       "fill_color_gdk", priv->title_bg,
+				       "fill_color", GNOME_ABOUT_TITLE_BG,
 				       NULL);
-
+		
 		/* Title text */
 		x += priv->width / 2;
 		y += GNOME_ABOUT_TITLE_PADDING_UP;
 		item = gnome_canvas_item_new (root,
 					      gnome_canvas_text_get_type(),
+					      "text", priv->title,
+					      "scale", GNOME_ABOUT_TITLE_SIZE,
 					      "x", x,
 					      "y", y,
 					      "anchor", GTK_ANCHOR_NORTH,
-					      "fill_color_gdk", priv->title_fg,
-					      "text", priv->title,
-					      "font_gdk", priv->font_title,
+					      "fill_color", GNOME_ABOUT_TITLE_FG,
 					      NULL);
-		if (priv->url) {
+		if (priv->url)
+		{
 			gtk_signal_connect(GTK_OBJECT(item), "event",
 					   (GtkSignalFunc) gnome_about_item_cb,
-					   priv->title_fg);
+					   GNOME_ABOUT_TITLE_FG);
 			gtk_object_set_data(GTK_OBJECT(item), "url", priv->url);
 		}
+		y += priv->title_text_height + GNOME_ABOUT_TITLE_PADDING_DOWN;
 
-		y += priv->font_title->ascent + priv->font_title->descent +
-			GNOME_ABOUT_TITLE_PADDING_DOWN;
 		if (GNOME_ABOUT_SHOW_URLS && priv->url) {
 			y += GNOME_ABOUT_TITLE_URL_PADDING_UP;
 			item = gnome_canvas_item_new (root,
@@ -253,40 +278,42 @@ gnome_about_draw (GnomeCanvas *canvas,
 						      "x", x,
 						      "y", y,
 						      "anchor", GTK_ANCHOR_NORTH,
-						      "fill_color_gdk", priv->title_fg,
+						      "fill_color", GNOME_ABOUT_TITLE_FG,
 						      "text", priv->url,
-						      "font_gdk", priv->font_url,
 						      NULL);
 			gtk_signal_connect(GTK_OBJECT(item), "event",
 					   (GtkSignalFunc)gnome_about_item_cb,
-					   priv->title_fg);
-			gtk_object_set_data(GTK_OBJECT(item), "url", priv->url);
-			y += priv->font_url->ascent +
-				priv->font_url->descent +
-				GNOME_ABOUT_TITLE_URL_PADDING_DOWN;		
+					   GNOME_ABOUT_TITLE_FG);
+			gtk_object_set_data(GTK_OBJECT(item), "url",
+					    priv->url);
+			
+			y += get_text_height (GTK_WIDGET (priv->canvas)) +
+				GNOME_ABOUT_TITLE_URL_PADDING_DOWN;
 		}
 		x = GNOME_ABOUT_PADDING_X;
 		y += GNOME_ABOUT_TITLE_PADDING_Y;
 	}
-	
+
 	/* Contents */
-	if (priv->copyright || priv->names || priv->comments) {
+	if (priv->copyright || priv->names || priv->comments)
+	{
 		x = GNOME_ABOUT_PADDING_X + GNOME_ABOUT_CONTENT_PADDING_X;
 		y += GNOME_ABOUT_CONTENT_PADDING_Y;
 		x2 = priv->width - (GNOME_ABOUT_CONTENT_PADDING_X +
 				    GNOME_ABOUT_PADDING_X) - 1;
 		y2 = priv->height - (GNOME_ABOUT_CONTENT_PADDING_Y +
 				     GNOME_ABOUT_PADDING_Y) - 1;
-		gnome_canvas_item_new(root,
-				      gnome_canvas_rect_get_type(),
-				      "x1", x,
-				      "y1", y,
-				      "x2", x2,
-				      "y2", y2,
-				      "fill_color_gdk", priv->contents_bg,
-				      NULL);
+
+		gnome_canvas_item_new (root,
+				       gnome_canvas_rect_get_type(),
+				       "x1", x,
+				       "y1", y,
+				       "x2", x2,
+				       "y2", y2,
+				       "fill_color", GNOME_ABOUT_CONTENTS_BG,
+				       NULL);
 	}
-	
+
 	/* Copyright message */
 	if (priv->copyright) {
 		x = GNOME_ABOUT_PADDING_X +
@@ -294,21 +321,21 @@ gnome_about_draw (GnomeCanvas *canvas,
 			GNOME_ABOUT_CONTENT_INDENT;
 		y += GNOME_ABOUT_CONTENT_SPACING +
 			GNOME_ABOUT_COPYRIGHT_PADDING_UP;
+
 		gnome_canvas_item_new (root,
 				       gnome_canvas_text_get_type(),
+				       "text", priv->copyright,
 				       "x", x,
 				       "y", y,
 				       "anchor", GTK_ANCHOR_NORTH_WEST,
-				       "fill_color_gdk", priv->contents_fg,
-				       "text", priv->copyright,
-				       "font_gdk", priv->font_copyright,
+				       "fill_color", GNOME_ABOUT_CONTENTS_FG,
 				       NULL);
 
-		y += priv->font_copyright->ascent +
-			priv->font_copyright->descent +
+		y += get_text_height (GTK_WIDGET (priv->canvas)) +
 			GNOME_ABOUT_COPYRIGHT_PADDING_DOWN;
 	}
-
+	
+#if 0
 	/* Authors header */
 	if (priv->names) {
 		y += GNOME_ABOUT_CONTENT_SPACING;
@@ -321,9 +348,8 @@ gnome_about_draw (GnomeCanvas *canvas,
 					       "x", x,
 					       "y", y,
 					       "anchor", GTK_ANCHOR_NORTH_WEST,
-					       "fill_color_gdk", priv->contents_fg,
 					       "text", _("Author:"),
-					       "font_gdk", priv->font_author,
+					       "fill_color", GNOME_ABOUT_CONTENTS_FG,
 					       NULL);
 		else
 			gnome_canvas_item_new (root,
@@ -331,9 +357,8 @@ gnome_about_draw (GnomeCanvas *canvas,
 					       "x", x,
 					       "y", y,
 					       "anchor", GTK_ANCHOR_NORTH_WEST,
-					       "fill_color_gdk", priv->contents_fg,
 					       "text", _("Authors:"),
-					       "font_gdk", priv->font_author,
+					       "fill_color", GNOME_ABOUT_CONTENTS_FG,
 					       NULL);
 	}
 	x += gdk_string_measure (priv->font_author, _("Authors:")) +
@@ -357,7 +382,6 @@ gnome_about_draw (GnomeCanvas *canvas,
 					      "anchor", GTK_ANCHOR_NORTH_WEST,
 					      "fill_color_gdk", priv->contents_fg,
 					      "text", (gchar*) name->data,
-					      "font_gdk", priv->font_names,
 					      NULL);
 
 		if (name_email->data) {
@@ -370,13 +394,12 @@ gnome_about_draw (GnomeCanvas *canvas,
 							    "anchor", GTK_ANCHOR_NORTH_WEST,
 							    "fill_color_gdk", priv->contents_fg,
 							    "text", tmp,
-							    "font_gdk", priv->font_names,
 							    NULL);
 
 			tmp = g_strdup_printf("mailto:%s", (gchar*) name_email->data);
 			gtk_signal_connect (GTK_OBJECT (item_email), "event",
 					    (GtkSignalFunc) gnome_about_item_cb,
-					    priv->contents_fg);
+					    GNOME_ABOUT_CONTENTS_FG);
 			gtk_object_set_data_full (GTK_OBJECT (item_email),
 						  "url", tmp,
 						  (GtkDestroyNotify) g_free);
@@ -390,7 +413,7 @@ gnome_about_draw (GnomeCanvas *canvas,
 			if (name_url->data) {
 				gtk_signal_connect (GTK_OBJECT(item), "event",
 						    (GtkSignalFunc) gnome_about_item_cb,
-						    priv->contents_fg);
+						    GNOME_ABOUT_CONTENTS_FG);
 				gtk_object_set_data(GTK_OBJECT(item),
 						    "url", 
 						    (gchar*)name_url->data);
@@ -407,12 +430,11 @@ gnome_about_draw (GnomeCanvas *canvas,
 								      "anchor", GTK_ANCHOR_NORTH_WEST,
 								      "fill_color_gdk", priv->contents_fg,
 								      "text", (gchar*) name_url->data,
-								      "font_gdk", priv->font_names_url,
 								      NULL);
 					gtk_signal_connect( GTK_OBJECT(item), 
 							    "event",
 							    (GtkSignalFunc) gnome_about_item_cb,
-							    priv->contents_fg);
+							    GNOME_ABOUT_CONTENTS_FG);
 					gtk_object_set_data(GTK_OBJECT(item),
 							    "url", 
 							    (gchar*)name_url->data);
@@ -423,7 +445,8 @@ gnome_about_draw (GnomeCanvas *canvas,
 			name_url = name_url->next;
 		}
 	}
-	
+#endif
+
 	if (priv->comments) {
 		y += GNOME_ABOUT_CONTENT_SPACING;
 		x = GNOME_ABOUT_PADDING_X +
@@ -434,21 +457,23 @@ gnome_about_draw (GnomeCanvas *canvas,
 					GNOME_ABOUT_CONTENT_PADDING_X) +
 				   GNOME_ABOUT_CONTENT_INDENT +
 				   GNOME_ABOUT_PADDING_Y);
-		gnome_about_display_comments(root, priv->font_comments,
-					     priv->contents_fg, x, y,
-					     w, priv->comments);
+		gnome_about_display_comments (about, 
+					      x, y, w,
+					      priv->comments);
 	}
-
-	gnome_canvas_set_scroll_region(GNOME_CANVAS(canvas), 0, 0, priv->width,
-				       priv->height);
-	gtk_widget_set_usize(GTK_WIDGET(canvas), priv->width, priv->height);
+	
+	gnome_canvas_set_scroll_region(about->_priv->canvas,
+				       0, 0,
+				       about->_priv->width, about->_priv->height);
+	gtk_widget_set_usize(GTK_WIDGET(about->_priv->canvas),
+			     about->_priv->width, about->_priv->height);
 }
 
 static void
-gnome_about_display_comments (GnomeCanvasGroup *group,
-			      GdkFont *font,
-			      GdkColor *color,
-			      gdouble x, gdouble y, gdouble w,
+gnome_about_display_comments (GnomeAbout  *about,
+			      gdouble      x,
+			      gdouble      y,
+			      gdouble      w,
 			      const gchar *comments)
 {
 	char *tok, *p1, *p2, *p3, c;
@@ -457,8 +482,13 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 	int done;
 	GList *par, *tmp;
 	char *tokp;
-
-	width = w - 16;
+	GtkWidget *widget = GTK_WIDGET (about->_priv->canvas);
+	GnomeCanvasGroup *group = gnome_canvas_root (about->_priv->canvas);
+	
+	width = w - 2 * (GNOME_ABOUT_PADDING_X +
+			 GNOME_ABOUT_CONTENT_PADDING_X +
+			 GNOME_ABOUT_CONTENT_INDENT +
+			 GNOME_ABOUT_COMMENTS_INDENT);
 	if (comments == NULL)
 		return;
 
@@ -483,7 +513,7 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 		p1 = p2 = tmp->data;
 		while (!done) {
 			c = *p1; *p1 = 0;
-			while (gdk_string_measure(font, p2) < width && c != 0) {
+			while (get_text_width (widget, p2) < width && c != 0) {
 				*p1 = c;
 				p1++;
 				c = *p1;
@@ -497,10 +527,8 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 						       "x", x,
 						       "y", ypos,
 						       "anchor", GTK_ANCHOR_NORTH_WEST,
-						       "fill_color_gdk",
-						       color,
+						       "fill_color", GNOME_ABOUT_CONTENTS_FG,
 						       "text", p2,
-						       "font_gdk", font,
 						       NULL);
 				
 				break;
@@ -511,10 +539,8 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 						       "x", x,
 						       "y", ypos,
 						       "anchor", GTK_ANCHOR_NORTH_WEST,
-						       "fill_color_gdk",
-						       color,
+						       "fill_color", GNOME_ABOUT_CONTENTS_FG,
 						       "text", p2,
-						       "font_gdk", font,
 						       NULL);
 				break;
 			default:
@@ -527,10 +553,8 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 							       "x", x,
 							       "y", ypos,
 							       "anchor", GTK_ANCHOR_NORTH_WEST,
-							       "fill_color_gdk",
-							       color,
+							       "fill_color", GNOME_ABOUT_CONTENTS_FG,
 							       "text", p2,
-							       "font_gdk", font,
 							       NULL);
 
 					*p3 = c;
@@ -545,15 +569,13 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 							       "x", x,
 							       "y", ypos,
 							       "anchor", GTK_ANCHOR_NORTH_WEST,
-							       "fill_color_gdk",
-							       color,
+							       "fill_color", GNOME_ABOUT_CONTENTS_FG,
 							       "text", p2,
-							       "font_gdk", font,
 							       NULL);
 				}
 				break;
 			}
-			ypos += font->descent + font->ascent;
+			ypos += get_text_height (widget);
 			p2 = p1;
 		}
 		tmp = tmp->next;
@@ -564,8 +586,35 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 	g_list_foreach(par, (GFunc)g_free, NULL);
 	g_list_free (par);
 	g_free (buffer);
+}
 
-	return;
+static int
+get_text_width (GtkWidget *widget,
+		gchar     *text)
+{
+	PangoContext *context = gtk_widget_get_pango_context (widget);
+	PangoLayout  *layout  = pango_layout_new (context);
+
+	int pango_width, pango_height;
+
+	pango_layout_set_text (layout, text, -1);
+	pango_layout_get_size (layout, &pango_width, &pango_height);
+
+	return pango_width / PANGO_SCALE;
+}
+
+static int
+get_text_height (GtkWidget *widget)
+{
+	PangoContext *context = gtk_widget_get_pango_context (widget);
+	PangoLayout  *layout  = pango_layout_new (context);
+
+	int pango_width, pango_height;
+
+//	pango_layout_set_text (layout, text, -1);
+	pango_layout_get_size (layout, &pango_width, &pango_height);
+
+	return pango_height / PANGO_SCALE;
 }
 
 
@@ -575,7 +624,7 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
    ---------------------------------------------------------------------- */
 
 static void
-gnome_about_calc_size (GnomeAboutPrivate *priv)
+gnome_about_calc_size (GnomeAbout *about)
 {
 	GList *name, *email = NULL;
 	GList *urls = NULL;
@@ -583,6 +632,10 @@ gnome_about_calc_size (GnomeAboutPrivate *priv)
 	gint title_h;
 	const gchar *p;
 	gfloat maxlen;
+
+	PangoContext *context = gtk_widget_get_pango_context (GTK_WIDGET (about->_priv->canvas));
+	PangoLayout  *layout  = pango_layout_new (context);
+	int pango_width, pango_height;
 	
 	w = GNOME_ABOUT_DEFAULT_WIDTH;
 	h = GNOME_ABOUT_PADDING_Y;
@@ -592,46 +645,60 @@ gnome_about_calc_size (GnomeAboutPrivate *priv)
 	len[0] = 0;
 	len[1] = 0;
 	title_h = 0;
-	if (priv->title) {
+	if (about->_priv->title)
+	{
 		h += GNOME_ABOUT_TITLE_PADDING_Y;
-		len[0] = gdk_string_measure (priv->font_title,
-					     priv->title);
-		title_h += (priv->font_title->descent + 
-			    GNOME_ABOUT_TITLE_PADDING_DOWN) +
-			(priv->font_title->ascent + 
-			 GNOME_ABOUT_TITLE_PADDING_UP);
 
+		pango_layout_set_text (layout, about->_priv->title, -1);
+		pango_layout_get_size (layout, &pango_width, &pango_height);
+
+		about->_priv->title_text_width  = (pango_width / PANGO_SCALE) * GNOME_ABOUT_TITLE_SIZE;
+		about->_priv->title_text_height = (pango_height / PANGO_SCALE) * GNOME_ABOUT_TITLE_SIZE;
+	
+		
+		len[0] = about->_priv->title_text_width;
+		title_h += GNOME_ABOUT_TITLE_PADDING_UP +
+			about->_priv->title_text_height +
+			GNOME_ABOUT_TITLE_PADDING_DOWN;
+			
 		h += GNOME_ABOUT_TITLE_PADDING_Y;
 		pw = GNOME_ABOUT_TITLE_PADDING_X;
-		if (GNOME_ABOUT_SHOW_URLS && priv->url) {
-			title_h += priv->font_url->ascent +
-				GNOME_ABOUT_TITLE_URL_PADDING_UP +
-				priv->font_url->descent +
+		if (GNOME_ABOUT_SHOW_URLS && about->_priv->url)
+		{
+			pango_layout_set_text (layout, about->_priv->url, -1);
+			pango_layout_get_size (layout, &pango_width, &pango_height);
+			
+			len[1] = pango_width / PANGO_SCALE;
+			title_h += GNOME_ABOUT_TITLE_URL_PADDING_UP +
+				pango_height / PANGO_SCALE +
 				GNOME_ABOUT_TITLE_URL_PADDING_DOWN;
-			len[1] = gdk_string_measure (priv->font_url, 
-						     priv->url);
 		}
 	}
-	priv->title_height = title_h;
+	about->_priv->title_height = title_h;
 	h += title_h;
 
-	if (priv->copyright || priv->names || priv->comments)
+	if (about->_priv->copyright ||
+	    about->_priv->names ||
+	    about->_priv->comments)
 	{
 		h += 2 * GNOME_ABOUT_CONTENT_PADDING_Y;
 		pw = MAX(pw, GNOME_ABOUT_CONTENT_PADDING_X);
 	}
 
 	len[2] = 0;
-	if (priv->copyright) {
-		h += priv->font_copyright->descent +
-			priv->font_copyright->ascent +
-			GNOME_ABOUT_COPYRIGHT_PADDING_UP +
+	if (about->_priv->copyright)
+	{
+		pango_layout_set_text (layout, about->_priv->copyright, -1);
+		pango_layout_get_size (layout, &pango_width, &pango_height);
+
+		h += GNOME_ABOUT_COPYRIGHT_PADDING_UP +
+			pango_height / PANGO_SCALE +
 			GNOME_ABOUT_COPYRIGHT_PADDING_DOWN +
 			GNOME_ABOUT_CONTENT_SPACING;
-		len[2] = gdk_string_measure (priv->font_copyright, 
-					     priv->copyright);
+		len[2] = pango_width / PANGO_SCALE;
 	}
 
+#if 0
 	len[3] = 0;
 	len[4] = 0;
 	if (priv->names) {
@@ -679,9 +746,14 @@ gnome_about_calc_size (GnomeAboutPrivate *priv)
 		h += GNOME_ABOUT_AUTHORS_PADDING_Y +
 			GNOME_ABOUT_CONTENT_SPACING;
 	}
+#endif
 	
 	maxlen = (gfloat) w;
+#if 0
 	for (i = 0; i < 5; i++)
+#else
+	for (i = 0; i < 3; i++)
+#endif
 		if (len[i] > maxlen)
 			maxlen = (gfloat) len[i];
 	
@@ -689,35 +761,50 @@ gnome_about_calc_size (GnomeAboutPrivate *priv)
 	if (w > GNOME_ABOUT_MAX_WIDTH)
 		w = GNOME_ABOUT_MAX_WIDTH;
 
-	if (priv->comments) {
+	if (about->_priv->comments) {
 		h += GNOME_ABOUT_CONTENT_SPACING;
 		num_pars = 1;
-		p = priv->comments;
+		p = about->_priv->comments;
 		while (*p != '\0') {
 			if (*p == '\n')
 				num_pars++;
 			p++;
 		}
 		
-		i = gdk_string_measure (priv->font_comments, priv->comments);
-		i /= w - 16;
+		pango_layout_set_text (layout, about->_priv->comments, -1);
+		pango_layout_get_size (layout, &pango_width, NULL);
+
+		i = pango_width / PANGO_SCALE;
+		
+		i /= w - 2 * (GNOME_ABOUT_PADDING_X +
+			      GNOME_ABOUT_CONTENT_PADDING_X +
+			      GNOME_ABOUT_CONTENT_INDENT +
+			      GNOME_ABOUT_COMMENTS_INDENT);
 		i += 1 + num_pars;;
-		h += i * (priv->font_comments->descent + priv->font_comments->ascent);
+
+		/*
+		 * The height of a single line is calculated from the
+		 * height of an empty string
+		 */
+		pango_layout_set_text (layout, 0, 0);
+		pango_layout_get_size (layout, NULL, &pango_height);
+		
+		h += i * (pango_height / PANGO_SCALE);
 	}
 
-	priv->width = w + 2 * (GNOME_ABOUT_PADDING_X + pw);
-	priv->height = h + GNOME_ABOUT_PADDING_Y;
+	g_object_unref (G_OBJECT (layout));
 
-	priv->height += 4 + priv->logo_height;
-	priv->width = MAX (priv->width, (priv->logo_width + 2 *
-					 (GNOME_ABOUT_PADDING_X +
-					  GNOME_ABOUT_LOGO_PADDING_X)));
-	
-	return;
+	about->_priv->width = w + 2 * (GNOME_ABOUT_PADDING_X + pw);
+	about->_priv->height = h + GNOME_ABOUT_PADDING_Y;
+
+	about->_priv->height += 4 + about->_priv->logo_height;
+	about->_priv->width = MAX (about->_priv->width,
+				   about->_priv->logo_width +
+				   2 * (GNOME_ABOUT_PADDING_X + GNOME_ABOUT_LOGO_PADDING_X));
 }
 
 static void
-gnome_about_load_logo(GnomeAboutPrivate *priv, 
+gnome_about_load_logo(GnomeAbout  *about, 
 		      const gchar *logo)
 {
 	gchar *filename;
@@ -744,9 +831,9 @@ gnome_about_load_logo(GnomeAboutPrivate *priv,
 			}
 
 			if (pixbuf != NULL) {
-				priv->logo = pixbuf;
-				priv->logo_width = gdk_pixbuf_get_width (pixbuf);
-				priv->logo_height = gdk_pixbuf_get_height (pixbuf);
+				about->_priv->logo = pixbuf;
+				about->_priv->logo_width = gdk_pixbuf_get_width (pixbuf);
+				about->_priv->logo_height = gdk_pixbuf_get_height (pixbuf);
 				
 			}
 			
@@ -761,8 +848,7 @@ gnome_about_load_logo(GnomeAboutPrivate *priv,
    ---------------------------------------------------------------------- */
 
 static void
-gnome_about_fill_info (GtkWidget *widget,
-		       GnomeAboutPrivate *priv,
+gnome_about_fill_info (GnomeAbout  *about,
 		       const gchar *title,
 		       const gchar *version,
 		       const gchar *url,
@@ -775,32 +861,32 @@ gnome_about_fill_info (GtkWidget *widget,
 	int author_num = 0, i;
 
 	/* Fill options */
-	gnome_about_fill_options (widget, priv);
+	gnome_about_fill_style (about);
 
 	/* Load logo */
-	gnome_about_load_logo (priv, logo);
+	gnome_about_load_logo (about, logo);
 	
 	/* fill struct */
 	if (title)
-		priv->title = g_strconcat (title, " ", 
-					   version ? version : "", NULL);
+		about->_priv->title = g_strconcat (title, " ", 
+						  version ? version : "", NULL);
 	else
-		priv->title = NULL;
+		about->_priv->title = NULL;
 	
 	if (url)
-		priv->url = g_strdup (url);
+		about->_priv->url = g_strdup (url);
 	else
-		priv->url = NULL;
+		about->_priv->url = NULL;
 	
 	if (copyright)
-		priv->copyright = g_strdup (copyright);
+		about->_priv->copyright = g_strdup (copyright);
 	else
-		priv->copyright = NULL;
+		about->_priv->copyright = NULL;
 
 	if (comments)
-		priv->comments = g_strdup (comments);
+		about->_priv->comments = g_strdup (comments);
 	else
-		priv->comments = NULL;
+		about->_priv->comments = NULL;
 
 	if (authors && authors[0]) {
 		gchar *name, *email;
@@ -808,40 +894,41 @@ gnome_about_fill_info (GtkWidget *widget,
 			name = g_strdup (*authors);
 			gnome_about_parse_name (&name, &email);
 			
-			priv->names = g_list_append (priv->names, name);
-			priv->author_emails = g_list_append (priv->author_emails, 
-							     email);
+			about->_priv->names = g_list_append (about->_priv->names, name);
+			about->_priv->author_emails = g_list_append (about->_priv->author_emails, 
+								     email);
 			
 			authors++;
 			author_num++;
 		}
 	}
 
-	priv->author_urls = NULL;
+	about->_priv->author_urls = NULL;
 	if (author_urls) {
 		for (i = 0; i < author_num; i++, author_urls++) {
-			priv->author_urls = g_list_append (priv->author_urls,
-							 g_strdup (*author_urls));
+			about->_priv->author_urls = g_list_append (
+				about->_priv->author_urls,
+				g_strdup (*author_urls));
 		}
 	}
-
+	
         /* Calculate width of window */
-	gnome_about_calc_size (priv);
+	gnome_about_calc_size (about);
 }
 
-static void gnome_about_fill_options (GtkWidget *widget,
-				      GnomeAboutPrivate *priv)
+static void gnome_about_fill_style (GnomeAbout *about)
 {
 	GtkStyle *style;
     
 	Bonobo_ConfigDatabase cd = gnome_program_get_config_database (gnome_program_get ());
 
-	g_return_if_fail (priv != NULL);
+	g_return_if_fail (about->_priv != NULL);
 
 	/* Read GConf options */
-	priv->show_urls = bonobo_pbclient_get_boolean (cd, "/about/show_urls", NULL);
-	priv->show_logo = bonobo_pbclient_get_boolean (cd, "/about/show_logo", NULL);
-	
+	about->_priv->show_urls = bonobo_pbclient_get_boolean (cd, "/about/show_urls", NULL);
+	about->_priv->show_logo = bonobo_pbclient_get_boolean (cd, "/about/show_logo", NULL);
+
+#if 0
 	/* Create fonts and get colors*/
 	/* FIXME: dirty hack, but it solves i18n problem without rewriting the
 	   drawing code..  */
@@ -850,7 +937,6 @@ static void gnome_about_fill_options (GtkWidget *widget,
 	gtk_widget_ensure_style (widget);
 
 	gtk_widget_set_name (widget, "Title");
-	priv->font_title = gdk_font_ref (widget->style->font);
 	priv->title_bg = gdk_color_copy (&widget->style->bg[GTK_STATE_NORMAL]);
 	g_print ("title:RGB, %d, %d, %d\n", priv->title_bg->red,
 		 priv->title_bg->green, priv->title_bg->blue);
@@ -858,25 +944,7 @@ static void gnome_about_fill_options (GtkWidget *widget,
 	gdk_color_alloc (gtk_widget_get_default_colormap (), priv->title_bg);
 	gdk_color_alloc (gtk_widget_get_default_colormap (), priv->title_fg);
 
-	
-	gtk_widget_set_name (widget, "TitleUrl");
-	gtk_widget_ensure_style (widget);
-	priv->font_url = gdk_font_ref (widget->style->font);
-	
-	gtk_widget_set_name (widget, "Copyright");
-	priv->font_copyright = gdk_font_ref (widget->style->font);
-	
-	gtk_widget_set_name (widget, "Author");
-	priv->font_author = gdk_font_ref (widget->style->font);
-
-	gtk_widget_set_name (widget, "Names");
-	priv->font_names = gdk_font_ref (widget->style->font);
-
-	gtk_widget_set_name (widget, "NamesUrl");
-	priv->font_names_url = gdk_font_ref (widget->style->font);
-	
 	gtk_widget_set_name (widget, "Comments");
-	priv->font_comments = gdk_font_ref (widget->style->font);
 	priv->contents_bg = gdk_color_copy (&widget->style->bg[GTK_STATE_NORMAL]);
 	priv->contents_fg = gdk_color_copy (&widget->style->fg[GTK_STATE_NORMAL]);
 	gdk_color_alloc (gtk_widget_get_default_colormap (), priv->contents_bg);
@@ -884,7 +952,27 @@ static void gnome_about_fill_options (GtkWidget *widget,
 	
 	gtk_widget_set_style (widget, style);
 	gtk_style_unref (style);
-
+#else
+	about->_priv->title_bg = g_new (GdkColor, 1);
+	about->_priv->title_bg->red = 0;
+	about->_priv->title_bg->green = 0;
+	about->_priv->title_bg->blue = 0;
+	
+	about->_priv->title_fg = g_new (GdkColor, 1);
+	about->_priv->title_fg->red = 255;
+	about->_priv->title_fg->green = 255;
+	about->_priv->title_fg->blue = 255;
+	
+	about->_priv->contents_bg = g_new (GdkColor, 1);
+	about->_priv->contents_bg->red = 0;
+	about->_priv->contents_bg->green = 0;
+	about->_priv->contents_bg->blue = 0;
+	
+	about->_priv->contents_fg = g_new (GdkColor, 1);
+	about->_priv->contents_fg->red = 255;
+	about->_priv->contents_fg->green = 255;
+	about->_priv->contents_fg->blue = 255;
+#endif
 }
 
 /* ----------------------------------------------------------------------
@@ -905,14 +993,16 @@ gnome_about_destroy (GtkObject *object)
 		g_free (self->_priv->copyright);
 		g_free (self->_priv->comments);
 
+#if 0
 		/* Free GUI's. */
-		gdk_font_unref (self->_priv->font_title);
-		gdk_font_unref (self->_priv->font_url);
-		gdk_font_unref (self->_priv->font_copyright);
-		gdk_font_unref (self->_priv->font_author);
-		gdk_font_unref (self->_priv->font_names);
-		gdk_font_unref (self->_priv->font_comments);
-
+		pango_font_description_free (self->_priv->font_title);
+		pango_font_description_free (self->_priv->font_url);
+		pango_font_description_free (self->_priv->font_copyright);
+		pango_font_description_free (self->_priv->font_author);
+		pango_font_description_free (self->_priv->font_names);
+		pango_font_description_free (self->_priv->font_comments);
+#endif
+		
 		/* Free colors */
 		gdk_color_free (self->_priv->title_fg);
 		gdk_color_free (self->_priv->title_bg);
@@ -1064,7 +1154,6 @@ gnome_about_construct (GnomeAbout *about,
 		       const gchar *logo)
 {
 	GtkWidget *frame;
-	GtkWidget *canvas;
 	
 	gtk_window_set_title (GTK_WINDOW(about), _("About"));
 	gtk_window_set_policy (GTK_WINDOW(about), FALSE, FALSE, TRUE);
@@ -1079,32 +1168,33 @@ gnome_about_construct (GnomeAbout *about,
 	gtk_container_add(GTK_CONTAINER (GTK_DIALOG(about)->vbox),
 			  GTK_WIDGET(frame));
 	gtk_widget_show (frame);
+	
+//        gtk_widget_push_colormap(gdk_rgb_get_cmap());
+	about->_priv->canvas = GNOME_CANVAS (gnome_canvas_new ());
+//        gtk_widget_pop_colormap();
 
-        gtk_widget_push_colormap(gdk_rgb_get_cmap());
-	canvas = gnome_canvas_new ();
-        gtk_widget_pop_colormap();
-	gtk_container_add (GTK_CONTAINER(frame), canvas);
+	gtk_container_add (GTK_CONTAINER(frame),
+			   GTK_WIDGET (about->_priv->canvas));
 
 	/* Fill the GnomeAboutPriv structure */
-	gnome_about_fill_info (GTK_WIDGET (about),
-			       about->_priv,
+	gnome_about_fill_info (about,
 			       title, version, url,
 			       copyright,
 			       authors, author_urls,
 			       comments,
 			       logo);
 
-	gnome_about_draw (GNOME_CANVAS(canvas), about->_priv);
-	gtk_widget_show (canvas);
+	gnome_about_draw (about);
+	gtk_widget_show (GTK_WIDGET (about->_priv->canvas));
 
 	gtk_dialog_add_button (GTK_DIALOG (about),
-			       GTK_STOCK_BUTTON_OK,
+			       GTK_STOCK_OK,
 			       GTK_RESPONSE_OK);
 }
 
 static gint
-gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
-		    gpointer data)
+gnome_about_item_cb (GnomeCanvasItem *item, GdkEvent *event,
+		     gpointer data)
 {
 	
 	gchar *url = gtk_object_get_data(GTK_OBJECT(item), "url");
@@ -1122,7 +1212,7 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 			if (underline == NULL) {
 				gdouble x1, x2, y1, y2;
 				GnomeCanvasPoints *points;
-				GdkColor *color = (GdkColor*)data;
+				gchar *color = (gchar*)data;
 				
 				if (color) {
 					points = gnome_canvas_points_new (2);
@@ -1137,7 +1227,7 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 					underline = gnome_canvas_item_new (gnome_canvas_root (item->canvas),
 									   gnome_canvas_line_get_type (),
 									   "points", points,
-									   "fill_color_gdk", color,
+									   "fill_color", color,
 									   NULL);
 					gnome_canvas_points_unref (points);
 				}

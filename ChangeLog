@@ -1,3 +1,12 @@
+2001-05-27  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* libgnomeui/gnome-about.c: First run at porting it over to
+	Pango. It is no longer themed by special widget names in GTKRC,
+	instead, you modify the default font for the canvas widget in
+	your GTKRC and it will use that. Colors and layout sizes are
+	hardcoded for now. Only the title, the copyright and the
+	description is displayed (i.e. the authors list is missing).
+
 2001-05-19  Martin Baulig  <baulig@suse.de>
 
 	* components/: New directory.
