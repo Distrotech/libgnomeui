@@ -1,3 +1,7 @@
+2001-12-10  Yanko Kaneti  <yaneti@declera.com>
+
+	* libgnomeui.schemas: (menus/show-icons) fix default value 
+	
 Sun Dec 09 14:24:57 2001  George Lebl <jirka@5z.com>
 
 	* gnome-icon-entry.c: don't use the deprecated _gtk_entry method
