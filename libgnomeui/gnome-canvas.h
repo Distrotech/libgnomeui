@@ -94,21 +94,19 @@ typedef struct {
 	guchar *buf;
 
 	/* Rowstride for the buffer */
-	int buf_rowstride;
+	int rowstride;
 
 	/* Rectangle describing the rendering area */
 	ArtIRect rect;
 
-	/* Background color, given as 0xrrggbb */
+	/* Background color to be used if is_solid is FALSE, given as 0xrrggbb */
 	guint32 bg_color;
 
-	/* Invariant: at least one of the following flags is true. */
-
-	/* Set when the render rectangle area is the solid color bg_color */
-	unsigned int is_bg : 1;
-
-	/* Set when the render rectangle area is represented by the buf */
-	unsigned int is_buf : 1;
+	/* If FALSE, the buffer does not contain meaningful data and it should
+	 * be considered to be a solid bg_color instead.  If TRUE, then the
+	 * buffer does contain meaningful data.
+	 */
+	guint is_solid : 1;
 } GnomeCanvasBuf;
 
 
@@ -180,17 +178,22 @@ struct _GnomeCanvasItemClass {
 	 */
 	void (* render) (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 
-	/* Calculate the distance from an item to the specified point.  It also
-         * returns a canvas item which is the item itself in the case of the
-         * object being an actual leaf item, or a child in case of the object
-         * being a canvas group.  (cx, cy) are the canvas pixel coordinates that
-         * correspond to the item-relative coordinates (x, y).
+	/* DEPRECATED:  Calculate the distance from an item to the specified
+         * point.  It also returns a canvas item which is the item itself in the
+         * case of the object being an actual leaf item, or a child in case of
+         * the object being a canvas group.  (cx, cy) are the canvas pixel
+         * coordinates that correspond to the item-relative coordinates (x, y).
 	 */
 	double (* point) (GnomeCanvasItem *item, double x, double y, int cx, int cy,
 			  GnomeCanvasItem **actual_item);
 
-	/* Deprecated.  FIXME: remove this */
-	void (* translate) (GnomeCanvasItem *item, double dx, double dy);
+	/* Returns whether the specified point, in item-relative coordinates, is
+	 * inside the item.  Also returns an item which is the item itself in
+	 * the case of the object being an actual leaf item, or a child in case
+	 * of the object being a canvas group.
+	 */
+	gboolean (* contains) (GnomeCanvasItem *item, double x, double y,
+			       GnomeCanvasItem **actual_item);
 
 	/* Fetch the item's bounding box (need not be exactly tight).  This
 	 * should be in item-relative coordinates.

@@ -1,3 +1,17 @@
+1999-12-14  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-rect-ellipse.c (update_non_aa): Compute the
+	bounding box in canvas pixel coordinates.
+	(gnome_canvas_rect_draw): Better computation of coordinates.
+	Also, threshold the alpha properly.
+
+	* gnome-canvas.h (GnomeCanvasBuf): Removed the is_bg and is_buf
+	fields and replaced them by a single is_solid flag.  The
+	invariants that were in place let us deal with things with only a
+	single flag.
+	(GnomeCanvasItemClass): Replaced the deprecated ::translate() slot
+	with the new ::contains() method.
+
 1999-12-13  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas-rect-ellipse.c (REPrivate): Moved the previously

@@ -565,9 +565,8 @@ update_non_aa (GnomeCanvasRE *re, double *affine, ArtSVP *clip_path, int flags)
 	    || ((flags & GNOME_CANVAS_UPDATE_VISIBILITY)
 		&& (GTK_OBJECT_FLAGS (re) & GNOME_CANVAS_ITEM_VISIBLE))
 	    || (flags & GNOME_CANVAS_UPDATE_AFFINE)) {
-		ArtPoint i1, i2, w1, w2;
+		ArtPoint i1, i2, c1, c2;
 		double hwidth;
-		double i2w[6];
 
 		get_corners (re, &i1.x, &i1.y, &i2.x, &i2.y);
 		if (priv->width_in_pixels)
@@ -580,14 +579,13 @@ update_non_aa (GnomeCanvasRE *re, double *affine, ArtSVP *clip_path, int flags)
 		i2.x += hwidth;
 		i2.y += hwidth;
 
-		gnome_canvas_item_i2w_affine (item, i2w);
-		art_affine_point (&w1, &i1, i2w);
-		art_affine_point (&w2, &i2, i2w);
+		art_affine_point (&c1, &i1, affine);
+		art_affine_point (&c2, &i2, affine);
 
-		item->x1 = w1.x;
-		item->y1 = w1.y;
-		item->x2 = w2.x;
-		item->y2 = w2.y;
+		item->x1 = floor (c1.x);
+		item->y1 = floor (c1.y);
+		item->x2 = ceil (c2.x);
+		item->y2 = ceil (c2.y);
 
 		priv->need_shape_update = FALSE;
 	}
@@ -641,14 +639,16 @@ gnome_canvas_re_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path
 	}
 
 	/* Both the rectangle and ellipse items can share the same update code
-	 * for the non-antialiased case.
+	 * for the non-antialiased case.  For the AA case, each item provides
+	 * its own implementation of ::update().
 	 */
-
 	if (!item->canvas->aa)
 		update_non_aa (re, affine, clip_path, flags);
 }
 
 
+
+/* Item methods */
 
 /* Unrealize handler for the rect/ellipse item */
 static void
@@ -699,20 +699,17 @@ gnome_canvas_re_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x
 	*y2 = ry2 + hwidth;
 }
 
+/* Render handler for the rect/ellipse item.  Both rectangles and ellipses share
+ * the same AA rendering code.
+ */
 static void
-gnome_canvas_re_render (GnomeCanvasItem *item,
-			GnomeCanvasBuf *buf)
+gnome_canvas_re_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 {
 	GnomeCanvasRE *re;
 	REPrivate *priv;
 
 	re = GNOME_CANVAS_RE (item);
 	priv = re->priv;
-
-#ifdef VERBOSE
-	g_print ("gnome_canvas_re_render (%d, %d) - (%d, %d) fill=%08x outline=%08x\n",
-		 buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1, re->fill_color, re->outline_color);
-#endif
 
 	if (priv->fill_svp)
 		gnome_canvas_render_svp (buf, priv->fill_svp, priv->fill_color);
@@ -721,30 +718,31 @@ gnome_canvas_re_render (GnomeCanvasItem *item,
 		gnome_canvas_render_svp (buf, priv->outline_svp, priv->outline_color);
 }
 
+
 
 /* Rectangle item */
 
 static void gnome_canvas_rect_class_init (GnomeCanvasRectClass *class);
 
-static void   gnome_canvas_rect_update (GnomeCanvasItem *item, double *affine,
-					ArtSVP *clip_path, int flags);
-static void   gnome_canvas_rect_draw   (GnomeCanvasItem *item, GdkDrawable *drawable,
-					int x, int y, int width, int height);
-static double gnome_canvas_rect_point  (GnomeCanvasItem *item, double x, double y, int cx, int cy,
-				        GnomeCanvasItem **actual_item);
-
+static void gnome_canvas_rect_update (GnomeCanvasItem *item, double *affine,
+				      ArtSVP *clip_path, int flags);
+static void gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
+				    int x, int y, int width, int height);
+static gboolean gnome_canvas_rect_contains (GnomeCanvasItem *item, double x, double y,
+					    GnomeCanvasItem **actual_item);
 
 static GnomeCanvasREClass *rect_parent_class;
 
+
 
 /**
  * gnome_canvas_rect_get_type:
  * @void:
  *
- * Registers the &GnomeCanvasRect class if necesary, and returns the type ID
+ * Registers the #GnomeCanvasRect class if necesary, and returns the type ID
  * associated to it.
  *
- * Return value: The type ID of the &GnomeCanvasRect class.
+ * Return value: The type ID of the #GnomeCanvasRect class.
  **/
 GtkType
 gnome_canvas_rect_get_type (void)
@@ -779,9 +777,9 @@ gnome_canvas_rect_class_init (GnomeCanvasRectClass *class)
 
 	rect_parent_class = gtk_type_class (gnome_canvas_re_get_type ());
 
-	item_class->draw = gnome_canvas_rect_draw;
-	item_class->point = gnome_canvas_rect_point;
 	item_class->update = gnome_canvas_rect_update;
+	item_class->draw = gnome_canvas_rect_draw;
+	item_class->contains = gnome_canvas_rect_contains;
 }
 
 /* Update handler for the rectangle item */
@@ -801,6 +799,8 @@ gnome_canvas_rect_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_pa
 	/* GnomeCanvasRE::update() did handle everything for the non-AA case */
 	if (!item->canvas->aa)
 		return;
+
+	/* FIXME: compute the SVPs for AA */
 }
 
 #if 0
@@ -941,6 +941,8 @@ gnome_canvas_rect_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_pa
 }
 #endif
 
+
+
 /* Draw handler for the rectangle item */
 static void
 gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
@@ -950,7 +952,8 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	REPrivate *priv;
 	ArtPoint i1, i2, c1, c2;
 	double i2c[6];
-	int x1, y1, w, h;
+	int x1, y1, x2, y2;
+	int w, h;
 
 	re = GNOME_CANVAS_RE (item);
 	priv = re->priv;
@@ -961,10 +964,13 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	art_affine_point (&c1, &i1, i2c);
 	art_affine_point (&c2, &i2, i2c);
 
-	x1 = (int) floor (c1.x - x + 0.5);
-	y1 = (int) floor (c1.y - y + 0.5);
-	w = (int) floor (c2.x - c1.x + 0.5);
-	h = (int) floor (c2.y - c1.y + 0.5);
+	x1 = floor (c1.x - x + 0.5);
+	y1 = floor (c1.y - y + 0.5);
+	x2 = floor (c2.x - x + 0.5);
+	y2 = floor (c2.y - y + 0.5);
+
+	w = x2 - x1 + 1;
+	h = y2 - y1 + 1;
 
 	/* If we have stipples, set the offsets in the GCs and reset them later,
 	 * because these GCs are supposed to be read-only.
@@ -980,13 +986,11 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	 * if we should actually paint the fill or outline.
 	 */
 
-	if (priv->fill_set
-	    && (priv->have_fill_pixel || (priv->fill_color & 0xff) >= 128))
-		gdk_draw_rectangle (drawable, priv->fill_gc, TRUE, x1, y1, w + 1, h + 1);
+	if (priv->fill_color & 0xff >= 128)
+		gdk_draw_rectangle (drawable, priv->fill_gdc, TRUE, x1, y1, w, h);
 
-	if (priv->outline_set
-	    && (priv->have_outline_pixel || (priv->outline_color & 0xff) >= 128))
-		gdk_draw_rectangle (drawable, priv->outline_gc, FALSE, x1, y1, w, h);
+	if (priv->outline_color & 0xff >= 128)
+		gdk_draw_rectangel (drawable, priv->outline_gc, FALSE, x1, y1, w, h);
 
 	/* Reset stipple offsets */
 
@@ -995,6 +999,20 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	if (priv->outline_stipple)
 		gdk_gc_set_ts_origin (priv->outline_gc, 0, 0);
+}
+
+/* Contains handler for the rectangle item */
+static gboolean
+gnome_canvas_rect_contains (GnomeCanvasItem *item, double x, double y, GnomeCanvasItem **actual_item)
+{
+	GnomeCanvasRE *re;
+	REPrivate *priv;
+	double x1, y1, x2, y2;
+
+	re = GNOME_CANVAS_RE (item);
+	priv = re->priv;
+
+	
 }
 
 static double
