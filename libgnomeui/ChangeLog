@@ -1,3 +1,7 @@
+1999-05-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dock-band.c (gnome_dock_band_draw): Made static.
+
 Mon May 03 01:02:11 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-propertybox.c: add two more g_return_if_fail's to at least

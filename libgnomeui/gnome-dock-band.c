@@ -535,7 +535,7 @@ gnome_dock_band_unmap (GtkWidget *widget)
     }
 }
 
-void
+static void
 gnome_dock_band_draw (GtkWidget *widget, GdkRectangle *area)
 {
   g_return_if_fail (widget != NULL);
