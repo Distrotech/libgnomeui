@@ -1,3 +1,9 @@
+1999-03-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-color-picker.c (render): added a check if cp is realized,
+	since otherwise da->style->bg_gc[*]==NULL caused a segfault in
+	background capplet. it seems to work allright now.
+
 1999-03-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-util.c: Added documentation for the functions that
