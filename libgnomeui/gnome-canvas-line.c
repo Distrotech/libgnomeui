@@ -493,10 +493,12 @@ set_stipple (GnomeCanvasLine *line, GdkBitmap *stipple, int reconfigure)
 	if (stipple && !reconfigure)
 		gdk_bitmap_ref (stipple);
 
-	if (line->gc) {
-		gdk_gc_set_stipple (line->gc, stipple);
-		gdk_gc_set_fill (line->gc, stipple ? GDK_STIPPLED : GDK_SOLID);
-	}
+	if (line->gc)
+		if (stipple) {
+			gdk_gc_set_stipple (line->gc, stipple);
+			gdk_gc_set_fill (line->gc, GDK_STIPPLED);
+		} else
+			gdk_gc_set_fill (line->gc, GDK_SOLID);
 }
 
 /* Convenience functions to recalculate the arrows and bounds of the line */

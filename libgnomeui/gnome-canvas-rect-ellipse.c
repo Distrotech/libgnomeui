@@ -199,10 +199,12 @@ set_stipple (GdkGC *gc, GdkBitmap **internal_stipple, GdkBitmap *stipple, int re
 	if (stipple && !reconfigure)
 		gdk_bitmap_ref (stipple);
 
-	if (gc) {
-		gdk_gc_set_stipple (gc, stipple);
-		gdk_gc_set_fill (gc, stipple ? GDK_STIPPLED : GDK_SOLID);
-	}
+	if (gc)
+		if (stipple) {
+			gdk_gc_set_stipple (gc, stipple);
+			gdk_gc_set_fill (gc, GDK_STIPPLED);
+		} else
+			gdk_gc_set_fill (gc, GDK_SOLID);
 }
 
 /* Recalculate the outline width of the rectangle/ellipse and set it in its GC */

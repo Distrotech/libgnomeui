@@ -362,10 +362,12 @@ set_stipple (GnomeCanvasText *text, GdkBitmap *stipple, int reconfigure)
 	if (stipple && !reconfigure)
 		gdk_bitmap_ref (stipple);
 
-	if (text->gc) {
-		gdk_gc_set_stipple (text->gc, stipple);
-		gdk_gc_set_fill (text->gc, stipple ? GDK_STIPPLED : GDK_SOLID);
-	}
+	if (text->gc)
+		if (stipple) {
+			gdk_gc_set_stipple (text->gc, stipple);
+			gdk_gc_set_fill (text->gc, GDK_STIPPLED);
+		} else
+			gdk_gc_set_fill (text->gc, GDK_SOLID);
 }
 
 static void

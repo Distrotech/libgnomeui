@@ -1,3 +1,15 @@
+1998-11-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-rect-ellipse.c (set_stipple): Only do
+	gdk_gc_set_stipple if the stipple pixmap is not NULL.  Otherwise,
+	just use gdk_gc_set_fill() to set the fill mode to GDK_SOLID.
+
+	* gnome-canvas-line.c (set_stipple): Likewise.
+
+	* gnome-canvas-polygon.c (set_stipple): Likewise.
+
+	* gnome-canvas-text.c (set_stipple): Likewise.
+
 1998-11-18  Tuomas Kuosmanen  <tigert@fun112.koivukyla.hoas.fi>
 
 	* gnome-stock.[c,h], stock_demo.c, pixmaps/stock_index.png
