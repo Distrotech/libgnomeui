@@ -1,3 +1,9 @@
+1999-12-25  Ettore Perazzoli  <ettore@gnu.org>
+
+	[From Morten Welinder <terra@diku.dk>]
+	* gnome-app.c (gnome_app_destroy): Unref the dock layout if not
+	NULL.
+
 1999-12-21  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* gnome-helpsys.c (gnome_help_app_topics): Removed extra loop 

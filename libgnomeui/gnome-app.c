@@ -291,6 +291,11 @@ gnome_app_destroy (GtkObject *object)
 	gtk_accel_group_unref (app->accel_group);
 	app->accel_group = NULL;
 
+	if (app->layout) {
+		gtk_object_unref (GTK_OBJECT (app->layout));
+		app->layout = NULL;
+	}
+
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
