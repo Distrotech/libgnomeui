@@ -273,7 +273,7 @@ gnome_client_class_init (GnomeClientClass *klass)
   
   client_signals[SAVE_YOURSELF] =
     gtk_signal_new ("save_yourself",
-		    GTK_RUN_FIRST,
+		    GTK_RUN_LAST,
 		    object_class->type,
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, save_yourself),
 		    gnome_client_marshal_signal_1,

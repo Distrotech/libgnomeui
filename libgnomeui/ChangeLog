@@ -1,5 +1,8 @@
 1998-05-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-client.c (gnome_client_class_init): Use GTK_RUN_LAST for
+	the save_yourself signal
+
 	* gnome-icon-list.c (gnome_icon_paint_text,
 	gnome_icon_layout_text, gnome_icon_text_info_free): moved from
 	gmc's gtrans.c code here.  Some more code reuse.
