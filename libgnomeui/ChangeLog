@@ -1,3 +1,7 @@
+2000-01-11  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-gconf.h: added more functions.
+
 2000-01-11  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* gnome-about.c: (gnome_about_item_cb): Changed the cursors to use the
