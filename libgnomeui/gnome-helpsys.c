@@ -687,43 +687,6 @@ gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view)
 static void
 gnome_help_view_interact(GtkWidget *btn, GnomeHelpView *help_view)
 {
-  char *baseurl;
-  char *fullurl;
-  const char *widget_id;
-  char *help_id;
-  const char *app_version, *app_id;
-  GnomeProgram *prog;
-  int slen;
-
-  baseurl = gnome_help_view_get_base_url();
-  widget_id = gnome_help_view_find_widget_id(help_view, help_view->toplevel);
-
-  if(widget_id)
-    help_id = gnome_help_view_find_help_id(help_view, widget_id);
-  else
-    help_id = NULL;
-
-  prog = gnome_program_get();
-  app_id = gnome_program_get_name(prog);
-  app_version = gnome_program_get_version(prog);
-
-  slen = strlen(baseurl);
-  slen += sizeof("goto.cgi?location=help_view&widgetID=&appID=&appVersion=&widgetID=&helpID=");
-  slen += widget_id?strlen(widget_id):0;
-  slen += help_id?strlen(help_id):0;
-  slen += strlen(app_id);
-  slen += strlen(app_version);
-  fullurl = g_alloca(slen);
-
-  sprintf(fullurl, "%s/jump.cgi?location=help_view&appID=%s&appVersion=%s%s%s%s%s", baseurl, app_id, app_version,
-	  widget_id?"&widgetID=":"",
-	  widget_id?widget_id:"",
-	  help_id?"&helpID=":"",
-	  help_id?help_id:"");
-  g_free(baseurl);
-  g_free(help_id);
-
-  gnome_help_view_show_url(help_view, fullurl, URL_WEB);
 }
 
 static char *
@@ -768,7 +731,6 @@ gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id)
 static char *
 gnome_help_view_get_base_url(void)
 {
-  return gnome_config_get_string("/Web/InteractSite=http://www.gnome.org/interact");
 }
 
 static void
