@@ -1,3 +1,8 @@
+2000-09-22  Jody Goldberg <jgoldberg@home.com>
+
+	* gnome-stock.c (create_pixmap_from_file) : Implement what was
+	  documented.
+
 Fri Sep 15 18:54:18 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dentry-edit.c: Add "URL" to the list of standard entry

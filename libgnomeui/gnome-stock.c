@@ -1007,8 +1007,11 @@ static GnomePixmap *
 create_pixmap_from_file(GtkWidget *window, GnomeStockPixmapEntryFile *data)
 {
 	GnomePixmap *pixmap;
+	char *filename = gnome_pixmap_file (data->filename);
 
-	pixmap = GNOME_PIXMAP(gnome_pixmap_new_from_file(data->filename));
+	pixmap = GNOME_PIXMAP(gnome_pixmap_new_from_file(filename));
+
+	g_free (filename);
 	return pixmap;
 }
 
