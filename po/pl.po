@@ -9,14 +9,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-26 10:03+0100\n"
 "PO-Revision-Date: 2003-06-27 21:59--100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -142,6 +142,7 @@ msgstr "Informacje o programie %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Plik"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Gra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Pomo_c"
 
@@ -389,11 +391,11 @@ msgstr "Konfiguruje aplikację"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Informacje o"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informacje o programie"
 
@@ -420,7 +422,7 @@ msgstr "Tworzy nowe okno"
 msgid "_Close This Window"
 msgstr "Za_mknij okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zamyka bieżące okno"
 
@@ -500,23 +502,23 @@ msgstr "_Zawartość"
 msgid "View help for this application"
 msgstr "Wyświetla pomoc na temat aplikacji"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Tekst pod ikonami"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Ważny tekst obok ikon"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Tylko ikony"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Tylko tekst"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Użycie globalnego ustawienia środowiska (%s)"
@@ -653,7 +655,7 @@ msgstr "Nie nawiązuje połączenia z menedżerem sesji"
 msgid "Session management"
 msgstr "Zarządzanie sesją"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Anuluj zakończenie sesji"
 
@@ -1322,27 +1324,32 @@ msgstr "Cofnij wcięcie"
 msgid "About"
 msgstr "Informacje o"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr "Wyłączenie okna błędu programu"
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "Wykorzystywany ekran X"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "EKRAN X"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "Biblioteka GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Kilkakrotnie wystąpiło niepoprawne odwołanie do pamięci; nie można "
 "wyświetlić okna z informacją o błędzie\n"
 
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1350,7 +1357,7 @@ msgstr ""
 "Naruszenie segmentacji!\n"
 "Nie można wyświetlić okna z informacją o błędzie\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1365,37 +1372,55 @@ msgstr ""
 "zostanie zakończona. Przed zamknięciem tego okna zapisz wszystkie pliki w "
 "uruchomionych programach."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Aplikacja \"%s\" (proces %d) została przerwana\n"
-"z powodu poważnego błędu.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "Aplikacja \"%s\" nieoczekiwanie zakończyła działanie."
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "proces %d: %s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Możesz powiadomić programistów o zdarzeniu, aby pomóc w usunięciu błędu. "
+"Możesz też, ponownie uruchomić aplikację."
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Użycie: gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Wyślij informację o błędzie"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr "Powiadomienie programistów"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Śledzenie"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Kończy test"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Odwiedź stronę \"GNOME Application Crash\", aby uzyskać więcej informacji"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Aplikacja \"%s\" (proces %d) została przerwana\n"
+#~ "z powodu poważnego błędu.\n"
+#~ "(%s)"
 
-#~ msgid "Exit the test"
-#~ msgstr "Kończy test"
+#~ msgid "Submit a bug report"
+#~ msgstr "Wyślij informację o błędzie"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr ""
+#~ "Odwiedź stronę \"GNOME Application Crash\", aby uzyskać więcej informacji"
