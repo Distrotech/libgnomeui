@@ -938,8 +938,8 @@ gnome_client_set_restart_command (GnomeClient *client,
 					   SmRestartCommand, 
 					   sm_client_id_arg_name,
 					   client->restart_command);
-#endif /* HAVE_LIBSM */
     }
+#endif /* HAVE_LIBSM */
 }
 
 
