@@ -200,7 +200,7 @@ main(int argc, char **argv)
 #if 0
   gnome_init ("mdi_demo", "1.0", argc, argv);
 #else
-  gnome_program_init ("mdi_demo", "2.0", argc, argv, GNOMEUI_INIT, NULL);
+  gnome_program_init ("mdi_demo", "2.0", argc, argv, LIBGNOMEUI_INIT, NULL);
 #endif
 
   mdi = gnome_mdi_new("MDIDemo", "MDI Demo");
