@@ -143,7 +143,6 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-uidefs.h			\
         gnome-winhints.h		\
 	gnometypebuiltins.h		\
-	gtkcalendar.h			\
 	gtkcauldron.h			\
 	gtkdial.h			\
 	gtklayout.h			\
@@ -164,10 +163,12 @@ auto-files-1: gnome.defs
 auto-files-1: gnometypebuiltins_evals.c gnometypebuiltins_ids.c
 auto-files-1: gnometypebuiltins_vars.c gnometypebuiltins.h
 
+gnometypes.c: gnometypebuiltins_evals.c gnometypebuiltins_vars.c
+
 # generate gnome.defs file from gnome-boxed.defs and *.h
 gnome.defs: @MAINT@ makeenums.pl gnome-boxed.defs
 	cd $(srcdir) \
-	&& perl makeenums.pl defs ./g*.h > gd.tmp \
+	&& perl makeenums.pl defs $(libgnomeuiinclude_HEADERS) > gd.tmp \
 	&& cat gnome-boxed.defs >> gd.tmp \
 	&& mv gd.tmp gnome.defs
 
@@ -192,7 +193,7 @@ gnometypebuiltins_ids.c: @MAINT@ gnome.defs maketypes.awk
 # generate enum value arrays
 gnometypebuiltins_evals.c: @MAINT@ makeenums.pl gnome.defs
 	cd $(srcdir) \
-	&& perl makeenums.pl arrays ./g*.h > gtbe.tmp \
+	&& perl makeenums.pl arrays $(libgnomeuiinclude_HEADERS) > gtbe.tmp \
 	&& mv gtbe.tmp gnometypebuiltins_evals.c
 
 #######################
