@@ -16,9 +16,9 @@
  *   are called before removing mdi_child or view. the handler should return true if the object
  *   should be removed from MDI
  *
- * GList *create_menus(GnomeMDI *)
- *   should return a GList of menuitems to be added to the MDI menubar when the GnomeUIInfo way
- *   with using menu template is not sufficient. This signal is emitted when a new GnomeApp that
+ * GtkMenubar *create_menus(GnomeMDI *)
+ *   should return a GtkMenubar for the GnomeApps when the GnomeUIInfo way with using menu
+ *   template is not sufficient. This signal is emitted when a new GnomeApp that
  *   needs new menubar is created but ONLY if the menu template is NULL!
  *
  * void app_created(GnomeMDI *, GnomeApp *)

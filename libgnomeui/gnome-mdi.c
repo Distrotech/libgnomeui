@@ -429,6 +429,7 @@ static GtkWidget *child_list_menu_create(GnomeMDI *mdi) {
       item = gtk_menu_item_new_with_label(GNOME_MDI_CHILD(child->data)->name);
       gtk_signal_connect(GTK_OBJECT(item), "activate",
 			 GTK_SIGNAL_FUNC(child_list_activated_cb), mdi);
+      gtk_object_set_data(GTK_OBJECT(item), MDI_CHILD_KEY, child->data);
 
       gtk_widget_show(item);
 
