@@ -23,7 +23,7 @@
 #include <config.h>
 #include <stdarg.h>
 #include "gnome-messagebox.h"
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-triggers.h>
 #include <libgnome/gnome-util.h>
 #include <libgnomebase/gnome-i18n.h>

@@ -26,9 +26,9 @@
 #ifndef __GNOME_STOCK_IDS_H__
 #define __GNOME_STOCK_IDS_H__
 
-#include <libgnomebase/gnome-defs.h>
+#include <gmacros.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* The names of `well known' icons. I define these strings mainly to
    prevent errors due to typos. */
@@ -373,6 +373,6 @@ extern const char gnome_stock_menu_text_strikeout[];
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_STOCK_H */

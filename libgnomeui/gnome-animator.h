@@ -28,10 +28,10 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwidget.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include "gnome-pixmap.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_ANIMATOR            (gnome_animator_get_type())
 #define GNOME_ANIMATOR(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ANIMATOR, GnomeAnimator))
@@ -197,6 +197,6 @@ gdouble gnome_animator_get_playback_speed (GnomeAnimator * animator);
 void gnome_animator_set_range (GnomeAnimator * animator,
 			       guint low, guint high);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* _GNOME_ANIMATOR_H */

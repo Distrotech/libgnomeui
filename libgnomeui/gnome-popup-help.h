@@ -26,12 +26,12 @@
 #ifndef GNOME_POPUP_HELP_H
 #define GNOME_POPUP_HELP_H
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define gnome_widget_add_help(widget, help) \
 	(gnome_widget_add_help_with_uidata((widget),(help),NULL, NULL))
@@ -42,7 +42,7 @@ void gnome_widget_add_help_with_uidata  (GtkWidget *widget,
 
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif
 

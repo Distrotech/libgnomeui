@@ -31,12 +31,12 @@
 
 
 #include <gtk/gtkvbox.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include "gnome-selector.h"
 
 #include <gconf/gconf-client.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 enum {
     GNOME_SELECTOR_ASYNC_TYPE_UNSPECIFIED = 0,
@@ -95,6 +95,6 @@ _gnome_selector_deep_copy_slist         (GSList                   *thelist);
 void
 _gnome_selector_deep_free_slist         (GSList                   *thelist);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

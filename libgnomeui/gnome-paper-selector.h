@@ -26,10 +26,10 @@
 #define GNOME_PAPER_SELECTOR_H
 
 #include <gtk/gtk.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-paper.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define OLD_GNOME_SELECTOR_API
 
@@ -105,6 +105,6 @@ gfloat gnome_paper_selector_get_top_margin    (GnomePaperSelector *gspaper);
 gfloat gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper);
 #endif
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

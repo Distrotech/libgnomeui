@@ -23,10 +23,10 @@
 #define GNOME_UNIT_SPINNER_H
 
 #include <gtk/gtk.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-paper.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_UNIT_SPINNER            (gnome_unit_spinner_get_type ())
 #define GNOME_UNIT_SPINNER(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_UNIT_SPINNER, GnomeUnitSpinner))
@@ -68,6 +68,6 @@ gfloat     gnome_unit_spinner_get_value    (GnomeUnitSpinner *self,
 void       gnome_unit_spinner_change_units (GnomeUnitSpinner *self,
 					    const GnomeUnit *unit);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

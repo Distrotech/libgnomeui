@@ -35,9 +35,9 @@
 
 #include <time.h>
 #include <gtk/gtk.h>
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GTK_TYPE_CLOCK            (gtk_clock_get_type ())
 #define GTK_CLOCK(obj)            (GTK_CHECK_CAST((obj), GTK_TYPE_CLOCK, GtkClock))
@@ -81,6 +81,6 @@ void gtk_clock_set_update_interval(GtkClock *gclock, gint seconds);
 void gtk_clock_start(GtkClock *gclock);
 void gtk_clock_stop(GtkClock *gclock);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GTK_CLOCK_H__ */

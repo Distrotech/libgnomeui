@@ -30,11 +30,11 @@
 #ifndef GNOME_COLOR_PICKER_H
 #define GNOME_COLOR_PICKER_H
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <gtk/gtkbutton.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 
 /* The GnomeColorPicker widget is a simple color picker in a button.  The button displays a sample
@@ -108,6 +108,6 @@ void gnome_color_picker_set_title (GnomeColorPicker *cp, const gchar *title);
 const char * gnome_color_picker_get_title (GnomeColorPicker *cp);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

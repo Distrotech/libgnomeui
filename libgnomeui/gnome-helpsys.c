@@ -35,7 +35,7 @@
 
 #include <glib.h>
 #include <ctype.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>

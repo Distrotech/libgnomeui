@@ -35,10 +35,10 @@
   instead of a dialog.
   ****/
 
-#include <libgnomebase/gnome-defs.h>
+
 #include "gnome-types.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* The GtkWidget * return values were added in retrospect; sometimes
    you might want to connect to the "close" signal of the dialog, or
@@ -137,6 +137,6 @@ GtkWidget * gnome_request_dialog (gboolean password,
                                   gpointer data,
                                   GtkWindow * parent);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

@@ -29,9 +29,9 @@
 #ifndef _GNOME_DOCK_BAND_H
 #define _GNOME_DOCK_BAND_H
 
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_DOCK_BAND            (gnome_dock_band_get_type ())
 #define GNOME_DOCK_BAND(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DOCK_BAND, GnomeDockBand))
@@ -147,6 +147,6 @@ void           gnome_dock_band_layout_add       (GnomeDockBand *band,
                                                  GnomeDockLayout *layout,
                                                  GnomeDockPlacement placement,
                                                  guint band_num);
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

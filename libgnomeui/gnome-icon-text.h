@@ -26,9 +26,9 @@
 #ifndef GNOME_ICON_TEXT_H
 #define GNOME_ICON_TEXT_H
 
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 typedef struct {
 	gchar *text;
@@ -56,6 +56,6 @@ void               gnome_icon_paint_text     (GnomeIconTextInfo *ti,
 
 void               gnome_icon_text_info_free (GnomeIconTextInfo *ti);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_ICON_TEXT_H */

@@ -33,12 +33,12 @@
 #ifndef _GNOME_ICON_TEXT_ITEM_H_
 #define _GNOME_ICON_TEXT_ITEM_H_
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <gtk/gtkentry.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomeui/gnome-icon-text.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_ICON_TEXT_ITEM            (gnome_icon_text_item_get_type ())
 #define GNOME_ICON_TEXT_ITEM(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ICON_TEXT_ITEM, GnomeIconTextItem))
@@ -125,6 +125,6 @@ void     gnome_icon_text_item_stop_editing  (GnomeIconTextItem *iti,
 					     gboolean           accept);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* _GNOME_ICON_ITEM_H_ */

@@ -26,11 +26,11 @@
 #ifndef GNOME_FILE_SAVER_H
 #define GNOME_FILE_SAVER_H
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomeui/gnome-dialog.h>
 #include <libgnomeui/gnome-gconf.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_FILE_SAVER            (gnome_file_saver_get_type())
 #define GNOME_FILE_SAVER(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_FILE_SAVER, GnomeFileSaver))
@@ -70,6 +70,6 @@ void            gnome_file_saver_add_mime_type(GnomeFileSaver *file_saver,
 void            gnome_file_saver_add_mime_types(GnomeFileSaver *file_saver,
                                                 const gchar    *mime_types[]);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

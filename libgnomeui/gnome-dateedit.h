@@ -27,9 +27,9 @@
 #define __GNOME_DATE_EDIT_H_ 
 
 #include <gtk/gtkhbox.h>
-#include <libgnomebase/gnome-defs.h>
+
  
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 
 typedef enum {
@@ -90,6 +90,6 @@ time_t    gnome_date_edit_get_initial_time(GnomeDateEdit *gde);
 time_t    gnome_date_edit_get_date        (GnomeDateEdit *gde);
 #endif /* GNOME_EXCLUDE_DEPRECATED */
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

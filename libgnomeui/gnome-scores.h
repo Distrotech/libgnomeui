@@ -48,9 +48,9 @@
 
 #include <time.h>
 #include "gnome-dialog.h"
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_SCORES            (gnome_scores_get_type ())
 #define GNOME_SCORES(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_SCORES, GnomeScores))
@@ -173,6 +173,6 @@ void gnome_scores_set_current_player (
 		GnomeScores *gs,	/* GNOME Scores widget. */
 		gint i			/* Index of the current(from 0 to 9). */
 		);
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_SCORES_H */

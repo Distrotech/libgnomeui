@@ -26,13 +26,13 @@
 #ifndef GNOME_HELPSYS_H
 #define GNOME_HELPSYS_H 1
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-url.h>
 
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-dock-item.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_HELP_VIEW            (gnome_help_view_get_type ())
 #define GNOME_HELP_VIEW(obj)            (GTK_CHECK_CAST((obj), GNOME_TYPE_HELP_VIEW, GnomeHelpView))
@@ -124,6 +124,6 @@ GtkWidget *	gnome_widget_set_name		(GtkWidget *widget,
 #define TT_(widget, text) gnome_widget_set_tooltip((widget), (text))
 #define H_(widget, help_id) gnome_widget_set_name((widget), (help_id))
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

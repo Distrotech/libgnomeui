@@ -21,7 +21,7 @@
 #ifndef __GNOME_STOCK_H__
 #define __GNOME_STOCK_H__
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkvbox.h>
@@ -84,7 +84,7 @@
  *    - gnome_stock_pixmap_change
  */
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* The names of `well known' icons. I define these strings mainly to
    prevent errors due to typos. */
@@ -510,6 +510,6 @@ void gnome_stock_pixmap_gdk (const char *icon,
 			     GdkPixmap **pixmap,
 			     GdkPixmap **mask);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_STOCK_H */

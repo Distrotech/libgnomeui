@@ -31,10 +31,10 @@
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkprogress.h>
 
-#include <libgnomebase/gnome-defs.h>
+
 #include "gnome-types.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_APPBAR            (gnome_appbar_get_type ())
 #define GNOME_APPBAR(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_APPBAR, GnomeAppBar))
@@ -126,7 +126,7 @@ void       gnome_appbar_construct(GnomeAppBar * ab,
 				  gboolean has_status,
 				  GnomePreferencesType interactivity);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_APPBAR_H__ */
 

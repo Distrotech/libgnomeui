@@ -40,11 +40,11 @@
 #include <gtk/gtkmenubar.h>
 #include <gtk/gtktoolbar.h>
 #include <gtk/gtkwindow.h>
-#include <libgnomebase/gnome-defs.h>
+
 
 #include "gnome-dock.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_APP_MENUBAR_NAME "Menubar"
 #define GNOME_APP_TOOLBAR_NAME "Toolbar"
@@ -169,6 +169,6 @@ GnomeDockItem *gnome_app_get_dock_item_by_name (GnomeApp *app,
 						const gchar *name);
 void gnome_app_set_help_view (GnomeApp *app,
 			      GtkWidget *help_view);
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_APP_H */

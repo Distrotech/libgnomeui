@@ -35,7 +35,7 @@
 #include "gnome-app-helper.h"
 #include "gnome-mdi-child.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_MDI            (gnome_mdi_get_type ())
 #define GNOME_MDI(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MDI, GnomeMDI))
@@ -189,6 +189,6 @@ const GnomeUIInfo *gnome_mdi_get_child_toolbar_info(GnomeApp *app);
 const GnomeUIInfo *gnome_mdi_get_view_menu_info    (GtkWidget *view);
 const GnomeUIInfo *gnome_mdi_get_view_toolbar_info (GtkWidget *view);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_MDI_H__ */

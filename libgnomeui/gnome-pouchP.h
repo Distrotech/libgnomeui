@@ -34,7 +34,7 @@
 #include "gnome-pouch.h"
 #include "gnome-roo.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 struct _GnomePouchPrivate
 {
@@ -65,6 +65,6 @@ struct _GnomeRooPrivate
 	GdkWindow *cover;
 };
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_POUCHP_H__ */

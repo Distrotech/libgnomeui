@@ -24,7 +24,7 @@
 
 #include "gnome-dialog.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_MESSAGE_BOX            (gnome_message_box_get_type ())
 #define GNOME_MESSAGE_BOX(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBox))
@@ -75,6 +75,6 @@ void       gnome_message_box_construct  (GnomeMessageBox       *messagebox,
 
 GtkWidget *gnome_message_box_get_label  (GnomeMessageBox       *messagebox);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_MESSAGE_BOX_H__ */

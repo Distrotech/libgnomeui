@@ -29,12 +29,12 @@
   Convenience UI functions for use with GnomeApp 
   ****/
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-app.h"
 #include "gnome-types.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* =============================================
   Simple messages and questions to the user; use dialogs for now, but
@@ -142,6 +142,6 @@ gnome_app_progress_done (GnomeAppProgressKey key);
 void gnome_window_set_icon(GtkWindow *window, GdkPixbuf *pixbuf, gboolean overwrite);
 void gnome_window_set_icon_from_file(GtkWindow *window, const char *filename, gboolean overwrite);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

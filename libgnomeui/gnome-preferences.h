@@ -40,12 +40,12 @@
           directly, instead.
 **************/
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <gtk/gtkbbox.h>
 
 #include "gnome-mdi.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* Global config choices. App-specific choices are handled in GnomeApp. */
 
@@ -142,6 +142,6 @@ void              gnome_preferences_set_menus_have_icons (int have_icons);
 int               gnome_preferences_get_disable_imlib_cache (void);
 void              gnome_preferences_set_disable_imlib_cache (int disable_imlib_cache);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

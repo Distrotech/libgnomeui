@@ -29,11 +29,11 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <gtk/gtkobject.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomebase/gnome-program.h>
 #include <libgnomeui/gnome-dialog.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_CLIENT            (gnome_client_get_type ())
 #define GNOME_CLIENT(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CLIENT, GnomeClient))
@@ -448,6 +448,6 @@ void         gnome_client_request_interaction_interp (GnomeClient *client,
 void         gnome_interaction_key_return        (gint     key,
 						  gboolean cancel_shutdown);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_CLIENT_H */

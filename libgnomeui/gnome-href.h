@@ -27,9 +27,9 @@
 
 #include <glib.h>
 #include <gtk/gtkbutton.h>
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_HREF            (gnome_href_get_type ())
 #define GNOME_HREF(obj)            (GTK_CHECK_CAST((obj), GNOME_TYPE_HREF, GnomeHRef))
@@ -78,7 +78,7 @@ void gnome_href_set_label(GnomeHRef *href, const gchar *label);
 const gchar *gnome_href_get_label(GnomeHRef *href);
 #endif
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif
 

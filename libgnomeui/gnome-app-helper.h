@@ -39,11 +39,11 @@
 #define GNOME_APP_HELPER_H
 
 #include <gtk/gtkstatusbar.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* This module lets you easily create menus and toolbars for your 
  * applications. You basically define a hierarchy of arrays of GnomeUIInfo 
@@ -737,6 +737,6 @@ void gnome_app_install_menu_hints           (GnomeApp *app,
 void gnome_app_setup_toolbar                (GtkToolbar *toolbar,
                                              GnomeDockItem *dock_item);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

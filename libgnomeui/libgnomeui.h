@@ -27,7 +27,7 @@
 #ifndef LIBGNOMEUI_H
 #define LIBGNOMEUI_H
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomeui/gnome-uidefs.h>
 #include <libgnomeui/gnome-about.h>
 #include <libgnomeui/gnome-animator.h>

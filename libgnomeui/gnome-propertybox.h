@@ -25,9 +25,9 @@
 #define __GNOME_PROPERTY_BOX_H__
 
 #include "gnome-dialog.h"
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_PROPERTY_BOX            (gnome_property_box_get_type ())
 #define GNOME_PROPERTY_BOX(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBox))
@@ -87,6 +87,6 @@ void      gnome_property_box_set_state   (GnomePropertyBox *property_box,
 					  gboolean state);
 #endif
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_PROPERTY_BOX_H__ */

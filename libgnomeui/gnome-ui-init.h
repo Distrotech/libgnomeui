@@ -26,7 +26,7 @@
 #ifndef GNOME_INIT_H
 #define GNOME_INIT_H
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #include <libgnomebase/gnome-program.h>
 
@@ -46,6 +46,6 @@ int gnome_init_with_popt_table(const char *app_id,
 			       poptContext *return_ctx);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

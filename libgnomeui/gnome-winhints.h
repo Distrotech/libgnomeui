@@ -27,10 +27,10 @@
 #ifndef GNOME_WINHINTS_H
 #define GNOME_WINHINTS_H
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <gtk/gtkwidget.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* The hints we recognize */
 #define XA_WIN_PROTOCOLS           "_WIN_PROTOCOLS"
@@ -191,6 +191,6 @@ gnome_win_hints_wm_exists(void);
 GList*
 gnome_win_hints_get_client_window_ids(void);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

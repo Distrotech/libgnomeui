@@ -42,7 +42,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include <libgnome/libgnome.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
 #include "gnome-helpsys.h"

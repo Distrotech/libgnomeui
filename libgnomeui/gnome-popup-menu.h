@@ -27,13 +27,13 @@
 #ifndef GNOME_POPUPMENU_H
 #define GNOME_POPUPMENU_H
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <gtk/gtkmenu.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 
 /* These routines are documented in gnome-popup-menu.c */
@@ -59,7 +59,7 @@ void gnome_popup_menu_append (GtkWidget *popup, GnomeUIInfo *uiinfo);
 listing items on a widget's popup ****/
 void gnome_widget_add_popup_items (GtkWidget *widget, GnomeUIInfo *uiinfo, gpointer user_data);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif
 

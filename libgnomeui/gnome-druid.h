@@ -26,9 +26,9 @@
 
 #include <gtk/gtk.h>
 #include "gnome-druid-page.h"
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_DRUID            (gnome_druid_get_type ())
 #define GNOME_DRUID(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID, GnomeDruid))
@@ -84,6 +84,6 @@ void       gnome_druid_construct_with_window (GnomeDruid *druid,
 					      gboolean close_on_cancel,
 					      GtkWidget **window);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_DRUID_H__ */

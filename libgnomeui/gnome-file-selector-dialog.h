@@ -33,10 +33,10 @@
 
 
 #include <gtk/gtkwindow.h>
-#include <libgnomebase/gnome-defs.h>
 
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 
 #define GNOME_TYPE_FILE_SELECTOR_DIALOG            (gnome_file_selector_dialog_get_type ())
@@ -95,7 +95,7 @@ const gchar *
 gnome_file_selector_dialog_get_home_dir (GnomeFileSelectorDialog *fsdialog);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif
 

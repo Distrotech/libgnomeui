@@ -31,7 +31,7 @@
 #include <config.h>
 #include <string.h>
 #include "gnome-scores.h"
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
 #include <libgnome/gnome-score.h>

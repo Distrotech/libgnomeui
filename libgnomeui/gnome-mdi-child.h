@@ -34,7 +34,7 @@
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_MDI_CHILD            (gnome_mdi_child_get_type ())
 #define GNOME_MDI_CHILD(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MDI_CHILD, GnomeMDIChild))
@@ -96,6 +96,6 @@ void         gnome_mdi_child_set_toolbar_position(GnomeMDIChild *mdi_child,
 												  gint offset);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_MDI_CHILD_H__ */

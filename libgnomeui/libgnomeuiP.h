@@ -31,13 +31,13 @@
 #include <gobject/gsignal.h>
 #include <gtk/gtktypeutils.h>
 
-#include <libgnomebase/gnome-defs.h>
+
 
 #include "gnome-macros.h"
 #include "gnometypebuiltins.h"
 #include "gnomemarshal.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 void gnome_type_init(void);
 
@@ -45,7 +45,7 @@ void gnome_type_init(void);
 extern const GList *gnome_i18n_get_language_list (const gchar *category_name);
 extern char *gnome_i18n_get_preferred_language (void);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* LIBGNOMEUIP_H */
 

@@ -40,7 +40,7 @@
 #include "gnome-mdi-child.h"
 #include "gnome-mdi-generic-child.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* keys for stuff that we'll assign to mdi data objects */
 #define GNOME_MDI_TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
@@ -133,6 +133,6 @@ void       gnome_mdi_child_add_toolbar (GnomeMDIChild *mdi_child,
 										GnomeApp *app,
 									    GtkToolbar *toolbar);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_MDIP_H__ */

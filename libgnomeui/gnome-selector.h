@@ -37,9 +37,9 @@
 
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkvbox.h>
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 
 #define GNOME_TYPE_SELECTOR            (gnome_selector_get_type ())
@@ -353,6 +353,6 @@ gnome_selector_async_handle_ref   (GnomeSelectorAsyncHandle  *async_handle);
 void
 gnome_selector_async_handle_unref (GnomeSelectorAsyncHandle  *async_handle);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

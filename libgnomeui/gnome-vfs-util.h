@@ -27,12 +27,12 @@
 #ifndef GNOME_VFS_UTIL_H
 #define GNOME_VFS_UTIL_H
 
-#include <libgnomebase/gnome-defs.h>
+
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libgnomevfs/gnome-vfs-types.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* =======================================================================
  * gdk-pixbuf handing stuff.
@@ -66,6 +66,6 @@ gnome_gdk_pixbuf_new_from_uri_async  (const char                 *uri,
 void
 gnome_gdk_pixbuf_new_from_uri_cancel (GnomeGdkPixbufAsyncHandle  *handle);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

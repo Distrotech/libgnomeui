@@ -27,10 +27,10 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include <libgnomebase/gnome-defs.h>
+
 #include "gnome-roo.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_POUCH            (gnome_pouch_get_type ())
 #define GNOME_POUCH(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_POUCH, GnomePouch))
@@ -77,6 +77,6 @@ void       gnome_pouch_enable_popup_menu(GnomePouch *pouch, gboolean enable);
 void       gnome_pouch_tile_children(GnomePouch *pouch);
 void       gnome_pouch_cascade_children(GnomePouch *pouch);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_POUCH_H__ */

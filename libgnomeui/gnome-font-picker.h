@@ -22,9 +22,9 @@
 #define GNOME_FONT_PICKER_H
 
 #include <gtk/gtkbutton.h>
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 /* GnomeFontPicker is a button widget that allow user to select a font.
  */
@@ -113,7 +113,7 @@ void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
                                                const gchar     *text);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
     
 #endif /* GNOME_FONT_PICKER_H */

@@ -24,10 +24,10 @@
 #define __GNOME_DRUID_PAGE_H__
 
 #include <gtk/gtk.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomecanvas/gnome-canvas.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_DRUID_PAGE            (gnome_druid_page_get_type ())
 #define GNOME_DRUID_PAGE(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID_PAGE, GnomeDruidPage))
@@ -76,7 +76,7 @@ gboolean gnome_druid_page_back			(GnomeDruidPage *druid_page);
 gboolean gnome_druid_page_cancel		(GnomeDruidPage *druid_page);
 void     gnome_druid_page_finish		(GnomeDruidPage *druid_page);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_DRUID_PAGE_H__ */
 

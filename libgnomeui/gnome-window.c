@@ -26,7 +26,7 @@
 #include <glib.h>
 #include <string.h>
 #include <gtk/gtkwindow.h>
-#include <libgnomebase/gnome-defs.h>
+
 
 #include "gnome-window.h"
 

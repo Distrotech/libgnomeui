@@ -36,7 +36,7 @@
 
 #include <libgnomeui/gnome-mdi.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* This function should parse the config string and return a newly
  * created GnomeMDIChild. */
@@ -52,6 +52,6 @@ gboolean	gnome_mdi_restore_state	(GnomeMDI *mdi, const gchar *section,
  * first and the config section name as the second argument. */
 void		gnome_mdi_save_state	(GnomeMDI *mdi, const gchar *section);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

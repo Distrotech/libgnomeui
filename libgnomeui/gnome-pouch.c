@@ -25,7 +25,7 @@
 #include <gdk/gdk.h>
 
 #include <config.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-config.h>
 #include <libgnomebase/gnome-i18n.h>
 #include <libgnome/gnome-util.h>

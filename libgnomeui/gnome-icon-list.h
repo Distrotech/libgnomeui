@@ -35,11 +35,11 @@
 #ifndef _GNOME_ICON_LIST_H_
 #define _GNOME_ICON_LIST_H_
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomecanvas/gnome-canvas.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_ICON_LIST            (gnome_icon_list_get_type ())
 #define GNOME_ICON_LIST(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ICON_LIST, GnomeIconList))
@@ -174,6 +174,6 @@ int            gnome_icon_list_get_icon_at         (GnomeIconList *gil,
 
 int            gnome_icon_list_get_items_per_line  (GnomeIconList *gil);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* _GNOME_ICON_LIST_H_ */

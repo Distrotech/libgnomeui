@@ -28,11 +28,11 @@
 #ifndef GNOME_LESS_H
 #define GNOME_LESS_H
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <gtk/gtk.h>
 #include <stdio.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 typedef struct _GnomeLess        GnomeLess;
 typedef struct _GnomeLessPrivate GnomeLessPrivate;
@@ -119,7 +119,7 @@ void gnome_less_set_font		(GnomeLess * gl, GdkFont * font);
 void gnome_less_set_fixed_font		(GnomeLess * gl, gboolean fixed);
 #endif
 
-END_GNOME_DECLS
+G_END_DECLS
    
 #endif /* GNOME_LESS_H */
 

@@ -26,10 +26,10 @@
 #ifndef GNOME_RECENTLY_USED_H
 #define GNOME_RECENTLY_USED_H
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomeui/gnome-gconf.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 typedef struct _GnomeRecentDocument GnomeRecentDocument;
 
@@ -107,6 +107,6 @@ const gchar*         gnome_recent_document_peek            (GnomeRecentDocument 
 GTime                gnome_recent_document_get_creation_time (GnomeRecentDocument *doc);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

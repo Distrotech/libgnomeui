@@ -32,9 +32,9 @@
 #include <gdk/gdk.h>
 #include <gtk/gtkbin.h>
 
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_DOCK_ITEM            (gnome_dock_item_get_type())
 #define GNOME_DOCK_ITEM(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DOCK_ITEM, GnomeDockItem))
@@ -150,6 +150,6 @@ void           gnome_dock_item_get_floating_position
                                                (GnomeDockItem *item,
                                                 gint *x, gint *y);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* _GNOME_DOCK_ITEM_H */

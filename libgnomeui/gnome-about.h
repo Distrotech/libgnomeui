@@ -39,10 +39,10 @@
 #ifndef __GNOME_ABOUT_H__
 #define __GNOME_ABOUT_H__
 
-#include <libgnomebase/gnome-defs.h>
+
 #include "gnome-dialog.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_ABOUT            (gnome_about_get_type ())
 #define GNOME_ABOUT(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ABOUT, GnomeAbout))
@@ -118,7 +118,7 @@ gnome_about_construct (GnomeAbout *about,
 		       const gchar **author_urls,
 		       const gchar *comments,
 		       const gchar *logo);
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_ABOUT_H__ */
 

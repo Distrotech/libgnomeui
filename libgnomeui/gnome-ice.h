@@ -29,9 +29,9 @@
 #ifndef GNOME_ICE_H
 #define GNOME_ICE_H
 
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 /* This function should be called before any ICE functions are used.
    It will arrange for ICE connections to be read and dispatched via
@@ -39,6 +39,6 @@ BEGIN_GNOME_DECLS
    times without harm.  */
 void gnome_ice_init (void);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_ICE_H */

@@ -34,11 +34,11 @@
 
 
 #include <glib.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include "gnome-selector.h"
 
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 
 #define GNOME_TYPE_ENTRY            (gnome_entry_get_type ())
@@ -73,6 +73,6 @@ gchar       *gnome_entry_get_text         (GnomeEntry  *gentry);
 void         gnome_entry_set_text         (GnomeEntry  *gentry,
 					   const gchar *text);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

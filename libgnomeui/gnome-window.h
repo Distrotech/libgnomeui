@@ -22,7 +22,7 @@
 
 #include <gtk/gtkwindow.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 /* set the window title */
 void gnome_window_toplevel_set_title (GtkWindow *w,
@@ -31,6 +31,6 @@ void gnome_window_toplevel_set_title (GtkWindow *w,
 				      const gchar *extension);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_WINDOW_H */

@@ -27,9 +27,9 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_ROO            (gnome_roo_get_type ())
 #define GNOME_ROO(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ROO, GnomeRoo))
@@ -74,6 +74,6 @@ gboolean     gnome_roo_is_parked(GnomeRoo *roo);
 void         gnome_roo_park(GnomeRoo *roo, gint x, gint y);
 void         gnome_roo_unpark(GnomeRoo *roo);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_ROO_H__ */

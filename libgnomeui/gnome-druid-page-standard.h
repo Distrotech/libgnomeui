@@ -27,7 +27,7 @@
 #include <libgnomecanvas/gnome-canvas.h>
 #include "gnome-druid-page.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_DRUID_PAGE_STANDARD            (gnome_druid_page_standard_get_type ())
 #define GNOME_DRUID_PAGE_STANDARD(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID_PAGE_STANDARD, GnomeDruidPageStandard))
@@ -90,7 +90,7 @@ void       gnome_druid_page_standard_set_logo      (GnomeDruidPageStandard *drui
 void       gnome_druid_page_standard_set_top_watermark(GnomeDruidPageStandard *druid_page_standard,
 						    GdkPixbuf		*top_watermark_image);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_DRUID_PAGE_STANDARD_H__ */
 

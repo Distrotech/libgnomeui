@@ -1,5 +1,13 @@
 2001-04-19  Michael Meeks  <michael@ximian.com>
 
+	* *.[ch]:
+
+	s/\#include[ \t]*<libgnomebase\/gnome-defs.h>//;
+	s/BEGIN_GNOME_DECLS/G_BEGIN_DECLS/g;
+	s/END_GNOME_DECLS/G_END_DECLS/g;
+	
+2001-04-19  Michael Meeks  <michael@ximian.com>
+
 	* configure.in: add GTK_VERSION.
 
 2001-04-11  Martin Baulig  <baulig@suse.de>

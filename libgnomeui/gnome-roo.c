@@ -27,7 +27,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnomebase/gnome-i18n.h>
 #include "gnome-roo.h"
 #include "gnome-pouch.h"

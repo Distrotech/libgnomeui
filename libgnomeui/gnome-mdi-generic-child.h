@@ -34,7 +34,7 @@
 
 #include "gnome-mdi-child.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_MDI_GENERIC_CHILD            (gnome_mdi_generic_child_get_type ())
 #define GNOME_MDI_GENERIC_CHILD(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChild))
@@ -106,6 +106,6 @@ void gnome_mdi_generic_child_set_label_func_full  (GnomeMDIGenericChild *child,
 												   GtkDestroyNotify notify);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

@@ -30,9 +30,9 @@
 #include <gtk/gtkmisc.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 typedef enum {
         /* update struct when adding enum values */
@@ -140,6 +140,6 @@ void            gnome_pixmap_set_alpha_threshold     (GnomePixmap      *gpixmap,
 gint            gnome_pixmap_get_alpha_threshold     (GnomePixmap      *gpixmap);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_PIXMAP_H__ */

@@ -30,9 +30,9 @@
 #ifndef _GNOME_DOCK_LAYOUT_H
 #define _GNOME_DOCK_LAYOUT_H
 
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_DOCK_LAYOUT            (gnome_dock_layout_get_type ())
 #define GNOME_DOCK_LAYOUT(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DOCK_LAYOUT, GnomeDockLayout))
@@ -128,6 +128,6 @@ gboolean             gnome_dock_layout_add_to_dock
                                                 (GnomeDockLayout *layout,
                                                  GnomeDock *dock);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

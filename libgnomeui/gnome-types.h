@@ -29,9 +29,9 @@
   Gnome-wide useful types.
   ****/
 
-#include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+
+G_BEGIN_DECLS
 
 /* string is a g_malloc'd string which should be freed, or NULL if the
    user cancelled. */
@@ -48,6 +48,6 @@ typedef enum {
   GNOME_PREFERENCES_ALWAYS
 } GnomePreferencesType;
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

@@ -28,11 +28,11 @@
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkeditable.h>
 #include <gtk/gtkaccelgroup.h>
-#include <libgnomebase/gnome-defs.h>
+
 
 #include <stdarg.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_DIALOG            (gnome_dialog_get_type ())
 #define GNOME_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DIALOG, GnomeDialog))
@@ -178,6 +178,6 @@ void       gnome_dialog_constructv (GnomeDialog * dialog,
 				    const gchar **buttons);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __GNOME_DIALOG_H__ */
