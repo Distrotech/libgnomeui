@@ -249,7 +249,7 @@ static void prepare_app(void)
   gtk_container_add(GTK_CONTAINER(button), hb);
   gtk_widget_show(hb);
 
-  apic = gnome_stock_pixmap_widget_new(GTK_WIDGET(app), GNOME_STOCK_PIXMAP_HELP);
+  apic = gnome_stock_new_with_icon (GNOME_STOCK_PIXMAP_HELP);
   gtk_box_pack_start(GTK_BOX(hb), apic, FALSE, FALSE, 0);
   gtk_widget_show(apic);
 

@@ -22,24 +22,28 @@
 #include <gnome.h>
 #include "gnome-druid.h"
 #include "gnome-druid-page-standard.h"
+#include "gnome-canvas-pixbuf.h"
+
+
 static void gnome_druid_page_standard_init		(GnomeDruidPageStandard		 *druid_page_standard);
 static void gnome_druid_page_standard_class_init	(GnomeDruidPageStandardClass	 *klass);
 static void gnome_druid_page_standard_construct     (GnomeDruidPageStandard             *druid_page_standard);
 static void gnome_druid_page_standard_configure_size(GnomeDruidPageStandard             *druid_page_standard,
-						  gint                             width,
-						  gint                             height);
+						     gint                             width,
+						     gint                             height);
 static void gnome_druid_page_standard_size_allocate     (GtkWidget                       *widget,
 							 GtkAllocation                   *allocation);
-static void gnome_druid_page_standard_realize           (GtkWidget                       *widget);
 static void gnome_druid_page_standard_prepare (GnomeDruidPage *page,
-				   GtkWidget *druid,
-				   gpointer *data);
+					       GtkWidget *druid,
+					       gpointer *data);
 
 
 static GnomeDruidPageClass *parent_class = NULL;
 
 #define LOGO_WIDTH 50.0
 #define DRUID_PAGE_WIDTH 516
+#define GDK_COLOR_TO_RGBA(color) GNOME_CANVAS_COLOR (color.red/256, color.green/256, color.blue/256)
+
 GtkType
 gnome_druid_page_standard_get_type (void)
 {
@@ -70,11 +74,10 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *klass)
 {
 	GtkObjectClass *object_class;
 	GtkWidgetClass *widget_class;
-	
+
 	object_class = (GtkObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
 	widget_class->size_allocate = gnome_druid_page_standard_size_allocate;
-	widget_class->realize = gnome_druid_page_standard_realize;
 
 	parent_class = gtk_type_class (gnome_druid_page_get_type ());
 
@@ -159,35 +162,50 @@ gnome_druid_page_standard_configure_size (GnomeDruidPageStandard *druid_page_sta
 	gnome_canvas_item_set (druid_page_standard->logo_item,
 			       "x", (gfloat) width - GNOME_PAD - LOGO_WIDTH,
 			       "y", (gfloat) GNOME_PAD,
-			       "anchor", GTK_ANCHOR_NORTH_WEST,
 			       "width", (gfloat) LOGO_WIDTH,
 			       "height", (gfloat) LOGO_WIDTH, NULL);
 }
+
 static void
 gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard)
 {
+	static guint32 fill_color = 0;
+
 	/* set up the rest of the page */
+	fill_color = GDK_COLOR_TO_RGBA (druid_page_standard->background_color);
 	druid_page_standard->background_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
-				       gnome_canvas_rect_get_type (), NULL);
+				       gnome_canvas_rect_get_type (),
+				       "fill_color_rgba", fill_color,
+				       NULL);
 
+	fill_color = GDK_COLOR_TO_RGBA (druid_page_standard->logo_background_color);
 	druid_page_standard->logoframe_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
-				       gnome_canvas_rect_get_type (), NULL);
+				       gnome_canvas_rect_get_type (),
+				       "fill_color_rgba", fill_color,
+				       NULL);
 
 	druid_page_standard->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
-				       gnome_canvas_image_get_type (), NULL);
+				       gnome_canvas_pixbuf_get_type (),
+				       "x_set", TRUE, "y_set", TRUE,
+				       NULL);
+
 	if (druid_page_standard->logo_image != NULL) {
 		gnome_canvas_item_set (druid_page_standard->logo_item,
-				       "image", druid_page_standard->logo_image, NULL);
+				       "pixbuf", druid_page_standard->logo_image, NULL);
 	}
+
+	fill_color = GDK_COLOR_TO_RGBA (druid_page_standard->title_color);
 	druid_page_standard->title_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
-				       gnome_canvas_text_get_type (), 
+				       gnome_canvas_text_get_type (),
 				       "text", druid_page_standard->title,
 				       "font", "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-1",
+				       "fill_color_rgba", fill_color,
 				       NULL);
+
 	gnome_canvas_item_set (druid_page_standard->title_item,
 			       "x", 15.0,
 			       "y", (gfloat) GNOME_PAD + LOGO_WIDTH / 2.0,
@@ -224,29 +242,6 @@ gnome_druid_page_standard_size_allocate (GtkWidget *widget,
 						  allocation->width,
 						  allocation->height);
 }
-static void
-gnome_druid_page_standard_realize (GtkWidget *widget)
-{
-	GnomeDruidPageStandard *druid_page_standard;
-	GdkColormap *cmap = gdk_imlib_get_colormap ();
-
-	druid_page_standard = GNOME_DRUID_PAGE_STANDARD (widget);
-	gdk_colormap_alloc_color (cmap, &druid_page_standard->background_color, FALSE, TRUE);
-	gdk_colormap_alloc_color (cmap, &druid_page_standard->logo_background_color, FALSE, TRUE);
-	gdk_colormap_alloc_color (cmap, &druid_page_standard->title_color, FALSE, TRUE);
-
-	gnome_canvas_item_set (druid_page_standard->background_item,
-			       "fill_color_gdk", &(druid_page_standard->background_color),
-			       NULL);
-	gnome_canvas_item_set (druid_page_standard->logoframe_item,
-			       "fill_color_gdk", &druid_page_standard->logo_background_color,
-			       NULL);
-	gnome_canvas_item_set (druid_page_standard->title_item,
-			       "fill_color_gdk", &druid_page_standard->title_color,
-			       NULL);
-	GTK_WIDGET_CLASS (parent_class)->realize (widget);
-}
-
 
 GtkWidget *
 gnome_druid_page_standard_new (void)
@@ -258,7 +253,7 @@ gnome_druid_page_standard_new (void)
 	return retval;
 }
 GtkWidget *
-gnome_druid_page_standard_new_with_vals (const gchar *title, GdkImlibImage *logo)
+gnome_druid_page_standard_new_with_vals (const gchar *title, GdkPixbuf *logo)
 {
 	GtkWidget *retval = GTK_WIDGET (gtk_type_new (gnome_druid_page_standard_get_type ()));
 	GNOME_DRUID_PAGE_STANDARD (retval)->title = g_strdup (title);
@@ -270,23 +265,24 @@ void
 gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_standard,
 					     GdkColor *color)
 {
+	guint32 fill_color;
+
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 
-	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
-		GdkColormap *cmap = gdk_imlib_get_colormap ();
-
-		gdk_colormap_free_colors (cmap, &druid_page_standard->background_color, 1);
-	}
 	druid_page_standard->background_color.red = color->red;
 	druid_page_standard->background_color.green = color->green;
 	druid_page_standard->background_color.blue = color->blue;
 
-	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
-		GtkStyle *style;
-		GdkColormap *cmap = gdk_imlib_get_colormap ();
+	fill_color = GDK_COLOR_TO_RGBA (druid_page_standard->background_color);
 
-		gdk_colormap_alloc_color (cmap, &druid_page_standard->background_color, FALSE, TRUE);
+	gnome_canvas_item_set (druid_page_standard->background_item,
+			       "fill_color_rgba", fill_color,
+			       NULL);
+
+	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
+
+		GtkStyle *style;
 
 		style = gtk_style_copy (gtk_widget_get_style (druid_page_standard->side_bar));
 		style->bg[GTK_STATE_NORMAL].red = color->red;
@@ -295,10 +291,6 @@ gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_
 		gtk_widget_set_style (druid_page_standard->side_bar, style);
 		gtk_widget_set_style (druid_page_standard->bottom_bar, style);
 		gtk_widget_set_style (druid_page_standard->right_bar, style);
-
-		gnome_canvas_item_set (druid_page_standard->background_item,
-				       "fill_color_gdk", &druid_page_standard->background_color,
-				       NULL);
 	} else {
 		GtkRcStyle *rc_style;
 
@@ -315,55 +307,44 @@ gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_
 		gtk_widget_modify_style (druid_page_standard->right_bar, rc_style);
 	}
 }
+
 void
 gnome_druid_page_standard_set_logo_bg_color (GnomeDruidPageStandard *druid_page_standard,
 					  GdkColor *color)
 {
+	guint32 fill_color;
+
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 
-	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
-		GdkColormap *cmap = gdk_imlib_get_colormap ();
-
-		gdk_colormap_free_colors (cmap, &druid_page_standard->logo_background_color, 1);
-	}
 	druid_page_standard->logo_background_color.red = color->red;
 	druid_page_standard->logo_background_color.green = color->green;
 	druid_page_standard->logo_background_color.blue = color->blue;
 
-	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
-		GdkColormap *cmap = gdk_imlib_get_colormap ();
-		gdk_colormap_alloc_color (cmap, &druid_page_standard->logo_background_color, FALSE, TRUE);
-		gnome_canvas_item_set (druid_page_standard->logoframe_item,
-				       "fill_color_gdk", &druid_page_standard->logo_background_color,
-				       NULL);
-	}
+	fill_color = GDK_COLOR_TO_RGBA (druid_page_standard->logo_background_color);
+	gnome_canvas_item_set (druid_page_standard->logoframe_item,
+			       "fill_color_rgba", fill_color,
+			       NULL);
 }
 void
 gnome_druid_page_standard_set_title_color   (GnomeDruidPageStandard *druid_page_standard,
 					  GdkColor *color)
 {
+	guint32 fill_color;
+
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 
-	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
-		GdkColormap *cmap = gdk_imlib_get_colormap ();
-
-		gdk_colormap_free_colors (cmap, &druid_page_standard->title_color, 1);
-	}
 	druid_page_standard->title_color.red = color->red;
 	druid_page_standard->title_color.green = color->green;
 	druid_page_standard->title_color.blue = color->blue;
 
-	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
-		GdkColormap *cmap = gdk_imlib_get_colormap ();
-		gdk_colormap_alloc_color (cmap, &druid_page_standard->title_color, FALSE, TRUE);
-		gnome_canvas_item_set (druid_page_standard->title_item,
-				       "fill_color_gdk", &druid_page_standard->title_color,
-				       NULL);
-	}
-
+	fill_color = GDK_COLOR_TO_RGBA (druid_page_standard->title_color);
+	gnome_canvas_item_set (druid_page_standard->title_item,
+			       "fill_color_rgba", fill_color,
+			       NULL);
 }
+
 void
 gnome_druid_page_standard_set_title         (GnomeDruidPageStandard *druid_page_standard,
 					  const gchar *title)
@@ -379,13 +360,17 @@ gnome_druid_page_standard_set_title         (GnomeDruidPageStandard *druid_page_
 }
 void
 gnome_druid_page_standard_set_logo          (GnomeDruidPageStandard *druid_page_standard,
-					  GdkImlibImage *logo_image)
+					     GdkPixbuf*logo_image)
 {
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 
+	if (druid_page_standard->logo_image)
+		gdk_pixbuf_unref (druid_page_standard->logo_image);
+
 	druid_page_standard->logo_image = logo_image;
+	gdk_pixbuf_ref (logo_image);
 	gnome_canvas_item_set (druid_page_standard->logo_item,
-			       "image", druid_page_standard->logo_image, NULL);
+			       "pixbuf", druid_page_standard->logo_image, NULL);
 }
 

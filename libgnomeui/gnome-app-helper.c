@@ -325,12 +325,12 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type,
 
 	switch (pixmap_type) {
 	case GNOME_APP_PIXMAP_STOCK:
-		pixmap = gnome_stock_pixmap_widget (window, pixmap_info);
+		pixmap = gnome_stock_new_with_icon (pixmap_info);
 		break;
 
 	case GNOME_APP_PIXMAP_DATA:
 		if (pixmap_info)
-			pixmap = gnome_pixmap_new_from_xpm_d ((char**)pixmap_info);
+			pixmap = gnome_pixmap_new_from_xpm_d ((const char**)pixmap_info);
 
 		break;
 

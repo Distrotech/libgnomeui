@@ -10,8 +10,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkbutton.h>
-#include <gdk_imlib.h>
-
+#include "gdk-pixbuf/gdk-pixbuf.h"
 
 BEGIN_GNOME_DECLS
 
@@ -39,11 +38,10 @@ struct _GnomeColorPicker {
 
 	gdouble r, g, b, a;	/* Red, green, blue, and alpha values */
 
-	GdkImlibImage *im;	/* Imlib image for rendering dithered sample */
-	GdkPixmap *pixmap;	/* Pixmap with the sample contents */
+	GdkPixbuf *pixbuf;	/* Pixbuf for rendering dithered sample */
 	GdkGC *gc;		/* GC for drawing */
 
-	GtkWidget *da;		/* Drawing area for color sample */
+	GtkWidget *drawing_area;/* Drawing area for color sample */
 	GtkWidget *cs_dialog;	/* Color selection dialog */
 
 	gchar *title;		/* Title for the color selection window */

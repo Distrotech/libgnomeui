@@ -5,7 +5,7 @@ SUBDIRS = pixmaps
 #
 # The targets
 #
-noinst_PROGRAMS = stock_demo winhints_demo animator_demo dock_demo
+noinst_PROGRAMS = stock_demo winhints_demo  dock_demo #animator_demo
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap
 lib_LTLIBRARIES = libgnomeui.la
 
@@ -85,15 +85,15 @@ EXTRA_HEADERS =
 
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
-	gnome-animator.c		\
+##	gnome-animator.c		\
 	gnome-app.c			\
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
 	gnome-calculator.c              \
 	gnome-canvas.c			\
-	gnome-canvas-image.c		\
-	gnome-canvas-load.c		\
+##	gnome-canvas-image.c		\
+##	gnome-canvas-load.c		\
 	gnome-canvas-line.c		\
 	gnome-canvas-rect-ellipse.c	\
 	gnome-canvas-polygon.c		\
@@ -101,9 +101,9 @@ libgnomeui_la_SOURCES = \
 	gnome-canvas-util.c		\
 	gnome-canvas-widget.c		\
 	gnome-client.c			\
-	gnome-color-picker.c		\
+##	gnome-color-picker.c		\
 	gnome-dateedit.c		\
-	gnome-dentry-edit.c		\
+##	gnome-dentry-edit.c		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -111,11 +111,11 @@ libgnomeui_la_SOURCES = \
 	gnome-dock-band.c		\
 	gnome-dock-item.c		\
 	gnome-dock-layout.c		\
-	gnome-druid.c			\
-	gnome-druid-page.c		\
-	gnome-druid-page-start.c	\
-	gnome-druid-page-standard.c	\
-	gnome-druid-page-finish.c	\
+##	gnome-druid.c			\
+##	gnome-druid-page.c		\
+##	gnome-druid-page-start.c	\
+##	gnome-druid-page-standard.c	\
+##	gnome-druid-page-finish.c	\
 	gnome-geometry.c		\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
@@ -123,11 +123,11 @@ libgnomeui_la_SOURCES = \
 	gnome-helpsys.c			\
 	gnome-href.c			\
 	gnome-ice.c			\
-	gnome-icon-list.c		\
-	gnome-icon-item.c		\
-	gnome-icon-sel.c		\
-	gnome-icon-text.c		\
-	gnome-icon-entry.c		\
+##	gnome-icon-list.c		\
+##	gnome-icon-item.c		\
+##	gnome-icon-sel.c		\
+##	gnome-icon-text.c		\
+##	gnome-icon-entry.c		\
 	gnome-init.c			\
 	gnome-less.c			\
 	gnome-mdi.c			\
@@ -142,8 +142,8 @@ libgnomeui_la_SOURCES = \
 	gnome-popup-help.c		\
 	gnome-preferences.c		\
 	gnome-propertybox.c		\
-	gnome-properties.c		\
-	gnome-property-entries.c	\
+##	gnome-properties.c		\
+##	gnome-property-entries.c	\
 	gnome-scores.c			\
 	gnome-stock.c			\
         gnome-winhints.c		\
@@ -159,16 +159,16 @@ libgnomeui_la_SOURCES = \
 ## this lists all the non-generated headers
 gnome_headers = \
 	gnome-about.h			\
-        gnome-animator.h		\
+##        gnome-animator.h		\
 	gnome-app.h			\
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
 	gnome-calculator.h              \
 	gnome-canvas.h			\
-	gnome-canvas-image.h		\
+##	gnome-canvas-image.h		\
 	gnome-canvas-line.h		\
-	gnome-canvas-load.h		\
+##	gnome-canvas-load.h		\
 	gnome-canvas-rect-ellipse.h	\
 	gnome-canvas-polygon.h		\
 	gnome-canvas-text.h		\
@@ -176,6 +176,7 @@ gnome_headers = \
 	gnome-canvas-widget.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
+##	gnome-compat.h			\
 	gnome-dateedit.h		\
 	gnome-dentry-edit.h		\
 	gnome-dialog.h                  \
@@ -189,7 +190,7 @@ gnome_headers = \
 	gnome-druid-page.h		\
 	gnome-druid-page-start.h	\
 	gnome-druid-page-standard.h	\
-	gnome-druid-page-finish.h	\
+##	gnome-druid-page-finish.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\
@@ -197,11 +198,11 @@ gnome_headers = \
 	gnome-helpsys.h			\
 	gnome-href.h			\
 	gnome-ice.h			\
-	gnome-icon-list.h		\
-	gnome-icon-item.h		\
-	gnome-icon-sel.h		\
-	gnome-icon-text.h		\
-	gnome-icon-entry.h		\
+##	gnome-icon-list.h		\
+##	gnome-icon-item.h		\
+##	gnome-icon-sel.h		\
+##	gnome-icon-text.h		\
+##	gnome-icon-entry.h		\
 	gnome-init.h			\
 	gnome-less.h			\
 	gnome-messagebox.h		\
@@ -291,7 +292,7 @@ stock_demo_SOURCES = stock_demo.c
 
 winhints_demo_SOURCES = winhints_demo.c
 
-animator_demo_SOURCES = animator_demo.c
+#animator_demo_SOURCES = animator_demo.c
 
 dock_demo_SOURCES = dock_demo.c
 
@@ -322,14 +323,19 @@ libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\
 	libgnomeui.la 					\
+	$(top_builddir)/libgnome/libgnome.la 		\
+	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
+        $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
-#	$(top_builddir)/libgnome/libgnome.la 		\
-#	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-#	$(LIBGNOMEUI_LIBS)
 
 stock_demo_LDADD =	\
 	libgnomeui.la 					\
+	$(top_builddir)/libgnome/libgnome.la 		\
+	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
+	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 #	$(top_builddir)/libgnome/libgnome.la 		\
@@ -340,19 +346,22 @@ winhints_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
-animator_demo_LDADD =	\
-	libgnomeui.la 					\
-	$(top_builddir)/libgnome/libgnome.la 		\
-	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(LIBGNOMEUI_LIBS) \
-	$(INTLLIBS)
+#animator_demo_LDADD =	\
+#	libgnomeui.la 					\
+#	$(top_builddir)/libgnome/libgnome.la 		\
+#	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+#	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
+#	$(LIBGNOMEUI_LIBS) \
+#	$(INTLLIBS)
 
 dock_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)

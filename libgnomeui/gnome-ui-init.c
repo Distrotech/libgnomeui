@@ -18,7 +18,6 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <gdk_imlib.h>
 
 #include "libgnome/libgnomeP.h"
 
@@ -27,6 +26,9 @@
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-init.h"
 #include "libgnomeui/gnome-winhints.h"
+
+#include "gdk-pixbuf/gdk-pixbuf.h"
+#include "gnome-pixmap.h"
 
 extern void gnome_type_init (void);
 
@@ -128,6 +130,8 @@ gtk_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
         final_argv = g_memdup(gnome_gtk_init_info.gtk_args->pdata, sizeof(char *) * gnome_gtk_init_info.gtk_args->len);
         gtk_init(&final_argc, &final_argv);
 
+        gdk_rgb_init();
+        
         accels_rc_filename = g_concat_dir_and_file (gnome_user_accels_dir, gnome_program_get_name(gnome_program_get()));
         gtk_item_factory_parse_rc(accels_rc_filename);
         g_free(accels_rc_filename);
@@ -183,11 +187,11 @@ static void libgnomeui_arg_callback(poptContext con,
 static void libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_rc_parse (gchar *command);
-static GdkPixmap *libgnomeui_imlib_image_loader(GdkWindow   *window,
-                                                GdkColormap *colormap,
-                                                GdkBitmap  **mask,
-                                                GdkColor    *transparent_color,
-                                                const gchar *filename);
+static GdkPixmap *libgnomeui_pixbuf_image_loader(GdkWindow   *window,
+                                                 GdkColormap *colormap,
+                                                 GdkBitmap  **mask,
+                                                 GdkColor    *transparent_color,
+                                                 const gchar *filename);
 static void libgnomeui_segv_setup(gboolean post_arg_parse);
 
 static GnomeModuleRequirement libgnomeui_requirements[] = {
@@ -261,25 +265,10 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 static void
 libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
-        gdk_imlib_init();
         gnome_type_init();
-        gtk_rc_set_image_loader(libgnomeui_imlib_image_loader);
+        gtk_rc_set_image_loader(libgnomeui_pixbuf_image_loader);
         libgnomeui_rc_parse(program_invocation_name);
         gnome_preferences_load();
-
-        if (gnome_preferences_get_disable_imlib_cache ()){
-                int pixmaps, images;
-			
-                /*
-                 * If cache info has been set to -1, -1, it
-                 * means something initialized before us and
-                 * is requesting the cache to not be touched
-                 */
-                gdk_imlib_get_cache_info (&pixmaps, &images);
-
-                if (!(pixmaps == -1 || images == -1))
-                        gdk_imlib_set_cache_info (0, images);
-        }
 
         libgnomeui_segv_setup(TRUE);
 }
@@ -376,18 +365,33 @@ libgnomeui_rc_parse (gchar *command)
 }
 
 static GdkPixmap *
-libgnomeui_imlib_image_loader(GdkWindow   *window,
-                              GdkColormap *colormap,
-                              GdkBitmap  **mask,
-                              GdkColor    *transparent_color,
-                              const gchar *filename)
+libgnomeui_pixbuf_image_loader(GdkWindow   *window,
+                               GdkColormap *colormap,
+                               GdkBitmap  **maskp,
+                               GdkColor    *transparent_color,
+                               const gchar *filename)
 {
-	GdkPixmap *retval;
-	
-	if (gdk_imlib_load_file_to_pixmap ((char *) filename, &retval, mask))
-		return retval;
-	else
-		return NULL;
+	GdkPixmap *retval = NULL;
+        GdkBitmap *mask = NULL;
+        GdkPixbuf *pixbuf;
+
+        /* FIXME we are ignoring colormap and transparent color */
+        
+        pixbuf = gdk_pixbuf_new_from_file(filename);
+
+        if (pixbuf == NULL)
+                return NULL;
+
+        gnome_pixbuf_render(pixbuf, &retval, &mask, 128);
+
+        gdk_pixbuf_unref(pixbuf);
+        
+        if (maskp)
+                *maskp = mask;
+        else
+                gdk_bitmap_unref(mask);
+
+        return retval;
 }
 
 /* crash handler */

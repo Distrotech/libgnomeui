@@ -25,7 +25,6 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwidget.h>
-#include <gdk_imlib.h>
 #include <libgnome/gnome-defs.h>
 #include "gnome-pixmap.h"
 
@@ -191,13 +190,6 @@ gboolean gnome_animator_append_frames_from_file       (GnomeAnimator *animator,
                                                        gint y_offset,
                                                        guint32 interval,
                                                        gint x_unit);
-
-/* Append `pixmap' to animator's list of frames.  */
-gboolean gnome_animator_append_frame_from_gnome_pixmap (GnomeAnimator *animator,
-                                                        GnomePixmap *pixmap,
-                                                        gint x_offset,
-                                                        gint y_offset,
-                                                        guint32 interval);
 
 /* Start playing the animation in the GTK loop.  */
 void     gnome_animator_start                         (GnomeAnimator *animator);

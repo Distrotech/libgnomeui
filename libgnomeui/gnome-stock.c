@@ -19,16 +19,7 @@
    Author: Eckehard Berns  */
 
 #include <config.h>
-#include <stdlib.h>
-#include <string.h>
-#include <libintl.h>
-#include <glib.h>
-#include <gdk/gdk.h>
-#include <gdk/gdktypes.h>
-#include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
 
-#include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-config.h"
@@ -36,468 +27,59 @@
 #include "gnome-pixmap.h"
 #include "gnome-uidefs.h"
 
+#include <stdlib.h>
+#include <string.h>
+#include <gdk/gdk.h>
+#include <gdk/gdkkeysyms.h>
+#include <gtk/gtk.h>
+
 #include "pixmaps/gnome-stock-imlib.h"
 
 #define STOCK_SEP '.'
 #define STOCK_SEP_STR "."
 
-static GnomePixmap *gnome_stock_pixmap(GtkWidget *window, const char *icon,
-				       const char *subtype);
-static GnomeStockPixmapEntry *lookup(const char *icon, const char *subtype,
-				     int fallback);
-
-#if !USE_NEW_GNOME_STOCK
-/*
- * GnomeStockPixmapWidget
- */
-
-static GtkVBoxClass *parent_class = NULL;
-
-static void
-gnome_stock_pixmap_widget_destroy(GtkObject *object)
-{
-	GnomeStockPixmapWidget *w;
-
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_STOCK_PIXMAP_WIDGET (object));
-
-	w = GNOME_STOCK_PIXMAP_WIDGET (object);
-	
-	/* free resources */
-	if (w->regular) {
-		gtk_widget_destroy(GTK_WIDGET(w->regular));
-		w->regular = NULL;
-	}
-	if (w->disabled) {
-		gtk_widget_destroy(GTK_WIDGET(w->disabled));
-		w->disabled = NULL;
-	}
-	if (w->focused) {
-		gtk_widget_destroy(GTK_WIDGET(w->focused));
-		w->focused = NULL;
-	}
-	if (w->icon) g_free(w->icon);
-
-	if (GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
-}
-
-
-
-/*
- * This function has turned out to be the load_pixmap_function and is not
- * used as signal catcher alone. That means, that you cannot trust the
- * value in prev_state.
- */
-static void
-gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, GtkStateType prev_state)
-{
-	GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
-	GnomePixmap *pixmap;
-
-	pixmap = NULL;
-	if (GTK_WIDGET_HAS_FOCUS(widget)) {
-		if (!w->focused) {
-			w->focused = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_FOCUSED);
-			gtk_widget_ref(GTK_WIDGET(w->focused));
-			gtk_widget_show(GTK_WIDGET(w->focused));
-		}
-		pixmap = w->focused;
-	} else if (!GTK_WIDGET_IS_SENSITIVE(widget)) {
-		if (!w->disabled) {
-			w->disabled = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_DISABLED);
-			gtk_widget_ref(GTK_WIDGET(w->disabled));
-			gtk_widget_show(GTK_WIDGET(w->disabled));
-		}
-		pixmap = w->disabled;
-	} else {
-		if (!w->regular) {
-			w->regular = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_REGULAR);
-			gtk_widget_ref(GTK_WIDGET(w->regular));
-			gtk_widget_show(GTK_WIDGET(w->regular));
-		}
-		pixmap = w->regular;
-	}
-	if (pixmap == w->pixmap) return;
-	if (w->pixmap) {
-		gtk_container_remove(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
-	}
-	w->pixmap = pixmap;
-	if (pixmap) {
-		gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
-	}
-}
-
-
-
-static void
-gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
-				       GtkRequisition *requisition)
-{
-	g_return_if_fail(widget != NULL);
-	g_return_if_fail(requisition != NULL);
-	g_return_if_fail(GNOME_IS_STOCK_PIXMAP_WIDGET(widget));
-
-	if (GNOME_STOCK_PIXMAP_WIDGET(widget)->pixmap)
-		gtk_widget_size_request(GTK_WIDGET(GNOME_STOCK_PIXMAP_WIDGET(widget)->pixmap),
-					requisition);
-}
-
-
-
-static void
-gnome_stock_pixmap_widget_class_init(GnomeStockPixmapWidgetClass *klass)
-{
-	GtkObjectClass *object_class = GTK_OBJECT_CLASS(klass);
-	object_class->destroy = gnome_stock_pixmap_widget_destroy;
-	((GtkWidgetClass *)klass)->state_changed =
-		gnome_stock_pixmap_widget_state_changed;
-	((GtkWidgetClass *)klass)->size_request =
-		gnome_stock_pixmap_widget_size_request;
-}
-
-
-
-static void
-gnome_stock_pixmap_widget_init(GtkObject *obj)
-{
-	GnomeStockPixmapWidget *w;
-
-	g_return_if_fail(obj != NULL);
-	g_return_if_fail(GNOME_IS_STOCK_PIXMAP_WIDGET(obj));
-
-	w = GNOME_STOCK_PIXMAP_WIDGET(obj);
-	w->icon = NULL;
-	w->width = 0;
-	w->height = 0;
-	w->window = NULL;
-	w->pixmap = NULL;
-	w->regular = NULL;
-	w->disabled = NULL;
-	w->focused = NULL;
-}
-
-/**
- * gnome_stock_pixmap_widget_get_type:
- *
- * Returns the GtkType for the GnomeStockPixmap widget
- */
-guint
-gnome_stock_pixmap_widget_get_type(void)
-{
-	static guint new_type = 0;
-	if (!new_type) {
-		GtkTypeInfo type_info = {
-			"GnomeStockPixmapWidget",
-			sizeof(GnomeStockPixmapWidget),
-			sizeof(GnomeStockPixmapWidgetClass),
-			(GtkClassInitFunc)gnome_stock_pixmap_widget_class_init,
-			(GtkObjectInitFunc)gnome_stock_pixmap_widget_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
-		};
-		new_type = gtk_type_unique(gtk_vbox_get_type(), &type_info);
-		parent_class = gtk_type_class(gtk_vbox_get_type());
-	}
-	return new_type;
-}
-
-/**
- * gnome_stock_pixmap_widget_new:
- * @window: deprecated.
- * @icon: deprecated.
- *
- * This routine is deprecated.
- *
- * Returns: deprecated value.
- */
-GtkWidget *
-gnome_stock_pixmap_widget_new (GtkWidget *window, const char *icon)
-{
-	GtkWidget *w;
-	GnomeStockPixmapWidget *p;
-	GnomeStockPixmapEntry *entry;
-
-	g_return_val_if_fail(icon != NULL, NULL);
-	entry = gnome_stock_pixmap_checkfor(icon, GNOME_STOCK_PIXMAP_REGULAR);
-	g_return_val_if_fail(entry != NULL, NULL);
-
-	w = gtk_type_new(gnome_stock_pixmap_widget_get_type());
-	p = GNOME_STOCK_PIXMAP_WIDGET(w);
-	p->icon = g_strdup(icon);
-	if (entry->type == GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED) {
-		p->width = entry->imlib_s.scaled_width;
-		p->height = entry->imlib_s.scaled_height;
-	} else {
-		p->width = entry->any.width;
-		p->height = entry->any.height;
-	}
-	p->window = window;
-
-	gnome_stock_pixmap_widget_state_changed(w, 0);
-
-	return w;
-}
-
-#endif /* !USE_NEW_GNOME_STOCK */
-
-#if USE_NEW_GNOME_STOCK
-void
-gnome_stock_pixmap_widget_set_icon(GnomeStock *widget,
-				   const char *icon)
-{
-	/* FIXME: this is a hack. This functions prototype will have to
-	 * use the new GnomeStock widget */
-	gnome_stock_set_icon(GNOME_STOCK(widget), icon);
-	g_warning("gnome_stock_pixmap_widget_set_icon is deprecated.\n\t\t"
-		  "Please use gnome_stock_set_icon instead.");
-}
-#else /* !USE_NEW_GNOME_STOCK */
-void
-gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
-				   const char *icon)
-{
-	GnomeStockPixmapEntry *entry;
-
-	g_return_if_fail(widget != NULL);
-	g_return_if_fail(icon != NULL);
-	g_return_if_fail(GNOME_IS_STOCK_PIXMAP_WIDGET(widget));
-
-	entry = lookup(icon, GNOME_STOCK_PIXMAP_REGULAR, 0);
-	g_return_if_fail(entry != NULL);
-
-	if (widget->icon)
-		if (0 == strcmp(widget->icon, icon))
-			return;
-
-	if (widget->regular) {
-		gtk_widget_unref(GTK_WIDGET(widget->regular));
-		widget->regular = NULL;
-	}
-	if (widget->disabled) {
-		gtk_widget_unref(GTK_WIDGET(widget->disabled));
-		widget->disabled = NULL;
-	}
-	if (widget->focused) {
-		gtk_widget_unref(GTK_WIDGET(widget->focused));
-		widget->focused = NULL;
-	}
-	if (widget->icon) g_free(widget->icon);
-	widget->icon = g_strdup(icon);
-	gnome_stock_pixmap_widget_state_changed(GTK_WIDGET(widget), 0);
-}
-#endif /* !USE_NEW_GNOME_STOCK */
-
-
+static GnomeStockPixmapEntry **lookup(const char *icon);
 
 /***************************/
 /*  new GnomeStock widget  */
 /***************************/
 
-static gint (*parent_expose)(GtkWidget *widget, GdkEventExpose *event) = NULL;
-static void (*parent_draw)(GtkWidget *widget, GdkRectangle *area) = NULL;
+static GnomePixmapClass* parent_class = NULL;
 
 static void
 gnome_stock_destroy(GtkObject *object)
 {
-	GtkObjectClass *object_class;
 	GnomeStock *stock;
 
 	g_return_if_fail(object != NULL);
 	g_return_if_fail(GNOME_IS_STOCK(object));
 
 	stock = GNOME_STOCK(object);
-	stock->current = NULL;
-	if (stock->regular) {
-		gtk_widget_unref (GTK_WIDGET(stock->regular));
-		stock->regular = NULL;
-	}
-	if (stock->disabled) {
-		gtk_widget_unref (GTK_WIDGET(stock->disabled));
-		stock->disabled = NULL;
-	}
-	if (stock->focused) {
-		gtk_widget_unref (GTK_WIDGET(stock->focused));
-		stock->focused = NULL;
-	}
-	if (stock->icon)
-		g_free(stock->icon);
 
-	object_class = gtk_type_class(gnome_pixmap_get_type());
-	if (object_class->destroy)
-		(* object_class->destroy)(object);
-
+        (* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }
 
-static void
-gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
-{
-	GnomePixmap *gpixmap;
-	GtkRequisition req;
-	GdkVisual *visual;
-	GdkGC *gc;
 
-	g_return_if_fail(stock != NULL);
-	g_return_if_fail(pixmap != NULL);
-	g_return_if_fail(GNOME_IS_STOCK(stock));
-	g_return_if_fail(GNOME_IS_PIXMAP(pixmap));
-
-	gpixmap = GNOME_PIXMAP(stock);
-	gtk_widget_size_request(GTK_WIDGET(pixmap), &req);
-	if (GTK_WIDGET(pixmap)->window)
-		visual = gdk_window_get_visual(GTK_WIDGET(pixmap)->window);
-	else
-		visual = gdk_imlib_get_visual();
-	if (gpixmap->pixmap) {
-		gint width, height;
-		gdk_window_get_size(gpixmap->pixmap, &width, &height);
-		if ((width != req.width) || (height != req.height)) {
-			gdk_pixmap_unref(gpixmap->pixmap);
-			gpixmap->pixmap = NULL;
-			if (gpixmap->mask)
-				gdk_pixmap_unref(gpixmap->mask);
-			gpixmap->mask = NULL;
-		}
-	}
-	if (!gpixmap->pixmap) {
-		gpixmap->pixmap = gdk_pixmap_new(pixmap->pixmap,
-						 req.width, req.height,
-						 visual->depth);
-	}
-	gc = gdk_gc_new(gpixmap->pixmap);
-	gdk_draw_pixmap(gpixmap->pixmap, gc, pixmap->pixmap, 0, 0, 0, 0,
-			req.width, req.height);
-	gdk_gc_destroy(gc);
-	if (pixmap->mask) {
-		if (!gpixmap->mask)
-			gpixmap->mask = gdk_pixmap_new(pixmap->mask,
-						       req.width, req.height, 1);
-		gc = gdk_gc_new(gpixmap->mask);
-		gdk_draw_pixmap(gpixmap->mask, gc, pixmap->mask, 0, 0, 0, 0,
-				req.width, req.height);
-		gdk_gc_destroy(gc);
-		if (!(GTK_WIDGET_FLAGS(gpixmap)&GTK_NO_WINDOW) &&
-			GTK_WIDGET(gpixmap)->window)
-			gtk_widget_shape_combine_mask(GTK_WIDGET(gpixmap),
-						      gpixmap->mask, 0, 0);
-	}
-	/* XXX: this isn't needed always, but I found that in some
-	 * circumstances it is. */
-	gtk_widget_queue_draw(GTK_WIDGET(stock));
-}
-
-/*
- * This function has turned out to be the load_pixmap_function and is not
- * used as signal catcher alone. That means, that you cannot trust the
- * value in prev_state.
- */
-static void
-gnome_stock_state_changed(GtkWidget *widget, GtkStateType prev_state)
-{
-	GnomeStock *w = GNOME_STOCK(widget);
-	GnomePixmap *pixmap;
-	GtkWidget *tmp;
-	guint32 c;
-
-	if (widget->parent) {
-		GdkWindow *w;
-		tmp = widget->parent;
-		w = tmp->window;
-		while (tmp->parent) {
-			if (tmp->parent->window != w) break;
-			tmp = tmp->parent;
-		}
-	} else {
-		tmp = widget;
-	}
-	c = (tmp->style->bg[tmp->state].red >> 8) |
-		(tmp->style->bg[tmp->state].green & 0xff00) |
-		((tmp->style->bg[tmp->state].blue & 0xff00) << 8);
-	pixmap = NULL;
-	/* if (GTK_WIDGET_HAS_FOCUS(widget)) { */
-	if (tmp->state == GTK_STATE_PRELIGHT) {
-		if ((c != w->c_focused) && (w->focused)) {
-			if (w->current == w->focused)
-				w->current = NULL;
-			gtk_widget_unref(GTK_WIDGET(w->focused));
-			w->focused = NULL;
-		}
-		w->c_focused = c;
-		if (!w->focused) {
-			w->focused = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_FOCUSED);
-		}
-		pixmap = w->focused;
-	} else if (!GTK_WIDGET_IS_SENSITIVE(widget)) {
-		if ((c != w->c_disabled) && (w->disabled)) {
-			if (w->current == w->disabled)
-				w->current = NULL;
-			gtk_widget_unref(GTK_WIDGET(w->disabled));
-			w->disabled = NULL;
-		}
-		w->c_disabled = c;
-		if (!w->disabled) {
-			w->disabled = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_DISABLED);
-		}
-		pixmap = w->disabled;
-	} else {
-		if ((c != w->c_regular) && (w->regular)) {
-			if (w->current == w->regular)
-				w->current = NULL;
-			gtk_widget_unref(GTK_WIDGET(w->regular));
-			w->regular = NULL;
-		}
-		w->c_regular = c;
-		if (!w->regular) {
-			w->regular = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_REGULAR);
-		}
-		pixmap = w->regular;
-	}
-	if (pixmap == w->current) return;
-	/* FIXME: this should check for sizes first */
-	w->current = pixmap;
-	gnome_stock_paint(w, pixmap);
-}
-
-static gint
-gnome_stock_expose(GtkWidget *widget, GdkEventExpose *event)
-{
-	gnome_stock_state_changed(widget, 0);
-	if (parent_expose)
-		return (*parent_expose)(widget, event);
-	else
-		return 0;
-}
-
-static void
-gnome_stock_draw(GtkWidget *widget, GdkRectangle *area)
-{
-	gnome_stock_state_changed(widget, 0);
-	if (parent_draw)
-		(*parent_draw)(widget, area);
-}
 
 static void
 gnome_stock_class_init(GtkObjectClass * klass)
 {
+  	GtkObjectClass *object_class;
+	GtkWidgetClass *widget_class;
+
+	object_class = (GtkObjectClass *) klass;
+	widget_class = (GtkWidgetClass *) klass;
+
+	parent_class = gtk_type_class (gnome_pixmap_get_type ());
+  
 	klass->destroy = gnome_stock_destroy;
-	((GtkWidgetClass *)klass)->state_changed =
-		gnome_stock_state_changed;
-	parent_expose = ((GtkWidgetClass *)klass)->expose_event;
-	((GtkWidgetClass *)klass)->expose_event =
-		gnome_stock_expose;
-	parent_draw = ((GtkWidgetClass *)klass)->draw;
-	((GtkWidgetClass *)klass)->draw =
-		gnome_stock_draw;
 }
 
 static void
 gnome_stock_init(GnomeStock *stock)
 {
-	stock->regular = NULL;
-	stock->disabled = NULL;
-	stock->focused = NULL;
-	stock->current = NULL;
 	stock->icon = NULL;
+	gnome_pixmap_set_draw_mode (GNOME_PIXMAP (stock), GNOME_PIXMAP_COLOR);
 }
 
 /**
@@ -533,30 +115,11 @@ gnome_stock_get_type(void)
 GtkWidget *
 gnome_stock_new(void)
 {
-	return gtk_type_new(gnome_stock_get_type());
-}
+        GnomeStock *stock;
+	stock = gtk_type_new(gnome_stock_get_type());
 
-#if USE_NEW_GNOME_STOCK
-
-/**
- * gnome_stock_pixmap_widget_new:
- * @window: deprecated
- * @icon: deprecated
- *
- * This routine is deprecated, please use gnome_stock_new_with_icon()
- *
- * Returns: A GtkWidget
- */
-GtkWidget *
-gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon)
-{
-#ifdef DEBUG
-	g_message("gnome_stock_pixmap_widget_new is deprecated\n\t\t"
-		  "Use gnome_stock_new_with_icon instead.");
-#endif
-	return gnome_stock_new_with_icon(icon);
+        return GTK_WIDGET(stock);
 }
-#endif /* USE_NEW_GNOME_STOCK */
 
 /**
  * gnome_stock_set_icon:
@@ -564,42 +127,74 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon)
  * @icon: Icon code to set
  *
  * Sets the @stock object icon to be the one whose code is @icon.
- *
- * Returns: TRUE if the icon was set successfully.
  */
-gboolean
+void
 gnome_stock_set_icon(GnomeStock *stock, const char *icon)
 {
-	GnomeStockPixmapEntry *entry;
-
-	g_return_val_if_fail(stock != NULL, 0);
-	g_return_val_if_fail(GNOME_IS_STOCK(stock), 0);
-	g_return_val_if_fail(icon != NULL, 0);
-
-	entry = lookup(icon, GNOME_STOCK_PIXMAP_REGULAR, 0);
-	if (!entry) return 0;
+	GnomeStockPixmapEntry **entries;
+        GdkPixbuf *pixbufs[5] = { NULL, NULL, NULL, NULL, NULL };
+        GdkBitmap *bitmasks[5] = { NULL, NULL, NULL, NULL, NULL };
+        int i;
+        
+	g_return_if_fail(stock != NULL);
+	g_return_if_fail(GNOME_IS_STOCK(stock));
+	g_return_if_fail(icon != NULL);
 
 	if (stock->icon) {
 		if (0 == strcmp(icon, stock->icon))
-			return 1;
+			return;
 		g_free(stock->icon);
+                stock->icon = NULL;
 	}
+        
+	entries = lookup(icon);
+        
+        if (entries == NULL) {
+                g_warning("No such stock icon `%s'", icon);
+                return;
+        }
+        
 	stock->icon = g_strdup(icon);
-	stock->current = NULL;
-	if (stock->regular) {
-		gtk_widget_destroy(GTK_WIDGET(stock->regular));
-		stock->regular = NULL;
-	}
-	if (stock->disabled) {
-		gtk_widget_destroy(GTK_WIDGET(stock->disabled));
-		stock->disabled = NULL;
-	}
-	if (stock->focused) {
-		gtk_widget_destroy(GTK_WIDGET(stock->focused));
-		stock->focused = NULL;
-	}
-	gnome_stock_state_changed(GTK_WIDGET(stock), 0);
-	return 1;
+
+        i = 0;
+        while (i < 5) {
+          if (entries[i] != NULL)
+            pixbufs[i] = gdk_pixbuf_new_from_stock_pixmap_entry(entries[i]);
+          else
+            pixbufs[i] = NULL;
+
+          bitmasks[i] = NULL;
+          
+          ++i;
+        }
+
+        i = 0;
+        while (i < 5) {
+          if (pixbufs[i] != NULL &&
+              gdk_pixbuf_get_has_alpha(pixbufs[i])) {
+                  bitmasks[i] = gdk_pixmap_new(NULL,
+                                               gdk_pixbuf_get_width(pixbufs[i]),
+                                               gdk_pixbuf_get_height(pixbufs[i]),
+                                               1);
+
+                  gdk_pixbuf_render_threshold_alpha(pixbufs[i], bitmasks[i],
+                                                    0, 0, 0, 0,
+                                                    gdk_pixbuf_get_width(pixbufs[i]),
+                                                    gdk_pixbuf_get_height(pixbufs[i]),
+                                                    128); /* clip at 50% alpha */
+          }
+          ++i;
+        }
+
+        /* Note that we may be building a new insensitive image for each widget,
+           while we could share the insensitive versions in our hash table.
+           It's an open question which is the right thing...
+        */
+        gnome_pixmap_set_pixbufs_at_state (GNOME_PIXMAP(stock),
+					   pixbufs,
+					   bitmasks);
+
+	return;
 }
 
 /**
@@ -607,7 +202,7 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
  * @icon: icon code.
  *
  * Returns: A GnomeStock widget created with the initial icon code
- * set to @icon.
+ * set to @icon. The icon must exist.
  */ 
 GtkWidget *
 gnome_stock_new_with_icon(const char *icon)
@@ -616,125 +211,340 @@ gnome_stock_new_with_icon(const char *icon)
 
 	g_return_val_if_fail(icon != NULL, NULL);
 	w = gtk_type_new(gnome_stock_get_type());
-	if (!gnome_stock_set_icon(GNOME_STOCK(w), icon)) {
-		gtk_widget_destroy(w);
-		return NULL;
-	}
+
+	gnome_stock_set_icon(GNOME_STOCK(w), icon);
+
 	return w;
 }
 
-
-
-/****************/
-/* some helpers */
-/****************/
-
-
-struct scale_color {
-	unsigned char r, g, b;
-};
-
-static struct scale_color scale_base = { 0xd6, 0xd6, 0xd6 };
-static struct scale_color scale_trans = { 0xff, 0x00, 0xff };
-
-static char *
-scale_down(GtkWidget *window, GtkStateType state, unsigned char *datao,
-	   gint wo, gint ho, gint w, gint h)
+GtkWidget    *
+gnome_stock_new_with_icon_at_size (const char *icon, int width, int height)
 {
-	unsigned char *data, *p, *p2, *p3;
-	long x, y, w2, h2, xo, yo, wo3, x2, y2, i, x3, y3;
-	long yw, xw, ww, hw, r, g, b, r2, g2, b2;
-	int trans;
-
-	if (window) {
-		GtkStyle *style = gtk_widget_get_style(window);
-		scale_base.r = style->bg[state].red >> 8;
-		scale_base.g = style->bg[state].green >> 8;
-		scale_base.b = style->bg[state].blue >> 8;
-	}
-	data = g_malloc(w * h * 3);
-	p = data;
-
-	ww = (wo << 8) / w;
-	hw = (ho << 8) / h;
-	h2 = h << 8;
-	w2 = w << 8;
-	wo3 = wo * 3;
-	for (y = 0; y < h2; y += 0x100) {
-		yo = (y * ho) / h;
-		y2 = yo & 0xff;
-		yo >>= 8;
-		for (x = 0; x < w2; x += 0x100) {
-			xo = (x * wo) / w;
-			x2 = xo & 0xff;
-			xo >>= 8;
-			i = xo + (yo * wo);
-			p2 = datao + (i * 3);
-
-			r2 = g2 = b2 = 0;
-			yw = hw;
-			y3 = y2;
-			trans = 1;
-			while (yw) {
-				xw = ww;
-				x3 = x2;
-				p3 = p2;
-				r = g = b = 0;
-				while (xw) {
-					if ((0x100 - x3) < xw)
-						i = 0x100 - x3;
-					else
-						i = xw;
-					if ((p3[0] == scale_trans.r) &&
-					    (p3[1] == scale_trans.g) &&
-					    (p3[2] == scale_trans.b)) {
-						r += scale_base.r * i;
-						g += scale_base.g * i;
-						b += scale_base.b * i;
-					} else {
-						trans = 0;
-						r += p3[0] * i;
-						g += p3[1] * i;
-						b += p3[2] * i;
-					}
-					p3 += 3;
-					xw -= i;
-					x3 = 0;
-				}
-				if ((0x100 - y3) < yw) {
-					r2 += r * (0x100 - y3);
-					g2 += g * (0x100 - y3);
-					b2 += b * (0x100 - y3);
-					yw -= 0x100 - y3;
-				} else {
-					r2 += r * yw;
-					g2 += g * yw;
-					b2 += b * yw;
-					yw = 0;
-				}
-				y3 = 0;
-				p2 += wo3;
-			}
-			if (trans) {
-				*(p++) = scale_trans.r;
-				*(p++) = scale_trans.g;
-				*(p++) = scale_trans.b;
-			} else {
-				r2 /= ww * hw;
-				g2 /= ww * hw;
-				b2 /= ww * hw;
-				*(p++) = r2 & 0xff;
-				*(p++) = g2 & 0xff;
-				*(p++) = b2 & 0xff;
-			}
-		}
-	}
-
-	return data;
+  /* FIXME */
+  g_warning("%s not implemented", __FUNCTION__);
+  return gnome_stock_new_with_icon(icon);
 }
 
+/*
+ * Hash entry for the stock icon hash
+ */
+
+
+/* Structures for the internal stock image hash table entries */
+
+typedef struct _GnomeStockPixmapEntryAny     GnomeStockPixmapEntryAny;
+typedef struct _GnomeStockPixmapEntryData    GnomeStockPixmapEntryData;
+typedef struct _GnomeStockPixmapEntryFile    GnomeStockPixmapEntryFile;
+typedef struct _GnomeStockPixmapEntryPath    GnomeStockPixmapEntryPath;
+typedef struct _GnomeStockPixmapEntryPixbuf     GnomeStockPixmapEntryPixbuf;
+typedef struct _GnomeStockPixmapEntryPixbufScaled GnomeStockPixmapEntryPixbufScaled;
+
+typedef enum {
+        GNOME_STOCK_PIXMAP_TYPE_NONE,
+        GNOME_STOCK_PIXMAP_TYPE_DATA,
+        GNOME_STOCK_PIXMAP_TYPE_FILE,
+        GNOME_STOCK_PIXMAP_TYPE_PATH,
+        GNOME_STOCK_PIXMAP_TYPE_PIXBUF,
+        GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED
+} GnomeStockPixmapType;
+
+struct _GnomeStockPixmapEntryAny {
+        GnomeStockPixmapType type;
+	char *label;
+        GdkPixbuf *pixbuf;
+};
+
+/* a data entry holds a hardcoded pixmap */
+struct _GnomeStockPixmapEntryData {
+        GnomeStockPixmapType type;
+	char *label;
+        GdkPixbuf *pixbuf;
+        const gchar **xpm_data;
+};
+
+/* a file entry holds a filename (no path) to the pixamp. this pixmap
+   will be seached for using gnome_pixmap_file */
+struct _GnomeStockPixmapEntryFile {
+        GnomeStockPixmapType type;
+	char *label;
+        GdkPixbuf *pixbuf;
+        gchar *filename;
+};
+
+/* a path entry holds the complete (absolut) path to the pixmap file */
+struct _GnomeStockPixmapEntryPath {
+        GnomeStockPixmapType type;
+	char *label;
+        GdkPixbuf *pixbuf;
+        gchar *pathname;
+};
+
+/* a data entry holds a hardcoded pixmap */
+struct _GnomeStockPixmapEntryPixbuf {
+        GnomeStockPixmapType type;
+        char *label;
+        GdkPixbuf *pixbuf;
+};
+
+ 
+/* scales the Pixbuf data to the given size when used (allows scale-on-demand) */
+struct _GnomeStockPixmapEntryPixbufScaled {
+        GnomeStockPixmapType type;
+        char *label;
+        GdkPixbuf *pixbuf;
+        int scaled_width, scaled_height;
+        GdkPixbuf *unscaled_pixbuf;
+};
+
+union _GnomeStockPixmapEntry {
+        GnomeStockPixmapType type;
+        GnomeStockPixmapEntryAny any;
+        GnomeStockPixmapEntryData data;
+        GnomeStockPixmapEntryFile file;
+        GnomeStockPixmapEntryPath path;
+        GnomeStockPixmapEntryPixbuf pixbuf;
+        GnomeStockPixmapEntryPixbufScaled scaled;
+};
+
+static GnomeStockPixmapEntry*
+gnome_stock_pixmap_entry_new_blank (GnomeStockPixmapType type, const gchar* label)
+{
+        GnomeStockPixmapEntry* entry = NULL;
+
+        switch (type) {
+        case GNOME_STOCK_PIXMAP_TYPE_DATA:
+                entry = (GnomeStockPixmapEntry*) g_new0(GnomeStockPixmapEntryData, 1);
+                break;
+        case GNOME_STOCK_PIXMAP_TYPE_FILE:
+                entry = (GnomeStockPixmapEntry*) g_new0(GnomeStockPixmapEntryFile, 1);
+                break;
+                
+        case GNOME_STOCK_PIXMAP_TYPE_PATH:
+                entry = (GnomeStockPixmapEntry*) g_new0(GnomeStockPixmapEntryPath, 1);
+                break;
+                
+        case GNOME_STOCK_PIXMAP_TYPE_PIXBUF:
+                entry = (GnomeStockPixmapEntry*) g_new0(GnomeStockPixmapEntryPixbuf, 1);
+                break;
+
+        case GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED:
+                entry = (GnomeStockPixmapEntry*) g_new0(GnomeStockPixmapEntryPixbufScaled, 1);
+                break;
+
+        default:
+                g_assert_not_reached();
+                break;
+        }
+        
+        g_assert(entry != NULL);
+
+        entry->type = type;
+        
+        if (label != NULL)
+                entry->any.label = g_strdup(label);
+
+        return entry;
+}
+
+void
+gnome_stock_pixmap_entry_destroy (GnomeStockPixmapEntry* entry)
+{
+        switch (entry->type) {
+        case GNOME_STOCK_PIXMAP_TYPE_DATA:
+                /* nothing to free */
+                break;
+
+        case GNOME_STOCK_PIXMAP_TYPE_FILE:
+                if (entry->file.filename != NULL) 
+                        g_free(entry->file.filename);
+                break;
+                
+        case GNOME_STOCK_PIXMAP_TYPE_PATH:
+                if (entry->path.pathname != NULL)
+                        g_free(entry->path.pathname);
+                break;
+                
+        case GNOME_STOCK_PIXMAP_TYPE_PIXBUF:
+                break;
+                
+        case GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED:
+                if (entry->scaled.unscaled_pixbuf != NULL)
+                        gdk_pixbuf_unref(entry->scaled.unscaled_pixbuf);
+                break;
+
+        default:
+                g_assert_not_reached();
+                break;
+        }
+
+        if (entry->any.pixbuf != NULL)
+                gdk_pixbuf_unref(entry->any.pixbuf);
+        
+        if (entry->any.label != NULL)
+                g_free(entry->any.label);
+
+        g_free(entry);
+}
+
+GnomeStockPixmapEntry*
+gnome_stock_pixmap_entry_new_from_gdk_pixbuf (GdkPixbuf *pixbuf,
+                                              const gchar* label)
+{
+        GnomeStockPixmapEntry* entry;
+
+        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_PIXBUF,
+                                                    label);
+
+        gdk_pixbuf_ref(pixbuf);
+
+        ((GnomeStockPixmapEntryPixbuf*)entry)->pixbuf = pixbuf;
+
+        return entry;
+}
+
+GnomeStockPixmapEntry*
+gnome_stock_pixmap_entry_new_from_gdk_pixbuf_at_size (GdkPixbuf *pixbuf,
+                                                      const gchar* label,
+                                                      gint width, gint height)
+{
+        GnomeStockPixmapEntry* entry;
+
+        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED,
+                                                    label);
+
+        gdk_pixbuf_ref(pixbuf);
+
+        ((GnomeStockPixmapEntryPixbufScaled*)entry)->unscaled_pixbuf = pixbuf;
+        ((GnomeStockPixmapEntryPixbufScaled*)entry)->scaled_width = width;
+        ((GnomeStockPixmapEntryPixbufScaled*)entry)->scaled_height = height;
+
+        return entry;
+}
+
+GnomeStockPixmapEntry*
+gnome_stock_pixmap_entry_new_from_filename (const gchar* filename,
+                                            const gchar* label)
+{
+        GnomeStockPixmapEntry* entry;
+
+        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_FILE,
+                                                    label);
+
+        ((GnomeStockPixmapEntryFile*)entry)->filename = g_strdup(filename);
+
+        return entry;
+}
+
+GnomeStockPixmapEntry*
+gnome_stock_pixmap_entry_new_from_pathname (const gchar* pathname,
+                                            const gchar* label)
+{
+        GnomeStockPixmapEntry* entry;
+
+        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_PATH,
+                                                    label);
+
+        entry->path.pathname = g_strdup(pathname);
+
+        return entry;
+}
+
+
+GnomeStockPixmapEntry*
+gnome_stock_pixmap_entry_new_from_xpm_data (const gchar** xpm_data, const gchar* label)
+{
+        GnomeStockPixmapEntry* entry;
+
+        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_DATA,
+                                                    label);
+
+        ((GnomeStockPixmapEntryData*)entry)->xpm_data = xpm_data;
+
+        return entry;
+}
+
+GdkPixbuf*
+gdk_pixbuf_new_from_stock_pixmap_entry (GnomeStockPixmapEntry *entry)
+{
+        if (entry->any.pixbuf != NULL) {
+                /* Return the cached pixbuf, with refcount incremented. */
+                gdk_pixbuf_ref(entry->any.pixbuf);
+                return entry->any.pixbuf;
+        }
+
+        switch (entry->type) {
+        case GNOME_STOCK_PIXMAP_TYPE_DATA:
+                entry->any.pixbuf = gdk_pixbuf_new_from_xpm_data(entry->data.xpm_data);
+                break;
+                
+        case GNOME_STOCK_PIXMAP_TYPE_FILE: {
+                gchar* pathname;
+
+                g_assert(entry->file.filename != NULL);
+                
+                pathname = gnome_pixmap_file(entry->file.filename);
+                entry->any.pixbuf = gdk_pixbuf_new_from_file(pathname);
+                g_free(pathname);
+                /* drop some memory */
+                if (entry->any.pixbuf != NULL) {
+                        g_free(entry->file.filename);
+                        entry->file.filename = NULL;
+                }
+        }
+                break;
+                
+        case GNOME_STOCK_PIXMAP_TYPE_PATH:
+                g_assert(entry->path.pathname != NULL);
+                
+                entry->any.pixbuf = gdk_pixbuf_new_from_file(entry->path.pathname);
+                /* drop some memory */
+                if (entry->any.pixbuf != NULL) {
+                        g_free(entry->path.pathname);
+                        entry->path.pathname = NULL;
+                }
+                break;
+                
+        case GNOME_STOCK_PIXMAP_TYPE_PIXBUF:
+                /* no work to do here */
+                break;
+
+        case GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED:
+                if (entry->scaled.unscaled_pixbuf != NULL) {
+                        g_assert(entry->any.pixbuf == NULL);
+
+                        entry->any.pixbuf = gnome_pixbuf_scale(entry->scaled.unscaled_pixbuf,
+                                                               entry->scaled.scaled_width,
+                                                               entry->scaled.scaled_height);
+                }
+                if (entry->any.pixbuf != NULL &&
+                    entry->scaled.unscaled_pixbuf != NULL) {
+                        gdk_pixbuf_unref(entry->scaled.unscaled_pixbuf);
+                        entry->scaled.unscaled_pixbuf = NULL;
+                }
+                break;
+
+        default:
+                g_assert_not_reached();
+                break;
+
+        }
+
+        if (entry->any.pixbuf != NULL) {
+                /* Return the cached pixbuf, with refcount incremented. */
+                gdk_pixbuf_ref(entry->any.pixbuf);
+                return entry->any.pixbuf;
+        } else {
+                return NULL;
+        }
+}
+
+/*
+ * Builtin stock icons 
+ */
+
 struct _default_entries_data {
-	const char *icon, *subtype;
+	const char *icon;
+        GtkStateType state;
 	const char *label;
 	const gchar *rgb_data;
 	int width, height;
@@ -749,616 +559,352 @@ struct _default_entries_data {
 #define MENU_H 16
 
 static const struct _default_entries_data entries_data[] = {
-	{GNOME_STOCK_PIXMAP_NEW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_new, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_SAVE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_SAVE_AS, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save_as, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_REVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_revert, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_CUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_cut, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_help, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_PRINT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_print, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_SEARCH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_search, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_SRCHRPL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_search_replace, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_BACK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_left_arrow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_FORWARD, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_right_arrow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_FIRST, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_first, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_LAST, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_last, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_HOME, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_home, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_STOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_stop, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_REFRESH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_refresh, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_UNDELETE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_undelete, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_OPEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_open, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_CLOSE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_close, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_COPY, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_copy, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_paste, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_properties, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_PREFERENCES, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_preferences, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_SCORES, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_scores, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_UNDO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_undo, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_REDO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_redo, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TIMER, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_timer, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TIMER_STOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_timer_stopped, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MAIL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MAIL_RCV, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_receive, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MAIL_SND, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_send, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MAIL_RPL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_reply, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MAIL_FWD, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_forward, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MAIL_NEW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_compose, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TRASH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_trash, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TRASH_FULL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_trash_full, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_SPELLCHECK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_spellcheck, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MIC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mic, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_VOLUME, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_volume, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MIDI, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_midi, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_LINE_IN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_line_in, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_CDROM, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_cdrom, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_BOOK_RED, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_red, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_BOOK_GREEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_green, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_BOOK_BLUE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_blue, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_BOOK_YELLOW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_BOOK_OPEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_open, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_NOT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_not, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_CONVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_convert, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_JUMP_TO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_jump_to, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MULTIPLE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_multiple_file, 32, 32, 32, 32},
-	{GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exit, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
-	{GNOME_STOCK_PIXMAP_UP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_up_arrow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_DOWN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_down_arrow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_top, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_BOTTOM, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_bottom, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_ATTACH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_attach, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_FONT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_font, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_INDEX, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_index, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_EXEC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exec, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_ALIGN_LEFT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_align_left, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_ALIGN_RIGHT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_align_right, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_ALIGN_CENTER, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_align_center, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_ALIGN_JUSTIFY, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_align_justify, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TEXT_BOLD, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_text_bold, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TEXT_ITALIC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_text_italic, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TEXT_UNDERLINE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_text_underline, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_TEXT_STRIKEOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_text_strikeout, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_NEW, GTK_STATE_NORMAL, NULL, imlib_new, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_SAVE, GTK_STATE_NORMAL, NULL, imlib_save, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_SAVE_AS, GTK_STATE_NORMAL, NULL, imlib_save_as, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_REVERT, GTK_STATE_NORMAL, NULL, imlib_revert, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_CUT, GTK_STATE_NORMAL, NULL, imlib_cut, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_HELP, GTK_STATE_NORMAL, NULL, imlib_help, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_PRINT, GTK_STATE_NORMAL, NULL, imlib_print, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_SEARCH, GTK_STATE_NORMAL, NULL, imlib_search, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_SRCHRPL, GTK_STATE_NORMAL, NULL, imlib_search_replace, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BACK, GTK_STATE_NORMAL, NULL, imlib_left_arrow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_FORWARD, GTK_STATE_NORMAL, NULL, imlib_right_arrow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_FIRST, GTK_STATE_NORMAL, NULL, imlib_first, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_LAST, GTK_STATE_NORMAL, NULL, imlib_last, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_HOME, GTK_STATE_NORMAL, NULL, imlib_home, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_STOP, GTK_STATE_NORMAL, NULL, imlib_stop, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_REFRESH, GTK_STATE_NORMAL, NULL, imlib_refresh, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_UNDELETE, GTK_STATE_NORMAL, NULL, imlib_undelete, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_OPEN, GTK_STATE_NORMAL, NULL, imlib_open, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_CLOSE, GTK_STATE_NORMAL, NULL, imlib_close, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_COPY, GTK_STATE_NORMAL, NULL, imlib_copy, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_PASTE, GTK_STATE_NORMAL, NULL, imlib_paste, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_PROPERTIES, GTK_STATE_NORMAL, NULL, imlib_properties, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_PREFERENCES, GTK_STATE_NORMAL, NULL, imlib_preferences, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_SCORES, GTK_STATE_NORMAL, NULL, imlib_scores, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_UNDO, GTK_STATE_NORMAL, NULL, imlib_undo, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_REDO, GTK_STATE_NORMAL, NULL, imlib_redo, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TIMER, GTK_STATE_NORMAL, NULL, imlib_timer, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TIMER_STOP, GTK_STATE_NORMAL, NULL, imlib_timer_stopped, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MAIL, GTK_STATE_NORMAL, NULL, imlib_mail, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MAIL_RCV, GTK_STATE_NORMAL, NULL, imlib_mail_receive, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MAIL_SND, GTK_STATE_NORMAL, NULL, imlib_mail_send, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MAIL_RPL, GTK_STATE_NORMAL, NULL, imlib_mail_reply, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MAIL_FWD, GTK_STATE_NORMAL, NULL, imlib_mail_forward, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MAIL_NEW, GTK_STATE_NORMAL, NULL, imlib_mail_compose, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TRASH, GTK_STATE_NORMAL, NULL, imlib_trash, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TRASH_FULL, GTK_STATE_NORMAL, NULL, imlib_trash_full, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_SPELLCHECK, GTK_STATE_NORMAL, NULL, imlib_spellcheck, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MIC, GTK_STATE_NORMAL, NULL, imlib_mic, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_VOLUME, GTK_STATE_NORMAL, NULL, imlib_volume, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MIDI, GTK_STATE_NORMAL, NULL, imlib_midi, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_LINE_IN, GTK_STATE_NORMAL, NULL, imlib_line_in, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_CDROM, GTK_STATE_NORMAL, NULL, imlib_cdrom, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_RED, GTK_STATE_NORMAL, NULL, imlib_book_red, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_GREEN, GTK_STATE_NORMAL, NULL, imlib_book_green, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_BLUE, GTK_STATE_NORMAL, NULL, imlib_book_blue, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_YELLOW, GTK_STATE_NORMAL, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_OPEN, GTK_STATE_NORMAL, NULL, imlib_book_open, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_NOT, GTK_STATE_NORMAL, NULL, imlib_not, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_CONVERT, GTK_STATE_NORMAL, NULL, imlib_convert, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_JUMP_TO, GTK_STATE_NORMAL, NULL, imlib_jump_to, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MULTIPLE, GTK_STATE_NORMAL, NULL, imlib_multiple_file, 32, 32, 32, 32},
+	{GNOME_STOCK_PIXMAP_EXIT, GTK_STATE_NORMAL, NULL, imlib_exit, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_ABOUT, GTK_STATE_NORMAL, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
+	{GNOME_STOCK_PIXMAP_UP, GTK_STATE_NORMAL, NULL, imlib_up_arrow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_DOWN, GTK_STATE_NORMAL, NULL, imlib_down_arrow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TOP, GTK_STATE_NORMAL, NULL, imlib_top, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOTTOM, GTK_STATE_NORMAL, NULL, imlib_bottom, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_ATTACH, GTK_STATE_NORMAL, NULL, imlib_attach, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_FONT, GTK_STATE_NORMAL, NULL, imlib_font, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_INDEX, GTK_STATE_NORMAL, NULL, imlib_index, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_EXEC, GTK_STATE_NORMAL, NULL, imlib_exec, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_ALIGN_LEFT, GTK_STATE_NORMAL, NULL, imlib_align_left, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_ALIGN_RIGHT, GTK_STATE_NORMAL, NULL, imlib_align_right, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_ALIGN_CENTER, GTK_STATE_NORMAL, NULL, imlib_align_center, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_ALIGN_JUSTIFY, GTK_STATE_NORMAL, NULL, imlib_align_justify, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TEXT_BOLD, GTK_STATE_NORMAL, NULL, imlib_text_bold, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TEXT_ITALIC, GTK_STATE_NORMAL, NULL, imlib_text_italic, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TEXT_UNDERLINE, GTK_STATE_NORMAL, NULL, imlib_text_underline, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_TEXT_STRIKEOUT, GTK_STATE_NORMAL, NULL, imlib_text_strikeout, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 
-	{GNOME_STOCK_PIXMAP_ADD, GNOME_STOCK_PIXMAP_REGULAR, N_("Add"), imlib_add, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_CLEAR, GNOME_STOCK_PIXMAP_REGULAR, N_("Clear"), imlib_clear, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_COLORSELECTOR, GNOME_STOCK_PIXMAP_REGULAR, N_("Select Color"), imlib_colorselector, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_REMOVE, GNOME_STOCK_PIXMAP_REGULAR, N_("Remove"), imlib_remove, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_TABLE_BORDERS, GNOME_STOCK_PIXMAP_REGULAR, N_("Table Borders"), imlib_table_borders, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_TABLE_FILL, GNOME_STOCK_PIXMAP_REGULAR, N_("Table Fill"), imlib_table_fill, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_TEXT_BULLETED_LIST, GNOME_STOCK_PIXMAP_REGULAR, N_("Bulleted List"), imlib_text_bulleted_list, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_TEXT_NUMBERED_LIST, GNOME_STOCK_PIXMAP_REGULAR, N_("Numbered List"), imlib_text_numbered_list, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_TEXT_INDENT, GNOME_STOCK_PIXMAP_REGULAR, N_("Indent"), imlib_text_indent, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_PIXMAP_TEXT_UNINDENT, GNOME_STOCK_PIXMAP_REGULAR, N_("Un-Indent"), imlib_text_unindent, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_ADD, GTK_STATE_NORMAL, N_("Add"), imlib_add, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_CLEAR, GTK_STATE_NORMAL, N_("Clear"), imlib_clear, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_COLORSELECTOR, GTK_STATE_NORMAL, N_("Select Color"), imlib_colorselector, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_REMOVE, GTK_STATE_NORMAL, N_("Remove"), imlib_remove, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_TABLE_BORDERS, GTK_STATE_NORMAL, N_("Table Borders"), imlib_table_borders, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_TABLE_FILL, GTK_STATE_NORMAL, N_("Table Fill"), imlib_table_fill, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_TEXT_BULLETED_LIST, GTK_STATE_NORMAL, N_("Bulleted List"), imlib_text_bulleted_list, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_TEXT_NUMBERED_LIST, GTK_STATE_NORMAL, N_("Numbered List"), imlib_text_numbered_list, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_TEXT_INDENT, GTK_STATE_NORMAL, N_("Indent"), imlib_text_indent, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_TEXT_UNINDENT, GTK_STATE_NORMAL, N_("Un-Indent"), imlib_text_unindent, TIGERT_W, TIGERT_H, TB_W, TB_H},
 
 
-	{GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, N_("OK"), imlib_button_ok, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, N_("Apply"), imlib_button_apply, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, N_("Cancel"), imlib_button_cancel, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_CLOSE, GNOME_STOCK_PIXMAP_REGULAR, N_("Close"), imlib_button_close, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_YES, GNOME_STOCK_PIXMAP_REGULAR, N_("Yes"), imlib_button_yes, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_NO, GNOME_STOCK_PIXMAP_REGULAR, N_("No"), imlib_button_no, TB_W, TB_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_HELP, GNOME_STOCK_PIXMAP_REGULAR, N_("Help"), imlib_help, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_NEXT, GNOME_STOCK_PIXMAP_REGULAR, N_("Next"), imlib_right_arrow, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_PREV, GNOME_STOCK_PIXMAP_REGULAR, N_("Prev"), imlib_left_arrow, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_UP, GNOME_STOCK_PIXMAP_REGULAR, N_("Up"), imlib_up_arrow, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_DOWN, GNOME_STOCK_PIXMAP_REGULAR, N_("Down"), imlib_down_arrow, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_BUTTON_FONT, GNOME_STOCK_PIXMAP_REGULAR, N_("Font"), imlib_font, TIGERT_W, TIGERT_H, TB_W, TB_H},
-	{GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_new, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_SAVE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_SAVE_AS, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save_as, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_REVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_revert, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_OPEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_open, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_CLOSE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_close, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_QUIT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exit, TB_W, TB_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_CUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_cut, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_COPY, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_copy, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_PASTE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_paste, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_PROP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_properties, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_PREF, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_preferences, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_UNDO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_undo, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_REDO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_redo, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_PRINT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_print, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_SEARCH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_search, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_SRCHRPL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_search_replace, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_BACK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_left_arrow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_FORWARD, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_right_arrow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_FIRST, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_first, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_LAST, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_last, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_HOME, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_home, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_STOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_stop, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_REFRESH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_refresh, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_UNDELETE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_undelete, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TIMER, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_timer, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TIMER_STOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_timer_stopped, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_MAIL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_MAIL_RCV, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_receive, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_MAIL_SND, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_send, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_MAIL_RPL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_reply, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_MAIL_FWD, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_forward, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_MAIL_NEW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_compose, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TRASH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_trash, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TRASH_FULL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_trash_full, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_SPELLCHECK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_spellcheck, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_MIC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mic, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_LINE_IN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_line_in, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_VOLUME, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_volume, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_MIDI, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_midi, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_CDROM, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_cdrom, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_BOOK_RED, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_red, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_BOOK_GREEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_green, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_BOOK_BLUE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_blue, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_BOOK_YELLOW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_BOOK_OPEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_open, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_CONVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_convert, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_JUMP_TO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_jump_to, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
+	{GNOME_STOCK_BUTTON_OK, GTK_STATE_NORMAL, N_("OK"), imlib_button_ok, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_APPLY, GTK_STATE_NORMAL, N_("Apply"), imlib_button_apply, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_CANCEL, GTK_STATE_NORMAL, N_("Cancel"), imlib_button_cancel, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_CLOSE, GTK_STATE_NORMAL, N_("Close"), imlib_button_close, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_YES, GTK_STATE_NORMAL, N_("Yes"), imlib_button_yes, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_NO, GTK_STATE_NORMAL, N_("No"), imlib_button_no, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_HELP, GTK_STATE_NORMAL, N_("Help"), imlib_help, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_NEXT, GTK_STATE_NORMAL, N_("Next"), imlib_right_arrow, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_PREV, GTK_STATE_NORMAL, N_("Prev"), imlib_left_arrow, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_UP, GTK_STATE_NORMAL, N_("Up"), imlib_up_arrow, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_DOWN, GTK_STATE_NORMAL, N_("Down"), imlib_down_arrow, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_BUTTON_FONT, GTK_STATE_NORMAL, N_("Font"), imlib_font, TIGERT_W, TIGERT_H, TB_W, TB_H},
+	{GNOME_STOCK_MENU_NEW, GTK_STATE_NORMAL, NULL, imlib_new, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_SAVE, GTK_STATE_NORMAL, NULL, imlib_save, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_SAVE_AS, GTK_STATE_NORMAL, NULL, imlib_save_as, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_REVERT, GTK_STATE_NORMAL, NULL, imlib_revert, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_OPEN, GTK_STATE_NORMAL, NULL, imlib_open, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_CLOSE, GTK_STATE_NORMAL, NULL, imlib_close, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_QUIT, GTK_STATE_NORMAL, NULL, imlib_exit, TB_W, TB_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_CUT, GTK_STATE_NORMAL, NULL, imlib_cut, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_COPY, GTK_STATE_NORMAL, NULL, imlib_copy, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_PASTE, GTK_STATE_NORMAL, NULL, imlib_paste, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_PROP, GTK_STATE_NORMAL, NULL, imlib_properties, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_PREF, GTK_STATE_NORMAL, NULL, imlib_preferences, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_UNDO, GTK_STATE_NORMAL, NULL, imlib_undo, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_REDO, GTK_STATE_NORMAL, NULL, imlib_redo, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_PRINT, GTK_STATE_NORMAL, NULL, imlib_print, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_SEARCH, GTK_STATE_NORMAL, NULL, imlib_search, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_SRCHRPL, GTK_STATE_NORMAL, NULL, imlib_search_replace, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BACK, GTK_STATE_NORMAL, NULL, imlib_left_arrow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_FORWARD, GTK_STATE_NORMAL, NULL, imlib_right_arrow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_FIRST, GTK_STATE_NORMAL, NULL, imlib_first, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_LAST, GTK_STATE_NORMAL, NULL, imlib_last, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_HOME, GTK_STATE_NORMAL, NULL, imlib_home, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_STOP, GTK_STATE_NORMAL, NULL, imlib_stop, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_REFRESH, GTK_STATE_NORMAL, NULL, imlib_refresh, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_UNDELETE, GTK_STATE_NORMAL, NULL, imlib_undelete, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TIMER, GTK_STATE_NORMAL, NULL, imlib_timer, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TIMER_STOP, GTK_STATE_NORMAL, NULL, imlib_timer_stopped, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MAIL, GTK_STATE_NORMAL, NULL, imlib_mail, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MAIL_RCV, GTK_STATE_NORMAL, NULL, imlib_mail_receive, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MAIL_SND, GTK_STATE_NORMAL, NULL, imlib_mail_send, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MAIL_RPL, GTK_STATE_NORMAL, NULL, imlib_mail_reply, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MAIL_FWD, GTK_STATE_NORMAL, NULL, imlib_mail_forward, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MAIL_NEW, GTK_STATE_NORMAL, NULL, imlib_mail_compose, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TRASH, GTK_STATE_NORMAL, NULL, imlib_trash, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TRASH_FULL, GTK_STATE_NORMAL, NULL, imlib_trash_full, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_SPELLCHECK, GTK_STATE_NORMAL, NULL, imlib_spellcheck, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MIC, GTK_STATE_NORMAL, NULL, imlib_mic, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_LINE_IN, GTK_STATE_NORMAL, NULL, imlib_line_in, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_VOLUME, GTK_STATE_NORMAL, NULL, imlib_volume, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MIDI, GTK_STATE_NORMAL, NULL, imlib_midi, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_CDROM, GTK_STATE_NORMAL, NULL, imlib_cdrom, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_RED, GTK_STATE_NORMAL, NULL, imlib_book_red, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_GREEN, GTK_STATE_NORMAL, NULL, imlib_book_green, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_BLUE, GTK_STATE_NORMAL, NULL, imlib_book_blue, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_YELLOW, GTK_STATE_NORMAL, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_OPEN, GTK_STATE_NORMAL, NULL, imlib_book_open, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_CONVERT, GTK_STATE_NORMAL, NULL, imlib_convert, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_JUMP_TO, GTK_STATE_NORMAL, NULL, imlib_jump_to, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_ABOUT, GTK_STATE_NORMAL, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
 	/* TODO: I shouldn't waste a pixmap for that */
-	{GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_blank, MENU_W, MENU_H, MENU_W, MENU_H}, 
-	{GNOME_STOCK_MENU_SCORES, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_scores, 20, 20, 20, 20},
-	{GNOME_STOCK_MENU_UP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_up_arrow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_DOWN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_down_arrow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_top, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_BOTTOM, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_bottom, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_ATTACH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_attach, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_INDEX, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_index, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_FONT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_font, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_EXEC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exec, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_ALIGN_LEFT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_align_left, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_ALIGN_RIGHT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_align_right, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_ALIGN_CENTER, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_align_center, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_ALIGN_JUSTIFY, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_align_justify, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TEXT_BOLD, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_text_bold, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TEXT_ITALIC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_text_italic, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TEXT_UNDERLINE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_text_underline, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
-	{GNOME_STOCK_MENU_TEXT_STRIKEOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_text_strikeout, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BLANK, GTK_STATE_NORMAL, NULL, imlib_menu_blank, MENU_W, MENU_H, MENU_W, MENU_H}, 
+	{GNOME_STOCK_MENU_SCORES, GTK_STATE_NORMAL, NULL, imlib_menu_scores, 20, 20, 20, 20},
+	{GNOME_STOCK_MENU_UP, GTK_STATE_NORMAL, NULL, imlib_up_arrow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_DOWN, GTK_STATE_NORMAL, NULL, imlib_down_arrow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TOP, GTK_STATE_NORMAL, NULL, imlib_top, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOTTOM, GTK_STATE_NORMAL, NULL, imlib_bottom, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_ATTACH, GTK_STATE_NORMAL, NULL, imlib_attach, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_INDEX, GTK_STATE_NORMAL, NULL, imlib_index, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_FONT, GTK_STATE_NORMAL, NULL, imlib_font, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_EXEC, GTK_STATE_NORMAL, NULL, imlib_exec, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_ALIGN_LEFT, GTK_STATE_NORMAL, NULL, imlib_align_left, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_ALIGN_RIGHT, GTK_STATE_NORMAL, NULL, imlib_align_right, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_ALIGN_CENTER, GTK_STATE_NORMAL, NULL, imlib_align_center, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_ALIGN_JUSTIFY, GTK_STATE_NORMAL, NULL, imlib_align_justify, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TEXT_BOLD, GTK_STATE_NORMAL, NULL, imlib_text_bold, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TEXT_ITALIC, GTK_STATE_NORMAL, NULL, imlib_text_italic, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TEXT_UNDERLINE, GTK_STATE_NORMAL, NULL, imlib_text_underline, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TEXT_STRIKEOUT, GTK_STATE_NORMAL, NULL, imlib_text_strikeout, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 
 };
 
 static const int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
 
 
-static char *
-build_hash_key(const char *icon, const char *subtype)
+typedef struct _HashEntry HashEntry;
+
+struct _HashEntry {
+        /* indexed by state type */
+        GnomeStockPixmapEntry *entries[5];
+};
+
+static HashEntry*
+hash_entry_new (void)
 {
-	return g_strconcat(icon, STOCK_SEP_STR, subtype ? subtype : GNOME_STOCK_PIXMAP_REGULAR, NULL);
+        HashEntry* he;
+
+        he = g_new0 (HashEntry, 1);
+
+        return he;
 }
 
+static void
+hash_entry_set (HashEntry *he, GtkStateType state, GnomeStockPixmapEntry *entry)
+{
+        g_return_if_fail (state < 5);
+        
+        if (he->entries[state] != NULL) {
+                gnome_stock_pixmap_entry_destroy (he->entries[state]);
+                he->entries[state] = NULL;
+        }
 
+        he->entries[state] = entry;
+}
+
+static void
+hash_insert (GHashTable *hash, const gchar* icon, GtkStateType state,
+             GnomeStockPixmapEntry *entry)
+{
+        gpointer key = NULL;
+        gpointer value = NULL;
+        
+        if (g_hash_table_lookup_extended (hash, icon, &key, &value)) {
+                HashEntry *he;
+                
+                he = value;
+
+                g_assert (he != NULL);
+
+                hash_entry_set (he, state, entry);
+
+                return;
+        } else {
+                HashEntry *he;
+
+                he = hash_entry_new ();
+
+                hash_entry_set (he, state, entry);
+
+                g_hash_table_insert (hash,
+                                     g_strdup(icon),
+                                     he);
+
+                return;
+        }
+}
 
 static GHashTable *
 stock_pixmaps(void)
 {
 	static GHashTable *hash = NULL;
-	GnomeStockPixmapEntry *entry;
 	int i;
 
-	if (hash) return hash;
+	if (hash != NULL)
+                return hash;
 
 	hash = g_hash_table_new(g_str_hash, g_str_equal);
 
 	for (i = 0; i < entries_data_num; i++) {
-		entry = g_malloc(sizeof(GnomeStockPixmapEntry));
-		entry->any.width = entries_data[i].width;
-		entry->any.height = entries_data[i].height;
-		entry->any.label = (char *) entries_data[i].label;
-		entry->type = GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED;
-		entry->imlib_s.scaled_width = entries_data[i].scaled_width;
-		entry->imlib_s.scaled_height = entries_data[i].scaled_height;
-		entry->imlib_s.rgb_data = entries_data[i].rgb_data;
-		entry->imlib_s.shape.r = 255;
-		entry->imlib_s.shape.g = 0;
-		entry->imlib_s.shape.b = 255;
-		entry->imlib_s.shape.pixel = 0;
-		g_hash_table_insert(hash,
-				    build_hash_key(entries_data[i].icon,
-						   entries_data[i].subtype),
-				    entry);
-	}
-	
-#if defined(DEBUG) && 0
-	{
-		time_t time(time_t *);
-		time_t t;
-		int i;
-		unsigned char *bla;
+                GdkPixbuf *pixbuf;
+                GnomeStockPixmapEntry *entry;
 
-		bla = g_malloc(3 * 24 * 24);
-		t = time(NULL);
-		while (t == time(NULL)) ;
-		t++;
-		i = 0;
-		while ((t == time(NULL)) && (i < 0x1000000)) {
-			g_free(scale_down(NULL, 0, bla, 24, 24, 16, 16));
-			i++;
-		}
-		g_print("%x %d\n", i, i);
-	}
-#endif
+                pixbuf = gdk_pixbuf_new_from_data ( (guchar*) entries_data[i].rgb_data, /* cast const */
+                                                    ART_PIX_RGB,
+                                                    TRUE,
+                                                    entries_data[i].width,
+                                                    entries_data[i].height,
+                                                    /* rowstride */
+                                                    entries_data[i].width * 4,
+                                                    NULL, /* don't destroy data */
+                                                    NULL );
+                
+                
+                entry = gnome_stock_pixmap_entry_new_from_gdk_pixbuf_at_size (pixbuf,
+                                                                              entries_data[i].label,
+                                                                              entries_data[i].scaled_width,
+                                                                              entries_data[i].scaled_height);
+                
 
+                /* entry holds a ref */
+                gdk_pixbuf_unref (pixbuf);
+
+                hash_insert (hash, entries_data[i].icon, entries_data[i].state, entry);
+	}
+        
 	return hash;
 }
 
 
-static GnomeStockPixmapEntry *
-lookup(const char *icon, const char *subtype, int fallback)
+static GnomeStockPixmapEntry **
+lookup(const char *icon)
 {
-	char *s;
 	GHashTable *hash = stock_pixmaps();
-	GnomeStockPixmapEntry *entry;
+        HashEntry* he;
 
-	s = build_hash_key(icon, subtype);
-	entry = (GnomeStockPixmapEntry *)g_hash_table_lookup(hash, s);
-	if (!entry) {
-		g_free(s);
-		if (!fallback) return NULL;
-		s = build_hash_key(icon, GNOME_STOCK_PIXMAP_REGULAR);
-		entry = (GnomeStockPixmapEntry *)
-			g_hash_table_lookup(hash, s);
-	}
-	g_free(s);
-	return entry;
+        he = g_hash_table_lookup(hash, icon);
+
+        if (he == NULL)
+                return NULL;
+        else
+                return he->entries;
 }
 
-
-static GnomePixmap *
-create_pixmap_from_file(GtkWidget *window, GnomeStockPixmapEntryFile *data)
-{
-	GnomePixmap *pixmap;
-
-	pixmap = GNOME_PIXMAP(gnome_pixmap_new_from_file(data->filename));
-	return pixmap;
-}
-
-
-static GnomePixmap *
-create_pixmap_from_data(GtkWidget *window, GnomeStockPixmapEntryData *data)
-{
-	GnomePixmap *pixmap;
-
-	pixmap = GNOME_PIXMAP(gnome_pixmap_new_from_xpm_d_at_size(data->xpm_data, data->width, data->height));
-	return pixmap;
-}
-
-
-
-static GnomePixmap *
-create_pixmap_from_imlib(GtkWidget *window, GnomeStockPixmapEntryImlib *data)
-{
-	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
-
-	return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped((gchar *)data->rgb_data,
-								 NULL,
-								 data->width,
-								 data->height,
-								 &shape_color);
-}
-
-
-static GnomePixmap *
-create_pixmap_from_imlib_scaled(GtkWidget *window, GtkStateType state,
-				GnomeStockPixmapEntryImlibScaled *data)
-{
-	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
-	GnomePixmap *ret;
-	gchar *d;
-
-	if ((data->width != data->scaled_width) ||
-	    (data->height != data->scaled_height)) {
-		if (!gnome_config_get_bool("/Gnome/Icons/ImlibResize=false")) {
-			d = scale_down(window, state, (gchar *)data->rgb_data,
-				       data->width, data->height,
-				       data->scaled_width,
-				       data->scaled_height);
-			ret = (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped(d, NULL, data->scaled_width, data->scaled_height, &shape_color);
-			g_free(d);
-			return ret;
-		} else {
-			return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped_at_size((gchar *)data->rgb_data, NULL, data->width, data->height, data->scaled_width, data->scaled_height, &shape_color);
-		}
-	} else {
-		return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped((gchar *)data->rgb_data, NULL, data->scaled_width, data->scaled_height, &shape_color);
-	}
-
-}
-
-
-
-static GnomePixmap *
-create_pixmap_from_path(GnomeStockPixmapEntryPath *data)
-{
-	return GNOME_PIXMAP(gnome_pixmap_new_from_file(data->pathname));
-}
-
-
-
-static void
-build_disabled_pixmap(GtkWidget *window, GtkStateType state,
-		      GnomePixmap **inout_pixmap)
-{
-	GdkGC *gc;
-	GdkWindow *pixmap = (*inout_pixmap)->pixmap;
-	gint w, h, x, y;
-	GdkGCValues vals;
-	GdkVisual *visual;
-	GdkImage *image;
-	GdkColorContext *cc;
-	GdkColormap *cmap;
-	gint32 red, green, blue;
-	GtkStyle *style;
-	int use_stripple = -1;
-
-	g_return_if_fail(window != NULL);
-
-	/* values for use_stripple:
-	 * 0 - decide upon the value of cc->mode
-	 * 1 - always stripple
-	 * 2 - always shade */
-	use_stripple = gnome_config_get_int("/Gnome/Icons/Shade=0");
-
-	gdk_window_get_size(pixmap, &w, &h);
-	visual = gtk_widget_get_visual(GTK_WIDGET(*inout_pixmap));
-	cmap = gtk_widget_get_colormap(GTK_WIDGET(*inout_pixmap));
-	gc = gdk_gc_new (pixmap);
-
-	cc = gdk_color_context_new(visual, cmap);
-	if (((cc->mode != GDK_CC_MODE_TRUE) &&
-	     (cc->mode != GDK_CC_MODE_MY_GRAY) &&
-	     (use_stripple != 2)) || 
-	    (use_stripple == 1)) {
-		gdk_color_context_free(cc);
-		style = gtk_widget_get_style(window);
-		gdk_gc_set_foreground (gc, &style->bg[state]);
-		for (y = 0; y < h; y ++) {
-			for (x = y % 2; x < w; x += 2) {
-				gdk_draw_point(pixmap, gc, x, y);
-			}
-		}
-		gdk_gc_destroy(gc);
-		return;
-	}
-
-	image = gdk_image_get(pixmap, 0, 0, w, h);
-	gdk_gc_get_values(gc, &vals);
-	style = gtk_widget_get_style(window);
-	red = style->bg[state].red;
-	green = style->bg[state].green;
-	blue = style->bg[state].blue;
-	for (y = 0; y < h; y++) {
-		for (x = 0; x < w; x++) {
-			GdkColor c;
-			int failed;
-			c.pixel = gdk_image_get_pixel(image, x, y);
-			gdk_color_context_query_color(cc, &c);
-			c.red = (((gint32)c.red - red) >> 1)
-				+ red;
-			c.green = (((gint32)c.green - green) >> 1)
-				+ green;
-			c.blue = (((gint32)c.blue - blue) >> 1)
-				+ blue;
-			c.pixel = gdk_color_context_get_pixel(cc, c.red,
-							      c.green,
-							      c.blue,
-							      &failed);
-			gdk_image_put_pixel(image, x, y, c.pixel);
-		}
-	}
-	gdk_draw_image(pixmap, gc, image, 0, 0, 0, 0, w, h);
-	gdk_image_destroy(image);
-	gdk_gc_destroy(gc);
-	gdk_color_context_free(cc);
-}
-
-
-
-/**********************/
-/* utitlity functions */
-/**********************/
-
-
-
-static GnomePixmap *
-gnome_stock_pixmap(GtkWidget * window, const char *icon, const char *subtype)
-{
-	GnomeStockPixmapEntry *entry;
-	GnomePixmap *pixmap;
-
-	g_return_val_if_fail(icon != NULL, NULL);
-	/* subtype can be NULL, so not checked */
-	entry = lookup(icon, subtype, TRUE);
-	if (!entry)
-		return NULL;
-
-	if ((entry->type != GNOME_STOCK_PIXMAP_TYPE_IMLIB) &&
-	    (entry->type != GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED)) {
-		g_return_val_if_fail(window != NULL, NULL);
-		g_return_val_if_fail(GTK_IS_WIDGET(window), NULL);
-	}
-
-	pixmap = NULL;
-	switch (entry->type) {
-	case GNOME_STOCK_PIXMAP_TYPE_DATA:
-		pixmap = create_pixmap_from_data(window, &entry->data);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_FILE:
-		pixmap = create_pixmap_from_file(window, &entry->file);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_PATH:
-		pixmap = create_pixmap_from_path(&entry->path);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_IMLIB:
-		pixmap = create_pixmap_from_imlib(window, &entry->imlib);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED:
-		pixmap = create_pixmap_from_imlib_scaled(window, window->state,
-							 &entry->imlib_s);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_GPIXMAP:
-		pixmap = GNOME_PIXMAP(gnome_pixmap_new_from_gnome_pixmap(entry->gpixmap.pixmap));
-		break;
-	default:
-		g_assert_not_reached();
-		break;
-	}
-	/* check if we have to draw our own disabled pixmap */
-	/* TODO: should be optimized a bit */
-	if ((NULL == lookup(icon, subtype, 0)) && (pixmap) &&
-	    (0 == strcmp(subtype, GNOME_STOCK_PIXMAP_DISABLED))) {
-		build_disabled_pixmap(window, window->state, &pixmap);
-	}
-	return pixmap;
-}
-
-GtkWidget *
-gnome_stock_pixmap_widget_at_size(GtkWidget *window, const char *icon,
-				  guint width, guint height)
-{
-	GnomeStockPixmapEntry *entry;
-	GnomeStockPixmapEntryImlibScaled *new_entry;
-	GdkImlibImage *im;
-	char name[512];
-
-	g_return_val_if_fail(icon != NULL, NULL);
-	g_snprintf(name, sizeof(name), "%s%ux%u", icon, width, height);
-	entry = lookup(name, GNOME_STOCK_PIXMAP_REGULAR, 0);
-	if (entry)
-		return gnome_stock_new_with_icon(name);
-	entry = lookup(icon, GNOME_STOCK_PIXMAP_REGULAR, 0);
-	if ((entry) &&
-	    ((entry->type == GNOME_STOCK_PIXMAP_TYPE_IMLIB) ||
-	     (entry->type == GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED))) {
-		new_entry = g_malloc(sizeof(GnomeStockPixmapEntryImlibScaled));
-		new_entry->type = GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED;
-		new_entry->label = NULL;
-		new_entry->scaled_width = width;
-		new_entry->scaled_height = height;
-		new_entry->width = entry->imlib.width;
-		new_entry->height = entry->imlib.height;
-		new_entry->rgb_data = entry->imlib.rgb_data;
-		new_entry->shape = entry->imlib.shape;
-	} else {
-		char *filename;
-		if (g_file_exists(icon))
-			filename = g_strdup(icon);
-		else
-			filename = gnome_pixmap_file(icon);
-		if (!filename) return NULL;
-		im = gdk_imlib_load_image(filename);
-		g_free(filename);
-		g_return_val_if_fail(im != NULL, NULL);
-		new_entry = g_malloc(sizeof(GnomeStockPixmapEntryImlibScaled));
-		new_entry->type = GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED;
-		new_entry->label = NULL;
-		new_entry->scaled_width = width;
-		new_entry->scaled_height = height;
-		new_entry->width = im->rgb_width;
-		new_entry->height = im->rgb_height;
-		new_entry->rgb_data = g_malloc(im->rgb_width * im->rgb_height * 3);
-		memcpy((char *)new_entry->rgb_data, im->rgb_data,
-		       im->rgb_width * im->rgb_height * 3);
-		new_entry->shape = im->shape_color;
-		gdk_imlib_destroy_image(im);
-	}
-	gnome_stock_pixmap_register(name, GNOME_STOCK_PIXMAP_REGULAR,
-				    (GnomeStockPixmapEntry *)new_entry);
-	return gnome_stock_new_with_icon(name);
-}
-
-
-
-GtkWidget *
-gnome_stock_pixmap_widget(GtkWidget *window, const char *icon)
-{
-#if USE_NEW_GNOME_STOCK
-	GtkWidget *w;
-
-	w = gnome_stock_new_with_icon(icon);
-	if (!w) {
-		GnomeStockPixmapEntryPath *new_entry;
-		char *filename;
-		if (g_file_exists(icon))
-			filename = g_strdup(icon);
-		else
-			filename = gnome_pixmap_file(icon);
-		if (!filename) return NULL;
-		g_assert(!gnome_stock_pixmap_checkfor(icon, GNOME_STOCK_PIXMAP_REGULAR));
-		new_entry = g_malloc(sizeof(GnomeStockPixmapEntryPath));
-		new_entry->type = GNOME_STOCK_PIXMAP_TYPE_PATH;
-		new_entry->label = NULL;
-		new_entry->pathname = filename;
-		new_entry->width = 0;
-		new_entry->height = 0;
-		gnome_stock_pixmap_register(icon, GNOME_STOCK_PIXMAP_REGULAR,
-					    (GnomeStockPixmapEntry *)new_entry);
-		return gnome_stock_new_with_icon(icon);
-	}
-	return w;
-#else
-	GtkWidget *w;
-
-	w = gnome_stock_pixmap_widget_new(window, icon);
-	return w;
-#endif
-}
-
-
-gint
-gnome_stock_pixmap_register(const char *icon, const char *subtype,
+void
+gnome_stock_pixmap_register(const char *icon, GtkStateType state,
 			    GnomeStockPixmapEntry *entry)
 {
-	g_return_val_if_fail(NULL == lookup(icon, subtype, 0), 0);
-	g_return_val_if_fail(entry != NULL, 0);
-	g_hash_table_insert(stock_pixmaps(), build_hash_key(icon, subtype),
-			    entry);
-	return 1;
+        GHashTable* hash;
+        
+	g_return_if_fail(entry != NULL);
+
+        hash = stock_pixmaps();
+        
+        g_return_if_fail(g_hash_table_lookup(hash, icon) == NULL);
+        
+        hash_insert (hash, icon, state, entry);
 }
 
-
-
-gint
-gnome_stock_pixmap_change(const char *icon, const char *subtype,
+void
+gnome_stock_pixmap_change(const char *icon, GtkStateType state,
 			  GnomeStockPixmapEntry *entry)
 {
 	GHashTable *hash;
-	char *key;
-
-	g_return_val_if_fail(NULL != lookup(icon, subtype, 0), 0);
-	g_return_val_if_fail(entry != NULL, 0);
-	/*FIXME: this leaks like nuts*/
+        HashEntry *he;
+        
 	hash = stock_pixmaps();
-	key = build_hash_key(icon, subtype);
-	g_hash_table_remove(hash, key);
-	g_hash_table_insert(hash, key, entry);
-	/* TODO: add some method to change all pixmaps (or at least
-	   the pixmap_widgets) to the new icon */
-	return 1;
+
+        he = g_hash_table_lookup(hash, icon);
+
+        if (he == NULL) {
+                gnome_stock_pixmap_register(icon, state, entry);
+        } else {
+                hash_entry_set(he, state, entry);
+        }
 }
 
 
 
 GnomeStockPixmapEntry *
-gnome_stock_pixmap_checkfor(const char *icon, const char *subtype)
+gnome_stock_pixmap_lookup(const char *icon, GtkStateType state)
 {
-	return lookup(icon, subtype, 0);
+	GHashTable *hash;
+        HashEntry *he;
+        
+	hash = stock_pixmaps();
+
+        he = g_hash_table_lookup(hash, icon);
+
+        if (he == NULL) {
+                return NULL;
+        } else {
+                return he->entries[state];
+        }
 }
-
-
 
 /*******************/
 /*  stock buttons  */
 /*******************/
 
-void
-gnome_button_can_default(GtkButton *button, gboolean can_default)
-{
-        g_warning ("gnome_button_can_default() is now deprecated.\n");
-}
-
-
 GtkWidget *
 gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 {
 	GtkWidget *button, *label, *hbox, *w;
-	GtkRequisition req;
 	gboolean use_icon, use_label;
 
 	g_return_val_if_fail(text != NULL, NULL);
@@ -1382,52 +928,31 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 	}
 
 	if ((use_icon) && (pixmap)) {
-		/* assign the created button as the container widget to the
-		 * GnomeStockPixmap (see comment in stock_button_from_entry)
-		 */
-#if !USE_NEW_GNOME_STOCK
-		if ((GNOME_IS_STOCK_PIXMAP_WIDGET(pixmap)) &&
-		    (pixmap->window == NULL))
-			GNOME_STOCK_PIXMAP_WIDGET(pixmap)->window = button;
-#endif /* !USE_NEW_GNOME_STOCK */
-		if ((GNOME_IS_PIXMAP(pixmap)) &&
-		    (!GNOME_IS_STOCK(pixmap))) {
-			GnomeStockPixmapEntry *entry;
-			char s[32];
-
-			entry = g_malloc(sizeof(GnomeStockPixmapEntry));
-			entry->type = GNOME_STOCK_PIXMAP_TYPE_GPIXMAP;
-			gtk_widget_size_request(pixmap, &req);
-			entry->any.width = req.width;
-			entry->any.height = req.height;
-			entry->any.label = NULL;
-			entry->gpixmap.pixmap = GNOME_PIXMAP(pixmap);
-			g_snprintf(s, sizeof(s), "%lx", (long)pixmap);
-			gnome_stock_pixmap_register(s, GNOME_STOCK_PIXMAP_REGULAR, entry);
-			pixmap = gnome_stock_pixmap_widget(button, s);
-		}
 
 		gtk_widget_show(pixmap);
 		gtk_box_pack_start(GTK_BOX(hbox), pixmap,
 				   FALSE, FALSE, 0);
-	}
+	} else {
+                gtk_widget_unref(pixmap);
+        }
 
 	return button;
 }
 
 static GtkWidget *
-stock_button_from_entry (const char *type, GnomeStockPixmapEntry *entry)
+stock_button_from_entries (const char *type, GnomeStockPixmapEntry **entries)
 {
 	char *text;
 	GtkWidget *pixmap;
 
-	if (entry->any.label)
-		text = dgettext(PACKAGE, entry->any.label);
+        /* FIXME we should actually change the label on state changes,
+           or else not store a label for every state. */
+	if (entries[GTK_STATE_NORMAL]->any.label)
+		text = dgettext(PACKAGE, entries[GTK_STATE_NORMAL]->any.label);
 	else
 		text = dgettext(PACKAGE, type);
-	/* Don't give the container widget (that is used for color calculation
-	 * etc., e.g. in build_disabled_pixmap) */
-	pixmap = gnome_stock_pixmap_widget(NULL, type);
+
+	pixmap = gnome_stock_new_with_icon(type);
 	return gnome_pixmap_button(pixmap, text);
 }
 
@@ -1443,12 +968,16 @@ stock_button_from_entry (const char *type, GnomeStockPixmapEntry *entry)
 GtkWidget *
 gnome_stock_button(const char *type)
 {
-	GnomeStockPixmapEntry *entry;
+	GnomeStockPixmapEntry **entries;
 
-	entry = lookup(type,GNOME_STOCK_PIXMAP_REGULAR,0);
-	g_assert(entry != NULL);
+	entries = lookup(type);
 
-	return stock_button_from_entry (type, entry);
+        g_return_val_if_fail(entries != NULL, NULL);
+        
+        if (entries == NULL)
+                return NULL;
+
+	return stock_button_from_entries (type, entries);
 }
 
 /**
@@ -1468,15 +997,17 @@ gnome_stock_button(const char *type)
 GtkWidget *
 gnome_stock_or_ordinary_button (const char *type)
 {
-	GnomeStockPixmapEntry *entry;
+        GnomeStockPixmapEntry **entries;
 
-	entry = lookup(type,GNOME_STOCK_PIXMAP_REGULAR,0);
-	if (entry != NULL)
-		return stock_button_from_entry (type, entry);
-
-	return gtk_button_new_with_label (type);
+	entries = lookup(type);
+        
+        g_return_val_if_fail(entries != NULL, NULL);
+        
+        if (entries == NULL)
+                return gtk_button_new_with_label (type);
+        else
+                return stock_button_from_entries (type, entries);
 }
-
 
 
 /***********/
@@ -1490,14 +1021,13 @@ gnome_stock_menu_item(const char *type, const char *text)
 	int use_icons;
 
 	g_return_val_if_fail(type != NULL, NULL);
-	g_return_val_if_fail(gnome_stock_pixmap_checkfor(type, GNOME_STOCK_PIXMAP_REGULAR), NULL);
 	g_return_val_if_fail(text != NULL, NULL);
 
 	use_icons = gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true");
 	if (use_icons) {
 		hbox = gtk_hbox_new(FALSE, 2);
 		gtk_widget_show(hbox);
-		w = gnome_stock_pixmap_widget(hbox, type);
+		w = gnome_stock_new_with_icon(type);
 		gtk_widget_show(w);
 		gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 0);
 
@@ -1516,7 +1046,6 @@ gnome_stock_menu_item(const char *type, const char *text)
 
 	return menu_item;
 }
-
 
 
 /***********************/
@@ -1927,45 +1456,31 @@ gnome_stock_menu_accel_dlg(char *section)
 }
 
 GtkWidget *
-gnome_stock_transparent_window (const char *icon, const char *subtype)
+gnome_stock_transparent_window (const char *icon, GtkStateType state)
 {
-	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
-	GnomeStockPixmapEntry *entry;
-	GtkWidget *window;
-	GdkImlibImage *im;
-	
+	GnomeStockPixmapEntry **entries = NULL;
+	GtkWidget *window = NULL;
+        GdkPixbuf *pixbuf = NULL;
+        GdkBitmap *mask = NULL;
+        GdkPixmap *pixmap = NULL;
+        
 	g_return_val_if_fail(icon != NULL, NULL);
 
-	/* subtype can be NULL, so not checked */
-	entry = lookup(icon, subtype, TRUE);
-	if (!entry)
-		return NULL;
+        entries = lookup(icon);
 	
 	window = NULL;
-	
-	switch (entry->type) {
-	case GNOME_STOCK_PIXMAP_TYPE_DATA:
-		im = gdk_imlib_create_image_from_xpm_data (entry->data.xpm_data);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_PATH:
-		im = gdk_imlib_load_image (entry->path.pathname);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED:
-	case GNOME_STOCK_PIXMAP_TYPE_IMLIB:
-		im = gdk_imlib_create_image_from_data ((gchar *)entry->imlib.rgb_data, NULL,
-						       entry->imlib.width, entry->imlib.height);
-		break;
-	 default:
-		im = NULL;
-		break;
-	}
 
-	if (!im)
-		return NULL;
+        if (entries[state] == NULL)
+                return NULL;
+        
+        pixbuf = gdk_pixbuf_new_from_stock_pixmap_entry(entries[state]);
 
-	/* Create the window on imlib's visual */
-	gtk_widget_push_visual (gdk_imlib_get_visual ());
-	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
+        if (pixbuf == NULL)
+                return NULL;
+        
+	/* Create the window on GdkRGB's visual */
+	gtk_widget_push_visual (gdk_rgb_get_visual ());
+	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 	window = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_widget_pop_colormap ();
 	gtk_widget_pop_visual ();
@@ -1983,67 +1498,79 @@ gnome_stock_transparent_window (const char *icon, const char *subtype)
 	 *   setting the saveunder flag.
 	 */
 	/* Set proper size */
-	gtk_widget_set_usize (window, im->rgb_width, im->rgb_height);
+	gtk_widget_set_usize (window,
+                              gdk_pixbuf_get_width(pixbuf),
+                              gdk_pixbuf_get_height(pixbuf));
 
-	/* The imlib images use a color to encode the shape, use it */
-	gdk_imlib_set_image_shape (im, &shape_color);
 
-	/* Render the image, return it */
-	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
-	gdk_window_set_back_pixmap (window->window, gdk_imlib_move_image (im), FALSE);
-	gtk_widget_shape_combine_mask (window, gdk_imlib_move_mask (im), 0, 0);
+        /* generate mask */
+        if (gdk_pixbuf_get_has_alpha(pixbuf)) {
+                mask = gdk_pixmap_new(NULL,
+                                      gdk_pixbuf_get_width(pixbuf),
+                                      gdk_pixbuf_get_height(pixbuf),
+                                      1);
 
-	gdk_imlib_destroy_image (im);
+                gdk_pixbuf_render_threshold_alpha(pixbuf, mask,
+                                                  0, 0, 0, 0,
+                                                  gdk_pixbuf_get_width(pixbuf),
+                                                  gdk_pixbuf_get_height(pixbuf),
+                                                  128); /* 50% alpha */
+        }
+
+        /* Draw to a pixmap */
+        
+        pixmap = gdk_pixmap_new(window->window,
+                                gdk_pixbuf_get_width(pixbuf),
+                                gdk_pixbuf_get_height(pixbuf),
+                                -1);
+
+        gdk_pixbuf_render_to_drawable(pixbuf, pixmap,
+                                      window->style->white_gc,
+                                      0, 0, 0, 0,
+                                      gdk_pixbuf_get_width(pixbuf),
+                                      gdk_pixbuf_get_height(pixbuf),
+                                      GDK_RGB_DITHER_NORMAL,
+                                      0, 0);
+        
+        /* Install pixmap/mask in the window */
+	gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
+
+        gdk_pixmap_unref(pixmap);
+
+        /* This appears to take ownership of the mask */
+	gtk_widget_shape_combine_mask (window, mask, 0, 0);
+
+        /* Destroy the pixbuf */
+        gdk_pixbuf_unref(pixbuf);
 	
 	return window;
 }
 
 void 
-gnome_stock_pixmap_gdk (const char   *icon,
-			const char   *subtype,
+gnome_stock_pixmap_gdk (const char    *icon,
+                        GtkStateType   state,
 			GdkPixmap    **pixmap,
 			GdkPixmap    **mask)
 {
-	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
-	GnomeStockPixmapEntry *entry;
-	GdkImlibImage *im;
-	
+	GnomeStockPixmapEntry **entries;
+        GdkPixbuf *pixbuf;
+        
 	g_return_if_fail(icon != NULL);
 	g_return_if_fail(pixmap != NULL);
 	g_return_if_fail(mask != NULL);
 
-	/* subtype can be NULL, so not checked */
-	entry = lookup(icon, subtype, TRUE);
+        entries = lookup(icon);
 
-	g_return_if_fail(entry != NULL);
+        if (entries == NULL)
+                return;
 
-	switch (entry->type) {
-	case GNOME_STOCK_PIXMAP_TYPE_DATA:
-		im = gdk_imlib_create_image_from_xpm_data (entry->data.xpm_data);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_PATH:
-		im = gdk_imlib_load_image (entry->path.pathname);
-		break;
-	case GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED:
-	case GNOME_STOCK_PIXMAP_TYPE_IMLIB:
-		im = gdk_imlib_create_image_from_data ((gchar *)entry->imlib.rgb_data, NULL,
-						       entry->imlib.width, entry->imlib.height);
-		break;
-	 default:
-		im = NULL;
-		break;
-	}
-	
-	g_return_if_fail(im != NULL);
-	
-	/* The imlib images use a color to encode the shape, use it */
-	gdk_imlib_set_image_shape (im, &shape_color);
+        pixbuf = gdk_pixbuf_new_from_stock_pixmap_entry(entries[state]);
 
-	/* Render the image, return it */
-	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+        gnome_pixbuf_render(pixbuf,
+                            pixmap,
+                            mask,
+			    128);
 
-	*pixmap = gdk_imlib_move_image (im);
-	*mask = gdk_imlib_move_mask (im);
-
-	gdk_imlib_destroy_image (im);
+        gdk_pixbuf_unref(pixbuf);
 }
+

@@ -131,12 +131,12 @@ gnome_help_view_init (GnomeHelpView *help_view)
   help_view->btn_help = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->toolbar), _("Help"),
 						_("Show help for a specific region of the application"),
 						NULL,
-						gnome_stock_pixmap_widget(GTK_WIDGET(help_view), GNOME_STOCK_PIXMAP_HELP),
+						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_HELP),
 						gnome_help_view_select_help, help_view);
   help_view->btn_style = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->toolbar), _("Style"),
 						_("Change the way help is displayed"),
 						NULL,
-						gnome_stock_pixmap_widget(GTK_WIDGET(help_view), GNOME_STOCK_PIXMAP_PREFERENCES),
+						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_PREFERENCES),
 						gnome_help_view_select_style, help_view);
 
   /* XXX fixme */

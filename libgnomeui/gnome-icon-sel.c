@@ -20,7 +20,6 @@
 
 #include <config.h>
 
-#include <gdk_imlib.h>
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-mime.h"

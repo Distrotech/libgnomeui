@@ -20,7 +20,6 @@
 #define __GNOME_DRUID_PAGE_START_H__
 
 #include <gtk/gtk.h>
-#include <gdk_imlib.h>
 #include "gnome-canvas.h"
 #include "gnome-druid-page.h"
 
@@ -48,8 +47,8 @@ struct _GnomeDruidPageStart
 
 	gchar *title;
 	gchar *text;
-	GdkImlibImage *logo_image;
-	GdkImlibImage *watermark_image;
+	GdkPixbuf *logo_image;
+	GdkPixbuf *watermark_image;
 
 	/*< private >*/
 	GtkWidget *canvas;
@@ -71,8 +70,8 @@ GtkType    gnome_druid_page_start_get_type    (void);
 GtkWidget *gnome_druid_page_start_new         (void);
 GtkWidget *gnome_druid_page_start_new_with_vals(const gchar *title,
 					       const gchar* text,
-					       GdkImlibImage *logo,
-					       GdkImlibImage *watermark);
+					       GdkPixbuf *logo,
+					       GdkPixbuf *watermark);
 void gnome_druid_page_start_set_bg_color      (GnomeDruidPageStart *druid_page_start,
 					       GdkColor *color);
 void gnome_druid_page_start_set_textbox_color (GnomeDruidPageStart *druid_page_start,
@@ -88,9 +87,9 @@ void gnome_druid_page_start_set_text          (GnomeDruidPageStart *druid_page_s
 void gnome_druid_page_start_set_title         (GnomeDruidPageStart *druid_page_start,
 					       const gchar *title);
 void gnome_druid_page_start_set_logo          (GnomeDruidPageStart *druid_page_start,
-					       GdkImlibImage *logo_image);
+					       GdkPixbuf *logo_image);
 void gnome_druid_page_start_set_watermark     (GnomeDruidPageStart *druid_page_start,
-					       GdkImlibImage *watermark);
+					       GdkPixbuf *watermark);
 
 END_GNOME_DECLS
 

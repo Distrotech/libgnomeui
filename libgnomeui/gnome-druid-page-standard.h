@@ -20,7 +20,6 @@
 #define __GNOME_DRUID_PAGE_STANDARD_H__
 
 #include <gtk/gtk.h>
-#include <gdk_imlib.h>
 #include "gnome-canvas.h"
 #include "gnome-druid-page.h"
 
@@ -44,7 +43,7 @@ struct _GnomeDruidPageStandard
 	GdkColor background_color;
 	GdkColor logo_background_color;
 	GdkColor title_color;
-	GdkImlibImage *logo_image;
+	GdkPixbuf *logo_image;
 
 	gchar *title;
 	
@@ -66,7 +65,7 @@ struct _GnomeDruidPageStandardClass
 
 GtkType    gnome_druid_page_standard_get_type      (void);
 GtkWidget *gnome_druid_page_standard_new           (void);
-GtkWidget *gnome_druid_page_standard_new_with_vals (const gchar *title, GdkImlibImage *logo);
+GtkWidget *gnome_druid_page_standard_new_with_vals (const gchar *title, GdkPixbuf *logo);
 void gnome_druid_page_standard_set_bg_color        (GnomeDruidPageStandard *druid_page_standard,
 						    GdkColor *color);
 void gnome_druid_page_standard_set_logo_bg_color   (GnomeDruidPageStandard *druid_page_standard,
@@ -76,7 +75,7 @@ void gnome_druid_page_standard_set_title_color     (GnomeDruidPageStandard *drui
 void gnome_druid_page_standard_set_title           (GnomeDruidPageStandard *druid_page_standard,
 						    const gchar *title);
 void gnome_druid_page_standard_set_logo            (GnomeDruidPageStandard *druid_page_standard,
-						    GdkImlibImage *logo_image);
+						    GdkPixbuf *logo_image);
 
 END_GNOME_DECLS
 

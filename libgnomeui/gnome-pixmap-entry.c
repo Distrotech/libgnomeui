@@ -10,7 +10,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
-#include <gdk_imlib.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
@@ -83,7 +82,7 @@ static void
 refresh_preview(GnomePixmapEntry *pentry)
 {
 	char *t;
-	GdkImlibImage *im;
+        GdkPixbuf *pixbuf;
 
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
@@ -99,7 +98,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 		return;
 	}
 	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(im = gdk_imlib_load_image (t))) {
+	   !(pixbuf = gdk_pixbuf_new_from_file (t))) {
 		if(GNOME_IS_PIXMAP(pentry->preview)) {
 			gtk_drag_source_unset (pentry->preview_sw);
 			gtk_widget_destroy(pentry->preview->parent);
@@ -113,11 +112,13 @@ refresh_preview(GnomePixmapEntry *pentry)
 		g_free(t);
 		return;
 	}
-	if(GNOME_IS_PIXMAP(pentry->preview))
-		gnome_pixmap_load_imlib (GNOME_PIXMAP(pentry->preview),im);
-	else {
+	if(GNOME_IS_PIXMAP(pentry->preview)) {
+                gnome_pixmap_clear(GNOME_PIXMAP(pentry->preview));
+                gnome_pixmap_set_pixbuf (GNOME_PIXMAP(pentry->preview),
+                                         pixbuf);
+        } else {
 		gtk_widget_destroy(pentry->preview->parent);
-		pentry->preview = gnome_pixmap_new_from_imlib (im);
+		pentry->preview = gnome_pixmap_new_from_pixbuf (pixbuf);
 		gtk_widget_show(pentry->preview);
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
 						      pentry->preview);
@@ -138,7 +139,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 	}
 	g_free(pentry->last_preview);
 	pentry->last_preview = t;
-	gdk_imlib_destroy_image(im);
+        gdk_pixbuf_unref(pixbuf);
 }
 
 static int change_timeout;
@@ -190,7 +191,7 @@ setup_preview(GtkWidget *widget)
 	char *p;
 	GList *l;
 	GtkWidget *pp = NULL;
-	GdkImlibImage *im;
+        GdkPixbuf *pixbuf;
 	int w,h;
 	GtkWidget *frame;
 	GtkFileSelection *fs;
@@ -211,11 +212,11 @@ setup_preview(GtkWidget *widget)
 
 	p = gtk_file_selection_get_filename(fs);
 	if(!p || !g_file_test(p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(im = gdk_imlib_load_image (p)))
+	   !(pixbuf = gdk_pixbuf_new_from_file (p)))
 		return;
 
-	w = im->rgb_width;
-	h = im->rgb_height;
+	w = gdk_pixbuf_get_width(pixbuf);
+	h = gdk_pixbuf_get_height(pixbuf);
 	if(w>h) {
 		if(w>100) {
 			h = h*(100.0/w);
@@ -227,12 +228,12 @@ setup_preview(GtkWidget *widget)
 			h = 100;
 		}
 	}
-	pp = gnome_pixmap_new_from_imlib_at_size(im,w,h);
+	pp = gnome_pixmap_new_from_pixbuf_at_size(pixbuf,w,h);
 	gtk_widget_show(pp);
 
 	gtk_container_add(GTK_CONTAINER(frame),pp);
 
-	gdk_imlib_destroy_image(im);
+        gdk_pixbuf_unref(pixbuf);
 }
 
 static void

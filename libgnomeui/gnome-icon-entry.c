@@ -10,8 +10,8 @@
  *	Written by: Havoc Pennington, based on code by John Ellis.
  */
 #include <config.h>
-#include <gdk_imlib.h>
 #include <unistd.h> /*getcwd*/
+#include <gdk-pixbuf.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
@@ -58,6 +58,14 @@ static GtkVBoxClass *parent_class;
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
+enum {
+	CHANGED_SIGNAL,
+	LAST_SIGNAL
+};
+
+static gint gnome_ientry_signals[LAST_SIGNAL] = {0};
+
+
 guint
 gnome_icon_entry_get_type (void)
 {
@@ -84,14 +92,27 @@ gnome_icon_entry_get_type (void)
 static void
 gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {
+	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
+
+	gnome_ientry_signals[CHANGED_SIGNAL] =
+		gtk_signal_new("changed",
+			       GTK_RUN_LAST,
+			       object_class->type,
+			       GTK_SIGNAL_OFFSET(GnomeIconEntryClass,
+			       			 changed),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE, 0);
+	gtk_object_class_add_signals (object_class, gnome_ientry_signals,
+				      LAST_SIGNAL);
+	class->changed = NULL;
 }
 
 static void
 entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 {
 	gchar *t;
-	GdkImlibImage *im;
+        GdkPixbuf *pixbuf;
 	GtkWidget *child;
 	int w,h;
 
@@ -104,7 +125,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	child = GTK_BIN(ientry->pickbutton)->child;
 	
 	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(im = gdk_imlib_load_image (t))) {
+	   !(pixbuf = gdk_pixbuf_new_from_file (t))) {
 		if(GNOME_IS_PIXMAP(child)) {
 			gtk_drag_source_unset (ientry->pickbutton);
 			gtk_widget_destroy(child);
@@ -117,8 +138,8 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 		return;
 	}
 	g_free(t);
-	w = im->rgb_width;
-	h = im->rgb_height;
+	w = gdk_pixbuf_get_width(pixbuf);
+	h = gdk_pixbuf_get_height(pixbuf);
 	if(w>h) {
 		if(w>48) {
 			h = h*(48.0/w);
@@ -130,11 +151,14 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 			h = 48;
 		}
 	}
-	if(GNOME_IS_PIXMAP(child))
-		gnome_pixmap_load_imlib_at_size (GNOME_PIXMAP(child),im, w, h);
-	else {
+	if(GNOME_IS_PIXMAP(child)) {
+                gnome_pixmap_clear(GNOME_PIXMAP(child));
+		gnome_pixmap_set_pixbuf_at_size (GNOME_PIXMAP(child),
+                                                 GTK_STATE_NORMAL,
+                                                 pixbuf, w, h);
+        } else {
 		gtk_widget_destroy(child);
-		child = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+		child = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
 		gtk_widget_show(child);
 		gtk_container_add(GTK_CONTAINER(ientry->pickbutton), child);
 
@@ -147,7 +171,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 					     GDK_ACTION_COPY);
 		}
 	}
-	gdk_imlib_destroy_image(im);
+        gdk_pixbuf_unref(pixbuf);
 	gtk_drag_source_set (ientry->pickbutton,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drop_types, 1,
@@ -191,7 +215,7 @@ setup_preview(GtkWidget *widget)
 	gchar *p;
 	GList *l;
 	GtkWidget *pp = NULL;
-	GdkImlibImage *im;
+        GdkPixbuf *pixbuf;
 	int w,h;
 	GtkWidget *frame;
 	GtkFileSelection *fs;
@@ -212,11 +236,11 @@ setup_preview(GtkWidget *widget)
 	
 	p = gtk_file_selection_get_filename(fs);
 	if(!p || !g_file_test (p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(im = gdk_imlib_load_image (p)))
+	   !(pixbuf = gdk_pixbuf_new_from_file (p)))
 		return;
 
-	w = im->rgb_width;
-	h = im->rgb_height;
+	w = gdk_pixbuf_get_width(pixbuf);
+	h = gdk_pixbuf_get_height(pixbuf);
 	if(w>h) {
 		if(w>100) {
 			h = h*(100.0/w);
@@ -228,11 +252,11 @@ setup_preview(GtkWidget *widget)
 			h = 100;
 		}
 	}
-	pp = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+	pp = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
 	gtk_widget_show(pp);
 	gtk_container_add(GTK_CONTAINER(frame),pp);
 
-	gdk_imlib_destroy_image(im);
+        gdk_pixbuf_unref(pixbuf);
 }
 
 static void
@@ -311,6 +335,9 @@ icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 		gtk_entry_set_text(GTK_ENTRY(e),icon);
 		entry_changed (NULL, ientry);
 	}
+
+	gtk_signal_emit(GTK_OBJECT(ientry),
+			gnome_calculator_signals[CHANGED_SIGNAL]);
 }
 
 static void
@@ -349,6 +376,9 @@ gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEnt
 		entry_changed (NULL, ientry);
 		gtk_widget_hide(ientry->pick_dialog);
 	}
+
+	gtk_signal_emit(GTK_OBJECT(ientry),
+			gnome_calculator_signals[CHANGED_SIGNAL]);
 }
 
 static void
@@ -637,6 +667,7 @@ gnome_icon_entry_new (const gchar *history_id, const gchar *browse_dialog_title)
  * @ientry: the GnomeIconEntry to work with
  *
  * Description: Get the GnomeFileEntry widget that's part of the entry
+ * DEPRECATED! Use the "changed" signal for getting changes
  *
  * Returns: Returns GnomeFileEntry widget
  **/
@@ -654,6 +685,7 @@ gnome_icon_entry_gnome_file_entry (GnomeIconEntry *ientry)
  * @ientry: the GnomeIconEntry to work with
  *
  * Description: Get the GnomeEntry widget that's part of the entry
+ * DEPRECATED! Use the "changed" signal for getting changes
  *
  * Returns: Returns GnomeEntry widget
  **/
@@ -670,7 +702,8 @@ gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry)
  * gnome_icon_entry_gtk_entry:
  * @ientry: the GnomeIconEntry to work with
  *
- * Description: Get the GtkEntry widget that's part of the entry
+ * Description: Get the GtkEntry widget that's part of the entry.
+ * DEPRECATED! Use the "changed" signal for getting changes
  *
  * Returns: Returns GtkEntry widget
  **/
@@ -733,6 +766,8 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 	gtk_entry_set_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (ientry)),
 			    filename);
 	entry_changed (NULL, ientry);
+	gtk_signal_emit(GTK_OBJECT(ientry),
+			gnome_calculator_signals[CHANGED_SIGNAL]);
 }
 
 /**

@@ -13,7 +13,6 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkpacker.h> /* why the hell is GtkAnchorType here and not in gtkenums.h? */
-#include <gdk_imlib.h>
 #include <libart_lgpl/art_misc.h>
 #include <libart_lgpl/art_pixbuf.h>
 #include "gnome-canvas.h"

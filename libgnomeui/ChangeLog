@@ -108,6 +108,259 @@ Mon Oct 18 21:51:43 1999  George Lebl  <jirka@5z.com>
 	* gnome-messagebox.c (gnome_message_box_new): add a label field to
 	GnomeMessagebox.  Removed gnome_message_box_set_{modal,default}.
 
+1999-11-18  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-pixmap.c (paint_with_pixbuf): now have all the composite
+	stuff done.  Still need to document et al., but the end is in
+	sight.
+	(generate_state): added docs.  Added a DARK_FACTOR to insensitive pixbufs.
+
+1999-11-16  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap-entry.c (refresh_preview): Fix call to gnome_pixmap_set_pixbuf()
+
+	* gnome-init.c (libgnomeui_pixbuf_image_loader): Fix
+	gnome_pixbuf_render() here. I have the bad feeling this breaks
+	things badly unless we always use the GdkRGB visual/cmap
+
+	* gnome-about.c (gnome_about_construct): fix to match new
+	gnome_pixbuf_render() API
+	(gnome_about_construct): Use GdkRGB visual/cmap for now
+
+	* libgnomeui.h: comment out icon stuff, and druid-page-finish
+
+	* gnome-pixmap.c (gnome_pixmap_set_pixbuf): Ref new pixbuf before clearing.
+
+Thu Nov 11 00:08:14 1999  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: support more then 2 accelerators per key
+	  and use ',' for decimal point
+
+	* gnome-icon-entry.c: added a changed signal, I couldn't actually
+	  compile and test this but the change is so minial it should
+	  just work
+
+1999-11-09  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-color-picker.c (render): gdk_pixmapified.
+
+	* winhints_demo.c (prepare_app): gdk_pixmapified.
+
+1999-11-09  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c (match_representation_to_mode): New function
+	converts pixbuf->pixmap or vice-versa if you set pixbuf in pixmap
+	mode or vice-versa.
+
+1999-11-08  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c (gnome_pixbuf_scale): fix no-scaling-needed case
+	to work properly. Some other bug fixes
+
+	* gnome-stock.c (stock_pixmaps): specify that the rgb data has no
+	alpha for now (since it doesn't)
+
+	* gnome-init.c (gtk_post_args_parse): gdk_rgb_init()
+
+	* gnome-pixmap.c (resize_to_fit): fix typo, s/PIXMAP/PIXBUF/
+	(paint_with_pixbuf): Um, actually draw the pixbuf.
+
+	* gnome-stock.c (gnome_stock_init): Set the pixmap mode here, not 
+	in specific constructors.
+
+Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: count active widgets and after we destroy
+	  the last one, kill our font pixmap, also don't use the
+	  unconditional pixmap file routine as we want to check if the
+	  file exists or not
+
+1999-11-05  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c (gnome_pixmap_set_mode): implemented
+
+	* Makefile.am: Comment out property entries, they use the color
+	picker.
+	comment out dentry editor, it uses icon entry.
+
+	* gnome-init.c (libgnomeui_post_args_parse): Don't init imlib
+	(libgnomeui_pixbuf_image_loader): Replaces libgnomeui_imlib_image_loader
+
+	* Makefile.am: Comment color picker out
+	comment out gnome-druid for now too
+	comment out icon list
+	comment out icon selector
+	comment out icon entry
+
+	* gnome-pixmap-entry.c: Port to gdk-pixbuf
+	(setup_preview): port to gdk-pixbuf
+
+	* gnome-pixmap.c (gnome_pixbuf_build_insensitive): init width and
+	height variables
+
+	* gnome-app-helper.c (create_pixmap): fix cast on xpm data to
+	match const char**
+
+	* gnome-pixmap.c (gnome_pixmap_new_from_xpm_d_at_size): const on
+	the xpm_data
+	(gnome_pixmap_new_from_xpm_d): ditto
+
+	* gnome-messagebox.c (gnome_message_box_newv): Port to new GnomePixmap
+	(gnome_message_box_new): Port to new GnomePixmap
+
+	* gnome-pixmap.c (set_pixmaps): Allow pixmaps/masks to be NULL for "unset"
+	(set_pixbufs): Ditto
+	(set_pixbuf): Ditto
+	(gnome_pixmap_clear): New function to clear all pixmaps
+
+	* gnome-druid.c (gnome_druid_init): port to gdk-pixbuf
+
+	* gnome-app-helper.c (create_pixmap): Use
+	gnome_stock_new_with_icon() instead of gnome_stock_pixmap_widget()
+
+	* gnome-icon-entry.c (entry_changed): port to gdk-pixbuf
+
+	* gnome-pixmap.c (gnome_pixbuf_scale): If new w/h are the same as
+	old w/h just use memcpy() instead of scaling.	
+	(gnome_pixmap_set_pixbuf_at_size): New function
+	(gnome_pixmap_set_pixbuf): New function
+	(set_pixbuf): New function, used by set_pixbufs and above two
+	functions. Also implements automatic mask generation.
+
+	* gnome-pixmap.h: add a little comment about not using GnomePixmap
+	as an image loader.
+
+	* gnome-druid.h: include gnome-defs.h
+
+	* gnome-druid-page.h: include gnome-defs.h
+
+	* gnome-druid.c: Don't include gnome.h
+
+	* libgnomeui.h: Comment out animator, canvas image, canvas load
+	headers for now.
+
+	* Makefile.am: Comment out gnome-canvas-load.c
+	(INCLUDES): Remove GDK_IMLIB_CFLAGS
+
+	* gnome-canvas-load.h: Delete header contents; they aren't needed
+	with gdk-pixbuf	
+
+	* Makefile.am: Comment out gnome-canvas-image.c for now
+
+	* gnome-calculator.c (gnome_calculator_realized): port to
+	gdk-pixbuf; was using GnomePixmap just to load an image (please
+	people, could we be ANY MORE BROKEN in a million years? GnomeAbout
+	and GnomeAnimator were doing the same thing)
+	(put_led_font): Port to gdk-pixbuf, and don't draw with the image
+	if we failed to load it.
+
+	Note that GnomeCalculator is still broken because the font pixmap
+	is leaked if you destroy all the outstanding GnomeCalculator
+	widgets. Should probably use a GdkPixbuf as the representation
+	instead of creating a pixmap, and render from client side. Then
+	refcount the GdkPixbuf.
+
+	* Makefile.am: Comment out gnome-animator.c for now
+
+	* gnome-animator.c
+	(gnome_animator_append_frame_from_gnome_pixmap): Deleted this
+	function. It makes no sense, doesn't work with new GnomePixmap,
+	and was marked experimental.
+	(free_all_frames): port to gdk-pixbuf
+	(gnome_animator_append_frame_from_imlib_at_size): Removed
+	(gnome_animator_append_frame_from_imlib): Removed
+	(gnome_animator_append_frames_from_imlib_at_size): Removed
+	(gnome_animator_append_frames_from_imlib): Removed
+
+	* gnome-about.c (gnome_about_construct): port to gdk-pixbuf
+
+	* gnome-pixmap.c (gnome_pixbuf_render): Render a pixbuf to pixmap/mask
+
+	* gnome-stock.c (gnome_pixmap_button): Remove some weird pixmap 
+	registration stuff that no longer works and I don't understand the 
+	purpose of.
+	(gnome_pixmap_button): Unref the pixmap if it isn't placed in the
+	button due to user preferences. Long-standing mem leak.
+	(gnome_stock_pixmap_gdk): Port to gdk-pixbuf
+	(gnome_stock_transparent_window): port to gdk-pixbuf
+
+	* gnome-stock.h: rename gnome_stock_pixmap_checkfor() to
+	gnome_stock_pixmap_lookup()
+
+	* gnome-stock.c: Rewrite the stock pixmap hash. We now store
+	entries for all 5 states, and we do a single lookup to get all
+	five states at once. Also, the GnomeStock widget now simply gets a 
+	reference to the GdkPixbuf stored in the hash. We also free memory
+	associated with unscaled pixbufs, filenames, etc. once we have the
+	final pixbuf cached.
+	(gnome_stock_new): Set GNOME_PIXMAP_KEEP_PIXBUF mode since we are
+	usually using a pixbuf shared with other GnomeStock widgets.	
+	(gnome_stock_set_icon): Implement
+	(gnome_stock_pixmap_register): Don't return success/failure, that
+	makes no sense (it always succeeded anyway)
+	(gnome_stock_pixmap_change): Ditto
+
+	* gnome-stock.h: Replace all "subtype" string arguments with
+	GtkStateType enum arguments. 
+
+1999-11-04  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-stock.c: Remove GnomeStockPixmapEntryWidget and 
+	GnomeStockPixmapEntryGPixmap; these no longer make any sense.
+
+	* gnome-stock.h: GnomeStockPixmapEntry made opaque, all struct
+	contents moved to gnome-stock.c. Added new constructors and
+	destructors for creating a GnomeStockPixmapEntry.
+	
+	* gnome-stock.c: Removed functions I removed from the header last
+	week (deprecated stuff that had been spewing warnings or not
+	compiled at all).
+	
+	* gnome-stock.h: GnomeStockPixmapEntryRGB,
+	GnomeStockPixmapEntryRGBScaled added to replace Imlib versions
+	
+	* gnome-pixmap.c (gnome_pixbuf_scale): Add this here; it's
+	scale_down originally in gnome-stock.c. We no longer handle 
+	the magic alpha color, and we do handle full alpha.
+
+	* gnome-stock.c (gnome_stock_set_icon): Don't return success or
+	failure; if the icon doesn't exist, spew warnings.
+	(gnome_stock_set_icon_at_size): ditto
+	(gnome_stock_new_with_icon): don't check return val from set_icon
+	(gnome_stock_set_icon): Check whether the new icon is the same as
+	the old right at the start of the function.
+	(scale_down): mostly moved to gnome-pixmap.c as gnome_pixbuf_scale()	
+	
+1999-10-25  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c: set parent_class to NULL 
+
+	* gnome-stock.h: Further enhance the gnome-stock header. Remove
+	all functions that spew "don't use me" when used; group things
+	logically; add new _at_size() constructor and mutator for the
+	GnomeStock widget.
+
+	* gnome-pixmap.h, gnome-pixmap.c: Rewrite. Now supports a
+	different pixmap for every state, so we can migrate this
+	functionality out of GnomeStock. Also, uses gdk-pixbuf instead of
+	Imlib, and on Owen's recommendation does not use a shaped window.
+	Also, now derives from GtkMisc so you can set alignment, etc.
+	Compat functions not yet in place. Doesn't compile either,
+	untested and depends on some nonexistent GdkPixbuf stuff.
+	
+	* gnome-stock.c: Delete all the stuff that wasn't being compiled 
+	due to the USE_NEW_GNOME_STOCK #define
+
+	* gnome-stock.h: Don't define USE_NEW_GNOME_STOCK, unconditionally
+	compile the new stuff, delete the old stuff. 
+	Move all GNOME_STOCK_* string constant macros to gnome-stock-ids.h
+	Delete large comment at the top, it was outdated.
+	Delete Imlib entry types (need compat for these)
+	Make xpm_data in the XPM entry type const 
+	Delete all the regular/disabled/focus fields in GnomeStock widget
+	
+	* gnome-stock-ids.h: New file to unclutter gnome-stock.h
+	
 1999-10-10  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-less.c: Remove the stupid popup menu, breaks binary

@@ -21,6 +21,7 @@
 #include <gdk/gdkkeysyms.h>
 #include "libgnome/libgnomeP.h"
 #include "gnome-calculator.h"
+#include "gdk-pixbuf/gdk-pixbuf.h"
 #include "gnome-pixmap.h"
 
 typedef void (*sighandler_t)(int);
@@ -56,7 +57,8 @@ static void gnome_calculator_destroy	(GtkObject		*object);
 
 static GtkVBoxClass *parent_class;
 
-static GtkWidget * font_pixmap=NULL;
+static GdkPixmap * font_pixmap = NULL;
+static int calculator_count = 0;
 
 typedef struct _CalculatorButton CalculatorButton;
 struct _CalculatorButton {
@@ -64,9 +66,9 @@ struct _CalculatorButton {
 	GtkSignalFunc signal_func;
 	gpointer data;
 	gpointer invdata;
-	gint convert_to_rad;
-	guint key; /*key shortcut*/
-	guint key2; /*2nd key shortcut - keypad or such*/
+	gboolean convert_to_rad;
+	guint keys[4]; /*key shortcuts, 0 terminated list,
+			 make sure to increase the number if more is needed*/
 };
 
 typedef void (*GnomeCalcualtorResultChangedSignal) (GtkObject * object,
@@ -140,6 +142,8 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 
 	class->result_changed = NULL;
 	gtk_object_class_add_signals (object_class, gnome_calculator_signals, LAST_SIGNAL);
+
+	calculator_count++;
 }
 
 #if 0 /*only used for debugging*/
@@ -185,37 +189,39 @@ put_led_font(GnomeCalculator *gc)
 
 	gdk_draw_rectangle(p, style->black_gc, 1, 0, 0, -1, -1);
 
-	if(gc->memory!=0) {
-		gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap, 13*FONT_WIDTH,
-				0, 0, 0, FONT_WIDTH, FONT_HEIGHT);
-	}
-	for(x=12,i=strlen(text)-1;i>=0;x--,i--) {
-		if(text[i]>='0' && text[i]<='9')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					(text[i]-'0')*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-		else if(text[i]=='.')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					10*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-		else if(text[i]=='+')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					11*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-		else if(text[i]=='-')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					12*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-		else if(text[i]=='e')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					14*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-	}
+        if (font_pixmap != NULL) {
+                if(gc->memory!=0) {
+                        gdk_draw_pixmap(p, style->white_gc, font_pixmap, 13*FONT_WIDTH,
+                                        0, 0, 0, FONT_WIDTH, FONT_HEIGHT);
+                }
+                for(x=12,i=strlen(text)-1;i>=0;x--,i--) {
+                        if(text[i]>='0' && text[i]<='9')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                (text[i]-'0')*FONT_WIDTH, 0, 
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                        else if(text[i]=='.')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                10*FONT_WIDTH, 0, 
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                        else if(text[i]=='+')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                11*FONT_WIDTH, 0,
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                        else if(text[i]=='-')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                12*FONT_WIDTH, 0, 
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                        else if(text[i]=='e')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                14*FONT_WIDTH, 0, 
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                }
+        }
 	gtk_signal_emit_by_name(GTK_OBJECT(gc->display), "draw", &retval);
 }
 
@@ -1023,15 +1029,21 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 {
 	GnomeCalculator *gc = GNOME_CALCULATOR(w);
 
-	if(!font_pixmap) {
-		gchar *file =
-			gnome_unconditional_pixmap_file("calculator-font.png");
+	if(font_pixmap == NULL) {
+                GdkPixbuf *pixbuf;
+		gchar *file = gnome_pixmap_file("calculator-font.png");
 
-		if(!file) {
+		if(file == NULL) {
 			g_warning("Can't find calculator-font.png");
-		}
-		font_pixmap = gnome_pixmap_new_from_file(file);
-		g_free(file);
+		} else {
+                        pixbuf = gdk_pixbuf_new_from_file("calculator-font.png");
+                        if (pixbuf == NULL) {
+                                g_warning("Can't load calculator-font.png");
+                        } else {
+                                gnome_pixbuf_render(pixbuf, &font_pixmap, NULL, 128);
+                        }
+                        g_free(file);
+                }
 	}
 
 	gc->display =  gtk_pixmap_new(gdk_pixmap_new(GTK_WIDGET(gc)->window,
@@ -1048,53 +1060,53 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 
 static const CalculatorButton buttons[8][5] = {
 	{
-		{N_("1/x"),(GtkSignalFunc)simple_func,c_inv,NULL,FALSE,0,0},
-		{N_("x^2"),(GtkSignalFunc)simple_func,c_pow2,sqrt,FALSE,0,0},
-		{N_("SQRT"),(GtkSignalFunc)simple_func,sqrt,c_pow2,FALSE,0,0},
-		{N_("CE/C"),(GtkSignalFunc)clear_calc,NULL,NULL,FALSE,0,0},
-		{N_("AC"),(GtkSignalFunc)reset_calc,NULL,NULL,FALSE,0,0}
+		{N_("1/x"),(GtkSignalFunc)simple_func,c_inv,NULL,FALSE,{0}},
+		{N_("x^2"),(GtkSignalFunc)simple_func,c_pow2,sqrt,FALSE,{0}},
+		{N_("SQRT"),(GtkSignalFunc)simple_func,sqrt,c_pow2,FALSE,{0}},
+		{N_("CE/C"),(GtkSignalFunc)clear_calc,NULL,NULL,FALSE,{GDK_Clear,0}},
+		{N_("AC"),(GtkSignalFunc)reset_calc,NULL,NULL,FALSE,{0}}
 	},{
 		{NULL,NULL,NULL,NULL}, /*inverse button*/
-		{N_("sin"),(GtkSignalFunc)simple_func,sin,asin,TRUE,0,0},
-		{N_("cos"),(GtkSignalFunc)simple_func,cos,acos,TRUE,0,0},
-		{N_("tan"),(GtkSignalFunc)simple_func,tan,atan,TRUE,0,0},
-		{N_("DEG"),(GtkSignalFunc)drg_toggle,NULL,NULL,FALSE,0,0}
+		{N_("sin"),(GtkSignalFunc)simple_func,sin,asin,TRUE,{0}},
+		{N_("cos"),(GtkSignalFunc)simple_func,cos,acos,TRUE,{0}},
+		{N_("tan"),(GtkSignalFunc)simple_func,tan,atan,TRUE,{0}},
+		{N_("DEG"),(GtkSignalFunc)drg_toggle,NULL,NULL,FALSE,{0}}
 	},{
-		{N_("e"),(GtkSignalFunc)set_e,NULL,NULL,FALSE,0,0},
-		{N_("EE"),(GtkSignalFunc)add_digit,"e+",NULL,FALSE,0,0},
-		{N_("log"),(GtkSignalFunc)simple_func,log10,c_pow10,FALSE,0,0},
-		{N_("ln"),(GtkSignalFunc)simple_func,log,c_powe,FALSE,0,0},
-		{N_("x^y"),(GtkSignalFunc)math_func,pow,NULL,FALSE,'^',0}
+		{N_("e"),(GtkSignalFunc)set_e,NULL,NULL,FALSE,{0}},
+		{N_("EE"),(GtkSignalFunc)add_digit,"e+",NULL,FALSE,{0}},
+		{N_("log"),(GtkSignalFunc)simple_func,log10,c_pow10,FALSE,{0}},
+		{N_("ln"),(GtkSignalFunc)simple_func,log,c_powe,FALSE,{0}},
+		{N_("x^y"),(GtkSignalFunc)math_func,pow,NULL,FALSE,{'^',0}}
 	},{
-		{N_("PI"),(GtkSignalFunc)set_pi,NULL,NULL,FALSE,0,0},
-		{N_("x!"),(GtkSignalFunc)simple_func,c_fact,NULL,FALSE,'!',0},
-		{N_("("),(GtkSignalFunc)add_parenth,NULL,NULL,FALSE,'(',0},
-		{N_(")"),(GtkSignalFunc)sub_parenth,NULL,NULL,FALSE,')',0},
-		{N_("/"),(GtkSignalFunc)math_func,c_div,NULL,FALSE,'/',GDK_KP_Divide}
+		{N_("PI"),(GtkSignalFunc)set_pi,NULL,NULL,FALSE,{0}},
+		{N_("x!"),(GtkSignalFunc)simple_func,c_fact,NULL,FALSE,{'!',0}},
+		{N_("("),(GtkSignalFunc)add_parenth,NULL,NULL,FALSE,{'(',0}},
+		{N_(")"),(GtkSignalFunc)sub_parenth,NULL,NULL,FALSE,{')',0}},
+		{N_("/"),(GtkSignalFunc)math_func,c_div,NULL,FALSE,{'/',GDK_KP_Divide,0}}
 	},{
-		{N_("STO"),(GtkSignalFunc)store_m,NULL,NULL,FALSE,0,0},
-		{N_("7"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'7',GDK_KP_7},
-		{N_("8"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'8',GDK_KP_8},
-		{N_("9"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'9',GDK_KP_9},
-		{N_("*"),(GtkSignalFunc)math_func,c_mul,NULL,FALSE,'*',GDK_KP_Multiply}
+		{N_("STO"),(GtkSignalFunc)store_m,NULL,NULL,FALSE,{0}},
+		{N_("7"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'7',GDK_KP_7,0}},
+		{N_("8"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'8',GDK_KP_8,0}},
+		{N_("9"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'9',GDK_KP_9,0}},
+		{N_("*"),(GtkSignalFunc)math_func,c_mul,NULL,FALSE,{'*',GDK_KP_Multiply,0}}
 	},{
-		{N_("RCL"),(GtkSignalFunc)recall_m,NULL,NULL,FALSE,0,0},
-		{N_("4"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'4',GDK_KP_4},
-		{N_("5"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'5',GDK_KP_5},
-		{N_("6"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'6',GDK_KP_6},
-		{N_("-"),(GtkSignalFunc)math_func,c_sub,NULL,FALSE,'-',GDK_KP_Subtract}
+		{N_("RCL"),(GtkSignalFunc)recall_m,NULL,NULL,FALSE,{0}},
+		{N_("4"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'4',GDK_KP_4,0}},
+		{N_("5"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'5',GDK_KP_5,0}},
+		{N_("6"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'6',GDK_KP_6,0}},
+		{N_("-"),(GtkSignalFunc)math_func,c_sub,NULL,FALSE,{'-',GDK_KP_Subtract,0}}
 	},{
-		{N_("SUM"),(GtkSignalFunc)sum_m,NULL,NULL,FALSE,0,0},
-		{N_("1"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'1',GDK_KP_1},
-		{N_("2"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'2',GDK_KP_2},
-		{N_("3"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'3',GDK_KP_3},
-		{N_("+"),(GtkSignalFunc)math_func,c_add,NULL,FALSE,'+',GDK_KP_Add}
+		{N_("SUM"),(GtkSignalFunc)sum_m,NULL,NULL,FALSE,{0}},
+		{N_("1"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'1',GDK_KP_1,0}},
+		{N_("2"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'2',GDK_KP_2,0}},
+		{N_("3"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'3',GDK_KP_3,0}},
+		{N_("+"),(GtkSignalFunc)math_func,c_add,NULL,FALSE,{'+',GDK_KP_Add,0}}
 	},{
-		{N_("EXC"),(GtkSignalFunc)exchange_m,NULL,NULL,FALSE,0},
-		{N_("0"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'0',GDK_KP_0},
-		{N_("."),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'.',GDK_KP_Decimal},
-		{N_("+/-"),(GtkSignalFunc)negate_val,c_neg,NULL,FALSE,0,0},
-		{N_("="),(GtkSignalFunc)no_func,NULL,NULL,FALSE,'=',GDK_KP_Enter}
+		{N_("EXC"),(GtkSignalFunc)exchange_m,NULL,NULL,FALSE,{0}},
+		{N_("0"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'0',GDK_KP_0,0}},
+		{N_("."),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,{'.',GDK_KP_Decimal,',',0}},
+		{N_("+/-"),(GtkSignalFunc)negate_val,c_neg,NULL,FALSE,{0}},
+		{N_("="),(GtkSignalFunc)no_func,NULL,NULL,FALSE,{'=',GDK_KP_Enter,GDK_Return,0}}
 	}
 };
 
@@ -1128,51 +1140,31 @@ gnome_calculator_init (GnomeCalculator *gc)
 		for(y=0;y<8;y++) {
 			const CalculatorButton *but = &buttons[y][x];
 			if(but->name) {
+				int i;
 				w=gtk_button_new_with_label(_(but->name));
 				gtk_signal_connect(GTK_OBJECT(w),"clicked",
 						   but->signal_func,
 						   (gpointer) but);
 
-				if(but->key) {
+				for(i=0;but->keys[i]!=0;i++) {
 				  gtk_widget_add_accelerator(w,
 							     "clicked",
 							     gc->accel,
-							     but->key,0,
+							     but->keys[i],0,
 							     GTK_ACCEL_VISIBLE);
 				  gtk_widget_add_accelerator(w,
 							     "clicked",
 							     gc->accel,
-							     but->key,
+							     but->keys[i],
 							     GDK_SHIFT_MASK,
 							     GTK_ACCEL_VISIBLE);
 				  gtk_widget_add_accelerator(w,
 							     "clicked",
 							     gc->accel,
-							     but->key,
+							     but->keys[i],
 							     GDK_LOCK_MASK,
 							     GTK_ACCEL_VISIBLE);
 				}
-				if(but->key2)
-				{
-				  gtk_widget_add_accelerator(w,
-							     "clicked",
-							     gc->accel,
-							     but->key2,0,
-							     0);
-				  gtk_widget_add_accelerator(w,
-							     "clicked",
-							     gc->accel,
-							     but->key2,
-							     GDK_SHIFT_MASK,
-							     0);
-				  gtk_widget_add_accelerator(w,
-							     "clicked",
-							     gc->accel,
-							     but->key2,
-							     GDK_LOCK_MASK,
-							     GTK_ACCEL_VISIBLE);
-				}
-
 				gtk_object_set_user_data(GTK_OBJECT(w),gc);
 				gtk_widget_show(w);
 				gtk_table_attach(GTK_TABLE(table),w,
@@ -1226,6 +1218,12 @@ gnome_calculator_destroy (GtkObject *object)
 
 	while(gc->stack)
 		stack_pop(&gc->stack);
+
+	if((--calculator_count)==0 &&
+	   font_pixmap) {
+		gdk_pixmap_unref(font_pixmap);
+		font_pixmap = NULL;
+	}
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
