@@ -251,7 +251,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 		GdkPixbuf *scaled;
 	        scaled = gdk_pixbuf_scale_simple(pixbuf, w, h,
 						 GDK_INTERP_BILINEAR);
-		gdk_pixbuf_unref(pixbuf);
+		g_object_unref (G_OBJECT (pixbuf));
 		pixbuf = scaled;
 
 		/* sanity */
@@ -263,7 +263,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	pos = gnome_icon_list_append_pixbuf(GNOME_ICON_LIST(gis->_priv->gil),
 					    pixbuf, path, base);
 	g_free(base);
-	gdk_pixbuf_unref(pixbuf); /* I'm so glad that gdk-pixbuf has eliminated the former lameness of imlib! :) */
+	g_object_unref (G_OBJECT (pixbuf)); /* I'm so glad that gdk-pixbuf has eliminated the former lameness of imlib! :) */
 }
 
 static int sort_file_list( gconstpointer a, gconstpointer b)

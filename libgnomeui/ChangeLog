@@ -1,3 +1,25 @@
+Wed Dec 26 17:56:25 2001  George Lebl <jirka@5z.com>
+
+	* gnome-scroes.c, gnome-dateedit.c: the output of strftime is
+	  not in utf8 so convert it
+
+	* gnome-pixmap-entry.c: a bit of cleanup and remove race where
+	  you could get two preview frames if you pressed the browse
+	  button twice
+
+	* gnome-scores.c: when setting font use pango, we can't use
+	  gdk_fontset_load as that's deprecated, and this is non-deprecated
+	  api.
+
+	* Makefile.am, gnome-about.c, gnome-app-helper.c, gnome-app-util.c,
+	  gnome-color-picker.c, gnome-dateedit.c, gnome-dialog.c,
+	  gnome-druid-page-edge.c, gnome-druid-page-standard.c,
+	  gnome-file-entry.c, gnome-href.c, gnome-ice.c, gnome-icon-entry.c,
+	  gnome-icon-list.c, gnome-icon-sel.c, gnome-pixmap-entry.c,
+	  gnome-pixmap.c, gnome-scores.c, gnome-stock-icons.c,
+	  gnome-vfs-util.c:  Compile with G_DISABLE_DEPRECATED,
+	  GDK_DISABLE_DEPRECATED and GDK_PIXBUF_DISABLE_DEPRECATED, yay!
+
 Wed Dec 26 14:34:14 2001  George Lebl <jirka@5z.com>
 
 	* gnome-icon-list.c: When appending a file it could happen that

@@ -126,6 +126,7 @@ day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 	char buffer [256];
 	guint year, month, day;
 	struct tm mtm = {0};
+	char *str_utf8;
 
 	gtk_calendar_get_date (calendar, &year, &month, &day);
 
@@ -139,10 +140,14 @@ day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 	if (strftime (buffer, sizeof (buffer),
 		      strftime_date_format, &mtm) == 0)
 		strcpy (buffer, "???");
+	buffer[sizeof(buffer)-1] = '\0';
 
 	/* FIXME: what about set time */
 
-	gtk_entry_set_text (GTK_ENTRY (gde->_priv->date_entry), buffer);
+	str_utf8 = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
+	gtk_entry_set_text (GTK_ENTRY (gde->_priv->date_entry),
+			    str_utf8 ? str_utf8 : "");
+	g_free (str_utf8);
 	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
 }
 
@@ -219,7 +224,7 @@ position_popup (GnomeDateEdit *gde)
 	gtk_widget_size_request (gde->_priv->cal_popup, &req);
 
 	gdk_window_get_origin (gde->_priv->date_button->window, &x, &y);
-	gdk_window_get_size (gde->_priv->date_button->window, &bwidth, &bheight);
+	gdk_drawable_get_size (gde->_priv->date_button->window, &bwidth, &bheight);
 
 	x += bwidth - req.width;
 	y += bheight;
@@ -332,6 +337,7 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 		GtkWidget *item, *submenu;
 		hour_info_t *hit;
 		char buffer [40];
+		char *str_utf8;
 
 		mtm->tm_hour = i;
 		mtm->tm_min  = 0;
@@ -345,7 +351,10 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 				      "%I:00 %p ", mtm) == 0)
 				strcpy (buffer, "???");
 		}
-		item = gtk_menu_item_new_with_label (buffer);
+		buffer[sizeof(buffer)-1] = '\0';
+		str_utf8 = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
+		item = gtk_menu_item_new_with_label (str_utf8 ? str_utf8 : "");
+		g_free (str_utf8);
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 #if 0
 		hit = g_new (hour_info_t, 1);
@@ -377,8 +386,11 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 					      "%I:%M %p", mtm) == 0)
 					strcpy (buffer, "???");
 			}
+			buffer[sizeof(buffer)-1] = '\0';
+			str_utf8 = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
+			mins = gtk_menu_item_new_with_label (str_utf8 ? str_utf8 : "");
+			g_free (str_utf8);
 
-			mins = gtk_menu_item_new_with_label (buffer);
 			gtk_menu_shell_append (GTK_MENU_SHELL (submenu), mins);
 
 			hit = g_new (hour_info_t, 1);
@@ -629,7 +641,8 @@ void
 gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 {
 	struct tm *mytm;
-	char buffer [40];
+	char buffer [256];
+	char *str_utf8;
 
 	g_return_if_fail(gde != NULL);
 
@@ -642,7 +655,11 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	/* Set the date */
 	if (strftime (buffer, sizeof (buffer), strftime_date_format, mytm) == 0)
 		strcpy (buffer, "???");
-	gtk_entry_set_text (GTK_ENTRY (gde->_priv->date_entry), buffer);
+	buffer[sizeof(buffer)-1] = '\0';
+
+	str_utf8 = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
+	gtk_entry_set_text (GTK_ENTRY (gde->_priv->date_entry), str_utf8 ? str_utf8 : "");
+	g_free (str_utf8);
 
 	/* Set the time */
 	if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR) {
@@ -652,7 +669,11 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 		if (strftime (buffer, sizeof (buffer), "%I:%M %p", mytm) == 0)
 			strcpy (buffer, "???");
 	}
-	gtk_entry_set_text (GTK_ENTRY (gde->_priv->time_entry), buffer);
+	buffer[sizeof(buffer)-1] = '\0';
+
+	str_utf8 = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
+	gtk_entry_set_text (GTK_ENTRY (gde->_priv->time_entry), str_utf8 ? str_utf8 : "");
+	g_free (str_utf8);
 }
 
 /**
@@ -890,8 +911,9 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 			}
 		}
 
-		if (flags != NULL) {
+		if (flags != NULL && tm.tm_hour < 12) {
 			char buf[256] = "";
+			char *str_utf8;
 			struct tm pmtm = {0};
 
 			/* Get locale specific "PM", note that it
@@ -899,10 +921,16 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 			pmtm.tm_hour = 17; /* around tea time is always PM */
 			if (strftime (buf, sizeof (buf), "%p", &pmtm) == 0)
 				strcpy (buf, "");
+			buf[sizeof(buf)-1] = '\0';
 
-			if (g_strcasecmp (flags, buf) == 0 &&
-			    tm.tm_hour < 12)
-					tm.tm_hour += 12;
+			str_utf8 = g_locale_to_utf8 (buf, -1, NULL, NULL, NULL);
+
+			/* eek, this may be evil, we are sort of fuzzy here */
+			if ((str_utf8 != NULL && strcmp (flags, str_utf8) == 0) ||
+			    g_ascii_strcasecmp (flags, buf) == 0)
+				tm.tm_hour += 12;
+
+			g_free (str_utf8);
 		}
 
 		g_free (string);

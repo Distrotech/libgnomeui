@@ -25,7 +25,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <gtk/gtkobject.h>
+#include <glib-object.h>
 #include <libgnome/gnome-i18n.h>
 
 #include "gnome-vfs-util.h"
@@ -131,7 +131,7 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
     }
 
     if (result != GNOME_VFS_OK) {
-	gtk_object_unref (GTK_OBJECT (loader));
+	g_object_unref (G_OBJECT (loader));
 	gnome_vfs_close (handle);
 	return NULL;
     }
@@ -140,9 +140,9 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
 
     pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
     if (pixbuf != NULL) {
-	gdk_pixbuf_ref (pixbuf);
+	g_object_ref (G_OBJECT (pixbuf));
     }
-    gtk_object_unref (GTK_OBJECT (loader));
+    g_object_unref (G_OBJECT (loader));
 
     return pixbuf;
 }

@@ -353,7 +353,7 @@ create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info,
 				((const char **)pixmap_info);
 			if (pixbuf != NULL) {
 				pixmap = gtk_image_new_from_pixbuf (pixbuf);
-				gdk_pixbuf_unref (pixbuf);
+				g_object_unref (G_OBJECT (pixbuf));
 			}
 		}
 
@@ -913,7 +913,7 @@ create_menu_item (GtkMenuShell       *menu_shell,
 	case GNOME_APP_UI_SUBTREE_STOCK:
 		if (is_radio) {
 			uiinfo->widget = gtk_radio_menu_item_new (*radio_group);
-			*radio_group = gtk_radio_menu_item_group
+			*radio_group = gtk_radio_menu_item_get_group
 				(GTK_RADIO_MENU_ITEM (uiinfo->widget));
 		} else {
 

@@ -365,7 +365,7 @@ browse_clicked(GnomeFileEntry *fentry)
 		gtk_window_set_position(GTK_WINDOW(fsw),GTK_WIN_POS_NONE);
 
 		gdk_window_get_origin (GTK_WIDGET(parent)->window, &x, &y);
-		gdk_window_get_size   (GTK_WIDGET(parent)->window, &w, &h);
+		gdk_drawable_get_size   (GTK_WIDGET(parent)->window, &w, &h);
 
 		/* The problem here is we don't know how big the dialog is.
 		   So "centered" isn't really true. We'll go with

@@ -130,7 +130,7 @@ gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge,
 			  position < GNOME_EDGE_LAST);
 
 	if (antialiased) {
-		gtk_widget_push_colormap (gdk_rgb_get_cmap ());
+		gtk_widget_push_colormap (gdk_rgb_get_colormap ());
 		canvas = gnome_canvas_new_aa();
 		gtk_widget_pop_colormap ();
 	} else {
@@ -144,15 +144,15 @@ gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge,
 	druid_page_edge->text = g_strdup (text ? text : "");
 
 	if (logo != NULL)
-		gdk_pixbuf_ref (logo);
+		g_object_ref (G_OBJECT (logo));
 	druid_page_edge->logo_image = logo;
 
 	if (watermark != NULL)
-		gdk_pixbuf_ref (watermark);
+		g_object_ref (G_OBJECT (watermark));
 	druid_page_edge->watermark_image = watermark;
 
 	if (top_watermark != NULL)
-		gdk_pixbuf_ref (top_watermark);
+		g_object_ref (G_OBJECT (top_watermark));
 	druid_page_edge->top_watermark_image = top_watermark;
 
 	/* Set up the canvas */
@@ -173,11 +173,11 @@ gnome_druid_page_edge_destroy(GtkObject *object)
 	/* remember, destroy can be run multiple times! */
 
 	if (druid_page_edge->logo_image != NULL)
-		gdk_pixbuf_unref (druid_page_edge->logo_image);
+		g_object_unref (G_OBJECT (druid_page_edge->logo_image));
 	druid_page_edge->logo_image = NULL;
 
 	if (druid_page_edge->watermark_image != NULL)
-		gdk_pixbuf_unref (druid_page_edge->watermark_image);
+		g_object_unref (G_OBJECT (druid_page_edge->watermark_image));
 	druid_page_edge->watermark_image = NULL;
 
 	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
@@ -672,11 +672,11 @@ gnome_druid_page_edge_set_logo (GnomeDruidPageEdge *druid_page_edge,
 	g_return_if_fail (logo_image != NULL);
 
 	if (druid_page_edge->logo_image != NULL)
-		gdk_pixbuf_unref (druid_page_edge->logo_image);
+		g_object_unref (G_OBJECT (druid_page_edge->logo_image));
 
 	druid_page_edge->logo_image = logo_image;
 	if (logo_image != NULL )
-		gdk_pixbuf_ref (logo_image);
+		g_object_ref (G_OBJECT (logo_image));
 	gnome_canvas_item_set (druid_page_edge->_priv->logo_item,
 			       "pixbuf", druid_page_edge->logo_image,
 			       NULL);
@@ -700,11 +700,11 @@ gnome_druid_page_edge_set_watermark (GnomeDruidPageEdge *druid_page_edge,
 	g_return_if_fail (watermark != NULL);
 
 	if (druid_page_edge->watermark_image != NULL)
-		gdk_pixbuf_unref (druid_page_edge->watermark_image);
+		g_object_unref (G_OBJECT (druid_page_edge->watermark_image));
 
 	druid_page_edge->watermark_image = watermark;
 	if (watermark != NULL )
-		gdk_pixbuf_ref (watermark);
+		g_object_ref (G_OBJECT (watermark));
 	gnome_canvas_item_set (druid_page_edge->_priv->watermark_item,
 			       "pixbuf", druid_page_edge->watermark_image,
 			       NULL);
@@ -727,11 +727,11 @@ gnome_druid_page_edge_set_top_watermark (GnomeDruidPageEdge *druid_page_edge,
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
 
 	if (druid_page_edge->top_watermark_image)
-		gdk_pixbuf_unref (druid_page_edge->top_watermark_image);
+		g_object_unref (G_OBJECT (druid_page_edge->top_watermark_image));
 
 	druid_page_edge->top_watermark_image = top_watermark_image;
 	if (top_watermark_image != NULL)
-		gdk_pixbuf_ref (top_watermark_image);
+		g_object_ref (G_OBJECT (top_watermark_image));
 	gnome_canvas_item_set (druid_page_edge->_priv->top_watermark_item,
 			       "pixbuf", druid_page_edge->top_watermark_image,
 			       NULL);

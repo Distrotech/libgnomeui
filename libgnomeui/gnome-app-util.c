@@ -319,12 +319,12 @@ bar_reply_cb(GnomeAppBar * ab, ReplyInfo * ri)
   g_print("Got reply: \"%s\"\n", response);
 #endif
 
-  if ( (g_strcasecmp(_("y"), response) == 0) || 
-       (g_strcasecmp(_("yes"), response) == 0) ) {
+  if ( (g_ascii_strcasecmp(_("y"), response) == 0) || 
+       (g_ascii_strcasecmp(_("yes"), response) == 0) ) {
     (* (ri->callback)) (GNOME_YES, ri->data);
   }
-  else if ( (g_strcasecmp(_("n"), response) == 0) || 
-	    (g_strcasecmp(_("no"), response) == 0) ) {
+  else if ( (g_ascii_strcasecmp(_("n"), response) == 0) || 
+	    (g_ascii_strcasecmp(_("no"), response) == 0) ) {
     (* (ri->callback)) (GNOME_NO, ri->data);
   }
   else {

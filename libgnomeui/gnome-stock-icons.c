@@ -57,7 +57,7 @@ add_sized (GtkIconFactory *factory,
 
     gtk_icon_factory_add (factory, stock_id, set);
 
-    gdk_pixbuf_unref (pixbuf);
+    g_object_unref (G_OBJECT (pixbuf));
     gtk_icon_source_free (source);
     gtk_icon_set_unref (set);
 }
@@ -81,7 +81,7 @@ add_unsized (GtkIconFactory *factory,
 
     gtk_icon_factory_add (factory, stock_id, set);
 
-    gdk_pixbuf_unref (pixbuf);
+    g_object_unref (G_OBJECT (pixbuf));
     gtk_icon_source_free (source);
     gtk_icon_set_unref (set);
 }

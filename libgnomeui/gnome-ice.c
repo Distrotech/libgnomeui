@@ -47,10 +47,11 @@ static void new_ice_connection (IceConn connection, IcePointer client_data,
 
 /* This is called when data is available on an ICE connection.  */
 static gboolean
-process_ice_messages (gpointer client_data, gint source,
-		      GdkInputCondition condition)
+process_ice_messages (GIOChannel   *source,
+		      GIOCondition  condition,
+		      gpointer      data)
 {
-  IceConn connection = (IceConn) client_data;
+  IceConn connection = (IceConn) data;
   IceProcessMessagesStatus status;
 
   status = IceProcessMessages (connection, NULL, NULL);
@@ -83,27 +84,30 @@ static void
 new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 		    IcePointer *watch_data)
 {
-  gint input_id;
+  guint input_id;
 
   if (opening)
     {
+      GIOChannel *channel;
       /* Make sure we don't pass on these file descriptors to any
          exec'ed children */
       fcntl(IceConnectionNumber(connection),F_SETFD,
 	    fcntl(IceConnectionNumber(connection),F_GETFD,0) | FD_CLOEXEC);
 
-      input_id = gdk_input_add (IceConnectionNumber (connection),
-				GDK_INPUT_READ|GDK_INPUT_EXCEPTION,
-				(GdkInputFunction)process_ice_messages,
-				(gpointer) connection);
+      channel = g_io_channel_unix_new (IceConnectionNumber (connection));
+      input_id = g_io_add_watch (channel,
+				 G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI,
+				 process_ice_messages,
+				 connection);
+      g_io_channel_unref (channel);
 
-      *watch_data = (IcePointer) GINT_TO_POINTER (input_id);
+      *watch_data = (IcePointer) GUINT_TO_POINTER (input_id);
     }
   else 
     {
-      input_id = GPOINTER_TO_INT ((gpointer) *watch_data);
+      input_id = GPOINTER_TO_UINT ((gpointer) *watch_data);
 
-      gdk_input_remove (input_id);
+      g_source_remove (input_id);
     }
 }
 

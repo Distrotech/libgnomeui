@@ -178,6 +178,8 @@ gnome_scores_construct (  GnomeScores *gs,
 	gs->_priv->label_times  = g_malloc(sizeof(GtkWidget*) * n_scores);
 
 	for(i=0; i < n_scores; i++) {
+		char *str_utf8;
+
 		gs->_priv->label_names[i] = gtk_label_new ( names[i] );
 		gtk_widget_show ( gs->_priv->label_names[i] );
 		gtk_table_attach_defaults ( gs->_priv->table, gs->_priv->label_names[i], 0, 1, i+1, i+2);
@@ -202,7 +204,10 @@ gnome_scores_construct (  GnomeScores *gs,
 			strcpy(tmp2, "???");
 		}
 		tmp2[sizeof(tmp2)-1] = '\0'; /* just for sanity */
-		gs->_priv->label_times[i] = gtk_label_new ( tmp2 );
+
+		str_utf8 = g_locale_to_utf8 (tmp2, -1, NULL, NULL, NULL);
+		gs->_priv->label_times[i] = gtk_label_new (str_utf8 ? str_utf8 : "");
+		g_free (str_utf8);
 		gtk_widget_show ( gs->_priv->label_times[i] );
 		gtk_table_attach_defaults ( gs->_priv->table, gs->_priv->label_times[i], 2, 3, i+1, i+2);
   	}
@@ -387,8 +392,7 @@ gnome_scores_set_logo_label (GnomeScores *gs,
 {
 	GtkStyle *s = gtk_style_new(); /* i believe that i should copy the default style
 					  and change only the fg & font fields, how? */
-	GdkFont *f;
-	const gchar *fo;
+	PangoFontDescription *font_desc;
 
 	g_return_if_fail(gs != NULL);
 	g_return_if_fail(GNOME_IS_SCORES(gs));
@@ -401,13 +405,13 @@ gnome_scores_set_logo_label (GnomeScores *gs,
 	if(col)
 		s->fg[0] = *col;
 
-	if( font ) 
-		fo = font;
-	else 
-		fo = _("-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*");
-
-	if(( f = gdk_fontset_load ( fo ) ))
-		gtk_style_set_font(s, f);
+	font_desc = NULL;
+	if (font != NULL)
+		font_desc = pango_font_description_from_string (font);
+	if (font_desc == NULL)
+		font_desc = pango_font_description_from_string (_("Sans 14"));
+	if (font_desc != NULL)
+		s->font_desc = font_desc;
 
 	gs->_priv->logo = gtk_label_new(txt);
 	gtk_widget_set_style(GTK_WIDGET(gs->_priv->logo), s);

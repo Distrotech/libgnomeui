@@ -278,7 +278,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	}
 	scaled = gdk_pixbuf_scale_simple
 		(pixbuf, w, h, GDK_INTERP_BILINEAR);
-        gdk_pixbuf_unref(pixbuf);
+        g_object_unref (G_OBJECT (pixbuf));
 
 	if (GTK_IS_IMAGE (child)) {
                 gtk_image_set_from_pixbuf (GTK_IMAGE (child), scaled);
@@ -297,7 +297,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 					     GDK_ACTION_COPY);
 		}
 	}
-	gdk_pixbuf_unref (scaled);
+	g_object_unref (G_OBJECT (scaled));
 #if 0
 	gtk_drag_source_set (ientry->_priv->pickbutton,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
@@ -381,9 +381,9 @@ setup_preview(GtkWidget *widget)
 	}
 
 	scaled = gdk_pixbuf_scale_simple (pixbuf, w, h, GDK_INTERP_BILINEAR);
-        gdk_pixbuf_unref (pixbuf);
+        g_object_unref (G_OBJECT (pixbuf));
 	pp = gtk_image_new_from_pixbuf (scaled);
-        gdk_pixbuf_unref (scaled);
+        g_object_unref (G_OBJECT (scaled));
 
 	gtk_widget_show(pp);
 	gtk_container_add(GTK_CONTAINER(frame),pp);

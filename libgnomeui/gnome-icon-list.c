@@ -1034,7 +1034,7 @@ icon_new (Gil *gil, const char *icon_filename, const char *text)
 	retval = icon_new_from_pixbuf (gil, im, icon_filename, text);
 
 	if(im)
-		gdk_pixbuf_unref(im);
+		g_object_unref (G_OBJECT (im));
 
 	return retval;
 }
@@ -1781,7 +1781,7 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 						"width_pixels", 1,
 						"outline_stipple", stipple,
 						NULL);
-	gdk_bitmap_unref (stipple);
+	g_object_unref (G_OBJECT (stipple));
 
 	gnome_canvas_item_grab (priv->sel_rect, GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
 				NULL, event->time);
@@ -2436,7 +2436,7 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, int flags)
 {
 	Gil *gil;
 
-	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
+	gtk_widget_push_colormap (gdk_rgb_get_colormap ());
 	gil = GIL (gtk_type_new (GNOME_TYPE_ICON_LIST));
 	gtk_widget_pop_colormap ();
 

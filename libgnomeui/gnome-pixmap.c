@@ -138,8 +138,8 @@ gnome_pixmap_new_from_file_at_size (const gchar *filename, gint width, gint heig
 							     GDK_INTERP_BILINEAR);
 		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (retval), scaled);
-		gdk_pixbuf_unref (scaled);
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (G_OBJECT (scaled));
+		g_object_unref (G_OBJECT (pixbuf));
 	} else {
 		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
 	}
@@ -168,7 +168,7 @@ gnome_pixmap_new_from_xpm_d (const char **xpm_data)
 	if (pixbuf != NULL) {
 		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (retval), pixbuf);
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (G_OBJECT (pixbuf));
 	} else {
 		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
 	}
@@ -203,8 +203,8 @@ gnome_pixmap_new_from_xpm_d_at_size (const char **xpm_data, int width, int heigh
 							     GDK_INTERP_BILINEAR);
 		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (retval), scaled);
-		gdk_pixbuf_unref (scaled);
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (G_OBJECT (scaled));
+		g_object_unref (G_OBJECT (pixbuf));
 	} else {
 		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
 	}
@@ -265,8 +265,8 @@ gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap,
 							     height,
 							     GDK_INTERP_BILINEAR);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (gpixmap), scaled);
-		gdk_pixbuf_unref (scaled);
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (G_OBJECT (scaled));
+		g_object_unref (G_OBJECT (pixbuf));
 	} else {
 		gtk_image_set_from_file (GTK_IMAGE (gpixmap), NULL);
 	}
@@ -284,7 +284,7 @@ gnome_pixmap_load_xpm_d (GnomePixmap *gpixmap,
 	pixbuf = gdk_pixbuf_new_from_xpm_data (xpm_data);
 	if (pixbuf != NULL) {
 		gtk_image_set_from_pixbuf (GTK_IMAGE (gpixmap), pixbuf);
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (G_OBJECT (pixbuf));
 	} else {
 		gtk_image_set_from_file (GTK_IMAGE (gpixmap), NULL);
 	}
@@ -307,8 +307,8 @@ gnome_pixmap_load_xpm_d_at_size (GnomePixmap *gpixmap,
 							     height,
 							     GDK_INTERP_BILINEAR);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (gpixmap), scaled);
-		gdk_pixbuf_unref (scaled);
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (G_OBJECT (scaled));
+		g_object_unref (G_OBJECT (pixbuf));
 	} else {
 		gtk_image_set_from_file (GTK_IMAGE (gpixmap), NULL);
 	}

@@ -200,15 +200,15 @@ refresh_preview(GnomePixmapEntry *pentry)
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->_priv->preview_sw),
 						      pentry->_priv->preview);
 		if(!GTK_WIDGET_NO_WINDOW(pentry->_priv->preview)) {
-			gtk_signal_connect (GTK_OBJECT (pentry->_priv->preview), "drag_data_get",
-					    GTK_SIGNAL_FUNC (drag_data_get),pentry);
+			g_signal_connect (G_OBJECT (pentry->_priv->preview), "drag_data_get",
+					  G_CALLBACK (drag_data_get), pentry);
 			gtk_drag_source_set (pentry->_priv->preview,
 					     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 					     drop_types, 1,
 					     GDK_ACTION_COPY);
 		}
-		gtk_signal_connect (GTK_OBJECT (pentry->_priv->preview->parent), "drag_data_get",
-				    GTK_SIGNAL_FUNC (drag_data_get),pentry);
+		g_signal_connect (G_OBJECT (pentry->_priv->preview->parent), "drag_data_get",
+				  G_CALLBACK (drag_data_get), pentry);
 		gtk_drag_source_set (pentry->_priv->preview->parent,
 				     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 				     drop_types, 1,
@@ -216,7 +216,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 	}
 	g_free(pentry->_priv->last_preview);
 	pentry->_priv->last_preview = t;
-        gdk_pixbuf_unref(pixbuf);
+        g_object_unref (G_OBJECT (pixbuf));
 }
 
 static int change_timeout;
@@ -272,8 +272,8 @@ setup_preview(GtkWidget *widget)
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
-	fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
+	frame = g_object_get_data (G_OBJECT (widget), "frame");
+	fs = g_object_get_data (G_OBJECT (frame), "fs");
 
 	if((l = gtk_container_get_children(GTK_CONTAINER(frame))) != NULL) {
 		pp = l->data;
@@ -303,9 +303,9 @@ setup_preview(GtkWidget *widget)
 	}
 	scaled = gdk_pixbuf_scale_simple
 		(pixbuf, w, h, GDK_INTERP_BILINEAR);
-        gdk_pixbuf_unref (pixbuf);
+        g_object_unref (G_OBJECT (pixbuf));
 	pp = gtk_image_new_from_pixbuf (scaled);
-        gdk_pixbuf_unref (scaled);
+        g_object_unref (G_OBJECT (scaled));
 
 	gtk_widget_show(pp);
 
@@ -364,7 +364,12 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 
 	if(!fentry->fsw)
 		return;
+
 	fs = GTK_FILE_SELECTION(fentry->fsw);
+
+	/* we already got this */
+	if (g_object_get_data (G_OBJECT (fs->file_list), "frame") != NULL)
+		return;
 
 	hbox = fs->file_list;
 	do {
@@ -379,15 +384,15 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 	w = gtk_frame_new(_("Preview"));
 	gtk_widget_show(w);
 	gtk_box_pack_end(GTK_BOX(hbox),w,FALSE,FALSE,0);
-	gtk_widget_set_usize(w,110,110);
-	gtk_object_set_data(GTK_OBJECT(w),"fs",fs);
+	gtk_widget_set_size_request (w, 110, 110);
+	g_object_set_data (G_OBJECT (w), "fs", fs);
 
-	gtk_object_set_data(GTK_OBJECT(fs->file_list),"frame",w);
-	gtk_signal_connect(GTK_OBJECT(fs->file_list),"select_row",
-			   GTK_SIGNAL_FUNC(setup_preview),NULL);
-	gtk_object_set_data(GTK_OBJECT(fs->selection_entry),"frame",w);
-	gtk_signal_connect(GTK_OBJECT(fs->selection_entry),"changed",
-			   GTK_SIGNAL_FUNC(setup_preview),NULL);
+	g_object_set_data (G_OBJECT (fs->file_list), "frame", w);
+	g_signal_connect (G_OBJECT (fs->file_list), "select_row",
+			  G_CALLBACK (setup_preview), NULL);
+	g_object_set_data (G_OBJECT (fs->selection_entry), "frame", w);
+	g_signal_connect (G_OBJECT (fs->selection_entry), "changed",
+			  GTK_SIGNAL_FUNC (setup_preview), NULL);
 }
 
 static void
@@ -476,16 +481,16 @@ turn_on_previewbox(GnomePixmapEntry *pentry)
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, 1, GDK_ACTION_COPY);
-	gtk_signal_connect (GTK_OBJECT (pentry->_priv->preview_sw), "drag_data_received",
-			    GTK_SIGNAL_FUNC (drag_data_received),pentry);
+	g_signal_connect (G_OBJECT (pentry->_priv->preview_sw), "drag_data_received",
+			  G_CALLBACK (drag_data_received), pentry);
 	/*for some reason we can't do this*/
-	/*gtk_signal_connect (GTK_OBJECT (pentry->_priv->preview_sw), "drag_data_get",
-			    GTK_SIGNAL_FUNC (drag_data_get),pentry);*/
+	/*g_signal_connect (G_OBJECT (pentry->_priv->preview_sw), "drag_data_get",
+			    G_CALLBACK (drag_data_get), pentry);*/
 	gtk_box_pack_start (GTK_BOX (pentry), pentry->_priv->preview_sw, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(pentry->_priv->preview_sw),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_widget_set_usize(pentry->_priv->preview_sw,100,100);
+	gtk_widget_set_size_request (pentry->_priv->preview_sw, 100, 100);
 	gtk_widget_show (pentry->_priv->preview_sw);
 
 	pentry->_priv->preview = gtk_label_new(_("No Image"));
@@ -528,9 +533,8 @@ gnome_pixmap_entry_instance_init (GnomePixmapEntry *pentry)
 	g_free(p);
 
 	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(pentry));
-	gtk_signal_connect(GTK_OBJECT(w),"changed",
-			   GTK_SIGNAL_FUNC(entry_changed),
-			   pentry);
+	g_signal_connect (G_OBJECT (w), "changed",
+			  G_CALLBACK (entry_changed), pentry);
 
 	/*just in case there is a default that is an image*/
 	refresh_preview(pentry);
@@ -772,8 +776,8 @@ gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 	g_return_if_fail (preview_w>=0 && preview_h>=0);
 
 	if(pentry->_priv->preview_sw)
-		gtk_widget_set_usize(pentry->_priv->preview_sw,
-				     preview_w,preview_h);
+		gtk_widget_set_size_request (pentry->_priv->preview_sw,
+					     preview_w, preview_h);
 }
 
 /* Ensures that a pixmap entry is not in the waiting list for a preview update.  */

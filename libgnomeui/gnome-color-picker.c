@@ -454,7 +454,7 @@ gnome_color_picker_instance_init (GnomeColorPicker *cp)
 	gtk_container_add (GTK_CONTAINER (alignment), frame);
 	gtk_widget_show (frame);
 
-	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
+	gtk_widget_push_colormap (gdk_rgb_get_colormap ());
 
 	cp->_priv->drawing_area = gtk_drawing_area_new ();
 
@@ -515,7 +515,7 @@ gnome_color_picker_destroy (GtkObject *object)
 	cp = GNOME_COLOR_PICKER (object);
 
 	if (cp->_priv->gc != NULL)
-		gdk_gc_destroy (cp->_priv->gc);
+		g_object_unref (G_OBJECT (cp->_priv->gc));
 	cp->_priv->gc = NULL;
 
 	if (cp->_priv->cs_dialog != NULL)
@@ -536,7 +536,7 @@ gnome_color_picker_finalize (GObject *object)
 	cp = GNOME_COLOR_PICKER (object);
 
 	if (cp->_priv->pixbuf != NULL)
-		gdk_pixbuf_unref (cp->_priv->pixbuf);
+		g_object_unref (G_OBJECT (cp->_priv->pixbuf));
 	cp->_priv->pixbuf = NULL;
 
 	g_free (cp->_priv->title);

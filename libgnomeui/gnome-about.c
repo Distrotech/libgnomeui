@@ -1261,11 +1261,11 @@ gnome_about_finalize (GObject *object)
 	g_free (about->_priv->translator_credits);
 	
 	if (about->_priv->background_pixbuf)
-		gdk_pixbuf_unref (about->_priv->background_pixbuf);
+		g_object_unref (G_OBJECT (about->_priv->background_pixbuf));
 	if (about->_priv->rendered_background_pixbuf)
-		gdk_pixbuf_unref (about->_priv->rendered_background_pixbuf);
+		g_object_unref (G_OBJECT (about->_priv->rendered_background_pixbuf));
 	if (about->_priv->logo_pixbuf)
-		gdk_pixbuf_unref (about->_priv->logo_pixbuf);
+		g_object_unref (G_OBJECT (about->_priv->logo_pixbuf));
 
 	/* sanity: */
 	memset (about->_priv, 0xff, sizeof (GnomeAboutPrivate));

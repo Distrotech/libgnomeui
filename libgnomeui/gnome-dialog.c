@@ -376,7 +376,7 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
     gtk_window_set_position(GTK_WINDOW(dialog),GTK_WIN_POS_NONE);
 
     gdk_window_get_origin (GTK_WIDGET(parent)->window, &x, &y);
-    gdk_window_get_size   (GTK_WIDGET(parent)->window, &w, &h);
+    gdk_drawable_get_size   (GTK_WIDGET(parent)->window, &w, &h);
 
     /* The problem here is we don't know how big the dialog is.
        So "centered" isn't really true. We'll go with 
@@ -610,8 +610,8 @@ gnome_dialog_shutdown_run(GnomeDialog* dialog,
 
   if (runinfo->mainloop)
     {
-      g_main_quit(runinfo->mainloop);
-      g_main_destroy(runinfo->mainloop);
+      g_main_loop_quit (runinfo->mainloop);
+      g_main_loop_unref (runinfo->mainloop);
       runinfo->mainloop = NULL;
     }
 }
@@ -686,8 +686,8 @@ gnome_dialog_run_real(GnomeDialog* dialog, gboolean close_after)
   if ( ! GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog)) )
     gtk_widget_show(GTK_WIDGET(dialog));
 
-  ri.mainloop = g_main_new(FALSE);
-  g_main_run(ri.mainloop);
+  ri.mainloop = g_main_loop_new (NULL, FALSE);
+  g_main_loop_run (ri.mainloop);
 
   g_assert(ri.mainloop == NULL);
   

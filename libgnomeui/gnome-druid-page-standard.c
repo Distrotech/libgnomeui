@@ -487,11 +487,11 @@ gnome_druid_page_standard_destroy (GtkObject *object)
 	/* remember, destroy can be run multiple times! */
 
 	if (druid_page_standard->logo != NULL)
-		gdk_pixbuf_unref (druid_page_standard->logo);
+		g_object_unref (G_OBJECT (druid_page_standard->logo));
 	druid_page_standard->logo = NULL;
 
 	if (druid_page_standard->top_watermark != NULL)
-		gdk_pixbuf_unref (druid_page_standard->top_watermark);
+		g_object_unref (G_OBJECT (druid_page_standard->top_watermark));
 	druid_page_standard->top_watermark = NULL;
 
 	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
@@ -596,9 +596,9 @@ gnome_druid_page_standard_set_logo (GnomeDruidPageStandard *druid_page_standard,
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 
 	if (logo_image != NULL)
-		gdk_pixbuf_ref (logo_image);
+		g_object_ref (G_OBJECT (logo_image));
 	if (druid_page_standard->logo)
-		gdk_pixbuf_unref (druid_page_standard->logo);
+		g_object_unref (G_OBJECT (druid_page_standard->logo));
 
 	druid_page_standard->logo = logo_image;
 	gtk_image_set_from_pixbuf (GTK_IMAGE (druid_page_standard->_priv->logo), logo_image);
@@ -623,9 +623,9 @@ gnome_druid_page_standard_set_top_watermark (GnomeDruidPageStandard *druid_page_
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 
 	if (top_watermark_image != NULL)
-		gdk_pixbuf_ref (top_watermark_image);
+		g_object_ref (G_OBJECT (top_watermark_image));
 	if (druid_page_standard->top_watermark)
-		gdk_pixbuf_unref (druid_page_standard->top_watermark);
+		g_object_unref (G_OBJECT (druid_page_standard->top_watermark));
 
 	druid_page_standard->top_watermark = top_watermark_image;
 
