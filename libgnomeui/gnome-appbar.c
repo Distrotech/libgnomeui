@@ -600,7 +600,7 @@ gnome_appbar_constructor (GType                  type,
    */
   if (has_progress &&
       /* FIXME: this should listen to changes! */
-      ! gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-meter-on-right"))
+      ! gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar_meter_on_right"))
     gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
 
   if ( has_status ) {
@@ -643,7 +643,7 @@ gnome_appbar_constructor (GType                  type,
 
   if (has_progress &&
       /* FIXME: this should listen to changes! */
-      gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-meter-on-right"))
+      gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar_meter_on_right"))
     gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
 
   if (ab->_priv->status) gtk_widget_show (ab->_priv->status);
