@@ -29,15 +29,12 @@ BEGIN_GNOME_DECLS
 #define GNOME_PROPERTY_BOX_CLASS(Klass) GTK_CHECK_CLASS_CAST (Klass, gnome_property_box_get_type (), GnomePropertyBoxClass)
 #define GNOME_IS_PROPERTY_BOX(Obj)      GTK_CHECK_TYPE (Obj, gnome_property_box_get_type ())
 
+/*the flag used on the notebook pages to see if a change happened on a certain page or not*/
+#define GNOME_PROPERTY_BOX_DIRTY	"gnome_property_box_dirty"
+
 
 typedef struct _GnomePropertyBox      GnomePropertyBox;
 typedef struct _GnomePropertyBoxClass GnomePropertyBoxClass;
-typedef struct _GnomePropertyBoxItem  GnomePropertyBoxItem;
-
-struct _GnomePropertyBoxItem
-{
-	gboolean dirty;
-};
 
 struct _GnomePropertyBox
 {
@@ -48,16 +45,13 @@ struct _GnomePropertyBox
 	GtkWidget *apply_button;    /* Apply button.  */
 	GtkWidget *cancel_button;   /* Cancel/Close button.  */
 	GtkWidget *help_button;	    /* Help button.  */
-
-	GList *items;		    /* List of GnomePropertyBoxItem*;
-				       one item per page.  */
 };
 
 struct _GnomePropertyBoxClass
 {
 	GnomeDialogClass parent_class;
 
-	void (* apply) (GnomePropertyBox *propertybox, gint button_num);
+	void (* apply) (GnomePropertyBox *propertybox, gint page_num);
 	void (* help)  (GnomePropertyBox *propertybox, gint page_num);
 };
 

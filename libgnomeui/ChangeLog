@@ -1,3 +1,10 @@
+Sat Jul 18 20:25:28 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-propertybox.[ch]: cleaned up the way the notebook
+	  page "dirty" flags are handeled, now one should just use
+	  gtk_notebook functions on the ->notebook item in the
+	  struct
+
 Sat Jul 18 20:26:40 1998  John Ellis  <johne@bellatlantic.net>
 
         * gnome-dentry-edit.c (gnome_dentry_edit_load_file): changed

@@ -174,8 +174,6 @@ gnome_property_box_init (GnomePropertyBox *property_box)
 	button_list = button_list->next;
 	property_box->help_button = GTK_WIDGET(button_list->data);
 
-	property_box->items = NULL;
-
 	gtk_widget_set_sensitive (property_box->ok_button, FALSE);
 	gtk_widget_set_sensitive (property_box->apply_button, FALSE);
 
@@ -194,17 +192,11 @@ static void
 gnome_property_box_destroy (GtkObject *object)
 {
 	GnomePropertyBox *property_box;
-	GList *list;
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_PROPERTY_BOX (object));
 
 	property_box = GNOME_PROPERTY_BOX (object);
-
-	for (list = property_box->items; list; list = list->next) {
-		g_free ((GnomePropertyBoxItem *) list->data);
-	}
-	g_list_free (property_box->items);
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
@@ -215,78 +207,75 @@ gnome_property_box_new (void)
 	return gtk_type_new (gnome_property_box_get_type ());
 }
 
-static void dialog_clicked_cb(GnomeDialog * dialog, gint button,
-			      gpointer data)
+static void
+dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 {
-  g_return_if_fail(dialog != NULL);
-  g_return_if_fail(GNOME_IS_PROPERTY_BOX(dialog));
+	g_return_if_fail(dialog != NULL);
+	g_return_if_fail(GNOME_IS_PROPERTY_BOX(dialog));
 
-  switch(button) {
-  case OK_BUTTON:
-    apply_and_close(GNOME_PROPERTY_BOX(dialog));
-    break;
-  case APPLY_BUTTON:
-    global_apply(GNOME_PROPERTY_BOX(dialog));
-    break;
-  case CLOSE_BUTTON:
-    just_close(GNOME_PROPERTY_BOX(dialog));
-    break;
-  case HELP_BUTTON:
-    help(GNOME_PROPERTY_BOX(dialog));
-    break;
-  default:
-    g_assert_not_reached();
-  }
+	switch(button) {
+	case OK_BUTTON:
+		apply_and_close(GNOME_PROPERTY_BOX(dialog));
+		break;
+	case APPLY_BUTTON:
+		global_apply(GNOME_PROPERTY_BOX(dialog));
+		break;
+	case CLOSE_BUTTON:
+		just_close(GNOME_PROPERTY_BOX(dialog));
+		break;
+	case HELP_BUTTON:
+		help(GNOME_PROPERTY_BOX(dialog));
+		break;
+	default:
+		g_assert_not_reached();
+	}
 }
 
 
 static void
-set_sensitive (GnomePropertyBox *property_box, GnomePropertyBoxItem *item)
+set_sensitive (GnomePropertyBox *property_box, gint dirty)
 {
-	gtk_widget_set_sensitive (property_box->ok_button, item->dirty);
-	gtk_widget_set_sensitive (property_box->apply_button, item->dirty);
+	gtk_widget_set_sensitive (property_box->ok_button, dirty);
+	gtk_widget_set_sensitive (property_box->apply_button, dirty);
 }
 
 void
 gnome_property_box_changed (GnomePropertyBox *property_box)
 {
-	GList *list;
-	GnomePropertyBoxItem *item;
-	gint page;
+	GtkWidget *page;
 
-	page =
-	  gtk_notebook_current_page (GTK_NOTEBOOK (property_box->notebook));
-	g_assert (page != -1);
+	page = GTK_NOTEBOOK (property_box->notebook)->cur_page;
+	g_assert (page != NULL);
+	
+	gtk_object_set_data(GTK_OBJECT(page),
+			    GNOME_PROPERTY_BOX_DIRTY,
+			    GINT_TO_POINTER(1));
 
-	list = g_list_nth (property_box->items, page);
-	g_assert (list);
-
-	item = (GnomePropertyBoxItem *) list->data;
-	item->dirty = TRUE;
-
-	set_sensitive (property_box, item);
+	set_sensitive (property_box, 1);
 }
 
 static void
 global_apply (GnomePropertyBox *property_box)
 {
 	GList *list;
-	GnomePropertyBoxItem *item = NULL; /* fixes a warning */
-	gint n = 0;
+	gint n;
 
-	g_return_if_fail(property_box->items != NULL);
-
-	for (list = property_box->items; list != NULL; list = list->next) {
-		item = (GnomePropertyBoxItem *) list->data;
+	g_return_if_fail(GTK_NOTEBOOK(property_box->notebook)->children != NULL);
+	
+	for (list = GTK_NOTEBOOK(property_box->notebook)->children, n=0;
+	     list != NULL;
+	     list = g_list_next(list), n++) {
 		/* FIXME: there should be a way to report an error
 		   during Apply.  That way we could prevent closing
 		   the window if there were a problem.  */
-		if (item->dirty) {
+		if (gtk_object_get_data(GTK_OBJECT(list->data),
+					GNOME_PROPERTY_BOX_DIRTY)) {
 			gtk_signal_emit (GTK_OBJECT (property_box),
 					 property_box_signals[APPLY], n);
-			item->dirty = FALSE;
+			gtk_object_set_data(GTK_OBJECT(list->data),
+					    GNOME_PROPERTY_BOX_DIRTY,
+					    GINT_TO_POINTER(0));
 		}
-		++n;
 	}
 
 	/* Emit an apply signal with a button of -1.  This means we
@@ -295,7 +284,7 @@ global_apply (GnomePropertyBox *property_box)
 			 property_box_signals[APPLY], (gint) -1);
 
 	/* Doesn't matter which item we use. */
-	set_sensitive (property_box, item);
+	set_sensitive (property_box, 0);
 }
 
 static void
@@ -312,7 +301,7 @@ help (GnomePropertyBox *property_box)
 static void
 just_close (GnomePropertyBox *property_box)
 {
-  gnome_dialog_close(GNOME_DIALOG(property_box));
+	gnome_dialog_close(GNOME_DIALOG(property_box));
 }
 
 static void
@@ -327,16 +316,14 @@ gnome_property_box_append_page (GnomePropertyBox *property_box,
 				GtkWidget *child,
 				GtkWidget *tab_label)
 {
-	GnomePropertyBoxItem *item;
+	g_warning("Use of gnome_property_box_append_page is depreciated, "
+		  "please use gtk_notebook_append_page instead!");
 
 	gtk_notebook_append_page (GTK_NOTEBOOK (property_box->notebook),
 				  child, tab_label);
 
-	item = g_new (GnomePropertyBoxItem, 1);
-	item->dirty = FALSE;
-	property_box->items = g_list_append (property_box->items, item);
-
-	return g_list_length (property_box->items) - 1;
+	return g_list_length (
+		GTK_NOTEBOOK(property_box->notebook)->children) - 1;
 }
 
 
