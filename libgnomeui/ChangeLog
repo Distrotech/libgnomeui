@@ -1,3 +1,14 @@
+1998-09-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-text.c (gnome_canvas_text_class_init): Added two
+	new object arguments, text_width and text_height.  These are used
+	to query the rendered size of the text.
+	(gnome_canvas_text_get_arg): Process the new arguments.
+
+	* gnome-animator.c: Include only the necessary files.
+
+	* gnome-winhints.h: Include only the necessary files.
+
 1998-09-29  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-mdi-session.[ch]: New files.

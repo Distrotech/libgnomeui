@@ -21,8 +21,8 @@
 #ifndef GNOME_WINHINTS_H
 #define GNOME_WINHINTS_H
 
-#include <gnome.h>
-#include <gtk/gtk.h>
+#include <libgnome/gnome-defs.h>
+#include <gtk/gtkwidget.h>
 
 BEGIN_GNOME_DECLS
 

@@ -47,6 +47,8 @@ BEGIN_GNOME_DECLS
  * clip			boolean			RW		Use clipping rectangle?
  * x_offset		double			RW		Horizontal offset distance from anchor position
  * y_offset		double			RW		Vertical offset distance from anchor position
+ * text_width		double			R		Used to query the width of the rendered text
+ * text_height		double			R		Used to query the rendered height of the text
  */
 
 #define GNOME_TYPE_CANVAS_TEXT            (gnome_canvas_text_get_type ())

@@ -35,7 +35,9 @@ enum {
 	ARG_X_OFFSET,
 	ARG_Y_OFFSET,
 	ARG_FILL_COLOR,
-	ARG_FILL_COLOR_GDK
+	ARG_FILL_COLOR_GDK,
+	ARG_TEXT_WIDTH,
+	ARG_TEXT_HEIGHT
 };
 
 
@@ -110,6 +112,8 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasText::y_offset", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y_OFFSET);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasText::text_width", GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_WIDTH);
+	gtk_object_add_arg_type ("GnomeCanvasText::text_height", GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_HEIGHT);
 
 	object_class->destroy = gnome_canvas_text_destroy;
 	object_class->set_arg = gnome_canvas_text_set_arg;
@@ -505,6 +509,14 @@ gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		color->pixel = text->pixel;
 		gdk_color_context_query_color (text->item.canvas->cc, color);
 		GTK_VALUE_BOXED (*arg) = color;
+		break;
+
+	case ARG_TEXT_WIDTH:
+		GTK_VALUE_DOUBLE (*arg) = text->max_width / text->item.canvas->pixels_per_unit;
+		break;
+
+	case ARG_TEXT_HEIGHT:
+		GTK_VALUE_DOUBLE (*arg) = text->height / text->item.canvas->pixels_per_unit;
 		break;
 
 	default:

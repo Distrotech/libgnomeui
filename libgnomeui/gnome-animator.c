@@ -28,7 +28,8 @@
    middle of the animations causes some ugly flickering.  */
 
 #include <config.h>
-#include <gnome.h>
+#include <gtk/gtkmain.h>
+#include <gtk/gtksignal.h>
 
 #include "gnome-animator.h"
 
