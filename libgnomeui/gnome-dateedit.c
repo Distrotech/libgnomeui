@@ -31,11 +31,11 @@
 #include <config.h>
 #include "gnome-macros.h"
 
+#include <time.h>
 #include <string.h>
 #include <stdlib.h> /* atoi */
 #include <ctype.h> /* isdigit */
 #include <stdio.h>
-#include <time.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
@@ -95,6 +95,9 @@ static void gnome_date_edit_get_property    (GObject            *object,
 					  GValue             *value,
 					  GParamSpec         *pspec);
 
+/* to get around warnings */
+const char *strftime_date_format = "%x";
+
 /**
  * gnome_date_edit_get_type:
  *
@@ -115,13 +118,25 @@ hide_popup (GnomeDateEdit *gde)
 static void
 day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 {
-	char buffer [40];
+	char buffer [256];
 	guint year, month, day;
+	struct tm mtm = {0};
 
 	gtk_calendar_get_date (calendar, &year, &month, &day);
 
-	/* FIXME: internationalize this - strftime()*/
-	g_snprintf (buffer, sizeof(buffer), "%d/%d/%d", month + 1, day, year);
+	mtm.tm_mday = day;
+	mtm.tm_mon = month - 1;
+	if (year > 1900)
+		mtm.tm_year = year - 1900;
+	else
+		mtm.tm_year = year;
+
+	if (strftime (buffer, sizeof (buffer),
+		      strftime_date_format, &mtm) == 0)
+		strcpy (buffer, "???");
+
+	/* FIXME: what about set time */
+
 	gtk_entry_set_text (GTK_ENTRY (gde->_priv->date_entry), buffer);
 	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
 }
@@ -216,11 +231,30 @@ position_popup (GnomeDateEdit *gde)
 static void
 select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 {
-	struct tm mtm = {0};
+	const char *str;
+	GDate *date;
 
+	str = gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry));
+
+	date = g_date_new ();
+	g_date_set_parse (date, str);
+
+	gtk_calendar_select_month (GTK_CALENDAR (gde->_priv->calendar),
+				   g_date_get_month (date),
+				   g_date_get_year (date));
+        gtk_calendar_select_day (GTK_CALENDAR (gde->_priv->calendar),
+				 g_date_get_day (date));
+
+	g_date_free (date);
+
+	/* FIXME: the preceeding needs further checking to see if it's correct,
+	 * the following is so utterly wrong that it doesn't even deserve to be
+	 * just commented out, but I didn't want to cut it right now */
+#if 0
+	struct tm mtm = {0};
         /* This code is pretty much just copied from gtk_date_edit_get_date */
       	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry)), "%d/%d/%d",
-		&mtm.tm_mon, &mtm.tm_mday, &mtm.tm_year); /* FIXME: internationalize this - strptime()*/
+		&mtm.tm_mon, &mtm.tm_mday, &mtm.tm_year);
 
 	mtm.tm_mon = CLAMP (mtm.tm_mon, 1, 12);
 	mtm.tm_mday = CLAMP (mtm.tm_mday, 1, 31);
@@ -235,13 +269,13 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 
 	gtk_calendar_select_month (GTK_CALENDAR (gde->_priv->calendar), mtm.tm_mon, 1900 + mtm.tm_year);
         gtk_calendar_select_day (GTK_CALENDAR (gde->_priv->calendar), mtm.tm_mday);
+#endif
 
         position_popup (gde);
        
 	gtk_widget_show (gde->_priv->cal_popup);
 	gtk_widget_grab_focus (gde->_priv->cal_popup);
 	gtk_grab_add (gde->_priv->cal_popup);
-
 
 	gdk_pointer_grab (gde->_priv->cal_popup->window, TRUE,
 			  (GDK_BUTTON_PRESS_MASK
@@ -263,9 +297,12 @@ set_time (GtkWidget *widget, hour_info_t *hit)
 }
 
 static void
-free_resources (GtkWidget *widget, hour_info_t *hit)
+free_resources (gpointer data)
 {
+	hour_info_t *hit = data;
+
 	g_free (hit->hour);
+	hit->hour = NULL;
 	g_free (hit);
 }
 
@@ -293,23 +330,30 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 
 		mtm->tm_hour = i;
 		mtm->tm_min  = 0;
-		hit = g_new (hour_info_t, 1);
 
-		if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR)
-			strftime (buffer, sizeof (buffer), "%H:00", mtm);
-		else
-			strftime (buffer, sizeof (buffer), "%I:00 %p ", mtm);
-		hit->hour = g_strdup (buffer);
-		hit->gde  = gde;
-
+		if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR) {
+			if (strftime (buffer, sizeof (buffer),
+				      "%H:00", mtm) == 0)
+				strcpy (buffer, "???");
+		} else {
+			if (strftime (buffer, sizeof (buffer),
+				      "%I:00 %p ", mtm) == 0)
+				strcpy (buffer, "???");
+		}
 		item = gtk_menu_item_new_with_label (buffer);
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 #if 0
-		gtk_signal_connect (GTK_OBJECT (item), "activate",
-				    GTK_SIGNAL_FUNC (set_time), hit);
+		hit = g_new (hour_info_t, 1);
+		hit->hour = g_strdup (buffer);
+		hit->gde  = gde;
+		gtk_signal_connect_full (GTK_OBJECT (item), "activate",
+					 GTK_SIGNAL_FUNC (set_time),
+					 NULL,
+					 hit,
+					 free_resources,
+					 FALSE /*object*/,
+					 FALSE /*after*/);
 #endif
-		gtk_signal_connect (GTK_OBJECT (item), "destroy",
-				    GTK_SIGNAL_FUNC (free_resources), hit);
 		gtk_widget_show (item);
 
 		submenu = gtk_menu_new ();
@@ -318,20 +362,31 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 			GtkWidget *mins;
 
 			mtm->tm_min = j;
-			hit = g_new (hour_info_t, 1);
-			if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR)
-				strftime (buffer, sizeof (buffer), "%H:%M", mtm);
-			else
-				strftime (buffer, sizeof (buffer), "%I:%M %p", mtm);
-			hit->hour = g_strdup (buffer);
-			hit->gde  = gde;
+
+			if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR) {
+				if (strftime (buffer, sizeof (buffer),
+					      "%H:%M", mtm) == 0)
+					strcpy (buffer, "???");
+			} else {
+				if (strftime (buffer, sizeof (buffer),
+					      "%I:%M %p", mtm) == 0)
+					strcpy (buffer, "???");
+			}
 
 			mins = gtk_menu_item_new_with_label (buffer);
 			gtk_menu_shell_append (GTK_MENU_SHELL (submenu), mins);
-			gtk_signal_connect (GTK_OBJECT (mins), "activate",
-					    GTK_SIGNAL_FUNC (set_time), hit);
-			gtk_signal_connect (GTK_OBJECT (item), "destroy",
-					    GTK_SIGNAL_FUNC (free_resources), hit);
+
+			hit = g_new (hour_info_t, 1);
+			hit->hour = g_strdup (buffer);
+			hit->gde  = gde;
+			gtk_signal_connect_full (GTK_OBJECT (mins), "activate",
+						 GTK_SIGNAL_FUNC (set_time),
+						 NULL,
+						 hit,
+						 free_resources,
+						 FALSE /*object*/,
+						 FALSE /*after*/);
+
 			gtk_widget_show (mins);
 		}
 	}
@@ -578,17 +633,18 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	mytm = localtime (&the_time);
 
 	/* Set the date */
-	g_snprintf (buffer, sizeof(buffer), "%d/%d/%d",
-		    mytm->tm_mon + 1,
-		    mytm->tm_mday,
-		    1900 + mytm->tm_year);
+	if (strftime (buffer, sizeof (buffer), strftime_date_format, mytm) == 0)
+		strcpy (buffer, "???");
 	gtk_entry_set_text (GTK_ENTRY (gde->_priv->date_entry), buffer);
 
 	/* Set the time */
-	if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR)
-		strftime (buffer, sizeof (buffer), "%H:%M", mytm);
-	else
-		strftime (buffer, sizeof (buffer), "%I:%M %p", mytm);
+	if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR) {
+		if (strftime (buffer, sizeof (buffer), "%H:%M", mytm) == 0)
+			strcpy (buffer, "???");
+	} else {
+		if (strftime (buffer, sizeof (buffer), "%I:%M %p", mytm) == 0)
+			strcpy (buffer, "???");
+	}
 	gtk_entry_set_text (GTK_ENTRY (gde->_priv->time_entry), buffer);
 }
 
@@ -769,14 +825,28 @@ time_t
 gnome_date_edit_get_time (GnomeDateEdit *gde)
 {
 	struct tm tm = {0};
-	char *str, *flags = NULL;
+	const char *str;
+	GDate *date;
 
 	/* Assert, because we're just hosed if it's NULL */
 	g_assert(gde != NULL);
 	g_assert(GNOME_IS_DATE_EDIT(gde));
 	
+	str = gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry));
+
+	date = g_date_new ();
+	g_date_set_parse (date, str);
+
+	g_date_to_struct_tm (date, &tm);
+
+	g_date_free (date);
+
+	/* FIXME: the preceeding needs further checking to see if it's correct,
+	 * the following is so utterly wrong that it doesn't even deserve to be
+	 * just commented out, but I didn't want to cut it right now */
+#if 0
 	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry)), "%d/%d/%d",
-		&tm.tm_mon, &tm.tm_mday, &tm.tm_year); /* FIXME: internationalize this - strptime()*/
+		&tm.tm_mon, &tm.tm_mday, &tm.tm_year);
 
 	tm.tm_mon = CLAMP (tm.tm_mon, 1, 12);
 	tm.tm_mday = CLAMP (tm.tm_mday, 1, 31);
@@ -789,11 +859,15 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 	if (tm.tm_year >= 1900)
 		tm.tm_year -= 1900;
 
+#endif
+
 	if (gde->_priv->flags & GNOME_DATE_EDIT_SHOW_TIME) {
 		char *tokp, *temp;
+		char *string;
+		char *flags = NULL;
 
-		str = g_strdup (gtk_entry_get_text (GTK_ENTRY (gde->_priv->time_entry)));
-		temp = strtok_r (str, ": ", &tokp);
+		string = g_strdup (gtk_entry_get_text (GTK_ENTRY (gde->_priv->time_entry)));
+		temp = strtok_r (string, ": ", &tokp);
 		if (temp) {
 			tm.tm_hour = atoi (temp);
 			temp = strtok_r (NULL, ": ", &tokp);
@@ -810,13 +884,25 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 			}
 		}
 
-		if (flags && (strcasecmp (flags, "PM") == 0)){
-			if (tm.tm_hour < 12)
-				tm.tm_hour += 12;
+		if (flags != NULL) {
+			char buf[256] = "";
+			struct tm pmtm = {0};
+
+			/* Get locale specific "PM", note that it
+			 * may not exist */
+			pmtm.tm_hour = 17; /* around tea time is always PM */
+			if (strftime (buf, sizeof (buf), "%p", &pmtm) == 0)
+				strcpy (buf, "");
+
+			if (g_strcasecmp (flags, buf) == 0 &&
+			    tm.tm_hour < 12)
+					tm.tm_hour += 12;
 		}
-		g_free (str);
+
+		g_free (string);
 	}
 
+	/* FIXME: Eeeeeeeeek! */
 	tm.tm_isdst = -1;
 
 	return mktime (&tm);

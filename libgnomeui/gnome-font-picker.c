@@ -100,9 +100,8 @@ static void gnome_font_picker_dialog_destroy(GtkWidget *widget,
 /* Auxiliary functions */
 static GtkWidget *gnome_font_picker_create_inside(GnomeFontPicker *gfs);
 
-static void gnome_font_picker_font_extract_attr(gchar *font_name,
-						gchar *attr,
-						gint i);
+static char * gnome_font_picker_font_extract_attr(const gchar *font_name,
+						  gint i);
 static void gnome_font_picker_font_set_attr(gchar **font_name,
                                               const gchar *attr,
                                               gint i);
@@ -878,25 +877,30 @@ GtkWidget *gnome_font_picker_create_inside(GnomeFontPicker *gfp)
         
 } /* gnome_font_picker_create_inside */
 
-static void gnome_font_picker_font_extract_attr(gchar *font_name,
-						gchar *attr,
-						gint i)
+static char *
+gnome_font_picker_font_extract_attr (const gchar *font_name, gint i)
 {
-    gchar *pTmp;
+	const char *pTmp;
+	char *cstr;
+	GString *str = g_string_new (NULL);
 
-    /* Search paramether */
-    for (pTmp=font_name; *pTmp && i > 0; i--,pTmp++)
-        pTmp=(gchar *)strchr(pTmp,'-');
+	/* Search paramether */
+	for (pTmp = font_name; *pTmp && i > 0; i--, pTmp++)
+		pTmp = (gchar *)strchr (pTmp, '-');
 
-    if (*pTmp!=0) {
-        while (*pTmp!='-' && *pTmp!=0) {
-            *attr=*pTmp;
-            attr++; pTmp++;
-        }
-        *attr=0;
-    }
-    else strcpy(attr, "Unknown");
+	if (*pTmp != '\0') {
+		while (*pTmp != '-' && *pTmp != '\0') {
+			g_string_append_c (str, *pTmp);
+			pTmp++;
+		}
+	} else {
+		/* note: do not use strncpy, it sucks */
+		g_string_assign (str, _("Unknown"));
+	}
 
+	cstr = str->str;
+	g_string_free (str, FALSE);
+	return cstr;
 } /* gnome_font_picker_font_extract_attr */
 
 static void gnome_font_picker_font_set_attr(gchar **font_name,
@@ -966,25 +970,32 @@ static void gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
 
 static void gnome_font_picker_update_font_info(GnomeFontPicker *gfp)
 {
-    gchar *pTmp;
+	gchar *attr;
+	const char *font_name;
 
-    pTmp = g_strdup(gfp->_priv->font_name);
+	font_name = gfp->_priv->font_name;
 
-    /* Extract font name */
-    gnome_font_picker_font_extract_attr(gfp->_priv->font_name,pTmp,2);
-    *pTmp=toupper(*pTmp);
-    gtk_label_set_text(GTK_LABEL(gfp->font_label),pTmp);
+	/* Extract font name */
+	attr = gnome_font_picker_font_extract_attr (font_name, 2);
 
-    /* Extract font size */
-    if (gfp->_priv->show_size)
-    {
-        gnome_font_picker_font_extract_attr(gfp->_priv->font_name,pTmp,7);
-        gtk_label_set_text(GTK_LABEL(gfp->size_label),pTmp);
-    }
+	/* Locale safe toupper */
+	if (*attr >= 'a' && *attr <= 'z')
+		*attr += 'A' - 'a';
 
-    if (gfp->_priv->use_font_in_label)
-        gnome_font_picker_label_use_font_in_label(gfp);
-        
-    g_free(pTmp);
-    
+	gtk_label_set_text (GTK_LABEL (gfp->font_label), attr);
+
+	g_free (attr);
+
+	/* Extract font size */
+	if (gfp->_priv->show_size) {
+		attr = gnome_font_picker_font_extract_attr (font_name, 7);
+
+		gtk_label_set_text (GTK_LABEL (gfp->size_label), attr);
+
+		g_free (attr);
+	}
+
+	if (gfp->_priv->use_font_in_label)
+		gnome_font_picker_label_use_font_in_label (gfp);
+
 } /* gnome_font_picker_update_font_info */

@@ -67,7 +67,7 @@ enum {
     PROP_0,
 
     /* Construction properties */
-    PROP_IS_FILE_ENTRY,
+    PROP_IS_FILE_ENTRY
 };
 
 GType
@@ -243,11 +243,18 @@ static void
 gnome_entry_finalize (GObject *object)
 {
     GnomeEntry *gentry;
+    CORBA_Environment ev;
 
     g_return_if_fail (object != NULL);
     g_return_if_fail (GNOME_IS_ENTRY (object));
 
     gentry = GNOME_ENTRY (object);
+
+    if (gentry->_priv->pbag != CORBA_OBJECT_NIL) {
+	    CORBA_exception_init (&ev);
+	    Bonobo_Unknown_unref (gentry->_priv->pbag, &ev);
+	    CORBA_exception_free (&ev);
+    }
 
     g_free (gentry->_priv);
     gentry->_priv = NULL;

@@ -1,3 +1,15 @@
+Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
+
+	* gnome-dateedit.[ch]: Some cleanup, and make the time
+	  reading/writing code be i18n correct (to a degree at least),
+	  also fix possible bad strftime use.
+
+	* gnome-entry.c: no comma after last enum element and unref
+	  the property bag in finalize
+
+	* gnome-font-picker.c: fix a possible crash and cleanup a bit of
+	  code
+
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
 	* gnome-geometry.[ch]: Moved to libgnome1compat/libgnomeui.
