@@ -1,0 +1,1388 @@
+# Thai translation for libgnomeui.
+# Copyright (C) 2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the libgnomeui package.
+# Paisa Seeluangsawat <paisa@users.sf.net>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-27 04:21+0100\n"
+"PO-Revision-Date: 2004-02-28 01:00-0600\n"
+"Last-Translator: Paisa Seeluangsawat <paisa@users.sf.net>\n"
+"Language-Team: Thai <L10n@opentle.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "รายการลูกที่ 1"
+
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "ข้อแนะนำสำหรับรายการที่ 1"
+
+#: demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "รายการลูกที่ 2"
+
+#: demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "ข้อแนะนำสำหรับรายการที่ 2"
+
+#: libgnomeui/gnome-about.c:198
+msgid "Credits"
+msgstr "เครดิต"
+
+#: libgnomeui/gnome-about.c:230
+msgid "Written by"
+msgstr "เขียนโดย"
+
+#: libgnomeui/gnome-about.c:245
+msgid "Documented by"
+msgstr "เอกสารโดย"
+
+#: libgnomeui/gnome-about.c:260
+msgid "Translated by"
+msgstr "แปลโดย"
+
+#: libgnomeui/gnome-about.c:323
+msgid "C_redits"
+msgstr "เ_ครดิต"
+
+#: libgnomeui/gnome-about.c:378
+msgid "Program name"
+msgstr "ชื่อโปรแกรม"
+
+#: libgnomeui/gnome-about.c:379
+msgid "The name of the program"
+msgstr "ชื่อของโปรแกรม"
+
+#: libgnomeui/gnome-about.c:386
+msgid "Program version"
+msgstr "รุ่นโปรแกรม"
+
+#: libgnomeui/gnome-about.c:387
+msgid "The version of the program"
+msgstr "รุ่นของโปรแกรม"
+
+#: libgnomeui/gnome-about.c:393
+msgid "Copyright string"
+msgstr "ข้อความลิขสิทธิ์"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright information for the program"
+msgstr "ข้อความเกี่ยวกับลิขสิทธิ์ของโปรแกรม"
+
+#: libgnomeui/gnome-about.c:401
+msgid "Comments string"
+msgstr "ข้อความหมายเหตุ"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments about the program"
+msgstr "ข้อความหมายเหตุเกี่ยวกับโปรแกรม"
+
+#: libgnomeui/gnome-about.c:408
+msgid "Authors"
+msgstr "ผู้เขียน"
+
+#: libgnomeui/gnome-about.c:409
+msgid "List of authors of the programs"
+msgstr "รายชื่อผู้เขียนโปรแกรมนี้"
+
+#: libgnomeui/gnome-about.c:411
+msgid "Author entry"
+msgstr "ผู้เขียนคนหนึ่ง"
+
+#: libgnomeui/gnome-about.c:412
+msgid "A single author entry"
+msgstr "ผู้เขียนคนหนึ่ง"
+
+#: libgnomeui/gnome-about.c:419
+msgid "Documenters"
+msgstr "ผู้เขียนเอกสาร"
+
+#: libgnomeui/gnome-about.c:420
+msgid "List of people documenting the program"
+msgstr "รายชื่อผู้เขียนเอกสารสำหรับโปรแกรมนี้"
+
+#: libgnomeui/gnome-about.c:422
+msgid "Documenter entry"
+msgstr "ผู้เขียนเอกสารคนหนึ่ง"
+
+#: libgnomeui/gnome-about.c:423
+msgid "A single documenter entry"
+msgstr "ผู้เขียนเอกสารคนหนึ่ง"
+
+#: libgnomeui/gnome-about.c:431
+msgid "Translator credits"
+msgstr "ผู้แปล"
+
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "เครดิตสำหรับผู้แปล ควรตั้งให้เป็นข้อความที่แปลได้"
+
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "โลโก"
+
+#: libgnomeui/gnome-about.c:440
+msgid "A logo for the about box"
+msgstr "โลโกสำหรับหน้าต่างเกี่ยวกับ"
+
+#: libgnomeui/gnome-about.c:519
+#, c-format
+msgid "About %s"
+msgstr "เกี่ยวกับ %s"
+
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "แ_ฟ้ม"
+
+#: libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "แ_ฟ้ม/"
+
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "แ_ก้ไข"
+
+#: libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "แ_ก้ไข/"
+
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "มุ_มมอง"
+
+#: libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "มุ_มมอง/"
+
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "_ตั้งค่า"
+
+#: libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "_ตั้งค่า/"
+
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "ใ_หม่"
+
+#: libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "ใ_หม่/"
+
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "_หลายแฟ้ม"
+
+#: libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "_หลายแฟ้ม/"
+
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "_หน้าต่าง"
+
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "เ_กม"
+
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "_วิธีใช้"
+
+#: libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "_หน้าต่าง/"
+
+#. Open
+#: libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "_เปิด..."
+
+#: libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "เปิดแฟ้ม"
+
+#. Save
+#: libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "_บันทึก"
+
+#: libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "บันทึกแฟ้มปัจจุบัน"
+
+#. Save As
+#: libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "บันทึกเป็_น..."
+
+#: libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "บันทึกแฟ้มปัจจุบันลงในชื่อใหม่"
+
+#. Revert
+#: libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "คืน_กลับ"
+
+#: libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "กลับไปใช้ข้อมูลที่บันทึกไว้"
+
+#. Print
+#: libgnomeui/gnome-app-helper.c:131
+msgid "_Print..."
+msgstr "_พิมพ์..."
+
+#: libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "พิมพ์แฟ้มปัจจุบัน"
+
+#. Print Setup
+#: libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "ตั้ง_ค่าการพิมพ์..."
+
+#: libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "ตั้งค่าเกี่ยวกับการพิมพ์่สำหรับเครื่องพิมพ์ปัจจุบัน"
+
+#. Close
+#: libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "ปิ_ด"
+
+#: libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "ปิดแฟ้มปัจจุบัน"
+
+#. Exit
+#: libgnomeui/gnome-app-helper.c:147
+msgid "_Quit"
+msgstr "_ออก"
+
+#: libgnomeui/gnome-app-helper.c:147
+msgid "Quit the application"
+msgstr "ออกจากโปรแกรม"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cu_t"
+msgstr "_ตัด"
+
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "ตัดส่วนที่เลือก"
+
+#. 10
+#. Copy
+#: libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "_คัดลอก"
+
+#: libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "คัดลอกส่วนที่เลือก"
+
+#. Paste
+#: libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "_แปะ"
+
+#: libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "แปะจากคลิปบอร์ด"
+
+#. Clear
+#: libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "_ล้าง"
+
+#: libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "ลบล้างส่วนที่เลือก"
+
+#. Undo
+#: libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "เรี_ยกคืน"
+
+#: libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "เรียกคืนการกระทำสุดท้าย"
+
+#. Redo
+#: libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "_ทำซ้ำ"
+
+#: libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "ซ้ำการกระทำที่เรียกคืน"
+
+#. Find
+#: libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "_หา..."
+
+#: libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "หาข้อความ"
+
+#. Find Again
+#: libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "ห_าอันถัดไป"
+
+#: libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "หาอันถัดไปของข้อความเดิม"
+
+#. Replace
+#: libgnomeui/gnome-app-helper.c:197
+msgid "R_eplace..."
+msgstr "แ_ทนที่..."
+
+#: libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "แทนที่ข้อความ"
+
+#. Properties
+#: libgnomeui/gnome-app-helper.c:202
+msgid "_Properties"
+msgstr "คุณ_สมบัติ"
+
+#: libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "แก้ไขคุณสมบัติของแฟ้ม"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: libgnomeui/gnome-app-helper.c:211
+msgid "Prefere_nces"
+msgstr "ปรับแ_ต่ง"
+
+#: libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "ปรับแต่งโปรแกรม"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "เ_กี่ยวกับ"
+
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "เกี่ยวกับโปรแกรมนี้"
+
+#: libgnomeui/gnome-app-helper.c:225
+msgid "Select _All"
+msgstr "เลือก_ทั้งหมด"
+
+#: libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "เลือกทุกอย่าง"
+
+#.
+#. * Window menu
+#.
+#: libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "สร้าง_หน้าต่างใหม่"
+
+#: libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "สร้างหน้าต่างใหม่"
+
+#: libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "ปิ_ดหน้าต่างนี้"
+
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "ปิดหน้าต่างปัจจุบัน"
+
+#.
+#. * The "Game" menu
+#.
+#: libgnomeui/gnome-app-helper.c:248
+msgid "_New game"
+msgstr "เกมใ_หม่"
+
+#: libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "เริ่มเกมใหม่"
+
+#: libgnomeui/gnome-app-helper.c:253
+msgid "_Pause game"
+msgstr "_หยุดเกม"
+
+#: libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "หยุดเกม"
+
+#: libgnomeui/gnome-app-helper.c:258
+msgid "_Restart game"
+msgstr "เ_ริ่มเกมใหม่"
+
+#: libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "เริ่มเกมใหม่"
+
+#: libgnomeui/gnome-app-helper.c:263
+msgid "_Undo move"
+msgstr "_ย้อนตากลับ"
+
+#: libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "ย้อนกลับไปตาที่แล้ว"
+
+#: libgnomeui/gnome-app-helper.c:268
+msgid "_Redo move"
+msgstr "เ_ล่นตาซ้ำ"
+
+#: libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "เล่นซ้ำตาที่ย้อนกลับไป"
+
+#: libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "ใ_บ้"
+
+#: libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "ขอคำใบ้สำหรับตานี้"
+
+#. 30
+#: libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "_คะแนน..."
+
+#: libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "ดูคะแนน"
+
+#: libgnomeui/gnome-app-helper.c:284
+msgid "_End game"
+msgstr "_จบเกม"
+
+#: libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "จบเกมปัจจุบัน"
+
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr "เ_นื้อหา"
+
+#: libgnomeui/gnome-app-helper.c:1146
+msgid "View help for this application"
+msgstr "แสดงวิธีใช้โปรแกรมนี้"
+
+#: libgnomeui/gnome-app-helper.c:2567
+msgid "Text Below Icons"
+msgstr "ข้อความล่างไอคอน"
+
+#: libgnomeui/gnome-app-helper.c:2568
+msgid "Priority Text Beside Icons"
+msgstr "ข้อความสำคัญข้างไอคอน"
+
+#: libgnomeui/gnome-app-helper.c:2569
+msgid "Icons Only"
+msgstr "ไอคอนเท่านั้น"
+
+#: libgnomeui/gnome-app-helper.c:2570
+msgid "Text Only"
+msgstr "ข้อความเท่านั้น"
+
+#: libgnomeui/gnome-app-helper.c:2631
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr "ใช้ค่าปริยายของพื้นโต๊ะ (%s)"
+
+#: libgnomeui/gnome-app-util.c:99
+msgid " (press return)"
+msgstr " (กด return)"
+
+#: libgnomeui/gnome-app-util.c:141
+msgid "ERROR: "
+msgstr "ผิดพลาด: "
+
+#: libgnomeui/gnome-app-util.c:178
+msgid "Warning: "
+msgstr "คำเตือน: "
+
+#: libgnomeui/gnome-app-util.c:316
+msgid "y"
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:317
+msgid "yes"
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:320
+msgid "n"
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:321
+msgid "no"
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:356
+msgid " (yes or no)"
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:357
+msgid "  - OK? (yes or no)"
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:685
+msgid "Progress"
+msgstr "ความคืบหน้า"
+
+#: libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr ""
+
+#: libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "มีแถบความคืนหน้า"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "สร้างวิดเก็จแสดงความคืนหน้า"
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "มีแถบสถานะ"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "สร้างวิดเก็จแสดงสถานะ"
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "การโต้ตอบ"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "ระดับการโต้ตอบกับผู้ใช้ที่ต้องใช้"
+
+#: libgnomeui/gnome-authentication-manager.c:61
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "พร็อกซี HTTP ของคุณบังคับว่าคุณต้องเข้าระบบ\n"
+
+#: libgnomeui/gnome-authentication-manager.c:62
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"คุณต้องเข้าระบบถึงจะสามารถอ่าน \"%s\".\n"
+"%s"
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted unencrypted."
+msgstr "รหัสผ่านของคุณจะถูกส่งออกไปโดยถูกไม่เข้ารหัส"
+
+#: libgnomeui/gnome-authentication-manager.c:66
+msgid "Your password will be transmitted encrypted."
+msgstr "รหัสผ่านของคุณจะถูกเข้ารหัสก่อนส่งออกไป"
+
+#: libgnomeui/gnome-authentication-manager.c:69
+#: libgnomeui/gnome-authentication-manager.c:272
+msgid "Authentication Required"
+msgstr "ต้องผ่านการตรวจสอบสิทธิ์ก่อน"
+
+#: libgnomeui/gnome-authentication-manager.c:265
+#, c-format
+msgid " domain %s"
+msgstr " โดเมน %s"
+
+#: libgnomeui/gnome-authentication-manager.c:268
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "คุณต้องเข้าระบบถึงจะสามารถใช้ %s\n"
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "บอก ID ของตัวจัดการวาระ"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr "บอกพาธไปแฟ้มปรับแต่ง"
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "ตัวจัดการวาระ"
+
+#: libgnomeui/gnome-client.c:2475
+msgid "Cancel Logout"
+msgstr "เลิกออกจากระบบ"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "ได้รับข้อมูลสีที่ใช้ไม่ได้\n"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "เปิดหน้าต่างเลือกสี"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "เลือกสี"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "เวลา"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "เวลาที่เลือก"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr "ตัวบ่งชี้ว่า DateEdit ควรจะหน้าตาอย่างไร"
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "เวลาเริ่มต้น"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "เวลาเริ่มต้น"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "วันที่"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "เลือกวัน"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "เลือกวันจากปฏิทิน"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "ปฏิทิน"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "เลือกเวลา"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "เลือกเวลาจากลิสต์"
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "ควรเลิกใช้ gnome_date_edit_get_date แล้วใช้ gnome_date_edit_get_time แทน"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "หัวเรื่อง"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr ""
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "รูปโลโก"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "รูปหัวหน้าต่าง"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "รูปสำหรับแสดงที่หัวหน้าต่าง"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "สีอักษรของหัวเรื่อง"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "สีตัวอักษรสำหรับหัวเรื่อง"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "สีอักษรของหัวเรื่อง"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "สีอักษรของหัวเรื่องเป็น GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "สีอักษรของหัวเรื่องถูกตั้ง"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "สีอักษรของหัวเรื่องถูกตั้งแล้ว"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "สีพื้นหลัง"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "สีพื้นหลัง"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "สีพื้นหลังเป็น GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "สีพื้นหลังถูกตั้ง"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "สีพื้นหลังถูกตั้งแล้ว"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "สีพื้นหลังของโลโก"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "สีพื้นหลังของโลโก"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "สีพื้นหลังของโลโกเป็น GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "สีพื้นหลังของโลโกถูกตั้ง"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "สีพื้นหลังของโลโกถูกตั้งแล้ว"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "แสดงเสร็จเรียบร้อย"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "แสดงปุ่ม 'เสร็จเรียบร้อย' แทนปุ่ม 'ถัดไป'"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "แสดงวิธีใช้"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "แสดงปุ่ม 'วิธีใช้'"
+
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+msgid "History id"
+msgstr ""
+
+#: libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr ""
+
+#: libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
+msgid "History ID"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:227
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
+msgid "Browse Dialog Title"
+msgstr "ชื่อหน้าต่างเรียกดูแฟ้ม"
+
+#: libgnomeui/gnome-file-entry.c:236
+msgid "Title for the Browse file dialog."
+msgstr "ชื่อสำหรับหน้าต่างเรียกดูแฟ้ม"
+
+#: libgnomeui/gnome-file-entry.c:243
+msgid "Directory Entry"
+msgstr "เอาโฟลเดอร์"
+
+#: libgnomeui/gnome-file-entry.c:244
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr "ว่าใช้หน้าต่างเรียกดูแฟ้ม สำหรับเลือกแฟ้มหรือโฟลเดอร์"
+
+#: libgnomeui/gnome-file-entry.c:252
+msgid "Modal"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:253
+msgid "Whether the Browse file window should be modal."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
+msgid "Filename"
+msgstr "ชื่อแฟ้ม"
+
+#: libgnomeui/gnome-file-entry.c:261
+msgid "Filename that should be displayed in the file entry."
+msgstr "ชื่อแฟ้มสำหรับแสดงในที่รับชื่อแฟ้ม"
+
+#: libgnomeui/gnome-file-entry.c:269
+msgid "Default Path"
+msgstr "พาธปริยาย"
+
+#: libgnomeui/gnome-file-entry.c:270
+msgid "Default path for the Browse file window."
+msgstr "พาธปริยายสำหรับหน้าต่างเลือกแฟ้ม"
+
+#: libgnomeui/gnome-file-entry.c:277
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: libgnomeui/gnome-file-entry.c:278
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:288
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: libgnomeui/gnome-file-entry.c:289
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:299
+msgid "Use GtkFileChooser"
+msgstr "ใช้ GtkFileChooser"
+
+#: libgnomeui/gnome-file-entry.c:300
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr "ว่าจะใช้วิดเก็จ GtkFileChooser (ใหม่กว่า) หรือ GtkFileSelection สำหรับเลือกแฟ้ม."
+
+#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+msgid "Select file"
+msgstr "เลือกแฟ้ม"
+
+#: libgnomeui/gnome-file-entry.c:748
+msgid "Path"
+msgstr "พาธ"
+
+#: libgnomeui/gnome-file-entry.c:748
+msgid "Path to file"
+msgstr "พาธไปยังแฟ้ม"
+
+#: libgnomeui/gnome-file-entry.c:775
+msgid "_Browse..."
+msgstr "เ_รียกดู..."
+
+#: libgnomeui/gnome-file-entry.c:776
+msgid "Pop up a file selector to choose a file"
+msgstr "แสดงหน้าต่างสำหรับเลือกแฟ้ม"
+
+#: libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr "sans 12"
+
+#: libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "พรสิทธิ์ศรัญญูนั้นอยู่ฎีกาเศรษฐๆฯ ๑๒๓ AbCdEfGhIjKlMnOpQrStUvWxYz"
+
+#: libgnomeui/gnome-font-picker.c:68
+msgid "Pick a Font"
+msgstr "เลือกแบบอักษร"
+
+#: libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr "ชื่อหน้าต่างเลือก"
+
+#: libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "โหมด"
+
+#: libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr "โหมดการทำงานของตัวเลือกแบบอักษร"
+
+#: libgnomeui/gnome-font-picker.c:174
+msgid "Font name"
+msgstr "ชื่ออักษร"
+
+#: libgnomeui/gnome-font-picker.c:175
+msgid "Name of the selected font"
+msgstr "ชื่ออักษรที่เลือก"
+
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "แบบอักษร"
+
+#: libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr "GtkFont ที่เลือก"
+
+#: libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "ข้อความตัวอย่าง"
+
+#: libgnomeui/gnome-font-picker.c:193
+msgid "Preview text shown in the dialog"
+msgstr "ข้อความตัวอย่างที่จะแสดงในหน้าต่างเลือก"
+
+# FIXME: No idea what this is for.
+#: libgnomeui/gnome-font-picker.c:201
+msgid "Use font in label"
+msgstr "ใช้แบบอักษรในฉลาก"
+
+#: libgnomeui/gnome-font-picker.c:202
+msgid "Use font in the label in font info mode"
+msgstr "ใช้แบบอักษรในฉลากในโหมดข้อมูลอักษร"
+
+#: libgnomeui/gnome-font-picker.c:210
+msgid "Font size for label"
+msgstr "ขนาดอักษรสำหรับฉลาก"
+
+#: libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label in font info mode"
+msgstr "ขนาดอักษรสำหรับฉลากในโหมดข้อมูลอักษร"
+
+#: libgnomeui/gnome-font-picker.c:221
+msgid "Show size"
+msgstr "แสดงขนาด"
+
+#: libgnomeui/gnome-font-picker.c:222
+msgid "Show size in font info mode"
+msgstr "แสดงขนาดในโหมดข้อมูลอักษร"
+
+#: libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr ""
+
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_ลายระเอียด"
+
+#: libgnomeui/gnome-gconf-ui.c:169
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"โปรแกรม \"%s\" พยายามจะแก้ไขค่าตั้ง ที่ผู้ดูแลระบบ หรือผู้จัดแจกลีนุกซ์ของคุณ ไม่ยอมให้แก้ไข\n"
+"ค่าตั้งบางค่าที่เลือก อาจจะไม่มีผลบังคับใช้ หรือถูกลืมเมื่อคุณ ออกจากโปรแกรม"
+
+#: libgnomeui/gnome-gconf-ui.c:176
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"เกิดข้อผิดพลาด ขณะอ่านหรือบันทึกค่าปรับแต่งสำหรับ %s  ค่าปรับแต่งบางค่า อาจจะทำงานไม่ถูกต้อง"
+
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "URL ที่ GnomeHRef เรียกดู"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "ข้อความ"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "ข้อความในปุ่ม"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "ขจัดความอดอยาก"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "สีลิงค์"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "สีสำหรับแสดงลิงค์"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "ปุ่มนี้จะนำคุณไปยัง URI ที่แสดง"
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"เกิดข้อผิดพลาดขณะเรียกใช้เว็บเบราเซอร์ปริยาย\n"
+"โปรดตรวจดูค่าตั้งในหน้าต่าง 'โปรแกรมที่ชอบ'"
+
+#: libgnomeui/gnome-icon-entry.c:178
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:187
+msgid "Title for the Browse icon dialog."
+msgstr "ชื่อหน้าต่างเลือกไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:194
+msgid "Pixmap Directory"
+msgstr "โฟลเดอร์พิกแมป"
+
+#: libgnomeui/gnome-icon-entry.c:195
+msgid "Directory that will be searched for icons."
+msgstr "โฟลเดอร์เก็บรูปไอคอน"
+
+# FIXME: What is this for?
+#: libgnomeui/gnome-icon-entry.c:203
+msgid "Filename that should be displayed in the icon entry."
+msgstr "ชื่อแฟ้มที่จะแสดงในรายการไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:211
+msgid "Picker dialog"
+msgstr "หน้าต่างเลือก"
+
+#: libgnomeui/gnome-icon-entry.c:212
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
+msgid "No Icon"
+msgstr "ไม่มีไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:750
+msgid "Icon selection dialog"
+msgstr "หน้าต่างเลือกไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:751
+msgid "This dialog box lets you select an icon."
+msgstr "สามารถใช้หน้าต่างนี้เลือกไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:757
+msgid "Icon selector"
+msgstr "ตัวเลือกไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:758
+msgid "Please pick the icon you want."
+msgstr "โปรดเลือกไอคอนที่ต้องการ"
+
+#: libgnomeui/gnome-icon-entry.c:983
+msgid "Icon Selector"
+msgstr "ตัวเลือกไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:984
+msgid "This button will open a window to let you select an icon."
+msgstr "ปุ่มนี้ใช้เปิดหน้าต่างสำหรับใช้เลือกไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:1007
+msgid "Browse"
+msgstr "เรียกดู"
+
+#: libgnomeui/gnome-icon-entry.c:1009
+msgid "Icon path"
+msgstr "พาธของไอคอน"
+
+#: libgnomeui/gnome-icon-entry.c:1010
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr "ใส่ชื่อโฟลเดอร์ที่มีรูปสำหรับไอคอนอยู่"
+
+#: libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: '%s' ไม่มีอยู่จริงหรือไม่ใช่โฟลเดอร์"
+
+#: libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection: ไม่สามารถเปิดโฟลเดอร์ '%s'"
+
+#: libgnomeui/gnome-icon-sel.c:401
+msgid "Loading Icons..."
+msgstr "กำลังอ่านไอคอน..."
+
+#: libgnomeui/gnome-messagebox.c:109
+msgid "Information"
+msgstr "โปรดทราบ"
+
+#: libgnomeui/gnome-messagebox.c:114
+msgid "Warning"
+msgstr "คำเตือน"
+
+#: libgnomeui/gnome-messagebox.c:120
+msgid "Error"
+msgstr "ผิดพลาด"
+
+#: libgnomeui/gnome-messagebox.c:126
+msgid "Question"
+msgstr "คำถาม"
+
+#: libgnomeui/gnome-messagebox.c:131
+msgid "Message"
+msgstr "ข้อความ"
+
+#: libgnomeui/gnome-password-dialog.c:219
+msgid "_Username:"
+msgstr "_ชื่อบัญชีผู้ใช้:"
+
+#: libgnomeui/gnome-password-dialog.c:221
+msgid "_Domain:"
+msgstr "โ_ดเมน"
+
+#: libgnomeui/gnome-password-dialog.c:223
+msgid "_Password:"
+msgstr "_รหัสผ่าน"
+
+#: libgnomeui/gnome-password-dialog.c:369
+msgid "Remember password for this session"
+msgstr "จำรหัสผ่านไว้ใช้ในวาระนี้"
+
+#: libgnomeui/gnome-password-dialog.c:371
+msgid "Save password in keyring"
+msgstr "บันทึกรหัสลงในพวงกุญแจ"
+
+#: libgnomeui/gnome-pixmap-entry.c:114
+msgid "Do Preview"
+msgstr ""
+
+#: libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr ""
+
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
+msgid "No Image"
+msgstr "ไม่มีรูป"
+
+#: libgnomeui/gnome-pixmap-entry.c:206
+msgid "Image Preview"
+msgstr "ตัวอย่างรูป"
+
+#: libgnomeui/gnome-pixmap-entry.c:207
+msgid "A preview of the image currently specified"
+msgstr "แสดงตัวอย่างรูปของรูปที่เลือก"
+
+#: libgnomeui/gnome-pixmap-entry.c:414
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: libgnomeui/gnome-pixmap-entry.c:420
+msgid "Preview"
+msgstr "ตัวอย่าง"
+
+#: libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "สิบอันดับแรก"
+
+#: libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "ผู้ใช้"
+
+#: libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr "คะแนน"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: libgnomeui/gnome-scores.c:194
+msgid "%a %b %d %T %Y"
+msgstr "%c"
+
+#: libgnomeui/gnome-scores.c:395
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "ขอบตาราง"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "ย่อหน้า"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "ลดย่อหน้า"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "เกี่ยวกับ"
+
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr "ปิดใช้หน้าต่างแจ้งข้อขัดข้อง"
+
+#: libgnomeui/gnome-ui-init.c:119
+msgid "X display to use"
+msgstr "X display ที่จะใช้"
+
+#: libgnomeui/gnome-ui-init.c:119
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: libgnomeui/gnome-ui-init.c:127
+msgid "GNOME GUI Library"
+msgstr "GNOME GUI Library"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:708
+#, c-format
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "เกิด segmentation faults หลายอัน ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:722
+#, c-format
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Segmentation faults!\n"
+"ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
+
+#: libgnomeui/gnome_segv.c:101
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"ตัวจัดการวาระของ GNOME (โพรเซส %d) ไม่สามารถทำงานต่อได้\n"
+"เนื่องจากข้อผิดพลาด %s\n"
+"เมื่อคุณปิดหน้าต่างนี้ โปรแกรมทุกตัวจะถูกปิด และคุณจะออกจาก วาระการใช้งานนี้\n"
+"โปรดบันทึกแฟ้มทั้งหมดที่ต้องการก่อนจะปิดหน้าต่างนี้"
+
+#: libgnomeui/gnome_segv.c:112
+#, c-format
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "โปรแกรม \"%s\" หยุดทำงานอย่างไม่ได้คาดหมาย"
+
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "โพรเซส %d: %s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"คุณสามารถแจ้งข้อผิดพลาดนี้ เพื่อช่วยผู้เขียนแก้ไขมัน หรือคุณสามารถ เรียกใช้โปรแกรมนี้ใหม่ ตอนนี้เลย"
+
+#: libgnomeui/gnome_segv.c:137
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "วีธีใช้: gnome_segv2 appname signum\n"
+
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "เ_รียกใช้โปรแกรมใหม่"
+
+#: libgnomeui/gnome_segv.c:166
+msgid "_Inform Developers"
+msgstr "แ_จ้งผู้เขียน"
+
+#: libgnomeui/gnome_segv.c:177
+msgid "_Debug"
+msgstr "_ดีบัก"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "ออกจากการทดสอบ"
