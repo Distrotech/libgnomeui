@@ -250,11 +250,16 @@ static int
 gil_get_items_per_line (Gil *gil)
 {
 	GnomeIconListPrivate *priv;
+	int available_width;
 	int items_per_line;
 
 	priv = gil->_priv;
 
-	items_per_line = GTK_WIDGET (gil)->allocation.width / (priv->icon_width + priv->col_spacing);
+	available_width = GTK_WIDGET (gil)->allocation.width - 2 * DEFAULT_COL_SPACING;
+
+	items_per_line = ((available_width + priv->col_spacing)
+			  / (priv->icon_width + priv->col_spacing));
+
 	if (items_per_line == 0)
 		items_per_line = 1;
 
@@ -311,11 +316,9 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 				       NULL);
 	}
 
-
 	gnome_icon_text_item_setxy (icon->text,
 				    x,
 				    y + icon_height + priv->text_spacing);
-
 }
 
 static void
@@ -1297,7 +1300,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 
 	if (priv->icons >= priv->focus_icon)
 		priv->focus_icon = -1;
-	
+
 	if (priv->last_selected_icon == icon)
 		priv->last_selected_icon = NULL;
 

@@ -1,3 +1,10 @@
+2002-05-15  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-icon-list.c (gil_get_items_per_line): Do a
+	slightly better computation of how many icons fit in a row, by
+	remembering that there are DEFAULT_COL_SPACING pixels between the
+	icons and each of the left/right edges of the window.
+
 2002-05-14  Michael Meeks  <michael@ximian.com>
 
 	* libgnomeui/gnome-app-helper.c: 
