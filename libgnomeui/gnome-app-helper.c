@@ -239,7 +239,7 @@ gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
       switch (uiinfo->type) {
       case GNOME_APP_UI_SUBTREE:
         gnome_app_install_statusbar_menu_hints(bar, uiinfo->moreinfo);
-        // FALL THRU
+
       case GNOME_APP_UI_ITEM:
       case GNOME_APP_UI_TOGGLEITEM:
       case GNOME_APP_UI_SEPARATOR:
@@ -249,7 +249,7 @@ gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
         gnome_app_install_statusbar_menu_hints(bar, uiinfo->moreinfo);
         break;
       default:
-        ; // nothing
+        ;
         break;
       }
 
@@ -334,7 +334,7 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
       switch (uiinfo->type) {
       case GNOME_APP_UI_SUBTREE:
         gnome_app_install_appbar_menu_hints(appbar, uiinfo->moreinfo);
-        // FALL THRU
+
       case GNOME_APP_UI_ITEM:
       case GNOME_APP_UI_TOGGLEITEM:
       case GNOME_APP_UI_SEPARATOR:
@@ -344,7 +344,7 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
         gnome_app_install_appbar_menu_hints(appbar, uiinfo->moreinfo);
         break;
       default:
-        ; // nothing
+        ; 
         break;
       }
 
