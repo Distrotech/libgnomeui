@@ -137,6 +137,13 @@ create_menu(GtkWidget *window)
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_CLOSE, _("Close"));
+	gtk_widget_show(w);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_CLOSE, &key, &mod))
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
+	gtk_menu_append(GTK_MENU(menu), w);
+	menu_items[i++] = w;
+
 	w = gtk_menu_item_new();
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
@@ -181,7 +188,7 @@ create_menu(GtkWidget *window)
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-	w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Redo"));
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_REDO, _("Redo"));
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -408,6 +415,14 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
 	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_CLOSE));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = gtk_label_new("Close");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_PRINT));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
@@ -428,6 +443,14 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
 	w = gtk_label_new("Undo");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_REDO));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = gtk_label_new("Redo");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
@@ -692,7 +715,18 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
-#if 1
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_BOOK_OPEN));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_BOOK_OPEN));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Book Open");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+#if 0
 	column++;
 	w = gnome_pixmap_new_from_file(gnome_pixmap_file("gnome-unknown.png"));
 	w = gnome_pixmap_button(w, "Test");
@@ -705,6 +739,7 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
 #endif
 
+#if 0
 	column++;
 	lamp = gnome_lamp_new();
 	gtk_widget_show(lamp);
@@ -716,6 +751,7 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = gtk_hscale_new(GTK_ADJUSTMENT(w));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+#endif
 
 	gtk_table_set_col_spacings(table, 10);
 	gtk_table_set_row_spacing(table, 2, 10);

@@ -91,6 +91,7 @@ BEGIN_GNOME_DECLS
 
 #define GNOME_STOCK_PIXMAP_NEW         "New"
 #define GNOME_STOCK_PIXMAP_OPEN        "Open"
+#define GNOME_STOCK_PIXMAP_CLOSE       "Close"
 #define GNOME_STOCK_PIXMAP_REVERT      "Revert"
 #define GNOME_STOCK_PIXMAP_SAVE        "Save"
 #define GNOME_STOCK_PIXMAP_SAVE_AS     "Save As"
@@ -109,6 +110,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_STOP        "Stop"
 #define GNOME_STOCK_PIXMAP_REFRESH     "Refresh"
 #define GNOME_STOCK_PIXMAP_UNDO        "Undo"
+#define GNOME_STOCK_PIXMAP_REDO        "Redo"
 #define GNOME_STOCK_PIXMAP_TIMER       "Timer"
 #define GNOME_STOCK_PIXMAP_TIMER_STOP  "Timer Stopped"
 #define GNOME_STOCK_PIXMAP_MAIL	       "Mail"
@@ -127,6 +129,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_BOOK_GREEN  "Book Green"
 #define GNOME_STOCK_PIXMAP_BOOK_BLUE   "Book Blue"
 #define GNOME_STOCK_PIXMAP_BOOK_YELLOW "Book Yellow"
+#define GNOME_STOCK_PIXMAP_BOOK_OPEN   "Book Open"
 #define GNOME_STOCK_PIXMAP_ABOUT       "About"
 #define GNOME_STOCK_PIXMAP_QUIT        "Quit"
 #define GNOME_STOCK_PIXMAP_MULTIPLE    "Multiple"
@@ -352,6 +355,7 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_SAVE_AS      "Menu_Save As"
 #define GNOME_STOCK_MENU_REVERT       "Menu_Revert"
 #define GNOME_STOCK_MENU_OPEN         "Menu_Open"
+#define GNOME_STOCK_MENU_CLOSE        "Menu_Close"
 #define GNOME_STOCK_MENU_QUIT         "Menu_Quit"
 #define GNOME_STOCK_MENU_CUT          "Menu_Cut"
 #define GNOME_STOCK_MENU_COPY         "Menu_Copy"
@@ -361,6 +365,7 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_ABOUT        "Menu_About"
 #define GNOME_STOCK_MENU_SCORES       "Menu_Scores"
 #define GNOME_STOCK_MENU_UNDO         "Menu_Undo"
+#define GNOME_STOCK_MENU_REDO         "Menu_Redo"
 #define GNOME_STOCK_MENU_PRINT        "Menu_Print"
 #define GNOME_STOCK_MENU_SEARCH       "Menu_Search"
 #define GNOME_STOCK_MENU_BACK         "Menu_Back"
@@ -384,6 +389,7 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_BOOK_GREEN   "Menu_Book Green"
 #define GNOME_STOCK_MENU_BOOK_BLUE    "Menu_Book Blue"
 #define GNOME_STOCK_MENU_BOOK_YELLOW  "Menu_Book Yellow"
+#define GNOME_STOCK_MENU_BOOK_OPEN    "Menu_Book Open"
 
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT
 

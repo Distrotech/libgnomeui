@@ -700,7 +700,12 @@ gnome_lamp_set_pixmap_color(GnomeLamp *lamp)
 #if !FORCE_FULL
 		c.red = red; c.green = green; c.blue = blue;
 #if USE_CC
-		c.pixel = gdk_color_context_get_pixel(cc, red, green, blue, &failed);
+		/* it might be better to use imlib's best-color-match in modes
+		 * where colormap entries are short. I need only one call to
+		 * the function, so speed is no problem here. */
+		/* c.pixel = gdk_color_context_get_pixel(cc, red, green, blue, &failed); */
+		gdk_imlib_best_color_get(&c);
+
 		gdk_color_context_free(cc);
 #else
 		gdk_imlib_best_color_get(&c);
