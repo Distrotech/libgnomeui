@@ -1,3 +1,8 @@
+1998-11-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_destroy): Free the color context
+	when the canvas is destroyed.
+
 1998-11-24  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.c: Removed definition of 'gnome_client_new_default'.
