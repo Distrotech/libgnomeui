@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui Gnome 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 00:45+0100\n"
+"POT-Creation-Date: 2005-01-15 12:32+0100\n"
 "PO-Revision-Date: 2004-03-27 21:11+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -31,17 +31,17 @@ msgstr ""
 msgid "Hint for item 2"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:678
+#: file-chooser/gtkfilesystemgnomevfs.c:677
 #, c-format
 msgid "%s is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:885
+#: file-chooser/gtkfilesystemgnomevfs.c:884
 #, fuzzy
 msgid "Filesystem"
 msgstr "Fai_lid"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1569
+#: file-chooser/gtkfilesystemgnomevfs.c:1565
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""
@@ -166,10 +166,11 @@ msgstr "Programmi logo (infoaknas)"
 #: libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
-msgstr "%s info"
+msgstr "Lähem teave \"%s\" kohta"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -227,6 +228,7 @@ msgid "_Game"
 msgstr "_Mäng"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Abi"
 
@@ -304,7 +306,7 @@ msgstr "_Lõpeta"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
-msgstr "Lõpeta programmi töö"
+msgstr "Lõpetab programmi töö"
 
 #.
 #. * The "Edit" menu
@@ -410,20 +412,20 @@ msgstr "_Häälestus"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Programmi häälestus"
+msgstr "Programmi seadistamine"
 
 #. 20
 #.
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "_Info"
+msgstr "_Programmist lähemalt"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Info selle programmi kohta"
+msgstr "Näitab teavet selle programmi kohta"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
@@ -448,7 +450,7 @@ msgstr "Loo uus aken"
 msgid "_Close This Window"
 msgstr "_Sulge see aken"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Sulge aktiivne aken"
 
@@ -469,7 +471,7 @@ msgstr "_Peata mäng"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Tee mängu paus"
+msgstr "Teeb mängu pausi"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
@@ -510,7 +512,7 @@ msgstr "_Tulemused..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr "Vaata tulemusi"
+msgstr "Vaatab tulemusi"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
@@ -518,7 +520,7 @@ msgstr "_Lõpeta mäng"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Lõpeta praegune mäng"
+msgstr "Lõpetab praeguse mängu"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
@@ -526,7 +528,7 @@ msgstr "_Sisukord"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr "Sirvi programmi abiinfot"
+msgstr "Sirvib programmi abiteavet"
 
 #: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
@@ -1434,5 +1436,6 @@ msgstr "Teata _arendajatele"
 msgid "_Debug"
 msgstr "_Silur"
 
-#~ msgid "Exit the test"
-#~ msgstr "Välju testprogrammist"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Välju testprogrammist"
