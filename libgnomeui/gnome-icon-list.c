@@ -1528,7 +1528,7 @@ gnome_icon_list_set_policy (GnomeIconList *ilist,
 
 
 static Icon *
-icon_new_from_imlib (GnomeIconList *ilist, GdkImlibImage *im, char *text)
+icon_new_from_imlib (GnomeIconList *ilist, GdkImlibImage *im, const char *text)
 {
 	Icon *icon;
 
@@ -1564,7 +1564,7 @@ icon_new_from_imlib (GnomeIconList *ilist, GdkImlibImage *im, char *text)
 }
 
 static Icon *
-icon_new (GnomeIconList *ilist, char *icon_filename, char *text)
+icon_new (GnomeIconList *ilist, char *icon_filename, const char *text)
 {
 	GdkImlibImage *im;
 
@@ -1640,7 +1640,8 @@ gnome_icon_list_append_imlib (GnomeIconList *ilist, GdkImlibImage *im, char *tex
 }
 
 int
-gnome_icon_list_append (GnomeIconList *ilist, char *icon_filename, char *text)
+gnome_icon_list_append (GnomeIconList *ilist, const char *icon_filename, 
+			const char *text)
 {
 	Icon *icon;
 
@@ -1674,7 +1675,9 @@ sync_selection (GnomeIconList *ilist, int pos, SyncType type)
 }
 
 void
-gnome_icon_list_insert (GnomeIconList *ilist, int pos, char *icon_filename, char *text)
+gnome_icon_list_insert (GnomeIconList *ilist, int pos, 
+			const char *icon_filename, 
+			const char *text)
 {
 	Icon *icon;
 
@@ -2159,7 +2162,8 @@ gnome_icon_list_set_icon_border (GnomeIconList *ilist, int spacing)
 }
 
 void
-gnome_icon_list_set_separators (GnomeIconList *ilist, char *separators)
+gnome_icon_list_set_separators (GnomeIconList *ilist, 
+				const char *separators)
 {
 	g_return_if_fail (ilist != NULL);
 	g_return_if_fail (GNOME_IS_ICON_LIST (ilist));

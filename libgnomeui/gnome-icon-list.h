@@ -99,8 +99,8 @@ void           gnome_icon_list_set_policy          (GnomeIconList *ilist,
 						    GtkPolicyType vscrollbar_policy,
 						    GtkPolicyType hscrollbar_policy);
 
-int            gnome_icon_list_append              (GnomeIconList *ilist, char *icon_filename, char *text);
-void           gnome_icon_list_insert              (GnomeIconList *ilist, int pos, char *icon_filename, char *text);
+int            gnome_icon_list_append              (GnomeIconList *ilist, const char *icon_filename, const char *text);
+void           gnome_icon_list_insert              (GnomeIconList *ilist, int pos, const char *icon_filename, const char *text);
 void           gnome_icon_list_remove              (GnomeIconList *ilist, int pos);
 
 int            gnome_icon_list_append_imlib        (GnomeIconList *ilist, GdkImlibImage *im, char *text);
@@ -129,7 +129,7 @@ void           gnome_icon_list_set_col_spacing    (GnomeIconList *ilist, int spa
 void           gnome_icon_list_set_text_spacing   (GnomeIconList *ilist, int spacing);
 void           gnome_icon_list_set_icon_border    (GnomeIconList *ilist, int spacing);
 
-void           gnome_icon_list_set_separators     (GnomeIconList *ilist, char *separators);
+void           gnome_icon_list_set_separators     (GnomeIconList *ilist, const char *separators);
 
 void           gnome_icon_list_set_mode           (GnomeIconList *ilist, GnomeIconListMode mode);
 void           gnome_icon_list_set_border         (GnomeIconList *ilist, GtkShadowType border);
