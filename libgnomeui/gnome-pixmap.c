@@ -86,6 +86,9 @@ gnome_pixmap_class_init (GnomePixmapClass *class)
 static void
 free_pixmap_and_mask (GnomePixmap *gpixmap)
 {
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+
 	if (gpixmap->pixmap) {
 		gdk_pixmap_unref (gpixmap->pixmap);
 		gpixmap->pixmap = NULL;
@@ -407,6 +410,9 @@ setup_window_and_style (GnomePixmap *gpixmap)
 	GdkVisual *visual;
 	GdkColormap *colormap;
 
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+
 	widget = GTK_WIDGET (gpixmap);
 
 	if (widget->window)
@@ -490,8 +496,8 @@ gnome_pixmap_size_request (GtkWidget *widget, GtkRequisition *requisition)
 	else
 		w = h = 0;
 
-	widget->requisition.width = requisition->width = w;
-	widget->requisition.height = requisition->height = h;
+	requisition->width = w;
+	requisition->height = h;
 }
 
 static void

@@ -92,6 +92,9 @@ gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 	char *text;
 	gdouble r;
 
+	g_return_val_if_fail (nentry != NULL,0.0);
+	g_return_val_if_fail (GNOME_IS_NUMBER_ENTRY (nentry),0.0);
+
 	entry = gnome_number_entry_gtk_entry (nentry);
 	
 	text = gtk_entry_get_text(GTK_ENTRY(entry));
@@ -105,6 +108,9 @@ gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 static void
 calc_dialog_destroyed(GtkWidget *w, GnomeNumberEntry *nentry)
 {
+	g_return_if_fail (nentry != NULL);
+	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (nentry));
+
 	nentry->calc_dlg = NULL;
 }
 
@@ -114,6 +120,9 @@ browse_clicked (GtkWidget *widget, gpointer data)
 	GnomeNumberEntry *nentry;
 	GtkWidget *dlg;
 	GtkWidget *calc;
+
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (data));
 
 	nentry = GNOME_NUMBER_ENTRY (data);
 	
@@ -168,6 +177,9 @@ static void
 gnome_number_entry_init (GnomeNumberEntry *nentry)
 {
 	GtkWidget *button;
+
+	g_return_if_fail (nentry != NULL);
+	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (nentry));
 
 	nentry->calc_dialog_title = NULL;
 

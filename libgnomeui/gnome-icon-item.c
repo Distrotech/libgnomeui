@@ -909,8 +909,10 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 	}
 
 	iti->is_text_allocated = !is_static;
+
+	/*XXX: this seems ugly, this should be solved without a cast*/
 	if (is_static)
-		iti->text = text;
+		iti->text = (char *) text;
 	else
 		iti->text = g_strdup (text);
 	

@@ -85,6 +85,9 @@ refresh_preview(GnomePixmapEntry *pentry)
 	char *t;
 	GdkImlibImage *im;
 
+	g_return_if_fail (pentry != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
+
 	if(!pentry->preview)
 		return;
 
@@ -167,6 +170,9 @@ changed_timeout_func(gpointer data)
 static void
 entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 {
+	g_return_if_fail (pentry != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
+
 	if(change_timeout == -1) {
 		refresh_preview(pentry);
 		change_timeout =
@@ -186,8 +192,14 @@ setup_preview(GtkWidget *widget)
 	GtkWidget *pp = NULL;
 	GdkImlibImage *im;
 	int w,h;
-	GtkWidget *frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
-	GtkFileSelection *fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
+	GtkWidget *frame;
+	GtkFileSelection *fs;
+
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+
+	frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
+	fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
 
 	if((l = gtk_container_children(GTK_CONTAINER(frame))) != NULL) {
 		pp = l->data;
@@ -223,13 +235,16 @@ setup_preview(GtkWidget *widget)
 	gdk_imlib_destroy_image(im);
 }
 
-static int
+static void
 pentry_destroy(GnomePixmapEntry *pentry)
 {
+	g_return_if_fail (pentry != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
+
 	pentry->preview = NULL;
 	g_free(pentry->last_preview);
+	pentry->last_preview = NULL;
 	changed_pentries = g_slist_remove(changed_pentries,pentry);
-	return FALSE;
 }
 
 
@@ -240,6 +255,12 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 	GtkWidget *hbox;
 
 	GtkFileSelection *fs;
+
+	g_return_if_fail (fentry != NULL);
+	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
+	g_return_if_fail (pentry != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
+
 	if(!fentry->fsw)
 		return;
 	fs = GTK_FILE_SELECTION(fentry->fsw);
@@ -278,8 +299,13 @@ drag_data_received (GtkWidget        *widget,
 		    guint32           time,
 		    GnomePixmapEntry *pentry)
 {
-	GtkWidget *entry = gnome_pixmap_entry_gtk_entry(pentry);
+	GtkWidget *entry;
 	GList *files;
+
+	g_return_if_fail (pentry != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
+
+	entry = gnome_pixmap_entry_gtk_entry(pentry);
 
 	/*here we extract the filenames from the URI-list we recieved*/
 	files = gnome_uri_list_extract_filenames(selection_data->data);
@@ -304,9 +330,14 @@ drag_data_get  (GtkWidget          *widget,
 		GnomePixmapEntry   *pentry)
 {
 	char *string;
-	char *file =
-		gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
-					       TRUE);
+	char *file;
+
+	g_return_if_fail (pentry != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
+
+	file = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
+					      TRUE);
+
 	if(!file) {
 		/*FIXME: cancel the drag*/
 		return;
@@ -530,6 +561,7 @@ gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 {
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
+	g_return_if_fail (preview_w>=0 && preview_h>=0);
 	
 	gtk_widget_set_usize(pentry->preview_sw,preview_w,preview_h);
 }
@@ -547,6 +579,9 @@ gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 char *
 gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)
 {
+	g_return_val_if_fail (pentry != NULL,NULL);
+	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry),NULL);
+
 	/*this happens if it doesn't exist or isn't an image*/
 	if(!GNOME_IS_PIXMAP(pentry->preview))
 		return NULL;

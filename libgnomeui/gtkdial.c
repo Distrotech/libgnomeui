@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
 
-/* gtkdial.c: Written by Owen Taylor <otaylor@redhat.com>
+/* gtkdial.c: Written by Owen Taylor <otaylor@redhat.com> */
 
 /* needed for M_* under 'gcc -ansi -pedantic' on GNU/Linux */
 #ifndef _BSD_SOURCE

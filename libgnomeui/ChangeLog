@@ -1,3 +1,23 @@
+Sun Mar 21 01:01:48 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-{icon,pixmap,number}-entry.c: added argument checks everywhere
+	  and the destroy signal is void
+
+	* gnome-pixmap-entry.c: on destroy, null the last_preview, just in
+	  case
+
+	* gnome-icon-item.c: (gnome_icon_text_item_configure) if the text is
+	  static, cast it to (char *) to avoid warning, but this is somewhat
+	  evil, so should it or should it not be const in the first place
+
+	* gnome-pixmap.c: added some argument checks and in size_request,
+	  setting the requisition of the widget directly is wrong I guess,
+	  plus it's redundant
+
+	* gtkdial.c: comment warning fix
+
+	* winhints_demo.c: changed () to (void) to avoid warnings
+
 1999-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Makefile.am (libgnomeui_la_LDFLAGS): Updated library version number.
