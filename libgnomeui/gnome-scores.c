@@ -143,7 +143,7 @@ gnome_scores_finalize(GObject *object)
 	g_free (gs->_priv);
 	gs->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**

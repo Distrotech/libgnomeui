@@ -347,7 +347,7 @@ gnome_entry_destroy (GtkObject *object)
 		gentry->_priv->gconf_client = NULL;
 	}
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -368,7 +368,7 @@ gnome_entry_finalize (GObject *object)
 	g_free (gentry->_priv);
 	gentry->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**

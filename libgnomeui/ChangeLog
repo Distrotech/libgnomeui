@@ -1,5 +1,10 @@
 2001-11-12  Darin Adler  <darin@bentspoon.com>
 
+	* Same files again.
+	Update for name change to GNOME_CALL_PARENT.
+
+2001-11-12  Darin Adler  <darin@bentspoon.com>
+
 	* gnome-about.c:
 	* gnome-app.c:
 	* gnome-appbar.c:

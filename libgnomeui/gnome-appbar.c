@@ -709,6 +709,6 @@ gnome_appbar_finalize (GObject *object)
   g_free (ab->_priv);
   ab->_priv = NULL;
 
-  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+  GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 

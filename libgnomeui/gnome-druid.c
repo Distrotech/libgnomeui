@@ -260,7 +260,7 @@ gnome_druid_destroy (GtkObject *object)
 		gtk_container_remove (GTK_CONTAINER (druid), GTK_WIDGET(child));
 	}
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -276,7 +276,7 @@ gnome_druid_finalize (GObject *object)
 	g_free(druid->_priv);
 	druid->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void

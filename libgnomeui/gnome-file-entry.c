@@ -544,7 +544,7 @@ gnome_file_entry_destroy (GtkObject *object)
 		gtk_widget_destroy (fentry->fsw);
 	fentry->fsw = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -566,7 +566,7 @@ gnome_file_entry_finalize (GObject *object)
 	g_free (fentry->_priv);
 	fentry->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**

@@ -284,7 +284,7 @@ gnome_font_picker_destroy (GtkObject *object)
 	    gfp->_priv->font_dialog = NULL;
     }
 
-    GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+    GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
     
 } /* gnome_font_picker_destroy */
 
@@ -314,7 +314,7 @@ gnome_font_picker_finalize (GObject *object)
     g_free(gfp->_priv);
     gfp->_priv = NULL;
 
-    GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+    GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
     
 } /* gnome_font_picker_finalize */
 

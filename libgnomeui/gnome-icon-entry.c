@@ -407,7 +407,7 @@ ientry_destroy (GtkObject *object)
 		gtk_widget_destroy (ientry->_priv->pick_dialog);
 	ientry->_priv->pick_dialog = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -432,7 +432,7 @@ ientry_finalize (GObject *object)
 	g_free (ientry->_priv);
 	ientry->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void

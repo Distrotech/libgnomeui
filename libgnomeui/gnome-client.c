@@ -1271,7 +1271,7 @@ gnome_real_client_destroy (GtkObject *object)
   if (GNOME_CLIENT_CONNECTED (client))
 	  gnome_client_disconnect (client);
 
-  GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+  GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -1324,7 +1324,7 @@ gnome_real_client_finalize (GObject *object)
   g_free     (client->user_id);
   client->user_id = NULL;
 
-  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+  GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 /*****************************************************************************/

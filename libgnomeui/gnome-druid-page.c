@@ -194,7 +194,7 @@ gnome_druid_page_expose (GtkWidget               *widget,
 		gnome_druid_page_paint (widget, &event->area);
 
 	if (GTK_WIDGET_DRAWABLE (widget)) {
-		return GNOME_CALL_PARENT_HANDLER_WITH_DEFAULT 
+		return GNOME_CALL_PARENT_WITH_DEFAULT 
 			(GTK_WIDGET_CLASS, expose_event, (widget, event), FALSE);
 	}
 

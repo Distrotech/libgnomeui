@@ -355,7 +355,7 @@ gnome_color_picker_realize (GtkWidget *widget)
 {
 	GnomeColorPicker *cp = GNOME_COLOR_PICKER (widget);
 
-	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, realize, (widget));
 
 	if (cp->_priv->gc == NULL)
 		cp->_priv->gc = gdk_gc_new (widget->window);
@@ -366,7 +366,7 @@ gnome_color_picker_realize (GtkWidget *widget)
 static void
 gnome_color_picker_style_set (GtkWidget *widget, GtkStyle *previous_style)
 {
-	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, style_set,
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, style_set,
 				   (widget, previous_style));
 
 	if (GTK_WIDGET_REALIZED (widget))
@@ -521,7 +521,7 @@ gnome_color_picker_destroy (GtkObject *object)
 		gtk_widget_destroy (cp->_priv->cs_dialog);
 	cp->_priv->cs_dialog = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -544,7 +544,7 @@ gnome_color_picker_finalize (GObject *object)
 	g_free (cp->_priv);
 	cp->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 

@@ -180,7 +180,7 @@ gnome_druid_page_edge_destroy(GtkObject *object)
 		gdk_pixbuf_unref (druid_page_edge->watermark_image);
 	druid_page_edge->watermark_image = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -196,7 +196,7 @@ gnome_druid_page_edge_finalize(GObject *object)
 	g_free (druid_page_edge->_priv);
 	druid_page_edge->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
@@ -400,7 +400,7 @@ gnome_druid_page_edge_size_allocate   (GtkWidget               *widget,
 
 	druid_page_edge = GNOME_DRUID_PAGE_EDGE (widget);
 
-	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, size_allocate,
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, size_allocate,
 				   (widget, allocation));
 
 	gnome_canvas_set_scroll_region (GNOME_CANVAS(druid_page_edge->_priv->canvas),

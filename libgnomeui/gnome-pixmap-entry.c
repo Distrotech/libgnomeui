@@ -327,7 +327,7 @@ pentry_destroy (GtkObject *object)
 
 	changed_pentries = g_slist_remove (changed_pentries, pentry);
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -346,7 +346,7 @@ pentry_finalize (GObject *object)
 	g_free (pentry->_priv);
 	pentry->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void

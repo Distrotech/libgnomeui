@@ -512,7 +512,7 @@ gnome_date_edit_destroy (GtkObject *object)
 		gtk_widget_destroy (gde->_priv->cal_popup);
 	gde->_priv->cal_popup = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -528,7 +528,7 @@ gnome_date_edit_finalize (GObject *object)
 	g_free(gde->_priv);
 	gde->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
@@ -543,7 +543,7 @@ gnome_date_edit_forall (GtkContainer *container, gboolean include_internals,
 	 * poked.
 	 */
 	if (include_internals)
-		GNOME_CALL_PARENT_HANDLER (GTK_CONTAINER_CLASS, forall,
+		GNOME_CALL_PARENT (GTK_CONTAINER_CLASS, forall,
 					   (container,
 					    include_internals,
 					    callback,

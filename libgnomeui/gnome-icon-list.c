@@ -1343,7 +1343,7 @@ gil_destroy (GtkObject *object)
 		gil->_priv->timer_tag = 0;
 	}
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -1359,7 +1359,7 @@ gil_finalize (GObject *object)
 	g_free (gil->_priv);
 	gil->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 

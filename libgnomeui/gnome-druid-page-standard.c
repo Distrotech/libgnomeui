@@ -364,7 +364,7 @@ gnome_druid_page_standard_get_property (GObject    *object,
 		break;
 	}
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, get_property, (object, prop_id, value, pspec));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, get_property, (object, prop_id, value, pspec));
 }
 
 static void
@@ -461,7 +461,7 @@ gnome_druid_page_standard_set_property (GObject      *object,
 		break;
 	}
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, set_property, (object, prop_id, value, pspec));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, set_property, (object, prop_id, value, pspec));
 }
 
 static void
@@ -475,7 +475,7 @@ gnome_druid_page_standard_finalize (GObject *object)
 	g_free (druid_page_standard->_priv);
 	druid_page_standard->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 
@@ -494,7 +494,7 @@ gnome_druid_page_standard_destroy (GtkObject *object)
 		gdk_pixbuf_unref (druid_page_standard->top_watermark);
 	druid_page_standard->top_watermark = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -502,7 +502,7 @@ gnome_druid_page_standard_realize (GtkWidget *widget)
 {
 	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD (widget);
 
-	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, realize, (widget));
 	
 	gnome_druid_page_standard_set_color (druid_page_standard);
 }
@@ -513,7 +513,7 @@ gnome_druid_page_standard_style_set (GtkWidget *widget,
 {
 	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD (widget);
 
-	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, style_set, (widget, old_style));
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, style_set, (widget, old_style));
 	
 	gnome_druid_page_standard_set_color (druid_page_standard);
 }
@@ -782,7 +782,7 @@ static void
 gnome_druid_page_standard_size_allocate (GtkWidget *widget,
 					 GtkAllocation *allocation)
 {
-	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, size_allocate,
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, size_allocate,
 				   (widget, allocation));
 	gnome_druid_page_standard_layout_setup (GNOME_DRUID_PAGE_STANDARD (widget));
 }

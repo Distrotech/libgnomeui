@@ -383,7 +383,7 @@ gnome_href_clicked (GtkButton *button)
   g_return_if_fail(button != NULL);
   g_return_if_fail(GNOME_IS_HREF(button));
 
-  GNOME_CALL_PARENT_HANDLER (GTK_BUTTON_CLASS, clicked, (button));
+  GNOME_CALL_PARENT (GTK_BUTTON_CLASS, clicked, (button));
 
   href = GNOME_HREF(button);
 
@@ -419,7 +419,7 @@ gnome_href_destroy (GtkObject *object)
 		href->_priv->label = NULL;
 	}
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -438,7 +438,7 @@ gnome_href_finalize (GObject *object)
 	g_free (href->_priv);
 	href->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
@@ -446,7 +446,7 @@ gnome_href_realize(GtkWidget *widget)
 {
 	GdkCursor *cursor;
 
-	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, realize, (widget));
 
 	cursor = gdk_cursor_new(GDK_HAND2);
 	gdk_window_set_cursor(widget->window, cursor);

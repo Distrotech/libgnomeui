@@ -264,7 +264,7 @@ gnome_app_show (GtkWidget *widget)
 	gtk_widget_show (app->vbox);
 	gtk_widget_show (app->dock);
 
-	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, show, (widget));
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, show, (widget));
 }
 
 static void
@@ -369,7 +369,7 @@ gnome_app_destroy (GtkObject *object)
 		app->layout = NULL;
 	}
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -391,7 +391,7 @@ gnome_app_finalize (GObject *object)
 	g_free (app->_priv);
 	app->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 /* Callback for an app's contents' parent_set signal.  We set the app->contents
