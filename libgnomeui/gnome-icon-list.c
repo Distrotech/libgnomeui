@@ -1393,9 +1393,11 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	return TRUE;
 }
 
-static void gil_set_scroll_adjustments (GtkLayout *layout,
-					GtkAdjustment *hadjustment,
-					GtkAdjustment *vadjustment) {
+static void
+gil_set_scroll_adjustments (GtkLayout *layout,
+			    GtkAdjustment *hadjustment,
+			    GtkAdjustment *vadjustment)
+{
 	Gil *gil = GIL (layout);
 
 	gnome_icon_list_set_hadjustment (gil, hadjustment);
