@@ -549,7 +549,7 @@ struct scale_color {
 };
 
 static struct scale_color scale_base = { 0xd6, 0xd6, 0xd6 };
-static struct scale_color scale_trans = { 0xfe, 0x00, 0xff };
+static struct scale_color scale_trans = { 0xff, 0x00, 0xff };
 
 static char *
 scale_down(GtkWidget *window, unsigned char *datao, gint wo, gint ho, gint w, gint h)
@@ -872,7 +872,7 @@ create_pixmap_from_data(GtkWidget *window, GnomeStockPixmapEntryData *data)
 static GnomePixmap *
 create_pixmap_from_imlib(GtkWidget *window, GnomeStockPixmapEntryImlib *data)
 {
-	static GdkImlibColor shape_color = { 0xfe, 0, 0xff, 0 };
+	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
 
 	return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped((gchar *)data->rgb_data,
 								 NULL,
@@ -886,7 +886,7 @@ static GnomePixmap *
 create_pixmap_from_imlib_scaled(GtkWidget *window,
 				GnomeStockPixmapEntryImlibScaled *data)
 {
-	static GdkImlibColor shape_color = { 0xfe, 0, 0xff, 0 };
+	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
 	gchar *d;
 
 	if ((data->width != data->scaled_width) ||
@@ -1689,7 +1689,7 @@ gnome_stock_menu_accel_dlg(char *section)
 GtkWidget *
 gnome_stock_transparent_window (const char *icon, const char *subtype)
 {
-	static GdkImlibColor shape_color = { 0xfe, 0, 0xff, 0 };
+	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
 	GnomeStockPixmapEntry *entry;
 	GtkWidget *window;
 	GdkImlibImage *im;
