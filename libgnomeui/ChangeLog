@@ -1,3 +1,12 @@
+1998-08-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkcauldron.c (gtk_cauldron_button_exit): Used gtk_main_quit for
+	terminating the dialog instead of destroying the window, as the
+	code expects the window to be valid after the cauldron main
+	loop.
+	(gtk_dialog_cauldron_parse): Hook to the delete_event instead of
+	destroy (as we do the destroy always after gtk_main).
+
 Fri Aug 21 18:28:43 1998  Jonathan Blandford  <jrb@redhat.com>
 	* gtk-plug.[ch]:
 	(gtk_plug_construct): New function.

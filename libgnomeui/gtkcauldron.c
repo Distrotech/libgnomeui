@@ -76,7 +76,7 @@ void gtk_cauldron_button_exit (GtkWidget * w, struct cauldron_button *b)
 	gtk_cauldron_get_results (b->r);
     if (b->window) {
 	*(b->result) = b->label;	/* returned from gtk_dialog_cauldron */
-	gtk_widget_destroy (b->window);
+	gtk_main_quit ();
     }
 }
 
@@ -425,7 +425,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     d.options = options;
     d.r = &r;
 
-    gtk_signal_connect (GTK_OBJECT (window), "destroy",
+    gtk_signal_connect (GTK_OBJECT (window), "delete_event",
 			GTK_SIGNAL_FUNC (gtk_main_quit),
 			NULL);
 
@@ -791,7 +791,8 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     gtk_main ();
 
     gtk_window_remove_accel_group (GTK_WINDOW (window), accel_table);
-
+    gtk_object_destroy (GTK_OBJECT (window));
+    
     if (r) {
 	while (r->prev)
 	    r = r->prev;
