@@ -1,3 +1,10 @@
+2001-11-07  jacob berkman  <jacob@ximian.com>
+
+	* glade/Makefile.am (glademoduledir): just install into our prefix
+	rather than libglade's
+
+	* configure.in: remove check for glade module dir
+
 2001-10-29  jacob berkman  <jacob@ximian.com>
 
 	* configure.in: drop the 2 from the package name, and set
