@@ -1,3 +1,7 @@
+1999-02-20  Stuart Parmenter <pavlov@pavlov.net>
+
+	* gnome-calculator.c: Accept keypad input.
+
 1999-02-18  Sergey Panov <sipan@mit.edu>
 
         * Makefile.am: Makefile will now be installing gtkrc.ru
