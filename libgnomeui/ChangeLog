@@ -1,9 +1,11 @@
 2001-12-27  jacob berkman  <jacob@ximian.com>
 
 	* gnome-font-picker.c
+	(gnome_font_picker_fi_set_use_font_in_label): remove workaround as
+	it has been fixed in gtk
 	(gnome_font_picker_fi_set_use_font_in_label): work around for gtk
 	bug #67598
-	
+
 	* gnome-font-picker.c (gnome_font_picker_set_preview_text): don't
 	free/dup the text if it is the same (pointer) as our current text
 	(gnome_font_picker_set_font_name): ditto
