@@ -110,6 +110,25 @@ gnome_create_pixmap_gtk (GtkWidget *window, GdkPixmap **pixmap, GdkBitmap **mask
 		    file);
 }
 
+void
+gnome_create_pixmap_gtk_d (GtkWidget *window, GdkPixmap **pixmap, GdkBitmap **mask, GtkWidget *holder,
+			   char **data)
+{
+	GtkStyle *style;
+	
+	g_assert(window != NULL);
+	g_assert(pixmap != NULL);
+	g_assert(mask != NULL);
+	g_assert(holder != NULL);
+
+	if (!GTK_WIDGET_REALIZED(window))
+		gtk_widget_realize(window);
+
+	style = gtk_widget_get_style (holder);
+
+	*pixmap = gdk_pixmap_create_from_xpm_d (window->window, &mask, &style->bg[GTK_STATE_NORMAL], data);
+}
+
 GtkWidget *
 gnome_create_pixmap_widget (GtkWidget *window, GtkWidget *holder, char *file)
 {
@@ -120,6 +139,17 @@ gnome_create_pixmap_widget (GtkWidget *window, GtkWidget *holder, char *file)
 		return NULL;
 
 	gnome_create_pixmap_gtk(window, &pixmap, &mask, holder, file);
+
+	return gtk_pixmap_new(pixmap, mask);
+}
+
+GtkWidget *
+gnome_create_pixmap_widget_d (GtkWidget *window, GtkWidget *holder, char **data)
+{
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	gnome_create_pixmap_gtk_d(window, &pixmap, &mask, holder, data);
 
 	return gtk_pixmap_new(pixmap, mask);
 }
@@ -136,6 +166,19 @@ gnome_set_pixmap_widget (GtkPixmap *pixmap, GtkWidget *window, GtkWidget *holder
 		return;
 
 	gnome_create_pixmap_gtk(window, &gpixmap, &mask, holder, file);
+
+	gtk_pixmap_set(pixmap, gpixmap, mask);
+}
+
+void
+gnome_set_pixmap_widget_d (GtkPixmap *pixmap, GtkWidget *window, GtkWidget *holder, gchar **data)
+{
+	GdkPixmap *gpixmap;
+	GdkBitmap *mask;
+	
+	g_assert (pixmap != NULL);
+
+	gnome_create_pixmap_gtk_d(window, &gpixmap, &mask, holder, data);
 
 	gtk_pixmap_set(pixmap, gpixmap, mask);
 }
