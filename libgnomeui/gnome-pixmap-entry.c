@@ -56,6 +56,7 @@
 #include "gnome-pixmap.h"
 
 #include <libgnomevfs/gnome-vfs-uri.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 struct _GnomePixmapEntryPrivate {
 	GtkWidget *preview;
@@ -74,14 +75,6 @@ static void drag_data_get		  (GtkWidget          *widget,
 					   guint               info,
 					   guint               time,
 					   GnomePixmapEntry   *pentry);
-static void drag_data_received		  (GtkWidget        *widget,
-					   GdkDragContext   *context,
-					   gint              x,
-					   gint              y,
-					   GtkSelectionData *selection_data,
-					   guint             info,
-					   guint32           time,
-					   GnomePixmapEntry *pentry);
 static void pentry_destroy		  (GtkObject *object);
 static void pentry_finalize		  (GObject *object);
 
@@ -405,53 +398,6 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 }
 
 static void
-drag_data_received (GtkWidget        *widget,
-		    GdkDragContext   *context,
-		    gint              x,
-		    gint              y,
-		    GtkSelectionData *selection_data,
-		    guint             info,
-		    guint32           time,
-		    GnomePixmapEntry *pentry)
-{
-	GList *uris, *li;
-	GnomeVFSURI *uri = NULL;
-	GtkWidget *entry;
-
-	g_return_if_fail (pentry != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
-
-	entry = gnome_pixmap_entry_gtk_entry (pentry);
-
-	/*here we extract the filenames from the URI-list we recieved*/
-	uris = gnome_vfs_uri_list_parse (selection_data->data);
-
-	/* FIXME: Support multiple files */
-	for (li = uris; li != NULL; li = li->next) {
-		uri = li->data;
-		/* FIXME: Support non-local files */
-		if (gnome_vfs_uri_is_local (uri)) {
-			break;
-		}
-		uri = NULL;
-	}
-
-	/*if there's isn't a file*/
-	if (uri == NULL) {
-		gtk_drag_finish (context, FALSE, FALSE, time);
-		/*free the list of files we got*/
-		gnome_vfs_uri_list_free (uris);
-		return;
-	}
-
-	gtk_entry_set_text (GTK_ENTRY (entry),
-			    gnome_vfs_uri_get_path (uri));
-
-	/*free the list of files we got*/
-	gnome_vfs_uri_list_free (uris);
-}
-
-static void
 drag_data_get  (GtkWidget          *widget,
 		GdkDragContext     *context,
 		GtkSelectionData   *selection_data,
@@ -485,13 +431,6 @@ turn_on_previewbox(GnomePixmapEntry *pentry)
 {
 	pentry->_priv->preview_sw = gtk_scrolled_window_new(NULL,NULL);
 	gtk_widget_ref(pentry->_priv->preview_sw);
-	gtk_drag_dest_set (GTK_WIDGET (pentry->_priv->preview_sw),
-			   GTK_DEST_DEFAULT_MOTION |
-			   GTK_DEST_DEFAULT_HIGHLIGHT |
-			   GTK_DEST_DEFAULT_DROP,
-			   drop_types, 1, GDK_ACTION_COPY);
-	g_signal_connect (G_OBJECT (pentry->_priv->preview_sw), "drag_data_received",
-			  G_CALLBACK (drag_data_received), pentry);
 	/*for some reason we can't do this*/
 	/*g_signal_connect (G_OBJECT (pentry->_priv->preview_sw), "drag_data_get",
 			    G_CALLBACK (drag_data_get), pentry);*/

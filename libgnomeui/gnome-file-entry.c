@@ -38,6 +38,7 @@
 
 #include <libgnome/gnome-macros.h>
 #include <libgnomevfs/gnome-vfs-uri.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
@@ -570,36 +571,36 @@ gnome_file_entry_drag_data_received (GtkWidget        *widget,
 				     guint             info,
 				     guint32           time)
 {
-	GList *uris, *li;
-	GnomeVFSURI *uri = NULL;
+	GtkWidget *entry;
+	char **uris;
+	char *file = NULL;
+	int i;
 
-	/*here we extract the filenames from the URI-list we recieved*/
-	uris = gnome_vfs_uri_list_parse (selection_data->data);
+	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (widget));
 
-	/* FIXME: Support multiple files */
-	/* FIXME: Support executable entries (smack files after others) */
-	for (li = uris; li != NULL; li = li->next) {
-		uri = li->data;
-		/* FIXME: Support non-local files */
-		if (gnome_vfs_uri_is_local (uri)) {
-			break;
-		}
-		uri = NULL;
-	}
-
-	/*if there's isn't a file*/
-	if (uri == NULL) {
+	uris = g_strsplit (selection_data->data, "\r\n", -1);
+	if (uris == NULL) {
 		gtk_drag_finish (context, FALSE, FALSE, time);
-		/*free the list of files we got*/
-		gnome_vfs_uri_list_free (uris);
 		return;
 	}
 
-	gtk_entry_set_text (GTK_ENTRY(widget),
-			    gnome_vfs_uri_get_path (uri));
+	for (i =0; uris[i] != NULL; i++) {
+		/* FIXME: Support non-local files */
+		/* FIXME: Multiple files */
+		file = gnome_vfs_get_local_path_from_uri (uris[i]);
+		if (file != NULL)
+			break;
+	}
 
-	/*free the list of files we got*/
-	gnome_vfs_uri_list_free (uris);
+	g_strfreev (uris);
+
+	/*if there's isn't a file*/
+	if (file == NULL) {
+		gtk_drag_finish (context, FALSE, FALSE, time);
+		return;
+	}
+
+	gtk_entry_set_text (GTK_ENTRY (entry), file);
 }
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
@@ -636,13 +637,16 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 			  G_CALLBACK (entry_activate_signal),
 			  fentry);
 
-	gtk_drag_dest_set (GTK_WIDGET (the_gtk_entry),
+	/* we must get rid of gtk's drop site on the entry else
+	 * weird stuff can happen */
+	gtk_drag_dest_unset (the_gtk_entry);
+	gtk_drag_dest_set (GTK_WIDGET (fentry),
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
-			   drop_types, ELEMENTS(drop_types), GDK_ACTION_COPY);
+			   drop_types, ELEMENTS (drop_types), GDK_ACTION_COPY);
 
-	g_signal_connect (the_gtk_entry, "drag_data_received",
+	g_signal_connect (fentry, "drag_data_received",
 			  G_CALLBACK (gnome_file_entry_drag_data_received),
 			  NULL);
 

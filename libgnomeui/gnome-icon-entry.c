@@ -56,6 +56,7 @@
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "gnome-file-entry.h"
 #include "gnome-icon-list.h"
@@ -802,26 +803,33 @@ drag_data_received (GtkWidget        *widget,
 		    guint32           time,
 		    GnomeIconEntry   *ientry)
 {
-	GList *uris, *li;
-	GnomeVFSURI *uri = NULL;
+	char **uris;
+	char *file = NULL;
 	GnomeVFSFileInfo *file_info;
+	int i;
 
-	/*here we extract the filenames from the URI-list we recieved*/
-	uris = gnome_vfs_uri_list_parse (selection_data->data);
+	uris = g_strsplit (selection_data->data, "\r\n", -1);
+	if (uris == NULL) {
+		gtk_drag_finish (context, FALSE, FALSE, time);
+		return;
+	}
 
-	for (li = uris; li != NULL; li = li->next) {
+	for (i =0; uris[i] != NULL; i++) {
 		const char *mimetype;
-		const char *path;
-
-		uri = li->data;
-
+		GnomeVFSURI *uri;
 		/* FIXME: Support non-local files */
-		if ( ! gnome_vfs_uri_is_local (uri)) {
-			uri = NULL;
+		/* FIXME: Multiple files */
+		file = gnome_vfs_get_local_path_from_uri (uris[i]);
+		if (file == NULL)
+			continue;
+
+		uri = gnome_vfs_uri_new (uris[i]);
+		if (uri == NULL) {
+			g_free (file);
+			file = NULL;
 			continue;
 		}
 
-		path = gnome_vfs_uri_get_path (uri);
 		file_info = gnome_vfs_file_info_new ();
 		/* FIXME: OK to do synchronous I/O on a possibly-remote URI here? */
 		gnome_vfs_get_file_info_uri (uri, file_info,
@@ -836,14 +844,14 @@ drag_data_received (GtkWidget        *widget,
 
 			/* Try to read the .desktop's Icon entry */
 			confpath = g_strdup_printf ("=%s=/Desktop Entry/Icon",
-						    path);
+						    file);
 			icon = gnome_config_get_string (confpath);
 			if (icon == NULL || *icon == '\0') {
 				gnome_config_drop_file (confpath);
 				g_free (confpath);
 				g_free (icon);
 				confpath = g_strdup_printf ("=%s=/KDE Desktop Entry/Icon",
-							    path);
+							    file);
 				icon = gnome_config_get_string (confpath);
 				gnome_config_drop_file (confpath);
 				g_free (confpath);
@@ -854,7 +862,8 @@ drag_data_received (GtkWidget        *widget,
 			}
 
 			if (icon == NULL) {
-				uri = NULL;
+				g_free (file);
+				file = NULL;
 				continue;
 			}
 
@@ -888,25 +897,22 @@ drag_data_received (GtkWidget        *widget,
 				}
 				g_free (full);
 			}
-		} else if (gnome_icon_entry_set_filename (ientry, path)) {
+		} else if (gnome_icon_entry_set_filename (ientry, file)) {
 			gnome_vfs_file_info_unref (file_info);
 			break;
 		}
-		uri = NULL;
+		g_free (file);
+		file = NULL;
 		gnome_vfs_file_info_unref (file_info);
 	}
 
+	g_strfreev (uris);
 
 	/*if there's isn't a file*/
-	if (uri == NULL) {
+	if (file == NULL) {
 		gtk_drag_finish (context, FALSE, FALSE, time);
-		/*free the list of files we got*/
-		gnome_vfs_uri_list_free (uris);
 		return;
 	}
-
-	/*free the list of files we got*/
-	gnome_vfs_uri_list_free (uris);
 }
 
 static void

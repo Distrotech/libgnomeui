@@ -1,3 +1,21 @@
+Wed May 15 20:30:14 2002  George Lebl <jirka@5z.com>
+
+	* libgnomeui/gnome-file-entry.c: remove dnd dest from the gtk entry and
+	  setup dest on the whole file entry.  Also parse the uri list
+	  differently, we can't use _is_local since it's not what I thought
+	  it meant when I originally wrote this code.  So that for example
+	  drops from applications:// won't work since we can so far only
+	  handle files.  Also this will remove the drag_data_received from
+	  being called twice because we set dest twice, etc...
+
+	* libgnomeui/gnome-pixmap-entry.c: since the drag dest is now bound
+	  on the  whole file entry and we derive from it remove it from here
+
+	* libgnomeui/gnome-icon-entry.c: parse the uri list in the same way
+	  we do for file entry now, so that we work correctly.  We really
+	  need at least a little bit of vfs support so that we could snarf
+	  icons out of desktop files from the vfolders.
+
 2002-05-15  Federico Mena Quintero  <federico@ximian.com>
 
 	* libgnomeui/gnome-icon-item.c (update_pango_layout): Use
