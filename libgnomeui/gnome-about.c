@@ -32,10 +32,12 @@
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkimage.h>
 #include <gtk/gtklabel.h>
+#include <gtk/gtknotebook.h>
 #include <gtk/gtkscrolledwindow.h>
 #include <gtk/gtkstock.h>
 #include <gtk/gtktextview.h>
 #include <gtk/gtkvbox.h>
+#include <gtk/gtkviewport.h>
 #include <libgnome/gnome-macros.h>
 
 
@@ -93,14 +95,14 @@ gnome_about_update_authors_label (GnomeAbout *about, GtkWidget *label)
 		gtk_widget_show (label);
 	}
 
-	string = g_string_new ("<b>");
-	g_string_append (string, _("Written by"));
-	g_string_append (string, "</b>\n");
+	string = g_string_new ("");
 
 	for (list = about->_priv->authors; list; list = list->next) {
 		tmp = g_markup_escape_text (list->data, -1);
 		g_string_append (string, tmp);
-		g_string_append (string, "\n");
+
+		if (list->next)
+			g_string_append (string, "\n");
 		g_free (tmp);
 	}
 	
@@ -123,14 +125,14 @@ gnome_about_update_documenters_label (GnomeAbout *about, GtkWidget *label)
 		gtk_widget_show (label);
 	}
 
-	string = g_string_new ("<b>");
-	g_string_append (string, _("Documented by"));
-	g_string_append (string, "</b>\n");
+	string = g_string_new ("");
 
 	for (list = about->_priv->documenters; list; list = list->next) {
 		tmp = g_markup_escape_text (list->data, -1);
 		g_string_append (string, tmp);
-		g_string_append (string, "\n");
+
+		if (list->next)
+			g_string_append (string, "\n");
 		g_free (tmp);
 	}
 	
@@ -152,9 +154,7 @@ gnome_about_update_translation_information_label (GnomeAbout *about, GtkWidget *
 		gtk_widget_show (label);
 	}
 
-	string = g_string_new ("<b>");
-	g_string_append (string, _("Translated by"));
-	g_string_append (string, "</b>\n");
+	string = g_string_new ("");
 
 	tmp = g_markup_escape_text (about->_priv->translator_credits, -1);
 	g_string_append (string, tmp);
@@ -172,6 +172,8 @@ create_label (void)
 	label = gtk_label_new ("");
 	gtk_label_set_selectable (GTK_LABEL (label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
+	gtk_misc_set_padding (GTK_MISC (label), 8, 8);
+
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 
 	return label;
@@ -180,37 +182,62 @@ create_label (void)
 static void
 gnome_about_display_credits_dialog (GnomeAbout *about)
 {
-	GtkWidget *dialog, *label, *hbox;
+	GtkWidget *dialog, *label, *notebook, *sw;
 	
 	dialog = gtk_dialog_new_with_buttons (_("Credits"),
 					      GTK_WINDOW (about),
 					      GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      NULL);
+	gtk_window_set_default_size (GTK_WINDOW (dialog), 360, 260);
 	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy), dialog);
 
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (hbox), 8);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, TRUE, TRUE, 0);
+	notebook = gtk_notebook_new ();
+	gtk_container_set_border_width (GTK_CONTAINER (notebook), 8);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, TRUE, TRUE, 0);
 
-	label = create_label ();
-	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 4);
-	gnome_about_update_authors_label (about, label);
-	g_signal_connect (about, "notify::authors",
-			  G_CALLBACK (gnome_about_update_authors_label), label);
+	if (about->_priv->authors != NULL) {
+		label = create_label ();
 
-	label = create_label ();
-	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 4);
-	gnome_about_update_documenters_label (about, label);
-	g_signal_connect (about, "notify::documenters",
-			  G_CALLBACK (gnome_about_update_documenters_label), label);
+		sw = gtk_scrolled_window_new (NULL, NULL);
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+						GTK_POLICY_AUTOMATIC,
+						GTK_POLICY_AUTOMATIC);
+		gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (sw), label);
+		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
 		
-	label = create_label ();
-	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 4);
-	gnome_about_update_translation_information_label (about, label);
-	g_signal_connect (about, "notify::translator_credits",
-			  G_CALLBACK (gnome_about_update_translation_information_label), label);
+		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw, gtk_label_new (_("Written by")));
+		gnome_about_update_authors_label (about, label);
+	}
+
+	if (about->_priv->documenters != NULL) {
+		label = create_label ();
+		
+		sw = gtk_scrolled_window_new (NULL, NULL);
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+						GTK_POLICY_AUTOMATIC,
+						GTK_POLICY_AUTOMATIC);
+		gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (sw), label);
+		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
+
+		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw, gtk_label_new (_("Documented by")));
+		gnome_about_update_documenters_label (about, label);
+	}
+
+	if (about->_priv->translator_credits != NULL) {
+		label = create_label ();
+		
+		sw = gtk_scrolled_window_new (NULL, NULL);
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+						GTK_POLICY_AUTOMATIC,
+						GTK_POLICY_AUTOMATIC);
+		gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (sw), label);
+		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
+
+		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw, gtk_label_new (_("Translated by")));
+		gnome_about_update_translation_information_label (about, label);
+	}
 	
 	gtk_widget_show_all (dialog);
 }
