@@ -1,3 +1,7 @@
+1999-07-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-popup-help.c: add some docs.
+
 1999-07-17  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-animator.c (gnome_animator_advance): Use `g_warning()'

@@ -413,6 +413,28 @@ paste_callback (GtkWidget *widget, gpointer data)
 }
 
 
+/**
+ * gnome_widget_add_help_with_uidata:
+ * @widget: The widget to add the popup help to.
+ * @help: The help message text.
+ * @menuinfo: The template for possible additional menu items.
+ * @user_data: The user data to be passed to menu callbacks.
+ * 
+ * This creates a popup menu on @widget with one entry.  The menu, invoked by
+ * pressing button three on the widget, will have one entry entitled: "Help with
+ * this."  Selecting this entry will bring up a tooltip with the help variable
+ * as its text.  In addition, if the widget is a descendent of #GtkEditable, it
+ * will add "cut", "copy", and "paste" to the menu.  If @help is NULL, then it
+ * will <emphasis>just</emphasis> add the "cut", "copy", and "paste".  Finally,
+ * if @menuinfo is non-NULL, it will append the menu defined by it on the end of
+ * the popup menu, with @user_data passed to the callbacks.  This function
+ * currently only works on non GTK_WIDGET_NO_WINDOW () widgets (ie. it only
+ * works on widgets with windows.)  If you would actually like a handle to the
+ * popup menu, call gnome_popup_menu_get() as normal.
+
+ * 
+ * Return value: 
+ **/
 /* public function. */
 void
 gnome_widget_add_help_with_uidata (GtkWidget *widget,
