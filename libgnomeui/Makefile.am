@@ -2,10 +2,16 @@
 
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
-INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @GTK_CFLAGS@ @SUPPORTINCS@
+INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @GTK_CFLAGS@ @SUPPORTINCS@ \
+        -DGNOMELIBDIR=\""$(libdir)"\" \
+        -DGNOMEDATADIR=\""$(datadir)"\" \
+        -DGNOMEBINDIR=\""$(bindir)"\" \
+        -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
+        -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-lib_LTLIBRARIES = libgnomeui.la
 noinst_PROGRAMS = ted_demo stock_demo
+bin_PROGRAMS = gnome_segv
+lib_LTLIBRARIES = libgnomeui.la
 
 libgnomeui_la_SOURCES = \
 	gnome-actionarea.c		\
@@ -63,6 +69,8 @@ libgnomeuiinclude_HEADERS = 		\
 	gtk-socket.h			\
 	libgnomeui.h
 
+gnome_segv_SOURCES = gnome_segv.c
+
 ted_demo_SOURCES = ted_demo.c
 
 stock_demo_SOURCES = stock_demo.c
@@ -81,6 +89,12 @@ EXTRA_DIST = \
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
+
+gnome_segv_LDADD =	\
+	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	$(top_builddir)/libgnome/libgnome.la 		\
+	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
+	$(INTLLIBS)
 
 ted_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\

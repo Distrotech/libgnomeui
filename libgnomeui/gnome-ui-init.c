@@ -8,11 +8,15 @@
 #include <gdk_imlib.h>
 #include "libgnome/libgnome.h"
 #include <argp.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
 
 static void gnome_rc_parse(gchar *command);
+static void gnome_segv_handle(int signum);
 
 
 
@@ -129,6 +133,16 @@ gnome_init (char *app_id, struct argp *app_args,
 	    int argc, char **argv,
 	    unsigned int flags, int *arg_index)
 {
+	struct sigaction sa;
+	error_t retval;
+
+	/* Yes, we do this twice, so if an error occurs before init,
+	   it will be caught, and if it happens after init, we'll override
+	   gtk's handler */
+	memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = (gpointer)gnome_segv_handle;
+	sigaction(SIGSEGV, &sa, NULL);
+
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_set_locale();
 
@@ -151,7 +165,13 @@ gnome_init (char *app_id, struct argp *app_args,
 		argp_program_version_hook = default_version_func;
 
 	/* Now parse command-line arguments.  */
-	return gnome_parse_arguments (app_args, argc, argv, flags, arg_index);
+	retval = gnome_parse_arguments (app_args, argc, argv, flags, arg_index);
+
+	memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = (gpointer)gnome_segv_handle;
+	sigaction(SIGSEGV, &sa, NULL);
+
+	return retval;
 }
 
 /* perhaps this belongs in libgnome.. move it if you like. */
@@ -228,4 +248,56 @@ gnome_rc_parse (gchar *command)
 	}
 	
 	g_free (apprc);
+}
+
+static void gnome_segv_handle(int signum)
+{
+  static int in_segv = 0;
+  void *eip = NULL;
+  pid_t pid;
+
+#if 0
+  /* Is there any way to do this portably? */
+#ifdef linux
+#if defined(__i386__)
+  eip = sc->eip;
+#elif defined(__ppc__)
+  eip = sc->nc_ip;
+#elif defined(__sparc__)
+  eip = sc->sigc_pc;
+#endif
+#endif
+
+#endif /* #if 0 */
+
+  if(in_segv)
+    return;
+
+  in_segv++;
+
+  pid = fork();
+
+  if(pid)
+    {
+      int estatus;
+      pid_t eret;
+      eret = waitpid(pid, &estatus, 0);
+      /* We only do a zap-em if the user specifically requested it
+	 - if an error happens getting user decision, we carry on.
+         "Failsafe" is the idea */
+      if(WIFEXITED(estatus) && WEXITSTATUS(estatus) == 0)
+	exit(0);
+      else if(WIFEXITED(estatus) && WEXITSTATUS(estatus) == 99)
+	return; /* We don't decrement the in_segv lock
+		   - basically the user wants to ignore all future segv's */
+    }
+  else
+    {
+      char buf[32];
+      snprintf(buf, sizeof(buf), "%ld", eip);
+      /* Child process */
+      execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
+	    program_invocation_name, buf, NULL);
+    }
+  in_segv--;
 }
