@@ -1,3 +1,12 @@
+1999-01-27  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-app-helper.c, gnome-init.c, gnome-spell.c:
+	Use autoconf incantation to include alloca.h properly.
+
+	* gnome-less.c:
+	Replace static const with a #define, Sun CC breaks if an array
+	is sized with a variable (yes, even a const one... grrr).
+
 1999-01-27  Felix Bellaby <felix@pooh.u-net.com>
 
 	* gnome-client.c (save_yourself_callback) wait for any pointer grab 
