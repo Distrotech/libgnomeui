@@ -231,67 +231,97 @@ gchar       *gnome_client_get_id                 (GnomeClient *client);
    recalled later to find the information.  */
 gchar       *gnome_client_get_previous_id        (GnomeClient *client);
 
-/* Get the config prefix for a client.  This config prefix depend on
-   the program name and the client id of a client.  This function is
-   useful, if your store configuration information of this client not
-   only in the command line, but in a config file.  You may use the
-   returned value as a prefix using the 'gnome_config_push_prefix'
-   function.  */
-
+/* Get the config prefix for a client. This config prefix provides a
+   suitable place to store any details about the state of the client 
+   which can not be described using the app's command line arguments (as
+   set in the restart command). You may push the returned value using
+   'gnome_config_push_prefix' and read or write any values you require. */
 gchar       *gnome_client_get_config_prefix        (GnomeClient *client);
 
-/* Get the config prefix for a class of clients.  The returned value
-   is more or less the same as the value returned by
-   'gnome_client_get_config_prefix', but it does not include the
-   client id.  */
+/* Get the config prefix that will be returned by the previous function
+   for clients which have NOT been restarted or cloned (i.e. for clients 
+   started by the user without `--sm-' options). This config prefix may be
+   used to write the user's preferred config for these "new" clients.
 
+   You could also use this prefix as a place to store and retrieve config
+   details that you wish to apply to ALL instances of the app. However, 
+   this practice limits the users freedom to configure each instance in
+   a different way so it should be used with caution. */
 gchar       *gnome_client_get_global_config_prefix (GnomeClient *client);
 
+/* The following functions are used to set or unset some session
+   management properties. If you want to unset an array property, you 
+   have to specify a NULL argv, if you want to unset a string property 
+   you have to specify NULL as parameter.
 
-/* The follwing functions are used to set or unset some session
-   management properties.  
+   The `--sm-' options are automatically added as the first arguments
+   to the restart and clone commands and you should not set them. */
 
-   If you want to unset an array property, you have to specify a NULL
-   argv, if you want to unset a string property you have to specify
-   NULL as parameter.  You are not allowed to unset the properties
-   marked as required (see above).  There is one exception to this
-   rule: If you unset the clone command, the clone command will be set
-   to the value of the restart command.
+/* The session manager usually only restarts clients which were running
+   when the session was last saved. You can use the restart style to make
+   the manager restart the client at the start of every session or
+   every time that the client dies or to prevent any restarting. */
+void         gnome_client_set_restart_style      (GnomeClient *client,
+						  GnomeRestartStyle style);
 
-   The magic `--sm-client-id' option is automatically appended to the
-   restart command.  Do not include this option in the restart command
-   that you set.  */
-void         gnome_client_set_clone_command      (GnomeClient *client, 
+/* Executing the restart command on the local host should reproduce
+   the state of the client at the time of the session save as closely
+   as possible. Saving config info under the gnome_client_get_config_prefix
+   is generally useful. */
+void         gnome_client_set_restart_command    (GnomeClient *client,
 						  gint argc, gchar *argv[]);
-void         gnome_client_set_current_directory  (GnomeClient *client,
-						  const gchar *dir);
+
+/* This function provides an alternative way of adding new arguments
+   to the restart command. The arguments are placed before the arguments
+   specified by gnome_client_set_restart_command and after any arguments
+   specified by the user on the original command line. */
+void         gnome_client_add_static_arg (GnomeClient *client, ...);
+
+
+
+/* Executing the discard command on the local host should delete the
+   information saved as part of the session save that was in progress
+   when the discard command was set. For example:
+
+     gchar *prefix = gnome_client_get_config_prefix (client);
+     gchar *argv[] = { "rm", NULL };
+     argv[1] = gnome_config_get_real_path (prefix);
+     gnome_client_set_discard_command (client, 2, argv);
+ */
 void         gnome_client_set_discard_command    (GnomeClient *client,
 						  gint argc, gchar *argv[]);
+
+/* These two commands are used by clients that use the GNOME_RESTART_ANYWAY
+   restart style to to undo their effects (these clients usually perform 
+   initialisation functions and leave effects behind after they die).
+   The shutdown command simply undoes the effects of the client. It is 
+   executed during a normal logout. The resign command combines the effects 
+   of a shutdown command and a discard command. It is executed when the user
+   decides that the client should cease to be restarted. */
+void         gnome_client_set_resign_command     (GnomeClient *client,
+						  gint argc, gchar *argv[]);
+void         gnome_client_set_shutdown_command   (GnomeClient *client,
+						  gint argc, gchar *argv[]);
+
+/* All the preceeding session manager commands are executed in the directory 
+   and environment set up by these two commands: */
+void         gnome_client_set_current_directory  (GnomeClient *client,
+						  const gchar *dir);
 void         gnome_client_set_environment        (GnomeClient *client,
 						  const gchar *name,
 						  const gchar *value);
+
+/* These four values are set automatically to the values required by the 
+   session manager and you should not need to change them. The clone
+   command is directly copied from the restart command. */
+void         gnome_client_set_clone_command      (GnomeClient *client, 
+						  gint argc, gchar *argv[]);
 void         gnome_client_set_process_id         (GnomeClient *client, 
 						  pid_t pid);
 void         gnome_client_set_program            (GnomeClient *client, 
 						  const gchar *program);
-void         gnome_client_set_restart_command    (GnomeClient *client,
-						  gint argc, gchar *argv[]);
-void         gnome_client_set_resign_command     (GnomeClient *client,
-						  gint argc, gchar *argv[]);
-void         gnome_client_set_restart_style      (GnomeClient *client,
-						  GnomeRestartStyle style);
-void         gnome_client_set_shutdown_command   (GnomeClient *client,
-						  gint argc, gchar *argv[]);
 void         gnome_client_set_user_id            (GnomeClient *client,
 						  const gchar *user_id);
-
-/* The following function may be used, to add static arguments to the
-   clone and restart command.  This function can be called more than
-   once.  Every call appends the new arguments to the older ones.
-   These arguments are inserted ahead the arguments set with the
-   'gnome_client_set[clone|restart]_command'.  This list of arguments,
-   given to this function must be end with 'NULL'.  */
-void         gnome_client_add_static_arg (GnomeClient *client, ...);
 
 
 /* The following function can be used, if you want that the

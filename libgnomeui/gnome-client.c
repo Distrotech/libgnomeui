@@ -42,7 +42,7 @@ extern char *program_invocation_short_name;
 #include <X11/SM/SMlib.h>
 #endif /* HAVE_LIBSM */
 
-static GtkWidget *grab_widget = NULL;
+static GtkWidget *client_grab_widget = NULL;
 
 enum {
   SAVE_YOURSELF,
@@ -103,7 +103,7 @@ static GtkObjectClass *parent_class = NULL;
 static gint client_signals[LAST_SIGNAL] = { 0 };
 
 static const char *sm_client_id_arg_name = "--sm-client-id";
-static const char *sm_cloned_id_arg_name = "--sm-cloned-id";
+static const char *sm_config_prefix_arg_name = "--sm-config-prefix";
 static const char *sm_client_id_prop="SM_CLIENT_ID";
 
 
@@ -372,64 +372,104 @@ client_set_array (GnomeClient *client, gchar *name, gchar *array[])
   g_free (vals);
 }		   
 
-
 static void
-client_set_array_with_arg (GnomeClient *client,
-			   gchar *name,
-			   const gchar *arg_name,
-			   gchar *array[])
+client_set_clone_command (GnomeClient *client)
 {
-  GList  *temp;
+  GList  *list;
   gint    argc;
   gchar **ptr;
   gint    i;
 
-    SmPropValue *vals;
+  SmPropValue *vals;
   
-  g_return_if_fail (name != NULL);
-  g_return_if_fail (arg_name != NULL);
-
-  if (!GNOME_CLIENT_CONNECTED (client) || (array == NULL))
+  if (!GNOME_CLIENT_CONNECTED (client) || (client->clone_command == NULL))
     return;
 
-  /* We count the number of elements in our array.  */
-  for (ptr= array, argc= 0; *ptr ; ptr++, argc++) /* LOOP */;
+  for (ptr = client->clone_command, argc = 0; *ptr ; ptr++) argc++;
 
-  /* We add an additional client id argument and some some static
-     arguments.  */
-  argc+= 2+g_list_length (client->static_args);
+  /* Add space for static arguments and config prefix. */
+  argc += g_list_length (client->static_args) + 2;
 
-  vals= g_new (SmPropValue, argc);
+  vals = g_new (SmPropValue, argc);
 
-  /* The program to start.  */
-  vals[0].length= strlen (*array);
-  vals[0].value = *array++;
+  ptr = client->clone_command;
 
-  /* An argument with the client id.  */
-  vals[1].length= strlen (arg_name);
-  vals[1].value = (char *) arg_name;
-  vals[2].length= strlen (client->client_id);
-  vals[2].value = client->client_id;
+  vals[0].length = strlen (*ptr);
+  vals[0].value  = *ptr++;
 
-  /* Some static arguments.  */
-  for (temp= client->static_args, i= 3; temp; i++, temp= g_list_next (temp))
+  vals[1].length = strlen (sm_config_prefix_arg_name);
+  vals[1].value = (char *) sm_config_prefix_arg_name;
+  vals[2].length = strlen (gnome_client_get_config_prefix (client));
+  vals[2].value = client->config_prefix;
+
+  for (list = client->static_args, i = 3; list; i++, list= g_list_next (list))
     {
-      vals[i].length= strlen ((gchar *)temp->data);
-      vals[i].value = (gchar *)temp->data;
+      vals[i].length= strlen ((gchar *)list->data);
+      vals[i].value = (gchar *)list->data;
     }
-  
-  /* Now set the arguments, we must set.  */
-  for (ptr= array; *ptr ; ptr++, i++)
+
+  for (; *ptr ; i++)
     {
       vals[i].length = strlen (*ptr);
-      vals[i].value  = *ptr;
+      vals[i].value  = *ptr++;
     }
 
-  client_set_value (client, name, SmLISTofARRAY8, argc, vals);
+  client_set_value (client, SmCloneCommand, SmLISTofARRAY8, argc, vals);
   
   g_free (vals);
 }		   
 
+static void
+client_set_restart_command (GnomeClient *client)
+{
+  GList  *list;
+  gint    argc;
+  gchar **ptr;
+  gint    i;
+
+  SmPropValue *vals;
+  
+  if (!GNOME_CLIENT_CONNECTED (client) || (client->restart_command == NULL))
+    return;
+
+  for (ptr = client->restart_command, argc = 0; *ptr ; ptr++) argc++;
+
+  /* Add space for static arguments, config prefix and client id. */
+  argc += g_list_length (client->static_args) + 4;
+
+  vals = g_new (SmPropValue, argc);
+
+  ptr = client->restart_command;
+
+  vals[0].length = strlen (*ptr);
+  vals[0].value  = *ptr++;
+
+  vals[1].length = strlen (sm_config_prefix_arg_name);
+  vals[1].value = (char *) sm_config_prefix_arg_name;
+  vals[2].length = strlen (gnome_client_get_config_prefix (client));
+  vals[2].value = client->config_prefix;
+
+  vals[3].length = strlen (sm_client_id_arg_name);
+  vals[3].value = (char *) sm_client_id_arg_name;
+  vals[4].length = strlen (client->client_id);
+  vals[4].value = client->client_id;
+
+  for (list = client->static_args, i = 5; list; i++, list = g_list_next (list))
+    {
+      vals[i].length= strlen ((gchar *)list->data);
+      vals[i].value = (gchar *)list->data;
+    }
+
+  for (; *ptr ; i++)
+    {
+      vals[i].length = strlen (*ptr);
+      vals[i].value  = *ptr++;
+    }
+
+  client_set_value (client, SmRestartCommand, SmLISTofARRAY8, argc, vals);
+  
+  g_free (vals);
+}		   
 
 static void
 client_unset (GnomeClient *client, gchar *name)
@@ -524,6 +564,8 @@ client_save_yourself_callback (SmcConn   smc_conn,
 			       Bool      fast)
 {
   GnomeClient *client= (GnomeClient*) client_data;
+  gchar *name, *prefix;
+  int fd;
 
   switch (save_style)
     {
@@ -564,10 +606,34 @@ client_save_yourself_callback (SmcConn   smc_conn,
 
   client_set_state (client, GNOME_CLIENT_SAVING_PHASE_1);
 
-  if (!grab_widget) {
-    grab_widget = gtk_widget_new (gtk_widget_get_type (), NULL);
+  if (!client_grab_widget) {
+    client_grab_widget = gtk_widget_new (gtk_widget_get_type(), NULL);
   }
-  gtk_grab_add (grab_widget);
+  gtk_grab_add (client_grab_widget);
+
+  name = client->program;
+
+  if ((prefix = strrchr (name, '/')))
+    name = prefix + 1;
+
+  prefix = g_copy_strings ("/", name, "-XXXXX", "/", NULL);
+  name = gnome_config_get_real_path (prefix);
+  
+  free (prefix);
+
+  name [strlen (name) - 1] = 'X';
+  fd = mkstemp (name);
+
+  if (fd != -1)
+    {
+      unlink (name);
+      close (fd);
+      client->config_prefix = g_copy_strings (strrchr (name, '/'), "/", NULL);
+    }
+  free (name);
+
+  client_set_clone_command (client);
+  client_set_restart_command (client);
 
   gtk_signal_emit (GTK_OBJECT (client), 
 		   client_signals[SAVE_YOURSELF],
@@ -589,7 +655,7 @@ client_die_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client= (GnomeClient*) client_data;
 
-  gtk_grab_remove (grab_widget);
+  gtk_grab_remove (client_grab_widget);
 
   gtk_signal_emit (GTK_OBJECT (client), client_signals[DIE]);
 }
@@ -600,7 +666,7 @@ client_save_complete_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client = (GnomeClient*) client_data;
 
-  gtk_grab_remove (grab_widget);
+  gtk_grab_remove (client_grab_widget);
 
   gtk_signal_emit (GTK_OBJECT (client), client_signals[SAVE_COMPLETE]);
 }
@@ -611,7 +677,7 @@ client_shutdown_cancelled_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client= (GnomeClient*) client_data;
 
-  gtk_grab_remove (grab_widget);
+  gtk_grab_remove (client_grab_widget);
 
   gtk_signal_emit (GTK_OBJECT (client), client_signals[SHUTDOWN_CANCELLED]);
 }
@@ -649,7 +715,6 @@ client_interact_callback (SmcConn smc_conn, SmPointer client_data)
 /* The master client.  */
 static GnomeClient *master_client= NULL;
 static GnomeClient *cloned_client= NULL;
-static gchar       *cloned_id    = NULL;
 
 static gboolean gnome_client_auto_connect_master = TRUE;
 
@@ -678,8 +743,8 @@ static const struct poptOption options[] = {
    client_parse_func, 0, NULL, NULL},
   {"sm-client-id", '\0', POPT_ARG_STRING, NULL, -1, 
    N_("Specify session management ID"), N_("ID")},
-  {"sm-cloned-id", '\0', POPT_ARG_STRING, NULL, -2, 
-   N_("Specify ID of cloned client"), N_("ID")},
+  {"sm-config-prefix", '\0', POPT_ARG_STRING, NULL, -2, 
+   N_("Specify prefix of saved configuration"), N_("PREFIX")},
   {"sm-disable", '\0', POPT_ARG_NONE, NULL, -3, 
    N_("Disable connection to session manager"), NULL},
   {NULL, '\0', 0, NULL, 0}
@@ -720,20 +785,13 @@ client_parse_func (poptContext ctx,
     {
       /* Option: --sm-client-id  */
       gnome_client_set_id (master_client, arg);
-
       g_free (master_client->previous_id);
       master_client->previous_id= g_strdup (arg);
-      
-      /* The cloned id should only be set, if there wasn't an explicit
-         '--sm-cloned-id' option specified.  */
-      if (!cloned_id)
-	cloned_id= g_strdup (arg);
     }
   else if (key == -2)
     {
-      /* Option: --sm-cloned-id  */
-      g_free (cloned_id);
-      cloned_id = g_strdup (arg);
+      /* Option: --sm-config-prefix  */
+      master_client->config_prefix = g_strdup (arg);
     }
   else if (key == -3)
     {
@@ -863,7 +921,6 @@ gnome_master_client (void)
 }
 
 
-
 /**
  * gnome_cloned_client
  *
@@ -875,15 +932,8 @@ gnome_master_client (void)
 GnomeClient*
 gnome_cloned_client (void)
 {
-  if (!cloned_client && cloned_id)
-    {
-      /* The 'cloned_client' is only created, when it's needed.  */
-      cloned_client= gnome_client_new_without_connection ();
-      gnome_client_set_id (cloned_client, cloned_id);
-    }
-  return cloned_client;
+  return NULL;
 }
-
 
 /*****************************************************************************/
 /* GTK-class managing functions */
@@ -1290,7 +1340,6 @@ gnome_client_disconnect (GnomeClient *client)
 
 /*****************************************************************************/
 
-
 /**
  * gnome_client_set_clone_command
  * @client: Pointer to GNOME session client object.
@@ -1323,17 +1372,9 @@ gnome_client_set_clone_command (GnomeClient *client,
     }
 
 #ifdef HAVE_LIBSM
-  if (GNOME_CLIENT_CONNECTED (client) && client->clone_command)
-    {
-      client_set_array_with_arg (client, 
-					   SmCloneCommand, 
-					   sm_cloned_id_arg_name,
-					   client->clone_command);
-    }
+  client_set_clone_command (client);
 #endif /* HAVE_LIBSM */
 }
-
-
 
 /**
  * gnome_client_set_current_directory
@@ -1587,12 +1628,7 @@ gnome_client_set_restart_command (GnomeClient *client,
   client->restart_command = array_init_from_arg (argc, argv);
 
 #ifdef HAVE_LIBSM
-  if (GNOME_CLIENT_CONNECTED (client) && client->restart_command)
-    {
-      client_set_array_with_arg (client, SmRestartCommand, 
-				 sm_client_id_arg_name,
-				 client->restart_command);
-    }
+  client_set_restart_command (client);
 #endif /* HAVE_LIBSM */
 }
 
@@ -1790,7 +1826,6 @@ gnome_client_get_id (GnomeClient *client)
   return client->client_id;
 }
 
-
 /**
  * gnome_client_get_previous_id
  * @client: Pointer to GNOME session client object.
@@ -1809,10 +1844,6 @@ gnome_client_get_previous_id (GnomeClient *client)
   return client->previous_id;
 }
 
-
-static gchar *config_prefix= NULL;
-  
-
 /**
  * gnome_client_get_config_prefix
  * @client: Pointer to GNOME session client object.
@@ -1825,36 +1856,16 @@ static gchar *config_prefix= NULL;
 gchar *
 gnome_client_get_config_prefix (GnomeClient *client)
 {
-  if (client == NULL)
-    {
-      if (!config_prefix)
-	config_prefix= g_copy_strings ("/", program_invocation_short_name, "/",
-				       NULL);
+  if (!client || !GNOME_IS_CLIENT (client))
+    client = master_client;
 
-      return config_prefix;
-    }
-
-  g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
-  
   if (!client->config_prefix)
-    {
-      char *name, *program;
-      program = client->program ? client->program :
-	program_invocation_short_name;
-      name= strrchr (program, '/');
-
-      name= name ? (name+1) : program;
-            
-      if (client->client_id)
-	client->config_prefix= g_copy_strings ("/", name, "-id#", 
-					       client->client_id, "/", NULL);
-      else
-	client->config_prefix= g_copy_strings ("/", name, "/", NULL);
-    }
+    client->config_prefix = gnome_client_get_global_config_prefix (client);
 
   return client->config_prefix;
 }
 
+static gchar* config_prefix = NULL;
 
 /**
  * gnome_client_get_global_config_prefix
@@ -1957,11 +1968,7 @@ gnome_real_client_connect (GnomeClient *client,
 #ifdef HAVE_LIBSM
   /* We now set all non empty properties.  */
   if (client->clone_command != NULL)
-    {
-      client_set_array_with_arg (client, SmCloneCommand, 
-				 sm_cloned_id_arg_name,
-				 client->clone_command);
-    }
+    client_set_clone_command (client);
   else
     client_set_array (client, SmCloneCommand, NULL);
 
@@ -1978,11 +1985,7 @@ gnome_real_client_connect (GnomeClient *client,
   client_set_array (client, SmResignCommand, client->resign_command);
 
   if (client->restart_command != NULL)
-    {
-      client_set_array_with_arg (client, SmRestartCommand, 
-				 sm_client_id_arg_name,
-				 client->restart_command);
-    }
+    client_set_restart_command (client);
   else
     client_set_array (client, SmRestartCommand, NULL);
 
@@ -2096,7 +2099,7 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
   
   if (status)
     {
-        client->interaction_keys= g_slist_prepend (client->interaction_keys, 
+        client->interaction_key= g_slist_prepend (client->interaction_keys, 
 						   key);
     }
   else
