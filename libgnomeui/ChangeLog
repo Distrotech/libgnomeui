@@ -1,3 +1,8 @@
+1998-07-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_find_menu_pos): can look for separators.
+	* gnome-mdi.c: some bugfixes.
+	
 Sun Jul  5 18:12:24 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-client.c (master_environment): Removed DISPLAY, HOME,

@@ -675,6 +675,7 @@ gnome_app_do_ui_accelerator_setup (GnomeApp *app,
  * "" will insert the item as the first one in the menubar
  * "File/" will insert it as the first one in the File menu
  * "File/Settings" will insert it after the Setting item in the File menu
+ * use of  "File/<Separator>" should be obvious. however this stops after the first separator.
  * I hope this explains use of the insert/remove functions well enough.
  */
 
@@ -691,7 +692,7 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 			 gint *pos)
 {
   GtkBin *item;
-  GtkLabel *label = NULL;
+  gchar *label = NULL;
   GList *children;
   gchar *name_end;
   gint p, path_len;
@@ -719,16 +720,16 @@ gnome_app_find_menu_pos (GtkWidget *parent,
     p++;
     item = GTK_BIN(children->data);
 
-    if(!item->child)
-      label = NULL;
-    else if(GTK_IS_LABEL(item->child))
-      label = GTK_LABEL(item->child);
-    else if(GTK_IS_HBOX(item->child))
-      label = GTK_LABEL(g_list_next(gtk_container_children(GTK_CONTAINER(item->child)))->data);
-    else
+    if(!item->child)                    /* this is a separator, right? */
+      label = "<Separator>";
+    else if(GTK_IS_LABEL(item->child))  /* a simple item with a label */
+      label = GTK_LABEL(item->child)->label;
+    else if(GTK_IS_HBOX(item->child))   /* an item with a hbox (pixmap + label) */
+      label = GTK_LABEL(g_list_next(gtk_container_children(GTK_CONTAINER(item->child)))->data)->label;
+    else                                /* something that we just can't handle */
       label = NULL;
 
-    if( label && (strncmp(path, label->label, path_len) == 0) ) {
+    if( label && (strncmp(path, label, path_len) == 0) ) {
       if(name_end == NULL) {
         *pos = p;
         return parent;

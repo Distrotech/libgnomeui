@@ -385,7 +385,8 @@ static GtkWidget *find_item_by_label(GtkMenuShell *shell, gchar *label) {
   child = shell->children;
   while(child) {
     grandchild = GTK_BIN(child->data)->child;
-    if( (GTK_IS_LABEL(grandchild)) &&
+    if( grandchild &&
+        (GTK_IS_LABEL(grandchild)) &&
         (strcmp(GTK_LABEL(grandchild)->label, label) == 0) )
       return GTK_WIDGET(child->data);
 
@@ -789,6 +790,7 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
   else
     gtk_window_set_title(GTK_WINDOW(app), mdi->title);
 
+  /* free previous ui-info */
   ui_info = gtk_object_get_data(GTK_OBJECT(app), MDI_CHILD_MENU_INFO_KEY);
   if(ui_info != NULL) {
     free_ui_info_tree(ui_info);
@@ -796,6 +798,7 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
   }
   ui_info = NULL;
 
+  /* remove old child-specific menus */
   items = (gint)gtk_object_get_data(GTK_OBJECT(app), ITEM_COUNT_KEY);
   if( items > 0 ) {
     parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
@@ -815,6 +818,7 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
   if(view) {
     child = VIEW_GET_CHILD(view);
 
+    /* create new child-specific menus */
     if( child->menu_template &&
         ( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
       gnome_app_insert_menus(app, mdi->child_menu_path, ui_info);
@@ -824,21 +828,23 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
     else {
       gtk_signal_emit_by_name(GTK_OBJECT(child), "create_menus", view, &menu_list);
 
-      parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
+      if(menu_list) {
+        parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
 
-      if(menu_list && parent) {
-        items = 0;
+        if(parent) {
+          items = 0;
 
-        while(menu_list) {
-          gtk_menu_shell_insert(GTK_MENU_SHELL(parent), GTK_WIDGET(menu_list->data), pos);
-          menu_list = g_list_remove(menu_list, menu_list->data);
-          pos++;
-          items++;
+          while(menu_list) {
+            gtk_menu_shell_insert(GTK_MENU_SHELL(parent), GTK_WIDGET(menu_list->data), pos);
+            menu_list = g_list_remove(menu_list, menu_list->data);
+            pos++;
+            items++;
+          }
+        
+          gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, (gpointer)items);
+        
+          gtk_widget_queue_resize(parent);
         }
-        
-        gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, (gpointer)items);
-        
-        gtk_widget_queue_resize(parent);
       }
     }
   }
