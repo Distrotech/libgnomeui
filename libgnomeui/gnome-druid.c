@@ -293,8 +293,8 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	gtk_widget_size_allocate (druid->back, &child_allocation);
 
 	/* Put up the GnomeDruidPage */
-	child_allocation.x = GNOME_PAD_SMALL;
-	child_allocation.y = GNOME_PAD_SMALL;
+	child_allocation.x = allocation->x + GNOME_PAD_SMALL;
+	child_allocation.y = allocation->y + GNOME_PAD_SMALL;
 	child_allocation.width =
 		((allocation->width - 2* GNOME_PAD_SMALL) > 0) ?
 		(allocation->width - 2* GNOME_PAD_SMALL):0;

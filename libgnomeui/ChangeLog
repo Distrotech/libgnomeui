@@ -1,3 +1,8 @@
+1999-08-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid.c (gnome_druid_size_allocate): Patch from damon to
+	put the child in the right place.
+
 1999-08-19  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-icon-entry.c (show_icon_selection): Patch from 
