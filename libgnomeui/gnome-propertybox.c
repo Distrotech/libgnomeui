@@ -241,14 +241,20 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 
 	g_return_if_fail(dialog != NULL);
 	g_return_if_fail(GNOME_IS_PROPERTY_BOX(dialog));
-
+        
 	pbox = GNOME_PROPERTY_BOX (dialog);
-	page = GTK_NOTEBOOK (pbox->notebook)->cur_page->child;
-	g_assert (page != NULL);
 
-	dirty = GPOINTER_TO_INT(gtk_object_get_data (GTK_OBJECT (page),
-						     GNOME_PROPERTY_BOX_DIRTY));
-	
+        if (GTK_NOTEBOOK (pbox->notebook)->cur_page != NULL) {
+                page = GTK_NOTEBOOK (pbox->notebook)->cur_page->child;
+                g_assert (page != NULL);
+
+                dirty = GPOINTER_TO_INT(gtk_object_get_data (GTK_OBJECT (page),
+                                                             GNOME_PROPERTY_BOX_DIRTY));
+        } else {
+                page = NULL;
+                dirty = FALSE;
+        }
+                
 	/* Choose which style we did */
 	if (pbox->apply_button){
 		switch(button) {

@@ -1,3 +1,8 @@
+2000-01-28  Havoc Pennington  <hp@redhat.com>
+
+	* gnome-propertybox.c (dialog_clicked_cb): Close bug 4378, do the
+	right thing with empty property boxes that have no notebook pages.
+
 Sun Jan 23 14:05:55 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dialog-util.c: add inline docs
