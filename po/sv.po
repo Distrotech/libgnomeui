@@ -1,6 +1,6 @@
 # Swedish messages for libgnomeui.
-# Copyright (C) 2001, 2002 Free Software Foundation, Inc.
-# Christian Rose <menthos@menthos.com>, 2001, 2002.
+# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
+# Christian Rose <menthos@menthos.com>, 2001, 2002, 2003.
 # Mikael Hallendal <micke@codefactory.se>, 2002.
 #
 # $Id$
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
-"PO-Revision-Date: 2002-12-02 16:31+0100\n"
+"POT-Creation-Date: 2003-05-02 11:23+0200\n"
+"PO-Revision-Date: 2003-05-02 11:24+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -152,32 +152,32 @@ msgstr "Interaktivitet"
 msgid "Level of user activity required."
 msgstr "Nivå på användarinteraktivitet som krävs."
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "Ange ID för sessionskontroll"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "ID"
 msgstr "ID"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
 msgstr "Ange prefix för den sparade konfigurationen"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
 msgstr "Stäng av koppling till sessionshanteraren"
 
-#: libgnomeui/gnome-client.c:972
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Sessionshantering"
 
-#: libgnomeui/gnome-client.c:2470
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Avbryt utloggning"
 
@@ -529,6 +529,7 @@ msgstr "Tips för objekt 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -586,6 +587,7 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -776,11 +778,11 @@ msgstr "Konfigurera programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om detta program"
 
@@ -807,7 +809,7 @@ msgstr "Skapa ett nytt fönster"
 msgid "_Close This Window"
 msgstr "_Stäng detta fönster"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Stäng det aktuella fönstret"
 
@@ -1334,12 +1336,25 @@ msgstr "Poäng"
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
 #: libgnomeui/gnome-scores.c:194
-msgid "%a %b %d %T %Y"
-msgstr "%a %d %b %H.%M %Y"
+msgid "%a %b %x %X %Y"
+msgstr "%a %x %b %X %Y"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avsluta testet"
+
+#~ msgid "%a %b %d %X %Y"
+#~ msgstr "%a %d %b %X %Y"
+
+#~ msgid "%a %b %d %T %Y"
+#~ msgstr "%a %d %b %H.%M %Y"
+
+#~ msgid "%a %x %X %Y"
+#~ msgstr "%a %x %X %Y"
 
 #~ msgid ""
 #~ "An error has occured while trying to launch the default web browser\n"
@@ -1349,9 +1364,6 @@ msgstr "Sans 14"
 #~ "Ett fel inträffade vid försök att starta standardwebbläsaren.\n"
 #~ "Kontrollera dina inställningar i inställningsverktyget \"Föredragna "
 #~ "program\"."
-
-#~ msgid "Exit the test"
-#~ msgstr "Avsluta testet"
 
 #~ msgid ""
 #~ "An error has occured while trying to launch the default web browser.\n"
