@@ -1,5 +1,7 @@
 2001-02-26  Martin Baulig  <baulig@suse.de>
 
+	* gnome-stock.c: Back to the API described below.
+
 	* gnome-stock.h
 	(GnomeStockPixmapEntryWidget, GnomeStockPixmapEntryGPixmap): Removed.
 	(GnomeStockPixmapEntryImlib): Renamed to GnomeStockPixmapEntryPixbuf.
@@ -8,6 +10,11 @@
 
 	(GnomeStockPixmapEntryAny): Removed `width' and `height' fields;
 	added `ref_count' and `pixbuf'.
+
+	(gnome_stock_pixmap_register, gnome_stock_pixmap_change,
+	gnome_stock_pixmap_checkfor, gnome_stock_transparent_window,
+	gnome_stock_pixmap_gdk): Replaced `const char *subtype' argument
+	with `GtkStateType state'.
 
 	* gnome-stock.h: Put this back to the API of GNOME 1.x.
 	- reverted to the state of gnome-libs stable.

@@ -44,6 +44,8 @@
 
 static GnomeStockPixmapEntry **lookup(const char *icon);
 
+static GdkPixbuf *gnome_stock_pixmap_entry_get_gdk_pixbuf(GnomeStockPixmapEntry *entry);
+
 /***************************/
 /*  new GnomeStock widget  */
 /***************************/
@@ -134,7 +136,7 @@ gnome_stock_new(void)
  *
  * Sets the @stock object icon to be the one whose code is @icon.
  */
-void
+gboolean
 gnome_stock_set_icon(GnomeStock *stock, const char *icon)
 {
 	GnomeStockPixmapEntry **entries;
@@ -142,13 +144,13 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
         GdkBitmap *bitmasks[5] = { NULL, NULL, NULL, NULL, NULL };
         int i;
         
-	g_return_if_fail(stock != NULL);
-	g_return_if_fail(GNOME_IS_STOCK(stock));
-	g_return_if_fail(icon != NULL);
+	g_return_val_if_fail(stock != NULL, FALSE);
+	g_return_val_if_fail(GNOME_IS_STOCK(stock), FALSE);
+	g_return_val_if_fail(icon != NULL, FALSE);
 
 	if (stock->icon) {
 		if (0 == strcmp(icon, stock->icon))
-			return;
+			return FALSE;
 		g_free(stock->icon);
                 stock->icon = NULL;
 	}
@@ -157,7 +159,7 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
         
         if (entries == NULL) {
                 g_warning("No such stock icon `%s'", icon);
-                return;
+                return FALSE;
         }
         
 	stock->icon = g_strdup(icon);
@@ -205,7 +207,7 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
         if (pixbufs[GTK_STATE_NORMAL] != NULL)
                 gnome_pixmap_set_pixbuf(GNOME_PIXMAP(stock),
                                         pixbufs[GTK_STATE_NORMAL]);
-	return;
+	return TRUE;
 }
 
 /**
@@ -228,13 +230,6 @@ gnome_stock_new_with_icon(const char *icon)
 	return w;
 }
 
-GtkWidget    *
-gnome_stock_new_with_icon_at_size (const char *icon, int width, int height)
-{
-  /* FIXME */
-  g_warning("%s not implemented", __FUNCTION__);
-  return gnome_stock_new_with_icon(icon);
-}
 
 /*
  * Hash entry for the stock icon hash
@@ -243,90 +238,9 @@ gnome_stock_new_with_icon_at_size (const char *icon, int width, int height)
 
 /* Structures for the internal stock image hash table entries */
 
-typedef struct _GnomeStockPixmapEntryAny     GnomeStockPixmapEntryAny;
-typedef struct _GnomeStockPixmapEntryData    GnomeStockPixmapEntryData;
-typedef struct _GnomeStockPixmapEntryFile    GnomeStockPixmapEntryFile;
-typedef struct _GnomeStockPixmapEntryPath    GnomeStockPixmapEntryPath;
-typedef struct _GnomeStockPixmapEntryPixbuf     GnomeStockPixmapEntryPixbuf;
-typedef struct _GnomeStockPixmapEntryPixbufScaled GnomeStockPixmapEntryPixbufScaled;
-
-typedef enum {
-        GNOME_STOCK_PIXMAP_TYPE_NONE,
-        GNOME_STOCK_PIXMAP_TYPE_DATA,
-        GNOME_STOCK_PIXMAP_TYPE_FILE,
-        GNOME_STOCK_PIXMAP_TYPE_PATH,
-        GNOME_STOCK_PIXMAP_TYPE_PIXBUF,
-        GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED,
-        GNOME_STOCK_PIXMAP_TYPE_LAST
-} GnomeStockPixmapType;
-
 /* for even easier debugging */ 
 #define GNOME_IS_STOCK_PIXMAP_ENTRY(entry) \
         (entry->type >= 0 && entry->type < GNOME_STOCK_PIXMAP_TYPE_LAST)
-
-struct _GnomeStockPixmapEntryAny {
-        GnomeStockPixmapType type;
-	int ref_count;
-	char *label;
-        GdkPixbuf *pixbuf;
-};
-
-/* a data entry holds a hardcoded pixmap */
-struct _GnomeStockPixmapEntryData {
-        GnomeStockPixmapType type;
-	int ref_count;
-	char *label;
-        GdkPixbuf *pixbuf;
-        const gchar **xpm_data;
-};
-
-/* a file entry holds a filename (no path) to the pixamp. this pixmap
-   will be seached for using gnome_pixmap_file */
-struct _GnomeStockPixmapEntryFile {
-        GnomeStockPixmapType type;
-	int ref_count;
-	char *label;
-        GdkPixbuf *pixbuf;
-        gchar *filename;
-};
-
-/* a path entry holds the complete (absolut) path to the pixmap file */
-struct _GnomeStockPixmapEntryPath {
-        GnomeStockPixmapType type;
-	int ref_count;
-	char *label;
-        GdkPixbuf *pixbuf;
-        gchar *pathname;
-};
-
-/* a data entry holds a hardcoded pixmap */
-struct _GnomeStockPixmapEntryPixbuf {
-        GnomeStockPixmapType type;
-	int ref_count;
-        char *label;
-        GdkPixbuf *pixbuf;
-};
-
- 
-/* scales the Pixbuf data to the given size when used (allows scale-on-demand) */
-struct _GnomeStockPixmapEntryPixbufScaled {
-        GnomeStockPixmapType type;
-	int ref_count;
-        char *label;
-        GdkPixbuf *pixbuf;
-        int scaled_width, scaled_height;
-        GdkPixbuf *unscaled_pixbuf;
-};
-
-union _GnomeStockPixmapEntry {
-        GnomeStockPixmapType type;
-        GnomeStockPixmapEntryAny any;
-        GnomeStockPixmapEntryData data;
-        GnomeStockPixmapEntryFile file;
-        GnomeStockPixmapEntryPath path;
-        GnomeStockPixmapEntryPixbuf pixbuf;
-        GnomeStockPixmapEntryPixbufScaled scaled;
-};
 
 static GnomeStockPixmapEntry*
 gnome_stock_pixmap_entry_new_blank (GnomeStockPixmapType type, const gchar* label)
@@ -419,7 +333,7 @@ gnome_stock_pixmap_entry_destroy (GnomeStockPixmapEntry* entry)
  *
  * Description:  Increments the reference count on the entry
  */
-void
+static void
 gnome_stock_pixmap_entry_ref (GnomeStockPixmapEntry* entry)
 {
 	g_return_if_fail (entry != NULL);
@@ -435,7 +349,7 @@ gnome_stock_pixmap_entry_ref (GnomeStockPixmapEntry* entry)
  * Description:  Decrements the reference count on the entry, and
  * destroys the structure if it went to 0
  */
-void
+static void
 gnome_stock_pixmap_entry_unref (GnomeStockPixmapEntry* entry)
 {
 	g_return_if_fail (entry != NULL);
@@ -446,23 +360,7 @@ gnome_stock_pixmap_entry_unref (GnomeStockPixmapEntry* entry)
 		gnome_stock_pixmap_entry_destroy(entry);
 }
 
-GnomeStockPixmapEntry*
-gnome_stock_pixmap_entry_new_from_gdk_pixbuf (GdkPixbuf *pixbuf,
-                                              const gchar* label)
-{
-        GnomeStockPixmapEntry* entry;
-
-        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_PIXBUF,
-                                                    label);
-
-        gdk_pixbuf_ref(pixbuf);
-
-        ((GnomeStockPixmapEntryPixbuf*)entry)->pixbuf = pixbuf;
-
-        return entry;
-}
-
-GnomeStockPixmapEntry*
+static GnomeStockPixmapEntry*
 gnome_stock_pixmap_entry_new_from_gdk_pixbuf_at_size (GdkPixbuf *pixbuf,
                                                       const gchar* label,
                                                       gint width, gint height)
@@ -481,47 +379,6 @@ gnome_stock_pixmap_entry_new_from_gdk_pixbuf_at_size (GdkPixbuf *pixbuf,
         return entry;
 }
 
-GnomeStockPixmapEntry*
-gnome_stock_pixmap_entry_new_from_filename (const gchar* filename,
-                                            const gchar* label)
-{
-        GnomeStockPixmapEntry* entry;
-
-        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_FILE,
-                                                    label);
-
-        ((GnomeStockPixmapEntryFile*)entry)->filename = g_strdup(filename);
-
-        return entry;
-}
-
-GnomeStockPixmapEntry*
-gnome_stock_pixmap_entry_new_from_pathname (const gchar* pathname,
-                                            const gchar* label)
-{
-        GnomeStockPixmapEntry* entry;
-
-        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_PATH,
-                                                    label);
-
-        entry->path.pathname = g_strdup(pathname);
-
-        return entry;
-}
-
-
-GnomeStockPixmapEntry*
-gnome_stock_pixmap_entry_new_from_xpm_data (const gchar** xpm_data, const gchar* label)
-{
-        GnomeStockPixmapEntry* entry;
-
-        entry = gnome_stock_pixmap_entry_new_blank (GNOME_STOCK_PIXMAP_TYPE_DATA,
-                                                    label);
-
-        ((GnomeStockPixmapEntryData*)entry)->xpm_data = xpm_data;
-
-        return entry;
-}
 
 /**
  * gnome_stock_pixmap_entry_get_gdk_pixbuf:
@@ -534,7 +391,7 @@ gnome_stock_pixmap_entry_new_from_xpm_data (const gchar** xpm_data, const gchar*
  *
  * Returns: a #GdkPixbuf with an incremented reference count.
  **/
-GdkPixbuf*
+static GdkPixbuf*
 gnome_stock_pixmap_entry_get_gdk_pixbuf (GnomeStockPixmapEntry *entry)
 {
 	g_return_val_if_fail (entry != NULL, NULL);
@@ -916,33 +773,35 @@ lookup(const char *icon)
                 return he->entries;
 }
 
-void
+gint
 gnome_stock_pixmap_register(const char *icon, GtkStateType state,
 			    GnomeStockPixmapEntry *entry)
 {
         GHashTable* hash;
         
-	g_return_if_fail (icon != NULL);
-	g_return_if_fail (entry != NULL);
-	g_return_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry));
+	g_return_val_if_fail (icon != NULL, 0);
+	g_return_val_if_fail (entry != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry), 0);
 
         hash = stock_pixmaps();
         
-        g_return_if_fail(g_hash_table_lookup(hash, icon) == NULL);
+        g_return_val_if_fail(g_hash_table_lookup(hash, icon) == NULL, 0);
         
         hash_insert (hash, icon, state, entry);
+
+        return 1;
 }
 
-void
+gint
 gnome_stock_pixmap_change(const char *icon, GtkStateType state,
 			  GnomeStockPixmapEntry *entry)
 {
 	GHashTable *hash;
         HashEntry *he;
 
-	g_return_if_fail (icon != NULL);
-	g_return_if_fail (entry != NULL);
-	g_return_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry));
+	g_return_val_if_fail (icon != NULL, 0);
+	g_return_val_if_fail (entry != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry), 0);
         
 	hash = stock_pixmaps();
 
@@ -953,12 +812,14 @@ gnome_stock_pixmap_change(const char *icon, GtkStateType state,
         } else {
                 hash_entry_set(he, state, entry);
         }
+
+        return 1;
 }
 
 
 
 GnomeStockPixmapEntry *
-gnome_stock_pixmap_lookup(const char *icon, GtkStateType state)
+gnome_stock_pixmap_checkfor (const char *icon, GtkStateType state)
 {
 	GHashTable *hash;
         HashEntry *he;
