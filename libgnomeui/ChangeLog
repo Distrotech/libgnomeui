@@ -1,3 +1,7 @@
+1998-04-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dateedit.c (gnome_date_edit_set_time): Print the date correctly.
+
 Thu Apr 16 00:18:13 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.[ch]: added error handeling,

@@ -408,7 +408,7 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 
 	/* Set the time */
-	strftime (buffer, sizeof (buffer), "%I:00 %p", mytm);
+	strftime (buffer, sizeof (buffer), "%I:%M %p", mytm);
 	gtk_entry_set_text (GTK_ENTRY (gde->time_entry), buffer);
 }
 
