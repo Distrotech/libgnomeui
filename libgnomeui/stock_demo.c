@@ -1048,7 +1048,7 @@ main(int argc, char **argv)
 {
 	GtkWidget *window, *hbox, *vbox, *table, *w;
 
-	gnome_init("stock_demo", VERSION, argc, argv);
+	gnome_program_init("stock_demo", VERSION, argc, argv, GNOMEUI_INIT, NULL);
 
 	textdomain(PACKAGE);
 

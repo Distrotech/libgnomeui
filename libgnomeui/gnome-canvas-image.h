@@ -15,6 +15,7 @@
 #include <gtk/gtkpacker.h> /* why the hell is GtkAnchorType here and not in gtkenums.h? */
 #include <libart_lgpl/art_misc.h>
 #include <libart_lgpl/art_pixbuf.h>
+#include <gdk_imlib.h>
 #include "gnome-canvas.h"
 
 

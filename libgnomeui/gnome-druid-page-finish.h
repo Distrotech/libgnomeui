@@ -20,6 +20,7 @@
 #define __GNOME_DRUID_PAGE_FINISH_H__
 
 #include <gtk/gtk.h>
+#include <gdk_imlib.h>
 #include "gnome-canvas.h"
 #include "gnome-druid-page.h"
 

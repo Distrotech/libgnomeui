@@ -2,26 +2,31 @@
 
 SUBDIRS = pixmaps
 
+LIB_VERSION=0:0:0
+LIB_VERSION_NUM=0.0.0
+
 #
 # The targets
 #
 noinst_PROGRAMS = stock_demo winhints_demo  dock_demo #animator_demo
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
-lib_LTLIBRARIES = libgnomeui.la
+lib_LTLIBRARIES = libgnomeui-2.0.la
 
 if COMPILE_GNOME_COMPAT
-lib_LIBRARIES = libgnomeui10compat.a
+lib_LIBRARIES = libgnomeui-1.0-compat-2.0.a
 endif
 
 #
 # Install location for header files
 #
-libgnomeuiincludedir = $(includedir)/libgnomeui
+libgnomeuiincludedir = $(includedir)/gnome/$(GNOME_INTERFACE_VERSION)/libgnomeui
 
 INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
-	-I.. -I$(srcdir)/.. $(SUPPORTINCS) 		\
-	$(OAF_CFLAGS)					\
+	-I$(top_builddir)				\
+	-I$(top_srcdir)					\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
+	$(SUPPORTINCS) 					\
+	$(OAF_CFLAGS)					\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
         -DGNOMEBINDIR=\""$(bindir)"\" 			\
@@ -52,9 +57,9 @@ $(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
 gnorba_built = $(gnome_unknown_built) $(gnome_corba_rexec_built)
 
 if COMPILE_GNOME_COMPAT
-libgnomeui10compatincludedir = $(includedir)/libgnomeui/compat10
+libgnomeui10compatincludedir = $(libgnomeuiincludedir)/compat/1.0
 
-libgnomeui10compat_a_SOURCES =\
+libgnomeui_1_0_compat_2_0_a_SOURCES =\
 	gnome-font-selector.c 		\
 	gnome-guru.c			\
 	gnome-spell.c			\
@@ -67,7 +72,7 @@ libgnomeui10compat_a_SOURCES =\
 	gnome-druid-page-finish.c
 
 libgnomeui10compatinclude_HEADERS = \
-	libgnomeui10compat.h		\
+	libgnomeui-compat-1.0.h		\
 	gnome-font-selector.h 		\
 	gnome-guru.h			\
 	gnome-spell.h			\
@@ -87,7 +92,7 @@ endif
 
 EXTRA_HEADERS = 
 
-libgnomeui_la_SOURCES = \
+libgnomeui_2_0_la_SOURCES = \
 	gnome-about.c			\
 ##	gnome-animator.c		\
 	gnome-app.c			\
@@ -244,10 +249,10 @@ ORBIT_IDL=orbit-idl
 IDL_FLAGS=-D__LIBOAFGNOME_COMPILATION -D__LIBGNORBA_COMPILATION
 
 gnome_remote_bootstrap_SOURCES=gnome-remote-bootstrap.c
-gnome_remote_bootstrap_LDADD=../libgnome/libgnome.la
+gnome_remote_bootstrap_LDADD=../libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la
 
 gnome_rexec_server_SOURCES=gnome-rexec-server.c
-gnome_rexec_server_LDADD=../libgnome/libgnome.la gnome-corba-rexec-skels.o gnome-corba-rexec-common.o $(OAF_LIBS)
+gnome_rexec_server_LDADD=../libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la gnome-corba-rexec-skels.o gnome-corba-rexec-common.o $(OAF_LIBS)
 
 BUILT_SOURCES = \
 	gnometypebuiltins.h		\
@@ -323,17 +328,18 @@ EXTRA_DIST =					\
 	landscape.xpm				\
 	$(oafinfo_DATA)
 
-libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir) \
-		-L`cd $(top_builddir); pwd`/gdk-pixbuf/gdk-pixbuf/.libs -lgdk_pixbuf \
-		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome \
-		-L`cd $(top_builddir); pwd`/libart_lgpl/.libs -lart_lgpl \
-		$(OAF_LIBS)					\
+libgnomeui_2_0_la_LDFLAGS = -version-info $(LIB_VERSION)				\
+		-L`cd $(top_builddir); pwd`/gdk-pixbuf/gdk-pixbuf/.libs -lgdk_pixbuf	\
+		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome			\
+		-L`cd $(top_builddir); pwd`/libart_lgpl/.libs -lart_lgpl		\
+		$(OAF_LIBS)								\
 		$(LIBGNOMEUI_LIBS)
-libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
+
+libgnomeui_2_0_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\
-	libgnomeui.la 					\
-	$(top_builddir)/libgnome/libgnome.la 		\
+	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
+	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
         $(LIBGNOMEUI_LIBS) \
@@ -341,36 +347,36 @@ gnome_segv_LDADD =	\
 
 
 stock_demo_LDADD =	\
-	libgnomeui.la 					\
-	$(top_builddir)/libgnome/libgnome.la 		\
+	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
+	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
-#	$(top_builddir)/libgnome/libgnome.la 		\
+#	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 #	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 #	$(LIBGNOMEUI_LIBS)
 
 winhints_demo_LDADD =	\
-	libgnomeui.la 					\
-	$(top_builddir)/libgnome/libgnome.la 		\
+	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
+	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 #animator_demo_LDADD =	\
-#	libgnomeui.la 					\
-#	$(top_builddir)/libgnome/libgnome.la 		\
+#	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
+#	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 #	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 #	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
 #	$(LIBGNOMEUI_LIBS) \
 #	$(INTLLIBS)
 
 dock_demo_LDADD =	\
-	libgnomeui.la 					\
-	$(top_builddir)/libgnome/libgnome.la 		\
+	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
+	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
 	$(LIBGNOMEUI_LIBS) \

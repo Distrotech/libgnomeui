@@ -97,6 +97,8 @@
 
 #define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT
 
-#define gnome_init(app_id, app_version, argc, argv) gnome_program_init(app_id, app_version, argc, argv, GNOMEUI_INIT, NULL)
+#ifdef COMPAT_1_0
+#include "compat/1.0/libgnomeui-compat-1.0.h"
+#endif
 
 #endif
