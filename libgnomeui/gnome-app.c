@@ -431,7 +431,7 @@ void gnome_app_set_menus     (GnomeApp *app,
 	gtk_widget_show(hb);
 	app->menubar = GTK_WIDGET(menubar);
 
-	gtk_signal_connect(GTK_OBJECT(app->menubar), "button_press_event",
+	gtk_signal_connect(GTK_OBJECT(hb), "button_press_event",
 			   GTK_SIGNAL_FUNC(gnome_app_rightclick_event), app);
 	gtk_widget_show(app->menubar);
 	gtk_container_add(GTK_CONTAINER(hb), app->menubar);
@@ -465,7 +465,7 @@ void gnome_app_set_toolbar   (GnomeApp *app,
 	hb = gtk_handle_box_new();
 	gtk_widget_show(hb);
 	app->toolbar = GTK_WIDGET(toolbar);
-	gtk_signal_connect(GTK_OBJECT(app->toolbar), "button_press_event",
+	gtk_signal_connect(GTK_OBJECT(hb), "button_press_event",
 			   GTK_SIGNAL_FUNC(gnome_app_rightclick_event), app);
 	gtk_widget_show(app->toolbar);
 	gtk_container_add(GTK_CONTAINER(hb), app->toolbar);
