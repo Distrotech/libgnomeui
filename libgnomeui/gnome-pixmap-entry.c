@@ -398,6 +398,10 @@ pentry_destroy(GtkObject *object)
 	changed_pentries = g_slist_remove(changed_pentries, pentry);
 
 	g_free(pentry->_priv);
+
+	if(GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+
 }
 
 

@@ -1,3 +1,7 @@
+Sat Mar 04 21:35:08 2000  George Lebl <jirka@5z.com>
+
+	* gnome-pixmap-entry.c: fix destructor to call parent destructor
+
 Sat Mar 04 20:52:26 2000  George Lebl <jirka@5z.com>
 
 	* gnome-ditem-edit.c,gnome-dentry-edit.c: use the new _set_filename
