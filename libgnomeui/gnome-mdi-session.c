@@ -1,6 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-#include <gnome-mdi-session.h>
+#include <config.h>
+#include "libgnome/libgnomeP.h"
+#include "gnome-mdi-session.h"
+
 
 static GPtrArray *	config_get_list		(const gchar *);
 static void		config_set_list		(const gchar *, GList *,

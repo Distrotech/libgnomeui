@@ -7,9 +7,9 @@
 #ifndef __GNOME_MDI_SESSION_H__
 #define __GNOME_MDI_SESSION_H__
 
-#include <gnome.h>
-
 #include <string.h>
+
+#include "libgnomeui/gnome-mdi.h"
 
 BEGIN_GNOME_DECLS
 

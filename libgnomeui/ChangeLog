@@ -1,3 +1,9 @@
+1998-10-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-mdi-session.h: Fixup includes.
+
+	* gnome-mdi-session.c: Fixup includes.
+
 1998-10-08  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gtkcauldron.h: Remove `#pragma }'.
