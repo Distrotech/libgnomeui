@@ -100,6 +100,12 @@ struct _GnomeClient
   /* Previous client id of this client.  */
   gchar		     *previous_id;
 
+  /* Prefix for per client configuration files.  */
+  gchar              *config_prefix;
+
+  /* Prefix for configuration files.  */
+  gchar              *global_config_prefix;
+
   /* The following properties are predefined in the X session
      management protocol.  The entries marked with a 'x' are required
      by the session management protocol.  The entries marked with a
@@ -200,6 +206,22 @@ gchar       *gnome_client_get_id                 (GnomeClient *client);
    in a location based on the session id; this old session id must be
    recalled later to find the information.  */
 gchar       *gnome_client_get_previous_id        (GnomeClient *client);
+
+/* Get the config prefix for a client.  This config prefix depend on
+   the program name and the client id of a client.  This function is
+   useful, if your store configuration information of this client not
+   only in the command line, but in a config file.  You may use the
+   returned value as a prefix using the 'gnome_config_push_prefix'
+   function.  */
+
+gchar       *gnome_client_get_config_prefix        (GnomeClient *client);
+
+/* Get the config prefix for a class of clients.  The returned value
+   is more or less the same as the value returned by
+   'gnome_client_get_config_prefix', but it does not include the
+   client id.  */
+
+gchar       *gnome_client_get_global_config_prefix (GnomeClient *client);
 
 
 /* The follwing functions are used to set or unset some session
