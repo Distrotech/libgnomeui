@@ -100,18 +100,21 @@ gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
         if (GTK_WIDGET_HAS_FOCUS(widget)) {
                 if (!w->focused) {
                         w->focused = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_FOCUSED);
+			gtk_widget_ref(GTK_WIDGET(w->focused));
                         gtk_widget_show(GTK_WIDGET(w->focused));
                 }
                 pixmap = w->focused;
         } else if (!GTK_WIDGET_IS_SENSITIVE(widget)) {
                 if (!w->disabled) {
                         w->disabled = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_DISABLED);
+			gtk_widget_ref(GTK_WIDGET(w->disabled));
                         gtk_widget_show(GTK_WIDGET(w->disabled));
                 }
                 pixmap = w->disabled;
         } else {
                 if (!w->regular) {
                         w->regular = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_REGULAR);
+			gtk_widget_ref(GTK_WIDGET(w->regular));
                         gtk_widget_show(GTK_WIDGET(w->regular));
                 }
                 pixmap = w->regular;
@@ -189,7 +192,10 @@ gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
                                                    GNOME_STOCK_PIXMAP_REGULAR);
 			gtk_widget_show(GTK_WIDGET(pmap->regular));
                 }
-                gdk_window_get_size(pmap->regular->pixmap, &w, &h);
+		if (pmap->regular->pixmap)
+			gdk_window_get_size(pmap->regular->pixmap, &w, &h);
+		else
+			w = h = 16; /* FIXME */
                 requisition->width = w;
                 requisition->height = h;
         }

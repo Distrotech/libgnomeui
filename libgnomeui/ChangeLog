@@ -1,5 +1,13 @@
 1998-02-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-stock.c (gnome_stock_pixmap_widget_state_changed): Added
+	gtk_widget_ref() when a new pixmap is created, because later they
+	may get gtk_container_remove()d.
+	(gnome_stock_pixmap_widget_size_request): Bad hack: if the pixmap
+	window is NULL, we return a default size.  The gnome-stock
+	architecture has to be rewritten, I think.  Please see my
+	forthcoming post to gnome-list for a proposal on how to do this.
+
 	* gnome-app.c: indentation fixes.
 
 	* gnome-stock.c (build_hash_key): Made routine use g_copy_strings().
