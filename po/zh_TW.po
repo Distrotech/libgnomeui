@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2\n"
-"POT-Creation-Date: 2001-11-07 11:47+0100\n"
+"POT-Creation-Date: 2001-11-30 11:16+0100\n"
 "PO-Revision-Date: 2001-09-22 11:01+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -13,434 +13,434 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:183
+#: libgnomeui/gnome-about.c:181
 #, fuzzy
 msgid "Program name"
 msgstr "進度對話盒"
 
-#: libgnomeui/gnome-about.c:184
+#: libgnomeui/gnome-about.c:182
 #, fuzzy
 msgid "The name of the program"
 msgstr "結束程式"
 
-#: libgnomeui/gnome-about.c:190
+#: libgnomeui/gnome-about.c:188
 #, fuzzy
 msgid "Program version"
 msgstr "進度對話盒"
 
-#: libgnomeui/gnome-about.c:191
+#: libgnomeui/gnome-about.c:189
 #, fuzzy
 msgid "The version of the program"
 msgstr "結束程式"
 
-#: libgnomeui/gnome-about.c:197
+#: libgnomeui/gnome-about.c:195
 msgid "Copyright string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:198
+#: libgnomeui/gnome-about.c:196
 msgid "Copyright information for the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:204
+#: libgnomeui/gnome-about.c:202
 msgid "Comments string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:205
+#: libgnomeui/gnome-about.c:203
 #, fuzzy
 msgid "Comments about the program"
 msgstr "結束程式"
 
-#: libgnomeui/gnome-about.c:212 libgnomeui/gnome-about.c:666
+#: libgnomeui/gnome-about.c:210 libgnomeui/gnome-about.c:664
 msgid "Authors"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:213
+#: libgnomeui/gnome-about.c:211
 msgid "List of authors of the programs"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:215
+#: libgnomeui/gnome-about.c:213
 msgid "Author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:216
+#: libgnomeui/gnome-about.c:214
 msgid "A single author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:223 libgnomeui/gnome-about.c:669
+#: libgnomeui/gnome-about.c:221 libgnomeui/gnome-about.c:667
 msgid "Translator credits"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:224
+#: libgnomeui/gnome-about.c:222
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:231 libgnomeui/gnome-about.c:672
+#: libgnomeui/gnome-about.c:229 libgnomeui/gnome-about.c:670
 msgid "Documenters"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:232
+#: libgnomeui/gnome-about.c:230
 msgid "List of people documenting the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:234
+#: libgnomeui/gnome-about.c:232
 msgid "Documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:235
+#: libgnomeui/gnome-about.c:233
 msgid "A single documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:242
+#: libgnomeui/gnome-about.c:240
 #, fuzzy
 msgid "Background"
 msgstr "背景色彩"
 
-#: libgnomeui/gnome-about.c:243
+#: libgnomeui/gnome-about.c:241
 msgid "The background pixbuf to use"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:249
+#: libgnomeui/gnome-about.c:247
 #, fuzzy
 msgid "Background start opacity"
 msgstr "設定了背景色彩"
 
-#: libgnomeui/gnome-about.c:250
+#: libgnomeui/gnome-about.c:248
 msgid "Opacity at the start of the background"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:259
+#: libgnomeui/gnome-about.c:257
 #, fuzzy
 msgid "Background end opacity"
 msgstr "背景色彩"
 
-#: libgnomeui/gnome-about.c:260
+#: libgnomeui/gnome-about.c:258
 msgid "Opacity at the end of the background"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:269
+#: libgnomeui/gnome-about.c:267
 #, fuzzy
 msgid "Background start position"
 msgstr "背景色彩設定"
 
-#: libgnomeui/gnome-about.c:270
+#: libgnomeui/gnome-about.c:268
 msgid "Position at the start of the background"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:278
+#: libgnomeui/gnome-about.c:276
 #, fuzzy
 msgid "Background end position"
 msgstr "背景色彩"
 
-#: libgnomeui/gnome-about.c:279
+#: libgnomeui/gnome-about.c:277
 msgid "Position at the end of the background"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:287 libgnomeui/gnome-druid-page-standard.c:145
+#: libgnomeui/gnome-about.c:285 libgnomeui/gnome-druid-page-standard.c:141
 msgid "Logo"
 msgstr "商標"
 
-#: libgnomeui/gnome-about.c:288
+#: libgnomeui/gnome-about.c:286
 msgid "A logo for the about box"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:294
+#: libgnomeui/gnome-about.c:292
 msgid "Logo top padding"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:295
+#: libgnomeui/gnome-about.c:293
 msgid "How far the logo is from the top"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:304
+#: libgnomeui/gnome-about.c:302
 msgid "Logo right padding"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:305
+#: libgnomeui/gnome-about.c:303
 msgid "How far the logo is from the right"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:314
+#: libgnomeui/gnome-about.c:312
 msgid "Header font"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:315
+#: libgnomeui/gnome-about.c:313
 msgid "Header font description as a string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:320
+#: libgnomeui/gnome-about.c:318
 msgid "Copyright font"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:321
+#: libgnomeui/gnome-about.c:319
 msgid "Copyright font description as a string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:326
+#: libgnomeui/gnome-about.c:324
 msgid "Comments font"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:327
+#: libgnomeui/gnome-about.c:325
 msgid "Comments font description as a string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:332
+#: libgnomeui/gnome-about.c:330
 #, fuzzy
 msgid "Name header font"
 msgstr "選定字型的名稱"
 
-#: libgnomeui/gnome-about.c:333
+#: libgnomeui/gnome-about.c:331
 msgid "Name header font description as a string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:338
+#: libgnomeui/gnome-about.c:336
 #, fuzzy
 msgid "Name list font"
 msgstr "選定字型的名稱"
 
-#: libgnomeui/gnome-about.c:339
+#: libgnomeui/gnome-about.c:337
 msgid "Name list font description as a string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:666
+#: libgnomeui/gnome-about.c:664
 msgid "Author"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:672
+#: libgnomeui/gnome-about.c:670
 msgid "Documenter"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:819
+#: libgnomeui/gnome-about.c:817
 #, fuzzy, c-format
 msgid "About %s"
 msgstr "關於"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:834
 msgid "Specify session management ID"
 msgstr "指定工作環境 ID"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:834
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:840
+#: libgnomeui/gnome-client.c:837
 msgid "Specify prefix of saved configuration"
 msgstr "指定舊設定檔的前置字"
 
-#: libgnomeui/gnome-client.c:840
+#: libgnomeui/gnome-client.c:837
 msgid "PREFIX"
 msgstr "前置字"
 
-#: libgnomeui/gnome-client.c:843
+#: libgnomeui/gnome-client.c:840
 msgid "Disable connection to session manager"
 msgstr "中斷連線到工作環境總管"
 
-#: libgnomeui/gnome-client.c:949
+#: libgnomeui/gnome-client.c:946
 msgid "Session management"
 msgstr "工作環境管理"
 
-#: libgnomeui/gnome-client.c:2475
+#: libgnomeui/gnome-client.c:2472
 msgid "Cancel Logout"
 msgstr "取消登出"
 
-#: libgnomeui/gnome-color-picker.c:405
+#: libgnomeui/gnome-color-picker.c:403
 msgid "Received invalid color data\n"
 msgstr "收到不合規格的色彩資料\n"
 
-#: libgnomeui/gnome-color-picker.c:469
+#: libgnomeui/gnome-color-picker.c:467
 msgid "Pick a color"
 msgstr "選取一個色彩"
 
-#: libgnomeui/gnome-dateedit.c:420
+#: libgnomeui/gnome-dateedit.c:418
 msgid "Time"
 msgstr "時間"
 
-#: libgnomeui/gnome-dateedit.c:421
+#: libgnomeui/gnome-dateedit.c:419
 msgid "The time currentlyselected"
 msgstr "目前選定的時間"
 
-#: libgnomeui/gnome-dateedit.c:433
+#: libgnomeui/gnome-dateedit.c:431
 msgid "DateEdit Flags"
 msgstr "日期元件選項"
 
-#: libgnomeui/gnome-dateedit.c:434
+#: libgnomeui/gnome-dateedit.c:432
 msgid "Flags for how DateEdit looks"
 msgstr "設定日期元件顯示時的外觀"
 
-#: libgnomeui/gnome-dateedit.c:443
+#: libgnomeui/gnome-dateedit.c:441
 msgid "Lower Hour"
 msgstr "時間下限"
 
-#: libgnomeui/gnome-dateedit.c:444
+#: libgnomeui/gnome-dateedit.c:442
 msgid "Lower hour in the time popup selector"
 msgstr "彈出式時間元件的時間下限"
 
-#: libgnomeui/gnome-dateedit.c:454
+#: libgnomeui/gnome-dateedit.c:452
 msgid "Upper Hour"
 msgstr "時間上限"
 
-#: libgnomeui/gnome-dateedit.c:455
+#: libgnomeui/gnome-dateedit.c:453
 msgid "Upper hour in the time popup selector"
 msgstr "彈出式時間元件的時間上限"
 
-#: libgnomeui/gnome-dateedit.c:465
+#: libgnomeui/gnome-dateedit.c:463
 msgid "Initial Time"
 msgstr "初始時間"
 
-#: libgnomeui/gnome-dateedit.c:466
+#: libgnomeui/gnome-dateedit.c:464
 msgid "The initial time"
 msgstr "初始時所顯示的時間"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:702
+#: libgnomeui/gnome-dateedit.c:700
 msgid "Calendar"
 msgstr "日曆"
 
-#: libgnomeui/gnome-dateedit.c:928
+#: libgnomeui/gnome-dateedit.c:926
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date 已停用，請使用 gnome_date_edit_get_time"
 
-#: libgnomeui/gnome-druid-page-edge.c:355
+#: libgnomeui/gnome-druid-page-edge.c:352
 msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 
-#: libgnomeui/gnome-druid-page-edge.c:364
+#: libgnomeui/gnome-druid-page-edge.c:361
 msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 
-#: libgnomeui/gnome-druid-page-standard.c:137
-#: libgnomeui/gnome-font-picker.c:158
+#: libgnomeui/gnome-druid-page-standard.c:133
+#: libgnomeui/gnome-font-picker.c:156
 msgid "Title"
 msgstr "標題"
 
-#: libgnomeui/gnome-druid-page-standard.c:138
+#: libgnomeui/gnome-druid-page-standard.c:134
 msgid "Title of the druid"
 msgstr "精靈的標題"
 
-#: libgnomeui/gnome-druid-page-standard.c:146
+#: libgnomeui/gnome-druid-page-standard.c:142
 msgid "Logo image"
 msgstr "商標影像"
 
-#: libgnomeui/gnome-druid-page-standard.c:153
+#: libgnomeui/gnome-druid-page-standard.c:149
 msgid "Top Watermark"
 msgstr "頂端影像"
 
-#: libgnomeui/gnome-druid-page-standard.c:154
+#: libgnomeui/gnome-druid-page-standard.c:150
 msgid "Watermark image for the top"
 msgstr "顯示於頁面頂端的影像"
 
-#: libgnomeui/gnome-druid-page-standard.c:161
+#: libgnomeui/gnome-druid-page-standard.c:157
 msgid "Title Foreground"
 msgstr "標題前景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:162
+#: libgnomeui/gnome-druid-page-standard.c:158
 msgid "Foreground color of the title"
 msgstr "標題的前景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:165
 msgid "Title Foreground Color"
 msgstr "標題前景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:170
+#: libgnomeui/gnome-druid-page-standard.c:166
 msgid "Foreground color of the title as a GdkColor"
 msgstr "以 Gdk 色彩作為標題的前景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:177
+#: libgnomeui/gnome-druid-page-standard.c:173
 msgid "Title Foreground color set"
 msgstr "標題前景色彩設定"
 
-#: libgnomeui/gnome-druid-page-standard.c:178
+#: libgnomeui/gnome-druid-page-standard.c:174
 msgid "Foreground color of the title is set"
 msgstr "設定了標題前景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:185
-#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:181
+#: libgnomeui/gnome-druid-page-standard.c:189
 msgid "Background Color"
 msgstr "背景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:186
+#: libgnomeui/gnome-druid-page-standard.c:182
 msgid "Background color"
 msgstr "背景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:190
 msgid "Background color as a GdkColor"
 msgstr "以 Gdk 色彩作為背景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:201
+#: libgnomeui/gnome-druid-page-standard.c:197
 msgid "Background color set"
 msgstr "背景色彩設定"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:198
 msgid "Background color is set"
 msgstr "設定了背景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
-#: libgnomeui/gnome-druid-page-standard.c:217
+#: libgnomeui/gnome-druid-page-standard.c:205
+#: libgnomeui/gnome-druid-page-standard.c:213
 msgid "Logo Background Color"
 msgstr "商標背景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:206
 msgid "Logo Background color"
 msgstr "商標背景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:218
+#: libgnomeui/gnome-druid-page-standard.c:214
 msgid "Logo Background color as a GdkColor"
 msgstr "以 Gdk 色彩作為商標的背景色彩"
 
-#: libgnomeui/gnome-druid-page-standard.c:225
+#: libgnomeui/gnome-druid-page-standard.c:221
 msgid "Logo Background color set"
 msgstr "商標背景色彩設定"
 
-#: libgnomeui/gnome-druid-page-standard.c:226
+#: libgnomeui/gnome-druid-page-standard.c:222
 msgid "Logo Background color is set"
 msgstr "設定了商標背景色彩"
 
-#: libgnomeui/gnome-druid.c:148
+#: libgnomeui/gnome-druid.c:146
 msgid "Show Finish"
 msgstr "顯示完成"
 
-#: libgnomeui/gnome-druid.c:149
+#: libgnomeui/gnome-druid.c:147
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "顯示 '完成' 按鈕代替 '下一頁' 按鈕"
 
-#: libgnomeui/gnome-druid.c:156
+#: libgnomeui/gnome-druid.c:154
 msgid "Show Help"
 msgstr "顯示說明"
 
-#: libgnomeui/gnome-druid.c:157
+#: libgnomeui/gnome-druid.c:155
 msgid "Show the 'Help' button"
 msgstr "顯示 '說明' 按鈕"
 
-#: libgnomeui/gnome-href.c:120
+#: libgnomeui/gnome-href.c:118
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:121
+#: libgnomeui/gnome-href.c:119
 msgid "The URL that GnomeHRef activates"
 msgstr "連結元件所啟動的 URL"
 
-#: libgnomeui/gnome-href.c:128
+#: libgnomeui/gnome-href.c:126
 msgid "Text"
 msgstr "句子"
 
-#: libgnomeui/gnome-href.c:129
+#: libgnomeui/gnome-href.c:127
 msgid "The text on the button"
 msgstr "在按鈕上所顯示的句子"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:128
 msgid "End World Hunger"
 msgstr "絕世飢餓"
 
-#: libgnomeui/gnome-href.c:136
+#: libgnomeui/gnome-href.c:134
 #, fuzzy
 msgid "Link colour"
 msgstr "選取一個色彩"
 
-#: libgnomeui/gnome-href.c:137
-msgid "Colour ysed to draw the link"
+#: libgnomeui/gnome-href.c:135
+msgid "Colour used to draw the link"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:398
+#: libgnomeui/gnome-href.c:396
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -448,11 +448,11 @@ msgstr ""
 "當嘗試啟動這個 URL 的處理程式時發生錯誤。\n"
 "請檢查在控制中心內的有關設定是否正確。 "
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:615
+#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
 msgid "X display to use"
 msgstr "所使用的 X 顯示環境"
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:615
+#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
 msgid "DISPLAY"
 msgstr "顯示環境"
 
@@ -461,12 +461,12 @@ msgid "GNOME GUI Library"
 msgstr "GNOME 圖形介面函式庫"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:462
+#: libgnomeui/gnome-ui-init.c:465
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "發生了非常嚴重的錯誤；無法顯示錯誤對話盒\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:476
+#: libgnomeui/gnome-ui-init.c:479
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -474,76 +474,76 @@ msgstr ""
 "嚴重錯誤！\n"
 "無法顯示錯誤對話盒\n"
 
-#: libgnomeui/gnome-ui-init.c:608
+#: libgnomeui/gnome-ui-init.c:611
 msgid "Gdk debugging flags to set"
 msgstr "設置 Gdk 除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:608 libgnomeui/gnome-ui-init.c:611
-#: libgnomeui/gnome-ui-init.c:652 libgnomeui/gnome-ui-init.c:655
+#: libgnomeui/gnome-ui-init.c:611 libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:655 libgnomeui/gnome-ui-init.c:658
 msgid "FLAGS"
 msgstr "除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:614
 msgid "Gdk debugging flags to unset"
 msgstr "取消設置 Gdk 除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:622
 msgid "Make X calls synchronous"
 msgstr "將 X 的呼叫同步"
 
-#: libgnomeui/gnome-ui-init.c:625
+#: libgnomeui/gnome-ui-init.c:628
 msgid "Don't use X shared memory extension"
 msgstr "不要使用 X 的共用延伸記憶體"
 
-#: libgnomeui/gnome-ui-init.c:629
+#: libgnomeui/gnome-ui-init.c:632
 msgid "Program name as used by the window manager"
 msgstr "視窗管理員所使用的程式名稱"
 
-#: libgnomeui/gnome-ui-init.c:629
+#: libgnomeui/gnome-ui-init.c:632
 msgid "NAME"
 msgstr "程式名稱"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:635
 msgid "Program class as used by the window manager"
 msgstr "視窗管理員所使用的程式類別"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:635
 msgid "CLASS"
 msgstr "類別"
 
-#: libgnomeui/gnome-ui-init.c:636
+#: libgnomeui/gnome-ui-init.c:639
 msgid "HOST"
 msgstr "主機名稱"
 
-#: libgnomeui/gnome-ui-init.c:640
+#: libgnomeui/gnome-ui-init.c:643
 msgid "PORT"
 msgstr "埠號"
 
-#: libgnomeui/gnome-ui-init.c:645 libgnomeui/gnome-ui-init.c:648
+#: libgnomeui/gnome-ui-init.c:648 libgnomeui/gnome-ui-init.c:651
 msgid "STYLE"
 msgstr "樣式"
 
-#: libgnomeui/gnome-ui-init.c:652
+#: libgnomeui/gnome-ui-init.c:655
 msgid "Gtk+ debugging flags to set"
 msgstr "設置 Gtk+ 除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:655
+#: libgnomeui/gnome-ui-init.c:658
 msgid "Gtk+ debugging flags to unset"
 msgstr "取消設置 Gtk+ 除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:661
 msgid "Make all warnings fatal"
 msgstr "將所有警告視為嚴重錯誤"
 
-#: libgnomeui/gnome-ui-init.c:661
+#: libgnomeui/gnome-ui-init.c:664
 msgid "Load an additional Gtk module"
 msgstr "載入另外的 Gtk 模組"
 
-#: libgnomeui/gnome-ui-init.c:661
+#: libgnomeui/gnome-ui-init.c:664
 msgid "MODULE"
 msgstr "模組"
 
-#: libgnomeui/gnome-ui-init.c:766
+#: libgnomeui/gnome-ui-init.c:769
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -1028,11 +1028,11 @@ msgstr " - OK？是或否 (yes or no)"
 msgid "Progress"
 msgstr "進度對話盒"
 
-#: libgnomeui/gnome-app.c:152
+#: libgnomeui/gnome-app.c:150
 msgid "App ID"
 msgstr "程式 ID"
 
-#: libgnomeui/gnome-app.c:153
+#: libgnomeui/gnome-app.c:151
 msgid "The application ID string"
 msgstr "程式的 ID 字串"
 
@@ -1068,64 +1068,64 @@ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgid "Pick a Font"
 msgstr "選取一個字型"
 
-#: libgnomeui/gnome-font-picker.c:159
+#: libgnomeui/gnome-font-picker.c:157
 msgid "The title of the selection dialog box"
 msgstr "對話盒的標題"
 
-#: libgnomeui/gnome-font-picker.c:167
+#: libgnomeui/gnome-font-picker.c:165
 msgid "Mode"
 msgstr "模式"
 
-#: libgnomeui/gnome-font-picker.c:168
+#: libgnomeui/gnome-font-picker.c:166
 msgid "The mode of operation of the font picker"
 msgstr "字型選擇器的執行模式"
 
-#: libgnomeui/gnome-font-picker.c:177
+#: libgnomeui/gnome-font-picker.c:175
 msgid "Font name"
 msgstr "字型名稱"
 
-#: libgnomeui/gnome-font-picker.c:178
+#: libgnomeui/gnome-font-picker.c:176
 msgid "Name of the selected font"
 msgstr "選定字型的名稱"
 
-#: libgnomeui/gnome-font-picker.c:187 libgnomeui/gnome-font-picker.c:977
+#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:975
 msgid "Font"
 msgstr "字型"
 
-#: libgnomeui/gnome-font-picker.c:188
+#: libgnomeui/gnome-font-picker.c:186
 msgid "The selected GtkFont"
 msgstr "選定的字型"
 
-#: libgnomeui/gnome-font-picker.c:195
+#: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text"
 msgstr "預覽文字"
 
-#: libgnomeui/gnome-font-picker.c:196
+#: libgnomeui/gnome-font-picker.c:194
 msgid "Preview text shown in the dialog"
 msgstr "顯示於對話盒內的預覽句子"
 
-#: libgnomeui/gnome-font-picker.c:204
+#: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in label"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:205
+#: libgnomeui/gnome-font-picker.c:203
 msgid "Use font in the label in font info mode"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:213
+#: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:214
+#: libgnomeui/gnome-font-picker.c:212
 msgid "Font size for label in font info mode"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:224
+#: libgnomeui/gnome-font-picker.c:222
 #, fuzzy
 msgid "Show size"
 msgstr "顯示字型大小"
 
-#: libgnomeui/gnome-font-picker.c:225
+#: libgnomeui/gnome-font-picker.c:223
 msgid "Show size in font info mode"
 msgstr ""
 
@@ -1156,73 +1156,73 @@ msgstr "當載入或儲存 %s 的設定資料時發生錯誤。某些設定將�
 msgid "GConf error details: %s\n"
 msgstr "GConf 詳細錯誤：%s\n"
 
-#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:860
+#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:858
 msgid "No Icon"
 msgstr "無圖示"
 
-#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:376
+#: libgnomeui/gnome-icon-entry.c:459 libgnomeui/gnome-pixmap-entry.c:373
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "無法找到水平容器元件，使用一般的檔案選取對話盒"
 
-#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:382
+#: libgnomeui/gnome-icon-entry.c:465 libgnomeui/gnome-pixmap-entry.c:379
 msgid "Preview"
 msgstr "預覽"
 
-#: libgnomeui/gnome-icon-entry.c:881
+#: libgnomeui/gnome-icon-entry.c:879
 msgid "Browse"
 msgstr "瀏覽"
 
-#: libgnomeui/gnome-icon-sel.c:295
+#: libgnomeui/gnome-icon-sel.c:297
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "圖示選擇：'%s' 不存在或不是一個目錄"
 
-#: libgnomeui/gnome-icon-sel.c:303
+#: libgnomeui/gnome-icon-sel.c:305
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "圖示選擇：無法開啟目錄 '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:409
+#: libgnomeui/gnome-icon-sel.c:411
 msgid "Loading Icons..."
 msgstr "載入圖示"
 
-#: libgnomeui/gnome-messagebox.c:118
+#: libgnomeui/gnome-messagebox.c:116
 msgid "Information"
 msgstr "資訊"
 
-#: libgnomeui/gnome-messagebox.c:123
+#: libgnomeui/gnome-messagebox.c:121
 msgid "Warning"
 msgstr "警告"
 
-#: libgnomeui/gnome-messagebox.c:129
+#: libgnomeui/gnome-messagebox.c:127
 msgid "Error"
 msgstr "錯誤"
 
-#: libgnomeui/gnome-messagebox.c:135
+#: libgnomeui/gnome-messagebox.c:133
 msgid "Question"
 msgstr "問題"
 
-#: libgnomeui/gnome-messagebox.c:140
+#: libgnomeui/gnome-messagebox.c:138
 msgid "Message"
 msgstr "訊息"
 
-#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:494
+#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:491
 msgid "No Image"
 msgstr "無影像"
 
-#: libgnomeui/gnome-scores.c:80
+#: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
 msgstr "首十名最高積分"
 
-#: libgnomeui/gnome-scores.c:93
+#: libgnomeui/gnome-scores.c:91
 msgid "User"
 msgstr "用者"
 
-#: libgnomeui/gnome-scores.c:96
+#: libgnomeui/gnome-scores.c:94
 msgid "Score"
 msgstr "分數"
 
-#: libgnomeui/gnome-scores.c:99
+#: libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "日期"
 
@@ -1233,11 +1233,11 @@ msgstr "日期"
 #. %d is day of month, %m is month number, %T full hour,
 #. %H hours, %M minutes, %S seconds
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:197
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
-#: libgnomeui/gnome-scores.c:409
+#: libgnomeui/gnome-scores.c:407
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 
