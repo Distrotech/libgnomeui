@@ -362,9 +362,10 @@ gtk_socket_claim_focus (GtkSocket *socket)
   
   /* FIXME: we might grab the focus even if we don't have
    * it as an app... (and see _focus_in ()) */
-  XSetInputFocus (GDK_DISPLAY (),
-		  GDK_WINDOW_XWINDOW (socket->plug_window),
-		  RevertToParent, GDK_CURRENT_TIME);
+  if (socket->plug_window)
+    XSetInputFocus (GDK_DISPLAY (),
+		    GDK_WINDOW_XWINDOW (socket->plug_window),
+		    RevertToParent, GDK_CURRENT_TIME);
 }
 
 static gint 

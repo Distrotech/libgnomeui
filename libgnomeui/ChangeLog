@@ -1,3 +1,8 @@
+Thu Aug 20 19:22:47 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gtk-socket.c (gtk_socket_claim_focus): Yet another fix
+	for when the plug window hasn't appeared yet.
+
 Thu Aug 20 18:40:38 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* winhints_demo.c gnome-wmhints.[ch]: Removed
