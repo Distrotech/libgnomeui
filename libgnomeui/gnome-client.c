@@ -169,10 +169,14 @@ static void client_parse_func(poptContext ctx,
 
 /* Command-line arguments understood by this module.  */
 static const struct poptOption options[] = {
-  {NULL, '\0', POPT_ARG_CALLBACK, client_parse_func, 0, NULL, NULL},
-  {"sm-client-id", '\0', POPT_ARG_STRING, NULL, -1, N_("Specify session management ID"), N_("ID")},
-  {"sm-cloned-id", '\0', POPT_ARG_STRING, NULL, -2, N_("Specify ID of cloned client"), N_("ID")},
-  {"sm-disable", '\0', POPT_ARG_NONE, NULL, -3, N_("Disable connection to session manager"), NULL},
+  {NULL, '\0', POPT_ARG_CALLBACK | POPT_CBFLAG_PRE | POPT_CBFLAG_POST, 
+   client_parse_func, 0, NULL, NULL},
+  {"sm-client-id", '\0', POPT_ARG_STRING, NULL, -1, 
+   N_("Specify session management ID"), N_("ID")},
+  {"sm-cloned-id", '\0', POPT_ARG_STRING, NULL, -2, 
+   N_("Specify ID of cloned client"), N_("ID")},
+  {"sm-disable", '\0', POPT_ARG_NONE, NULL, -3, 
+   N_("Disable connection to session manager"), NULL},
   {NULL, '\0', 0, NULL, 0}
 };
 
@@ -226,7 +230,7 @@ client_parse_func(poptContext ctx,
     }
   else if (key == -3)
     {
-      /* Disable the connection to the sessione manager.  */
+      /* Disable the connection to the session manager.  */
       gnome_client_disable_master_connection ();
     }
 }

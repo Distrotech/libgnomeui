@@ -1,3 +1,8 @@
+1998-11-05  Felix Bellaby <felix@pooh.u-net.com>
+
+	* gnome-client.c (options): Added CBFLAGS to make connection to
+	master_client.
+
 1998-11-04  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-net.c (make_inetaddr): Use memset/memcpy rather than
