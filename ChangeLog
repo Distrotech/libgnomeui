@@ -1,3 +1,8 @@
+2001-12-28  jacob berkman  <jacob@ximian.com>
+
+	* glade/glade-gnome.c: sigh, forgot to commit fixes for
+	de-privatization of GnomeDialog
+
 2001-12-23  Takayuki KUSANO  <AE5T-KSN@asahi-net.or.jp>
 
 	* configure.in: Added "ja" to ALL_LINGUAS.

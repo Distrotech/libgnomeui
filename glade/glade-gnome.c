@@ -307,7 +307,7 @@ dialog_build_children(GladeXML *self, GtkWidget *w,
 
     glade_standard_build_children (self, w, info);
 
-    aa = dialog->_priv->action_area;
+    aa = dialog->action_area;
     if (!aa)
 	return;
 
@@ -591,7 +591,7 @@ dialog_find_internal_child(GladeXML *xml, GtkWidget *parent,
     if (!strcmp(childname, "vbox"))
 	return GNOME_DIALOG(parent)->vbox;
     else if (!strcmp (childname, "action_area"))
-	return GNOME_DIALOG (parent)->_priv->action_area;
+	return GNOME_DIALOG (parent)->action_area;
 
     return NULL;
 }
@@ -623,7 +623,7 @@ propertybox_find_internal_child(GladeXML *xml, GtkWidget *parent,
     if (!strcmp(childname, "vbox"))
 	return GNOME_DIALOG(parent)->vbox;
     else if (!strcmp(childname, "action_area"))
-	return GNOME_DIALOG(parent)->_priv->action_area;
+	return GNOME_DIALOG(parent)->action_area;
     else if (!strcmp(childname, "notebook"))
 	return GNOME_PROPERTY_BOX(parent)->notebook;
     else if (!strcmp(childname, "ok_button"))
