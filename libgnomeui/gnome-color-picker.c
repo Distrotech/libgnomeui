@@ -411,6 +411,9 @@ drag_data_received (GtkWidget        *widget,
 
 	gnome_color_picker_set_i16(cpicker, dropped[0], dropped[1],
 				   dropped[2], dropped[3]);
+	g_signal_emit (cpicker, color_picker_signals[COLOR_SET], 0,
+		       dropped[0], dropped[1], dropped[2], dropped[3]);
+		
 }
 
 static void
