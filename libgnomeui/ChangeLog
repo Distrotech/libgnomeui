@@ -1,3 +1,13 @@
+Mon Sep 18 20:16:45 2000  George Lebl <jirka@5z.com>
+
+	* gnome-recently-used.[ch]: use boilerplates, minor cleanup,
+	  some precondition checks.  Add the maximum number of documents,
+	  implemented simplistically, when adding check if there is more
+	  then the <key-prefix>/MaximumSize (or 30 by default), and remove
+	  the oldest entries until there is this.  This really doesn't
+	  need to be perfect, a simple solution is better here I think.
+	  Also rename gnome_recent_document_get to gnome_recent_document_peek
+
 Mon Sep 18 19:02:34 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dateedit.c: use the boilerplate macros and switch to GParam

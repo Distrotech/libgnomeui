@@ -82,7 +82,6 @@ void                 gnome_recently_used_add_simple       (GnomeRecentlyUsed   *
                                                            const gchar         *filename,
                                                            const gchar         *mime_type);
 
-
 GnomeRecentDocument* gnome_recent_document_new            (void);
 GnomeRecentDocument* gnome_recent_document_ref            (GnomeRecentDocument *doc);
 void                 gnome_recent_document_unref          (GnomeRecentDocument *doc);
@@ -101,8 +100,8 @@ void                 gnome_recent_document_set            (GnomeRecentDocument *
                                                            const gchar         *val);
 
 /* can return NULL if the arg wasn't set for whatever reason */
-const gchar*         gnome_recent_document_get            (GnomeRecentDocument *doc,
-                                                           const gchar         *arg);
+const gchar*         gnome_recent_document_peek            (GnomeRecentDocument *doc,
+							    const gchar         *arg);
 
 
 GTime                gnome_recent_document_get_creation_time (GnomeRecentDocument *doc);
