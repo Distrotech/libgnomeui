@@ -240,10 +240,32 @@ gnome_dialog_construct (GnomeDialog * dialog,
     }
     
     gnome_dialog_append_buttons( dialog, 
-				 button_name, 
-				 NULL );
+				 button_name);
   };  
 }
+
+void gnome_dialog_constructv (GnomeDialog * dialog,
+			      const gchar * title,
+			      const gchar ** buttons)
+{
+  const gchar * button_name;
+  
+  if (title)
+    gtk_window_set_title (GTK_WINDOW (dialog), title);
+  
+  while (TRUE) {
+    
+    button_name = *buttons++;
+    
+    if (button_name == NULL) {
+      break;
+    }
+    
+    gnome_dialog_append_buttons( dialog, 
+				 button_name);
+  };  
+}
+
 
 
 GtkWidget* gnome_dialog_new            (const gchar * title,
@@ -251,17 +273,56 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 {
   va_list ap;
   GnomeDialog *dialog;
-	
-  va_start (ap, title);
+  int count;
+  gchar **buttons;
+  gchar *button_name;
 	
   dialog = gtk_type_new (gnome_dialog_get_type ());
 
-  gnome_dialog_construct(dialog, title, ap);
-
+  va_start (ap, title);
+  count = 0;
+  while (TRUE) {
+    button_name = va_arg (ap, gchar *);
+    count++;
+    if (button_name == NULL) {
+      break;
+    }
+  }
   va_end (ap);
+  
+  buttons = g_new (gchar *, count);
+  count = 0;
+
+  va_start (ap, title);
+  
+  while (TRUE) {
+    buttons[count] = va_arg (ap, gchar *);
+    if (buttons[count] == NULL) {
+      break;
+    }
+    count++;
+  }
+  va_end (ap);
+  
+  gnome_dialog_constructv(dialog, title, (const gchar **)buttons);
+  g_free(buttons);
 
   return GTK_WIDGET (dialog);
 }
+
+GtkWidget* gnome_dialog_newv            (const gchar * title,
+					 const gchar ** buttons)
+{
+  va_list ap;
+  GnomeDialog *dialog;
+	
+  dialog = gtk_type_new (gnome_dialog_get_type ());
+
+  gnome_dialog_constructv(dialog, title, buttons);
+
+  return GTK_WIDGET (dialog);
+}
+
 
 void       gnome_dialog_append_buttons (GnomeDialog * dialog,
 					const gchar * first,
@@ -276,6 +337,19 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
   va_start(ap, first);
 
   while(button_name != NULL) {
+    gnome_dialog_append_button (dialog, button_name);
+    button_name = va_arg (ap, gchar *);
+  }
+  va_end(ap);
+}
+
+void       gnome_dialog_append_button (GnomeDialog * dialog,
+				       const gchar * button_name)
+{
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  if (button_name != NULL) {
     GtkWidget *button;
     
     button = gnome_stock_or_ordinary_button (button_name);
@@ -290,10 +364,19 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
 			      dialog);
     
     dialog->buttons = g_list_append (dialog->buttons, button);
-
-    button_name = va_arg (ap, gchar *);
   }
-  va_end(ap);
+}
+
+void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
+					const gchar ** buttons)
+{
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  while(*buttons != NULL) {
+    gnome_dialog_append_button (dialog, *buttons);
+    buttons++;
+  }
 }
 
 void
@@ -730,6 +813,9 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.33  1998/07/17 23:37:03  yacc
+  provide ...v-forms of functions using varargs.
+
   Revision 1.32  1998/07/15 03:59:15  hp
 
 

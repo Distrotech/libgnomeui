@@ -152,9 +152,8 @@ gnome_message_box_new (const gchar           *message,
 	    break;
 	  }
 	  
-	  gnome_dialog_append_buttons( GNOME_DIALOG(message_box), 
-				       button_name, 
-				       NULL );
+	  gnome_dialog_append_button ( GNOME_DIALOG(message_box), 
+				       button_name);
 	};
 	
 	va_end (ap);

@@ -77,6 +77,9 @@ guint      gnome_dialog_get_type       (void);
 /* Arguments: Title and button names, then NULL */
 GtkWidget* gnome_dialog_new            (const gchar * title,
 					...);
+/* Arguments: Title and NULL terminated array of button names. */
+GtkWidget* gnome_dialog_newv           (const gchar * title,
+					const gchar **buttons);
 
 /* Connect to the "clicked" signal of a single button */
 void       gnome_dialog_button_connect (GnomeDialog *dialog,
@@ -149,16 +152,23 @@ void       gnome_dialog_set_destroy (GnomeDialog * d, gboolean self_destruct);
 
 /* Use of append_buttons is discouraged, it's really
    meant for subclasses. */
-void       gnome_dialog_append_buttons (GnomeDialog * dialog,
-					const gchar * first,
-					...);
+void       gnome_dialog_append_buttons  (GnomeDialog * dialog,
+					 const gchar * first,
+					 ...);
+void       gnome_dialog_append_button   (GnomeDialog * dialog,
+				         const gchar * name);
+void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
+					 const gchar **buttons);
 
 /* Don't use this either; it's for bindings to languages other 
    than C (which makes the varargs kind of lame... feel free to fix)
    You want _new, see above. */
-void       gnome_dialog_construct (GnomeDialog * dialog,
-				   const gchar * title,
-				   va_list ap);
+void       gnome_dialog_construct  (GnomeDialog * dialog,
+				    const gchar * title,
+				    va_list ap);
+void       gnome_dialog_constructv (GnomeDialog * dialog,
+				    const gchar * title,
+				    const gchar **buttons);
 
 END_GNOME_DECLS
 

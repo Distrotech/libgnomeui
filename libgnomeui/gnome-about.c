@@ -624,9 +624,8 @@ gnome_about_construct (GnomeAbout *about,
 
 	gtk_widget_show (drawing_area);
                                                  
-	gnome_dialog_append_buttons( GNOME_DIALOG(about),
-				     GNOME_STOCK_BUTTON_OK, 
-				     NULL );
+	gnome_dialog_append_button ( GNOME_DIALOG(about),
+				     GNOME_STOCK_BUTTON_OK);
 
 	gnome_dialog_set_close( GNOME_DIALOG(about),
 				TRUE );

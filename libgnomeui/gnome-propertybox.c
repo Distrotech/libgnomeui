@@ -155,12 +155,12 @@ gnome_property_box_init (GnomePropertyBox *property_box)
 
 	property_box->notebook = gtk_notebook_new ();
 
-	gnome_dialog_append_buttons(GNOME_DIALOG(property_box),
-				    GNOME_STOCK_BUTTON_OK,
-				    GNOME_STOCK_BUTTON_APPLY,
-				    GNOME_STOCK_BUTTON_CLOSE,
-				    GNOME_STOCK_BUTTON_HELP,
-				    NULL);
+	gnome_dialog_append_buttons (GNOME_DIALOG(property_box),
+				     GNOME_STOCK_BUTTON_OK,
+				     GNOME_STOCK_BUTTON_APPLY,
+				     GNOME_STOCK_BUTTON_CLOSE,
+				     GNOME_STOCK_BUTTON_HELP,
+				     NULL);
 
 	/* This is sort of unattractive */
 
