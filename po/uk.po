@@ -5,505 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
+"POT-Creation-Date: 2003-06-04 09:08+0200\n"
 "PO-Revision-Date: 2003-01-28 02:59--500\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: libgnomeui/gnome-about.c:194
-msgid "Credits"
-msgstr "Інформація про авторів"
-
-#: libgnomeui/gnome-about.c:223
-msgid "Written by"
-msgstr "Автори"
-
-#: libgnomeui/gnome-about.c:238
-msgid "Documented by"
-msgstr "Автори документації"
-
-#: libgnomeui/gnome-about.c:253
-msgid "Translated by"
-msgstr "Перекладачі"
-
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "Інформація про _авторів"
-
-#: libgnomeui/gnome-about.c:352
-msgid "Program name"
-msgstr "Назва програми"
-
-#: libgnomeui/gnome-about.c:353
-msgid "The name of the program"
-msgstr "Назва програми"
-
-#: libgnomeui/gnome-about.c:360
-msgid "Program version"
-msgstr "Версія програми"
-
-#: libgnomeui/gnome-about.c:361
-msgid "The version of the program"
-msgstr "Версія програми"
-
-#: libgnomeui/gnome-about.c:367
-msgid "Copyright string"
-msgstr "Авторські права"
-
-#: libgnomeui/gnome-about.c:368
-msgid "Copyright information for the program"
-msgstr "Інформація про авторські права на програму"
-
-#: libgnomeui/gnome-about.c:375
-msgid "Comments string"
-msgstr "Коментарі"
-
-#: libgnomeui/gnome-about.c:376
-msgid "Comments about the program"
-msgstr "Коментарі про програму"
-
-#: libgnomeui/gnome-about.c:382
-msgid "Authors"
-msgstr "Автори"
-
-#: libgnomeui/gnome-about.c:383
-msgid "List of authors of the programs"
-msgstr "Список авторів програми"
-
-#: libgnomeui/gnome-about.c:385
-msgid "Author entry"
-msgstr "Запис про автора"
-
-#: libgnomeui/gnome-about.c:386
-msgid "A single author entry"
-msgstr "Запис про одного автора"
-
-#: libgnomeui/gnome-about.c:393
-msgid "Documenters"
-msgstr "Автори документації"
-
-#: libgnomeui/gnome-about.c:394
-msgid "List of people documenting the program"
-msgstr "Список авторів документації до програми"
-
-#: libgnomeui/gnome-about.c:396
-msgid "Documenter entry"
-msgstr "Запис про автора документації"
-
-#: libgnomeui/gnome-about.c:397
-msgid "A single documenter entry"
-msgstr "Запис про одного автора документації"
-
-#: libgnomeui/gnome-about.c:405
-msgid "Translator credits"
-msgstr "Інформація про перекладачів"
-
-#: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Інформація про перекладачів. Цей рядок має бути позначеним до перекладу"
-
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
-msgid "Logo"
-msgstr "Емблема"
-
-#: libgnomeui/gnome-about.c:414
-msgid "A logo for the about box"
-msgstr "Емблема для блоку інформації про програму"
-
-#: libgnomeui/gnome-about.c:493
-#, c-format
-msgid "About %s"
-msgstr "Про %s"
-
-#: libgnomeui/gnome-appbar.c:747
-msgid "Has Progress"
-msgstr "Має поступ"
-
-#: libgnomeui/gnome-appbar.c:748
-msgid "Create a progress widget."
-msgstr "Створити віджет поступу."
-
-#: libgnomeui/gnome-appbar.c:755
-msgid "Has Status"
-msgstr "Має стан"
-
-#: libgnomeui/gnome-appbar.c:756
-msgid "Create a status widget."
-msgstr "Створити віджет стану."
-
-#: libgnomeui/gnome-appbar.c:763
-msgid "Interactivity"
-msgstr "Інтерактивність"
-
-#: libgnomeui/gnome-appbar.c:764
-msgid "Level of user activity required."
-msgstr "Вимагається рівень активності користувача."
-
-#: libgnomeui/gnome-client.c:860
-msgid "Specify session management ID"
-msgstr "Вказати ідентифікатор керування сеансом"
-
-#: libgnomeui/gnome-client.c:860
-msgid "ID"
-msgstr "ІДЕНТИФІКАТОР"
-
-#: libgnomeui/gnome-client.c:863
-msgid "Specify prefix of saved configuration"
-msgstr "Вказати префікс збереженої конфіґурації"
-
-#: libgnomeui/gnome-client.c:863
-msgid "PREFIX"
-msgstr "ПРЕФІКС"
-
-#: libgnomeui/gnome-client.c:866
-msgid "Disable connection to session manager"
-msgstr "Вимкнути з'єднання з менеджером сеансів"
-
-#: libgnomeui/gnome-client.c:972
-msgid "Session management"
-msgstr "Керування сеансами"
-
-#: libgnomeui/gnome-client.c:2470
-msgid "Cancel Logout"
-msgstr "Скасувати завершення роботи"
-
-#: libgnomeui/gnome-color-picker.c:414
-msgid "Received invalid color data\n"
-msgstr "Отримано невірні дані кольору\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Вибір кольору"
-
-#: libgnomeui/gnome-color-picker.c:465
-msgid "Open a dialog to specify the color"
-msgstr "Відкрити діалог для вказання кольору"
-
-#: libgnomeui/gnome-color-picker.c:487
-msgid "Pick a color"
-msgstr "Вибрати колір"
-
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
-msgid "Time"
-msgstr "Час"
-
-#: libgnomeui/gnome-dateedit.c:480
-msgid "The time currently selected"
-msgstr "Вибраний час"
-
-#: libgnomeui/gnome-dateedit.c:492
-msgid "DateEdit Flags"
-msgstr "Індикатори DateEdit"
-
-#: libgnomeui/gnome-dateedit.c:493
-msgid "Flags for how DateEdit looks"
-msgstr "Індикатори вигляду DateEdit"
-
-#: libgnomeui/gnome-dateedit.c:502
-msgid "Lower Hour"
-msgstr "Нижня година"
-
-#: libgnomeui/gnome-dateedit.c:503
-msgid "Lower hour in the time popup selector"
-msgstr "Нижня година у вибирачі часу"
-
-#: libgnomeui/gnome-dateedit.c:513
-msgid "Upper Hour"
-msgstr "Верхня година"
-
-#: libgnomeui/gnome-dateedit.c:514
-msgid "Upper hour in the time popup selector"
-msgstr "Верхня година у вибирачі часу"
-
-#: libgnomeui/gnome-dateedit.c:524
-msgid "Initial Time"
-msgstr "Початковий час"
-
-#: libgnomeui/gnome-dateedit.c:525
-msgid "The initial time"
-msgstr "Початковий час"
-
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "Дата"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select Date"
-msgstr "Виберіть дату"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select the date from a calendar"
-msgstr "Вибрати дату з календаря"
-
-#. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
-msgid "Calendar"
-msgstr "Календар"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select Time"
-msgstr "Виберіть час"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select the time from a list"
-msgstr "Вибрати час з списку"
-
-#: libgnomeui/gnome-dateedit.c:1003
-msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"функція gnome_date_edit_get_date небажаний, використовуйте "
-"gnome_date_edit_get_time"
-
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
-msgid "Title"
-msgstr "Заголовок"
-
-#: libgnomeui/gnome-druid-page-standard.c:122
-msgid "Title of the druid"
-msgstr "Заголовок друіда"
-
-#: libgnomeui/gnome-druid-page-standard.c:130
-msgid "Logo image"
-msgstr "Зображення емблеми"
-
-#: libgnomeui/gnome-druid-page-standard.c:137
-msgid "Top Watermark"
-msgstr "Верхня позначка"
-
-#: libgnomeui/gnome-druid-page-standard.c:138
-msgid "Watermark image for the top"
-msgstr "Зображення для верхньої позначки"
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Title Foreground"
-msgstr "Передній план заголовка"
-
-#: libgnomeui/gnome-druid-page-standard.c:146
-msgid "Foreground color of the title"
-msgstr "Колір переднього плану заголовка"
-
-#: libgnomeui/gnome-druid-page-standard.c:153
-msgid "Title Foreground Color"
-msgstr "Колір переднього плану заголовка"
-
-#: libgnomeui/gnome-druid-page-standard.c:154
-msgid "Foreground color of the title as a GdkColor"
-msgstr "Колір переднього плану заголовка у вигляді GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:161
-msgid "Title Foreground color set"
-msgstr "Колір переднього плану заголовка встановлено"
-
-#: libgnomeui/gnome-druid-page-standard.c:162
-msgid "Foreground color of the title is set"
-msgstr "Колір переднього плану заголовка встановлено"
-
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
-msgid "Background Color"
-msgstr "Колір тла"
-
-#: libgnomeui/gnome-druid-page-standard.c:170
-msgid "Background color"
-msgstr "Колір тла"
-
-#: libgnomeui/gnome-druid-page-standard.c:178
-msgid "Background color as a GdkColor"
-msgstr "Колір тла у вигляді GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:185
-msgid "Background color set"
-msgstr "Колір тла встановлено"
-
-#: libgnomeui/gnome-druid-page-standard.c:186
-msgid "Background color is set"
-msgstr "Колір тла встановлено"
-
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
-msgstr "Колір тла логотипа"
-
-#: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
-msgstr "Колір тла логотипа"
-
-#: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
-msgstr "Колір тла логотипа у вигляді GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:209
-msgid "Logo Background color set"
-msgstr "Колір тла логотипа встановлено"
-
-#: libgnomeui/gnome-druid-page-standard.c:210
-msgid "Logo Background color is set"
-msgstr "Колір тла логотипа встановлено"
-
-#: libgnomeui/gnome-druid.c:150
-msgid "Show Finish"
-msgstr "Показати завершення"
-
-#: libgnomeui/gnome-druid.c:151
-msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Показати кнопку завершення замість кнопки переходу далі"
-
-#: libgnomeui/gnome-druid.c:158
-msgid "Show Help"
-msgstr "Показати довідку"
-
-#: libgnomeui/gnome-druid.c:159
-msgid "Show the 'Help' button"
-msgstr "Показати кнопку довідки"
-
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URL"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "URL, який активує GnomeHRef"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "Текст"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "Текст на кнопці"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "Кінець всесвітнього голоду"
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr "Колір посилання"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "Колір, що використовуватиметься для малювання посилання"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr "Ця кнопка перенаправить вас до URI, який вона відображає."
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"Сталася помилка під час спроби запустити типового переглядача веб.\n"
-"Будь ласка, перевірте ваші налаштування в утиліті \"Вподобані програми\"."
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "X-дисплей до використання"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "ДИСПЛЕЙ"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "Бібліотека ГІК GNOME"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Множинний збій сеґментації; неможливо відобразити повідомлення про помилку\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Збій сеґментації!\n"
-"Неможливо відобразити діалог збою\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"Менеджер сеансів GNOME (процес %d) зазнав збою\n"
-"через фатальну помилку (%s).\n"
-"Коли ви закриєте це діалогове вікно, всі програми буде закрито, а ваш сеанс "
-"завершено.\n"
-"Будь ласка, збережіть всі ваші файли перед закриттям цього діалогового вікна."
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Програма \"%s\" (процес %d) зазнала збою\n"
-"через фатальну помилку.\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Використання: gnome_segv2 назва_програми номер_сиґналу\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Підготувати звіт про помилку"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "Налагодження"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Будь ласка, відвідайте сторінку збоїв прогам GNOME для додаткової інформації"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "Поля таблиці"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "Заповнення таблиці"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "Спосок з позначками"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "Пронумерований список"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "Відступ"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "Без відступу"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "Про"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -520,6 +28,114 @@ msgstr "Спадкоємний елемент 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Довідка елемента 2"
+
+#: libgnomeui/gnome-about.c:198
+msgid "Credits"
+msgstr "Інформація про авторів"
+
+#: libgnomeui/gnome-about.c:230
+msgid "Written by"
+msgstr "Автори"
+
+#: libgnomeui/gnome-about.c:245
+msgid "Documented by"
+msgstr "Автори документації"
+
+#: libgnomeui/gnome-about.c:260
+msgid "Translated by"
+msgstr "Перекладачі"
+
+#: libgnomeui/gnome-about.c:323
+#, fuzzy
+msgid "C_redits"
+msgstr "Інформація про авторів"
+
+#: libgnomeui/gnome-about.c:378
+msgid "Program name"
+msgstr "Назва програми"
+
+#: libgnomeui/gnome-about.c:379
+msgid "The name of the program"
+msgstr "Назва програми"
+
+#: libgnomeui/gnome-about.c:386
+msgid "Program version"
+msgstr "Версія програми"
+
+#: libgnomeui/gnome-about.c:387
+msgid "The version of the program"
+msgstr "Версія програми"
+
+#: libgnomeui/gnome-about.c:393
+msgid "Copyright string"
+msgstr "Авторські права"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright information for the program"
+msgstr "Інформація про авторські права на програму"
+
+#: libgnomeui/gnome-about.c:401
+msgid "Comments string"
+msgstr "Коментарі"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments about the program"
+msgstr "Коментарі про програму"
+
+#: libgnomeui/gnome-about.c:408
+msgid "Authors"
+msgstr "Автори"
+
+#: libgnomeui/gnome-about.c:409
+msgid "List of authors of the programs"
+msgstr "Список авторів програми"
+
+#: libgnomeui/gnome-about.c:411
+msgid "Author entry"
+msgstr "Запис про автора"
+
+#: libgnomeui/gnome-about.c:412
+msgid "A single author entry"
+msgstr "Запис про одного автора"
+
+#: libgnomeui/gnome-about.c:419
+msgid "Documenters"
+msgstr "Автори документації"
+
+#: libgnomeui/gnome-about.c:420
+msgid "List of people documenting the program"
+msgstr "Список авторів документації до програми"
+
+#: libgnomeui/gnome-about.c:422
+msgid "Documenter entry"
+msgstr "Запис про автора документації"
+
+#: libgnomeui/gnome-about.c:423
+msgid "A single documenter entry"
+msgstr "Запис про одного автора документації"
+
+#: libgnomeui/gnome-about.c:431
+msgid "Translator credits"
+msgstr "Інформація про перекладачів"
+
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Інформація про перекладачів. Цей рядок має бути позначеним до перекладу"
+
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Емблема"
+
+#: libgnomeui/gnome-about.c:440
+msgid "A logo for the about box"
+msgstr "Емблема для блоку інформації про програму"
+
+#: libgnomeui/gnome-about.c:519
+#, c-format
+msgid "About %s"
+msgstr "Про %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
@@ -950,6 +566,271 @@ msgstr "Ідентифікатор програми"
 msgid "The application ID string"
 msgstr "Ідентифікаційний рядок програми"
 
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "Має поступ"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "Створити віджет поступу."
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "Має стан"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "Створити віджет стану."
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "Інтерактивність"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "Вимагається рівень активності користувача."
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "Вказати ідентифікатор керування сеансом"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "ІДЕНТИФІКАТОР"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr "Вказати префікс збереженої конфіґурації"
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr "ПРЕФІКС"
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr "Вимкнути з'єднання з менеджером сеансів"
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "Керування сеансами"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "Скасувати завершення роботи"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Отримано невірні дані кольору\n"
+
+#: libgnomeui/gnome-color-picker.c:464
+msgid "Color Selector"
+msgstr "Вибір кольору"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Відкрити діалог для вказання кольору"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Вибрати колір"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "Час"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "Вибраний час"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr "Індикатори DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr "Індикатори вигляду DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "Нижня година"
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr "Нижня година у вибирачі часу"
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "Верхня година"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr "Верхня година у вибирачі часу"
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "Початковий час"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "Початковий час"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Дата"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "Виберіть дату"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "Вибрати дату з календаря"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "Календар"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "Виберіть час"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "Вибрати час з списку"
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"функція gnome_date_edit_get_date небажаний, використовуйте "
+"gnome_date_edit_get_time"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Заголовок"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Заголовок друіда"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Зображення емблеми"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Верхня позначка"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Зображення для верхньої позначки"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Передній план заголовка"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Колір переднього плану заголовка"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Колір переднього плану заголовка"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Колір переднього плану заголовка у вигляді GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Колір переднього плану заголовка встановлено"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Колір переднього плану заголовка встановлено"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Колір тла"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Колір тла"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Колір тла у вигляді GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Колір тла встановлено"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Колір тла встановлено"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "Колір тла логотипа"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "Колір тла логотипа"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "Колір тла логотипа у вигляді GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "Колір тла логотипа встановлено"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "Колір тла логотипа встановлено"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "Показати завершення"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Показати кнопку завершення замість кнопки переходу далі"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "Показати довідку"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "Показати кнопку довідки"
+
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Ідентифікатор історії"
@@ -1046,23 +927,23 @@ msgstr ""
 "Можна використовувати цю властивість для зміни чи отримання будь-якого з "
 "параметрів."
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "Вибрати файл"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "Шлях"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "Шлях до файла"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "_Вибрати..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr "Викликати діалог для вибору файла"
 
@@ -1169,6 +1050,46 @@ msgstr ""
 "інформації для %s. Деякі з ваших конфіґураційних параметрів можуть працювати "
 "невірно."
 
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "URL, який активує GnomeHRef"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "Текст"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "Текст на кнопці"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "Кінець всесвітнього голоду"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "Колір посилання"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "Колір, що використовуватиметься для малювання посилання"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "Ця кнопка перенаправить вас до URI, який вона відображає."
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Сталася помилка під час спроби запустити типового переглядача веб.\n"
+"Будь ласка, перевірте ваші налаштування в утиліті \"Вподобані програми\"."
+
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1205,52 +1126,52 @@ msgstr ""
 "Діалог вибору пактограм. Ви можете цю властивість, щоб отримати GtkDialog, "
 "якщо вам необхідно змінити чи опитати його властивості."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Немає піктограми"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 "Незнайдено горизонтального блоку, використовується звичайний вибір файлу"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Перегляд"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "Діалог вибору піктограм"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "Цей діалог дозволяє вибрати піктограму."
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "Вибір піктограм"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "Виберіть бажану піктограму."
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Вибір піктограм"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "Ця кнопка викличе вікно, що дозволяє вибрати піктограму."
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Вибрати"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "Шлях до піктограми"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1289,6 +1210,14 @@ msgstr "Запитання"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Повідомлення"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1332,6 +1261,111 @@ msgstr "%a %d %b %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 12"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Поля таблиці"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Заповнення таблиці"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Спосок з позначками"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Пронумерований список"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Відступ"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Без відступу"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Про"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "X-дисплей до використання"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "ДИСПЛЕЙ"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "Бібліотека ГІК GNOME"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+"Множинний збій сеґментації; неможливо відобразити повідомлення про помилку\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Збій сеґментації!\n"
+"Неможливо відобразити діалог збою\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"Менеджер сеансів GNOME (процес %d) зазнав збою\n"
+"через фатальну помилку (%s).\n"
+"Коли ви закриєте це діалогове вікно, всі програми буде закрито, а ваш сеанс "
+"завершено.\n"
+"Будь ласка, збережіть всі ваші файли перед закриттям цього діалогового вікна."
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Програма \"%s\" (процес %d) зазнала збою\n"
+"через фатальну помилку.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Використання: gnome_segv2 назва_програми номер_сиґналу\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "Підготувати звіт про помилку"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "Налагодження"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr ""
+"Будь ласка, відвідайте сторінку збоїв прогам GNOME для додаткової інформації"
+
+#~ msgid "_Credits"
+#~ msgstr "Інформація про _авторів"
 
 #~ msgid "Exit the test"
 #~ msgstr "Вийти з тесту"

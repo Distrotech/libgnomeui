@@ -6,508 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.1.5\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
+"POT-Creation-Date: 2003-06-04 09:08+0200\n"
 "PO-Revision-Date: 2003-02-22 23:56+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: libgnomeui/gnome-about.c:194
-msgid "Credits"
-msgstr "Crèdits"
-
-#: libgnomeui/gnome-about.c:223
-msgid "Written by"
-msgstr "Escrit per"
-
-#: libgnomeui/gnome-about.c:238
-msgid "Documented by"
-msgstr "Documentat per"
-
-#: libgnomeui/gnome-about.c:253
-msgid "Translated by"
-msgstr "Traduït per"
-
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "_Crèdits"
-
-#: libgnomeui/gnome-about.c:352
-msgid "Program name"
-msgstr "Nom del programa"
-
-#: libgnomeui/gnome-about.c:353
-msgid "The name of the program"
-msgstr "El nom del programa"
-
-#: libgnomeui/gnome-about.c:360
-msgid "Program version"
-msgstr "Versió del programa"
-
-#: libgnomeui/gnome-about.c:361
-msgid "The version of the program"
-msgstr "La versió del programa"
-
-#: libgnomeui/gnome-about.c:367
-msgid "Copyright string"
-msgstr "Cadena del copyright"
-
-#: libgnomeui/gnome-about.c:368
-msgid "Copyright information for the program"
-msgstr "Informació del Copyright del programa"
-
-#: libgnomeui/gnome-about.c:375
-msgid "Comments string"
-msgstr "Cadena de comentaris"
-
-#: libgnomeui/gnome-about.c:376
-msgid "Comments about the program"
-msgstr "Comentaris sobre el programa"
-
-#: libgnomeui/gnome-about.c:382
-msgid "Authors"
-msgstr "Autors"
-
-#: libgnomeui/gnome-about.c:383
-msgid "List of authors of the programs"
-msgstr "Llista dels autors dels programes"
-
-#: libgnomeui/gnome-about.c:385
-msgid "Author entry"
-msgstr "Registre d'autor"
-
-#: libgnomeui/gnome-about.c:386
-msgid "A single author entry"
-msgstr "Un únic registre d'autor"
-
-#: libgnomeui/gnome-about.c:393
-msgid "Documenters"
-msgstr "Documentalistes"
-
-#: libgnomeui/gnome-about.c:394
-msgid "List of people documenting the program"
-msgstr "Llista de persones que estan documentant el programa"
-
-#: libgnomeui/gnome-about.c:396
-msgid "Documenter entry"
-msgstr "Registre de documentalista"
-
-#: libgnomeui/gnome-about.c:397
-msgid "A single documenter entry"
-msgstr "Un únic registre de documentalista"
-
-#: libgnomeui/gnome-about.c:405
-msgid "Translator credits"
-msgstr "Crèdits dels traductors"
-
-#: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Crèdits dels traductors. Aquesta cadena hauria de ser marcada com a "
-"traduïble."
-
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
-msgid "Logo"
-msgstr "Logo"
-
-#: libgnomeui/gnome-about.c:414
-msgid "A logo for the about box"
-msgstr "Un logo pel quadre Quant a "
-
-#: libgnomeui/gnome-about.c:493
-#, c-format
-msgid "About %s"
-msgstr "Quant a %s"
-
-#: libgnomeui/gnome-appbar.c:747
-msgid "Has Progress"
-msgstr "En curs"
-
-#: libgnomeui/gnome-appbar.c:748
-msgid "Create a progress widget."
-msgstr "Crea un símbol de progrés."
-
-#: libgnomeui/gnome-appbar.c:755
-msgid "Has Status"
-msgstr "En Estat"
-
-#: libgnomeui/gnome-appbar.c:756
-msgid "Create a status widget."
-msgstr "Crea un símbol d'estat."
-
-#: libgnomeui/gnome-appbar.c:763
-msgid "Interactivity"
-msgstr "Interactivitat"
-
-#: libgnomeui/gnome-appbar.c:764
-msgid "Level of user activity required."
-msgstr "Nivell d'usuari requerit."
-
-#: libgnomeui/gnome-client.c:860
-msgid "Specify session management ID"
-msgstr "Especifica l'identificador de gestió de sessió"
-
-#: libgnomeui/gnome-client.c:860
-msgid "ID"
-msgstr "Identificador"
-
-#: libgnomeui/gnome-client.c:863
-msgid "Specify prefix of saved configuration"
-msgstr "Especifica el prefix de la configuració guardada"
-
-#: libgnomeui/gnome-client.c:863
-msgid "PREFIX"
-msgstr "PREFIX"
-
-#: libgnomeui/gnome-client.c:866
-msgid "Disable connection to session manager"
-msgstr "Inhabilita la connexió de la sessió amb el gestor"
-
-#: libgnomeui/gnome-client.c:972
-msgid "Session management"
-msgstr "Gestió de sessió"
-
-#: libgnomeui/gnome-client.c:2470
-msgid "Cancel Logout"
-msgstr "Cancel.lar la Sortida"
-
-#: libgnomeui/gnome-color-picker.c:414
-msgid "Received invalid color data\n"
-msgstr "S'ha rebut dades de color invàlides\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Seleccionador de color"
-
-#: libgnomeui/gnome-color-picker.c:465
-msgid "Open a dialog to specify the color"
-msgstr "Obre un diàleg per a especificar el color"
-
-#: libgnomeui/gnome-color-picker.c:487
-msgid "Pick a color"
-msgstr "Tria un color"
-
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
-msgid "Time"
-msgstr "Hora"
-
-#: libgnomeui/gnome-dateedit.c:480
-msgid "The time currently selected"
-msgstr "L'hora actualment seleccionada"
-
-#: libgnomeui/gnome-dateedit.c:492
-msgid "DateEdit Flags"
-msgstr "Indicadors del DateEdit"
-
-#: libgnomeui/gnome-dateedit.c:493
-msgid "Flags for how DateEdit looks"
-msgstr "Indicadors per a l'aspecte del DateEdit"
-
-#: libgnomeui/gnome-dateedit.c:502
-msgid "Lower Hour"
-msgstr "Hora menor"
-
-#: libgnomeui/gnome-dateedit.c:503
-msgid "Lower hour in the time popup selector"
-msgstr "Hora inferior del selector de l'emergent d'hora"
-
-#: libgnomeui/gnome-dateedit.c:513
-msgid "Upper Hour"
-msgstr "Hora superior"
-
-#: libgnomeui/gnome-dateedit.c:514
-msgid "Upper hour in the time popup selector"
-msgstr "Hora superior del selector de l'emergent d'hora"
-
-#: libgnomeui/gnome-dateedit.c:524
-msgid "Initial Time"
-msgstr "Hora inicial"
-
-#: libgnomeui/gnome-dateedit.c:525
-msgid "The initial time"
-msgstr "L'hora inicial"
-
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "Data"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select Date"
-msgstr "Selecciona la data"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select the date from a calendar"
-msgstr "Selecciona la data des d'un calendari"
-
-#. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
-msgid "Calendar"
-msgstr "Calendari"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select Time"
-msgstr "Selecciona l'hora"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select the time from a list"
-msgstr "Selecciona l'hora d'una llista"
-
-#: libgnomeui/gnome-dateedit.c:1003
-msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date està obsolet, utilitzeu gnome_date_edit_get_time "
-
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
-msgid "Title"
-msgstr "Títol"
-
-#: libgnomeui/gnome-druid-page-standard.c:122
-msgid "Title of the druid"
-msgstr "Títol del druida"
-
-#: libgnomeui/gnome-druid-page-standard.c:130
-msgid "Logo image"
-msgstr "Imatge del logo"
-
-#: libgnomeui/gnome-druid-page-standard.c:137
-msgid "Top Watermark"
-msgstr "Marca d'aigua superior"
-
-#: libgnomeui/gnome-druid-page-standard.c:138
-msgid "Watermark image for the top"
-msgstr "Imatge de marca d'aigua per a la part superior"
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Title Foreground"
-msgstr "Primer pla del títol"
-
-#: libgnomeui/gnome-druid-page-standard.c:146
-msgid "Foreground color of the title"
-msgstr "Color de primer pla del títol"
-
-#: libgnomeui/gnome-druid-page-standard.c:153
-msgid "Title Foreground Color"
-msgstr "Color de primer pla del títol"
-
-#: libgnomeui/gnome-druid-page-standard.c:154
-msgid "Foreground color of the title as a GdkColor"
-msgstr "Color de primer pla del títol com un GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:161
-msgid "Title Foreground color set"
-msgstr "Color de primer pla del títol definit"
-
-#: libgnomeui/gnome-druid-page-standard.c:162
-msgid "Foreground color of the title is set"
-msgstr "El color de primer pla del títol ha estat definit"
-
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
-msgid "Background Color"
-msgstr "Color de fons"
-
-#: libgnomeui/gnome-druid-page-standard.c:170
-msgid "Background color"
-msgstr "Color de fons"
-
-#: libgnomeui/gnome-druid-page-standard.c:178
-msgid "Background color as a GdkColor"
-msgstr "Color de fons com un GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:185
-msgid "Background color set"
-msgstr "Color de fons definit"
-
-#: libgnomeui/gnome-druid-page-standard.c:186
-msgid "Background color is set"
-msgstr "El color de fons s'ha definit"
-
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
-msgstr "Logo del color de fons"
-
-#: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
-msgstr "Logo del color de fons"
-
-#: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
-msgstr "Logo del color de fons com un GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:209
-msgid "Logo Background color set"
-msgstr "Logo del color de fons definit"
-
-#: libgnomeui/gnome-druid-page-standard.c:210
-msgid "Logo Background color is set"
-msgstr "El logo del color de fons s'ha definit"
-
-#: libgnomeui/gnome-druid.c:150
-msgid "Show Finish"
-msgstr "Mostra Finalitzar"
-
-#: libgnomeui/gnome-druid.c:151
-msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Mostra el botó «Finalitzar» en comptes del botó «Següent»"
-
-#: libgnomeui/gnome-druid.c:158
-msgid "Show Help"
-msgstr "Mostra Ajuda"
-
-#: libgnomeui/gnome-druid.c:159
-msgid "Show the 'Help' button"
-msgstr "Mostra el botó «Ajuda»"
-
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URL"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "L' URL que activa el GnomeHRef"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "Text"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "El text sobre el botó"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "Acaba amb la fam del mon"
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr "Color de l'enllaç"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "Color utilitzat per a dibuixar l'enllaç"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr "Aquest botó vos durà a la URI que mostra."
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"S'ha produït un error en probar d'executar el navegador per defecte.\n"
-"Comproveu la vostra configuració en l'eina de preferències «Aplicacions "
-"preferides»."
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "Pantalla X per utilitzar"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "VISUALITZACIÓ"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "Biblioteca GNOME GUI"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Han ocorregut múltiples violacions de segment; no es pot mostrar el diàleg "
-"d'error\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Violació de segment!\n"
-"No es pot mostrar el diàleg d'error\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"El Gestor de Sessió del GNOME (procés %d) ha fallat\n"
-"degut a un error fatal (%s).\n"
-"Quan tanqueu aquest diàleg, totes les aplicacions es tancaran i es sortirà "
-"de la vostra sessió.\n"
-"Si us plau, deseu tots els vostres fitxers abans de tancar aquest diàleg."
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"L'aplicació \"%s\" (procés %d) ha fallat\n"
-"degut a un error fatal.\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Ús: gnome_segv2 nomapp numsig\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Envia un informe d'error"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "Depuració"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Si us plau, visiteu la pàgina de Fallades d'Aplicació del GNOME per més "
-"informació"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "Contorns de la Taula"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "Contingut de la Taula"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "Llista de pic"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "Llista numerada"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "Sagnat"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "Desagnat"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "Quant a"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -524,6 +29,115 @@ msgstr "Element fill 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Pista per a l'element 2"
+
+#: libgnomeui/gnome-about.c:198
+msgid "Credits"
+msgstr "Crèdits"
+
+#: libgnomeui/gnome-about.c:230
+msgid "Written by"
+msgstr "Escrit per"
+
+#: libgnomeui/gnome-about.c:245
+msgid "Documented by"
+msgstr "Documentat per"
+
+#: libgnomeui/gnome-about.c:260
+msgid "Translated by"
+msgstr "Traduït per"
+
+#: libgnomeui/gnome-about.c:323
+#, fuzzy
+msgid "C_redits"
+msgstr "Crèdits"
+
+#: libgnomeui/gnome-about.c:378
+msgid "Program name"
+msgstr "Nom del programa"
+
+#: libgnomeui/gnome-about.c:379
+msgid "The name of the program"
+msgstr "El nom del programa"
+
+#: libgnomeui/gnome-about.c:386
+msgid "Program version"
+msgstr "Versió del programa"
+
+#: libgnomeui/gnome-about.c:387
+msgid "The version of the program"
+msgstr "La versió del programa"
+
+#: libgnomeui/gnome-about.c:393
+msgid "Copyright string"
+msgstr "Cadena del copyright"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright information for the program"
+msgstr "Informació del Copyright del programa"
+
+#: libgnomeui/gnome-about.c:401
+msgid "Comments string"
+msgstr "Cadena de comentaris"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments about the program"
+msgstr "Comentaris sobre el programa"
+
+#: libgnomeui/gnome-about.c:408
+msgid "Authors"
+msgstr "Autors"
+
+#: libgnomeui/gnome-about.c:409
+msgid "List of authors of the programs"
+msgstr "Llista dels autors dels programes"
+
+#: libgnomeui/gnome-about.c:411
+msgid "Author entry"
+msgstr "Registre d'autor"
+
+#: libgnomeui/gnome-about.c:412
+msgid "A single author entry"
+msgstr "Un únic registre d'autor"
+
+#: libgnomeui/gnome-about.c:419
+msgid "Documenters"
+msgstr "Documentalistes"
+
+#: libgnomeui/gnome-about.c:420
+msgid "List of people documenting the program"
+msgstr "Llista de persones que estan documentant el programa"
+
+#: libgnomeui/gnome-about.c:422
+msgid "Documenter entry"
+msgstr "Registre de documentalista"
+
+#: libgnomeui/gnome-about.c:423
+msgid "A single documenter entry"
+msgstr "Un únic registre de documentalista"
+
+#: libgnomeui/gnome-about.c:431
+msgid "Translator credits"
+msgstr "Crèdits dels traductors"
+
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Crèdits dels traductors. Aquesta cadena hauria de ser marcada com a "
+"traduïble."
+
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Logo"
+
+#: libgnomeui/gnome-about.c:440
+msgid "A logo for the about box"
+msgstr "Un logo pel quadre Quant a "
+
+#: libgnomeui/gnome-about.c:519
+#, c-format
+msgid "About %s"
+msgstr "Quant a %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
@@ -954,6 +568,270 @@ msgstr "Identificador App"
 msgid "The application ID string"
 msgstr "La cadena d'identificació d'aplicacions"
 
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "En curs"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "Crea un símbol de progrés."
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "En Estat"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "Crea un símbol d'estat."
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "Interactivitat"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "Nivell d'usuari requerit."
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "Especifica l'identificador de gestió de sessió"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "Identificador"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr "Especifica el prefix de la configuració guardada"
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr "Inhabilita la connexió de la sessió amb el gestor"
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "Gestió de sessió"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "Cancel.lar la Sortida"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "S'ha rebut dades de color invàlides\n"
+
+#: libgnomeui/gnome-color-picker.c:464
+msgid "Color Selector"
+msgstr "Seleccionador de color"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Obre un diàleg per a especificar el color"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Tria un color"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "Hora"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "L'hora actualment seleccionada"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr "Indicadors del DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr "Indicadors per a l'aspecte del DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "Hora menor"
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr "Hora inferior del selector de l'emergent d'hora"
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "Hora superior"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr "Hora superior del selector de l'emergent d'hora"
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "Hora inicial"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "L'hora inicial"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Data"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "Selecciona la data"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "Selecciona la data des d'un calendari"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "Calendari"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "Selecciona l'hora"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "Selecciona l'hora d'una llista"
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date està obsolet, utilitzeu gnome_date_edit_get_time "
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Títol"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Títol del druida"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Imatge del logo"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Marca d'aigua superior"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Imatge de marca d'aigua per a la part superior"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Primer pla del títol"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Color de primer pla del títol"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Color de primer pla del títol"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Color de primer pla del títol com un GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Color de primer pla del títol definit"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "El color de primer pla del títol ha estat definit"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Color de fons"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Color de fons"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Color de fons com un GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Color de fons definit"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "El color de fons s'ha definit"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "Logo del color de fons"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "Logo del color de fons"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "Logo del color de fons com un GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "Logo del color de fons definit"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "El logo del color de fons s'ha definit"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "Mostra Finalitzar"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Mostra el botó «Finalitzar» en comptes del botó «Següent»"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "Mostra Ajuda"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "Mostra el botó «Ajuda»"
+
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Historial d'identificació"
@@ -1050,23 +928,23 @@ msgstr ""
 "de registres.  Es pot utilitzar aquesta propietat per aconseguir el Registre "
 "Gtk si necessiteu modificar o consultar qualsevol dels seus paràmetres."
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "Selecciona el fitxer"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "Camí"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "Camí al fitxer"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "_Vés a..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr "Mostra un navegador de fitxers per a seleccionar un fitxer"
 
@@ -1177,6 +1055,47 @@ msgstr ""
 "S'ha produït un error en carregar o desar informació de la configuració per "
 "a %s. Alguns paràmetres de la configuració no funcionaran correctament."
 
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "L' URL que activa el GnomeHRef"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "Text"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "El text sobre el botó"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "Acaba amb la fam del mon"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "Color de l'enllaç"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "Color utilitzat per a dibuixar l'enllaç"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "Aquest botó vos durà a la URI que mostra."
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"S'ha produït un error en probar d'executar el navegador per defecte.\n"
+"Comproveu la vostra configuració en l'eina de preferències «Aplicacions "
+"preferides»."
+
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1214,52 +1133,52 @@ msgstr ""
 "aconseguir el GtkDialog si necessiteu modificar o consultar qualsevol dels "
 "seus paràmetres."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Sense icona"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "No es pot trobar una hbox, s'utilitarà una selecció de fitxers normal"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Previsualització"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "Diàleg de selecció d'icones"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "Aquest diàleg vos permet seleccionar una icona."
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "Seleccionador d'icones"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "Seleccioneu la icona que voleu."
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Seleccionador d'icones"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 "Aquest botó obrirà una finestra per a que pugueu seleccionar una icona."
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Vés a"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "Camí de les icones"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1301,6 +1220,14 @@ msgstr "Pregunta"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Missatge"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1346,6 +1273,113 @@ msgstr "%a %d de %b %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Contorns de la Taula"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Contingut de la Taula"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Llista de pic"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Llista numerada"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Sagnat"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Desagnat"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Quant a"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "Pantalla X per utilitzar"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "VISUALITZACIÓ"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "Biblioteca GNOME GUI"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+"Han ocorregut múltiples violacions de segment; no es pot mostrar el diàleg "
+"d'error\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Violació de segment!\n"
+"No es pot mostrar el diàleg d'error\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"El Gestor de Sessió del GNOME (procés %d) ha fallat\n"
+"degut a un error fatal (%s).\n"
+"Quan tanqueu aquest diàleg, totes les aplicacions es tancaran i es sortirà "
+"de la vostra sessió.\n"
+"Si us plau, deseu tots els vostres fitxers abans de tancar aquest diàleg."
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"L'aplicació \"%s\" (procés %d) ha fallat\n"
+"degut a un error fatal.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Ús: gnome_segv2 nomapp numsig\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "Envia un informe d'error"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "Depuració"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr ""
+"Si us plau, visiteu la pàgina de Fallades d'Aplicació del GNOME per més "
+"informació"
+
+#~ msgid "_Credits"
+#~ msgstr "_Crèdits"
 
 #~ msgid "Exit the test"
 #~ msgstr "Surt del test"

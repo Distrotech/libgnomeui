@@ -5,509 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.7\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
+"POT-Creation-Date: 2003-06-04 09:08+0200\n"
 "PO-Revision-Date: 2002-01-25 06:21+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: libgnomeui/gnome-about.c:194
-msgid "Credits"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:223
-msgid "Written by"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:238
-#, fuzzy
-msgid "Documented by"
-msgstr "Dokumenterar"
-
-#: libgnomeui/gnome-about.c:253
-#, fuzzy
-msgid "Translated by"
-msgstr "Omsetjarkreditering"
-
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-#, fuzzy
-msgid "_Credits"
-msgstr "R_ediger"
-
-#: libgnomeui/gnome-about.c:352
-msgid "Program name"
-msgstr "Programnamn"
-
-#: libgnomeui/gnome-about.c:353
-msgid "The name of the program"
-msgstr "Namnet på programmet"
-
-#: libgnomeui/gnome-about.c:360
-msgid "Program version"
-msgstr "Program versjon"
-
-#: libgnomeui/gnome-about.c:361
-msgid "The version of the program"
-msgstr "Versjonen av programmet"
-
-#: libgnomeui/gnome-about.c:367
-msgid "Copyright string"
-msgstr "Opphavsrettstreng"
-
-#: libgnomeui/gnome-about.c:368
-msgid "Copyright information for the program"
-msgstr "Opphavsrettsinformasjon for programmet"
-
-#: libgnomeui/gnome-about.c:375
-msgid "Comments string"
-msgstr "Merknadstreng"
-
-#: libgnomeui/gnome-about.c:376
-msgid "Comments about the program"
-msgstr "Merknadar om programmet"
-
-#: libgnomeui/gnome-about.c:382
-msgid "Authors"
-msgstr "Forfattarar"
-
-#: libgnomeui/gnome-about.c:383
-msgid "List of authors of the programs"
-msgstr "Liste over forfattarar av programmet"
-
-#: libgnomeui/gnome-about.c:385
-msgid "Author entry"
-msgstr "Forfattar oppføring"
-
-#: libgnomeui/gnome-about.c:386
-msgid "A single author entry"
-msgstr "Ei enkel forfattaroppføring"
-
-#: libgnomeui/gnome-about.c:393
-msgid "Documenters"
-msgstr "Dokumenterar"
-
-#: libgnomeui/gnome-about.c:394
-msgid "List of people documenting the program"
-msgstr "Liste over folk som dokumenterar programmet"
-
-#: libgnomeui/gnome-about.c:396
-msgid "Documenter entry"
-msgstr "Oppføring for dokumenterar"
-
-#: libgnomeui/gnome-about.c:397
-msgid "A single documenter entry"
-msgstr "Ei enkelt dokumenteraroppføring"
-
-#: libgnomeui/gnome-about.c:405
-msgid "Translator credits"
-msgstr "Omsetjarkreditering"
-
-#: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr "Kreditéring til omsetjarar. Denne streng bør merkast som omsetjbar"
-
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
-msgid "Logo"
-msgstr "Logo"
-
-#: libgnomeui/gnome-about.c:414
-msgid "A logo for the about box"
-msgstr "Ein logo for om-boksa"
-
-#: libgnomeui/gnome-about.c:493
-#, c-format
-msgid "About %s"
-msgstr "Om %s"
-
-#: libgnomeui/gnome-appbar.c:747
-msgid "Has Progress"
-msgstr "Har framgang"
-
-#: libgnomeui/gnome-appbar.c:748
-msgid "Create a progress widget."
-msgstr "Lag ein framgongswidget"
-
-#: libgnomeui/gnome-appbar.c:755
-msgid "Has Status"
-msgstr "Har status"
-
-#: libgnomeui/gnome-appbar.c:756
-msgid "Create a status widget."
-msgstr "Lag ein statuswidget."
-
-#: libgnomeui/gnome-appbar.c:763
-msgid "Interactivity"
-msgstr "Interaktivitet"
-
-#: libgnomeui/gnome-appbar.c:764
-msgid "Level of user activity required."
-msgstr "Nivå av brukaraktivitet påkrevd."
-
-#: libgnomeui/gnome-client.c:860
-msgid "Specify session management ID"
-msgstr "Spesifiser ID for sesjonskontroll"
-
-#: libgnomeui/gnome-client.c:860
-msgid "ID"
-msgstr "ID"
-
-#: libgnomeui/gnome-client.c:863
-msgid "Specify prefix of saved configuration"
-msgstr "Spesifiser prefiks for lagret konfigurasjon"
-
-#: libgnomeui/gnome-client.c:863
-msgid "PREFIX"
-msgstr "PREFIX"
-
-#: libgnomeui/gnome-client.c:866
-msgid "Disable connection to session manager"
-msgstr "Fjern forbindelse til sesjonsbehandler"
-
-#: libgnomeui/gnome-client.c:972
-msgid "Session management"
-msgstr "Øktkontroll"
-
-#: libgnomeui/gnome-client.c:2470
-msgid "Cancel Logout"
-msgstr "Avbryt utlogging"
-
-#: libgnomeui/gnome-color-picker.c:414
-msgid "Received invalid color data\n"
-msgstr "Mottok ugyldig farge data\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-#, fuzzy
-msgid "Color Selector"
-msgstr "Slett valet"
-
-#: libgnomeui/gnome-color-picker.c:465
-msgid "Open a dialog to specify the color"
-msgstr ""
-
-#: libgnomeui/gnome-color-picker.c:487
-msgid "Pick a color"
-msgstr "Velj ein farge"
-
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
-msgid "Time"
-msgstr "Tid"
-
-#: libgnomeui/gnome-dateedit.c:480
-msgid "The time currently selected"
-msgstr "Tida som er vald"
-
-#: libgnomeui/gnome-dateedit.c:492
-msgid "DateEdit Flags"
-msgstr "DateEdit flagg"
-
-#: libgnomeui/gnome-dateedit.c:493
-msgid "Flags for how DateEdit looks"
-msgstr "Flagg for korleis DateEdit ser ut"
-
-#: libgnomeui/gnome-dateedit.c:502
-msgid "Lower Hour"
-msgstr "Lavaste time"
-
-#: libgnomeui/gnome-dateedit.c:503
-msgid "Lower hour in the time popup selector"
-msgstr "Lavaste time i velgaren"
-
-#: libgnomeui/gnome-dateedit.c:513
-msgid "Upper Hour"
-msgstr "Øvre time"
-
-#: libgnomeui/gnome-dateedit.c:514
-msgid "Upper hour in the time popup selector"
-msgstr "Øvre time i veljaren"
-
-#: libgnomeui/gnome-dateedit.c:524
-msgid "Initial Time"
-msgstr "Opprinneleg time"
-
-#: libgnomeui/gnome-dateedit.c:525
-msgid "The initial time"
-msgstr "Opprinneleg tid"
-
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "Dato"
-
-#: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
-msgid "Select Date"
-msgstr "Vel fil"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select the date from a calendar"
-msgstr ""
-
-#. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
-msgid "Calendar"
-msgstr "Kalender"
-
-#: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
-msgid "Select Time"
-msgstr "Vel fil"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select the time from a list"
-msgstr ""
-
-#: libgnomeui/gnome-dateedit.c:1003
-msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date er utdatert, bruk gnome_date_edit_get_time"
-
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
-msgid "Title"
-msgstr "Tittel"
-
-#: libgnomeui/gnome-druid-page-standard.c:122
-msgid "Title of the druid"
-msgstr "Tittelen på druiden"
-
-#: libgnomeui/gnome-druid-page-standard.c:130
-msgid "Logo image"
-msgstr "Logo bilete"
-
-#: libgnomeui/gnome-druid-page-standard.c:137
-msgid "Top Watermark"
-msgstr "Øvre vassmerke"
-
-#: libgnomeui/gnome-druid-page-standard.c:138
-msgid "Watermark image for the top"
-msgstr "Øvre vassmerkebiletet "
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Title Foreground"
-msgstr "Framgrunn for tittel"
-
-#: libgnomeui/gnome-druid-page-standard.c:146
-msgid "Foreground color of the title"
-msgstr "Framgrunnsfarge på tittelen"
-
-#: libgnomeui/gnome-druid-page-standard.c:153
-msgid "Title Foreground Color"
-msgstr "Framgrunnsfarge på tittel"
-
-#: libgnomeui/gnome-druid-page-standard.c:154
-msgid "Foreground color of the title as a GdkColor"
-msgstr "Framgrunnsfargen på tittelen som GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:161
-msgid "Title Foreground color set"
-msgstr "Sett framgrunnsfarge"
-
-#: libgnomeui/gnome-druid-page-standard.c:162
-msgid "Foreground color of the title is set"
-msgstr "Framgrunnsfargen på tittelen er sett"
-
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
-msgid "Background Color"
-msgstr "Bakgrunnsfarge"
-
-#: libgnomeui/gnome-druid-page-standard.c:170
-msgid "Background color"
-msgstr "Bakgrunnsfarge"
-
-#: libgnomeui/gnome-druid-page-standard.c:178
-msgid "Background color as a GdkColor"
-msgstr "Bakgrunnsfarge som GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:185
-msgid "Background color set"
-msgstr "Sett bakgrunnsfarge"
-
-#: libgnomeui/gnome-druid-page-standard.c:186
-msgid "Background color is set"
-msgstr "Bakgrunnsfargen er sett"
-
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
-msgstr "Logo bakgrunnsfarge"
-
-#: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
-msgstr "Logo bakgrunnsfarge"
-
-#: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
-msgstr "Logobakgrunnsfarge som GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:209
-msgid "Logo Background color set"
-msgstr "Sett logo bakgrunnsfarge"
-
-#: libgnomeui/gnome-druid-page-standard.c:210
-msgid "Logo Background color is set"
-msgstr "Logo bakgrunnsfarge er sett"
-
-#: libgnomeui/gnome-druid.c:150
-msgid "Show Finish"
-msgstr "Vis Fullfør"
-
-#: libgnomeui/gnome-druid.c:151
-msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Vis «Fullfør» knappen i staden for 'Neste' knappen"
-
-#: libgnomeui/gnome-druid.c:158
-msgid "Show Help"
-msgstr "Vis hjelp"
-
-#: libgnomeui/gnome-druid.c:159
-msgid "Show the 'Help' button"
-msgstr "Vis «Hjelp» Knappen"
-
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URL"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "URLen som GnomeHRef aktiverar"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "Tekst"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "Teksta på knappen"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "Gjer slutt på verdssvolten"
-
-#: libgnomeui/gnome-href.c:138
-#, fuzzy
-msgid "Link color"
-msgstr "Lenkjefarge"
-
-#: libgnomeui/gnome-href.c:139
-#, fuzzy
-msgid "Color used to draw the link"
-msgstr "Farge brukt for å teikne lenkja"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr ""
-
-#: libgnomeui/gnome-href.c:393
-#, fuzzy
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"Ein feil oppstod ved forsøk på å starta URL handteraren.\n"
-"Sjekk om instillingane i Kontrollpanelet stemmer."
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "X-display som skal brukes"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "DISPLAY"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "GNOME brukargrensesnittbibliotek"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Flere segmenteringsfeil oppstod; kan ikkje vise feildialogen\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Segmenteringsfeil!\n"
-"Kan ikkje vise feildialogen\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOME's sesjonhåndterer (prosess %d) har krasjet\n"
-"pga en fatal feil (%s).\n"
-"Når du lukker denne dialogen vil alle applikasjoner lukkes og din sesjon \n"
-"vil avslutte.\n"
-"Vennligst lagre alle åpne filer før du lukker denne dialogen."
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Programmet «%s» (prosess %d) har krasjet\n"
-"pga ein fatal feil.\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Bruk: gnome_segv2 appname signum\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Send inn en feilrapport"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "Feilsøk"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Gå til GNOME programkrasj-siden for meir informasjon"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "Kanter for tabell"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "Fyll for tabell"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "Punktmerket liste"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "Nummerert liste"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "Rykk inn"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "Fjern innrykk"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "Om"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -524,6 +28,115 @@ msgstr "Barnoppføring 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Tips for barnoppføring 2"
+
+#: libgnomeui/gnome-about.c:198
+msgid "Credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:230
+msgid "Written by"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:245
+#, fuzzy
+msgid "Documented by"
+msgstr "Dokumenterar"
+
+#: libgnomeui/gnome-about.c:260
+#, fuzzy
+msgid "Translated by"
+msgstr "Omsetjarkreditering"
+
+#: libgnomeui/gnome-about.c:323
+#, fuzzy
+msgid "C_redits"
+msgstr "R_ediger"
+
+#: libgnomeui/gnome-about.c:378
+msgid "Program name"
+msgstr "Programnamn"
+
+#: libgnomeui/gnome-about.c:379
+msgid "The name of the program"
+msgstr "Namnet på programmet"
+
+#: libgnomeui/gnome-about.c:386
+msgid "Program version"
+msgstr "Program versjon"
+
+#: libgnomeui/gnome-about.c:387
+msgid "The version of the program"
+msgstr "Versjonen av programmet"
+
+#: libgnomeui/gnome-about.c:393
+msgid "Copyright string"
+msgstr "Opphavsrettstreng"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright information for the program"
+msgstr "Opphavsrettsinformasjon for programmet"
+
+#: libgnomeui/gnome-about.c:401
+msgid "Comments string"
+msgstr "Merknadstreng"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments about the program"
+msgstr "Merknadar om programmet"
+
+#: libgnomeui/gnome-about.c:408
+msgid "Authors"
+msgstr "Forfattarar"
+
+#: libgnomeui/gnome-about.c:409
+msgid "List of authors of the programs"
+msgstr "Liste over forfattarar av programmet"
+
+#: libgnomeui/gnome-about.c:411
+msgid "Author entry"
+msgstr "Forfattar oppføring"
+
+#: libgnomeui/gnome-about.c:412
+msgid "A single author entry"
+msgstr "Ei enkel forfattaroppføring"
+
+#: libgnomeui/gnome-about.c:419
+msgid "Documenters"
+msgstr "Dokumenterar"
+
+#: libgnomeui/gnome-about.c:420
+msgid "List of people documenting the program"
+msgstr "Liste over folk som dokumenterar programmet"
+
+#: libgnomeui/gnome-about.c:422
+msgid "Documenter entry"
+msgstr "Oppføring for dokumenterar"
+
+#: libgnomeui/gnome-about.c:423
+msgid "A single documenter entry"
+msgstr "Ei enkelt dokumenteraroppføring"
+
+#: libgnomeui/gnome-about.c:431
+msgid "Translator credits"
+msgstr "Omsetjarkreditering"
+
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "Kreditéring til omsetjarar. Denne streng bør merkast som omsetjbar"
+
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Logo"
+
+#: libgnomeui/gnome-about.c:440
+msgid "A logo for the about box"
+msgstr "Ein logo for om-boksa"
+
+#: libgnomeui/gnome-about.c:519
+#, c-format
+msgid "About %s"
+msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
@@ -965,6 +578,272 @@ msgstr "App ID"
 msgid "The application ID string"
 msgstr "ID-strengen for programmet"
 
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "Har framgang"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "Lag ein framgongswidget"
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "Har status"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "Lag ein statuswidget."
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "Interaktivitet"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "Nivå av brukaraktivitet påkrevd."
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "Spesifiser ID for sesjonskontroll"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr "Spesifiser prefiks for lagret konfigurasjon"
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr "Fjern forbindelse til sesjonsbehandler"
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "Øktkontroll"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "Avbryt utlogging"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Mottok ugyldig farge data\n"
+
+#: libgnomeui/gnome-color-picker.c:464
+#, fuzzy
+msgid "Color Selector"
+msgstr "Slett valet"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr ""
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Velj ein farge"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "Tid"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "Tida som er vald"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr "DateEdit flagg"
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr "Flagg for korleis DateEdit ser ut"
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "Lavaste time"
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr "Lavaste time i velgaren"
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "Øvre time"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr "Øvre time i veljaren"
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "Opprinneleg time"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "Opprinneleg tid"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Dato"
+
+#: libgnomeui/gnome-dateedit.c:752
+#, fuzzy
+msgid "Select Date"
+msgstr "Vel fil"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr ""
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "Kalender"
+
+#: libgnomeui/gnome-dateedit.c:784
+#, fuzzy
+msgid "Select Time"
+msgstr "Vel fil"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date er utdatert, bruk gnome_date_edit_get_time"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Tittel"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Tittelen på druiden"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Logo bilete"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Øvre vassmerke"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Øvre vassmerkebiletet "
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Framgrunn for tittel"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Framgrunnsfarge på tittelen"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Framgrunnsfarge på tittel"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Framgrunnsfargen på tittelen som GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Sett framgrunnsfarge"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Framgrunnsfargen på tittelen er sett"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Bakgrunnsfarge"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Bakgrunnsfarge"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Bakgrunnsfarge som GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Sett bakgrunnsfarge"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Bakgrunnsfargen er sett"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "Logo bakgrunnsfarge"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "Logo bakgrunnsfarge"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "Logobakgrunnsfarge som GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "Sett logo bakgrunnsfarge"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "Logo bakgrunnsfarge er sett"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "Vis Fullfør"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Vis «Fullfør» knappen i staden for 'Neste' knappen"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "Vis hjelp"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "Vis «Hjelp» Knappen"
+
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Historikk id"
@@ -1056,26 +935,26 @@ msgid ""
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "Vel fil"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 #, fuzzy
 msgid "Path"
 msgstr "_Lim inn"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 #, fuzzy
 msgid "Path to file"
 msgstr "Lagre aktiv fil"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 #, fuzzy
 msgid "_Browse..."
 msgstr "Bla gjennom ... "
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr ""
 
@@ -1181,6 +1060,49 @@ msgstr ""
 "Ein feil oppstod under lasting eller lagring av oppsettsinformasjonen for %"
 "s. Det er ikkje sikkert at heile oppsettet ditt virkar som det skal."
 
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "URLen som GnomeHRef aktiverar"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "Tekst"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "Teksta på knappen"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "Gjer slutt på verdssvolten"
+
+#: libgnomeui/gnome-href.c:138
+#, fuzzy
+msgid "Link color"
+msgstr "Lenkjefarge"
+
+#: libgnomeui/gnome-href.c:139
+#, fuzzy
+msgid "Color used to draw the link"
+msgstr "Farge brukt for å teikne lenkja"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr ""
+
+#: libgnomeui/gnome-href.c:393
+#, fuzzy
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Ein feil oppstod ved forsøk på å starta URL handteraren.\n"
+"Sjekk om instillingane i Kontrollpanelet stemmer."
+
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1215,52 +1137,52 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Utan ikon"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Klarar ikkje å finne ei hbox, brukar eit vanleg filval"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Førehandsvisning"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 #, fuzzy
 msgid "Icon selection dialog"
 msgstr "Tittelen på valdialogboksa"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Bla gjennom "
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1299,6 +1221,14 @@ msgstr "Spørsmål"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Melding"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 #, fuzzy
@@ -1345,6 +1275,106 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Kanter for tabell"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Fyll for tabell"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Punktmerket liste"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Nummerert liste"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Rykk inn"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Fjern innrykk"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Om"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "X-display som skal brukes"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "GNOME brukargrensesnittbibliotek"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "Flere segmenteringsfeil oppstod; kan ikkje vise feildialogen\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Segmenteringsfeil!\n"
+"Kan ikkje vise feildialogen\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"GNOME's sesjonhåndterer (prosess %d) har krasjet\n"
+"pga en fatal feil (%s).\n"
+"Når du lukker denne dialogen vil alle applikasjoner lukkes og din sesjon \n"
+"vil avslutte.\n"
+"Vennligst lagre alle åpne filer før du lukker denne dialogen."
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Programmet «%s» (prosess %d) har krasjet\n"
+"pga ein fatal feil.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Bruk: gnome_segv2 appname signum\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "Send inn en feilrapport"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "Feilsøk"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "Gå til GNOME programkrasj-siden for meir informasjon"
 
 #~ msgid "Find _Again"
 #~ msgstr "Finn _igjen"

@@ -5,504 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
+"POT-Creation-Date: 2003-06-04 09:08+0200\n"
 "PO-Revision-Date: 2002-12-20 01:37+0200\n"
 "Last-Translator: Artis Trops <hornet@navigator.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: libgnomeui/gnome-about.c:194
-msgid "Credits"
-msgstr "Kredīti"
-
-#: libgnomeui/gnome-about.c:223
-msgid "Written by"
-msgstr "Sarakstījuši"
-
-#: libgnomeui/gnome-about.c:238
-msgid "Documented by"
-msgstr "Dokumentējuši"
-
-#: libgnomeui/gnome-about.c:253
-msgid "Translated by"
-msgstr "Tūlkojuši"
-
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "_Kredīti"
-
-#: libgnomeui/gnome-about.c:352
-msgid "Program name"
-msgstr "Programmas nosaukums"
-
-#: libgnomeui/gnome-about.c:353
-msgid "The name of the program"
-msgstr "Programmas nosaukums"
-
-#: libgnomeui/gnome-about.c:360
-msgid "Program version"
-msgstr "Programmas versija"
-
-#: libgnomeui/gnome-about.c:361
-msgid "The version of the program"
-msgstr "Programmas versija"
-
-#: libgnomeui/gnome-about.c:367
-msgid "Copyright string"
-msgstr "Autortiesību virkne"
-
-#: libgnomeui/gnome-about.c:368
-msgid "Copyright information for the program"
-msgstr "Programmas autortiesību informācija"
-
-#: libgnomeui/gnome-about.c:375
-msgid "Comments string"
-msgstr "Komentāru virkne"
-
-#: libgnomeui/gnome-about.c:376
-msgid "Comments about the program"
-msgstr "Komentāri par programmu"
-
-#: libgnomeui/gnome-about.c:382
-msgid "Authors"
-msgstr "Autori"
-
-#: libgnomeui/gnome-about.c:383
-msgid "List of authors of the programs"
-msgstr "Programmas autoru saraksts"
-
-#: libgnomeui/gnome-about.c:385
-msgid "Author entry"
-msgstr "Autora ievads"
-
-#: libgnomeui/gnome-about.c:386
-msgid "A single author entry"
-msgstr "Viena autora ievads"
-
-#: libgnomeui/gnome-about.c:393
-msgid "Documenters"
-msgstr "Dokumentētāji"
-
-#: libgnomeui/gnome-about.c:394
-msgid "List of people documenting the program"
-msgstr "Cilvēku saraksts, kuri dokumentējuši programmu"
-
-#: libgnomeui/gnome-about.c:396
-msgid "Documenter entry"
-msgstr "Dokumentētāja ievads"
-
-#: libgnomeui/gnome-about.c:397
-msgid "A single documenter entry"
-msgstr "Viena dokumentētāja ievads"
-
-#: libgnomeui/gnome-about.c:405
-msgid "Translator credits"
-msgstr "Tūlkotājs"
-
-#: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr "Tūlkotāju kredīti. Šai virknei vajadzētu būt atzīmētai kā tūlkojamai"
-
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
-msgid "Logo"
-msgstr "Logo"
-
-#: libgnomeui/gnome-about.c:414
-msgid "A logo for the about box"
-msgstr "Logo 'par' kastītei"
-
-#: libgnomeui/gnome-about.c:493
-#, c-format
-msgid "About %s"
-msgstr "Par %s"
-
-#: libgnomeui/gnome-appbar.c:747
-msgid "Has Progress"
-msgstr "Ir Progress"
-
-#: libgnomeui/gnome-appbar.c:748
-msgid "Create a progress widget."
-msgstr "Izveidot progresa logdaļu."
-
-#: libgnomeui/gnome-appbar.c:755
-msgid "Has Status"
-msgstr "Ir Statuss"
-
-#: libgnomeui/gnome-appbar.c:756
-msgid "Create a status widget."
-msgstr "Izveidot statusa logdaļu."
-
-#: libgnomeui/gnome-appbar.c:763
-msgid "Interactivity"
-msgstr "Interaktivitāte"
-
-#: libgnomeui/gnome-appbar.c:764
-msgid "Level of user activity required."
-msgstr "Pieprasītais lietotāja aktivitātes līmenis."
-
-#: libgnomeui/gnome-client.c:860
-msgid "Specify session management ID"
-msgstr "Norādīt sesijas pārvaldības ID"
-
-#: libgnomeui/gnome-client.c:860
-msgid "ID"
-msgstr "ID"
-
-#: libgnomeui/gnome-client.c:863
-msgid "Specify prefix of saved configuration"
-msgstr "Norādīt ceļu uz saglabāto konfigurāciju"
-
-#: libgnomeui/gnome-client.c:863
-msgid "PREFIX"
-msgstr "PREFIX"
-
-#: libgnomeui/gnome-client.c:866
-msgid "Disable connection to session manager"
-msgstr "Atvienoties no sesiju pārvaldnieka"
-
-#: libgnomeui/gnome-client.c:972
-msgid "Session management"
-msgstr "Sesijas Pārvaldība"
-
-#: libgnomeui/gnome-client.c:2470
-msgid "Cancel Logout"
-msgstr "Atsaukt Iziešanu"
-
-#: libgnomeui/gnome-color-picker.c:414
-msgid "Received invalid color data\n"
-msgstr "Saņemti nepareizi krāsu dati\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Krāsu Izvēlētājs"
-
-#: libgnomeui/gnome-color-picker.c:465
-msgid "Open a dialog to specify the color"
-msgstr "Atvērt dialogu, lai norādītu krāsu"
-
-#: libgnomeui/gnome-color-picker.c:487
-msgid "Pick a color"
-msgstr "Izvēlieties krāsu"
-
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
-msgid "Time"
-msgstr "Laiks"
-
-#: libgnomeui/gnome-dateedit.c:480
-msgid "The time currently selected"
-msgstr "Uz doto brīdi izvēlētais laiks"
-
-#: libgnomeui/gnome-dateedit.c:492
-msgid "DateEdit Flags"
-msgstr "DateEdit Karodziņi"
-
-#: libgnomeui/gnome-dateedit.c:493
-msgid "Flags for how DateEdit looks"
-msgstr "Karodziņi, lai norādītu, ka izskatās DateEdit"
-
-#: libgnomeui/gnome-dateedit.c:502
-msgid "Lower Hour"
-msgstr "Pazemināt Stundu"
-
-#: libgnomeui/gnome-dateedit.c:503
-msgid "Lower hour in the time popup selector"
-msgstr "Pazemināt sundu laika izlecēja izvēlētājā"
-
-#: libgnomeui/gnome-dateedit.c:513
-msgid "Upper Hour"
-msgstr "Paaugstināt Stundu"
-
-#: libgnomeui/gnome-dateedit.c:514
-msgid "Upper hour in the time popup selector"
-msgstr "Paaugstināt sundu laika izlecēja izvēlētājā"
-
-#: libgnomeui/gnome-dateedit.c:524
-msgid "Initial Time"
-msgstr "Pamata Laiks"
-
-#: libgnomeui/gnome-dateedit.c:525
-msgid "The initial time"
-msgstr "Pamata Laiks"
-
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "Datums"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select Date"
-msgstr "Izvēlieties Datumu"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select the date from a calendar"
-msgstr "Izvēlieties datumu no kalendāra"
-
-#. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
-msgid "Calendar"
-msgstr "Kalendārs"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select Time"
-msgstr "Izvēlieties Laiku"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select the time from a list"
-msgstr "Izvēlieties laiku no saraksta"
-
-#: libgnomeui/gnome-dateedit.c:1003
-msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date nesagaidīts, izmantot gnome_date_edit_get_time"
-
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
-msgid "Title"
-msgstr "Virsraksts"
-
-#: libgnomeui/gnome-druid-page-standard.c:122
-msgid "Title of the druid"
-msgstr "Vedņa virsraksts"
-
-#: libgnomeui/gnome-druid-page-standard.c:130
-msgid "Logo image"
-msgstr "Logo attēls"
-
-#: libgnomeui/gnome-druid-page-standard.c:137
-msgid "Top Watermark"
-msgstr "Virspuses Ūdenszīme"
-
-#: libgnomeui/gnome-druid-page-standard.c:138
-msgid "Watermark image for the top"
-msgstr "Ūdenszīmes attēls virspusei"
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Title Foreground"
-msgstr "Virsraksta Priekšplāns"
-
-#: libgnomeui/gnome-druid-page-standard.c:146
-msgid "Foreground color of the title"
-msgstr "Virsraksta priekšplāna krāsa"
-
-#: libgnomeui/gnome-druid-page-standard.c:153
-msgid "Title Foreground Color"
-msgstr "Virsraksta Priekšplāna Krāsa"
-
-#: libgnomeui/gnome-druid-page-standard.c:154
-msgid "Foreground color of the title as a GdkColor"
-msgstr "Priekšplāna krāsa virsrakstam kā GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:161
-msgid "Title Foreground color set"
-msgstr "Virsraksta Priekšplāna krāsas iestatījums"
-
-#: libgnomeui/gnome-druid-page-standard.c:162
-msgid "Foreground color of the title is set"
-msgstr "Virsraksta Priekšplāna krāsa ir iestatīta"
-
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
-msgid "Background Color"
-msgstr "Fona Krāsa"
-
-#: libgnomeui/gnome-druid-page-standard.c:170
-msgid "Background color"
-msgstr "Fona krāsa"
-
-#: libgnomeui/gnome-druid-page-standard.c:178
-msgid "Background color as a GdkColor"
-msgstr "Fona krāsa kā GdkKrāsa"
-
-#: libgnomeui/gnome-druid-page-standard.c:185
-msgid "Background color set"
-msgstr "Fona krāsas iestatījums"
-
-#: libgnomeui/gnome-druid-page-standard.c:186
-msgid "Background color is set"
-msgstr "Fona krāsa ir iestatīta"
-
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
-msgstr "Logo Fona Krāsa"
-
-#: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
-msgstr "Logo Fona krāsa"
-
-#: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
-msgstr "Logo Fona krāsa kā GdkKrāsa"
-
-#: libgnomeui/gnome-druid-page-standard.c:209
-msgid "Logo Background color set"
-msgstr "Logo Fona krāsas iestatījums"
-
-#: libgnomeui/gnome-druid-page-standard.c:210
-msgid "Logo Background color is set"
-msgstr "Logo Fona krāsa ir iestatīta"
-
-#: libgnomeui/gnome-druid.c:150
-msgid "Show Finish"
-msgstr "Parādīt Beigt"
-
-#: libgnomeui/gnome-druid.c:151
-msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Parādīt 'Beigt' pogu 'Nākošais' pogas vietā"
-
-#: libgnomeui/gnome-druid.c:158
-msgid "Show Help"
-msgstr "Parādīt Palīdzība"
-
-#: libgnomeui/gnome-druid.c:159
-msgid "Show the 'Help' button"
-msgstr "Parādīt 'Palīdzība' pogu"
-
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URL"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "URL ko GnomeHRef aktivizē"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "Teksts"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "Pogas teksts"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "Izbeidz Pasaules Badu"
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr "Saites krāsa"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "Krāsa saites uzzīmēšanai"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr "Šī poga aizvedis uz URI ko tā attēlo."
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"Atgadījās kļūda, mēģinot palaist noklusēto tīkla pārlūku.\n"
-"Lūdzu pārbaudiet savus uzstādījumus 'Vēlamās Aplikācijas ' rekvizītu rīkā."
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "Lietojamais X displejs"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "DISPLAY"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "GNOME GUI Bibliotēka"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Notikušas vairākas segmentācijas kļūdas: nevaru attēlot kļūdu dialogu\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Segmentācijas kļūda!\n"
-"Nevarēju attēlot avārijas dialogu\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOME Sesijas Pārvaldnieks (process %d) ir avarējis\n"
-"sakarā ar fatālu kļūdu (%s).\n"
-"Kad jūs aizvērsiet šo dialogu, visas aplikācijas aizvērsies un jūsu sesija "
-"tiks beigta.\n"
-"Lūdzu saglabājiet visus jūsu failus pirms šī dialoga aizvēršanas."
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Aplikācija \"%s\" (process %d) ir avarējusi\n"
-"sakarā ar fatālu kļūdu.\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Lietojums: gnome_segv2 apnos signum\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Nosūtīt kļūdu ziņojumu"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "Atkļūdot"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Lūdzu apmeklējiet GNOME Aplikāciju Avāriju lapu, lai saņemtu vairāk "
-"informācijas"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "Tabulas Robežas"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "Tabulas Aizpildījums"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "Lodīšstila Saraksts"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "Numurēts Saraksts"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "Atkāpe"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "Ne-Atkāpe"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "Par"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -519,6 +28,113 @@ msgstr "Bērna Priekšmets 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Padoms priekšmetam 2"
+
+#: libgnomeui/gnome-about.c:198
+msgid "Credits"
+msgstr "Kredīti"
+
+#: libgnomeui/gnome-about.c:230
+msgid "Written by"
+msgstr "Sarakstījuši"
+
+#: libgnomeui/gnome-about.c:245
+msgid "Documented by"
+msgstr "Dokumentējuši"
+
+#: libgnomeui/gnome-about.c:260
+msgid "Translated by"
+msgstr "Tūlkojuši"
+
+#: libgnomeui/gnome-about.c:323
+#, fuzzy
+msgid "C_redits"
+msgstr "Kredīti"
+
+#: libgnomeui/gnome-about.c:378
+msgid "Program name"
+msgstr "Programmas nosaukums"
+
+#: libgnomeui/gnome-about.c:379
+msgid "The name of the program"
+msgstr "Programmas nosaukums"
+
+#: libgnomeui/gnome-about.c:386
+msgid "Program version"
+msgstr "Programmas versija"
+
+#: libgnomeui/gnome-about.c:387
+msgid "The version of the program"
+msgstr "Programmas versija"
+
+#: libgnomeui/gnome-about.c:393
+msgid "Copyright string"
+msgstr "Autortiesību virkne"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright information for the program"
+msgstr "Programmas autortiesību informācija"
+
+#: libgnomeui/gnome-about.c:401
+msgid "Comments string"
+msgstr "Komentāru virkne"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments about the program"
+msgstr "Komentāri par programmu"
+
+#: libgnomeui/gnome-about.c:408
+msgid "Authors"
+msgstr "Autori"
+
+#: libgnomeui/gnome-about.c:409
+msgid "List of authors of the programs"
+msgstr "Programmas autoru saraksts"
+
+#: libgnomeui/gnome-about.c:411
+msgid "Author entry"
+msgstr "Autora ievads"
+
+#: libgnomeui/gnome-about.c:412
+msgid "A single author entry"
+msgstr "Viena autora ievads"
+
+#: libgnomeui/gnome-about.c:419
+msgid "Documenters"
+msgstr "Dokumentētāji"
+
+#: libgnomeui/gnome-about.c:420
+msgid "List of people documenting the program"
+msgstr "Cilvēku saraksts, kuri dokumentējuši programmu"
+
+#: libgnomeui/gnome-about.c:422
+msgid "Documenter entry"
+msgstr "Dokumentētāja ievads"
+
+#: libgnomeui/gnome-about.c:423
+msgid "A single documenter entry"
+msgstr "Viena dokumentētāja ievads"
+
+#: libgnomeui/gnome-about.c:431
+msgid "Translator credits"
+msgstr "Tūlkotājs"
+
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "Tūlkotāju kredīti. Šai virknei vajadzētu būt atzīmētai kā tūlkojamai"
+
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Logo"
+
+#: libgnomeui/gnome-about.c:440
+msgid "A logo for the about box"
+msgstr "Logo 'par' kastītei"
+
+#: libgnomeui/gnome-about.c:519
+#, c-format
+msgid "About %s"
+msgstr "Par %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
@@ -949,6 +565,270 @@ msgstr "App ID"
 msgid "The application ID string"
 msgstr "Aplikācijas ID virkne"
 
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "Ir Progress"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "Izveidot progresa logdaļu."
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "Ir Statuss"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "Izveidot statusa logdaļu."
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "Interaktivitāte"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "Pieprasītais lietotāja aktivitātes līmenis."
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "Norādīt sesijas pārvaldības ID"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr "Norādīt ceļu uz saglabāto konfigurāciju"
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr "Atvienoties no sesiju pārvaldnieka"
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "Sesijas Pārvaldība"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "Atsaukt Iziešanu"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Saņemti nepareizi krāsu dati\n"
+
+#: libgnomeui/gnome-color-picker.c:464
+msgid "Color Selector"
+msgstr "Krāsu Izvēlētājs"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Atvērt dialogu, lai norādītu krāsu"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Izvēlieties krāsu"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "Laiks"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "Uz doto brīdi izvēlētais laiks"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr "DateEdit Karodziņi"
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr "Karodziņi, lai norādītu, ka izskatās DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "Pazemināt Stundu"
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr "Pazemināt sundu laika izlecēja izvēlētājā"
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "Paaugstināt Stundu"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr "Paaugstināt sundu laika izlecēja izvēlētājā"
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "Pamata Laiks"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "Pamata Laiks"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Datums"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "Izvēlieties Datumu"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "Izvēlieties datumu no kalendāra"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "Kalendārs"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "Izvēlieties Laiku"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "Izvēlieties laiku no saraksta"
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date nesagaidīts, izmantot gnome_date_edit_get_time"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Virsraksts"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Vedņa virsraksts"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Logo attēls"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Virspuses Ūdenszīme"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Ūdenszīmes attēls virspusei"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Virsraksta Priekšplāns"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Virsraksta priekšplāna krāsa"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Virsraksta Priekšplāna Krāsa"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Priekšplāna krāsa virsrakstam kā GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Virsraksta Priekšplāna krāsas iestatījums"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Virsraksta Priekšplāna krāsa ir iestatīta"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Fona Krāsa"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Fona krāsa"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Fona krāsa kā GdkKrāsa"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Fona krāsas iestatījums"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Fona krāsa ir iestatīta"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "Logo Fona Krāsa"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "Logo Fona krāsa"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "Logo Fona krāsa kā GdkKrāsa"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "Logo Fona krāsas iestatījums"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "Logo Fona krāsa ir iestatīta"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "Parādīt Beigt"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Parādīt 'Beigt' pogu 'Nākošais' pogas vietā"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "Parādīt Palīdzība"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "Parādīt 'Palīdzība' pogu"
+
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Vēstures id"
@@ -1045,23 +925,23 @@ msgstr ""
 "varat izmantot šo rekvizītu lai dabūtu GtkEntry ja jums vajag mainīt vai "
 "pārlūkot jebkuru no tā parametriem."
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "Izvēlieties failu"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "Ceļš"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "Ceļš uz failu"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "_Lūkoties..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr "Parādīt failu izvēlētāju, lai izvēlētos failu"
 
@@ -1167,6 +1047,46 @@ msgstr ""
 "Kļūda, ielādējot vai glabājot konfigurācijas informāciju %s. Daži no "
 "konfigurācijas uzstādījumiem varētu nestrādāt, kā nākas."
 
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "URL ko GnomeHRef aktivizē"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "Teksts"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "Pogas teksts"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "Izbeidz Pasaules Badu"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "Saites krāsa"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "Krāsa saites uzzīmēšanai"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "Šī poga aizvedis uz URI ko tā attēlo."
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Atgadījās kļūda, mēģinot palaist noklusēto tīkla pārlūku.\n"
+"Lūdzu pārbaudiet savus uzstādījumus 'Vēlamās Aplikācijas ' rekvizītu rīkā."
+
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1203,51 +1123,51 @@ msgstr ""
 "Ikonu ņēmēja dialogs. Jūs varat lietot šo rekvizītu, lai dabūtu GtkDialog, "
 "ja jums vajag mainīt vai pārlūkots kādu no tā parametriem."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Nav Ikonas"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nevaru atrast hbox, lietoju normālu faila izvēli"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Pirmsapskate"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "Ikonas izvēlēšanās dialogs"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "Šī dialoga kastīte ļaus jums izvēlēties ikonu."
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "Ikonu izvēlētājs"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "Lūdzu izvēlieties ikonu, kuru vēlaties."
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Ikonu Izvēlētājs"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "Šī poga atvērs logu, lai jūs varētu izvēlēties ikonu."
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Lūkoties"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "Ceļš uz ikonām"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1288,6 +1208,14 @@ msgstr "Jautājums"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Ziņojums"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1331,6 +1259,112 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Tabulas Robežas"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Tabulas Aizpildījums"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Lodīšstila Saraksts"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Numurēts Saraksts"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Atkāpe"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Ne-Atkāpe"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Par"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "Lietojamais X displejs"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "GNOME GUI Bibliotēka"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+"Notikušas vairākas segmentācijas kļūdas: nevaru attēlot kļūdu dialogu\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Segmentācijas kļūda!\n"
+"Nevarēju attēlot avārijas dialogu\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"GNOME Sesijas Pārvaldnieks (process %d) ir avarējis\n"
+"sakarā ar fatālu kļūdu (%s).\n"
+"Kad jūs aizvērsiet šo dialogu, visas aplikācijas aizvērsies un jūsu sesija "
+"tiks beigta.\n"
+"Lūdzu saglabājiet visus jūsu failus pirms šī dialoga aizvēršanas."
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Aplikācija \"%s\" (process %d) ir avarējusi\n"
+"sakarā ar fatālu kļūdu.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Lietojums: gnome_segv2 apnos signum\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "Nosūtīt kļūdu ziņojumu"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "Atkļūdot"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr ""
+"Lūdzu apmeklējiet GNOME Aplikāciju Avāriju lapu, lai saņemtu vairāk "
+"informācijas"
+
+#~ msgid "_Credits"
+#~ msgstr "_Kredīti"
 
 #~ msgid "Exit the test"
 #~ msgstr "Iziet no testa"

@@ -6,490 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.2.x\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
+"POT-Creation-Date: 2003-06-04 09:08+0200\n"
 "PO-Revision-Date: 2003-03-05 10:29+0530\n"
 "Last-Translator: FSF-India <locale@gnu.org.in>\n"
 "Language-Team: Malayalam <locale@gnu.org.in>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: libgnomeui/gnome-about.c:194
-msgid "Credits"
-msgstr "പിന്നണിയില്"
-
-#: libgnomeui/gnome-about.c:223
-msgid "Written by"
-msgstr "രചയിതാക്കള്"
-
-#: libgnomeui/gnome-about.c:238
-msgid "Documented by"
-msgstr "സഹായ ഗ്രന്ഥ ക‍ര്ത്താക്കള്‌"
-
-#: libgnomeui/gnome-about.c:253
-msgid "Translated by"
-msgstr "വിവ‍ര്‌ത്തക‌ര്"
-
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "പിന്നണിയില്"
-
-#: libgnomeui/gnome-about.c:352
-msgid "Program name"
-msgstr "പ്രയോഗത്തിന്റെ പേര‌്"
-
-#: libgnomeui/gnome-about.c:353
-msgid "The name of the program"
-msgstr "പ്രയോഗത്തിന്റെ പേര‍്"
-
-#: libgnomeui/gnome-about.c:360
-msgid "Program version"
-msgstr "പ്രയോഗത്തിന്റെ ലക്കം"
-
-#: libgnomeui/gnome-about.c:361
-msgid "The version of the program"
-msgstr "പ്രയോഗത്തിന്റെ ലക്കം"
-
-#: libgnomeui/gnome-about.c:367
-msgid "Copyright string"
-msgstr "പക‍ര്പ്പവകാശ നാമാവലി"
-
-#: libgnomeui/gnome-about.c:368
-msgid "Copyright information for the program"
-msgstr "പ്രയോഗത്തിനുവേണ്ടിയുള്ള പക‍ര്പ്പവകാശ വിവരം"
-
-#: libgnomeui/gnome-about.c:375
-msgid "Comments string"
-msgstr "അഭിപ്രായ നാമം"
-
-#: libgnomeui/gnome-about.c:376
-msgid "Comments about the program"
-msgstr "പ്രയോഗത്തെക്കുറിച്ചുള്ള അഭിപ്രായങ്ങള്"
-
-#: libgnomeui/gnome-about.c:382
-msgid "Authors"
-msgstr "ക‍ര്ത്താക്കള്"
-
-#: libgnomeui/gnome-about.c:383
-msgid "List of authors of the programs"
-msgstr "പ്രയോഗ ക‍ര്ത്താക്കളുടെ നാമാവലി"
-
-#: libgnomeui/gnome-about.c:385
-msgid "Author entry"
-msgstr "ക‍ര്ത്താവിന്റെ വിവരം"
-
-#: libgnomeui/gnome-about.c:386
-msgid "A single author entry"
-msgstr "ഏക ക‍ര്ത്താവിന്റെ വിവരം"
-
-#: libgnomeui/gnome-about.c:393
-msgid "Documenters"
-msgstr "സഹായ ഗ്രന്ഥ ക‍ര്ത്താക്കള്‌"
-
-#: libgnomeui/gnome-about.c:394
-msgid "List of people documenting the program"
-msgstr "സഹായ ഗ്രന്ഥ ക‍ര്ത്താക്കളുടെ പട്ടിക‌"
-
-#: libgnomeui/gnome-about.c:396
-msgid "Documenter entry"
-msgstr "സഹായ ഗ്രന്ഥ ക‍ര്ത്താവ്"
-
-#: libgnomeui/gnome-about.c:397
-msgid "A single documenter entry"
-msgstr "ഏക സഹായ ഗ്രന്ഥ ക‍ര്ത്താവ്"
-
-#: libgnomeui/gnome-about.c:405
-msgid "Translator credits"
-msgstr "എഫ്.എസ്.എഫ് ഇന്ത്യ"
-
-#: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
-msgid "Logo"
-msgstr "ലോഗോ"
-
-#: libgnomeui/gnome-about.c:414
-#, fuzzy
-msgid "A logo for the about box"
-msgstr "ഔട്ട് ബോക്സില്‌ നിന്നുള്ള സന്ദേശം അയയ‌്ക്കൂ"
-
-#: libgnomeui/gnome-about.c:493
-#, c-format
-msgid "About %s"
-msgstr "കുറിപ്പ് %s"
-
-#: libgnomeui/gnome-appbar.c:747
-msgid "Has Progress"
-msgstr "പുരോഗതിയുണ്ട്"
-
-#: libgnomeui/gnome-appbar.c:748
-msgid "Create a progress widget."
-msgstr "പുതിയ ഒരു ജാലകം ഉണ്ടാക്കുക"
-
-#: libgnomeui/gnome-appbar.c:755
-msgid "Has Status"
-msgstr "അവസ്ഥ ഉണ്ട്"
-
-#: libgnomeui/gnome-appbar.c:756
-msgid "Create a status widget."
-msgstr "പുതിയ ഒരു ജാലകം ഉണ്ടാക്കുക"
-
-#: libgnomeui/gnome-appbar.c:763
-msgid "Interactivity"
-msgstr "അന്യോ‌ന്യപൂരകം"
-
-#: libgnomeui/gnome-appbar.c:764
-msgid "Level of user activity required."
-msgstr ""
-
-#: libgnomeui/gnome-client.c:860
-msgid "Specify session management ID"
-msgstr "പ്രവ‌ര്ത്തനകാല നിയന്ത്രണ ID വ്യക്തമാക്കുക"
-
-#: libgnomeui/gnome-client.c:860
-msgid "ID"
-msgstr "ID"
-
-#: libgnomeui/gnome-client.c:863
-msgid "Specify prefix of saved configuration"
-msgstr ""
-
-#: libgnomeui/gnome-client.c:863
-msgid "PREFIX"
-msgstr ""
-
-#: libgnomeui/gnome-client.c:866
-msgid "Disable connection to session manager"
-msgstr "പ്രവ‌‌ര്ത്തനകാലപാലകനിലേക്കുള്ള ബന്ധം നിശ്ചലമാക്കുക"
-
-#: libgnomeui/gnome-client.c:972
-msgid "Session management"
-msgstr "അവസ്ഥാ പാലനം"
-
-#: libgnomeui/gnome-client.c:2470
-msgid "Cancel Logout"
-msgstr "പുറത്ത് പോകുന്നത് ദ്ദാക്കുക"
-
-#: libgnomeui/gnome-color-picker.c:414
-msgid "Received invalid color data\n"
-msgstr ""
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "അക്ഷരരൂപം തെരഞ്ഞെടുക്കല്"
-
-#: libgnomeui/gnome-color-picker.c:465
-msgid "Open a dialog to specify the color"
-msgstr "നിറം നിശ്ചയിക്കുന്നതിനുള്ള സംവാദചതുരം തുറക്കുക"
-
-#: libgnomeui/gnome-color-picker.c:487
-msgid "Pick a color"
-msgstr "ഒരു നിറം തിരഞ്ഞെടുക്കുക"
-
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
-msgid "Time"
-msgstr "സമയം"
-
-#: libgnomeui/gnome-dateedit.c:480
-msgid "The time currently selected"
-msgstr "ഇപ്പോള് തെരഞ്ഞെടുത്ത സമയം"
-
-#: libgnomeui/gnome-dateedit.c:492
-msgid "DateEdit Flags"
-msgstr "DateEdit Flags"
-
-#: libgnomeui/gnome-dateedit.c:493
-msgid "Flags for how DateEdit looks"
-msgstr ""
-
-#: libgnomeui/gnome-dateedit.c:502
-msgid "Lower Hour"
-msgstr "കുറച്ച് മണിക്കൂ‌ര്"
-
-#: libgnomeui/gnome-dateedit.c:503
-msgid "Lower hour in the time popup selector"
-msgstr ""
-
-#: libgnomeui/gnome-dateedit.c:513
-msgid "Upper Hour"
-msgstr "കൂടുതല്‌ മണിക്കൂ‌ര്"
-
-#: libgnomeui/gnome-dateedit.c:514
-msgid "Upper hour in the time popup selector"
-msgstr ""
-
-#: libgnomeui/gnome-dateedit.c:524
-msgid "Initial Time"
-msgstr "പ്രാരംഭ സമയം"
-
-#: libgnomeui/gnome-dateedit.c:525
-msgid "The initial time"
-msgstr "പ്രാരംഭ സമയം"
-
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "തിയ്യതി"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select Date"
-msgstr "തിയ്യതി തെരഞ്ഞെടുക്കുക"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select the date from a calendar"
-msgstr "ഒരു കലണ്ടറില് നിന്നും തിയ്യതി തെരഞ്ഞെടുക്കുക"
-
-#. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
-msgid "Calendar"
-msgstr "കലണ്ടര്"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select Time"
-msgstr "സമയം തെരഞ്ഞെടുക്കുക"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select the time from a list"
-msgstr "സമയം പട്ടികയില് നിന്ന് തെരഞ്ഞെടുക്കുക"
-
-#: libgnomeui/gnome-dateedit.c:1003
-msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
-msgid "Title"
-msgstr "തലക്കെട്ട്"
-
-#: libgnomeui/gnome-druid-page-standard.c:122
-msgid "Title of the druid"
-msgstr "ജാലകത്തിന്റെ തലക്കുറി"
-
-#: libgnomeui/gnome-druid-page-standard.c:130
-msgid "Logo image"
-msgstr "ലോഗോ ചിത്രം"
-
-#: libgnomeui/gnome-druid-page-standard.c:137
-msgid "Top Watermark"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-standard.c:138
-msgid "Watermark image for the top"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Title Foreground"
-msgstr "പുരോതല തലക്കെട്ട്"
-
-#: libgnomeui/gnome-druid-page-standard.c:146
-msgid "Foreground color of the title"
-msgstr "തലക്കെട്ടിന്റെ പുരോതല നിറം"
-
-#: libgnomeui/gnome-druid-page-standard.c:153
-msgid "Title Foreground Color"
-msgstr "പുരോതല നിറത്തിന്റെ തലക്കെട്ട്"
-
-#: libgnomeui/gnome-druid-page-standard.c:154
-msgid "Foreground color of the title as a GdkColor"
-msgstr "തലക്കെട്ടിന്‌റെ പുരോതല നിറം ഒരു GdkColor പോലെ"
-
-#: libgnomeui/gnome-druid-page-standard.c:161
-msgid "Title Foreground color set"
-msgstr "പുരോതല നിറക്കൂട്ടിന്‌റെ തലക്കെട്ട്"
-
-#: libgnomeui/gnome-druid-page-standard.c:162
-msgid "Foreground color of the title is set"
-msgstr "തലക്കെട്ടിന്റെ പുരോതല നിറം നിര്ണയിച്ചു"
-
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
-msgid "Background Color"
-msgstr "പശ്ചാത്തല നിറം"
-
-#: libgnomeui/gnome-druid-page-standard.c:170
-msgid "Background color"
-msgstr "പശ്ചാത്തല നിറം"
-
-#: libgnomeui/gnome-druid-page-standard.c:178
-msgid "Background color as a GdkColor"
-msgstr "പശ്ചാത്തല നിറം ഒരു GdkColor പോലെ"
-
-#: libgnomeui/gnome-druid-page-standard.c:185
-msgid "Background color set"
-msgstr "പശ്ചാത്തലനിറം നിര്ണ്ണയം"
-
-#: libgnomeui/gnome-druid-page-standard.c:186
-msgid "Background color is set"
-msgstr "പശ്ചാത്തലനിറം നിര്ണ്ണയിച്ചു"
-
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
-msgstr "ലോഗോയുടെ പശ്ചാത്തല നിറം"
-
-#: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
-msgstr "ലോഗോയുടെ പശ്ചാത്തല നിറം"
-
-#: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
-msgstr "ലോഗോയുടെ പശ്ചാത്തല നിറം ഒരു GdkColor പോലെ"
-
-#: libgnomeui/gnome-druid-page-standard.c:209
-msgid "Logo Background color set"
-msgstr "ലോഗോയുടെ പശ്ചാത്തലനിറക്കൂട്ട്"
-
-#: libgnomeui/gnome-druid-page-standard.c:210
-msgid "Logo Background color is set"
-msgstr "ലോഗോയുടെ പശ്ചാത്തല നിറം നിര്ണയിച്ചു"
-
-#: libgnomeui/gnome-druid.c:150
-msgid "Show Finish"
-msgstr "പരിസമാപ്തി കാണിക്കുക"
-
-#: libgnomeui/gnome-druid.c:151
-#, fuzzy
-msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "മൊട്ടിന്റെ സ്ഥിരതയില്ലാത്ത അവസ്ഥ"
-
-#: libgnomeui/gnome-druid.c:158
-msgid "Show Help"
-msgstr "സഹായം ദൃശ്യമാക്കുക"
-
-#: libgnomeui/gnome-druid.c:159
-msgid "Show the 'Help' button"
-msgstr "'സഹായ' മൊട്ടുകള് കാണിക്കുക"
-
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URL"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr ""
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "വാചകം"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "മൊട്ടിലെ വാക്യം"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr ""
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr " ബന്ധന നിറം"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "ബന്ധം വരക്കുന്നതിന് വേണ്ടി നിറം ഉപയോഗിച്ചു"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr ""
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "ഉപയോഗിക്കുന്നതിനായി X പ്രദര്ശനം"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "പ്രദ‌ര്ശനം"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "ഗ്നോം GUI നിഘണ്ടു"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr ""
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr ""
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "തിരുത്ത്"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "കള അതിരുകള്"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "കളം നിറയെ"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "അടയാളങ്ങളുടെ നാമാവലി"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "സംഖ്യാ നാമാവലി‌"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "വിടവ്"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "വിടവില്ലാത്ത"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "കുറിപ്പ്"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -506,6 +29,114 @@ msgstr ""
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr ""
+
+#: libgnomeui/gnome-about.c:198
+msgid "Credits"
+msgstr "പിന്നണിയില്"
+
+#: libgnomeui/gnome-about.c:230
+msgid "Written by"
+msgstr "രചയിതാക്കള്"
+
+#: libgnomeui/gnome-about.c:245
+msgid "Documented by"
+msgstr "സഹായ ഗ്രന്ഥ ക‍ര്ത്താക്കള്‌"
+
+#: libgnomeui/gnome-about.c:260
+msgid "Translated by"
+msgstr "വിവ‍ര്‌ത്തക‌ര്"
+
+#: libgnomeui/gnome-about.c:323
+#, fuzzy
+msgid "C_redits"
+msgstr "പിന്നണിയില്"
+
+#: libgnomeui/gnome-about.c:378
+msgid "Program name"
+msgstr "പ്രയോഗത്തിന്റെ പേര‌്"
+
+#: libgnomeui/gnome-about.c:379
+msgid "The name of the program"
+msgstr "പ്രയോഗത്തിന്റെ പേര‍്"
+
+#: libgnomeui/gnome-about.c:386
+msgid "Program version"
+msgstr "പ്രയോഗത്തിന്റെ ലക്കം"
+
+#: libgnomeui/gnome-about.c:387
+msgid "The version of the program"
+msgstr "പ്രയോഗത്തിന്റെ ലക്കം"
+
+#: libgnomeui/gnome-about.c:393
+msgid "Copyright string"
+msgstr "പക‍ര്പ്പവകാശ നാമാവലി"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright information for the program"
+msgstr "പ്രയോഗത്തിനുവേണ്ടിയുള്ള പക‍ര്പ്പവകാശ വിവരം"
+
+#: libgnomeui/gnome-about.c:401
+msgid "Comments string"
+msgstr "അഭിപ്രായ നാമം"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments about the program"
+msgstr "പ്രയോഗത്തെക്കുറിച്ചുള്ള അഭിപ്രായങ്ങള്"
+
+#: libgnomeui/gnome-about.c:408
+msgid "Authors"
+msgstr "ക‍ര്ത്താക്കള്"
+
+#: libgnomeui/gnome-about.c:409
+msgid "List of authors of the programs"
+msgstr "പ്രയോഗ ക‍ര്ത്താക്കളുടെ നാമാവലി"
+
+#: libgnomeui/gnome-about.c:411
+msgid "Author entry"
+msgstr "ക‍ര്ത്താവിന്റെ വിവരം"
+
+#: libgnomeui/gnome-about.c:412
+msgid "A single author entry"
+msgstr "ഏക ക‍ര്ത്താവിന്റെ വിവരം"
+
+#: libgnomeui/gnome-about.c:419
+msgid "Documenters"
+msgstr "സഹായ ഗ്രന്ഥ ക‍ര്ത്താക്കള്‌"
+
+#: libgnomeui/gnome-about.c:420
+msgid "List of people documenting the program"
+msgstr "സഹായ ഗ്രന്ഥ ക‍ര്ത്താക്കളുടെ പട്ടിക‌"
+
+#: libgnomeui/gnome-about.c:422
+msgid "Documenter entry"
+msgstr "സഹായ ഗ്രന്ഥ ക‍ര്ത്താവ്"
+
+#: libgnomeui/gnome-about.c:423
+msgid "A single documenter entry"
+msgstr "ഏക സഹായ ഗ്രന്ഥ ക‍ര്ത്താവ്"
+
+#: libgnomeui/gnome-about.c:431
+msgid "Translator credits"
+msgstr "എഫ്.എസ്.എഫ് ഇന്ത്യ"
+
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "ലോഗോ"
+
+#: libgnomeui/gnome-about.c:440
+#, fuzzy
+msgid "A logo for the about box"
+msgstr "ഔട്ട് ബോക്സില്‌ നിന്നുള്ള സന്ദേശം അയയ‌്ക്കൂ"
+
+#: libgnomeui/gnome-about.c:519
+#, c-format
+msgid "About %s"
+msgstr "കുറിപ്പ് %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
@@ -936,6 +567,270 @@ msgstr ""
 msgid "The application ID string"
 msgstr "പ്രയോഗ ഐ ഡി നാമം"
 
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "പുരോഗതിയുണ്ട്"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "പുതിയ ഒരു ജാലകം ഉണ്ടാക്കുക"
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "അവസ്ഥ ഉണ്ട്"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "പുതിയ ഒരു ജാലകം ഉണ്ടാക്കുക"
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "അന്യോ‌ന്യപൂരകം"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "പ്രവ‌ര്ത്തനകാല നിയന്ത്രണ ID വ്യക്തമാക്കുക"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr "പ്രവ‌‌ര്ത്തനകാലപാലകനിലേക്കുള്ള ബന്ധം നിശ്ചലമാക്കുക"
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "അവസ്ഥാ പാലനം"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "പുറത്ത് പോകുന്നത് ദ്ദാക്കുക"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr ""
+
+#: libgnomeui/gnome-color-picker.c:464
+msgid "Color Selector"
+msgstr "അക്ഷരരൂപം തെരഞ്ഞെടുക്കല്"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "നിറം നിശ്ചയിക്കുന്നതിനുള്ള സംവാദചതുരം തുറക്കുക"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "ഒരു നിറം തിരഞ്ഞെടുക്കുക"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "സമയം"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "ഇപ്പോള് തെരഞ്ഞെടുത്ത സമയം"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr "DateEdit Flags"
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "കുറച്ച് മണിക്കൂ‌ര്"
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "കൂടുതല്‌ മണിക്കൂ‌ര്"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "പ്രാരംഭ സമയം"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "പ്രാരംഭ സമയം"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "തിയ്യതി"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "തിയ്യതി തെരഞ്ഞെടുക്കുക"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "ഒരു കലണ്ടറില് നിന്നും തിയ്യതി തെരഞ്ഞെടുക്കുക"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "കലണ്ടര്"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "സമയം തെരഞ്ഞെടുക്കുക"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "സമയം പട്ടികയില് നിന്ന് തെരഞ്ഞെടുക്കുക"
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "തലക്കെട്ട്"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "ജാലകത്തിന്റെ തലക്കുറി"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "ലോഗോ ചിത്രം"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr ""
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr ""
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "പുരോതല തലക്കെട്ട്"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "തലക്കെട്ടിന്റെ പുരോതല നിറം"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "പുരോതല നിറത്തിന്റെ തലക്കെട്ട്"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "തലക്കെട്ടിന്‌റെ പുരോതല നിറം ഒരു GdkColor പോലെ"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "പുരോതല നിറക്കൂട്ടിന്‌റെ തലക്കെട്ട്"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "തലക്കെട്ടിന്റെ പുരോതല നിറം നിര്ണയിച്ചു"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "പശ്ചാത്തല നിറം"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "പശ്ചാത്തല നിറം"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "പശ്ചാത്തല നിറം ഒരു GdkColor പോലെ"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "പശ്ചാത്തലനിറം നിര്ണ്ണയം"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "പശ്ചാത്തലനിറം നിര്ണ്ണയിച്ചു"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "ലോഗോയുടെ പശ്ചാത്തല നിറം"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "ലോഗോയുടെ പശ്ചാത്തല നിറം"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "ലോഗോയുടെ പശ്ചാത്തല നിറം ഒരു GdkColor പോലെ"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "ലോഗോയുടെ പശ്ചാത്തലനിറക്കൂട്ട്"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "ലോഗോയുടെ പശ്ചാത്തല നിറം നിര്ണയിച്ചു"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "പരിസമാപ്തി കാണിക്കുക"
+
+#: libgnomeui/gnome-druid.c:151
+#, fuzzy
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "മൊട്ടിന്റെ സ്ഥിരതയില്ലാത്ത അവസ്ഥ"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "സഹായം ദൃശ്യമാക്കുക"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "'സഹായ' മൊട്ടുകള് കാണിക്കുക"
+
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "ചരിത്രം ഐ ഡി"
@@ -1023,23 +918,23 @@ msgid ""
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "രചന തെരഞ്ഞെടുക്കുക"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "വഴി"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "രചനയിലേക്കുള്ള വഴി"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "അന്വേഷണം..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr ""
 
@@ -1140,6 +1035,44 @@ msgid ""
 "Some of your configuration settings may not work properly."
 msgstr ""
 
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr ""
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "വാചകം"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "മൊട്ടിലെ വാക്യം"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr ""
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr " ബന്ധന നിറം"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "ബന്ധം വരക്കുന്നതിന് വേണ്ടി നിറം ഉപയോഗിച്ചു"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr ""
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1173,51 +1106,51 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "ചിഹ്നം ഇല്ല"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "തിരനോട്ടം"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "അക്ഷരരൂപം തെരഞ്ഞെടുക്കല്"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "അക്ഷരരൂപം തെരഞ്ഞെടുക്കല്"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "ദയവായി താങ്കള്‌ക്കാവശ്യമായ ചിഹ്നം എടുക്കുക"
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "അക്ഷരരൂപം തെരഞ്ഞെടുക്കല്"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "അന്വോഷണം"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "ചിഹ്ന പാത"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1256,6 +1189,14 @@ msgstr "ചോദ്യം"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "സന്ദേശം"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1300,3 +1241,96 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "സാന്‌സ് 12"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "കള അതിരുകള്"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "കളം നിറയെ"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "അടയാളങ്ങളുടെ നാമാവലി"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "സംഖ്യാ നാമാവലി‌"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "വിടവ്"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "വിടവില്ലാത്ത"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "കുറിപ്പ്"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "ഉപയോഗിക്കുന്നതിനായി X പ്രദര്ശനം"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "പ്രദ‌ര്ശനം"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "ഗ്നോം GUI നിഘണ്ടു"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "തിരുത്ത്"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr ""
+
+#~ msgid "_Credits"
+#~ msgstr "പിന്നണിയില്"

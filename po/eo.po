@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3\n"
-"POT-Creation-Date: 2003-03-08 12:32+0100\n"
+"POT-Creation-Date: 2003-06-04 09:08+0200\n"
 "PO-Revision-Date: 2003-04-12 21:54GMT\n"
 "Last-Translator: Joël Brich <joel.brich@laposte.net>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -14,111 +14,557 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:194
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "Idoero 1"
+
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "Helpindiko por ero 1"
+
+#: demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "Idoero 2"
+
+#: demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "Helpindiko por ero 2"
+
+#: libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr "Dankoj"
 
-#: libgnomeui/gnome-about.c:223
+#: libgnomeui/gnome-about.c:230
 msgid "Written by"
 msgstr "Skribo de"
 
-#: libgnomeui/gnome-about.c:238
+#: libgnomeui/gnome-about.c:245
 msgid "Documented by"
 msgstr "Dokumento de"
 
-#: libgnomeui/gnome-about.c:253
+#: libgnomeui/gnome-about.c:260
 msgid "Translated by"
 msgstr "Traduko de"
 
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "_Dankoj"
+#: libgnomeui/gnome-about.c:323
+#, fuzzy
+msgid "C_redits"
+msgstr "Dankoj"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:378
 msgid "Program name"
 msgstr "Programnomo"
 
-#: libgnomeui/gnome-about.c:353
+#: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
 msgstr "La nomo de la programo"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:386
 msgid "Program version"
 msgstr "Programversio"
 
-#: libgnomeui/gnome-about.c:361
+#: libgnomeui/gnome-about.c:387
 msgid "The version of the program"
 msgstr "La versio de la programo"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
 msgstr "Kopirajta literĉeno"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
 msgstr "Kopirajta informo por la programo"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:401
 msgid "Comments string"
 msgstr "Komenta literĉeno"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
 msgstr "Komentoj pri la programo"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:408
 msgid "Authors"
 msgstr "Aŭtoroj"
 
-#: libgnomeui/gnome-about.c:383
+#: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
 msgstr "Listo de la aŭtoroj de la programoj"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:411
 msgid "Author entry"
 msgstr "Aŭtora enirejo"
 
-#: libgnomeui/gnome-about.c:386
+#: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
 msgstr "Ununura aŭtora enirejo"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:419
 msgid "Documenters"
 msgstr "Dokumentantoj"
 
-#: libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
 msgstr "Listo de la personoj dokumentante la programo"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
 msgstr "Dokumentanta enirejo"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
 msgstr "Ununura dokumentanta enirejo"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
 msgstr "Dankoj al tradukantoj"
 
-#: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Dankoj al tradukantoj. Tiu literĉeno devus markiĝita kiel tradukebla"
 
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Insigno"
 
-#: libgnomeui/gnome-about.c:414
+#: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
 msgstr "Insigno por la Pri-dialogo"
 
-#: libgnomeui/gnome-about.c:493
+#: libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
 msgstr "Pri %s"
+
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+msgid "_File"
+msgstr "_Dosiero"
+
+#: libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "_Dosiero/"
+
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "_Redakto"
+
+#: libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "_Redakto/"
+
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "_Rigardo"
+
+#: libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "_Rigardo/"
+
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "_Agordo"
+
+#: libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "_Agordo/"
+
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "_Nova"
+
+#: libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "_Nova/"
+
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "_Dosiero"
+
+#: libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "_Dosiero/"
+
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "_Fenestro"
+
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "_Ludo"
+
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+msgid "_Help"
+msgstr "_Helpo"
+
+#: libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "_Fenestro/"
+
+#. Open
+#: libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "_Malfermu..."
+
+#: libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "Malfermu dosieron"
+
+#. Save
+#: libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "_Konservu"
+
+#: libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "Konservu la aktualan dosieron"
+
+#. Save As
+#: libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "Konservu k_iel..."
+
+#: libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "Konservu la aktualan dosieron kun alia nomo"
+
+#. Revert
+#: libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "_Restarigu"
+
+#: libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "Restarigu al konservita versio de la dosiero"
+
+#. Print
+#: libgnomeui/gnome-app-helper.c:131
+msgid "_Print..."
+msgstr "_Presu..."
+
+#: libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "Presu la aktualan dosieron"
+
+#. Print Setup
+#: libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "Preso-_agordo..."
+
+#: libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "Agordu la paĝagordon por via aktuala presilo"
+
+#. Close
+#: libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "F_ermu"
+
+#: libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "Fermu la aktualan dosieron"
+
+#. Exit
+#: libgnomeui/gnome-app-helper.c:147
+msgid "_Quit"
+msgstr "_Finu"
+
+#: libgnomeui/gnome-app-helper.c:147
+msgid "Quit the application"
+msgstr "Finu la aplikaĵon"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cu_t"
+msgstr "E_ltondu"
+
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "Eltondu la elekton"
+
+#. 10
+#. Copy
+#: libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "_Kopiu"
+
+#: libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "Kopiu la elekton"
+
+#. Paste
+#: libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "E_nmetu"
+
+#: libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "Enmetu la poŝon"
+
+#. Clear
+#: libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "For_viŝu"
+
+#: libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "Forviŝu la elekton"
+
+#. Undo
+#: libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "_Malfaru"
+
+#: libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "Malfaru la lastan agon"
+
+#. Redo
+#: libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "_Refaru"
+
+#: libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "Refaru la malfaran agon"
+
+#. Find
+#: libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "_Trovu..."
+
+#: libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "Serĉu literĉenon"
+
+#. Find Again
+#: libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "Trovu _sekvan"
+
+#: libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "Serĉu denove la saman literĉenon"
+
+#. Replace
+#: libgnomeui/gnome-app-helper.c:197
+msgid "R_eplace..."
+msgstr "_Anstataŭigu..."
+
+#: libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "Anstataŭigu literĉenon"
+
+#. Properties
+#: libgnomeui/gnome-app-helper.c:202
+msgid "_Properties"
+msgstr "_Ecoj"
+
+#: libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "Ŝanĝu dosierecojn"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: libgnomeui/gnome-app-helper.c:211
+msgid "Prefere_nces"
+msgstr "_Agordo"
+
+#: libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "Agordu la aplikaĵon"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:221
+msgid "_About"
+msgstr "_Pri"
+
+#: libgnomeui/gnome-app-helper.c:222
+msgid "About this application"
+msgstr "Informoj pri tiu aplikaĵo"
+
+#: libgnomeui/gnome-app-helper.c:225
+msgid "Select _All"
+msgstr "Elektu _ĉion"
+
+#: libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "Elektu ĉion"
+
+#.
+#. * Window menu
+#.
+#: libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "_Kreu novan fenestron"
+
+#: libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "Kreu novan fenestron"
+
+#: libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "_Fermu tiun fenestron"
+
+#: libgnomeui/gnome-app-helper.c:240
+msgid "Close the current window"
+msgstr "Fermu la aktualan fenestron"
+
+#.
+#. * The "Game" menu
+#.
+#: libgnomeui/gnome-app-helper.c:248
+msgid "_New game"
+msgstr "_Nova ludo"
+
+#: libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "Lanĉu novan ludon"
+
+#: libgnomeui/gnome-app-helper.c:253
+msgid "_Pause game"
+msgstr "_Paŭzu ludon"
+
+#: libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "Paŭzu la ludon"
+
+#: libgnomeui/gnome-app-helper.c:258
+msgid "_Restart game"
+msgstr "_Relanĉu ludon"
+
+#: libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "Relanĉu la ludon"
+
+#: libgnomeui/gnome-app-helper.c:263
+msgid "_Undo move"
+msgstr "_Malfaru movon"
+
+#: libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "Malfaru la lastan movon"
+
+#: libgnomeui/gnome-app-helper.c:268
+msgid "_Redo move"
+msgstr "_Refaru movon"
+
+#: libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "Refaru la malfaran movon"
+
+#: libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "_Helpindiko"
+
+#: libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "Ricevi helpindikon por via sekva movo"
+
+#. 30
+#: libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "_Poentoj..."
+
+#: libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "Vidu la poentojn"
+
+#: libgnomeui/gnome-app-helper.c:284
+msgid "_End game"
+msgstr "_Finu ludon"
+
+#: libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "Fino de la aktuala ludo"
+
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr "_Enhavo"
+
+#: libgnomeui/gnome-app-helper.c:1146
+msgid "View help for this application"
+msgstr "Vidu helpon por tiu aplikaĵo"
+
+#: libgnomeui/gnome-app-helper.c:2566
+msgid "Text Below Icons"
+msgstr "Teksto sub la piktogramoj"
+
+#: libgnomeui/gnome-app-helper.c:2567
+msgid "Priority Text Beside Icons"
+msgstr "Prioritada teksto apud piktogramoj"
+
+#: libgnomeui/gnome-app-helper.c:2568
+msgid "Icons Only"
+msgstr "Nur piktogramoj"
+
+#: libgnomeui/gnome-app-helper.c:2569
+msgid "Text Only"
+msgstr "Nur teksto"
+
+#: libgnomeui/gnome-app-helper.c:2630
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr "Uzu aprioran tabulon (%s)"
+
+#: libgnomeui/gnome-app-util.c:99
+msgid " (press return)"
+msgstr " (premu 'return')"
+
+#: libgnomeui/gnome-app-util.c:141
+msgid "ERROR: "
+msgstr "ERARO : "
+
+#: libgnomeui/gnome-app-util.c:178
+msgid "Warning: "
+msgstr "Averto : "
+
+#: libgnomeui/gnome-app-util.c:316
+msgid "y"
+msgstr "j"
+
+#: libgnomeui/gnome-app-util.c:317
+msgid "yes"
+msgstr "jes"
+
+#: libgnomeui/gnome-app-util.c:320
+msgid "n"
+msgstr "n"
+
+#: libgnomeui/gnome-app-util.c:321
+msgid "no"
+msgstr "ne"
+
+#: libgnomeui/gnome-app-util.c:356
+msgid " (yes or no)"
+msgstr " (jes aŭ ne)"
+
+#: libgnomeui/gnome-app-util.c:357
+msgid "  - OK? (yes or no)"
+msgstr " - bone? (jes aŭ ne)"
+
+#: libgnomeui/gnome-app-util.c:685
+msgid "Progress"
+msgstr "Progreso"
+
+#: libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "Aplikaĵa identigilo"
+
+#: libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "La aplikaĵa identigila literĉeno"
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
@@ -144,31 +590,54 @@ msgstr "Interaktiveco"
 msgid "Level of user activity required."
 msgstr "Nivelo de uzantaktiveco bezonita."
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "Specifu sesian administran ID"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
 msgstr "Specifu prefikson de la konserva agordo"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "PREFIKSO"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
 msgstr "Elŝaltu konekton al la sesia administrilo"
 
-#: libgnomeui/gnome-client.c:972
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Sesia administro"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Rezignu Adiaŭi"
 
@@ -360,592 +829,6 @@ msgstr "Montru la helpon"
 msgid "Show the 'Help' button"
 msgstr "Montru la 'Helpo' butonon"
 
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URLo"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "La URLon, ke GnomeHRef aktivigas"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "Teksto"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "La teksto sur la butono"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "Haltu malsaton en la mondo"
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr "Ligokoloro"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "Koloro uzita por desegni la ligon"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr "Tiu butono eblas aliron al la montrita URI-o."
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"Eraro okazis dum la lanĉoprovo de la apriora rigardilo.\n"
-"Bonvolu kontroli vian agordon en la 'preferata aplikaĵo' agordilo."
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "X-vidigilo por uzi"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "VIDIGILO"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "Grafika interfaca libraro de GNOME"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Multobla segmentadaj eraroj okasis, ne povas montri eraro-dialogon\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Segmentada eraro!\n"
-"Ne povas montri akcidento-dialogon\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"La GNOME sesia administrilo (procezo %d) mortis\n"
-"pro fatala eraro (%s).\n"
-"Kiam vi fermos tiun dialogon, ĉiuj aplikaĵoj fermiĝos kaj via sesio finiĝos.\n"
-"Bonvolu konservi viajn dosierojn antaŭ la fermo de tiu dialogo."
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Aplikaĵo \"%s\" (procezo %d) mortis\n"
-"pro fatala eraro.\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Uzado : gnome_segv2 appname signum\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Sendu eraroraporton"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "Erarserĉi"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Bonvolu viziti la GNOME aplikaĵan akcidentan paĝon por plej informoj"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "Randoj de la tabelo "
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "Plenigo de la tabelo"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "Kuglita listo"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "Nombrita listo"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "Deŝovu"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "maldeŝovu"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "Pri"
-
-#: demos/mdi_demo.c:128
-msgid "Child Item 1"
-msgstr "Idoero 1"
-
-#: demos/mdi_demo.c:129
-msgid "Hint for item 1"
-msgstr "Helpindiko por ero 1"
-
-#: demos/mdi_demo.c:131
-msgid "Child Item 2"
-msgstr "Idoero 2"
-
-#: demos/mdi_demo.c:132
-msgid "Hint for item 2"
-msgstr "Helpindiko por ero 2"
-
-#. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
-msgid "_File"
-msgstr "_Dosiero"
-
-#: libgnomeui/gnome-app-helper.c:83
-msgid "_File/"
-msgstr "_Dosiero/"
-
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
-msgid "_Edit"
-msgstr "_Redakto"
-
-#: libgnomeui/gnome-app-helper.c:85
-msgid "_Edit/"
-msgstr "_Redakto/"
-
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
-msgid "_View"
-msgstr "_Rigardo"
-
-#: libgnomeui/gnome-app-helper.c:87
-msgid "_View/"
-msgstr "_Rigardo/"
-
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
-msgid "_Settings"
-msgstr "_Agordo"
-
-#: libgnomeui/gnome-app-helper.c:89
-msgid "_Settings/"
-msgstr "_Agordo/"
-
-#. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
-msgid "_New"
-msgstr "_Nova"
-
-#: libgnomeui/gnome-app-helper.c:91
-msgid "_New/"
-msgstr "_Nova/"
-
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
-msgid "Fi_les"
-msgstr "_Dosiero"
-
-#: libgnomeui/gnome-app-helper.c:93
-msgid "Fi_les/"
-msgstr "_Dosiero/"
-
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
-msgid "_Windows"
-msgstr "_Fenestro"
-
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
-msgid "_Game"
-msgstr "_Ludo"
-
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
-msgid "_Help"
-msgstr "_Helpo"
-
-#: libgnomeui/gnome-app-helper.c:97
-msgid "_Windows/"
-msgstr "_Fenestro/"
-
-#. Open
-#: libgnomeui/gnome-app-helper.c:109
-msgid "_Open..."
-msgstr "_Malfermu..."
-
-#: libgnomeui/gnome-app-helper.c:109
-msgid "Open a file"
-msgstr "Malfermu dosieron"
-
-#. Save
-#: libgnomeui/gnome-app-helper.c:114
-msgid "_Save"
-msgstr "_Konservu"
-
-#: libgnomeui/gnome-app-helper.c:114
-msgid "Save the current file"
-msgstr "Konservu la aktualan dosieron"
-
-#. Save As
-#: libgnomeui/gnome-app-helper.c:119
-msgid "Save _As..."
-msgstr "Konservu k_iel..."
-
-#: libgnomeui/gnome-app-helper.c:120
-msgid "Save the current file with a different name"
-msgstr "Konservu la aktualan dosieron kun alia nomo"
-
-#. Revert
-#: libgnomeui/gnome-app-helper.c:125
-msgid "_Revert"
-msgstr "_Restarigu"
-
-#: libgnomeui/gnome-app-helper.c:126
-msgid "Revert to a saved version of the file"
-msgstr "Restarigu al konservita versio de la dosiero"
-
-#. Print
-#: libgnomeui/gnome-app-helper.c:131
-msgid "_Print..."
-msgstr "_Presu..."
-
-#: libgnomeui/gnome-app-helper.c:131
-msgid "Print the current file"
-msgstr "Presu la aktualan dosieron"
-
-#. Print Setup
-#: libgnomeui/gnome-app-helper.c:136
-msgid "Print S_etup..."
-msgstr "Preso-_agordo..."
-
-#: libgnomeui/gnome-app-helper.c:137
-msgid "Setup the page settings for your current printer"
-msgstr "Agordu la paĝagordon por via aktuala presilo"
-
-#. Close
-#: libgnomeui/gnome-app-helper.c:142
-msgid "_Close"
-msgstr "F_ermu"
-
-#: libgnomeui/gnome-app-helper.c:142
-msgid "Close the current file"
-msgstr "Fermu la aktualan dosieron"
-
-#. Exit
-#: libgnomeui/gnome-app-helper.c:147
-msgid "_Quit"
-msgstr "_Finu"
-
-#: libgnomeui/gnome-app-helper.c:147
-msgid "Quit the application"
-msgstr "Finu la aplikaĵon"
-
-#.
-#. * The "Edit" menu
-#.
-#. Cut
-#: libgnomeui/gnome-app-helper.c:155
-msgid "Cu_t"
-msgstr "E_ltondu"
-
-#: libgnomeui/gnome-app-helper.c:155
-msgid "Cut the selection"
-msgstr "Eltondu la elekton"
-
-#. 10
-#. Copy
-#: libgnomeui/gnome-app-helper.c:161
-msgid "_Copy"
-msgstr "_Kopiu"
-
-#: libgnomeui/gnome-app-helper.c:161
-msgid "Copy the selection"
-msgstr "Kopiu la elekton"
-
-#. Paste
-#: libgnomeui/gnome-app-helper.c:166
-msgid "_Paste"
-msgstr "E_nmetu"
-
-#: libgnomeui/gnome-app-helper.c:166
-msgid "Paste the clipboard"
-msgstr "Enmetu la poŝon"
-
-#. Clear
-#: libgnomeui/gnome-app-helper.c:171
-msgid "C_lear"
-msgstr "For_viŝu"
-
-#: libgnomeui/gnome-app-helper.c:171
-msgid "Clear the selection"
-msgstr "Forviŝu la elekton"
-
-#. Undo
-#: libgnomeui/gnome-app-helper.c:176
-msgid "_Undo"
-msgstr "_Malfaru"
-
-#: libgnomeui/gnome-app-helper.c:176
-msgid "Undo the last action"
-msgstr "Malfaru la lastan agon"
-
-#. Redo
-#: libgnomeui/gnome-app-helper.c:181
-msgid "_Redo"
-msgstr "_Refaru"
-
-#: libgnomeui/gnome-app-helper.c:181
-msgid "Redo the undone action"
-msgstr "Refaru la malfaran agon"
-
-#. Find
-#: libgnomeui/gnome-app-helper.c:186
-msgid "_Find..."
-msgstr "_Trovu..."
-
-#: libgnomeui/gnome-app-helper.c:186
-msgid "Search for a string"
-msgstr "Serĉu literĉenon"
-
-#. Find Again
-#: libgnomeui/gnome-app-helper.c:191
-msgid "Find Ne_xt"
-msgstr "Trovu _sekvan"
-
-#: libgnomeui/gnome-app-helper.c:192
-msgid "Search again for the same string"
-msgstr "Serĉu denove la saman literĉenon"
-
-#. Replace
-#: libgnomeui/gnome-app-helper.c:197
-msgid "R_eplace..."
-msgstr "_Anstataŭigu..."
-
-#: libgnomeui/gnome-app-helper.c:197
-msgid "Replace a string"
-msgstr "Anstataŭigu literĉenon"
-
-#. Properties
-#: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties"
-msgstr "_Ecoj"
-
-#: libgnomeui/gnome-app-helper.c:203
-msgid "Modify the file's properties"
-msgstr "Ŝanĝu dosierecojn"
-
-#.
-#. * The Settings menu
-#.
-#. Settings
-#: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces"
-msgstr "_Agordo"
-
-#: libgnomeui/gnome-app-helper.c:212
-msgid "Configure the application"
-msgstr "Agordu la aplikaĵon"
-
-#. 20
-#.
-#. * And the "Help" menu
-#.
-#. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
-msgid "_About"
-msgstr "_Pri"
-
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-msgid "About this application"
-msgstr "Informoj pri tiu aplikaĵo"
-
-#: libgnomeui/gnome-app-helper.c:225
-msgid "Select _All"
-msgstr "Elektu _ĉion"
-
-#: libgnomeui/gnome-app-helper.c:226
-msgid "Select everything"
-msgstr "Elektu ĉion"
-
-#.
-#. * Window menu
-#.
-#: libgnomeui/gnome-app-helper.c:234
-msgid "Create New _Window"
-msgstr "_Kreu novan fenestron"
-
-#: libgnomeui/gnome-app-helper.c:235
-msgid "Create a new window"
-msgstr "Kreu novan fenestron"
-
-#: libgnomeui/gnome-app-helper.c:239
-msgid "_Close This Window"
-msgstr "_Fermu tiun fenestron"
-
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-msgid "Close the current window"
-msgstr "Fermu la aktualan fenestron"
-
-#.
-#. * The "Game" menu
-#.
-#: libgnomeui/gnome-app-helper.c:248
-msgid "_New game"
-msgstr "_Nova ludo"
-
-#: libgnomeui/gnome-app-helper.c:249
-msgid "Start a new game"
-msgstr "Lanĉu novan ludon"
-
-#: libgnomeui/gnome-app-helper.c:253
-msgid "_Pause game"
-msgstr "_Paŭzu ludon"
-
-#: libgnomeui/gnome-app-helper.c:254
-msgid "Pause the game"
-msgstr "Paŭzu la ludon"
-
-#: libgnomeui/gnome-app-helper.c:258
-msgid "_Restart game"
-msgstr "_Relanĉu ludon"
-
-#: libgnomeui/gnome-app-helper.c:259
-msgid "Restart the game"
-msgstr "Relanĉu la ludon"
-
-#: libgnomeui/gnome-app-helper.c:263
-msgid "_Undo move"
-msgstr "_Malfaru movon"
-
-#: libgnomeui/gnome-app-helper.c:264
-msgid "Undo the last move"
-msgstr "Malfaru la lastan movon"
-
-#: libgnomeui/gnome-app-helper.c:268
-msgid "_Redo move"
-msgstr "_Refaru movon"
-
-#: libgnomeui/gnome-app-helper.c:269
-msgid "Redo the undone move"
-msgstr "Refaru la malfaran movon"
-
-#: libgnomeui/gnome-app-helper.c:273
-msgid "_Hint"
-msgstr "_Helpindiko"
-
-#: libgnomeui/gnome-app-helper.c:274
-msgid "Get a hint for your next move"
-msgstr "Ricevi helpindikon por via sekva movo"
-
-#. 30
-#: libgnomeui/gnome-app-helper.c:279
-msgid "_Scores..."
-msgstr "_Poentoj..."
-
-#: libgnomeui/gnome-app-helper.c:280
-msgid "View the scores"
-msgstr "Vidu la poentojn"
-
-#: libgnomeui/gnome-app-helper.c:284
-msgid "_End game"
-msgstr "_Finu ludon"
-
-#: libgnomeui/gnome-app-helper.c:285
-msgid "End the current game"
-msgstr "Fino de la aktuala ludo"
-
-#: libgnomeui/gnome-app-helper.c:1143
-msgid "_Contents"
-msgstr "_Enhavo"
-
-#: libgnomeui/gnome-app-helper.c:1146
-msgid "View help for this application"
-msgstr "Vidu helpon por tiu aplikaĵo"
-
-#: libgnomeui/gnome-app-helper.c:2566
-msgid "Text Below Icons"
-msgstr "Teksto sub la piktogramoj"
-
-#: libgnomeui/gnome-app-helper.c:2567
-msgid "Priority Text Beside Icons"
-msgstr "Prioritada teksto apud piktogramoj"
-
-#: libgnomeui/gnome-app-helper.c:2568
-msgid "Icons Only"
-msgstr "Nur piktogramoj"
-
-#: libgnomeui/gnome-app-helper.c:2569
-msgid "Text Only"
-msgstr "Nur teksto"
-
-#: libgnomeui/gnome-app-helper.c:2630
-#, c-format
-msgid "Use desktop default (%s)"
-msgstr "Uzu aprioran tabulon (%s)"
-
-#: libgnomeui/gnome-app-util.c:99
-msgid " (press return)"
-msgstr " (premu 'return')"
-
-#: libgnomeui/gnome-app-util.c:141
-msgid "ERROR: "
-msgstr "ERARO : "
-
-#: libgnomeui/gnome-app-util.c:178
-msgid "Warning: "
-msgstr "Averto : "
-
-#: libgnomeui/gnome-app-util.c:316
-msgid "y"
-msgstr "j"
-
-#: libgnomeui/gnome-app-util.c:317
-msgid "yes"
-msgstr "jes"
-
-#: libgnomeui/gnome-app-util.c:320
-msgid "n"
-msgstr "n"
-
-#: libgnomeui/gnome-app-util.c:321
-msgid "no"
-msgstr "ne"
-
-#: libgnomeui/gnome-app-util.c:356
-msgid " (yes or no)"
-msgstr " (jes aŭ ne)"
-
-#: libgnomeui/gnome-app-util.c:357
-msgid "  - OK? (yes or no)"
-msgstr " - bone? (jes aŭ ne)"
-
-#: libgnomeui/gnome-app-util.c:685
-msgid "Progress"
-msgstr "Progreso"
-
-#: libgnomeui/gnome-app.c:153
-msgid "App ID"
-msgstr "Aplikaĵa identigilo"
-
-#: libgnomeui/gnome-app.c:154
-msgid "The application ID string"
-msgstr "La aplikaĵa identigila literĉeno"
-
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Identigilo de historio"
@@ -967,7 +850,8 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Ununura identigilo por la dosierenirejo. Ĝi estos uzata por konservi la " "historiliston."
+"Ununura identigilo por la dosierenirejo. Ĝi estos uzata por konservi la "
+"historiliston."
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
@@ -986,7 +870,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Se la dosiera enirejo estas uzita por eniri dosierujonomojn aŭ kompletajn " "dosiernomoj."
+"Se la dosiera enirejo estas uzita por eniri dosierujonomojn aŭ kompletajn "
+"dosiernomoj."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1022,8 +907,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"Dosierenirejo GnomeEntry uzita por eniri dosiernomojn. Vi povas uzi tiun econ por "
-"ricevi la GnomeEntry se vi bezonas ŝanĝi aŭ demandi iun el ĝiaj ecoj."
+"Dosierenirejo GnomeEntry uzita por eniri dosiernomojn. Vi povas uzi tiun "
+"econ por ricevi la GnomeEntry se vi bezonas ŝanĝi aŭ demandi iun el ĝiaj "
+"ecoj."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1035,26 +921,26 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"Dosierenirejo GtkEntry uzita por eniri dosiernomojn. Vi povas uzi tiun econ por "
-"ricevi la GtkEntry se vi bezonas ŝanĝi aŭ demandi iun el ĝiaj ecoj."
+"Dosierenirejo GtkEntry uzita por eniri dosiernomojn. Vi povas uzi tiun econ "
+"por ricevi la GtkEntry se vi bezonas ŝanĝi aŭ demandi iun el ĝiaj ecoj."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "Elektu dosieron"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "Pado"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "Pado al dosiero"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "_Rigardu..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr "Ekaperu dosierelektilon por elekti dosieron"
 
@@ -1146,9 +1032,10 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"La aplikaĵo \"%s\" provis modifi aspekton de via agordo, ke via administranto "
-"aŭ mastrumosistema vendisto ne permesis modifi. Iu de via selektita agordo "
-"ne povas uziĝita aŭ ne povos restariĝi la sekva fojo ke vi volos uzi la aplikaĵon."
+"La aplikaĵo \"%s\" provis modifi aspekton de via agordo, ke via "
+"administranto aŭ mastrumosistema vendisto ne permesis modifi. Iu de via "
+"selektita agordo ne povas uziĝita aŭ ne povos restariĝi la sekva fojo ke vi "
+"volos uzi la aplikaĵon."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1156,16 +1043,56 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Eraro okazis dum la ŝarĝo aŭ konservo de la agordo de %s. "
-"Via agordo ne estas probable bona"
+"Eraro okazis dum la ŝarĝo aŭ konservo de la agordo de %s. Via agordo ne "
+"estas probable bona"
+
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URLo"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "La URLon, ke GnomeHRef aktivigas"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "Teksto"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "La teksto sur la butono"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "Haltu malsaton en la mondo"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "Ligokoloro"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "Koloro uzita por desegni la ligon"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "Tiu butono eblas aliron al la montrita URI-o."
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Eraro okazis dum la lanĉoprovo de la apriora rigardilo.\n"
+"Bonvolu kontroli vian agordon en la 'preferata aplikaĵo' agordilo."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Ununura identigilo por la piktograma enirejo. Tiu uziĝos por konservi "
-"la historiliston."
+"Ununura identigilo por la piktograma enirejo. Tiu uziĝos por konservi la "
+"historiliston."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1192,59 +1119,58 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Piktogramelekta dialogo. Vi povas uzi tiun econ por havi la GtkDialog-on se vi "
-"bezonas ŝanĝi aŭ demandi siajn ecojn."
+"Piktogramelekta dialogo. Vi povas uzi tiun econ por havi la GtkDialog-on se "
+"vi bezonas ŝanĝi aŭ demandi siajn ecojn."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Sen piktogramo"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Ne trovis hbox, uzanto de normala dosierelektilo"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Antaŭrigardo"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "Piktogramelekta dialogo"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "La dialogo lasu al vi elekti piktogramon."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "Piktograma elektilo"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "Bonvolu elekti vian deziratan piktogramon."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Piktograma elektilo"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "Tiu butono malfermos fenestron por lasi al vi elekti piktogramon."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Rigardu"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "Piktogramopado"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"Ĉi tie, vi devus eniri la dosierujonomon de la piktogramoj"
+msgstr "Ĉi tie, vi devus eniri la dosierujonomon de la piktogramoj"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1279,6 +1205,14 @@ msgstr "Demando"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Mesaĝo"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1323,7 +1257,108 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Finu la teston"
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Randoj de la tabelo "
 
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Plenigo de la tabelo"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Kuglita listo"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Nombrita listo"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Deŝovu"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "maldeŝovu"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Pri"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "X-vidigilo por uzi"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "VIDIGILO"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "Grafika interfaca libraro de GNOME"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "Multobla segmentadaj eraroj okasis, ne povas montri eraro-dialogon\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Segmentada eraro!\n"
+"Ne povas montri akcidento-dialogon\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"La GNOME sesia administrilo (procezo %d) mortis\n"
+"pro fatala eraro (%s).\n"
+"Kiam vi fermos tiun dialogon, ĉiuj aplikaĵoj fermiĝos kaj via sesio "
+"finiĝos.\n"
+"Bonvolu konservi viajn dosierojn antaŭ la fermo de tiu dialogo."
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Aplikaĵo \"%s\" (procezo %d) mortis\n"
+"pro fatala eraro.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Uzado : gnome_segv2 appname signum\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "Sendu eraroraporton"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "Erarserĉi"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "Bonvolu viziti la GNOME aplikaĵan akcidentan paĝon por plej informoj"
+
+#~ msgid "_Credits"
+#~ msgstr "_Dankoj"
+
+#~ msgid "Exit the test"
+#~ msgstr "Finu la teston"

@@ -6,499 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
+"POT-Creation-Date: 2003-06-04 09:08+0200\n"
 "PO-Revision-Date: 2003-02-03 10:16+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: libgnomeui/gnome-about.c:194
-msgid "Credits"
-msgstr "ተሳታፊዎች"
-
-#: libgnomeui/gnome-about.c:223
-msgid "Written by"
-msgstr "ፀሐፊው"
-
-#: libgnomeui/gnome-about.c:238
-msgid "Documented by"
-msgstr "ሰነዱን ያዘጋጀው"
-
-#: libgnomeui/gnome-about.c:253
-msgid "Translated by"
-msgstr "ተርጓሚ"
-
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "_ተሳታፊዎች"
-
-#: libgnomeui/gnome-about.c:352
-msgid "Program name"
-msgstr "የፕሮግራም ስም"
-
-#: libgnomeui/gnome-about.c:353
-msgid "The name of the program"
-msgstr "የፕሮግራሙ ስም"
-
-#: libgnomeui/gnome-about.c:360
-msgid "Program version"
-msgstr "የፕሮግራም ቅጂ"
-
-#: libgnomeui/gnome-about.c:361
-msgid "The version of the program"
-msgstr "የፕሮግራሙ ቅጂ"
-
-#: libgnomeui/gnome-about.c:367
-msgid "Copyright string"
-msgstr "የቅጂው መብት ሐረግ"
-
-#: libgnomeui/gnome-about.c:368
-msgid "Copyright information for the program"
-msgstr "ለፕሮግራሙ የቅጂ መብት መረጃ"
-
-#: libgnomeui/gnome-about.c:375
-msgid "Comments string"
-msgstr "የአስተያየቶች ሐረግ"
-
-#: libgnomeui/gnome-about.c:376
-msgid "Comments about the program"
-msgstr "ስለፕሮግራሙ አስተያየት"
-
-#: libgnomeui/gnome-about.c:382
-msgid "Authors"
-msgstr "ደራሲዎች"
-
-#: libgnomeui/gnome-about.c:383
-msgid "List of authors of the programs"
-msgstr "የፕሮግራሞቹ ደራሲዎች ዝርዝር"
-
-#: libgnomeui/gnome-about.c:385
-msgid "Author entry"
-msgstr "የደራሲው መግቢያ"
-
-#: libgnomeui/gnome-about.c:386
-msgid "A single author entry"
-msgstr "የአንድ ደራሲ መግቢያ"
-
-#: libgnomeui/gnome-about.c:393
-msgid "Documenters"
-msgstr "ሰነድ አዘጋጆች"
-
-#: libgnomeui/gnome-about.c:394
-msgid "List of people documenting the program"
-msgstr "ፕሮግራሙን የሚያዘጋጁት ሰዎች ዝርዝር"
-
-#: libgnomeui/gnome-about.c:396
-msgid "Documenter entry"
-msgstr "የሰነድ አዘጋጁ መግቢያ"
-
-#: libgnomeui/gnome-about.c:397
-msgid "A single documenter entry"
-msgstr "የአንድ ሰነድ አዘጋጅ መግቢያ"
-
-#: libgnomeui/gnome-about.c:405
-msgid "Translator credits"
-msgstr "የተርጓሚው አመለካከት"
-
-#: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr "የተርጓሚዎቹ አመለካከት። ይህ ሐረግ ሊተርጎም የሚችል ተብሎ ምልክት መደረግ አለበት"
-
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
-msgid "Logo"
-msgstr "አርማ"
-
-#: libgnomeui/gnome-about.c:414
-msgid "A logo for the about box"
-msgstr "ስለሳጥኑ አርማ"
-
-#: libgnomeui/gnome-about.c:493
-#, c-format
-msgid "About %s"
-msgstr "ስለ %s"
-
-#: libgnomeui/gnome-appbar.c:747
-msgid "Has Progress"
-msgstr "ተሻሽሏል"
-
-#: libgnomeui/gnome-appbar.c:748
-msgid "Create a progress widget."
-msgstr "የተሻሻለ ዊድጌት ፍጠር"
-
-#: libgnomeui/gnome-appbar.c:755
-msgid "Has Status"
-msgstr "ሁኔታ አለው"
-
-#: libgnomeui/gnome-appbar.c:756
-msgid "Create a status widget."
-msgstr "የዊድጌት አቀማመጥ ፍጠር"
-
-#: libgnomeui/gnome-appbar.c:763
-msgid "Interactivity"
-msgstr "ውስጣዊ እንቅስቃሴ"
-
-#: libgnomeui/gnome-appbar.c:764
-msgid "Level of user activity required."
-msgstr "የተጠቃሚው የአጠቃቀም ደረጃ ያስፈልጋል"
-
-#: libgnomeui/gnome-client.c:860
-msgid "Specify session management ID"
-msgstr "የጉባኤውን አስተዳደር መለያ ቍጥር ጥቀስ"
-
-#: libgnomeui/gnome-client.c:860
-msgid "ID"
-msgstr "ID"
-
-#: libgnomeui/gnome-client.c:863
-msgid "Specify prefix of saved configuration"
-msgstr "ተስተካክሎ የተቀመጠውን ባዕድ መነሻ ጥቀስ"
-
-#: libgnomeui/gnome-client.c:863
-msgid "PREFIX"
-msgstr "ባዕድ መነሻ"
-
-#: libgnomeui/gnome-client.c:866
-msgid "Disable connection to session manager"
-msgstr "ለአስተዳደሩ ጉባኤ ግንኙነቱን አቋርጥ "
-
-#: libgnomeui/gnome-client.c:972
-msgid "Session management"
-msgstr "የመምሪያው ጉባኤ"
-
-#: libgnomeui/gnome-client.c:2470
-msgid "Cancel Logout"
-msgstr "መዝጊያውን ይሰርዙ"
-
-#: libgnomeui/gnome-color-picker.c:414
-msgid "Received invalid color data\n"
-msgstr "የማይሠራ የቀለም መረጃ ተቀብሏል\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "ቀለም መራጭ"
-
-#: libgnomeui/gnome-color-picker.c:465
-msgid "Open a dialog to specify the color"
-msgstr "ቀለሙን ለመለየት መምረጫውን ይክፈቱ"
-
-#: libgnomeui/gnome-color-picker.c:487
-msgid "Pick a color"
-msgstr "ቀለም ምረጡ"
-
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
-msgid "Time"
-msgstr "ሰዓት"
-
-#: libgnomeui/gnome-dateedit.c:480
-msgid "The time currently selected"
-msgstr "ሰዓቱ በቅርብ ጊዜ ተመርጧል"
-
-#: libgnomeui/gnome-dateedit.c:492
-msgid "DateEdit Flags"
-msgstr "የቀን ማስተካከያ ምልክት"
-
-#: libgnomeui/gnome-dateedit.c:493
-msgid "Flags for how DateEdit looks"
-msgstr "የቀን ማስተካከያው ምን እንደሚመስል ለማሳየት ምልክቶች ተደርገዋል"
-
-#: libgnomeui/gnome-dateedit.c:502
-msgid "Lower Hour"
-msgstr "ዝቅተኛው ሰዓት"
-
-#: libgnomeui/gnome-dateedit.c:503
-msgid "Lower hour in the time popup selector"
-msgstr "በፖፕአፕ ሰዓት መምረጫ ውስጥ ዝቅተኛውን ሰዓት አድርጉ#"
-
-#: libgnomeui/gnome-dateedit.c:513
-msgid "Upper Hour"
-msgstr "ከፍተኛ ሰዓት"
-
-#: libgnomeui/gnome-dateedit.c:514
-msgid "Upper hour in the time popup selector"
-msgstr "በፖፕአፕ የሰዓት መምረጫ ውስጥ ከፍተኛውን ሰዓት ያድርጉ"
-
-#: libgnomeui/gnome-dateedit.c:524
-msgid "Initial Time"
-msgstr "የመጀመሪያ ሰዓት"
-
-#: libgnomeui/gnome-dateedit.c:525
-msgid "The initial time"
-msgstr "የመጀመሪያው ሰዓት"
-
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "ቀን"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select Date"
-msgstr "ቀን ምረጥ"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select the date from a calendar"
-msgstr "ከቀን መቁጠሩያው ላይ ቀኑን ይምረጡ"
-
-#. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
-msgid "Calendar"
-msgstr "ቀን መቁጠሪያ"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select Time"
-msgstr "ሰዓት ምረጥ"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select the time from a list"
-msgstr "ከዝርዝሩ ውስጥ ሰዓቱን ይምረጡ"
-
-#: libgnomeui/gnome-dateedit.c:1003
-msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date deprecated፣ አገልግሎቱ ስለቀነሰ use "
-"gnome_date_edit_get_timeን ተጠቀሙ"
-
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
-msgid "Title"
-msgstr "አርእስት"
-
-#: libgnomeui/gnome-druid-page-standard.c:122
-msgid "Title of the druid"
-msgstr "የድሩይድ አርእስት"
-
-#: libgnomeui/gnome-druid-page-standard.c:130
-msgid "Logo image"
-msgstr "የአርማ ምስል"
-
-#: libgnomeui/gnome-druid-page-standard.c:137
-msgid "Top Watermark"
-msgstr "የመለያውን ምልክት ከላይ አድርግ"
-
-#: libgnomeui/gnome-druid-page-standard.c:138
-msgid "Watermark image for the top"
-msgstr "ለላይኛው የመለያ ምልክት ምስል"
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Title Foreground"
-msgstr "ከአርእስቱ ፊት"
-
-#: libgnomeui/gnome-druid-page-standard.c:146
-msgid "Foreground color of the title"
-msgstr "ከአርእስቱ ፊት ያለው ቀለም"
-
-#: libgnomeui/gnome-druid-page-standard.c:153
-msgid "Title Foreground Color"
-msgstr "ከአርእስቱ ፊት ያለው ቀለም"
-
-#: libgnomeui/gnome-druid-page-standard.c:154
-msgid "Foreground color of the title as a GdkColor"
-msgstr "ከአርእስቱ ፊት ላለው ቀለም GdkColorን ይምረጡ"
-
-#: libgnomeui/gnome-druid-page-standard.c:161
-msgid "Title Foreground color set"
-msgstr "ከአርእስቱ ፊት ያለው ቀለም ተመርጧል"
-
-#: libgnomeui/gnome-druid-page-standard.c:162
-msgid "Foreground color of the title is set"
-msgstr "የአርእስቱ የፊት ለፊት ቀለም ተመረርጧል"
-
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
-msgid "Background Color"
-msgstr "የመደቡ ቀለም"
-
-#: libgnomeui/gnome-druid-page-standard.c:170
-msgid "Background color"
-msgstr "የመደቡ ቀለም"
-
-#: libgnomeui/gnome-druid-page-standard.c:178
-msgid "Background color as a GdkColor"
-msgstr "የመደቡ ቀለም በGdkColor ይቅለም"
-
-#: libgnomeui/gnome-druid-page-standard.c:185
-msgid "Background color set"
-msgstr "የመደቡ ቀለም ተመርጧል"
-
-#: libgnomeui/gnome-druid-page-standard.c:186
-msgid "Background color is set"
-msgstr "የመደቡ ቀለም ተመርጧል"
-
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
-msgstr "የአርማው መደብ ቀለም"
-
-#: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
-msgstr "የአርማው መደብ ቀለም"
-
-#: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
-msgstr "የአርማው የመደብ ቀለም በGdkColor ይቅለም"
-
-#: libgnomeui/gnome-druid-page-standard.c:209
-msgid "Logo Background color set"
-msgstr "የአርማው የመደብ ቀለም ተመርጧል"
-
-#: libgnomeui/gnome-druid-page-standard.c:210
-msgid "Logo Background color is set"
-msgstr "የአርማው የመደብ ቀለም ተመርጧል"
-
-#: libgnomeui/gnome-druid.c:150
-msgid "Show Finish"
-msgstr "መጨረሻውን አሳይ"
-
-#: libgnomeui/gnome-druid.c:151
-msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "'ጨርስ' የሚለውን ቁልፍ 'የሚቀጥለው' በሚለው ቁልፍ ፋንታ አሳይ"
-
-#: libgnomeui/gnome-druid.c:158
-msgid "Show Help"
-msgstr "መረጃውን አሳይ"
-
-#: libgnomeui/gnome-druid.c:159
-msgid "Show the 'Help' button"
-msgstr "'መረጃ' የሚለውን ቁልፍ አሳይ"
-
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URL"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "GnomeHRef የሚያስጀምረው URL"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "ጽሑፍ"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "ቁልፉ ላይ ያለው ጽሑፍ"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "የዓለም ረሃብ ያብቃ"
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr "ቀለሙን አያይዝ"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "ማያያዣውን ለመሳል የተጠቀመው ቀለም"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr "ይህ ቁልፍ እራሱ ወደሚያሳየው ወደ URI  ይወስድዎታል"
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "Xን ለመጠቀም አሳይ"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "አሳይ"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "የGNOME GUI ስብስብ"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "የተለያዩ ክፍሎች ላይ ስህተት ተከስቷል፥ ስሕተቱን ማሳየት አልተቻለም\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"የተወሰነ ክፍል ስህተት!\n"
-"ግጭቱን ማውጫ ማሳየት አይቻልም\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"የGNOME ክፍል መምሪያ (ድርጊት %d) ጊዜ\n"
-"በማይሰጥ ስህተት ተቋርጧል (%s)።\n"
-"ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞችይዘጉና ከውይይትዎ ይወጣሉ።እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ "
-"ከመዝጋትዎ በፊት ያስቀምጧቸው።"
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"በአደገኛ ስሕተት ምክንያት።\n"
-"የመጠቀሚያ ፕሮግራሞች \"%s\" (ድርጊት %d) ተቋርጧል\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "አጠቃቀም፦ gnome_segv2 appname signum\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "የስሕተቱን ጉዳይ አቅርብ"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "አስተካክል"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "ለበለጠ መረጃ እባክዎን የGNOMEን ፕሮግራም ይጎብኙ"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "የሠንጠረዥ ወሰኖች"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "የሠንጠረዥ መሙያ"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "በነጠብጣብ የተሰየመ ዝርዝር"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "በቍጥር የተሰየመ ዝርዝር"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "አዲስ አንቀጽ"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "አንቀጽ የሌለው"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "ስለ"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -515,6 +29,113 @@ msgstr "የልጅ ዕቃ ቍጥር 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "ጥቆማ ለተራ ቍጥር 2"
+
+#: libgnomeui/gnome-about.c:198
+msgid "Credits"
+msgstr "ተሳታፊዎች"
+
+#: libgnomeui/gnome-about.c:230
+msgid "Written by"
+msgstr "ፀሐፊው"
+
+#: libgnomeui/gnome-about.c:245
+msgid "Documented by"
+msgstr "ሰነዱን ያዘጋጀው"
+
+#: libgnomeui/gnome-about.c:260
+msgid "Translated by"
+msgstr "ተርጓሚ"
+
+#: libgnomeui/gnome-about.c:323
+#, fuzzy
+msgid "C_redits"
+msgstr "ተሳታፊዎች"
+
+#: libgnomeui/gnome-about.c:378
+msgid "Program name"
+msgstr "የፕሮግራም ስም"
+
+#: libgnomeui/gnome-about.c:379
+msgid "The name of the program"
+msgstr "የፕሮግራሙ ስም"
+
+#: libgnomeui/gnome-about.c:386
+msgid "Program version"
+msgstr "የፕሮግራም ቅጂ"
+
+#: libgnomeui/gnome-about.c:387
+msgid "The version of the program"
+msgstr "የፕሮግራሙ ቅጂ"
+
+#: libgnomeui/gnome-about.c:393
+msgid "Copyright string"
+msgstr "የቅጂው መብት ሐረግ"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright information for the program"
+msgstr "ለፕሮግራሙ የቅጂ መብት መረጃ"
+
+#: libgnomeui/gnome-about.c:401
+msgid "Comments string"
+msgstr "የአስተያየቶች ሐረግ"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments about the program"
+msgstr "ስለፕሮግራሙ አስተያየት"
+
+#: libgnomeui/gnome-about.c:408
+msgid "Authors"
+msgstr "ደራሲዎች"
+
+#: libgnomeui/gnome-about.c:409
+msgid "List of authors of the programs"
+msgstr "የፕሮግራሞቹ ደራሲዎች ዝርዝር"
+
+#: libgnomeui/gnome-about.c:411
+msgid "Author entry"
+msgstr "የደራሲው መግቢያ"
+
+#: libgnomeui/gnome-about.c:412
+msgid "A single author entry"
+msgstr "የአንድ ደራሲ መግቢያ"
+
+#: libgnomeui/gnome-about.c:419
+msgid "Documenters"
+msgstr "ሰነድ አዘጋጆች"
+
+#: libgnomeui/gnome-about.c:420
+msgid "List of people documenting the program"
+msgstr "ፕሮግራሙን የሚያዘጋጁት ሰዎች ዝርዝር"
+
+#: libgnomeui/gnome-about.c:422
+msgid "Documenter entry"
+msgstr "የሰነድ አዘጋጁ መግቢያ"
+
+#: libgnomeui/gnome-about.c:423
+msgid "A single documenter entry"
+msgstr "የአንድ ሰነድ አዘጋጅ መግቢያ"
+
+#: libgnomeui/gnome-about.c:431
+msgid "Translator credits"
+msgstr "የተርጓሚው አመለካከት"
+
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "የተርጓሚዎቹ አመለካከት። ይህ ሐረግ ሊተርጎም የሚችል ተብሎ ምልክት መደረግ አለበት"
+
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "አርማ"
+
+#: libgnomeui/gnome-about.c:440
+msgid "A logo for the about box"
+msgstr "ስለሳጥኑ አርማ"
+
+#: libgnomeui/gnome-about.c:519
+#, c-format
+msgid "About %s"
+msgstr "ስለ %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
@@ -945,6 +566,271 @@ msgstr "የመጠቀሚያው ፕሮግራም ID"
 msgid "The application ID string"
 msgstr "የመጠቀሚያው ፕሮግራም የID ሐረግ"
 
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "ተሻሽሏል"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "የተሻሻለ ዊድጌት ፍጠር"
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "ሁኔታ አለው"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "የዊድጌት አቀማመጥ ፍጠር"
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "ውስጣዊ እንቅስቃሴ"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "የተጠቃሚው የአጠቃቀም ደረጃ ያስፈልጋል"
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "የጉባኤውን አስተዳደር መለያ ቍጥር ጥቀስ"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr "ተስተካክሎ የተቀመጠውን ባዕድ መነሻ ጥቀስ"
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr "ባዕድ መነሻ"
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr "ለአስተዳደሩ ጉባኤ ግንኙነቱን አቋርጥ "
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "የመምሪያው ጉባኤ"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "መዝጊያውን ይሰርዙ"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "የማይሠራ የቀለም መረጃ ተቀብሏል\n"
+
+#: libgnomeui/gnome-color-picker.c:464
+msgid "Color Selector"
+msgstr "ቀለም መራጭ"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "ቀለሙን ለመለየት መምረጫውን ይክፈቱ"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "ቀለም ምረጡ"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "ሰዓት"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "ሰዓቱ በቅርብ ጊዜ ተመርጧል"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr "የቀን ማስተካከያ ምልክት"
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr "የቀን ማስተካከያው ምን እንደሚመስል ለማሳየት ምልክቶች ተደርገዋል"
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "ዝቅተኛው ሰዓት"
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr "በፖፕአፕ ሰዓት መምረጫ ውስጥ ዝቅተኛውን ሰዓት አድርጉ#"
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "ከፍተኛ ሰዓት"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr "በፖፕአፕ የሰዓት መምረጫ ውስጥ ከፍተኛውን ሰዓት ያድርጉ"
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "የመጀመሪያ ሰዓት"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "የመጀመሪያው ሰዓት"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "ቀን"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "ቀን ምረጥ"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "ከቀን መቁጠሩያው ላይ ቀኑን ይምረጡ"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "ቀን መቁጠሪያ"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "ሰዓት ምረጥ"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "ከዝርዝሩ ውስጥ ሰዓቱን ይምረጡ"
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date deprecated፣ አገልግሎቱ ስለቀነሰ use "
+"gnome_date_edit_get_timeን ተጠቀሙ"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "አርእስት"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "የድሩይድ አርእስት"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "የአርማ ምስል"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "የመለያውን ምልክት ከላይ አድርግ"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "ለላይኛው የመለያ ምልክት ምስል"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "ከአርእስቱ ፊት"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "ከአርእስቱ ፊት ያለው ቀለም"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "ከአርእስቱ ፊት ያለው ቀለም"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "ከአርእስቱ ፊት ላለው ቀለም GdkColorን ይምረጡ"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "ከአርእስቱ ፊት ያለው ቀለም ተመርጧል"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "የአርእስቱ የፊት ለፊት ቀለም ተመረርጧል"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "የመደቡ ቀለም"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "የመደቡ ቀለም"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "የመደቡ ቀለም በGdkColor ይቅለም"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "የመደቡ ቀለም ተመርጧል"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "የመደቡ ቀለም ተመርጧል"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "የአርማው መደብ ቀለም"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "የአርማው መደብ ቀለም"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "የአርማው የመደብ ቀለም በGdkColor ይቅለም"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "የአርማው የመደብ ቀለም ተመርጧል"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "የአርማው የመደብ ቀለም ተመርጧል"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "መጨረሻውን አሳይ"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "'ጨርስ' የሚለውን ቁልፍ 'የሚቀጥለው' በሚለው ቁልፍ ፋንታ አሳይ"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "መረጃውን አሳይ"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "'መረጃ' የሚለውን ቁልፍ አሳይ"
+
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "የታሪኩ id"
@@ -1035,23 +921,23 @@ msgstr ""
 "GtkEntryን ፋይል ማስገቢያው የፋይል ስሞችን ለማስገባት ይጠቀምበታል። ይህንን አካል የፋይሎችን አቀማመጥ ለማሻሻል "
 "ወይንም ለመጠየቅ መጠቀም ይችላሉ።"
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "ፋይል ምረጡ"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "መንገድ"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "መንግድ ወደ ፋይል"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "_ቃኝ..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr "የፋይል መምረጫ ፋይል ለመምረጥ አሳይ"
 
@@ -1156,6 +1042,44 @@ msgstr ""
 "ለ%s የመረጃውን ማስተካከያ በሚጭንበት ወይንም በሚያስቀምጥበት ጊዜ ስሕተት ተከስቷል።አንዳንድ የማስተካከያው ማዘጋጃዎችዎ "
 "በትክክል ላይሰሩ ይችላሉ።"
 
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "GnomeHRef የሚያስጀምረው URL"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "ጽሑፍ"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "ቁልፉ ላይ ያለው ጽሑፍ"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "የዓለም ረሃብ ያብቃ"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "ቀለሙን አያይዝ"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "ማያያዣውን ለመሳል የተጠቀመው ቀለም"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "ይህ ቁልፍ እራሱ ወደሚያሳየው ወደ URI  ይወስድዎታል"
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1190,51 +1114,51 @@ msgstr ""
 "የምልክት መራጭ መምረጫ። በGtkDialog ውስጥ ያለውን ማንኛውንም ነገር ለማሻሻል ወይንም ለመጠየቅ ከፈለጉ ይህንን "
 "መምረጫ መጠቀም ይችላሉ።"
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "ምልክት የለም"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "መደበኛ የሆነውን የፋይል አመራረጥ በመጠቀም ሸሯቅብን ማግኘት አይቻልም"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "ቅድመ ዕይታ"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "የምልክቶች ምርጫ መምረጫ"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "ይህ የመምረጫ ሳጥን ምልክቶችን ያስመርጥዎታል።"
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "የቁልፍ መራጭ"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "እባክዎ የሚፈልጉትን ቁልፍ ይምረጡ።"
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "የቁልፍ መራጭ"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "ይህ ቁልፍ ምልክቶችን እንድትመርጡ መስኮቱን ይከፍታል።"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "ቃኝ"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "የቁልፉ መተላለፊያ"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1273,6 +1197,14 @@ msgstr "ጥያቄ"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "መልዕክት"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1316,6 +1248,108 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "የሠንጠረዥ ወሰኖች"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "የሠንጠረዥ መሙያ"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "በነጠብጣብ የተሰየመ ዝርዝር"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "በቍጥር የተሰየመ ዝርዝር"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "አዲስ አንቀጽ"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "አንቀጽ የሌለው"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "ስለ"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "Xን ለመጠቀም አሳይ"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "አሳይ"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "የGNOME GUI ስብስብ"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "የተለያዩ ክፍሎች ላይ ስህተት ተከስቷል፥ ስሕተቱን ማሳየት አልተቻለም\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"የተወሰነ ክፍል ስህተት!\n"
+"ግጭቱን ማውጫ ማሳየት አይቻልም\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"የGNOME ክፍል መምሪያ (ድርጊት %d) ጊዜ\n"
+"በማይሰጥ ስህተት ተቋርጧል (%s)።\n"
+"ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞችይዘጉና ከውይይትዎ ይወጣሉ።እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ "
+"ከመዝጋትዎ በፊት ያስቀምጧቸው።"
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"በአደገኛ ስሕተት ምክንያት።\n"
+"የመጠቀሚያ ፕሮግራሞች \"%s\" (ድርጊት %d) ተቋርጧል\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "አጠቃቀም፦ gnome_segv2 appname signum\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "የስሕተቱን ጉዳይ አቅርብ"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "አስተካክል"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "ለበለጠ መረጃ እባክዎን የGNOMEን ፕሮግራም ይጎብኙ"
+
+#~ msgid "_Credits"
+#~ msgstr "_ተሳታፊዎች"
 
 #~ msgid "Exit the test"
 #~ msgstr "ከሙከራው ውጣ"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.0\n"
-"POT-Creation-Date: 2003-05-17 16:41+0800\n"
+"POT-Creation-Date: 2003-06-04 09:08+0200\n"
 "PO-Revision-Date: 2003-05-17 16:40+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -14,112 +14,557 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:194
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "副項目一"
+
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "項目一的提示"
+
+#: demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "副項目二"
+
+#: demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "項目二的提示"
+
+#: libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr "鳴謝"
 
-#: libgnomeui/gnome-about.c:223
+#: libgnomeui/gnome-about.c:230
 msgid "Written by"
 msgstr "程式編寫"
 
-#: libgnomeui/gnome-about.c:238
+#: libgnomeui/gnome-about.c:245
 msgid "Documented by"
 msgstr "文件編寫"
 
-#: libgnomeui/gnome-about.c:253
+#: libgnomeui/gnome-about.c:260
 msgid "Translated by"
 msgstr "翻譯"
 
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "鳴謝(_C)"
+#: libgnomeui/gnome-about.c:323
+#, fuzzy
+msgid "C_redits"
+msgstr "鳴謝"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:378
 msgid "Program name"
 msgstr "程式名稱"
 
-#: libgnomeui/gnome-about.c:353
+#: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
 msgstr "程式的名稱"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:386
 msgid "Program version"
 msgstr "程式版本"
 
-#: libgnomeui/gnome-about.c:361
+#: libgnomeui/gnome-about.c:387
 msgid "The version of the program"
 msgstr "程式的版本"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
 msgstr "版權資訊字串"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
 msgstr "該程式的版權資訊"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:401
 msgid "Comments string"
 msgstr "備註字串"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
 msgstr "有關該程式的說明文字"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:408
 msgid "Authors"
 msgstr "作者"
 
-#: libgnomeui/gnome-about.c:383
+#: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
 msgstr "程式作者清單"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:411
 msgid "Author entry"
 msgstr "程式作者欄位"
 
-#: libgnomeui/gnome-about.c:386
+#: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
 msgstr "顯示一個程式作者的欄位"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:419
 msgid "Documenters"
 msgstr "文件編寫員"
 
-#: libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
 msgstr "為程式編寫文件的人員的清單"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
 msgstr "文件編寫員欄位"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
 msgstr "顯示一個文件編寫員的欄位"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
 msgstr "鳴謝翻譯者"
 
-#: libgnomeui/gnome-about.c:406
+#: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "向翻譯者致謝。本字串應該被標記為可翻譯的字串。"
 
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "標誌"
 
-#: libgnomeui/gnome-about.c:414
+#: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
 msgstr "顯示程式資訊的對話方塊中使用的標誌"
 
-#: libgnomeui/gnome-about.c:493
+#: libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
 msgstr "關於 %s"
+
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+msgid "_File"
+msgstr "檔案(_F)"
+
+#: libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "檔案(_F)/"
+
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "編輯(_E)"
+
+#: libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "編輯(_E)/"
+
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "顯示(_V)"
+
+#: libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "顯示(_V)/"
+
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "設定(_S)"
+
+#: libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "設定(_S)/"
+
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "新增(_N)"
+
+#: libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "新增(_N)/"
+
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "檔案(_L)"
+
+#: libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "檔案(_L)/"
+
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "視窗(_W)"
+
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "遊戲(_G)"
+
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+msgid "_Help"
+msgstr "求助(_H)"
+
+#: libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "視窗(_W)/"
+
+#. Open
+#: libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "開啟(_O)..."
+
+#: libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "開啟現有的檔案"
+
+#. Save
+#: libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "儲存(_S)"
+
+#: libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "儲存目前檔案"
+
+#. Save As
+#: libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "另存新檔(_A)..."
+
+#: libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "將目前檔案用另一名稱儲存"
+
+#. Revert
+#: libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "回復(_R)"
+
+#: libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "將檔案內容回復至已儲存的版本"
+
+#. Print
+#: libgnomeui/gnome-app-helper.c:131
+msgid "_Print..."
+msgstr "列印(_P)"
+
+#: libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "列印目前的檔案"
+
+#. Print Setup
+#: libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "列印設定(_E)..."
+
+#: libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "修改目前印表機的頁面列印設定"
+
+#. Close
+#: libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "關閉(_C)"
+
+#: libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "關閉目前的檔案"
+
+#. Exit
+#: libgnomeui/gnome-app-helper.c:147
+msgid "_Quit"
+msgstr "離開(_Q)"
+
+#: libgnomeui/gnome-app-helper.c:147
+msgid "Quit the application"
+msgstr "離開程式"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cu_t"
+msgstr "剪下(_T)"
+
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "剪下選定的內容"
+
+#. 10
+#. Copy
+#: libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "複製(_C)"
+
+#: libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "複製選定的內容"
+
+#. Paste
+#: libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "貼上(_P)"
+
+#: libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "貼上剪貼簿中的內容"
+
+#. Clear
+#: libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "清除(_L)"
+
+#: libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "清除選定的範圍"
+
+#. Undo
+#: libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "復原(_U)"
+
+#: libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "取消上一個操作程序"
+
+#. Redo
+#: libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "取消復原(_R)"
+
+#: libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "重複進行剛復原的操作程序"
+
+#. Find
+#: libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "搜尋(_F)..."
+
+#: libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "搜尋字串"
+
+#. Find Again
+#: libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "繼續搜尋(_X)"
+
+#: libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "搜尋下一個相同的字串"
+
+#. Replace
+#: libgnomeui/gnome-app-helper.c:197
+msgid "R_eplace..."
+msgstr "取代(_E)..."
+
+#: libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "取代字串"
+
+#. Properties
+#: libgnomeui/gnome-app-helper.c:202
+msgid "_Properties"
+msgstr "屬性(_P)..."
+
+#: libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "修改檔案的屬性"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: libgnomeui/gnome-app-helper.c:211
+msgid "Prefere_nces"
+msgstr "偏好設定(_N)"
+
+#: libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "修改有關本程式的設定"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:221
+msgid "_About"
+msgstr "關於(_A)"
+
+#: libgnomeui/gnome-app-helper.c:222
+msgid "About this application"
+msgstr "顯示有關本程式的資訊"
+
+#: libgnomeui/gnome-app-helper.c:225
+msgid "Select _All"
+msgstr "全部選取(_A)"
+
+#: libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "選取所有項目或範圍"
+
+#.
+#. * Window menu
+#.
+#: libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "新增視窗(_W)"
+
+#: libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "顯示新的視窗"
+
+#: libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "關閉本視窗(_C)"
+
+#: libgnomeui/gnome-app-helper.c:240
+msgid "Close the current window"
+msgstr "關閉目前的視窗"
+
+#.
+#. * The "Game" menu
+#.
+#: libgnomeui/gnome-app-helper.c:248
+msgid "_New game"
+msgstr "新遊戲(_N)"
+
+#: libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "開始新的遊戲"
+
+#: libgnomeui/gnome-app-helper.c:253
+msgid "_Pause game"
+msgstr "暫停遊戲(_P)"
+
+#: libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "暫停今局遊戲"
+
+#: libgnomeui/gnome-app-helper.c:258
+msgid "_Restart game"
+msgstr "重新開始遊戲(_R)"
+
+#: libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "重新開始今局遊戲"
+
+#: libgnomeui/gnome-app-helper.c:263
+msgid "_Undo move"
+msgstr "還原上一步(_U)"
+
+#: libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "取消剛進行的一步"
+
+#: libgnomeui/gnome-app-helper.c:268
+msgid "_Redo move"
+msgstr "取消還原(_R)"
+
+#: libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "重新執行剛取消的一步"
+
+#: libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "提示(_H)"
+
+#: libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "獲取下一步的提示"
+
+#. 30
+#: libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "分數(_S)..."
+
+#: libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "觀看所得的積分"
+
+#: libgnomeui/gnome-app-helper.c:284
+msgid "_End game"
+msgstr "結束遊戲(_E)"
+
+#: libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "結束目前的遊戲"
+
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr "內容(_C)"
+
+#: libgnomeui/gnome-app-helper.c:1146
+msgid "View help for this application"
+msgstr "顯示有關本程式的說明文件"
+
+#: libgnomeui/gnome-app-helper.c:2566
+msgid "Text Below Icons"
+msgstr "圖示下顯示文字"
+
+#: libgnomeui/gnome-app-helper.c:2567
+msgid "Priority Text Beside Icons"
+msgstr "部份圖示旁顯示文字"
+
+#: libgnomeui/gnome-app-helper.c:2568
+msgid "Icons Only"
+msgstr "只顯示圖示"
+
+#: libgnomeui/gnome-app-helper.c:2569
+msgid "Text Only"
+msgstr "只顯示文字"
+
+#: libgnomeui/gnome-app-helper.c:2630
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr "使用桌面的預設設定 (%s)"
+
+#: libgnomeui/gnome-app-util.c:99
+msgid " (press return)"
+msgstr " (按下 return 鍵)"
+
+#: libgnomeui/gnome-app-util.c:141
+msgid "ERROR: "
+msgstr "錯誤："
+
+#: libgnomeui/gnome-app-util.c:178
+msgid "Warning: "
+msgstr "警告："
+
+#: libgnomeui/gnome-app-util.c:316
+msgid "y"
+msgstr "y"
+
+#: libgnomeui/gnome-app-util.c:317
+msgid "yes"
+msgstr "yes"
+
+#: libgnomeui/gnome-app-util.c:320
+msgid "n"
+msgstr "n"
+
+#: libgnomeui/gnome-app-util.c:321
+msgid "no"
+msgstr "no"
+
+#: libgnomeui/gnome-app-util.c:356
+msgid " (yes or no)"
+msgstr " (yes 或 no)"
+
+#: libgnomeui/gnome-app-util.c:357
+msgid "  - OK? (yes or no)"
+msgstr " ─ 確定？ (yes 或 no)"
+
+#: libgnomeui/gnome-app-util.c:685
+msgid "Progress"
+msgstr "進度對話方塊"
+
+#: libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "程式識別碼"
+
+#: libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "程式的識別碼字串"
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
@@ -144,6 +589,29 @@ msgstr "狀態列的互動性"
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
 msgstr "指定狀態列可否接受用戶輸入。"
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr ""
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -361,592 +829,6 @@ msgstr "顯示說明"
 msgid "Show the 'Help' button"
 msgstr "顯示「求助」按鈕"
 
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URL"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "GnomeHRef(鏈結元件)所啟動的 URL"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "文字"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "按鈕中顯示的文字"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "結束全球飢荒"
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr "鏈結顏色"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "顯示鏈結用的顏色"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr "按下本按鈕後會顯示它所代表的網頁。"
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"當嘗試啟動預設的網頁瀏覽器時發生錯誤。\n"
-"請檢查在「首選應用程式」內的有關設定是否正確。 "
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "準備使用的 X 畫面代號"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "畫面代號"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "GNOME 圖形界面函式庫"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "發生了非常嚴重的錯誤；無法顯示錯誤訊息對話方塊\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"程式記憶體區段錯誤！\n"
-"無法顯示錯誤訊息對話方塊\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOME 作業階段總管 (進程編號 %d) 不正常終止，\n"
-"原因是出現嚴重的錯誤 (%s)。\n"
-"當關閉本對話方塊後，所有程式都會關閉，並且今次的作業階段也會終止。\n"
-"請在關閉本對話方塊前儲存所有資料。"
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"程式“%s”(進程編號 %d) 不正常終止，\n"
-"原因是出現嚴重的錯誤。\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "用法：gnome_segv2 程式名稱 訊號號碼\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "匯報錯誤報告"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "偵錯"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "請到 GNOME 程式錯誤網頁獲取更多資訊"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "表格邊框"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "填充表格"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "無序號清單"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "序號清單"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "增加縮排"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "減少縮排"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "關於"
-
-#: demos/mdi_demo.c:128
-msgid "Child Item 1"
-msgstr "副項目一"
-
-#: demos/mdi_demo.c:129
-msgid "Hint for item 1"
-msgstr "項目一的提示"
-
-#: demos/mdi_demo.c:131
-msgid "Child Item 2"
-msgstr "副項目二"
-
-#: demos/mdi_demo.c:132
-msgid "Hint for item 2"
-msgstr "項目二的提示"
-
-#. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
-msgid "_File"
-msgstr "檔案(_F)"
-
-#: libgnomeui/gnome-app-helper.c:83
-msgid "_File/"
-msgstr "檔案(_F)/"
-
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
-msgid "_Edit"
-msgstr "編輯(_E)"
-
-#: libgnomeui/gnome-app-helper.c:85
-msgid "_Edit/"
-msgstr "編輯(_E)/"
-
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
-msgid "_View"
-msgstr "顯示(_V)"
-
-#: libgnomeui/gnome-app-helper.c:87
-msgid "_View/"
-msgstr "顯示(_V)/"
-
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
-msgid "_Settings"
-msgstr "設定(_S)"
-
-#: libgnomeui/gnome-app-helper.c:89
-msgid "_Settings/"
-msgstr "設定(_S)/"
-
-#. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
-msgid "_New"
-msgstr "新增(_N)"
-
-#: libgnomeui/gnome-app-helper.c:91
-msgid "_New/"
-msgstr "新增(_N)/"
-
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
-msgid "Fi_les"
-msgstr "檔案(_L)"
-
-#: libgnomeui/gnome-app-helper.c:93
-msgid "Fi_les/"
-msgstr "檔案(_L)/"
-
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
-msgid "_Windows"
-msgstr "視窗(_W)"
-
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
-msgid "_Game"
-msgstr "遊戲(_G)"
-
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
-msgid "_Help"
-msgstr "求助(_H)"
-
-#: libgnomeui/gnome-app-helper.c:97
-msgid "_Windows/"
-msgstr "視窗(_W)/"
-
-#. Open
-#: libgnomeui/gnome-app-helper.c:109
-msgid "_Open..."
-msgstr "開啟(_O)..."
-
-#: libgnomeui/gnome-app-helper.c:109
-msgid "Open a file"
-msgstr "開啟現有的檔案"
-
-#. Save
-#: libgnomeui/gnome-app-helper.c:114
-msgid "_Save"
-msgstr "儲存(_S)"
-
-#: libgnomeui/gnome-app-helper.c:114
-msgid "Save the current file"
-msgstr "儲存目前檔案"
-
-#. Save As
-#: libgnomeui/gnome-app-helper.c:119
-msgid "Save _As..."
-msgstr "另存新檔(_A)..."
-
-#: libgnomeui/gnome-app-helper.c:120
-msgid "Save the current file with a different name"
-msgstr "將目前檔案用另一名稱儲存"
-
-#. Revert
-#: libgnomeui/gnome-app-helper.c:125
-msgid "_Revert"
-msgstr "回復(_R)"
-
-#: libgnomeui/gnome-app-helper.c:126
-msgid "Revert to a saved version of the file"
-msgstr "將檔案內容回復至已儲存的版本"
-
-#. Print
-#: libgnomeui/gnome-app-helper.c:131
-msgid "_Print..."
-msgstr "列印(_P)"
-
-#: libgnomeui/gnome-app-helper.c:131
-msgid "Print the current file"
-msgstr "列印目前的檔案"
-
-#. Print Setup
-#: libgnomeui/gnome-app-helper.c:136
-msgid "Print S_etup..."
-msgstr "列印設定(_E)..."
-
-#: libgnomeui/gnome-app-helper.c:137
-msgid "Setup the page settings for your current printer"
-msgstr "修改目前印表機的頁面列印設定"
-
-#. Close
-#: libgnomeui/gnome-app-helper.c:142
-msgid "_Close"
-msgstr "關閉(_C)"
-
-#: libgnomeui/gnome-app-helper.c:142
-msgid "Close the current file"
-msgstr "關閉目前的檔案"
-
-#. Exit
-#: libgnomeui/gnome-app-helper.c:147
-msgid "_Quit"
-msgstr "離開(_Q)"
-
-#: libgnomeui/gnome-app-helper.c:147
-msgid "Quit the application"
-msgstr "離開程式"
-
-#.
-#. * The "Edit" menu
-#.
-#. Cut
-#: libgnomeui/gnome-app-helper.c:155
-msgid "Cu_t"
-msgstr "剪下(_T)"
-
-#: libgnomeui/gnome-app-helper.c:155
-msgid "Cut the selection"
-msgstr "剪下選定的內容"
-
-#. 10
-#. Copy
-#: libgnomeui/gnome-app-helper.c:161
-msgid "_Copy"
-msgstr "複製(_C)"
-
-#: libgnomeui/gnome-app-helper.c:161
-msgid "Copy the selection"
-msgstr "複製選定的內容"
-
-#. Paste
-#: libgnomeui/gnome-app-helper.c:166
-msgid "_Paste"
-msgstr "貼上(_P)"
-
-#: libgnomeui/gnome-app-helper.c:166
-msgid "Paste the clipboard"
-msgstr "貼上剪貼簿中的內容"
-
-#. Clear
-#: libgnomeui/gnome-app-helper.c:171
-msgid "C_lear"
-msgstr "清除(_L)"
-
-#: libgnomeui/gnome-app-helper.c:171
-msgid "Clear the selection"
-msgstr "清除選定的範圍"
-
-#. Undo
-#: libgnomeui/gnome-app-helper.c:176
-msgid "_Undo"
-msgstr "復原(_U)"
-
-#: libgnomeui/gnome-app-helper.c:176
-msgid "Undo the last action"
-msgstr "取消上一個操作程序"
-
-#. Redo
-#: libgnomeui/gnome-app-helper.c:181
-msgid "_Redo"
-msgstr "取消復原(_R)"
-
-#: libgnomeui/gnome-app-helper.c:181
-msgid "Redo the undone action"
-msgstr "重複進行剛復原的操作程序"
-
-#. Find
-#: libgnomeui/gnome-app-helper.c:186
-msgid "_Find..."
-msgstr "搜尋(_F)..."
-
-#: libgnomeui/gnome-app-helper.c:186
-msgid "Search for a string"
-msgstr "搜尋字串"
-
-#. Find Again
-#: libgnomeui/gnome-app-helper.c:191
-msgid "Find Ne_xt"
-msgstr "繼續搜尋(_X)"
-
-#: libgnomeui/gnome-app-helper.c:192
-msgid "Search again for the same string"
-msgstr "搜尋下一個相同的字串"
-
-#. Replace
-#: libgnomeui/gnome-app-helper.c:197
-msgid "R_eplace..."
-msgstr "取代(_E)..."
-
-#: libgnomeui/gnome-app-helper.c:197
-msgid "Replace a string"
-msgstr "取代字串"
-
-#. Properties
-#: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties"
-msgstr "屬性(_P)..."
-
-#: libgnomeui/gnome-app-helper.c:203
-msgid "Modify the file's properties"
-msgstr "修改檔案的屬性"
-
-#.
-#. * The Settings menu
-#.
-#. Settings
-#: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces"
-msgstr "偏好設定(_N)"
-
-#: libgnomeui/gnome-app-helper.c:212
-msgid "Configure the application"
-msgstr "修改有關本程式的設定"
-
-#. 20
-#.
-#. * And the "Help" menu
-#.
-#. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
-msgid "_About"
-msgstr "關於(_A)"
-
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-msgid "About this application"
-msgstr "顯示有關本程式的資訊"
-
-#: libgnomeui/gnome-app-helper.c:225
-msgid "Select _All"
-msgstr "全部選取(_A)"
-
-#: libgnomeui/gnome-app-helper.c:226
-msgid "Select everything"
-msgstr "選取所有項目或範圍"
-
-#.
-#. * Window menu
-#.
-#: libgnomeui/gnome-app-helper.c:234
-msgid "Create New _Window"
-msgstr "新增視窗(_W)"
-
-#: libgnomeui/gnome-app-helper.c:235
-msgid "Create a new window"
-msgstr "顯示新的視窗"
-
-#: libgnomeui/gnome-app-helper.c:239
-msgid "_Close This Window"
-msgstr "關閉本視窗(_C)"
-
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-msgid "Close the current window"
-msgstr "關閉目前的視窗"
-
-#.
-#. * The "Game" menu
-#.
-#: libgnomeui/gnome-app-helper.c:248
-msgid "_New game"
-msgstr "新遊戲(_N)"
-
-#: libgnomeui/gnome-app-helper.c:249
-msgid "Start a new game"
-msgstr "開始新的遊戲"
-
-#: libgnomeui/gnome-app-helper.c:253
-msgid "_Pause game"
-msgstr "暫停遊戲(_P)"
-
-#: libgnomeui/gnome-app-helper.c:254
-msgid "Pause the game"
-msgstr "暫停今局遊戲"
-
-#: libgnomeui/gnome-app-helper.c:258
-msgid "_Restart game"
-msgstr "重新開始遊戲(_R)"
-
-#: libgnomeui/gnome-app-helper.c:259
-msgid "Restart the game"
-msgstr "重新開始今局遊戲"
-
-#: libgnomeui/gnome-app-helper.c:263
-msgid "_Undo move"
-msgstr "還原上一步(_U)"
-
-#: libgnomeui/gnome-app-helper.c:264
-msgid "Undo the last move"
-msgstr "取消剛進行的一步"
-
-#: libgnomeui/gnome-app-helper.c:268
-msgid "_Redo move"
-msgstr "取消還原(_R)"
-
-#: libgnomeui/gnome-app-helper.c:269
-msgid "Redo the undone move"
-msgstr "重新執行剛取消的一步"
-
-#: libgnomeui/gnome-app-helper.c:273
-msgid "_Hint"
-msgstr "提示(_H)"
-
-#: libgnomeui/gnome-app-helper.c:274
-msgid "Get a hint for your next move"
-msgstr "獲取下一步的提示"
-
-#. 30
-#: libgnomeui/gnome-app-helper.c:279
-msgid "_Scores..."
-msgstr "分數(_S)..."
-
-#: libgnomeui/gnome-app-helper.c:280
-msgid "View the scores"
-msgstr "觀看所得的積分"
-
-#: libgnomeui/gnome-app-helper.c:284
-msgid "_End game"
-msgstr "結束遊戲(_E)"
-
-#: libgnomeui/gnome-app-helper.c:285
-msgid "End the current game"
-msgstr "結束目前的遊戲"
-
-#: libgnomeui/gnome-app-helper.c:1143
-msgid "_Contents"
-msgstr "內容(_C)"
-
-#: libgnomeui/gnome-app-helper.c:1146
-msgid "View help for this application"
-msgstr "顯示有關本程式的說明文件"
-
-#: libgnomeui/gnome-app-helper.c:2566
-msgid "Text Below Icons"
-msgstr "圖示下顯示文字"
-
-#: libgnomeui/gnome-app-helper.c:2567
-msgid "Priority Text Beside Icons"
-msgstr "部份圖示旁顯示文字"
-
-#: libgnomeui/gnome-app-helper.c:2568
-msgid "Icons Only"
-msgstr "只顯示圖示"
-
-#: libgnomeui/gnome-app-helper.c:2569
-msgid "Text Only"
-msgstr "只顯示文字"
-
-#: libgnomeui/gnome-app-helper.c:2630
-#, c-format
-msgid "Use desktop default (%s)"
-msgstr "使用桌面的預設設定 (%s)"
-
-#: libgnomeui/gnome-app-util.c:99
-msgid " (press return)"
-msgstr " (按下 return 鍵)"
-
-#: libgnomeui/gnome-app-util.c:141
-msgid "ERROR: "
-msgstr "錯誤："
-
-#: libgnomeui/gnome-app-util.c:178
-msgid "Warning: "
-msgstr "警告："
-
-#: libgnomeui/gnome-app-util.c:316
-msgid "y"
-msgstr "y"
-
-#: libgnomeui/gnome-app-util.c:317
-msgid "yes"
-msgstr "yes"
-
-#: libgnomeui/gnome-app-util.c:320
-msgid "n"
-msgstr "n"
-
-#: libgnomeui/gnome-app-util.c:321
-msgid "no"
-msgstr "no"
-
-#: libgnomeui/gnome-app-util.c:356
-msgid " (yes or no)"
-msgstr " (yes 或 no)"
-
-#: libgnomeui/gnome-app-util.c:357
-msgid "  - OK? (yes or no)"
-msgstr " ─ 確定？ (yes 或 no)"
-
-#: libgnomeui/gnome-app-util.c:685
-msgid "Progress"
-msgstr "進度對話方塊"
-
-#: libgnomeui/gnome-app.c:153
-msgid "App ID"
-msgstr "程式識別碼"
-
-#: libgnomeui/gnome-app.c:154
-msgid "The application ID string"
-msgstr "程式的識別碼字串"
-
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "紀錄代碼"
@@ -1037,23 +919,23 @@ msgstr ""
 "表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果您想修改或查詢任何有關該 "
 "GtkEntry 的參數，可以透過本屬性進行。"
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "選取檔案"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "路徑"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "檔案的路徑"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "瀏覽(_B)..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr "開啟檔案選擇窗來選取檔案"
 
@@ -1155,6 +1037,46 @@ msgid ""
 "Some of your configuration settings may not work properly."
 msgstr "當載入或儲存 %s 的設定資料時發生錯誤。某些設定可能無法正常運作。"
 
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "GnomeHRef(鏈結元件)所啟動的 URL"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "文字"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "按鈕中顯示的文字"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "結束全球飢荒"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "鏈結顏色"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "顯示鏈結用的顏色"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "按下本按鈕後會顯示它所代表的網頁。"
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"當嘗試啟動預設的網頁瀏覽器時發生錯誤。\n"
+"請檢查在「首選應用程式」內的有關設定是否正確。 "
+
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1189,51 +1111,51 @@ msgstr ""
 "圖示選擇窗。如果您想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
 "行。"
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "沒有圖示"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "找不到水平容器元件，改用一般的選取檔案對話方塊"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "預覽"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "圖示選擇窗"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "本對話方塊可用來選取圖示。"
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "圖示選擇元件"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "請選取希望使用的圖示。"
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "圖示選擇元件"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "此按鈕可開啟用來選取圖示的視窗。"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "瀏覽"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "圖示的路徑"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1272,6 +1194,14 @@ msgstr "問題"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "訊息"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1316,9 +1246,110 @@ msgstr "%x(%a) %T"
 msgid "Sans 14"
 msgstr "AR PL KaitiM Big5 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "結束測試"
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "表格邊框"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "填充表格"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "無序號清單"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "序號清單"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "增加縮排"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "減少縮排"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "關於"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "準備使用的 X 畫面代號"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "畫面代號"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "GNOME 圖形界面函式庫"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "發生了非常嚴重的錯誤；無法顯示錯誤訊息對話方塊\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"程式記憶體區段錯誤！\n"
+"無法顯示錯誤訊息對話方塊\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"GNOME 作業階段總管 (進程編號 %d) 不正常終止，\n"
+"原因是出現嚴重的錯誤 (%s)。\n"
+"當關閉本對話方塊後，所有程式都會關閉，並且今次的作業階段也會終止。\n"
+"請在關閉本對話方塊前儲存所有資料。"
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"程式“%s”(進程編號 %d) 不正常終止，\n"
+"原因是出現嚴重的錯誤。\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "用法：gnome_segv2 程式名稱 訊號號碼\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "匯報錯誤報告"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "偵錯"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "請到 GNOME 程式錯誤網頁獲取更多資訊"
+
+#~ msgid "_Credits"
+#~ msgstr "鳴謝(_C)"
+
+#~ msgid "Exit the test"
+#~ msgstr "結束測試"
 
 #~ msgid "Unknown"
 #~ msgstr "不詳"
