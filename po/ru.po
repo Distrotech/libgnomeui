@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "POT-Creation-Date: 2003-01-08 16:38+0300\n"
-"PO-Revision-Date: 2003-01-08 16:46+0300\n"
+"PO-Revision-Date: 2003-01-18 14:10+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -171,7 +171,7 @@ msgstr "Управление сеансом"
 
 #: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
-msgstr "Отменить выход"
+msgstr "Отменить завершение сеанса"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
