@@ -22,7 +22,7 @@ libgnomeui_la_SOURCES = \
 	gnome-about.c			\
 	gnome-pixmap.c			\
 	gnome-properties.c		\
-	gnome-session.c			\
+	gnome-client.c			\
 	gnome-scores.c			\
 	gnome-stock.c			\
 	gtk-clock.c			\
@@ -42,7 +42,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-net.h			\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
-	gnome-session.h			\
+	gnome-client.h			\
 	gnome-scores.h			\
 	gnome-stock.h			\
 	gtk-clock.h			\
@@ -71,12 +71,14 @@ libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 ted_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(top_builddir)/libgnome/libgnome.la 		\
-	$(LIBGNOMEUI_LIBS) 
+	$(LIBGNOMEUI_LIBS) \
+	$(INTLLIBS)
 
 stock_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(top_builddir)/libgnome/libgnome.la 		\
-	$(LIBGNOMEUI_LIBS) 
+	$(LIBGNOMEUI_LIBS) \
+	$(INTLLIBS)
 
 dist-hook:
 	mkdir $(distdir)/pixmaps
