@@ -150,13 +150,13 @@ dnl AC_SUBST GTK+ version
 GTK_VERSION=`$PKG_CONFIG --modversion gtk+-2.0`
 AC_SUBST(GTK_VERSION)
 
-
-dnl Check for gdk_screen_get_number and gdk_get_default_screen
-pre_LIBS="$LIBS"
-LIBS="$LIBS $LIBGNOMEUI_LIBS"
-AC_CHECK_FUNCS(gdk_screen_get_number gdk_get_default_screen)
-LIBS="$pre_LIBS"
-
+AC_MSG_CHECKING([for gtk+ multihead support])
+if $PKG_CONFIG --atleast-version 2.1.0 gtk+-2.0; then
+   AC_DEFINE(HAVE_GTK_MULTIHEAD,,[gtk+ with multihead support found])
+   AC_MSG_RESULT(yes)
+else
+   AC_MSG_RESULT(no)
+fi
 
 AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
 libgnomeui. You can download the latest version from ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.0.x/]))
