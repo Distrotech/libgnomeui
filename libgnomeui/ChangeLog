@@ -1,3 +1,10 @@
+Wed Aug 12 18:33:15 EDT 1998 Gregory McLean <gregm@comstar.net>
+
+	* gnome-app-helper.c: Adjusted the GNOME_PIXMAP_FILENAME
+	stuff to do a gnome_pixmap_file() on the file name passed in
+	otherwise you wind up doing all sorts of silly stuff to maintain
+	good code.. Anyone have a better soultion?
+
 Wed Aug 12 14:48:24 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-stock-imlib.h: Made all gnome stock pixmaps 
