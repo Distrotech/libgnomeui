@@ -1,3 +1,7 @@
+Mon Sep 18 19:02:34 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dateedit.c: use the boilerplate macros and switch to GParam
+
 2000-09-16  Martin Baulig  <baulig@suse.de>
 
 	* gnome-gconf.c: Very quick hack just to make it compile.

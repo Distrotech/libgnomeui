@@ -29,6 +29,8 @@
  * Author: Miguel de Icaza
  */
 #include <config.h>
+#include "gnome-macros.h"
+
 #include <string.h>
 #include <stdlib.h> /* atoi */
 #include <ctype.h> /* isdigit */
@@ -67,12 +69,12 @@ enum {
 };
 
 enum {
-	ARG_0,
-	ARG_TIME,
-	ARG_FLAGS,
-	ARG_LOWER_HOUR,
-	ARG_UPPER_HOUR,
-	ARG_INITIAL_TIME
+	PARAM_0,
+	PARAM_TIME,
+	PARAM_DATEEDIT_FLAGS,
+	PARAM_LOWER_HOUR,
+	PARAM_UPPER_HOUR,
+	PARAM_INITIAL_TIME
 };
 
 static gint date_edit_signals [LAST_SIGNAL] = { 0 };
@@ -86,41 +88,25 @@ static void gnome_date_edit_forall       (GtkContainer       *container,
 					  gboolean	      include_internals,
 					  GtkCallback	      callback,
 					  gpointer	      callbabck_data);
-static void gnome_date_edit_set_arg      (GtkObject          *object,
-					  GtkArg             *arg,
-					  guint               arg_id);
-static void gnome_date_edit_get_arg      (GtkObject          *object,
-					  GtkArg             *arg,
-					  guint               arg_id);
-
-static GtkHBoxClass *parent_class;
+static void gnome_date_edit_set_param    (GObject            *object,
+					  guint               param_id,
+					  GValue             *value,
+					  GParamSpec         *pspec,
+					  const gchar        *trailer);
+static void gnome_date_edit_get_param    (GObject            *object,
+					  guint               param_id,
+					  GValue             *value,
+					  GParamSpec         *pspec,
+					  const gchar        *trailer);
 
 /**
  * gnome_date_edit_get_type:
  *
  * Returns the GtkType for the GnomeDateEdit widget
  */
-guint
-gnome_date_edit_get_type (void)
-{
-	static guint date_edit_type = 0;
-
-	if (!date_edit_type){
-		GtkTypeInfo date_edit_info = {
-			"GnomeDateEdit",
-			sizeof (GnomeDateEdit),
-			sizeof (GnomeDateEditClass),
-			(GtkClassInitFunc) gnome_date_edit_class_init,
-			(GtkObjectInitFunc) gnome_date_edit_init,
-			NULL,
-			NULL,
-		};
-
-		date_edit_type = gtk_type_unique (gtk_hbox_get_type (), &date_edit_info);
-	}
-	
-	return date_edit_type;
-}
+/* The following macro defines the get_type */
+GNOME_CLASS_BOILERPLATE(GnomeDateEdit, gnome_date_edit,
+			GtkHBox, gtk_hbox)
 
 static void
 hide_popup (GnomeDateEdit *gde)
@@ -369,49 +355,86 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 
 	object_class = (GtkObjectClass*) class;
 
-	parent_class = gtk_type_class (gtk_hbox_get_type ());
-
-	gtk_object_add_arg_type("GnomeDateEdit::time",
-				GTK_TYPE_ULONG,
-				GTK_ARG_READWRITE,
-				ARG_TIME);
-	gtk_object_add_arg_type("GnomeDateEdit::flags",
-				GTK_TYPE_INT,
-				GTK_ARG_READWRITE,
-				ARG_FLAGS);
-	gtk_object_add_arg_type("GnomeDateEdit::lower_hour",
-				GTK_TYPE_INT,
-				GTK_ARG_READWRITE,
-				ARG_LOWER_HOUR);
-	gtk_object_add_arg_type("GnomeDateEdit::upper_hour",
-				GTK_TYPE_INT,
-				GTK_ARG_READWRITE,
-				ARG_UPPER_HOUR);
-	gtk_object_add_arg_type("GnomeDateEdit::initial_time",
-				GTK_TYPE_ULONG,
-				GTK_ARG_READABLE,
-				ARG_INITIAL_TIME);
+	g_object_class_install_param (gobject_class,
+				      PARAM_TIME,
+				      g_param_spec_ulong ("time",
+							  _("Time"),
+							  _("The time currently"
+							    "selected"),
+							  0, G_MAXULONG,
+							  0,
+						          (G_PARAM_READABLE |
+							   G_PARAM_WRITABLE)));
+	/* FIXME: Not sure G_TYPE_FLAGS is right here, perhaps we
+	 * need a new type, Also think of a better name then "dateedit_flags" */
+	g_object_class_install_param (gobject_class,
+				      PARAM_DATEEDIT_FLAGS,
+				      g_param_spec_flags ("dateedit_flags",
+							  _("DateEdit Flags"),
+							  _("Flags for how "
+							    "DateEdit looks"),
+							  G_TYPE_FLAGS,
+							  GNOME_DATE_EDIT_SHOW_TIME,
+						          (G_PARAM_READABLE |
+							   G_PARAM_WRITABLE)));
+	g_object_class_install_param (gobject_class,
+				      PARAM_LOWER_HOUR,
+				      g_param_spec_int ("lower_hour",
+							_("Lower Hour"),
+							_("Lower hour in "
+							  "the time popup "
+							  "selector"),
+							0, 24,
+							7,
+							(G_PARAM_READABLE |
+							 G_PARAM_WRITABLE)));
+	g_object_class_install_param (gobject_class,
+				      PARAM_UPPER_HOUR,
+				      g_param_spec_int ("upper_hour",
+							_("Upper Hour"),
+							_("Upper hour in "
+							  "the time popup "
+							  "selector"),
+							0, 24,
+							19,
+							(G_PARAM_READABLE |
+							 G_PARAM_WRITABLE)));
+	g_object_class_install_param (gobject_class,
+				      PARAM_INITIAL_TIME,
+				      g_param_spec_ulong ("initial_time",
+							  _("Initial Time"),
+							  _("The initial time"),
+							  0, G_MAXULONG,
+							  0,
+						          (G_PARAM_READABLE |
+							   G_PARAM_WRITABLE)));
 	
 	date_edit_signals [TIME_CHANGED] =
 		gtk_signal_new ("time_changed",
 				GTK_RUN_FIRST, GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDateEditClass, time_changed),
-				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+				GTK_SIGNAL_OFFSET (GnomeDateEditClass,
+						   time_changed),
+				gtk_signal_default_marshaller,
+				GTK_TYPE_NONE, 0);
 	
 	date_edit_signals [DATE_CHANGED] =
 		gtk_signal_new ("date_changed",
 				GTK_RUN_FIRST, GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDateEditClass, date_changed),
-				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+				GTK_SIGNAL_OFFSET (GnomeDateEditClass,
+						   date_changed),
+				gtk_signal_default_marshaller,
+				GTK_TYPE_NONE, 0);
 	
-	gtk_object_class_add_signals (object_class, date_edit_signals, LAST_SIGNAL);
+	gtk_object_class_add_signals (object_class, date_edit_signals,
+				      LAST_SIGNAL);
 
 	container_class->forall = gnome_date_edit_forall;
 
 	object_class->destroy = gnome_date_edit_destroy;
+
 	gobject_class->finalize = gnome_date_edit_finalize;
-	object_class->get_arg = gnome_date_edit_get_arg;
-	object_class->set_arg = gnome_date_edit_set_arg;
+	gobject_class->get_param = gnome_date_edit_get_param;
+	gobject_class->set_param = gnome_date_edit_set_param;
 
 	class->date_changed = NULL;
 	class->time_changed = NULL;
@@ -442,8 +465,7 @@ gnome_date_edit_destroy (GtkObject *object)
 		gtk_widget_destroy (gde->_priv->cal_popup);
 	gde->_priv->cal_popup = NULL;
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -459,8 +481,7 @@ gnome_date_edit_finalize (GObject *object)
 	g_free(gde->_priv);
 	gde->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
@@ -475,34 +496,38 @@ gnome_date_edit_forall (GtkContainer *container, gboolean include_internals,
 	 * poked.
 	 */
 	if (include_internals)
-		if (GTK_CONTAINER_CLASS (parent_class)->forall)
-			(* GTK_CONTAINER_CLASS (parent_class)->forall) (container,
-									include_internals,
-									callback,
-									callback_data);
+		GNOME_CALL_PARENT_HANDLER (GTK_CONTAINER_CLASS, forall,
+					   (container,
+					    include_internals,
+					    callback,
+					    callback_data));
 }
 
 static void
-gnome_date_edit_set_arg (GtkObject *object,
-			 GtkArg *arg,
-			 guint arg_id)
+gnome_date_edit_set_param (GObject            *object,
+			   guint               param_id,
+			   GValue             *value,
+			   GParamSpec         *pspec,
+			   const gchar        *trailer)
 {
 	GnomeDateEdit *self;
 
 	self = GNOME_DATE_EDIT (object);
 
-	switch (arg_id) {
-	case ARG_TIME:
-		gnome_date_edit_set_time(self, GTK_VALUE_ULONG(*arg));
+	switch (param_id) {
+	case PARAM_TIME:
+		gnome_date_edit_set_time(self, g_value_get_ulong (value));
 		break;
-	case ARG_FLAGS:
-		gnome_date_edit_set_flags(self, GTK_VALUE_INT(*arg));
+	case PARAM_DATEEDIT_FLAGS:
+		gnome_date_edit_set_flags(self, g_value_get_flags (value));
 		break;
-	case ARG_LOWER_HOUR:
-		gnome_date_edit_set_popup_range(self, GTK_VALUE_INT(*arg), self->_priv->upper_hour);
+	case PARAM_LOWER_HOUR:
+		gnome_date_edit_set_popup_range(self, g_value_get_int (value),
+						self->_priv->upper_hour);
 		break;
-	case ARG_UPPER_HOUR:
-		gnome_date_edit_set_popup_range(self, self->_priv->lower_hour, GTK_VALUE_INT(*arg));
+	case PARAM_UPPER_HOUR:
+		gnome_date_edit_set_popup_range(self, self->_priv->lower_hour,
+						g_value_get_int (value));
 		break;
 
 	default:
@@ -511,31 +536,32 @@ gnome_date_edit_set_arg (GtkObject *object,
 }
 
 static void
-gnome_date_edit_get_arg (GtkObject *object,
-			 GtkArg *arg,
-			 guint arg_id)
+gnome_date_edit_get_param (GObject            *object,
+			   guint               param_id,
+			   GValue             *value,
+			   GParamSpec         *pspec,
+			   const gchar        *trailer)
 {
 	GnomeDateEdit *self;
 
 	self = GNOME_DATE_EDIT (object);
 
-
-	switch (arg_id) {
-	case ARG_TIME:
-		GTK_VALUE_ULONG(*arg) =
-			gnome_date_edit_get_time(self);
+	switch (param_id) {
+	case PARAM_TIME:
+		g_value_set_ulong (value,
+				   gnome_date_edit_get_time(self));
 		break;
-	case ARG_FLAGS:
-		GTK_VALUE_INT(*arg) = self->_priv->flags;
+	case PARAM_DATEEDIT_FLAGS:
+		g_value_set_flags (value, self->_priv->flags);
 		break;
-	case ARG_LOWER_HOUR:
-		GTK_VALUE_INT(*arg) = self->_priv->lower_hour;
+	case PARAM_LOWER_HOUR:
+		g_value_set_int (value, self->_priv->lower_hour);
 		break;
-	case ARG_UPPER_HOUR:
-		GTK_VALUE_INT(*arg) = self->_priv->upper_hour;
+	case PARAM_UPPER_HOUR:
+		g_value_set_int (value, self->_priv->upper_hour);
 		break;
-	case ARG_INITIAL_TIME:
-		GTK_VALUE_ULONG(*arg) = self->_priv->initial_time;
+	case PARAM_INITIAL_TIME:
+		g_value_set_ulong (value, self->_priv->initial_time);
 		break;
 	default:
 		break;
@@ -592,7 +618,9 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 void
 gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour)
 {
-        g_return_if_fail(gde != NULL);
+        g_return_if_fail (gde != NULL);
+	g_return_if_fail (low_hour >= 0 && low_hour <= 24);
+	g_return_if_fail (up_hour >= 0 && up_hour <= 24);
 
 	gde->_priv->lower_hour = low_hour;
 	gde->_priv->upper_hour = up_hour;
