@@ -27,8 +27,6 @@
 
 #include "gnome-icon-theme.h"
 
-typedef 
-
 typedef struct _GtkIconThemePrivate GnomeIconThemePrivate;
 
 struct _GtkIconThemePrivate

@@ -1,5 +1,10 @@
 2003-12-18  Alexander Larsson  <alexl@redhat.com>
 
+	* libgnomeui/gnome-icon-theme.c:
+	Fix typo that broke build
+
+2003-12-18  Alexander Larsson  <alexl@redhat.com>
+
 	* libgnomeui/gnome-icon-lookup.c: 
 	* libgnomeui/gnome-icon-theme.[ch]:
 	Remove/Internalize some new api I accidentally added
