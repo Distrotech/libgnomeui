@@ -1,3 +1,8 @@
+1999-01-27  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app-helper.[ch]: Add gnome_app_fill_{menu,toolbar}_with_data
+	functions to match gnome_app_create...with_data versions.
+
 1999-01-27  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (INCLUDES): Use G_LOG_DOMAIN of "GnomeUI".

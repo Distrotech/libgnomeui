@@ -533,6 +533,14 @@ void gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 			  GtkAccelGroup *accel_group,
 			  gboolean insert_shortcuts, gint pos);
 
+/* Same as gnome_app_fill_menu, but sets all the user data pointers to
+ * the specified value.
+ */
+void gnome_app_fill_menu_with_data (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
+				    GtkAccelGroup *accel_group,
+				    gboolean insert_shortcuts, gint pos,
+				    gpointer user_data);
+
 /* Fills the specified menu shell with items created from the specified
  * info, inserting them from item no. pos on and using the specified
  * builder data -- this is intended for language bindings.  If the
@@ -582,6 +590,12 @@ void gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIB
  * NULL, then the items' accelerator keys are put into it.
  */
 void gnome_app_fill_toolbar (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GtkAccelGroup *accel_group);
+
+/* Same as gnome_app_fill_toolbar, but sets all the user data pointers
+ * to the specified value.
+ */
+void gnome_app_fill_toolbar_with_data (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
+				       GtkAccelGroup *accel_group, gpointer user_data);
 
 /* Fills the specified toolbar with buttons created from the specified info, using the specified
  * builder data -- this is intended for language bindings.  If accel_group is not NULL, then the

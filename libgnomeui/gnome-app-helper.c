@@ -1015,6 +1015,41 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 
 /**
+ * gnome_app_fill_menu_with_data
+ * @menu_shell:
+ * @uiinfo:
+ * @accel_group:
+ * @insert_shortcuts:
+ * @pos:
+ * @user_data:
+ *
+ * Description:
+ **/
+
+void
+gnome_app_fill_menu_with_data (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
+			       GtkAccelGroup *accel_group, gboolean insert_shortcuts, 
+			       gint pos, gpointer user_data)
+{
+	GnomeUIBuilderData uibdata;
+
+	g_return_if_fail (menu_shell != NULL);
+	g_return_if_fail (GTK_IS_MENU_SHELL (menu_shell));
+	g_return_if_fail (uiinfo != NULL);
+
+	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.data = user_data;
+	uibdata.is_interp = FALSE;
+	uibdata.relay_func = NULL;
+	uibdata.destroy_func = NULL;
+
+	gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata,
+				    accel_group, insert_shortcuts,
+				    pos);
+}
+
+
+/**
  * gnome_app_fill_menu_custom
  * @menu_shell:
  * @uiinfo:
@@ -1199,8 +1234,8 @@ gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
  **/
 
 void
-gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, 
-		gpointer user_data)
+gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo,
+				  gpointer user_data)
 {
 	GnomeUIBuilderData uibdata;
 
@@ -1402,6 +1437,36 @@ gnome_app_fill_toolbar (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 
 	uibdata.connect_func = do_ui_signal_connect;
 	uibdata.data = NULL;
+	uibdata.is_interp = FALSE;
+	uibdata.relay_func = NULL;
+	uibdata.destroy_func = NULL;
+
+	gnome_app_fill_toolbar_custom (toolbar, uiinfo, &uibdata, accel_group);
+}
+
+
+/**
+ * gnome_app_fill_toolbar_with_data
+ * @toolbar:
+ * @uiinfo:
+ * @accel_group:
+ * @user_data:
+ *
+ * Description:
+ **/
+
+void
+gnome_app_fill_toolbar_with_data (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, 
+				  GtkAccelGroup *accel_group, gpointer user_data)
+{
+	GnomeUIBuilderData uibdata;
+
+	g_return_if_fail (toolbar != NULL);
+	g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
+	g_return_if_fail (uiinfo != NULL);
+
+	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.data = user_data;
 	uibdata.is_interp = FALSE;
 	uibdata.relay_func = NULL;
 	uibdata.destroy_func = NULL;
