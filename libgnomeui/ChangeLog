@@ -1,3 +1,12 @@
+1999-02-11 Sergey Panov <sipan@mit.edu>
+
+        * gnome-app-helper.c(install_menuitem_hint_to_statusbar,
+	install_menuitem_hint_to_appbar): hints were not translated
+        at all. Now we look for them first using gettext then, if failed,
+        with dgettext.
+        (create_menu_item): simplified Miguels fix for lalels. Now there
+        is no special cases, but will use the same procedure as for hints.  
+
 1999-02-11 The Rasterman <raster@redhat.com>
 
 	* gnome-winhints.h: added WIN_HINTS_DO_NOT_COVER to hints enum

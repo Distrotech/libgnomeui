@@ -473,6 +473,8 @@ remove_hint_from_statusbar(GtkWidget* menuitem, gpointer data)
 static void
 install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
 {
+  char *i8l_hint;
+
   g_return_if_fail (uiinfo != NULL);
   g_return_if_fail (uiinfo->widget != NULL);
   g_return_if_fail (GTK_IS_MENU_ITEM(uiinfo->widget));
@@ -482,9 +484,16 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
 
   if (uiinfo->hint)
     {
+#ifdef ENABLE_NLS
+                i8l_hint = gettext (uiinfo->hint);
+		if ( i8l_hint == uiinfo->hint )
+			i8l_hint = dgettext (PACKAGE, uiinfo->hint);
+#else
+		i8l_hint = uiinfo->hint;
+#endif
       gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
                            "apphelper_statusbar_hint",
-                           uiinfo->hint);
+                           i8l_hint);
 
       gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
                           "select",
@@ -569,6 +578,7 @@ remove_hint_from_appbar(GtkWidget* menuitem, gpointer data)
 static void
 install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
 {
+  char *i8l_hint;
   g_return_if_fail (uiinfo != NULL);
   g_return_if_fail (uiinfo->widget != NULL);
   g_return_if_fail (GTK_IS_MENU_ITEM(uiinfo->widget));
@@ -578,9 +588,16 @@ install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
 
   if (uiinfo->hint)
     {
+#ifdef ENABLE_NLS
+                i8l_hint = gettext (uiinfo->hint);
+		if ( i8l_hint == uiinfo->hint )
+			i8l_hint = dgettext (PACKAGE, uiinfo->hint);
+#else
+		i8l_hint = uiinfo->hint;
+#endif
       gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
                            "apphelper_appbar_hint",
-                           uiinfo->hint);
+                           i8l_hint);
 
       gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
                           "select",
@@ -737,26 +754,13 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	GtkWidget *pixmap;
 	char *i8l_label;
 	guint keyval;
-	gboolean use_gnome_libs_catalog;
 	int type;
 	
 	/* Translate configurable menu items to normal menu items. */
 
-	if (uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE) {
-		int type = uiinfo->accelerator_key;
-		
+	if (uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE)
 	        gnome_app_ui_configure_configurable( uiinfo );
 
-		if (type == GNOME_APP_CONFIGURABLE_ITEM_NEW)
-			use_gnome_libs_catalog = 0;
-		else
-			use_gnome_libs_catalog = 1;
-	} else
-		use_gnome_libs_catalog = 0;
-
-	if (uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK)
-		use_gnome_libs_catalog = 1;
-	
 	/* Create the menu item */
 
 	switch (uiinfo->type) {
@@ -823,10 +827,9 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	else
 	{
 #ifdef ENABLE_NLS
-		if (use_gnome_libs_catalog)
+	        i8l_label = gettext (uiinfo->label);
+		if (i8l_label==uiinfo->label)
 			i8l_label = dgettext (PACKAGE, uiinfo->label);
-		else
-			i8l_label = gettext (uiinfo->label);
 #else
 		i8l_label = uiinfo->label;
 #endif
