@@ -24,7 +24,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
-#include "libgnome/libgnomeP.h"
+#include <config.h>
+#include "libgnome/libgnome.h"
 #include "gtkcalendar.h"
 #include "libgnome/lib_date.h"
 
@@ -887,7 +888,7 @@ gtk_calendar_paint_day_names (GtkWidget *widget)
   int day_wid_sep;
   int str_width;
   static char *dayinletters[] =
-  {_("Su"), _("Mo"), _("Tu"), _("We"), _("Th"), _("Fr"), _("Sa")};
+  {N_("Su"), N_("Mo"), N_("Tu"), N_("We"), N_("Th"), N_("Fr"), N_("Sa")};
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GTK_IS_CALENDAR (widget));
