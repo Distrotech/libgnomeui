@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
 "POT-Creation-Date: 2003-06-08 18:16+0200\n"
-"PO-Revision-Date: 2003-06-08 18:23+0200\n"
+"PO-Revision-Date: 2003-06-08 18:28+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -822,11 +822,11 @@ msgstr "El logo del color de fons s'ha definit"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr "Mostra Finalitzar"
+msgstr "Mostra Finalitza"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Mostra el botó «Finalitzar» en comptes del botó «Següent»"
+msgstr "Mostra el botó «Finalitza» en comptes del botó «Següent»"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
