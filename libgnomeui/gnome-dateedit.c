@@ -108,16 +108,6 @@ GNOME_CLASS_BOILERPLATE(GnomeDateEdit, gnome_date_edit,
 			GtkHBox, GTK_TYPE_HBOX)
 
 static void
-grab_focus (GtkWidget *widget)
-{
-	GnomeDateEdit *gde = GNOME_DATE_EDIT (widget);
-	
-	GTK_WIDGET_CLASS (parent_class)->grab_focus (widget);
-	
-	gtk_widget_grab_focus (gde->_priv->date_entry);
-}
-
-static void
 hide_popup (GnomeDateEdit *gde)
 {
 	gtk_widget_hide (gde->_priv->cal_popup);
@@ -456,8 +446,6 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 
 	object_class->destroy = gnome_date_edit_destroy;
 
-	widget_class->grab_focus = grab_focus;
-	
 	gobject_class->finalize = gnome_date_edit_finalize;
 	gobject_class->get_property = gnome_date_edit_get_property;
 	gobject_class->set_property = gnome_date_edit_set_property;
@@ -547,8 +535,6 @@ gnome_date_edit_instance_init (GnomeDateEdit *gde)
 	gde->_priv->upper_hour = 19;
 	gde->_priv->flags = GNOME_DATE_EDIT_SHOW_TIME;
 	create_children (gde);
-
-	GTK_WIDGET_SET_FLAGS (gde, GTK_CAN_FOCUS);
 }
 
 static void
