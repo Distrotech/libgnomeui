@@ -53,8 +53,7 @@
 #include "gnome-dock.h"
 #include "gnome-init.h"
 #include "gnome-helpsys.h"
-#include "gnome-app-util.h"
-#include "gnome-app-helper.h"
+#include "gnome-window.h"
 
 #include "gnome-app.h"
 
