@@ -57,8 +57,6 @@ typedef enum
   GTK_CALENDAR_COLOR_NORMAL_DAY
 } GtkCalendarColor;
 
-
-
 typedef struct _GtkCalendar            GtkCalendar;
 typedef struct _GtkCalendarClass       GtkCalendarClass;
 
@@ -69,7 +67,13 @@ struct _GtkCalendar
   GdkWindow *header_win, *day_name_win, *main_win;
   gint header_h, day_name_h, main_h;
 
-  gint month, year;
+  gint month; 
+  gint year;
+  gint selected_day;
+
+  gint day_month[6][7];
+  gint day[6][7];
+
   gint num_marked_dates;
   gint marked_date[31];
   GtkCalendarDisplayOptions  display_flags;
@@ -100,11 +104,11 @@ struct _GtkCalendar
   gint day_width;
   GdkRectangle header_button[4];
   GdkRectangle rect_days[6][7];
-  gint days[6][7];
 
   gint highlight_row;
   gint highlight_col;
-  gint selected_day;
+
+  gint max_char_width;
 };
 
 struct _GtkCalendarClass
@@ -113,8 +117,12 @@ struct _GtkCalendarClass
 
   /* Signal handlers */
   void (* gtk_calendar_month_changed) (GtkCalendarClass *);
-  void (* gtk_calendar_year_changed) (GtkCalendarClass *);
   void (* gtk_calendar_day_selected) (GtkCalendarClass *);
+  void (* gtk_calendar_day_selected_double_click) (GtkCalendarClass *);
+  void (* gtk_calendar_prev_month) (GtkCalendarClass *);
+  void (* gtk_calendar_next_month) (GtkCalendarClass *);
+  void (* gtk_calendar_prev_year) (GtkCalendarClass *);
+  void (* gtk_calendar_next_year) (GtkCalendarClass *);
  
 };
 
@@ -130,12 +138,14 @@ gint       gtk_calendar_mark_day     	(GtkCalendar *calendar, gint day);
 gint       gtk_calendar_unmark_day   	(GtkCalendar *calendar, gint day);
 void       gtk_calendar_clear_marks  	(GtkCalendar *calendar);
 
+/* Not yet implemented:
 void       gtk_calendar_set_font      	(GtkCalendar *calendar, 
                                  	 GtkCalendarFont type, 
                                  	 GdkFont *font);
 void       gtk_calendar_set_color     	(GtkCalendar *calendar, 
                                  	 GtkCalendarColor type, 
                                 	 GdkColor *color);
+					 */
 
 void	   gtk_calendar_display_options (GtkCalendar *calendar,
                                          GtkCalendarDisplayOptions flags);

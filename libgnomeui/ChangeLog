@@ -1,3 +1,7 @@
+1998-04-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtkcalendar.[ch]: Update to latest version from gcalendar cvs module.
+
 1998-04-01  Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
 	* gtkcalendar.c (gtk_calendar_select_month,
