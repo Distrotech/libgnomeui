@@ -123,7 +123,7 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
 			       "x",  (double) x + gil->icon_width/2,
 			       "y",  (double) y,
-			       "anchor", GTK_ANCHOR_N,
+			       "anchor", GTK_ANCHOR_CENTER,
 			       NULL);
 	gnome_icon_text_item_setxy (
 		icon->text, x,

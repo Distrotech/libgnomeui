@@ -104,7 +104,7 @@ static void get_gnome_entry_result (GtkWidget * w, void *x)
 }
 
 /* get text of an gnome file entry widget */
-void get_gnome_file_entry_result (GtkWidget * w, void *x)
+static void get_gnome_file_entry_result (GtkWidget * w, void *x)
 {
     gchar **result = (gchar **) x;
     GnomeFileEntry *gentry;
@@ -115,7 +115,7 @@ void get_gnome_file_entry_result (GtkWidget * w, void *x)
 }
 
 /* get text of an gnome number entry widget */
-void get_gnome_number_entry_result (GtkWidget * w, void *x)
+static void get_gnome_number_entry_result (GtkWidget * w, void *x)
 {
     gchar **result = (gchar **) x;
     GnomeNumberEntry *gentry;
