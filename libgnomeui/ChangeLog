@@ -1,3 +1,37 @@
+1999-03-29  Owen Taylor  <otaylor@redhat.com>
+
+	[ Fix applied until Raster gets back and we find a better
+	  solution - Miguel ]
+	
+	* gnome-pixmap.c (finish_load): Temporary fix.
+
+	The problems people have been having with *Bad Window*
+	errors and pixmap themes seem to be occurring because
+	of mistakes in the way that gnome-pixmap is handling
+	Imlib images. (Well, actually, they are occurring because
+	of mistakes in the design of imlib...)
+	
+	To be specific, gnome-pixmap widget calls 
+	gdk_imlib_move_pixmap() and gdk_imlib_move_mask(), then
+	gdk_imlib_destroy_image(). 
+	
+	If no caching is enabled, then this works pretty
+	much as expected - the pixmaps and masks are dissociated
+	from the image and the imlib data structures are cleaned
+	up.
+	
+	If caching is enabled, then bad things happen. move_pixmap()
+	and move_mask() leave the pixmaps in the cache; the
+	destroy_image() drops the refcount of the pixmaps to 
+	zero, and when the cache gets full, the pixmaps are
+	destroyed.
+	
+	The following patch fixes things up, but is a rather
+	inefficient, since it puts every pixmap in GNOME through
+	a extra copy. I'm not really sure how to do this
+	better - I'll ask Raster about it when he gets back
+	from Germany. 
+
 1999-03-28  Felix Bellaby <felix@pooh.u-net.com>
 	
 	* gnome-client.c (save_yourself_callback): timeout wait for pointer

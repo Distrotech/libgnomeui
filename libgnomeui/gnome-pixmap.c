@@ -617,8 +617,8 @@ finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int
 	else
 		gdk_imlib_render (im, im->rgb_width, im->rgb_height);
 
-	gpixmap->pixmap = gdk_imlib_move_image (im);
-	gpixmap->mask = gdk_imlib_move_mask (im);
+	gpixmap->pixmap = gdk_imlib_copy_image (im);
+	gpixmap->mask = gdk_imlib_copy_mask (im);
 
 	if (destroy)
 		gdk_imlib_destroy_image (im);
