@@ -1,5 +1,10 @@
 2001-04-26  Martin Baulig  <baulig@suse.de>
 
+	* gnome-file-selector-dialog.h: Removed; this file was never
+	really used.
+
+2001-04-26  Martin Baulig  <baulig@suse.de>
+
 	* gnome-app-util.[ch], gnome-dialog-util.[ch], gnome-dialog.[ch],
 	gnome-messagebox.[ch], gnome-propertybox.[ch], gnome-scores.[ch]:
 	Removed; they are already in libcompat, but now all code which was
