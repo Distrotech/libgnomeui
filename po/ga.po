@@ -1,5 +1,5 @@
 # Irish translation of libgnomeui
-# Copyright (C) 2003 Free Software Foundation, Inc.
+# Copyright (C) 2003,2004 Free Software Foundation, Inc.
 # Paul Duffy <dubhthach@zion.nuigalway.ie>, 2003.
 # Alastair McKinstry <mckinstry@computer.org>, 2004.
 # 
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-03-15 23:38+0100\n"
-"PO-Revision-Date: 2004-02-02 14:41+0000\n"
+"PO-Revision-Date: 2004-03-21 14:41+0000\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -197,7 +197,7 @@ msgstr "_Cluiche"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
-msgstr "C_uidiú"
+msgstr "Cab_hair"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -1372,20 +1372,20 @@ msgstr ""
 msgid "_Debug"
 msgstr ""
 
-#~ msgid "Color Selector"
-#~ msgstr "Roghnóir Dath"
+msgid "Color Selector"
+msgstr "Roghnóir Dath"
 
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Tá an feidhclár \"%s\" (proseáil %d) taréis tuairt a dhéanamh\n"
-#~ "mar bhí earraid marfach.\n"
-#~ "(%s)"
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Tá an feidhclár \"%s\" (proseáil %d) taréis tuairt a dhéanamh\n"
+"mar bhí earraid marfach.\n"
+"(%s)"
 
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ealu as an scrúdu"
+msgid "Exit the test"
+msgstr "Ealu as an scrúdu"
