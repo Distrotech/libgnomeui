@@ -52,6 +52,8 @@
 #define GNOME_KEY_MOD_COPY	        (GDK_CONTROL_MASK)
 #define GNOME_KEY_NAME_PASTE 	        'V'
 #define GNOME_KEY_MOD_PASTE 	        (GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_SELECT_ALL       0
+#define GNOME_KEY_MOD_SELECT_ALL        (0)
 #define GNOME_KEY_NAME_CLEAR 	        0
 #define GNOME_KEY_MOD_CLEAR 	        (0)
 
@@ -60,8 +62,8 @@
 #define GNOME_KEY_NAME_REDO	        'R'
 #define GNOME_KEY_MOD_REDO	        (GDK_CONTROL_MASK)
 
-#define GNOME_KEY_NAME_SAVE	        GDK_F2
-#define GNOME_KEY_MOD_SAVE	        (0)
+#define GNOME_KEY_NAME_SAVE	        'S'
+#define GNOME_KEY_MOD_SAVE	        (GDK_CONTROL_MASK)
 #define GNOME_KEY_NAME_OPEN	        GDK_F3
 #define GNOME_KEY_MOD_OPEN	        (0)
 #define GNOME_KEY_NAME_SAVE_AS	        0
@@ -82,4 +84,9 @@
 #define GNOME_KEY_NAME_REPLACE          GDK_F7
 #define GNOME_KEY_MOD_REPLACE           (0)
 
+#define GNOME_KEY_NAME_NEW_WINDOW       0
+#define GNOME_KEY_MOD_NEW_WINDOW        (0)
+
+#define GNOME_KEY_NAME_CLOSE_WINDOW     0
+#define GNOME_KEY_MOD_CLOSE_WINDOW      (0)
 #endif

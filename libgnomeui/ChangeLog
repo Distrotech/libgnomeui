@@ -1,3 +1,16 @@
+1999-01-08  Nat Friedman  <nat@nat.org>
+
+	* gnome-app-helper.h (GNOMEUIINFO_MENU_SELECT_ALL_ITEM): New entry.
+
+	* gnome-uidefs.h (GNOME_KEY_NAME_SELECT_ALL): New entry.
+
+	* gnome-app-helper.h (GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM): New entry.
+	(GNOMEUIINFO_MENU_NEW_WINDOW_ITEM): Likewise.
+
+	* gnome-uidefs.h (GNOME_KEY_MOD_SAVE): Changed it back to C-s.
+	(GNOME_KEY_NAME_NEW_WINDOW): New entries.
+	(GNOME_KEY_NAME_CLOSE_WINDOW): Likewise.
+
 Fri Jan 08 17:10:49 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-init.c: removed all the autosync stuff
@@ -33,6 +46,7 @@ Fri Jan 08 02:35:24 1999  George Lebl  <jirka@5z.com>
 	  it was setting the requisition to handle size instead of just
 	  adding the handle size ...
 
+>>>>>>> 1.795
 1999-01-08  Nat Friedman  <nat@nat.org>
 
 	* gnome-appbar.c (gnome_appbar_construct): Moved the status bar to

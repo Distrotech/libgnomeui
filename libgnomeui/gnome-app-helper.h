@@ -285,6 +285,13 @@ typedef struct {
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,                   \
           GNOME_KEY_NAME_PASTE, GNOME_KEY_MOD_PASTE, NULL }
 
+#define GNOMEUIINFO_MENU_SELECT_ALL_ITEM(cb, data)                          \
+        { GNOME_APP_UI_ITEM, N_("_Select All"),                             \
+          N_("Select everything"),                                          \
+          cb, (gpointer)(data), NULL,                                       \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,                   \
+          GNOME_KEY_NAME_SELECT_ALL, GNOME_KEY_MOD_SELECT_ALL, NULL }
+
 #define GNOMEUIINFO_MENU_CLEAR_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM, N_("C_lear"), N_("Clear the selection"),       \
           cb, (gpointer)(data), NULL,                                       \
@@ -310,7 +317,7 @@ typedef struct {
           GNOME_KEY_NAME_FIND, GNOME_KEY_MOD_FIND, NULL }
 
 #define GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(cb, data)                          \
-        { GNOME_APP_UI_ITEM, N_("_Find Again"),                             \
+        { GNOME_APP_UI_ITEM, N_("Find _Again"),                             \
           N_("Search again for the same string"),                           \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,                  \
@@ -340,11 +347,28 @@ typedef struct {
           0,  (GdkModifierType) 0, NULL }
 
 /*
+ * The Windows menu
+ */
+#define GNOMEUIINFO_MENU_NEW_WINDOW_ITEM(cb, data)                          \
+        { GNOME_APP_UI_ITEM, N_("_New Window..."),                          \
+          N_("Create a new window"),                                        \
+          cb, (gpointer)(data),                                             \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,              \
+          GNOME_KEY_NAME_NEW_WINDOW, GNOME_KEY_MOD_NEW_WINDOW, NULL }
+
+#define GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(cb, data)                        \
+        { GNOME_APP_UI_ITEM, N_("_Close Window..."),                        \
+          N_("Close the current window"),                                   \
+          cb, (gpointer)(data),                                             \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,              \
+          GNOME_KEY_NAME_CLOSE_WINDOW, GNOME_KEY_MOD_CLOSE_WINDOW, NULL }
+
+/*
  * And the "Help" menu
  */
 #define GNOMEUIINFO_MENU_ABOUT_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM, N_("_About..."),                               \
-          N_("About this application"), cb, (gpointer)(data),           \
+          N_("About this application"), cb, (gpointer)(data),               \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,             \
           0,  (GdkModifierType) 0, NULL }
 	  
