@@ -1,3 +1,8 @@
+2000-01-11  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-gconf.c (gnome_gconf_gnome_color_picker_get): added new
+	function.  Home for food.
+
 2000-01-11  Havoc Pennington  <hp@redhat.com>
 
 	* gnome-messagebox.c (gnome_message_box_new): Use human readable
