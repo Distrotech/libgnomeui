@@ -1,5 +1,7 @@
 2001-06-12  Martin Baulig  <baulig@suse.de>
 
+	* libgnomeui-2.0.pc.in: Depend on libgnomecanvas-2.0, but not on gconf-2.0.
+
 	* gnome-cursors.c (build_cursor_table): Commented this out.
 	(FIXME: gnome-cursors.[ch] will go away, fix all code which is still
 	using it).
