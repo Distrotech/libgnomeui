@@ -1,3 +1,9 @@
+2002-06-06  Anders Carlsson  <andersca@gnu.org>
+
+	* configure.in:
+	* libgnomeui/Makefile.am:
+	Change localedir definition. (#83633, Hidetoshi Tajima)
+	
 2002-06-05  Bastien Nocera  <hadess@hadess.net>
 
 	* libgnomeui/gnome-app-helper.h: fix macro problem when using
