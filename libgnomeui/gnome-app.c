@@ -92,31 +92,19 @@ gnome_app_get_type (void)
 }
 
 static void
-gnome_app_add (GtkContainer *container, GtkWidget *widget)
-{
-	GnomeApp *gnome_app = GNOME_APP (container);
-
-	gnome_app_set_contents (gnome_app, widget);
-}
-
-static void
 gnome_app_class_init (GnomeAppClass *class)
 {
 	GtkObjectClass *object_class;
 	GtkWidgetClass *widget_class;
-	GtkContainerClass *container_class;
 	
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
-	container_class = (GtkContainerClass *) class;
 
 	parent_class = gtk_type_class (gtk_window_get_type ());
 
 	object_class->destroy = gnome_app_destroy;
 
 	widget_class->realize = gnome_app_realize;
-
-	container_class->add = gnome_app_add;
 }
 
 static void
