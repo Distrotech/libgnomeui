@@ -66,6 +66,10 @@ libgnomeui_2_la_SOURCES = \
 	gnome-ice.c			\
 	gnome-i18nP.h			\
 	gnome-messagebox.c		\
+	gnome-mdi.c			\
+	gnome-mdi-child.c		\
+	gnome-mdi-generic-child.c	\
+	gnome-mdi-session.c		\
 	gnome-pixmap.c			\
 	gnome-pixmap-entry.c		\
 	gnome-propertybox.c		\
@@ -104,6 +108,10 @@ gnome_headers = \
 	gnome-icon-sel.h		\
 	gnome-macros.h			\
 	gnome-messagebox.h		\
+	gnome-mdi.h			\
+	gnome-mdi-child.h		\
+	gnome-mdi-generic-child.h	\
+	gnome-mdi-session.h		\
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
 	gnome-propertybox.h		\

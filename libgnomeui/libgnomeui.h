@@ -66,6 +66,10 @@
 #include <libgnomeui/gnome-druid-page-edge.h>
 #include <libgnomeui/gnome-druid-page-standard.h>
 #include <libgnomeui/gnome-messagebox.h>
+#include <libgnomeui/gnome-mdi.h>
+#include <libgnomeui/gnome-mdi-child.h>
+#include <libgnomeui/gnome-mdi-generic-child.h>
+#include <libgnomeui/gnome-mdi-session.h>
 #include <libgnomeui/gnome-vfs-util.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-pixmap-entry.h>
