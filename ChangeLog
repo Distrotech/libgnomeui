@@ -1,5 +1,11 @@
 2003-01-07  Alexander Larsson  <alexl@redhat.com>
 
+	* libgnomeui/gnome-icon-theme.c:
+	Revert the change that made "gnome" a default theme.
+	This needs some more thought, but I think its right for now.
+	
+2003-01-07  Alexander Larsson  <alexl@redhat.com>
+
 	* libgnomeui/gnome-thumbnail.c:
 	Move thumbnail config to gconf.
 

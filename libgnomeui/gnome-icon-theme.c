@@ -636,14 +636,6 @@ load_themes (GnomeIconTheme *icon_theme)
   
   insert_theme (icon_theme, priv->current_theme);
   
-  /* Always look in the "gnome" icon theme for gnome apps.
-   * This means we will always find the icons we need for gnome
-   * even if a custom theme doesn't contain them.
-   * (This is valid according to the Icon theme Spec, see
-   * "Icon Lookup" paragraph 2)
-   */
-  insert_theme (icon_theme, "gnome");
-  
   /* Always look in the "default" icon theme */
   insert_theme (icon_theme, "hicolor");
   priv->themes = g_list_reverse (priv->themes);
