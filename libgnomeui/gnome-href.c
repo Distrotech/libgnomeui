@@ -132,7 +132,7 @@ gnome_href_class_init (GnomeHRefClass *klass)
 	gtk_widget_class_install_style_property (GTK_WIDGET_CLASS (gobject_class),
 						 g_param_spec_boxed ("link_colour",
 								     _("Link colour"),
-								     _("Colour ysed to draw the link"),
+								     _("Colour used to draw the link"),
 								     GDK_TYPE_COLOR,
 								     G_PARAM_READABLE));
 }
