@@ -50,7 +50,6 @@ static const gchar *authors[] = {
 static void
 test_exit (TestGnomeApp *app)
 {
-	bonobo_object_unref (BONOBO_OBJECT (app->ui_container));
 	bonobo_object_unref (BONOBO_OBJECT (app->ui_component));
 
 	gtk_widget_destroy (app->app);
@@ -72,8 +71,6 @@ static void
 verb_FileClose_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname)
 {
 	TestGnomeApp *app = user_data;
-
-	bonobo_object_unref (BONOBO_OBJECT (app->ui_container));
 
 	gtk_widget_destroy (app->app);
 }
@@ -125,9 +122,8 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 		gtk_signal_connect(GTK_OBJECT(app->app), "delete_event",
 				   GTK_SIGNAL_FUNC(quit_test), app);
 	};
-	app->ui_container = bonobo_ui_container_new ();
-	bonobo_ui_container_set_engine (app->ui_container,
-					bonobo_window_get_ui_engine (BONOBO_WINDOW (app->app)));
+	app->ui_container = bonobo_ui_engine_get_ui_container (
+		bonobo_window_get_ui_engine (BONOBO_WINDOW (app->app)));
 
 	app->ui_component = bonobo_ui_component_new (appname);
 	bonobo_ui_component_set_container (app->ui_component,
@@ -977,23 +973,6 @@ create_papersel(void)
 }
 
 #endif
-/*
- * Pixmap
- */
-
-static void
-create_pixmap(void)
-{
-	TestGnomeApp *app;
-	GtkWidget *pixmap;
-
-	app = create_newwin(TRUE,"testGNOME","Pixmap");
-	pixmap = gnome_pixmap_new_from_xpm_d ((const gchar **)bomb_xpm);
-
-	bonobo_window_set_contents(BONOBO_WINDOW (app->app),pixmap);
-	gtk_widget_show(pixmap);
-	gtk_widget_show(app->app);
-}
 #if 0
 /*
  * UnitSpinner
@@ -1026,7 +1005,6 @@ main (int argc, char **argv)
 /*		{ "image selector", create_image_selector },*/
 /*		{ "less", create_less }, */
 /*		{ "paper selector", create_papersel },*/
-		{ "pixmap", create_pixmap },
 /*		{ "unit spinner", create_unit_spinner },*/
 	  };
 	int nbuttons = sizeof (buttons) / sizeof (buttons[0]);

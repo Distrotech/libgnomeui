@@ -1,3 +1,8 @@
+2001-07-21  Martin Baulig  <baulig@suse.de>
+
+	* testgnome.c (create_pixmap): Removed.
+	(create_newwin): Fixed the UI stuff.
+
 2001-07-19  Michael Meeks  <michael@ximian.com>
 
 	* testgnome.c (create_newwin): fixup add_verb_list_with_data so
