@@ -31,8 +31,12 @@
 #include <string.h>
 #include <glade/glade.h>
 #include <glade/glade-build.h>
+#include <glade/glade-private.h>
 
 #include <gnome.h>
+#if ENABLE_BONOBO
+#include <bonobo.h>
+#endif
 
 #ifndef ENABLE_NLS
 /* a slight optimisation when gettext is off */
@@ -2058,6 +2062,75 @@ void glade_init_gnome_widgets(void)
 	glade_register_widgets(widget_data);
 }
 
+#if ENABLE_BONOBO
+static GtkWidget *gnome_control_new (GladeXML *xml, GladeWidgetInfo *info, char **err)
+{
+	GtkWidget               *widget;
+	BonoboControlFrame      *cf;
+	BonoboPropertyBagClient *pbc;
+	GList                   *tmp;
+
+	g_return_val_if_fail (info->class != NULL, NULL);
+
+	widget = bonobo_widget_new_control (info->class, CORBA_OBJECT_NIL);
+
+	if (!widget) {
+		*err = g_strdup_printf ("unknown bonobo control '%s'", info->class);
+		return NULL;
+	}
+
+	cf = bonobo_widget_get_control_frame (BONOBO_WIDGET (widget));
+
+	if (!cf) {
+		*err = g_strdup_printf ("control '%s' has no frame", info->class);
+		gtk_widget_destroy (widget);
+		return NULL;
+	}
+
+	pbc = bonobo_control_frame_get_control_property_bag (cf);
+	if (!pbc)
+		return widget;
+
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+		CORBA_TypeCode tc;
+
+		tc  = bonobo_property_bag_client_get_property_type (pbc, attr->name);
+
+		switch (tc->kind) {
+
+		case CORBA_tk_boolean:
+			bonobo_property_bag_client_set_value_gboolean (pbc, attr->name,
+								       attr->value[0] == 'T');
+			break;
+
+		case CORBA_tk_string:
+			bonobo_property_bag_client_set_value_string (pbc, attr->name, attr->value);
+			break;
+
+		case CORBA_tk_long:
+			bonobo_property_bag_client_set_value_glong (pbc, attr->name, strtol (attr->value, NULL, 0));
+			break;
+
+		case CORBA_tk_float:
+			bonobo_property_bag_client_set_value_gfloat (pbc, attr->name, strtod (attr->value, NULL));
+			break;
+
+		case CORBA_tk_double:
+			bonobo_property_bag_client_set_value_gdouble (pbc, attr->name, strtod (attr->value, NULL));
+			break;
+
+		default:
+			g_warning ("Unhandled type %d", tc->kind);
+			break;
+		}
+	}
+
+	gtk_widget_show (widget);
+	return widget;
+}
+#endif
+
 /**
  * glade_gnome_init
  *
@@ -2077,4 +2150,8 @@ void glade_gnome_init(void)
 	initialised = TRUE;
 	glade_init();
 	glade_init_gnome_widgets();
+
+#if ENABLE_BONOBO
+	glade_xml_build_extended_widget = gnome_control_new;
+#endif
 }
