@@ -1738,7 +1738,7 @@ gnome_client_set_priority (GnomeClient *client, guint priority)
   if (priority > 99)
     priority = 99;
 
-  client_set_gchar (client, "Priority", (gchar) priority);
+  client_set_gchar (client, "_GSM_Priority", (gchar) priority);
 #endif
 }
 
