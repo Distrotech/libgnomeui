@@ -1,3 +1,19 @@
+Mon Jul  5 20:11:01 1999  Tim Janik  <timj@gtk.org>
+
+	* gnome-canvas.[hc]: added gnome_canvas_get_color_pixel() to retrive
+	the pixel value for a GdkColor.
+
+	* gnome-canvas-line.c:
+	* gnome-canvas-text.c:
+        * gnome-canvas-polygon.c:
+        * gnome-canvas-rect-ellipse.c: support ::fill_color, ::fill_color_rgba,
+	::fill_color_gdk, ::outline_color, ::outline_color_rgba and
+	::outline_color_gdk for non-aa as for aa canvas. don't segfault upon
+	NULL pointer passing, but assume no-fill and black in that case.
+	always request an update on the canvas items if a color changed.
+	keep the fill_color (sometimes fill_rgba) values uptodate, so
+	querying *_color_rgba returns valid results.
+
 1999-07-05  Miguel de Icaza  <miguel@gnu.org>
 
 	* gnome-about.c: Make the inter-line skip, it is not required

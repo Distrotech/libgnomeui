@@ -3843,6 +3843,40 @@ gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
 	return TRUE;
 }
 
+/**
+ * gnome_canvas_get_color:
+ * @canvas: The canvas in which to allocate the color.
+ * @rgba: RGB color specification
+ *
+ * Allocates a color from the RGB value passed into this function.
+ *
+ * Return value: Pixel value for this color.
+ **/
+gulong
+gnome_canvas_get_color_pixel (GnomeCanvas *canvas,
+			      guint        rgba)
+{
+	GdkColor color;
+	gint n;
+
+	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), 0);
+
+	color.pixel = 0;
+	color.red = ((rgba & 0xff000000) >> 16) + ((rgba & 0xff000000) >> 24);
+	color.green = ((rgba & 0x00ff0000) >> 8) + ((rgba & 0x00ff0000) >> 16);
+	color.blue = (rgba & 0x0000ff00) + ((rgba & 0x0000ff00) >> 8);
+	n = 0;
+	gdk_color_context_get_pixels (canvas->cc,
+				      &color.red,
+				      &color.green,
+				      &color.blue,
+				      1,
+				      &color.pixel,
+				      &n);
+
+	return color.pixel;
+}
+
 
 /**
  * gnome_canvas_set_stipple_origin:

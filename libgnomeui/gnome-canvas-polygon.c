@@ -365,7 +365,7 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasItem *item;
 	GnomeCanvasPolygon *poly;
 	GnomeCanvasPoints *points;
-	GdkColor color;
+	GdkColor color = { 0, 0, 0, 0, };
 
 	item = GNOME_CANVAS_ITEM (object);
 	poly = GNOME_CANVAS_POLYGON (object);
@@ -383,82 +383,84 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			poly->num_points = 0;
 		else
 			set_points (poly, points);
-
+		
 		gnome_canvas_item_request_update (item);
 		break;
-
-	case ARG_FILL_COLOR:
-		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
-			poly->fill_set = TRUE;
-			poly->fill_pixel = color.pixel;
-			if (item->canvas->aa)
-				poly->fill_rgba =
-					((color.red & 0xff00) << 16) |
-					((color.green & 0xff00) << 8) |
-					(color.blue & 0xff00) |
-					0xff;
-			else
-				set_gc_foreground (poly->fill_gc, poly->fill_pixel);
-		} else {
-			poly->fill_set = FALSE;
-			poly->fill_rgba = 0;
-		}
-
-		gnome_canvas_item_request_update (item);
-		break;
-
+		
+        case ARG_FILL_COLOR:
 	case ARG_FILL_COLOR_GDK:
-		poly->fill_set = TRUE;
-		poly->fill_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
-		set_gc_foreground (poly->fill_gc, poly->fill_pixel);
-		gnome_canvas_item_request_update (item);
-		break;
-
 	case ARG_FILL_COLOR_RGBA:
-		poly->fill_set = TRUE;
-		poly->fill_rgba = GTK_VALUE_UINT (*arg);
-
-		/* should probably request repaint on the fill_svp */
-		gnome_canvas_item_request_update (item);
-
-		break;
-
-	case ARG_OUTLINE_COLOR:
-		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
-			poly->outline_set = TRUE;
-			poly->outline_pixel = color.pixel;
-			if (item->canvas->aa)
-				poly->outline_rgba =
-					((color.red & 0xff00) << 16) |
-					((color.green & 0xff00) << 8) |
-					(color.blue & 0xff00) |
-					0xff;
+		switch (arg_id) {
+		case ARG_FILL_COLOR:
+			if (GTK_VALUE_STRING (*arg) &&
+			    gdk_color_parse (GTK_VALUE_STRING (*arg), &color))
+				poly->fill_set = TRUE;
 			else
-				set_gc_foreground (poly->outline_gc, poly->outline_pixel);
-		} else {
-			poly->outline_set = FALSE;
-			poly->outline_rgba = 0;
+				poly->fill_set = FALSE;
+			poly->fill_color = ((color.red & 0xff00) << 16 |
+					    (color.green & 0xff00) << 8 |
+					    (color.blue & 0xff00) |
+					    0xff);
+			break;
+		case ARG_FILL_COLOR_GDK:
+			poly->fill_set = GTK_VALUE_BOXED (*arg) != NULL;
+			if (GTK_VALUE_BOXED (*arg))
+				color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+			poly->fill_color = ((color.red & 0xff00) << 16 |
+					    (color.green & 0xff00) << 8 |
+					    (color.blue & 0xff00) |
+					    0xff);
+			break;
+		case ARG_FILL_COLOR_RGBA:
+			poly->fill_set = TRUE;
+			poly->fill_color = GTK_VALUE_UINT (*arg);
+			break;
 		}
-
-		gnome_canvas_item_request_update (item);
+#ifdef VERBOSE
+		g_print ("poly fill color = %08x\n", poly->fill_color);
+#endif
+		poly->fill_pixel = gnome_canvas_get_color_pixel (item->canvas, poly->fill_color);
+		set_gc_foreground (poly->fill_gc, poly->fill_pixel);
+                gnome_canvas_item_request_redraw_svp (item, poly->fill_svp);
 		break;
-
+		
+        case ARG_OUTLINE_COLOR:
 	case ARG_OUTLINE_COLOR_GDK:
-		poly->outline_set = TRUE;
-		poly->outline_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
-		set_gc_foreground (poly->outline_gc, poly->outline_pixel);
-		gnome_canvas_item_request_update (item);
-		break;
-
 	case ARG_OUTLINE_COLOR_RGBA:
-		poly->outline_set = TRUE;
-		poly->outline_rgba = GTK_VALUE_UINT (*arg);
-
-		/* should probably request repaint on the outline_svp */
-		gnome_canvas_item_request_update (item);
-
+		switch (arg_id) {
+		case ARG_OUTLINE_COLOR:
+			if (GTK_VALUE_STRING (*arg) &&
+			    gdk_color_parse (GTK_VALUE_STRING (*arg), &color))
+				poly->outline_set = TRUE;
+			else
+				poly->outline_set = FALSE;
+			poly->outline_color = ((color.red & 0xff00) << 16 |
+					       (color.green & 0xff00) << 8 |
+					       (color.blue & 0xff00) |
+					       0xff);
+			break;
+		case ARG_OUTLINE_COLOR_GDK:
+			poly->outline_set = GTK_VALUE_BOXED (*arg) != NULL;
+			if (GTK_VALUE_BOXED (*arg))
+				color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+			poly->outline_color = ((color.red & 0xff00) << 16 |
+					       (color.green & 0xff00) << 8 |
+					       (color.blue & 0xff00) |
+					       0xff);
+			break;
+		case ARG_OUTLINE_COLOR_RGBA:
+			poly->outline_set = TRUE;
+			poly->outline_color = GTK_VALUE_UINT (*arg);
+			break;
+		}
+#ifdef VERBOSE
+		g_print ("poly outline color = %08x\n", poly->outline_color);
+#endif
+		poly->outline_pixel = gnome_canvas_get_color_pixel (item->canvas, poly->outline_color);
+		set_gc_foreground (poly->outline_gc, poly->outline_pixel);
+                gnome_canvas_item_request_redraw_svp (item, poly->outline_svp);
 		break;
-
+		
 	case ARG_FILL_STIPPLE:
 		set_stipple (poly->fill_gc, &poly->fill_stipple, GTK_VALUE_BOXED (*arg), FALSE);
 		gnome_canvas_item_request_update (item);
@@ -569,10 +571,10 @@ gnome_canvas_polygon_render (GnomeCanvasItem *item,
 	poly = GNOME_CANVAS_POLYGON (item);
 
 	if (poly->fill_svp != NULL)
-		gnome_canvas_render_svp (buf, poly->fill_svp, poly->fill_rgba);
+		gnome_canvas_render_svp (buf, poly->fill_svp, poly->fill_color);
 
 	if (poly->outline_svp != NULL)
-		gnome_canvas_render_svp (buf, poly->outline_svp, poly->outline_rgba);
+		gnome_canvas_render_svp (buf, poly->outline_svp, poly->outline_color);
 }
 
 static void
@@ -641,7 +643,7 @@ gnome_canvas_polygon_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip
 		set_stipple (poly->outline_gc, &poly->outline_stipple, poly->outline_stipple, TRUE);
 
 		get_bounds_canvas (poly, &x1, &y1, &x2, &y2, affine);
-		gnome_canvas_update_bbox (item, x1, y1, x2, y2);		
+		gnome_canvas_update_bbox (item, x1, y1, x2, y2);
 	}
 }
 

@@ -566,8 +566,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasItem *item;
 	GnomeCanvasLine *line;
 	GnomeCanvasPoints *points;
-	GdkColor color;
-	GdkColor *colorp;
+	GdkColor color = { 0, 0, 0, 0, };
+	gboolean color_changed = FALSE;
 
 	item = GNOME_CANVAS_ITEM (object);
 	line = GNOME_CANVAS_LINE (object);
@@ -600,57 +600,46 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			g_free (line->last_coords);
 			line->last_coords = NULL;
 		}
-
+		
 		/* Since the line's points have changed, we need to re-generate arrowheads in
 		 * addition to recalculating the bounds.
 		 */
-
+		
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
 #else
 		gnome_canvas_item_request_update (item);
 #endif
 		break;
-
+		
 	case ARG_FILL_COLOR:
-		gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color);
-		line->fill_pixel = color.pixel;
-		if (item->canvas->aa) 
-			line->fill_rgba =
-				((color.red & 0xff00) << 16) |
-				((color.green & 0xff00) << 8) |
-				(color.blue & 0xff00) |
-				0xff;
-		else
-			set_line_gc_foreground (line);
-
-		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
+		if (GTK_VALUE_STRING (*arg))
+			gdk_color_parse (GTK_VALUE_STRING (*arg), &color);
+		line->fill_rgba = ((color.red & 0xff00) << 16 |
+				   (color.green & 0xff00) << 8 |
+				   (color.blue & 0xff00) |
+				   0xff);
+		color_changed = TRUE;
 		break;
-
 	case ARG_FILL_COLOR_GDK:
-		colorp = (GdkColor *) GTK_VALUE_BOXED (*arg);
-		line->fill_pixel = colorp->pixel;
-		if (item->canvas->aa) 
-			line->fill_rgba = (((colorp->red & 0xff00) << 16) |
-					   ((colorp->green & 0xff00) << 8) |
-					   (colorp->blue & 0xff00) |
-					   0xff);
-		else
-			set_line_gc_foreground (line);
-
-		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
+		if (GTK_VALUE_BOXED (*arg))
+			color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+		line->fill_rgba = ((color.red & 0xff00) << 16 |
+				   (color.green & 0xff00) << 8 |
+				   (color.blue & 0xff00) |
+				   0xff);
+		color_changed = TRUE;
 		break;
-
 	case ARG_FILL_COLOR_RGBA:
 		line->fill_rgba = GTK_VALUE_UINT (*arg);
-		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
+		color_changed = TRUE;
 		break;
-
+		
 	case ARG_FILL_STIPPLE:
 		set_stipple (line, GTK_VALUE_BOXED (*arg), FALSE);
 		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
 		break;
-
+		
 	case ARG_WIDTH_PIXELS:
 		line->width = GTK_VALUE_UINT (*arg);
 		line->width_pixels = TRUE;
@@ -757,6 +746,13 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	default:
 		break;
 	}
+	
+	if (color_changed) {
+		line->fill_pixel = gnome_canvas_get_color_pixel (item->canvas, line->fill_rgba);
+		if (item->canvas->aa)
+			set_line_gc_foreground (line);
+		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
+	}
 }
 
 static void
@@ -844,7 +840,6 @@ gnome_canvas_line_render (GnomeCanvasItem *item,
 			     GnomeCanvasBuf *buf)
 {
 	GnomeCanvasLine *line;
-	guint32 fg_color, bg_color;
 
 	line = GNOME_CANVAS_LINE (item);
 

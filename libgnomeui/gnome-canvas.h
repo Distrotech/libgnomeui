@@ -581,6 +581,11 @@ void gnome_canvas_world_to_window (GnomeCanvas *canvas,
  */
 int gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color);
 
+/* Allocates a color from the RGB value passed into this function. */
+gulong gnome_canvas_get_color_pixel (GnomeCanvas *canvas,
+				     guint        rgba);
+     
+
 /* Sets the stipple origin of the specified gc so that it will be aligned with
  * all the stipples used in the specified canvas.  This is intended for use only
  * by canvas item implementations.

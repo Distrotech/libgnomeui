@@ -485,8 +485,8 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasText *text;
-	GdkColor color;
-	GdkColor *colorp;
+	GdkColor color = { 0, 0, 0, 0, };
+	gboolean color_changed = FALSE;
 
 	item = GNOME_CANVAS_ITEM (object);
 	text = GNOME_CANVAS_TEXT (object);
@@ -584,69 +584,60 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		text->clip_height = fabs (GTK_VALUE_DOUBLE (*arg));
 		recalc_bounds (text);
 		break;
-
+		
 	case ARG_CLIP:
 		text->clip = GTK_VALUE_BOOL (*arg);
 		recalc_bounds (text);
 		break;
-
+		
 	case ARG_X_OFFSET:
 		text->xofs = GTK_VALUE_DOUBLE (*arg);
 		recalc_bounds (text);
 		break;
-
+		
 	case ARG_Y_OFFSET:
 		text->yofs = GTK_VALUE_DOUBLE (*arg);
 		recalc_bounds (text);
 		break;
-
-	case ARG_FILL_COLOR:
-		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
-			text->pixel = color.pixel;
-			if (item->canvas->aa)
-				text->rgba =
-					((color.red & 0xff00) << 16) |
-					((color.green & 0xff00) << 8) |
-					(color.blue & 0xff00) |
-					0xff;
-			else
-				set_text_gc_foreground (text);
-		} else {
-			text->pixel = 0;
-			if (item->canvas->aa)
-				text->rgba = 0;
-			else
-				set_text_gc_foreground (text);
-		}
-
+		
+        case ARG_FILL_COLOR:
+		if (GTK_VALUE_STRING (*arg))
+			gdk_color_parse (GTK_VALUE_STRING (*arg), &color);
+		text->rgba = ((color.red & 0xff00) << 16 |
+			      (color.green & 0xff00) << 8 |
+			      (color.blue & 0xff00) |
+			      0xff);
+		color_changed = TRUE;
 		break;
-
+		
 	case ARG_FILL_COLOR_GDK:
-		colorp = (GdkColor *) GTK_VALUE_BOXED (*arg);
-		text->pixel = colorp->pixel;
-		if (item->canvas->aa)
-			text->rgba = (((colorp->red & 0xff00) << 16) |
-				      ((colorp->green & 0xff00) << 8) |
-				      (colorp->blue & 0xff00) |
-				      0xff);
-		else
-			set_text_gc_foreground (text);
+		if (GTK_VALUE_BOXED (*arg))
+			color = *((GdkColor*) GTK_VALUE_BOXED (*arg));
+		text->rgba = ((color.red & 0xff00) << 16 |
+			      (color.green & 0xff00) << 8 |
+			      (color.blue & 0xff00) |
+			      0xff);
+		color_changed = TRUE;
 		break;
-
-	case ARG_FILL_COLOR_RGBA:
+		
+        case ARG_FILL_COLOR_RGBA:
 		text->rgba = GTK_VALUE_UINT (*arg);
-
-		/* should probably request repaint on the fill_svp */
-		gnome_canvas_item_request_update (item);
-
+		color_changed = TRUE;
 		break;
-
+		
 	case ARG_FILL_STIPPLE:
 		set_stipple (text, GTK_VALUE_BOXED (*arg), FALSE);
 		break;
 
 	default:
 		break;
+	}
+	
+	if (color_changed) {
+		text->pixel = gnome_canvas_get_color_pixel (item->canvas, text->rgba);
+		if (item->canvas->aa)
+			set_text_gc_foreground (text);
+		gnome_canvas_item_request_update (item);
 	}
 }
 
