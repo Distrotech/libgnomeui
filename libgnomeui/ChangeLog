@@ -1,3 +1,7 @@
+1999-03-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-item.c (iti_paint_text): Nice offset adjustments.
+
 1999-03-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_get_bounds): Un-transform the
@@ -23,6 +27,7 @@
 
 	* gnome-icon-item.c (iti_event): Only start selecting with mouse
 	button-1.  This should fix bug #482
+	(iti_event): Add check here too (Patch from Richard Hult).
 
 Mon Mar 08 21:55:09 1999  George Lebl  <jirka@5z.com>
 
