@@ -1617,6 +1617,38 @@ _gnome_selector_async_handle_add (GnomeSelectorAsyncHandle *async_handle,
 }
 
 void
+_gnome_selector_async_handle_remove (GnomeSelectorAsyncHandle *async_handle,
+				     gpointer async_data)
+{
+    GSList *c;
+
+    for (c = async_handle->async_data_list; c; c = c->next) {
+	GnomeSelectorAsyncData *data = c->data;
+
+	if (data->async_data == async_data) {
+	    async_handle->async_data_list = g_slist_remove
+		(async_handle->async_data_list, data);
+
+	    if (data->async_data_destroy)
+		data->async_data_destroy (async_data);
+
+	    g_free (data);
+
+	    g_message (G_STRLOC ": %p - %d - %p", async_handle,
+		       async_handle->completed, async_handle->async_data_list);
+
+	    if (async_handle->completed &&
+		async_handle->async_data_list == NULL)
+		_gnome_selector_async_handle_destroy (async_handle);
+
+	    return;
+	}
+    }
+
+    g_assert_not_reached ();
+}
+
+void
 _gnome_selector_async_handle_completed (GnomeSelectorAsyncHandle *async_handle,
 					gboolean success)
 {
@@ -1627,19 +1659,21 @@ _gnome_selector_async_handle_completed (GnomeSelectorAsyncHandle *async_handle,
 
     selector = async_handle->selector;
 
-    if (!async_handle->completed && async_handle->async_func)
-	async_handle->async_func (selector, async_handle,
-				  async_handle->async_type, async_handle->uri,
-				  async_handle->error, success,
-				  async_handle->user_data);
+    g_message (G_STRLOC ": %p - %d - %d - %p", async_handle,
+	       async_handle->completed, success,
+	       async_handle->async_data_list);
+
+    if (!async_handle->completed)
+	async_handle->success = success;
 
     async_handle->completed = TRUE;
 
-    _gnome_selector_async_handle_remove (async_handle);
+    if (async_handle->async_data_list == NULL)
+	_gnome_selector_async_handle_destroy (async_handle);
 }
 
 void
-_gnome_selector_async_handle_remove (GnomeSelectorAsyncHandle *async_handle)
+_gnome_selector_async_handle_destroy (GnomeSelectorAsyncHandle *async_handle)
 {
     GnomeSelector *selector;
 
@@ -1648,7 +1682,9 @@ _gnome_selector_async_handle_remove (GnomeSelectorAsyncHandle *async_handle)
 
     selector = async_handle->selector;
 
-    if (!async_handle->completed && async_handle->async_func)
+    g_message (G_STRLOC ": %p - %d", async_handle, async_handle->refcount);
+
+    if (async_handle->async_func)
 	async_handle->async_func (selector, async_handle,
 				  async_handle->async_type, async_handle->uri,
 				  async_handle->error, FALSE,
@@ -1657,6 +1693,7 @@ _gnome_selector_async_handle_remove (GnomeSelectorAsyncHandle *async_handle)
     selector->_priv->async_ops = g_list_remove (selector->_priv->async_ops,
 						async_handle);
 
+    async_handle->completed = TRUE;
     async_handle->destroyed = TRUE;
 
     gnome_selector_async_handle_unref (async_handle);
@@ -1673,6 +1710,7 @@ _gnome_selector_async_handle_set_error (GnomeSelectorAsyncHandle *async_handle, 
 	return;
 
     async_handle->error = g_error_copy (error);
+    async_handle->success = FALSE;
 }
 
 void
@@ -1836,6 +1874,6 @@ gnome_selector_cancel_async_operation (GnomeSelector *selector, GnomeSelectorAsy
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
     g_return_if_fail (async_handle != NULL);
 
-    _gnome_selector_async_handle_remove (async_handle);
+    _gnome_selector_async_handle_destroy (async_handle);
 }
 

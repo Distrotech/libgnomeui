@@ -88,6 +88,7 @@ struct _GnomeSelectorHistoryItem {
 };
 
 enum {
+    GNOME_SELECTOR_ASYNC_TYPE_UNSPECIFIED = 0,
     GNOME_SELECTOR_ASYNC_TYPE_CHECK_FILENAME = 1,
     GNOME_SELECTOR_ASYNC_TYPE_CHECK_DIRECTORY,
     GNOME_SELECTOR_ASYNC_TYPE_ADD_FILE,
@@ -113,6 +114,7 @@ struct _GnomeSelectorAsyncHandle {
 
     GError *error;
 
+    gboolean success;
     gboolean destroyed;
     gboolean completed;
 
@@ -129,7 +131,7 @@ _gnome_selector_async_handle_get                (GnomeSelector            *selec
                                                  GnomeSelectorAsyncType    async_type,
                                                  const char               *uri,
                                                  GnomeSelectorAsyncFunc    async_func,
-                                                 gpointer                  async_data);
+                                                 gpointer                  user_data);
 
 void
 _gnome_selector_async_handle_add                (GnomeSelectorAsyncHandle *async_handle,
@@ -137,11 +139,15 @@ _gnome_selector_async_handle_add                (GnomeSelectorAsyncHandle *async
 						 GDestroyNotify            async_data_destroy);
 
 void
+_gnome_selector_async_handle_remove             (GnomeSelectorAsyncHandle *async_handle,
+						 gpointer                  async_data);
+
+void
 _gnome_selector_async_handle_completed          (GnomeSelectorAsyncHandle *async_handle,
                                                  gboolean                  success);
 
 void
-_gnome_selector_async_handle_remove             (GnomeSelectorAsyncHandle *async_handle);
+_gnome_selector_async_handle_destroy            (GnomeSelectorAsyncHandle *async_handle);
 
 void
 _gnome_selector_async_handle_set_error          (GnomeSelectorAsyncHandle *async_handle,

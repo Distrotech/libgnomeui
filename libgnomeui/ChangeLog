@@ -1,3 +1,14 @@
+2000-12-05  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selectorP.h (_gnome_selector_async_handle_removed): Renamed
+	to _gnome_selector_async_handle_destroy().
+	(_gnome_selector_async_handle_removed): New internal function, does
+	the opposite of _gnome_selector_async_handle_add().
+	(_gnome_selector_async_handle_completed): Don't call the callback
+	function here, only mark the async handler as completed and call
+	_gnome_selector_async_handle_destroy() if there are no pending sub-
+	operations.
+
 2000-12-04  Martin Baulig  <baulig@suse.de>
 
 	Started to make GnomeSelector fully asynchronous.
