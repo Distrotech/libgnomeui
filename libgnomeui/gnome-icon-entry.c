@@ -1007,6 +1007,7 @@ gnome_icon_entry_set_filename(GnomeIconEntry *ientry,
 			      const gchar *filename)
 {
 	GtkWidget *child;
+	GtkWidget *e;
 
 	g_return_val_if_fail (ientry != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), FALSE);
@@ -1014,8 +1015,8 @@ gnome_icon_entry_set_filename(GnomeIconEntry *ientry,
 	if(!filename)
 		filename = "";
 
-	gtk_entry_set_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (ientry)),
-			    filename);
+	e = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->_priv->fentry));
+	gtk_entry_set_text (GTK_ENTRY (e), filename);
 	entry_changed (NULL, ientry);
 	gtk_signal_emit(GTK_OBJECT(ientry),
 			gnome_ientry_signals[CHANGED_SIGNAL]);

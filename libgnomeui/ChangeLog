@@ -1,3 +1,9 @@
+Sun Dec 09 14:24:57 2001  George Lebl <jirka@5z.com>
+
+	* gnome-icon-entry.c: don't use the deprecated _gtk_entry method
+	  internally even. (it's kind of hypocritical of a widget to use
+	  it's own deprecated api)
+
 Sun Dec 09 14:15:01 2001  George Lebl <jirka@5z.com>
 
 	* gnome-dialog.c, gnome-messagebox.c: Contrary to popular belief,
