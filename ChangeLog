@@ -1,3 +1,10 @@
+2002-03-22  Havoc Pennington  <hp@pobox.com>
+
+	* libgnomeui/gnome-gconf-ui.c (_gnomeui_gconf_lazy_init): remove
+	unused call to gconf_init().
+	(error_idle_func): consider NO_WRITABLE_DATABASE to also mean 
+	"setting is locked down"
+
 2002-03-20  Cody Russell  <cody@jhu.edu>
 
 	* libgnomeui/gnome-icon-list.c: Fix a warning that appears with

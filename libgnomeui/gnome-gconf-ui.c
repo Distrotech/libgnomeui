@@ -72,6 +72,62 @@ _gnome_gconf_ui_module_info_get (void)
 	return &module_info;
 }
 
+static void
+dialog_add_details (GtkDialog  *dialog,
+                    GtkWidget  *details,
+                    int         extra_hsize,
+                    int         extra_vsize)
+{
+        GtkWidget *hbox;
+        GtkWidget *button;
+        GtkRequisition req;
+        GtkWidget *align;
+  
+        hbox = gtk_hbox_new (FALSE, 0);
+
+        gtk_container_set_border_width (GTK_CONTAINER (hbox), 10);
+  
+        gtk_box_pack_start (GTK_BOX (dialog->vbox),
+                            hbox,
+                            TRUE, TRUE, 0);
+
+        align = gtk_alignment_new (1.0, 1.0, 0.0, 0.0);
+  
+        button = gtk_button_new_with_mnemonic (_("_Details"));
+
+        gtk_container_add (GTK_CONTAINER (align), button);
+  
+        gtk_box_pack_end (GTK_BOX (hbox), align,
+                          FALSE, FALSE, 0);  
+  
+        gtk_box_pack_start (GTK_BOX (hbox), details,
+                            TRUE, TRUE, 0);
+
+        /* show the details on click */
+        g_signal_connect_swapped (G_OBJECT (button),
+                                  "clicked",
+                                  G_CALLBACK (gtk_widget_show),
+                                  details);
+  
+        /* second callback destroys the button (note disconnects first callback) */
+        g_signal_connect (G_OBJECT (button), "clicked",
+                          G_CALLBACK (gtk_widget_destroy),
+                          NULL);
+
+        /* Set default dialog size to size with the details,
+   * and without the button, but then rehide the details
+   */
+        gtk_widget_show_all (hbox);
+
+        gtk_widget_size_request (GTK_WIDGET (dialog), &req);
+
+        gtk_window_set_default_size (GTK_WINDOW (dialog),
+                                     req.width + extra_hsize,
+                                     req.height + extra_vsize);
+  
+        gtk_widget_hide (details);
+}
+
 typedef struct {
         GConfClient *client;
 } ErrorIdleData;
@@ -79,77 +135,113 @@ typedef struct {
 static guint error_handler_idle = 0;
 static GSList *pending_errors = NULL;
 static ErrorIdleData eid = { NULL };
+static GtkWidget *current_dialog = NULL;
+static GtkWidget *current_details = NULL;
 
 static gboolean
 error_idle_func (gpointer data)
 {
-        GtkWidget *dialog;
         GSList *iter;
-        gboolean have_overridden = FALSE;
-        const gchar* fmt = NULL;
 
         error_handler_idle = 0;
 
         g_return_val_if_fail(eid.client != NULL, FALSE);
         g_return_val_if_fail(pending_errors != NULL, FALSE);
 
-        iter = pending_errors;
-        while (iter != NULL) {
-                GError *error = iter->data;
+        if (current_dialog == NULL) {
+                GtkWidget *dialog;
+                gboolean have_overridden = FALSE;
+                const char* fmt = NULL;
+                GtkWidget *sw;
 
-                if (g_error_matches (error, GCONF_ERROR, GCONF_ERROR_OVERRIDDEN))
-                        have_overridden = TRUE;
+                iter = pending_errors;
+                while (iter != NULL) {
+                        GError *error = iter->data;
 
-                iter = g_slist_next(iter);
-        }
+                        if (g_error_matches (error, GCONF_ERROR, GCONF_ERROR_OVERRIDDEN) ||
+                            g_error_matches (error, GCONF_ERROR, GCONF_ERROR_NO_WRITABLE_DATABASE))
+                                have_overridden = TRUE;
 
-        if (have_overridden) {
-                fmt = _("You attempted to change an aspect of your "
-			"configuration that your system administrator "
-			"or operating system vendor does not allow you to "
-			"change. Some of the settings you have selected may "
-			"not take effect, or may not be restored next time "
-			"you use this application (%s).");
+                        iter = g_slist_next (iter);
+                }
 
-        } else {
-                fmt = _("An error occurred while loading or saving "
-			"configuration information for %s. Some of your "
-			"configuration settings may not work properly.");
-        }
+                if (have_overridden) {
+                        fmt = _("The application \"%s\" attempted to change an "
+                                "aspect of your configuration that your system "
+                                "administrator or operating system vendor does not "
+                                "allow you to change. Some of the settings you have "
+                                "selected may not take effect, or may not be "
+                                "restored next time you use the application.");
+                } else {
+                        fmt = _("An error occurred while loading or saving "
+                                "configuration information for %s. Some of your "
+                                "configuration settings may not work properly.");
+                }
 
-        dialog = gtk_message_dialog_new (NULL /* parent */,
-					 0 /* flags */,
-					 GTK_MESSAGE_ERROR,
-					 GTK_BUTTONS_OK,
-					 fmt,
-					 gnome_program_get_human_readable_name(gnome_program_get()));
-	g_signal_connect_swapped (dialog, "response",
+                dialog = gtk_message_dialog_new (NULL /* parent */,
+                                                 0 /* flags */,
+                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_BUTTONS_OK,
+                                                 fmt,
+                                                 gnome_program_get_human_readable_name(gnome_program_get()));
+                g_signal_connect (dialog, "response",
                                   G_CALLBACK (gtk_widget_destroy),
-                                  dialog);
-        gtk_widget_show_all (dialog);
+                                  NULL);
 
+                sw = gtk_scrolled_window_new (NULL, NULL);
+                gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+                                                GTK_POLICY_NEVER,
+                                                GTK_POLICY_AUTOMATIC);
+                current_details = gtk_text_view_new ();
+                gtk_text_view_set_editable (GTK_TEXT_VIEW (current_details),
+                                            FALSE);
+                gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (current_details),
+                                             GTK_WRAP_WORD);
+                gtk_container_add (GTK_CONTAINER (sw), current_details);
+                gtk_widget_show (current_details);
+                
+                dialog_add_details (GTK_DIALOG (dialog),
+                                    sw,
+                                    0, 70);
+                
+                current_dialog = dialog;
+                g_object_add_weak_pointer (G_OBJECT (current_dialog),
+                                           (void**) &current_dialog);
 
-        /* FIXME put this in a "Technical Details" optional part of the dialog
-           that can be opened up if users are interested */
+                g_object_add_weak_pointer (G_OBJECT (current_details),
+                                           (void**) &current_details);
+        }
+
+        g_assert (current_dialog);
+        g_assert (current_details);
+        
         iter = pending_errors;
         while (iter != NULL) {
                 GError *error = iter->data;
-                iter->data = NULL;
+                GtkTextIter end;
+                GtkTextBuffer *buffer;
 
-                fprintf(stderr, _("GConf error details: %s\n"), error->message);
+                buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (current_details));
 
-                g_error_free(error);
+                gtk_text_buffer_get_end_iter (buffer, &end);
 
-                iter = g_slist_next(iter);
+                gtk_text_buffer_insert (buffer, &end, error->message, -1);
+                gtk_text_buffer_insert (buffer, &end, "\n", -1);
+
+                g_error_free (error);
+
+                iter = g_slist_next (iter);
         }
 
-        g_slist_free(pending_errors);
+        g_slist_free (pending_errors);
 
         pending_errors = NULL;
 
-        g_object_unref(G_OBJECT(eid.client));
+        g_object_unref (G_OBJECT (eid.client));
         eid.client = NULL;
 
+        gtk_window_present (GTK_WINDOW (current_dialog));
+        
         return FALSE;
 }
 
@@ -185,7 +277,6 @@ _gnomeui_gconf_lazy_init (void)
 {
 	/* Note this is the same as in libgnome/libgnome/gnome-gconf.c, keep
 	 * this in sync (it's called gnome_gconf_lazy_init) */
-	char *argv [] = { "dummy", NULL };
         gchar *settings_dir;
 	GConfClient* client = NULL;
 	static gboolean initialized = FALSE;
@@ -194,8 +285,6 @@ _gnomeui_gconf_lazy_init (void)
 		return;
 
 	initialized = TRUE;
-
-	gconf_init (1, argv, NULL);
 
         client = gconf_client_get_default ();
 
@@ -211,6 +300,10 @@ _gnomeui_gconf_lazy_init (void)
 			      GCONF_CLIENT_PRELOAD_NONE,
 			      NULL);
         g_free (settings_dir);
+
+        /* Leak the GConfClient reference, we want to keep
+         * the client alive forever.
+         */
 }
 
 gboolean
