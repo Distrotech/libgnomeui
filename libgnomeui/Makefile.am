@@ -19,9 +19,9 @@ libgnomeui_la_SOURCES = \
 	gnome-actionarea.c		\
 	gnome-app.c			\
 	gnome-app-helper.c		\
+	gnome-color-selector.c 		\
 	gnome-canvas.c			\
 	gnome-canvas-rect-ellipse.c	\
-	gnome-color-selector.c 		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -62,10 +62,10 @@ libgnomeui_la_SOURCES = \
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
         gnome-actionarea.h     		\
+	gnome-canvas.h			\
+	gnome-canvas-rect-ellipse.h	\
 	gnome-app.h			\
 	gnome-app-helper.h		\
-	gnome-canvas.h			\
-	gnome-color-selector.h 		\
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
 	gnome-dns.h			\

@@ -174,9 +174,15 @@ gnome_dialog_init (GnomeDialog *dialog)
   dialog->click_closes = FALSE;
   dialog->buttons = NULL;
 
+#ifdef HAVE_DEVGTK
   dialog->accelerators = gtk_accel_group_new();
   gtk_window_add_accel_group (GTK_WINDOW(dialog), 
 				    dialog->accelerators);
+#else
+  dialog->accelerators = gtk_accelerator_table_new();
+  gtk_window_add_accelerator_table (GTK_WINDOW(dialog),
+                                    dialog->accelerators);
+#endif
 
   bf = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (bf), GTK_SHADOW_OUT);
@@ -496,12 +502,21 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
   list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
+#ifdef HAVE_DEVGTK
 /*FIXME*/
     gtk_widget_add_accelerator(GTK_WIDGET(list->data),
 				   "clicked",
 				   dialog->accelerators,
 				   accelerator_key,
 				   accelerator_mods,0);
+#else
+    gtk_widget_install_accelerator(GTK_WIDGET(list->data),
+                                   dialog->accelerators,
+                                   "clicked",
+                                   accelerator_key,
+                                   accelerator_mods);
+
+#endif
     
     return;
   }
@@ -591,8 +606,13 @@ static void gnome_dialog_destroy (GtkObject *dialog)
 
   g_list_free(GNOME_DIALOG (dialog)->buttons);
 
+#ifdef HAVE_DEVGTK
   if (GNOME_DIALOG(dialog)->accelerators) 
     gtk_window_remove_accel_group(GTK_WINDOW(dialog), GNOME_DIALOG(dialog)->accelerators);
+#else
+  if (GNOME_DIALOG(dialog)->accelerators)
+    gtk_accelerator_table_unref(GNOME_DIALOG(dialog)->accelerators);
+#endif
 
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dialog);
@@ -645,6 +665,15 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.27  1998/06/10 17:15:25  gregm
+  Wed Jun 10 13:07:09 EDT 1998 Gregory McLean <gregm@comstar.net>
+
+          * Wheee libgnomeui now compiles (with the exception of the
+            canvas stuff) under 1.0.x again. It also compiles under 1.1
+            for thoose of you that like to bleed. Please please if you
+            add code that _requires_ gtk 1.1 shield it with HAVE_DEVGTK
+            so us boring folks can continue to get stuff done.
+
   Revision 1.26  1998/06/07 17:58:21  pavlov
   updates to make gnome-libs compile with new gtk1.1
 

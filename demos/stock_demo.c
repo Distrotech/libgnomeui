@@ -122,7 +122,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -133,7 +133,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -144,7 +144,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -155,7 +155,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -166,7 +166,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -181,7 +181,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -201,7 +201,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_signal_connect_object(GTK_OBJECT(w), "activate",
 				  (GtkSignalFunc)message_dlg,
@@ -222,7 +222,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -247,7 +247,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -258,7 +258,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -269,7 +269,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -284,7 +284,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_signal_connect(GTK_OBJECT(w), "activate",
 			   GTK_SIGNAL_FUNC(prop_dlg), NULL);
@@ -297,7 +297,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_signal_connect_object(GTK_OBJECT(w), "activate",
 				  GTK_SIGNAL_FUNC(gnome_stock_menu_accel_dlg),
@@ -315,7 +315,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -334,7 +334,7 @@ create_menu(GtkWidget *window)
 #ifdef HAVE_DEVGTK
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
-		gtk_widget_add_accelerator(w, "activate",  accel, key, mod);
+		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 #endif
 	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;

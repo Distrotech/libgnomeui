@@ -21,7 +21,9 @@
 #include <gdk/gdk.h>
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkeditable.h>
+#ifdef HAVE_DEVGTK
 #include <gtk/gtkaccelgroup.h>
+#endif
 #include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
@@ -43,7 +45,11 @@ struct _GnomeDialog
   GtkWidget * action_area; /* A button box, not an hbox */
 
   GList *buttons;
+#ifdef HAVE_DEVGTK
   GtkAccelGroup * accelerators;
+#else 
+  GtkAcceleratorTable *accelerators;
+#endif
   int modal : 1;
   int click_closes : 1;
   int just_hide : 1;

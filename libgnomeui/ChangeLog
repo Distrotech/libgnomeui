@@ -1,3 +1,11 @@
+Wed Jun 10 13:07:09 EDT 1998 Gregory McLean <gregm@comstar.net>
+
+	* Wheee libgnomeui now compiles (with the exception of the
+	  canvas stuff) under 1.0.x again. It also compiles under 1.1
+	  for thoose of you that like to bleed. Please please if you 
+	  add code that _requires_ gtk 1.1 shield it with HAVE_DEVGTK
+	  so us boring folks can continue to get stuff done.
+
 Wed Jun 10 00:45:36 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-init.c (our_gtk_options): Added help separator entry.
