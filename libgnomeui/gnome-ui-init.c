@@ -42,6 +42,9 @@
 #include <locale.h>
 #endif
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include <libgnome.h>
 #include <libgnomeui/gnome-canvas-init.h>
 

@@ -25,12 +25,14 @@
 #include <config.h>
 #include "gnome-macros.h"
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-rect-ellipse.h>
 #include <libgnomecanvas/gnome-canvas-text.h>
 #include "gnome-druid.h"
 #include "gnome-uidefs.h"
-#include <libgnome/gnome-i18n.h>
 
 #include "gnome-druid-page-edge.h"
 

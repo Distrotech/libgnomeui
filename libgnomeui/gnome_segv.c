@@ -42,6 +42,9 @@
 #include <string.h>
 #include <stdio.h>
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 enum {
   RESPONSE_NULL,
   RESPONSE_BUG_BUDDY,

@@ -1,3 +1,25 @@
+Sun Aug 26 16:37:35 2001  George Lebl <jirka@5z.com>
+
+	* gnome-i18nP.h, gnome-app-util.c, gnome-app.c, gnome-canvas-init.c,
+	  gnome-client.c, gnome-color-picker.c, gnome-dateedit.c,
+	  gnome-druid-page-edge.c, gnome-druid-page-standard.c, gnome-druid.c,
+	  gnome-entry.c, gnome-file-entry.c, gnome-font-picker.c,
+	  gnome-href.c, gnome-stock-icons.c, gnome-ui-init.c, gnome_segv.c,
+	  libgnomeuiP.h:  Fix i18n issues (as in, translations should work
+	  again now) and add a gnome-i18nP.h like in libgnome.
+
+	* Makefile.am, gnome-dialog-util.[ch], gnome-dialog.[ch],
+	  gnome-messagebox.[ch]: Ressurect the gnome-dialog/messagebox stuff
+	  only to be deprecated, and it is marked deprecated.  The
+	  gnome-stock defines for buttons have been added to gnome-dialog.h,
+	  and they point to corresponding GTK_STOCK_ defines.
+
+	* gnome-dateedit.[ch], gnome-file-entry.h, gnome-href.[ch]: use
+	  GNOME_DISABLE_DEPRECATED rather then GNOME_EXCLUDE_DEPRECATED
+
+	* gnome-file-entry.c: add GNOME_DISABLE_DEPRECATED_SOURCE around
+	  a deprecated method and some fixups related 
+
 Sun Aug 26 09:18:55 2001  George Lebl <jirka@5z.com>
 
 	* gnome-app-helper.[ch], gnome-app-util.[ch], gnome-app.[ch],

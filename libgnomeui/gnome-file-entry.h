@@ -117,11 +117,11 @@ void       gnome_file_entry_set_modal	(GnomeFileEntry *fentry,
 					 gboolean is_modal);
 gboolean   gnome_file_entry_get_modal	(GnomeFileEntry *fentry);
 
-#ifndef GNOME_EXCLUDE_DEPRECATED
+#ifndef GNOME_DISABLE_DEPRECATED
 /* DEPRECATED, use gnome_file_entry_set_directory_entry */
 void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
 					  gboolean directory_entry);
-#endif /* GNOME_EXCLUDE_DEPRECATED */
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 G_END_DECLS
 

@@ -32,6 +32,9 @@
 #include <config.h>
 #include "gnome-macros.h"
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include <pwd.h>
 #include <string.h>
 #include <unistd.h>
@@ -187,7 +190,7 @@ fentry_set_arg (GtkObject *object,
 		break;
 	}
 	case ARG_DIRECTORY_ENTRY:
-		gnome_file_entry_set_directory (self, GTK_VALUE_BOOL(*arg));
+		gnome_file_entry_set_directory_entry (self, GTK_VALUE_BOOL(*arg));
 		break;
 	case ARG_MODAL:
 		gnome_file_entry_set_modal (self, GTK_VALUE_BOOL(*arg));
@@ -676,7 +679,7 @@ tilde_expand (char *str)
  * If @file_must_exist is false, nothing is tested and the path is returned.
  * If @file_must_exist is true, then the path is only returned if the path
  * actually exists. In case the entry is a directory entry (see
- * #gnome_file_entry_set_directory), then if the path exists and is a
+ * #gnome_file_entry_set_directory_entry), then if the path exists and is a
  * directory then it's returned; if not, it is assumed it was a file so
  * we try to strip it, and try again. It allocates memory for the returned string.
  *
@@ -846,6 +849,7 @@ gnome_file_entry_get_directory_entry(GnomeFileEntry *fentry)
 	return fentry->_priv->directory_entry;
 }
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 /**
  * gnome_file_entry_set_directory:
  * @fentry: The GnomeFileEntry widget to work with.
@@ -862,3 +866,4 @@ gnome_file_entry_set_directory(GnomeFileEntry *fentry, gboolean directory_entry)
 		  "please use gnome_file_entry_set_directory_entry");
 	gnome_file_entry_set_directory_entry(fentry, directory_entry);
 }
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */

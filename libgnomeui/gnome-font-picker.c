@@ -22,6 +22,9 @@
 #include <config.h>
 #include "gnome-macros.h"
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkalignment.h>
@@ -33,7 +36,6 @@
 #include <gtk/gtkstock.h>
 #include <libgnomeui/gnome-stock-icons.h>
 #include "gnome-font-picker.h"
-#include <libgnome/gnome-i18n.h>
 
 #include <string.h>
 #include <stdio.h>

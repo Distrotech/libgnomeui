@@ -38,8 +38,11 @@
 #include <gtk/gtkdrawingarea.h>
 #include <gtk/gtkframe.h>
 #include <gtk/gtksignal.h>
+
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include "gnome-color-picker.h"
-#include <libgnome/gnome-i18n.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkbutton.h>
 

@@ -27,7 +27,8 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
-#include <libgnome/gnome-i18n.h>
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
 
 #include <libgnomeui/gnome-stock-icons.h>
 #include "pixmaps/gnome-stock-pixbufs.h"

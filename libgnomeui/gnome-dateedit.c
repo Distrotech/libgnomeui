@@ -38,6 +38,10 @@
 #include <stdio.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
+
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include "gnome-dateedit.h"
 #include <libgnome/gnome-i18n.h>
 
@@ -908,7 +912,7 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 	return mktime (&tm);
 }
 
-#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
 /**
  * gnome_date_edit_get_date:
@@ -923,7 +927,7 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 	return gnome_date_edit_get_time(gde);
 }
 
-#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
+#endif /* not GNOME_DISABLE_DEPRECATED_SOURCE */
 
 
 /**

@@ -1,4 +1,3 @@
-/*  -*- Mode: C; c-set-style: linux; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -24,23 +23,35 @@
   @NOTATION@
  */
 
-#ifndef LIBGNOMEUIP_H
-#define LIBGNOMEUIP_H
+/*
+ * Handles i18n for the Gnome libraries. Libraries need to use
+ * dgettext in order to use a non-default translation domain.
+ * Author: Tom Tromey <tromey@creche.cygnus.com>
+ */
 
-#include <glib.h>
-#include <gobject/gsignal.h>
-#include <gtk/gtktypeutils.h>
+#ifndef __GNOME_I18NP_H__
+#define __GNOME_I18NP_H__ 1
 
+#ifdef ENABLE_NLS
+#    include <libintl.h>
+#    undef _
+#    define _(String) dgettext (PACKAGE, String)
+#    ifdef gettext_noop
+#        define N_(String) gettext_noop (String)
+#    else
+#        define N_(String) (String)
+#    endif
+#else
+/* Stubs that do something close enough.  */
+#    define textdomain(String) (String)
+#    define gettext(String) (String)
+#    define dgettext(Domain,Message) (Message)
+#    define dcgettext(Domain,Message,Type) (Message)
+#    define bindtextdomain(Domain,Directory) (Domain)
+#    define _(String) (String)
+#    define N_(String) (String)
+#endif
 
-#include <libgnome.h>
-#include "gnome-macros.h"
-#include "gnometypebuiltins.h"
+#include <libgnome/gnome-i18n.h>
 
-G_BEGIN_DECLS
-
-void gnome_type_init(void);
-
-G_END_DECLS
-
-#endif /* LIBGNOMEUIP_H */
-
+#endif /* __GNOME_I18NP_H__ */

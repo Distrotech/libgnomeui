@@ -23,13 +23,14 @@
 #include "config.h"
 #include "gnome-macros.h"
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include <string.h> /* for strlen */
 
 #include <gtk/gtk.h>
 #include <libgnome/gnome-url.h>
 #include "gnome-href.h"
-
-#include <libgnome/gnome-i18n.h>
 
 struct _GnomeHRefPrivate {
 	gchar *url;
@@ -338,7 +339,7 @@ gnome_href_set_text (GnomeHRef *href, const gchar *text)
   g_free(pattern);
 }
 
-#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
 /**
  * gnome_href_get_label
@@ -375,7 +376,7 @@ gnome_href_set_label (GnomeHRef *href, const gchar *label)
 	gnome_href_set_text(href, label);
 }
 
-#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
+#endif /* not GNOME_DISABLE_DEPRECATED_SOURCE */
 
 static void
 gnome_href_clicked (GtkButton *button)

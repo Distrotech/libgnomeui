@@ -86,9 +86,9 @@ int       gnome_date_edit_get_flags       (GnomeDateEdit *gde);
 
 time_t    gnome_date_edit_get_initial_time(GnomeDateEdit *gde);
 
-#ifndef GNOME_EXCLUDE_DEPRECATED
+#ifndef GNOME_DISABLE_DEPRECATED
 time_t    gnome_date_edit_get_date        (GnomeDateEdit *gde);
-#endif /* GNOME_EXCLUDE_DEPRECATED */
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 G_END_DECLS
 

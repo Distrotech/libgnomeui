@@ -72,11 +72,11 @@ const gchar *gnome_href_get_url(GnomeHRef *href);
 void gnome_href_set_text(GnomeHRef *href, const gchar *text);
 const gchar *gnome_href_get_text(GnomeHRef *href);
 
-#ifndef GNOME_EXCLUDE_DEPRECATED
+#ifndef GNOME_DISABLE_DEPRECATED
 /* DEPRECATED!, use set/get_text */
 void gnome_href_set_label(GnomeHRef *href, const gchar *label);
 const gchar *gnome_href_get_label(GnomeHRef *href);
-#endif
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 G_END_DECLS
 

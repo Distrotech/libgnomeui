@@ -23,9 +23,11 @@
 #include <config.h>
 #include "gnome-macros.h"
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include "gnome-druid.h"
 #include "gnome-uidefs.h"
-#include <libgnome/gnome-i18n.h>
 
 /* FIXME: Are these includes needed */
 #include <gtk/gtklabel.h>

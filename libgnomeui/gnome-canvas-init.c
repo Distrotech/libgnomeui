@@ -28,6 +28,9 @@
 #include <gobject/gboxed.h>
 #include <gtk/gtk.h>
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include <libgnomecanvas.h>
 #include <libgnome.h>
 

@@ -30,6 +30,9 @@
 
 #include <config.h>
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtkentry.h>
@@ -38,8 +41,6 @@
 #include <gtk/gtksignal.h>
 
 #include "gnome-entry.h"
-
-#include <libgnome/gnome-i18n.h>
 
 enum {
 	PROP_0,

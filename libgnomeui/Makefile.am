@@ -49,6 +49,8 @@ libgnomeui_2_la_SOURCES = \
 	gnome-client.c			\
 	gnome-color-picker.c		\
 	gnome-dateedit.c		\
+	gnome-dialog.c			\
+	gnome-dialog-util.c		\
 	gnome-druid.c			\
 	gnome-druid-page.c		\
 	gnome-druid-page-edge.c		\
@@ -60,6 +62,8 @@ libgnomeui_2_la_SOURCES = \
 	gnome-image-selector.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
+	gnome-i18nP.h			\
+	gnome-messagebox.c		\
 	gnome-ui-init.c			\
         gnome-winhints.c		\
 	gnometypes.c			\
@@ -74,6 +78,8 @@ gnome_headers = \
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-dateedit.h		\
+	gnome-dialog.h			\
+	gnome-dialog-util.h		\
 	gnome-druid.h			\
 	gnome-druid-page.h		\
 	gnome-druid-page-edge.h		\
@@ -87,6 +93,7 @@ gnome_headers = \
 	gnome-ice.h			\
 	gnome-icon-list.h		\
 	gnome-macros.h			\
+	gnome-messagebox.h		\
 	gnome-ui-init.h			\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
