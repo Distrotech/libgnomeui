@@ -25,6 +25,7 @@
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
@@ -773,6 +774,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 					(GTK_MENU_SHELL (menu), 
 					 uiinfo->moreinfo, orig_uibdata, 
 					 accel_group, FALSE, 0);
+				
 				if (gnome_preferences_get_menus_have_tearoff ()) {
 					tearoff = gtk_tearoff_menu_item_new ();
 					gtk_widget_show (tearoff);
@@ -891,6 +893,36 @@ gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo,
 	gnome_app_create_menus_custom (app, uiinfo, &uibdata);
 }
 
+static void
+gnome_app_set_tearoff_menu_titles(GnomeApp *app, GnomeUIInfo *uiinfo,
+				  char *above)
+{
+  int i;
+  char *ctmp = NULL, *ctmp2;
+
+  for(i = 0; uiinfo[i].type != GNOME_APP_UI_ENDOFINFO; i++) {
+    if(uiinfo[i].type != GNOME_APP_UI_SUBTREE)
+      continue;
+
+    if(!ctmp)
+      ctmp = alloca(strlen(above) + sizeof(" : ") + strlen(uiinfo[i].label)
+		    + 75 /* eek! Hope noone uses huge menu item names! */);
+    strcpy(ctmp, above);
+    strcat(ctmp, " : ");
+    strcat(ctmp, uiinfo[i].label);
+
+    ctmp2 = ctmp;
+    while((ctmp2 = strchr(ctmp2, '_')))
+      g_memmove(ctmp2, ctmp2+1, strlen(ctmp2+1)+1);
+
+    gtk_object_set_data_full(GTK_OBJECT(uiinfo[i].widget),
+			     "GtkTearoffMenuItem_window_title",
+			     g_strdup(ctmp), g_free);
+
+    gnome_app_set_tearoff_menu_titles(app, uiinfo[i].moreinfo, ctmp);
+  }
+}
+
 
 /**
  * gnome_app_create_menus_custom
@@ -903,7 +935,7 @@ gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 void
 gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo, 
-		GnomeUIBuilderData *uibdata)
+			       GnomeUIBuilderData *uibdata)
 {
 	GtkWidget *menubar;
 
@@ -916,6 +948,14 @@ gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo,
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, 
 			app->accel_group, TRUE, 0);
 	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
+
+	if(gnome_preferences_get_menus_have_tearoff ()) {
+	  char *app_name;
+	  app_name = GTK_WINDOW(app)->title;
+	  if(!app_name)
+	    app_name = GNOME_APP(app)->name;
+	  gnome_app_set_tearoff_menu_titles(app, uiinfo, app_name);
+	}
 }
 
 /* Creates a toolbar item appropriate for the SEPARATOR, ITEM, or TOGGLEITEM 
