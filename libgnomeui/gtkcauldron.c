@@ -73,7 +73,7 @@ static void gtk_cauldron_get_results (struct cauldron_result *r)
 }
 
 /* when a button is pressed for to quit the dialog, this function is called */
-void gtk_cauldron_button_exit (GtkWidget * w, struct cauldron_button *b)
+static void gtk_cauldron_button_exit (GtkWidget * w, struct cauldron_button *b)
 {
     if (b->r)
 	gtk_cauldron_get_results (b->r);
@@ -84,7 +84,7 @@ void gtk_cauldron_button_exit (GtkWidget * w, struct cauldron_button *b)
 }
 
 /* get text of an entry widget */
-void get_entry_result (GtkWidget * w, void *x)
+static void get_entry_result (GtkWidget * w, void *x)
 {
     gchar **result = (gchar **) x;
     *result = strdup (gtk_entry_get_text (GTK_ENTRY (w)));
@@ -93,7 +93,7 @@ void get_entry_result (GtkWidget * w, void *x)
 #ifdef HAVE_GNOME
 
 /* get text of an gnome entry widget */
-void get_gnome_entry_result (GtkWidget * w, void *x)
+static void get_gnome_entry_result (GtkWidget * w, void *x)
 {
     gchar **result = (gchar **) x;
     GnomeEntry *gentry;
@@ -128,7 +128,7 @@ void get_gnome_number_entry_result (GtkWidget * w, void *x)
 #endif
 
 /* get text of an text widget */
-void get_text_result (GtkWidget * w, void *x)
+static void get_text_result (GtkWidget * w, void *x)
 {
     gchar **result = (gchar **) x;
     gint i, l;
@@ -141,14 +141,14 @@ void get_text_result (GtkWidget * w, void *x)
 }
 
 /* get state of a check box or a radio button */
-void get_check_result (GtkWidget * w, void *x)
+static void get_check_result (GtkWidget * w, void *x)
 {
     gint *result = (gint *) x;
     *result = GTK_TOGGLE_BUTTON (w)->active;
 }
 
 /* get state of a check box or a radio button */
-void get_spin_result (GtkWidget * w, void *x)
+static void get_spin_result (GtkWidget * w, void *x)
 {
     gdouble *result = (gdouble *) x;
     *result = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON (w));
@@ -190,7 +190,7 @@ static gint find_breaker (gchar * p)
     return 0;
 }
 
-gint space_after (gchar * p)
+static gint space_after (gchar * p)
 {
     int s = 0;
     p++;
@@ -454,7 +454,7 @@ static void get_child_entry (GtkWidget * widget, gpointer data)
     }
 }
 
-gchar *create_label_pattern (gchar * label, gint underbar_pos)
+static gchar *create_label_pattern (gchar * label, gint underbar_pos)
 {
     gchar *pattern;
     pattern = strdup (label);
@@ -475,7 +475,7 @@ static void add_accelerator_with_underbar (GtkWidget * widget, GtkAccelGroup * a
     free (d.pattern);
 }
 
-GtkWidget *gtk_label_new_with_ampersand (gchar * label)
+static GtkWidget *gtk_label_new_with_ampersand (gchar * label)
 {
     GtkWidget *widget;
     gchar *pattern;
