@@ -251,7 +251,7 @@ item_post_create_setup (GnomeCanvasItem *item)
 
 	group_add (GNOME_CANVAS_GROUP (item->parent), item);
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2 + 1, item->y2 + 1);
 	item->canvas->need_repick = TRUE;
 }
 
@@ -337,7 +337,7 @@ static void
 redraw_if_visible (GnomeCanvasItem *item)
 {
 	if (item->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
-		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2 + 1, item->y2 + 1);
 }
 
 /* Standard object shutdown function for canvas items */
@@ -1016,7 +1016,7 @@ gnome_canvas_item_show (GnomeCanvasItem *item)
 
 	item->object.flags |= GNOME_CANVAS_ITEM_VISIBLE;
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2 + 1, item->y2 + 1);
 	item->canvas->need_repick = TRUE;
 }
 
@@ -1039,7 +1039,7 @@ gnome_canvas_item_hide (GnomeCanvasItem *item)
 
 	item->object.flags &= ~GNOME_CANVAS_ITEM_VISIBLE;
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2 + 1, item->y2 + 1);
 	item->canvas->need_repick = TRUE;
 }
 
