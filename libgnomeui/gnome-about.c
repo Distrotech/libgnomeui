@@ -27,7 +27,11 @@
 
 #include "gnome-about.h"
 
+#include "gnome-stock-icons.h"
+
+#include <gtk/gtkalignment.h>
 #include <gtk/gtkbbox.h>
+#include <gtk/gtkbutton.h>
 #include <gtk/gtkdialog.h>
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkimage.h>
@@ -194,11 +198,14 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 	dialog = gtk_dialog_new_with_buttons (_("Credits"),
 					      GTK_WINDOW (about),
 					      GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_STOCK_OK, GTK_RESPONSE_OK,
+					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					      NULL);
 	about->_priv->credits_dialog = dialog;
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 360, 260);
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
+	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
 	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy), dialog);
 	g_signal_connect (dialog, "destroy",
@@ -206,7 +213,7 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 			  &(about->_priv->credits_dialog));
 
 	notebook = gtk_notebook_new ();
-	gtk_container_set_border_width (GTK_CONTAINER (notebook), 8);
+	gtk_container_set_border_width (GTK_CONTAINER (notebook), 5);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, TRUE, TRUE, 0);
 
 	if (about->_priv->authors != NULL) {
@@ -220,7 +227,7 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
 		
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw,
-					  gtk_label_new_with_mnemonic (_("Written by")));
+					  gtk_label_new (_("Written by")));
 		gnome_about_update_authors_label (about, label);
 	}
 
@@ -235,7 +242,7 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
 
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw,
-					  gtk_label_new_with_mnemonic (_("Documented by")));
+					  gtk_label_new (_("Documented by")));
 		gnome_about_update_documenters_label (about, label);
 	}
 
@@ -250,7 +257,7 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
 
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw,
-					  gtk_label_new_with_mnemonic (_("Translated by")));
+					  gtk_label_new (_("Translated by")));
 		gnome_about_update_translation_information_label (about, label);
 	}
 	
@@ -261,7 +268,7 @@ static void
 gnome_about_instance_init (GnomeAbout *about)
 {
 	GnomeAboutPrivate *priv;
-	GtkWidget *vbox, *button;
+	GtkWidget *vbox, *hbox, *image, *label, *alignment, *button;
 
 	/* Data */
 	
@@ -276,9 +283,13 @@ gnome_about_instance_init (GnomeAbout *about)
 	priv->authors = NULL;
 	priv->documenters = NULL;
 
+	gtk_dialog_set_has_separator (GTK_DIALOG (about), FALSE);
+	gtk_container_set_border_width (GTK_CONTAINER (about), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (about)->vbox), 5);
+
 	/* Widgets */
 	vbox = gtk_vbox_new (FALSE, 8);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 8);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about)->vbox), vbox, TRUE, TRUE, 0);
 
@@ -302,12 +313,27 @@ gnome_about_instance_init (GnomeAbout *about)
 
 	gtk_widget_show_all (vbox);
 	
-	/* Add the OK button */
-	gtk_dialog_add_button (GTK_DIALOG (about), GTK_STOCK_OK, GTK_RESPONSE_OK);
-	gtk_dialog_set_default_response (GTK_DIALOG (about), GTK_RESPONSE_OK);
+	/* Add the close button */
+	gtk_dialog_add_button (GTK_DIALOG (about), GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
+	gtk_dialog_set_default_response (GTK_DIALOG (about), GTK_RESPONSE_CLOSE);
 
 	/* Add the credits button */
-	button = gtk_dialog_add_button (GTK_DIALOG (about), _("_Credits"), GNOME_RESPONSE_CREDITS);
+	image = gtk_image_new_from_stock (GNOME_STOCK_ABOUT, GTK_ICON_SIZE_BUTTON);
+
+	label = gtk_label_new_with_mnemonic (_("C_redits"));
+	
+	hbox = gtk_hbox_new (FALSE, 2);
+	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+	alignment = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
+	gtk_container_add (GTK_CONTAINER (alignment), hbox);
+
+	button = gtk_button_new ();
+	gtk_container_add (GTK_CONTAINER (button), alignment);
+	gtk_widget_show_all (button);
+
+	gtk_dialog_add_action_widget (GTK_DIALOG (about), button, GNOME_RESPONSE_CREDITS);
 	gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (GTK_DIALOG (about)->action_area), button, TRUE);
 	
 	gtk_window_set_resizable (GTK_WINDOW (about), FALSE);
