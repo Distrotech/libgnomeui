@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-21 19:21+0200\n"
+"POT-Creation-Date: 2004-07-15 22:01+0200\n"
 "PO-Revision-Date: 2003-06-27 21:59--100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -38,7 +38,7 @@ msgstr "Podpowiedź do 2. elementu"
 msgid "Filesystem"
 msgstr "System plików"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1507
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Zachowanie Ulubionych nie powiodło się (%s)"
@@ -1282,23 +1282,31 @@ msgstr "Pytanie"
 msgid "Message"
 msgstr "Komunikat"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "Nazwa _użytkownika:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Domena:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Hasło:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr "Połączenie _anonimowe"
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr "Połączenie jako _użytkownik:"
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Zapamiętanie hasła dla bieżącej sesji"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "Zachowanie hasła w bazie kluczy"
 
