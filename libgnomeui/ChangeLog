@@ -1,5 +1,16 @@
 1998-07-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-init.c: Fixup includes.
+
+	* gnome-canvas.c (gnome_canvas_scroll_to): Re-added the
+	gnome_canvas_scroll_to() function.  It changes the scroll offset
+	by emitting the proper signals, and takes care of all the gritty
+	details.
+	(gnome_canvas_get_scroll_offsets): New public function to query
+	the scroll offsets of the canvas.
+
+1998-07-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	OK, some semi-major changes.  The canvas is now a descendant of
 	GtkLayout, which does smooth scrolling a la Mozilla (so that
 	subwindows of the window you are scrolling do not trail behind

@@ -2023,6 +2023,53 @@ gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height)
 }
 
 void
+gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy)
+{
+	int hupper, vupper;
+
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	hupper = canvas->layout.hadjustment->upper;
+	vupper = canvas->layout.vadjustment->upper;
+
+	if (cx < 0)
+		cx = 0;
+
+	if (cx > (hupper - canvas->width))
+		cx = hupper - canvas->width;
+
+	if (cy < 0)
+		cy = 0;
+
+	if (cy > (vupper - canvas->height))
+		cx = vupper - canvas->height;
+
+	if (cx != (int) canvas->layout.hadjustment->value) {
+		canvas->layout.hadjustment->value = cx;
+		gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.hadjustment), "value_changed");
+	}
+
+	if (cy != (int) canvas->layout.vadjustment->value) {
+		canvas->layout.vadjustment->value = cy;
+		gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "value_changed");
+	}
+}
+
+void
+gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	if (cx)
+		*cx = canvas->layout.hadjustment->value;
+
+	if (cy)
+		*cy = canvas->layout.vadjustment->value;
+}
+
+void
 gnome_canvas_update_now (GnomeCanvas *canvas)
 {
 	g_return_if_fail (canvas != NULL);
