@@ -1,5 +1,23 @@
 2000-08-01  Martin Baulig  <baulig@suse.de>
 
+	Moved all deprecated files (i.e the ones that were linked into
+	libgnomeui-1-compat and not into libgnomeui) into their own
+	subdirectory (../libcompat).
+
+	Hey, new you can do a `ls' here and you won't get confused by all
+	this old crap any longer .... :-)
+
+	* gnome-dentry-edit.c, gnome-dentry-edit.h, gnome-dns.c,
+	gnome-dns.h, gnome-druid-page-finish.c, gnome-druid-page-finish.h,
+	gnome-druid-page-start.c, gnome-druid-page-start.h, gnome-guru.c,
+	gnome-guru.h, gnome-procbar.c, gnome-procbar.h, gnome-properties.c,
+	gnome-properties.h, gnome-property-entries.c, gnome-property-entries.h,
+	gnome-spell.c, gnome-spell.h, gnome-startup.c, gnome-startup.h,
+	gnomeui10-compat.c, gnomeui10-compat.h, gtkcauldron.c, gtkcauldron.h:
+	Moved to ../libcompat/.
+
+2000-08-01  Martin Baulig  <baulig@suse.de>
+
 	* gnome-stock.c (GnomeStockPixmapEntryPixbufScaled): Inserted
 	`ref_count' field so we can cast it to GnomeStockPixmapEntryAny
 	without getting a core dump.

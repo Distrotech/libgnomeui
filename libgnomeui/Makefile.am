@@ -16,10 +16,6 @@ noinst_PROGRAMS = test-recently-used test-file-saver selector_demo stock_demo wi
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
 lib_LTLIBRARIES = libgnomeui-2.la
 
-if COMPILE_GNOME_COMPAT
-lib_LIBRARIES = libgnomeui-1-compat-2.a
-endif
-
 #
 # Install location for header files
 #
@@ -63,47 +59,6 @@ $(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
 	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-unknown.idl
 
 gnorba_built = $(gnome_unknown_built) $(gnome_corba_rexec_built)
-
-if COMPILE_GNOME_COMPAT
-libgnomeui10compatincludedir = $(libgnomeuiincludedir)/compat/1
-
-libgnomeui_1_compat_2_a_SOURCES =\
-	gnome-font-selector.c 		\
-	gnome-guru.c			\
-	gnome-spell.c			\
-	gnome-startup.c			\
-	gtkcauldron.c			\
-	gnomeui10-compat.c		\
-	gnome-dns.c			\
-	gnome-dentry-edit.c		\
-	gnome-druid-page-start.c	\
-	gnome-druid-page-finish.c	\
-	gnome-procbar.c			\
-	gnome-properties.c		\
-	gnome-property-entries.c
-
-# This probably won't work right
-#	gnome-canvas-image.c
-
-libgnomeui10compatinclude_HEADERS = \
-	libgnomeui-compat-1.0.h		\
-	gnome-font-selector.h 		\
-	gnome-guru.h			\
-	gnome-spell.h			\
-	gnome-startup.h			\
-	gtkcauldron.h			\
-	gnome-dentry-edit.h		\
-	gnomeui10-compat.h		\
-	gnome-dns.h			\
-	gnome-druid-page-start.h	\
-	gnome-druid-page-finish.h	\
-	gnome-procbar.h			\
-	gnome-properties.h		\
-	gnome-property-entries.h
-
-# This probably won't work right
-#	gnome-canvas-image.h
-endif
 
 EXTRA_HEADERS = 
 
