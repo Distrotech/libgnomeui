@@ -203,6 +203,8 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 			h = ICON_SIZE;
 		}
 	}
+	w = w>0?w:1;
+	h = h>0?h:1;
 	
 	im = gdk_imlib_clone_scaled_image(iml,w,h);
 	gdk_imlib_destroy_image(iml);
