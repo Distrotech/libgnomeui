@@ -1,3 +1,14 @@
+Mon Apr 05 00:58:12 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-sel.c: avoid segfault if the browse dialog is closed
+	  before a directory is fully read, also catch destructions while
+	  in the show loop. and I removed the "update on every 5th" thing
+	  and it updates the progressbar on every image (the saving was
+	  insignificant as far as I meassured it)
+
+	* gnome-icon-entry.c: stop the showing of icons when one of the
+	  buttons to avoid segs
+
 Fri Apr  2 21:03:56 1999  ape@spacetec.no  (Asbjorn Pettersen)
 
 	* gnome-less.c (gnome_less_show_command): 

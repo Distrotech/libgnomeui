@@ -303,6 +303,7 @@ icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
 	gis =  gtk_object_get_user_data(GTK_OBJECT(ientry));
+	gnome_icon_selection_stop_loading(gis);
 	icon = gnome_icon_selection_get_icon(gis, TRUE);
 
 	if (icon != NULL) {
@@ -311,6 +312,19 @@ icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 		entry_changed (NULL, ientry);
 	}
 }
+
+static void
+cancel_pressed(GtkButton * button, GnomeIconEntry * ientry)
+{
+	GnomeIconSelection * gis;
+
+	g_return_if_fail (ientry != NULL);
+	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+
+	gis =  gtk_object_get_user_data(GTK_OBJECT(ientry));
+	gnome_icon_selection_stop_loading(gis);
+}
+
 
 static void
 gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEntry *ientry)
@@ -331,6 +345,7 @@ gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEnt
 	}
 
 	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
+		gnome_icon_selection_stop_loading(gis);
 		entry_changed (NULL, ientry);
 		gtk_widget_hide(ientry->pick_dialog);
 	}
@@ -443,14 +458,21 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 					    0, /* OK button */
 					    GTK_SIGNAL_FUNC(icon_selected_cb),
 					    ientry);
+		gnome_dialog_button_connect(GNOME_DIALOG(ientry->pick_dialog), 
+					    1, /* Cancel button */
+					    GTK_SIGNAL_FUNC(cancel_pressed),
+					    ientry);
 		gtk_signal_connect_after(GTK_OBJECT(GNOME_ICON_SELECTION(iconsel)->gil), "select_icon",
 					 GTK_SIGNAL_FUNC(gil_icon_selected_cb),
 					 ientry);
 
 		gtk_object_set_user_data(GTK_OBJECT(ientry), iconsel);
 	} else {
+		GnomeIconSelection *gis =
+			gtk_object_get_user_data(GTK_OBJECT(ientry));
 		if(!GTK_WIDGET_VISIBLE(ientry->pick_dialog))
 			gtk_widget_show(ientry->pick_dialog);
+		if(gis) gnome_icon_selection_show_icons(gis);
 	}
 }
 

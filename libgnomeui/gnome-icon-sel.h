@@ -40,6 +40,8 @@ struct _GnomeIconSelection {
   GtkWidget * gil;
 
   GList * file_list;
+  
+  int stop_loading; /* a flag set to stop the loading of images in midprocess */
 };
 
 struct _GnomeIconSelectionClass {
@@ -73,6 +75,9 @@ gnome_icon_selection_get_icon             (GnomeIconSelection * gis,
 /* Filename is only the last part, not the full path */
 void  gnome_icon_selection_select_icon    (GnomeIconSelection * gis,
 					   const gchar * filename);
+
+/* Stop the loading of images when we are in the loop in show_icons */
+void  gnome_icon_selection_stop_loading   (GnomeIconSelection * gis);
 
 END_GNOME_DECLS
    

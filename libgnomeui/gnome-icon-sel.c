@@ -290,6 +290,12 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
   closedir(dp);
 }
 
+static void
+set_flag(GtkWidget *w, int *flag)
+{
+	*flag = TRUE;
+}
+
 /**
  * gnome_icon_selection_show_icons:
  * @gis: GnomeIconSelection to work with
@@ -304,45 +310,61 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
  **/
 void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
 {
-  GList * list;
   GtkWidget *label;
   GtkWidget *progressbar;
   int file_count, i;
+  int local_dest;
+  int was_destroyed = FALSE;
 
   g_return_if_fail(gis != NULL);
   if(!gis->file_list) return;
 
-  list = gis->file_list;
-  
   label = gtk_label_new(_("Loading Icons..."));
   gtk_box_pack_start(GTK_BOX(gis->box),label,FALSE,FALSE,0);
   gtk_widget_show(label);
-
+  
   progressbar = gtk_progress_bar_new();
   gtk_box_pack_start(GTK_BOX(gis->box),progressbar,FALSE,FALSE,0);
   gtk_widget_show(progressbar);
 
-  file_count = g_list_length(list);
+  file_count = g_list_length(gis->file_list);
   i = 0;
   
   gnome_icon_list_freeze(GNOME_ICON_LIST(gis->gil));
 
-  while (list) {
-    append_an_icon(gis, list->data);
-    g_free(list->data);
-    list = list->next;
-    /*only do this for every 5th to save some time*/
-    if(i%5==0) {
-	    gtk_progress_bar_update (GTK_PROGRESS_BAR (progressbar), (float)i / file_count);
-	    while ( gtk_events_pending() ) {
-		    gtk_main_iteration();
-	    }
-    }
-    i++;
-  }
+  /* this can be set with the stop_loading method to stop the
+     display in the middle */
+  gis->stop_loading = FALSE;
+  
+  /*bind destroy so that we can bail out of this function if the whole thing
+    was destroyed while doing the main_iteration*/
+  local_dest = gtk_signal_connect(GTK_OBJECT(gis),"destroy",
+				  GTK_SIGNAL_FUNC(set_flag),
+				  &was_destroyed);
 
-  g_list_free(gis->file_list);
-  gis->file_list = NULL;
+  while (gis->file_list) {
+	  GList * list = gis->file_list;
+	  append_an_icon(gis, list->data);
+	  g_free(list->data);
+	  gis->file_list = g_list_remove_link(gis->file_list,list);
+	  g_list_free_1(list);
+
+	  gtk_progress_bar_update (GTK_PROGRESS_BAR (progressbar),
+				   (float)i / file_count);
+	  while ( gtk_events_pending() ) {
+		  gtk_main_iteration();
+	  }
+	  
+	  /*if the gis was destroyed from underneath us ... bail out*/
+	  if(was_destroyed) return;
+
+	  if(gis->stop_loading)
+		  break;
+
+	  i++;
+  }
+  
+  gtk_signal_disconnect(GTK_OBJECT(gis),local_dest);
 
   gnome_icon_list_thaw(GNOME_ICON_LIST(gis->gil));
 
@@ -350,6 +372,28 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
   gtk_widget_destroy(label);
 }
 
+/**
+ * gnome_icon_selection_stop_loading:
+ * @gis: GnomeIconSelection to work with
+ *
+ * Description: Stop the loading of images when we are in
+ * the loop in show_icons, otherwise it does nothing and is
+ * harmless, it should be used say if the dialog was hidden
+ * or when we want to quickly stop loading the images to do
+ * something else without destroying the icon selection object.
+ * The ramaining icons can be shown by
+ * #gnome_icon_selection_show_icons.
+ *
+ * Returns:
+ **/
+void
+gnome_icon_selection_stop_loading(GnomeIconSelection * gis)
+{
+	g_return_if_fail(gis != NULL);
+	g_return_if_fail(GNOME_IS_ICON_SELECTION(gis));
+	
+	gis->stop_loading = TRUE;
+}
 
 /**
  * gnome_icon_selection_clear:
@@ -366,6 +410,7 @@ void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
 					   gboolean not_shown)
 {
 	g_return_if_fail(gis != NULL);
+	g_return_if_fail(GNOME_IS_ICON_SELECTION(gis));
 
 	/*clear our data if we have some and not_shown is set*/
 	if(not_shown && gis->file_list) {
