@@ -1,3 +1,22 @@
+2003-09-30  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserimpldefault.c (struct _GtkFileChooserImplDefault):
+	Added fields for the shortcuts tree and its model.
+	(create_file_list): Don't call
+	gtk_tree_view_column_set_sort_column_id() twice.
+	(create_shortcuts_model): New function.
+	(list_icon_data_func): Use an ICON_SIZE macro instead of a
+	hardcoded value.
+	(list_row_activated): Use _gtk_file_chooser_set_current_folder_path()
+	to avoid converting the GtkFilePath to a URI string.
+	(gtk_file_chooser_impl_default_set_current_folder): Select the
+	appropriate item from the shortcuts list when the current folder
+	changes, to let the user know where he is.
+	(tree_selection_changed): Likewise.
+
+	* gtkfilesystem.h (struct _GtkFileSystemIface): Added methods for
+	::supports_shortcuts(), ::list_shortcuts(), ::set_shortcuts().
+
 2003-09-15  Bastien Nocera  <hadess@hadess.net>
 
 	* gtkfilefilter.c: (gtk_file_filter_filter): avoid crash when
@@ -91,7 +110,7 @@ Wed Sep  3 16:38:59 2003  Owen Taylor  <otaylor@redhat.com>
 	* glib-interface-propreties-0.5.patch: Remove excess
 	check that was breaking with current GObject.
 
-	* gtkfilechooser.c (gtk_file_chooser_class_init): 
+	* gtkfilechooser.c (gtk_file_chooser_class_init):
 	use the new ability to have a class_init function for
 	interfaces to avoid the ugly static gboolean initialized
 	hack.
@@ -204,7 +223,7 @@ Wed Jul 16 16:50:31 2003  Owen Taylor  <otaylor@redhat.com>
 	based on MIME type. Add a simple icon caching system.
 
 	* gtkfilesystemgnomevfs.c: Implement ensure_types()
-	so that extending the set of types for a loaded 
+	so that extending the set of types for a loaded
 	directory works. Set the MIME type to get the default
 	icon handling.
 
@@ -230,10 +249,10 @@ Fri Jul 11 14:37:07 2003  Owen Taylor  <otaylor@redhat.com>
 
 Wed Apr  9 12:28:04 2003  Owen Taylor  <otaylor@redhat.com>
 
-	* gtkfilesystemmodel.c: 
+	* gtkfilesystemmodel.c:
 	- Disconnect signal connections when appropriate.
 	- Listen to ::roots-changed on the file system
-	- When the last reference count on a child is 
+	- When the last reference count on a child is
 	  removed, queue an idle to unload the parent.
 
 	* gtkfilesystemgnomevfs.c
@@ -244,7 +263,7 @@ Wed Apr  9 12:28:04 2003  Owen Taylor  <otaylor@redhat.com>
 	* gtkfilechooserentry.c: Don't complete on empty
 	file parts; free stored folder when base directory
 	changes.
-	
+
 	* gtkfilechooser.c: Fill in some docs.
 
 Fri Apr  4 18:29:27 2003  Owen Taylor  <otaylor@redhat.com>
@@ -258,7 +277,7 @@ Fri Apr  4 17:30:27 2003  Owen Taylor  <otaylor@redhat.com>
 	can refer to GtkFileSystem.
 
 	* *.[ch]: Switch over from using gchar *uri internally
-	to using GtkFilePath * internally, and add 
+	to using GtkFilePath * internally, and add
 	conversion routines to GtkFileSystem.
 
 	* TODO README: Updates.
