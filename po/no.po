@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2002-05-07 14:39+0200\n"
-"PO-Revision-Date: 2002-05-07 14:41+0200\n"
+"POT-Creation-Date: 2002-05-12 17:03+0200\n"
+"PO-Revision-Date: 2002-05-12 17:04+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -838,27 +838,31 @@ msgstr "_Avslutt spillet"
 msgid "End the current game"
 msgstr "Avslutt aktivt spill"
 
-#: libgnomeui/gnome-app-helper.c:1133
+#: libgnomeui/gnome-app-helper.c:1130
 msgid "_Contents"
 msgstr "_Innhold"
 
-#: libgnomeui/gnome-app-helper.c:2517
+#: libgnomeui/gnome-app-helper.c:1131
+msgid "View help for this application"
+msgstr "Vis hjelp for denne applikasjonen"
+
+#: libgnomeui/gnome-app-helper.c:2515
 msgid "Text Below Icons"
 msgstr "Tekst under ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2516
 msgid "Text Beside Icons"
 msgstr "Tekst ved siden av ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2519
+#: libgnomeui/gnome-app-helper.c:2517
 msgid "Icons Only"
 msgstr "Kun ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2518
 msgid "Text Only"
 msgstr "Kun tekst"
 
-#: libgnomeui/gnome-app-helper.c:2580
+#: libgnomeui/gnome-app-helper.c:2578
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Bruk forvalg for skrivebord (%s)"
@@ -1248,19 +1252,6 @@ msgstr "Sans 14"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Avslutt testprogrammet"
-
-#~ msgid "Find _Again"
-#~ msgstr "Finn _igjen"
-
-#~ msgid "Both text and icons"
-#~ msgstr "Både tekst og ikoner"
-
-#~ msgid "Both text and icons when horizontal, just icons when vertical"
-#~ msgstr ""
-#~ "Både tekst og ikoner ved horisontal plassering, kun ikoner ved vertikal"
-
-#~ msgid "E_xit"
-#~ msgstr "_Avslutt"
 
 #~ msgid "Exit the program"
 #~ msgstr "Avslutt programmet"
