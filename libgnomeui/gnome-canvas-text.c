@@ -533,8 +533,7 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 		text->font = gdk_fontset_load (GTK_VALUE_STRING (*arg));
 		if (!text->font) {
-			text->font = gdk_fontset_load ("-*-fixed-medium-r-semicondensed--13-120-75-75-c-60-*-*");
-			g_assert (text->font != NULL);
+			text->font = gdk_fontset_load ("-*-fixed-medium-r-semicondensed--13-120-75-75-c-60-*-*,*");
 		}
 		if (!text->font) {
 			text->font = gdk_font_load ("fixed");

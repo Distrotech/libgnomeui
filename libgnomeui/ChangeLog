@@ -1,3 +1,8 @@
+1999-02-26  Sergey Panov <sipan@mit.edu>
+
+        * gnome-canvas-text.c(gnome_canvas_text_set_arg): removed
+        g_assert that was left there by mistake.
+
 Fri Feb 26 15:39:58 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-entry.c: fix problem with chooser dialog when the
