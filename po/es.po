@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
-"POT-Creation-Date: 2001-10-01 23:53+0200\n"
+"POT-Creation-Date: 2001-10-06 23:59+0200\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -69,7 +69,8 @@ msgstr "Creditos de los traductores"
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
-"Creditos de los traductores. Esta cadena deberia estar marcada como traducible"
+"Creditos de los traductores. Esta cadena deberia estar marcada como "
+"traducible"
 
 #: libgnomeui/gnome-about.c:231 libgnomeui/gnome-about.c:672
 msgid "Documenters"
@@ -153,7 +154,7 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:314
 msgid "Header font"
-msgstr ""
+msgstr "Fuente de la cabecera"
 
 #: libgnomeui/gnome-about.c:315
 msgid "Header font description as a string"
@@ -177,19 +178,19 @@ msgstr "Descripción de la fuente de los comentarios como una cadena"
 
 #: libgnomeui/gnome-about.c:332
 msgid "Name header font"
-msgstr ""
+msgstr "Fuente del nombre de la cabecera"
 
 #: libgnomeui/gnome-about.c:333
 msgid "Name header font description as a string"
-msgstr ""
+msgstr "Fuente del nombre de la descripción de la cabecera como cadena"
 
 #: libgnomeui/gnome-about.c:338
 msgid "Name list font"
-msgstr ""
+msgstr "Fuente del nombre de la lista"
 
 #: libgnomeui/gnome-about.c:339
 msgid "Name list font description as a string"
-msgstr ""
+msgstr "Fuente del nombre de la descripción de la lista como cadena"
 
 #: libgnomeui/gnome-about.c:666
 msgid "Author"
@@ -200,6 +201,7 @@ msgid "Documenter"
 msgstr "Documentador"
 
 #: libgnomeui/gnome-about.c:819
+#, c-format
 msgid "About %s"
 msgstr "Acerca de %s"
 
