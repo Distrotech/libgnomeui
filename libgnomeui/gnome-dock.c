@@ -1119,14 +1119,19 @@ get_docked_item_by_name (GnomeDock *dock,
     }
     areas[] =
     {
-      { dock->top_bands, GNOME_DOCK_TOP },
-      { dock->bottom_bands, GNOME_DOCK_BOTTOM },
-      { dock->left_bands, GNOME_DOCK_LEFT },
-      { dock->right_bands, GNOME_DOCK_RIGHT },
+      { NULL, GNOME_DOCK_TOP },
+      { NULL, GNOME_DOCK_BOTTOM },
+      { NULL, GNOME_DOCK_LEFT },
+      { NULL, GNOME_DOCK_RIGHT },
       { NULL, GNOME_DOCK_FLOATING },
     }, *p;
     GtkWidget *item;
     GList *lp;
+
+    areas[0].band_list = dock->top_bands;
+    areas[1].band_list = dock->bottom_bands;
+    areas[2].band_list = dock->left_bands;
+    areas[3].band_list = dock->right_bands;
 
     for (p = areas; p->band_list != NULL; p++)
       {

@@ -1,4 +1,10 @@
 #include <config.h>
+
+/* needed for sigaction and friends under 'gcc -ansi -pedantic' on 
+ * GNU/Linux */
+#define _POSIX_SOURCE 1
+#include <sys/types.h>
+
 #include <unistd.h>
 #include <gnome.h>
 #include <signal.h>

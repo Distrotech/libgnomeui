@@ -9,6 +9,11 @@
  */
 
 #include <config.h>
+
+/* needed for M_PI_2 under 'gcc -ansi -predantic' on GNU/Linux */
+#define _BSD_SOURCE 1
+#include <sys/types.h>
+
 #include <glib.h>
 #include <math.h>
 #include "gnome-canvas.h"

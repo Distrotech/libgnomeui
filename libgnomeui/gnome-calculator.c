@@ -4,6 +4,12 @@
  */
 
 #include <config.h>
+
+/* needed for values of M_E and M_PI under 'gcc -ansi -pedantic'
+ * on GNU/Linux */
+#define _BSD_SOURCE 1
+#include <sys/types.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -23,7 +29,7 @@ typedef void (*sighandler_t)(int);
 typedef enum {
 	CALCULATOR_NUMBER,
 	CALCULATOR_FUNCTION,
-	CALCULATOR_PARENTHESIS,
+	CALCULATOR_PARENTHESIS
 } CalculatorActionType;
 
 typedef gdouble (*MathFunction1) (gdouble);

@@ -15,6 +15,11 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+
+/* needed for M_* under 'gcc -ansi -pedantic' on GNU/Linux */
+#define _BSD_SOURCE 1
+#include <sys/types.h>
+
 #include <math.h>
 #include <stdio.h>
 #include <gtk/gtkmain.h>

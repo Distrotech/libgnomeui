@@ -261,7 +261,12 @@ client_set_value (GnomeClient *client,
 		  SmPropValue *vals)
 {
   SmProp *proplist[1];
-  SmProp prop= {name, type, num_vals, vals};
+  SmProp prop;
+  
+  prop.name = name;
+  prop.type = type;
+  prop.num_vals = num_vals;
+  prop.vals = vals;
 
   proplist[0]= &prop;  
   SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);  
