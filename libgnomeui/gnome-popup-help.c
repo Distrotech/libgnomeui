@@ -412,6 +412,7 @@ paste_callback (GtkWidget *widget, gpointer data)
         gtk_editable_paste_clipboard (GTK_EDITABLE (editable));
 }
 
+
 /* public function. */
 void
 gnome_widget_add_help_with_uidata (GtkWidget *widget,
