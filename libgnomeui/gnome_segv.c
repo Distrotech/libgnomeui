@@ -11,12 +11,12 @@
 
 #include <errno.h>
 
-#include <stdlib.h>
 #include <unistd.h>
 #include <gnome.h>
 #include <signal.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[])
 {
@@ -43,7 +43,8 @@ int main(int argc, char *argv[])
 
   /* in case gnome-session is segfaulting :-) */
   gnome_client_disable_master_connection();
-  
+
+  putenv("GNOME_DISABLE_CRASH_DIALOG=1"); /* Don't recurse */  
   gnome_init_with_popt_table("gnome_segv", VERSION, argc, argv, NULL, 0, &ctx);
 
   memset(&sa, 0, sizeof(sa));
