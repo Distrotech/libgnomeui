@@ -5,6 +5,16 @@
 
 
 static void
+message_dlg_clicked(GtkWidget *widget, int button)
+{
+	if (button == 0) { /* Yes */
+		gtk_main_quit();
+	}
+}
+
+
+
+static gboolean
 message_dlg(GtkWidget *widget, gpointer data)
 {
 	GnomeMessageBox *box;
@@ -14,12 +24,12 @@ message_dlg(GtkWidget *widget, gpointer data)
 				     			GNOME_STOCK_BUTTON_YES,
 				     			GNOME_STOCK_BUTTON_NO,
 				     			NULL));
-	/* Quit no matter what.  */
 	gtk_signal_connect (GTK_OBJECT (box), "clicked",
-			    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
+			    GTK_SIGNAL_FUNC (message_dlg_clicked), NULL);
 
 	gnome_message_box_set_modal (box);
 	gtk_widget_show (GTK_WIDGET (box));
+	return TRUE;
 }
 
 
@@ -444,7 +454,7 @@ main(int argc, char **argv)
 			       "GnomeStockTest");
 
 	gtk_signal_connect(GTK_OBJECT(window), "delete_event",
-			   GTK_SIGNAL_FUNC(gtk_widget_destroy), NULL);
+			   GTK_SIGNAL_FUNC(message_dlg), NULL);
 	gtk_signal_connect(GTK_OBJECT(window), "destroy",
 			   GTK_SIGNAL_FUNC(gtk_main_quit), NULL);
 	
@@ -454,7 +464,9 @@ main(int argc, char **argv)
 			  "Click on `OK' to enable the toolbar and menu items\n"
 			  "Select Edit->Properties or the Properties toolbar button\n"
 			  "to open a GnomePropertyBox\n"
-			  "Select File->Quit or the Close button to exit the app");
+			  "Select Edit->Preferences to open the Menu Accelerator Configuration Dialog\n"
+			  "Select File->Quit or the Close button to get an example message box and the\n"
+			  "opportunity to exit this app");
 	gtk_widget_show(w);
 	gtk_box_pack_start(GTK_BOX(vbox), w, TRUE, TRUE, 2);
 
@@ -475,8 +487,8 @@ main(int argc, char **argv)
 	gtk_widget_show(w);
 	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
 	gtk_signal_connect_object(GTK_OBJECT(w), "clicked",
-				  (GtkSignalFunc)gtk_widget_destroy,
-				  GTK_OBJECT(window));
+				  (GtkSignalFunc)message_dlg,
+				  NULL);
 
 	w = gnome_stock_button(GNOME_STOCK_BUTTON_HELP);
 	gtk_widget_show(w);
@@ -515,3 +527,4 @@ main(int argc, char **argv)
 	gtk_widget_show(window);
 	gtk_main();
 }
+

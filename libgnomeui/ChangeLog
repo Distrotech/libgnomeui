@@ -1,3 +1,9 @@
+Wed Mar 25 01:30:00 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
+
+	* stock_demo.c: use the "Really quit?" message box for real.
+
+	* gnome-stock.c: minor i18n fix for clist titles.
+
 Tue Mar 24 23:06:44 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
 
 	* gnome-messagebox.c (gnome_message_box_init): applied patch from

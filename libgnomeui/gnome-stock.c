@@ -1249,10 +1249,7 @@ gnome_stock_menu_accel_dlg(char *section)
 	GnomePropertyBox *box;
 	GtkWidget *w, *label;
 	struct default_AccelEntry *p;
-	char *titles[] = {
-		"Menu Item",
-		"Accelerator"
-	};
+	char *titles[2];
 	char *row_data[2];
 
 	box = GNOME_PROPERTY_BOX(gnome_property_box_new());
@@ -1260,6 +1257,8 @@ gnome_stock_menu_accel_dlg(char *section)
 
 	label = gtk_label_new(_("Global"));
 	gtk_widget_show(label);
+	titles[0] = _("Menu Item");
+	titles[1] = _("Accelerator");
 	w = gtk_clist_new_with_titles(2, titles);
 	gtk_object_set_data(GTK_OBJECT(box), "clist", w);
 	gtk_widget_set_usize(w, -1, 170);
