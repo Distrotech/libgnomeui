@@ -347,7 +347,7 @@ msgstr "Karakterlánc keresése"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "_Következő találat"
+msgstr "Kö_vetkező találat"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
