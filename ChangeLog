@@ -1,3 +1,9 @@
+2004-01-21  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-icon-lookup.c (gnome_icon_lookup):
+	Fix GNOME_ICON_LOOKUP_FLAGS_ALLOW_SVG_AS_THEMSELVES behaviour
+	when gdk-pixbuf supports svgs.
+
 2004-01-21  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-client.c: (gnome_client_module_info_get):
