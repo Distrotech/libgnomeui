@@ -51,7 +51,6 @@
 #include "gnome-stock-icons.h"
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include "gnome-pixmap.h"
 
 #include "libgnomeuiP.h"
 

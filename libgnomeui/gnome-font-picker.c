@@ -28,7 +28,7 @@
 #include <gtk/gtkvseparator.h>
 #include <gtk/gtkfontsel.h>
 #include <gtk/gtkimage.h>
-#include <libgnomeui/gnome-pixmap.h>
+#include <gtk/gtkstock.h>
 #include <libgnomeui/gnome-stock-icons.h>
 #include "gnome-font-picker.h"
 #include <libgnome/gnome-i18n.h>
@@ -849,7 +849,7 @@ GtkWidget *gnome_font_picker_create_inside(GnomeFontPicker *gfp)
     GtkWidget *widget;
     
     if (gfp->_priv->mode==GNOME_FONT_PICKER_MODE_PIXMAP) {
-        widget=gtk_image_new_from_stock(GNOME_STOCK_PIXMAP_FONT,
+        widget=gtk_image_new_from_stock(GTK_STOCK_SELECT_FONT,
 					GTK_ICON_SIZE_BUTTON);
         gtk_widget_show(widget);
     } else if (gfp->_priv->mode==GNOME_FONT_PICKER_MODE_FONT_INFO) {

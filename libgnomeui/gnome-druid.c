@@ -164,16 +164,16 @@ gnome_druid_init (GnomeDruid *druid)
 
 	/* set up the buttons */
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (druid), GTK_NO_WINDOW);
-	druid->back = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_PREV);
+	druid->back = gtk_button_new_from_stock (GTK_STOCK_GO_BACK);
 	GTK_WIDGET_SET_FLAGS (druid->back, GTK_CAN_DEFAULT);
-	druid->next = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_NEXT);
+	druid->next = gtk_button_new_from_stock (GTK_STOCK_GO_FORWARD);
 	GTK_WIDGET_SET_FLAGS (druid->next, GTK_CAN_DEFAULT);
 	GTK_WIDGET_SET_FLAGS (druid->next, GTK_HAS_FOCUS);
-	druid->cancel = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_CANCEL);
+	druid->cancel = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
 	GTK_WIDGET_SET_FLAGS (druid->cancel, GTK_CAN_DEFAULT);
-	druid->finish = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_APPLY);
+	druid->finish = gtk_button_new_from_stock (GTK_STOCK_APPLY);
 	GTK_WIDGET_SET_FLAGS (druid->finish, GTK_CAN_DEFAULT);
-	druid->help = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_HELP);
+	druid->help = gtk_button_new_from_stock (GTK_STOCK_HELP);
 	GTK_WIDGET_SET_FLAGS (druid->help, GTK_CAN_DEFAULT);
 	gtk_widget_set_parent (druid->back, GTK_WIDGET (druid));
 	gtk_widget_set_parent (druid->next, GTK_WIDGET (druid));

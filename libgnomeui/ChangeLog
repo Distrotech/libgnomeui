@@ -1,3 +1,16 @@
+2001-07-22  Joe Shaw  <joe@ximian.com>
+
+	* gnome-druid.c (gnome_druid_init): Change GNOME_STOCK_BUTTON_PREV
+	to GTK_STOCK_GO_BACK, GNOME_STOCK_BUTTON_NEXT to GTK_STOCK_GO_FORWARD,
+	GNOME_STOCK_BUTTON_CANCEL to GTK_STOCK_CANCEL, GNOME_STOCK_BUTTON_APPLY
+	to GTK_STOCK_APPLY and GNOME_STOCK_BUTTON_HELP to GTK_STOCK_HELP.
+
+	* gnome-font-picker.c: Include gtkstock.h instead of gnome-pixmap.h.
+	(gnome_font_picker_create_inside): Change GNOME_STOCK_PIXMAP_FONT to
+	GTK_STOCK_SELECT_FONT.
+
+	* gnome-init.c: Don't include gnome-pixmap.h
+
 2001-07-22  Martin Baulig  <baulig@suse.de>
 
 	* pixmaps/stock_menu_scores.png: Removed, same as stock_scores.png.
