@@ -1,3 +1,8 @@
+2002-01-15  Jody Goldberg <jody@gnome.org>
+
+	* gnome-app-helper.c (create_toolbar_item) : toggle items should use
+	  "clicked" in gtk-1.3.
+
 2002-01-15  Mark McLoughlin  <mark@skynet.ie>
 
 	* gnome-druid.c: (undefault_button): kill unused.

@@ -1776,7 +1776,7 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio,
 
 	/* Set the accelerator and connect to the signal */
 
-	if (is_radio || (uiinfo->type == GNOME_APP_UI_TOGGLEITEM)) {
+	if (is_radio) {
 		setup_accelerator (accel_group, uiinfo, "toggled", 0);
 		(* uibdata->connect_func) (uiinfo, "toggled", uibdata);
 	} else {
@@ -2157,7 +2157,7 @@ gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos)
 	part[path_len] = '\0';
 	transl = L_(part);
 	path_len = strlen(transl);
-		
+
 	p = 0;
 
 	while (children){
