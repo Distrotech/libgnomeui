@@ -22,8 +22,7 @@ BEGIN_GNOME_DECLS
 typedef struct _GtkClock GtkClock;
 typedef struct _GtkClockClass GtkClockClass;
 
-typedef enum
-{
+typedef enum {
 	GTK_CLOCK_INCREASING,
 	GTK_CLOCK_DECREASING,
 	GTK_CLOCK_REALTIME

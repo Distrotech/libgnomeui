@@ -13,7 +13,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_HELP_VIEW_CLASS(class) GTK_CHECK_CLASS_CAST(class, gnome_help_view_get_type(), GnomeHelpViewClass)
 #define GNOME_IS_HELP_VIEW(obj) GTK_CHECK_TYPE(obj, gnome_help_view_get_type())
 
-typedef enum { GNOME_HELP_POPUP, GNOME_HELP_EMBEDDED, GNOME_HELP_BROWSER } GnomeHelpViewStyle;
+typedef enum {
+	GNOME_HELP_POPUP,
+	GNOME_HELP_EMBEDDED,
+	GNOME_HELP_BROWSER
+} GnomeHelpViewStyle;
 typedef int GnomeHelpViewStylePriority; /* Use the G_PRIORITY_* system */
 
 typedef struct _GnomeHelpViewClass GnomeHelpViewClass;
