@@ -95,7 +95,7 @@ gnome_add_gtk_arg_callback(poptContext con,
 	int final_argc;
 	char **final_argv;
 	
-	if(gnome_gtk_initialized) {
+	if (gnome_gtk_initialized) {
 		/*
 		 * gnome has already been initialized, so app might be making a
 		 * second pass over the args - just ignore
@@ -199,7 +199,7 @@ static void
 gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 	      const struct poptOption *opt)
 {
-	if(gnome_initialized)
+	if (gnome_initialized)
 		return;
 	
 	switch(reason) {
@@ -437,7 +437,8 @@ gnome_init_with_popt_table(const char *app_id,
 	__malloc_hook = my_malloc_hook;
 	__realloc_hook = my_realloc_hook;
 #endif
-	g_return_val_if_fail(gnome_initialized == FALSE, -1);
+	if (gnome_initialized)
+                return 0;
 	
 	gnomelib_init (app_id, app_version);
 	
@@ -485,7 +486,8 @@ gnome_init(const char *app_id,
 	   const char *app_version,
 	   int argc, char **argv)
 {
-  g_return_val_if_fail(gnome_initialized == FALSE, -1);
+  if (gnome_initialized)
+          return 0;
 
   gnome_init_with_popt_table(app_id, app_version,
 			     argc, argv, NULL, 0, NULL);
