@@ -67,6 +67,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-mdi-child.c		\
 	gnome-mdi-generic-child.c	\
 	gnome-mdi-session.c		\
+	gnome-multiscreen.c		\
 	gnome-pixmap.c			\
 	gnome-pixmap-entry.c		\
 	gnome-popup-menu.c		\
@@ -115,6 +116,7 @@ gnome_headers = \
 	gnome-entry.h			\
 	gnome-file-entry.h		\
 	gnome-font-picker.h		\
+	gnome-help.h			\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-entry.h		\
@@ -139,6 +141,7 @@ gnome_headers = \
 	gnome-thumbnail.h		\
 	gnome-types.h			\
 	gnome-uidefs.h			\
+	gnome-url.h			\
 	gnome-vfs-util.h		\
 	gnome-window.h			\
 	gnome-window-icon.h		\

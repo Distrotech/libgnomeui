@@ -1,3 +1,18 @@
+2003-12-05  Mark McLoughlin  <mark@skynet.ie>
+
+	* libgnomeui/gnome-help.h,
+	  libgnomeui/gnome-url.h,
+	  libgnomeui/gnome-multiscreen.c:
+	(gnome_url_show_on_screen),
+	(gnome_help_display_on_screen),
+	(gnome_help_display_with_doc_id_on_screen),
+	(gnome_help_display_desktop_on_screen),
+	(gnome_help_display_uri_on_screen): Add multi-screen
+	variants of the help and url display methods.
+
+	* libgnomeui/Makefile.am: install gnome-help.h and gnome-url.h.
+	Build gnome-multiscreen.c
+	
 2003-12-05  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-authentication-manager.c:
