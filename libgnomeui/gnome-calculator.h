@@ -39,9 +39,10 @@ struct _GnomeCalculator {
 
 	GnomeCalculatorMode mode;
 
-	gint add_digit;		/*add a digit instead of starting a new
+	gint add_digit:1;	/*add a digit instead of starting a new
 				  number*/
-	gint invert;
+	gint error:1;
+	gint invert:1;
 	GtkWidget *invert_button;
 
 	GList *stack;
@@ -49,6 +50,9 @@ struct _GnomeCalculator {
 
 struct _GnomeCalculatorClass {
 	GtkVBoxClass parent_class;
+
+	void (* result_changed)(GnomeCalculator *gc,
+				gdouble result);
 };
 
 

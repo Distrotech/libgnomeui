@@ -1,3 +1,9 @@
+Thu Apr 16 00:18:13 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.[ch]: added error handeling,
+	  some workarounds to alpha's SIGFPE problem, and
+	  added a result_changed signal.
+
 Thu Apr 16 02:06:07 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h, gnome-appsmenu.c: Renamed "variety" to
