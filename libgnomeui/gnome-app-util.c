@@ -26,93 +26,27 @@
 #include "gnome-dialog.h"
 #include "gnome-uidefs.h"
 #include "gnome-preferences.h"
+#include "gnome-appbar.h"
 
 #include <gtk/gtk.h>
 
 #define NOT_IMPLEMENTED g_warning("Interactive status bar not implemented.\n")
 
 static gboolean 
-gnome_app_has_statusbar(GnomeApp * app)
+gnome_app_has_appbar_progress(GnomeApp * app)
 {
-  g_return_val_if_fail(app != NULL, FALSE);
-  g_return_val_if_fail(GNOME_IS_APP(app), FALSE);
+  return ( (app->statusbar != NULL) &&
+	   (GNOME_APPBAR_HAS_PROGRESS(app->statusbar)) );
+}
 
-  return (app->statusbar != NULL);
+static gboolean 
+gnome_app_has_appbar_status(GnomeApp * app)
+{
+  return ( (app->statusbar != NULL) &&
+	   (GNOME_APPBAR_HAS_STATUS(app->statusbar)) );
 }
 
 /* ================================================================== */
-
-void gnome_app_set_status (GnomeApp * app, const gchar * status)
-{
-  static guint messageid = 0; /* 0 is an invalid id AFAICT */
-  static guint contextid = 0;
-
-  g_return_if_fail(app != NULL);
-  g_return_if_fail(GNOME_IS_APP(app));
-
-  /* It's OK to call the function without a statusbar */
-  if ( gnome_app_has_statusbar(app) ) {
-    if (contextid == 0) {
-      contextid = 
-	gtk_statusbar_get_context_id ( GTK_STATUSBAR(app->statusbar),
-				       "gnome_app_set_status_context" );
-    }
-
-    if (messageid != 0) {
-      gtk_statusbar_remove ( GTK_STATUSBAR(app->statusbar),
-			     contextid,
-			     messageid );
-    }
-
-    if (status != NULL) {
-      messageid = gtk_statusbar_push ( GTK_STATUSBAR(app->statusbar),
-				       contextid,
-				       status );
-    }
-  } 
-}
-
-void 
-gnome_app_pushpop (GnomeApp * app, const gchar * status, gboolean push_not_pop)
-{
-  static guint contextid = 0;
-
-  g_return_if_fail(app != NULL);
-  g_return_if_fail(GNOME_IS_APP(app));
-
-  /* It's OK to call the function without a statusbar */
-  if ( gnome_app_has_statusbar(app) ) {
-    if (contextid == 0) {
-      contextid = 
-	gtk_statusbar_get_context_id ( GTK_STATUSBAR(app->statusbar),
-				       "gnome_app_pushpop_context" );
-    }
-
-    if ( push_not_pop ) {
-      gtk_statusbar_push ( GTK_STATUSBAR(app->statusbar),
-			   contextid,
-			   status );
-    }
-    else {
-      gtk_statusbar_pop ( GTK_STATUSBAR(app->statusbar),
-			  contextid );
-    }
-  } 
-}
-
-void 
-gnome_app_push_status (GnomeApp * app, const gchar * status)
-{
-  g_return_if_fail(status != NULL);
-
-  gnome_app_pushpop (app, status, TRUE);
-}
-
-void 
-gnome_app_pop_status  (GnomeApp * app)
-{
-  gnome_app_pushpop (app, NULL, FALSE);
-}
 
 /* =================================================================== */
 
@@ -129,7 +63,7 @@ gnome_app_message (GnomeApp * app, const gchar * message)
   g_return_val_if_fail(GNOME_IS_APP(app), NULL);
 
   if ( gnome_preferences_get_statusbar_dialog() &&
-       gnome_app_has_statusbar(app) ) {
+       gnome_app_has_appbar_status(app) ) {
     gnome_app_message_bar ( app, message );
     return NULL;
   }
@@ -140,8 +74,6 @@ gnome_app_message (GnomeApp * app, const gchar * message)
 
 struct _MessageInfo {
   GnomeApp * app;
-  guint contextid;
-  guint messageid;
   guint timeoutid;
   guint handlerid;
 };
@@ -151,8 +83,7 @@ typedef struct _MessageInfo MessageInfo;
 static gint
 remove_message_timeout (MessageInfo * mi) 
 {
-  gtk_statusbar_remove ( GTK_STATUSBAR(mi->app->statusbar), 
-			 mi->contextid, mi->messageid );
+  gnome_appbar_refresh(GNOME_APPBAR(mi->app->statusbar));
   gtk_signal_disconnect(GTK_OBJECT(mi->app), mi->handlerid);
   g_free ( mi );
   return FALSE; /* removes the timeout */
@@ -173,54 +104,45 @@ gnome_app_flash (GnomeApp * app, const gchar * flash)
 {
   /* This is a no-op for dialogs, since these messages aren't 
      important enough to pester users. */
-  static guint contextid = 0;
-
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
   g_return_if_fail(flash != NULL);
 
-  /* OK to call app_flash without a statusbar */
-  if ( gnome_app_has_statusbar(app) ) {
-    MessageInfo * mi;
-    guint timeoutid;
-    guint handlerid;
-    guint messageid;
+  /* An alternative and less messy way to write this function would be 
+     to make gnome_appbar_update() a public function (it's in .c now) and 
+     have the timeout call that after the flash_length. But I don't think
+     that function should be public. */
 
-    if (contextid == 0) {
-      contextid = gtk_statusbar_get_context_id( GTK_STATUSBAR(app->statusbar),
-						"gnome_app_flash_context" );
-    }
+  /* OK to call app_flash without a statusbar */
+  if ( gnome_app_has_appbar_status(app) ) {
+    MessageInfo * mi;
+
+    g_return_if_fail(GNOME_IS_APPBAR(app->statusbar));
+    
+    gnome_appbar_set_status(GNOME_APPBAR(app->statusbar), flash);
 
     mi = g_new(MessageInfo, 1);
-    
-    messageid = 
-      gtk_statusbar_push ( GTK_STATUSBAR(app->statusbar),
-			   contextid, flash );
 
-    timeoutid = 
+    mi->timeoutid = 
       gtk_timeout_add ( flash_length,
 			(GtkFunction) remove_message_timeout,
 			mi );
     
-    handlerid = 
+    mi->handlerid = 
       gtk_signal_connect ( GTK_OBJECT(app),
 			   "destroy",
 			   GTK_SIGNAL_FUNC(remove_timeout_cb),
 			   mi );
 
-    mi->contextid = contextid;
-    mi->messageid = messageid;
-    mi->timeoutid = timeoutid;
-    mi->handlerid = handlerid;
     mi->app       = app;
-  } /* if ( gnome_app_has_statusbar (app) ) */   
+  }   
 }
 
 
 static gboolean
 gnome_app_interactive_statusbar(GnomeApp * app)
 {
- return ( gnome_app_has_statusbar (app) && 
+ return ( gnome_app_has_appbar_status (app) && 
 	  gnome_preferences_get_statusbar_dialog() &&
 	  gnome_preferences_get_statusbar_interactive() );
 }
@@ -259,7 +181,7 @@ gnome_app_warning (GnomeApp * app, const gchar * warning)
   g_return_val_if_fail(GNOME_IS_APP(app), NULL);
   g_return_val_if_fail(warning != NULL, NULL);
 
-  if ( gnome_app_has_statusbar(app) && 
+  if ( gnome_app_has_appbar_status(app) && 
        gnome_preferences_get_statusbar_dialog() ) {
     gnome_app_warning_bar(app, warning);
     return NULL;
@@ -386,8 +308,8 @@ gnome_app_request_password (GnomeApp * app, const gchar * prompt,
 /* ================================================== */
 
 typedef struct {
-  GtkWidget * bar; /* Progress bar, if any */
-  GtkWidget * widget; /* dialog or status bar */
+  GtkWidget * bar; /* Progress bar, for dialog; NULL for AppBar */
+  GtkWidget * widget; /* dialog or AppBar */
   guint timeout_tag;
   GnomeApp * app;
   GnomeAppProgressFunc percentage_cb;
@@ -403,7 +325,7 @@ static gint progress_timeout_cb (ProgressKeyReal * key)
 {
   gfloat percent;
   percent = (* key->percentage_cb)(key->data);
-  gnome_app_progress_update (key, percent);
+  gnome_app_set_progress (key, percent);
   return TRUE;
 }
 
@@ -428,11 +350,11 @@ progress_dialog (const gchar * description, ProgressKeyReal * key)
 			 GNOME_STOCK_BUTTON_CANCEL,
 			 NULL );
   gnome_dialog_set_close (GNOME_DIALOG(d), TRUE);
-  gtk_signal_connect(GTK_OBJECT(d), "clicked", 
-		     GTK_SIGNAL_FUNC(progress_clicked_cb),
-		     key);
+  gtk_signal_connect (GTK_OBJECT(d), "clicked", 
+		      GTK_SIGNAL_FUNC(progress_clicked_cb),
+		      key);
 			       
-  label = gtk_label_new( description );
+  label = gtk_label_new (description);
 
   pb = gtk_progress_bar_new();
 
@@ -445,6 +367,14 @@ progress_dialog (const gchar * description, ProgressKeyReal * key)
   key->widget = d;
 
   gtk_widget_show_all (d);
+}
+
+static void 
+progress_bar (GnomeApp * app, const gchar * description, ProgressKeyReal * key)
+{
+  key->bar = NULL;
+  key->widget = app->statusbar;
+  gnome_appbar_set_status(GNOME_APPBAR(key->widget), description);
 }
 
 GnomeAppProgressKey 
@@ -468,9 +398,13 @@ gnome_app_progress_timeout (GnomeApp * app,
   key->cancel_cb = cancel_cb;
   key->data = data;
 
-  /* If dialog, */
-  progress_dialog (description, key);
-  /* else if statusbar, do something different. */
+  if ( gnome_app_has_appbar_progress(app) &&
+       gnome_preferences_get_statusbar_dialog() ) {
+    progress_bar    (app, description, key);
+  }
+  else {
+    progress_dialog (description, key);
+  }
 
   key->timeout_tag = gtk_timeout_add ( interval, 
 				       (GtkFunction) progress_timeout_cb,
@@ -497,18 +431,29 @@ gnome_app_progress_manual (GnomeApp * app,
   key->data = data;
   key->timeout_tag = INVALID_TIMEOUT;  
 
-  progress_dialog (description, key);
+  if ( gnome_app_has_appbar_progress(app) &&
+       gnome_preferences_get_statusbar_dialog() ) {
+    progress_bar    (app, description, key);
+  }
+  else {
+    progress_dialog (description, key);
+  }
 
   return key;
 }
 
-void gnome_app_progress_update (GnomeAppProgressKey key, gfloat percent)
+void gnome_app_set_progress (GnomeAppProgressKey key, gfloat percent)
 {
   ProgressKeyReal * real_key = (GnomeAppProgressKey) key;
 
   g_return_if_fail ( key != NULL );  
 
-  gtk_progress_bar_update ( GTK_PROGRESS_BAR(real_key->bar), percent );
+  if (real_key->bar) {
+    gtk_progress_bar_update ( GTK_PROGRESS_BAR(real_key->bar), percent );
+  }
+  else {
+    gnome_appbar_set_progress ( GNOME_APPBAR(real_key->widget), percent );
+  }
 }
 
 static void progress_timeout_remove(ProgressKeyReal * key)
@@ -527,7 +472,13 @@ void gnome_app_progress_done (GnomeAppProgressKey key)
 
   progress_timeout_remove((ProgressKeyReal *)key);
 
-  if (real_key->widget) gnome_dialog_close(GNOME_DIALOG(real_key->widget));
+  if (real_key->bar) { /* It's a dialog */
+    if (real_key->widget) gnome_dialog_close(GNOME_DIALOG(real_key->widget));
+  }
+  else {
+    /* Reset the bar */
+    gnome_appbar_set_progress ( GNOME_APPBAR(real_key->widget), 0.0 );
+  }
   g_free(key);
 }
 

@@ -1,3 +1,17 @@
+Mon Jul  6 22:46:58 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appbar.h, gnome-appbar.c: A tentative start at this
+	widget inspired by Mozilla; eventually it will be a lot nicer
+	hopefully.
+        * gnome-app-util.h, gnome-app-util.c (gnome_app_set_status,
+	gnome_app_push_status, gnome_app_pop_status): Removed functions.
+	(gnome_app_progress_update): renamed to set_progress
+	* gnome-app-util.c: Changed to use AppBar
+	* libgnomeui.h, Makefile.am: Add gnome-appbar.[ch]
+	* gnome-app.c: #ifdef GTK_RELIEF_NONE around toolbar relief stuff.
+	* gnome-preferences.c: I mispelled the menubar handlebox config
+	key.
+	
 1998-07-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): can look for separators.

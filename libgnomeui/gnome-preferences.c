@@ -98,7 +98,7 @@ static const gchar * const dialog_button_styles [] = {
 #define STATUSBAR_INTERACTIVE_KEY  "StatusBar_is_Interactive"
 
 #define TOOLBAR_HANDLEBOX_KEY      "Toolbar_has_Handlebox"
-#define MENUBAR_HANDLEBOX_KEY      "Menubar_had_Handlebox"
+#define MENUBAR_HANDLEBOX_KEY      "Menubar_has_Handlebox"
 
 #define TOOLBAR_RELIEF_KEY         "Toolbar_relieved_buttons"
 

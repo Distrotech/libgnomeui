@@ -10,26 +10,6 @@
 
 BEGIN_GNOME_DECLS
 
-/* It's OK to call any of these functions, whether or not the 
-   GnomeApp has a statusbar at a particular time. If there's no 
-   statusbar they could be no-ops, or use a dialog */
-
-/* What to show in the status bar while not showing anything else.
-   There can only be one of these at a time. You might use it 
-   to display the currently selected item, for example. */
-/* If status == NULL the current status is cleared */
-void 
-gnome_app_set_status (GnomeApp * app, const gchar * status);
-
-/* Simplified push/pop for statusbar; a single fixed context,
-   callable whether or not statusbar exists. */
-
-void 
-gnome_app_push_status (GnomeApp * app, const gchar * status);
-
-void 
-gnome_app_pop_status  (GnomeApp * app);
-
 /* =============================================
   Simple messages and questions to the user; use dialogs for now, but
    ultimately can use either dialogs or statusbar. Supposed to be a
@@ -104,7 +84,7 @@ typedef void (* GnomeAppProgressCancelFunc) (gpointer data);
    It's freed by _done or when the progress is canceled. */
 typedef gpointer GnomeAppProgressKey;
 
-/* These will be a progress bar dialog or maybe dots in the statusbar. */
+/* These will be a progress bar dialog or the progress bar in the AppBar. */
 
 /* Call percentage_cb every interval to set the progress indicator.
    Both callbacks get the data arg. */
@@ -126,7 +106,7 @@ gnome_app_progress_manual (GnomeApp * app,
 
 /* Only makes sense with manual. */
 void 
-gnome_app_progress_update (GnomeAppProgressKey key, gfloat percent);
+gnome_app_set_progress (GnomeAppProgressKey key, gfloat percent);
 
 /* Call this when the progress meter should go away. Automatically 
    called if progress is cancelled. */

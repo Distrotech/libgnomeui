@@ -34,6 +34,7 @@ libgnomeui_la_SOURCES = \
 	gnome-about.c			\
 	gnome-actionarea.c		\
 	gnome-app.c			\
+	gnome-appbar.c			\
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
 	gnome-calculator.c              \
@@ -79,6 +80,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
 	gnome-actionarea.h     		\
 	gnome-app.h			\
+	gnome-appbar.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
 	gnome-calculator.h              \

@@ -566,7 +566,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 	  gtk_widget_set_events(hb, GDK_BUTTON_PRESS_MASK);
 	}
 
-#ifdef GTK_HAVE_RELIEF_STYLE
+#ifdef GTK_RELIEF_NONE
 	if ( ! gnome_preferences_get_toolbar_relief() ) {
 	  gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
 	}
