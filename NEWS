@@ -1,4 +1,21 @@
 ================
+libgnomeui 2.2.2 (10.07.2003)
+================
+
+New in this release:
+
+Library:
+
+	* Fix a memory leak in the pixbuf utils. 
+	Patch by Takuro Ashie <ashie@homa.ne.jp>. Fixes bug #114928
+	* Fix a bunch of typos (Kjartan)
+	* Fix problems with sound event handling (Leena)
+
+Translations:
+
+	Dafydd Harries (cy), Joel Brich (eo), Arafat Mendini (ar),
+	 	
+================
 libgnomeui 2.2.1 (24.05.2003)
 ================
 
