@@ -1,3 +1,9 @@
+2000-11-28  Ramiro Estrugo  <ramiro@eazel.com>
+
+	* libgnomeui/gnome-druid.c: (gnome_druid_destroy):
+	Fix tiny mistake from the last change.  GnomeDruid in this branch
+	doesnt have a '_priv' structure.
+	
 2000-11-28  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-druid.c (gnome_druid_destroy): Merge in from HEAD the

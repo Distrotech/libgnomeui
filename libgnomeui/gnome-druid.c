@@ -197,9 +197,9 @@ gnome_druid_destroy (GtkObject *object)
 
 	/* Remove all children, we set current to NULL so
 	 * that the remove code doesn't try to do anything funny */
-	druid->_priv->current = NULL;
-	while (druid->_priv->children != NULL) {
-		GnomeDruidPage *child = druid->_priv->children->data;
+	druid->current = NULL;
+	while (druid->children != NULL) {
+		GnomeDruidPage *child = druid->children->data;
 		gtk_container_remove (GTK_CONTAINER (druid), GTK_WIDGET(child));
 	}
 
