@@ -2732,6 +2732,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		new_event.type = GDK_LEAVE_NOTIFY;
 
 		new_event.crossing.detail = GDK_NOTIFY_ANCESTOR;
+		new_event.crossing.subwindow = NULL;
 		canvas->in_repick = TRUE;
 		retval = emit_event (canvas, &new_event);
 		canvas->in_repick = FALSE;
@@ -2755,6 +2756,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		new_event = canvas->pick_event;
 		new_event.type = GDK_ENTER_NOTIFY;
 		new_event.crossing.detail = GDK_NOTIFY_ANCESTOR;
+		new_event.crossing.subwindow = NULL;
 		retval = emit_event (canvas, &new_event);
 	}
 

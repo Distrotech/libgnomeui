@@ -1,3 +1,11 @@
+1998-10-11  James Henstridge  <james@daa.com.au>
+
+	* gnome-canvas.c (pick_current_item): set subwindow to NULL before
+	emitting the GDK_{LEAVE,ENTER}_NOTIFY events.  In some cases the
+	value would point at garbage, which caused problems for my
+	python bindings.  It should have no effect on other programs.
+	This fix was sent to me by Chi-Deok Hwang <cdhwang@sr.hei.co.kr>
+
 Sun Jan 10 23:33:10 1999  Raph Levien  <raph@gimp.org>
 
 	* gnome-canvas-image.c (gnome_canvas_image_update): made it (more)
