@@ -2,7 +2,6 @@ demos/mdi_demo.c
 demos/winhints_demo.c
 libgnomeui/gnome-about.c
 libgnomeui/gnome-about.h
-libgnomeui/gnome-animator.c
 libgnomeui/gnome-canvas-init.c
 libgnomeui/gnome-client.c
 libgnomeui/gnome-color-picker.c

@@ -1,3 +1,9 @@
+2001-06-19  Héctor García Álvarez  <hector@scouts-es.org>
+
+        * es.po: Added Spanish translation.
+	* POTFILES.in: removed libgnomeui/gnome-animator.c since is no longer
+	there
+
 2001-06-16  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Added Swedish translation.
