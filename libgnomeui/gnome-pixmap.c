@@ -23,8 +23,8 @@ destroy_hash_element (void *key, void *val, void *data)
 {
 	struct pixmap_item *pi = val;
 
-	gdk_pixmap_destroy (pi->pixmap);
-	gdk_pixmap_destroy (pi->mask);
+	gdk_pixmap_unref (pi->pixmap);
+	gdk_pixmap_unref (pi->mask);
 	g_free (val);
 	g_free (key);
 }
