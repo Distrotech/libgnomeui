@@ -4,6 +4,7 @@
  * Originally by Elliot Lee, with hacking by Chris Toshok for *_data,
  * and I don't know what you other people did :)
  */
+#include <config.h>
 #include <gdk/gdkkeysyms.h>
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
