@@ -25,6 +25,7 @@
 #include "libgnome/gnome-i18nP.h"
 
 #include <time.h>
+#include <string.h> /* memset */
 #include "libgnomeui/gnome-uidefs.h"
 
 
@@ -103,6 +104,9 @@ gnome_less_init (GnomeLess *gl)
   gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(gl->text),
 		     TRUE, TRUE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), vscroll, FALSE, FALSE, 0);
+
+  /* Since horizontal scroll doesn't work, use this hack. */
+  gtk_widget_set_usize(GTK_WIDGET(gl->text), 300, -1); 
 
   gtk_widget_show_all(hbox);
 
@@ -260,7 +264,17 @@ static void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
 
   if (gl->font) gdk_font_unref(gl->font);
   gl->font = font;
-  if (gl->font) gdk_font_ref(gl->font);
+  if (gl->font) {
+    gchar eighty_ems[81];
+    gdk_font_ref(gl->font);
+    /* This is sort of a silly hack, just for now since horizontal
+       scroll is broken. */
+    memset(eighty_ems, 'M', sizeof(gchar) * 80);
+    eighty_ems[80] = '\0';
+    gtk_widget_set_usize(GTK_WIDGET(gl->text), 
+			 gdk_string_width(font, eighty_ems) + 10,
+			 -1);
+  }
 }
 
 void gnome_less_fixed_font(GnomeLess * gl)

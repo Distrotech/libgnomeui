@@ -1,3 +1,11 @@
+Thu May  7 19:13:33 1998  Havoc Pennington  <hp@pobox.com>
+
+	* Makefile.am, libgnomeui.h: Add gnome-less
+	* gnome-less.h, gnome-less.c: Set default width to 80 columns
+	when the font is changed.
+	* TODO: Check this item off.
+	* gnome-preferences.h: Fiddled around, not important.
+	
 Thu May  7 15:47:21 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-about.c (gnome_about_new): Use set_close instead of

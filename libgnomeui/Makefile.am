@@ -29,6 +29,7 @@ libgnomeui_la_SOURCES = \
 	gnome-ice.c			\
 	gnome-icon-list.c		\
 	gnome-init.c			\
+	gnome-less.c			\
 	gnome-messagebox.c		\
 	gnome-net.c			\
 	gnome-about.c			\
@@ -63,6 +64,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-geometry.h		\
 	gnome-ice.h			\
 	gnome-icon-list.h		\
+	gnome-less.h			\
 	gnome-messagebox.h		\
 	gnome-net.h			\
 	gnome-propertybox.h		\

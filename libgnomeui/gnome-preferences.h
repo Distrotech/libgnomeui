@@ -41,6 +41,30 @@ BEGIN_GNOME_DECLS
 #define GNOME_PROPERTY_BOX_BUTTONS_CLOSE_KEY _GNOME_PROPERTY_BOX_BUTTONS"Close"
 #define GNOME_PROPERTY_BOX_BUTTONS_HELP_KEY _GNOME_PROPERTY_BOX_BUTTONS"Help"
 
+/* ==================== GnomeDialog ===================== */
+
+/* Use positions from GnomeApp; that stuff needs to be broken out of 
+   GnomeApp */
+
+
+
+/* Stuff set on an app-by-app basis. */
+typedef _GnomeAppPreferences GnomeAppPreferences;
+
+struct {
+  const gchar * status_bar_usage;
+} _GnomeAppPreferences;
+
+/* Stuff set globally */
+typedef _GnomeUIPreferences GnomeUIPreferences;
+
+struct {
+  const gchar * dialog_buttons_position;
+  int property_box_buttons_ok : 1;
+  int property_box_buttons_apply : 1;
+  int property_box_buttons_close : 1;
+  int property_box_buttons_help : 1;
+} _GnomeUIPreferences;
 
 END_GNOME_DECLS
 

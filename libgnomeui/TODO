@@ -24,9 +24,6 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
   the above config mechanism. Gtk already lets you config accelerators,
   but only on an app-by-app basis. This would be global.
 
-* gnome-less.[hc] isn't quite finished, and doesn't build by default
-  due to the feature freeze. Fix this.
-
 * Documentation, documentation, documentation... both commenting header
   files and writing real docs would help.
 
@@ -82,3 +79,8 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
   rather than destroy if this flag is set.
 
   [gnome_dialog_just_hides]
+
+* gnome-less.[hc] isn't quite finished, and doesn't build by default
+  due to the feature freeze. Fix this.
+ 
+  [Now builds, works except for popup menu.]
