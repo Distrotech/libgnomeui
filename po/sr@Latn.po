@@ -1,21 +1,21 @@
 # Serbian translation of libgnomeui
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003.
-# 
+# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003, 2004.
+#
 # This file is distributed under the same license as the libgnomeui package.
-# 
+#
 # Maintainer: Danilo Šegan <dsegan@gmx.net>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.4\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
-"PO-Revision-Date: 2003-12-07 22:38+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-23 11:01+0100\n"
+"PO-Revision-Date: 2004-01-23 11:02+0100\n"
 "Last-Translator: Bojan Živanović <bojanz@panet.co.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -142,6 +142,7 @@ msgstr "O programu „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -389,11 +391,11 @@ msgstr "Podesi program"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O programu"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O ovom programu"
 
@@ -420,7 +422,7 @@ msgstr "Otvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori tekući prozor"
 
@@ -500,23 +502,23 @@ msgstr "_Sadržaj"
 msgid "View help for this application"
 msgstr "Pregledaj pomoć za ovaj program"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Tekst ispod sličica"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Tekst pored sličica prema prioritetu"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Samo sličice"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Samo tekst"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Koristi uobičajeno za sistem (%s)"
@@ -654,7 +656,7 @@ msgstr "Onemogući vezu sa upravnikom sesije"
 msgid "Session management"
 msgstr "Upravljanje sesijom"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Otkaži odjavu"
 
@@ -927,9 +929,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete "
-"koristiti ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate "
-"ili izmenite neke njegove parametre."
+"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete koristiti "
+"ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate ili izmenite "
+"neke njegove parametre."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1054,8 +1056,8 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Program „%s“ je pokušao da izmeni podešavanja sistema za koja vaš "
-"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. "
-"Neka od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
+"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. Neka "
+"od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
 "narednom pokretanju programa."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1064,8 +1066,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %"
-"s. Neka od vaših postavki možda neće ispravno raditi."
+"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %s. "
+"Neka od vaših postavki možda neće ispravno raditi."
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -1318,27 +1320,31 @@ msgstr "Bez uvlačenja"
 msgid "About"
 msgstr "O programu"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr "Isključi prozorče pri krahu"
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "Iks ekran koji da koristi"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "EKRAN"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "Gnomova biblioteka za korisničko sučelje"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Došlo je do nekoliko nepravilnih pristupa memoriji (SIGSEGV); ne može da "
 "prikaže prozorče za grešku\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1346,7 +1352,7 @@ msgstr ""
 "Greška u pristupu memoriji!\n"
 "Ne može da prikaže prozorče za pad programa\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1361,36 +1367,57 @@ msgstr ""
 "okončana.\n"
 "Sačuvajte sve vaše datoteke pre zatvaranja ovog prozorčeta."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Program „%s“ (proces %d) je pukao\n"
-"usled nepovratne greške.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "Program „%s“ je neočekivano završen."
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "proces %d: %s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Možete obavestiti programere šta se dogodilo kako bi to lakše ispravili.  "
+"Ili možete odmah ponovo pokrenuti program."
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Upotreba: gnome_segv2 ime-programa broj-signala\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Pošaljite izveštaj o grešci"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr "Obavesti programere"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Pronalaženje grešaka"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Napustite probu"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Posetite Gnomovu stranicu za pukle programe za dodatne informacije"
+#~ msgid "You must log in to access %s domain %s\n"
+#~ msgstr "Morate se prijaviti da biste pristupili %s, domen %s\n"
 
-#~ msgid "Exit the test"
-#~ msgstr "Napustite probu"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Program „%s“ (proces %d) je pukao\n"
+#~ "usled nepovratne greške.\n"
+#~ "(%s)"
+
+#~ msgid "Submit a bug report"
+#~ msgstr "Pošaljite izveštaj o grešci"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "Posetite Gnomovu stranicu za pukle programe za dodatne informacije"
