@@ -38,6 +38,12 @@ static gint gnome_pixmap_expose        (GtkWidget        *widget,
 					GdkEventExpose   *event);
 static void gnome_pixmap_size_request  (GtkWidget        *widget,
                                         GtkRequisition    *requisition);
+static void gnome_pixmap_set_arg       (GtkObject *object,
+					GtkArg *arg,
+					guint arg_id);
+static void gnome_pixmap_get_arg       (GtkObject *object,
+					GtkArg *arg,
+					guint arg_id);
 
 static void clear_provided_state_image (GnomePixmap *gpixmap,
                                         GtkStateType state);
@@ -61,6 +67,16 @@ static GtkMiscClass *parent_class = NULL;
 
 #define INTENSITY(r, g, b) ((r) * 0.30 + (g) * 0.59 + (b) * 0.11)
 
+enum {
+	ARG_0,
+	ARG_PIXBUF,
+	ARG_PIXBUF_WIDTH,
+	ARG_PIXBUF_HEIGHT,
+	ARG_FILE,
+	ARG_XPM_D,
+	ARG_DRAW_MODE,
+	ARG_ALPHA_THRESHOLD
+};
 
 /*
  * Widget functions
@@ -141,8 +157,119 @@ gnome_pixmap_class_init (GnomePixmapClass *class)
 
 	parent_class = gtk_type_class (gtk_misc_get_type ());
 
+	gtk_object_add_arg_type("GnomePixmap::pixbuf",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READWRITE,
+				ARG_PIXBUF);
+	gtk_object_add_arg_type("GnomePixmap::pixbuf_width",
+				GTK_TYPE_INT,
+				GTK_ARG_READWRITE,
+				ARG_PIXBUF_WIDTH);
+	gtk_object_add_arg_type("GnomePixmap::pixbuf_height",
+				GTK_TYPE_INT,
+				GTK_ARG_READWRITE,
+				ARG_PIXBUF_HEIGHT);
+	gtk_object_add_arg_type("GnomePixmap::file",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE,
+				ARG_FILE);
+	gtk_object_add_arg_type("GnomePixmap::xpm_d",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE,
+				ARG_XPM_D);
+	gtk_object_add_arg_type("GnomePixmap::draw_mode",
+				GTK_TYPE_ENUM,
+				GTK_ARG_READWRITE,
+				ARG_PIXBUF_HEIGHT);
+	gtk_object_add_arg_type("GnomePixmap::alpha_threshold",
+				GTK_TYPE_INT,
+				GTK_ARG_READWRITE,
+				ARG_PIXBUF_HEIGHT);
+	
 	widget_class->expose_event = gnome_pixmap_expose;
         widget_class->size_request = gnome_pixmap_size_request;
+	object_class->get_arg = gnome_pixmap_get_arg;
+	object_class->set_arg = gnome_pixmap_set_arg;
+}
+
+static void
+gnome_pixmap_set_arg (GtkObject *object,
+		      GtkArg *arg,
+		      guint arg_id)
+{
+	GnomePixmap *self;
+
+	self = GNOME_PIXMAP (object);
+
+	switch (arg_id) {
+	case ARG_PIXBUF:
+		gnome_pixmap_set_pixbuf (self, GTK_VALUE_POINTER (*arg));
+		break;
+	case ARG_PIXBUF_WIDTH:
+		gnome_pixmap_set_pixbuf_size (self, GTK_VALUE_INT (*arg),
+					      self->height);
+		break;
+	case ARG_PIXBUF_HEIGHT:
+		gnome_pixmap_set_pixbuf_size (self, self->width,
+					      GTK_VALUE_INT (*arg));
+		break;
+	case ARG_FILE: {
+		GdkPixbuf *pixbuf;
+		pixbuf = gdk_pixbuf_new_from_file (GTK_VALUE_POINTER (*arg));
+		if (pixbuf != NULL) {
+			gnome_pixmap_set_pixbuf (self, pixbuf);
+			gdk_pixbuf_unref (pixbuf);
+		}
+		break;
+        }
+	case ARG_XPM_D: {
+		GdkPixbuf *pixbuf;
+		pixbuf = gdk_pixbuf_new_from_xpm_data (GTK_VALUE_POINTER (*arg));
+		if (pixbuf != NULL) {
+			gnome_pixmap_set_pixbuf (self, pixbuf);
+			gdk_pixbuf_unref (pixbuf);
+		}
+		break;
+        }
+	case ARG_DRAW_MODE:
+		gnome_pixmap_set_draw_mode (self, GTK_VALUE_ENUM (*arg));
+		break;
+	case ARG_ALPHA_THRESHOLD:
+		gnome_pixmap_set_alpha_threshold (self, GTK_VALUE_INT (*arg));
+		break;
+	default:
+		break;
+	}
+}
+
+static void
+gnome_pixmap_get_arg (GtkObject *object,
+		      GtkArg *arg,
+		      guint arg_id)
+{
+	GnomePixmap *self;
+
+	self = GNOME_PIXMAP (object);
+
+	switch (arg_id) {
+	case ARG_PIXBUF:
+		GTK_VALUE_POINTER (*arg) = gnome_pixmap_get_pixbuf (self);
+		break;
+	case ARG_PIXBUF_WIDTH:
+		GTK_VALUE_INT (*arg) = self->width;
+		break;
+	case ARG_PIXBUF_HEIGHT:
+		GTK_VALUE_INT (*arg) = self->height;
+		break;
+	case ARG_DRAW_MODE:
+		GTK_VALUE_ENUM (*arg) = gnome_pixmap_get_draw_mode (self);
+		break;
+	case ARG_ALPHA_THRESHOLD:
+		GTK_VALUE_INT (*arg) = gnome_pixmap_get_alpha_threshold (self);
+		break;
+	default:
+		break;
+	}
 }
 
 static void
