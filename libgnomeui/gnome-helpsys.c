@@ -841,7 +841,7 @@ gnome_help_path_resolve(const char *path, const char *file_type)
       g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/%s.%s", appname, lang, filepath, file_type);
       res = gnome_help_file (fnbuf);
 
-      language_list = language_list->next;
+/*      language_list = language_list->next;*/
     }
 
   if(res)
@@ -879,7 +879,7 @@ gnome_help_app_topics(const char *app_id)
       g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/topic.list", app_id, lang);
       topicfn = gnome_help_file (fnbuf);
 
-      language_list = language_list->next;
+/*        language_list = language_list->next;  */
     }
 
   if(!topicfn)
