@@ -6,16 +6,16 @@
 #
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Pablo Saratxaga <srtxg@chanae.alphanet.ch> 2001-2003
-# Pablo Saratxaga <pablo@walon.org>, 2003.
+# Pablo Saratxaga <pablo@walon.org>, 2003, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 02:11+0100\n"
-"PO-Revision-Date: 2003-07-07 23:46+0200\n"
-"Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
-"Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
+"POT-Creation-Date: 2004-04-06 04:08+0200\n"
+"PO-Revision-Date: 2004-04-06 17:17+0200\n"
+"Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
+"Language-Team: Walloon <linux-wa@walon.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -126,8 +126,7 @@ msgid "Translator credits"
 msgstr "Gråces po les ratourneus"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come "
 "ratournåve."
@@ -147,6 +146,7 @@ msgstr "Å dfait di %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitchî"
 
@@ -204,6 +204,7 @@ msgid "_Game"
 msgstr "_Djeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aidance"
 
@@ -394,11 +395,11 @@ msgstr "Apontyî li programe"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "Å _dfait"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Å dfait di ç' programe chal"
 
@@ -425,7 +426,7 @@ msgstr "Fé on novea purnea"
 msgid "_Close This Window"
 msgstr "_Clôre ci purnea chal"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Clôre ci purnea chal"
 
@@ -592,15 +593,15 @@ msgstr "Fé ene ahesse ki mostere les messaedjes el bår di messaedjes."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
-msgstr ""
+msgstr "Interactivité"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
-msgstr ""
+msgstr "Livea d' activité d' uzeu k' i fåt."
 
 #: libgnomeui/gnome-authentication-manager.c:62
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Vosse procsi HTTP dimande ki vs soeyoz elodjî.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:63
 #, c-format
@@ -620,21 +621,19 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Vosse sicret serè-st evoyî ecripté."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:289
+#: libgnomeui/gnome-authentication-manager.c:287
 msgid "Authentication Required"
 msgstr "Otintifiaedje obligatwere"
 
-#: libgnomeui/gnome-authentication-manager.c:282
+#: libgnomeui/gnome-authentication-manager.c:280
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " dominne %s"
 
-#: libgnomeui/gnome-authentication-manager.c:285
-#, fuzzy, c-format
+#: libgnomeui/gnome-authentication-manager.c:283
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Vos vs divoz elodjî po-z aveur accès a «%s».\n"
-"%s"
+msgstr "Vos vs divoz elodjî po-z aveur accès a %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -828,11 +827,11 @@ msgstr "Coleur di fond po l' imådjete come ene valixhance GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
-msgstr "Coleur di fond pol imådjete metowe"
+msgstr "Coleur di fond po l' imådjete metowe"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
-msgstr "Li coleur di fond pol imådjete a stî metowe"
+msgstr "Li coleur di fond po l' imådjete a stî metowe"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
@@ -852,7 +851,7 @@ msgstr "Mostrer li boton «Aidance»"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr "ID del istwere"
+msgstr "ID d' l' istwere"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -864,7 +863,7 @@ msgstr "L' intrêye GTK"
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
-msgstr "ID del istwere"
+msgstr "ID d' l' istwere"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid ""
@@ -940,13 +939,13 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "Eployî l' novea tchoezixheu d' fitchîs"
 
 #: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "Definixhe s' i fåt eployî l' novea tchoezixheu d' fitchîs (GtkFileChooser) oudonbén l' vî (GtkFileSelection) pol tchoezixhaedje des fitchîs."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -974,8 +973,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
+msgstr "Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1057,13 +1055,17 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
+"Li programe «%s» a sayî d' candjî ene sacwè di vost apontiaedje ki l' manaedjeu "
+"do sistinme da vosse oudonbén l' vindeu do sistinme d' operance ni vs permete "
+"nén d' candjî. Sacwants des apontiaedjes ki vos avoz tchoezi porént èn nén prinde "
+"efet, ou èn nén esse rapexhîs l' côp ki vént ki vos eployrîz l' programe."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr ""
+msgstr "Åk n' a nén stî tot tcherdjant ou schapant des informåcions d' apontiaedje po %s. Sacwants di vos apontiaedjes polèt èn nén ovrer comifåt."
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -1110,8 +1112,8 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Indintifiant unike pol intrêye del imådjete.  Çouchal serè-st eployî po "
-"schaper li djivêye del istwere."
+"Indintifiant unike po l' intrêye di l' imådjete.  Çouchal serè-st eployî po "
+"schaper li djivêye di l' istwere."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1127,7 +1129,7 @@ msgstr "Li ridant wice ki les imådjetes sont cwerowes."
 
 #: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
-msgstr "No do fitchî a esse håyné po l' intrêye del imådjete."
+msgstr "No do fitchî a esse håyné po l' intrêye di l' imådjete."
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
@@ -1176,7 +1178,7 @@ msgstr "Foyter"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
-msgstr "Tchimin del imådjete"
+msgstr "Tchimin d' l' imådjete"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
@@ -1187,8 +1189,7 @@ msgstr "Chal vos dvoz mete li no do ridant ki les imådjetes sont-st å dvins."
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr ""
-"GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
+msgstr "GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1225,7 +1226,7 @@ msgstr "No d' _uzeu:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Dominne:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1233,11 +1234,11 @@ msgstr "_Sicret:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Si rmimbrer do scret po cisse session ci"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Schaper l' sicret dins l' anea des clés"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1383,49 +1384,25 @@ msgstr ""
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr ""
+msgstr "Vos ploz åzès programeus çou k' ç' a passé, po les aidî a coridjî l' problinme.  Oudonbén vos ploz djusse renonder l' programe."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Po s' è siervi: gnome_segv2 nodoprograme limsign\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "Moussî foû di ci programe chal"
+msgstr "_Renonder l' programe"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
-msgstr ""
+msgstr "El d_ire åzès programeus"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "Disbugaedje"
+msgstr "_Disbugaedje"
 
-#~ msgid "Color Selector"
-#~ msgstr "Tchoezixheu di coleurs"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Moussî foû do sayaedje"
 
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Li programe «%s» (processus lº %d)\n"
-#~ "s' a crashé a cåze d' ene aroke moirt.\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "Evoyî on rapoirt di bug"
-
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr "Loukîz li pådje GNOME Application Crash po pus d' informåcion"
-
-#~ msgid "Exit the test"
-#~ msgstr "Moussî foû do sayaedje"
-
-#~ msgid "_Credits"
-#~ msgstr "_Gråces"
