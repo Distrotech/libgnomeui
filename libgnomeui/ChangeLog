@@ -1,5 +1,12 @@
 2001-06-13  Martin Baulig  <baulig@suse.de>
 
+	* Makefile.am: Install libgnomeui.h in `$(includedir)/gnome/2' to make it
+	consistent with Bonobo.
+
+	* libgnomeui.h: You now use #include <libgnomeui.h> to get this.
+
+2001-06-13  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector-client.[ch]: Moved to libgnome-extra/libgnomeui.
 	* gnome-selector-dialog-client.[ch]: Likewise.
 	* gnome-selector-component.[ch]: Likewise.

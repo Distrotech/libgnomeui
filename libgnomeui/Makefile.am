@@ -14,7 +14,9 @@ lib_LTLIBRARIES = libgnomeui-2.la
 #
 # Install location for header files
 #
-libgnomeuiincludedir = $(includedir)/gnome/$(GNOME_INTERFACE_VERSION)/libgnomeui
+libincludedir = $(includedir)/gnome/2
+
+libgnomeuiincludedir = $(includedir)/gnome/2/libgnomeui
 
 INCLUDES = \
 	-I$(top_builddir)				\
@@ -137,11 +139,13 @@ gnome_headers = \
         gnome-winhints.h		\
 	gtkdial.h			\
 	gtk-clock.h			\
-	libgnomeui.h			\
 	gnome-vfs-util.h		\
 	gnome-window.h			\
 	wap-textfu.h			\
 	oafgnome.h
+
+lib_headers = \
+	libgnomeui.h
 
 libgnomeuiinclude_HEADERS =		\
 	$(gnome_headers)		\
