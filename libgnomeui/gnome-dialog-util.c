@@ -152,7 +152,6 @@ dialog_reply_callback (GnomeMessageBox * mbox, gint button, callback_info* data)
 {
   GnomeReplyCallback func = (GnomeReplyCallback) data->function;
   (* func)(button, data->data);
-  g_free(data);
 }
  
 static GtkWidget *
@@ -179,9 +178,12 @@ reply_dialog (const gchar * question, GnomeReplyCallback callback, gpointer data
     info->function = callback;
     info->data = data;
 
-    gtk_signal_connect(GTK_OBJECT(mbox), "clicked",
-		       GTK_SIGNAL_FUNC(dialog_reply_callback),
-		       info);
+    gtk_signal_connect_full(GTK_OBJECT(mbox), "clicked",
+			    GTK_SIGNAL_FUNC(dialog_reply_callback),
+			    NULL,
+			    info,
+			    (GtkDestroyNotify)g_free,
+			    FALSE, FALSE);
   }
 
   if (modal) {
@@ -394,8 +396,6 @@ dialog_string_callback (GnomeMessageBox * mbox, gint button, callback_info * dat
   }
 
   (* func)(s, data->data);
-
-  g_free(data);
 }
 
 static GtkWidget *
@@ -434,9 +434,12 @@ request_dialog (const gchar * request, const gchar * default_text, const guint16
   info->data = data;
   info->entry = GTK_ENTRY(entry);
 
-  gtk_signal_connect (GTK_OBJECT(mbox), "clicked", 
-		      GTK_SIGNAL_FUNC(dialog_string_callback), 
-		      info);
+  gtk_signal_connect_full(GTK_OBJECT(mbox), "clicked", 
+			  GTK_SIGNAL_FUNC(dialog_string_callback), 
+			  NULL,
+			  info,
+			  (GtkDestroyNotify)g_free,
+			  FALSE, FALSE);
 
   if (parent != NULL) {
     gnome_dialog_set_parent(GNOME_DIALOG(mbox),parent);

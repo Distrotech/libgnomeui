@@ -1,3 +1,10 @@
+Mon Jun 12 16:57:50 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dialog-util.c: fix a memory leak.  Free the info structure
+	  by using the destroy notify of the signal connection rather then
+	  in the clicked handler as that is not always called (like when
+	  the dialog is closed by the wm)
+
 Thu Jun 01 02:47:22 2000  George Lebl <jirka@5z.com>
 
 	* gnome-color-picker.[ch]: add accessors for attributes, and add
