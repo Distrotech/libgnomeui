@@ -1,13 +1,13 @@
 # libgnomeui eesti tõlge.
 # Copyright (C) 2002 Free Software Foundation, Inc.
-# Tõivo Leedjärv <leedjarv@interest.ee>, 2002.
+# Tõivo Leedjärv <toivo@linux.ee>, 2002.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-03-18 15:41+0100\n"
-"PO-Revision-Date: 2002-03-02 18:42+0200\n"
-"Last-Translator: Tõivo Leedjärv <leedjarv@interest.ee>\n"
+"POT-Creation-Date: 2002-03-21 23:42+0200\n"
+"PO-Revision-Date: 2002-03-21 23:41+0200\n"
+"Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,15 +19,15 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:210
 msgid "Written by"
-msgstr "Autorid:"
+msgstr "Autorid"
 
 #: libgnomeui/gnome-about.c:224
 msgid "Documented by"
-msgstr "Dokumentatsioon:"
+msgstr "Dokumentatsioon"
 
 #: libgnomeui/gnome-about.c:238
 msgid "Translated by"
-msgstr "Tõlge:"
+msgstr "Tõlge"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:295
@@ -118,7 +118,7 @@ msgstr "Programmi logo (infoaknas)"
 #: libgnomeui/gnome-about.c:476
 #, c-format
 msgid "About %s"
-msgstr ""
+msgstr "%s info"
 
 #: libgnomeui/gnome-appbar.c:762
 msgid "Has Progress"
@@ -472,8 +472,7 @@ msgstr ""
 msgid "Hint for item 2"
 msgstr ""
 
-#. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: libgnomeui/gnome-app-helper.c:82 test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -481,7 +480,7 @@ msgstr "_Fail"
 msgid "_File/"
 msgstr "_Fail/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
+#: libgnomeui/gnome-app-helper.c:84
 msgid "_Edit"
 msgstr "_Redaktor"
 
@@ -489,7 +488,7 @@ msgstr "_Redaktor"
 msgid "_Edit/"
 msgstr "_Redaktor/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
+#: libgnomeui/gnome-app-helper.c:86
 msgid "_View"
 msgstr "_Vaade"
 
@@ -497,7 +496,7 @@ msgstr "_Vaade"
 msgid "_View/"
 msgstr "_Vaade/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
+#: libgnomeui/gnome-app-helper.c:88
 msgid "_Settings"
 msgstr "_Sätted"
 
@@ -505,8 +504,7 @@ msgstr "_Sätted"
 msgid "_Settings/"
 msgstr "_Sätted/"
 
-#. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
+#: libgnomeui/gnome-app-helper.c:90
 msgid "_New"
 msgstr "_Uus"
 
@@ -514,7 +512,7 @@ msgstr "_Uus"
 msgid "_New/"
 msgstr "_Uus/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
+#: libgnomeui/gnome-app-helper.c:92
 msgid "Fi_les"
 msgstr "Fai_lid"
 
@@ -522,15 +520,15 @@ msgstr "Fai_lid"
 msgid "Fi_les/"
 msgstr "Fai_lid/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
+#: libgnomeui/gnome-app-helper.c:94
 msgid "_Windows"
 msgstr "A_knad"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
+#: libgnomeui/gnome-app-helper.c:95
 msgid "_Game"
 msgstr "_Mäng"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: libgnomeui/gnome-app-helper.c:96 test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Abi"
 
@@ -545,7 +543,7 @@ msgstr "_Ava..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr ""
+msgstr "Ava fail"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
@@ -554,7 +552,7 @@ msgstr "_Salvesta"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr ""
+msgstr "Salvesta aktiivne fail"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
@@ -563,7 +561,7 @@ msgstr "Salvesta _kui..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr ""
+msgstr "Salvesta aktiivne fail teise nimega"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -572,7 +570,7 @@ msgstr "_Taasta"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr ""
+msgstr "Taasta faili salvestatud versioon"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
@@ -599,16 +597,16 @@ msgstr "S_ulge"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr ""
+msgstr "Sulge aktiivne fail"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "E_xit"
-msgstr ""
+msgstr "_Välju"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Exit the program"
-msgstr ""
+msgstr "Välju programmist"
 
 #.
 #. * The "Edit" menu
@@ -620,7 +618,7 @@ msgstr "_Lõika"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr ""
+msgstr "Lõika valik välja"
 
 #. 10
 #. Copy
@@ -630,7 +628,7 @@ msgstr "_Kopeeri"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr ""
+msgstr "Kopeeri valik"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -639,7 +637,7 @@ msgstr "_Aseta"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr ""
+msgstr "Aseta lõikelaua sisu"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
@@ -648,7 +646,7 @@ msgstr "_Tühjenda"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr ""
+msgstr "Tühjenda valik"
 
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
@@ -675,7 +673,7 @@ msgstr "_Otsi..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr ""
+msgstr "Otsi stringi"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
@@ -684,7 +682,7 @@ msgstr "O_tsi uuesti"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr ""
+msgstr "Otsi sama stringi uuesti"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
@@ -693,7 +691,7 @@ msgstr "A_senda..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr ""
+msgstr "Asenda string"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
@@ -702,7 +700,7 @@ msgstr "_Omadused..."
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr ""
+msgstr "Redigeeri faili omadusi"
 
 #.
 #. * The Settings menu
@@ -721,11 +719,11 @@ msgstr "Programmi häälestus"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Info selle programmi kohta"
 
@@ -735,26 +733,26 @@ msgstr "_Vali kõik"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr ""
+msgstr "Vali kõik"
 
 #.
 #. * Window menu
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr ""
+msgstr "Loo uus _aken"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr ""
+msgstr "Loo uus aken"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr ""
+msgstr "_Sulge see aken"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr ""
+msgstr "Sulge aktiivne aken"
 
 #.
 #. * The "Game" menu
@@ -983,19 +981,6 @@ msgstr "Vali fail"
 msgid "Browse..."
 msgstr "Vali..."
 
-#: libgnomeui/gnome-font-picker.c:66
-msgid "sans 12"
-msgstr ""
-
-#: libgnomeui/gnome-font-picker.c:67
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-
-#: libgnomeui/gnome-font-picker.c:68
-#, fuzzy
-msgid "Pick a Font"
-msgstr "Vali värv"
-
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr ""
@@ -1173,7 +1158,7 @@ msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
 msgid "No Image"
-msgstr ""
+msgstr "Pilti pole"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1204,6 +1189,10 @@ msgstr "%d. %b %Y %H:%M"
 
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
+msgstr "Sans 14"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
 msgstr ""
 
 #~ msgid "FLAGS"
