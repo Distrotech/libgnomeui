@@ -8,6 +8,7 @@ BEGIN_GNOME_DECLS
 
 
 #define LIBGNOMEUI_PARAM_CRASH_DIALOG "B:libgnomeui/show_crash_dialog"
+#define LIBGNOMEUI_PARAM_DISPLAY "S:libgnomeui/display"
 
 extern GnomeModuleInfo libgnomeui_module_info, gtk_module_info;
 

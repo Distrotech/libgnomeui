@@ -196,13 +196,14 @@ static GnomeModuleRequirement libgnomeui_requirements[] = {
         {NULL, NULL}
 };
 
-enum { ARG_DISABLE_CRASH_DIALOG=1 };
+enum { ARG_DISABLE_CRASH_DIALOG=1, ARG_DISPLAY };
 
 static struct poptOption libgnomeui_options[] = {
         { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
 	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	 &libgnomeui_arg_callback, 0, NULL, NULL},
 	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, ARG_DISABLE_CRASH_DIALOG},
+        {"display", '\0', POPT_ARG_STRING|POPT_ARGFLAG_DOC_HIDDEN, NULL, ARG_DISPLAY, N_("X display to use"), N_("DISPLAY")},
 	{NULL, '\0', 0, NULL, 0}
 };
 
@@ -225,6 +226,7 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
         if(envar)
                 do_crash_dialog = atoi(envar)?FALSE:TRUE;
         gnome_program_attributes_set(app, LIBGNOMEUI_PARAM_CRASH_DIALOG, do_crash_dialog, NULL);
+        gnome_program_attributes_set(app, LIBGNOMEUI_PARAM_DISPLAY, getenv("DISPLAY"), NULL);
 
         if(do_crash_dialog)
                 libgnomeui_segv_setup(FALSE);
@@ -293,6 +295,9 @@ libgnomeui_arg_callback(poptContext con,
                 switch(opt->val) {
                 case ARG_DISABLE_CRASH_DIALOG:
                         gnome_program_attributes_set(gnome_program_get(), LIBGNOMEUI_PARAM_CRASH_DIALOG, FALSE, NULL);
+                        break;
+                case ARG_DISPLAY:
+                        gnome_program_attributes_set(gnome_program_get(), LIBGNOMEUI_PARAM_DISPLAY, arg, NULL);
                         break;
                 }
                 break;
