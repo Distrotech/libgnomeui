@@ -1,3 +1,8 @@
+Fri Feb 13 18:23:02 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-messagebox.c: Message boxes now take a variable number of
+	arguments instead of having 3 options at most. 
+
 Fri Feb 13 18:09:46 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtk-ted.c (gtk_ted_update_position): More refcouting joy.

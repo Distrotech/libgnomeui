@@ -52,10 +52,7 @@ struct _GnomeMessageBox
 {
   GtkWindow window;
 
-  GtkWidget *button1;
-  GtkWidget *button2;
-  GtkWidget *button3;
-
+  GList *buttons;
   int modal : 1;
 };
 
@@ -70,9 +67,7 @@ struct _GnomeMessageBoxClass
 guint      gnome_messagebox_get_type       (void);
 GtkWidget* gnome_messagebox_new            (gchar           *message,
 					    gchar           *messagebox_type,
-					    gchar           *button1,
-					    gchar           *button2,
-					    gchar           *button3);
+					    ...);
 void       gnome_messagebox_set_modal      (GnomeMessageBox *messagebox);
 void       gnome_messagebox_set_default    (GnomeMessageBox *messagebox,
                                             gint            button);
