@@ -444,14 +444,14 @@ simple_func(GtkWidget *w, gpointer data)
 		return;
 	}
 
+	reduce_stack(gc);
+	if(gc->error) return;
+
 	stack = gc->stack->data;
 	if(stack->type!=CALCULATOR_NUMBER) {
 		unselect_invert(gc);
 		return;
 	}
-
-	reduce_stack(gc);
-	if(gc->error) return;
 
 	/*only convert non inverting functions*/
 	if(!gc->invert && but->convert_to_rad)
@@ -509,15 +509,15 @@ math_func(GtkWidget *w, gpointer data)
 		return;
 	}
 
+	reduce_stack(gc);
+	if(gc->error) return;
+	set_result(gc);
+
 	stack = gc->stack->data;
 	if(stack->type!=CALCULATOR_NUMBER) {
 		unselect_invert(gc);
 		return;
 	}
-
-	reduce_stack(gc);
-	if(gc->error) return;
-	set_result(gc);
 	
 	stack = g_new(CalculatorStack,1);
 	stack->type = CALCULATOR_FUNCTION;

@@ -1,3 +1,9 @@
+Sun Dec 12 10:57:40 1999  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: check for number on stack AFTER we reduce
+	  stack, this fixes a segfault where reduce_stack actually did
+	  reduce the stack. Fixes bug #4330
+
 1999-12-12  James Henstridge  <james@daa.com.au>
 
 	* libgnomeui.h: include gnome-unit-spinner.h.
