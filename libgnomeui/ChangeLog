@@ -1,3 +1,13 @@
+Sat May 20 14:50:59 2000  George Lebl <jirka@5z.com>
+
+	* gnome-stock.[ch]: the GdkPixbuf getting routine is renamed to
+	  gnome_stock_entry_get_gdk_pixbuf.  This is 1) because polluting
+	  other namespaces is bad 2) because the function does not create
+	  a new pixbuf, but returns an existing one with the refcount
+	  incremented.
+
+	* gnome-entry.[ch]: implemented gnome_entry_clear_history
+
 Sat May 20  Martijn van Beers  <martijn@earthling.net>
 
 	* (every GtkObject).h: make sure every object has GNOME_TYPE_

@@ -163,7 +163,7 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
         i = 0;
         while (i < 5) {
           if (entries[i] != NULL)
-            pixbufs[i] = gdk_pixbuf_new_from_stock_pixmap_entry(entries[i]);
+            pixbufs[i] = gnome_stock_pixmap_entry_get_gdk_pixbuf(entries[i]);
           else
             pixbufs[i] = NULL;
 
@@ -520,8 +520,19 @@ gnome_stock_pixmap_entry_new_from_xpm_data (const gchar** xpm_data, const gchar*
         return entry;
 }
 
+/**
+ * gnome_stock_pixmap_entry_get_gdk_pixbuf:
+ * @entry: the #GnomeStockPixmapEntry
+ *
+ * Description: Returns the #GdkPixbuf that is used for drawing
+ * this stock entry.  The returned pixbuf is the internal data with
+ * it's reference count incremented, so do gdk_pixbuf_unref when you
+ * are done with it and treat it as read only data.
+ *
+ * Returns: a #GdkPixbuf with an incremented reference count.
+ **/
 GdkPixbuf*
-gdk_pixbuf_new_from_stock_pixmap_entry (GnomeStockPixmapEntry *entry)
+gnome_stock_pixmap_entry_get_gdk_pixbuf (GnomeStockPixmapEntry *entry)
 {
 	g_return_val_if_fail (entry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry), NULL);
@@ -1543,7 +1554,7 @@ gnome_stock_transparent_window (const char *icon, GtkStateType state)
         if (entries[state] == NULL)
                 return NULL;
         
-        pixbuf = gdk_pixbuf_new_from_stock_pixmap_entry(entries[state]);
+        pixbuf = gnome_stock_pixmap_entry_get_gdk_pixbuf(entries[state]);
 
         if (pixbuf == NULL)
                 return NULL;
@@ -1634,7 +1645,7 @@ gnome_stock_pixmap_gdk (const char    *icon,
         if (entries == NULL)
                 return;
 
-        pixbuf = gdk_pixbuf_new_from_stock_pixmap_entry(entries[state]);
+        pixbuf = gnome_stock_pixmap_entry_get_gdk_pixbuf(entries[state]);
 
         gdk_pixbuf_render_pixmap_and_mask(pixbuf,
                                           pixmap,

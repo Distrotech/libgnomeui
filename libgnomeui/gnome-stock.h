@@ -126,7 +126,7 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_xpm_data (const gchar**
                                                                    const gchar* label);
 
 
-GdkPixbuf *gdk_pixbuf_new_from_stock_pixmap_entry (GnomeStockPixmapEntry *entry);
+GdkPixbuf *gnome_stock_pixmap_entry_get_gdk_pixbuf(GnomeStockPixmapEntry *entry);
 
 /*
  * Utility functions to retrieve buttons

@@ -392,7 +392,7 @@ void
 gnome_entry_append_history (GnomeEntry *gentry, gboolean save,
 			    const gchar *text)
 {
-  gnome_entry_add_history (gentry, save, text, TRUE);
+	gnome_entry_add_history (gentry, save, text, TRUE);
 }
 
 
@@ -487,6 +487,26 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	set_combo_items (gentry);
 
 	gnome_config_pop_prefix ();
+}
+
+/**
+ * gnome_entry_clear_history
+ * @gentry: Pointer to GnomeEntry object.
+ *
+ * Description:  Clears the history, you should call #gnome_entry_save_history
+ * To make the change permanent.
+ *
+ * Returns:
+ */
+void
+gnome_entry_clear_history (GnomeEntry *gentry)
+{
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+
+	free_items (gentry);
+
+	set_combo_items (gentry);
 }
 
 static gboolean
