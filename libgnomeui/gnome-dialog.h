@@ -96,12 +96,12 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
 /* Connect to the "clicked" signal of a single button */
 void       gnome_dialog_button_connect (GnomeDialog *dialog,
 					gint button,
-					GtkSignalFunc callback,
+					GCallback callback,
 					gpointer data);
 /* Connect the object to the "clicked" signal of a single button */
 void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
 					       gint button,
-					       GtkSignalFunc callback,
+					       GCallback callback,
 					       GtkObject * obj);
 
 /* Run the dialog, return the button # that was pressed or -1 if none.

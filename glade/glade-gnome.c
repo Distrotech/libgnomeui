@@ -472,13 +472,13 @@ druid_page_edge_new (GladeXML *xml, GType widget_type,
 	    title = value;
 	else if (!strcmp (name, "logo_image")) {
 	    if (logo)
-		gdk_pixbuf_unref (logo);
+		g_object_unref (G_OBJECT (logo));
 	    filename = glade_xml_relative_file (xml, value);
 	    logo = gdk_pixbuf_new_from_file (filename, NULL);
 	    g_free (filename);
 	} else if (!strcmp (name, "watermark_image")) {
 	    if (watermark)
-		gdk_pixbuf_unref (watermark);
+		g_object_unref (G_OBJECT (watermark));
 	    filename = glade_xml_relative_file (xml, value);
 	    watermark = gdk_pixbuf_new_from_file (filename, NULL);
 	    g_free (filename);
@@ -493,11 +493,11 @@ druid_page_edge_new (GladeXML *xml, GType widget_type,
     
 
     if (logo)
-	gdk_pixbuf_unref (logo);
+	g_object_unref (G_OBJECT (logo));
     if (watermark)
-	gdk_pixbuf_unref (watermark);
+	g_object_unref (G_OBJECT (watermark));
     if (top_watermark)
-	gdk_pixbuf_unref (top_watermark);
+	g_object_unref (G_OBJECT (top_watermark));
 
     return druid;
 }

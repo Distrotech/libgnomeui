@@ -189,12 +189,11 @@ reply_dialog (const gchar * question, GnomeReplyCallback callback, gpointer data
     info->function = callback;
     info->data = data;
 
-    gtk_signal_connect_full(GTK_OBJECT(mbox), "clicked",
-			    GTK_SIGNAL_FUNC(dialog_reply_callback),
-			    NULL,
-			    info,
-			    (GtkDestroyNotify)g_free,
-			    FALSE, FALSE);
+    g_signal_connect_data (mbox, "clicked",
+			   G_CALLBACK (dialog_reply_callback),
+			   info,
+			   (GClosureNotify) g_free,
+			   0);
   }
 
   if (modal) {
@@ -445,12 +444,11 @@ request_dialog (const gchar * request, const gchar * default_text, const guint16
   info->data = data;
   info->entry = GTK_ENTRY(entry);
 
-  gtk_signal_connect_full(GTK_OBJECT(mbox), "clicked", 
-			  GTK_SIGNAL_FUNC(dialog_string_callback), 
-			  NULL,
-			  info,
-			  (GtkDestroyNotify)g_free,
-			  FALSE, FALSE);
+  g_signal_connect_data (mbox, "clicked",
+			 G_CALLBACK (dialog_string_callback),
+			 info,
+			 (GClosureNotify) g_free,
+			 0);
 
   if (parent != NULL) {
     gnome_dialog_set_parent(GNOME_DIALOG(mbox),parent);

@@ -63,7 +63,7 @@ struct _GnomeEntryPrivate {
 
 	guint16      max_saved;
 	guint        changed : 1;
-	guint        saving_history : 1; 
+	guint        saving_history : 1;
 	GConfClient *gconf_client;
 	guint        gconf_notify_id;
 };
@@ -103,26 +103,27 @@ gnome_entry_get_type (void)
 	static GType object_type = 0;
 
 	if (object_type == 0) {
-		GtkType type_of_parent;
-		static const GtkTypeInfo object_info = {
-			"GnomeEntry",
-			sizeof (GnomeEntry),
+		static const GTypeInfo object_info = {
 			sizeof (GnomeEntryClass),
-			(GtkClassInitFunc) gnome_entry_class_init,
-			(GtkObjectInitFunc) gnome_entry_init,
-			/* reserved_1 */ NULL,
-			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) gnome_entry_class_init,
+			(GClassFinalizeFunc) NULL,
+			NULL,			/* class_data */
+			sizeof (GnomeEntry),
+			0,			/* n_preallocs */
+			(GInstanceInitFunc) gnome_entry_init,
+			NULL			/* value_table */
 		};
+
 		static const GInterfaceInfo editable_info =
 		{
 			(GInterfaceInitFunc) gnome_entry_editable_init,	 /* interface_init */
 			NULL,			                         /* interface_finalize */
 			NULL			                         /* interface_data */
 		};
-		type_of_parent = GTK_TYPE_COMBO;
-		object_type = gtk_type_unique (type_of_parent, &object_info);
-		parent_class = gtk_type_class (type_of_parent);
+
+		object_type = g_type_register_static (GTK_TYPE_COMBO, "GnomeEntry", &object_info, 0);
 
 		g_type_add_interface_static (object_type,
 					     GTK_TYPE_EDITABLE,
@@ -143,18 +144,19 @@ gnome_entry_class_init (GnomeEntryClass *class)
 	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
 
+	parent_class = g_type_class_peek_parent (class);
+
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 
 	gnome_entry_signals[ACTIVATE_SIGNAL] =
-		gtk_signal_new("activate",
-			       GTK_RUN_LAST,
-			       GTK_CLASS_TYPE (object_class),
-			       GTK_SIGNAL_OFFSET(GnomeEntryClass,
-			       			 activate),
-			       gtk_signal_default_marshaller,
-			       GTK_TYPE_NONE,
-			       0);
+		g_signal_new("activate",
+			     G_TYPE_FROM_CLASS (gobject_class),
+			     G_SIGNAL_RUN_LAST,
+			     G_STRUCT_OFFSET(GnomeEntryClass, activate),
+			     NULL, NULL,
+			     g_cclosure_marshal_VOID__VOID,
+			     G_TYPE_NONE, 0);
 
 	class->activate = NULL;
 
@@ -198,7 +200,7 @@ gnome_entry_get_property (GObject        *object,
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
-	
+
 }
 
 static void
@@ -214,12 +216,12 @@ gnome_entry_set_property (GObject        *object,
 		gnome_entry_set_history_id (entry, g_value_get_string (value));
 		gnome_entry_load_history (entry);
 		break;
-		
+
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
-	
+
 }
 
 static void
@@ -230,7 +232,7 @@ entry_changed (GtkWidget *widget, gpointer data)
 	gentry = data;
 	gentry->_priv->changed = TRUE;
 
-	gtk_signal_emit_by_name (GTK_OBJECT (gentry), "changed");
+	g_signal_emit_by_name (gentry, "changed");
 }
 
 static void
@@ -249,7 +251,7 @@ entry_activated (GtkWidget *widget, gpointer data)
 		gnome_entry_prepend_history (gentry, TRUE, gtk_entry_get_text (GTK_ENTRY (widget)));
 	}
 
-	gtk_signal_emit (GTK_OBJECT (gentry), gnome_entry_signals[ACTIVATE_SIGNAL]);
+	g_signal_emit (gentry, gnome_entry_signals[ACTIVATE_SIGNAL], 0);
 	gnome_entry_save_history (gentry);
 }
 
@@ -263,12 +265,12 @@ gnome_entry_init (GnomeEntry *gentry)
 	gentry->_priv->items        = NULL;
 	gentry->_priv->max_saved    = DEFAULT_MAX_HISTORY_SAVED;
 
-	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (gentry)), "changed",
-			    (GtkSignalFunc) entry_changed,
-			    gentry);
-	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (gentry)), "activate",
-			    (GtkSignalFunc) entry_activated,
-			    gentry);
+	g_signal_connect (gnome_entry_gtk_entry (gentry), "changed",
+			  G_CALLBACK (entry_changed),
+			  gentry);
+	g_signal_connect (gnome_entry_gtk_entry (gentry), "activate",
+			  G_CALLBACK (entry_activated),
+			  gentry);
 	gtk_combo_disable_activate (GTK_COMBO (gentry));
         gtk_combo_set_case_sensitive (GTK_COMBO (gentry), TRUE);
 }
@@ -321,7 +323,7 @@ gnome_entry_destroy (GtkObject *object)
 	GnomeEntry *gentry;
 
 	/* Note: destroy can run multiple times */
-	
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (object));
 
@@ -354,7 +356,7 @@ static void
 gnome_entry_finalize (GObject *object)
 {
 	GnomeEntry *gentry;
-	
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (object));
 
@@ -406,7 +408,7 @@ gnome_entry_history_changed (GConfClient* client,
 
 		return;
 	}
-		
+
 	gnome_entry_load_history (gentry);
 }
 
@@ -415,7 +417,7 @@ void
 gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 {
 	gchar *key;
-	
+
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 	g_return_if_fail (gentry->_priv->history_id == NULL);
@@ -435,7 +437,7 @@ gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 			      key,
 			      GCONF_CLIENT_PRELOAD_NONE,
 			      NULL);
-	
+
 	gentry->_priv->gconf_notify_id = gconf_client_notify_add (gentry->_priv->gconf_client,
 								  key,
 								  gnome_entry_history_changed,
@@ -523,44 +525,70 @@ build_gconf_key (GnomeEntry *gentry)
 }
 
 static void
+set_combo_items (GnomeEntry *gentry)
+{
+	GnomeEntryPrivate *priv;
+	GList *strings;
+	GList *l;
+	char *text;
+
+	priv = gentry->_priv;
+
+	/* Save the contents of the entry so that setting the new list of
+	 * strings will not overwrite it.
+	 */
+
+	text = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (gentry)->entry), 0, -1);
+
+	/* Build the list of strings out of our items */
+
+	strings = NULL;
+
+	for (l = priv->items; l; l = l->next) {
+		struct item *item;
+
+		item = l->data;
+
+		strings = g_list_prepend (strings, item->text);
+	}
+
+	strings = g_list_reverse (strings);
+
+	gtk_combo_set_popdown_strings (GTK_COMBO (gentry), strings);
+
+	/* Restore the text in the entry and clear our changed flag. */
+
+	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (gentry)->entry), text);
+	g_free (text);
+
+	g_list_free (strings);
+
+	priv->changed = FALSE;
+}
+
+static void
 gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
 			 const gchar *text, gboolean append)
 {
+	GnomeEntryPrivate *priv;
 	struct item *item;
-	GList *gitem;
-	GtkWidget *li;
-	GtkWidget *entry;
-	gchar *tmp;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 	g_return_if_fail (text != NULL); /* FIXME: should we just return without warning? */
 
-	entry = gnome_entry_gtk_entry (gentry);
-	tmp = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
-	
+	priv = gentry->_priv;
+
 	item = g_new (struct item, 1);
 	item->save = save;
 	item->text = g_strdup (text);
 
-	gentry->_priv->items = g_list_prepend (gentry->_priv->items, item);
-
-	li = gtk_list_item_new_with_label (text);
-	gtk_widget_show (li);
-
-	gitem = g_list_append (NULL, li);
-
 	if (append)
-	  gtk_list_prepend_items (GTK_LIST (GTK_COMBO (gentry)->list), gitem);
+		priv->items = g_list_append (priv->items, item);
 	else
-	  gtk_list_append_items (GTK_LIST (GTK_COMBO (gentry)->list), gitem);
+		priv->items = g_list_prepend (priv->items, item);
 
-	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
-	g_free (tmp);
-
-	/* gtk_entry_set_text runs our 'entry_changed' routine, so we have
-	   to undo the effect */
-	gentry->_priv->changed = FALSE;
+	set_combo_items (gentry);
 }
 
 
@@ -607,57 +635,13 @@ gnome_entry_append_history (GnomeEntry *gentry, gboolean save,
 }
 
 
-
-static void
-set_combo_items (GnomeEntry *gentry)
-{
-	GtkList *gtklist;
-	GList *items;
-	GList *gitems;
-	struct item *item;
-	GtkWidget *li;
-	GtkWidget *entry;
-	gchar *tmp;
-
-	gtklist = GTK_LIST (GTK_COMBO (gentry)->list);
-
-	/* We save the contents of the entry because when we insert
-	 * items on the combo list, the contents of the entry will get
-	 * changed.
-	 */
-
-	entry = gnome_entry_gtk_entry (gentry);
-	tmp = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
-	
-	gtk_list_clear_items (gtklist, 0, -1); /* erase everything */
-
-	gitems = NULL;
-
-	for (items = gentry->_priv->items; items; items = items->next) {
-		item = items->data;
-
-		li = gtk_list_item_new_with_label (item->text);
-		gtk_widget_show (li);
-		
-		gitems = g_list_append (gitems, li);
-	}
-
-	gtk_list_append_items (gtklist, gitems); /* this handles NULL correctly */
-
-	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
-	g_free (tmp);
-
-	gentry->_priv->changed = FALSE;
-}
-
-
 static void
 gnome_entry_load_history (GnomeEntry *gentry)
 {
 	struct item *item;
 	gchar *key;
 	GSList *gconf_items, *items;
-	
+
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
@@ -709,12 +693,12 @@ gnome_entry_clear_history (GnomeEntry *gentry)
 }
 
 static gboolean
-check_for_duplicates (GSList *gconf_items, 
+check_for_duplicates (GSList *gconf_items,
 		      const struct item *item)
 {
 
 	for (; gconf_items; gconf_items = gconf_items->next) {
-		
+
 		if (strcmp ((gchar *) gconf_items->data, item->text) == 0) {
 			return FALSE;
 		}
@@ -732,7 +716,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	struct item *item;
 	gchar *key;
 	gint n;
-	
+
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
@@ -758,7 +742,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	/* Save the list */
 	gentry->_priv->saving_history = TRUE;
 	gconf_client_set_list (gentry->_priv->gconf_client, key, GCONF_VALUE_STRING, gconf_items, NULL);
-	
+
 	g_free (key);
 }
 

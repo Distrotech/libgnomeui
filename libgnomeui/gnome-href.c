@@ -71,11 +71,11 @@ static const GtkTargetEntry other_drop_types[] = {
 	{ "_NETSCAPE_URL",       0, 0 }
 };
 
-static const gint n_http_drop_types = 
+static const gint n_http_drop_types =
    sizeof(http_drop_types) / sizeof(http_drop_types[0]);
-static const gint n_ftp_drop_types = 
+static const gint n_ftp_drop_types =
    sizeof(ftp_drop_types) / sizeof(ftp_drop_types[0]);
-static const gint n_other_drop_types = 
+static const gint n_other_drop_types =
    sizeof(other_drop_types) / sizeof(other_drop_types[0]);
 
 
@@ -101,9 +101,9 @@ gnome_href_class_init (GnomeHRefClass *klass)
 	GObjectClass *gobject_class = (GObjectClass *)klass;
 	GtkWidgetClass *widget_class = (GtkWidgetClass *)klass;
 	GtkButtonClass *button_class = (GtkButtonClass *)klass;
-	
+
 	object_class->destroy = gnome_href_destroy;
-	
+
 	gobject_class->finalize = gnome_href_finalize;
 	gobject_class->set_property = gnome_href_set_property;
 	gobject_class->get_property = gnome_href_get_property;
@@ -170,8 +170,8 @@ gnome_href_instance_init (GnomeHRef *href)
 	href->_priv->url = NULL;
 
 	/* the source dest is set on set_url */
-	gtk_signal_connect (GTK_OBJECT (href), "drag_data_get",
-			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
+	g_signal_connect (href, "drag_data_get",
+			  G_CALLBACK (drag_data_get), NULL);
 }
 
 static void
@@ -301,14 +301,14 @@ void gnome_href_set_url(GnomeHRef *href, const gchar *url) {
  * Returns:  Pointer to text contained in the label widget.
  **/
 
-const gchar *gnome_href_get_text(GnomeHRef *href) {
-  gchar *ret;
+const gchar *
+gnome_href_get_text(GnomeHRef *href)
+{
 
   g_return_val_if_fail(href != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_HREF(href), NULL);
 
-  gtk_label_get(GTK_LABEL(href->_priv->label), &ret);
-  return ret;
+  return gtk_label_get_text (GTK_LABEL(href->_priv->label));
 }
 
 

@@ -59,10 +59,10 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
 
 	object_class = (GtkObjectClass*)klass;
 	gobject_class = (GObjectClass*)klass;
-  
+
 	object_class->destroy = gnome_mdi_child_destroy;
 	gobject_class->finalize = gnome_mdi_child_finalize;
-  
+
 	klass->create_view = NULL;
 	klass->create_menus = NULL;
 	klass->get_config_string = NULL;
@@ -138,13 +138,13 @@ static void gnome_mdi_child_destroy (GtkObject *obj)
 /**
  * gnome_mdi_child_add_view:
  * @mdi_child: A pointer to a GnomeMDIChild object.
- * 
+ *
  * Description:
  * Creates a new view of a child (a GtkWidget) adds it to the list
  * of the views and returns a pointer to it. Virtual function
  * that has to be specified for classes derived from GnomeMDIChild
  * is used to create the new view.
- * 
+ *
  * Return value:
  * A pointer to the new view.
  **/
@@ -157,7 +157,7 @@ GtkWidget *gnome_mdi_child_add_view (GnomeMDIChild *mdi_child)
 	if(view) {
 		mdi_child->views = g_list_append(mdi_child->views, view);
 
-		gtk_object_set_data(GTK_OBJECT(view), "GnomeMDIChild", mdi_child);
+		g_object_set_data(G_OBJECT(view), "GnomeMDIChild", mdi_child);
 	}
 
 	return view;
@@ -167,7 +167,7 @@ GtkWidget *gnome_mdi_child_add_view (GnomeMDIChild *mdi_child)
  * gnome_mdi_child_remove_view:
  * @mdi_child: A pointer to a GnomeMDIChild object.
  * @view: View to be removed.
- * 
+ *
  * Description:
  * Removes view @view from the list of @mdi_child's views and
  * unrefs it.
@@ -183,7 +183,7 @@ void gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view)
  * gnome_mdi_child_set_name:
  * @mdi_child: A pointer to a GnomeMDIChild object.
  * @name: String containing the new name for the child.
- * 
+ *
  * Description:
  * Changes name of @mdi_child to @name. @name is duplicated and stored
  * in @mdi_child. If @mdi_child has already been added to GnomeMDI,
@@ -211,7 +211,7 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
  * gnome_mdi_child_set_menu_template:
  * @mdi_child: A pointer to a GnomeMDIChild object.
  * @menu_tmpl: A GnomeUIInfo array describing the child specific menus.
- * 
+ *
  * Description:
  * Sets the template for menus that are added and removed when differrent
  * children get activated. This way, each child can modify the MDI menubar

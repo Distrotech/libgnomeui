@@ -163,7 +163,7 @@ struct _GnomeIconListPrivate {
 
 	/* The icon that has keyboard focus */
 	gint focus_icon;
-	
+
 	/* Number of icons in the list */
 	int icons;
 
@@ -197,7 +197,7 @@ struct _GnomeIconListPrivate {
 	int sel_start_y;
 
 	int icons_per_row;
-	
+
 	/* Modifier state when the selection began */
 	guint sel_state;
 
@@ -311,7 +311,7 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 				       "y",  (double) (y + y_offset),
 				       NULL);
 	}
-	
+
 
 	gnome_icon_text_item_setxy (icon->text,
 				    x,
@@ -489,7 +489,7 @@ gil_scrollbar_adjust (Gil *gil)
 	GList *l;
 	int height, step_increment;
 	double wx, wy;
-	
+
 	priv = gil->_priv;
 
 	if (!GTK_WIDGET_REALIZED (gil))
@@ -531,10 +531,8 @@ gil_scrollbar_adjust (Gil *gil)
 static void
 emit_select (Gil *gil, int sel, int i, GdkEvent *event)
 {
-	gtk_signal_emit (GTK_OBJECT (gil),
-			 gil_signals[sel ? SELECT_ICON : UNSELECT_ICON],
-			 i,
-			 event);
+	g_signal_emit (gil, gil_signals[sel ? SELECT_ICON : UNSELECT_ICON], 0,
+		       i, event);
 }
 
 static int
@@ -650,7 +648,7 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 				emit_select (gil, TRUE, idx, event);
 		}
 
-		retval = TRUE;		
+		retval = TRUE;
 		break;
 
 	case GDK_2BUTTON_PRESS:
@@ -676,7 +674,7 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 	 * icon text item's own handler from executing.
 	 */
 	if (on_text && retval)
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "event");
+		g_signal_stop_emission_by_name (text, "event");
 
 	g_object_unref (G_OBJECT (text));
 
@@ -849,7 +847,7 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 	 * icon text item's own handler from executing.
 	 */
 	if (on_text && retval)
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "event");
+		g_signal_stop_emission_by_name (text, "event");
 
 	g_object_unref (G_OBJECT (text));
 
@@ -907,7 +905,7 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 	Icon *icon;
 
 	icon = data;
-	gtk_signal_handler_block (GTK_OBJECT (iti), icon->text_event_id);
+	g_signal_handler_block (iti, icon->text_event_id);
 	gil_unselect_all (GIL (GNOME_CANVAS_ITEM (iti)->canvas), NULL, icon);
 }
 
@@ -920,7 +918,7 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 	Icon *icon;
 
 	icon = data;
-	gtk_signal_handler_unblock (GTK_OBJECT (iti), icon->text_event_id);
+	g_signal_handler_unblock (iti, icon->text_event_id);
 }
 
 static gboolean G_GNUC_UNUSED
@@ -936,10 +934,9 @@ text_changed (GnomeCanvasItem *item, Icon *icon)
 
 	idx = gil_icon_to_index (gil, icon);
 	g_object_get (G_OBJECT (icon->text), "text", &text, NULL);
-	gtk_signal_emit (GTK_OBJECT (gil),
-			 gil_signals[TEXT_CHANGED],
-			 idx, text,
-			 &accept);
+	g_signal_emit (gil, gil_signals[TEXT_CHANGED], 0,
+		       idx, text,
+		       &accept);
 
 	return accept;
 }
@@ -1006,7 +1003,7 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 	gnome_icon_text_item_configure (icon->text,
 					0, 0, priv->icon_width, NULL,
 					text, priv->is_editable, priv->static_text);
-	
+
 	if (icon->image != NULL) {
 		g_signal_connect (G_OBJECT (icon->image), "event",
 				  G_CALLBACK (icon_event),
@@ -1361,7 +1358,7 @@ gil_destroy (GtkObject *object)
 
 	gil->_priv->frozen = 1;
 	gil->_priv->dirty  = TRUE;
-	
+
 	if (gil->_priv->icon_list != NULL) {
 		gnome_icon_list_clear (gil);
 		g_array_free(gil->_priv->icon_list, TRUE);
@@ -1377,12 +1374,12 @@ gil_destroy (GtkObject *object)
 		g_object_unref (G_OBJECT (gil->adj));
 		gil->adj = NULL;
 	}
-	
+
 	if (gil->hadj) {
 		g_object_unref (G_OBJECT (gil->hadj));
 		gil->hadj = NULL;
 	}
-	
+
 	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
@@ -1408,10 +1405,8 @@ gnome_icon_list_focus_icon (GnomeIconList *gil, gint idx)
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (idx >= 0 && idx < gil->_priv->icons);
 
-	gtk_signal_emit (GTK_OBJECT (gil),
-			 gil_signals[FOCUS_ICON],
-			 idx);
-
+	g_signal_emit (gil, gil_signals[FOCUS_ICON], 0,
+		       idx);
 }
 
 static void
@@ -1567,12 +1562,12 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 	GnomeIconListPrivate *priv;
 	gint items_per_line;
 	gint new_focus_icon;
-	
+
 	priv = gil->_priv;
-	
+
 	items_per_line = gil_get_items_per_line (gil);
 	new_focus_icon = priv->focus_icon;
-	
+
 	switch (dir) {
 	case GTK_DIR_RIGHT:
 		if (priv->focus_icon + 1 < priv->icons &&
@@ -1589,7 +1584,7 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 		else
 			return;
 		break;
-		
+
 	case GTK_DIR_DOWN:
 		if (priv->focus_icon + items_per_line < priv->icons)
 			new_focus_icon += items_per_line;
@@ -1614,7 +1609,7 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 	if (gnome_icon_list_icon_is_visible (gil, new_focus_icon) != GTK_VISIBILITY_FULL &&
 	    (dir == GTK_DIR_UP || dir == GTK_DIR_DOWN))
 		gnome_icon_list_moveto (gil, new_focus_icon, dir == GTK_DIR_UP ? 0.0 : 1.0);
-	
+
 	gnome_icon_list_focus_icon (gil, new_focus_icon);
 }
 
@@ -1628,10 +1623,10 @@ real_toggle_cursor_selection (Gil *gil)
 
 	if (priv->focus_icon == -1)
 		return;
-	
+
 	icon = g_array_index (priv->icon_list, Icon*, priv->focus_icon);
 
-	if (icon->selected) 
+	if (icon->selected)
 		gnome_icon_list_unselect_icon (gil, priv->focus_icon);
 	else
 		gnome_icon_list_select_icon (gil, priv->focus_icon);
@@ -1697,7 +1692,7 @@ real_focus_icon (Gil *gil, gint num)
 		icon = g_array_index (priv->icon_list, Icon*, priv->focus_icon);
 		gnome_icon_text_item_focus (icon->text, FALSE);
 	}
-	
+
 	icon = g_array_index (priv->icon_list, Icon*, num);
 	gnome_icon_text_item_focus (icon->text, TRUE);
 
@@ -1735,7 +1730,7 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 	int only_one;
 	GdkBitmap *stipple;
 	double tx, ty;
-	
+
 	gil = GIL (widget);
 	priv = gil->_priv;
 
@@ -1743,11 +1738,11 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 		if (!GTK_WIDGET_HAS_FOCUS (widget))
 			gtk_widget_grab_focus (widget);
 	}
-	
+
 	/* Invoke the canvas event handler and see if an item picks up the event */
-	if ((* GTK_WIDGET_CLASS (parent_class)->button_press_event) (widget, event)) 
+	if ((* GTK_WIDGET_CLASS (parent_class)->button_press_event) (widget, event))
 		return TRUE;
-	
+
 	if (!(event->type == GDK_BUTTON_PRESS
 	      && event->button == 1
 	      && priv->selection_mode != GTK_SELECTION_BROWSE))
@@ -1963,7 +1958,7 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	double x, y;
 	gint absolute_y;
 	GtkAdjustment *adj;
-	
+
 	gil = GIL (widget);
 	priv = gil->_priv;
 
@@ -2034,7 +2029,7 @@ static gint
 gil_focus_out (GtkWidget *widget, GdkEventFocus *event)
 {
 	GTK_WIDGET_UNSET_FLAGS (widget, GTK_HAS_FOCUS);
-	
+
 	gtk_widget_queue_draw (widget);
 
 	return FALSE;
@@ -2045,14 +2040,14 @@ gil_key_press (GtkWidget        *widget,
 	       GdkEventKey      *event)
 {
 	gboolean handled;
-	
+
 	handled = gtk_bindings_activate (GTK_OBJECT (widget),
 					 event->keyval,
 					 event->state);
 
 	if (handled)
 		return TRUE;
-	
+
 	if (GTK_WIDGET_CLASS (parent_class)->key_press_event &&
 	    GTK_WIDGET_CLASS (parent_class)->key_press_event (widget, event))
 		return TRUE;
@@ -2077,12 +2072,12 @@ add_move_binding (GtkBindingSet   *binding_set,
                   GtkDirectionType dir)
 {
 	gtk_binding_entry_add_signal (binding_set, keyval, 0, "move_cursor", 2,
-				      GTK_TYPE_ENUM, dir,
-				      GTK_TYPE_INT, TRUE);
+				      G_TYPE_ENUM, dir,
+				      G_TYPE_INT, TRUE);
 
 	gtk_binding_entry_add_signal (binding_set, keyval, GDK_CONTROL_MASK, "move_cursor", 2,
-				      GTK_TYPE_ENUM, dir,
-				      GTK_TYPE_INT, FALSE);
+				      G_TYPE_ENUM, dir,
+				      G_TYPE_INT, FALSE);
 }
 
 static gint
@@ -2096,15 +2091,15 @@ gil_scroll (GtkWidget *widget, GdkEventScroll *event)
 		return FALSE;
 
 	adj = GIL (widget)->adj;
-	
+
 	if (event->direction == GDK_SCROLL_UP)
 		new_value = adj->value - adj->page_increment / 2;
 	else
 		new_value = adj->value + adj->page_increment / 2;
-	
+
 	new_value = CLAMP (new_value, adj->lower, adj->upper - adj->page_size);
 	gtk_adjustment_set_value (adj, new_value);
-	
+
 	return TRUE;
 }
 
@@ -2116,7 +2111,7 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	GtkWidgetClass *widget_class;
 	GnomeCanvasClass *canvas_class;
 	GtkLayoutClass *layout_class;
-	
+
 	GtkBindingSet *binding_set;
 
 	binding_set = gtk_binding_set_by_class (gil_class);
@@ -2126,71 +2121,70 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	widget_class = (GtkWidgetClass *)   gil_class;
 	canvas_class = (GnomeCanvasClass *) gil_class;
 	layout_class = (GtkLayoutClass *)   gil_class;
-	
+
 	gil_signals[SELECT_ICON] =
-		gtk_signal_new (
-			"select_icon",
-			GTK_RUN_FIRST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconListClass, select_icon),
-			_gnome_marshal_VOID__INT_BOXED,
-			GTK_TYPE_NONE, 2,
-			GTK_TYPE_INT,
-			GDK_TYPE_EVENT);
+		g_signal_new ("select_icon",
+			      G_TYPE_FROM_CLASS (gobject_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeIconListClass, select_icon),
+			      NULL, NULL,
+			      _gnome_marshal_VOID__INT_BOXED,
+			      G_TYPE_NONE, 2,
+			      G_TYPE_INT,
+			      GDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
 
 	gil_signals[UNSELECT_ICON] =
-		gtk_signal_new (
-			"unselect_icon",
-			GTK_RUN_FIRST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconListClass, unselect_icon),
-			_gnome_marshal_VOID__INT_BOXED,
-			GTK_TYPE_NONE, 2,
-			GTK_TYPE_INT,
-			GDK_TYPE_EVENT);
-	
+		g_signal_new ("unselect_icon",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeIconListClass, unselect_icon),
+			      NULL, NULL,
+			      _gnome_marshal_VOID__INT_BOXED,
+			      G_TYPE_NONE, 2,
+			      G_TYPE_INT,
+			      GDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
+
 	gil_signals[FOCUS_ICON] =
-		gtk_signal_new (
-			"focus_icon",
-			GTK_RUN_FIRST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconListClass, focus_icon),
-			g_cclosure_marshal_VOID__INT,
-			GTK_TYPE_NONE, 1,
-			GTK_TYPE_INT);
+		g_signal_new ("focus_icon",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeIconListClass, focus_icon),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__INT,
+			      G_TYPE_NONE, 1,
+			      G_TYPE_INT);
 
 	gil_signals[TEXT_CHANGED] =
-		gtk_signal_new (
-			"text_changed",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconListClass, text_changed),
-			_gnome_marshal_BOOLEAN__INT_STRING,
-			GTK_TYPE_BOOL, 2,
-			GTK_TYPE_INT,
-			GTK_TYPE_STRING);
+		g_signal_new ("text_changed",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeIconListClass, text_changed),
+			      NULL, NULL,
+			      _gnome_marshal_BOOLEAN__INT_STRING,
+			      G_TYPE_BOOLEAN, 2,
+			      G_TYPE_INT,
+			      G_TYPE_STRING);
 
 	gil_signals[MOVE_CURSOR] =
-		g_signal_new (
-			"move_cursor",
-			G_TYPE_FROM_CLASS (object_class),
-			G_SIGNAL_RUN_LAST | GTK_RUN_ACTION,
-			G_STRUCT_OFFSET (GnomeIconListClass, move_cursor),
-			NULL, NULL,
-			_gnome_marshal_VOID__ENUM_BOOLEAN,
-			GTK_TYPE_NONE, 2, GTK_TYPE_DIRECTION_TYPE, GTK_TYPE_BOOL);
-
+		g_signal_new ("move_cursor",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GnomeIconListClass, move_cursor),
+			      NULL, NULL,
+			      _gnome_marshal_VOID__ENUM_BOOLEAN,
+			      G_TYPE_NONE, 2,
+			      GTK_TYPE_DIRECTION_TYPE,
+			      G_TYPE_BOOLEAN);
 
 	gil_signals[TOGGLE_CURSOR_SELECTION] =
-		g_signal_new (
-			"toggle_cursor_selection",
-			G_TYPE_FROM_CLASS (object_class),
-			G_SIGNAL_RUN_LAST | GTK_RUN_ACTION,
-			G_STRUCT_OFFSET (GnomeIconListClass, toggle_cursor_selection),
-			NULL, NULL,
-			g_cclosure_marshal_VOID__VOID,
-			GTK_TYPE_NONE, 0);
-	
+		g_signal_new ("toggle_cursor_selection",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GnomeIconListClass, toggle_cursor_selection),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+
 	add_move_binding (binding_set, GDK_Right, GTK_DIR_RIGHT);
 	add_move_binding (binding_set, GDK_Left, GTK_DIR_LEFT);
 	add_move_binding (binding_set, GDK_Down, GTK_DIR_DOWN);
@@ -2198,7 +2192,7 @@ gnome_icon_list_class_init (GilClass *gil_class)
 
 	gtk_binding_entry_add_signal (binding_set, GDK_space, 0, "toggle_cursor_selection", 0);
 	gtk_binding_entry_add_signal (binding_set, GDK_space, GDK_CONTROL_MASK, "toggle_cursor_selection", 0);
-	
+
 	object_class->destroy = gil_destroy;
 	gobject_class->finalize = gil_finalize;
 	gobject_class->constructor = gnome_icon_list_constructor;
@@ -2213,7 +2207,7 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	widget_class->focus_out_event = gil_focus_out;
 	widget_class->key_press_event = gil_key_press;
 	widget_class->scroll_event = gil_scroll;
-	
+
 	/* we override GtkLayout's set_scroll_adjustments signal instead
 	 * of creating a new signal so as to keep binary compatibility.
 	 * Anyway, a widget class only needs one of these signals, and
@@ -2243,7 +2237,7 @@ gnome_icon_list_instance_init (Gil *gil)
 	gil->_priv->dirty = TRUE;
 
 	gil->_priv->focus_icon = -1;
-	
+
 	GTK_WIDGET_SET_FLAGS (gil, GTK_CAN_FOCUS);
 }
 
@@ -2364,7 +2358,8 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 	old_adjustment = gil->adj;
 
 	if (gil->adj) {
-		gtk_signal_disconnect_by_data (GTK_OBJECT (gil->adj), gil);
+		g_signal_handlers_disconnect_matched (gil->adj, G_SIGNAL_MATCH_DATA,
+						      0, 0, NULL, NULL, gil);
 		g_object_unref (G_OBJECT (gil->adj));
 	}
 
@@ -2439,7 +2434,7 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, int flags)
 	Gil *gil;
 
 	gtk_widget_push_colormap (gdk_rgb_get_colormap ());
-	gil = GIL (gtk_type_new (GNOME_TYPE_ICON_LIST));
+	gil = g_object_new (GNOME_TYPE_ICON_LIST, NULL);
 	gtk_widget_pop_colormap ();
 
 	gnome_icon_list_construct (gil, icon_width, adj, flags);
@@ -3001,7 +2996,7 @@ gnome_icon_list_get_icon_text_item (GnomeIconList *gil,
 				    int idx)
 {
 	Icon *icon;
-	
+
 	g_return_val_if_fail (gil != NULL, NULL);
 	g_return_val_if_fail (IS_GIL (gil), NULL);
 	g_return_val_if_fail (idx >= 0 && idx < gil->_priv->icons, NULL);
@@ -3016,7 +3011,7 @@ gnome_icon_list_get_icon_pixbuf_item (GnomeIconList *gil,
 				      int idx)
 {
 	Icon *icon;
-	
+
 	g_return_val_if_fail (gil != NULL, NULL);
 	g_return_val_if_fail (IS_GIL (gil), NULL);
 	g_return_val_if_fail (idx >= 0 && idx < gil->_priv->icons, NULL);

@@ -68,7 +68,7 @@ static void gnome_scores_finalize   (GObject          *object);
 GNOME_CLASS_BOILERPLATE (GnomeScores, gnome_scores,
 			 GtkDialog, GTK_TYPE_DIALOG);
 
-static void 
+static void
 gnome_scores_instance_init (GnomeScores *gs)
 {
 	GtkWidget *label;
@@ -106,9 +106,9 @@ gnome_scores_instance_init (GnomeScores *gs)
 
 	gtk_container_set_border_width (GTK_CONTAINER (gs), 5);
 
-	gtk_signal_connect_object (GTK_OBJECT (gs), "response",
-				   GTK_SIGNAL_FUNC (gtk_widget_destroy),
-				   GTK_OBJECT (gs));
+	g_signal_connect_swapped (gs, "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  gs);
 
 	gs->_priv->logo_container = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(gs->_priv->logo_container);
@@ -161,8 +161,8 @@ gnome_scores_finalize(GObject *object)
  */
 void
 gnome_scores_construct (  GnomeScores *gs,
-			  guint n_scores, 
-			  gchar **names, 
+			  guint n_scores,
+			  gchar **names,
 			  gfloat *scores,
 			  time_t *times,
 			  gboolean clear)
@@ -212,7 +212,7 @@ gnome_scores_construct (  GnomeScores *gs,
 		gtk_table_attach_defaults ( gs->_priv->table, gs->_priv->label_times[i], 2, 3, i+1, i+2);
   	}
 
-	/* 
+	/*
 	if(clear) {
 	  gs->_priv->but_clear = gtk_button_new_with_label ( _("Clear") );
 	  gtk_widget_show (gs->_priv->but_clear);
@@ -233,14 +233,14 @@ gnome_scores_construct (  GnomeScores *gs,
  *
  * Returns: A new #GnomeScores widget
  */
-GtkWidget * 
-gnome_scores_new (  guint n_scores, 
-		    gchar **names, 
+GtkWidget *
+gnome_scores_new (  guint n_scores,
+		    gchar **names,
 		    gfloat *scores,
 		    time_t *times,
 		    gboolean clear)
 {
-	GtkWidget *retval = gtk_type_new (GNOME_TYPE_SCORES);
+	GtkWidget *retval = g_object_new (GNOME_TYPE_SCORES, NULL);
 
 	gnome_scores_construct(GNOME_SCORES(retval), n_scores, names, scores, times, clear);
 
@@ -275,7 +275,7 @@ gnome_scores_set_color(GnomeScores *gs, guint n, GdkColor *col)
 	gtk_widget_set_style(GTK_WIDGET(gs->_priv->label_scores[n]), s);
 	gtk_widget_set_style(GTK_WIDGET(gs->_priv->label_times[n]), s);
 
-	gtk_style_unref(s);
+	g_object_unref (G_OBJECT (s));
 }
 
 /**
@@ -415,7 +415,7 @@ gnome_scores_set_logo_label (GnomeScores *gs,
 
 	gs->_priv->logo = gtk_label_new(txt);
 	gtk_widget_set_style(GTK_WIDGET(gs->_priv->logo), s);
-	gtk_style_unref(s);
+	g_object_unref (G_OBJECT (s));
 	gtk_container_add(GTK_CONTAINER(gs->_priv->logo_container), gs->_priv->logo);
 	gtk_widget_show (gs->_priv->logo);
 }
@@ -484,7 +484,7 @@ gnome_scores_set_logo_pixmap (GnomeScores *gs, const gchar *pix_name)
  * @level: Level of the game or %NULL.
  * @pos: Position in the top ten of the current player, as returned by gnome_score_log.
  *
- * Description:  Does all the work of displaying the best scores. 
+ * Description:  Does all the work of displaying the best scores.
  * It calls gnome_score_get_notables to retrieve the info, creates the window,
  * and show it.
  *
@@ -506,12 +506,12 @@ gnome_scores_display (const gchar *title, const gchar *app_name, const gchar *le
 		gnome_scores_set_logo_label_title (GNOME_SCORES(hs), title);
 		if(pos)
  			gnome_scores_set_current_player(GNOME_SCORES(hs), pos-1);
-		
+
 		gtk_widget_show (hs);
 		g_strfreev(names);
 		g_free(scores);
 		g_free(scoretimes);
-	} 
+	}
 
 	return hs;
 }
@@ -523,7 +523,7 @@ gnome_scores_display (const gchar *title, const gchar *app_name, const gchar *le
  * @level: Level of the game or %NULL.
  * @pos: Position in the top ten of the current player, as returned by gnome_score_log.
  *
- * Description:  Does all the work of displaying the best scores. 
+ * Description:  Does all the work of displaying the best scores.
  * It calls gnome_score_get_notables to retrieve the info, creates the window,
  * and show it.
  *
@@ -545,12 +545,12 @@ gnome_scores_display_with_pixmap (const gchar *pixmap_logo, const gchar *app_nam
 		gnome_scores_set_logo_pixmap (GNOME_SCORES(hs), pixmap_logo);
 		if(pos)
  			gnome_scores_set_current_player(GNOME_SCORES(hs), pos-1);
-		
+
 		gtk_widget_show (hs);
 		g_strfreev(names);
 		g_free(scores);
 		g_free(scoretimes);
-	} 
+	}
 
 	return hs;
 }

@@ -42,6 +42,7 @@
 #include "gnome-i18nP.h"
 
 #include "gnome-icon-item.h"
+#include "gnome-marshal.h"
 
 /* Margins used to display the information */
 #define MARGIN_X 2
@@ -105,7 +106,7 @@ send_focus_event (GnomeIconTextItem *iti, gboolean in)
 	GtkWidget *widget;
 	gboolean has_focus;
 	GdkEvent fake_event;
-	
+
 	g_return_if_fail (in == FALSE || in == TRUE);
 
 	priv = iti->_priv;
@@ -119,7 +120,7 @@ send_focus_event (GnomeIconTextItem *iti, gboolean in)
 	if (has_focus == in) {
 		return;
 	}
-	
+
 	memset (&fake_event, 0, sizeof (fake_event));
 	fake_event.focus_change.type = GDK_FOCUS_CHANGE;
 	fake_event.focus_change.window = widget->window;
@@ -135,15 +136,15 @@ update_pango_layout (GnomeIconTextItem *iti)
 	GnomeIconTextItemPrivate *priv;
 	PangoRectangle bounds;
 	const char *text;
-	
-	priv = iti->_priv;	
+
+	priv = iti->_priv;
 
 	if (iti->editing) {
 		text = gtk_entry_get_text (GTK_ENTRY (priv->entry));
 	} else {
 		text = iti->text;
 	}
-		
+
 	pango_layout_set_text (priv->layout, text, strlen (text));
 
 	pango_layout_set_width (priv->layout, iti->width * PANGO_SCALE);
@@ -159,7 +160,7 @@ static void
 iti_stop_editing (GnomeIconTextItem *iti)
 {
 	GnomeIconTextItemPrivate *priv;
-	
+
 	priv = iti->_priv;
 	iti->editing = FALSE;
 	send_focus_event (iti, FALSE);
@@ -272,7 +273,7 @@ iti_selection_motion (GnomeIconTextItem *iti, int idx)
 	GnomeIconTextItemPrivate *priv;
 	GtkEditable *e;
 	g_assert (idx >= 0);
-	
+
 	priv = iti->_priv;
 	e = GTK_EDITABLE (priv->entry);
 
@@ -293,10 +294,10 @@ iti_entry_text_changed_by_clipboard (GtkObject *widget, gpointer data)
 
         /* Update text item to reflect changes */
         iti = GNOME_ICON_TEXT_ITEM (data);
-	
+
 	update_pango_layout (iti);
 	iti->_priv->need_text_update = TRUE;
-	
+
         item = GNOME_CANVAS_ITEM (iti);
         gnome_canvas_item_request_update (item);
 }
@@ -328,7 +329,7 @@ get_layout_index (GnomeIconTextItem *iti, int x, int y)
 
 	x = (x * PANGO_SCALE) + extents.x;
 	y = (y * PANGO_SCALE) + extents.y;
-	
+
 	pango_layout_xy_to_index (priv->layout, x, y, &index, &trailing);
 
 	cluster = gtk_entry_get_text (GTK_ENTRY (priv->entry)) + index;
@@ -353,13 +354,13 @@ realize_cursor_gc (GnomeIconTextItem *iti)
 {
 	GdkColor *cursor_color;
 	GdkColor red = { 0, 0xffff, 0x0000, 0x0000 };
-	
+
 	if (iti->_priv->cursor_gc) {
 		g_object_unref (iti->_priv->cursor_gc);
 	}
-	
+
 	iti->_priv->cursor_gc = gdk_gc_new (GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas)->window);
-	
+
 	gtk_widget_style_get (GTK_WIDGET (iti->_priv->entry), "cursor_color",
 			      &cursor_color, NULL);
 	if (cursor_color) {
@@ -378,7 +379,7 @@ gnome_icon_text_item_realize (GnomeCanvasItem *item)
 	if (iti->_priv->entry) {
 		realize_cursor_gc (iti);
 	}
-	
+
 	GNOME_CALL_PARENT (GNOME_CANVAS_ITEM_CLASS, realize, (item));
 }
 
@@ -386,7 +387,7 @@ static void
 gnome_icon_text_item_unrealize (GnomeCanvasItem *item)
 {
 	GnomeIconTextItem *iti = GNOME_ICON_TEXT_ITEM (item);
-	
+
 	if (iti->_priv->cursor_gc) {
 		g_object_unref (iti->_priv->cursor_gc);
 		iti->_priv->cursor_gc = NULL;
@@ -416,15 +417,16 @@ iti_start_editing (GnomeIconTextItem *iti)
 		if (GTK_WIDGET_REALIZED (GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas))) {
 			realize_cursor_gc (iti);
 		}
-		
+
 		/* Make clipboard functions cause an update, since clipboard
 		 * functions will change the offscreen entry */
-		gtk_signal_connect_after (GTK_OBJECT (priv->entry), "changed",
-					  G_CALLBACK (iti_entry_text_changed_by_clipboard), iti);
+		g_signal_connect_after (priv->entry, "changed",
+					G_CALLBACK (iti_entry_text_changed_by_clipboard),
+					iti);
 		priv->entry_top = gtk_window_new (GTK_WINDOW_POPUP);
-		gtk_container_add (GTK_CONTAINER (priv->entry_top), 
+		gtk_container_add (GTK_CONTAINER (priv->entry_top),
 				   GTK_WIDGET (priv->entry));
-		gtk_widget_set_uposition (priv->entry_top, 20000, 20000);
+		gtk_window_move (GTK_WINDOW (priv->entry_top), 20000, 20000);
 		gtk_widget_show_all (priv->entry_top);
 	}
 
@@ -437,7 +439,7 @@ iti_start_editing (GnomeIconTextItem *iti)
 	send_focus_event (iti, TRUE);
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (iti));
 
-	gtk_signal_emit (GTK_OBJECT (iti), iti_signals[EDITING_STARTED]);
+	g_signal_emit (iti, iti_signals[EDITING_STARTED], 0);
 }
 
 /* Recomputes the bounding box of an icon text item */
@@ -452,7 +454,7 @@ recompute_bounding_box (GnomeIconTextItem *iti)
 	int max_width_w;
 
 	item = GNOME_CANVAS_ITEM (iti);
-	
+
 	width_c = iti->_priv->layout_width + 2 * MARGIN_X;
 	height_c = iti->_priv->layout_height + 2 * MARGIN_Y;
 	width_w = ROUND (width_c / item->canvas->pixels_per_unit);
@@ -480,7 +482,7 @@ gnome_icon_text_item_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip
 
 	iti = GNOME_ICON_TEXT_ITEM (item);
 	priv = iti->_priv;
-	
+
 	GNOME_CALL_PARENT (GNOME_CANVAS_ITEM_CLASS, update, (item, affine, clip_path, flags));
 
 	/* If necessary, queue a redraw of the old bounding box */
@@ -507,7 +509,7 @@ gnome_icon_text_item_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip
 }
 
 static void
-iti_draw_cursor (GnomeIconTextItem *iti, GdkDrawable *drawable, 
+iti_draw_cursor (GnomeIconTextItem *iti, GdkDrawable *drawable,
 		 int x, int y)
 {
 	int stem_width;
@@ -516,22 +518,22 @@ iti_draw_cursor (GnomeIconTextItem *iti, GdkDrawable *drawable,
 
 	g_return_if_fail (iti->_priv->cursor_gc != NULL);
 
-	pango_layout_get_cursor_pos (iti->_priv->layout, 
-				     gtk_editable_get_position (GTK_EDITABLE (iti->_priv->entry)), 
+	pango_layout_get_cursor_pos (iti->_priv->layout,
+				     gtk_editable_get_position (GTK_EDITABLE (iti->_priv->entry)),
 				     &pos, NULL);
 	stem_width = PANGO_PIXELS (pos.height) / 30 + 1;
 	for (i = 0; i < stem_width; i++) {
 		gdk_draw_line (drawable, iti->_priv->cursor_gc,
-			       x + PANGO_PIXELS (pos.x) + i - stem_width / 2, 
+			       x + PANGO_PIXELS (pos.x) + i - stem_width / 2,
 			       y + PANGO_PIXELS (pos.y),
-			       x + PANGO_PIXELS (pos.x) + i - stem_width / 2, 
-			       y + PANGO_PIXELS (pos.y) + PANGO_PIXELS (pos.height));	
+			       x + PANGO_PIXELS (pos.x) + i - stem_width / 2,
+			       y + PANGO_PIXELS (pos.y) + PANGO_PIXELS (pos.height));
 	}
 }
 
 /* Draw method handler for the icon text item */
 static void
-gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable, 
+gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			   int x, int y, int width, int height)
 {
 	GtkWidget *widget;
@@ -547,15 +549,15 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	widget = GTK_WIDGET (item->canvas);
 	iti = GNOME_ICON_TEXT_ITEM (item);
 	priv = iti->_priv;
-	
+
 	style = GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas)->style;
-	
+
 	gc = style->fg_gc [GTK_STATE_NORMAL];
 	bgc = style->bg_gc [GTK_STATE_NORMAL];
 
 	w = priv->layout_width + 2 * MARGIN_X;
 	h = priv->layout_height + 2 * MARGIN_Y;
-	
+
 	xofs = item->x1 - x;
 	yofs = item->y1 - y;
 
@@ -567,35 +569,46 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 		state = GTK_STATE_SELECTED;
 	else
 		state = GTK_STATE_ACTIVE;
-		
-	if (iti->selected && !iti->editing) 
+
+	if (iti->selected && !iti->editing)
 		gdk_draw_rectangle (drawable,
 				    style->base_gc[state],
 				    TRUE,
 				    xofs + 1, yofs + 1,
 				    w - 2, h - 2);
-	
-	if (iti->focused && ! iti->editing)
+
+	if (iti->focused && ! iti->editing) {
+		GdkRectangle r;
+
+		r.x = xofs;
+		r.y = yofs;
+		r.width = w - 1;
+		r.height = h - 1;
+		gtk_paint_focus (style, drawable, state, &r, widget, NULL,
+				 xofs, yofs, w - 1, h - 1);
+#if 0
 		gtk_draw_focus (style,
 				drawable,
 				xofs, yofs,
 				w - 1, h - 1);
-	
+#endif
+	}
+
 	if (iti->editing) {
 		/* FIXME: are these the right graphics contexts? */
 		gdk_draw_rectangle (drawable,
 				    style->base_gc[GTK_STATE_NORMAL],
-				    TRUE, 
+				    TRUE,
 				    xofs, yofs, w - 1, h - 1);
 		gdk_draw_rectangle (drawable,
 				    style->fg_gc[GTK_STATE_NORMAL],
 				    FALSE,
 				    xofs, yofs, w - 1, h - 1);
-	}	
+	}
 
 	gdk_draw_layout (drawable,
 			 style->text_gc[iti->selected ? state : GTK_STATE_NORMAL],
-			 text_xofs, 
+			 text_xofs,
 			 text_yofs,
 			 priv->layout);
 
@@ -605,7 +618,7 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			GdkRegion *clip_region;
 			GdkColor *selection_color, *text_color;
 			guint8 state;
-		
+
 			state = GTK_WIDGET_HAS_FOCUS (widget) ? GTK_STATE_SELECTED : GTK_STATE_ACTIVE;
 			selection_color = &widget->style->base[state];
 			text_color = &widget->style->text[state];
@@ -614,14 +627,14 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 				 text_xofs,
 				 text_yofs,
 				 range, 1);
-			gdk_gc_set_clip_region (widget->style->black_gc, 
+			gdk_gc_set_clip_region (widget->style->black_gc,
 						clip_region);
 			gdk_draw_layout_with_colors (drawable,
 						     widget->style->black_gc,
-						     text_xofs, 
+						     text_xofs,
 						     text_yofs,
 						     priv->layout,
-						     text_color, 
+						     text_color,
 						     selection_color);
 			gdk_gc_set_clip_region (widget->style->black_gc, NULL);
 			gdk_region_destroy (clip_region);
@@ -647,7 +660,7 @@ draw_pixbuf_aa (GdkPixbuf *pixbuf, GnomeCanvasBuf *buf, double affine[6], int x_
 	affine_function = gdk_pixbuf_get_has_alpha (pixbuf)
 		? art_rgb_rgba_affine
 		: art_rgb_affine;
-	
+
 	(* affine_function)
 		(buf->buf,
 		 buf->rect.x0, buf->rect.y0,
@@ -677,7 +690,7 @@ gnome_icon_text_item_render (GnomeCanvasItem *item, GnomeCanvasBuf *buffer)
 	visual = gdk_rgb_get_visual ();
 	art_affine_identity(affine);
 	width  = ROUND (item->x2 - item->x1);
-	height = ROUND (item->y2 - item->y1);	
+	height = ROUND (item->y2 - item->y1);
 
 	pixmap = gdk_pixmap_new (NULL, width, height, visual->depth);
 
@@ -686,20 +699,20 @@ gnome_icon_text_item_render (GnomeCanvasItem *item, GnomeCanvasBuf *buffer)
 			    0, 0,
 			    width,
 			    height);
-	
+
 	/* use a common routine to draw the label into the pixmap */
-	gnome_icon_text_item_draw (item, pixmap, 
-				   ROUND (item->x1), ROUND (item->y1), 
+	gnome_icon_text_item_draw (item, pixmap,
+				   ROUND (item->x1), ROUND (item->y1),
 				   width, height);
-	
+
 	/* turn it into a pixbuf */
 	text_pixbuf = gdk_pixbuf_get_from_drawable
 		(NULL, pixmap, gdk_rgb_get_colormap (),
 		 0, 0,
-		 0, 0, 
-		 width, 
+		 0, 0,
+		 width,
 		 height);
-	
+
 	/* draw the pixbuf containing the label */
 	draw_pixbuf_aa (text_pixbuf, buffer, affine, ROUND (item->x1), ROUND (item->y1));
 	g_object_unref (text_pixbuf);
@@ -718,7 +731,7 @@ gnome_icon_text_item_bounds (GnomeCanvasItem *item, double *x1, double *y1, doub
 
 	iti = GNOME_ICON_TEXT_ITEM (item);
 	priv = iti->_priv;
-	
+
 	width = priv->layout_width + 2 * MARGIN_X;
 	height = priv->layout_height + 2 * MARGIN_Y;
 
@@ -733,7 +746,7 @@ static double
 gnome_icon_text_item_point (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item)
 {
 	double dx, dy;
-	
+
 	*actual_item = item;
 
 	if (cx < item->x1)
@@ -760,7 +773,7 @@ gnome_icon_text_item_event (GnomeCanvasItem *item, GdkEvent *event)
 	GnomeIconTextItemPrivate *priv;
 	int idx;
 	double cx, cy;
-	
+
 	iti = GNOME_ICON_TEXT_ITEM (item);
 	priv = iti->_priv;
 
@@ -769,23 +782,23 @@ gnome_icon_text_item_event (GnomeCanvasItem *item, GdkEvent *event)
 		if (!iti->editing) {
 			break;
 		}
-		
+
 		switch(event->key.keyval) {
-		
-		/* Pass these events back to parent */		
+
+		/* Pass these events back to parent */
 		case GDK_Escape:
 		case GDK_Return:
 		case GDK_KP_Enter:
 			return FALSE;
 
-		/* Handle up and down arrow keys.  GdkEntry does not know 
+		/* Handle up and down arrow keys.  GdkEntry does not know
 		 * how to handle multi line items */
-		case GDK_Up:		
+		case GDK_Up:
 		case GDK_Down:
 			iti_handle_arrow_key_event(iti, event);
 			break;
-			
-		default:			
+
+		default:
 			/* Check for control key operations */
 			if (event->key.state & GDK_CONTROL_MASK) {
 				return FALSE;
@@ -795,7 +808,7 @@ gnome_icon_text_item_event (GnomeCanvasItem *item, GdkEvent *event)
 			gtk_widget_event (GTK_WIDGET (priv->entry), event);
 			break;
 		}
-		
+
 		/* Update text item to reflect changes */
 		update_pango_layout (iti);
 		priv->need_text_update = TRUE;
@@ -809,7 +822,7 @@ gnome_icon_text_item_event (GnomeCanvasItem *item, GdkEvent *event)
 
 		if (event->button.button == 1) {
 			gnome_canvas_w2c_d (item->canvas, event->button.x, event->button.y, &cx, &cy);
-			idx = get_layout_index (iti, 
+			idx = get_layout_index (iti,
 						(cx - item->x1) + MARGIN_X,
 						(cy - item->y1) + MARGIN_Y);
 			iti_start_selecting (iti, idx, event->button.time);
@@ -820,11 +833,11 @@ gnome_icon_text_item_event (GnomeCanvasItem *item, GdkEvent *event)
 			break;
 
 		gtk_widget_event (GTK_WIDGET (priv->entry), event);
-		gnome_canvas_w2c_d (item->canvas, event->button.x, event->button.y, &cx, &cy);			
-		idx = get_layout_index (iti, 
+		gnome_canvas_w2c_d (item->canvas, event->button.x, event->button.y, &cx, &cy);
+		idx = get_layout_index (iti,
 					floor ((cx - (item->x1 + MARGIN_X)) + .5),
 					floor ((cy - (item->y1 + MARGIN_Y)) + .5));
-		
+
 		iti_selection_motion (iti, idx);
 		return TRUE;
 
@@ -841,39 +854,39 @@ gnome_icon_text_item_event (GnomeCanvasItem *item, GdkEvent *event)
 	return FALSE;
 }
 
-static void 
+static void
 gnome_icon_text_item_destroy (GtkObject *object)
 {
 	GnomeIconTextItem *iti = GNOME_ICON_TEXT_ITEM (object);
 	GnomeCanvasItem *item = GNOME_CANVAS_ITEM (object);
 	GnomeIconTextItemPrivate *priv = iti->_priv;
-	
-	gnome_canvas_request_redraw (item->canvas, 
+
+	gnome_canvas_request_redraw (item->canvas,
 				     ROUND (item->x1),
 				     ROUND (item->y1),
 				     ROUND (item->x2),
 				     ROUND (item->y2));
-	
+
 	if (iti->text && iti->is_text_allocated) {
 		g_free (iti->text);
 		iti->text = NULL;
 	}
 
 	if (priv->layout) {
-		g_object_unref (priv->layout);	
+		g_object_unref (priv->layout);
 		priv->layout = NULL;
 	}
-	
+
 	if (priv->entry_top) {
 		gtk_widget_destroy (priv->entry_top);
 		priv->entry_top = NULL;
 	}
-	
+
 	if (priv->cursor_gc) {
 		g_object_unref (priv->cursor_gc);
 		priv->cursor_gc = NULL;
 	}
-	
+
 	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
@@ -882,72 +895,72 @@ gnome_icon_text_item_class_init (GnomeIconTextItemClass *klass)
 {
 	GnomeCanvasItemClass *canvas_item_class;
 	GtkObjectClass *object_class;
-	
+
 	object_class = (GtkObjectClass *)klass;
 	canvas_item_class = (GnomeCanvasItemClass *)klass;
-	
+
 	iti_signals [TEXT_CHANGED] =
-		gtk_signal_new (
-			"text_changed",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, text_changed),
-			gtk_marshal_BOOL__NONE,
-			GTK_TYPE_BOOL, 0);
+		g_signal_new ("text_changed",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeIconTextItemClass, text_changed),
+			      NULL, NULL,
+			      _gnome_marshal_BOOLEAN__VOID,
+			      G_TYPE_BOOLEAN, 0);
 
 	iti_signals [HEIGHT_CHANGED] =
-		gtk_signal_new (
-			"height_changed",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, height_changed),
-			gtk_marshal_NONE__NONE,
-			GTK_TYPE_NONE, 0);
+		g_signal_new ("height_changed",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeIconTextItemClass, height_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 
 	iti_signals [WIDTH_CHANGED] =
-		gtk_signal_new (
-			"width_changed",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, width_changed),
-			gtk_marshal_NONE__NONE,
-			GTK_TYPE_NONE, 0);
+		g_signal_new ("width_changed",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeIconTextItemClass, width_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 
 	iti_signals[EDITING_STARTED] =
-		gtk_signal_new (
-			"editing_started",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, editing_started),
-			gtk_marshal_NONE__NONE,
-			GTK_TYPE_NONE, 0);
+		g_signal_new ("editing_started",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeIconTextItemClass, editing_started),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 
 	iti_signals[EDITING_STOPPED] =
-		gtk_signal_new (
-			"editing_stopped",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, editing_stopped),
-			gtk_marshal_NONE__NONE,
-			GTK_TYPE_NONE, 0);
+		g_signal_new ("editing_stopped",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeIconTextItemClass, editing_stopped),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 
 	iti_signals[SELECTION_STARTED] =
-		gtk_signal_new (
-			"selection_started",
-			GTK_RUN_FIRST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, selection_started),
-			gtk_marshal_NONE__NONE,
-			GTK_TYPE_NONE, 0);
+		g_signal_new ("selection_started",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeIconTextItemClass, selection_started),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 
 	iti_signals[SELECTION_STOPPED] =
-		gtk_signal_new (
-			"selection_stopped",
-			GTK_RUN_FIRST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, selection_stopped),
-			gtk_marshal_NONE__NONE,
-			GTK_TYPE_NONE, 0);
+		g_signal_new ("selection_stopped",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeIconTextItemClass, selection_stopped),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 
 	object_class->destroy = gnome_icon_text_item_destroy;
 
@@ -1007,7 +1020,7 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 	g_return_if_fail (GNOME_IS_ICON_TEXT_ITEM (iti));
 	g_return_if_fail (width > 2 * MARGIN_X);
 	g_return_if_fail (text != NULL);
-	
+
 	iti->x = x;
 	iti->y = y;
 	iti->width = width;
@@ -1020,13 +1033,13 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 		g_free (iti->text);
 
 	iti->is_text_allocated = !is_static;
-	
+
 	/* This cast is to shut up the compiler */
 	if (is_static)
 		iti->text = (char *) text;
 	else
 		iti->text = g_strdup (text);
-	
+
 	if (iti->fontname)
 		g_free (iti->fontname);
 
@@ -1085,7 +1098,7 @@ gnome_icon_text_item_focus (GnomeIconTextItem *iti, int focused)
 
 	if (!iti->focused == !focused)
 		return;
-	
+
 	iti->focused = focused ? TRUE : FALSE;
 
 	priv->need_state_update = TRUE;

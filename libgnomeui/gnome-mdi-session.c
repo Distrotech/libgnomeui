@@ -124,12 +124,8 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 		else {
 			gnome_mdi_add_toplevel_view (mdi, mdi_child);
 			
-			gtk_widget_set_usize
-				(GTK_WIDGET (mdi->active_window),
-				 width, height);
-
-			gtk_widget_set_uposition
-				(GTK_WIDGET (mdi->active_window), x, y);
+			gtk_window_set_default_size (GTK_WINDOW (mdi->active_window), width, height);
+			gtk_window_move (GTK_WINDOW (mdi->active_window), x, y);
 			
 			*init = TRUE;
 
@@ -166,10 +162,8 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 	if(child_list->len == 0) {	
 		gnome_mdi_open_toplevel (mdi);
 
-		gtk_widget_set_usize (GTK_WIDGET (mdi->active_window), w, h);
-
-		gtk_widget_set_uposition (GTK_WIDGET (mdi->active_window),
-					  x, y);
+		gtk_window_set_default_size (GTK_WINDOW (mdi->active_window), w, h);
+		gtk_window_move (GTK_WINDOW (mdi->active_window), x, y);
 
 		g_hash_table_insert (window_hash, (gpointer) window,
 				     mdi->active_window);

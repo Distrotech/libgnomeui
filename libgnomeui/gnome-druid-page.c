@@ -39,7 +39,7 @@ enum {
 	LAST_SIGNAL
 };
 
-static void gnome_druid_page_size_request       (GtkWidget               *widget, 
+static void gnome_druid_page_size_request       (GtkWidget               *widget,
 						 GtkRequisition          *requisition);
 static void gnome_druid_page_size_allocate      (GtkWidget		 *widget,
 						 GtkAllocation           *allocation);
@@ -62,52 +62,57 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 	object_class = (GtkObjectClass*) class;
 	widget_class = (GtkWidgetClass*) class;
 
-	druid_page_signals[NEXT] = 
-		gtk_signal_new ("next",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, next),
-				_gnome_marshal_BOOLEAN__OBJECT,
-				GTK_TYPE_BOOL, 1,
-				GTK_TYPE_WIDGET);
-	druid_page_signals[PREPARE] = 
-		gtk_signal_new ("prepare",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, prepare),
-				g_cclosure_marshal_VOID__OBJECT,
-				GTK_TYPE_NONE, 1,
-				GTK_TYPE_WIDGET);
-	druid_page_signals[BACK] = 
-		gtk_signal_new ("back",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, back),
-				_gnome_marshal_BOOLEAN__OBJECT,
-				GTK_TYPE_WIDGET, 1,
-				GTK_TYPE_WIDGET);
-	druid_page_signals[FINISH] = 
-		gtk_signal_new ("finish",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, finish),
-				g_cclosure_marshal_VOID__OBJECT,
-				GTK_TYPE_NONE, 1,
-				GTK_TYPE_WIDGET);
-	druid_page_signals[CANCEL] = 
-		gtk_signal_new ("cancel",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, cancel),
-				_gnome_marshal_BOOLEAN__OBJECT,
-				GTK_TYPE_BOOL, 1,
-				GTK_TYPE_WIDGET);
+	druid_page_signals[NEXT] =
+		g_signal_new ("next",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeDruidPageClass, next),
+			      NULL, NULL,
+			      _gnome_marshal_BOOLEAN__OBJECT,
+			      G_TYPE_BOOLEAN, 1,
+			      GTK_TYPE_WIDGET);
+	druid_page_signals[PREPARE] =
+		g_signal_new ("prepare",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeDruidPageClass, prepare),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE, 1,
+			      GTK_TYPE_WIDGET);
+	druid_page_signals[BACK] =
+		g_signal_new ("back",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeDruidPageClass, back),
+			      NULL, NULL,
+			      _gnome_marshal_BOOLEAN__OBJECT,
+			      G_TYPE_BOOLEAN, 1,
+			      GTK_TYPE_WIDGET);
+	druid_page_signals[FINISH] =
+		g_signal_new ("finish",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeDruidPageClass, finish),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE, 1,
+			      GTK_TYPE_WIDGET);
+	druid_page_signals[CANCEL] =
+		g_signal_new ("cancel",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeDruidPageClass, cancel),
+			      NULL, NULL,
+			      _gnome_marshal_BOOLEAN__OBJECT,
+			      G_TYPE_BOOLEAN, 1,
+			      GTK_TYPE_WIDGET);
 
 	widget_class->size_request = gnome_druid_page_size_request;
 	widget_class->size_allocate = gnome_druid_page_size_allocate;
 	widget_class->expose_event = gnome_druid_page_expose;
 	widget_class->realize = gnome_druid_page_realize;
-	     
+
 	class->next = NULL;
 	class->prepare = NULL;
 	class->back = NULL;
@@ -125,7 +130,7 @@ gnome_druid_page_instance_init (GnomeDruidPage *druid_page)
 }
 
 static void
-gnome_druid_page_size_request (GtkWidget *widget, 
+gnome_druid_page_size_request (GtkWidget *widget,
 			       GtkRequisition *requisition)
 {
 	GtkBin *bin;
@@ -163,7 +168,7 @@ gnome_druid_page_size_allocate (GtkWidget *widget,
 	child_allocation.y = 0;
 	child_allocation.width = MAX (allocation->width - GTK_CONTAINER (widget)->border_width * 2, 0);
 	child_allocation.height = MAX (allocation->height - GTK_CONTAINER (widget)->border_width * 2, 0);
-	
+
 	if (GTK_WIDGET_REALIZED (widget)) {
 		gdk_window_move_resize (widget->window,
 					allocation->x + GTK_CONTAINER (widget)->border_width,
@@ -179,7 +184,7 @@ static void
 gnome_druid_page_paint (GtkWidget     *widget,
 			GdkRectangle *area)
 {
-	gtk_paint_flat_box (widget->style, widget->window, GTK_STATE_NORMAL, 
+	gtk_paint_flat_box (widget->style, widget->window, GTK_STATE_NORMAL,
 			    GTK_SHADOW_NONE, area, widget, "base", 0, 0, -1, -1);
 }
 
@@ -195,7 +200,7 @@ gnome_druid_page_expose (GtkWidget               *widget,
 		gnome_druid_page_paint (widget, &event->area);
 
 	if (GTK_WIDGET_DRAWABLE (widget)) {
-		return GNOME_CALL_PARENT_WITH_DEFAULT 
+		return GNOME_CALL_PARENT_WITH_DEFAULT
 			(GTK_WIDGET_CLASS, expose_event, (widget, event), FALSE);
 	}
 
@@ -212,7 +217,7 @@ gnome_druid_page_realize (GtkWidget *widget)
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (widget));
 
 	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
-	
+
 	border_width = GTK_CONTAINER (widget)->border_width;
 
 	attributes.x = widget->allocation.x + border_width;
@@ -230,9 +235,9 @@ gnome_druid_page_realize (GtkWidget *widget)
 		| GDK_EXPOSURE_MASK
 		| GDK_ENTER_NOTIFY_MASK
 		| GDK_LEAVE_NOTIFY_MASK;
-	
+
 	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-  
+
 	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
 	gdk_window_set_user_data (widget->window, widget);
 	gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
@@ -244,16 +249,16 @@ gnome_druid_page_realize (GtkWidget *widget)
 
 /**
  * gnome_druid_page_new:
- * @void: 
- * 
+ * @void:
+ *
  * Creates a new #GnomeDruidPage.
- * 
+ *
  * Return value: The newly created #GnomeDruidPage.
  **/
 GtkWidget *
 gnome_druid_page_new (void)
 {
-     GtkWidget *widget = (GtkWidget *) gtk_type_new (GNOME_TYPE_DRUID_PAGE);
+     GtkWidget *widget = g_object_new (GNOME_TYPE_DRUID_PAGE, NULL);
 
      return widget;
 }
@@ -261,11 +266,11 @@ gnome_druid_page_new (void)
 /**
  * gnome_druid_page_next:
  * @druid_page: A DruidPage widget.
- * 
+ *
  * Description: This will emit the "next" signal for that particular page.  It
  * is called by gnome-druid exclusively.  It is expected that non-linear Druid's
- * will override this signal and return TRUE if it handles changing pages.  
- * 
+ * will override this signal and return TRUE if it handles changing pages.
+ *
  * Return value: This function will return FALSE by default.
  **/
 /* Public functions */
@@ -277,17 +282,16 @@ gnome_druid_page_next     (GnomeDruidPage *druid_page)
 	g_return_val_if_fail (druid_page != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (druid_page), FALSE);
 
-	gtk_signal_emit (GTK_OBJECT (druid_page),
-			 druid_page_signals [NEXT],
-			 GTK_WIDGET (druid_page)->parent,
-			 &retval);
+	g_signal_emit (druid_page, druid_page_signals [NEXT], 0,
+		       GTK_WIDGET (druid_page)->parent,
+		       &retval);
 
 	return retval;
 }
 /**
  * gnome_druid_page_prepare:
  * @druid_page: A DruidPage widget.
- * 
+ *
  * Description: This emits the "prepare" signal for the page.  It is called by
  * gnome-druid exclusively.
  **/
@@ -297,18 +301,17 @@ gnome_druid_page_prepare  (GnomeDruidPage *druid_page)
 	g_return_if_fail (druid_page != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (druid_page));
 
-	gtk_signal_emit (GTK_OBJECT (druid_page),
-			 druid_page_signals [PREPARE],
-			 GTK_WIDGET (druid_page)->parent);
+	g_signal_emit (druid_page, druid_page_signals [PREPARE], 0,
+		       GTK_WIDGET (druid_page)->parent);
 }
 /**
  * gnome_druid_page_back:
  * @druid_page: A DruidPage widget.
- * 
+ *
  * Description: This will emit the "back" signal for that particular page.  It
  * is called by gnome-druid exclusively.  It is expected that non-linear Druid's
  * will override this signal and return TRUE if it handles changing pages.
- * 
+ *
  * Return value: This function will return FALSE by default.
  **/
 gboolean
@@ -318,18 +321,17 @@ gnome_druid_page_back     (GnomeDruidPage *druid_page)
 
 	g_return_val_if_fail (druid_page != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (druid_page), FALSE);
-  
-	gtk_signal_emit (GTK_OBJECT (druid_page),
-			 druid_page_signals [BACK],
-			 GTK_WIDGET (druid_page)->parent,
-			 &retval);
+
+	g_signal_emit (druid_page, druid_page_signals [BACK], 0,
+		       GTK_WIDGET (druid_page)->parent,
+		       &retval);
 
 	return retval;
 }
 /**
  * gnome_druid_page_finish:
  * @druid_page: A DruidPage widget.
- * 
+ *
  * Description: This emits the "finish" signal for the page.  It is called by
  * gnome-druid exclusively.
  **/
@@ -338,19 +340,18 @@ gnome_druid_page_finish   (GnomeDruidPage *druid_page)
 {
 	g_return_if_fail (druid_page != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (druid_page));
-  
-	gtk_signal_emit (GTK_OBJECT (druid_page),
-			 druid_page_signals [FINISH],
-			 GTK_WIDGET (druid_page)->parent);
+
+	g_signal_emit (druid_page, druid_page_signals [FINISH], 0,
+		       GTK_WIDGET (druid_page)->parent);
 }
 /**
  * gnome_druid_page_cancel:
  * @druid_page: A DruidPage widget.
- * 
+ *
  * Description: This will emit the "cancel" signal for that particular page.  It
  * is called by gnome-druid exclusively.  It is expected that a Druid will
  * override this signal and return TRUE if it does not want to exit.
- * 
+ *
  * Return value: This function will return FALSE by default.
  **/
 gboolean
@@ -361,10 +362,9 @@ gnome_druid_page_cancel   (GnomeDruidPage *druid_page)
 	g_return_val_if_fail (druid_page != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (druid_page), FALSE);
 
-	gtk_signal_emit (GTK_OBJECT (druid_page),
-			 druid_page_signals [CANCEL],
-			 GTK_WIDGET (druid_page)->parent,
-			 &retval);
+	g_signal_emit (druid_page, druid_page_signals [CANCEL], 0,
+		       GTK_WIDGET (druid_page)->parent,
+		       &retval);
 
 	return retval;
 }

@@ -163,7 +163,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	/* Add some extra space on the right to balance the pixmap */
 	if (pixmap) {
 		alignment = gtk_alignment_new (0., 0., 0., 0.);
-		gtk_widget_set_usize (alignment, GNOME_PAD, -1);
+		gtk_widget_set_size_request (alignment, GNOME_PAD, -1);
 		gtk_widget_show (alignment);
 		
 		gtk_box_pack_start (GTK_BOX (hbox), alignment, FALSE, FALSE, 0);
@@ -197,7 +197,7 @@ gnome_message_box_new (const gchar           *message,
         
 	va_start (ap, message_box_type);
 	
-	message_box = gtk_type_new (GNOME_TYPE_MESSAGE_BOX);
+	message_box = g_object_new (GNOME_TYPE_MESSAGE_BOX, NULL);
 
 	gnome_message_box_construct (message_box, message,
 				     message_box_type, NULL);
@@ -249,7 +249,7 @@ gnome_message_box_newv (const gchar           *message,
 	g_return_val_if_fail (message != NULL, NULL);
 	g_return_val_if_fail (message_box_type != NULL, NULL);
 
-	message_box = gtk_type_new (GNOME_TYPE_MESSAGE_BOX);
+	message_box = g_object_new (GNOME_TYPE_MESSAGE_BOX, NULL);
 
 	gnome_message_box_construct (message_box, message,
 				     message_box_type, buttons);

@@ -42,7 +42,7 @@
 
 static void gnome_ice_io_error_handler (IceConn connection);
 
-static void new_ice_connection (IceConn connection, IcePointer client_data, 
+static void new_ice_connection (IceConn connection, IcePointer client_data,
 				Bool opening, IcePointer *watch_data);
 
 /* This is called when data is available on an ICE connection.  */
@@ -62,11 +62,10 @@ process_ice_messages (GIOChannel   *source,
 
       if (context && GTK_IS_OBJECT (context))
 	{
-	  guint disconnect_id = gtk_signal_lookup ("disconnect", 
-						   GTK_OBJECT_TYPE (context));
+	  guint disconnect_id = g_signal_lookup ("disconnect", G_OBJECT_TYPE (context));
 
 	  if (disconnect_id > 0)
-	    gtk_signal_emit (GTK_OBJECT (context), disconnect_id);
+	    g_signal_emit (context, disconnect_id, 0);
 	}
       else
 	{
@@ -103,7 +102,7 @@ new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 
       *watch_data = (IcePointer) GUINT_TO_POINTER (input_id);
     }
-  else 
+  else
     {
       input_id = GPOINTER_TO_UINT ((gpointer) *watch_data);
 
@@ -113,14 +112,14 @@ new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 
 static IceIOErrorHandler gnome_ice_installed_handler;
 
-/* We call any handler installed before (or after) gnome_ice_init but 
+/* We call any handler installed before (or after) gnome_ice_init but
    avoid calling the default libICE handler which does an exit() */
 static void
 gnome_ice_io_error_handler (IceConn connection)
 {
     if (gnome_ice_installed_handler)
       (*gnome_ice_installed_handler) (connection);
-}    
+}
 
 #endif /* HAVE_LIBSM */
 

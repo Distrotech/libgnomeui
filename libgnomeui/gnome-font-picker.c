@@ -3,7 +3,7 @@
  * All rights reserved.
  *
  * Based on gnome-color-picker by Federico Mena <federico@nuclecu.unam.mx>
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -45,7 +45,7 @@
 
 struct _GnomeFontPickerPrivate {
         gchar         *title;
-        
+
         gchar         *font_name;
         gchar         *preview_text;
 
@@ -225,13 +225,14 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 				       G_PARAM_WRITABLE)));
 
 	font_picker_signals[FONT_SET] =
-		gtk_signal_new ("font_set",
-				GTK_RUN_FIRST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeFontPickerClass, font_set),
-				gtk_marshal_VOID__STRING,
-				GTK_TYPE_NONE, 1,
-				GTK_TYPE_STRING);
+		g_signal_new ("font_set",
+			      G_TYPE_FROM_CLASS (gobject_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeFontPickerClass, font_set),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__STRING,
+			      G_TYPE_NONE, 1,
+			      G_TYPE_STRING);
 
 }
 
@@ -270,28 +271,28 @@ static void
 gnome_font_picker_destroy (GtkObject *object)
 {
     GnomeFontPicker *gfp;
-    
+
     g_return_if_fail (object != NULL);
     g_return_if_fail (GNOME_IS_FONT_PICKER (object));
 
     /* remember, destroy can be run multiple times! */
 
     gfp = GNOME_FONT_PICKER (object);
-    
+
     if (gfp->_priv->font_dialog != NULL) {
 	    gtk_widget_destroy (gfp->_priv->font_dialog);
 	    gfp->_priv->font_dialog = NULL;
     }
 
     GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
-    
+
 } /* gnome_font_picker_destroy */
 
 static void
 gnome_font_picker_finalize (GObject *object)
 {
     GnomeFontPicker *gfp;
-    
+
     g_return_if_fail (object != NULL);
     g_return_if_fail (GNOME_IS_FONT_PICKER (object));
 
@@ -314,7 +315,7 @@ gnome_font_picker_finalize (GObject *object)
     gfp->_priv = NULL;
 
     GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
-    
+
 } /* gnome_font_picker_finalize */
 
 static void
@@ -390,7 +391,7 @@ gnome_font_picker_get_property (GObject *object,
 		g_value_set_string (value,
 				    gnome_font_picker_get_font_name (self));
 		break;
-#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+#if !defined(GNOME_DISABLE_DEPRECATED_SOURCE) && !defined(GTK_DISABLE_DEPRECATED)
 	case PROP_FONT:
 		g_value_set_pointer (value, gnome_font_picker_get_font (self));
 		break;
@@ -435,7 +436,7 @@ gnome_font_picker_get_property (GObject *object,
 GtkWidget *
 gnome_font_picker_new (void)
 {
-	return GTK_WIDGET (gtk_type_new (GNOME_TYPE_FONT_PICKER));
+	return g_object_new (GNOME_TYPE_FONT_PICKER, NULL);
 } /* gnome_font_picker_new */
 
 
@@ -496,11 +497,11 @@ gnome_font_picker_get_title(GnomeFontPicker *gfp)
  * Description:
  * Returns current font picker button mode (or what to show).  Possible
  * values include %GNOME_FONT_PICKER_MODE_PIXMAP,
- * %GNOME_FONT_PICKER_MODE_FONT_INFO, and 
+ * %GNOME_FONT_PICKER_MODE_FONT_INFO, and
  * %GNOME_FONT_PICKER_MODE_USER_WIDGET.
  *
  * Returns:
- * Button mode currently set in font picker widget, or 
+ * Button mode currently set in font picker widget, or
  * %GNOME_FONT_PICKER_MODE_UNKNOWN on error.
  */
 
@@ -540,7 +541,7 @@ void       gnome_font_picker_set_mode        (GnomeFontPicker *gfp,
         gfp->_priv->inside = gnome_font_picker_create_inside(gfp);
         if (gfp->_priv->inside)
             gtk_container_add(GTK_CONTAINER(gfp), gfp->_priv->inside);
-        
+
         if (gfp->_priv->mode == GNOME_FONT_PICKER_MODE_FONT_INFO) {
             /* Update */
             gnome_font_picker_update_font_info(gfp);
@@ -582,7 +583,7 @@ void  gnome_font_picker_fi_set_use_font_in_label (GnomeFontPicker *gfp,
 		if (gfp->_priv->use_font_in_label)
 			gnome_font_picker_label_use_font_in_label (gfp);
 		else
-			gtk_widget_restore_default_style (gfp->_priv->font_label);
+			gtk_widget_set_style (gfp->_priv->font_label, NULL);
 	}
 } /* gnome_font_picker_fi_set_use_font_in_label */
 
@@ -722,7 +723,7 @@ const gchar*	   gnome_font_picker_get_font_name    (GnomeFontPicker *gfp)
  * an internal value and should not be modified.
  */
 
-#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+#if !defined(GNOME_DISABLE_DEPRECATED_SOURCE) && !defined(GTK_DISABLE_DEPRECATED)
 GdkFont*   gnome_font_picker_get_font	       (GnomeFontPicker *gfp)
 {
     g_return_val_if_fail (gfp != NULL, NULL);
@@ -730,7 +731,7 @@ GdkFont*   gnome_font_picker_get_font	       (GnomeFontPicker *gfp)
 
     /* FIXME: no GtkFont when there is no dialog? huh?
      *  -George */
-    
+
     return (gfp->_priv->font_dialog ?
              gtk_font_selection_dialog_get_font(GTK_FONT_SELECTION_DIALOG(gfp->_priv->font_dialog)) :
              NULL);
@@ -762,7 +763,7 @@ gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
 	    g_free(gfp->_priv->font_name);
 	    gfp->_priv->font_name = g_strdup (fontname);
     }
-    
+
     if (gfp->_priv->mode == GNOME_FONT_PICKER_MODE_FONT_INFO)
 	gnome_font_picker_update_font_info(gfp);
 
@@ -797,7 +798,7 @@ const gchar*	   gnome_font_picker_get_preview_text (GnomeFontPicker *gfp)
     }
 
     return gfp->_priv->preview_text;
-    
+
 } /* gnome_font_picker_get_preview_text */
 
 
@@ -837,50 +838,50 @@ gnome_font_picker_clicked(GtkButton *button)
 {
     GnomeFontPicker      *gfp;
     GtkFontSelectionDialog *fsd;
-    
+
     gfp = GNOME_FONT_PICKER(button);
 
     if (!gfp->_priv->font_dialog) {
         GtkWidget *parent;
 
         parent = gtk_widget_get_toplevel(GTK_WIDGET(gfp));
-      
+
         gfp->_priv->font_dialog=gtk_font_selection_dialog_new(gfp->_priv->title);
 
         if (parent)
             gtk_window_set_transient_for(GTK_WINDOW(gfp->_priv->font_dialog),
                                          GTK_WINDOW(parent));
-        
+
         fsd=GTK_FONT_SELECTION_DIALOG(gfp->_priv->font_dialog);
 
         /* If there is a grabed window, set new dialog as modal */
         if (gtk_grab_get_current())
             gtk_window_set_modal(GTK_WINDOW(gfp->_priv->font_dialog),TRUE);
 
-        gtk_signal_connect(GTK_OBJECT(fsd->ok_button), "clicked",
-                           (GtkSignalFunc) gnome_font_picker_dialog_ok_clicked,
-                           gfp);
+        g_signal_connect(fsd->ok_button, "clicked",
+			 G_CALLBACK (gnome_font_picker_dialog_ok_clicked),
+			 gfp);
 
-        gtk_signal_connect(GTK_OBJECT(fsd->cancel_button), "clicked",
-                           (GtkSignalFunc) gnome_font_picker_dialog_cancel_clicked,
-                           gfp);
-        gtk_signal_connect(GTK_OBJECT(fsd),"delete_event",
-                           (GtkSignalFunc) gnome_font_picker_dialog_delete_event,
-                           gfp);
-        gtk_signal_connect(GTK_OBJECT(fsd),"destroy",
-                           (GtkSignalFunc) gnome_font_picker_dialog_destroy,
-                           gfp);
-                           
+        g_signal_connect(fsd->cancel_button, "clicked",
+			 G_CALLBACK (gnome_font_picker_dialog_cancel_clicked),
+			 gfp);
+        g_signal_connect(fsd,"delete_event",
+			 G_CALLBACK (gnome_font_picker_dialog_delete_event),
+			 gfp);
+        g_signal_connect(fsd, "destroy",
+			 G_CALLBACK (gnome_font_picker_dialog_destroy),
+			 gfp);
+
     } /* if */
 
     if (!GTK_WIDGET_VISIBLE(gfp->_priv->font_dialog)) {
-        
+
         /* Set font and preview text */
         gtk_font_selection_dialog_set_font_name(GTK_FONT_SELECTION_DIALOG(gfp->_priv->font_dialog),
                                                 gfp->_priv->font_name);
         gtk_font_selection_dialog_set_preview_text(GTK_FONT_SELECTION_DIALOG(gfp->_priv->font_dialog),
                                                    gfp->_priv->preview_text);
-        
+
         gtk_widget_show(gfp->_priv->font_dialog);
     } else if (gfp->_priv->font_dialog->window) {
 	/*raise the window so that if it is obscured that we see it*/
@@ -897,7 +898,7 @@ gnome_font_picker_dialog_ok_clicked(GtkWidget *widget,
     gfp = GNOME_FONT_PICKER (data);
 
     gtk_widget_hide(gfp->_priv->font_dialog);
-    
+
     /* These calls will update gfp->_priv->font_name and gfp->_priv->preview_text */
     gnome_font_picker_get_font_name(gfp);
     gnome_font_picker_get_preview_text(gfp);
@@ -907,10 +908,9 @@ gnome_font_picker_dialog_ok_clicked(GtkWidget *widget,
         gnome_font_picker_update_font_info(gfp);
 
     /* Emit font_set signal */
-    gtk_signal_emit(GTK_OBJECT(gfp),
-		    font_picker_signals[FONT_SET],
-		    gfp->_priv->font_name);
-    
+    g_signal_emit(gfp, font_picker_signals[FONT_SET], 0,
+		  gfp->_priv->font_name);
+
 } /* gnome_font_picker_dialog_ok_clicked */
 
 
@@ -938,7 +938,7 @@ gnome_font_picker_dialog_delete_event(GtkWidget *widget, GdkEventAny *ev,
     GnomeFontPicker *gfp;
 
     gfp = GNOME_FONT_PICKER (data);
-    
+
     /* FIXME: is this necessary? bug #67587 */
     /* Here we restore old values */
     gnome_font_picker_set_font_name(gfp,gfp->_priv->font_name);
@@ -954,7 +954,7 @@ gnome_font_picker_dialog_destroy(GtkWidget *widget,
     GnomeFontPicker *gfp;
 
     gfp = GNOME_FONT_PICKER (data);
-    
+
     /* Query GtkFontSelectionDialog before it get destroyed */
     /* These calls will update gfp->_priv->font_name and gfp->_priv->preview_text */
     gnome_font_picker_get_font_name(gfp);
@@ -967,7 +967,7 @@ gnome_font_picker_dialog_destroy(GtkWidget *widget,
 GtkWidget *gnome_font_picker_create_inside(GnomeFontPicker *gfp)
 {
     GtkWidget *widget;
-    
+
     if (gfp->_priv->mode==GNOME_FONT_PICKER_MODE_PIXMAP) {
         widget=gtk_image_new_from_stock(GTK_STOCK_SELECT_FONT,
 					GTK_ICON_SIZE_BUTTON);
@@ -976,14 +976,14 @@ GtkWidget *gnome_font_picker_create_inside(GnomeFontPicker *gfp)
         widget=gtk_hbox_new(FALSE,0);
 
         gfp->_priv->font_label=gtk_label_new(_("Font"));
-            
+
         gtk_label_set_justify(GTK_LABEL(gfp->_priv->font_label),GTK_JUSTIFY_LEFT);
         gtk_box_pack_start(GTK_BOX(widget),gfp->_priv->font_label,TRUE,TRUE,5);
 
         if (gfp->_priv->show_size) {
             gfp->_priv->vsep=gtk_vseparator_new();
             gtk_box_pack_start(GTK_BOX(widget),gfp->_priv->vsep,FALSE,FALSE,0);
-            
+
             gfp->_priv->size_label=gtk_label_new("14");
             gtk_box_pack_start(GTK_BOX(widget),gfp->_priv->size_label,FALSE,FALSE,5);
         }
@@ -993,9 +993,9 @@ GtkWidget *gnome_font_picker_create_inside(GnomeFontPicker *gfp)
     } else /* GNOME_FONT_PICKER_MODE_USER_WIDGET */ {
         widget=NULL;
     }
-    
+
     return widget;
-        
+
 } /* gnome_font_picker_create_inside */
 
 static void
@@ -1024,7 +1024,7 @@ gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
 	style->font_desc = desc;
 
 	gtk_widget_set_style (gfp->_priv->font_label, style);
-	gtk_style_unref(style);
+	g_object_unref (G_OBJECT (style));
 } /* gnome_font_picker_set_label_font */
 
 static void

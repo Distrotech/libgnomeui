@@ -24,7 +24,7 @@
 #include <config.h>
 #include <libgnome/gnome-macros.h>
 
-#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+#if !defined(GNOME_DISABLE_DEPRECATED_SOURCE) && !defined(GTK_DISABLE_DEPRECATED)
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
@@ -104,7 +104,7 @@ GnomeMDIGenericChild *gnome_mdi_generic_child_new (const gchar *name)
 {
 	GnomeMDIGenericChild *child;
 
-	child = gtk_type_new (GNOME_TYPE_MDI_GENERIC_CHILD);
+	child = g_object_new (GNOME_TYPE_MDI_GENERIC_CHILD, NULL);
 
 	GNOME_MDI_CHILD(child)->name = g_strdup(name);
 
@@ -424,4 +424,4 @@ static void gnome_mdi_generic_child_destroy (GtkObject *obj)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(obj);
 }
 
-#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
+#endif /* !defined(GNOME_DISABLE_DEPRECATED_SOURCE) && !defined(GTK_DISABLE_DEPRECATED) */

@@ -46,7 +46,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-app-util.c		\
 	gnome-appbar.c			\
 	gnome-stock-icons.c		\
-	gnome-client.c			\
 	gnome-color-picker.c		\
 	gnome-dateedit.c		\
 	gnome-dialog.c			\
@@ -83,7 +82,8 @@ libgnomeui_2_la_SOURCES = \
 	gnome-window-icon.c		\
 	gnome-i18nP.h			\
 	gnome-gconf-ui.h		\
-	libgnomeuiP.h
+	libgnomeuiP.h			\
+	gnome-client.c
 
 ## this lists all the non-generated headers
 gnome_headers = \

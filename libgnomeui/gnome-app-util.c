@@ -41,14 +41,14 @@
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 
-static gboolean 
+static gboolean
 gnome_app_has_appbar_progress(GnomeApp * app)
 {
   return ( (app->statusbar != NULL) &&
 	   (GNOME_APPBAR_HAS_PROGRESS(app->statusbar)) );
 }
 
-static gboolean 
+static gboolean
 gnome_app_has_appbar_status(GnomeApp * app)
 {
   return ( (app->statusbar != NULL) &&
@@ -135,7 +135,7 @@ gnome_app_message (GnomeApp * app, const gchar * message)
   }
 }
 
-static void 
+static void
 gnome_app_error_bar(GnomeApp * app, const gchar * error)
 {
   gchar * s = g_strconcat(_("ERROR: "), error, NULL);
@@ -151,7 +151,7 @@ gnome_app_error_bar(GnomeApp * app, const gchar * error)
  * @error: Text of error message to be displayed
  *
  * Description:
- * An important fatal error; if it appears in the statusbar, 
+ * An important fatal error; if it appears in the statusbar,
  * it might gdk_beep() and require acknowledgement.
  *
  * Returns:
@@ -159,7 +159,7 @@ gnome_app_error_bar(GnomeApp * app, const gchar * error)
  * status bar.
  **/
 
-GtkWidget * 
+GtkWidget *
 gnome_app_error (GnomeApp * app, const gchar * error)
 {
   g_return_val_if_fail(app != NULL, NULL);
@@ -195,7 +195,7 @@ static void gnome_app_warning_bar (GnomeApp * app, const gchar * warning)
  * status bar.
  **/
 
-GtkWidget * 
+GtkWidget *
 gnome_app_warning (GnomeApp * app, const gchar * warning)
 {
   g_return_val_if_fail(app != NULL, NULL);
@@ -203,7 +203,7 @@ gnome_app_warning (GnomeApp * app, const gchar * warning)
   g_return_val_if_fail(warning != NULL, NULL);
 
   /* FIXME !!! */
-  if ( 0 /*gnome_app_has_appbar_status(app) && 
+  if ( 0 /*gnome_app_has_appbar_status(app) &&
        gnome_preferences_get_statusbar_dialog() */) {
     gnome_app_warning_bar(app, warning);
     return NULL;
@@ -225,10 +225,10 @@ struct _MessageInfo {
 typedef struct _MessageInfo MessageInfo;
 
 static gint
-remove_message_timeout (MessageInfo * mi) 
+remove_message_timeout (MessageInfo * mi)
 {
-  GDK_THREADS_ENTER ();	
-	
+  GDK_THREADS_ENTER ();
+
   gnome_appbar_refresh(GNOME_APPBAR(mi->app->statusbar));
   g_signal_handler_disconnect(mi->app, mi->handlerid);
   g_free ( mi );
@@ -240,7 +240,7 @@ remove_message_timeout (MessageInfo * mi)
 
 /* Called if the app is destroyed before the timeout occurs. */
 static void
-remove_timeout_cb ( GtkWidget * app, MessageInfo * mi ) 
+remove_timeout_cb ( GtkWidget * app, MessageInfo * mi )
 {
   gtk_timeout_remove(mi->timeoutid);
   g_free(mi);
@@ -260,10 +260,10 @@ static const guint32 flash_length = 3000; /* 3 seconds, I hope */
  * e.g. "Auto saving..."
  **/
 
-void 
+void
 gnome_app_flash (GnomeApp * app, const gchar * flash)
 {
-  /* This is a no-op for dialogs, since these messages aren't 
+  /* This is a no-op for dialogs, since these messages aren't
      important enough to pester users. */
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
@@ -274,24 +274,24 @@ gnome_app_flash (GnomeApp * app, const gchar * flash)
     MessageInfo * mi;
 
     g_return_if_fail(GNOME_IS_APPBAR(app->statusbar));
-    
+
     gnome_appbar_set_status(GNOME_APPBAR(app->statusbar), flash);
 
     mi = g_new(MessageInfo, 1);
 
-    mi->timeoutid = 
+    mi->timeoutid =
       gtk_timeout_add ( flash_length,
 			(GtkFunction) remove_message_timeout,
 			mi );
-    
-    mi->handlerid = 
+
+    mi->handlerid =
       g_signal_connect (G_OBJECT(app),
 			"destroy",
 			G_CALLBACK(remove_timeout_cb),
 			mi);
 
     mi->app       = app;
-  }   
+  }
 }
 
 /* ========================================================== */
@@ -313,11 +313,11 @@ bar_reply_cb(GnomeAppBar * ab, ReplyInfo * ri)
   g_print("Got reply: \"%s\"\n", response);
 #endif
 
-  if ( (g_ascii_strcasecmp(_("y"), response) == 0) || 
+  if ( (g_ascii_strcasecmp(_("y"), response) == 0) ||
        (g_ascii_strcasecmp(_("yes"), response) == 0) ) {
     (* (ri->callback)) (GNOME_YES, ri->data);
   }
-  else if ( (g_ascii_strcasecmp(_("n"), response) == 0) || 
+  else if ( (g_ascii_strcasecmp(_("n"), response) == 0) ||
 	    (g_ascii_strcasecmp(_("no"), response) == 0) ) {
     (* (ri->callback)) (GNOME_NO, ri->data);
   }
@@ -345,7 +345,7 @@ reply_clear_prompt_cb(GnomeAppBar * ab, ReplyInfo * ri)
   g_free(ri);
 }
 
-static void 
+static void
 gnome_app_reply_bar(GnomeApp * app, const gchar * question,
 		    GnomeReplyCallback callback, gpointer data,
 		    gboolean yes_or_ok, gboolean modal)
@@ -353,20 +353,20 @@ gnome_app_reply_bar(GnomeApp * app, const gchar * question,
   gchar * prompt;
   ReplyInfo * ri;
 
-  prompt = g_strconcat(question, yes_or_ok ? _(" (yes or no)") : 
+  prompt = g_strconcat(question, yes_or_ok ? _(" (yes or no)") :
 			  _("  - OK? (yes or no)"), NULL);
   gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, modal);
   gnome_app_activate_statusbar(app);
   g_free(prompt);
-  
+
   ri = g_new(ReplyInfo, 1);
   ri->callback = callback;
   ri->data     = data;
 
-  gtk_signal_connect(GTK_OBJECT(app->statusbar), "user_response",
-		     GTK_SIGNAL_FUNC(bar_reply_cb), ri);
-  gtk_signal_connect(GTK_OBJECT(app->statusbar), "clear_prompt",
-		     GTK_SIGNAL_FUNC(reply_clear_prompt_cb), ri);
+  g_signal_connect(app->statusbar, "user_response",
+		   G_CALLBACK(bar_reply_cb), ri);
+  g_signal_connect(app->statusbar, "clear_prompt",
+		   G_CALLBACK(reply_clear_prompt_cb), ri);
 }
 
 
@@ -385,7 +385,7 @@ gnome_app_reply_bar(GnomeApp * app, const gchar * question,
  * status bar.
  **/
 
-GtkWidget * 
+GtkWidget *
 gnome_app_question (GnomeApp * app, const gchar * question,
 		    GnomeReplyCallback callback, gpointer data)
 {
@@ -420,7 +420,7 @@ gnome_app_question (GnomeApp * app, const gchar * question,
  * status bar.
  **/
 
-GtkWidget * 
+GtkWidget *
 gnome_app_question_modal (GnomeApp * app, const gchar * question,
 			  GnomeReplyCallback callback, gpointer data)
 {
@@ -454,7 +454,7 @@ gnome_app_question_modal (GnomeApp * app, const gchar * question,
  * status bar.
  **/
 
-GtkWidget * 
+GtkWidget *
 gnome_app_ok_cancel (GnomeApp * app, const gchar * message,
 		     GnomeReplyCallback callback, gpointer data)
 {
@@ -488,7 +488,7 @@ gnome_app_ok_cancel (GnomeApp * app, const gchar * message,
  * status bar.
  **/
 
-GtkWidget * 
+GtkWidget *
 gnome_app_ok_cancel_modal (GnomeApp * app, const gchar * message,
 			   GnomeReplyCallback callback, gpointer data)
 {
@@ -513,7 +513,7 @@ typedef struct {
 } RequestInfo;
 
 
-static void 
+static void
 bar_request_cb(GnomeAppBar * ab, RequestInfo * ri)
 {
   gchar * response;
@@ -525,7 +525,7 @@ bar_request_cb(GnomeAppBar * ab, RequestInfo * ri)
   g_print("Got string: \"%s\"\n", response);
 #endif
 
-  /* response isn't freed because the callback expects an 
+  /* response isn't freed because the callback expects an
      allocated string. */
   (* (ri->callback)) (response, ri->data);
 
@@ -541,18 +541,14 @@ request_clear_prompt_cb(GnomeAppBar * ab, RequestInfo * ri)
 #endif
 
 
-  gtk_signal_disconnect_by_func(GTK_OBJECT(ab), 
-				GTK_SIGNAL_FUNC(bar_request_cb),
-				ri);
-  gtk_signal_disconnect_by_func(GTK_OBJECT(ab), 
-				GTK_SIGNAL_FUNC(request_clear_prompt_cb),
-				ri);
+  g_signal_handlers_disconnect_by_func (ab, bar_request_cb, ri);
+  g_signal_handlers_disconnect_by_func (ab, request_clear_prompt_cb, ri);
   g_free(ri);
 }
 
-static void 
+static void
 gnome_app_request_bar  (GnomeApp * app, const gchar * prompt,
-			GnomeStringCallback callback, 
+			GnomeStringCallback callback,
 			gpointer data, gboolean password)
 {
   if (password == TRUE) {
@@ -560,17 +556,17 @@ gnome_app_request_bar  (GnomeApp * app, const gchar * prompt,
   }
   else {
     RequestInfo * ri;
-    
+
     gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, FALSE);
-    
+
     ri = g_new(RequestInfo, 1);
     ri->callback = callback;
     ri->data     = data;
-    
-    gtk_signal_connect(GTK_OBJECT(app->statusbar), "user_response",
-		       GTK_SIGNAL_FUNC(bar_request_cb), ri);   
-    gtk_signal_connect(GTK_OBJECT(app->statusbar), "clear_prompt",
-		       GTK_SIGNAL_FUNC(request_clear_prompt_cb), ri);     
+
+    g_signal_connect(app->statusbar, "user_response",
+		     G_CALLBACK(bar_request_cb), ri);
+    g_signal_connect(app->statusbar, "clear_prompt",
+		     G_CALLBACK(request_clear_prompt_cb), ri);
   }
 }
 
@@ -589,10 +585,10 @@ gnome_app_request_bar  (GnomeApp * app, const gchar * prompt,
  * status bar.
  **/
 
-GtkWidget * 
+GtkWidget *
 gnome_app_request_string (GnomeApp * app, const gchar * prompt,
 			  GnomeStringCallback callback, gpointer data)
-{ 
+{
   g_return_val_if_fail(app != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_APP(app), NULL);
   g_return_val_if_fail(prompt != NULL, NULL);
@@ -604,7 +600,7 @@ gnome_app_request_string (GnomeApp * app, const gchar * prompt,
   }
   else {
     return gnome_request_dialog(FALSE, prompt, NULL, 0,
-				callback, data, GTK_WINDOW(app));   
+				callback, data, GTK_WINDOW(app));
   }
 }
 
@@ -624,7 +620,7 @@ gnome_app_request_string (GnomeApp * app, const gchar * prompt,
  * status bar.
  **/
 
-GtkWidget * 
+GtkWidget *
 gnome_app_request_password (GnomeApp * app, const gchar * prompt,
 			    GnomeStringCallback callback, gpointer data)
 {
@@ -636,7 +632,7 @@ gnome_app_request_password (GnomeApp * app, const gchar * prompt,
   /* FIXME implement for AppBar */
 
   return gnome_request_dialog(TRUE, prompt, NULL, 0,
-			      callback, data, GTK_WINDOW(app));   
+			      callback, data, GTK_WINDOW(app));
 }
 
 /* ================================================== */
@@ -660,12 +656,12 @@ static gint progress_timeout_cb (ProgressKeyReal * key)
   gdouble percent;
 
   GDK_THREADS_ENTER ();
-	
+
   percent = (* key->percentage_cb)(key->data);
   gnome_app_set_progress (key, percent);
 
   GDK_THREADS_LEAVE ();
-  
+
   return TRUE;
 }
 
@@ -681,25 +677,25 @@ static void progress_clicked_cb (GnomeDialog * d, gint button,
   gnome_app_progress_done(key);
 }
 
-static void 
+static void
 progress_dialog (const gchar * description, ProgressKeyReal * key)
 {
   GtkWidget * d, * pb, * label;
 
-  d = gnome_dialog_new ( _("Progress"), 
+  d = gnome_dialog_new ( _("Progress"),
 			 GNOME_STOCK_BUTTON_CANCEL,
 			 NULL );
   gnome_dialog_set_close (GNOME_DIALOG(d), TRUE);
   gnome_dialog_set_parent(GNOME_DIALOG(d), GTK_WINDOW(key->app));
-  gtk_signal_connect (GTK_OBJECT(d), "clicked", 
-		      GTK_SIGNAL_FUNC(progress_clicked_cb),
-		      key);
-			       
+  g_signal_connect (d, "clicked",
+		    G_CALLBACK(progress_clicked_cb),
+		    key);
+
   label = gtk_label_new (description);
 
   pb = gtk_progress_bar_new();
 
-  gtk_box_pack_start ( GTK_BOX(GNOME_DIALOG(d)->vbox), 
+  gtk_box_pack_start ( GTK_BOX(GNOME_DIALOG(d)->vbox),
 		       label, TRUE, TRUE, GNOME_PAD );
   gtk_box_pack_start ( GTK_BOX(GNOME_DIALOG(d)->vbox),
 		       pb, TRUE, TRUE, GNOME_PAD );
@@ -710,7 +706,7 @@ progress_dialog (const gchar * description, ProgressKeyReal * key)
   gtk_widget_show_all (d);
 }
 
-static void 
+static void
 progress_bar (const gchar * description, ProgressKeyReal * key)
 {
   key->bar = NULL;
@@ -740,10 +736,10 @@ stop_progress_cb(GnomeApp * app, GnomeAppProgressKey key)
  * Returns:
  **/
 
-GnomeAppProgressKey 
-gnome_app_progress_timeout (GnomeApp * app, 
+GnomeAppProgressKey
+gnome_app_progress_timeout (GnomeApp * app,
 			    const gchar * description,
-			    guint32 interval, 
+			    guint32 interval,
 			    GnomeAppProgressFunc percentage_cb,
 			    GnomeAppProgressCancelFunc cancel_cb,
 			    gpointer data)
@@ -771,14 +767,14 @@ gnome_app_progress_timeout (GnomeApp * app,
     progress_dialog (description, key);
   }
 
-  key->timeout_tag = gtk_timeout_add ( interval, 
+  key->timeout_tag = gtk_timeout_add ( interval,
 				       (GtkFunction) progress_timeout_cb,
 				       key );
 
   /* Make sure progress stops if the app is destroyed. */
-  key->handler_id = gtk_signal_connect(GTK_OBJECT(app), "destroy",
-				       GTK_SIGNAL_FUNC(stop_progress_cb),
-	 			       key);
+  key->handler_id = g_signal_connect(app, "destroy",
+				     G_CALLBACK(stop_progress_cb),
+				     key);
 
   return key;
 }
@@ -796,8 +792,8 @@ gnome_app_progress_timeout (GnomeApp * app,
  * Returns:
  **/
 
-GnomeAppProgressKey 
-gnome_app_progress_manual (GnomeApp * app, 
+GnomeAppProgressKey
+gnome_app_progress_manual (GnomeApp * app,
 			   const gchar * description,
 			   GnomeAppProgressCancelFunc cancel_cb,
 			   gpointer data)
@@ -813,7 +809,7 @@ gnome_app_progress_manual (GnomeApp * app,
   key->app = app;
   key->cancel_cb = cancel_cb;
   key->data = data;
-  key->timeout_tag = INVALID_TIMEOUT;  
+  key->timeout_tag = INVALID_TIMEOUT;
 
   if ( gnome_app_has_appbar_progress(app) &&
   /* FIXME !!! */
@@ -825,9 +821,9 @@ gnome_app_progress_manual (GnomeApp * app,
   }
 
   /* Make sure progress stops if the app is destroyed. */
-  key->handler_id = gtk_signal_connect(GTK_OBJECT(app), "destroy",
-				       GTK_SIGNAL_FUNC(stop_progress_cb),
-				       key);
+  key->handler_id = g_signal_connect(app, "destroy",
+				     G_CALLBACK(stop_progress_cb),
+				     key);
 
   return key;
 }
@@ -844,7 +840,7 @@ void gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent)
 {
   ProgressKeyReal * real_key = (GnomeAppProgressKey) key;
 
-  g_return_if_fail ( key != NULL );  
+  g_return_if_fail ( key != NULL );
 
   if (real_key->bar) {
     gtk_progress_bar_set_fraction ( GTK_PROGRESS_BAR(real_key->bar), percent );

@@ -81,24 +81,25 @@ static void gnome_file_entry_drag_data_received (GtkWidget        *widget,
 						 guint             info,
 						 guint32           time);
 static void browse_clicked(GnomeFileEntry *fentry);
-static void fentry_set_arg                (GtkObject *object,
-					   GtkArg *arg,
-					   guint arg_id);
-static void fentry_get_arg                (GtkObject *object,
-					   GtkArg *arg,
-					   guint arg_id);
+
+static void fentry_set_property (GObject *object, guint param_id,
+				 const GValue *value, GParamSpec *pspec);
+static void fentry_get_property (GObject *object, guint param_id,
+				 GValue *value, GParamSpec *pspec);
+
 static void gnome_file_entry_editable_init (GtkEditableClass *iface);
 
+/* Property IDs */
 enum {
-	ARG_0,
-	ARG_HISTORY_ID,
-	ARG_BROWSE_DIALOG_TITLE,
-	ARG_DIRECTORY_ENTRY,
-	ARG_MODAL,
-	ARG_FILENAME,
-	ARG_DEFAULT_PATH,
-	ARG_GNOME_ENTRY,
-	ARG_GTK_ENTRY
+	PROP_0,
+	PROP_HISTORY_ID,
+	PROP_BROWSE_DIALOG_TITLE,
+	PROP_DIRECTORY_ENTRY,
+	PROP_MODAL,
+	PROP_FILENAME,
+	PROP_DEFAULT_PATH,
+	PROP_GNOME_ENTRY,
+	PROP_GTK_ENTRY
 };
 
 /* Note, can't use boilerplate with interfaces yet,
@@ -110,26 +111,28 @@ gnome_file_entry_get_type (void)
 	static GType object_type = 0;
 
 	if (object_type == 0) {
-		GType type_of_parent;
-		static const GtkTypeInfo object_info = {
-			"GnomeFileEntry",
-			sizeof (GnomeFileEntry),
+		static const GTypeInfo object_info = {
 			sizeof (GnomeFileEntryClass),
-			(GtkClassInitFunc) gnome_file_entry_class_init,
-			(GtkObjectInitFunc) gnome_file_entry_init,
-			/* reserved_1 */ NULL,
-			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) gnome_file_entry_class_init,
+			(GClassFinalizeFunc) NULL,
+			NULL,			/* class_data */
+			sizeof (GnomeFileEntry),
+			0,			/* n_preallocs */
+			(GInstanceInitFunc) gnome_file_entry_init,
+			NULL			/* value_table */
 		};
-		static const GInterfaceInfo editable_info =
-		{
+
+		static const GInterfaceInfo editable_info = {
 			(GInterfaceInitFunc) gnome_file_entry_editable_init,	 /* interface_init */
 			NULL,			                         	 /* interface_finalize */
 			NULL			                         	 /* interface_data */
 		};
-		type_of_parent = GTK_TYPE_VBOX;
-		object_type = gtk_type_unique (type_of_parent, &object_info);
-		parent_class = gtk_type_class (type_of_parent);
+
+		object_type = g_type_register_static (GTK_TYPE_VBOX,
+						      "GnomeFileEntry",
+						      &object_info, 0);
 
 		g_type_add_interface_static (object_type,
 					     GTK_TYPE_EDITABLE,
@@ -152,137 +155,205 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
 
+	parent_class = g_type_class_peek_parent (class);
+
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 
 	gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL] =
-		gtk_signal_new("browse_clicked",
-			       GTK_RUN_LAST,
-			       GTK_CLASS_TYPE (object_class),
-			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
-			       			 browse_clicked),
-			       gtk_signal_default_marshaller,
-			       GTK_TYPE_NONE,
-			       0);
+		g_signal_new("browse_clicked",
+			     G_TYPE_FROM_CLASS (gobject_class),
+			     G_SIGNAL_RUN_LAST,
+			     G_STRUCT_OFFSET(GnomeFileEntryClass, browse_clicked),
+			     NULL, NULL,
+			     g_cclosure_marshal_VOID__VOID,
+			     G_TYPE_NONE, 0);
 	gnome_file_entry_signals[ACTIVATE_SIGNAL] =
-		gtk_signal_new("activate",
-			       GTK_RUN_LAST,
-			       GTK_CLASS_TYPE (object_class),
-			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
-			       			 activate),
-			       gtk_signal_default_marshaller,
-			       GTK_TYPE_NONE,
-			       0);
+		g_signal_new("activate",
+			     G_TYPE_FROM_CLASS (gobject_class),
+			     G_SIGNAL_RUN_LAST,
+			     G_STRUCT_OFFSET(GnomeFileEntryClass, activate),
+			     NULL, NULL,
+			     g_cclosure_marshal_VOID__VOID,
+			     G_TYPE_NONE, 0);
 
-	gtk_object_add_arg_type("GnomeFileEntry::history_id",
-				GTK_TYPE_STRING,
-				GTK_ARG_WRITABLE,
-				ARG_HISTORY_ID);
-	gtk_object_add_arg_type("GnomeFileEntry::browse_dialog_title",
-				GTK_TYPE_STRING,
-				GTK_ARG_WRITABLE,
-				ARG_BROWSE_DIALOG_TITLE);
-	gtk_object_add_arg_type("GnomeFileEntry::directory_entry",
-				GTK_TYPE_BOOL,
-				GTK_ARG_READWRITE,
-				ARG_DIRECTORY_ENTRY);
-	gtk_object_add_arg_type("GnomeFileEntry::modal",
-				GTK_TYPE_BOOL,
-				GTK_ARG_READWRITE,
-				ARG_MODAL);
-	gtk_object_add_arg_type("GnomeFileEntry::filename",
-				GTK_TYPE_STRING,
-				GTK_ARG_READWRITE,
-				ARG_FILENAME);
-	gtk_object_add_arg_type("GnomeFileEntry::default_path",
-				GTK_TYPE_STRING,
-				GTK_ARG_WRITABLE,
-				ARG_FILENAME);
-	gtk_object_add_arg_type("GnomeFileEntry::gnome_entry",
-				GNOME_TYPE_ENTRY,
-				GTK_ARG_READABLE,
-				ARG_GNOME_ENTRY);
-	gtk_object_add_arg_type("GnomeFileEntry::gtk_entry",
-				GTK_TYPE_ENTRY,
-				GTK_ARG_READABLE,
-				ARG_GTK_ENTRY);
+	g_object_class_install_property (gobject_class,
+					 PROP_HISTORY_ID,
+					 g_param_spec_string (
+						 "history_id",
+						 _("History ID"),
+						 _("Unique identifier for the file entry.  "
+						   "This will be used to save the history list."),
+						 NULL,
+						 G_PARAM_READWRITE));
+	g_object_class_install_property (gobject_class,
+					 PROP_BROWSE_DIALOG_TITLE,
+					 g_param_spec_string (
+						 "browse_dialog_title",
+						 _("Browse Dialog Title"),
+						 _("Title for the Browse file dialog."),
+						 NULL,
+						 G_PARAM_READWRITE));
+	g_object_class_install_property (gobject_class,
+					 PROP_DIRECTORY_ENTRY,
+					 g_param_spec_boolean (
+						 "directory_entry",
+						 _("Directory Entry"),
+						 _("Whether the file entry is being used to "
+						   "enter directory names or complete filenames."),
+						 FALSE,
+						 G_PARAM_READWRITE));
+	g_object_class_install_property (gobject_class,
+					 PROP_MODAL,
+					 g_param_spec_boolean (
+						 "modal",
+						 _("Modal"),
+						 _("Whether the Browse file window should be modal."),
+						 FALSE,
+						 G_PARAM_READWRITE));
+	g_object_class_install_property (gobject_class,
+					 PROP_FILENAME,
+					 g_param_spec_string (
+						 "filename",
+						 _("Filename"),
+						 _("Filename that should be displayed in the "
+						   "file entry."),
+						 NULL,
+						 G_PARAM_READWRITE));
+	g_object_class_install_property (gobject_class,
+					 PROP_DEFAULT_PATH,
+					 g_param_spec_string (
+						 "default_path",
+						 _("Default Path"),
+						 _("Default path for the Browse file window."),
+						 NULL,
+						 G_PARAM_READWRITE));
+	g_object_class_install_property (gobject_class,
+					 PROP_GNOME_ENTRY,
+					 g_param_spec_object (
+						 "gnome_entry",
+						 _("GnomeEntry"),
+						 _("GnomeEntry that the file entry uses for "
+						   "entering filenames.  You can use this property "
+						   "to get the GnomeEntry if you need to modify "
+						   "or query any of its parameters."),
+						 GNOME_TYPE_ENTRY,
+						 G_PARAM_READABLE));
+	g_object_class_install_property (gobject_class,
+					 PROP_GTK_ENTRY,
+					 g_param_spec_object (
+						 "gtk_entry",
+						 _("GtkEntry"),
+						 _("GtkEntry that the file entry uses for "
+						   "entering filenames.  You can use this property "
+						   "to get the GtkEntry if you need to modify "
+						   "or query any of its parameters."),
+						 GTK_TYPE_ENTRY,
+						 G_PARAM_READABLE));
 
 	object_class->destroy = gnome_file_entry_destroy;
+
 	gobject_class->finalize = gnome_file_entry_finalize;
-	object_class->get_arg = fentry_get_arg;
-	object_class->set_arg = fentry_set_arg;
+	gobject_class->set_property = fentry_set_property;
+	gobject_class->get_property = fentry_get_property;
 
 	class->browse_clicked = browse_clicked;
 	class->activate = NULL;
 }
 
+/* set_property handler for the file entry */
 static void
-fentry_set_arg (GtkObject *object,
-		GtkArg *arg,
-		guint arg_id)
+fentry_set_property (GObject *object, guint param_id,
+		     const GValue *value, GParamSpec *pspec)
 {
-	GnomeFileEntry *self;
+	GnomeFileEntry *fentry;
+	GnomeFileEntryPrivate *priv;
 
-	self = GNOME_FILE_ENTRY (object);
+	fentry = GNOME_FILE_ENTRY (object);
+	priv = fentry->_priv;
 
-	switch (arg_id) {
-	case ARG_HISTORY_ID: {
-		GtkWidget *gentry;
-		gentry = gnome_file_entry_gnome_entry(self);
-		g_object_set (G_OBJECT (gentry),
-			      "history_id", GTK_VALUE_STRING (*arg),
+	switch (param_id) {
+	case PROP_HISTORY_ID:
+		g_object_set (priv->gentry, "history_id", g_value_get_string (value),
 			      NULL);
 		break;
-	}
-	case ARG_DIRECTORY_ENTRY:
-		gnome_file_entry_set_directory_entry (self, GTK_VALUE_BOOL(*arg));
+
+	case PROP_BROWSE_DIALOG_TITLE:
+		gnome_file_entry_set_title (fentry, g_value_get_string (value));
 		break;
-	case ARG_MODAL:
-		gnome_file_entry_set_modal (self, GTK_VALUE_BOOL(*arg));
+
+	case PROP_DIRECTORY_ENTRY:
+		gnome_file_entry_set_directory_entry (fentry, g_value_get_boolean (value));
 		break;
-	case ARG_FILENAME:
-		gnome_file_entry_set_filename (self, GTK_VALUE_STRING(*arg));
+
+	case PROP_MODAL:
+		gnome_file_entry_set_modal (fentry, g_value_get_boolean (value));
 		break;
-	case ARG_DEFAULT_PATH:
-		gnome_file_entry_set_default_path (self, GTK_VALUE_STRING(*arg));
+
+	case PROP_FILENAME:
+		gnome_file_entry_set_filename (fentry, g_value_get_string (value));
 		break;
-	case ARG_BROWSE_DIALOG_TITLE:
-		gnome_file_entry_set_title (self, GTK_VALUE_STRING(*arg));
+
+	case PROP_DEFAULT_PATH:
+		gnome_file_entry_set_default_path (fentry, g_value_get_string (value));
 		break;
+
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }
 
+/* get_property handler for the file entry */
 static void
-fentry_get_arg (GtkObject *object,
-		GtkArg *arg,
-		guint arg_id)
+fentry_get_property (GObject *object, guint param_id,
+		     GValue *value, GParamSpec *pspec)
 {
-	GnomeFileEntry *self;
+	GnomeFileEntry *fentry;
+	GnomeFileEntryPrivate *priv;
 
-	self = GNOME_FILE_ENTRY (object);
+	fentry = GNOME_FILE_ENTRY (object);
+	priv = fentry->_priv;
 
-	switch (arg_id) {
-	case ARG_GNOME_ENTRY:
-		GTK_VALUE_POINTER(*arg) =
-			gnome_file_entry_gnome_entry(self);
+	switch (param_id) {
+	case PROP_HISTORY_ID:
+		g_value_set_string (value, gnome_entry_get_history_id (GNOME_ENTRY (priv->gentry)));
 		break;
-	case ARG_DIRECTORY_ENTRY:
-		GTK_VALUE_BOOL(*arg) = self->_priv->directory_entry;
+
+	case PROP_BROWSE_DIALOG_TITLE:
+		g_value_set_string (value, priv->browse_dialog_title);
 		break;
-	case ARG_MODAL:
-		GTK_VALUE_BOOL(*arg) = self->_priv->is_modal;
+
+	case PROP_DIRECTORY_ENTRY:
+		g_value_set_boolean (value, priv->directory_entry);
 		break;
-	case ARG_FILENAME:
-		GTK_VALUE_STRING(*arg) =
-			gnome_file_entry_get_full_path (self, FALSE);
+
+	case PROP_MODAL:
+		g_value_set_boolean (value, priv->is_modal);
 		break;
-	case ARG_GTK_ENTRY:
-		GTK_VALUE_POINTER(*arg) =
-			gnome_file_entry_gtk_entry(self);
+
+	case PROP_FILENAME: {
+		char *filename;
+
+		filename = gnome_file_entry_get_full_path (fentry, FALSE);
+		g_value_set_string (value, filename);
+		g_free (filename);
+		break; }
+
+	case PROP_DEFAULT_PATH:
+		g_value_set_string (value, fentry->default_path);
 		break;
+
+	case PROP_GNOME_ENTRY:
+		g_value_set_object (value, gnome_file_entry_gnome_entry (fentry));
+		break;
+
+	case PROP_GTK_ENTRY:
+		g_value_set_object (value, gnome_file_entry_gtk_entry (fentry));
+		break;
+
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }
@@ -295,13 +366,13 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	GtkWidget *entry;
 
 	fs = GTK_FILE_SELECTION (data);
-	fentry = GNOME_FILE_ENTRY (gtk_object_get_user_data (GTK_OBJECT (fs)));
+	fentry = GNOME_FILE_ENTRY (g_object_get_data (G_OBJECT (fs), "gnome_file_entry"));
 	entry = gnome_file_entry_gtk_entry (fentry);
 
 	gtk_entry_set_text (GTK_ENTRY (entry),
 			    gtk_file_selection_get_filename (fs));
 	/* Is this evil? */
-	gtk_signal_emit_by_name (GTK_OBJECT (entry), "activate");
+	g_signal_emit_by_name (entry, "activate");
 	gtk_widget_destroy (GTK_WIDGET (fs));
 }
 
@@ -374,10 +445,10 @@ browse_clicked(GnomeFileEntry *fentry)
 		dialog_x = x + w/4;
 		dialog_y = y + h/4;
 
-		gtk_widget_set_uposition(GTK_WIDGET(fsw), dialog_x, dialog_y);
+		gtk_window_move (GTK_WINDOW (fsw), dialog_x, dialog_y);
 	}
 
-	gtk_object_set_user_data (GTK_OBJECT (fsw), fentry);
+	g_object_set_data (G_OBJECT (fsw), "gnome_file_entry", fentry);
 
 	fs = GTK_FILE_SELECTION (fsw);
 	gtk_widget_set_sensitive(fs->file_list,
@@ -392,15 +463,15 @@ browse_clicked(GnomeFileEntry *fentry)
 		gtk_file_selection_set_filename (fs, p);
 	}
 
-	gtk_signal_connect (GTK_OBJECT (fs->ok_button), "clicked",
-			    (GtkSignalFunc) browse_dialog_ok,
-			    fs);
-	gtk_signal_connect_object (GTK_OBJECT (fs->cancel_button), "clicked",
-				   GTK_SIGNAL_FUNC(gtk_widget_destroy),
-				   GTK_OBJECT(fsw));
-	gtk_signal_connect (GTK_OBJECT (fsw), "destroy",
-			    GTK_SIGNAL_FUNC(browse_dialog_kill),
-			    fentry);
+	g_signal_connect (fs->ok_button, "clicked",
+			  G_CALLBACK (browse_dialog_ok),
+			  fs);
+	g_signal_connect_swapped (fs->cancel_button, "clicked",
+				  G_CALLBACK (gtk_widget_destroy),
+				  fsw);
+	g_signal_connect (fsw, "destroy",
+			  G_CALLBACK (browse_dialog_kill),
+			  fentry);
 
 	if (gtk_grab_get_current ())
 		gtk_grab_add (fsw);
@@ -415,21 +486,19 @@ browse_clicked(GnomeFileEntry *fentry)
 static void
 browse_clicked_signal (GtkWidget *widget, gpointer data)
 {
-	gtk_signal_emit (GTK_OBJECT (data),
-			 gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL]);
+	g_signal_emit (data, gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL], 0);
 }
 
 static void
 entry_changed_signal (GtkWidget *widget, gpointer data)
 {
-	gtk_signal_emit_by_name (GTK_OBJECT (data), "changed");
+	g_signal_emit_by_name (data, "changed");
 }
 
 static void
 entry_activate_signal (GtkWidget *widget, gpointer data)
 {
-	gtk_signal_emit (GTK_OBJECT (data),
-			 gnome_file_entry_signals[ACTIVATE_SIGNAL]);
+	g_signal_emit (data, gnome_file_entry_signals[ACTIVATE_SIGNAL], 0);
 }
 
 static void
@@ -500,12 +569,12 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 	fentry->_priv->gentry = gnome_entry_new (NULL);
 	the_gtk_entry = gnome_file_entry_gtk_entry (fentry);
 
-	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "changed",
-			    (GtkSignalFunc) entry_changed_signal,
-			    fentry);
-	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "activate",
-			    (GtkSignalFunc) entry_activate_signal,
-			    fentry);
+	g_signal_connect (the_gtk_entry, "changed",
+			  G_CALLBACK (entry_changed_signal),
+			  fentry);
+	g_signal_connect (the_gtk_entry, "activate",
+			  G_CALLBACK (entry_activate_signal),
+			  fentry);
 
 	gtk_drag_dest_set (GTK_WIDGET (the_gtk_entry),
 			   GTK_DEST_DEFAULT_MOTION |
@@ -513,17 +582,17 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, ELEMENTS(drop_types), GDK_ACTION_COPY);
 
-	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "drag_data_received",
-			    GTK_SIGNAL_FUNC (gnome_file_entry_drag_data_received),
-			    NULL);
+	g_signal_connect (the_gtk_entry, "drag_data_received",
+			  G_CALLBACK (gnome_file_entry_drag_data_received),
+			  NULL);
 
 	gtk_box_pack_start (GTK_BOX (hbox), fentry->_priv->gentry, TRUE, TRUE, 0);
 	gtk_widget_show (fentry->_priv->gentry);
 
 	button = gtk_button_new_with_label (_("Browse..."));
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    (GtkSignalFunc) browse_clicked_signal,
-			    fentry);
+	g_signal_connect (button, "clicked",
+			  G_CALLBACK (browse_clicked_signal),
+			  fentry);
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_widget_show (button);
 }
@@ -604,7 +673,7 @@ gnome_file_entry_new (const char *history_id, const char *browse_dialog_title)
 {
 	GnomeFileEntry *fentry;
 
-	fentry = gtk_type_new (GNOME_TYPE_FILE_ENTRY);
+	fentry = g_object_new (GNOME_TYPE_FILE_ENTRY, NULL);
 
 	gnome_file_entry_construct (fentry, history_id, browse_dialog_title);
 	return GTK_WIDGET (fentry);

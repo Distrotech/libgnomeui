@@ -60,7 +60,7 @@
 struct _GnomePixmapEntryPrivate {
 	GtkWidget *preview;
 	GtkWidget *preview_sw;
-	
+
 	gchar *last_preview;
 
 	guint32 do_preview : 1; /*put a preview frame with the pixmap next to
@@ -84,18 +84,18 @@ static void drag_data_received		  (GtkWidget        *widget,
 					   GnomePixmapEntry *pentry);
 static void pentry_destroy		  (GtkObject *object);
 static void pentry_finalize		  (GObject *object);
-static void pentry_set_arg                (GtkObject *object,
-					   GtkArg *arg,
-					   guint arg_id);
-static void pentry_get_arg                (GtkObject *object,
-					   GtkArg *arg,
-					   guint arg_id);
+
+static void pentry_set_property (GObject *object, guint param_id,
+				 const GValue *value, GParamSpec *pspec);
+static void pentry_get_property (GObject *object, guint param_id,
+				 GValue *value, GParamSpec *pspec);
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
+/* Property IDs */
 enum {
-	ARG_0,
-	ARG_DO_PREVIEW
+	PROP_0,
+	PROP_DO_PREVIEW
 };
 
 GNOME_CLASS_BOILERPLATE (GnomePixmapEntry, gnome_pixmap_entry,
@@ -107,51 +107,59 @@ gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
 	GObjectClass *gobject_class = G_OBJECT_CLASS(class);
 
-	gtk_object_add_arg_type("GnomePixmapEntry::do_preview",
-				GTK_TYPE_BOOL,
-				GTK_ARG_READWRITE,
-				ARG_DO_PREVIEW);
+	g_object_class_install_property (gobject_class,
+					 PROP_DO_PREVIEW,
+					 g_param_spec_boolean (
+						 "do_preview",
+						 _("Do Preview"),
+						 _("Whether the pixmap entry should have a preview."),
+						 FALSE,
+						 G_PARAM_READWRITE));
 
 	object_class->destroy = pentry_destroy;
 	gobject_class->finalize = pentry_finalize;
-	object_class->get_arg = pentry_get_arg;
-	object_class->set_arg = pentry_set_arg;
-
+	gobject_class->set_property = pentry_set_property;
+	gobject_class->get_property = pentry_get_property;
 }
 
+/* set_property handler for the pixmap entry */
 static void
-pentry_set_arg (GtkObject *object,
-		GtkArg *arg,
-		guint arg_id)
+pentry_set_property (GObject *object, guint param_id,
+		     const GValue *value, GParamSpec *pspec)
 {
-	GnomePixmapEntry *self;
+	GnomePixmapEntry *pentry;
 
-	self = GNOME_PIXMAP_ENTRY (object);
+	pentry = GNOME_PIXMAP_ENTRY (object);
 
-	switch (arg_id) {
-	case ARG_DO_PREVIEW:
-		gnome_pixmap_entry_set_preview(self, GTK_VALUE_BOOL(*arg));
+	switch (param_id) {
+	case PROP_DO_PREVIEW:
+		gnome_pixmap_entry_set_preview(pentry, g_value_get_boolean (value));
 		break;
 
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }
 
+/* get_property handler for the pixmap entry */
 static void
-pentry_get_arg (GtkObject *object,
-		GtkArg *arg,
-		guint arg_id)
+pentry_get_property (GObject *object, guint param_id,
+		     GValue *value, GParamSpec *pspec)
 {
-	GnomePixmapEntry *self;
+	GnomePixmapEntry *pentry;
+	GnomePixmapEntryPrivate *priv;
 
-	self = GNOME_PIXMAP_ENTRY (object);
+	pentry = GNOME_PIXMAP_ENTRY (object);
+	priv = pentry->_priv;
 
-	switch (arg_id) {
-	case ARG_DO_PREVIEW:
-		GTK_VALUE_BOOL(*arg) = self->_priv->do_preview;
+	switch (param_id) {
+	case PROP_DO_PREVIEW:
+		g_value_set_boolean (value, priv->do_preview);
 		break;
+
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }
@@ -167,7 +175,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 
 	if( ! pentry->_priv->preview)
 		return;
-	
+
 	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry), FALSE);
 
 	if(pentry->_priv->last_preview && t
@@ -354,7 +362,7 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 {
 	GtkWidget *w;
 	GtkWidget *hbox;
-	
+
 	GtkFileSelection *fs;
 
 	g_return_if_fail (fentry != NULL);
@@ -391,8 +399,8 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 	g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (fs->file_list))), "changed",
 			  G_CALLBACK (setup_preview), fs->file_list);
 	g_object_set_data (G_OBJECT (fs->selection_entry), "frame", w);
-	g_signal_connect (G_OBJECT (fs->selection_entry), "changed",
-			  GTK_SIGNAL_FUNC (setup_preview), fs->selection_entry);
+	g_signal_connect (fs->selection_entry, "changed",
+			  G_CALLBACK (setup_preview), fs->selection_entry);
 }
 
 static void
@@ -408,7 +416,7 @@ drag_data_received (GtkWidget        *widget,
 	GList *uris, *li;
 	GnomeVFSURI *uri = NULL;
 	GtkWidget *entry;
-	
+
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 
@@ -520,9 +528,9 @@ gnome_pixmap_entry_instance_init (GnomePixmapEntry *pentry)
 	pentry->_priv->preview = NULL;
 	pentry->_priv->preview_sw = NULL;
 
-	gtk_signal_connect_after(GTK_OBJECT(pentry),"browse_clicked",
-				 GTK_SIGNAL_FUNC(browse_clicked),
-				 pentry);
+	g_signal_connect_after (pentry, "browse_clicked",
+				G_CALLBACK (browse_clicked),
+				pentry);
 
 	p = gnome_program_locate_file (NULL /* program */,
 				       GNOME_FILE_DOMAIN_PIXMAP,
@@ -584,7 +592,7 @@ gnome_pixmap_entry_new (const gchar *history_id, const gchar *browse_dialog_titl
 {
 	GnomePixmapEntry *pentry;
 
-	pentry = gtk_type_new (GNOME_TYPE_PIXMAP_ENTRY);
+	pentry = g_object_new (GNOME_TYPE_PIXMAP_ENTRY, NULL);
 
 	gnome_pixmap_entry_construct (pentry, history_id, browse_dialog_title, do_preview);
 	return GTK_WIDGET (pentry);
@@ -724,7 +732,7 @@ gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
  * the entry.  If the preview is on, we also load the files and check
  * for them being real images.  If it is off, we don't check files
  * to be real image files.
- * 
+ *
  * Returns:
  **/
 void
@@ -811,7 +819,7 @@ ensure_update (GnomePixmapEntry *pentry)
  * successfully loaded if preview is disabled.  If the preview is
  * disabled, the file is only checked if it exists or not.
  *
- * Returns: Newly allocated string containing path, or %NULL on error. 
+ * Returns: Newly allocated string containing path, or %NULL on error.
  **/
 char *
 gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)

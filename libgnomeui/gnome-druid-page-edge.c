@@ -327,7 +327,7 @@ gnome_druid_page_edge_new (GnomeEdgePosition position)
 	g_return_val_if_fail (position >= GNOME_EDGE_START &&
 			      position < GNOME_EDGE_LAST, NULL);
 
-	retval = gtk_type_new (GNOME_TYPE_DRUID_PAGE_EDGE);
+	retval = g_object_new (GNOME_TYPE_DRUID_PAGE_EDGE, NULL);
 
 	gnome_druid_page_edge_construct (retval,
 					 position,
@@ -359,7 +359,7 @@ gnome_druid_page_edge_new_aa (GnomeEdgePosition position)
 	g_return_val_if_fail (position >= GNOME_EDGE_START &&
 			      position < GNOME_EDGE_LAST, NULL);
 
-	retval = gtk_type_new (GNOME_TYPE_DRUID_PAGE_EDGE);
+	retval = g_object_new (GNOME_TYPE_DRUID_PAGE_EDGE, NULL);
 
 	gnome_druid_page_edge_construct (retval,
 					 position,
@@ -404,7 +404,7 @@ gnome_druid_page_edge_new_with_vals (GnomeEdgePosition position,
 	g_return_val_if_fail (position >= GNOME_EDGE_START &&
 			      position < GNOME_EDGE_LAST, NULL);
 
-	retval = gtk_type_new (GNOME_TYPE_DRUID_PAGE_EDGE);
+	retval = g_object_new (GNOME_TYPE_DRUID_PAGE_EDGE, NULL);
 
 	gnome_druid_page_edge_construct (retval,
 					 position,

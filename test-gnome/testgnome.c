@@ -121,8 +121,8 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 	app = g_new0 (TestGnomeApp, 1);
 	app->app = bonobo_window_new (appname, title);
 	if (!normal) {
-		gtk_signal_connect(GTK_OBJECT(app->app), "delete_event",
-				   GTK_SIGNAL_FUNC(quit_test), app);
+		g_signal_connect(app->app, "delete_event",
+				 G_CALLBACK(quit_test), app);
 	};
 	app->ui_container = bonobo_ui_engine_get_ui_container (
 		bonobo_window_get_ui_engine (BONOBO_WINDOW (app->app)));
@@ -284,17 +284,17 @@ create_ditem_edit (void)
 	g_print("Dialog (main): %p\n", GNOME_DITEM_EDIT(dee)->icon_dialog);
 #endif
 
-	gtk_signal_connect(GTK_OBJECT(dee), "changed",
-			   GTK_SIGNAL_FUNC(ditem_changed_callback),
-			   NULL);
+	g_signal_connect(dee, "changed",
+			 G_CALLBACK(ditem_changed_callback),
+			 NULL);
 
-	gtk_signal_connect(GTK_OBJECT(dee), "icon_changed",
-			   GTK_SIGNAL_FUNC(ditem_icon_changed_callback),
-			   NULL);
+	g_signal_connect(dee, "icon_changed",
+			 G_CALLBACK(ditem_icon_changed_callback),
+			 NULL);
 
-	gtk_signal_connect(GTK_OBJECT(dee), "name_changed",
-			   GTK_SIGNAL_FUNC(ditem_name_changed_callback),
-			   NULL);
+	g_signal_connect(dee, "name_changed",
+			 G_CALLBACK(ditem_name_changed_callback),
+			 NULL);
 
 #ifdef GNOME_ENABLE_DEBUG
 	g_print("Dialog (main 2): %p\n", GNOME_DITEM_EDIT(dee)->icon_dialog);
@@ -324,7 +324,7 @@ typedef struct druid_data
 static gboolean
 simple_druid_next_callback (GnomeDruidPage *page, GnomeDruid *druid, GnomeDruidPage *next)
 {
-	gtk_object_set_data (GTK_OBJECT (next), "back", page);
+	g_object_set_data (G_OBJECT (next), "back", page);
 	gnome_druid_set_page (druid,
 	                      next);
 	return TRUE;
@@ -334,11 +334,11 @@ static gboolean
 complex_druid_next_callback (GnomeDruidPage *page, GnomeDruid *druid, druid_data *data)
 {
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (data->radio_button))) {
-		gtk_object_set_data (GTK_OBJECT (data->target_a), "back", page);
+		g_object_set_data (G_OBJECT (data->target_a), "back", page);
 		gnome_druid_set_page (druid,
 				      GNOME_DRUID_PAGE (data->target_a));
 	} else {
-		gtk_object_set_data (GTK_OBJECT (data->target_b), "back", page);
+		g_object_set_data (G_OBJECT (data->target_b), "back", page);
 		gnome_druid_set_page (druid,
 				      GNOME_DRUID_PAGE (data->target_b));
 	}
@@ -349,9 +349,9 @@ static gboolean
 druid_back_callback (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	GtkWidget *back_page = NULL;
-	back_page = gtk_object_get_data (GTK_OBJECT (page), "back");
+	back_page = g_object_get_data (G_OBJECT (page), "back");
 	if (back_page) {
-		gtk_object_set_data (GTK_OBJECT (page), "back", NULL);
+		g_object_set_data (G_OBJECT (page), "back", NULL);
 		gnome_druid_set_page (druid,
 				      GNOME_DRUID_PAGE (back_page));
 		return TRUE;
@@ -436,8 +436,12 @@ create_druid(void)
 	data->radio_button = check_a;
 	data->target_a = page_b;
 	data->target_b = page_c;
-	gtk_signal_connect (GTK_OBJECT (page_a), "next", (GtkSignalFunc) complex_druid_next_callback, (gpointer) data);
-	gtk_signal_connect (GTK_OBJECT (page_a), "back", (GtkSignalFunc) druid_back_callback, (gpointer) NULL);
+	g_signal_connect (page_a, "next",
+			  G_CALLBACK (complex_druid_next_callback),
+			  data);
+	g_signal_connect (page_a, "back",
+			  G_CALLBACK (druid_back_callback),
+			  NULL);
 
 	/* page_b */
 	data = g_new (druid_data, 1);
@@ -453,46 +457,70 @@ create_druid(void)
 	data->radio_button = check_a;
 	data->target_a = page_d;
 	data->target_b = page_e;
-	gtk_signal_connect (GTK_OBJECT (page_b), "next", (GtkSignalFunc) complex_druid_next_callback, (gpointer) data);
-	gtk_signal_connect (GTK_OBJECT (page_b), "back", (GtkSignalFunc) druid_back_callback, (gpointer) NULL);
+	g_signal_connect (page_b, "next",
+			  G_CALLBACK (complex_druid_next_callback),
+			  data);
+	g_signal_connect (page_b, "back",
+			  G_CALLBACK (druid_back_callback),
+			  NULL);
 
 	/* page_c */
 	gtk_box_pack_start (GTK_BOX (GNOME_DRUID_PAGE_STANDARD (page_c)->vbox),
 			    gtk_label_new ("This page will take you to page G\nYou don't have any say in the matter. (-:"),
 			    FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (page_c), "next", (GtkSignalFunc) simple_druid_next_callback, (gpointer) page_g);
-	gtk_signal_connect (GTK_OBJECT (page_c), "back", (GtkSignalFunc) druid_back_callback, (gpointer) NULL);
+	g_signal_connect (page_c, "next",
+			  G_CALLBACK (simple_druid_next_callback),
+			  page_g);
+	g_signal_connect (page_c, "back",
+			  G_CALLBACK (druid_back_callback),
+			  NULL);
 
 	/* page_d */
 	gtk_box_pack_start (GTK_BOX (GNOME_DRUID_PAGE_STANDARD (page_d)->vbox),
 			    gtk_label_new ("This page will take you to page F"),
 			    FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (page_d), "next", (GtkSignalFunc) simple_druid_next_callback, (gpointer) page_f);
-	gtk_signal_connect (GTK_OBJECT (page_d), "back", (GtkSignalFunc) druid_back_callback, (gpointer) NULL);
+	g_signal_connect (page_d, "next",
+			  G_CALLBACK (simple_druid_next_callback),
+			  page_f);
+	g_signal_connect (page_d, "back",
+			  G_CALLBACK (druid_back_callback),
+			  NULL);
 
 	/* page_e */
 	gtk_box_pack_start (GTK_BOX (GNOME_DRUID_PAGE_STANDARD (page_e)->vbox),
 			    gtk_label_new ("This page will take you to page G\n\nShe sells sea shells by the sea shore."),
 			    FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (page_e), "next", (GtkSignalFunc) simple_druid_next_callback, (gpointer) page_g);
-	gtk_signal_connect (GTK_OBJECT (page_e), "back", (GtkSignalFunc) druid_back_callback, (gpointer) NULL);
+	g_signal_connect (page_e, "next",
+			  G_CALLBACK (simple_druid_next_callback),
+			  page_g);
+	g_signal_connect (page_e, "back",
+			  G_CALLBACK (druid_back_callback),
+			  NULL);
 
 	/* page_f */
 	gtk_box_pack_start (GTK_BOX (GNOME_DRUID_PAGE_STANDARD (page_f)->vbox),
 			    gtk_label_new ("This is a second to last page.\nIt isn't as nice as page G.\n\nClick Next to go to the last page\n"),
 			    FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (page_f), "next", (GtkSignalFunc) simple_druid_next_callback, (gpointer) page_finish);
-	gtk_signal_connect (GTK_OBJECT (page_f), "back", (GtkSignalFunc) druid_back_callback, (gpointer) NULL);
+	g_signal_connect (page_f, "next",
+			  G_CALLBACK (simple_druid_next_callback),
+			  page_finish);
+	g_signal_connect (page_f, "back",
+			  G_CALLBACK (druid_back_callback),
+			  NULL);
 
 	/* page_g */
 	gtk_box_pack_start (GTK_BOX (GNOME_DRUID_PAGE_STANDARD (page_g)->vbox),
 			    gtk_label_new ("This is page G!!!!\n\nyay!!!!!!!"),
 			    FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (page_g), "back", (GtkSignalFunc) druid_back_callback, (gpointer) NULL);
+	g_signal_connect (page_g, "back",
+			  G_CALLBACK (druid_back_callback),
+			  NULL);
 
 
 	/* page_finish */
-	gtk_signal_connect (GTK_OBJECT (page_finish), "back", (GtkSignalFunc) druid_back_callback, (gpointer) NULL);
+	g_signal_connect (page_finish, "back",
+			  G_CALLBACK (druid_back_callback),
+			  NULL);
 
 	/*Tie it together */
 	gtk_container_add (GTK_CONTAINER (window), druid);
@@ -547,8 +575,8 @@ file_entry_update_files(GtkWidget *w, GnomeFileEntry *fentry)
 	char *p;
 	char *pp;
 
-	GtkLabel *l1 = gtk_object_get_data(GTK_OBJECT(w),"l1");
-	GtkLabel *l2 = gtk_object_get_data(GTK_OBJECT(w),"l2");
+	GtkLabel *l1 = g_object_get_data(G_OBJECT(w),"l1");
+	GtkLabel *l2 = g_object_get_data(G_OBJECT(w),"l2");
 
 	p = gnome_file_entry_get_full_path(fentry,FALSE);
 	pp = g_strconcat("File name: ",p,NULL);
@@ -597,23 +625,23 @@ create_file_entry(void)
 	gtk_box_pack_start(GTK_BOX(box),l2,FALSE,FALSE,0);
 
 	but = gtk_button_new_with_label("Update file labels");
-	gtk_object_set_data(GTK_OBJECT(but),"l1",l1);
-	gtk_object_set_data(GTK_OBJECT(but),"l2",l2);
-	gtk_signal_connect(GTK_OBJECT(but),"clicked",
-			   GTK_SIGNAL_FUNC(file_entry_update_files),
-			   entry);
+	g_object_set_data(G_OBJECT(but),"l1",l1);
+	g_object_set_data(G_OBJECT(but),"l2",l2);
+	g_signal_connect(but,"clicked",
+			 G_CALLBACK(file_entry_update_files),
+			 entry);
 	gtk_box_pack_start(GTK_BOX(box),but,FALSE,FALSE,0);
 
 	but = gtk_toggle_button_new_with_label("Make browse dialog modal");
-	gtk_signal_connect(GTK_OBJECT(but),"toggled",
-			   GTK_SIGNAL_FUNC(file_entry_modal_toggle),
-			   entry);
+	g_signal_connect(but,"toggled",
+			 G_CALLBACK(file_entry_modal_toggle),
+			 entry);
 	gtk_box_pack_start(GTK_BOX(box),but,FALSE,FALSE,0);
 
 	but = gtk_toggle_button_new_with_label("Directory only picker");
-	gtk_signal_connect(GTK_OBJECT(but),"toggled",
-			   GTK_SIGNAL_FUNC(file_entry_directory_toggle),
-			   entry);
+	g_signal_connect(but,"toggled",
+			 G_CALLBACK(file_entry_directory_toggle),
+			 entry);
 	gtk_box_pack_start(GTK_BOX(box),but,FALSE,FALSE,0);
 
 	bonobo_window_set_contents (BONOBO_WINDOW(app->app), box);
@@ -749,8 +777,9 @@ create_font_picker (void)
 	lbPixmap=gtk_label_new("If you choose a font it will appear here");
 	gtk_box_pack_start(GTK_BOX(vbox1),lbPixmap,TRUE,TRUE,5);
 
-	gtk_signal_connect(GTK_OBJECT(fontpicker1),"font_set",
-			   GTK_SIGNAL_FUNC(cfp_set_font),lbPixmap);
+	g_signal_connect(fontpicker1,"font_set",
+			 G_CALLBACK(cfp_set_font),
+			 lbPixmap);
 
 	/* Font_Info */
 	frFontInfo=gtk_frame_new("Font Info");
@@ -768,24 +797,24 @@ create_font_picker (void)
 	gtk_box_pack_start(GTK_BOX(hbox1),ckUseFont,TRUE,TRUE,0);
 
 	adj=GTK_ADJUSTMENT(gtk_adjustment_new(14,5,150,1,1,1));
-	gtk_signal_connect (GTK_OBJECT (adj), "value_changed",
-			    GTK_SIGNAL_FUNC (cfp_sp_value_changed),
-			    fontpicker2);
+	g_signal_connect (adj, "value_changed",
+			  G_CALLBACK (cfp_sp_value_changed),
+			  fontpicker2);
 	spUseFont=gtk_spin_button_new(adj,1,0);
 	gtk_box_pack_start(GTK_BOX(hbox1),spUseFont,FALSE,FALSE,0);
-	gtk_object_set_data (GTK_OBJECT (fontpicker2), "spUseFont", spUseFont);
+	g_object_set_data (G_OBJECT (fontpicker2), "spUseFont", spUseFont);
 
-	gtk_signal_connect (GTK_OBJECT (ckUseFont), "toggled",
-			    GTK_SIGNAL_FUNC (cfp_ck_UseFont),
-			    fontpicker2);
+	g_signal_connect (ckUseFont, "toggled",
+			  G_CALLBACK (cfp_ck_UseFont),
+			  fontpicker2);
 
 	ckShowSize=gtk_check_button_new_with_label("Show font size");
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ckShowSize),TRUE);
 	gtk_box_pack_start(GTK_BOX(vbox2),ckShowSize,FALSE,FALSE,5);
 
-	gtk_signal_connect (GTK_OBJECT (ckShowSize), "toggled",
-			    GTK_SIGNAL_FUNC (cfp_ck_ShowSize),
-			    fontpicker2);
+	g_signal_connect (ckShowSize, "toggled",
+			  G_CALLBACK (cfp_ck_ShowSize),
+			  fontpicker2);
 
 	gnome_font_picker_set_mode(GNOME_FONT_PICKER(fontpicker2),GNOME_FONT_PICKER_MODE_FONT_INFO);
 	gtk_box_pack_start(GTK_BOX(vbox2),fontpicker2,TRUE,TRUE,0);
@@ -794,8 +823,8 @@ create_font_picker (void)
 	gtk_box_pack_start(GTK_BOX(vbox2),lbFontInfo,TRUE,TRUE,5);
 
 
-	gtk_signal_connect(GTK_OBJECT(fontpicker2),"font_set",
-			   GTK_SIGNAL_FUNC(cfp_set_font),lbFontInfo);
+	g_signal_connect(fontpicker2,"font_set",
+			 G_CALLBACK(cfp_set_font),lbFontInfo);
 
 
 	/* User Widget */
@@ -821,8 +850,8 @@ create_font_picker (void)
 	lbUser=gtk_label_new("If you choose a font it will appear here");
 	gtk_box_pack_start(GTK_BOX(vbox3),lbUser,TRUE,TRUE,5);
 
-	gtk_signal_connect(GTK_OBJECT(fontpicker3),"font_set",
-			   GTK_SIGNAL_FUNC(cfp_set_font),lbUser);
+	g_signal_connect(fontpicker3,"font_set",
+			 G_CALLBACK(cfp_set_font),lbUser);
 
 	gtk_widget_show_all(app->app);
 
@@ -836,9 +865,9 @@ create_font_picker (void)
 static void
 href_cb(GtkObject *button)
 {
-	GtkWidget *href = gtk_object_get_data(button, "href");
-	GtkWidget *url_ent = gtk_object_get_data(button, "url");
-	GtkWidget *label_ent = gtk_object_get_data(button, "label");
+	GtkWidget *href = g_object_get_data (G_OBJECT (button), "href");
+	GtkWidget *url_ent = g_object_get_data (G_OBJECT (button), "url");
+	GtkWidget *label_ent = g_object_get_data (G_OBJECT (button), "label");
 	gchar *url, *text;
 
 	url = gtk_editable_get_chars (GTK_EDITABLE(url_ent), 0, -1);
@@ -879,11 +908,11 @@ create_href(void)
 	gtk_box_pack_start (GTK_BOX(vbox), ent2, TRUE, TRUE, 0);
 
 	wid = gtk_button_new_with_label ("set href props");
-	gtk_object_set_data (GTK_OBJECT(wid), "href", href);
-	gtk_object_set_data (GTK_OBJECT(wid), "url", ent1);
-	gtk_object_set_data (GTK_OBJECT(wid), "label", ent2);
-	gtk_signal_connect (GTK_OBJECT(wid), "clicked",
-			    GTK_SIGNAL_FUNC(href_cb), NULL);
+	g_object_set_data (G_OBJECT(wid), "href", href);
+	g_object_set_data (G_OBJECT(wid), "url", ent1);
+	g_object_set_data (G_OBJECT(wid), "label", ent2);
+	g_signal_connect (wid, "clicked",
+			  G_CALLBACK(href_cb), NULL);
 	gtk_box_pack_start (GTK_BOX(vbox), wid, TRUE, TRUE, 0);
 
 	gtk_widget_show_all(app->app);
@@ -931,17 +960,17 @@ create_icon_list(void)
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
 	bonobo_window_set_contents (BONOBO_WINDOW (app->app), sw);
-	gtk_widget_set_usize (sw, 430, 300);
+	gtk_widget_set_size_request (sw, 430, 300);
 	gtk_widget_show (sw);
 
 	iconlist = gnome_icon_list_new (80, NULL, GNOME_ICON_LIST_IS_EDITABLE);
 	gtk_container_add (GTK_CONTAINER (sw), iconlist);
-	gtk_signal_connect (GTK_OBJECT (iconlist), "select_icon",
-			    GTK_SIGNAL_FUNC (select_icon),
-			    NULL);
-	gtk_signal_connect (GTK_OBJECT (iconlist), "unselect_icon",
-			    GTK_SIGNAL_FUNC (unselect_icon),
-			    NULL);
+	g_signal_connect (iconlist, "select_icon",
+			  G_CALLBACK (select_icon),
+			  NULL);
+	g_signal_connect (iconlist, "unselect_icon",
+			  G_CALLBACK (unselect_icon),
+			  NULL);
 
 	GTK_WIDGET_SET_FLAGS(iconlist, GTK_CAN_FOCUS);
 	pix = gdk_pixbuf_new_from_xpm_data ((const gchar **)bomb_xpm);
@@ -1305,14 +1334,14 @@ create_app_helper (GtkWidget *widget, gpointer data)
 	gtk_widget_show (frame);
 
 	w = gnome_canvas_new ();
-	gtk_widget_set_usize ((w), 200, 100);
+	gtk_widget_set_size_request ((w), 200, 100);
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (w), 0.0, 0.0, 200.0, 100.0);
 	gtk_container_add (GTK_CONTAINER (frame), w);
 	gtk_widget_show (w);
 
-	gtk_signal_connect (GTK_OBJECT (w), "destroy",
-			    (GtkSignalFunc) delete_event,
-			    popup);
+	g_signal_connect (w, "destroy",
+			  G_CALLBACK (delete_event),
+			  popup);
 
 	item = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (w)),
 				      gnome_canvas_ellipse_get_type (),
@@ -1323,9 +1352,9 @@ create_app_helper (GtkWidget *widget, gpointer data)
 				      "fill_color", "white",
 				      "outline_color", "black",
 				      NULL);
-	gtk_signal_connect (GTK_OBJECT (item), "event",
-			    (GtkSignalFunc) item_event,
-			    popup);
+	g_signal_connect (item, "event",
+			  G_CALLBACK (item_event),
+			  popup);
 
 	item = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (w)),
 				      gnome_canvas_ellipse_get_type (),
@@ -1336,9 +1365,9 @@ create_app_helper (GtkWidget *widget, gpointer data)
 				      "fill_color", "white",
 				      "outline_color", "black",
 				      NULL);
-	gtk_signal_connect (GTK_OBJECT (item), "event",
-			    (GtkSignalFunc) item_event,
-			    popup);
+	g_signal_connect (item, "event",
+			  G_CALLBACK (item_event),
+			  popup);
 
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 	gtk_widget_show (app);
@@ -1460,7 +1489,7 @@ main (int argc, char **argv)
 			    argc, argv, NULL);
 
 	app = create_newwin (FALSE, "testGNOME", "testGNOME");
-	gtk_widget_set_usize (app->app, 200, 300);
+	gtk_window_set_default_size (GTK_WINDOW (app->app), 200, 300);
 	box1 = gtk_vbox_new (FALSE, 0);
 	bonobo_window_set_contents (BONOBO_WINDOW (app->app), box1);
 	gtk_widget_show (box1);
@@ -1481,10 +1510,9 @@ main (int argc, char **argv)
 	for (i = 0; i < nbuttons; i++) {
 		button = gtk_button_new_with_label (buttons[i].label);
 		if (buttons[i].func)
-			gtk_signal_connect (GTK_OBJECT (button),
-					    "clicked",
-					    GTK_SIGNAL_FUNC(buttons[i].func),
-					    NULL);
+			g_signal_connect (button, "clicked",
+					  G_CALLBACK(buttons[i].func),
+					  NULL);
 		else
 			gtk_widget_set_sensitive (button, FALSE);
 		gtk_box_pack_start (GTK_BOX (box2), button, TRUE, TRUE, 0);

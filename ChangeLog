@@ -1,3 +1,132 @@
+2002-02-21  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-dialog.c: Use
+	g_signal_* and g_object_* instead of gtk_signal_* and
+	gtk_object_*, respectively.
+	* libgnomeui/gnome-dateedit.c: Likewise.
+	* libgnomeui/gnome-color-picker.c: Likewise.
+	* libgnomeui/gnome-client.c: Likewise.
+	* libgnomeui/gnome-appbar.c: Likewise.
+	* libgnomeui/gnome-app-util.c: Likewise.
+	* libgnomeui/gnome-app-helper.c: Likewise.
+	* libgnomeui/gnome-dialog-util.c: Likewise.
+	* libgnomeui/gnome-druid.c: Likewise.
+	* libgnomeui/gnome-druid-page.c: Likewise.
+	* libgnomeui/gnome-entry.c: Likewise.
+
+	* libgnomeui/gnome-file-entry.c: Likewise.
+
+	* libgnomeui/gnome-font-picker.c: Likewise.
+
+	* libgnomeui/gnome-gconf-ui.c: Likewise.
+	* libgnomeui/gnome-href.c: Likewise.
+
+	* libgnomeui/gnome-ice.c: Likewise.
+	* libgnomeui/gnome-icon-entry.c: Likewise.
+
+	* libgnomeui/gnome-icon-item.c: Likewise.
+
+	* libgnomeui/gnome-icon-list.c: Likewise.
+	* libgnomeui/gnome-mdi.c: Likewise.
+
+	* libgnomeui/gnome-mdi-child.c: Likewise.
+	* libgnomeui/gnome-mdi-generic-child.c: Likewise.
+
+	* libgnomeui/gnome-pixmap-entry.c: Likewise.
+	* libgnomeui/gnome-popup-menu.c: Likewise.
+
+	* libgnomeui/gnome-propertybox.c: Likewise.
+
+	* libgnomeui/gnome-scores.c: Likewise.
+
+	* glade/glade-gnome.c: Likewise.
+
+	* test-gnome/testgnome.c: Likewise.
+
+	* libgnomeui/gnome-appbar.c (gnome_appbar_get_progress): Return a
+	GtkProgressBar, not a deprecated GtkProgress.
+	(gnome_appbar_constructor): gtk_widget_set_usize() ->
+	gtk_widget_set_size_request().
+
+	* libgnomeui/gnome-color-picker.c
+	(gnome_color_picker_instance_init): gtk_drawing_area_size() ->
+	gtk_widget_set_size_request().
+	(cs_ok_clicked): Use the new color selection API.
+	(gnome_color_picker_clicked): Likewise.
+	(gnome_color_picker_set_d): gtk_widget_draw() -> gtk_widget_queue_draw().
+	(gnome_color_picker_set_i8): Likewise.
+	(gnome_color_picker_set_i16): Likewise.
+	(gnome_color_picker_set_dither): Likewise.
+	(gnome_color_picker_set_use_alpha): Likewise.
+
+	* libgnomeui/gnome-dateedit.c (position_popup): Use
+	gtk_widget_set_uposition() -> gtk_window_move().
+	(create_children): gtk_widget_set_usize() ->
+	gtk_widget_set_size_request().  gtk_entry_new_with_max_length() ->
+	gtk_entry_new() with gtk_entry_set_max_length().
+	gtk_window_set_policy() -> gtk_window_set_resizable().
+
+	* libgnomeui/gnome-dialog.c (gnome_dialog_init):
+	gtk_window_set_policy() -> gtk_window_set_resizable().
+	(gnome_dialog_set_parent): gtk_widget_set_uposition() ->
+	gtk_window_move().
+
+	* libgnomeui/gnome-entry.c (set_combo_items): Re-create the list
+	of items for the combo and use gtk_combo_set_popdown_strings().
+	We cannot longer use the GtkList deprecated functions.
+	(gnome_entry_add_history): Keep the items list in the same order
+	as specified, and use set_combo_items() instead of inserting the
+	item string directly into the GtkCombo list.
+
+	* libgnomeui/gnome-file-entry.c (browse_clicked):
+	gtk_widget_set_uposition() -> gtk_window_move().
+
+	* libgnomeui/gnome-font-picker.c: Be stricter in what we don't
+	compile when building with GTK_DISABLE_DEPRECATED.
+	(gnome_font_picker_fi_set_use_font_in_label):
+	gtk_widget_restore_default_style() -> gtk_widget_set_style().
+
+	* libgnomeui/gnome-href.c (gnome_href_get_text): gtk_label_get()
+	-> gtk_label_get_text().
+
+	* libgnomeui/gnome-messagebox.c (gnome_message_box_construct):
+	gtk_widget_set_usize() -> gtk_widget_set_size_request().
+
+	* libgnomeui/gnome-mdi.c (book_button_release):
+	gtk_widget_set_usize() -> gtk_widget_set_size_request().
+	(app_create): Removed unneeded gtk_window_set_policy().
+	(gnome_mdi_set_mode): gtk_widget_set_usize() ->
+	gtk_widget_set_size_request().
+
+	* libgnomeui/gnome-mdi-generic-child.c: Be stricter in what we
+	don't compile when building with GTK_DISABLE_DEPRECATED.
+
+	* libgnomeui/gnome-mdi-session.c (restore_window_child):
+	gtk_widget_set_usize() -> gtk_window_set_default_size().
+	gtk_widget_set_uposition() -> gtk_window_move().
+	(restore_window): Likewise.
+
+	* libgnomeui/gnome-popup-menu.c (relay_popup_button_pressed):
+	Don't leak the list of the container's children.
+
+	* libgnomeui/gnome-propertybox.c (dialog_clicked_cb):
+	gtk_notebook_current_page() -> gtk_notebook_get_current_page().
+
+	* libgnomeui/gnome-icon-entry.c (browse_clicked):
+	gtk_widget_set_usize() -> gtk_widget_set_size_request().
+	(ientry_browse): Removed unused gtk_window_set_policy().
+	(gnome_icon_entry_instance_init): gtk_widget_set_usize() ->
+	gtk_widget_set_size_request().
+
+	* libgnomeui/gnome-icon-item.c (iti_start_editing):
+	set_uposition() -> window_move().
+	(gnome_icon_text_item_draw): gtk_draw_focus() ->
+	gtk_paint_focus().
+
+	* libgnomeui/gnome-icon-sel.c
+	(gnome_icon_selection_instance_init): usize() -> size_request().
+	(load_idle_func): progress_bar_update() -> progress_bar_set_fraction().
+
 2002-02-19  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Release 1.112.0
@@ -145,15 +274,15 @@
 	* libgnomeui/gnome-icon-item.c: Added editing support based on the
 	NautilusIconTextItem object in nautilus.
 	(draw_pixbuf_aa), (gnome_icon_text_item_render),
-	(iti_entry_activate), (iti_handle_arrow_key_event), 
-	(get_layout_index), (iti_selection_motion), 
+	(iti_entry_activate), (iti_handle_arrow_key_event),
+	(get_layout_index), (iti_selection_motion),
 	(iti_entry_text_changed_by_clipboard),
 	(iti_start_selecting), (iti_stop_selecting),
 	(iti_ensure_focus), (send_focus_event),
 	(gnome_icon_text_item_get_editable): New functions.
 	(update_pango_layout): If editing, use the GtkEntry's text instead
 	of the item's text.
-	(gnome_icon_text_item_event), (iti_start_editing), 
+	(gnome_icon_text_item_event), (iti_start_editing),
 	(iti_stop_editing), (iti_edition_accept): Implemented.
 	(gnome_icon_text_item_draw): Draw the selection if text is selected,
 	and draw text with the text_gc instead of fg_gc.
@@ -164,13 +293,13 @@
 	(gnome_icon_text_item_start_editing): Call iti_ensure_focus instead
 	of gnome_canvas_item_grab_focus.
 	(recompute_bounding_box): Use gnome_canvas_item_i2w and
-	gnome_canvase_w3c_d to simplify the operation, and only ask for 
+	gnome_canvase_w3c_d to simplify the operation, and only ask for
 	a bounding box big enough to display the text size.
 
 	* libgnomeui/gnome-icon-item.h: Added a create_entry virtual
 	function and removed one of the padding items, and added
 	gnome_icon_text_item_get_editable().
-	
+
 	* libgnomeui/gnome-icon-list.c: (selection_one_icon_event),
 	(selection_many_icon_event): Save the editing icon and
 	don't try to process events meant for the editing widget.
@@ -234,9 +363,9 @@
 
 2002-01-16  Anders Carlsson  <andersca@gnu.org>
 
-	* libgnomeui/gnome-about.c: 
+	* libgnomeui/gnome-about.c:
 	Make the about box a bit nicer.
-	
+
 	* libgnomeui/gnome-app-helper.c: (setup_image_menu_item),
 	(gnome_app_fill_menu_custom), (gnome_app_create_menus_custom),
 	(per_app_toolbar_style_changed_notify),
@@ -244,11 +373,11 @@
 	(global_menu_item_activated), (create_and_popup_toolbar_menu),
 	(button_press), (gnome_app_setup_toolbar):
 	Update for new gconf schemas.
-	
+
 	* libgnomeui/gnome-app.c: (gnome_app_instance_init), (gnome_app_set_menus),
 	(gnome_app_set_toolbar):
 	Update for new gconf schemas.
-	
+
 
 2002-01-15  Mark McLoughlin  <mark@skynet.ie>
 
@@ -273,7 +402,7 @@
 	GnomeDruidPageStandard - use the theme
 	(gnome_druid_page_edge_set_*): rewrite all color things to use the
 	widgets
-	(gnome_druid_page_edge_style_set): 
+	(gnome_druid_page_edge_style_set):
 	(gnome_druid_page_edge_realize): update the color for themes
 
 	* libgnomeui/gnome-druid-page-standard.c
@@ -314,8 +443,8 @@ Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
 2002-01-13  Murray Cumming  <murrayc@usa.net>
 
 	* libgnomeui/gnome-app-helper.cc: gnome_app_find_menu_pos() was
- 	not working, due to a faulty optimisation. I'm not sure what 
- 	changed since gnome-libs 1.2, but the problem is solved by 
+ 	not working, due to a faulty optimisation. I'm not sure what
+ 	changed since gnome-libs 1.2, but the problem is solved by
  	removing the optimisation. This fixes gnome_app_insert_menus(),
  	which uses it.
 
@@ -380,7 +509,7 @@ Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
 
 	* glade/glade-gnome.c: sigh, forgot to commit fixes for
 	de-privatization of GnomeDialog
-	
+
 
 2001-12-27  jacob berkman  <jacob@ximian.com>
 
@@ -462,9 +591,9 @@ Sat Dec 22 23:29:15 2001  George Lebl <jirka@5z.com>
 2001-12-18  jacob berkman  <jacob@ximian.com>
 
 	* doc/reference/libgnomeui.hierarchy: remove generated file
-	
+
 	* doc/reference/tmpl/*: letting gtk-doc do its thing
-	
+
 	* doc/reference/Makefile.am: make it build docs on our objects
 
 	* doc/reference/libgnomeui.types: include instantiable types
@@ -539,8 +668,8 @@ Fri Dec 14 16:24:04 2001  Jonathan Blandford  <jrb@redhat.com>
 
 2001-12-10  Yanko Kaneti  <yaneti@declera.com>
 
-	* libgnomeui/libgnomeui.schemas: (menus/show-icons) fix default value 
-	
+	* libgnomeui/libgnomeui.schemas: (menus/show-icons) fix default value
+
 Sun Dec 09 14:24:57 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-icon-entry.c: don't use the deprecated _gtk_entry method
@@ -572,7 +701,7 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 
 	* glade/glade-gnome.c (gnome_add_dock_item): fix dock item
 	placement
-	
+
 	* glade/glade-gnome.c: accept more values for boolean true
 
 2001-12-09  Kristian Rietveld  <kris@gtk.org>
@@ -612,8 +741,8 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 
 2001-12-08  ERDI Gergo  <cactus@cactus.rulez.org>
 
-	* libgnomeui/gnome-ui-init.c (libgnomeui_segv_handle): 
-	* libgnomeui/gnome-client.c (gnome_client_new_without_connection): 
+	* libgnomeui/gnome-ui-init.c (libgnomeui_segv_handle):
+	* libgnomeui/gnome-client.c (gnome_client_new_without_connection):
 	* libgnomeui/gnome-app.c (gnome_app_class_init): use g_get_prgname () instead
 	of program_invocation_name
 
@@ -673,11 +802,11 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 	(gnome_appbar_construct): remove in favor of construct-time
 	properties
 	(gnome_appbar_constructor): instead of gnome_appbar_construct
-	(gnome_appbar_set_property): 
+	(gnome_appbar_set_property):
 	(gnome_appbar_get_property): implement
 	(gnome_appbar_class_init): add some construct time properties
 
-	* libgnomeui/gnome-app.c (gnome_app_show): 
+	* libgnomeui/gnome-app.c (gnome_app_show):
 	(layout_changed): BonoboDockLayout is no longer a GtkObject
 
 2001-12-07  jacob berkman  <jacob@ximian.com>
@@ -692,7 +821,7 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 
 2001-12-07  Anders Carlsson  <andersca@gnu.org>
 
-	* libgnomeui/gnome-icon-sel.c (gnome_icon_selection_instance_init): Update 
+	* libgnomeui/gnome-icon-sel.c (gnome_icon_selection_instance_init): Update
 	for the changed GnomeIconList API.
 
 	* libgnomeui/gnome-icon-list.h: Bring back some of the old, working API,
@@ -713,7 +842,7 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-marshal.list: Add.
 
-	* libgnomeui/Makefile.am: Add gnome-icon-item.[ch] and 
+	* libgnomeui/Makefile.am: Add gnome-icon-item.[ch] and
 	gnome-marshal.list.
 
 	* libgnomeui/gnome-icon-item.c: Add.
@@ -729,7 +858,7 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-messagebox.c (gnome_message_box_new):
 	Only try to grab button focus if buttons != NULL.
-	
+
 	* libgnomeui/gnome-pixmap-entry.c (gnome_pixmap_entry_instance_init):
 	Set do_preview to 0 instead of 1, as it is not really set up
 	by default and thus will confuse gnome_pixmap_entry_set_preview.
@@ -741,7 +870,7 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 
 2001-11-30  Anders Carlsson  <andersca@gnu.org>
 
-	* libgnomeui/gnome-font-picker.c (gnome_font_picker_label_use_font_in_label): 
+	* libgnomeui/gnome-font-picker.c (gnome_font_picker_label_use_font_in_label):
 	Queue a resize after setting the new style.
 
 	* libgnomeui/gnome-entry.c: Add saving_history to priv struct.
@@ -770,7 +899,7 @@ Tue Nov 27 17:48:02 2001  Owen Taylor  <otaylor@redhat.com>
 2001-11-28  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* libgnomeui/libgnomeui.schemas: entry for show-icons should be of type bool.
-	
+
 	* libgnomeui/Makefile.am: fix GNOMEUILOCALEDIR to point to correct location.
 
 	* libgnomeui/gnome-app-init.c: find translations and get them in UTF-8.
@@ -783,7 +912,7 @@ Tue Nov 27 17:41:30 2001  Owen Taylor  <otaylor@redhat.com>
 	for show-icons, hopefully resulting with this defaulting
 	to on.
 
-	* libgnomeui/gnome-app.c (gnome_app_instance_init): Ref/sink 
+	* libgnomeui/gnome-app.c (gnome_app_instance_init): Ref/sink
 	app->layout.
 
 	* libgnomeui/gnome-app-helper.c (do_ui_signal_connect): Use a standard
@@ -1011,7 +1140,7 @@ Tue Oct 23 14:42:04 2001  George Lebl <jirka@5z.com>
 
 	* glade/glade-gnome.c: (file_entry_find_internal_child): fix a
 	tyop
-	
+
 	* glade/glade-gnome.c: move from libglade/glade/
 
 	* configure.in: add libglade check
@@ -1095,7 +1224,7 @@ Wed Oct 17 18:08:34 2001  George Lebl <jirka@5z.com>
 	(nor is gnome-font-picker.c built, nor does it appear to
 	build on my system). Removing the include so things that
 	depend on libgnomeui will build.
-	
+
 
 2001-10-13  Michael Meeks  <michael@ximian.com>
 
@@ -1122,7 +1251,7 @@ Sun Oct 14 18:03:38 2001  George Lebl <jirka@5z.com>
 Thu Oct 11 03:09:08 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-mdi.c, gnome-mdi-child.c:  Make
-	  gnome_mdi_child_list_menu_remove_item and 
+	  gnome_mdi_child_list_menu_remove_item and
 	  gnome_mdi_child_list_menu_add_item private by crafty use of
 	  a leading underscore
 
@@ -1155,7 +1284,7 @@ Tue Sep 04 19:11:54 2001  George Lebl <jirka@5z.com>
 
 2001-10-10  jacob berkman  <jacob@ximian.com>
 
-	* libgnomeui/gnome-stock-icons.c (add_unsized): 
+	* libgnomeui/gnome-stock-icons.c (add_unsized):
 	(add_sized): update to new pixbuf api
 
 Tue Oct 09 19:35:23 2001  George Lebl <jirka@5z.com>
@@ -1188,15 +1317,15 @@ Tue Oct 09 19:35:23 2001  George Lebl <jirka@5z.com>
 	 Fix output of:
 	 nm -g -l .libs/libgnomeui-2.so | grep ' T ' | grep -v ' gnome_' |
 	 grep -v ' GNOME_'
-	
-	* libgnomeui/gnome-stock-icons.c (gnome_stock_icons_init): renamed from 
-	init_gnome_stock_icons, to be in the right namespace.	
-	
+
+	* libgnomeui/gnome-stock-icons.c (gnome_stock_icons_init): renamed from
+	init_gnome_stock_icons, to be in the right namespace.
+
 	* libgnomeui/gnome-mdi.c (child_list_menu_remove_item):
 	(child_list_menu_add_item): rename with gnome_mdi prefix
 
 	* libgnomeui/gnome-mdi-child.c: fixes for renames
-	
+
 2001-10-04  James Henstridge  <james@daa.com.au>
 
 	* libgnomeui/gnome-icon-list.c (gnome_icon_list_class_init): change second
@@ -1256,7 +1385,7 @@ Fri Sep 28 15:54:23 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-window-icon.c: add some preconditions
 
-	* libgnomeui/gnome-entry.c: correct gconf usage 
+	* libgnomeui/gnome-entry.c: correct gconf usage
 
 2001-09-26  Michael Meeks  <michael@ximian.com>
 
@@ -1427,8 +1556,8 @@ Sun Sep 09 00:43:09 2001  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 2001-09-07  jacob berkman  <jacob@ximian.com>
 
-	* libgnomeui/gnome_segv.c: 
-	* libgnomeui/gnome-ui-init.c: 
+	* libgnomeui/gnome_segv.c:
+	* libgnomeui/gnome-ui-init.c:
 	* libgnomeui/gnome-gconf-ui.c: <libgnome(ui).h> -=>
 	<libgnome(ui)/libgnome(ui).h>
 
@@ -1513,10 +1642,10 @@ Tue Sep 04 19:11:34 2001  George Lebl <jirka@5z.com>
 2001-09-05  Anders Carlsson  <andersca@gnu.org>
 
 	* libgnomeui/Makefile.am:	Build gnome-about.c and install gnome-about.h
-	
+
 	* libgnomeui/gnome-pixmap-entry.c: (refresh_preview), (changed_timeout_func),
 	(pentry_destroy), (drag_data_get): Fix a double-free bug and remove
-	the unused GnomeFileEntry variable since we now inherit from 
+	the unused GnomeFileEntry variable since we now inherit from
 	GnomeFileEntry.
 
 2001-09-05  Anders Carlsson  <andersca@gnu.org>
@@ -1533,9 +1662,9 @@ Tue Sep 04 19:11:34 2001  George Lebl <jirka@5z.com>
 2001-09-04  Anders Carlsson  <andersca@gnu.org>
 
 	* test-gnome/Makefile.am: Add test-entry.
-	
+
 	* test-gnome/testentry.c: New file.
-	
+
 	* test-gnome/testgnome.c: Some changes to work with new api.
 
 Mon Sep 03 00:12:44 2001  George Lebl <jirka@5z.com>
@@ -1574,15 +1703,15 @@ Sat Aug 25 00:33:41 2001  Jonathan Blandford  <jrb@redhat.com>
 	(check_for_duplicates), (gnome_entry_save_history):
 
 	Make gnome-entry use GConf.
-	
+
 	* libgnomeui/gnome-file-entry.c: (fentry_set_arg),
 	(gnome_file_entry_construct):
 	* libgnomeui/gnome-icon-entry.c: (gnome_icon_entry_set_history_id):
 	Some fixups to work with API changes in gnome-entry.
-	
+
 	* libgnomeui/libgnomeui-2.0.pc.in:
 	Fix include path.
-	
+
 	* libgnomeui/pixmaps/Makefile.am:
 	Don't install the gcalc font png.
 
@@ -1717,13 +1846,13 @@ Fri Aug 31 03:16:44 2001  George Lebl <jirka@5z.com>
 2001-08-31  Anders Carlsson  <andersca@gnu.org>
 
 	* libgnomeui/Makefile.am: Remove gnome-component-widget.[ch]
-	
+
 	* libgnomeui/gnome-app-helper.c: Include gnome-init.h
-	
+
 	* libgnomeui/gnome-component-widget.c: Remove.
-	
+
 	* libgnomeui/gnome-component-widget.h: Remove.
-	
+
 	* libgnomeui/gnome-dateedit.c: (gnome_date_edit_class_init): Set
 	get_property and set_property before adding properties.
 
@@ -1779,7 +1908,7 @@ Thu Aug 30 14:38:35 2001  George Lebl <jirka@5z.com>
 
 2001-08-30  Anders Carlsson  <andersca@gnu.org>
 
-	* libgnomeui/gnome-href.c (gnome_href_class_init): Make the properties 
+	* libgnomeui/gnome-href.c (gnome_href_class_init): Make the properties
 	actually work.
 	(gnome_href_construct): Remove this function, since we can
 	do everything with properties now.
@@ -1833,7 +1962,7 @@ Mon Aug 27 01:32:00 2001  George Lebl <jirka@5z.com>
 
 Mon Aug 27 00:44:15 2001  George Lebl <jirka@5z.com>
 
-	* libgnomeui/Makefile.am, gnome-gconf-ui.[ch], gnome-ui-init.c, libgnomeui.h: 
+	* libgnomeui/Makefile.am, gnome-gconf-ui.[ch], gnome-ui-init.c, libgnomeui.h:
 	  Add gconf error stuff as a module, no api added.  The only two
 	  gnome-gconf API entry points are in libgnome itself.  Also
 	  a bit of cleanup in the init code, and handle fork() < 0 case
@@ -1869,7 +1998,7 @@ Sun Aug 26 16:37:35 2001  George Lebl <jirka@5z.com>
 	  GNOME_DISABLE_DEPRECATED rather then GNOME_EXCLUDE_DEPRECATED
 
 	* libgnomeui/gnome-file-entry.c: add GNOME_DISABLE_DEPRECATED_SOURCE around
-	  a deprecated method and some fixups related 
+	  a deprecated method and some fixups related
 
 Sun Aug 26 09:18:55 2001  George Lebl <jirka@5z.com>
 
@@ -1939,7 +2068,7 @@ Fri Aug 24 23:31:39 2001  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-entry.h:
 
 	Bring back the old GnomeEntry widget.
-	
+
 Fri Aug 24 07:57:50 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-color-picker.c, gnome-font-picker.c: use gnome-macros.h
@@ -2011,7 +2140,7 @@ Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
 	* libgnomeui/gtkrc*: Removed.
 
 	* libgnomeui/landscape.xpm, portrait.xpm: Removed.
-	
+
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
 	* libgnomeui/gnome-rexec-server.oafinfo: Removed.
@@ -2223,7 +2352,7 @@ Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
 	to the glib-mkenums script.
 	(gnometype_inits.c): But also provide hooks for one function
 	that will init all the types.
-	
+
 	* libgnomeui/gnometypes.c (gnome_type_init): #include gnometype_inits.c
 	to initialize all of the types.
 
@@ -2241,11 +2370,11 @@ Sun Jul  1 12:18:32 2001  Jonathan Blandford  <jrb@redhat.com>
 	druid.
 
 Tue Jun 26 23:27:58 2001  Jonathan Blandford  <jrb@redhat.com>
- 
+
  	* gnome-druid.c (gnome_druid_set_property): Add Param support.
  	(gnome_druid_get_property): Add Param support.
  	(gnome_druid_init): Add a Help button.
- 
+
  	* gnome-druid.h: Add a Help button.
 
 Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
@@ -2281,14 +2410,14 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 	* libgnomeui/gnome-stock-icons.c: (add_sized), (add_unsized): Change
 	gdk_pixbuf_new_from_inline to gdk_pixbuf_new_from_stream.
-	
+
 	* libgnomeui/pixmaps/Makefile.am: change MAKE_INLINE_PIXBUF to GDK_PIXBUF_CSOURCE
 
 2001-06-28  Anders Carlsson  <andersca@codefactory.se>
 
-	* configure.in: change MAKE_INLINE_PIXBUF to 
+	* configure.in: change MAKE_INLINE_PIXBUF to
 	GDK_PIXBUF_CSOURCE.
-	
+
 2001-06-26  Fatih Demir <kabalak@gtranslator.org>
 
 	* configure.in: Added ta to the languages list.
@@ -2319,7 +2448,7 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 2001-06-19  Héctor García Álvarez <hector@scouts-es.org>
 
 	* configure.in: added "es" for Spanish to $ALL_LINGUAS
-	
+
 2001-06-19  Cody Russell  <bratsche@gnome.org>
 
 	* libgnomeui/gnome-animator.[ch]: Removed.
@@ -2472,7 +2601,7 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 	(gnome_image_entry_new_from_selector): Removed.
 
 	* libgnomeui/gnome-image-selector.[ch]: Derive from GnomeSelectorWidget, not GnomeSelectorClient.
-	(gnome_image_selector_new_from_selector, gnome_image_selector_construct): Removed.	
+	(gnome_image_selector_new_from_selector, gnome_image_selector_construct): Removed.
 
 2001-06-03  Martin Baulig  <baulig@suse.de>
 
@@ -2965,7 +3094,7 @@ Sun May 20 23:15:50 2001  George Lebl <jirka@5z.com>
 2001-04-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Added nn and no to ALL_LINGUAS.
-	
+
 
 2001-04-19  Michael Meeks  <michael@ximian.com>
 
@@ -2987,7 +3116,7 @@ Sun May 20 23:15:50 2001  George Lebl <jirka@5z.com>
 	s/\#include[ \t]*<libgnomebase\/gnome-defs.h>//;
 	s/BEGIN_GNOME_DECLS/G_BEGIN_DECLS/g;
 	s/END_GNOME_DECLS/G_END_DECLS/g;
-	
+
 2001-04-19  Michael Meeks  <michael@ximian.com>
 
 	* configure.in: add GTK_VERSION.
@@ -3357,7 +3486,7 @@ Sat Mar 24 23:55:06 2001  George Lebl <jirka@5z.com>
 2001-02-15  Darin Adler  <darin@eazel.com>
 
 	* libgnomeui/gnome-init.c: (gnome_register_options): Use N_, not
-	_, for the popt table names. 
+	_, for the popt table names.
 	(gnome_init_with_popt_table): Remove g_free that screws up the
 	popt option section.
 
@@ -3419,7 +3548,7 @@ Sat Mar 24 23:55:06 2001  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-selector.h (gnome_selector_get_history_id): New function.
 	(gnome_selector_set_history_id): New function.
 	(GnomeSelector): Added "get_selection_mode" signal.
-	
+
 	* libgnomeui/gnome-selector.c (PROP_DIALOG_TITLE, PROP_HISTORY_ID,
 	PROP_SELECTION_MODE): New properties.
 
@@ -3620,7 +3749,7 @@ Wed Dec 06 02:57:06 2000  George Lebl <jirka@5z.com>
 
 Wed Dec 06 01:55:24 2000  George Lebl <jirka@5z.com>
 
-	* libgnomeui/gnome-animamtor.c, gnome-canvas.c, gnome-dock-band.c, 
+	* libgnomeui/gnome-animamtor.c, gnome-canvas.c, gnome-dock-band.c,
 	  gnome-dock-item.c, gnome-dock.c, gnome-druid-page.c,
 	  gnome-druid.c, gnome-roo.c, gnome-textfu.c, gtkpixmapmenuitem.c,
 	  wap-textfu.c:  There is no draw signal/method anymore, it's
@@ -3758,13 +3887,13 @@ Sat Nov 04 22:14:02 2000  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-selector.c: Likewise.
 
 2000-10-15  Chema Celorio  <chema@celorio.com>
- 
+
  	* gnome-window.c (gnome_window_toplevel_set_title): new file &
  	function. apps should use it to set the tile, so that we can
  	have a unform way of setting the window properties (only the
  	title for now)
  	* gnome-window.h: new file
- 
+
 
 2000-10-03  Martin Baulig  <baulig@suse.de>
 
@@ -3840,7 +3969,7 @@ Thu Sep 28 03:35:44 2000  George Lebl <jirka@5z.com>
 
 2000-09-25  Iain Holmes  <iain@helixcode.com>
 
-	* libgnomeui/gnome-propertybox.c (dialog_clicked_cb): Check all the pages for a 
+	* libgnomeui/gnome-propertybox.c (dialog_clicked_cb): Check all the pages for a
 	change, as opposed to just the current one.
 	Use the GNOME_CLASS_BOILERPLATE macro for the type creation.
 
@@ -4514,7 +4643,7 @@ Mon Jul 17 23:49:58 2000  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-appbar.[ch] (gnome_appbar_get_status): new accessor function.
 	* libgnomeui/gnome-app-util.c (gnome_app_activate_statusbar): use
 	gnome_appbar_get_status().
-	
+
 Fri Jul 14 17:10:54 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/*.c: fixup the destroy/finalize handlers.  Make sure destroy
@@ -4589,7 +4718,7 @@ Fri Jul 14 01:00:44 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/libgnomeui-compat-1.0.h, libgnomeui.h:  Move the headers which
 	  are actually in the compat lib to the compat header
-	
+
 
 Thu Jul 13 19:12:38 2000  George Lebl <jirka@5z.com>
 
@@ -4642,7 +4771,7 @@ Wed Jul 12 02:47:22 2000  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome_segv.c (main): Fix message string typo.
 
 2000-07-07  Chema Celorio  <chema@celorio.com>
- 
+
  	* gnome_segv.c: add a "DEBUG" button to the segv dialog if the program
  	pointed by the enviromental variable "GNOME_DEBUGGER" is
 
@@ -4658,7 +4787,7 @@ Tue Jul 04 01:44:21 2000  George Lebl <jirka@5z.com>
 2000-07-03  Jonathan Blandford  <jrb@redhat.com>
 
 	* libgnomeui/gnome-druid-page-standard.c: add finalize function.  Move
-	free()ing to it. 
+	free()ing to it.
 
 Tue Jun 27 00:04:35 2000  George Lebl <jirka@5z.com>
 
@@ -4686,7 +4815,7 @@ Sun Jun 25 23:50:22 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-app.c: dup the app id string in the GtkArg get
 
-	* libgnomeui/gnome-color-picker.[ch]: Use a private structure for privates. 
+	* libgnomeui/gnome-color-picker.[ch]: Use a private structure for privates.
 	  Dup the title string on GtkArg get
 
 	* libgnomeui/gnome-dialog.[ch]: Use a private structure for privates.
@@ -5124,7 +5253,7 @@ Fri Feb 25 03:29:15 2000  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-remote-bootstrap.c (handle_commands): pass g_strsplit()
 	parameters in proper order.
 	(relay_output): fflush() stdout.
-	
+
 Fri Feb 18 17:30:58 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-app-helper.c,gnome-stock.c: use the gnome-properties instead
@@ -5148,7 +5277,7 @@ Fri Feb 18 13:07:33 2000  George Lebl <jirka@5z.com>
 	is in GNOME_FONT_PICKER_MODE_FONT_INFO the widget gets properly
 	updated with the current font.  Before you could set the font name
 	it would appear in the dialog but not on the visable widget.
-	
+
 Sun Feb 13 23:21:19 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-calculator.c: apply patch from "W. Adam Foran"
@@ -5187,7 +5316,7 @@ Sat Feb 05 18:29:26 2000  George Lebl <jirka@5z.com>
 
 2000-02-01  Iain Holmes  <ih@csd.abdn.ac.uk>
 
-	* libgnomeui/gnome-dateedit.c (select_clicked): Changed to use 
+	* libgnomeui/gnome-dateedit.c (select_clicked): Changed to use
 	gnome_stock_cursor_new.
 
 	* libgnomeui/gnome-dock-item.c (gnome_dock_item_grab_pointer): Same.
@@ -5212,8 +5341,8 @@ Sat Feb 05 18:29:26 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-app-helper.c (gnome_app_setup_toolbar): Function to set up
 	toolbar preferences, uses GConf for some preferences now instead
-	of gnome-preferences	
-	
+	of gnome-preferences
+
 2000-01-31  Havoc Pennington  <hp@redhat.com>
 
 	* libgnomeui/gnome-messagebox.c (gnome_message_box_construct): turn on line
@@ -5248,7 +5377,7 @@ Sun Jan 30 16:58:54 2000  George Lebl <jirka@5z.com>
 
 2000-01-30  Havoc Pennington  <hp@pobox.com>
 
-	* libgnomeui/gnome-pixmap.c (clear_provided_state_image): Apply patch 
+	* libgnomeui/gnome-pixmap.c (clear_provided_state_image): Apply patch
 	from Peter Wainwright to free the mask as well as the pixbuf,
 	closes bug 5687
 
@@ -5262,11 +5391,11 @@ Sun Jan 30 16:58:54 2000  George Lebl <jirka@5z.com>
 	(create_menu_item): Call setup_pixmap_menu_item
 	(setup_pixmap_menu_item): new function sets up a pixmap menu item
 	to respond appropriately to changes in whether menu icons should
-	be displayed	
+	be displayed
 
 	* libgnomeui/libgnomeui.h (GNOMEUI_INIT): Add GConf to the default
-	initialization, include gnome-gconf.h	
-	
+	initialization, include gnome-gconf.h
+
 Sun Jan 30 15:44:35 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-dentry-edit.c: use gnome_config_assemble_vector instead of
@@ -5299,12 +5428,12 @@ Sun Jan 30 15:44:35 2000  George Lebl <jirka@5z.com>
 
 2000-01-28  Havoc Pennington  <hp@redhat.com>
 
-	* libgnomeui/gnome-number-entry.c (browse_clicked): set transient parent, 
+	* libgnomeui/gnome-number-entry.c (browse_clicked): set transient parent,
 	bug 2497
 
 	* libgnomeui/gnome-font-picker.c (gnome_font_picker_clicked): set transient
-	parent, fixes 2497 
-	
+	parent, fixes 2497
+
 	* libgnomeui/gnome-color-picker.c (gnome_color_picker_clicked): Set transient
 	parent, per bug 2497
 
@@ -5407,7 +5536,7 @@ Tue Jan 18 00:56:46 2000  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-calculator.c (gnome_calculator_realized): ditto
 
 	* libgnomeui/gnome-init.c (libgnomeui_pixbuf_image_loader): ditto
-	
+
 
 2000-01-16  Iain Holmes  <ih@csd.abdn.ac.uk>
 
@@ -5433,13 +5562,13 @@ Sun Jan 16 02:45:10 2000  George Lebl <jirka@5z.com>
 
 2000-01-16  Havoc Pennington  <hp@pobox.com>
 
-	* libgnomeui/gnome-pixmap.c (gnome_pixmap_get_draw_vals): new function 
+	* libgnomeui/gnome-pixmap.c (gnome_pixmap_get_draw_vals): new function
 	to get the draw vals
 
 2000-01-15  Havoc Pennington  <hp@pobox.com>
 
 	* libgnomeui/gnome-stock.c (gnome_stock_set_icon): set main pixbuf in
-	addition to the individual states.	
+	addition to the individual states.
 
 2000-01-15  Havoc Pennington  <hp@pobox.com>
 
@@ -5449,11 +5578,11 @@ Sun Jan 16 02:45:10 2000  George Lebl <jirka@5z.com>
 	variable
 
 	* libgnomeui/gnome-pixmap.h: remove the "internal functions" since we no
-	longer use any of them	
+	longer use any of them
 
 	* libgnomeui/gnome-stock.c (gnome_stock_pixmap_gdk): gdk_pixbuf_render_pixmap
 
-	* libgnomeui/gnome-init.c (libgnomeui_pixbuf_image_loader): 
+	* libgnomeui/gnome-init.c (libgnomeui_pixbuf_image_loader):
 	gdk_pixbuf_render_pixmap
 
 	* libgnomeui/gnome-calculator.c (gnome_calculator_realized): replace
@@ -5471,7 +5600,7 @@ Sun Jan 16 02:45:10 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-messagebox.c: include gnomelib-init isntead of
 	gnomelib-init2
-	
+
 	* libgnomeui/gnome-client.c (gnome_client_pre_args_parse): const on the
 	module info
 	(gnome_client_post_args_parse): ditto
@@ -5480,13 +5609,13 @@ Sun Jan 16 02:45:10 2000  George Lebl <jirka@5z.com>
 	clean it all up.  Also, remove gnome_pixbuf_render since we have
 	one of these in gdk-pixbuf now.
 	(gnome_pixmap_size_request): implement size request so we can
-	lazily calculate size information instead of updating the 
+	lazily calculate size information instead of updating the
 	requisition all the darn time
-	(set_pixbuf): don't calculate any pixbufs/masks etc. since 
+	(set_pixbuf): don't calculate any pixbufs/masks etc. since
 	it's all done lazily now
 	(gnome_pixmap_set_draw_vals): queue a redraw if necessary
 
-	* libgnomeui/gnome-pixmap.h: split the data members so that generated 
+	* libgnomeui/gnome-pixmap.h: split the data members so that generated
 	images are always clearly separated from non-generated images,
 	this is the only way to get predictable, consistent behavior.
 
@@ -5498,7 +5627,7 @@ Sun Jan 16 02:45:10 2000  George Lebl <jirka@5z.com>
 	-1, it's necessary to reset the scaled image
 	(gnome_pixmap_set_pixbufs_at_state): call set_pixbuf_size()
 	instead of manually calculating the requisition
-	
+
 Sat Jan 15 00:04:00 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-helpsys.c: fix gnome_help_view_get_arg by initializing the
@@ -5510,7 +5639,7 @@ Sat Jan 15 00:04:00 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-init.c: fix an uninitialized local variable problem
 
-	* libgnomeui/gnome-textfu.c: fix several potentially quite dangerous 
+	* libgnomeui/gnome-textfu.c: fix several potentially quite dangerous
 	  uninitialized values and assumptions
 
 2000-01-15  Havoc Pennington  <hp@pobox.com>
@@ -5524,15 +5653,15 @@ Sat Jan 15 00:04:00 2000  George Lebl <jirka@5z.com>
 
 2000-01-14  Iain Holmes  <ih@csd.abdn.ac.uk>
 
-	* libgnomeui/gnome-about.[ch]: Changed gnome_about_new_url to 
+	* libgnomeui/gnome-about.[ch]: Changed gnome_about_new_url to
 	gnome_about_new_with_url.
 
 	* libgnomeui/gnome-cursors.c: Removed the extra cursors that weren't needed.
-	
+
 2000-01-14  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* libgnomeui/gnome-cursors.c: Changed the white value to be full white, changed
-	the background and foreground's round on some of the cursors. Changed 
+	the background and foreground's round on some of the cursors. Changed
 	the eggtimers foreground colour to yellow.
 
 2000-01-14  ERDI Gergo  <cactus@cactus.rulez.org>
@@ -5545,10 +5674,10 @@ Sat Jan 15 00:04:00 2000  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-gconf.c: fix the version of liboafgnome we require.
 
-        * Makefile.am: add initial file save dialog stuff, not to the 
+        * Makefile.am: add initial file save dialog stuff, not to the
 	lib but as a test prog. just a prototype; may use James Cape version
         instead.
-	
+
 	* libgnomeui/libgnomeui.h: emacs magic
 
 	* libgnomeui/gnome-gconf.c (gnome_gconf_post_args_parse): ref/sink the global
@@ -5592,8 +5721,8 @@ Wed Jan 12 15:51:18 2000  ERDI Gergo  <cactus@cactus.rulez.org>
 2000-01-12  Havoc Pennington  <hp@pobox.com>
 
 	* libgnomeui/gnome-gconf.c (gnome_gconf_client_get): Add a global
-	GConfClient, and init stuff for creating it and setting up 
-	GConf. Not yet added to GNOMEUI_INIT macro; wondering 
+	GConfClient, and init stuff for creating it and setting up
+	GConf. Not yet added to GNOMEUI_INIT macro; wondering
 	if we want this stuff for _every_ gnome app. Probably we do.
 
 2000-01-11  Jonathan Blandford  <jrb@redhat.com>
@@ -5611,13 +5740,13 @@ Wed Jan 12 15:51:18 2000  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* libgnomeui/gnome-messagebox.c (gnome_message_box_new): Use human readable
 	name in the message box title.
-	(gnome_message_box_set_default, gnome_message_box_set_modal): 
+	(gnome_message_box_set_default, gnome_message_box_set_modal):
 	Removed, now obsolete
 
 2000-01-11  Havoc Pennington  <hp@pobox.com>
 
-	* libgnomeui/gnome-messagebox.c (gnome_message_box_new): 
-	Format title as "Error (Gnumeric)" rather than 
+	* libgnomeui/gnome-messagebox.c (gnome_message_box_new):
+	Format title as "Error (Gnumeric)" rather than
 	"Error: Gnumeric"
 
 2000-01-10  Jonathan Blandford  <jrb@redhat.com>
@@ -5667,7 +5796,7 @@ Wed Jan 12 15:51:18 2000  ERDI Gergo  <cactus@cactus.rulez.org>
 	* libgnomeui/gnome-mdi.c (app_book_delete_event, app_toplevel_delete_event):
 	fixed a bug that kept a deleted empty toplevel in windows list,
 	causing occasional warnings & segfaults.
-	
+
 
 2000-01-06  Elliot Lee  <sopwith@redhat.com>
 
@@ -5724,7 +5853,7 @@ Wed Dec 29 16:53:35 1999  George Lebl <jirka@5z.com>
 
 1999-12-21  Iain Holmes  <ih@csd.abdn.ac.uk>
 
-	* libgnomeui/gnome-helpsys.c (gnome_help_app_topics): Removed extra loop 
+	* libgnomeui/gnome-helpsys.c (gnome_help_app_topics): Removed extra loop
 	iterator, to prevent a crash.
 	(gnome-help_path_resolve): Same.
 
@@ -5740,9 +5869,9 @@ Wed Dec 29 16:53:35 1999  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-pixmap.c, gnome-pixmap.h: Add copyright notices and file
 	magic. comment cleanup
 
-	* libgnomeui/gnome-ditem-edit.h, gnome-ditem-edit.c: mostly cut-and-paste 
+	* libgnomeui/gnome-ditem-edit.h, gnome-ditem-edit.c: mostly cut-and-paste
 	from gnome-dentry-edit, not testable until we get the icon list.
-	
+
 Tue Dec 21 02:06:25 1999  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-calculator.[ch]: make the get_result be a function rather
@@ -5821,11 +5950,11 @@ Sun Dec 12 10:57:40 1999  George Lebl <jirka@5z.com>
 	(gnome_headers): added gnome-unit-spinner.h
 
 	* libgnomeui/portrait.xpm, landscape.xpm: image files for the new paper selector.
-	
+
 	* libgnomeui/gnome-paper-selector.[ch]: new paper selector.  It should be source
 	source compatible with the old one, but you would probably want to
 	modify your code to take advantage of the newer features.
-	
+
 	* libgnomeui/gnome-unit-spinner.[ch]: new widget.  A GtkSpinButton type widget
 	that understands different units.
 
@@ -5842,7 +5971,7 @@ Sun Dec 12 10:57:40 1999  George Lebl <jirka@5z.com>
 	click_closes as gnome_dialog_clicked() takes care of this.
 	* libgnomeui/Makefile.am: changed all references to gdk-pixbuf/src to
 	gdk-pixbuf/gdk-pixbuf.
-	
+
 
 1999-12-04  Elliot Lee  <sopwith@redhat.com>
 
@@ -5854,7 +5983,7 @@ Sun Dec 12 10:57:40 1999  George Lebl <jirka@5z.com>
 	version from gdk-pixbuf.  gdk-pixbuf has the master copy; do not
 	modify this libgnomeui copy.
 
-	* libgnomeui/gnome-dialog.c (gnome_dialog_clicked): New function, 
+	* libgnomeui/gnome-dialog.c (gnome_dialog_clicked): New function,
 	emits the "clicked" signal
 
 Mon Nov 29 09:17:02 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
@@ -5865,11 +5994,11 @@ Mon Nov 29 09:17:02 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 1999-11-28  Havoc Pennington  <hp@pobox.com>
 
 	* libgnomeui/gnome-pixmap.h: include gdk-pixbuf before gnome-defs, seems to
-	be required for some reason. 
-	
+	be required for some reason.
+
         The below is all still wrong; if you have a gdk-pixbuf installed
 	it will probably use the wrong one.
-	
+
 	* libgnomeui/gnome-pixmap.c: angle
 
 	* libgnomeui/gnome-color-picker.h: angle brackets
@@ -6000,7 +6129,7 @@ Wed Nov 10 20:15:10 1999  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-pixmap.c (resize_to_fit): fix typo, s/PIXMAP/PIXBUF/
 	(paint_with_pixbuf): Um, actually draw the pixbuf.
 
-	* libgnomeui/gnome-stock.c (gnome_stock_init): Set the pixmap mode here, not 
+	* libgnomeui/gnome-stock.c (gnome_stock_init): Set the pixmap mode here, not
 	in specific constructors.
 
 Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
@@ -6056,7 +6185,7 @@ Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-icon-entry.c (entry_changed): port to gdk-pixbuf
 
 	* libgnomeui/gnome-pixmap.c (gnome_pixbuf_scale): If new w/h are the same as
-	old w/h just use memcpy() instead of scaling.	
+	old w/h just use memcpy() instead of scaling.
 	(gnome_pixmap_set_pixbuf_at_size): New function
 	(gnome_pixmap_set_pixbuf): New function
 	(set_pixbuf): New function, used by set_pixbufs and above two
@@ -6078,7 +6207,7 @@ Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 	(INCLUDES): Remove GDK_IMLIB_CFLAGS
 
 	* libgnomeui/gnome-canvas-load.h: Delete header contents; they aren't needed
-	with gdk-pixbuf	
+	with gdk-pixbuf
 
 	* libgnomeui/Makefile.am: Comment out gnome-canvas-image.c for now
 
@@ -6111,8 +6240,8 @@ Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-pixmap.c (gnome_pixbuf_render): Render a pixbuf to pixmap/mask
 
-	* libgnomeui/gnome-stock.c (gnome_pixmap_button): Remove some weird pixmap 
-	registration stuff that no longer works and I don't understand the 
+	* libgnomeui/gnome-stock.c (gnome_pixmap_button): Remove some weird pixmap
+	registration stuff that no longer works and I don't understand the
 	purpose of.
 	(gnome_pixmap_button): Unref the pixmap if it isn't placed in the
 	button due to user preferences. Long-standing mem leak.
@@ -6124,19 +6253,19 @@ Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-stock.c: Rewrite the stock pixmap hash. We now store
 	entries for all 5 states, and we do a single lookup to get all
-	five states at once. Also, the GnomeStock widget now simply gets a 
+	five states at once. Also, the GnomeStock widget now simply gets a
 	reference to the GdkPixbuf stored in the hash. We also free memory
 	associated with unscaled pixbufs, filenames, etc. once we have the
 	final pixbuf cached.
 	(gnome_stock_new): Set GNOME_PIXMAP_KEEP_PIXBUF mode since we are
-	usually using a pixbuf shared with other GnomeStock widgets.	
+	usually using a pixbuf shared with other GnomeStock widgets.
 	(gnome_stock_set_icon): Implement
 	(gnome_stock_pixmap_register): Don't return success/failure, that
 	makes no sense (it always succeeded anyway)
 	(gnome_stock_pixmap_change): Ditto
 
 	* libgnomeui/gnome-stock.h: Replace all "subtype" string arguments with
-	GtkStateType enum arguments. 
+	GtkStateType enum arguments.
 
 1999-11-04  Jonathan Blandford  <jrb@redhat.com>
 
@@ -6145,22 +6274,22 @@ Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 
 1999-11-04  Havoc Pennington  <hp@pobox.com>
 
-	* libgnomeui/gnome-stock.c: Remove GnomeStockPixmapEntryWidget and 
+	* libgnomeui/gnome-stock.c: Remove GnomeStockPixmapEntryWidget and
 	GnomeStockPixmapEntryGPixmap; these no longer make any sense.
 
 	* libgnomeui/gnome-stock.h: GnomeStockPixmapEntry made opaque, all struct
 	contents moved to gnome-stock.c. Added new constructors and
 	destructors for creating a GnomeStockPixmapEntry.
-	
+
 	* libgnomeui/gnome-stock.c: Removed functions I removed from the header last
 	week (deprecated stuff that had been spewing warnings or not
 	compiled at all).
-	
+
 	* libgnomeui/gnome-stock.h: GnomeStockPixmapEntryRGB,
 	GnomeStockPixmapEntryRGBScaled added to replace Imlib versions
-	
+
 	* libgnomeui/gnome-pixmap.c (gnome_pixbuf_scale): Add this here; it's
-	scale_down originally in gnome-stock.c. We no longer handle 
+	scale_down originally in gnome-stock.c. We no longer handle
 	the magic alpha color, and we do handle full alpha.
 
 	* libgnomeui/gnome-stock.c (gnome_stock_set_icon): Don't return success or
@@ -6169,8 +6298,8 @@ Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 	(gnome_stock_new_with_icon): don't check return val from set_icon
 	(gnome_stock_set_icon): Check whether the new icon is the same as
 	the old right at the start of the function.
-	(scale_down): mostly moved to gnome-pixmap.c as gnome_pixbuf_scale()	
-	
+	(scale_down): mostly moved to gnome-pixmap.c as gnome_pixbuf_scale()
+
 
 1999-11-04  Federico Mena Quintero  <federico@redhat.com>
 
@@ -6206,7 +6335,7 @@ Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 
 1999-10-25  Havoc Pennington  <hp@pobox.com>
 
-	* libgnomeui/gnome-pixmap.c: set parent_class to NULL 
+	* libgnomeui/gnome-pixmap.c: set parent_class to NULL
 
 	* libgnomeui/gnome-stock.h: Further enhance the gnome-stock header. Remove
 	all functions that spew "don't use me" when used; group things
@@ -6220,20 +6349,20 @@ Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 	Also, now derives from GtkMisc so you can set alignment, etc.
 	Compat functions not yet in place. Doesn't compile either,
 	untested and depends on some nonexistent GdkPixbuf stuff.
-	
-	* libgnomeui/gnome-stock.c: Delete all the stuff that wasn't being compiled 
+
+	* libgnomeui/gnome-stock.c: Delete all the stuff that wasn't being compiled
 	due to the USE_NEW_GNOME_STOCK #define
 
 	* libgnomeui/gnome-stock.h: Don't define USE_NEW_GNOME_STOCK, unconditionally
-	compile the new stuff, delete the old stuff. 
+	compile the new stuff, delete the old stuff.
 	Move all GNOME_STOCK_* string constant macros to gnome-stock-ids.h
 	Delete large comment at the top, it was outdated.
 	Delete Imlib entry types (need compat for these)
-	Make xpm_data in the XPM entry type const 
+	Make xpm_data in the XPM entry type const
 	Delete all the regular/disabled/focus fields in GnomeStock widget
-	
+
 	* libgnomeui/gnome-stock-ids.h: New file to unclutter gnome-stock.h
-	
+
 
 1999-10-22  Jonathan Blandford  <jrb@redhat.com>
 
@@ -6270,7 +6399,7 @@ Mon Oct 18 21:51:43 1999  George Lebl  <jirka@5z.com>
 
 	* libgnomeui/gnome-less.c: Remove the stupid popup menu, breaks binary
 	compatibility.
-	(gnome_less_fixed_font): This was deprecated about a year ago, 
+	(gnome_less_fixed_font): This was deprecated about a year ago,
 	removed.
 	(gnome_less_set_font): reformat
 
@@ -6481,8 +6610,8 @@ Thu Nov 19 11:21:52 1998  Raph Levien  <raph@gimp.org>
 
 	* test-gnome/testgnome.c (create_app_helper): Added tests for popup menus.
 
-	* test-gnome/canvas-fifteen.c: 
-	* test-gnome/canvas-arrowhead.c: 
+	* test-gnome/canvas-fifteen.c:
+	* test-gnome/canvas-arrowhead.c:
 	* test-gnome/canvas-primitives.c: Removed occurrences of #ifdef GTK_HAVE_FEATURES_1_1_0.
 
 1998-09-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -6522,7 +6651,7 @@ Thu Nov 19 11:21:52 1998  Raph Levien  <raph@gimp.org>
 
 	* test-gnome/testgnome.c (about_cb): Set the version to reflect what the current
 	gnome release is. (VERSION).
-	
+
 
 1998-07-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -6589,16 +6718,16 @@ Thu Nov 19 11:21:52 1998  Raph Levien  <raph@gimp.org>
 
 1998-07-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* test-gnome/canvas.c (piece_event): 
-	(create_primitives): 
+	* test-gnome/canvas.c (piece_event):
+	(create_primitives):
 	(create_fifteen): Removed the "SomeGtkType::" prefixes for
 	arguments now that Gtk supports direct argument lookups.  The code
 	is actually nice right now :-)
 
 Sun Jul 12 23:01:56 1998  Havoc Pennington  <hp@pobox.com>
 
-	* test-gnome/testgnome.c (create_app_util): Added a test for the 
-	GnomeAppBar, gnome-app-util, and gnome-dialog-util (they're 
+	* test-gnome/testgnome.c (create_app_util): Added a test for the
+	GnomeAppBar, gnome-app-util, and gnome-dialog-util (they're
 	all interrelated, so it's just one test window). This is also
 	a decent demo for what these functions do (or don't).
 
@@ -6643,10 +6772,10 @@ Sun Jul 12 23:01:56 1998  Havoc Pennington  <hp@pobox.com>
 	* test-gnome/canvas.c: New test for new canvas -- work in progress.
 
 1998-06-22  Richard Hestilow  <hestgray@ionet.net>
-	
+
 	* test-gnome/testgnome.c: 	Fixed icon list (create_icon_list) and changed
 			create_pixmap to use gdk_imlib.
-		
+
 Thu Jun 18 02:48:17 1998  George Lebl  <jirka@5z.com>
 
 	* test-gnome/testgnome.c: added test for number entry widget
@@ -6677,7 +6806,7 @@ Tue Jun  2 00:51:58 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 Wed Jun 10 14:19:39 EDT 1998 Gregory McLean <gregm@comstar.net>
 
-	* test-gnome/fixed up this so that the canvas is only built if it was built in 
+	* test-gnome/fixed up this so that the canvas is only built if it was built in
 	  libgnomeui.
 
 1998-05-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -6700,5 +6829,5 @@ Thu May 21 18:51:02 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* test-gnome/testgnome.c (create_newwin): Create the menus with a data
 	pointer.  Add a routine to close the window, and not quit the
-	program. 
+	program.
 

@@ -97,7 +97,7 @@ gnome_pixmap_class_init (GnomePixmapClass *class)
 GtkWidget*
 gnome_pixmap_new_from_file (const char *filename)
 {
-	GtkWidget *retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+	GtkWidget *retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 	gtk_image_set_from_file (GTK_IMAGE (retval), filename);
 	return retval;
 }
@@ -136,12 +136,12 @@ gnome_pixmap_new_from_file_at_size (const gchar *filename, gint width, gint heig
 							     width,
 							     height,
 							     GDK_INTERP_BILINEAR);
-		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+		retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (retval), scaled);
 		g_object_unref (G_OBJECT (scaled));
 		g_object_unref (G_OBJECT (pixbuf));
 	} else {
-		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+		retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 	}
 	return retval;
 }
@@ -166,11 +166,11 @@ gnome_pixmap_new_from_xpm_d (const char **xpm_data)
 
 	pixbuf = gdk_pixbuf_new_from_xpm_data (xpm_data);
 	if (pixbuf != NULL) {
-		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+		retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (retval), pixbuf);
 		g_object_unref (G_OBJECT (pixbuf));
 	} else {
-		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+		retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 	}
 	return retval;
 }
@@ -201,12 +201,12 @@ gnome_pixmap_new_from_xpm_d_at_size (const char **xpm_data, int width, int heigh
 							     width,
 							     height,
 							     GDK_INTERP_BILINEAR);
-		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+		retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (retval), scaled);
 		g_object_unref (G_OBJECT (scaled));
 		g_object_unref (G_OBJECT (pixbuf));
 	} else {
-		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+		retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 	}
 	return retval;
 }
@@ -223,10 +223,10 @@ gnome_pixmap_new_from_gnome_pixmap (GnomePixmap *gpixmap)
 
 	pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (gpixmap));
 	if (pixbuf != NULL) {
-		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+		retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (retval), pixbuf);
 	} else {
-		retval = gtk_type_new (GNOME_TYPE_PIXMAP);
+		retval = g_object_new (GNOME_TYPE_PIXMAP, NULL);
 	}
 	return retval;
 }

@@ -1,5 +1,5 @@
 /* Popup menus for GNOME
- * 
+ *
  * Copyright (C) 1998 Mark Crichton
  * All rights reserved.
  *
@@ -31,11 +31,10 @@
 static GtkWidget* global_menushell_hack = NULL;
 #define TOPLEVEL_MENUSHELL_KEY "gnome-popup-menu:toplevel_menushell_key"
 
-static GtkWidget* 
+static GtkWidget*
 get_toplevel(GtkWidget* menuitem)
 {
-	return gtk_object_get_data (GTK_OBJECT (menuitem),
-				    TOPLEVEL_MENUSHELL_KEY);
+	return g_object_get_data (G_OBJECT (menuitem), TOPLEVEL_MENUSHELL_KEY);
 }
 
 /* Our custom marshaller for menu items.  We need it so that it can extract the per-attachment
@@ -50,16 +49,16 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
 {
 	ActivateFunc func;
 	gpointer user_data;
-	GtkObject *tl;
+	GObject *tl;
 	GtkWidget *for_widget;
 
-	tl = GTK_OBJECT (get_toplevel(GTK_WIDGET (object)));
-	user_data = gtk_object_get_data (tl, "gnome_popup_menu_do_popup_user_data");
-	for_widget = gtk_object_get_data (tl, "gnome_popup_menu_do_popup_for_widget");
+	tl = G_OBJECT (get_toplevel(GTK_WIDGET (object)));
+	user_data = g_object_get_data (tl, "gnome_popup_menu_do_popup_user_data");
+	for_widget = g_object_get_data (tl, "gnome_popup_menu_do_popup_for_widget");
 
-	gtk_object_set_data (GTK_OBJECT (get_toplevel(GTK_WIDGET (object))),
-			     "gnome_popup_menu_active_item",
-			     object);
+	g_object_set_data (G_OBJECT (get_toplevel(GTK_WIDGET (object))),
+			   "gnome_popup_menu_active_item",
+			   object);
 
 	func = (ActivateFunc) data;
 	if (func)
@@ -75,14 +74,13 @@ popup_connect_func (GnomeUIInfo *uiinfo, const char *signal_name, GnomeUIBuilder
 {
 	g_assert (uibdata->is_interp);
 
-	gtk_object_set_data (GTK_OBJECT (uiinfo->widget), 
-			     TOPLEVEL_MENUSHELL_KEY, 
-			     global_menushell_hack);
+	g_object_set_data (G_OBJECT (uiinfo->widget),
+			   TOPLEVEL_MENUSHELL_KEY,
+			   global_menushell_hack);
 
-	gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
-			    signal_name,
-			    GTK_SIGNAL_FUNC (popup_marshal_func),
-			    uiinfo->moreinfo);
+	g_signal_connect (uiinfo->widget, signal_name,
+			  G_CALLBACK (popup_marshal_func),
+			  uiinfo->moreinfo);
 }
 
 /**
@@ -144,7 +142,7 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 
 /**
  * gnome_popup_menu_get_accel_group
- * @menu: 
+ * @menu:
  *
  * Returns the accelgroup associated with the specified GtkMenu.  This
  * is the accelgroup that was created by gnome_popup_menu_new().  If
@@ -182,7 +180,7 @@ real_popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer da
 	 *
 	 */
 
-	user_data = gtk_object_get_data (GTK_OBJECT (widget), "gnome_popup_menu_attach_user_data");
+	user_data = g_object_get_data (G_OBJECT (widget), "gnome_popup_menu_attach_user_data");
 
 	gnome_popup_menu_do_popup (popup, NULL, NULL, event, user_data, widget);
 
@@ -195,7 +193,7 @@ popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
 	if (event->button != 3)
 		return FALSE;
 
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "button_press_event");
+	g_signal_stop_emission_by_name (widget, "button_press_event");
 
 	return real_popup_button_pressed (widget, event, data);
 }
@@ -203,7 +201,7 @@ popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
 static gint
 popup_menu_pressed (GtkWidget *widget, gpointer data)
 {
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "popup_menu");
+	g_signal_stop_emission_by_name (widget, "popup_menu");
 
 	return real_popup_button_pressed (widget, NULL, data);
 }
@@ -216,29 +214,31 @@ relay_popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer d
 	if (event->button != 3)
 		return FALSE;
 
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "button_press_event");
+	g_signal_stop_emission_by_name (widget, "button_press_event");
 
 	if (GTK_IS_CONTAINER(widget))
 	  {
 
 	    do {
 	      GList *children;
+	      GList *child;
 
-	      for (children = gtk_container_children(GTK_CONTAINER(widget)), new_widget = NULL;
-		   children; children = children->next)
+	      children = gtk_container_get_children (GTK_CONTAINER (widget));
+
+	      for (child = children, new_widget = NULL; child; child = child->next)
 		{
 		  GtkWidget *cur;
-		  
-		  cur = (GtkWidget *)children->data;
-		  
+
+		  cur = (GtkWidget *)child->data;
+
 		  if(! GTK_WIDGET_NO_WINDOW(cur) )
 		    continue;
-		  
+
 		  if(cur->allocation.x <= event->x
 		     && cur->allocation.y <= event->y
 		     && (cur->allocation.x + cur->allocation.width) > event->x
 		     && (cur->allocation.y + cur->allocation.height) > event->y
-		     && gtk_object_get_data (GTK_OBJECT(cur), "gnome_popup_menu_nowindow"))
+		     && g_object_get_data (G_OBJECT(cur), "gnome_popup_menu_nowindow"))
 		    {
 		      new_widget = cur;
 		      break;
@@ -250,7 +250,7 @@ relay_popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer d
 		break;
 	    } while(widget && GTK_IS_CONTAINER (widget) && GTK_WIDGET_NO_WINDOW(widget));
 
-	    if(!widget || !gtk_object_get_data (GTK_OBJECT(widget), "gnome_popup_menu"))
+	    if(!widget || !g_object_get_data (G_OBJECT(widget), "gnome_popup_menu"))
 	      {
 		return TRUE;
 	      }
@@ -270,7 +270,7 @@ popup_attach_widget_destroyed (GtkWidget *widget, gpointer data)
 
 	popup = data;
 
-	gtk_object_unref (GTK_OBJECT (popup));
+	g_object_unref (G_OBJECT (popup));
 }
 
 /**
@@ -309,30 +309,30 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	if(gtk_object_get_data (GTK_OBJECT (widget), "gnome_popup_menu"))
+	if(g_object_get_data (G_OBJECT (widget), "gnome_popup_menu"))
 	  return;
 
-	gtk_object_set_data (GTK_OBJECT (widget), "gnome_popup_menu", popup);
+	g_object_set_data (G_OBJECT (widget), "gnome_popup_menu", popup);
 
 	/* This operation can fail if someone is trying to set a popup on e.g. an uncontained label, so we do it first. */
 	for(ev_widget = widget; ev_widget && GTK_WIDGET_NO_WINDOW(ev_widget); ev_widget = ev_widget->parent)
 	  {
-	    gtk_object_set_data (GTK_OBJECT (ev_widget), "gnome_popup_menu_nowindow", GUINT_TO_POINTER(1));
+	    g_object_set_data (G_OBJECT (ev_widget), "gnome_popup_menu_nowindow", GUINT_TO_POINTER(1));
 	  }
 
 	g_return_if_fail (ev_widget);
 
 	/* Ref/sink the popup menu so that we take "ownership" of it */
 
-	gtk_object_ref (GTK_OBJECT (popup));
+	g_object_ref (G_OBJECT (popup));
 	gtk_object_sink (GTK_OBJECT (popup));
 
 	/* Store the user data pointer in the widget -- we will use it later when the menu has to be
 	 * invoked.
 	 */
 
-	gtk_object_set_data (GTK_OBJECT (widget), "gnome_popup_menu_attach_user_data", user_data);
-	gtk_object_set_data (GTK_OBJECT (widget), "gnome_popup_menu", user_data);
+	g_object_set_data (G_OBJECT (widget), "gnome_popup_menu_attach_user_data", user_data);
+	g_object_set_data (G_OBJECT (widget), "gnome_popup_menu", user_data);
 
 	/* Prepare the widget to accept button presses -- the proper assertions will be
 	 * shouted by gtk_widget_set_events().
@@ -341,21 +341,27 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 	gtk_widget_add_events (ev_widget, GDK_BUTTON_PRESS_MASK |
 			       GDK_KEY_PRESS_MASK);
 
-	gtk_signal_connect (GTK_OBJECT (widget), "button_press_event",
-			    GTK_SIGNAL_FUNC (popup_button_pressed), popup);
+	g_signal_connect (widget, "button_press_event",
+			  G_CALLBACK (popup_button_pressed), popup);
 
 	g_signal_connect (G_OBJECT (widget), "popup_menu",
 			  G_CALLBACK (popup_menu_pressed), popup);
-	
-	if (ev_widget != widget)
-	  gtk_signal_connect_while_alive (GTK_OBJECT (ev_widget), "button_press_event",
-					  (GtkSignalFunc) relay_popup_button_pressed,
-					  popup, GTK_OBJECT(widget));
+
+	if (ev_widget != widget) {
+		GClosure *closure;
+
+		closure = g_cclosure_new (G_CALLBACK (relay_popup_button_pressed),
+					  popup,
+					  NULL);
+		g_object_watch_closure (G_OBJECT (widget), closure);
+		g_signal_connect_closure (ev_widget, "button_press_event",
+					  closure, FALSE);
+	}
 
 	/* This callback will unref the popup menu when the widget it is attached to gets destroyed. */
-	gtk_signal_connect (GTK_OBJECT (widget), "destroy",
-			    (GtkSignalFunc) popup_attach_widget_destroyed,
-			    popup);
+	g_signal_connect (widget, "destroy",
+			  G_CALLBACK (popup_attach_widget_destroyed),
+			  popup);
 }
 
 /**
@@ -395,8 +401,8 @@ gnome_popup_menu_do_popup (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpoin
 	 * marshaller.
 	 */
 
-	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_do_popup_user_data", user_data);
-	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_do_popup_for_widget", for_widget);
+	g_object_set_data (G_OBJECT (popup), "gnome_popup_menu_do_popup_user_data", user_data);
+	g_object_set_data (G_OBJECT (popup), "gnome_popup_menu_do_popup_for_widget", for_widget);
 
 	if (event) {
 		button = event->button;
@@ -424,7 +430,7 @@ get_active_index (GtkMenu *menu)
 	GtkWidget *active;
 	int i;
 
-	active = gtk_object_get_data (GTK_OBJECT (menu), "gnome_popup_menu_active_item");
+	active = g_object_get_data (G_OBJECT (menu), "gnome_popup_menu_active_item");
 
 	for (i = 0, l = GTK_MENU_SHELL (menu)->children; l; l = l->next, i++)
 		if (active == l->data)
@@ -440,7 +446,7 @@ get_active_index (GtkMenu *menu)
  * @pos_data:
  * @event:
  * @user_data:
- * 
+ *
  * Same as above, but runs the popup menu modally and returns the
  * index of the selected item, or -1 if none.
  */
@@ -457,13 +463,13 @@ gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func,
 
 	/* Connect to the deactivation signal to be able to quit our modal main loop */
 
-	id = gtk_signal_connect (GTK_OBJECT (popup), "deactivate",
-				 (GtkSignalFunc) menu_shell_deactivated,
-				 NULL);
+	id = g_signal_connect (popup, "deactivate",
+			       G_CALLBACK (menu_shell_deactivated),
+			       NULL);
 
-	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_active_item", NULL);
-	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_do_popup_user_data", user_data);
-	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_do_popup_for_widget", for_widget);
+	g_object_set_data (G_OBJECT (popup), "gnome_popup_menu_active_item", NULL);
+	g_object_set_data (G_OBJECT (popup), "gnome_popup_menu_do_popup_user_data", user_data);
+	g_object_set_data (G_OBJECT (popup), "gnome_popup_menu_do_popup_for_widget", for_widget);
 
 	if (event) {
 		button = event->button;
@@ -478,7 +484,7 @@ gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func,
 	gtk_main ();
 	gtk_grab_remove (popup);
 
-	gtk_signal_disconnect (GTK_OBJECT (popup), id);
+	g_signal_handler_disconnect (G_OBJECT (popup), id);
 
 	return get_active_index (GTK_MENU (popup));
 }
@@ -522,7 +528,7 @@ gnome_gtk_widget_add_popup_items (GtkWidget *widget, GnomeUIInfo *uiinfo, gpoint
 {
   GtkWidget *prev_popup;
 
-  prev_popup = gtk_object_get_data (GTK_OBJECT (widget), "gnome_popup_menu");
+  prev_popup = g_object_get_data (G_OBJECT (widget), "gnome_popup_menu");
 
   if(!prev_popup)
     {

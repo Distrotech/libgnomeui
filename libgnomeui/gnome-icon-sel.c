@@ -113,17 +113,16 @@ gnome_icon_selection_instance_init (GnomeIconSelection *gis)
 	gis->_priv->gil = gnome_icon_list_new(ICON_SIZE+30,
 					      gtk_range_get_adjustment (GTK_RANGE (sb)),
 					      FALSE);
-	gtk_widget_set_usize(gis->_priv->gil,350,300);
+	gtk_widget_set_size_request (gis->_priv->gil, 350, 300);
 	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(gis->_priv->gil),
 					    GTK_SELECTION_SINGLE);
 
 	gtk_container_add (GTK_CONTAINER (frame), gis->_priv->gil);
 	gtk_widget_show(gis->_priv->gil);
 
-	gtk_signal_connect (GTK_OBJECT (gis->_priv->gil), "destroy",
-			    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
-			    &(gis->_priv->gil));
-
+	g_signal_connect (gis->_priv->gil, "destroy",
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &(gis->_priv->gil));
 
 	gis->_priv->file_list = NULL;
 }
@@ -142,7 +141,7 @@ gnome_icon_selection_new (void)
 {
   GnomeIconSelection * gis;
   
-  gis = gtk_type_new (GNOME_TYPE_ICON_SELECTION);
+  gis = g_object_new (GNOME_TYPE_ICON_SELECTION, NULL);
 
   return GTK_WIDGET (gis);
 }
@@ -372,10 +371,8 @@ load_idle_func (gpointer data)
 	if (gis->_priv->load_i > gis->_priv->load_file_count)
 		gis->_priv->load_file_count = gis->_priv->load_i;
 
-	gtk_progress_bar_update
-		(GTK_PROGRESS_BAR (gis->_priv->load_progressbar),
-		 (float)gis->_priv->load_i /
-		 gis->_priv->load_file_count);
+	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (gis->_priv->load_progressbar),
+				       (double)gis->_priv->load_i / gis->_priv->load_file_count);
 
 	gis->_priv->load_i ++;
 
@@ -415,22 +412,22 @@ gnome_icon_selection_show_icons (GnomeIconSelection * gis)
 	gtk_box_pack_start (GTK_BOX (gis->_priv->box),
 			    label, FALSE, FALSE, 0);
 	gtk_widget_show (label);
-	gtk_signal_connect (GTK_OBJECT (label), "destroy",
-			    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
-			    &label);
+	g_signal_connect (label, "destroy",
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &label);
 
 	progressbar = gtk_progress_bar_new ();
 	gtk_box_pack_start (GTK_BOX (gis->_priv->box),
 			    progressbar, FALSE, FALSE, 0);
 	gtk_widget_show (progressbar);
-	gtk_signal_connect (GTK_OBJECT (progressbar), "destroy",
-			    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
-			    &progressbar);
+	g_signal_connect (progressbar, "destroy",
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &progressbar);
 
 	gnome_icon_list_freeze (GNOME_ICON_LIST (gis->_priv->gil));
 
 	/* Ref to avoid object disappearing from under us */
-	gtk_object_ref (GTK_OBJECT (gis));
+	g_object_ref (G_OBJECT (gis));
 
 	gis->_priv->load_loop = g_main_loop_new (NULL, FALSE);
 	gis->_priv->load_i = 0;
@@ -463,7 +460,7 @@ gnome_icon_selection_show_icons (GnomeIconSelection * gis)
 	if (label != NULL)
 		gtk_widget_destroy (label);
 
-	gtk_object_unref (GTK_OBJECT (gis));
+	g_object_unref (G_OBJECT (gis));
 }
 
 /**

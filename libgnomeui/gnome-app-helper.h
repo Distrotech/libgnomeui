@@ -562,7 +562,10 @@ typedef void (* GnomeUISignalConnectFunc) (GnomeUIInfo        *uiinfo,
 struct _GnomeUIBuilderData {
 	GnomeUISignalConnectFunc connect_func;	/* Function that connects to the item's signals */
 	gpointer data;				/* User data pointer */
-	gboolean is_interp;			/* Should use gtk_signal_connect_interp or normal gtk_signal_connect? */
+	gboolean is_interp;			/* Should use
+						 * g_signal_connect_closure_by_id
+						 * or normal g_signal_connect?
+						 */
 	GtkCallbackMarshal relay_func;		/* Marshaller function for language bindings */
 	GtkDestroyNotify destroy_func;		/* Destroy notification function for language bindings */
 };

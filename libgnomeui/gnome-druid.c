@@ -110,21 +110,23 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 	widget_class = (GtkWidgetClass*) klass;
 	container_class = (GtkContainerClass*) klass;
 
-	druid_signals[CANCEL] = 
-		gtk_signal_new ("cancel",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDruidClass, cancel),
-				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
-	
-	druid_signals[HELP] = 
-		gtk_signal_new ("help",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDruidClass, help),
-				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
+	druid_signals[CANCEL] =
+		g_signal_new ("cancel",
+			      G_TYPE_FROM_CLASS (gobject_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeDruidClass, cancel),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+
+	druid_signals[HELP] =
+		g_signal_new ("help",
+			      G_TYPE_FROM_CLASS (gobject_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GnomeDruidClass, help),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 
 	object_class->destroy = gnome_druid_destroy;
 	gobject_class->set_property = gnome_druid_set_property;
@@ -216,26 +218,16 @@ gnome_druid_instance_init (GnomeDruid *druid)
 	druid->_priv->show_finish = FALSE;
 	druid->_priv->show_help = FALSE;
 
-	gtk_signal_connect (GTK_OBJECT (druid->back),
-			    "clicked",
-			    GTK_SIGNAL_FUNC (gnome_druid_back_callback),
-			    druid);
-	gtk_signal_connect (GTK_OBJECT (druid->next),
-			    "clicked",
-			    GTK_SIGNAL_FUNC (gnome_druid_next_callback),
-			    druid);
-	gtk_signal_connect (GTK_OBJECT (druid->cancel),
-			    "clicked",
-			    GTK_SIGNAL_FUNC (gnome_druid_cancel_callback),
-			    druid);
-	gtk_signal_connect (GTK_OBJECT (druid->finish),
-			    "clicked",
-			    GTK_SIGNAL_FUNC (gnome_druid_next_callback),
-			    druid);
-	gtk_signal_connect (GTK_OBJECT (druid->help),
-			    "clicked",
-			    GTK_SIGNAL_FUNC (gnome_druid_help_callback),
-			    druid);
+	g_signal_connect (druid->back, "clicked",
+			  G_CALLBACK (gnome_druid_back_callback), druid);
+	g_signal_connect (druid->next, "clicked",
+			  G_CALLBACK (gnome_druid_next_callback), druid);
+	g_signal_connect (druid->cancel, "clicked",
+			  G_CALLBACK (gnome_druid_cancel_callback), druid);
+	g_signal_connect (druid->finish, "clicked",
+			  G_CALLBACK (gnome_druid_next_callback), druid);
+	g_signal_connect (druid->help, "clicked",
+			  G_CALLBACK (gnome_druid_help_callback), druid);
 }
 
 
@@ -338,7 +330,7 @@ gnome_druid_size_request (GtkWidget *widget,
 	GtkRequisition child_requisition;
 	GnomeDruidPage *child;
 	int border;
-	
+
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_DRUID (widget));
 
@@ -358,16 +350,16 @@ gnome_druid_size_request (GtkWidget *widget,
 				gtk_widget_unmap (GTK_WIDGET(child));
 		}
 	}
-	
+
         requisition->width = temp_width + 2 * border;
         requisition->height = temp_height + 2 * border;
 
 #if 0
 	/* In an Attempt to show how the widgets are packed,
 	 * here's a little diagram.
-	 * 
+	 *
 	 * [  Help  ] ------------- [  Back  ] [  Next  ]    [ Cancel ]
-	 *             / 
+	 *             /
 	 *     This part needs to be at least 1 button width.
 	 *     In addition, there is 1/4 X Button width between Cancel and Next,
 	 *     and a GNOME_PAD_SMALL between Next and Back.
@@ -418,7 +410,7 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	gint button_height;
 	GList *list;
 	int border;
-	
+
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_DRUID (widget));
 
@@ -465,7 +457,7 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	child_allocation.height = button_height;
 	child_allocation.width = allocation->width;
 	gtk_widget_size_allocate (druid->_priv->bbox, &child_allocation);
-	
+
 	/* Put up the GnomeDruidPage */
 	child_allocation.x = allocation->x + border;
 	child_allocation.y = allocation->y + border;
@@ -534,7 +526,7 @@ gnome_druid_unmap (GtkWidget *widget)
 		gtk_widget_unmap (druid->finish);
 	else
 		gtk_widget_unmap (druid->next);
-	gtk_widget_unmap (druid->cancel);	
+	gtk_widget_unmap (druid->cancel);
 	if (druid->_priv->show_help)
 		gtk_widget_unmap (druid->help);
 #endif
@@ -561,7 +553,7 @@ gnome_druid_remove (GtkContainer *widget,
 {
 	GnomeDruid *druid;
 	GList *list;
-	
+
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_DRUID (widget));
 	g_return_if_fail (child != NULL);
@@ -569,7 +561,7 @@ gnome_druid_remove (GtkContainer *widget,
 	druid = GNOME_DRUID (widget);
 
 	list = g_list_find (druid->_priv->children, child);
-	/* Is it a page? */ 
+	/* Is it a page? */
 	if (list != NULL) {
 		/* If we are mapped and visible, we want to deal with changing the page. */
 		if ((GTK_WIDGET_MAPPED (GTK_WIDGET (widget))) &&
@@ -709,7 +701,7 @@ gnome_druid_cancel_callback (GtkWidget *button, GtkWidget *druid)
 	     if (gnome_druid_page_cancel (GNOME_DRUID (druid)->_priv->current))
 		     return;
 
-	     gtk_signal_emit (GTK_OBJECT (druid), druid_signals [CANCEL]);
+	     g_signal_emit (druid, druid_signals [CANCEL], 0);
      }
 }
 
@@ -717,7 +709,7 @@ static void
 gnome_druid_help_callback (GtkWidget  *button,
 			   GnomeDruid *druid)
 {
-	gtk_signal_emit (GTK_OBJECT (druid), druid_signals [HELP]);
+	g_signal_emit (druid, druid_signals [HELP], 0);
 }
 
 /* Public Functions */
@@ -732,7 +724,7 @@ gnome_druid_help_callback (GtkWidget  *button,
 GtkWidget *
 gnome_druid_new (void)
 {
-	return GTK_WIDGET (gtk_type_new (GNOME_TYPE_DRUID));
+	return g_object_new (GNOME_TYPE_DRUID, NULL);
 }
 
 /**
@@ -757,9 +749,9 @@ gnome_druid_new_with_window (const char *title,
 			     gboolean close_on_cancel,
 			     GtkWidget **window)
 {
-	GtkWidget *druid = gtk_type_new (GNOME_TYPE_DRUID);
+	GtkWidget *druid = g_object_new (GNOME_TYPE_DRUID, NULL);
 
-	/* make sure we always set window to NULL, even in 
+	/* make sure we always set window to NULL, even in
 	 * case of precondition errors */
 	if (window != NULL)
 		*window = NULL;
@@ -802,7 +794,7 @@ gnome_druid_construct_with_window (GnomeDruid *druid,
 {
 	GtkWidget *win;
 
-	/* make sure we always set window to NULL, even in 
+	/* make sure we always set window to NULL, even in
 	 * case of precondition errors */
 	if (window != NULL)
 		*window = NULL;
@@ -827,19 +819,17 @@ gnome_druid_construct_with_window (GnomeDruid *druid,
 	gtk_widget_show (win);
 
 	if (close_on_cancel) {
-		/* Use while_alive just for sanity */
-		gtk_signal_connect_object_while_alive
-			(GTK_OBJECT (druid), "cancel",
-			 GTK_SIGNAL_FUNC (gtk_widget_destroy),
-			 GTK_OBJECT (win));
+		g_signal_connect_object (druid, "cancel",
+					 G_CALLBACK (gtk_widget_destroy),
+					 win,
+					 G_CONNECT_SWAPPED);
 	}
 
 	/* When the druid gets destroyed so does the window */
-	/* Use while_alive just for sanity */
-	gtk_signal_connect_object_while_alive
-		(GTK_OBJECT (druid), "destroy",
-		 GTK_SIGNAL_FUNC (gtk_widget_destroy),
-		 GTK_OBJECT (win));
+	g_signal_connect_object (druid, "destroy",
+				 G_CALLBACK (gtk_widget_destroy),
+				 win,
+				 G_CONNECT_SWAPPED);
 
 	/* return the window */
 	if (window != NULL)
@@ -908,7 +898,7 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
  * @druid: A #GnomeDruid.
  # @show_finish: TRUE, if the "Help" button is to be shown.
  *
- * Sets the 
+ * Sets the
  **/
 void
 gnome_druid_set_show_help (GnomeDruid *druid,
@@ -932,7 +922,7 @@ gnome_druid_set_show_help (GnomeDruid *druid,
  * gnome_druid_prepend_page:
  * @druid: A Druid widget.
  * @page: The page to be inserted.
- * 
+ *
  * Description: This will prepend a GnomeDruidPage into the internal list of
  * pages that the @druid has.  Since #GnomeDruid is just a container, you will
  * need to also call #gtk_widget_show on the page, otherwise the page will not
@@ -954,7 +944,7 @@ gnome_druid_prepend_page (GnomeDruid *druid,
  * @druid: A Druid widget.
  * @back_page: The page prior to the page to be inserted.
  * @page: The page to insert.
- * 
+ *
  * Description: This will insert @page after @back_page into the list of
  * internal pages that the @druid has.  If @back_page is not present in the list
  * or %NULL, @page will be prepended to the list.  Since #GnomeDruid is just a
@@ -980,7 +970,7 @@ gnome_druid_insert_page (GnomeDruid *druid,
 		GList *new_el = g_list_alloc ();
 		new_el->next = list->next;
 		new_el->prev = list;
-		if (new_el->next) 
+		if (new_el->next)
 			new_el->next->prev = new_el;
 		new_el->prev->next = new_el;
 		new_el->data = (gpointer) page;
@@ -1002,11 +992,11 @@ gnome_druid_insert_page (GnomeDruid *druid,
 }
 
 /**
- * gnome_druid_append_page: 
+ * gnome_druid_append_page:
  * @druid: A Druid widget.
  * @page: The #GnomeDruidPage to be appended.
- * 
- * Description: This will append @page onto the end of the internal list.  
+ *
+ * Description: This will append @page onto the end of the internal list.
  * Since #GnomeDruid is just a container, you will need to also call
  * #gtk_widget_show on the page, otherwise the page will not be shown.
  **/
@@ -1025,13 +1015,13 @@ gnome_druid_append_page (GnomeDruid *druid,
 		gnome_druid_insert_page (druid, GNOME_DRUID_PAGE (list->data), page);
 	} else {
 		gnome_druid_insert_page (druid, NULL, page);
-	}	
+	}
 }
 /**
  * gnome_druid_set_page:
  * @druid: A Druid widget.
  * @page: The #GnomeDruidPage to be brought to the foreground.
- * 
+ *
  * Description: This will make @page the currently showing page in the druid.
  * @page must already be in the druid.
  **/

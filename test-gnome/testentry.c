@@ -14,8 +14,8 @@ main (gint argc, gchar **argv)
 			    NULL);
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
-			    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
+	g_signal_connect (window, "delete_event",
+			  G_CALLBACK (gtk_main_quit), NULL);
 
 	vbox = gtk_vbox_new (FALSE, 0);
 

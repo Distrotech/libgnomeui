@@ -48,7 +48,7 @@
 struct _GnomeDateEditPrivate {
 	GtkWidget *date_entry;
 	GtkWidget *date_button;
-	
+
 	GtkWidget *time_entry;
 	GtkWidget *time_popup;
 
@@ -60,7 +60,7 @@ struct _GnomeDateEditPrivate {
 
 	int       lower_hour;
 	int       upper_hour;
-	
+
 	int       flags;
 };
 
@@ -143,7 +143,7 @@ day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 	gtk_entry_set_text (GTK_ENTRY (gde->_priv->date_entry),
 			    str_utf8 ? str_utf8 : "");
 	g_free (str_utf8);
-	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
+	g_signal_emit (gde, date_edit_signals [DATE_CHANGED], 0);
 }
 
 static void
@@ -172,7 +172,7 @@ key_press_popup (GtkWidget *widget, GdkEventKey *event, gpointer data)
 		return FALSE;
 
 	gde = data;
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "key_press_event");
+	g_signal_stop_emission_by_name (widget, "key_press_event");
 	hide_popup (gde);
 
 	return TRUE;
@@ -230,7 +230,7 @@ position_popup (GnomeDateEdit *gde)
 	if (y < 0)
 		y = 0;
 
-	gtk_widget_set_uposition (gde->_priv->cal_popup, x, y);
+	gtk_window_move (GTK_WINDOW (gde->_priv->cal_popup), x, y);
 }
 
 static void
@@ -246,7 +246,7 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 	g_date_set_parse (date, str);
         /* GtkCalendar expects month to be in 0-11 range (inclusive) */
 	month = g_date_get_month (date) - 1;
-	
+
 	gtk_calendar_select_month (GTK_CALENDAR (gde->_priv->calendar),
 				   CLAMP (month, 0, 11),
 				   g_date_get_year (date));
@@ -266,7 +266,7 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 
 	mtm.tm_mon = CLAMP (mtm.tm_mon, 1, 12);
 	mtm.tm_mday = CLAMP (mtm.tm_mday, 1, 31);
-        
+
         mtm.tm_mon--;
 
 	/* Hope the user does not actually mean years early in the A.D. days...
@@ -280,7 +280,7 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 #endif
 
         position_popup (gde);
-       
+
 	gtk_widget_show (gde->_priv->cal_popup);
 	gtk_widget_grab_focus (gde->_priv->calendar);
 #if 0
@@ -303,7 +303,7 @@ static void
 set_time (GtkWidget *widget, hour_info_t *hit)
 {
 	gtk_entry_set_text (GTK_ENTRY (hit->gde->_priv->time_entry), hit->hour);
-	gtk_signal_emit (GTK_OBJECT (hit->gde), date_edit_signals [TIME_CHANGED]);
+	g_signal_emit (hit->gde, date_edit_signals [TIME_CHANGED], 0);
 }
 
 static void
@@ -331,7 +331,7 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 
 	time (&current_time);
 	mtm = localtime (&current_time);
-	
+
 	for (i = gde->_priv->lower_hour; i <= gde->_priv->upper_hour; i++){
 		GtkWidget *item, *submenu;
 		hour_info_t *hit;
@@ -359,13 +359,11 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 		hit = g_new (hour_info_t, 1);
 		hit->hour = g_strdup (buffer);
 		hit->gde  = gde;
-		gtk_signal_connect_full (GTK_OBJECT (item), "activate",
-					 GTK_SIGNAL_FUNC (set_time),
-					 NULL,
-					 hit,
-					 free_resources,
-					 FALSE /*object*/,
-					 FALSE /*after*/);
+		g_signal_connect_data (item, "activate",
+				       G_CALLBACK (set_time),
+				       hit,
+				       (GCallbackNotify) free_resources,
+				       0);
 #endif
 		gtk_widget_show (item);
 
@@ -395,14 +393,11 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 			hit = g_new (hour_info_t, 1);
 			hit->hour = g_strdup (buffer);
 			hit->gde  = gde;
-			gtk_signal_connect_full (GTK_OBJECT (mins), "activate",
-						 GTK_SIGNAL_FUNC (set_time),
-						 NULL,
-						 hit,
-						 free_resources,
-						 FALSE /*object*/,
-						 FALSE /*after*/);
-
+			g_signal_connect_data (mins, "activate",
+					       G_CALLBACK (set_time),
+					       hit,
+					       (GClosureNotify) free_resources,
+					       0);
 			gtk_widget_show (mins);
 		}
 	}
@@ -434,7 +429,7 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 							     0,
 							     (G_PARAM_READABLE |
 							      G_PARAM_WRITABLE)));
-	
+
 	/* FIXME: Not sure G_TYPE_FLAGS is right here, perhaps we
 	 * need a new type, Also think of a better name then "dateedit_flags" */
 	g_object_class_install_property (gobject_class,
@@ -478,23 +473,25 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 							     0,
 							     (G_PARAM_READABLE |
 							      G_PARAM_WRITABLE)));
-	
+
 	date_edit_signals [TIME_CHANGED] =
-		gtk_signal_new ("time_changed",
-				GTK_RUN_FIRST, GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDateEditClass,
-						   time_changed),
-				gtk_signal_default_marshaller,
-				GTK_TYPE_NONE, 0);
-	
+		g_signal_new ("time_changed",
+			      G_TYPE_FROM_CLASS (gobject_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeDateEditClass, time_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+
 	date_edit_signals [DATE_CHANGED] =
-		gtk_signal_new ("date_changed",
-				GTK_RUN_FIRST, GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeDateEditClass,
-						   date_changed),
-				gtk_signal_default_marshaller,
-				GTK_TYPE_NONE, 0);
-	
+		g_signal_new ("date_changed",
+			      G_TYPE_FROM_CLASS (gobject_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeDateEditClass, date_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+
 	class->date_changed = NULL;
 	class->time_changed = NULL;
 }
@@ -685,13 +682,13 @@ create_children (GnomeDateEdit *gde)
 	GtkWidget *arrow;
 
 	gde->_priv->date_entry  = gtk_entry_new ();
-	gtk_widget_set_usize (gde->_priv->date_entry, 90, 0);
+	gtk_widget_set_size_request (gde->_priv->date_entry, 90, 0);
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->date_entry, TRUE, TRUE, 0);
 	gtk_widget_show (gde->_priv->date_entry);
-	
+
 	gde->_priv->date_button = gtk_button_new ();
-	gtk_signal_connect (GTK_OBJECT (gde->_priv->date_button), "clicked",
-			    GTK_SIGNAL_FUNC (select_clicked), gde);
+	g_signal_connect (gde->_priv->date_button, "clicked",
+			  G_CALLBACK (select_clicked), gde);
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->date_button, FALSE, FALSE, 0);
 
 	hbox = gtk_hbox_new (FALSE, 3);
@@ -712,8 +709,9 @@ create_children (GnomeDateEdit *gde)
 
 	gtk_widget_show (gde->_priv->date_button);
 
-	gde->_priv->time_entry = gtk_entry_new_with_max_length (12);
-	gtk_widget_set_usize (gde->_priv->time_entry, 88, 0);
+	gde->_priv->time_entry = gtk_entry_new ();
+	gtk_entry_set_max_length (GTK_ENTRY (gde->_priv->time_entry), 12);
+	gtk_widget_set_size_request (gde->_priv->time_entry, 88, 0);
 	gtk_box_pack_start (GTK_BOX (gde), gde->_priv->time_entry, TRUE, TRUE, 0);
 
 	gde->_priv->time_popup = gtk_option_menu_new ();
@@ -723,8 +721,8 @@ create_children (GnomeDateEdit *gde)
 	 * realized, so that it uses the values that the user might supply in a
 	 * future call to gnome_date_edit_set_popup_range
 	 */
-	gtk_signal_connect (GTK_OBJECT (gde), "realize",
-			    GTK_SIGNAL_FUNC (fill_time_popup), gde);
+	g_signal_connect (gde, "realize",
+			  G_CALLBACK (fill_time_popup), gde);
 
 	if (gde->_priv->flags & GNOME_DATE_EDIT_SHOW_TIME) {
 		gtk_widget_show (gde->_priv->time_entry);
@@ -734,16 +732,13 @@ create_children (GnomeDateEdit *gde)
 	gde->_priv->cal_popup = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_widget_set_events (gde->_priv->cal_popup,
 			       gtk_widget_get_events (gde->_priv->cal_popup) | GDK_KEY_PRESS_MASK);
-	gtk_signal_connect (GTK_OBJECT (gde->_priv->cal_popup), "delete_event",
-			    (GtkSignalFunc) delete_popup,
-			    gde);
-	gtk_signal_connect (GTK_OBJECT (gde->_priv->cal_popup), "key_press_event",
-			    (GtkSignalFunc) key_press_popup,
-			    gde);
-	gtk_signal_connect (GTK_OBJECT (gde->_priv->cal_popup), "button_press_event",
-			    (GtkSignalFunc) button_press_popup,
-			    gde);
-	gtk_window_set_policy (GTK_WINDOW (gde->_priv->cal_popup), FALSE, FALSE, TRUE);
+	g_signal_connect (gde->_priv->cal_popup, "delete_event",
+			  G_CALLBACK (delete_popup), gde);
+	g_signal_connect (gde->_priv->cal_popup, "key_press_event",
+			  G_CALLBACK (key_press_popup), gde);
+	g_signal_connect (gde->_priv->cal_popup, "button_press_event",
+			  G_CALLBACK (button_press_popup), gde);
+	gtk_window_set_resizable (GTK_WINDOW (gde->_priv->cal_popup), FALSE);
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
@@ -756,10 +751,10 @@ create_children (GnomeDateEdit *gde)
 				       | GTK_CALENDAR_SHOW_HEADING
 				       | ((gde->_priv->flags & GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY)
 					  ? GTK_CALENDAR_WEEK_START_MONDAY : 0)));
-	gtk_signal_connect (GTK_OBJECT (gde->_priv->calendar), "day_selected",
-			    GTK_SIGNAL_FUNC (day_selected), gde);
-	gtk_signal_connect (GTK_OBJECT (gde->_priv->calendar), "day_selected_double_click",
-			    GTK_SIGNAL_FUNC (day_selected_double_click), gde);
+	g_signal_connect (gde->_priv->calendar, "day_selected",
+			  G_CALLBACK (day_selected), gde);
+	g_signal_connect (gde->_priv->calendar, "day_selected_double_click",
+			  G_CALLBACK (day_selected_double_click), gde);
 	gtk_container_add (GTK_CONTAINER (frame), gde->_priv->calendar);
         gtk_widget_show (gde->_priv->calendar);
 }
@@ -773,7 +768,7 @@ create_children (GnomeDateEdit *gde)
  * Description: Creates a new #GnomeDateEdit widget which can be used
  * to provide an easy to use way for entering dates and times.
  * If @the_time is 0 then current time is used.
- * 
+ *
  * Returns: a new #GnomeDateEdit widget.
  */
 GtkWidget *
@@ -788,10 +783,10 @@ gnome_date_edit_new (time_t the_time, gboolean show_time, gboolean use_24_format
  * gnome_date_edit_new_flags:
  * @the_time: The initial time for the date editor.
  * @flags: A bitmask of GnomeDateEditFlags values.
- * 
+ *
  * Description:  Creates a new #GnomeDateEdit widget with the
  * specified flags. If @the_time is 0 then current time is used.
- * 
+ *
  * Returns: the newly-created date editor widget.
  **/
 GtkWidget *
@@ -799,7 +794,7 @@ gnome_date_edit_new_flags (time_t the_time, GnomeDateEditFlags flags)
 {
 	GnomeDateEdit *gde;
 
-	gde = gtk_type_new (GNOME_TYPE_DATE_EDIT);
+	gde = g_object_new (GNOME_TYPE_DATE_EDIT, NULL);
 
 	gnome_date_edit_construct(gde, the_time, flags);
 
@@ -811,7 +806,7 @@ gnome_date_edit_new_flags (time_t the_time, GnomeDateEditFlags flags)
  * @gde: The #GnomeDateEdit object to construct
  * @the_time: The initial time for the date editor.
  * @flags: A bitmask of GnomeDateEditFlags values.
- * 
+ *
  * Description:  For language bindings and subclassing only
  **/
 void
@@ -837,7 +832,7 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 	/* Assert, because we're just hosed if it's NULL */
 	g_assert(gde != NULL);
 	g_assert(GNOME_IS_DATE_EDIT(gde));
-	
+
 	str = gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry));
 
 	date = g_date_new ();
@@ -943,20 +938,20 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
  * gnome_date_edit_set_flags:
  * @gde: The date editor widget whose flags should be changed.
  * @flags: The new bitmask of GnomeDateEditFlags values.
- * 
+ *
  * Changes the display flags on an existing date editor widget.
  **/
 void
 gnome_date_edit_set_flags (GnomeDateEdit *gde, GnomeDateEditFlags flags)
 {
         GnomeDateEditFlags old_flags;
-        
+
 	g_return_if_fail (gde != NULL);
 	g_return_if_fail (GNOME_IS_DATE_EDIT (gde));
 
         old_flags = gde->_priv->flags;
         gde->_priv->flags = flags;
-        
+
 	if ((flags & GNOME_DATE_EDIT_SHOW_TIME) != (old_flags & GNOME_DATE_EDIT_SHOW_TIME)) {
 		if (flags & GNOME_DATE_EDIT_SHOW_TIME) {
 			gtk_widget_show (gde->_priv->cal_label);
@@ -988,9 +983,9 @@ gnome_date_edit_set_flags (GnomeDateEdit *gde, GnomeDateEditFlags flags)
 /**
  * gnome_date_edit_get_flags:
  * @gde: The date editor whose flags should be queried.
- * 
+ *
  * Queries the display flags on a date editor widget.
- * 
+ *
  * Return value: The current display flags for the specified date editor widget.
  **/
 int
@@ -1005,10 +1000,10 @@ gnome_date_edit_get_flags (GnomeDateEdit *gde)
 /**
  * gnome_date_edit_get_initial_time:
  * @gde: The date editor whose initial time should be queried
- * 
+ *
  * Description:  Queries the initial time that was set using the
  * #gnome_date_edit_set_time or during creation
- * 
+ *
  * Returns:  The initial time in seconds (standard time_t format)
  **/
 time_t
