@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-02-26 22:53+0900\n"
+"POT-Creation-Date: 2004-06-03 00:20+0900\n"
+"PO-Revision-Date: 2004-06-03 00:19+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -142,6 +142,7 @@ msgstr "%s について"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ファイル(_F)"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "ゲーム(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
@@ -389,11 +391,11 @@ msgstr "アプリケーションの設定を変更します"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "情報(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "このアプリケーションの情報を表示します"
 
@@ -420,7 +422,7 @@ msgstr "新規にウインドウを生成します"
 msgid "_Close This Window"
 msgstr "ウインドウを閉じる(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "このウインドウを閉じます"
 
@@ -517,7 +519,7 @@ msgid "Text Only"
 msgstr "ラベルのみ"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "デスクトップのデフォルト (%s) を使用する"
 
@@ -620,9 +622,9 @@ msgid "Authentication Required"
 msgstr "認証を必要としています"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "%s にアクセスするためにログインして下さい\n"
+msgstr "%s (ドメイン %s) にアクセスするためにログインして下さい\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -775,7 +777,7 @@ msgstr "タイトルの前景色"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr "GdkColor 表現のタイトルの前景色"
+msgstr "GdkColor によるタイトルの前景色"
 
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
@@ -796,7 +798,7 @@ msgstr "背景の色"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr "GdkColor 表現の背景の色"
+msgstr "GdkColor による背景色"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
@@ -808,24 +810,45 @@ msgstr "セットされている背景色"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "コンテンツの背景色"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "コンテンツの背景色"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "GdkColor によるコンテンツの背景色"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "コンテンツの背景色の設定"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "セットされているコンテンツの背景色"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "ロゴの背景色"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "ロゴの背景色"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
-msgstr "GdkColor 表現のロゴの背景色"
+msgstr "GdkColor によるロゴの背景色"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "ロゴの背景色の設定"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
-msgstr "セットされたロゴの背景色"
+msgstr "セットされているロゴの背景色"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
@@ -1401,8 +1424,6 @@ msgstr "開発者へ通知する(_I)"
 msgid "_Debug"
 msgstr "デバッグする(_D)"
 
-#~ msgid " domain %s"
-#~ msgstr " ドメイン %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "テストの終了"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "テストの終了"
