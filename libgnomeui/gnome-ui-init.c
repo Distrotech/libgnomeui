@@ -314,6 +314,9 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         priv->constructed = TRUE;
 
         _gnome_stock_icons_init ();
+
+	bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 }
 
 static void

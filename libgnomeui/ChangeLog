@@ -1,3 +1,11 @@
+2001-11-28  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* libgnomeui.schemas: entry for show-icons should be of type bool.
+	
+	* Makefile.am: fix GNOMEUILOCALEDIR to point to correct location.
+
+	* gnome-app-init.c: find translations and get them in UTF-8.
+
 Tue Nov 27 17:41:30 2001  Owen Taylor  <otaylor@redhat.com>
 
 	* Makefile.am: Install the schema file.

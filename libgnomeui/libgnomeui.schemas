@@ -36,8 +36,8 @@ To change the gconftool target use the - -config-source=blah option to gconftool
       <key>/schemas/desktop/gnome/menus/show-icons</key>
       <applyto>/desktop/gnome/menus/show-icons</applyto>
       <owner>libgnomeui</owner>
-      <type>string</type>
-      <default>true</default>
+      <type>bool</type>
+      <default value="true"></default>
       <locale name="C">
         <short>Whether to display icons in menus</short>
 
