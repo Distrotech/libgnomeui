@@ -1,3 +1,10 @@
+2002-02-16  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* libgnomeui/libgnomeui-2.0.pc.in: replace
+	@GNOME_INTERFACE_VERSION@ (nowhere defined) with 2.
+	* configure.in: remove GNOME_COMMON_INIT, GNOME_PLATFORM_GNOME_2
+	macros, fix warning macro to match latest gnome-common.
+
 2002-02-13  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Up to 1.111.1
