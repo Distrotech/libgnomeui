@@ -1,3 +1,9 @@
+2000-01-10  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-about.[ch] : Complete rewrite using the GnomeCanvas, a new
+	constructor (gnome_about_new_url) allows the easy inclusion of
+	URLs for both the project and individual authors.
+
 2000-01-07  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-pixmap.c: use the new gdk-pixbuf scaling functions.
