@@ -49,7 +49,6 @@
 #include <libgnomeui/gnome-icon-item.h>
 #include <libgnomeui/gnome-canvas-init.h>
 #include <libgnomeui/gnome-init.h>
-#include <libgnomeui/gnome-less.h>
 #include <libgnomeui/gnome-macros.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-types.h>

@@ -1,3 +1,7 @@
+2001-07-18  Martin Baulig  <baulig@suse.de>
+
+	* gnome-less.[ch]: Removed.
+
 2001-07-16  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am: Added explicit dependency
