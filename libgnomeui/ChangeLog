@@ -1,3 +1,8 @@
+Mon Jan 17 01:38:21 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: don't reduce stack on unary functions, a patch
+	  from "W. Adam Foran" <waforan@pathcom.com>
+
 2000-01-16  Federico Mena Quintero  <federico@helixcode.com>
 
 	* gnome-canvas.c (gnome_canvas_key): Do not check for the window
