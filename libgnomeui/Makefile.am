@@ -26,14 +26,13 @@ if HAVE_GTKCAL
 gtkcal_sources =
 gtkcal_headers =
 else
-gtkcal_sources +=			\
-	gtkcalendar.c
-
-gtkcal_headers =			\
-	gtkcalendar.h
+gtkcal_sources = gtkcalendar.c
+gtkcal_headers = gtkcalendar.h
 endif
 
 EXTRA_HEADERS = 
+
+EXTRA_libgnomeui_la_SOURCES = gtkcalendar.h gtkcalendar.c
 
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\

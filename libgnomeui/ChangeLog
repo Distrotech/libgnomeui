@@ -1,3 +1,11 @@
+1998-09-27  Raja R Harinath  <harinath@cs.umn.edu>
+
+	`automake' 1.3b and older have a bug with handling continuation 
+	lines inside conditionals.
+	* Makefile.am (gtkcal_headers): Don't use continuation lines.
+	(gtkcal_sources): Likewise.
+	(EXTRA_libgnomeui_la_SOURCES): List gtkcalendar.[ch].
+	
 1998-09-28  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-messagebox.c (gnome_message_box_new): Fixed some memory
