@@ -1,16 +1,16 @@
 # Danish translation of libgnomeui.
-# Copyright (C) 1998, 99, 2000, 01, 02 Free Software Foundation, Inc.
+# Copyright (C) 1998, 99, 2000, 01, 02, 03 Free Software Foundation, Inc.
 # Keld Simonsen <keld@dkuug.dk>, 2001.
 # Kjartan Maraas <kmaraas@gnome.org>, 1998, 1999, 2000
-# Ole Laursen <olau@hardworking.dk>, 2002.
+# Ole Laursen <olau@hardworking.dk>, 2002, 03.
 #
 # Se po-filen til Gtk+ for nogle konventioner.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
-"PO-Revision-Date: 2002-12-07 17:55+0100\n"
+"POT-Creation-Date: 2003-03-16 15:37+0100\n"
+"PO-Revision-Date: 2003-03-16 15:37+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -172,7 +172,7 @@ msgstr "Deaktivér forbindelse til sessionshåndtering"
 msgid "Session management"
 msgstr "Sessionshåndtering"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Annullér log ud"
 
@@ -355,7 +355,7 @@ msgstr "Vis fuldfør"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Vis 'Fuldfør'-knappen i stedet for 'Næste'-knappen"
+msgstr "Vis 'Fuldfør'-knappen i stedet for 'Fremad'-knappen"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
@@ -525,6 +525,7 @@ msgstr "Tip til element 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -582,6 +583,7 @@ msgid "_Game"
 msgstr "_Spil"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjælp"
 
@@ -772,11 +774,11 @@ msgstr "Konfigurér programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om dette program"
 
@@ -803,7 +805,7 @@ msgstr "Opret et nyt vindue"
 msgid "_Close This Window"
 msgstr "L_uk dette vindue"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Luk det aktuelle vindue"
 
@@ -1207,7 +1209,7 @@ msgstr ""
 "dens parametre"
 
 # med et linjeskift her kommer det til at passe fint med den forhåndenværende plads
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr ""
 "Intet\n"
@@ -1221,39 +1223,39 @@ msgstr "Kan ikke finde en hbox, bruger en almindelig filvælger"
 msgid "Preview"
 msgstr "Eksempel"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Ikonvælger"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Dette vindue lader dig vælge et ikon"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Ikonvælger"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Vælg det ikon du ønsker"
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Ikonvælger"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Denne knap åbner et vindue der lader dig vælge et ikon"
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Gennemse"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Ikonsti"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1339,8 +1341,9 @@ msgstr "%a %d %b %Y %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Afslut testprogrammet"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Afslut testprogrammet"
 
 #~ msgid "Both text and icons"
 #~ msgstr "Både tekst og ikoner"
