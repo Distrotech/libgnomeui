@@ -2549,6 +2549,9 @@ global_menu_item_activated (GtkWidget *item)
 
 }
 
+/* Welcome to Hack City, population: gnome-app-helper */
+#define _(x) dgettext (GETTEXT_PACKAGE, x)
+
 static void
 create_and_popup_toolbar_menu (GdkEventButton *event)
 {
@@ -2628,7 +2631,7 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 		g_assert_not_reached ();
 	}
 
-	global = g_strdup_printf (_("Use desktop default (%s)"),
+	global = g_strdup_printf (_("Use Desktop Default (%s)"),
 				  str);
 	global_item = gtk_radio_menu_item_new_with_label (group, global);
 	g_signal_connect (global_item, "activate",
@@ -2678,6 +2681,9 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, event->button, event->time);
 
 }
+
+/* Now leaving Hack City */
+#define _(x) gettext (x)
 
 static int
 button_press (GtkWidget *dock, GdkEventButton *event, gpointer user_data)

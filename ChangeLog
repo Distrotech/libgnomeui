@@ -1,5 +1,11 @@
 2004-05-02  Anders Carlsson  <andersca@gnome.org>
 
+	* libgnomeui/gnome-app-helper.c: (create_and_popup_toolbar_menu):
+	Add the worlds worst hack to make the toolbar popup menus translated.
+	(#138730, Takao Fujiwara)
+	
+2004-05-02  Anders Carlsson  <andersca@gnome.org>
+
 	* libgnomeui/gnome-icon-list.c: (gnome_icon_list_select_all):
 	* libgnomeui/gnome-icon-list.h:
 	Add gnome_icon_list_select_all.
