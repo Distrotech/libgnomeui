@@ -202,7 +202,8 @@ EXTRA_DIST =					\
 	AUTHORS					\
 	gnome-boxed.defs			\
 	gnometype_inits.c			\
-	libgnomeui-2.0.pc.in
+	libgnomeui-2.0.pc.in			\
+	$(schema_DATA)
 
 libgnomeui_2_la_LDFLAGS = \
 	-version-info $(LIB_VERSION)		\
