@@ -1323,8 +1323,11 @@ gnome_calculator_init (GnomeCalculator *gc)
 			   GTK_SIGNAL_FUNC(invert_toggle), gc);
 	gtk_object_set_user_data(GTK_OBJECT(gc->_priv->invert_button), gc);
 	gtk_widget_show(gc->_priv->invert_button);
-	gtk_table_attach_defaults(GTK_TABLE(table), gc->_priv->invert_button,
-				  0, 1, 1, 2);
+	gtk_table_attach (GTK_TABLE(table), gc->_priv->invert_button,
+			  0, 1, 1, 2,
+			  GTK_FILL | GTK_EXPAND |
+			  GTK_SHRINK,
+			  0, 2, 2);
 }
 
 

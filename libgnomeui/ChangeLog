@@ -1,3 +1,8 @@
+Sun Dec 17 14:28:05 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: attach INV button in the same way as other
+	  buttons
+
 2000-12-15  Martin Baulig  <baulig@suse.de>
 
 	* gnome-canvas.c (gnome_canvas_item_class_init): Added "parent"
