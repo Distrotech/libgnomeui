@@ -266,7 +266,7 @@ gnome_icon_lookup (GtkIconTheme               *icon_theme,
     {
       if (gnome_icon_theme_get_allow_svg (GNOME_ICON_THEME (icon_theme)))
 	flags |= GNOME_ICON_LOOKUP_FLAGS_ALLOW_SVG_AS_THEMSELVES;
-      icon_theme = gnome_icon_theme_get_gtk_icon_theme (GNOME_ICON_THEME (icon_theme));
+      icon_theme = _gnome_icon_theme_get_gtk_icon_theme (GNOME_ICON_THEME (icon_theme));
     }
 
   g_return_val_if_fail (GTK_IS_ICON_THEME (icon_theme), NULL);

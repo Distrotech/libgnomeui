@@ -1,5 +1,11 @@
 2003-12-18  Alexander Larsson  <alexl@redhat.com>
 
+	* libgnomeui/gnome-icon-lookup.c: 
+	* libgnomeui/gnome-icon-theme.c:
+	* libgnomeui/gnome-icon-theme.h:
+
+2003-12-18  Alexander Larsson  <alexl@redhat.com>
+
         * doc/reference/tmpl/gnome-icon-theme.sgml:
 	* doc/reference/tmpl/gnome-icon-lookup.sgml:
 	Update

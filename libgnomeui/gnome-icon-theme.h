@@ -61,9 +61,6 @@ typedef struct
 
 GType            gnome_icon_theme_get_type              (void) G_GNUC_CONST;
 
-GnomeIconTheme *gnome_icon_theme_new_from_gtk          (GtkIconTheme         *gtk_theme);
-GtkIconTheme   *gnome_icon_theme_get_gtk_icon_theme    (GnomeIconTheme       *icon_theme);
-
 GnomeIconTheme *gnome_icon_theme_new                   (void);
 void            gnome_icon_theme_set_search_path       (GnomeIconTheme       *theme,
 							const char           *path[],
@@ -95,6 +92,7 @@ gboolean        gnome_icon_theme_rescan_if_needed      (GnomeIconTheme       *th
 GnomeIconData * gnome_icon_data_dup                    (const GnomeIconData  *icon_data);
 void            gnome_icon_data_free                   (GnomeIconData        *icon_data);
 
+GtkIconTheme   *_gnome_icon_theme_get_gtk_icon_theme    (GnomeIconTheme       *icon_theme);
 
 #endif /* GNOME_DISABLE_DEPRECATED */
 

@@ -80,17 +80,6 @@ gnome_icon_theme_new (void)
   return g_object_new (GNOME_TYPE_ICON_THEME, NULL);
 }
 
-GnomeIconTheme *
-gnome_icon_theme_new_from_gtk (GtkIconTheme *gtk_theme)
-{
-  GnomeIconTheme *theme;
-  
-  theme = g_object_new (GNOME_TYPE_ICON_THEME, NULL);
-  set_gtk_theme (theme, gtk_theme);
-  
-  return theme;
-}
-
 static void
 gtk_theme_changed_callback (GtkIconTheme *gtk_theme,
 			    gpointer user_data)
@@ -150,7 +139,7 @@ get_gtk_theme (GnomeIconTheme *icon_theme)
 }
 
 GtkIconTheme  *
-gnome_icon_theme_get_gtk_icon_theme (GnomeIconTheme *icon_theme)
+_gnome_icon_theme_get_gtk_icon_theme (GnomeIconTheme *icon_theme)
 {
   return get_gtk_theme (icon_theme);
 }
