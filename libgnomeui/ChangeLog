@@ -1,3 +1,9 @@
+1999-04-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-item.c (gnome_icon_text_item_stop_editing): Make sure
+	iti_stop_editing is never called if we are not editing.  Fixes gmc
+	bug #1065
+
 1999-04-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-init.c (gnome_add_gtk_arg_callback): Use the macro correctly.

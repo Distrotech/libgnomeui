@@ -221,7 +221,8 @@ iti_edition_accept (Iti *iti)
 		iti->is_text_allocated = 1;
 	}
 
-	iti_stop_editing (iti);
+	if (iti->editing)
+		iti_stop_editing (iti);
 	layout_text (iti);
 	iti_queue_redraw (iti);
 }
@@ -354,7 +355,7 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y, GtkJustification 
 
 	dx = dy = 0.0;
 	gnome_canvas_item_i2w (GNOME_CANVAS_ITEM (iti), &dx, &dy);
-	
+
 	ti = iti->ti;
 	len = 0;
         y += ti->font->ascent;
@@ -982,6 +983,9 @@ gnome_icon_text_item_stop_editing (GnomeIconTextItem *iti,
 	g_return_if_fail (iti != NULL);
 	g_return_if_fail (IS_ITI (iti));
 
+	if (!iti->editing)
+		return;
+	
 	if (accept)
 		iti_edition_accept (iti);
 	else
