@@ -1,5 +1,7 @@
 2000-07-31  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-selector.c (gnome_icon_selector_add_defaults): New.
+
 	* gnome-icon-list.h (GnomeIconList): Made the `selection' and
 	`icons' fields private and added the necessary accessor functions.
 	(gnome_icon_list_get_num_icons): New function.

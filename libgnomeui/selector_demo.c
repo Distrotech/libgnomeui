@@ -41,7 +41,7 @@ file_list_cb (void)
 	list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector), TRUE);
 
 	for (c = list; c; c = c->next) {
-		g_print ("FILE: `%s'\n", c->data);
+		g_print ("FILE: `%s'\n", (gchar *) c->data);
 	}
 }
 
@@ -53,7 +53,7 @@ selection_cb (void)
 	list = gnome_selector_get_selection (GNOME_SELECTOR (iselector));
 
 	for (c = list; c; c = c->next) {
-		g_print ("SELECTION: `%s'\n", c->data);
+		g_print ("SELECTION: `%s'\n", (gchar *) c->data);
 	}
 }
 
@@ -148,7 +148,6 @@ main (int argc, char **argv)
     GtkWidget *frame1, *frame2;
     GtkWidget *fselector;
     GtkWidget *selector;
-    gchar *pixmap_dir;
 
     gnome_program_init ("selector_demo", "1.0", argc, argv,
 			GNOMEUI_INIT, NULL);
@@ -179,14 +178,10 @@ main (int argc, char **argv)
 
     iselector = gnome_icon_selector_new ("test2", NULL);
 
-    pixmap_dir = gnome_unconditional_datadir_file ("pixmaps");
-  
-    gnome_selector_append_directory (GNOME_SELECTOR (iselector), pixmap_dir);
+    gnome_icon_selector_add_defaults (iselector);
 
     gnome_selector_set_selection_mode (GNOME_SELECTOR (iselector),
 				       GTK_SELECTION_MULTIPLE);
-
-    g_free(pixmap_dir);
 
     gtk_container_add (GTK_CONTAINER (frame2), iselector);
 
