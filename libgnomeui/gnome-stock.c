@@ -753,7 +753,7 @@ gnome_stock_button(char *type)
         hbox = gtk_hbox_new(FALSE, 0);
         gtk_widget_show(hbox);
         gtk_container_add(GTK_CONTAINER(button), hbox);
-        label = gtk_label_new(gettext(&type[7]));
+        label = gtk_label_new(dgettext(PACKAGE, &type[7]));
         gtk_widget_show(label);
         gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
 

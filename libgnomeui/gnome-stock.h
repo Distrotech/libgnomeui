@@ -261,6 +261,14 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
 #define GNOME_STOCK_BUTTON_APPLY  "Button_Apply"
 #define GNOME_STOCK_BUTTON_HELP   "Button_Help"
 
+/* dummy gettext helpers */
+#ifdef NEVER
+char *gettext_dummy_string[] = {
+	N_("Ok"), N_("Cancel"), N_("Yes"), N_("No"),
+	N_("Close"), N_("Apply")
+};
+#endif
+
 /* returns a default button widget for dialogs */
 GtkWidget             *gnome_stock_button          (char *type);
 
