@@ -98,22 +98,25 @@ libgnomeui_module_info_get (void)
 	};
 
 	if (module_info.requirements == NULL) {
-		static GnomeModuleRequirement req[5];
+		static GnomeModuleRequirement req[6];
 
 		req[0].required_version = "1.3.7";
 		req[0].module_info = gnome_gtk_module_info_get ();
 
 		req[1].required_version = "1.102.0";
-		req[1].module_info = libgnome_module_info_get ();
+		req[1].module_info = LIBGNOME_MODULE;
 
-		req[2].required_version = "1.1.1";
-		req[2].module_info = gnome_gconf_ui_module_info_get ();
+		req[2].required_version = "1.101.2";
+		req[2].module_info = GNOME_BONOBO_MODULE;
 
-		req[3].required_version = VERSION;
-		req[3].module_info = gnome_client_module_info_get ();
+		req[3].required_version = "1.1.1";
+		req[3].module_info = gnome_gconf_ui_module_info_get ();
 
-		req[4].required_version = NULL;
-		req[4].module_info = NULL;
+		req[4].required_version = VERSION;
+		req[4].module_info = gnome_client_module_info_get ();
+
+		req[5].required_version = NULL;
+		req[5].module_info = NULL;
 
 		module_info.requirements = req;
 	}

@@ -453,6 +453,9 @@ setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
         gtk_object_set_data(GTK_OBJECT(mi), gnome_app_helper_pixmap_info,
                             (gpointer)pixmap_info);
 
+
+	/* make sure that things are all ready for us */
+	gnome_gconf_lazy_init ();
         
         conf = gconf_client_get_default();
 
@@ -2540,6 +2543,9 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                          BonoboDockItem *dock_item)
 {
         GConfClient *conf;
+
+	/* make sure that things are all ready for us */
+	gnome_gconf_lazy_init ();
 
         conf = gconf_client_get_default();
 

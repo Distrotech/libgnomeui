@@ -1,3 +1,9 @@
+Mon Sep 03 03:34:36 2001  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.c: do gconf lazy init stuff
+
+	* gnome-ui-init.c: init bonobo
+
 Mon Sep 03 02:17:59 2001  George Lebl <jirka@5z.com>
 
 	* gnome-client.[ch]: Add the sm-connect property, deprecate disable
