@@ -1,3 +1,14 @@
+Sun Sep 24 04:24:34 2000  George Lebl <jirka@5z.com>
+
+	* gnome-canvas-pixmap.c: fix glaring compile errors/warnings
+
+	* gnome-recently-used.c: Use GParam.  Separate the construction
+	  into neccessary and lazy part.  The lazy part is the actual
+	  loading of data.  This way we can do the parameter setting
+	  in a minorly saner way, thus fixing problems with
+	  improperly made objects, AND the ability to change app_specific
+	  later (or twice) without leaks (though that's not really useful).
+
 2000-09-24  Iain Holmes  <iain@helixcode.com>
 
 	* gnome-canvas-pixbuf.c: Add an ANCHOR argument, like GnomeCanvasImage

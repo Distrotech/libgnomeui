@@ -556,7 +556,7 @@ compute_viewport_affine (GnomeCanvasPixbuf *gcp, double *viewport_affine, double
 	} else
 		ti_len = 1.0;
 
-	switch (priv->anchow) {
+	switch (priv->anchor) {
 	case GTK_ANCHOR_NW:
 	case GTK_ANCHOR_W:
 	case GTK_ANCHOR_SW:
@@ -593,7 +593,7 @@ compute_viewport_affine (GnomeCanvasPixbuf *gcp, double *viewport_affine, double
 		
 	case GTK_ANCHOR_W:
 	case GTK_ANCHOR_CENTER:
-	case GTK_ANCHOR_S:
+	case GTK_ANCHOR_E:
 		tj_len *= y - (h / 2);
 		break;
 
