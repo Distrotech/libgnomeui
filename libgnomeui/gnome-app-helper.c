@@ -1341,22 +1341,53 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 	return pos;
 }
 
+typedef struct
+{
+	GtkCallbackMarshal relay_func;
+	GtkDestroyNotify destroy_func;
+	gpointer user_data;
+} SavedData;
+
+static void
+ui_relay_callback (GtkObject *object,
+		   SavedData *saved_data)
+{
+	saved_data->relay_func (object, saved_data->user_data, 0, NULL);
+}
+
+static void
+ui_destroy_callback (SavedData *saved_data)
+{
+	if (saved_data->user_data)
+		saved_data->destroy_func (saved_data->user_data);
+	g_free (saved_data);
+}
+
 /* Performs signal connection as appropriate for interpreters or native bindings */
 static void
-do_ui_signal_connect (GnomeUIInfo *uiinfo, const char *signal_name, 
-		GnomeUIBuilderData *uibdata)
+do_ui_signal_connect (GnomeUIInfo        *uiinfo,
+		      const char         *signal_name, 
+		      GnomeUIBuilderData *uibdata)
 {
-	if (uibdata->is_interp)
+	if (uibdata->is_interp) {
+		SavedData *saved_data = g_new (SavedData, 1);
+		saved_data->relay_func = uibdata->relay_func;
+		saved_data->destroy_func = uibdata->destroy_func;
+		saved_data->user_data = uibdata->data ? uibdata->data : uiinfo->user_data;
+
 		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), 
-				signal_name, NULL, uibdata->relay_func, 
-				uibdata->data ? 
-				uibdata->data : uiinfo->user_data,
-				uibdata->destroy_func, FALSE, FALSE);
+					 signal_name,
+					 GTK_SIGNAL_FUNC (ui_relay_callback),
+					 NULL,
+					 saved_data,
+					 (GtkDestroyNotify) ui_destroy_callback,
+					 FALSE, FALSE);
 	
-	else if (uiinfo->moreinfo)
+	} else if (uiinfo->moreinfo)
 		gtk_signal_connect (GTK_OBJECT (uiinfo->widget), 
-				signal_name, uiinfo->moreinfo, uibdata->data ? 
-				uibdata->data : uiinfo->user_data);
+				    signal_name,
+				    uiinfo->moreinfo,
+				    uibdata->data ? uibdata->data : uiinfo->user_data);
 }
 
 

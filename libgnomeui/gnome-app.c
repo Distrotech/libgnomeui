@@ -216,7 +216,8 @@ gnome_app_instance_init (GnomeApp *app)
 			    GTK_SIGNAL_FUNC (layout_changed),
 			    (gpointer) app);
 
-	app->layout = bonobo_dock_layout_new ();
+	app->layout = g_object_ref (bonobo_dock_layout_new ());
+	gtk_object_sink (GTK_OBJECT (app->layout));
 
 	app->enable_layout_config = TRUE;
 

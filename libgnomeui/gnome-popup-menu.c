@@ -31,28 +31,6 @@
 static GtkWidget* global_menushell_hack = NULL;
 #define TOPLEVEL_MENUSHELL_KEY "gnome-popup-menu:toplevel_menushell_key"
 
-/* This is our custom signal connection function for popup menu items -- see below for the
- * marshaller information.  We pass the original callback function as the data pointer for the
- * marshaller (uiinfo->moreinfo).
- */
-static void
-popup_connect_func (GnomeUIInfo *uiinfo, const char *signal_name, GnomeUIBuilderData *uibdata)
-{
-	g_assert (uibdata->is_interp);
-
-	gtk_object_set_data (GTK_OBJECT (uiinfo->widget), 
-			     TOPLEVEL_MENUSHELL_KEY, 
-			     global_menushell_hack);
-
-	gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
-				 NULL,
-				 uibdata->relay_func,
-				 uiinfo->moreinfo,
-				 uibdata->destroy_func,
-				 FALSE,
-				 FALSE);
-}
-
 static GtkWidget* 
 get_toplevel(GtkWidget* menuitem)
 {
@@ -86,6 +64,25 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
 	func = (ActivateFunc) data;
 	if (func)
 		(* func) (object, user_data, for_widget);
+}
+
+/* This is our custom signal connection function for popup menu items -- see below for the
+ * marshaller information.  We pass the original callback function as the data pointer for the
+ * marshaller (uiinfo->moreinfo).
+ */
+static void
+popup_connect_func (GnomeUIInfo *uiinfo, const char *signal_name, GnomeUIBuilderData *uibdata)
+{
+	g_assert (uibdata->is_interp);
+
+	gtk_object_set_data (GTK_OBJECT (uiinfo->widget), 
+			     TOPLEVEL_MENUSHELL_KEY, 
+			     global_menushell_hack);
+
+	gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
+			    signal_name,
+			    GTK_SIGNAL_FUNC (popup_marshal_func),
+			    uiinfo->moreinfo);
 }
 
 /**
@@ -485,7 +482,7 @@ gnome_popup_menu_append (GtkWidget *popup, GnomeUIInfo *uiinfo)
 	uibdata.connect_func = popup_connect_func;
 	uibdata.data = NULL;
 	uibdata.is_interp = TRUE;
-	uibdata.relay_func = popup_marshal_func;
+	uibdata.relay_func = NULL;
 	uibdata.destroy_func = NULL;
 
 	for (length = 0; uiinfo[length].type != GNOME_APP_UI_ENDOFINFO; length++)

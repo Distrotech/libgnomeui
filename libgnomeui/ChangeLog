@@ -1,3 +1,23 @@
+Tue Nov 27 17:41:30 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* Makefile.am: Install the schema file.
+
+	* libgnomeui.schemas: Add a scheme entry
+	for show-icons, hopefully resulting with this defaulting
+	to on.
+
+	* gnome-app.c (gnome_app_instance_init): Ref/sink 
+	app->layout.
+
+	* gnome-app-helper.c (do_ui_signal_connect): Use a standard
+	signal connection and a thunk to implement the "relay_func"
+	feature, rather the (no longer present) marshaller feature
+	of gtk_signal_connect_full().
+
+	* gnome-popup-menu.c (pop_connect_func): Use a thunk rather than
+	the (no longer present) marshaller feature of
+	gtk_signal_connect_full().
+
 2001-11-26  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* gnome-app-helper.c: remove gtk_item_factory_add_foreign()

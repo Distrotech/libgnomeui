@@ -215,5 +215,14 @@ libgnomeui_2_la_LIBADD = \
 LDADD = \
 	libgnomeui-2.la
 
+#
+# The GConf schema data installation voodoo
+#
+schemadir   = $(sysconfdir)/gconf/schemas
+schema_DATA = libgnomeui.schemas
+
+install-data-local:
+	GCONF_CONFIG_SOURCE=$(GCONF_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$(schema_DATA)
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libgnomeui-2.0.pc

@@ -32,6 +32,18 @@ To change the gconftool target use the - -config-source=blah option to gconftool
         <long>Long description in Norway. long long long. this is a long sentence.</long>
       </locale>
     </schema>
+      <schema>
+      <key>/schemas/desktop/gnome/menus/show-icons</key>
+      <applyto>/desktop/gnome/menus/show-icons</applyto>
+      <owner>libgnomeui</owner>
+      <type>string</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Whether to display icons in menus</short>
+
+        <long>If TRUE, icons will be displayed next to menu items when available. </long>
+      </locale>
+    </schema>
 
   </schemalist>
   
