@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
   int res;
   gchar *appname;
   gchar *bug_buddy_path = NULL;
-  gchar *debugger = NULL;
+  const char *debugger = NULL;
   gchar *debugger_path = NULL;
   
   int bb_sm_disable = 0;

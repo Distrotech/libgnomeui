@@ -894,8 +894,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
   char *cwd;
 
   /* Make sure the Gtk+ type system is initialized.  */
-  gtk_type_init ();
-  gtk_signal_init ();
+  gtk_type_init (G_TYPE_DEBUG_NONE);
   gnome_type_init ();
 
   /* Create the master client.  */
@@ -912,7 +911,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
   /* Set the master client's environment.  */
   for (i= 0; master_environment[i]; i++)
     {
-      char *value= g_getenv (master_environment[i]);
+      const char *value= g_getenv (master_environment[i]);
 	      
       if (value)
 	gnome_client_set_environment (master_client,

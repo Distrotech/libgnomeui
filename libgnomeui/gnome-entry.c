@@ -180,7 +180,9 @@ gnome_entry_construct_full (GnomeEntry *gentry,
 		gtk_combo_set_case_sensitive (GTK_COMBO (entry_widget), TRUE);
 
 		gtk_signal_connect (GTK_OBJECT (gentry->_priv->entry),
-				    "activate", entry_activated_cb, gentry);
+				    "activate",
+				    GTK_SIGNAL_FUNC (entry_activated_cb),
+				    gentry);
 
 		newflags &= ~GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
 	}
@@ -255,7 +257,7 @@ static gchar *
 get_entry_text_handler (GnomeSelector *selector)
 {
 	GnomeEntry *gentry;
-	gchar *text;
+	const char *text;
 
 	g_return_val_if_fail (selector != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_ENTRY (selector), NULL);
@@ -284,7 +286,7 @@ static void
 activate_entry_handler (GnomeSelector *selector)
 {
 	GnomeEntry *gentry;
-	gchar *text;
+	const char *text;
 
 	g_return_if_fail (selector != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (selector));

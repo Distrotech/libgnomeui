@@ -550,7 +550,7 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 			    "drag_data_get", GTK_SIGNAL_FUNC (drag_data_get),
 			    ientry);
 	gtk_signal_connect_object (GTK_OBJECT (ientry->_priv->browse_button),
-				   "clicked", show_icon_selection,
+				   "clicked", GTK_SIGNAL_FUNC (show_icon_selection),
 				   GTK_OBJECT (ientry));
 
 	/*FIXME: 60x60 is just larger then default 48x48, though icon sizes

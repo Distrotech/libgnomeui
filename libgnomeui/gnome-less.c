@@ -115,7 +115,7 @@ gnome_less_init (GnomeLess *gl)
 
 	/* Since horizontal scroll doesn't work, use this hack. */
 	gtk_widget_set_usize(GTK_WIDGET(gl->text_view), 300, -1); 
-	gtk_text_view_set_wrap_mode(gl->text_view, GTK_WRAPMODE_WORD);
+	gtk_text_view_set_wrap_mode(gl->text_view, GTK_WRAP_WORD);
 }
 
 /**

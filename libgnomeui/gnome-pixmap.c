@@ -244,7 +244,7 @@ gnome_pixmap_set_property (GObject            *object,
 	case PROP_FILE: {
 		GdkPixbuf *pixbuf;
                 GError *error = NULL;
-                gchar *filename;
+                const char *filename;
 
                 filename = g_value_get_string (value);
 		pixbuf = gdk_pixbuf_new_from_file (filename, &error);

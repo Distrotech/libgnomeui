@@ -220,12 +220,14 @@ gnome_help_view_init (GnomeHelpView *help_view)
 						_("Show help for a specific region of the application"),
 						NULL,
 						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_HELP),
-						gnome_help_view_select_help_cb, help_view);
+						GTK_SIGNAL_FUNC (gnome_help_view_select_help_cb),
+						(gpointer) help_view);
   help_view->_priv->btn_style = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->_priv->toolbar), _("Style"),
 						_("Change the way help is displayed"),
 						NULL,
 						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_PREFERENCES),
-						gnome_help_view_select_style, help_view);
+						GTK_SIGNAL_FUNC (gnome_help_view_select_style),
+						(gpointer) help_view);
 
   help_view->_priv->evbox = gtk_event_box_new();
   gtk_widget_add_events(help_view->_priv->evbox,
@@ -841,10 +843,10 @@ gnome_help_view_popup(GnomeHelpView *help_view, const char *file_path)
       tf = WAP_TEXTFU(wap_textfu_new());
       wap_textfu_load_file(tf, file_path);
 
-      gtk_signal_connect_while_alive(GTK_OBJECT(win), "destroy", gtk_widget_destroy_2, help_view, GTK_OBJECT(help_view));
-      gtk_signal_connect(GTK_OBJECT(help_view), "destroy", gtk_widget_destroy_2, win);
+      gtk_signal_connect_while_alive(GTK_OBJECT(win), "destroy", GTK_SIGNAL_FUNC(gtk_widget_destroy_2), help_view, GTK_OBJECT(help_view));
+      gtk_signal_connect(GTK_OBJECT(help_view), "destroy", GTK_SIGNAL_FUNC(gtk_widget_destroy_2), win);
 
-/*        gtk_signal_connect(GTK_OBJECT(tf), "activate_uri", gnome_help_view_popup_activate_uri, help_view); */
+/*        gtk_signal_connect(GTK_OBJECT(tf), "activate_uri", GTK_SIGNAL_FUNC(gnome_help_view_popup_activate_uri), help_view); */
 
       gtk_container_add(GTK_CONTAINER(win), GTK_WIDGET(tf));
       gtk_widget_show_all(win);

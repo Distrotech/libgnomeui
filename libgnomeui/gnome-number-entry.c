@@ -136,7 +136,7 @@ gdouble
 gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 {
 	GtkWidget *entry;
-	gchar *text;
+	const char *text;
 	gdouble r;
 
 	g_return_val_if_fail (nentry != NULL, 0.0);
