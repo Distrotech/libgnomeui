@@ -26,7 +26,7 @@
 #include "libgnome/gnome-mime.h"
 #include "gnome-file-entry.h"
 #include "gnome-pixmap-entry.h"
-
+#include "gnome-pixmap.h"
 
 static void gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class);
 static void gnome_pixmap_entry_init       (GnomePixmapEntry      *pentry);
@@ -68,8 +68,6 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 	char *t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
 						 FALSE);
 	GdkImlibImage *im;
-	GdkPixmap *pix;
-	GdkBitmap *mask;
 	
 	if(!pentry->preview)
 		return;
@@ -84,15 +82,11 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 		}
 		return;
 	}
-	gdk_imlib_render (im, im->rgb_width,im->rgb_height);
-	pix = gdk_imlib_move_image (im);
-	mask = gdk_imlib_move_mask (im);
-
 	if(GTK_IS_PIXMAP(pentry->preview))
-		gtk_pixmap_set(GTK_PIXMAP(pentry->preview),pix,mask);
+		gnome_pixmap_load_imlib (GNOME_PIXMAP(pentry->preview),im);
 	else {
 		gtk_widget_destroy(pentry->preview->parent);
-		pentry->preview = gtk_pixmap_new(pix,mask);
+		pentry->preview = gnome_pixmap_new_from_imlib (im);
 		gtk_widget_show(pentry->preview);
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
 						      pentry->preview);
@@ -108,8 +102,6 @@ setup_preview(GtkWidget *widget)
 	GList *l;
 	GtkWidget *pp = NULL;
 	GdkImlibImage *im;
-	GdkPixmap *pix;
-	GdkBitmap *mask;
 	int w,h;
 	GtkWidget *frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
 	GtkFileSelection *fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
@@ -140,12 +132,9 @@ setup_preview(GtkWidget *widget)
 			h = 100;
 		}
 	}
-	gdk_imlib_render(im,w,h);
-	pix = gdk_imlib_move_image(im);
-	mask = gdk_imlib_move_mask(im);
-
-	pp = gtk_pixmap_new(pix,mask);
+	pp = gnome_pixmap_new_from_imlib(im);
 	gtk_widget_show(pp);
+	
 	gtk_container_add(GTK_CONTAINER(frame),pp);
 
 	gdk_imlib_destroy_image(im);
