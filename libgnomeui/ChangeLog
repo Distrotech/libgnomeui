@@ -1,3 +1,9 @@
+Sun Feb 21 19:06:51 1999  Maciej Stachowiak  <mstachow@alum.mit.edu>
+
+	* gnome-winhints.c (gnome_win_hints_get_workspace): This code was
+ 	on crack, it was getting the _WIN_HINTS property instead of
+ 	_WIN_WORKSPACE.
+
 1999-02-21  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
 
 	* Makefile.am (gnome_segv_LDADD): Use libgnomeui.la without the

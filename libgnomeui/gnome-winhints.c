@@ -297,7 +297,7 @@ gnome_win_hints_get_workspace(GtkWidget *window)
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   priv = (GdkWindowPrivate*)(window->window);
-  if (XGetWindowProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_HINTS, 0, 1,
+  if (XGetWindowProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_WORKSPACE, 0, 1,
 			 False, XA_CARDINAL, &r_type, &r_format,
 			 &count, &bytes_remain, &prop) == Success)
     {
