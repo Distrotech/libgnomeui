@@ -329,6 +329,37 @@ static gchar *menu_names[] =
 };
 
 
+static GtkWidget *
+scale_pixbuf (GdkPixbuf *pixbuf, GtkIconSize icon_size) {
+	double pix_x, pix_y;
+	int width, height;
+
+	gtk_icon_size_lookup (icon_size, &width, &height);
+
+        pix_x = gdk_pixbuf_get_width (pixbuf);
+        pix_y = gdk_pixbuf_get_height (pixbuf);
+
+	/* Only scale if the image doesn't match the required
+	 * icon size 
+	 */
+        if (pix_x > width || pix_y > height) {
+        	double greatest;
+        	GdkPixbuf *scaled;
+		GtkWidget *image;
+
+                greatest = pix_x > pix_y ? pix_x : pix_y;
+                scaled = gdk_pixbuf_scale_simple (pixbuf,
+                                                  (width/ greatest) * pix_x,
+                                                  (height/ greatest) * pix_y,
+                                                   GDK_INTERP_BILINEAR);
+                image = gtk_image_new_from_pixbuf (scaled);
+                g_object_unref (G_OBJECT (scaled));
+		return image;
+	}
+	
+	return gtk_image_new_from_pixbuf (pixbuf);
+}
+
 /* Creates a pixmap appropriate for items.  */
 
 static GtkWidget *
@@ -351,7 +382,7 @@ create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info,
 			GdkPixbuf *pixbuf = gdk_pixbuf_new_from_xpm_data
 				((const char **)pixmap_info);
 			if (pixbuf != NULL) {
-				pixmap = gtk_image_new_from_pixbuf (pixbuf);
+				pixmap = scale_pixbuf (pixbuf, icon_size);
 				g_object_unref (G_OBJECT (pixbuf));
 			}
 		}
@@ -370,7 +401,10 @@ create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info,
 			g_warning ("Could not find GNOME pixmap file %s",
 					(char *) pixmap_info);
 		else {
-			pixmap = gtk_image_new_from_file (name);
+			GdkPixbuf *pixbuf;
+			pixbuf = gdk_pixbuf_new_from_file (name, NULL);
+			pixmap = scale_pixbuf (pixbuf, icon_size);
+			g_object_unref (G_OBJECT (pixbuf));
 			g_free (name);
 		}
 
