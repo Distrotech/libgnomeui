@@ -171,17 +171,23 @@ gnome_canvas_re_destroy (GtkObject *object)
 
 	re = GNOME_CANVAS_RE (object);
 
+	/* remember, destroy can be run multiple times! */
+
 	if (re->fill_stipple)
 		gdk_bitmap_unref (re->fill_stipple);
+	re->fill_stipple = NULL;
 
 	if (re->outline_stipple)
 		gdk_bitmap_unref (re->outline_stipple);
+	re->outline_stipple = NULL;
 
 	if (re->fill_svp)
 		art_svp_free (re->fill_svp);
+	re->fill_svp = NULL;
 
 	if (re->outline_svp)
 		art_svp_free (re->outline_svp);
+	re->outline_svp = NULL;
 
 	if (GTK_OBJECT_CLASS (re_parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (re_parent_class)->destroy) (object);

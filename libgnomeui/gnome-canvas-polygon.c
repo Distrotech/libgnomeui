@@ -177,20 +177,27 @@ gnome_canvas_polygon_destroy (GtkObject *object)
 
 	poly = GNOME_CANVAS_POLYGON (object);
 
+	/* remember, destroy can be run multiple times! */
+
 	if (poly->coords)
 		g_free (poly->coords);
+	poly->coords = NULL;
 
 	if (poly->fill_stipple)
 		gdk_bitmap_unref (poly->fill_stipple);
+	poly->fill_stipple = NULL;
 
 	if (poly->outline_stipple)
 		gdk_bitmap_unref (poly->outline_stipple);
+	poly->outline_stipple = NULL;
 
 	if (poly->fill_svp)
 		art_svp_free (poly->fill_svp);
+	poly->fill_svp = NULL;
 
 	if (poly->outline_svp)
 		art_svp_free (poly->outline_svp);
+	poly->outline_svp = NULL;
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);

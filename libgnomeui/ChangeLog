@@ -1,5 +1,13 @@
 2000-07-31  Martin Baulig  <baulig@suse.de>
 
+	* gnome-canvas-line.c (gnome_canvas_line_destroy): Destroy may run
+	multiple times nowadays.
+	* gnome-canvas-polygon.c (gnome_canvas_polygon_destroy): Likewise.
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_destroy): Likewise.
+	* gnome-canvas-text.c (gnome_canvas_text_destroy): Likewise.
+
+2000-07-31  Martin Baulig  <baulig@suse.de>
+
 	* gnome-icon-list.c (gnome_icon_list_new): Removed the adjustment
 	argument and undeprecated this function.
 	(gnome_icon_list_new_flags): Removed.

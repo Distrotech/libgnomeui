@@ -225,20 +225,27 @@ gnome_canvas_text_destroy (GtkObject *object)
 
 	text = GNOME_CANVAS_TEXT (object);
 
+	/* remember, destroy can be run multiple times! */
+
 	if (text->text)
 		g_free (text->text);
+	text->text = NULL;
 
 	if (text->lines)
 		g_free (text->lines);
+	text->lines = NULL;
 
 	if (text->font)
 		gdk_font_unref (text->font);
+	text->font = NULL;
 
 	if (text->suckfont)
 		gnome_canvas_suck_font_free (text->suckfont);
+	text->suckfont = NULL;
 
 	if (text->stipple)
 		gdk_bitmap_unref (text->stipple);
+	text->stipple = NULL;
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);

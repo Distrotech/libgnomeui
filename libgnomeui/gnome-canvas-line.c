@@ -202,26 +202,35 @@ gnome_canvas_line_destroy (GtkObject *object)
 
 	line = GNOME_CANVAS_LINE (object);
 
+	/* remember, destroy can be run multiple times! */
+
 	if (line->coords)
 		g_free (line->coords);
+	line->coords = NULL;
 
 	if (line->first_coords)
 		g_free (line->first_coords);
+	line->first_coords = NULL;
 
 	if (line->last_coords)
 		g_free (line->last_coords);
+	line->last_coords = NULL;
 
 	if (line->stipple)
 		gdk_bitmap_unref (line->stipple);
+	line->stipple = NULL;
 
 	if (line->fill_svp)
 		art_svp_free (line->fill_svp);
+	line->fill_svp = NULL;
 
 	if (line->first_svp)
 		art_svp_free (line->first_svp);
+	line->first_svp = NULL;
 
 	if (line->last_svp)
 		art_svp_free (line->last_svp);
+	line->last_svp = NULL;
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
