@@ -158,10 +158,24 @@ gnome_about_update_text_buffer (GnomeAbout *about)
 static void
 gnome_about_instance_init (GnomeAbout *about)
 {
+	GnomeAboutPrivate *priv;
 	GtkWidget *vbox, *hbox, *separator;
 	GtkWidget *scrolled_window, *text_view;
+
+	/* Data */
 	
-	about->_priv = g_new0 (GnomeAboutPrivate, 1);
+	priv = g_new0 (GnomeAboutPrivate, 1);
+	about->_priv = priv;
+
+	priv->name = NULL;
+	priv->version = NULL;
+	priv->copyright = NULL;
+	priv->comments = NULL;
+	priv->translator_credits = NULL;
+	priv->authors = NULL;
+	priv->documenters = NULL;
+
+	/* Widgets */
 
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about)->vbox), hbox, TRUE, TRUE, 0);
@@ -177,17 +191,17 @@ gnome_about_instance_init (GnomeAbout *about)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_NEVER);
 	gtk_box_pack_start (GTK_BOX (hbox), scrolled_window, TRUE, TRUE, 8);
 
-	about->_priv->text_buffer = gtk_text_buffer_new (NULL);
+	priv->text_buffer = gtk_text_buffer_new (NULL);
 
-	gtk_text_buffer_create_tag (about->_priv->text_buffer, "heading",
+	gtk_text_buffer_create_tag (priv->text_buffer, "heading",
 				    "weight", PANGO_WEIGHT_BOLD,
 				    NULL);
 
-	gtk_text_buffer_create_tag (about->_priv->text_buffer, "wrapped",
+	gtk_text_buffer_create_tag (priv->text_buffer, "wrapped",
 				    "wrap_mode", GTK_WRAP_WORD,
 				    NULL);
 
-	text_view = gtk_text_view_new_with_buffer (about->_priv->text_buffer);
+	text_view = gtk_text_view_new_with_buffer (priv->text_buffer);
 			      
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view), FALSE);
 	gtk_container_add (GTK_CONTAINER (scrolled_window), text_view);
@@ -195,17 +209,17 @@ gnome_about_instance_init (GnomeAbout *about)
 	gtk_widget_modify_base (text_view, GTK_STATE_NORMAL,
 				&GTK_WIDGET (about)->style->bg[GTK_STATE_NORMAL]);
 
-	about->_priv->logo_image = gtk_image_new ();
-	gtk_box_pack_start (GTK_BOX (vbox), about->_priv->logo_image, FALSE, FALSE, 0);
-	about->_priv->name_label = gtk_label_new (NULL);
-	gtk_box_pack_start (GTK_BOX (vbox), about->_priv->name_label, FALSE, FALSE, 0);
+	priv->logo_image = gtk_image_new ();
+	gtk_box_pack_start (GTK_BOX (vbox), priv->logo_image, FALSE, FALSE, 0);
+	priv->name_label = gtk_label_new (NULL);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->name_label, FALSE, FALSE, 0);
 
-	about->_priv->comments_label = gtk_label_new (NULL);
-	gtk_label_set_line_wrap (GTK_LABEL (about->_priv->comments_label), TRUE);
-	gtk_box_pack_start (GTK_BOX (vbox), about->_priv->comments_label, FALSE, FALSE, 0);
+	priv->comments_label = gtk_label_new (NULL);
+	gtk_label_set_line_wrap (GTK_LABEL (priv->comments_label), TRUE);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->comments_label, FALSE, FALSE, 0);
 
-	about->_priv->copyright_label = gtk_label_new (NULL);
-	gtk_box_pack_start (GTK_BOX (vbox), about->_priv->copyright_label, FALSE, FALSE, 0);
+	priv->copyright_label = gtk_label_new (NULL);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->copyright_label, FALSE, FALSE, 0);
 
 	gtk_widget_show_all (hbox);
 
