@@ -238,6 +238,7 @@ EXTRA_DIST =					\
 	gnome.defs 				\
 	maketypes.awk				\
 	makeenums.pl				\
+	gnome-boxed.defs			\
 	gnometypebuiltins_vars.c		\
 	gnometypebuiltins_ids.c			\
 	gnometypebuiltins_evals.c
