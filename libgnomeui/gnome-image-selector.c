@@ -41,6 +41,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-icon-selector-component.h>
 #include <bonobo/bonobo-moniker-util.h>
+#include <bonobo/bonobo-exception.h>
 #include "gnome-image-selector.h"
 
 struct _GnomeImageSelectorPrivate {
@@ -97,30 +98,22 @@ gnome_image_selector_init (GnomeImageSelector *gselector)
 }
 
 GtkWidget *
-gnome_image_selector_construct (GnomeImageSelector  *iselector,
-				GNOME_Selector       corba_selector,
-				Bonobo_UIContainer   uic)
-{
-	g_return_val_if_fail (iselector != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_IMAGE_SELECTOR (iselector), NULL);
-	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
-
-	return (GtkWidget *) gnome_selector_client_construct
-		(GNOME_SELECTOR_CLIENT (iselector), corba_selector, uic);
-}
-
-GtkWidget *
 gnome_image_selector_new (void)
 {
-	GNOME_Selector selector;
-	CORBA_Environment ev;
+	GnomeImageSelector *iselector;
 
-	CORBA_exception_init (&ev);
-	selector = bonobo_get_object ("OAFIID:GNOME_UI_Component_IconSelector",
-				      "GNOME/Selector", &ev);
-	CORBA_exception_free (&ev);
+	iselector = g_object_new (gnome_image_selector_get_type (),
+				  "want-entry-widget", TRUE,
+				  "want-selector-widget", TRUE,
+				  "want-browse-button", TRUE,
+				  "want-clear-button", TRUE,
+				  "want-default-button", TRUE,
+				  NULL);
 
-	return gnome_image_selector_new_from_selector (selector, CORBA_OBJECT_NIL);
+	return (GtkWidget *) gnome_selector_client_construct
+		(GNOME_SELECTOR_CLIENT (iselector),
+		 "OAFIID:GNOME_UI_Component_IconSelector",
+		 CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
@@ -133,7 +126,8 @@ gnome_image_selector_new_from_selector (GNOME_Selector     corba_selector,
 
 	iselector = g_object_new (gnome_image_selector_get_type (), NULL);
 
-	return gnome_image_selector_construct (iselector, corba_selector, uic);
+	return (GtkWidget *) gnome_selector_client_construct_from_objref
+		(GNOME_SELECTOR_CLIENT (iselector), corba_selector, uic);
 }
 
 static void

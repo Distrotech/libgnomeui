@@ -73,10 +73,6 @@ GtkWidget   *gnome_image_entry_new_pixmap_entry  (guint                preview_x
 GtkWidget   *gnome_image_entry_new_from_selector (GNOME_Selector       corba_selector,
 						  Bonobo_UIContainer   uic);
 
-GtkWidget   *gnome_image_entry_construct         (GnomeImageEntry     *ientry,
-						  GNOME_Selector       corba_selector,
-						  Bonobo_UIContainer   uic);
-
 G_END_DECLS
 
 #endif

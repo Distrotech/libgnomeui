@@ -13,6 +13,9 @@
 	(gnome_selector_client_construct): Create a new property bag and proxy our
 	GObject's properties.
 
+	* gnome-image-entry.c (gnome_image_entry_construct): Removed.
+	(PROP_IS_PIXMAP_ENTRY, PROP_PREVIEW_X, PROP_PREVIEW_Y): New properties.
+
 2001-05-20  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-client.h

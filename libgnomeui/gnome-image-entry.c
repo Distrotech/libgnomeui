@@ -43,9 +43,25 @@
 #include <bonobo/bonobo-moniker-util.h>
 #include "gnome-image-entry.h"
 
+#define ICON_SIZE 48
+
 struct _GnomeImageEntryPrivate {
+    gboolean constructed;
+
+    gboolean is_pixmap_entry;
+    guint preview_x, preview_y;
 };
-	
+
+enum {
+    PROP_0,
+
+    /* Construction properties */
+    PROP_IS_PIXMAP_ENTRY,
+
+    /* Normal properties */
+    PROP_PREVIEW_X,
+    PROP_PREVIEW_Y
+};
 
 static void   gnome_image_entry_class_init   (GnomeImageEntryClass *class);
 static void   gnome_image_entry_init         (GnomeImageEntry      *gentry);
@@ -77,17 +93,98 @@ gnome_image_entry_get_type (void)
 }
 
 static void
+gnome_image_entry_set_property (GObject *object, guint param_id,
+				const GValue *value, GParamSpec *pspec)
+{
+    GnomeImageEntry *ientry;
+
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_IMAGE_ENTRY (object));
+
+    ientry = GNOME_IMAGE_ENTRY (object);
+
+    switch (param_id) {
+    case PROP_IS_PIXMAP_ENTRY:
+	g_assert (!ientry->_priv->constructed);
+	ientry->_priv->is_pixmap_entry = g_value_get_boolean (value);
+	break;
+    case PROP_PREVIEW_X:
+	ientry->_priv->preview_x = g_value_get_uint (value);
+	break;
+    case PROP_PREVIEW_Y:
+	ientry->_priv->preview_y = g_value_get_uint (value);
+	break;
+    default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	break;
+    }
+}
+
+static void
+gnome_image_entry_get_property (GObject *object, guint param_id, GValue *value,
+				GParamSpec *pspec)
+{
+    GnomeImageEntry *ientry;
+
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_IMAGE_ENTRY (object));
+
+    ientry = GNOME_IMAGE_ENTRY (object);
+
+    switch (param_id) {
+    case PROP_IS_PIXMAP_ENTRY:
+	g_value_set_boolean (value, ientry->_priv->is_pixmap_entry);
+	break;
+    case PROP_PREVIEW_X:
+	g_value_set_uint (value, ientry->_priv->preview_x);
+	break;
+    case PROP_PREVIEW_Y:
+	g_value_set_uint (value, ientry->_priv->preview_y);
+	break;
+    default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	break;
+    }
+}
+
+static void
 gnome_image_entry_class_init (GnomeImageEntryClass *class)
 {
-	GtkObjectClass *object_class;
-	GObjectClass *gobject_class;
+	GObjectClass *object_class;
 
-	object_class = (GtkObjectClass *) class;
-	gobject_class = (GObjectClass *) class;
+	object_class = (GObjectClass *) class;
 
 	parent_class = gtk_type_class (gnome_selector_client_get_type ());
 
-	gobject_class->finalize = gnome_image_entry_finalize;
+	object_class->finalize = gnome_image_entry_finalize;
+
+	object_class->get_property = gnome_image_entry_get_property;
+	object_class->set_property = gnome_image_entry_set_property;
+
+	/* Construction properties */
+	g_object_class_install_property
+		(object_class,
+		 PROP_IS_PIXMAP_ENTRY,
+		 g_param_spec_boolean ("is-pixmap-entry", NULL, NULL,
+				       FALSE,
+				       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+					G_PARAM_CONSTRUCT_ONLY)));
+
+	/* Normal properties */
+	g_object_class_install_property
+		(object_class,
+		 PROP_PREVIEW_X,
+		 g_param_spec_uint ("preview-x", NULL, NULL,
+				    0, G_MAXINT, ICON_SIZE,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				     G_PARAM_CONSTRUCT)));
+	g_object_class_install_property
+		(object_class,
+		 PROP_PREVIEW_Y,
+		 g_param_spec_uint ("preview-y", NULL, NULL,
+				    0, G_MAXINT, ICON_SIZE,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				     G_PARAM_CONSTRUCT)));
 }
 
 static void
@@ -97,44 +194,42 @@ gnome_image_entry_init (GnomeImageEntry *gentry)
 }
 
 GtkWidget *
-gnome_image_entry_construct (GnomeImageEntry     *ientry,
-			     GNOME_Selector       corba_selector,
-			     Bonobo_UIContainer   uic)
-{
-	g_return_val_if_fail (ientry != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_IMAGE_ENTRY (ientry), NULL);
-	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
-
-	return (GtkWidget *) gnome_selector_client_construct
-		(GNOME_SELECTOR_CLIENT (ientry), corba_selector, uic);
-}
-
-GtkWidget *
 gnome_image_entry_new_icon_entry (void)
 {
-	GNOME_Selector selector;
-	CORBA_Environment ev;
+	GnomeImageEntry *ientry;
 
-	CORBA_exception_init (&ev);
-	selector = bonobo_get_object ("OAFIID:GNOME_UI_Component_ImageEntry!type=icon",
-				      "GNOME/Selector", &ev);
-	CORBA_exception_free (&ev);
+	ientry = g_object_new (gnome_image_entry_get_type (),
+			       "want-entry-widget", FALSE,
+			       "want-selector-widget", TRUE,
+			       "want-browse-button", FALSE,
+			       "want-clear-button", FALSE,
+			       "want-default-button", FALSE,
+			       "is-pixmap-entry", FALSE, NULL);
 
-	return gnome_image_entry_new_from_selector (selector, CORBA_OBJECT_NIL);
+	return (GtkWidget *) gnome_selector_client_construct
+		(GNOME_SELECTOR_CLIENT (ientry),
+		 "OAFIID:GNOME_UI_Component_ImageEntry",
+		 CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
 gnome_image_entry_new_pixmap_entry (guint preview_x, guint preview_y)
 {
-	GNOME_Selector selector;
-	CORBA_Environment ev;
+	GnomeImageEntry *ientry;
 
-	CORBA_exception_init (&ev);
-	selector = bonobo_get_object ("OAFIID:GNOME_UI_Component_ImageEntry!type=pixmap",
-				      "GNOME/Selector", &ev);
-	CORBA_exception_free (&ev);
+	ientry = g_object_new (gnome_image_entry_get_type (),
+			       "want-entry-widget", TRUE,
+			       "want-selector-widget", TRUE,
+			       "want-browse-button", TRUE,
+			       "want-clear-button", FALSE,
+			       "want-default-button", FALSE,
+			       "preview-x", preview_x, "preview-y", preview_y,
+			       "is-pixmap-entry", TRUE, NULL);
 
-	return gnome_image_entry_new_from_selector (selector, CORBA_OBJECT_NIL);
+	return (GtkWidget *) gnome_selector_client_construct
+		(GNOME_SELECTOR_CLIENT (ientry),
+		 "OAFIID:GNOME_UI_Component_ImageEntry",
+		 CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
@@ -147,7 +242,8 @@ gnome_image_entry_new_from_selector (GNOME_Selector     corba_selector,
 
 	ientry = g_object_new (gnome_image_entry_get_type (), NULL);
 
-	return gnome_image_entry_construct (ientry, corba_selector, uic);
+	return (GtkWidget *) gnome_selector_client_construct_from_objref
+		(GNOME_SELECTOR_CLIENT (ientry), corba_selector, uic);
 }
 
 static void
