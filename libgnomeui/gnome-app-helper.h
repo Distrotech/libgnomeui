@@ -1,3 +1,6 @@
+#ifndef GNOME_APP_HELPER_H
+#define GNOME_APP_HELPER_H
+
 #include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
@@ -7,14 +10,13 @@ BEGIN_GNOME_DECLS
  */
 struct _GnomeUIInfo {
   enum {
-    GNOME_APP_UI_ENDOFINFO = 0,
-    GNOME_APP_UI_ITEM = 1,
-    GNOME_APP_UI_TOGGLEITEM = 2, /* check item for menu - no toolbar support */
-    GNOME_APP_UI_RADIOITEMS = 3, /* no toolbar support */
-    GNOME_APP_UI_SUBTREE = 4,
-    GNOME_APP_UI_SEPARATOR = 5,
-    GNOME_APP_UI_HELP = 6,
-    GNOME_APP_UI_LAST = 6
+    GNOME_APP_UI_ENDOFINFO,
+    GNOME_APP_UI_ITEM,
+    GNOME_APP_UI_TOGGLEITEM, /* check item for menu - no toolbar support */
+    GNOME_APP_UI_RADIOITEMS, /* no toolbar support */
+    GNOME_APP_UI_SUBTREE,
+    GNOME_APP_UI_SEPARATOR,
+    GNOME_APP_UI_HELP
   } type;
 
   gchar *label;
@@ -147,3 +149,5 @@ void gnome_app_create_toolbar_custom    (GnomeApp *app,
 					 GnomeUIInfo *tbinfo,
 					 GnomeUIBuilderData uibdata);
 END_GNOME_DECLS
+
+#endif

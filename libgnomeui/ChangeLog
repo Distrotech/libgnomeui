@@ -1,3 +1,9 @@
+1998-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-app-helper.h: Removed the explicit values from the type
+	enum and removed the GNOME_APP_UI_LAST value (never used).
+	Added #ifndef GNOME_APP_HELPER_H... stuff.
+
 1998-03-16  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock/stock_demo: Added undo stock icon. Added some more
