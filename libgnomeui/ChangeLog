@@ -1,3 +1,11 @@
+Thu Feb 04 22:56:28 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.c: use set_icon method of icon entry as setting
+	  the text of the entry now doesn't work (this was probably an
+	  unwanted side effect of it's recent makeover)
+
+	* gnome-icon-entry.c: accept NULL for the set_icon method
+
 Thu Feb 04 22:45:45 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-entry.c: switch order of two functions to avoid

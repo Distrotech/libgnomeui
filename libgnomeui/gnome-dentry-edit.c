@@ -335,7 +335,6 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
 					   GnomeDesktopEntry * dentry)
 {
   gchar * s = NULL;
-  GtkWidget *e;
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
 
@@ -351,8 +350,8 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), 
 		     dentry->tryexec ? dentry->tryexec : "");
 
-  e = gnome_icon_entry_gtk_entry(GNOME_ICON_ENTRY(dee->icon_entry));
-  gtk_entry_set_text(GTK_ENTRY(e), dentry->icon ? dentry->icon : "");
+  gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry),
+			    dentry->icon ? dentry->icon : "");
 
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), 
 		     dentry->docpath ? dentry->docpath : "");
@@ -465,7 +464,6 @@ GnomeDesktopEntry * gnome_dentry_get_dentry(GnomeDEntryEdit * dee)
 
 void        gnome_dentry_edit_clear     (GnomeDEntryEdit * dee)
 {
-  GtkWidget *e;
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
 
@@ -474,8 +472,7 @@ void        gnome_dentry_edit_clear     (GnomeDEntryEdit * dee)
   gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), "");  
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), "");
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), "");
-  e = gnome_icon_entry_gtk_entry(GNOME_ICON_ENTRY(dee->icon_entry));
-  gtk_entry_set_text(GTK_ENTRY(e), "");
+  gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry),"");
 }
 
 static void gnome_dentry_edit_changed(GnomeDEntryEdit * dee)
