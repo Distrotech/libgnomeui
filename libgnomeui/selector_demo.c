@@ -132,7 +132,7 @@ main (int argc, char **argv)
 
     fselector = gnome_file_selector_new_custom ("test",
 						"Albert Einstein",
-						selector, NULL);
+						selector, NULL, 0);
 
     gtk_container_add (GTK_CONTAINER (frame1), fselector);
 

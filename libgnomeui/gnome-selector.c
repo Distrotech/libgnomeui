@@ -452,7 +452,8 @@ gnome_selector_construct (GnomeSelector *selector,
 			  const gchar *history_id,
 			  const gchar *dialog_title,
 			  GtkWidget *selector_widget,
-			  GtkWidget *browse_dialog)
+			  GtkWidget *browse_dialog,
+			  guint32 flags)
 {
 	GnomeSelectorPrivate *priv;
 
@@ -465,6 +466,8 @@ gnome_selector_construct (GnomeSelector *selector,
 	priv->entry = gnome_entry_gtk_entry (GNOME_ENTRY (priv->gentry));
 
 	priv->dialog_title = g_strdup (dialog_title);
+
+	priv->flags = flags;
 
 	priv->selector_widget = selector_widget;
 	if (priv->selector_widget)
@@ -484,7 +487,14 @@ gnome_selector_construct (GnomeSelector *selector,
 	gtk_box_pack_start (GTK_BOX (priv->box), priv->hbox,
 			    TRUE, FALSE, GNOME_PAD_SMALL);
 
-	if (priv->browse_dialog) {
+	if (flags & GNOME_SELECTOR_WANT_BROWSE_BUTTON) {
+		if (priv->browse_dialog == NULL) {
+			g_warning (G_STRLOC ": It makes no sense to use "
+				   "GNOME_SELECTOR_WANT_BROWSE_BUTTON "
+				   "without having a `browse_dialog'.");
+			return;
+		}
+
 		priv->browse_button = gtk_button_new_with_label
 			(_("Browse..."));
 
@@ -495,7 +505,7 @@ gnome_selector_construct (GnomeSelector *selector,
 				    priv->browse_button, FALSE, FALSE, 0);
 	}
 
-	if (priv->selector_widget) {
+	if (flags & GNOME_SELECTOR_WANT_CLEAR_BUTTON) {
 		priv->clear_button = gtk_button_new_with_label
 			(_("Clear..."));
 
@@ -504,7 +514,9 @@ gnome_selector_construct (GnomeSelector *selector,
 
 		gtk_box_pack_start (GTK_BOX (priv->hbox),
 				    priv->clear_button, FALSE, FALSE, 0);
+	}
 
+	if (priv->selector_widget) {
 		gtk_box_pack_start (GTK_BOX (priv->box),
 				    priv->selector_widget, TRUE, TRUE,
 				    GNOME_PAD_SMALL);

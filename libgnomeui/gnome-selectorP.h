@@ -53,6 +53,8 @@ struct _GnomeSelectorPrivate {
 	GtkWidget   *browse_button;
 	GtkWidget   *clear_button;
 
+	guint32      flags;
+
 	guint32      changed : 1;
 
 	guint        frozen;

@@ -53,6 +53,13 @@ typedef struct _GnomeSelector         GnomeSelector;
 typedef struct _GnomeSelectorPrivate  GnomeSelectorPrivate;
 typedef struct _GnomeSelectorClass    GnomeSelectorClass;
 
+enum {
+	GNOME_SELECTOR_DEFAULT_SELECTOR_WIDGET	= 1 << 0,
+	GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG	= 1 << 1,
+	GNOME_SELECTOR_WANT_BROWSE_BUTTON	= 1 << 2,
+	GNOME_SELECTOR_WANT_CLEAR_BUTTON	= 1 << 3
+};
+
 struct _GnomeSelector {
 	GtkVBox vbox;
 	
@@ -89,7 +96,8 @@ void         gnome_selector_construct        (GnomeSelector *selector,
                                               const gchar *history_id,
 					      const gchar *dialog_title,
 					      GtkWidget *selector_widget,
-					      GtkWidget *browse_dialog);
+					      GtkWidget *browse_dialog,
+					      guint32 flags);
 
 /*only return a file if the `check_filename' method succeeded. */
 gchar       *gnome_selector_get_filename     (GnomeSelector *selector);
