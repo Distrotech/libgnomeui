@@ -72,7 +72,8 @@ gnome_pixmap_init (GnomePixmap *gpixmap)
 	gpixmap->width = -1;
 	gpixmap->height = -1;
 	gpixmap->alpha_threshold = 128;
-
+	gpixmap->mode = GNOME_PIXMAP_SIMPLE;
+	gpixmap->mode = GNOME_PIXMAP_COLOR;/* REMOVE ME -- TESTING ONLY */
         for (i = 0; i < 5; i ++) {
                 gpixmap->image_data[i].pixbuf = NULL;
                 gpixmap->image_data[i].mask = NULL;
@@ -179,7 +180,8 @@ generate_state (GnomePixmap *gpixmap, gint state)
 
 		gpixmap->image_data[state].pixbuf = target;
 		gpixmap->image_data[state].mask = gpixmap->original_scaled_mask;
-		gdk_pixmap_ref (gpixmap->image_data[state].mask);
+		if (gpixmap->original_scaled_mask)
+			gdk_pixmap_ref (gpixmap->image_data[state].mask);
 	}
 }
 
@@ -190,60 +192,146 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
         GdkPixbuf *draw_source;
         GdkBitmap *draw_mask;
         GtkMisc   *misc;
-	gint state;
+	gint x_off, y_off;
+	gint top_clip, bottom_clip, left_clip, right_clip;
 
-        misc = GTK_MISC(gpixmap);
-        widget = GTK_WIDGET(gpixmap);
+        g_return_if_fail (GTK_WIDGET_DRAWABLE(gpixmap));
 
-        g_return_if_fail(GTK_WIDGET_DRAWABLE(gpixmap));
+        misc = GTK_MISC (gpixmap);
+        widget = GTK_WIDGET (gpixmap);
 
-	state = GTK_WIDGET_STATE(widget);
-        draw_source = gpixmap->image_data[state].pixbuf;
-        draw_mask = gpixmap->image_data[state].mask;
+	/* We find the pixmap */
+        draw_source = gpixmap->image_data[GTK_WIDGET_STATE (widget)].pixbuf;
+        draw_mask = gpixmap->image_data[GTK_WIDGET_STATE (widget)].mask;
 
 	if (draw_source == NULL)
-		generate_state (gpixmap, state);
+		generate_state (gpixmap, GTK_WIDGET_STATE (widget));
 
-        draw_source = gpixmap->image_data[state].pixbuf;
-        draw_mask = gpixmap->image_data[state].mask;
+        draw_source = gpixmap->image_data[GTK_WIDGET_STATE (widget)].pixbuf;
+        draw_mask = gpixmap->image_data[GTK_WIDGET_STATE (widget)].mask;
 
-        if (draw_source != NULL) {
-                /* Draw the image */
-                gint x, y;
-                x = (widget->allocation.x * (1.0 - misc->xalign) +
-                     (widget->allocation.x + widget->allocation.width
-                      - (widget->requisition.width - misc->xpad * 2)) *
-                     misc->xalign) + 0.5;
-                y = (widget->allocation.y * (1.0 - misc->yalign) +
-                     (widget->allocation.y + widget->allocation.height
-                      - (widget->requisition.height - misc->ypad * 2)) *
-                     misc->yalign) + 0.5;
+        if (draw_source == NULL)
+		return;
 
-                if (draw_mask) {
-                        gdk_gc_set_clip_mask (widget->style->black_gc, draw_mask);
-                        gdk_gc_set_clip_origin (widget->style->black_gc, x, y);
-			draw_mask = NULL; /* here temporarily to remove the mask */
-                }
+	/* Now we actually want to draw the image */
+	/* The first thing we do for that, is write the images coords in the
+	 * drawable's coordinate system. */
+	x_off = (widget->allocation.x * (1.0 - misc->xalign) +
+		 (widget->allocation.x + widget->allocation.width
+		  - (widget->requisition.width - misc->xpad * 2)) *
+		 misc->xalign) + 0.5;
+	y_off = (widget->allocation.y * (1.0 - misc->yalign) +
+		 (widget->allocation.y + widget->allocation.height
+		  - (widget->requisition.height - misc->ypad * 2)) *
+		 misc->yalign) + 0.5;
 
-                gdk_pixbuf_render_to_drawable(draw_source,
-                                              widget->window,
-                                              widget->style->black_gc,
-                                              0, 0,
-                                              x, y,
-                                              gdk_pixbuf_get_width(draw_source),
-                                              gdk_pixbuf_get_height(draw_source),
-                                              GDK_RGB_DITHER_NORMAL,
-                                              0, 0);
+	/* next, we want to do clipping, to find the coordinates in image space of
+	 * the region to be drawn.  */
+	left_clip = (x_off < area->x)?area->x - x_off:0;
+	top_clip = (y_off < area->y)?area->y - y_off:0;
+	if (x_off + gdk_pixbuf_get_width (draw_source) > area->x + area->width)
+		right_clip = x_off + gdk_pixbuf_get_width (draw_source) - (area->x + area->width);
+	else
+		right_clip = 0;
+	if (y_off + gdk_pixbuf_get_height (draw_source) > area->y + area->height)
+		bottom_clip = y_off + gdk_pixbuf_get_height (draw_source) - (area->y + area->height);
+	else
+		bottom_clip = 0;
 
-                if (draw_mask) {
-                        gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
-                        gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
-                }
+	/* it's not in the area; we return */
+	if (right_clip + left_clip > gdk_pixbuf_get_width (draw_source)||
+	    top_clip + bottom_clip > gdk_pixbuf_get_height (draw_source))
+		return;
 
-        } else {
-                /* Draw nothing */
+	g_print ("width=%d\theight=%d\n", gdk_pixbuf_get_width (draw_source), gdk_pixbuf_get_height (draw_source));
+	g_print ("area->x=%d\tarea->y=%d\tarea->width=%d\tarea->height=%d\nx_off=%d\ty_off=%d\nright=%d\tleft=%d\ttop=%d\tbottom=%d\n\n", area->x, area->y, area->width, area->height, x_off, y_off, right_clip, left_clip, top_clip, bottom_clip); 
 
-        }
+	if (gpixmap->mode == GNOME_PIXMAP_SIMPLE || !gdk_pixbuf_get_has_alpha (draw_source)) {
+		if (draw_mask) {
+			gdk_gc_set_clip_mask (widget->style->black_gc, draw_mask);
+			gdk_gc_set_clip_origin (widget->style->black_gc, left_clip, top_clip);
+		}
+
+		gdk_pixbuf_render_to_drawable (draw_source,
+					       widget->window,
+					       widget->style->black_gc,
+					       left_clip, top_clip,
+					       x_off + left_clip, y_off + top_clip,
+					       gdk_pixbuf_get_width (draw_source) - left_clip - right_clip,
+					       gdk_pixbuf_get_height (draw_source) - top_clip - bottom_clip,
+					       GDK_RGB_DITHER_NORMAL,
+					       0, 0); /* FIXME -- get the right offset */
+
+		if (draw_mask) {
+			gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
+			gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
+		}
+	} else if (gpixmap->mode == GNOME_PIXMAP_COLOR) {
+		GdkPixbuf *dest_source;
+		GdkBitmap *dest_mask;
+		gint i, j, height, width, rowstride, dest_rowstride;
+		gint r, g, b;
+		guchar *dest_pixels, *c, *a, *original_pixels;
+		
+
+		dest_source = gdk_pixbuf_new (ART_PIX_RGB,
+					      FALSE,
+					      gdk_pixbuf_get_bits_per_sample (draw_source),
+					      gdk_pixbuf_get_width (draw_source) - left_clip - right_clip,
+					      gdk_pixbuf_get_height (draw_source) - top_clip - bottom_clip);
+
+		dest_mask = gdk_pixmap_new (NULL,
+					    gdk_pixbuf_get_width (draw_source) - left_clip - right_clip,
+					    gdk_pixbuf_get_height (draw_source) - top_clip - bottom_clip,
+					    1);
+ 		gdk_pixbuf_render_threshold_alpha (draw_source,
+						   dest_mask,
+						   left_clip, top_clip,
+						   x_off + left_clip, y_off + top_clip,
+						   gdk_pixbuf_get_width (draw_source) - left_clip - right_clip,
+						   gdk_pixbuf_get_height (draw_source) - top_clip - bottom_clip,
+						   gpixmap->alpha_threshold);
+
+		gdk_gc_set_clip_mask (widget->style->black_gc, dest_mask);
+		gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
+
+		r = widget->style->bg[GTK_WIDGET_STATE (widget)].red >> 8;
+		g = widget->style->bg[GTK_WIDGET_STATE (widget)].green >> 8;
+		b = widget->style->bg[GTK_WIDGET_STATE (widget)].blue >> 8;
+		g_print ("%d %d %d\n", r, g, b);
+		height = gdk_pixbuf_get_height (dest_source);
+		width = gdk_pixbuf_get_width (dest_source);
+		rowstride = gdk_pixbuf_get_rowstride (draw_source);
+		dest_rowstride = gdk_pixbuf_get_rowstride (dest_source);
+		dest_pixels = gdk_pixbuf_get_pixels (dest_source);
+		original_pixels = gdk_pixbuf_get_pixels (draw_source);
+		for (i = 0; i < height; i++) {
+			for (j = 0; j < width; j++) {
+				c = original_pixels + (i + top_clip)*rowstride + (j + left_clip)*4;
+				a = c + 3;
+				*(dest_pixels + i*dest_rowstride + j*3) = r + (((*c - r) * (*a) + 0x80) >> 8);
+				c++;
+				*(dest_pixels + i*dest_rowstride + j*3 + 1) = g + (((*c - g) * (*a) + 0x80) >> 8);
+				c++;
+				*(dest_pixels + i*dest_rowstride + j*3 + 2) = b + (((*c - b) * (*a) + 0x80) >> 8);
+			}
+		}
+
+		gdk_pixbuf_render_to_drawable (dest_source,
+					       widget->window,
+					       widget->style->black_gc,
+					       0, 0,
+					       x_off + left_clip, y_off + top_clip,
+					       width, height,
+					       GDK_RGB_DITHER_NORMAL,
+					       0, 0); /* FIXME -- get the right offset */
+
+		gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
+		gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
+
+		gdk_bitmap_unref (dest_mask);
+		gdk_pixbuf_unref (dest_source);
+	}
 }
 
 static gint
@@ -775,6 +863,27 @@ gnome_pixmap_set_state (GnomePixmap *gpixmap,
 	gpixmap->image_data[state].saturation = saturation;
 	gpixmap->image_data[state].pixelate = pixelate;
 }
+
+void
+gnome_pixmap_set_draw_mode (GnomePixmap *gpixmap,
+			    GnomePixmapDraw mode)
+{
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP(gpixmap));
+
+	gpixmap->mode = mode;
+}
+
+GnomePixmapDraw
+gnome_pixmap_get_draw_mode (GnomePixmap *gpixmap)
+{
+	g_return_val_if_fail (gpixmap != NULL, GNOME_PIXMAP_SIMPLE);
+	g_return_val_if_fail (GNOME_IS_PIXMAP(gpixmap), GNOME_PIXMAP_SIMPLE);
+
+	return gpixmap->mode;
+}
+
+
 
 
 
