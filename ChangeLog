@@ -11,10 +11,6 @@
 	* libgnomeui/gnome-about.c: removed unneeded '#define _ ...', already
 	defined in bonobo-i18n.h
 
-2002-01-17  Christian Rose  <menthos@menthos.com>
-
-	* po/sv.po: Updated Swedish translation.
-
 2002-01-16  Richard Hult  <rhult@codefactory.se>
 
 	* libgnomeui/gnome-app-helper.c (gnome_app_setup_toolbar): Remove unused
@@ -105,10 +101,6 @@ Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
 
 2002-01-14  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
 
-	* po/sk.po: Added Slovak translation from Marcel Telka <marcel@telka.sk>.
-
-2002-01-14  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
-
 	* configure.in: added 'sk' to ALL_LINGUAS.
 
 2002-01-13  Murray Cumming  <murrayc@usa.net>
@@ -118,11 +110,6 @@ Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
  	changed since gnome-libs 1.2, but the problem is solved by 
  	removing the optimisation. This fixes gnome_app_insert_menus(),
  	which uses it.
-
-2002-01-12 Hasbullah Bin Pit <sebol@ikhlas.com>
-
-	* po/ms.po: Added Malay translation base on gnome-libs 
-          by Khairulanuar Abd Majid <khairul@ikhlas.com>
 
 2002-01-12 Hasbullah Bin Pit <sebol@ikhlas.com>
 
@@ -157,18 +144,10 @@ Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
 	* libgnomeui/gnome-dialog.c (gnome_dialog_init): remove the bevel border to
 	be consistent with GtkDialog
 
-2002-01-05  Christian Rose  <menthos@menthos.com>
-
-	* po/sv.po: Updated Swedish translation.
-
 2002-01-04  Laszlo Peter <laca@ireland.sun.com>
 
 	* doc/reference/Makefile.am: pass CFLAGS and LDFLAGS to the gtk-doc
 	scan program
-
-2002-01-04  Duarte Loreto <happyguy_pt@hotmail.com>
-
-        * pt.po: Added Portuguese translation.
 
 2002-01-04  Duarte Loreto <happyguy_pt@hotmail.com>
 
@@ -177,11 +156,6 @@ Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
 2002-01-04  Duarte Loreto <happyguy_pt@hotmail.com>
 
         * configure.in: Added Portuguese (pt) to ALL_LINGUAS
-
-2002-01-02  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
-
-	* po/POTFILES.in: Added libgnomeui/gnome-appbar.c thanks to
-	Marcel Telka <marcel@telka.sk>.
 
 2001-12-28  jacob berkman  <jacob@ximian.com>
 
@@ -199,10 +173,6 @@ Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
 	* glade/glade-gnome.c: sigh, forgot to commit fixes for
 	de-privatization of GnomeDialog
 	
-
-2001-12-28  Christian Rose  <menthos@menthos.com>
-
-	* po/sv.po: Updated Swedish translation.
 
 2001-12-27  jacob berkman  <jacob@ximian.com>
 
@@ -264,10 +234,6 @@ Sat Dec 22 23:29:15 2001  George Lebl <jirka@5z.com>
 
 2001-12-23  Takayuki KUSANO  <AE5T-KSN@asahi-net.or.jp>
 
-	* po/ja.po: Added Japanese translation.
-
-2001-12-23  Takayuki KUSANO  <AE5T-KSN@asahi-net.or.jp>
-
 	* configure.in: Added "ja" to ALL_LINGUAS.
 
 2001-12-21  jacob berkman  <jacob@ximian.com>
@@ -322,10 +288,6 @@ Fri Dec 14 16:24:04 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* configure.in: Up version, disable tests/
 	until it works with srcdir!=builddir.
-
-2001-12-13  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated Norwegian (bokmål) translation.
 
 2001-12-13  Darin Adler  <darin@bentspoon.com>
 
@@ -464,10 +426,6 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 	sure it knows what accel group to use for dynamic accelerator
 	changing.
 
-2001-12-08  Christian Rose  <menthos@menthos.com>
-
-	* po/sv.po: Updated Swedish translation.
-
 2001-12-08  Anders Carlsson  <andersca@gnu.org>
 
 	* libgnomeui/gnome-marshal-main.c: Add file which includes gnome-marshal.[ch].
@@ -554,26 +512,10 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-icon-item.h: Add.
 
-2001-12-05  Yuriy Syrota  <rasta@renome.rovno.ua>
-
-	* po/uk.po: Added Ukrainian translation.
-
 2001-12-04  Murray Cumming  <murrayc@usa.net>
 
 	* libgnomeui/gnome-about.h/.c: Added gnome_about_construct(), for
 	  language bindings.
-
-2001-12-04  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated Norwegian (bokmål) translation.
-
-2001-12-04  Christian Rose  <menthos@menthos.com>
-
-	* po/sv.po: Updated Swedish translation.
-
-2001-12-01  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated Norwegian (bokmål) translation.
 
 2001-11-30  Richard Hestilow  <hestilow@ximian.com>
 
@@ -603,11 +545,6 @@ Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 2001-11-30  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Up version to 1.107.0
-
-2001-11-29  Wang Jian  <lark@linux.net.cn>
-
-	* po/zh_CN.po: Updated Simplified Chinese translation by
-	Wang Li <charlesw1234@163.com>.
 
 2001-11-28  jacob berkman  <jacob@ximian.com>
 
@@ -712,7 +649,6 @@ Fri Nov 16 02:06:32 2001  George Lebl <jirka@5z.com>
 2001-11-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-href.c: Fix a typo.
-	
 
 2001-11-14  Michael Meeks  <michael@ximian.com>
 
@@ -725,14 +661,6 @@ Fri Nov 16 02:06:32 2001  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-app.c (gnome_app_set_menus): use
 	gtk_accel_groups_from_acceleratable instead of from_object;
 	(gnome_app_add_toolbar): ditto.
-
-2001-11-14  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated Norwegian (bokmål) translation.
-
-2001-11-12  Darin Adler  <darin@bentspoon.com>
-
-	* po/.cvsignore: po2tbl.sed.in
 
 2001-11-12  Darin Adler  <darin@bentspoon.com>
 
@@ -882,11 +810,6 @@ Tue Oct 23 14:42:04 2001  George Lebl <jirka@5z.com>
 
 	* Makefile.am (SUBDIRS): build glade/
 
-2001-10-23  Héctor García Álvarez  <hector@scouts-es.org>
-
-        * es.po: Updated Spanish translation.
-	
-
 2001-10-22  Cristiano De Michele <cristiano.demichele@na.infn.it>
 
 	* libgnomeui/gnome-entry.c (gnome_entry_finalize): don't NULL priv and
@@ -930,10 +853,6 @@ Sun Oct 21 00:24:59 2001  George Lebl <jirka@5z.com>
 	(gnome_href_set_text): use markup to add the underline to the
 	link. (this doesn't seem to work correctly yet, but that is a gtk
 	bug.
-
-2001-10-14  Valek Filippov  <frob@df.ru>
-
-	* po/ru.po: Added russian translation.
 
 2001-10-14  Bastien Nocera  <hadess@hadess.net>
 
@@ -987,11 +906,6 @@ Sun Oct 14 18:03:38 2001  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-ui-init.c: Fix an INCREDIBLE hack, and a couple of leaks
 	  in the gtk init stuff.  All runtime data needs to be stored
 	  with the GnomeProgram and NOT the GnomeModuleInfo.
-
-2001-10-13  Héctor García Álvarez  <hector@scouts-es.org>
-
-        * es.po: Updated Spanish translation.
-	
 
 2001-10-13  Bastien Nocera  <hadess@hadess.net>
 
@@ -1075,16 +989,6 @@ Tue Oct 09 19:35:23 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-mdi-child.c: fixes for renames
 	
-
-2001-10-08  Wang Jian  <lark@linux.net.cn>
-
-	* po/zh_CN.po: Updated Simplified Chinese translation.
-
-2001-10-07  Héctor García Álvarez  <hector@scouts-es.org>
-
-        * es.po: Updated Spanish translation.
-	
-
 2001-10-04  James Henstridge  <james@daa.com.au>
 
 	* libgnomeui/gnome-icon-list.c (gnome_icon_list_class_init): change second
@@ -1146,17 +1050,6 @@ Fri Sep 28 15:54:23 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-entry.c: correct gconf usage 
 
-2001-10-02  Héctor García Álvarez  <hector@scouts-es.org>
-
-        * es.po: Updated Spanish translation.
-	
-
-2001-09-27  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated Norwegian (bokmål) translation.
-	* po/POTFILES.in: Updated.
-	
-
 2001-09-26  Michael Meeks  <michael@ximian.com>
 
 	* libgnomeui/libgnomeui-2.0.pc.in: add libbonoboui-2.0 for gnome
@@ -1167,10 +1060,6 @@ Fri Sep 28 15:54:23 2001  George Lebl <jirka@5z.com>
 	* configure.in: Up to 1.104.0 and require libgnome 1.104.0 and
 	libgnomecanvas 1.104.0
 
-2001-09-24  Pablo Saratxaga  <pablo@mandrakesoft.com>
-
-	* po/az.po: Updated Azeri file
-
 2001-09-24  Havoc Pennington  <hp@redhat.com>
 
 	* autogen.sh (srcdir): remove CERTIFIED_GNOMIE
@@ -1179,28 +1068,13 @@ Fri Sep 28 15:54:23 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/.cvsignore: Ignore gnome_segv2 binary.
 
-2001-09-23  Héctor García Álvarez  <hector@scouts-es.org>
-
-        * es.po: Updated Spanish translation.
-	
-
 2001-09-22  Wang Jian <lark@linux.net.cn>
 
 	* configure.in(ALL_LINGUAS): Added zh_CN.
 
-2001-09-22  Wang Jian  <lark@linux.net.cn>
-
-	* po/zh_CN.po: Added Simplified Chinese translation.
-	(Merged from gnome-libs/po/zh_CN.po)
-
 2001-09-22  Abel Cheung <maddog@linux.org.hk>
 
 	* configure.in: Added "zh_TW" to ALL_LINGUAS.
-
-2001-09-22  Abel Cheung  <maddog@linux.org.hk>
-
-	* po/zh_TW.po: New traditional Chinese translation from
-	  Joe Man <trmetal@yahoo.com.hk>
 
 2001-09-20  Frank Belew <frb@ximian.com>
 
@@ -1242,11 +1116,6 @@ Fri Sep 14 12:36:25 2001  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-icon-list.c, gnome-client.c, gnome-icon-entry.c: move to
 	  the gnome-macros stuff.
 
-2001-09-19  Héctor García Álvarez  <hector@scouts-es.org>
-
-	* po/es.po: Updated Spanish translation.
-	
-
 2001-09-19  Darin Adler  <darin@bentspoon.com>
 
 	* libgnomeui/gnome-about.c: (gnome_about_draw_names): Must unref the
@@ -1277,18 +1146,6 @@ Fri Sep 14 12:36:25 2001  George Lebl <jirka@5z.com>
 	* COPYING.LIB: Add this file.
 
 	* Makefile.am (EXTRA_DIST): Add COPYING.LIB
-
-2001-09-15  Héctor García Álvarez  <hector@scouts-es.org>
-
-	* po/es.po: Updated Spanish translation.
-	
-Mon Sep 03 17:28:21 2001  George Lebl <jirka@5z.com>
-
-	* po/POTFILES.in: remove the canvas init file
-
-Mon Sep 03 05:32:28 2001  George Lebl <jirka@5z.com>
-
-	* po/POTFILES.in: add missing files
 
 2001-09-12  jacob berkman  <jacob@ximian.com>
 
@@ -1588,14 +1445,6 @@ Fri Aug 24 10:00:24 2001  George Lebl <jirka@5z.com>
 	* configure.in: get rid of the CERTIFIED_GNOMIE bullshit for it is
 	  evil and stupid
 
-2001-09-02  Fatih Demir <kabalak@gtranslator.org>
-
-	* po/tr.po: Committed updated Turkish translation by Ömer.
-
-2001-09-02  Carlos Perelló Marín <carlos@gnome-db.org>
-
-	* po/POTFILES.in: Removed demos/winhints_demo.c
-
 2001-09-02  Anders Carlsson  <andersca@gnu.org>
 
 	* libgnomeui/gnome-stock-icons.c:
@@ -1832,10 +1681,6 @@ Sat Aug 25 00:33:51 2001  Jonathan Blandford  <jrb@redhat.com>
 	(gnome_druid_page_standard_append_item): Modified patch from James
 	Cape to improve look of druid.  Added a convenience API.
 
-2001-08-27  Abel Cheung <maddog@linux.org.hk>
-
-	* po/es.po: Fixed header.
-
 2001-08-24  Darin Adler  <darin@bentspoon.com>
 
 	* test-gnome/testgnome.c: (create_entry): Update for new API.
@@ -1905,10 +1750,6 @@ Fri Aug 24 07:16:18 2001  George Lebl <jirka@5z.com>
 2001-08-20  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* configure.in: /s/libgnomeui-2/libgnomeui2/
-
-2001-08-19  Fatih Demir <kabalak@gtranslator.org>
-
-	* po/ta.po: Committed updated Tamil translation.
 
 2001-08-14  Martin Baulig  <baulig@suse.de>
 
@@ -2013,10 +1854,6 @@ Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
 
 2001-08-07  Darin Adler  <darin@bentspoon.com>
 
-	* po/.cvsignore: New file to ignore.
-
-2001-08-07  Darin Adler  <darin@bentspoon.com>
-
 	* libgnomeui/oafgnome.c: Remove unnecessary includes of now-nonexistent
 	headers to make things compile.
 
@@ -2060,11 +1897,6 @@ Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
 	* test-gnome/testgnome.c (create_newwin): Get this building again by adding
 	a NULL CORBA environment to the bonobo_ui_component_set_container
 	call.
-
-2001-07-26  Peter Williams  <peterw@ximian.com>
-
-	* po/POTFILES.in: Remove gnome-recently-used.c. Track the
-	rename of gnome-init.c to gnome-ui-init.c
 
 2001-07-22  Martin Baulig  <baulig@suse.de>
 
@@ -2125,10 +1957,6 @@ Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
 
 	* test-gnome/testgnome.c (create_newwin): fixup add_verb_list_with_data so
 	we pass the right data member.
-
-2001-07-19  Michael Meeks  <michael@ximian.com>
-
-	* po/POTFILES.in: remove gnome-pouch.c
 
 2001-07-19  Martin Baulig  <baulig@suse.de>
 
@@ -2217,18 +2045,6 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 	* libgnomeui/gnome-init.c (libgnomeui_rc_parse): removed #warning, as
 	gtk_rc_init is dead.
 
-2001-07-07  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated Norwegian translation.
-
-2001-07-07  Christopher R. Gabriel  <cgabriel@cgabriel.org>
-
-	* po/it.po: Added italian translation.
-
-2001-07-07  Christian Rose  <menthos@menthos.com>
-
-	* po/sv.po: Updated Swedish translation.
-
 2001-07-02  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* test-gnome/testgnome.[ch]: Some cleanup, but it does not run now :-?. I think
@@ -2265,11 +2081,6 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 	* configure.in: change MAKE_INLINE_PIXBUF to 
 	GDK_PIXBUF_CSOURCE.
 	
-
-2001-06-26  Fatih Demir <kabalak@gtranslator.org>
-
-	* po/ta.po: Added Tamil translation by Dinesh.
-
 2001-06-26  Fatih Demir <kabalak@gtranslator.org>
 
 	* configure.in: Added ta to the languages list.
@@ -2301,13 +2112,6 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 	* configure.in: added "es" for Spanish to $ALL_LINGUAS
 	
-
-2001-06-19  Héctor García Álvarez  <hector@scouts-es.org>
-
-	* po/es.po: Added Spanish translation.
-	* po/POTFILES.in: removed libgnomeui/gnome-animator.c since is no longer
-	there
-
 2001-06-19  Cody Russell  <bratsche@gnome.org>
 
 	* libgnomeui/gnome-animator.[ch]: Removed.
@@ -2320,16 +2124,7 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 2001-06-16  Christian Rose  <menthos@menthos.com>
 
-	* po/sv.po: Added Swedish translation.
-
-2001-06-16  Christian Rose  <menthos@menthos.com>
-
 	* configure.in: Added sv to ALL_LINGUAS.
-
-2001-06-15  Martin Baulig  <baulig@suse.de>
-
-	* po/POTFILES.in: Removed libgnomeui/gnome-helpsys.c and
-	libgnomeui/gnome-popup-help.c
 
 2001-06-15  Martin Baulig  <baulig@suse.de>
 
@@ -2359,11 +2154,6 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 	* libgnomeui/gnome-cursors.[ch]: Removed. This was a new addition, so we don't
 	need to put it into libcompat.
-
-2001-06-13  Martin Baulig  <baulig@suse.de>
-
-	* po/POTFILES.in: Removed components/gnome-image-entry-component.c and
-	libgnomeui/gnome-selector-component.c.
 
 2001-06-13  Martin Baulig  <baulig@suse.de>
 
@@ -2402,10 +2192,6 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 	#include <bonobo.h>: it will enable the compatibility stuff
 	while you should use <libgnome.h> and <libgnomeui.h> for
 	new applications.
-
-2001-06-12  Martin Baulig  <baulig@suse.de>
-
-	* po/POTFILES.in: Removed gnome-gconf.c.
 
 2001-06-12  Martin Baulig  <baulig@suse.de>
 
@@ -2449,17 +2235,7 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 2001-06-07  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
-	* po/az.po: Added Azeri file
-	* po/wa.po: Added Walloon file
-
-2001-06-07  Pablo Saratxaga  <pablo@mandrakesoft.com>
-
 	* configure.in: Added "az" and "wa" to the languages list.
-
-2001-06-06  Fatih Demir <kabalak@gtranslator.org>
-
-	* po/tr.po: Added preliminary Turkish translation
-		by Görkem.
 
 2001-06-06  Fatih Demir <kabalak@gtranslator.org>
 
@@ -2562,10 +2338,6 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 2001-05-30  Christophe Merlet  <redfox@eikonex.org>
 
-	* po/fr.po: Added French translation.
-
-2001-05-30  Christophe Merlet  <redfox@eikonex.org>
-
 	* configure.in: Added fr to $ALL_LINGUAS.
 
 2001-05-27  ERDI Gergo  <cactus@cactus.rulez.org>
@@ -2592,10 +2364,6 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 	* libgnomeui/gnome-selector-client.c (gnome_selector_client_construct): Create the
 	property bag and use the factory.
-
-2001-05-22  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated Norwegian translation.
 
 2001-05-21  Martin Baulig  <baulig@suse.de>
 
@@ -2633,12 +2401,6 @@ Sun May 20 23:15:50 2001  George Lebl <jirka@5z.com>
 	* libgnomeui/gnome-image-selector.c, gnome-image-entry.c: include the component
 	  header from the right directory, components/ to make this beast
 	  compile ... yay!
-
-2001-05-21  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated.
-	* po/POTFILES.in: Updated.
-	
 
 2001-05-20  Martin Baulig  <baulig@suse.de>
 
@@ -2991,16 +2753,6 @@ Sun May 20 23:15:50 2001  George Lebl <jirka@5z.com>
 2001-04-24  Martin Baulig  <baulig@suse.de>
 
 	* libgnomeui/gnome-init.c: Reflect latests GnomeProgram API changes.
-
-2001-04-21  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Added Norwegian (bokmål) translation.
-	* po/nn.po: Added Norwegian (nynorsk) translation.
-	* po/POTFILES.in: Populated.
-	
-Wed Dec 26 14:35:47 2001  George Lebl <jirka@5z.com>
-
-	* po/testgnome.c: add testcase for non existant icon file
 
 2001-04-21  Kjartan Maraas  <kmaraas@gnome.org>
 
