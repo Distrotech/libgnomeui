@@ -260,8 +260,6 @@ static void gnome_mdi_init (GnomeMDI *mdi) {
   mdi->mode = GNOME_MDI_DEFAULT_MODE;
   mdi->tab_pos = gnome_preferences_get_mdi_tab_pos();
 
-  printf("tp: %d\n", mdi->tab_pos);
-
   mdi->children = NULL;
   mdi->windows = NULL;
   mdi->registered = NULL;
@@ -1243,8 +1241,6 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
     mode = mdi->mode;
   else if(mdi->mode == mode)
     return;
-
-  printf("mode: %d\n", mode);
 
   /* remove all views from their parents */
   child_node = mdi->children;
