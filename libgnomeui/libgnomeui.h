@@ -65,6 +65,7 @@
 #include "libgnomeui/gnome-mdi-session.h"
 #include "libgnomeui/gnometypebuiltins.h"
 #include "libgnomeui/gnome-winhints.h"
+#include "libgnomeui/gnome-href.h"
 
 BEGIN_GNOME_DECLS
 
