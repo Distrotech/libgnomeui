@@ -1,3 +1,9 @@
+Sun Jan 10 23:33:10 1999  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas-image.c (gnome_canvas_image_update): made it (more)
+	correctly support the case where the image width/height are not
+	equal to the imlib image width/height.
+
 1999-01-11  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gtkrc.ko: New file.  gtkrc for Korean users.
