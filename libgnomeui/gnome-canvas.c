@@ -833,8 +833,8 @@ gnome_canvas_destroy (GtkObject *object)
 
 	/* FIXME */
 
-	if (GTK_OBJECT_CLASS (item_parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (item_parent_class)->destroy) (object);
+	if (GTK_OBJECT_CLASS (canvas_parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (canvas_parent_class)->destroy) (object);
 }
 
 GtkWidget *

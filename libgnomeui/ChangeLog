@@ -1,3 +1,10 @@
+1998-07-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* Makefile.am (INCLUDES): Cosmetic cleanups.
+
+	* gnome-canvas.c (gnome_canvas_destroy): Use canvas_parent_class,
+	not item_parent_class on the destroy method.
+
 Thu Jul  2 14:12:14 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock*: new icons by tigert.

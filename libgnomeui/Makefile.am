@@ -1,8 +1,18 @@
 ## Process this file with automake to produce Makefile.in
 
-libgnomeuiincludedir = $(includedir)/libgnomeui
-
 SUBDIRS = pixmaps
+
+#
+# The targets
+#
+noinst_PROGRAMS = ted_demo stock_demo
+bin_PROGRAMS    = gnome_segv
+lib_LTLIBRARIES = libgnomeui.la
+
+#
+# Install location for header files
+#
+libgnomeuiincludedir = $(includedir)/libgnomeui
 
 INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) $(GTK_CFLAGS) $(SUPPORTINCS) \
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
@@ -12,9 +22,6 @@ INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) $(GTK_CFLAGS) $(SUPPORTINCS) \
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-noinst_PROGRAMS = ted_demo stock_demo
-bin_PROGRAMS    = gnome_segv
-lib_LTLIBRARIES = libgnomeui.la
 
 # these files are `autoconf'ed in.
 EXTRA_libgnomeui_la_SOURCES = gnome-canvas.c gnome-canvas-rect-ellipse.c
@@ -24,49 +31,49 @@ EXTRA_HEADERS = gnome-canvas.h gnome-canvas-rect-ellipse.h
 libgnomeui_la_DEPENDENCIES = @GNOME_CANVAS_OBJS@
 
 libgnomeui_la_SOURCES = \
+	gnome-about.c			\
 	gnome-actionarea.c		\
 	gnome-app.c			\
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
+	gnome-calculator.c              \
 	@GNOME_CANVAS_SRC@		\
+	gnome-client.c			\
 	gnome-color-selector.c 		\
+	gnome-dateedit.c		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
 	gnome-geometry.c		\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
-	gnome-number-entry.c		\
 	gnome-font-selector.c 		\
 	gnome-ice.c			\
 	gnome-icon-list.c		\
 	gnome-init.c			\
+	gnome-lamp.c			\
 	gnome-less.c			\
+	gnome-mdi.c			\
+	gnome-mdi-child.c		\
 	gnome-messagebox.c		\
 	gnome-net.c			\
-	gnome-about.c			\
+	gnome-number-entry.c		\
 	gnome-pixmap.c			\
 	gnome-preferences.c		\
 	gnome-propertybox.c		\
 	gnome-properties.c		\
-	gnome-client.c			\
+	gnome-rootwin.c			\
 	gnome-scores.c			\
 	gnome-startup.c			\
-	gnome-rootwin.c			\
 	gnome-stock.c			\
-	gtk-clock.c			\
-	gtk-ted.c			\
 	gnome-stock-imlib.h		\
-	gtk-plug.c			\
-	gtk-socket.c			\
 	gtkcalendar.c			\
 	gtkspell.c			\
-	gnome-dateedit.c		\
-	gnome-lamp.c			\
-	gnome-calculator.c              \
-	gtkdial.c                       \
-	gnome-mdi.c			\
-	gnome-mdi-child.c
+	gtk-clock.c			\
+	gtk-plug.c			\
+	gtk-socket.c			\
+	gtk-ted.c			\
+	gtkdial.c
 
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
@@ -74,45 +81,45 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-app.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
+	gnome-calculator.h              \
 	@GNOME_CANVAS_HED@		\
+	gnome-client.h			\
 	gnome-color-selector.h		\
+	gnome-dateedit.h		\
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
 	gnome-dns.h			\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
-	gnome-number-entry.h		\
 	gnome-font-selector.h 		\
 	gnome-geometry.h		\
 	gnome-ice.h			\
 	gnome-icon-list.h		\
+	gnome-lamp.h			\
 	gnome-less.h			\
 	gnome-messagebox.h		\
+	gnome-mdi.h			\
+	gnome-mdi-child.h		\
+	gnome-number-entry.h		\
 	gnome-net.h			\
 	gnome-preferences.h		\
 	gnome-propertybox.h		\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
-	gnome-client.h			\
 	gnome-scores.h			\
 	gnome-startup.h			\
 	gnome-rootwin.h			\
 	gnome-stock.h			\
 	gnome-types.h			\
 	gnome-uidefs.h			\
+	gtkcalendar.h			\
+	gtkdial.h			\
+	gtkspell.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\
 	gtk-plug.h			\
 	gtk-socket.h			\
-	libgnomeui.h			\
-	gtkcalendar.h			\
-	gtkspell.h			\
-	gnome-dateedit.h		\
-	gnome-lamp.h			\
-	gnome-calculator.h              \
-	gtkdial.h			\
-	gnome-mdi.h			\
-	gnome-mdi-child.h
+	libgnomeui.h
 
 gnome_segv_SOURCES = gnome_segv.c
 
