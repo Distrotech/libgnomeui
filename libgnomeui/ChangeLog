@@ -1,3 +1,24 @@
+1999-04-23  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* animator_demo.c (main): Removed Tux animation.
+
+	* gnome-animator.c: Removed some unused variables.
+	(draw_background_pixmap): Don't draw anything if `widget->window'
+	is NULL.
+	(gnome_animator_new_with_size): Set the requisition directly
+	instead of using `gtk_widget_set_usize()'.
+
+	* gnome-dock.c (gnome_dock_add_floating_item): Removed a couple of
+	useless casts.
+	(gnome_dock_add_floating_item): Do not remove the item from its
+	parent.
+
+	* gnome-dock-item.c (gnome_dock_item_map): If we are floating,
+	call `gnome_dock_item_detach()' properly to do the floating setup.
+	(gnome_dock_item_size_allocate): Applied patch from Damon Chaplin
+	<damon@karuna.freeserve.co.uk> to fix handling of the child's
+	requisition.
+
 1999-04-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-dock-item.c (gnome_dock_item_destroy): Release di->name on
@@ -604,9 +625,8 @@ Tue Feb 09 18:51:08 1999  George Lebl  <jirka@5z.com>
 1999-02-08  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock.c (drag_snap): New function: contains the code from
- 	`drag_motion()'.  This is does not change anything in the
- 	behavior, but makes it more simple to implement outline movement
- 	later.
+ 	`drag_motion()'.  This does not change anything in the behavior,
+ 	but makes it more simple to implement outline movement later.
 
 	* gnome-dock-item.c (gnome_dock_item_delete_event): Do nothing for 
 	now.
