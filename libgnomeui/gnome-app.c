@@ -7,6 +7,7 @@
  * improvements and rearrangement by Miguel,
  * and I don't know what you other people did :)
  */
+#include "config.h"
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
@@ -455,8 +456,11 @@ gnome_app_set_menus (GnomeApp *app,
 	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
 	char *location = NULL;
 	GtkWidget *hb;
+#ifdef HAVE_DEVGTK
 	GtkAccelGroup *ag;
-
+#else
+	GtkAcceleratorTable *at;
+#endif
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 	g_return_if_fail(app->menubar == NULL);
@@ -489,12 +493,17 @@ gnome_app_set_menus (GnomeApp *app,
 		g_free (location);
 		gnome_config_pop_prefix ();
 	}
-
+#ifdef HAVE_DEVGTK
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
 /* FIXME */
 /*	if(ag && !g_list_find(GTK_WINDOW(app)->accelerator_groups, ag)) */
 	if (ag)
 	gtk_window_add_accel_group(GTK_WINDOW(app), ag);
+#else
+        at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
+        if(at && !g_list_find(GTK_WINDOW(app)->accelerator_tables, at))
+                gtk_window_add_accelerator_table(GTK_WINDOW(app), at);
+#endif
 }
 
 void
@@ -504,8 +513,11 @@ gnome_app_set_toolbar (GnomeApp *app,
 	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
 	GtkWidget *hb;
 	char *location;
+#ifdef HAVE_DEVGTK
 	GtkAccelGroup *ag;
-
+#else
+	GtkAcceleratorTable *at;
+#endif
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 	g_return_if_fail(toolbar != NULL);
@@ -531,12 +543,18 @@ gnome_app_set_toolbar (GnomeApp *app,
 	}
 	else
 		gnome_app_toolbar_set_position (app, pos);
+#ifdef HAVE_DEVGTK
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
 	/* FIXME
 	if(ag && !g_list_find(GTK_WINDOW(app)->accelerator_groups, ag))
 	*/
 	if (ag)
 		gtk_window_add_accel_group(GTK_WINDOW(app), ag);
+#else
+        at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
+        if(at && !g_list_find(GTK_WINDOW(app)->accelerator_tables, at))
+                gtk_window_add_accelerator_table(GTK_WINDOW(app), at);
+#endif
 }
 
 void
