@@ -261,8 +261,8 @@ gnome_druid_page_edge_prepare (GnomeDruidPage *page,
 		gnome_druid_set_show_finish (GNOME_DRUID (druid), TRUE);
 		gtk_widget_grab_default (GNOME_DRUID (druid)->finish);
 		break;
+	case GNOME_EDGE_OTHER:
 	default:
-		g_assert_not_reached ();
 		break;
 	}
 }

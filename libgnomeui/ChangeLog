@@ -3,6 +3,7 @@
 	* gnome-druid-page-edge.c (gnome_druid_page_edge_new): new
 	widget.  Moved gnome_druid_page_edge_finish/start away, and moved
 	their functionality into a single widget.
+	(gnome_druid_page_edge_prepare): add a GNOME_EDGE_OTHER.
 
 1999-11-22  Jonathan Blandford  <jrb@redhat.com>
 
