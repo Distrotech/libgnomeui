@@ -448,7 +448,7 @@ gnome_dialog_run_modal(GnomeDialog *dialog)
   g_return_val_if_fail(dialog != NULL, -1);
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
-  gtk_window_set_modal(dialog);
+  gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
   return gnome_dialog_run(dialog);
 }
 
@@ -463,7 +463,7 @@ gnome_dialog_run(GnomeDialog *dialog)
 
   was_only_hidden = dialog->just_hide || !dialog->click_closes;
   was_modal = GTK_WINDOW(dialog)->modal;
-  if (!was_modal) gtk_window_set_modal(dialog,TRUE);
+  if (!was_modal) gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
 
   ri.clicked_id =
     gtk_signal_connect(GTK_OBJECT(dialog), "clicked",

@@ -187,7 +187,7 @@ void
 gnome_message_box_set_modal (GnomeMessageBox     *message_box)
 {
   g_warning("gnome_message_box_set_modal is deprecated.\n");
-  gnome_dialog_set_modal(GNOME_DIALOG(message_box));
+  gtk_window_set_modal(GNOME_DIALOG(message_box));
 }
 
 void

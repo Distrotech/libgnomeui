@@ -123,7 +123,7 @@ static GtkWidget * reply_dialog (const gchar * question,
 		     info);
 
   if (modal) {
-    gnome_dialog_set_modal(GNOME_DIALOG(mbox));
+    gtk_window_set_modal(GTK_WINDOW(mbox));
   }
 
   if (parent != NULL) {

@@ -1,5 +1,12 @@
 1998-09-29  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-dialog.c: Oops, fix a couple screwups in the last commit.
+	* gnome-messagebox.c: Use gtk_window_set_modal
+	* gnome-dialog-util.c: ditto
+	* stock_demo.c: ditto.
+
+1998-09-29  Havoc Pennington  <hp@pobox.com>
+
 	* gnome-dialog.c, gnome-dialog.h: Replace dialog's modality
 	facilities with the ones from GtkWindow. Since GtkWindow's were
 	exactly the same nothing should break (unless you accessed the
@@ -15,7 +22,7 @@
 	(gnome_dialog_close_real): Don't remove grab, GtkWindow does it on
 	hide.
 	(gnome_dialog_show): Don't add grab.
-	
+
 1998-09-28  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-animator.c, gnome-animator.h: Misspell private, so C++
