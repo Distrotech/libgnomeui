@@ -81,17 +81,24 @@ gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 static void
 gnome_icon_selection_init (GnomeIconSelection *gis)
 {
+  GtkWidget *scrolled;
+
   gis->box = gtk_vbox_new(FALSE, 0);
 
   gtk_container_add(GTK_CONTAINER(gis), gis->box);
 
   gtk_widget_show(gis->box);
 
+  scrolled = gtk_scrolled_window_new(NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(scrolled),
+			   GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+  gtk_box_pack_end(GTK_BOX(gis->box), scrolled, TRUE, TRUE, 0);
+  gtk_widget_show(scrolled);
+
   gis->clist = gtk_clist_new(1);
   gtk_clist_set_row_height(GTK_CLIST(gis->clist), 
 			   ICON_SIZE + GNOME_PAD_SMALL);
-
-  gtk_box_pack_end(GTK_BOX(gis->box) , gis->clist, TRUE, TRUE, 0);
+  gtk_container_add(GTK_CONTAINER(scrolled), gis->clist);
 
   gtk_widget_show(gis->clist);
 

@@ -1,3 +1,8 @@
+Sat Nov 14 14:55:48 1998  John Ellis  <johne@bellatlantic.net>
+
+	* gone-icon-sel.c(gnome_icon_selection_init): Add scrolled window
+	for the clist of icons.
+
 Fri Nov 13 11:29:22 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-rootwin.c: Include gdkx.h not gdkprivate.h
