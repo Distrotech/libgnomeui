@@ -1,3 +1,9 @@
+1999-12-25  Ettore Perazzoli  <ettore@gnu.org>
+
+	[From Morten Welinder <terra@diku.dk>]
+	* gnome-app.c (gnome_app_destroy): Unref the dock layout if not
+	NULL.
+
 1999-12-20  JP Rosevear <jpr@arcavia.com>
 
         * gtkpixmapmenuitem.c (gtk_pixmap_menu_item_size_request): make
@@ -96,6 +102,7 @@ Wed Nov 10 17:55:10 1999  George Lebl <jirka@5z.com>
 
 	* gnome-mdi.c (gnome_mdi_remove_view): if a registered object exists,
 	destroy an empty GnomeApp even if it is the last one.
+	
 
 1999-10-21  Federico Mena Quintero  <federico@redhat.com>
 
