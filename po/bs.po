@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.bs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-25 21:01+0200\n"
+"POT-Creation-Date: 2004-08-30 16:28+0200\n"
 "PO-Revision-Date: 2004-07-31 01:44+0200\n"
 "Last-Translator: Kenan Hadžiavdić <kenan@bgnett.no>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -34,16 +34,16 @@ msgstr "Podređena stavka 2"
 msgid "Hint for item 2"
 msgstr "Savjet za stavku 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:650
+#: file-chooser/gtkfilesystemgnomevfs.c:653
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nije direktorij"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:857
+#: file-chooser/gtkfilesystemgnomevfs.c:860
 msgid "Filesystem"
 msgstr "Datotečni sistem"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1521
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Neuspješno snimanje zabilješke (%s)"
@@ -60,8 +60,11 @@ msgstr "Neuspješno otvaranje datoteke '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Neuspješno učitavanje slike '%s': razlog nije poznat, vjerovatno oštećena datoteka slike"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Neuspješno učitavanje slike '%s': razlog nije poznat, vjerovatno oštećena "
+"datoteka slike"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -152,7 +155,8 @@ msgid "Translator credits"
 msgstr "Zaslužni prevodioci"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Zasluge prevodiocima. Ovaj niz bi trebao biti označen za prijevod"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -170,7 +174,6 @@ msgstr "O %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -228,7 +231,6 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "P_omoć"
 
@@ -419,11 +421,11 @@ msgstr "Podesite aplikaciju"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_O"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "O ovoj aplikaciji"
 
@@ -450,7 +452,7 @@ msgstr "Otvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zatvori trenutni prozor"
 
@@ -623,11 +625,11 @@ msgstr "Interaktivnost"
 msgid "Level of user activity required."
 msgstr "Neophodan nivo korisničke aktivnosti."
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Vaš HTTP proxy zahtijeva da se prijavite.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -636,25 +638,25 @@ msgstr ""
 "Morate se prijaviti za pristup \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "Vaša šifra će biti poslana nekriptovana."
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "Vaša šifra će biti poslana kriptovana."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Obavezna provjera autentičnosti"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Morate se prijaviti za pristup %s domeni %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Morate se prijaviti za pristup %s\n"
@@ -766,7 +768,8 @@ msgstr "Izaberi vrijeme sa liste"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date je zastarjelo, koristite gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date je zastarjelo, koristite gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -1167,7 +1170,8 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "Jedinstveni identifikator za upis ikone.  Koristiće se za snimanje historije."
+msgstr ""
+"Jedinstveni identifikator za upis ikone.  Koristiće se za snimanje historije."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1237,7 +1241,8 @@ msgstr "Putanja do ikone"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Ovdje trebate upisati ime direktorija u kojem se nalaze datoteke ikona."
+msgstr ""
+"Ovdje trebate upisati ime direktorija u kojem se nalaze datoteke ikona."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1463,7 +1468,5 @@ msgstr "_Obavijesti autore"
 msgid "_Debug"
 msgstr "_Traži greške"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Napust test"
-
+#~ msgid "Exit the test"
+#~ msgstr "Napust test"

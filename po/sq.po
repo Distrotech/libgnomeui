@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-19 12:07+0200\n"
+"POT-Creation-Date: 2004-08-30 16:28+0200\n"
 "PO-Revision-Date: 2004-07-27 11:04+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -32,16 +32,16 @@ msgstr "Objekt bir 2"
 msgid "Hint for item 2"
 msgstr "Propozime për objektin 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:652
+#: file-chooser/gtkfilesystemgnomevfs.c:653
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nuk është kartelë"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:859
+#: file-chooser/gtkfilesystemgnomevfs.c:860
 msgid "Filesystem"
 msgstr "File i sistemit"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1523
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ruajtja e libërshënuesit dështoi (%s)"
@@ -172,7 +172,6 @@ msgstr "Informacione mbi %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -230,7 +229,6 @@ msgid "_Game"
 msgstr "_Loja"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ndihmë"
 
@@ -421,11 +419,11 @@ msgstr "Konfiguro programin"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Informacione"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Informacione mbi këtë program"
 
@@ -452,7 +450,7 @@ msgstr "Krijo një dritare të re"
 msgid "_Close This Window"
 msgstr "_Mbylle këtë dritare"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Mbyll dritaren aktuale"
 
@@ -625,11 +623,11 @@ msgstr "Interaktivitet"
 msgid "Level of user activity required."
 msgstr "Niveli i kërkuar i aktivitetit të pëdoruesit."
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Proxy juaj HTTP kërkon që ju te jeni identifikuar.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -638,25 +636,25 @@ msgstr ""
 "Duhet të jeni identifikuar që të hyni tek \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "Fjalëkalimi juaj do të transmetohet i pakriptuar."
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "Fjalëkalimi juaj do të transmetohet i kriptuar."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Është i nevojshëm identifikimi"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Duhet të jeni identifikuar që të hyni tek %s domain %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Duhet të jeni identifikuar që të hyni tek %s\n"
@@ -1004,7 +1002,6 @@ msgstr ""
 "Nëse duhet përdorur instrumenti i ri GtkFileChooser apo instrumenti "
 "GtkFileSelection për të zgjedhur files."
 
-#. GRUT modified this item
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Zgjidh një file"
@@ -1471,7 +1468,5 @@ msgstr "_Informo zhvilluesit"
 msgid "_Debug"
 msgstr "_Debug"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Përfundo provën"
-
+#~ msgid "Exit the test"
+#~ msgstr "Përfundo provën"

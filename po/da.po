@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-17 13:20+0200\n"
+"POT-Creation-Date: 2004-08-30 16:28+0200\n"
 "PO-Revision-Date: 2004-08-17 15:14+0200\n"
 "Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -36,16 +36,16 @@ msgstr "Afkom-element 2"
 msgid "Hint for item 2"
 msgstr "Tip til element 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:652
+#: file-chooser/gtkfilesystemgnomevfs.c:653
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s er ikke en mappe"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:859
+#: file-chooser/gtkfilesystemgnomevfs.c:860
 msgid "Filesystem"
 msgstr "Filsystem"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1523
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Bogmærkegemning mislykkedes (%s)"
@@ -176,7 +176,6 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -234,7 +233,6 @@ msgid "_Game"
 msgstr "_Spil"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjælp"
 
@@ -425,11 +423,11 @@ msgstr "Konfigurér programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Om dette program"
 
@@ -456,7 +454,7 @@ msgstr "Opret et nyt vindue"
 msgid "_Close This Window"
 msgstr "L_uk dette vindue"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Luk det aktuelle vindue"
 
@@ -629,11 +627,11 @@ msgstr "Interaktiv"
 msgid "Level of user activity required."
 msgstr "Niveau af brugeraktivitet påkrævet"
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "HTTP-mellemværten kræver at du logger på.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -642,25 +640,25 @@ msgstr ""
 "Du skal logge på for at tilgå \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "Din adgangskode vil blive sendt ukrypteret."
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "Din adgangskode vil blive sendt krypteret."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Brugerverifikation krævet"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Du skal logge på for at tilgå %s domæne %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Du skal logge på for at tilgå %s\n"
@@ -1477,9 +1475,8 @@ msgstr "_Informér udviklere"
 msgid "_Debug"
 msgstr "_Fejlanalysering"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Afslut testprogrammet"
+#~ msgid "Exit the test"
+#~ msgstr "Afslut testprogrammet"
 
 #~ msgid " domain %s"
 #~ msgstr " domæne %s"

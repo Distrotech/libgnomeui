@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libGNOMEui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-16 13:40+0200\n"
+"POT-Creation-Date: 2004-08-30 16:28+0200\n"
 "PO-Revision-Date: 2004-03-14 09:33+0530\n"
 "Last-Translator: Sayamindu Dasgupta <unmadindu@bengalinux.org> \n"
 "Language-Team: Bangla <gnome-translation@bengalinux.org>\n"
@@ -31,17 +31,17 @@ msgstr "দুই নম্বর চাইল্ড বস্তু"
 msgid "Hint for item 2"
 msgstr "দুই নম্বর বস্তুর জন্য ইঙ্গিত"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:652
+#: file-chooser/gtkfilesystemgnomevfs.c:653
 #, c-format
 msgid "%s is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:859
+#: file-chooser/gtkfilesystemgnomevfs.c:860
 #, fuzzy
 msgid "Filesystem"
 msgstr "ফাইল_সমূহ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1523
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""
@@ -621,11 +621,11 @@ msgstr "পারস্পরিক অংশগ্রহণ"
 msgid "Level of user activity required."
 msgstr "ব্যবহারকারির অংশগ্রহণের মাত্রা।"
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "আপনাকে আপনার এইচ-টি-টি-পি প্রক্সি-তে লগ-ইন করতে হবে|\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -634,25 +634,25 @@ msgstr ""
 "\"%s\"-কে পড়তে চাইলে আপনাকে লগ-ইন করতে হবে।\n"
 " %s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "আপনার পাসওয়ার্ড আন-এনকৃপ্টেড অবস্থায় পাঠানো হবে। "
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "আপনার পাসওয়ার্ড এনকৃপ্টেড অবস্থায় পাঠানো হবে।"
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "ব্যবহারকারীর নাম এবং পাসওয়ার্ড দিতে হবে"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:299
 #, fuzzy, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "%s - কে পড়তে চাইলে আপনাকে লগ-ইন করতে হবে।\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "%s - কে পড়তে চাইলে আপনাকে লগ-ইন করতে হবে।\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-18 23:07+0300\n"
+"POT-Creation-Date: 2004-08-30 16:28+0200\n"
 "PO-Revision-Date: 2004-08-19 02:24+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -34,16 +34,16 @@ msgstr "Lapsikohta 2"
 msgid "Hint for item 2"
 msgstr "Kohdan 2 vinkki"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:652
+#: file-chooser/gtkfilesystemgnomevfs.c:653
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kansio"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:859
+#: file-chooser/gtkfilesystemgnomevfs.c:860
 msgid "Filesystem"
 msgstr "Tiedostojärjestelmä"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1523
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Kirjanmerkin tallentaminen epäonnistui (%s)"
@@ -174,7 +174,6 @@ msgstr "Tietoja ohjelmasta %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
@@ -232,7 +231,6 @@ msgid "_Game"
 msgstr "_Peli"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -423,11 +421,11 @@ msgstr "Määrittele ohjelman asetukset"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Tietoja"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Tietoja tästä ohjelmasta"
 
@@ -454,7 +452,7 @@ msgstr "Luo uusi ikkuna"
 msgid "_Close This Window"
 msgstr "_Sulje tämä ikkuna"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Sulje tämä ikkuna"
 
@@ -627,11 +625,11 @@ msgstr "Vuorovaikutteisuus"
 msgid "Level of user activity required."
 msgstr "Vaadittu käyttäjän aktiivisuuden määrä."
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "HTTP-välipalvelin vaatii sisäänkirjautumisen.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -640,26 +638,26 @@ msgstr ""
 "Osoitteen \"%s\" käyttämiseksi täytyy kirjautua sisään.\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "Salasanasi välittyy salaamattomana."
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "Salasanasi välittyy salattuna."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Todennus vaaditaan"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr ""
 "Osoitteen \"%s\" verkkoalueen \"%s\" käyttämiseksi täytyy kirjautua sisään.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Osoitteen \"%s\" käyttämiseksi täytyy kirjautua sisään.\n"
@@ -1468,9 +1466,8 @@ msgstr "_Ota yhteyttä kehittäjiin"
 msgid "_Debug"
 msgstr "_Vianetsintä"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Lopeta testi"
+#~ msgid "Exit the test"
+#~ msgstr "Lopeta testi"
 
 #~ msgid " domain %s"
 #~ msgstr " verkkoalue %s"

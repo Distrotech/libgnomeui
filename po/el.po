@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-25 16:59-0300\n"
+"POT-Creation-Date: 2004-08-30 16:28+0200\n"
 "PO-Revision-Date: 2004-08-25 17:23-0300\n"
 "Last-Translator: Nikos Charonitakis <charosn@her.forthnet.gr>\n"
 "Language-Team:  <nls@tux.hellug.gr>\n"
@@ -69,8 +69,11 @@ msgstr "Αποτυχία ανοίγματος του αρχείου '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Αποτυχία φόρτωσης εικόνας '%s': άγνωστη αιτία, πιθανό να είναι αλλοιωμένο το αρχείο της εικόνας"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Αποτυχία φόρτωσης εικόνας '%s': άγνωστη αιτία, πιθανό να είναι αλλοιωμένο το "
+"αρχείο της εικόνας"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
@@ -164,7 +167,8 @@ msgid "Translator credits"
 msgstr "Μνεία μεταφραστών"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Μνεία στους μεταφραστές. Αυτό το αλφαριθμητικό θα πρέπει να σημειωθεί ως "
 "μεταφράσιμο."
@@ -202,7 +206,6 @@ msgstr "Περί %s"
 #
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
@@ -334,7 +337,6 @@ msgstr "_Παιχνίδι"
 # #-#-#-#-#  gnomemeeting-el.po (gnomemeeting 0.12.2)  #-#-#-#-#
 #
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Βοήθεια"
 
@@ -728,7 +730,7 @@ msgstr "Ρύθμιση της εφαρμογής"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Π_ερί"
 
@@ -739,7 +741,7 @@ msgstr "Π_ερί"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
@@ -783,7 +785,7 @@ msgstr "_Κλείσιμο Αυτού Του Παραθύρου"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Κλείσιμο του τρέχοντος παραθύρου"
 
@@ -1050,8 +1052,7 @@ msgid "Authentication Required"
 msgstr "Απαιτείται πιστοποίηση"
 
 #: libgnomeui/gnome-authentication-manager.c:299
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Θα πρέπει να συνδεθείτε για να έχετε πρόσβαση στον τομέα %s\n"
 
@@ -1592,7 +1593,8 @@ msgstr "Μέγεθος γραμματοσειράς για την ετικέτα
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
+msgstr ""
+"Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -2086,7 +2088,8 @@ msgstr "Βιβλιοθήκη GNOME GUI"
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
+msgstr ""
+"Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -2165,7 +2168,5 @@ msgstr "Εκσ_φαλμάτωση"
 #
 # #-#-#-#-#  achtung-el.po (achtung 0.99.0)  #-#-#-#-#
 #
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Έξοδος από τη δοκιμή"
-
+#~ msgid "Exit the test"
+#~ msgstr "Έξοδος από τη δοκιμή"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.az\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-16 12:04+0200\n"
+"POT-Creation-Date: 2004-08-30 16:28+0200\n"
 "PO-Revision-Date: 2004-08-18 20:17+0300\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani <translation-team-az@lists.sourceforge.net>\n"
@@ -33,16 +33,16 @@ msgstr "Törəmə Üzv 2"
 msgid "Hint for item 2"
 msgstr "İkinci üzv üçün ipucu"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:652
+#: file-chooser/gtkfilesystemgnomevfs.c:653
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s qovluq deyil"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:859
+#: file-chooser/gtkfilesystemgnomevfs.c:860
 msgid "Filesystem"
 msgstr "Fayl sistemi"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1523
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Nişanlara qeyd bacarılmadı (%s)"
@@ -59,8 +59,10 @@ msgstr "'%s' faylı açıla bilmədi: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "'%s' rəsmi yüklənə bilmədi: səbəbi bilinmir, xəsərli rəsm faylı ola bilər"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"'%s' rəsmi yüklənə bilmədi: səbəbi bilinmir, xəsərli rəsm faylı ola bilər"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -151,8 +153,10 @@ msgid "Translator credits"
 msgstr "Tərcüməçilər"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Tərcüməçilər haqqında. Bu qatar tərcümə ediləbilən olaraq işarələnməlidir"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Tərcüməçilər haqqında. Bu qatar tərcümə ediləbilən olaraq işarələnməlidir"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -169,7 +173,6 @@ msgstr "%s Haqqında"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fayl"
 
@@ -227,7 +230,6 @@ msgid "_Game"
 msgstr "_Oyun"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Yardım"
 
@@ -418,11 +420,11 @@ msgstr "Proqram tə'minatını quraşdırın"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Haqqında"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Proqram tə'minatı haqqında"
 
@@ -449,7 +451,7 @@ msgstr "Yeni pəncərə yarat"
 msgid "_Close This Window"
 msgstr "Bu Pəncərəni _Bağla"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Hazırkı pəncərəni bağla"
 
@@ -622,11 +624,11 @@ msgstr "İnteraktivlik"
 msgid "Level of user activity required."
 msgstr "Məcburi olan istifadəçi fəallığı səviyyəsi"
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "HTTP Proxyniz sizin giriş etmənizi məcburi istəyir.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -635,25 +637,25 @@ msgstr ""
 "\"%sə yetişə bilmək üçün giriş etməlisiniz\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "Parolunuz kodlanmadan keçiriləcək."
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "Parolunuz kodlanaraq keçiriləcək."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Səlahiyyətləndirmə Məcburidir"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "%s %s domeninə yetişə bilmək üçün giriş etməlisiniz\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "%s-ə yetişə bilmək üçün giriş etməlisiniz\n"
@@ -765,7 +767,8 @@ msgstr "Siyahıdan zamanı seç"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date olmadı, gnome_date_edit_get_time istifadə edin"
+msgstr ""
+"gnome_date_edit_get_date olmadı, gnome_date_edit_get_time istifadə edin"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -1399,7 +1402,8 @@ msgstr "GNOME GUI Kitabxanası"
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Çoxlu parçalanma xətaları meydana gəldi: xəta dialoqu göstərilə bilmir\n"
+msgstr ""
+"Çoxlu parçalanma xətaları meydana gəldi: xəta dialoqu göstərilə bilmir\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1460,7 +1464,5 @@ msgstr "_İnkişafçılara Xəbər Ver"
 msgid "_Debug"
 msgstr "_Xəta Həlli"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Sınaqdan çıx"
-
+#~ msgid "Exit the test"
+#~ msgstr "Sınaqdan çıx"
