@@ -1,21 +1,22 @@
+# translation of libgnomeui.HEAD.po to Spanish
 # Translation into spanish of libgnomeui.
 # Copyright © 2001-2003 Free Software Foundation, Inc.
+# Francisco Javier Fernández <serrador@arrakis.es> (Revision)
 # Héctor García Álvarez <hector@scouts-es.org>, 2001.
 # Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.
-# Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2002.
-# Francisco Javier Fernández <serrador@arrakis.es> (Revision)
+# Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2002,2003.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui cvs\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "POT-Creation-Date: 2003-06-04 09:08+0200\n"
-"PO-Revision-Date: 2003-01-07 09:56GMT\n"
+"PO-Revision-Date: 2003-06-06 16:22+0200\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Germán Poo Caamaño <gpoo@ubiobio.cl>\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 1.0.1\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -50,9 +51,8 @@ msgid "Translated by"
 msgstr "Traducido por"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Créditos"
+msgstr "C_réditos"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -123,8 +123,7 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -256,7 +255,7 @@ msgstr "Imprimir el archivo actual"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Configuración de la impresión..."
+msgstr "Configuración de la impr_esión..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -597,7 +596,7 @@ msgstr "Nivel de actividad del usuario requerido."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Su proxy HTTP necesita que esté registrado.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -605,18 +604,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Debe estar registrado para acceder a «%s».\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Su contraseña se transmitirá sin cifrar."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Su contraseña se transmitirá cifrada."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Se necesita autentificación"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1004,8 +1005,7 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
-"Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1219,11 +1219,11 @@ msgstr "Mensaje"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Usuario:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Contraseña:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1368,11 +1368,11 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Para obtener más información visite la página «Error en Aplicaciones GNOME»"
+msgstr "Para obtener más información visite la página «Error en Aplicaciones GNOME»"
 
 #~ msgid "_Credits"
 #~ msgstr "_Créditos"
 
 #~ msgid "Exit the test"
 #~ msgstr "Salir del test"
+
