@@ -1,16 +1,17 @@
 # Hungarian translation for libgnomeui.
-# Copyright (C) 2002-2004 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2003, 2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the libgnomeui package.
 # Emese Kovacs <emese@gnome.hu>, 2002.
 # Szabolcs Ban <shooby@gnome.hu>, 2002.
-# Andras Timar <timar@gnome.hu>, 2003-2004.
+# Andras Timar <timar@gnome.hu>, 2002, 2003, 2004.
 # Laszlo Dvornik <dvornik@gnome.hu>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-16 13:40+0200\n"
-"PO-Revision-Date: 2004-07-07 14:37+0200\n"
+"POT-Creation-Date: 2004-08-26 12:08+0200\n"
+"PO-Revision-Date: 2004-08-26 15:20+0200\n"
 "Last-Translator: Laszlo Dvornik <dvornik@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -33,16 +34,16 @@ msgstr "2. gyermekelem"
 msgid "Hint for item 2"
 msgstr "Javaslat a 2. gyermekelemhez"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:652
+#: file-chooser/gtkfilesystemgnomevfs.c:653
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "%s nem mappa"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:859
+#: file-chooser/gtkfilesystemgnomevfs.c:860
 msgid "Filesystem"
 msgstr "Fájlrendszer"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1523
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Könyvjelző mentése sikertelen (%s)"
@@ -172,6 +173,7 @@ msgstr "%s névjegye"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fájl"
 
@@ -214,11 +216,11 @@ msgstr "Ú_j/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "F_ájlok"
+msgstr "Fáj_lok"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "F_ájlok/"
+msgstr "Fáj_lok/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
@@ -229,6 +231,7 @@ msgid "_Game"
 msgstr "_Játék"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Súgó"
 
@@ -419,11 +422,11 @@ msgstr "Az alkalmazás beállítása"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Névjegy"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
@@ -440,7 +443,7 @@ msgstr "Mindent kijelöl"
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr "_Új ablak létrehozása"
+msgstr "Új _ablak létrehozása"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
@@ -448,9 +451,9 @@ msgstr "Új ablakot hoz létre"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "_Ablak bezárása"
+msgstr "Ablak _bezárása"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "A jelenlegi ablak bezárása"
 
@@ -459,7 +462,7 @@ msgstr "A jelenlegi ablak bezárása"
 #.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
-msgstr "_Új játék"
+msgstr "Ú_j játék"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
@@ -528,7 +531,7 @@ msgstr "_Tartalom"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr "Az alkalmazás súgója"
+msgstr "Az alkalmazás súgójának megtekintése"
 
 #: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
@@ -536,7 +539,7 @@ msgstr "Szöveg az ikonok alatt"
 
 #: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
-msgstr "Fontos szöveg az ikonok mellett"
+msgstr "Lényeges szöveg az ikonok mellett"
 
 #: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
@@ -605,7 +608,7 @@ msgstr "Van folyamatjelzője"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Folyamatjelző-widget létrehozása."
+msgstr "Folyamatjelző-elem létrehozása."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
@@ -613,7 +616,7 @@ msgstr "Van állapota"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Állapot widget-létrehozása."
+msgstr "Állapotelem létrehozása."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -623,11 +626,11 @@ msgstr "Interaktivitás"
 msgid "Level of user activity required."
 msgstr "A felhasználótól elvárható aktivitás."
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "A HTTP-proxy megköveteli a bejelentkezést.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -636,25 +639,25 @@ msgstr ""
 "Be kell jelentkeznie a(z) \"%s\" eléréséhez.\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "A jelszava titkosítás nélkül kerül átvitelre."
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "A jelszava titkosítással kerül átvitelre."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Hitelesítés szükséges"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Be kell jelentkeznie a(z) %s tartomány %s eléréséhez\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Be kell jelentkeznie a(z) %s eléréséhez.\n"
@@ -669,7 +672,7 @@ msgstr "Azonosító"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
-msgstr "Az elmentett beállítások prefixének megadása"
+msgstr "Az elmentett beállítások előtagjának megadása"
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
@@ -900,15 +903,15 @@ msgstr "Előzmény ID"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr "GTK entry"
+msgstr "GTK-bejegyzés"
 
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr "A GTK entry"
+msgstr "A GTK-bejegyzés"
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
-msgstr "Előzmény ID"
+msgstr "Előzményazonosító"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid ""
@@ -955,11 +958,11 @@ msgstr "A fájlnév, ami a fájlbeíró mezőben jelenik meg."
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
-msgstr "Alapértelmezett könyvtár"
+msgstr "Alapértelmezett útvonal"
 
 #: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
-msgstr "A tallózó párbeszédablak alapértelmezett könyvtára."
+msgstr "A tallózó párbeszédablak alapértelmezett útvonala."
 
 #: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
@@ -1121,7 +1124,7 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Hiba történt a %s beállításainak betöltése vagy mentése során. Egyes "
+"Hiba történt a(z) %s beállításainak betöltése vagy mentése során. Egyes "
 "beállítások az elvárttól eltérően működhetnek."
 
 #: libgnomeui/gnome-href.c:123
@@ -1201,9 +1204,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
-msgstr ""
-"Nincs\n"
-"ikon"
+msgstr "Nincs ikon"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
@@ -1279,7 +1280,7 @@ msgstr "Üzenet"
 
 #: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
-msgstr "_Felhasználói név:"
+msgstr "_Felhasználónév:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
@@ -1350,7 +1351,7 @@ msgstr "Pontszám"
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr "%Y. %b %e., %A, %T"
+msgstr "%Y. %b. %e., %a, %H.%M.%S"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
@@ -1405,7 +1406,8 @@ msgstr "GNOME GUI programkönyvtár"
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"Többszörös szegmentációs hiba; hiba-párbeszédpanel megjelenítése sikertelen\n"
+"Többszörös szegmentációs hiba; a hiba-párbeszédablak megjelenítése "
+"sikertelen\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1415,7 +1417,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "Szegmentációs hiba!\n"
-"Az összeomlás párbeszédpanel megjelenítése sikertelen\n"
+"Az összeomlás párbeszédablak megjelenítése sikertelen\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1466,5 +1468,6 @@ msgstr "A _fejlesztők értesítése"
 msgid "_Debug"
 msgstr "_Hibakeresés"
 
-#~ msgid "Exit the test"
-#~ msgstr "Kilépés a tesztből"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Kilépés a tesztből"
