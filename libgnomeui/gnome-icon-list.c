@@ -1632,6 +1632,9 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
  * If IS_EDITABLE is TRUE, then the text on the icons will be permited to
  * be edited.  If the name changes the "text_changed" signal will be emitted.
  *
+ * Please note that the GnomeIconList starts life in Frozen state.  You are
+ * supposed to fall gnome_icon_list_thaw on it as soon as possible.
+ *
  */
 GtkWidget *
 gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
@@ -1647,6 +1650,28 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
 	gnome_icon_list_construct (gil, icon_width, adj, is_editable);
 
 	return GTK_WIDGET (gil);
+}
+
+/**
+ * gnome_icon_list_new_thawed: [constructor]
+ * @icon_width:  Icon width.
+ * @adj:         Scrolling adjustment.
+ * @is_editable: whether editing changes can be made to this icon_list.
+ *
+ * Create a new GnomeIconList.  See the description for gnome_icon_list_new
+ * for details.
+ *
+ * The only difference with gnome_icon_list_new is that the widget is
+ * returned in thawed state.
+ */
+GtkWidget *
+gnome_icon_list_new_thawed (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
+{
+	GtkWidget *w = gnome_icon_list_new (icon_width, adj, is_editable);
+
+	gnome_icon_list_thaw (GIL (w));
+
+	return w;
 }
 
 /**

@@ -94,13 +94,6 @@ static const GtkEnumValue _gnome_mdi_mode_values[] = {
   { GNOME_MDI_REDRAW, "GNOME_MDI_REDRAW", "redraw" },
   { 0, NULL, NULL }
 };
-static const GtkEnumValue _gnome_property_request_values[] = {
-  { GNOME_PROPERTY_READ, "GNOME_PROPERTY_READ", "read" },
-  { GNOME_PROPERTY_WRITE, "GNOME_PROPERTY_WRITE", "write" },
-  { GNOME_PROPERTY_APPLY, "GNOME_PROPERTY_APPLY", "apply" },
-  { GNOME_PROPERTY_SETUP, "GNOME_PROPERTY_SETUP", "setup" },
-  { 0, NULL, NULL }
-};
 static const GtkEnumValue _gnome_stock_pixmap_type_values[] = {
   { GNOME_STOCK_PIXMAP_TYPE_NONE, "GNOME_STOCK_PIXMAP_TYPE_NONE", "none" },
   { GNOME_STOCK_PIXMAP_TYPE_DATA, "GNOME_STOCK_PIXMAP_TYPE_DATA", "data" },

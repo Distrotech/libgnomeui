@@ -97,14 +97,6 @@
    (default-mode GNOME_MDI_DEFAULT_MODE)
    (redraw GNOME_MDI_REDRAW))
 
-; enumerations from "gnome-properties.h"
-
-(define-enum GnomePropertyRequest
-   (read GNOME_PROPERTY_READ)
-   (write GNOME_PROPERTY_WRITE)
-   (apply GNOME_PROPERTY_APPLY)
-   (setup GNOME_PROPERTY_SETUP))
-
 ; enumerations from "gnome-stock.h"
 
 (define-enum GnomeStockPixmapType
@@ -206,3 +198,18 @@
    (increasing GTK_CLOCK_INCREASING)
    (decreasing GTK_CLOCK_DECREASING)
    (realtime GTK_CLOCK_REALTIME))
+; -*- scheme -*-
+
+; These definitions here cause the creation of some new GTK_TYPE_* ids
+; The code doesn't benefit most C programs directly, but is very useful
+; for language bindings.
+
+;; Maybe this should be defined in a gdk_imlib specific library -- but
+;; gdk_imlib has no gtk+ code in it.
+(define-boxed GdkImlibImage
+)
+
+;; An array of points used by GnomeCanvasLine and GnomeCanvasPolygon
+(define-boxed GnomeCanvasPoints
+)
+
