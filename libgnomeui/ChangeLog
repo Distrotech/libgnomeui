@@ -1,3 +1,11 @@
+1998-11-02  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-child.[ch]: added "set_book_label" signal, giving the user
+	some control over the notebook labels. see source and header for some
+	comments on the handler.
+	* gnome-mdi.c (book_add_view, gnome_mdi_update_child): emit
+	"set_book_label" signal to obtain or update the notebook label.
+
 1998-11-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	Wheee!  Now we have stippling capabilities in the canvas.

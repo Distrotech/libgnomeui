@@ -51,6 +51,10 @@ struct _GnomeMDIChild
 	GnomeUIInfo *menu_template;
 };
 
+/* note that if you override the set_book_label signal handler, it should return
+ * a new widget if its GtkWidget * parameter is NULL and modify and return the old
+ * widget otherwise (see gnome-mdi-child.c/gnome_mdi_child_set_book_label()).
+ */
 struct _GnomeMDIChildClass
 {
 	GtkObjectClass parent_class;
@@ -58,6 +62,7 @@ struct _GnomeMDIChildClass
 	GtkWidget * (*create_view)(GnomeMDIChild *); 
 	GList     * (*create_menus)(GnomeMDIChild *, GtkWidget *); 
 	gchar     * (*get_config_string)(GnomeMDIChild *);
+	GtkWidget * (*set_book_label)(GnomeMDIChild *, GtkWidget *);
 };
 
 guint         gnome_mdi_child_get_type         (void);

@@ -571,14 +571,14 @@ static GtkWidget *book_create(GnomeMDI *mdi) {
 
 static void book_add_view(GtkNotebook *book, GtkWidget *view) {
 	GnomeMDIChild *child;
-	GtkWidget *title_label;
-	
+	GtkWidget *title;
+
 	child = gnome_mdi_get_child_from_view(view);
-	
-	title_label = gtk_label_new(child->name);
-	
-	gtk_notebook_append_page(book, view, title_label);
-	
+
+	gtk_signal_emit_by_name(GTK_OBJECT(child), "set_book_label", NULL, &title);
+
+	gtk_notebook_append_page(book, view, title);
+
 	set_page_by_widget(book, view);  
 }
 
@@ -1297,7 +1297,7 @@ void gnome_mdi_open_toplevel(GnomeMDI *mdi) {
 }
 
 void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {
-	GtkWidget *view;
+	GtkWidget *view, *title;
 	GList *view_node;
 
 	g_return_if_fail(mdi != NULL);
@@ -1324,9 +1324,9 @@ void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {
 
 			page = find_page_by_widget(GTK_NOTEBOOK(view->parent), view);
 			if(page)
-				gtk_label_set(GTK_LABEL(page->tab_label), child->name);
+				gtk_signal_emit_by_name(GTK_OBJECT(child), "set_book_label", page->tab_label, &title);
 		}
-
+		
 		view_node = g_list_next(view_node);
 	}
 }
