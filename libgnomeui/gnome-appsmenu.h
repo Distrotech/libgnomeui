@@ -1,4 +1,5 @@
-/* gnome-appsmenu.h: Copyright (C) 1998 Havoc Pennington
+/* gnome-appsmenu.h: Copyright (C) 1998 Free Software Foundation
+ * Written by: Havoc Pennington
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -33,7 +34,10 @@
    imagine this will be rooted in .gnome/AppsMenu or somewhere.
 
    Directories have .directory files in them; these are handled by
-   default.
+   default. Other such file types can be registered, and anything
+   starting with . will be taken to be one.  Only one directory
+   dotfile will be used per directory, the first one found. So really
+   there should only be one.
 
    Applications can register their own types of apps menu items by
    providing an extension other than .desktop, and a function to load
@@ -64,30 +68,37 @@ BEGIN_GNOME_DECLS
    like gnome-dentry.h, and renamed appropriately */
 #define GNOME_APPS_MENU_DENTRY_EXTENSION "desktop"
 
-/* By default:
-   extension = GNOME_APPS_MENU_DENTRY_EXTENSION
-   data is a GnomeDesktopEntry
-   */
+typedef struct _GnomeAppsMenu GnomeAppsMenu;
 
-typedef struct {
+struct _GnomeAppsMenu {
+  guint is_directory : 1; /* Whether it's a directory. If it is, the
+			     extension will really be the whole file
+			     name (except the period)
+			     (e.g. ".directory" for filename,
+			     "directory" extension) */
   gchar * extension; /* The file extension, without the period.
 			This implies the type of the data field. */
   gpointer data;     /* Data loaded from the file */
-  GList * submenus;  /* NULL if there are none */
-  /* Private after here - don't use, they should be moved 
-     somewhere nicer eventually? */
+  GList * submenus;  /* NULL if there are none. If is_directory is 
+			FALSE, this must be NULL */
   GnomeAppsMenu * parent;
   guint in_destroy : 1;
-} GnomeAppsMenu;
+};
 
 #define GNOME_APPS_MENU_IS_DENTRY(x) \
 (strcmp ( (gchar *)(((GnomeAppsMenu *)x)->extension), \
 	  GNOME_APPS_MENU_DENTRY_EXTENSION ) == 0)
 
 #define GNOME_APPS_MENU_IS_DIR(x) \
-(GNOME_APPS_MENU_IS_DENTRY(x) && \
- (strcmp ( ((GnomeDesktopEntry *)((GnomeAppsMenu *)x)->data)->type, \
-	   "Directory" ) == 0 ) )
+(((GnomeAppsMenu *)x)->is_directory)
+
+     /* Consider taking this out */
+#define GNOME_APPS_MENU_IS_DENTRY_DIR(x) \
+(GNOME_APPS_MENU_IS_DENTRY(x) && GNOME_APPS_MENU_IS_DIR(x))
+     /* This should also be true:
+	(strcmp ( ((GnomeDesktopEntry *)((GnomeAppsMenu *)x)->data)->type, \
+	"Directory" ) == 0 ) )
+	*/
 
 /* Just allocate a new one */
 GnomeAppsMenu * gnome_apps_menu_new(void);
@@ -111,32 +122,33 @@ void gnome_apps_menu_insert_after(GnomeAppsMenu * dir,
 				  GnomeAppsMenu * after_me);
 /* Recursive foreach. For non-recursive, just use the GList */
 void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
-			     GFunc func, gpointer data);
+                             GFunc func, gpointer data);
 
 /* The load func takes a filename as argument and returns 
    whatever should go in the data field, above.
    Should return NULL if it fails. */
 
-typedef gpointer (GnomeAppsMenuLoadFunc *)(const gchar *);
+typedef gpointer (*GnomeAppsMenuLoadFunc)(const gchar *);
 
 /* The menuitem-creating function can be NULL, if you don't
    want to create menuitems in gtk_menu_new_from_apps_menu()
    This function should create the menu item and attach any
    callbacks. */
 
-typedef GtkWidget * (GnomeAppsMenuGtkMenuItemFunc *)(GnomeAppsMenu *);
+typedef GtkWidget * (*GnomeAppsMenuGtkMenuItemFunc)(GnomeAppsMenu *);
        
 /* The desktop entry variety is already registered by default,
    with gnome_desktop_entry_load () as LoadFunc,
    and GNOME_APPS_MENU_DENTRY_EXTENSION as extension,
    and a private function to create menuitems. 
 
-   .directory files are also handled by default. */
+   .directory files are also registered by default. */
 
 void 
-gnome_apps_menu_register_variety( const gchar * extension,
-				  GnomeAppsMenuLoadFunc load_func,
-				  GnomeAppsMenuGtkMenuItemFunc menu_item_func );
+gnome_apps_menu_register_variety( gboolean is_directory,
+                                  const gchar * extension,
+                                  GnomeAppsMenuLoadFunc load_func,
+                                  GnomeAppsMenuGtkMenuItemFunc menu_item_func );
 
 /* Load a GnomeAppsMenu, with `directory' as root.  */
 

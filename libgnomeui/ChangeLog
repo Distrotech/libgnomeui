@@ -1,3 +1,9 @@
+Tue Apr 14 10:27:25 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h, gnome-appsmenu.c: Fixed many little glitches,
+	after first compilation attempt. Compiles, doesn't work. Copyright
+	changed to FSF. 
+
 Mon Apr 13 00:43:32 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.c: fixed display
