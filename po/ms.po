@@ -397,23 +397,23 @@ msgstr "Kosongkan pilihan"
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "_Nyahcara"
+msgstr "_Nyah acara"
 
 # libgnomeui/gnome-app-helper.c:189
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Nyahcara aksi terakhir"
+msgstr "Nyah acara aksi terakhir"
 
 # libgnomeui/gnome-app-helper.c:194
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "_Ulangcara"
+msgstr "_Ulang acara"
 
 # libgnomeui/gnome-app-helper.c:194
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Ulangcara aksi dinyahcara"
+msgstr "Ulang acara aksi dinyahcara"
 
 # libgnomeui/gnome-app-helper.c:199
 #. Find
@@ -558,22 +558,22 @@ msgstr "Mulakan semula permainan"
 # libgnomeui/gnome-app-helper.c:276
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr "_Nyahcara pindah"
+msgstr "_Nyah acara pindah"
 
 # libgnomeui/gnome-app-helper.c:277
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Nyahcara pindahan terakhir"
+msgstr "Nyah acara pindahan terakhir"
 
 # libgnomeui/gnome-app-helper.c:281
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "_Ulangcara pindahan"
+msgstr "_Ulang acara pindahan"
 
 # libgnomeui/gnome-app-helper.c:282
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Ulangcara pindahan yang belum siap"
+msgstr "Ulang acara pindahan yang belum siap"
 
 # libgnomeui/gnome-app-helper.c:286
 #: libgnomeui/gnome-app-helper.c:273
