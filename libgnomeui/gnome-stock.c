@@ -22,6 +22,7 @@
 #include "../programs/gtt/tb_exit.xpm"
 #include "gnome-stock-ok.xpm"
 #include "gnome-stock-cancel.xpm"
+#include "gnome-stock-menu.c"
 
 
 #define STOCK_SEP '.'
@@ -131,6 +132,37 @@ gnome_stock_pixmap_widget_realize(GtkWidget *widget)
 
 
 static void
+gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
+                                       GtkRequisition *requisition)
+{
+        g_return_if_fail(widget != NULL);
+        g_return_if_fail(requisition != NULL);
+        /* Okay, since I should not load the pixmaps as long as
+           there's no GdkWindow for them, I will guess a size of 16x16
+           for the icons, as long as widget->window is NULL */
+        if (widget->window == NULL) {
+                if (requisition->width < 16)
+                        requisition->width = 16;
+                if (requisition->height < 16)
+                        requisition->height = 16;
+        } else {
+                GnomeStockPixmapWidget *pmap;
+                int w, h;
+                pmap = GNOME_STOCK_PIXMAP_WIDGET(widget);
+                if (!pmap->regular) {
+                        pmap->regular =
+                                gnome_stock_pixmap(widget, pmap->icon,
+                                                   GNOME_STOCK_PIXMAP_REGULAR);
+                }
+                gdk_window_get_size(pmap->regular->pixmap, &w, &h);
+                requisition->width = w;
+                requisition->height = h;
+        }
+}
+
+
+
+static void
 gnome_stock_pixmap_widget_class_init(GnomeStockPixmapWidgetClass *klass)
 {
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS(klass);
@@ -139,6 +171,8 @@ gnome_stock_pixmap_widget_class_init(GnomeStockPixmapWidgetClass *klass)
                 gnome_stock_pixmap_widget_state_changed;
         ((GtkWidgetClass *)klass)->realize =
                 gnome_stock_pixmap_widget_realize;
+        ((GtkWidgetClass *)klass)->size_request =
+                gnome_stock_pixmap_widget_size_request;
 }
 
 
@@ -223,10 +257,13 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, tb_properties_xpm},
 /*         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm}, */
         {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, tb_unknown_xpm},
+        {GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, tb_exit_xpm},
         {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
         {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
-        {GNOME_STOCK_BUTTON_CLOSE, GNOME_STOCK_PIXMAP_REGULAR, tb_exit_xpm},
         {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_cancel_xpm},
+        {GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_new_xpm},
+        {GNOME_STOCK_MENU_EXIT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_exit_xpm},
+        {GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_about_xpm},
 };
 static int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
 
@@ -490,3 +527,52 @@ gnome_stock_button(char *type)
 #endif /* BUTTON_WANT_ICON */
         return button;
 }
+
+
+
+
+/***********/
+/*  menus  */
+/***********/
+
+
+static int use_icons = -1;
+
+GtkWidget *
+gnome_stock_menu_item(char *type, char *text)
+{
+        GtkWidget *hbox, *w, *menu_item;
+
+        g_return_val_if_fail(type != NULL, NULL);
+        g_return_val_if_fail(gnome_stock_pixmap_checkfor(type, GNOME_STOCK_PIXMAP_REGULAR), NULL);
+
+        if (use_icons == -1) {
+                /* TODO: fetch default value from gnome_config */
+                use_icons = TRUE;
+        }
+        if (use_icons) {
+                hbox = gtk_hbox_new(FALSE, 2);
+                gtk_widget_show(hbox);
+                w = gnome_stock_pixmap_widget(hbox, type);
+                gtk_widget_show(w);
+                gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 0);
+
+                if (text)
+                        w = gtk_label_new(text);
+                else
+                        w = gtk_label_new(_(&type[5]));
+                gtk_widget_show(w);
+                gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 0);
+
+                menu_item = gtk_menu_item_new();
+                gtk_container_add(GTK_CONTAINER(menu_item), hbox);
+        } else {
+                if (text)
+                        menu_item = gtk_menu_item_new_with_label(text);
+                else
+                        menu_item = gtk_menu_item_new_with_label(_(&type[5]));
+        }
+
+        return menu_item;
+}
+

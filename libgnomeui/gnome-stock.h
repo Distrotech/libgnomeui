@@ -73,6 +73,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_PASTE       "Paste"
 #define GNOME_STOCK_PIXMAP_PROPERTIES  "Properties"
 #define GNOME_STOCK_PIXMAP_HELP        "Help"
+#define GNOME_STOCK_PIXMAP_EXIT        "Exit"
 
 
 /* The basic pixmap version of an icon. */
@@ -195,12 +196,23 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
 #define GNOME_STOCK_BUTTON_CANCEL "Cancel"
 #define GNOME_STOCK_BUTTON_YES    "Yes"
 #define GNOME_STOCK_BUTTON_NO     "No"
-#define GNOME_STOCK_BUTTON_CLOSE  "Close"
+#define GNOME_STOCK_BUTTON_CLOSE  GNOME_STOCK_PIXMAP_EXIT
 #define GNOME_STOCK_BUTTON_APPLY  "Apply"
 #define GNOME_STOCK_BUTTON_HELP   GNOME_STOCK_PIXMAP_HELP
 
 /* returns a default button widget for dialogs */
 GtkWidget             *gnome_stock_button          (char *type);
+
+
+/*  menus  */
+
+#define GNOME_STOCK_MENU_NEW      "Menu_New"
+#define GNOME_STOCK_MENU_EXIT     "Menu_Exit"
+#define GNOME_STOCK_MENU_ABOUT    "Menu_About"
+
+/* returns a GtkMenuItem with an stock icon and text */
+GtkWidget             *gnome_stock_menu_item       (char *type, char *text);
+
 
 END_GNOME_DECLS
 
