@@ -19,6 +19,7 @@
    Boston, MA 02111-1307, USA.
 
    Author: Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
+   Interp modifications: James Henstridge <james@daa.com.au>
 */
 
 #ifndef __GNOME_MDI_GENERIC_CHILD_H__
@@ -41,15 +42,20 @@ typedef struct _GnomeMDIGenericChildClass  GnomeMDIGenericChildClass;
 struct _GnomeMDIGenericChild {
 	GnomeMDIChild mdi_child;
 
-  gpointer user_data;
-
-  /* if any of these are set they override the virtual functions
-     in GnomeMDIChildClass. create_view is mandatory, as no default
-     handler is provided, others may be NULL */
+	/* if any of these are set they override the virtual functions
+	   in GnomeMDIChildClass. create_view is mandatory, as no default
+	   handler is provided, others may be NULL */
 	GnomeMDIChildViewCreator create_view;
 	GnomeMDIChildMenuCreator create_menus;
 	GnomeMDIChildConfigFunc  get_config_string;
 	GnomeMDIChildLabelFunc   set_label;
+
+	GtkCallbackMarshal create_view_cbm, create_menus_cbm,
+		               get_config_string_cbm, set_label_cbm;
+	GtkDestroyNotify   create_view_dn, create_menus_dn,
+		               get_config_string_dn, set_label_dn;
+	gpointer           create_view_data, create_menus_data,
+		               get_config_string_data, set_label_data;
 };
 
 struct _GnomeMDIGenericChildClass {
@@ -57,17 +63,40 @@ struct _GnomeMDIGenericChildClass {
 };
 
 guint                gnome_mdi_generic_child_get_type (void);
+GnomeMDIGenericChild *gnome_mdi_generic_child_new     (gchar *name);
+void gnome_mdi_generic_child_set_view_creator     (GnomeMDIGenericChild *child,
+												   GnomeMDIChildViewCreator func,
+                                                   gpointer data);
+void gnome_mdi_generic_child_set_view_creator_full(GnomeMDIGenericChild *child,
+												   GnomeMDIChildViewCreator func,
+												   GtkCallbackMarshal marshal,
+												   gpointer data,
+												   GtkDestroyNotify notify);
+void gnome_mdi_generic_child_set_menu_creator     (GnomeMDIGenericChild *child,
+												   GnomeMDIChildMenuCreator func,
+                                                   gpointer data);
+void gnome_mdi_generic_child_set_menu_creator_full(GnomeMDIGenericChild *child,
+												   GnomeMDIChildMenuCreator func,
+												   GtkCallbackMarshal marshal,
+												   gpointer data,
+												   GtkDestroyNotify notify);
+void gnome_mdi_generic_child_set_config_func      (GnomeMDIGenericChild *child,
+												   GnomeMDIChildConfigFunc func,
+                                                   gpointer data);
+void gnome_mdi_generic_child_set_config_func_full (GnomeMDIGenericChild *child,
+												   GnomeMDIChildConfigFunc func,
+												   GtkCallbackMarshal marshal,
+												   gpointer data,
+												   GtkDestroyNotify notify);
+void gnome_mdi_generic_child_set_label_func       (GnomeMDIGenericChild *child,
+												   GnomeMDIChildLabelFunc func,
+                                                   gpointer data);
+void gnome_mdi_generic_child_set_label_func_full  (GnomeMDIGenericChild *child,
+												   GnomeMDIChildLabelFunc func,
+												   GtkCallbackMarshal marshal,
+												   gpointer data,
+												   GtkDestroyNotify notify);
 
-GnomeMDIGenericChild *gnome_mdi_generic_child_new(gchar *name,
-                                                  GnomeMDIChildViewCreator create_view,
-                                                  GnomeMDIChildMenuCreator create_menus,
-                                                  GnomeMDIChildConfigFunc  get_config_string,
-                                                  GnomeMDIChildLabelFunc   set_label,
-                                                  gpointer                 user_data);
-
-gpointer             gnome_mdi_generic_child_get_data(GnomeMDIGenericChild *child);
-void                 gnome_mdi_generic_child_set_data(GnomeMDIGenericChild *child,
-                                                      gpointer             data);
 
 END_GNOME_DECLS
 

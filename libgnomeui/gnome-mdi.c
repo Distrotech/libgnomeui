@@ -84,7 +84,6 @@ static void            free_ui_info_tree        (GnomeUIInfo *);
 static gint            count_ui_info_items      (GnomeUIInfo *);
 
 /* convenience functions that call child's "virtual" functions */
-static GtkWidget       *child_create_view        (GnomeMDIChild *);
 static GList           *child_create_menus       (GnomeMDIChild *, GtkWidget *);
 static GtkWidget       *child_set_label          (GnomeMDIChild *, GtkWidget *);
 
@@ -279,13 +278,13 @@ GtkObject *gnome_mdi_new(gchar *appname, gchar *title) {
 
 static GList *child_create_menus(GnomeMDIChild *child, GtkWidget *view) {
 	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_menus)
-		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_menus(child, view);
+		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_menus(child, view, NULL);
 
 	return NULL;
 }
 
 static GtkWidget *child_set_label(GnomeMDIChild *child, GtkWidget *label) {
-	return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->set_label(child, label);
+	return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->set_label(child, label, NULL);
 }
 
 /* the app-helper support routines */

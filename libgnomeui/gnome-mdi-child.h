@@ -52,10 +52,10 @@ struct _GnomeMDIChild
 	GnomeUIInfo *menu_template;
 };
 
-typedef GtkWidget *(*GnomeMDIChildViewCreator) (GnomeMDIChild *);
-typedef GList     *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *);
-typedef gchar     *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *);
-typedef GtkWidget *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *);
+typedef GtkWidget *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);
+typedef GList     *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *, gpointer);
+typedef gchar     *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *, gpointer);
+typedef GtkWidget *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *, gpointer);
 
 /* note that if you override the set_label virtual function, it should return
  * a new widget if its GtkWidget * parameter is NULL and modify and return the old

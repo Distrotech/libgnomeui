@@ -32,7 +32,7 @@
 static void       gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void       gnome_mdi_child_init             (GnomeMDIChild *);
 static void       gnome_mdi_child_destroy          (GtkObject *);
-static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *);
+static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *, gpointer);
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
 
 /* declare the functions from gnome-mdi.c that we need but are not public */
@@ -87,7 +87,7 @@ static void gnome_mdi_child_init (GnomeMDIChild *mdi_child) {
  * parameter is NULL and modify and return the old widget otherwise. it
  * should (obviously) NOT call the parent class handler!
  */
-static GtkWidget *gnome_mdi_child_set_label(GnomeMDIChild *child, GtkWidget *old_label) {
+static GtkWidget *gnome_mdi_child_set_label(GnomeMDIChild *child, GtkWidget *old_label, gpointer data) {
 #ifdef GNOME_ENABLE_DEBUG
 	printf("GnomeMDIChild: default set_label handler called!\n");
 #endif
@@ -164,7 +164,7 @@ void gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *me
 
 static GtkWidget *gnome_mdi_child_create_view(GnomeMDIChild *child) {
 	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view)
-		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view(child);
+		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view(child, NULL);
 
 	return NULL;
 }

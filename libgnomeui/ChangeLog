@@ -1,3 +1,9 @@
+1998-12-01  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c, gnome-mdi-child.[ch], gnome-mdi-generic-child.[ch]
+	gnome-mdi-session.c: applied James Henstridge's interp modifications
+	to make creating bindings for other languages easier.
+
 1998-11-30  Justin Maurer  <justin@openprojects.net>
 
 	* gnome-paper-selector: merge old code with new, add in seth's
