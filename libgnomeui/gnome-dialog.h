@@ -40,8 +40,9 @@ typedef struct _GnomeDialogClass   GnomeDialogClass;
 struct _GnomeDialog
 {
   GtkWindow window;
+  /*< public >*/
   GtkWidget * vbox;
-
+  /*< private >*/
   GtkWidget * action_area; /* A button box, not an hbox */
 
   GList *buttons;
