@@ -797,6 +797,8 @@ void gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
     if (!font)
       return; /* Use widget default */
 
+    g_return_if_fail( font != NULL );
+
     /* Change label style */
     gtk_widget_ensure_style(gfp->font_label);
     style=gtk_style_copy(gfp->font_label->style);
