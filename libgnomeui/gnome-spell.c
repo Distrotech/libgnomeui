@@ -1077,8 +1077,10 @@ gnome_spell_insert(GnomeSpell* spell, gchar* word, gint lowercase) {
 	}
 	strcpy(w, word);
 	if ( lowercase ) {
-		char* p=w;
-		while (*p) *p = tolower(*p);
+		char *p = w;
+		for (p = w; *p; p++){
+			*p = tolower(*p);
+		}
 	}
 	/*  if ispell dies in a bad way it dosen't save the dictionary.
 		save it at every update? (append "#\n" to the string below) */

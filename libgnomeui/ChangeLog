@@ -1,3 +1,7 @@
+1999-05-16  Robert Brady <rwb197@ecs.soton.ac.uk>
+
+	* gnome-spell.c: Avoid infinite loop.
+
 1999-05-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dock-band.c (gnome_dock_band_draw): Made static.
