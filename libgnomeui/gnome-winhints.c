@@ -6,6 +6,8 @@
 #include <gdk/gdkprivate.h>
 #include "gnome-winhints.h"
 
+#define CARD32 long
+
 /* these are the X atoms for the hints we use */
 Atom _XA_WIN_PROTOCOLS;
 Atom _XA_WIN_WORKSPACE;
