@@ -1,3 +1,17 @@
+2003-01-08  Anders Carlsson  <andersca@gnu.org>
+
+	* configure.in: Release 2.1.90
+
+2003-01-08  Anders Carlsson  <andersca@codefactory.se>
+
+	* libgnomeui/gnome-app-helper.c:
+	(gnome_app_install_statusbar_menu_hints):
+	Apply fix for #102812, by Tom Ball.
+	
+	* libgnomeui/gnome-popup-menu.c: 
+	(gnome_popup_menu_do_popup_modal):
+	Apply fix for #96899, by Erwann Chenede.
+	
 2003-01-07  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-theme.c:

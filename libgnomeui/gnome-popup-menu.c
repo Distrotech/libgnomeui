@@ -484,7 +484,9 @@ gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func,
 		button = 0;
 		timestamp = GDK_CURRENT_TIME;
 	}
-
+#ifdef HAVE_GTK_MULTIHEAD
+	gtk_menu_set_screen (GTK_MENU (popup), gtk_widget_get_screen (for_widget));
+#endif	
 	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, pos_func, pos_data, button, timestamp);
 	gtk_grab_add (popup);
 	gtk_main ();

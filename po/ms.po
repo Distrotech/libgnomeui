@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-12-16 23:06+0800\n"
+"POT-Creation-Date: 2003-01-08 10:16+0100\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -570,7 +570,6 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -633,7 +632,6 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -862,12 +860,12 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Perihal"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -900,7 +898,7 @@ msgid "_Close This Window"
 msgstr "_Tutup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -1492,9 +1490,8 @@ msgid "Sans 14"
 msgstr "Sans 14"
 
 # libgnomeui/gnome-app-helper.c:160
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Keluar ujian"
+#~ msgid "Exit the test"
+#~ msgstr "Keluar ujian"
 
 # libgnomeui/gnome-app-helper.c:204
 #~ msgid "Find _Again"

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.4\n"
-"POT-Creation-Date: 2003-01-05 12:21+0200\n"
+"POT-Creation-Date: 2003-01-08 10:16+0100\n"
 "PO-Revision-Date: 2003-01-05 12:19+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -683,7 +683,6 @@ msgstr "Hint for item 2"
 #
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
@@ -815,7 +814,6 @@ msgstr "_Παιχνίδι"
 # #-#-#-#-#  gnomemeeting-el.po (gnomemeeting 0.12.2)  #-#-#-#-#
 #
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Βοήθεια"
 
@@ -1209,7 +1207,7 @@ msgstr "Ρύθμιση της εφαρμογής"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Περί"
 
@@ -1220,7 +1218,7 @@ msgstr "_Περί"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
@@ -1264,7 +1262,7 @@ msgstr "_Κλείσιμο Αυτού Του Παραθύρου"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Κλείσιμο του τρέχοντος παραθύρου"
 
@@ -2033,6 +2031,5 @@ msgstr "Sans 14"
 #
 # #-#-#-#-#  achtung-el.po (achtung 0.99.0)  #-#-#-#-#
 #
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Έξοδος από τη δοκιμή"
+#~ msgid "Exit the test"
+#~ msgstr "Έξοδος από τη δοκιμή"

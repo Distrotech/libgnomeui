@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-12-09 21:29+0100\n"
+"POT-Creation-Date: 2003-01-08 10:16+0100\n"
 "PO-Revision-Date: 2002-11-30 15:26-0300\n"
 "Last-Translator: Evandro F. Giovanini <evandrofg@ig.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"

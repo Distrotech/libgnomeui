@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui cvs\n"
-"POT-Creation-Date: 2003-01-07 09:55-0300\n"
+"POT-Creation-Date: 2003-01-08 10:16+0100\n"
 "PO-Revision-Date: 2003-01-07 09:56GMT\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -107,7 +107,8 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -526,7 +527,6 @@ msgstr "Consejo para el elemento 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Archivo"
 
@@ -584,7 +584,6 @@ msgid "_Game"
 msgstr "_Juego"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_yuda"
 
@@ -775,11 +774,11 @@ msgstr "Configura la aplicación"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Acerca de"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
@@ -806,7 +805,7 @@ msgstr "Crear una ventana nueva"
 msgid "_Close This Window"
 msgstr "_Cerrar Esta Ventana"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Cerrar la ventana actual"
 
@@ -1125,7 +1124,8 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr ""
+"Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1339,7 +1339,5 @@ msgstr "%a, %d de %b de %Y, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Salir del test"
-
+#~ msgid "Exit the test"
+#~ msgstr "Salir del test"

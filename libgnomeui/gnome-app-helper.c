@@ -647,7 +647,7 @@ gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
 		case GNOME_APP_UI_SUBTREE:
 		case GNOME_APP_UI_SUBTREE_STOCK:
 			gnome_app_install_statusbar_menu_hints(bar, uiinfo->moreinfo);
-
+			break;
 		case GNOME_APP_UI_ITEM:
 		case GNOME_APP_UI_TOGGLEITEM:
 		case GNOME_APP_UI_SEPARATOR:
