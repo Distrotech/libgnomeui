@@ -12,6 +12,10 @@
 #include <math.h>
 #include "gnome-canvas-rect-ellipse.h"
 
+#include "libart_lgpl/art_vpath.h"
+#include "libart_lgpl/art_svp.h"
+#include "libart_lgpl/art_svp_vpath.h"
+#include "libart_lgpl/art_rgb_svp.h"
 
 /* Base class for rectangle and ellipse item types */
 
@@ -48,6 +52,8 @@ static void gnome_canvas_re_realize     (GnomeCanvasItem *item);
 static void gnome_canvas_re_unrealize   (GnomeCanvasItem *item);
 static void gnome_canvas_re_translate   (GnomeCanvasItem *item, double dx, double dy);
 static void gnome_canvas_re_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
+
+static void gnome_canvas_re_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 
 
 static GnomeCanvasItemClass *re_parent_class;
@@ -109,6 +115,8 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	item_class->unrealize = gnome_canvas_re_unrealize;
 	item_class->translate = gnome_canvas_re_translate;
 	item_class->bounds = gnome_canvas_re_bounds;
+
+	item_class->render = gnome_canvas_re_render;
 }
 
 static void
@@ -119,6 +127,8 @@ gnome_canvas_re_init (GnomeCanvasRE *re)
 	re->x2 = 0.0;
 	re->y2 = 0.0;
 	re->width = 0.0;
+	re->fill_svp = NULL;
+	re->outline_svp = NULL;
 }
 
 static void
@@ -173,6 +183,9 @@ recalc_bounds (GnomeCanvasRE *re)
 	item->y2 += 2;
 
 	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
+
+	if (item->canvas->aa)
+		gnome_canvas_item_request_update (item);
 }
 
 /* Convenience function to set a GC's foreground color to the specified pixel value */
@@ -261,9 +274,21 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
 			re->fill_set = TRUE;
 			re->fill_pixel = color.pixel;
-			set_gc_foreground (re->fill_gc, re->fill_pixel);
-		} else
+			if (item->canvas->aa)
+				re->fill_rgba =
+					((color.red & 0xff00) << 16) |
+					((color.green & 0xff00) << 8) |
+					(color.blue & 0xff00) |
+					0xff;
+			else
+				set_gc_foreground (re->fill_gc, re->fill_pixel);
+		} else {
 			re->fill_set = FALSE;
+			re->fill_rgba = 0;
+		}
+
+		if (item->canvas->aa)
+			gnome_canvas_item_request_update (item);
 
 		break;
 
@@ -277,9 +302,18 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
 			re->outline_set = TRUE;
 			re->outline_pixel = color.pixel;
-			set_gc_foreground (re->outline_gc, re->outline_pixel);
-		} else
+			if (item->canvas->aa)
+				re->outline_rgba =
+					((color.red & 0xff00) << 16) |
+					((color.green & 0xff00) << 8) |
+					(color.blue & 0xff00) |
+					0xff;
+			else
+				set_gc_foreground (re->outline_gc, re->outline_pixel);
+		} else {
 			re->outline_set = FALSE;
+			re->outline_rgba = 0;
+		}
 
 		break;
 
@@ -386,11 +420,13 @@ gnome_canvas_re_reconfigure (GnomeCanvasItem *item)
 	if (re_parent_class->reconfigure)
 		(* re_parent_class->reconfigure) (item);
 
-	set_gc_foreground (re->fill_gc, re->fill_pixel);
-	set_gc_foreground (re->outline_gc, re->outline_pixel);
-	set_stipple (re->fill_gc, &re->fill_stipple, re->fill_stipple, TRUE);
-	set_stipple (re->outline_gc, &re->outline_stipple, re->outline_stipple, TRUE);
-	set_outline_gc_width (re);
+	if (!item->canvas->aa) {
+		set_gc_foreground (re->fill_gc, re->fill_pixel);
+		set_gc_foreground (re->outline_gc, re->outline_pixel);
+		set_stipple (re->fill_gc, &re->fill_stipple, re->fill_stipple, TRUE);
+		set_stipple (re->outline_gc, &re->outline_stipple, re->outline_stipple, TRUE);
+		set_outline_gc_width (re);
+	} 
 
 	recalc_bounds (re);
 }
@@ -459,15 +495,63 @@ gnome_canvas_re_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x
 	*y2 = re->y2 + hwidth;
 }
 
+static void
+gnome_canvas_re_render (GnomeCanvasItem *item,
+			GnomeCanvasBuf *buf)
+{
+	GnomeCanvasRE *re;
+	guint32 fg_color, bg_color;
+
+	re = GNOME_CANVAS_RE (item);
+
+	if (re->fill_svp != NULL) {
+
+		if (buf->is_bg) {
+			bg_color = buf->bg_color;
+			fg_color = re->fill_rgba >> 8; /* FIXME: this needs to be a composite */
+			art_rgb_svp_aa (re->fill_svp,
+					buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+					fg_color, bg_color,
+					buf->buf, buf->buf_rowstride);
+			buf->is_bg = 0;
+			buf->is_buf = 1;
+		} else {
+			art_rgb_svp_alpha (re->fill_svp,
+					   buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+					   re->fill_rgba,
+					   buf->buf, buf->buf_rowstride);
+		}
+	}
+
+	if (re->outline_svp != NULL) {
+
+		if (buf->is_bg) {
+			bg_color = buf->bg_color;
+			fg_color = re->outline_rgba >> 8; /* FIXME: this needs to be a composite */
+			art_rgb_svp_aa (re->outline_svp,
+					buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+					fg_color, bg_color,
+					buf->buf, buf->buf_rowstride);
+			buf->is_bg = 0;
+			buf->is_buf = 1;
+		} else {
+			art_rgb_svp_alpha (re->outline_svp,
+					   buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+					   re->outline_rgba,
+					   buf->buf, buf->buf_rowstride);
+		}
+	}
+}
 
 /* Rectangle item */
 
 
 static void gnome_canvas_rect_class_init (GnomeCanvasRectClass *class);
 
-static void   gnome_canvas_rect_draw  (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y, int width, int height);
-static double gnome_canvas_rect_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
-				       GnomeCanvasItem **actual_item);
+static void   gnome_canvas_rect_draw   (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y, int width, int height);
+static double gnome_canvas_rect_point  (GnomeCanvasItem *item, double x, double y, int cx, int cy,
+				        GnomeCanvasItem **actual_item);
+static void   gnome_canvas_rect_update (GnomeCanvasItem *item);
 
 
 GtkType
@@ -502,6 +586,7 @@ gnome_canvas_rect_class_init (GnomeCanvasRectClass *class)
 
 	item_class->draw = gnome_canvas_rect_draw;
 	item_class->point = gnome_canvas_rect_point;
+	item_class->update = gnome_canvas_rect_update;
 }
 
 static void
@@ -630,15 +715,129 @@ gnome_canvas_rect_point (GnomeCanvasItem *item, double x, double y, int cx, int 
 }
 
 
+static void
+gnome_canvas_rect_update (GnomeCanvasItem *item)
+{
+	GnomeCanvasRE *re;
+	ArtVpath vpath[11];
+	double x0, y0, x1, y1;
+	double dx, dy;
+	double halfwidth;
+	int i;
+
+	re = GNOME_CANVAS_RE (item);
+
+	x0 = re->x1 * item->canvas->pixels_per_unit;
+	y0 = re->y1 * item->canvas->pixels_per_unit;
+	x1 = re->x2 * item->canvas->pixels_per_unit;
+	y1 = re->y2 * item->canvas->pixels_per_unit;
+
+	if (re->fill_svp)
+		art_svp_free (re->fill_svp);
+
+	if (re->fill_set) {
+		vpath[0].code = ART_MOVETO;
+		vpath[0].x = x0;
+		vpath[0].y = y0;
+		vpath[1].code = ART_LINETO;
+		vpath[1].x = x0;
+		vpath[1].y = y1;
+		vpath[2].code = ART_LINETO;
+		vpath[2].x = x1;
+		vpath[2].y = y1;
+		vpath[3].code = ART_LINETO;
+		vpath[3].x = x1;
+		vpath[3].y = y0;
+		vpath[4].code = ART_LINETO;
+		vpath[4].x = x0;
+		vpath[4].y = y0;
+		vpath[5].code = ART_END;
+		vpath[5].x = 0;
+		vpath[5].y = 0;
+
+		re->fill_svp = art_svp_from_vpath (vpath);
+	} else
+		re->fill_svp = NULL;
+
+	if (re->outline_svp)
+		art_svp_free (re->outline_svp);
+
+	if (re->outline_set) {
+		/* We do the stroking by hand because it's simple enough
+		   and could save time. */
+
+		if (re->width_pixels)
+			halfwidth = re->width * 0.5;
+		else
+			halfwidth = re->width * item->canvas->pixels_per_unit * 0.5;
+
+		i = 0;
+		vpath[i].code = ART_MOVETO;
+		vpath[i].x = x0 - halfwidth;
+		vpath[i].y = y0 - halfwidth;
+		i++;
+		vpath[i].code = ART_LINETO;
+		vpath[i].x = x0 - halfwidth;
+		vpath[i].y = y1 + halfwidth;
+		i++;
+		vpath[i].code = ART_LINETO;
+		vpath[i].x = x1 + halfwidth;
+		vpath[i].y = y1 + halfwidth;
+		i++;
+		vpath[i].code = ART_LINETO;
+		vpath[i].x = x1 + halfwidth;
+		vpath[i].y = y0 - halfwidth;
+		i++;
+		vpath[i].code = ART_LINETO;
+		vpath[i].x = x0 - halfwidth;
+		vpath[i].y = y0 - halfwidth;
+		i++;
+
+		if (x1 - halfwidth > x0 + halfwidth &&
+		    y1 - halfwidth > y0 + halfwidth) {
+			vpath[i].code = ART_MOVETO;
+			vpath[i].x = x0 + halfwidth;
+			vpath[i].y = y0 + halfwidth;
+			i++;
+			vpath[i].code = ART_LINETO;
+			vpath[i].x = x1 - halfwidth;
+			vpath[i].y = y0 + halfwidth;
+			i++;
+			vpath[i].code = ART_LINETO;
+			vpath[i].x = x1 - halfwidth;
+			vpath[i].y = y1 - halfwidth;
+			i++;
+			vpath[i].code = ART_LINETO;
+			vpath[i].x = x0 + halfwidth;
+			vpath[i].y = y1 - halfwidth;
+			i++;
+			vpath[i].code = ART_LINETO;
+			vpath[i].x = x0 + halfwidth;
+			vpath[i].y = y0 + halfwidth;
+			i++;
+		}
+		vpath[i].code = ART_END;
+		vpath[i].x = 0;
+		vpath[i].y = 0;
+
+		re->outline_svp = art_svp_from_vpath (vpath);
+	} else
+		re->outline_svp = NULL;
+
+
+	/* FIXME: request repaint */
+}
+
 /* Ellipse item */
 
 
 static void gnome_canvas_ellipse_class_init (GnomeCanvasEllipseClass *class);
 
-static void   gnome_canvas_ellipse_draw  (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y,
-					  int width, int height);
-static double gnome_canvas_ellipse_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
-					  GnomeCanvasItem **actual_item);
+static void   gnome_canvas_ellipse_draw   (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y,
+					   int width, int height);
+static double gnome_canvas_ellipse_point  (GnomeCanvasItem *item, double x, double y, int cx, int cy,
+					   GnomeCanvasItem **actual_item);
+static void   gnome_canvas_ellipse_update (GnomeCanvasItem *item);
 
 
 GtkType
@@ -673,6 +872,7 @@ gnome_canvas_ellipse_class_init (GnomeCanvasEllipseClass *class)
 
 	item_class->draw = gnome_canvas_ellipse_draw;
 	item_class->point = gnome_canvas_ellipse_point;
+	item_class->update = gnome_canvas_ellipse_update;
 }
 
 static void
@@ -796,3 +996,87 @@ gnome_canvas_ellipse_point (GnomeCanvasItem *item, double x, double y, int cx, i
 
 	return outline_dist;
 }
+
+#define N_PTS 126
+
+static void
+gnome_canvas_gen_ellipse (ArtVpath *vpath, double x0, double y0,
+			  double x1, double y1)
+{
+	int i;
+
+	for (i = 0; i < N_PTS + 1; i++) {
+		double th;
+
+		th = (2 * M_PI * i) / N_PTS;
+		vpath[i].code = i == 0 ? ART_MOVETO : ART_LINETO;
+		vpath[i].x = (x0 + x1) * 0.5 + (x1 - x0) * 0.5 * cos (th);
+		vpath[i].y = (y0 + y1) * 0.5 - (y1 - y0) * 0.5 * sin (th);
+	}
+}
+
+static void
+gnome_canvas_ellipse_update (GnomeCanvasItem *item)
+{
+	GnomeCanvasRE *re;
+	ArtVpath vpath[N_PTS + N_PTS + 3];
+	double x0, y0, x1, y1;
+	double dx, dy;
+	int i;
+
+	re = GNOME_CANVAS_RE (item);
+
+	dx = 0.0;
+	dy = 0.0;
+
+	gnome_canvas_item_i2w (item, &dx, &dy);
+
+	gnome_canvas_w2c_d (item->canvas, dx + re->x1, dy + re->y1, &x0, &y0);
+	gnome_canvas_w2c_d (item->canvas, dx + re->x2, dy + re->y2, &x1, &y1);
+
+	if (re->fill_svp)
+		art_svp_free (re->fill_svp);
+
+	if (re->fill_set) {
+		gnome_canvas_gen_ellipse (vpath, x0, y0, x1, y1);
+		vpath[N_PTS + 1].code = ART_END;
+		vpath[N_PTS + 1].x = 0;
+		vpath[N_PTS + 1].y = 0;
+
+		re->fill_svp = art_svp_from_vpath (vpath);
+	}
+
+	if (re->outline_svp)
+		art_svp_free (re->outline_svp);
+
+	if (re->outline_set) {
+		double halfwidth;
+
+		if (re->width_pixels)
+			halfwidth = re->width * 0.5;
+		else
+			halfwidth = re->width * item->canvas->pixels_per_unit * 0.5;
+
+		i = 0;
+		gnome_canvas_gen_ellipse (vpath + i,
+					  x0 - halfwidth, y0 - halfwidth,
+					  x1 + halfwidth, y1 + halfwidth);
+		i = N_PTS + 1;
+		if (x1 - halfwidth > x0 + halfwidth &&
+		    y1 - halfwidth > y0 + halfwidth) {
+			gnome_canvas_gen_ellipse (vpath + i,
+						  x0 + halfwidth, y1 - halfwidth,
+						  x1 - halfwidth, y0 + halfwidth);
+			i += N_PTS + 1;
+		}
+		vpath[i].code = ART_END;
+		vpath[i].x = 0;
+		vpath[i].y = 0;
+
+		re->outline_svp = art_svp_from_vpath (vpath);
+	} else
+		re->outline_svp = NULL;
+
+	/* FIXME: request repaint */
+}
+

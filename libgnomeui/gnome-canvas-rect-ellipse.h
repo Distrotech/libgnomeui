@@ -14,6 +14,7 @@
 #include <libgnome/gnome-defs.h>
 #include "gnome-canvas.h"
 
+#include <libart_lgpl/art_svp.h>
 
 BEGIN_GNOME_DECLS
 
@@ -70,6 +71,12 @@ struct _GnomeCanvasRE {
 
 	GdkGC *fill_gc;			/* GC for filling */
 	GdkGC *outline_gc;		/* GC for outline */
+
+	/* Antialiased specific stuff follows */
+	guint32 fill_rgba;		/* RGBA color for filling */
+	ArtSVP *fill_svp;		/* The SVP for the filled shape */
+	guint32 outline_rgba;		/* RGBA color for outline */
+	ArtSVP *outline_svp;		/* The SVP for the outline shape */
 };
 
 struct _GnomeCanvasREClass {

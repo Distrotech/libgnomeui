@@ -15,6 +15,7 @@
 #include <gtk/gtklayout.h>
 #include <stdarg.h>
 #include <libart_lgpl/art_misc.h>
+#include <libart_lgpl/art_rect.h>
 #include <libart_lgpl/art_uta.h>
 
 BEGIN_GNOME_DECLS
@@ -28,6 +29,7 @@ typedef struct _GnomeCanvas           GnomeCanvas;
 typedef struct _GnomeCanvasClass      GnomeCanvasClass;
 typedef struct _GnomeCanvasGroup      GnomeCanvasGroup;
 typedef struct _GnomeCanvasGroupClass GnomeCanvasGroupClass;
+typedef struct _GnomeCanvasBuf        GnomeCanvasBuf;
 
 
 /* GnomeCanvasItem - base item class for canvas items
@@ -49,7 +51,8 @@ enum {
 	GNOME_CANVAS_ITEM_REALIZED      = 1 << 4,
 	GNOME_CANVAS_ITEM_MAPPED        = 1 << 5,
 	GNOME_CANVAS_ITEM_ALWAYS_REDRAW = 1 << 6,
-	GNOME_CANVAS_ITEM_VISIBLE       = 1 << 7
+	GNOME_CANVAS_ITEM_VISIBLE       = 1 << 7,
+	GNOME_CANVAS_ITEM_NEED_UPDATE	= 1 << 8
 };
 
 #define GNOME_TYPE_CANVAS_ITEM            (gnome_canvas_item_get_type ())
@@ -115,6 +118,20 @@ struct _GnomeCanvasItemClass {
 	 * canvas world coordinate system.
 	 */
 	gint (* event) (GnomeCanvasItem *item, GdkEvent *event);
+
+	/* Do an update operation. It's not required to do anything, but it's an excellent place
+	 * to handle queued state changes, calculate the repaint area, and preprocess things for
+	 * rendering.
+	 */
+	void (* update) (GnomeCanvasItem *item);
+
+	/* Render the item over the buffer given. The buf data structure contains both a pointer
+	 * to a packed 24-bit RGB array, and the coordinates.
+	 *
+	 * TODO: figure out where affine transforms and clip paths fit into the rendering
+	 * framework.
+	 */
+	void (* render) (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 };
 
 
@@ -206,6 +223,9 @@ void gnome_canvas_item_grab_focus (GnomeCanvasItem *item);
  */
 void gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
+/* Request that the update method eventually gets called. */
+void gnome_canvas_item_request_update (GnomeCanvasItem *item);
+
 
 /* GnomeCanvasGroup - a group of canvas items
  *
@@ -259,6 +279,22 @@ GtkType gnome_canvas_group_get_type (void);
  * then propagates the bounds change upwards in the hierarchy.
  */
 void gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item);
+
+
+/* GnomeCanvasBuf - data for rendering in antialiased mode.
+ */
+
+struct _GnomeCanvasBuf {
+	guchar *buf;			/* 24 bit RGB buffer for rendering */
+	gint buf_rowstride;		/* The rowstride for buf */
+	ArtIRect rect;			/* The rectangle describing the rendering area */
+	guint32 bg_color;		/* The background color in 0xrrggbb */
+
+	/* Invariant: at least one of the following flags is true. */
+	unsigned int is_bg : 1;		/* Set when the render rectangle area is the solid color bg_color */
+	unsigned int is_buf : 1;	/* Set when the render rectangle area is represented by the buf */
+};
+
 
 
 /*** GnomeCanvas ***/
@@ -317,10 +353,13 @@ struct _GnomeCanvas {
 	GdkColorContext *cc;			/* Color context used for color allocation */
 	GdkGC *pixmap_gc;			/* GC for temporary pixmap */
 
+	unsigned int need_update : 1;		/* Will update at next idle loop iteration */
 	unsigned int need_redraw : 1;		/* Will redraw at next idle loop iteration */
 	unsigned int need_repick : 1;		/* Will repick current item at next idle loop iteration */
 	unsigned int left_grabbed_item : 1;	/* For use by the internal pick_event function */
 	unsigned int in_repick : 1;		/* For use by the internal pick_event function */
+
+	unsigned int aa : 1;			/* antialiased rendering */
 };
 
 struct _GnomeCanvasClass {
@@ -384,6 +423,7 @@ void gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, i
  * the upper-left scrolling limit and something else for the lower-left scrolling limit).
  */
 void gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy);
+void gnome_canvas_w2c_d (GnomeCanvas *canvas, double wx, double wy, double *cx, double *cy);
 void gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *wy);
 
 /* This function takes in coordinates relative to the GTK_LAYOUT (canvas)->bin_window and converts

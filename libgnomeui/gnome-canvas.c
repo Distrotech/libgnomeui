@@ -64,6 +64,9 @@ enum {
 };
 
 
+static void gnome_canvas_request_update (GnomeCanvas *canvas);
+
+
 typedef gint (* GnomeCanvasItemSignal1) (GtkObject *item,
 					 gpointer   arg1,
 					 gpointer   data);
@@ -1018,6 +1021,29 @@ gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, dou
 }
   
 
+/**
+ * gnome_canvas_item_request_update
+ * @item:
+ *
+ * Description: Request that the update method of the item gets called sometime before the next
+ * render (generally from the idle loop).
+ **/
+
+void
+gnome_canvas_item_request_update (GnomeCanvasItem *item)
+{
+	if (!(item->object.flags & GNOME_CANVAS_ITEM_NEED_UPDATE)) {
+		item->object.flags |= GNOME_CANVAS_ITEM_NEED_UPDATE;
+		if (item->parent != NULL) {
+			/* Recurse up the tree */
+			gnome_canvas_item_request_update (item->parent);
+		} else {
+			/* Have reached the top of the tree, make sure the update call gets scheduled. */
+			gnome_canvas_request_update (item->canvas);
+		}
+	}
+}
+
 /*** GnomeCanvasGroup ***/
 
 
@@ -1049,6 +1075,9 @@ static double gnome_canvas_group_point       (GnomeCanvasItem *item, double x, d
 					      GnomeCanvasItem **actual_item);
 static void   gnome_canvas_group_translate   (GnomeCanvasItem *item, double dx, double dy);
 static void   gnome_canvas_group_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
+static void   gnome_canvas_group_update      (GnomeCanvasItem *item);
+static void   gnome_canvas_group_render      (GnomeCanvasItem *item,
+					      GnomeCanvasBuf *buf);
 
 
 static GnomeCanvasItemClass *group_parent_class;
@@ -1110,6 +1139,8 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 	item_class->point = gnome_canvas_group_point;
 	item_class->translate = gnome_canvas_group_translate;
 	item_class->bounds = gnome_canvas_group_bounds;
+	item_class->update = gnome_canvas_group_update;
+	item_class->render = gnome_canvas_group_render;
 }
 
 static void
@@ -1403,6 +1434,8 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 
 	/* Get the bounds of the first visible item */
 
+	child = NULL; /* Unnecessary but eliminates a warning. */
+
 	set = FALSE;
 
 	for (list = group->item_list; list; list = list->next) {
@@ -1459,6 +1492,52 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 	*y1 = miny;
 	*x2 = maxx;
 	*y2 = maxy;
+}
+
+static void
+gnome_canvas_group_update (GnomeCanvasItem *item)
+{
+	GnomeCanvasGroup *group;
+	GnomeCanvasItem *child;
+	GList *list;
+
+	group = GNOME_CANVAS_GROUP (item);
+
+	for (list = group->item_list; list; list = list->next) {
+		child = list->data;
+
+		if (child->object.flags & GNOME_CANVAS_ITEM_NEED_UPDATE) {
+			(* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->update) (child);
+			child->object.flags &= ~GNOME_CANVAS_ITEM_NEED_UPDATE;
+		}
+	}
+}
+
+static void
+gnome_canvas_group_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
+{
+	GnomeCanvasGroup *group;
+	GnomeCanvasItem *child;
+	GList *list;
+
+	group = GNOME_CANVAS_GROUP (item);
+
+	for (list = group->item_list; list; list = list->next) {
+		child = list->data;
+
+		if (((child->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+		     && ((child->x1 < buf->rect.x1)
+			 && (child->y1 < buf->rect.y1)
+			 && (child->x2 > buf->rect.x0)
+			 && (child->y2 > buf->rect.y0)))
+		    || ((GTK_OBJECT_FLAGS (child) & GNOME_CANVAS_ITEM_ALWAYS_REDRAW)
+			&& (child->x1 < child->canvas->redraw_x2)
+			&& (child->y1 < child->canvas->redraw_y2)
+			&& (child->x2 > child->canvas->redraw_x1)
+			&& (child->y2 > child->canvas->redraw_y2)))
+			if (GNOME_CANVAS_ITEM_CLASS (child->object.klass)->render)
+				(* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->render) (child, buf);
+	}
 }
 
 static void
@@ -2458,6 +2537,9 @@ gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
 #define IMAGE_WIDTH 512
 #define IMAGE_HEIGHT 512
 
+#define IMAGE_WIDTH_AA 256
+#define IMAGE_HEIGHT_AA 64
+
 static void
 paint (GnomeCanvas *canvas)
 {
@@ -2469,10 +2551,20 @@ paint (GnomeCanvas *canvas)
 	ArtIRect *rects;
 	gint n_rects, i;
 
-	if (!canvas->need_redraw)
-	  return;
+	if (canvas->need_update) {
+		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root);
 
-	rects = art_rect_list_from_uta (canvas->redraw_area, IMAGE_WIDTH, IMAGE_HEIGHT, &n_rects);
+		canvas->root->object.flags &= ~GNOME_CANVAS_ITEM_NEED_UPDATE;
+		canvas->need_update = FALSE;
+	}
+
+	if (!canvas->need_redraw)
+		return;
+
+	if (canvas->aa)
+		rects = art_rect_list_from_uta (canvas->redraw_area, IMAGE_WIDTH_AA, IMAGE_HEIGHT_AA, &n_rects);
+	else
+		rects = art_rect_list_from_uta (canvas->redraw_area, IMAGE_WIDTH, IMAGE_HEIGHT, &n_rects);
 
 	art_uta_free (canvas->redraw_area);
 
@@ -2505,52 +2597,90 @@ paint (GnomeCanvas *canvas)
 
 		if ((draw_x1 < draw_x2) && (draw_y1 < draw_y2)) {
 
-			/* Set up the temporary pixmap */
-
 			canvas->draw_xofs = draw_x1;
 			canvas->draw_yofs = draw_y1;
 
 			width = draw_x2 - draw_x1;
 			height = draw_y2 - draw_y1;
 
-			pixmap = gdk_pixmap_new (canvas->layout.bin_window, width, height,
-						 gtk_widget_get_visual (widget)->depth);
+			if (canvas->aa) {
+				GnomeCanvasBuf buf;
+				buf.buf = g_new (guchar, IMAGE_WIDTH_AA * IMAGE_HEIGHT_AA * 3);
+				buf.buf_rowstride = IMAGE_WIDTH_AA * 3;
+				buf.rect.x0 = draw_x1;
+				buf.rect.y0 = draw_y1;
+				buf.rect.x1 = draw_x2;
+				buf.rect.y1 = draw_y2;
+				buf.bg_color = 0xffffff; /* FIXME; should be the same as the style's background color */
+				buf.is_bg = 1;
+				buf.is_buf = 0;
 
-			gdk_gc_set_foreground (canvas->pixmap_gc, &widget->style->bg[GTK_STATE_NORMAL]);
-			gdk_draw_rectangle (pixmap,
-					    canvas->pixmap_gc,
-					    TRUE,
-					    0, 0,
-					    width, height);
+				if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE) {
+					if ((* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->render) != NULL)
+						(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->render) (canvas->root, &buf);
+					/* else warning? */
+				}
 
-			/* Draw the items that intersect the area */
+				if (buf.is_bg) {
+					gdk_rgb_gc_set_foreground (canvas->pixmap_gc, buf.bg_color);
+					gdk_draw_rectangle (canvas->layout.bin_window,
+							    canvas->pixmap_gc,
+							    TRUE,
+							    0, 0,
+							    width, height);
+				} else {
+					gdk_draw_rgb_image (canvas->layout.bin_window,
+							    canvas->pixmap_gc,
+							    draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
+							    draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
+							    width, height,
+							    GDK_RGB_DITHER_NONE,
+							    buf.buf,
+							    IMAGE_WIDTH_AA * 3);
+				}
+				canvas->draw_xofs = draw_x1;
+				canvas->draw_yofs = draw_y1;
+				g_free (buf.buf);
+			
+			} else {
+				pixmap = gdk_pixmap_new (canvas->layout.bin_window, width, height, gtk_widget_get_visual (widget)->depth);
 
-			if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
-				(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->draw) (canvas->root, pixmap,
+				gdk_gc_set_foreground (canvas->pixmap_gc, &widget->style->bg[GTK_STATE_NORMAL]);
+				gdk_draw_rectangle (pixmap,
+						    canvas->pixmap_gc,
+						    TRUE,
+						    0, 0,
+						    width, height);
+
+				/* Draw the items that intersect the area */
+
+				if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+					(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->draw) (canvas->root, pixmap,
 												draw_x1, draw_y1,
 												width, height);
 #if 0
-			gdk_draw_line (pixmap,
-				       widget->style->black_gc,
-				       0, 0,
-				       width - 1, height - 1);
-			gdk_draw_line (pixmap,
-				       widget->style->black_gc,
-				       width - 1, 0,
-				       0, height - 1);
+				gdk_draw_line (pixmap,
+					       widget->style->black_gc,
+					       0, 0,
+					       width - 1, height - 1);
+				gdk_draw_line (pixmap,
+					       widget->style->black_gc,
+					       width - 1, 0,
+					       0, height - 1);
 #endif
-			/* Copy the pixmap to the window and clean up */
+				/* Copy the pixmap to the window and clean up */
 
-			gdk_draw_pixmap (canvas->layout.bin_window,
-					 canvas->pixmap_gc,
-					 pixmap,
-					 0, 0,
-					 draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
-					 draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
-					 width, height);
+				gdk_draw_pixmap (canvas->layout.bin_window,
+						 canvas->pixmap_gc,
+						 pixmap,
+						 0, 0,
+						 draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
+						 draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
+						 width, height);
 
-			gdk_pixmap_unref (pixmap);
-		}
+				gdk_pixmap_unref (pixmap);
+			}
+	  	}
 	}
 
 	art_free (rects);
@@ -2818,6 +2948,24 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 }
 
 
+/* Invariant: the idle handler is always present when need_update or need_redraw. */
+
+/**
+ * gnome_canvas_request_update
+ * @canvas:
+ *
+ * Description: Schedules an update () invocation for the next idle loop.
+ **/
+
+static void
+gnome_canvas_request_update (GnomeCanvas *canvas)
+{
+	if (!(canvas->need_update || canvas->need_redraw)) {
+		canvas->idle_id = gtk_idle_add (idle_handler, canvas);
+	}
+	canvas->need_update = TRUE;
+}
+
 /**
  * gnome_canvas_request_redraw_uta:
  * @canvas: The canvas whose area needs to be redrawn.
@@ -2929,6 +3077,33 @@ gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy)
 		else
 			*cy = (int) ceil (y - 0.5);
 	}
+}
+
+/**
+ * gnome_canvas_w2c_d:
+ * @canvas: The canvas whose coordinates need conversion.
+ * @wx: World X coordinate.
+ * @wy: World Y coordinate.
+ * @cx: If non-NULL, returns the converted X pixel coordinate.
+ * @cy: If non-NULL, returns the converted Y pixel coordinate.
+ * 
+ * Converts world coordinates into canvas pixel coordinates.  Usually only needed
+ * by item implementations. This version results in double coordinates, which
+ * are useful in antialiased implementations.
+ **/
+void
+gnome_canvas_w2c_d (GnomeCanvas *canvas, double wx, double wy, double *cx, double *cy)
+{
+	double x, y;
+
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	if (cx)
+		*cx = (wx - canvas->scroll_x1) * canvas->pixels_per_unit;
+
+	if (cy)
+		*cy = (wy - canvas->scroll_y1) * canvas->pixels_per_unit;
 }
 
 

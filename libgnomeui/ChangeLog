@@ -1,3 +1,17 @@
+Sun Dec  6 22:40:23 1998  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas.h:
+	* gnome-canvas.c: Added basic support for antialiased rendering.
+	It's overeager to repaint (for example, any time an item gets
+	translated, the entire bounding box gets repainted). There is
+	no support yet for affine transformations or clip paths. However,
+	I feel that the basic concept is sound.
+
+	* gnome-canvas-rect-ellipse.h:
+	* gnome-canvas-rect-ellipse.c: I am using the rect-ellipse item as
+	the basic testbed for adding antialiased rendering. It's certainly
+	not perfect yet, but it basically works in the test-gnome demo.
+
 1998-12-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c: slight indentation changes. added documentation
