@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui-2.0.hi\n"
-"POT-Creation-Date: 2004-02-03 11:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-24 11:24+0100\n"
 "PO-Revision-Date: 2003-08-25 16:04+0530\n"
 "Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
 
 # demos/mdi_demo.c:128
@@ -794,11 +794,6 @@ msgstr "लागआउट निरस्त करें"
 msgid "Received invalid color data\n"
 msgstr "अवैध रंग डाटा प्राप्त हुआ है\n"
 
-# libgnomeui/gnome-app-helper.c:171
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "रंग चयनक"
-
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "रंग चुनने के लिये डायलाग खोलें"
@@ -1039,12 +1034,12 @@ msgid "The GTK entry"
 msgstr "यह GTK प्रविष्टि"
 
 # libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "इतिहास क्रमांक"
 
 # libgnomeui/gnome-file-entry.c:191
-#: libgnomeui/gnome-file-entry.c:221
+#: libgnomeui/gnome-file-entry.c:227
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -1052,22 +1047,22 @@ msgstr ""
 "फाइल प्रविष्टि के लिए एक मात्र सूचक इसका उपयोग इतिहास को संग्रहित करने के लिए होता है"
 
 # libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "डायलाग शीर्षक"
 
 # libgnomeui/gnome-file-entry.c:200
-#: libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:236
 msgid "Title for the Browse file dialog."
 msgstr "ब्राउस फाइल डायलाग के लिए शीर्षक"
 
 # libgnomeui/gnome-file-entry.c:207
-#: libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:243
 msgid "Directory Entry"
 msgstr "डायरेक्टरी प्रविष्टि"
 
 # libgnomeui/gnome-file-entry.c:208
-#: libgnomeui/gnome-file-entry.c:238
+#: libgnomeui/gnome-file-entry.c:244
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -1076,42 +1071,42 @@ msgstr ""
 "किया जाएगा"
 
 # libgnomeui/gnome-file-entry.c:216
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
 msgstr "मोडल"
 
 # libgnomeui/gnome-file-entry.c:217
-#: libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Whether the Browse file window should be modal."
 msgstr "क्या ब्राउज फाइल विन्डो मोडल हो"
 
 # libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "फाइलनाम"
 
 # libgnomeui/gnome-file-entry.c:225
-#: libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Filename that should be displayed in the file entry."
 msgstr "वह फाइलनाम जो फाइल प्रविष्टि में प्रदर्शित होता है"
 
 # libgnomeui/gnome-file-entry.c:233
-#: libgnomeui/gnome-file-entry.c:263
+#: libgnomeui/gnome-file-entry.c:269
 msgid "Default Path"
 msgstr "डिफाल्ट पाथ"
 
 # libgnomeui/gnome-file-entry.c:234
-#: libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:270
 msgid "Default path for the Browse file window."
 msgstr "ब्राउज फाइल विन्डो के लिए डिफाल्ट पाथ"
 
 # libgnomeui/gnome-file-entry.c:241
-#: libgnomeui/gnome-file-entry.c:271
+#: libgnomeui/gnome-file-entry.c:277
 msgid "GnomeEntry"
 msgstr "जीनोम प्रविष्टि"
 
 # libgnomeui/gnome-file-entry.c:242
-#: libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:278
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1122,12 +1117,12 @@ msgstr ""
 "किसी पैरामीटर को संशोधित करने का या किसी पैरामीटर से संबधित प्रश्न करने की आवश्यकता हो"
 
 # libgnomeui/gnome-file-entry.c:252
-#: libgnomeui/gnome-file-entry.c:282
+#: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
 # libgnomeui/gnome-file-entry.c:253
-#: libgnomeui/gnome-file-entry.c:283
+#: libgnomeui/gnome-file-entry.c:289
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1137,27 +1132,37 @@ msgstr ""
 "गुणधर्म का प्रयोग GtkEntry को प्राप्त करने के लिए कर सकते हैं यदि आपको इसके किसी "
 "पैरामीटर को संशोधित करने का या किसी पैरामीटर से संबधित प्रश्न करने की आवश्यकता हो"
 
+#: libgnomeui/gnome-file-entry.c:299
+msgid "Use GtkFileChooser"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:300
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+
 # libgnomeui/gnome-file-entry.c:418
-#: libgnomeui/gnome-file-entry.c:535
+#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
 msgstr "फाइल चयन करें"
 
 # libgnomeui/gnome-app-helper.c:166
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path"
 msgstr "पाथ"
 
 # libgnomeui/gnome-app-helper.c:114
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path to file"
 msgstr "फाइल का पाथ"
 
 # libgnomeui/gnome-file-entry.c:592
-#: libgnomeui/gnome-file-entry.c:683
+#: libgnomeui/gnome-file-entry.c:775
 msgid "_Browse..."
 msgstr "ब्राउज (_B)..."
 
-#: libgnomeui/gnome-file-entry.c:684
+#: libgnomeui/gnome-file-entry.c:776
 msgid "Pop up a file selector to choose a file"
 msgstr "फाइल चयन करने के लिये फाइल सेलेक्टर खोलें"
 
@@ -1332,39 +1337,39 @@ msgstr ""
 "कृपया वरीयता टुल में अनुप्रयोग वरीयता समायोजन जांचें"
 
 # libgnomeui/gnome-icon-entry.c:164
-#: libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "आइकान प्रविष्टि के लिए एकमात्र सूचक इसका प्रयोग इतिहास संग्रहित करने में होता है"
 
 # libgnomeui/gnome-icon-entry.c:173
-#: libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
 msgstr "ब्राउज आइकान डायलाग के लिए शीर्षक"
 
 # libgnomeui/gnome-icon-entry.c:180
-#: libgnomeui/gnome-icon-entry.c:193
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr "Pixmap डायरेक्टरी"
 
 # libgnomeui/gnome-icon-entry.c:181
-#: libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
 msgstr "आइकान के लिए खोजी जाने वाली डायरेक्टरी"
 
 # libgnomeui/gnome-icon-entry.c:189
-#: libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
 msgstr "वह फाइलनाम जो आइकान प्रविष्टि में प्रदर्शित होना है"
 
 # libgnomeui/gnome-icon-entry.c:197
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
 msgstr "Picker डायलाग"
 
 # libgnomeui/gnome-icon-entry.c:198
-#: libgnomeui/gnome-icon-entry.c:211
+#: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1374,55 +1379,45 @@ msgstr ""
 "प्रश्न करने की आवश्यकता हो"
 
 # libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr "आइकान नहीं"
 
-# libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
-#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "सामान्य फाइल चयन का प्रयोग करने पर कोई hbox नहीं मिला"
-
-# libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
-#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
-msgid "Preview"
-msgstr "पूर्व दर्शन"
-
 # libgnomeui/gnome-font-picker.c:156
-#: libgnomeui/gnome-icon-entry.c:756
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "आयकॉन चयन डायलाग"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "यह डायलाग बाँक्स से आप आयकन चयन कर सकते हें"
 
-#: libgnomeui/gnome-icon-entry.c:763
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "आयकन चयनक"
 
-#: libgnomeui/gnome-icon-entry.c:764
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "अपनी आवश्यकतानुसार आयकन चुने"
 
-#: libgnomeui/gnome-icon-entry.c:988
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
 msgstr "आयकन चयनक"
 
-#: libgnomeui/gnome-icon-entry.c:989
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
 msgstr "इस बटन से एक विंडो खुलेगा जहां से आप आयकन चुन सकते हें"
 
 # libgnomeui/gnome-icon-entry.c:930
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
 msgstr "ब्राउज"
 
-#: libgnomeui/gnome-icon-entry.c:1014
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
 msgstr "आयकन path"
 
-#: libgnomeui/gnome-icon-entry.c:1015
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1446,27 +1441,27 @@ msgid "Loading Icons..."
 msgstr "आइकान लोड हो रहे है"
 
 # libgnomeui/gnome-messagebox.c:110
-#: libgnomeui/gnome-messagebox.c:108
+#: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "सूचना"
 
 # libgnomeui/gnome-messagebox.c:115
-#: libgnomeui/gnome-messagebox.c:113
+#: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "चेतावनी"
 
 # libgnomeui/gnome-messagebox.c:121
-#: libgnomeui/gnome-messagebox.c:119
+#: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "त्रुटि"
 
 # libgnomeui/gnome-messagebox.c:127
-#: libgnomeui/gnome-messagebox.c:125
+#: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "प्रश्न"
 
 # libgnomeui/gnome-messagebox.c:132
-#: libgnomeui/gnome-messagebox.c:130
+#: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "संदेश"
 
@@ -1491,29 +1486,39 @@ msgid "Save password in keyring"
 msgstr ""
 
 # libgnomeui/gnome-pixmap-entry.c:118
-#: libgnomeui/gnome-pixmap-entry.c:113
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "पूर्व-दर्शन कराएं"
 
 # libgnomeui/gnome-pixmap-entry.c:119
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "क्या pixmap प्रविष्टि के लिए पूर्वदर्शन है"
 
 # libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
-#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "कोई इमेज नहीं"
 
 # libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
-#: libgnomeui/gnome-pixmap-entry.c:205
+#: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "चित्र पूर्व दर्शन"
 
 # libgnomeui/gnome-dateedit.c:469
-#: libgnomeui/gnome-pixmap-entry.c:206
+#: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "वर्तमान में चयनित चित्र का पूर्वदर्शन"
+
+# libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-pixmap-entry.c:414
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "सामान्य फाइल चयन का प्रयोग करने पर कोई hbox नहीं मिला"
+
+# libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-pixmap-entry.c:420
+msgid "Preview"
+msgstr "पूर्व दर्शन"
 
 # libgnomeui/gnome-scores.c:78
 #: libgnomeui/gnome-scores.c:78
@@ -1592,11 +1597,13 @@ msgstr "GNOME GUI लाइब्रेरी"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "कई हिस्सों में एक साथ खराबी त्रुटि संदेश नहीं दिए जा सकते\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1637,13 +1644,24 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "प्रयोग: gnome_segv2 appname signum\n"
 
+# libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome_segv.c:154
+#, fuzzy
+msgid "_Restart Application"
+msgstr "अनुप्रयोग के बाहर"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
+msgid "_Inform Developers"
 msgstr ""
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
+#, fuzzy
+msgid "_Debug"
 msgstr "त्रुटि सुधार"
+
+# libgnomeui/gnome-app-helper.c:171
+#~ msgid "Color Selector"
+#~ msgstr "रंग चयनक"
 
 #~ msgid ""
 #~ "Application \"%s\" (process %d) has crashed\n"

@@ -12,13 +12,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-31 04:22+0100\n"
+"POT-Creation-Date: 2004-02-24 11:24+0100\n"
 "PO-Revision-Date: 2004-01-31 18:00+0100\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -144,7 +144,6 @@ msgstr "حول %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_ملف"
 
@@ -202,7 +201,6 @@ msgid "_Game"
 msgstr "_لعبة"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_مساعدة"
 
@@ -393,11 +391,11 @@ msgstr "إعداد التطبيق"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_حول"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "حول هذا البرنامج"
 
@@ -424,7 +422,7 @@ msgstr "أنشىء نافذة جديدة"
 msgid "_Close This Window"
 msgstr "أ_غلق هذه النافذة"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "أغلق النافذة الحالية"
 
@@ -665,10 +663,6 @@ msgstr "إلغي الخروج"
 msgid "Received invalid color data\n"
 msgstr "تقبلت بيانات لون غير سليمة\n"
 
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "منتقي الألوان"
-
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "افتح مربعا لتحديد اللون"
@@ -861,64 +855,64 @@ msgstr "خانة GTK"
 msgid "The GTK entry"
 msgstr "خانة GTK"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "هوية التاريخ"
 
-#: libgnomeui/gnome-file-entry.c:221
+#: libgnomeui/gnome-file-entry.c:227
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr "معرّف فريد لخانة الملفات. سيتم استخدامه لحفظ قائمة التاريخ."
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "عنوانُ مربعِ حوارِ التصفحِ"
 
-#: libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:236
 msgid "Title for the Browse file dialog."
 msgstr "عنوان لمربع حوار تصفح الملفات."
 
-#: libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:243
 msgid "Directory Entry"
 msgstr "خانة المجلدات"
 
-#: libgnomeui/gnome-file-entry.c:238
+#: libgnomeui/gnome-file-entry.c:244
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 "ما إذا  خانة الملفات تستخدم لادخال أسماء المجلدات أو أسماء كاملة للملفات."
 
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
 msgstr "سائدة"
 
-#: libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Whether the Browse file window should be modal."
 msgstr "ما إذا وجب ان  تكون نافذة تصفح الملفات سائدة."
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "اسم الملف"
 
-#: libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Filename that should be displayed in the file entry."
 msgstr "اسم الملف الذي يجب عرضه في خانة الملفات."
 
-#: libgnomeui/gnome-file-entry.c:263
+#: libgnomeui/gnome-file-entry.c:269
 msgid "Default Path"
 msgstr "المسار الافتراضي"
 
-#: libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:270
 msgid "Default path for the Browse file window."
 msgstr "المسار الافتراضي لنافذة تصفح الملفات."
 
-#: libgnomeui/gnome-file-entry.c:271
+#: libgnomeui/gnome-file-entry.c:277
 msgid "GnomeEntry"
 msgstr "خانة جنوم"
 
-#: libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:278
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -928,11 +922,11 @@ msgstr ""
 "استخدام هذه الخاصية للحصول على GnomeEntry إذا أردت تعديل أو الاستعلام عن أيّ "
 "من عواملها."
 
-#: libgnomeui/gnome-file-entry.c:282
+#: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
 msgstr "خانة Gtk"
 
-#: libgnomeui/gnome-file-entry.c:283
+#: libgnomeui/gnome-file-entry.c:289
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -942,23 +936,33 @@ msgstr ""
 "استخدام هذه الخاصية للحصول على GtkEntry إذا أردت تعديل أو الاستعلام عن أي "
 "واحد من عواملها."
 
-#: libgnomeui/gnome-file-entry.c:535
+#: libgnomeui/gnome-file-entry.c:299
+msgid "Use GtkFileChooser"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:300
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
 msgstr "اختر ملفا"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path"
 msgstr "المسار"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path to file"
 msgstr "مسار الملف"
 
-#: libgnomeui/gnome-file-entry.c:683
+#: libgnomeui/gnome-file-entry.c:775
 msgid "_Browse..."
 msgstr "_تصفح..."
 
-#: libgnomeui/gnome-file-entry.c:684
+#: libgnomeui/gnome-file-entry.c:776
 msgid "Pop up a file selector to choose a file"
 msgstr "اعرض منتقي ملفات لاختيار ملف"
 
@@ -1103,33 +1107,33 @@ msgstr ""
 "حدث خطأ أثناء محاولة تشغيل المتصفح الإفتراضي.\n"
 "الرجاء التأكد من اعدادات في أدات التفضيلات 'تطبيقي المفضل'."
 
-#: libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "معرّف فريد لخانة الأيقونات. سيتم استخدامه لحفظ قائمة التاريخ."
 
-#: libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
 msgstr "عنوان لمربع حوار أيقونة التصفح."
 
-#: libgnomeui/gnome-icon-entry.c:193
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr "مجلد بيكسماب"
 
-#: libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
 msgstr "المجلد الذي سيتم البحث فيه عن أيقونات."
 
-#: libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
 msgstr "اسم الملف الذي سيعرض في خانة اﻻيقونة."
 
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
 msgstr "مربع حوار المنتقي"
 
-#: libgnomeui/gnome-icon-entry.c:211
+#: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1137,51 +1141,43 @@ msgstr ""
 "مربع حوار منتقي اﻻيقونات. باستطاعتك استخدام هذه الخاصية للحصول على GtkDialog "
 "إذا أردت تعديل أو الاستعلام عن أيّ من خواصها."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr "لا أيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "لم اجد hbox، سأستخدم اختيار الملفات العادي"
-
-#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
-msgid "Preview"
-msgstr "معاينة"
-
-#: libgnomeui/gnome-icon-entry.c:756
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "مربع حوار اختيار اﻻيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "يسمح لك صندوق مربع الحوار هذا باختيار أيقونة."
 
-#: libgnomeui/gnome-icon-entry.c:763
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "منتقي اﻻيقونات"
 
-#: libgnomeui/gnome-icon-entry.c:764
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "رجاءا اختر اﻻيقونة التي تريدها."
 
-#: libgnomeui/gnome-icon-entry.c:988
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
 msgstr "منتقي اﻻيقونات"
 
-#: libgnomeui/gnome-icon-entry.c:989
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
 msgstr "سيفتح هذا الزر نافذة تسمح لك بانتقاء أيقونة."
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
 msgstr "تصفح"
 
-#: libgnomeui/gnome-icon-entry.c:1014
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
 msgstr "مسار اﻻيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:1015
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1201,23 +1197,23 @@ msgstr "GnomeIconSelection: لم استطع فتح المجلد '%s'"
 msgid "Loading Icons..."
 msgstr "تحميل اﻻيقونات..."
 
-#: libgnomeui/gnome-messagebox.c:108
+#: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "معلومات"
 
-#: libgnomeui/gnome-messagebox.c:113
+#: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "تحذير"
 
-#: libgnomeui/gnome-messagebox.c:119
+#: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "خطأ"
 
-#: libgnomeui/gnome-messagebox.c:125
+#: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "سؤال"
 
-#: libgnomeui/gnome-messagebox.c:130
+#: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "رسالة"
 
@@ -1241,25 +1237,33 @@ msgstr "تذكر كلمة السر لهذه الجلسة"
 msgid "Save password in keyring"
 msgstr "حفظ كلمة السر في حلقة المفاتيح"
 
-#: libgnomeui/gnome-pixmap-entry.c:113
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "عاين"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "ما إذا سيكون لخانة البيكسماب معاينة"
 
-#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "لا صورة"
 
-#: libgnomeui/gnome-pixmap-entry.c:205
+#: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "معاينة صورة"
 
-#: libgnomeui/gnome-pixmap-entry.c:206
+#: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "معاينة الصورة المحددة حاليا"
+
+#: libgnomeui/gnome-pixmap-entry.c:414
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "لم اجد hbox، سأستخدم اختيار الملفات العادي"
+
+#: libgnomeui/gnome-pixmap-entry.c:420
+msgid "Preview"
+msgstr "معاينة"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1373,24 +1377,33 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"يمكنك إبلاغ المطورين بما حدث لمساعدتهم في إصلاحه."
-"كما يمكنك إعادة تشغيل التطبيق الآن."
+"يمكنك إبلاغ المطورين بما حدث لمساعدتهم في إصلاحه.كما يمكنك إعادة تشغيل "
+"التطبيق الآن."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "الاستخدام: gnome_segv2 اسم-التطبيق رقم-اﻻشارة\n"
 
+#: libgnomeui/gnome_segv.c:154
+#, fuzzy
+msgid "_Restart Application"
+msgstr "أغلق التطبيق"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
+#, fuzzy
+msgid "_Inform Developers"
 msgstr "إبلاغ المطورين"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
+#, fuzzy
+msgid "_Debug"
 msgstr "تنقيح"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "اخرج من التجربة"
+#~ msgid "Color Selector"
+#~ msgstr "منتقي الألوان"
+
+#~ msgid "Exit the test"
+#~ msgstr "اخرج من التجربة"
 
 #~ msgid ""
 #~ "Application \"%s\" (process %d) has crashed\n"

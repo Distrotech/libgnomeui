@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-18 09:35+0100\n"
+"POT-Creation-Date: 2004-02-24 11:24+0100\n"
 "PO-Revision-Date: 2003-06-27 21:59--100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -142,7 +142,6 @@ msgstr "Informacje o programie %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Plik"
 
@@ -200,7 +199,6 @@ msgid "_Game"
 msgstr "_Gra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Pomo_c"
 
@@ -391,11 +389,11 @@ msgstr "Konfiguruje aplikację"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Informacje o"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Informacje o programie"
 
@@ -422,7 +420,7 @@ msgstr "Tworzy nowe okno"
 msgid "_Close This Window"
 msgstr "Za_mknij okno"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zamyka bieżące okno"
 
@@ -1356,6 +1354,7 @@ msgstr ""
 "Kilkakrotnie wystąpiło niepoprawne odwołanie do pamięci; nie można "
 "wyświetlić okna z informacją o błędzie\n"
 
+#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
@@ -1414,9 +1413,8 @@ msgstr "_Powiadom programistów"
 msgid "_Debug"
 msgstr "Ś_ledzenie"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Kończy test"
+#~ msgid "Exit the test"
+#~ msgstr "Kończy test"
 
 #~ msgid "Color Selector"
 #~ msgstr "Okno wyboru koloru"

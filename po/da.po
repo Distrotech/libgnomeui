@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-18 00:17+0100\n"
+"POT-Creation-Date: 2004-02-24 11:24+0100\n"
 "PO-Revision-Date: 2004-02-18 00:17+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -142,7 +142,6 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -200,7 +199,6 @@ msgid "_Game"
 msgstr "_Spil"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjælp"
 
@@ -391,11 +389,11 @@ msgstr "Konfigurér programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Om dette program"
 
@@ -422,7 +420,7 @@ msgstr "Opret et nyt vindue"
 msgid "_Close This Window"
 msgstr "L_uk dette vindue"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Luk det aktuelle vindue"
 
@@ -1414,9 +1412,8 @@ msgstr "_Informér udviklere"
 msgid "_Debug"
 msgstr "_Fejlanalysering"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Afslut testprogrammet"
+#~ msgid "Exit the test"
+#~ msgstr "Afslut testprogrammet"
 
 #~ msgid "Color Selector"
 #~ msgstr "Farvevælger"

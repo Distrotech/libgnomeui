@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-23 17:58+0200\n"
+"POT-Creation-Date: 2004-02-24 11:24+0100\n"
 "PO-Revision-Date: 2004-02-23 18:08+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -132,7 +132,8 @@ msgid "Translator credits"
 msgstr "Μνεία μεταφραστών"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Μνεία στους μεταφραστές. Αυτό το αλφαριθμητικό θα πρέπει να σημειωθεί ως "
 "μεταφράσιμο."
@@ -170,7 +171,6 @@ msgstr "Περί %s"
 #
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
@@ -302,7 +302,6 @@ msgstr "_Παιχνίδι"
 # #-#-#-#-#  gnomemeeting-el.po (gnomemeeting 0.12.2)  #-#-#-#-#
 #
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Βοήθεια"
 
@@ -696,7 +695,7 @@ msgstr "Ρύθμιση της εφαρμογής"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Π_ερί"
 
@@ -707,7 +706,7 @@ msgstr "Π_ερί"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
@@ -751,7 +750,7 @@ msgstr "_Κλείσιμο Αυτού Του Παραθύρου"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Κλείσιμο του τρέχοντος παραθύρου"
 
@@ -1414,8 +1413,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Αν θα χρησιμοποιείται το νέο γραφικό συστατικό επιλογέα αρχείου Gtk ή το γραφικό "
-"συστατικό  GtkFileSelection για την επιλογή αρχείων."
+"Αν θα χρησιμοποιείται το νέο γραφικό συστατικό επιλογέα αρχείου Gtk ή το "
+"γραφικό συστατικό  GtkFileSelection για την επιλογή αρχείων."
 
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
 #
@@ -1538,7 +1537,8 @@ msgstr "Μέγεθος γραμματοσειράς για την ετικέτα
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
+msgstr ""
+"Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -2022,11 +2022,14 @@ msgstr "Βιβλιοθήκη GNOME GUI"
 #
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
+msgstr ""
+"Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -2064,8 +2067,8 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"Μπορείτε να ενημερώσετε τους προγραμματιστές της εφαρμογής για να τους βοηθήσετε να "
-"το διορθώσουν. Ή να επανεκκινήσετε την εφαρμογή αμέσως τώρα."
+"Μπορείτε να ενημερώσετε τους προγραμματιστές της εφαρμογής για να τους "
+"βοηθήσετε να το διορθώσουν. Ή να επανεκκινήσετε την εφαρμογή αμέσως τώρα."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -2101,11 +2104,9 @@ msgstr "Εκσ_φαλμάτωση"
 #
 # #-#-#-#-#  achtung-el.po (achtung 0.99.0)  #-#-#-#-#
 #
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Έξοδος από τη δοκιμή"
+#~ msgid "Exit the test"
+#~ msgstr "Έξοδος από τη δοκιμή"
 
 #
 #~ msgid "Color Selector"
 #~ msgstr "Επιλογέας Χρώματος"
-

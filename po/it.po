@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-16 16:56+0100\n"
+"POT-Creation-Date: 2004-02-24 11:24+0100\n"
 "PO-Revision-Date: 2004-02-16 23:27+0100\n"
 "Last-Translator: Alessio Frusciante <algol@firenze.linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -140,7 +140,6 @@ msgstr "Informazioni su %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -198,7 +197,6 @@ msgid "_Game"
 msgstr "_Gioco"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_iuto"
 
@@ -390,11 +388,11 @@ msgstr "Configura l'applicazione"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "I_nformazioni"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Informazioni su questa applicazione"
 
@@ -421,7 +419,7 @@ msgstr "Crea una nuova finestra"
 msgid "_Close This Window"
 msgstr "_Chiudi questa finestra"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Chiude la finestra corrente"
 
@@ -947,7 +945,9 @@ msgstr "Usa GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Indica se usare il nuovo widget GtkFileChooser oppure GtkFileSelection per selezionare i file."
+msgstr ""
+"Indica se usare il nuovo widget GtkFileChooser oppure GtkFileSelection per "
+"selezionare i file."
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -1394,20 +1394,29 @@ msgstr "processo %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "È possibile informare gli sviluppatori di ciò che è accaduto per aiutarli a correggere l'errore. Oppure è possibile riavviare l'applicazione immediatamente."
+msgstr ""
+"È possibile informare gli sviluppatori di ciò che è accaduto per aiutarli a "
+"correggere l'errore. Oppure è possibile riavviare l'applicazione "
+"immediatamente."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uso: gnome_segv2 NOME_APPL NUM_SEGN\n"
 
+#: libgnomeui/gnome_segv.c:154
+#, fuzzy
+msgid "_Restart Application"
+msgstr "Termina l'applicazione"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
+#, fuzzy
+msgid "_Inform Developers"
 msgstr "Informa sviluppatori"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
+#, fuzzy
+msgid "_Debug"
 msgstr "Debug"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Termina il test"
+#~ msgid "Exit the test"
+#~ msgstr "Termina il test"

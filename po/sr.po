@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-20 02:33+0100\n"
+"POT-Creation-Date: 2004-02-24 11:24+0100\n"
 "PO-Revision-Date: 2004-02-20 02:33+0100\n"
 "Last-Translator: Bojan Suzic <bojans@teol.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
@@ -144,7 +144,6 @@ msgstr "О програму „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Датотека"
 
@@ -202,7 +201,6 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Помоћ"
 
@@ -393,11 +391,11 @@ msgstr "Подеси програм"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_О програму"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "О овом програму"
 
@@ -424,7 +422,7 @@ msgstr "Отвори нови прозор"
 msgid "_Close This Window"
 msgstr "_Затвори овај прозор"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Затвори текући прозор"
 
@@ -1348,6 +1346,7 @@ msgstr "Гномова библиотека за корисничко сучељ
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Дошло је до неколико неправилних приступа меморији (SIGSEGV); не може да "
@@ -1355,6 +1354,7 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1411,9 +1411,8 @@ msgstr "_Обавести програмере"
 msgid "_Debug"
 msgstr "_Нађи грешке"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Напустите пробу"
+#~ msgid "Exit the test"
+#~ msgstr "Напустите пробу"
 
 #~ msgid "Color Selector"
 #~ msgstr "Изборник боје"
