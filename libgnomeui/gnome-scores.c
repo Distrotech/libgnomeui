@@ -179,8 +179,6 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 {
 	GtkStyle *s = gtk_style_new(); /* i believe that i should copy the default style
 					  and change only the fg & font fields, how? */
-	GdkFont *f;
-	gchar *fo;
 
 	if(gs->logo) {
 		g_print("Warning: gnome_scores_set_logo_* can be called only once\n");
@@ -240,7 +238,6 @@ gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos)
 	gfloat *scores = NULL;
 	time_t *scoretimes = NULL;
 	gint top;
-	int i;
 
 	top = gnome_score_get_notable(app_name, level, &names, &scores, &scoretimes);
 	if (top > 0){

@@ -48,7 +48,7 @@ void
 gnome_app_create_menus(GnomeApp *app,
 		       GnomeMenuInfo *menuinfo)
 {
-	GtkWidget *hb, *menubar;
+	GtkWidget *menubar;
 	
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
@@ -103,8 +103,6 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 void gnome_app_create_toolbar(GnomeApp *app,
 			      GnomeToolbarInfo *toolbarinfo)
 {
-	GtkWidget *hb;
-	
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 	g_return_if_fail(app->toolbar == NULL);

@@ -115,7 +115,7 @@ GtkWidget *gtk_clock_new(GtkClockType type)
 	} else {
 		clock->fmt = g_strdup("%H:%M:%S");
 		clock->tm = g_new(struct tm, 1);
-		bzero(clock->tm, sizeof(struct tm));
+		memset(clock->tm, 0, sizeof(struct tm));
 		clock->update_interval = 1;
 	}
 
