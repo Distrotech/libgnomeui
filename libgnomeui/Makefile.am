@@ -55,7 +55,6 @@ libgnomeui_la_SOURCES = \
 	gnome-file-entry.c		\
         gnome-font-picker.c		\
 	gnome-font-selector.c 		\
-	gnome-gtk-utils.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-icon-list.c		\
@@ -123,7 +122,6 @@ gnome_headers = \
 	gnome-font-selector.h 		\
 	gnome-geometry.h		\
 	gnome-guru.h			\
-	gnome-gtk-utils.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-list.h		\

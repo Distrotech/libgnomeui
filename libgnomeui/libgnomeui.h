@@ -28,7 +28,6 @@
 #include "libgnomeui/gnome-font-picker.h"
 #include "libgnomeui/gnome-font-selector.h"
 #include "libgnomeui/gnome-geometry.h"
-#include "libgnomeui/gnome-gtk-utils.h"
 #include "libgnomeui/gnome-guru.h"
 #include "libgnomeui/gnome-icon-list.h"
 #include "libgnomeui/gnome-icon-item.h"
