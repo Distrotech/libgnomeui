@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-04-29 23:00+0200\n"
+"POT-Creation-Date: 2002-05-10 00:39+0800\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -534,6 +534,7 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -596,6 +597,7 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -651,8 +653,8 @@ msgstr "Kembalikan ke fail yang telah disimpan"
 # libgnomeui/gnome-app-helper.c:144
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-msgid "_Print"
-msgstr "_Cetak"
+msgid "_Print..."
+msgstr "_Cetak..."
 
 # libgnomeui/gnome-app-helper.c:144
 #: libgnomeui/gnome-app-helper.c:131
@@ -684,15 +686,13 @@ msgstr "Tutup fail ini"
 # libgnomeui/gnome-app-helper.c:168
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "_Potong"
+msgstr "_Keluar"
 
 # libgnomeui/gnome-app-helper.c:235
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "Perihal aplikasi ini"
+msgstr "Keluar aplikasi ini"
 
 # libgnomeui/gnome-app-helper.c:168
 #.
@@ -700,7 +700,7 @@ msgstr "Perihal aplikasi ini"
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-msgid "C_ut"
+msgid "Cu_t"
 msgstr "_Potong"
 
 # libgnomeui/gnome-app-helper.c:168
@@ -762,7 +762,7 @@ msgstr "_Ulangcara"
 # libgnomeui/gnome-app-helper.c:194
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Ulangcara aksi ternyahcara"
+msgstr "Ulangcara aksi dinyahcara"
 
 # libgnomeui/gnome-app-helper.c:199
 #. Find
@@ -775,11 +775,10 @@ msgstr "_Cari..."
 msgid "Search for a string"
 msgstr "Cari perkataan"
 
-# libgnomeui/gnome-app-helper.c:204
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-msgid "Find _Again"
-msgstr "Cari _Lagi"
+msgid "Find Ne_xt"
+msgstr "Cari _lagi"
 
 # libgnomeui/gnome-app-helper.c:205
 #: libgnomeui/gnome-app-helper.c:192
@@ -789,7 +788,7 @@ msgstr "Cari lagi rentetan yang sama"
 # libgnomeui/gnome-app-helper.c:210
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-msgid "_Replace..."
+msgid "R_eplace..."
 msgstr "_Ganti..."
 
 # libgnomeui/gnome-app-helper.c:210
@@ -814,7 +813,7 @@ msgstr "Ubahsuai ciri-ciri fail"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "_Preferences..."
+msgid "Prefere_nces..."
 msgstr "_Keutamaan..."
 
 # libgnomeui/gnome-app-helper.c:225
@@ -827,18 +826,18 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "Perih_al"
+msgstr "_Perihal"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
 # libgnomeui/gnome-app-helper.c:238
 #: libgnomeui/gnome-app-helper.c:225
-msgid "_Select All"
+msgid "Select _All"
 msgstr "Pilih _Semua"
 
 # libgnomeui/gnome-app-helper.c:239
@@ -865,7 +864,7 @@ msgid "_Close This Window"
 msgstr "_Tutup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -953,28 +952,28 @@ msgstr "_Tamat permainan"
 msgid "End the current game"
 msgstr "Tamatkan permainan ini"
 
-#: libgnomeui/gnome-app-helper.c:1096
-msgid "_Help Contents"
-msgstr "Kandungan _Bantuan"
+#: libgnomeui/gnome-app-helper.c:1128
+msgid "_Contents"
+msgstr "_Kandungan"
 
-#: libgnomeui/gnome-app-helper.c:2463
-msgid "Both text and icons"
-msgstr "Kedua-dua teks dan ikon"
+#: libgnomeui/gnome-app-helper.c:2512
+msgid "Text Below Icons"
+msgstr "Teks di Bawah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2464
-msgid "Both text and icons when horizontal, just icons when vertical"
-msgstr "Kedua teks dan ikon bila mengufuk, hanya ikon bila menegak"
+#: libgnomeui/gnome-app-helper.c:2513
+msgid "Text Beside Icons"
+msgstr "Teks di Sebelah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2465
-msgid "Icons only"
-msgstr "Ikon sahaja"
+#: libgnomeui/gnome-app-helper.c:2514
+msgid "Icons Only"
+msgstr "Ikon Sahaja"
 
 # libgnomeui/gnome-stock.c:844
-#: libgnomeui/gnome-app-helper.c:2466
-msgid "Text only"
-msgstr "Teks sahaja"
+#: libgnomeui/gnome-app-helper.c:2515
+msgid "Text Only"
+msgstr "Teks Sahaja"
 
-#: libgnomeui/gnome-app-helper.c:2526
+#: libgnomeui/gnome-app-helper.c:2575
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Guna default desktop (%s)"
@@ -1402,16 +1401,27 @@ msgid "Sans 14"
 msgstr "Sans 14"
 
 # libgnomeui/gnome-app-helper.c:160
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Keluar ujian"
+
+# libgnomeui/gnome-app-helper.c:204
+#~ msgid "Find _Again"
+#~ msgstr "Cari _Lagi"
+
+#~ msgid "Both text and icons"
+#~ msgstr "Kedua-dua teks dan ikon"
+
+#~ msgid "Both text and icons when horizontal, just icons when vertical"
+#~ msgstr "Kedua teks dan ikon bila mengufuk, hanya ikon bila menegak"
+
+# libgnomeui/gnome-app-helper.c:160
 #~ msgid "E_xit"
 #~ msgstr "Ke_luar"
 
 # libgnomeui/gnome-app-helper.c:160
 #~ msgid "Exit the program"
 #~ msgstr "Keluar dari aturcara"
-
-# libgnomeui/gnome-app-helper.c:160
-#~ msgid "Exit the test"
-#~ msgstr "Keluar ujian"
 
 #~ msgid "GConf error details: %s\n"
 #~ msgstr "Huraian ralat GConf: %s\n"
