@@ -64,8 +64,8 @@ static void gnome_mdi_child_marshal_3 (GtkObject	*object,
   GnomeMDIChildSignal3 rfunc;
   gchar **return_val;
   
-  rfunc = (GnomeMDIChildSignal1) func;
-  return_val = GTK_RETLOC_POINTER (args[0]);
+  rfunc = (GnomeMDIChildSignal3) func;
+  return_val = (gchar **)GTK_RETLOC_POINTER (args[0]);
   
   *return_val = (* rfunc)(object, func_data);
 }
