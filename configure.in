@@ -40,7 +40,7 @@ CPPFLAGS="$CPPFLAGS $X_CFLAGS"
 
 GNOME_HAVE_SM=true
 AC_CHECK_LIB(SM, SmcSaveYourselfDone,
-	[SM_LIBS="-lSM -lICE"],GNOME_HAVE_SM=false,
+	[SM_LIBS="$X_LIBS -lSM -lICE"],GNOME_HAVE_SM=false,
 	$X_LIBS -lICE)
 AC_CHECK_HEADERS(X11/SM/SMlib.h,,GNOME_HAVE_SM=false)
 if test "$GNOME_HAVE_SM" = true; then

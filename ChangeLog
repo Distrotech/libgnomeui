@@ -1,3 +1,8 @@
+Sat Mar  2 19:50:24 2002  Owen Taylor  <otaylor@redhat.com>
+
+	* configure.in: Add $X_LIBS into $SM_LIBS since we no
+	longer inherit them from GTK+.
+
 2002-03-02  Tõivo Leedjärv  <leedjarv@interest.ee>
 
 	* configure.in: Added et to ALL_LINGUAS.
