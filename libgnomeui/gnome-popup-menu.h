@@ -43,7 +43,7 @@ gnome_app_create_popup_menus_custom(GnomeApp * app,
 				    GtkWidget * child,
 				    GnomeUIInfo * uiinfo,
        				    gpointer * handler,
-			            GnomeUIBuilderData * uibdata);
+			            GnomeUIBuilderData * uiinfo);
 
 END_GNOME_DECLS
 
