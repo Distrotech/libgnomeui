@@ -15,220 +15,248 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:187
+#: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr "ተሳታፊዎች"
 
-#: libgnomeui/gnome-about.c:210
-msgid "Written by"
-msgstr "ፀሐፊው"
-
-#: libgnomeui/gnome-about.c:224
-msgid "Documented by"
-msgstr "ሰነዱን ያዘጋጀው"
+#: libgnomeui/gnome-about.c:223
+msgid "_Written by"
+msgstr "_ፀሐፊው"
 
 #: libgnomeui/gnome-about.c:238
-msgid "Translated by"
-msgstr "ተርጓሚ"
+msgid "_Documented by"
+msgstr "_ሰነዱን ያዘጋጀው"
+
+#: libgnomeui/gnome-about.c:253
+msgid "_Translated by"
+msgstr "ተ_ርጓሚ"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:295
+#: libgnomeui/gnome-about.c:310
 msgid "_Credits"
 msgstr "_ተሳታፊዎች"
 
-#: libgnomeui/gnome-about.c:335
+#: libgnomeui/gnome-about.c:352
 msgid "Program name"
 msgstr "የፕሮግራም ስም"
 
-#: libgnomeui/gnome-about.c:336
+#: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
 msgstr "የፕሮግራሙ ስም"
 
-#: libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:360
 msgid "Program version"
 msgstr "የፕሮግራም ቅጂ"
 
-#: libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:361
 msgid "The version of the program"
 msgstr "የፕሮግራሙ ቅጂ"
 
-#: libgnomeui/gnome-about.c:350
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright string"
 msgstr "የቅጂው መብት ሐረግ"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:368
 msgid "Copyright information for the program"
 msgstr "ለፕሮግራሙ የቅጂ መብት መረጃ"
 
-#: libgnomeui/gnome-about.c:358
+#: libgnomeui/gnome-about.c:375
 msgid "Comments string"
 msgstr "የአስተያየቶች ሐረግ"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
 msgstr "ስለፕሮግራሙ አስተያየት"
 
-#: libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:382
 msgid "Authors"
 msgstr "ደራሲዎች"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
 msgstr "የፕሮግራሞቹ ደራሲዎች ዝርዝር"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:385
 msgid "Author entry"
 msgstr "የደራሲው መግቢያ"
 
-#: libgnomeui/gnome-about.c:369
+#: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
 msgstr "የአንድ ደራሲ መግቢያ"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:393
 msgid "Documenters"
 msgstr "ሰነድ አዘጋጆች"
 
-#: libgnomeui/gnome-about.c:377
+#: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
 msgstr "ፕሮግራሙን የሚያዘጋጁት ሰዎች ዝርዝር"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
 msgstr "የሰነድ አዘጋጁ መግቢያ"
 
-#: libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
 msgstr "የአንድ ሰነድ አዘጋጅ መግቢያ"
 
-#: libgnomeui/gnome-about.c:388
+#: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
 msgstr "የተርጓሚው አመለካከት"
 
-#: libgnomeui/gnome-about.c:389
+#: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "የተርጓሚዎቹ አመለካከት። ይህ ሐረግ ሊተርጎም የሚችል ተብሎ ምልክት መደረግ አለበት"
 
-#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "አርማ"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
 msgstr "ስለሳጥኑ አርማ"
 
-#: libgnomeui/gnome-about.c:476
+#: libgnomeui/gnome-about.c:493
 #, c-format
 msgid "About %s"
 msgstr "ስለ %s"
 
-#: libgnomeui/gnome-appbar.c:748
+#: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
 msgstr "ተሻሽሏል"
 
-#: libgnomeui/gnome-appbar.c:749
+#: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
 msgstr "የተሻሻለ ዊድጌት ፍጠር"
 
-#: libgnomeui/gnome-appbar.c:756
+#: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
 msgstr "ሁኔታ አለው"
 
-#: libgnomeui/gnome-appbar.c:757
+#: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
 msgstr "የዊድጌት አቀማመጥ ፍጠር"
 
-#: libgnomeui/gnome-appbar.c:764
+#: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
 msgstr "ውስጣዊ እንቅስቃሴ"
 
-#: libgnomeui/gnome-appbar.c:765
+#: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
 msgstr "የተጠቃሚው የአጠቃቀም ደረጃ ያስፈልጋል"
 
-#: libgnomeui/gnome-client.c:833
+#: libgnomeui/gnome-client.c:860
 msgid "Specify session management ID"
 msgstr "የጉባኤውን አስተዳደር መለያ ቍጥር ጥቀስ"
 
-#: libgnomeui/gnome-client.c:833
+#: libgnomeui/gnome-client.c:860
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:863
 msgid "Specify prefix of saved configuration"
 msgstr "ተስተካክሎ የተቀመጠውን ባዕድ መነሻ ጥቀስ"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:863
 msgid "PREFIX"
 msgstr "ባዕድ መነሻ"
 
-#: libgnomeui/gnome-client.c:839
+#: libgnomeui/gnome-client.c:866
 msgid "Disable connection to session manager"
 msgstr "ለአስተዳደሩ ጉባኤ ግንኙነቱን አቋርጥ "
 
-#: libgnomeui/gnome-client.c:945
+#: libgnomeui/gnome-client.c:972
 msgid "Session management"
 msgstr "የመምሪያው ጉባኤ"
 
-#: libgnomeui/gnome-client.c:2483
+#: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
 msgstr "መዝጊያውን ይሰርዙ"
 
-#: libgnomeui/gnome-color-picker.c:405
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "የማይሠራ የቀለም መረጃ ተቀብሏል\n"
 
-#: libgnomeui/gnome-color-picker.c:471
+#: libgnomeui/gnome-color-picker.c:464
+msgid "Color Selector"
+msgstr ""
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr ""
+
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "ቀለም ምረጡ"
 
-#: libgnomeui/gnome-dateedit.c:455
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "ሰዓት"
 
-#: libgnomeui/gnome-dateedit.c:456
+#: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
 msgstr "ሰዓቱ በቅርብ ጊዜ ተመርጧል"
 
-#: libgnomeui/gnome-dateedit.c:468
+#: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
 msgstr "የቀን ማስተካከያ ምልክት"
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
 msgstr "የቀን ማስተካከያው ምን እንደሚመስል ለማሳየት ምልክቶች ተደርገዋል"
 
-#: libgnomeui/gnome-dateedit.c:478
+#: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
 msgstr "ዝቅተኛው ሰዓት"
 
-#: libgnomeui/gnome-dateedit.c:479
+#: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
 msgstr "በፖፕአፕ ሰዓት መምረጫ ውስጥ ዝቅተኛውን ሰዓት አድርጉ#"
 
-#: libgnomeui/gnome-dateedit.c:489
+#: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
 msgstr "ከፍተኛ ሰዓት"
 
-#: libgnomeui/gnome-dateedit.c:490
+#: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
 msgstr "በፖፕአፕ የሰዓት መምረጫ ውስጥ ከፍተኛውን ሰዓት ያድርጉ"
 
-#: libgnomeui/gnome-dateedit.c:500
+#: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
 msgstr "የመጀመሪያ ሰዓት"
 
-#: libgnomeui/gnome-dateedit.c:501
+#: libgnomeui/gnome-dateedit.c:525
 msgid "The initial time"
 msgstr "የመጀመሪያው ሰዓት"
 
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "ቀን"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "ቀን ምረጥ"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr ""
+
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:730
+#: libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
 msgstr "ቀን መቁጠሪያ"
 
-#: libgnomeui/gnome-dateedit.c:960
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "ሰዓት ምረጥ"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date deprecated፣ አገልግሎቱ ስለቀነሰ use gnome_date_edit_get_timeን ተጠቀሙ"
 
@@ -305,7 +333,7 @@ msgstr "የአርማው መደብ ቀለም"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
-msgstr "የአርማው መደብ ቀለም "
+msgstr "የአርማው መደብ ቀለም"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
@@ -335,35 +363,39 @@ msgstr "መረጃውን አሳይ"
 msgid "Show the 'Help' button"
 msgstr "'መረጃ' የሚለውን ቁልፍ አሳይ"
 
-#: libgnomeui/gnome-href.c:121
+#: libgnomeui/gnome-href.c:122
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRef የሚያስጀምረው URL"
 
-#: libgnomeui/gnome-href.c:129
+#: libgnomeui/gnome-href.c:130
 msgid "Text"
 msgstr "ጽሑፍ"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "The text on the button"
 msgstr "ቁልፉ ላይ ያለው ጽሑፍ"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
 msgstr "የዓለም ረሃብ ያብቃ"
 
-#: libgnomeui/gnome-href.c:137
+#: libgnomeui/gnome-href.c:138
 msgid "Link color"
 msgstr "ቀለሙን አያይዝ"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
 msgstr "ማያያዣውን ለመሳል የተጠቀመው ቀለም"
 
-#: libgnomeui/gnome-href.c:383
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr ""
+
+#: libgnomeui/gnome-href.c:393
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -371,25 +403,25 @@ msgstr ""
 "የURLን መያዣ ለማስጀመር በሚሞክርበት ጊዜ ስህተት ተከስቷል።\n"
 "እባክዎ አካባቢው ያለውን የመቆጣጠሪያ ማዕከል ትክክል እንደሆነ ይፈትሹ።"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "Xን ለመጠቀም አሳይ"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "አሳይ"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr "የGNOME GUI ስብስብ"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:564
+#: libgnomeui/gnome-ui-init.c:591
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "የተለያዩ ክፍሎች ላይ ስህተት ተከስቷል፤ ስሕተቱን ማሳየት አልተቻለም\n"
+msgstr "የተለያዩ ክፍሎች ላይ ስህተት ተከስቷል፥ ስሕተቱን ማሳየት አልተቻለም\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:578
+#: libgnomeui/gnome-ui-init.c:605
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -399,9 +431,11 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
-msgid "The GNOME Session Manager (process %d) has crashed\n"
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session will exit.\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 "የGNOME ክፍል መምሪያ (ድርጊት %d) ጊዜ በማይሰጥ ስህተት ተቋርጧል።"
@@ -423,19 +457,19 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "አጠቃቀም፦ gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:138
+#: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
 msgstr "የስሕተቱን ጉዳይ አቅርብ"
 
-#: libgnomeui/gnome_segv.c:149
+#: libgnomeui/gnome_segv.c:151
 msgid "Debug"
 msgstr "አስተካክል"
 
-#: libgnomeui/gnome_segv.c:157
+#: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:163
+#: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "ለበለጠ መረጃ እባክዎን የGNOMEን ፕሮግራም ይጎብኙ"
 
@@ -484,7 +518,7 @@ msgid "Hint for item 2"
 msgstr "ጥቆማ ለተራ ቍጥር 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 #: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_ፋይል"
@@ -493,7 +527,7 @@ msgstr "_ፋይል"
 msgid "_File/"
 msgstr "_ፋይል/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_አስተካክል"
 
@@ -501,15 +535,15 @@ msgstr "_አስተካክል"
 msgid "_Edit/"
 msgstr "_አስተካክል/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_ተመልከት"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "ተመልከት/"
+msgstr "_ተመልከት/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_ይዞታዎች"
 
@@ -518,7 +552,7 @@ msgid "_Settings/"
 msgstr "_ይዞታዎች/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_አዲስ"
 
@@ -526,23 +560,23 @@ msgstr "_አዲስ"
 msgid "_New/"
 msgstr "_አዲስ/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-msgid "Files"
-msgstr "ፋይሎች"
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "ፋ_ይሎች"
 
 #: libgnomeui/gnome-app-helper.c:93
-msgid "Files/"
-msgstr "ፋይሎች/"
+msgid "Fi_les/"
+msgstr "ፋ_ይሎች/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_መስኮቶች"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_ጨዋታ"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_መረጃ"
@@ -568,6 +602,7 @@ msgstr "_አስቀምጥ"
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
 msgstr "የአሁኑን ፋይል አስቀምጥ"
+
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
@@ -588,8 +623,8 @@ msgstr "መጀመሪያ ተቀምጦ ወደ ነበረው የፋይሉ ቅጂ መ
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-msgid "_Print"
-msgstr "_አትም"
+msgid "_Print..."
+msgstr "_አትም..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -597,7 +632,7 @@ msgstr "የአሁኑን ፋይል አትም"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
-msgid "Print Setup..."
+msgid "Print S_etup..."
 msgstr "የህትመት ቅንጅት"
 
 #: libgnomeui/gnome-app-helper.c:137
@@ -615,19 +650,20 @@ msgstr "የአሁኑን ፋይል ዝጋ"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-msgid "E_xit"
-msgstr "_ውጣ"
+msgid "_Quit"
+msgstr "_ማቆሚያ"
 
 #: libgnomeui/gnome-app-helper.c:147
-msgid "Exit the program"
-msgstr "ከፕሮግራሙ ውጣ"
+msgid "Quit the application"
+msgstr ""
 
 #.
 #. * The "Edit" menu
+#.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-msgid "Cut"
-msgstr "ቁረጥ"
+msgid "Cu_t"
+msgstr "_ቁረጥ"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
@@ -654,8 +690,8 @@ msgstr "ክሊፕቦርዱን ለጥፍ"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
-msgid "Clear"
-msgstr "ሰርዝ"
+msgid "C_lear"
+msgstr "_ሰርዝ"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
@@ -690,8 +726,8 @@ msgstr "ሐረጉን አስስ"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-msgid "Find _Again"
-msgstr "_እንደገና ፈልግ"
+msgid "Find Ne_xt"
+msgstr "_የሚቀጥለዉን ፈልግ"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -699,7 +735,7 @@ msgstr "ያንኑ ሐረግ እንደገና አስስ"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-msgid "_Replace..."
+msgid "R_eplace..."
 msgstr "_ተካ"
 
 #: libgnomeui/gnome-app-helper.c:197
@@ -720,8 +756,8 @@ msgstr "የፋይሉን ሁኔታዎች አሻሽል"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "_Preferences..."
-msgstr "_ምርጫዎች..."
+msgid "Prefere_nces..."
+msgstr "_ምርጫዎች"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -730,17 +766,18 @@ msgstr "ፕሮግራሙን አስተካክል"
 #. 20
 #.
 #. * And the "Help" menu
-#.#. About
+#.
+#. About
 #: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "_ስለ..."
+msgstr "_ስለ"
 
 #: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "ስለዚህ ፕሮግራም"
 
 #: libgnomeui/gnome-app-helper.c:225
-msgid "_Select All"
+msgid "Select _All"
 msgstr "_ሁሉንም ምረጥ"
 
 #: libgnomeui/gnome-app-helper.c:226
@@ -783,7 +820,7 @@ msgstr "_ጨዋታውን ለጥቂት ጊዜ አሳርፍ"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "ጨዋታውን ለጥቂት ጊዜ አሳርፍ"
+msgstr "_ጨዋታውን ለጥቂት ጊዜ አሳርፍ"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
@@ -834,23 +871,27 @@ msgstr "_ጨዋታውን ጨርስ"
 msgid "End the current game"
 msgstr "አሁን ያለውን ጨዋታ ጨርስ"
 
-#: libgnomeui/gnome-app-helper.c:1096
-msgid "_Help Contents"
-msgstr "_የመረጃ ይዞታዎች"
+#: libgnomeui/gnome-app-helper.c:1145
+msgid "View help for this application"
+msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2402
-msgid "Both text and icons"
-msgstr "ሁለቱም ጽሑፉ እና ምልክቶቹ"
+#: libgnomeui/gnome-app-helper.c:2565
+msgid "Text Below Icons"
+msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2403
-msgid "Icons only"
+#: libgnomeui/gnome-app-helper.c:2566
+msgid "Priority Text Beside Icons"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2567
+msgid "Icons Only"
 msgstr "ምልክቶቸን ብቻ"
 
-#: libgnomeui/gnome-app-helper.c:2404
-msgid "Text only"
+#: libgnomeui/gnome-app-helper.c:2568
+msgid "Text Only"
 msgstr "ጽሑፉን ብቻ"
 
-#: libgnomeui/gnome-app-helper.c:2455
+#: libgnomeui/gnome-app-helper.c:2629
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "ነባሩን ዴስክቶፕ ይጠቀሙ (%s)"
@@ -895,108 +936,124 @@ msgstr "  - ይሁን? (አዎ ወይም አይደለም)"
 msgid "Progress"
 msgstr "ይሻሻል"
 
-#: libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "የመጠቀሚያው ፕሮግራም ID"
 
-#: libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "የመጠቀሚያው ፕሮግራም የID ሐረግ"
 
-#: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "የታሪኩ id"
 
-#: libgnomeui/gnome-entry.c:178
+#: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
 msgstr "የGTK መግቢያ"
 
-#: libgnomeui/gnome-entry.c:179
+#: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "የGTK መግቢያ"
 
-#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:175
 msgid "History ID"
 msgstr "የታሪኩ ID"
 
-#: libgnomeui/gnome-file-entry.c:191
+#: libgnomeui/gnome-file-entry.c:221
 msgid ""
-"Unique identifier for the file entry.  This will be used to save the history list."
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
 msgstr "ለፋይሉ መግቢያ ልዩ መለያ። ይህ የፋይሉን ታሪክ ዝርዝዝር ለማስቀመጫ ይጠቅማል።"
 
-#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
 msgid "Browse Dialog Title"
 msgstr "የመምረጫው መመልከቻ አርእስት"
 
-#: libgnomeui/gnome-file-entry.c:200
+#: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
 msgstr "ለአማራጩ የፋይል መመልከቻ አርእስት"""
 
-#: libgnomeui/gnome-file-entry.c:207
+#: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
 msgstr "የማውጫው መግቢያ"
 
-#: libgnomeui/gnome-file-entry.c:208
+#: libgnomeui/gnome-file-entry.c:238
 msgid ""
-"Whether the file entry is being used to enter directory names or complete filenames."
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
 msgstr ""
 "የፋይሉ መግቢያ የማውጫ ስሞችን ለማስገባት ወይንም የፋይል ስሞችን ለማጠናቀቅ ተጠቅሞ እንደሆነ።"
 
-#: libgnomeui/gnome-file-entry.c:216
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
 msgstr "አዛምድ"
 
-#: libgnomeui/gnome-file-entry.c:217
+#: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
 msgstr "የፋይሉ መስኮት መቃኛ የተዛመደ እንደሆነ።"
 
-#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:200
 msgid "Filename"
 msgstr "የፋይል ስም"
 
-#: libgnomeui/gnome-file-entry.c:225
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
 msgstr "በፋይሉ መግቢያ ላይ መታየት ያለባቸው የፋይል ስሞች"
 
-#: libgnomeui/gnome-file-entry.c:233
+#: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
 msgstr "ነባሩ አቅጣጫ"
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
 msgstr "ለፋይሉ መስኮት መቃኛ ነባሩ አቅጣጫ "
 
-#: libgnomeui/gnome-file-entry.c:241
+#: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:242
+#: libgnomeui/gnome-file-entry.c:272
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
-"this property to get the GnomeEntry if you need to modify or query any of its parameters."
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
 msgstr ""
-"ፋይል ማስገቢያው GnomeEntryን የፋይል ስሞችን ለማስገባት ይጠቀምበታል።"
+"ፋይል ማስገቢያው GnomeEntryን የፋይል ስሞችን ለማስገባት ይጠቀምበታል።  "
 "ይህንን አካል የፋይሎችን አቀማመጥ ለማሻሻል ወይንም ለመጠየቅ መጠቀም ይችላሉ።"
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:283
 msgid ""
-"GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its "
-"parameters"
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
 msgstr ""
-"GtkEntryን ፋይል ማስገቢያው የፋይል ስሞችን ለማስገባት ይጠቀምበታል።"
+"GtkEntryን ፋይል ማስገቢያው የፋይል ስሞችን ለማስገባት ይጠቀምበታል። "
 "ይህንን አካል የፋይሎችን አቀማመጥ ለማሻሻል ወይንም ለመጠየቅ መጠቀም ይችላሉ።"
 
-#: libgnomeui/gnome-file-entry.c:481
+#: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
 msgstr "ፋይል ምረጡ"
 
-#: libgnomeui/gnome-file-entry.c:619
+#: libgnomeui/gnome-file-entry.c:645
+msgid "Path"
+msgstr "መንገድ"
+
+#: libgnomeui/gnome-file-entry.c:645
+msgid "Path to file"
+msgstr "መንግድ ወደ ፋይል"
+
+#: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
 msgstr "_ቃኝ..."
+
+#: libgnomeui/gnome-file-entry.c:673
+msgid "Pop up a file selector to choose a file"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1005,7 +1062,6 @@ msgstr "sans 12"
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "የፊደል ቅርጽ ምረጥ"
@@ -1080,13 +1136,17 @@ msgstr "_ዝርዝሮች"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
-
 msgid ""
-"The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
 msgstr ""
-"የሚጠቀሙበት ፕሮግራምሩ \"%s\" የሲስተሙ አስተዳደር ወይም ኮምፒውተር ሻጩ እንዲለውጡ የማይፈቅድልዎትን የማስተካከያዎትን አቅጣጫ ለመለወጥ ሙከራ አድርጓል። አንዳንድ የመረጡአቸው አቀማመጦች የመጠቀሚያ ፕሮግራሙን በሚቀጥለው ጊዜ ሲጠቀሙ ለውጦችን ላይ ቀበሉ ወይም ደግሞ እንደገና መልሰው ሳያወጧቸው ይችላሉ።"
+"የሚጠቀሙበት ፕሮግራምሩ \"%s\" የሲስተሙ አስተዳደር ወይም ኮምፒውተር ሻጩ "
+"እንዲለውጡ የማይፈቅድልዎትን የማስተካከያዎትን አቅጣጫ ለመለወጥ ሙከራ አድርጓል። "
+"አንዳንድ የመረጡአቸው አቀማመጦች የመጠቀሚያ ፕሮግራሙን በሚቀጥለው ጊዜ ሲጠቀሙ "
+"ለውጦችን ላይ ቀበሉ ወይም ደግሞ እንደገና መልሰው ሳያወጧቸው ይችላሉ።"
 
-	
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
@@ -1096,96 +1156,145 @@ msgstr ""
 "ለ%s የመረጃውን ማስተካከያ በሚጭንበት ወይንም በሚያስቀምጥበት ጊዜ ስሕተት ተከስቷል።"
 "አንዳንድ የማስተካከያው ማዘጋጃዎችዎ በትክክል ላይሰሩ ይችላሉ።"
 
-#: libgnomeui/gnome-icon-entry.c:164
-msgid "Unique identifier for the icon entry.  This will be used to save the history list."
-msgstr "ለምልክቱ መግቢያ የተለየ መለያ። ይህ የሚጠቅመው የታሪኩን ዝርዝር ለማስቀመጥ ነው።"
 
-#: libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-icon-entry.c:176
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"ለምልክቱ መግቢያ የተለየ መለያ። ይህ የሚጠቅመው የታሪኩን ዝርዝር ለማስቀመጥ ነው።"
+
+#: libgnomeui/gnome-icon-entry.c:185
 msgid "Title for the Browse icon dialog."
 msgstr "የምልክቱ መምረጫ ማመልከቻ አርእስት "
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:192
 msgid "Pixmap Directory"
 msgstr "የሙሻብቀሮቆ ማውጫ"
 
-#: libgnomeui/gnome-icon-entry.c:181
+#: libgnomeui/gnome-icon-entry.c:193
 msgid "Directory that will be searched for icons."
 msgstr "ለምልክቹ ማሰሻ የሚውሆን ማውጫ"
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:201
 msgid "Filename that should be displayed in the icon entry."
 msgstr "በምልክቶቹ መግቢያ ላይ የሚታየው የፋይል ስም"
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:209
 msgid "Picker dialog"
 msgstr "የመራጮች መምረጫ"
 
-#: libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-icon-entry.c:210
 msgid ""
-"Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
-msgstr "የምልክት መራጭ መምረጫ። በGtkDialog ውስጥ ያለውን ማንኛውንም ነገር ለማሻሻል ወይንም ለመጠየቅ ከፈለጉ ይህንን መምረጫ መጠቀም ይችላሉ።"
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"የምልክት መራጭ መምረጫ። በGtkDialog ውስጥ ያለውን ማንኛውንም ነገር ለማሻሻል "
+"ወይንም ለመጠየቅ ከፈለጉ ይህንን መምረጫ መጠቀም ይችላሉ።"
 
-#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
+#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
 msgid "No Icon"
 msgstr "ምልክት የለም"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "መደበኛ የሆነውን የፋይል አመራረጥ በመጠቀም ሸሯቅብን ማግኘት አይቻልም"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:536 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "ቅድመ ዕይታ"
 
-#: libgnomeui/gnome-icon-entry.c:930
+#: libgnomeui/gnome-icon-entry.c:752
+msgid "Icon selection dialog"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:753
+msgid "This dialog box lets you select an icon."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:759
+msgid "Icon selector"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:760
+msgid "Please pick the icon you want."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:984
+msgid "Icon Selector"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:985
+msgid "This button will open a window to let you select an icon."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
 msgstr "ቃኝ"
 
-#: libgnomeui/gnome-icon-sel.c:296
+#: libgnomeui/gnome-icon-entry.c:1010
+msgid "Icon path"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:1011
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr ""
+
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection፦ '%s' የለም ወይንም ማውጫ አይደለም"
 
-#: libgnomeui/gnome-icon-sel.c:304
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection፦ ማውጫውን መክፈት አልተቻለም '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:406
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "ምልክቶችን በመጫን ላይ.... "
 
-#: libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
 msgstr "መረጃ"
 
-#: libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
 msgstr "ማስጠንቀቂያ"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
 msgstr "ስህተት"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
 msgstr "ጥያቄ"
 
-#: libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "መልእክት"
 
-#: libgnomeui/gnome-pixmap-entry.c:118
+#: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
 msgstr "ቅድመ እይታውን ተጠቀም"
 
-#: libgnomeui/gnome-pixmap-entry.c:119
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
 msgstr "የቆሻብቀሮቆ መግቢያ ቅድመ እይታ ሊኖረው ይገባው እንደሆነ"
 
-#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "ገጽታ የለም"
+
+#: libgnomeui/gnome-pixmap-entry.c:205
+msgid "Image Preview"
+msgstr ""
+
+#: libgnomeui/gnome-pixmap-entry.c:206
+msgid "A preview of the image currently specified"
+msgstr ""
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1199,22 +1308,14 @@ msgstr "ተጠቃሚ"
 msgid "Score"
 msgstr "ነጥብ"
 
-#: libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "ቀን"
-
-#. the localized string should fit (after replacing the %a %b
-#. etc) in ~18 chars.
-#. %a is abbreviated weekday, %A is full weekday,
-#. %b %B are abbreviated and full monthname, %Y is year,
-#. %d is day of month, %m is month number, %T full hour,
-#. %H hours, %M minutes, %S seconds
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
-#: libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
