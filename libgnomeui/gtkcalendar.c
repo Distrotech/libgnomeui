@@ -1108,6 +1108,8 @@ gtk_calendar_select_month (GtkCalendar *calendar, gint month, gint year)
   calendar->month = month;
   calendar->year  = year;
 
+  gtk_calendar_compute_days (calendar);
+  
   if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
     gtk_calendar_paint(GTK_WIDGET(calendar), NULL);
 
@@ -1122,6 +1124,7 @@ gtk_calendar_select_day (GtkCalendar *calendar, gint day)
   gint col, c;
   g_return_if_fail (calendar != NULL);
 
+  gtk_calendar_compute_days (calendar);
   if (calendar->selected_day > 0) {
     row = -1;
     col = -1;
