@@ -1,3 +1,29 @@
+2003-10-14  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserimpldefault.c (create_shortcuts_tree): Added a
+	button to remove a bookmark.
+	(remove_bookmark_button_clicked_cb): New callback.
+	(shortcuts_append_bookmarks): Show/hide the bookmarks buttons
+	here, rather than in create_shortcuts_tree().
+	(shortcuts_append_path): Return whether the operation succeeded.
+	(shortcuts_selection_changed): Set the sensitivity of the button
+	used to remove a bookmark.
+	(shortcuts_append_bookmarks): Do not select the shortcuts folder
+	here; let the caller do it if needed.
+	(create_shortcuts_tree): Select the shortcuts folder here.
+	(bookmarks_changed_cb): Likewise.
+	(create_shortcuts_tree): Also set the sensitivity of the bookmarks
+	buttons.
+	(bookmarks_check_add_sensitivity): Renamed from
+	check_bookmarks_sensitivity().
+	(shortcuts_select_folder): Renamed from select_shortcuts_folder().
+	(bookmarks_check_add_sensitivity): The current_path may not be set
+	yet.
+	(shortcuts_append_bookmarks): Oops, remove all the bookmark rows,
+	not just the separator node.
+	(bookmarks_changed_cb): Set the sensitivity of the bookmarks
+	buttons.
+
 2003-10-13  Federico Mena Quintero  <federico@ximian.com>
 
 	* TODO: Removed the point about shortcuts to clipart-like
