@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2003-07-07 18:03+0200\n"
-"PO-Revision-Date: 2003-07-12 23:10+0200\n"
+"POT-Creation-Date: 2003-08-04 22:23+0200\n"
+"PO-Revision-Date: 2003-08-04 22:23+0200\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -562,7 +562,7 @@ msgstr "Folyamatjelző"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr "App ID"
+msgstr "Alk. azon."
 
 #: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
@@ -623,7 +623,7 @@ msgstr "A munkamenet-kezelő azonosítójának megadása"
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
-msgstr "ID"
+msgstr "Azonosító"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
@@ -874,7 +874,9 @@ msgstr "Könyvtár bejegyzés"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "A fájlbeíró mező könyvtárnevek és teljes elérési utak beírására is használható-e."
+msgstr ""
+"A fájlbeíró mező könyvtárnevek és teljes elérési utak beírására is "
+"használható-e."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1035,7 +1037,12 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr "A(z) \"%s\" alkalmazás megpróbálta megváltoztatni a beállításokat, de a rendszergazda vagy az operációs rendszer terjesztője letiltotta ezt a lehetőséget. A kiválasztott beállítások közül egyeseket nem lehet alkalmazni, vagy nem lehet ezeket legközelebb ezzel az alkalmazással visszaállítani."
+msgstr ""
+"A(z) \"%s\" alkalmazás megpróbálta megváltoztatni a beállításokat, de a "
+"rendszergazda vagy az operációs rendszer terjesztője letiltotta ezt a "
+"lehetőséget. A kiválasztott beállítások közül egyeseket nem lehet "
+"alkalmazni, vagy nem lehet ezeket legközelebb ezzel az alkalmazással "
+"visszaállítani."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
