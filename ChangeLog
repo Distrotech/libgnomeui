@@ -1,3 +1,19 @@
+2002-04-18  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-icon-list.c: Added accessibility support by
+	implementing the necessary ATK interfaces within this file.
+
+	* libgnomeui/gnome-icon-list.c (real_select_icon): Keep the
+	selection list sorted; the accessibility interface expects it to
+	be that way.
+
+	* libgnomeui/libgnomeui-access.c (_accessibility_get_atk_object):
+	(_accessibility_for_object): 
+	(_accessibility_get_gobject): 
+	(_accessibility_weak_unref): 
+	(_accessibility_set_atk_object_return): 
+	(_accessibility_create_derived_type): Copied from eel.
+
 2002-04-17  Federico Mena Quintero  <federico@ximian.com>
 
 	* libgnomeui/gnome-icon-sel.c (gnome_icon_selection_show_icons):
