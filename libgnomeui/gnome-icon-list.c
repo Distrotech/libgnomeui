@@ -614,47 +614,17 @@ gnome_icon_list_init (GnomeIconList *ilist)
 
 	GTK_WIDGET_UNSET_FLAGS (ilist, GTK_NO_WINDOW);
 
-	ilist->icons = 0;
-	ilist->icon_list = NULL;
-	ilist->icon_list_end = NULL;
-
 	ilist->row_spacing = DEFAULT_ROW_SPACING;
 	ilist->col_spacing = DEFAULT_COL_SPACING;
 	ilist->text_spacing = DEFAULT_TEXT_SPACING;
 	ilist->icon_border = DEFAULT_ICON_BORDER;
-
-	ilist->x_offset = 0;
-	ilist->y_offset = 0;
-
-	ilist->max_icon_width = 0;
-	ilist->max_icon_height = 0;
-	ilist->max_pixmap_width = 0;
-	ilist->max_pixmap_height = 0;
-	ilist->max_text_width = 0;
-	ilist->max_text_height = 0;
-
-	ilist->icon_rows = 0;
-	ilist->icon_cols = 0;
-
 	ilist->separators = g_strdup (" ");
 
 	ilist->mode = GNOME_ICON_LIST_TEXT_BELOW;
 	ilist->frozen = TRUE; /* starts frozen! */
 	ilist->dirty  = TRUE;
-	
-	ilist->ilist_window = NULL;
-	ilist->ilist_window_width = 0;
-	ilist->ilist_window_height = 0;
-
-	ilist->fg_gc = NULL;
-	ilist->bg_gc = NULL;
-
 	ilist->border_type = GTK_SHADOW_IN;
 	ilist->selection_mode = GTK_SELECTION_SINGLE;
-
-	ilist->selection = NULL;
-	ilist->last_selected = 0;
-	
 	/* Create scrollbars */
 
 	ilist->vscrollbar = gtk_vscrollbar_new (NULL);
@@ -723,23 +693,22 @@ static void
 relayout_icon (GnomeIconList *ilist, Icon *icon)
 {
 	GdkFont *font;
-	static int desired_size;
 
 	if (!GTK_WIDGET_REALIZED (ilist))
 		g_warning ("relayout_icon: oops, ilist not realized");
 
 	font = GTK_WIDGET (ilist)->style->font;
 
-	if (!desired_size) {
-		desired_size = gdk_string_width (font, "XXXXXXXXXX");
-		if (desired_size == 0)
-			desired_size = 80;
+	if (!ilist->desired_text_width) {
+		ilist->desired_text_width = gdk_string_width (font, "XXXXXXXXXX");
+		if (ilist->desired_text_width == 0)
+			ilist->desired_text_width = 80;
 	}
 
 	if (icon->ti)
 		gnome_icon_text_info_free (icon->ti);
 
-	icon->ti = gnome_icon_layout_text (font, icon->text, ilist->separators, desired_size, TRUE);
+	icon->ti = gnome_icon_layout_text (font, icon->text, ilist->separators, ilist->desired_text_width, TRUE);
 }
 
 static void

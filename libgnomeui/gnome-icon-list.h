@@ -59,8 +59,8 @@ struct _GnomeIconList {
 	char *separators;
 
 	GnomeIconListMode mode;
-	int frozen : 1;
-
+	unsigned int frozen : 1;
+	unsigned int dirty  : 1;
 	GdkWindow *ilist_window;
 	int ilist_window_width;
 	int ilist_window_height;
@@ -81,7 +81,7 @@ struct _GnomeIconList {
 	int hscrollbar_height;
 	int last_selected;
 	int last_clicked;
-	int dirty;
+	int desired_text_width;
 };
 
 struct _GnomeIconListClass {

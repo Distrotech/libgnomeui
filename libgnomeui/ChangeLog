@@ -1,3 +1,8 @@
+1998-05-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (relayout_icon), gnome-icon-list.h: add
+	desired_text_width.
+
 1998-05-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_layout_text): I must be stupid or
