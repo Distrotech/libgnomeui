@@ -60,7 +60,7 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
 	func = (ActivateFunc) data;
 	user_data = gtk_object_get_data (GTK_OBJECT (GTK_WIDGET (object)->parent), "gnome_popup_menu_do_popup_user_data");
 
-	gtk_object_set_data (GTK_WIDGET (object)->parent, "gnome_popup_menu_active_item", object);
+	gtk_object_set_data (GTK_OBJECT (GTK_WIDGET (object)->parent), "gnome_popup_menu_active_item", object);
 	(* func) (object, user_data);
 }
 

@@ -586,7 +586,7 @@ height_changed (GnomeCanvasItem *item, Icon *icon)
 	if (!GTK_WIDGET_REALIZED (gil))
 		return;
 
-	if (gil->frozen > 0){
+	if (gil->frozen){
 		gil->dirty = TRUE;
 		return;
 	}
@@ -672,7 +672,7 @@ icon_list_append (Gil *gil, Icon *icon)
 		break;
 	}
 
-	if (!gil->frozen > 0){
+	if (!gil->frozen){
 		/* FIXME: this should only layout the last line */
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
@@ -701,7 +701,7 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 		break;
 	}
 
-	if (!gil->frozen > 0){
+	if (!gil->frozen){
 		/*
 		 * FIXME: this should only layout the lines from then
 		 * one containing the Icon to the end.
@@ -875,7 +875,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 
 	icon_destroy (icon);
 
-	if (!gil->frozen > 0) {
+	if (!gil->frozen) {
 		/*
 		 * FIXME: Optimize, only re-layout from pos to end
 		 */
@@ -1035,7 +1035,7 @@ gil_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
 		(* GTK_WIDGET_CLASS (parent_class)->size_allocate)
 			(widget, allocation);
-	if (gil->frozen > 0)
+	if (gil->frozen)
 		return;
 	gil_layout_all_icons (gil);
 	gil_scrollbar_adjust (gil);
@@ -1051,7 +1051,7 @@ gil_realize (GtkWidget *widget)
 		(* GTK_WIDGET_CLASS (parent_class)->realize)(widget);
 	gil->frozen--;
 	
-	if (gil->frozen > 0)
+	if (gil->frozen)
 		return;
 	if (gil->dirty){
 		gil_layout_all_icons (gil);
@@ -1094,11 +1094,17 @@ real_unselect_icon (Gil *gil, gint num, GdkEvent *event)
 	}
 }
 
+#define gray50_width 2
+#define gray50_height 2
+static const char gray50_bits[] = {
+  0x02, 0x01, };
+
 static gint
 gil_button_press (GtkWidget *widget, GdkEventButton *event)
 {
 	Gil *gil = GIL (widget);
 	int v;
+	GdkBitmap *stipple;
 
 	v = (*GTK_WIDGET_CLASS (parent_class)->button_press_event) (widget, event);
 
@@ -1129,7 +1135,8 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 			gil->preserve_selection = g_list_prepend (gil->preserve_selection, data);
 		}
 	}
-	
+
+	stipple = gdk_bitmap_create_from_data (NULL, gray50_bits, gray50_width, gray50_height);
 	gil->sel_rect = gnome_canvas_item_new (
 		gnome_canvas_root (GNOME_CANVAS (gil)),
 		gnome_canvas_rect_get_type (),
@@ -1139,7 +1146,11 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 		"y2", (double) event->y,
 		"outline_color", "black",
 		"width_pixels", 1,
+		"outline_stipple", stipple,
 		NULL);
+	gdk_bitmap_unref (stipple);
+
+	gnome_canvas_item_grab (gil->sel_rect, GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK, NULL, event->time);
 	return TRUE;
 }
 
@@ -1152,6 +1163,7 @@ gil_button_release (GtkWidget *widget, GdkEventButton *event)
 	if (!gil->sel_rect){
 		v = FALSE;
 	} else {
+		gnome_canvas_item_ungrab (gil->sel_rect, event->time);
 		gtk_object_destroy (GTK_OBJECT (gil->sel_rect));
 		gil->sel_rect = NULL;
 		v = TRUE;
@@ -1218,14 +1230,22 @@ gil_mark_region (Gil *gil, GdkEventMotion *event, double x, double y)
 	y1 = MIN (gil->sel_start_y, y);
 	x2 = MAX (gil->sel_start_x, x);
 	y2 = MAX (gil->sel_start_y, y);
-	
-	gnome_canvas_item_set (
-		gil->sel_rect,
-		"x1", x1,
-		"y1", y1,
-		"x2", x2,
-		"y2", y2,
-		NULL);
+
+	if (x1 < 0)
+		x1 = 0;
+
+	if (y1 < 0)
+		y1 = 0;
+
+	if (x2 >= gil->canvas.width)
+		x2 = gil->canvas.width - 1;
+
+	gnome_canvas_item_set (gil->sel_rect,
+			       "x1", x1,
+			       "y1", y1,
+			       "x2", x2,
+			       "y2", y2,
+			       NULL);
 
 
 	icons = gil_get_icons_in_region (gil, x1, y1, x2, y2);
@@ -1272,10 +1292,7 @@ scroll_timeout (gpointer data)
 	
 	gtk_adjustment_set_value (gil->adj, gil->adj->value + gil->value_diff);
 
-	gnome_canvas_window_to_world (
-		gil,
-		gil->event_last_x, gil->event_last_y,
-		&x, &y);
+	gnome_canvas_window_to_world (GNOME_CANVAS (gil), gil->event_last_x, gil->event_last_y, &x, &y);
 	gil_mark_region (gil, NULL, x, y);
 
 	return TRUE;
@@ -1290,10 +1307,7 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	if (!gil->sel_rect)
 		return FALSE;
 
-	gnome_canvas_window_to_world (
-		GNOME_CANVAS (gil),
-		event->x, event->y, &x, &y);
-
+	gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &x, &y);
 	gil_mark_region (gil, event, x, y);
 	
 	/*
@@ -1534,7 +1548,7 @@ gnome_icon_list_set_icon_width (GnomeIconList *gil, int w)
 
 	gil->icon_width  = w;
 
-	if (gil->frozen > 0){
+	if (gil->frozen){
 		gil->dirty = TRUE;
 		return;
 	}
@@ -1704,12 +1718,10 @@ gnome_icon_list_thaw (GnomeIconList *gil)
 {
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
+	g_return_if_fail (gil->frozen > 0);
 
 	gil->frozen--;
 
-	if (gil->frozen > 0)
-		return;
-	
 	if (!gil->dirty)
 		return;
 
@@ -1838,7 +1850,7 @@ gil_set_if (Gil *gil, int n, int offset)
 
 	*v = n;
 
-	if (!gil->frozen > 0){
+	if (!gil->frozen){
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
 	} else
@@ -1916,7 +1928,7 @@ gnome_icon_list_set_separators (GnomeIconList *gil, const char *sep)
 		g_free (gil->separators);
 	gil->separators = g_strdup (sep);
 
-	if (gil->frozen > 0){
+	if (gil->frozen){
 		gil->dirty = TRUE;
 		return;
 	}

@@ -1,3 +1,16 @@
+1998-12-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gil_button_press): Grab the rectangle
+	selection item to grab the mouse.
+	(gil_button_release): Ungrab the item and thus the mouse.
+	(gil_button_press): Use a nice stipple pattern for the selection
+	rectangle.
+	(gil_mark_region): Do not look amateurish; make the selection
+	rectangle only extend to the borders of the window.
+	(gnome_icon_list_thaw): Do not allow thaws if the freeze counter
+	is <= zero.
+	Reverted all gil->frozen > 0 tests.
+
 1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gil_mark_region): New routine.  Expand the
