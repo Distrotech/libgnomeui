@@ -1,3 +1,13 @@
+2001-05-02  Martin Baulig  <baulig@suse.de>
+
+	* libgnomeui-demos-server.c, libgnomeui-demos.oafinfo: New files.
+	This is a little component test program. To test it, you need to
+	manually the oafinfo file to $(datadir)/oaf.
+
+	* selector_demo.c: Comment out everything which currently doesn't
+	work and add a GnomeEntry with a remote GNOME::Selector (from the
+	libgnomeui-demos-server).
+
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
 	* selector_demo.c: Use the Bonobo UI API.

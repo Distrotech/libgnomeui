@@ -20,6 +20,7 @@ LDADD =	\
 	$(INTLLIBS)
 
 noinst_PROGRAMS = \
+	libgnomeui-demos-server	\
 	selector_demo		\
 	winhints_demo		\
 	animator_demo
