@@ -36,6 +36,8 @@
  * - Keeping all the gnome-vfs-infos in the hashtable looks wasteful, but otherwise we'll do to much i/o
  */
 
+#include <config.h>
+
 #include "gtkfilesystemgnomevfs.h"
 
 #include <libgnomevfs/gnome-vfs.h>
@@ -469,7 +471,8 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
 
   /* Add root, first in the list */
   volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, "/");
-  result = g_slist_prepend (result, volume);
+  if (volume)
+    result = g_slist_prepend (result, volume);
   
   return result;
 }
@@ -618,6 +621,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	    }
 
 	  vfs_info = child->info;
+	  gnome_vfs_file_info_ref (vfs_info);
 	  g_assert (vfs_info != NULL);
 	}
     }
@@ -2149,6 +2153,8 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
 	  FolderChild *child;
 
 	  child = folder_child_new (uri, vfs_info);
+
+	  g_free (uri);
 
 	  if (!g_hash_table_lookup (folder_vfs->children, child->uri))
 	    new = TRUE;

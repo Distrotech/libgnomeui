@@ -1,3 +1,14 @@
+2004-08-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	Merged from HEAD.
+
+	Fix #150075 and #150857.
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_list_volumes),
+	(gtk_file_system_gnome_vfs_get_folder), (directory_load_callback):
+	Fix leak and some other issues.
+
 2004-07-20  Federico Mena Quintero  <federico@ximian.com>
 
 	Merged from HEAD:
