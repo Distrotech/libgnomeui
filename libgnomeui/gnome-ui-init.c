@@ -280,12 +280,8 @@ gnome_init (char *app_id, struct argp *app_args,
 	/* Now parse command-line arguments.  */
 	retval = gnome_parse_arguments (app_args, argc, argv, flags, arg_index);
 
-	/* Initialize related libraries if needed.  If argument
-	   parsing failed but flags contains ARGP_NO_EXIT or
-	   ARGP_NO_ERRS then initialize the related gnome libraries,
-	   since exit() wasn't called. */
-	if (retval == 0 || flags & (ARGP_NO_EXIT | ARGP_NO_ERRS))
-		gnome_libs_init ();
+	/* Initialize related libraries.  */
+	gnome_libs_init ();
 
 	/*now set up the handeling of automatic config syncing*/
 	gnome_config_set_set_handler(set_handler,NULL);
