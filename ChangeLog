@@ -1,7 +1,11 @@
 2002-09-27  Alexander Larsson  <alexl@redhat.com>
+	
+	* configure.in:
+	Bump version to 2.1.0
+	
+2002-09-27  Alexander Larsson  <alexl@redhat.com>
 
 	* acconfig.h:
-	* configure.in:
 	Look for libjpeg
 	
 	* libgnomeui/Makefile.am:
