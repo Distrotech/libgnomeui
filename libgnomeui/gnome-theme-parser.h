@@ -22,6 +22,8 @@
 
 #include <glib.h>
 
+G_BEGIN_DECLS
+
 typedef struct _GnomeThemeFile GnomeThemeFile;
 
 typedef void (* GnomeThemeFileSectionFunc) (GnomeThemeFile *df,
@@ -80,5 +82,7 @@ gboolean gnome_theme_file_get_locale_string  (GnomeThemeFile   *df,
 					      const char       *section,
 					      const char       *keyname,
 					      char            **val);
+
+G_END_DECLS
 
 #endif /* GNOME_THEME_PARSER_H */

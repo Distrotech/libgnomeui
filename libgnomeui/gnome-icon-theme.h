@@ -22,6 +22,8 @@
 
 #include <glib-object.h>
 
+G_BEGIN_DECLS
+
 #define GNOME_TYPE_ICON_THEME             (gnome_icon_theme_get_type ())
 #define GNOME_ICON_THEME(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_ICON_THEME, GnomeIconTheme))
 #define GNOME_ICON_THEME_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ICON_THEME, GnomeIconThemeClass))
@@ -97,6 +99,6 @@ gboolean        gnome_icon_theme_rescan_if_needed      (GnomeIconTheme       *th
 GnomeIconData * gnome_icon_data_dup                    (const GnomeIconData  *icon_data);
 void            gnome_icon_data_free                   (GnomeIconData        *icon_data);
 
-
+G_END_DECLS
 
 #endif /* GNOME_ICON_THEME_H */
