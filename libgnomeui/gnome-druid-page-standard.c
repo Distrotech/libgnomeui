@@ -25,6 +25,7 @@
 static void gnome_druid_page_standard_init		(GnomeDruidPageStandard		 *druid_page_standard);
 static void gnome_druid_page_standard_class_init	(GnomeDruidPageStandardClass	 *klass);
 static void gnome_druid_page_standard_construct     (GnomeDruidPageStandard             *druid_page_standard);
+static void gnome_druid_page_standard_finalize          (GtkObject                       *widget);
 static void gnome_druid_page_standard_configure_size(GnomeDruidPageStandard             *druid_page_standard,
 						  gint                             width,
 						  gint                             height);
@@ -73,6 +74,7 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *klass)
 	
 	object_class = (GtkObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
+	object_class->finalize = gnome_druid_page_standard_finalize;
 	widget_class->size_allocate = gnome_druid_page_standard_size_allocate;
 	widget_class->realize = gnome_druid_page_standard_realize;
 
@@ -147,6 +149,13 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 	gtk_container_add (GTK_CONTAINER (druid_page_standard), vbox);
 	gtk_widget_show_all (vbox);
 }
+
+static void
+gnome_druid_page_standard_finalize (GtkObject *object)
+{
+	g_free (GNOME_DRUID_PAGE_STANDARD (object)->title);
+}
+
 static void
 gnome_druid_page_standard_configure_size (GnomeDruidPageStandard *druid_page_standard, gint width, gint height)
 {

@@ -1,3 +1,9 @@
+2000-07-03  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_class_init): add a finalize function to
+	free the title.
+
 2000-06-29  Iain Holmes   <terrorist@gegl.org>
 
 	* gtkpixmapmenuitem.c (gtk_pixmap_menu_item_size_request): Take the
