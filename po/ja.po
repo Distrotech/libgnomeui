@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-03-18 15:41+0100\n"
-"PO-Revision-Date: 2002-03-01 23:31+0900\n"
+"Project-Id-Version: libgnomeui 1.113.0\n"
+"POT-Creation-Date: 2002-03-24 19:53+0900\n"
+"PO-Revision-Date: 2002-03-24 19:54+0900\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -1083,19 +1083,24 @@ msgstr "フォント情報モードでサイズを表示"
 msgid "GNOME GConf UI Support"
 msgstr "GNOME GConf UI オプション"
 
-#: libgnomeui/gnome-gconf-ui.c:107
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "詳細(_D)"
+
+#: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
 msgid ""
-"You attempted to change an aspect of your configuration that your system "
-"administrator or operating system vendor does not allow you to change. Some "
-"of the settings you have selected may not take effect, or may not be "
-"restored next time you use this application (%s)."
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
 msgstr ""
-"システム管理者、あるいはシステムのベンダーが変更を許可していないものの設定の"
-"一部を変更しようとしました。選択した設定のいくつかは反映されないか、もしく"
-"は、このアプリケーションを次回使用した時に設定されません (%s)。"
+"アプリケーション \"%s\" がシステム管理者、あるいはシステムのベンダーが変更を"
+"許可していないものの設定の一部を変更しようとしました。選択した設定のいくつか"
+"は反映されないか、もしくは、このアプリケーションを次回使用した時に設定されま"
+"せん。"
 
-#: libgnomeui/gnome-gconf-ui.c:115
+#: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1103,11 +1108,6 @@ msgid ""
 msgstr ""
 "%s の情報を読みこみ、あるいは保存しようとした時にエラーが発生しました。\n"
 "設定がうまく反映されていないかもしれません。"
-
-#: libgnomeui/gnome-gconf-ui.c:139
-#, c-format
-msgid "GConf error details: %s\n"
-msgstr "GConf のエラーの詳細: %s\n"
 
 #: libgnomeui/gnome-icon-entry.c:164
 msgid ""
@@ -1235,6 +1235,9 @@ msgstr "%Y年%m月%d日(%a) %T"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "GConf error details: %s\n"
+#~ msgstr "GConf のエラーの詳細: %s\n"
 
 #~ msgid "Gdk debugging flags to set"
 #~ msgstr "セットする GDK デバッグフラグ"
