@@ -31,7 +31,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include "gnome-app.h"
+#include <libgnomeui/gnome-app.h>
 #include "gnome-mdi-child.h"
 
 G_BEGIN_DECLS

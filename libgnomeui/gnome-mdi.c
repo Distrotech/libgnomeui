@@ -34,10 +34,8 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-preferences.h>
-#include "gnome-app.h"
-#include "gnome-cursors.h"
-#include "gnome-dock-layout.h"
-#include "gnome-stock.h"
+#include <libgnomeui/gnome-app.h>
+#include <bonobo/bonobo-dock-layout.h>
 #include "gnome-pouch.h"
 #include "gnome-roo.h"
 #include "gnome-macros.h"
@@ -340,8 +338,9 @@ gnome_mdi_view_changed (GnomeMDI *mdi, GtkWidget *old_view)
 		/* insert the new toolbar */
 		if(child->priv->toolbar_template &&
 		   (ui_info = copy_ui_info_tree(child->priv->toolbar_template)) != NULL) {
-			toolbar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-									  GTK_TOOLBAR_BOTH);
+			toolbar = gtk_toolbar_new();
+			gtk_toolbar_set_orientation(GTK_TOOLBAR(toolbar), GTK_ORIENTATION_HORIZONTAL);
+			gtk_toolbar_set_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_BOTH);
 			gnome_app_fill_toolbar_with_data(GTK_TOOLBAR(toolbar), ui_info,
 											 app->accel_group, child);
 			gnome_mdi_child_add_toolbar(child, app, GTK_TOOLBAR(toolbar));
@@ -678,7 +677,7 @@ book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 	mdi = GNOME_MDI(data);
 
 	if(!drag_cursor)
-		drag_cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_FLEUR);
+		drag_cursor = gdk_cursor_new(GDK_FLEUR);
 
 	if(e->window == widget->window) {
 		mdi->priv->in_drag = TRUE;

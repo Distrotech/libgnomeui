@@ -31,7 +31,6 @@
 #include <libgnome/gnome-util.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
-#include <libgnomeui/gnome-popup-menu.h>
 #include "gnome-pouch.h"
 #include "gnome-roo.h"
 #include "gnome-pouchP.h"
@@ -229,9 +228,11 @@ gnome_pouch_button_press(GtkWidget *w, GdkEventButton *e)
 		}
 	}
 	else if(e->button == 3 && pouch->priv->popup_menu) {
+#ifdef FIXME
 		/* popup a menu */
 		gnome_popup_menu_do_popup(pouch->priv->popup_menu, NULL, NULL,
 								  e, pouch, GTK_WIDGET(pouch));
+#endif
 		set_active_items(pouch);
 		return TRUE;
 	}
@@ -887,7 +888,9 @@ gnome_pouch_enable_popup_menu(GnomePouch *pouch, gboolean enable)
 	g_return_if_fail(GNOME_IS_POUCH(pouch));
 
 	if(enable && pouch->priv->popup_menu == NULL) {
+#ifdef FIXME
 		pouch->priv->popup_menu = gnome_popup_menu_new(popup_menu);
+#endif
 		for(i = 0; i < 2; i++)
 			pouch->priv->oitem[i] = GTK_CHECK_MENU_ITEM(orientation_list[i].widget);
 		for(i = 0; i < 4; i++)
