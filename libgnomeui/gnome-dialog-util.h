@@ -14,40 +14,52 @@
 
 BEGIN_GNOME_DECLS
 
+/* The GtkWidget * return values were added in retrospect; sometimes
+   you might want to connect to the "close" signal of the dialog, or
+   something, the return value makes the functions more
+   flexible. However, there is nothing especially guaranteed about
+   these dialogs except that they will be dialogs, so don't count on
+   anything. */
+
+
 /* A little OK box */
-void gnome_ok_dialog      (const gchar * message);
+GtkWidget * gnome_ok_dialog      (const gchar * message);
 
 /* Operation failed fatally. In an OK dialog. */
-void gnome_error_dialog   (const gchar * error);
+GtkWidget * gnome_error_dialog   (const gchar * error);
 
 /* Just a warning. */
-void gnome_warning_dialog (const gchar * warning);
+GtkWidget * gnome_warning_dialog (const gchar * warning);
 
 /* Look in gnome-types.h for the callback types. */
 
 /* Ask a yes or no question, and call the callback when it's answered. */
-void gnome_question_dialog        (const gchar * question,
-			           GnomeReplyCallback callback, gpointer data);
+GtkWidget * gnome_question_dialog        (const gchar * question,
+					  GnomeReplyCallback callback, 
+					  gpointer data);
 
-void gnome_question_dialog_modal  (const gchar * question,
-			           GnomeReplyCallback callback, gpointer data);
+GtkWidget * gnome_question_dialog_modal  (const gchar * question,
+					  GnomeReplyCallback callback, 
+					  gpointer data);
 
 /* OK-Cancel question. */
-void gnome_ok_cancel_dialog       (const gchar * message,
-			           GnomeReplyCallback callback, gpointer data);
+GtkWidget * gnome_ok_cancel_dialog       (const gchar * message,
+					  GnomeReplyCallback callback, 
+					  gpointer data);
 
-void gnome_ok_cancel_dialog_modal (const gchar * message,
-				   GnomeReplyCallback callback, gpointer data);
+GtkWidget * gnome_ok_cancel_dialog_modal (const gchar * message,
+					  GnomeReplyCallback callback, 
+					  gpointer data);
 
 /* Get a string. */
-void gnome_request_string_dialog  (const gchar * prompt,
-			           GnomeStringCallback callback, 
-				   gpointer data);
+GtkWidget * gnome_request_string_dialog  (const gchar * prompt,
+					  GnomeStringCallback callback, 
+					  gpointer data);
 
 /* Request a string, but don't echo to the screen. */
-void gnome_request_password_dialog (const gchar * prompt,
-				    GnomeStringCallback callback, 
-				    gpointer data);
+GtkWidget * gnome_request_password_dialog (const gchar * prompt,
+					   GnomeStringCallback callback, 
+					   gpointer data);
 
 
 END_GNOME_DECLS

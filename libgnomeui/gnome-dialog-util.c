@@ -23,7 +23,7 @@
 #include "gnome-uidefs.h"
 #include <gtk/gtk.h>
 
-static void show_ok_box(const gchar * message, const gchar * type)
+static GtkWidget * show_ok_box(const gchar * message, const gchar * type)
 {  
   GtkWidget * mbox;
 
@@ -31,25 +31,26 @@ static void show_ok_box(const gchar * message, const gchar * type)
 				GNOME_STOCK_BUTTON_OK, NULL);
   
   gtk_widget_show (mbox);
+  return mbox;
 }
 
 
 /* A little OK box */
-void gnome_ok_dialog      (const gchar * message)
+GtkWidget * gnome_ok_dialog      (const gchar * message)
 {
-  show_ok_box (message, GNOME_MESSAGE_BOX_INFO);
+  return show_ok_box (message, GNOME_MESSAGE_BOX_INFO);
 }
 
 /* Operation failed fatally. In an OK dialog. */
-void gnome_error_dialog   (const gchar * error)
+GtkWidget * gnome_error_dialog   (const gchar * error)
 {
-  show_ok_box(error, GNOME_MESSAGE_BOX_ERROR);
+  return show_ok_box(error, GNOME_MESSAGE_BOX_ERROR);
 }
 
 /* Just a warning. */
-void gnome_warning_dialog (const gchar * warning)
+GtkWidget * gnome_warning_dialog (const gchar * warning)
 {
-  show_ok_box(warning, GNOME_MESSAGE_BOX_WARNING);
+  return show_ok_box(warning, GNOME_MESSAGE_BOX_WARNING);
 }
 
 typedef struct {
@@ -66,11 +67,11 @@ static void dialog_reply_callback (GnomeMessageBox * mbox,
   g_free(data);
 }
  
-static void reply_dialog (const gchar * question,
-			  GnomeReplyCallback callback, 
-			  gpointer data,
-			  gboolean yes_or_ok,
-			  gboolean modal)
+static GtkWidget * reply_dialog (const gchar * question,
+				 GnomeReplyCallback callback, 
+				 gpointer data,
+				 gboolean yes_or_ok,
+				 gboolean modal)
 {
   GtkWidget * mbox;
   callback_info * info;
@@ -101,33 +102,38 @@ static void reply_dialog (const gchar * question,
   }
 
   gtk_widget_show(mbox);
+  return mbox;
 }
 
 
 /* Ask a yes or no question, and call the callback when it's answered. */
-void gnome_question_dialog        (const gchar * question,
-			           GnomeReplyCallback callback, gpointer data)
+GtkWidget * gnome_question_dialog        (const gchar * question,
+					  GnomeReplyCallback callback, 
+					  gpointer data)
 {
-  reply_dialog(question, callback, data, TRUE, FALSE);
+  return reply_dialog(question, callback, data, TRUE, FALSE);
 }
 
-void gnome_question_dialog_modal  (const gchar * question,
-			           GnomeReplyCallback callback, gpointer data)
+GtkWidget * gnome_question_dialog_modal  (const gchar * question,
+					  GnomeReplyCallback callback, 
+					  gpointer data)
 {
-  reply_dialog(question, callback, data, TRUE, TRUE);
+  return reply_dialog(question, callback, data, TRUE, TRUE);
 }
 
 /* OK-Cancel question. */
-void gnome_ok_cancel_dialog       (const gchar * message,
-			           GnomeReplyCallback callback, gpointer data)
+GtkWidget * gnome_ok_cancel_dialog       (const gchar * message,
+					  GnomeReplyCallback callback, 
+					  gpointer data)
 {
-  reply_dialog(message, callback, data, FALSE, FALSE);
+  return reply_dialog(message, callback, data, FALSE, FALSE);
 }
 
-void gnome_ok_cancel_dialog_modal (const gchar * message,
-				   GnomeReplyCallback callback, gpointer data)
+GtkWidget * gnome_ok_cancel_dialog_modal (const gchar * message,
+					  GnomeReplyCallback callback, 
+					  gpointer data)
 {
-  reply_dialog(message, callback, data, FALSE, TRUE);
+  return reply_dialog(message, callback, data, FALSE, TRUE);
 }
 
 static void dialog_string_callback (GnomeMessageBox * mbox, gint button, 
@@ -147,9 +153,9 @@ static void dialog_string_callback (GnomeMessageBox * mbox, gint button,
   g_free(data);
 }
 
-static void request_dialog (const gchar * request, 
-			    GnomeStringCallback callback,
-			    gpointer data, gboolean password)
+static GtkWidget * request_dialog (const gchar * request, 
+				   GnomeStringCallback callback,
+				   gpointer data, gboolean password)
 {
   GtkWidget * mbox;
   callback_info * info;
@@ -184,23 +190,24 @@ static void request_dialog (const gchar * request,
 
   gtk_widget_show (entry);
   gtk_widget_show (mbox);
+  return mbox;
 }
 
 
 /* Get a string. */
-void gnome_request_string_dialog  (const gchar * prompt,
-			           GnomeStringCallback callback, 
-				   gpointer data)
+GtkWidget * gnome_request_string_dialog  (const gchar * prompt,
+					  GnomeStringCallback callback, 
+					  gpointer data)
 {
-  request_dialog (prompt, callback, data, FALSE);
+  return request_dialog (prompt, callback, data, FALSE);
 }
 
 /* Request a string, but don't echo to the screen. */
-void gnome_request_password_dialog (const gchar * prompt,
-				    GnomeStringCallback callback, 
-				    gpointer data)
+GtkWidget * gnome_request_password_dialog (const gchar * prompt,
+					   GnomeStringCallback callback, 
+					   gpointer data)
 {
-  request_dialog (prompt, callback, data, TRUE);
+  return request_dialog (prompt, callback, data, TRUE);
 }
 
 
