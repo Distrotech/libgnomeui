@@ -1,5 +1,6 @@
 2001-05-08  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selectorP.h: Removed.
 	* gnome-selector.[ch]: Removed, this is now in libgnome.
 	* gnome-file-selector.[ch]: Removed, this is now in libgnome.
 
