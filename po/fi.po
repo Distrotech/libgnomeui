@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-12-09 21:29+0100\n"
-"PO-Revision-Date: 2002-11-30 22:30+0200\n"
+"POT-Creation-Date: 2002-12-11 21:34+0200\n"
+"PO-Revision-Date: 2002-12-05 22:25+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Gnome Finnish Translation Team <gnome-fi-laatu@lists."
 "sourceforge.net>\n"
@@ -400,12 +400,11 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Tämä painike vie näyttämälleen URI:lle."
 
 #: libgnomeui/gnome-href.c:393
-#, fuzzy
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"URL-käsittelimen käynnistyksessä tapahtui virhe.\n"
+"Oletusarvoisen WWW-selaimen käynnistyksessä tapahtui virhe.\n"
 "Tarkista, että suosittujen sovellusten asetukset ovat oikein."
 
 #: libgnomeui/gnome-ui-init.c:113
@@ -526,6 +525,7 @@ msgstr "Kohdan 2 vinkki"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
@@ -583,6 +583,7 @@ msgid "_Game"
 msgstr "_Peli"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -773,11 +774,11 @@ msgstr "Määrittele ohjelman asetukset"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Tietoja"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Tietoja tästä ohjelmasta"
 
@@ -804,7 +805,7 @@ msgstr "Luo uusi ikkuna"
 msgid "_Close This Window"
 msgstr "_Sulje tämä ikkuna"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Sulje tämä ikkuna"
 
@@ -1332,5 +1333,6 @@ msgstr "%a %d. %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Lopeta testi"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Lopeta testi"
