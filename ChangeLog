@@ -1,3 +1,8 @@
+2003-02-04  Anders Carlsson  <andersca@codefactory.se>
+
+	* libgnomeui/gnome-client.c: (client_set_restart_command):
+	Revert fix since it caused brokenness.
+	
 2003-02-01  Anders Carlsson  <andersca@codefactory.se>
 
 	* libgnomeui/gnome-client.c (client_set_restart_command): Fix
