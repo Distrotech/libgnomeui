@@ -102,7 +102,7 @@ struct _GnomeDockBandChild
 };
 
 GtkWidget     *gnome_dock_band_new              (void);
-guint          gnome_dock_band_get_type         (void);
+guint          gnome_dock_band_get_type         (void) G_GNUC_CONST;
    
 void           gnome_dock_band_set_orientation  (GnomeDockBand *band,
                                                  GtkOrientation orientation);

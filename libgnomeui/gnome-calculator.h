@@ -72,7 +72,7 @@ struct _GnomeCalculatorClass {
 };
 
 
-GtkType		 gnome_calculator_get_type	(void);
+GtkType		 gnome_calculator_get_type	(void) G_GNUC_CONST;
 GtkWidget	*gnome_calculator_new		(void);
 void		 gnome_calculator_clear		(GnomeCalculator *gc,
 						 const gboolean reset);

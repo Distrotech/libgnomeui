@@ -64,7 +64,7 @@ struct _GnomeDateEditClass {
 	void (*time_changed) (GnomeDateEdit *gde);
 };
 
-guint     gnome_date_edit_get_type        (void);
+guint     gnome_date_edit_get_type        (void) G_GNUC_CONST;
 GtkWidget *gnome_date_edit_new            (time_t the_time,
 					   gboolean show_time,
 					   gboolean use_24_format);

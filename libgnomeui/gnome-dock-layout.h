@@ -90,7 +90,7 @@ struct _GnomeDockLayoutClass
 };
 
 GnomeDockLayout     *gnome_dock_layout_new      (void);
-guint                gnome_dock_layout_get_type (void);
+guint                gnome_dock_layout_get_type (void) G_GNUC_CONST;
    
 gboolean             gnome_dock_layout_add_item (GnomeDockLayout *layout,
                                                  GnomeDockItem *item,

@@ -67,7 +67,7 @@ struct _GnomeDruidPageClass
 };
 
 
-GtkType  gnome_druid_page_get_type		(void);
+GtkType  gnome_druid_page_get_type		(void) G_GNUC_CONST;
 
 /* These are really to be only called from GnomeDruid */
 gboolean gnome_druid_page_next			(GnomeDruidPage *druid_page);

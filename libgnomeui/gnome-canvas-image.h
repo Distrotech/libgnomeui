@@ -98,7 +98,7 @@ struct _GnomeCanvasImageClass {
 
 
 /* Standard Gtk function */
-GtkType gnome_canvas_image_get_type (void);
+GtkType gnome_canvas_image_get_type (void) G_GNUC_CONST;
 
 
 END_GNOME_DECLS

@@ -103,7 +103,7 @@ struct _GnomeAnimatorClass
   GtkMiscClass parent_class;
 };
 
-GtkType gnome_animator_get_type (void);
+GtkType gnome_animator_get_type (void) G_GNUC_CONST;
 GtkWidget *gnome_animator_new_with_size (guint width, guint height);
 
 void gnome_animator_set_loop_type (GnomeAnimator * animator,

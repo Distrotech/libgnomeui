@@ -112,7 +112,7 @@ struct _GnomeCanvasREClass {
 
 
 /* Standard Gtk function */
-GtkType gnome_canvas_re_get_type (void);
+GtkType gnome_canvas_re_get_type (void) G_GNUC_CONST;
 
 
 /* Rectangle item.  No configurable or queryable arguments are available (use those in
@@ -141,7 +141,7 @@ struct _GnomeCanvasRectClass {
 
 
 /* Standard Gtk function */
-GtkType gnome_canvas_rect_get_type (void);
+GtkType gnome_canvas_rect_get_type (void) G_GNUC_CONST;
 
 
 /* Ellipse item.  No configurable or queryable arguments are available (use those in
@@ -170,7 +170,7 @@ struct _GnomeCanvasEllipseClass {
 
 
 /* Standard Gtk function */
-GtkType gnome_canvas_ellipse_get_type (void);
+GtkType gnome_canvas_ellipse_get_type (void) G_GNUC_CONST;
 
 
 END_GNOME_DECLS

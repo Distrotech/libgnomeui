@@ -69,7 +69,7 @@ struct _GnomeFontPickerClass {
 
 
 /* Standard Gtk function */
-GtkType gnome_font_picker_get_type (void);
+GtkType gnome_font_picker_get_type (void) G_GNUC_CONST;
 
 /* Creates a new font picker widget */
 GtkWidget *gnome_font_picker_new (void);

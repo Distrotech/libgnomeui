@@ -59,7 +59,7 @@ struct _GnomeRecentlyUsedClass {
         void (* document_changed) (GnomeRecentlyUsed* obj, GnomeRecentDocument *doc);
 };
 
-GtkType              gnome_recently_used_get_type         (void);
+GtkType              gnome_recently_used_get_type         (void) G_GNUC_CONST;
 GnomeRecentlyUsed*   gnome_recently_used_new              (void);
 GnomeRecentlyUsed*   gnome_recently_used_new_app_specific (void);
 

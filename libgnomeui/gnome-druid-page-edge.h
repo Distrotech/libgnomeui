@@ -78,7 +78,7 @@ struct _GnomeDruidPageEdgeClass
 	GnomeDruidPageClass parent_class;
 };
 
-GtkType    gnome_druid_page_edge_get_type          (void);
+GtkType    gnome_druid_page_edge_get_type          (void) G_GNUC_CONST;
 GtkWidget *gnome_druid_page_edge_new               (GnomeEdgePosition   position);
 GtkWidget *gnome_druid_page_edge_new_aa            (GnomeEdgePosition   position);
 GtkWidget *gnome_druid_page_edge_new_with_vals     (GnomeEdgePosition   position,

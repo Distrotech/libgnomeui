@@ -99,7 +99,7 @@ struct _GnomeFontSelector
   gint spacing;
 };
 
-guint gnome_font_selector_get_type(void);
+guint gnome_font_selector_get_type(void) G_GNUC_CONST;
 GtkWidget *gnome_font_selector_new(void);
 /* You should free this retval up after you're done with it */
 gchar *gnome_font_selector_get_selected(GnomeFontSelector *text_tool);

@@ -151,7 +151,7 @@ struct _GnomeCanvasTextClass {
 
 
 /* Standard Gtk function */
-GtkType gnome_canvas_text_get_type (void);
+GtkType gnome_canvas_text_get_type (void) G_GNUC_CONST;
 
 
 END_GNOME_DECLS

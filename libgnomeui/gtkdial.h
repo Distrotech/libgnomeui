@@ -72,7 +72,7 @@ struct _GtkDialClass
 
 
 GtkWidget*     gtk_dial_new                    (GtkAdjustment  *adjustment);
-guint          gtk_dial_get_type               (void);
+guint          gtk_dial_get_type               (void) G_GNUC_CONST;
 GtkAdjustment* gtk_dial_get_adjustment         (GtkDial        *dial);
 void           gtk_dial_set_update_policy      (GtkDial        *dial,
 						GtkUpdateType  policy);

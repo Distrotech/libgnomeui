@@ -107,7 +107,7 @@ struct _GnomeAppClass {
 
 
 /* Standard Gtk function */
-GtkType gnome_app_get_type (void);
+GtkType gnome_app_get_type (void) G_GNUC_CONST;
 
 /* Create a new (empty) application window.  You must specify the application's name (used
  * internally as an identifier).  The window title can be left as NULL, in which case the window's

@@ -72,7 +72,7 @@ struct _GnomeAppBarClass
 
 #define GNOME_APPBAR_INTERACTIVE(ab) ((ab) ? (ab)->interactive : FALSE)
 
-guint      gnome_appbar_get_type     	(void);
+guint      gnome_appbar_get_type     	(void) G_GNUC_CONST;
 
 GtkWidget* gnome_appbar_new          	(gboolean has_progress, 
 					 gboolean has_status,

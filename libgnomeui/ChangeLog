@@ -1,3 +1,8 @@
+Fri Sep 01 03:33:09 2000  George Lebl <jirka@5z.com>
+
+	* *.h:  All _get_type functions are now G_GNUC_CONST to make
+	  things just a tad better optimized on gcc.
+
 Fri Sep 01 02:58:58 2000  George Lebl <jirka@5z.com>
 
 	* gnome-animator.c: fix memory leaks, remove old FIXMEs and minor

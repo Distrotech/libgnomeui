@@ -118,7 +118,7 @@ struct _GnomeSelectorClass {
 };
 
 
-guint        gnome_selector_get_type           (void);
+guint        gnome_selector_get_type           (void) G_GNUC_CONST;
 
 /* This is a purely virtual class, so there is no _new method.
  * Use gnome_{file,icon,pixmap}_selector_new instead. */

@@ -61,7 +61,7 @@ struct _GnomeRooClass {
 	void (*deselect)(GnomeRoo *roo);
 };
 
-guint        gnome_roo_get_type(void);
+guint        gnome_roo_get_type(void) G_GNUC_CONST;
 GtkWidget   *gnome_roo_new(void);
 const gchar *gnome_roo_get_title(GnomeRoo *roo);
 void         gnome_roo_set_title(GnomeRoo *roo, const gchar *name);

@@ -70,7 +70,7 @@ struct _GnomeAboutClass
 };
 
 
-GtkType    gnome_about_get_type       (void);
+GtkType    gnome_about_get_type       (void) G_GNUC_CONST;
 /* Main routine that creates the widget 
  *
  * USAGE:

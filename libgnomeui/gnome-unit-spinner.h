@@ -52,7 +52,7 @@ struct _GnomeUnitSpinnerClass {
   GtkSpinButtonClass parent_class;
 };
 
-GtkType    gnome_unit_spinner_get_type     (void);
+GtkType    gnome_unit_spinner_get_type     (void) G_GNUC_CONST;
 GtkWidget *gnome_unit_spinner_new          (GtkAdjustment *adjustment,
 					    guint digits,
 					    const GnomeUnit *adj_unit);

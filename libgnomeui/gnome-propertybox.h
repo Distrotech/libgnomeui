@@ -64,7 +64,7 @@ struct _GnomePropertyBoxClass
 	void (* help)  (GnomePropertyBox *propertybox, gint page_num);
 };
 
-guint     gnome_property_box_get_type    (void);
+guint     gnome_property_box_get_type    (void) G_GNUC_CONST;
 GtkWidget *gnome_property_box_new        (void);
 
 /*

@@ -62,7 +62,7 @@ struct _GnomePouchClass {
 	void (*unselect_child)(GnomePouch *pouch, GnomeRoo *roo);
 };
 
-guint      gnome_pouch_get_type(void);
+guint      gnome_pouch_get_type(void) G_GNUC_CONST;
 GtkWidget *gnome_pouch_new(void);
 void       gnome_pouch_select_roo(GnomePouch *pouch, GnomeRoo *roo);
 GnomeRoo  *gnome_pouch_get_selected(GnomePouch *pouch);

@@ -64,7 +64,7 @@ struct _GnomeStockClass {
 	GnomePixmapClass pixmap_class;
 };
 
-guint         gnome_stock_get_type (void);
+guint         gnome_stock_get_type (void) G_GNUC_CONST;
 GtkWidget    *gnome_stock_new (void);
 GtkWidget    *gnome_stock_new_with_icon (const char *icon);
 GtkWidget    *gnome_stock_new_with_icon_at_size (const char *icon, int width, int height);

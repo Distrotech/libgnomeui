@@ -75,7 +75,7 @@ struct _GtkPixmapMenuItemClass
 };
 
 
-GtkType	   gtk_pixmap_menu_item_get_type      (void);
+GtkType	   gtk_pixmap_menu_item_get_type      (void) G_GNUC_CONST;
 GtkWidget* gtk_pixmap_menu_item_new	      (void);
 void       gtk_pixmap_menu_item_set_pixmap    (GtkPixmapMenuItem *menu_item,
 					       GtkWidget *pixmap);

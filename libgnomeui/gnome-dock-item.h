@@ -105,7 +105,7 @@ struct _GnomeDockItemClass
 };
 
 /* Public methods.  */
-guint          gnome_dock_item_get_type        (void);
+guint          gnome_dock_item_get_type        (void) G_GNUC_CONST;
 GtkWidget     *gnome_dock_item_new             (const gchar *name,
                                                 GnomeDockItemBehavior behavior);
 void           gnome_dock_item_construct       (GnomeDockItem *new_dock_item,

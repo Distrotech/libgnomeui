@@ -65,7 +65,7 @@ struct _GnomeNumberEntryClass {
 };
 
 
-guint      gnome_number_entry_get_type    (void);
+guint      gnome_number_entry_get_type    (void) G_GNUC_CONST;
 GtkWidget *gnome_number_entry_new         (const gchar *history_id,
 					   const gchar *calc_dialog_title);
 

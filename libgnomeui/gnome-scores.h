@@ -76,7 +76,7 @@ struct _GnomeScoresClass
   GnomeDialogClass parent_class;
 };
 
-guint      gnome_scores_get_type (void);
+guint      gnome_scores_get_type (void) G_GNUC_CONST;
 
 /* Does all the work of displaying the best scores. 
 

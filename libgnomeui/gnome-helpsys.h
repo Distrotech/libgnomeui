@@ -66,7 +66,7 @@ struct _GnomeHelpViewClass {
   GtkBoxClass parent_class;
 };
 
-GtkType		gnome_help_view_get_type	(void);
+GtkType		gnome_help_view_get_type	(void) G_GNUC_CONST;
 
 GtkWidget *	gnome_help_view_new		(GtkWidget *toplevel,
 						 GnomeHelpViewStyle app_style,

@@ -89,7 +89,7 @@ struct _GnomeDockClass
 };
 
 GtkWidget     *gnome_dock_new               (void);
-guint          gnome_dock_get_type          (void);
+guint          gnome_dock_get_type          (void) G_GNUC_CONST;
 
 void           gnome_dock_allow_floating_items
                                             (GnomeDock *dock,

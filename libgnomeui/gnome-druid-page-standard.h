@@ -65,7 +65,7 @@ struct _GnomeDruidPageStandardClass
 };
 
 
-GtkType    gnome_druid_page_standard_get_type      (void);
+GtkType    gnome_druid_page_standard_get_type      (void) G_GNUC_CONST;
 GtkWidget *gnome_druid_page_standard_new           (void);
 GtkWidget *gnome_druid_page_standard_new_aa        (void);
 GtkWidget *gnome_druid_page_standard_new_with_vals (gboolean		 antialiased,

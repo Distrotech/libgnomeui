@@ -100,7 +100,7 @@ typedef struct {
 	void (* selection_stopped) (GnomeIconTextItem *iti);
 } GnomeIconTextItemClass;
 
-GtkType  gnome_icon_text_item_get_type      (void);
+GtkType  gnome_icon_text_item_get_type      (void) G_GNUC_CONST;
 
 void     gnome_icon_text_item_configure     (GnomeIconTextItem *iti,
 					     int                x,

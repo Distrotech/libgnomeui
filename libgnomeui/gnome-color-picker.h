@@ -78,7 +78,7 @@ struct _GnomeColorPickerClass {
 
 
 /* Standard Gtk function */
-GtkType gnome_color_picker_get_type (void);
+GtkType gnome_color_picker_get_type (void) G_GNUC_CONST;
 
 /* Creates a new color picker widget */
 GtkWidget *gnome_color_picker_new (void);

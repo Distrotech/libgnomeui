@@ -91,7 +91,7 @@ struct _GnomePixmapClass {
 	GtkMiscClass parent_class;
 };
 
-guint           gnome_pixmap_get_type                (void);
+guint           gnome_pixmap_get_type                (void) G_GNUC_CONST;
 GtkWidget      *gnome_pixmap_new                     (void);
 GtkWidget      *gnome_pixmap_new_from_file           (const gchar      *filename);
 GtkWidget      *gnome_pixmap_new_from_file_at_size   (const gchar      *filename,

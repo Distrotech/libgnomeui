@@ -111,7 +111,7 @@ struct _GnomeMDIClass {
  *   no contents may be set since GnomeMDI uses them for purposes of its own!
  */
 
-guint          gnome_mdi_get_type            (void);
+guint          gnome_mdi_get_type            (void) G_GNUC_CONST;
 
 GnomeMDI      *gnome_mdi_new                 (const gchar *appname, const gchar *title);
 void           gnome_mdi_construct           (GnomeMDI *mdi, const gchar *appname, const gchar *title);

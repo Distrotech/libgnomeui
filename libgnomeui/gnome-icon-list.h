@@ -83,7 +83,7 @@ enum {
 	GNOME_ICON_LIST_STATIC_TEXT	= 1 << 1
 };
 
-guint          gnome_icon_list_get_type            (void);
+guint          gnome_icon_list_get_type            (void) G_GNUC_CONST;
 
 GtkWidget     *gnome_icon_list_new                 (guint         icon_width,
 						    int           flags);

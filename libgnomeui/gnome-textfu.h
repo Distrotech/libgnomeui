@@ -126,7 +126,7 @@ struct _GnomeTextFuClass
 
 typedef GnomeTextFuItem * (*GnomeTextFuTagHandler)(GnomeTextFu *textfu, const char *tag, guint16 tag_id, char **attrs);
 
-GtkType    gnome_textfu_get_type   (void);
+GtkType    gnome_textfu_get_type   (void) G_GNUC_CONST;
 GtkWidget *gnome_textfu_new        (void);
 void       gnome_textfu_load_file  (GnomeTextFu *textfu, const char *filename);
 guint16    gnome_textfu_tagid_alloc(const char *name, GnomeTextFuTagHandler handler);

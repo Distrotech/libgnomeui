@@ -60,7 +60,7 @@ struct _GnomeLessClass {
 	GtkHBoxClass parent_class;
 };
 
-GtkType  gnome_less_get_type		(void);
+GtkType  gnome_less_get_type		(void) G_GNUC_CONST;
 
 GtkWidget * gnome_less_new		(void);
 

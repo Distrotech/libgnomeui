@@ -73,7 +73,7 @@ struct _GnomeIconEntryClass {
 };
 
 
-guint      gnome_icon_entry_get_type    (void);
+guint      gnome_icon_entry_get_type    (void) G_GNUC_CONST;
 GtkWidget *gnome_icon_entry_new         (const gchar *history_id,
 					 const gchar *browse_dialog_title);
 

@@ -68,7 +68,7 @@ struct _GnomePixmapEntryClass {
 };
 
 
-guint      gnome_pixmap_entry_get_type    (void);
+guint      gnome_pixmap_entry_get_type    (void) G_GNUC_CONST;
 GtkWidget *gnome_pixmap_entry_new         (const gchar *history_id,
 					   const gchar *browse_dialog_title,
 					   gboolean do_preview);

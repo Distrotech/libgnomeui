@@ -72,7 +72,7 @@ struct _GtkClockClass {
 	GtkLabelClass parent_class;
 };
 
-guint gtk_clock_get_type(void);
+guint gtk_clock_get_type(void) G_GNUC_CONST;
 GtkWidget *gtk_clock_new(GtkClockType type);
 void gtk_clock_construct(GtkClock *gclock, GtkClockType type);
 void gtk_clock_set_format(GtkClock *gclock, const gchar *fmt);

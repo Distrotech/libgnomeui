@@ -58,7 +58,7 @@ struct _GnomeFileSaverClass {
                            const gchar    *mime_type);
 };
 
-GtkType         gnome_file_saver_get_type     (void);
+GtkType         gnome_file_saver_get_type     (void) G_GNUC_CONST;
 GtkWidget*      gnome_file_saver_new          (const gchar    *title,
                                                const gchar    *saver_id);
 

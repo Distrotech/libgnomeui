@@ -65,7 +65,7 @@ struct _GnomePaperSelectorClass {
   void (*fittopage)(GnomePaperSelector *pl);
 };
 
-GtkType      gnome_paper_selector_get_type    (void);
+GtkType      gnome_paper_selector_get_type    (void) G_GNUC_CONST;
 GtkWidget   *gnome_paper_selector_new(void);
 GtkWidget   *gnome_paper_selector_new_with_unit (const GnomeUnit *unit);
 
