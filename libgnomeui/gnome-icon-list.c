@@ -2258,7 +2258,7 @@ gnome_icon_list_freeze (GnomeIconList *gil)
 void
 gnome_icon_list_thaw (GnomeIconList *gil)
 {
-	GilPrivate *priv;
+        GilPrivate *priv;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
@@ -2269,11 +2269,10 @@ gnome_icon_list_thaw (GnomeIconList *gil)
 
 	priv->frozen--;
 
-	if (!priv->dirty)
-		return;
-
-	gil_layout_all_icons (gil);
-	gil_scrollbar_adjust (gil);
+	if (priv->dirty) {
+                gil_layout_all_icons (gil);
+                gil_scrollbar_adjust (gil);
+        }
 
 	if (priv->frozen == 0)
 		gnome_canvas_item_show (GNOME_CANVAS (gil)->root);
