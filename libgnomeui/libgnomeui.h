@@ -63,6 +63,7 @@
 #include "libgnomeui/gnome-mdi.h"
 #include "libgnomeui/gnome-mdi-child.h"
 #include "libgnomeui/gnometypebuiltins.h"
+#include "libgnomeui/gnome-winhints.h"
 
 BEGIN_GNOME_DECLS
 
