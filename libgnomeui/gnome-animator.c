@@ -28,7 +28,7 @@
 #include <gobject/gparam.h>
 #include <gtk/gtkmain.h>
 #include "gnome-animator.h"
-#include "libgnome/gnome-i18nP.h"
+#include "gnome-i18nP.h"
 
 enum {
   PROP_0,

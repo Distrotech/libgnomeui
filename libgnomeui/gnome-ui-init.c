@@ -46,6 +46,7 @@
 
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-program.h>
+#include <libgnome/gnomelib-init.h>
 
 #include "gnome-i18nP.h"
 #include "gnome-client.h"

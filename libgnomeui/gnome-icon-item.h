@@ -35,7 +35,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkentry.h>
-#include <libgnomeui/gnome-canvas.h>
+#include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomeui/gnome-icon-text.h>
 
 BEGIN_GNOME_DECLS

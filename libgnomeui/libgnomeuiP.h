@@ -31,7 +31,6 @@
 #include <gobject/gsignal.h>
 #include <gtk/gtktypeutils.h>
 
-#include "libgnome/libgnomeP.h"
 #include "libgnome/gnome-defs.h"
 
 #include "gnome-macros.h"

@@ -28,7 +28,7 @@
 #include "gnome-propertybox.h"
 #include "gnome-macros.h"
 #include "libgnome/gnome-util.h"
-#include "libgnome/gnome-i18nP.h"
+#include "gnome-i18nP.h"
 #include "gnome-stock.h"
 #include "libgnome/gnome-config.h"
 #include <gtk/gtk.h>

@@ -42,7 +42,7 @@
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-ditem.h"
-#include "libgnome/libgnomeP.h"
+#include "gnome-i18nP.h"
 #include "gnome-macros.h"
 #include "gnome-vfs-util.h"
 #include "gnome-selectorP.h"

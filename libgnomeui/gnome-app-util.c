@@ -26,7 +26,7 @@
 
 #include "gnome-app-util.h"
 
-#include "libgnome/gnome-i18nP.h"
+#include "gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
 
 #include "gnome-stock.h"

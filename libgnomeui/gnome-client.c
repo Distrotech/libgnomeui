@@ -32,7 +32,7 @@
 #include <sys/types.h>
 #include <errno.h>
 
-#include "libgnome/libgnomeP.h"
+#include "gnome-i18nP.h"
 #include "gnome-client.h"
 #include "gnome-stock.h"
 #include "gnome-messagebox.h"

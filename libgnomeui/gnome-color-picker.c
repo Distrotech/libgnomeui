@@ -38,7 +38,7 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkcompat.h>
 #include "gnome-color-picker.h"
-#include <libgnome/gnome-i18nP.h>
+#include "gnome-i18nP.h"
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkbutton.h>
 

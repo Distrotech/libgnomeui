@@ -34,7 +34,7 @@
 #include <sys/wait.h>
 #include <gtk/gtk.h>
 #include <libgnome/gnome-defs.h>
-#include <libgnome/gnome-i18nP.h>
+#include "gnome-i18nP.h"
 #include <libgnome/gnome-config.h>
 #include <liboaf/liboaf.h>
 #include <gdk/gdkx.h>

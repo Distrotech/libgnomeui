@@ -38,7 +38,7 @@
 #include <gtk/gtklist.h>
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
-#include "libgnome/libgnomeP.h"
+#include "gnome-i18nP.h"
 #include "gnome-macros.h"
 #include "gnome-entry.h"
 

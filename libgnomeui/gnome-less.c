@@ -30,7 +30,7 @@
 
 #include "libgnome/gnome-util.h"
 
-#include "libgnome/gnome-i18nP.h"
+#include "gnome-i18nP.h"
 
 #include "libgnomeui/gnome-uidefs.h"
 

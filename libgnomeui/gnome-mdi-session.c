@@ -25,7 +25,11 @@
  */
 
 #include <config.h>
-#include "libgnome/libgnomeP.h"
+#include <stdio.h>
+
+#include "gnome-i18nP.h"
+
+#include <libgnome/gnome-config.h>
 
 #include "gnome-dock-layout.h"
 #include "gnome-mdi-session.h"

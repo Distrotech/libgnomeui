@@ -40,7 +40,7 @@
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
 #include "gnome-cursors.h"
-#include <libgnome/gnome-i18nP.h>
+#include "gnome-i18nP.h"
 #include <libgnomeui/gnome-stock.h>
 
 struct _GnomeDateEditPrivate {
