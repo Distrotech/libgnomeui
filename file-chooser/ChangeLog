@@ -1,8 +1,13 @@
 2004-02-23  Alexander Larsson  <alexl@redhat.com>
 
 	* gtkfilesystemgnomevfs.c:
-	More get_file_info fixups.
+	Last change wasn't entierly right.
 	
+2004-02-23  Alexander Larsson  <alexl@redhat.com>
+
+	* gtkfilesystemgnomevfs.c:
+	More get_file_info fixups.
+
 2004-02-23  Alexander Larsson  <alexl@redhat.com>
 
 	* gtkfilesystemgnomevfs.c (lookup_vfs_info_in_folder):
