@@ -211,6 +211,8 @@ $(srcdir)/gnome-marshal.c: @REBUILD@ Makefile.am gnome-marshal.list
 	&& cp xgen-gmc gnome-marshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
 
+gnome-marshal-main.c: $(srcdir)/gnome-marshal.c $(srcdir)/gnome-marshal.h
+
 EXTRA_DIST =					\
 	AUTHORS					\
 	gnome-marshal.list			\
@@ -218,10 +220,6 @@ EXTRA_DIST =					\
 	gnometype_inits.c			\
 	libgnomeui-2.0.pc.in			\
 	$(schema_DATA)
-
-BUILT_SOURCES = \
-	gnome-marshal.h			\
-	gnome-marshal.c			
 
 libgnomeui_2_la_LDFLAGS = \
 	-version-info $(LIB_VERSION)		\

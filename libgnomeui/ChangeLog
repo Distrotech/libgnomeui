@@ -1,3 +1,8 @@
+2001-12-10  jacob berkman  <jacob@ximian.com>
+
+	* Makefile.am (gnome-marshal-main.c): add an explicit dep here
+	because automake sucks
+
 2001-12-10  Yanko Kaneti  <yaneti@declera.com>
 
 	* libgnomeui.schemas: (menus/show-icons) fix default value 
