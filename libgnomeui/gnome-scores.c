@@ -12,7 +12,7 @@
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-score.h"
 #include "libgnome/gnome-string.h"
-#include "libgnome/gnome-i18n.h"
+#include "libgnome/gnome-i18nP.h"
 #include "gnome-stock.h"
 #include "gtk/gtk.h"
 
