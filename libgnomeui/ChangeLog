@@ -1,3 +1,10 @@
+1999-11-03  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (gnome_canvas_init): Fixed long-standing problem
+	with the canvas->pick_event not being properly initialized.  This
+	caused spurious EnterNotify events to be sent to items right after
+	the canvas was created and the mouse had never been inside it.
+
 1999-11-02  Kjartan Maraas  <kmaraas@online.no>
 
 	* gnome-druid-page-standard.c: #include <config.h>
