@@ -164,14 +164,16 @@ gnome_scores_new (  guint n_scores,
 void
 gnome_scores_set_color(GnomeScores *gs, guint n, GdkColor *col)
 {
-	GtkStyle *s = gtk_style_new(); /* i believe that i should copy the default style
-					  and change only the fg field, how? */
+	GtkStyle *s = gtk_style_new();
+	/* i believe that i should copy the default style
+	   and change only the fg field, how? */
 
 	memcpy((void *) &s->fg[0], col, sizeof(GdkColor) );
 	gtk_widget_set_style(GTK_WIDGET(gs->label_names[n]), s);
 	gtk_widget_set_style(GTK_WIDGET(gs->label_scores[n]), s);
 	gtk_widget_set_style(GTK_WIDGET(gs->label_times[n]), s);
-/* Can i free s?, how? */
+
+	gtk_style_unref(s);
 }
 
 void
@@ -220,6 +222,7 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 
 	gs->logo = gtk_label_new(txt);
 	gtk_widget_set_style(GTK_WIDGET(gs->logo), s);
+	gtk_style_unref(s);
 	gtk_box_pack_end (GTK_BOX(gs->vbox), gs->logo, TRUE, TRUE, 0);
 	gtk_widget_show (gs->logo);
 }

@@ -397,6 +397,7 @@ text_resize_text_widget (GnomeFontSelector *text_tool)
   gdk_font_ref (style->font);
 
   gtk_widget_set_style (text_tool->the_text, style);
+  gtk_style_unref(style);
 }
 
 static void

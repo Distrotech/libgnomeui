@@ -1,3 +1,12 @@
+Tue Feb 17 00:16:49 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gnome-scores.c (gnome_scores_set_color): gtk_style_unref() new
+	GtkStyle after gtk_widget_set_style.
+	(gnome_scores_set_logo_label): Likewise.
+	* gnome-about.c (gnome_about_new): Likewise.
+	* gnome-font-selector.c (text_resize_text_widget): Likewise.
+
+
 Mon Feb 16 11:53:14 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gnome-client.h: Include <gtk/gtkobject.h>.

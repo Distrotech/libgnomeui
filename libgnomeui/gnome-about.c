@@ -644,6 +644,7 @@ gnome_about_new (gchar	*title,
   style->bg[GTK_STATE_NORMAL].green = (gushort) 65535;
   style->bg[GTK_STATE_NORMAL].blue  = (gushort) 65535; 
   gtk_widget_set_style (drawing_area, style);
+  gtk_style_unref(style);
 
   if (logo)
     {
