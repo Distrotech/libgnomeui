@@ -1,3 +1,13 @@
+2002-02-23  Jody Goldberg <jody@gnome.org>
+
+	* libgnomeui/gnome-uidefs.h : Use lower case for the stock accelerator
+	  keys.
+
+	* test-gnome/testgnome.c (helper_file_menu) : Use some STOCK items
+	  too.  These illustrate the current accelerator breakage.
+
+	* libgnomeui/gnome-app-helper.h : constify the label and hint.
+
 2002-02-22  Murray Cumming  <murrayc@usa.net>
 
 	* Renamed GnomeIconList::select_all default signal handler

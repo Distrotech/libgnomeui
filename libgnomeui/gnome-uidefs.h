@@ -52,28 +52,28 @@
 /* These are keybindings, in GnomeUIInfo format. USE THEM OR DIE! 
    Add to the list as well..
 */
-#define GNOME_KEY_NAME_EXIT 	        'Q'
+#define GNOME_KEY_NAME_EXIT 	        'q'
 #define GNOME_KEY_MOD_EXIT	        (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_CLOSE 	        'W'
+#define GNOME_KEY_NAME_CLOSE 	        'w'
 #define	GNOME_KEY_MOD_CLOSE	        (GDK_CONTROL_MASK)
 
-#define GNOME_KEY_NAME_CUT 	        'X'
+#define GNOME_KEY_NAME_CUT 	        'x'
 #define GNOME_KEY_MOD_CUT 	        (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_COPY	        'C'
+#define GNOME_KEY_NAME_COPY	        'c'
 #define GNOME_KEY_MOD_COPY	        (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_PASTE 	        'V'
+#define GNOME_KEY_NAME_PASTE 	        'v'
 #define GNOME_KEY_MOD_PASTE 	        (GDK_CONTROL_MASK)
 #define GNOME_KEY_NAME_SELECT_ALL       0
 #define GNOME_KEY_MOD_SELECT_ALL        (0)
 #define GNOME_KEY_NAME_CLEAR 	        0
 #define GNOME_KEY_MOD_CLEAR 	        (0)
 
-#define GNOME_KEY_NAME_UNDO  	        'Z'
+#define GNOME_KEY_NAME_UNDO  	        'z'
 #define GNOME_KEY_MOD_UNDO  	        (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_REDO	        'R'
+#define GNOME_KEY_NAME_REDO	        'r'
 #define GNOME_KEY_MOD_REDO	        (GDK_CONTROL_MASK)
 
-#define GNOME_KEY_NAME_SAVE	        'S'
+#define GNOME_KEY_NAME_SAVE	        's'
 #define GNOME_KEY_MOD_SAVE	        (GDK_CONTROL_MASK)
 #define GNOME_KEY_NAME_OPEN	        GDK_F3
 #define GNOME_KEY_MOD_OPEN	        (0)
@@ -100,14 +100,14 @@
 #define GNOME_KEY_NAME_CLOSE_WINDOW     0
 #define GNOME_KEY_MOD_CLOSE_WINDOW      (0)
 
-#define GNOME_KEY_NAME_REDO_MOVE        'R'
+#define GNOME_KEY_NAME_REDO_MOVE        'r'
 #define GNOME_KEY_MOD_REDO_MOVE         (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_UNDO_MOVE        'Z'
+#define GNOME_KEY_NAME_UNDO_MOVE        'z'
 #define GNOME_KEY_MOD_UNDO_MOVE         (GDK_CONTROL_MASK)
 
 #define GNOME_KEY_NAME_PAUSE_GAME       0
 #define GNOME_KEY_MOD_PAUSE_GAME        (0)
-#define GNOME_KEY_NAME_NEW_GAME         'N'
+#define GNOME_KEY_NAME_NEW_GAME         'n'
 #define GNOME_KEY_MOD_NEW_GAME          (GDK_CONTROL_MASK)
 
 #endif

@@ -142,8 +142,8 @@ typedef enum {
  * structure is to use the GNOMEUIINFO_* macros provided below. */
 typedef struct {
 	GnomeUIInfoType type;		/* Type of item */
-	gchar *label;			/* String to use in the label */
-	gchar *hint;			/* For toolbar items, the tooltip. For 
+	gchar const *label;			/* String to use in the label */
+	gchar const *hint;			/* For toolbar items, the tooltip. For 
 					   menu items, the status bar message */
 	gpointer moreinfo;		/* For an item, toggleitem, or 
 					   radioitem, this is a pointer to the 
