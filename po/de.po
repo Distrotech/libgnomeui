@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.4.x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-06 15:52+0200\n"
-"PO-Revision-Date: 2003-07-06 15:52+0200\n"
-"Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
+"POT-Creation-Date: 2003-08-04 20:30+0200\n"
+"PO-Revision-Date: 2003-08-04 20:52+0200\n"
+"Last-Translator: Benjamin Greiner <nadaschauher@gmx.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -826,7 +826,7 @@ msgstr "Die Hintergrundfarbe des Logos wurde gesetzt"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr "Abschließen zeigen"
+msgstr "Abschlußknopf zeigen"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
@@ -899,7 +899,7 @@ msgstr "Dateiname"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
-msgstr "Dateiname der im Dateieintrag angezeigt werden soll."
+msgstr "Dateiname, der im Dateieintrag angezeigt werden soll."
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
@@ -907,7 +907,7 @@ msgstr "Vorgabepfad"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr "Vorgabepfad für das Auswahl-Dateifenster"
+msgstr "Vorgabepfad für das Dateiauswahlfenster"
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
@@ -1032,7 +1032,7 @@ msgstr "Größe im Schriftinformationsmodus zeigen"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr "GNOME GConf-UI-Unterstützung"
+msgstr "Unterstützung für GNOME-GConf-UI"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
@@ -1047,7 +1047,7 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Die Anwendung »%s« hat versucht, einen Aspekt der Konfiguration zu ändern, "
-"die Ihr Systemadministrator oder Betriebssystemhändler nicht zu ändern "
+"den Ihr Systemadministrator oder Betriebssystemhändler nicht zu ändern "
 "erlaubt. Einige der von Ihnen gewählten Einstellungen könnten nicht in Kraft "
 "treten oder in der nächsten Sitzung mit dieser Anwendung nicht "
 "wiederhergestellt werden."
@@ -1386,6 +1386,3 @@ msgstr ""
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Den Test beenden"
-
-#~ msgid "_Credits"
-#~ msgstr "_Mitwirkende"
