@@ -380,7 +380,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 					   do_add),
 			gtk_marshal_NONE__INT_POINTER,
 			GTK_TYPE_NONE,
-			2, GTK_TYPE_INT, GTK_TYPE_STRING);
+			2, GTK_TYPE_STRING, GTK_TYPE_INT);
     gnome_selector_signals [STOP_LOADING_SIGNAL] =
 	gtk_signal_new ("stop_loading",
 			GTK_RUN_LAST,

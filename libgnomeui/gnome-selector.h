@@ -123,8 +123,8 @@ struct _GnomeSelectorClass {
 
     /* the following operations are async. */
     void      (*do_add)                    (GnomeSelector *selector,
-                                            gint           position,
-                                            const gchar   *uri);
+                                            const gchar   *uri,
+                                            gint           position);
     void      (*stop_loading)              (GnomeSelector *selector);
 };
 
