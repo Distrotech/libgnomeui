@@ -141,6 +141,13 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 	return app;
 }
 
+
+static void
+color_set (GnomeColorPicker *cp, guint r, guint g, guint b, guint a)
+{
+	g_print ("Color set: %d %d %d %d\n", r, g, b, a);
+}
+
 /* Creates a color picker with the specified parameters */
 static void
 create_cp (GtkWidget *table, int dither, int use_alpha, int left, int right, int top, int bottom)
@@ -148,6 +155,9 @@ create_cp (GtkWidget *table, int dither, int use_alpha, int left, int right, int
 	GtkWidget *cp;
 
 	cp = gnome_color_picker_new ();
+	g_signal_connect (cp, "color_set",
+			  G_CALLBACK (color_set), NULL);
+
 	gnome_color_picker_set_dither (GNOME_COLOR_PICKER (cp), dither);
 	gnome_color_picker_set_use_alpha (GNOME_COLOR_PICKER (cp), use_alpha);
 	gnome_color_picker_set_d (GNOME_COLOR_PICKER (cp), 1.0, 0.0, 1.0, 0.5);
