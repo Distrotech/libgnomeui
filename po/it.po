@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2003-07-01 09:53+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2003-07-03 11:01+0200\n"
 "Last-Translator: Alessio Frusciante <algol@firenze.linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -140,7 +140,6 @@ msgstr "Informazioni su %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -198,7 +197,6 @@ msgid "_Game"
 msgstr "_Gioco"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_iuto"
 
@@ -390,11 +388,11 @@ msgstr "Configura l'applicazione"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "I_nformazioni"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Informazioni su questa applicazione"
 
@@ -421,7 +419,7 @@ msgstr "Crea una nuova finestra"
 msgid "_Close This Window"
 msgstr "_Chiudi questa finestra"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Chiude la finestra corrente"
 
@@ -856,7 +854,9 @@ msgstr "ID cronologia"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr "Identificatore univoco per il campo file. Sarà usato per salvare la lista della cronologia."
+msgstr ""
+"Identificatore univoco per il campo file. Sarà usato per salvare la lista "
+"della cronologia."
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
@@ -874,7 +874,9 @@ msgstr "Campo directory"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "Indica se il campo file debba essere usato per fornire nomi di directory o nomi di file completi."
+msgstr ""
+"Indica se il campo file debba essere usato per fornire nomi di directory o "
+"nomi di file completi."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -909,7 +911,10 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr "GnomeEntry che il campo file usa per fornire nomi di file. È possibile usare questa proprietà per otterere il GnomeEntry, se è necessario modificare o interrogare uno dei suoi parametri."
+msgstr ""
+"GnomeEntry che il campo file usa per fornire nomi di file. È possibile usare "
+"questa proprietà per otterere il GnomeEntry, se è necessario modificare o "
+"interrogare uno dei suoi parametri."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -920,7 +925,10 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr "GtkEntry che il campo file usa per fornire nomi di file. È possibile usare questa proprietà per otterere il GtkEntry, se è necessario modificare o interrogare uno dei suoi parametri."
+msgstr ""
+"GtkEntry che il campo file usa per fornire nomi di file. È possibile usare "
+"questa proprietà per otterere il GtkEntry, se è necessario modificare o "
+"interrogare uno dei suoi parametri."
 
 #: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
@@ -996,7 +1004,8 @@ msgstr "Usa il carattere nella etichetta"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Usa il carattere nella etichetta nella modalità informazioni sul carattere"
+msgstr ""
+"Usa il carattere nella etichetta nella modalità informazioni sul carattere"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1085,14 +1094,18 @@ msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Si è verificato un errore nel tentativo di avviare il web browser predefinito.\n"
-"Contrallare le proprie impostazioni nello strumento di preferenza «Applicazioni preferite»."
+"Si è verificato un errore nel tentativo di avviare il web browser "
+"predefinito.\n"
+"Contrallare le proprie impostazioni nello strumento di preferenza "
+"«Applicazioni preferite»."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "Identificatore univoco per il campo icona. Sarà usato per salvare la lista della cronologia."
+msgstr ""
+"Identificatore univoco per il campo icona. Sarà usato per salvare la lista "
+"della cronologia."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1168,7 +1181,8 @@ msgstr "Percorso icona"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Inserire qui il nome della directory dove sono posizionate le immagini."
+msgstr ""
+"Inserire qui il nome della directory dove sono posizionate le immagini."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1283,27 +1297,27 @@ msgstr "Riduci rientro"
 msgid "About"
 msgstr "Informazioni"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "Display X da utilizzare"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "Libreria per la GUI di GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Si sono verificati errori di segmentazione multipli; impossibile "
 "visualizzare la finestre di errore\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1359,9 +1373,8 @@ msgstr ""
 "Per maggiori informazioni visitare la pagina per il crash delle applicazioni "
 "GNOME"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Termina il test"
+#~ msgid "Exit the test"
+#~ msgstr "Termina il test"
 
 #~ msgid "_Credits"
 #~ msgstr "_Credits_"
