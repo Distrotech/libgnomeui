@@ -1,3 +1,8 @@
+Sat Jul 18 20:26:40 1998  John Ellis  <johne@bellatlantic.net>
+
+        * gnome-dentry-edit.c (gnome_dentry_edit_load_file): changed
+        gnome_desktop_entry_load to unconditional.
+
 Sat Jul 18 12:42:09 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c (gnome_dialog_constructv): Use append_button,

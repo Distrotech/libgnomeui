@@ -433,7 +433,7 @@ void        gnome_dentry_edit_load_file  (GnomeDEntryEdit * dee,
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
   g_return_if_fail(path != NULL);
 
-  newentry = gnome_desktop_entry_load(path);
+  newentry = gnome_desktop_entry_load_unconditional(path);
 
   if ( newentry ) {
     gnome_dentry_edit_sync_display(dee, newentry);
