@@ -83,6 +83,7 @@ libgnomeui_la_SOURCES = \
 	gnome-property-entries.c	\
 	gnome-rootwin.c			\
 	gnome-scores.c			\
+	gnome-spell.c			\
 	gnome-startup.c			\
 	gnome-stock.c			\
         gnome-winhints.c		\
@@ -90,7 +91,6 @@ libgnomeui_la_SOURCES = \
 	gnome-procbar.c			\
 	gnometypes.c			\
 	gtkcauldron.c			\
-	gtkspell.c			\
 	gtk-clock.c			\
 	gtk-ted.c			\
 	gtkdial.c			\
@@ -154,6 +154,7 @@ gnome_headers = \
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
 	gnome-scores.h			\
+	gnome-spell.h			\
 	gnome-startup.h			\
 	gnome-rootwin.h			\
 	gnome-stock.h			\
@@ -164,7 +165,6 @@ gnome_headers = \
 	gnome-procbar.h			\
 	gtkcauldron.h			\
 	gtkdial.h			\
-	gtkspell.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\
 	gtkpixmapmenuitem.h		\

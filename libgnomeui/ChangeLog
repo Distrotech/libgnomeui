@@ -1,3 +1,8 @@
+1998-12-15  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-spell.[ch], gtkspell.[ch]:
+	Renamed gtkspell to gnome-spell, internationalized, doc'd.
+
 1998-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app.c (gnome_app_set_*bar): for setting things after the

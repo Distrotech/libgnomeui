@@ -17,8 +17,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef __GTK_SPELL_H__
-#define __GTK_SPELL_H__
+#ifndef __GNOME_SPELL_H__
+#define __GNOME_SPELL_H__
 
 #include <gtk/gtkvbox.h>
 #include <gtk/gtktooltips.h>
@@ -31,15 +31,15 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#define GTK_SPELL(obj)		GTK_CHECK_CAST(obj, gtk_spell_get_type(), GtkSpell)
-#define GTK_SPELL_CLASS(klass)		GTK_CHECK_CLASS_CAST(klass, gtk_spell_get_type(), GtkSpelliClass)
-#define GTK_IS_SPELL(obj)		GTK_CHECK_TYPE(obj, gtk_spell_get_type())
+#define GNOME_SPELL(obj)		GTK_CHECK_CAST(obj, gnome_spell_get_type(), GnomeSpell)
+#define GNOME_SPELL_CLASS(klass)		GTK_CHECK_CLASS_CAST(klass, gnome_spell_get_type(), GnomeSpelliClass)
+#define GNOME_IS_SPELL(obj)		GTK_CHECK_TYPE(obj, gnome_spell_get_type())
 
-typedef struct _GtkSpell GtkSpell;
-typedef struct _GtkSpellClass GtkSpellClass;
-typedef struct _GtkSpellInfo GtkSpellInfo;
+typedef struct _GnomeSpell GnomeSpell;
+typedef struct _GnomeSpellClass GnomeSpellClass;
+typedef struct _GnomeSpellInfo GnomeSpellInfo;
 
-struct _GtkSpellInfo {
+struct _GnomeSpellInfo {
 	gchar* original;
 	gchar* replacement;
 	gchar* word;
@@ -47,7 +47,7 @@ struct _GtkSpellInfo {
 	GSList * words;
 };
 
-struct _GtkSpell {
+struct _GnomeSpell {
 	GtkVBox vbox;
 
 	GSList * spellinfo;
@@ -79,28 +79,28 @@ struct _GtkSpell {
 	pid_t spell_pid;
 };
 
-struct _GtkSpellClass {
+struct _GnomeSpellClass {
 	GtkVBoxClass parent_class;
-	void (* found_word)   (GtkSpell* spell, GtkSpellInfo* sp);
-	void (* handled_word) (GtkSpell* spell, GtkSpellInfo* sp);
+	void (* found_word)   (GnomeSpell* spell, GnomeSpellInfo* sp);
+	void (* handled_word) (GnomeSpell* spell, GnomeSpellInfo* sp);
 };
 
-guint 		gtk_spell_get_type(void);
+guint 		gnome_spell_get_type(void);
 
-GtkWidget* 	gtk_spell_new(void);
+GtkWidget* 	gnome_spell_new(void);
 /* check str for mispelled words  returns 0 if words are ok */
-gint 		gtk_spell_check(GtkSpell* gtkspell, gchar* str);
+gint 		gnome_spell_check(GnomeSpell* gtkspell, gchar* str);
 /* accept word for this session only */
-void 		gtk_spell_accept(GtkSpell* gtkspell, gchar* word);
+void 		gnome_spell_accept(GnomeSpell* gtkspell, gchar* word);
 /* insert word in personal dictionary */
-void 		gtk_spell_insert(GtkSpell* gtkspell, gchar* word, gint lowercase);
+void 		gnome_spell_insert(GnomeSpell* gtkspell, gchar* word, gint lowercase);
 /* go for the next word */
-int			gtk_spell_next(GtkSpell* gtkspell);
+int			gnome_spell_next(GnomeSpell* gtkspell);
 /* kill the ispell process */
-void		gtk_spell_kill(GtkSpell* gtkspell);
+void		gnome_spell_kill(GnomeSpell* gtkspell);
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* __GTK_SPELL_H__ */
+#endif /* __GNOME_SPELL_H__ */
