@@ -790,7 +790,7 @@ static void app_set_title(GnomeMDI *mdi, GnomeApp *app) {
 
   if( (mdi->flags & (GNOME_MDI_MODAL | GNOME_MDI_TOPLEVEL)) &&
       app->contents && (child = VIEW_GET_CHILD(app->contents)) ) {
-    fullname = g_copy_strings(mdi->title, ": ", child->name, NULL);
+    fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);
     gtk_window_set_title(GTK_WINDOW(app), fullname);
     g_free(fullname);
   }
