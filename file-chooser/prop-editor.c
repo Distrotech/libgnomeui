@@ -475,7 +475,7 @@ property_widget (GObject *object, GParamSpec *spec, gboolean can_modify)
 				 adj, G_OBJECT (adj));
       
       if (can_modify)
-	connect_controller (G_OBJECT (adj), "value_changed",
+	connect_controller (G_OBJECT (adj), "value-changed",
 			    object, spec->name, (GtkSignalFunc) int_modified);
     }
   else if (type == G_TYPE_PARAM_UINT)
@@ -496,7 +496,7 @@ property_widget (GObject *object, GParamSpec *spec, gboolean can_modify)
 				 adj, G_OBJECT (adj));
       
       if (can_modify)
-	connect_controller (G_OBJECT (adj), "value_changed",
+	connect_controller (G_OBJECT (adj), "value-changed",
 			    object, spec->name, (GtkSignalFunc) uint_modified);
     }
   else if (type == G_TYPE_PARAM_FLOAT)
@@ -517,7 +517,7 @@ property_widget (GObject *object, GParamSpec *spec, gboolean can_modify)
 				 adj, G_OBJECT (adj));
       
       if (can_modify)
-	connect_controller (G_OBJECT (adj), "value_changed",
+	connect_controller (G_OBJECT (adj), "value-changed",
 			    object, spec->name, (GtkSignalFunc) float_modified);
     }
   else if (type == G_TYPE_PARAM_DOUBLE)
@@ -537,7 +537,7 @@ property_widget (GObject *object, GParamSpec *spec, gboolean can_modify)
 				 adj, G_OBJECT (adj));
       
       if (can_modify)
-	connect_controller (G_OBJECT (adj), "value_changed",
+	connect_controller (G_OBJECT (adj), "value-changed",
 			    object, spec->name, (GtkSignalFunc) double_modified);
     }
   else if (type == G_TYPE_PARAM_STRING)
@@ -685,9 +685,9 @@ properties_from_type (GObject     *object,
 
       if (G_IS_PARAM_SPEC_OVERRIDE (spec))
 	{
-	  GParamSpec *overridden = g_object_property_find_overridden (spec);
-	  if (overridden)
-	    spec = overridden;
+	  GParamSpec *redirect_target = g_object_property_get_redirect_target (spec);
+	  if (redirect_target)
+	    spec = redirect_target;
 	}
       
       prop_edit = NULL;

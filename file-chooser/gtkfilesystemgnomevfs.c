@@ -437,7 +437,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 				child->uri, child);
 
 	  uris = g_slist_prepend (NULL, child->uri);
-	  g_signal_emit_by_name (parent_folder, "files_added", uris);
+	  g_signal_emit_by_name (parent_folder, "files-added", uris);
 	  g_slist_free (uris);
 	}
     }
@@ -459,7 +459,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
       if (!found)
 	{
 	  system_vfs->roots = g_slist_prepend (system_vfs->roots, folder_vfs);
-	  g_signal_emit_by_name (system_vfs, "roots_changed");
+	  g_signal_emit_by_name (system_vfs, "roots-changed");
 	}
     }
 
@@ -864,7 +864,7 @@ gtk_file_folder_gnome_vfs_finalize (GObject *object)
 	  if (tmp_list->data == object)
 	    {
 	      system_vfs->roots = g_slist_delete_link (system_vfs->roots, tmp_list);
-	      g_signal_emit_by_name (system_vfs, "roots_changed");
+	      g_signal_emit_by_name (system_vfs, "roots-changed");
 	    }
 	}
     }
@@ -1090,7 +1090,7 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
 
   if (uris)
     {
-      g_signal_emit_by_name (folder_vfs, "files_added", uris);
+      g_signal_emit_by_name (folder_vfs, "files-added", uris);
       g_slist_free (uris);
     }
 }
@@ -1128,9 +1128,9 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
 	    
 	    uris = g_slist_prepend (NULL, (gchar *)info_uri);
 	    if (event_type == GNOME_VFS_MONITOR_EVENT_CHANGED)
-	      g_signal_emit_by_name (folder_vfs, "files_changed", uris);
+	      g_signal_emit_by_name (folder_vfs, "files-changed", uris);
 	    else
-	      g_signal_emit_by_name (folder_vfs, "files_added", uris);
+	      g_signal_emit_by_name (folder_vfs, "files-added", uris);
 	    g_slist_free (uris);
 	  }
 	else
@@ -1141,7 +1141,7 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
       g_hash_table_remove (folder_vfs->children, info_uri);
       
       uris = g_slist_prepend (NULL, (gchar *)info_uri);
-      g_signal_emit_by_name (folder_vfs, "files_removed", uris);
+      g_signal_emit_by_name (folder_vfs, "files-removed", uris);
       g_slist_free (uris);
       break;
     case GNOME_VFS_MONITOR_EVENT_STARTEXECUTING:
