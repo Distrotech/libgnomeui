@@ -859,7 +859,8 @@ gnome_selector_construct (GnomeSelector *selector,
 	priv->browse_button = gtk_button_new_with_label (_("Browse..."));
 
 	gtk_signal_connect (GTK_OBJECT (priv->browse_button),
-			    "clicked", browse_clicked_cb, selector);
+			    "clicked", GTK_SIGNAL_FUNC (browse_clicked_cb),
+			    selector);
 
 	gtk_box_pack_start (GTK_BOX (priv->hbox),
 			    priv->browse_button, FALSE, FALSE, 0);
@@ -869,7 +870,8 @@ gnome_selector_construct (GnomeSelector *selector,
 	priv->default_button = gtk_button_new_with_label (_("Default..."));
 
 	gtk_signal_connect (GTK_OBJECT (priv->default_button),
-			    "clicked", default_clicked_cb, selector);
+			    "clicked", GTK_SIGNAL_FUNC (default_clicked_cb),
+			    selector);
 
 	gtk_box_pack_start (GTK_BOX (priv->hbox),
 			    priv->default_button, FALSE, FALSE, 0);
@@ -879,7 +881,8 @@ gnome_selector_construct (GnomeSelector *selector,
 	priv->clear_button = gtk_button_new_with_label (_("Clear..."));
 
 	gtk_signal_connect (GTK_OBJECT (priv->clear_button),
-			    "clicked", clear_clicked_cb, selector);
+			    "clicked", GTK_SIGNAL_FUNC (clear_clicked_cb),
+			    selector);
 
 	gtk_box_pack_start (GTK_BOX (priv->hbox),
 			    priv->clear_button, FALSE, FALSE, 0);
