@@ -152,7 +152,7 @@ gnome_dialog_marshal_signal_2 (GtkObject	    *object,
   gint * return_val;
   
   rfunc = (GnomeDialogSignal2) func;
-  return_val = GTK_RETLOC_BOOL (args[0]);
+  return_val = GTK_RETLOC_INT (args[0]);
   
   *return_val = (* rfunc) (object,
 			   func_data);
@@ -503,7 +503,7 @@ void gnome_dialog_close_real(GnomeDialog * dialog)
 
 void gnome_dialog_close(GnomeDialog * dialog)
 {
-  gboolean close_handled = FALSE;
+  gint close_handled = FALSE;
 
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));

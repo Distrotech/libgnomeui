@@ -1,3 +1,8 @@
+Thu May 14 12:31:28 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-dialog.c (gnome_dialog_close): changed type of close_handled
+	to gint.
+
 1998-05-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c: Added dirty flag to the gnome icon list
