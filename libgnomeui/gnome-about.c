@@ -529,12 +529,12 @@ gnome_about_new (const gchar	*title,
 {
 	GnomeAbout *about;
 
-	g_return_val_if_fail (title != NULL, NULL);
-	g_return_val_if_fail (version != NULL, NULL);
-	g_return_val_if_fail (copyright != NULL, NULL);
+	if(!title) title = "";
+	if(!version) version = "";
+	if(!copyright) copyright = "";
 	g_return_val_if_fail (authors != NULL, NULL);
-	g_return_val_if_fail (comments != NULL, NULL);
-	
+	if(!comments) comments = "";
+
 	about = gtk_type_new (gnome_about_get_type ());
 
 	gnome_about_construct(about, title, version, copyright,
