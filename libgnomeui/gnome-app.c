@@ -338,7 +338,7 @@ layout_changed (GtkWidget *w, gpointer data)
 }
 
 /**
- * gnome_app_new
+ * gnome_app_new:
  * @appname: Name of program, used in file names and paths.
  * @title: Window title for application.
  *
@@ -371,7 +371,7 @@ gnome_app_new (const gchar *appname, const gchar *title)
 }
 
 /**
- * gnome_app_construct
+ * gnome_app_construct:
  * @app: A newly created #GnomeApp object.
  * @appname: Name of program, using in file names and paths.
  * @title: Window title for application.
@@ -462,7 +462,7 @@ contents_parent_set (GtkWidget *widget, GtkWidget *previous_parent, gpointer dat
 }
 
 /**
- * gnome_app_set_contents
+ * gnome_app_set_contents:
  * @app: A #GnomeApp instance.
  * @contents: Widget to be application content area.
  *
@@ -496,7 +496,7 @@ gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
 }
 
 /**
- * gnome_app_set_menus
+ * gnome_app_set_menus:
  * @app: A #GnomeApp instance.
  * @menubar: Menu bar widget for main application window.
  *
@@ -554,7 +554,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 
 
 /**
- * gnome_app_set_statusbar
+ * gnome_app_set_statusbar:
  * @app: A #GnomeApp instance
  * @statusbar: Statusbar widget for main app window
  *
@@ -585,7 +585,7 @@ gnome_app_set_statusbar (GnomeApp *app,
 }
 
 /**
- * gnome_app_set_statusbar_custom
+ * gnome_app_set_statusbar_custom:
  * @app: A #GnomeApp instance
  * @container: container widget containing the statusbar
  * @statusbar: Statusbar widget for main app window
@@ -651,7 +651,7 @@ gnome_app_add_toolbar (GnomeApp *app,
 	dock_item = bonobo_dock_item_new (name, behavior);
 	setup_notification_for_dock_item (BONOBO_DOCK_ITEM (dock_item), "/desktop/gnome/interface/toolbar_detachable");
 	
-	gtk_container_set_border_width (GTK_CONTAINER (toolbar), 1);
+	gtk_container_set_border_width (GTK_CONTAINER (toolbar), 2);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (toolbar));
 
 	if(app->layout)
@@ -682,7 +682,7 @@ gnome_app_add_toolbar (GnomeApp *app,
 }
 
 /**
- * gnome_app_set_toolbar
+ * gnome_app_set_toolbar:
  * @app: A #GnomeApp instance.
  * @toolbar: Toolbar widget for main app window.
  *
