@@ -1,5 +1,12 @@
 2003-10-20  Federico Mena Quintero  <federico@ximian.com>
 
+	* gtkfilesystem.c (gtk_file_info_free): Free the info itself.
+
+	* gtkfilechooserimpldefault.c (shortcuts_insert_path): Free the
+	GtkFileInfo.
+
+2003-10-20  Federico Mena Quintero  <federico@ximian.com>
+
 	* gtkfilesystemgnomevfs.c (folder_child_new): New utility
 	function.
 	(gtk_file_system_gnome_vfs_get_folder): Use folder_child_new().
