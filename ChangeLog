@@ -1,3 +1,8 @@
+2004-02-17  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome_segv.c: (main): Mark strings for
+	translation and add mnemonics.
+
 2004-02-16  Narayana Pattipati <narayana.pattipati@wipro.com>
 
 	* libgnomeui/libgnomeui/gnome-icon-list.c:

@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
   app_path = g_find_program_in_path (appname);
   if (app_path != NULL)
     {
-      gtk_dialog_add_button (GTK_DIALOG(mainwin), "Restart Application",
+      gtk_dialog_add_button (GTK_DIALOG(mainwin), _("_Restart Application"),
                              RESPONSE_RESTART); 
     }
 
@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
   if (bug_buddy_path != NULL)
     {
       gtk_dialog_add_button (GTK_DIALOG(mainwin),
-                            _("Inform Developers"),
+                            _("_Inform Developers"),
                             RESPONSE_BUG_BUDDY);
     }
 
@@ -174,7 +174,7 @@ int main(int argc, char *argv[])
     if (debugger_path != NULL)
       {
         gtk_dialog_add_button(GTK_DIALOG(mainwin),
-                              _("Debug"),
+                              _("_Debug"),
                               RESPONSE_DEBUG);
       }
   }
