@@ -1329,9 +1329,10 @@ gil_destroy (GtkObject *object)
 
 	gil->_priv->frozen = 1;
 	gil->_priv->dirty  = TRUE;
-	gnome_icon_list_clear (gil);
-	if(gil->_priv->icon_list)
+	if(gil->_priv->icon_list) {
+		gnome_icon_list_clear (gil);
 		g_array_free(gil->_priv->icon_list, TRUE);
+	}
 	gil->_priv->icon_list = NULL;
 
 	if (gil->_priv->timer_tag != 0) {
