@@ -25,8 +25,6 @@
   @NOTATION@
 */
 
-#define GNOME_ENABLE_DEBUG
-
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 

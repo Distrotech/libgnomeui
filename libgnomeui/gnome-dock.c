@@ -49,6 +49,15 @@
 
 
 
+struct _GnomeDockPrivate
+{
+	int dummy;
+	/* Nothing right now, needs to get filled with the private things */
+	/* XXX: When stuff is added, uncomment the allocation in the
+	 * gnome_dock_init function! */
+};
+
+
 enum {
   LAYOUT_CHANGED,
   LAST_SIGNAL
@@ -76,6 +85,7 @@ static void     gnome_dock_forall              (GtkContainer *container,
                                                 gboolean include_internals,
                                                 GtkCallback callback,
                                                 gpointer callback_data);
+static void     gnome_dock_destroy             (GtkObject *object);
 
 static void     size_request_v                 (GList *list,
                                                 GtkRequisition *requisition);
@@ -174,6 +184,8 @@ gnome_dock_class_init (GnomeDockClass *class)
 
   parent_class = gtk_type_class (gtk_container_get_type ());
 
+  object_class->destroy = gnome_dock_destroy;
+
   widget_class->size_request = gnome_dock_size_request;
   widget_class->size_allocate = gnome_dock_size_allocate;
   widget_class->map = gnome_dock_map;
@@ -200,6 +212,11 @@ static void
 gnome_dock_init (GnomeDock *dock)
 {
   GTK_WIDGET_SET_FLAGS (GTK_WIDGET (dock), GTK_NO_WINDOW);
+
+  dock->_priv = NULL;
+  /* XXX: when there is some private stuff enable this
+  dock->_priv = g_new0(GnomeDockPrivate, 1);
+  */
 
   dock->client_area = NULL;
 
@@ -756,6 +773,18 @@ gnome_dock_forall (GtkContainer *container,
 
   if (dock->client_area != NULL)
     (* callback) (dock->client_area, callback_data);
+}
+
+static void
+gnome_dock_destroy (GtkObject *object)
+{
+  GnomeDock *self = GNOME_DOCK (object);
+
+  if (GTK_OBJECT_CLASS (parent_class)->destroy)
+    (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+
+  g_free (self->_priv);
+  self->_priv = NULL;
 }
 
 

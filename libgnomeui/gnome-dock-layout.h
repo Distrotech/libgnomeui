@@ -40,9 +40,10 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DOCK_LAYOUT(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DOCK_LAYOUT))
 #define GNOME_IS_DOCK_LAYOUT_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DOCK_LAYOUT))
 
-typedef struct _GnomeDockLayoutItem GnomeDockLayoutItem;
-typedef struct _GnomeDockLayoutClass GnomeDockLayoutClass;
-typedef struct _GnomeDockLayout GnomeDockLayout;
+typedef struct _GnomeDockLayoutItem    GnomeDockLayoutItem;
+typedef struct _GnomeDockLayoutClass   GnomeDockLayoutClass;
+typedef struct _GnomeDockLayout        GnomeDockLayout;
+typedef struct _GnomeDockLayoutPrivate GnomeDockLayoutPrivate;
 
 #include "gnome-dock.h"
 #include "gnome-dock-item.h"
@@ -77,6 +78,9 @@ struct _GnomeDockLayout
   GtkObject object;
 
   GList *items;                 /* GnomeDockLayoutItem */
+
+  /*< private >*/
+  GnomeDockLayoutPrivate *_priv;
 };
 
 struct _GnomeDockLayoutClass

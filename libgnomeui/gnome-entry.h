@@ -47,16 +47,16 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ENTRY))
 
 
-typedef struct _GnomeEntry      GnomeEntry;
-typedef struct _GnomeEntryClass GnomeEntryClass;
+typedef struct _GnomeEntry        GnomeEntry;
+typedef struct _GnomeEntryPrivate GnomeEntryPrivate;
+typedef struct _GnomeEntryClass   GnomeEntryClass;
 
 struct _GnomeEntry {
 	GtkCombo combo;
 	gchar   *history_id;
-	GList   *items;
 
-	guint16    max_saved;
-	gboolean changed : 1;
+	/*< private >*/
+	GnomeEntryPrivate *_priv;
 };
 
 struct _GnomeEntryClass {
@@ -74,6 +74,7 @@ void	   gnome_entry_construct       (GnomeEntry *gentry,
 GtkWidget *gnome_entry_gtk_entry       (GnomeEntry *gentry);
 void       gnome_entry_set_history_id  (GnomeEntry *gentry, const gchar *history_id);
 void	   gnome_entry_set_max_saved   (GnomeEntry *gentry, guint max_saved);
+guint	   gnome_entry_get_max_saved   (GnomeEntry *gentry);
 
 void       gnome_entry_prepend_history (GnomeEntry *gentry, gboolean save, const gchar *text);
 void       gnome_entry_append_history  (GnomeEntry *gentry, gboolean save, const gchar *text);

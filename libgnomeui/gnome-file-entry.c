@@ -47,10 +47,21 @@
 #include "libgnomeui/gnome-preferences.h"
 #include "gnome-file-entry.h"
 
+struct _GnomeFileEntryPrivate {
+	GtkWidget *gentry;
+
+	gboolean is_modal : 1;
+
+	gboolean directory_entry : 1; /*optional flag to only do directories*/
+	/* TODO: executable_entry as used in gnome_run */
+	/* TODO: multiple_entry for entering multiple filenames */
+};
+
+
 
 static void gnome_file_entry_class_init (GnomeFileEntryClass *class);
 static void gnome_file_entry_init       (GnomeFileEntry      *fentry);
-static void gnome_file_entry_finalize   (GtkObject           *object);
+static void gnome_file_entry_destroy    (GtkObject           *object);
 static void gnome_file_entry_drag_data_received (GtkWidget        *widget,
 						 GdkDragContext   *context,
 						 gint              x,
@@ -161,7 +172,7 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 				GTK_ARG_READABLE,
 				ARG_GTK_ENTRY);
 
-	object_class->finalize = gnome_file_entry_finalize;
+	object_class->destroy = gnome_file_entry_destroy;
 	object_class->get_arg = fentry_get_arg;
 	object_class->set_arg = fentry_set_arg;
 
@@ -221,10 +232,10 @@ fentry_get_arg (GtkObject *object,
 			gnome_file_entry_gnome_entry(self);
 		break;
 	case ARG_DIRECTORY_ENTRY:
-		GTK_VALUE_BOOL(*arg) = self->directory_entry;
+		GTK_VALUE_BOOL(*arg) = self->_priv->directory_entry;
 		break;
 	case ARG_MODAL:
-		GTK_VALUE_BOOL(*arg) = self->is_modal;
+		GTK_VALUE_BOOL(*arg) = self->_priv->is_modal;
 		break;
 	case ARG_FILENAME:
 		GTK_VALUE_POINTER(*arg) =
@@ -281,7 +292,7 @@ browse_clicked(GnomeFileEntry *fentry)
 			gdk_window_raise(fentry->fsw->window);
 		fs = GTK_FILE_SELECTION(fentry->fsw);
 		gtk_widget_set_sensitive(fs->file_list,
-					 !fentry->directory_entry);
+					 ! fentry->_priv->directory_entry);
 		p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 		if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
 			p = g_concat_dir_and_file (fentry->default_path, p);
@@ -331,7 +342,7 @@ browse_clicked(GnomeFileEntry *fentry)
 
 	fs = GTK_FILE_SELECTION (fsw);
 	gtk_widget_set_sensitive(fs->file_list,
-				 !fentry->directory_entry);
+				 ! fentry->_priv->directory_entry);
 
 	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 	if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
@@ -356,7 +367,7 @@ browse_clicked(GnomeFileEntry *fentry)
 
 	gtk_widget_show (fsw);
 
-	if(fentry->is_modal)
+	if(fentry->_priv->is_modal)
 		gtk_window_set_modal (GTK_WINDOW (fsw), TRUE);
 	fentry->fsw = fsw;
 }
@@ -401,14 +412,16 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 	GtkWidget *button, *the_gtk_entry;
 	static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
+	fentry->_priv = g_new0(GnomeFileEntryPrivate, 1);
+
 	fentry->browse_dialog_title = NULL;
 	fentry->default_path = NULL;
-	fentry->is_modal = FALSE;
-	fentry->directory_entry = FALSE;
+	fentry->_priv->is_modal = FALSE;
+	fentry->_priv->directory_entry = FALSE;
 
 	gtk_box_set_spacing (GTK_BOX (fentry), 4);
 
-	fentry->gentry = gnome_entry_new (NULL);
+	fentry->_priv->gentry = gnome_entry_new (NULL);
 	the_gtk_entry = gnome_file_entry_gtk_entry (fentry);
 
 	gtk_drag_dest_set (GTK_WIDGET (the_gtk_entry),
@@ -421,8 +434,8 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 			    GTK_SIGNAL_FUNC (gnome_file_entry_drag_data_received),
 			    NULL);
 
-	gtk_box_pack_start (GTK_BOX (fentry), fentry->gentry, TRUE, TRUE, 0);
-	gtk_widget_show (fentry->gentry);
+	gtk_box_pack_start (GTK_BOX (fentry), fentry->_priv->gentry, TRUE, TRUE, 0);
+	gtk_widget_show (fentry->_priv->gentry);
 
 	button = gtk_button_new_with_label (_("Browse..."));
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
@@ -433,7 +446,7 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 }
 
 static void
-gnome_file_entry_finalize (GtkObject *object)
+gnome_file_entry_destroy (GtkObject *object)
 {
 	GnomeFileEntry *fentry;
 
@@ -442,14 +455,21 @@ gnome_file_entry_finalize (GtkObject *object)
 
 	fentry = GNOME_FILE_ENTRY (object);
 
-	if (fentry->browse_dialog_title)
-		g_free (fentry->browse_dialog_title);
-	if (fentry->default_path)
-		g_free (fentry->default_path);
+	g_free (fentry->browse_dialog_title);
+	fentry->browse_dialog_title = NULL;
+
+	g_free (fentry->default_path);
+	fentry->default_path = NULL;
+
 	if (fentry->fsw)
 		gtk_widget_destroy(fentry->fsw);
+	fentry->fsw = NULL;
 
-	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
+	if(GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+
+	g_free(fentry->_priv);
+	fentry->_priv = NULL;
 }
 
 /**
@@ -466,7 +486,7 @@ gnome_file_entry_construct (GnomeFileEntry *fentry, const char *history_id, cons
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
-	gnome_entry_construct (GNOME_ENTRY (fentry->gentry),
+	gnome_entry_construct (GNOME_ENTRY (fentry->_priv->gentry),
 			       history_id);
 
 	gnome_file_entry_set_title (fentry, browse_dialog_title);
@@ -507,7 +527,7 @@ gnome_file_entry_gnome_entry (GnomeFileEntry *fentry)
 	g_return_val_if_fail (fentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
 
-	return fentry->gentry;
+	return fentry->_priv->gentry;
 }
 
 /**
@@ -525,7 +545,7 @@ gnome_file_entry_gtk_entry (GnomeFileEntry *fentry)
 	g_return_val_if_fail (fentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
 
-	return gnome_entry_gtk_entry (GNOME_ENTRY (fentry->gentry));
+	return gnome_entry_gtk_entry (GNOME_ENTRY (fentry->_priv->gentry));
 }
 
 /**
@@ -678,7 +698,7 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 		if (!p)
 			return NULL;
 
-		if (fentry->directory_entry) {
+		if (fentry->_priv->directory_entry) {
 			char *d;
 
 			if (g_file_test (p, G_FILE_TEST_ISDIR))
@@ -734,11 +754,29 @@ gnome_file_entry_set_modal(GnomeFileEntry *fentry, gboolean is_modal)
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
-	fentry->is_modal = is_modal;
+	fentry->_priv->is_modal = is_modal;
 }
 
 /**
- * gnome_file_entry_set_directory:
+ * gnome_file_entry_get_modal:
+ * @fentry: The GnomeFileEntry widget to work with.
+ *
+ * Description:  This function gets the boolean which specifies if
+ * the browsing dialog is modal or not
+ *
+ * Returns:  A boolean.
+ **/
+gboolean
+gnome_file_entry_get_modal(GnomeFileEntry *fentry)
+{
+	g_return_val_if_fail (fentry != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), FALSE);
+
+	return fentry->_priv->is_modal;
+}
+
+/**
+ * gnome_file_entry_set_directory_entry:
  * @fentry: The GnomeFileEntry widget to work with.
  * @directory_entry: boolean
  *
@@ -750,10 +788,47 @@ gnome_file_entry_set_modal(GnomeFileEntry *fentry, gboolean is_modal)
  * Returns:
  **/
 void
-gnome_file_entry_set_directory(GnomeFileEntry *fentry, gboolean directory_entry)
+gnome_file_entry_set_directory_entry(GnomeFileEntry *fentry, gboolean directory_entry)
 {
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
-	fentry->directory_entry = directory_entry?TRUE:FALSE;
+	fentry->_priv->directory_entry = directory_entry ? TRUE : FALSE;
+}
+
+
+/**
+ * gnome_file_entry_get_directory_entry:
+ * @fentry: The GnomeFileEntry widget to work with.
+ * @directory_entry: boolean
+ *
+ * Description: Gets whether this is a directory only entry.
+ * See also #gnome_file_entry_set_directory_entry.
+ *
+ * Returns:  A boolean.
+ **/
+gboolean
+gnome_file_entry_get_directory_entry(GnomeFileEntry *fentry)
+{
+	g_return_val_if_fail (fentry != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), FALSE);
+
+	return fentry->_priv->directory_entry;
+}
+
+/**
+ * gnome_file_entry_set_directory:
+ * @fentry: The GnomeFileEntry widget to work with.
+ * @directory_entry: boolean
+ *
+ * Description:  Deprecated, use #gnome_file_entry_set_directory_entry
+ *
+ * Returns:
+ **/
+void
+gnome_file_entry_set_directory(GnomeFileEntry *fentry, gboolean directory_entry)
+{
+	g_warning("gnome_file_entry_set_directory is deprecated, "
+		  "please use gnome_file_entry_set_directory_entry");
+	gnome_file_entry_set_directory_entry(fentry, directory_entry);
 }

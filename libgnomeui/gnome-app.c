@@ -58,6 +58,15 @@
 
 #define LAYOUT_CONFIG_PATH      "Placement/Dock"
 
+struct _GnomeAppPrivate
+{
+	int dummy;
+	/* Nothing right now, needs to get filled with the private things */
+	/* XXX: When stuff is added, uncomment the allocation in the
+	 * gnome_app_init function! */
+};
+
+
 static void gnome_app_class_init (GnomeAppClass *class);
 static void gnome_app_init       (GnomeApp      *app);
 static void gnome_app_destroy    (GtkObject     *object);
@@ -187,6 +196,11 @@ static void
 gnome_app_init (GnomeApp *app)
 {
 	const char *str = NULL;
+
+	app->_priv = NULL;
+	/* XXX: when there is some private stuff enable this
+	app->_priv = g_new0(GnomeAppPrivate, 1);
+	*/
 
 	app->accel_group = gtk_accel_group_new ();
 	gtk_window_add_accel_group (GTK_WINDOW (app), app->accel_group);
@@ -329,6 +343,10 @@ gnome_app_destroy (GtkObject *object)
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+
+	/* Free private data */
+	g_free(app->_priv);
+	app->_priv = NULL;
 }
 
 /* Callback for an app's contents' parent_set signal.  We set the app->contents

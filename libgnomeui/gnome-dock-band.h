@@ -40,6 +40,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DOCK_BAND_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DOCK_BAND))
 
 typedef struct _GnomeDockBand GnomeDockBand;
+typedef struct _GnomeDockBandPrivate GnomeDockBandPrivate;
 typedef struct _GnomeDockBandClass GnomeDockBandClass;
 typedef struct _GnomeDockBandChild GnomeDockBandChild;
 
@@ -69,6 +70,9 @@ struct _GnomeDockBand
   guint new_for_drag : 1;
   gboolean doing_drag : 1;
   GtkOrientation orientation : 1;
+
+  /*< private >*/
+  GnomeDockBandPrivate *_priv;
 };
 
 struct _GnomeDockBandClass

@@ -57,8 +57,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_APP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_APP))
 
 
-typedef struct _GnomeApp       GnomeApp;
-typedef struct _GnomeAppClass  GnomeAppClass;
+typedef struct _GnomeApp        GnomeApp;
+typedef struct _GnomeAppPrivate GnomeAppPrivate;
+typedef struct _GnomeAppClass   GnomeAppClass;
 
 struct _GnomeApp {
 	GtkWindow parent_object;
@@ -94,6 +95,9 @@ struct _GnomeApp {
 	/* If TRUE, the application uses gnome-config to retrieve and
            save the docking configuration automagically.  */
 	gboolean enable_layout_config : 1;
+
+	/*< private >*/
+	GnomeAppPrivate *_priv;
 };
 
 struct _GnomeAppClass {

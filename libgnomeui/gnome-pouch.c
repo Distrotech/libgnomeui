@@ -21,8 +21,6 @@
    Author: Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
 */
 
-#define GNOME_ENABLE_DEBUG
-
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 

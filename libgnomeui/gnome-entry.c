@@ -39,8 +39,18 @@
 #include "libgnome/libgnomeP.h"
 #include "gnome-entry.h"
 
+/*FIXME: Add GtkArg stuff */
+
 
 #define DEFAULT_MAX_HISTORY_SAVED 10  /* This seems to make more sense then 60*/
+
+struct _GnomeEntryPrivate {
+	GList     *items;
+
+	guint16    max_saved;
+	guint32    changed : 1;
+};
+	
 
 
 struct item {
@@ -97,7 +107,7 @@ entry_changed (GtkWidget *widget, gpointer data)
 	GnomeEntry *gentry;
 
 	gentry = data;
-	gentry->changed = TRUE;
+	gentry->_priv->changed = TRUE;
 }
 
 static void
@@ -110,8 +120,8 @@ entry_activated (GtkWidget *widget, gpointer data)
 
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 
-	if (!gentry->changed || (strcmp (text, "") == 0)) {
-		gentry->changed = FALSE;
+	if (!gentry->_priv->changed || (strcmp (text, "") == 0)) {
+		gentry->_priv->changed = FALSE;
 		return;
 	}
 
@@ -121,10 +131,12 @@ entry_activated (GtkWidget *widget, gpointer data)
 static void
 gnome_entry_init (GnomeEntry *gentry)
 {
-	gentry->changed    = FALSE;
+	gentry->_priv = g_new0(GnomeEntryPrivate, 1);
+
+	gentry->_priv->changed    = FALSE;
 	gentry->history_id = NULL;
-	gentry->items      = NULL;
-	gentry->max_saved  = DEFAULT_MAX_HISTORY_SAVED;
+	gentry->_priv->items      = NULL;
+	gentry->_priv->max_saved  = DEFAULT_MAX_HISTORY_SAVED;
 
 	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (gentry)), "changed",
 			    (GtkSignalFunc) entry_changed,
@@ -194,9 +206,9 @@ free_item (gpointer data, gpointer user_data)
 static void
 free_items (GnomeEntry *gentry)
 {
-	g_list_foreach (gentry->items, free_item, NULL);
-	g_list_free (gentry->items);
-	gentry->items = NULL;
+	g_list_foreach (gentry->_priv->items, free_item, NULL);
+	g_list_free (gentry->_priv->items);
+	gentry->_priv->items = NULL;
 }
 
 static void
@@ -214,25 +226,28 @@ gnome_entry_destroy (GtkObject *object)
 	entry = gnome_entry_gtk_entry (gentry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 
-	if (gentry->changed && (strcmp (text, "") != 0)) {
+	if (gentry->_priv->changed && (strcmp (text, "") != 0)) {
 		struct item *item;
 		
 		item = g_new (struct item, 1);
 		item->save = 1;
 		item->text = g_strdup (text);
 		
-		gentry->items = g_list_prepend (gentry->items, item);
+		gentry->_priv->items = g_list_prepend (gentry->_priv->items, item);
 	}
 
 	gnome_entry_save_history (gentry);
 
-	if (gentry->history_id)
-		g_free (gentry->history_id);
+	g_free (gentry->history_id);
+	gentry->history_id = NULL;
 
 	free_items (gentry);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+
+	g_free(gentry->_priv);
+	gentry->_priv = NULL;
 }
 
 
@@ -296,7 +311,26 @@ gnome_entry_set_max_saved (GnomeEntry *gentry, guint max_saved)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	gentry->max_saved = max_saved;
+	gentry->_priv->max_saved = max_saved;
+}
+
+/**
+ * gnome_entry_get_max_saved
+ * @gentry: Pointer to GnomeEntry object.
+ *
+ * Description: Get internal limit on number of history items saved
+ * to the config file, when #gnome_entry_save_history() is called.
+ * See #gnome_entry_set_max_saved().
+ *
+ * Returns: An unsigned integer
+ */
+guint
+gnome_entry_get_max_saved (GnomeEntry *gentry)
+{
+	g_return_val_if_fail (gentry != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), 0);
+
+	return gentry->_priv->max_saved;
 }
 
 
@@ -332,7 +366,7 @@ gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
 	item->save = save;
 	item->text = g_strdup (text);
 
-	gentry->items = g_list_prepend (gentry->items, item);
+	gentry->_priv->items = g_list_prepend (gentry->_priv->items, item);
 
 	li = gtk_list_item_new_with_label (text);
 	gtk_widget_show (li);
@@ -349,7 +383,7 @@ gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
 
 	/* gtk_entry_set_text runs our 'entry_changed' routine, so we have
 	   to undo the effect */
-	gentry->changed = FALSE;
+	gentry->_priv->changed = FALSE;
 }
 
 
@@ -422,7 +456,7 @@ set_combo_items (GnomeEntry *gentry)
 
 	gitems = NULL;
 
-	for (items = gentry->items; items; items = items->next) {
+	for (items = gentry->_priv->items; items; items = items->next) {
 		item = items->data;
 
 		li = gtk_list_item_new_with_label (item->text);
@@ -436,7 +470,7 @@ set_combo_items (GnomeEntry *gentry)
 	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
 	g_free (tmp);
 
-	gentry->changed = FALSE;
+	gentry->_priv->changed = FALSE;
 }
 
 
@@ -481,7 +515,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 		item->save = TRUE;
 		item->text = value;
 
-		gentry->items = g_list_append (gentry->items, item);
+		gentry->_priv->items = g_list_append (gentry->_priv->items, item);
 	}
 
 	set_combo_items (gentry);
@@ -560,7 +594,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	gnome_config_push_prefix (prefix);
 	g_free (prefix);
 
-	for (n = 0, items = gentry->items; items && n < gentry->max_saved; items = items->next, n++) {
+	for (n = 0, items = gentry->_priv->items; items && n < gentry->_priv->max_saved; items = items->next, n++) {
 		item = items->data;
 
 		final_items [n] = NULL;

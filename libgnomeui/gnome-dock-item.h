@@ -59,8 +59,9 @@ typedef enum
 #define GNOME_DOCK_ITEM_NOT_LOCKED(x) (! (GNOME_DOCK_ITEM(x)->behavior \
                                           & GNOME_DOCK_ITEM_BEH_LOCKED))
 
-typedef struct _GnomeDockItem       GnomeDockItem;
-typedef struct _GnomeDockItemClass  GnomeDockItemClass;
+typedef struct _GnomeDockItem        GnomeDockItem;
+typedef struct _GnomeDockItemPrivate GnomeDockItemPrivate;
+typedef struct _GnomeDockItemClass   GnomeDockItemClass;
 
 struct _GnomeDockItem
 {
@@ -86,6 +87,9 @@ struct _GnomeDockItem
   guint                 in_drag : 1;
   /* If TRUE, the pointer must be grabbed on "map_event".  */
   guint                 grab_on_map_event : 1;
+
+  /*< private >*/
+  GnomeDockItemPrivate *_priv;
 };
 
 struct _GnomeDockItemClass

@@ -50,6 +50,7 @@ typedef enum
 } GnomeDockPlacement;
 
 typedef struct _GnomeDock GnomeDock;
+typedef struct _GnomeDockPrivate GnomeDockPrivate;
 typedef struct _GnomeDockClass GnomeDockClass;
 
 #include "gnome-dock-band.h"
@@ -74,6 +75,9 @@ struct _GnomeDock
   GtkAllocation client_rect;
 
   gboolean floating_items_allowed : 1;
+
+  /*< private >*/
+  GnomeDockPrivate *_priv;
 };
 
 struct _GnomeDockClass

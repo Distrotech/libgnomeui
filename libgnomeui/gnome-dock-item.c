@@ -33,6 +33,15 @@
 #include "gnome-dock-item.h"
 #include "gnome-cursors.h"
 
+struct _GnomeDockItemPrivate
+{
+	int dummy;
+	/* Nothing right now, needs to get filled with the private things */
+	/* XXX: When stuff is added, uncomment the allocation in the
+	 * gnome_dock_item_init function! */
+};
+
+
 enum {
   ARG_0,
   ARG_SHADOW,
@@ -209,6 +218,11 @@ gnome_dock_item_init (GnomeDockItem *dock_item)
 {
   GTK_WIDGET_UNSET_FLAGS (dock_item, GTK_NO_WINDOW);
 
+  dock_item->_priv = NULL;
+  /* XXX: when there is some private stuff enable this
+  dock_item->_priv = g_new0(GnomeDockItemPrivate, 1);
+  */
+
   dock_item->bin_window = NULL;
   dock_item->float_window = NULL;
   dock_item->shadow_type = GTK_SHADOW_OUT;
@@ -282,9 +296,14 @@ gnome_dock_item_destroy (GtkObject *object)
 
   di = GNOME_DOCK_ITEM (object);
   g_free (di->name);
+  di->name = NULL;
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+
+  /* Free the private structure */
+  g_free (di->_priv);
+  di->_priv = NULL;
 }
 
 static void

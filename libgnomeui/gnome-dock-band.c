@@ -46,6 +46,16 @@
 
 
 
+struct _GnomeDockBandPrivate
+{
+	int dummy;
+	/* Nothing right now, needs to get filled with the private things */
+	/* XXX: When stuff is added, uncomment the allocation in the
+	 * gnome_dock_band_init function! */
+};
+
+
+
 static void     gnome_dock_band_class_init    (GnomeDockBandClass *class);
 
 static void     gnome_dock_band_init          (GnomeDockBand *app);
@@ -75,6 +85,8 @@ static void     gnome_dock_band_forall        (GtkContainer *container,
                                                gboolean include_internals,
                                                GtkCallback callback,
                                                gpointer callback_data);
+
+static void     gnome_dock_band_destroy       (GtkObject *object);
 
 static void     size_allocate_child           (GnomeDockBand *band,
                                                GnomeDockBandChild *child,
@@ -149,7 +161,7 @@ gnome_dock_band_class_init (GnomeDockBandClass *class)
 
   parent_class = gtk_type_class (gtk_container_get_type ());
 
-  /* object_class->destroy = destroy; */
+  object_class->destroy = gnome_dock_band_destroy;
 
   widget_class->map = gnome_dock_band_map;
   widget_class->unmap = gnome_dock_band_unmap;
@@ -167,6 +179,11 @@ static void
 gnome_dock_band_init (GnomeDockBand *band)
 {
   GTK_WIDGET_SET_FLAGS (band, GTK_NO_WINDOW);
+
+  band->_priv = NULL;
+  /* XXX: when there is some private stuff enable this
+  band->_priv = g_new0(GnomeDockBandPrivate, 1);
+  */
 
   band->orientation = GTK_ORIENTATION_HORIZONTAL;
 
@@ -687,6 +704,18 @@ gnome_dock_band_forall (GtkContainer *container,
       children = children->next;
       (* callback) (child->widget, callback_data);
     }
+}
+
+static void
+gnome_dock_band_destroy (GtkObject *object)
+{
+  GnomeDockBand *self = GNOME_DOCK_BAND (object);
+
+  if (GTK_OBJECT_CLASS (parent_class)->destroy)
+    (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+
+  g_free (self->_priv);
+  self->_priv = NULL;
 }
 
 

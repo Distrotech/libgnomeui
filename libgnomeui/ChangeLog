@@ -1,3 +1,26 @@
+Sun Jun 25 17:00:17 2000  George Lebl <jirka@5z.com>
+
+	* gnome-app.[ch], gnome-dock*.[ch]:  Add a private pointer even
+	  though nothing is private yet, this should be done.
+
+	* gnome-dock-layout.c:  In the destroy handler, call the parent
+	  destroy handler for the object.
+
+	* gnome-entry.[ch]:  Move private data into a private structure,
+	  also add an accessor for the max_saved integer
+
+	* gnome-file-entry.[ch]:  Move private data into a private
+	  structure, also add an accessor for the is_modal and
+	  directory_entry bools.  Rename _set_directory to
+	  _set_directory_entry to avoid confusion, but keep the old
+	  method for compatibility.  Change finalize into destroy
+	  and NULL freed data.
+
+	* gnome-gconf.c (gnome_gconf_gtk_range_set) fix warning
+
+	* gnome-mdi.c, gnome-pouch.c, gnome-roo.c:  Don't define
+	  GNOME_ENABLE_DEBUG by hand here.  This is done in configure.
+
 Tue Jun 20 14:11:17 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dock*.[ch]: remove the dock hiding patch as it seems to not

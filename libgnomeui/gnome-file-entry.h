@@ -47,8 +47,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_FILE_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FILE_ENTRY))
 
 
-typedef struct _GnomeFileEntry      GnomeFileEntry;
-typedef struct _GnomeFileEntryClass GnomeFileEntryClass;
+typedef struct _GnomeFileEntry        GnomeFileEntry;
+typedef struct _GnomeFileEntryPrivate GnomeFileEntryPrivate;
+typedef struct _GnomeFileEntryClass   GnomeFileEntryClass;
 
 struct _GnomeFileEntry {
 	GtkHBox hbox;
@@ -59,11 +60,8 @@ struct _GnomeFileEntry {
 	/*the file dialog widget*/
 	GtkWidget *fsw;
 
-	GtkWidget *gentry;
-
-	gboolean is_modal : 1;
-
-	gboolean directory_entry : 1; /*optional flag to only do directories*/
+	/*< private >*/
+	GnomeFileEntryPrivate *_priv;
 };
 
 struct _GnomeFileEntryClass {
@@ -94,8 +92,9 @@ void	   gnome_file_entry_set_default_path(GnomeFileEntry *fentry,
 					     const char *path);
 
 /*sets up the file entry to be a directory picker rather then a file picker*/
-void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
-					  gboolean directory_entry);
+void	   gnome_file_entry_set_directory_entry(GnomeFileEntry *fentry,
+						gboolean directory_entry);
+gboolean   gnome_file_entry_get_directory_entry(GnomeFileEntry *fentry);
 
 /*returns a filename which is a full path with WD or the default
   directory prepended if it's not an absolute path, returns
@@ -113,6 +112,11 @@ void       gnome_file_entry_set_filename(GnomeFileEntry *fentry,
   next time a dialog is created*/
 void       gnome_file_entry_set_modal	(GnomeFileEntry *fentry,
 					 gboolean is_modal);
+gboolean   gnome_file_entry_get_modal	(GnomeFileEntry *fentry);
+
+/* DEPRECATED, use gnome_file_entry_set_directory_entry */
+void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
+					  gboolean directory_entry);
 
 END_GNOME_DECLS
 

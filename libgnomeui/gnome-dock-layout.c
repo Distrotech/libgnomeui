@@ -32,6 +32,15 @@
 
 /* TODO: handle incorrect GNOME_DOCK_ITEM_BEH_EXCLUSIVE situations.  */
 
+struct _GnomeDockLayoutPrivate
+{
+	int dummy;
+	/* Nothing right now, needs to get filled with the private things */
+	/* XXX: When stuff is added, uncomment the allocation in the
+	 * gnome_dock_layout_init function! */
+};
+
+
 static GtkObjectClass *parent_class = NULL;
 
 
@@ -74,6 +83,10 @@ gnome_dock_layout_class_init (GnomeDockLayoutClass  *class)
 static void
 gnome_dock_layout_init (GnomeDockLayout *layout)
 {
+  layout->_priv = NULL;
+  /* XXX: when there is some private stuff enable this
+  layout->_priv = g_new0(GnomeDockLayoutPrivate, 1);
+  */
   layout->items = NULL;
 }
 
@@ -86,6 +99,13 @@ gnome_dock_layout_destroy (GtkObject *object)
 
   while (layout->items)
     remove_item (layout, layout->items);
+
+  if (GTK_OBJECT_CLASS (parent_class)->destroy)
+    (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+  
+  /* Free the private structure */
+  g_free (layout->_priv);
+  layout->_priv = NULL;
 }
 
 
