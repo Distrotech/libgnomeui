@@ -541,7 +541,7 @@ dist_to_mask (GnomeCanvasImage *image, int cx, int cy)
 				tx = x + dest.x - cx;
 				ty = y + dest.y - cy;
 
-				dist = hypot(tx, ty);
+				dist = sqrt (tx * tx + ty * ty);
 				if (dist < best)
 					best = dist;
 			}
@@ -595,7 +595,7 @@ gnome_canvas_image_point (GnomeCanvasItem *item, double x, double y,
 	else
 		dy = 0;
 
-	return hypot(dx, dy) / item->canvas->pixels_per_unit;
+	return sqrt (dx * dx + dy * dy) / item->canvas->pixels_per_unit;
 }
 
 static void

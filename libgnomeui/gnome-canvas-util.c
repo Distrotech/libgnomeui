@@ -195,7 +195,7 @@ gnome_canvas_get_butt_points (double x1, double y1, double x2, double y2,
 	width *= 0.5;
 	dx = x2 - x1;
 	dy = y2 - y1;
-	length = hypot(dx, dy);
+	length = sqrt (dx * dx + dy * dy);
 
 	if (length < GNOME_CANVAS_EPSILON) {
 		*bx1 = *bx2 = x2;
@@ -334,7 +334,7 @@ gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y)
 
 		dx = x - px;
 		dy = y - py;
-		dist = hypot(dx, dy);
+		dist = sqrt (dx * dx + dy * dy);
 		if (dist < best)
 			best = dist;
 	}
