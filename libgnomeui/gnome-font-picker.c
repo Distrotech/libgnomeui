@@ -30,7 +30,7 @@
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-stock.h>
 #include "gnome-font-picker.h"
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 
 #include <string.h>
 #include <stdio.h>

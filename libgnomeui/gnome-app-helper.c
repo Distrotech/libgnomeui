@@ -53,7 +53,7 @@
  * bogus; we should just call gettext() directly here.
  */
 
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"

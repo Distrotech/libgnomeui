@@ -31,7 +31,7 @@
 #include "gnome-dialog-util.h"
 #include "gnome-cursors.h"
 
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 
 struct _GnomeHRefPrivate {
 	gchar *url;

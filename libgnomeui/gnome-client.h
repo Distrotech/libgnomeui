@@ -30,7 +30,7 @@
 #include <sys/types.h>
 #include <gtk/gtkobject.h>
 
-#include <libgnomebase/gnome-program.h>
+#include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-dialog.h>
 
 G_BEGIN_DECLS

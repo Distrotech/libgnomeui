@@ -31,7 +31,7 @@
 
 
 #include <libgnome/gnome-config.h>
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 #include "gnome-app.h"
 #include "gnome-app-helper.h"

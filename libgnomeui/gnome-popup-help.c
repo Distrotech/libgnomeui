@@ -32,7 +32,7 @@
 #include <gtk/gtkeditable.h>
 #include <gtk/gtkentry.h>
 
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-stock.h"

@@ -26,7 +26,7 @@
 #include "gnome-druid.h"
 #include "gnome-stock.h"
 #include "gnome-uidefs.h"
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 
 struct _GnomeDruidPrivate
 {

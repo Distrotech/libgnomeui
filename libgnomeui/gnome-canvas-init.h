@@ -26,7 +26,7 @@
 #ifndef GNOME_CANVAS_INIT_H
 #define GNOME_CANVAS_INIT_H
 
-#include <libgnomebase/gnome-program.h>
+#include <libgnome/gnome-program.h>
 
 G_BEGIN_DECLS
 

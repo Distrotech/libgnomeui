@@ -22,7 +22,7 @@
 #include <config.h>
 
 #include <libgnome/gnome-util.h>
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-config.h>
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"

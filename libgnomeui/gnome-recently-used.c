@@ -29,13 +29,13 @@
 #include <sys/time.h>
 #include <stdlib.h>
 
-#include <libgnomebase/gnome-program.h>
+#include <libgnome/gnome-program.h>
 
 #include <gtk/gtk.h>
 
 #include <string.h>
 #include <errno.h>
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 
 /* The default maximum number of documents */
 #define DEFAULT_MAX 30

@@ -32,7 +32,7 @@
 
 #include "gnome-dock-item.h"
 #include "gnome-cursors.h"
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 #include "gnome-macros.h"
 
 struct _GnomeDockItemPrivate

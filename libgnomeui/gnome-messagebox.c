@@ -26,7 +26,7 @@
 
 #include <libgnome/gnome-triggers.h>
 #include <libgnome/gnome-util.h>
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-stock.h>

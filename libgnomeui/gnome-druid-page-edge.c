@@ -30,7 +30,7 @@
 #include <libgnomecanvas/gnome-canvas-text.h>
 #include "gnome-druid.h"
 #include "gnome-uidefs.h"
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 
 #include "gnome-druid-page-edge.h"
 

@@ -43,9 +43,9 @@
 
 #include <string.h>
 #include <gtk/gtk.h>
-#include <libgnomebase/gnome-program.h>
+#include <libgnome/gnome-program.h>
 
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
 #include "gnome-uidefs.h"

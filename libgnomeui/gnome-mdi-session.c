@@ -27,7 +27,7 @@
 #include <config.h>
 #include <stdio.h>
 
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 
 #include <libgnome/gnome-config.h>
 
