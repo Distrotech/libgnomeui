@@ -58,6 +58,14 @@ static GtkVBoxClass *parent_class;
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
+enum {
+	CHANGED_SIGNAL,
+	LAST_SIGNAL
+};
+
+static gint gnome_ientry_signals[LAST_SIGNAL] = {0};
+
+
 guint
 gnome_icon_entry_get_type (void)
 {
@@ -84,7 +92,20 @@ gnome_icon_entry_get_type (void)
 static void
 gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {
+	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
+
+	gnome_ientry_signals[CHANGED_SIGNAL] =
+		gtk_signal_new("changed",
+			       GTK_RUN_LAST,
+			       object_class->type,
+			       GTK_SIGNAL_OFFSET(GnomeIconEntryClass,
+			       			 changed),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE, 0);
+	gtk_object_class_add_signals (object_class, gnome_ientry_signals,
+				      LAST_SIGNAL);
+	class->changed = NULL;
 }
 
 static void
@@ -314,6 +335,9 @@ icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 		gtk_entry_set_text(GTK_ENTRY(e),icon);
 		entry_changed (NULL, ientry);
 	}
+
+	gtk_signal_emit(GTK_OBJECT(ientry),
+			gnome_calculator_signals[CHANGED_SIGNAL]);
 }
 
 static void
@@ -352,6 +376,9 @@ gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEnt
 		entry_changed (NULL, ientry);
 		gtk_widget_hide(ientry->pick_dialog);
 	}
+
+	gtk_signal_emit(GTK_OBJECT(ientry),
+			gnome_calculator_signals[CHANGED_SIGNAL]);
 }
 
 static void
@@ -640,6 +667,7 @@ gnome_icon_entry_new (const gchar *history_id, const gchar *browse_dialog_title)
  * @ientry: the GnomeIconEntry to work with
  *
  * Description: Get the GnomeFileEntry widget that's part of the entry
+ * DEPRECATED! Use the "changed" signal for getting changes
  *
  * Returns: Returns GnomeFileEntry widget
  **/
@@ -657,6 +685,7 @@ gnome_icon_entry_gnome_file_entry (GnomeIconEntry *ientry)
  * @ientry: the GnomeIconEntry to work with
  *
  * Description: Get the GnomeEntry widget that's part of the entry
+ * DEPRECATED! Use the "changed" signal for getting changes
  *
  * Returns: Returns GnomeEntry widget
  **/
@@ -673,7 +702,8 @@ gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry)
  * gnome_icon_entry_gtk_entry:
  * @ientry: the GnomeIconEntry to work with
  *
- * Description: Get the GtkEntry widget that's part of the entry
+ * Description: Get the GtkEntry widget that's part of the entry.
+ * DEPRECATED! Use the "changed" signal for getting changes
  *
  * Returns: Returns GtkEntry widget
  **/
@@ -736,6 +766,8 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 	gtk_entry_set_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (ientry)),
 			    filename);
 	entry_changed (NULL, ientry);
+	gtk_signal_emit(GTK_OBJECT(ientry),
+			gnome_calculator_signals[CHANGED_SIGNAL]);
 }
 
 /**

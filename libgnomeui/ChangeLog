@@ -1,3 +1,12 @@
+Thu Nov 11 00:08:14 1999  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: support more then 2 accelerators per key
+	  and use ',' for decimal point
+
+	* gnome-icon-entry.c: added a changed signal, I couldn't actually
+	  compile and test this but the change is so minial it should
+	  just work
+
 1999-11-09  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-color-picker.c (render): gdk_pixmapified.

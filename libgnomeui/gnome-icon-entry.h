@@ -43,6 +43,8 @@ struct _GnomeIconEntry {
 
 struct _GnomeIconEntryClass {
 	GtkVBoxClass parent_class;
+
+	void (*changed) (GnomeIconEntry *ientry);
 };
 
 
