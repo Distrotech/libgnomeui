@@ -69,13 +69,13 @@ libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS) 
 
 ted_demo_LDADD =	\
-	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	$(top_builddir)/libgnome/libgnome.la 		\
 	$(LIBGNOMEUI_LIBS) $(INTLLIBS)
 
 stock_demo_LDADD =	\
-	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	$(top_builddir)/libgnome/libgnome.la 		\
 	$(LIBGNOMEUI_LIBS) $(INTLLIBS)
 
 dist-hook:
