@@ -25,7 +25,6 @@ INCLUDES = \
         -DGNOMEUIICONDIR=\""$(datadir)/icons"\"	\
         -DGNOMEUISERVERDIR=\""$(libexecdir)"\" 		\
 	-DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
-        -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\"	\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"		\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(WARN_CFLAGS)					\

@@ -9,7 +9,6 @@ INCLUDES = \
         -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
         -DGNOMEUIBINDIR=\""$(bindir)"\" 		\
         -DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
-        -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"
 
 LDADD =	\

@@ -1,14 +1,27 @@
-2004-05-06  James Henstridge  <james@daa.com.au>
- 
+2004-05-11  James Henstridge  <james@daa.com.au>
+
+	* configure.in (GCONF_CONFIG_SOURCE): get rid of checks for gconf,
+	since the schemas in libgnomeui were removed in 2001.
+
+	* demos/Makefile.am (INCLUDES): same here.
+
+	* libgnomeui/Makefile.am (INCLUDES): don't define
+	GNOMEUILOCALEDIR.
+
+	* configure.in: use AM_GLIB_DEFINE_LOCALEDIR() to define the
+	locale directory.
+
+2004-05-05  James Henstridge  <james@daa.com.au>
+
 	* test-gnome/Makefile.am (test_gnome_SOURCES): move testgnome.h to
- 	sources list.
- 
+	sources list.
+
 	* libgnomeui/Makefile.am: fix up readonly srcdir build of
- 	generated files.  Don't build libgnomeui.defs since it wasn't
- 	being distributed and it wasn't being used for anything.
+	generated files.  Don't build libgnomeui.defs since it wasn't
+	being distributed and it wasn't being used for anything.
 
 	* Makefile.am: require automake-1.7, and ensure that docs get
- 	built during "make distcheck".
+	built during "make distcheck".
 
 	* configure.in: update configure script.
 
