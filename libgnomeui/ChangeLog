@@ -1,3 +1,21 @@
+Fri Apr 17 19:42:54 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h: #define GNOME_APPS_MENU_DENTRY_DIR_EXTENSION 
+
+	* gnome-appsmenu.c: Saving works now, mostly. Successfully loaded 
+	system menu, saved in .gnome, reloaded, displayed.
+	(GNOME_APPS_MENU_DEBUG_PRINT): debugging macro
+	(g_extract_file): New, reverse of g_concat_dir_and_file (may move 
+	to gnome-util along with get_extension, is_dotfile?).
+	(dentry_save_func): Implemented.
+	(is_dotfile): Oops, didn't stop at first path separator. Fixed.
+	(gnome_apps_menu_new_from_file): optimized to immediately ignore
+	backup files.	
+	(gnome_apps_menu_save): Made to work, previously it saved the
+ 	.directory file in the wrong directory and got confused. Still
+ 	does symlinks wrong I think (like ftw(), potentially traverses
+ 	them twice.)
+
 Fri Apr 17 15:49:02 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calcualtor.c: fix the +/- button to actually

@@ -42,7 +42,8 @@ static GnomeAppsMenu * gnome_apps_menu_new_empty(void);
   Debugging stuff
   ********************************/
 
-#ifndef G_DISABLE_CHECKS
+#define GNOME_ENABLE_DEBUG 1
+#ifdef GNOME_ENABLE_DEBUG
 static gboolean gnome_apps_menu_check(GnomeAppsMenu * gam)
 {
   GnomeAppsMenu * sub;
@@ -92,13 +93,52 @@ static gboolean gnome_apps_menu_check(GnomeAppsMenu * gam)
   return TRUE;
 }
 
+void gnome_apps_menu_debug_print(GnomeAppsMenu * gam)
+{
+  gchar * pixmap, * name;
+  
+  g_return_if_fail(gam != NULL);
+
+  gnome_apps_menu_setup(gam, &pixmap, &name, NULL, NULL);
+
+  g_print("GnomeAppsMenu: %p; directory? %s; Name: %s; Ext: %s;\n  %s;\n"
+	  "  Data: %p; Submenus: %p; Parent: %p Vtable: %p\n", 
+	  gam, GNOME_APPS_MENU_IS_DIR(gam) ? "yes" : "no",
+	  name, gam->extension, pixmap, gam->data, gam->submenus, 
+	  gam->parent, gam->vtable );
+}
+
 /* Things that should always be true once the GnomeAppsMenu is
    initialized */
 #define GNOME_APPS_MENU_INVARIANTS(x) g_assert( gnome_apps_menu_check(x) )
-#else /* G_DISABLE_CHECKS */
+
+#define GNOME_APPS_MENU_DEBUG_PRINT(x) gnome_apps_menu_debug_print(x)
+
+#else /* GNOME_ENABLE_DEBUG */
 #define GNOME_APPS_MENU_INVARIANTS(x)
+#define GNOME_APPS_MENU_DEBUG_PRINT(x)
 #endif
 
+/* Extract filename from a path, NULL if no filename */
+gchar * g_extract_file(const gchar * path)
+{
+  int len, i;
+  g_return_val_if_fail(path != NULL, NULL);
+
+  i = len = strlen(path);
+
+  while ( i >= 0 ) {
+    --i;
+    if (path[i] == PATH_SEP) break;
+  }
+  
+  /* path ended in PATH_SEP */
+  if ( i == len - 1) return NULL;
+  /* i is indexing the separator, so return position one past */
+  else {
+    return g_strdup(&path[i+1]);
+  }
+}
 
 /****************************************
   Class-handling stuff
@@ -259,7 +299,38 @@ dentry_setup_func( GnomeAppsMenu * gam, gchar ** pixmap_name, gchar ** name,
 static void dentry_save_func( GnomeAppsMenu * gam, 
 			      const gchar * directory )
 {
-  g_print("Unimplemented stub, saving: %s\n", directory);
+  gchar * filename = NULL;
+  gchar * name;
+  g_return_if_fail(gam != NULL);
+  g_return_if_fail(directory != NULL);
+
+  if ( ((GnomeDesktopEntry *)gam->data)->location ) {
+    filename = g_extract_file( ((GnomeDesktopEntry *)gam->data)->location );
+  }
+  else if (GNOME_APPS_MENU_IS_DIR(gam)) {
+    filename = g_strdup( "."GNOME_APPS_MENU_DENTRY_DIR_EXTENSION );
+  }
+  else {
+    gnome_apps_menu_setup(gam, NULL, &name, NULL, NULL);
+    if (name) {
+      filename = g_copy_strings ( name, 
+				  GNOME_APPS_MENU_DENTRY_EXTENSION, NULL);
+    }
+  }
+
+  if (filename == NULL) {
+    g_warning("Couldn't decide on a filename for this menu.");
+    return;
+  }
+
+  g_free( ((GnomeDesktopEntry *)gam->data)->location ); /* free if it exists */
+
+  ((GnomeDesktopEntry *)gam->data)->location = 
+    g_concat_dir_and_file(directory, filename);
+
+  g_free(filename);
+
+  gnome_desktop_entry_save((GnomeDesktopEntry *)gam->data);
 }
 
 static void make_default_classes(void)
@@ -273,7 +344,8 @@ static void make_default_classes(void)
 				    gnome_desktop_entry_load,
 				    dentry_setup_func,
 				    dentry_save_func );
-    gnome_apps_menu_register_class( TRUE, "directory",
+    gnome_apps_menu_register_class( TRUE, 
+				    GNOME_APPS_MENU_DENTRY_DIR_EXTENSION,
 				    (GnomeAppsMenuLoadFunc)
 				    gnome_desktop_entry_load,
 				    dentry_setup_func,
@@ -315,8 +387,6 @@ static gchar ** get_filename_list(const gchar * directory)
     return NULL;
   }
 
-  g_print("Filename list start.\n");
-
   filename_list = g_malloc(sizeof(gchar *) * max_filenames);
 
   while ( (dir_entry = readdir(dir)) != NULL) {
@@ -333,7 +403,6 @@ static gchar ** get_filename_list(const gchar * directory)
     }
 
     filename_list[next] = g_concat_dir_and_file(directory, thisfile);
-    g_print(" Adding %s at %d\n", filename_list[next], next);
     ++next;
     if ( next > max_filenames ) {
       filename_list = g_realloc(filename_list, sizeof(gchar *)*100);
@@ -341,22 +410,23 @@ static gchar ** get_filename_list(const gchar * directory)
     }
   }
   filename_list[next] = NULL;
-  g_print("Filename list end at %d.\n", next);
   return filename_list;
 }
 
-static gboolean is_dotfile(const gchar * filename)
+static gboolean is_dotfile(const gchar * path)
 {
   gint len;
-  if (filename[0] == '.') return TRUE;
-  len = strlen(filename);
+
+  if (path[0] == '.') return TRUE;
+  len = strlen(path);
   while ( len > 0 ) {
-    if (filename[len] == '.') break;
+    if ( path[len] == PATH_SEP ) return FALSE; /* no dots */
+    if ( path[len] == '.' ) break;
     --len;
   }
   if ( len == 0 ) return FALSE; /* no dots */
   /* len is indexing the . */
-  if (filename[len - 1] == PATH_SEP) return TRUE;
+  if (path[len - 1] == PATH_SEP) return TRUE;
   else return FALSE;
 }
 
@@ -399,6 +469,13 @@ gnome_apps_menu_new_from_file(const gchar * filename)
   g_return_val_if_fail(filename != NULL, NULL);
 
   extension = get_extension(filename);
+
+  /* The class find would fail anyway; this is just an optimization. */
+  if ( strcmp(extension, BACKUP_EXTENSION) == 0 ) {
+    g_free(extension);
+    return NULL;
+  }
+
   is_directory = is_dotfile(filename);
 
   c = find_class_by_extension(extension, is_directory);
@@ -491,9 +568,14 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
     filename = *filename_list;
     ++filename_list;
 
+    g_print("fn: %s\n", filename);
+
     /* Ignore all dotfiles -- they're meant to describe the 
        directory, not items in it. */
     if ( is_dotfile(filename) ) {
+#ifdef GNOME_ENABLE_DEBUG
+      g_print("Ignoring dotfile %s\n", filename);
+#endif
       continue;
     }
 
@@ -507,10 +589,15 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
     /* If it's a directory, recursively descend into it */
     if (S_ISDIR (s.st_mode)) {
 
+      g_print("Dir: %s", filename);
+
       sub_apps_menu = gnome_apps_menu_load(filename);
       
       /* Recursive load failed for some reason. */
       if ( sub_apps_menu == NULL ) {
+#ifdef GNOME_ENABLE_DEBUG
+	g_print("Couldn't load %s\n", filename);
+#endif
 	continue;
       }      
     }
@@ -521,6 +608,9 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
 
       if ( sub_apps_menu == NULL ) {
 	/* didn't load it successfully, ignore it. */
+#ifdef GNOME_ENABLE_DEBUG
+	g_print("Couldn't load %s\n", filename);
+#endif
 	continue;
       }
     }
@@ -534,7 +624,10 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
   if ( root_apps_menu->submenus == NULL && 
        GNOME_APPS_MENU_IS_DIR(root_apps_menu)) {
     gnome_apps_menu_destroy(root_apps_menu);
-    return NULL;
+    root_apps_menu = NULL;
+#ifdef GNOME_ENABLE_DEBUG
+    g_print("Ignoring empty GnomeAppsMenu\n");
+#endif
   }
 
   free_filename_list(filename_list_start);
@@ -683,18 +776,42 @@ gboolean gnome_apps_menu_save(GnomeAppsMenu * gam,
 {
   GList * submenus;
   GnomeAppsMenu * sub;
-  gchar * subdir, * full_subdir;  
+  gchar * subdir, * full_subdir = NULL;  
   gboolean return_val = TRUE;
 
   g_return_val_if_fail(gam != NULL, FALSE);
   g_return_val_if_fail(directory != NULL, FALSE);
 
-  if (! prepare_directory(directory) ) {
-    return FALSE;
-  }
+#ifdef GNOME_ENABLE_DEBUG
+  g_print("**** \n Save got: \n");
+  GNOME_APPS_MENU_DEBUG_PRINT(gam);
+#endif
 
   /* Just ignore anything with no save function */
   if ( gam->vtable->save_func == NULL ) return TRUE;
+
+  if ( GNOME_APPS_MENU_IS_DIR(gam) &&
+       (gam->parent != NULL) ) {
+
+    /* Get the name of this directory AppsMenu, so we know the name of
+       the filesystem directory to store it and submenus in.
+       The root menu goes in the passed-in directory. */
+
+    gnome_apps_menu_setup(gam, NULL, &subdir, NULL, NULL);
+  
+    g_print("Got subdir %s\n", subdir);
+    
+    full_subdir = g_concat_dir_and_file(directory, subdir);
+    
+    g_print("Full: %s\n", full_subdir);  
+
+    directory = full_subdir; /* alias */
+  }
+
+  if (! prepare_directory(directory) ) {
+    g_free(full_subdir);
+    return FALSE;
+  }
 
   (gam->vtable->save_func)(gam, directory);
 
@@ -703,28 +820,17 @@ gboolean gnome_apps_menu_save(GnomeAppsMenu * gam,
   while (submenus) {
     sub = (GnomeAppsMenu *)submenus->data;
 
-    /* Get the name of this directory AppsMenu, so we know
-       the name of the filesystem directory to store its
-       submenus in */
-    gnome_apps_menu_setup(gam, NULL, &subdir, NULL, NULL);
-
-    g_print("Got subdir %s\n", subdir);
-
-    full_subdir = g_concat_dir_and_file(directory, subdir);
-
-    g_print("Full: %s\n", full_subdir);
-
-    if ( ! gnome_apps_menu_save(sub, full_subdir) ) {
+    if ( ! gnome_apps_menu_save(sub, directory) ) {
       return_val = FALSE; /* indicate error but keep going as much as
 			     possible */
     }
 
-    /* Don't free subdir, stuff from _setup() doesn't belong
-       to us */
-    g_free(full_subdir);
-
     submenus = g_list_next(submenus);
   }
+
+  /* Don't free subdir, stuff from _setup() doesn't belong
+     to us */
+  g_free(full_subdir); /* if non-null */
 
   return return_val;
 }

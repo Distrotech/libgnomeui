@@ -67,6 +67,7 @@ BEGIN_GNOME_DECLS
 /* fixme, this should be (or even is?) defined elsewhere,
    like gnome-dentry.h, and renamed appropriately */
 #define GNOME_APPS_MENU_DENTRY_EXTENSION "desktop"
+#define GNOME_APPS_MENU_DENTRY_DIR_EXTENSION "directory"
 
 typedef struct _GnomeAppsMenu GnomeAppsMenu;
 typedef struct _GnomeAppsMenuClass GnomeAppsMenuClass;
