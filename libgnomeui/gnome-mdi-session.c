@@ -388,7 +388,7 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 	gnome_config_clean_section (section);
 
 	/* save MDI mode */
-	g_snprintf (key, sizeof(key), "%s/mdi_session", section);
+	g_snprintf (key, sizeof(key), "%s/mdi_mode", section);
 	gnome_config_set_int (key, mdi->mode);
 
 	/* Write list of children. */
