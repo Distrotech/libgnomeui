@@ -19,6 +19,7 @@ INCLUDES = \
         -DGNOMEUIBINDIR=\""$(bindir)"\" 		\
         -DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\" 	\
+	-DGNOMEUIXMLDBFILE=\""$(componentdir)/selector-components.xmldb"\" \
 	-DG_LOG_DOMAIN=\"GnomeUI-Components\"		\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOME_CFLAGS)				\
@@ -37,6 +38,9 @@ GNOME_UI_Components.oaf : $(srcdir)/GNOME_UI_Components.oaf.in $(top_builddir)/c
 	sed -e "s|\@COMPONENTS_LIBDIR\@|$(componentdir)|" \
 	$(srcdir)/GNOME_UI_Components.oaf.in > GNOME_UI_Components.oaf 
 
+component_DATA = \
+	selector-components.xmldb
+
 clean-local:
 	-rm -f $(OAF_FILES)
 
@@ -45,6 +49,8 @@ libgnomeui_components_2_la_SOURCES = \
 	gnome-icon-selector-component.h			\
 	gnome-image-entry-component.c			\
 	gnome-image-entry-component.h			\
+	gnome-entry-component.c				\
+	gnome-entry-component.h				\
 	libgnomeui-components.c
 
 libgnomeui_components_2_la_LDFLAGS = \

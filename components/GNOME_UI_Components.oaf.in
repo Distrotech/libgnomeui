@@ -8,6 +8,15 @@
 	<oaf_attribute name="name" type="string" value="GNOME UI Components Factory"/>
 </oaf_server>
 
+<oaf_server iid="OAFIID:GNOME_UI_Component_Entry" type="factory" location="OAFIID:GNOME_UI_Components_Factory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:GNOME/SelectorFactory:1.0"/>
+		<item value="IDL:Bonobo/ItemContainer:1.0"/>
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="GNOME Entry"/>
+</oaf_server>
+
 <oaf_server iid="OAFIID:GNOME_UI_Component_IconSelector" type="factory" location="OAFIID:GNOME_UI_Components_Factory">
 	<oaf_attribute name="repo_ids" type="stringv">
 		<item value="IDL:GNOME/SelectorFactory:1.0"/>

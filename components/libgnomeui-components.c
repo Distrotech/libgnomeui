@@ -35,6 +35,7 @@
 #include <libgnome/gnome-selector-factory.h>
 #include "gnome-icon-selector-component.h"
 #include "gnome-image-entry-component.h"
+#include "gnome-entry-component.h"
 
 static Bonobo_Unknown
 image_entry_get_object_fn (BonoboItemHandler *h, const char *item_name,
@@ -113,6 +114,12 @@ libgnomeui_components_factory (BonoboGenericFactory *this,
 	item_handler = bonobo_item_handler_new (NULL, image_entry_get_object_fn, NULL);
 
 	return BONOBO_OBJECT (item_handler);
+    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_Entry")) {
+	GnomeSelectorFactory *factory;
+
+	factory = gnome_selector_factory_new (gnome_entry_component_get_type ());
+
+	return BONOBO_OBJECT (factory);
     } else
 	g_warning ("Failing to manufacture a '%s'", object_id);
         
