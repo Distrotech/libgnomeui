@@ -594,7 +594,7 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	}	
 
 	gdk_draw_layout (drawable,
-			 style->text_gc[state],
+			 style->text_gc[iti->selected ? state : GTK_STATE_NORMAL],
 			 text_xofs, 
 			 text_yofs,
 			 priv->layout);

@@ -1,3 +1,8 @@
+2002-02-14  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-icon-item.c (gnome_icon_text_item_draw): Use 
+	GTK_STATE_NORMAL if the icon isn't selected.
+
 2002-02-13  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-about.c (gnome_about_display_credits_dialog): Put 
