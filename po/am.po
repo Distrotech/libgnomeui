@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "POT-Creation-Date: 2002-10-03 05:33+0200\n"
-"PO-Revision-Date: 2002-12-12 15:47+EDT\n"
+"PO-Revision-Date: 2002-12-21 22:37+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
@@ -235,7 +235,7 @@ msgstr "ቀን"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select Date"
-msgstr "ቀን ምረጥ"
+msgstr "ቀን ምረጡ"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
@@ -248,7 +248,7 @@ msgstr "ቀን መቁጠሪያ"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
-msgstr "ሰዓት ምረጥ"
+msgstr "ሰዓት ምረጡ"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
@@ -779,11 +779,11 @@ msgstr "ስለዚህ ፕሮግራም"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
-msgstr "_ሁሉንም ምረጥ"
+msgstr "_ሁሉንም ምረጡ"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr "ሁሉንም ነገር ምረጥ"
+msgstr "ሁሉንም ነገር ምረጡ"
 
 #.
 #. * Window menu
@@ -890,7 +890,7 @@ msgstr "ከምልክቶቹ ጐን ቀዳሚ ጽሑፍ"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
-msgstr "ምልክቶቸን ብቻ"
+msgstr "ምልክቶች ብቻ"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
@@ -1057,7 +1057,7 @@ msgstr "_ቃኝ..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "የፋይል መምረጫ ፋይል ለመምረጥ አሳይ"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1069,7 +1069,7 @@ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr "የፊደል ቅርጽ ምረጥ"
+msgstr "የፊደል ቅርጽ ምረጡ"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -1216,15 +1216,15 @@ msgstr "ይህ የመምረጫ ሳጥን ምልክቶችን ያስመርጥዎ�
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
-msgstr "የቁልፍ መራጭ"
+msgstr "የምልክት መራጭ"
 
 #: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr "እባክዎ የሚፈልጉትን ቁልፍ ይምረጡ።"
+msgstr "እባክዎ የሚፈልጉትን ምልክት ይምረጡ።"
 
 #: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
-msgstr "የቁልፍ መራጭ"
+msgstr "የምልክት መራጭ"
 
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
@@ -1236,7 +1236,7 @@ msgstr "ቃኝ"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
-msgstr "የቁልፉ መተላለፊያ"
+msgstr "የምልክት መተላለፊያ"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
