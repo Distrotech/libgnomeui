@@ -135,7 +135,7 @@ gnome_add_gtk_arg_callback(poptContext con,
 		gtk_args = NULL;
 		gnome_gtk_initialized = TRUE;
 		file_name = g_concat_dir_and_file (gnome_user_accels_dir, gnome_app_id);
-#ifdef	GTK_CHECK_VERSION(1,2,1)
+#if GTK_CHECK_VERSION(1,2,1)
 		gtk_item_factory_parse_rc (file_name);
 #else
 		g_warning ("Accelerator support disabled.  Use at least GTK+ 1.2.1 if you want it.");

@@ -1772,16 +1772,17 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
  * Applications can use this adjustment stored inside the
  * GnomeIconList structure to construct scrollbars if they so desire.
  *
- * if flags has the GNOME_ICON_LIST_IS_EDITABLE flag set, then the
+ * if flags has the %GNOME_ICON_LIST_IS_EDITABLE flag set, then the
  * text on the icons will be permited to be edited.  If the name
  * changes the "text_changed" signal will be emitted.
  *
- * if flags has the GNOME_ICON_LIST_STATIC_TEXT flags set, then the
+ * if flags has the %GNOME_ICON_LIST_STATIC_TEXT flags set, then the
  * text 
  *
  * Please note that the GnomeIconList starts life in Frozen state.  You are
  * supposed to fall gnome_icon_list_thaw on it as soon as possible.
- * */
+ *
+ */
 GtkWidget *
 gnome_icon_list_new_flags (guint icon_width, GtkAdjustment *adj, int flags)
 {

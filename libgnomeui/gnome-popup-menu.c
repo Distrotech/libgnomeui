@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include <gtk/gtkmain.h>
+#include <gtk/gtkfeatures.h>
 #include "gnome-popup-menu.h"
 
 static GtkWidget* global_menushell_hack = NULL;
@@ -171,7 +172,7 @@ gnome_popup_menu_get_accel_group(GtkMenu *menu)
 	g_return_val_if_fail (menu != NULL, NULL);
         g_return_val_if_fail (GTK_IS_MENU (menu), NULL);
 
-#ifdef GTK_CHECK_VERSION(1,2,1)
+#if GTK_CHECK_VERSION(1,2,1)
         return gtk_menu_get_accel_group (menu);
 #else
 	return NULL;

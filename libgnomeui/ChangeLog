@@ -1,3 +1,16 @@
+1999-05-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_new_flags): Fixed the format
+	of the file, to get proper documentation.
+
+1999-05-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-init.c (gnome_add_gtk_arg_callback): Replace #ifdef
+	GTK_CHECK... with #if.
+	* gnome-popup-menu.c (gnome_popup_menu_get_accel_group): ditto.
+
+	Thanks to Morten Welinder for pointing this out.
+
 1999-05-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-util.c (gnome_canvas_get_miter_points): Fixed M_PI
