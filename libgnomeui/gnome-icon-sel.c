@@ -103,6 +103,7 @@ gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 static void
 gnome_icon_selection_init (GnomeIconSelection *gis)
 {
+	GtkAdjustment *vadj;
 	GtkWidget *box;
 	GtkWidget *frame;
 	GtkWidget *sb;
@@ -120,21 +121,21 @@ gnome_icon_selection_init (GnomeIconSelection *gis)
 	gtk_box_pack_end(GTK_BOX(gis->_priv->box), box, TRUE, TRUE, 0);
 	gtk_widget_show(box);
 	
-	sb = gtk_vscrollbar_new(NULL);
-	gtk_box_pack_end(GTK_BOX(box),sb,FALSE,FALSE,0);
-	gtk_widget_show(sb);
-
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_box_pack_start (GTK_BOX (box), frame, TRUE, TRUE, 0);
 	gtk_widget_show (frame);
 
-	gis->_priv->gil = gnome_icon_list_new(ICON_SIZE+30,
-				       gtk_range_get_adjustment(GTK_RANGE(sb)),
-				       FALSE);
+	gis->_priv->gil = gnome_icon_list_new(ICON_SIZE+30, FALSE);
 	gtk_widget_set_usize(gis->_priv->gil,350,300);
 	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(gis->_priv->gil),
-					   GTK_SELECTION_SINGLE);
+					    GTK_SELECTION_SINGLE);
+
+	vadj = gtk_layout_get_vadjustment(GTK_LAYOUT(gis->_priv->gil));
+	sb = gtk_vscrollbar_new(vadj);
+	gtk_box_pack_end(GTK_BOX(box),sb,FALSE,FALSE,0);
+	gtk_widget_show(sb);
+
 	gtk_container_add (GTK_CONTAINER (frame), gis->_priv->gil);
 	gtk_widget_show(gis->_priv->gil);
 

@@ -2042,13 +2042,12 @@ gnome_icon_list_set_icon_width (GnomeIconList *gil, int w)
  * gnome_icon_list_construct:
  * @gil: An icon list.
  * @icon_width: Width for the icon columns.
- * @adj: Adjustment to be used for vertical scrolling.
  * @flags: A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT.
  *
  * Constructor for the icon list, to be used by derived classes.
  **/
 void
-gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *adj, int flags)
+gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, int flags)
 {
 	GnomeIconListPrivate *priv;
 
@@ -2060,28 +2059,17 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
 	gnome_icon_list_set_icon_width (gil, icon_width);
 	priv->is_editable = (flags & GNOME_ICON_LIST_IS_EDITABLE) != 0;
 	priv->static_text = (flags & GNOME_ICON_LIST_STATIC_TEXT) != 0;
-
-	if (!adj)
-		adj = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0.1, 0.1));
-
-	gtk_layout_set_vadjustment (GTK_LAYOUT (gil), adj);
 }
 
 
 /**
- * gnome_icon_list_new_flags: [constructor]
+ * gnome_icon_list_new: [constructor]
  * @icon_width: Width for the icon columns.
- * @adj:        Adjustment to be used for vertical scrolling.
  * @flags:      A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT.
  *
  * Creates a new icon list widget.  The icon columns are allocated a width of
  * @icon_width pixels.  Icon captions will be word-wrapped to this width as
  * well.
- *
- * The adjustment is used to pass an existing adjustment to be used to control
- * the icon list's vertical scrolling.  Normally NULL can be passed here; if the
- * icon list is inserted into a &GtkScrolledWindow, it will handle scrolling
- * automatically.
  *
  * If @flags has the %GNOME_ICON_LIST_IS_EDITABLE flag set, then the user will be
  * able to edit the text in the icon captions, and the "text_changed" signal
@@ -2096,7 +2084,7 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
  * Returns: a newly-created icon list widget
  */
 GtkWidget *
-gnome_icon_list_new_flags (guint icon_width, GtkAdjustment *adj, int flags)
+gnome_icon_list_new (guint icon_width, int flags)
 {
 	Gil *gil;
 
@@ -2104,28 +2092,11 @@ gnome_icon_list_new_flags (guint icon_width, GtkAdjustment *adj, int flags)
 	gil = GIL (gtk_type_new (gnome_icon_list_get_type ()));
 	gtk_widget_pop_colormap ();
 
-	gnome_icon_list_construct (gil, icon_width, adj, flags);
+	gnome_icon_list_construct (gil, icon_width, flags);
 
 	return GTK_WIDGET (gil);
 }
 
-/**
- * gnome_icon_list_new:
- * @icon_width: Width for the icon columns.
- * @adj: Adjustment to be used for vertical scrolling.
- * @flags: A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT.
- *
- * This function is kept for binary compatibility with old applications.  It is
- * similar in purpose to gnome_icon_list_new_flags(), but it will always turn on
- * the %GNOME_ICON_LIST_IS_EDITABLE flag.
- *
- * Return value: a newly-created icon list widget
- **/
-GtkWidget *
-gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, int flags)
-{
-	return gnome_icon_list_new_flags (icon_width, adj, flags & GNOME_ICON_LIST_IS_EDITABLE);
-}
 
 /**
  * gnome_icon_list_freeze:

@@ -86,20 +86,17 @@ struct _GnomeIconListClass {
 	gboolean (*text_changed)   (GnomeIconList *gil, gint num, const char *new_text);
 };
 
-#define GNOME_ICON_LIST_IS_EDITABLE 1
-#define GNOME_ICON_LIST_STATIC_TEXT 2
+enum {
+	GNOME_ICON_LIST_IS_EDITABLE	= 1 << 0,
+	GNOME_ICON_LIST_STATIC_TEXT	= 1 << 1
+};
 
 guint          gnome_icon_list_get_type            (void);
 
 GtkWidget     *gnome_icon_list_new                 (guint         icon_width,
-						    GtkAdjustment *adj,
-						    int           flags);
-GtkWidget     *gnome_icon_list_new_flags           (guint         icon_width,
-						    GtkAdjustment *adj,
 						    int           flags);
 void           gnome_icon_list_construct           (GnomeIconList *gil,
 						    guint icon_width,
-						    GtkAdjustment *adj,
 						    int flags);
 
 

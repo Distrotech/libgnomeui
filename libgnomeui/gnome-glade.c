@@ -1474,7 +1474,7 @@ iconlist_new(GladeXML *xml, GladeWidgetInfo *info)
 				flags |= GNOME_ICON_LIST_STATIC_TEXT;
 		}
 	}
-	wid = gnome_icon_list_new_flags(icon_width, NULL, flags);
+	wid = gnome_icon_list_new(icon_width, flags);
 	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(wid), mode);
 	gnome_icon_list_set_row_spacing(GNOME_ICON_LIST(wid), row_spacing);
 	gnome_icon_list_set_col_spacing(GNOME_ICON_LIST(wid), col_spacing);
