@@ -1,3 +1,8 @@
+2001-10-22  Cristiano De Michele <cristiano.demichele@na.infn.it>
+
+	* gnome-entry.c (gnome_entry_finalize): don't NULL priv and
+	then de-reference it.
+
 Sun Oct 21 13:27:07 2001  George Lebl <jirka@5z.com>
 
 	* gnome-font-picker.h: add padding to class structure.  There are

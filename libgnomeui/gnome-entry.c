@@ -361,7 +361,7 @@ gnome_entry_finalize (GObject *object)
 	gentry = GNOME_ENTRY (object);
 
 	g_free (gentry->_priv->history_id);
-	gentry->_priv = NULL;
+	gentry->_priv->history_id = NULL;
 
 	free_items (gentry);
 
