@@ -133,8 +133,8 @@ void          gnome_mdi_set_tab_pos         (GnomeMDI *, GtkPositionType);
 /* setting the menu and toolbar stuff */
 void          gnome_mdi_set_menubar_template(GnomeMDI *, GnomeUIInfo *);
 void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *);
-void          gnome_mdi_set_child_menu_path (GnomeMDI *, gchar *);
-void          gnome_mdi_set_child_list_path (GnomeMDI *, gchar *);
+void          gnome_mdi_set_child_menu_path (GnomeMDI *, const gchar *);
+void          gnome_mdi_set_child_list_path (GnomeMDI *, const gchar *);
 
 /* manipulating views */
 gint          gnome_mdi_add_view            (GnomeMDI *, GnomeMDIChild *);

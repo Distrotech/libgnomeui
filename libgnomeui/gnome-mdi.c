@@ -1717,7 +1717,7 @@ void gnome_mdi_set_toolbar_template (GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl)
  * removed from the main menus as views of different children are activated).
  * See gnome_app_find_menu_pos for details on menu paths. 
  **/
-void gnome_mdi_set_child_menu_path (GnomeMDI *mdi, gchar *path)
+void gnome_mdi_set_child_menu_path (GnomeMDI *mdi, const gchar *path)
 {
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
@@ -1741,7 +1741,7 @@ void gnome_mdi_set_child_menu_path (GnomeMDI *mdi, gchar *path)
  * you want all menu items to be inserted in their own submenu, you have to
  * create that submenu (and leave it empty, of course). 
  **/
-void gnome_mdi_set_child_list_path (GnomeMDI *mdi, gchar *path)
+void gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path)
 {
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));

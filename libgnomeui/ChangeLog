@@ -4,6 +4,10 @@
 	Added null-ptr-deref sanity checks.
 	Bugfix for trigger stuff to handle absent trigger list.
 
+	* gnome-mdi.[ch]:
+	(gnome_mdi_set_child_menu_path, gnome_mdi_set_child_list_path):
+	Make path arg const-correct.
+
 1998-12-09  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-child.c (gnome_mdi_child_set_label): left-justify
