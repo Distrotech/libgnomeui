@@ -1,3 +1,10 @@
+Wed Aug 30 04:06:22 2000  George Lebl <jirka@5z.com>
+
+	* gnome-druid-page-edge.c, gnome-druid-page-standard.c:  Be anal
+	  and use (double) instead of gfloat and use it in all the places
+	  where doubles are set on the canvas.  Also never show the logoframe
+	  when no logo is set.
+
 Wed Aug 30 03:51:08 2000  George Lebl <jirka@5z.com>
 
 	* gnome-druid.c: in size_allocate/size_request, use the border_width

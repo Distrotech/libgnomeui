@@ -204,20 +204,28 @@ gnome_druid_page_standard_configure_canvas (GnomeDruidPageStandard *druid_page_s
 	gnome_canvas_item_set (druid_page_standard->_priv->background_item,
 			       "x1", 0.0,
 			       "y1", 0.0,
-			       "x2", (gfloat) width,
-			       "y2", (gfloat) LOGO_WIDTH + GNOME_PAD * 2,
-			       "width_units", 1.0, NULL);
-	gnome_canvas_item_set (druid_page_standard->_priv->logoframe_item,
-			       "x1", (gfloat) width - LOGO_WIDTH - GNOME_PAD,
-			       "y1", (gfloat) GNOME_PAD,
-			       "x2", (gfloat) width - GNOME_PAD,
-			       "y2", (gfloat) GNOME_PAD + LOGO_WIDTH,
-			       "width_units", 1.0, NULL);
+			       "x2", (double) width,
+			       "y2", (double) (LOGO_WIDTH + GNOME_PAD * 2),
+			       "width_units", 1.0,
+			       NULL);
+	if (druid_page_standard->logo_image != NULL) {
+		gnome_canvas_item_show (druid_page_standard->_priv->logoframe_item);
+		gnome_canvas_item_set (druid_page_standard->_priv->logoframe_item,
+				       "x1", (double) (width - LOGO_WIDTH - GNOME_PAD),
+				       "y1", (double) (GNOME_PAD),
+				       "x2", (double) (width - GNOME_PAD),
+				       "y2", (double) (GNOME_PAD + LOGO_WIDTH),
+				       "width_units", 1.0,
+				       NULL);
+	} else {
+		gnome_canvas_item_hide (druid_page_standard->_priv->logoframe_item);
+	}
 	gnome_canvas_item_set (druid_page_standard->_priv->logo_item,
-			       "x", (gfloat) width - GNOME_PAD - LOGO_WIDTH,
-			       "y", (gfloat) GNOME_PAD,
-			       "width", (gfloat) LOGO_WIDTH,
-			       "height", (gfloat) LOGO_WIDTH, NULL);
+			       "x", (double) (width - GNOME_PAD - LOGO_WIDTH),
+			       "y", (double) (GNOME_PAD),
+			       "width", (double) (LOGO_WIDTH),
+			       "height", (double) (LOGO_WIDTH),
+			       NULL);
 }
 
 static void
@@ -242,6 +250,9 @@ gnome_druid_page_standard_setup (GnomeDruidPageStandard *druid_page_standard)
 				       gnome_canvas_rect_get_type (),
 				       "fill_color_rgba", fill_color,
 				       NULL);
+	if (druid_page_standard->logo_image == NULL) {
+		gnome_canvas_item_hide (druid_page_standard->_priv->logoframe_item);
+	}
 
 	druid_page_standard->_priv->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
@@ -251,7 +262,8 @@ gnome_druid_page_standard_setup (GnomeDruidPageStandard *druid_page_standard)
 
 	if (druid_page_standard->logo_image != NULL) {
 		gnome_canvas_item_set (druid_page_standard->_priv->logo_item,
-				       "pixbuf", druid_page_standard->logo_image, NULL);
+				       "pixbuf", druid_page_standard->logo_image,
+				       NULL);
 	}
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_standard->title_color);
@@ -265,7 +277,7 @@ gnome_druid_page_standard_setup (GnomeDruidPageStandard *druid_page_standard)
 
 	gnome_canvas_item_set (druid_page_standard->_priv->title_item,
 			       "x", 15.0,
-			       "y", (gfloat) GNOME_PAD + LOGO_WIDTH / 2.0,
+			       "y", (double) (GNOME_PAD + LOGO_WIDTH / 2.0),
 			       "anchor", GTK_ANCHOR_WEST,
 			       NULL);
 

@@ -216,41 +216,48 @@ gnome_druid_page_edge_configure_canvas (GnomeDruidPageEdge *druid_page_edge)
 	gnome_canvas_item_set (druid_page_edge->_priv->background_item,
 			       "x1", 0.0,
 			       "y1", 0.0,
-			       "x2", (gfloat) width,
-			       "y2", (gfloat) height,
+			       "x2", (double) width,
+			       "y2", (double) height,
 			       NULL);
 	gnome_canvas_item_set (druid_page_edge->_priv->textbox_item,
-			       "x1", watermark_width,
-			       "y1", LOGO_WIDTH + GNOME_PAD * 2.0,
-			       "x2", (gfloat) width,
-			       "y2", (gfloat) height,
+			       "x1", (double) watermark_width,
+			       "y1", (double) (LOGO_WIDTH + GNOME_PAD * 2.0),
+			       "x2", (double) width,
+			       "y2", (double) height,
 			       NULL);
-	gnome_canvas_item_set (druid_page_edge->_priv->logoframe_item,
-			       "x1", (gfloat) width - LOGO_WIDTH -GNOME_PAD,
-			       "y1", (gfloat) GNOME_PAD,
-			       "x2", (gfloat) width - GNOME_PAD,
-			       "y2", (gfloat) GNOME_PAD + LOGO_WIDTH,
-			       "width_units", 1.0, NULL);
+	if (druid_page_edge->logo_image != NULL) {
+		gnome_canvas_item_show (druid_page_edge->_priv->logoframe_item);
+		gnome_canvas_item_set (druid_page_edge->_priv->logoframe_item,
+				       "x1", (double) (width - LOGO_WIDTH -GNOME_PAD),
+				       "y1", (double) (GNOME_PAD),
+				       "x2", (double) (width - GNOME_PAD),
+				       "y2", (double) (GNOME_PAD + LOGO_WIDTH),
+				       "width_units", 1.0,
+				       NULL);
+	} else {
+		gnome_canvas_item_hide (druid_page_edge->_priv->logoframe_item);
+	}
 	gnome_canvas_item_set (druid_page_edge->_priv->logo_item,
-			       "x", (gfloat) width - GNOME_PAD - LOGO_WIDTH,
-			       "y", (gfloat) GNOME_PAD,
-			       "width", (gfloat) LOGO_WIDTH,
-			       "height", (gfloat) LOGO_WIDTH, NULL);
+			       "x", (double) (width - GNOME_PAD - LOGO_WIDTH),
+			       "y", (double) (GNOME_PAD),
+			       "width", (double) (LOGO_WIDTH),
+			       "height", (double) (LOGO_WIDTH),
+			       NULL);
 	gnome_canvas_item_set (druid_page_edge->_priv->watermark_item,
 			       "x", 0.0,
-			       "y", watermark_ypos,
-			       "width", watermark_width,
-			       "height", watermark_height,
+			       "y", (double) watermark_ypos,
+			       "width", (double) watermark_width,
+			       "height", (double) watermark_height,
 			       NULL);
 
 	gnome_canvas_item_set (druid_page_edge->_priv->title_item,
 			       "x", 15.0,
-			       "y", (gfloat) GNOME_PAD + LOGO_WIDTH / 2.0,
+			       "y", (double) (GNOME_PAD + LOGO_WIDTH / 2.0),
 			       "anchor", GTK_ANCHOR_WEST,
 			       NULL);
 	gnome_canvas_item_set (druid_page_edge->_priv->text_item,
-			       "x", ((width - watermark_width) * 0.5) + watermark_width,
-			       "y", LOGO_WIDTH + GNOME_PAD * 2.0 + (height - (LOGO_WIDTH + GNOME_PAD * 2.0))/ 2.0,
+			       "x", (double) (((width - watermark_width) * 0.5) + watermark_width),
+			       "y", (double) (LOGO_WIDTH + GNOME_PAD * 2.0 + (height - (LOGO_WIDTH + GNOME_PAD * 2.0))/ 2.0),
 			       "anchor", GTK_ANCHOR_CENTER,
 			       NULL);
 }
@@ -284,6 +291,9 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 				       gnome_canvas_rect_get_type (),
 				       "fill_color_rgba", fill_color,
 				       NULL);
+	if (druid_page_edge->logo_image == NULL) {
+		gnome_canvas_item_hide (druid_page_edge->_priv->logoframe_item);
+	}
 
 	druid_page_edge->_priv->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
@@ -303,7 +313,8 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 
 	if (druid_page_edge->watermark_image != NULL)
 		gnome_canvas_item_set (druid_page_edge->_priv->watermark_item,
-				       "pixbuf", druid_page_edge->watermark_image, NULL);
+				       "pixbuf", druid_page_edge->watermark_image,
+				       NULL);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->title_color);
 	druid_page_edge->_priv->title_item =
@@ -346,6 +357,8 @@ gnome_druid_page_edge_prepare (GnomeDruidPage *page,
 		gtk_widget_grab_default (GNOME_DRUID (druid)->finish);
 		break;
 	case GNOME_EDGE_OTHER:
+		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, TRUE, TRUE);
+		gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
 	default:
 		break;
 	}
