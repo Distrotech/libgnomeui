@@ -337,12 +337,12 @@ void         gnome_interaction_key_return        (gint key,
 /* Request the session manager to save the session in some way.  This
    can also be used to request a logout.  If IS_GLOBAL is true, then
    all clients are saved; otherwise only this client is saved.  */
-void         gnome_client_request_save (GnomeClient        *client,
-					GnomeSaveStyle      save_style,
-					int /* bool */      shutdown,
-					GnomeInteractStyle  interact_style,
-					int /* bool */      fast,
-					int /* bool */      global);
+void	     gnome_client_request_save (GnomeClient	       *client,
+				        GnomeSaveStyle		save_style,
+				        gboolean		shutdown,
+				        GnomeInteractStyle	interact_style,
+				        gboolean		fast,
+				        gboolean		global);
 
 /* This will force the underlying connection to the session manager to
    be flushed.  This is useful if you have some pending changes that

@@ -11,6 +11,8 @@ Mon Nov 23 23:55:41 1998  Owen Taylor  <otaylor@redhat.com>
 
 1998-11-23  Jeff Garzik  <jgarzik@pobox.com>
 
+	* gnome-client.[ch]: (gnome_client_request_save):
+	  Changed int-typed boolean args to gbooleans.
 	* gnome-canvas.c, gnome-client.c: Added API doc stubs.
 	* gnome-calculator.[ch]: Changed gnome_calculator_clear() reset arg
 	  from a gint to a gboolean, reformatted a bit, and added const'ness.
