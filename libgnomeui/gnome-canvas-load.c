@@ -6,6 +6,8 @@
  * Most of the code comes from GdkImlib, written by the Rasterman
  * (raster@redhat.com).
  *
+ * After Imlib 1.9 is wildely used, we can remove this.
+ *
  * Miguel de Icaza.
  */
 #include <config.h>
@@ -14,12 +16,28 @@
 #include "gnome-canvas.h"
 #include "gnome-canvas-load.h"
 
+#ifdef HAVE_IMLIB_1_9
+GdkImlibImage *
+gnome_canvas_load_alpha (char *file)
+{
+	g_return_val_if_fail (file != NULL, NULL);
+
+	return gdk_imlib_loader_alpha (file);
+}
+
+void
+gnome_canvas_destroy_image (GdkImlibImage *image)
+{
+	g_return_if_fail (image != NULL);
+	gdk_imlib_destroy_image (image);
+}
+#else
 #ifdef HAVE_LIBPNG
 #include <png.h>
 #include <setjmp.h>
 
 static unsigned char *
-_gnome_canvas_load_png (FILE * f, int *w, int *h, int *t, unsigned char **alpha)
+_gnome_canvas_load_alpha (FILE * f, int *w, int *h, int *t, unsigned char **alpha)
 {
 	png_structp         png_ptr;
 	png_infop           info_ptr;
@@ -164,7 +182,7 @@ _gnome_canvas_load_png (FILE * f, int *w, int *h, int *t, unsigned char **alpha)
 }
 
 /**
- * gnome_canvas_load_png:
+ * gnome_canvas_load_alpha:
  * @file: filename to load
  *
  * This routine loads a PNG file with full alpha transparency and
@@ -175,12 +193,12 @@ _gnome_canvas_load_png (FILE * f, int *w, int *h, int *t, unsigned char **alpha)
  * the GnomeCanvasImage Canvas item.  Use this with GdkImlib at
  * your own risk.
  *
- * To release images loaded by gnome_canvas_load_png, use
+ * To release images loaded by gnome_canvas_load_alpha, use
  * gnome_canvas_destroy_image preferably although it works
  * with imlib now, in the future this might not be the case.
  */
 GdkImlibImage *
-gnome_canvas_load_png (char *file)
+gnome_canvas_load_alpha (char *file)
 {
 	FILE *f;
 	int w, h, trans;
@@ -193,7 +211,7 @@ gnome_canvas_load_png (char *file)
 	if (!f)
 		return NULL;
 
-	data = _gnome_canvas_load_png (f, &w, &h, &trans, &alpha);
+	data = _gnome_canvas_load_alpha (f, &w, &h, &trans, &alpha);
 	fclose (f);
 
 	if (!data)
@@ -221,10 +239,10 @@ gnome_canvas_load_png (char *file)
 
 /**
  * gnome_canvas_destroy_image:
- * @image: A GdkImlibImage allocated by gnome_canvas_load_png
+ * @image: A GdkImlibImage allocated by gnome_canvas_load_alpha
  *
  * Do not pass a regular GdkImlibImage to this routine, only pass
- * GdkImlibImage pointer that were created by gnome_canvas_load_png
+ * GdkImlibImage pointer that were created by gnome_canvas_load_alpha
  */
 void
 gnome_canvas_destroy_image (GdkImlibImage *image)
@@ -241,7 +259,7 @@ gnome_canvas_destroy_image (GdkImlibImage *image)
 #else
 
 GdkImlibImage *
-gnome_canvas_load_png (char *file)
+gnome_canvas_load_alpha (char *file)
 {
 	return NULL;
 }
@@ -250,4 +268,5 @@ void
 gnome_canvas_destroy_image (GdkImlibImage *image)
 {
 }
+#endif
 #endif
