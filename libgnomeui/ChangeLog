@@ -1,3 +1,11 @@
+Mon Mar  9 23:21:22 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* stock_demo.c: added stock icon properties,
+	added descriptions for `other icons'
+
+	* gnome-stock*: changed other icons to look like tigert's and added
+	a preferences stock icon.
+
 Mon Mar  9 17:37:44 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-init.c (gnome_init): Set program_invocation_short_name.

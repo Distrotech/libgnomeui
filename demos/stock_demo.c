@@ -253,22 +253,44 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_HELP));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 0, 1, 0, 1);
+	w = gtk_label_new("Help");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 0, 1, 1, 2);
 
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_SEARCH));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 1, 2, 0, 1);
+	w = gtk_label_new("Search");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 1, 2, 1, 2);
 
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_PRINT));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 2, 3, 0, 1);
+	w = gtk_label_new("Print");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 2, 3, 1, 2);
 
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_BACK));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 3, 4, 0, 1);
+	w = gtk_label_new("Backward");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 3, 4, 1, 2);
 
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_FORWARD));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 4, 5, 0, 1);
+	w = gtk_label_new("Forward");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 4, 5, 1, 2);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_PREFERENCES));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 5, 6, 0, 1);
+	w = gtk_label_new("Preferences");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 5, 6, 1, 2);
 }
 
 

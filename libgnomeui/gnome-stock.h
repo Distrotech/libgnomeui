@@ -89,6 +89,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_COPY        "Copy"
 #define GNOME_STOCK_PIXMAP_PASTE       "Paste"
 #define GNOME_STOCK_PIXMAP_PROPERTIES  "Properties"
+#define GNOME_STOCK_PIXMAP_PREFERENCES "Preferences"
 #define GNOME_STOCK_PIXMAP_HELP        "Help"
 #define GNOME_STOCK_PIXMAP_SCORES      "Scores"
 #define GNOME_STOCK_PIXMAP_PRINT       "Print"
