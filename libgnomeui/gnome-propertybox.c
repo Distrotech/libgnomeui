@@ -50,6 +50,10 @@
 #endif
 
 
+/* FIXME: define more globally.  */
+#define GNOME_PAD 10
+
+
 enum
 {
 	APPLY,
@@ -68,10 +72,11 @@ static void gnome_property_box_marshal_signal (GtkObject *object,
 					       GtkArg *args);
 static void gnome_property_box_destroy (GtkObject *object);
 
-static void global_apply (GnomePropertyBox *property_box);
-static void help (GnomePropertyBox *property_box);
-static void apply_and_close (GnomePropertyBox *property_box);
-static void just_close (GnomePropertyBox *property_box);
+static void global_apply (GtkObject *button, GnomePropertyBox *property_box);
+static void help (GtkObject *button, GnomePropertyBox *property_box);
+static void apply_and_close (GtkObject *button,
+			     GnomePropertyBox *property_box);
+static void just_close (GtkObject *button, GnomePropertyBox *property_box);
 
 
 static GtkWindowClass *parent_class = NULL;
@@ -155,6 +160,7 @@ gnome_property_box_init (GnomePropertyBox *property_box)
 	property_box->notebook = property_box->ok_button = NULL;
 	property_box->apply_button = property_box->cancel_button = NULL;
 	property_box->help_button = NULL;
+	property_box->items = NULL;
 }
 
 static void
@@ -179,7 +185,7 @@ gnome_property_box_destroy (GtkObject *object)
 GtkWidget *
 gnome_property_box_new (void)
 {
-	GtkWidget *ret;
+	GtkWidget *ret, *vbox, *hbox, *bf;
 	GnomePropertyBox *property_box;
 
 	ret = gtk_type_new (gnome_property_box_get_type ());
@@ -201,14 +207,50 @@ gnome_property_box_new (void)
 	gtk_widget_set_sensitive (property_box->apply_button, FALSE);
 
 	gtk_signal_connect (GTK_OBJECT (property_box->ok_button), "clicked",
-			    GTK_SIGNAL_FUNC (apply_and_close), NULL);
+			    GTK_SIGNAL_FUNC (apply_and_close), property_box);
 	gtk_signal_connect (GTK_OBJECT (property_box->apply_button), "clicked",
-			    GTK_SIGNAL_FUNC (global_apply), NULL);
+			    GTK_SIGNAL_FUNC (global_apply), property_box);
 	gtk_signal_connect (GTK_OBJECT (property_box->cancel_button),
 			    "clicked",
-			    GTK_SIGNAL_FUNC (just_close), NULL);
+			    GTK_SIGNAL_FUNC (just_close), property_box);
 	gtk_signal_connect (GTK_OBJECT (property_box->help_button), "clicked",
-			    GTK_SIGNAL_FUNC (help), NULL);
+			    GTK_SIGNAL_FUNC (help), property_box);
+
+	/* FIXME: connect delete_event to run just_close?  */
+
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD);
+	gtk_container_border_width (GTK_CONTAINER (hbox), GNOME_PAD);
+
+	bf = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (bf), GTK_SHADOW_OUT);
+
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (property_box), vbox);
+
+	gtk_box_pack_start (GTK_BOX (vbox), property_box->notebook,
+			    FALSE, FALSE, 0);
+
+	gtk_box_pack_end (GTK_BOX (hbox), property_box->help_button,
+			  FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (hbox), property_box->cancel_button,
+			  FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (hbox), property_box->apply_button,
+			  FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (hbox), property_box->ok_button,
+			  FALSE, FALSE, 0);
+
+	gtk_container_add (GTK_CONTAINER (bf), hbox);
+	gtk_box_pack_start (GTK_BOX (vbox), bf, FALSE, FALSE, 0);
+
+	gtk_widget_show (property_box->ok_button);
+	gtk_widget_show (property_box->apply_button);
+	gtk_widget_show (property_box->cancel_button);
+	gtk_widget_show (property_box->help_button);
+
+	gtk_widget_show (hbox);
+	gtk_widget_show (bf);
+	gtk_widget_show (property_box->notebook);
+	gtk_widget_show (vbox);
 
 	return ret;
 }
@@ -242,7 +284,7 @@ gnome_property_box_changed (GnomePropertyBox *property_box)
 
 /* This is connected directly to the Apply button.  */
 static void
-global_apply (GnomePropertyBox *property_box)
+global_apply (GtkObject *button, GnomePropertyBox *property_box)
 {
 	GList *list;
 	GnomePropertyBoxItem *item;
@@ -261,13 +303,18 @@ global_apply (GnomePropertyBox *property_box)
 		++n;
 	}
 
+	/* Emit an apply signal with a button of -1.  This means we
+	   just finished a global apply.  Is this a hack?  */
+	gtk_signal_emit (GTK_OBJECT (property_box),
+			 property_box_signals[APPLY], -1);
+
 	/* Doesn't matter which item we use.  */
 	set_sensitive (property_box, item);
 }
 
 /* This is connected to the Help button.  */
 static void
-help (GnomePropertyBox *property_box)
+help (GtkObject *button, GnomePropertyBox *property_box)
 {
 	gint page;
 
@@ -279,7 +326,7 @@ help (GnomePropertyBox *property_box)
 
 /* This is connected to the Cancel button.  */
 static void
-just_close (GnomePropertyBox *property_box)
+just_close (GtkObject *button, GnomePropertyBox *property_box)
 {
 	/* FIXME: it isn't clear what is the right thing to do here.  */
 	gtk_widget_destroy (GTK_WIDGET (property_box));
@@ -287,10 +334,10 @@ just_close (GnomePropertyBox *property_box)
 
 /* This is connected to the OK button.  */
 static void
-apply_and_close (GnomePropertyBox *property_box)
+apply_and_close (GtkObject *button, GnomePropertyBox *property_box)
 {
-	global_apply (property_box);
-	just_close (property_box);
+	global_apply (button, property_box);
+	just_close (button, property_box);
 }
 
 gint

@@ -1,4 +1,21 @@
+Sun Mar 22 00:07:06 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-propertybox.c (global_apply): Emit apply signal with page
+	number of -1 after all pages applied.
+
 Sat Mar 21 00:45:10 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-properties.c (apply_page): New function.
+	(gnome_property_configurator_setup): Connect apply_page to "apply"
+	signal on property box.
+	(gnome_property_configurator_request): Removed.
+
+	* gnome-properties.h (GnomePropertyConfigurator): Replaced
+	notebook with property_box.
+
+	* gnome-propertybox.c (gnome_property_box_new): Actually pack
+	widgets into frame.
+	(gnome_property_box_init): Initalize `items'.
 
 	* libgnomeui.h: Include gnome-propertybox.h.
 	* gnome-propertybox.h: New file.

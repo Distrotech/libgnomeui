@@ -3,6 +3,7 @@
 #include "libgnome/gnome-defs.h"
 #include "gnome-properties.h"
 #include "gnome-actionarea.h"
+#include "gnome-propertybox.h"
 
 GnomePropertyConfigurator *
 gnome_property_configurator_new (void)
@@ -10,7 +11,7 @@ gnome_property_configurator_new (void)
 	GnomePropertyConfigurator *this = g_malloc (sizeof (GnomePropertyConfigurator));
 
 	this->props = NULL;
-	this->notebook = NULL;
+	this->property_box = NULL;
 
 	return this;
 }
@@ -18,8 +19,8 @@ gnome_property_configurator_new (void)
 void
 gnome_property_configurator_destroy (GnomePropertyConfigurator *this)
 {
-	if (this->notebook)
-		gtk_widget_destroy (this->notebook);
+	if (this->property_box)
+		gtk_widget_destroy (this->property_box);
 	g_list_free (this->props);
 }
 
@@ -32,34 +33,34 @@ gnome_property_configurator_register (GnomePropertyConfigurator *this,
 	this->props = g_list_append (this->props, callback);
 }
 
+/* This is run when the user applies a change in the property box.  */
+static void
+apply_page (GtkObject *object, gint page, gpointer data)
+{
+	GnomePropertyConfigurator *this = (GnomePropertyConfigurator *) data;
+	int (*cb)(GnomePropertyRequest);
+
+	if (page == -1) {
+		/* Applied all pages.  Now write and sync.  */
+		gnome_property_configurator_request_foreach (this, GNOME_PROPERTY_WRITE);
+		gnome_config_sync ();
+		return;
+	}
+
+	cb = (int (*)(GnomePropertyRequest))
+		(g_list_nth (this->props, page)->data);
+	if (cb)
+		(*cb) (GNOME_PROPERTY_APPLY);
+}
+
 void
 gnome_property_configurator_setup (GnomePropertyConfigurator *this)
 {
-	this->notebook = gtk_notebook_new ();
-	gtk_widget_show (this->notebook);
-}
+	this->property_box = gnome_property_box_new ();
+	gtk_widget_show (this->property_box);
 
-gint
-gnome_property_configurator_request (GnomePropertyConfigurator *th,
-				     GnomePropertyRequest r)
-{
-	int (*cb)(GnomePropertyRequest);
-
-	if (!th->notebook)
-		return 0;
-
-	cb = (int (*)(GnomePropertyRequest))
-		(g_list_nth
-		 (th->props,
-		  gtk_notebook_current_page (GTK_NOTEBOOK (th->notebook)))->data);
-
-
-	/* printf ("request %d %x\n", gtk_notebook_current_page (th->notebook), cb); */
-
-	if (cb)
-		return (*cb) (r);
-	else
-		return 0;
+	gtk_signal_connect (GTK_OBJECT (this->property_box), "apply",
+			    (GtkSignalFunc) apply_page, (gpointer) this);
 }
 
 static void

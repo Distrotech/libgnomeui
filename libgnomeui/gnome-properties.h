@@ -5,7 +5,7 @@
 BEGIN_GNOME_DECLS
 
 typedef struct {
-	GtkWidget *notebook;
+	GtkWidget *property_box;
 
 	GList *props;
 } GnomePropertyConfigurator;
@@ -18,15 +18,13 @@ typedef enum {
 	GNOME_PROPERTY_SETUP
 } GnomePropertyRequest;
 
-GnomePropertyConfigurator
-     *gnome_property_configurator_new (void);
+GnomePropertyConfigurator *gnome_property_configurator_new (void);
   
 void gnome_property_configurator_destroy (GnomePropertyConfigurator *);
 void gnome_property_configurator_register (GnomePropertyConfigurator *, 
 					   int (*callback)(GnomePropertyRequest));
 void gnome_property_configurator_setup (GnomePropertyConfigurator *);
-gint gnome_property_configurator_request (GnomePropertyConfigurator *,
-					  GnomePropertyRequest);
+
 void gnome_property_configurator_request_foreach (GnomePropertyConfigurator *th,
 						  GnomePropertyRequest r);
 
