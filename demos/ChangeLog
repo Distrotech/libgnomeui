@@ -1,3 +1,7 @@
+2001-08-01  Darin Adler  <darin@bentspoon.com>
+
+	* winhints_demo.c: Update for changes to GnomeAbout.
+
 2001-06-13  Martin Baulig  <baulig@suse.de>
 
 	* selector_demo.c: Moved to libgnome-extra/demos.

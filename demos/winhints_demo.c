@@ -305,14 +305,11 @@ void layers_cb (GtkWidget *widget, void *data)
     }
   
   gnome_win_hints_set_layer(GTK_WIDGET(app), new_layer);
-  
-  return;
 }
 
 void quit_cb (GtkWidget *widget, void *data)
 {
   gtk_main_quit ();
-  return;
 }
 
 void workspace_cb (GtkWidget *widget, void *data)
@@ -336,8 +333,6 @@ void workspace_cb (GtkWidget *widget, void *data)
     gnome_win_hints_set_state(GTK_WIDGET(app), WIN_STATE_STICKY);
   else
     gnome_win_hints_set_state(GTK_WIDGET(app), 0);
-  
-  return;
 }
 
 static GList *get_workspaces(void)
@@ -386,8 +381,6 @@ void state_cb (GtkWidget *widget, void *data)
     state |= WIN_STATE_ARRANGE_IGNORE;
   
   gnome_win_hints_set_state(GTK_WIDGET(app), state);
-  
-  return;
 }
 
 void skip_cb (GtkWidget *widget, void *data)
@@ -403,7 +396,6 @@ void skip_cb (GtkWidget *widget, void *data)
     skip |= WIN_HINTS_SKIP_TASKBAR;
   
   gnome_win_hints_set_hints(GTK_WIDGET(app), skip);
-  return;
 }
 
 void about_cb(GtkWidget *widget, gpointer data)
@@ -413,12 +405,12 @@ void about_cb(GtkWidget *widget, gpointer data)
 
   about = gnome_about_new (_("WIN_HINTS Test"), "0.1",
                            _("Copyright (C) 1998"),
-                           authors,
                            _("Simple test app to check how the WIN_HINTS work.\n"
                              "And to test the gnome_win_hints_* functions for errors. :)"),
+                           authors,
+			   NULL,
+			   NULL,
                            NULL);
   gtk_widget_show (about);
-
-  return;
 }
 
