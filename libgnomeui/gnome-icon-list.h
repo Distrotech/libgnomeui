@@ -53,6 +53,8 @@ struct _GnomeIconList {
 	int icon_rows;
 	int icon_cols;
 
+	char *separators;
+
 	GnomeIconListMode mode;
 	int frozen : 1;
 
@@ -98,6 +100,7 @@ int            gnome_icon_list_append              (GnomeIconList *ilist, char *
 void           gnome_icon_list_insert              (GnomeIconList *ilist, int pos, char *icon_filename, char *text);
 void           gnome_icon_list_remove              (GnomeIconList *ilist, int pos);
 
+int            gnome_icon_list_append_imlib        (GnomeIconList *ilist, GdkImlibImage *im, char *text);
 void           gnome_icon_list_clear               (GnomeIconList *ilist);
 
 void           gnome_icon_list_set_icon_data       (GnomeIconList *ilist, int pos, gpointer data);
@@ -123,12 +126,19 @@ void           gnome_icon_list_set_col_spacing    (GnomeIconList *ilist, int spa
 void           gnome_icon_list_set_text_spacing   (GnomeIconList *ilist, int spacing);
 void           gnome_icon_list_set_icon_border    (GnomeIconList *ilist, int spacing);
 
+void           gnome_icon_list_set_separators     (GnomeIconList *ilist, char *separators);
+
 void           gnome_icon_list_set_mode           (GnomeIconList *ilist, GnomeIconListMode mode);
 void           gnome_icon_list_set_border         (GnomeIconList *ilist, GtkShadowType border);
 
 int            gnome_icon_list_get_icon_at        (GnomeIconList *ilist, int x, int y);
 void           gnome_icon_list_unselect_all       (GnomeIconList *ilist, GdkEvent *event, void *keep);
 
+
+struct gnome_icon_text_info_row {
+	char *text;
+	int width;
+};
 
 struct gnome_icon_text_info {
 	GList *rows;
@@ -140,7 +150,8 @@ struct gnome_icon_text_info {
 
 /* Text layout routine for icons with text */
 void                         gnome_icon_text_info_free (struct gnome_icon_text_info *ti);
-struct gnome_icon_text_info *gnome_icon_layout_text    (GdkFont *font, char *text, int max_width);
+struct gnome_icon_text_info *gnome_icon_layout_text    (GdkFont *font, char *text, char *separators,
+							int max_width, int confine);
 void                         gnome_icon_paint_text     (struct gnome_icon_text_info *ti,
 							GdkDrawable *drawable, GdkGC *gc,
 							int x_ofs, int y_ofs, int width);
