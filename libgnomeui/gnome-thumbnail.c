@@ -501,12 +501,19 @@ load_thumbnail_info (const char *path)
   if (pixbuf == NULL)
     return NULL;
   
+  thumb_uri = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::URI");
+  thumb_mtime_str = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::MTime");
+
+  if (thumb_uri == NULL ||
+      thumb_mtime_str == NULL)
+    {
+      g_object_unref (pixbuf);
+      return NULL;
+    }
+
   info = g_new0 (struct ThumbnailInfo, 1);
   
-  thumb_uri = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::URI");
   info->uri = g_strdup (thumb_uri);
-  
-  thumb_mtime_str = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::MTime");
   info->mtime = atol (thumb_mtime_str);
 
   g_object_unref (pixbuf);

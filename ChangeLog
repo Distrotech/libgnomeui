@@ -1,3 +1,9 @@
+2004-05-29  Martin Wehner  <martin.wehner@epost.de>
+
+	* libgnomeui/gnome-thumbnail.c: (load_thumbnail_info):
+	Handle invalid values from gdk_pixbuf_get_option.
+	Fixes #139473.
+	
 2004-05-29  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "tk" to ALL_LINGUAS.
