@@ -27,9 +27,6 @@ Thu Sep 28 03:35:44 2000  George Lebl <jirka@5z.com>
 
 2000-09-24  Iain Holmes  <iain@helixcode.com>
 
-	* gnome-file-selector.c (gnome_file_selector_construct): Construct
-	a gnome-selector widget instead of a gnome-entry.
-
 	* gnome-recently-used.c: fix glaring compile errors/warnings :)
 
 	* test-recently-used.c (item_changed): Change gnome_recent_document_get
