@@ -1,3 +1,9 @@
+2000-12-03  Martin Baulig  <baulig@suse.de>
+
+	* Makefile.am (INCLUDES): Added $(WARN_CFLAGS).
+
+	* libgnomeuiP.h (gnome_type_init): Added external declaration.
+
 2000-12-01  Martin Baulig  <baulig@suse.de>
 
 	A bunch of changes to make if work with the latest libraries

@@ -31,9 +31,18 @@
 #include <gobject/gsignal.h>
 #include <gtk/gtktypeutils.h>
 
+#include "libgnome/libgnomeP.h"
+#include "libgnome/gnome-defs.h"
+
 #include "gnome-macros.h"
 #include "gnometypebuiltins.h"
 #include "gnomemarshal.h"
+
+BEGIN_GNOME_DECLS
+
+void gnome_type_init(void);
+
+END_GNOME_DECLS
 
 #endif /* LIBGNOMEUIP_H */
 

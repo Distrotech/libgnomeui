@@ -31,6 +31,7 @@ INCLUDES = \
 	-I$(top_srcdir)					\
 	-I$(top_srcdir)/intl				\
 	-I$(top_builddir)/intl				\
+	$(WARN_CFLAGS)					\
 	$(GNOMESUPPORT_CFLAGS)				\
 	$(GLIB_CFLAGS)					\
 	$(GTK_CFLAGS)					\
