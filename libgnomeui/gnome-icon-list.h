@@ -74,6 +74,7 @@ struct _GnomeIconList {
 	GtkPolicyType hscrollbar_policy;
 	int vscrollbar_width;
 	int hscrollbar_height;
+	int last_selected;
 };
 
 struct _GnomeIconListClass {

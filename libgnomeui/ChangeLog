@@ -1,3 +1,14 @@
+1998-05-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c: Changed required for gmc icon view.
+	(icon_new_from_imlib): New routine, this is now used internally to
+	create an icon from an Imlib image.
+	(gnome_icon_list_append_imlib): New routine: add icons from an
+	Imlib created image.
+	(gnome_icon_list_append): Modified, load the file and call
+	gnome_icon_list_append_imlib.
+	(toggle_icon): Implemented the Windows-like selection scheme.
+
 Thu May  7 19:13:33 1998  Havoc Pennington  <hp@pobox.com>
 
 	* Makefile.am, libgnomeui.h: Add gnome-less

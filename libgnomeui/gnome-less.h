@@ -30,7 +30,7 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeLess GnomeLess;
 typedef struct _GnomeLessClass GnomeLessClass;
 
-#define GNOME_LESS(obj)        GTK_CHECK_CAST (obj, gnome_less_get_type (), GnomeLess)
+#define GNOME_LESS(obj)          GTK_CHECK_CAST (obj, gnome_less_get_type (), GnomeLess)
 #define GNOME_LESS_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_less_get_type (), GnomeLessClass)
 #define GNOME_IS_LESS(obj)       GTK_CHECK_TYPE (obj, gnome_less_get_type ())
 
@@ -54,15 +54,16 @@ guint gnome_less_get_type(void);
 GtkWidget * gnome_less_new(void);
 
 /* All these clear any existing text and show whatever you pass in. */
-void gnome_less_show_file(GnomeLess * gl, const gchar * path);
-void gnome_less_show_command(GnomeLess * gl,
-			     const gchar * command_line);
-void gnome_less_show_string(GnomeLess * gl, const gchar * s);
-void gnome_less_show_filestream(GnomeLess * gl, FILE * f);
+void gnome_less_show_file       (GnomeLess * gl, const gchar * path);
+void gnome_less_show_command    (GnomeLess * gl, const gchar * command_line);
+void gnome_less_show_string     (GnomeLess * gl, const gchar * s);
+void gnome_less_show_filestream (GnomeLess * gl, FILE * f);
 
-/* Use a fixed font for any future showings. 
-   Recommended for anything that comes in columns, program code,
-   etc. */
+/*
+ * Use a fixed font for any future showings. 
+ * Recommended for anything that comes in columns, program code,
+ * etc.
+ */
 void gnome_less_fixed_font(GnomeLess * gl);
 
 END_GNOME_DECLS
