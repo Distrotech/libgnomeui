@@ -1,3 +1,9 @@
+1998-11-25  James Henstridge  <james@daa.com.au>
+
+	* gtkcauldron.h (constants): Altered the values of a few of the
+	constants (previously GTK_CAULDRON_SPACE15 & GTK_CAULDRON_IGNOREESCAPE
+	was non zero).
+
 1998-11-24  James Henstridge  <james@daa.com.au>
 
 	* gnome-icon-item.c (iti_paint_text): Do not dereference null pointer.

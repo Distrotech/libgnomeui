@@ -49,9 +49,9 @@ extern "C" {
 #define GTK_CAULDRON_SPACE14		(0xEL<<GTK_CAULDRON_SPACE_SHIFT)
 #define GTK_CAULDRON_SPACE15		(0xFL<<GTK_CAULDRON_SPACE_SHIFT)
 
-#define GTK_CAULDRON_IGNOREESCAPE	(0x1L<<6)
-#define GTK_CAULDRON_IGNOREENTER	(0x1L<<7)
-#define GTK_CAULDRON_GRAB		(0x1L<<8)
+#define GTK_CAULDRON_IGNOREESCAPE	(0x1L<<7)
+#define GTK_CAULDRON_IGNOREENTER	(0x1L<<8)
+#define GTK_CAULDRON_GRAB		(0x1L<<9)
 
 typedef void (*GtkCauldronNextArgCallback) (gint cauldron_type, gpointer user_data, void *result);
 
