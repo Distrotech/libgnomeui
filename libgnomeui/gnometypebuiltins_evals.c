@@ -11,14 +11,6 @@ static const GtkEnumValue _gnome_animator_loop_type_values[] = {
   { GNOME_ANIMATOR_LOOP_PING_PONG, "GNOME_ANIMATOR_LOOP_PING_PONG", "ping-pong" },
   { 0, NULL, NULL }
 };
-static const GtkEnumValue _gnome_app_widget_position_type_values[] = {
-  { GNOME_APP_POS_TOP, "GNOME_APP_POS_TOP", "top" },
-  { GNOME_APP_POS_BOTTOM, "GNOME_APP_POS_BOTTOM", "bottom" },
-  { GNOME_APP_POS_LEFT, "GNOME_APP_POS_LEFT", "left" },
-  { GNOME_APP_POS_RIGHT, "GNOME_APP_POS_RIGHT", "right" },
-  { GNOME_APP_POS_FLOATING, "GNOME_APP_POS_FLOATING", "floating" },
-  { 0, NULL, NULL }
-};
 static const GtkEnumValue _gnome_ui_info_type_values[] = {
   { GNOME_APP_UI_ENDOFINFO, "GNOME_APP_UI_ENDOFINFO", "endofinfo" },
   { GNOME_APP_UI_ITEM, "GNOME_APP_UI_ITEM", "item" },
@@ -76,12 +68,12 @@ static const GtkEnumValue _gnome_client_state_values[] = {
   { GNOME_CLIENT_DISCONNECTED, "GNOME_CLIENT_DISCONNECTED", "disconnected" },
   { 0, NULL, NULL }
 };
-static const GtkEnumValue _gnome_dock_position_type_values[] = {
-  { GNOME_DOCK_POS_LEFT, "GNOME_DOCK_POS_LEFT", "left" },
-  { GNOME_DOCK_POS_RIGHT, "GNOME_DOCK_POS_RIGHT", "right" },
-  { GNOME_DOCK_POS_TOP, "GNOME_DOCK_POS_TOP", "top" },
-  { GNOME_DOCK_POS_BOTTOM, "GNOME_DOCK_POS_BOTTOM", "bottom" },
-  { GNOME_DOCK_POS_DETACHED, "GNOME_DOCK_POS_DETACHED", "detached" },
+static const GtkEnumValue _gnome_dock_placement_values[] = {
+  { GNOME_DOCK_TOP, "GNOME_DOCK_TOP", "top" },
+  { GNOME_DOCK_RIGHT, "GNOME_DOCK_RIGHT", "right" },
+  { GNOME_DOCK_BOTTOM, "GNOME_DOCK_BOTTOM", "bottom" },
+  { GNOME_DOCK_LEFT, "GNOME_DOCK_LEFT", "left" },
+  { GNOME_DOCK_FLOATING, "GNOME_DOCK_FLOATING", "floating" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_dock_item_behavior_values[] = {

@@ -46,6 +46,9 @@ typedef enum
   GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL = 1 << 3
 } GnomeDockItemBehavior;
 
+#define GNOME_DOCK_ITEM_DETACHABLE(x) (!(GNOME_DOCK_ITEM(x)->behavior & \
+                                       GNOME_DOCK_ITEM_BEH_NEVER_DETACH))
+
 typedef struct _GnomeDockItem       GnomeDockItem;
 typedef struct _GnomeDockItemClass  GnomeDockItemClass;
 

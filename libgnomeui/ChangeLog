@@ -1,3 +1,27 @@
+1998-12-14  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-app.c (gnome_app_set_toolbar): Honor preferences by
+	setting behavior to NEVER_DETACH if user wants.
+	(gnome_app_set_menus): Same.
+	
+	Maybe this should be done for add_docked too?
+
+	* gnome-dock-item.c: If we are BEH_NEVER_DETACH, don't draw
+	the handle box and don't allow movement. Ettore, not sure this
+	was the right flag; I used a GNOME_DOCK_ITEM_DETACHABLE macro
+	so I can add a different flag if needed.
+	(gnome_dock_item_size_request): If we are not detachable,
+	don't consider handle size.
+	(gnome_dock_item_size_allocate): If we aren't detachable, 
+	give all space to child.
+	(gnome_dock_item_paint): If not detachable, don't draw 
+	handle
+	(gnome_dock_item_button_changed): If not detachable, 
+	ignore button presses.
+	
+
+	* dock_demo.c: Add a NEVER_DETACH toolbar.
+
 1998-12-15  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-app.c (gnome_app_enable_layout_config): New function.

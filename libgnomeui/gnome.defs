@@ -12,15 +12,6 @@
    (restart GNOME_ANIMATOR_LOOP_RESTART)
    (ping-pong GNOME_ANIMATOR_LOOP_PING_PONG))
 
-; enumerations from "gnome-app.h"
-
-(define-enum GnomeAppWidgetPositionType
-   (top GNOME_APP_POS_TOP)
-   (bottom GNOME_APP_POS_BOTTOM)
-   (left GNOME_APP_POS_LEFT)
-   (right GNOME_APP_POS_RIGHT)
-   (floating GNOME_APP_POS_FLOATING))
-
 ; enumerations from "gnome-app-helper.h"
 
 (define-enum GnomeUIInfoType
@@ -78,12 +69,12 @@
 
 ; enumerations from "gnome-dock.h"
 
-(define-enum GnomeDockPositionType
-   (left GNOME_DOCK_POS_LEFT)
-   (right GNOME_DOCK_POS_RIGHT)
-   (top GNOME_DOCK_POS_TOP)
-   (bottom GNOME_DOCK_POS_BOTTOM)
-   (detached GNOME_DOCK_POS_DETACHED))
+(define-enum GnomeDockPlacement
+   (top GNOME_DOCK_TOP)
+   (right GNOME_DOCK_RIGHT)
+   (bottom GNOME_DOCK_BOTTOM)
+   (left GNOME_DOCK_LEFT)
+   (floating GNOME_DOCK_FLOATING))
 
 ; enumerations from "gnome-dock-item.h"
 

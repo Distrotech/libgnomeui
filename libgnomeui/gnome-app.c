@@ -284,6 +284,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 {
 	GtkWidget *dock_item;
 	GtkAccelGroup *ag;
+	GnomeDockItemBehavior behavior = 0;
 
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
@@ -292,9 +293,14 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	g_return_if_fail(GTK_IS_MENU_BAR(menubar));
 	g_return_if_fail(app->layout != NULL);
 
+	behavior |= GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
+	behavior |= GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL;
+	
+	if (!gnome_preferences_get_toolbar_detachable())
+		behavior |= GNOME_DOCK_ITEM_BEH_NEVER_DETACH;
+
 	dock_item = gnome_dock_item_new (GNOME_APP_MENUBAR_NAME,
-					 GNOME_DOCK_ITEM_BEH_EXCLUSIVE
-					 | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+					 behavior);
 	gtk_container_set_border_width (GTK_CONTAINER (dock_item), 0);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
 	gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
@@ -433,12 +439,18 @@ void
 gnome_app_set_toolbar (GnomeApp *app,
 		       GtkToolbar *toolbar)
 {
+	GnomeDockItemBehavior behavior = 0;
+	behavior |= GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
+	
+	if (!gnome_preferences_get_toolbar_detachable())
+		behavior |= GNOME_DOCK_ITEM_BEH_NEVER_DETACH;
+	
 	/* Making dock items containing toolbars use
 	   `GNOME_DOCK_ITEM_BEH_EXCLUSIVE' is not really a
 	   requirement.  We only do this for backwards compatibility.  */
 	gnome_app_add_toolbar (app, toolbar,
 			       GNOME_APP_TOOLBAR_NAME,
-			       GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
+			       behavior,
 			       GNOME_DOCK_TOP,
 			       0, 0, 0);
 }

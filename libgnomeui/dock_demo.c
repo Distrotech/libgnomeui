@@ -4,12 +4,12 @@
 
 static GtkWidget *app;
 static GtkWidget *dock;
-static GtkWidget *dock_items[5];
-static GtkWidget *toolbars[5];
+static GtkWidget *dock_items[6];
+static GtkWidget *toolbars[6];
 static GtkWidget *drawing_area;
 static GtkWidget *client_frame;
 
-static GnomeUIInfo toolbar_infos[5][10] = {
+static GnomeUIInfo toolbar_infos[6][10] = {
   { { GNOME_APP_UI_ITEM, "New", "Create a new file", NULL, NULL, NULL,
       GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_NEW, 0, 0, NULL },
     { GNOME_APP_UI_ITEM, "Open", "Open an existing file", NULL, NULL, NULL,
@@ -44,7 +44,13 @@ static GnomeUIInfo toolbar_infos[5][10] = {
       GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_FIRST, 0, 0, NULL },
     { GNOME_APP_UI_ITEM, "Last", "Go to the last item", NULL, NULL, NULL,
       GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_LAST, 0, 0, NULL },
+    GNOMEUIINFO_END },
+  { { GNOME_APP_UI_ITEM, "First", "Go to the first item", NULL, NULL, NULL,
+      GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_FIRST, 0, 0, NULL },
+    { GNOME_APP_UI_ITEM, "Last", "Go to the last item", NULL, NULL, NULL,
+      GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_LAST, 0, 0, NULL },
     GNOMEUIINFO_END }
+
 };
 
 static void delete_callback (GtkWidget *w)
@@ -101,7 +107,7 @@ main (int argc, char **argv)
 
   layout = gnome_dock_layout_new ();
 
-  for (i = 0; i < 5; i++)
+  for (i = 0; i < 6; i++)
     {
       toolbars[i] = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL,
                                      GTK_TOOLBAR_ICONS);
@@ -116,6 +122,9 @@ main (int argc, char **argv)
         dock_items[i] = gnome_dock_item_new ("SomeBar",
                                              GNOME_DOCK_ITEM_BEH_EXCLUSIVE
                                              | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+      else if (i == 1)
+        dock_items[i] = gnome_dock_item_new ("NoDetachBar",
+                                             GNOME_DOCK_ITEM_BEH_NEVER_DETACH);
       else
         {
           gchar *name;

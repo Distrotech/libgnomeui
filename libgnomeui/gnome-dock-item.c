@@ -492,7 +492,8 @@ gnome_dock_item_size_request (GtkWidget      *widget,
 
   if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-      requisition->width = DRAG_HANDLE_SIZE;
+      requisition->width = 
+        GNOME_DOCK_ITEM_DETACHABLE(dock_item) ? DRAG_HANDLE_SIZE : 0;
       if (bin->child != NULL)
         {
           requisition->width += bin->child->requisition.width;
@@ -503,7 +504,8 @@ gnome_dock_item_size_request (GtkWidget      *widget,
     }
   else
     {
-      requisition->height = DRAG_HANDLE_SIZE;
+      requisition->height = 
+        GNOME_DOCK_ITEM_DETACHABLE(dock_item) ? DRAG_HANDLE_SIZE : 0;
       if (bin->child != NULL)
         {
           requisition->width = bin->child->requisition.width;
@@ -551,10 +553,14 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
 
       child_allocation.x = border_width;
       child_allocation.y = border_width;
-      if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
-	child_allocation.x += DRAG_HANDLE_SIZE;
-      else
-	child_allocation.y += DRAG_HANDLE_SIZE;
+
+      if (GNOME_DOCK_ITEM_DETACHABLE(di))
+        {
+          if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
+            child_allocation.x += DRAG_HANDLE_SIZE;
+          else
+            child_allocation.y += DRAG_HANDLE_SIZE;
+        }
 
       if (di->is_floating)
 	{
@@ -589,11 +595,14 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
 	  child_allocation.width = MAX (1, widget->allocation.width - 2 * border_width);
 	  child_allocation.height = MAX (1, widget->allocation.height - 2 * border_width);
 
-	  if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
-	    child_allocation.width -= DRAG_HANDLE_SIZE;
-	  else
-	    child_allocation.height -= DRAG_HANDLE_SIZE;
-	  
+          if (GNOME_DOCK_ITEM_DETACHABLE (di))
+            {
+              if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
+                child_allocation.width -= DRAG_HANDLE_SIZE;
+              else
+                child_allocation.height -= DRAG_HANDLE_SIZE;
+            }
+
 	  if (GTK_WIDGET_REALIZED (di))
 	    gdk_window_move_resize (di->bin_window,
 				    0,
@@ -627,6 +636,10 @@ gnome_dock_item_paint (GtkWidget      *widget,
   guint height;
   guint border_width;
   GdkRectangle rect;
+  gint drag_handle_size = DRAG_HANDLE_SIZE;
+
+  if (!GNOME_DOCK_ITEM_DETACHABLE(widget))
+    drag_handle_size = 0;
 
   bin = GTK_BIN (widget);
   di = GNOME_DOCK_ITEM (widget);
@@ -640,13 +653,13 @@ gnome_dock_item_paint (GtkWidget      *widget,
     }
   else if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-      width = widget->allocation.width - DRAG_HANDLE_SIZE;
+      width = widget->allocation.width - drag_handle_size;
       height = widget->allocation.height;
     }
   else
     {
       width = widget->allocation.width;
-      height = widget->allocation.height - DRAG_HANDLE_SIZE;
+      height = widget->allocation.height - drag_handle_size;
     }
 
   if (!event)
@@ -669,22 +682,26 @@ gnome_dock_item_paint (GtkWidget      *widget,
   /* We currently draw the handle _above_ the relief of the dockitem.
      It could also be drawn on the same level...  */
 
-  rect.x = 0;
-  rect.y = 0;
-
-  if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (GNOME_DOCK_ITEM_DETACHABLE(di))
     {
-      rect.width = DRAG_HANDLE_SIZE;
-      rect.height = height;
-    }
-  else
-    {
-      rect.width = width;
+      
+      rect.x = 0;
+      rect.y = 0;
+      
+      if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
+        {
+          rect.width = DRAG_HANDLE_SIZE;
+          rect.height = height;
+        }
+      else
+        {
+          rect.width = width;
       rect.height = DRAG_HANDLE_SIZE;
-    }
-
-  draw_textured_frame (widget, di->bin_window, &rect, GTK_SHADOW_OUT, event ? &event->area : area);
-
+        }
+      
+      draw_textured_frame (widget, di->bin_window, &rect, GTK_SHADOW_OUT, event ? &event->area : area);
+    }    
+  
   if (bin->child && GTK_WIDGET_VISIBLE (bin->child))
     {
       GdkRectangle child_area;
@@ -768,6 +785,9 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
   di = GNOME_DOCK_ITEM (widget);
 
   if (event->window != di->bin_window)
+    return FALSE;
+
+  if (!GNOME_DOCK_ITEM_DETACHABLE(widget))
     return FALSE;
 
   event_handled = FALSE;
@@ -1177,3 +1197,6 @@ gnome_dock_item_get_floating_position (GnomeDockItem *item,
       *y = item->float_y;
     }
 }
+
+
+
