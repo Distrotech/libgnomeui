@@ -1,3 +1,7 @@
+2001-07-13  Darin Adler  <darin@bentspoon.com>
+
+	* configure.in: Remove duplicate macros.
+
 2001-06-28  Anders Carlsson  <andersca@codefactory.se>
 
 	* configure.in: change MAKE_INLINE_PIXBUF to 
