@@ -49,23 +49,25 @@ CPPFLAGS="$sm_save_cppflags"
 dnl
 dnl Start of pkg-config checks
 dnl
-PKG_CHECK_MODULES(LIBGNOMEUI, \
-		  libgnome-2.0 >= 1.104.0 libgnomecanvas-2.0 >= 1.104.0 \
-		  libbonoboui-2.0 >= 1.97.0 gconf-2.0 >= 1.1.1 )
+GNOMEUI_MODULES="libgnome-2.0 >= 1.104.0 libgnomecanvas-2.0 >= 1.104.0 libbonoboui-2.0 >= 1.97.0 gconf-2.0 >= 1.1.1"
+PKG_CHECK_MODULES(LIBGNOMEUI, $GNOMEUI_MODULES)
 AC_SUBST(LIBGNOMEUI_CFLAGS)
 AC_SUBST(LIBGNOMEUI_LIBS)
 
-PKG_CHECK_MODULES(LIBGNOMEUI_COMPONENTS, \
-		  libgnome-2.0 >= 1.104.0 libgnomecanvas-2.0 >= 1.104.0 \
-		  libbonoboui-2.0 >= 1.97.0 gconf-2.0 >= 1.1.1)
+PKG_CHECK_MODULES(LIBGNOMEUI_COMPONENTS, $GNOMEUI_MODULES)
 AC_SUBST(LIBGNOMEUI_COMPONENTS_CFLAGS)
 AC_SUBST(LIBGNOMEUI_COMPONENTS_LIBS)
 
-PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, \
-		  libgnome-2.0 >= 1.104.0 libgnomecanvas-2.0 >= 1.104.0 \
-		  libbonoboui-2.0 >= 1.97.0 gconf-2.0 >= 1.1.1)
+PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, $GNOMEUI_MODULES)
 AC_SUBST(LIBGNOMEUI_DEMOS_CFLAGS)
 AC_SUBST(LIBGNOMEUI_DEMOS_LIBS)
+
+PKG_CHECK_MODULES(LIBGNOMEUI_GLADE, $GNOMEUI_MODULES libglade-2.0 >= 1.99.3)
+AC_SUBST(LIBGNOMEUI_GLADE_CFLAGS)
+AC_SUBST(LIBGNOMEUI_GLADE_LIBS)
+
+GLADE_MODULE_DIR="`$PKG_CONFIG --variable=moduledir libglade-2.0`"
+AC_SUBST(GLADE_MODULE_DIR)
 
 dnl
 dnl Check for gtk-doc
@@ -153,6 +155,7 @@ po/Makefile.in
 libgnomeui/Makefile
 libgnomeui/libgnomeui-2.0.pc
 libgnomeui/pixmaps/Makefile
+glade/Makefile
 images/Makefile
 demos/Makefile
 test-gnome/Makefile

@@ -1,3 +1,11 @@
+2001-10-24  jacob berkman  <jacob@ximian.com>
+
+	* glade/glade-gnome.c: move from libglade/glade/
+
+	* configure.in: add libglade check
+
+	* Makefile.am (SUBDIRS): build glade/
+
 2001-09-26  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Up to 1.104.0 and require libgnome 1.104.0 and
