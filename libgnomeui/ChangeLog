@@ -1,3 +1,7 @@
+2000-05-27  Julian Missig  <julian@linuxpower.org>
+
+	* gnome-paper-selector.h: SELECTOR, not SELECTER.
+
 2000-05-26  Ian Peters  <itp@gnu.org>
 
 	* gnome-app.h: uncommented GNOME_APP_CLASS and GNOME_IS_APP_CLASS --
