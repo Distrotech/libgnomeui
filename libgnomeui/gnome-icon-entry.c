@@ -587,9 +587,10 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
-	/* Setting the text in the entry will actually set the icon */
 	gtk_entry_set_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (ientry)),
 			    filename);
+	entry_changed (NULL, ientry);
+	
 }
 
 /**
