@@ -1,3 +1,17 @@
+Wed Apr 15 18:03:36 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h: Updated comments.
+
+	* gnome-appsmenu.c: Moved things around and fixed comments to make
+ 	file clearer.
+	(gtk_menu_item_new_from_apps_menu): Fixed bug which assumed menu
+ 	was of homogeneous type (because the particular variety's function
+ 	did the recursion rather than the generic function).
+	(gtk_menu_new_from_apps_menu): ignore the root node, rather than
+ 	creating a one-item menu with the root node on it. Remaining bug:
+ 	Child menus show up on my screen before I call _show() on the root
+ 	menu. I do not understand this.
+
 1998-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dateedit.c (gnome_date_edit_init): The "Calendar" button

@@ -26,6 +26,19 @@
 #include "libgnome/gnome-util.h"
 #include "gnome-pixmap.h"
 
+
+static GnomeAppsMenu * gnome_apps_menu_new_empty(void);
+
+/* Use a dotfile, so people won't try to edit manually
+   unless they really know what they're doing. */
+/* Alternatively, use "apps" to be consistent with share/apps? */
+
+#define GNOME_APPS_MENU_DEFAULT_DIR ".Gnome Apps Menu"
+
+/*******************************
+  Debugging stuff
+  ********************************/
+
 #ifndef G_DISABLE_CHECKS
 static gboolean gnome_apps_menu_check(GnomeAppsMenu * gam)
 {
@@ -73,17 +86,14 @@ static gboolean gnome_apps_menu_check(GnomeAppsMenu * gam)
 /* Things that should always be true once the GnomeAppsMenu is
    initialized */
 #define GNOME_APPS_MENU_INVARIANTS(x) g_assert( gnome_apps_menu_check(x) )
-#else
+#else /* G_DISABLE_CHECKS */
 #define GNOME_APPS_MENU_INVARIANTS(x)
 #endif
 
-GnomeAppsMenu * gnome_apps_menu_new_empty(void);
 
-/* Use a dotfile, so people won't try to edit manually
-   unless they really know what they're doing. */
-/* Alternatively, use "apps" to be consistent with share/apps? */
-
-#define GNOME_APPS_MENU_DEFAULT_DIR ".Gnome Apps Menu"
+/****************************************
+  Variety-handling stuff
+  ***********************************/
 
 typedef struct {
   gchar * extension;
@@ -179,6 +189,37 @@ static void clear_varieties(void)
   }
 }
 
+static GnomeAppsMenuVariety * 
+find_variety(GnomeAppsMenu * gam)
+{
+  GList * list;
+  GnomeAppsMenuVariety * v;
+
+  g_return_val_if_fail(gam != NULL, NULL);
+  g_return_val_if_fail(gam->extension != NULL, NULL);
+
+  list = GNOME_APPS_MENU_IS_DIR(gam) ? dir_varieties : file_varieties;
+  
+  g_return_val_if_fail(list != NULL, NULL);
+
+  while ( list ) {
+    v = (GnomeAppsMenuVariety *)list->data;
+    g_assert ( v != NULL );
+
+    if ( strcmp (gam->extension, v->extension) == 0 ) {
+      return v;
+    }
+    
+    list = g_list_next(list);
+  }
+
+  return NULL; /* didn't find an appropriate extension */
+}
+
+/*******************************************
+  Code to handle default varieties 
+  **********************************/
+
 static void dentry_launch_cb(GtkWidget * menuitem, gpointer gam)
 {
   gnome_desktop_entry_launch( (GnomeDesktopEntry *)
@@ -192,8 +233,6 @@ static GtkWidget * gtk_menu_item_new_from_dentry (GnomeAppsMenu * gam)
   GtkWidget * menuitem;
   GtkWidget * pixmap;
   gchar * pixmap_name, * menu_name;
-  GtkWidget * subdir, *subitem;
-  GList * submenus;
   GtkWidget *label, *hbox, *align;
 
   g_return_val_if_fail(gam != NULL, NULL);
@@ -236,29 +275,10 @@ static GtkWidget * gtk_menu_item_new_from_dentry (GnomeAppsMenu * gam)
   gtk_widget_show (hbox);
   gtk_widget_show (label);
   if (pixmap) gtk_widget_show (pixmap);
-      
-  if ( GNOME_APPS_MENU_IS_DIR(gam) ) {
 
-    subdir = gtk_menu_new();
-    gtk_widget_show(subdir);
 
-    gtk_menu_item_set_submenu ( GTK_MENU_ITEM(menuitem), subdir );
-    
-    submenus = gam->submenus;
-
-    while ( submenus ) {
-      
-      subitem = gtk_menu_item_new_from_dentry ( (GnomeAppsMenu *)(submenus->data));
-      if (subitem) {
-	gtk_menu_append(GTK_MENU(subdir), subitem);
-	gtk_widget_show(subitem);
-      }
-
-      submenus = g_slist_next(submenus);
-    }
-  }
-  else {
-    /* Connect callback if it's not a directory */
+  /* Connect callback if it's not a directory */
+  if ( ! GNOME_APPS_MENU_IS_DIR(gam) ) {
     gtk_signal_connect ( GTK_OBJECT(menuitem), "activate",
 			 GTK_SIGNAL_FUNC(dentry_launch_cb),
 			 gam );
@@ -283,35 +303,9 @@ static void make_default_varieties(void)
   }
 }
 
-static GnomeAppsMenuVariety * 
-find_variety(GnomeAppsMenu * gam)
-{
-  GList * list;
-  GnomeAppsMenuVariety * v;
-
-  g_return_val_if_fail(gam != NULL, NULL);
-  g_return_val_if_fail(gam->extension != NULL, NULL);
-
-  list = GNOME_APPS_MENU_IS_DIR(gam) ? dir_varieties : file_varieties;
-  
-  g_return_val_if_fail(list != NULL, NULL);
-
-  while ( list ) {
-    v = (GnomeAppsMenuVariety *)list->data;
-    g_assert ( v != NULL );
-
-    g_print("Comparing %s with\n %s\n", gam->extension, v->extension);
-
-    if ( strcmp (gam->extension, v->extension) == 0 ) {
-      return v;
-    }
-    
-    list = g_list_next(list);
-  }
-
-  return NULL; /* didn't find an appropriate extension */
-}
-
+/**********************************
+  Code to load the GnomeAppsMenu from disk
+  ************************************/
 
 static GnomeAppsMenuLoadFunc 
 get_load_func_and_init_apps_menu( const gchar * filename,
@@ -482,14 +476,6 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
 
   if ( filename_list == NULL ) return NULL;
 
-#ifdef DEBUG
-  while ( *filename_list ) {
-    g_print("%s\n", *filename_list);
-    ++filename_list;
-  }
-  filename_list = filename_list_start;
-#endif
-
   root_apps_menu = load_directory_info(filename_list);
 
   if (root_apps_menu == NULL) {
@@ -608,6 +594,10 @@ GnomeAppsMenu * gnome_apps_menu_load_system(void)
   return gam;
 }
 
+/********************************************
+  Functions for creating a GtkMenu[Item] from a GnomeAppsMenu
+  *******************************************/
+
 GnomeAppsMenuGtkMenuItemFunc
 get_menu_item_func(GnomeAppsMenu * gam)
 {
@@ -626,6 +616,7 @@ get_menu_item_func(GnomeAppsMenu * gam)
 GtkWidget * gtk_menu_item_new_from_apps_menu(GnomeAppsMenu * gam)
 {
   GnomeAppsMenuGtkMenuItemFunc menu_item_func;
+  GtkWidget * menuitem, * submenu;
 
   g_return_val_if_fail(gam != NULL, NULL);
 
@@ -636,35 +627,64 @@ GtkWidget * gtk_menu_item_new_from_apps_menu(GnomeAppsMenu * gam)
        it has no function to make it show up.*/
     return NULL;
   }
-  
-  return menu_item_func(gam);
+
+  menuitem = menu_item_func(gam);
+
+  if ( menuitem ) {
+    if ( GNOME_APPS_MENU_IS_DIR(gam) && (gam->submenus != NULL) ) {
+
+      submenu = gtk_menu_new_from_apps_menu(gam);
+      if (submenu) {
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem), submenu);
+	gtk_widget_show(submenu);
+      }
+
+    }
+  }
+
+  return menuitem;
 }
 
 GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam)
 {
-  GtkWidget * root_menu;
-  GtkWidget * menuitem;
-
-  g_return_val_if_fail(gam != NULL, NULL);    
-
-  root_menu = gtk_menu_new();
-
-  menuitem = gtk_menu_item_new_from_apps_menu(gam);
+  GtkWidget * menu, * subitem;
+  GList * submenus;
+  gint items;
   
-  if (menuitem != NULL) {
-    gtk_menu_append( GTK_MENU(root_menu), menuitem );
-    gtk_widget_show(menuitem);
+  g_return_val_if_fail(GNOME_APPS_MENU_IS_DIR(gam), NULL);
+
+  menu = gtk_menu_new();    
+  submenus = gam->submenus;
+  items = 0;
+
+  while ( submenus ) {
+    
+    subitem = 
+      gtk_menu_item_new_from_apps_menu ( (GnomeAppsMenu *)(submenus->data));
+    
+    if (subitem) {
+      gtk_menu_append(GTK_MENU(menu), subitem);
+      gtk_widget_show(subitem);
+      ++items;
+    }
+      
+    submenus = g_list_next(submenus);
   }
 
-  return root_menu;
+  if (items > 0) return menu;
+  else {
+    gtk_widget_destroy(menu);
+    return NULL;
+  }
 }
+
 
 /****************************************************
   Remaining functions are for manipulating the apps_menu
   trees. Don't relate to config files. 
   *******************************************/
 
-GnomeAppsMenu * gnome_apps_menu_new_empty(void)
+static GnomeAppsMenu * gnome_apps_menu_new_empty(void)
 {
   GnomeAppsMenu * gam = g_new(GnomeAppsMenu, 1);
 

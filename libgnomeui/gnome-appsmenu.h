@@ -36,8 +36,8 @@
    Directories have .directory files in them; these are handled by
    default. Other such file types can be registered, and anything
    starting with . will be taken to be one.  Only one directory
-   dotfile will be used per directory, the first one found. So really
-   there should only be one.
+   dotfile will be used per directory, the first one found with a
+   known name. So really there should only be one.
 
    Applications can register their own types of apps menu items by
    providing an extension other than .desktop, and a function to load
@@ -122,7 +122,9 @@ typedef gpointer (*GnomeAppsMenuLoadFunc)(const gchar *);
 /* The menuitem-creating function can be NULL, if you don't
    want to create menuitems in gtk_menu_new_from_apps_menu()
    This function should create the menu item and attach any
-   callbacks. */
+   callbacks. It should NOT be recursive, i.e. just create 
+   the item for this GnomeAppsMenu, don't worry about the 
+   submenus. */
 
 typedef GtkWidget * (*GnomeAppsMenuGtkMenuItemFunc)(GnomeAppsMenu *);
        
@@ -153,7 +155,12 @@ GnomeAppsMenu * gnome_apps_menu_load_default(void);
 GnomeAppsMenu * gnome_apps_menu_load_system(void);
 
 /* Create a GtkMenu or MenuItem from a GnomeAppsMenu, complete with
-   callbacks. */
+   callbacks. Creating an item recursively creates any submenus.
+   Creating a menu is the same as iterating over gam->submenus and
+   appending the result of gtk_menu_item_new_from_apps_menu() for each
+   submenu to the menu. i.e. it's the same as creating an item, except
+   that there's no item created for the root AppsMenu.  Confusing -
+   just look at the code. :) */
 
 GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam);
 GtkWidget * gtk_menu_item_new_from_apps_menu(GnomeAppsMenu * gam);
