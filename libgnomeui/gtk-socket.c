@@ -44,6 +44,7 @@ static gint gtk_socket_focus                    (GtkContainer *container,
 static GdkFilterReturn gtk_socket_filter_func   (GdkXEvent *gdk_xevent, 
 						 GdkEvent *event, 
 						 gpointer data);
+static void gtk_socket_destroy			(GtkObject *object); 
 
 #ifdef DEBUG_PLUGSOCKET
 #define DPRINTF(arg) g_print arg
@@ -102,6 +103,8 @@ gtk_socket_class_init (GtkSocketClass *class)
   widget_class->focus_out_event = gtk_socket_focus_out_event;
 
   container_class->focus = gtk_socket_focus;
+
+  object_class->destroy = gtk_socket_destroy;
 }
 
 static void
@@ -584,3 +587,16 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 
   return return_val;
 }
+
+static void
+gtk_socket_destroy(GtkObject *object)
+{
+  GtkSocket *socket = GTK_SOCKET(object);
+  gdk_window_destroy_notify (socket->plug_window);
+  gdk_window_destroy (socket->plug_window);
+  socket->plug_window = NULL;
+
+  gtk_widget_destroy (GTK_WIDGET(object));
+}
+	    
+

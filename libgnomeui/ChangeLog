@@ -1,3 +1,9 @@
+Thu Apr 23 20:50:56 1998  George Lebl  <jirka@5z.com>
+
+	* gtk-socket.c: fixed destroy handeling on the socket,
+	  before it only worked if you destroyed the plug, if
+	  you destroyed the socket it just messed up
+
 1998-04-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dialog.c (gnome_dialog_new): Actually set the window
