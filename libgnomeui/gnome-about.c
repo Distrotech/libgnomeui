@@ -631,9 +631,9 @@ gnome_about_new (gchar	*title,
 	gtk_window_set_title (GTK_WINDOW (about), _("About"));
 	gtk_window_set_policy (GTK_WINDOW (about), FALSE, FALSE, TRUE);
 
-	//x = (gdk_screen_width ()  - w) / 2;
-	//y = (gdk_screen_height () - h) / 2;   
-	//gtk_widget_set_uposition ( GTK_WIDGET (about), x, y);
+	/* x = (gdk_screen_width ()  - w) / 2; */
+	/* y = (gdk_screen_height () - h) / 2;    */
+	/* gtk_widget_set_uposition ( GTK_WIDGET (about), x, y); */
 	gtk_container_border_width (GTK_CONTAINER (about), 3);
                                                         
 	vbox = gtk_vbox_new (FALSE, 0);
@@ -660,9 +660,9 @@ gnome_about_new (gchar	*title,
 			      comments, logo);
   
 	w = ai->w; h = ai->h;
-	//x = (gdk_screen_width ()  - w) / 2;
-	//y = (gdk_screen_height () - h) / 2;   
-	//gtk_widget_set_uposition ( GTK_WIDGET (about), x, y);
+	/* x = (gdk_screen_width ()  - w) / 2; */
+	/* y = (gdk_screen_height () - h) / 2;    */
+	/* gtk_widget_set_uposition ( GTK_WIDGET (about), x, y); */
 
 	if (logo)
 	{

@@ -1,3 +1,7 @@
+1998-03-03  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome-about.c (gnome_about_new): Uses /* */ comments, not //.
+
 1998-03-01  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-pixmap.c (gnome_pixmap_expose): I have to draw the pixmap on
