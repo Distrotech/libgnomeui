@@ -116,7 +116,7 @@ struct _GnomeCanvasItemClass {
 GtkType gnome_canvas_item_get_type (void);
 
 /* Create a canvas item using the standard Gtk argument mechanism.  The item is automatically
- * inserted at the top of the specified canvas group.
+ * inserted at the top of the specified canvas group.  The last argument must be a NULL pointer.
  */
 GnomeCanvasItem *gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, ...);
 
@@ -129,7 +129,7 @@ void gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *paren
 void gnome_canvas_item_constructv (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
 				   guint nargs, GtkArg *args);
 
-/* Configure an item using the standard Gtk argument mechanism */
+/* Configure an item using the standard Gtk argument mechanism.  The last argument must be a NULL pointer. */
 void gnome_canvas_item_set (GnomeCanvasItem *item, ...);
 
 /* Same as above, with parsed args */
