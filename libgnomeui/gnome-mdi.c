@@ -36,6 +36,7 @@
 #include "libgnome/gnome-util.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
+#include "gnome-cursors.h"
 #include "gnome-dock-layout.h"
 #include "gnome-stock.h"
 #include "gnome-preferences.h"
@@ -701,7 +702,7 @@ static gint book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 	mdi = GNOME_MDI(data);
 
 	if(!drag_cursor)
-		drag_cursor = gdk_cursor_new(GDK_HAND2);
+		drag_cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_FLEUR);
 
 	if(e->window == widget->window) {
 		mdi->in_drag = TRUE;

@@ -13,6 +13,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
+#include "gnome-cursors.h"
 #include <libgnome/gnome-i18nP.h>
 #include <libgnomeui/gnome-stock.h>
 
@@ -199,7 +200,7 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 	gtk_grab_add (gde->cal_popup);
 
 
-	cursor = gdk_cursor_new (GDK_ARROW);
+	cursor = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_DEFAULT);
 
 	gdk_pointer_grab (gde->cal_popup->window, TRUE,
 			  (GDK_BUTTON_PRESS_MASK

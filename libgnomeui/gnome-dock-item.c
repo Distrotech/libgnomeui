@@ -27,6 +27,7 @@
 #include <gtk/gtkwindow.h>
 
 #include "gnome-dock-item.h"
+#include "gnome-cursors.h"
 
 enum {
   ARG_0,
@@ -1132,7 +1133,7 @@ gnome_dock_item_grab_pointer (GnomeDockItem *item)
 {
   GdkCursor *fleur;
 
-  fleur = gdk_cursor_new (GDK_FLEUR);
+  fleur = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_FLEUR);
 
   /* Hm, not sure this is the right thing to do, but it seems to work.  */
   while (gdk_pointer_grab (item->bin_window,

@@ -21,6 +21,7 @@
 #include <gtk/gtklabel.h>
 #include <libgnome/gnome-url.h>
 #include "gnome-href.h"
+#include "gnome-cursors.h"
 
 static void gnome_href_class_init(GnomeHRefClass *klass);
 static void gnome_href_init(GnomeHRef *href);
@@ -243,7 +244,7 @@ static void gnome_href_realize(GtkWidget *widget) {
 
   if (GTK_WIDGET_CLASS(parent_class)->realize)
     (* GTK_WIDGET_CLASS(parent_class)->realize)(widget);
-  cursor = gdk_cursor_new(GDK_HAND2);
+  cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
   gdk_window_set_cursor(widget->window, cursor);
   gdk_cursor_destroy(cursor);
 }

@@ -15,7 +15,7 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkwindow.h>
 #include "gnome-icon-item.h"
-
+#include "gnome-cursors.h"
 
 /* Margins used to display the information */
 #define MARGIN_X 2
@@ -639,7 +639,7 @@ iti_start_selecting (Iti *iti, int idx, guint32 event_time)
 
 	gtk_editable_select_region (e, idx, idx);
 	gtk_editable_set_position (e, idx);
-	ibeam = gdk_cursor_new (GDK_XTERM);
+	ibeam = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_XTERM);
 	gnome_canvas_item_grab (GNOME_CANVAS_ITEM (iti),
 				GDK_BUTTON_RELEASE_MASK |
 				GDK_POINTER_MOTION_MASK,
