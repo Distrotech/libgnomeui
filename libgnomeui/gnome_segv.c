@@ -9,6 +9,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include <errno.h>
+
 #include <stdlib.h>
 #include <unistd.h>
 #include <gnome.h>
@@ -17,25 +19,6 @@
 #include <stdio.h>
 
 int retval = 1;
-pid_t bug_buddy_pid = -1;
-
-gchar *bug_buddy_path;
-gchar *appname;
-
-gint bug_buddy_cb(GtkWidget *button, gpointer data)
-{
-  gchar *envv[3] = { NULL };
-  gchar *argv[2] = { NULL };
-
-  argv[0] = bug_buddy_path;
-  envv[0] = g_strdup_printf("BB_APPNAME=%s", appname);
-  envv[1] = g_strdup_printf("BB_PID=%d", getppid());
-
-  bug_buddy_pid = gnome_execute_async_with_env (NULL, 
-                                                1, argv,
-                                                2, envv);
-  return FALSE;
-}
 
 int main(int argc, char *argv[])
 {
@@ -44,6 +27,9 @@ int main(int argc, char *argv[])
   struct sigaction sa;
   poptContext ctx;
   const char **args;
+  int res;
+  gchar *appname;
+  gchar *bug_buddy_path = NULL;
 
   /* We do this twice to make sure we don't start running ourselves... :) */
   memset(&sa, 0, sizeof(sa));
@@ -90,14 +76,13 @@ int main(int argc, char *argv[])
                                   GNOME_STOCK_BUTTON_CLOSE,
                                   NULL);
   
-  bug_buddy_path = gnome_is_program_in_path ("bug-buddy");
-  if (bug_buddy_path != NULL)
+  /* so we don't try to debug bug-buddy */
+  if (getenv("BB_APPNAME") == NULL)
     {
-      gnome_dialog_append_button(GNOME_DIALOG(mainwin),
-                                 _("Submit a bug report"));
-      gnome_dialog_button_connect(GNOME_DIALOG(mainwin), 1,
-                                  GTK_SIGNAL_FUNC(bug_buddy_cb),
-                                  NULL);
+      bug_buddy_path = gnome_is_program_in_path ("bug-buddy");
+      if (bug_buddy_path != NULL)
+        gnome_dialog_append_button(GNOME_DIALOG(mainwin),
+                                   _("Submit a bug report"));
     }
   /* Please download http://www.gnome.org/application_crashed-shtml.txt,
    * translate the plain text, and send the file to webmaster@gnome.org. */
@@ -108,10 +93,20 @@ int main(int argc, char *argv[])
 
   g_free(msg);
 
-  gnome_dialog_run(GNOME_DIALOG(mainwin));
+  res = gnome_dialog_run(GNOME_DIALOG(mainwin));
 
-  if (bug_buddy_pid != -1)
-    waitpid(bug_buddy_pid, NULL, 0);
+  if (res == 1)
+    {
+      gchar *env_str;
+      env_str = g_strdup_printf("BB_APPNAME=%s", appname);
+      putenv(env_str);
+      
+      env_str = g_strdup_printf("BB_PID=%d", getppid());
+      putenv(env_str);
+
+      g_assert (bug_buddy_path);
+      system(bug_buddy_path);
+    }
 
   return 0;
 }
