@@ -3133,6 +3133,8 @@ gnome_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
 {
 	GnomeCanvas *canvas;
 
+	GTK_WIDGET_SET_FLAGS (widget, GTK_HAS_FOCUS);
+
 	canvas = GNOME_CANVAS (widget);
 
 #if 0
@@ -3151,6 +3153,8 @@ static gint
 gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
 {
 	GnomeCanvas *canvas;
+
+	GTK_WIDGET_UNSET_FLAGS (widget, GTK_HAS_FOCUS);
 
 	canvas = GNOME_CANVAS (widget);
 
