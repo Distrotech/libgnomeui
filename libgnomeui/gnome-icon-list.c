@@ -1884,7 +1884,7 @@ gil_class_init (GilClass *gil_class)
 			gnome_marshal_VOID__INT_BOXED,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_INT,
-			GTK_TYPE_GDK_EVENT);
+			GDK_TYPE_EVENT);
 
 	gil_signals[UNSELECT_ICON] =
 		gtk_signal_new (
@@ -1895,7 +1895,7 @@ gil_class_init (GilClass *gil_class)
 			gnome_marshal_VOID__INT_BOXED,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_INT,
-			GTK_TYPE_GDK_EVENT);
+			GDK_TYPE_EVENT);
 
 	gil_signals[TEXT_CHANGED] =
 		gtk_signal_new (
