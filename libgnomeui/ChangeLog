@@ -1,3 +1,8 @@
+2000-06-28  Peter Teichman (peter@helixcode.com)
+
+	* gnome-messagebox.c: Do not focus the default button when there
+	are no buttons.
+
 2000-06-21  Jody Goldberg <jgoldberg@home.com>
 
 	* gnome-canvas.c (gnome_canvas_init) : Init the Input Context and
