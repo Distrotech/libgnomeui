@@ -9,7 +9,7 @@
 	{toolbar,menubar}_handlebox preferences removed; obsoleted by
 	gnome-dock integration.
 
-	Renamed toolbar_relief to toolbar_btn_relief.  Renamed
+	Renamed toolbar_relief to toolbar_relief_btn.  Renamed
 	toolbar_flat to toolbar_relief, inverting the logic for
 	consistency with menubar relief.
 
