@@ -224,10 +224,10 @@ gnome_add_dock_item (GladeXML *xml,
 	placement = BONOBO_DOCK_TOP;
 	behavior  = BONOBO_DOCK_ITEM_BEH_NORMAL;
 	
-	for (i = 0; i < childinfo->child->n_properties; i++) {
-		const char *name  = childinfo->child->properties[i].name;
-		const char *value = childinfo->child->properties[i].value;
-		
+	for (i = 0; i < childinfo->n_properties; i++) {
+		const char *name  = childinfo->properties[i].name;
+		const char *value = childinfo->properties[i].value;
+
 		if (!strcmp (name, "placement"))
 			placement = glade_enum_from_string (
 				BONOBO_TYPE_DOCK_PLACEMENT,

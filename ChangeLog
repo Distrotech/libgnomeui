@@ -1,5 +1,8 @@
 2001-12-10  jacob berkman  <jacob@ximian.com>
 
+	* glade/glade-gnome.c (gnome_add_dock_item): fix dock item
+	placement
+	
 	* glade/glade-gnome.c: accept more values for boolean true
 
 2001-12-09  Kristian Rietveld  <kris@gtk.org>
