@@ -1,3 +1,7 @@
+2002-06-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
+	* libgnomeui/gnome-app-helper.c: Translate the word "Contents" in the
+	  libgnomeui domain (i.e. correctly).
+
 2002-06-10  Naba Kumar <kh_naba@users.sourceforge.net>
 
 	* configure.in: Added hi in ALL_LINGUAS
