@@ -126,11 +126,7 @@ typedef enum {
 	GNOME_APP_CONFIGURABLE_ITEM_END_GAME
 } GnomeUIInfoConfigurableTypes;
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #define GNOME_APP_CONFIGURABLE_ITEM_EXIT	GNOME_APP_CONFIGURABLE_ITEM_QUIT
-
-#endif
 
 /* These values identify the type of pixmap used in an item */
 typedef enum {
@@ -343,12 +339,7 @@ typedef struct {
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
           GNOME_APP_CONFIGURABLE_ITEM_CLOSE, (GdkModifierType) 0, NULL }
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #define GNOMEUIINFO_MENU_EXIT_ITEM(cb, data)	GNOMEUIINFO_MENU_QUIT_ITEM(cb, data)
-
-#endif
-
 #define GNOMEUIINFO_MENU_QUIT_ITEM(cb, data)                                \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           (gpointer)cb, (gpointer)(data), NULL,                             \
