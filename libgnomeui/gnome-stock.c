@@ -952,6 +952,8 @@ create_pixmap_from_imlib_scaled(GtkWidget *window, GtkStateType state,
 {
 	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
 	gchar *d;
+	GnomePixmap *ret;
+	int need_free;
 
 	if ((data->width != data->scaled_width) ||
 	    (data->height != data->scaled_height)) {
@@ -962,14 +964,18 @@ create_pixmap_from_imlib_scaled(GtkWidget *window, GtkStateType state,
 				       data->scaled_height);
 		else
 			return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped_at_size((gchar *)data->rgb_data, NULL, data->width, data->height, data->scaled_width, data->scaled_height, &shape_color);
+		need_free = 1;
 	} else {
 		d = (gchar *)data->rgb_data;
+		need_free = 0;
 	}
 
-	return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped(d, NULL,
-								 data->scaled_width,
-								 data->scaled_height,
-								 &shape_color);
+	ret = (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped(d, NULL,
+								data->scaled_width,
+								data->scaled_height,
+								&shape_color);
+	if (need_free) g_free(d);
+	return ret;
 }
 
 
