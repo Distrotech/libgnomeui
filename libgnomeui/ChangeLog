@@ -2,7 +2,8 @@
 
 	* gnome-icon-list.c: (toggle_icon): Make sure we emit a signal
 	with the correct index.
-	
+	(icon_event): Generate events for button-2 and 3
+
 	* gnome-icon-list.c (gnome_icon_list_icon_is_visible): Fix wrong
 	return value. 
 
