@@ -1,19 +1,22 @@
+# translation of libgnomeui.HEAD.po to Mongolian
 # translation of libgnomeui.HEAD.mn.po to Mongolian
 # This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# Sanlig Badral <badral@chinggis.com>, 2003
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Sanlig Badral <badral@chinggis.com>, 2003.
+# Sanlig Badral <Badral@openmn.org>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD.mn\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-01-21 06:26+0100\n"
-"Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
-"Language-Team: Mongolian <mn@li.org>\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-21 21:09+0200\n"
+"PO-Revision-Date: 2003-08-22 03:01+0200\n"
+"Last-Translator: Sanlig Badral <Badral@openmn.org>\n"
+"Language-Team: Mongolian <openmn-kdemn@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.1\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -48,9 +51,8 @@ msgid "Translated by"
 msgstr "Орчуулсан"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Оролцогчид"
+msgstr "_Оролцогчид"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -122,10 +124,8 @@ msgstr "Орчуулагч"
 
 # CHECK
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Орчуулагчдад талархал. Энэ үгс орчуулагдах боломжтойгоор тэмдэглэгджээ."
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "Орчуулагчдад талархал. Энэ үгс орчуулагдах боломжтойгоор тэмдэглэгджээ."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -142,6 +142,7 @@ msgstr "%s -н тухай"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Тоглоом"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Тусламж"
 
@@ -389,11 +391,11 @@ msgstr "Программыг тохируулах"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Тухай"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Энэ программын тухай"
 
@@ -420,7 +422,7 @@ msgstr "Шинэ _цонх нээх"
 msgid "_Close This Window"
 msgstr "Цонх _хаах"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Энэ цонхыг хаах"
 
@@ -595,7 +597,7 @@ msgstr "Хэрэглэгчийн харилцан ажиллагааны шаа�
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Таны HTTP итгэмжилэгч таныг нэвтрэхийг хүсэж байна.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -603,18 +605,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Та \"%s\" рүү хандахын тулд нэвтрэх ёстой.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Таны нууц үг кодлогдохгүй дамжуулагдана."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Таны нууц үг кодлогдоод дамжуулагдана."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Баталгаа шаардлагатай"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -875,8 +879,7 @@ msgstr "Лавлахын бичлэг"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"Файлын бичлэг лавлахын нэрийн оруулах эсвэл файлын бүтэн нэр хэрэглэх эсэх."
+msgstr "Файлын бичлэг лавлахын нэрийн оруулах эсвэл файлын бүтэн нэр хэрэглэх эсэх."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1216,11 +1219,11 @@ msgstr "Мэдээ"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Хэрэглэгч:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Нууц үг:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1367,8 +1370,10 @@ msgstr ""
 "Та дэлгэрэнгүй мэдээлэл авахдаа GNOME-н алдаа боловсруулагч вэб хаягаар "
 "зочилоно уу."
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Тестийг дуусгах"
+
 #~ msgid "_Credits"
 #~ msgstr "_Оролцогчид"
 
-#~ msgid "Exit the test"
-#~ msgstr "Тестийг дуусгах"
