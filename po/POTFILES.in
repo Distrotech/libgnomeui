@@ -1,4 +1,5 @@
 libgnomeui/gnome-about.c
+libgnomeui/gnome-appbar.c
 libgnomeui/gnome-client.c
 libgnomeui/gnome-color-picker.c
 libgnomeui/gnome-dateedit.c
