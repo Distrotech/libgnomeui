@@ -1,3 +1,8 @@
+1999-01-01  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-session.c (gnome_mdi_save_state): fixed a bug
+	with different key names used when saving and restoring.
+
 1998-12-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_destroy): Release
