@@ -1,3 +1,21 @@
+2003-10-08  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserimpldefault.c (tree_selection_changed): Autosize
+	the columns after the model is set.
+	(shortcuts_append_path): Add optional indentation to items.
+	(shortcuts_append_bookmarks): Indent bookmark items.
+	(create_shortcuts_tree): Set the "xpad" attribute of the name
+	renderer to be fetched from the indent column.
+	(shortcuts_append_bookmarks): Use NULL for the name of the
+	bookmarks node, so that a separator gets drawn.
+	(create_shortcuts_tree): Create a GtkCellRendererSepText.
+
+	* gtkcellrendererseptext.[ch]: New files with a cell renderer that
+	can display text or a separator line.
+
+	* Makefile.am (libgtkfilechooser_la_SOURCES): Added
+	gtkcellrendererseptext.[ch].
+
 2003-10-07  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystem.h (struct _GtkFileSystemIface): Added methods for
