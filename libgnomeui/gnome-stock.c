@@ -474,6 +474,8 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_PIXMAP_BOOK_GREEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_green, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_BOOK_BLUE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_blue, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_BOOK_YELLOW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_NOT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_not, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_MULTIPLE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_multiple_file, 32, 32 },
 	{GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exit, TB_W, TB_H, TB_W, TB_H},
 	{GNOME_STOCK_PIXMAP_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
 	{GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, N_("OK"), imlib_button_ok, TB_W, TB_H, TB_W, TB_H},
@@ -1428,3 +1430,73 @@ gnome_stock_menu_accel_dlg(char *section)
 	gtk_widget_show(GTK_WIDGET(box));
 }
 
+GtkWidget *
+gnome_stock_transparent_window (const char *icon, const char *subtype)
+{
+	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
+	GnomeStockPixmapEntry *entry;
+	GtkWidget *window;
+	GdkImlibImage *im;
+	
+	g_return_val_if_fail(icon != NULL, NULL);
+
+	/* subtype can be NULL, so not checked */
+	entry = lookup(icon, subtype, TRUE);
+	if (!entry)
+		return NULL;
+	
+	window = NULL;
+	
+	switch (entry->type) {
+	case GNOME_STOCK_PIXMAP_TYPE_DATA:
+		im = gdk_imlib_create_image_from_xpm_data (entry->data.xpm_data);
+		break;
+	case GNOME_STOCK_PIXMAP_TYPE_PATH:
+		im = gdk_imlib_load_image (entry->path.pathname);
+		break;
+	case GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED:
+	case GNOME_STOCK_PIXMAP_TYPE_IMLIB:
+		im = gdk_imlib_create_image_from_data (entry->imlib.rgb_data, NULL,
+						       entry->imlib.width, entry->imlib.height);
+		break;
+	 default:
+		 break;
+	}
+
+	if (!im)
+		return NULL;
+
+	/* Create the window on imlib's visual */
+	gtk_widget_push_visual (gdk_imlib_get_visual ());
+	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
+	window = gtk_window_new (GTK_WINDOW_POPUP);
+	gtk_widget_pop_colormap ();
+	gtk_widget_pop_visual ();
+
+	/* Force realization */
+	gtk_widget_realize (window);
+
+	/* Kids:  DO not do this.  I repeat.  Do not do this.
+	 * we are trained professionals and we know what we are doing.
+	 *
+	 * Here is an explanation in case you care:
+	 *   We break the GDK abstraction here, as older Gdks do not
+	 *   support the Xserver SaveUnder flag.  We do set the
+	 *   windows's realize bit and we create the window manually
+	 *   setting the saveunder flag.
+	 */
+	/* Set proper size */
+	gtk_widget_set_usize (window, im->rgb_width, im->rgb_height);
+
+	/* The imlib images use a color to encode the shape, use it */
+	gdk_imlib_set_image_shape (im, &shape_color);
+
+	/* Render the image, return it */
+	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+	gdk_window_set_back_pixmap (window->window, gdk_imlib_move_image (im), FALSE);
+	gdk_window_shape_combine_mask (window->window, gdk_imlib_move_mask (im), 0, 0);
+
+	gdk_imlib_destroy_image (im);
+	
+	return window;
+}

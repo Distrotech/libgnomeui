@@ -129,6 +129,8 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_BOOK_YELLOW "Book Yellow"
 #define GNOME_STOCK_PIXMAP_ABOUT       "About"
 #define GNOME_STOCK_PIXMAP_QUIT        "Quit"
+#define GNOME_STOCK_PIXMAP_MULTIPLE    "Multiple"
+#define GNOME_STOCK_PIXMAP_NOT         "Not"
 
 #define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
 
@@ -415,6 +417,12 @@ gboolean	       gnome_stock_menu_accel      (const char *type,
  * redefinitions. section should be something like "/filename/section/" with
  * both the leading and trailing `/' */
 void                   gnome_stock_menu_accel_parse(const char *section);
+
+/*
+ * Creates a toplevel window with a shaped mask.  Useful for making the DnD
+ * windows
+ */
+GtkWidget *gnome_stock_transparent_window (const char *icon, const char *subtype);
 
 END_GNOME_DECLS
 
