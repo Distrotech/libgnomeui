@@ -1,3 +1,9 @@
+2000-05-27  Iain Holmes  <ih@csd.abdn.ac.uk>
+
+	* gnome-canvas-text.c (gnome_canvas_text_bounds): width of bounds are
+	only x + rbearing.
+	(get_bounds_item_relative): Same.
+
 2000-05-23  Jacob Berkman  <jacob@helixcode.com>
 
 	* gnome-window-icon.c (window_destroyed): forgot to test for NULL here.

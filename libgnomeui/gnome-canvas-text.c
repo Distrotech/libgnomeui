@@ -312,7 +312,7 @@ get_bounds_item_relative (GnomeCanvasText *text, double *px1, double *py1, doubl
 	} else {
 		*px1 = x + private->min_lbearing;
 		*py1 = y;
-		*px2 = x + text->max_width + private->max_rbearing;
+		*px2 = x + private->max_rbearing;
 		*py2 = y + text->height;
 	}
 }
@@ -405,7 +405,7 @@ get_bounds (GnomeCanvasText *text, double *px1, double *py1, double *px2, double
 	} else {
 		*px1 = text->cx + private->min_lbearing;
 		*py1 = text->cy;
-		*px2 = text->cx + text->max_width + private->max_rbearing;
+		*px2 = text->cx + private->max_rbearing;
 		*py2 = text->cy + text->height;
 	}
 }
@@ -1272,7 +1272,7 @@ gnome_canvas_text_bounds (GnomeCanvasItem *item, double *x1, double *y1, double 
 		break;
 	}
 
-	*x2 = *x1 + width + private->max_rbearing;
+	*x2 = *x1 + private->max_rbearing;
 	*y2 = *y1 + height;
 }
 
