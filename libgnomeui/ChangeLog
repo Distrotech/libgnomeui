@@ -1,3 +1,10 @@
+1999-09-07  Havoc Pennington  <hp@pobox.com>
+
+        * gnome-app-helper.h (GnomeUIInfo): Change pixmap_info to
+	gconstpointer. Closes bug 1864.
+	
+	* gnome-app-helper.c (create_pixmap): Take a const argument.
+
 1999-09-07  Elliot Lee  <sopwith@redhat.com>
 	* gnome-font-selector.c: Don't use X in class_init()...
 

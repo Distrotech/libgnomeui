@@ -330,7 +330,7 @@ static gchar *menu_names[] =
 
 static GtkWidget *
 create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, 
-		gpointer pixmap_info)
+		gconstpointer pixmap_info)
 {
 	GtkWidget *pixmap;
 	char *name;
@@ -344,7 +344,7 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type,
 
 	case GNOME_APP_PIXMAP_DATA:
 		if (pixmap_info)
-			pixmap = gnome_pixmap_new_from_xpm_d (pixmap_info);
+			pixmap = gnome_pixmap_new_from_xpm_d ((char**)pixmap_info);
 
 		break;
 

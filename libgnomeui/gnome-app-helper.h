@@ -139,7 +139,7 @@ typedef struct {
 	gpointer unused_data;		/* Reserved for future expansion, 
 					   should be NULL */
 	GnomeUIPixmapType pixmap_type;	/* Type of pixmap for the item */
-	gpointer pixmap_info;		/* Pointer to the pixmap information:
+	gconstpointer pixmap_info;      /* Pointer to the pixmap information:
 					 *
 					 * For GNOME_APP_PIXMAP_STOCK, a 
 					 * pointer to the stock icon name.
