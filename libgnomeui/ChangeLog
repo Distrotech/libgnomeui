@@ -1,3 +1,22 @@
+1999-04-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_expose): Build a microtile array
+	from the expose area directly, instead of going through
+	gnome_canvas_request_redraw().  This ensures that we'll repaint
+	off-screen areas if requested.
+
+1999-04-22  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (add_idle): New function to centralize adding of
+	the idle handlers.
+	(remove_idle): New function to centralize the removal of idle
+	handlers.
+	(gnome_canvas_update_now): Use remove_idle().  Do not call
+	gdk_flush().
+	(gnome_canvas_request_update): Use add_idle().
+	(gnome_canvas_request_redraw_uta): Use add_idle().
+	(idle_handler): Reset the canvas->idle_id to zero.
+
 1999-04-26  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-mdi-generic-child.h (GNOME_IS_MDI_MDI_CHILD): Remove.  Is

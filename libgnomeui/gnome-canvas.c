@@ -53,8 +53,6 @@
  * - Add more image loading techniques to work around imlib deficiencies.
  */
 
-#define noVERBOSE
-
 #include <stdio.h>
 #include <config.h>
 #include <math.h>
@@ -348,6 +346,7 @@ redraw_if_visible (GnomeCanvasItem *item)
 		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 }
 
+/* Standard object shutdown function for canvas items */
 static void
 gnome_canvas_item_shutdown (GtkObject *object)
 {
@@ -395,6 +394,7 @@ gnome_canvas_item_shutdown (GtkObject *object)
 		(* GTK_OBJECT_CLASS (item_parent_class)->shutdown) (object);
 }
 
+/* Realize handler for canvas items */
 static void
 gnome_canvas_item_realize (GnomeCanvasItem *item)
 {
@@ -403,24 +403,28 @@ gnome_canvas_item_realize (GnomeCanvasItem *item)
 	gnome_canvas_item_request_update (item);
 }
 
+/* Unrealize handler for canvas items */
 static void
 gnome_canvas_item_unrealize (GnomeCanvasItem *item)
 {
 	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_REALIZED);
 }
 
+/* Map handler for canvas items */
 static void
 gnome_canvas_item_map (GnomeCanvasItem *item)
 {
 	GTK_OBJECT_SET_FLAGS (item, GNOME_CANVAS_ITEM_MAPPED);
 }
 
+/* Unmap handler for canvas items */
 static void
 gnome_canvas_item_unmap (GnomeCanvasItem *item)
 {
 	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_MAPPED);
 }
 
+/* Update handler for canvas items */
 static void
 gnome_canvas_item_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
@@ -486,10 +490,6 @@ gnome_canvas_item_invoke_update (GnomeCanvasItem *item, double *affine, ArtSVP *
 	if (item->object.flags & GNOME_CANVAS_ITEM_NEED_VIS)
 		child_flags |= GNOME_CANVAS_UPDATE_VISIBILITY;
 
-#ifdef VERBOSE
-	g_print ("item %x object %x\n", child_flags, item->object.flags);
-#endif
-
 	if ((child_flags & (GNOME_CANVAS_UPDATE_REQUESTED | GNOME_CANVAS_UPDATE_AFFINE | GNOME_CANVAS_UPDATE_CLIP |
 			    GNOME_CANVAS_UPDATE_VISIBILITY)) &&
 	    GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update)
@@ -503,8 +503,9 @@ gnome_canvas_item_invoke_update (GnomeCanvasItem *item, double *affine, ArtSVP *
 #endif
 }
 
-/* This routine invokes the point method of the item. The argument x, y should be in the parent's item-relative
- * coordinate system. This routine applies the inverse of the item's transform, maintaining the affine invariant.
+/* This routine invokes the point method of the item.  The argument x, y should
+ * be in the parent's item-relative coordinate system.  This routine applies the
+ * inverse of the item's transform, maintaining the affine invariant.
  */
 static double
 gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item)
@@ -529,6 +530,7 @@ gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int c
 	return (* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->point) (item, x, y, cx, cy, actual_item);
 }
 
+/* Marshaler for the "event" signal of canvas items */
 static void
 gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpointer func_data, GtkArg *args)
 {
@@ -644,15 +646,6 @@ gnome_canvas_item_affine_relative (GnomeCanvasItem *item, const double affine[6]
 	double *new_affine;
 	int i;
 
-#ifdef VERBOSE
-	{
-		char str[128];
-
-		art_affine_to_string (str, affine);
-		g_print ("g_c_i_a_r %s\n", str);
-	}
-#endif
-
 	if (fabs (affine[0] - 1.0) < GCIAR_EPSILON &&
 	    fabs (affine[1]) < GCIAR_EPSILON &&
 	    fabs (affine[2]) < GCIAR_EPSILON &&
@@ -720,15 +713,6 @@ gnome_canvas_item_affine_absolute (GnomeCanvasItem *item, const double affine[6]
 {
 	int i;
 
-#ifdef VERBOSE
-	{
-		char str[128];
-
-		art_affine_to_string (str, affine);
-		g_print ("g_c_i_a_a %s\n", str);
-	}
-#endif
-
 	if (fabs (affine[0] - 1.0) < GCIAR_EPSILON &&
 	    fabs (affine[1]) < GCIAR_EPSILON &&
 	    fabs (affine[2]) < GCIAR_EPSILON &&
@@ -785,10 +769,6 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 {
 	double translate[6];
 
-#ifdef VERBOSE
-	g_print ("g_c_item_move %g %g\n", dx, dy);
-#endif
-
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 
@@ -819,6 +799,9 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 }
 #endif
 
+/* Convenience function to reorder items in a group's child list.  This puts the
+ * specified link after the "before" link.
+ */
 static void
 put_item_after (GList *link, GList *before)
 {
@@ -1523,6 +1506,7 @@ gnome_canvas_group_get_type (void)
 	return group_type;
 }
 
+/* Class initialization function for GnomeCanvasGroupClass */
 static void
 gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 {
@@ -1553,6 +1537,7 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 	item_class->bounds = gnome_canvas_group_bounds;
 }
 
+/* Object initialization function for GnomeCanvasGroup */
 static void
 gnome_canvas_group_init (GnomeCanvasGroup *group)
 {
@@ -1562,6 +1547,7 @@ gnome_canvas_group_init (GnomeCanvasGroup *group)
 #endif
 }
 
+/* Translate handler for canvas groups */
 static double *
 gnome_canvas_ensure_translate (GnomeCanvasItem *item)
 {
@@ -1578,6 +1564,7 @@ gnome_canvas_ensure_translate (GnomeCanvasItem *item)
 	}
 }
 
+/* Set_arg handler for canvas groups */
 static void
 gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
@@ -1624,6 +1611,7 @@ gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 }
 
+/* Get_arg handler for canvas groups */
 static void
 gnome_canvas_group_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
@@ -1666,6 +1654,7 @@ gnome_canvas_group_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 }
 
+/* Destroy handler for canvas groups */
 static void
 gnome_canvas_group_destroy (GtkObject *object)
 {
@@ -1690,6 +1679,7 @@ gnome_canvas_group_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (group_parent_class)->destroy) (object);
 }
 
+/* Update handler for canvas groups */
 static void
 gnome_canvas_group_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
@@ -1722,6 +1712,7 @@ gnome_canvas_group_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 	item->y2 = bbox.y1;
 }
 
+/* Realize handler for canvas groups */
 static void
 gnome_canvas_group_realize (GnomeCanvasItem *item)
 {
@@ -1741,6 +1732,7 @@ gnome_canvas_group_realize (GnomeCanvasItem *item)
 	(* group_parent_class->realize) (item);
 }
 
+/* Unrealize handler for canvas groups */
 static void
 gnome_canvas_group_unrealize (GnomeCanvasItem *item)
 {
@@ -1760,6 +1752,7 @@ gnome_canvas_group_unrealize (GnomeCanvasItem *item)
 	(* group_parent_class->unrealize) (item);
 }
 
+/* Map handler for canvas groups */
 static void
 gnome_canvas_group_map (GnomeCanvasItem *item)
 {
@@ -1779,6 +1772,7 @@ gnome_canvas_group_map (GnomeCanvasItem *item)
 	(* group_parent_class->map) (item);
 }
 
+/* Unmap handler for canvas groups */
 static void
 gnome_canvas_group_unmap (GnomeCanvasItem *item)
 {
@@ -1798,6 +1792,7 @@ gnome_canvas_group_unmap (GnomeCanvasItem *item)
 	(* group_parent_class->unmap) (item);
 }
 
+/* Draw handler for canvas groups */
 static void
 gnome_canvas_group_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y, int width, int height)
 {
@@ -1825,6 +1820,7 @@ gnome_canvas_group_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, in
 	}
 }
 
+/* Point handler for canvas groups */
 static double
 gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item)
 {
@@ -1882,6 +1878,7 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 	return best;
 }
 
+/* Translate handler for canvas groups */
 static void
 gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
 {
@@ -1900,6 +1897,7 @@ gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
 #endif
 }
 
+/* Bounds handler for canvas groups */
 static void
 gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
@@ -1979,6 +1977,7 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 	*y2 = maxy;
 }
 
+/* Render handler for canvas groups */
 static void
 gnome_canvas_group_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 {
@@ -2006,6 +2005,7 @@ gnome_canvas_group_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 	}
 }
 
+/* Adds an item to a group */
 static void
 group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
@@ -2027,6 +2027,7 @@ group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 	gnome_canvas_group_child_bounds (group, item);
 }
 
+/* Removes an item from a group */
 static void
 group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
@@ -2210,6 +2211,7 @@ gnome_canvas_get_type (void)
 	return canvas_type;
 }
 
+/* Class initialization function for GnomeCanvasClass */
 static void
 gnome_canvas_class_init (GnomeCanvasClass *class)
 {
@@ -2241,12 +2243,16 @@ gnome_canvas_class_init (GnomeCanvasClass *class)
 	widget_class->focus_out_event = gnome_canvas_focus_out;
 }
 
+/* Callback used when the root item of a canvas is destroyed.  The user should
+ * never ever do this, so we panic if this happens.
+ */
 static void
 panic_root_destroyed (GtkObject *object, gpointer data)
 {
 	g_error ("Eeeek, root item %p of canvas %p was destroyed!", object, data);
 }
 
+/* Object initialization function for GnomeCanvas */
 static void
 gnome_canvas_init (GnomeCanvas *canvas)
 {
@@ -2280,29 +2286,43 @@ gnome_canvas_init (GnomeCanvas *canvas)
 	canvas->need_repick = TRUE;
 }
 
+/* Convenience function to remove the idle handler of a canvas */
+static void
+remove_idle (GnomeCanvas *canvas)
+{
+	if (canvas->idle_id == 0)
+		return;
+
+	gtk_idle_remove (canvas->idle_id);
+	canvas->idle_id = 0;
+}
+
+/* Removes the transient state of the canvas (idle handler, grabs). */
 static void
 shutdown_transients (GnomeCanvas *canvas)
 {
-	if (canvas->need_redraw || canvas->need_update) {
-		/* We do not turn off the need_update flag so that if the canvas
-		 * is mapped again, it will run the update methods of the items
-		 * that need it.  We do turn need_redraw off because the flag
-		 * will be turned on, anyway, if the canvas is exposed.
-		 */
+	/* We turn off the need_redraw flag, since if the canvas is mapped again
+	 * it will request a redraw anyways.  We do not turn off the need_update
+	 * flag, though, because updates are not queued when the canvas remaps
+	 * itself.
+	 */
+	if (canvas->need_redraw) {
 		canvas->need_redraw = FALSE;
 		canvas->redraw_x1 = 0;
 		canvas->redraw_y1 = 0;
 		canvas->redraw_x2 = 0;
 		canvas->redraw_y2 = 0;
-		gtk_idle_remove (canvas->idle_id);
 	}
 
 	if (canvas->grabbed_item) {
 		canvas->grabbed_item = NULL;
 		gdk_pointer_ungrab (GDK_CURRENT_TIME);
 	}
+
+	remove_idle (canvas);
 }
 
+/* Destroy handler for GnomeCanvas */
 static void
 gnome_canvas_destroy (GtkObject *object)
 {
@@ -2357,6 +2377,7 @@ gnome_canvas_new_aa (void)
 	return GTK_WIDGET (canvas);
 }
 
+/* Map handler for the canvas */
 static void
 gnome_canvas_map (GtkWidget *widget)
 {
@@ -2378,6 +2399,7 @@ gnome_canvas_map (GtkWidget *widget)
 		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->map) (canvas->root);
 }
 
+/* Unmap handler for the canvas */
 static void
 gnome_canvas_unmap (GtkWidget *widget)
 {
@@ -2401,6 +2423,7 @@ gnome_canvas_unmap (GtkWidget *widget)
 		(* GTK_WIDGET_CLASS (canvas_parent_class)->unmap) (widget);
 }
 
+/* Realize handler for the canvas */
 static void
 gnome_canvas_realize (GtkWidget *widget)
 {
@@ -2435,6 +2458,7 @@ gnome_canvas_realize (GtkWidget *widget)
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->realize) (canvas->root);
 }
 
+/* Unrealize handler for the canvas */
 static void
 gnome_canvas_unrealize (GtkWidget *widget)
 {
@@ -2458,6 +2482,7 @@ gnome_canvas_unrealize (GtkWidget *widget)
 		(* GTK_WIDGET_CLASS (canvas_parent_class)->unrealize) (widget);
 }
 
+/* Draw handler for the canvas */
 static void
 gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 {
@@ -2478,6 +2503,9 @@ gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 				     area->y + area->height + DISPLAY_Y1 (canvas) - canvas->zoom_yofs);
 }
 
+/* Handles scrolling of the canvas.  Adjusts the scrolling and zooming offset to
+ * keep as much as possible of the canvas scrolling region in view.
+ */
 static void
 scroll_to (GnomeCanvas *canvas, int cx, int cy)
 {
@@ -2489,11 +2517,6 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 
 	canvas_width = GTK_WIDGET (canvas)->allocation.width;
 	canvas_height = GTK_WIDGET (canvas)->allocation.height;
-
-	/*
-	 * Adjust the scrolling offset and the zoom offset to keep as much as possible of the canvas
-	 * scrolling region in view.
-	 */
 
 	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2, &scroll_maxx, &scroll_maxy);
 
@@ -2556,6 +2579,7 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 		gtk_layout_thaw (GTK_LAYOUT (canvas));
 }
 
+/* Size allocation handler for the canvas */
 static void
 gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
@@ -2583,6 +2607,9 @@ gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "changed");
 }
 
+/* Emits an event for an item in the canvas, be it the current item, grabbed
+ * item, or focused item, as appropriate.
+ */
 static int
 emit_event (GnomeCanvas *canvas, GdkEvent *event)
 {
@@ -2647,7 +2674,9 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	switch (ev.type) {
 	case GDK_ENTER_NOTIFY:
 	case GDK_LEAVE_NOTIFY:
-		gnome_canvas_window_to_world (canvas, ev.crossing.x, ev.crossing.y, &ev.crossing.x, &ev.crossing.y);
+		gnome_canvas_window_to_world (canvas,
+					      ev.crossing.x, ev.crossing.y,
+					      &ev.crossing.x, &ev.crossing.y);
 		break;
 
 	case GDK_MOTION_NOTIFY:
@@ -2655,7 +2684,9 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	case GDK_2BUTTON_PRESS:
 	case GDK_3BUTTON_PRESS:
 	case GDK_BUTTON_RELEASE:
-		gnome_canvas_window_to_world (canvas, ev.motion.x, ev.motion.y, &ev.motion.x, &ev.motion.y);
+		gnome_canvas_window_to_world (canvas,
+					      ev.motion.x, ev.motion.y,
+					      &ev.motion.x, &ev.motion.y);
 		break;
 
 	default:
@@ -2665,13 +2696,14 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	/* Choose where we send the event */
 
 	item = canvas->current_item;
-	
-	if (canvas->focused_item && ((event->type == GDK_KEY_PRESS) || (event->type == GDK_KEY_RELEASE)))
+
+	if (canvas->focused_item
+	    && ((event->type == GDK_KEY_PRESS) || (event->type == GDK_KEY_RELEASE)))
 		item = canvas->focused_item;
 
-	/* The event is propagated up the hierarchy (for if someone connected to a group instead of
-	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
-	 * events.
+	/* The event is propagated up the hierarchy (for if someone connected to
+	 * a group instead of a leaf event), and emission is stopped if a
+	 * handler returns TRUE, just like for GtkWidget events.
 	 */
 
 	finished = FALSE;
@@ -2695,6 +2727,9 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	return finished;
 }
 
+/* Re-picks the current item in the canvas, based on the event's coordinates.
+ * Also emits enter/leave events for items as appropriate.
+ */
 static int
 pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 {
@@ -2783,7 +2818,8 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		/* find the closest item */
 
 		if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
-			gnome_canvas_item_invoke_point (canvas->root, x, y, cx, cy, &canvas->new_current_item);
+			gnome_canvas_item_invoke_point (canvas->root, x, y, cx, cy,
+							&canvas->new_current_item);
 		else
 			canvas->new_current_item = NULL;
 	} else
@@ -2837,6 +2873,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 	return retval;
 }
 
+/* Button event handler for the canvas */
 static gint
 gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 {
@@ -2911,6 +2948,7 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 	return retval;
 }
 
+/* Motion event handler for the canvas */
 static gint
 gnome_canvas_motion (GtkWidget *widget, GdkEventMotion *event)
 {
@@ -2930,10 +2968,13 @@ gnome_canvas_motion (GtkWidget *widget, GdkEventMotion *event)
 	return emit_event (canvas, (GdkEvent *) event);
 }
 
+/* Expose handler for the canvas */
 static gint
 gnome_canvas_expose (GtkWidget *widget, GdkEventExpose *event)
 {
 	GnomeCanvas *canvas;
+	ArtIRect rect;
+	ArtUta *uta;
 
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_CANVAS (widget), FALSE);
@@ -2944,15 +2985,18 @@ gnome_canvas_expose (GtkWidget *widget, GdkEventExpose *event)
 	if (!GTK_WIDGET_DRAWABLE (widget) || (event->window != canvas->layout.bin_window))
 		return FALSE;
 
-	gnome_canvas_request_redraw (canvas,
-				     event->area.x + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
-				     event->area.y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs,
-				     event->area.x + event->area.width + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
-				     event->area.y + event->area.height + DISPLAY_Y1 (canvas) - canvas->zoom_yofs);
+	rect.x0 = event->area.x + DISPLAY_X1 (canvas) - canvas->zoom_xofs;
+	rect.y0 = event->area.y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
+	rect.x1 = event->area.x + event->area.width + DISPLAY_X1 (canvas) - canvas->zoom_xofs;
+	rect.y1 = event->area.y + event->area.height + DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
+
+	uta = art_uta_from_irect (&rect);
+	gnome_canvas_request_redraw_uta (canvas, uta);
 
 	return FALSE;
 }
 
+/* Key event handler for the canvas */
 static gint
 gnome_canvas_key (GtkWidget *widget, GdkEventKey *event)
 {
@@ -2970,6 +3014,7 @@ gnome_canvas_key (GtkWidget *widget, GdkEventKey *event)
 	return emit_event (canvas, (GdkEvent *) event);
 }
 
+/* Crossing event handler for the canvas */
 static gint
 gnome_canvas_crossing (GtkWidget *widget, GdkEventCrossing *event)
 {
@@ -2988,6 +3033,7 @@ gnome_canvas_crossing (GtkWidget *widget, GdkEventCrossing *event)
 	return pick_current_item (canvas, (GdkEvent *) event);
 }
 
+/* Focus in handler for the canvas */
 static gint
 gnome_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
 {
@@ -3001,6 +3047,7 @@ gnome_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
 		return FALSE;
 }
 
+/* Focus out handler for the canvas */
 static gint
 gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
 {
@@ -3020,8 +3067,7 @@ gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
 #define IMAGE_WIDTH_AA 256
 #define IMAGE_HEIGHT_AA 64
 
-#define noVERBOSE
-
+/* Repaints the areas in the canvas that need it */
 static void
 paint (GnomeCanvas *canvas)
 {
@@ -3033,16 +3079,11 @@ paint (GnomeCanvas *canvas)
 	ArtIRect *rects;
 	gint n_rects, i;
 
-#ifdef VERBOSE
-	g_print ("paint\n");
-#endif
 	if (canvas->need_update) {
 		double affine[6];
 
 		art_affine_identity (affine);
-
 		gnome_canvas_item_invoke_update (canvas->root, affine, NULL, 0);
-
 		canvas->need_update = FALSE;
 	}
 
@@ -3050,9 +3091,11 @@ paint (GnomeCanvas *canvas)
 		return;
 
 	if (canvas->aa)
-		rects = art_rect_list_from_uta (canvas->redraw_area, IMAGE_WIDTH_AA, IMAGE_HEIGHT_AA, &n_rects);
+		rects = art_rect_list_from_uta (canvas->redraw_area, IMAGE_WIDTH_AA, IMAGE_HEIGHT_AA,
+						&n_rects);
 	else
-		rects = art_rect_list_from_uta (canvas->redraw_area, IMAGE_WIDTH, IMAGE_HEIGHT, &n_rects);
+		rects = art_rect_list_from_uta (canvas->redraw_area, IMAGE_WIDTH, IMAGE_HEIGHT,
+						&n_rects);
 
 	art_uta_free (canvas->redraw_area);
 
@@ -3084,7 +3127,6 @@ paint (GnomeCanvas *canvas)
 			draw_y2 = canvas->redraw_y2;
 
 		if ((draw_x1 < draw_x2) && (draw_y1 < draw_y2)) {
-
 			canvas->draw_xofs = draw_x1;
 			canvas->draw_yofs = draw_y1;
 
@@ -3102,16 +3144,11 @@ paint (GnomeCanvas *canvas)
 				buf.rect.x1 = draw_x2;
 				buf.rect.y1 = draw_y2;
 				color = &widget->style->bg[GTK_STATE_NORMAL];
-				buf.bg_color = ((color->red & 0xff00) << 8) |
-					(color->green & 0xff00) |
-					(color->blue >> 8);
+				buf.bg_color = (((color->red & 0xff00) << 8)
+						| (color->green & 0xff00)
+						| (color->blue >> 8));
 				buf.is_bg = 1;
 				buf.is_buf = 0;
-
-#ifdef VERBOSE
-				g_print ("paint render (%d, %d) - (%d, %d)\n",
-					 draw_x1, draw_y1, draw_x2, draw_y2);
-#endif
 
 				if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE) {
 					if ((* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->render) != NULL)
@@ -3185,9 +3222,13 @@ paint (GnomeCanvas *canvas)
 	art_free (rects);
 
 	canvas->need_redraw = FALSE;
+	canvas->redraw_x1 = 0;
+	canvas->redraw_y1 = 0;
+	canvas->redraw_x2 = 0;
+	canvas->redraw_y2 = 0;
 }
 
-#define noVERBOSE
+/* Idle handler for the canvas.  It deals with pending updates and redraws. */
 static gint
 idle_handler (gpointer data)
 {
@@ -3195,10 +3236,7 @@ idle_handler (gpointer data)
 
 	GDK_THREADS_ENTER ();
 
-#ifdef VERBOSE
-	g_print ("idle_handler {\n");
-#endif
-	canvas = data;
+	canvas = GNOME_CANVAS (data);
 
 	/* Cause the update if necessary */
 
@@ -3206,9 +3244,7 @@ idle_handler (gpointer data)
 		double affine[6];
 
 		art_affine_identity (affine);
-
 		gnome_canvas_item_invoke_update (canvas->root, affine, NULL, 0);
-
 		canvas->need_update = FALSE;
 	}
 
@@ -3224,21 +3260,23 @@ idle_handler (gpointer data)
 	if (GTK_WIDGET_DRAWABLE (canvas))
 		paint (canvas);
 
-	canvas->need_redraw = FALSE;
-	canvas->redraw_x1 = 0;
-	canvas->redraw_y1 = 0;
-	canvas->redraw_x2 = 0;
-	canvas->redraw_y2 = 0;
-
-#ifdef VERBOSE
-	g_print ("idle_handler }\n");
-#endif
+	/* Reset idle id */
+	canvas->idle_id = 0;
 
 	GDK_THREADS_LEAVE ();
 	
 	return FALSE;
 }
 
+/* Convenience function to add an idle handler to a canvas */
+static void
+add_idle (GnomeCanvas *canvas)
+{
+	if (canvas->idle_id != 0)
+		return;
+
+	canvas->idle_id = gtk_idle_add (idle_handler, canvas);
+}
 
 /**
  * gnome_canvas_root:
@@ -3339,7 +3377,6 @@ gnome_canvas_get_scroll_region (GnomeCanvas *canvas, double *x1, double *y1, dou
 		*y2 = canvas->scroll_y2;
 }
 
-
 /**
  * gnome_canvas_set_pixels_per_unit:
  * @canvas: The canvas whose zoom factor should be changed.
@@ -3372,13 +3409,7 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 
 	canvas->pixels_per_unit = n;
 
-#ifdef VERBOSE
-	g_print ("gnome_canvas_set_pixels_per_unit %g\n", n);
-#endif
 	if (!(canvas->root->object.flags & GNOME_CANVAS_ITEM_NEED_AFFINE)) {
-#ifdef VERBOSE
-		g_print ("...requesting update\n");
-#endif
 		canvas->root->object.flags |= GNOME_CANVAS_ITEM_NEED_AFFINE;
 		gnome_canvas_request_update (canvas);
 	}
@@ -3402,7 +3433,6 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
 }
 
-
 /**
  * gnome_canvas_scroll_to:
  * @canvas: The canvas to scroll.
@@ -3421,7 +3451,6 @@ gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy)
 
 	scroll_to (canvas, cx, cy);
 }
-
 
 /**
  * gnome_canvas_get_scroll_offsets:
@@ -3444,33 +3473,26 @@ gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy)
 		*cy = canvas->layout.vadjustment->value;
 }
 
-
-/* Invariant: the idle handler is always present when need_update or need_redraw. */
-
 /**
  * gnome_canvas_update_now:
  * @canvas: The canvas whose view should be updated.
  * 
- * Forces an immediate redraw or update of the canvas.  If the canvas does not have
- * any pending redraw requests, then no action is taken.  This is typically only used
- * by applications that need explicit control of when the display is updated, like games.
- * It is not needed by normal applications.
- **/
+ * Forces an immediate redraw or update of the canvas.  If the canvas does not
+ * have any pending redraw requests, then no action is taken.  This is typically
+ * only used by applications that need explicit control of when the display is
+ * updated, like games.  It is not needed by normal applications.
+ */
 void
 gnome_canvas_update_now (GnomeCanvas *canvas)
 {
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
-#ifdef VERBOSE
-	g_print ("update_now\n");
-#endif
 	if (!(canvas->need_update || canvas->need_redraw))
 		return;
 
+	remove_idle (canvas);
 	idle_handler (canvas);
-	gtk_idle_remove (canvas->idle_id);
-	gdk_flush (); /* flush the X queue to ensure repaint */
 }
 
 /**
@@ -3514,11 +3536,8 @@ gnome_canvas_get_item_at (GnomeCanvas *canvas, double x, double y)
 static void
 gnome_canvas_request_update (GnomeCanvas *canvas)
 {
-	if (!(canvas->need_update || canvas->need_redraw)) {
-		canvas->idle_id = gtk_idle_add_priority (GTK_PRIORITY_DEFAULT,
-							 idle_handler, canvas);
-	}
 	canvas->need_update = TRUE;
+	add_idle (canvas);
 }
 
 /**
@@ -3545,9 +3564,9 @@ gnome_canvas_request_redraw_uta (GnomeCanvas *canvas,
 	} else {
 		canvas->redraw_area = uta;
 		canvas->need_redraw = TRUE;
-		canvas->idle_id = gtk_idle_add_priority (GTK_PRIORITY_DEFAULT,
-							 idle_handler, canvas);
 	}
+
+	add_idle (canvas);
 }
 
 
@@ -3571,11 +3590,8 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 	ArtIRect bbox;
 	ArtIRect visible;
 	ArtIRect clip;
+	gint w_width, w_height;
 
-#ifdef VERBOSE
-	g_print ("gnome_canvas_request_redraw %d %d %d %d\n",
-		 x1, y1, x2, y2);
-#endif
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
