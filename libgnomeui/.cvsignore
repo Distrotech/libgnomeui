@@ -6,3 +6,4 @@ Makefile
 _libs
 .libs
 so_locations
+ted_demo

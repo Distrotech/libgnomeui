@@ -14,6 +14,7 @@ libgnomeui_la_SOURCES = \
 	gnome-app.c			\
 	gnome-app-helper.c		\
 	gnome-color-selector.c 		\
+	gnome-font-selector.c 		\
 	gnome-colors.c			\
 	gnome-ice.c			\
 	gnome-init.c			\
@@ -32,6 +33,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-app.h			\
 	gnome-app-helper.h		\
 	gnome-color-selector.h 		\
+	gnome-font-selector.h 		\
 	gnome-colors.h         		\
 	gnome-ice.h			\
 	gnome-messagebox.h		\
