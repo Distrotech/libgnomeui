@@ -1,3 +1,9 @@
+Wed Aug 12 18:01:30 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.[ch]: 1st go at a rewrite of the gnome stock widget.
+	Because of a new widget (GnomeStock) some apps might get minor
+	problems. The majority of the apps should work though.
+
 Tue Aug 11 23:35:58 1998  Jonathan Blandford <jrb@mit.edu>
 	* gnome-app.c: added GTK_SHRINK to the x/y options.
 

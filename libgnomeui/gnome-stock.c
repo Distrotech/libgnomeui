@@ -69,6 +69,7 @@ static GnomePixmap *gnome_stock_pixmap(GtkWidget *window, const char *icon,
 static GnomeStockPixmapEntry *lookup(const char *icon, const char *subtype,
 				     int fallback);
 
+#if !USE_NEW_GNOME_STOCK
 /*
  * GnomeStockPixmapWidget
  */
@@ -255,8 +256,20 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon)
 	return w;
 }
 
+#endif /* !USE_NEW_GNOME_STOCK */
 
-
+#if USE_NEW_GNOME_STOCK
+void
+gnome_stock_pixmap_widget_set_icon(GnomeStock *widget,
+				   const char *icon)
+{
+	/* FIXME: this is a hack. This functions prototype will have to
+	 * use the new GnomeStock widget */
+	gnome_stock_set_icon(GNOME_STOCK(widget), icon);
+	g_warning("gnome_stock_pixmap_widget_set_icon is depreciated.\n\t\t"
+		  "Please use gnome_stock_set_icon instead.");
+}
+#else /* !USE_NEW_GNOME_STOCK */
 void
 gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
 				   const char *icon)
@@ -289,6 +302,239 @@ gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
 	if (widget->icon) g_free(widget->icon);
 	widget->icon = g_strdup(icon);
 	gnome_stock_pixmap_widget_state_changed(GTK_WIDGET(widget), 0);
+}
+#endif /* !USE_NBEW_GNOME_STOCK */
+
+
+
+/***************************/
+/*  new GnomeStock widget  */
+/***************************/
+
+static void
+gnome_stock_destroy(GtkObject *object)
+{
+	GtkObjectClass *object_class;
+	GnomeStock *stock;
+
+	g_return_if_fail(object != NULL);
+	g_return_if_fail(GNOME_IS_STOCK(object));
+
+	stock = GNOME_STOCK(object);
+	if (stock->regular)
+		gtk_widget_destroy(GTK_WIDGET(stock->regular));
+	if (stock->disabled)
+		gtk_widget_destroy(GTK_WIDGET(stock->disabled));
+	if (stock->focused)
+		gtk_widget_destroy(GTK_WIDGET(stock->focused));
+	if (stock->icon)
+		g_free(stock->icon);
+
+	object_class = gtk_type_class(gnome_pixmap_get_type());
+	if (object_class->destroy)
+		(* object_class->destroy)(object);
+
+}
+
+static void
+gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
+{
+	GnomePixmap *gpixmap;
+	GtkRequisition req;
+	GdkVisual *visual;
+	GdkGC *gc;
+
+	g_return_if_fail(stock != NULL);
+	g_return_if_fail(pixmap != NULL);
+	g_return_if_fail(GNOME_IS_STOCK(stock));
+	g_return_if_fail(GNOME_IS_PIXMAP(pixmap));
+
+	gpixmap = GNOME_PIXMAP(stock);
+	gtk_widget_size_request(GTK_WIDGET(pixmap), &req);
+	if (GTK_WIDGET(pixmap)->window)
+		visual = gdk_window_get_visual(GTK_WIDGET(pixmap)->window);
+	else
+		visual = gdk_imlib_get_visual();
+	if (gpixmap->pixmap) {
+		gint width, height;
+		gdk_window_get_size(gpixmap->pixmap, &width, &height);
+		if ((width != req.width) || (height != req.height)) {
+			gdk_window_destroy(gpixmap->pixmap);
+			gpixmap->pixmap = NULL;
+			gdk_window_destroy(gpixmap->mask);
+			gpixmap->mask = NULL;
+		}
+	}
+	if (!gpixmap->pixmap) {
+		gpixmap->pixmap = gdk_pixmap_new(pixmap->pixmap,
+						 req.width, req.height,
+						 visual->depth);
+		gpixmap->mask = gdk_pixmap_new(pixmap->mask,
+					       req.width, req.height, 1);
+	}
+	gc = gdk_gc_new(gpixmap->pixmap);
+	gdk_draw_pixmap(gpixmap->pixmap, gc, pixmap->pixmap, 0, 0, 0, 0,
+			req.width, req.height);
+	gdk_gc_destroy(gc);
+	gc = gdk_gc_new(gpixmap->mask);
+	gdk_draw_pixmap(gpixmap->mask, gc, pixmap->mask, 0, 0, 0, 0,
+			req.width, req.height);
+	gdk_gc_destroy(gc);
+	if (GTK_WIDGET(gpixmap)->window)
+		gdk_window_shape_combine_mask(GTK_WIDGET(gpixmap)->window,
+					      gpixmap->mask, 0, 0);
+}
+
+/*
+ * This function has turned out to be the load_pixmap_function and is not
+ * used as signal catcher alone. That means, that you cannot trust the
+ * value in prev_state.
+ */
+static void
+gnome_stock_state_changed(GtkWidget *widget, guint prev_state)
+{
+	GnomeStock *w = GNOME_STOCK(widget);
+	GnomePixmap *pixmap;
+	GtkWidget *tmp;
+
+	if (widget->parent) {
+		tmp = widget->parent;
+		if (tmp->parent)
+			tmp = tmp->parent;
+	} else {
+		tmp = widget;
+	}
+	pixmap = NULL;
+	if (GTK_WIDGET_HAS_FOCUS(widget)) {
+		if (!w->focused) {
+			w->focused = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_FOCUSED);
+			/* gtk_widget_ref(GTK_WIDGET(w->focused)); */
+			/* gtk_widget_show(GTK_WIDGET(w->focused)); */
+		}
+		pixmap = w->focused;
+	} else if (!GTK_WIDGET_IS_SENSITIVE(widget)) {
+		if (!w->disabled) {
+			w->disabled = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_DISABLED);
+			/* gtk_widget_ref(GTK_WIDGET(w->disabled)); */
+			/* gtk_widget_show(GTK_WIDGET(w->disabled)); */
+		}
+		pixmap = w->disabled;
+	} else {
+		if (!w->regular) {
+			w->regular = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_REGULAR);
+			/* gtk_widget_ref(GTK_WIDGET(w->regular)); */
+			/* gtk_widget_show(GTK_WIDGET(w->regular)); */
+		}
+		pixmap = w->regular;
+	}
+	if (pixmap == w->current) return;
+	/* FIXME: this should check for sizes first */
+	w->current = pixmap;
+	gnome_stock_paint(w, pixmap);
+}
+
+static void
+gnome_stock_class_init(GtkObjectClass *klass)
+{
+	klass->destroy = gnome_stock_destroy;
+	((GtkWidgetClass *)klass)->state_changed =
+		gnome_stock_state_changed;
+}
+
+static void
+gnome_stock_init(GnomeStock *stock)
+{
+	stock->regular = NULL;
+	stock->disabled = NULL;
+	stock->focused = NULL;
+	stock->current = NULL;
+	stock->icon = NULL;
+}
+
+guint
+gnome_stock_get_type(void)
+{
+	static guint new_type = 0;
+	if (!new_type) {
+		GtkTypeInfo type_info = {
+			"GnomeStock",
+			sizeof(GnomeStock),
+			sizeof(GnomeStockClass),
+			(GtkClassInitFunc)gnome_stock_class_init,
+			(GtkObjectInitFunc)gnome_stock_init,
+			(GtkArgSetFunc) NULL,
+			(GtkArgGetFunc) NULL
+		};
+		new_type = gtk_type_unique(gnome_pixmap_get_type(), &type_info);
+	}
+	return new_type;
+}
+
+GtkWidget *
+gnome_stock_new(void)
+{
+	return gtk_type_new(gnome_stock_get_type());
+}
+
+#if USE_NEW_GNOME_STOCK
+GtkWidget *
+gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon)
+{
+#ifdef DEBUG
+	g_message("gnome_stock_pixmap_widget_new is depriciated\n\t\t"
+		  "Use gnome_stock_new_with_icon instead.");
+#endif
+	return gnome_stock_new_with_icon(icon);
+}
+#endif /* USE_NEW_GNOME_STOCK */
+
+gboolean
+gnome_stock_set_icon(GnomeStock *stock, const char *icon)
+{
+	GnomeStockPixmapEntry *entry;
+
+	g_return_val_if_fail(stock != NULL, 0);
+	g_return_val_if_fail(GNOME_IS_STOCK(stock), 0);
+	g_return_val_if_fail(icon != NULL, 0);
+
+	entry = lookup(icon, GNOME_STOCK_PIXMAP_REGULAR, 0);
+	g_return_val_if_fail(entry != NULL, 0);
+
+	if (stock->icon) {
+		if (0 == strcmp(icon, stock->icon))
+			return 1;
+		g_free(stock->icon);
+	}
+	stock->icon = g_strdup(icon);
+	stock->current = NULL;
+	if (stock->regular) {
+		gtk_widget_unref(GTK_WIDGET(stock->regular));
+		stock->regular = NULL;
+	}
+	if (stock->disabled) {
+		gtk_widget_unref(GTK_WIDGET(stock->disabled));
+		stock->disabled = NULL;
+	}
+	if (stock->focused) {
+		gtk_widget_unref(GTK_WIDGET(stock->focused));
+		stock->focused = NULL;
+	}
+	gnome_stock_state_changed(GTK_WIDGET(stock), 0);
+	return 1;
+}
+
+GtkWidget *
+gnome_stock_new_with_icon(const char *icon)
+{
+	GtkWidget *w;
+
+	g_return_val_if_fail(icon != NULL, NULL);
+	w = gtk_type_new(gnome_stock_get_type());
+	if (!gnome_stock_set_icon(GNOME_STOCK(w), icon)) {
+		gtk_widget_destroy(w);
+		return NULL;
+	}
+	return w;
 }
 
 
@@ -797,10 +1043,14 @@ gnome_stock_pixmap(GtkWidget *window, const char *icon, const char *subtype)
 GtkWidget *
 gnome_stock_pixmap_widget(GtkWidget *window, const char *icon)
 {
+#if USE_NEW_GNOME_STOCK
+	return gnome_stock_new_with_icon(icon);
+#else
 	GtkWidget *w;
 
 	w = gnome_stock_pixmap_widget_new(window, icon);
 	return w;
+#endif
 }
 
 
@@ -907,9 +1157,11 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 		/* assign the created button as the container widget to the
 		 * GnomeStockPixmap (see comment in stock_button_from_entry)
 		 */
+#if !USE_NEW_GNOME_STOCK
 		if ((GNOME_IS_STOCK_PIXMAP_WIDGET(pixmap)) &&
 		    (pixmap->window == NULL))
 			GNOME_STOCK_PIXMAP_WIDGET(pixmap)->window = button;
+#endif /* !USE_NEW_GNOME_STOCK */
 		if (GNOME_IS_PIXMAP(pixmap)) {
 			GnomeStockPixmapEntry *entry;
 			char s[32];

@@ -435,6 +435,18 @@ tb_insens(GtkWidget *w, gpointer *data)
 
 
 
+#if USE_NEW_GNOME_STOCK
+static void
+toggle_button(GtkWidget *button, GnomeStock *w)
+{
+	if (!w) return;
+	if (!w->icon) return;
+	if (0 == strcmp(w->icon, GNOME_STOCK_PIXMAP_TIMER))
+		gnome_stock_set_icon(w, GNOME_STOCK_PIXMAP_TIMER_STOP);
+	else
+		gnome_stock_set_icon(w, GNOME_STOCK_PIXMAP_TIMER);
+}
+#else /* °USE_NEW_GNOME_STOCK */
 static void
 toggle_button(GtkWidget *button, GnomeStockPixmapWidget *w)
 {
@@ -445,6 +457,7 @@ toggle_button(GtkWidget *button, GnomeStockPixmapWidget *w)
 	else
 		gnome_stock_pixmap_widget_set_icon(w, GNOME_STOCK_PIXMAP_TIMER);
 }
+#endif /* !USE_NEW_GNOME_STOCK */
 
 
 
