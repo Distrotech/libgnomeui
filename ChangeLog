@@ -1,3 +1,9 @@
+2004-11-18  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (load_dir): Use a different
+	number of items per notification depending on whether the folder
+	system is local or not.
+
 2004-09-22  J.H.M. Dassen (Ray) <jdassen@debian.org>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=153151
