@@ -430,8 +430,6 @@ gnome_init_with_popt_table(const char *app_id,
 	gnome_config_sync();
 	g_blow_chunks();
 
-	gnome_win_hints_init();
-
 	return 0;
 }
 

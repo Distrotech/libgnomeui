@@ -1,3 +1,10 @@
+Sun Aug 29 01:14:35 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-winhints.c,gnome-init.c: take out implicit initialization
+	  of the atoms, and do it only when we need it. Also replaced all
+	  CARD32 by long since this was being done by the preprocessor
+	  anyway, and made all local Atom variables static.
+
 1999-08-28  Havoc Pennington  <hp@pobox.com>
 
 	* TODO: Long-overdue TODO update.
