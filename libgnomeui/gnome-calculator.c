@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <nan.h>
 #include <errno.h>
 #include <signal.h>
 #include <gtk/gtk.h>
@@ -296,15 +295,10 @@ reduce_stack(GnomeCalculator *gc)
 		signal(SIGFPE,old);
 	}
 
-	{
-		/*this will work even on buggy alphas where just
-		  bout anythign causes a SIGFPE*/
-		gdouble nan=NAN;
-		if(memcmp(&stack->d.number,&nan,sizeof(gdouble))==0 ||
-		   errno>0) {
-			errno = 0;
-			do_error(gc);
-		}
+	if(errno>0 ||
+	   finite(stack->d.number)==0) {
+		errno = 0;
+		do_error(gc);
 	}
 }
 
@@ -454,16 +448,11 @@ simple_func(GtkWidget *w, gpointer data)
 		signal(SIGFPE,old);
 	}
 
-	{
-		/*this will work even on buggy alphas where just
-		  bout anythign causes a SIGFPE*/
-		gdouble nan=NAN;
-		if(memcmp(&stack->d.number,&nan,sizeof(gdouble))==0 ||
-		   errno>0) {
-			errno = 0;
-			do_error(gc);
-			return TRUE;
-		}
+	if(errno>0 ||
+	   finite(stack->d.number)==0) {
+		errno = 0;
+		do_error(gc);
+		return TRUE;
 	}
 
 	/*we are converting back from rad to mode*/
@@ -703,16 +692,20 @@ c_mul(gdouble arg1, gdouble arg2)
 static gdouble
 c_div(gdouble arg1, gdouble arg2)
 {
-	if(arg2==0)
-		return NAN;
+	if(arg2==0) {
+		errno=ERANGE;
+		return 0;
+	}
 	return arg1/arg2;
 }
 
 static gdouble
 c_inv(gdouble arg1)
 {
-	if(arg1==0)
-		return NAN;
+	if(arg1==0) {
+		errno=ERANGE;
+		return 0;
+	}
 	return 1/arg1;
 }
 
@@ -739,11 +732,15 @@ c_fact(gdouble arg1)
 {
 	int i;
 	gdouble r;
-	if(arg1<0)
-		return NAN;
+	if(arg1<0) {
+		errno=ERANGE;
+		return 0;
+	}
 	i = (int)arg1;
-	if(arg1!=i)
-		return NAN;
+	if(arg1!=i) {
+		errno=ERANGE;
+		return 0;
+	}
 	for(r=1;i>0;i--)
 		r*=i;
 
