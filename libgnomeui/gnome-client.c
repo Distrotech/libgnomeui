@@ -1451,6 +1451,46 @@ gnome_client_request_save (GnomeClient        *client,
 #endif HAVE_LIBSM
 }
 
+/* Request the session manager to save only the state of another process
+   to a pseudo-session. Only supported by gnome-session. */
+/* This implementation is only an ugly hack. It should use CORBA...*/
+void /* It should return an int (bool) */
+gnome_client_save (GnomeClient	*client,
+                   char		*ID, /* process to be saved */
+                   char		*sess /* pseudo-session */
+                   )
+{
+  g_return_if_fail (client != NULL);
+  g_return_if_fail (GNOME_IS_CLIENT (client));
+
+#ifdef HAVE_LIBSM
+  if (GNOME_CLIENT_CONNECTED (client))
+    {
+      client_set_prop_from_string (client, "GnSaveID", ID);
+      client_set_prop_from_string (client, "GnSaveSess", sess);
+      SmcRequestSaveYourself (client->smc_conn, 0, 0, 0, 0, 0);
+      client_unset_prop (client, "GnSaveID");
+      client_unset_prop (client, "GnSaveSess");
+    }
+#endif HAVE_LIBSM
+}
+
+/* Request the session manager to restart a session without closing the
+   current. Only supported by gnome-session. */
+void    gnome_client_restart_session (GnomeClient       *client,
+                                      char      *sess /* pseudo-session */
+                                      )
+{
+#ifdef HAVE_LIBSM
+  if (GNOME_CLIENT_CONNECTED (client))
+    {
+      client_set_prop_from_string (client, "GnRestartSess", sess);
+      SmcRequestSaveYourself (client->smc_conn, 0, 0, 0, 0, 0);
+      client_unset_prop (client, "GnRestartSess");
+    }
+#endif HAVE_LIBSM
+}
+
 /*****************************************************************************/
 /* 'GnomeInteractData' stuff */
 

@@ -343,6 +343,19 @@ void         gnome_client_request_save (GnomeClient        *client,
 					int /* bool */      fast,
 					int /* bool */      global);
 
+/* Request the session manager to save only the state of another process
+   to a pseudo-session. Only supported by gnome-session. */
+void         gnome_client_save (GnomeClient	*client,
+				char		*ID, /* process to be saved */
+				char		*sess /* pseudo-session */
+				);
+
+/* Request the session manager to restart a session without closing the
+   current. Only supported by gnome-session. */
+void	gnome_client_restart_session (GnomeClient	*client,
+	  			      char	*sess /* pseudo-session */
+				      );
+
 /* This will force the underlying connection to the session manager to
    be flushed.  This is useful if you have some pending changes that
    you want to make sure get committed.  */
