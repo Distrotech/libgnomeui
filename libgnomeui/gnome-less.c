@@ -100,6 +100,7 @@ static void
 gnome_less_init (GnomeLess *gl)
 {
 	GtkWidget * vscroll;
+	GtkTextIter start, end;
 
 	gtk_box_set_homogeneous(GTK_BOX(gl), FALSE);
 	gtk_box_set_spacing(GTK_BOX(gl), 0);
@@ -126,7 +127,8 @@ gnome_less_init (GnomeLess *gl)
 	gtk_object_set(GTK_OBJECT(gl->_priv->text_tag),
 		       "font_desc", gl->_priv->font_desc,
 		       NULL);
-	gtk_text_buffer_apply_tag_to_chars(gl->text_buffer, "text_tag", 0, -1);
+	gtk_text_buffer_get_bounds(gl->text_buffer, &start, &end);
+	gtk_text_buffer_apply_tag_by_name(gl->text_buffer, "text_tag", &start, &end);
 
 	vscroll = gtk_vscrollbar_new(gl->text_view->vadjustment);
 	gtk_widget_show(vscroll);
@@ -380,12 +382,16 @@ gboolean gnome_less_append_filestream(GnomeLess * gl, FILE * f)
 
   errno = 0; /* Reset it to detect errors */
   while (TRUE) {
+	  GtkTextIter start, end;
+
 	  s = fgets(buffer, GLESS_BUFSIZE, f);
 
 	  if ( s == NULL ) break;
 
-	  gtk_text_buffer_insert_at_char(gl->text_buffer, -1, buffer, strlen(buffer));
-	  gtk_text_buffer_apply_tag_to_chars(gl->text_buffer, "text_tag", 0, -1);
+	  gtk_text_buffer_get_bounds(gl->text_buffer, &start, &end);
+	  gtk_text_buffer_insert(gl->text_buffer, &end, buffer, strlen(buffer));
+	  gtk_text_buffer_get_bounds(gl->text_buffer, &start, &end);
+	  gtk_text_buffer_apply_tag_by_name(gl->text_buffer, "text_tag", &start, &end);
   }
 
   if ( errno != 0 ) {
@@ -480,12 +486,16 @@ gnome_less_show_fd(GnomeLess * gl, int file_descriptor)
 void
 gnome_less_append_string(GnomeLess * gl, const gchar * s)
 {
+	GtkTextIter start, end;
+
 	g_return_if_fail(gl != NULL);
 	g_return_if_fail(GNOME_IS_LESS(gl));
 	g_return_if_fail(s != NULL);
 
-	gtk_text_buffer_insert_at_char(gl->text_buffer, -1, s, strlen(s));
-	gtk_text_buffer_apply_tag_to_chars(gl->text_buffer, "text_tag", 0, -1);
+	gtk_text_buffer_get_bounds(gl->text_buffer, &start, &end);
+	gtk_text_buffer_insert(gl->text_buffer, &end, s, strlen(s));
+	gtk_text_buffer_get_bounds(gl->text_buffer, &start, &end);
+	gtk_text_buffer_apply_tag_by_name(gl->text_buffer, "text_tag", &start, &end);
 }
 
 /**
@@ -517,10 +527,13 @@ void gnome_less_show_string(GnomeLess * gl, const gchar * s)
 
 void gnome_less_clear (GnomeLess * gl)
 {
+  GtkTextIter start, end;
+
   g_return_if_fail(gl != NULL);
   g_return_if_fail(GNOME_IS_LESS(gl));
 
-  gtk_text_buffer_delete_chars(gl->text_buffer, 0, -1);
+  gtk_text_buffer_get_bounds(gl->text_buffer, &start, &end);
+  gtk_text_buffer_delete(gl->text_buffer, &start, &end);
 }
 
 /**
@@ -539,12 +552,15 @@ gnome_less_write_fd(GnomeLess * gl, int fd)
 	gchar * contents;
 	gint len;
 	gint bytes_written;
+	GtkTextIter start, end;
+
 
 	g_return_val_if_fail(gl != NULL, FALSE);
 	g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
 	g_return_val_if_fail(fd >= 0, FALSE);
 
-	contents = gtk_text_buffer_get_text_chars(gl->text_buffer, 0, -1, FALSE);
+	gtk_text_buffer_get_bounds(gl->text_buffer, &start, &end);
+	contents = gtk_text_buffer_get_text(gl->text_buffer, &start, &end, FALSE);
 	if(contents)
 		len = strlen(contents);
 	else
