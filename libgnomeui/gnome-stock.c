@@ -1170,6 +1170,8 @@ gnome_stock_menu_accel_parse(const char *section)
 /*  accelerator definition box  */
 /********************************/
 
+#if 0
+
 #include <libgnomeui/gnome-messagebox.h>
 #include <libgnomeui/gnome-propertybox.h>
 
@@ -1394,6 +1396,8 @@ gnome_stock_menu_accel_dlg(char *section)
 
 	gtk_widget_show(GTK_WIDGET(box));
 }
+
+#endif
 
 GtkWidget *
 gnome_stock_transparent_window (const char *icon, GtkStateType state)
