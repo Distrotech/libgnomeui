@@ -136,7 +136,13 @@ gnome_color_selector_button_clicked(GtkWidget *widget,
 	gcs = data;
 
 	if (!gcs->cs_dialog) {
+		gtk_widget_push_visual (gtk_preview_get_visual ());
+		gtk_widget_push_colormap (gtk_preview_get_cmap ());
+
 		gcs->cs_dialog = gtk_color_selection_dialog_new("Pick a color");
+
+		gtk_widget_pop_colormap ();
+		gtk_widget_pop_visual ();
 
 		csd = GTK_COLOR_SELECTION_DIALOG(gcs->cs_dialog);
 		cs  = GTK_COLOR_SELECTION(csd->colorsel);

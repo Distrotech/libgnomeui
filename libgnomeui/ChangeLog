@@ -1,3 +1,8 @@
+1998-04-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-color-selector.c (gnome_color_selector_button_clicked):
+	Use correct visual and colormap for color selector.
+
 1998-04-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-pixmap.c (finish_load): Hide the old window and show the
