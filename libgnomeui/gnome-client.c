@@ -610,7 +610,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
   gboolean ret;
 
   if (!client_grab_widget)
-    client_grab_widget = gtk_widget_new (GTK_TYPE_WIDGET, NULL);
+    client_grab_widget = gtk_widget_new (GTK_TYPE_INVISIBLE, NULL);
 
   /* The first SaveYourself after registering for the first time
    * is a special case (SM specs 7.2).
