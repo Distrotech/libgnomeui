@@ -1,5 +1,7 @@
 2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-ui-init.c: Fix the fix for
+	bug #84778. Patch from <malcolm@commsecure.com.au>
 	* libgnomeui/gnome-icon-list.c: Merge fix for
 	bug #83748 from stable branch.
 	* libgnomeui/gnome-app.c: Merge fix for bug #106342

@@ -605,9 +605,10 @@ libgnomeui_segv_setup (GnomeProgram *program, gboolean post_arg_parse)
 static void libgnomeui_segv_handle(int signum)
 {
 	static int in_segv = 0;
-        struct sigaction sa = { 0 };
+        struct sigaction sa;
 	pid_t pid;
 	
+	sa.sa_handler = NULL;
 	in_segv++;
 
         if (in_segv > 2) {
