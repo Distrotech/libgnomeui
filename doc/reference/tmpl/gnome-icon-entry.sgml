@@ -131,6 +131,20 @@ GnomeIconEntry
 @Returns: 
 
 
+<!-- ##### SIGNAL GnomeIconEntry::browse ##### -->
+<para>
+
+</para>
+
+@iconentry: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconEntry::changed ##### -->
+<para>
+
+</para>
+
+@iconentry: the object which received the signal.
+
 <!-- ##### ARG GnomeIconEntry:history-id ##### -->
 <para>
 

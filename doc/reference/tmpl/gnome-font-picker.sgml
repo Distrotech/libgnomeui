@@ -157,6 +157,14 @@ GnomeFontPicker
 @text: 
 
 
+<!-- ##### SIGNAL GnomeFontPicker::font-set ##### -->
+<para>
+
+</para>
+
+@fontpicker: the object which received the signal.
+@arg1: 
+
 <!-- ##### ARG GnomeFontPicker:title ##### -->
 <para>
 

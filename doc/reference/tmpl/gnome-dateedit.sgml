@@ -124,6 +124,20 @@ GnomeDateEdit
 @Returns: 
 
 
+<!-- ##### SIGNAL GnomeDateEdit::date-changed ##### -->
+<para>
+
+</para>
+
+@dateedit: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeDateEdit::time-changed ##### -->
+<para>
+
+</para>
+
+@dateedit: the object which received the signal.
+
 <!-- ##### ARG GnomeDateEdit:time ##### -->
 <para>
 

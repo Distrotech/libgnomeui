@@ -119,6 +119,20 @@ GnomeDruid
 @window: 
 
 
+<!-- ##### SIGNAL GnomeDruid::cancel ##### -->
+<para>
+
+</para>
+
+@druid: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeDruid::help ##### -->
+<para>
+
+</para>
+
+@druid: the object which received the signal.
+
 <!-- ##### ARG GnomeDruid:show-finish ##### -->
 <para>
 

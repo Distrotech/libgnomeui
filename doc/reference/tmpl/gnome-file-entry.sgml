@@ -140,6 +140,20 @@ GnomeFileEntry
 @directory_entry: 
 
 
+<!-- ##### SIGNAL GnomeFileEntry::activate ##### -->
+<para>
+
+</para>
+
+@fileentry: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeFileEntry::browse-clicked ##### -->
+<para>
+
+</para>
+
+@fileentry: the object which received the signal.
+
 <!-- ##### ARG GnomeFileEntry:history-id ##### -->
 <para>
 

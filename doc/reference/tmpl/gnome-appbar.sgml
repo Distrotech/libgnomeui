@@ -166,6 +166,20 @@ GnomeAppBar
 @Returns: 
 
 
+<!-- ##### SIGNAL GnomeAppBar::clear-prompt ##### -->
+<para>
+
+</para>
+
+@appbar: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeAppBar::user-response ##### -->
+<para>
+
+</para>
+
+@appbar: the object which received the signal.
+
 <!-- ##### ARG GnomeAppBar:has-progress ##### -->
 <para>
 

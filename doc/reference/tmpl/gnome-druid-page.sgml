@@ -71,3 +71,46 @@ GnomeDruidPage
 @druid_page: 
 
 
+<!-- ##### SIGNAL GnomeDruidPage::back ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeDruidPage::cancel ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeDruidPage::finish ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: 
+
+<!-- ##### SIGNAL GnomeDruidPage::next ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeDruidPage::prepare ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: 
+

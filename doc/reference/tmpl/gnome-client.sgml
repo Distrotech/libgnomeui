@@ -418,3 +418,52 @@ GnomeClient
 @cancel_shutdown: 
 
 
+<!-- ##### SIGNAL GnomeClient::connect ##### -->
+<para>
+
+</para>
+
+@client: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeClient::die ##### -->
+<para>
+
+</para>
+
+@client: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeClient::disconnect ##### -->
+<para>
+
+</para>
+
+@client: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeClient::save-complete ##### -->
+<para>
+
+</para>
+
+@client: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeClient::save-yourself ##### -->
+<para>
+
+</para>
+
+@client: the object which received the signal.
+@arg1: 
+@arg2: 
+@arg3: 
+@arg4: 
+@arg5: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeClient::shutdown-cancelled ##### -->
+<para>
+
+</para>
+
+@client: the object which received the signal.
+

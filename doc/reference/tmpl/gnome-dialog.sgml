@@ -14,12 +14,6 @@ GnomeDialog
 
 </para>
 
-<!-- ##### STRUCT GnomeDialogPrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### FUNCTION gnome_dialog_new ##### -->
 <para>
 
@@ -314,4 +308,20 @@ GnomeDialog
 </para>
 
 
+
+<!-- ##### SIGNAL GnomeDialog::clicked ##### -->
+<para>
+
+</para>
+
+@dialog: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeDialog::close ##### -->
+<para>
+
+</para>
+
+@dialog: the object which received the signal.
+@Returns: 
 

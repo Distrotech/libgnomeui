@@ -277,3 +277,63 @@ GnomeMDI
 @Returns: 
 
 
+<!-- ##### SIGNAL GnomeMDI::add-child ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@arg1: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeMDI::add-view ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@widget: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeMDI::app-created ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeMDI::child-changed ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeMDI::remove-child ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@arg1: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeMDI::remove-view ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@widget: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeMDI::view-changed ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@widget: 
+

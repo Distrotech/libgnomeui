@@ -111,6 +111,13 @@ GnomeEntry
 @gentry: 
 
 
+<!-- ##### SIGNAL GnomeEntry::activate ##### -->
+<para>
+
+</para>
+
+@entry: the object which received the signal.
+
 <!-- ##### ARG GnomeEntry:history-id ##### -->
 <para>
 
