@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 02:11+0100\n"
-"PO-Revision-Date: 2004-01-05 01:16+0100\n"
-"Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
+"POT-Creation-Date: 2004-03-23 09:27+0100\n"
+"PO-Revision-Date: 2004-03-23 09:30+0100\n"
+"Last-Translator: Åsmund Skjæveland\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -122,8 +123,7 @@ msgid "Translator credits"
 msgstr "Omsetjarheidring"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Heider til omsetjarar. Denne streng bør merkast som omsetjbar"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -141,6 +141,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -198,6 +199,7 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -388,11 +390,11 @@ msgstr "Set opp programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om dette programmet"
 
@@ -419,7 +421,7 @@ msgstr "Lag eit nytt vindauge"
 msgid "_Close This Window"
 msgstr "L_ukk dette vindauget"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Lukk dette vindauget"
 
@@ -505,7 +507,7 @@ msgstr "Tekst under ikon"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
-msgstr ""
+msgstr "Prioritetstekst attmed ikon"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
@@ -862,9 +864,7 @@ msgid ""
 "list."
 msgstr "Unikt kjenneteikn på filoppføringa. Vert brukt til å lagra logglista."
 
-# TRN: Feilmeld: Kan ikkje brukast på begge på norsk
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
-#, fuzzy
 msgid "Browse Dialog Title"
 msgstr "Tittel på bla gjennom-dialogen"
 
@@ -880,8 +880,7 @@ msgstr "Oppgje katalog"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"Om filveljaren vert brukt til å oppgje katalognamn eller heile filnamn."
+msgstr "Om filveljaren vert brukt til å oppgje katalognamn eller heile filnamn."
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
@@ -937,13 +936,13 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "Bruk GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "Om den nye GtkFileChooser-filveljaren eller GtkFileSelection-veljaren skal brukast."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1111,8 +1110,7 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"Unikt kjenneteikn på ikonoppføringa. Dette vert brukt til å lagra logglista."
+msgstr "Unikt kjenneteikn på ikonoppføringa. Dette vert brukt til å lagra logglista."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1319,7 +1317,7 @@ msgstr "Om"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Kopla ut krasj-dialog"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
@@ -1335,13 +1333,11 @@ msgstr "GNOME brukargrensesnittbibliotek"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Fleire segmenteringsfeil oppstod. Kan ikkje visa feildialogen\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1367,237 +1363,38 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "Programmet «%s» har avslutta uventa."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "prosess %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
+"Du kan melda frå til utviklarane om kva som skjedde for å hjelpa dei å fiksa det, eller "
+"du kan starta programmet på nytt."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Bruk: gnome_segv2 prognamn signum\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "Avslutt programmet"
+msgstr "Sta_rt programmet på nytt"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
-msgstr ""
+msgstr "Se_i ifrå til utviklarane"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "Feilsøk"
+msgstr "_Feilsøk"
 
-#~ msgid "Color Selector"
-#~ msgstr "Fargeveljar"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avslutt testen"
 
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Programmet «%s» (prosess %d) har krasja\n"
-#~ "på grunn av ein fatal feil.\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "Send inn en feilrapport"
-
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr "Gå til GNOME programkrasj-sida for meir informasjon"
-
-#~ msgid "Exit the test"
-#~ msgstr "Avslutt testen"
-
-#~ msgid "Find _Again"
-#~ msgstr "Finn _igjen"
-
-#~ msgid "Both text and icons"
-#~ msgstr "Både tekst og ikon"
-
-#~ msgid "E_xit"
-#~ msgstr "_Avslutt"
-
-#~ msgid "Exit the program"
-#~ msgstr "Avslutt programmet"
-
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "GConf feildetaljar: %s\n"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Gdk avlusingsflagg som skal slås på"
-
-#~ msgid "FLAGS"
-#~ msgstr "FLAGS"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Gdk avlusingsflagg som skal slås av"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Bruk synkrone X-kall"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "ikkje bruk X-utviding for delt minne"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Programnavmn som brukt av vindaugshandsamaren"
-
-#~ msgid "NAME"
-#~ msgstr "NAMN"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Programklasse som brukt av vindusbehandleren"
-
-#~ msgid "CLASS"
-#~ msgstr "CLASS"
-
-#~ msgid "HOST"
-#~ msgstr "HOST"
-
-#~ msgid "PORT"
-#~ msgstr "PORT"
-
-#~ msgid "STYLE"
-#~ msgstr "STYLE"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Gtk+ avlusingsflagg som skal slås på"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Gtk+ avlusingsflagg som skal slås av"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Gjør alle advarsler til fatale"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Last tilleggsmodul for Gtk+"
-
-#~ msgid "MODULE"
-#~ msgstr "MODULE"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
-
-#~ msgid "Author"
-#~ msgstr "Forfattar"
-
-#, fuzzy
-#~ msgid "Copyright font"
-#~ msgstr "Copyright (C) 1998"
-
-#, fuzzy
-#~ msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "wmhints-test"
-#~ msgstr "wmhints-test"
-
-#~ msgid "winhints-test"
-#~ msgstr "winhints-test"
-
-#~ msgid "Layer:"
-#~ msgstr "Lag:"
-
-#~ msgid "Above Dock"
-#~ msgstr "Over dokk"
-
-#~ msgid "Dock"
-#~ msgstr "Dokk"
-
-#~ msgid "On Top"
-#~ msgstr "Øverst"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Below"
-#~ msgstr "Under"
-
-#~ msgid "Desktop"
-#~ msgstr "Skrivebord"
-
-#~ msgid "Set Layer"
-#~ msgstr "Sett lag"
-
-#~ msgid "Workspaces:"
-#~ msgstr "Arbeidsområder:"
-
-#~ msgid "Sticky"
-#~ msgstr "Klebrig"
-
-#~ msgid "Set Workspace"
-#~ msgstr "Sett arbeidsplass"
-
-#~ msgid "State Toggles:"
-#~ msgstr "Tilstandsvelgere:"
-
-#~ msgid "Minimized"
-#~ msgstr "Minimert"
-
-#~ msgid "Maximized Vertical"
-#~ msgstr "Maksimert vertikalt"
-
-#~ msgid "Maximized Horizontal"
-#~ msgstr "Maksimert horisontalt"
-
-#~ msgid "Hidden"
-#~ msgstr "Skjult"
-
-#~ msgid "Shaded"
-#~ msgstr "Skyggelagt"
-
-#~ msgid "Fixed Position"
-#~ msgstr "Fast posisjon"
-
-#~ msgid "Ignore on Arrange"
-#~ msgstr "Ignorer ved plassering"
-
-#~ msgid "Set State"
-#~ msgstr "Set tilstand"
-
-#~ msgid "Skip Toggles:"
-#~ msgstr "Hopp over velgere:"
-
-#~ msgid "Skip Focus"
-#~ msgstr "Hopp over fokus"
-
-#~ msgid "Skip Window Menu"
-#~ msgstr "Hopp over vindusmeny"
-
-#~ msgid "Skip Taskbar / WinList"
-#~ msgstr "Hopp over oppgavelinje / vindusliste"
-
-#~ msgid "Set Skip"
-#~ msgstr "Hopp over"
-
-#~ msgid "WIN_HINTS Test"
-#~ msgstr "WIN_HINTS test"
-
-#~ msgid ""
-#~ "Simple test app to check how the WIN_HINTS work.\n"
-#~ "And to test the gnome_win_hints_* functions for errors. :)"
-#~ msgstr ""
-#~ "Enkel testapplikasjon for å sjekke hvordan WIN_HINTS verker.\n"
-#~ "Og for å teste gnome_win_hints_*-funksjonane for feil. :)"
-
-#~ msgid "Bonobo UI"
-#~ msgstr "Bonobo bg/UI"
