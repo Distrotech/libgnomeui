@@ -1,3 +1,17 @@
+2004-06-01  Rodney Dawes  <dobey@novell.com>
+
+	* libgnomeui/gnome-druid-page-edge.c (gnome_druid_page_edge_set_color):
+	Fix the default colors to be theme compliant
+
+	* libgnomeui/gnome-druid-page-standard.c
+	(gnome_druid_page_standard_class_init):
+	Add the "contents-background", "contents-background-gdk" and
+	"contents-background-set" properties to fix #119298
+	(gnome_druid_page_standard_set_color):
+	Fix the default colors to be theme compliant
+
+	Fixes #119298
+
 2004-06-01 Pawan Chitrakar <pawan@nplinux.org>
 	*configure.in: Added "ne" in ALL_LINGUAS
 

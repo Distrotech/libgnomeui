@@ -188,6 +188,29 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *class)
 							       G_PARAM_READWRITE));
 
 	g_object_class_install_property (gobject_class,
+					 PROP_CONTENTS_BACKGROUND,
+					 g_param_spec_string ("contents_background",
+							      _("Contents Background Color"),
+							      _("Contents Background color"),
+							      NULL,
+							      G_PARAM_WRITABLE));
+
+	g_object_class_install_property (gobject_class,
+					 PROP_CONTENTS_BACKGROUND_GDK,
+					 g_param_spec_boxed ("contents_background_gdk",
+							     _("Contents Background Color"),
+							     _("Contents Background color as a GdkColor"),
+							     GDK_TYPE_COLOR,
+							     G_PARAM_READWRITE));
+
+	g_object_class_install_property (gobject_class,
+					 PROP_CONTENTS_BACKGROUND_SET,
+					 g_param_spec_boolean ("contents_background_set",
+							       _("Contents Background color set"),
+							       _("Contents Background color is set"),
+							       FALSE,
+							       G_PARAM_READWRITE));
+	g_object_class_install_property (gobject_class,
 					 PROP_LOGO_BACKGROUND,
 					 g_param_spec_string ("logo_background",
 							      _("Logo Background Color"),
@@ -785,10 +808,10 @@ gnome_druid_page_standard_set_color (GnomeDruidPageStandard *druid_page_standard
 		druid_page_standard->title_foreground = widget->style->fg[GTK_STATE_SELECTED];
 	}
 	if (druid_page_standard->_priv->contents_background_set == FALSE) {
-		druid_page_standard->contents_background = widget->style->bg[GTK_STATE_PRELIGHT];
+		druid_page_standard->contents_background = widget->style->bg[GTK_STATE_NORMAL];
 	}
 
 	gtk_widget_modify_fg (druid_page_standard->_priv->title_label, GTK_STATE_NORMAL, &(druid_page_standard->title_foreground));
 	gtk_widget_modify_bg (druid_page_standard->_priv->background, GTK_STATE_NORMAL, &(druid_page_standard->background));
-	gtk_widget_modify_bg (druid_page_standard->_priv->evbox, GTK_STATE_NORMAL,&(druid_page_standard->contents_background));
+	gtk_widget_modify_bg (GTK_BIN (druid_page_standard->_priv->evbox)->child, GTK_STATE_NORMAL,&(druid_page_standard->contents_background));
 }
