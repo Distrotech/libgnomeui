@@ -1,3 +1,7 @@
+1998-07-19  Havoc Pennington <hp@pobox.com>
+
+	* gnome-appbar.h, gnome-appbar.c: Add construct function.
+
 Sat Jul 18 20:25:28 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-propertybox.[ch]: cleaned up the way the notebook

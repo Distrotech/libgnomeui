@@ -116,9 +116,18 @@ void       gnome_appbar_set_prompt          (GnomeAppBar * appbar,
 					     const gchar * prompt,
 					     gboolean modal);
 /* Remove any prompt */
-void       gnome_appbar_clear_prompt    (GnomeAppBar * appbar);				       
+void       gnome_appbar_clear_prompt    (GnomeAppBar * appbar);
+
 /* Get the response to the prompt, if any. Result must be g_free'd. */
-gchar *    gnome_appbar_get_response    (GnomeAppBar * appbar);				       
+gchar *    gnome_appbar_get_response    (GnomeAppBar * appbar);
+
+
+/* For use to bindings in languages other than C. Don't use. */
+void       gnome_appbar_construct(GnomeAppBar * ab,
+				  gboolean has_progress,
+				  gboolean has_status,
+				  GnomePreferencesType interactivity);
+
 END_GNOME_DECLS
 
 #endif /* __GNOME_APPBAR_H__ */

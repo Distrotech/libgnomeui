@@ -232,16 +232,30 @@ gnome_appbar_new (gboolean has_progress,
 		  gboolean has_status,
 		  GnomePreferencesType interactivity)
 {
-  GtkBox *box;
   GnomeAppBar * ab = gtk_type_new (gnome_appbar_get_type ());
 
+  gnome_appbar_construct(ab, has_progress, has_status, interactivity);
+
+  return GTK_WIDGET(ab);
+}
+
+void
+gnome_appbar_construct(GnomeAppBar * ab,
+		       gboolean has_progress,
+		       gboolean has_status,
+		       GnomePreferencesType interactivity)
+{
+  GtkBox *box;
+
+  /* These checks are kind of gross because an unfinished object will
+     be returned from _new instead of NULL */
+
   /* Has to have either a progress bar or a status bar */
-  g_return_val_if_fail( (has_progress == TRUE) || (has_status == TRUE), NULL );
+  g_return_if_fail( (has_progress == TRUE) || (has_status == TRUE) );
   /* Can't be interactive if there's no status bar */
-  g_return_val_if_fail( ((has_status == FALSE) && 
-			 (interactivity == GNOME_PREFERENCES_NEVER)) ||
-			(has_status == TRUE),
-			NULL); 
+  g_return_if_fail( ((has_status == FALSE) && 
+		     (interactivity == GNOME_PREFERENCES_NEVER)) ||
+		    (has_status == TRUE)); 
 
   box = GTK_BOX (ab);
 
@@ -304,8 +318,6 @@ gnome_appbar_new (gboolean has_progress,
   }
 
   if (ab->status) gtk_widget_show (ab->status);
-
-  return GTK_WIDGET(ab);
 }
 
 void
