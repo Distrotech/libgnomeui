@@ -113,14 +113,14 @@ void gnome_app_add_toolbar (GnomeApp *app,
 			    gint band_position,
 			    gint offset);
 
-void gnome_app_add_docked (GnomeApp *app,
-			   GtkWidget *widget,
-			   const gchar *name,
-			   GnomeDockItemBehavior behavior,
-			   GnomeDockPlacement placement,
-			   gint band_num,
-			   gint band_position,
-			   gint offset);
+GtkWidget *gnome_app_add_docked (GnomeApp *app,
+				 GtkWidget *widget,
+				 const gchar *name,
+				 GnomeDockItemBehavior behavior,
+				 GnomeDockPlacement placement,
+				 gint band_num,
+				 gint band_position,
+				 gint offset);
 
 void gnome_app_add_dock_item (GnomeApp *app,
 			      GnomeDockItem *item,

@@ -649,13 +649,15 @@ gnome_app_add_dock_item (GnomeApp *app,
  * @band_position: Position of the new dock item in band @band_num
  * @offset: Offset from the previous dock item in the band; if there is
  * no previous item, offset from the beginning of the band.
+ *
+ * Returns: The dock item used to contain the widget.
  * 
  * Add @widget as a dock item according to the specified layout
  * information.  Notice that, if automatic layout configuration is
  * enabled, the layout is overridden by the saved configuration, if
  * any.
  **/
-void
+GtkWidget *
 gnome_app_add_docked (GnomeApp *app,
 		      GtkWidget *widget,
 		      const gchar *name,
@@ -671,6 +673,8 @@ gnome_app_add_docked (GnomeApp *app,
 	gtk_container_add (GTK_CONTAINER (item), widget);
 	gnome_app_add_dock_item (app, GNOME_DOCK_ITEM (item),
 				 placement, band_num, band_position, offset);
+
+	return item;
 }
 
 /**
