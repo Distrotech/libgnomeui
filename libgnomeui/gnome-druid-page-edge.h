@@ -100,7 +100,7 @@ struct _GnomeDruidPageEdge
 	GdkColor title_color;
 	GdkColor text_color;
 
-	GnomeEdgePosition position : 2;
+	guint position : 2; /* GnomeEdgePosition */
 
 	/*< private >*/
 	GnomeDruidPageEdgePrivate *_priv;

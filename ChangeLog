@@ -1,3 +1,17 @@
+2005-01-26  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: #include
+	"gnome-authentication-manager-private.h" to get rid
+	of compiler warnings. It's internal to this library so
+	it should be ok.
+	* libgnomeui/gnome-about.c:
+	* libgnomeui/gnome-client.h:
+	* libgnomeui/gnome-druid-page-edge.h:
+	* libgnomeui/gnome-druid-page-standard.c:
+	* libgnomeui/gnome-druid.c:
+	* libgnomeui/gnome-font-picker.c: AIX portability fixes
+	from TheWrittenWord. Closes bug #131397.
+
 2005-01-25  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c

@@ -50,7 +50,7 @@ enum {
 enum {
   PROP_0,
   PROP_SHOW_FINISH,
-  PROP_SHOW_HELP,
+  PROP_SHOW_HELP
 };
 
 

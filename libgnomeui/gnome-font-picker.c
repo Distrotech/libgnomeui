@@ -51,7 +51,7 @@ struct _GnomeFontPickerPrivate {
 
         int           use_font_in_label_size;
 
-        GnomeFontPickerMode mode : 2;
+        guint         mode : 2; /* GnomeFontPickerMode */
 
         /* Only for GNOME_FONT_PICKER_MODE_FONT_INFO */
         guint      use_font_in_label : 1;

@@ -50,6 +50,7 @@
 #endif
 
 #include <libgnomeui/gnome-icon-lookup.h>
+#include <libgnomeui/gnome-authentication-manager-private.h>
 
 #include <errno.h>
 #include <math.h>

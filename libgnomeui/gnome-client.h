@@ -147,11 +147,11 @@ struct _GnomeClient
   gint                input_id;
 
   /* values sent with the last SaveYourself message */
-  GnomeSaveStyle      save_style : 2;
-  GnomeInteractStyle  interact_style : 2;
+  guint               save_style : 2; /* GnomeRestartStyle */
+  guint               interact_style : 2; /* GnomeInteractStyle */
 
   /* other internal state information */
-  GnomeClientState    state : 3;
+  guint               state : 3; /* GnomeClientState */ 
 
   guint               shutdown : 1;
   guint               fast : 1;
