@@ -68,10 +68,12 @@ static void gnome_about_display_comments (GdkWindow *win,
 
 
 /**
- * gnome_about_get_type:
+ * gnome_about_get_type
  *
+ * Description:
  * Returns the GtkType for the GnomeAbout widget.
- */
+ **/
+
 guint
 gnome_about_get_type ()
 {
@@ -511,14 +513,16 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
  * @comments: Other comments
  * @logo: a logo pixmap file.
  *
- * Description: Creates a new GNOME About dialog.  @title, @version,
+ * Description:
+ * Creates a new GNOME About dialog.  @title, @version,
  * @copyright, and @authors are displayed first, in that order.
  * @comments is typically the location for multiple lines of text, if
  * necessary.  (Separate with "\n".)  @logo is the filename of a
  * optional pixmap to be displayed in the dialog, typically a product or
  * company logo of some sort; set to %NULL if no logo file is available.
  *
- * Returns: &GtkWidget pointer to new dialog
+ * Returns:
+ * &GtkWidget pointer to new dialog
  **/
 
 GtkWidget* 
@@ -544,6 +548,32 @@ gnome_about_new (const gchar	*title,
 
 	return GTK_WIDGET (about);
 }
+
+/**
+ * gnome_about_construct
+ * @about: Pointer to new GNOME about object
+ * @title: Name of app.
+ * @version: version number
+ * @copyright: copyright string
+ * @authors: %NULL terminated list of authors
+ * @comments: Other comments
+ * @logo: a logo pixmap file.
+ *
+ * Description: Constructs a new GNOME About dialog, given an object
+ * @about newly created via the Gtk type system.  @title, @version,
+ * @copyright, and @authors are displayed first, in that order.
+ * @comments is typically the location for multiple lines of text, if
+ * necessary.  (Separate with "\n".)  @logo is the filename of a
+ * optional pixmap to be displayed in the dialog, typically a product or
+ * company logo of some sort; set to %NULL if no logo file is available.
+ *
+ * Note:
+ * Only for use by bindings to languages other than C; don't use
+ * in applications.
+ *
+ * Returns:
+ * &GtkWidget pointer to new dialog
+ **/
 
 void
 gnome_about_construct (GnomeAbout *about,

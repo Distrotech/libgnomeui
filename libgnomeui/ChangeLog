@@ -1,3 +1,12 @@
+1999-06-12  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-about.c:
+	Filled out inline API docs, a little bit 'o doc reformatting.
+	
+	* gnome-preferences.c:
+	Added API doc stubs, documented maybe 1/3 of them.
+	Normalized several function declarations.
+
 1999-06-10  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-popup-menu.c: 
