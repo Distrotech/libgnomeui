@@ -1086,6 +1086,9 @@ gil_realize (GtkWidget *widget)
 	style->bg[GTK_STATE_NORMAL] = style->base[GTK_STATE_NORMAL];
 	gtk_widget_set_style (widget, style);
 
+	gdk_window_set_background (GTK_LAYOUT (gil)->bin_window,
+				   &widget->style->bg[GTK_STATE_NORMAL]);
+
 	if (gil->frozen)
 		return;
 
