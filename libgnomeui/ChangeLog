@@ -1,3 +1,10 @@
+1999-01-23  The Rasterman <raster@redhat.com>
+	* gnome-init.c: disable setting of cache - this is the most evil 
+	thing I've ever seen. There is an imlib perefercnes (imlib_config) 
+	program to dojust this for every setting of imlib - and overriding it 
+	like this is not just bad coding but bad policy since now a users 
+	preferences dont count anymore.
+					   
 1999-01-23  Felix Bellaby <felix@pooh.u-net.com>
 
 	* gnome-client.c, gnome-client.h (gnome_client_set_priority): 
