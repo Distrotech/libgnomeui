@@ -1,3 +1,8 @@
+Sun Jun 28 10:50:01 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* libgnomeui.h: Include libgnome/gnome-parse.h, so libgnomeui.h
+	can be included without first including libgnome.h.
+
 Mon Jun 29 00:35:47 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-app-util.h, gnome-app-util.c: Implementation for all

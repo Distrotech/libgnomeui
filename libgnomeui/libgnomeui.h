@@ -2,6 +2,7 @@
 #define LIBGNOMEUI_H
 
 #include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-parse.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"
 #include "libgnomeui/gnome-actionarea.h"
