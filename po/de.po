@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui cvs\n"
-"POT-Creation-Date: 2002-08-06 15:26+0200\n"
-"PO-Revision-Date: 2002-07-08 12:57+0200\n"
-"Last-Translator: Manuel Borchers <webmaster@matronix.de>\n"
+"POT-Creation-Date: 2002-08-06 21:15+0200\n"
+"PO-Revision-Date: 2002-08-06 12:57+0200\n"
+"Last-Translator: Benjamin Greiner <benjamin.greiner@gmx.net>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -531,6 +531,7 @@ msgstr "Hinweis für Kindelement 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datei"
 
@@ -588,6 +589,7 @@ msgid "_Game"
 msgstr "_Spiel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -754,7 +756,6 @@ msgstr "Eine Zeichenkette ersetzen"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
 msgstr "Ei_genschaften..."
 
@@ -767,9 +768,8 @@ msgstr "Die Eigenschaften der Datei verändern"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "_Vorlieben..."
+msgstr "_Vorlieben"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -780,11 +780,11 @@ msgstr "Die Anwendung konfigurieren"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Über diese Anwendung"
 
@@ -811,7 +811,7 @@ msgstr "Ein neues Fenster öffnen"
 msgid "_Close This Window"
 msgstr "Fenster _schließen"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Das aktuelle Fenster schließen"
 
@@ -883,11 +883,9 @@ msgstr "Spiel _beenden"
 msgid "End the current game"
 msgstr "Das aktuelle Spiel beenden"
 
-# CHECK
 #: libgnomeui/gnome-app-helper.c:1143
-#, fuzzy
 msgid "_Contents"
-msgstr "_Hilfeinhalt"
+msgstr "_Inhalt"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
@@ -899,7 +897,7 @@ msgstr "Text unter Symbolen"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr "Text neben Symbolen bevorzugen"
+msgstr "Text vorrangig neben Symbolen"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
@@ -964,7 +962,7 @@ msgstr "Die Kennungszeichenfolge der Anwendung"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr "Kennung der Chronik"
+msgstr "Chronikkennung"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -1202,7 +1200,7 @@ msgstr "Pixmap-Verzeichnis"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr "Verzeichnis, in dem die Icons gesucht werden."
+msgstr "Das nach Symbolen zu durchsuchende Verzeichnis."
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
@@ -1248,7 +1246,7 @@ msgstr "Symbol-Auswahl"
 
 #: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr "Wählen Sie ein Icon"
+msgstr "Wählen Sie ein Symbol."
 
 #: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
@@ -1349,14 +1347,6 @@ msgstr "%a, %d. %m. %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Den Test beenden"
-
-#~ msgid "Find _Again"
-#~ msgstr "_Weitersuchen"
-
-#~ msgid "Both text and icons"
-#~ msgstr "Text und Symbole"
-
-#~ msgid "Both text and icons when horizontal, just icons when vertical"
-#~ msgstr "Text und Symbole wenn horizontal, nur Symbole wenn vertikal"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Den Test beenden"
