@@ -1,3 +1,7 @@
+1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkcalendar.c: return meaningful values from most routines.  
+
 Thu Apr 30 11:45:38 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-app-helper.c (gnome_app_create_menus_custom,

@@ -1115,6 +1115,7 @@ gtk_calendar_select_month (GtkCalendar *calendar, gint month, gint year)
 
   gtk_signal_emit (GTK_OBJECT (calendar), 
        	           gtk_calendar_signals[MONTH_CHANGED_SIGNAL]);
+  return TRUE;
 }
 
 void
@@ -1195,6 +1196,7 @@ gtk_calendar_mark_day (GtkCalendar *calendar, gint day)
 
   if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
     gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  return TRUE;
 }
 
 gint
@@ -1207,6 +1209,7 @@ gtk_calendar_unmark_day (GtkCalendar *calendar, gint day)
 
   if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
     gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  return TRUE;
 }
 
 void
@@ -1293,6 +1296,7 @@ gtk_calendar_motion_notify (GtkWidget      *widget,
         gtk_calendar_paint_day(widget, row, col);
     }
   }
+  return TRUE;
 }      
 
 static gint
