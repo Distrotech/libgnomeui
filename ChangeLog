@@ -1,3 +1,9 @@
+Tue Oct 14 17:06:59 2003  Jonathan Blandford  <jrb@redhat.com>
+
+	* libgnomeui/gnome-file-entry.h:
+	* libgnomeui/gnome-icon-entry.h: undeprecate these two.  They
+	don't have GTK+ equivelants yet.
+
 Mon Oct 13 17:45:16 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* libgnomeui/gnome-dateedit.h: undeprecate.
