@@ -1,3 +1,7 @@
+Sat May 27 11:42:02 2000  George Lebl <jirka@5z.com>
+
+	* gnome-href.c: Allow draging the link off the button
+
 Sat May 27 01:13:20 2000  George Lebl <jirka@5z.com>
 
 	* dock_demo.c, gnome-file-saver.c, gnome-helpsys.c

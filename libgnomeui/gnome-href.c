@@ -43,8 +43,37 @@ static void gnome_href_set_arg(GtkObject *object,
 			       GtkArg *arg,
 			       guint arg_id);
 static void gnome_href_realize(GtkWidget *widget);
+static void drag_data_get     (GnomeHRef          *href,
+			       GdkDragContext     *context,
+			       GtkSelectionData   *selection_data,
+			       guint               info,
+			       guint               time,
+			       gpointer            data);
 
 static GtkObjectClass *parent_class;
+
+static const GtkTargetEntry http_drop_types[] = {
+	{ "text/uri-list",       0, 0 },
+	{ "x-url/http",          0, 0 },
+	{ "_NETSCAPE_URL",       0, 0 }
+};
+static const GtkTargetEntry ftp_drop_types[] = {
+	{ "text/uri-list",       0, 0 },
+	{ "x-url/ftp",           0, 0 },
+	{ "_NETSCAPE_URL",       0, 0 }
+};
+static const GtkTargetEntry other_drop_types[] = {
+	{ "text/uri-list",       0, 0 },
+	{ "_NETSCAPE_URL",       0, 0 }
+};
+
+static const gint n_http_drop_types = 
+   sizeof(http_drop_types) / sizeof(http_drop_types[0]);
+static const gint n_ftp_drop_types = 
+   sizeof(ftp_drop_types) / sizeof(ftp_drop_types[0]);
+static const gint n_other_drop_types = 
+   sizeof(other_drop_types) / sizeof(other_drop_types[0]);
+
 
 enum {
 	ARG_0,
@@ -102,11 +131,44 @@ static void gnome_href_class_init(GnomeHRefClass *klass) {
 }
 
 static void gnome_href_init(GnomeHRef *href) {
-  href->label = gtk_label_new("");
-  gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
-  gtk_container_add(GTK_CONTAINER(href), href->label);
-  gtk_widget_show(href->label);
-  href->url = NULL;
+	href->label = gtk_label_new("");
+	gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
+	gtk_container_add(GTK_CONTAINER(href), href->label);
+	gtk_widget_show(href->label);
+	href->url = NULL;
+	/* the source dest is set on set_url */
+	gtk_signal_connect (GTK_OBJECT (href), "drag_data_get",
+			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
+}
+
+static void
+drag_data_get(GnomeHRef          *href,
+	      GdkDragContext     *context,
+	      GtkSelectionData   *selection_data,
+	      guint               info,
+	      guint               time,
+	      gpointer            data)
+{
+	g_return_if_fail (href != NULL);
+	g_return_if_fail (GNOME_IS_HREF (href));
+
+	if(!href->url) {
+		/*FIXME: cancel the drag*/
+		return;
+	}
+
+	/* if this doesn't look like an url, it's probably a file */
+	if(strchr(href->url, ':') == NULL) {
+		char *s = g_strdup_printf("file:%s\r\n", href->url);
+		gtk_selection_data_set (selection_data,
+					selection_data->target,
+					8, s, strlen(s)+1);
+		g_free(s);
+	} else {
+		gtk_selection_data_set (selection_data,
+					selection_data->target,
+					8, href->url, strlen(href->url)+1);
+	}
 }
 
 /**
@@ -194,9 +256,28 @@ void gnome_href_set_url(GnomeHRef *href, const gchar *url) {
   g_return_if_fail(GNOME_IS_HREF(href));
   g_return_if_fail(url != NULL);
 
-  if (href->url)
-    g_free(href->url);
+  if (href->url) {
+	  gtk_drag_source_unset(GTK_WIDGET(href));
+	  g_free(href->url);
+  }
   href->url = g_strdup(url);
+  if(strncmp(url, "http://", 7) == 0 ||
+     strncmp(url, "https://", 8) == 0) {
+	  gtk_drag_source_set (GTK_WIDGET(href),
+			       GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+			       http_drop_types, n_http_drop_types,
+			       GDK_ACTION_COPY);
+  } else if(strncmp(url, "ftp://", 6) == 0) {
+	  gtk_drag_source_set (GTK_WIDGET(href),
+			       GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+			       ftp_drop_types, n_ftp_drop_types,
+			       GDK_ACTION_COPY);
+  } else {
+	  gtk_drag_source_set (GTK_WIDGET(href),
+			       GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+			       other_drop_types, n_other_drop_types,
+			       GDK_ACTION_COPY);
+  }
 }
 
 
