@@ -1,3 +1,7 @@
+Thu Dec 16 11:11:58 1999  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gtkrc.ko: Changed the default Korean fonts for each styles.
+
 1999-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (gnome_mdi_get_child_menu_info): fix a typo in
