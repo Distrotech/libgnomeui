@@ -180,7 +180,7 @@ gboolean gnome_less_show_command(GnomeLess * gl,
   g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
   g_return_val_if_fail(command_line != NULL, FALSE);
   
-  p = popen(command_line, "rt");
+  p = popen(command_line, "r");
 
   if ( p == NULL ) {
     return FALSE;
