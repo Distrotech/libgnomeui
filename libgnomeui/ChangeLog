@@ -1,3 +1,9 @@
+1998-06-08 Arturo Espinosa Aldama <arturo@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (gnome_app_do_menu_creation): The support for
+	pixmapped menus was broken (if you tried to put menus with pixmaps
+	of your own, you got warnings). This patch fixes it.
+
 1998-06-08  Chris Lahey  <clahey@umich.edu>
 
 	* gnome-less.h:
@@ -87,6 +93,7 @@ Thu Jun  4 14:53:55 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	WIN_APP_STATE window property. This is an implementation of raster's
 	proposal as found in the E sources (gnome.c).
 
+>>>>>>> 1.244
 1998-06-03  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* libgnomeui.h:

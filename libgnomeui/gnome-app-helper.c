@@ -108,16 +108,48 @@ gnome_app_do_menu_creation(GnomeApp *app,
 		gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(menuinfo[i].widget), TRUE);
 		gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(menuinfo[i].widget), FALSE);
 	      }
-	    else
-	      if (has_stock_pixmaps)
-		menuinfo[i].widget =
-		  gnome_stock_menu_item((menuinfo[i].pixmap_info 
-					 ? menuinfo[i].pixmap_info 
-					 : GNOME_STOCK_MENU_BLANK),
-					_(menuinfo[i].label));
-	      else
-		menuinfo[i].widget = gtk_menu_item_new_with_label(_(menuinfo[i].label));
+	    else {
+		    GtkWidget *pmap = NULL;
+		    
+		    switch(menuinfo[i].pixmap_type) {
+		     case GNOME_APP_PIXMAP_DATA:
+			    pmap = gnome_pixmap_new_from_xpm_d(menuinfo[i].pixmap_info);
+			    break;
+		     case GNOME_APP_PIXMAP_FILENAME:
+			    pmap = gnome_pixmap_new_from_file(menuinfo[i].pixmap_info);
+			    break;
+		     case GNOME_APP_PIXMAP_NONE:
+		     case GNOME_APP_PIXMAP_STOCK:
+			    if (has_stock_pixmaps)
+			      menuinfo[i].widget =
+			      gnome_stock_menu_item(menuinfo[i].pixmap_info ?
+						    menuinfo[i].pixmap_info :
+						    GNOME_STOCK_MENU_BLANK,
+						    _(menuinfo[i].label));
+			    else
+			      menuinfo[i].widget = gtk_menu_item_new_with_label(_(menuinfo[i].label));
+			    break;
+		     default:
+			    g_warning("GNOME_APP_PIXMAP type unknown.");
+			    break;
+		    }
+		    
+		    if (pmap) {
+			    GtkWidget *hbox, *w;
+			    
+			    hbox = gtk_hbox_new(FALSE, 2);
+			    gtk_box_pack_start(GTK_BOX(hbox), pmap, 
+					       FALSE, FALSE, 0);
+			    w = gtk_label_new(_(menuinfo[i].label));
+			    gtk_box_pack_start(GTK_BOX(hbox), w, 
+					       FALSE, FALSE, 0);
+			    menuinfo[i].widget = gtk_menu_item_new();
+			    gtk_container_add(GTK_CONTAINER(menuinfo[i].widget), hbox);
+			    gtk_widget_show_all(hbox);
 
+		    }
+	    }
+		  
 	    gtk_widget_show(menuinfo[i].widget);
 
 	    if(justify_right)
