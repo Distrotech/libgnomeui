@@ -292,7 +292,7 @@ gnome_about_instance_init (GnomeAbout *about)
 	gtk_dialog_set_default_response (GTK_DIALOG (about), GTK_RESPONSE_OK);
 
 	/* Add the credits button */
-	button = gtk_dialog_add_button (GTK_DIALOG (about), "_Credits", GNOME_RESPONSE_CREDITS);
+	button = gtk_dialog_add_button (GTK_DIALOG (about), _("_Credits"), GNOME_RESPONSE_CREDITS);
 	gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (GTK_DIALOG (about)->action_area), button, TRUE);
 	
 	gtk_window_set_resizable (GTK_WINDOW (about), FALSE);

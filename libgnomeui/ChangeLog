@@ -1,3 +1,7 @@
+2002-02-25  Zbigniew Chyla  <cyba@gnome.pl>
+
+	* gnome-about.c (gnome_about_instance_init): Marked string for translation.
+
 2002-02-20  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-ui-init.c (initialize_gtk_signal_relay): The soundlist
