@@ -1,5 +1,11 @@
 2003-10-13  Federico Mena Quintero  <federico@ximian.com>
 
+	* TODO: Removed the point about shortcuts to clipart-like
+	directories, as the code is in place.  Added a comment to the
+	bookmarks point.  Removed my old TODOs.
+
+2003-10-13  Federico Mena Quintero  <federico@ximian.com>
+
 	* gtkfilechooserimpldefault.c (check_bookmarks_sensitivity): Walk
 	the whole shortcuts model, not just the bookmarks part --- there
 	is no need to add bookmarks for "stock" volume items.
