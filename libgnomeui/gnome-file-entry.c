@@ -494,7 +494,7 @@ tilde_expand (char *str)
  * wrong
  **/
 char *
-gnome_file_entry_get_full_path(GnomeFileEntry *fentry, int file_must_exist)
+gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 {
 	char *p;
 	char *t;
@@ -568,7 +568,7 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, int file_must_exist)
  * Returns:
  **/
 void
-gnome_file_entry_set_modal(GnomeFileEntry *fentry, int is_modal)
+gnome_file_entry_set_modal(GnomeFileEntry *fentry, gboolean is_modal)
 {
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
@@ -589,7 +589,7 @@ gnome_file_entry_set_modal(GnomeFileEntry *fentry, int is_modal)
  * Returns:
  **/
 void
-gnome_file_entry_set_directory(GnomeFileEntry *fentry, int directory_entry)
+gnome_file_entry_set_directory(GnomeFileEntry *fentry, gboolean directory_entry)
 {
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));

@@ -69,19 +69,19 @@ void	   gnome_file_entry_set_default_path(GnomeFileEntry *fentry,
 
 /*sets up the file entry to be a directory picker rather then a file picker*/
 void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
-					  int directory_entry);
+					  gboolean directory_entry);
 
 /*returns a filename which is a full path with WD or the default
   directory prepended if it's not an absolute path, returns
   NULL on empty entry or if the file doesn't exist and that was
   a requirement*/
 char      *gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
-					  int file_must_exist);
+					  gboolean file_must_exist);
 
 /*set modality of the file browse dialog, only applies for the
   next time a dialog is created*/
 void       gnome_file_entry_set_modal	(GnomeFileEntry *fentry,
-					 int is_modal);
+					 gboolean is_modal);
 
 END_GNOME_DECLS
 
