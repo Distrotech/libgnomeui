@@ -17,6 +17,7 @@
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
+#include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-preferences.h"
 #include "gnome-app.h"
 
@@ -579,8 +580,11 @@ gnome_app_set_toolbar (GnomeApp *app,
 	  gtk_widget_set_events(hb, GDK_BUTTON_PRESS_MASK);
 	}
 
-	if ( ! gnome_preferences_get_toolbar_relief() ) {
+	if ( gnome_preferences_get_toolbar_relief() ) {
+	  gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar), GNOME_PAD);
+	} else {
 	  gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
+	  gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar), GNOME_PAD_SMALL);
 	}
 	
 	app->toolbar = GTK_WIDGET (toolbar);

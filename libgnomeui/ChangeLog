@@ -2,6 +2,12 @@
 
 	* gnome-app-helper.c (gnome_app_create_menus_custom): Move menu
 	relief setting code to gnome_app.c (gnome_app_set_menus).
+	(gnome_app_create_toolbar_custom): Move space size setting to
+	gnome_app.c (gnome_app_set_toolbar) with change: if toolbar has
+	relieved buttons, use GNOME_PAD as space size, else use
+	GNOME_PAD_SMALL.
+	(create_toolbar_item): Use multiple of GNOME_PAD instead of
+	GNOME_PAD_BIG for separator height.
 
 	* gnome-preferences.c (gnome_preferences_load_custom): Toolbar
 	button relief default changed to "=false" to match

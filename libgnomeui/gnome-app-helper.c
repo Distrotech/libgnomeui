@@ -617,7 +617,7 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio, Gtk
 		} else {
 			GtkWidget *separator = gtk_vseparator_new ();
 			gtk_widget_show (separator);
-			gtk_widget_set_usize (separator, 0, GNOME_PAD_BIG * 2);
+			gtk_widget_set_usize (separator, 0, GNOME_PAD * 3);
 			gtk_toolbar_append_space (toolbar);
 			gtk_toolbar_append_widget (toolbar, separator, NULL, NULL);
 			gtk_toolbar_append_space (toolbar);
@@ -820,7 +820,6 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
 	g_return_if_fail (uibdata != NULL);
 
 	toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
-	gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar), GNOME_PAD);
 	gnome_app_fill_toolbar_custom (GTK_TOOLBAR (toolbar), uiinfo, uibdata, app->accel_group);
 	gnome_app_set_toolbar (app, GTK_TOOLBAR (toolbar));
 }
