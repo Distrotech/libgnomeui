@@ -40,8 +40,7 @@ test_libglade_gnome_SOURCE = test-libglade-gnome.c
 test_libglade_gnome_noupgrade_SOURCE = test-libglade-gnome-noupgrade.c
 
 EXTRA_DIST = \
-	test-libglade-gnome.glade	\
-	test-libglade-gnome-noupgrade.glade
+	test-libglade-gnome.glade
 
 distclean-local:
 	rm -f test-libglade-gnome.glade2 test-libglade-gnome-noupgrade.glade

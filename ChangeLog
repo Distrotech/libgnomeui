@@ -1,3 +1,8 @@
+2001-12-10  jacob berkman  <jacob@ximian.com>
+
+	* tests/Makefile.am: there is no
+	test-libglade-gnome-noupgrade.glade
+
 2001-12-10  Kristian Rietveld  <kris@gtk.org>
 
 	* libgnomeui/gnome-dialog.c (gnome_dialog_constructv): don't append
