@@ -16,6 +16,16 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/****************************************************************
+  $Log$
+  Revision 1.24  1998/05/25 16:15:57  sopwith
+
+
+  gnome_dialog_run_*(): Fixes for Havoc's bugs
+  Also added CVS log recording at the top :)
+
+*****************************************************************/
+
 #include <config.h>
 #include <stdarg.h>
 
@@ -294,15 +304,48 @@ gnome_dialog_set_modal (GnomeDialog * dialog)
   if (GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog))) gtk_grab_add(GTK_WIDGET(dialog));
 }
 
-/* Perhaps using set_data would be better; I don't know */
+struct GnomeDialogRunInfo {
+  gint button_number;
+  gint close_id, clicked_id;
+};
+
 static void
 gnome_dialog_setbutton_callback(GnomeDialog *dialog,
 				gint button_number,
-				gint *set_button_number)
+				struct GnomeDialogRunInfo *runinfo)
 {
-  *set_button_number = button_number;
+  if(runinfo->close_id < 0)
+    return;
+
+  runinfo->button_number = button_number;
+
+  gtk_signal_disconnect(GTK_OBJECT(dialog),
+			runinfo->close_id);
+  gtk_signal_disconnect(GTK_OBJECT(dialog),
+			runinfo->clicked_id);
+
+  runinfo->close_id = runinfo->clicked_id = -1;
 
   gtk_main_quit();
+}
+
+static gboolean
+gnome_dialog_quit_run(GnomeDialog *dialog,
+		      struct GnomeDialogRunInfo *runinfo)
+{
+  if(runinfo->close_id < 0)
+    return FALSE;
+
+  gtk_signal_disconnect(GTK_OBJECT(dialog),
+			runinfo->close_id);
+  gtk_signal_disconnect(GTK_OBJECT(dialog),
+			runinfo->clicked_id);
+
+  runinfo->close_id = runinfo->clicked_id = -1;
+
+  gtk_main_quit();
+
+  return FALSE;
 }
 
 gint
@@ -315,8 +358,8 @@ gnome_dialog_run_modal(GnomeDialog *dialog)
 gint
 gnome_dialog_run(GnomeDialog *dialog)
 {
-  gint button_num = -1;
   gboolean was_modal;
+  struct GnomeDialogRunInfo ri = {-1,-1,-1};
 
   g_return_val_if_fail(dialog != NULL, -1);
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
@@ -324,11 +367,16 @@ gnome_dialog_run(GnomeDialog *dialog)
   was_modal = dialog->modal;
   gnome_dialog_set_modal(dialog);
   gnome_dialog_close_hides(dialog, TRUE);
-  gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
-		     GTK_SIGNAL_FUNC(gnome_dialog_setbutton_callback),
-		     &button_num);
-  gtk_signal_connect(GTK_OBJECT(dialog), "delete_event",
-		     GTK_SIGNAL_FUNC(gtk_main_quit), NULL);
+
+  ri.clicked_id =
+    gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
+		       GTK_SIGNAL_FUNC(gnome_dialog_setbutton_callback),
+		       &ri);
+
+  ri.close_id =
+    gtk_signal_connect(GTK_OBJECT(dialog), "close",
+		       GTK_SIGNAL_FUNC(gnome_dialog_quit_run),
+		       &ri);
 
   if ( ! GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog)) )
     gtk_widget_show(GTK_WIDGET(dialog));
@@ -336,13 +384,22 @@ gnome_dialog_run(GnomeDialog *dialog)
   gtk_main();
 
   gtk_widget_hide(GTK_WIDGET(dialog));
+
   if(!was_modal)
     {
+      /* It would be nicer if gnome_dialog_set_modal() took a
+	 bool value to indicate yes/no modal */
       dialog->modal = FALSE;
       gtk_grab_remove(GTK_WIDGET(dialog));
     }
 
-  return button_num;
+  if(ri.close_id >= 0)
+    {
+      gtk_signal_disconnect(GTK_OBJECT(dialog), ri.close_id);
+      gtk_signal_disconnect(GTK_OBJECT(dialog), ri.clicked_id);
+    }
+
+  return ri.button_number;
 }
 
 void
