@@ -77,7 +77,7 @@ iti_get_width (Iti *iti, int *center_offset)
 	if (!center_offset)
 		center_offset = &x;
 	
-	if (iti->ti->rows){
+	if (iti->ti && iti->ti->rows) {
 		if (iti->ti->rows->next){
 			*center_offset = 0;
 			w = iti->width;
@@ -112,7 +112,7 @@ recompute_bounding_box (Iti *iti)
 	nx1 = dx + iti->x + (iti->width - w) / 2 - MARGIN_X;
 	ny1 = dy + iti->y;
 	nx2 = dx + iti->x + (iti->width - w) / 2 + w + 2*MARGIN_X + 1;
-	ny2 = dy + 2*MARGIN_Y + (iti->y + iti->ti->height + 1);
+	ny2 = dy + 2*MARGIN_Y + (iti->y + (iti->ti ? iti->ti->height : 0) + 1);
 		
 	/* See if our dimenssions match the item bounding box */
 	if (!(nx1 != item->x1 || ny1 != item->y1 || nx2 != item->x2 || ny2 != item->y2))

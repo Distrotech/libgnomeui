@@ -1,3 +1,15 @@
+1998-10-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-item.c (iti_get_width): Handle the case where iti->ti
+	has not been created yet.
+	(recompute_bounding_box): Likewise.
+
+1998-10-22  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-popup-help.c (gnome_popup_help_size_window): Use
+	"traditional" drawing functions until Gtk-themes is all over the
+	place.
+
 Mon Oct 19 19:33:18 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_window_remove_embedded_xid): Added
