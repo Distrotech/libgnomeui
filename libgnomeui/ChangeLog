@@ -1,3 +1,8 @@
+Wed Jan 06 18:03:59 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-app-helper.c: cast data to (gpointer) on the new macros,
+	  and add a standard "_Print" and "Print S_etup..." items
+
 Wed Jan 06 17:45:06 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-app-helper.h: changed the NEW_ITEM macros, as by the
