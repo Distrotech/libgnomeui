@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "POT-Creation-Date: 2002-04-29 23:00+0200\n"
-"PO-Revision-Date: 2002-04-16 01:02+0400\n"
+"PO-Revision-Date: 2002-05-04 19:46+0400\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,19 +18,16 @@ msgid "Credits"
 msgstr "Благодарности"
 
 #: libgnomeui/gnome-about.c:222
-#, fuzzy
 msgid "_Written by"
-msgstr "Авторы"
+msgstr "_Авторы"
 
 #: libgnomeui/gnome-about.c:237
-#, fuzzy
 msgid "_Documented by"
-msgstr "Авторы документации"
+msgstr "Авторы _документации"
 
 #: libgnomeui/gnome-about.c:252
-#, fuzzy
 msgid "_Translated by"
-msgstr "Авторы перевода"
+msgstr "Авторы _перевода"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:309
@@ -358,12 +355,10 @@ msgid "End World Hunger"
 msgstr "Конец Всемирного Голода"
 
 #: libgnomeui/gnome-href.c:137
-#, fuzzy
 msgid "Link color"
 msgstr "Цвет ссылки"
 
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Color used to draw the link"
 msgstr "Цвет, используемый для ссылки"
 
@@ -626,14 +621,12 @@ msgstr "Закрыть текущий файл"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "_Вырезать"
+msgstr "В_ыйти"
 
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "Получить информацию об этой программе"
+msgstr "Выйти из программы"
 
 #.
 #. * The "Edit" menu
@@ -851,7 +844,7 @@ msgstr "Закончить эту игру"
 
 #: libgnomeui/gnome-app-helper.c:1096
 msgid "_Help Contents"
-msgstr ""
+msgstr "_Содержание Справки"
 
 #: libgnomeui/gnome-app-helper.c:2463
 msgid "Both text and icons"
@@ -860,6 +853,8 @@ msgstr "Текст и пиктограммы"
 #: libgnomeui/gnome-app-helper.c:2464
 msgid "Both text and icons when horizontal, just icons when vertical"
 msgstr ""
+"Текст и пиктограммы при горизонтальном размещении, только пиктограммы при "
+"вертикальном"
 
 #: libgnomeui/gnome-app-helper.c:2465
 msgid "Icons only"
@@ -1023,9 +1018,8 @@ msgid "Select file"
 msgstr "Выбрать файл"
 
 #: libgnomeui/gnome-file-entry.c:652
-#, fuzzy
 msgid "_Browse..."
-msgstr "Просмотреть..."
+msgstr "П_росмотреть..."
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
