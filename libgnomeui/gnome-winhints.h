@@ -127,7 +127,7 @@ typedef enum
   WIN_APP_STATE_PERCENT100_2
 } GnomeWinAppState;
 
-/* This must be called before any gnome_win_hints_* calls */
+/* Called during gnome initiailisation */
 void
 gnome_win_hints_init(void);
 
@@ -135,6 +135,7 @@ void
 gnome_win_hints_set_layer(GtkWidget *window, GnomeWinLayer layer);
 GnomeWinLayer
 gnome_win_hints_get_layer(GtkWidget *window);
+
 
 void
 gnome_win_hints_set_state(GtkWidget *window, GnomeWinState state);

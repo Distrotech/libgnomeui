@@ -27,6 +27,7 @@
 #include "gnome-preferences.h"
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-init.h"
+#include "libgnomeui/gnome-winhints.h"
 
 static void initialize_gtk_signal_relay(void);
 static gboolean
@@ -420,6 +421,8 @@ gnome_init_with_popt_table(const char *app_id,
 	/* reduce mem usage (hopefully) */
 	gnome_config_sync();
 	g_blow_chunks();
+
+	gnome_win_hints_init();
 
 	return 0;
 }

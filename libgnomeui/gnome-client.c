@@ -31,6 +31,8 @@
 
 #include "libgnome/libgnomeP.h"
 #include "gnome-client.h"
+#include "gnome-ice.h"
+#include "gnome-winhints.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkprivate.h>
 #include <X11/Xatom.h>
@@ -651,6 +653,14 @@ client_save_yourself_callback (SmcConn   smc_conn,
   client->save_yourself_emitted = FALSE;
 
   client_set_state (client, GNOME_CLIENT_SAVING_PHASE_1);
+
+  while (gdk_pointer_is_grabbed())
+    gtk_main_iteration();
+
+  /* Check that we did not receive a shutdown cancelled while waiting 
+   * for the grab to be released. The grab should prevent it but ... */
+  if (client->state != GNOME_CLIENT_SAVING_PHASE_1)
+    return;
 
   gdk_pointer_ungrab (GDK_CURRENT_TIME);
   gdk_keyboard_ungrab (GDK_CURRENT_TIME);
@@ -1723,10 +1733,12 @@ gnome_client_set_priority (GnomeClient *client, guint priority)
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
+#ifdef HAVE_LIBSM
   if (priority > 99)
     priority = 99;
 
   client_set_gchar (client, "Priority", (gchar) priority);
+#endif
 }
 
 /**
@@ -2224,6 +2236,9 @@ gnome_client_save_dialog_show (GnomeClient *client, gint key,
   GnomeDialog* dialog = GNOME_DIALOG (data);
   gboolean shutdown_cancelled;
   gint cancel_button = g_list_length (dialog->buttons);
+
+  /* These are SYSTEM modal dialogs so map them above everything else */
+  gnome_win_hints_set_layer (GTK_WIDGET (dialog), WIN_LAYER_ABOVE_DOCK);
 
   if (client->shutdown) 
     gnome_dialog_append_button (dialog, _("Cancel Logout"));
