@@ -1,3 +1,7 @@
+2004-01-21  Iain <iain@prettypeople.org>
+
+	* libgnomeui/gnome_segv.c (main): Remove the separator from the window
+
 2004-01-21  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-lookup.c (gnome_icon_lookup):
