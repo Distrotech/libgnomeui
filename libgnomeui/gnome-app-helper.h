@@ -82,6 +82,10 @@ typedef struct _GnomeUIInfo GnomeUIInfo;
                               {GNOME_APP_UI_ITEM, label, tip, cb, \
 			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
 			       0, (GdkModifierType)0, NULL}
+#define GNOMEUIINFO_ITEM_STOCK(label, tip, cb, xpm) \
+                              {GNOME_APP_UI_ITEM, label, tip, cb, \
+			       NULL, NULL, GNOME_APP_PIXMAP_STOCK, xpm, \
+			       0, (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_ITEM_DATA(label, tip, cb, data, xpm) \
                               {GNOME_APP_UI_ITEM, label, tip, cb, \
 			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
