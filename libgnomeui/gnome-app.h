@@ -20,7 +20,7 @@ typedef enum
 	GNOME_APP_POS_BOTTOM,
 	GNOME_APP_POS_LEFT,
 	GNOME_APP_POS_RIGHT,
-	GNOME_APP_POS_FLOATING,
+	GNOME_APP_POS_FLOATING
 } GnomeAppWidgetPositionType;
 
 /* Everything gets put into a table that looks like:
