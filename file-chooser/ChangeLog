@@ -1,3 +1,16 @@
+2004-01-30  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c: Use "#ifdef USE_GCONF" for the
+	bookmarks code.  For now we will just use the code from
+	GtkFileSystemUnix, so that both implementations share the same
+	bookmarks.
+
+	* gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_add_bookmark): Use the code from
+	GtkFileSystemGnomeVFS.
+	(gtk_file_system_gnome_vfs_remove_bookmark): Likewise.
+	(gtk_file_system_gnome_vfs_list_bookmarks): Likewise.
+
 2004-01-19  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystemgnomevfs.c
