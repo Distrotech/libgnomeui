@@ -624,6 +624,17 @@ relay_gtk_signal(GtkObject *object,
 #ifdef HAVE_ESD
   char *pieces[3] = {"gtk-events", NULL, NULL};
   pieces[1] = signame;
+  static GQuark disable_sound_quark = 0;
+
+  if(!disable_sound_quark)
+    disable_sound_quark = g_quark_from_static_string("gnome_disable_sound_events");
+
+  if(gtk_object_get_data_by_id(object, disable_sound_quark))
+    return TRUE;
+
+  if(GTK_IS_WIDGET(object) && !GTK_WIDGET_VISIBLE(object))
+    return TRUE;
+
   gnome_triggers_vdo("", NULL, (const char **)pieces);
 
   return TRUE;

@@ -1,3 +1,10 @@
+1999-02-15  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-init.c: Don't give sound events for widgets
+	that are not visible. Don't give sound events for
+	objects with the "gnome_disable_sound_events" property
+	set.
+
 Sun Feb 14 22:12:48 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-entry.c: don't let the file entry expand verticaly when the
