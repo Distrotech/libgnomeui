@@ -1457,6 +1457,19 @@ gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
 
 	gtk_object_unref(GTK_OBJECT(child));
 
+	if(mdi->mode == GNOME_MDI_MODAL && mdi->children) {
+		GnomeMDIChild *next_child = mdi->children->data;
+
+		if(next_child->views) {
+			gnome_app_set_contents(mdi->active_window,
+								   GTK_WIDGET(next_child->views->data));
+			app_set_view(mdi, mdi->active_window,
+						 GTK_WIDGET(next_child->views->data));
+		}
+		else
+			gnome_mdi_add_view(mdi, next_child);
+	}
+
 	return TRUE;
 }
 

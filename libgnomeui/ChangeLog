@@ -1,3 +1,8 @@
+1999-09-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_remove_child): in MODAL mode automatically
+	activate another child if it exists.
+
 1999-09-05  Tim Gerla  <timg@means.net>
 
 	* gtkdial.c: Started docs
