@@ -712,6 +712,9 @@ void gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
 void gnome_app_install_menu_hints           (GnomeApp *app,
                                              GnomeUIInfo *uinfo);
 
+void gnome_app_setup_toolbar                (GtkToolbar *toolbar,
+                                             GnomeDockItem *dock_item);
+
 END_GNOME_DECLS
 
 #endif

@@ -27,6 +27,7 @@
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-dock.h"
 #include "libgnomeui/gnome-helpsys.h"
+#include "gnome-app-helper.h"
 
 #include "gnome-app.h"
 
@@ -539,27 +540,8 @@ gnome_app_add_toolbar (GnomeApp *app,
 				     offset,
 				     TRUE);
 
-	if (gnome_preferences_get_toolbar_relief ()) {
-		gtk_container_set_border_width (GTK_CONTAINER (dock_item), 1);
-	} else {
-		gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item),
-						 GTK_SHADOW_NONE);
-	}
-	
-	/* Configure toolbar to gnome preferences, if possible.  (Sync
-	   to gnome_app_helper.c:gnome_app_toolbar_custom.)  */
-	if (gnome_preferences_get_toolbar_lines ()) {
-		gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_LINE);
-		gtk_toolbar_set_space_size (toolbar, GNOME_PAD * 2);
-	} else {
-		gtk_toolbar_set_space_size (toolbar, GNOME_PAD);
-	}
 
-	if (!gnome_preferences_get_toolbar_relief_btn ())
-		gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
-	
-	if (!gnome_preferences_get_toolbar_labels ())
-		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
+	gnome_app_setup_toolbar(toolbar, GNOME_DOCK_ITEM(dock_item));
 	
 	gtk_widget_show (GTK_WIDGET (toolbar));
 	gtk_widget_show (GTK_WIDGET (dock_item));

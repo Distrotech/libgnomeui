@@ -382,15 +382,17 @@ showing_pixmaps_changed_notify(GConfClient            *client,
         }
 }
 
+/* Note that this function is also used for toolbars, don't assume
+   obj is a menu item */
 static void
-remove_notify_cb(GtkObject *mi, gpointer data)
+remove_notify_cb(GtkObject *obj, gpointer data)
 {
         guint notify_id;
         GConfClient *conf;
         
         notify_id = GPOINTER_TO_INT(data);
 
-        conf = gtk_object_get_data(mi, "gnome-app-helper-gconf-client");
+        conf = gtk_object_get_data(obj, "gnome-app-helper-gconf-client");
 
         gconf_client_notify_remove(conf, notify_id);
 }
@@ -604,8 +606,7 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
                           GTK_SIGNAL_FUNC(remove_hint_from_statusbar),
                           bar);
     }
-}
-
+}        
 
 /**
  * gnome_app_install_statusbar_menu_hints
@@ -1767,19 +1768,7 @@ gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 
 	uiinfo->widget = GTK_WIDGET (toolbar);
 
-	/* Configure toolbar to gnome preferences, if possible.
-	 * (sync to gnome_app.c:gnome_app_set_toolbar) */	
-	if (gnome_preferences_get_toolbar_lines ()) {
-		gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_LINE);
-		gtk_toolbar_set_space_size (toolbar, GNOME_PAD * 2);
-	} else
-		gtk_toolbar_set_space_size (toolbar, GNOME_PAD);
-
-	if (!gnome_preferences_get_toolbar_relief_btn ())
-		gtk_toolbar_set_button_relief (toolbar, GTK_RELIEF_NONE);
-
-	if (!gnome_preferences_get_toolbar_labels ())
-		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
+        gnome_app_setup_toolbar(toolbar, NULL);
 }
 
 /**
@@ -2288,4 +2277,342 @@ gnome_app_helper_gettext (const gchar *str)
 }
 #endif
 
+static void
+set_bevels(GnomeDockItem *dock_item, gboolean bevels)
+{
+        if (bevels) {
+                gtk_container_set_border_width (GTK_CONTAINER (dock_item), 1);
+                gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item),
+                                                 GTK_SHADOW_OUT);
+        } else {
+                gtk_container_set_border_width (GTK_CONTAINER (dock_item), 0);
+                gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item),
+                                                 GTK_SHADOW_NONE);
+        }
+}
+
+static void
+dockitem_bevels_changed_notify(GConfClient            *client,
+                               guint                   cnxn_id,
+                               const gchar            *key,
+                               GConfValue             *value,
+                               gboolean                is_default,
+                               gpointer                user_data)
+{
+        gboolean bevels = TRUE;
+        GtkWidget *w = user_data;
+        GnomeDockItem *dock_item = GNOME_DOCK_ITEM(w);
+
+        if (value &&
+            value->type == GCONF_VALUE_BOOL) {
+                bevels = gconf_value_bool(value);
+        }
+
+        set_bevels(dock_item, bevels);
+}
+
+static void
+set_separators(GtkToolbar *toolbar, gboolean separators)
+{
+        if (separators) {
+                gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_LINE);
+                gtk_toolbar_set_space_size (toolbar, GNOME_PAD_SMALL * 2);
+        } else {
+                gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_EMPTY);
+                gtk_toolbar_set_space_size (toolbar, GNOME_PAD_SMALL);
+        }
+}
+
+static void
+toolbar_separators_changed_notify(GConfClient            *client,
+                                  guint                   cnxn_id,
+                                  const gchar            *key,
+                                  GConfValue             *value,
+                                  gboolean                is_default,
+                                  gpointer                user_data)
+{
+        gboolean separators = TRUE;
+        GtkWidget *w = user_data;
+        GtkToolbar *toolbar = GTK_TOOLBAR(w);
+
+        if (value &&
+            value->type == GCONF_VALUE_BOOL) {
+                separators = gconf_value_bool(value);
+        }
+
+        set_separators(toolbar, separators);
+}
+
+static GConfEnumStringPair toolbar_reliefs[] = {
+        { GTK_RELIEF_NORMAL, "normal" },
+        { GTK_RELIEF_NONE, "none" },
+        { GTK_RELIEF_HALF, "half" }
+};
+
+static void
+toolbar_relief_changed_notify(GConfClient            *client,
+                              guint                   cnxn_id,
+                              const gchar            *key,
+                              GConfValue             *value,
+                              gboolean                is_default,
+                              gpointer                user_data)
+{
+        GtkReliefStyle style = GTK_RELIEF_NONE;
+        GtkWidget *w = user_data;
+        GtkToolbar *toolbar = GTK_TOOLBAR(w);
+
+        if (value &&
+            value->type == GCONF_VALUE_STRING &&
+            gconf_value_string(value) != NULL) {
+                gconf_string_to_enum(toolbar_reliefs,
+                                     gconf_value_string(value),
+                                     (gint*)&style);
+        }
+
+        gtk_toolbar_set_button_relief(toolbar, style);
+}
+
+static GConfEnumStringPair toolbar_styles[] = {
+        { GTK_TOOLBAR_TEXT, "text" },
+        { GTK_TOOLBAR_ICONS, "icons" },
+        { GTK_TOOLBAR_BOTH, "both" }
+};
+
+static void
+per_app_toolbar_style_changed_notify(GConfClient            *client,
+                                     guint                   cnxn_id,
+                                     const gchar            *key,
+                                     GConfValue             *value,
+                                     gboolean                is_default,
+                                     gpointer                user_data)
+{
+        GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
+        GtkWidget *w = user_data;
+        GtkToolbar *toolbar = GTK_TOOLBAR(w);
+        gboolean got_it = FALSE;
+
+        if (value &&
+            value->type == GCONF_VALUE_STRING &&
+            gconf_value_string(value) != NULL) {
+
+                if (gconf_string_to_enum(toolbar_styles,
+                                         gconf_value_string(value),
+                                         (gint*)&style)) {
+                        got_it = TRUE;
+                }
+        }
+
+        /* Fall back to global setting */
+        if (!got_it) {
+                gchar *str;
+
+                str = gconf_client_get_string(client,
+                                              "/desktop/gnome/toolbars/style",
+                                              NULL);
+
+                if (str) {
+                        gconf_string_to_enum(toolbar_styles,
+                                             str,
+                                             (gint*)&style);
+                        
+                        g_free(str);
+                }
+        }
+        
+        gtk_toolbar_set_style(toolbar, style);
+}
+
+static void
+toolbar_style_changed_notify(GConfClient            *client,
+                             guint                   cnxn_id,
+                             const gchar            *key,
+                             GConfValue             *value,
+                             gboolean                is_default,
+                             gpointer                user_data)
+{
+        GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
+        GtkWidget *w = user_data;
+        GtkToolbar *toolbar = GTK_TOOLBAR(w);
+        gchar *per_app_key;
+        gchar *str;
+        gboolean got_it = FALSE;
+
+        /* Check for app-specific override */
+        per_app_key = gnome_gconf_get_gnome_libs_settings_relative("toolbar-style");
+        str = gconf_client_get_string(client, per_app_key, NULL);
+        g_free(per_app_key);
+
+        if (str) {
+                if (gconf_string_to_enum(toolbar_styles,
+                                         str,
+                                         (gint*)&style)) {
+                        got_it = TRUE;
+                }
+                g_free(str);
+        }
+
+        /* If no per-app setting use this new global setting */
+        if (!got_it &&
+            value &&
+            value->type == GCONF_VALUE_STRING &&
+            gconf_value_string(value) != NULL) {
+                gconf_string_to_enum(toolbar_styles,
+                                     gconf_value_string(value),
+                                     (gint*)&style);
+        }
+
+        gtk_toolbar_set_style(toolbar, style);
+}
+
+/**
+ * gnome_app_setup_toolbar
+ * @toolbar: Pointer to #GtkToolbar widget
+ * @dock_item: Pointer to a #GnomeDockItem the toolbar is inside, or NULL for none
+ *
+ * Description:
+ * Sets up a toolbar to use GNOME user preferences
+ **/
+
+void
+gnome_app_setup_toolbar (GtkToolbar *toolbar,
+                         GnomeDockItem *dock_item)
+{
+        GConfClient *conf;
+
+        conf = gnome_get_gconf_client();
+
+        gtk_object_ref(GTK_OBJECT(conf));
+        
+        gtk_object_set_data_full(GTK_OBJECT(toolbar), "gnome-app-helper-gconf-client",
+                                 conf, (GtkDestroyNotify)gtk_object_unref);
+        
+        /* Attach GConf settings */
+
+        if (dock_item != NULL) { /* Dock item bevel */
+                gboolean bevels = TRUE;
+                guint notify_id;
+                
+                bevels = gconf_client_get_bool(conf,
+                                               "/desktop/gnome/toolbars/bevels",
+                                               NULL);
+                
+                notify_id = gconf_client_notify_add(conf,
+                                                    "/desktop/gnome/toolbars/bevels",
+                                                    dockitem_bevels_changed_notify,
+                                                    dock_item, NULL, NULL);
+                
+                gtk_signal_connect(GTK_OBJECT(dock_item), "destroy",
+                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+
+                set_bevels(dock_item, bevels);
+        }
+        
+        { /* Toolbar line separators */
+                gboolean separators = TRUE;
+                guint notify_id;
+                
+                separators = gconf_client_get_bool(conf,
+                                                   "/desktop/gnome/toolbars/separators",
+                                                   NULL);
+                
+                notify_id = gconf_client_notify_add(conf,
+                                                    "/desktop/gnome/toolbars/separators",
+                                                    toolbar_separators_changed_notify,
+                                                    toolbar, NULL, NULL);
+
+                gtk_signal_connect(GTK_OBJECT(toolbar), "destroy",
+                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+
+                set_separators(toolbar, separators);
+        }
+        
+        { /* Toolbar button relief */
+                GtkReliefStyle relief_style = GTK_RELIEF_NONE;
+                guint notify_id;
+                gchar *str;
+                
+                str = gconf_client_get_string(conf,
+                                              "/desktop/gnome/toolbars/relief",
+                                              NULL);
+
+                if (str != NULL) {
+                        gconf_string_to_enum(toolbar_reliefs,
+                                             str,
+                                             (gint*)&relief_style);
+                        g_free(str);
+                }
+                
+                notify_id = gconf_client_notify_add(conf,
+                                                    "/desktop/gnome/toolbars/relief",
+                                                    toolbar_relief_changed_notify,
+                                                    toolbar, NULL, NULL);
+
+                gtk_signal_connect(GTK_OBJECT(toolbar), "destroy",
+                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+
+                gtk_toolbar_set_button_relief (toolbar, relief_style);
+        }
+        
+        { /* Toolbar Style */
+                /* This one is a lot more complex because
+                   we have a per-app setting that overrides
+                   the default global setting */
+                
+                GtkToolbarStyle toolbar_style = GTK_TOOLBAR_BOTH;
+                guint notify_id;
+                gchar *str;
+                gchar *per_app_key;
+                gboolean got_it = FALSE;
+
+                /* Try per-app key */
+                per_app_key = gnome_gconf_get_gnome_libs_settings_relative("toolbar-style");
+
+                str = gconf_client_get_string(conf,
+                                              per_app_key,
+                                              NULL);
+                
+                if (str &&
+                    gconf_string_to_enum(toolbar_styles,
+                                         str,
+                                         (gint*)&toolbar_style)) {
+                        got_it = TRUE;
+                }
+
+                g_free(str);
+
+                /* Try global default */
+                if (!got_it) {
+                        str = gconf_client_get_string(conf,
+                                                      "/desktop/gnome/toolbars/style",
+                                                      NULL);
+
+                        if (str != NULL) {
+                                gconf_string_to_enum(toolbar_styles,
+                                                     str,
+                                                     (gint*)&toolbar_style);
+                                g_free(str);
+                        }
+                }
+                
+                notify_id = gconf_client_notify_add(conf,
+                                                    "/desktop/gnome/toolbars/style",
+                                                    toolbar_style_changed_notify,
+                                                    toolbar, NULL, NULL);
+
+                gtk_signal_connect(GTK_OBJECT(toolbar), "destroy",
+                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+
+                notify_id = gconf_client_notify_add(conf,
+                                                    per_app_key,
+                                                    per_app_toolbar_style_changed_notify,
+                                                    toolbar, NULL, NULL);
+
+                gtk_signal_connect(GTK_OBJECT(toolbar), "destroy",
+                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+                
+                g_free(per_app_key);
+                
+                gtk_toolbar_set_style (toolbar, toolbar_style);
+        }
+}
 

@@ -1,5 +1,21 @@
 2000-01-31  Havoc Pennington  <hp@redhat.com>
 
+	* gnome-gconf.c (gnome_gconf_get_gnome_libs_settings_relative):
+	Function to make a key relative to the
+	/apps/gnome-settings/<appname> directory
+	(gnome_gconf_get_app_settings_relative): make a key relative to
+	/apps/<appname>
+	(gnome_gconf_post_args_parse): add gnome-libs settings dir to our
+	GConfClient
+
+	* gnome-app.c (gnome_app_add_toolbar): Use gnome_app_setup_toolbar
+
+	* gnome-app-helper.c (gnome_app_setup_toolbar): Function to set up
+	toolbar preferences, uses GConf for some preferences now instead
+	of gnome-preferences	
+	
+2000-01-31  Havoc Pennington  <hp@redhat.com>
+
 	* gnome-messagebox.c (gnome_message_box_construct): turn on line
 	wrap for message boxes
 
