@@ -54,7 +54,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-druid-page.c		\
 	gnome-druid-page-edge.c		\
 	gnome-druid-page-standard.c	\
-	gnome-geometry.c		\
 	gnome-component-widget.c	\
 	gnome-entry.c			\
 	gnome-image-entry.c		\
@@ -86,7 +85,6 @@ gnome_headers = \
 	gnome-image-entry.h		\
 	gnome-image-selector.h		\
         gnome-font-picker.h		\
-	gnome-geometry.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-list.h		\

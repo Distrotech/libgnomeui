@@ -1,5 +1,9 @@
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
+	* gnome-geometry.[ch]: Moved to libgnome1compat/libgnomeui.
+
+2001-08-11  Martin Baulig  <baulig@suse.de>
+
 	* gnome-unit-spinner.[ch]: Removed.
 
 2001-08-11  Martin Baulig  <baulig@suse.de>
