@@ -28,6 +28,8 @@
 #include "libgnome/libgnomeP.h"
 #include "gnome-paper-selector.h"
 
+#define g_list_data(list)	((list) ? (((GList *)(list))->data) : NULL)
+
 static void gnome_paper_selector_class_init (GnomePaperSelectorClass *class);
 static void gnome_paper_selector_init       (GnomePaperSelector      *gspaper);
 
@@ -396,7 +398,7 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
 }	
 
 GtkWidget *
-gnome_select_paper_new (void)
+gnome_paper_selector_new (void)
 {
   return GTK_WIDGET ( gtk_type_new (gnome_paper_selector_get_type ()));
 }
@@ -428,4 +430,38 @@ gfloat gnome_paper_selector_get_height (GnomePaperSelector *gspaper)
 	  (GTK_SPIN_BUTTON(gspaper->height));
 
   return paper_height;
+}
+
+/* DO NOT TOUCH BELOW THIS LINE. THESE FUNCTIONS WILL BE FILLED IN WHEN THE CODE HAS BEEN LICENSED PROPERLY */
+
+double paperpswidth(const struct paper* spaper)
+{
+}
+
+int paperinit(void)
+{
+}
+
+char* systempapername(void)
+{
+}
+
+const struct paper* paperinfo(const char* paper)
+{
+}
+
+const struct paper* papername(const char* spaper)
+{
+}
+
+double papersheight(const struct paper* spaper)
+{
+}
+
+const struct paper* paperwithsize(double pswidth, double psheight)
+{
+}
+
+double paperpsheight(const struct paper* spaper)
+{
 }
