@@ -243,7 +243,7 @@ msgstr ""
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
-msgstr ""
+msgstr "Feilire"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
@@ -523,11 +523,11 @@ msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr ""
+msgstr "_Feic"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr ""
+msgstr "_Feic/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -556,7 +556,7 @@ msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr ""
+msgstr "_Fuinneoga"
 
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
@@ -568,7 +568,7 @@ msgstr "Cab_hair"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
-msgstr ""
+msgstr "_Fuinneoga/"
 
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
@@ -582,20 +582,20 @@ msgstr "Oscail Comhad"
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
-msgstr ""
+msgstr "_Sábháil"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr ""
+msgstr "Sábháil an comhad seo"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr ""
+msgstr "Sábháil M_ar..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr ""
+msgstr "Sábháil an comhad seo le ainm eile"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -636,11 +636,11 @@ msgstr ""
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr ""
+msgstr "_Ealu"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
-msgstr ""
+msgstr "Ealu as an chlár seo "
 
 #.
 #. * The "Edit" menu
@@ -648,7 +648,7 @@ msgstr ""
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
-msgstr ""
+msgstr "Gea_rr"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
@@ -703,7 +703,7 @@ msgstr ""
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr ""
+msgstr "_Cuardaigh..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
@@ -759,15 +759,15 @@ msgstr "F_aoi"
 
 #: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
-msgstr ""
+msgstr "Faoi an Clár seo"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
-msgstr ""
+msgstr "Pioc G_ach rud"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr ""
+msgstr "Pioc gach rud"
 
 #.
 #. * Window menu
@@ -793,11 +793,11 @@ msgstr ""
 #.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
-msgstr "Cluich _Nua"
+msgstr "Cluiche _Nua"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr ""
+msgstr "Tosaigh Cluiche nua"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
@@ -1021,15 +1021,15 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
-msgstr ""
+msgstr "Pioc comhad"
 
 #: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
-msgstr ""
+msgstr "Bealach"
 
 #: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
-msgstr ""
+msgstr "Bealach go dtí comhad"
 
 #: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."

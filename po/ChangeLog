@@ -1,3 +1,8 @@
+2003-04-29 Paul Duffy <dubhthach@frink.nuigalway.ie>
+
+        * ga.po: Updated Irish translation.
+
+
 2003-04-24  Abel Cheung  <maddog@linux.org.hk>
 
 	* az.po: Mark wrong entry(ies) as fuzzy (msgfmt check failed).
