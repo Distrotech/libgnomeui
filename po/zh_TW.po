@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
-"POT-Creation-Date: 2003-06-09 23:24+0800\n"
-"PO-Revision-Date: 2003-06-10 11:34+0800\n"
+"POT-Creation-Date: 2003-06-12 08:15+0800\n"
+"PO-Revision-Date: 2003-06-12 08:21+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -948,7 +948,7 @@ msgstr "AR PL KaitiM Big5 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "The Following Is Chinese Text: '中文測試'"
+msgstr "The following is Chinese: '中文測試'"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -992,19 +992,19 @@ msgstr "對話方塊中顯示的預覽文字"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "使用字型本身顯示標籤"
+msgstr "字型本身反映在名稱內"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "在字型資訊模式中，直接使用字型本身來顯示字型名稱"
+msgstr "在字型資訊模式中，字型本身的形狀反映在字型名稱內"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "使用字型大小顯示標籤"
+msgstr "字型大小反映在名稱內"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "在字型資訊模式中，字型的大小直接反映在字型名稱中"
+msgstr "在字型資訊模式中，字型大小直接反映在字型名稱內"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1012,11 +1012,11 @@ msgstr "顯示字型大小"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "在字型資訊模式中，顯示字型的大小"
+msgstr "在字型資訊模式中顯示字型大小"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr "GNOME GConf 用戶介面支換"
+msgstr "GNOME GConf 用戶介面支援"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
