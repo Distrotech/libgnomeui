@@ -1,3 +1,8 @@
+1999-02-25  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-app-helper.c (gnome_app_fill_menu_custom): added a quick
+	assertion to catch an error I was having.
+
 1999-02-26  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gtkrc.ko: Fixed a typo.

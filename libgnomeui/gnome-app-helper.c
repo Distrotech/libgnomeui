@@ -1082,7 +1082,8 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	g_return_if_fail (menu_shell != NULL);
 	g_return_if_fail (GTK_IS_MENU_SHELL (menu_shell));
 	g_return_if_fail (uiinfo != NULL);
-
+	g_return_if_fail (pos >= 0);
+	
 	uibdata.connect_func = do_ui_signal_connect;
 	uibdata.data = NULL;
 	uibdata.is_interp = FALSE;
@@ -1165,6 +1166,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	g_return_if_fail (GTK_IS_MENU_SHELL (menu_shell));
 	g_return_if_fail (uiinfo != NULL);
 	g_return_if_fail (uibdata != NULL);
+	g_return_if_fail (pos >= 0);
 
 	/* Store a pointer to the original uibdata so that we can use it for 
 	 * the subtrees */
