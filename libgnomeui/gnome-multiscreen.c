@@ -43,6 +43,7 @@ static char **
 make_environment_for_screen (GdkScreen *screen)
 {
 	char **retval = NULL;
+	char  *display_name;
 	int    i, env_len;
 	int    display_index = -1;
 
@@ -58,13 +59,17 @@ make_environment_for_screen (GdkScreen *screen)
 	retval = g_new (char *, env_len + 1);
 	retval [env_len] = NULL;
 
+	display_name = gdk_screen_make_display_name (screen);
+
 	for (i = 0; i < env_len; i++)
 		if (i == display_index)
-			retval [i] = gdk_screen_make_display_name (screen);
+			retval [i] = g_strconcat ("DISPLAY=", display_name, NULL);
 		else
 			retval [i] = g_strdup (environ [i]);
 
 	g_assert (i == env_len);
+
+	g_free (display_name);
 
 	return retval;
 }

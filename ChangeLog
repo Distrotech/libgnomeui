@@ -1,3 +1,9 @@
+2003-12-17  Mark McLoughlin  <mark@skynet.ie>
+
+	* libgnomeui/gnome-multiscreen.c: (make_environment_for_screen):
+	Fix silly where we weren't actually setting $DISPLAY. Similar
+	patch from Vijaykumar Patwari in bug #129516.
+
 2003-12-14  Fernando Herrera  <fherrera@onirica.com>
 
 	* configure.in: requiere gnome-vfs-2.0 >= 2.5.3 for new auth sutff
