@@ -6,141 +6,125 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
 "POT-Creation-Date: 2001-12-14 16:07+0100\n"
-"PO-Revision-Date: 2001-06-01 17:35GMT +0200\n"
+"PO-Revision-Date: 2001-12-19 19:49GMT+0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
-"Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
+"Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.8\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: libgnomeui/gnome-about.c:181
-#, fuzzy
 msgid "Program name"
-msgstr "Gedişat"
+msgstr "Proqram adı"
 
 #: libgnomeui/gnome-about.c:182
-#, fuzzy
 msgid "The name of the program"
-msgstr "Proqramdan çıx"
+msgstr "Proqram tə'minatının adı"
 
 #: libgnomeui/gnome-about.c:188
-#, fuzzy
 msgid "Program version"
-msgstr "Gedişat"
+msgstr "Proqram buraxılışı"
 
 #: libgnomeui/gnome-about.c:189
-#, fuzzy
 msgid "The version of the program"
-msgstr "Proqramdan çıx"
+msgstr "Proqram buraxılışı"
 
 #: libgnomeui/gnome-about.c:195
 msgid "Copyright string"
-msgstr ""
+msgstr "Təlif haqqı qatarı"
 
 #: libgnomeui/gnome-about.c:196
 msgid "Copyright information for the program"
-msgstr ""
+msgstr "Proqramın təlif haqqı haqqında məlumat"
 
 #: libgnomeui/gnome-about.c:202
-#, fuzzy
 msgid "Comments string"
-msgstr "Şərh"
+msgstr "Şərhlər qatarı"
 
 #: libgnomeui/gnome-about.c:203
-#, fuzzy
 msgid "Comments about the program"
-msgstr "Proqramdan çıx"
+msgstr "Proqram haqqında şərhlər"
 
 #: libgnomeui/gnome-about.c:210 libgnomeui/gnome-about.c:664
-#, fuzzy
 msgid "Authors"
-msgstr "Müəlliflər:"
+msgstr "Müəlliflər"
 
 #: libgnomeui/gnome-about.c:211
 msgid "List of authors of the programs"
-msgstr ""
+msgstr "Proqramların müəlliflərinin siyahısı"
 
 #: libgnomeui/gnome-about.c:213
-#, fuzzy
 msgid "Author entry"
-msgstr "Müəlliflər: "
+msgstr "Müəllif girişi"
 
 #: libgnomeui/gnome-about.c:214
 msgid "A single author entry"
-msgstr ""
+msgstr "Tək müəllif girişi"
 
 #: libgnomeui/gnome-about.c:221 libgnomeui/gnome-about.c:667
 msgid "Translator credits"
-msgstr ""
+msgstr "Tərcüməçi kreditləri"
 
 #: libgnomeui/gnome-about.c:222
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "Tərcüməçi kreditləri. Bu qatar tərcüməediləbilən olaraq içarələnməlidir"
 
 #: libgnomeui/gnome-about.c:229 libgnomeui/gnome-about.c:670
-#, fuzzy
 msgid "Documenters"
-msgstr "Sənədlər:"
+msgstr "Sənədləşdiricilər"
 
 #: libgnomeui/gnome-about.c:230
 msgid "List of people documenting the program"
-msgstr ""
+msgstr "Proqram sənədlərini hazırlayanların siyahısı"
 
 #: libgnomeui/gnome-about.c:232
-#, fuzzy
 msgid "Documenter entry"
-msgstr "Sənədlər:"
+msgstr "Sənədləşdirici girişi"
 
 #: libgnomeui/gnome-about.c:233
 msgid "A single documenter entry"
-msgstr ""
+msgstr "Tək sənədləşdirici girişi"
 
 #: libgnomeui/gnome-about.c:240
-#, fuzzy
 msgid "Background"
-msgstr "Arxa Plan Rəngi"
+msgstr "Arxa plan"
 
 #: libgnomeui/gnome-about.c:241
 msgid "The background pixbuf to use"
-msgstr ""
+msgstr "İşlədiləcək arxa plan şəkli"
 
 #: libgnomeui/gnome-about.c:247
-#, fuzzy
 msgid "Background start opacity"
-msgstr "Arxa plan rəngi seçildi"
+msgstr "Arxa plan başlama matlığı"
 
 #: libgnomeui/gnome-about.c:248
 msgid "Opacity at the start of the background"
-msgstr ""
+msgstr "Arxa plan başlanğıcındakı matlıq"
 
 #: libgnomeui/gnome-about.c:257
-#, fuzzy
 msgid "Background end opacity"
-msgstr "Arxa plan rəngi"
+msgstr "Arxa plan sonu matlığı"
 
 #: libgnomeui/gnome-about.c:258
 msgid "Opacity at the end of the background"
-msgstr ""
+msgstr "Arxa plan sonundakı matlıq"
 
 #: libgnomeui/gnome-about.c:267
-#, fuzzy
 msgid "Background start position"
-msgstr "Arxa plan rəng seçilməsi"
+msgstr "Arxa plan başlanğıc yeri"
 
 #: libgnomeui/gnome-about.c:268
 msgid "Position at the start of the background"
-msgstr ""
+msgstr "Arxa plan başlanğıcındakı yer"
 
 #: libgnomeui/gnome-about.c:276
-#, fuzzy
 msgid "Background end position"
-msgstr "Timsal yerləri"
+msgstr "Arxa plan sonu yeri"
 
 #: libgnomeui/gnome-about.c:277
 msgid "Position at the end of the background"
-msgstr ""
+msgstr "Arxa plan sonundakı yer"
 
 #: libgnomeui/gnome-about.c:285 libgnomeui/gnome-druid-page-standard.c:141
 msgid "Logo"
@@ -148,82 +132,76 @@ msgstr "Loqo"
 
 #: libgnomeui/gnome-about.c:286
 msgid "A logo for the about box"
-msgstr ""
+msgstr "Haqqında qutusunun loqosu"
 
 #: libgnomeui/gnome-about.c:292
 msgid "Logo top padding"
-msgstr ""
+msgstr "Üst fasilələndirmə loqosu"
 
 #: libgnomeui/gnome-about.c:293
 msgid "How far the logo is from the top"
-msgstr ""
+msgstr "Loqonun üstdən uzaqlığı"
 
 #: libgnomeui/gnome-about.c:302
 msgid "Logo right padding"
-msgstr ""
+msgstr "Loqonun sağ tərəfi"
 
 #: libgnomeui/gnome-about.c:303
 msgid "How far the logo is from the right"
-msgstr ""
+msgstr "Loqonun sağ tərəfdən uzaqlığı"
 
 #: libgnomeui/gnome-about.c:312
 msgid "Header font"
-msgstr ""
+msgstr "Başlıg  yazı növü"
 
 #: libgnomeui/gnome-about.c:313
 msgid "Header font description as a string"
-msgstr ""
+msgstr "Qatar olaraq başlıq yazı növü izahı"
 
 #: libgnomeui/gnome-about.c:318
-#, fuzzy
 msgid "Copyright font"
-msgstr "Təlif haqqı (C) 1998"
+msgstr "Təlif haqqı yazı növü"
 
 #: libgnomeui/gnome-about.c:319
 msgid "Copyright font description as a string"
-msgstr ""
+msgstr "Qatar olaraq təlif haqqı yazı növü izahı"
 
 #: libgnomeui/gnome-about.c:324
-#, fuzzy
 msgid "Comments font"
-msgstr "Şərh"
+msgstr "Şərhlərin yazı növü"
 
 #: libgnomeui/gnome-about.c:325
 msgid "Comments font description as a string"
-msgstr ""
+msgstr "Qatar olaraq şərhlərin yazı növü"
 
 #: libgnomeui/gnome-about.c:330
-#, fuzzy
 msgid "Name header font"
-msgstr "Seçili yazı növü adı"
+msgstr "Ad başlığı yazı növü"
 
 #: libgnomeui/gnome-about.c:331
 msgid "Name header font description as a string"
-msgstr ""
+msgstr "Qatar olaraq ad başlığı yazı növü"
 
 #: libgnomeui/gnome-about.c:336
-#, fuzzy
 msgid "Name list font"
-msgstr "Seçili yazı növü adı"
+msgstr "Ad siyahısı yazı növü"
 
 #: libgnomeui/gnome-about.c:337
 msgid "Name list font description as a string"
-msgstr ""
+msgstr "Qatar olaraq ad siyahısı yazı növü"
 
 #: libgnomeui/gnome-about.c:664
-#, fuzzy
 msgid "Author"
-msgstr "Müəllif:"
+msgstr "Müəllif"
 
 #: libgnomeui/gnome-about.c:670
-#, fuzzy
 msgid "Documenter"
-msgstr "Sənədlər:"
+msgstr "Sənədləşdirici"
 
 #: libgnomeui/gnome-about.c:817
-#, fuzzy, c-format
+#, c-format
 msgid "About %s"
-msgstr "Haqqında"
+msgstr "%s Haqqında"
 
 #: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
@@ -308,16 +286,15 @@ msgstr "Təqvim"
 
 #: libgnomeui/gnome-dateedit.c:928
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date olmadı, gnome_date_edit_get_time istifadə edin"
+msgstr "gnome_date_edit_get_date olmadı, gnome_date_edit_get_time istifadə edin"
 
 #: libgnomeui/gnome-druid-page-edge.c:342
 msgid "Helvetical Bold 18"
-msgstr ""
+msgstr "Helvetical Qalın 18"
 
 #: libgnomeui/gnome-druid-page-edge.c:353
 msgid "Helvetical Medium 12"
-msgstr ""
+msgstr "Helvetical Orta 12"
 
 #: libgnomeui/gnome-druid-page-standard.c:133
 #: libgnomeui/gnome-font-picker.c:156
@@ -443,13 +420,12 @@ msgid "End World Hunger"
 msgstr "World Hunger sonu"
 
 #: libgnomeui/gnome-href.c:134
-#, fuzzy
 msgid "Link colour"
-msgstr "Rəng Seç"
+msgstr "Körpü rəngi"
 
 #: libgnomeui/gnome-href.c:135
 msgid "Colour used to draw the link"
-msgstr ""
+msgstr "Körpünün rəngi"
 
 #: libgnomeui/gnome-href.c:396
 msgid ""
@@ -587,9 +563,8 @@ msgstr ""
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:114
-#, fuzzy
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "İstifadə qaydası: gnome_segv proqram adı nömrəsi\n"
+msgstr "İstifadə qaydası: gnome_segv2 proqram-adı nömrəsi\n"
 
 #: libgnomeui/gnome_segv.c:130
 msgid "Submit a bug report"
@@ -973,9 +948,8 @@ msgid "Undo the last move"
 msgstr "Axırıncı gedişi qaytar"
 
 #: libgnomeui/gnome-app-helper.c:269
-#, fuzzy
 msgid "_Redo move"
-msgstr "Gedişi _qaytar"
+msgstr "Gedişi _Yenidən et"
 
 #: libgnomeui/gnome-app-helper.c:270
 msgid "Redo the undone move"
@@ -1076,7 +1050,7 @@ msgstr "Gəz..."
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "sans 12"
-msgstr ""
+msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
@@ -1124,28 +1098,27 @@ msgstr "Dialoqda göstərilən nümayiş mətni"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in label"
-msgstr ""
+msgstr "Etiketdə yazı növü işlət"
 
 #: libgnomeui/gnome-font-picker.c:203
 msgid "Use font in the label in font info mode"
-msgstr ""
+msgstr "Yazı növü info modunda etiket üçün yazı növü işlət"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label"
-msgstr ""
+msgstr "Etiket yazı növü böyüklüyü"
 
 #: libgnomeui/gnome-font-picker.c:212
 msgid "Font size for label in font info mode"
-msgstr ""
+msgstr "Yazı növü info modunda etiket yazı növü böyüklüyü"
 
 #: libgnomeui/gnome-font-picker.c:222
-#, fuzzy
 msgid "Show size"
-msgstr "Yazı nvü böyüklüyünü göstər"
+msgstr "Böyüklüyü göstər"
 
 #: libgnomeui/gnome-font-picker.c:223
 msgid "Show size in font info mode"
-msgstr ""
+msgstr "Yazı növü info modunda böyüklüyü göstər"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1179,9 +1152,8 @@ msgid "GConf error details: %s\n"
 msgstr "GConf xəta mündəricatı: %s\n"
 
 #: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
-#, fuzzy
 msgid "No Icon"
-msgstr "Timsal Yoxdur"
+msgstr "Timsalsız"
 
 #: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:373
 msgid "Can't find an hbox, using a normal file selection"
@@ -1238,7 +1210,6 @@ msgid "Top Ten"
 msgstr "Zirvədəki On"
 
 #: libgnomeui/gnome-scores.c:91
-#, fuzzy
 msgid "User"
 msgstr "İstifadəçi"
 
@@ -1265,381 +1236,3 @@ msgstr "%a %b %d %T %Y"
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 
-#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-"
-
-#~ msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
-#~ msgstr "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
-
-#~ msgid "Unknown"
-#~ msgstr "Namə'lum"
-
-#~ msgid "Default Pixmap"
-#~ msgstr "Ana Piskmep"
-
-#~ msgid "If you choose a font it will appear here"
-#~ msgstr "Yazı növü seçsəniz burada görünəcəkdir"
-
-#~ msgid "Use Font in button with size"
-#~ msgstr "Düymədəki yazı növünü böyüklüyü ilə bərabər istifadə edin"
-
-#~ msgid "This is an hbox with pixmap and text"
-#~ msgstr "Mətn və piksmepli hbox-dan istifadə et"
-
-#~ msgid "Exit the test"
-#~ msgstr "Sınaqdan çıx"
-
-#~ msgid "wmhints-test"
-#~ msgstr "wmhints-test"
-
-#~ msgid "winhints-test"
-#~ msgstr "winhints-test"
-
-#~ msgid "Layer:"
-#~ msgstr "Lay:"
-
-#~ msgid "Above Dock"
-#~ msgstr "Arakəsmə Üstündə"
-
-#~ msgid "Dock"
-#~ msgstr "Arakəsmə"
-
-#~ msgid "On Top"
-#~ msgstr "Üstdə"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Below"
-#~ msgstr "Aşağıda"
-
-#~ msgid "Desktop"
-#~ msgstr "Masa üstü"
-
-#~ msgid "Set Layer"
-#~ msgstr "Lay Seç"
-
-#~ msgid "Workspaces:"
-#~ msgstr "İş sahəsi:"
-
-#~ msgid "Sticky"
-#~ msgstr "Yapışqan"
-
-#~ msgid "Set Workspace"
-#~ msgstr "İş sahəsi seç"
-
-#~ msgid "State Toggles:"
-#~ msgstr "Toqqlları Göstər:"
-
-#~ msgid "Minimized"
-#~ msgstr "Balacalaşdır"
-
-#~ msgid "Maximized Vertical"
-#~ msgstr "Şaguli Böyüdülmüş"
-
-#~ msgid "Maximized Horizontal"
-#~ msgstr "Üfüqi Böyüdülmüş"
-
-#~ msgid "Hidden"
-#~ msgstr "Gizli"
-
-#~ msgid "Shaded"
-#~ msgstr "Kölgəli"
-
-#~ msgid "Fixed Position"
-#~ msgstr "Sabit Yer"
-
-#~ msgid "Ignore on Arrange"
-#~ msgstr "Düzülüşdə rədd et"
-
-#~ msgid "Set State"
-#~ msgstr "Hal Seç:"
-
-#~ msgid "Skip Toggles:"
-#~ msgstr "Toqqlları Keç:"
-
-#~ msgid "Skip Focus"
-#~ msgstr "Fokuslamanı Nəzərə Alma"
-
-#~ msgid "Skip Window Menu"
-#~ msgstr "Pəncərə Menyusunu Nəzərə Alma"
-
-#~ msgid "Skip Taskbar / WinList"
-#~ msgstr "Vəzifə Çubuğu / Pəncərə Siyahısını Nəzərə Alma"
-
-#~ msgid "Set Skip"
-#~ msgstr "Keçişi Seç"
-
-#~ msgid "WIN_HINTS Test"
-#~ msgstr "WIN_HINTS Sınağı"
-
-#~ msgid ""
-#~ "Simple test app to check how the WIN_HINTS work.\n"
-#~ "And to test the gnome_win_hints_* functions for errors. :)"
-#~ msgstr ""
-#~ "Proqramları WIN_HINTSin işləmə qaydasını sınamaq üçün yoxla.\n"
-#~ "Və gnome_win_hints_* functionu xətalar üçün yoxla. :)"
-
-#~ msgid "Name:"
-#~ msgstr "Ad:"
-
-#~ msgid "Comment:"
-#~ msgstr "Şərh:"
-
-#~ msgid "Command:"
-#~ msgstr "Əmr:"
-
-#~ msgid "Type:"
-#~ msgstr "Növ:"
-
-#~ msgid "Run in Terminal"
-#~ msgstr "Terminalda işə sal"
-
-#~ msgid "Simple drag and drop"
-#~ msgstr "Sadə sürüklə və burax"
-
-#~ msgid ""
-#~ "In the following commands you should use %s in the spot where the\n"
-#~ "filename/URL should be substituted.  If you leave the field blank\n"
-#~ "drops will not be accepted.  If this application can accept\n"
-#~ "multiple files or URLs as arguments after its command name check the box "
-#~ "above."
-#~ msgstr ""
-#~ "Bu əmrlərdə fayladı/URL girilən yerdə %s\n"
-#~ "istifadə etməlisiniz.  Əgər girişləri boş buraxsanız\n"
-#~ "əməliyyatınız yerinə gətirilməyəcək.  Əgər bu proqram tə'minatı\n"
-#~ "bir çox fayl və URlləri qəbul edirsə əmrdən sonra yuxarıdakı qutunu "
-#~ "işarətləyin."
-
-#~ msgid "Command for file drops:"
-#~ msgstr "Fayl buraxılması üçün əmr:"
-
-#~ msgid "Drop one file at a time only."
-#~ msgstr "Bir dəfədə tək fayl burax."
-
-#~ msgid "Command for URL drops:"
-#~ msgstr "URL buraxılması üçün əmr:"
-
-#~ msgid "Drop one URL at a time only."
-#~ msgstr "Bir dəfədə tək URL burax."
-
-#~ msgid "Try this before using:"
-#~ msgstr "İstifadədən əvvəl bunu sınayın:"
-
-#~ msgid "Window titles to wait for (comma separated):"
-#~ msgstr "Gözlədilən pəncərə adları (vergüllə ayrılıb):"
-
-#~ msgid "Name/Comment translations:"
-#~ msgstr "Ad/Qeyd tərcümələri:"
-
-#~ msgid "Language"
-#~ msgstr "Dil"
-
-#, fuzzy
-#~ msgid "Name"
-#~ msgstr "Ad:"
-
-#~ msgid "Add/Set"
-#~ msgstr "Əlavə et/Seç"
-
-#, fuzzy
-#~ msgid "Remove"
-#~ msgstr "Gedişi _təkrarla"
-
-#~ msgid "Basic"
-#~ msgstr "Əsas"
-
-#~ msgid "Drag and Drop"
-#~ msgstr "Sürüklə və Burax"
-
-#~ msgid "Advanced"
-#~ msgstr "Ətraflı"
-
-#~ msgid "Bonobo UI"
-#~ msgstr "IU Bonobo"
-
-#~ msgid "Paper Size"
-#~ msgstr "Kağız Böyüklüyü"
-
-#~ msgid "Orientation"
-#~ msgstr "İstiqamət"
-
-#~ msgid "Portrait"
-#~ msgstr "Portret"
-
-#~ msgid "Landscape"
-#~ msgstr "Mənzərə"
-
-#~ msgid "Margins"
-#~ msgstr "Kənarlar"
-
-#~ msgid "Top:"
-#~ msgstr "Üst:"
-
-#~ msgid "Bottom:"
-#~ msgstr "Alt:"
-
-#~ msgid "Left:"
-#~ msgstr "Sol:"
-
-#~ msgid "Right:"
-#~ msgstr "Sağ:"
-
-#~ msgid "Scaling"
-#~ msgstr "Böyütmə"
-
-#~ msgid "Fit to Page"
-#~ msgstr "Səhifəyə yaraşdır"
-
-#~ msgid "%0.3g%s x %0.3g%s"
-#~ msgstr "%0.3g%s x %0.3g%s"
-
-#~ msgid "Page Setup"
-#~ msgstr "Səhifə Quruluşu"
-
-#~ msgid "Password:"
-#~ msgstr "Parol:"
-
-#~ msgid "Loop type"
-#~ msgstr "İlgək növü"
-
-#~ msgid "The type of loop the GnomeAnimator uses"
-#~ msgstr "GnomeAnimator istifadəsində olan ilgək növü"
-
-#~ msgid "Direction"
-#~ msgstr "Tərəf"
-
-#~ msgid "Animation direction"
-#~ msgstr "Animasiya tərəfi"
-
-#~ msgid "Number of frames"
-#~ msgstr "Çərçivə miqdarı"
-
-#~ msgid "Total number of frames in animation"
-#~ msgstr "Animasıyadakı çərçivə miqdarı"
-
-#~ msgid "Current frame number"
-#~ msgstr "Haırkı çərçivə nömrəsi"
-
-#~ msgid "Animation status"
-#~ msgstr "Animasiya vəziyyəti"
-
-#~ msgid "Speed"
-#~ msgstr "Sür'ət"
-
-#~ msgid "Animation speed"
-#~ msgstr "Animasiya sür'əti"
-
-#~ msgid "_Popup"
-#~ msgstr "_SıçrayanPəncərə"
-
-#~ msgid "Show help in temporary popup windows"
-#~ msgstr "Köməyi sıçrayan pəncərələrdə göstər"
-
-#~ msgid "_Embedded"
-#~ msgstr "_Basdırılmış"
-
-#~ msgid "Show help in a help browser window"
-#~ msgstr "Köməyi səyahət pəncərəsində göstər"
-
-#~ msgid "App style"
-#~ msgstr "Proqram tə'minatı tərzi"
-
-#~ msgid "The style of GnomeHelpView"
-#~ msgstr "GnomeHelpView göstəriliş tərzi"
-
-#~ msgid "App style priority"
-#~ msgstr "Proqram tə'minatı tərzi xüsusiyyətləri"
-
-#~ msgid "The priority of style of GnomeHelpView"
-#~ msgstr "GnomeHelpView göstərilmə tərzi"
-
-#~ msgid "Toplevel"
-#~ msgstr "Ən üst səviyyə"
-
-#~ msgid "The toplevel widget"
-#~ msgstr "Ən üst pəncərə"
-
-#~ msgid "Show help for a specific region of the application"
-#~ msgstr "Proqram tə'minatının xüsusi yerləri üçün kömək göstər"
-
-#~ msgid "Style"
-#~ msgstr "Tərz"
-
-#~ msgid "Change the way help is displayed"
-#~ msgstr "Köməyin göstərilmə şəklini dəyişdir"
-
-#~ msgid "No help is available for the selected portion of the application."
-#~ msgstr "Proqram tə'minatının seçilən bölgəsi üçün kömək yoxdur."
-
-#~ msgid "Cought GnomeURL error: %s"
-#~ msgstr "GnomeURL xətası alındı: %s"
-
-#~ msgid "_Help with this"
-#~ msgstr "Buna _Kömək et"
-
-#~ msgid "Bottom left"
-#~ msgstr "Alt sol"
-
-#~ msgid "Top right"
-#~ msgstr "Üst sağ"
-
-#~ msgid "Bottom right"
-#~ msgstr "Alt sağ"
-
-#~ msgid "Horizontal"
-#~ msgstr "Üfüqi"
-
-#~ msgid "Vertical"
-#~ msgstr "Şaquli"
-
-#~ msgid "Tile children"
-#~ msgstr "Törəməni döşə"
-
-#~ msgid "Cascade children"
-#~ msgstr "Törəmənı daşır"
-
-#~ msgid "Arrange icons"
-#~ msgstr "Timsalları düz"
-
-#~ msgid "Autoarrange icons"
-#~ msgstr "Timsalları avtomatik düz"
-
-#~ msgid "App Specific"
-#~ msgstr "Proqram Tə'minatına Xas"
-
-#~ msgid "bad GnomeRecentDocument attribute: %s\n"
-#~ msgstr "xətalı GnomeRecentDocument atributu %s\n"
-
-#~ msgid "Default..."
-#~ msgstr "Əsas..."
-
-#~ msgid "Clear..."
-#~ msgstr "Təmizlə..."
-
-#~ msgid "Add"
-#~ msgstr "Əlavə Et"
-
-#~ msgid "OK"
-#~ msgstr "Oldu"
-
-#~ msgid "Apply"
-#~ msgstr "Əlavə Et"
-
-#~ msgid "Cancel"
-#~ msgstr "Ləğv et"
-
-#~ msgid "No"
-#~ msgstr "Xeyr"
-
-#~ msgid "Next"
-#~ msgstr "Sonrakı"
-
-#~ msgid "Up"
-#~ msgstr "Yuxarı"
-
-#~ msgid "Down"
-#~ msgstr "Aşağı"
