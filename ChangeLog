@@ -1,3 +1,8 @@
+2003-12-19  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-icon-lookup.h:
+	Include gnome-icon-theme.h for backwards compat.
+
 2003-12-18  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-theme.c:

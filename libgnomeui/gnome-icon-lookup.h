@@ -25,7 +25,9 @@
 
 #include <gtk/gtkicontheme.h>
 #include <libgnomevfs/gnome-vfs-file-info.h>
-#include "gnome-thumbnail.h"
+#include <libgnomeui/gnome-thumbnail.h>
+/* We used to include this, so keep doing it for backwards compat */
+#include <libgnomeui/gnome-icon-theme.h>
 
 G_BEGIN_DECLS
 
