@@ -96,6 +96,7 @@ GnomePixmapDraw gnome_pixmap_get_draw_mode           (GnomePixmap      *gpixmap)
 void            gnome_pixmap_clear                   (GnomePixmap      *gpixmap);
 void            gnome_pixmap_set_alpha_threshold     (GnomePixmap      *gpixmap,
 						      gint              alpha_threshold);
+gint            gnome_pixmap_get_alpha_threshold     (GnomePixmap      *gpixmap);
 
 
 END_GNOME_DECLS

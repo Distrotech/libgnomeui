@@ -238,14 +238,15 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
 	else
 		bottom_clip = 0;
 
-	/* it's not in the area; we return */
+	/* it's in the allocation, but not the image, so we return */
 	if (right_clip + left_clip >= gdk_pixbuf_get_width (draw_source)||
 	    top_clip + bottom_clip >= gdk_pixbuf_get_height (draw_source))
 		return;
-/*
+
+#if 0
 	g_print ("width=%d\theight=%d\n", gdk_pixbuf_get_width (draw_source), gdk_pixbuf_get_height (draw_source));
 	g_print ("area->x=%d\tarea->y=%d\tarea->width=%d\tarea->height=%d\nx_off=%d\ty_off=%d\nright=%d\tleft=%d\ttop=%d\tbottom=%d\n\n", area->x, area->y, area->width, area->height, x_off, y_off, right_clip, left_clip, top_clip, bottom_clip); 
-*/
+#endif
 	if (gpixmap->mode == GNOME_PIXMAP_SIMPLE || !gdk_pixbuf_get_has_alpha (draw_source)) {
 		if (draw_mask) {
 			gdk_gc_set_clip_mask (widget->style->black_gc, draw_mask);
@@ -286,7 +287,6 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
 		r = widget->style->bg[GTK_WIDGET_STATE (widget)].red >> 8;
 		g = widget->style->bg[GTK_WIDGET_STATE (widget)].green >> 8;
 		b = widget->style->bg[GTK_WIDGET_STATE (widget)].blue >> 8;
-		g_print ("%d %d %d\n", r, g, b);
 		height = gdk_pixbuf_get_height (dest_source);
 		width = gdk_pixbuf_get_width (dest_source);
 		rowstride = gdk_pixbuf_get_rowstride (draw_source);
@@ -793,7 +793,7 @@ gnome_pixmap_set_pixbufs_at_state (GnomePixmap *gpixmap,
 				   GdkBitmap   *masks[5])
 {
         g_return_if_fail(gpixmap != NULL);
-        g_return_if_fail(GNOME_IS_PIXMAP(gpixmap));
+        g_return_if_fail(GNOME_IS_PIXMAP (gpixmap));
 
 	if ((gpixmap->original_image == NULL) && (pixbufs[GTK_STATE_NORMAL] != NULL)) {
 		/* We are setting the images from scratch */
@@ -818,7 +818,7 @@ void
 gnome_pixmap_clear (GnomePixmap *gpixmap)
 {
         g_return_if_fail(gpixmap != NULL);
-        g_return_if_fail(GNOME_IS_PIXMAP(gpixmap));
+        g_return_if_fail(GNOME_IS_PIXMAP (gpixmap));
 
         clear_old_images(gpixmap);
 	if (gpixmap->original_image) {
@@ -844,7 +844,7 @@ gnome_pixmap_set_state (GnomePixmap *gpixmap,
 			gboolean pixelate)
 {
 	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP(gpixmap));
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
 	g_return_if_fail (state >= 0 && state < 5);
 
 	gpixmap->image_data[state].saturation = saturation;
@@ -856,20 +856,67 @@ gnome_pixmap_set_draw_mode (GnomePixmap *gpixmap,
 			    GnomePixmapDraw mode)
 {
 	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP(gpixmap));
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+
+	if (gpixmap->mode == mode)
+		return;
 
 	gpixmap->mode = mode;
+	clear_old_images (gpixmap);
+
+        if (GTK_WIDGET_VISIBLE (gpixmap)) {
+		gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
+	}
 }
 
 GnomePixmapDraw
 gnome_pixmap_get_draw_mode (GnomePixmap *gpixmap)
 {
 	g_return_val_if_fail (gpixmap != NULL, GNOME_PIXMAP_SIMPLE);
-	g_return_val_if_fail (GNOME_IS_PIXMAP(gpixmap), GNOME_PIXMAP_SIMPLE);
+	g_return_val_if_fail (GNOME_IS_PIXMAP (gpixmap), GNOME_PIXMAP_SIMPLE);
 
 	return gpixmap->mode;
 }
 
+void
+gnome_pixmap_set_alpha_threshold (GnomePixmap *gpixmap,
+				  gint alpha_threshold)
+{
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+	g_return_if_fail (alpha_threshold >= 0 || alpha_threshold <= 255);
+
+	if (alpha_threshold == gpixmap->alpha_threshold)
+		return;
+
+	gpixmap->alpha_threshold = alpha_threshold;
+	clear_old_images (gpixmap);
+
+
+
+	if (gpixmap->original_scaled_mask)
+		gdk_pixbuf_render_threshold_alpha
+			(gpixmap->original_scaled_image,
+			 gpixmap->original_scaled_mask,
+			 0, 0, 0, 0,
+			 gdk_pixbuf_get_width (gpixmap->original_scaled_image),
+			 gdk_pixbuf_get_height (gpixmap->original_scaled_image),
+			 gpixmap->alpha_threshold);
+
+        if (GTK_WIDGET_VISIBLE (gpixmap)) {
+		gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
+	}
+}
+
+gint
+gnome_pixmap_get_alpha_threshold (GnomePixmap *gpixmap)
+{
+	g_return_val_if_fail (gpixmap != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_PIXMAP (gpixmap), 0);
+
+	return gpixmap->alpha_threshold;
+}
+	
 
 
 
@@ -1047,7 +1094,6 @@ gnome_pixbuf_scale(GdkPixbuf* gdk_pixbuf,
 					p3 += pixbuf->n_channels;
 					xw -= i;
 					x3 = 0;
-					g_print ("%d:%d\t", a, i);
 				}
 				if ((256 - y3) < yw) {
                                         if (pixbuf->has_alpha) {
