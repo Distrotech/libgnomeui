@@ -308,7 +308,7 @@ translations_add(GtkWidget *button, GnomeDEntryEdit *dee)
 	
   /*we are setting the current language so set the easy page entries*/
   /*FIXME: do the opposite as well!, but that's not that crucial*/
-  language_list = gnome_i18n_get_language_list("LC_ALL");
+  language_list = gnome_i18n_get_language_list("LC_MESSAGES");
   curlang = language_list ? language_list->data : NULL;
   if ((curlang && strcmp(curlang,lang)==0) ||
       ((!curlang || strcmp(curlang,"C")==0) && !*lang)) {
