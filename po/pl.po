@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-08 00:22+0200\n"
-"PO-Revision-Date: 2002-05-08 00:22+0200\n"
+"POT-Creation-Date: 2002-05-13 17:43+0200\n"
+"PO-Revision-Date: 2002-05-13 17:47+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -852,6 +852,10 @@ msgstr "Kończy bieżącą grę"
 #: libgnomeui/gnome-app-helper.c:1
 msgid "_Contents"
 msgstr "Zawart_ość"
+
+#: libgnomeui/gnome-app-helper.c:1
+msgid "View help for this application"
+msgstr "Wyświetla pomoc na temat aplikacji"
 
 #: libgnomeui/gnome-app-helper.c:1
 msgid "Text Below Icons"
