@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-05-10 00:39+0800\n"
+"POT-Creation-Date: 2002-05-13 19:16+0200\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -17,115 +17,115 @@ msgstr ""
 msgid "Credits"
 msgstr "Kredit"
 
-#: libgnomeui/gnome-about.c:222
+#: libgnomeui/gnome-about.c:223
 msgid "_Written by"
 msgstr "Di_tulis oleh"
 
 # libgnomeui/gnome-dentry-edit.c:374
-#: libgnomeui/gnome-about.c:237
+#: libgnomeui/gnome-about.c:238
 msgid "_Documented by"
 msgstr "_Dokumentasi oleh"
 
-#: libgnomeui/gnome-about.c:252
+#: libgnomeui/gnome-about.c:253
 msgid "_Translated by"
 msgstr "_Terjemahan oleh"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:309
+#: libgnomeui/gnome-about.c:310
 msgid "_Credits"
 msgstr "_Kredit"
 
 # libgnomeui/gnome-app-util.c:687
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:352
 msgid "Program name"
 msgstr "Nama program"
 
 # libgnomeui/gnome-app-helper.c:160
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
 msgstr "Nama program itu"
 
 # libgnomeui/gnome-app-util.c:687
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:360
 msgid "Program version"
 msgstr "Versi program"
 
 # libgnomeui/gnome-app-helper.c:160
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:361
 msgid "The version of the program"
 msgstr "Versi program itu"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright string"
 msgstr "Hakcipta rentetan"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:368
 msgid "Copyright information for the program"
 msgstr "Maklumat hakcipta program"
 
 # libgnomeui/gnome-dentry-edit.c:389
-#: libgnomeui/gnome-about.c:374
+#: libgnomeui/gnome-about.c:375
 msgid "Comments string"
 msgstr "Rentetan komen"
 
 # libgnomeui/gnome-app-helper.c:160
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
 msgstr "Komen perihal program"
 
-#: libgnomeui/gnome-about.c:381
+#: libgnomeui/gnome-about.c:382
 msgid "Authors"
 msgstr "Penulis"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
 msgstr "Senarai penulis program"
 
-#: libgnomeui/gnome-about.c:384
+#: libgnomeui/gnome-about.c:385
 msgid "Author entry"
 msgstr "Kemasukan Penulis"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
 msgstr "Kemasukan penulis tunggal"
 
 # libgnomeui/gnome-dentry-edit.c:374
-#: libgnomeui/gnome-about.c:392
+#: libgnomeui/gnome-about.c:393
 msgid "Documenters"
 msgstr "Juru dokumentasi"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
 msgstr "Senarai penyumbang dokumentasi program"
 
 # libgnomeui/gnome-dentry-edit.c:374
-#: libgnomeui/gnome-about.c:395
+#: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
 msgstr "Kemasukan Juru dokumentasi"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
 msgstr "Kemasukan juru dokumentasi tunggal"
 
-#: libgnomeui/gnome-about.c:404
+#: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
 msgstr "Kredit penterjemah"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Kredit kepada penterjemah. Rentetan ini akan ditanda sebagai boleh diterjemah"
 
-#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
 msgstr "Logo pada kekotak perihal"
 
-#: libgnomeui/gnome-about.c:492
+#: libgnomeui/gnome-about.c:493
 #, c-format
 msgid "About %s"
 msgstr "Perihal %s"
@@ -534,7 +534,6 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -597,7 +596,6 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -826,12 +824,12 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Perihal"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -864,7 +862,7 @@ msgid "_Close This Window"
 msgstr "_Tutup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -952,28 +950,34 @@ msgstr "_Tamat permainan"
 msgid "End the current game"
 msgstr "Tamatkan permainan ini"
 
-#: libgnomeui/gnome-app-helper.c:1128
+#: libgnomeui/gnome-app-helper.c:1130
 msgid "_Contents"
 msgstr "_Kandungan"
 
-#: libgnomeui/gnome-app-helper.c:2512
+# libgnomeui/gnome-app-helper.c:235
+#: libgnomeui/gnome-app-helper.c:1131
+#, fuzzy
+msgid "View help for this application"
+msgstr "Perihal aplikasi ini"
+
+#: libgnomeui/gnome-app-helper.c:2515
 msgid "Text Below Icons"
 msgstr "Teks di Bawah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2513
+#: libgnomeui/gnome-app-helper.c:2516
 msgid "Text Beside Icons"
 msgstr "Teks di Sebelah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2514
+#: libgnomeui/gnome-app-helper.c:2517
 msgid "Icons Only"
 msgstr "Ikon Sahaja"
 
 # libgnomeui/gnome-stock.c:844
-#: libgnomeui/gnome-app-helper.c:2515
+#: libgnomeui/gnome-app-helper.c:2518
 msgid "Text Only"
 msgstr "Teks Sahaja"
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2578
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Guna default desktop (%s)"
@@ -1401,9 +1405,8 @@ msgid "Sans 14"
 msgstr "Sans 14"
 
 # libgnomeui/gnome-app-helper.c:160
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Keluar ujian"
+#~ msgid "Exit the test"
+#~ msgstr "Keluar ujian"
 
 # libgnomeui/gnome-app-helper.c:204
 #~ msgid "Find _Again"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-04-29 23:00+0200\n"
+"POT-Creation-Date: 2002-05-13 19:16+0200\n"
 "PO-Revision-Date: 2002-05-04 19:46+0400\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -17,106 +17,106 @@ msgstr ""
 msgid "Credits"
 msgstr "Благодарности"
 
-#: libgnomeui/gnome-about.c:222
+#: libgnomeui/gnome-about.c:223
 msgid "_Written by"
 msgstr "_Авторы"
 
-#: libgnomeui/gnome-about.c:237
+#: libgnomeui/gnome-about.c:238
 msgid "_Documented by"
 msgstr "Авторы _документации"
 
-#: libgnomeui/gnome-about.c:252
+#: libgnomeui/gnome-about.c:253
 msgid "_Translated by"
 msgstr "Авторы _перевода"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:309
+#: libgnomeui/gnome-about.c:310
 msgid "_Credits"
 msgstr "_Благодарности"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:352
 msgid "Program name"
 msgstr "Наименование программы"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
 msgstr "Наименование программы"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:360
 msgid "Program version"
 msgstr "Версия программы"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:361
 msgid "The version of the program"
 msgstr "Версия программы"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright string"
 msgstr "Авторское право"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:368
 msgid "Copyright information for the program"
 msgstr "Информация об авторских правах на программу"
 
-#: libgnomeui/gnome-about.c:374
+#: libgnomeui/gnome-about.c:375
 msgid "Comments string"
 msgstr "Строка комментария"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
 msgstr "Комментарий о программе"
 
-#: libgnomeui/gnome-about.c:381
+#: libgnomeui/gnome-about.c:382
 msgid "Authors"
 msgstr "Авторы"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
 msgstr "Список авторов программы"
 
-#: libgnomeui/gnome-about.c:384
+#: libgnomeui/gnome-about.c:385
 msgid "Author entry"
 msgstr "Автор"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
 msgstr "Автор программы"
 
-#: libgnomeui/gnome-about.c:392
+#: libgnomeui/gnome-about.c:393
 msgid "Documenters"
 msgstr "Авторы документации"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
 msgstr "Список людей, писавших документацию к программе"
 
-#: libgnomeui/gnome-about.c:395
+#: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
 msgstr "Автор документации"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
 msgstr "Автор документации к программе"
 
-#: libgnomeui/gnome-about.c:404
+#: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
 msgstr "Благодарности переводчикам"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Благодарности переводчикам. Эта строка должна быть помечена для перевода"
 
-#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Эмблема"
 
-#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
 msgstr "Эмблема для окна \"О программе\""
 
-#: libgnomeui/gnome-about.c:492
+#: libgnomeui/gnome-about.c:493
 #, c-format
 msgid "About %s"
 msgstr "О программе %s"
@@ -594,7 +594,8 @@ msgstr "Возвратиться к сохранённой версии файл
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-msgid "_Print"
+#, fuzzy
+msgid "_Print..."
 msgstr "На_печатать"
 
 #: libgnomeui/gnome-app-helper.c:131
@@ -633,7 +634,8 @@ msgstr "Выйти из программы"
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-msgid "C_ut"
+#, fuzzy
+msgid "Cu_t"
 msgstr "_Вырезать"
 
 #: libgnomeui/gnome-app-helper.c:155
@@ -697,8 +699,8 @@ msgstr "Найти строку"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-msgid "Find _Again"
-msgstr "Найти _снова"
+msgid "Find Ne_xt"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -706,7 +708,8 @@ msgstr "Повторно найти ту же строку"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-msgid "_Replace..."
+#, fuzzy
+msgid "R_eplace..."
 msgstr "_Заменить..."
 
 #: libgnomeui/gnome-app-helper.c:197
@@ -727,7 +730,8 @@ msgstr "Изменить свойства файла"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "_Preferences..."
+#, fuzzy
+msgid "Prefere_nces..."
 msgstr "_Настроить..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -748,7 +752,8 @@ msgid "About this application"
 msgstr "Получить информацию об этой программе"
 
 #: libgnomeui/gnome-app-helper.c:225
-msgid "_Select All"
+#, fuzzy
+msgid "Select _All"
 msgstr "Выделить вс_ё"
 
 #: libgnomeui/gnome-app-helper.c:226
@@ -842,29 +847,35 @@ msgstr "_Закончить игру"
 msgid "End the current game"
 msgstr "Закончить эту игру"
 
-#: libgnomeui/gnome-app-helper.c:1096
-msgid "_Help Contents"
+#: libgnomeui/gnome-app-helper.c:1130
+#, fuzzy
+msgid "_Contents"
 msgstr "_Содержание Справки"
 
-#: libgnomeui/gnome-app-helper.c:2463
-msgid "Both text and icons"
-msgstr "Текст и пиктограммы"
+#: libgnomeui/gnome-app-helper.c:1131
+#, fuzzy
+msgid "View help for this application"
+msgstr "Получить информацию об этой программе"
 
-#: libgnomeui/gnome-app-helper.c:2464
-msgid "Both text and icons when horizontal, just icons when vertical"
+#: libgnomeui/gnome-app-helper.c:2515
+msgid "Text Below Icons"
 msgstr ""
-"Текст и пиктограммы при горизонтальном размещении, только пиктограммы при "
-"вертикальном"
 
-#: libgnomeui/gnome-app-helper.c:2465
-msgid "Icons only"
+#: libgnomeui/gnome-app-helper.c:2516
+msgid "Text Beside Icons"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2517
+#, fuzzy
+msgid "Icons Only"
 msgstr "Только пиктограммы"
 
-#: libgnomeui/gnome-app-helper.c:2466
-msgid "Text only"
+#: libgnomeui/gnome-app-helper.c:2518
+#, fuzzy
+msgid "Text Only"
 msgstr "Только текст"
 
-#: libgnomeui/gnome-app-helper.c:2526
+#: libgnomeui/gnome-app-helper.c:2578
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Использовать умолчания рабочего стола (%s)"
@@ -1251,6 +1262,17 @@ msgstr "%a, %d %b"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Find _Again"
+#~ msgstr "Найти _снова"
+
+#~ msgid "Both text and icons"
+#~ msgstr "Текст и пиктограммы"
+
+#~ msgid "Both text and icons when horizontal, just icons when vertical"
+#~ msgstr ""
+#~ "Текст и пиктограммы при горизонтальном размещении, только пиктограммы при "
+#~ "вертикальном"
 
 #~ msgid "E_xit"
 #~ msgstr "В_ыйти"

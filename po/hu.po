@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2002-04-29 23:00+0200\n"
+"POT-Creation-Date: 2002-05-13 19:16+0200\n"
 "PO-Revision-Date: 2002-01-28 20:35+0100\n"
 "Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -17,108 +17,108 @@ msgstr ""
 msgid "Credits"
 msgstr "Jó pontok"
 
-#: libgnomeui/gnome-about.c:222
+#: libgnomeui/gnome-about.c:223
 #, fuzzy
 msgid "_Written by"
 msgstr "Szerző"
 
-#: libgnomeui/gnome-about.c:237
+#: libgnomeui/gnome-about.c:238
 #, fuzzy
 msgid "_Documented by"
 msgstr "Dokumentáció"
 
-#: libgnomeui/gnome-about.c:252
+#: libgnomeui/gnome-about.c:253
 #, fuzzy
 msgid "_Translated by"
 msgstr "Fordítók"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:309
+#: libgnomeui/gnome-about.c:310
 msgid "_Credits"
 msgstr "_Jó pontok"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:352
 msgid "Program name"
 msgstr "Programnév"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
 msgstr "A program neve"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:360
 msgid "Program version"
 msgstr "Programverzió"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:361
 msgid "The version of the program"
 msgstr "A program változata"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright string"
 msgstr "Copyright szöveg"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:368
 msgid "Copyright information for the program"
 msgstr "Copyright információ a programról"
 
-#: libgnomeui/gnome-about.c:374
+#: libgnomeui/gnome-about.c:375
 msgid "Comments string"
 msgstr "Megjegyzések"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
 msgstr "Megjegyzések a programról"
 
-#: libgnomeui/gnome-about.c:381
+#: libgnomeui/gnome-about.c:382
 msgid "Authors"
 msgstr "Szerzők"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
 msgstr "A program szerzőinek listája"
 
-#: libgnomeui/gnome-about.c:384
+#: libgnomeui/gnome-about.c:385
 msgid "Author entry"
 msgstr "Szerző bejegyzés"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
 msgstr "Egy szerző a sok közül"
 
-#: libgnomeui/gnome-about.c:392
+#: libgnomeui/gnome-about.c:393
 msgid "Documenters"
 msgstr "Dokumentáció írói"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
 msgstr "A program dokumentációját író emberek listája"
 
-#: libgnomeui/gnome-about.c:395
+#: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
 msgstr "Doksiíró bejegyzés"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
 msgstr "Egy doksiíró a sok közül"
 
-#: libgnomeui/gnome-about.c:404
+#: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
 msgstr "Fordítók"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "A fordítók listája. Ez a sztring fordítható."
 
-#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logó"
 
-#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
 msgstr "Logó a névjegy ablakban"
 
-#: libgnomeui/gnome-about.c:492
+#: libgnomeui/gnome-about.c:493
 #, c-format
 msgid "About %s"
 msgstr "%s névjegye"
@@ -597,7 +597,8 @@ msgstr "Visszatérés a fájl egy korábban mentett változatához"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-msgid "_Print"
+#, fuzzy
+msgid "_Print..."
 msgstr "_Nyomtatás"
 
 #: libgnomeui/gnome-app-helper.c:131
@@ -638,7 +639,8 @@ msgstr "Az alkalmazás névjegye"
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-msgid "C_ut"
+#, fuzzy
+msgid "Cu_t"
 msgstr "_Kivágás"
 
 #: libgnomeui/gnome-app-helper.c:155
@@ -702,8 +704,8 @@ msgstr "Karakterlánc keresése"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-msgid "Find _Again"
-msgstr "Következő _találat"
+msgid "Find Ne_xt"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -711,7 +713,8 @@ msgstr "A keresésben megadott karakterlánc következő előfordulása"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-msgid "_Replace..."
+#, fuzzy
+msgid "R_eplace..."
 msgstr "_Csere..."
 
 #: libgnomeui/gnome-app-helper.c:197
@@ -732,7 +735,8 @@ msgstr "A fájl tulajdonságainak módosítása"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "_Preferences..."
+#, fuzzy
+msgid "Prefere_nces..."
 msgstr "_Beállítások"
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -753,7 +757,8 @@ msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
 #: libgnomeui/gnome-app-helper.c:225
-msgid "_Select All"
+#, fuzzy
+msgid "Select _All"
 msgstr "Min_dent kijelöl"
 
 #: libgnomeui/gnome-app-helper.c:226
@@ -847,27 +852,34 @@ msgstr "Játék be_fejezése"
 msgid "End the current game"
 msgstr "A jelenlegi játék befejezése"
 
-#: libgnomeui/gnome-app-helper.c:1096
-msgid "_Help Contents"
+#: libgnomeui/gnome-app-helper.c:1130
+msgid "_Contents"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2463
-msgid "Both text and icons"
-msgstr "Szöveg és ikon"
+#: libgnomeui/gnome-app-helper.c:1131
+#, fuzzy
+msgid "View help for this application"
+msgstr "Az alkalmazás névjegye"
 
-#: libgnomeui/gnome-app-helper.c:2464
-msgid "Both text and icons when horizontal, just icons when vertical"
+#: libgnomeui/gnome-app-helper.c:2515
+msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2465
-msgid "Icons only"
+#: libgnomeui/gnome-app-helper.c:2516
+msgid "Text Beside Icons"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2517
+#, fuzzy
+msgid "Icons Only"
 msgstr "Csak ikon"
 
-#: libgnomeui/gnome-app-helper.c:2466
-msgid "Text only"
+#: libgnomeui/gnome-app-helper.c:2518
+#, fuzzy
+msgid "Text Only"
 msgstr "Czak szöveg"
 
-#: libgnomeui/gnome-app-helper.c:2526
+#: libgnomeui/gnome-app-helper.c:2578
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "A munkafelülethez tartozó alapértelmezés használata (%s)"
@@ -1252,6 +1264,12 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Find _Again"
+#~ msgstr "Következő _találat"
+
+#~ msgid "Both text and icons"
+#~ msgstr "Szöveg és ikon"
 
 #~ msgid "E_xit"
 #~ msgstr "_Kilépés"

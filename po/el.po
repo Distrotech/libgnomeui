@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.0\n"
-"POT-Creation-Date: 2002-04-29 23:00+0200\n"
+"POT-Creation-Date: 2002-05-13 19:16+0200\n"
 "PO-Revision-Date: 2002-04-21 21:32+0100\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -21,105 +21,105 @@ msgstr ""
 msgid "Credits"
 msgstr "Μνεία"
 
-#: libgnomeui/gnome-about.c:222
+#: libgnomeui/gnome-about.c:223
 msgid "_Written by"
 msgstr "_Γράφτηκε από"
 
-#: libgnomeui/gnome-about.c:237
+#: libgnomeui/gnome-about.c:238
 msgid "_Documented by"
 msgstr "_Τεκμηριώθηκε από"
 
-#: libgnomeui/gnome-about.c:252
+#: libgnomeui/gnome-about.c:253
 msgid "_Translated by"
 msgstr "_Μεταφράστηκε από"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:309
+#: libgnomeui/gnome-about.c:310
 msgid "_Credits"
 msgstr "_Μνεία"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:352
 msgid "Program name"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
 msgstr "Το όνομα του προγράμματος"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:360
 msgid "Program version"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:361
 msgid "The version of the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:368
 msgid "Copyright information for the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:374
+#: libgnomeui/gnome-about.c:375
 msgid "Comments string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:381
+#: libgnomeui/gnome-about.c:382
 msgid "Authors"
 msgstr "Συγγραφείς"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:384
+#: libgnomeui/gnome-about.c:385
 msgid "Author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:392
+#: libgnomeui/gnome-about.c:393
 msgid "Documenters"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:395
+#: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:404
+#: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Λογότυπο"
 
-#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:492
+#: libgnomeui/gnome-about.c:493
 #, c-format
 msgid "About %s"
 msgstr "Περί %s"
@@ -837,7 +837,8 @@ msgstr "Επαναφορά σε αποθηκευμένη έκδοση του α�
 #
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-msgid "_Print"
+#, fuzzy
+msgid "_Print..."
 msgstr "Εκ_τύπωση"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
@@ -933,7 +934,8 @@ msgstr "Περί αυτής της εφαρμογής"
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-msgid "C_ut"
+#, fuzzy
+msgid "Cu_t"
 msgstr "Αποκο_πή"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
@@ -1065,13 +1067,10 @@ msgstr "_Εύρεση..."
 msgid "Search for a string"
 msgstr "Αναζήτηση αλφαριθμητικού"
 
-# #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
-# #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
-#
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-msgid "Find _Again"
-msgstr "Εύρεση _Ξανά"
+msgid "Find Ne_xt"
+msgstr ""
 
 #
 #: libgnomeui/gnome-app-helper.c:192
@@ -1083,7 +1082,8 @@ msgstr "Aναζήτηση ξανά του ίδιου αλφαριθμητικο�
 #
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-msgid "_Replace..."
+#, fuzzy
+msgid "R_eplace..."
 msgstr "Αντικα_τάσταση..."
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
@@ -1119,7 +1119,8 @@ msgstr "Τροποποίηση ιδιοτήτων αρχείου"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "_Preferences..."
+#, fuzzy
+msgid "Prefere_nces..."
 msgstr "_Προτιμήσεις..."
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
@@ -1160,7 +1161,8 @@ msgstr "Περί αυτής της εφαρμογής"
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
 #
 #: libgnomeui/gnome-app-helper.c:225
-msgid "_Select All"
+#, fuzzy
+msgid "Select _All"
 msgstr "_Επιλογή Όλων"
 
 #
@@ -1287,29 +1289,44 @@ msgstr "_Τέλος παιχνιδιού"
 msgid "End the current game"
 msgstr "Τερματισμός του τρέχοντος παιχνιδιού"
 
-#: libgnomeui/gnome-app-helper.c:1096
-msgid "_Help Contents"
+#: libgnomeui/gnome-app-helper.c:1130
+#, fuzzy
+msgid "_Contents"
 msgstr "Περιεχόμενα _Βοήθειας"
 
-#: libgnomeui/gnome-app-helper.c:2463
-msgid "Both text and icons"
+# #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
+# #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
+#
+# #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
+#
+# #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
+#
+#: libgnomeui/gnome-app-helper.c:1131
+#, fuzzy
+msgid "View help for this application"
+msgstr "Περί αυτής της εφαρμογής"
+
+#: libgnomeui/gnome-app-helper.c:2515
+msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2464
-msgid "Both text and icons when horizontal, just icons when vertical"
+#: libgnomeui/gnome-app-helper.c:2516
+msgid "Text Beside Icons"
 msgstr ""
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:2465
-msgid "Icons only"
+#: libgnomeui/gnome-app-helper.c:2517
+#, fuzzy
+msgid "Icons Only"
 msgstr "Μόνο εικονίδια"
 
-#: libgnomeui/gnome-app-helper.c:2466
-msgid "Text only"
+#: libgnomeui/gnome-app-helper.c:2518
+#, fuzzy
+msgid "Text Only"
 msgstr "Μόνο κείμενο"
 
-#: libgnomeui/gnome-app-helper.c:2526
+#: libgnomeui/gnome-app-helper.c:2578
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -1861,6 +1878,12 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+# #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
+# #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
+#
+#~ msgid "Find _Again"
+#~ msgstr "Εύρεση _Ξανά"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#

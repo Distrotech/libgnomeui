@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-04-29 23:00+0200\n"
+"POT-Creation-Date: 2002-05-13 19:16+0200\n"
 "PO-Revision-Date: 2002-04-15 19:27+01:00\n"
 "Last-Translator: Hoang Ngoc Tu <hntu@gmx.de>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -18,110 +18,110 @@ msgstr ""
 msgid "Credits"
 msgstr "Cộng tác"
 
-#: libgnomeui/gnome-about.c:222
+#: libgnomeui/gnome-about.c:223
 #, fuzzy
 msgid "_Written by"
 msgstr "Tác giả"
 
-#: libgnomeui/gnome-about.c:237
+#: libgnomeui/gnome-about.c:238
 #, fuzzy
 msgid "_Documented by"
 msgstr "Người cung cấp tư liệu"
 
-#: libgnomeui/gnome-about.c:252
+#: libgnomeui/gnome-about.c:253
 #, fuzzy
 msgid "_Translated by"
 msgstr "Người dịch"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:309
+#: libgnomeui/gnome-about.c:310
 msgid "_Credits"
 msgstr "Cộng tác"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:352
 msgid "Program name"
 msgstr "Tên chương trình"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
 msgstr "Tên của chương trình"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:360
 msgid "Program version"
 msgstr "Phiên bản của chuơng trình"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:361
 msgid "The version of the program"
 msgstr "Phiên bản chương trình"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright string"
 msgstr "Dòng tin bản quyền"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:368
 msgid "Copyright information for the program"
 msgstr "Thông tin bản quyền cho chuơng trình"
 
-#: libgnomeui/gnome-about.c:374
+#: libgnomeui/gnome-about.c:375
 msgid "Comments string"
 msgstr "Dòng bình luận"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
 msgstr "Bình luận về chương trình"
 
-#: libgnomeui/gnome-about.c:381
+#: libgnomeui/gnome-about.c:382
 msgid "Authors"
 msgstr "Các đồng tác giả"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
 msgstr "Danh sách các tác giả của chương trình"
 
-#: libgnomeui/gnome-about.c:384
+#: libgnomeui/gnome-about.c:385
 msgid "Author entry"
 msgstr "Trường nhập số liệu cho tác giả"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
 msgstr "Trường nhập số liệu đơn cho tác giả"
 
-#: libgnomeui/gnome-about.c:392
+#: libgnomeui/gnome-about.c:393
 msgid "Documenters"
 msgstr "Người cung cấp tư liệu"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
 msgstr "Danh sách những người cung cấp tư liệu cho chương trình"
 
-#: libgnomeui/gnome-about.c:395
+#: libgnomeui/gnome-about.c:396
 #, fuzzy
 msgid "Documenter entry"
 msgstr "Trường nhập số liệu cho nguời cung cấp tư liệu "
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:404
+#: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
 msgstr "Cộng tác dịch"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Những người cộng tác dịch. Dòng tin này cần được dánh dấu có thể dịch được"
 
-#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Biểu tuợng riêng"
 
-#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
 msgstr "Một biểu tượng riêng cho hộp trên"
 
-#: libgnomeui/gnome-about.c:492
+#: libgnomeui/gnome-about.c:493
 #, c-format
 msgid "About %s"
 msgstr "Về đề tài%s"
@@ -598,7 +598,8 @@ msgstr "Quay lại một phiên bản đã nhớ của tập tin"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-msgid "_Print"
+#, fuzzy
+msgid "_Print..."
 msgstr "In"
 
 #: libgnomeui/gnome-app-helper.c:131
@@ -639,7 +640,8 @@ msgstr "Thông tin về ứng dụng này"
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-msgid "C_ut"
+#, fuzzy
+msgid "Cu_t"
 msgstr "Cắt"
 
 #: libgnomeui/gnome-app-helper.c:155
@@ -703,8 +705,8 @@ msgstr "Tìm một chuỗi"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-msgid "Find _Again"
-msgstr "Tìm thêm"
+msgid "Find Ne_xt"
+msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -712,7 +714,8 @@ msgstr "Tìm thêm một chuỗi như vậy"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-msgid "_Replace..."
+#, fuzzy
+msgid "R_eplace..."
 msgstr "Thay thế..."
 
 #: libgnomeui/gnome-app-helper.c:197
@@ -733,7 +736,8 @@ msgstr "Sửa đổi các đặc tính của tập tin hiện thời"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "_Preferences..."
+#, fuzzy
+msgid "Prefere_nces..."
 msgstr "Chỉnh lý..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -754,7 +758,8 @@ msgid "About this application"
 msgstr "Thông tin về ứng dụng này"
 
 #: libgnomeui/gnome-app-helper.c:225
-msgid "_Select All"
+#, fuzzy
+msgid "Select _All"
 msgstr "Chọn tất cả"
 
 #: libgnomeui/gnome-app-helper.c:226
@@ -848,27 +853,34 @@ msgstr "Kết thúc chơi"
 msgid "End the current game"
 msgstr "Kết thúc trò chơi hiện thời"
 
-#: libgnomeui/gnome-app-helper.c:1096
-msgid "_Help Contents"
+#: libgnomeui/gnome-app-helper.c:1130
+msgid "_Contents"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2463
-msgid "Both text and icons"
-msgstr "Cả văn bản và các biểu tượng"
+#: libgnomeui/gnome-app-helper.c:1131
+#, fuzzy
+msgid "View help for this application"
+msgstr "Thông tin về ứng dụng này"
 
-#: libgnomeui/gnome-app-helper.c:2464
-msgid "Both text and icons when horizontal, just icons when vertical"
+#: libgnomeui/gnome-app-helper.c:2515
+msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2465
-msgid "Icons only"
+#: libgnomeui/gnome-app-helper.c:2516
+msgid "Text Beside Icons"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2517
+#, fuzzy
+msgid "Icons Only"
 msgstr "Chỉ có các biểu tượng"
 
-#: libgnomeui/gnome-app-helper.c:2466
-msgid "Text only"
+#: libgnomeui/gnome-app-helper.c:2518
+#, fuzzy
+msgid "Text Only"
 msgstr "Chỉ có văn bản"
 
-#: libgnomeui/gnome-app-helper.c:2526
+#: libgnomeui/gnome-app-helper.c:2578
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -1245,6 +1257,12 @@ msgstr "%a, %d.%m.%Y, %H.%M"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Find _Again"
+#~ msgstr "Tìm thêm"
+
+#~ msgid "Both text and icons"
+#~ msgstr "Cả văn bản và các biểu tượng"
 
 #~ msgid "E_xit"
 #~ msgstr "Kết thúc"
