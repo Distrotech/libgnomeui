@@ -4,8 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
-"POT-Creation-Date: 2003-08-25 20:29+0200\n"
-"PO-Revision-Date: 2003-07-20 22:04+0900\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-07-20 21:58+0900\n"
+"PO-Revision-Date: 2003-09-23 03:32+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
@@ -115,12 +116,12 @@ msgstr "이 프로그램의 문서를 작성한 한 사람 항목"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "번역자 크레디트"
+msgstr "옮긴이 크레디트"
 
 #: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "번역자의 크레디트. 이 문자열은 번역 가능하도록 표시해야 합니다"
+msgstr "옮긴이의 크레디트. 이 문자열은 번역 가능하도록 표시해야 합니다"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -603,11 +604,11 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr "비밀번호가 암호화되지 않은 상태로 전송됩니다."
+msgstr "열쇠글이 암호화되지 않은 상태로 전송됩니다."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr "비밀번호가 암호화된 상태로 전송됩니다."
+msgstr "열쇠글이 암호화된 상태로 전송됩니다."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
@@ -1214,7 +1215,7 @@ msgstr "사용자이름(_U):"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr "비밀번호(_P):"
+msgstr "열쇠글(_P):"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1360,12 +1361,3 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "자세한 정보는 그놈 응용프로그램의 비정상 종료 안내 웹페이지에 있습니다."
-
-# 테스트 프로그램의 번역?
-#
-# 테스트 프로그램은 번역할 필요가 없다.  왜냐하면 설치되지 않으니까.
-# 시간이 남아돌면서 번역할 메세지가 이거밖에 없다면 몰라도, 쓸데없는 일에
-# 시간을 낭비하고 싶지는 않다.
-#
-#~ msgid "Exit the test"
-#~ msgstr "테스트 나감"
