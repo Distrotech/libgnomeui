@@ -1,25 +1,28 @@
+# translation of libgnomeui.HEAD.ar.po to 
 # translation of libgnomeui.po to
 # translation of libgnomeui.po to Arabic
-# Copyright (C) 2002 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) 2002 THE libgnomeui.HEAD.ar'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the libgnomeui.HEAD.ar package.
 # Arafat Medini <lumina@silverpen.de>, 2002,2003.
-# Isam Bayazidi <bayazidi@arabeyes.org>, 2002
-#
+# Isam Bayazidi <bayazidi@arabeyes.org>, 2002.
+#  <lumina@silverpen.de>, 2004.
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
-"PO-Revision-Date: 2003-04-29 13:20+0200\n"
+"Project-Id-Version: libgnomeui.HEAD.ar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-22 20:40+0100\n"
+"PO-Revision-Date: 2004-01-09 17:37+0100\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.1\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "عنصر الابن 1"
+msgstr "العنصر الابن 1"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
@@ -35,7 +38,7 @@ msgstr "تلميحة للعنصر 2"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
-msgstr "عرفات المديني تونس "
+msgstr "المساهمون"
 
 #: libgnomeui/gnome-about.c:230
 msgid "Written by"
@@ -50,9 +53,8 @@ msgid "Translated by"
 msgstr "تُرجم من طرف"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "عرفات المديني تونس "
+msgstr "الم_ساهمون"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -120,12 +122,11 @@ msgstr "خانة مفردة للموثّق"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "شكر للمترجمين"
+msgstr "المترجمين"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr "شكر للمترجمين يجب هذا النص على انه قابل للترجمة"
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "المترجمين يجب هذا النص على انه قابل للترجمة"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -142,6 +143,7 @@ msgstr "حول %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_ملف"
 
@@ -199,6 +201,7 @@ msgid "_Game"
 msgstr "_لعبة"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_مساعدة"
 
@@ -389,11 +392,11 @@ msgstr "إعداد التطبيق"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_حول"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "حول هذا البرنامج"
 
@@ -420,7 +423,7 @@ msgstr "أنشىء نافذة جديدة"
 msgid "_Close This Window"
 msgstr "أ_غلق هذه النافذة"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "أغلق النافذة الحالية"
 
@@ -595,7 +598,7 @@ msgstr "مطلوب مستوى نشاط المستخد"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "بروكسي الـ HTTP يتطلب منك التسجيل.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
@@ -603,29 +606,31 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"يجب أن تسجل لتنفذ إلى \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "سترسل كلمة سرك غير مشفرة."
 
 #: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "سترسل كلمة سرك مشفرة."
 
 #: libgnomeui/gnome-authentication-manager.c:69
 #: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
-msgstr ""
+msgstr "التوثيق مطلوب"
 
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " النطاق %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
+msgstr "يبج عليك التسجيل للنفاذ إلى %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -881,8 +886,7 @@ msgstr "خانة المجلدات"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"ما إذا  خانة الملفات تستخدم لادخال أسماء المجلدات أو أسماء كاملة للملفات."
+msgstr "ما إذا  خانة الملفات تستخدم لادخال أسماء المجلدات أو أسماء كاملة للملفات."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1217,23 +1221,23 @@ msgstr "رسالة"
 
 #: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
-msgstr ""
+msgstr "اسم ال_مستخدم:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "ال_نطاق:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
-msgstr ""
+msgstr "_كلمة السر:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "تذكر كلمة السر لهذه الجلسة"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "حفظ كلمة السر في حلقة المفاتيح"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1377,11 +1381,12 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "لمزيد من المعلومات، فضلا قم بزيارة صفحة انهيار تطبيقات جنوم"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "اخرج من التجربة"
+
 #~ msgid "_Credits"
 #~ msgstr "_شكر للمترجمين"
-
-#~ msgid "Exit the test"
-#~ msgstr "اخرج من التجربة"
 
 #~ msgid "E_xit"
 #~ msgstr "ا_خرج"
