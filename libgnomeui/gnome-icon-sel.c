@@ -43,6 +43,7 @@ static void gnome_icon_selection_destroy (GtkObject *gis);
 static GtkVBoxClass *parent_class;
 
 static int sort_file_list( gconstpointer a, gconstpointer b);
+static gboolean gnome_icon_list_button_press_event (GtkWidget *widget, GdkEventButton *button, gpointer data);
 
 guint
 gnome_icon_selection_get_type ()
@@ -109,6 +110,9 @@ gnome_icon_selection_init (GnomeIconSelection *gis)
 	gis->gil = gnome_icon_list_new(ICON_SIZE+30,
 				       gtk_range_get_adjustment(GTK_RANGE(sb)),
 				       FALSE);
+	gtk_signal_connect (GTK_OBJECT (gis->gil), "button_press_event",
+			    GTK_SIGNAL_FUNC (gnome_icon_list_button_press_event), gis);
+	
 	gtk_widget_set_usize(gis->gil,350,300);
 	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(gis->gil),
 					   GTK_SELECTION_SINGLE);
@@ -117,8 +121,24 @@ gnome_icon_selection_init (GnomeIconSelection *gis)
 
 	gis->file_list = NULL;
 }
+	
+static gboolean gnome_icon_list_button_press_event (GtkWidget *widget, GdkEventButton *button, gpointer data)
+{
+	if (button->button == 4 || button->button == 5) {
+		GnomeIconSelection *gis = GNOME_ICON_SELECTION (data);
+		GtkAdjustment *adj = GNOME_ICON_LIST (gis->gil)->adj;
+		gfloat new_value = adj->value + ((button->button == 4) ?
+						 - adj->page_increment / 2:
+						 adj->page_increment / 2);
+		new_value = CLAMP (new_value, adj->lower, adj->upper - adj->page_size);
+		gtk_adjustment_set_value (adj, new_value);
+		
+		return TRUE;
+	}
 
-
+	return FALSE;
+}
+	
 /**
  * gnome_icon_selection_new:
  *
