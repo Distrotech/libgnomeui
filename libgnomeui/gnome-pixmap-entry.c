@@ -40,6 +40,7 @@
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkfilesel.h>
+#include <gtk/gtkfilechooser.h>
 #include <gtk/gtkframe.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkmain.h>
@@ -275,13 +276,21 @@ setup_preview(GtkTreeSelection *selection, GtkWidget *widget)
 	GtkWidget *pp = NULL;
         GdkPixbuf *pixbuf, *scaled;
 	int w,h;
-	GtkWidget *frame;
-	GtkFileSelection *fs;
+	GtkWidget *frame, *fw;
 
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	frame = g_object_get_data (G_OBJECT (widget), "frame");
-	fs = g_object_get_data (G_OBJECT (frame), "fs");
+	if (GTK_IS_FILE_CHOOSER (widget)) {
+		fw = widget;
+		frame = gtk_file_chooser_get_preview_widget (GTK_FILE_CHOOSER (fw));
+
+		p = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (fw));
+	} else {
+		frame = g_object_get_data (G_OBJECT (widget), "frame");
+		fw = g_object_get_data (G_OBJECT (frame), "fs");
+
+		p = gtk_file_selection_get_filename(GTK_FILE_SELECTION (fw));
+	}
 
 	if((l = gtk_container_get_children(GTK_CONTAINER(frame))) != NULL) {
 		pp = l->data;
@@ -291,7 +300,6 @@ setup_preview(GtkTreeSelection *selection, GtkWidget *widget)
 	if(pp)
 		gtk_widget_destroy(pp);
 
-	p = gtk_file_selection_get_filename(fs);
 	if(!p || !g_file_test(p,G_FILE_TEST_IS_SYMLINK|G_FILE_TEST_IS_REGULAR) ||
 	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL)))
 		return;
@@ -318,7 +326,6 @@ setup_preview(GtkTreeSelection *selection, GtkWidget *widget)
 	gtk_widget_show(pp);
 
 	gtk_container_add(GTK_CONTAINER(frame),pp);
-
 }
 
 static void
@@ -360,10 +367,10 @@ pentry_finalize (GObject *object)
 static void
 browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 {
-	GtkWidget *w;
-	GtkWidget *hbox;
-
+	GtkWidget *w, *hbox;
 	GtkFileSelection *fs;
+	GtkFileChooser *fc;
+	gchar *path;
 
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
@@ -373,34 +380,56 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 	if(!fentry->fsw)
 		return;
 
-	fs = GTK_FILE_SELECTION(fentry->fsw);
+	if (GTK_IS_FILE_CHOOSER (fentry->fsw)) {
+		fc = GTK_FILE_CHOOSER (fentry->fsw);
 
-	/* we already got this */
-	if (g_object_get_data (G_OBJECT (fs->file_list), "frame") != NULL)
-		return;
-
-	hbox = fs->file_list;
-	do {
-		hbox = hbox->parent;
-		if(!hbox) {
-			g_warning(_("Can't find an hbox, using a normal file "
-				    "selection"));
+		if (gtk_file_chooser_get_preview_widget (fc) != NULL)
 			return;
-		}
-	} while(!GTK_IS_HBOX(hbox));
 
-	w = gtk_frame_new(_("Preview"));
-	gtk_widget_show(w);
-	gtk_box_pack_end(GTK_BOX(hbox),w,FALSE,FALSE,0);
-	gtk_widget_set_size_request (w, 110, 110);
-	g_object_set_data (G_OBJECT (w), "fs", fs);
+		w = gtk_frame_new ("");
+		gtk_frame_set_shadow_type (GTK_FRAME (w), GTK_SHADOW_NONE);
+		gtk_widget_show (w);
+		
+		gtk_file_chooser_set_preview_widget (fc, w);
 
-	g_object_set_data (G_OBJECT (fs->file_list), "frame", w);
-	g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (fs->file_list))), "changed",
-			  G_CALLBACK (setup_preview), fs->file_list);
-	g_object_set_data (G_OBJECT (fs->selection_entry), "frame", w);
-	g_signal_connect (fs->selection_entry, "changed",
-			  G_CALLBACK (setup_preview), fs->selection_entry);
+		g_signal_connect (G_OBJECT (fc), "update-preview",
+				  G_CALLBACK (setup_preview), fentry->fsw);
+
+		/* the path can be already set */
+		if ((path = gtk_file_chooser_get_filename (fc)) != NULL)
+			setup_preview (NULL, fentry->fsw);
+
+		g_free (path);
+	} else {
+		fs = GTK_FILE_SELECTION (fentry->fsw);
+		
+		/* we already got this */
+		if (g_object_get_data (G_OBJECT (fs->file_list), "frame") != NULL)
+			return;
+
+		hbox = fs->file_list;
+		do {
+			hbox = hbox->parent;
+			if(!hbox) {
+				g_warning(_("Can't find an hbox, using a normal file "
+					    "selection"));
+				return;
+			}
+		} while(!GTK_IS_HBOX(hbox));
+
+		w = gtk_frame_new(_("Preview"));
+		gtk_widget_show(w);
+		gtk_box_pack_end(GTK_BOX(hbox),w,FALSE,FALSE,0);
+		gtk_widget_set_size_request (w, 110, 110);
+		g_object_set_data (G_OBJECT (w), "fs", fs);
+
+		g_object_set_data (G_OBJECT (fs->file_list), "frame", w);
+		g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (fs->file_list))), "changed",
+				  G_CALLBACK (setup_preview), fs->file_list);
+		g_object_set_data (G_OBJECT (fs->selection_entry), "frame", w);
+		g_signal_connect (fs->selection_entry, "changed",
+				  G_CALLBACK (setup_preview), fs->selection_entry);
+	}
 }
 
 static void

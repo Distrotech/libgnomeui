@@ -43,6 +43,7 @@
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkfilesel.h>
+#include <gtk/gtkfilechooser.h>
 #include <gtk/gtkframe.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkmain.h>
@@ -213,7 +214,6 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 						   "or query any of its properties."),
 						 GTK_TYPE_DIALOG,
 						 G_PARAM_READABLE));
-
 }
 
 /* set_property handler for the icon entry */
@@ -412,14 +412,14 @@ setup_preview(GtkWidget *widget)
         GdkPixbuf *pixbuf, *scaled;
 	int w,h;
 	GtkWidget *frame;
-	GtkFileSelection *fs;
+	GtkFileChooser *fc;
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	frame = g_object_get_data(G_OBJECT(widget),"frame");
-	fs = g_object_get_data(G_OBJECT(frame),"fs");
-
+	fc = GTK_FILE_CHOOSER (widget);
+	frame = gtk_file_chooser_get_preview_widget (fc);
+	
 	if((l = gtk_container_get_children(GTK_CONTAINER(frame))) != NULL) {
 		pp = l->data;
 		g_list_free(l);
@@ -428,7 +428,7 @@ setup_preview(GtkWidget *widget)
 	if(pp)
 		gtk_widget_destroy(pp);
 
-	p = gtk_file_selection_get_filename(fs);
+	p = gtk_file_chooser_get_filename(fc);
 	if(!p || !g_file_test (p,G_FILE_TEST_IS_SYMLINK | G_FILE_TEST_IS_REGULAR) ||
 	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL)))
 		return;
@@ -511,9 +511,9 @@ static void
 browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 {
 	GtkWidget *w;
-	GtkWidget *hbox;
-	GtkFileSelection *fs;
+	GtkFileChooser *fc;
 	GClosure *closure;
+	gchar *path;
 
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
@@ -522,33 +522,27 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 
 	if(!fentry->fsw)
 		return;
-	fs = GTK_FILE_SELECTION(fentry->fsw);
+	
+	fc = GTK_FILE_CHOOSER (fentry->fsw);
 
-	hbox = fs->file_list;
-	g_return_if_fail (g_object_get_data(G_OBJECT(hbox),"frame") == NULL);
+	g_return_if_fail (gtk_file_chooser_get_preview_widget (fc) == NULL);
 
-	do {
-		hbox = hbox->parent;
-		if(!hbox) {
-			g_warning(_("Can't find an hbox, using a normal file "
-				    "selection"));
-			return;
-		}
-	} while(!GTK_IS_HBOX(hbox));
+	w = gtk_frame_new("");
+	gtk_frame_set_shadow_type (GTK_FRAME (w), GTK_SHADOW_NONE);
 
-	w = gtk_frame_new(_("Preview"));
-	gtk_widget_show(w);
-	gtk_box_pack_end(GTK_BOX(hbox),w,FALSE,FALSE,0);
-	gtk_widget_set_size_request (w,110,110);
-	g_object_set_data(G_OBJECT(w),"fs",fs);
-
-	g_object_set_data(G_OBJECT(fs->file_list),"frame",w);
-	g_object_set_data(G_OBJECT(fs->selection_entry),"frame",w);
+	gtk_file_chooser_set_preview_widget (fc, w);
+	gtk_widget_set_size_request (w, 110, 110);
 
 	closure = g_cclosure_new (G_CALLBACK (setup_preview), NULL, NULL);
-	g_object_watch_closure (G_OBJECT (fs), closure);
-	g_signal_connect_closure (fs->selection_entry, "changed",
+	g_object_watch_closure (G_OBJECT (fc), closure);
+	g_signal_connect_closure (fc, "update-preview",
 				  closure, FALSE);
+
+	/* the path can be already set */
+	if ((path = gtk_file_chooser_get_filename (fc)) != NULL)
+		setup_preview (fc);
+
+	g_free (path);
 }
 
 static void
@@ -969,6 +963,7 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 	GtkWidget *w;
 	gchar *p;
 	GClosure *closure;
+	GValue value = {0, };
 
 	ientry->_priv = g_new0(GnomeIconEntryPrivate, 1);
 
@@ -1018,6 +1013,12 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 	g_signal_connect_after (ientry->_priv->fentry, "browse_clicked",
 				G_CALLBACK (browse_clicked),
 				ientry);
+
+	g_value_init (&value, G_TYPE_BOOLEAN);
+	g_value_set_boolean (&value, TRUE);
+
+	g_object_set_property (G_OBJECT (ientry->_priv->fentry),
+			       "use_filechooser", &value);
 
 	gtk_widget_show (ientry->_priv->fentry);
 
