@@ -1,5 +1,8 @@
 2003-11-03  Federico Mena Quintero  <federico@ximian.com>
 
+	* TODO: Removed the point about sensitizing the toolbar items -
+	done.
+
 	* autogen.sh: Oops, check for a file that still exists.
 
 2003-11-02  Federico Mena Quintero  <federico@ximian.com>
