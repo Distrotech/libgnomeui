@@ -145,6 +145,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-item.c		\
 	gnome-icon-sel.c		\
 	gnome-icon-text.c		\
+	gnome-vfs-util.c		\
 	gnome-textfu.c			\
 	wap-textfu.c			\
 	$(gnorba_built)
@@ -226,6 +227,7 @@ gnome_headers = \
 	gtk-clock.h			\
 	gtkpixmapmenuitem.h		\
 	libgnomeui.h			\
+	gnome-vfs-util.h		\
 	gnome-textfu.h			\
 	wap-textfu.h			\
 	oafgnome.h

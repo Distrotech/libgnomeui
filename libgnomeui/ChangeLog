@@ -1,3 +1,13 @@
+2000-09-06  Martin Baulig  <baulig@suse.de>
+
+	* gnome-vfs-util.[ch]: New files.
+	These three functions are shamelessy stolen from Nautilus; they
+	use gnome-vfs to load the pixbuf so the URI doesn't need to be
+	a local file.
+	(gnome_gdk_pixbuf_new_from_uri): New function.
+	(gnome_gdk_pixbuf_new_from_uri_async): New function.
+	(gnome_gdk_pixbuf_new_from_uri_cancel): New function.
+
 2000-09-05  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am (gnome_headers): Removed duplicate gnome-textfu.h.

@@ -117,6 +117,7 @@
 #include "libgnomeui/gnome-druid-page-standard.h"
 #include "libgnomeui/oafgnome.h"
 #include "libgnomeui/gnome-textfu.h"
+#include "libgnomeui/gnome-vfs-util.h"
 
 #define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT,GNOME_GCONF_INIT
 
