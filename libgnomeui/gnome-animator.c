@@ -1319,7 +1319,6 @@ gnome_animator_get_current_frame_number (GnomeAnimator *animator)
  * Returns: Status constant.
  **/
 
-guint
 GnomeAnimatorStatus
 gnome_animator_get_status (GnomeAnimator *animator)
 {
