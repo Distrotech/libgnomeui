@@ -1254,6 +1254,13 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 			best = dist;
 	}
 
+	/* sometimes the GnomeCanvasItem::update signal will not have
+           been processed between deleting the arrow points and a call
+           to this routine -- this can cause a segfault here */
+	if ((line->first_arrow && !line->first_coords) ||
+	    (line->last_arrow && !line->last_coords))
+		reconfigure_arrows(line);
+
 	/* If there are arrowheads, check the distance to them */
 
 	if (line->first_arrow) {
