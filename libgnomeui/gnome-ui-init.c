@@ -548,6 +548,8 @@ libgnomeui_segv_setup (GnomeProgram *program, gboolean post_arg_parse)
         }
 
         sigaction(SIGSEGV, setptr, NULL);
+        sigaction(SIGABRT, setptr, NULL);
+        sigaction(SIGTRAP, setptr, NULL);
         sigaction(SIGFPE, setptr, NULL);
         sigaction(SIGBUS, setptr, NULL);
 }

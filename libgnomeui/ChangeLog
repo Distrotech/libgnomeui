@@ -1,3 +1,8 @@
+2002-03-05  jacob berkman  <jacob@ximian.com>
+
+	* gnome-ui-init.c (libgnomeui_segv_setup): listen to SIGABRT and
+	SIGTRAP also
+
 2002-03-07  James Henstridge  <james@daa.com.au>
 
 	* Makefile.am ($(libgnomeui_2_la_OBJECTS)): change target from
