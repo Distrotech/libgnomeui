@@ -1,3 +1,8 @@
+1998-03-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkcalendar.c: Added Shawn's and Cesar's calendar widget to the
+	gnome-libs. 
+
 1998-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_list_moveto): Finished
