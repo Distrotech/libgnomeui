@@ -265,7 +265,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 
 	child = GTK_BIN(ientry->_priv->pickbutton)->child;
 	
-	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	if(!t || !g_file_test (t, G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(pixbuf = gdk_pixbuf_new_from_file (t))) {
 		if(GNOME_IS_PIXMAP(child)) {
 			gtk_drag_source_unset (ientry->_priv->pickbutton);
@@ -869,7 +869,8 @@ gnome_icon_entry_new (const gchar *history_id, const gchar *browse_dialog_title)
  *
  * Description: Sets the subdirectory below gnome's default
  * pixmap directory to use as the default path for the file
- * entry.
+ * entry.  The path can also be an absolute one.  If %NULL is passed
+ * then the pixmap directory itself is used.
  *
  * Returns:
  **/
@@ -877,16 +878,19 @@ void
 gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
 				   const gchar *subdir)
 {
-	gchar *p;
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 	
 	if(!subdir)
 		subdir = ".";
 
-	p = gnome_pixmap_file(subdir);
-	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),p);
-	g_free(p);
+	if(g_path_is_absolute(subdir)) {
+		gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->_priv->fentry), subdir);
+	} else {
+		gchar *p = gnome_pixmap_file(subdir);
+		gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->_priv->fentry), p);
+		g_free(p);
+	}
 }
 
 /**
