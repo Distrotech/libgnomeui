@@ -200,8 +200,7 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 		gis = gtk_object_get_user_data(GTK_OBJECT(ientry));
 		gnome_icon_selection_clear (gis, TRUE);
 		gnome_icon_selection_add_directory (gis, filename);
-		if (gis->file_list)
-			gnome_icon_selection_show_icons(gis);
+		gnome_icon_selection_show_icons(gis);
 	} else {
 		/* We pretend like ok has been called */
 		entry_changed (NULL, ientry);
@@ -441,6 +440,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 	   ientry->pick_dialog_dir==NULL ||
 	   strcmp(p,ientry->pick_dialog_dir)!=0) {
 		GtkWidget * iconsel;
+		GtkWidget * gil;
 		
 		if(ientry->pick_dialog) {
 			gtk_container_remove (GTK_CONTAINER (ientry->fentry->parent), ientry->fentry);
@@ -494,7 +494,9 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 					    1, /* Cancel button */
 					    GTK_SIGNAL_FUNC(cancel_pressed),
 					    ientry);
-		gtk_signal_connect_after(GTK_OBJECT(GNOME_ICON_SELECTION(iconsel)->gil), "select_icon",
+		
+		gil = gnome_icon_selection_get_gil(GNOME_ICON_SELECTION(iconsel));
+		gtk_signal_connect_after(GTK_OBJECT(gil), "select_icon",
 					 GTK_SIGNAL_FUNC(gil_icon_selected_cb),
 					 ientry);
 	} else {

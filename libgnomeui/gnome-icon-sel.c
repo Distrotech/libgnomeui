@@ -513,3 +513,40 @@ void  gnome_icon_selection_select_icon    (GnomeIconSelection * gis,
     ++pos;
   }
 }
+
+/**
+ * gnome_icon_selection_get_gil:
+ * @gis: GnomeIconSelection to work with
+ *
+ * Description: Gets the #GnomeIconList widget that is
+ * used for the display of icons
+ *
+ * Returns: a #GtkWidget pointer to the interal widget
+ **/
+GtkWidget *
+gnome_icon_selection_get_gil(GnomeIconSelection * gis)
+{
+	g_return_val_if_fail(gis != NULL, NULL);
+	g_return_val_if_fail(GNOME_IS_ICON_SELECTION(gis), NULL);
+
+	return gis->gil;
+}
+
+/**
+ * gnome_icon_selection_get_box:
+ * @gis: GnomeIconSelection to work with
+ *
+ * Description: Gets the #GtkVBox widget that is
+ * used to pack the different elements of the selection
+ * into.
+ *
+ * Returns: a #GtkWidget pointer to the interal widget
+ **/
+GtkWidget *
+gnome_icon_selection_get_box(GnomeIconSelection * gis)
+{
+	g_return_val_if_fail(gis != NULL, NULL);
+	g_return_val_if_fail(GNOME_IS_ICON_SELECTION(gis), NULL);
+
+	return gis->box;
+}

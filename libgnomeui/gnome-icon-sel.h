@@ -35,13 +35,14 @@ typedef struct _GnomeIconSelectionClass GnomeIconSelectionClass;
 struct _GnomeIconSelection {
   GtkVBox vbox;
 
+  /*< private >*/
   GtkWidget * box;
 
   GtkWidget * gil;
 
   GList * file_list;
   
-  int stop_loading; /* a flag set to stop the loading of images in midprocess */
+  gboolean stop_loading; /* a flag set to stop the loading of images in midprocess */
 };
 
 struct _GnomeIconSelectionClass {
@@ -78,6 +79,11 @@ void  gnome_icon_selection_select_icon    (GnomeIconSelection * gis,
 
 /* Stop the loading of images when we are in the loop in show_icons */
 void  gnome_icon_selection_stop_loading   (GnomeIconSelection * gis);
+
+/* accessors for the internal widgets, icon_list is the actual 
+   icon list, and box is the vertical box*/
+GtkWidget *gnome_icon_selection_get_gil   (GnomeIconSelection * gis);
+GtkWidget *gnome_icon_selection_get_box   (GnomeIconSelection * gis);
 
 END_GNOME_DECLS
    
