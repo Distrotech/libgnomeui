@@ -1,3 +1,15 @@
+2001-02-11  Ettore Perazzoli  <ettore@ximian.com>
+
+	* gnome-dock.c (gnome_dock_size_allocate): Don't set `client_rect'
+	anymore.
+	(drag_begin): Set `client_rect' here instead.
+	(drag_motion): Added some debugging messages.
+	(drag_snap): Added some debugging messages.
+
+	* gnome-dock-band.c [GNOME_DOCK_BAND_DEBUG] (DEBUG): Use
+	`g_print()' instead of `printf()' and `putchar()'.
+	* gnome-dock.c (DEBUG): Likewise.
+
 2001-02-11  Rusty Conover  <rconover@zootweb.com>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_rect_update): Added

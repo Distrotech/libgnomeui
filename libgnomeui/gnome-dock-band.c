@@ -1,6 +1,6 @@
 /* gnome-dock-band.c
 
-   Copyright (C) 1998 Free Software Foundation
+   Copyright (C) 1998, 1999, 2000, 2001 Free Software Foundation
 
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -17,7 +17,7 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
 
-   Author: Ettore Perazzoli <ettore@comm2000.it>
+   Author: Ettore Perazzoli <ettore@ximian.com>
 */
 
 #include <gtk/gtk.h>
@@ -35,9 +35,9 @@
 #define DEBUG(x)                                        \
   do                                                    \
     {                                                   \
-      printf ("%s.%d: ", __FUNCTION__, __LINE__);       \
-      printf x;                                         \
-      putchar ('\n');                                   \
+      g_print ("%s.%d: ", __FUNCTION__, __LINE__);      \
+      g_print x;                                        \
+      g_print ("\n");                                   \
     }                                                   \
   while (0)
 #else

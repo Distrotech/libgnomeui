@@ -1,6 +1,6 @@
 /* gnome-dock.c
 
-   Copyright (C) 1998 Free Software Foundation
+   Copyright (C) 1998, 1999, 2000, 2001 Free Software Foundation
 
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -17,7 +17,7 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
 
-   Author: Ettore Perazzoli <ettore@comm2000.it>
+   Author: Ettore Perazzoli <ettore@ximian.com>
 */
 
 #include <gtk/gtk.h>
@@ -36,9 +36,9 @@
 #define DEBUG(x)                                        \
   do                                                    \
     {                                                   \
-      printf ("%s.%d: ", __FUNCTION__, __LINE__);       \
-      printf x;                                         \
-      putchar ('\n');                                   \
+      g_print ("%s.%d: ", __FUNCTION__, __LINE__);      \
+      g_print x;                                        \
+      g_print ("\n");                                   \
     }                                                   \
   while (0)
 #else
@@ -394,8 +394,6 @@ gnome_dock_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
   child_allocation.x = left_bands_x;
   child_allocation.y = top_bands_y;
-
-  dock->client_rect = child_allocation;
 
   if (dock->client_area != NULL && GTK_WIDGET_VISIBLE (dock->client_area))
     gtk_widget_size_allocate (dock->client_area, &child_allocation);
@@ -1016,6 +1014,11 @@ drag_snap (GnomeDock *dock,
 
   DEBUG (("(%d,%d)", x, y));
   DEBUG (("relative (%d,%d)", rel_x, rel_y));
+  DEBUG (("Client rect (%d,%d) (%dx%d)",
+	  dock->client_rect.x, dock->client_rect.y,
+	  dock->client_rect.width, dock->client_rect.height));
+
+  DEBUG (("Check prepending to top/bottom bands..."));
 
   if (item_allows_horizontal
       && rel_x >= 0 && rel_x < GTK_WIDGET (dock)->allocation.width)
@@ -1048,6 +1051,8 @@ drag_snap (GnomeDock *dock,
         return;
     }
 
+  DEBUG (("Check dragging into bands..."));
+
   /* Check dragging into bands.  */
   if (item_allows_horizontal
       && drag_check (dock, item, &dock->top_bands, rel_x, rel_y, FALSE))
@@ -1061,6 +1066,8 @@ drag_snap (GnomeDock *dock,
   else if (item_allows_vertical
            && drag_check (dock, item, &dock->right_bands, rel_x, rel_y, TRUE))
     return;
+
+  DEBUG (("Resort to floating..."));
 
   /* We are not in any "interesting" area: the item must be floating
      if allowed to.  */
@@ -1095,6 +1102,8 @@ drag_begin (GtkWidget *widget, gpointer data)
   g_list_foreach (dock->bottom_bands, (GFunc) gnome_dock_band_drag_begin, item);
   g_list_foreach (dock->right_bands, (GFunc) gnome_dock_band_drag_begin, item);
   g_list_foreach (dock->left_bands, (GFunc) gnome_dock_band_drag_begin, item);
+
+  dock->client_rect = dock->client_area->allocation;
 }
 
 
@@ -1163,7 +1172,13 @@ drag_motion (GtkWidget *widget,
              gint x, gint y,
              gpointer data)
 {
+#ifdef GNOME_DOCK_DEBUG
+  static int i = 0;
+#endif
+
+  DEBUG (("--- DRAG MOTION START %d", ++i));
   drag_snap (GNOME_DOCK (data), widget, x, y);
+  DEBUG (("--- DRAG MOTION END %d\n", ++i));
 }
 
 
