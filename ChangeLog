@@ -1,3 +1,7 @@
+2001-09-24  Havoc Pennington  <hp@redhat.com>
+
+	* autogen.sh (srcdir): remove CERTIFIED_GNOMIE
+
 2001-09-22  Abel Cheung <maddog@linux.org.hk>
 
 	* configure.in: Added "zh_TW" to ALL_LINGUAS.
