@@ -1,3 +1,8 @@
+2004-01-18  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-icon-theme.h: Merge fix for bug #119788.
+	* libgnomeui/gnome-theme-parser.h:
+
 2004-01-16  Federico Mena Quintero  <federico@ximian.com>
 
 	Fix #124789:

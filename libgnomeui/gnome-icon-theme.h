@@ -25,6 +25,8 @@
 #include <glib-object.h>
 #include <gtk/gtkicontheme.h>
 
+G_BEGIN_DECLS
+
 #define GNOME_TYPE_ICON_THEME             (gnome_icon_theme_get_type ())
 #define GNOME_ICON_THEME(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_ICON_THEME, GnomeIconTheme))
 #define GNOME_ICON_THEME_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ICON_THEME, GnomeIconThemeClass))
@@ -93,6 +95,8 @@ GnomeIconData * gnome_icon_data_dup                    (const GnomeIconData  *ic
 void            gnome_icon_data_free                   (GnomeIconData        *icon_data);
 
 GtkIconTheme   *_gnome_icon_theme_get_gtk_icon_theme    (GnomeIconTheme       *icon_theme);
+
+G_END_DECLS
 
 #endif /* GNOME_DISABLE_DEPRECATED */
 
