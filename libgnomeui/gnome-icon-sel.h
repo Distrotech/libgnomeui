@@ -26,10 +26,9 @@
 #ifndef GNOME_ICON_SEL_H
 #define GNOME_ICON_SEL_H
 
-#include "libgnome/gnome-defs.h"
 #include <gtk/gtk.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 typedef struct _GnomeIconSelection        GnomeIconSelection;
 typedef struct _GnomeIconSelectionPrivate GnomeIconSelectionPrivate;
@@ -89,10 +88,6 @@ void  gnome_icon_selection_stop_loading   (GnomeIconSelection * gis);
 GtkWidget *gnome_icon_selection_get_gil   (GnomeIconSelection * gis);
 GtkWidget *gnome_icon_selection_get_box   (GnomeIconSelection * gis);
 
-END_GNOME_DECLS
+G_END_DECLS
    
 #endif /* GNOME_ICON_SEL_H */
-
-
-
-

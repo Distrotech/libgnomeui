@@ -1,3 +1,9 @@
+Fri Aug 31 03:16:44 2001  George Lebl <jirka@5z.com>
+
+	* gnome-icon-entry.h, gnome-icon-sel.h, gnome-pixmap-entry.h:  Remove
+	  the include of gnome-defs.h.  Damn includes mess.  I wasn't seeing
+	  this issue.
+
 2001-08-31  Anders Carlsson  <andersca@gnu.org>
 
 	* Makefile.am: Remove gnome-component-widget.[ch]

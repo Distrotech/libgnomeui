@@ -37,7 +37,6 @@
 
 
 #include <gtk/gtkvbox.h>
-#include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-file-entry.h>
 
 
