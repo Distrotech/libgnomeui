@@ -35,9 +35,8 @@
 #define ICON_NAME_REGULAR               "file-regular"
 #define ICON_NAME_SEARCH_RESULTS        "file-search"
 #define ICON_NAME_SOCKET                "file-sock"
-#define ICON_NAME_THUMBNAIL_LOADING     "loading"
-#define ICON_NAME_TRASH_EMPTY           "trash-empty"
-#define ICON_NAME_TRASH_NOT_EMPTY       "trash-full"
+
+#define ICON_NAME_MIME_PREFIX           "mime-"
 
 #define SELF_THUMBNAIL_SIZE_THRESHOLD   16384
 
@@ -49,8 +48,6 @@ get_icon_name (const char          *file_uri,
 	       const char          *mime_type,
 	       GnomeIconLookupFlags flags)
 {
-  /* FIXME: Special case trash here */
-
   if (file_info &&
       (file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE))
     {
@@ -131,7 +128,7 @@ make_mime_name (const char *mime_type)
   while ((p = strchr(mime_type_without_slashes, '/')) != NULL)
     *p = '-';
   
-  icon_name = g_strconcat ("mime-", mime_type_without_slashes, NULL);
+  icon_name = g_strconcat (ICON_NAME_MIME_PREFIX, mime_type_without_slashes, NULL);
   g_free (mime_type_without_slashes);
   
   return icon_name;
