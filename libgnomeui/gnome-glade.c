@@ -29,7 +29,6 @@
 #include <string.h>
 #include <glade/glade.h>
 #include <glade/glade-build.h>
-#include <tree.h>
 
 #include <gnome.h>
 
@@ -56,7 +55,7 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 	vboxname = g_strconcat (longname, ".", info->name, NULL);
 
 	/* all dialog children are inside the main vbox */
-	for (tmp = ((GladeWidget *)info->children->data)->children;
+	for (tmp = ((GladeWidgetInfo *)info->children->data)->children;
 	     tmp; tmp = tmp->next) {
 		GladeWidgetInfo *cinfo = tmp->data;
 		GtkWidget *child;
@@ -112,7 +111,7 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		}
 
 		child = glade_xml_build_widget(xml, cinfo, vboxname);
-		for (tmp2 = cinfo->child_attributes; tmp2; tmpt = tmp2->next) {
+		for (tmp2 = cinfo->child_attributes; tmp2; tmp2 = tmp2->next) {
 			GladeAttribute *attr = tmp2->data;
 
 			switch(attr->name[0]) {
@@ -271,7 +270,7 @@ menuitem_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 {
         GtkWidget *menu;
         if (!info->children) return;
-        menu = glade_xml_build_widget(xml, info->children, longname);
+        menu = glade_xml_build_widget(xml, info->children->data, longname);
         gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
 	/* weird things happen if menu is initially visible */
         gtk_widget_hide(menu);
@@ -319,7 +318,7 @@ toolbar_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 					if (icon) g_free(icon);
 					stock = NULL;
 					icon = glade_xml_relative_file(xml,
-								content);
+								attr->value);
 				} else if (!strcmp(attr->name,"stock_pixmap")){
 					if (icon) g_free(icon);
 					icon = NULL;
@@ -368,14 +367,14 @@ menushell_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		GladeWidgetInfo *cinfo = tmp->data;
 		GList *tmp2;
 		GtkWidget *child;
-		gchar *stock_item = NULL;
+		gchar *stock_name = NULL;
 
 		childnum++;
 		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
 			GladeAttribute *attr = tmp2->data;
 
 			if (!strcmp(attr->name, "stock_item")) {
-				stock_item = attr->value;
+				stock_name = attr->value;
 				break;
 			}
 		}
@@ -402,7 +401,7 @@ menushell_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 
 			if (!strcmp(attr->name, "label"))
 				infos[0].label = _(attr->value);
-			else if (!strcmp(xmlnode->name, "tooltip"))
+			else if (!strcmp(attr->name, "tooltip"))
 				infos[0].hint = _(attr->value);
 		}
 		gnome_app_fill_menu(GTK_MENU_SHELL(w), infos,
@@ -737,35 +736,31 @@ get_stock_uiinfo (const char *stock_name, GnomeUIInfo *info)
 	}
 	return FALSE;
 }
+
 static GtkWidget *
-stock_button_new(GladeXML *xml, GNode *node)
+stock_button_new(GladeXML *xml, GladeWidgetInfo *info)
 {
         GtkWidget *button;
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
         char *string = NULL;
         char *stock = NULL;
   
         /*
-         * This should really be a container, but GLADE is wierd in this respect
-.
+         * This should really be a container, but GLADE is weird in this
+	 * respect.
          * If the label property is set for this widget, insert a label.
          * Otherwise, allow a widget to be packed
          */
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
-                if (!strcmp(info->name, "label")) {
-                        if (string) g_free(string);
-                        if (stock) g_free (stock);
-                        string = g_strdup(content);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+
+                if (!strcmp(attr->name, "label")) {
+                        string = attr->value;
                         stock = NULL;
-                } else if (!strcmp(info->name, "stock_button")) {
-                        if (string) g_free(string);
-                        if (stock) g_free(stock);
-                        stock = g_strdup(content);
+                } else if (!strcmp(attr->name, "stock_button")) {
+                        stock = attr->value;
                         string = NULL;
                 }
-                if (content)
-                        free(content);
         }
         if (string != NULL) {
                 button = gtk_button_new_with_label(_(string));
@@ -778,68 +773,60 @@ stock_button_new(GladeXML *xml, GNode *node)
         } else
                 button = gtk_button_new();
 
-        if (stock)
-                g_free (stock);
-        if (string)
-                g_free (string);
         return button;
 }
 
 static GtkWidget *
-color_picker_new(GladeXML *xml, GNode *node)
+color_picker_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid = gnome_color_picker_new();
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 		
-		if (!strcmp(info->name, "dither"))
+		if (!strcmp(attr->name, "dither"))
 			gnome_color_picker_set_dither(GNOME_COLOR_PICKER(wid),
-						      content[0] == 'T');
-		else if (!strcmp(info->name, "use_alpha"))
+						      attr->value[0] == 'T');
+		else if (!strcmp(attr->name, "use_alpha"))
 			gnome_color_picker_set_use_alpha(
-				GNOME_COLOR_PICKER(wid), content[0] == 'T');
-		else if (!strcmp(info->name, "title"))
+				GNOME_COLOR_PICKER(wid), attr->value[0]=='T');
+		else if (!strcmp(attr->name, "title"))
 			gnome_color_picker_set_title(GNOME_COLOR_PICKER(wid),
-						     _(content));
-		if (content)
-			free(content);
+						     _(attr->value));
 	}
 	return wid;
 }
 
 static GtkWidget *
-font_picker_new(GladeXML *xml, GNode *node)
+font_picker_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid = gnome_font_picker_new();
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gboolean use_font = FALSE;
 	gint use_font_size = 14;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 		
-		if (!strcmp(info->name, "title"))
+		if (!strcmp(attr->name, "title"))
 			gnome_font_picker_set_title(GNOME_FONT_PICKER(wid),
-						    _(content));
-		else if (!strcmp(info->name, "preview_text"))
+						    _(attr->value));
+		else if (!strcmp(attr->name, "preview_text"))
 			gnome_font_picker_set_preview_text(
-				GNOME_FONT_PICKER(wid), content);
-		else if (!strcmp(info->name, "mode"))
+				GNOME_FONT_PICKER(wid), attr->value);
+		else if (!strcmp(attr->name, "mode"))
 			gnome_font_picker_set_mode(GNOME_FONT_PICKER(wid),
 				glade_enum_from_string(
 					GTK_TYPE_GNOME_FONT_PICKER_MODE,
-					content));
-		else if (!strcmp(info->name, "show_size"))
+					attr->value));
+		else if (!strcmp(attr->name, "show_size"))
 			gnome_font_picker_fi_set_show_size(
-				GNOME_FONT_PICKER(wid), content[0] == 'T');
-		else if (!strcmp(info->name, "use_font"))
-			use_font = (content[0] == 'T');
-		else if (!strcmp(info->name, "use_font_size"))
-			use_font_size = strtol(content, NULL, 0);
-		if (content)
-			free(content);
+				GNOME_FONT_PICKER(wid), attr->value[0] == 'T');
+		else if (!strcmp(attr->name, "use_font"))
+			use_font = (attr->value[0] == 'T');
+		else if (!strcmp(attr->name, "use_font_size"))
+			use_font_size = strtol(attr->value, NULL, 0);
 	}
 	gnome_font_picker_fi_set_use_font_in_label(GNOME_FONT_PICKER(wid),
 						   use_font,
@@ -849,124 +836,104 @@ font_picker_new(GladeXML *xml, GNode *node)
 
 /* -- does not look like this widget is fully coded yet
 static GtkWidget *
-icon_entry_new(GladeXML *xml, GNode *node) {
+icon_entry_new(GladeXML *xml, GladeWidgetInfo *info)
+{
 	GtkWidget *wid = gnome_color_picker_new();
 
 }
 */
 
 static GtkWidget *
-href_new(GladeXML *xml, GNode *node)
+href_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gchar *url = NULL, *label = NULL;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 		
-		if (!strcmp(info->name, "url")) {
-			if (url) g_free(url);
-			url = g_strdup(content);
-		} else if (!strcmp(info->name, "label")) {
-			if (label) g_free(label);
-			label = g_strdup(content);
-		}
-		if (content)
-			free(content);
+		if (!strcmp(attr->name, "url"))
+			url = attr->value;
+		else if (!strcmp(attr->name, "label"))
+			label = attr->value;
 	}
 	wid = gnome_href_new(url, _(label));
-	if (url) g_free(url);
-	if (label) g_free(label);
 	return wid;
 }
 
 static GtkWidget *
-entry_new(GladeXML *xml, GNode *node)
+entry_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
-	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gchar *history_id = NULL;
 	gint max_saved = 10;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 		
-		if (!strcmp(info->name, "history_id")) {
-			if (history_id) g_free(history_id);
-			history_id = g_strdup(content);
-		} else if (!strcmp(info->name, "max_saved"))
-			max_saved = strtol(content, NULL, 0);
-		if (content)
-			free(content);
+		if (!strcmp(attr->name, "history_id"))
+			history_id = attr->value;
+		else if (!strcmp(attr->name, "max_saved"))
+			max_saved = strtol(attr->value, NULL, 0);
 	}
 	wid = gnome_entry_new(history_id);
-	if (history_id) g_free(history_id);
 	gnome_entry_set_max_saved(GNOME_ENTRY(wid), max_saved);
 	return wid;
 }
 
 static GtkWidget *
-file_entry_new(GladeXML *xml, GNode *node)
+file_entry_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
-	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gchar *history_id = NULL, *title = NULL;
 	gboolean directory = FALSE, modal = FALSE;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 		
-		if (!strcmp(info->name, "history_id")) {
-			if (history_id) g_free(history_id);
-			history_id = g_strdup(content);
-		} else if (!strcmp(info->name, "title")) {
-			if (title) g_free(title);
-			title = g_strdup(content);
-		} else if (!strcmp(info->name, "directory"))
-			directory = (content[0] == 'T');
-		else if (!strcmp(info->name, "modal"))
-			modal = (content[0] == 'T');
-		if (content)
-			free(content);
+		if (!strcmp(attr->name, "history_id"))
+			history_id = attr->value;
+		else if (!strcmp(attr->name, "title"))
+			title = attr->value;
+		else if (!strcmp(attr->name, "directory"))
+			directory = (attr->value[0] == 'T');
+		else if (!strcmp(attr->name, "modal"))
+			modal = (attr->value[0] == 'T');
 	}
 	wid = gnome_file_entry_new(history_id, _(title));
-	if (history_id) g_free(history_id);
-	if (title) g_free(title);
 	gnome_file_entry_set_directory(GNOME_FILE_ENTRY(wid), directory);
 	gnome_file_entry_set_modal(GNOME_FILE_ENTRY(wid), modal);
 	return wid;
 }
 
 static GtkWidget *
-clock_new(GladeXML *xml, GNode *node)
+clock_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
-	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	GtkClockType ctype = GTK_CLOCK_REALTIME;
 	gchar *format = NULL;
 	time_t seconds = 0;
 	gint interval = 60;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 		
-		if (!strcmp(info->name, "type"))
+		if (!strcmp(attr->name, "type"))
 			ctype = glade_enum_from_string(GTK_TYPE_CLOCK_TYPE,
-						       content);
-		else if (!strcmp(info->name, "format")) {
-			if (format) g_free(format);
-			format = g_strdup(content);
-		} else if (!strcmp(info->name, "seconds"))
-			seconds = strtol(content, NULL, 0);
-		else if (!strcmp(info->name, "interval"))
-			interval = strtol(content, NULL, 0);
-		if (content)
-			free(content);
+						       attr->value);
+		else if (!strcmp(attr->name, "format"))
+			format = attr->value;
+		else if (!strcmp(attr->name, "seconds"))
+			seconds = strtol(attr->value, NULL, 0);
+		else if (!strcmp(attr->name, "interval"))
+			interval = strtol(attr->value, NULL, 0);
 	}
 	wid = gtk_clock_new(ctype);
 	gtk_clock_set_format(GTK_CLOCK(wid), _(format));
-	if (format) g_free(format);
 	gtk_clock_set_seconds(GTK_CLOCK(wid), seconds);
 	gtk_clock_set_update_interval(GTK_CLOCK(wid), interval);
 	return wid;
@@ -975,77 +942,73 @@ clock_new(GladeXML *xml, GNode *node)
 /* -- GnomeAnimator not finished */
 
 static GtkWidget *
-less_new(GladeXML *xml, GNode *node)
+less_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid = gnome_less_new();
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 		
-		if (!strcmp(info->name, "font"))
+		if (!strcmp(attr->name, "font"))
 			gnome_less_set_font(GNOME_LESS(wid),
-					    gdk_font_load(content));
-		if (content)
-			free(content);
+					    gdk_font_load(attr->value));
 	}
 	return wid;
 }
 
 static GtkWidget *
-calculator_new(GladeXML *xml, GNode *node)
+calculator_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	return gnome_calculator_new();
 }
 
 static GtkWidget *
-paper_selector_new(GladeXML *xml, GNode *node)
+paper_selector_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	return gnome_paper_selector_new();
 }
 
 static GtkWidget *
-spell_new(GladeXML *xml, GNode *node)
+spell_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	return gnome_spell_new();
 }
 
 static GtkWidget *
-dial_new(GladeXML *xml, GNode *node)
+dial_new(GladeXML *xml, GladeWidgetInfo *info)
 {
-	GtkWidget *wid = gtk_dial_new(glade_get_adjustment(node));
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GtkWidget *wid = gtk_dial_new(glade_get_adjustment(info));
+	GList *tmp;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		if (!strcmp(info->name, "view_only"))
-			gtk_dial_set_view_only(GTK_DIAL(wid), content[0]=='T');
-		else if (!strcmp(info->name, "update_policy"))
+		if (!strcmp(attr->name, "view_only"))
+			gtk_dial_set_view_only(GTK_DIAL(wid),
+					       attr->value[0] == 'T');
+		else if (!strcmp(attr->name, "update_policy"))
 			gtk_dial_set_update_policy(GTK_DIAL(wid),
 				glade_enum_from_string(GTK_TYPE_UPDATE_TYPE,
-						       content));
-		if (content)
-			free(content);
+						       attr->value));
 	}
 	return wid;
 }
 
 static GtkWidget *
-appbar_new(GladeXML *xml, GNode *node)
+appbar_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
-	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gboolean has_progress = TRUE, has_status = TRUE;
 
-	for (; info; info = info->next) {
-		char *content = xmlNodeGetContent(info);
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		if (!strcmp(info->name, "has_progress"))
-			has_progress = content[0] == 'T';
-		else if (!strcmp(info->name, "has_status"))
-			has_status = content[0] == 'T';
-		if (content) free(content);
+		if (!strcmp(attr->name, "has_progress"))
+			has_progress = attr->value[0] == 'T';
+		else if (!strcmp(attr->name, "has_status"))
+			has_status = attr->value[0] == 'T';
 	}
 	wid = gnome_appbar_new(has_progress, has_status,
 			       GNOME_PREFERENCES_USER);
@@ -1053,67 +1016,65 @@ appbar_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
-dock_new(GladeXML *xml, GNode *node)
+dock_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid = gnome_dock_new();
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 
-	for (; info; info = info->next) {
-		char *content = xmlNodeGetContent(info);
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		if (!strcmp(info->name, "allow_floating"))
+		if (!strcmp(attr->name, "allow_floating"))
 			gnome_dock_allow_floating_items(GNOME_DOCK(wid),
-							content[0] == 'T');
-		if (content) free(content);
+							attr->value[0] == 'T');
 	}
 
 	return wid;
 }
 
 static GtkWidget *
-dockitem_new(GladeXML *xml, GNode *node)
+dockitem_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	char *name = NULL;
 	GnomeDockItemBehavior behaviour = GNOME_DOCK_ITEM_BEH_NORMAL;
 	GtkShadowType shadow_type = GTK_SHADOW_OUT;
 	
-	for (; info; info = info->next) {
-		char *content = xmlNodeGetContent(info);
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		switch (info->name[0]) {
+		switch (attr->name[0]) {
 		case 'e':
-			if (!strcmp(info->name, "exclusive"))
-				if (content[0] == 'T')
+			if (!strcmp(attr->name, "exclusive"))
+				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
 			break;
 		case 'l':
-			if (!strcmp(info->name, "locked"))
-				if (content[0] == 'T')
+			if (!strcmp(attr->name, "locked"))
+				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_LOCKED;
 			break;
 		case 'n':
-			if (!strcmp(info->name, "name")) {
-				if (name) g_free(name);
-				name = g_strdup(content);
-			} else if (!strcmp(info->name, "never_floating"))
-				if (content[0] == 'T')
+			if (!strcmp(attr->name, "name"))
+				name = attr->value;
+			else if (!strcmp(attr->name, "never_floating"))
+				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_FLOATING;
-			else if (!strcmp(info->name, "never_vertical"))
-				if (content[0] == 'T')
+			else if (!strcmp(attr->name, "never_vertical"))
+				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL;
-			else if (!strcmp(info->name, "never_horizontal"))
-				if (content[0] == 'T')
+			else if (!strcmp(attr->name, "never_horizontal"))
+				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL;
 			break;
 		case 's':
-			if (!strcmp(info->name, "shadow_type"))
+			if (!strcmp(attr->name, "shadow_type"))
 				shadow_type = glade_enum_from_string(
-						GTK_TYPE_SHADOW_TYPE, content);
+						GTK_TYPE_SHADOW_TYPE,
+						attr->value);
 			break;
 		}
-		if (content) free(content);
 	}
 	wid = gnome_dock_item_new(name, behaviour);
 	gnome_dock_item_set_shadow_type(GNOME_DOCK_ITEM(wid), shadow_type);
@@ -1121,49 +1082,50 @@ dockitem_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
-menubar_new(GladeXML *xml, GNode *node)
+menubar_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid = gtk_menu_bar_new();
 
-	gtk_menu_bar_set_shadow_type(GTK_MENU_BAR(wid), GTK_SHADOW_NONE);
+	/* a kludge to remove the menu bar border if we are being packed in
+	 * a dock item */
+	if (!strcmp(info->parent->class, "GnomeDockItem"))
+		gtk_menu_bar_set_shadow_type(GTK_MENU_BAR(wid),
+					     GTK_SHADOW_NONE);
 	return wid;
 }
 
 static GtkWidget *
-menu_new(GladeXML *xml, GNode *node)
+menu_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	return gtk_menu_new();
 }
 
 static GtkWidget *
-pixmapmenuitem_new(GladeXML *xml, GNode *node)
+pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	/* This needs to be rewritten to handle the GNOMEUIINFO_* macros.
 	 * For now, we have something that is useable, but not perfect */
 	GtkWidget *wid;
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	char *label = NULL;
 	const char *stock_icon = NULL;
 	gboolean right = FALSE;
 
-	for (; info; info = info->next) {
-		char *content = xmlNodeGetContent(info);
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		if (!strcmp(info->name, "label")) {
-			if (label) g_free(label);
-			label = g_strdup(content);
-		} else if (!strcmp(info->name, "stock_icon")) {
-			stock_icon = get_stock_name(content);
-		} else if (!strcmp(info->name, "right_justify"))
-			right = content[0] == 'T';
-		if (content) free(content);
+		if (!strcmp(attr->name, "label"))
+			label = attr->value;
+		else if (!strcmp(attr->name, "stock_icon"))
+			stock_icon = get_stock_name(attr->value);
+		else if (!strcmp(attr->name, "right_justify"))
+			right = attr->value[0] == 'T';
 	}
 	wid = gtk_pixmap_menu_item_new();
 	if (label) {
 		GtkWidget *lwid = gtk_label_new(_(label));
 		gtk_container_add(GTK_CONTAINER(wid), lwid);
 		gtk_widget_show(lwid);
-		g_free(label);
 	}
 	if (stock_icon) {
 		GtkWidget *iconw = gnome_stock_new_with_icon(stock_icon);
@@ -1177,43 +1139,41 @@ pixmapmenuitem_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
-toolbar_new(GladeXML *xml, GNode *node)
+toolbar_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *tool;
-	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	GtkOrientation orient = GTK_ORIENTATION_HORIZONTAL;
 	GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
 	GtkToolbarSpaceStyle spaces = GTK_TOOLBAR_SPACE_EMPTY;
 	int space_size = 5;
 	gboolean tooltips = TRUE;
 
-	for (; info; info = info->next) {
-		char *content = xmlNodeGetContent(info);
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		switch (info->name[0]) {
+		switch (attr->name[0]) {
 		case 'o':
-			if (!strcmp(info->name, "orientation"))
-				orient = glade_enum_from_string(GTK_TYPE_ORIENTATION,
-								content);
+			if (!strcmp(attr->name, "orientation"))
+				orient = glade_enum_from_string(
+					GTK_TYPE_ORIENTATION, attr->value);
 			break;
 		case 's':
-			if (!strcmp(info->name, "space_size"))
-				space_size = strtol(content, NULL, 0);
-			else if (!strcmp(info->name, "space_style"))
+			if (!strcmp(attr->name, "space_size"))
+				space_size = strtol(attr->value, NULL, 0);
+			else if (!strcmp(attr->name, "space_style"))
 				spaces = glade_enum_from_string(
-					GTK_TYPE_TOOLBAR_SPACE_STYLE, content);
+					GTK_TYPE_TOOLBAR_SPACE_STYLE,
+					attr->value);
 			break;
 		case 't':
-			if (!strcmp(info->name, "type"))
+			if (!strcmp(attr->name, "type"))
 				style = glade_enum_from_string(
-					GTK_TYPE_TOOLBAR_STYLE, content);
-			else if (!strcmp(info->name, "tooltips"))
-				tooltips = content[0] == 'T';
+					GTK_TYPE_TOOLBAR_STYLE, attr->value);
+			else if (!strcmp(attr->name, "tooltips"))
+				tooltips = attr->value[0] == 'T';
 			break;
 		}
-
-		if (content)
-			free(content);
 	}
 	tool = gtk_toolbar_new(orient, style);
 	gtk_toolbar_set_space_size(GTK_TOOLBAR(tool), space_size);
@@ -1227,108 +1187,89 @@ toolbar_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
-about_new(GladeXML *xml, GNode *node)
+about_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
-        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gchar *title = gnome_app_id, *version = gnome_app_version;
 	gchar *copyright = NULL;
 	gchar **authors = NULL;
 	gchar *comments = NULL, *logo = NULL;
 
-        for (; info; info = info->next) {
-                char *content = xmlNodeGetContent(info);
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		if (!strcmp(info->name, "copyright")) {
-			if (copyright) g_free(copyright);
-			copyright = g_strdup(content);
-		} else if (!strcmp(info->name, "authors")) {
+		if (!strcmp(attr->name, "copyright"))
+			copyright = attr->value;
+		else if (!strcmp(attr->name, "authors")) {
 			if (authors) g_strfreev(authors);
-			authors = g_strsplit(content, "\n", 0);
-		} else if (!strcmp(info->name, "comments")) {
-			if (comments) g_free(comments);
-			comments = g_strdup(content);
-		} else if (!strcmp(info->name, "logo")) {
-			if (logo) g_free(logo);
-			logo = g_strdup(content);
-		}
-		if (content)
-			free(content);
+			authors = g_strsplit(attr->value, "\n", 0);
+		} else if (!strcmp(attr->name, "comments"))
+			comments = attr->value;
+		else if (!strcmp(attr->name, "logo"))
+			logo = attr->value;
 	}
 	wid = gnome_about_new(title, version, _(copyright),
 			      (const gchar **)authors, _(comments), logo);
 	/* if (title) g_free(title); */
 	/* if (version) g_free(version); */
-	if (copyright) g_free(copyright);
 	if (authors) g_strfreev(authors);
-	if (comments) g_free(comments);
-	if (logo) g_free(logo);
 	return wid;
 }
 
 static GtkWidget *
-gnomedialog_new(GladeXML *xml, GNode *node)
+gnomedialog_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *win;
-	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gint xpos = -1, ypos = -1;
 	gboolean allow_shrink = TRUE, allow_grow = TRUE, auto_shrink = FALSE;
 	gboolean auto_close = FALSE, hide_on_close = FALSE;
 	gchar *title = NULL, *wmname = NULL, *wmclass = NULL;
 
-	for (; info; info = info->next) {
-		char *content = xmlNodeGetContent(info);
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		switch (info->name[0]) {
+		switch (attr->name[0]) {
 		case 'a':
-			if (!strcmp(info->name, "allow_grow"))
-				allow_grow = content[0] == 'T';
-			else if (!strcmp(info->name, "allow_shrink"))
-				allow_shrink = content[0] == 'T';
-			else if (!strcmp(info->name, "auto_shrink"))
-				auto_shrink = content[0] == 'T';
-			else if (!strcmp(info->name, "auto_close"))
-				auto_close = content[0] == 'T';
+			if (!strcmp(attr->name, "allow_grow"))
+				allow_grow = attr->value[0] == 'T';
+			else if (!strcmp(attr->name, "allow_shrink"))
+				allow_shrink = attr->value[0] == 'T';
+			else if (!strcmp(attr->name, "auto_shrink"))
+				auto_shrink = attr->value[0] == 'T';
+			else if (!strcmp(attr->name, "auto_close"))
+				auto_close = attr->value[0] == 'T';
 			break;
 		case 'h':
-			if (!strcmp(info->name, "hide_on_close"))
-				hide_on_close = content[0] == 'T';
+			if (!strcmp(attr->name, "hide_on_close"))
+				hide_on_close = attr->value[0] == 'T';
 		case 't':
-			if (!strcmp(info->name, "title")) {
-				if (title) g_free(title);
-				title = g_strdup(content);
-			}
+			if (!strcmp(attr->name, "title"))
+				title = attr->value;
 			break;
 		case 'w':
-			if (!strcmp(info->name, "wmclass_name")) {
-				if (wmname) g_free(wmname);
-				wmname = g_strdup(content);
-			} else if (!strcmp(info->name, "wmclass_class")) {
-				if (wmclass) g_free(wmclass);
-				wmclass = g_strdup(content);
-			}
+			if (!strcmp(attr->name, "wmclass_name"))
+				wmname = attr->value;
+			else if (!strcmp(attr->name, "wmclass_class"))
+				wmclass = attr->value;
 			break;
 		case 'x':
-			if (info->name[1] == '\0') xpos=strtol(content,NULL,0);
+			if (attr->name[1] == '\0')
+				xpos = strtol(attr->value, NULL, 0);
 			break;
 		case 'y':
-			if (info->name[1] == '\0') ypos=strtol(content,NULL,0);
+			if (attr->name[1] == '\0')
+				ypos = strtol(attr->value, NULL, 0);
 			break;
 		}
-
-		if (content)
-			free(content);
 	}
 	win = gnome_dialog_new(_(title), NULL);
-	if (title) g_free(title);
 	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
 			      auto_shrink);
-	if (wmname || wmclass) {
+	if (wmname || wmclass)
 		gtk_window_set_wmclass(GTK_WINDOW(win),
 				       wmname?wmname:"", wmclass?wmclass:"");
-		if (wmname) g_free(wmname);
-		if (wmclass) g_free(wmclass);
-	}
 	gnome_dialog_set_close(GNOME_DIALOG(win), auto_close);
 	gnome_dialog_close_hides(GNOME_DIALOG(win), hide_on_close);
 	if (xpos >= 0 || ypos >= 0)
@@ -1337,40 +1278,39 @@ gnomedialog_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
-messagebox_new(GladeXML *xml, GNode *node)
+messagebox_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *win;
-	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gchar *typename = GNOME_MESSAGE_BOX_GENERIC, *message = NULL;
 
-	for (; info; info = info->next) {
-		char *content = xmlNodeGetContent(info);
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		switch (info->name[0]) {
+		switch (attr->name[0]) {
 		case 'm':
-			if (!strcmp(info->name, "message")) {
-				if (message) g_free(message);
-				message = g_strdup(content);
-			}
+			if (!strcmp(attr->name, "message"))
+				message = attr->value;
 			break;
 		case 't':
-			if (!strcmp(info->name, "type")) {
-				if (strncmp(content, "GNOME_MESSAGE_BOX_", 18))
+			if (!strcmp(attr->name, "type")) {
+				gchar *str = attr->value;
+				if (strncmp(str, "GNOME_MESSAGE_BOX_", 18))
 					break;
-				if (!strcmp(&content[18], "INFO"))
+				str += 18;
+				if (!strcmp(str, "INFO"))
 					typename = GNOME_MESSAGE_BOX_INFO;
-				else if (!strcmp(&content[18], "WARNING"))
+				else if (!strcmp(str, "WARNING"))
 					typename = GNOME_MESSAGE_BOX_WARNING;
-				else if (!strcmp(&content[18], "ERROR"))
+				else if (!strcmp(str, "ERROR"))
 					typename = GNOME_MESSAGE_BOX_ERROR;
-				else if (!strcmp(&content[18], "QUESTION"))
+				else if (!strcmp(str, "QUESTION"))
 					typename = GNOME_MESSAGE_BOX_QUESTION;
-				else if (!strcmp(&content[18], "GENERIC"))
+				else if (!strcmp(str, "GENERIC"))
 					typename = GNOME_MESSAGE_BOX_GENERIC;
 			}
 			break;
 		}
-		if (content) free(content);
 	}
 	/* create the message box with no buttons */
 	win = gnome_message_box_new(_(message), typename, NULL);
@@ -1378,63 +1318,51 @@ messagebox_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
-app_new(GladeXML *xml, GNode *node)
+app_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *win;
-	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GList *tmp;
 	gchar *title = NULL, *wmname = NULL, *wmclass = NULL;
 	gboolean enable_layout = TRUE;
 	gboolean allow_shrink = TRUE, allow_grow = TRUE, auto_shrink = FALSE;
 
-	for (; info; info = info->next) {
-		char *content = xmlNodeGetContent(info);
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
 
-		switch (info->name[0]) {
+		switch (attr->name[0]) {
 		case 'a':
-			if (!strcmp(info->name, "allow_grow"))
-				allow_grow = content[0] == 'T';
-			else if (!strcmp(info->name, "allow_shrink"))
-				allow_shrink = content[0] == 'T';
-			else if (!strcmp(info->name, "auto_shrink"))
-				auto_shrink = content[0] == 'T';
+			if (!strcmp(attr->name, "allow_grow"))
+				allow_grow = attr->value[0] == 'T';
+			else if (!strcmp(attr->name, "allow_shrink"))
+				allow_shrink = attr->value[0] == 'T';
+			else if (!strcmp(attr->name, "auto_shrink"))
+				auto_shrink = attr->value[0] == 'T';
 			break;
 		case 'e':
-			if (!strcmp(info->name, "enable_layout_config"))
-				enable_layout = content[0] == 'T';
+			if (!strcmp(attr->name, "enable_layout_config"))
+				enable_layout = attr->value[0] == 'T';
 			break;
 		case 't':
-			if (!strcmp(info->name, "title")) {
-				if (title) g_free(title);
-				title = g_strdup(content);
-			}
+			if (!strcmp(attr->name, "title"))
+				title = attr->value;
 			break;
 		case 'w':
-			if (!strcmp(info->name, "wmclass_name")) {
-				if (wmname) g_free(wmname);
-				wmname = g_strdup(content);
-			} else if (!strcmp(info->name, "wmclass_class")) {
-				if (wmclass) g_free(wmclass);
-				wmclass = g_strdup(content);
-			}
+			if (!strcmp(attr->name, "wmclass_name"))
+				wmname = attr->value;
+			else if (!strcmp(attr->name, "wmclass_class"))
+				wmclass = attr->value;
 			break;
 		}
-		if (content) free(content);
 	}
 	win = gnome_app_new(gnome_app_id, _(title));
-	if (title) g_free(title);
 	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
 			      auto_shrink);
-	if (wmname || wmclass) {
+	if (wmname || wmclass)
 		gtk_window_set_wmclass(GTK_WINDOW(win),
 				       wmname?wmname:"", wmclass?wmclass:"");
-		if (wmname) g_free(wmname);
-		if (wmclass) g_free(wmclass);
-	}
 	gnome_app_enable_layout_config(GNOME_APP(win), enable_layout);
 	return win;
 }
-
-/* -- dialog box build routine goes here */
 
 /* -- routines to initialise these widgets with libglade -- */
 
