@@ -272,6 +272,12 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 
+	if (!GNOME_CANVAS_ITEM_CLASS (item->object.klass)->translate) {
+		g_warning ("Item type %s does not implement translate method.\n",
+			   gtk_type_name (GTK_OBJECT_TYPE (item)));
+		return;
+	}
+
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->translate) (item, dx, dy);
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
@@ -582,7 +588,8 @@ gnome_canvas_group_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, in
 			&& (item->y1 < item->canvas->redraw_y2)
 			&& (item->x2 > item->canvas->redraw_x1)
 			&& (item->y2 > item->canvas->redraw_y2)))
-			(* GNOME_CANVAS_ITEM_CLASS (i->object.klass)->draw) (i, drawable, x, y, width, height);
+			if (GNOME_CANVAS_ITEM_CLASS (i->object.klass)->draw)
+				(* GNOME_CANVAS_ITEM_CLASS (i->object.klass)->draw) (i, drawable, x, y, width, height);
 	}
 }
 
@@ -595,6 +602,7 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 	int x1, y1, x2, y2;
 	double gx, gy;
 	double dist, best;
+	int has_point;
 
 	group = GNOME_CANVAS_GROUP (item);
 
@@ -615,9 +623,17 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 		if ((child->x1 > x2) || (child->y1 > y2) || (child->x2 < x1) || (child->y2 < y1))
 			continue;
 
-		dist = (* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->point) (child, gx, gy, cx, cy, &point_item);
+		point_item = NULL; /* cater for incomplete item implementations */
 
-		if (point_item
+		if (GNOME_CANVAS_ITEM_CLASS (child->object.klass)->point) {
+			dist = (* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->point) (child, gx, gy, cx, cy,
+											 &point_item);
+			has_point = TRUE;
+		} else
+			has_point = FALSE;
+
+		if (has_point
+		    && point_item
 		    && ((int) (dist / item->canvas->pixels_per_unit + 0.5) <= item->canvas->close_enough)) {
 			best = dist;
 			*actual_item = point_item;
@@ -1582,6 +1598,7 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 
 	idle_handler (canvas);
 	gtk_idle_remove (canvas->idle_id);
+	gdk_flush (); /* flush the X queue to ensure repaint */
 }
 
 void

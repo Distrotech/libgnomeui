@@ -13,6 +13,7 @@
 #include "libgnomeui/gnome-actionarea.h"
 #ifdef GDK_HAVE_FULL_CROSSING_EVENT
 #include "libgnomeui/gnome-canvas.h"
+#include "libgnomeui/gnome-canvas-image.h"
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"
 #include "libgnomeui/gnome-canvas-text.h"
 #endif

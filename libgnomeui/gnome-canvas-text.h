@@ -52,6 +52,7 @@ struct _GnomeCanvasTextClass {
 };
 
 
+/* Standard Gtk function */
 GtkType gnome_canvas_text_get_type (void);
 
 

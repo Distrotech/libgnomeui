@@ -29,8 +29,8 @@ static void gnome_canvas_text_class_init (GnomeCanvasTextClass *class);
 static void gnome_canvas_text_init       (GnomeCanvasText      *text);
 static void gnome_canvas_text_destroy    (GtkObject            *object);
 static void gnome_canvas_text_set_arg    (GtkObject            *object,
-					  GtkArg             *arg,
-					  guint               arg_id);
+					  GtkArg               *arg,
+					  guint                 arg_id);
 
 static void   gnome_canvas_text_reconfigure (GnomeCanvasItem *item);
 static void   gnome_canvas_text_realize     (GnomeCanvasItem *item);
@@ -301,7 +301,7 @@ gnome_canvas_text_realize (GnomeCanvasItem *item)
 	text = GNOME_CANVAS_TEXT (item);
 
 	text->gc = gdk_gc_new (GTK_WIDGET (item->canvas)->window);
-	gnome_canvas_text_reconfigure (item);
+	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
 
 static void
@@ -418,5 +418,12 @@ gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
 static void
 gnome_canvas_text_translate (GnomeCanvasItem *item, double dx, double dy)
 {
-	/* FIXME */
+	GnomeCanvasText *text;
+
+	text = GNOME_CANVAS_TEXT (item);
+
+	text->x += dx;
+	text->y += dy;
+
+	recalc_bounds (text);
 }

@@ -1,3 +1,26 @@
+1998-07-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-image.[ch]: New imlib image type for the canvas.
+
+	* libgnomeui.h: 
+	* Makefile.am: Added gnome-canvas-image.[ch].
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_realize): 
+	* gnome-canvas-text.c (gnome_canvas_text_realize): Call the
+	reconfigure method instead of the explicit function.
+
+	* gnome-canvas.c (gnome_canvas_item_move): Take care of incomplete
+	item type implementations by warning about unimplemented method.
+	(gnome_canvas_group_draw): Test for presence of draw method.
+	(gnome_canvas_group_point): Test for presence of point method, and
+	use an initialized point_item in case the method is incompletely
+	implemented.
+	(gnome_canvas_update_now): Now we flush the X queue here to ensure
+	repaint.
+
+	* gnome-canvas-text.c (gnome_canvas_text_translate): Implemented
+	translate method for text items.
+
 Tue Jul  7 00:03:21 1998  John Ellis  <johne@bellatlantic.net>
 
 	* gnome-dentry-edit.c (gnome_dentry_get_dentry): fixed segfault.

@@ -53,6 +53,7 @@ struct _GnomeCanvasREClass {
 };
 
 
+/* Standard Gtk function */
 GtkType gnome_canvas_re_get_type (void);
 
 
@@ -78,6 +79,7 @@ struct _GnomeCanvasRectClass {
 };
 
 
+/* Standard Gtk function */
 GtkType gnome_canvas_rect_get_type (void);
 
 
@@ -103,6 +105,7 @@ struct _GnomeCanvasEllipseClass {
 };
 
 
+/* Standard Gtk function */
 GtkType gnome_canvas_ellipse_get_type (void);
 
 

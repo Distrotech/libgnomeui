@@ -256,7 +256,7 @@ gnome_canvas_re_realize (GnomeCanvasItem *item)
 	re->fill_gc = gdk_gc_new (GTK_WIDGET (item->canvas)->window);
 	re->outline_gc = gdk_gc_new (GTK_WIDGET (item->canvas)->window);
 
-	gnome_canvas_re_reconfigure (item);
+	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
 
 static void
