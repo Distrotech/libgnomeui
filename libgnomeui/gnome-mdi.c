@@ -830,7 +830,7 @@ static gint app_close_book (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 {
 	GList *menu_list = NULL, *children;
-	GtkWidget *parent;
+	GtkWidget *parent = NULL;
 	GnomeMDIChild *child;
 	GnomeUIInfo *ui_info;
 	gint pos, items;
@@ -843,21 +843,18 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 	}
 	ui_info = NULL;
 	
-	parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
+	if(mdi->child_menu_path)
+		parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
 
 	/* remove old child-specific menus */
 	items = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY));
-	if( items > 0 ) {
-		if(parent != NULL) {
-			/* remove items */
+	if(items > 0 && parent) {
+		/* remove items */
+		children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
+		while(children && items > 0) {
+			gtk_container_remove(GTK_CONTAINER(parent), GTK_WIDGET(children->data));
 			children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
-			while(children && items > 0) {
-				gtk_container_remove(GTK_CONTAINER(parent), GTK_WIDGET(children->data));
-				children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
-				items--;
-			}
-
-			/* gtk_widget_queue_resize(parent); */
+			items--;
 		}
 	}
 	
@@ -878,20 +875,17 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 			gtk_window_set_title(GTK_WINDOW(app), mdi->title);
 		
 		/* create new child-specific menus */
-		if( child->menu_template &&
-			( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
-			gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
-			gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
-			gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(count_ui_info_items(ui_info)));
-			/* gtk_widget_queue_resize(app->menubar); */
-		}
-		else {
-			menu_list = child_create_menus(child, view);
+		if(parent) {
+			if( child->menu_template &&
+				( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
+				gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
+				gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
+				gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(count_ui_info_items(ui_info)));
+			}
+			else {
+				menu_list = child_create_menus(child, view);
 			
-			if(menu_list) {
-				/* parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos); */
-				
-				if(parent) {
+				if(menu_list) {
 					GList *menu;
 
 					items = 0;
@@ -905,10 +899,8 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 					
 					gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
 					
-					/* gtk_widget_queue_resize(parent); */
+					g_list_free(menu_list);
 				}
-
-				g_list_free(menu_list);
 			}
 		}
 	}
