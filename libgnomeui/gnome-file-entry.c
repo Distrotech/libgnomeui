@@ -729,7 +729,7 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 			if (g_file_test (p, G_FILE_TEST_ISDIR))
 				return p;
 
-			d = g_dirname (p);
+			d = g_path_get_dirname (p);
 			g_free (p);
 
 			if (g_file_test (d, G_FILE_TEST_ISDIR))

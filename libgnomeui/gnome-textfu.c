@@ -118,23 +118,23 @@ gnome_textfu_resolve_filename(GnomeTextFu *textfu, char *in_filename, const char
 {
   int slen;
 
-  if(in_filename[0] == '"')
+  if (in_filename[0] == '"')
     in_filename++;
   slen = strlen(in_filename) - 1;
-  if(in_filename[slen] == '"')
+  if (in_filename[slen] == '"')
     in_filename[slen] = '\0';
 
-  if(g_file_exists(in_filename))
-    return g_strdup(in_filename);
+  if (g_file_exists (in_filename))
+    return g_strdup (in_filename);
   else if(in_filename[0] == '/')
     return gnome_help_path_resolve(in_filename, type);
   else
     {
       char *dirname_ret;
       char *retval;
-      dirname_ret = g_dirname(textfu->cur_filename);
-      retval = g_strconcat(dirname_ret, "/", in_filename, NULL);
-      g_free(dirname_ret);
+      dirname_ret = g_path_get_dirname (textfu->cur_filename);
+      retval = g_concat_dir_and_file (dirname_ret, in_filename);
+      g_free (dirname_ret);
       return retval;
     }
 }

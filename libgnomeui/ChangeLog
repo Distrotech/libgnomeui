@@ -1,3 +1,8 @@
+Thu Sep 14 18:45:54 2000  George Lebl <jirka@5z.com>
+
+	* gnome-file-entry.c, gnome-icon-entry.c, gnome-textfu.c: use
+	  g_path_get_dirname instead of g_dirname
+
 2000-09-14  Martin Baulig  <baulig@suse.de>
 
 	* gnome-vfs-util.h (GnomeGdkPixbufLoadHandle): Renamed to

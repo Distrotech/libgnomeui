@@ -603,7 +603,7 @@ ientry_browse(GnomeIconEntry *ientry)
 	/*figure out the directory*/
 	if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
 		gchar *d;
-		d = g_dirname (p);
+		d = g_path_get_dirname (p);
 		g_free (p);
 		p = d;
 		if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
