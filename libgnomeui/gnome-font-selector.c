@@ -27,6 +27,7 @@
 #include <gdk/gdkx.h>
 #include "gnome-font-selector.h"
 #include "libgnome/libgnomeP.h"
+#include "libgnomeui/gnome-window-icon.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gdk/gdkkeysyms.h"
@@ -171,6 +172,8 @@ gnome_font_selector_init(GtkWidget *widget)
 
   font_info = klass->font_info;
   nfonts = klass->nfonts;
+
+  gnome_window_icon_set_from_default (GTK_WINDOW (text_tool));
 
   /* Create the shell and vertical & horizontal boxes */
   gtk_window_set_title (GTK_WINDOW (text_tool), "Font Selector");

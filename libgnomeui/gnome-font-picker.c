@@ -28,6 +28,7 @@
 #include <gdk_imlib.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-stock.h>
+#include "libgnomeui/gnome-window-icon.h"
 #include "gnome-font-picker.h"
 #include <libgnome/gnome-i18n.h>
 
@@ -585,9 +586,9 @@ gnome_font_picker_clicked(GtkButton *button)
     gfp = GNOME_FONT_PICKER(button);
 
     if (!gfp->font_dialog) {
-        gfp->font_dialog=gtk_font_selection_dialog_new(gfp->title);
+        gfp->font_dialog=gtk_font_selection_dialog_new(gfp->title);	
         fsd=GTK_FONT_SELECTION_DIALOG(gfp->font_dialog);
-
+	gnome_window_icon_set_from_default (GTK_WINDOW (fsd));
         /* If there is a grabed window, set new dialog as modal */
         if (gtk_grab_get_current())
             gtk_window_set_modal(GTK_WINDOW(gfp->font_dialog),TRUE);

@@ -26,6 +26,7 @@
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-dock.h"
+#include "libgnomeui/gnome-window-icon.h"
 
 #include "gnome-app.h"
 
@@ -128,6 +129,7 @@ gnome_app_init (GnomeApp *app)
 	app->layout = gnome_dock_layout_new ();
 
 	app->enable_layout_config = TRUE;
+	gnome_window_icon_set_from_default (GTK_WINDOW (app));
 }
 
 static void

@@ -44,6 +44,7 @@ char *alloca ();
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-init.h"
 #include "libgnomeui/gnome-winhints.h"
+#include "libgnomeui/gnome-window-icon.h"
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
 #endif
@@ -454,6 +455,8 @@ gnome_init_with_popt_table(const char *app_id,
 		*return_ctx = ctx;
 	else
 		poptFreeContext(ctx);
+
+        gnome_window_icon_init ();
 
 	/* reduce mem usage (hopefully) */
 	gnome_config_sync();

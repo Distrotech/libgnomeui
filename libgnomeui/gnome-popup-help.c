@@ -33,6 +33,7 @@
 #include "gnome-stock.h"
 #include "gnome-popup-help.h"
 #include "gnome-popup-menu.h"
+#include "libgnomeui/gnome-window-icon.h"
 /* Prototypes */
 static void help_callback (GtkWidget *widget, gpointer data);
 static void helpwindow_destroy_callback (GtkWidget *widget, gpointer data);
@@ -315,6 +316,7 @@ help_callback (GtkWidget *menu, gpointer unused)
                 data->row = NULL;
 
                 helpwindow = gtk_window_new (GTK_WINDOW_POPUP);
+                gnome_window_icon_set_from_default (GTK_WINDOW (helpwindow));
                 gtk_window_set_policy (GTK_WINDOW (helpwindow), FALSE, FALSE, TRUE);
                 
                 darea = gtk_drawing_area_new ();

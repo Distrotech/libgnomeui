@@ -330,8 +330,11 @@ client_set_ghash (GnomeClient *client, gchar *name, GHashTable *table)
 
   if (!GNOME_CLIENT_CONNECTED (client))
     return;
-  
-  argc = g_hash_table_size (table);
+
+  /* multiple by 2 because for each element
+   * we have a key and a value
+   */
+  argc = 2 * g_hash_table_size (table);
 
   if (argc == 0) 
     return;

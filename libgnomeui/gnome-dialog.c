@@ -28,6 +28,7 @@
 #include "gnome-uidefs.h"
 #include "gnome-preferences.h"
 #include "gnome-dialog-util.h"
+#include "libgnomeui/gnome-window-icon.h"
 
 enum {
   CLICKED,
@@ -199,6 +200,8 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_box_pack_start (GTK_BOX (vbox), dialog->vbox, 
 		      TRUE, TRUE,
 		      GNOME_PAD_SMALL);
+
+  gnome_window_icon_set_from_default (GTK_WINDOW (dialog));
   gtk_widget_show(dialog->vbox);
 }
 

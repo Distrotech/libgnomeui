@@ -12,9 +12,9 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
-#include <libgnome/gnome-i18nP.h>
-#include <libgnomeui/gnome-stock.h>
-
+#include "libgnome/gnome-i18nP.h"
+#include "libgnomeui/gnome-stock.h"
+#include "libgnomeui/gnome-window-icon.h"
 
 enum {
 	DATE_CHANGED,
@@ -483,6 +483,7 @@ create_children (GnomeDateEdit *gde)
 	}
 
 	gde->cal_popup = gtk_window_new (GTK_WINDOW_POPUP);
+	gnome_window_icon_set_from_default (GTK_WINDOW (gde->cal_popup));
 	gtk_widget_set_events (gde->cal_popup,
 			       gtk_widget_get_events (gde->cal_popup) | GDK_KEY_PRESS_MASK);
 	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "delete_event",

@@ -45,6 +45,7 @@ char *alloca ();
 #include "gnome-spell.h"
 
 #include "libgnome/gnome-i18nP.h"
+#include "libgnomeui/gnome-window-icon.h"
 
 #ifndef HAVE_GDK_CHILD_REGISTER
 
@@ -194,6 +195,7 @@ static void
 gnome_spell_browse_handler(GtkButton * button, GtkEntry* entry) {
 	if ( !filesel ) {
 		filesel = gtk_file_selection_new(_("Select dictionary"));
+		gnome_window_icon_set_from_default (GTK_WINDOW (filesel));
 		gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(filesel)->ok_button), 
 			"clicked", (GtkSignalFunc)gnome_spell_filesel_ok, NULL);
 		gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(filesel)->cancel_button), 

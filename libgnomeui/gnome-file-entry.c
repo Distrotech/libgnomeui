@@ -21,6 +21,7 @@
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-mime.h"
 #include "libgnomeui/gnome-preferences.h"
+#include "libgnomeui/gnome-window-icon.h"
 #include "gnome-file-entry.h"
 
 
@@ -149,6 +150,7 @@ browse_clicked(GnomeFileEntry *fentry)
 	fsw = gtk_file_selection_new (fentry->browse_dialog_title
 				      ? fentry->browse_dialog_title
 				      : _("Select file"));
+	gnome_window_icon_set_from_default (GTK_WINDOW (fsw));
 	/* BEGIN UGLINESS.  This code is stolen from gnome_dialog_set_parent.
 	 * We want its functionality, but it takes a GnomeDialog as its argument.
 	 * So we copy it )-: */

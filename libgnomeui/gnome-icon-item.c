@@ -15,7 +15,7 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkwindow.h>
 #include "gnome-icon-item.h"
-
+#include "libgnomeui/gnome-window-icon.h"
 
 /* Margins used to display the information */
 #define MARGIN_X 2
@@ -215,6 +215,7 @@ iti_start_editing (Iti *iti)
 			    GTK_SIGNAL_FUNC (iti_entry_activate), iti);
 
 	priv->entry_top = gtk_window_new (GTK_WINDOW_POPUP);
+	gnome_window_icon_set_from_default (GTK_WINDOW (priv->entry_top));
 	gtk_container_add (GTK_CONTAINER (priv->entry_top), GTK_WIDGET (priv->entry));
 	gtk_widget_set_uposition (priv->entry_top, 20000, 20000);
 	gtk_widget_show_all (priv->entry_top);

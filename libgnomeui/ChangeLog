@@ -1,3 +1,21 @@
+2000-05-04  Jacob Berkman  <jacob@helixcode.com>
+
+	* gnome-window-icon.[ch]: wrapper for gdk_window_set_icon() which
+	handles setting the icon on realize time and drawing the minimized
+	icon window
+
+	* gnome-client.c (client_set_ghash): count both values and keys when
+	determining size
+
+2000-04-25  Jacob Berkman  <jacob@helixcode.com>
+
+	* gnome-dialog.c (gnome_dialog_init): 
+	* gnome-app.c (gnome_app_init): 
+	* gnome-popup-help.c (help_callback): 
+	* gnome-icon-item.c (iti_start_editing): 
+	* gnome-dateedit.c (create_children): 
+	* gnome-file-entry.c (browse_clicked): use the default gnome icon 
+
 2000-05-03  Ian Peters  <itp@gnu.org>
 
 	* gnome-about.c (gnome_fill_info): Allocate about box shade of green

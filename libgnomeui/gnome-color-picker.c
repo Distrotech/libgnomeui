@@ -14,6 +14,7 @@
 #include <gtk/gtkcompat.h>
 #include "gnome-color-picker.h"
 #include <libgnome/gnome-i18nP.h>
+#include "libgnomeui/gnome-window-icon.h"
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkbutton.h>
 
@@ -453,6 +454,7 @@ gnome_color_picker_clicked (GtkButton *button)
 		/* Create the dialog and connects its buttons */
 
 		cp->cs_dialog = gtk_color_selection_dialog_new (cp->title);
+		gnome_window_icon_set_from_default (GTK_WINDOW (cp->cs_dialog));
 		csd = GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog);
 		gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "destroy",
 				    (GtkSignalFunc) cs_destroy,
