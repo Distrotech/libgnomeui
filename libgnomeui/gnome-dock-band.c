@@ -307,25 +307,29 @@ size_allocate_small (GnomeDockBand *band,
       guint child_requested_space;
 
       child = lp->data;
-      child->real_offset = 0;
 
-      if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
-        child_requested_space = child->widget->requisition.width;
-      else
-        child_requested_space = child->widget->requisition.height;
-
-      if (space < child->max_space_requisition
-          || (space - child->max_space_requisition
-              < requested_space - child_requested_space))
-        break;
-
-      space -= child->max_space_requisition;
-      requested_space -= child_requested_space;
-      max_space_requisition -= child->max_space_requisition;
-
-      size_allocate_child (band, child,
-                           child->max_space_requisition,
-                           &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = 0;
+	  
+	  if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
+	    child_requested_space = child->widget->requisition.width;
+	  else
+	    child_requested_space = child->widget->requisition.height;
+	  
+	  if (space < child->max_space_requisition
+	      || (space - child->max_space_requisition
+		  < requested_space - child_requested_space))
+	    break;
+	  
+	  space -= child->max_space_requisition;
+	  requested_space -= child_requested_space;
+	  max_space_requisition -= child->max_space_requisition;
+	  
+	  size_allocate_child (band, child,
+			       child->max_space_requisition,
+			       &child_allocation);
+	}
     }
 
   if (lp != NULL)
@@ -334,20 +338,24 @@ size_allocate_small (GnomeDockBand *band,
       guint child_requested_space, child_space;
 
       child = lp->data;
-      child->real_offset = 0;
 
-      if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
-        child_requested_space = child->widget->requisition.width;
-      else
-        child_requested_space = child->widget->requisition.height;
-
-      requested_space -= child_requested_space;
-      child_space = space - requested_space;
-      space -= child_space;
-
-      size_allocate_child (band, child,
-                           child_space,
-                           &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = 0;
+	  
+	  if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
+	    child_requested_space = child->widget->requisition.width;
+	  else
+	    child_requested_space = child->widget->requisition.height;
+	  
+	  requested_space -= child_requested_space;
+	  child_space = space - requested_space;
+	  space -= child_space;
+	  
+	  size_allocate_child (band, child,
+			       child_space,
+			       &child_allocation);
+	}
 
       lp = lp->next;
     }
@@ -357,16 +365,21 @@ size_allocate_small (GnomeDockBand *band,
       GnomeDockBandChild *child;
 
       child = lp->data;
-      child->real_offset = 0;
 
-      if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
-        size_allocate_child (band, child,
-                             child->widget->requisition.width,
-                             &child_allocation);
-      else
-        size_allocate_child (band, child,
-                             child->widget->requisition.height,
-                             &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = 0;
+	  child->real_offset = 0;
+
+	  if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
+	    size_allocate_child (band, child,
+				 child->widget->requisition.width,
+				 &child_allocation);
+	  else
+	    size_allocate_child (band, child,
+				 child->widget->requisition.height,
+				 &child_allocation);
+	}
     }
 }
 
@@ -397,11 +410,15 @@ size_allocate_medium (GnomeDockBand *band,
       GnomeDockBandChild *child;
 
       child = lp->data;
-      child->real_offset = (guint) ((float) child->offset * factor + .5);
 
-      size_allocate_child (band, child,
-                           child->max_space_requisition,
-                           &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = (guint) ((float) child->offset * factor + .5);
+	  
+	  size_allocate_child (band, child,
+			       child->max_space_requisition,
+			       &child_allocation);
+	}
     }
 }
 
@@ -426,11 +443,15 @@ size_allocate_large (GnomeDockBand *band,
       GnomeDockBandChild *child;
 
       child = lp->data;
-      child->real_offset = child->offset;
 
-      size_allocate_child (band, child,
-                           child->max_space_requisition,
-                           &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = child->offset;
+
+	  size_allocate_child (band, child,
+			       child->max_space_requisition,
+			       &child_allocation);
+	}
     }
 }
 
@@ -452,7 +473,7 @@ gnome_dock_band_size_allocate (GtkWidget *widget,
       GnomeDockBandChild *c;
 
       c = (GnomeDockBandChild *) band->children->data;
-      if (GNOME_IS_DOCK_ITEM (c->widget))
+      if (GNOME_IS_DOCK_ITEM (c->widget) && GTK_WIDGET_VISIBLE (c->widget))
         {
           GnomeDockItemBehavior behavior;
           GnomeDockItem *item;

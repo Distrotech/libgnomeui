@@ -1,3 +1,10 @@
+1999-09-19  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-dock-band.c: Don't size-allocate non-visible
+	children, since we don't size-request them. This will
+	avoid problems with warnings since otherwise we
+	will allocating the children with junk allocations.
+
 1999-09-20  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-appbar.c (gnome_appbar_construct): Put alignment back in
