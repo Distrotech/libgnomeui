@@ -127,6 +127,7 @@ void           gnome_icon_list_set_mode           (GnomeIconList *ilist, GnomeIc
 void           gnome_icon_list_set_border         (GnomeIconList *ilist, GtkShadowType border);
 
 int            gnome_icon_list_get_icon_at        (GnomeIconList *ilist, int x, int y);
+void           gnome_icon_list_unselect_all       (GnomeIconList *ilist, GdkEvent *event, void *keep);
 
 
 END_GNOME_DECLS

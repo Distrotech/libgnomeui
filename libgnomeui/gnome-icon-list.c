@@ -1223,6 +1223,26 @@ gnome_icon_list_draw (GtkWidget *widget, GdkRectangle *area)
 	/* FIXME: need to draw scrollbars? */
 }
 
+void
+gnome_icon_list_unselect_all (GnomeIconList *ilist, GdkEvent *event, void *keep)
+{
+	int i;
+	GList *icon_list = ilist->icon_list;
+	Icon *icon;
+	
+	g_return_if_fail (ilist != NULL);
+	g_return_if_fail (GNOME_IS_ICON_LIST (ilist));
+
+	gnome_icon_list_freeze (ilist);
+	for (i = 0; icon_list ; icon_list = icon_list->next, i++){
+		icon = icon_list->data;
+		
+		if (icon != keep && icon->state == GTK_STATE_SELECTED)
+			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON], i, event);
+	}
+	gnome_icon_list_thaw (ilist);
+}
+
 static void
 toggle_icon (GnomeIconList *ilist, int num, GdkEvent *event)
 {
@@ -1277,15 +1297,9 @@ toggle_icon (GnomeIconList *ilist, int num, GdkEvent *event)
 		if (!(event->button.state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK))){
 			GList *icon_list = ilist->icon_list;
 			Icon *clicked_icon;
-			int state;
 
 			clicked_icon = g_list_nth (ilist->icon_list, num)->data;
-			for (i = 0; icon_list ; icon_list = icon_list->next, i++){
-				icon = icon_list->data;
-
-				if (icon != clicked_icon && icon->state == GTK_STATE_SELECTED)
-					gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON], i, event);
-			}
+			gnome_icon_list_unselect_all (ilist, event, clicked_icon);
 			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON], num, event);
 			ilist->last_selected = num;
 			break;
@@ -2071,8 +2085,8 @@ gnome_icon_list_set_icon_border (GnomeIconList *ilist, int spacing)
 
 	if (!ilist->frozen) {
 		recalc_max_icon_size (ilist);
-		adjust_scrollbars (ilist);
-		draw_icons_area (ilist, NULL);
+		adjust_scrollbars (ilist);	
+	draw_icons_area (ilist, NULL);
 	}
 }
 
