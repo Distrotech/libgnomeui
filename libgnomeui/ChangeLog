@@ -1,4 +1,11 @@
+1999-06-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.h: The last argument to gnome_icon_list_new()
+	had effectively the same type as the one declared in the .c file,
+	but it was inconsistently declared.  Fixed it.
+
 1999-06-30  Cody Russell <bratsche@dfw.net>
+
 	* gnome-animator.c: Added last line to while() loop in
 	free_all_frames(). It was getting caught in an infinite loop in
 	some circumstances when the GnomeAnimator object was destroyed

@@ -89,7 +89,7 @@ guint          gnome_icon_list_get_type            (void);
 
 GtkWidget     *gnome_icon_list_new                 (guint         icon_width,
 						    GtkAdjustment *adj,
-						    gboolean      is_editable);
+						    int           flags);
 GtkWidget     *gnome_icon_list_new_flags           (guint         icon_width,
 						    GtkAdjustment *adj,
 						    int           flags);
