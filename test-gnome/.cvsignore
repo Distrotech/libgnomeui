@@ -3,5 +3,6 @@
 *.o
 test-gnome
 test-druid
+test-entry
 Makefile
 Makefile.in
