@@ -83,8 +83,6 @@ static GnomeClient *client = NULL;
 
 static gboolean gnome_initialized = FALSE;
 
-char *gnome_app_startup_geometry = NULL;
-
 static void
 gnome_add_gtk_arg_callback(poptContext con,
 			   enum poptCallbackReason reason,
@@ -290,8 +288,6 @@ static const struct poptOption gnome_options[] = {
 	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	 &gnome_init_cb, 0, NULL, NULL},
 	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, KEY_DISABLE_CRASH_DIALOG},
-        { "geometry", '\0', POPT_ARG_STRING, &gnome_app_startup_geometry, NULL,
-          N_("Specifies the geometry for the toplevel window"), N_("GEOMETRY") },
 	{NULL, '\0', 0, NULL, 0}
 };
 
