@@ -1,3 +1,7 @@
+1999-02-11  Felix Bellaby <felix@pooh.u-net.com>
+
+	* gnome-client.c: replace "Priority" with "_GSM_Priority" throughout.
+
 1999-02-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-paper-selector.c (paper_size_system): Use GnomePaper and
