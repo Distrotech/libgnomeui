@@ -1,3 +1,10 @@
+1999-02-11  Arturo Espinosa <arturo@nuclecu.unam.mx>
+
+	* gnome-stock.c: 
+		(gnome_stock_pixmap): case for TYPE_FILE was missing. 
+		(create_pixmap_from_file): new function for missing case.
+	 
+
 1999-02-11  Felix Bellaby <felix@pooh.u-net.com>
 
 	* gnome-client.c: replace "Priority" with "_GSM_Priority" throughout.

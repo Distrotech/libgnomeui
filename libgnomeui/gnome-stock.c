@@ -945,6 +945,15 @@ lookup(const char *icon, const char *subtype, int fallback)
 }
 
 
+static GnomePixmap *
+create_pixmap_from_file(GtkWidget *window, GnomeStockPixmapEntryFile *data)
+{
+	GnomePixmap *pixmap;
+
+	pixmap = GNOME_PIXMAP(gnome_pixmap_new_from_file(data->filename));
+	return pixmap;
+}
+
 
 static GnomePixmap *
 create_pixmap_from_data(GtkWidget *window, GnomeStockPixmapEntryData *data)
@@ -1114,6 +1123,9 @@ gnome_stock_pixmap(GtkWidget * window, const char *icon, const char *subtype)
 	switch (entry->type) {
 	case GNOME_STOCK_PIXMAP_TYPE_DATA:
 		pixmap = create_pixmap_from_data(window, &entry->data);
+		break;
+	case GNOME_STOCK_PIXMAP_TYPE_FILE:
+		pixmap = create_pixmap_from_file(window, &entry->file);
 		break;
 	case GNOME_STOCK_PIXMAP_TYPE_PATH:
 		pixmap = create_pixmap_from_path(&entry->path);
