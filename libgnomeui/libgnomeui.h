@@ -81,5 +81,7 @@
 #include <libgnomeui/gnome-propertybox.h>
 #include <libgnomeui/gnome-window-icon.h>
 #include <libgnomeui/gnome-password-dialog.h>
+#include <libgnomeui/gnome-help.h>
+#include <libgnomeui/gnome-url.h>
 
 #endif
