@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-08-06 15:26+0200\n"
-"PO-Revision-Date: 2002-06-06 17:01+0300\n"
+"POT-Creation-Date: 2002-08-14 20:34+0300\n"
+"PO-Revision-Date: 2002-08-14 23:11+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -76,11 +76,11 @@ msgstr "Programmi autorite nimekiri"
 
 #: libgnomeui/gnome-about.c:385
 msgid "Author entry"
-msgstr ""
+msgstr "Autori sisestusväli"
 
 #: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
-msgstr ""
+msgstr "Ühe autori sisestusväli"
 
 #: libgnomeui/gnome-about.c:393
 msgid "Documenters"
@@ -92,11 +92,11 @@ msgstr "Programmi dokumentatsiooni kirjutajate nimekiri"
 
 #: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
-msgstr ""
+msgstr "Dokumenteerija sisestusväli"
 
 #: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
-msgstr ""
+msgstr "Ühe dokumenteerija sisestusväli"
 
 #: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
@@ -138,7 +138,7 @@ msgstr ""
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
-msgstr ""
+msgstr "Interaktiivsus"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
@@ -146,7 +146,7 @@ msgstr ""
 
 #: libgnomeui/gnome-client.c:860
 msgid "Specify session management ID"
-msgstr ""
+msgstr "Määra sessioonihalduse ID"
 
 #: libgnomeui/gnome-client.c:860
 msgid "ID"
@@ -170,7 +170,7 @@ msgstr "Sessioonihaldus"
 
 #: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
-msgstr ""
+msgstr "Tühista väljalogimine"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
@@ -182,7 +182,7 @@ msgstr "Värvivalija"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "Ava dialoogiaken värvi määramiseks"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -194,7 +194,7 @@ msgstr "Aeg"
 
 #: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
-msgstr ""
+msgstr "Hetkel valitud aeg"
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
@@ -255,7 +255,7 @@ msgstr "Vali nimekirjast aeg"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
+msgstr "gnome_date_edit_get_date on taunitav, kasuta gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -280,15 +280,15 @@ msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
-msgstr ""
+msgstr "Pealkirja värv"
 
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
-msgstr ""
+msgstr "Pealkirja teksti värv"
 
 #: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
-msgstr ""
+msgstr "Pealkirja värv"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
@@ -366,7 +366,7 @@ msgstr "URL"
 
 #: libgnomeui/gnome-href.c:123
 msgid "The URL that GnomeHRef activates"
-msgstr ""
+msgstr "URL, mille GnomeHRef aktiveerib"
 
 #: libgnomeui/gnome-href.c:130
 msgid "Text"
@@ -374,7 +374,7 @@ msgstr "Tekst"
 
 #: libgnomeui/gnome-href.c:131
 msgid "The text on the button"
-msgstr ""
+msgstr "Tekst nupu peal"
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
@@ -386,7 +386,7 @@ msgstr "Lingi värv"
 
 #: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
-msgstr ""
+msgstr "Lingi kuvamisel kasutatav värv"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
@@ -514,6 +514,7 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -571,6 +572,7 @@ msgid "_Game"
 msgstr "_Mäng"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Abi"
 
@@ -737,9 +739,8 @@ msgstr "Asenda string"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
-msgstr "_Omadused..."
+msgstr "_Omadused"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -750,9 +751,8 @@ msgstr "Redigeeri faili omadusi"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "_Häälestus..."
+msgstr "_Häälestus"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -763,11 +763,11 @@ msgstr "Programmi häälestus"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Info selle programmi kohta"
 
@@ -794,7 +794,7 @@ msgstr "Loo uus aken"
 msgid "_Close This Window"
 msgstr "_Sulge see aken"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Sulge aktiivne aken"
 
@@ -1191,7 +1191,7 @@ msgstr "Eelvaade"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
-msgstr ""
+msgstr "Ikooni valimise dialoog"
 
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
@@ -1304,8 +1304,9 @@ msgstr "%d. %b %Y %H:%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Välju testprogrammist"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Välju testprogrammist"
 
 #~ msgid "Find _Again"
 #~ msgstr "O_tsi uuesti"
