@@ -47,7 +47,9 @@ struct _GnomeMDIChildClass
   GList     * (*create_menus)(GnomeMDIChild *, GtkWidget *); 
 };
 
-GnomeMDIChild *gnome_mdi_child_new             ();
+guint         gnome_mdi_child_get_type         (void);
+
+GnomeMDIChild *gnome_mdi_child_new             (void);
 GList         *gnome_mdi_child_get_views       (GnomeMDIChild *);
 
 GtkWidget     *gnome_mdi_child_add_view        (GnomeMDIChild *);

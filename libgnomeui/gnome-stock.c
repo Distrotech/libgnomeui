@@ -932,7 +932,7 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 			entry->any.height = req.height;
 			entry->any.label = NULL;
 			entry->gpixmap.pixmap = GNOME_PIXMAP(pixmap);
-			sprintf(s, "%lx", (long)pixmap);
+			g_snprintf(s, 32, "%lx", (long)pixmap);
 			gnome_stock_pixmap_register(s, GNOME_STOCK_PIXMAP_REGULAR, entry);
 			pixmap = gnome_stock_pixmap_widget(button, s);
 		}

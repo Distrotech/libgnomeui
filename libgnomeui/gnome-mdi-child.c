@@ -124,7 +124,7 @@ static void gnome_mdi_child_destroy(GtkObject *obj) {
     gnome_mdi_child_remove_view(mdi_child, GTK_WIDGET(mdi_child->views->data));
 
   if(mdi_child->name)
-    free(mdi_child->name);
+    g_free(mdi_child->name);
 
   if(GTK_OBJECT_CLASS(parent_class)->destroy)
     (* GTK_OBJECT_CLASS(parent_class)->destroy)(GTK_OBJECT(mdi_child));
@@ -153,10 +153,10 @@ void gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view) {
 void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name) {
   gchar *old_name = mdi_child->name;
 
-  mdi_child->name = (gchar *)strdup(name);
+  mdi_child->name = (gchar *)g_strdup(name);
 
   if(old_name)
-    free(old_name);
+    g_free(old_name);
 }
 
 void gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl) {

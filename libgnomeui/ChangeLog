@@ -1,3 +1,29 @@
+Mon Jun  8 20:11:52 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dateedit.c: #include <stdlib.h> for atoi.
+	(day_selected): use g_snprintf, sprintf was undeclared.
+	
+	* gnome-mdi-child.c (gnome_mdi_child_destroy): Use g_free, free
+	was undeclared.
+	(gnome_mdi_child_set_name): Use g_strdup, g_free.
+
+	* gnome-mdi-child.h: Declare gnom_mdi_child_get_type()
+
+	* gnome-mdi.c: #include "libgnome/gnome-util.h"
+	Removed a bunch of unused variables.
+	(app_set_title): Use g_copy_strings in place of strcat
+	(app_set_active_view): Slight rewrites for "assignment in
+	conditional" warning.
+	(top_add_view): Same.
+	(gnome_mdi_add_child): Use return_val_if_fail, for checks. 
+	(gnome_mdi_remove_child): Same, and a couple unused variables.
+	
+	* gnome-stock.c (gnome_pixmap_button): Use g_snprintf, fixes
+	warning about undeclared sprintf.
+
+	* gtkdial.c: Use return_val_if_fail when function returns
+	something. Removed a couple of unused variables.
+
 Mon Jun  8 19:27:17 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-less.h, gnome-less.c: Changed error handling; rather than

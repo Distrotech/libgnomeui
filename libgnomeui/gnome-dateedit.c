@@ -6,6 +6,7 @@
  */
 #include <config.h>
 #include <string.h>
+#include <stdlib.h> /* atoi */
 #include <time.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
@@ -72,7 +73,7 @@ day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 
 	gtk_calendar_get_date (calendar, &year, &month, &day);
 
-	sprintf (buffer, "%d/%d/%d", month + 1, day, year); /* FIXME: internationalize this - strftime()*/
+	g_snprintf (buffer, 40, "%d/%d/%d", month + 1, day, year); /* FIXME: internationalize this - strftime()*/
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
 }

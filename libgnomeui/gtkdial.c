@@ -221,8 +221,8 @@ gfloat
 gtk_dial_set_percentage (GtkDial *dial, gfloat percent)
 {
  
-  g_return_if_fail (dial != NULL);
-  g_return_if_fail (GTK_IS_DIAL (dial));
+  g_return_val_if_fail (dial != NULL, 0.0);
+  g_return_val_if_fail (GTK_IS_DIAL (dial), 0.0);
 
   if (percent < 1.0)
     {
@@ -237,8 +237,8 @@ gtk_dial_set_percentage (GtkDial *dial, gfloat percent)
 gfloat
 gtk_dial_get_percentage (GtkDial *dial)
 {
-  g_return_if_fail (dial != NULL);
-  g_return_if_fail (GTK_IS_DIAL (dial));
+  g_return_val_if_fail (dial != NULL, 0.0);
+  g_return_val_if_fail (GTK_IS_DIAL (dial), 0.0);
 
   return dial->percentage;
 }
@@ -246,8 +246,8 @@ gtk_dial_get_percentage (GtkDial *dial)
 gfloat
 gtk_dial_get_value (GtkDial *dial)
 {
-  g_return_if_fail (dial != NULL);
-  g_return_if_fail (GTK_IS_DIAL (dial));
+  g_return_val_if_fail (dial != NULL, 0.0);
+  g_return_val_if_fail (GTK_IS_DIAL (dial), 0.0);
 
   return dial->adjustment->value;
 }
@@ -255,8 +255,8 @@ gtk_dial_get_value (GtkDial *dial)
 gfloat
 gtk_dial_set_value (GtkDial *dial, gfloat value)
 {
-  g_return_if_fail (dial != NULL);
-  g_return_if_fail (GTK_IS_DIAL (dial));
+  g_return_val_if_fail (dial != NULL, 0.0);
+  g_return_val_if_fail (GTK_IS_DIAL (dial), 0.0);
 
   if (value < dial->adjustment->upper)
     {
@@ -334,7 +334,6 @@ gtk_dial_size_allocate (GtkWidget     *widget,
 			GtkAllocation *allocation)
 {
   GtkDial *dial;
-  int     r_width, r_height, kludge;
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GTK_IS_DIAL (widget));
@@ -520,7 +519,6 @@ gtk_dial_timer (GtkDial *dial)
 static void
 gtk_dial_update_mouse (GtkDial *dial, gint x, gint y)
 {
-  GtkWidget *widget;
   gint xc, yc;
   gfloat old_value;
 
