@@ -28,6 +28,12 @@ struct _GnomeFileEntry {
 	GtkHBox hbox;
 
 	char *browse_dialog_title;
+	char *default_path;
+	
+	/*the file dialog widget*/
+	GtkWidget *fsw;
+	
+	int is_modal;
 
 	GtkWidget *gentry;
 };
@@ -38,12 +44,29 @@ struct _GnomeFileEntryClass {
 
 
 guint      gnome_file_entry_get_type    (void);
-GtkWidget *gnome_file_entry_new         (char *history_id, char *browse_dialog_title);
+GtkWidget *gnome_file_entry_new         (char *history_id,
+					 char *browse_dialog_title);
 
 GtkWidget *gnome_file_entry_gnome_entry (GnomeFileEntry *fentry);
 GtkWidget *gnome_file_entry_gtk_entry   (GnomeFileEntry *fentry);
-void       gnome_file_entry_set_title   (GnomeFileEntry *fentry, char *browse_dialog_title);
+void       gnome_file_entry_set_title   (GnomeFileEntry *fentry,
+					 char *browse_dialog_title);
 
+/*set default path for the browse dialog*/
+void	   gnome_file_entry_set_default_path(GnomeFileEntry *fentry,
+					     char *path);
+
+/*returns a filename which is a full path with WD or the default
+  directory prepended if it's not an absolute path, returns
+  NULL on empty entry or if the file doesn't exist and that was
+  a requirement*/
+char      *gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
+					  int file_must_exist);
+
+/*set modality of the file browse dialog, only applies for the
+  next time a dialog is created*/
+void       gnome_file_entry_set_modal	(GnomeFileEntry *fentry,
+					 int is_modal);
 
 END_GNOME_DECLS
 

@@ -1,3 +1,9 @@
+Thu Nov 19 20:37:10 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-file-entry.[ch]: added default paths and made modality
+	  optional, also added a utility function for getting the
+	  filename
+
 1998-11-19  Havoc Pennington <hp@pobox.com>
 
 	* gnome-appbar.h, gnome-appbar.c: Add a function to get at the

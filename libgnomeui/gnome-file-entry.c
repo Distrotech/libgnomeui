@@ -5,6 +5,7 @@
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  */
 #include <config.h>
+#include <unistd.h> /*getcwd*/
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
@@ -13,6 +14,7 @@
 #include <gtk/gtksignal.h>
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18nP.h"
+#include "libgnome/gnome-util.h"
 #include "gnome-file-entry.h"
 
 
@@ -78,9 +80,11 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 }
 
 static void
-browse_dialog_cancel (GtkWidget *widget, gpointer data)
+browse_dialog_kill (GtkWidget *widget, gpointer data)
 {
-	gtk_widget_destroy (GTK_WIDGET (data));
+	GnomeFileEntry *fentry;
+	fentry = GNOME_FILE_ENTRY (data);
+	fentry->fsw = NULL;
 }
 
 static void
@@ -89,8 +93,26 @@ browse_clicked (GtkWidget *widget, gpointer data)
 	GnomeFileEntry *fentry;
 	GtkWidget *fsw;
 	GtkFileSelection *fs;
+	char *p;
 
 	fentry = GNOME_FILE_ENTRY (data);
+	
+	/*if it already exists make sure it's shown and raised*/
+	if(fentry->fsw) {
+		gtk_widget_show(fentry->fsw);
+		if(fentry->fsw->window)
+			gdk_window_raise(fentry->fsw->window);
+		fs = GTK_FILE_SELECTION(fentry->fsw);
+		p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
+		if(p && *p!='/' && fentry->default_path) {
+			p = g_concat_dir_and_file (fentry->default_path, p);
+			gtk_file_selection_set_filename (fs, p);
+			g_free(p);
+		} else
+			gtk_file_selection_set_filename (fs, p);
+		return;
+	}
+
 
 	fsw = gtk_file_selection_new (fentry->browse_dialog_title
 				      ? fentry->browse_dialog_title
@@ -99,17 +121,29 @@ browse_clicked (GtkWidget *widget, gpointer data)
 
 	fs = GTK_FILE_SELECTION (fsw);
 
-	gtk_file_selection_set_filename (fs, gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry))));
+	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
+	if(p && *p!='/' && fentry->default_path) {
+		p = g_concat_dir_and_file (fentry->default_path, p);
+		gtk_file_selection_set_filename (fs, p);
+		g_free(p);
+	} else
+		gtk_file_selection_set_filename (fs, p);
 
 	gtk_signal_connect (GTK_OBJECT (fs->ok_button), "clicked",
 			    (GtkSignalFunc) browse_dialog_ok,
 			    fs);
-	gtk_signal_connect (GTK_OBJECT (fs->cancel_button), "clicked",
-			    (GtkSignalFunc) browse_dialog_cancel,
-			    fs);
+	gtk_signal_connect_object (GTK_OBJECT (fs->cancel_button), "clicked",
+				   GTK_SIGNAL_FUNC(gtk_widget_destroy),
+				   GTK_OBJECT(fsw));
+	gtk_signal_connect (GTK_OBJECT (fsw), "destroy",
+			    GTK_SIGNAL_FUNC(browse_dialog_kill),
+			    fentry);
 
 	gtk_widget_show (fsw);
-	gtk_grab_add (fsw); /* Yes, it is modal, so sue me */
+	
+	if(fentry->is_modal)
+		gtk_grab_add(fsw);
+	fentry->fsw = fsw;
 }
 
 static void
@@ -130,9 +164,11 @@ static void
 gnome_file_entry_init (GnomeFileEntry *fentry)
 {
 	GtkWidget *button, *the_gtk_entry;
-	static const GtkTargetEntry drop_types[] = { { "url:ALL", 0, 0 } };
+	static GtkTargetEntry drop_types[] = { { "url:ALL", 0, 0 } };
 
 	fentry->browse_dialog_title = NULL;
+	fentry->default_path = NULL;
+	fentry->is_modal = FALSE;
 
 	gtk_box_set_spacing (GTK_BOX (fentry), 4);
 
@@ -168,6 +204,10 @@ gnome_file_entry_finalize (GtkObject *object)
 
 	if (fentry->browse_dialog_title)
 		g_free (fentry->browse_dialog_title);
+	if (fentry->default_path)
+		g_free (fentry->default_path);
+	if (fentry->fsw)
+		gtk_widget_destroy(fentry->fsw);
 
 	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
@@ -213,4 +253,55 @@ gnome_file_entry_set_title (GnomeFileEntry *fentry, char *browse_dialog_title)
 		g_free (fentry->browse_dialog_title);
 
 	fentry->browse_dialog_title = g_strdup (browse_dialog_title); /* handles NULL correctly */
+}
+
+void
+gnome_file_entry_set_default_path(GnomeFileEntry *fentry, char *path)
+{
+	g_return_if_fail (fentry != NULL);
+	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
+
+	if(fentry->default_path)
+		g_free(fentry->default_path);
+	
+	/*handles NULL as well*/
+	fentry->default_path = g_strdup(path);
+}
+
+char *
+gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
+			       int file_must_exist)
+{
+	char *p;
+	char *t;
+	g_return_val_if_fail (fentry != NULL,NULL);
+	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry),NULL);
+
+	t = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
+	if(!t || !*t)
+		return NULL;
+	if(*t=='/')
+		p = g_strdup(t);
+	else if(fentry->default_path)
+			p = g_concat_dir_and_file (fentry->default_path, t);
+	else {
+		char *cwd = getcwd(NULL,0);
+		p = g_concat_dir_and_file (cwd, t);
+		free(cwd);
+	}
+	/*return the file if it's ok*/
+	if(!file_must_exist || g_file_exists(p))
+		return p;
+	/*bad file, return NULL*/
+	g_free(p);
+	return NULL;
+}
+
+void
+gnome_file_entry_set_modal(GnomeFileEntry *fentry, int is_modal)
+{
+	g_return_val_if_fail (fentry != NULL,NULL);
+	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry),NULL);
+	
+	fentry->is_modal = is_modal;
 }
