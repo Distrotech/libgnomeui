@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
-"POT-Creation-Date: 2001-09-23 01:57+0200\n"
+"POT-Creation-Date: 2001-10-01 23:53+0200\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -13,31 +13,221 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-about.c:183
+msgid "Program name"
+msgstr "Nombre del programao"
+
+#: libgnomeui/gnome-about.c:184
+msgid "The name of the program"
+msgstr "El nombre del programa"
+
+#: libgnomeui/gnome-about.c:190
+msgid "Program version"
+msgstr "Versión del programa"
+
+#: libgnomeui/gnome-about.c:191
+msgid "The version of the program"
+msgstr "La versión del programa"
+
+#: libgnomeui/gnome-about.c:197
+msgid "Copyright string"
+msgstr "Cadena del Copyright"
+
+#: libgnomeui/gnome-about.c:198
+msgid "Copyright information for the program"
+msgstr "Información del Copyright del programa"
+
+#: libgnomeui/gnome-about.c:204
+msgid "Comments string"
+msgstr "Cadenas de comentarios"
+
+#: libgnomeui/gnome-about.c:205
+msgid "Comments about the program"
+msgstr "Comentarios acerca del programa"
+
+#: libgnomeui/gnome-about.c:212 libgnomeui/gnome-about.c:666
+msgid "Authors"
+msgstr "Autores"
+
+#: libgnomeui/gnome-about.c:213
+msgid "List of authors of the programs"
+msgstr "Lista de autores del programa"
+
+#: libgnomeui/gnome-about.c:215
+msgid "Author entry"
+msgstr "Entrada del autor"
+
+#: libgnomeui/gnome-about.c:216
+msgid "A single author entry"
+msgstr "Una entrada de autor simple"
+
+#: libgnomeui/gnome-about.c:223 libgnomeui/gnome-about.c:669
+msgid "Translator credits"
+msgstr "Creditos de los traductores"
+
+#: libgnomeui/gnome-about.c:224
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Creditos de los traductores. Esta cadena deberia estar marcada como traducible"
+
+#: libgnomeui/gnome-about.c:231 libgnomeui/gnome-about.c:672
+msgid "Documenters"
+msgstr "Documentadores"
+
+#: libgnomeui/gnome-about.c:232
+msgid "List of people documenting the program"
+msgstr "Listado de las personas documentando el programa"
+
+#: libgnomeui/gnome-about.c:234
+msgid "Documenter entry"
+msgstr "Entrada de documentalista"
+
+#: libgnomeui/gnome-about.c:235
+msgid "A single documenter entry"
+msgstr "Una entrada simple de documentador"
+
+#: libgnomeui/gnome-about.c:242
+msgid "Background"
+msgstr "Fondo"
+
+#: libgnomeui/gnome-about.c:243
+msgid "The background pixbuf to use"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:249
+msgid "Background start opacity"
+msgstr "Opacidad inicial del fondo"
+
+#: libgnomeui/gnome-about.c:250
+msgid "Opacity at the start of the background"
+msgstr "Opacidad del fondo al inicio"
+
+#: libgnomeui/gnome-about.c:259
+msgid "Background end opacity"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:260
+msgid "Opacity at the end of the background"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:269
+msgid "Background start position"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:270
+msgid "Position at the start of the background"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:278
+msgid "Background end position"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:279
+msgid "Position at the end of the background"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:287 libgnomeui/gnome-druid-page-standard.c:145
+msgid "Logo"
+msgstr "Logo"
+
+#: libgnomeui/gnome-about.c:288
+msgid "A logo for the about box"
+msgstr "Un logo para la caja \"acerca de\""
+
+#: libgnomeui/gnome-about.c:294
+msgid "Logo top padding"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:295
+msgid "How far the logo is from the top"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:304
+msgid "Logo right padding"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:305
+msgid "How far the logo is from the right"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:314
+msgid "Header font"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:315
+msgid "Header font description as a string"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:320
+msgid "Copyright font"
+msgstr "Fuente del Copyright"
+
+#: libgnomeui/gnome-about.c:321
+msgid "Copyright font description as a string"
+msgstr "Descripción de la fuente del Copyright como una cadena"
+
+#: libgnomeui/gnome-about.c:326
+msgid "Comments font"
+msgstr "Fuente de los comentarios"
+
+#: libgnomeui/gnome-about.c:327
+msgid "Comments font description as a string"
+msgstr "Descripción de la fuente de los comentarios como una cadena"
+
+#: libgnomeui/gnome-about.c:332
+msgid "Name header font"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:333
+msgid "Name header font description as a string"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:338
+msgid "Name list font"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:339
+msgid "Name list font description as a string"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:666
+msgid "Author"
+msgstr "Autor"
+
+#: libgnomeui/gnome-about.c:672
+msgid "Documenter"
+msgstr "Documentador"
+
+#: libgnomeui/gnome-about.c:819
+msgid "About %s"
+msgstr "Acerca de %s"
+
+#: libgnomeui/gnome-client.c:837
 msgid "Specify session management ID"
 msgstr "Especificar un ID de administración de sesión"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:837
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:839
+#: libgnomeui/gnome-client.c:840
 msgid "Specify prefix of saved configuration"
 msgstr "Especificar un prefijo para guardar la configuración"
 
-#: libgnomeui/gnome-client.c:839
+#: libgnomeui/gnome-client.c:840
 msgid "PREFIX"
 msgstr "PREFIJO"
 
-#: libgnomeui/gnome-client.c:842
+#: libgnomeui/gnome-client.c:843
 msgid "Disable connection to session manager"
 msgstr "Deshabilitar la conexión al administrador de sesiones"
 
-#: libgnomeui/gnome-client.c:948
+#: libgnomeui/gnome-client.c:949
 msgid "Session management"
 msgstr "Administación de sesiones"
 
-#: libgnomeui/gnome-client.c:2438
+#: libgnomeui/gnome-client.c:2453
 msgid "Cancel Logout"
 msgstr "Cancelar Salir"
 
@@ -114,10 +304,6 @@ msgstr "Título"
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Title of the druid"
 msgstr "Título del asistente"
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Logo"
-msgstr "Logo"
 
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Logo image"
@@ -827,23 +1013,23 @@ msgstr "  - OK ? (si o no)"
 msgid "Progress"
 msgstr "Progreso"
 
-#: libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:152
 msgid "App ID"
 msgstr "ID de la aplicación"
 
-#: libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:153
 msgid "The application ID string"
 msgstr "La cadena ID de la aplicación"
 
-#: libgnomeui/gnome-entry.c:177 libgnomeui/gnome-entry.c:178
+#: libgnomeui/gnome-entry.c:180 libgnomeui/gnome-entry.c:181
 msgid "History id"
 msgstr "Id histórico"
 
-#: libgnomeui/gnome-entry.c:184
+#: libgnomeui/gnome-entry.c:187
 msgid "GTK entry"
 msgstr "Entrada GTK"
 
-#: libgnomeui/gnome-entry.c:185
+#: libgnomeui/gnome-entry.c:188
 msgid "The GTK entry"
 msgstr "La entrada GTK"
 
@@ -940,73 +1126,73 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "Detalles del error GConf: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:258 libgnomeui/gnome-icon-entry.c:817
+#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:851
 msgid "No Icon"
 msgstr "Sin icono"
 
-#: libgnomeui/gnome-icon-entry.c:464 libgnomeui/gnome-pixmap-entry.c:380
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:376
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "No puedo encontrar un hbox, usando un selector de archivos normal"
 
-#: libgnomeui/gnome-icon-entry.c:470 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:382
 msgid "Preview"
 msgstr "Previsualizar"
 
-#: libgnomeui/gnome-icon-entry.c:838
+#: libgnomeui/gnome-icon-entry.c:872
 msgid "Browse"
 msgstr "Navegar"
 
-#: libgnomeui/gnome-icon-sel.c:281
+#: libgnomeui/gnome-icon-sel.c:295
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: '%s' no existe o no es un directorio"
 
-#: libgnomeui/gnome-icon-sel.c:289
+#: libgnomeui/gnome-icon-sel.c:303
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: no pude abrir el directorio '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:362
+#: libgnomeui/gnome-icon-sel.c:398
 msgid "Loading Icons..."
 msgstr "Cargando iconos..."
 
-#: libgnomeui/gnome-messagebox.c:169
+#: libgnomeui/gnome-messagebox.c:118
 msgid "Information"
 msgstr "Información"
 
-#: libgnomeui/gnome-messagebox.c:174
+#: libgnomeui/gnome-messagebox.c:123
 msgid "Warning"
 msgstr "Aviso"
 
-#: libgnomeui/gnome-messagebox.c:180
+#: libgnomeui/gnome-messagebox.c:129
 msgid "Error"
 msgstr "Error"
 
-#: libgnomeui/gnome-messagebox.c:186
+#: libgnomeui/gnome-messagebox.c:135
 msgid "Question"
 msgstr "Pregunta"
 
-#: libgnomeui/gnome-messagebox.c:191
+#: libgnomeui/gnome-messagebox.c:140
 msgid "Message"
 msgstr "Mensaje"
 
-#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:498
+#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:494
 msgid "No Image"
 msgstr "Sin imagen"
 
-#: libgnomeui/gnome-scores.c:81
+#: libgnomeui/gnome-scores.c:80
 msgid "Top Ten"
 msgstr "Diez primeros"
 
-#: libgnomeui/gnome-scores.c:94
+#: libgnomeui/gnome-scores.c:93
 msgid "User"
 msgstr "Usuario"
 
-#: libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-scores.c:96
 msgid "Score"
 msgstr "Puntuación"
 
-#: libgnomeui/gnome-scores.c:100
+#: libgnomeui/gnome-scores.c:99
 msgid "Date"
 msgstr "Fecha"
 
@@ -1017,33 +1203,33 @@ msgstr "Fecha"
 #. %d is day of month, %m is month number, %T full hour,
 #. %H hours, %M minutes, %S seconds
 #.
-#: libgnomeui/gnome-scores.c:215
+#: libgnomeui/gnome-scores.c:199
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
-#: libgnomeui/gnome-scores.c:425
+#: libgnomeui/gnome-scores.c:409
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 
 #. Pixmap
-#: test-gnome/testgnome.c:690
+#: test-gnome/testgnome.c:756
 msgid "Default Pixmap"
 msgstr "Pixmaps por defecto"
 
-#: test-gnome/testgnome.c:699 test-gnome/testgnome.c:739
-#: test-gnome/testgnome.c:766
+#: test-gnome/testgnome.c:765 test-gnome/testgnome.c:805
+#: test-gnome/testgnome.c:832
 msgid "If you choose a font it will appear here"
 msgstr "Si eliges una fuente aparecerá aquí"
 
-#: test-gnome/testgnome.c:715
+#: test-gnome/testgnome.c:781
 msgid "Use Font in button with size"
 msgstr "Usar fuente en botón con tamaño"
 
-#: test-gnome/testgnome.c:722
+#: test-gnome/testgnome.c:788
 msgid "Show font size"
 msgstr "Mostrar tamaño de la fuente"
 
-#: test-gnome/testgnome.c:760
+#: test-gnome/testgnome.c:826
 msgid "This is an hbox with pixmap and text"
 msgstr "Este es un hboxcon un pixmaps y texto"
 
