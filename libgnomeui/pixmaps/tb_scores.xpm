@@ -1,0 +1,29 @@
+/* XPM */
+static char *menu_scores_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"    20    20        3            1",
+/* colors */
+". c None",
+"# c #000000",
+"a c #ffffff",
+/* pixels */
+"....................",
+"......#######.......",
+"......#aaaaa#.......",
+"......#aa#aa#.......",
+"......#a##aa#.......",
+"......#aa#aa#.......",
+".######aa#aa#.......",
+".#aaaaaa###a######..",
+".#a###aaaaaaaaaaa#..",
+".#aaa#aaaaaaa###a#..",
+".#a###aaaaaaaaa#a#..",
+".#a#aaaaaaaaaa##a#..",
+".#a###aaaaaaaaa#a#..",
+".#aaaaaaaaaaa###a#..",
+".#aaaaaaaaaaaaaaa#..",
+".#################..",
+"....................",
+"....................",
+"...................."
+};
