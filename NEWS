@@ -1,3 +1,44 @@
+================
+libgnomeui 2.2.1 (24.05.2003)
+================
+
+New in this release:
+
+Library:
+	* Fix toolbars to be consistent (Rodney Dawes)
+	* Fix gnome-segv to not loop when it crashes itself
+	(Malcolm Tredinnick, Damon Chaplin)
+	* Make fonts in icon labels respect font size changes
+	(Pasupathi Duraisamy)
+	* Skip hidden pages in the druid (Ricardo Fernández Pascual)
+	* Fix referencing problem with MDI (Jaka Mocnic)
+	* Fix leaks in session management and score handling
+	(Kjartan Maraas, Arjan Van de Ven)
+	* Bugfix for gnome-icon-theme (Gustavo Giraldez)
+	* Don't crash when double clicking the OK button in
+	the fileselector (Narayana Pattipati)
+	* API documentation fixes (Sebastian Rittau)
+	* Don't return FALSE in pointer functions (Morten Welinder)
+	* Fix compiler warnings and uninitialised vars (Malcolm
+	Tredinnick)
+	* Ask gdk-pixbuf for supported mime types in gnome-icon-lookup.c
+	(Anders Carlsson, Christian Schaller)
+	* Fix leak in the font picker (Kjartan Maraas)
+	* Fix top-left text for icons in nautilus (Alex Larsson)
+	* Fix entry items not being cleared properly (Marco Pesenti Gritti)
+	
+Translations:
+
+	am (Daniel Yacob), az (Metin Amiroff), be (Dmitry Mastrukov), 
+	ca (Jordi Mallach), cs (Miloslav Trmac), da (Ole Laursen),
+	de (Christian Meyer), eo (Joel Brich), fa (Roozbeh Pournander),
+	fr (Christophe Merlet), ga (Paul Duffy), hi (Guntapalli Karunkar),
+	id (Mohammad DAMT), is (Samuel Gunnarsson), ja (Takeshi AIHANA),
+	ml (FSF-India), mn (Sanlig Badral), pt (Duarte Loreto), ro (Marius
+	Andreiana), sr (Danilo Yegan), tr (Fatih Demir), yi (Raphael Finkel), 
+	zh_CN (He Qiangqiang), zh_TW (Abel Cheung)
+
+
 August 14, 2001:
 ===============
 
