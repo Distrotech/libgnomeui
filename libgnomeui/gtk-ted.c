@@ -173,10 +173,6 @@ gtk_ted_attach (GtkTed *ted, GtkWidget *widget, struct ted_widget_info *wi)
 			  1+ wi->start_col * 2, 1+ (wi->start_col * 2)+(wi->col_span * 2)-1,
 			  1+ wi->start_row * 2, 1+ (wi->start_row * 2)+(wi->row_span * 2)-1,
 			  GTK_FILL | GTK_EXPAND, GTK_FILL | GTK_EXPAND,
-/* 
-			  wi->flags_x,
-			  wi->flags_y,
-*/
 			  0, 0);
 
 	gtk_ted_align_new (align, wi);
@@ -791,15 +787,17 @@ gtk_ted_control_bar_new (GtkTed *ted)
 	return hbox;
 }
 
-void
+static void
+gtk_ted_init_divisions (GtkTed *ted)
+{
+	gtk_ted_add_controls (ted, ted->top_col+1, ted->top_row+1);
+	gtk_ted_add_divisions (ted, ted->top_col+1, ted->top_row+1);
+}
+
+static void
 gtk_ted_init_editor (GtkTed *ted)
 {
 	GtkWidget *control_window, *control_bar;
-	int rows = 6;
-	int cols = 6;
-	
-	gtk_ted_add_controls (ted, cols, rows);
-	gtk_ted_add_divisions (ted, cols, rows);	
 
 	control_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	ted->widget_box = gtk_table_new (TED_TOP_ROW+2, TED_TOP_COL, 0);
@@ -1334,7 +1332,8 @@ gtk_ted_prepare_widgets_edit (gpointer key, gpointer value, gpointer user_data)
 {
 	GtkTed *ted = user_data;
 	struct ted_widget_info *wi = value;
-
+	int top_col, top_row;
+	
 	/* This is a widget that had layout information, but does not exist in this
 	 * instance of the execution
 	 */
@@ -1343,6 +1342,10 @@ gtk_ted_prepare_widgets_edit (gpointer key, gpointer value, gpointer user_data)
 	
 	gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted), key);
 	gtk_ted_widget_control_new (ted, wi->widget, key);
+	top_col = wi->start_col + wi->col_span;
+	top_row = wi->start_row + wi->row_span;
+	ted->top_col = MAX (ted->top_col, wi->start_col + wi->col_span);
+	ted->top_row = MAX (ted->top_row, wi->start_row + wi->row_span);
 }
 
 static void
@@ -1352,6 +1355,12 @@ gtk_ted_setup_layout (gpointer key, gpointer value, gpointer user_data)
 	struct ted_widget_info *wi = value;
 	int top_col, top_row;
 
+	/* If the widget does no longer exist, but it is present on the layout
+	 * file, return
+	 */
+	if (!wi->widget)
+		return;
+	
 	top_col = wi->start_col + wi->col_span;
 	top_row = wi->start_row + wi->row_span;
 	
@@ -1411,6 +1420,7 @@ gtk_ted_prepare (GtkTed *ted)
 		gtk_ted_init_editor (ted);
 		ted->in_gui = 1;
 		g_hash_table_foreach (ted->widgets, gtk_ted_prepare_widgets_edit, ted);
+		gtk_ted_init_divisions (ted);
 	} else {
 		ted->top_col = ted->top_row = 0;
 		g_hash_table_foreach (ted->widgets, gtk_ted_setup_layout, ted);
