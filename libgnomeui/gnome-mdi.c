@@ -415,6 +415,9 @@ static void child_list_menu_create(GnomeMDI *mdi, GnomeApp *app) {
   GList *child;
   gint pos;
 
+  if(mdi->child_list_path == NULL)
+    return;
+
   submenu = gnome_app_find_menu_pos(app->menubar, mdi->child_list_path, &pos);
 
   child = mdi->children;
