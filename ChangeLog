@@ -1,3 +1,8 @@
+Fri Jul  4 04:27:42 2003  Soeren Sandmann  <sandmann@daimi.au.dk>
+
+	* libgnomeui/gnome-app.c (gnome_app_add_toolbar): remove setting
+	of border width, thus getting rid of double bevels.
+
 2003-07-03  Anders Carlsson  <andersca@codefactory.se>
 
 	* doc/reference/.cvsignore:

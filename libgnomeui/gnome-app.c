@@ -651,7 +651,6 @@ gnome_app_add_toolbar (GnomeApp *app,
 	dock_item = bonobo_dock_item_new (name, behavior);
 	setup_notification_for_dock_item (BONOBO_DOCK_ITEM (dock_item), "/desktop/gnome/interface/toolbar_detachable");
 	
-	gtk_container_set_border_width (GTK_CONTAINER (toolbar), 2);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (toolbar));
 
 	if(app->layout)
