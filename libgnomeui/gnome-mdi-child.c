@@ -32,6 +32,8 @@
 static void       gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void       gnome_mdi_child_init             (GnomeMDIChild *);
 static void       gnome_mdi_child_destroy          (GtkObject *);
+static void       gnome_mdi_child_finalize         (GtkObject *);
+
 static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *, gpointer);
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
 
@@ -69,6 +71,7 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
 	object_class = (GtkObjectClass*)klass;
   
 	object_class->destroy = gnome_mdi_child_destroy;
+	object_class->finalize = gnome_mdi_child_finalize;
   
 	klass->create_view = NULL;
 	klass->create_menus = NULL;
@@ -93,7 +96,7 @@ static void gnome_mdi_child_init (GnomeMDIChild *mdi_child)
 static GtkWidget *gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *old_label, gpointer data)
 {
 #ifdef GNOME_ENABLE_DEBUG
-	printf("GnomeMDIChild: default set_label handler called!\n");
+	g_message("GnomeMDIChild: default set_label handler called!\n");
 #endif
 
 	if(old_label) {
@@ -110,12 +113,29 @@ static GtkWidget *gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *ol
 	}
 }
 
+static void gnome_mdi_child_finalize (GtkObject *obj)
+{
+	GnomeMDIChild *mdi_child;
+
+#ifdef GNOME_ENABLE_DEBUG
+	g_message("child finalization\n");
+#endif
+
+	mdi_child = GNOME_MDI_CHILD(obj);
+
+	if(mdi_child->name)
+		g_free(mdi_child->name);
+
+	if(GTK_OBJECT_CLASS(parent_class)->finalize)
+		(* GTK_OBJECT_CLASS(parent_class)->finalize)(obj);
+}
+
 static void gnome_mdi_child_destroy (GtkObject *obj)
 {
 	GnomeMDIChild *mdi_child;
 
 #ifdef GNOME_ENABLE_DEBUG
-	printf("GnomeMDIChild: destroying!\n");
+	g_message("GnomeMDIChild: destroying!\n");
 #endif
 
 	mdi_child = GNOME_MDI_CHILD(obj);
@@ -123,11 +143,8 @@ static void gnome_mdi_child_destroy (GtkObject *obj)
 	while(mdi_child->views)
 		gnome_mdi_child_remove_view(mdi_child, GTK_WIDGET(mdi_child->views->data));
 
-	if(mdi_child->name)
-		g_free(mdi_child->name);
-
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(GTK_OBJECT(mdi_child));
+		(* GTK_OBJECT_CLASS(parent_class)->destroy)(obj);
 }
 
 /**
@@ -153,8 +170,6 @@ GtkWidget *gnome_mdi_child_add_view (GnomeMDIChild *mdi_child)
 		mdi_child->views = g_list_append(mdi_child->views, view);
 
 		gtk_object_set_data(GTK_OBJECT(view), "GnomeMDIChild", mdi_child);
-
-		gtk_widget_ref(view);
 	}
 
 	return view;

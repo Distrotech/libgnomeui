@@ -37,6 +37,7 @@ static void gnome_proc_bar_size_request (GtkWidget *w, GtkRequisition *r, GnomeP
 static void gnome_proc_bar_finalize (GtkObject *o);
 static void gnome_proc_bar_setup_colors (GnomeProcBar *pb);
 static void gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val []);
+static void gnome_proc_bar_destroy (GtkObject *obj);
 
 
 guint
@@ -71,6 +72,22 @@ gnome_proc_bar_class_init (GnomeProcBarClass *class)
     parent_class = gtk_type_class (gtk_hbox_get_type ());
 
     object_class->finalize = gnome_proc_bar_finalize;
+
+    object_class->destroy = gnome_proc_bar_destroy;
+}
+
+static void
+gnome_proc_bar_destroy (GtkObject *obj)
+{
+  GnomeProcBar *pb = GNOME_PROC_BAR (obj);
+
+  if (pb->tag != -1) {
+    gtk_timeout_remove (pb->tag);
+    pb->tag = -1;
+  }
+
+  if (GTK_OBJECT_CLASS (parent_class)->destroy)
+    (* GTK_OBJECT_CLASS (parent_class)->destroy) (obj);
 }
 
 static void
@@ -299,6 +316,9 @@ gnome_proc_bar_start (GnomeProcBar *pb, gint time, gpointer data)
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
 
+    if (pb->tag != -1)
+      gtk_timeout_remove (pb->tag);
+
     if (pb->cb) {
 	pb->cb (data);
 	pb->tag = gtk_timeout_add (time, pb->cb, data);
@@ -312,9 +332,8 @@ gnome_proc_bar_stop (GnomeProcBar *pb)
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
 
-    if (pb->cb && pb->tag != -1) {
+    if (pb->tag != -1)
 	gtk_timeout_remove (pb->tag);
-    }
 
     pb->tag = -1;
 }

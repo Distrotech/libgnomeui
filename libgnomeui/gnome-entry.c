@@ -233,6 +233,10 @@ gnome_entry_prepend_history (GnomeEntry *gentry, int save, char *text)
 
 	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
 	g_free (tmp);
+
+	/* gtk_entry_set_text runs our 'entry_changed' routine, so we have
+	   to undo the effect */
+	gentry->changed = FALSE;
 }
 
 void
@@ -265,6 +269,9 @@ gnome_entry_append_history (GnomeEntry *gentry, int save, char *text)
 
 	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
 	g_free (tmp);
+	/* gtk_entry_set_text runs our 'entry_changed' routine, so we have
+	   to undo the effect */
+	gentry->changed = FALSE;
 }
 
 static void
@@ -305,6 +312,7 @@ set_combo_items (GnomeEntry *gentry)
 
 	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
 	g_free (tmp);
+	gentry->changed = FALSE;
 }
 
 void
@@ -313,7 +321,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	char *prefix;
 	struct item *item;
 	int n;
-	char key[32];
+	char key[13];
 	char *value;
 
 	g_return_if_fail (gentry != NULL);
@@ -338,7 +346,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 		item->save = TRUE;
 		item->text = value;
 
-		gentry->items = g_list_prepend (gentry->items, item);
+		gentry->items = g_list_append (gentry->items, item);
 	}
 
 	set_combo_items (gentry);
@@ -353,7 +361,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	GList *items;
 	struct item *item;
 	int n;
-	char key[32];
+	char key[13];
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));

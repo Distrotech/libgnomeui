@@ -2479,7 +2479,7 @@ static gchar **
 array_init_from_arg (gint argc, gchar *argv[])
 {
   gchar **array;
-  gchar **ptr;
+  int i;
 
   if (argv == NULL)
     {
@@ -2490,12 +2490,12 @@ array_init_from_arg (gint argc, gchar *argv[])
   else
     {
       /* Now initialize the array.  */
-      ptr = array = g_new (gchar *, argc + 1);
+      array = g_new (gchar *, argc + 1);
+
+      for(i = 0; i < argc; i++)
+	array[i] = g_strdup(argv[i]);
       
-      for (; argc > 0 ; ptr++, argv++, argc--)
-	*ptr= g_strdup (*argv);
-      
-      *ptr= NULL;
+      array[i] = NULL;
     }
 
   return array;
@@ -2505,23 +2505,23 @@ static gchar **
 array_copy (gchar **source)
 {
   gchar **array;
-  gchar **ptr;
   gint    argc;
+  int i, n;
   
   if (source == NULL)
     return NULL;
-  
+
   /* Count number of elements in source array. */
-  for (ptr = source, argc = 0; *ptr; ptr++, argc++) /* LOOP */;
+  for (n = 0; source[n]; n++) /* */;
   
   /* Allocate memory for array. */
-  array = g_new (gchar *, argc + 1);
+  array = g_new (gchar *, n + 1);
 
   /* Copy the elements. */
-  for (ptr = array; argc > 0 ; ptr++, source++, argc--)
-    *ptr = g_strdup (*source);
+  for(i = 0; i < n; i++)
+    array[i] = g_strdup(source[i]);
   
-  *ptr = NULL;
+  array[i] = NULL;
   
   return array;
 }

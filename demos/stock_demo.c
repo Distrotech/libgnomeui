@@ -729,6 +729,17 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = gtk_label_new("Line In");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+        column++;
+        w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_CDROM));
+        gtk_widget_show(w);
+        gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+        w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_CDROM));
+        gtk_widget_show(w);
+        gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+        w = gtk_label_new("CD Rom");
+        gtk_widget_show(w);
+        gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
 
 	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_FONT));

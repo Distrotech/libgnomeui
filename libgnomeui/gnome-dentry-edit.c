@@ -364,50 +364,6 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
 			      dentry->terminal);
 }
 
-/* This is a simple-minded string splitter.  It splits on whitespace.
-   Something better would be to define a quoting syntax so that the
-   user can use quotes and such.  FIXME.  */
-static void
-gnome_dentry_edit_split (char *text, int *argcp, char ***argvp)
-{
-  char *p;
-  int count = 0;
-
-  /* First pass: find out how large to make the return vector.  */
-  for (p = text; *p; ++p) {
-    while (*p && isspace (*p))
-      ++p;
-    if (! *p)
-      break;
-    while (*p && ! isspace (*p))
-      ++p;
-    ++count;
-  }
-
-  /* Increment count to account for NULL terminator.  Resulting ARGC
-     doesn't include NULL terminator, though.  */
-  *argcp = count;
-  ++count;
-  *argvp = (char **) g_malloc (count * sizeof (char *));
-
-  count = 0;
-  for (p = text; *p; ++p) {
-    char *q;
-
-    while (*p && isspace (*p))
-      ++p;
-    if (! *p)
-      break;
-
-    q = p;
-    while (*p && ! isspace (*p))
-      ++p;
-    (*argvp)[count++] = (char *) g_strndup (q, p - q);
-  }
-
-  (*argvp)[count] = NULL;
-}
-
 /* Conform dentry to display */
 static void gnome_dentry_edit_sync_dentry(GnomeDEntryEdit * dee,
 					  GnomeDesktopEntry * dentry)
@@ -429,7 +385,9 @@ static void gnome_dentry_edit_sync_dentry(GnomeDEntryEdit * dee,
   text = gtk_entry_get_text(GTK_ENTRY(dee->exec_entry));
   g_strfreev(dentry->exec);
   if (text[0] != '\0') {
-    gnome_dentry_edit_split (text, &dentry->exec_length, &dentry->exec);
+    gnome_config_make_vector(text,
+			     &dentry->exec_length,
+			     &dentry->exec);
   } else {
     dentry->exec_length = 0;
   }

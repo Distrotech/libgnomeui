@@ -1057,13 +1057,6 @@ gnome_canvas_ellipse_update (GnomeCanvasItem *item, double affine[6], ArtSVP *cl
 	gnome_canvas_w2c_d (item->canvas, dx + re->x1, dy + re->y1, &x0, &y0);
 	gnome_canvas_w2c_d (item->canvas, dx + re->x2, dy + re->y2, &x1, &y1);
 
-#ifdef VERBOSE
-	g_print ("item %x (%g, %g) - (%g, %g) -> (%g, %g) - (%g, %g)\n",
-		 item,
-		 re->x1, re->y1, re->x2, re->y2,
-		 x0, y0, x1, y1);
-#endif
-
 	if (re->fill_set) {
 		gnome_canvas_gen_ellipse (vpath, x0, y0, x1, y1);
 		vpath[N_PTS + 1].code = ART_END;

@@ -73,6 +73,174 @@ Wed Dec 16 11:51:23 1998  Raph Levien  <raph@gimp.org>
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_render): Added
 	alphagamma arg to rendering calls.
 
+1998-12-29  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-properties.c (gnome_property_object_register): Only create
+ 	the label if not already done.
+
+1998-12-29  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-procbar.c (gnome_proc_bar_destroy): New static function.
+	(gnome_proc_bar_class_init): Added `destroy' handler.
+	(gnome_proc_bar_start): Remove old timeout handler first.
+
+Mon Dec 28 20:56:18 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry.c: use the same function for breaking strings
+	  as gnome-config does.
+
+Sun Dec 27 21:47:41 1998 Gregory McLean <gregm@comstar.net>
+
+	* gnome-stock.[c|h] : added a stock cdrom icon that I found in
+	one of larry ewing's galleries. (With his blessing). 
+	* pixmaps/stock_cdrom.png: added this.
+
+1998-12-27  Tuomas Kuosmanen  <tigert@fun112.koivukyla.hoas.fi>
+
+	* Replaced the offending-to-some-ethnic-groups Yes/No -buttons
+	with hopefully nicer looking red/green circles (streetlights _are_
+	universal, right? :)
+
+1998-12-23  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_remove_menu[s|range]):
+	if the item widget is a GtkAccelLabel, set its accel_widget
+	to NULL, thus unreferencing the item properly.
+	(gnome_app_find_menu_pos): trash the outdated checking for
+	gtkhbox since gtkpixmapmenuitem replaced it.
+	* gnome-mdi.c (app_set_view): set accel_widget to NULL.
+
+Mon Dec 21 01:27:23 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-entry.c: accept double click on the icon list for
+	  selection of the icon (someone please test this!)
+
+	* gnome-icon-sel.c: just remove an outdated fixme comment
+
+1998-12-21  James Henstridge  <james@daa.com.au>
+
+	* gnome-app-helper.c (gnome_app_remove_menu{s,_range}): don't
+	destroy widgets after calling gtk_container_remove on them.
+	The widgets should be automatically destroyed when their reference
+	count is decremented.
+
+1998-12-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-sel.c (gnome_icon_selection_init): Put a frame around
+	the icon list to make it look better.
+
+1998-12-18  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-procbar.c (gnome_proc_bar_draw): Calculate total field
+	here and make it work with vertical procbars.
+	(gnome_proc_bar_set_values): Always redraw the procbar not just
+	if the values have changed.
+
+	* gnome-procbar.c (gnome_proc_bar_draw): New static function.
+	(gnome_proc_bar_set_values): Save values in pb->last even if
+	the widget is not realized. Moved actual drawing code into
+	gnome_proc_bar_draw ().
+	(gnome_proc_bar_start): Call the callback here, not only add
+	a timeout for it.
+	(gnome_proc_bar_configure): Call gnome_proc_bar_draw () if the
+	widget is already realized. This fixes the bug that the procbar
+	was displaying garbage until the timeout was run the first time.
+
+1998-12-18  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (app_set_view): enhance removing of menus and
+	explicitly destroy the widget after removing it from the
+	menu shell. I guess this has to do with menu refcounting.
+	* gnome-app-helper.c(gnome_app_remove_menus,
+	gnome_app_remove_menu_range): optimize menu removal; explicitly
+	destroy removed widgets. small fix to make removal of first
+	item work properly with tearoff menus.
+	
+1998-12-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_freeze): Hide the root of the
+	canvas while the list is frozen.  This way the user does not see
+	icons loading at the upper left corner.
+	(gnome_icon_list_thaw): Show the canvas root again.
+
+	* gnome-icon-sel.c (append_an_icon): Do not destroy the image that
+	we insert in the icon list.  This is actually not the correct
+	solution.  Imlib needs to provide ref() and unref() functions for
+	its images.
+
+1998-12-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_find_menu_pos): consider the
+	position after the tear off item to be the topmost one.
+	
+1998-12-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (icon_event): Propagate button-3 events to the
+	container. 
+
+1998-12-17  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app-helper.c (gnome_app_fill_menu_custom): Prepend a
+	tearoff if preferences tell us to.
+	(gnome_app_find_menu_pos): When checking if menu item is a
+	separator, ignore tear off menu items.
+
+	* gnome-preferences.[ch]: Add preference for menus_have_tearoff.
+
+1998-12-17  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-app.c (gnome_app_realize): Simply show the dock, instead
+	of showing_all.
+	(gnome_app_set_contents): Show the contents.
+	(gnome_app_set_menus): Show the dock item.  Put the dock item into a
+	new dock band.  The menubar now goes into
+	band 0 (instead of band -1).
+	(gnome_app_add_toolbar): Put the dock item into a new dock band.
+	The toolbar now goes into band 1 (instead of band 0).
+
+1998-12-17  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app.c (gnome_app_set_menus): Make menubar relief agree
+	with with toolbar relief (relief on the dock item, around
+	handles).
+
+Thu Dec 17  Felix Bellaby  <felix@pooh.u-net.com>
+	* gnome-client.c (gnome_client_connect, gnome_client_set_id): remove
+	some code left over from old config file naming scheme.
+
+1998-12-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c: added checks for all returns of
+	gnome_app_find_menu_pos, although the programmer should take
+	of using proper paths!
+
+1998-12-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (gnome_popup_menu_do_popup_modal): REmoved
+	bogus assert.
+
+1998-12-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-number-entry.c (calc_dialog_destroyed): Fix signal
+	signature. 
+
+	* gnome-init.c (relay_gtk_signal): Return a value.
+
+Wed Dec 16 17:53:48 1998  Raph Levien  <raph@gimp.org>
+
+	So far, no changes that affect canvas users or xlib custom items.
+
+	* gnome-canvas-util.h:
+	* gnome-canvas-util.c: Added a number of routines that are helpful
+	for aa rendering.
+
+	* gnome-canvas-rect-ellipse.c: re-enabled the rendering.
+
+Wed Dec 16 11:51:23 1998  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_render): Added
+	alphagamma arg to rendering calls.
+
 1998-12-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.[ch]: Misc. updates to accomodate the new rendering
