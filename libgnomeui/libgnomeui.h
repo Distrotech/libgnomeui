@@ -45,6 +45,7 @@
 #include <libgnomeui/gnome-color-picker.h>
 #include <libgnomeui/gnome-entry.h>
 #include <libgnomeui/gnome-file-entry.h>
+#include <libgnomeui/gnome-gconf-ui.h>
 #include <libgnomeui/gnome-image-entry.h>
 #include <libgnomeui/gnome-image-selector.h>
 

@@ -62,6 +62,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-component-widget.c	\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
+	gnome-gconf-ui.c		\
 	gnome-image-entry.c		\
 	gnome-image-selector.c		\
 	gnome-href.c			\
@@ -95,6 +96,7 @@ gnome_headers = \
 	gnome-component-widget.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
+	gnome-gconf-ui.h		\
 	gnome-image-entry.h		\
 	gnome-image-selector.h		\
 	gnome-href.h			\

@@ -43,7 +43,6 @@
 #include <gconf/gconf-client.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
-#include <libgnome/libgnome.h>
 
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
@@ -54,6 +53,8 @@
  */
 
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-gconf.h>
+#include <libgnome/gnome-program.h>
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"
@@ -2480,9 +2481,6 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
         
         gtk_toolbar_set_style(toolbar, style);
 }
-
-/* FIXME FIXME FIXME */
-#define gnome_gconf_get_gnome_libs_settings_relative(p) NULL
 
 static void
 toolbar_style_changed_notify(GConfClient            *client,

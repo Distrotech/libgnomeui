@@ -49,6 +49,7 @@
 #include <libgnomeui/gnome-canvas-init.h>
 
 #include "gnome-client.h"
+#include "gnome-gconf-ui.h"
 #include "gnome-ui-init.h"
 #include "gnome-winhints.h"
 #include "gnome-stock-icons.h"
@@ -113,6 +114,7 @@ static void libgnomeui_rc_parse (gchar *command);
 static void libgnomeui_segv_setup(gboolean post_arg_parse);
 
 static GnomeModuleRequirement libgnomeui_requirements[] = {
+        {VERSION, &gnome_gconf_ui_module_info},
         {VERSION, &libgnome_module_info},
         {VERSION, &libgnomecanvas_module_info},
         {VERSION, &libbonoboui_module_info},
@@ -283,25 +285,23 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
            characters will display for as many people as possible. Related to bug #1979 */
         ctype = setlocale (LC_CTYPE, NULL);
 
-        if (!strcmp(ctype, "C")) {
+        if (strcmp (ctype, "C") == 0) {
                 old_ctype = g_strdup (g_getenv ("LC_CTYPE"));
-                putenv ("LC_CTYPE=en_US");
+                gnome_setenv ("LC_CTYPE", "en_US", TRUE);
                 ctype_set = TRUE;
-        } else
+        } else {
                 ctype_set = FALSE;
+	}
 
         gtk_set_locale ();
 
         if (ctype_set) {
-                char *setme;
-
                 if (old_ctype) {
-                        setme = g_strconcat ("LC_CTYPE=", old_ctype, NULL);
-                        g_free(old_ctype);
-                } else
-                        setme = "LC_CTYPE";
-
-                putenv (setme);
+			gnome_setenv ("LC_CTYPE", old_ctype, TRUE);
+                        g_free (old_ctype);
+                } else {
+			gnome_unsetenv ("LC_CTYPE");
+		}
         }
         /* End hack */
 }
@@ -312,7 +312,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         GnomeProgramPrivate_libgnomeui *priv = g_new0(GnomeProgramPrivate_libgnomeui, 1);
 
         gnome_type_init();
-        // #warning FIXME: here... gtk_rc ...
+        /* #warning FIXME: here... gtk_rc ... */
         libgnomeui_rc_parse(program_invocation_name);
 
         libgnomeui_segv_setup(TRUE);
@@ -475,7 +475,19 @@ static void libgnomeui_segv_handle(int signum)
 
         gdk_flush();
         
-	if ((pid = fork())) {
+	pid = fork();
+
+	if (pid < 0) {
+		/* Eeeek! Can't show dialog */
+                fprintf (stderr, _("Segmentation fault!\n"
+				   "Cannot display crash dialog\n"));
+
+                /* Don't use app attributes here - a lot of things are probably hosed */
+		if (g_getenv ("GNOME_DUMP_CORE"))
+	                abort ();
+
+		_exit(1);
+	} else if (pid > 0) {
                 /* Wait for user to see the dialog, then exit. */
                 /* Why wait at all? Because we want to allow people to attach to the
 		   process */
@@ -489,7 +501,7 @@ static void libgnomeui_segv_handle(int signum)
 	                abort ();
 
 		_exit(1);
-	} else {
+	} else /* pid == 0 */ {
                 GnomeProgram *program;
 		char buf[32];
 

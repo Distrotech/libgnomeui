@@ -1,3 +1,14 @@
+Mon Aug 27 00:44:15 2001  George Lebl <jirka@5z.com>
+
+	* Makefile.am, gnome-gconf-ui.[ch], gnome-ui-init.c, libgnomeui.h: 
+	  Add gconf error stuff as a module, no api added.  The only two
+	  gnome-gconf API entry points are in libgnome itself.  Also
+	  a bit of cleanup in the init code, and handle fork() < 0 case
+	  on segfault.
+
+	* gnome-app-helper.c, gnome-messagebox.c: fix includes and use the
+	  gconf stuff
+
 Sun Aug 26 19:35:04 2001  George Lebl <jirka@5z.com>
 
 	* Makefile.am, gnome-app-helper.[ch], gnome-app-util.[ch],

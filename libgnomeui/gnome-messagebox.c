@@ -36,7 +36,6 @@
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-uidefs.h>
-#include <libgnome/libgnome.h>
 
 #define GNOME_MESSAGE_BOX_WIDTH  425
 #define GNOME_MESSAGE_BOX_HEIGHT 125
