@@ -3054,10 +3054,6 @@ gnome_canvas_key (GtkWidget *widget, GdkEventKey *event)
 	g_return_val_if_fail (event != NULL, FALSE);
 
 	canvas = GNOME_CANVAS (widget);
-
-	if (event->window != canvas->layout.bin_window)
-		return FALSE;
-
 	return emit_event (canvas, (GdkEvent *) event);
 }
 
