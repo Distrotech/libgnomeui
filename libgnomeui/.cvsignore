@@ -18,3 +18,13 @@ gnometypebuiltins.h
 gnometypebuiltins_evals.c
 gnometypebuiltins_ids.c
 gnometypebuiltins_vars.c
+gnome-unknown-stubs.c
+gnome-unknown-skels.c
+gnome-unknown-common.c
+gnome-unknown.h
+gnome-corba-rexec-stubs.c
+gnome-corba-rexec-skels.c
+gnome-corba-rexec-common.c
+gnome-corba-rexec.h
+gnome-remote-bootstrap
+gnome-rexec-server
