@@ -349,15 +349,18 @@ gnome_thumbnail_factory_ensure_uptodate (GnomeThumbnailFactory *factory)
   struct stat statbuf;
   GnomeThumbnailFactoryPrivate *priv = factory->priv;
 
+  gettimeofday (&tv, NULL);
+  
   if (priv->last_existing_time != 0)
     {
-      gettimeofday (&tv, NULL);
-
+      /* Shortcut to not stat on every lookup */
       if (tv.tv_sec >= priv->last_existing_time &&
 	  tv.tv_sec < priv->last_existing_time + SECONDS_BETWEEN_STATS)
 	return;
     }
-
+  
+  priv->last_existing_time = tv.tv_sec;
+      
   path = g_build_filename (g_get_home_dir (),
 			   ".thumbnails",
 			   (priv->size == GNOME_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
@@ -376,7 +379,6 @@ gnome_thumbnail_factory_ensure_uptodate (GnomeThumbnailFactory *factory)
     }
 
   priv->read_existing_mtime = statbuf.st_mtime;
-  priv->last_existing_time = tv.tv_sec;
 
   read_md5_dir (path, priv->existing_thumbs);
 

@@ -1,3 +1,11 @@
+2002-10-10  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-thumbnail.c (gnome_thumbnail_factory_ensure_uptodate):
+	Fix shortcut to avoid stat:ing thumbnail dir a lot.
+
+	* libgnomeui/gnome-icon-theme.c (gnome_icon_theme_rescan_if_needed):
+	Implement rescanning
+
 2002-10-04  Vladimir Vukicevic  <vladimir@pobox.com>
 
 	* libgnomeui/gnome-ui-init.c (libgnomeui_segv_setup): don't reset

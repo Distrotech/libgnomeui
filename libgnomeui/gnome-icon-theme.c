@@ -17,6 +17,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <glib.h>
@@ -24,11 +28,6 @@
 
 #include "gnome-icon-theme.h"
 #include "gnome-theme-parser.h"
-
-/* general TODO:
- * Handle icon specific properties
- * Rescan/stat handling.
- */
 
 typedef enum
 {
@@ -45,6 +44,7 @@ typedef enum
   ICON_SUFFIX_SVG,
   ICON_SUFFIX_PNG,  
 } IconSuffix;
+
 
 struct _GnomeIconThemePrivate
 {
@@ -69,6 +69,10 @@ struct _GnomeIconThemePrivate
   
   /* GConf data: */
   guint theme_changed_id;
+
+  /* time when we last stat:ed for theme changes */
+  long last_stat_time;
+  GList *dir_mtimes;
 };
 
 typedef struct
@@ -97,6 +101,12 @@ typedef struct
   GHashTable *icons;
   GHashTable *icon_data;
 } IconThemeDir;
+
+typedef struct 
+{
+  char *dir;
+  time_t mtime; /* 0 == not existing or not a dir */
+} IconThemeDirMtime;
 
 static void   gnome_icon_theme_class_init (GnomeIconThemeClass *klass);
 static void   gnome_icon_theme_init       (GnomeIconTheme      *icon_theme);
@@ -281,6 +291,13 @@ gnome_icon_theme_init (GnomeIconTheme *icon_theme)
 }
 
 static void
+free_dir_mtime (IconThemeDirMtime *dir_mtime)
+{
+  g_free (dir_mtime->dir);
+  g_free (dir_mtime);
+}
+
+static void
 blow_themes (GnomeIconThemePrivate *priv)
 {
   if (priv->themes_valid)
@@ -288,10 +305,13 @@ blow_themes (GnomeIconThemePrivate *priv)
       g_hash_table_destroy (priv->all_icons);
       g_list_foreach (priv->themes, (GFunc)theme_destroy, NULL);
       g_list_free (priv->themes);
+      g_list_foreach (priv->dir_mtimes, (GFunc)free_dir_mtime, NULL);
+      g_list_free (priv->dir_mtimes);
       g_hash_table_destroy (priv->unthemed_icons);
     }
   priv->themes = NULL;
   priv->unthemed_icons = NULL;
+  priv->dir_mtimes = NULL;
   priv->all_icons = NULL;
   priv->themes_valid = FALSE;
 }
@@ -463,6 +483,8 @@ insert_theme (GnomeIconTheme *icon_theme, const char *theme_name)
   char *directories;
   char *inherits;
   GnomeThemeFile *theme_file;
+  IconThemeDirMtime *dir_mtime;
+  struct stat stat_buf;
   
   priv = icon_theme->priv;
   
@@ -471,6 +493,21 @@ insert_theme (GnomeIconTheme *icon_theme, const char *theme_name)
       theme = l->data;
       if (strcmp (theme->name, theme_name) == 0)
 	return;
+    }
+  
+  for (i = 0; i < priv->search_path_len; i++)
+    {
+      path = g_build_filename (priv->search_path[i],
+			       theme_name,
+			       NULL);
+      dir_mtime = g_new (IconThemeDirMtime, 1);
+      dir_mtime->dir = path;
+      if (stat (path, &stat_buf) == 0 && S_ISDIR (stat_buf.st_mode))
+	dir_mtime->mtime = stat_buf.st_mtime;
+      else
+	dir_mtime->mtime = 0;
+
+      priv->dir_mtimes = g_list_prepend (priv->dir_mtimes, dir_mtime);
     }
 
   theme_file = NULL;
@@ -591,6 +628,7 @@ load_themes (GnomeIconTheme *icon_theme)
   char *abs_file;
   char *old_file;
   IconSuffix old_suffix, new_suffix;
+  struct timeval tv;
   
   priv = icon_theme->priv;
 
@@ -650,8 +688,28 @@ load_themes (GnomeIconTheme *icon_theme)
       g_dir_close (gdir);
     }
 
-
   priv->themes_valid = TRUE;
+  
+  gettimeofday(&tv, NULL);
+  priv->last_stat_time = tv.tv_sec;
+}
+
+static void
+ensure_valid_themes (GnomeIconTheme *icon_theme)
+{
+  GnomeIconThemePrivate *priv = icon_theme->priv;
+  struct timeval tv;
+  
+  if (priv->themes_valid)
+    {
+      gettimeofday(&tv, NULL);
+
+      if (ABS (tv.tv_sec - priv->last_stat_time) > 5)
+	gnome_icon_theme_rescan_if_needed (icon_theme);
+    }
+  
+  if (!priv->themes_valid)
+    load_themes (icon_theme);
 }
 
 char *
@@ -666,9 +724,8 @@ gnome_icon_theme_lookup_icon (GnomeIconTheme      *icon_theme,
   char *icon;
   
   priv = icon_theme->priv;
-  
-  if (!priv->themes_valid)
-    load_themes (icon_theme);
+
+  ensure_valid_themes (icon_theme);
 
   if (icon_data)
     *icon_data = NULL;
@@ -703,8 +760,7 @@ gnome_icon_theme_has_icon (GnomeIconTheme      *icon_theme,
   
   priv = icon_theme->priv;
   
-  if (!priv->themes_valid)
-    load_themes (icon_theme);
+  ensure_valid_themes (icon_theme);
 
   return g_hash_table_lookup_extended (priv->all_icons,
 				       icon_name, NULL, NULL);
@@ -742,8 +798,7 @@ gnome_icon_theme_list_icons (GnomeIconTheme *icon_theme,
   
   priv = icon_theme->priv;
   
-  if (!priv->themes_valid)
-    load_themes (icon_theme);
+  ensure_valid_themes (icon_theme);
 
   if (context)
     {
@@ -789,8 +844,7 @@ gnome_icon_theme_get_example_icon_name (GnomeIconTheme *icon_theme)
   
   priv = icon_theme->priv;
   
-  if (!priv->themes_valid)
-    load_themes (icon_theme);
+  ensure_valid_themes (icon_theme);
 
   l = priv->themes;
   while (l != NULL)
@@ -808,7 +862,40 @@ gnome_icon_theme_get_example_icon_name (GnomeIconTheme *icon_theme)
 gboolean
 gnome_icon_theme_rescan_if_needed (GnomeIconTheme *icon_theme)
 {
-  /* TODO */
+  GnomeIconThemePrivate *priv;
+  IconThemeDirMtime *dir_mtime;
+  char *path;
+  GList *d;
+  int stat_res;
+  struct stat stat_buf;
+  struct timeval tv;
+
+  priv = icon_theme->priv;
+  
+  for (d = priv->dir_mtimes; d != NULL; d = d->next)
+    {
+      dir_mtime = d->data;
+
+      stat_res = stat (dir_mtime->dir, &stat_buf);
+
+      /* dir mtime didn't change */
+      if (stat_res == 0 && 
+	  S_ISDIR (stat_buf.st_mode) &&
+	  dir_mtime->mtime == stat_buf.st_mtime)
+	continue;
+      /* didn't exist before, and still doesn't */
+      if (dir_mtime->mtime == 0 &&
+	  (stat_res != 0 || !S_ISDIR (stat_buf.st_mode)))
+	continue;
+	  
+      blow_themes(icon_theme->priv);
+      g_signal_emit (G_OBJECT (icon_theme), signal_changed, 0);
+      return TRUE;
+    }
+  
+  gettimeofday (&tv, NULL);
+  priv->last_stat_time = tv.tv_sec;
+
   return FALSE;
 }
 
