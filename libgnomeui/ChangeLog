@@ -1,3 +1,9 @@
+1998-11-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-popup-help.c (gnome_widget_add_help_with_uidata): we don't 
+	actually want to not add help if we have no window, we just don't
+	wan't to subscribe to events.
+
 Wen Nov 18 1998  Tim Gerla   <timg@means.net>
 
         * gnome-uidefs.h: Fixed another bug. :P
