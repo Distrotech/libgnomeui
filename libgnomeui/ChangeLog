@@ -1,3 +1,20 @@
+1998-06-12  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c: (array_insert_arg): Removed.
+	(master_environment): New array.  Lists all environment variables,
+ 	that will set automatically to the master client.
+	(gnome_client_init): Sets the environment variables listed in
+ 	'master_environment' and the current_directory now.
+	(gnome_client_set_current_directory): Sets only one environment
+ 	variable instead of all.
+	(client_set_prop_from_string): Include the trailing '\0' character
+ 	when sending strings.
+
+	* gnome-client.h: Changed declaration of
+ 	'gnome_client_set_environment'.  This function now only sets one
+ 	environment variable and not the hole environment.
+	(struct _GnomeClient): member environment now of type GList.
+
 1998-06-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-calculator.c: 

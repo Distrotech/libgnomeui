@@ -116,7 +116,7 @@ struct _GnomeClient
   gchar             **clone_command;        /*[xs]*/
   gchar              *current_directory;    /*[  ]*/
   gchar             **discard_command;      /*[  ]*/
-  gchar             **environment;          /*[  ]*/
+  GList              *environment;          /*[  ]*/
   pid_t               process_id;           /*[ s]*/
   gchar              *program;              /*[xs]*/
   gchar             **resign_command;       /*[  ]*/
@@ -278,7 +278,8 @@ void         gnome_client_set_current_directory  (GnomeClient *client,
 void         gnome_client_set_discard_command    (GnomeClient *client,
 						  gint argc, gchar *argv[]);
 void         gnome_client_set_environment        (GnomeClient *client,
-						  gint argc, gchar *argv[]);
+						  const gchar *name,
+						  const gchar *value);
 void         gnome_client_set_process_id         (GnomeClient *client, 
 						  pid_t pid);
 void         gnome_client_set_program            (GnomeClient *client, 

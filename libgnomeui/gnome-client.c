@@ -90,6 +90,9 @@ static void   client_set_prop_from_string   (GnomeClient *client,
 static void   client_set_prop_from_gchar    (GnomeClient *client,
 					     gchar       *prop_name,
 					     gchar        value);
+static void   client_set_prop_from_glist    (GnomeClient *client,
+					     gchar       *prop_name,
+					     GList       *value);
 static void   client_set_prop_from_array    (GnomeClient *client,
 					     gchar       *prop_name,
 					     gchar       *array[]);
@@ -107,9 +110,6 @@ static void   client_unset_config_prefix    (GnomeClient *client);
 static gchar** array_init_from_arg           (gint argc, 
 					      gchar *argv[]);
 static gchar** array_copy                    (gchar **source);
-static void    array_insert_arg              (gchar ***array,
-					      const gchar *client_arg,
-					      const gchar *client_id);
 
 /* 'GnomeInteractData' stuff */
 
@@ -147,6 +147,18 @@ static GnomeClient *cloned_client= NULL;
 static gchar       *cloned_id    = NULL;
 
 static gboolean gnome_client_auto_connect_master= TRUE;
+
+/* The following environment variables will be set on the master
+   client, if they are defined the programs environment.  The array
+   must end with a NULL entry.  */
+static char* master_environment[]=
+{
+  "DISPLAY", 
+  "HOME",
+  "PATH",
+  "LD_LIBRARY_PATH",
+  NULL
+};
 
 /* Forward declaration for our parsing function.  */
 static error_t client_parse_func (int key, char *arg,
@@ -275,11 +287,41 @@ gnome_client_init (void)
       
       if (master_client)
 	{
+	  gint i;
+	  gchar *buffer= NULL;
+	  
 	  gtk_signal_connect (GTK_OBJECT (master_client), "connect",
 			      GTK_SIGNAL_FUNC (master_client_connect), NULL);
 	  gtk_signal_connect (GTK_OBJECT (master_client), "disconnect",
 			      GTK_SIGNAL_FUNC (master_client_disconnect), NULL);
 	  gnome_parse_register_arguments (&parser);
+	  
+	  /* Set the master clients environment.  */
+	  for (i= 0; master_environment[i]; i++)
+	    {
+	      char *value= getenv (master_environment[i]);
+	      
+	      if (value)
+		gnome_client_set_environment (master_client, 
+					      master_environment[i],
+					      value);
+	    }
+
+	  /* Set the current directory.  */
+	  i= 512;
+	  while (buffer == NULL)
+	    {
+	      buffer= (gchar *) g_malloc (i);
+	      
+	      if (getcwd (buffer, i) == NULL)
+		{
+		  g_free (buffer);
+		  i *= 2;
+		  buffer= NULL;
+		}
+	    }
+	  gnome_client_set_current_directory (master_client, buffer);
+	  g_free (buffer);
 	}
     }
 }
@@ -485,12 +527,13 @@ gnome_real_client_destroy (GtkObject *object)
   g_free (client->global_config_prefix);
 
   g_list_foreach (client->static_args, (GFunc)g_free, NULL);
-  g_list_free (client->static_args);
+  g_list_free    (client->static_args);
 
   gnome_string_array_free (client->clone_command);
   g_free     (client->current_directory);
   gnome_string_array_free (client->discard_command);
-  gnome_string_array_free (client->environment);
+  g_list_foreach (client->environment, (GFunc)g_free, NULL);
+  g_list_free    (client->environment);
   g_free     (client->program);
   gnome_string_array_free (client->resign_command);
   gnome_string_array_free (client->restart_command);
@@ -746,31 +789,64 @@ gnome_client_set_discard_command (GnomeClient *client,
 
 void 
 gnome_client_set_environment (GnomeClient *client,
-			     gint argc, gchar *argv[])
+			      const gchar *name,
+			      const gchar *value)
 {
+  GList *temp;
+  
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
+  g_return_if_fail (name != NULL);
+
+  /* Look, if 'name' is defined in our environment.  */
+  temp= client->environment;
+  while (temp)
+    {
+      if (strcmp ((gchar *)temp->data, name) == 0)
+	break;
+      
+      temp= g_list_next (temp);
+      g_return_if_fail (temp != NULL);
+      temp= g_list_next (temp);
+    }
   
-  if (argv == NULL)
+  if (value)
     {
-      g_return_if_fail (argc == 0);
-      
-      gnome_string_array_free (client->environment);
-      client->environment= NULL;
-#ifdef HAVE_LIBSM
-      client_unset_prop (client, SmEnvironment);
-#endif /* HAVE_LIBSM */
+      if (temp)
+	{
+	  /* Change one entry in the environment.  */
+	  temp= g_list_next (temp);
+	  g_return_if_fail (temp != NULL);
+
+	  g_free (temp->data);
+	  temp->data= (gpointer) g_strdup (value);
+	}
+      else
+	{
+	  /* Add one entry to the environment.  */
+	  client->environment= g_list_append (client->environment,
+					      g_strdup (name));
+	  client->environment= g_list_append (client->environment,
+					      g_strdup (value));	  
+	}
     }
-  else
+  else if (temp)
     {
-      gnome_string_array_free (client->environment);
-      client->environment = array_init_from_arg (argc, argv);
+      /* Remove one entry from the environment.  */
+      GList *temp2= g_list_next (temp);
       
-#ifdef HAVE_LIBSM
-      client_set_prop_from_array (client, SmEnvironment, 
-				  client->environment);
-#endif /* HAVE_LIBSM */
+      g_free (temp->data);
+      client->environment= g_list_remove (client->environment, temp);
+      g_return_if_fail (temp2 != NULL);
+      g_free (temp2->data);
+      client->environment= g_list_remove (client->environment, temp2);
     }
+  else 
+    return;
+  
+#ifdef HAVE_LIBSM
+  client_set_prop_from_glist (client, SmEnvironment, client->environment);
+#endif /* HAVE_LIBSM */
 }
 
 
@@ -1131,8 +1207,7 @@ gnome_real_client_connect (GnomeClient *client,
 			       client->current_directory);
   client_set_prop_from_array (client, SmDiscardCommand,
 			      client->discard_command);
-  client_set_prop_from_array (client, SmEnvironment,
-			      client->environment);
+  client_set_prop_from_glist (client, SmEnvironment, client->environment);
   {
     gchar str_pid[32];
     
@@ -1464,7 +1539,7 @@ client_set_prop_from_string (GnomeClient *client,
   prop.type     = SmARRAY8;
   prop.num_vals = 1;
   prop.vals     = &val;
-  val.length = strlen (value);
+  val.length = strlen (value)+1;
   val.value  = value;
   proplist[0] = &prop;
   SmcSetProperties (client->smc_conn, 1, proplist);
@@ -1506,8 +1581,14 @@ client_set_prop_from_glist (GnomeClient *client,
   
   g_return_if_fail (prop_name != NULL);
 
-  if (!GNOME_CLIENT_CONNECTED (client) || (list == NULL))
+  if (!GNOME_CLIENT_CONNECTED (client))
     return;
+
+  if (list == NULL)
+    {
+      SmcDeleteProperties (client->smc_conn, 1, &prop_name);
+      return;
+    }
 
   argc= g_list_length (list);
 
@@ -1827,39 +1908,6 @@ gnome_client_marshal_signal_2 (GtkObject     *object,
 
 /*****************************************************************************/
 /* array helping functions - these function should be replaced by g_lists */
-
-static void
-array_insert_arg (gchar ***array, 
-		  const gchar *client_arg, 
-		  const gchar *client_id)
-{
-  gchar **new_array;
-  gchar **ptr1;
-  gchar **ptr2;
-  gint    argc;
-
-  g_return_if_fail (client_id != NULL);
-
-  for (ptr1 = *array, argc = 0; *ptr1 ; ptr1++ , argc++) /* LOOP */;
-
-  ptr2 = new_array = g_new (gchar*, argc + 3);
-  ptr1 = *array;
-
-  *ptr2 = *ptr1;
-  ptr1++; ptr2++;
-  *ptr2 = g_strdup (client_arg);
-  ptr2++;
-  *ptr2 = g_strdup (client_id);
-  ptr2++;
-  for (; *ptr1; ptr1++, ptr2++)
-    *ptr2 = *ptr1;
-  *ptr2= NULL;
-
-  g_free (*array);
-  *array = new_array;
-}
-
-/*****************************************************************************/
 
 static gchar **
 array_init_from_arg (gint argc, gchar *argv[])
