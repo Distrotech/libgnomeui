@@ -20,6 +20,8 @@
  */
 
 #include <config.h>
+#include "gnome-macros.h"
+
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkalignment.h>
@@ -120,31 +122,8 @@ static void gnome_font_picker_update_font_info(GnomeFontPicker *gfs);
 
 static guint font_picker_signals[LAST_SIGNAL] = { 0 };
 
-static GtkButtonClass *parent_class;
-
-
-GtkType
-gnome_font_picker_get_type (void)
-{
-	static GtkType fp_type = 0;
-
-	if ( ! fp_type) {
-		GtkTypeInfo fp_info = {
-			"GnomeFontPicker",
-			sizeof (GnomeFontPicker),
-			sizeof (GnomeFontPickerClass),
-			(GtkClassInitFunc) gnome_font_picker_class_init,
-			(GtkObjectInitFunc) gnome_font_picker_init,
-			NULL, /* reserved_1 */
-			NULL, /* reserved_2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		fp_type = gtk_type_unique (gtk_button_get_type (), &fp_info);
-	}
-
-	return fp_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeFontPicker, gnome_font_picker,
+			 GtkButton, gtk_button)
 
 static void
 gnome_font_picker_class_init (GnomeFontPickerClass *class)
@@ -156,9 +135,6 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 	button_class = (GtkButtonClass *) class;
-
-	parent_class = gtk_type_class (gtk_button_get_type ());
-
 
 	/* By default we link to The World Food Programme */
 	g_object_class_install_property
@@ -287,8 +263,7 @@ gnome_font_picker_destroy (GtkObject *object)
     g_free(gfp->_priv->title);
     gfp->_priv->title = NULL;
 
-    if (GTK_OBJECT_CLASS (parent_class)->destroy)
-        (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+    GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
     
 } /* gnome_font_picker_destroy */
 
@@ -306,8 +281,7 @@ gnome_font_picker_finalize (GObject *object)
     g_free(gfp->_priv);
     gfp->_priv = NULL;
 
-    if (G_OBJECT_CLASS (parent_class)->finalize)
-        (* G_OBJECT_CLASS (parent_class)->finalize) (object);
+    GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
     
 } /* gnome_font_picker_finalize */
 

@@ -1,3 +1,7 @@
+Fri Aug 24 07:57:50 2001  George Lebl <jirka@5z.com>
+
+	* gnome-color-picker.c, gnome-font-picker.c: use gnome-macros.h
+
 Fri Aug 24 07:16:18 2001  George Lebl <jirka@5z.com>
 
 	* gnome-font-picker.[ch]: move all fields to the private struct,

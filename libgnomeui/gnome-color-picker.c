@@ -28,6 +28,8 @@
  */
 
 #include <config.h>
+#include "gnome-macros.h"
+
 #include <gtk/gtkmain.h>
 #include <gtk/gtkalignment.h>
 #include <gtk/gtkcolorsel.h>
@@ -122,32 +124,10 @@ static void gnome_color_picker_get_property (GObject            *object,
 
 static guint color_picker_signals[LAST_SIGNAL] = { 0 };
 
-static GtkButtonClass *parent_class;
-
 static GtkTargetEntry drop_types[] = { { "application/x-color", 0, 0 } };
 
-GtkType
-gnome_color_picker_get_type (void)
-{
-	static GtkType cp_type = 0;
-
-	if (!cp_type) {
-		GtkTypeInfo cp_info = {
-			"GnomeColorPicker",
-			sizeof (GnomeColorPicker),
-			sizeof (GnomeColorPickerClass),
-			(GtkClassInitFunc) gnome_color_picker_class_init,
-			(GtkObjectInitFunc) gnome_color_picker_init,
-			NULL, /* reserved_1 */
-			NULL, /* reserved_2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		cp_type = gtk_type_unique (gtk_button_get_type (), &cp_info);
-	}
-
-	return cp_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeColorPicker, gnome_color_picker,
+			 GtkButton, gtk_button)
 
 static void
 gnome_color_picker_class_init (GnomeColorPickerClass *class)
@@ -161,7 +141,6 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 	gobject_class = (GObjectClass *) class;
 	button_class = (GtkButtonClass *) class;
 	widget_class = (GtkWidgetClass *) class;
-	parent_class = gtk_type_class (gtk_button_get_type ());
 
 	color_picker_signals[COLOR_SET] =
 		gtk_signal_new ("color_set",
@@ -378,15 +357,16 @@ gnome_color_picker_realize (GtkWidget *widget)
 {
 	GnomeColorPicker *cp = GNOME_COLOR_PICKER (widget);
 
-	if (GTK_WIDGET_CLASS(parent_class)->realize)
-		GTK_WIDGET_CLASS (parent_class)->realize (widget);
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
+
 	render (cp);
 }
 static void
 gnome_color_picker_style_set (GtkWidget *widget, GtkStyle *previous_style)
 {
-	if (GTK_WIDGET_CLASS(parent_class)->style_set)
-		GTK_WIDGET_CLASS (parent_class)->style_set (widget, previous_style);
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, style_set,
+				   (widget, previous_style));
+
 	if (GTK_WIDGET_REALIZED (widget))
 		render (GNOME_COLOR_PICKER (widget));
 }
@@ -545,8 +525,7 @@ gnome_color_picker_destroy (GtkObject *object)
 	g_free (cp->_priv->title);
 	cp->_priv->title = NULL;
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -562,8 +541,7 @@ gnome_color_picker_finalize (GObject *object)
 	g_free (cp->_priv);
 	cp->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 
