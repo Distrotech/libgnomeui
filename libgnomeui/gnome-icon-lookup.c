@@ -39,6 +39,9 @@
 #define ICON_NAME_TRASH_EMPTY           "trash-empty"
 #define ICON_NAME_TRASH_NOT_EMPTY       "trash-full"
 
+#define SELF_THUMBNAIL_SIZE_THRESHOLD   16384
+
+
 /* Returns NULL for regular */
 static char *
 get_icon_name (const char          *file_uri,
@@ -134,6 +137,34 @@ make_mime_name (const char *mime_type)
   return icon_name;
 }
 
+static gboolean
+mimetype_supported_by_gdk_pixbuf (const char *mime_type)
+{
+	guint i;
+	static GHashTable *formats = NULL;
+	static const char *types [] = {
+		"image/x-bmp", "image/x-ico", "image/jpeg",
+		"image/png", "image/pnm", "image/ras", "image/tga",
+		"image/tiff", "image/wbmp", "image/x-xbitmap",
+		"image/x-xpixmap"
+	};
+
+	if (!formats) {
+		formats = g_hash_table_new (g_str_hash, g_str_equal);
+
+		for (i = 0; i < G_N_ELEMENTS (types); i++)
+			g_hash_table_insert (formats,
+					     (gpointer) types [i],
+					     GUINT_TO_POINTER (1));	
+	}
+
+	if (g_hash_table_lookup (formats, mime_type))
+		return TRUE;
+
+	return FALSE;
+}
+
+
 char *
 gnome_icon_lookup (GnomeIconLoader            *icon_loader,
 		   GnomeThumbnailFactory      *thumbnail_factory,
@@ -163,6 +194,14 @@ gnome_icon_lookup (GnomeIconLoader            *icon_loader,
 
   if (thumbnail_factory)
     {
+      if (flags & GNOME_ICON_LOOKUP_FLAGS_SHOW_SMALL_IMAGES_AS_THEMSELVES &&
+	  (mimetype_supported_by_gdk_pixbuf (mime_type) ||
+	   (strcmp (mime_type, "image/svg") == 0 &&
+	    gnome_icon_loader_get_allow_svg (icon_loader)))  &&
+	  strncmp (file_uri, "file:/", 6) == 0 &&
+	  file_info && file_info->size < SELF_THUMBNAIL_SIZE_THRESHOLD)
+	return gnome_vfs_get_local_path_from_uri (file_uri);
+      
       mtime = 0;
       if (file_info)
 	mtime = file_info->mtime;

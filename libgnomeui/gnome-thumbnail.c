@@ -23,6 +23,7 @@
  * Author: Alexander Larsson <alexl@redhat.com>
  */
 
+#include <config.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
@@ -34,8 +35,15 @@
 #include <string.h>
 #include <glib.h>
 #include <stdio.h>
+#include <pthread.h>
 #include <libgnome/gnome-macros.h>
 #include "gnome-thumbnail.h"
+
+#ifdef HAVE_LIBJPEG
+GdkPixbuf * _gnome_thumbnail_load_scaled_jpeg (const char *uri,
+					       int         target_width,
+					       int         target_height);
+#endif
 
 #define SECONDS_BETWEEN_STATS 10
 
@@ -45,14 +53,7 @@ struct ThumbMD5Context {
 	unsigned char in[64];
 };
 
-static void thumb_md5_init      (struct ThumbMD5Context *context);
-static void thumb_md5_update    (struct ThumbMD5Context *context,
-				 unsigned char const    *buf,
-				 unsigned                len);
-static void thumb_md5_final     (unsigned char           digest[16],
-				 struct ThumbMD5Context *context);
-static void thumb_md5_transform (guint32                 buf[4],
-				 guint32 const           in[16]);
+static void thumb_md5 (const char *string, unsigned char digest[16]);
 
 struct _GnomeThumbnailFactoryPrivate {
   char *application;
@@ -65,6 +66,8 @@ struct _GnomeThumbnailFactoryPrivate {
   GHashTable *failed_thumbs;
   time_t read_failed_mtime;
   long last_failed_time;
+
+  pthread_mutex_t lock;
 };
 
 struct ThumbnailInfo {
@@ -160,6 +163,8 @@ gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory *factory)
   factory->priv->failed_thumbs = g_hash_table_new_full (md5_hash,
 							md5_equal,
 							g_free, NULL);
+
+  pthread_mutex_init (&factory->priv->lock, NULL);
 }
 
 static void
@@ -228,7 +233,7 @@ read_md5_dir (const char *path, GHashTable *hash_table)
   DIR *dir;
   struct dirent *dirent;
   char *digest;
-  
+
   /* Remove all current thumbs */
   g_hash_table_foreach_remove (hash_table,
 			       (GHRFunc) remove_all,
@@ -366,19 +371,19 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
 				const char            *uri,
 				time_t                 mtime)
 {
+  GnomeThumbnailFactoryPrivate *priv = factory->priv;
   unsigned char digest[16];
-  struct ThumbMD5Context md5_context;
   char *path, *md5, *file;
   gpointer value;
   struct ThumbnailInfo *info;
 
-  gnome_thumbnail_factory_ensure_uptodate (factory);
-  
-  thumb_md5_init (&md5_context);
-  thumb_md5_update (&md5_context, uri, strlen (uri));
-  thumb_md5_final (digest, &md5_context);
+  pthread_mutex_lock (&priv->lock);
 
-  if (g_hash_table_lookup_extended (factory->priv->existing_thumbs,
+  gnome_thumbnail_factory_ensure_uptodate (factory);
+
+  thumb_md5 (uri, digest);
+
+  if (g_hash_table_lookup_extended (priv->existing_thumbs,
 				    digest, NULL, &value))
     {
       md5 = thumb_digest_to_ascii (digest);
@@ -387,7 +392,7 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
   
       path = g_build_filename (g_get_home_dir (),
 			       ".thumbnails",
-			       (factory->priv->size == GNOME_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
+			       (priv->size == GNOME_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
 			       file,
 			       NULL);
       g_free (file);
@@ -400,7 +405,7 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
 	      unsigned char *key;
 	      key = g_malloc (16);
 	      memcpy (key, digest, 16);
-	      g_hash_table_insert (factory->priv->existing_thumbs, key, info);
+	      g_hash_table_insert (priv->existing_thumbs, key, info);
 	    }
 	}
       else
@@ -410,12 +415,15 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
 	  info->mtime == mtime &&
 	  strcmp (info->uri, uri) == 0)
 	{
+	  pthread_mutex_unlock (&priv->lock);
 	  return path;
 	}
       
       g_free (path);
     }
 
+  pthread_mutex_unlock (&priv->lock);
+  
   return NULL;
 }
 
@@ -424,19 +432,20 @@ gnome_thumbnail_factory_has_valid_failed_thumbnail (GnomeThumbnailFactory *facto
 						    const char            *uri,
 						    time_t                 mtime)
 {
+  GnomeThumbnailFactoryPrivate *priv = factory->priv;
   unsigned char digest[16];
-  struct ThumbMD5Context md5_context;
   char *path, *file, *md5;
   GdkPixbuf *pixbuf;
   gboolean res;
 
   res = FALSE;
-  
+
+  pthread_mutex_lock (&priv->lock);
+
   gnome_thumbnail_factory_ensure_failed_uptodate (factory);
   
-  thumb_md5_init (&md5_context);
-  thumb_md5_update (&md5_context, uri, strlen (uri));
-  thumb_md5_final (digest, &md5_context);
+  thumb_md5 (uri, digest);
+  
   if (g_hash_table_lookup_extended (factory->priv->failed_thumbs,
 				    digest, NULL, NULL))
     {
@@ -461,8 +470,38 @@ gnome_thumbnail_factory_has_valid_failed_thumbnail (GnomeThumbnailFactory *facto
 	  }
     }
 
+  pthread_mutex_unlock (&priv->lock);
+  
   return res;
 }
+
+static gboolean
+mimetype_supported_by_gdk_pixbuf (const char *mime_type)
+{
+	guint i;
+	static GHashTable *formats = NULL;
+	static const char *types [] = {
+		"image/x-bmp", "image/x-ico", "image/jpeg",
+		"image/png", "image/pnm", "image/ras", "image/tga",
+		"image/tiff", "image/wbmp", "image/x-xbitmap",
+		"image/x-xpixmap"
+	};
+
+	if (!formats) {
+		formats = g_hash_table_new (g_str_hash, g_str_equal);
+
+		for (i = 0; i < G_N_ELEMENTS (types); i++)
+			g_hash_table_insert (formats,
+					     (gpointer) types [i],
+					     GUINT_TO_POINTER (1));	
+	}
+
+	if (g_hash_table_lookup (formats, mime_type))
+		return TRUE;
+
+	return FALSE;
+}
+
 
 gboolean
 gnome_thumbnail_factory_can_thumbnail (GnomeThumbnailFactory *factory,
@@ -470,14 +509,16 @@ gnome_thumbnail_factory_can_thumbnail (GnomeThumbnailFactory *factory,
 				       const char            *mime_type,
 				       time_t                 mtime)
 {
-
+  /* Don't thumbnail thumbnails */
+  if (uri &&
+      strncmp (uri, "file:/", 6) == 0 &&
+      strstr (uri, "/.thumbnails/") != NULL)
+    return FALSE;
+  
   /* TODO: Replace with generic system */
   if (mime_type != NULL &&
-      (strcmp (mime_type, "image/png") == 0 ||
-       strcmp (mime_type, "image/jpeg") == 0))
+      mimetype_supported_by_gdk_pixbuf (mime_type))
     {
-      /* Check to see if there is a failed thumb */
-
       return !gnome_thumbnail_factory_has_valid_failed_thumbnail (factory,
 								  uri,
 								  mtime);
@@ -495,18 +536,26 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
   GdkPixbuf *pixbuf, *scaled;
   int width, height, size;
   double scale;
+
+  /* Doesn't access any volatile fields in factory, so it's threadsafe */
   
-  pixbuf = gnome_thumbnail_load_pixbuf (uri);
+  size = 128;
+  if (factory->priv->size == GNOME_THUMBNAIL_SIZE_LARGE)
+    size = 256;
+
+
+#ifdef HAVE_LIBJPEG
+  if (strcmp (mime_type, "image/jpeg") == 0)
+    pixbuf = _gnome_thumbnail_load_scaled_jpeg (uri, size, size);
+  else
+#endif
+    pixbuf = gnome_thumbnail_load_pixbuf (uri);
 
   if (pixbuf == NULL)
     return NULL;
 
   width = gdk_pixbuf_get_width (pixbuf);
   height = gdk_pixbuf_get_height (pixbuf);
-
-  size = 128;
-  if (factory->priv->size == GNOME_THUMBNAIL_SIZE_LARGE)
-    size = 256;
 
   if (width > size || height > size)
     {
@@ -519,7 +568,6 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
       g_object_unref (pixbuf);
       pixbuf = scaled;
     }
-
   
   return pixbuf;
 }
@@ -608,8 +656,8 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
 					const char            *uri,
 					time_t                 original_mtime)
 {
+  GnomeThumbnailFactoryPrivate *priv = factory->priv;
   unsigned char *digest;
-  struct ThumbMD5Context md5_context;
   char *path, *md5, *file, *dir;
   char *tmp_path;
   int tmp_fd;
@@ -618,12 +666,14 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
   struct stat statbuf;
   struct ThumbnailInfo *info;
   
+  pthread_mutex_lock (&priv->lock);
+  
   gnome_thumbnail_factory_ensure_uptodate (factory);
 
+  pthread_mutex_unlock (&priv->lock);
+  
   digest = g_malloc (16);
-  thumb_md5_init (&md5_context);
-  thumb_md5_update (&md5_context, uri, strlen (uri));
-  thumb_md5_final (digest, &md5_context);
+  thumb_md5 (uri, digest);
 
   md5 = thumb_digest_to_ascii (digest);
   file = g_strconcat (md5, ".png", NULL);
@@ -631,7 +681,7 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
   
   dir = g_build_filename (g_get_home_dir (),
 			  ".thumbnails",
-			  (factory->priv->size == GNOME_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
+			  (priv->size == GNOME_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
 			  NULL);
   
   path = g_build_filename (dir,
@@ -677,6 +727,9 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
       info = g_new (struct ThumbnailInfo, 1);
       info->mtime = original_mtime;
       info->uri = g_strdup (uri);
+      
+      pthread_mutex_lock (&priv->lock);
+      
       g_hash_table_insert (factory->priv->existing_thumbs, digest, info);
       /* Make sure we don't re-read the directory. We should be uptodate
        * with all previous changes du to the ensure_uptodate above.
@@ -686,6 +739,8 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
        */
       if (stat(dir, &statbuf) == 0)
 	factory->priv->read_existing_mtime = statbuf.st_mtime;
+      
+      pthread_mutex_unlock (&priv->lock);
     }
   else
     {
@@ -703,8 +758,8 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
 						 const char            *uri,
 						 time_t                 mtime)
 {
+  GnomeThumbnailFactoryPrivate *priv = factory->priv;
   unsigned char *digest;
-  struct ThumbMD5Context md5_context;
   char *path, *md5, *file, *dir;
   char *tmp_path;
   int tmp_fd;
@@ -713,12 +768,14 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
   struct stat statbuf;
   GdkPixbuf *pixbuf;
   
+  pthread_mutex_lock (&priv->lock);
+  
   gnome_thumbnail_factory_ensure_failed_uptodate (factory);
 
+  pthread_mutex_unlock (&priv->lock);
+
   digest = g_malloc (16);
-  thumb_md5_init (&md5_context);
-  thumb_md5_update (&md5_context, uri, strlen (uri));
-  thumb_md5_final (digest, &md5_context);
+  thumb_md5 (uri, digest);
 
   md5 = thumb_digest_to_ascii (digest);
   file = g_strconcat (md5, ".png", NULL);
@@ -770,6 +827,8 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
       chmod (tmp_path, 0600);
       rename(tmp_path, path);
 
+      pthread_mutex_lock (&priv->lock);
+      
       g_hash_table_insert (factory->priv->failed_thumbs, digest, NULL);
       /* Make sure we don't re-read the directory. We should be uptodate
        * with all previous changes du to the ensure_uptodate above.
@@ -779,6 +838,8 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
        */
       if (stat(dir, &statbuf) == 0)
 	factory->priv->read_failed_mtime = statbuf.st_mtime;
+      
+      pthread_mutex_unlock (&priv->lock);
     }
   else
     g_free (digest);
@@ -792,12 +853,8 @@ char *
 gnome_thumbnail_md5 (char *uri)
 {
   unsigned char digest[16];
-  struct ThumbMD5Context md5_context;
 
-  thumb_md5_init (&md5_context);
-  thumb_md5_update (&md5_context, uri, strlen (uri));
-  thumb_md5_final (digest, &md5_context);
-
+  thumb_md5 (uri, digest);
   return thumb_digest_to_ascii (digest);
 }
 
@@ -864,6 +921,26 @@ gnome_thumbnail_is_valid (GdkPixbuf          *pixbuf,
  * digest in ascii form. 
  *
  */
+
+static void thumb_md5_init      (struct ThumbMD5Context *context);
+static void thumb_md5_update    (struct ThumbMD5Context *context,
+				 unsigned char const    *buf,
+				 unsigned                len);
+static void thumb_md5_final     (unsigned char           digest[16],
+				 struct ThumbMD5Context *context);
+static void thumb_md5_transform (guint32                 buf[4],
+				 guint32 const           in[16]);
+
+
+static void
+thumb_md5 (const char *string, unsigned char digest[16])
+{
+  struct ThumbMD5Context md5_context;
+  
+  thumb_md5_init (&md5_context);
+  thumb_md5_update (&md5_context, string, strlen (string));
+  thumb_md5_final (digest, &md5_context);
+}
 
 #if G_BYTE_ORDER == G_LITTLE_ENDIAN
 #define byteReverse(buf, len)	/* Nothing */
