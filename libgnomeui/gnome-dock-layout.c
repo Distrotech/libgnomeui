@@ -200,9 +200,9 @@ gnome_dock_layout_get_type (void)
 /**
  * gnome_dock_layout_new:
  * 
- * Description: Create a new GnomeDockLayout widget.
+ * Description: Create a new #GnomeDockLayout widget.
  * 
- * Returns: The new GnomeDockLayout widget.
+ * Returns: The new #GnomeDockLayout widget.
  **/
    
 GnomeDockLayout *
@@ -217,7 +217,7 @@ gnome_dock_layout_new (void)
 
 /**
  * gnome_dock_layout_add_item:
- * @layout: A GnomeDockLayout widget
+ * @layout: A #GnomeDockLayout widget
  * @item: The dock item to be added to @layout
  * @placement: Placement of @item in @layout
  * @band_num: Band number
@@ -254,7 +254,7 @@ gnome_dock_layout_add_item (GnomeDockLayout *layout,
 
 /**
  * gnome_dock_layout_add_floating_item:
- * @layout: A GnomeDockLayout widget
+ * @layout: A #GnomeDockLayout widget
  * @item: The dock item to be added to @layout
  * @x: X-coordinate for the floating item
  * @y: Y-coordinate for the floating item
@@ -290,12 +290,12 @@ gnome_dock_layout_add_floating_item (GnomeDockLayout *layout,
 
 /**
  * gnome_dock_layout_get_item:
- * @layout: A GnomeDockLayout widget
- * @item: The GnomeDockItem to be retrieved
+ * @layout: A #GnomeDockLayout widget
+ * @item: The #GnomeDockItem to be retrieved
  * 
  * Description: Retrieve a layout item.
  * 
- * Returns: The retrieved GnomeDockLayoutItem widget.
+ * Returns: The retrieved #GnomeDockLayoutItem widget.
  **/
 GnomeDockLayoutItem *
 gnome_dock_layout_get_item (GnomeDockLayout *layout,
@@ -313,12 +313,12 @@ gnome_dock_layout_get_item (GnomeDockLayout *layout,
 
 /**
  * gnome_dock_layout_get_item_by_name:
- * @layout: A GnomeDockLayout widget
+ * @layout: A #GnomeDockLayout widget
  * @name: Name of the item to be retrieved
  * 
  * Description: Retrieve the dock item named @name.
  * 
- * Returns: The named GnomeDockLayoutItem widget.
+ * Returns: The named #GnomeDockLayoutItem widget.
  **/
 GnomeDockLayoutItem *
 gnome_dock_layout_get_item_by_name (GnomeDockLayout *layout,
@@ -336,8 +336,8 @@ gnome_dock_layout_get_item_by_name (GnomeDockLayout *layout,
 
 /**
  * gnome_dock_layout_remove_item:
- * @layout: A GnomeDockLayout widget
- * @item: The GnomeDockItem to be removed
+ * @layout: A #GnomeDockLayout widget
+ * @item: The #GnomeDockItem to be removed
  * 
  * Description: Remove the specified @item from @layout.
  * 
@@ -360,8 +360,8 @@ gnome_dock_layout_remove_item (GnomeDockLayout *layout,
 
 /**
  * gnome_dock_layout_remove_item_by_name:
- * @layout: A GnomeDockLayout widget
- * @name: Name of the GnomeDockItem to be removed
+ * @layout: A #GnomeDockLayout widget
+ * @name: Name of the #GnomeDockItem to be removed
  * 
  * Description: Remove the item named @name from @layout.
  * 
@@ -386,8 +386,8 @@ gnome_dock_layout_remove_item_by_name (GnomeDockLayout *layout,
 
 /**
  * gnome_dock_layout_add_to_dock:
- * @layout: A GnomeDockLayout widget
- * @dock: The GnomeDock widget the layout items must be added to
+ * @layout: A #GnomeDockLayout widget
+ * @dock: The #GnomeDock widget the layout items must be added to
  * 
  * Description: Add all the items in @layout to the specified @dock.
  * 
@@ -458,7 +458,7 @@ gnome_dock_layout_add_to_dock (GnomeDockLayout *layout,
 
 /**
  * gnome_dock_layout_create_string:
- * @layout: A GnomeDockLayout widget
+ * @layout: A #GnomeDockLayout widget
  * 
  * Description: Generate a string describing the layout in @layout.
  * 
@@ -520,7 +520,7 @@ gnome_dock_layout_create_string (GnomeDockLayout *layout)
 
 /**
  * gnome_dock_layout_parse_string:
- * @layout: A GnomeDockLayout widget
+ * @layout: A #GnomeDockLayout widget
  * @string: A layout string to be parsed
  * 
  * Description: Parse the layout string @string, and move around the

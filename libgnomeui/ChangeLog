@@ -1,3 +1,9 @@
+Sat Aug 21 12:19:53 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dock.c: document gnome_dock_add_from_layout
+
+	* gnome-doct.c,gnome-dock-layout.c: add #'s for crossreferencing
+
 Sat Aug 21 11:54:16 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-procbar.c: completely document the API

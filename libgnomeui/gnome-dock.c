@@ -1276,7 +1276,7 @@ gnome_dock_get_type (void)
 /**
  * gnome_dock_new:
  * 
- * Description: Creates a new GnomeDock widget.
+ * Description: Creates a new #GnomeDock widget.
  * 
  * Return value: The new widget.
  **/
@@ -1299,7 +1299,7 @@ gnome_dock_new (void)
 
 /**
  * gnome_dock_allow_floating_items:
- * @dock: A pointer to a GnomeDock widget
+ * @dock: A pointer to a #GnomeDock widget
  * @enable: Specifies whether floating items are allowed in this dock
  * 
  * Description: Enable or disable floating items on @dock, according
@@ -1314,7 +1314,7 @@ gnome_dock_allow_floating_items (GnomeDock *dock,
 
 /**
  * gnome_dock_add_item:
- * @dock: A pointer to a GnomeDock widget
+ * @dock: A pointer to a #GnomeDock widget
  * @item: The item to add
  * @placement: Placement for the new item
  * @band_num: Number of the band the new item must be added to
@@ -1410,7 +1410,7 @@ gnome_dock_add_item (GnomeDock *dock,
 
 /**
  * gnome_dock_add_floating_item:
- * @dock: A GnomeDock widget
+ * @dock: A #GnomeDock widget
  * @item: The item to be added
  * @x: X-coordinate for the floating item
  * @y: Y-coordinate for the floating item
@@ -1473,7 +1473,7 @@ gnome_dock_add_floating_item (GnomeDock *dock,
 
 /**
  * gnome_dock_set_client_area:
- * @dock: A GnomeDock widget
+ * @dock: A #GnomeDock widget
  * @widget: The widget to be used for the client area.
  * 
  * Description: Specify a widget for the dock's client area.
@@ -1521,7 +1521,7 @@ gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget)
 
 /**
  * gnome_dock_get_client_area:
- * @dock: A GnomeDock widget.
+ * @dock: A #GnomeDock widget.
  * 
  * Description: Retrieve the widget being used as the client area in
  * @dock.
@@ -1536,7 +1536,7 @@ gnome_dock_get_client_area (GnomeDock *dock)
 
 /**
  * gnome_dock_get_item_by_name:
- * @dock: A GnomeDock widget.
+ * @dock: A #GnomeDock widget.
  * @name: The name of the dock item to retrieve
  * @placement_return: A pointer to a variable holding the item's placement
  * @num_band_return: A pointer to a variable holding the band number
@@ -1551,7 +1551,7 @@ gnome_dock_get_client_area (GnomeDock *dock)
  * the placement is %GNOME_DOCK_FLOATING *@num_band_return,
  * *@band_position_return and *@offset_return are not set.
  * 
- * Returns: The named GnomeDockItem widget, or %NULL if no item with
+ * Returns: The named #GnomeDockItem widget, or %NULL if no item with
  * such name exists.
  **/
 GnomeDockItem *
@@ -1633,11 +1633,11 @@ layout_add_bands (GnomeDock *dock,
 
 /**
  * gnome_dock_get_layout:
- * @dock: A GnomeDock widget
+ * @dock: A #GnomeDock widget
  * 
  * Description: Retrieve the layout of @dock.
  * 
- * Returns: @dock's layout as a GnomeDockLayout object.
+ * Returns: @dock's layout as a #GnomeDockLayout object.
  **/
 GnomeDockLayout *
 gnome_dock_get_layout (GnomeDock *dock)
@@ -1656,6 +1656,15 @@ gnome_dock_get_layout (GnomeDock *dock)
   return layout;
 }
 
+/**
+ * gnome_dock_add_from_layout:
+ * @dock: The #GnomeDock widget
+ * @layout: A #GnomeDockLayout widget
+ * 
+ * Description: Add all the items in @layout to the specified @dock.
+ * 
+ * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
+ **/
 gboolean
 gnome_dock_add_from_layout (GnomeDock *dock,
                             GnomeDockLayout *layout)
