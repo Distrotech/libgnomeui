@@ -1,3 +1,8 @@
+2001-10-27  jacob berkman  <jacob@ximian.com>
+
+	* gnome-vfs-util.c (gnome_gdk_pixbuf_new_from_uri_async): update
+	to new vfs priority macro name
+
 Tue Oct 23 14:42:04 2001  George Lebl <jirka@5z.com>
 
 	* *.h: make sure all non-deprecated widgets have some class
