@@ -1,3 +1,8 @@
+1999-02-17  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-color-picker.c (gnome_color_picker_init): Changed the shadow.
+	(render): now draws a stipple when insensitive
+
 1999-02-17  Sergey Panov  <sipan@mit.edu>
 
         * gnome-canvas-text.c (gnome_canvas_text_set_arg): fontset
