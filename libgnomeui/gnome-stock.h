@@ -107,6 +107,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_UNDO        "Undo"
 #define GNOME_STOCK_PIXMAP_TIMER       "Timer"
 #define GNOME_STOCK_PIXMAP_TIMER_STOP  "Timer Stopped"
+#define GNOME_STOCK_PIXMAP_MAIL	       "Mail"
+#define GNOME_STOCK_PIXMAP_MAIL_RCV    "Receive Mail"
+#define GNOME_STOCK_PIXMAP_MAIL_SND    "Send Mail"
 #define GNOME_STOCK_PIXMAP_QUIT        "Quit"
 
 #define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
@@ -301,6 +304,7 @@ GtkWidget             *gnome_stock_or_ordinary_button (char *type);
 
 /*  menus  */
 
+#define GNOME_STOCK_MENU_BLANK    "Menu_"
 #define GNOME_STOCK_MENU_NEW      "Menu_New"
 #define GNOME_STOCK_MENU_SAVE     "Menu_Save"
 #define GNOME_STOCK_MENU_SAVE_AS  "Menu_Save As"
@@ -318,7 +322,9 @@ GtkWidget             *gnome_stock_or_ordinary_button (char *type);
 #define GNOME_STOCK_MENU_SEARCH   "Menu_Search"
 #define GNOME_STOCK_MENU_BACK     "Menu_Back"
 #define GNOME_STOCK_MENU_FORWARD  "Menu_Forward"
-#define GNOME_STOCK_MENU_BLANK    "Menu_"
+#define GNOME_STOCK_MENU_MAIL     "Menu_Mail"
+#define GNOME_STOCK_MENU_MAIL_RCV "Menu_Receive Mail"
+#define GNOME_STOCK_MENU_MAIL_SND "Menu_Send Mail"
 
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT
 

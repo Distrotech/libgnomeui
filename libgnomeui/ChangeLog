@@ -1,3 +1,8 @@
+Sat Mar 28 18:12:33 CET 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock{,-imlib}.[ch], stock_demo.c: Added more of tigert's
+	pixmaps.
+
 1998-03-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (draw_icons_area): Only paint icons within
