@@ -1,3 +1,8 @@
+2003-10-22  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserdefault.[ch]: Renamed from
+	GtkFileChooserImplDefault to GtkFileChooserDefault.
+
 Tue Oct 21 15:15:20 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* glib-interface-properties-0.5.patch README: Removed. Now in
