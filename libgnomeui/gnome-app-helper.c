@@ -463,7 +463,7 @@ gnome_app_do_ui_signal_connect    (GnomeApp *app,
   else
     gtk_signal_connect(GTK_OBJECT(info_item->widget), signal_name,
 		       info_item->moreinfo,
-		       info_item->user_data);
+		       uidata->data?uidata->data:info_item->user_data);
 }
 
 static void gnome_app_do_ui_accelerator_setup (GnomeApp *app,
