@@ -355,8 +355,8 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem    *file_system,
 	  child->info = vfs_info;
 	  gnome_vfs_file_info_ref (child->info);
 	  
-	  g_hash_table_insert (parent_folder->children,
-			       child->uri, child);
+	  g_hash_table_replace (parent_folder->children,
+				child->uri, child);
 
 	  uris = g_slist_prepend (NULL, child->uri);
 	  g_signal_emit_by_name (parent_folder, "files_added", uris);
@@ -985,20 +985,51 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
 		  gpointer                 user_data)
 {
   GtkFileFolderGnomeVFS *folder_vfs = user_data;
+  GSList *uris;
 
   switch (event_type)
     {
     case GNOME_VFS_MONITOR_EVENT_CHANGED:
+    case GNOME_VFS_MONITOR_EVENT_CREATED:
+      {
+	GnomeVFSResult result;
+	GnomeVFSFileInfo *vfs_info;
+
+	vfs_info = gnome_vfs_file_info_new ();
+	result = gnome_vfs_get_file_info (info_uri, vfs_info, get_options (folder_vfs->types));
+	
+	if (result == GNOME_VFS_OK)
+	  {
+	    FolderChild *child = g_new (FolderChild, 1);
+	    child->uri = g_strdup (info_uri);
+	    child->info = vfs_info;
+	    gnome_vfs_file_info_ref (child->info);
+	    
+	    g_hash_table_replace (folder_vfs->children,
+				  child->uri, child);
+	    
+	    uris = g_slist_prepend (NULL, (gchar *)info_uri);
+	    if (event_type == GNOME_VFS_MONITOR_EVENT_CHANGED)
+	      g_signal_emit_by_name (folder_vfs, "files_changed", uris);
+	    else
+	      g_signal_emit_by_name (folder_vfs, "files_added", uris);
+	    g_slist_free (uris);
+	  }
+	else
+	  gnome_vfs_file_info_unref (vfs_info);
+      }
       break;
     case GNOME_VFS_MONITOR_EVENT_DELETED:
+      g_hash_table_remove (folder_vfs->children, info_uri);
+      
+      uris = g_slist_prepend (NULL, (gchar *)info_uri);
+      g_signal_emit_by_name (folder_vfs, "files_removed", uris);
+      g_slist_free (uris);
       break;
     case GNOME_VFS_MONITOR_EVENT_STARTEXECUTING:
-      break;
     case GNOME_VFS_MONITOR_EVENT_STOPEXECUTING:
-      break;
-    case GNOME_VFS_MONITOR_EVENT_CREATED:
-      break;
     case GNOME_VFS_MONITOR_EVENT_METADATA_CHANGED:
+      g_print ("MetaData Changed\n");
       break;
     }
 }
@@ -1006,23 +1037,22 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
 static gboolean
 is_valid_scheme_character (char c)
 {
-	return g_ascii_isalnum (c) || c == '+' || c == '-' || c == '.';
+  return g_ascii_isalnum (c) || c == '+' || c == '-' || c == '.';
 }
 
 static gboolean
 has_valid_scheme (const char *uri)
 {
-	const char *p;
-
-	p = uri;
-
-	if (!is_valid_scheme_character (*p)) {
-		return FALSE;
-	}
-
-	do {
-		p++;
-	} while (is_valid_scheme_character (*p));
-
-	return *p == ':';
+  const char *p;
+  
+  p = uri;
+  
+  if (!is_valid_scheme_character (*p))
+    return FALSE;
+  
+  do
+    p++;
+  while (is_valid_scheme_character (*p));
+  
+  return *p == ':';
 }
