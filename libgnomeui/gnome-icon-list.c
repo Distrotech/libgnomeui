@@ -64,26 +64,28 @@ typedef void (* GnomeIconListSignal1) (GtkObject *object,
 				       gpointer   data);
 
 
-static void gnome_icon_list_class_init    (GnomeIconListClass *class);
-static void gnome_icon_list_init          (GnomeIconList      *ilist);
-static void gnome_icon_list_destroy       (GtkObject          *object);
-static void gnome_icon_list_realize       (GtkWidget          *widget);
-static void gnome_icon_list_unrealize     (GtkWidget          *widget);
-static void gnome_icon_list_map           (GtkWidget          *widget);
-static void gnome_icon_list_unmap         (GtkWidget          *widget);
-static void gnome_icon_list_size_request  (GtkWidget          *widget,
-					   GtkRequisition     *requisition);
-static void gnome_icon_list_size_allocate (GtkWidget          *widget,
-					   GtkAllocation      *allocation);
-static void gnome_icon_list_draw          (GtkWidget          *widget,
-					   GdkRectangle       *area);
-static gint gnome_icon_list_button_press  (GtkWidget          *widget,
-					   GdkEventButton     *event);
-static gint gnome_icon_list_expose        (GtkWidget          *widget,
-					   GdkEventExpose     *event);
-static void gnome_icon_list_foreach       (GtkContainer       *container,
-					   GtkCallback         callback,
-					   gpointer            callback_data);
+static void gnome_icon_list_class_init     (GnomeIconListClass *class);
+static void gnome_icon_list_init           (GnomeIconList      *ilist);
+static void gnome_icon_list_destroy        (GtkObject          *object);
+static void gnome_icon_list_realize        (GtkWidget          *widget);
+static void gnome_icon_list_unrealize      (GtkWidget          *widget);
+static void gnome_icon_list_map            (GtkWidget          *widget);
+static void gnome_icon_list_unmap          (GtkWidget          *widget);
+static void gnome_icon_list_size_request   (GtkWidget          *widget,
+					    GtkRequisition     *requisition);
+static void gnome_icon_list_size_allocate  (GtkWidget          *widget,
+					    GtkAllocation      *allocation);
+static void gnome_icon_list_draw           (GtkWidget          *widget,
+					    GdkRectangle       *area);
+static gint gnome_icon_list_button_press   (GtkWidget          *widget,
+					    GdkEventButton     *event);
+static gint gnome_icon_list_button_release (GtkWidget          *widget,
+					    GdkEventButton     *event);
+static gint gnome_icon_list_expose         (GtkWidget          *widget,
+					    GdkEventExpose     *event);
+static void gnome_icon_list_foreach        (GtkContainer       *container,
+					    GtkCallback         callback,
+					    gpointer            callback_data);
 
 static void real_select_icon (GnomeIconList *ilist, gint num, GdkEvent *event);
 static void real_unselect_icon (GnomeIconList *ilist, gint num, GdkEvent *event);
@@ -166,6 +168,7 @@ gnome_icon_list_class_init (GnomeIconListClass *class)
 	widget_class->size_allocate = gnome_icon_list_size_allocate;
 	widget_class->draw = gnome_icon_list_draw;
 	widget_class->button_press_event = gnome_icon_list_button_press;
+	widget_class->button_release_event = gnome_icon_list_button_release;
 	widget_class->expose_event = gnome_icon_list_expose;
 
 	container_class->foreach = gnome_icon_list_foreach;
@@ -833,7 +836,7 @@ gnome_icon_list_realize (GtkWidget *widget)
 			     + (GTK_WIDGET_VISIBLE (ilist->vscrollbar) ? ilist->vscrollbar_width : 0));
 	attributes.height -= (2 * widget->style->klass->ythickness
 			     + (GTK_WIDGET_VISIBLE (ilist->hscrollbar) ? ilist->hscrollbar_height : 0));
-	attributes.event_mask |= GDK_BUTTON_PRESS_MASK | GDK_BUTTON1_MOTION_MASK;
+	attributes.event_mask |= GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_BUTTON1_MOTION_MASK;
 
 	ilist->ilist_window = gdk_window_new (widget->window, &attributes, attributes_mask);
 	gdk_window_set_user_data (ilist->ilist_window, ilist);
@@ -1328,10 +1331,33 @@ toggle_icon (GnomeIconList *ilist, int num, GdkEvent *event)
 }
 
 static gint
+gnome_icon_list_button_release (GtkWidget *widget, GdkEventButton *event)
+{
+	GnomeIconList *ilist;
+	Icon *icon;
+	
+	g_return_val_if_fail (widget != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_ICON_LIST (widget), FALSE);
+	g_return_val_if_fail (event != NULL, FALSE);
+
+	ilist = GNOME_ICON_LIST (widget);
+
+	if (ilist->last_clicked == -1)
+		return FALSE;
+			
+	if (event->window != ilist->ilist_window)
+		return FALSE;
+
+	toggle_icon (ilist, ilist->last_clicked, (GdkEvent *) event);
+	return FALSE;
+}
+
+static gint
 gnome_icon_list_button_press (GtkWidget *widget, GdkEventButton *event)
 {
 	GnomeIconList *ilist;
 	int num, on_spacing;
+	Icon *icon;
 
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_ICON_LIST (widget), FALSE);
@@ -1347,7 +1373,15 @@ gnome_icon_list_button_press (GtkWidget *widget, GdkEventButton *event)
 	if (on_spacing)
 		return FALSE;
 
-	toggle_icon (ilist, num, (GdkEvent *) event);
+	icon = g_list_nth (ilist->icon_list, num)->data;
+	if (icon->state == GTK_STATE_SELECTED && event->type != GDK_2BUTTON_PRESS){
+		ilist->last_clicked = num;
+		return FALSE;
+	} else {
+		ilist->last_clicked = -1;
+		toggle_icon (ilist, num, (GdkEvent *) event);
+	}
+	
 	return FALSE;
 }
 

@@ -75,6 +75,7 @@ struct _GnomeIconList {
 	int vscrollbar_width;
 	int hscrollbar_height;
 	int last_selected;
+	int last_clicked;
 };
 
 struct _GnomeIconListClass {
