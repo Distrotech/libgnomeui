@@ -1,3 +1,7 @@
+Wed Dec 26 14:35:47 2001  George Lebl <jirka@5z.com>
+
+	* testgnome.c: add testcase for non existant icon file
+
 2001-12-13  Darin Adler  <darin@bentspoon.com>
 
 	* .cvsignore: Ignore test-iconlist.

@@ -956,6 +956,7 @@ create_icon_list(void)
 		gnome_icon_list_append_pixbuf (GNOME_ICON_LIST(iconlist), pix, "bomb.xpm", "LaLa");
 	}
 
+	gnome_icon_list_append (GNOME_ICON_LIST(iconlist), "non-existant.png", "No Icon");
 
 	gnome_icon_list_set_selection_mode (GNOME_ICON_LIST (iconlist), GTK_SELECTION_EXTENDED);
 	gnome_icon_list_thaw (GNOME_ICON_LIST (iconlist));
