@@ -1,3 +1,9 @@
+Thu Feb 04 19:10:38 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-file-entry.c: follow documented behaviour and only
+	  use modal file dialog if it has been requested with the
+	  set_modal method
+
 1999-02-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dateedit.c (gnome_date_edit_new_flags): 
