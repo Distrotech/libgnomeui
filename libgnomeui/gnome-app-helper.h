@@ -8,16 +8,26 @@ BEGIN_GNOME_DECLS
 /*
  * Helper routines,
  */
+
+typedef enum {
+  GNOME_APP_UI_ENDOFINFO,
+  GNOME_APP_UI_ITEM,
+  GNOME_APP_UI_TOGGLEITEM, /* check item for menu - no toolbar support */
+  GNOME_APP_UI_RADIOITEMS, /* no toolbar support */
+  GNOME_APP_UI_SUBTREE,
+  GNOME_APP_UI_SEPARATOR,
+  GNOME_APP_UI_HELP
+} GnomeUIInfoType;
+
+typedef enum {
+  GNOME_APP_PIXMAP_NONE,
+  GNOME_APP_PIXMAP_STOCK,
+  GNOME_APP_PIXMAP_DATA, /* Can't currently use these last two in menus */
+  GNOME_APP_PIXMAP_FILENAME
+} GnomeUIPixmapType;
+
 struct _GnomeUIInfo {
-  enum {
-    GNOME_APP_UI_ENDOFINFO,
-    GNOME_APP_UI_ITEM,
-    GNOME_APP_UI_TOGGLEITEM, /* check item for menu - no toolbar support */
-    GNOME_APP_UI_RADIOITEMS, /* no toolbar support */
-    GNOME_APP_UI_SUBTREE,
-    GNOME_APP_UI_SEPARATOR,
-    GNOME_APP_UI_HELP
-  } type;
+  GnomeUIInfoType type;
 
   gchar *label;
 
@@ -43,12 +53,7 @@ struct _GnomeUIInfo {
   /* Unsed - for future expansion.  Should always be NULL. */
   gpointer unused_data;
 
-  enum {
-    GNOME_APP_PIXMAP_NONE,
-    GNOME_APP_PIXMAP_STOCK,
-    GNOME_APP_PIXMAP_DATA, /* Can't currently use these last two in menus */
-    GNOME_APP_PIXMAP_FILENAME
-  } pixmap_type;
+  GnomeUIPixmapType pixmap_type;
 
   /* Either 
    * a pointer to the char for the pixmap (GNOME_APP_PIXMAP_DATA),
@@ -68,42 +73,47 @@ typedef struct _GnomeUIInfo GnomeUIInfo;
 /* Handy GnomeUIInfo macros */
 
 #define GNOMEUIINFO_END       {GNOME_APP_UI_ENDOFINFO, NULL, NULL, NULL, \
-                               NULL, NULL, 0, NULL, 0, 0, NULL}
+                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
+                               (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_SEPARATOR {GNOME_APP_UI_SEPARATOR, NULL, NULL, NULL, \
-                               NULL, NULL, 0, NULL, 0, 0, NULL}
+                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
+                               (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_ITEM(label, tip, cb, xpm) \
                               {GNOME_APP_UI_ITEM, label, tip, cb, \
 			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, 0, NULL}
+			       0, (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_ITEM_DATA(label, tip, cb, data, xpm) \
                               {GNOME_APP_UI_ITEM, label, tip, cb, \
 			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, 0, NULL}
+			       0, (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_TOGGLEITEM(label, tip, cb, xpm) \
                               {GNOME_APP_UI_TOGGLEITEM, label, tip, cb, \
 			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, 0, NULL}
+			       0, (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_TOGGLEITEM_DATA(label, tip, cb, data, xpm) \
                               {GNOME_APP_UI_TOGGLEITEM, label, tip, cb, \
 			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, 0, NULL}
+			       0, (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_HELP(name) \
                               {GNOME_APP_UI_HELP, NULL, NULL, name, \
-                               NULL, NULL, 0, NULL, 0, 0, NULL}
+                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
+                               (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_SUBTREE(label, tree) \
                               {GNOME_APP_UI_SUBTREE, label, NULL, tree, \
-                               NULL, NULL, 0, NULL, 0, 0, NULL}
+                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
+                               (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_RADIOLIST(list) \
                               {GNOME_APP_UI_RADIOITEMS, NULL, NULL, list, \
-                               NULL, NULL, 0, NULL, 0, 0, NULL}
+                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
+                               (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_RADIOITEM(label, tip, cb, xpm) \
                               {GNOME_APP_UI_RADIOITEMS, label, tip, cb, \
 			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, 0, NULL}
+			       0, (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_RADIOITEM_DATA(label, tip, cb, data, xpm) \
                               {GNOME_APP_UI_RADIOITEMS, label, tip, cb, \
 			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, 0, NULL}
+			       0, (GdkModifierType)0, NULL}
 
 
 /* Functions */

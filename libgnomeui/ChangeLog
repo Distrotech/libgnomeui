@@ -1,3 +1,21 @@
+1998-04-10  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-app-helper.h (GnomeUIInfoType): New type, extracted from
+ 	GnomeUIInfo, to make access to this type easier when using C++.
+	(GnomeUIPixmapType): likewise
+	(GnomeUIInfo): Use GnomeUIInfoType and GnomeUIPixmapType.
+	(GNOMEUIINFO_END): Use expicit type casts to GnomeUIPixmapType and
+ 	GdkModifierType to prevent C++ from generating compiler warnings.
+	(GNOMEUIINFO_SEPARATOR): likewise
+	(GNOMEUIINFO_ITEM): likewise
+	(GNOMEUIINFO_ITEM_DATA): likewise
+	(GNOMEUIINFO_TOGGLEITEM): likewise
+	(GNOMEUIINFO_TOGGLEITEM_DATA): likewise
+	(GNOMEUIINFO_HELP): likewise
+	(GNOMEUIINFO_RADIOLIST): likewise
+	(GNOMEUIINFO_RADIOITEM): likewise
+	(GNOMEUIINFO_RADIOITEM_DATA): likewise
+
 Fri Apr 10 00:14:03 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h (gnome_apps_menu_variety_new): 
