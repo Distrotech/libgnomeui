@@ -77,9 +77,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-pixmap.c			\
 	gnome-popup-menu.c		\
 	gnome-popup-help.c		\
-	gnome-pouch.c			\
 	gnome-pouchP.h			\
-	gnome-roo.c			\
         gnome-winhints.c		\
         gnome-paper-selector.c		\
 	gnome-unit-spinner.c		\

@@ -8,6 +8,10 @@
 	this, I can help you with it and I may even have some
 	experimental code on my hard disk.
 
+	* Makefile.am (libgnomeui_2_la_SOURCES): Removed gnome-mdi.c,
+	gnome-mdiP.h, gnome-mdi-child.c, gnome-mdi-session.c,
+	gnome-pouch.c, gnome-roo.c.
+
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
 	* gnome-preferences.[ch]: Removed. This is now in libgnome
