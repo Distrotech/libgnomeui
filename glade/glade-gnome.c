@@ -183,7 +183,8 @@ messagebox_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		cinfo = tmp->data;
 		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
 			GladeAttribute *attr = tmp2->data;
-			if (!strcmp(attr->name, "stock_button")) {
+			if (!strcmp(attr->name, "stock_button") ||
+			    !strcmp(attr->name, "stock_pixmap")) {
 				string = attr->value;
 				break;
 			}
@@ -975,6 +976,9 @@ get_stock_name (const char *stock_name)
 	gnome_map_t *v;
 	gnome_map_t base;
 
+	/* check for NULL pointer */
+	if (stock_name == NULL)
+		return GNOME_STOCK_MENU_BLANK;
         /* If an error happens, return this */
         if (!strncmp (stock_name, "GNOME_STOCK_BUTTON_", blen)) {
 		base.extension = stock_name + blen;
