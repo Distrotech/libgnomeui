@@ -104,7 +104,7 @@ gnome_scores_new (  guint n_scores,
 	GtkTable	*table;
 	GtkWidget	*label;
 	gchar     	tmp[10];
-	gchar     	tmp2[20];
+	gchar     	tmp2[256];
 	guint i;
 	const gchar * buttons[] = { GNOME_STOCK_BUTTON_OK, NULL };
 
@@ -145,16 +145,20 @@ gnome_scores_new (  guint n_scores,
 		gtk_table_attach_defaults ( table, gs->label_scores[i], 1, 2, i+1, i+2);
 
 		/* the localized string should fit (after replacing the %a %b
-		   etc) in ~18 chars; so drop some if needed; after all this
-		   is for games scores, there is no need for extra precision.
+		   etc) in ~18 chars.
 		   %a is abbreviated weekday, %A is full weekday,
 		   %b %B are abbreviated and full monthname, %Y is year,
 		   %d is day of month, %m is month number, %T full hour,
 		   %H hours, %M minutes, %S seconds
 		*/
-		strftime(tmp2,sizeof(tmp2),_("%a %b %d %T %Y"),
-			 localtime( &(times[i]) ));
-		tmp2[strlen(tmp2)-1]=0;
+		if(strftime(tmp2, sizeof(tmp2), _("%a %b %d %T %Y"),
+			    localtime( &(times[i]) )) == 0) {
+			/* according to docs, if the string does not fit, the
+			 * contents of tmp2 are undefined, thus just use
+			 * ??? */
+			strcpy(tmp2, "???");
+		}
+		tmp2[sizeof(tmp2)-1] = '\0'; /* just for sanity */
 		gs->label_times[i] = gtk_label_new ( tmp2 );
 		gtk_widget_show ( gs->label_times[i] );
 		gtk_table_attach_defaults ( table, gs->label_times[i], 2, 3, i+1, i+2);

@@ -1,3 +1,9 @@
+Sat May 13 11:56:35 2000  George Lebl <jirka@5z.com>
+
+	* gnome-scores.c (gnome_scores_new): make the strftime buffer 256
+	  chars, stop cutting the last character, also if strftime fails,
+	  we need to reset the buffer to something sane.
+
 2000-05-10  Karl Eichwalder  <ke@suse.de>
 
 	* Makefile.am (gnometypebuiltins.h, gnometypebuiltins_vars.c,
