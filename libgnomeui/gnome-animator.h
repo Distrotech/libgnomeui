@@ -158,6 +158,11 @@ gboolean gnome_animator_append_frames_from_pixbuf (GnomeAnimator * animator,
 						   guint32 interval,
 						   gint x_unit);
 
+/* Append frames from a GdkPixbufAnimation */
+gboolean
+gnome_animator_append_frames_from_pixbuf_animation (GnomeAnimator * animator,
+						    GdkPixbufAnimation * pixbuf);
+
 /* Start and stop playback in the GTK loop. */
 void gnome_animator_start (GnomeAnimator * animator);
 void gnome_animator_stop (GnomeAnimator * animator);

@@ -26,24 +26,6 @@
 #include <config.h>
 #include <gtk/gtkmain.h>
 #include "gnome-animator.h"
-/*FIXME: BAD, UGLY UGLY UGLY BAD!, This is because this code wants to
- * allocate GdkPixbufFrames, this must somehow be fixed!!*/
-/* Private part of the GdkPixbufFrame structure */
-struct _GdkPixbufFrame {
-	/* The pixbuf with this frame's image data */
-	GdkPixbuf *pixbuf;
-
-	/* Offsets for overlaying onto the animation's area */
-	int x_offset;
-	int y_offset;
-
-	/* Frame duration in ms */
-	int delay_time;
-
-	/* Overlay mode */
-	GdkPixbufFrameAction action;
-};
-
 
 struct _GnomeAnimatorPrivate
 {
@@ -61,7 +43,18 @@ struct _GnomeAnimatorPrivate
 struct _GnomeAnimatorFrame
 {
   int frame_num;
-  GdkPixbufFrame *frame;
+
+  /* The pixbuf with this frame's image data */
+  GdkPixbuf *pixbuf;
+
+  /* Offsets for overlaying onto the animation's area */
+  int x_offset;
+  int y_offset;
+
+  /* Overlay mode */
+  /* FIXME: IMPLEMENT! (either here or in loading from GdkPixbufAnimation) */
+  GdkPixbufFrameAction action;
+
   GdkBitmap *mask;
   guint32 interval;
   GnomeAnimatorFrame *next;
@@ -316,10 +309,10 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
       draw_background_pixbuf (animator);
     }
 
-  draw_source = gdk_pixbuf_frame_get_pixbuf(animator->internal->current_frame->frame);
+  draw_source = animator->internal->current_frame->pixbuf;
 
-  x_off = gdk_pixbuf_frame_get_x_offset(animator->internal->current_frame->frame);
-  y_off = gdk_pixbuf_frame_get_y_offset(animator->internal->current_frame->frame);
+  x_off = animator->internal->current_frame->x_offset;
+  y_off = animator->internal->current_frame->x_offset;
 
   width = gdk_pixbuf_get_width (draw_source);
   height = gdk_pixbuf_get_height (draw_source);
@@ -365,8 +358,8 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
 	  if (frame->mask)
 	    {
 	      gdk_gc_set_clip_mask (widget->style->black_gc, frame->mask);
-	      gdk_gc_set_clip_origin (widget->style->black_gc, x_off,	/* frame->frame->x_offset */
-				      y_off);	/* frame->frame->y_offset */
+	      gdk_gc_set_clip_origin (widget->style->black_gc, x_off,	/* frame->x_offset */
+				      y_off);	/* frame->y_offset */
 	    }
 
 	  gdk_pixbuf_render_to_drawable (draw_source,
@@ -747,17 +740,16 @@ gnome_animator_append_frame_from_pixbuf_at_size (GnomeAnimator * animator,
 
   new_frame = append_frame (animator);
 
-  /*FIXME: somehow fix this, GdkPixbufFrame is now an opaque type! */
-  new_frame->frame = g_new0 (GdkPixbufFrame, 1);
-  new_frame->frame->pixbuf = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (pixbuf),
-					     TRUE,
-					     gdk_pixbuf_get_bits_per_sample
-					     (pixbuf), width, height);
+  new_frame->pixbuf = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (pixbuf),
+				      TRUE,
+				      gdk_pixbuf_get_bits_per_sample
+				      (pixbuf), width, height);
   gdk_pixbuf_copy_area (pixbuf, x_offset, y_offset, width, height,
-			new_frame->frame->pixbuf, 0, 0);
-  new_frame->frame->x_offset = x_offset;
-  new_frame->frame->y_offset = y_offset;
+			new_frame->pixbuf, 0, 0);
+  new_frame->x_offset = x_offset;
+  new_frame->y_offset = y_offset;
   new_frame->interval = interval;
+  new_frame->action = GDK_PIXBUF_FRAME_DISPOSE;
   animator->n_frames++;
 
   return TRUE;
@@ -786,17 +778,16 @@ gnome_animator_append_frames_from_pixbuf_at_size (GnomeAnimator * animator,
       GnomeAnimatorFrame *frame;
 
       frame = append_frame (animator);
-      /*FIXME: somehow fix this, GdkPixbufFrame is now an opaque type! */
-      frame->frame = g_new0 (GdkPixbufFrame, 1);
-      frame->frame->pixbuf = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (pixbuf),
-					     TRUE,
-					     gdk_pixbuf_get_bits_per_sample
-					     (pixbuf), width, height);
+      frame->pixbuf = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (pixbuf),
+				      TRUE,
+				      gdk_pixbuf_get_bits_per_sample
+				      (pixbuf), width, height);
       gdk_pixbuf_copy_area (pixbuf, offs, y_offset, width, height,
-			    frame->frame->pixbuf, 0, 0);
-      frame->frame->x_offset = x_offset;
-      frame->frame->y_offset = y_offset;
+			    frame->pixbuf, 0, 0);
+      frame->x_offset = x_offset;
+      frame->y_offset = y_offset;
       frame->interval = interval;
+      frame->action = GDK_PIXBUF_FRAME_DISPOSE;
     }
 
   return TRUE;
@@ -817,39 +808,41 @@ gnome_animator_append_frames_from_pixbuf (GnomeAnimator * animator,
 							   x_unit, 0, 0);
 }
 
-#if 0
 gboolean
 gnome_animator_append_frames_from_pixbuf_animation (GnomeAnimator * animator,
-						    GdkPixbufAnimation *
-						    pixbuf)
+						    GdkPixbufAnimation * pixbuf)
 {
-  int x;
-
-  g_print ("gnome_animator_append_frames_from_pixbuf_animation()\n");
+  GList *li;
 
   g_return_val_if_fail (animator != NULL, FALSE);
   g_return_val_if_fail (pixbuf != NULL, FALSE);
 
-  for (x = 0; x < pixbuf->n_frames; x++)
+  for(li = gdk_pixbuf_animation_get_frames(pixbuf); li != NULL; li = li->next)
     {
       GnomeAnimatorFrame *frame;
-      GdkPixbufFrame *pixbuf_frame;
-
-      pixbuf_frame = g_list_nth (pixbuf->frames, x);
+      GdkPixbufFrame *pixbuf_frame = li->data;
 
       frame = append_frame (animator);
-      frame->frame = g_new0 (GdkPixbufFrame, 1);
-      frame->frame->pixbuf = pixbuf_frame->pixbuf;
-      gdk_pixbuf_ref (frame->frame->pixbuf);
-      frame->frame->x_offset = pixbuf_frame->x_offset;
-      frame->frame->y_offset = pixbuf_frame->y_offset;
-      frame->delay_time = pixbuf_frame->delay_time;
-      frame->mode = pixbuf_frame->mode;
+      frame->pixbuf = gdk_pixbuf_frame_get_pixbuf(pixbuf_frame);
+      gdk_pixbuf_ref (frame->pixbuf);
+      frame->x_offset = gdk_pixbuf_frame_get_x_offset(pixbuf_frame);
+      frame->y_offset = gdk_pixbuf_frame_get_y_offset(pixbuf_frame);
+      frame->interval = gdk_pixbuf_frame_get_delay_time(pixbuf_frame);
+      frame->action = gdk_pixbuf_frame_get_action(pixbuf_frame);
+
+      if (frame->action != GDK_PIXBUF_FRAME_DISPOSE)
+        {
+	  static gboolean did_warning = FALSE;
+	  if( ! did_warning)
+	    g_warning("Only GDK_PIXBUF_FRAME_DISPOSE is supported for animations currently");
+	  did_warning = TRUE;
+	  /* FIXME: This needs to be done.  One way to do this is to create new full frames
+	   * here. */
+	}
     }
 
   return TRUE;
 }
-#endif
 
 /**
  * gnome_animator_start
