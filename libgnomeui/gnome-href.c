@@ -49,6 +49,8 @@ static void gnome_href_set_property	(GObject *object,
 					 const GValue * value,
 					 GParamSpec * pspec);
 static void gnome_href_realize		(GtkWidget *widget);
+static void gnome_href_style_set        (GtkWidget *widget,
+					 GtkStyle *previous_style);
 static void drag_data_get    		(GnomeHRef          *href,
 					 GdkDragContext     *context,
 					 GtkSelectionData   *selection_data,
@@ -109,6 +111,7 @@ gnome_href_class_init (GnomeHRefClass *klass)
 	gobject_class->get_property = gnome_href_get_property;
 
 	widget_class->realize = gnome_href_realize;
+	widget_class->style_set = gnome_href_style_set;
 	button_class->clicked = gnome_href_clicked;
 
 	/* By default we link to The World Food Programme */
@@ -140,27 +143,11 @@ gnome_href_class_init (GnomeHRefClass *klass)
 static void
 gnome_href_instance_init (GnomeHRef *href)
 {
-        GdkColor *link_color;
-	GdkColor blue = { 0, 0x0000, 0x0000, 0xffff };
-
 	href->_priv = g_new0(GnomeHRefPrivate, 1);
 
 	href->_priv->label = gtk_label_new("");
 	gtk_widget_ref(href->_priv->label);
 
-	gtk_widget_style_get (GTK_WIDGET(href),
-			      "link_color", &link_color,
-			      NULL);
-	if (!link_color)
-		link_color = &blue;
-	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
-			      GTK_STATE_NORMAL, link_color);
-	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
-			      GTK_STATE_ACTIVE, link_color);
-	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
-			      GTK_STATE_PRELIGHT, link_color);
-	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
-			      GTK_STATE_SELECTED, link_color);
 
 	gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
 
@@ -451,6 +438,38 @@ gnome_href_realize(GtkWidget *widget)
 	cursor = gdk_cursor_new (GDK_HAND2);
 	gdk_window_set_cursor (GTK_BUTTON (widget)->event_window, cursor);
 	gdk_cursor_unref (cursor);
+}
+
+static void
+gnome_href_style_set (GtkWidget *widget,
+		      GtkStyle *previous_style)
+{
+	GdkColor *link_color;
+	GdkColor blue = { 0, 0x0000, 0x0000, 0xffff };
+	GnomeHRef *href;
+
+	href = GNOME_HREF (widget);
+	
+	gtk_widget_style_get (widget,
+			      "link_color", &link_color,
+			      NULL);
+
+	if (!link_color)
+		link_color = &blue;
+
+	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
+			      GTK_STATE_NORMAL, link_color);
+	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
+			      GTK_STATE_ACTIVE, link_color);
+	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
+			      GTK_STATE_PRELIGHT, link_color);
+	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
+			      GTK_STATE_SELECTED, link_color);
+
+	if (link_color != &blue)
+		gdk_color_free (link_color);
+	
+	g_print ("in style set: %p!\n", link_color);
 }
 
 static void
