@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2001-10-14 15:13+0400\n"
+"POT-Creation-Date: 2001-11-03 14:06+0100\n"
 "PO-Revision-Date: 2001-10-14 16:10+0400\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -67,7 +67,8 @@ msgstr "Благодарности переводчику"
 #: libgnomeui/gnome-about.c:224
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "Благодарности переводчикам. Эта строка должна быть помечена для перевода"
+msgstr ""
+"Благодарности переводчикам. Эта строка должна быть помечена для перевода"
 
 #: libgnomeui/gnome-about.c:231 libgnomeui/gnome-about.c:672
 msgid "Documenters"
@@ -226,7 +227,7 @@ msgstr "Отключить соединение с диспетчером сеанса"
 msgid "Session management"
 msgstr "Управление сеансом"
 
-#: libgnomeui/gnome-client.c:2453
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Отменить выход"
 
@@ -285,7 +286,8 @@ msgstr "Календарь"
 
 #: libgnomeui/gnome-dateedit.c:928
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date устарело, используйте gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date устарело, используйте gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-edge.c:355
 msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
@@ -296,7 +298,7 @@ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 msgstr "-*-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
-#: libgnomeui/gnome-font-picker.c:146
+#: libgnomeui/gnome-font-picker.c:158
 msgid "Title"
 msgstr "Заголовок"
 
@@ -418,106 +420,115 @@ msgstr "Текст на кнопке"
 msgid "End World Hunger"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:375
+#: libgnomeui/gnome-href.c:136
+#, fuzzy
+msgid "Link colour"
+msgstr "Выбрать цвет"
+
+#: libgnomeui/gnome-href.c:137
+msgid "Colour ysed to draw the link"
+msgstr ""
+
+#: libgnomeui/gnome-href.c:398
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:88 libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:615
 msgid "X display to use"
 msgstr "Используемый X-display"
 
-#: libgnomeui/gnome-ui-init.c:88 libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:615
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЙ"
 
-#: libgnomeui/gnome-ui-init.c:96
+#: libgnomeui/gnome-ui-init.c:103
 msgid "GNOME GUI Library"
 msgstr "Библиотека пользовательского интерфейса GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:454
+#: libgnomeui/gnome-ui-init.c:462
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:468
+#: libgnomeui/gnome-ui-init.c:476
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:599
+#: libgnomeui/gnome-ui-init.c:608
 msgid "Gdk debugging flags to set"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:599 libgnomeui/gnome-ui-init.c:602
-#: libgnomeui/gnome-ui-init.c:632 libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:608 libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:652 libgnomeui/gnome-ui-init.c:655
 msgid "FLAGS"
 msgstr "ФЛАГИ"
 
-#: libgnomeui/gnome-ui-init.c:602
+#: libgnomeui/gnome-ui-init.c:611
 msgid "Gdk debugging flags to unset"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:608
+#: libgnomeui/gnome-ui-init.c:619
 msgid "Make X calls synchronous"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:625
 msgid "Don't use X shared memory extension"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:629
 msgid "Program name as used by the window manager"
 msgstr "Название программы используемое диспетчером окон"
 
-#: libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:629
 msgid "NAME"
 msgstr "НАЗВАНИЕ"
 
-#: libgnomeui/gnome-ui-init.c:617
+#: libgnomeui/gnome-ui-init.c:632
 msgid "Program class as used by the window manager"
 msgstr "Класс программы используемый диспетчером окон"
 
-#: libgnomeui/gnome-ui-init.c:617
+#: libgnomeui/gnome-ui-init.c:632
 msgid "CLASS"
 msgstr "КЛАСС"
 
-#: libgnomeui/gnome-ui-init.c:620
+#: libgnomeui/gnome-ui-init.c:636
 msgid "HOST"
 msgstr "ХОСТ"
 
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:640
 msgid "PORT"
 msgstr "ПОРТ"
 
-#: libgnomeui/gnome-ui-init.c:626 libgnomeui/gnome-ui-init.c:629
+#: libgnomeui/gnome-ui-init.c:645 libgnomeui/gnome-ui-init.c:648
 msgid "STYLE"
 msgstr "СТИЛЬ"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:652
 msgid "Gtk+ debugging flags to set"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:655
 msgid "Gtk+ debugging flags to unset"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:638
+#: libgnomeui/gnome-ui-init.c:658
 msgid "Make all warnings fatal"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:661
 msgid "Load an additional Gtk module"
 msgstr "Загрузить дополнительный модуль Gtk"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:661
 msgid "MODULE"
 msgstr "МОДУЛЬ"
 
-#: libgnomeui/gnome-ui-init.c:736
+#: libgnomeui/gnome-ui-init.c:766
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -559,31 +570,31 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:139
+#: libgnomeui/gnome-stock-icons.c:135
 msgid "Table Borders"
 msgstr "Границы таблицы"
 
-#: libgnomeui/gnome-stock-icons.c:140
+#: libgnomeui/gnome-stock-icons.c:136
 msgid "Table Fill"
 msgstr "Заполнение таблицы"
 
-#: libgnomeui/gnome-stock-icons.c:141
+#: libgnomeui/gnome-stock-icons.c:137
 msgid "Bulleted List"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:142
+#: libgnomeui/gnome-stock-icons.c:138
 msgid "Numbered List"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:143
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Indent"
 msgstr "Отступ"
 
-#: libgnomeui/gnome-stock-icons.c:144
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Un-Indent"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:145
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "About"
 msgstr "О программе"
 
@@ -605,7 +616,6 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:83 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Файл"
 
@@ -663,7 +673,6 @@ msgid "_Game"
 msgstr "Игра"
 
 #: libgnomeui/gnome-app-helper.c:97 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Справка"
 
@@ -854,11 +863,11 @@ msgstr "Настроить приложение"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:222
 msgid "_About"
 msgstr "О программе"
 
-#: libgnomeui/gnome-app-helper.c:223 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:223
 msgid "About this application"
 msgstr "Об этой программе"
 
@@ -885,7 +894,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:241 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:241
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -1005,78 +1014,98 @@ msgstr ""
 msgid "The application ID string"
 msgstr ""
 
-#: libgnomeui/gnome-entry.c:180 libgnomeui/gnome-entry.c:181
+#: libgnomeui/gnome-entry.c:169 libgnomeui/gnome-entry.c:170
 msgid "History id"
 msgstr ""
 
-#: libgnomeui/gnome-entry.c:187
+#: libgnomeui/gnome-entry.c:176
 msgid "GTK entry"
 msgstr ""
 
-#: libgnomeui/gnome-entry.c:188
+#: libgnomeui/gnome-entry.c:177
 msgid "The GTK entry"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:358
+#: libgnomeui/gnome-file-entry.c:347
 msgid "Select file"
 msgstr "Выбрать файл"
 
-#: libgnomeui/gnome-file-entry.c:535
+#: libgnomeui/gnome-file-entry.c:523
 msgid "Browse..."
 msgstr "Просмотр..."
 
-#: libgnomeui/gnome-font-picker.c:63
-msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
-msgstr "-*-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+#: libgnomeui/gnome-font-picker.c:67
+msgid "sans 12"
+msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:64
+#: libgnomeui/gnome-font-picker.c:68
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "В чащах юга жил-был цитрус. Да, но фальшивый экземпляръ!"
 
-#: libgnomeui/gnome-font-picker.c:65
+#: libgnomeui/gnome-font-picker.c:69
 msgid "Pick a Font"
 msgstr "Выбрать шрифт"
 
-#: libgnomeui/gnome-font-picker.c:147
+#: libgnomeui/gnome-font-picker.c:159
 msgid "The title of the selection dialog box"
 msgstr "Заголовок диалога выбора"
 
-#: libgnomeui/gnome-font-picker.c:155
+#: libgnomeui/gnome-font-picker.c:167
 msgid "Mode"
 msgstr "Режим"
 
-#: libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-font-picker.c:168
 msgid "The mode of operation of the font picker"
 msgstr "Режим действия выбора шрифта"
 
-#: libgnomeui/gnome-font-picker.c:165
+#: libgnomeui/gnome-font-picker.c:177
 msgid "Font name"
 msgstr "Название шрифта"
 
-#: libgnomeui/gnome-font-picker.c:166
+#: libgnomeui/gnome-font-picker.c:178
 msgid "Name of the selected font"
 msgstr "Название выбранного шрифта"
 
-#: libgnomeui/gnome-font-picker.c:174 libgnomeui/gnome-font-picker.c:899
+#: libgnomeui/gnome-font-picker.c:187 libgnomeui/gnome-font-picker.c:977
 msgid "Font"
 msgstr "Шрифт"
 
-#: libgnomeui/gnome-font-picker.c:175
+#: libgnomeui/gnome-font-picker.c:188
 msgid "The selected GtkFont"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:181
+#: libgnomeui/gnome-font-picker.c:195
 msgid "Preview text"
 msgstr "Текст для просмотра"
 
-#: libgnomeui/gnome-font-picker.c:182
+#: libgnomeui/gnome-font-picker.c:196
 msgid "Preview text shown in the dialog"
 msgstr "Текст показываемый в строке просмотра"
 
-#. note: do not use strncpy, it sucks
-#: libgnomeui/gnome-font-picker.c:939
-msgid "Unknown"
-msgstr "Неизвестно"
+#: libgnomeui/gnome-font-picker.c:204
+msgid "Use font in label"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:205
+msgid "Use font in the label in font info mode"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:213
+msgid "Font size for label"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:214
+msgid "Font size for label in font info mode"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:224
+#, fuzzy
+msgid "Show size"
+msgstr "Показать размер шрифта"
+
+#: libgnomeui/gnome-font-picker.c:225
+msgid "Show size in font info mode"
+msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1188,28 +1217,17 @@ msgstr ""
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-*-*-*-*-*-*-30-170-*-*-*-*-*-*"
 
-#. Pixmap
-#: test-gnome/testgnome.c:738
-msgid "Default Pixmap"
-msgstr "Картинка по умолчанию"
+#~ msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+#~ msgstr "-*-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
 
-#: test-gnome/testgnome.c:747 test-gnome/testgnome.c:787
-#: test-gnome/testgnome.c:814
-msgid "If you choose a font it will appear here"
-msgstr "Если выберете шрифт, он появится здесь"
+#~ msgid "Unknown"
+#~ msgstr "Неизвестно"
 
-#: test-gnome/testgnome.c:763
-msgid "Use Font in button with size"
-msgstr ""
+#~ msgid "Default Pixmap"
+#~ msgstr "Картинка по умолчанию"
 
-#: test-gnome/testgnome.c:770
-msgid "Show font size"
-msgstr "Показать размер шрифта"
+#~ msgid "If you choose a font it will appear here"
+#~ msgstr "Если выберете шрифт, он появится здесь"
 
-#: test-gnome/testgnome.c:808
-msgid "This is an hbox with pixmap and text"
-msgstr ""
-
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Выход из теста"
+#~ msgid "Exit the test"
+#~ msgstr "Выход из теста"
