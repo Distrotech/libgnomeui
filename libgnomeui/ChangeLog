@@ -1,5 +1,8 @@
 1998-09-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-canvas.c (gnome_canvas_root): Changed the return type to
+	GnomeCanvasGroup, as it is more convenient that way.
+
 	* gnome-color-picker.[ch]: New color picker that is a real
 	widget.  GnomeColorSelector is now deprecated.
 

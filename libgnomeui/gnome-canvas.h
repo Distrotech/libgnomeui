@@ -309,7 +309,7 @@ GtkType gnome_canvas_get_type (void);
 GtkWidget *gnome_canvas_new (void);
 
 /* Returns the root canvas item group of the canvas */
-GnomeCanvasItem *gnome_canvas_root (GnomeCanvas *canvas);
+GnomeCanvasGroup *gnome_canvas_root (GnomeCanvas *canvas);
 
 /* Sets the limits of the scrolling region */
 void gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, double x2, double y2);

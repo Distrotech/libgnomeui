@@ -2040,13 +2040,13 @@ idle_handler (gpointer data)
 	return FALSE;
 }
 
-GnomeCanvasItem *
+GnomeCanvasGroup *
 gnome_canvas_root (GnomeCanvas *canvas)
 {
 	g_return_val_if_fail (canvas != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), NULL);
 
-	return canvas->root;
+	return GNOME_CANVAS_GROUP (canvas->root);
 }
 
 void
