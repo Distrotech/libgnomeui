@@ -2,6 +2,8 @@
 
 	* gnome-icon-list.c (gnome_icon_list_clear): Reset last_clicked
 	and last_selected here.
+	(gnome_icon_list_remove): Keep last_clicked and last_selected
+	within the range of icons.
 
 1999-05-26  Tim Janik <timj@couch.wilmington.net>
 
