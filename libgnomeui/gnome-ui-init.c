@@ -330,7 +330,7 @@ initialize_gtk_signal_relay (void)
 	if (!gnome_config_get_bool ("/sound/system/settings/event_sounds=true"))
 		return;
 	
-	ctmp = gnome_config_file ("/sound/events/gtk-events.soundlist");
+	ctmp = gnome_config_file ("/sound/events/gtk-events-2.soundlist");
 	ctmp2 = g_strconcat ("=", ctmp, "=", NULL);
 	g_free (ctmp);
 	iter_signames = gnome_config_init_iterator_sections (ctmp2);
