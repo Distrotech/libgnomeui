@@ -515,26 +515,24 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
 
 }
 
-/* ----------------------------------------------------------------------
-   NAME:	gnome_about_new
-   DESCRIPTION:	Main routine that creates the widget. The arguments are:
-                  title      ... Name of app.
-		  version    ... version number
-		  copyright  ... copyright string
-		  authors    ... NULL terminated list of authors
-		  comments   ... Other comments
-		  logo       ... a logo bitmap file.
-
-		a typical call would be:
-
-   gchar *authors[] = {"author1", "author2", ..., NULL};
-
-   GtkWdiget about = gnome_about_new ("GnoApp", "1.2b",
-                           "Copyright (C) 1998",
-			   authors,
-			   "Comment line 1\nComment line 2",
-			   "/usr/local/lib/pixmaps/app_icon.xpm");
-   ---------------------------------------------------------------------- */
+/**
+ * gnome_about_new
+ * @title: Name of app.
+ * @version: version number
+ * @copyright: copyright string
+ * @authors: %NULL terminated list of authors
+ * @comments: Other comments
+ * @logo: a logo pixmap file.
+ *
+ * Description: Creates a new GNOME About dialog.  @title, @version,
+ * @copyright, and @authors are displayed first, in that order.
+ * @comments is typically the location for multiple lines of text, if
+ * necessary.  (Separate with "\n".)  @logo is the filename of a
+ * optional pixmap to be displayed in the dialog, typically a product or
+ * company logo of some sort; set to %NULL if no logo file is available.
+ *
+ * Returns: &GtkWidget pointer to new dialog
+ **/
 
 GtkWidget* 
 gnome_about_new (const gchar	*title,
