@@ -117,6 +117,7 @@ gnome_headers = \
 	gnome-canvas-widget.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
+	gnome-compat.h			\
 	gnome-dateedit.h		\
 	gnome-dentry-edit.h		\
 	gnome-dialog.h                  \

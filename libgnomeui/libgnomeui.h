@@ -1,6 +1,8 @@
 #ifndef LIBGNOMEUI_H
 #define LIBGNOMEUI_H
 
+#include "libgnomeui/gnome-compat.h"
+
 #include "libgnome/gnome-defs.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"
