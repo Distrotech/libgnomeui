@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-15 23:38+0100\n"
+"POT-Creation-Date: 2004-03-22 02:11+0100\n"
 "PO-Revision-Date: 2003-07-01 16:42-0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -590,11 +590,11 @@ msgstr "Interaktiveco"
 msgid "Level of user activity required."
 msgstr "Nivelo de uzantaktiveco bezonita."
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Via HTTP Prokurilo bezonas, ke vi salutas.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:63
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -603,25 +603,25 @@ msgstr ""
 "Vi devas saluti por eniri \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted unencrypted."
 msgstr "Via pasvorto sendos neĉifrite."
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:67
 msgid "Your password will be transmitted encrypted."
 msgstr "Via pasvorto sendos ĉifrite."
 
-#: libgnomeui/gnome-authentication-manager.c:69
-#: libgnomeui/gnome-authentication-manager.c:272
+#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:289
 msgid "Authentication Required"
 msgstr "Aŭtentigo necesita"
 
-#: libgnomeui/gnome-authentication-manager.c:265
+#: libgnomeui/gnome-authentication-manager.c:282
 #, c-format
 msgid " domain %s"
 msgstr ""
 
-#: libgnomeui/gnome-authentication-manager.c:268
+#: libgnomeui/gnome-authentication-manager.c:285
 #, fuzzy, c-format
 msgid "You must log in to access %s\n"
 msgstr ""

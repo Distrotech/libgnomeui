@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-15 23:38+0100\n"
+"POT-Creation-Date: 2004-03-22 02:11+0100\n"
 "PO-Revision-Date: 2004-01-05 01:16+0100\n"
 "Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -592,11 +592,11 @@ msgstr "Interaktivitet"
 msgid "Level of user activity required."
 msgstr "Kor mykje brukaraktivitet som vert kravd."
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "HTTP-mellomtenaren din krev at du loggar inn.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:63
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -605,25 +605,25 @@ msgstr ""
 "Du må logga på for å få tilgjenge til «%s».\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted unencrypted."
 msgstr "Passordet ditt vil overførast i klartekst."
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:67
 msgid "Your password will be transmitted encrypted."
 msgstr "Passordet ditt vil overførast kryptert."
 
-#: libgnomeui/gnome-authentication-manager.c:69
-#: libgnomeui/gnome-authentication-manager.c:272
+#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:289
 msgid "Authentication Required"
 msgstr "Autentisering krevst"
 
-#: libgnomeui/gnome-authentication-manager.c:265
+#: libgnomeui/gnome-authentication-manager.c:282
 #, c-format
 msgid " domain %s"
 msgstr " domene %s"
 
-#: libgnomeui/gnome-authentication-manager.c:268
+#: libgnomeui/gnome-authentication-manager.c:285
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Du må logga på for å få tilgjenge til %s\n"

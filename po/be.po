@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-15 23:38+0100\n"
+"POT-Creation-Date: 2004-03-22 02:11+0100\n"
 "PO-Revision-Date: 2004-03-08 15:11+0200\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -591,11 +591,11 @@ msgstr "Інтэрактыўнасьць"
 msgid "Level of user activity required."
 msgstr "Патрабуецца актыўнасьць карыстальніка."
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Ваш упаўнаважаны паслужнік HTTP патрабуе высьвятленьня асобы.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:63
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -604,25 +604,25 @@ msgstr ""
 "Вам патрэбна вызначыць сябе для доступу да \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted unencrypted."
 msgstr "Ваш пароль будзе пераданы ў незашыфраваным выглядзе."
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:67
 msgid "Your password will be transmitted encrypted."
 msgstr "Ваш пароль будзе пераданы ў зашыфраваным выглядзе."
 
-#: libgnomeui/gnome-authentication-manager.c:69
-#: libgnomeui/gnome-authentication-manager.c:272
+#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:289
 msgid "Authentication Required"
 msgstr "Патрабуецца высьвятленьне асобы"
 
-#: libgnomeui/gnome-authentication-manager.c:265
+#: libgnomeui/gnome-authentication-manager.c:282
 #, c-format
 msgid " domain %s"
 msgstr " маёнтак %s"
 
-#: libgnomeui/gnome-authentication-manager.c:268
+#: libgnomeui/gnome-authentication-manager.c:285
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Вы мусіце ўвайсьці, каб мець доступ да \"%s\"\n"

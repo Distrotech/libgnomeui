@@ -39,7 +39,7 @@
 
 #define ICON_NAME_MIME_PREFIX           "gnome-mime-"
 
-#define SELF_THUMBNAIL_SIZE_THRESHOLD   16384
+#define SELF_THUMBNAIL_SIZE_THRESHOLD   32768
 
 
 /* Returns NULL for regular */

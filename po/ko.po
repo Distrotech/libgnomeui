@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-15 23:38+0100\n"
+"POT-Creation-Date: 2004-03-22 02:11+0100\n"
 "PO-Revision-Date: 2004-02-24 23:52+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
@@ -589,11 +589,11 @@ msgstr "상호작용 정도"
 msgid "Level of user activity required."
 msgstr "사용자 행동이 필요한 정도."
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "이 HTTP 프록시는 로그인을 해야 합니다.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:63
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -602,25 +602,25 @@ msgstr ""
 "\"%s\"에 접근하려면 로그인을 해야 합니다.\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted unencrypted."
 msgstr "열쇠글이 암호화되지 않은 상태로 전송됩니다."
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:67
 msgid "Your password will be transmitted encrypted."
 msgstr "열쇠글이 암호화된 상태로 전송됩니다."
 
-#: libgnomeui/gnome-authentication-manager.c:69
-#: libgnomeui/gnome-authentication-manager.c:272
+#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:289
 msgid "Authentication Required"
 msgstr "인증이 필요합니다"
 
-#: libgnomeui/gnome-authentication-manager.c:265
+#: libgnomeui/gnome-authentication-manager.c:282
 #, c-format
 msgid " domain %s"
 msgstr " 도메인 %s"
 
-#: libgnomeui/gnome-authentication-manager.c:268
+#: libgnomeui/gnome-authentication-manager.c:285
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-15 23:38+0100\n"
+"POT-Creation-Date: 2004-03-22 02:11+0100\n"
 "PO-Revision-Date: 2004-02-18 00:17+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -593,11 +593,11 @@ msgstr "Interaktiv"
 msgid "Level of user activity required."
 msgstr "Niveau af brugeraktivitet påkrævet"
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "HTTP-mellemværten kræver at du logger på.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:63
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -606,25 +606,25 @@ msgstr ""
 "Du skal logge på for at tilgå \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted unencrypted."
 msgstr "Din adgangskode vil blive sendt ukrypteret."
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:67
 msgid "Your password will be transmitted encrypted."
 msgstr "Din adgangskode vil blive sendt krypteret."
 
-#: libgnomeui/gnome-authentication-manager.c:69
-#: libgnomeui/gnome-authentication-manager.c:272
+#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:289
 msgid "Authentication Required"
 msgstr "Brugerverifikation krævet"
 
-#: libgnomeui/gnome-authentication-manager.c:265
+#: libgnomeui/gnome-authentication-manager.c:282
 #, c-format
 msgid " domain %s"
 msgstr " domæne %s"
 
-#: libgnomeui/gnome-authentication-manager.c:268
+#: libgnomeui/gnome-authentication-manager.c:285
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Du skal logge på for at tilgå %s\n"

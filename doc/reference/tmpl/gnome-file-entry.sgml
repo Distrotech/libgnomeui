@@ -49,6 +49,11 @@ GnomeFileEntry
 
 </para>
 
+<!-- ##### ARG GnomeFileEntry:filechooser-action ##### -->
+<para>
+
+</para>
+
 <!-- ##### ARG GnomeFileEntry:filename ##### -->
 <para>
 
