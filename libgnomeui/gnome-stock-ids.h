@@ -117,12 +117,6 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_TEXT_BULLETED_LIST "Text Bulleted List"
 #define GNOME_STOCK_PIXMAP_TEXT_NUMBERED_LIST "Text Numbered List"
 
-/* The basic pixmap version of an icon. */
-
-#define GNOME_STOCK_PIXMAP_REGULAR     "regular"
-#define GNOME_STOCK_PIXMAP_DISABLED    "disabled"
-#define GNOME_STOCK_PIXMAP_FOCUSED     "focused"
-
 /*
  * Buttons
  */

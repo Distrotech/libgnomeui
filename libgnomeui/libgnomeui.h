@@ -9,7 +9,7 @@
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"
 #ifndef GNOME_EXCLUDE_EXPERIMENTAL
-#include "libgnomeui/gnome-animator.h"
+/* #include "libgnomeui/gnome-animator.h" */
 #endif
 #include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-appbar.h"
@@ -18,9 +18,9 @@
 #include "libgnomeui/gnome-app-util.h"
 #endif
 #include "libgnomeui/gnome-canvas.h"
-#include "libgnomeui/gnome-canvas-image.h"
+/* #include "libgnomeui/gnome-canvas-image.h" */
 #include "libgnomeui/gnome-canvas-line.h"
-#include "libgnomeui/gnome-canvas-load.h"
+/* #include "libgnomeui/gnome-canvas-load.h" */
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"
 #include "libgnomeui/gnome-canvas-polygon.h"
 #include "libgnomeui/gnome-canvas-text.h"

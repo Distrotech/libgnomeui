@@ -17,8 +17,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <gnome.h>
 #include "gnome-druid.h"
+#include "gnome-stock.h"
+#include "gnome-uidefs.h"
+#include <libgnome/gnome-i18nP.h>
+
 enum {
 	CANCEL,
 	LAST_SIGNAL
@@ -125,14 +128,14 @@ gnome_druid_init (GnomeDruid *druid)
 
 	/* set up the buttons */
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (druid), GTK_NO_WINDOW);
-	pixmap =  gnome_stock_pixmap_widget(NULL, GNOME_STOCK_BUTTON_PREV);
+	pixmap =  gnome_stock_new_with_icon(GNOME_STOCK_BUTTON_PREV);
 	druid->back = gnome_pixmap_button (pixmap, _("Back"));
 	GTK_WIDGET_SET_FLAGS (druid->back, GTK_CAN_DEFAULT);
 	druid->next = gnome_stock_or_ordinary_button (GNOME_STOCK_BUTTON_NEXT);
 	GTK_WIDGET_SET_FLAGS (druid->next, GTK_CAN_DEFAULT);
 	druid->cancel = gnome_stock_or_ordinary_button (GNOME_STOCK_BUTTON_CANCEL);
 	GTK_WIDGET_SET_FLAGS (druid->cancel, GTK_CAN_DEFAULT);
-	pixmap =  gnome_stock_pixmap_widget(NULL, GNOME_STOCK_BUTTON_APPLY);
+	pixmap =  gnome_stock_new_with_icon(GNOME_STOCK_BUTTON_APPLY);
 	druid->finish = gnome_pixmap_button (pixmap, _("Finish"));
 	GTK_WIDGET_SET_FLAGS (druid->finish, GTK_CAN_DEFAULT);
 	gtk_widget_set_parent (druid->back, GTK_WIDGET (druid));

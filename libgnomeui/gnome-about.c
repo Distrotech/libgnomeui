@@ -623,24 +623,32 @@ gnome_about_construct (GnomeAbout *about,
 	if (logo)
 	{
 		filename = gnome_pixmap_file (logo);
-		if (filename
-		    && gdk_imlib_load_file_to_pixmap (filename, &ai->logo,
-						      &ai->mask))
-		{
-			gdk_window_get_size ((GdkWindow *) ai->logo,
-					     &ai->logo_w, &ai->logo_h);
-			h += 4 + ai->logo_h;
-			ai->h = h;
-			ai->w = MAX (w, (ai->logo_w + 6)); 
-			w = ai->w;
+		if (filename != NULL) {
+                        GdkPixbuf *pixbuf;
+                        pixbuf = gdk_pixbuf_new_from_file(filename);
+                        if (pixbuf != NULL) {
+                                gnome_pixbuf_render(pixbuf,
+                                                    &ai->logo,
+                                                    &ai->mask);
+                                
+                                gdk_pixbuf_unref(pixbuf);
+                                
+                                gdk_window_get_size ((GdkWindow *) ai->logo,
+                                                     &ai->logo_w, &ai->logo_h);
+                                h += 4 + ai->logo_h;
+                                ai->h = h;
+                                ai->w = MAX (w, (ai->logo_w + 6)); 
+                                w = ai->w;
+                        }
 		}
 		else
 			ai->logo = NULL;
-		g_free(filename);
-	}
-	else
-		ai->logo = NULL;
 
+		g_free(filename);
+	} else {
+		ai->logo = NULL;
+        }
+                
 	gtk_widget_set_usize ( GTK_WIDGET (drawing_area), w, h);
 	gtk_widget_set_events (drawing_area, GDK_EXPOSURE_MASK);
 

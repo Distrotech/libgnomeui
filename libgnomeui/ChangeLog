@@ -1,3 +1,131 @@
+1999-11-05  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c (gnome_pixmap_set_mode): implemented
+
+	* Makefile.am: Comment out property entries, they use the color
+	picker.
+	comment out dentry editor, it uses icon entry.
+
+	* gnome-init.c (libgnomeui_post_args_parse): Don't init imlib
+	(libgnomeui_pixbuf_image_loader): Replaces libgnomeui_imlib_image_loader
+
+	* Makefile.am: Comment color picker out
+	comment out gnome-druid for now too
+	comment out icon list
+	comment out icon selector
+	comment out icon entry
+
+	* gnome-pixmap-entry.c: Port to gdk-pixbuf
+	(setup_preview): port to gdk-pixbuf
+
+	* gnome-pixmap.c (gnome_pixbuf_build_insensitive): init width and
+	height variables
+
+	* gnome-app-helper.c (create_pixmap): fix cast on xpm data to
+	match const char**
+
+	* gnome-pixmap.c (gnome_pixmap_new_from_xpm_d_at_size): const on
+	the xpm_data
+	(gnome_pixmap_new_from_xpm_d): ditto
+
+	* gnome-messagebox.c (gnome_message_box_newv): Port to new GnomePixmap
+	(gnome_message_box_new): Port to new GnomePixmap
+
+	* gnome-pixmap.c (set_pixmaps): Allow pixmaps/masks to be NULL for "unset"
+	(set_pixbufs): Ditto
+	(set_pixbuf): Ditto
+	(gnome_pixmap_clear): New function to clear all pixmaps
+
+	* gnome-druid.c (gnome_druid_init): port to gdk-pixbuf
+
+	* gnome-app-helper.c (create_pixmap): Use
+	gnome_stock_new_with_icon() instead of gnome_stock_pixmap_widget()
+
+	* gnome-icon-entry.c (entry_changed): port to gdk-pixbuf
+
+	* gnome-pixmap.c (gnome_pixbuf_scale): If new w/h are the same as
+	old w/h just use memcpy() instead of scaling.	
+	(gnome_pixmap_set_pixbuf_at_size): New function
+	(gnome_pixmap_set_pixbuf): New function
+	(set_pixbuf): New function, used by set_pixbufs and above two
+	functions. Also implements automatic mask generation.
+
+	* gnome-pixmap.h: add a little comment about not using GnomePixmap
+	as an image loader.
+
+	* gnome-druid.h: include gnome-defs.h
+
+	* gnome-druid-page.h: include gnome-defs.h
+
+	* gnome-druid.c: Don't include gnome.h
+
+	* libgnomeui.h: Comment out animator, canvas image, canvas load
+	headers for now.
+
+	* Makefile.am: Comment out gnome-canvas-load.c
+	(INCLUDES): Remove GDK_IMLIB_CFLAGS
+
+	* gnome-canvas-load.h: Delete header contents; they aren't needed
+	with gdk-pixbuf	
+
+	* Makefile.am: Comment out gnome-canvas-image.c for now
+
+	* gnome-calculator.c (gnome_calculator_realized): port to
+	gdk-pixbuf; was using GnomePixmap just to load an image (please
+	people, could we be ANY MORE BROKEN in a million years? GnomeAbout
+	and GnomeAnimator were doing the same thing)
+	(put_led_font): Port to gdk-pixbuf, and don't draw with the image
+	if we failed to load it.
+
+	Note that GnomeCalculator is still broken because the font pixmap
+	is leaked if you destroy all the outstanding GnomeCalculator
+	widgets. Should probably use a GdkPixbuf as the representation
+	instead of creating a pixmap, and render from client side. Then
+	refcount the GdkPixbuf.
+
+	* Makefile.am: Comment out gnome-animator.c for now
+
+	* gnome-animator.c
+	(gnome_animator_append_frame_from_gnome_pixmap): Deleted this
+	function. It makes no sense, doesn't work with new GnomePixmap,
+	and was marked experimental.
+	(free_all_frames): port to gdk-pixbuf
+	(gnome_animator_append_frame_from_imlib_at_size): Removed
+	(gnome_animator_append_frame_from_imlib): Removed
+	(gnome_animator_append_frames_from_imlib_at_size): Removed
+	(gnome_animator_append_frames_from_imlib): Removed
+
+	* gnome-about.c (gnome_about_construct): port to gdk-pixbuf
+
+	* gnome-pixmap.c (gnome_pixbuf_render): Render a pixbuf to pixmap/mask
+
+	* gnome-stock.c (gnome_pixmap_button): Remove some weird pixmap 
+	registration stuff that no longer works and I don't understand the 
+	purpose of.
+	(gnome_pixmap_button): Unref the pixmap if it isn't placed in the
+	button due to user preferences. Long-standing mem leak.
+	(gnome_stock_pixmap_gdk): Port to gdk-pixbuf
+	(gnome_stock_transparent_window): port to gdk-pixbuf
+
+	* gnome-stock.h: rename gnome_stock_pixmap_checkfor() to
+	gnome_stock_pixmap_lookup()
+
+	* gnome-stock.c: Rewrite the stock pixmap hash. We now store
+	entries for all 5 states, and we do a single lookup to get all
+	five states at once. Also, the GnomeStock widget now simply gets a 
+	reference to the GdkPixbuf stored in the hash. We also free memory
+	associated with unscaled pixbufs, filenames, etc. once we have the
+	final pixbuf cached.
+	(gnome_stock_new): Set GNOME_PIXMAP_KEEP_PIXBUF mode since we are
+	usually using a pixbuf shared with other GnomeStock widgets.	
+	(gnome_stock_set_icon): Implement
+	(gnome_stock_pixmap_register): Don't return success/failure, that
+	makes no sense (it always succeeded anyway)
+	(gnome_stock_pixmap_change): Ditto
+
+	* gnome-stock.h: Replace all "subtype" string arguments with
+	GtkStateType enum arguments. 
+
 1999-11-04  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-stock.c: Remove GnomeStockPixmapEntryWidget and 

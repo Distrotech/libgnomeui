@@ -21,6 +21,7 @@
 #include <gdk/gdkkeysyms.h>
 #include "libgnome/libgnomeP.h"
 #include "gnome-calculator.h"
+#include <gdk-pixbuf.h>
 #include "gnome-pixmap.h"
 
 typedef void (*sighandler_t)(int);
@@ -56,7 +57,7 @@ static void gnome_calculator_destroy	(GtkObject		*object);
 
 static GtkVBoxClass *parent_class;
 
-static GtkWidget * font_pixmap=NULL;
+static GdkPixmap * font_pixmap = NULL;
 
 typedef struct _CalculatorButton CalculatorButton;
 struct _CalculatorButton {
@@ -185,37 +186,39 @@ put_led_font(GnomeCalculator *gc)
 
 	gdk_draw_rectangle(p, style->black_gc, 1, 0, 0, -1, -1);
 
-	if(gc->memory!=0) {
-		gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap, 13*FONT_WIDTH,
-				0, 0, 0, FONT_WIDTH, FONT_HEIGHT);
-	}
-	for(x=12,i=strlen(text)-1;i>=0;x--,i--) {
-		if(text[i]>='0' && text[i]<='9')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					(text[i]-'0')*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-		else if(text[i]=='.')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					10*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-		else if(text[i]=='+')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					11*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-		else if(text[i]=='-')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					12*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-		else if(text[i]=='e')
-			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
-					14*FONT_WIDTH, 0, 
-					x*FONT_WIDTH, 0,
-					FONT_WIDTH, FONT_HEIGHT);
-	}
+        if (font_pixmap != NULL) {
+                if(gc->memory!=0) {
+                        gdk_draw_pixmap(p, style->white_gc, font_pixmap, 13*FONT_WIDTH,
+                                        0, 0, 0, FONT_WIDTH, FONT_HEIGHT);
+                }
+                for(x=12,i=strlen(text)-1;i>=0;x--,i--) {
+                        if(text[i]>='0' && text[i]<='9')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                (text[i]-'0')*FONT_WIDTH, 0, 
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                        else if(text[i]=='.')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                10*FONT_WIDTH, 0, 
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                        else if(text[i]=='+')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                11*FONT_WIDTH, 0,
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                        else if(text[i]=='-')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                12*FONT_WIDTH, 0, 
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                        else if(text[i]=='e')
+                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+                                                14*FONT_WIDTH, 0, 
+                                                x*FONT_WIDTH, 0,
+                                                FONT_WIDTH, FONT_HEIGHT);
+                }
+        }
 	gtk_signal_emit_by_name(GTK_OBJECT(gc->display), "draw", &retval);
 }
 
@@ -1023,15 +1026,22 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 {
 	GnomeCalculator *gc = GNOME_CALCULATOR(w);
 
-	if(!font_pixmap) {
+	if(font_pixmap == NULL) {
+                GdkPixbuf *pixbuf;
 		gchar *file =
 			gnome_unconditional_pixmap_file("calculator-font.png");
 
-		if(!file) {
+		if(file == NULL) {
 			g_warning("Can't find calculator-font.png");
-		}
-		font_pixmap = gnome_pixmap_new_from_file(file);
-		g_free(file);
+		} else {
+                        pixbuf = gdk_pixbuf_new_from_file("calculator-font.png");
+                        if (pixbuf == NULL) {
+                                g_warning("Can't load calculator-font.png");
+                        } else {
+                                gnome_pixbuf_render(pixbuf, &font_pixmap, NULL);
+                        }
+                        g_free(file);
+                }
 	}
 
 	gc->display =  gtk_pixmap_new(gdk_pixmap_new(GTK_WIDGET(gc)->window,

@@ -20,6 +20,7 @@
 #define __GNOME_DRUID_PAGE_H__
 
 #include <gtk/gtk.h>
+#include "libgnome/gnome-defs.h"
 
 BEGIN_GNOME_DECLS
 

@@ -25,7 +25,6 @@
 #include <gtk/gtklabel.h>
 #include <gtk/gtkvseparator.h>
 #include <gtk/gtkfontsel.h>
-#include <gdk_imlib.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-stock.h>
 #include "gnome-font-picker.h"

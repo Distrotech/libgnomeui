@@ -17,7 +17,7 @@ libgnomeuiincludedir = $(includedir)/libgnomeui
 INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
 	-I$(top_srcdir)/gdk-pixbuf/src	\
-	-I$(includedir) $(GDK_IMLIB_CFLAGS) \
+	-I$(includedir) \
 	$(AUDIOFILE_CFLAGS) $(ESD_CFLAGS) \
         -DGNOMELIBDIR=\""$(libdir)"\" \
         -DGNOMEDATADIR=\""$(datadir)"\" \
@@ -30,15 +30,15 @@ EXTRA_HEADERS =
 
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
-	gnome-animator.c		\
+##	gnome-animator.c		\
 	gnome-app.c			\
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
 	gnome-calculator.c              \
 	gnome-canvas.c			\
-	gnome-canvas-image.c		\
-	gnome-canvas-load.c		\
+##	gnome-canvas-image.c		\
+##	gnome-canvas-load.c		\
 	gnome-canvas-line.c		\
 	gnome-canvas-rect-ellipse.c	\
 	gnome-canvas-polygon.c		\
@@ -46,9 +46,9 @@ libgnomeui_la_SOURCES = \
 	gnome-canvas-util.c		\
 	gnome-canvas-widget.c		\
 	gnome-client.c			\
-	gnome-color-picker.c		\
+##	gnome-color-picker.c		\
 	gnome-dateedit.c		\
-	gnome-dentry-edit.c		\
+##	gnome-dentry-edit.c		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -56,11 +56,11 @@ libgnomeui_la_SOURCES = \
 	gnome-dock-band.c		\
 	gnome-dock-item.c		\
 	gnome-dock-layout.c		\
-	gnome-druid.c			\
-	gnome-druid-page.c		\
-	gnome-druid-page-start.c	\
-	gnome-druid-page-standard.c	\
-	gnome-druid-page-finish.c	\
+##	gnome-druid.c			\
+##	gnome-druid-page.c		\
+##	gnome-druid-page-start.c	\
+##	gnome-druid-page-standard.c	\
+##	gnome-druid-page-finish.c	\
 	gnome-geometry.c		\
 	gnome-guru.c			\
 	gnome-entry.c			\
@@ -69,11 +69,11 @@ libgnomeui_la_SOURCES = \
 	gnome-font-selector.c 		\
 	gnome-href.c			\
 	gnome-ice.c			\
-	gnome-icon-list.c		\
+##	gnome-icon-list.c		\
 	gnome-icon-item.c		\
-	gnome-icon-sel.c		\
+##	gnome-icon-sel.c		\
 	gnome-icon-text.c		\
-	gnome-icon-entry.c		\
+##	gnome-icon-entry.c		\
 	gnome-init.c			\
 	gnome-less.c			\
 	gnome-mdi.c			\
@@ -88,8 +88,8 @@ libgnomeui_la_SOURCES = \
 	gnome-popup-help.c		\
 	gnome-preferences.c		\
 	gnome-propertybox.c		\
-	gnome-properties.c		\
-	gnome-property-entries.c	\
+##	gnome-properties.c		\
+##	gnome-property-entries.c	\
 	gnome-scores.c			\
 	gnome-spell.c			\
 	gnome-startup.c			\
@@ -107,23 +107,23 @@ libgnomeui_la_SOURCES = \
 ## this lists all the non-generated headers
 gnome_headers = \
 	gnome-about.h			\
-        gnome-animator.h		\
+##        gnome-animator.h		\
 	gnome-app.h			\
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
 	gnome-calculator.h              \
 	gnome-canvas.h			\
-	gnome-canvas-image.h		\
+##	gnome-canvas-image.h		\
 	gnome-canvas-line.h		\
-	gnome-canvas-load.h		\
+##	gnome-canvas-load.h		\
 	gnome-canvas-rect-ellipse.h	\
 	gnome-canvas-polygon.h		\
 	gnome-canvas-text.h		\
 	gnome-canvas-util.h		\
 	gnome-canvas-widget.h		\
 	gnome-client.h			\
-	gnome-color-picker.h		\
+##	gnome-color-picker.h		\
 	gnome-compat.h			\
 	gnome-dateedit.h		\
 	gnome-dentry-edit.h		\
@@ -268,6 +268,7 @@ gnome_segv_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -275,6 +276,7 @@ ted_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -282,6 +284,7 @@ stock_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -289,6 +292,7 @@ winhints_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -296,6 +300,7 @@ animator_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -303,5 +308,6 @@ dock_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)

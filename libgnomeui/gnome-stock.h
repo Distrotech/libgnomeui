@@ -27,6 +27,7 @@
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkbutton.h>
 #include "gnome-pixmap.h"
+#include "gnome-stock-ids.h"
 
 BEGIN_GNOME_DECLS
 
@@ -54,12 +55,12 @@ struct _GnomeStockClass {
 	GnomePixmapClass pixmap_class;
 };
 
-guint         gnome_stock_get_type(void);
-GtkWidget    *gnome_stock_new(void);
-GtkWidget    *gnome_stock_new_with_icon(const char *icon);
-GtkWidget    *gnome_stock_new_with_icon_at_size(const char *icon, int width, int height);
-void          gnome_stock_set_icon(GnomeStock *stock, const char *icon);
-void          gnome_stock_set_icon_at_size(GnomeStock *stock, const char *icon, int width, int height);
+guint         gnome_stock_get_type (void);
+GtkWidget    *gnome_stock_new (void);
+GtkWidget    *gnome_stock_new_with_icon (const char *icon);
+GtkWidget    *gnome_stock_new_with_icon_at_size (const char *icon, int width, int height);
+void          gnome_stock_set_icon (GnomeStock *stock, const char *icon);
+void          gnome_stock_set_icon_at_size (GnomeStock *stock, const char *icon, int width, int height);
 
 /*
  * The stock pixmap hash table
@@ -73,26 +74,25 @@ typedef union  _GnomeStockPixmapEntry        GnomeStockPixmapEntry;
  */
 
 /* register a pixmap. returns non-zero, if successful */
-gint                   gnome_stock_pixmap_register (const char *icon,
-						    const char *subtype,
+void                   gnome_stock_pixmap_register (const char *icon,
+                                                    GtkStateType state,
                                                     GnomeStockPixmapEntry *entry);
 
 /* change an existing entry. returns non-zero on success */
-gint                   gnome_stock_pixmap_change   (const char *icon,
-						    const char *subtype,
+void                   gnome_stock_pixmap_change   (const char *icon,
+                                                    GtkStateType state,
                                                     GnomeStockPixmapEntry *entry);
 
 /* check for the existance of an entry. returns the entry if it
    exists, or NULL otherwise */
-GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (const char *icon,
-						    const char *subtype);
+GnomeStockPixmapEntry *gnome_stock_pixmap_lookup (const char *icon,
+                                                  GtkStateType state);
 
-/* Return a GdkPixmap and GdkMask for a stock pixmap */
+/* Return a GdkPixmap and GdkMask for a stock pixmap (or NULL if no such icon) */
 void gnome_stock_pixmap_gdk (const char *icon,
-			     const char *subtype,
+                             GtkStateType state,
 			     GdkPixmap **pixmap,
 			     GdkPixmap **mask);
-
 
 /*
  * Hash entry datatype operations
@@ -115,6 +115,9 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_pathname (const gchar* 
 
 GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_xpm_data (const gchar** xpm_data,
                                                                    const gchar* label);
+
+
+GdkPixbuf *gdk_pixbuf_new_from_stock_pixmap_entry (GnomeStockPixmapEntry *entry);
 
 /*
  * Utility functions to retrieve buttons
@@ -182,13 +185,13 @@ void                   gnome_stock_menu_accel_parse(const char *section);
 
 
 
-/* Should this be deprecated? Is anyone using it? -hp */
+/* Should this be deprecated? Is anyone using it? what is it for? -hp */
 
 /*
  * Creates a toplevel window with a shaped mask.  Useful for making the DnD
  * windows
  */
-GtkWidget *gnome_stock_transparent_window (const char *icon, const char *subtype);
+GtkWidget *gnome_stock_transparent_window (const char *icon, GtkStateType state);
 
 
 

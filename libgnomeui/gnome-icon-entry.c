@@ -10,8 +10,8 @@
  *	Written by: Havoc Pennington, based on code by John Ellis.
  */
 #include <config.h>
-#include <gdk_imlib.h>
 #include <unistd.h> /*getcwd*/
+#include <gdk-pixbuf.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
@@ -91,7 +91,7 @@ static void
 entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 {
 	gchar *t;
-	GdkImlibImage *im;
+        GdkPixbuf *pixbuf;
 	GtkWidget *child;
 	int w,h;
 
@@ -104,7 +104,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	child = GTK_BIN(ientry->pickbutton)->child;
 	
 	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(im = gdk_imlib_load_image (t))) {
+	   !(pixbuf = gdk_pixbuf_new_from_file (t))) {
 		if(GNOME_IS_PIXMAP(child)) {
 			gtk_drag_source_unset (ientry->pickbutton);
 			gtk_widget_destroy(child);
@@ -117,8 +117,8 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 		return;
 	}
 	g_free(t);
-	w = im->rgb_width;
-	h = im->rgb_height;
+	w = gdk_pixbuf_get_width(pixbuf);
+	h = gdk_pixbuf_get_height(pixbuf);
 	if(w>h) {
 		if(w>48) {
 			h = h*(48.0/w);
@@ -130,11 +130,14 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 			h = 48;
 		}
 	}
-	if(GNOME_IS_PIXMAP(child))
-		gnome_pixmap_load_imlib_at_size (GNOME_PIXMAP(child),im, w, h);
-	else {
+	if(GNOME_IS_PIXMAP(child)) {
+                gnome_pixmap_clear(GNOME_PIXMAP(child));
+		gnome_pixmap_set_pixbuf_at_size (GNOME_PIXMAP(child),
+                                                 GTK_STATE_NORMAL,
+                                                 pixbuf, w, h);
+        } else {
 		gtk_widget_destroy(child);
-		child = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+		child = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
 		gtk_widget_show(child);
 		gtk_container_add(GTK_CONTAINER(ientry->pickbutton), child);
 
@@ -147,7 +150,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 					     GDK_ACTION_COPY);
 		}
 	}
-	gdk_imlib_destroy_image(im);
+        gdk_pixbuf_unref(pixbuf);
 	gtk_drag_source_set (ientry->pickbutton,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drop_types, 1,
@@ -191,7 +194,7 @@ setup_preview(GtkWidget *widget)
 	gchar *p;
 	GList *l;
 	GtkWidget *pp = NULL;
-	GdkImlibImage *im;
+        GdkPixbuf *pixbuf;
 	int w,h;
 	GtkWidget *frame;
 	GtkFileSelection *fs;
@@ -212,11 +215,11 @@ setup_preview(GtkWidget *widget)
 	
 	p = gtk_file_selection_get_filename(fs);
 	if(!p || !g_file_test (p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(im = gdk_imlib_load_image (p)))
+	   !(pixbuf = gdk_pixbuf_new_from_file (p)))
 		return;
 
-	w = im->rgb_width;
-	h = im->rgb_height;
+	w = gdk_pixbuf_get_width(pixbuf);
+	h = gdk_pixbuf_get_height(pixbuf);
 	if(w>h) {
 		if(w>100) {
 			h = h*(100.0/w);
@@ -228,11 +231,11 @@ setup_preview(GtkWidget *widget)
 			h = 100;
 		}
 	}
-	pp = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+	pp = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
 	gtk_widget_show(pp);
 	gtk_container_add(GTK_CONTAINER(frame),pp);
 
-	gdk_imlib_destroy_image(im);
+        gdk_pixbuf_unref(pixbuf);
 }
 
 static void

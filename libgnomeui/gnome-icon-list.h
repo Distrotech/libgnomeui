@@ -12,7 +12,6 @@
 
 #include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-canvas.h>
-#include <gdk_imlib.h>
 
 BEGIN_GNOME_DECLS
 
