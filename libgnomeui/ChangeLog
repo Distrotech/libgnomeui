@@ -1,3 +1,8 @@
+2001-02-22  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gnome-property-entries.c: use _() instead of gettext().
+	(gnome_property_entry_colors): translate labels.
+
 2001-02-21  Anders Carlsson  <andersca@codefactory.se>
 
 	* gnome-icon-sel.c (gnome_icon_selection_init): Connect to 

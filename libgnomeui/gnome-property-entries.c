@@ -204,7 +204,7 @@ _property_entry_font_select_cb (GtkWidget *widget, FontCbData *cb_data)
 	GtkFontSelectionDialog *fontsel;
 
 	fontsel = GTK_FONT_SELECTION_DIALOG
-		(gtk_font_selection_dialog_new (gettext (cb_data->label)));
+		(gtk_font_selection_dialog_new (_(cb_data->label)));
 
 	gtk_window_set_modal (GTK_WINDOW (fontsel), TRUE);
 	
@@ -315,7 +315,7 @@ gnome_property_entry_colors (GnomePropertyObject *object, const gchar *label,
 	GtkWidget *frame, *table;
 	gint rows, i;
 
-	frame = gtk_frame_new (gettext (label));
+	frame = gtk_frame_new (_(label));
 
 	rows = (num_colors < columns) ? 2 :
 		((num_colors+columns-1) / columns) << 1;
@@ -329,7 +329,7 @@ gnome_property_entry_colors (GnomePropertyObject *object, const gchar *label,
 		GtkWidget *label, *cp;
 		gint row, col;
 
-		label = gtk_label_new (texts [i]);
+		label = gtk_label_new (_(texts [i]));
 		cp = gnome_color_picker_new ();
 		gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (cp),
 					    colors [i].red,
