@@ -134,7 +134,6 @@ libgnomeui_2_la_SOURCES = \
 	oafgnome.c			\
 	gnome-icon-list.c		\
 	gnome-icon-item.c		\
-	gnome-icon-sel.c		\
 	gnome-icon-text.c		\
 	gnome-vfs-util.c		\
 	gnome-textfu.c			\
@@ -186,7 +185,6 @@ gnome_headers = \
 	gnome-icon-entry.h		\
 	gnome-icon-item.h		\
 	gnome-icon-list.h		\
-	gnome-icon-sel.h		\
 	gnome-icon-selector.h		\
 	gnome-icon-text.h		\
 	gnome-init.h			\
