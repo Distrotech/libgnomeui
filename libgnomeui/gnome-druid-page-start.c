@@ -214,6 +214,7 @@ gnome_druid_page_start_construct (GnomeDruidPageStart *druid_page_start)
 				       gnome_canvas_text_get_type (),
 				       "text", druid_page_start->title,
 				       "font", "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-1",
+				       "fontset", "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-1,*-r-*",
 				       NULL);
 
 	druid_page_start->text_item =
@@ -222,6 +223,7 @@ gnome_druid_page_start_construct (GnomeDruidPageStart *druid_page_start)
 				       "text", druid_page_start->text,
 				       "justification", GTK_JUSTIFY_LEFT,
 				       "font", "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
+				       "fontset", "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1,*-r-*",
 				       NULL);
 
 	gnome_druid_page_start_configure_size (druid_page_start, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);

@@ -202,6 +202,7 @@ gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard
 				       gnome_canvas_text_get_type (), 
 				       "text", druid_page_standard->title,
 				       "font", "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-1",
+				       "fontset", "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-1,*-r-*",
 				       NULL);
 	gnome_canvas_item_set (druid_page_standard->title_item,
 			       "x", 15.0,
