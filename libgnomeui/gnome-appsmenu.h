@@ -71,20 +71,24 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeAppsMenu GnomeAppsMenu;
 typedef struct _GnomeAppsMenuClass GnomeAppsMenuClass;
 
+/* Please try to avoid mucking around in this struct - use
+   the provided functions and macros, except in 
+   member functions. */
+
 struct _GnomeAppsMenu {
-  guint is_directory : 1; /* Whether it's a directory. If it is, the
-			     extension will really be the whole file
-			     name (except the period)
-			     (e.g. ".directory" for filename,
-			     "directory" extension) */
   gchar * extension; /* The file extension, without the period.
 			This implies the type of the data field. */
   gpointer data;     /* Data loaded from the file */
   GList * submenus;  /* NULL if there are none. If is_directory is 
 			FALSE, this must be NULL */
   GnomeAppsMenu * parent;
-  guint in_destroy : 1;
   GnomeAppsMenuClass * vtable;
+  guint in_destroy : 1;
+  guint is_directory : 1; /* Whether it's a directory. If it is, the
+			     extension will really be the whole file
+			     name (except the period)
+			     (e.g. ".directory" for filename,
+			     "directory" extension) */
 };
 
 #define GNOME_APPS_MENU_IS_DIR(x) \
@@ -120,8 +124,6 @@ void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
    Should return NULL if it fails. */
 
 typedef gpointer (*GnomeAppsMenuLoadFunc)(const gchar *);
-/* Loading can't use vtable directly, 
-   because it's a static function. */
 
 /* Function to set up a display of this menu item to the user.
    The information from here is used to create tree items, menu items,
@@ -134,7 +136,8 @@ typedef gpointer (*GnomeAppsMenuLoadFunc)(const gchar *);
     GtkSignalFunc * to store callback
     gpointer * to store data for callback
    The function should simply fill in these four bits of information
-   based on the GnomeAppsMenu it receives */
+   based on the GnomeAppsMenu it receives. If any of the argument
+   is NULL, it shouldn't be filled in. */
 
 typedef void (*GnomeAppsMenuSetupFunc)(GnomeAppsMenu *,
 				       gchar **, gchar **,
@@ -185,7 +188,7 @@ GnomeAppsMenu * gnome_apps_menu_load_default(void);
 GnomeAppsMenu * gnome_apps_menu_load_system(void);
 
 /* Save this menu in directory, overwriting/deleting any old menus of
-   registered class. Unrecognized classes are left unchanged. */
+   registered classes. Unrecognized classes are left unchanged. */
 
 gboolean gnome_apps_menu_save(GnomeAppsMenu * gam, 
 			      const gchar * directory);
@@ -193,7 +196,9 @@ gboolean gnome_apps_menu_save(GnomeAppsMenu * gam,
 gboolean gnome_apps_menu_save_default(GnomeAppsMenu * gam);
 
 /* Used to get information for a menu item, without having to know its
-   class. None of the returned pointers should be freed. */
+   class. None of the returned pointers should be freed. 
+   Any args can be null (except the AppsMenu), indicating 
+   disinterest in that info. */
 void gnome_apps_menu_setup( GnomeAppsMenu * gam, gchar ** pixmap_name,
 			    gchar ** name, GtkSignalFunc * callback,
 			    gpointer * data );
@@ -208,8 +213,6 @@ void gnome_apps_menu_setup( GnomeAppsMenu * gam, gchar ** pixmap_name,
 
 GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam);
 GtkWidget * gtk_menu_item_new_from_apps_menu(GnomeAppsMenu * gam);
-
-/* Functions to save GnomeAppsMenu to be added. */
 
 END_GNOME_DECLS
    

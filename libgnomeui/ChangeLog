@@ -1,3 +1,26 @@
+Fri Apr 17 16:03:36 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h (GnomeAppsMenu): rearranged order of items
+	in struct (put bit flags together)
+	(GnomeAppsMenuSetupFunc): Changed required behavior - can now
+	take NULL arguments and ignore them.
+
+	* gnome-appsmenu.c: Implemented vtable instead of function
+	lookup, meaning small changes throughout.
+	(gnome_apps_menu_check): Check presence of vtable.
+	(find_class): Took out this function, not needed with vtables.
+	(dentry_setup_func): Changed to use new SetupFunc semantics.
+	(dentry_save_func): New function, just a stub.
+	(gnome_apps_menu_new_from_file): new function.
+	(gnome_apps_menu_load): destroy empty menu, and return NULL,
+	rather than return an empty menu.	
+	(gnome_apps_menu_save): Removed use of ftw(). Get name of
+ 	directory AppsMenu and create a matching filesystem
+ 	directory. Delete empty filesystem directories. Delete old backup
+ 	files. Still doesn't work, some kind of memory corruption, and
+ 	likely fails on symlinks or other weird situations.
+	(gnome_apps_menu_new): Init vtable.
+	
 1998-04-17  Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
 	* gtkcalendar.[hc]: display option GTK_CALENDAR_NO_MONTH_CHANGE to 
