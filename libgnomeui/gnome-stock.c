@@ -79,10 +79,7 @@ static void
 gnome_stock_init(GnomeStock *stock)
 {
 	stock->icon = NULL;
-
-        /* we cache the pixbufs for stock icons, plus some of them contain shared
-           read-only data, so it's typically more efficient to keep the pixbuf */
-/*        gnome_pixmap_set_mode(GNOME_PIXMAP(stock), GNOME_PIXMAP_KEEP_PIXBUF);*/
+	gnome_pixmap_set_draw_mode (GNOME_PIXMAP (stock), GNOME_PIXMAP_COLOR);
 }
 
 /**
