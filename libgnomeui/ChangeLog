@@ -1,3 +1,10 @@
+1998-06-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* libgnomeui.h: 
+	* Makefile.am: Removed the canvas stuff from these files, for the
+	upcoming release which will use gtk-1.0.4.  The canvas needs the
+	development branch of Gtk.
+
 1998-06-02  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): set *pos to 0 if
