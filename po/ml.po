@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.2.x\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
-"PO-Revision-Date: 2003-03-05 10:29+0530\n"
+"Project-Id-Version:libgnomeui.HEAD\n"
+"POT-Creation-Date: 2003-06-06 04:55+0200\n"
+"PO-Revision-Date: 2003-07-05 10:29+0530\n"
 "Last-Translator: FSF-India <locale@gnu.org.in>\n"
 "Language-Team: Malayalam <locale@gnu.org.in>\n"
 "MIME-Version: 1.0\n"
@@ -47,9 +47,8 @@ msgid "Translated by"
 msgstr "വിവ‍ര്‌ത്തക‌ര്"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "പിന്നണിയില്"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -129,9 +128,8 @@ msgid "Logo"
 msgstr "ലോഗോ"
 
 #: libgnomeui/gnome-about.c:440
-#, fuzzy
 msgid "A logo for the about box"
-msgstr "ഔട്ട് ബോക്സില്‌ നിന്നുള്ള സന്ദേശം അയയ‌്ക്കൂ"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:519
 #, c-format
@@ -140,6 +138,7 @@ msgstr "കുറിപ്പ് %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ശേഖരം"
 
@@ -197,6 +196,7 @@ msgid "_Game"
 msgstr "കളി"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "സഹായം"
 
@@ -387,11 +387,11 @@ msgstr "പ്രയോഗത്തെ അനുരൂപമാക്കുക"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "കുറിപ്പ്"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "ഈ പ്രയോഗത്തെക്കുറിച്ച്"
 
@@ -418,7 +418,7 @@ msgstr "പുതിയ ഒരു ജാലകം ഉണ്ടാക്കുക
 msgid "_Close This Window"
 msgstr "ഈ ജാലകം അടയ്‍ക്കുക"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "നിലവിലുള്ള ശേഖരം അടയ്‍ക്കുക"
 
@@ -612,7 +612,7 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "അധികൃതമാക്കല്‌ ആവശ്യമാണ‍്"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -819,9 +819,8 @@ msgid "Show Finish"
 msgstr "പരിസമാപ്തി കാണിക്കുക"
 
 #: libgnomeui/gnome-druid.c:151
-#, fuzzy
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "മൊട്ടിന്റെ സ്ഥിരതയില്ലാത്ത അവസ്ഥ"
+msgstr "'അടുത്തത്' എന്ന മൊട്ടിന‌് പകരം 'അവസാനം' എന്ന മൊട്ട് കാണിക്കുക"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
@@ -854,9 +853,8 @@ msgid ""
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
-#, fuzzy
 msgid "Browse Dialog Title"
-msgstr "തുറന്ന എല്ലാ ലോഗ് രചനകളും അടയ്‍ക്കുക"
+msgstr "അന്വേഷണ സംവാദത്തിന്റെ തലക്കെട്ട്"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
@@ -959,9 +957,8 @@ msgid "Mode"
 msgstr "രീതി"
 
 #: libgnomeui/gnome-font-picker.c:165
-#, fuzzy
 msgid "The mode of operation of the font picker"
-msgstr "വൃക്ഷകാഴ്ചയുടെ മാതൃക"
+msgstr "അച്ച് തിരഞ്ഞെടുക്കലിന്റെ പ്രവ‌ര്ത്തന രീതി"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
@@ -1092,13 +1089,12 @@ msgid "Directory that will be searched for icons."
 msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:202
-#, fuzzy
 msgid "Filename that should be displayed in the icon entry."
-msgstr "മാത്രക്ക് പകരം ദൃശ്യമാക്കിയ സ്ഥലത്തിന്റെ സംഖ്യാങ്കം നിറ്ണയിക്കുന്നു "
+msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
-msgstr "വ്യഞ്ജന സംവാദം"
+msgstr "തിരഞ്ഞെടുക്കല് സംവാദം"
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid ""
@@ -1192,20 +1188,19 @@ msgstr "സന്ദേശം"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "ഉപയോക്തൃ നാമം:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "അടയാളവാക്ക്:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
 msgstr "തിരനോട്ടം ചെയ്യ‌ുക"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
-#, fuzzy
 msgid "Whether the pixmap entry should have a preview."
-msgstr "താലം ഉപയോഗിക്കേണ്ടതുണ്ടോ"
+msgstr "പിക്സ്മാപ്പിന‌് തിരനോട്ടം ആവശ്യമുണ്ടോ?"
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
@@ -1270,25 +1265,25 @@ msgstr "വിടവില്ലാത്ത"
 msgid "About"
 msgstr "കുറിപ്പ്"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "X display to use"
 msgstr "ഉപയോഗിക്കുന്നതിനായി X പ്രദര്ശനം"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "DISPLAY"
 msgstr "പ്രദ‌ര്ശനം"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:125
 msgid "GNOME GUI Library"
 msgstr "ഗ്നോം GUI നിഘണ്ടു"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:637
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1332,5 +1327,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 
-#~ msgid "_Credits"
-#~ msgstr "പിന്നണിയില്"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr ""
