@@ -1,3 +1,9 @@
+1999-01-10  Dave Camp (campd@oit.edu)
+
+	* gnome-dateedit.c: Hides the calendar widget on signal
+         "day_selected_double_click" instead of "day_selected".
+
+
 Sat Jan 09 01:42:15 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-dialog.[ch]: do the Motif thing with default buttons

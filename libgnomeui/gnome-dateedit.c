@@ -73,13 +73,17 @@ day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 	char buffer [40];
 	gint year, month, day;
 
-	hide_popup (gde);
-
 	gtk_calendar_get_date (calendar, &year, &month, &day);
 
 	g_snprintf (buffer, sizeof(buffer), "%d/%d/%d", month + 1, day, year); /* FIXME: internationalize this - strftime()*/
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
+}
+
+static void
+day_selected_double_click (GtkCalendar *calendar, GnomeDateEdit *gde)
+{
+	hide_popup (gde);
 }
 
 static gint
@@ -476,6 +480,8 @@ create_children (GnomeDateEdit *gde, int show_time)
 				      GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_HEADING);
 	gtk_signal_connect (GTK_OBJECT (gde->calendar), "day_selected",
 			    GTK_SIGNAL_FUNC (day_selected), gde);
+	gtk_signal_connect (GTK_OBJECT (gde->calendar), "day_selected_double_click",
+			    GTK_SIGNAL_FUNC (day_selected_double_click), gde);
 	gtk_container_add (GTK_CONTAINER (frame), gde->calendar);
         gtk_widget_show (gde->calendar);
 }
