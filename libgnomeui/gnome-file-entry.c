@@ -5,8 +5,11 @@
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  */
 #include <config.h>
-#include <unistd.h> /*getcwd*/
-#include <sys/param.h> /*realpath*/
+#include <pwd.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/param.h>
+#include <sys/types.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
@@ -70,7 +73,7 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 
 	object_class = (GtkObjectClass *) class;
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
-	
+
 	gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL] =
 		gtk_signal_new("browse_clicked",
 			       GTK_RUN_LAST,
@@ -86,7 +89,7 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	object_class->finalize = gnome_file_entry_finalize;
 
 	class->browse_clicked = browse_clicked;
-	
+
 }
 
 static void
@@ -103,7 +106,7 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	gtk_entry_set_text (GTK_ENTRY (entry),
 			    gtk_file_selection_get_filename (fs));
 	/* Is this evil? */
-	gtk_signal_emit_by_name (GTK_OBJECT (entry), "activate"); 
+	gtk_signal_emit_by_name (GTK_OBJECT (entry), "activate");
 	gtk_widget_destroy (GTK_WIDGET (fs));
 }
 
@@ -118,7 +121,7 @@ browse_dialog_kill (GtkWidget *widget, gpointer data)
 
 static void
 browse_clicked(GnomeFileEntry *fentry)
-{	
+{
 	GtkWidget *fsw;
 	GtkFileSelection *fs;
 	GtkWidget *parent;
@@ -153,7 +156,7 @@ browse_clicked(GnomeFileEntry *fentry)
 	gtk_window_set_transient_for (GTK_WINDOW(fsw), GTK_WINDOW (parent));
 
 	if ( gnome_preferences_get_dialog_centered() ) {
-		
+
 		/* User wants us to center over parent */
 
 		gint x, y, w, h, dialog_x, dialog_y;
@@ -168,13 +171,13 @@ browse_clicked(GnomeFileEntry *fentry)
 		gdk_window_get_size   (GTK_WIDGET(parent)->window, &w, &h);
 
 		/* The problem here is we don't know how big the dialog is.
-		   So "centered" isn't really true. We'll go with 
+		   So "centered" isn't really true. We'll go with
 		   "kind of more or less on top" */
 
 		dialog_x = x + w/4;
 		dialog_y = y + h/4;
-		
-		gtk_widget_set_uposition(GTK_WIDGET(fsw), dialog_x, dialog_y); 
+
+		gtk_widget_set_uposition(GTK_WIDGET(fsw), dialog_x, dialog_y);
 	}
 
 	gtk_object_set_user_data (GTK_OBJECT (fsw), fentry);
@@ -205,7 +208,7 @@ browse_clicked(GnomeFileEntry *fentry)
 		gtk_grab_add (fsw);
 
 	gtk_widget_show (fsw);
-	
+
 	if(fentry->is_modal)
 		gtk_window_set_modal (GTK_WINDOW (fsw), TRUE);
 	fentry->fsw = fsw;
@@ -291,7 +294,7 @@ gnome_file_entry_finalize (GtkObject *object)
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (object));
 
 	fentry = GNOME_FILE_ENTRY (object);
-	
+
 	if (fentry->browse_dialog_title)
 		g_free (fentry->browse_dialog_title);
 	if (fentry->default_path)
@@ -315,10 +318,10 @@ gnome_file_entry_construct (GnomeFileEntry *fentry, const char *history_id, cons
 {
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
-	
-        /* Keep in sync with gnome_entry_new() - or better yet, 
+
+        /* Keep in sync with gnome_entry_new() - or better yet,
            add a _construct() method once we are in development
-           branch. 
+           branch.
         */
 
 	gnome_entry_set_history_id (GNOME_ENTRY (fentry->gentry), history_id);
@@ -353,7 +356,7 @@ gnome_file_entry_new (const char *history_id, const char *browse_dialog_title)
  * Description: It returns a pointer to the gnome entry widget of the
  * widget (see#GnomeEntry).
  *
- * Returns: A pointer to the component #GnomeEntry widget 
+ * Returns: A pointer to the component #GnomeEntry widget
  **/
 GtkWidget *
 gnome_file_entry_gnome_entry (GnomeFileEntry *fentry)
@@ -368,7 +371,7 @@ gnome_file_entry_gnome_entry (GnomeFileEntry *fentry)
  * gnome_file_entry_gtk_entry:
  * @fentry: The GnomeFileEntry widget to work with.
  *
- * Description: Similar to #gnome_file_entry_gnome_entry but 
+ * Description: Similar to #gnome_file_entry_gnome_entry but
  * returns the gtk entry instead of the Gnome entry widget.
  *
  * Returns: Returns the GtkEntry widget
@@ -423,7 +426,7 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 	char *p;
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
-	
+
 	if(path) {
 		if(realpath(path,rpath))
 			p = g_strdup(rpath);
@@ -434,9 +437,48 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 
 	if(fentry->default_path)
 		g_free(fentry->default_path);
-	
+
 	/*handles NULL as well*/
 	fentry->default_path = p;
+}
+
+/* Does tilde (home directory) expansion on a string */
+static char *
+tilde_expand (char *str)
+{
+	struct passwd *passwd;
+	char *p;
+	char *name;
+
+	g_assert (str != NULL);
+
+	if (*str != '~')
+		return g_strdup (str);
+
+	str++;
+
+	p = strchr (str, G_DIR_SEPARATOR);
+
+	/* d = "~" or d = "~/" */
+	if (!*str || *str == G_DIR_SEPARATOR) {
+		passwd = getpwuid (geteuid ());
+		p = (*str == G_DIR_SEPARATOR) ? str + 1 : "";
+	} else {
+		if (!p) {
+			p = "";
+			passwd = getpwnam (str);
+		} else {
+			name = g_strndup (str, p - str);
+			passwd = getpwnam (name);
+			g_free (name);
+		}
+	}
+
+	/* If we can't figure out the user name, bail out */
+	if (!passwd)
+		return NULL;
+
+	return g_strconcat (passwd->pw_dir, G_DIR_SEPARATOR_S, p, NULL);
 }
 
 /**
@@ -460,38 +502,64 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, int file_must_exist)
 {
 	char *p;
 	char *t;
-	g_return_val_if_fail (fentry != NULL,NULL);
-	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry),NULL);
 
-	t = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
-	if(!t || !*t)
+	g_return_val_if_fail (fentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
+
+	t = gtk_editable_get_chars (GTK_EDITABLE (gnome_file_entry_gtk_entry (fentry)), 0, -1);
+
+	if (!t)
 		return NULL;
-	if(*t=='/')
-		p = g_strdup(t);
-	else if(fentry->default_path)
-			p = g_concat_dir_and_file (fentry->default_path, t);
-	else {
-		char *cwd = getcwd(NULL,0);
-		p = g_concat_dir_and_file (cwd, t);
-		free(cwd);
+	else if (!*t) {
+		g_free (t);
+		return NULL;
 	}
+
+	if (*t == '/')
+		p = t;
+	else if (*t == '~') {
+		p = tilde_expand (t);
+		g_free (t);
+	} else if (fentry->default_path) {
+		p = g_concat_dir_and_file (fentry->default_path, t);
+		g_free (t);
+		if (*p == '~') {
+			t = p;
+			p = tilde_expand (t);
+			g_free (t);
+		}
+	} else {
+		char *cwd = getcwd (NULL, -1);
+
+		p = g_concat_dir_and_file (cwd, t);
+		free (cwd);
+		g_free (t);
+	}
+
 	if (file_must_exist) {
+		if (!p)
+			return NULL;
+
 		if (fentry->directory_entry) {
 			char *d;
-			if (g_file_test (p,G_FILE_TEST_ISDIR))
+
+			if (g_file_test (p, G_FILE_TEST_ISDIR))
 				return p;
+
 			d = g_dirname (p);
 			g_free (p);
-			if (g_file_test (d,G_FILE_TEST_ISDIR))
+
+			if (g_file_test (d, G_FILE_TEST_ISDIR))
 				return d;
+
 			p = d;
 		} else if (g_file_exists (p))
 			return p;
-	} else 
-		return p;
 
-	g_free (p);
-	return NULL;
+		g_free (p);
+		return NULL;
+	} else
+		return p;
 }
 
 /**
@@ -508,7 +576,7 @@ gnome_file_entry_set_modal(GnomeFileEntry *fentry, int is_modal)
 {
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
-	
+
 	fentry->is_modal = is_modal;
 }
 
@@ -529,6 +597,6 @@ gnome_file_entry_set_directory(GnomeFileEntry *fentry, int directory_entry)
 {
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
-	
+
 	fentry->directory_entry = directory_entry;
 }
