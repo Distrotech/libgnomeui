@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-22 11:30+0200\n"
+"POT-Creation-Date: 2004-06-23 05:18+0200\n"
 "PO-Revision-Date: 2004-06-22 11:34+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -32,11 +32,12 @@ msgstr "Objekt bir 2"
 msgid "Hint for item 2"
 msgstr "Propozime për objektin 2"
 
+#. GRUT modified this item
 #: file-chooser/gtkfilesystemgnomevfs.c:855
 msgid "Filesystem"
-msgstr "File sistemi"
+msgstr "File i sistemit"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1507
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ruajtja e libërshënuesit dështoi (%s)"
@@ -53,8 +54,11 @@ msgstr "Hapja e file '%s' dështoi: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Leximi i figurës '%s' dështoi: shkaku nuk njihet, ndoshta file është i dëmtuar"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Leximi i figurës '%s' dështoi: shkaku nuk njihet, ndoshta file është i "
+"dëmtuar"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -145,7 +149,8 @@ msgid "Translator credits"
 msgstr "Falenderime pëkthyesit"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Kreditë e përkthyesve. Kjo frazë duhet shënuar si e përkthyeshme"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -247,10 +252,11 @@ msgstr "_Ruaj"
 msgid "Save the current file"
 msgstr "Ruaj file aktual"
 
+#. GRUT modified this item
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Ruaje _si..."
+msgstr "Ruaje _Si..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
@@ -301,17 +307,19 @@ msgstr "_Dil"
 msgid "Quit the application"
 msgstr "Mbylle programin"
 
+#. GRUT modified this item
 #.
 #. * The "Edit" menu
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
-msgstr "Pri_je"
+msgstr "Pre_je"
 
+#. GRUT modified this item
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "Prije pjesën e zgjedhur"
+msgstr "Preje pjesën e zgjedhur"
 
 #. 10
 #. Copy
@@ -652,9 +660,10 @@ msgstr "Duhet të jeni identifikuar që të hyni tek %s domain %s\n"
 msgid "You must log in to access %s\n"
 msgstr "Duhet të jeni identifikuar që të hyni tek %s\n"
 
+#. GRUT modified this item
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
-msgstr "Specifiko ID e manazhuesit të seancës"
+msgstr "Specifiko ID e organizuesit të seancës"
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
@@ -808,10 +817,11 @@ msgstr "Ngjyra në plan të parë të titullit të vendosur"
 msgid "Foreground color of the title is set"
 msgstr "Ngjyra në plan të parë e titullit është vendosur"
 
+#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr "Ngjyra e sfondit"
+msgstr "Ngjyra e Sfondit"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
@@ -1266,9 +1276,10 @@ msgstr "Gabim"
 msgid "Question"
 msgstr "Pyetje"
 
+#. GRUT modified this item
 #: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
-msgstr "Mesazhi"
+msgstr "Mesazh"
 
 #: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
@@ -1373,9 +1384,10 @@ msgstr "Informacione"
 msgid "Disable Crash Dialog"
 msgstr "Ç'aktivo dritaren e dialogut të crash"
 
+#. GRUT modified this item
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
-msgstr "Display X që duhet përdorur"
+msgstr "Monitori X që duhet përdorur"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
