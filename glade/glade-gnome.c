@@ -140,14 +140,6 @@ menushell_build_children (GladeXML *xml, GtkWidget *w,
 	{ GNOME_APP_UI_ITEM },
 	GNOMEUIINFO_END
     };
-#if 0
-    GtkAccelGroup *uline = NULL;
-    
-    if (strcmp (info->classname, "GtkMenuBar") != 0) {
-	uline = gtk_menu_ensure_uline_accel_group (GTK_MENU (w));
-	glade_xml_push_uline_accel (xml, uline);
-    }
-#endif
 
     for (i = 0; i < info->n_children; i++) {
 	GladeChildInfo *cinfo = &info->children[i];
@@ -777,6 +769,41 @@ about_set_authors (GladeXML *xml, GtkWidget *w,
 }
 
 static void
+about_set_translator_credits (GladeXML *xml, GtkWidget *w,
+			      const char *name, const char *value)
+{
+    /* only set this if the translator actually translated the string. */
+    if (strcmp(value, "translator_credits") != 0) {
+	g_object_set (G_OBJECT (w), "translator_credits", value, NULL);
+    }
+}
+
+static void
+about_set_documentors (GladeXML *xml, GtkWidget *w,
+		       const char *name, const char *value)
+{
+    char **documentors;
+    GValueArray *documentors_array;
+    int i;
+
+    documentors = g_strsplit (value, "\n", 0);
+    documentors_array = g_value_array_new (0);
+	
+    for (i = 0; documentors[i] != NULL; i++) {
+	GValue value = { 0 };
+		g_value_init (&value, G_TYPE_STRING);
+	g_value_set_static_string (&value, documentors[i]);
+	documentors_array = g_value_array_append (documentors_array, &value);
+    }
+
+    g_object_set (G_OBJECT (w), "documentors", documentors_array, NULL);
+
+    g_value_array_free (documentors_array);
+
+    g_strfreev (documentors);
+}
+
+static void
 pixmap_set_filename (GladeXML *xml, GtkWidget *w,
 		     const char *name, const char *value)
 {
@@ -809,6 +836,8 @@ glade_module_register_widgets (void)
     glade_register_custom_prop (GNOME_TYPE_MESSAGE_BOX, "message", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_MESSAGE_BOX, "message_box_type", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_ABOUT, "authors", about_set_authors);
+    glade_register_custom_prop (GNOME_TYPE_ABOUT, "translator_credirs", about_set_translator_credits);
+    glade_register_custom_prop (GNOME_TYPE_ABOUT, "documentors", about_set_documentors);
     glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "title", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "text", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "title_color", custom_noop);

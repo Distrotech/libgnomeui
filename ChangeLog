@@ -1,3 +1,9 @@
+2002-07-27  James Henstridge  <james@daa.com.au>
+
+	* glade/glade-gnome.c (about_set_translator_credits): handle
+	translator_credits.
+	(about_set_documentors): add "documentors" handler.
+
 2002-07-25  Federico Mena Quintero  <federico@ximian.com>
 
 	* libgnomeui/gnome-file-entry.c (browse_clicked): Do not add a
