@@ -1,3 +1,8 @@
+2002-10-24  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-icon-theme.c:
+	Fix memory leaks.
+
 2002-10-16  James Willcox  <jwillcox@gnome.org>
 
 	* libgnomeui/gnome-icon-lookup.c: (get_icon_name):

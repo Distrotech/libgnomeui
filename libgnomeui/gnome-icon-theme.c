@@ -674,15 +674,20 @@ load_themes (GnomeIconTheme *icon_theme)
 		    g_hash_table_replace (priv->unthemed_icons,
 					  base_name,
 					  abs_file);
-
+		  else
+		    {
+		      g_free (base_name);
+		      g_free (abs_file);
+		    }
 		}
 	      else
-		g_hash_table_insert (priv->unthemed_icons,
-				     base_name,
-				     abs_file);
-	      
-	      g_hash_table_insert (priv->all_icons,
-				   base_name, NULL);
+		{
+		  g_hash_table_insert (priv->unthemed_icons,
+				       base_name,
+				       abs_file);
+		  g_hash_table_insert (priv->all_icons,
+				       base_name, NULL);
+		}
 	    }
 	}
       g_dir_close (gdir);
@@ -1268,8 +1273,10 @@ theme_subdir_load (GnomeIconTheme *icon_theme,
 	type = ICON_THEME_DIR_SCALABLE;
       else if (strcmp (type_string, "Threshold") == 0)
 	type = ICON_THEME_DIR_THRESHOLD;
-    }
 
+      g_free (type_string);
+    }
+  
   context = 0;
   if (gnome_theme_file_get_string (theme_file, subdir, "Context", &context_string))
     {
