@@ -84,14 +84,6 @@ gnome_selector_client_construct_from_objref (GnomeSelectorClient   *client,
                                              GNOME_Selector         corba_selector,
                                              Bonobo_UIContainer     uic);
 
-/* Get/set the text in the entry widget. */
-gchar *
-gnome_selector_client_get_entry_text        (GnomeSelectorClient   *client);
-
-void
-gnome_selector_client_set_entry_text        (GnomeSelectorClient   *client,
-                                             const gchar           *text);
-
 /* If the entry widget is derived from GtkEditable, then we can use this
  * function to send an "activate" signal to it. */
 void

@@ -307,7 +307,11 @@ gnome_entry_get_text (GnomeEntry *gentry)
 	g_return_val_if_fail (gentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
 
+#ifdef FIXME
 	return gnome_selector_client_get_entry_text (GNOME_SELECTOR_CLIENT (gentry));
+#else
+	return NULL;
+#endif
 }
 
 void
@@ -316,7 +320,9 @@ gnome_entry_set_text (GnomeEntry *gentry, const gchar *text)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
+#ifdef FIXME
 	gnome_selector_client_set_entry_text (GNOME_SELECTOR_CLIENT (gentry),
 					      text);
+#endif
 }
 

@@ -520,40 +520,6 @@ gnome_selector_client_create_async_data (GnomeSelectorClient *client, const gcha
     return async_data;
 }
 
-gchar *
-gnome_selector_client_get_entry_text (GnomeSelectorClient *client)
-{
-    gchar *retval = NULL;
-    CORBA_Environment ev;
-
-    g_return_val_if_fail (client != NULL, NULL);
-    g_return_val_if_fail (GNOME_IS_SELECTOR_CLIENT (client), NULL);
-
-    g_assert (client->_priv->selector != CORBA_OBJECT_NIL);
-
-    CORBA_exception_init (&ev);
-    retval = GNOME_Selector__get_entryText (client->_priv->selector, &ev);
-    CORBA_exception_free (&ev);
-
-    return retval;
-}
-
-void
-gnome_selector_client_set_entry_text (GnomeSelectorClient *client,
-				      const gchar *text)
-{
-    CORBA_Environment ev;
-
-    g_return_if_fail (client != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (client));
-
-    g_assert (client->_priv->selector != CORBA_OBJECT_NIL);
-
-    CORBA_exception_init (&ev);
-    GNOME_Selector__set_entryText (client->_priv->selector, text, &ev);
-    CORBA_exception_free (&ev);
-}
-
 void
 gnome_selector_client_activate_entry (GnomeSelectorClient *client)
 {

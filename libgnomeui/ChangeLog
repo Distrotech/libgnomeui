@@ -1,6 +1,12 @@
 2001-06-01  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-client.c
+	(gnome_selector_client_get_entry_text, gnome_selector_client_set_entry_text):
+	Removed, use the PropertyBag.
+
+2001-06-01  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector-client.c
 	(gnome_selector_client_check_uri): New function.
 	(gnome_selector_client_scan_directory): New function.
 
