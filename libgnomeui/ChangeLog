@@ -1,3 +1,11 @@
+Thu Jun 18 23:52:04 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-init.c: set up config autosyncing during gnome_init
+
+	* gnome-entry.c: don't sync every time we want to do a set,
+	  we can realy on the autosync to do it for us, this should
+	  reduce cpuusage.
+
 1998-06-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-number-entry.c: Fixup includes.

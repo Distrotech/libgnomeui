@@ -27,7 +27,6 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 				     GdkColor    *transparent_color,
 				     const gchar *filename);
 
-
 
 
 /* This describes all the arguments understood by Gtk.  We parse them
@@ -160,6 +159,52 @@ default_version_func (FILE *stream, struct argp_state *state)
 	   here?  */
 }
 
+/*handeling of automatic syncing of gnome_config stuff*/
+static int config_was_changed = FALSE;
+static int sync_timeout = -1;
+
+static int
+sync_timeout_f(gpointer data)
+{
+	sync_timeout = -1;
+	gnome_config_sync();
+	return FALSE;
+}
+
+/* gnome_config set handler, when we use a _set_* function this is
+   called and it schedhules a sync in 10 seconds*/
+static void
+set_handler(gpointer data)
+{
+	config_was_changed = TRUE;
+	/*timeout already running*/
+	if(sync_timeout!=-1)
+		return;
+	/*set a new sync timeout for 10 seconds from now*/
+	sync_timeout = gtk_timeout_add(10*1000,sync_timeout_f,NULL);
+}
+
+/*called on every gnome_config_sync*/
+static void
+sync_handler(gpointer data)
+{
+	config_was_changed = FALSE;
+	if(sync_timeout>-1)
+		gtk_timeout_remove(sync_timeout);
+	sync_timeout = -1;
+}
+
+/*is called as an atexit handler and synces the config if it was changed
+  but not yet synced*/
+static void
+atexit_handler(void)
+{
+	/*avoid any further sync_handler calls*/
+	gnome_config_set_sync_handler(NULL,NULL);
+	if(config_was_changed)
+		gnome_config_sync();
+}
+
 error_t
 gnome_init (char *app_id, struct argp *app_args,
 	    int argc, char **argv,
@@ -207,6 +252,12 @@ gnome_init (char *app_id, struct argp *app_args,
 
 	/* Now parse command-line arguments.  */
 	retval = gnome_parse_arguments (app_args, argc, argv, flags, arg_index);
+	
+	/*now set up the handeling of automatic config syncing*/
+	gnome_config_set_set_handler(set_handler,NULL);
+	gnome_config_set_sync_handler(sync_handler,NULL);
+	atexit(atexit_handler);
+
 #if 0
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = (gpointer)gnome_segv_handle;

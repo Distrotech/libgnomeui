@@ -393,5 +393,6 @@ gnome_entry_save_history (GnomeEntry *gentry)
 
 	gnome_config_pop_prefix ();
 	gnome_config_set_prefix_list(prefix_list);
-	gnome_config_sync ();
+	/*we don't have to sync since that's done automatically*/
+	/*gnome_config_sync ();*/
 }
