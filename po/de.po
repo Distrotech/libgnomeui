@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.5.90\n"
+"Project-Id-Version: libgnomeui 2.7.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-02-26 16:13+0100\n"
+"POT-Creation-Date: 2004-07-02 20:01+0200\n"
+"PO-Revision-Date: 2004-07-02 20:01+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,33 @@ msgstr "Kindelement 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Hinweis für Kindelement 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "Dateisystem"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Speichern von Lesezeichen gescheitert (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Informationen zu Datei »%s« konnten nicht abgerufen werden: %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Datei »%s« konnte nicht geöffnet werden: %s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Bild »%s« konnte nicht geladen werden: Grund unbekannt, Bilddatei vermutlich "
+"fehlerhaft"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -144,6 +171,7 @@ msgstr "Info zu %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datei"
 
@@ -201,6 +229,7 @@ msgid "_Game"
 msgstr "_Spiel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -392,11 +421,11 @@ msgstr "Die Anwendung konfigurieren"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Info zu dieser Anwendung"
 
@@ -423,7 +452,7 @@ msgstr "Ein neues Fenster öffnen"
 msgid "_Close This Window"
 msgstr "Fenster _schließen"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Das aktuelle Fenster schließen"
 
@@ -520,9 +549,9 @@ msgid "Text Only"
 msgstr "Nur Text"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Desktopvorgaben verwenden (%s)"
+msgstr "Desktopvorgabe verwenden (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -623,9 +652,9 @@ msgid "Authentication Required"
 msgstr "Legitimation erforderlich"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Sie müssen sich anmelden, um auf »%s« zuzugreifen\n"
+msgstr "Sie müssen sich anmelden, um auf %s, Domain %s zuzugreifen\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -811,22 +840,43 @@ msgstr "Die Hintergrundfarbe wurde gesetzt"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Hintergrundfarbe des Inhalts"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Hintergrundfarbe des Inhalts"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Die Hintergrundfarbe des Inhalts als GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Hintergrundfarbe des Inhalts gesetzt"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Die Hintergrundfarbe des Inhalts wurde gesetzt"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Hintergrundfarbe des Logos"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Hintergrundfarbe des Logos"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Hintergrundfarbe des Logos als GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Hintergrundfarbe des Logos gesetzt"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Die Hintergrundfarbe des Logos wurde gesetzt"
 
@@ -1160,43 +1210,43 @@ msgstr ""
 "GtkDialog zu erhalten, falls Sie seine Eigenschfaten verändern oder abfragen "
 "müssen."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:986
 msgid "No Icon"
 msgstr "Kein Symbol"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "Symbolauswahl-Dialog"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "Dieser Auswahldialog lässt Sie ein Symbol auswählen."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "Symbolauswahl"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "Wählen Sie das gewünschte Symbol."
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "Icon Selector"
 msgstr "Symbolauswahl"
 
-#: libgnomeui/gnome-icon-entry.c:984
+#: libgnomeui/gnome-icon-entry.c:990
 msgid "This button will open a window to let you select an icon."
 msgstr "Diese Schaltfläche öffnet das Auswahlfenster für Symbole."
 
-#: libgnomeui/gnome-icon-entry.c:1007
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid "Browse"
 msgstr "Auswählen"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid "Icon path"
 msgstr "Pfad zum Symbol"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1016
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1236,23 +1286,31 @@ msgstr "Frage"
 msgid "Message"
 msgstr "Nachricht"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_Benutzername:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Domäne:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Passwort:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr "A_nonym verbinden"
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr "Als _Benutzer verbinden:"
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Innerhalb dieser Sitzung an Passwort erinnern"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "Passwort in Schlüsselbund speichern"
 
@@ -1422,8 +1480,9 @@ msgstr "_Entwickler informieren"
 msgid "_Debug"
 msgstr "_Fehlerdiagnose"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Den Test beenden"
+
 #~ msgid " domain %s"
 #~ msgstr " Domäne %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Den Test beenden"
