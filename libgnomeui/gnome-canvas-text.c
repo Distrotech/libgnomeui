@@ -649,7 +649,7 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		else
 			text->pixel = gnome_canvas_get_color_pixel (item->canvas, text->rgba);
 
-		if (item->canvas->aa)
+		if (!item->canvas->aa)
 			set_text_gc_foreground (text);
 
 		gnome_canvas_item_request_update (item);

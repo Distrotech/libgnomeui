@@ -1,3 +1,10 @@
+1999-08-17  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Typo fix; do
+	set the gc foreground if the canvas is not AA.
+
+	* gnome-canvas-text.c (gnome_canvas_text_set_arg): Likewise.
+
 1999-08-17  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-popup-help.c (helpwindow_destroy_callback): remove

@@ -766,7 +766,7 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			line->fill_pixel = gnome_canvas_get_color_pixel (item->canvas,
 									 line->fill_rgba);
 
-		if (item->canvas->aa)
+		if (!item->canvas->aa)
 			set_line_gc_foreground (line);
 
 		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
