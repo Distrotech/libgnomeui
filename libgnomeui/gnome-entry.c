@@ -42,14 +42,8 @@
 #include "gnome-entry.h"
 
 struct _GnomeEntryPrivate {
-	gchar     *history_id;
-
-	GList     *items;
-
 	GtkWidget *combo;
 	GtkWidget *entry;
-
-	guint32    changed : 1;
 };
 	
 
@@ -118,9 +112,6 @@ static void
 gnome_entry_init (GnomeEntry *gentry)
 {
 	gentry->_priv = g_new0(GnomeEntryPrivate, 1);
-
-	gentry->_priv->changed      = FALSE;
-	gentry->_priv->items        = NULL;
 }
 
 /**
@@ -140,8 +131,6 @@ gnome_entry_construct (GnomeEntry *gentry,
 	guint32 flags;
 
 	g_return_if_fail (gentry != NULL);
-
-	gentry->_priv->history_id = g_strdup (history_id);
 
 	flags = GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
 
@@ -241,10 +230,6 @@ gnome_entry_finalize (GObject *object)
 	g_return_if_fail (GNOME_IS_ENTRY (object));
 
 	gentry = GNOME_ENTRY (object);
-
-	if (gentry->_priv) {
-		g_free (gentry->_priv->history_id);
-	}
 
 	g_free (gentry->_priv);
 	gentry->_priv = NULL;
