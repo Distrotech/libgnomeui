@@ -1,4 +1,9 @@
 2002-04-08  Wayne Schuller  <k_wayne@linuxpower.org>
+ 
+ 	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_init): 
+	Give the browse button an accelerator. Fixes #77416
+
+2002-04-08  Wayne Schuller  <k_wayne@linuxpower.org>
 
 	* libgnomeui/gnome-entry.c: (gnome_entry_load_history): 
 	Free the key. http://bugzilla.gnome.org/show_bug.cgi?id=74788
