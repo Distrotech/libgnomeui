@@ -1,3 +1,27 @@
+2000-03-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-pouch.[ch]: new files; a Window-in-Window style MDI container
+	widget.
+	* gnome-roo.[ch]: new files; a child window for Window-in-Window style
+	MDI. The child window decorations are rather ugly, as I'm a pretty bad
+	designer. Any improvements are very welcome.
+	* gnome-mdi.h: new enum GNOME_MDI_WIW; describes WiW MDI mode.
+	* gnome-mdi.[ch] (gnome_mdi_new): return a GnomeMDI * instead of
+	GtkObject *.
+	(gnome_mdi_get_view_menu_info): new function; return menu GnomeUIInfo
+	of a view if the menu is set.
+	(gnome_mdi_get_view_toolbar_info): new function; return toolbar
+ 	GnomeUIInfo of a view if the toolbar is set.
+	(gnome_mdi_get_child_toolbar_info): new function; return child's
+	toolbar GnomeUIInfo of a given GnomeApp.
+	(*): implemented the WiW mode. I suppose it's still full of bugs
+	that I've overlooked.
+	* gnome-mdi-child.h (GnomeMDIChildConfigFunc): returns a const
+	gchar *.
+	(gnome_mdi_child_add_toolbar): moved to gnome-mdiP.h.
+	* mdi_demo.c: a testing app for GnomeMDI.
+	* Makefile.am: integrated the above.
+
 Sat Mar 04 21:35:08 2000  George Lebl <jirka@5z.com>
 
 	* gnome-pixmap-entry.c: fix destructor to call parent destructor

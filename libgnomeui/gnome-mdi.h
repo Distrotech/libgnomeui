@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* gnome-mdi.h - definition of a Gnome MDI object
 
-   Copyright (C) 1997, 1998, 1999 Free Software Foundation
+   Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
    All rights reserved.
 
    The Gnome Library is free software; you can redistribute it and/or
@@ -49,6 +49,7 @@ typedef enum {
 	GNOME_MDI_NOTEBOOK,
 	GNOME_MDI_TOPLEVEL,
 	GNOME_MDI_MODAL,
+	GNOME_MDI_WIW,
 	GNOME_MDI_DEFAULT_MODE
 } GnomeMDIMode;
 
@@ -72,14 +73,14 @@ struct _GnomeMDI {
 
 	GSList *registered; /* see comment for gnome_mdi_(un)register() functions below for an explanation. */
 	
-    /* paths for insertion of mdi_child specific menus and mdi_child list menu via
-       gnome-app-helper routines */
+    /* paths for insertion of mdi_child specific menus and mdi_child list
+	   menu via gnome-app-helper routines */
 	gchar *child_menu_path;
 	gchar *child_list_path;
 
 	GtkPositionType tab_pos;
 
-	GnomeMDIMode mode : 2;
+	GnomeMDIMode mode : 3;
 
 	guint signal_id;
 	gint in_drag : 1;
@@ -127,13 +128,13 @@ struct _GnomeMDIClass {
  *   is called with each newly created GnomeApp to allow the MDI user to
  *   customize it (add a statusbar, toolbars or menubar if the method with
  *   GnomeUIInfo templates is not sufficient, etc.).
- *   no contents may be set since GnomeMDI uses them for storing either a
- *   view of a child or a notebook
+ *   no contents may be set since GnomeMDI uses them for purposes of its own!
  */
 
 guint          gnome_mdi_get_type            (void);
 
-GtkObject     *gnome_mdi_new                 (const gchar *appname, const gchar *title);
+GnomeMDI       *gnome_mdi_new                (const gchar *appname, const gchar *title);
+void           gnome_mdi_construct           (GnomeMDI *mdi, const gchar *appname, const gchar *title);
 
 /* setting the mdi mode */
 void           gnome_mdi_set_mode            (GnomeMDI *mdi, GnomeMDIMode mode);
@@ -190,9 +191,17 @@ GtkWidget     *gnome_mdi_get_view_from_window(GnomeMDI *mdi, GnomeApp *app);
  * GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees
  * and are non-NULL only if templates are used for menu/toolbar creation.
  */
-GnomeUIInfo   *gnome_mdi_get_menubar_info    (GnomeApp *app);
-GnomeUIInfo   *gnome_mdi_get_toolbar_info    (GnomeApp *app);
-GnomeUIInfo   *gnome_mdi_get_child_menu_info (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_menubar_info      (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_toolbar_info      (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_child_menu_info   (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_child_toolbar_info(GnomeApp *app);
+
+/* extracting the menu/toolbar GnomeUIInfos (when they are set)
+ * from the views.
+ */
+GnomeUIInfo   *gnome_mdi_get_view_menu_info    (GtkWidget *view);
+GnomeUIInfo   *gnome_mdi_get_view_toolbar_info (GtkWidget *view);
+
 
 END_GNOME_DECLS
 

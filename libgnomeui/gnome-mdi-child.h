@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* gnome-mdi-child.h - definition of an abstract MDI child class.
 
-   Copyright (C) 1997, 1998 Free Software Foundation
+   Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
    All rights reserved
 
    The Gnome Library is free software; you can redistribute it and/or
@@ -70,17 +70,15 @@ struct _GnomeMDIChild
 	gint band_num, band_pos, offset;
 };
 
-typedef GtkWidget *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);
-typedef GList     *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *, gpointer);
-typedef gchar     *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *, gpointer);
-typedef GtkWidget *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *, gpointer);
+typedef GtkWidget   *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);
+typedef GList       *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *, gpointer);
+typedef const gchar *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *, gpointer);
+typedef GtkWidget   *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *, gpointer);
 
 /* note that if you override the set_label virtual function, it should return
  * a new widget if its GtkWidget* parameter is NULL and modify and return the
  * old widget otherwise.
- * (see gnome-mdi-child.c/gnome_mdi_child_set_book_label() for an example).
  */
-
 struct _GnomeMDIChildClass
 {
 	GtkObjectClass parent_class;
@@ -103,8 +101,6 @@ void      gnome_mdi_child_set_toolbar_position(GnomeMDIChild *mdi_child,
 											   GnomeDockPlacement placement,
 											   gint band_num, gint band_pos,
 											   gint offset);
-void      gnome_mdi_child_add_toolbar(GnomeMDIChild *mdi_child, GnomeApp *app,
-									  GtkToolbar *toolbar);
 
 END_GNOME_DECLS
 

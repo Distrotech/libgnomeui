@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* gnome-mdi-child.c - implementation of an abstract class for MDI children
 
-   Copyright (C) 1997, 1998 Free Software Foundation
+   Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
    All rights reserved.
 
    The Gnome Library is free software; you can redistribute it and/or
@@ -34,7 +34,7 @@
 #include "gnome-mdi.h"
 #include "gnome-mdiP.h"
 
-#define GNOME_ENABLE_DEBUG
+#undef GNOME_ENABLE_DEBUG
 
 static void       gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void       gnome_mdi_child_init             (GnomeMDIChild *);
@@ -162,6 +162,15 @@ static void gnome_mdi_child_destroy (GtkObject *obj)
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(obj);
+}
+
+void gnome_mdi_child_add_toolbar(GnomeMDIChild *mdi_child, GnomeApp *app,
+								 GtkToolbar *toolbar)
+{
+	gnome_app_add_toolbar(app, toolbar, GNOME_MDI_CHILD_TOOLBAR_NAME,
+						  mdi_child->behavior, mdi_child->placement,
+						  mdi_child->band_num, mdi_child->band_pos,
+						  mdi_child->offset);
 }
 
 /**
@@ -295,23 +304,4 @@ void gnome_mdi_child_set_toolbar_position(GnomeMDIChild *mdi_child,
 	mdi_child->band_num = band_num;
 	mdi_child->band_pos = band_pos;
 	mdi_child->offset = offset;
-}
-
-/**
- * gnome_mdi_child_add_toolbar:
- * @mdi_child: A pointer to a GnomeMDIChild object.
- * @app: A pointer to a GnomeApp that contains the view of the @mdi_child
- * @toolbar: The toolbar to be added.
- *
- * Description:
- * Adds toolbar @toolbar to the GnomeApp @app using the default placement
- * values stored in @mdi_child.
- **/
-void gnome_mdi_child_add_toolbar(GnomeMDIChild *mdi_child, GnomeApp *app,
-								 GtkToolbar *toolbar)
-{
-	gnome_app_add_toolbar(app, toolbar, GNOME_MDI_CHILD_TOOLBAR_NAME,
-						  mdi_child->behavior, mdi_child->placement,
-						  mdi_child->band_num, mdi_child->band_pos,
-						  mdi_child->offset);
 }

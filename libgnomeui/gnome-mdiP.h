@@ -2,7 +2,7 @@
 /* gnome-mdiP.h - functions from gnome-mdi.c needed by other mdi sources,
    but not a part of the public API
 
-   Copyright (C) 1997, 1998, 1999 Free Software Foundation
+   Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
    All rights reserved.
 
    The Gnome Library is free software; you can redistribute it and/or
@@ -56,6 +56,8 @@ void       gnome_mdi_child_list_remove (GnomeMDI *mdi, GnomeMDIChild *child);
 void       gnome_mdi_child_list_add    (GnomeMDI *mdi, GnomeMDIChild *child);
 GtkWidget *gnome_mdi_new_toplevel      (GnomeMDI *mdi);
 void       gnome_mdi_update_child      (GnomeMDI *mdi, GnomeMDIChild *child);
+void       gnome_mdi_child_add_toolbar (GnomeMDIChild *mdi_child, GnomeApp *app,
+									    GtkToolbar *toolbar);
 
 END_GNOME_DECLS
 
