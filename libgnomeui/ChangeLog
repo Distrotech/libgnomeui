@@ -1,3 +1,13 @@
+1999-09-11  Roberto Zunino <zunino@cli.di.unipi.it>
+
+	* gnome-dns.c: Do not cache 0.0.0.0 results (ie, not found).
+	Do not abuse gdk_input_add.
+
+1999-09-06  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-canvas.c (gnome_canvas_new_aa): Only warn one time about
+	the buginess of the Canvas.
+
 1999-09-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-color-picker.c (key_pressed): Provide a way to cancel a

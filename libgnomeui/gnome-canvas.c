@@ -2381,8 +2381,15 @@ gnome_canvas_new_aa (void)
 {
 	GnomeCanvas *canvas;
 
-	g_warning ("The antialiased canvas is buggy.  Please do not use it unless "
-		   "you know what you are doing.");
+	{
+		static int warning_shown = 0;
+
+		if (!warning_shown){
+			g_warning ("The antialiased canvas is buggy.  Please do not use it unless "
+				   "you know what you are doing.");
+			warning_shown = 1;
+		}
+	}
 
 	canvas = gtk_type_new (gnome_canvas_get_type ());
 	canvas->aa = 1;
