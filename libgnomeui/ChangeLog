@@ -1,3 +1,14 @@
+1998-11-27  bertrand  <Bertrand.Guiheneuf@inria.fr>
+
+	* gnome-canvas-line.c (gnome_canvas_line_draw): use the new parameter
+	in item_to_canvas to know the actual number of points drawn.
+
+1998-11-27  bertrand  <Bertrand.Guiheneuf@inria.fr>
+
+	* gnome-canvas-line.c (item_to_canvas): Don't draw twice the same point
+	speeds up a lot when line contains a lot of points and the zoom factor
+	is very small.
+
 Fri Nov 27 00:34:44 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap.c: check the visuals and if imlib and gdk visuals
