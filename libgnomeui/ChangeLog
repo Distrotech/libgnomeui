@@ -1,3 +1,7 @@
+2001-07-15  Darin Adler  <darin@bentspoon.com>
+
+	* .cvsignore: Update for new generated files.
+
 2001-07-15  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* Makefile.am (gnometypebuiltins.c): It depends on gnometypebuiltins.h
