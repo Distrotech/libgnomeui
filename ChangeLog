@@ -1,3 +1,11 @@
+2005-01-08  Anders Carlsson  <andersca@imendio.com>
+
+	* libgnomeui/gnome-thumbnail.c 
+	(gnome_thumbnail_factory_instance_init): 
+	No need to do all initialization here, meaning
+	that we can use the thumbnail factory without calling
+	gnome_program_init (Yay!)
+	
 2005-01-05  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-client.c: Fix typo in docs for two functions.

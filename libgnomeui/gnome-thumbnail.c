@@ -332,11 +332,12 @@ gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory *factory)
   
   pthread_mutex_init (&factory->priv->lock, NULL);
 
-  _gnomeui_gconf_lazy_init ();
-
   gnome_thumbnail_factory_reread_scripts (factory);
 
   client = gconf_client_get_default ();
+  gconf_client_add_dir (client,
+			"/desktop/gnome",
+			GCONF_CLIENT_PRELOAD_NONE, NULL);
 
   priv->thumbnailers_notify = gconf_client_notify_add (client, "/desktop/gnome/thumbnailers",
 						       schedule_reread, factory, NULL,
