@@ -5,13 +5,29 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-05-20 13:07+0200\n"
-"PO-Revision-Date: 2003-05-20 15:43+0200\n"
+"POT-Creation-Date: 2003-05-29 13:00+0200\n"
+"PO-Revision-Date: 2003-05-29 14:45+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "Položka potomka 1"
+
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "Rada pro položku 1"
+
+#: demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "Položka potomka 2"
+
+#: demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "Rada pro položku 2"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -118,407 +134,6 @@ msgstr "Logo pro dialog O aplikaci"
 #, c-format
 msgid "About %s"
 msgstr "O %s"
-
-#: libgnomeui/gnome-appbar.c:747
-msgid "Has Progress"
-msgstr "Má průběh"
-
-#: libgnomeui/gnome-appbar.c:748
-msgid "Create a progress widget."
-msgstr "Vytvořit prvek průběhu."
-
-#: libgnomeui/gnome-appbar.c:755
-msgid "Has Status"
-msgstr "Má stav"
-
-#: libgnomeui/gnome-appbar.c:756
-msgid "Create a status widget."
-msgstr "Vytvořit prvek stavu."
-
-#: libgnomeui/gnome-appbar.c:763
-msgid "Interactivity"
-msgstr "Interaktivita"
-
-#: libgnomeui/gnome-appbar.c:764
-msgid "Level of user activity required."
-msgstr "Úroveň požadované uživatelské aktivity."
-
-#: libgnomeui/gnome-client.c:863
-msgid "Specify session management ID"
-msgstr "Zadejte ID správy sezení"
-
-#: libgnomeui/gnome-client.c:863
-msgid "ID"
-msgstr "ID"
-
-#: libgnomeui/gnome-client.c:866
-msgid "Specify prefix of saved configuration"
-msgstr "Zadejte předponu uloženého nastavení"
-
-#: libgnomeui/gnome-client.c:866
-msgid "PREFIX"
-msgstr "PREFIX"
-
-#: libgnomeui/gnome-client.c:869
-msgid "Disable connection to session manager"
-msgstr "Vypnout napojení na správce sezení"
-
-#: libgnomeui/gnome-client.c:975
-msgid "Session management"
-msgstr "Správa sezení"
-
-#: libgnomeui/gnome-client.c:2473
-msgid "Cancel Logout"
-msgstr "Zrušit odhlášení"
-
-#: libgnomeui/gnome-color-picker.c:414
-msgid "Received invalid color data\n"
-msgstr "Obdrženy neplatné údaje o barvě\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Výběr barvy"
-
-#: libgnomeui/gnome-color-picker.c:465
-msgid "Open a dialog to specify the color"
-msgstr "Otevře dialog pro zadání barvy"
-
-#: libgnomeui/gnome-color-picker.c:487
-msgid "Pick a color"
-msgstr "Vyberte barvu"
-
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
-msgid "Time"
-msgstr "Čas"
-
-#: libgnomeui/gnome-dateedit.c:480
-msgid "The time currently selected"
-msgstr "Právě vybraný čas"
-
-#: libgnomeui/gnome-dateedit.c:492
-msgid "DateEdit Flags"
-msgstr "Příznaky DateEdit"
-
-#: libgnomeui/gnome-dateedit.c:493
-msgid "Flags for how DateEdit looks"
-msgstr "Příznaky vzhledu prvku DateEdit"
-
-#: libgnomeui/gnome-dateedit.c:502
-msgid "Lower Hour"
-msgstr "Nižší hodina"
-
-#: libgnomeui/gnome-dateedit.c:503
-msgid "Lower hour in the time popup selector"
-msgstr "Nižší hodina ve vyskakovacím výběru času"
-
-#: libgnomeui/gnome-dateedit.c:513
-msgid "Upper Hour"
-msgstr "Vyšší hodina"
-
-#: libgnomeui/gnome-dateedit.c:514
-msgid "Upper hour in the time popup selector"
-msgstr "Vyšší hodina ve vyskakovacím výběru času"
-
-#: libgnomeui/gnome-dateedit.c:524
-msgid "Initial Time"
-msgstr "Výchozí čas"
-
-#: libgnomeui/gnome-dateedit.c:525
-msgid "The initial time"
-msgstr "Výchozí čas"
-
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "Datum"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select Date"
-msgstr "Vyberte datum"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select the date from a calendar"
-msgstr "Vyberte datum z kalendáře"
-
-#. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
-msgid "Calendar"
-msgstr "Kalendář"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select Time"
-msgstr "Vyberte čas"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select the time from a list"
-msgstr "Vyberte čas ze seznamu"
-
-#: libgnomeui/gnome-dateedit.c:1003
-msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date je zastaralé, používejte gnome_date_edit_get_time"
-
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
-msgid "Title"
-msgstr "Nadpis"
-
-#: libgnomeui/gnome-druid-page-standard.c:122
-msgid "Title of the druid"
-msgstr "Nadpis druida"
-
-#: libgnomeui/gnome-druid-page-standard.c:130
-msgid "Logo image"
-msgstr "Obrázek loga"
-
-#: libgnomeui/gnome-druid-page-standard.c:137
-msgid "Top Watermark"
-msgstr "Horní vodoznak"
-
-#: libgnomeui/gnome-druid-page-standard.c:138
-msgid "Watermark image for the top"
-msgstr "Obrázek vodoznaku nahoře"
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Title Foreground"
-msgstr "Popředí nadpisu"
-
-#: libgnomeui/gnome-druid-page-standard.c:146
-msgid "Foreground color of the title"
-msgstr "Barva popředí nadpisu"
-
-#: libgnomeui/gnome-druid-page-standard.c:153
-msgid "Title Foreground Color"
-msgstr "Barva popředí nadpisu"
-
-#: libgnomeui/gnome-druid-page-standard.c:154
-msgid "Foreground color of the title as a GdkColor"
-msgstr "Barva popředí nadpisu jako GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:161
-msgid "Title Foreground color set"
-msgstr "Barva popředí nadpisu nastavena"
-
-#: libgnomeui/gnome-druid-page-standard.c:162
-msgid "Foreground color of the title is set"
-msgstr "Barva popředí nadpisu je nastavena"
-
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
-msgid "Background Color"
-msgstr "Barva pozadí"
-
-#: libgnomeui/gnome-druid-page-standard.c:170
-msgid "Background color"
-msgstr "Barva pozadí"
-
-#: libgnomeui/gnome-druid-page-standard.c:178
-msgid "Background color as a GdkColor"
-msgstr "Barva pozadí jako GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:185
-msgid "Background color set"
-msgstr "Barva pozadí nastavena"
-
-#: libgnomeui/gnome-druid-page-standard.c:186
-msgid "Background color is set"
-msgstr "Barva pozadí je nastavena"
-
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
-msgstr "Barva pozadí loga"
-
-#: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
-msgstr "Barva pozadí loga"
-
-#: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
-msgstr "Barva pozadí loga jako GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:209
-msgid "Logo Background color set"
-msgstr "Barva pozadí loga nastavena"
-
-#: libgnomeui/gnome-druid-page-standard.c:210
-msgid "Logo Background color is set"
-msgstr "Barva pozadí loga je nastavena"
-
-#: libgnomeui/gnome-druid.c:150
-msgid "Show Finish"
-msgstr "Ukázat Ukončit"
-
-#: libgnomeui/gnome-druid.c:151
-msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Ukázat tlačítko 'Ukončit' místo tlačítka 'Další'"
-
-#: libgnomeui/gnome-druid.c:158
-msgid "Show Help"
-msgstr "Ukázat Nápovědu"
-
-#: libgnomeui/gnome-druid.c:159
-msgid "Show the 'Help' button"
-msgstr "Ukázat tlačítko 'Nápověda'"
-
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "URL"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "URL, které aktivuje prvek GnomeHRef"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "Text"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "Text na tlačítku"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "Ukončit hlad ve světě"
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr "Barva odkazu"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "Barva, kterou se vykresluje odkaz"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr "Toto tlačítko vás zavede na adresu URI, kterou zobrazuje."
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"Při pokusu o spuštění implicitního prohlížeče WWW nastala chyba.\n"
-"Zkontrolujte prosím svá nastavení v nástroji 'Preferované aplikace'."
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "Použitý displej X"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "DISPLAY"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "GNOME GUI knihovna"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:618
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Vyskytlo se několik chyb 'segmentation faults'; nelze zobrazit chybový "
-"dialog\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:632
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Chyba Segmentation fault!\n"
-"Nelze zobrazit dialog o havárii\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"Správce sezení GNOME (proces %d) havaroval\n"
-"díky fatální chybě (%s).\n"
-"Poté, co zavřete tento dialog, budou všechny aplikace ukončeny a vaše sezení "
-"se ukončí.\n"
-"Uložte proto před zavřením tohoto dialogu všechny vaše soubory."
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Aplikace \"%s\" (proces %d) se zhroutila\n"
-"kvůli smrtelné chybě.\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Použití: gnome_segv2 jménoaplikace čsignálu\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Podat zprávu o chybě"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "Ladit"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Pro více informací prosím navštivte stránku GNOME Application Crash (selhání "
-"aplikace GNOME)"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "Okraje tabulky"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "Výplň tabulky"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "Seznam s odrážkami"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "Číslovaný seznam"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "Odsazení"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "Ododsazení"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "O aplikaci"
-
-#: demos/mdi_demo.c:128
-msgid "Child Item 1"
-msgstr "Položka potomka 1"
-
-#: demos/mdi_demo.c:129
-msgid "Hint for item 1"
-msgstr "Rada pro položku 1"
-
-#: demos/mdi_demo.c:131
-msgid "Child Item 2"
-msgstr "Položka potomka 2"
-
-#: demos/mdi_demo.c:132
-msgid "Hint for item 2"
-msgstr "Rada pro položku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
@@ -951,6 +566,272 @@ msgstr "App ID"
 msgid "The application ID string"
 msgstr "Řetězec ID aplikace"
 
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "Má průběh"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "Vytvořit prvek průběhu."
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "Má stav"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "Vytvořit prvek stavu."
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "Interaktivita"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "Úroveň požadované uživatelské aktivity."
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "Vaše HTTP proxy vyžaduje, abyste se přihlásili.\n"
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"Pro přístup k \"%s\" se musíte přihlásit.\n"
+"%s"
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr "Vaše heslo bude přenášeno nešifrovaně."
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr "Vaše heslo bude přenášeno šifrovaně."
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr "Vyžadována autentizace"
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "Zadejte ID správy sezení"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr "Zadejte předponu uloženého nastavení"
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr "Vypnout napojení na správce sezení"
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "Správa sezení"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "Zrušit odhlášení"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Obdrženy neplatné údaje o barvě\n"
+
+#: libgnomeui/gnome-color-picker.c:464
+msgid "Color Selector"
+msgstr "Výběr barvy"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Otevře dialog pro zadání barvy"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Vyberte barvu"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "Čas"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "Právě vybraný čas"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr "Příznaky DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr "Příznaky vzhledu prvku DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "Nižší hodina"
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr "Nižší hodina ve vyskakovacím výběru času"
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "Vyšší hodina"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr "Vyšší hodina ve vyskakovacím výběru času"
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "Výchozí čas"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "Výchozí čas"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Datum"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "Vyberte datum"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "Vyberte datum z kalendáře"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "Kalendář"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "Vyberte čas"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "Vyberte čas ze seznamu"
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date je zastaralé, používejte gnome_date_edit_get_time"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Nadpis"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Nadpis druida"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Obrázek loga"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Horní vodoznak"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Obrázek vodoznaku nahoře"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Popředí nadpisu"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Barva popředí nadpisu"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Barva popředí nadpisu"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Barva popředí nadpisu jako GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Barva popředí nadpisu nastavena"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Barva popředí nadpisu je nastavena"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Barva pozadí"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Barva pozadí"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Barva pozadí jako GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Barva pozadí nastavena"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Barva pozadí je nastavena"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "Barva pozadí loga"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "Barva pozadí loga"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "Barva pozadí loga jako GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "Barva pozadí loga nastavena"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "Barva pozadí loga je nastavena"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "Ukázat Ukončit"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Ukázat tlačítko 'Ukončit' místo tlačítka 'Další'"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "Ukázat Nápovědu"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "Ukázat tlačítko 'Nápověda'"
+
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "ID historie"
@@ -1047,23 +928,23 @@ msgstr ""
 "atribut lze použít k získání prvku GtkEntry, chcete-li měnit nebo zjistit "
 "jeho parametry."
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "Vyber soubor"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "Cesta"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "Cesta k souboru"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "_Probírat..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr "Zobrazí dialog pro výběr souboru"
 
@@ -1169,6 +1050,46 @@ msgstr ""
 "Nastala chyba při nahrávání nebo ukládání informací o vašem nastavení pro %"
 "s. Některé volby vašeho nastavení nemusí fungovat správně."
 
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "URL, které aktivuje prvek GnomeHRef"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "Text"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "Text na tlačítku"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "Ukončit hlad ve světě"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "Barva odkazu"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "Barva, kterou se vykresluje odkaz"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "Toto tlačítko vás zavede na adresu URI, kterou zobrazuje."
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Při pokusu o spuštění implicitního prohlížeče WWW nastala chyba.\n"
+"Zkontrolujte prosím svá nastavení v nástroji 'Preferované aplikace'."
+
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1205,51 +1126,51 @@ msgstr ""
 "Dialog pro výběr ikony. Můžete použít tento atribut, chcete-li získat prvek "
 "GtkDialog a měnit nebo zjistit jeho parametry."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Žádná ikona"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nelze nalézt prvek hbox, použije se běžný výběr souboru"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Náhled"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "Dialog výběru ikony"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "Toto dialogové okno vám umožní vybrat ikonu."
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "Výběr ikony"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "Vyberte prosím ikonu, kterou chcete."
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Výběr ikony"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "Toto tlačítko otevře okno, ve kterém budete moci vybrat ikonu."
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Probírat"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "Cesta k ikonám"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1288,6 +1209,14 @@ msgstr "Otázka"
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Zpráva"
+
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr "_Jméno uživatele:"
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr "_Heslo:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1331,6 +1260,110 @@ msgstr "%T %a %d. %b %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Okraje tabulky"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Výplň tabulky"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Seznam s odrážkami"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Číslovaný seznam"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Odsazení"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Ododsazení"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "O aplikaci"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "Použitý displej X"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "GNOME GUI knihovna"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:619
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+"Vyskytlo se několik chyb 'segmentation faults'; nelze zobrazit chybový "
+"dialog\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:633
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Chyba Segmentation fault!\n"
+"Nelze zobrazit dialog o havárii\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"Správce sezení GNOME (proces %d) havaroval\n"
+"díky fatální chybě (%s).\n"
+"Poté, co zavřete tento dialog, budou všechny aplikace ukončeny a vaše sezení "
+"se ukončí.\n"
+"Uložte proto před zavřením tohoto dialogu všechny vaše soubory."
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Aplikace \"%s\" (proces %d) se zhroutila\n"
+"kvůli smrtelné chybě.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Použití: gnome_segv2 jménoaplikace čsignálu\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "Podat zprávu o chybě"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "Ladit"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr ""
+"Pro více informací prosím navštivte stránku GNOME Application Crash (selhání "
+"aplikace GNOME)"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
