@@ -22,21 +22,23 @@
   @NOTATION@
 */
 
-#include "gnome-icon-sel.h"
-
 #include <config.h>
-
-#include "libgnome/gnome-i18nP.h"
-#include "libgnome/gnome-util.h"
-#include "libgnome/gnome-mime.h"
-#include "gnome-uidefs.h"
-#include "gnome-icon-list.h"
+#include "gnome-macros.h"
 
 #include <unistd.h> 
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
+
+#include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-util.h"
+#include "libgnome/gnome-mime.h"
+#include "libgnome/gnome-i18nP.h"
+#include "gnome-icon-list.h"
+#include "gnome-uidefs.h"
+
+#include "gnome-icon-sel.h"
 
 #define ICON_SIZE 48
 
@@ -51,39 +53,16 @@ struct _GnomeIconSelectionPrivate {
 };
 
 static void gnome_icon_selection_class_init (GnomeIconSelectionClass *klass);
-static void gnome_icon_selection_init       (GnomeIconSelection      *messagebox);
+static void gnome_icon_selection_init       (GnomeIconSelection      *gis);
 
 static void gnome_icon_selection_destroy    (GtkObject               *object);
 static void gnome_icon_selection_finalize   (GObject                 *object);
 
-static GtkVBoxClass *parent_class;
+static int sort_file_list		    (gconstpointer            a,
+					     gconstpointer            b);
 
-static int sort_file_list( gconstpointer a, gconstpointer b);
-
-guint
-gnome_icon_selection_get_type ()
-{
-  static guint gis_type = 0;
-
-  if (!gis_type)
-    {
-      GtkTypeInfo gis_info =
-      {
-	"GnomeIconSelection",
-	sizeof (GnomeIconSelection),
-	sizeof (GnomeIconSelectionClass),
-	(GtkClassInitFunc) gnome_icon_selection_class_init,
-	(GtkObjectInitFunc) gnome_icon_selection_init,
-	NULL,
-	NULL,
-	NULL
-      };
-
-      gis_type = gtk_type_unique (gtk_vbox_get_type (), &gis_info);
-    }
-
-  return gis_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeIconSelection, gnome_icon_selection,
+			 GtkVBox, gtk_vbox)
 
 static void
 gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
@@ -93,8 +72,6 @@ gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 
   object_class = (GtkObjectClass*) klass;
   gobject_class = (GObjectClass*) klass;
-
-  parent_class = gtk_type_class (gtk_vbox_get_type ());
 
   object_class->destroy = gnome_icon_selection_destroy;
   gobject_class->finalize = gnome_icon_selection_finalize;
@@ -151,7 +128,8 @@ gnome_icon_selection_init (GnomeIconSelection *gis)
  *
  * Returns: Returns the new object
  **/
-GtkWidget* gnome_icon_selection_new (void)
+GtkWidget *
+gnome_icon_selection_new (void)
 {
   GnomeIconSelection * gis;
   
@@ -160,16 +138,17 @@ GtkWidget* gnome_icon_selection_new (void)
   return GTK_WIDGET (gis);
 }
 
-static void gnome_icon_selection_destroy (GtkObject *o)
+static void
+gnome_icon_selection_destroy (GtkObject *object)
 {
 	GnomeIconSelection *gis;
 
-	g_return_if_fail(o != NULL);
-	g_return_if_fail(GNOME_IS_ICON_SELECTION(o));
+	g_return_if_fail(object != NULL);
+	g_return_if_fail(GNOME_IS_ICON_SELECTION(object));
 
 	/* remember, destroy can be run multiple times! */
 	
-	gis = GNOME_ICON_SELECTION(o);
+	gis = GNOME_ICON_SELECTION(object);
 
 	/*clear our data if we have some*/
 	if(gis->_priv->file_list) {
@@ -178,24 +157,23 @@ static void gnome_icon_selection_destroy (GtkObject *o)
 		gis->_priv->file_list = NULL;
 	}
 
-	if (GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(o);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
-static void gnome_icon_selection_finalize (GObject *o)
+static void
+gnome_icon_selection_finalize (GObject *object)
 {
 	GnomeIconSelection *gis;
 
-	g_return_if_fail(o != NULL);
-	g_return_if_fail(GNOME_IS_ICON_SELECTION(o));
+	g_return_if_fail(object != NULL);
+	g_return_if_fail(GNOME_IS_ICON_SELECTION(object));
 	
-	gis = GNOME_ICON_SELECTION(o);
+	gis = GNOME_ICON_SELECTION(object);
 
 	g_free(gis->_priv);
 	gis->_priv = NULL;
 
-	if (G_OBJECT_CLASS(parent_class)->finalize)
-		(* (G_OBJECT_CLASS(parent_class)->finalize))(o);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**
@@ -208,7 +186,8 @@ static void gnome_icon_selection_finalize (GObject *o)
  *
  * Returns:
  **/
-void  gnome_icon_selection_add_defaults   (GnomeIconSelection * gis)
+void
+gnome_icon_selection_add_defaults (GnomeIconSelection * gis)
 {
   gchar *pixmap_dir;
 
@@ -225,7 +204,6 @@ static void
 append_an_icon(GnomeIconSelection * gis, const gchar * path)
 {
 	GdkPixbuf *pixbuf;
-	GdkPixbuf *scaled;
 	int pos;
 	int w, h;
 	char *base;
@@ -243,7 +221,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 			w = ICON_SIZE;
 		}
 	} else {
-		if(h>ICON_SIZE) {
+		if(h > ICON_SIZE) {
 			w = w * ((double)ICON_SIZE / h);
 			h = ICON_SIZE;
 		}
@@ -251,16 +229,24 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	w = (w > 0) ? w : 1;
 	h = (h > 0) ? h : 1;
 	
-	scaled = gdk_pixbuf_scale_simple(pixbuf, w, h, GDK_INTERP_BILINEAR);
-	gdk_pixbuf_unref(pixbuf);
-	if(scaled == NULL)
-		return;
+	if (w != gdk_pixbuf_get_width (pixbuf) ||
+	    h != gdk_pixbuf_get_height (pixbuf)) {
+		GdkPixbuf *scaled;
+	        scaled = gdk_pixbuf_scale_simple(pixbuf, w, h,
+						 GDK_INTERP_BILINEAR);
+		gdk_pixbuf_unref(pixbuf);
+		pixbuf = scaled;
+
+		/* sanity */
+		if(pixbuf == NULL)
+			return;
+	}
 	
 	base = g_path_get_basename(path);
 	pos = gnome_icon_list_append_pixbuf(GNOME_ICON_LIST(gis->_priv->gil),
-					    scaled, path, base);
+					    pixbuf, path, base);
 	g_free(base);
-	gdk_pixbuf_unref(scaled); /* I'm so glad that gdk-pixbuf has eliminated the former lameness of imlib! :) */
+	gdk_pixbuf_unref(pixbuf); /* I'm so glad that gdk-pixbuf has eliminated the former lameness of imlib! :) */
 }
 
 static int sort_file_list( gconstpointer a, gconstpointer b)
@@ -279,30 +265,26 @@ static int sort_file_list( gconstpointer a, gconstpointer b)
  *
  * Returns:
  **/
-void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
-					   const gchar * dir)
+void
+gnome_icon_selection_add_directory (GnomeIconSelection * gis,
+				    const gchar * dir)
 {
-  struct stat statbuf;
   struct dirent * de;
   DIR * dp;
 
   g_return_if_fail(gis != NULL);
   g_return_if_fail(dir != NULL);
 
-  if ( stat(dir, &statbuf) == -1 ) {
-    g_warning("GnomeIconSelection: Couldn't stat directory");
-    return;
-  }
-
-  if ( ! S_ISDIR(statbuf.st_mode) ) {
-    g_warning("GnomeIconSelection: not a directory");
-    return;
+  if ( ! g_file_test (dir, G_FILE_TEST_ISDIR)) {
+	  g_warning(_("GnomeIconSelection: '%s' does not exist or is not "
+		      "a directory"), dir);
+	  return;
   }
 
   dp = opendir(dir);
 
   if ( dp == NULL ) {
-    g_warning("GnomeIconSelection: couldn't open directory");
+    g_warning(_("GnomeIconSelection: couldn't open directory '%s'"), dir);
     return;
   }
 
@@ -314,17 +296,18 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
     if ( *(de->d_name) == '.' ) continue; /* skip dotfiles */
 
     mimetype = gnome_mime_type(de->d_name);
-    if ( mimetype && strncmp(mimetype,"image",sizeof("image")-1)==0 ) {
+    if (mimetype != NULL &&
+	strncmp(mimetype, "image", strlen("image")) == 0 ) {
       gchar * full_path = g_concat_dir_and_file(dir, de->d_name);
 #ifdef GNOME_ENABLE_DEBUG
-    g_print("Full path: %s\n", full_path);
+      g_print("Full path: %s\n", full_path);
 #endif
-      if ( stat(full_path, &statbuf) != -1 ) {
-	if ( S_ISREG(statbuf.st_mode) ) {
-	  /* Image filename, exists, regular file, go for it. */
-          gis->_priv->file_list = g_list_insert_sorted(gis->_priv->file_list,
-            g_strdup (full_path), sort_file_list);
-	}
+      if (g_file_test (full_path, G_FILE_TEST_ISFILE)) {
+	      /* Image filename, exists, regular file, go for it. */
+	      gis->_priv->file_list =
+		      g_list_insert_sorted(gis->_priv->file_list,
+					   g_strdup (full_path),
+					   sort_file_list);
       }
       g_free(full_path);
     }
@@ -351,7 +334,8 @@ set_flag(GtkWidget *w, int *flag)
  *
  * Returns:
  **/
-void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
+void
+gnome_icon_selection_show_icons (GnomeIconSelection * gis)
 {
   GtkWidget *label;
   GtkWidget *progressbar;
@@ -411,6 +395,9 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
 
 	  gtk_progress_bar_update (GTK_PROGRESS_BAR (progressbar),
 				   (float)i / file_count);
+	  /* FIXME: this should be done either
+	   * 1) asynchroniously
+	   * 2) with a separate main loop and not the gtk one */
 	  while ( gtk_events_pending() ) {
                   gtk_main_iteration();
 
@@ -435,8 +422,10 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
   progressbar = gtk_object_get_user_data(GTK_OBJECT(gis));
   if (progressbar)
          label = gtk_object_get_user_data(GTK_OBJECT(progressbar));
-  if (progressbar) gtk_widget_destroy(progressbar);
-  if (label) gtk_widget_destroy(label);
+  if (progressbar)
+	  gtk_widget_destroy(progressbar);
+  if (label)
+	  gtk_widget_destroy(label);
 
   /* cleanse gis of evil progressbar/label ptrs */
   /* also let previous calls to show_icons() know that rendering is done. */
@@ -477,14 +466,16 @@ gnome_icon_selection_stop_loading(GnomeIconSelection * gis)
  *
  * Returns:
  **/
-void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
-					   gboolean not_shown)
+void
+gnome_icon_selection_clear (GnomeIconSelection * gis,
+			    gboolean not_shown)
 {
 	g_return_if_fail(gis != NULL);
 	g_return_if_fail(GNOME_IS_ICON_SELECTION(gis));
 
 	/*clear our data if we have some and not_shown is set*/
-	if(not_shown && gis->_priv->file_list) {
+	if(not_shown &&
+	   gis->_priv->file_list != NULL) {
 		g_list_foreach(gis->_priv->file_list,(GFunc)g_free,NULL);
 		g_list_free(gis->_priv->file_list);
 		gis->_priv->file_list = NULL;
@@ -506,8 +497,8 @@ void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
  * or NULL
  **/
 gchar * 
-gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
-				   gboolean full_path)
+gnome_icon_selection_get_icon (GnomeIconSelection * gis,
+			       gboolean full_path)
 {
 	GList * sel;
 
@@ -574,7 +565,7 @@ gnome_icon_selection_select_icon (GnomeIconSelection * gis,
  * Returns: a #GtkWidget pointer to the interal widget
  **/
 GtkWidget *
-gnome_icon_selection_get_gil(GnomeIconSelection * gis)
+gnome_icon_selection_get_gil (GnomeIconSelection * gis)
 {
 	g_return_val_if_fail(gis != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_ICON_SELECTION(gis), NULL);
@@ -593,7 +584,7 @@ gnome_icon_selection_get_gil(GnomeIconSelection * gis)
  * Returns: a #GtkWidget pointer to the interal widget
  **/
 GtkWidget *
-gnome_icon_selection_get_box(GnomeIconSelection * gis)
+gnome_icon_selection_get_box (GnomeIconSelection * gis)
 {
 	g_return_val_if_fail(gis != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_ICON_SELECTION(gis), NULL);

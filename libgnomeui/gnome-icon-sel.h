@@ -53,7 +53,7 @@ struct _GnomeIconSelectionClass {
   GtkVBoxClass parent_class;
 };
 
-guint gnome_icon_selection_get_type       (void);
+GtkType gnome_icon_selection_get_type     (void);
 
 GtkWidget * gnome_icon_selection_new      (void);
 
@@ -65,7 +65,7 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
 					   const gchar * dir);
 
 /* Loads and displays the icons that were added using gnome_icon_selection_add_* */
-void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis);
+void  gnome_icon_selection_show_icons     (GnomeIconSelection * gis);
 
 /* Clear all icons (even the non shown ones if not_shown is set)*/
 void  gnome_icon_selection_clear          (GnomeIconSelection * gis,

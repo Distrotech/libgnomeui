@@ -1,3 +1,8 @@
+Thu Aug 31 15:21:38 2000  George Lebl <jirka@5z.com>
+
+	* gnome-icon-sel.[ch]: use the new gnome-macros stuff and general
+	  minor cleanup
+
 Wed Aug 30 21:59:43 2000  George Lebl <jirka@5z.com>
 
 	* gnome-animator.c, gnome-cursors.c, gnome-textfu.c: make
