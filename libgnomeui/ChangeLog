@@ -1,5 +1,13 @@
 2000-12-06  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector.c: Asyncify the "set_filename" signal and the
+	gnome_selector_set_filename() function.
+
+	* gnome-entry.c (set_entry_text_handler): `gentry->_priv->entry'
+	may be NULL if we don't have the default entry widget.
+
+2000-12-06  Martin Baulig  <baulig@suse.de>
+
 	* gnome-canvas.c (gnome_canvas_get_color): The 7th argument of
 	gdk_color_context_get_pixels() is now a gulong.
 	(gnome_canvas_get_color_pixel): Likewise.

@@ -98,8 +98,9 @@ struct _GnomeSelectorClass {
     void      (*thaw)                      (GnomeSelector *selector);
 
     gchar *   (*get_filename)              (GnomeSelector *selector);
-    gboolean  (*set_filename)              (GnomeSelector *selector,
-                                            const gchar   *filename);
+    void      (*set_filename)              (GnomeSelector            *selector,
+                                            const gchar              *filename,
+                                            GnomeSelectorAsyncHandle *async_handle);
 
     gchar *   (*get_entry_text)            (GnomeSelector *selector);
     void      (*set_entry_text)            (GnomeSelector *selector,
@@ -201,8 +202,11 @@ void         gnome_selector_set_file_list      (GnomeSelector *selector,
                                                 gboolean       defaultp);
 
 /* set the filename to something, returns TRUE on success. */
-gboolean     gnome_selector_set_filename       (GnomeSelector *selector,
-                                                const gchar   *filename);
+void         gnome_selector_set_filename       (GnomeSelector             *selector,
+						GnomeSelectorAsyncHandle **async_handle_return,
+                                                const gchar               *filename,
+						GnomeSelectorAsyncFunc     async_func,
+						gpointer                   user_data);
 
 /* Remove all entries from the selector. */
 void         gnome_selector_clear              (GnomeSelector *selector,

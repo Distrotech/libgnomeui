@@ -328,7 +328,8 @@ set_entry_text_handler (GnomeSelector *selector, const gchar *text)
 
 	gentry = GNOME_ENTRY (selector);
 
-	gtk_entry_set_text (GTK_ENTRY (gentry->_priv->entry), text);
+	if (gentry->_priv->entry)
+		gtk_entry_set_text (GTK_ENTRY (gentry->_priv->entry), text);
 }
 
 static void
