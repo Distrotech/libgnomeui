@@ -1,3 +1,9 @@
+1999-10-05  Russell Steinthal  <rms39@columbia.edu>
+	* gnome-dateedit.c (gnome_date_edit_get_date): Improve handling of
+	invalid times: don't segfault when there is no colon in a time,
+	default omitted trailing time fields (i.e. allow 8 for 8:00:00).
+	Allow entry of seconds.
+
 1999-10-03  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock.c (drag_floating): Realize, map and queue_resize the

@@ -463,7 +463,7 @@ create_children (GnomeDateEdit *gde)
 
 	gtk_widget_show (gde->date_button);
 
-	gde->time_entry = gtk_entry_new_with_max_length (9);
+	gde->time_entry = gtk_entry_new_with_max_length (12);
 	gtk_widget_set_usize (gde->time_entry, 88, 0);
 	gtk_box_pack_start (GTK_BOX (gde), gde->time_entry, TRUE, TRUE, 0);
 
@@ -566,8 +566,8 @@ gnome_date_edit_new_flags (time_t the_time, GnomeDateEditFlags flags)
 time_t
 gnome_date_edit_get_date (GnomeDateEdit *gde)
 {
-	struct tm tm;
-	char *str, *flags;
+	struct tm tm = {0};
+	char *str, *flags = NULL;
 
 	/* Assert, because we're just hosed if it's NULL */
 	g_assert(gde != NULL);
@@ -585,24 +585,33 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 		tm.tm_year -= 1900;
 
 	if (gde->flags & GNOME_DATE_EDIT_SHOW_TIME) {
-		char *tokp;
+		char *tokp, *temp;
 
 		str = g_strdup (gtk_entry_get_text (GTK_ENTRY (gde->time_entry)));
-		tm.tm_hour = atoi (strtok_r (str, ":", &tokp));
-		tm.tm_min  = atoi (strtok_r (NULL, ": ", &tokp));
-		flags = strtok_r (NULL, ":", &tokp);
+		temp = strtok_r (str, ": ", &tokp);
+		if (temp) {
+			tm.tm_hour = atoi (temp);
+			temp = strtok_r (NULL, ": ", &tokp);
+			if (temp) {
+				if (isdigit (*temp)) {
+					tm.tm_min = atoi (temp);
+					flags = strtok_r (NULL, ": ", &tokp);
+					if (flags && isdigit (*flags)) {
+						tm.tm_sec = atoi (flags);
+						flags = strtok_r (NULL, ": ", &tokp);
+					}
+				} else
+					flags = temp;
+			}
+		}
 
 		if (flags && (strcasecmp (flags, "PM") == 0)){
 			if (tm.tm_hour < 12)
 				tm.tm_hour += 12;
 		}
 		g_free (str);
-	} else {
-		tm.tm_hour = 0;
-		tm.tm_min  = 0;
 	}
 
-	tm.tm_sec = 0;
 	tm.tm_isdst = -1;
 
 	return mktime (&tm);
