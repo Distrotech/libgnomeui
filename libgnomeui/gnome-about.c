@@ -24,9 +24,7 @@
 
 /* Library must use dgettext, not gettext.  */
 #ifdef ENABLE_NLS
-#    ifdef HAVE_LIBINTL_H
-#       include <libintl.h>
-#    endif
+#    include <libintl.h>
 #    define _(String) dgettext (PACKAGE, String)
 #    ifdef gettext_noop
 #        define N_(String) gettext_noop (String)
