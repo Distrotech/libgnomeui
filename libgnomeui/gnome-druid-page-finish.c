@@ -460,7 +460,7 @@ gnome_druid_page_finish_set_watermark     (GnomeDruidPageFinish *druid_page_fini
 	g_return_if_fail (druid_page_finish != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_FINISH (druid_page_finish));
 
-	druid_page_finish->logo_image = watermark;
+	druid_page_finish->watermark_image = watermark;
 	gnome_canvas_item_set (druid_page_finish->watermark_item,
 			       "image", druid_page_finish->watermark_image, NULL);
 }

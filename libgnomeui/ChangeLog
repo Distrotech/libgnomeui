@@ -1,3 +1,8 @@
+1999-09-05    <jrb@redhat.com>
+
+	* gnome-druid-page-finish.c
+	(gnome_druid_page_finish_set_watermark): fix typo (thanks Damon).
+
 1999-09-04  Tim Gerla  <timg@means.net>
 
 	* gnome-pixmap-entry.c (gnome_pixmap_entry_new): Docs
