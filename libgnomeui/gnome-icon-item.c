@@ -784,6 +784,9 @@ gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
 
 	iti->selected = sel;
 
+	if (iti->selected == 0 && iti->editing)
+		iti_stop_editing (iti);
+
 	iti_queue_redraw (iti);
 }
 

@@ -1216,8 +1216,9 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 		"y2", y2,
 		NULL);
 
-	icons = gil_get_icons_in_region (gil, x1, y1, x2, y2);
 
+	icons = gil_get_icons_in_region (gil, x1, y1, x2, y2);
+		
 	for (l = gil->icon_list, idx = 0; l; l = l->next, idx++){
 		Icon *icon = l->data;
 

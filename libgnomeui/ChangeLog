@@ -1,3 +1,8 @@
+1998-10-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-item.c (gnome_icon_text_item_select): When we are
+	unselected, cancel any pending editing facility on the item.
+
 1998-10-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	(gnome_icon_list_icon_is_visible):  Small name function name
