@@ -101,17 +101,20 @@ void           gnome_icon_list_insert              (GnomeIconList *gil,
 						    int idx,
 						    const char *icon_filename,
 						    const char *text);
-
-void           gnome_icon_list_insert_pixbuf        (GnomeIconList *gil,
-						     int idx, GdkPixbuf *im,
-						     const char *text);
+void           gnome_icon_list_insert_pixbuf       (GnomeIconList *gil,
+						    int idx,
+						    GdkPixbuf *im,
+						    const char *icon_filename,
+						    const char *text);
 
 int            gnome_icon_list_append              (GnomeIconList *gil,
 						    const char *icon_filename,
 						    const char *text);
-int            gnome_icon_list_append_pixbuf        (GnomeIconList *gil,
-						     GdkPixbuf *im,
-						     const char *text);
+int            gnome_icon_list_append_pixbuf       (GnomeIconList *gil,
+						    GdkPixbuf *im,
+						    const char *icon_filename,
+						    const char *text);
+
 void           gnome_icon_list_clear               (GnomeIconList *gil);
 void           gnome_icon_list_remove              (GnomeIconList *gil,
 						    int idx);
@@ -142,6 +145,11 @@ void           gnome_icon_list_set_icon_border     (GnomeIconList *gil,
 						    int pixels);
 void           gnome_icon_list_set_separators      (GnomeIconList *gil,
 						    const char *sep);
+/* Icon filename. */
+gchar *        gnome_icon_list_get_icon_filename   (GnomeIconList *gil,
+						    int idx);
+int            gnome_icon_list_find_icon_from_filename (GnomeIconList *gil,
+							const char *filename);
 
 /* Attaching information to the icons */
 void           gnome_icon_list_set_icon_data       (GnomeIconList *gil,

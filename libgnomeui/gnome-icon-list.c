@@ -96,6 +96,9 @@ typedef struct {
 	GnomeCanvasPixbuf *image;
 	GnomeIconTextItem *text;
 
+	/* Filename of the icon file. */
+	gchar *icon_filename;
+
 	/* User data and destroy notify function */
 	gpointer data;
 	GtkDestroyNotify destroy;
@@ -961,7 +964,8 @@ height_changed (GnomeCanvasItem *item, Icon *icon)
 }
 
 static Icon *
-icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im, const char *text)
+icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
+		      const char *icon_filename, const char *text)
 {
 	GnomeIconListPrivate *priv;
 	GnomeCanvas *canvas;
@@ -973,6 +977,8 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im, const char *text)
 	group = GNOME_CANVAS_GROUP (canvas->root);
 
 	icon = g_new0 (Icon, 1);
+
+	icon->icon_filename = g_strdup (icon_filename);
 
 	icon->image = GNOME_CANVAS_PIXBUF (gnome_canvas_item_new (
 		group,
@@ -1017,6 +1023,7 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im, const char *text)
 	gtk_signal_connect (GTK_OBJECT (icon->text), "height_changed",
 			    GTK_SIGNAL_FUNC (height_changed),
 			    icon);
+
 	return icon;
 }
 
@@ -1031,7 +1038,7 @@ icon_new (Gil *gil, const char *icon_filename, const char *text)
 	else
 		im = NULL;
 
-	retval = icon_new_from_pixbuf (gil, im, text);
+	retval = icon_new_from_pixbuf (gil, im, icon_filename, text);
 
 	if(im)
 		gdk_pixbuf_unref(im);
@@ -1107,16 +1114,18 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 
 /**
  * gnome_icon_list_insert_pixbuf:
- * @gil:  An icon list.
- * @pos:  Position at which the new icon should be inserted.
- * @im:   Pixbuf image with the icon image.
- * @text: Text to be used for the icon's caption.
+ * @gil:      An icon list.
+ * @pos:      Position at which the new icon should be inserted.
+ * @im:       Pixbuf image with the icon image.
+ * @filename: Filename of the image file.
+ * @text:     Text to be used for the icon's caption.
  *
  * Inserts an icon in the specified icon list.  The icon is created from the
  * specified Imlib image, and it is inserted at the @pos index.
  */
 void
-gnome_icon_list_insert_pixbuf (GnomeIconList *gil, int pos, GdkPixbuf *im, const char *text)
+gnome_icon_list_insert_pixbuf (GnomeIconList *gil, int pos, GdkPixbuf *im,
+			       const char *icon_filename, const char *text)
 {
 	Icon *icon;
 
@@ -1124,7 +1133,7 @@ gnome_icon_list_insert_pixbuf (GnomeIconList *gil, int pos, GdkPixbuf *im, const
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (im != NULL);
 
-	icon = icon_new_from_pixbuf (gil, im, text);
+	icon = icon_new_from_pixbuf (gil, im, icon_filename, text);
 	icon_list_insert (gil, pos, icon);
 	return;
 }
@@ -1153,16 +1162,18 @@ gnome_icon_list_insert (GnomeIconList *gil, int pos, const char *icon_filename, 
 }
 
 /**
- * gnome_icon_list_append_imlib:
- * @gil:  An icon list.
- * @im:   Pixbuf image with the icon image.
- * @text: Text to be used for the icon's caption.
+ * gnome_icon_list_append_pixbuf:
+ * @gil:      An icon list.
+ * @im:       Pixbuf image with the icon image.
+ * @filename: Filename of the image file.
+ * @text:     Text to be used for the icon's caption.
  *
  * Appends an icon to the specified icon list.  The icon is created from
  * the specified Imlib image.
  */
 int
-gnome_icon_list_append_pixbuf (GnomeIconList *gil, GdkPixbuf *im, const char *text)
+gnome_icon_list_append_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
+			       const char *icon_filename, const char *text)
 {
 	Icon *icon;
 
@@ -1170,7 +1181,7 @@ gnome_icon_list_append_pixbuf (GnomeIconList *gil, GdkPixbuf *im, const char *te
 	g_return_val_if_fail (IS_GIL (gil), -1);
 	g_return_val_if_fail (im != NULL, -1);
 
-	icon = icon_new_from_pixbuf (gil, im, text);
+	icon = icon_new_from_pixbuf (gil, im, icon_filename, text);
 	return icon_list_append (gil, icon);
 }
 
@@ -1201,6 +1212,8 @@ icon_destroy (Icon *icon)
 {
 	if (icon->destroy)
 		(* icon->destroy) (icon->data);
+
+	g_free (icon->icon_filename);
 
 	gtk_object_destroy (GTK_OBJECT (icon->image));
 	gtk_object_destroy (GTK_OBJECT (icon->text));
@@ -2587,3 +2600,57 @@ gnome_icon_list_get_selection (GnomeIconList *gil)
 
 	return gil->_priv->selection;
 }
+
+
+/**
+ * gnome_icon_list_get_selection:
+ * @gil: An icon list.
+ * @idx: Index of an @icon.
+ *
+ * Returns the filename of the icon with index @idx.
+ */
+gchar *
+gnome_icon_list_get_icon_filename (GnomeIconList *gil, int idx)
+{
+	Icon *icon;
+
+	g_return_val_if_fail (gil != NULL, NULL);
+	g_return_val_if_fail (IS_GIL (gil), NULL);
+	g_return_val_if_fail (idx >= 0 && idx < gil->_priv->icons, NULL);
+
+	icon = g_array_index (gil->_priv->icon_list, Icon*, idx);
+	return icon->icon_filename;
+}
+
+
+/**
+ * gnome_icon_list_find_icon_from_filename:
+ * @gil:       An icon list.
+ * @filename:  Filename of an icon.
+ *
+ * Returns the index of the icon whose filename is @filename or -1 if
+ * there is no icon with this filename.
+ */
+int
+gnome_icon_list_find_icon_from_filename (GnomeIconList *gil,
+					 const gchar *filename)
+{
+	GnomeIconListPrivate *priv;
+	int n;
+	Icon *icon;
+
+	g_return_val_if_fail (gil != NULL, -1);
+	g_return_val_if_fail (IS_GIL (gil), -1);
+	g_return_val_if_fail (filename != NULL, -1);
+
+	priv = gil->_priv;
+
+	for (n = 0; n < priv->icon_list->len; n++) {
+		icon = g_array_index(priv->icon_list, Icon*, n);
+		if (!strcmp (icon->icon_filename, filename))
+			return n;
+	}
+
+	return -1;
+}
+

@@ -1,3 +1,15 @@
+2000-08-02  Martin Baulig  <baulig@suse.de>
+
+	* gnome-icon-list.c (gnome_icon_list_insert_pixbuf): Added
+	`image_filename' argument.
+	(gnome_icon_list_append_pixbuf): Likewise.
+	(gnome_icon_list_get_icon_filename): New function.
+	(gnome_icon_list_find_icon_from_filename): New function.
+
+	* gnome-icon-sel.c: Use gnome_icon_list_get_icon_filename()
+	instead of gnome_icon_list_get/set_icon_data().
+	* gnome-icon-selector.c: Likewise.
+
 2000-08-01  Martin Baulig  <baulig@suse.de>
 
 	Moved all deprecated files (i.e the ones that were linked into

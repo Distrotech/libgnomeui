@@ -256,10 +256,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 		return;
 	
 	pos = gnome_icon_list_append_pixbuf(GNOME_ICON_LIST(gis->_priv->gil), im,
-					    g_basename(path));
-	gnome_icon_list_set_icon_data_full(GNOME_ICON_LIST(gis->_priv->gil), pos, 
-					   g_strdup(path),
-					   (GtkDestroyNotify) g_free );
+					    path, g_basename(path));
 	gdk_pixbuf_unref(im); /* I'm so glad that gdk-pixbuf has eliminated the former lameness of imlib! :) */
 }
 
@@ -517,7 +514,7 @@ gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
   if ( sel ) {
     gchar * p;
     gint pos = GPOINTER_TO_INT(sel->data);
-    p = gnome_icon_list_get_icon_data(GNOME_ICON_LIST(gis->_priv->gil), pos);
+    p = gnome_icon_list_get_icon_filename(GNOME_ICON_LIST(gis->_priv->gil), pos);
     if (full_path) return p;
     else return g_basename(p);
   }
@@ -548,7 +545,7 @@ void  gnome_icon_selection_select_icon    (GnomeIconSelection * gis,
 
   while ( pos < icons ) {
     gchar * file = 
-      gnome_icon_list_get_icon_data(GNOME_ICON_LIST(gis->_priv->gil),pos);
+      gnome_icon_list_get_icon_filename(GNOME_ICON_LIST(gis->_priv->gil),pos);
     if ( strcmp(g_basename(file),filename) == 0 ) {
       gnome_icon_list_select_icon(GNOME_ICON_LIST(gis->_priv->gil), pos);
       return;
