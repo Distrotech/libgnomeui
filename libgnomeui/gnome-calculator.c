@@ -109,7 +109,7 @@ reduce_stack(GnomeCalculator *gc)
 	if(stack->type!=CALCULATOR_NUMBER)
 		return;
 
-	first = stack->d.number;
+	second = stack->d.number;
 
 	list=g_list_next(gc->stack);
 	if(!list)
@@ -119,23 +119,23 @@ reduce_stack(GnomeCalculator *gc)
 	if(stack->type==CALCULATOR_PARENTHESIS)
 		return;
 	if(stack->type!=CALCULATOR_FUNCTION) {
-		g_warning("Corrupt GnomeCalculator stack! (1)");
+		g_warning("Corrupt GnomeCalculator stack!");
 		return;
 	}
 	func = stack->d.func;
 
-	list=g_list_next(gc->stack);
+	list=g_list_next(list);
 	if(!list) {
-		g_warning("Corrupt GnomeCalculator stack! (2)");
+		g_warning("Corrupt GnomeCalculator stack!");
 		return;
 	}
 
 	stack = list->data;
 	if(stack->type!=CALCULATOR_NUMBER) {
-		g_warning("Corrupt GnomeCalculator stack! (3)");
+		g_warning("Corrupt GnomeCalculator stack!");
 		return;
 	}
-	second = stack->d.number;
+	first = stack->d.number;
 
 	stack_pop(&gc->stack);
 	stack_pop(&gc->stack);
@@ -171,8 +171,8 @@ set_result(GnomeCalculator *gc)
 		return;
 
 	gc->result = stack->d.number;
-	g_snprintf(gc->result_string,16,"% 15lg",gc->result);
 
+	g_snprintf(gc->result_string,16,"% 15lg",gc->result);
 	gtk_label_set(GTK_LABEL(gc->display),gc->result_string);
 }
 
@@ -266,6 +266,7 @@ reset_calc(GtkWidget *w, gpointer data)
 
 	gc->add_digit = TRUE;
 	push_input(gc);
+	set_result(gc);
 
 	return TRUE;
 }
@@ -285,6 +286,7 @@ clear_calc(GtkWidget *w, gpointer data)
 
 	gc->add_digit = TRUE;
 	push_input(gc);
+	set_result(gc);
 
 	return TRUE;
 }
@@ -432,15 +434,21 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gc->stack = NULL;
 	reset_calc(NULL,gc);
 
+	w = gtk_frame_new(NULL);
+	gtk_widget_show(w);
+
 	gc->display = gtk_label_new(gc->result_string);
 	gtk_widget_show(gc->display);
+	gtk_label_set_justify(GTK_LABEL(gc->display),GTK_JUSTIFY_RIGHT);
 
-	gtk_box_pack_start(GTK_BOX(gc),gc->display,FALSE,FALSE,5);
+	gtk_container_add(GTK_CONTAINER(w),gc->display);
+
+	gtk_box_pack_start(GTK_BOX(gc),w,FALSE,FALSE,0);
 
 	table = gtk_table_new(8,5,TRUE);
 	gtk_widget_show(table);
 
-	gtk_box_pack_start(GTK_BOX(gc),table,FALSE,FALSE,5);
+	gtk_box_pack_start(GTK_BOX(gc),table,FALSE,FALSE,0);
 
 	w=gtk_button_new_with_label("1/x");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",

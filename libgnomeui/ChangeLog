@@ -1,3 +1,8 @@
+Sun Apr 12 19:29:52 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.[ch]: killed a few bugs, seems to
+	  kind of work now
+
 Sun Apr 12 17:24:39 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.[ch]: added the beginnings of a
