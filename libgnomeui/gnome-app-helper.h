@@ -85,6 +85,12 @@ typedef struct _GnomeUIInfo GnomeUIInfo;
                               {GNOME_APP_UI_TOGGLEITEM, label, tip, cb, \
 			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
 			       0, 0, NULL}
+#define GNOMEUIINFO_HELP(name) \
+                              {GNOME_APP_UI_HELP, NULL, NULL, name, \
+                               NULL, NULL, 0, NULL, 0, 0, NULL}
+#define GNOMEUIINFO_SUBTREE(label, tree) \
+                              {GNOME_APP_UI_SUBTREE, label, NULL, tree, \
+                               NULL, NULL, 0, NULL, 0, 0, NULL}
 #define GNOMEUIINFO_RADIOLIST(list) \
                               {GNOME_APP_UI_RADIOITEMS, NULL, NULL, list, \
                                NULL, NULL, 0, NULL, 0, 0, NULL}
