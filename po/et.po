@@ -2,34 +2,36 @@
 # Copyright (C) 2002-2004 Free Software Foundation, Inc.
 # Tõivo Leedjärv <toivo@linux.ee>, 2002-2004.
 # Priit Laes <amd@tt.ee>, 2004.
+# Ivar Smolin <okul@linux.ee>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui Gnome 2.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-29 12:39+0100\n"
-"PO-Revision-Date: 2005-01-29 19:46+0300\n"
-"Last-Translator: Priit Laes <amd@tt.ee>\n"
+"PO-Revision-Date: 2005-02-10 18:22+0300\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "Tütarelement 1"
+msgstr "Tütarkirje 1"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr ""
+msgstr "Vihje kirjele 1"
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr "Tütarelement 2"
+msgstr "Tütarkirje 2"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr ""
+msgstr "Vihje kirjele 2"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
@@ -48,7 +50,7 @@ msgstr "Tõrge järjehoidja salvestamisel (%s)"
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Fail '%s' kohta ei saa teavet hankida: %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
@@ -102,7 +104,7 @@ msgstr "Autoriõiguse teade"
 
 #: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
-msgstr "Programmi autoriõiguste info"
+msgstr "Teave programmi autoriõiguste kohta"
 
 #: libgnomeui/gnome-about.c:401
 msgid "Comments string"
@@ -159,7 +161,7 @@ msgstr "Logo"
 
 #: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
-msgstr "Programmi logo (infoaknas)"
+msgstr "Programmi logo lähema teabe aknas)"
 
 #: libgnomeui/gnome-about.c:519
 #, c-format
@@ -250,7 +252,7 @@ msgstr "_Ava..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr "Ava fail"
+msgstr "Avab faili"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
@@ -259,7 +261,7 @@ msgstr "_Salvesta"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "Salvesta aktiivne fail"
+msgstr "Salvestab aktiivse faili"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
@@ -268,7 +270,7 @@ msgstr "Salvesta _kui..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Salvesta aktiivne fail teise nimega"
+msgstr "Salvestab aktiivse failo teise nimega"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -277,25 +279,25 @@ msgstr "_Taasta"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr "Taasta faili salvestatud versioon"
+msgstr "Taastab faili salvestatud versiooni"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr "_Prindi..."
+msgstr "_Trüki..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "Prindi aktiivne fail"
+msgstr "Trükib aktiivse faili"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Printimise h_äälestus..."
+msgstr "Trükkimise _sätted..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Häälesta paberi sätted oma printerile sobivaks"
+msgstr "Häälestab lehekülje sätted sinu printerile sobivaks"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -304,7 +306,7 @@ msgstr "S_ulge"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Sulge aktiivne fail"
+msgstr "Sulgeb aktiivse faili"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
@@ -323,7 +325,7 @@ msgstr "_Lõika"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "Lõika valik välja"
+msgstr "Lõikab valiku välja"
 
 #. 10
 #: libgnomeui/gnome-app-helper.c:161
@@ -332,7 +334,7 @@ msgstr "_Kopeeri"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Kopeeri valik"
+msgstr "Kopeerib valiku"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -341,7 +343,7 @@ msgstr "_Aseta"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "Aseta lõikelaua sisu"
+msgstr "Asetab lõikelaua sisu"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
@@ -350,7 +352,7 @@ msgstr "_Tühjenda"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr "Tühjenda valik"
+msgstr "Tühjendab valiku"
 
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
@@ -359,7 +361,7 @@ msgstr "_Unusta"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Unusta viimane tegevus"
+msgstr "Unustab viimase toimingu"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
@@ -368,7 +370,7 @@ msgstr "Uu_esti"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Taasta unustatud tegevus"
+msgstr "Taastab unustatud toimingu"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -377,7 +379,7 @@ msgstr "_Otsi..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr "Otsi stringi"
+msgstr "Otsib stringi"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
@@ -386,7 +388,7 @@ msgstr "Otsi _järgmine..."
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "Otsi sama stringi uuesti"
+msgstr "Otsib sama stringi uuesti"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
@@ -395,7 +397,7 @@ msgstr "A_senda..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr "Asenda string"
+msgstr "Asendab stringi"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
@@ -404,13 +406,13 @@ msgstr "_Omadused"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Redigeeri faili omadusi"
+msgstr "Redigeerib faili omadusi"
 
 #. * The Settings menu
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr "_Häälestus"
+msgstr "_Eelistused"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -435,7 +437,7 @@ msgstr "_Vali kõik"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr "Vali kõik"
+msgstr "Valib kõik"
 
 #. * Window menu
 #: libgnomeui/gnome-app-helper.c:234
@@ -444,7 +446,7 @@ msgstr "Loo uus _aken"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr "Loo uus aken"
+msgstr "Loob uue akna"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
@@ -453,7 +455,7 @@ msgstr "_Sulge see aken"
 #: libgnomeui/gnome-app-helper.c:240
 #: test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "Sulge aktiivne aken"
+msgstr "Sulgeb käesoleva akna"
 
 #. * The "Game" menu
 #: libgnomeui/gnome-app-helper.c:248
@@ -462,7 +464,7 @@ msgstr "_Uus mäng"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Alusta uut mängu"
+msgstr "Alustab uut mängu"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
@@ -470,7 +472,7 @@ msgstr "_Peata mäng"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Teeb mängu pausi"
+msgstr "Peatab mängu"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
@@ -478,7 +480,7 @@ msgstr "_Taasalusta mäng"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "Alusta mängu otsast peale"
+msgstr "Alustab mängu otsast peale"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
@@ -486,7 +488,7 @@ msgstr "Käik _tagasi"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Unusta viimati tehtud käik"
+msgstr "Unustab viimati tehtud käigu"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
@@ -494,7 +496,7 @@ msgstr "Käik _edasi"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Käi viimati tagasivõetud käik uuesti"
+msgstr "Käib viimati tagasivõetud käigu uuesti"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -511,7 +513,7 @@ msgstr "_Tulemused..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr "Vaatab tulemusi"
+msgstr "Näitab tulemusi"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
@@ -519,7 +521,7 @@ msgstr "_Lõpeta mäng"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Lõpetab praeguse mängu"
+msgstr "Lõpetab käesoleva mängu"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
@@ -588,31 +590,31 @@ msgstr " - sobib? (jah või ei)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr ""
+msgstr "Edenemine"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr ""
+msgstr "Rak ID"
 
 #: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr ""
+msgstr "Rakenduse ID string"
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
-msgstr ""
+msgstr "Edeneb"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr ""
+msgstr "Loob edenemise vidina."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
-msgstr ""
+msgstr "Olek"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr ""
+msgstr "Loob olekuvidina."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -620,11 +622,11 @@ msgstr "Interaktiivsus"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
-msgstr ""
+msgstr "Kasutaja vajaliku sekkumise tase."
 
 #: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Sinu HTTP proxi nõuab sisselogimist.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
@@ -632,6 +634,8 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Sa pead \"%s\" ligipääsuks sisse logima.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
@@ -644,7 +648,7 @@ msgstr "Sinu parool edastatakse krüpteeritult."
 #: libgnomeui/gnome-authentication-manager.c:78
 #: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
-msgstr ""
+msgstr "Autentimine on vajalik"
 
 #: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
@@ -654,11 +658,11 @@ msgstr ""
 #: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
+msgstr "Sa pead %s ligipääsuks sisse logima\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
-msgstr "Määra sessioonihalduse ID"
+msgstr "Seansihalduse ID määramine"
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
@@ -666,19 +670,19 @@ msgstr "ID"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
-msgstr ""
+msgstr "Salvestatud seadistuste eesliite määramine"
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
-msgstr "PREFIX"
+msgstr "EESLIIDE"
 
 #: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
-msgstr ""
+msgstr "Seansihalduri ühenduse keelamine"
 
 #: libgnomeui/gnome-client.c:975
 msgid "Session management"
-msgstr "Sessioonihaldus"
+msgstr "Seansihaldus"
 
 #: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
@@ -686,7 +690,7 @@ msgstr "Tühista väljalogimine"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr ""
+msgstr "Võeti vastu vigased värviandmed\n"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
@@ -715,27 +719,27 @@ msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
-msgstr ""
+msgstr "Alumine tund"
 
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
-msgstr ""
+msgstr "Alumine tund, mis määratakse ajavalimise hüpikaknale"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
-msgstr ""
+msgstr "Ülemine tund"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr ""
+msgstr "Ülemine tund, mis määratakse ajavalimise hüpikaknale"
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
-msgstr ""
+msgstr "Aja lähteväärtus"
 
 #: libgnomeui/gnome-dateedit.c:525
 msgid "The initial time"
-msgstr ""
+msgstr "Aja lähtestamisel kasutatav väärtus"
 
 #: libgnomeui/gnome-dateedit.c:739
 #: libgnomeui/gnome-scores.c:97
@@ -748,7 +752,7 @@ msgstr "Vali kuupäev"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr "Vali kalendrist kuupäev"
+msgstr "Kuupäeva valimine kalendrist"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -761,7 +765,7 @@ msgstr "Vali aeg"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr "Vali nimekirjast aeg"
+msgstr "Aja valimine loendist"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -778,7 +782,7 @@ msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr ""
+msgstr "Logopilt"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
@@ -835,37 +839,33 @@ msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Taustavärv"
+msgstr "Sisukorra taustavärv"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Taustavärv"
+msgstr "Sisukorra taustavärv"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
 msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Taustavärv"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "Taustavärv"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
-msgstr ""
+msgstr "Logo taustavärv"
 
 #: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
-msgstr ""
+msgstr "Logo taustavärv"
 
 #: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
@@ -1079,11 +1079,11 @@ msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr ""
+msgstr "GNOME GConf UI tugi"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "Ü_ksikasjad"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
@@ -1205,7 +1205,7 @@ msgstr ""
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: '%s' ei eksisteeri või tegemist pole kataloogiga"
+msgstr "GnomeIconSelection: '%s' ei ole olemas või pole tegemist kataloogiga"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1218,7 +1218,7 @@ msgstr "Ikoonide laadimine..."
 
 #: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
-msgstr "Info"
+msgstr "Teave"
 
 #: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
@@ -1250,7 +1250,7 @@ msgstr "_Parool:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr "Ühendu anonüümselt"
+msgstr "Ühendu _anonüümselt"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
@@ -1324,15 +1324,15 @@ msgstr "Tabeli täidis"
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr ""
+msgstr "Mummudega loend"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr ""
+msgstr "Numbriline loend"
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr ""
+msgstr "Joondus"
 
 #: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
@@ -1340,29 +1340,29 @@ msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
-msgstr "Info"
+msgstr "Programmist lähemalt"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Krahhidialoogi keelamine"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
-msgstr ""
+msgstr "X'i kuva, mida kasutada"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
-msgstr "DISPLAY"
+msgstr "KUVA"
 
 #: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
-msgstr ""
+msgstr "GNOME kasutajaliidese teek"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
+msgstr "Toimus mitu segmentimise viga, veadialoogi ei saa näidata\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1371,6 +1371,8 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
+"Segmentimise viga!\n"
+"Krahhidialoodi ei saa näidata\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1382,7 +1384,7 @@ msgid ""
 msgstr ""
 "GNOME'i sessioonihaldur (protsess nr %d) krahhis\n"
 "parandamatu vea tõttu (%s).\n"
-"Selle dialoogi sulgemisel lõpetatakse kõikide rakenduste töö ja sessioon lõppeb.\n"
+"Selle dialoogi sulgemisel lõpetatakse kõikide rakenduste töö ja seanss lõpeb.\n"
 "Enne selle dialoogi sulgemist salvesta palun kõik oma failid."
 
 #: libgnomeui/gnome_segv.c:112
@@ -1393,7 +1395,7 @@ msgstr "Rakendus \"%s\" lõpetas ootamatult."
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "protsess %d: %s"
 
 #: libgnomeui/gnome_segv.c:118
 #: libgnomeui/gnome_segv.c:123
@@ -1402,7 +1404,7 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Kasutamine: gnome_segv2 programmi_nimi signr\n"
+msgstr "Kasutamine: gnome_segv2 programminimi signr\n"
 
 #: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
