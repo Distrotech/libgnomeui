@@ -414,6 +414,7 @@ gnome_dock_item_realize (GtkWidget *widget)
 			   GDK_STRUCTURE_MASK);
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
   di->float_window = gdk_window_new (NULL, &attributes, attributes_mask);
+  gdk_window_set_transient_for(di->float_window, gdk_window_get_toplevel(widget->window));
   gdk_window_set_user_data (di->float_window, widget);
   gdk_window_set_decorations (di->float_window, 0);
   

@@ -1,3 +1,9 @@
+1998-12-16  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-dock-item.c (gnome_dock_item_realize): set transient for
+	the floating window so that it gets minimized with the dock-item's
+	toplevel (usually a GnomeApp).
+
 1998-12-15  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-rootwin.[ch]: Removed this before the freeze.
