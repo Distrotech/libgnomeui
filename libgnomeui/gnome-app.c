@@ -71,7 +71,7 @@ gnome_app_add (GtkContainer *container,
 	g_return_if_fail (widget != NULL);
 
 	/* Buggy sigh */
-/*	gnome_app_set_contents (GNOME_APP (container), widget); */
+	gnome_app_set_contents (GNOME_APP (container), widget);
 }
 
 static void
@@ -81,7 +81,7 @@ gnome_app_class_init(GnomeAppClass *appclass)
 	GtkContainerClass *container_class = GTK_CONTAINER_CLASS (appclass);
 		
 	object_class->destroy = gnome_app_destroy;
-	container_class->add = gnome_app_add;
+/*	container_class->add = gnome_app_add; */
 }
 
 static void
