@@ -1,0 +1,919 @@
+# Turkish translation of libgnomeui2.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Görkem Çetin <gorkem@gelecek.com.tr>, 2001.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui2 1.96.0\n"
+"POT-Creation-Date: 2001-06-02 14:12+0200\n"
+"PO-Revision-Date: 2001-06-02 14:12+0200\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-9\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: demos/mdi_demo.c:116
+msgid "Child Item 1"
+msgstr ""
+
+#: demos/mdi_demo.c:117
+msgid "Hint for item 1"
+msgstr ""
+
+#: demos/mdi_demo.c:119
+msgid "Child Item 2"
+msgstr ""
+
+#: demos/mdi_demo.c:120
+msgid "Hint for item 2"
+msgstr ""
+
+#: demos/winhints_demo.c:49
+msgid "wmhints-test"
+msgstr "wmhints-test"
+
+#: demos/winhints_demo.c:49
+msgid "winhints-test"
+msgstr "winhints-test"
+
+#: demos/winhints_demo.c:74
+msgid "Layer:"
+msgstr "Katman:"
+
+#: demos/winhints_demo.c:97
+msgid "Above Dock"
+msgstr ""
+
+#: demos/winhints_demo.c:101
+msgid "Dock"
+msgstr ""
+
+#: demos/winhints_demo.c:105
+msgid "On Top"
+msgstr "Üstte"
+
+#: demos/winhints_demo.c:109
+msgid "Normal"
+msgstr "Normal"
+
+#: demos/winhints_demo.c:113
+msgid "Below"
+msgstr "Altta"
+
+#: demos/winhints_demo.c:117
+msgid "Desktop"
+msgstr "Masaüstü"
+
+#: demos/winhints_demo.c:125
+msgid "Set Layer"
+msgstr ""
+
+#: demos/winhints_demo.c:132
+msgid "Workspaces:"
+msgstr "Çalýþma alanlarý:"
+
+#: demos/winhints_demo.c:154
+msgid "Sticky"
+msgstr "Yapýþkan"
+
+#: demos/winhints_demo.c:158
+msgid "Set Workspace"
+msgstr "Çalýþma Alaný Tanýmla"
+
+#: demos/winhints_demo.c:168
+msgid "State Toggles:"
+msgstr ""
+
+#: demos/winhints_demo.c:178
+msgid "Minimized"
+msgstr "Küçültülmüþ"
+
+#: demos/winhints_demo.c:182
+msgid "Maximized Vertical"
+msgstr "Dikey Büyütülmüþ"
+
+#: demos/winhints_demo.c:186
+msgid "Maximized Horizontal"
+msgstr ""
+
+#: demos/winhints_demo.c:190
+msgid "Hidden"
+msgstr "Gizli"
+
+#: demos/winhints_demo.c:194
+msgid "Shaded"
+msgstr "Toplu"
+
+#: demos/winhints_demo.c:198
+msgid "Fixed Position"
+msgstr "Sabit Konum"
+
+#: demos/winhints_demo.c:202
+msgid "Ignore on Arrange"
+msgstr "Düzenlerken Gözardý et"
+
+#: demos/winhints_demo.c:206
+msgid "Set State"
+msgstr ""
+
+#: demos/winhints_demo.c:212
+msgid "Skip Toggles:"
+msgstr ""
+
+#: demos/winhints_demo.c:222
+msgid "Skip Focus"
+msgstr ""
+
+#: demos/winhints_demo.c:226
+msgid "Skip Window Menu"
+msgstr ""
+
+#: demos/winhints_demo.c:230
+msgid "Skip Taskbar / WinList"
+msgstr ""
+
+#: demos/winhints_demo.c:234
+msgid "Set Skip"
+msgstr ""
+
+#: demos/winhints_demo.c:260 libgnomeui/gnome-about.c:1163
+msgid "About"
+msgstr "Hakkýnda"
+
+#: demos/winhints_demo.c:414
+msgid "WIN_HINTS Test"
+msgstr ""
+
+#: demos/winhints_demo.c:415
+msgid "Copyright (C) 1998"
+msgstr "Copyright (C) 1998"
+
+#: demos/winhints_demo.c:417
+msgid ""
+"Simple test app to check how the WIN_HINTS work.\n"
+"And to test the gnome_win_hints_* functions for errors. :)"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:353
+msgid "Author:"
+msgstr "Yazar:"
+
+#: libgnomeui/gnome-about.c:362 libgnomeui/gnome-about.c:366
+msgid "Authors:"
+msgstr "Yazarlar:"
+
+#: libgnomeui/gnome-about.c:745
+msgid "Authors: "
+msgstr "Yazarlar: "
+
+#: libgnomeui/gnome-about.c:1262 libgnomeui/gnome-href.c:398
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+
+#: libgnomeui/gnome-animator.c:136
+msgid "Loop type"
+msgstr ""
+
+#: libgnomeui/gnome-animator.c:137
+msgid "The type of loop the GnomeAnimator uses"
+msgstr ""
+
+#: libgnomeui/gnome-animator.c:145
+msgid "Direction"
+msgstr "Yön"
+
+#: libgnomeui/gnome-animator.c:146
+msgid "Animation direction"
+msgstr "Canlandýrma yönü"
+
+#: libgnomeui/gnome-animator.c:154
+msgid "Number of frames"
+msgstr "Çerçeve sayýsý"
+
+#: libgnomeui/gnome-animator.c:155
+msgid "Total number of frames in animation"
+msgstr ""
+
+#: libgnomeui/gnome-animator.c:163
+msgid "Current frame"
+msgstr "Þimdiki çerçeve"
+
+#: libgnomeui/gnome-animator.c:164
+msgid "Current frame number"
+msgstr "Þimdiki çerçeve numarasý"
+
+#: libgnomeui/gnome-animator.c:172 libgnomeui/gnome-animator.c:173
+msgid "Animation status"
+msgstr "Canlandýrma durumu"
+
+#: libgnomeui/gnome-animator.c:181
+msgid "Speed"
+msgstr "Hýz"
+
+#: libgnomeui/gnome-animator.c:182
+msgid "Animation speed"
+msgstr "Canlandýrma hýzý"
+
+#: libgnomeui/gnome-canvas-init.c:52
+msgid "Gdk debugging flags to set"
+msgstr "Kullanýlacak Gdk hata ayýklama bayraklarý"
+
+#: libgnomeui/gnome-canvas-init.c:52 libgnomeui/gnome-canvas-init.c:55
+#: libgnomeui/gnome-canvas-init.c:85 libgnomeui/gnome-canvas-init.c:88
+msgid "FLAGS"
+msgstr "BAYRAKLAR"
+
+#: libgnomeui/gnome-canvas-init.c:55
+msgid "Gdk debugging flags to unset"
+msgstr "Kullanýlmayacak Gdk hata ayýklama bayraklarý"
+
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:134
+msgid "X display to use"
+msgstr "Kullanýlacak X görüntüsü"
+
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:134
+msgid "DISPLAY"
+msgstr "GÖRÜNTÜ"
+
+#: libgnomeui/gnome-canvas-init.c:61
+msgid "Make X calls synchronous"
+msgstr "X çaðrýlarýný eþzamanlý yap"
+
+#: libgnomeui/gnome-canvas-init.c:64
+msgid "Don't use X shared memory extension"
+msgstr "X paylaþýmlý bellek eklentisini kullanma"
+
+#: libgnomeui/gnome-canvas-init.c:67
+msgid "Program name as used by the window manager"
+msgstr "Pencere yöneticisi tarafýndan kullanýlan program adý"
+
+#: libgnomeui/gnome-canvas-init.c:67
+msgid "NAME"
+msgstr "ÝSÝM"
+
+#: libgnomeui/gnome-canvas-init.c:70
+msgid "Program class as used by the window manager"
+msgstr "Pencere yöneticisi tarafýndan kullanýlan program sýnýfý"
+
+#: libgnomeui/gnome-canvas-init.c:70
+msgid "CLASS"
+msgstr "SINIF"
+
+#: libgnomeui/gnome-canvas-init.c:73
+msgid "HOST"
+msgstr "MAKÝNE"
+
+#: libgnomeui/gnome-canvas-init.c:76
+msgid "PORT"
+msgstr "PORT"
+
+#: libgnomeui/gnome-canvas-init.c:79 libgnomeui/gnome-canvas-init.c:82
+msgid "STYLE"
+msgstr "STÝL"
+
+#: libgnomeui/gnome-canvas-init.c:85
+msgid "Gtk+ debugging flags to set"
+msgstr ""
+
+#: libgnomeui/gnome-canvas-init.c:88
+msgid "Gtk+ debugging flags to unset"
+msgstr ""
+
+#: libgnomeui/gnome-canvas-init.c:91
+msgid "Make all warnings fatal"
+msgstr "Tüm uyarýlarý ölümcül olarak göster"
+
+#: libgnomeui/gnome-canvas-init.c:94
+msgid "Load an additional Gtk module"
+msgstr "Ek Gtk modülü yükle"
+
+#: libgnomeui/gnome-canvas-init.c:94
+msgid "MODULE"
+msgstr "MODÜL"
+
+#: libgnomeui/gnome-client.c:834
+msgid "Specify session management ID"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:834
+msgid "ID"
+msgstr "NO"
+
+#: libgnomeui/gnome-client.c:837
+msgid "Specify prefix of saved configuration"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:837
+msgid "PREFIX"
+msgstr "ÖNEK"
+
+#: libgnomeui/gnome-client.c:840
+msgid "Disable connection to session manager"
+msgstr "Oturum yöneticisine baðlantýyý iptal et"
+
+#: libgnomeui/gnome-client.c:852
+msgid "Session management"
+msgstr "Oturum yönetimi"
+
+#: libgnomeui/gnome-client.c:2343
+msgid "Cancel Logout"
+msgstr "Çýkmayý Ýptal Et"
+
+#: libgnomeui/gnome-color-picker.c:421
+msgid "Received invalid color data\n"
+msgstr ""
+
+#: libgnomeui/gnome-color-picker.c:485
+msgid "Pick a color"
+msgstr "Bir renk seçin"
+
+#: libgnomeui/gnome-dateedit.c:358
+msgid "Time"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:359
+msgid "The time currentlyselected"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:370
+msgid "DateEdit Flags"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:371
+msgid "Flags for how DateEdit looks"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:380
+msgid "Lower Hour"
+msgstr "Alt Saat"
+
+#: libgnomeui/gnome-dateedit.c:381
+msgid "Lower hour in the time popup selector"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:391
+msgid "Upper Hour"
+msgstr "Üst Saat"
+
+#: libgnomeui/gnome-dateedit.c:392
+msgid "Upper hour in the time popup selector"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:402
+msgid "Initial Time"
+msgstr "Ýlk Tarih"
+
+#: libgnomeui/gnome-dateedit.c:403
+msgid "The initial time"
+msgstr "Ýlk tarih"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:646
+msgid "Calendar"
+msgstr "Takvim"
+
+#: libgnomeui/gnome-dateedit.c:842
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+
+#: libgnomeui/gnome-ditem-edit.c:202
+msgid "Name:"
+msgstr "Ýsim:"
+
+#: libgnomeui/gnome-ditem-edit.c:215
+msgid "Comment:"
+msgstr "Açýklama:"
+
+#: libgnomeui/gnome-ditem-edit.c:225
+msgid "Command:"
+msgstr "Komut:"
+
+#: libgnomeui/gnome-ditem-edit.c:235
+msgid "Type:"
+msgstr "Tür:"
+
+#: libgnomeui/gnome-ditem-edit.c:252
+msgid "Icon:"
+msgstr "Simge:"
+
+#: libgnomeui/gnome-ditem-edit.c:277
+msgid "Run in Terminal"
+msgstr "Terminalde Çalýþtir"
+
+#: libgnomeui/gnome-ditem-edit.c:303
+msgid "Simple drag and drop"
+msgstr "Basit sürükle ve býrak"
+
+#: libgnomeui/gnome-ditem-edit.c:325
+#, c-format
+msgid ""
+"In the following commands you should use %s in the spot where the\n"
+"filename/URL should be substituted.  If you leave the field blank\n"
+"drops will not be accepted.  If this application can accept\n"
+"multiple files or URLs as arguments after its command name check the box "
+"above."
+msgstr ""
+
+#: libgnomeui/gnome-ditem-edit.c:337
+msgid "Command for file drops:"
+msgstr "Dosya taþýmalarý için komut:"
+
+#: libgnomeui/gnome-ditem-edit.c:347
+msgid "Drop one file at a time only."
+msgstr "Ayný anda sadece bir dosya taþýyýn."
+
+#: libgnomeui/gnome-ditem-edit.c:359
+msgid "Command for URL drops:"
+msgstr ""
+
+#: libgnomeui/gnome-ditem-edit.c:369
+msgid "Drop one URL at a time only."
+msgstr "Ayný anda sadece bir URL taþýyýn."
+
+#: libgnomeui/gnome-ditem-edit.c:482
+msgid "Try this before using:"
+msgstr ""
+
+#: libgnomeui/gnome-ditem-edit.c:492
+msgid "Documentation:"
+msgstr "Belgeler"
+
+#: libgnomeui/gnome-ditem-edit.c:502
+msgid "Window titles to wait for (comma separated):"
+msgstr ""
+
+#: libgnomeui/gnome-ditem-edit.c:512
+msgid "Name/Comment translations:"
+msgstr ""
+
+#: libgnomeui/gnome-ditem-edit.c:515
+msgid "Language"
+msgstr "Dil"
+
+#: libgnomeui/gnome-ditem-edit.c:516
+msgid "Name"
+msgstr "Ýsim"
+
+#: libgnomeui/gnome-ditem-edit.c:517
+msgid "Comment"
+msgstr "Açýklama"
+
+#: libgnomeui/gnome-ditem-edit.c:545
+msgid "Add/Set"
+msgstr "Ekle/Uygula"
+
+#: libgnomeui/gnome-ditem-edit.c:550 libgnomeui/gnome-stock-icons.c:261
+msgid "Remove"
+msgstr "Kaldýr"
+
+#: libgnomeui/gnome-ditem-edit.c:594
+msgid "Basic"
+msgstr "Temel"
+
+#: libgnomeui/gnome-ditem-edit.c:598
+msgid "Drag and Drop"
+msgstr "Sürükle ve Býrak"
+
+#: libgnomeui/gnome-ditem-edit.c:602
+msgid "Advanced"
+msgstr "Geliþmiþ"
+
+#: libgnomeui/gnome-druid-page-edge.c:352
+#: libgnomeui/gnome-druid-page-standard.c:301
+msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+
+#: libgnomeui/gnome-druid-page-edge.c:361
+msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+
+#: libgnomeui/gnome-font-picker.c:55
+msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+msgstr "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+
+#: libgnomeui/gnome-font-picker.c:56
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcÇçDdEeFfGgÐðHhIýÝiJjKkLlMmNnOoÖöPpRrSsÞþTtUuÜüVvYyZz"
+
+#: libgnomeui/gnome-font-picker.c:57
+msgid "Pick a Font"
+msgstr "Bir Yazýtipi Seçin"
+
+#: libgnomeui/gnome-font-picker.c:858 libgnomeui/gnome-stock-icons.c:279
+msgid "Font"
+msgstr "Yazýtipi"
+
+#: libgnomeui/gnome-gconf.c:476
+msgid "GNOME GConf Support"
+msgstr "GNOME GConf Desteði"
+
+#: libgnomeui/gnome-gconf.c:516
+#, c-format
+msgid ""
+"You attempted to change an aspect of your configuration that your system "
+"administrator or operating system vendor does not allow you to change. Some "
+"of the settings you have selected may not take effect, or may not be restored "
+"next time you use this application (%s)."
+msgstr ""
+
+#: libgnomeui/gnome-gconf.c:519
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"%s için yapýlandýrma bilgilerinin kaydedilmesi sýrasýnda bir hata oluþtu. "
+"Bazý yapýlandýrma ayalarlarý düzgün iþlemeyebilir."
+
+
+#: libgnomeui/gnome-gconf.c:541
+#, c-format
+msgid "GConf error details: %s\n"
+msgstr "GConf hata ayrýntýlarý: %s\n"
+
+#: libgnomeui/gnome-helpsys.c:114
+msgid "_Popup"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:115
+msgid "Show help in temporary popup windows"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:117
+msgid "_Embedded"
+msgstr "_Gömülü"
+
+#: libgnomeui/gnome-helpsys.c:118
+msgid "Show help inside the application window"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:120
+msgid "_Browser"
+msgstr "_Tarayýcý"
+
+#: libgnomeui/gnome-helpsys.c:121
+msgid "Show help in a help browser window"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:169
+msgid "App style"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:170
+msgid "The style of GnomeHelpView"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:179
+msgid "App style priority"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:180
+msgid "The priority of style of GnomeHelpView"
+msgstr ""
+
+#. orientation
+#: libgnomeui/gnome-helpsys.c:189 libgnomeui/gnome-helpsys.c:190
+#: libgnomeui/gnome-paper-selector.c:191
+msgid "Orientation"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:199
+msgid "Toplevel"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:200
+msgid "The toplevel widget"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:218 libgnomeui/gnome-stock-icons.c:274
+msgid "Help"
+msgstr "Yardým"
+
+#: libgnomeui/gnome-helpsys.c:219
+msgid "Show help for a specific region of the application"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:225
+msgid "Style"
+msgstr "Stil"
+
+#: libgnomeui/gnome-helpsys.c:226
+msgid "Change the way help is displayed"
+msgstr ""
+
+#: libgnomeui/gnome-helpsys.c:930 libgnomeui/gnome-helpsys.c:1033
+msgid "No help is available for the selected portion of the application."
+msgstr ""
+
+#. FIXME: properly handle the error!
+#: libgnomeui/gnome-helpsys.c:1207
+#, c-format
+msgid "Cought GnomeURL error: %s"
+msgstr ""
+
+#: libgnomeui/gnome-href.c:111
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:112
+msgid "The URL that GnomeHRef activates"
+msgstr ""
+
+#: libgnomeui/gnome-href.c:119
+msgid "Text"
+msgstr "Metin"
+
+#: libgnomeui/gnome-href.c:120
+msgid "The text on the button"
+msgstr ""
+
+#: libgnomeui/gnome-href.c:121
+msgid "End World Hunger"
+msgstr ""
+
+#: libgnomeui/gnome-init.c:92
+msgid "Bonobo UI"
+msgstr "Bonobo UI"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-init.c:497
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+
+#. paper size
+#: libgnomeui/gnome-paper-selector.c:159
+msgid "Paper Size"
+msgstr "Sayfa Boyu"
+
+#: libgnomeui/gnome-paper-selector.c:213
+msgid "Portrait"
+msgstr "Portre"
+
+#: libgnomeui/gnome-paper-selector.c:233
+msgid "Landscape"
+msgstr ""
+
+#. margins
+#: libgnomeui/gnome-paper-selector.c:241
+msgid "Margins"
+msgstr ""
+
+#: libgnomeui/gnome-paper-selector.c:253
+msgid "Top:"
+msgstr "Üst:"
+
+#: libgnomeui/gnome-paper-selector.c:266
+msgid "Bottom:"
+msgstr "Alt:"
+
+#: libgnomeui/gnome-paper-selector.c:279
+msgid "Left:"
+msgstr "Sol:"
+
+#: libgnomeui/gnome-paper-selector.c:292
+msgid "Right:"
+msgstr "Sað:"
+
+#. Scaling
+#: libgnomeui/gnome-paper-selector.c:306
+msgid "Scaling"
+msgstr "Oranlama"
+
+#: libgnomeui/gnome-paper-selector.c:321
+msgid "Fit to Page"
+msgstr "Sayfaya Sýðdýr"
+
+#: libgnomeui/gnome-paper-selector.c:810
+#, c-format
+msgid "%0.3g%s x %0.3g%s"
+msgstr ""
+
+#: libgnomeui/gnome-paper-selector.c:1040
+msgid "Page Setup"
+msgstr "Sayfa Ayarlarý"
+
+#: libgnomeui/gnome-popup-help.c:56
+msgid "_Help with this"
+msgstr "Y_ardýmý göster"
+
+#: libgnomeui/gnome-popup-help.c:62
+msgid "Cu_t"
+msgstr "K_es"
+
+#: libgnomeui/gnome-popup-help.c:64
+msgid "_Copy"
+msgstr "_Kopyala"
+
+#: libgnomeui/gnome-popup-help.c:66
+msgid "_Paste"
+msgstr "_Yapýþtýr"
+
+#. to be kept in sync with GtkCornerType enumeration
+#: libgnomeui/gnome-pouch.c:782
+msgid "Top left"
+msgstr "Üst sol"
+
+#: libgnomeui/gnome-pouch.c:783
+msgid "Bottom left"
+msgstr "Alt sol"
+
+#: libgnomeui/gnome-pouch.c:784
+msgid "Top right"
+msgstr "Üst sað"
+
+#: libgnomeui/gnome-pouch.c:785
+msgid "Bottom right"
+msgstr "Alt sað"
+
+#. to be kept in sync with GtkOrientation enumeration
+#: libgnomeui/gnome-pouch.c:796
+msgid "Horizontal"
+msgstr "Yatay"
+
+#: libgnomeui/gnome-pouch.c:797
+msgid "Vertical"
+msgstr "Dikey"
+
+#: libgnomeui/gnome-pouch.c:807
+msgid "Icon position"
+msgstr "Simge konumu"
+
+#: libgnomeui/gnome-pouch.c:808
+msgid "Icon orientation"
+msgstr ""
+
+#: libgnomeui/gnome-pouch.c:810
+msgid "Tile children"
+msgstr ""
+
+#: libgnomeui/gnome-pouch.c:811
+msgid "Cascade children"
+msgstr ""
+
+#: libgnomeui/gnome-pouch.c:813
+msgid "Arrange icons"
+msgstr "Simgeleri düzenle"
+
+#: libgnomeui/gnome-pouch.c:814
+msgid "Autoarrange icons"
+msgstr "Simgeleri otomatik düzenle"
+
+#: libgnomeui/gnome-recently-used.c:111
+msgid "App Specific"
+msgstr "Uygulamaya Özel"
+
+#: libgnomeui/gnome-recently-used.c:112
+msgid "Is this list application specific"
+msgstr ""
+
+#: libgnomeui/gnome-recently-used.c:893
+#, c-format
+msgid "bad GnomeRecentDocument attribute: %s\n"
+msgstr "hatalý GnomeRecentDocument özelliði: %s\n"
+
+#: libgnomeui/gnome-recently-used.c:1123
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+#: libgnomeui/gnome_segv.c:91
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session will "
+"exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:101
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:110
+msgid "Usage: gnome_segv appname signum\n"
+msgstr "Kullaným: gnome_segv uyg_adý sinyal_num\n"
+
+#: libgnomeui/gnome_segv.c:126
+msgid "Submit a bug report"
+msgstr "Bir hata raporu gönderin"
+
+#: libgnomeui/gnome_segv.c:137
+msgid "Debug"
+msgstr "Hata ayýkla"
+
+#: libgnomeui/gnome_segv.c:145
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr ""
+
+#: libgnomeui/oafgnome.c:242
+msgid "Username:"
+msgstr "Kullanýcý adý:"
+
+#: libgnomeui/oafgnome.c:256
+msgid "Password:"
+msgstr ""
+
+#: components/gnome-image-entry-component.c:517
+#: components/gnome-image-entry-component.c:534
+msgid "No Image"
+msgstr ""
+
+#: libgnomeui/gnome-selector-component.c:463
+msgid "Browse..."
+msgstr "Gözat..."
+
+#: libgnomeui/gnome-selector-component.c:477
+msgid "Default..."
+msgstr "Öntanýmlý..."
+
+#: libgnomeui/gnome-selector-component.c:493
+msgid "Clear..."
+msgstr "Temizle..."
+
+#: libgnomeui/gnome-stock-icons.c:258
+msgid "Add"
+msgstr "Ekle"
+
+#: libgnomeui/gnome-stock-icons.c:259
+msgid "Clear"
+msgstr "Temizle"
+
+#: libgnomeui/gnome-stock-icons.c:260
+msgid "Select Color"
+msgstr "Rengi Seç"
+
+#: libgnomeui/gnome-stock-icons.c:262
+msgid "Table Borders"
+msgstr "Tablo Kenarlarý"
+
+#: libgnomeui/gnome-stock-icons.c:263
+msgid "Table Fill"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:264
+msgid "Bulleted List"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:265
+msgid "Numbered List"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:266
+msgid "Indent"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:267
+msgid "Un-Indent"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:268
+msgid "OK"
+msgstr "Tamam"
+
+#: libgnomeui/gnome-stock-icons.c:269
+msgid "Apply"
+msgstr "Uygula"
+
+#: libgnomeui/gnome-stock-icons.c:270
+msgid "Cancel"
+msgstr "Ýptal"
+
+#: libgnomeui/gnome-stock-icons.c:271
+msgid "Close"
+msgstr "Kapat"
+
+#: libgnomeui/gnome-stock-icons.c:272
+msgid "Yes"
+msgstr "Evet"
+
+#: libgnomeui/gnome-stock-icons.c:273
+msgid "No"
+msgstr "Hayýr"
+
+#: libgnomeui/gnome-stock-icons.c:275
+msgid "Next"
+msgstr "Ýleri"
+
+#: libgnomeui/gnome-stock-icons.c:276
+msgid "Prev"
+msgstr "Geri"
+
+#: libgnomeui/gnome-stock-icons.c:277
+msgid "Up"
+msgstr "Yukarý"
+
+#: libgnomeui/gnome-stock-icons.c:278
+msgid "Down"
+msgstr "Aþaðý"
+
