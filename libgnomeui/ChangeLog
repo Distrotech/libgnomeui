@@ -1,7 +1,18 @@
 2001-04-11  Martin Baulig  <baulig@suse.de>
 
+	* gnome-helpsys.c (gnome_help_view_find_help_id): Use
+	gnome_program_locate_file() instead of gnome_datadir_file().
+	(gnome_help_path_resolve, gnome_help_app_topics): Use
+	gnome_program_locate_file() instead of gnome_help_file().
+
+	* gnome-init.c (libgnomeui_rc_parse): Use gnome_program_locate_file()
+	instead of gnome_datadir_file().
+
+	* gnome-icon-selector.c (gnome_icon_selector_add_defaults): Use
+	gnome_program_locate_file() to get a list of all pixmap dirs.
+
 	* gnome-about.c (gnome_about_load_logo): Use
-	gnome_program_local_file() instead of gnome_pixmap_file ().
+	gnome_program_locate_file() instead of gnome_pixmap_file().
 	* gnome-app-helper.c (create_pixmap): Likewise.
 	* gnome-app-util.c (gnome_window_set_icon_from_file): Likewise.
 	* gnome-stock.c (gnome_stock_pixmap_entry_get_gdk_pixbuf): Likewise.

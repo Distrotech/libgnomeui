@@ -385,14 +385,18 @@ libgnomeui_rc_parse (gchar *command)
 	sprintf(apprc, "%src", buf);
 	
 	/* <gnomedatadir>/gtkrc */
-	file = gnome_datadir_file("gtkrc");
+        file = gnome_program_locate_file (gnome_program_get (),
+                                          GNOME_FILE_DOMAIN_DATADIR,
+                                          "gtkrc", TRUE, NULL);
   	if (file) {
   		gtk_rc_add_default_file (file); 
 		g_free (file);
 	}
 
 	/* <gnomedatadir>/<progname> */
-	file = gnome_datadir_file(apprc);
+        file = gnome_program_locate_file (gnome_program_get (),
+                                          GNOME_FILE_DOMAIN_DATADIR,
+                                          apprc, TRUE, NULL);
 	if (file) {
                 gtk_rc_add_default_file (file);
                 g_free (file);

@@ -1122,8 +1122,10 @@ gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id)
   g_snprintf(buf, sizeof(buf),
 	     "help/%s/widget-help-map.txt",
 	     gnome_program_get_name(gnome_program_get()));
-  filename = gnome_datadir_file(buf);
-  
+  filename = gnome_program_locate_file (gnome_program_get (),
+					GNOME_FILE_DOMAIN_DATADIR,
+					buf, TRUE, NULL);
+
   if(filename == NULL) {
     /* Search the current directory as well */
     if (g_file_test ("widget-help-map.txt", G_FILE_TEST_EXISTS))
@@ -1271,7 +1273,9 @@ gnome_help_path_resolve(const char *path, const char *file_type)
       lang = language_list->data;
 		
       g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/%s.%s", appname, lang, filepath, file_type);
-      res = gnome_help_file (fnbuf);
+      res = gnome_program_locate_file (gnome_program_get (),
+				       GNOME_FILE_DOMAIN_HELP,
+				       fnbuf, TRUE, NULL);
     }
 
   if(res)
@@ -1308,7 +1312,9 @@ gnome_help_app_topics(const char *app_id)
       lang = language_list->data;
 		
       g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/topic.list", app_id, lang);
-      topicfn = gnome_help_file (fnbuf);
+      topicfn = gnome_program_locate_file (gnome_program_get (),
+					   GNOME_FILE_DOMAIN_HELP,
+					   fnbuf, TRUE, NULL);
 
 /*        language_list = language_list->next;  */
     }
