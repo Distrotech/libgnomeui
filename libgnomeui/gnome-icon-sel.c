@@ -105,7 +105,6 @@ gnome_icon_selection_init (GnomeIconSelection *gis)
 	gtk_widget_set_usize(gis->gil,350,300);
 	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(gis->gil),
 					   GTK_SELECTION_SINGLE);
-	gnome_icon_list_thaw(GNOME_ICON_LIST(gis->gil));
 	gtk_box_pack_start(GTK_BOX(box),gis->gil,TRUE,TRUE,0);
 
 	gtk_widget_show(gis->gil);

@@ -1,5 +1,8 @@
 1998-11-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-icon-sel.c (gnome_icon_selection_init): Fix to the new
+	behaviour of GnomeIconList.
+
 	* gnome-icon-list.c: Frozen tests are now done by comparing the
 	sign, not comparing different than zero.
 	(gil_init): IconList no longer starts in frozen state by popular demand.
