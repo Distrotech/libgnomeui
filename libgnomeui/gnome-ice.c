@@ -7,7 +7,7 @@
 #include <X11/ICE/ICElib.h>
 #endif /* HAVE_LIBSM */
 
-#include "gnome.h"
+#include <gtk/gtk.h>
 #include "gnome-ice.h"
 
 /* True if we've started listening to ICE.  */

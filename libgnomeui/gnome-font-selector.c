@@ -22,8 +22,10 @@
 #include <string.h>
 #include <X11/Xlib.h>
 #include <gdk/gdkx.h>
-#include "gnome.h"
 #include "gnome-font-selector.h"
+#include "libgnome/libgnome.h"
+#include "gnome-app.h"
+#include "gnome-app-helper.h"
 #include "gdk/gdkkeysyms.h"
 
 #define FONT_LIST_WIDTH  125

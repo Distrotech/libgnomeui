@@ -7,7 +7,7 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include "gnome.h"
+#include "libgnome/libgnome.h"
 #include "gnome-client.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkprivate.h>

@@ -57,8 +57,8 @@ struct _GnomePropertyBoxClass
 {
 	GnomeDialogClass parent_class;
 
-	void (* apply) (GnomePropertyBox *propertybox);
-	void (* help)  (GnomePropertyBox *propertybox);
+	void (* apply) (GnomePropertyBox *propertybox, gint button_num);
+	void (* help)  (GnomePropertyBox *propertybox, gint page_num);
 };
 
 guint     gnome_property_box_get_type (void);

@@ -130,6 +130,9 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 
 	gtk_object_class_add_signals (object_class, property_box_signals,
 				      LAST_SIGNAL);
+
+	klass->apply = NULL;
+	klass->help = NULL;
 }
 
 static void
@@ -268,7 +271,7 @@ global_apply (GnomePropertyBox *property_box)
 {
 	GList *list;
 	GnomePropertyBoxItem *item = NULL; /* fixes a warning */
-	int n = 0;
+	gint n = 0;
 
 	g_return_if_fail(property_box->items != NULL);
 
@@ -288,7 +291,7 @@ global_apply (GnomePropertyBox *property_box)
 	/* Emit an apply signal with a button of -1.  This means we
 	   just finished a global apply.  Is this a hack?  */
 	gtk_signal_emit (GTK_OBJECT (property_box),
-			 property_box_signals[APPLY], -1);
+			 property_box_signals[APPLY], (gint) -1);
 
 	/* Doesn't matter which item we use. */
 	set_sensitive (property_box, item);

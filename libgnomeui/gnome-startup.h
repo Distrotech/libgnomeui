@@ -4,6 +4,10 @@
 #ifndef GNOME_STARTUP_H
 #define GNOME_STARTUP_H
 
+#include <libgnome/gnome-defs.h>
+
+BEGIN_GNOME_DECLS
+
 /* This function is used by configurator programs that set some global
    X server state.  The general idea is that such a program can be run
    in an `initialization' mode, where it sets the server state
@@ -16,5 +20,7 @@
 
 gboolean gnome_startup_acquire_token (const gchar *property_name,
 				      const gchar *sm_id);
+
+END_GNOME_DECLS
 
 #endif /* GNOME_STARTUP_H */
