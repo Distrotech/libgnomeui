@@ -1,3 +1,6 @@
+2000-03-01  Cody Russell  <bratsche@dfw.net>
+	* gnome-ditem-edit.c: Fixed a couple typos; gtk_entry -> GTK_ENTRY
+
 Fri Feb 25 03:29:15 2000  George Lebl <jirka@5z.com>
 
 	* gnome-icon-entry.[ch]: made the interface sane, made privates
