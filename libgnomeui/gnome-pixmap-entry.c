@@ -54,7 +54,7 @@
 #include "gnome-pixmap-entry.h"
 #include "gnome-pixmap.h"
 
-#include <libgnomevfs/gnome-vfs-mime.h>
+#include <libgnomevfs/gnome-vfs-uri.h>
 
 struct _GnomePixmapEntryPrivate {
 	GtkWidget *preview;

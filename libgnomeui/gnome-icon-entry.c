@@ -55,7 +55,7 @@
 
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
-#include <libgnomevfs/gnome-vfs-mime.h>
+#include <libgnomevfs/gnome-vfs-ops.h>
 
 #include "gnome-file-entry.h"
 #include "gnome-icon-list.h"
@@ -705,6 +705,7 @@ drag_data_received (GtkWidget        *widget,
 {
 	GList *uris, *li;
 	GnomeVFSURI *uri = NULL;
+	GnomeVFSFileInfo *file_info;
 
 	/*here we extract the filenames from the URI-list we recieved*/
 	uris = gnome_vfs_uri_list_parse (selection_data->data);
@@ -722,7 +723,12 @@ drag_data_received (GtkWidget        *widget,
 		}
 
 		path = gnome_vfs_uri_get_path (uri);
-		mimetype = gnome_vfs_get_mime_type_from_file_data (uri);
+		file_info = gnome_vfs_file_info_new ();
+		/* FIXME: OK to do synchronous I/O on a possibly-remote URI here? */
+		gnome_vfs_get_file_info_uri (uri, file_info,
+					     GNOME_VFS_FILE_INFO_GET_MIME_TYPE | 
+					     GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+		mimetype = gnome_vfs_file_info_get_mime_type (file_info);
 
 		if (mimetype != NULL &&
 		    strcmp (mimetype, "application/x-gnome-app-info") == 0) {
@@ -784,10 +790,13 @@ drag_data_received (GtkWidget        *widget,
 				g_free (full);
 			}
 		} else if (gnome_icon_entry_set_filename (ientry, path)) {
+			gnome_vfs_file_info_unref (file_info);
 			break;
 		}
 		uri = NULL;
+		gnome_vfs_file_info_unref (file_info);
 	}
+
 
 	/*if there's isn't a file*/
 	if (uri == NULL) {

@@ -37,7 +37,7 @@
 #include <unistd.h>
 #include <sys/param.h>
 #include <sys/types.h>
-#include <libgnomevfs/gnome-vfs-mime.h>
+#include <libgnomevfs/gnome-vfs-uri.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>

@@ -40,7 +40,7 @@
 
 #include "gnome-icon-sel.h"
 
-#include <libgnomevfs/gnome-vfs-mime.h>
+#include <libgnomevfs/gnome-vfs-ops.h>
 
 #define ICON_SIZE 48
 
@@ -306,12 +306,22 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
 
   while ( (de = readdir(dp)) != NULL ) {
     const char *mimetype;
+    char *uri;
+    GnomeVFSFileInfo *info;
+
 #ifdef GNOME_ENABLE_DEBUG
     g_print("File: %s\n", de->d_name);
 #endif
     if ( *(de->d_name) == '.' ) continue; /* skip dotfiles */
 
-    mimetype = gnome_vfs_mime_type_from_name(de->d_name);
+    uri = g_filename_to_uri (de->d_name, "localhost", NULL);
+    info = gnome_vfs_file_info_new ();
+    /* FIXME: OK to do synchronous I/O here? */
+    gnome_vfs_get_file_info (uri, info, GNOME_VFS_FILE_INFO_GET_MIME_TYPE | 
+			     GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+    mimetype = info->mime_type;
+    g_free (uri);
+
     if (mimetype != NULL &&
 	strncmp(mimetype, "image", strlen("image")) == 0 ) {
       gchar * full_path = g_build_filename (dir, de->d_name, NULL);
@@ -327,6 +337,7 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
       }
       g_free(full_path);
     }
+    gnome_vfs_file_info_unref (info);
   }
 
   closedir(dp);

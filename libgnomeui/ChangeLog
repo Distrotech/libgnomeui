@@ -1,3 +1,9 @@
+2001-11-05  Maciej Stachowiak  <mjs@noisehavoc.org>
+
+	* gnome-file-entry.c, gnome-pixmap-entry.c, gnome-icon-entry.c,
+	gnome-icon-sel.c: Stop including gnome-vfs module API headers; use
+	preferred public functions where needed / appropriate.
+
 2001-11-01  Mark McLoughlin  <mark@skynet.ie>
 
 	* gnome-app-helper.c: (help_view_display_callback): update for
