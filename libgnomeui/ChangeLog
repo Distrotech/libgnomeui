@@ -1,5 +1,6 @@
 1998-11-23  Jeff Garzik  <jgarzik@pobox.com>
 
+	* gnome-canvas.c, gnome-client.c: Added API doc stubs.
 	* gnome-calculator.[ch]: Changed gnome_calculator_clear() reset arg
 	  from a gint to a gboolean, reformatted a bit, and added const'ness.
 	  No gnome apps appear to depend on this function.

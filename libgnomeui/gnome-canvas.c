@@ -152,6 +152,19 @@ gnome_canvas_item_init (GnomeCanvasItem *item)
 	item->object.flags |= GNOME_CANVAS_ITEM_VISIBLE;
 }
 
+
+/**
+ * gnome_canvas_item_new
+ * @parent:
+ * @type:
+ * @first_arg_name:
+ * @...:
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
+
 GnomeCanvasItem *
 gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, const gchar *first_arg_name, ...)
 {
@@ -170,6 +183,19 @@ gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, const gchar *firs
 
 	return item;
 }
+
+
+/**
+ * gnome_canvas_item_newv
+ * @parent:
+ * @type:
+ * @nargs:
+ * @args:
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
 
 GnomeCanvasItem *
 gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type, guint nargs, GtkArg *args)
@@ -199,6 +225,17 @@ item_post_create_setup (GnomeCanvasItem *item)
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	item->canvas->need_repick = TRUE;
 }
+
+
+/**
+ * gnome_canvas_item_construct
+ * @item:
+ * @parent:
+ * @first_arg_name:
+ * @args:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar *first_arg_name, va_list args)
@@ -236,6 +273,17 @@ gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, co
 	item_post_create_setup (item);
 }
  
+
+/**
+ * gnome_canvas_item_constructv
+ * @item:
+ * @parent:
+ * @nargs:
+ * @args:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_constructv(GnomeCanvasItem *item, GnomeCanvasGroup *parent,
 			     guint nargs, GtkArg *args)
@@ -350,6 +398,16 @@ gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoin
 				 func_data);
 }
 
+
+/**
+ * gnome_canvas_item_set
+ * @item:
+ * @first_arg_name:
+ * @...:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 {
@@ -359,6 +417,16 @@ gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 	gnome_canvas_item_set_valist (item, first_arg_name, args);
 	va_end (args);
 }
+
+
+/**
+ * gnome_canvas_item_set_valist
+ * @item:
+ * @first_arg_name:
+ * @args:
+ *
+ * Description:
+ **/
 
 void 
 gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name, va_list args)
@@ -398,6 +466,16 @@ gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name
 }
 
 
+
+/**
+ * gnome_canvas_item_setv
+ * @item:
+ * @nargs:
+ * @args:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
 {
@@ -407,6 +485,16 @@ gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
 
 	item->canvas->need_repick = TRUE;
 }
+
+
+/**
+ * gnome_canvas_item_move
+ * @item:
+ * @dx:
+ * @dy:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
@@ -478,6 +566,15 @@ put_item_after (GList *link, GList *before)
 	}
 }
 
+
+/**
+ * gnome_canvas_item_raise
+ * @item:
+ * @positions:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_raise (GnomeCanvasItem *item, int positions)
 {
@@ -506,6 +603,15 @@ gnome_canvas_item_raise (GnomeCanvasItem *item, int positions)
 	redraw_if_visible (item);
 	item->canvas->need_repick = TRUE;
 }
+
+
+/**
+ * gnome_canvas_item_lower
+ * @item:
+ * @positions:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_item_lower (GnomeCanvasItem *item, int positions)
@@ -536,6 +642,14 @@ gnome_canvas_item_lower (GnomeCanvasItem *item, int positions)
 	item->canvas->need_repick = TRUE;
 }
 
+
+/**
+ * gnome_canvas_item_raise_to_top
+ * @item:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_raise_to_top (GnomeCanvasItem *item)
 {
@@ -557,6 +671,14 @@ gnome_canvas_item_raise_to_top (GnomeCanvasItem *item)
 	redraw_if_visible (item);
 	item->canvas->need_repick = TRUE;
 }
+
+
+/**
+ * gnome_canvas_item_lower_to_bottom
+ * @item:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_item_lower_to_bottom (GnomeCanvasItem *item)
@@ -580,6 +702,14 @@ gnome_canvas_item_lower_to_bottom (GnomeCanvasItem *item)
 	item->canvas->need_repick = TRUE;
 }
 
+
+/**
+ * gnome_canvas_item_show
+ * @item:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_show (GnomeCanvasItem *item)
 {
@@ -595,6 +725,14 @@ gnome_canvas_item_show (GnomeCanvasItem *item)
 	item->canvas->need_repick = TRUE;
 }
 
+
+/**
+ * gnome_canvas_item_hide
+ * @item:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_hide (GnomeCanvasItem *item)
 {
@@ -609,6 +747,19 @@ gnome_canvas_item_hide (GnomeCanvasItem *item)
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	item->canvas->need_repick = TRUE;
 }
+
+
+/**
+ * gnome_canvas_item_grab
+ * @item:
+ * @event_mask:
+ * @cursor:
+ * @etime:
+ *
+ * Description:
+ *
+ * Returns:
+ **/
 
 int
 gnome_canvas_item_grab (GnomeCanvasItem *item, guint event_mask, GdkCursor *cursor, guint32 etime)
@@ -642,6 +793,15 @@ gnome_canvas_item_grab (GnomeCanvasItem *item, guint event_mask, GdkCursor *curs
 	return retval;
 }
 
+
+/**
+ * gnome_canvas_item_ungrab
+ * @item:
+ * @etime:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime)
 {
@@ -655,6 +815,16 @@ gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime)
 
 	gdk_pointer_ungrab (etime);
 }
+
+
+/**
+ * gnome_canvas_item_w2i
+ * @item:
+ * @x:
+ * @y:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y)
@@ -676,6 +846,16 @@ gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y)
 		item = item->parent;
 	}
 }
+
+
+/**
+ * gnome_canvas_item_i2w
+ * @item:
+ * @x:
+ * @y:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
@@ -717,6 +897,15 @@ is_descendant (GnomeCanvasItem *item, GnomeCanvasItem *parent)
  * This moves the item from its current group to the group specified
  * in NEW_GROUP.
  */
+
+/**
+ * gnome_canvas_item_reparent
+ * @item:
+ * @new_group:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 {
@@ -788,6 +977,18 @@ gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
 	gtk_widget_grab_focus (GTK_WIDGET (item->canvas));
 }
 
+
+/**
+ * gnome_canvas_item_get_bounds
+ * @item:
+ * @x1:
+ * @y1:
+ * @x2:
+ * @y2:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
@@ -850,6 +1051,15 @@ static void   gnome_canvas_group_bounds      (GnomeCanvasItem *item, double *x1,
 
 static GnomeCanvasItemClass *group_parent_class;
 
+
+
+/**
+ * gnome_canvas_group_get_type
+ *
+ * Description:
+ *
+ * Returns:
+ **/
 
 GtkType
 gnome_canvas_group_get_type (void)
@@ -1305,6 +1515,15 @@ group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 		}
 }
 
+
+/**
+ * gnome_canvas_group_child_bounds
+ * @group:
+ * @item:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
@@ -1412,6 +1631,15 @@ static GtkLayoutClass *canvas_parent_class;
 #define DISPLAY_X1(canvas) (GNOME_CANVAS (canvas)->layout.xoffset)
 #define DISPLAY_Y1(canvas) (GNOME_CANVAS (canvas)->layout.yoffset)
 
+
+
+/**
+ * gnome_canvas_get_type
+ *
+ * Description:
+ *
+ * Returns:
+ **/
 
 GtkType
 gnome_canvas_get_type (void)
@@ -1527,6 +1755,15 @@ gnome_canvas_destroy (GtkObject *object)
 	if (GTK_OBJECT_CLASS (canvas_parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (canvas_parent_class)->destroy) (object);
 }
+
+
+/**
+ * gnome_canvas_new
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
 
 GtkWidget *
 gnome_canvas_new (void)
@@ -2329,6 +2566,16 @@ idle_handler (gpointer data)
 	return FALSE;
 }
 
+
+/**
+ * gnome_canvas_root
+ * @canvas:
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
+
 GnomeCanvasGroup *
 gnome_canvas_root (GnomeCanvas *canvas)
 {
@@ -2337,6 +2584,18 @@ gnome_canvas_root (GnomeCanvas *canvas)
 
 	return GNOME_CANVAS_GROUP (canvas->root);
 }
+
+
+/**
+ * gnome_canvas_set_scroll_region
+ * @canvas:
+ * @x1:
+ * @y1:
+ * @x2:
+ * @y2:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, double x2, double y2)
@@ -2374,6 +2633,18 @@ gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, doubl
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
 }
 
+
+/**
+ * gnome_canvas_get_scroll_region
+ * @canvas:
+ * @x1:
+ * @y1:
+ * @x2:
+ * @y2:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_get_scroll_region (GnomeCanvas *canvas, double *x1, double *y1, double *x2, double *y2)
 {
@@ -2392,6 +2663,15 @@ gnome_canvas_get_scroll_region (GnomeCanvas *canvas, double *x1, double *y1, dou
 	if (y2)
 		*y2 = canvas->scroll_y2;
 }
+
+
+/**
+ * gnome_canvas_set_pixels_per_unit
+ * @canvas:
+ * @n:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
@@ -2428,6 +2708,16 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
 }
 
+
+/**
+ * gnome_canvas_set_size
+ * @canvas:
+ * @width:
+ * @height:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height)
 {
@@ -2442,6 +2732,16 @@ gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height)
 	gtk_widget_queue_resize (GTK_WIDGET (canvas));
 }
 
+
+/**
+ * gnome_canvas_scroll_to
+ * @canvas:
+ * @cx:
+ * @cy:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy)
 {
@@ -2450,6 +2750,16 @@ gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy)
 
 	scroll_to (canvas, cx, cy);
 }
+
+
+/**
+ * gnome_canvas_get_scroll_offsets
+ * @canvas:
+ * @cx:
+ * @cy:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy)
@@ -2464,6 +2774,14 @@ gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy)
 		*cy = canvas->layout.vadjustment->value;
 }
 
+
+/**
+ * gnome_canvas_update_now
+ * @canvas:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_update_now (GnomeCanvas *canvas)
 {
@@ -2477,6 +2795,18 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 	gtk_idle_remove (canvas->idle_id);
 	gdk_flush (); /* flush the X queue to ensure repaint */
 }
+
+
+/**
+ * gnome_canvas_request_redraw
+ * @canvas:
+ * @x1:
+ * @y1:
+ * @x2:
+ * @y2:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2)
@@ -2510,6 +2840,18 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 	}
 }
 
+
+/**
+ * gnome_canvas_w2c
+ * @canvas:
+ * @wx:
+ * @wy:
+ * @cx:
+ * @cy:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy)
 {
@@ -2537,6 +2879,18 @@ gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy)
 	}
 }
 
+
+/**
+ * gnome_canvas_c2w
+ * @canvas:
+ * @cx:
+ * @cy:
+ * @wx:
+ * @wy:
+ *
+ * Description:
+ **/
+
 void
 gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *wy)
 {
@@ -2549,6 +2903,18 @@ gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *wy)
 	if (wy)
 		*wy = canvas->scroll_y1 + cy / canvas->pixels_per_unit;
 }
+
+
+/**
+ * gnome_canvas_window_to_world
+ * @canvas:
+ * @winx:
+ * @winy:
+ * @worldx:
+ * @worldy:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_window_to_world (GnomeCanvas *canvas, double winx, double winy, double *worldx, double *worldy)
@@ -2563,6 +2929,18 @@ gnome_canvas_window_to_world (GnomeCanvas *canvas, double winx, double winy, dou
 		*worldy = canvas->scroll_y1 + (winy + DISPLAY_Y1 (canvas) - canvas->zoom_yofs) / canvas->pixels_per_unit;
 }
 
+
+
+/**
+ * gnome_canvas_world_to_window
+ * @canvas:
+ * @worldx:
+ * @worldy:
+ * @winx:
+ * @winy:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy, double *winx, double *winy)
@@ -2579,6 +2957,18 @@ gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy,
 		  DISPLAY_Y1(canvas) + canvas->zoom_yofs;
 }
 
+
+
+/**
+ * gnome_canvas_get_color
+ * @canvas:
+ * @spec:
+ * @color:
+ *
+ * Description:
+ *
+ * Returns:
+ **/
 
 int
 gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
@@ -2611,6 +3001,15 @@ gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
 
 	return TRUE;
 }
+
+
+/**
+ * gnome_canvas_set_stipple_origin
+ * @canvas:
+ * @gc:
+ *
+ * Description:
+ **/
 
 void
 gnome_canvas_set_stipple_origin (GnomeCanvas *canvas, GdkGC *gc)

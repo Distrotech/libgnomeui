@@ -235,6 +235,13 @@ client_parse_func(poptContext ctx,
     }
 }
 
+
+/**
+ * gnome_client_disable_master_connection
+ *
+ * Description:
+ **/
+
 void         
 gnome_client_disable_master_connection (void)
 {
@@ -263,6 +270,13 @@ master_client_disconnect (GnomeClient *client,
   XDeleteProperty(gdk_display, gdk_leader_window,
 		  XInternAtom(gdk_display, sm_client_id_prop, False));
 }
+
+
+/**
+ * gnome_client_init
+ *
+ * Description:
+ **/
 
 void
 gnome_client_init (void)
@@ -324,6 +338,15 @@ gnome_client_init (void)
     }
 }
 
+
+/**
+ * gnome_client_new_default
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
+
 GnomeClient *
 gnome_client_new_default (void)
 {
@@ -333,6 +356,15 @@ gnome_client_new_default (void)
 }
 
 
+
+/**
+ * gnome_master_client
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
+
 GnomeClient*
 gnome_master_client (void)
 {
@@ -341,6 +373,15 @@ gnome_master_client (void)
   return master_client;
 }
 
+
+
+/**
+ * gnome_cloned_client
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
 
 GnomeClient*
 gnome_cloned_client (void)
@@ -543,6 +584,15 @@ gnome_real_client_destroy (GtkObject *object)
 /*****************************************************************************/
 /* 'gnome_client' public member functions */
 
+
+/**
+ * gnome_client_new
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
+
 GnomeClient *
 gnome_client_new (void)
 {
@@ -554,6 +604,15 @@ gnome_client_new (void)
 
   return client;
 }
+
+
+/**
+ * gnome_client_new_without_connection
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
 
 GnomeClient *
 gnome_client_new_without_connection (void)
@@ -574,6 +633,14 @@ gnome_client_new_without_connection (void)
   return client;
 }
 
+
+/**
+ * gnome_client_flush
+ * @client:
+ *
+ * Description:
+ **/
+
 void
 gnome_client_flush (GnomeClient *client)
 {
@@ -593,6 +660,14 @@ gnome_client_flush (GnomeClient *client)
 /*****************************************************************************/
 
 #define ERROR_STRING_LENGTH 256
+
+
+/**
+ * gnome_client_connect
+ * @client:
+ *
+ * Description:
+ **/
 
 void
 gnome_client_connect (GnomeClient *client)
@@ -679,6 +754,14 @@ gnome_client_connect (GnomeClient *client)
 }
 
 
+
+/**
+ * gnome_client_disconnect
+ * @client:
+ *
+ * Description:
+ **/
+
 void
 gnome_client_disconnect (GnomeClient *client)
 {
@@ -691,6 +774,16 @@ gnome_client_disconnect (GnomeClient *client)
 }
 
 /*****************************************************************************/
+
+
+/**
+ * gnome_client_set_clone_command
+ * @client:
+ * @argc:
+ * @argv[]:
+ *
+ * Description:
+ **/
 
 void 
 gnome_client_set_clone_command (GnomeClient *client, 
@@ -726,6 +819,15 @@ gnome_client_set_clone_command (GnomeClient *client,
 }
 
 
+
+/**
+ * gnome_client_set_current_directory
+ * @client:
+ * @dir:
+ *
+ * Description:
+ **/
+
 void 
 gnome_client_set_current_directory (GnomeClient *client,
 				    const gchar *dir)
@@ -752,6 +854,16 @@ gnome_client_set_current_directory (GnomeClient *client,
     }
 }
 
+
+
+/**
+ * gnome_client_set_discard_command
+ * @client:
+ * @argc:
+ * @argv[]:
+ *
+ * Description:
+ **/
 
 void 
 gnome_client_set_discard_command (GnomeClient *client,
@@ -782,6 +894,16 @@ gnome_client_set_discard_command (GnomeClient *client,
     }
 }
 
+
+
+/**
+ * gnome_client_set_environment
+ * @client:
+ * @name:
+ * @value:
+ *
+ * Description:
+ **/
 
 void 
 gnome_client_set_environment (GnomeClient *client,
@@ -846,6 +968,15 @@ gnome_client_set_environment (GnomeClient *client,
 }
 
 
+
+/**
+ * gnome_client_set_process_id
+ * @client:
+ * @pid:
+ *
+ * Description:
+ **/
+
 void 
 gnome_client_set_process_id (GnomeClient *client, pid_t pid)
 {
@@ -862,6 +993,15 @@ gnome_client_set_process_id (GnomeClient *client, pid_t pid)
 #endif /* HAVE_LIBSM */
 }
 
+
+
+/**
+ * gnome_client_set_program
+ * @client:
+ * @program:
+ *
+ * Description:
+ **/
 
 void 
 gnome_client_set_program (GnomeClient *client, 
@@ -883,6 +1023,16 @@ gnome_client_set_program (GnomeClient *client,
 #endif /* HAVE_LIBSM */
 }
 
+
+
+/**
+ * gnome_client_set_resign_command
+ * @client:
+ * @argc:
+ * @argv[]:
+ *
+ * Description:
+ **/
 
 void 
 gnome_client_set_resign_command (GnomeClient *client,
@@ -914,6 +1064,16 @@ gnome_client_set_resign_command (GnomeClient *client,
 }
 
 
+
+/**
+ * gnome_client_set_restart_command
+ * @client:
+ * @argc:
+ * @argv[]:
+ *
+ * Description:
+ **/
+
 void 
 gnome_client_set_restart_command (GnomeClient *client,
 				  gint argc, gchar *argv[])
@@ -941,6 +1101,15 @@ gnome_client_set_restart_command (GnomeClient *client,
 }
 
 
+
+/**
+ * gnome_client_set_restart_style
+ * @client:
+ * @style:
+ *
+ * Description:
+ **/
+
 void 
 gnome_client_set_restart_style (GnomeClient *client,
 				GnomeRestartStyle style)
@@ -956,6 +1125,16 @@ gnome_client_set_restart_style (GnomeClient *client,
 #endif /* HAVE_LIBSM */
 }
 
+
+
+/**
+ * gnome_client_set_shutdown_command
+ * @client:
+ * @argc:
+ * @argv[]:
+ *
+ * Description:
+ **/
 
 void 
 gnome_client_set_shutdown_command (GnomeClient *client,
@@ -987,6 +1166,15 @@ gnome_client_set_shutdown_command (GnomeClient *client,
 }
 
 
+
+/**
+ * gnome_client_set_user_id
+ * @client:
+ * @id:
+ *
+ * Description:
+ **/
+
 void 
 gnome_client_set_user_id (      GnomeClient *client,
 			  const gchar       *id)
@@ -1005,6 +1193,15 @@ gnome_client_set_user_id (      GnomeClient *client,
 #endif /* HAVE_LIBSM */
 }
 
+
+
+/**
+ * gnome_client_add_static_arg
+ * @client:
+ * @...:
+ *
+ * Description:
+ **/
 
 void
 gnome_client_add_static_arg (GnomeClient *client, ...)
@@ -1028,6 +1225,15 @@ gnome_client_add_static_arg (GnomeClient *client, ...)
 
 /*****************************************************************************/
 
+
+/**
+ * gnome_client_set_id
+ * @client:
+ * @id:
+ *
+ * Description:
+ **/
+
 void
 gnome_client_set_id (GnomeClient *client, const gchar *id)
 {
@@ -1044,6 +1250,16 @@ gnome_client_set_id (GnomeClient *client, const gchar *id)
 }
 
 
+
+/**
+ * gnome_client_get_id
+ * @client:
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
+
 gchar *
 gnome_client_get_id (GnomeClient *client)
 {
@@ -1052,6 +1268,16 @@ gnome_client_get_id (GnomeClient *client)
   
   return client->client_id;
 }
+
+
+/**
+ * gnome_client_get_previous_id
+ * @client:
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
 
 gchar *
 gnome_client_get_previous_id (GnomeClient *client)
@@ -1065,6 +1291,16 @@ gnome_client_get_previous_id (GnomeClient *client)
 
 static gchar *config_prefix= NULL;
   
+
+/**
+ * gnome_client_get_config_prefix
+ * @client:
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
+
 gchar *
 gnome_client_get_config_prefix (GnomeClient *client)
 {
@@ -1097,6 +1333,16 @@ gnome_client_get_config_prefix (GnomeClient *client)
 
   return client->config_prefix;
 }
+
+
+/**
+ * gnome_client_get_global_config_prefix
+ * @client:
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
 
 gchar *
 gnome_client_get_global_config_prefix (GnomeClient *client)
@@ -1314,6 +1560,17 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
 #endif /* HAVE_LIBSM */
 }
 
+
+/**
+ * gnome_client_request_interaction
+ * @client:
+ * @dialog_type:
+ * @function:
+ * @data:
+ *
+ * Description:
+ **/
+
 void
 gnome_client_request_interaction (GnomeClient *client,
 				  GnomeDialogType dialog_type,
@@ -1332,6 +1589,18 @@ gnome_client_request_interaction (GnomeClient *client,
   gnome_client_request_interaction_internal (client, dialog_type, 
 					     FALSE, function, data, NULL);  
 }
+
+
+/**
+ * gnome_client_request_interaction_interp
+ * @client:
+ * @dialog_type:
+ * @function:
+ * @data:
+ * @destroy:
+ *
+ * Description:
+ **/
 
 void
 gnome_client_request_interaction_interp (GnomeClient *client,
@@ -1417,6 +1686,14 @@ gnome_interaction_remove (GnomeInteractData *interactf)
 
 /*****************************************************************************/
 
+
+/**
+ * gnome_client_request_phase_2
+ * @client:
+ *
+ * Description:
+ **/
+
 void
 gnome_client_request_phase_2 (GnomeClient *client)
 {
@@ -1429,6 +1706,19 @@ gnome_client_request_phase_2 (GnomeClient *client)
 
   client->save_phase_2_requested= TRUE;
 }
+
+
+/**
+ * gnome_client_request_save
+ * @client:
+ * @save_style:
+ * @shutdown:
+ * @interact_style:
+ * @fast:
+ * @global:
+ *
+ * Description:
+ **/
 
 void
 gnome_client_request_save (GnomeClient        *client,
@@ -1453,6 +1743,15 @@ gnome_client_request_save (GnomeClient        *client,
 
 /*****************************************************************************/
 /* 'GnomeInteractData' stuff */
+
+
+/**
+ * gnome_interaction_key_return
+ * @key:
+ * @cancel_shutdown:
+ *
+ * Description:
+ **/
 
 void
 gnome_interaction_key_return (gint key,
