@@ -576,7 +576,7 @@ msgstr "_Ffenestri"
 
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
-msgstr "_GÃªm"
+msgstr "_Gêm"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
