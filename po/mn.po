@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Sanlig Badral <badral@chinggis.com>, 2003.
-# Sanlig Badral <Badral@openmn.org>, 2003.
+# Sanlig Badral <Badral@openmn.org>, 2003, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
-"PO-Revision-Date: 2003-08-22 03:01+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-06 20:55+0100\n"
+"PO-Revision-Date: 2004-01-07 01:18+0100\n"
 "Last-Translator: Sanlig Badral <Badral@openmn.org>\n"
-"Language-Team: Mongolian <openmn-kdemn@lists.sourceforge.net>\n"
+"Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
@@ -124,10 +124,8 @@ msgstr "Орчуулагч"
 
 # CHECK
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Орчуулагчдад талархал. Энэ үгс орчуулагдах боломжтойгоор тэмдэглэгджээ."
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "Орчуулагчдад талархал. Энэ үгс орчуулагдах боломжтойгоор тэмдэглэгджээ."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -144,6 +142,7 @@ msgstr "%s -н тухай"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -201,6 +200,7 @@ msgid "_Game"
 msgstr "_Тоглоом"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Тусламж"
 
@@ -391,11 +391,11 @@ msgstr "Программыг тохируулах"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Тухай"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Энэ программын тухай"
 
@@ -422,7 +422,7 @@ msgstr "Шинэ _цонх нээх"
 msgid "_Close This Window"
 msgstr "Цонх _хаах"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Энэ цонхыг хаах"
 
@@ -624,14 +624,12 @@ msgstr "Баталгаа шаардлагатай"
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " %s домайн"
 
 #: libgnomeui/gnome-authentication-manager.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Та \"%s\" рүү хандахын тулд нэвтрэх ёстой.\n"
-"%s"
+msgstr "Та \"%s\" рүү хандахын тулд нэвтрэх ёстой.\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -892,8 +890,7 @@ msgstr "Лавлахын бичлэг"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"Файлын бичлэг лавлахын нэрийн оруулах эсвэл файлын бүтэн нэр хэрэглэх эсэх."
+msgstr "Файлын бичлэг лавлахын нэрийн оруулах эсвэл файлын бүтэн нэр хэрэглэх эсэх."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -947,23 +944,23 @@ msgstr ""
 "түүний параметрийг өөрчилөх эсвэл хүсэлт тавих болбол энэ онцлогийг "
 "GnomeEntry -г авахдаа хэрэглэж болно,"
 
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "Файл сонгох"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "Зам"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "Файлын зам"
 
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "_Сонгох..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "Файл сонгохын тулд файл сонгогчоор хийх"
 
@@ -1237,7 +1234,7 @@ msgstr "_Хэрэглэгч:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Домайн:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1245,11 +1242,11 @@ msgstr "_Нууц үг:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Энэ суултын нууц үгийг сана"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Нууц үгийг түлхүүрийн холбоонд хадгал"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1396,8 +1393,10 @@ msgstr ""
 "Та дэлгэрэнгүй мэдээлэл авахдаа GNOME-н алдаа боловсруулагч вэб хаягаар "
 "зочилоно уу."
 
-#~ msgid "Exit the test"
-#~ msgstr "Тестийг дуусгах"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Тестийг дуусгах"
 
 #~ msgid "_Credits"
 #~ msgstr "_Оролцогчид"
+
