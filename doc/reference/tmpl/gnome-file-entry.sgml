@@ -140,3 +140,43 @@ GnomeFileEntry
 @directory_entry: 
 
 
+<!-- ##### ARG GnomeFileEntry:history-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:browse-dialog-title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:directory-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:modal ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:filename ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:default-path ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:gnome-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:gtk-entry ##### -->
+<para>
+
+</para>
+

@@ -36,3 +36,78 @@ GnomeAbout
 @Returns: 
 
 
+<!-- ##### ARG GnomeAbout:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:version ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:copyright ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:comments ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:authors ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:documenters ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:background ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:background-start-opacity ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:background-end-opacity ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:background-start-position ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:background-end-position ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:translator-credits ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:logo ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:logo-top-padding ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:logo-right-padding ##### -->
+<para>
+
+</para>
+

@@ -40,8 +40,8 @@ extra_files =
 
 # CFLAGS and LDFLAGS for compiling scan program. Only needed if your app/lib
 # contains GtkObjects/GObjects and you want to document signals and properties.
-GTKDOC_CFLAGS =
-GTKDOC_LIBS =
+GTKDOC_CFLAGS = -I$(top_builddir) -I$(top_srcdir) $(LIBGNOMEUI_CFLAGS)
+GTKDOC_LIBS = $(top_builddir)/libgnomeui/libgnomeui-2.la
 
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)

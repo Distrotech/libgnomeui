@@ -131,3 +131,28 @@ GnomeIconEntry
 @Returns: 
 
 
+<!-- ##### ARG GnomeIconEntry:history-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:browse-dialog-title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:pixmap-subdir ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:filename ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:pick-dialog ##### -->
+<para>
+
+</para>
+

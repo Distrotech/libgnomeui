@@ -166,3 +166,18 @@ GnomeAppBar
 @Returns: 
 
 
+<!-- ##### ARG GnomeAppBar:has-progress ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAppBar:has-status ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAppBar:interactivity ##### -->
+<para>
+
+</para>
+

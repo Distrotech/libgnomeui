@@ -145,3 +145,63 @@ GnomeDruidPageStandard
 @additional_info_markup: 
 
 
+<!-- ##### ARG GnomeDruidPageStandard:title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:top-watermark ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:title-foreground ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:title-foreground-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:title-foreground-set ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:background ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:background-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:background-set ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo-background ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo-background-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo-background-set ##### -->
+<para>
+
+</para>
+

@@ -1,5 +1,13 @@
 2001-12-18  jacob berkman  <jacob@ximian.com>
 
+	* reference/libgnomeui.hierarchy: remove generated file
+	
+	* reference/tmpl/*: letting gtk-doc do its thing
+	
+	* reference/Makefile.am: make it build docs on our objects
+
+	* reference/libgnomeui.types: include instantiable types
+
 	* reference/Makefile.am (scan-build.stamp): run gtkdoc-scangobj
 	rather than gtkdoc-scanobj
 

@@ -111,3 +111,13 @@ GnomeEntry
 @gentry: 
 
 
+<!-- ##### ARG GnomeEntry:history-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeEntry:gtk-entry ##### -->
+<para>
+
+</para>
+

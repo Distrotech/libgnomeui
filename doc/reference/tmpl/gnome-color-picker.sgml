@@ -154,3 +154,38 @@ GnomeColorPicker
 @Returns: 
 
 
+<!-- ##### ARG GnomeColorPicker:dither ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:use-alpha ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:red ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:green ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:blue ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:alpha ##### -->
+<para>
+
+</para>
+

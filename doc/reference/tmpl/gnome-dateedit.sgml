@@ -124,3 +124,28 @@ GnomeDateEdit
 @Returns: 
 
 
+<!-- ##### ARG GnomeDateEdit:time ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDateEdit:dateedit-flags ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDateEdit:lower-hour ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDateEdit:upper-hour ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDateEdit:initial-time ##### -->
+<para>
+
+</para>
+
