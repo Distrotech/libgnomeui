@@ -1,3 +1,10 @@
+Mon Aug 27 01:32:00 2001  George Lebl <jirka@5z.com>
+
+	* gnome-icon-entry.[ch], gnome-icon-sel.[ch]: bring back pre-selector
+	  versions of these.  Not yet fully finished, use of gnome-dialog
+	  exorcised, gnome-pixmap usage still lurks.  Comitting for
+	  andersca's hacking pleasure.
+
 Mon Aug 27 00:44:15 2001  George Lebl <jirka@5z.com>
 
 	* Makefile.am, gnome-gconf-ui.[ch], gnome-ui-init.c, libgnomeui.h: 
