@@ -1,3 +1,10 @@
+1999-02-21  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
+
+	* Makefile.am (gnome_segv_LDADD): Use libgnomeui.la without the
+	path from the topdir so that AM_MAKEFLAGS=-j4 works. 
+	(ted_demo_LDADD, stock_demo_LDADD, winhints_demo_LDADD,
+	animator_demo_LDADD, dock_demo_LDADD): Likewise.
+	
 Sun Feb 21 04:36:54 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-winhints.c: don't use CARD32's for format 32 hints, Xlib sends

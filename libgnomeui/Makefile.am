@@ -248,42 +248,42 @@ libgnomeui_la_LDFLAGS = -version-info 37:0:5 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\
-	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 ted_demo_LDADD =	\
-	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 stock_demo_LDADD =	\
-	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 winhints_demo_LDADD =	\
-	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 animator_demo_LDADD =	\
-	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 dock_demo_LDADD =	\
-	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \

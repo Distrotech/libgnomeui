@@ -211,6 +211,7 @@ static const GtkEnumValue _gnome_win_hints_values[] = {
   { WIN_HINTS_SKIP_TASKBAR, "WIN_HINTS_SKIP_TASKBAR", "skip-taskbar" },
   { WIN_HINTS_GROUP_TRANSIENT, "WIN_HINTS_GROUP_TRANSIENT", "group-transient" },
   { WIN_HINTS_FOCUS_ON_CLICK, "WIN_HINTS_FOCUS_ON_CLICK", "focus-on-click" },
+  { WIN_HINTS_DO_NOT_COVER, "WIN_HINTS_DO_NOT_COVER", "do-not-cover" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_win_app_state_values[] = {
