@@ -519,7 +519,6 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 
   g_hash_table_foreach_remove (folder_vfs->children,
 			       remove_all, NULL);
-  g_print ("load_dir %s\n", folder_vfs->uri);
   gnome_vfs_async_load_directory (&folder_vfs->async_handle,
 				  folder_vfs->uri,
 				  get_options (folder_vfs->types),
