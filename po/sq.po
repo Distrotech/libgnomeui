@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD\n"
+"Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
-"PO-Revision-Date: 2004-02-20 12:33+0100\n"
+"POT-Creation-Date: 2004-05-08 11:59+0200\n"
+"PO-Revision-Date: 2004-05-08 12:02+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -121,8 +121,7 @@ msgid "Translator credits"
 msgstr "Falenderime pëkthyesit"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Kreditë e përkthyesve. Kjo frazë duhet shënuar si e përkthyeshme"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -140,6 +139,7 @@ msgstr "Informacione mbi %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -197,6 +197,7 @@ msgid "_Game"
 msgstr "_Loja"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ndihmë"
 
@@ -387,11 +388,11 @@ msgstr "Konfiguro programin"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Informacione"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informacione mbi këtë program"
 
@@ -418,7 +419,7 @@ msgstr "Krijo një dritare të re"
 msgid "_Close This Window"
 msgstr "_Mbylle këtë dritare"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Mbyll dritaren aktuale"
 
@@ -498,26 +499,26 @@ msgstr "_Përmbajtja"
 msgid "View help for this application"
 msgstr "Shiko ndihmën në lidhje me këtë program"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Tekst në ikona"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Tekst përparsor krahas ikonave"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Vetëm ikona"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Vetëm tekst"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2634
 #, c-format
-msgid "Use desktop default (%s)"
-msgstr "Përdor konfigurimin e prezgjedhur të desktop (%s)"
+msgid "Use Desktop Default (%s)"
+msgstr "Përdor të prezgjedhurin e ambientit të punës (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -613,16 +614,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Fjalëkalimi juaj do të transmetohet i kriptuar."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Është i nevojshëm identifikimi"
 
 #: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
-msgid " domain %s"
-msgstr " domain %s"
+msgid "You must log in to access %s domain %s\n"
+msgstr "Duhet të jeni identifikuar që të hyni tek %s domain %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Duhet të jeni identifikuar që të hyni tek %s\n"
@@ -1071,39 +1072,39 @@ msgstr ""
 "Gabim gjatë leximit apo ruajtjes së informacioneve të konfigurimit për  %s. "
 "Disa nga rregullimet e konfigurimit mund të mos punojnë si duhet."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "URL e aktivuar nga GnomeHRef"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Teksti"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Teksti i pulsantit"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Fund urisë në botë"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Ngjyra e lidhjes"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Ngjyra që duhet përdorur për të vizatuar lidhjen"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Ky pulsant ju çon tek URl e shkruar."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1407,5 +1408,7 @@ msgstr "_Informo zhvilluesit"
 msgid "_Debug"
 msgstr "_Debug"
 
-#~ msgid "Exit the test"
-#~ msgstr "Përfundo provën"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Përfundo provën"
+
