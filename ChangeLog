@@ -1,3 +1,8 @@
+2004-08-22  William Jon McCann  <mccann@jhu.edu>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (gtk_file_system_gnome_vfs_get_folder):
+	Ref the vfs_info if it is pulled from the hash table.  Fixes #150075.
+
 2004-08-16  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "bs" to ALL_LINGUAS.

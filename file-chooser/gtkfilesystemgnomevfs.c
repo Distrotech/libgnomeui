@@ -621,6 +621,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	    }
 
 	  vfs_info = child->info;
+	  gnome_vfs_file_info_ref (vfs_info);
 	  g_assert (vfs_info != NULL);
 	}
     }
