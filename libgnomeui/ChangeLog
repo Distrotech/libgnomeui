@@ -1,3 +1,12 @@
+2001-05-31  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector-client.c (WANT_PREVIEW_WIDGET): New property.
+
+	* gnome-selector-component.[ch]: Derive from GnomeSelector, not
+	GnomeFileSelector which is now a component.
+	(GnomeSelectorComponentClass): Added "ensure_properties" signal.
+	(PROP_PREVIEW_WIDGET, PROP_CONTROL_WIDGET): New properties.
+
 2001-05-27  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-about.c: First run at porting it over to

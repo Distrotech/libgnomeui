@@ -39,6 +39,7 @@ struct _GnomeSelectorClientPrivate {
     gchar *browse_dialog_moniker;
 
     GNOME_Tristate  want_entry_widget;
+    GNOME_Tristate  want_preview_widget;
     GNOME_Tristate  want_selector_widget;
     GNOME_Tristate  want_browse_dialog;
     GNOME_Tristate  want_browse_button;
@@ -63,13 +64,14 @@ gnome_selector_client_event_cb (BonoboListener    *listener,
 
 static BonoboWidgetClass *gnome_selector_client_parent_class;
 
-static GNOME_Selector_AsyncID last_async_id G_GNUC_UNUSED = 0;
+static GNOME_AsyncID last_async_id G_GNUC_UNUSED = 0;
 
 enum {
     PROP_0,
 
     /* Construction properties */
     PROP_WANT_ENTRY_WIDGET,
+    PROP_WANT_PREVIEW_WIDGET,
     PROP_WANT_SELECTOR_WIDGET,
     PROP_WANT_BROWSE_DIALOG,
     PROP_WANT_BROWSE_BUTTON,
@@ -121,6 +123,9 @@ gnome_selector_client_pbag_get_property (BonoboPropertyBag *bag, BonoboArg *arg,
     case PROP_WANT_ENTRY_WIDGET:
 	set_arg_tristate (arg, client->_priv->want_entry_widget, ev);
 	break;
+    case PROP_WANT_PREVIEW_WIDGET:
+	set_arg_tristate (arg, client->_priv->want_preview_widget, ev);
+	break;
     case PROP_WANT_SELECTOR_WIDGET:
 	set_arg_tristate (arg, client->_priv->want_selector_widget, ev);
 	break;
@@ -160,6 +165,10 @@ gnome_selector_client_set_property (GObject *object, guint param_id,
     case PROP_WANT_ENTRY_WIDGET:
 	g_assert (!client->_priv->constructed);
 	client->_priv->want_entry_widget = g_value_get_enum (value);
+	break;
+    case PROP_WANT_PREVIEW_WIDGET:
+	g_assert (!client->_priv->constructed);
+	client->_priv->want_preview_widget = g_value_get_enum (value);
 	break;
     case PROP_WANT_SELECTOR_WIDGET:
 	g_assert (!client->_priv->constructed);
@@ -206,6 +215,9 @@ gnome_selector_client_get_property (GObject *object, guint param_id, GValue *val
     case PROP_WANT_ENTRY_WIDGET:
 	g_value_set_enum (value, client->_priv->want_entry_widget);
 	break;
+    case PROP_WANT_PREVIEW_WIDGET:
+	g_value_set_enum (value, client->_priv->want_preview_widget);
+	break;
     case PROP_WANT_SELECTOR_WIDGET:
 	g_value_set_enum (value, client->_priv->want_selector_widget);
 	break;
@@ -246,6 +258,13 @@ gnome_selector_client_class_init (GnomeSelectorClientClass *klass)
 	(object_class,
 	 PROP_WANT_ENTRY_WIDGET,
 	 g_param_spec_enum ("want-entry-widget", NULL, NULL,
+			    GNOME_TYPE_TRISTATE, GNOME_TRISTATE_DEFAULT,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(object_class,
+	 PROP_WANT_PREVIEW_WIDGET,
+	 g_param_spec_enum ("want-preview-widget", NULL, NULL,
 			    GNOME_TYPE_TRISTATE, GNOME_TRISTATE_DEFAULT,
 			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
 			     G_PARAM_CONSTRUCT_ONLY)));
@@ -347,6 +366,9 @@ gnome_selector_client_construct (GnomeSelectorClient *client, const gchar *monik
 			     BONOBO_ARG_STRING, NULL, NULL, BONOBO_PROPERTY_READABLE);
     bonobo_property_bag_add (client->_priv->pbag,
 			     "want-entry-widget", PROP_WANT_ENTRY_WIDGET,
+			     BONOBO_ARG_BOOLEAN, NULL, NULL, BONOBO_PROPERTY_READABLE);
+    bonobo_property_bag_add (client->_priv->pbag,
+			     "want-preview-widget", PROP_WANT_PREVIEW_WIDGET,
 			     BONOBO_ARG_BOOLEAN, NULL, NULL, BONOBO_PROPERTY_READABLE);
     bonobo_property_bag_add (client->_priv->pbag,
 			     "want-browse-dialog", PROP_WANT_BROWSE_DIALOG,
@@ -510,7 +532,7 @@ gnome_selector_client_get_entry_text (GnomeSelectorClient *client)
     g_assert (client->_priv->selector != CORBA_OBJECT_NIL);
 
     CORBA_exception_init (&ev);
-    retval = GNOME_Selector_getEntryText (client->_priv->selector, &ev);
+    retval = GNOME_Selector__get_entryText (client->_priv->selector, &ev);
     CORBA_exception_free (&ev);
 
     return retval;
@@ -528,7 +550,7 @@ gnome_selector_client_set_entry_text (GnomeSelectorClient *client,
     g_assert (client->_priv->selector != CORBA_OBJECT_NIL);
 
     CORBA_exception_init (&ev);
-    GNOME_Selector_setEntryText (client->_priv->selector, text, &ev);
+    GNOME_Selector__set_entryText (client->_priv->selector, text, &ev);
     CORBA_exception_free (&ev);
 }
 
