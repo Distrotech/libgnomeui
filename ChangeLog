@@ -1,3 +1,8 @@
+2002-11-10  Ole Laursen  <olau@hardworking.dk>
+
+	* configure.in: Added da to the list in ALL_LINGUAS. Too bad I
+	first discovered this now.
+
 2002-11-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* doc/reference/Makefile.am:
