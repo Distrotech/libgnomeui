@@ -5,7 +5,7 @@ SUBDIRS = pixmaps
 #
 # The targets
 #
-noinst_PROGRAMS = ted_demo stock_demo winhints_demo animator_demo
+noinst_PROGRAMS = ted_demo stock_demo winhints_demo
 bin_PROGRAMS    = gnome_segv
 lib_LTLIBRARIES = libgnomeui.la
 
@@ -22,21 +22,9 @@ INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) $(GDK_IMLIB_CFLAGS) $(SUPPORTINCS
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-if HAVE_GTKCAL
-gtkcal_sources =
-gtkcal_headers =
-else
-gtkcal_sources = gtkcalendar.c
-gtkcal_headers = gtkcalendar.h
-endif
-
-EXTRA_HEADERS = 
-
-EXTRA_libgnomeui_la_SOURCES = gtkcalendar.h gtkcalendar.c
-
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
-	gnome-animator.c		\
+	gnome-actionarea.c		\
 	gnome-app.c			\
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
@@ -85,6 +73,7 @@ libgnomeui_la_SOURCES = \
 	gnome-stock.c			\
         gnome-winhints.c		\
 	gnometypes.c			\
+	gtkcalendar.c			\
 	gtkcauldron.c			\
 	gtklayout.c			\
 	gtkspell.c			\
@@ -92,12 +81,11 @@ libgnomeui_la_SOURCES = \
 	gtk-plug.c			\
 	gtk-socket.c			\
 	gtk-ted.c			\
-	gtkdial.c			\
-	$(gtkcal_sources)
+	gtkdial.c
 
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
-        gnome-animator.h		\
+	gnome-actionarea.h     		\
 	gnome-app.h			\
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
@@ -147,6 +135,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-uidefs.h			\
         gnome-winhints.h		\
 	gnometypebuiltins.h		\
+	gtkcalendar.h			\
 	gtkcauldron.h			\
 	gtkdial.h			\
 	gtklayout.h			\
@@ -155,8 +144,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gtk-ted.h			\
 	gtk-plug.h			\
 	gtk-socket.h			\
-	libgnomeui.h			\
-	$(gtkcal_headers)
+	libgnomeui.h
 
 .PHONY: auto-files auto-files-1
 auto-files:
@@ -167,12 +155,10 @@ auto-files-1: gnome.defs
 auto-files-1: gnometypebuiltins_evals.c gnometypebuiltins_ids.c
 auto-files-1: gnometypebuiltins_vars.c gnometypebuiltins.h
 
-gnometypes.c: gnometypebuiltins_evals.c gnometypebuiltins_vars.c
-
 # generate gnome.defs file from gnome-boxed.defs and *.h
 gnome.defs: @MAINT@ makeenums.pl gnome-boxed.defs
 	cd $(srcdir) \
-	&& perl makeenums.pl defs $(libgnomeuiinclude_HEADERS) > gd.tmp \
+	&& perl makeenums.pl defs ./g*.h > gd.tmp \
 	&& cat gnome-boxed.defs >> gd.tmp \
 	&& mv gd.tmp gnome.defs
 
@@ -197,7 +183,7 @@ gnometypebuiltins_ids.c: @MAINT@ gnome.defs maketypes.awk
 # generate enum value arrays
 gnometypebuiltins_evals.c: @MAINT@ makeenums.pl gnome.defs
 	cd $(srcdir) \
-	&& perl makeenums.pl arrays $(libgnomeuiinclude_HEADERS) > gtbe.tmp \
+	&& perl makeenums.pl arrays ./g*.h > gtbe.tmp \
 	&& mv gtbe.tmp gnometypebuiltins_evals.c
 
 #######################
@@ -209,8 +195,6 @@ ted_demo_SOURCES = ted_demo.c
 stock_demo_SOURCES = stock_demo.c
 
 winhints_demo_SOURCES = winhints_demo.c
-
-animator_demo_SOURCES = animator_demo.c
 
 SGML =	\
 	gtk-ted.sgml
@@ -252,12 +236,6 @@ stock_demo_LDADD =	\
 	$(INTLLIBS)
 
 winhints_demo_LDADD =	\
-	$(top_builddir)/libgnomeui/libgnomeui.la 	\
-	$(top_builddir)/libgnome/libgnome.la 		\
-	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
-	$(INTLLIBS)
-
-animator_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \

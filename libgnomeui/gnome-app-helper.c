@@ -74,7 +74,7 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, gpointer pixmap
 		name = gnome_pixmap_file (pixmap_info);
 
 		if (!name)
-			g_warning ("Could not find GNOME pixmap file %s", (char *) pixmap_info);
+			g_warning ("Could not find GNOME pixmap file %s", pixmap_info);
 		else {
 			pixmap = gnome_pixmap_new_from_file (name);
 			g_free (name);
@@ -111,10 +111,7 @@ create_pixmap_and_label (char *label_text, GnomeUIPixmapType pixmap_type, gpoint
 	 * displayed or not
 	 */
 
-	if (gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true"))
-		pixmap = create_pixmap (hbox, pixmap_type, pixmap_info, indent_missing_pixmaps);
-	else
-		pixmap = NULL;
+	pixmap = create_pixmap (hbox, pixmap_type, pixmap_info, indent_missing_pixmaps);
 
 	if (pixmap) {
 		gtk_box_pack_start (GTK_BOX (hbox), pixmap, FALSE, FALSE, 0);
@@ -828,8 +825,7 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 	gchar *label = NULL;
 	GList *children, *hbox_children;
 	gchar *name_end;
-	gint p;
-	int  path_len;
+	gint p, path_len;
 	
 	g_return_val_if_fail (parent != NULL, NULL);
 	g_return_val_if_fail (path != NULL, NULL);

@@ -20,7 +20,6 @@
 #include <stdarg.h>
 #include "gnome-messagebox.h"
 #include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-triggers.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18nP.h"
 #include <string.h> /* for strcmp */
@@ -91,44 +90,29 @@ gnome_message_box_new (const gchar           *message,
 
 	style = gtk_widget_get_style (GTK_WIDGET (message_box));
 
-	/* Make noises, basically */
-	gnome_triggers_vdo(message, message_box_type, NULL);
-
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
 		gtk_window_set_title (GTK_WINDOW (message_box), _("Information"));
 		s = gnome_pixmap_file("gnome-info.png");
-		if (s) {
-                        pixmap = gnome_pixmap_new_from_file(s);
-                        g_free(s);
-                }
+		if (s) pixmap = gnome_pixmap_new_from_file(s);
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
 		gtk_window_set_title (GTK_WINDOW (message_box), _("Warning"));
 		s = gnome_pixmap_file("gnome-warning.png");
-		if (s) {
-                        pixmap = gnome_pixmap_new_from_file(s);
-                        g_free(s);
-                }
+		if (s) pixmap = gnome_pixmap_new_from_file(s);
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
 		gtk_window_set_title (GTK_WINDOW (message_box), _("Error"));
 		s = gnome_pixmap_file("gnome-error");
-		if (s) {
-                        pixmap = gnome_pixmap_new_from_file(s);
-                        g_free(s);
-                }
+		if (s) pixmap = gnome_pixmap_new_from_file(s);
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
 		gtk_window_set_title (GTK_WINDOW (message_box), _("Question"));
 		s = gnome_pixmap_file("gnome-question.png");
-		if (s) {
-                        pixmap = gnome_pixmap_new_from_file(s);
-                        g_free(s);
-                }
+		if (s) pixmap = gnome_pixmap_new_from_file(s);
 	}
 	else
 	{
@@ -144,10 +128,9 @@ gnome_message_box_new (const gchar           *message,
 	     (GNOME_PIXMAP(pixmap)->pixmap == NULL) ) {
         	if (pixmap) gtk_widget_destroy(pixmap);
 		s = gnome_pixmap_file("gnome-default.png");
-         	if (s) {
+         	if (s)
 			pixmap = gnome_pixmap_new_from_file(s);
-                        g_free(s);
-                } else
+		else
 			pixmap = NULL;
 	}
 	if (pixmap) {
@@ -187,7 +170,7 @@ void
 gnome_message_box_set_modal (GnomeMessageBox     *message_box)
 {
   g_warning("gnome_message_box_set_modal is deprecated.\n");
-  gtk_window_set_modal(GTK_WINDOW(message_box),TRUE);
+  gnome_dialog_set_modal(GNOME_DIALOG(message_box));
 }
 
 void

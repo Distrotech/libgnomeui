@@ -5,11 +5,12 @@
 #include "libgnome/gnome-parse.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"
-#include "libgnomeui/gnome-animator.h"
+#include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-appbar.h"
 #include "libgnomeui/gnome-app-helper.h"
 #include "libgnomeui/gnome-app-util.h"
+#include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-canvas.h"
 #include "libgnomeui/gnome-canvas-image.h"
 #include "libgnomeui/gnome-canvas-line.h"
@@ -45,9 +46,7 @@
 #include "libgnomeui/gnome-rootwin.h"
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-client.h"
-#ifndef __GTK_CALENDAR_H__
 #include "libgnomeui/gtkcalendar.h"
-#endif
 #include "libgnomeui/gtkcauldron.h"
 #include "libgnomeui/gtk-clock.h"
 #include "libgnomeui/gtkdial.h"
@@ -61,7 +60,6 @@
 #include "libgnomeui/gnome-lamp.h"
 #include "libgnomeui/gnome-mdi.h"
 #include "libgnomeui/gnome-mdi-child.h"
-#include "libgnomeui/gnome-mdi-session.h"
 #include "libgnomeui/gnometypebuiltins.h"
 #include "libgnomeui/gnome-winhints.h"
 

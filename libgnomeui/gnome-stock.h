@@ -312,7 +312,6 @@ struct _GnomeStock {
 	GnomePixmap *regular, *disabled, *focused; /* pixmap cache */
 	GnomePixmap *current;
 	char *icon;
-	guint32 c_regular, c_disabled, c_focused;
 };
 
 struct _GnomeStockClass {
@@ -340,19 +339,8 @@ GnomePixmap           *gnome_stock_pixmap          (GtkWidget *window,
 #endif
 
 /* just fetch a GnomeStock(PixmapWidget) */
-/* It is possible to specify a filename instead of an icon name. Gnome stock
- * will use gnome_pixmap_file to find the pixmap and return a GnomeStock widget
- * from that file. */
 GtkWidget             *gnome_stock_pixmap_widget   (GtkWidget *window,
                                                     const char *icon);
-
-/* This function loads that file scaled to the specified size. Unlike
- * gnome_pixmap_new_from_file_at_size this function uses antializing and stuff
- * to scale the pixmap */
-GtkWidget             *gnome_stock_pixmap_widget_at_size(GtkWidget *window,
-							 const char *icon,
-				  			 guint width,
-							 guint height);
 
 /* change the icon/look of a GnomeStockPixmapWidget */
 #if USE_NEW_GNOME_STOCK

@@ -1,4 +1,3 @@
-#include <config.h>
 #include <gnome.h>
 #include <gdk/gdkx.h>
 #include "gnome-winhints.h"

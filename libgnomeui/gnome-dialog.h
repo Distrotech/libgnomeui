@@ -48,6 +48,7 @@ struct _GnomeDialog
   GList *buttons;
   GtkAccelGroup * accelerators;
 
+  int modal : 1;
   int click_closes : 1;
   int just_hide : 1;
 
@@ -96,26 +97,19 @@ void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
 					       GtkSignalFunc callback,
 					       GtkObject * obj);
 
-/* Remember that modal dialogs are annoying! */
-
-/* DEPRECATED: Use gtk_window_set_modal instead. */
+/* Make the dialog modal */
 void       gnome_dialog_set_modal      (GnomeDialog *dialog);
 
 /* Run the dialog, return the button # that was pressed or -1 if none.
-   (this sets the dialog modal while it blocks)
  */
 gint       gnome_dialog_run	       (GnomeDialog *dialog);
 
-/* Run the dialog with gnome_dialog_run, and also call set_modal
-   to set the dialog modal permanently.
- */
+/* Run the dialog with gnome_dialog_run, and also call set_modal */
 gint       gnome_dialog_run_modal      (GnomeDialog *dialog);
 /* Run the dialog, and hide it afterwards */
 gint       gnome_dialog_run_and_hide   (GnomeDialog * dialog);
 /* Run the dialog, and destroy it afterwards */
 gint       gnome_dialog_run_and_destroy(GnomeDialog * dialog);
-
-
 
 /* Set the default button. - it will have a little highlight, 
    and pressing return will activate it. */
