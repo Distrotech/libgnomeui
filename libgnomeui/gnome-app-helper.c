@@ -4,6 +4,7 @@
  * Originally by Elliot Lee, with hacking by Chris Toshok for *_data, Marc 
  * Ewing added menu support, toggle and radio support, and I don't know what 
  * you other people did :) menu insertion/removal functions by Jaka Mocnik.
+ * Small fixes and documentation by Justin Maurer.
  *
  * Major cleanups and rearrangements by Federico Mena and Justin Maurer.
  */
@@ -52,6 +53,12 @@
 
 /* Creates a pixmap appropriate for items.  The window parameter is required 
  * by gnome-stock (bleah) */
+
+/**
+ * create_pixmap:
+ * @GtkWidget *window:  
+ */
+
 static GtkWidget *
 create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, 
 		gpointer pixmap_info, int indent_missing_pixmaps)
@@ -94,6 +101,7 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type,
 
 	default:
 		g_assert_not_reached ();
+		g_warning("Invalid pixmap_type %d", (int) pixmap_type); 
 	}
 
 	return pixmap;
@@ -224,7 +232,7 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 
 	default:
 		g_warning ("Invalid GnomeUIInfo type %d passed to "
-			   "create_menu_item()", (int) uiinfo->type);
+				"create_menu_item()", (int) uiinfo->type);
 		return;
 	}
 
@@ -304,7 +312,7 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 		default:
 			g_warning ("GnomeUIInfo element type %d is not valid "
-				   "inside a menu radio item group",
+					"inside a menu radio item group",
 				   (int) uiinfo->type);
 		}
 
@@ -342,7 +350,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 	if (!uiinfo->moreinfo) {
 		g_warning ("GnomeUIInfo->moreinfo cannot be NULL for "
-			   "GNOME_APP_UI_HELP");
+				"GNOME_APP_UI_HELP");
 		return pos;
 	}
 
