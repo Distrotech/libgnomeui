@@ -1,3 +1,10 @@
+=================== 2.6.2 ===================
+
+Thu Dec 16 12:01:23 2004  Jonathan Blandford  <jrb@redhat.com>
+
+	* configure.in: Released 2.6.2.  No release had been made for a
+	while and the filechooser fixes are pretty important.
+
 2004-08-30  Federico Mena Quintero  <federico@ximian.com>
 
 	Fix #145200:

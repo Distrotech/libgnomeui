@@ -1,3 +1,15 @@
+libgnomeui 2.6.2 "Turret"
+-------------------------
+What's new since 2.6.1
+
+ * Bug fixes (all merged from HEAD):
+       - filechooser crasher fixed (Federico Mena Quintero)
+       - memleak fixes (Kjartan Maraas)
+       - Handle invalid values from gdk_pixbuf_get_option. (Martin Wehner)
+       - use gnome_url_show_on_screen for GnomeHRef (Anders Carlsson)
+ * Translations
+	- tk translation added (Christian Rose)
+
 libgnomeui 2.6.1 "Magmoor"
 --------------------------
 
