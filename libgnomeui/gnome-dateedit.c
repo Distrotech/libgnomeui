@@ -230,8 +230,11 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 		mtm->tm_hour = i;
 		mtm->tm_min  = 0;
 		hit = g_new (hour_info_t, 1);
-		
-		strftime (buffer, sizeof (buffer), "%I:00 %p ", mtm);
+
+		if (gde->is_24_hour)
+			strftime (buffer, sizeof (buffer), "%H:00", mtm);
+		else
+			strftime (buffer, sizeof (buffer), "%I:00 %p ", mtm);
 		hit->hour = g_strdup (buffer);
 		hit->gde  = gde;
 
@@ -252,7 +255,10 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 
 			mtm->tm_min = j;
 			hit = g_new (hour_info_t, 1);
-			strftime (buffer, sizeof (buffer), "%I:%M %p", mtm);
+			if (gde->is_24_hour)
+				strftime (buffer, sizeof (buffer), "%H:%M", mtm);
+			else
+				strftime (buffer, sizeof (buffer), "%I:%M %p", mtm);
 			hit->hour = g_strdup (buffer);
 			hit->gde  = gde;
 
@@ -337,7 +343,10 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 
 	if (gde->time_entry) {
 		/* Set the time */
-		strftime (buffer, sizeof (buffer), "%I:%M %p", mytm);
+		if (gde->is_24_hour)
+			strftime (buffer, sizeof (buffer), "%H:%M", mytm);
+		else
+			strftime (buffer, sizeof (buffer), "%I:%M %p", mytm);
 		gtk_entry_set_text (GTK_ENTRY (gde->time_entry), buffer);
 	}
 }
@@ -433,12 +442,13 @@ create_children (GnomeDateEdit *gde, int show_time)
 }
 
 GtkWidget *
-gnome_date_edit_new (time_t the_time, int show_time)
+gnome_date_edit_new (time_t the_time, int show_time, int use_24_format)
 {
 	GnomeDateEdit *gde;
 
 	gde = gtk_type_new (gnome_date_edit_get_type ());
 
+	gde->is_24_hour = use_24_format;
 	create_children (gde, show_time);
 	gnome_date_edit_set_time (gde, the_time);
 

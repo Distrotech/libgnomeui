@@ -1,3 +1,13 @@
+1998-05-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-dateedit.c: Add support for 12/24 hour format.
+
+1998-05-15  Federico Mena  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_init): Connect to the
+	"changed" signal of the adjustments as well, otherwise we will not
+	reset stuff properly when clearing the icon list.
+
 1998-05-15  Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-icon-list.c (gnome_icon_list_button_press): pressing non-left mouse button

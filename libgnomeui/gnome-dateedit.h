@@ -26,6 +26,7 @@ typedef struct {
 	int       upper_hour;
 	
 	time_t    initial_time;
+	int       is_24_hour;
 } GnomeDateEdit;
 
 typedef struct {
@@ -35,7 +36,7 @@ typedef struct {
 } GnomeDateEditClass;
 
 guint     gnome_date_edit_get_type        (void);
-GtkWidget *gnome_date_edit_new            (time_t the_time, int show_time);
+GtkWidget *gnome_date_edit_new            (time_t the_time, int show_time, int use_24_format);
 
 void      gnome_date_edit_set_time        (GnomeDateEdit *gde, time_t the_time);
 void      gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour);
