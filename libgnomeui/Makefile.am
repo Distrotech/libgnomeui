@@ -140,6 +140,8 @@ libgnomeui_2_la_SOURCES = \
 	gnome-geometry.c		\
 	gnome-entry.c			\
 	gnome-selector.c		\
+	gnome-selectorP.h		\
+	gnome-file-selector.c		\
 	gnome-file-entry.c		\
         gnome-font-picker.c		\
 	gnome-gconf.c			\
@@ -217,6 +219,7 @@ gnome_headers = \
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
 	gnome-selector.h		\
+	gnome-file-selector.h		\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\
 	gnome-gconf.h			\

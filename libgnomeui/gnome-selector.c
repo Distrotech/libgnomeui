@@ -35,20 +35,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtkentry.h>
-#include <gtk/gtkcombo.h>
+#include <gtk/gtkvbox.h>
+#include <gtk/gtkbutton.h>
 #include <gtk/gtklist.h>
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
 #include "libgnome/libgnomeP.h"
-#include "gnome-selector.h"
-#include "gnome-entry.h"
+#include "gnome-selectorP.h"
+#include "gnome-uidefs.h"
 
-struct _GnomeSelectorPrivate {
-	GtkWidget   *gentry;
-
-	guint32      changed : 1;
-};
-	
 
 static void gnome_selector_class_init (GnomeSelectorClass *class);
 static void gnome_selector_init       (GnomeSelector      *selector);
@@ -101,7 +96,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_combo_get_type ());
+	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
 	object_class->destroy = gnome_selector_destroy;
 	gobject_class->finalize = gnome_selector_finalize;
@@ -140,13 +135,19 @@ gnome_selector_init (GnomeSelector *selector)
 {
 	selector->_priv = g_new0 (GnomeSelectorPrivate, 1);
 
-	selector->_priv->changed      = FALSE;
+	selector->_priv->changed = FALSE;
+
+	selector->_priv->selector_widget = NULL;
+	selector->_priv->is_popup = FALSE;
 }
 
 /**
  * gnome_selector_construct:
  * @selector: Pointer to GnomeSelector object.
  * @history_id: If not %NULL, the text id under which history data is stored
+ * @selector_widget: Widget which should be used as selector.
+ * @is_popup: Flag indicating whether @selector_widget is a popop dialog
+ * or not.
  *
  * Constructs a #GnomeSelector object, for language bindings or subclassing
  * use #gnome_selector_new from C
@@ -155,12 +156,54 @@ gnome_selector_init (GnomeSelector *selector)
  */
 void
 gnome_selector_construct (GnomeSelector *selector, 
-			  const gchar *history_id)
+			  const gchar *history_id,
+			  const gchar *dialog_title,
+			  GtkWidget *selector_widget,
+			  gboolean is_popup)
 {
+	GnomeSelectorPrivate *priv;
+
 	g_return_if_fail (selector != NULL);
 	g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-	selector->_priv->gentry		= gnome_entry_new (history_id);
+	priv = selector->_priv;
+
+	priv->gentry = gnome_entry_new (history_id);
+
+	priv->dialog_title = g_strdup (dialog_title);
+
+	priv->selector_widget = selector_widget;
+	gtk_widget_ref (priv->selector_widget);
+	priv->is_popup = is_popup;
+
+	if (priv->is_popup) {
+		priv->entry_hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+		priv->browse_button = gtk_button_new_with_label
+			(_("Browse..."));
+
+		gtk_box_pack_start (GTK_BOX (priv->entry_hbox),
+				    priv->gentry, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (priv->entry_hbox),
+				    priv->browse_button, FALSE, FALSE, 0);
+
+		gtk_widget_show_all (priv->entry_hbox);
+
+		gtk_box_pack_start (GTK_BOX (selector),
+				    priv->entry_hbox,
+				    FALSE, FALSE, 0);
+	} else {
+		gtk_widget_show (priv->gentry);
+
+		gtk_box_pack_start (GTK_BOX (selector),
+				    priv->gentry,
+				    FALSE, FALSE, 0);
+
+		gtk_box_pack_start (GTK_BOX (selector),
+				    priv->selector_widget,
+				    TRUE, TRUE, 0);
+
+		gtk_widget_show (priv->selector_widget);
+	}
 }
 
 
@@ -175,6 +218,12 @@ gnome_selector_destroy (GtkObject *object)
 	g_return_if_fail (GNOME_IS_SELECTOR (object));
 
 	selector = GNOME_SELECTOR (object);
+
+	if (selector->_priv->selector_widget) {
+		gtk_widget_unref (selector->_priv->selector_widget);
+		selector->_priv->selector_widget = NULL;
+		selector->_priv->is_popup = FALSE;
+	}
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -212,5 +261,52 @@ gnome_selector_get_gnome_entry (GnomeSelector *selector)
 	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
 
 	return selector->_priv->gentry;
+}
+
+
+/**
+ * gnome_selector_get_dialog_title
+ * @selector: Pointer to GnomeSelector object.
+ *
+ * Description: Returns the titel of the popup dialog.
+ *
+ * Returns: Titel of the popup dialog.
+ */
+const gchar *
+gnome_selector_get_dialog_title (GnomeSelector *selector)
+{
+	g_return_val_if_fail (selector != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+	return selector->_priv->dialog_title;
+}
+
+
+/**
+ * gnome_selector_set_dialog_title
+ * @selector: Pointer to GnomeSelector object.
+ * @dialog_title: New title for the popup dialog.
+ *
+ * Description: Sets the titel of the popup dialog.
+ *
+ * This is only used when the widget uses a popup dialog for
+ * the actual selector.
+ *
+ * Returns:
+ */
+void
+gnome_selector_set_dialog_title (GnomeSelector *selector,
+				 const gchar *dialog_title)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	if (selector->_priv->dialog_title) {
+		g_free (selector->_priv->dialog_title);
+		selector->_priv->dialog_title = NULL;
+	}
+
+	/* this is NULL safe. */
+	selector->_priv->dialog_title = g_strdup (dialog_title);
 }
 

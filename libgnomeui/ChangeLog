@@ -3,6 +3,9 @@
 	Added new GnomeSelector widget. We'll subclass this for
 	files, directories, icons, pixmaps and so on.
 
+	* gnome-file-selector.[ch]: New files.
+	* gnome-selectorP.h: New file.
+
 	* gnome-selector.[ch]: New files.
 	* selector-demo.c: New demo.
 

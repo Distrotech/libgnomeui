@@ -22,12 +22,16 @@
 
 #include <gnome.h>
 
-#include "gnome-selector.h"
+#include "gnome-file-selector.h"
 
 int
 main (int argc, char **argv)
 {
     GtkWidget *app;
+    GtkWidget *vbox;
+    GtkWidget *frame1, *frame2;
+    GtkWidget *fselector1, *fselector2;
+    GtkWidget *selector;
 
     gnome_program_init ("selector_demo", "1.0", argc, argv,
 			GNOMEUI_INIT, NULL);
@@ -35,6 +39,31 @@ main (int argc, char **argv)
     app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (app), "Selector Demo!");
     gtk_window_set_default_size (GTK_WINDOW (app), 400, 400);
+
+    vbox = gtk_vbox_new (FALSE, GNOME_PAD);
+
+    frame1 = gtk_frame_new ("Test 1");
+
+    gtk_box_pack_start (GTK_BOX (vbox), frame1, TRUE, TRUE,
+			GNOME_PAD);
+
+    selector = gtk_label_new ("<selector widget goes here>");
+
+    fselector1 = gnome_file_selector_new_custom ("test", NULL,
+						 selector, FALSE);
+
+    gtk_container_add (GTK_CONTAINER (frame1), fselector1);
+
+    frame2 = gtk_frame_new ("Test 2");
+
+    gtk_box_pack_start (GTK_BOX (vbox), frame2, FALSE, TRUE,
+			GNOME_PAD);
+
+    fselector2 = gnome_file_selector_new ("test2", NULL);
+
+    gtk_container_add (GTK_CONTAINER (frame2), fselector2);
+
+    gtk_container_add (GTK_CONTAINER (app), vbox);
 
     gtk_widget_show_all (app);
     gtk_main ();

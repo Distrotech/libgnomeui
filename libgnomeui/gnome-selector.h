@@ -71,24 +71,32 @@ struct _GnomeSelectorClass {
 };
 
 
-guint        gnome_selector_get_type       (void);
+guint        gnome_selector_get_type         (void);
 
 /* This is a purely virtual class, so there is no _new method.
  * Use gnome_{file,icon,pixmap}_selector_new instead. */
 
-void         gnome_selector_construct      (GnomeSelector *selector,
-                                            const gchar *history_id);
+void         gnome_selector_construct        (GnomeSelector *selector,
+                                              const gchar *history_id,
+					      const gchar *dialog_title,
+					      GtkWidget *selector_widget,
+					      gboolean is_popup);
 
 /*only return a file if the `check_filename' method succeeded. */
-gchar       *gnome_selector_get_filename  (GnomeSelector *selector);
+gchar       *gnome_selector_get_filename     (GnomeSelector *selector);
 
 /* checks whether this is a valid filename. */
-gboolean     gnome_selector_check_filename (GnomeSelector *selector,
-                                            const gchar *filename);
+gboolean     gnome_selector_check_filename   (GnomeSelector *selector,
+                                              const gchar *filename);
 
 /* set the filename to something, returns TRUE on success. */
-gboolean     gnome_selector_set_filename   (GnomeSelector *selector,
-                                            const gchar *filename);
+gboolean     gnome_selector_set_filename     (GnomeSelector *selector,
+                                              const gchar *filename);
+
+/* get/set the dialog title. */
+const gchar *gnome_selector_get_dialog_title (GnomeSelector *selector);
+void         gnome_selector_set_dialog_title (GnomeSelector *selector,
+					      const gchar *dialog_title);
 
 /* returns the GnomeEntry widget of this selector. */
 GtkWidget   *gnome_selector_get_gnome_entry  (GnomeSelector *selector);
