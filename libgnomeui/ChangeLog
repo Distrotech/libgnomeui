@@ -1,5 +1,9 @@
 1998-07-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): When re-setting
+	the coordinates of the line, drop the arrowhead polygons if they
+	exist, as they need to be regenerated.
+
 	* gnome-canvas-line.c (reconfigure_arrows): Do not do anything if
 	the line does not have any points at all.
 	(recalc_bounds): Only grow the bounds to include the arrows if the

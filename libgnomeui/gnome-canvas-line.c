@@ -288,7 +288,19 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			memcpy (line->coords, points->coords, 2 * line->num_points * sizeof (double));
 		}
 
-		calc_bounds = TRUE;
+		/* Drop the arrowhead polygons if they exist -- they will be regenerated */
+
+		if (line->first_coords) {
+			g_free (line->first_coords);
+			line->first_coords = NULL;
+		}
+
+		if (line->last_coords) {
+			g_free (line->last_coords);
+			line->last_coords = NULL;
+		}
+
+		recalc = TRUE; /* need to re-generate arrowheads in addition to rebounding */
 		break;
 
 	case ARG_FILL_COLOR:
