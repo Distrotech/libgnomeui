@@ -64,8 +64,8 @@
 
 #define GNOME_KEY_NAME_SAVE	        'S'
 #define GNOME_KEY_MOD_SAVE	        (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_OPEN	        'O'
-#define GNOME_KEY_MOD_OPEN	        (GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_OPEN	        GDK_F3
+#define GNOME_KEY_MOD_OPEN	        (0)
 #define GNOME_KEY_NAME_SAVE_AS	        0
 #define GNOME_KEY_MOD_SAVE_AS           (0)
 #define GNOME_KEY_NAME_NEW	        0
