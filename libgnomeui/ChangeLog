@@ -1,3 +1,8 @@
+1999-07-05  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-about.c: Make the inter-line skip, it is not required
+	(descent+ascent has all the information we need).
+
 1999-07-04  Miguel de Icaza  <miguel@gnu.org>
 
 	* gnome-client.c: small fix for api docs.

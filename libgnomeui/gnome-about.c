@@ -34,7 +34,7 @@
 
 #define GNOME_ABOUT_DEFAULT_WIDTH               100
 #define GNOME_ABOUT_MAX_WIDTH                   600
-#define BASE_LINE_SKIP                          4
+#define BASE_LINE_SKIP                          0
 
 typedef struct
 {
