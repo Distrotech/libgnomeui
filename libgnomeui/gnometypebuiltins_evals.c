@@ -162,15 +162,9 @@ static const GtkEnumValue _gnome_mdi_mode_values[] = {
   { GNOME_MDI_DEFAULT_MODE, "GNOME_MDI_DEFAULT_MODE", "default-mode" },
   { 0, NULL, NULL }
 };
-static const GtkEnumValue _gnome_stock_pixmap_type_values[] = {
-  { GNOME_STOCK_PIXMAP_TYPE_NONE, "GNOME_STOCK_PIXMAP_TYPE_NONE", "none" },
-  { GNOME_STOCK_PIXMAP_TYPE_DATA, "GNOME_STOCK_PIXMAP_TYPE_DATA", "data" },
-  { GNOME_STOCK_PIXMAP_TYPE_FILE, "GNOME_STOCK_PIXMAP_TYPE_FILE", "file" },
-  { GNOME_STOCK_PIXMAP_TYPE_PATH, "GNOME_STOCK_PIXMAP_TYPE_PATH", "path" },
-  { GNOME_STOCK_PIXMAP_TYPE_WIDGET, "GNOME_STOCK_PIXMAP_TYPE_WIDGET", "widget" },
-  { GNOME_STOCK_PIXMAP_TYPE_IMLIB, "GNOME_STOCK_PIXMAP_TYPE_IMLIB", "imlib" },
-  { GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED, "GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED", "imlib-scaled" },
-  { GNOME_STOCK_PIXMAP_TYPE_GPIXMAP, "GNOME_STOCK_PIXMAP_TYPE_GPIXMAP", "gpixmap" },
+static const GtkEnumValue _gnome_pixmap_draw_values[] = {
+  { GNOME_PIXMAP_SIMPLE, "GNOME_PIXMAP_SIMPLE", "simple" },
+  { GNOME_PIXMAP_COLOR, "GNOME_PIXMAP_COLOR", "color" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_preferences_type_values[] = {

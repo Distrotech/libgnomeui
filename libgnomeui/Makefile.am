@@ -6,7 +6,7 @@ SUBDIRS = pixmaps
 # The targets
 #
 noinst_PROGRAMS = stock_demo winhints_demo  dock_demo #animator_demo
-bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap
+bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
 lib_LTLIBRARIES = libgnomeui.la
 
 if COMPILE_GNOME_COMPAT
@@ -31,11 +31,11 @@ INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) 		\
 	$(GTK_CFLAGS) $(ORBIT_CFLAGS)			\
 	-DVERSION=\"$(VERSION)\"
 
-gnome_factory_built=\
-	gnome-factory.h 				\
-	gnome-factory-skels.c 				\
-	gnome-factory-stubs.c 				\
-	gnome-factory-common.c
+gnome_corba_rexec_built = 		\
+	gnome-corba-rexec.h		\
+	gnome-corba-rexec-skels.c	\
+	gnome-corba-rexec-stubs.c	\
+	gnome-corba-rexec-common.c
 
 gnome_unknown_built = \
 	gnome-unknown.h					\
@@ -49,8 +49,8 @@ history_db_built = \
 	HistoryDB-skels.c \
 	HistoryDB-common.c
 
-$(gnome_factory_built): $(top_srcdir)/idl/gnome-factory.idl
-	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-factory.idl
+$(gnome_corba_rexec_built): $(top_srcdir)/idl/gnome-corba-rexec.idl
+	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-corba-rexec.idl
 
 $(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
 	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-unknown.idl
@@ -58,7 +58,7 @@ $(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
 $(history_db_built): $(top_srcdir)/idl/HistoryDB.idl
 	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/HistoryDB.idl
 
-gnorba_built = $(gnome_factory_built) $(gnome_unknown_built) $(history_db_built)
+gnorba_built = $(gnome_unknown_built) $(history_db_built) $(gnome_corba_rexec_built)
 
 if COMPILE_GNOME_COMPAT
 libgnomeui10compatincludedir = $(includedir)/libgnomeui/compat10
@@ -235,16 +235,19 @@ gnome_headers = \
 libgnomeuiinclude_HEADERS =		\
 	$(gnome_headers)		\
 	gnome-unknown.h			\
-	gnome-factory.h			\
 	HistoryDB.h			\
+	gnome-corba-rexec.h		\
 	gnometypebuiltins.h
 
 ORBIT_IDL=orbit-idl
 
-IDL_FLAGS=-D__LIBOAFGNOME_COMPILATION
+IDL_FLAGS=-D__LIBOAFGNOME_COMPILATION -D__LIBGNORBA_COMPILATION
 
 gnome_remote_bootstrap_SOURCES=gnome-remote-bootstrap.c
 gnome_remote_bootstrap_LDADD=../libgnome/libgnome.la
+
+gnome_rexec_server_SOURCES=gnome-rexec-server.c
+gnome_rexec_server_LDADD=../libgnome/libgnome.la gnome-corba-rexec-skels.o gnome-corba-rexec-common.o $(OAF_LIBS)
 
 BUILT_SOURCES = \
 	gnometypebuiltins.h		\
@@ -303,6 +306,9 @@ gtkrc_DATA = gtkrc gtkrc.el gtkrc.eo gtkrc.he gtkrc.hy gtkrc.ja \
 	gtkrc.ka_GE.georgianacademy gtkrc.ka_GE.georgianps \
 	gtkrc.vi_VN.tcvn gtkrc.vi_VN.viscii
 
+oafinfodir=$(datadir)/oaf
+oafinfo_DATA=gnome-rexec-server.oafinfo
+
 EXTRA_DIST =					\
 	$(gtkrc_DATA)				\
 	AUTHORS					\
@@ -312,7 +318,8 @@ EXTRA_DIST =					\
 	gnome-boxed.defs			\
 	gnometypebuiltins_vars.c		\
 	gnometypebuiltins_ids.c			\
-	gnometypebuiltins_evals.c
+	gnometypebuiltins_evals.c		\
+	$(oafinfo_DATA)
 
 libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir) \
 		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome \
