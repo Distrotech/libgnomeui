@@ -1,13 +1,13 @@
 # Catalan translation of libgnomeui.
-# Copyright (C) 2002 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2003 Free Software Foundation, Inc.
 # Dani Vilar <32023dvr@comb.es>, 2002.
-# Jordi Mallach <jordi@sindominio.net>, 2002.
+# Jordi Mallach <jordi@sindominio.net>, 2002, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.1.5\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
-"PO-Revision-Date: 2003-02-22 23:56+0100\n"
+"Project-Id-Version: libgnomeui 2.3.0\n"
+"POT-Creation-Date: 2003-06-04 15:02+0200\n"
+"PO-Revision-Date: 2003-06-04 15:08+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -47,9 +47,8 @@ msgid "Translated by"
 msgstr "Traduït per"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Crèdits"
+msgstr "C_rèdits"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -141,6 +140,7 @@ msgstr "Quant a %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitxer"
 
@@ -198,6 +198,7 @@ msgid "_Game"
 msgstr "_Joc"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -388,11 +389,11 @@ msgstr "Configura l'aplicació"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Quant a"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Quant a aquesta aplicació"
 
@@ -419,7 +420,7 @@ msgstr "Crea una nova finestra"
 msgid "_Close This Window"
 msgstr "_Tanca aquesta finestra"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Tanca la finestra actual"
 
@@ -497,11 +498,11 @@ msgstr "_Continguts"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr "Veure l'ajuda per a aquesta aplicació"
+msgstr "Visualitza l'ajuda per a aquesta aplicació"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr "Text baix les icones"
+msgstr "Text sota les icones"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
@@ -530,7 +531,7 @@ msgstr "ERROR: "
 
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr "Advertència:"
+msgstr "Avís: "
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
@@ -558,7 +559,7 @@ msgstr "  - D'acord? (sí o no)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr "En curs"
+msgstr "Progrés"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
@@ -594,7 +595,7 @@ msgstr "Nivell d'usuari requerit."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "El vostre servidor intermediari d'HTTP requereix que vos identifiqueu.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -602,18 +603,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Heu d'identificar-vos per a accedir a «%s».\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "La vostra contrasenya es transmetrà sense xifrar."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "La vostra contrasenya es transmetrà xifrada."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Es requereix autenticació"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1199,7 +1202,7 @@ msgstr "GnomeIconSelection: no s'ha pogut obrir el directori «%s»"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr "S'està carregant les icones..."
+msgstr "S'estan carregant les icones..."
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
@@ -1207,7 +1210,7 @@ msgstr "Informació"
 
 #: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
-msgstr "Advertència"
+msgstr "Avís"
 
 #: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
@@ -1223,11 +1226,11 @@ msgstr "Missatge"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "Nom d'_usuari:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Contrasenya:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1358,7 +1361,7 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Ús: gnome_segv2 nomapp numsig\n"
+msgstr "Forma d'ús: gnome_segv2 nomapp numsig\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
@@ -1378,8 +1381,9 @@ msgstr ""
 "Si us plau, visiteu la pàgina de Fallades d'Aplicació del GNOME per més "
 "informació"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Surt del test"
+
 #~ msgid "_Credits"
 #~ msgstr "_Crèdits"
-
-#~ msgid "Exit the test"
-#~ msgstr "Surt del test"
