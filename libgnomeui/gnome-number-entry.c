@@ -14,8 +14,10 @@
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
 #include "libgnome/libgnome.h"
-#include "libgnomeui/libgnomeui.h"
 #include "gnome-number-entry.h"
+#include "gnome-calculator.h"
+#include "gnome-dialog.h"
+#include "gnome-stock.h"
 
 
 static void gnome_number_entry_class_init (GnomeNumberEntryClass *class);

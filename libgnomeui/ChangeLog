@@ -1,3 +1,7 @@
+1998-06-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-number-entry.c: Fixup includes.
+
 1998-06-18  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
  	
 	* gnome-app-helper.c: changed gnome_app_add_[radio|help]_menu_entries() to
