@@ -40,9 +40,27 @@ gboolean          gnome_preferences_get_menubar_handlebox    (void);
 void              gnome_preferences_set_menubar_handlebox    (gboolean b);
 
 /* Whether toolbar buttons have a beveled edge */
-gboolean          gnome_preferences_get_toolbar_relief    (void);
-void              gnome_preferences_set_toolbar_relief    (gboolean b);
+gboolean          gnome_preferences_get_toolbar_relief       (void);
+void              gnome_preferences_set_toolbar_relief       (gboolean b);
+
+/* Whether to try to center dialogs over their parent window.
+   If it's possible, dialog_position is ignored. If not,
+   fall back to dialog_position. */
+gboolean          gnome_preferences_get_dialog_centered      ();
+void              gnome_preferences_set_dialog_centered      (gboolean b);
+
+/* Whether dialogs are GTK_WINDOW_DIALOG or GTK_WINDOW_TOPLEVEL */
+GtkWindowType     gnome_preferences_get_dialog_type          ();
+void              gnome_preferences_set_dialog_type          (GtkWindowType t);
+
+/* Whether dialogs are GTK_WIN_POS_NONE, GTK_WIN_POS_CENTER,
+   GTK_WIN_POS_MOUSE */
+GtkWindowPosition gnome_preferences_get_dialog_position      ();
+void              gnome_preferences_set_dialog_position      (GtkWindowPosition p);
 
 END_GNOME_DECLS
 
 #endif
+
+
+

@@ -1,3 +1,29 @@
+Fri Jul 24 19:54:43 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-scores.c (gnome_scores_new): Use construct to set 
+	the title and buttons.
+
+        * gnome-app-util.c: Switch to parented dialogs. 
+	
+	* gnome-dialog-util.h, gnome-dialog-util.c: Added "parented" 
+	versions of these. The old versions are not really necessary 
+	anymore because you can just pass NULL for parent, but they
+	save typing I guess.
+
+	* gnome-preferences.h: New functions for dialog position, whether
+ 	to attempt dialog-over-parent centering, whether dialogs are
+ 	TOPLEVEL or DIALOG.
+
+	* gnome-dialog.c (gnome_dialog_newv): Remove unused variable.
+	(gnome_dialog_set_parent): New function, allows setting a parent
+	the dialog should be centered over.	
+
+Sat Jul 25 02:51:12 1998  Simon Kagedal  <simon@sdf.se>
+ 
+ 	* gnome-scores.c, gnome-scores.h:
+ 	made the GnomeScore dialog inherit from GnomeDialog
+ 	instead of GtkWindow	
+	
 1998-07-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (emit_event): When there is a grabbed item, the

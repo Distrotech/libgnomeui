@@ -56,6 +56,8 @@ struct _GnomeDialog
   int modal : 1;
   int click_closes : 1;
   int just_hide : 1;
+
+  GtkWindow * parent;
 };
 
 struct _GnomeDialogClass
@@ -81,6 +83,14 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 GtkWidget* gnome_dialog_newv           (const gchar * title,
 					const gchar **buttons);
 
+/* For now this just means the dialog can be centered over
+   its parent. */
+void       gnome_dialog_set_parent     (GnomeDialog * dialog,
+					GtkWindow   * parent);
+
+/* Note: it's better to use GnomeDialog::clicked rather than 
+   connecting to a button. These are really here in case
+   you're lazy. */
 /* Connect to the "clicked" signal of a single button */
 void       gnome_dialog_button_connect (GnomeDialog *dialog,
 					gint button,

@@ -172,7 +172,12 @@ gnome_dialog_init (GnomeDialog *dialog)
   dialog->just_hide = FALSE;
   dialog->click_closes = FALSE;
   dialog->buttons = NULL;
+  dialog->parent = NULL;
 
+  GTK_WINDOW(dialog)->type = gnome_preferences_get_dialog_type();
+  gtk_window_position(GTK_WINDOW(dialog), 
+		      gnome_preferences_get_dialog_position());
+  
 #ifdef GTK_HAVE_ACCEL_GROUP
   dialog->accelerators = gtk_accel_group_new();
   gtk_window_add_accel_group (GTK_WINDOW(dialog), 
@@ -288,7 +293,6 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 GtkWidget* gnome_dialog_newv            (const gchar * title,
 					 const gchar ** buttons)
 {
-  va_list ap;
   GnomeDialog *dialog;
 	
   dialog = gtk_type_new (gnome_dialog_get_type ());
@@ -296,6 +300,42 @@ GtkWidget* gnome_dialog_newv            (const gchar * title,
   gnome_dialog_constructv(dialog, title, buttons);
 
   return GTK_WIDGET (dialog);
+}
+
+void       gnome_dialog_set_parent     (GnomeDialog * dialog,
+					GtkWindow   * parent)
+{
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+  g_return_if_fail(parent != NULL);
+  g_return_if_fail(GTK_IS_WINDOW(parent));
+
+  dialog->parent = parent;
+
+  if ( gnome_preferences_get_dialog_centered() ) {
+
+    /* User wants us to center over parent */
+
+    gint x, y, w, h, dialog_x, dialog_y;
+
+    if ( ! GTK_WIDGET_VISIBLE(parent)) return; /* Can't get its
+						  size/pos */
+
+    /* Throw out other positioning */
+    gtk_window_position(GTK_WINDOW(dialog),GTK_WIN_POS_NONE);
+
+    gdk_window_get_origin (GTK_WIDGET(parent)->window, &x, &y);
+    gdk_window_get_size   (GTK_WIDGET(parent)->window, &w, &h);
+
+    /* The problem here is we don't know how big the dialog is.
+       So "centered" isn't really true. We'll go with 
+       "kind of more or less on top" */
+
+    dialog_x = x + w/4;
+    dialog_y = y + h/4;
+
+    gtk_widget_set_uposition(GTK_WIDGET(dialog), dialog_x, dialog_y); 
+  }
 }
 
 
@@ -788,6 +828,35 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.35  1998/07/25 03:07:40  hp
+
+
+  Fri Jul 24 19:54:43 1998  Havoc Pennington  <hp@pobox.com>
+
+          * gnome-scores.c (gnome_scores_new): Use construct to set
+          the title and buttons.
+
+          * gnome-app-util.c: Switch to parented dialogs.
+
+  	* gnome-dialog-util.h, gnome-dialog-util.c: Added "parented"
+  	versions of these. The old versions are not really necessary
+  	anymore because you can just pass NULL for parent, but they
+  	save typing I guess.
+
+  	* gnome-preferences.h: New functions for dialog position, whether
+  	to attempt dialog-over-parent centering, whether dialogs are
+  	TOPLEVEL or DIALOG.
+
+  	* gnome-dialog.c (gnome_dialog_newv): Remove unused variable.
+  	(gnome_dialog_set_parent): New function, allows setting a parent
+  	the dialog should be centered over.
+
+  Sat Jul 25 02:51:12 1998  Simon Kagedal  <simon@sdf.se>
+
+          * gnome-scores.c, gnome-scores.h:
+          made the GnomeScore dialog inherit from GnomeDialog
+          instead of GtkWindow
+
   Revision 1.34  1998/07/18 17:53:31  hp
 
 

@@ -39,7 +39,8 @@ gnome_scores_get_type ()
 			(GtkArgGetFunc) NULL,
 		};
 
-		scores_type = gtk_type_unique (gtk_window_get_type (), &scores_info);
+		scores_type = gtk_type_unique (gnome_dialog_get_type (), 
+					       &scores_info);
 	}
 
 	return scores_type;
@@ -61,16 +62,16 @@ gnome_scores_new (  guint n_scores,
 	GtkWidget *retval = gtk_type_new(gnome_scores_get_type());
 	GnomeScores  *gs = GNOME_SCORES(retval); 
 	GtkTable	*table;
-	GtkWidget	*hor_table;
 	GtkWidget	*label;
-	GtkWidget	*hSep;
-	GtkWidget	*button1;
 	gchar     	tmp[10];
 	gchar     	*tmp2;
 	int i;
+	gchar * buttons[] = { GNOME_STOCK_BUTTON_OK, NULL };
 
-  	gtk_window_set_policy (GTK_WINDOW(gs), FALSE, FALSE, TRUE);
-  
+	gnome_dialog_constructv(GNOME_DIALOG(retval),
+				_("Top Ten"),
+				buttons);
+
 	gs->logo = 0;
 	gs->but_clear = 0;
 	gs->n_scores = n_scores;
@@ -111,35 +112,22 @@ gnome_scores_new (  guint n_scores,
   	}
 	gtk_widget_show (GTK_WIDGET(table));
 
-	button1 = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-	gtk_signal_connect_object (GTK_OBJECT (button1), "clicked",
-				   GTK_SIGNAL_FUNC (gtk_widget_destroy),
-				   GTK_OBJECT (gs));
-	gtk_widget_show (button1);
-	hor_table     = gtk_table_new (1, clear?5:3, TRUE); 
-	gtk_table_attach_defaults ( GTK_TABLE(hor_table), button1, 1, 2, 0, 1);
-	gtk_widget_show (hor_table);
-
+	/* 
 	if(clear) {
-		gs->but_clear = gtk_button_new_with_label ( _("Clear") );
-		gtk_widget_show (gs->but_clear);
-		gtk_table_attach_defaults ( GTK_TABLE(hor_table), gs->but_clear, 3, 4, 0, 1);
+	  gs->but_clear = gtk_button_new_with_label ( _("Clear") );
+	  gtk_widget_show (gs->but_clear);
+	  gtk_table_attach_defaults ( GTK_TABLE(hor_table), gs->but_clear, 3, 4, 0, 1);
   	}
+	*/
 
-	gs->vbox = gtk_vbox_new (FALSE, 5);
-	gtk_widget_show (gs->vbox);
-	gtk_box_pack_end (GTK_BOX(gs->vbox), hor_table, TRUE, TRUE, 0);
-	hSep = gtk_hseparator_new ();
-	gtk_widget_show (hSep);
-	gtk_box_pack_end (GTK_BOX(gs->vbox), hSep, TRUE, TRUE, 0);
-	gtk_box_pack_end (GTK_BOX(gs->vbox), GTK_WIDGET(table), TRUE, TRUE, 0);
-	hSep = gtk_hseparator_new ();
-	gtk_widget_show (hSep);
-	gtk_box_pack_end (GTK_BOX(gs->vbox), hSep, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX(GNOME_DIALOG(gs)->vbox),
+			    GTK_WIDGET(table),
+			    TRUE, TRUE, 0);
 
-	gtk_container_add( GTK_CONTAINER(gs), gs->vbox);
-	gtk_window_set_title (GTK_WINDOW (gs), _("Top Ten") );
 	gtk_container_border_width (GTK_CONTAINER (gs), 5);
+
+
+	gnome_dialog_set_close (GNOME_DIALOG (gs), TRUE);
 
 	return retval;
 }
@@ -196,7 +184,7 @@ void gnome_scores_set_logo_label_title (GnomeScores *gs, gchar *txt)
 
 	gs->logo = gtk_label_new(txt);
 	gtk_widget_set_name(GTK_WIDGET(gs->logo), "Logo");
-	gtk_box_pack_end (GTK_BOX(gs->vbox), gs->logo, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX(GNOME_DIALOG(gs)->vbox), gs->logo, TRUE, TRUE, 0);
 	gtk_widget_show (gs->logo);
 }
 
@@ -228,7 +216,7 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 	gs->logo = gtk_label_new(txt);
 	gtk_widget_set_style(GTK_WIDGET(gs->logo), s);
 	gtk_style_unref(s);
-	gtk_box_pack_end (GTK_BOX(gs->vbox), gs->logo, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX(GNOME_DIALOG(gs)->vbox), gs->logo, TRUE, TRUE, 0);
 	gtk_widget_show (gs->logo);
 }
 
@@ -241,7 +229,7 @@ void gnome_scores_set_logo_widget (GnomeScores *gs, GtkWidget *w)
 	}
 
 	gs->logo = w;
-	gtk_box_pack_end (GTK_BOX(gs->vbox), gs->logo, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX(GNOME_DIALOG(gs)->vbox), gs->logo, TRUE, TRUE, 0);
 }
 
 void gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
@@ -262,7 +250,7 @@ void gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
 					      pix_name);
 	gs->logo = gtk_pixmap_new (pixmap, mask);
 
-	gtk_box_pack_end (GTK_BOX(gs->vbox), gs->logo, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX(GNOME_DIALOG(gs)->vbox), gs->logo, TRUE, TRUE, 0);
 	gtk_widget_show (gs->logo);
 }
 

@@ -104,7 +104,7 @@ gnome_app_message (GnomeApp * app, const gchar * message)
     return NULL;
   }
   else {
-    return gnome_ok_dialog(message);
+    return gnome_ok_dialog_parented(message,GTK_WINDOW(app));
   }
 }
 
@@ -128,7 +128,7 @@ gnome_app_error (GnomeApp * app, const gchar * error)
     gnome_app_error_bar(app, error);
     return NULL;
   }
-  else return gnome_error_dialog (error);
+  else return gnome_error_dialog_parented (error,GTK_WINDOW(app));
 }
 
 static void gnome_app_warning_bar (GnomeApp * app, const gchar * warning)
@@ -152,7 +152,7 @@ gnome_app_warning (GnomeApp * app, const gchar * warning)
     return NULL;
   }
   else {
-    return gnome_warning_dialog(warning);
+    return gnome_warning_dialog_parented(warning,GTK_WINDOW(app));
   }
 }
 
@@ -312,7 +312,8 @@ gnome_app_question (GnomeApp * app, const gchar * question,
     return NULL;
   }
   else {
-    return gnome_question_dialog(question, callback, data);
+    return gnome_question_dialog_parented(question, callback, data,
+					  GTK_WINDOW(app));
   }
 }
 
@@ -330,7 +331,8 @@ gnome_app_question_modal (GnomeApp * app, const gchar * question,
     return NULL;
   }
   else {
-    return gnome_question_dialog_modal(question, callback, data);
+    return gnome_question_dialog_modal_parented(question, callback, data,
+						GTK_WINDOW(app));
   }
 }
 
@@ -348,7 +350,8 @@ gnome_app_ok_cancel (GnomeApp * app, const gchar * message,
     return NULL;
   }
   else {
-    return gnome_ok_cancel_dialog(message, callback, data);
+    return gnome_ok_cancel_dialog_parented(message, callback, data,
+					   GTK_WINDOW(app));
   }
 }
 
@@ -366,7 +369,8 @@ gnome_app_ok_cancel_modal (GnomeApp * app, const gchar * message,
     return NULL;
   }
   else {
-    return gnome_ok_cancel_dialog_modal(message, callback, data);
+    return gnome_ok_cancel_dialog_modal_parented(message, callback, data,
+						 GTK_WINDOW(app));
   }
 }
 
@@ -451,7 +455,8 @@ gnome_app_request_string (GnomeApp * app, const gchar * prompt,
     return NULL;
   }
   else {
-    return gnome_request_string_dialog(prompt, callback, data);   
+    return gnome_request_string_dialog_parented(prompt, callback, data,
+						GTK_WINDOW(app));   
   }
 }
 
@@ -467,7 +472,8 @@ gnome_app_request_password (GnomeApp * app, const gchar * prompt,
 
   /* FIXME implement for AppBar */
 
-  return gnome_request_password_dialog(prompt, callback, data);
+  return gnome_request_password_dialog_parented(prompt, callback, data,
+						GTK_WINDOW(app));
 }
 
 /* ================================================== */
@@ -515,6 +521,7 @@ progress_dialog (const gchar * description, ProgressKeyReal * key)
 			 GNOME_STOCK_BUTTON_CANCEL,
 			 NULL );
   gnome_dialog_set_close (GNOME_DIALOG(d), TRUE);
+  gnome_dialog_set_parent(GNOME_DIALOG(d), GTK_WINDOW(key->app));
   gtk_signal_connect (GTK_OBJECT(d), "clicked", 
 		      GTK_SIGNAL_FUNC(progress_clicked_cb),
 		      key);
@@ -535,10 +542,10 @@ progress_dialog (const gchar * description, ProgressKeyReal * key)
 }
 
 static void 
-progress_bar (GnomeApp * app, const gchar * description, ProgressKeyReal * key)
+progress_bar (const gchar * description, ProgressKeyReal * key)
 {
   key->bar = NULL;
-  key->widget = app->statusbar;
+  key->widget = key->app->statusbar;
   gnome_appbar_set_status(GNOME_APPBAR(key->widget), description);
 }
 
@@ -567,13 +574,14 @@ gnome_app_progress_timeout (GnomeApp * app,
 
   key = g_new (ProgressKeyReal, 1);
 
+  key->app = app;
   key->percentage_cb = percentage_cb;
   key->cancel_cb = cancel_cb;
   key->data = data;
 
   if ( gnome_app_has_appbar_progress(app) &&
        gnome_preferences_get_statusbar_dialog() ) {
-    progress_bar    (app, description, key);
+    progress_bar    (description, key);
   }
   else {
     progress_dialog (description, key);
@@ -605,13 +613,14 @@ gnome_app_progress_manual (GnomeApp * app,
 
   key = g_new (ProgressKeyReal, 1);
 
+  key->app = app;
   key->cancel_cb = cancel_cb;
   key->data = data;
   key->timeout_tag = INVALID_TIMEOUT;  
 
   if ( gnome_app_has_appbar_progress(app) &&
        gnome_preferences_get_statusbar_dialog() ) {
-    progress_bar    (app, description, key);
+    progress_bar    (description, key);
   }
   else {
     progress_dialog (description, key);

@@ -20,9 +20,10 @@
 
 #ifndef GNOME_SCORES_H
 #define GNOME_SCORES_H
-#include <gtk/gtkwindow.h>
-#include <libgnome/gnome-defs.h>
+
 #include <time.h>
+#include "gnome-dialog.h"
+#include "libgnome/gnome-defs.h"
 
 BEGIN_GNOME_DECLS
 
@@ -35,13 +36,12 @@ typedef struct _GnomeScoresClass   GnomeScoresClass;
 
 struct _GnomeScores
 {
-  GtkWindow window;
+  GnomeDialog dialog;
 
   GtkWidget *but_clear;
   guint	    n_scores;
 
   GtkWidget *logo;
-  GtkWidget *vbox;
   GtkWidget **label_names;
   GtkWidget **label_scores;
   GtkWidget **label_times;
@@ -49,7 +49,7 @@ struct _GnomeScores
 
 struct _GnomeScoresClass
 {
-  GtkWindowClass parent_class;
+  GnomeDialogClass parent_class;
 };
 
 guint      gnome_scores_get_type (void);

@@ -23,13 +23,18 @@
 #include "gnome-uidefs.h"
 #include <gtk/gtk.h>
 
-static GtkWidget * show_ok_box(const gchar * message, const gchar * type)
+static GtkWidget * show_ok_box(const gchar * message, const gchar * type,
+			       GtkWindow * parent)
 {  
   GtkWidget * mbox;
 
   mbox = gnome_message_box_new (message, type,
 				GNOME_STOCK_BUTTON_OK, NULL);
   
+  if (parent != NULL) {
+    gnome_dialog_set_parent(GNOME_DIALOG(mbox),parent);
+  }
+
   gtk_widget_show (mbox);
   return mbox;
 }
@@ -38,20 +43,39 @@ static GtkWidget * show_ok_box(const gchar * message, const gchar * type)
 /* A little OK box */
 GtkWidget * gnome_ok_dialog      (const gchar * message)
 {
-  return show_ok_box (message, GNOME_MESSAGE_BOX_INFO);
+  return show_ok_box (message, GNOME_MESSAGE_BOX_INFO, NULL);
+}
+
+GtkWidget * gnome_ok_dialog_parented    (const gchar * message,
+					 GtkWindow * parent)
+{
+  return show_ok_box (message, GNOME_MESSAGE_BOX_INFO, parent);
 }
 
 /* Operation failed fatally. In an OK dialog. */
 GtkWidget * gnome_error_dialog   (const gchar * error)
 {
-  return show_ok_box(error, GNOME_MESSAGE_BOX_ERROR);
+  return show_ok_box(error, GNOME_MESSAGE_BOX_ERROR, NULL);
+}
+
+GtkWidget * gnome_error_dialog_parented (const gchar * error,
+					 GtkWindow * parent)
+{
+  return show_ok_box(error, GNOME_MESSAGE_BOX_ERROR, parent);
 }
 
 /* Just a warning. */
 GtkWidget * gnome_warning_dialog (const gchar * warning)
 {
-  return show_ok_box(warning, GNOME_MESSAGE_BOX_WARNING);
+  return show_ok_box(warning, GNOME_MESSAGE_BOX_WARNING, NULL);
 }
+
+GtkWidget * gnome_warning_dialog_parented  (const gchar * warning,
+					    GtkWindow * parent)
+{
+  return show_ok_box(warning, GNOME_MESSAGE_BOX_WARNING, parent);
+}
+
 
 typedef struct {
   gpointer function;
@@ -71,7 +95,8 @@ static GtkWidget * reply_dialog (const gchar * question,
 				 GnomeReplyCallback callback, 
 				 gpointer data,
 				 gboolean yes_or_ok,
-				 gboolean modal)
+				 gboolean modal,
+				 GtkWindow * parent)
 {
   GtkWidget * mbox;
   callback_info * info;
@@ -98,7 +123,10 @@ static GtkWidget * reply_dialog (const gchar * question,
 
   if (modal) {
     gnome_dialog_set_modal(GNOME_DIALOG(mbox));
-    gtk_window_position(GTK_WINDOW(mbox), GTK_WIN_POS_CENTER);
+  }
+
+  if (parent != NULL) {
+    gnome_dialog_set_parent(GNOME_DIALOG(mbox),parent);
   }
 
   gtk_widget_show(mbox);
@@ -111,29 +139,64 @@ GtkWidget * gnome_question_dialog        (const gchar * question,
 					  GnomeReplyCallback callback, 
 					  gpointer data)
 {
-  return reply_dialog(question, callback, data, TRUE, FALSE);
+  return reply_dialog(question, callback, data, TRUE, FALSE, NULL);
 }
+
+GtkWidget * gnome_question_dialog_parented        (const gchar * question,
+						   GnomeReplyCallback callback,
+						   gpointer data,
+						   GtkWindow * parent)
+{
+  return reply_dialog(question, callback, data, TRUE, FALSE, parent);
+}
+
+
 
 GtkWidget * gnome_question_dialog_modal  (const gchar * question,
 					  GnomeReplyCallback callback, 
 					  gpointer data)
 {
-  return reply_dialog(question, callback, data, TRUE, TRUE);
+  return reply_dialog(question, callback, data, TRUE, TRUE, NULL);
 }
+
+GtkWidget * gnome_question_dialog_modal_parented  (const gchar * question,
+						   GnomeReplyCallback callback,
+						   gpointer data,
+						   GtkWindow * parent)
+{
+  return reply_dialog(question, callback, data, TRUE, TRUE, parent);
+}
+
 
 /* OK-Cancel question. */
 GtkWidget * gnome_ok_cancel_dialog       (const gchar * message,
 					  GnomeReplyCallback callback, 
 					  gpointer data)
 {
-  return reply_dialog(message, callback, data, FALSE, FALSE);
+  return reply_dialog(message, callback, data, FALSE, FALSE, NULL);
+}
+
+GtkWidget * gnome_ok_cancel_dialog_parented       (const gchar * message,
+						   GnomeReplyCallback callback,
+						   gpointer data,
+						   GtkWindow * parent)
+{
+  return reply_dialog(message, callback, data, FALSE, FALSE, parent);
 }
 
 GtkWidget * gnome_ok_cancel_dialog_modal (const gchar * message,
 					  GnomeReplyCallback callback, 
 					  gpointer data)
 {
-  return reply_dialog(message, callback, data, FALSE, TRUE);
+  return reply_dialog(message, callback, data, FALSE, TRUE, NULL);
+}
+
+GtkWidget * gnome_ok_cancel_dialog_modal_parented (const gchar * message,
+						   GnomeReplyCallback callback,
+						   gpointer data,
+						   GtkWindow * parent)
+{
+  return reply_dialog(message, callback, data, FALSE, TRUE, parent);
 }
 
 static void dialog_string_callback (GnomeMessageBox * mbox, gint button, 
@@ -155,7 +218,8 @@ static void dialog_string_callback (GnomeMessageBox * mbox, gint button,
 
 static GtkWidget * request_dialog (const gchar * request, 
 				   GnomeStringCallback callback,
-				   gpointer data, gboolean password)
+				   gpointer data, gboolean password,
+				   GtkWindow * parent)
 {
   GtkWidget * mbox;
   callback_info * info;
@@ -186,6 +250,10 @@ static GtkWidget * request_dialog (const gchar * request,
 		      GTK_SIGNAL_FUNC(dialog_string_callback), 
 		      info);
 
+  if (parent != NULL) {
+    gnome_dialog_set_parent(GNOME_DIALOG(mbox),parent);
+  }
+
   gtk_widget_show (entry);
   gtk_widget_show (mbox);
   return mbox;
@@ -197,7 +265,15 @@ GtkWidget * gnome_request_string_dialog  (const gchar * prompt,
 					  GnomeStringCallback callback, 
 					  gpointer data)
 {
-  return request_dialog (prompt, callback, data, FALSE);
+  return request_dialog (prompt, callback, data, FALSE, NULL);
+}
+
+GtkWidget * gnome_request_string_dialog_parented  (const gchar * prompt,
+						   GnomeStringCallback callback,
+						   gpointer data,
+						   GtkWindow * parent)
+{
+  return request_dialog (prompt, callback, data, FALSE, parent);
 }
 
 /* Request a string, but don't echo to the screen. */
@@ -205,9 +281,13 @@ GtkWidget * gnome_request_password_dialog (const gchar * prompt,
 					   GnomeStringCallback callback, 
 					   gpointer data)
 {
-  return request_dialog (prompt, callback, data, TRUE);
+  return request_dialog (prompt, callback, data, TRUE, NULL);
 }
 
-
-
-
+GtkWidget * gnome_request_password_dialog_parented(const gchar * prompt,
+						   GnomeStringCallback callback,
+						   gpointer data,
+						   GtkWindow * parent)
+{
+  return request_dialog (prompt, callback, data, TRUE, parent);
+}

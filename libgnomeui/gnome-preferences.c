@@ -35,6 +35,9 @@ struct _GnomePreferences {
   int toolbar_handlebox : 1;
   int menubar_handlebox : 1;
   int toolbar_relief : 1;
+  int dialog_centered : 1;
+  GtkWindowType dialog_type;
+  GtkWindowPosition dialog_position; 
 };
 
 /* 
@@ -53,7 +56,10 @@ static GnomePreferences prefs =
   FALSE,              /* Statusbar isn't interactive */
   TRUE,               /* Toolbar has handlebox */
   TRUE,               /* Menubar has handlebox */
-  TRUE                /* Toolbar buttons are relieved */
+  TRUE,               /* Toolbar buttons are relieved */
+  TRUE,               /* Center dialogs over apps when possible */
+  GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
+  GTK_WIN_POS_MOUSE   /* Put dialogs at mouse pointer. */
 };
 
 /* Tons of defines for where to store the preferences. */
@@ -81,6 +87,27 @@ static const gchar * const dialog_button_styles [] = {
 
 #define NUM_BUTTON_STYLES 5
 
+#define DIALOG_CENTERED_KEY "Dialog_is_Centered"
+
+#define DIALOG_TYPE_KEY "DialogType"
+
+static const gchar * const dialog_types [] = {
+  "Toplevel",
+  "Dialog"
+};
+
+#define NUM_DIALOG_TYPES 2
+
+#define DIALOG_POSITION_KEY "DialogPosition"
+
+static const gchar * const dialog_positions [] = {
+  "None",
+  "Center",
+  "Mouse"
+};
+
+#define NUM_DIALOG_POSITIONS 3
+
 /* ============ Property Box ======================= */
 
 /* ignore this */
@@ -102,42 +129,71 @@ static const gchar * const dialog_button_styles [] = {
 
 #define TOOLBAR_RELIEF_KEY         "Toolbar_relieved_buttons"
 
+static gboolean 
+enum_from_strings(gint * setme, gchar * findme, 
+		  const gchar * const array[], gint N)
+{
+  gboolean retval = FALSE;
+  gint i = 0;
+  if ( findme == NULL ) {
+    /* Leave default */
+    retval = TRUE;
+  }
+  else {
+    while ( i < N ) {
+      if ( g_strcasecmp(findme, array[i]) == 0 ) {
+	*setme = i;
+	retval = TRUE;
+	break;
+      } 
+      ++i;
+    }
+  }
+
+  g_free(findme);
+  return retval;
+}
+
 void gnome_preferences_load(void)
 {
   /* Probably this function should be rewritten to use the 
      _preferences_get functions */
   gboolean b;
-  gint i;
   gchar * s;
 
   gnome_config_push_prefix(DIALOGS);
 
   s = gnome_config_get_string(DIALOG_BUTTONS_STYLE_KEY);
 
-  if ( s == NULL ) {
-    ; /* Leave the default initialization, nothing found. */
+
+  if ( ! enum_from_strings((int*) &prefs.dialog_buttons_style, s,
+			   dialog_button_styles, NUM_BUTTON_STYLES) ) {
+    g_warning("Didn't recognize buttonbox style in libgnomeui config");
   }
-  else {
-    i = 0;
-    while ( i < NUM_BUTTON_STYLES ) {
-      if ( strcasecmp(s, dialog_button_styles[i]) == 0 ) {
-	prefs.dialog_buttons_style = i;
-	break;
-      } 
-      ++i;
-    }
-    if ( i == NUM_BUTTON_STYLES ) {
-      /* We got all the way to the end without finding one */
-      g_warning("Didn't recognize buttonbox style in libgnomeui config\n");
-    }
-  }
-  g_free(s); 
-  s = NULL;
   
+  s = gnome_config_get_string(DIALOG_TYPE_KEY);
+
+  if ( ! enum_from_strings((int*) &prefs.dialog_type, s,
+			   dialog_types, NUM_DIALOG_TYPES) ) {
+    g_warning("Didn't recognize dialog type in libgnomeui config");
+  }
+
+  s = gnome_config_get_string(DIALOG_POSITION_KEY);
+
+  if ( ! enum_from_strings((int*) &prefs.dialog_position, s,
+			   dialog_positions, NUM_DIALOG_POSITIONS) ) {
+    g_warning("Didn't recognize dialog position in libgnomeui config");
+  }  
+
   /* Fixme. There's a little problem with no error value from the 
      bool get function. This makes it yucky to do the propertybox 
      thing. The intermediate 'b' variable is only in anticipation
      of a future way to check for errors. */
+
+  b = gnome_config_get_bool_with_default(DIALOG_CENTERED_KEY"=true",
+					 NULL);
+  prefs.dialog_centered = b;
+
 #if 0
   /* This is unused for now */
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_OK_KEY"=true",
@@ -194,6 +250,15 @@ void gnome_preferences_save(void)
   
   gnome_config_set_string(DIALOG_BUTTONS_STYLE_KEY, 
 			  dialog_button_styles[prefs.dialog_buttons_style]);
+
+  gnome_config_set_string(DIALOG_TYPE_KEY, 
+			  dialog_types[prefs.dialog_type]);
+
+  gnome_config_set_string(DIALOG_POSITION_KEY, 
+			  dialog_positions[prefs.dialog_position]);
+  
+  gnome_config_set_bool  (DIALOG_CENTERED_KEY,
+			  prefs.dialog_centered);
 
   gnome_config_pop_prefix();
 
@@ -279,3 +344,36 @@ void              gnome_preferences_set_toolbar_relief    (gboolean b)
 {
   prefs.toolbar_relief = b;
 }
+
+gboolean          gnome_preferences_get_dialog_centered      ()
+{
+  return prefs.dialog_centered;
+}
+
+void              gnome_preferences_set_dialog_centered      (gboolean b)
+{
+  prefs.dialog_centered = b;
+}
+
+GtkWindowType     gnome_preferences_get_dialog_type          ()
+{
+  return prefs.dialog_type;
+}
+
+void              gnome_preferences_set_dialog_type          (GtkWindowType t)
+{
+  prefs.dialog_type = t;
+}
+
+/* Whether dialogs are GTK_WIN_POS_NONE, GTK_WIN_POS_CENTER,
+   GTK_WIN_POS_MOUSE */
+GtkWindowPosition gnome_preferences_get_dialog_position      ()
+{
+  return prefs.dialog_position;
+}
+
+void              gnome_preferences_set_dialog_position      (GtkWindowPosition p)
+{
+  prefs.dialog_position = p;
+}
+
