@@ -66,36 +66,40 @@
 
 
 enum {
-	ARG_0,
-	ARG_POINTS,
-	ARG_FILL_COLOR,
-	ARG_FILL_COLOR_GDK,
-	ARG_FILL_COLOR_RGBA,
-	ARG_FILL_STIPPLE,
-	ARG_WIDTH_PIXELS,
-	ARG_WIDTH_UNITS,
-	ARG_CAP_STYLE,
-	ARG_JOIN_STYLE,
-	ARG_LINE_STYLE,
-	ARG_FIRST_ARROWHEAD,
-	ARG_LAST_ARROWHEAD,
-	ARG_SMOOTH,
-	ARG_SPLINE_STEPS,
-	ARG_ARROW_SHAPE_A,
-	ARG_ARROW_SHAPE_B,
-	ARG_ARROW_SHAPE_C
+	PROP_0,
+	PROP_POINTS,
+	PROP_FILL_COLOR,
+	PROP_FILL_COLOR_GDK,
+	PROP_FILL_COLOR_RGBA,
+	PROP_FILL_STIPPLE,
+	PROP_WIDTH_PIXELS,
+	PROP_WIDTH_UNITS,
+	PROP_CAP_STYLE,
+	PROP_JOIN_STYLE,
+	PROP_LINE_STYLE,
+	PROP_FIRST_ARROWHEAD,
+	PROP_LAST_ARROWHEAD,
+	PROP_SMOOTH,
+	PROP_SPLINE_STEPS,
+	PROP_ARROW_SHAPE_A,
+	PROP_ARROW_SHAPE_B,
+	PROP_ARROW_SHAPE_C
 };
 
 
-static void gnome_canvas_line_class_init (GnomeCanvasLineClass *class);
-static void gnome_canvas_line_init       (GnomeCanvasLine      *line);
-static void gnome_canvas_line_destroy    (GtkObject            *object);
-static void gnome_canvas_line_set_arg    (GtkObject            *object,
-					  GtkArg               *arg,
-					  guint                 arg_id);
-static void gnome_canvas_line_get_arg    (GtkObject            *object,
-					  GtkArg               *arg,
-					  guint                 arg_id);
+static void gnome_canvas_line_class_init   (GnomeCanvasLineClass *class);
+static void gnome_canvas_line_init         (GnomeCanvasLine      *line);
+static void gnome_canvas_line_destroy      (GtkObject            *object);
+static void gnome_canvas_line_set_property (GObject              *object,
+					    guint                 param_id,
+					    const GValue         *value,
+					    GParamSpec           *pspec,
+					    const gchar          *trailer);
+static void gnome_canvas_line_get_property (GObject              *object,
+					    guint                 param_id,
+					    GValue               *value,
+					    GParamSpec           *pspec,
+					    const gchar          *trailer);
 
 static void   gnome_canvas_line_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_line_realize     (GnomeCanvasItem *item);
@@ -138,35 +142,126 @@ gnome_canvas_line_get_type (void)
 static void
 gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 {
+	GObjectClass *gobject_class;
 	GtkObjectClass *object_class;
 	GnomeCanvasItemClass *item_class;
 
+	gobject_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasLine::points", GTK_TYPE_GNOME_CANVAS_POINTS, GTK_ARG_READWRITE, ARG_POINTS);
-	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color_rgba", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_COLOR_RGBA);
-	gtk_object_add_arg_type ("GnomeCanvasLine::fill_stipple", GDK_TYPE_DRAWABLE, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
-	gtk_object_add_arg_type ("GnomeCanvasLine::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
-	gtk_object_add_arg_type ("GnomeCanvasLine::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
-	gtk_object_add_arg_type ("GnomeCanvasLine::cap_style", GTK_TYPE_GDK_CAP_STYLE, GTK_ARG_READWRITE, ARG_CAP_STYLE);
-	gtk_object_add_arg_type ("GnomeCanvasLine::join_style", GTK_TYPE_GDK_JOIN_STYLE, GTK_ARG_READWRITE, ARG_JOIN_STYLE);
-	gtk_object_add_arg_type ("GnomeCanvasLine::line_style", GTK_TYPE_GDK_LINE_STYLE, GTK_ARG_READWRITE, ARG_LINE_STYLE);
-	gtk_object_add_arg_type ("GnomeCanvasLine::first_arrowhead", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_FIRST_ARROWHEAD);
-	gtk_object_add_arg_type ("GnomeCanvasLine::last_arrowhead", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_LAST_ARROWHEAD);
-	gtk_object_add_arg_type ("GnomeCanvasLine::smooth", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_SMOOTH);
-	gtk_object_add_arg_type ("GnomeCanvasLine::spline_steps", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_SPLINE_STEPS);
-	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_a", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_ARROW_SHAPE_A);
-	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_b", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_ARROW_SHAPE_B);
-	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_c", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_ARROW_SHAPE_C);
+	gobject_class->set_property = gnome_canvas_line_set_property;
+	gobject_class->get_property = gnome_canvas_line_get_property;
+
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_POINTS,
+                 g_param_spec_boxed ("points", NULL, NULL,
+				     GTK_TYPE_GNOME_CANVAS_POINTS,
+				     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR,
+                 g_param_spec_string ("fill_color", NULL, NULL,
+                                      NULL,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR_GDK,
+                 g_param_spec_boxed ("fill_color_gdk", NULL, NULL,
+				     GTK_TYPE_GDK_COLOR,
+				     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR_RGBA,
+                 g_param_spec_uint ("fill_color_rgba", NULL, NULL,
+				    0, G_MAXUINT, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_STIPPLE,
+                 g_param_spec_object ("fill_stipple", NULL, NULL,
+                                      GDK_TYPE_DRAWABLE,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_WIDTH_PIXELS,
+                 g_param_spec_uint ("width_pixels", NULL, NULL,
+				    0, G_MAXUINT, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_WIDTH_UNITS,
+                 g_param_spec_double ("width_units", NULL, NULL,
+				      0.0, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_CAP_STYLE,
+                 g_param_spec_enum ("cap_style", NULL, NULL,
+                                    GTK_TYPE_GDK_CAP_STYLE,
+                                    GDK_CAP_BUTT,
+                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_JOIN_STYLE,
+                 g_param_spec_enum ("join_style", NULL, NULL,
+                                    GTK_TYPE_GDK_JOIN_STYLE,
+                                    GDK_JOIN_MITER,
+                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_LINE_STYLE,
+                 g_param_spec_enum ("line_style", NULL, NULL,
+                                    GTK_TYPE_GDK_LINE_STYLE,
+                                    GDK_LINE_SOLID,
+                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FIRST_ARROWHEAD,
+                 g_param_spec_boolean ("first_arrowhead", NULL, NULL,
+				       FALSE,
+				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_LAST_ARROWHEAD,
+                 g_param_spec_boolean ("last_arrowhead", NULL, NULL,
+				       FALSE,
+				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_SMOOTH,
+                 g_param_spec_boolean ("smooth", NULL, NULL,
+				       FALSE,
+				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_SPLINE_STEPS,
+                 g_param_spec_uint ("spline_steps", NULL, NULL,
+				    0, G_MAXUINT, DEFAULT_SPLINE_STEPS,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_ARROW_SHAPE_A,
+                 g_param_spec_double ("arrow_shape_a", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_ARROW_SHAPE_B,
+                 g_param_spec_double ("arrow_shape_b", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_ARROW_SHAPE_C,
+                 g_param_spec_double ("arrow_shape_c", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 
 	object_class->destroy = gnome_canvas_line_destroy;
-	object_class->set_arg = gnome_canvas_line_set_arg;
-	object_class->get_arg = gnome_canvas_line_get_arg;
 
 	item_class->update = gnome_canvas_line_update;
 	item_class->realize = gnome_canvas_line_realize;
@@ -596,7 +691,11 @@ reconfigure_arrows_and_bounds (GnomeCanvasLine *line)
 #endif
 
 static void
-gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_line_set_property (GObject              *object,
+				guint                 param_id,
+				const GValue         *value,
+				GParamSpec           *pspec,
+				const gchar          *trailer)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasLine *line;
@@ -606,15 +705,18 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	gboolean color_changed;
 	int have_pixel;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_LINE (object));
+
 	item = GNOME_CANVAS_ITEM (object);
 	line = GNOME_CANVAS_LINE (object);
 
 	color_changed = FALSE;
 	have_pixel = FALSE;
 
-	switch (arg_id) {
-	case ARG_POINTS:
-		points = GTK_VALUE_POINTER (*arg);
+	switch (param_id) {
+	case PROP_POINTS:
+		points = g_value_get_boxed (value);
 
 		if (line->coords) {
 			g_free (line->coords);
@@ -652,9 +754,9 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_FILL_COLOR:
-		if (GTK_VALUE_STRING (*arg))
-			gdk_color_parse (GTK_VALUE_STRING (*arg), &color);
+	case PROP_FILL_COLOR:
+		if (g_value_get_string (value))
+			gdk_color_parse (g_value_get_string (value), &color);
 		line->fill_rgba = ((color.red & 0xff00) << 16 |
 				   (color.green & 0xff00) << 8 |
 				   (color.blue & 0xff00) |
@@ -662,8 +764,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		color_changed = TRUE;
 		break;
 
-	case ARG_FILL_COLOR_GDK:
-		pcolor = GTK_VALUE_BOXED (*arg);
+	case PROP_FILL_COLOR_GDK:
+		pcolor = g_value_get_boxed (value);
 		if (pcolor) {
 			color = *pcolor;
 			gdk_color_context_query_color (item->canvas->cc, &color);
@@ -677,18 +779,18 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		color_changed = TRUE;
 		break;
 
-	case ARG_FILL_COLOR_RGBA:
-		line->fill_rgba = GTK_VALUE_UINT (*arg);
+	case PROP_FILL_COLOR_RGBA:
+		line->fill_rgba = g_value_get_uint (value);
 		color_changed = TRUE;
 		break;
 
-	case ARG_FILL_STIPPLE:
-		set_stipple (line, GTK_VALUE_BOXED (*arg), FALSE);
+	case PROP_FILL_STIPPLE:
+		set_stipple (line, (GdkBitmap *) g_value_get_object (value), FALSE);
 		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
 		break;
 
-	case ARG_WIDTH_PIXELS:
-		line->width = GTK_VALUE_UINT (*arg);
+	case PROP_WIDTH_PIXELS:
+		line->width = g_value_get_uint (value);
 		line->width_pixels = TRUE;
 		set_line_gc_width (line);
 #ifdef OLD_XFORM
@@ -698,8 +800,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_WIDTH_UNITS:
-		line->width = fabs (GTK_VALUE_DOUBLE (*arg));
+	case PROP_WIDTH_UNITS:
+		line->width = fabs (g_value_get_double (value));
 		line->width_pixels = FALSE;
 		set_line_gc_width (line);
 #ifdef OLD_XFORM
@@ -709,8 +811,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_CAP_STYLE:
-		line->cap = GTK_VALUE_ENUM (*arg);
+	case PROP_CAP_STYLE:
+		line->cap = g_value_get_enum (value);
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
 #else
@@ -718,8 +820,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_JOIN_STYLE:
-		line->join = GTK_VALUE_ENUM (*arg);
+	case PROP_JOIN_STYLE:
+		line->join = g_value_get_enum (value);
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
 #else
@@ -727,8 +829,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_LINE_STYLE:
-		line->line_style = GTK_VALUE_ENUM (*arg);
+	case PROP_LINE_STYLE:
+		line->line_style = g_value_get_enum (value);
 		set_line_gc_width (line);
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
@@ -737,8 +839,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_FIRST_ARROWHEAD:
-		line->first_arrow = GTK_VALUE_BOOL (*arg);
+	case PROP_FIRST_ARROWHEAD:
+		line->first_arrow = g_value_get_boolean (value);
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
 #else
@@ -746,8 +848,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_LAST_ARROWHEAD:
-		line->last_arrow = GTK_VALUE_BOOL (*arg);
+	case PROP_LAST_ARROWHEAD:
+		line->last_arrow = g_value_get_boolean (value);
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
 #else
@@ -755,16 +857,16 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_SMOOTH:
+	case PROP_SMOOTH:
 		/* FIXME */
 		break;
 
-	case ARG_SPLINE_STEPS:
+	case PROP_SPLINE_STEPS:
 		/* FIXME */
 		break;
 
-	case ARG_ARROW_SHAPE_A:
-		line->shape_a = fabs (GTK_VALUE_DOUBLE (*arg));
+	case PROP_ARROW_SHAPE_A:
+		line->shape_a = fabs (g_value_get_double (value));
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
 #else
@@ -772,8 +874,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_ARROW_SHAPE_B:
-		line->shape_b = fabs (GTK_VALUE_DOUBLE (*arg));
+	case PROP_ARROW_SHAPE_B:
+		line->shape_b = fabs (g_value_get_double (value));
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
 #else
@@ -781,8 +883,8 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_ARROW_SHAPE_C:
-		line->shape_c = fabs (GTK_VALUE_DOUBLE (*arg));
+	case PROP_ARROW_SHAPE_C:
+		line->shape_c = fabs (g_value_get_double (value));
 #ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
 #else
@@ -791,6 +893,7 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 
@@ -809,81 +912,88 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
-gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_line_get_property (GObject              *object,
+				guint                 param_id,
+				GValue               *value,
+				GParamSpec           *pspec,
+				const gchar          *trailer)
 {
 	GnomeCanvasLine *line;
 	GnomeCanvasPoints *points;
 	GdkColor *color;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_LINE (object));
+
 	line = GNOME_CANVAS_LINE (object);
 
-	switch (arg_id) {
-	case ARG_POINTS:
+	switch (param_id) {
+	case PROP_POINTS:
 		if (line->num_points != 0) {
 			points = gnome_canvas_points_new (line->num_points);
 			memcpy (points->coords, line->coords, 2 * line->num_points * sizeof (double));
-			GTK_VALUE_POINTER (*arg) = points;
+			g_value_set_boxed (value, points);
 		} else
-			GTK_VALUE_POINTER (*arg) = NULL;
+			g_value_set_boxed (value, NULL);
 		break;
 
-	case ARG_FILL_COLOR_GDK:
+	case PROP_FILL_COLOR_GDK:
 		color = g_new (GdkColor, 1);
 		color->pixel = line->fill_pixel;
 		gdk_color_context_query_color (line->item.canvas->cc, color);
-		GTK_VALUE_BOXED (*arg) = color;
+		g_value_set_boxed (value, color);
 		break;
 
-	case ARG_FILL_COLOR_RGBA:
-		GTK_VALUE_UINT (*arg) = line->fill_rgba;
+	case PROP_FILL_COLOR_RGBA:
+		g_value_set_uint (value, line->fill_rgba);
 		break;
 
-	case ARG_FILL_STIPPLE:
-		GTK_VALUE_BOXED (*arg) = line->stipple;
+	case PROP_FILL_STIPPLE:
+		g_value_set_boxed (value, line->stipple);
 		break;
 
-	case ARG_CAP_STYLE:
-		GTK_VALUE_ENUM (*arg) = line->cap;
+	case PROP_CAP_STYLE:
+		g_value_set_enum (value, line->cap);
 		break;
 
-	case ARG_JOIN_STYLE:
-		GTK_VALUE_ENUM (*arg) = line->join;
+	case PROP_JOIN_STYLE:
+		g_value_set_enum (value, line->join);
 		break;
 
-	case ARG_LINE_STYLE:
-		GTK_VALUE_ENUM (*arg) = line->line_style;
+	case PROP_LINE_STYLE:
+		g_value_set_enum (value, line->line_style);
 		break;
 
-	case ARG_FIRST_ARROWHEAD:
-		GTK_VALUE_BOOL (*arg) = line->first_arrow;
+	case PROP_FIRST_ARROWHEAD:
+		g_value_set_boolean (value, line->first_arrow);
 		break;
 
-	case ARG_LAST_ARROWHEAD:
-		GTK_VALUE_BOOL (*arg) = line->last_arrow;
+	case PROP_LAST_ARROWHEAD:
+		g_value_set_boolean (value, line->last_arrow);
 		break;
 
-	case ARG_SMOOTH:
-		GTK_VALUE_BOOL (*arg) = line->smooth;
+	case PROP_SMOOTH:
+		g_value_set_boolean (value, line->smooth);
 		break;
 
-	case ARG_SPLINE_STEPS:
-		GTK_VALUE_UINT (*arg) = line->spline_steps;
+	case PROP_SPLINE_STEPS:
+		g_value_set_uint (value, line->spline_steps);
 		break;
 
-	case ARG_ARROW_SHAPE_A:
-		GTK_VALUE_DOUBLE (*arg) = line->shape_a;
+	case PROP_ARROW_SHAPE_A:
+		g_value_set_double (value, line->shape_a);
 		break;
 
-	case ARG_ARROW_SHAPE_B:
-		GTK_VALUE_DOUBLE (*arg) = line->shape_b;
+	case PROP_ARROW_SHAPE_B:
+		g_value_set_double (value, line->shape_b);
 		break;
 
-	case ARG_ARROW_SHAPE_C:
-		GTK_VALUE_DOUBLE (*arg) = line->shape_c;
+	case PROP_ARROW_SHAPE_C:
+		g_value_set_double (value, line->shape_c);
 		break;
 
 	default:
-		arg->type = GTK_TYPE_INVALID;
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }

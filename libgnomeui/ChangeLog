@@ -1,5 +1,9 @@
 2000-12-20  Martin Baulig  <baulig@suse.de>
 
+	* gnome-canvas-lines.c: GtkArg -> GParam.
+
+2000-12-20  Martin Baulig  <baulig@suse.de>
+
 	* gnome-canvas-image.c: Removed.  This has been obsolated by
 	gnome-canvas-pixbuf.c and wasn't even compiled for a longer time.
 
