@@ -1742,13 +1742,6 @@ gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 }
 
 static void
-window_to_world (GnomeCanvas *canvas, double *x, double *y)
-{
-	*x = canvas->scroll_x1 + (*x + DISPLAY_X1 (canvas) - canvas->zoom_xofs) / canvas->pixels_per_unit;
-	*y = canvas->scroll_y1 + (*y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs) / canvas->pixels_per_unit;
-}
-
-static void
 emit_event (GnomeCanvas *canvas, GdkEvent *event)
 {
 	GdkEvent ev;
@@ -1813,7 +1806,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	switch (ev.type) {
 	case GDK_ENTER_NOTIFY:
 	case GDK_LEAVE_NOTIFY:
-		window_to_world (canvas, &ev.crossing.x, &ev.crossing.y);
+		gnome_canvas_window_to_world (canvas, ev.crossing.x, ev.crossing.y, &ev.crossing.x, &ev.crossing.y);
 		break;
 		
 	case GDK_MOTION_NOTIFY:
@@ -1821,7 +1814,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	case GDK_2BUTTON_PRESS:
 	case GDK_3BUTTON_PRESS:
 	case GDK_BUTTON_RELEASE:
-		window_to_world (canvas, &ev.motion.x, &ev.motion.y);
+		gnome_canvas_window_to_world (canvas, ev.motion.x, ev.motion.y, &ev.motion.x, &ev.motion.y);
 		break;
 
 	default:
@@ -2499,6 +2492,19 @@ gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *wy)
 
 	if (wy)
 		*wy = canvas->scroll_y1 + cy / canvas->pixels_per_unit;
+}
+
+void
+gnome_canvas_window_to_world (GnomeCanvas *canvas, double winx, double winy, double *worldx, double *worldy)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	if (worldx)
+		*worldx = canvas->scroll_x1 + (winx + DISPLAY_X1 (canvas) - canvas->zoom_xofs) / canvas->pixels_per_unit;
+
+	if (worldy)
+		*worldy = canvas->scroll_y1 + (winy + DISPLAY_Y1 (canvas) - canvas->zoom_yofs) / canvas->pixels_per_unit;
 }
 
 int

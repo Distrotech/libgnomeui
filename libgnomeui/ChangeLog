@@ -1,3 +1,11 @@
+1998-10-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_window_to_world): New public
+	function that takes in window coordinates (relative to the
+	GTK_LAYOUT (canvas)->bin_window) and converts them to world
+	coordinates.  This is what everyone needs :-)
+	(emit_event): Made it use gnome_canvas_window_to_world().
+
 1998-10-12  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.h: remove GNOME_MDI_MS from GnomeMDIMode enums.

@@ -368,6 +368,11 @@ void gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, i
 void gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy);
 void gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *wy);
 
+/* This function takes in coordinates relative to the GTK_LAYOUT (canvas)->bin_window and converts
+ * them to world coordinates.
+ */
+void gnome_canvas_window_to_world (GnomeCanvas *canvas, double winx, double winy, double *worldx, double *worldy);
+
 /* Takes a string specification for a color and allocates it into the specified GdkColor.  If the
  * string is null, then it returns FALSE. Otherwise, it returns TRUE.
  */
