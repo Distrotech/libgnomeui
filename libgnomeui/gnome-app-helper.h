@@ -33,7 +33,7 @@ struct _GnomeUIInfo {
     GNOME_APP_PIXMAP_NONE,
     GNOME_APP_PIXMAP_STOCK,
     GNOME_APP_PIXMAP_DATA, /* Can't currently use these last two in menus */
-    GNOME_APP_PIXMAP_FILENAME,
+    GNOME_APP_PIXMAP_FILENAME
   } pixmap_type;
 
   /* Either 
