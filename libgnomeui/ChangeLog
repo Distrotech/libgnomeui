@@ -1,3 +1,8 @@
+Fri Apr 19 21:02:09 2002  George Lebl <jirka@5z.com>
+
+	* gnome-about.c: Fix #77931, that is, open only one credits dialog.
+	  when one is already open just gtk_window_present the dialog.
+
 Fri Apr 19 16:25:18 2002  George Lebl <jirka@5z.com>
 
 	* gnome-file-entry.c, gnome-icon-entry.c: export the file expanding

@@ -57,6 +57,8 @@ struct _GnomeAboutPrivate {
 	GtkWidget *name_label;
 	GtkWidget *comments_label;
 	GtkWidget *copyright_label;
+
+	GtkWidget *credits_dialog;
 };
 
 enum {
@@ -183,15 +185,24 @@ static void
 gnome_about_display_credits_dialog (GnomeAbout *about)
 {
 	GtkWidget *dialog, *label, *notebook, *sw;
+
+	if (about->_priv->credits_dialog != NULL) {
+		gtk_window_present (GTK_WINDOW (about->_priv->credits_dialog));
+		return;
+	}
 	
 	dialog = gtk_dialog_new_with_buttons (_("Credits"),
 					      GTK_WINDOW (about),
 					      GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      NULL);
+	about->_priv->credits_dialog = dialog;
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 360, 260);
 	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy), dialog);
+	g_signal_connect (dialog, "destroy",
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &(about->_priv->credits_dialog));
 
 	notebook = gtk_notebook_new ();
 	gtk_container_set_border_width (GTK_CONTAINER (notebook), 8);
@@ -299,6 +310,8 @@ gnome_about_instance_init (GnomeAbout *about)
 	gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (GTK_DIALOG (about)->action_area), button, TRUE);
 	
 	gtk_window_set_resizable (GTK_WINDOW (about), FALSE);
+
+	priv->credits_dialog = NULL;
 }
 
 static void
