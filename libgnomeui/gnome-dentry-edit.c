@@ -260,96 +260,96 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
 static void
 set_list_width(GtkWidget *clist, char *text[])
 {
-	int i;
-	int cols = GTK_CLIST(clist)->columns;
-	GtkCList *cl = GTK_CLIST(clist);
-	for(i=0;i<cols;i++) {
-		int w = gdk_string_width(clist->style->font,text[i]);
-		if(cl->column[i].width < w)
-			gtk_clist_set_column_width(cl,i,w);
-	}
+  int i;
+  int cols = GTK_CLIST(clist)->columns;
+  GtkCList *cl = GTK_CLIST(clist);
+  for(i=0;i<cols;i++) {
+    int w = gdk_string_width(clist->style->font,text[i]);
+    if(cl->column[i].width < w)
+      gtk_clist_set_column_width(cl,i,w);
+  }
 }
 
 static void
 translations_select_row(GtkCList *cl, int row, int column,
 			GdkEvent *event, GnomeDEntryEdit *dee)
 {
-	char *lang;
-	char *name;
-	char *comment;
-	gtk_clist_get_text(cl,row,0,&lang);
-	gtk_clist_get_text(cl,row,1,&name);
-	gtk_clist_get_text(cl,row,2,&comment);
+  char *lang;
+  char *name;
+  char *comment;
+  gtk_clist_get_text(cl,row,0,&lang);
+  gtk_clist_get_text(cl,row,1,&name);
+  gtk_clist_get_text(cl,row,2,&comment);
 	
-	gtk_entry_set_text(GTK_ENTRY(dee->transl_lang_entry), lang);
-	gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), name);
-	gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), comment);
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_lang_entry), lang);
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), name);
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), comment);
 }
 
 static void
 translations_add(GtkWidget *button, GnomeDEntryEdit *dee)
 {
-	int i;
-	char *lang;
-	char *name;
-	char *comment;
-	char *text[3];
-	GList *language_list;
-	const char *curlang;
-	GtkCList *cl = GTK_CLIST(dee->translations);
+  int i;
+  char *lang;
+  char *name;
+  char *comment;
+  char *text[3];
+  GList *language_list;
+  const char *curlang;
+  GtkCList *cl = GTK_CLIST(dee->translations);
 
-	lang = gtk_entry_get_text(GTK_ENTRY(dee->transl_lang_entry));
-	name = gtk_entry_get_text(GTK_ENTRY(dee->transl_name_entry));
-	comment = gtk_entry_get_text(GTK_ENTRY(dee->transl_comment_entry));
-
-	g_assert(lang && name && comment);
+  lang = gtk_entry_get_text(GTK_ENTRY(dee->transl_lang_entry));
+  name = gtk_entry_get_text(GTK_ENTRY(dee->transl_name_entry));
+  comment = gtk_entry_get_text(GTK_ENTRY(dee->transl_comment_entry));
+  
+  g_assert(lang && name && comment);
 	
-	lang = g_strstrip(g_strdup(lang));
+  lang = g_strstrip(g_strdup(lang));
 	
-	/*we are setting the current language so set the easy page entries*/
-	/*FIXME: do the opposite as well!, but that's not that crucial*/
-	language_list = gnome_i18n_get_language_list("LC_ALL");
-	curlang = language_list ? language_list->data : NULL;
-	if((curlang && strcmp(curlang,lang)==0) ||
-	   ((!curlang || strcmp(curlang,"C")==0) && !*lang)) {
-		gtk_entry_set_text(GTK_ENTRY(dee->name_entry),name);
-		gtk_entry_set_text(GTK_ENTRY(dee->comment_entry),comment);
-	}
+  /*we are setting the current language so set the easy page entries*/
+  /*FIXME: do the opposite as well!, but that's not that crucial*/
+  language_list = gnome_i18n_get_language_list("LC_ALL");
+  curlang = language_list ? language_list->data : NULL;
+  if ((curlang && strcmp(curlang,lang)==0) ||
+      ((!curlang || strcmp(curlang,"C")==0) && !*lang)) {
+    gtk_entry_set_text(GTK_ENTRY(dee->name_entry),name);
+    gtk_entry_set_text(GTK_ENTRY(dee->comment_entry),comment);
+  }
 
-	for(i=0;i<cl->rows;i++) {
-		char *s;
-		gtk_clist_get_text(cl,i,0,&s);
-		if(strcmp(lang,s)==0) {
-			gtk_clist_set_text(cl,i,1,name);
-			gtk_clist_set_text(cl,i,2,comment);
-			text[0] = s;
-			text[1] = name;
-			text[2] = comment;
-			set_list_width(cl,text);
-			gtk_signal_emit(GTK_OBJECT(dee),
-					dentry_edit_signals[CHANGED], NULL);
-			g_free(lang);
-			return;
-		}
-	}
-	text[0]=lang;
-	text[1]=name;
-	text[2]=comment;
-	set_list_width(cl,text);
-	gtk_clist_append(cl,text);
-	gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
-
-	g_free(lang);
+  for (i=0;i<cl->rows;i++) {
+    char *s;
+    gtk_clist_get_text(cl,i,0,&s);
+    if (strcmp(lang,s)==0) {
+      gtk_clist_set_text(cl,i,1,name);
+      gtk_clist_set_text(cl,i,2,comment);
+      text[0] = s;
+      text[1] = name;
+      text[2] = comment;
+      set_list_width (cl, text);
+      gtk_signal_emit (GTK_OBJECT(dee),
+		       dentry_edit_signals[CHANGED], NULL);
+      g_free (lang);
+      return;
+    }
+  }
+  text[0]=lang;
+  text[1]=name;
+  text[2]=comment;
+  set_list_width(cl,text);
+  gtk_clist_append(cl,text);
+  gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
+  
+  g_free(lang);
 }
 
 static void
 translations_remove(GtkWidget *button, GnomeDEntryEdit *dee)
 {
-	GtkCList *cl = GTK_CLIST(dee->translations);
-	if(cl->selection == NULL)
-		return;
-	gtk_clist_remove(cl,GPOINTER_TO_INT(cl->selection->data));
-	gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
+  GtkCList *cl = GTK_CLIST(dee->translations);
+  if(cl->selection == NULL)
+  	return;
+  gtk_clist_remove(cl,GPOINTER_TO_INT(cl->selection->data));
+  gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
 }
 
 static void
@@ -565,20 +565,16 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->terminal_button),
 			       dentry->terminal);
   
-  /*there are no i18n entries*/
-  if (!gnome_desktop_entry_i18n_ht)
-	  return;
-
   /*set the names and comments from our i18n list*/
-  i18n_list = g_hash_table_lookup(gnome_desktop_entry_i18n_ht,dentry);
+  i18n_list = gnome_desktop_entry_get_i18n_list (dentry);
   for (li=i18n_list; li; li=li->next) {
-	  char *text[3];
-	  GnomeDesktopEntryI18N *e = li->data;
-	  text[0] = e->lang?e->lang:"";
-	  text[1] = e->name?e->name:"";
-	  text[2] = e->comment?e->comment:"";
-	  set_list_width(GTK_CLIST(dee->translations),text);
-	  gtk_clist_append(GTK_CLIST(dee->translations),text);
+    char *text[3];
+    GnomeDesktopEntryI18N *e = li->data;
+    text[0] = e->lang?e->lang:"";
+    text[1] = e->name?e->name:"";
+    text[2] = e->comment?e->comment:"";
+    set_list_width (GTK_CLIST(dee->translations),text);
+    gtk_clist_append (GTK_CLIST(dee->translations),text);
   }
 }
 
@@ -649,29 +645,26 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
   g_free(dentry->geometry);
   dentry->geometry = NULL;
 
-  /*there are no i18n entries yet*/
-  if (!gnome_desktop_entry_i18n_ht)
-	  gnome_desktop_entry_i18n_ht = g_hash_table_new(NULL,NULL);
-
   for(i=0;i<GTK_CLIST(dee->translations)->rows;i++) {
-	  char *lang,*name,*comment;
-	  GnomeDesktopEntryI18N *i18n_entry;
-	  gtk_clist_get_text(GTK_CLIST(dee->translations),i,0,&lang);
-	  gtk_clist_get_text(GTK_CLIST(dee->translations),i,1,&name);
-	  gtk_clist_get_text(GTK_CLIST(dee->translations),i,2,&comment);
-	  if(!*lang) lang = NULL;
-	  if(!*name) name = NULL;
-	  if(!*comment) comment = NULL;
-	  if(!name && !comment)
-		  continue;
-	  
-	  i18n_entry = g_new0(GnomeDesktopEntryI18N,1);
-	  i18n_entry->lang = lang?g_strdup(lang):NULL;
-	  i18n_entry->name = name?g_strdup(name):NULL;
-	  i18n_entry->comment = comment?g_strdup(comment):NULL;
-	  i18n_list = g_list_prepend(i18n_list,i18n_entry);
+    char *lang,*name,*comment;
+    GnomeDesktopEntryI18N *i18n_entry;
+    gtk_clist_get_text(GTK_CLIST(dee->translations),i,0,&lang);
+    gtk_clist_get_text(GTK_CLIST(dee->translations),i,1,&name);
+    gtk_clist_get_text(GTK_CLIST(dee->translations),i,2,&comment);
+    if(!*lang) lang = NULL;
+    if(!*name) name = NULL;
+    if(!*comment) comment = NULL;
+    if(!name && !comment)
+      continue;
+
+    i18n_entry = g_new0(GnomeDesktopEntryI18N,1);
+    i18n_entry->lang = lang?g_strdup(lang):NULL;
+    i18n_entry->name = name?g_strdup(name):NULL;
+    i18n_entry->comment = comment?g_strdup(comment):NULL;
+    i18n_list = g_list_prepend(i18n_list,i18n_entry);
   }
-  g_hash_table_insert(gnome_desktop_entry_i18n_ht,dentry,i18n_list);
+  gnome_desktop_entry_free_i18n_list(gnome_desktop_entry_get_i18n_list(dentry));
+  gnome_desktop_entry_set_i18n_list(dentry,i18n_list);
 }
 
 /**
