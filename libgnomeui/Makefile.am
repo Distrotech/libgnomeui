@@ -21,11 +21,12 @@ INCLUDES = \
 	-I$(top_srcdir)					\
 	-I$(top_srcdir)/intl				\
 	-I$(top_builddir)/intl				\
-        -DGNOMELIBDIR=\""$(libdir)"\" 			\
-        -DGNOMEDATADIR=\""$(datadir)"\" 		\
-        -DGNOMEBINDIR=\""$(bindir)"\" 			\
-        -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" 	\
-        -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" 	\
+        -DGNOMEUILIBDIR=\""$(libdir)"\" 		\
+        -DGNOMEUIDATADIR=\""$(datadir)"\" 		\
+        -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
+        -DGNOMEUIBINDIR=\""$(bindir)"\" 		\
+        -DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
+        -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMECANVAS_CFLAGS)			\

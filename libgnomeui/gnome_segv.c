@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
   sigaction(SIGSEGV, &sa, NULL);
 
 
-  bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+  bindtextdomain (PACKAGE, GNOMEUILOCALEDIR);
   textdomain (PACKAGE);
 
   /* in case gnome-session is segfaulting :-) */

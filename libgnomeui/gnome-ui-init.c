@@ -525,7 +525,7 @@ static void libgnomeui_segv_handle(int signum)
 		g_snprintf(buf, sizeof(buf), "%d", signum);
 
 		/* Child process */
-		execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
+		execl(GNOMEUIBINDIR "/gnome_segv", GNOMEUIBINDIR "/gnome_segv",
 		      program_invocation_name, buf, gnome_app_version, NULL);
 
                 execlp("gnome_segv", "gnome_segv", program_invocation_name, buf, gnome_app_version, NULL);
