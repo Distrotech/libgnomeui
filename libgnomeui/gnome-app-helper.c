@@ -440,7 +440,7 @@ gnome_app_do_toolbar_creation (GnomeApp *app,
 	GtkWidget *pmap;
 #ifdef GTK_HAVE_FEATURES_1_1_0
 	GtkAccelGroup *ag;
-	
+
 	set_accel = (NULL == gtk_object_get_data(GTK_OBJECT(app),
 						 "GtkAccelGroup"));
 #else
@@ -449,7 +449,7 @@ gnome_app_do_toolbar_creation (GnomeApp *app,
 	set_accel = (NULL == gtk_object_get_data(GTK_OBJECT(app),
 						 "GtkAcceleratorTable"));
 #endif
-	
+
 	if (!GTK_WIDGET (app)->window)
 		gtk_widget_realize (GTK_WIDGET (app));
 	
@@ -598,22 +598,48 @@ gnome_app_add_radio_toolbar_entries (GnomeApp *app,
 	}
 }
 
+static GtkWidget *
+_gnome_app_create_toolbar_custom (GnomeApp *app,
+				  GnomeUIInfo *tbinfo,
+				  GnomeUIBuilderData *uibdata,
+				  gboolean attach)
+{
+	GtkWidget *tb;
+	
+	g_return_val_if_fail (app != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_APP(app), NULL);
+
+	if (attach)
+		g_return_val_if_fail (app->toolbar == NULL, NULL);
+	
+	tb = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	if (attach)
+		gnome_app_set_toolbar (app, GTK_TOOLBAR (tb));
+	
+	if(tbinfo)
+		gnome_app_do_toolbar_creation(app, tb, tbinfo, uibdata);
+
+	return tb;
+}
+
 void
 gnome_app_create_toolbar_custom (GnomeApp *app,
 				 GnomeUIInfo *tbinfo,
 				 GnomeUIBuilderData *uibdata)
 {
-	GtkWidget *tb;
-	
 	g_return_if_fail (app != NULL);
-	g_return_if_fail (GNOME_IS_APP(app));
+	g_return_if_fail (GNOME_IS_APP (app));
 	g_return_if_fail (app->toolbar == NULL);
 	
-	tb = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
-	gnome_app_set_toolbar (app, GTK_TOOLBAR (tb));
-	
-	if(tbinfo)
-		gnome_app_do_toolbar_creation(app, tb, tbinfo, uibdata);
+	_gnome_app_create_toolbar_custom (app, tbinfo, uibdata, TRUE);
+}
+
+GtkWidget *
+gnome_create_toolbar_custom (GnomeApp *app,
+			      GnomeUIInfo *tbinfo,
+			      GnomeUIBuilderData *uibdata)
+{
+	return _gnome_app_create_toolbar_custom (app, tbinfo, uibdata, FALSE);
 }
 
 void
@@ -642,6 +668,22 @@ gnome_app_create_toolbar_with_data(GnomeApp *app,
 	uidata.data = data;
 	gnome_app_create_toolbar_custom (app, toolbarinfo, &uidata);
 }
+
+GtkWidget *
+gnome_create_toolbar_with_data(GnomeApp *app,
+			       GnomeUIInfo *toolbarinfo,
+			       gpointer data)
+{
+	GnomeUIBuilderData uidata =
+	{
+		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+		NULL, FALSE, NULL, NULL
+	};
+	
+	uidata.data = data;
+	return _gnome_app_create_toolbar_custom (app, toolbarinfo, &uidata, FALSE);
+}
+
 
 void
 gnome_app_create_toolbar_interp (GnomeApp *app,

@@ -1,3 +1,9 @@
+1998-09-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (gnome_create_toolbar_with_data,
+	gnome_create_toolbar_custom): New routines to reuse the toolbar
+	creation code without having the toolbar be attached by default.
+
 1998-08-28  Havoc Pennington  <hp@pobox.com>
 
 	* gtklayout.c (gtk_layout_move): Fix infinite loop (add

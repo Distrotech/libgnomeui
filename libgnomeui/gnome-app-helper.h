@@ -175,7 +175,13 @@ void gnome_app_create_toolbar_interp    (GnomeApp *app,
 void gnome_app_create_toolbar_with_data (GnomeApp *app,
 			                 GnomeUIInfo *toolbarinfo,
 				         gpointer data);
+GtkWidget *gnome_create_toolbar_with_data (GnomeApp *app,
+					 GnomeUIInfo *toolbarinfo,
+					 gpointer data);
 void gnome_app_create_toolbar_custom    (GnomeApp *app,
+					 GnomeUIInfo *tbinfo,
+					 GnomeUIBuilderData *uibdata);
+GtkWidget *gnome_create_toolbar_custom  (GnomeApp *app,
 					 GnomeUIInfo *tbinfo,
 					 GnomeUIBuilderData *uibdata);
 GtkWidget *gnome_app_find_menu_pos      (GtkWidget *parent,
