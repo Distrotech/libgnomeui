@@ -32,6 +32,8 @@
  *   Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef _GNOME_ICON_LIST_H_
 #define _GNOME_ICON_LIST_H_
 
@@ -216,3 +218,5 @@ GnomeCanvasPixbuf *gnome_icon_list_get_icon_pixbuf_item (GnomeIconList *gil,
 G_END_DECLS
 
 #endif /* _GNOME_ICON_LIST_H_ */
+
+#endif /* GNOME_DISABLE_DEPRECATED */

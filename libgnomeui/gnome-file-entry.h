@@ -30,6 +30,7 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+
 #ifndef GNOME_FILE_ENTRY_H
 #define GNOME_FILE_ENTRY_H
 
@@ -37,6 +38,7 @@
 #include <libgnomeui/gnome-entry.h>
 #include <gtk/gtkvbox.h>
 
+#ifndef GNOME_DISABLE_DEPRECATED
 
 G_BEGIN_DECLS
 
@@ -137,3 +139,5 @@ void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
 G_END_DECLS
 
 #endif
+
+#endif /* GNOME_DISABLE_DEPRECATED */

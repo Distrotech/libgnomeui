@@ -32,6 +32,8 @@
  * Author: George Lebl <jirka@5z.com>
  */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef GNOME_PIXMAP_ENTRY_H
 #define GNOME_PIXMAP_ENTRY_H
 
@@ -117,3 +119,5 @@ gchar      *gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry);
 G_END_DECLS
 
 #endif
+
+#endif /* GNOME_DISABLE_DEPRECATED */

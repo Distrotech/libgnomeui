@@ -22,6 +22,8 @@
    Author: Anders Carlsson <andersca@codefactory.se>
 */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef __GNOME_ABOUT_H__
 #define __GNOME_ABOUT_H__
 
@@ -81,3 +83,5 @@ void gnome_about_construct (GnomeAbout *about,
 G_END_DECLS
 
 #endif /* __GNOME_ABOUT_H__ */
+
+#endif /* GNOME_DISABLE_DEPRECATED */
