@@ -1,3 +1,11 @@
+2004-02-27  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_insert_bookmark): Renamed from
+	gtk_file_system_gnome_vfs_add_bookmark(); update to conform to the
+	new API.
+	(gtk_file_system_gnome_vfs_remove_bookmark): Updated.
+
 Thu Feb 26 20:01:03 2004  Jonathan Blandford  <jrb@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c (browse_clicked): use modified

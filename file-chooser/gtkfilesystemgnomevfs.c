@@ -198,8 +198,9 @@ static GdkPixbuf *gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file
 							 gint               pixel_size,
 							 GError           **error);
 
-static gboolean gtk_file_system_gnome_vfs_add_bookmark    (GtkFileSystem     *file_system,
+static gboolean gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
 							   const GtkFilePath *path,
+							   gint               position,
 							   GError           **error);
 static gboolean gtk_file_system_gnome_vfs_remove_bookmark (GtkFileSystem     *file_system,
 							   const GtkFilePath *path,
@@ -328,7 +329,7 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
   iface->uri_to_path = gtk_file_system_gnome_vfs_uri_to_path;
   iface->filename_to_path = gtk_file_system_gnome_vfs_filename_to_path;
   iface->render_icon = gtk_file_system_gnome_vfs_render_icon;
-  iface->add_bookmark = gtk_file_system_gnome_vfs_add_bookmark;
+  iface->insert_bookmark = gtk_file_system_gnome_vfs_insert_bookmark;
   iface->remove_bookmark = gtk_file_system_gnome_vfs_remove_bookmark;
   iface->list_bookmarks = gtk_file_system_gnome_vfs_list_bookmarks;
 }
@@ -1360,11 +1361,10 @@ bookmark_list_read (GSList **bookmarks, GError **error)
 {
   gchar *filename;
   gchar *contents;
-  gboolean result;
+  gboolean result = FALSE;
 
   filename = bookmark_get_filename (FALSE);
   *bookmarks = NULL;
-  result = FALSE;
 
   if (g_file_get_contents (filename, &contents, NULL, error))
     {
@@ -1474,21 +1474,32 @@ bookmark_list_write (GSList *bookmarks, GError **error)
 }
 
 static gboolean
-gtk_file_system_gnome_vfs_add_bookmark (GtkFileSystem     *file_system,
-					const GtkFilePath *path,
-					GError           **error)
+gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
+					   const GtkFilePath *path,
+					   gint               position,
+					   GError           **error)
 {
   GSList *bookmarks;
+  int num_bookmarks;
   GSList *l;
   char *uri;
   gboolean result;
+  GError *err;
 
-  if (!bookmark_list_read (&bookmarks, error))
-    return FALSE;
+  err = NULL;
+  if (!bookmark_list_read (&bookmarks, &err) && err->code != G_FILE_ERROR_NOENT)
+    {
+      g_propagate_error (error, err);
+      g_error_free (err);
+      return FALSE;
+    }
+
+  num_bookmarks = g_slist_length (bookmarks);
+  g_return_val_if_fail (position >= -1 && position <= num_bookmarks, FALSE);
 
   result = FALSE;
 
-  uri = gtk_file_system_path_to_uri (file_system, path);
+  uri = gtk_file_system_gnome_vfs_path_to_uri (file_system, path);
 
   for (l = bookmarks; l; l = l->next)
     {
@@ -1496,18 +1507,24 @@ gtk_file_system_gnome_vfs_add_bookmark (GtkFileSystem     *file_system,
 
       bookmark = l->data;
       if (strcmp (bookmark, uri) == 0)
-	break;
-    }
-
-  if (!l)
-    {
-      bookmarks = g_slist_append (bookmarks, g_strdup (uri));
-      if (bookmark_list_write (bookmarks, error))
 	{
-	  result = TRUE;
-	  g_signal_emit_by_name (file_system, "bookmarks-changed", 0);
+	  g_set_error (error,
+		       GTK_FILE_SYSTEM_ERROR,
+		       GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS,
+		       "%s already exists in the bookmarks list",
+		       uri);
+	  goto out;
 	}
     }
+
+  bookmarks = g_slist_insert (bookmarks, g_strdup (uri), position);
+  if (bookmark_list_write (bookmarks, error))
+    {
+      result = TRUE;
+      g_signal_emit_by_name (file_system, "bookmarks-changed", 0);
+    }
+
+ out:
 
   g_free (uri);
   bookmark_list_free (bookmarks);
@@ -1538,26 +1555,31 @@ gtk_file_system_gnome_vfs_remove_bookmark (GtkFileSystem     *file_system,
 
       bookmark = l->data;
       if (strcmp (bookmark, uri) == 0)
-	break;
+	{
+	  g_free (l->data);
+	  bookmarks = g_slist_remove_link (bookmarks, l);
+	  g_slist_free_1 (l);
+
+	  if (bookmark_list_write (bookmarks, error))
+	    {
+	      result = TRUE;
+	      g_signal_emit_by_name (file_system, "bookmarks-changed", 0);
+	    }
+
+	  goto out;
+	}
     }
 
-  if (l)
-    {
-      g_free (l->data);
-      bookmarks = g_slist_remove_link (bookmarks, l);
-      g_slist_free_1 (l);
+  g_set_error (error,
+	       GTK_FILE_SYSTEM_ERROR,
+	       GTK_FILE_SYSTEM_ERROR_NONEXISTENT,
+	       "%s does not exist in the bookmarks list",
+	       uri);
 
-      if (bookmark_list_write (bookmarks, error))
-	result = TRUE;
-    }
-  else
-    result = TRUE;
+ out:
 
   g_free (uri);
   bookmark_list_free (bookmarks);
-
-  if (result)
-    g_signal_emit_by_name (file_system, "bookmarks-changed", 0);
 
   return result;
 }
