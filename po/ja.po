@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 1.113.0\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
-"PO-Revision-Date: 2002-03-24 19:54+0900\n"
+"Project-Id-Version: libgnomeui 2.0.0cvs\n"
+"POT-Creation-Date: 2002-06-13 02:18+0900\n"
+"PO-Revision-Date: 2002-06-13 02:25+0900\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -20,19 +20,16 @@ msgid "Credits"
 msgstr "クレジット"
 
 #: libgnomeui/gnome-about.c:223
-#, fuzzy
 msgid "_Written by"
-msgstr "作者"
+msgstr "作者(_W)"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "_Documented by"
-msgstr "文書著作者"
+msgstr "文書著作者(_D)"
 
 #: libgnomeui/gnome-about.c:253
-#, fuzzy
 msgid "_Translated by"
-msgstr "翻訳者"
+msgstr "翻訳者(_T)"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -182,13 +179,12 @@ msgid "Received invalid color data\n"
 msgstr "おかしな色データを受けとりました\n"
 
 #: libgnomeui/gnome-color-picker.c:464
-#, fuzzy
 msgid "Color Selector"
-msgstr "色の選択"
+msgstr "色選択"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "色を指定するダイアログを開く"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -239,13 +235,12 @@ msgid "Date"
 msgstr "日付"
 
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "ファイルの選択"
+msgstr "日付の選択"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "カレンダーから日付を選ぶ"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -253,13 +248,12 @@ msgid "Calendar"
 msgstr "カレンダー"
 
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "ファイルの選択"
+msgstr "時刻の選択"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "一覧から時刻を選ぶ"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -391,18 +385,16 @@ msgid "End World Hunger"
 msgstr "世界から飢餓を無くしましょう"
 
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Link color"
 msgstr "リンクの色"
 
 #: libgnomeui/gnome-href.c:139
-#, fuzzy
 msgid "Color used to draw the link"
 msgstr "リンクの描画に使用する色"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "このボタンを押すと表示されている URI が指すものを表示します"
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
@@ -634,9 +626,8 @@ msgstr "ファイルを保存されたものに戻す"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
 msgid "_Print..."
-msgstr "印刷..."
+msgstr "印刷(_P)..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -662,14 +653,12 @@ msgstr "現在のファイルを閉じる"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "終了"
+msgstr "終了(_Q)"
 
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "このアプリケーションに関して"
+msgstr "アプリケーションを終了する"
 
 #.
 #. * The "Edit" menu
@@ -741,7 +730,7 @@ msgstr "文字列を検索する"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "次を検索(_X)"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -749,9 +738,8 @@ msgstr "更に同じ文字列を探す"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
 msgid "R_eplace..."
-msgstr "置換(_R)..."
+msgstr "置換(_E)..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -771,9 +759,8 @@ msgstr "ファイルのプロパティを変更する"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces..."
-msgstr "設定..."
+msgstr "設定(_N)..."
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -793,7 +780,6 @@ msgid "About this application"
 msgstr "このアプリケーションに関して"
 
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
 msgid "Select _All"
 msgstr "全選択(_A)"
 
@@ -889,25 +875,22 @@ msgid "End the current game"
 msgstr "今のゲームを終了する"
 
 #: libgnomeui/gnome-app-helper.c:1145
-#, fuzzy
 msgid "View help for this application"
-msgstr "このアプリケーションに関して"
+msgstr "このアプリケーションのヘルプを表示"
 
 #: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
-msgstr ""
+msgstr "アイコンの下にテキスト"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
-msgstr ""
+msgstr "アイコンの前にテキスト"
 
 #: libgnomeui/gnome-app-helper.c:2567
-#, fuzzy
 msgid "Icons Only"
 msgstr "アイコンのみ"
 
 #: libgnomeui/gnome-app-helper.c:2568
-#, fuzzy
 msgid "Text Only"
 msgstr "テキストのみ"
 
@@ -1061,23 +1044,20 @@ msgid "Select file"
 msgstr "ファイルの選択"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path"
-msgstr "貼り付け"
+msgstr "パス"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path to file"
-msgstr "現在のファイルを保存"
+msgstr "ファイルのパス"
 
 #: libgnomeui/gnome-file-entry.c:672
-#, fuzzy
 msgid "_Browse..."
-msgstr "参照..."
+msgstr "参照(_B)..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "ファイルを選ぶ「ファイル選択」をポップアップ"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1228,30 +1208,28 @@ msgid "Preview"
 msgstr "プレビュー"
 
 #: libgnomeui/gnome-icon-entry.c:752
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "選択ダイアログのタイトル"
+msgstr "アイコン選択ダイアログ"
 
 #: libgnomeui/gnome-icon-entry.c:753
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "アイコンを選べるダイアログボックスを表示"
 
 #: libgnomeui/gnome-icon-entry.c:759
 msgid "Icon selector"
-msgstr ""
+msgstr "アイコン選択"
 
 #: libgnomeui/gnome-icon-entry.c:760
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "アイコンを選んでください"
 
 #: libgnomeui/gnome-icon-entry.c:984
-#, fuzzy
 msgid "Icon Selector"
-msgstr "色の選択"
+msgstr "アイコン選択"
 
 #: libgnomeui/gnome-icon-entry.c:985
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "このボタンを押すとアイコンを選べるウインドウを開きます"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
@@ -1259,13 +1237,13 @@ msgstr "参照"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
-msgstr ""
+msgstr "アイコンのパス"
 
 #: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
+msgstr "ここにアイコンの画像があるディレクトリの名前を入力してください"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1314,14 +1292,12 @@ msgid "No Image"
 msgstr "絵なし"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "プレビュー"
+msgstr "画像プレビュー"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
-#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr "選択されている時刻"
+msgstr "選択されている画像のプレビュー"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
