@@ -16,16 +16,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/****************************************************************
-  $Log$
-  Revision 1.24  1998/05/25 16:15:57  sopwith
-
-
-  gnome_dialog_run_*(): Fixes for Havoc's bugs
-  Also added CVS log recording at the top :)
-
-*****************************************************************/
-
 #include <config.h>
 #include <stdarg.h>
 
@@ -653,3 +643,15 @@ static void gnome_dialog_show (GtkWidget * d)
 }
 
 
+/****************************************************************
+  $Log$
+  Revision 1.25  1998/05/25 16:31:18  sopwith
+  Move log msgs to bottom
+
+  Revision 1.24  1998/05/25 16:15:57  sopwith
+
+
+  gnome_dialog_run_*(): Fixes for Havoc's bugs
+  Also added CVS log recording at the top :)
+
+*****************************************************************/
