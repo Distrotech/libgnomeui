@@ -25,6 +25,7 @@
 #define __GNOME_APPBAR_H__
 
 #include <gtk/gtkhbox.h>
+#include <gtk/gtkprogress.h>
 
 #include "libgnome/gnome-defs.h"
 #include "gnome-types.h"
@@ -103,8 +104,13 @@ void       gnome_appbar_pop              (GnomeAppBar * appbar);
 /* Nuke the stack. */
 void       gnome_appbar_clear_stack      (GnomeAppBar * appbar);
 
-void	   gnome_appbar_set_progress	(GnomeAppBar * statusbar,
-					 gfloat percentage);
+/* pure sugar - with a bad name, in light of the get_progress name
+   which is not the opposite of set_progress. Maybe this function
+   should die.*/
+void	     gnome_appbar_set_progress	  (GnomeAppBar * appbar,
+					   gfloat percentage);
+/* use GtkProgress functions on returned value */
+GtkProgress* gnome_appbar_get_progress    (GnomeAppBar * appbar);
 
 /* Reflect the current state of stack/default. Useful to force a set_status
    to disappear. */

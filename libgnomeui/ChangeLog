@@ -1,3 +1,11 @@
+1998-11-19  Havoc Pennington <hp@pobox.com>
+
+	* gnome-appbar.h, gnome-appbar.c: Add a function to get at the
+	GtkProgress.
+	* gnome-preferences.c: Change dialog default to "center of
+	screen," this emulates KDE and is nicer anyway. Change toolbar
+	default to no button relief.
+
 1998-11-19  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-popup-help.c (gnome_widget_add_help_with_uidata): we don't 

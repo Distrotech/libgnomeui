@@ -59,11 +59,11 @@ static GnomePreferences prefs =
   FALSE,              /* Statusbar isn't interactive */
   TRUE,               /* Toolbar has handlebox */
   TRUE,               /* Menubar has handlebox */
-  TRUE,               /* Toolbar buttons are relieved */
+  FALSE,               /* Toolbar buttons are not relieved */
   TRUE,               /* Center dialogs over apps when possible */
   TRUE,               /* Menu items have icons in them */
   GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
-  GTK_WIN_POS_MOUSE,  /* Put dialogs at mouse pointer. */
+  GTK_WIN_POS_CENTER, /* Put dialogs in center of screen. */
   GNOME_MDI_NOTEBOOK, /* Use notebook MDI mode. */
   GTK_POS_TOP         /* Show tabs on top of MDI notebooks. */
 };

@@ -478,6 +478,16 @@ gnome_appbar_set_progress(GnomeAppBar *ab,
   gtk_progress_bar_update(GTK_PROGRESS_BAR(ab->progress), percentage);
 }
 
+GtkProgress* 
+gnome_appbar_get_progress    (GnomeAppBar * ab)
+{
+  g_return_val_if_fail(ab != NULL, NULL);
+  g_return_val_if_fail(ab->progress != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APPBAR(ab), NULL);
+
+  return GTK_PROGRESS(ab->progress);
+}
+
 static void
 gnome_appbar_destroy (GtkObject *object)
 {
