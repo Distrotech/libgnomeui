@@ -1,3 +1,16 @@
+1998-03-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-rootwin.h: New widget GnomeRootWin.  This is a widget that
+	corresponds to the root window of the screen.  Yes, I know it is
+	weird.  However, it provides a nice Gtk abstraction for the root
+	window.  The immediate use of this will be to drop objects from
+	the file manager into the root window.  Some hacking is still
+	needed in this widget to make it work exactly like normal GtkWindows.
+
+	* libgnomeui.h: Added #include "libgnomeui/gnome-rootwin.h".
+
+	* Makefile.am: Added gnome-rootwin.[ch] to the list of files.
+
 1998-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-pixmap.c (gnome_pixmap_draw): Doh.  I don't know how to

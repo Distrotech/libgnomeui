@@ -25,6 +25,7 @@ libgnomeui_la_SOURCES = \
 	gnome-client.c			\
 	gnome-scores.c			\
 	gnome-startup.c			\
+	gnome-rootwin.c			\
 	gnome-stock.c			\
 	gtk-clock.c			\
 	gtk-ted.c			\
@@ -48,6 +49,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-client.h			\
 	gnome-scores.h			\
 	gnome-startup.h			\
+	gnome-rootwin.h			\
 	gnome-stock.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\
@@ -83,4 +85,3 @@ stock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
-
