@@ -499,6 +499,7 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
 	g_list_foreach(gai->names, (GFunc)g_free, NULL);
 	g_list_free (gai->names);
 
+	g_free (gai);
 }
 
 /**
