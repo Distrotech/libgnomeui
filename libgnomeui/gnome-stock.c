@@ -412,8 +412,11 @@ gnome_stock_pixmap_entry_get_gdk_pixbuf (GnomeStockPixmapEntry *entry)
                 gchar* pathname;
 
                 g_assert(entry->file.filename != NULL);
-                
-                pathname = gnome_pixmap_file(entry->file.filename);
+
+                pathname = gnome_program_locate_file (gnome_program_get (),
+                                                      GNOME_FILE_DOMAIN_PIXMAP,
+                                                      entry->file.filename,
+                                                      TRUE, NULL);
                 entry->any.pixbuf = gdk_pixbuf_new_from_file(pathname, NULL);
                 g_free(pathname);
                 /* drop some memory */

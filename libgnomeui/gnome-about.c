@@ -732,7 +732,10 @@ gnome_about_load_logo(GnomeAboutPrivate *priv,
 		if (g_path_is_absolute (logo) && g_file_test (logo, G_FILE_TEST_EXISTS))
 			filename = g_strdup (logo);
 		else
-			filename = gnome_pixmap_file (logo);
+			filename = gnome_program_locate_file
+				(gnome_program_get (),
+				 GNOME_FILE_DOMAIN_PIXMAP,
+				 logo, TRUE, NULL);
 		
 		if (filename != NULL) {
 			GdkPixbuf *pixbuf;

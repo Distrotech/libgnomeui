@@ -354,8 +354,10 @@ create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info)
 		break;
 
 	case GNOME_APP_PIXMAP_FILENAME:
-		name = gnome_pixmap_file (pixmap_info);
-
+		name = gnome_program_locate_file (gnome_program_get (),
+						  GNOME_FILE_DOMAIN_PIXMAP,
+						  pixmap_info, TRUE, NULL);
+		
 		if (!name)
 			g_warning ("Could not find GNOME pixmap file %s", 
 					(char *) pixmap_info);

@@ -1,5 +1,13 @@
 2001-04-11  Martin Baulig  <baulig@suse.de>
 
+	* gnome-about.c (gnome_about_load_logo): Use
+	gnome_program_local_file() instead of gnome_pixmap_file ().
+	* gnome-app-helper.c (create_pixmap): Likewise.
+	* gnome-app-util.c (gnome_window_set_icon_from_file): Likewise.
+	* gnome-stock.c (gnome_stock_pixmap_entry_get_gdk_pixbuf): Likewise.
+
+2001-04-11  Martin Baulig  <baulig@suse.de>
+
 	* gnome-messagebox.c: For images which we install in ../images/,
 	use an absolute filename using GNOMEUIPIXMAPDIR.
 

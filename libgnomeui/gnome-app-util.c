@@ -966,7 +966,10 @@ gnome_window_set_icon_from_file(GtkWindow *window, const char *filename, gboolea
   if(!pb)
     {
       error = NULL;
-      filename = gnome_pixmap_file(filename);
+      filename = gnome_program_locate_file (gnome_program_get (),
+					    GNOME_FILE_DOMAIN_PIXMAP,
+					    filename, TRUE, NULL);
+		
       pb = gdk_pixbuf_new_from_file(filename, &error);
       if (error != NULL) {
 	g_warning (error->message);
