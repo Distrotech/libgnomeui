@@ -1,3 +1,7 @@
+2001-07-22  Martin Baulig  <baulig@suse.de>
+
+	* gnome-recently-used.[ch]: Removed.
+
 2001-07-22  Joe Shaw  <joe@ximian.com>
 
 	* gnome-druid.c (gnome_druid_init): Change GNOME_STOCK_BUTTON_PREV
