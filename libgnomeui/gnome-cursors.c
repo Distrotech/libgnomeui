@@ -42,13 +42,13 @@ static GHashTable *cursortable = NULL;
  */
 
 
-static const gchar * blank_xpm[] = {
+static const char * blank_xpm[] = {
 	"8 1 1 1",
 	"     c None",
 	"        "
 };
 
-static const gchar * default_arrow_xpm[] = {
+static const char * default_arrow_xpm[] = {
 "16 16 3 1",
 "       c None",
 ".      c #000000",
@@ -70,7 +70,7 @@ static const gchar * default_arrow_xpm[] = {
 "            ... ",
 "             .  "};
 
-static const gchar * egg_timer1_xpm[] = {
+static const char * egg_timer1_xpm[] = {
 "16 16 3 1",
 "       c None",
 ".      c #000000",
@@ -92,7 +92,7 @@ static const gchar * egg_timer1_xpm[] = {
 "   . +++.+  .   ",
 "   ..........   "};
 
-static const gchar * egg_timer2_xpm[] = {
+static const char * egg_timer2_xpm[] = {
 "16 16 3 1",
 "       c None",
 ".      c #000000",
@@ -114,7 +114,7 @@ static const gchar * egg_timer2_xpm[] = {
 "   ..+++.+...   ",
 "   ..........   "};
 
-static const gchar * egg_timer3_xpm[] = {
+static const char * egg_timer3_xpm[] = {
 "16 16 3 1",
 "       c None",
 ".      c #000000",
@@ -136,7 +136,7 @@ static const gchar * egg_timer3_xpm[] = {
 "   ..+++.+...   ",
 "   ..........   "};
 
-static const gchar * egg_timer4_xpm[] = {
+static const char * egg_timer4_xpm[] = {
 "16 16 3 1",
 "       c None",
 ".      c #000000",
@@ -158,7 +158,7 @@ static const gchar * egg_timer4_xpm[] = {
 "   ..+++++++.   ",
 "   ..........   "};
 
-static const gchar * pointing_hand_xpm[] = {
+static const char * pointing_hand_xpm[] = {
 "16 20 3 1",
 "       c None",
 ".      c #000000",
@@ -183,7 +183,7 @@ static const gchar * pointing_hand_xpm[] = {
 "   .+++++++++.  ",
 "    .........   "};
 
-static const gchar * cursor_zoom_in_xpm[] = {
+static const char * cursor_zoom_in_xpm[] = {
 "32 32 2 1",
 "       c None",
 ".      c #000000",
@@ -220,7 +220,7 @@ static const gchar * cursor_zoom_in_xpm[] = {
 "                                ",
 "                                "};
 
-static const gchar * cursor_zoom_out_xpm[] = {
+static const char * cursor_zoom_out_xpm[] = {
 "32 32 2 1",
 "       c None",
 ".      c #000000",
@@ -302,100 +302,100 @@ static const char hand_open_mask_bits[] = {
 
 static GnomeStockCursor default_cursors[] = {
         {
-                GNOME_STOCK_CURSOR_DEFAULT,
-                GNOME_CURSOR_XPM,
-                default_arrow_xpm,
-                BLACK,
-                WHITE,
-                0, 0,     /* hotspot */
-                -1, -1,   /* w x h */
-                0,        /* alpha */
+                GNOME_STOCK_CURSOR_DEFAULT, /* name */
+                default_arrow_xpm, /* cursor_data */
                 NULL,     /* xbm mask */
-                NULL, NULL /* bitmap/mask */
-        },
-        {
-                GNOME_STOCK_CURSOR_BLANK,
-                GNOME_CURSOR_XPM,
-                blank_xpm,
-                BLACK,
-                WHITE,
+                NULL, NULL, /* bitmap/mask */
+                BLACK, /* foreground */
+                WHITE, /* background */
                 0, 0,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */
-                NULL, /* xbm mask */
-                NULL, NULL /* bitmap/mask */
+                GNOME_CURSOR_XPM /* type */
         },
         {
-                GNOME_STOCK_CURSOR_POINTING_HAND,
-                GNOME_CURSOR_XPM,
-                pointing_hand_xpm,
-                BLACK,
-                WHITE,
+                GNOME_STOCK_CURSOR_BLANK, /* name */
+                blank_xpm, /* cursor_data */
+                NULL, /* xbm mask */
+                NULL, NULL, /* bitmap/mask */
+                BLACK, /* foreground */
+                WHITE, /* background */
+                0, 0,     /* hotspot */
+                -1, -1,   /* w x h */
+                0,        /* alpha */
+                GNOME_CURSOR_XPM /* type */
+        },
+        {
+                GNOME_STOCK_CURSOR_POINTING_HAND, /* name */
+                pointing_hand_xpm, /* cursor_data */
+                NULL, /* xbm mask */
+                NULL, NULL, /* bitmap/mask */
+                BLACK, /* foreground */
+                WHITE, /* background */
                 5, 0,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */
-                NULL, /* xbm mask */
-                NULL, NULL /* bitmap/mask */
+                GNOME_CURSOR_XPM /* type */
         },
         {
-                GNOME_STOCK_CURSOR_HAND_OPEN,
-                GNOME_CURSOR_XBM,
-                (gchar*)hand_open_data_bits,
-                BLACK,
-                WHITE,
+                GNOME_STOCK_CURSOR_HAND_OPEN, /* name */
+                (gchar*)hand_open_data_bits, /* cursor_data */
+                (gchar*)hand_open_mask_bits,
+                NULL, NULL, /* bitmap/mask */
+                BLACK, /* foreground */
+                WHITE, /* background */
                 10, 10,     /* hotspot */
                 hand_open_data_width, hand_open_data_height,   /* w x h */
                 0,        /* alpha */
-                (gchar*)hand_open_mask_bits,
-                NULL, NULL /* bitmap/mask */
+                GNOME_CURSOR_XBM /* type */
         },
         {
-                GNOME_STOCK_CURSOR_HAND_CLOSE,
-                GNOME_CURSOR_XBM,
-                (gchar*)hand_closed_data_bits,
-                BLACK,
-                WHITE,
+                GNOME_STOCK_CURSOR_HAND_CLOSE, /* name */
+                (gchar*)hand_closed_data_bits, /* cursor_data */
+                (gchar*)hand_closed_mask_bits,
+                NULL, NULL, /* bitmap/mask */
+                BLACK, /* foreground */
+                WHITE, /* background */
                 10, 10,     /* hotspot */
                 hand_closed_data_width, hand_closed_data_height,   /* w x h */
                 0,        /* alpha */
-                (gchar*)hand_closed_mask_bits,
-                NULL, NULL /* bitmap/mask */
+                GNOME_CURSOR_XBM /* type */
         },
         {
-                GNOME_STOCK_CURSOR_ZOOM_IN,
-                GNOME_CURSOR_XPM,
-                cursor_zoom_in_xpm,
-                BLACK,
-                WHITE,
+                GNOME_STOCK_CURSOR_ZOOM_IN, /* name */
+                cursor_zoom_in_xpm, /* cursor_data */
+                NULL, /* xbm mask */
+                NULL, NULL, /* bitmap/mask */
+                BLACK, /* foreground */
+                WHITE, /* background */
                 10, 10,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */
-                NULL, /* xbm mask */
-                NULL, NULL /* bitmap/mask */
+                GNOME_CURSOR_XPM /* type */
         },
         {
-                GNOME_STOCK_CURSOR_ZOOM_IN,
-                GNOME_CURSOR_XPM,
-                cursor_zoom_out_xpm,
-                BLACK,
-                WHITE,
+                GNOME_STOCK_CURSOR_ZOOM_IN, /* name */
+                cursor_zoom_out_xpm, /* cursor_data */
+                NULL, /* xbm mask */
+                NULL, NULL, /* bitmap/mask */
+                BLACK, /* foreground */
+                WHITE, /* background */
                 10, 10,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */
-                NULL, /* xbm mask */
-                NULL, NULL /* bitmap/mask */
+                GNOME_CURSOR_XPM /* type */
         },
         {
-                GNOME_STOCK_CURSOR_EGG_1,
-                GNOME_CURSOR_XPM,
-                egg_timer1_xpm,
-                BLACK,
-                WHITE,
+                GNOME_STOCK_CURSOR_EGG_1, /* name */
+                egg_timer1_xpm, /* cursor_data */
+                NULL, /* xbm mask */
+                NULL, NULL, /* bitmap/mask */
+                BLACK, /* foreground */
+                WHITE, /* background */
                 8, 8,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */
-                NULL, /* xbm mask */
-                NULL, NULL /* bitmap/mask */
+                GNOME_CURSOR_XPM /* type */
         }
 };
 
@@ -510,7 +510,7 @@ gnome_cursor_create_from_pixbuf (GdkPixbuf *pixbuf,
 				 GdkBitmap **bitmap,
 				 GdkBitmap **mask)
 {
-	int w, h, has_alpha, rs;
+	int w, h, has_alpha;
 	int x, y;
 	unsigned char *pixel;
 	unsigned int r, g, b, a = 255;
@@ -532,7 +532,7 @@ gnome_cursor_create_from_pixbuf (GdkPixbuf *pixbuf,
                         unsigned char value = 0, maskv = 0;
 			
                         for (pix = 0; pix < 8; pix++, x++) {
-                                unsigned int t = 0;
+
                                 r = *(pixel++);
                                 g = *(pixel++);
                                 b = *(pixel++);
@@ -569,7 +569,7 @@ gnome_cursor_create_from_pixbuf (GdkPixbuf *pixbuf,
  *
  * Returns: A new #GdkCursor or %NULL on failure.  */
 GdkCursor*
-gnome_stock_cursor_new (const gchar *cursorname)
+gnome_stock_cursor_new (const char *cursorname)
 {
 	GnomeStockCursor *cursor = NULL;
 	GdkCursor *gdk_cursor;
@@ -614,7 +614,7 @@ gnome_stock_cursor_new (const gchar *cursorname)
 		
                         pixbuf = gdk_pixbuf_new_from_file (cursor->cursor_data);
                         gnome_cursor_create_from_pixbuf (pixbuf,
-                                                         cursor->alpha_threshold,
+                                                         cursor->alpha_threshhold,
                                                          &pmap, &mask);
                         gdk_pixbuf_unref (pixbuf);
                 }
@@ -622,7 +622,7 @@ gnome_stock_cursor_new (const gchar *cursorname)
               
                 case GNOME_CURSOR_GDK_PIXBUF:
                         gnome_cursor_create_from_pixbuf ((GdkPixbuf*) cursor->cursor_data,
-                                                         cursor->alpha_threshold,
+                                                         cursor->alpha_threshhold,
                                                          &pmap, &mask);
                         break;
                 
@@ -689,7 +689,7 @@ gnome_stock_cursor_register (GnomeStockCursor *cursor)
  *
  * The returned #GnomeStockCursor is not copied and must not be freed.  */
 GnomeStockCursor*
-gnome_stock_cursor_lookup_entry(const gchar *cursorname)
+gnome_stock_cursor_lookup_entry(const char *cursorname)
 {
 	if (!cursortable)
 		build_cursor_table ();
@@ -705,7 +705,7 @@ gnome_stock_cursor_lookup_entry(const gchar *cursorname)
  * Unregisters a cursor and frees all memory associated with it.
  */
 void
-gnome_stock_cursor_unregister (const gchar *cursorname)
+gnome_stock_cursor_unregister (const char *cursorname)
 {
 	GnomeStockCursor *cursor;
 

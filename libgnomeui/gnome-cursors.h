@@ -21,45 +21,28 @@
 #ifndef GNOME_CURSORS_H
 #define GNOME_CURSORS_H
 
-typedef enum _GnomeStockCursorType GnomeStockCursorType;
-
-enum _GnomeStockCursorType {
+typedef enum  {
+	/* Update bitfield size in struct when adding enums */
 	GNOME_CURSOR_FILE,
 	GNOME_CURSOR_XBM,
 	GNOME_CURSOR_XPM,
 	GNOME_CURSOR_GDK_PIXBUF,
 	GNOME_CURSOR_STANDARD
-};
+} GnomeStockCursorType;
 
 typedef struct _GnomeStockCursor GnomeStockCursor;
 
-struct _GnomeStockCursor {
-        gchar *cursorname;
-        GnomeStockCursorType type;
-        /*
-          GNOME_CURSOR_FILE: filename
-          GNOME_CURSOR_XBM:  XBM data bits
-          GNOME_CURSOR_XPM:  XPM data
-          GNOME_CURSOR_GDK_PIXBUF: GdkPixbuf*
-          GNOME_CURSOR_STANDARD: a #define from gdkcursors.h
-        */
-        gpointer cursor_data;
-        /* Must initialize in all cases */
-        GdkColor foreground;
-        GdkColor background;
-        /* Not needed for standard X cursors */
-        gint hotspot_x;
-        gint hotspot_y;
-        /* Only needed for XBM */
-        gint width;
-        gint height;
-        /* Only needed for _GDK_PIXBUF and _FILE */
-        guchar alpha_threshold;
-        /* Only needed for _XBM */
-        gchar *xbm_mask_bits;
-        /* Filled in by the library */
-        GdkBitmap *pmap;
-        GdkBitmap *mask;
+struct _GnomeStockCursor { /* The new one */
+	const char *cursorname;
+	gconstpointer cursor_data;
+	gchar *xbm_mask_bits;
+	GdkBitmap *pmap, *mask;
+
+	GdkColor foreground, background;
+	gint16 hotspot_x, hotspot_y;
+	gint16 width, height;
+	guchar alpha_threshhold;
+	GnomeStockCursorType type : 4;
 };
 
 void       gnome_stock_cursor_register   (GnomeStockCursor *cursor);
@@ -67,11 +50,12 @@ void       gnome_stock_cursor_register   (GnomeStockCursor *cursor);
 /* This returns a pointer to the internal GnomeStockCursor,
    which should not be modified. */
 GnomeStockCursor*
-           gnome_stock_cursor_lookup_entry(const gchar *srcname);
+           gnome_stock_cursor_lookup_entry(const char *srcname);
                                           
-void       gnome_stock_cursor_unregister  (const gchar *cursorname);
+void       gnome_stock_cursor_unregister  (const char *cursorname);
 
-GdkCursor *gnome_stock_cursor_new         (const gchar *cursorname);
+/* Use gdk_cursor_destroy() to destroy the returned value */
+GdkCursor *gnome_stock_cursor_new         (const char *cursorname);
 
 
 /* Set the cursor on a window with gdk_window_set_cursor(),
