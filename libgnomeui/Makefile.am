@@ -329,9 +329,8 @@ EXTRA_DIST =					\
 	$(oafinfo_DATA)
 
 libgnomeui_2_0_la_LDFLAGS = -version-info $(LIB_VERSION)				\
-		-L`cd $(top_builddir); pwd`/gdk-pixbuf/gdk-pixbuf/.libs -lgdk_pixbuf	\
+		$(GDK_PIXBUF_LIBS)							\
 		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome			\
-		-L`cd $(top_builddir); pwd`/libart_lgpl/.libs -lart_lgpl		\
 		$(OAF_LIBS)								\
 		$(LIBGNOMEUI_LIBS)
 
@@ -340,8 +339,7 @@ libgnomeui_2_0_la_LIBADD = $(LIBGNOMEUI_LIBS)
 gnome_segv_LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
+	$(GDK_PIXBUF_LIBS) \
         $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -349,8 +347,7 @@ gnome_segv_LDADD =	\
 stock_demo_LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
+	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -361,23 +358,20 @@ stock_demo_LDADD =	\
 winhints_demo_LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
+	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 #animator_demo_LDADD =	\
 #	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
 #	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-#	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-#	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
+#	$(GDK_PIXBUF_LIBS) \
 #	$(LIBGNOMEUI_LIBS) \
 #	$(INTLLIBS)
 
 dock_demo_LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
+	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
