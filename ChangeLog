@@ -1,3 +1,9 @@
+2003-05-01  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-client.c: Merge fix from HEAD.
+	* libgnomeui/gnome-scores.c: Fix leak.
+	Fixes bug #104986 and bug #98058.
+
 2003-04-23  Gustavo Giraldez  <gustavo.giraldez@gmx.net>
  
 	* libgnomeui/gnome-icon-theme.c (gnome_icon_theme_class_init):
