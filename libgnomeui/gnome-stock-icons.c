@@ -92,6 +92,7 @@ get_default_icons (GtkIconFactory *factory)
     /* KEEP IN SYNC with gtkstock.c */
 
     add_sized (factory, stock_attach, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_ATTACH);
+    add_sized (factory, stock_book_open, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_BOOK_OPEN);
     add_sized (factory, stock_book_red, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_BOOK_RED);
     add_sized (factory, stock_book_green, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_BOOK_GREEN);
     add_sized (factory, stock_book_blue, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_BOOK_BLUE);
@@ -102,6 +103,7 @@ get_default_icons (GtkIconFactory *factory)
     add_sized (factory, stock_trash, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_TRASH);
     add_sized (factory, stock_trash_full, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_TRASH_FULL);
 
+    add_sized (factory, stock_mail_compose, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_MAIL_NEW);
     add_sized (factory, stock_mail, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_MAIL);
     add_sized (factory, stock_mail_receive, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_MAIL_RCV);
     add_sized (factory, stock_mail_send, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_MAIL_SND);

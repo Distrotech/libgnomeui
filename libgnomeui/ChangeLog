@@ -1,5 +1,8 @@
 2002-02-10  Anders Carlsson  <andersca@gnu.org>
 
+	* gnome-stock-icons.c (get_default_icons): Actually add the
+	GNOME_STOCK_MAIL_NEW and GNOME_STOCK_BOOK_OPEN to the icon factory.
+
 	* gnome-ui-init.c (libgnomeui_post_args_parse): 
 	Call bind_textdomain_codeset.
 
