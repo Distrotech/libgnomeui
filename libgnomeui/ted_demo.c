@@ -1,0 +1,47 @@
+/*
+ * This program ilustrates how the Ted widget is used for GUI design
+ *
+ */
+#include <gnome.h>
+#include "gtk-ted.h"
+
+void
+xrandom_widgets (GtkTed *t)
+{
+	GtkWidget *l;
+	int i;
+
+	for (i = 0; i < 4; i++){
+		char buf [40];
+
+		sprintf (buf, "Button-%d", i);
+		l = gtk_button_new_with_label (buf);
+		gtk_widget_show (l);
+		gtk_ted_add (t, l, buf);
+	}
+
+	l = gtk_label_new ("This is a windowless widget");
+	gtk_widget_show (l);
+	gtk_ted_add (t, l, "Label-0");
+}
+
+void
+main (int argc, char *argv[])
+{
+	GtkWidget *t, *w;
+	
+	gnome_init (&argc, &argv);
+
+	gtk_ted_set_app_name ("MyApp");
+	
+	w = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	t = gtk_ted_new ("DialogName");
+	gtk_widget_show (t);
+	gtk_container_add (GTK_CONTAINER (w), t);
+	
+	xrandom_widgets (GTK_TED(t));
+	gtk_ted_prepare (GTK_TED(t));
+	gtk_widget_show (w);
+	
+	gtk_main ();
+}
