@@ -1,3 +1,8 @@
+1999-03-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dock-item.c (gnome_dock_item_paint): Eliminate flicker
+	by only painting the handle if the expose area intersects it.
+
 1999-03-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (iti_event): Only start selecting with mouse

@@ -660,7 +660,8 @@ gnome_dock_item_paint (GtkWidget      *widget,
 
   if (GNOME_DOCK_ITEM_NOT_LOCKED (di))
     {
-      
+      GdkRectangle dest;
+
       rect.x = 0;
       rect.y = 0;
       
@@ -674,10 +675,11 @@ gnome_dock_item_paint (GtkWidget      *widget,
           rect.width = width;
           rect.height = DRAG_HANDLE_SIZE;
         }
-      
-      draw_textured_frame (widget, di->bin_window, &rect,
-                           GTK_SHADOW_OUT,
-                           event ? &event->area : area);
+
+      if (gdk_rectangle_intersect (event ? &event->area : area, &rect, &dest))
+	draw_textured_frame (widget, di->bin_window, &rect,
+			     GTK_SHADOW_OUT,
+			     event ? &event->area : area);
     }    
   
   if (bin->child && GTK_WIDGET_VISIBLE (bin->child))
