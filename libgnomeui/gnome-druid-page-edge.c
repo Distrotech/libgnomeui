@@ -278,6 +278,7 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 {
 	GnomeCanvas *canvas;
 	guint32 fill_color;
+	PangoFontDescription *font_desc;
 
 	canvas = GNOME_CANVAS (druid_page_edge->_priv->canvas);
 
@@ -311,8 +312,6 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 				       GNOME_TYPE_CANVAS_PIXBUF,
 				       "x", 0.0,
 				       "y", 0.0,
-				       "x_set", TRUE,
-				       "y_set", TRUE,
 				       NULL);
 
 	if (druid_page_edge->top_watermark_image != NULL)
@@ -323,8 +322,6 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 	druid_page_edge->_priv->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
 				       GNOME_TYPE_CANVAS_PIXBUF,
-				       "x_set", TRUE,
-				       "y_set", TRUE,
 				       NULL);
 
 	if (druid_page_edge->logo_image != NULL)
@@ -334,8 +331,6 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 	druid_page_edge->_priv->watermark_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
 				       GNOME_TYPE_CANVAS_PIXBUF,
-				       "x_set", TRUE,
-				       "y_set", TRUE,
 				       NULL);
 
 	if (druid_page_edge->watermark_image != NULL)
@@ -344,23 +339,27 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 				       NULL);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->title_color);
+	font_desc = pango_font_description_from_string (_("Helvetical Bold 18"));
 	druid_page_edge->_priv->title_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
 				       GNOME_TYPE_CANVAS_TEXT,
 				       "text", druid_page_edge->title,
 				       "fill_color_rgba", fill_color,
-				       "fontset", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"),
+				       "font_desc", font_desc,
 				       NULL);
+	pango_font_description_free (font_desc);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->text_color);
+	font_desc = pango_font_description_from_string (_("Helvetical Medium 12"));
 	druid_page_edge->_priv->text_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
 				       GNOME_TYPE_CANVAS_TEXT,
 				       "text", druid_page_edge->text,
 				       "justification", GTK_JUSTIFY_LEFT,
-				       "fontset", _("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"),
+				       "font_desc", font_desc,
 				       "fill_color_rgba", fill_color,
 				       NULL);
+	pango_font_description_free (font_desc);
 
 	gtk_signal_connect (GTK_OBJECT (druid_page_edge),
 			    "prepare",
@@ -377,12 +376,14 @@ gnome_druid_page_edge_prepare (GnomeDruidPage *page,
 	case GNOME_EDGE_START:
 		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), FALSE, TRUE, TRUE, TRUE);
 		gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
-		gtk_widget_grab_default (GNOME_DRUID (druid)->next);
+		if (GTK_IS_WINDOW (gtk_widget_get_toplevel (druid)))
+			gtk_widget_grab_default (GNOME_DRUID (druid)->next);
 		break;
 	case GNOME_EDGE_FINISH:
 		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, FALSE, TRUE, TRUE);
 		gnome_druid_set_show_finish (GNOME_DRUID (druid), TRUE);
-		gtk_widget_grab_default (GNOME_DRUID (druid)->finish);
+		if (GTK_IS_WINDOW (gtk_widget_get_toplevel (druid)))
+			gtk_widget_grab_default (GNOME_DRUID (druid)->finish);
 		break;
 	case GNOME_EDGE_OTHER:
 		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, TRUE, TRUE, TRUE);

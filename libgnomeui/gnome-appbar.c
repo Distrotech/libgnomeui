@@ -39,6 +39,7 @@
 #include <libgnome/gnome-i18n.h>
 
 #include "gnome-uidefs.h"
+#include "gnometypebuiltins.h"
 
 #ifndef GNOME_ENABLE_DEBUG
 #define GNOME_ENABLE_DEBUG /* to be sure */
@@ -50,6 +51,7 @@ struct _GnomeAppBarPrivate
      future. Statusbar could be a label, entry, GtkStatusbar, or
      something else; progress could be a label or progress bar; it's
      all up in the air for now. */
+  /* there is no reason for these not to be properties */
   GtkWidget * progress;
   GtkWidget * status;
   gchar * prompt; /* The text of a prompt, if any. */
@@ -64,59 +66,34 @@ struct _GnomeAppBarPrivate
 
   gint16 editable_start; /* The first editable position in the interactive
 			  buffer. */
+
+  /* these are construct only currently. there is no reason this
+   * couldn't be changed. */
+
+  GnomePreferencesType interactivity;
   gboolean interactive : 1; /* This means status is an entry rather than a
 			       label, for the moment. */
+  gboolean has_progress : 1;
+  gboolean has_status : 1;
 };
 
-
-static void gnome_appbar_finalize                 (GObject          *object);
-     
 enum {
   USER_RESPONSE,
   CLEAR_PROMPT,
   LAST_SIGNAL
 };
 
+enum {
+	PROP_0,
+	PROP_HAS_PROGRESS,
+	PROP_HAS_STATUS,
+	PROP_INTERACTIVITY
+};
+
 static gint appbar_signals[LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE (GnomeAppBar, gnome_appbar,
 			 GtkHBox, GTK_TYPE_HBOX)
-
-static void
-gnome_appbar_class_init (GnomeAppBarClass *class)
-{
-  GtkObjectClass *object_class;
-  GObjectClass *gobject_class;
-  GtkWidgetClass *widget_class;
-  GtkContainerClass *container_class;
-
-  object_class = (GtkObjectClass *) class;
-  gobject_class = (GObjectClass *) class;
-  widget_class = (GtkWidgetClass *) class;
-  container_class = (GtkContainerClass *) class;
-
-  appbar_signals[USER_RESPONSE] =
-    gtk_signal_new ("user_response",
-		    GTK_RUN_LAST,
-		    GTK_CLASS_TYPE (object_class),
-		    GTK_SIGNAL_OFFSET (GnomeAppBarClass, user_response),
-		    gtk_signal_default_marshaller,
-		    GTK_TYPE_NONE, 0);
-
-  appbar_signals[CLEAR_PROMPT] =
-    gtk_signal_new ("clear_prompt",
-		    GTK_RUN_LAST,
-		    GTK_CLASS_TYPE (object_class),
-		    GTK_SIGNAL_OFFSET (GnomeAppBarClass, clear_prompt),
-		    gtk_signal_default_marshaller,
-		    GTK_TYPE_NONE, 0);
-
-  class->user_response = NULL;
-  class->clear_prompt  = NULL; /* maybe should have a handler
-				  and the clear_prompt function
-				  just emits. */
-  gobject_class->finalize = gnome_appbar_finalize;
-}
 
 static GSList * 
 stringstack_push(GSList * stringstack, const gchar * s)
@@ -268,118 +245,12 @@ gnome_appbar_new (gboolean has_progress,
 		  gboolean has_status,
 		  GnomePreferencesType interactivity)
 {
-  GnomeAppBar * ab = gtk_type_new (GNOME_TYPE_APPBAR);
-
-  gnome_appbar_construct(ab, has_progress, has_status, interactivity);
-
-  return GTK_WIDGET(ab);
+  return GTK_WIDGET (g_object_new (GNOME_TYPE_APPBAR,
+				   "has_progress", has_progress,
+				   "has_status", has_status,
+				   "interactivity", interactivity,
+				   NULL));
 }
-
-/**
- * gnome_appbar_construct
- * @ab: Pointer to GNOME appbar object.
- * @has_progress: %TRUE if appbar needs progress bar widget.
- * @has_status: %TRUE if appbar needs status bar widget.
- * @interactivity: See gnome_appbar_new() explanation.
- *
- * Description:
- * For use to bindings in languages other than C. Don't use.
- **/
-
-void
-gnome_appbar_construct(GnomeAppBar * ab,
-		       gboolean has_progress,
-		       gboolean has_status,
-		       GnomePreferencesType interactivity)
-{
-  GtkBox *box;
-
-  /* These checks are kind of gross because an unfinished object will
-     be returned from _new instead of NULL */
-
-  /* Can't be interactive if there's no status bar */
-  g_return_if_fail( ((has_status == FALSE) && 
-		     (interactivity == GNOME_PREFERENCES_NEVER)) ||
-		    (has_status == TRUE)); 
-
-  box = GTK_BOX (ab);
-
-  box->spacing = GNOME_PAD_SMALL;
-  box->homogeneous = FALSE;
-
-  if (has_progress)
-    ab->_priv->progress = gtk_progress_bar_new();
-  else
-    ab->_priv->progress = NULL;
-
-  /*
-   * If the progress meter goes on the right then we place it after we
-   * create the status line.
-   */
-  if (has_progress &&
-      /* FIXME: this should listen to changes! */
-      ! gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-meter-on-right"))
-    gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
-
-  if ( has_status ) {
-    if ( (interactivity == GNOME_PREFERENCES_ALWAYS) ||
-	 ( (interactivity == GNOME_PREFERENCES_USER) &&
-	   /* FIXME: this should listen to changes! */
-	   gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-interactive")) ) {
-      ab->_priv->interactive = TRUE;
-   
-      ab->_priv->status = gtk_entry_new();
-
-      gtk_signal_connect (GTK_OBJECT(ab->_priv->status), "delete_text",
-			  GTK_SIGNAL_FUNC(entry_delete_text_cb),
-			  ab);
-      gtk_signal_connect (GTK_OBJECT(ab->_priv->status), "insert_text",
-			  GTK_SIGNAL_FUNC(entry_insert_text_cb),
-			  ab);
-      gtk_signal_connect_after(GTK_OBJECT(ab->_priv->status), "key_press_event",
-			       GTK_SIGNAL_FUNC(entry_key_press_cb),
-			       ab);
-      gtk_signal_connect(GTK_OBJECT(ab->_priv->status), "activate",
-			 GTK_SIGNAL_FUNC(entry_activate_cb),
-			 ab);
-
-      /* no prompt now */
-      gtk_entry_set_editable(GTK_ENTRY(ab->_priv->status), FALSE);
-
-      gtk_box_pack_start (box, ab->_priv->status, TRUE, TRUE, 0);
-    }
-    else {
-      GtkWidget * frame;
-      
-      ab->_priv->interactive = FALSE;
-
-      frame = gtk_frame_new (NULL);
-      gtk_frame_set_shadow_type (GTK_FRAME(frame), GTK_SHADOW_IN);
-      
-      ab->_priv->status = gtk_label_new ("");
-      gtk_misc_set_alignment (GTK_MISC (ab->_priv->status), 0.0, 0.0);
-      gtk_widget_set_usize (ab->_priv->status, 1, -1);
-      
-      gtk_box_pack_start (box, frame, TRUE, TRUE, 0);
-      gtk_container_add (GTK_CONTAINER(frame), ab->_priv->status);
-      
-      gtk_widget_show (frame);
-    }
-  }
-  else {
-    ab->_priv->status = NULL;
-    ab->_priv->interactive = FALSE;
-  }
-
-  if (has_progress &&
-      /* FIXME: this should listen to changes! */
-      gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-meter-on-right"))
-    gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
-
-  if (ab->_priv->status) gtk_widget_show (ab->_priv->status);
-  if (ab->_priv->progress) gtk_widget_show(ab->_priv->progress);
-}
-
 
 /**
  * gnome_appbar_set_prompt
@@ -712,3 +583,207 @@ gnome_appbar_finalize (GObject *object)
   GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
+static GObject *
+gnome_appbar_constructor (GType                  type,
+			  guint                  n_properties,
+			  GObjectConstructParam *properties)
+{
+  GObject *object;
+  GnomeAppBar *ab;
+  GtkBox *box;
+  gboolean has_status, has_progress, interactivity;
+
+  object = G_OBJECT_CLASS (parent_class)->constructor (type,
+						       n_properties,
+						       properties);
+
+  ab = GNOME_APPBAR (object);
+
+  has_status    = ab->_priv->has_status;
+  has_progress  = ab->_priv->has_progress;
+  interactivity = ab->_priv->interactivity;
+
+  box = GTK_BOX (ab);
+
+  box->spacing = GNOME_PAD_SMALL;
+  box->homogeneous = FALSE;
+
+  if (has_progress)
+    ab->_priv->progress = gtk_progress_bar_new ();
+
+  /*
+   * If the progress meter goes on the right then we place it after we
+   * create the status line.
+   */
+  if (has_progress &&
+      /* FIXME: this should listen to changes! */
+      ! gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-meter-on-right"))
+    gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
+
+  if ( has_status ) {
+    if ( interactivity ) {
+      ab->_priv->status = gtk_entry_new();
+
+      gtk_signal_connect (GTK_OBJECT(ab->_priv->status), "delete_text",
+			  GTK_SIGNAL_FUNC(entry_delete_text_cb),
+			  ab);
+      gtk_signal_connect (GTK_OBJECT(ab->_priv->status), "insert_text",
+			  GTK_SIGNAL_FUNC(entry_insert_text_cb),
+			  ab);
+      gtk_signal_connect_after(GTK_OBJECT(ab->_priv->status), "key_press_event",
+			       GTK_SIGNAL_FUNC(entry_key_press_cb),
+			       ab);
+      gtk_signal_connect(GTK_OBJECT(ab->_priv->status), "activate",
+			 GTK_SIGNAL_FUNC(entry_activate_cb),
+			 ab);
+
+      /* no prompt now */
+      gtk_entry_set_editable(GTK_ENTRY(ab->_priv->status), FALSE);
+
+      gtk_box_pack_start (box, ab->_priv->status, TRUE, TRUE, 0);
+    } else {
+      GtkWidget * frame;
+      
+      frame = gtk_frame_new (NULL);
+      gtk_frame_set_shadow_type (GTK_FRAME(frame), GTK_SHADOW_IN);
+      
+      ab->_priv->status = gtk_label_new ("");
+      gtk_misc_set_alignment (GTK_MISC (ab->_priv->status), 0.0, 0.0);
+      gtk_widget_set_usize (ab->_priv->status, 1, -1);
+      
+      gtk_box_pack_start (box, frame, TRUE, TRUE, 0);
+      gtk_container_add (GTK_CONTAINER(frame), ab->_priv->status);
+      
+      gtk_widget_show (frame);
+    }
+  }
+
+  if (has_progress &&
+      /* FIXME: this should listen to changes! */
+      gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-meter-on-right"))
+    gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
+
+  if (ab->_priv->status) gtk_widget_show (ab->_priv->status);
+  if (ab->_priv->progress) gtk_widget_show(ab->_priv->progress);
+
+  return object;
+}
+
+static void
+gnome_appbar_set_property (GObject      *object,
+			   guint         prop_id,
+			   const GValue *value,
+			   GParamSpec   *pspec)
+{
+  GnomeAppBarPrivate *priv = GNOME_APPBAR (object)->_priv;
+  switch (prop_id) {
+  case PROP_HAS_STATUS:
+    priv->has_status = g_value_get_boolean (value);
+    break;
+  case PROP_HAS_PROGRESS:
+    priv->has_progress = g_value_get_boolean (value);
+    break;
+  case PROP_INTERACTIVITY:
+    priv->interactivity = g_value_get_enum (value);
+    switch (priv->interactivity) {
+    case GNOME_PREFERENCES_NEVER:
+      priv->interactive = FALSE;
+      break;
+    case GNOME_PREFERENCES_ALWAYS:
+      priv->interactive = TRUE;
+      break;
+    default:
+      priv->interactive = gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-interactive");
+      break;
+    }
+  }
+}
+
+static void
+gnome_appbar_get_property (GObject    *object,
+			   guint       prop_id,
+			   GValue     *value,
+			   GParamSpec *pspec)
+{
+  GnomeAppBarPrivate *priv = GNOME_APPBAR (object)->_priv;
+
+  switch (prop_id) {
+  case PROP_HAS_STATUS:
+    g_value_set_boolean (value, priv->has_status);
+    break;
+  case PROP_HAS_PROGRESS:
+    g_value_set_boolean (value, priv->has_progress);
+    break;
+  case PROP_INTERACTIVITY:
+    g_value_set_enum (value, priv->interactivity);
+    break;
+  }
+}
+
+static void
+gnome_appbar_class_init (GnomeAppBarClass *class)
+{
+  GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
+  GtkWidgetClass *widget_class;
+  GtkContainerClass *container_class;
+
+  object_class = (GtkObjectClass *) class;
+  gobject_class = (GObjectClass *) class;
+  widget_class = (GtkWidgetClass *) class;
+  container_class = (GtkContainerClass *) class;
+
+  parent_class = GTK_HBOX_CLASS (gtk_type_class (GTK_TYPE_HBOX));
+
+  gobject_class->constructor  = gnome_appbar_constructor;
+  gobject_class->get_property = gnome_appbar_get_property;
+  gobject_class->set_property = gnome_appbar_set_property;
+
+  appbar_signals[USER_RESPONSE] =
+    gtk_signal_new ("user_response",
+		    GTK_RUN_LAST,
+		    GTK_CLASS_TYPE (object_class),
+		    GTK_SIGNAL_OFFSET (GnomeAppBarClass, user_response),
+		    gtk_signal_default_marshaller,
+		    GTK_TYPE_NONE, 0);
+
+  appbar_signals[CLEAR_PROMPT] =
+    gtk_signal_new ("clear_prompt",
+		    GTK_RUN_LAST,
+		    GTK_CLASS_TYPE (object_class),
+		    GTK_SIGNAL_OFFSET (GnomeAppBarClass, clear_prompt),
+		    gtk_signal_default_marshaller,
+		    GTK_TYPE_NONE, 0);
+
+  g_object_class_install_property (
+	  gobject_class,
+	  PROP_HAS_PROGRESS,
+	  g_param_spec_boolean ("has_progress",
+				_("Has Progress"),
+				_("Create a progress widget."),
+				FALSE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+
+  g_object_class_install_property (
+	  gobject_class,
+	  PROP_HAS_STATUS,
+	  g_param_spec_boolean ("has_status",
+				_("Has Status"),
+				_("Create a status widget."),
+				FALSE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+
+  g_object_class_install_property (
+	  gobject_class,
+	  PROP_INTERACTIVITY,
+	  g_param_spec_enum ("interactivity",
+			     _("Interactivity"),
+			     _("Level of user activity required."),
+			     GNOME_TYPE_PREFERENCES_TYPE,
+			     GNOME_PREFERENCES_NEVER,
+			     G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+
+  class->user_response = NULL;
+  class->clear_prompt  = NULL; /* maybe should have a handler
+				  and the clear_prompt function
+				  just emits. */
+  gobject_class->finalize = gnome_appbar_finalize;
+}

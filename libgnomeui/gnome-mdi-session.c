@@ -199,7 +199,7 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 		bonobo_dock_layout_parse_string(mdi->active_window->layout, string);
 		gtk_container_forall(GTK_CONTAINER(app->dock), remove_items, app->dock);
 		bonobo_dock_add_from_layout(BONOBO_DOCK(app->dock), layout);
-		gtk_object_unref(GTK_OBJECT(layout));
+		g_object_unref (G_OBJECT(layout));
 	}
 #endif
 }
@@ -496,7 +496,7 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 
 		layout = bonobo_dock_get_layout (BONOBO_DOCK (app->dock));
 		string = bonobo_dock_layout_create_string (layout);
-		gtk_object_unref (GTK_OBJECT (layout));
+		g_object_unref (G_OBJECT (layout));
 		gnome_config_set_string(key, string);
 		g_free(string);
 

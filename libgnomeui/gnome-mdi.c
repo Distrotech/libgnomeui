@@ -724,7 +724,7 @@ static void app_clone(GnomeMDI *mdi, GnomeApp *app)
 	if(app) {
 		layout = bonobo_dock_get_layout(BONOBO_DOCK(app->dock));
 		layout_string = bonobo_dock_layout_create_string(layout);
-		gtk_object_unref(GTK_OBJECT(layout));
+		g_object_unref (G_OBJECT(layout));
 	}
 
 	app_create(mdi, layout_string);

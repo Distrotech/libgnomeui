@@ -1978,6 +1978,23 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	return TRUE;
 }
 
+static GObject *
+gnome_icon_list_constructor (GType                  type,
+			     guint                  n_properties,
+			     GObjectConstructParam *properties)
+{
+	GObject *gil;
+
+	gil = G_OBJECT_CLASS (parent_class)->constructor (type,
+							  n_properties,
+							  properties);
+
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (gil), 0.0, 0.0, 1000000.0, 1000000.0);
+	gnome_canvas_scroll_to (GNOME_CANVAS (gil), 0, 0);
+
+	return gil;
+}
+
 static gint
 gil_focus_in (GtkWidget *widget, GdkEventFocus *event)
 {
@@ -2159,6 +2176,7 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	
 	object_class->destroy = gil_destroy;
 	gobject_class->finalize = gil_finalize;
+	gobject_class->constructor = gnome_icon_list_constructor;
 
 	widget_class->size_request = gil_size_request;
 	widget_class->size_allocate = gil_size_allocate;
@@ -2201,9 +2219,6 @@ gnome_icon_list_instance_init (Gil *gil)
 
 	gil->_priv->focus_icon = -1;
 	
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (gil), 0.0, 0.0, 1000000.0, 1000000.0);
-	gnome_canvas_scroll_to (GNOME_CANVAS (gil), 0, 0);
-
 	GTK_WIDGET_SET_FLAGS (gil, GTK_CAN_FOCUS);
 }
 

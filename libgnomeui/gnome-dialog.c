@@ -38,15 +38,6 @@
 
 #include <libgnomeuiP.h>
 
-struct _GnomeDialogPrivate {
-  GtkWidget      *action_area; /* A button box, not an hbox */
-
-  GtkAccelGroup  *accelerators;
-
-  unsigned int    click_closes : 1;
-  unsigned int    just_hide : 1;
-};
-
 enum {
   CLICKED,
   CLOSE,

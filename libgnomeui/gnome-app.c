@@ -190,17 +190,12 @@ gnome_app_get_property (GObject       *object,
 static void
 gnome_app_instance_init (GnomeApp *app)
 {
-	const char *str = NULL;
-	GValue value = { 0, };
-
+	const char *icons;
+		
 	app->_priv = NULL;
 	/* XXX: when there is some private stuff enable this
 	app->_priv = g_new0(GnomeAppPrivate, 1);
 	*/
-
-	app->name = NULL;
-	app->prefix = NULL;
-
 	app->accel_group = gtk_accel_group_new ();
 	gtk_window_add_accel_group (GTK_WINDOW (app), app->accel_group);
 	
@@ -208,6 +203,8 @@ gnome_app_instance_init (GnomeApp *app)
 	gtk_container_add (GTK_CONTAINER (app), app->vbox);
 
 	app->dock = bonobo_dock_new ();
+	app->layout = bonobo_dock_layout_new ();
+
 	gtk_box_pack_start (GTK_BOX (app->vbox), app->dock,
 			    TRUE, TRUE, 0);
 
@@ -216,22 +213,18 @@ gnome_app_instance_init (GnomeApp *app)
 			    GTK_SIGNAL_FUNC (layout_changed),
 			    (gpointer) app);
 
-	app->layout = g_object_ref (bonobo_dock_layout_new ());
-	gtk_object_sink (GTK_OBJECT (app->layout));
-
 	app->enable_layout_config = TRUE;
 
-	g_value_init (&value, G_TYPE_STRING);
-	g_object_get_property (G_OBJECT (gnome_program_get ()),
-			       LIBGNOMEUI_PARAM_DEFAULT_ICON, &value);
-	str = g_value_get_string (&value);
-	if (str != NULL) {
-		char **files = g_strsplit (str, ";", -1);
+	g_object_get (G_OBJECT (gnome_program_get ()),
+		      LIBGNOMEUI_PARAM_DEFAULT_ICON, &icons,
+		      NULL);
+
+	if (icons && *icons) {
+		char **files = g_strsplit (icons, ";", -1);
 		gnome_window_icon_set_from_file_list (GTK_WINDOW (app),
 						      (const char **)files);
 		g_strfreev (files);
 	}
-	g_value_unset (&value);
 }
 
 static void
@@ -258,7 +251,7 @@ gnome_app_show (GtkWidget *widget)
 		if (app->enable_layout_config)
 			write_layout_config (app, app->layout);
 
-		gtk_object_unref (GTK_OBJECT (app->layout));
+		g_object_unref (G_OBJECT (app->layout));
 		app->layout = NULL;
 	}
 			
@@ -281,10 +274,9 @@ layout_changed (GtkWidget *w, gpointer data)
 	if (app->enable_layout_config) {
 		BonoboDockLayout *layout;
 
-		layout = g_object_ref (bonobo_dock_get_layout (BONOBO_DOCK (app->dock)));
-		gtk_object_sink (GTK_OBJECT (layout));
+		layout = bonobo_dock_get_layout (BONOBO_DOCK (app->dock));
 		write_layout_config (app, layout);
-		gtk_object_unref (GTK_OBJECT (layout));
+		g_object_unref (G_OBJECT (layout));
 	}
 }
 

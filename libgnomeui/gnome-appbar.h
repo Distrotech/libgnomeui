@@ -124,12 +124,6 @@ void       gnome_appbar_clear_prompt    (GnomeAppBar * appbar);
 gchar *    gnome_appbar_get_response    (GnomeAppBar * appbar);
 
 
-/* For use to bindings in languages other than C. Don't use. */
-void       gnome_appbar_construct(GnomeAppBar * ab,
-				  gboolean has_progress,
-				  gboolean has_status,
-				  GnomePreferencesType interactivity);
-
 G_END_DECLS
 
 #endif /* __GNOME_APPBAR_H__ */

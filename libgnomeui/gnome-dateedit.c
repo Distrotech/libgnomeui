@@ -494,6 +494,7 @@ gnome_date_edit_instance_init (GnomeDateEdit *gde)
 	gde->_priv->lower_hour = 7;
 	gde->_priv->upper_hour = 19;
 	gde->_priv->flags = GNOME_DATE_EDIT_SHOW_TIME;
+	create_children (gde);
 }
 
 static void
@@ -814,8 +815,7 @@ gnome_date_edit_new_flags (time_t the_time, GnomeDateEditFlags flags)
 void
 gnome_date_edit_construct (GnomeDateEdit *gde, time_t the_time, GnomeDateEditFlags flags)
 {
-	gde->_priv->flags = flags;
-	create_children (gde);
+	gnome_date_edit_set_flags (gde, flags);
 	gnome_date_edit_set_time (gde, the_time);
 }
 

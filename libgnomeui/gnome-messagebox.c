@@ -47,11 +47,6 @@ struct _GnomeMessageBoxPrivate {
 	int dummy;
 };
 
-static void gnome_message_box_construct  (GnomeMessageBox      *messagebox,
-					  const gchar          *message,
-					  const gchar          *message_box_type,
-					  const gchar         **buttons);
-
 GNOME_CLASS_BOILERPLATE (GnomeMessageBox, gnome_message_box,
 			 GnomeDialog, GNOME_TYPE_DIALOG)
 
@@ -85,7 +80,7 @@ gnome_message_box_instance_init (GnomeMessageBox *message_box)
  *
  * Returns:
  */
-static void
+void
 gnome_message_box_construct (GnomeMessageBox       *messagebox,
 			     const gchar           *message,
 			     const gchar           *message_box_type,
@@ -144,12 +139,9 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
         if (appname) {
                 s = g_strdup_printf("%s (%s)", title_prefix, appname);
         }
-        if (s) {
-                gtk_window_set_title(GTK_WINDOW(messagebox), s);
-                g_free(s);
-        } else {
-                gtk_window_set_title(GTK_WINDOW(messagebox), title_prefix);
-        }
+
+	gnome_dialog_construct (GNOME_DIALOG (messagebox), s ? s : title_prefix, buttons);
+	g_free (s);
 
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(GNOME_DIALOG(messagebox)->vbox),
@@ -177,18 +169,6 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 		
 		gtk_box_pack_start (GTK_BOX (hbox), alignment, FALSE, FALSE, 0);
 	}
-
-	if (buttons) {
-		while (buttons[i]) {
-			gnome_dialog_append_button (GNOME_DIALOG (messagebox), 
-						    buttons[i]);
-			i++;
-		};
-	}
-
-	if(GNOME_DIALOG(messagebox)->buttons)
-		gtk_widget_grab_focus(
-			g_list_last (GNOME_DIALOG (messagebox)->buttons)->data);
 	
 	gnome_dialog_set_close (GNOME_DIALOG (messagebox),
 				TRUE );

@@ -122,7 +122,7 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *class)
 	gobject_class->set_property = gnome_druid_page_standard_set_property;
 	gobject_class->finalize = gnome_druid_page_standard_finalize;
 	object_class->destroy = gnome_druid_page_standard_destroy;
-	widget_class->size_allocate = gnome_druid_page_standard_size_allocate;
+	/* widget_class->size_allocate = gnome_druid_page_standard_size_allocate; */
 	widget_class->realize = gnome_druid_page_standard_realize;
 	widget_class->style_set = gnome_druid_page_standard_style_set;
 	druid_page_class->prepare = gnome_druid_page_standard_prepare;
@@ -524,7 +524,8 @@ gnome_druid_page_standard_prepare (GnomeDruidPage *page,
 {
 	gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, TRUE, TRUE, TRUE);
 	gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
-	gtk_widget_grab_default (GNOME_DRUID (druid)->next);
+	if (GTK_IS_WINDOW (gtk_widget_get_toplevel (druid)))
+		gtk_widget_grab_default (GNOME_DRUID (druid)->next);
 }
 
 GtkWidget *

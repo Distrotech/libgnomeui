@@ -1,3 +1,39 @@
+2001-12-07  jacob berkman  <jacob@ximian.com>
+
+	* gnome-messagebox.c (gnome_message_box_construct): make public
+	and fix some bugs
+
+	* gnome-mdi-session.c (gnome_mdi_save_state): fix reference to
+	BonoboDockLayout
+
+	* gnome-icon-list.c (gnome_icon_list_constructor): don't call the
+	canvas functions until here, since they will not be available
+	until after the object has been constructed
+
+	* gnome-druid-page-edge.c (gnome_druid_page_edge_setup): use
+	PangoFontDescriptions, and remove incorrect properties on some of
+	the canvas items
+
+	* gnome-dialog.c (GnomeDialogPrivate): move definition to
+	libgnomeuiP.h such that libglade support can peek into it
+
+	* gnome-dateedit.c (gnome_date_edit_instance_init): create
+	children here
+	(gnome_date_edit_construct): just set the properties, rather than
+	creating the children
+
+	* gnome-appbar.c (gnome_appbar_new): call g_object_new rather than
+	the constructor
+	(gnome_appbar_construct): remove in favor of construct-time
+	properties
+	(gnome_appbar_constructor): instead of gnome_appbar_construct
+	(gnome_appbar_set_property): 
+	(gnome_appbar_get_property): implement
+	(gnome_appbar_class_init): add some construct time properties
+
+	* gnome-app.c (gnome_app_show): 
+	(layout_changed): BonoboDockLayout is no longer a GtkObject
+
 2001-12-07  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-icon-sel.c (gnome_icon_selection_instance_init): Update 
