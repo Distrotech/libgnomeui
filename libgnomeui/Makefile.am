@@ -109,6 +109,7 @@ libgnomeui_la_SOURCES = \
 	gnome-canvas-widget.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
+	gnome-cursors.c			\
 	gnome-dateedit.c		\
 ##	gnome-dentry-edit.c		\
 	gnome-dialog.c                  \
@@ -179,6 +180,7 @@ gnome_headers = \
 	gnome-canvas-widget.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
+	gnome-cursors.h			\
 	gnome-dateedit.h		\
 ##	gnome-dentry-edit.h		\
 	gnome-dialog.h                  \
