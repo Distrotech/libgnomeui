@@ -161,8 +161,8 @@ typedef struct {
 	/* Whether the user is performing a rubberband selection */
 	guint selecting : 1;
 
-	/* Whether the user clicked on an unselected icon's text */
-	guint select_on_text : 1;
+	/* Whether editing an icon is pending after a button press */
+	guint edit_pending : 1;
 
 	/* Whether selection is pending after a button press */
 	guint select_pending : 1;
@@ -501,12 +501,9 @@ gnome_icon_list_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep
 static void
 sync_selection (Gil *gil, int pos, SyncType type)
 {
-	GilPrivate *priv;
 	GList *list;
 
-	priv = gil->priv;
-
-	for (list = priv->icon_list; list; list = list->next) {
+	for (list = gil->selection; list; list = list->next) {
 		if (GPOINTER_TO_INT (list->data) >= pos) {
 			int i = GPOINTER_TO_INT (list->data);
 
@@ -549,11 +546,17 @@ static gint
 selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *event)
 {
 	GilPrivate *priv;
+	GnomeIconTextItem *text;
 	int retval;
-	int do_sel;
 
 	priv = gil->priv;
 	retval = FALSE;
+
+	/* We use a separate variable and ref the object because it may be
+	 * destroyed by one of the signal handlers.
+	 */
+	text = icon->text;
+	gtk_object_ref (GTK_OBJECT (text));
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
@@ -563,23 +566,17 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 
 		if (!icon->selected) {
 			gnome_icon_list_unselect_all (gil, NULL, NULL);
-
-			if (on_text)
-				priv->select_on_text = TRUE;
-
-			do_sel = TRUE;
+			emit_select (gil, TRUE, idx, event);
 		} else {
 			if (priv->selection_mode == GTK_SELECTION_SINGLE
-			    && (event->button.state & GDK_CONTROL_MASK)) {
-				do_sel = FALSE;
-
-				if (on_text)
-					priv->select_on_text = TRUE;
-			} else
-				do_sel = TRUE;
+			    && (event->button.state & GDK_CONTROL_MASK))
+				emit_select (gil, FALSE, idx, event);
+			else if (on_text && priv->is_editable && event->button.button == 1)
+				priv->edit_pending = TRUE;
+			else
+				emit_select (gil, TRUE, idx, event);
 		}
 
-		emit_select (gil, do_sel, idx, event);
 		retval = TRUE;
 		break;
 
@@ -594,11 +591,12 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 		break;
 
 	case GDK_BUTTON_RELEASE:
-		if (on_text && priv->select_on_text) {
-			priv->select_on_text = FALSE;
-			retval = TRUE;
+		if (priv->edit_pending) {
+			gnome_icon_text_item_start_editing (text);
+			priv->edit_pending = FALSE;
 		}
 
+		retval = TRUE;
 		break;
 
 	default:
@@ -609,7 +607,9 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 	 * icon text item's own handler from executing.
 	 */
 	if (on_text && retval)
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (icon->text), "event");
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "event");
+
+	gtk_object_unref (GTK_OBJECT (text));
 
 	return retval;
 }
@@ -687,11 +687,19 @@ static gint
 selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *event)
 {
 	GilPrivate *priv;
+	GnomeIconTextItem *text;
 	int retval;
 	int additive, range;
+	int do_select;
 
 	priv = gil->priv;
 	retval = FALSE;
+
+	/* We use a separate variable and ref the object because it may be
+	 * destroyed by one of the signal handlers.
+	 */
+	text = icon->text;
+	gtk_object_ref (GTK_OBJECT (text));
 
 	range = (event->button.state & GDK_SHIFT_MASK) != 0;
 	additive = (event->button.state & GDK_CONTROL_MASK) != 0;
@@ -703,13 +711,10 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 			break;
 
 		priv->select_pending = FALSE;
+		do_select = TRUE;
 
-		if (!on_text || !icon->selected || additive || range) {
-			if (on_text && (!icon->selected || additive || range))
-				priv->select_on_text = TRUE;
-
-			if ((icon->selected && !additive && !range)
-			    || (additive && !range)) {
+		if (additive || range) {
+			if (additive && !range) {
 				priv->select_pending = TRUE;
 				priv->select_pending_event = *event;
 				priv->select_pending_was_selected = icon->selected;
@@ -718,12 +723,18 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 				 * know about the click.
 				 */
 				emit_select (gil, TRUE, idx, event);
-			} else
-				do_select_many (gil, icon, idx, event);
-
-			retval = TRUE;
+				do_select = FALSE;
+			}
+		} else if (icon->selected && on_text && priv->is_editable
+			   && event->button.button == 1) {
+			priv->edit_pending = TRUE;
+			do_select = FALSE;
 		}
 
+		if (do_select)
+			do_select_many (gil, icon, idx, event);
+
+		retval = TRUE;
 		break;
 
 	case GDK_2BUTTON_PRESS:
@@ -737,15 +748,14 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 		break;
 
 	case GDK_BUTTON_RELEASE:
-		if (on_text && priv->select_on_text) {
-			priv->select_on_text = FALSE;
-			retval = TRUE;
-		}
-
 		if (priv->select_pending) {
 			icon->selected = priv->select_pending_was_selected;
 			do_select_many (gil, icon, idx, &priv->select_pending_event);
 			priv->select_pending = FALSE;
+			retval = TRUE;
+		} else if (priv->edit_pending) {
+			gnome_icon_text_item_start_editing (text);
+			priv->edit_pending = FALSE;
 			retval = TRUE;
 		}
 
@@ -759,7 +769,9 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 	 * icon text item's own handler from executing.
 	 */
 	if (on_text && retval)
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (icon->text), "event");
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "event");
+
+	gtk_object_unref (GTK_OBJECT (text));
 
 	return retval;
 }
@@ -890,6 +902,10 @@ icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 		group,
 		gnome_icon_text_item_get_type (),
 		NULL));
+
+	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->text),
+			       "use_broken_event_handling", FALSE,
+			       NULL);
 
 	gnome_icon_text_item_configure (icon->text,
 					0, 0, priv->icon_width, NULL,
@@ -1126,13 +1142,14 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 	list = g_list_nth (priv->icon_list, pos);
 	icon = list->data;
 
-	if (icon->text->selected) {
+	if (icon->selected) {
 		was_selected = TRUE;
 
 		switch (priv->selection_mode) {
 		case GTK_SELECTION_SINGLE:
 		case GTK_SELECTION_BROWSE:
 		case GTK_SELECTION_MULTIPLE:
+		case GTK_SELECTION_EXTENDED:
 			gnome_icon_list_unselect_icon (gil, pos);
 			break;
 
@@ -1260,7 +1277,7 @@ select_icon (Gil *gil, int pos, GdkEvent *event)
 		for (list = priv->icon_list; list; list = list->next) {
 			icon = list->data;
 
-			if (i != pos && icon->text->selected)
+			if (i != pos && icon->selected)
 				emit_select (gil, FALSE, i, event);
 
 			i++;
@@ -1270,10 +1287,8 @@ select_icon (Gil *gil, int pos, GdkEvent *event)
 		break;
 
 	case GTK_SELECTION_MULTIPLE:
-		emit_select (gil, TRUE, pos, event);
-		break;
-
 	case GTK_SELECTION_EXTENDED:
+		emit_select (gil, TRUE, pos, event);
 		break;
 
 	default:
@@ -1309,10 +1324,8 @@ unselect_icon (Gil *gil, int pos, GdkEvent *event)
 	case GTK_SELECTION_SINGLE:
 	case GTK_SELECTION_BROWSE:
 	case GTK_SELECTION_MULTIPLE:
-		emit_select (gil, FALSE, pos, event);
-		break;
-
 	case GTK_SELECTION_EXTENDED:
+		emit_select (gil, FALSE, pos, event);
 		break;
 
 	default:
@@ -1518,6 +1531,7 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 
 	gnome_canvas_item_grab (priv->sel_rect, GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
 				NULL, event->time);
+
 	return TRUE;
 }
 
@@ -1638,8 +1652,8 @@ gil_button_release (GtkWidget *widget, GdkEventButton *event)
 
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &x, &y);
 	update_drag_selection (gil, x, y);
-
 	gnome_canvas_item_ungrab (priv->sel_rect, event->time);
+
 	gtk_object_destroy (GTK_OBJECT (priv->sel_rect));
 	priv->sel_rect = NULL;
 	priv->selecting = FALSE;
@@ -1689,7 +1703,6 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	Gil *gil;
 	GilPrivate *priv;
 	double x, y;
-	int v;
 
 	gil = GIL (widget);
 	priv = gil->priv;

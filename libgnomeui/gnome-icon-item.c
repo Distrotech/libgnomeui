@@ -59,10 +59,18 @@ typedef struct {
 
 	/* Whether we need to update because the editing/selected state changed */
 	guint need_state_update : 1;
+
+	/* For compatibility with old clients */
+	guint use_broken_event_handling : 1;
 } ItiPrivate;
 
 
 static GnomeCanvasItemClass *parent_class;
+
+enum {
+	ARG_0,
+	ARG_USE_BROKEN_EVENT_HANDLING
+};
 
 enum {
 	TEXT_CHANGED,
@@ -164,7 +172,7 @@ iti_edition_accept (Iti *iti)
 		if (accept) {
 			if (iti->is_text_allocated)
 				g_free (iti->text);
-			
+
 			iti->text = g_strdup (gtk_entry_get_text (priv->entry));
 			iti->is_text_allocated = 1;
 		}
@@ -263,6 +271,26 @@ iti_destroy (GtkObject *object)
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+/* set_arg handler for the icon text item */
+static void
+iti_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	Iti *iti;
+	ItiPrivate *priv;
+
+	iti = ITI (object);
+	priv = iti->priv;
+
+	switch (arg_id) {
+	case ARG_USE_BROKEN_EVENT_HANDLING:
+		priv->use_broken_event_handling = GTK_VALUE_BOOL (*arg) ? TRUE : FALSE;
+		break;
+
+	default:
+		break;
+	}
 }
 
 /* Loads the default font for icon text items if necessary */
@@ -700,34 +728,33 @@ iti_event (GnomeCanvasItem *item, GdkEvent *event)
 		return TRUE;
 
 	case GDK_BUTTON_PRESS:
-		if (!iti->is_editable)
+		if (priv->use_broken_event_handling) {
+			if (!iti->is_editable)
+				break;
+
+			if (event->button.button != 1)
+				break;
+
+			if (!iti->selected) {
+				priv->unselected_click = TRUE;
+				break;
+			} else
+				priv->unselected_click = FALSE;
+		} else if (!iti->editing)
 			break;
 
-		if (event->button.button != 1)
-			break;
-
-		if (!iti->selected) {
-			priv->unselected_click = TRUE;
-			break;
-		} else
-			priv->unselected_click = FALSE;
-
-		if (iti->editing) {
+		if (iti->editing && event->button.button == 1) {
 			x = event->button.x - (item->x1 + MARGIN_X);
 			y = event->button.y - (item->y1 + MARGIN_Y);
 			idx = iti_idx_from_x_y (iti, x, y);
 
 			iti_start_selecting (iti, idx, event->button.time);
-		}
+		} else if (!priv->use_broken_event_handling)
+			break;
+
 		return TRUE;
 
 	case GDK_MOTION_NOTIFY:
-		if (!iti->is_editable)
-			break;
-
-		if (!priv->entry)
-			break;
-
 		if (!iti->selecting)
 			break;
 
@@ -738,20 +765,27 @@ iti_event (GnomeCanvasItem *item, GdkEvent *event)
 		return TRUE;
 
 	case GDK_BUTTON_RELEASE:
-		if (!iti->is_editable)
-			break;
-
-		if (!priv->entry) {
-			if (priv->unselected_click || iti->editing)
+		if (priv->use_broken_event_handling) {
+			if (!iti->is_editable)
 				break;
 
-			if (event->button.button != 1)
-				break;
+			if (!priv->entry) {
+				if (priv->unselected_click || iti->editing)
+					break;
 
-			gnome_canvas_item_grab_focus (item);
-			iti_start_editing (iti);
-		} else
-			iti_stop_selecting (iti, event->button.time);
+				if (event->button.button != 1)
+					break;
+
+				gnome_canvas_item_grab_focus (item);
+				iti_start_editing (iti);
+			} else
+				iti_stop_selecting (iti, event->button.time);
+		} else {
+			if (iti->selecting && event->button.button == 1)
+				iti_stop_selecting (iti, event->button.time);
+			else
+				break;
+		}
 
 		return TRUE;
 
@@ -798,22 +832,14 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 	GtkObjectClass  *object_class;
 	GnomeCanvasItemClass *item_class;
 
-	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
-
 	object_class = (GtkObjectClass *) text_item_class;
 	item_class   = (GnomeCanvasItemClass *) text_item_class;
 
-	/* GtkObject class method overrides */
-	object_class->destroy = iti_destroy;
+	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	/* GnomeCanvasItem class method overrides */
-	item_class->update = iti_update;
-	item_class->draw = iti_draw;
-	item_class->point = iti_point;
-	item_class->bounds = iti_bounds;
-	item_class->event = iti_event;
+	gtk_object_add_arg_type ("GnomeIconTextItem::use_broken_event_handling",
+				 GTK_TYPE_BOOL, GTK_ARG_WRITABLE, ARG_USE_BROKEN_EVENT_HANDLING);
 
-	/* Our signals */
 	iti_signals [TEXT_CHANGED] =
 		gtk_signal_new (
 			"text_changed",
@@ -878,6 +904,15 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_TYPE_NONE, 0);
 
 	gtk_object_class_add_signals (object_class, iti_signals, LAST_SIGNAL);
+
+	object_class->destroy = iti_destroy;
+	object_class->set_arg = iti_set_arg;
+
+	item_class->update = iti_update;
+	item_class->draw = iti_draw;
+	item_class->point = iti_point;
+	item_class->bounds = iti_bounds;
+	item_class->event = iti_event;
 }
 
 /* Object initialization function for the icon text item */
@@ -888,6 +923,9 @@ iti_init (GnomeIconTextItem *iti)
 
 	priv = g_new0 (ItiPrivate, 1);
 	iti->priv = priv;
+
+	/* For compatibility with old clients */
+	priv->use_broken_event_handling = TRUE;
 }
 
 /**
@@ -898,7 +936,7 @@ iti_init (GnomeIconTextItem *iti)
  * @width: Maximum width allowed for this item, to be used for word wrapping.
  * @fontname: Name of the fontset that should be used to display the text.
  * @text: Text that is going to be displayed.
- * @is_editable: Whether editing is enabled for this item.
+ * @is_editable: Deprecated.
  * @is_static: Whether @text points to a static string or not.
  *
  * This routine is used to configure a &GnomeIconTextItem.
@@ -1062,6 +1100,26 @@ gnome_icon_text_item_get_text (GnomeIconTextItem *iti)
 		return iti->text;
 }
 
+
+/**
+ * gnome_icon_text_item_start_editing:
+ * @iti: An icon text item.
+ *
+ * Starts the editing state of an icon text item.
+ **/
+void
+gnome_icon_text_item_start_editing (GnomeIconTextItem *iti)
+{
+	g_return_if_fail (iti != NULL);
+	g_return_if_fail (IS_ITI (iti));
+
+	if (iti->editing)
+		return;
+
+	iti->selected = TRUE; /* Ensure that we are selected */
+	gnome_canvas_item_grab_focus (GNOME_CANVAS_ITEM (iti));
+	iti_start_editing (iti);
+}
 
 /**
  * gnome_icon_text_item_stop_editing:

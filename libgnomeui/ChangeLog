@@ -1,3 +1,32 @@
+1999-07-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_remove): Use icon->selected,
+	not icon->text->selected.  Consider GTK_SELECTION_EXTENDED as
+	well.
+	(select_icon): Likewise.
+	(unselect_icon): Consider GTK_SELECTION_EXTENDED as well.
+	(sync_selection): HOW DID THIS EVER WORK!?  This has to sync the
+	gil->selection, not the list of icons itself.  It seems that no
+	one ever inserted or deleted icons, just appended them.
+	(icon_new_from_imlib): Do not use broken event handling for the
+	icon text item.
+	(selection_one_icon_event): Turn on editing in the icon text item
+	if appropriate.  Adjusted for sane event handling; this makes the
+	code simpler as well.  Ref/unref the text item since it may be
+	destroyed by one of the signal handlers.
+	(selection_many_icon_event): Likewise.
+
+	* gnome-icon-item.c (iti_event): Added an object argument called
+	use_broken_event_handling.  The event model of the icon text item
+	was wrong in old versions; it should not make itself editable, but
+	let the client request it instead.  The icon list now turns off
+	this flag, but old clients can have the expected behavior (much to
+	their pain).
+	(gnome_icon_text_item_start_editing): New function to let the user
+	start the editing state of the icon text item.
+	(gnome_icon_text_item_configure): Documented the is_editable flag
+	as deprecated.  Old clients may still make use of it.
+
 Wed Jul 28 03:14:49 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap-entry.c: fix typo in the inline docs

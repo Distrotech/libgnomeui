@@ -81,28 +81,29 @@ typedef struct {
 	void (* selection_stopped) (GnomeIconTextItem *iti);
 } GnomeIconTextItemClass;
 
-GtkType  gnome_icon_text_item_get_type     (void);
+GtkType  gnome_icon_text_item_get_type      (void);
 
-void     gnome_icon_text_item_configure    (GnomeIconTextItem *iti,
-					    int                x,
-					    int                y,
-					    int                width,
-					    const char        *fontname,
-					    const char        *text,
-					    gboolean           is_editable,
-					    gboolean           is_static);
+void     gnome_icon_text_item_configure     (GnomeIconTextItem *iti,
+					     int                x,
+					     int                y,
+					     int                width,
+					     const char        *fontname,
+					     const char        *text,
+					     gboolean           is_editable,
+					     gboolean           is_static);
 
-void     gnome_icon_text_item_setxy        (GnomeIconTextItem *iti,
-					    int                x,
-					    int                y);
+void     gnome_icon_text_item_setxy         (GnomeIconTextItem *iti,
+					     int                x,
+					     int                y);
 
-void     gnome_icon_text_item_select       (GnomeIconTextItem *iti,
-					    int                sel);
+void     gnome_icon_text_item_select        (GnomeIconTextItem *iti,
+					     int                sel);
 
-char    *gnome_icon_text_item_get_text     (GnomeIconTextItem *iti);
+char    *gnome_icon_text_item_get_text      (GnomeIconTextItem *iti);
 
-void     gnome_icon_text_item_stop_editing (GnomeIconTextItem *iti,
-					    gboolean           accept);
+void     gnome_icon_text_item_start_editing (GnomeIconTextItem *iti);
+void     gnome_icon_text_item_stop_editing  (GnomeIconTextItem *iti,
+					     gboolean           accept);
 
 
 END_GNOME_DECLS
