@@ -24,6 +24,8 @@
 
 #include "gnome-file-selector.h"
 #include "gnome-icon-selector.h"
+#include "gnome-icon-entry.h"
+#include "gnome-entry.h"
 
 static GtkWidget *iselector;
 
@@ -162,8 +164,8 @@ main (int argc, char **argv)
 {
     GtkWidget *app;
     GtkWidget *vbox;
-    GtkWidget *frame1, *frame2, *frame3;
-    GtkWidget *fselector, *entry;
+    GtkWidget *frame1, *frame2, *frame3, *frame4;
+    GtkWidget *fselector, *entry, *ientry;
 
     gnome_program_init ("selector_demo", "1.0", argc, argv,
 			GNOMEUI_INIT, NULL);
@@ -191,6 +193,15 @@ main (int argc, char **argv)
     entry = gnome_entry_new ("test3");
 
     gtk_container_add (GTK_CONTAINER (frame3), entry);
+
+    frame4 = gtk_frame_new ("GnomeIconEntry");
+
+    gtk_box_pack_start (GTK_BOX (vbox), frame4, FALSE, FALSE,
+			GNOME_PAD);
+
+    ientry = gnome_icon_entry_new ("test4", "San Francisco");
+
+    gtk_container_add (GTK_CONTAINER (frame4), ientry);
 
     frame2 = gtk_frame_new ("GnomeIconSelector");
 

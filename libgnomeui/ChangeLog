@@ -1,5 +1,9 @@
 2000-09-12  Martin Baulig  <baulig@suse.de>
 
+	* selector-demo.c: Added GnomeIconEntry.
+
+2000-09-12  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector.h (GnomeSelector): Added "get_filename" signal.
 	(gnome_selector_get_filename): New function.
 	(gnome_selector_set_filename): Allow the filename to be NULL.
