@@ -1,3 +1,9 @@
+Sun Mar 25 15:26:29 2001  George Lebl <jirka@5z.com>
+
+	* gnome-icon-item.c: use the editable interface to get the values
+	  instead of grabbing it directly of the structure, however added
+	  FIXME's since that needs to be tested and verified
+
 Sun Mar 25 03:04:13 2001  George Lebl <jirka@5z.com>
 
 	* gnome-app-helper.c, gnome-file-saver.c, gnome-gconf.c,

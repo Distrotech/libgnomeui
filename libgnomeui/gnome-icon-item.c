@@ -435,6 +435,19 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y)
 
 		xpos = (ti->width - row->width) / 2;
 
+		/* FIXME: is this correct? */
+		gtk_editable_get_selection_bounds (GTK_EDITABLE (priv->entry),
+						   &sel_start,
+						   &sel_end);
+
+		sel_start -= len;
+		sel_end -= len;
+
+		offset = 0;
+		cursor = gtk_editable_get_position (GTK_EDITABLE (priv->entry));
+
+		/* FIXME: is the above aquivalent for 2.0 ??? */
+
 #if 0 /* FIXME */
 		sel_start = GTK_EDITABLE (priv->entry)->selection_start_pos - len;
 		sel_end = GTK_EDITABLE (priv->entry)->selection_end_pos - len;
