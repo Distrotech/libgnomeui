@@ -210,7 +210,7 @@ gil_get_items_per_line (Gil *gil)
 
 /**
  * gnome_icon_list_get_items_per_line:
- * @gil: An icon list
+ * @gil: An icon list.
  *
  * Returns the number of icons that fit in a line or row.
  */
@@ -468,9 +468,9 @@ emit_select (Gil *gil, int sel, int i, GdkEvent *event)
 
 /**
  * gnome_icon_list_unselect_all:
- * @gil:   An icon list
- * @event: Unused, must be NULL
- * @keep:  For internal use only; must be NULL
+ * @gil:   An icon list.
+ * @event: Unused, must be NULL.
+ * @keep:  For internal use only; must be NULL.
  *
  * Unselects all the icons in the icon list.  The @event and @keep parameters
  * must be NULL, since they are used only internally.
@@ -1003,10 +1003,10 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 
 /**
  * gnome_icon_list_insert_imlib:
- * @gil:  An icon list
- * @pos:  Position at which the new icon should be inserted
- * @im:   Imlib image with the icon image
- * @text: Text to be used for the icon's caption
+ * @gil:  An icon list.
+ * @pos:  Position at which the new icon should be inserted.
+ * @im:   Imlib image with the icon image.
+ * @text: Text to be used for the icon's caption.
  *
  * Inserts an icon in the specified icon list.  The icon is created from the
  * specified Imlib image, and it is inserted at the @pos index.
@@ -1027,10 +1027,10 @@ gnome_icon_list_insert_imlib (GnomeIconList *gil, int pos, GdkImlibImage *im, co
 
 /**
  * gnome_icon_list_insert:
- * @gil:           An icon list
- * @pos:           Position at which the new icon should be inserted
- * @icon_filename: Name of the file that holds the icon's image
- * @text:          Text to be used for the icon's caption
+ * @gil:           An icon list.
+ * @pos:           Position at which the new icon should be inserted.
+ * @icon_filename: Name of the file that holds the icon's image.
+ * @text:          Text to be used for the icon's caption.
  *
  * Inserts an icon in the specified icon list.  The icon's image is loaded
  * from the specified file, and it is inserted at the @pos index.
@@ -1049,10 +1049,10 @@ gnome_icon_list_insert (GnomeIconList *gil, int pos, const char *icon_filename, 
 }
 
 /**
- * gnome_icon_list_append:
- * @gil:  An icon list
- * @im:   Imlib image with the icon image
- * @text: Text to be used for the icon's caption
+ * gnome_icon_list_append_imlib:
+ * @gil:  An icon list.
+ * @im:   Imlib image with the icon image.
+ * @text: Text to be used for the icon's caption.
  *
  * Appends an icon to the specified icon list.  The icon is created from
  * the specified Imlib image.
@@ -1072,9 +1072,9 @@ gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, char *text)
 
 /**
  * gnome_icon_list_append:
- * @gil:           An icon list
- * @icon_filename: Name of the file that holds the icon's image
- * @text:          Text to be used for the icon's caption
+ * @gil:           An icon list.
+ * @icon_filename: Name of the file that holds the icon's image.
+ * @text:          Text to be used for the icon's caption.
  *
  * Appends an icon to the specified icon list.  The icon's image is loaded from
  * the specified file, and it is inserted at the @pos index.
@@ -1105,8 +1105,8 @@ icon_destroy (Icon *icon)
 
 /**
  * gnome_icon_list_remove:
- * @gil: An icon list
- * @pos: Index of the icon that should be removed
+ * @gil: An icon list.
+ * @pos: Index of the icon that should be removed.
  *
  * Removes the icon at index position @pos.  If a destroy handler was specified
  * for that icon, it will be called with the appropriate data.
@@ -1184,7 +1184,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 
 /**
  * gnome_icon_list_clear:
- * @gil: An icon list
+ * @gil: An icon list.
  *
  * Clears the contents for the icon list by removing all the icons.  If destroy
  * handlers were specified for any of the icons, they will be called with the
@@ -1287,8 +1287,8 @@ select_icon (Gil *gil, int pos, GdkEvent *event)
 
 /**
  * gnome_icon_list_select_icon:
- * @gil: An icon list
- * @pos: Index of the icon to be selected
+ * @gil: An icon list.
+ * @pos: Index of the icon to be selected.
  *
  * Selects the icon at the index specified by @pos.
  */
@@ -1326,8 +1326,8 @@ unselect_icon (Gil *gil, int pos, GdkEvent *event)
 
 /**
  * gnome_icon_list_unselect_icon:
- * @gil: An icon list
- * @pos: Index of the icon to be unselected
+ * @gil: An icon list.
+ * @pos: Index of the icon to be unselected.
  *
  * Unselects the icon at the index specified by @pos.
  */
@@ -1944,8 +1944,8 @@ gnome_icon_list_get_type (void)
 
 /**
  * gnome_icon_list_set_icon_width:
- * @gil: An icon list
- * @w:   New width for the icon columns
+ * @gil: An icon list.
+ * @w:   New width for the icon columns.
  *
  * Sets the amount of horizontal space allocated to the icons, i.e. the column
  * width of the icon list.
@@ -1979,8 +1979,8 @@ gil_adj_value_changed (GtkAdjustment *adj, Gil *gil)
 
 /**
  * gnome_icon_list_set_hadjustment:
- * @gil: An icon list
- * @hadj: Adjustment to be used for horizontal scrolling
+ * @gil: An icon list.
+ * @hadj: Adjustment to be used for horizontal scrolling.
  *
  * Sets the adjustment to be used for horizontal scrolling.  This is normally
  * not required, as the icon list can be simply inserted in a &GtkScrolledWindow
@@ -2032,8 +2032,8 @@ gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 
 /**
  * gnome_icon_list_set_vadjustment:
- * @gil: An icon list
- * @hadj: Adjustment to be used for horizontal scrolling
+ * @gil: An icon list.
+ * @hadj: Adjustment to be used for horizontal scrolling.
  *
  * Sets the adjustment to be used for vertical scrolling.  This is normally not
  * required, as the icon list can be simply inserted in a &GtkScrolledWindow and
@@ -2080,10 +2080,10 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 
 /**
  * gnome_icon_list_construct:
- * @gil: An icon list
- * @icon_width: Width for the icon columns
- * @adj: Adjustment to be used for vertical scrolling
- * @flags: A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT
+ * @gil: An icon list.
+ * @icon_width: Width for the icon columns.
+ * @adj: Adjustment to be used for vertical scrolling.
+ * @flags: A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT.
  *
  * Constructor for the icon list, to be used by derived classes.
  **/
@@ -2111,9 +2111,9 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
 
 /**
  * gnome_icon_list_new_flags: [constructor]
- * @icon_width: Width for the icon columns
- * @adj:        Adjustment to be used for vertical scrolling
- * @flags:      A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT
+ * @icon_width: Width for the icon columns.
+ * @adj:        Adjustment to be used for vertical scrolling.
+ * @flags:      A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT.
  *
  * Creates a new icon list widget.  The icon columns are allocated a width of
  * @icon_width pixels.  Icon captions will be word-wrapped to this width as
@@ -2154,9 +2154,9 @@ gnome_icon_list_new_flags (guint icon_width, GtkAdjustment *adj, int flags)
 
 /**
  * gnome_icon_list_new:
- * @icon_width: Width for the icon columns
- * @adj: Adjustment to be used for vertical scrolling
- * @flags: A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT
+ * @icon_width: Width for the icon columns.
+ * @adj: Adjustment to be used for vertical scrolling.
+ * @flags: A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT.
  *
  * This function is kept for binary compatibility with old applications.  It is
  * similar in purpose to gnome_icon_list_new_flags(), but it will always turn on
@@ -2172,7 +2172,7 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, int flags)
 
 /**
  * gnome_icon_list_freeze:
- * @gil:  An icon list
+ * @gil:  An icon list.
  *
  * Freezes an icon list so that any changes made to it will not be
  * reflected on the screen until it is thawed with gnome_icon_list_thaw().
@@ -2206,7 +2206,7 @@ gnome_icon_list_freeze (GnomeIconList *gil)
 
 /**
  * gnome_icon_list_thaw:
- * @gil:  An icon list
+ * @gil:  An icon list.
  *
  * Thaws the icon list and performs any pending layout operations.  This
  * is to be used in conjunction with gnome_icon_list_freeze().
@@ -2237,8 +2237,8 @@ gnome_icon_list_thaw (GnomeIconList *gil)
 
 /**
  * gnome_icon_list_set_selection_mode
- * @gil:  An icon list
- * @mode: New selection mode
+ * @gil:  An icon list.
+ * @mode: New selection mode.
  *
  * Sets the selection mode for an icon list.  The %GTK_SELECTION_MULTIPLE and
  * %GTK_SELECTION_EXTENDED modes are considered equivalent.
@@ -2260,10 +2260,10 @@ gnome_icon_list_set_selection_mode (GnomeIconList *gil, GtkSelectionMode mode)
 
 /**
  * gnome_icon_list_set_icon_data_full:
- * @gil:     An icon list
- * @pos:     Index of an icon
- * @data:    User data to set on the icon
- * @destroy: Destroy notification handler for the icon
+ * @gil:     An icon list.
+ * @pos:     Index of an icon.
+ * @data:    User data to set on the icon.
+ * @destroy: Destroy notification handler for the icon.
  *
  * Associates the @data pointer to the icon at the index specified by @pos.  The
  * @destroy argument points to a function that will be called when the icon is
@@ -2290,9 +2290,9 @@ gnome_icon_list_set_icon_data_full (GnomeIconList *gil,
 
 /**
  * gnome_icon_list_get_icon_data:
- * @gil:  An icon list
- * @pos:  Index of an icon
- * @data: User data to set on the icon
+ * @gil:  An icon list.
+ * @pos:  Index of an icon.
+ * @data: User data to set on the icon.
  *
  * Associates the @data pointer to the icon at the index specified by @pos.
  */
@@ -2304,8 +2304,8 @@ gnome_icon_list_set_icon_data (GnomeIconList *gil, int pos, gpointer data)
 
 /**
  * gnome_icon_list_get_icon_data:
- * @gil: An icon list
- * @pos: Index of an icon
+ * @gil: An icon list.
+ * @pos: Index of an icon.
  *
  * Returns the user data pointer associated to the icon at the index specified
  * by @pos.
@@ -2328,8 +2328,8 @@ gnome_icon_list_get_icon_data (GnomeIconList *gil, int pos)
 
 /**
  * gnome_icon_list_find_icon_from_data:
- * @gil:    An icon list
- * @data:   Data pointer associated to an icon
+ * @gil:    An icon list.
+ * @data:   Data pointer associated to an icon.
  *
  * Returns the index of the icon whose user data has been set to @data,
  * or -1 if no icon has this data associated to it.
@@ -2374,8 +2374,8 @@ set_value (GnomeIconList *gil, GilPrivate *priv, int *dest, int val)
 
 /**
  * gnome_icon_list_set_row_spacing:
- * @gil:    An icon list
- * @pixels: Number of pixels for inter-row spacing
+ * @gil:    An icon list.
+ * @pixels: Number of pixels for inter-row spacing.
  *
  * Sets the spacing to be used between rows of icons.
  */
@@ -2393,8 +2393,8 @@ gnome_icon_list_set_row_spacing (GnomeIconList *gil, int pixels)
 
 /**
  * gnome_icon_list_set_col_spacing:
- * @gil:    An icon list
- * @pixels: Number of pixels for inter-column spacing
+ * @gil:    An icon list.
+ * @pixels: Number of pixels for inter-column spacing.
  *
  * Sets the spacing to be used between columns of icons.
  */
@@ -2412,8 +2412,8 @@ gnome_icon_list_set_col_spacing (GnomeIconList *gil, int pixels)
 
 /**
  * gnome_icon_list_set_text_spacing:
- * @gil:    An icon list
- * @pixels: Number of pixels between an icon's image and its caption
+ * @gil:    An icon list.
+ * @pixels: Number of pixels between an icon's image and its caption.
  *
  * Sets the spacing to be used between an icon's image and its text caption.
  */
@@ -2431,8 +2431,8 @@ gnome_icon_list_set_text_spacing (GnomeIconList *gil, int pixels)
 
 /**
  * gnome_icon_list_set_icon_border:
- * @gil:    An icon list
- * @pixels: Number of border pixels to be used around an icon's image
+ * @gil:    An icon list.
+ * @pixels: Number of border pixels to be used around an icon's image.
  *
  * Sets the width of the border to be displayed around an icon's image.  This is
  * currently not implemented.
@@ -2451,8 +2451,8 @@ gnome_icon_list_set_icon_border (GnomeIconList *gil, int pixels)
 
 /**
  * gnome_icon_list_set_separators:
- * @gil: An icon list
- * @sep: String with characters to be used as word separators
+ * @gil: An icon list.
+ * @sep: String with characters to be used as word separators.
  *
  * Sets the characters that can be used as word separators when doing
  * word-wrapping in the icon text captions.
@@ -2484,9 +2484,9 @@ gnome_icon_list_set_separators (GnomeIconList *gil, const char *sep)
 
 /**
  * gnome_icon_list_moveto:
- * @gil:    An icon list
- * @pos:    Index of an icon
- * @yalign: Vertical alignment of the icon
+ * @gil:    An icon list.
+ * @pos:    Index of an icon.
+ * @yalign: Vertical alignment of the icon.
  *
  * Makes the icon whose index is @pos be visible on the screen.  The icon list
  * gets scrolled so that the icon is visible.  An alignment of 0.0 represents
@@ -2526,8 +2526,8 @@ gnome_icon_list_moveto (GnomeIconList *gil, int pos, double yalign)
 
 /**
  * gnome_icon_list_is_visible:
- * @gil: An icon list
- * @pos: Index of an icon
+ * @gil: An icon list.
+ * @pos: Index of an icon.
  *
  * Returns whether the icon at the index specified by @pos is visible.  This
  * will be %GTK_VISIBILITY_NONE if the icon is not visible at all,
@@ -2574,9 +2574,9 @@ gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 
 /**
  * gnome_icon_list_get_icon_at:
- * @gil: An icon list
- * @x:   X position in the icon list window
- * @y:   Y position in the icon list window
+ * @gil: An icon list.
+ * @x:   X position in the icon list window.
+ * @y:   Y position in the icon list window.
  *
  * Returns the index of the icon that is under the specified coordinates, which
  * are relative to the icon list's window.  If there is no icon in that

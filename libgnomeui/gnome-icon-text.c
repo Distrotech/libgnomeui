@@ -24,10 +24,10 @@ free_row (gpointer data, gpointer user_data)
 
 /**
  * gnome_icon_text_info_free:
- * @ti: the GnomeIconTextInfo returned by gnome_icon_layout_text
+ * @ti: An icon text info structure.
  *
- * Frees a GnomeIconTextInfo structure.
- * You should call this instead of freeing it yourself.
+ * Frees a &GnomeIconTextInfo structure.  You should call this instead of
+ * freeing the structure yourself.
  */
 void
 gnome_icon_text_info_free (GnomeIconTextInfo *ti)
@@ -39,19 +39,24 @@ gnome_icon_text_info_free (GnomeIconTextInfo *ti)
 
 /**
  * gnome_icon_layout_text:
- * @font:       The font that will be used to render this text
- * @text:       Text to be formatted
- * @separators: Separators used to split the string optimally
- * @max_width:  Maximum width allowed
- * @confine:    whether it is mandatory to wrap at max_width
+ * @font:       Name of the font that will be used to render the text.
+ * @text:       Text to be formatted.
+ * @separators: Separators used for word wrapping, can be NULL.
+ * @max_width:  Width in pixels to be used for word wrapping.
+ * @confine:    Whether it is mandatory to wrap at @max_width.
  *
- * Wraps the specified @text and returns a new GnomeIconTextInfo
- * structure.  @text is word-wrapped as defined by the specified
- * @separators characters (or just at spaces if separators is NULL).
- * The @max_width parameter specifies the width at which text will be
- * wrapped.  If a word is too long to be wrapped and @confine is %TRUE,
- * it will be force-split somewhere in the middle; if @confine is
- * %FALSE, then the text may exceed the specified max_width.
+ * Creates a new &GnomeIconTextInfo structure by wrapping the specified
+ * text.  If non-NULL, the @separators argument defines a set of characters
+ * to be used as word delimiters for performing word wrapping.  If it is
+ * NULL, then only spaces will be used as word delimiters.
+ *
+ * The @max_width argument is used to specify the width at which word
+ * wrapping will be performed.  If there is a very long word that does not
+ * fit in a single line, the @confine argument can be used to specify
+ * whether the word should be unconditionally split to fit or whether
+ * the maximum width should be increased as necessary.
+ *
+ * Return value: A newly-created &GnomeIconTextInfo structure.
  */
 GnomeIconTextInfo *
 gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_width, int confine)
@@ -195,15 +200,16 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 /**
  * gnome_icon_paint_text:
- * @ti:       GnomeIconTextInfo returned by gnome_icon_layout_text
+ * @ti:       An icon text info structure.
  * @drawable: Target drawable.
- * @gc:       GC used to render the string
- * @x:        x coordinate
- * @y:        y coordinate
- * 
- * Paints text that was laid out by gnome_icon_layout_text().  The
- * text is painted at the specified coordinates, with the specified
- * justification.  This is just a sample implementation, other are possible.
+ * @gc:       GC used to render the string.
+ * @x:        Left coordinate for text.
+ * @y:        Upper coordinate for text.
+ * @just:     Justification for text.
+ *
+ * Paints the formatted text in the icon text info structure onto a drawable.
+ * This is just a sample implementation; applications can choose to use other
+ * rendering functions.
  */
 void
 gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc,
