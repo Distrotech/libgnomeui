@@ -1,3 +1,7 @@
+1998-10-08  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gtkcauldron.h: Remove `#pragma }'.
+
 1998-10-08  The Rasterman <raster@redhat.com>
 	* gnome-winhints.[ch]: moved to standard method of #defines in gtk+
 	and gnome by using enum's and all capitals. added extra support.
