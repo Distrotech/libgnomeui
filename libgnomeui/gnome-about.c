@@ -64,7 +64,7 @@ static void gnome_about_display_comments (GdkWindow *win,
 					  GdkFont *font,
 					  GdkGC *gc, 
 					  gint x, gint y, gint w, 
-					  gchar *comments);
+					  const gchar *comments);
 
 
 /* ----------------------------------------------------------------------
@@ -224,7 +224,7 @@ gnome_about_display_comments (GdkWindow *win,
 			      GdkFont *font,
 			      GdkGC *gc, 
 			      gint x, gint y, gint w, 
-			      char *comments)
+			      const gchar *comments)
 {
 	char *tok, *p1, *p2, *p3, c;
 	char *buffer;
@@ -321,7 +321,7 @@ gnome_about_calc_size (GnomeAboutInfo *gai)
 {
 	GList *name;
 	gint num_pars, i, h, w, len[4], tmpl;
-	char *p;
+	const gchar *p;
 	gfloat maxlen;
 
 	w = GNOME_ABOUT_DEFAULT_WIDTH;
@@ -401,12 +401,12 @@ gnome_about_calc_size (GnomeAboutInfo *gai)
 
 static GnomeAboutInfo*
 gnome_fill_info (GtkWidget *widget,
-		 gchar	*title,
-		 gchar	*version,
-		 gchar   *copyright,
-		 gchar   **authors,
-		 gchar   *comments,
-		 gchar   *logo)
+		 const gchar	*title,
+		 const gchar	*version,
+		 const gchar   *copyright,
+		 const gchar   **authors,
+		 const gchar   *comments,
+		 const gchar   *logo)
 {
 	GnomeAboutInfo *gai;
 	GdkColor light_green = {0, 51914, 64764, 44718};
@@ -529,14 +529,32 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
    ---------------------------------------------------------------------- */
 
 GtkWidget* 
-gnome_about_new (gchar	*title,
-		 gchar	*version,
-		 gchar   *copyright,
-		 gchar   **authors,
-		 gchar   *comments,
-		 gchar   *logo)
+gnome_about_new (const gchar	*title,
+		 const gchar	*version,
+		 const gchar   *copyright,
+		 const gchar   **authors,
+		 const gchar   *comments,
+		 const gchar   *logo)
 {
 	GnomeAbout *about;
+
+	about = gtk_type_new (gnome_about_get_type ());
+
+	gnome_about_construct(about, title, version, copyright,
+			      authors, comments, logo);
+
+	return GTK_WIDGET (about);
+}
+
+void
+gnome_about_construct (GnomeAbout *about,
+		       const gchar	*title,
+		       const gchar	*version,
+		       const gchar   *copyright,
+		       const gchar   **authors,
+		       const gchar   *comments,
+		       const gchar   *logo)
+{
 	GnomeAboutInfo *ai;
 	GtkWidget *frame;
 	GtkWidget *drawing_area;
@@ -545,7 +563,6 @@ gnome_about_new (gchar	*title,
 	gint w,h;
 	char *filename;
 
-	about = gtk_type_new (gnome_about_get_type ());
 
 	gtk_window_set_title (GTK_WINDOW (about), _("About"));
 	gtk_window_set_policy (GTK_WINDOW (about), FALSE, FALSE, TRUE);
@@ -613,7 +630,4 @@ gnome_about_new (gchar	*title,
 
 	gnome_dialog_set_close( GNOME_DIALOG(about),
 				TRUE );
-
-	return GTK_WIDGET (about);
 }
-

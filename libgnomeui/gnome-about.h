@@ -49,16 +49,27 @@ guint      gnome_about_get_type       (void);
  *				"/usr/local/share/pixmaps/gnoapp-logo.xpm");
  *	gtk_widget_show (about);		
  */
-GtkWidget* gnome_about_new	(gchar	*title, /* Name of the application. */
-				gchar	*version, /* Version. */
-				gchar	*copyright, /* Copyright notice (one
-							line.) */
-				gchar	**authors, /* NULL terminated list of
-							authors. */
-				gchar	*comments, /* Other comments. */
-				gchar	*logo /* A logo pixmap file. */
-				);
 
+GtkWidget* gnome_about_new	(const gchar	*title, /* Name of the application. */
+				 const gchar	*version, /* Version. */
+				 const gchar	*copyright, /* Copyright notice (one
+						       line.) */
+				 const gchar	**authors, /* NULL terminated list of
+						      authors. */
+				 const gchar	*comments, /* Other comments. */
+				 const gchar	*logo /* A logo pixmap file. */
+				 );
+
+/* Only for use by bindings to languages other than C; don't use
+   in applications. */
+void
+gnome_about_construct (GnomeAbout *about,
+		       const gchar	*title,
+		       const gchar	*version,
+		       const gchar   *copyright,
+		       const gchar   **authors,
+		       const gchar   *comments,
+		       const gchar   *logo);
 END_GNOME_DECLS
 
 #endif /* __GNOME_ABOUT_H__ */

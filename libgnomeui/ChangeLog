@@ -1,3 +1,9 @@
+Thu Jul 16 23:14:00 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-about.h, gnome-about.c (gnome_about_new):
+ 	const-correctness.
+	(gnome_about_construct): new function.
+	
 1998-07-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Do not reset
