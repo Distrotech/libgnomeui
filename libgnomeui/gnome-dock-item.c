@@ -520,7 +520,7 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
     {
       GtkWidget *child;
       GtkAllocation child_allocation;
-      guint border_width;
+      int border_width;
 
       child = bin->child;
       border_width = GTK_CONTAINER (widget)->border_width;
@@ -569,15 +569,15 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
 	}
       else
 	{
-	  child_allocation.width = MAX (1, widget->allocation.width - 2 * border_width);
-	  child_allocation.height = MAX (1, widget->allocation.height - 2 * border_width);
+	  child_allocation.width = MAX (1, (int) widget->allocation.width - 2 * border_width);
+	  child_allocation.height = MAX (1, (int) widget->allocation.height - 2 * border_width);
 
           if (GNOME_DOCK_ITEM_NOT_LOCKED (di))
             {
               if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
-		child_allocation.width = MAX((int)child_allocation.width - DRAG_HANDLE_SIZE, 1);
+		child_allocation.width = MAX ((int) child_allocation.width - DRAG_HANDLE_SIZE, 1);
               else
-		child_allocation.height = MAX(child_allocation.height - DRAG_HANDLE_SIZE, 1);
+		child_allocation.height = MAX ((int) child_allocation.height - DRAG_HANDLE_SIZE, 1);
             }
 
 	  if (GTK_WIDGET_REALIZED (di))

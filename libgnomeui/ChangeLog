@@ -1,3 +1,8 @@
+2000-08-30  Federico Mena Quintero  <federico@helixcode.com>
+
+	* gnome-dock-item.c (gnome_dock_item_size_allocate): Fix unsigned
+	vs. signed confusion, as always.
+
 2000-07-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome_segv.c (main): Fix typo.
