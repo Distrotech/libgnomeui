@@ -181,7 +181,7 @@ void gnome_mdi_generic_child_set_view_creator_full (GnomeMDIGenericChild *child,
  * @func: a function to create a list of child specific menus
  * @data: optional user data
  * 
- * Sets the function used to create child specific menus.  The function will
+ * Sets the function used to create child specific menus.  The function
  * should return a &GList of the menus created.
  *
  * A &GnomeMDIGenericChild doesn't require a menu creator.

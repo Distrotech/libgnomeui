@@ -34,7 +34,7 @@ BEGIN_GNOME_DECLS
 
 #define GNOME_MDI_GENERIC_CHILD(obj)          GTK_CHECK_CAST (obj, gnome_mdi_generic_child_get_type (), GnomeMDIGenericChild)
 #define GNOME_MDI_GENERIC_CHILD_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_mdi_generic_child_get_type (), GnomeMDIGenericChildClass)
-#define GNOME_IS_MDI_MDI_CHILD(obj)           GTK_CHECK_TYPE (obj, gnome_mdi_generic_child_get_type ())
+#define GNOME_IS_MDI_GENERIC_CHILD(obj)       GTK_CHECK_TYPE (obj, gnome_mdi_generic_child_get_type ())
 
 typedef struct _GnomeMDIGenericChild       GnomeMDIGenericChild;
 typedef struct _GnomeMDIGenericChildClass  GnomeMDIGenericChildClass;

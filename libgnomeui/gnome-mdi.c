@@ -1893,7 +1893,7 @@ void gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path)
  * @object: Object to register.
  * 
  * Description:
- * Registers GtkObject @owith MDI. 
+ * Registers GtkObject @object with MDI. 
  * This is mostly intended for applications that open other windows besides
  * those opened by the MDI and want to continue to run even when no MDI
  * windows exist (an example of this would be GIMP's window with tools, if
@@ -1929,7 +1929,7 @@ void gnome_mdi_unregister (GnomeMDI *mdi, GtkObject *object)
  * Returns a child that @view is a view of.
  * 
  * Return value:
- * A pointer to a GnomeMDIChild.
+ * A pointer to the GnomeMDIChild the view belongs to.
  **/
 GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *view)
 {
@@ -1944,7 +1944,7 @@ GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *view)
  * Returns the toplevel window for this view.
  * 
  * Return value:
- * A pointer to a GnomeApp widget.
+ * A pointer to the GnomeApp containg the specified view.
  **/
 GnomeApp *gnome_mdi_get_app_from_view(GtkWidget *view)
 {
@@ -1962,7 +1962,7 @@ GnomeApp *gnome_mdi_get_app_from_view(GtkWidget *view)
  * page is returned.
  * 
  * Return value: 
- * A pointer to a GtkWidget.
+ * A pointer to a view.
  **/
 GtkWidget *gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app)
 {

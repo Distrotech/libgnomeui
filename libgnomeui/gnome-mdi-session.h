@@ -20,12 +20,12 @@ typedef GnomeMDIChild *(*GnomeMDIChildCreator) (const gchar *);
 /* gnome_mdi_restore_state(): call this with the GnomeMDI object, the
  * config section name and the function used to recreate the GnomeMDIChildren
  * from their config strings. */
-gboolean	gnome_mdi_restore_state	(GnomeMDI *, const char *,
-					 GnomeMDIChildCreator);
+gboolean	gnome_mdi_restore_state	(GnomeMDI *mdi, const char *section,
+					 GnomeMDIChildCreator child_create_func);
 
 /* gnome_mdi_save_state (): call this with the GnomeMDI object as the
  * first and the config section name as the second argument. */
-void		gnome_mdi_save_state	(GnomeMDI *, const gchar *);
+void		gnome_mdi_save_state	(GnomeMDI *mdi, const gchar *section);
 
 END_GNOME_DECLS
 

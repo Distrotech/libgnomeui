@@ -1,3 +1,10 @@
+1999-04-21  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-generic-child.h: fixed a typo. GNOME_IS_MDI_GENERIC_CHILD()
+	seems better than GNOME_IS_MDI_MDI_CHILD().
+	* gnome-mdi-generic-child.c, gnome-mdi.c, gnome-mdi-session.*:
+	some documentation fixes.
+	
 1999-04-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtk-clock.c (gtk_clock_new): Bug fix from Damon Chaplin,

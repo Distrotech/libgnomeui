@@ -214,8 +214,8 @@ set_active_window (GnomeMDI *mdi, GHashTable *window_hash, glong active_window)
  * 
  * Description:
  * Restores the MDI state. Children are recreated with @create_child_func that
- * restores information about a child from a config string that was provided during
- * saving state by the child. 
+ * restores information about a child from a config string that was provided
+ * during saving state by the child. 
  * 
  * Return value:
  * TRUE if state was successfully restored, FALSE otherwise.
