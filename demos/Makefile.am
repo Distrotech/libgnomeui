@@ -1,8 +1,6 @@
 INCLUDES = \
 	-I$(top_builddir)				\
 	-I$(top_srcdir)					\
-	-I$(top_srcdir)/intl				\
-	-I$(top_builddir)/intl				\
 	-I$(top_srcdir)/libgnomeui			\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMEUI_DEMOS_CFLAGS)			\
@@ -12,8 +10,7 @@ INCLUDES = \
         -DGNOMEUIBINDIR=\""$(bindir)"\" 		\
         -DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\" 	\
-	-DG_LOG_DOMAIN=\"GnomeUI\"			\
-	-DVERSION=\"$(VERSION)\"
+	-DG_LOG_DOMAIN=\"GnomeUI\"
 
 LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui-2.la \

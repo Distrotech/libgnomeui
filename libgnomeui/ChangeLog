@@ -1,3 +1,7 @@
+2001-11-26  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* gnome-app-helper.c: remove gtk_item_factory_add_foreign()
+
 2001-11-22  Mark McLoughlin  <mark@skynet.ie>
 
 	* gnome-app.c: (gnome_app_set_menus), (gnome_app_add_toolbar):

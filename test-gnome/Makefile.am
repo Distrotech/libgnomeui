@@ -13,9 +13,7 @@ INCLUDES = \
 	-DGNOMEUIBINDIR=\""$(bindir)"\"			\
 	-DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\"	\
 	-DGNOMEUISRCDIR=\""$(srcdir)"\"			\
-	-DG_LOG_DOMAIN=\"GnomeUI\"			\
-	-DVERSION=\"$(VERSION)\"			\
-	$(GDK_PIXBUF_CFLAGS)
+	-DG_LOG_DOMAIN=\"GnomeUI\"
 
 LDADD = \
 	$(top_builddir)/libgnomeui/libgnomeui-2.la

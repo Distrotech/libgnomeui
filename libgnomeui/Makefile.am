@@ -22,19 +22,15 @@ libgnomeuiincludedir = $(includedir)/libgnomeui-2.0/libgnomeui
 INCLUDES = \
 	-I$(top_builddir)				\
 	-I$(top_srcdir)					\
-	-I$(top_srcdir)/intl				\
-	-I$(top_builddir)/intl				\
         -DGNOMEUILIBDIR=\""$(libdir)"\" 		\
         -DGNOMEUIDATADIR=\""$(datadir)"\" 		\
         -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
         -DGNOMEUIBINDIR=\""$(bindir)"\" 		\
-        -DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
+	-DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(WARN_CFLAGS)					\
-	$(LIBGNOMEUI_CFLAGS)				\
-	-DGTK_VERSION=\""$(GTK_VERSION)"\"		\
-	-DVERSION=\"$(VERSION)\"
+	$(LIBGNOMEUI_CFLAGS)
 
 EXTRA_HEADERS = 
 

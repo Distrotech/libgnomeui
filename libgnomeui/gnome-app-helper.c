@@ -522,7 +522,7 @@ setup_accelerator (GtkAccelGroup *accel_group, GnomeUIInfo *uiinfo,
 					    uiinfo->ac_mods, accel_flags);
 }
 
-#ifndef	GTK_CHECK_VERSION
+#if 0
 GtkAccelGroup*
 gtk_menu_ensure_uline_accel_group (GtkMenu *menu)
 {
@@ -543,21 +543,6 @@ gtk_menu_ensure_uline_accel_group (GtkMenu *menu)
     }
 
   return accel_group;
-}
-void
-gtk_item_factory_add_foreign (GtkWidget      *accel_widget,
-			      const gchar    *full_path,
-			      GtkAccelGroup  *accel_group,
-			      guint           keyval,
-			      GdkModifierType modifiers)
-{
-  if (accel_group)
-    gtk_widget_add_accelerator (accel_widget,
-				"activate",
-				accel_group,
-				keyval,
-				modifiers,
-				GTK_ACCEL_VISIBLE);
 }
 #endif
 
