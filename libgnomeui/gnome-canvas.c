@@ -2385,7 +2385,7 @@ gnome_canvas_new_aa (void)
 		static int warning_shown = 0;
 
 		if (!warning_shown){
-			g_warning ("The antialiased canvas is buggy.  Please do not use it unless "
+			g_message ("The antialiased canvas is buggy.  Please do not use it unless "
 				   "you know what you are doing.");
 			warning_shown = 1;
 		}
