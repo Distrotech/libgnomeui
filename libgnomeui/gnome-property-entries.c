@@ -132,8 +132,6 @@ _property_entry_font_apply (GtkFontSelectionDialog *fontsel)
 	*(temp_ptr->font_name_ptr) = g_strdup (font_name);
 	*(temp_ptr->font_ptr) = font;
 
-	fprintf (stderr, "font_apply: %s\n", font_name);
-
 	gtk_entry_set_text (GTK_ENTRY (cb_data->entry), font_name);
 
 	gnome_property_object_changed (cb_data->object->user_data);
