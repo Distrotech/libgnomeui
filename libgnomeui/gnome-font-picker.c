@@ -581,7 +581,16 @@ gnome_font_picker_clicked(GtkButton *button)
     gfp = GNOME_FONT_PICKER(button);
 
     if (!gfp->font_dialog) {
+        GtkWidget *parent;
+
+        parent = gtk_widget_get_toplevel(GTK_WIDGET(gfp));
+      
         gfp->font_dialog=gtk_font_selection_dialog_new(gfp->title);
+
+        if (parent)
+            gtk_window_set_transient_for(GTK_WINDOW(gfp->font_dialog),
+                                         GTK_WINDOW(parent));
+        
         fsd=GTK_FONT_SELECTION_DIALOG(gfp->font_dialog);
 
         /* If there is a grabed window, set new dialog as modal */

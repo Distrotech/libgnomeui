@@ -449,7 +449,16 @@ gnome_color_picker_clicked (GtkButton *button)
 			gdk_window_raise(cp->cs_dialog->window);
 	} else {
 		/* Create the dialog and connects its buttons */
+                GtkWidget *parent;
+
+                parent = gtk_widget_get_toplevel(GTK_WIDGET(cp));
+                
 		cp->cs_dialog = gtk_color_selection_dialog_new (cp->title);
+
+                if (parent)
+                        gtk_window_set_transient_for(GTK_WINDOW(cp->cs_dialog),
+                                                     GTK_WINDOW(parent));
+                
 		csd = GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog);
 		gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "destroy",
 				    (GtkSignalFunc) cs_destroy,

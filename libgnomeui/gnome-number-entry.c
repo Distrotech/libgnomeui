@@ -128,7 +128,8 @@ browse_clicked (GtkWidget *widget, gpointer data)
 	GnomeNumberEntry *nentry;
 	GtkWidget *dlg;
 	GtkWidget *calc;
-
+        GtkWidget *parent;
+        
 	g_return_if_fail (data != NULL);
 	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (data));
 
@@ -146,12 +147,18 @@ browse_clicked (GtkWidget *widget, gpointer data)
 		return;
 	}
 
+        parent = gtk_widget_get_toplevel(GTK_WIDGET(nentry));
+        
 	dlg = gnome_dialog_new (nentry->calc_dialog_title
 				? nentry->calc_dialog_title
 				: _("Calculator"),
 				GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL,
 				NULL);
+        if (parent)
+                gnome_dialog_set_parent(GNOME_DIALOG(dlg), GTK_WINDOW(parent));
+        
+        
 	gnome_dialog_set_default(GNOME_DIALOG(dlg), 0);
 
 	calc = gnome_calculator_new();

@@ -1,5 +1,16 @@
 2000-01-28  Havoc Pennington  <hp@redhat.com>
 
+	* gnome-number-entry.c (browse_clicked): set transient parent, 
+	bug 2497
+
+	* gnome-font-picker.c (gnome_font_picker_clicked): set transient
+	parent, fixes 2497 
+	
+	* gnome-color-picker.c (gnome_color_picker_clicked): Set transient
+	parent, per bug 2497
+
+2000-01-28  Havoc Pennington  <hp@redhat.com>
+
 	* gnome-propertybox.c (dialog_clicked_cb): merge fix to bug 4378
 	from stable branch (handle empty property boxes)
 
