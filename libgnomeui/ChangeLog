@@ -1,3 +1,8 @@
+1998-11-11  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-geometry.c (gnome_geometry_string): Use
+	gdk_window_get_root_origin().
+
 1998-11-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-popup-menu.c (popup_connect_func): Only connect to the
