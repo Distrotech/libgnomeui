@@ -1,5 +1,9 @@
 1998-11-21  Andrew T. Veliath  <andrewtv@usa.net>
 
+	* gnome-preferences.c (gnome_preferences_load_custom): Toolbar
+	button relief default changed to "=false" to match
+	GnomePreferences structure default.
+
 	* gnome-app-helper.c (gnome_app_create_menus_custom): If menubar
 	relief is set to none, set menu bar shadow type to GTK_SHADOW_NONE.
 	(gnome_app_create_toolbar_custom): Remove the extra pad to toolbar

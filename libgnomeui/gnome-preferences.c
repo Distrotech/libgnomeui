@@ -258,7 +258,7 @@ gnome_preferences_load_custom(GnomePreferences *settings)
 					 NULL);
   settings->menubar_relief = b;
 
-  b = gnome_config_get_bool_with_default(TOOLBAR_RELIEF_KEY"=true",
+  b = gnome_config_get_bool_with_default(TOOLBAR_RELIEF_KEY"=false",
 					 NULL);
   settings->toolbar_relief = b;
 
