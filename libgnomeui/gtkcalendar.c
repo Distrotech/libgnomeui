@@ -650,7 +650,7 @@ gtk_calendar_paint_header (GtkWidget *widget)
   y_arrow = (calendar->header_h - 9) / 2;
 
   /* Draw year and its arrows */
-  sprintf (buffer, "%d", calendar->year);
+  sprintf (buffer, "%d", calendar->year + 1900);
   str_width = gdk_string_measure (calendar->day_name_font, buffer);
   gdk_gc_set_foreground (gc, &calendar->heading_color);
   gdk_draw_string (calendar->header_win, calendar->month_font, gc, 
