@@ -1,5 +1,18 @@
 2002-04-29  Anders Carlsson  <andersca@gnu.org>
 
+	* libgnomeui/gnome-app-helper.c:
+	(menus_have_tearoff_changed_notify), (gnome_app_fill_menu_custom):
+	* libgnomeui/gnome-app.c: (remove_notification_cb),
+	(dock_item_changed_notify), (setup_notification_for_dock_item),
+	(gnome_app_set_menus), (gnome_app_add_toolbar),
+	(gnome_app_add_docked):
+	* libgnomeui/gnome-icon-item.c: (iti_draw_cursor),
+	(gnome_icon_text_item_draw):
+	Add support for toggling the tear-off menus and wether menu bars
+	can be detachable on-the-fly.
+	
+2002-04-29  Anders Carlsson  <andersca@gnu.org>
+
 	* libgnomeui/gnome-dateedit.c: (gnome_date_edit_mnemonic_activate),
 	(gnome_date_edit_class_init):
 	* libgnomeui/gnome-entry.c: (gnome_entry_mnemonic_activate),
@@ -41,7 +54,6 @@
 	* glade/glade-gnome.c: Fixed use of GladeWidgetInfo "class" field
 	name now that libglade no longer uses that reserved C++ keyword.
 	
->>>>>>> 1.156
 2002-04-23  Jody Goldberg <jody@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c (browse_clicked) : suppress warning on

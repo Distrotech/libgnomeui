@@ -47,7 +47,7 @@
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
 
-
+#include <gconf/gconf-client.h>
 #include <libgnome/gnome-program.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
@@ -222,6 +222,62 @@ gnome_app_instance_init (GnomeApp *app)
 						      (const char **)files);
 		g_strfreev (files);
 	}
+}
+
+static void
+remove_notification_cb (BonoboDockItem *item, gpointer data)
+{
+	GConfClient *client;
+	guint notify_id;
+
+	notify_id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "gnome-app-gconf-notify-id"));
+
+	if (notify_id == 0)
+		return;
+	
+	client = gconf_client_get_default ();
+	gconf_client_notify_remove (client, notify_id);
+	g_object_unref (client);
+	g_object_set_data (G_OBJECT (item), "gnome-app-gconf-notify-id", NULL);
+	
+}
+
+static void
+dock_item_changed_notify (GConfClient* client,
+			  guint cnxn_id,
+			  GConfEntry *entry,
+			  gpointer user_data)
+{
+	BonoboDockItem *item;
+	guint notify_id;
+	
+	item = BONOBO_DOCK_ITEM (user_data);
+	notify_id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "gnome-app-gconf-notify-id"));
+
+	if (notify_id == cnxn_id &&
+	    entry->value->type == GCONF_VALUE_BOOL) {
+		gboolean detachable;
+
+		detachable = gconf_value_get_bool (entry->value);
+		
+		/* Update */
+		bonobo_dock_item_set_locked (item, !detachable);
+	}
+}
+
+static void
+setup_notification_for_dock_item (BonoboDockItem *item, const char *key_name)
+{
+	guint notify_id;
+	GConfClient *client;
+
+	client = gconf_client_get_default ();
+	notify_id = gconf_client_notify_add (client, key_name,
+					     dock_item_changed_notify,
+					     item, NULL, NULL);
+
+	g_object_set_data (G_OBJECT (item), "gnome-app-gconf-notify-id", GINT_TO_POINTER (notify_id));
+	g_signal_connect (item, "destroy", G_CALLBACK (remove_notification_cb), NULL);
 }
 
 static void
@@ -466,6 +522,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 
 	dock_item = bonobo_dock_item_new (GNOME_APP_MENUBAR_NAME,
 					 behavior);
+	setup_notification_for_dock_item (BONOBO_DOCK_ITEM (dock_item), "/desktop/gnome/interface/menubar_detachable");
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
 
 	app->menubar = GTK_WIDGET (menubar);
@@ -589,7 +646,8 @@ gnome_app_add_toolbar (GnomeApp *app,
 	g_return_if_fail(toolbar != NULL);
 
 	dock_item = bonobo_dock_item_new (name, behavior);
-
+	setup_notification_for_dock_item (BONOBO_DOCK_ITEM (dock_item), "/desktop/gnome/interface/toolbar_detachable");
+	
 	gtk_container_set_border_width (GTK_CONTAINER (toolbar), 1);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (toolbar));
 
@@ -724,6 +782,7 @@ gnome_app_add_docked (GnomeApp *app,
 	GtkWidget *item;
 
 	item = bonobo_dock_item_new (name, behavior);
+	setup_notification_for_dock_item (BONOBO_DOCK_ITEM (item), "/desktop/gnome/interface/toolbar_detachable");
 	gtk_container_add (GTK_CONTAINER (item), widget);
 	gnome_app_add_dock_item (app, BONOBO_DOCK_ITEM (item),
 				 placement, band_num, band_position, offset);

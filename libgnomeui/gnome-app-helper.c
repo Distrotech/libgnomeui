@@ -1236,6 +1236,51 @@ gnome_app_fill_menu_with_data (GtkMenuShell  *menu_shell,
 				    pos);
 }
 
+static void
+menus_have_tearoff_changed_notify(GConfClient            *client,
+				  guint                   cnxn_id,
+				  GConfEntry             *entry,
+				  gpointer                user_data)
+{
+	GtkWidget *menu;
+	
+	if (entry->value->type != GCONF_VALUE_BOOL)
+		return;
+
+	menu = GTK_WIDGET (user_data);
+	
+	if (gconf_value_get_bool (entry->value)) {
+		GtkWidget *tearoff;
+
+		tearoff = g_object_get_data (G_OBJECT (menu), "gnome-app-tearoff");
+
+		if (tearoff) {
+			/* Do nothing */
+			return;
+		}
+		
+		/* Add the tearoff */
+		tearoff = gtk_tearoff_menu_item_new ();
+		gtk_widget_show (tearoff);
+		g_object_set_data (G_OBJECT (menu), "gnome-app-tearoff", tearoff);
+		gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), tearoff);
+	}
+	else {
+		GtkWidget *tearoff;
+
+		tearoff = g_object_get_data (G_OBJECT (user_data), "gnome-app-tearoff");
+
+		if (!tearoff) {
+			/* Do nothing */
+			return;
+		}
+		
+		/* Remove the tearoff */
+		gtk_widget_destroy (tearoff);
+		g_object_set_data (G_OBJECT (menu), "gnome-app-tearoff", NULL);
+	}
+}
+
 
 /**
  * gnome_app_fill_menu_custom
@@ -1326,7 +1371,9 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 
 				GtkWidget *menu;
 				GtkWidget *tearoff;
-
+				guint notify_id;
+				GConfClient *client;
+				
 				menu = gtk_menu_new ();
 				gtk_menu_item_set_submenu
 					(GTK_MENU_ITEM(uiinfo->widget), menu);
@@ -1336,12 +1383,25 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 					 uiinfo->moreinfo, orig_uibdata,
 					 accel_group, uline_accels, 0);
 
-				/* FIXME: make this runtime configurable */
 				if (gnome_gconf_get_bool ("/desktop/gnome/interface/menus_have_tearoff")) {
 					tearoff = gtk_tearoff_menu_item_new ();
 					gtk_widget_show (tearoff);
+					g_object_set_data (G_OBJECT (menu), "gnome-app-tearoff", tearoff);
 					gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), tearoff);
 				}
+
+				client = gconf_client_get_default ();
+				g_object_set_data_full(G_OBJECT(menu), gnome_app_helper_gconf_client,
+						       client, g_object_unref);
+
+				notify_id = gconf_client_notify_add (client,
+								     "/desktop/gnome/interface/menus_have_tearoff",
+								     menus_have_tearoff_changed_notify,
+								     menu, NULL, NULL);
+				g_signal_connect(menu, "destroy",
+						 G_CALLBACK(remove_notify_cb),
+						 GINT_TO_POINTER(notify_id));
+
 			}
 			pos++;
 			break;

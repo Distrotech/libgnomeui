@@ -514,12 +514,16 @@ iti_draw_cursor (GnomeIconTextItem *iti, GdkDrawable *drawable,
 {
 	int stem_width;
 	int i;
+	int cursor_offset;
 	PangoRectangle pos;
-
+	GtkEntry *entry;
+	
 	g_return_if_fail (iti->_priv->cursor_gc != NULL);
 
+	entry = GTK_ENTRY (iti->_priv->entry);
+	cursor_offset = gtk_editable_get_position (GTK_EDITABLE (entry));
 	pango_layout_get_cursor_pos (iti->_priv->layout,
-				     gtk_editable_get_position (GTK_EDITABLE (iti->_priv->entry)),
+				     g_utf8_offset_to_pointer (entry->text, cursor_offset) - entry->text,
 				     &pos, NULL);
 	stem_width = PANGO_PIXELS (pos.height) / 30 + 1;
 	for (i = 0; i < stem_width; i++) {
@@ -619,6 +623,9 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			GdkColor *selection_color, *text_color;
 			guint8 state;
 
+			range[0] = g_utf8_offset_to_pointer (GTK_ENTRY (priv->entry)->text, range[0]) - GTK_ENTRY (priv->entry)->text;
+			range[1] = g_utf8_offset_to_pointer (GTK_ENTRY (priv->entry)->text, range[1]) - GTK_ENTRY (priv->entry)->text;
+			
 			state = GTK_WIDGET_HAS_FOCUS (widget) ? GTK_STATE_SELECTED : GTK_STATE_ACTIVE;
 			selection_color = &widget->style->base[state];
 			text_color = &widget->style->text[state];
