@@ -6,8 +6,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui cvs\n"
-"POT-Creation-Date: 2002-08-06 21:15+0200\n"
+"Project-Id-Version: libgnomeui 2.0.x\n"
+"POT-Creation-Date: 2002-08-10 20:39+0200\n"
 "PO-Revision-Date: 2002-08-06 12:57+0200\n"
 "Last-Translator: Benjamin Greiner <benjamin.greiner@gmx.net>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -373,7 +373,7 @@ msgstr "URL"
 
 #: libgnomeui/gnome-href.c:123
 msgid "The URL that GnomeHRef activates"
-msgstr "Der URL, den GnomeHRef aktiviert"
+msgstr "Die URL, den GnomeHRef aktiviert"
 
 #: libgnomeui/gnome-href.c:130
 msgid "Text"
@@ -574,7 +574,7 @@ msgstr "_Neu/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "_Dateien"
+msgstr "Da_teien"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
@@ -769,7 +769,7 @@ msgstr "Die Eigenschaften der Datei verändern"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr "_Vorlieben"
+msgstr "_Einstellungen"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -885,7 +885,7 @@ msgstr "Das aktuelle Spiel beenden"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr "_Inhalt"
+msgstr "I_nhalt"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
@@ -893,15 +893,15 @@ msgstr "Hilfe zu dieser Anwendung zeigen"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr "Text unter Symbolen"
+msgstr "Text unter Icons"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr "Text vorrangig neben Symbolen"
+msgstr "Text vorrangig neben Icons"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
-msgstr "Nur Symbole"
+msgstr "Nur Icons"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
@@ -1071,7 +1071,7 @@ msgstr "Pfad zur Datei"
 
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
-msgstr "_Durchsuchen..."
+msgstr "_Auswählen..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
@@ -1200,7 +1200,7 @@ msgstr "Pixmap-Verzeichnis"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr "Das nach Symbolen zu durchsuchende Verzeichnis."
+msgstr "Das nach Icons zu durchsuchende Verzeichnis."
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
@@ -1234,41 +1234,41 @@ msgstr "Voransicht"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
-msgstr "Symbol für Auswahldialog"
+msgstr "Icon für Auswahldialog"
 
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr "Dieser Auswahldialog läßt Sie ein Symbol auswählen."
+msgstr "Dieser Auswahldialog lässt Sie ein Icon auswählen."
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
-msgstr "Symbol-Auswahl"
+msgstr "Icon-Auswahl"
 
 #: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr "Wählen Sie ein Symbol."
+msgstr "Wählen Sie ein Icon."
 
 #: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
-msgstr "Symbol-Auswahl"
+msgstr "Icon-Auswahl"
 
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
-msgstr "Diese Schaltfläche öffnet das Auswahlfenster für das Symbol."
+msgstr "Diese Schaltfläche öffnet das Auswahlfenster für das Icon."
 
 #: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
-msgstr "Durchsuchen"
+msgstr "Auswählen"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
-msgstr "Symbol-Pfad"
+msgstr "Icon-Pfad"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Bitte ein Verzeichnis angeben in dem Symbole gespeichert sind"
+msgstr "Bitte ein Verzeichnis angeben in dem Icons gespeichert sind"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1282,7 +1282,7 @@ msgstr "GnomeIconSelection: Verzeichnis »%s« konnte nicht geöffnet werden"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr "Symbole werden geladen..."
+msgstr "Icons werden geladen..."
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
