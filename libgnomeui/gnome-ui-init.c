@@ -51,7 +51,6 @@
 #include "gnome-client.h"
 #include "gnome-gconf-ui.h"
 #include "gnome-ui-init.h"
-#include "gnome-winhints.h"
 #include "gnome-stock-icons.h"
 
 #include <gdk-pixbuf/gdk-pixbuf.h>

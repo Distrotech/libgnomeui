@@ -63,7 +63,10 @@ struct _GnomeFileEntry {
 	 * alternatives. */
 	GtkWidget *fsw;
 
+	/* gnome-icon-entry needs to access this, but it's
+	 * not for public consumption, think of it as protected */
 	/*< private >*/
+	char *default_path;
 	GnomeFileEntryPrivate *_priv;
 };
 

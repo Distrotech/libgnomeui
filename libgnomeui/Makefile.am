@@ -71,9 +71,10 @@ libgnomeui_2_la_SOURCES = \
 	gnome-messagebox.c		\
 	gnome-pixmap.c			\
 	gnome-ui-init.c			\
-        gnome-winhints.c		\
 	gnometypes.c			\
+	gnome-icon-entry.c		\
 	gnome-icon-list.c		\
+	gnome-icon-sel.c		\
 	gnome-vfs-util.c		\
 	gnome-window.c			\
 	$(noinst_HEADERS)
@@ -102,7 +103,9 @@ gnome_headers = \
 	gnome-image-selector.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
+	gnome-icon-entry.h		\
 	gnome-icon-list.h		\
+	gnome-icon-sel.h		\
 	gnome-macros.h			\
 	gnome-messagebox.h		\
 	gnome-pixmap.h			\
@@ -110,7 +113,6 @@ gnome_headers = \
 	gnome-stock-icons.h		\
 	gnome-types.h			\
 	gnome-uidefs.h			\
-        gnome-winhints.h		\
 	gnome-vfs-util.h		\
 	gnome-window.h
 

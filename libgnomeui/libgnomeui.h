@@ -49,7 +49,9 @@
 #include <libgnomeui/gnome-image-entry.h>
 #include <libgnomeui/gnome-image-selector.h>
 
+#include <libgnomeui/gnome-icon-entry.h>
 #include <libgnomeui/gnome-icon-list.h>
+#include <libgnomeui/gnome-icon-sel.h>
 #include <libgnomeui/gnome-canvas-init.h>
 #include <libgnomeui/gnome-ui-init.h>
 #include <libgnomeui/gnome-macros.h>
@@ -58,7 +60,6 @@
 #include <libgnomeui/gnome-client.h>
 #include <libgnomeui/gnome-dateedit.h>
 #include <libgnomeui/gnometypebuiltins.h>
-#include <libgnomeui/gnome-winhints.h>
 #include <libgnomeui/gnome-href.h>
 #include <libgnomeui/gnome-dialog.h>
 #include <libgnomeui/gnome-dialog-util.h>

@@ -38,7 +38,6 @@
 #include "gnome-client.h"
 #include "gnome-uidefs.h"
 #include "gnome-ice.h"
-#include "gnome-winhints.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkprivate.h>
 #include <X11/Xatom.h>
@@ -2345,7 +2344,12 @@ gnome_client_save_dialog_show (GnomeClient *client, gint key,
     gtk_dialog_add_button (dialog, _("Cancel Logout"), GTK_RESPONSE_CANCEL);
   gtk_widget_show_all (GTK_WIDGET (dialog));
   /* These are SYSTEM modal dialogs so map them above everything else */
+#if 0
+  /* FIXME: hmmm, _NET doesn't include a way to do this, I'm not sure
+   * if window type == DOCK is a correct way and the old win_hints
+   * layer stuff is no more */
   gnome_win_hints_set_layer (GTK_WIDGET (dialog), WIN_LAYER_ABOVE_DOCK);
+#endif
   shutdown_cancelled = (gtk_dialog_run (dialog) == GTK_RESPONSE_CANCEL);
   gnome_interaction_key_return (key, shutdown_cancelled);
 }

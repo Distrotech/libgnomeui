@@ -26,6 +26,9 @@
 
 #include <config.h>
 #include "gnome-macros.h"
+
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+
 #include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
@@ -310,3 +313,5 @@ gnome_pixmap_load_xpm_d_at_size (GnomePixmap *gpixmap,
 		gtk_image_set_from_file (GTK_IMAGE (gpixmap), NULL);
 	}
 }
+
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */

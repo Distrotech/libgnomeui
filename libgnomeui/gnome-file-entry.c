@@ -58,7 +58,6 @@ struct _GnomeFileEntryPrivate {
 	GtkWidget *gentry;
 
 	char *browse_dialog_title;
-	char *default_path;
 
 	gboolean is_modal : 1;
 
@@ -286,8 +285,8 @@ browse_clicked(GnomeFileEntry *fentry)
 		gtk_widget_set_sensitive(fs->file_list,
 					 ! fentry->_priv->directory_entry);
 		p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
-		if(p && *p!=G_DIR_SEPARATOR && fentry->_priv->default_path) {
-			char *dp = g_concat_dir_and_file (fentry->_priv->default_path, p);
+		if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
+			char *dp = g_concat_dir_and_file (fentry->default_path, p);
 			gtk_file_selection_set_filename (fs, dp);
 			g_free(dp);
 		} else {
@@ -338,8 +337,8 @@ browse_clicked(GnomeFileEntry *fentry)
 				 ! fentry->_priv->directory_entry);
 
 	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
-	if(p && *p!=G_DIR_SEPARATOR && fentry->_priv->default_path) {
-		char *dp = g_concat_dir_and_file (fentry->_priv->default_path, p);
+	if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
+		char *dp = g_concat_dir_and_file (fentry->default_path, p);
 		gtk_file_selection_set_filename (fs, dp);
 		g_free(dp);
 	} else {
@@ -434,7 +433,7 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 	fentry->_priv = g_new0(GnomeFileEntryPrivate, 1);
 
 	fentry->_priv->browse_dialog_title = NULL;
-	fentry->_priv->default_path = NULL;
+	fentry->default_path = NULL;
 	fentry->_priv->is_modal = FALSE;
 	fentry->_priv->directory_entry = FALSE;
 
@@ -477,8 +476,8 @@ gnome_file_entry_destroy (GtkObject *object)
 	g_free (fentry->_priv->browse_dialog_title);
 	fentry->_priv->browse_dialog_title = NULL;
 
-	g_free (fentry->_priv->default_path);
-	fentry->_priv->default_path = NULL;
+	g_free (fentry->default_path);
+	fentry->default_path = NULL;
 
 	if (fentry->fsw != NULL)
 		gtk_widget_destroy(fentry->fsw);
@@ -627,8 +626,8 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 		p = NULL;
 
 	/*handles NULL as well*/
-	g_free(fentry->_priv->default_path);
-	fentry->_priv->default_path = p;
+	g_free(fentry->default_path);
+	fentry->default_path = p;
 }
 
 /* Does tilde (home directory) expansion on a string */
@@ -709,8 +708,8 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 	else if (*t == '~') {
 		p = tilde_expand (t);
 		g_free (t);
-	} else if (fentry->_priv->default_path) {
-		p = g_concat_dir_and_file (fentry->_priv->default_path, t);
+	} else if (fentry->default_path) {
+		p = g_concat_dir_and_file (fentry->default_path, t);
 		g_free (t);
 		if (*p == '~') {
 			t = p;
