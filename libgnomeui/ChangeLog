@@ -1,3 +1,19 @@
+1998-12-09  Dave Camp  <campd@oit.edu>
+        * gnome-dateedit.c (select_clicked):
+
+        Shows the pop-up calendar widget.
+
+        Synchnonizes the pop-up calendar with the date in the entrybox
+        (create_children): Took out gtk_widget_show on the calendar, as
+        is is now showed in select_clicked.
+
+1998-12-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gil_place_icon): Center images in the icon
+	list. 
+	(gil_unselect_all): Unselect all of the icons on left button
+	click. 
+
 1998-12-09  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* dock_demo.c (main): Updated calls to `gnome_dock_add_item()'.

@@ -165,20 +165,32 @@ position_popup (GnomeDateEdit *gde)
 static void
 select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 {
-	struct tm *mtm;
+	struct tm mtm;
 	GdkCursor *cursor;
 
-	mtm = localtime (&gde->initial_time);
+        /* This code is pretty much just copied from gtk_date_edit_get_date */
+      	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->date_entry)), "%d/%d/%d",
+		&mtm.tm_mon, &mtm.tm_mday, &mtm.tm_year); /* FIXME: internationalize this - strptime()*/
+        
+        mtm.tm_mon--;
 
-	/* FIXME: this would be better if we set the date from what is displayed */
-	gtk_calendar_select_month (GTK_CALENDAR (gde->calendar), mtm->tm_mon, 1900 + mtm->tm_year);
+	/* Hope the user does not actually mean years early in the A.D. days...
+	 * This date widget will obviously not work for a history program :-)
+	 */
+	if (mtm.tm_year >= 1900)
+		mtm.tm_year -= 1900;
+
+	gtk_calendar_select_month (GTK_CALENDAR (gde->calendar), mtm.tm_mon, 1900 + mtm.tm_year);
 
 	position_popup (gde);
+
+        gtk_widget_show (gde->calendar);
 
 	gtk_widget_realize (gde->cal_popup);
 	gtk_widget_show (gde->cal_popup);
 	gtk_widget_grab_focus (gde->cal_popup);
 	gtk_grab_add (gde->cal_popup);
+
 
 	cursor = gdk_cursor_new (GDK_ARROW);
 
@@ -460,14 +472,13 @@ create_children (GnomeDateEdit *gde, int show_time)
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER (gde->cal_popup), frame);
 	gtk_widget_show (frame);
-
+       
 	gde->calendar = gtk_calendar_new ();
 	gtk_calendar_display_options (GTK_CALENDAR (gde->calendar),
 				      GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_HEADING);
 	gtk_signal_connect (GTK_OBJECT (gde->calendar), "day_selected",
 			    GTK_SIGNAL_FUNC (day_selected), gde);
 	gtk_container_add (GTK_CONTAINER (frame), gde->calendar);
-	gtk_widget_show (gde->calendar);
 }
 
 /**
@@ -543,3 +554,9 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 
 	return mktime (&tm);
 }
+
+
+
+
+
+
