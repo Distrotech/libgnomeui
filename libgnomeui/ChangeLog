@@ -1,3 +1,8 @@
+2001-09-19  Darin Adler  <darin@bentspoon.com>
+
+	* gnome-about.c: (gnome_about_draw_names): Must unref the
+	metrics when we are done using them.
+
 2001-09-19  James Henstridge  <james@daa.com.au>
 
 	* gnome-scores.c (gnome_scores_set_logo_label): use

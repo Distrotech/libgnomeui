@@ -617,6 +617,8 @@ gnome_about_draw_names (GnomeAbout *about, GdkRectangle *area)
 	height = pango_font_metrics_get_ascent (metrics) / PANGO_SCALE +
                  pango_font_metrics_get_descent (metrics) / PANGO_SCALE + 2;
 	
+	pango_font_metrics_unref (metrics);
+
 	rows_per_column = gnome_about_get_number_of_undisplayed_entries (about);
 	rows_per_column = rows_per_column / 2 + rows_per_column % 2;
 	rows_per_column = MIN (rows_per_column, MAX_ROWS_PER_COLUMN);
