@@ -1,3 +1,14 @@
+1999-09-03  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page-finish.c
+	(gnome_druid_page_finish_new_with_vals): don't call gnome_druid_page_finish_new
+	(gnome_druid_page_finish_construct): new policy for watermarks.
+
+	* gnome-druid-page-start.c
+	(gnome_druid_page_start_configure_size): new policy for watermark images.
+	(gnome_druid_page_start_new_with_vals): don't call
+	gnome_druid_page_start_new.
+
 1999-09-02  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-druid-page-standard.c

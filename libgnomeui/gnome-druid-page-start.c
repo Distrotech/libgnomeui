@@ -38,7 +38,7 @@ static GnomeDruidPageClass *parent_class = NULL;
 #define LOGO_WIDTH 50.0
 #define DRUID_PAGE_HEIGHT 318
 #define DRUID_PAGE_WIDTH 516
-#define DRUID_PAGE_LEFT_WIDTH 100
+#define DRUID_PAGE_LEFT_WIDTH 100.0
 
 GtkType
 gnome_druid_page_start_get_type (void)
@@ -78,7 +78,6 @@ gnome_druid_page_start_class_init (GnomeDruidPageStartClass *klass)
 	parent_class = gtk_type_class (gnome_druid_page_get_type ());
 }
 
-
 static void
 gnome_druid_page_start_init (GnomeDruidPageStart *druid_page_start)
 {
@@ -110,9 +109,24 @@ gnome_druid_page_start_init (GnomeDruidPageStart *druid_page_start)
 	gtk_container_add (GTK_CONTAINER (druid_page_start), druid_page_start->canvas);
 
 }
+
 static void
 gnome_druid_page_start_configure_size (GnomeDruidPageStart *druid_page_start, gint width, gint height)
 {
+	gfloat watermark_width = DRUID_PAGE_LEFT_WIDTH;
+	gfloat watermark_height = (gfloat) height - LOGO_WIDTH + GNOME_PAD * 2.0;
+	gfloat watermark_ypos = LOGO_WIDTH + GNOME_PAD * 2.0;
+
+	if (druid_page_start->watermark_image) {
+		watermark_width = druid_page_start->watermark_image->rgb_width;
+		watermark_height = druid_page_start->watermark_image->rgb_height;
+		watermark_ypos = (gfloat) height - watermark_height;
+		if (watermark_width < 1)
+			watermark_width = 1.0;
+		if (watermark_height < 1)
+			watermark_height = 1.0;
+	}
+
 	gnome_canvas_item_set (druid_page_start->background_item,
 			       "x1", 0.0,
 			       "y1", 0.0,
@@ -120,7 +134,7 @@ gnome_druid_page_start_configure_size (GnomeDruidPageStart *druid_page_start, gi
 			       "y2", (gfloat) height,
 			       "width_units", 1.0, NULL);
 	gnome_canvas_item_set (druid_page_start->textbox_item,
-			       "x1", width * 0.3,
+			       "x1", watermark_width,
 			       "y1", LOGO_WIDTH + GNOME_PAD * 2.0,
 			       "x2", (gfloat) width,
 			       "y2", (gfloat) height,
@@ -139,10 +153,10 @@ gnome_druid_page_start_configure_size (GnomeDruidPageStart *druid_page_start, gi
 			       "height", (gfloat) LOGO_WIDTH, NULL);
 	gnome_canvas_item_set (druid_page_start->watermark_item,
 			       "x", 0.0,
-			       "y", LOGO_WIDTH + GNOME_PAD * 2.0,
+			       "y", watermark_ypos,
 			       "anchor", GTK_ANCHOR_NORTH_WEST,
-			       "width", width * 0.3,
-			       "height", (gfloat) height - LOGO_WIDTH + GNOME_PAD * 2.0,
+			       "width", watermark_width,
+			       "height", watermark_height,
 			       NULL);
 	gnome_canvas_item_set (druid_page_start->title_item,
 			       "x", 15.0,
@@ -150,7 +164,7 @@ gnome_druid_page_start_configure_size (GnomeDruidPageStart *druid_page_start, gi
 			       "anchor", GTK_ANCHOR_WEST,
 			       NULL);
 	gnome_canvas_item_set (druid_page_start->text_item,
-			       "x", width * 0.65,
+			       "x", ((width - watermark_width) * 0.5) + watermark_width,
 			       "y", LOGO_WIDTH + GNOME_PAD * 2.0 + (height - (LOGO_WIDTH + GNOME_PAD * 2.0))/ 2.0,
 			       "anchor", GTK_ANCHOR_CENTER,
 			       NULL);
@@ -299,7 +313,7 @@ GtkWidget *
 gnome_druid_page_start_new_with_vals (const gchar *title, const gchar* text,
 				      GdkImlibImage *logo, GdkImlibImage *watermark)
 {
-	GtkWidget *retval =  gnome_druid_page_start_new ();
+	GtkWidget *retval =  GTK_WIDGET (gtk_type_new (gnome_druid_page_start_get_type ()));
 	GNOME_DRUID_PAGE_START (retval)->title = g_strdup (title);
 	GNOME_DRUID_PAGE_START (retval)->text = g_strdup (text);
 	GNOME_DRUID_PAGE_START (retval)->logo_image = logo;
