@@ -1,3 +1,8 @@
+2001-02-16  Jody Goldberg <jgoldberg@home.com>
+
+	* gnome-stock.c (entries_data) : fix cut-n-paste error on size of
+	  indent icons.
+
 2001-02-11  Ettore Perazzoli  <ettore@ximian.com>
 
 	* gnome-dock.c (gnome_dock_size_allocate): Don't set `client_rect'
