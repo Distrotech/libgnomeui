@@ -1,7 +1,7 @@
 # Translation into spanish of libgnomeui.
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Héctor García Álvarez <hector@scouts-es.org>, 2001.
-# Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.Héctor García Álvarez <hector@scouts-es.org>, 2002.
+# Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Last-Translator: Germán Poo Caamaño <gpoo@ubiobio.cl>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libgnomeui/gnome-about.c:187
@@ -483,8 +483,8 @@ msgid ""
 msgstr ""
 "El Administrador de Sesiones de GNOME (poceso %d) ha falllado\n"
 "debido a un error fatal (%s).\n"
-"Cuando cierre este diálogo, se cerrarán todas las aplicaciones y se "
-"cerrará su sesión.\n"
+"Cuando cierre este diálogo, se cerrarán todas las aplicaciones y se cerrará "
+"su sesión.\n"
 "Por favor guarde todos los archivos antes de cerrar este diálogo."
 
 #: libgnomeui/gnome_segv.c:110
@@ -517,8 +517,7 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 #: libgnomeui/gnome_segv.c:164
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
-"Por favor visite la página Error en Aplicaciones GNOME para más "
-"información"
+"Por favor visite la página Error en Aplicaciones GNOME para más información"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -1164,10 +1163,10 @@ msgid ""
 "of the settings you have selected may not take effect, or may not be restored "
 "next time you use this application (%s)."
 msgstr ""
-"Ha intentado modificar un aspecto de la configuración que el administrador "
-"de sistemas o el proveedor del sistema operativo no permite modificar. "
-"Algunas de las opciones que has elegido puede que no tengan efecto, o puede "
-"que no se guarden para la próxima vez que use esta aplicación (%s)."
+"Ha intentado modificar un aspecto de la configuración que el administrador de "
+"sistemas o el proveedor del sistema operativo no permite modificar. Algunas "
+"de las opciones que has elegido puede que no tengan efecto, o puede que no se "
+"guarden para la próxima vez que use esta aplicación (%s)."
 
 #: libgnomeui/gnome-gconf-ui.c:115
 #, c-format
@@ -1337,3 +1336,81 @@ msgstr "Salir de la prueba"
 
 #~ msgid "Opacity at the end of the background"
 #~ msgstr "Opacidad del fondo al final"
+
+#~ msgid "Background start position"
+#~ msgstr "Posición de comienzo del fondo"
+
+#~ msgid "Position at the start of the background"
+#~ msgstr "Posición del fondo al comienzo"
+
+#~ msgid "Background end position"
+#~ msgstr "Posición final del fondo"
+
+#~ msgid "Position at the end of the background"
+#~ msgstr "Posición del fondo al final"
+
+#~ msgid "Logo top padding"
+#~ msgstr "Margen superior del logo"
+
+#~ msgid "How far the logo is from the top"
+#~ msgstr "Como de lejos está el logo del margen superior"
+
+#~ msgid "Logo right padding"
+#~ msgstr "Margen derecho del logo"
+
+#~ msgid "How far the logo is from the right"
+#~ msgstr "Como de lejos está el logo del margen derecho"
+
+#~ msgid "Header font"
+#~ msgstr "Fuente de la cabecera"
+
+#~ msgid "Header font description as a string"
+#~ msgstr "Descripción de la fuente de la cabecera como cadena"
+
+#~ msgid "Copyright font"
+#~ msgstr "Fuente del Copyright"
+
+#~ msgid "Copyright font description as a string"
+#~ msgstr "Descripción de la fuente del Copyright como una cadena"
+
+#~ msgid "Comments font"
+#~ msgstr "Fuente de los comentarios"
+
+#~ msgid "Comments font description as a string"
+#~ msgstr "Descripción de la fuente de los comentarios como una cadena"
+
+#~ msgid "Name header font"
+#~ msgstr "Fuente del nombre de la cabecera"
+
+#~ msgid "Name header font description as a string"
+#~ msgstr "Fuente del nombre de la descripción de la cabecera como cadena"
+
+#~ msgid "Name list font"
+#~ msgstr "Fuente del nombre de la lista"
+
+#~ msgid "Name list font description as a string"
+#~ msgstr "Fuente del nombre de la descripción de la lista como cadena"
+
+#~ msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
+#~ msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+
+#~ msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+#~ msgstr "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+
+#~ msgid "Unknown"
+#~ msgstr "Desconocido"
+
+#~ msgid "If you choose a font it will appear here"
+#~ msgstr "Si eliges una fuente aparecerá aquí"
+
+#~ msgid "Use Font in button with size"
+#~ msgstr "Usar fuente en botón con tamaño"
+
+#~ msgid "This is an hbox with pixmap and text"
+#~ msgstr "Este es un hboxcon un pixmaps y texto"
