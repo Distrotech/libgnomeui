@@ -1,3 +1,36 @@
+2003-12-06  Anders Carlsson  <andersca@gnome.org>
+
+	* libgnomeui/pixmaps/stock_attach.png:
+	* libgnomeui/pixmaps/stock_book_blue.png:
+	* libgnomeui/pixmaps/stock_book_green.png:
+	* libgnomeui/pixmaps/stock_book_open.png:
+	* libgnomeui/pixmaps/stock_book_red.png:
+	* libgnomeui/pixmaps/stock_book_yellow.png:
+	* libgnomeui/pixmaps/stock_line_in.png:
+	* libgnomeui/pixmaps/stock_mail.png:
+	* libgnomeui/pixmaps/stock_mail_compose.png:
+	* libgnomeui/pixmaps/stock_mail_forward.png:
+	* libgnomeui/pixmaps/stock_mail_receive.png:
+	* libgnomeui/pixmaps/stock_mail_reply.png:
+	* libgnomeui/pixmaps/stock_mail_send.png:
+	* libgnomeui/pixmaps/stock_mic.png:
+	* libgnomeui/pixmaps/stock_midi.png:
+	* libgnomeui/pixmaps/stock_multiple_file.png:
+	* libgnomeui/pixmaps/stock_not.png:
+	* libgnomeui/pixmaps/stock_scores.png:
+	* libgnomeui/pixmaps/stock_table_borders.png:
+	* libgnomeui/pixmaps/stock_table_fill.png:
+	* libgnomeui/pixmaps/stock_text_bulleted_list.png:
+	* libgnomeui/pixmaps/stock_text_indent.png:
+	* libgnomeui/pixmaps/stock_text_numbered_list.png:
+	* libgnomeui/pixmaps/stock_text_unindent.png:
+	* libgnomeui/pixmaps/stock_timer.png:
+	* libgnomeui/pixmaps/stock_timer_stopped.png:
+	* libgnomeui/pixmaps/stock_trash.png:
+	* libgnomeui/pixmaps/stock_trash_full.png:
+	* libgnomeui/pixmaps/stock_volume.png:
+	Use new icons from Jimmac.
+	
 2003-12-05  Mark McLoughlin  <mark@skynet.ie>
 
 	* libgnomeui/gnome-help.h,
