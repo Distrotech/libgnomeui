@@ -39,7 +39,7 @@ static void        gnome_mdi_generic_child_destroy           (GtkObject *);
 static GtkWidget   *gnome_mdi_generic_child_create_view      (GnomeMDIGenericChild *child);
 static GList       *gnome_mdi_generic_child_create_menus     (GnomeMDIGenericChild *child,
 															  GtkWidget            *view);
-static const gchar *gnome_mdi_generic_child_get_config_string(GnomeMDIGenericChild *child);
+static gchar       *gnome_mdi_generic_child_get_config_string(GnomeMDIGenericChild *child);
 static GtkWidget   *gnome_mdi_generic_child_set_label        (GnomeMDIGenericChild *child,
 															  GtkWidget *old_label);
 
@@ -372,7 +372,7 @@ static GList *gnome_mdi_generic_child_create_menus(GnomeMDIGenericChild *child, 
 								   child->create_menus_data);
 }
 
-static const gchar *gnome_mdi_generic_child_get_config_string (GnomeMDIGenericChild *child)
+static gchar *gnome_mdi_generic_child_get_config_string (GnomeMDIGenericChild *child)
 {
 	if(!child->get_config_string && !child->get_config_string_cbm)
 		return NULL;

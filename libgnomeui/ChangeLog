@@ -1,3 +1,14 @@
+Sat May 27 01:13:20 2000  George Lebl <jirka@5z.com>
+
+	* dock_demo.c, gnome-file-saver.c, gnome-helpsys.c
+	  gnome-mdi-child.h, gnome-mdi-generic-child.c, gnome-preferences.[ch],
+	  gnome-roo.c, gnome_segv.c, mdi_demo.c, oafgnome.c,
+	  test-recently-used.c:  Fix warnings.
+
+	* gnome-animator.c:  Fix warnings.  Fix an unitialized value problem.
+
+	* gnome-color-picker.c: Add drag and drop for colors.
+
 Mon May 22  Martijn van Beers  <martijn@earthling.net>
 
 	* gnome-gconf.c (gnome_gconf_color_picker_get): actually save the

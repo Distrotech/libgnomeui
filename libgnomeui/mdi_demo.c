@@ -33,7 +33,7 @@ view_creator(GnomeMDIChild *child, gpointer user_data)
 	return label;
 }
 
-static const gchar *
+static gchar *
 child_config(GnomeMDIChild *child, gpointer user_data)
 {
 	gchar *conf;

@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
   poptContext ctx;
   const char **args;
   char *urlstr;
-  char *app_version = NULL;
+  const char *app_version = NULL;
   int res;
   gchar *appname;
   gchar *bug_buddy_path = NULL;

@@ -27,8 +27,6 @@
 #include <string.h>
 
 
-typedef struct _GnomePreferences GnomePreferences;
-
 struct _GnomePreferences {
   GtkButtonBoxStyle dialog_buttons_style;
   int property_box_buttons_ok : 1;

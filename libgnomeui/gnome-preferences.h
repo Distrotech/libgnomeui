@@ -49,9 +49,14 @@ BEGIN_GNOME_DECLS
 
 /* Global config choices. App-specific choices are handled in GnomeApp. */
 
+/* By now an opaque type */
+typedef struct _GnomePreferences GnomePreferences;
+
 /* Load and sync the config file. */
 void gnome_preferences_load(void);
+void gnome_preferences_load_custom(GnomePreferences *settings);
 void gnome_preferences_save(void);
+void gnome_preferences_save_custom(GnomePreferences *settings);
 
 /* How buttons are layed out in dialogs */
 GtkButtonBoxStyle gnome_preferences_get_button_layout (void);

@@ -510,11 +510,13 @@ location_mi_get_human_name(GtkWidget *mi)
         return gtk_object_get_data(GTK_OBJECT(mi), "name");
 }
 
+/*UNUSED
 static const gchar*
 location_mi_get_dirname(GtkWidget *mi)
 {
         return gtk_object_get_data(GTK_OBJECT(mi), "dirname");
 }
+*/
 
 static const gchar*
 location_mi_get_key(GtkWidget *mi)
@@ -531,6 +533,7 @@ location_mi_set(GtkWidget* mi,
         gtk_object_set_data_full(GTK_OBJECT(mi), "name", g_strdup(human_name), g_free);
 }
 
+/*UNUSED
 static gint
 location_compare_human_func(gconstpointer loc1, gconstpointer loc2)
 {
@@ -538,6 +541,7 @@ location_compare_human_func(gconstpointer loc1, gconstpointer loc2)
         return strcmp(location_mi_get_human_name((GtkWidget*)loc1),
                       location_mi_get_human_name((GtkWidget*)loc2));
 }
+*/
 
 static gint
 location_compare_gconf_func(gconstpointer loc1, gconstpointer loc2)

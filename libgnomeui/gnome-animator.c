@@ -77,9 +77,11 @@ static void draw (GtkWidget * widget, GdkRectangle * area);
 static gint expose (GtkWidget * widget, GdkEventExpose * event);
 static void size_allocate (GtkWidget * widget, GtkAllocation * allocation);
 static void update (GnomeAnimator * animator);
+/*UNUSED
 static void state_or_style_changed (GnomeAnimator * animator);
 static void state_changed (GtkWidget * widget, GtkStateType previous_state);
 static void style_set (GtkWidget * widget, GtkStyle * previous_style);
+*/
 static GnomeAnimatorFrame *append_frame (GnomeAnimator * animator);
 static gint timer_cb (gpointer data);
 
@@ -394,8 +396,6 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
 	  GdkPixbuf *dest_source;
 	  gint i, j, rowstride, dest_rowstride;
 	  gint r, g, b;
-	  /*FIXME: dest_pixels will be used uninitialized in this function,
-	   * fix! */
 	  gchar *dest_pixels, *c, *a, *original_pixels;
 
 	  dest_source = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
@@ -410,8 +410,9 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
 	  r = widget->style->bg[GTK_WIDGET_STATE (widget)].red >> 8;
 	  g = widget->style->bg[GTK_WIDGET_STATE (widget)].green >> 8;
 	  b = widget->style->bg[GTK_WIDGET_STATE (widget)].blue >> 8;
-	  rowstride = gdk_pixbuf_get_rowstride (draw_source);
 	  dest_rowstride = gdk_pixbuf_get_rowstride (dest_source);
+	  dest_pixels = gdk_pixbuf_get_pixels (dest_source);
+	  rowstride = gdk_pixbuf_get_rowstride (draw_source);
 	  original_pixels = gdk_pixbuf_get_pixels (draw_source);
 	  for (i = 0; i < height; i++)
 	    {
@@ -515,6 +516,7 @@ update (GnomeAnimator * animator)
     }
 }
 
+/* UNUSED
 static void
 state_or_style_changed (GnomeAnimator * animator)
 {
@@ -535,6 +537,7 @@ style_set (GtkWidget * widget, GtkStyle * previous_style)
   g_assert (GNOME_IS_ANIMATOR (widget));
   state_or_style_changed (GNOME_ANIMATOR (widget));
 }
+*/
 
 static GnomeAnimatorFrame *
 append_frame (GnomeAnimator * animator)

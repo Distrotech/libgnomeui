@@ -75,7 +75,7 @@ add_to_menu(GtkWidget* menu, GnomeRecentDocument *doc)
 static void
 item_removed(GnomeRecentlyUsed* recently_used, GnomeRecentDocument* doc, gpointer user_data)
 {
-        GtkWidget *menu = user_data;
+        /*UNUSED GtkWidget *menu = user_data; */
         GtkWidget *mi;
 
         mi = g_hash_table_lookup(doc_to_menuitem, doc);
@@ -100,7 +100,7 @@ item_added(GnomeRecentlyUsed* recently_used, GnomeRecentDocument* doc, gpointer 
 static void
 item_changed(GnomeRecentlyUsed* recently_used, GnomeRecentDocument* doc, gpointer user_data)
 {
-        GtkWidget *menu = user_data;
+        /*UNUSED GtkWidget *menu = user_data; */
         const gchar* name;
         GtkWidget *mi;
         

@@ -74,7 +74,7 @@ static void layout_changed_callback (GtkWidget *w)
 }
 
 static void
-do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData *uibdata)
+do_ui_signal_connect (GnomeUIInfo *uiinfo, const char *signal_name, GnomeUIBuilderData *uibdata)
 {
 }
 

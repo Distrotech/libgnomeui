@@ -30,6 +30,7 @@
 #include <config.h>
 #include <gtk/gtkalignment.h>
 #include <gtk/gtkcolorsel.h>
+#include <gtk/gtkdnd.h>
 #include <gtk/gtkdrawingarea.h>
 #include <gtk/gtkframe.h>
 #include <gtk/gtksignal.h>
@@ -75,12 +76,27 @@ static void gnome_color_picker_clicked    (GtkButton             *button);
 static void gnome_color_picker_state_changed (GtkWidget *widget, GtkStateType previous_state);
 static void gnome_color_picker_realize (GtkWidget *widget);
 static void gnome_color_picker_style_set (GtkWidget *widget, GtkStyle *previous_style);
+static void drag_data_get		(GtkWidget          *widget,
+					 GdkDragContext     *context,
+					 GtkSelectionData   *selection_data,
+					 guint               info,
+					 guint               time,
+					 GnomeColorPicker   *cpicker);
+static void drag_data_received		(GtkWidget        *widget,
+					 GdkDragContext   *context,
+					 gint              x,
+					 gint              y,
+					 GtkSelectionData *selection_data,
+					 guint             info,
+					 guint32           time,
+					 GnomeColorPicker *cpicker);
 
 
 static guint color_picker_signals[LAST_SIGNAL] = { 0 };
 
 static GtkButtonClass *parent_class;
 
+static GtkTargetEntry drop_types[] = { { "application/x-color", 0, 0 } };
 
 GtkType
 gnome_color_picker_get_type (void)
@@ -306,6 +322,62 @@ gnome_color_picker_state_changed (GtkWidget *widget, GtkStateType previous_state
 	if (widget->state == GTK_STATE_INSENSITIVE || previous_state == GTK_STATE_INSENSITIVE)
 		render (GNOME_COLOR_PICKER (widget));
 }
+
+static void
+drag_data_received (GtkWidget        *widget,
+		    GdkDragContext   *context,
+		    gint              x,
+		    gint              y,
+		    GtkSelectionData *selection_data,
+		    guint             info,
+		    guint32           time,
+		    GnomeColorPicker *cpicker)
+{
+	guint16 *dropped;
+	gushort alpha;
+
+	g_return_if_fail (cpicker != NULL);
+	g_return_if_fail (GNOME_IS_COLOR_PICKER (cpicker));
+
+	if (selection_data->length < 0)
+		return;
+
+	if ((selection_data->format != 16) || 
+	    (selection_data->length != 8)) {
+		g_warning (_("Received invalid color data\n"));
+		return;
+	}
+
+
+	dropped = (guint16 *)selection_data->data;
+
+	gnome_color_picker_set_i16(cpicker, dropped[0], dropped[1],
+				   dropped[2], dropped[3]);
+}
+
+static void  
+drag_data_get  (GtkWidget          *widget,
+		GdkDragContext     *context,
+		GtkSelectionData   *selection_data,
+		guint               info,
+		guint               time,
+		GnomeColorPicker   *cpicker)
+{
+	gushort r, g, b, a;
+	guint16 dropped[4];
+
+	gnome_color_picker_get_i16(cpicker, &r, &g, &b, &a);
+
+	dropped[0] = r;
+	dropped[1] = g;
+	dropped[2] = b;
+	dropped[3] = a;
+
+	gtk_selection_data_set (selection_data,
+				selection_data->target,
+				16/*fromat*/, (guchar *)dropped, 8/*length*/);
+}
+
 static void
 gnome_color_picker_init (GnomeColorPicker *cp)
 {
@@ -355,6 +427,22 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	cp->a = 1.0;
 	cp->dither = TRUE;
 	cp->use_alpha = FALSE;
+
+	gtk_drag_dest_set (GTK_WIDGET (cp),
+			   GTK_DEST_DEFAULT_MOTION |
+			   GTK_DEST_DEFAULT_HIGHLIGHT |
+			   GTK_DEST_DEFAULT_DROP,
+			   drop_types, 1, GDK_ACTION_COPY);
+	gtk_drag_source_set (GTK_WIDGET(cp),
+			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+			     drop_types, 1,
+			     GDK_ACTION_COPY);
+	gtk_signal_connect (GTK_OBJECT (cp),
+			    "drag_data_received",
+			    GTK_SIGNAL_FUNC (drag_data_received), cp);
+	gtk_signal_connect (GTK_OBJECT (cp),
+			    "drag_data_get",
+			    GTK_SIGNAL_FUNC (drag_data_get), cp);
 }
 
 static void

@@ -453,7 +453,8 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
 {
   char *basecmd = gnome_config_get_string("/OAF/RemoteCommand=rsh");
   char *ior_string;
-  char *argv[10], iornum_buf[25], display_buf[512], langs_buf[512];
+  const char *argv[10/*XXX: MAGIC Number, but it's right*/];
+  char iornum_buf[25], display_buf[512], langs_buf[512];
   int argc = 0;
   CORBA_Object retval;
 
@@ -469,7 +470,7 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
 
   argv[argc++] = regcat->hostname?regcat->hostname:"localhost";
   argv[argc++] = "gnome-remote-bootstrap"; /* The command that runs on the remote end to start oafd for us */
-  sprintf(iornum_buf, "--ior-fd=%d", ior_fd);
+  g_snprintf(iornum_buf, sizeof(iornum_buf), "--ior-fd=%d", ior_fd);
   argv[argc++] = iornum_buf;
 
   {

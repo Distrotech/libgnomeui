@@ -74,7 +74,7 @@ struct _GnomeMDIChild
 
 typedef GtkWidget   *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);
 typedef GList       *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *, gpointer);
-typedef const gchar *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *, gpointer);
+typedef gchar       *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *, gpointer);
 typedef GtkWidget   *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *, gpointer);
 
 /* note that if you override the set_label virtual function, it should return

@@ -23,10 +23,12 @@
 
 #define GNOME_ENABLE_DEBUG
 
+#include <config.h>
+#include <string.h>
+
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include <config.h>
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18nP.h"
 #include "gnome-roo.h"

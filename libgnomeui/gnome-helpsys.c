@@ -120,7 +120,9 @@ gnome_help_view_get_type(void)
 
 static GtkObjectClass *parent_class = NULL;
 
+/* UNUSED
 static GdkAtom atom_explain_query = 0, atom_explain_request = 0, atom_explain_query_reply = 0;
+*/
 
 static void
 gnome_help_view_class_init (GnomeHelpViewClass *class)
@@ -891,6 +893,8 @@ gnome_help_view_select_help_cb(GtkWidget *ignored, GnomeHelpView *help_view)
 		   NULL, choose_cursor, GDK_CURRENT_TIME);
 }
 
+#if 0
+/*UNUSED*/
 static void
 popup_set_selection (GnomeHelpView *help_view)
 {
@@ -916,6 +920,7 @@ popup_set_selection (GnomeHelpView *help_view)
 
   gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(popup_style_menu_items[n].widget), TRUE);
 }
+#endif
 
 static void
 gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view)
