@@ -124,8 +124,10 @@ gnome_pixmap_destroy (GtkObject *object)
  * gnome_pixmap_new_from_file:
  * @filename: The name of a file containing a graphics image
  *
- * Returns a widget that contains the image, or NULL if it fails to
- * load the image.
+ * Description: Returns a widget that contains the image, or %NULL
+ * if it fails to load the image.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_file (const char *filename)
@@ -143,11 +145,13 @@ gnome_pixmap_new_from_file (const char *filename)
 /**
  * gnome_pixmap_new_from_file_at_size:
  * @filename: The name of a file containing a graphics image
- * @width: desired widht
+ * @width: desired width
  * @height: desired height.
  *
- * Returns a widget that contains the image scaled to @widht and @height pixels,
- * or NULL if it fails to load the image.
+ * Description: Returns a widget that contains the image scaled to
+ * @width by @height pixels, or %NULL if it fails to load the image.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_file_at_size (const char *filename, int width, int height)
@@ -166,8 +170,10 @@ gnome_pixmap_new_from_file_at_size (const char *filename, int width, int height)
  * gnome_pixmap_new_from_xpm_d:
  * @xpm_data: A pointer to an inlined xpm image.
  *
- * Returns a widget that contains the image, or NULL if it fails to
- * create the image
+ * Description: Returns a widget that contains the image, or %NULL
+ * if it fails to load the image.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_xpm_d (char **xpm_data)
@@ -188,8 +194,10 @@ gnome_pixmap_new_from_xpm_d (char **xpm_data)
  * @width: desired widht
  * @height: desired height.
  *
- * Returns a widget that contains the image scaled to @widht and @height pixels,
- * or NULL if it fails to load the image.
+ * Description: Returns a widget that contains the image scaled to
+ * @width by @height pixels, or %NULL if it fails to load the image.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height)
@@ -208,8 +216,10 @@ gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height)
  * gnome_pixmap_new_from_rgb_d:
  * @data: A pointer to an inlined rgb image.
  *
- * Returns a widget that contains the image, or NULL if it fails to
- * create the image
+ * Description: Returns a widget that contains the image, or %NULL
+ * if it fails to load the image.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_rgb_d (unsigned char *data, unsigned char *alpha,
@@ -234,8 +244,10 @@ gnome_pixmap_new_from_rgb_d (unsigned char *data, unsigned char *alpha,
  * @rgb_height: height of the rgb data.
  * @shape_color: which color encodes the transparency
  *
- * Returns a widget that contains the image, or NULL if it
- * fails to load the image.
+ * Description: Returns a widget that contains the image, or %NULL
+ * if it fails to load the image.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_rgb_d_shaped (unsigned char *data, unsigned char *alpha,
@@ -263,8 +275,10 @@ gnome_pixmap_new_from_rgb_d_shaped (unsigned char *data, unsigned char *alpha,
  * @width: desired width.
  * @height: desired height.
  *
- * Returns a widget that contains the image scaled to @width and @height pixels,
- * or NULL if it fails to load the image.
+ * Description: Returns a widget that contains the image scaled to
+ * @width by @height pixels, or %NULL if it fails to load the image.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
@@ -293,8 +307,10 @@ gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
  * @width: desired width.
  * @height: desired height.
  *
- * Returns a widget that contains the image scaled to @width and
- * @height pixels, or NULL if it fails to load the image.
+ * Description: Returns a widget that contains the image scaled to
+ * @width by @height pixels, or %NULL if it fails to load the image.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
@@ -320,9 +336,11 @@ gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
  * gnome_pixmap_new_from_imlib:
  * @im: A pointer to GdkImlibImage data
  *
- * Returns a widget that contains the image, or NULL if it fails to
- * create the image. Note that @im will not be rendered after this
- * call.
+ * Description: Returns a widget that contains the image, or %NULL
+ * if it fails to load the image. Note that @im will not be
+ * rendered after this call.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_imlib (GdkImlibImage *im)
@@ -343,9 +361,11 @@ gnome_pixmap_new_from_imlib (GdkImlibImage *im)
  * @width: desired width.
  * @height: desired height.
  *
- * Returns a widget that contains the image scaled to @width and
- * @height pixels, or NULL if it fails to create the image. Note
- * that @im will not be rendered after this call.
+ * Description: Returns a widget that contains the image scaled to
+ * @width by @height pixels, or %NULL if it fails to load the image.
+ * Note that @im will not be * rendered after this call.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
  */
 GtkWidget *
 gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im, int width, int height)
@@ -366,7 +386,9 @@ gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im, int width, int height)
  * gnome_pixmap_new_from_gnome_pixmap:
  * @gpixmap_old: Another GnomePixmap widget
  *
- * Returns a widget that contains a copy of @gpixmap_old
+ * Description: Returns a widget that contains a copy of @gpixmap_old
+ *
+ * Returns: A new #GnomePixmap widget
  */
 GtkWidget *
 gnome_pixmap_new_from_gnome_pixmap (GnomePixmap *gpixmap_old)
@@ -695,9 +717,11 @@ load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
 
 /**
  * gnome_pixmap_load_file:
+ * @gpixmap: the #GnomePixmap widget
  * @filename: a new filename
  *
- * Sets the gnome pixmap to image stored in @filename.
+ * Description: Sets the gnome pixmap to image stored
+ * in @filename.
  */
 void
 gnome_pixmap_load_file (GnomePixmap *gpixmap, const char *filename)
@@ -711,12 +735,13 @@ gnome_pixmap_load_file (GnomePixmap *gpixmap, const char *filename)
 
 /**
  * gnome_pixmap_load_file:
+ * @gpixmap: the #GnomePixmap widget
  * @filename: a new filename
  * @width: desired width.
  * @height: desired height.
  *
- * Sets the gnome pixmap to image stored in @filename scaled to @width and
- * @height pixels.
+ * Description: Sets the gnome pixmap to image stored in
+ * @filename scaled to @width and @height pixels.
  */
 void
 gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap, const char *filename, int width, int height)
@@ -732,9 +757,10 @@ gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap, const char *filename, int 
 
 /**
  * gnome_pixmap_load_xpm_d:
+ * @gpixmap: the #GnomePixmap widget
  * @xpm_data: xpm image data
  *
- * Sets the gnome pixmap to image stored in @xpm_data.
+ * Description: Sets the gnome pixmap to image stored in @xpm_data.
  */
 void
 gnome_pixmap_load_xpm_d (GnomePixmap *gpixmap, char **xpm_data)
@@ -748,12 +774,13 @@ gnome_pixmap_load_xpm_d (GnomePixmap *gpixmap, char **xpm_data)
 
 /**
  * gnome_pixmap_load_xpm_d_at_size:
+ * @gpixmap: the #GnomePixmap widget
  * @xpm_data: xpm image data
  * @width: desired width.
  * @height: desired height.
  *
- * Sets the gnome pixmap to image stored in @xpm_data scaled to @width and
- * @height pixels.
+ * Description: Sets the gnome pixmap to image stored in
+ * @xpm_data scaled to @width and @height pixels.
  */
 void
 gnome_pixmap_load_xpm_d_at_size (GnomePixmap *gpixmap, char **xpm_data, int width, int height)
@@ -769,13 +796,14 @@ gnome_pixmap_load_xpm_d_at_size (GnomePixmap *gpixmap, char **xpm_data, int widt
 
 /**
  * gnome_pixmap_load_rgb_d:
+ * @gpixmap: the #GnomePixmap widget
  * @xpm_data: xpm image data
  * @data: A pointer to an inlined rgb image.
  * @alpha:
  * @rgb_width: the width of the rgb image.
  * @rgb_height: the height of the rgb image.
  *
- * Sets the gnome pixmap to the image.
+ * Description: Sets the gnome pixmap to the image.
  */
 void
 gnome_pixmap_load_rgb_d (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
@@ -792,6 +820,7 @@ gnome_pixmap_load_rgb_d (GnomePixmap *gpixmap, unsigned char *data, unsigned cha
 
 /**
  * gnome_pixmap_load_rgb_d_shaped:
+ * @gpixmap: the #GnomePixmap widget
  * @xpm_data: xpm image data
  * @data: A pointer to an inlined rgb image.
  * @alpha:
@@ -799,7 +828,7 @@ gnome_pixmap_load_rgb_d (GnomePixmap *gpixmap, unsigned char *data, unsigned cha
  * @rgb_height: the height of the rgb image.
  * @shape_color: which color encodes the transparency
  *
- * Sets the gnome pixmap to the image.
+ * Description: Sets the gnome pixmap to the image.
  */
 void
 gnome_pixmap_load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
@@ -819,6 +848,7 @@ gnome_pixmap_load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
 
 /**
  * gnome_pixmap_load_rgb_d_at_size:
+ * @gpixmap: the #GnomePixmap widget
  * @xpm_data: xpm image data
  * @data: A pointer to an inlined rgb image.
  * @alpha:
@@ -827,7 +857,8 @@ gnome_pixmap_load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
  * @width: desired width.
  * @height: desired height.
  *
- * Sets the gnome pixmap to the image scaled to @width and @height pixels.
+ * Description: Sets the gnome pixmap to the image scaled to
+ * @width and @height pixels.
  */
 void
 gnome_pixmap_load_rgb_d_at_size (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
@@ -847,6 +878,7 @@ gnome_pixmap_load_rgb_d_at_size (GnomePixmap *gpixmap, unsigned char *data, unsi
 
 /**
  * gnome_pixmap_load_rgb_d_shaped_at_size:
+ * @gpixmap: the #GnomePixmap widget
  * @xpm_data: xpm image data
  * @data: A pointer to an inlined rgb image.
  * @alpha:
@@ -856,7 +888,8 @@ gnome_pixmap_load_rgb_d_at_size (GnomePixmap *gpixmap, unsigned char *data, unsi
  * @height: desired height.
  * @shape_color: which color encodes the transparency
  *
- * Sets the gnome pixmap to the image scaled to @width and @height pixels.
+ * Description: Sets the gnome pixmap to the image scaled to
+ * @width and @height pixels.
  */
 void
 gnome_pixmap_load_rgb_d_shaped_at_size (GnomePixmap *gpixmap,
@@ -880,12 +913,13 @@ gnome_pixmap_load_rgb_d_shaped_at_size (GnomePixmap *gpixmap,
 
 /**
  * gnome_pixmap_load_imlib:
+ * @gpixmap: the #GnomePixmap widget
  * @im: A pointer to GdkImlibImage data
  * @width: desired width.
  * @height: desired height.
  *
- * Sets the gnome pixmap to image stored in @im. Note that @im will
- * not be rendered after this call.
+ * Description: Sets the gnome pixmap to image stored in @im. Note
+ * that @im will not be rendered after this call.
  */
 void
 gnome_pixmap_load_imlib (GnomePixmap *gpixmap, GdkImlibImage *im)
@@ -899,13 +933,14 @@ gnome_pixmap_load_imlib (GnomePixmap *gpixmap, GdkImlibImage *im)
 
 /**
  * gnome_pixmap_load_imlib_at_size:
+ * @gpixmap: the #GnomePixmap widget
  * @im: A pointer to GdkImlibImage data
  * @width: desired width.
  * @height: desired height.
  *
- * Sets the gnome pixmap to image stored in @im scaled to @width and
- * @height pixels. Note that @im will not be rendered after this
- * call.
+ * Description: Sets the gnome pixmap to image stored in @im
+ * scaled to @width and @height pixels. Note that @im will not
+ * be rendered after this call.
  */
 void
 gnome_pixmap_load_imlib_at_size (GnomePixmap *gpixmap,

@@ -1,3 +1,11 @@
+Sat Aug 21 12:45:09 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap.c: pretty up the inline docs and divide
+	  Description and Returns
+
+	* gnome-scores.c: add the "/**" comments, but without any
+	  descriptions
+
 Sat Aug 21 12:19:53 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-dock.c: document gnome_dock_add_from_layout
