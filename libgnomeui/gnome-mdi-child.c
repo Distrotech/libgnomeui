@@ -42,7 +42,7 @@ enum {
 	CREATE_VIEW,
 	CREATE_MENUS,
 	GET_CONFIG_STRING,
-	GET_LABEL,
+	SET_BOOK_LABEL,
 	LAST_SIGNAL
 };
 
@@ -153,12 +153,12 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *class) {
 														   GTK_SIGNAL_OFFSET (GnomeMDIChildClass, get_config_string),
 														   gnome_mdi_child_marshal_3,
 														   GTK_TYPE_POINTER, 0);
-	mdi_child_signals[GET_LABEL] = gtk_signal_new ("set_book_label",
-												   GTK_RUN_LAST,
-												   object_class->type,
-												   GTK_SIGNAL_OFFSET (GnomeMDIChildClass, set_book_label),
-												   gnome_mdi_child_marshal_4,
-												   gtk_widget_get_type(), 1, gtk_widget_get_type());
+	mdi_child_signals[SET_BOOK_LABEL] = gtk_signal_new ("set_book_label",
+														GTK_RUN_LAST,
+														object_class->type,
+														GTK_SIGNAL_OFFSET (GnomeMDIChildClass, set_book_label),
+														gnome_mdi_child_marshal_4,
+														gtk_widget_get_type(), 1, gtk_widget_get_type());
 
 	gtk_object_class_add_signals (object_class, mdi_child_signals, LAST_SIGNAL);
 
