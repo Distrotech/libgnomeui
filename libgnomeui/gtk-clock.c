@@ -126,6 +126,8 @@ GtkWidget *gtk_clock_new(GtkClockType type)
 {
 	GtkClock *clock = gtk_type_new(gtk_clock_get_type());
 
+	clock->type = type;
+	
 	if (type == GTK_CLOCK_REALTIME) {
 		clock->fmt = g_strdup("%H:%M");
 		clock->update_interval = 60;
