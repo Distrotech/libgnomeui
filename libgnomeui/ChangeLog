@@ -1,3 +1,9 @@
+1999-11-18  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-pixmap.c (paint_with_pixbuf): now have all the composite
+	stuff done.  Still need to document et al., but the end is in
+	sight.
+
 1999-11-16  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-pixmap-entry.c (refresh_preview): Fix call to gnome_pixmap_set_pixbuf()
