@@ -103,8 +103,8 @@ struct _GnomeSelectorClass {
 
     gboolean  (*check_directory)           (GnomeSelector *selector,
                                             const gchar   *directory);
-    void      (*add_directory)     (GnomeSelector *selector,
-                                    const gchar   *directory);
+    void      (*add_directory)             (GnomeSelector *selector,
+                                            const gchar   *directory);
     void      (*add_directory_default)     (GnomeSelector *selector,
                                             const gchar   *directory);
 
