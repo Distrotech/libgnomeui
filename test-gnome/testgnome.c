@@ -967,6 +967,23 @@ create_unit_spinner (void)
 
 }
 #endif
+
+static void
+create_about_box (void)
+{
+	const char *authors[] = { "Author1", "Author2", "Author3", NULL };
+	const char *documentors[] = { "Documentor1", "Documentor2", NULL };
+	GtkWidget *about_box = gnome_about_new ("Test GNOME",
+						VERSION,
+						"(c) 2001 Foo, Inc.\n(c) 2001 Bar, Inc.",
+						"This is the testing gnome application about box",
+						authors,
+						documentors,
+						"Translation credits",
+						NULL /* logo pixbuf */);
+	gtk_widget_show (about_box);
+}
+
 int
 main (int argc, char **argv)
 {
@@ -988,6 +1005,7 @@ main (int argc, char **argv)
 /*		{ "image selector", create_image_selector },*/
 /*		{ "paper selector", create_papersel },*/
 /*		{ "unit spinner", create_unit_spinner },*/
+		{ "about box", create_about_box }
 	  };
 	int nbuttons = sizeof (buttons) / sizeof (buttons[0]);
 	TestGnomeApp *app;
