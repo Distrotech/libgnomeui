@@ -98,6 +98,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	g_return_if_fail (message != NULL);
 	g_return_if_fail (message_box_type != NULL);
 
+	atk_object_set_role (gtk_widget_get_accessible (GTK_WIDGET (messagebox)), ATK_ROLE_ALERT);
 	style = gtk_widget_get_style (GTK_WIDGET (messagebox));
 
 	/* Make noises, basically */

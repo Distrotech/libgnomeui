@@ -1,3 +1,11 @@
+2004-02-04  Padraig O'Briain <padraig.obriain@sun.com>
+
+	* libgnomeui/gnome-color-picker.c (gnome_color_picker_instance_init):
+	Do not set accessible name for GnomeColorPicker. Fixes bug #133200.
+
+	* libgnomeui/gnome-messagebox.c (gnome_message_box_construct): Set
+	role to ATK_ROLE_ALERT. Fixes bug #129567.
+
 2004-02-03  Jeffrey Stedfast  <fejj@ximian.com>
 
 	* libgnomeui/gnome-ui-init.c (libgnomeui_class_init): Don't make

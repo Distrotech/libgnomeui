@@ -461,7 +461,7 @@ gnome_color_picker_instance_init (GnomeColorPicker *cp)
 	 * The application may very well override these.
 	 */
 	_add_atk_name_desc (GTK_WIDGET (cp),
-			    _("Color Selector"),
+			    NULL,
 			    _("Open a dialog to specify the color"));
 
 	alignment = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
