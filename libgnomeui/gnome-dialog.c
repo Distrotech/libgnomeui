@@ -178,7 +178,7 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_window_position(GTK_WINDOW(dialog), 
 		      gnome_preferences_get_dialog_position());
   
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
   dialog->accelerators = gtk_accel_group_new();
   gtk_window_add_accel_group (GTK_WINDOW(dialog), 
 				    dialog->accelerators);
@@ -664,7 +664,7 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
   list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 /*FIXME*/
     gtk_widget_add_accelerator(GTK_WIDGET(list->data),
 			       "clicked",
@@ -769,7 +769,7 @@ static void gnome_dialog_destroy (GtkObject *dialog)
 
   g_list_free(GNOME_DIALOG (dialog)->buttons);
 
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
   if (GNOME_DIALOG(dialog)->accelerators) 
     gtk_window_remove_accel_group(GTK_WINDOW(dialog), GNOME_DIALOG(dialog)->accelerators);
 #else
@@ -828,6 +828,14 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.36  1998/07/27 14:37:10  pavlov
+  replaced GTK_HAVE_ACCEL_GROUP with GTK_HAVE_FEATURES_1_1_0
+
+  This should allow it to compile correctly with the new gtk 1.1.0 that timj
+  broke changed on us ;)
+
+  -pav
+
   Revision 1.35  1998/07/25 03:07:40  hp
 
 
@@ -889,7 +897,7 @@ static void gnome_dialog_show (GtkWidget * d)
 
           * gnome-app-helper.c (gnome_app_do_menu_creation):
           * gnome-stock.c (gnome_stock_menu_item):
-          create GtkAccelLabel if GTK_HAVE_ACCEL_GROUP, so accelerators are
+          create GtkAccelLabel if GTK_HAVE_FEATURES_1_1_0, so accelerators are
           visible.
 
   Revision 1.30  1998/07/03 00:51:57  hp
@@ -948,7 +956,7 @@ static void gnome_dialog_show (GtkWidget * d)
   (gnome_dialog_button_connect_object): Someone requested this.
 
   Revision 1.28  1998/06/11 02:26:50  yosh
-  changed things to use GTK_HAVE_ACCEL_GROUP instead of HAVE_DEVGTK...
+  changed things to use GTK_HAVE_FEATURES_1_1_0 instead of HAVE_DEVGTK...
   installed headers depending on config.h stuff is bad.
 
   -Yosh
@@ -959,7 +967,7 @@ static void gnome_dialog_show (GtkWidget * d)
           * Wheee libgnomeui now compiles (with the exception of the
             canvas stuff) under 1.0.x again. It also compiles under 1.1
             for thoose of you that like to bleed. Please please if you
-            add code that _requires_ gtk 1.1 shield it with GTK_HAVE_ACCEL_GROUP
+            add code that _requires_ gtk 1.1 shield it with GTK_HAVE_FEATURES_1_1_0
             so us boring folks can continue to get stuff done.
 
   Revision 1.26  1998/06/07 17:58:21  pavlov

@@ -23,7 +23,7 @@
 #include "libgnome/libgnomeP.h"
 
 #ifdef TEST_DENTRY_EDIT
-#define  GTK_HAVE_ACCEL_GROUP /* Hack for my own use */
+#define  GTK_HAVE_FEATURES_1_1_0 /* Hack for my own use */
 #endif
 
 #include "gnome-stock.h"

@@ -68,7 +68,7 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 
 {
 
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 
 	GtkWidget *menubar;
 	GtkWidget *oldparent;
@@ -122,14 +122,14 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 
 	if (menuinfo)
 		gnome_app_do_menu_creation(app, menubar, 0, menuinfo, uibdata);
-#endif /* GTK_HAVE_ACCEL_GROUP */
+#endif /* GTK_HAVE_FEATURES_1_1_0 */
 }
 
 void
 gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child,
 			      GnomeUIInfo *menudata, gpointer handler)
 {
-#if GTK_HAVE_ACCEL_GROUP
+#if GTK_HAVE_FEATURES_1_1_0
 
 	GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
 				      NULL, FALSE, NULL, NULL };

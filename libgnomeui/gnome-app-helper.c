@@ -156,13 +156,13 @@ gnome_app_do_menu_creation(GnomeApp *app,
 			    gtk_box_pack_start(GTK_BOX(hbox), pmap, 
 					       FALSE, FALSE, 0);
 			    menuinfo[i].widget = gtk_menu_item_new();
-#ifdef	GTK_HAVE_ACCEL_GROUP
+#ifdef	GTK_HAVE_FEATURES_1_1_0
 			    w = gtk_accel_label_new (_(menuinfo[i].label));
 			    gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (w),
 							      menuinfo[i].widget);
-#else	/* !GTK_HAVE_ACCEL_GROUP */
+#else	/* !GTK_HAVE_FEATURES_1_1_0 */
 			    w = gtk_label_new(_(menuinfo[i].label));
-#endif	/* !GTK_HAVE_ACCEL_GROUP */
+#endif	/* !GTK_HAVE_FEATURES_1_1_0 */
 			    gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
 			    gtk_box_pack_start(GTK_BOX(hbox), w, TRUE, TRUE, 0);
 			    gtk_container_add(GTK_CONTAINER(menuinfo[i].widget), hbox);
@@ -325,7 +325,7 @@ gnome_app_create_menus_custom (GnomeApp *app,
 			       GnomeUIBuilderData *uibdata)
 {
   GtkWidget *menubar;
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
   GtkAccelGroup *ag;
 #else
   GtkAcceleratorTable *at;
@@ -338,7 +338,7 @@ gnome_app_create_menus_custom (GnomeApp *app,
 
   menubar = gtk_menu_bar_new ();
   gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
-#ifdef GTK_HAVE_ACCEL_GROUP	
+#ifdef GTK_HAVE_FEATURES_1_1_0	
   ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
   set_accel = (ag == NULL);
 #else
@@ -348,7 +348,7 @@ gnome_app_create_menus_custom (GnomeApp *app,
   if (menuinfo)
     gnome_app_do_menu_creation(app, app->menubar, 0, menuinfo, uibdata);
   if (set_accel) {
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
     ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
     if (ag)
       gtk_window_add_accel_group(GTK_WINDOW(app), ag);
@@ -409,7 +409,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 {
   int i, set_accel;
   GtkWidget *pmap;
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
   GtkAccelGroup *ag;
 
   set_accel = (NULL == gtk_object_get_data(GTK_OBJECT(app),
@@ -487,7 +487,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
     }
   tbinfo[i].widget = parent_widget;
   if (set_accel) {
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
     ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
     if (ag)
       gtk_window_add_accel_group(GTK_WINDOW(app), ag);
@@ -630,14 +630,14 @@ gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 				   gchar *signal_name,
 				   GnomeUIInfo *menuinfo_item)
 {
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
   GtkAccelGroup *ag;
 #else
   GtkAcceleratorTable *at;
 #endif
   if (menuinfo_item->accelerator_key == 0)
     return;
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
   ag = gtk_object_get_data(GTK_OBJECT(app),
 			   "GtkAccelGroup");
   if (ag == NULL)
@@ -803,7 +803,7 @@ gnome_app_insert_menus_custom (GnomeApp *app,
 			       GnomeUIBuilderData *uibdata)
 {
   GtkWidget *parent;
-#ifndef GTK_HAVE_ACCEL_GROUP
+#ifndef GTK_HAVE_FEATURES_1_1_0
   GtkAcceleratorTable *at;
 #endif
   gint pos;

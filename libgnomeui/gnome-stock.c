@@ -1026,12 +1026,12 @@ gnome_stock_menu_item(const char *type, const char *text)
 		gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 0);
 
 		menu_item = gtk_menu_item_new();
-#ifdef	GTK_HAVE_ACCEL_GROUP
+#ifdef	GTK_HAVE_FEATURES_1_1_0
 		w = gtk_accel_label_new (text);
 		gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (w), menu_item);
-#else	/* !GTK_HAVE_ACCEL_GROUP */
+#else	/* !GTK_HAVE_FEATURES_1_1_0 */
 		w = gtk_label_new(text);
-#endif	/* !GTK_HAVE_ACCEL_GROUP */
+#endif	/* !GTK_HAVE_FEATURES_1_1_0 */
 		gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
 		gtk_widget_show(w);
 		gtk_box_pack_start(GTK_BOX(hbox), w, TRUE, TRUE, 0);

@@ -22,7 +22,7 @@
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkeditable.h>
 #include <gtk/gtkfeatures.h>
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 #include <gtk/gtkaccelgroup.h>
 #endif
 #include <libgnome/gnome-defs.h>
@@ -48,7 +48,7 @@ struct _GnomeDialog
   GtkWidget * action_area; /* A button box, not an hbox */
 
   GList *buttons;
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
   GtkAccelGroup * accelerators;
 #else 
   GtkAcceleratorTable *accelerators;

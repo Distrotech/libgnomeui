@@ -33,7 +33,7 @@
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-net.h"
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 #include "libgnomeui/gnome-popupmenu.h"
 #endif
 #include "libgnomeui/gnome-pixmap.h"

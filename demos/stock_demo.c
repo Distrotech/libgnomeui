@@ -98,7 +98,7 @@ create_menu(GtkWidget *window)
 {
 	void gnome_stock_menu_accel_dlg(char *);
 	GtkWidget *menubar, *w, *menu;
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	GtkAccelGroup *accel;
 #else
 	GtkAcceleratorTable *accel;
@@ -106,7 +106,7 @@ create_menu(GtkWidget *window)
 	int i = 0;
 	guchar key;
 	guint8 mod;
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	accel = gtk_accel_group_new();
 #else
 	accel = gtk_accelerator_table_new();
@@ -119,7 +119,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_NEW, _("New..."));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_NEW, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -130,7 +130,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_OPEN, _("Open..."));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_OPEN, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -141,7 +141,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE, _("Save"));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SAVE, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -152,7 +152,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE_AS, _("Save as..."));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SAVE_AS, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -163,7 +163,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_CLOSE, _("Close"));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_CLOSE, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -178,7 +178,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_PRINT, _("Print..."));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PRINT, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -198,7 +198,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_QUIT, _("Quit"));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_QUIT, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -219,7 +219,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_UNDO, _("Undo"));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_UNDO, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -244,7 +244,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_CUT, _("Cut"));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_CUT, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -255,7 +255,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_COPY, _("Copy"));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_COPY, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -266,7 +266,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_PASTE, _("Paste"));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PASTE, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -281,7 +281,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_PROP, _("Properties..."));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PROP, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -294,7 +294,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_PREF, _("Preferences..."));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PREF, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -312,7 +312,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_SCORES, _("Scores..."));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SCORES, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -331,7 +331,7 @@ create_menu(GtkWidget *window)
 	w = gnome_stock_menu_item(GNOME_STOCK_MENU_ABOUT, _("About"));
 	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_ABOUT, &key, &mod))
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		gtk_widget_add_accelerator(w, "activate",  accel, key, mod, 0);
 #else
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
@@ -347,7 +347,7 @@ create_menu(GtkWidget *window)
 
 	menu_items[i] = NULL;
 	/* g_print("%d menu items\n", i); */
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	gtk_window_add_accel_group(GTK_WINDOW(window), accel);
 #else
 	gtk_window_add_accelerator_table (GTK_WINDOW (window), accel);
