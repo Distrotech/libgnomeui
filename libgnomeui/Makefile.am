@@ -28,6 +28,7 @@ INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
 	$(SUPPORTINCS) 					\
 	$(OAF_CFLAGS)					\
+	@LIBART_CFLAGS@					\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
         -DGNOMEBINDIR=\""$(bindir)"\" 			\
@@ -364,6 +365,7 @@ gnome_segv_LDADD =	\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \
         $(LIBGNOMEUI_LIBS) \
+	@LIBART_LIBS@	\
 	$(INTLLIBS)
 
 test_file_saver_LDADD =	\
@@ -371,6 +373,7 @@ test_file_saver_LDADD =	\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
+	@LIBART_LIBS@	\
 	$(INTLLIBS)
 
 test_recently_used_LDADD =	\
@@ -378,6 +381,7 @@ test_recently_used_LDADD =	\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
+	@LIBART_LIBS@	\
 	$(INTLLIBS)
 
 stock_demo_LDADD =	\
@@ -385,6 +389,7 @@ stock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
+	@LIBART_LIBS@	\
 	$(INTLLIBS)
 
 #	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
@@ -396,6 +401,7 @@ winhints_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
+	@LIBART_LIBS@	\
 	$(INTLLIBS)
 
 animator_demo_LDADD =	\
@@ -403,6 +409,7 @@ animator_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
+	@LIBART_LIBS@	\
 	$(INTLLIBS)
 
 dock_demo_LDADD =	\
@@ -410,6 +417,7 @@ dock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
+	@LIBART_LIBS@	\
 	$(INTLLIBS)
 
 mdi_demo_LDADD =       \
@@ -417,5 +425,6 @@ mdi_demo_LDADD =       \
         $(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la                 \
         $(GDK_PIXBUF_LIBS) \
         $(LIBGNOMEUI_LIBS) \
+	@LIBART_LIBS@	\
         $(INTLLIBS)
 

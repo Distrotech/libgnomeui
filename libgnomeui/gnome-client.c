@@ -864,7 +864,7 @@ GnomeModuleInfo gnome_client_module_info = {
   "gnome-client", VERSION, N_("Session management"),
   gnome_client_requirements,
   gnome_client_pre_args_parse, gnome_client_post_args_parse,
-  options
+  (struct poptOption *)options
 };
 
 /* Parse command-line arguments we recognize.  */

@@ -20,12 +20,17 @@
   @NOTATION@
 */
 
+#include "config.h"
+
 #include <string.h> /* for strlen */
 
-#include <gtk/gtklabel.h>
+#include <gtk/gtk.h>
 #include <libgnome/gnome-url.h>
 #include "gnome-href.h"
+#include "gnome-dialog-util.h"
 #include "gnome-cursors.h"
+
+#include "libgnome/gnome-i18nP.h"
 
 static void gnome_href_class_init(GnomeHRefClass *klass);
 static void gnome_href_init(GnomeHRef *href);
@@ -249,10 +254,16 @@ static void gnome_href_clicked(GtkButton *button) {
 
   if (GTK_BUTTON_CLASS(parent_class)->clicked)
     (* GTK_BUTTON_CLASS(parent_class)->clicked)(button);
+
   href = GNOME_HREF(button);
+
   g_return_if_fail(href->url);
 
-  gnome_url_show(href->url);
+  if(!gnome_url_show(href->url))
+	  gnome_error_dialog(_("Error occured while trying to launch the "
+			       "URL handler.\n"
+			       "Please check the settings in the "
+			       "Control Center if they are correct."));
 }
 
 static void gnome_href_destroy(GtkObject *object) {

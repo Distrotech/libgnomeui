@@ -1,3 +1,15 @@
+Fri May 05 19:23:20 2000  George Lebl <jirka@5z.com>
+
+	* gnome-about.c: make an error dialog if gnome_url_show fails
+
+	* gnome-href.c: make an error dialog if gnome_url_show fails also fix
+	  the includes
+
+	* gnome-helpsys.c: minor doc fix and use the new gnome_url_show_full
+	  routine with the error argument.
+
+	* Makefile.am: add @LIBART_LIBS@ for the test and demo programs
+
 Sun Apr 30 02:12:53 2000  George Lebl <jirka@5z.com>
 
 	* animator_demo.c (main): fix warnings

@@ -968,6 +968,7 @@ static void
 gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType type)
 {
   char *url_type = NULL;
+  GnomeURLError error;
 
   switch(type)
     {
@@ -981,7 +982,13 @@ gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType 
     }
 
   help_view->url_ctx = gnome_url_show_full(help_view->url_ctx, url, url_type,
-					   GNOME_URL_DISPLAY_NEWWIN|GNOME_URL_DISPLAY_CLOSE_ATEXIT);
+					   GNOME_URL_DISPLAY_NEWWIN |
+					   GNOME_URL_DISPLAY_CLOSE_ATEXIT,
+					   &error);
+  /*FIXME:
+  if(error != GNOME_URL_NO_ERROR) {
+
+  } */
 }
 
 void
@@ -1018,6 +1025,8 @@ gnome_help_view_display_callback (GtkWidget *widget, const char *help_path)
  * @file_type: The type of the file to be found, normally "html"
  *
  * Turns a "help path" into a full URL.
+ *
+ * Returns: a newly allocated string with the URL
  */
 char *
 gnome_help_path_resolve(const char *path, const char *file_type)

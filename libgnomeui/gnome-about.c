@@ -1124,7 +1124,14 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 	case GDK_BUTTON_PRESS:
 		if (url)
 		{
-			gnome_url_show(url);
+			if(!gnome_url_show(url))
+				gnome_error_dialog(_("Error occured while "
+						     "trying to launch the "
+						     "URL handler.\n"
+						     "Please check the "
+						     "settings in the "
+						     "Control Center if they "
+						     "are correct."));
 		}
 		break;
 	default:
