@@ -1,3 +1,4 @@
+/*  -*- Mode: C; c-set-style: linux; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 #ifndef LIBGNOMEUI_H
 #define LIBGNOMEUI_H
 

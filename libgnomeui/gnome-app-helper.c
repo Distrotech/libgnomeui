@@ -9,19 +9,6 @@
  * Major cleanups and rearrangements by Federico Mena and Justin Maurer.
  */
 
-/* TO-DO list for GnomeAppHelper and friends:
- *
- * - Find out how to disable on-the-fly hotkey changing for menu items 
- * (GtkAccelGroup locking?).
- *
- * - Write a custom container for the GnomeApp window so that you can have 
- * multiple toolbars and such.
- *
- * - Fix GtkHandleBox so that it works right (i.e. is easy to re-dock) and so 
- * that it allows dragging into the top/bottom/left/right of the application 
- * window as well.
- */
-
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif

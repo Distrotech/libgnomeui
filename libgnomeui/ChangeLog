@@ -1,3 +1,20 @@
+2000-01-13  Havoc Pennington  <hp@redhat.com>
+
+	* gnome-gconf.c: fix the version of liboafgnome we require.
+
+        * Makefile.am: add initial file save dialog stuff, not to the 
+	lib but as a test prog. just a prototype; may use James Cape version
+        instead.
+	
+	* libgnomeui.h: emacs magic
+
+	* gnome-gconf.c (gnome_gconf_post_args_parse): ref/sink the global
+	GConfClient. Also, fix indentation.
+
+2000-01-12  Havoc Pennington  <hp@redhat.com>
+
+	* gnome-app-helper.c: delete obsolete comment
+
 2000-01-13  Elliot Lee  <sopwith@redhat.com>
 
 	* gnome-helpsys.c: Make use of textfu, and start work on 'point for popup help'.
@@ -12,6 +29,7 @@
 	* gnome-cursors.c (gnome_stock_cursor_new): Fixed the GDK crash
 	when a cursor gets requested several times
 
+>>>>>>> 1.1234
 Wed Jan 12 15:51:18 2000  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-about.h: Added rewrite notice
