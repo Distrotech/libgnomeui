@@ -1,3 +1,8 @@
+2001-10-17  jacob berkman  <jacob@ximian.com>
+
+	* gnome-vfs-util.c (gnome_gdk_pixbuf_new_from_uri_async): pass
+	priority to gnome_vfs_asyn_open()
+
 2001-10-13  Michael Meeks  <michael@ximian.com>
 
 	* gnome-entry.c (gnome_entry_class_init): remove 'changed'

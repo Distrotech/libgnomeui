@@ -163,6 +163,7 @@ gnome_gdk_pixbuf_new_from_uri_async (const char *uri,
     gnome_vfs_async_open (&handle->vfs_handle,
 			  uri,
 			  GNOME_VFS_OPEN_READ,
+			  GNOME_VFS_DEFAULT_PRIORITY,
 			  file_opened_callback,
 			  handle);
 
