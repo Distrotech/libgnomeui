@@ -1,3 +1,8 @@
+2000-05-03  Iain Holems  <ih@csd.abdn.ac.uk>
+
+	* gnome-canvas-text.c (calc_line_widths): Changed to width to be 
+	lbearing + rbearing
+
 2000-05-03  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* gnome-canvas-text.c (calc_line_widths): Correctly calculate the width
