@@ -414,3 +414,91 @@ gfloat gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper)
 
   return paper_bmargin;
 }
+
+void
+gnome_paper_selector_set_name	(GnomePaperSelector *gspaper,
+				 gchar *name)
+{
+  const Paper *paper;
+  const Unit *unit;
+  gchar *unit_name;
+  double paper_width, paper_height;
+  
+  gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), name);
+  paper = gnome_paper_with_name (name);
+
+  unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
+  unit = gnome_unit_with_name (unit_name);
+
+  paper_width = gnome_paper_convert (gnome_paper_pswidth (paper), unit);
+  paper_height = gnome_paper_convert (gnome_paper_psheight (paper), unit);
+
+  gtk_signal_handler_block (GTK_OBJECT(gspaper->width), gspaper->width_id);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->width), (gfloat) paper_width);
+  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->width), gspaper->width_id);
+
+  gtk_signal_handler_block (GTK_OBJECT(gspaper->height), gspaper->height_id);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->height), (gfloat) paper_height);
+  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->height), gspaper->height_id);
+}
+
+void
+gnome_paper_selector_set_width	(GnomePaperSelector *gspaper,
+				 gfloat width)
+{
+  gfloat paper_width, paper_height, height;
+  const Paper	*paper;
+  const Unit    *unit;
+  gchar *unit_name;
+
+  unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
+  unit = gnome_unit_with_name (unit_name);
+  
+  paper_width = gnome_paper_convert (width, unit);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->width), paper_width);
+  
+  paper_height = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->height));
+  height = gnome_paper_convert_to_points (paper_height, unit);
+  
+  paper = gnome_paper_with_size ((double)width, (double)height);
+
+  gtk_signal_handler_block (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), gspaper->paper_id);
+  if (paper) {
+    const char* paper_name = gnome_paper_name (paper);
+    gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), paper_name); 
+  }
+  else {
+    gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), "custom"); 
+  }
+  gtk_signal_handler_unblock (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), gspaper->paper_id);
+}
+
+void
+gnome_paper_selector_set_height	(GnomePaperSelector *gspaper,
+				 gfloat height)
+{
+  gfloat paper_width, paper_height, width;
+  const Paper	*paper;
+  const Unit    *unit;
+  gchar *unit_name;
+
+  unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
+  unit = gnome_unit_with_name (unit_name);
+
+  paper_width  = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->width));
+  width = gnome_paper_convert_to_points (paper_width, unit );
+  paper_height = gnome_paper_convert( height, unit );
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->height), paper_height);
+  
+  paper = gnome_paper_with_size ((double)width, (double)height);
+
+  gtk_signal_handler_block (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), gspaper->paper_id);
+  if (paper) {
+    const char* paper_name = gnome_paper_name (paper);
+    gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), paper_name); 
+  }
+  else {
+    gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), "custom"); 
+  }
+  gtk_signal_handler_unblock (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), gspaper->paper_id);
+}

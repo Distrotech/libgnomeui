@@ -1,3 +1,9 @@
+1999-02-09  Chris Lahey  <clahey@umich.edu>
+
+	* gnome-paper-selector.h, gnome-paper-selector.c: Added
+	gnome_paper_selector_set functions.  These are neccessary and thus
+	constitute a bug fix.
+
 1999-02-08  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock.c (drag_snap): New function: contains the code from
@@ -7892,10 +7898,4 @@ Fri Feb 13 18:09:46 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 Fri Feb 13 11:45:12 1998  Nuno Ferreira <nmrf@rnl.ist.utl.pt>
 
 	* gnome-app.c (gnome_app_configure_positions): use app->toolbar
-	when dealing with the toolbar, not app->menubar.
-
-Wed Feb 11 15:06:05 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
-
-	* gtk-ted.c (gtk_ted_widget_drop
-	gtk_ted_prepare_editable_widget): refcouting fixes
-
+	when dealing

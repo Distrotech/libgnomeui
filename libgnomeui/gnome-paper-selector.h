@@ -67,6 +67,13 @@ gfloat          gnome_paper_selector_get_right_margin  (GnomePaperSelector *gspa
 gfloat          gnome_paper_selector_get_top_margin    (GnomePaperSelector *gspaper);
 gfloat          gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper);
 
+  /* These are still only stubs. */
+void		gnome_paper_selector_set_name	(GnomePaperSelector *gspaper,
+						 gchar *name);
+void		gnome_paper_selector_set_width	(GnomePaperSelector *gspaper,
+						 gfloat width);
+void		gnome_paper_selector_set_height	(GnomePaperSelector *gspaper,
+						 gfloat height);
 
 END_GNOME_DECLS
 
