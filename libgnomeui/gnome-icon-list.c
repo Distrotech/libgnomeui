@@ -870,6 +870,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 	}
 
 	gil->icon_list = g_list_remove_link (gil->icon_list, list);
+	g_list_free_1(list);
 	gil->icons--;
 
 	sync_selection (gil, pos, SYNC_REMOVE);

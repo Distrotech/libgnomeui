@@ -1030,9 +1030,11 @@ sub_parenth(GtkWidget *w, gpointer data)
 			stack_pop(&gc->stack);
 		else if(g_list_next(gc->stack)) {
 			stack = g_list_next(gc->stack)->data;
-			if(stack->type==CALCULATOR_PARENTHESIS)
-				gc->stack = g_list_remove_link(gc->stack,
-						       g_list_next(gc->stack));
+			if(stack->type==CALCULATOR_PARENTHESIS) {
+				GList *n = g_list_next(gc->stack);
+				gc->stack = g_list_remove_link(gc->stack,n);
+				g_list_free_1(n);
+			}
 		}
 	}
 
