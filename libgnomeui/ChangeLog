@@ -1,3 +1,12 @@
+Sun Jan 16 02:45:10 2000  George Lebl <jirka@5z.com>
+
+	* gnome-ditem-edit.[ch]: update for the new gnome-ditem stuff and make
+	  it store a ref to any ditem is loads so that information not
+	  updated in the gui is not lost.  Also add a whole bunch of
+	  preconditions to public methods, fix the header define, added
+	  accessors for new widgets, and fixed the ordering in the
+	  translations list
+
 2000-01-16  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-pixmap.c (gnome_pixmap_get_draw_vals): new function 
