@@ -240,7 +240,7 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
 
       fputs("yes\n", ri->in_fh);
     }
-  else if((ctmp = strstr(aline, "GNOME BOOTSTRAP READY")))
+  else if((ctmp = strstr(ri->in_buf->str, "GNOME BOOTSTRAP READY")))
     {
       int i;
 
@@ -352,8 +352,10 @@ rcmd_run(const OAFRegistrationCategory *regcat, const char **argv, int argc, con
 
   memset(&ri, 0, sizeof(ri));
 
+  ri.in_buf = g_string_new("");
   ri.regcat = regcat;
   ri.state = CONNECTING;
+  ri.cmd = remote_cmd;
 
   childpid = fork();
   if(!childpid)
@@ -415,6 +417,8 @@ rcmd_run(const OAFRegistrationCategory *regcat, const char **argv, int argc, con
 
   waitpid(childpid, &ri.out_tag, WNOHANG); /* Try to reap it if possible */
 
+  g_string_free(ri.in_buf, TRUE);
+
   return (*ri.iorbuf)?g_strdup(ri.iorbuf):NULL;
 }
 
@@ -463,7 +467,7 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
 
     g_snprintf(langs_buf, sizeof(langs_buf), "--languages=%s", langparam->str);
     g_string_free(langparam, TRUE);
-    argv[argc++] = display_buf;
+    argv[argc++] = langs_buf;
   }
 
   argv[argc] = NULL; /* The last one */

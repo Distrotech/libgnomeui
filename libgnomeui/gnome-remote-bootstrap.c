@@ -96,7 +96,7 @@ handle_commands(GIOChannel *ioc, GIOCondition cond, gpointer data)
 	goto err;
 
       dup2(pipes[1], ior_fd);
-      pieces = g_strsplit(" ", aline + strlen("RUN "), -1);
+      pieces = g_strsplit(aline + strlen("RUN "), " ", -1);
       for(i = 0; pieces[i]; i++) /**/;
 
       childpid = gnome_execute_async_fds(NULL, i, pieces, FALSE);
@@ -142,6 +142,7 @@ relay_output(GIOChannel *ioc, GIOCondition cond, gpointer data)
 
   fprintf(stdout, "OUTPUT %s%s", aline,
 	  (aline[strlen(aline) - 1] == '\n')?"":"\n");
+  fflush(stdout);
 
   return TRUE;
 
