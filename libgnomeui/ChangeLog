@@ -1,7 +1,8 @@
 1999-01-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gnome-app-helper.c, gnome-app-helper.h: Changes to make the
-	strings localizable.
+	* gnome-app-helper.c, gnome-app-helper.h: New approach.  We now
+	have a new constant: GNOME_APP_UI_SUBTREE_STOCK which means that
+	the text string we provide is included in the gnome-libs catalog
 
 1999-01-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

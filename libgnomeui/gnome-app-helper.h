@@ -46,12 +46,17 @@ typedef enum {
 	GNOME_APP_UI_BUILDER_DATA,	/* Specifies the builder data for the 
 					   following entries, see code for 
 					   further info */
-	GNOME_APP_UI_ITEM_CONFIGURABLE  /* A configurable menu item. */
+	GNOME_APP_UI_ITEM_CONFIGURABLE, /* A configurable menu item. */
 	/* one should be careful when using 
 	 * gnome_app_create_*_[custom|interp|with_data]() functions with 
 	 * GnomeUIInfo arrays containing GNOME_APP_UI_BUILDER_DATA items since 
 	 * their GnomeUIBuilderData structures completely override the ones 
 	 * generated or supplied by the above functions. */
+	GNOME_APP_UI_SUBTREE_STOCK	/* Item that defines a 
+					   subtree/submenu, same as GNOME_APP_UI_SUBTREE,
+					   but the texts should be looked up in the
+					   gnome-libs catalog
+					*/
 } GnomeUIInfoType;
 
 /* If you insert a value into this enum it'll break configurations all
@@ -258,7 +263,7 @@ typedef struct {
 
 /* If you have more then one New type, use this tree */
 #define GNOMEUIINFO_MENU_NEW_SUBTREE(tree)                                  \
-        { GNOME_APP_UI_SUBTREE, N_("_New"), NULL, tree, NULL, NULL,         \
+        { GNOME_APP_UI_SUBTREE_STOCK, N_("_New"), NULL, tree, NULL, NULL,   \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,                     \
           GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL }
 
@@ -463,37 +468,35 @@ typedef struct {
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
           GNOME_APP_CONFIGURABLE_ITEM_END_GAME, (GdkModifierType) 0, NULL }
-	  
-#ifdef ENABLE_NLS
-#   define D_(x) dgettext("gnome-libs", x)
-#else
-#   define D_(x) (x)
-#endif
+
+char * gnome_app_helper_gettext (char *string);
+
+#define D_(x) gnome_app_helper_dgettext("gnome-libs", x)
 
 /* Some standard menus */
 #define GNOMEUIINFO_MENU_FILE_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_File"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE_STOCK, N_("_File"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_EDIT_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Edit"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE_STOCK, N_("_Edit"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_VIEW_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_View"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE_STOCK, N_("_View"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_SETTINGS_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Settings"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE_STOCK, N_("_Settings"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_FILES_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("Fi_les"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE_STOCK, N_("Fi_les"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_WINDOWS_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Windows"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE_STOCK, N_("_Windows"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_HELP_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Help"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE_STOCK, N_("_Help"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_GAME_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Game"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE_STOCK, N_("_Game"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 		
 /*these are strings to be used for paths when working with the menus stuff*/
