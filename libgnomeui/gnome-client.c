@@ -147,7 +147,7 @@ static GnomeClient *master_client= NULL;
 static GnomeClient *cloned_client= NULL;
 static gchar       *cloned_id    = NULL;
 
-static gboolean gnome_client_auto_connect_master= TRUE;
+static gboolean gnome_client_auto_connect_master = TRUE;
 
 /* The following environment variables will be set on the master
    client, if they are defined the programs environment.  The array
@@ -162,71 +162,40 @@ static char* master_environment[]=
 };
 
 /* Forward declaration for our parsing function.  */
-static error_t client_parse_func (int key, char *arg,
-				  struct argp_state *state);
+static void client_parse_func(poptContext ctx,
+			      enum poptCallbackReason reason,
+			      const struct poptOption *opt,
+			      const char *arg, void *data);
 
 /* Command-line arguments understood by this module.  */
-static const struct argp_option arguments[] =
-{
-  { "sm-client-id", -1, N_("ID"), OPTION_HIDDEN,
-    N_("Specify session management id"), -2 },
-  { "sm-cloned-id", -2, N_("ID"), OPTION_HIDDEN,
-    N_("Specify id of cloned client"), -2 },
-  { "sm-disable", -3, NULL, OPTION_HIDDEN,
-    N_("Disable connection to session manager"), -2},
-  { NULL, 0, NULL, 0, NULL, 0 }
+static const struct poptOption options[] = {
+  {NULL, '\0', POPT_ARG_CALLBACK, client_parse_func, 0, NULL, NULL},
+  {"sm-client-id", '\0', POPT_ARG_STRING, NULL, -1, N_("Specify session management ID"), N_("ID")},
+  {"sm-cloned-id", '\0', POPT_ARG_STRING, NULL, -2, N_("Specify ID of cloned client"), N_("ID")},
+  {"sm-disable", '\0', POPT_ARG_NONE, NULL, -3, N_("Disable connection to session manager"), NULL},
+  {NULL, '\0', 0, NULL, 0}
 };
-
-/* Definition of our command-line parser.  */
-static const struct argp parser =
-{
-  arguments,			/* Argument vector.  */
-  client_parse_func,		/* Parsing function.  */
-  NULL,				/* Docs.  */
-  NULL,				/* More docs.  */
-  NULL,				/* Children.  */
-  NULL,				/* Help filter.  */
-  PACKAGE			/* Translation domain.  */
-};
-
 
 /* Parse command-line arguments we recognize.  */
-static error_t
-client_parse_func (int key, char *arg, struct argp_state *state)
+static void
+client_parse_func(poptContext ctx,
+		  enum poptCallbackReason reason,
+		  const struct poptOption *opt,
+		  const char *arg, void *data)
 {
- if (key == ARGP_KEY_INIT)
-   {
-     /* Argument parsing is starting.  We set the restart and the
-        clone command to a default value, so other functions can use
-        the master client while command line parsing.  */
-     g_assert (master_client != NULL);
-     gnome_client_set_restart_command (master_client, 1, 
-				       &program_invocation_name);
-     gnome_client_set_clone_command (master_client, 0, NULL);
-      
-   }
- else if (key == -1)
-   {
-      /* Found our argument.  Set the session id.  */
+  int key = opt?opt->val:0;
+
+  if(reason == POPT_CALLBACK_REASON_PRE) {
+      /* Argument parsing is starting.  We set the restart and the
+	 clone command to a default value, so other functions can use
+	 the master client while command line parsing.  */
       g_assert (master_client != NULL);
-      gnome_client_set_id (master_client, arg);
-      g_free (master_client->previous_id);
-      master_client->previous_id = g_strdup (arg);
-      g_free (cloned_id);
-      cloned_id= g_strdup (arg);
+      gnome_client_set_restart_command (master_client, 1,
+					&program_invocation_name);
+      gnome_client_set_clone_command (master_client, 0, NULL);
+      
     }
-  else if (key == -2)
-    {
-      /* Set the id of the client, that we want to clone.  */
-      g_free (cloned_id);
-      cloned_id= g_strdup (arg);
-    }
- else if (key == -3)
-   {
-     /* Disable the connection to the sessione manager.  */
-     gnome_client_disable_master_connection ();
-   }
-  else if (key == ARGP_KEY_FINI)
+  else if(reason == POPT_CALLBACK_REASON_POST)
     {
       /* We're done, we think.  This has moved to from the
          ARGP_KEY_SUCCESS to ARGP_KEY_FINI, because this way some
@@ -239,10 +208,27 @@ client_parse_func (int key, char *arg, struct argp_state *state)
 	  gnome_client_connect (master_client);
 	}
     }
- else
-   return ARGP_ERR_UNKNOWN;
-
-  return 0;
+  else if (key == -1)
+    {
+      /* Found our argument.  Set the session id.  */
+      g_assert (master_client != NULL);
+      gnome_client_set_id (master_client, arg);
+      g_free (master_client->previous_id);
+      master_client->previous_id = g_strdup (arg);
+      g_free (cloned_id);
+      cloned_id= g_strdup (arg);
+    }
+  else if (key == -2)
+    {
+      /* Set the id of the client, that we want to clone.  */
+      g_free (cloned_id);
+      cloned_id = g_strdup (arg);
+    }
+  else if (key == -3)
+    {
+      /* Disable the connection to the sessione manager.  */
+      gnome_client_disable_master_connection ();
+    }
 }
 
 void         
@@ -294,7 +280,7 @@ gnome_client_init (void)
 			      GTK_SIGNAL_FUNC (master_client_connect), NULL);
 	  gtk_signal_connect (GTK_OBJECT (master_client), "disconnect",
 			      GTK_SIGNAL_FUNC (master_client_disconnect), NULL);
-	  gnome_parse_register_arguments (&parser);
+	  gnomelib_register_popt_table(options, N_("Session management options"));
 
 	  /* Set the master clients environment.  */
 	  for (i= 0; master_environment[i]; i++)
@@ -535,15 +521,15 @@ gnome_real_client_destroy (GtkObject *object)
   g_list_foreach (client->static_args, (GFunc)g_free, NULL);
   g_list_free    (client->static_args);
 
-  gnome_string_array_free (client->clone_command);
+  g_strfreev (client->clone_command);
   g_free     (client->current_directory);
-  gnome_string_array_free (client->discard_command);
+  g_strfreev (client->discard_command);
   g_list_foreach (client->environment, (GFunc)g_free, NULL);
   g_list_free    (client->environment);
   g_free     (client->program);
-  gnome_string_array_free (client->resign_command);
-  gnome_string_array_free (client->restart_command);
-  gnome_string_array_free (client->shutdown_command);
+  g_strfreev (client->resign_command);
+  g_strfreev (client->restart_command);
+  g_strfreev (client->shutdown_command);
   g_free     (client->user_id);
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
@@ -715,12 +701,12 @@ gnome_client_set_clone_command (GnomeClient *client,
     {
       g_return_if_fail (argc == 0);
 
-      gnome_string_array_free (client->clone_command);
+      g_strfreev (client->clone_command);
       client->clone_command = array_copy (client->restart_command);
     }
   else
     {
-      gnome_string_array_free (client->clone_command);
+      g_strfreev (client->clone_command);
       client->clone_command = array_init_from_arg (argc, argv);
     }
 
@@ -774,7 +760,7 @@ gnome_client_set_discard_command (GnomeClient *client,
     {
       g_return_if_fail (argc == 0);
       
-      gnome_string_array_free (client->discard_command);
+      g_strfreev (client->discard_command);
       client->discard_command= NULL;
 #ifdef HAVE_LIBSM
       client_unset_prop (client, SmDiscardCommand);
@@ -782,7 +768,7 @@ gnome_client_set_discard_command (GnomeClient *client,
     }
   else
     {
-      gnome_string_array_free (client->discard_command);
+      g_strfreev (client->discard_command);
       client->discard_command = array_init_from_arg (argc, argv);
       
 #ifdef HAVE_LIBSM
@@ -905,7 +891,7 @@ gnome_client_set_resign_command (GnomeClient *client,
     {
       g_return_if_fail (argc == 0);
       
-      gnome_string_array_free (client->resign_command);
+      g_strfreev (client->resign_command);
       client->resign_command= NULL;
 #ifdef HAVE_LIBSM
       client_unset_prop (client, SmResignCommand);
@@ -913,7 +899,7 @@ gnome_client_set_resign_command (GnomeClient *client,
     }
   else
     {
-      gnome_string_array_free (client->resign_command);
+      g_strfreev (client->resign_command);
       client->resign_command = array_init_from_arg (argc, argv);
   
 #ifdef HAVE_LIBSM
@@ -936,7 +922,7 @@ gnome_client_set_restart_command (GnomeClient *client,
   g_return_if_fail (argc != 0);
   g_return_if_fail (argv != NULL);
 
-  gnome_string_array_free (client->restart_command);
+  g_strfreev (client->restart_command);
   client->restart_command = array_init_from_arg (argc, argv);
 
 #ifdef HAVE_LIBSM
@@ -978,7 +964,7 @@ gnome_client_set_shutdown_command (GnomeClient *client,
     {
       g_return_if_fail (argc == 0);
       
-      gnome_string_array_free (client->shutdown_command);
+      g_strfreev (client->shutdown_command);
       client->shutdown_command = NULL;
 #ifdef HAVE_LIBSM
       client_unset_prop (client, SmShutdownCommand);
@@ -986,7 +972,7 @@ gnome_client_set_shutdown_command (GnomeClient *client,
     }
   else
     {
-      gnome_string_array_free (client->shutdown_command);
+      g_strfreev (client->shutdown_command);
       client->shutdown_command = array_init_from_arg (argc, argv);
 
 #ifdef HAVE_LIBSM

@@ -2,7 +2,6 @@
 #define LIBGNOMEUI_H
 
 #include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-parse.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"
 #include "libgnomeui/gnome-animator.h"
@@ -33,6 +32,7 @@
 #include "libgnomeui/gnome-icon-list.h"
 #include "libgnomeui/gnome-icon-item.h"
 #include "libgnomeui/gnome-icon-sel.h"
+#include "libgnomeui/gnome-init.h"
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-net.h"
@@ -70,17 +70,5 @@
 #include "libgnomeui/gnometypebuiltins.h"
 #include "libgnomeui/gnome-winhints.h"
 #include "libgnomeui/gnome-href.h"
-
-BEGIN_GNOME_DECLS
-
-error_t gnome_init (char *app_id, struct argp *app_parser,
-		    int argc, char **argv,
-		    unsigned int flags, int *arg_index);
-error_t gnome_init_with_data (char *app_id, struct argp *app_parser,
-			      int argc, char **argv,
-			      unsigned int flags, int *arg_index,
-			      void *user_data);
-
-END_GNOME_DECLS
 
 #endif

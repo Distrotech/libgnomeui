@@ -11,7 +11,6 @@
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-score.h"
-#include "libgnome/gnome-string.h"
 #include "libgnome/gnome-i18nP.h"
 #include "gnome-stock.h"
 #include "gtk/gtk.h"
@@ -276,7 +275,7 @@ gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos)
  			gnome_scores_set_current_player(GNOME_SCORES(hs), pos-1);
 		
 		gtk_widget_show (hs);
-		gnome_string_array_free(names);
+		g_strfreev(names);
 		g_free(scores);
 		g_free(scoretimes);
 	} 

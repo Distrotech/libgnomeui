@@ -23,8 +23,7 @@ GtkWidget *sfocbut, *smenubut, *sbarbut, *fixedbut, *ignorebut;
 
 int main(int argc, char *argv[])
 {
-  gnome_init ("winhints-test", NULL, argc, argv,
-	      0, NULL);
+  gnome_init ("winhints-test", VERSION, argc, argv);
   
   prepare_app ();
   

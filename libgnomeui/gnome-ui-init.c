@@ -1,3 +1,5 @@
+/* Blame Elliot for the poptimization of this file */
+
 #include <config.h>
 
 #include <errno.h>
@@ -5,13 +7,14 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <argp.h>
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
 #include <gtk/gtk.h>
 #include <gdk_imlib.h>
+
+#include <popt.h>
 
 #include "libgnome/libgnomeP.h"
 #include "gnome-preferences.h"
@@ -34,150 +37,15 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 				     GdkColor    *transparent_color,
 				     const gchar *filename);
 
-
 
-/* This describes all the arguments understood by Gtk.  We parse them
- * out and put them into our own private argv, which we then feed to
- * Gtk once the command line has been successfully parsed.  Yes, this
- * is a total hack.  FIXME: should hidden options really be visible?
- *
- * Note that the key numbers must start at -1 and decrease by 1.  The
- * key number is used to look up the argument name we supply to Gtk.
- */
-static const struct argp_option our_gtk_options[] =
-{
-	{ N_("\nGtk+ toolkit options"), -1, NULL, OPTION_DOC,   NULL, -3 },
-	{ "gdk-debug",         -1, N_("FLAGS"),   0,      N_("Gdk debugging flags to set"), 0 },
-	{ "gdk-no-debug",      -2, N_("FLAGS"),   0,      N_("Gdk debugging flags to unset"), 0 },
-	{ "display",           -3, N_("DISPLAY"), 0,	  N_("X display to use"), 0 },
-	{ "sync",              -4, NULL,          OPTION_HIDDEN, NULL, 0 },
-	{ "no-xshm",           -5, NULL,          0,	  N_("Don't use X shared memory extension"), 0 },
-	{ "name",              -6, N_("NAME"),    0,	  N_("Program name as used by the window manager"), 0 },
-	{ "class",             -7, N_("CLASS"),   0,	  N_("Program class as used by the window manager"), 0 },
-	{ "gxid_host",         -8, N_("HOST"),    0,	  N_("FIXME"), 0 },
-	{ "gxid_port",         -9, N_("PORT"),    0,	  N_("FIXME"), 0 },
-	{ "xim-preedit",      -10, N_("STYLE"),   0,	  N_("FIXME"), 0 },
-	{ "xim-status",       -11, N_("STYLE"),   0,	  N_("FIXME"), 0 },
-	{ "gtk-debug",        -12, N_("FLAGS"),   0,      N_("Gtk+ debugging flags to set"), 0 },
-	{ "gtk-no-debug",     -13, N_("FLAGS"),   0,      N_("Gtk+ debugging flags to unset"), 0 },
-	{ "g-fatal-warnings", -14, NULL,          0,      N_("Make all warnings fatal"), 0 },
-	{ "gtk-module",       -15, N_("MODULE"),  0,      N_("Load additional Gtk+ modules"), 0 },
-	{ NULL, 0, NULL, 0, NULL, 0 }
-};
-
-/* Index of next free slot in the argument vector we construct for
- * Gtk.
- */
-static int our_argc;
-
-/* Argument vector we construct.  */
-static char **our_argv;
 
 /* The master client.  */
-static GnomeClient *client;
-
-/* Called during argument parsing to handle various details.  */
-static error_t
-our_gtk_parse_func (int key, char *arg, struct argp_state *state)
-{
-	if (key < 0)
-	{
-		/* This is some argument we defined.  We handle it by pushing
-		 * the flag, and possibly the argument, onto our saved argument
-		 * vector.  Later this is passed to gtk_init.
-		 *
-		 * Add our arguments as static argument to the master
-		 * client.
-		 */
-		our_argv[our_argc] = g_strconcat ("--",
-						    our_gtk_options[- key].name,
-						    NULL);
-		gnome_client_add_static_arg (client, our_argv [our_argc++], NULL);
-		
-		if (arg)
-		  {
-		    our_argv[our_argc] = g_strdup (arg);
-		    gnome_client_add_static_arg (client, our_argv[our_argc++], NULL);
-		  }
-	}
-	else if (key == ARGP_KEY_INIT)
-	{
-		/* We use twice the amount of space you'd think we need,
-		 * because the user might write all options as
-		 * `--foo=bar', but we always split into two arguments,
-		 * like `-foo bar'.
-		 */
-		our_argv = (char **) g_malloc (2 * (state->argc + 1) * sizeof (char *));
-		our_argc = 0;
-		our_argv[our_argc++] = g_strdup (state->argv[0]);
-
-		/* Get the master client.  It must be defined, when
-		 * processing 'ARGP_KEY_INIT'.
-		 */
-		client= gnome_master_client ();
-	}
-	else if (key == ARGP_KEY_SUCCESS || key == ARGP_KEY_ERROR)
-	{
-		int i, copy_ac = our_argc;
-		char **copy = (char **) g_malloc (our_argc * sizeof (char *));
-
-		memcpy (copy, our_argv, our_argc * sizeof (char *));
-		our_argv[our_argc] = NULL;
-
-		gtk_init (&our_argc, &our_argv);
-		gdk_imlib_init ();
-		gnome_type_init();
-
-		gtk_rc_set_image_loader(imlib_image_loader);
-		gnome_rc_parse (program_invocation_name);
-
-		for (i = 0; i < copy_ac; ++i)
-			g_free (copy[i]);
-		g_free (copy);
-		g_free (our_argv); our_argv = NULL;
-	}
-	else
-		return ARGP_ERR_UNKNOWN;
-
-	return 0;
-}
-
-static const struct argp our_gtk_parser =
-{
-	our_gtk_options,		/* Options.  */
-	our_gtk_parse_func,		/* The parser function.  */
-	NULL,				/* Description of other args.  */
-	NULL,				/* Extra text for long help.  */
-	NULL,				/* Child arguments.  */
-	NULL,				/* Help filter.  */
-	PACKAGE			/* Translation domain.  */
-};
-
-void
-gnomeui_register_arguments (void)
-{
-	gnome_parse_register_arguments (&our_gtk_parser);
-}
-
-
-
-/* The default version hook tells everybody that this is a free Gnome
- * program.  You must override if that is incorrect.
- */
-static void
-default_version_func (FILE *stream, struct argp_state *state)
-{
-	fprintf (stream, "Gnome %s %s\n", gnome_app_id,
-		 argp_program_version ? argp_program_version : "");
-	
-	/* FIXME: define a way to set copyright date so we can print it
-	 * here?
-	 */
-}
+static GnomeClient *client = NULL;
 
 /* handeling of automatic syncing of gnome_config stuff */
 static int config_was_changed = FALSE;
 static int sync_timeout = -1;
+static gboolean gnome_initialized = FALSE;
 
 static int
 sync_timeout_f (gpointer data)
@@ -226,79 +94,217 @@ atexit_handler(void)
 		gnome_config_sync();
 }
 
-error_t
-gnome_init_with_data (char *app_id, struct argp *app_args,
-		      int argc, char **argv,
-		      unsigned int flags, int *arg_index,
-		      void *user_data)
+static void
+gnome_add_gtk_arg_callback(poptContext con,
+			   enum poptCallbackReason reason,
+			   const struct poptOption * opt,
+			   const char * arg, void * data)
 {
-	error_t retval;
+  static GPtrArray *gtk_args = NULL;
+  char *newstr, *newarg;
+  int final_argc;
+  char **final_argv;
+
+  if(gnome_initialized) {
+    /* gnome has already been initialized, so app might be making a
+       second pass over the args - just ignore */
+    return;
+  }
+
+  switch(reason) {
+  case POPT_CALLBACK_REASON_PRE:
+    gtk_args = g_ptr_array_new();
+    g_ptr_array_add(gtk_args,
+		    g_strdup(poptGetInvocationName(con)));
+    break;
+
+  case POPT_CALLBACK_REASON_OPTION:
+    newstr = g_copy_strings("--", opt->longName, NULL);
+    g_ptr_array_add(gtk_args, newstr);
+    gnome_client_add_static_arg(client, newstr, NULL);
+
+    if(opt->argInfo == POPT_ARG_STRING) {
+      g_ptr_array_add(gtk_args, (char *)arg);
+      gnome_client_add_static_arg(client, arg, NULL);
+    }
+    break;
+
+  case POPT_CALLBACK_REASON_POST:
+    g_ptr_array_add(gtk_args, NULL);
+    final_argc = gtk_args->len - 1;
+    final_argv = g_memdup(gtk_args->pdata, sizeof(char *) * gtk_args->len);
+
+    gtk_init(&final_argc, &final_argv);
+
+    g_free(final_argv);
+#ifdef GNOME_CLIENT_WILL_COPY_ARGS
+    g_strfreev(gtk_args->pdata); /* this weirdness is here to eliminate
+					  memory leaks if gtk_init() modifies
+					  argv[] */
+
+    g_ptr_array_free(gtk_args, FALSE);
+#else
+    g_ptr_array_free(gtk_args, TRUE);
+#endif
+    gtk_args = NULL;
+    break;
+  }
+}
+
+static const struct poptOption gtk_options[] = {
+  {NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
+   &gnome_add_gtk_arg_callback, 0, NULL},
+  {"gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+   N_("Gdk debugging flags to set"), N_("FLAGS")},
+  {"gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+   N_("Gdk debugging flags to unset"), N_("FLAGS")},
+  {"display", '\0', POPT_ARG_STRING, NULL, 0,
+   N_("X display to use"), N_("DISPLAY")},
+  {"sync", '\0', POPT_ARG_NONE, NULL, 0,
+   N_("Make X calls synchronous"), NULL},
+  {"no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
+   N_("Don't use X shared memory extension"), NULL},
+  {"name", '\0', POPT_ARG_STRING, NULL, 0,
+   N_("Program name as used by the window manager"), N_("NAME")},
+  {"class", '\0', POPT_ARG_STRING, NULL, 0,
+   N_("Program class as used by the window manager"), N_("CLASS")},
+  {"gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
+   NULL, N_("HOST")},
+  {"gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
+   NULL, N_("PORT")},
+  {"xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
+   NULL, N_("STYLE")},
+  {"xim-status", '\0', POPT_ARG_STRING, NULL, 0,
+   NULL, N_("STYLE")},
+  {"gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+   N_("Gtk+ debugging flags to set"), N_("FLAGS")},
+  {"gtk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+   N_("Gtk+ debugging flags to unset"), N_("FLAGS")},
+  {"g-fatal-warnings", '\0', POPT_ARG_NONE, NULL, 0,
+   N_("Make all warnings fatal"), NULL},
+  {"gtk-module", '\0', POPT_ARG_STRING, NULL, 0,
+   N_("Load an additional Gtk module"), N_("MODULE")},
+  {NULL, '\0', 0, NULL, 0}
+};
+
+static void
+gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
+	      const struct poptOption *opt)
+{
+#ifdef USE_SEGV_HANDLE
+  struct sigaction sa;
+#endif
+
+  if(gnome_initialized)
+    return;
+
+  switch(reason) {
+  case POPT_CALLBACK_REASON_PRE:
 
 #ifdef USE_SEGV_HANDLE
-	struct sigaction sa;
-
-	/* Debugging segv when you have a pointer grab is less than
-	 * useful, Sop instead of removing the above #if 0, fix the DND
-	 *
+    /* 
 	 * Yes, we do this twice, so if an error occurs before init,
 	 * it will be caught, and if it happens after init, we'll override
 	 * gtk's handler
 	 */
-	memset(&sa, 0, sizeof(sa));
-	sa.sa_handler = (gpointer)gnome_segv_handle;
-	sigaction(SIGSEGV, &sa, NULL);
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_handler = (gpointer)gnome_segv_handle;
+    sigaction(SIGSEGV, &sa, NULL);
 #endif
-	/* now we replace gtk_init() with gnome_init() in our apps */
-	gtk_set_locale();
+    gtk_set_locale();
+    client = gnome_master_client();
 
-	gnome_client_init ();
-	gnomelib_register_arguments ();
-	gnomeui_register_arguments ();
-
-	/* On non-glibc systems, this is not set up for us.  */
-	if (!program_invocation_name) {
-		char *arg;
-	  
-		program_invocation_name = argv[0];
-		arg = strrchr (argv[0], '/');
-		program_invocation_short_name =
-		  arg ? (arg + 1) : program_invocation_name;
-	}
-	
-	gnomelib_init (app_id);
-
-	/* Load UI preferences. Should this go here? */
-	gnome_preferences_load();
-
-	if (! argp_program_version_hook)
-		argp_program_version_hook = default_version_func;
-
-	/* Now parse command-line arguments.  */
-	retval = gnome_parse_arguments_with_data (app_args, argc, argv,
-						  flags, arg_index, user_data);
-	
-	/*now set up the handeling of automatic config syncing*/
-	gnome_config_set_set_handler(set_handler,NULL);
-	gnome_config_set_sync_handler(sync_handler,NULL);
-	atexit(atexit_handler);
-
+    break;
+  case POPT_CALLBACK_REASON_POST:
+    gdk_imlib_init();
+    gnome_type_init();
+    gtk_rc_set_image_loader(imlib_image_loader);
+    gnome_rc_parse(program_invocation_name);
+    gnome_preferences_load();
+    gnome_config_set_set_handler(set_handler,NULL);
+    gnome_config_set_sync_handler(sync_handler,NULL);
+    atexit(atexit_handler);
+    
 #ifdef USE_SEGV_HANDLE
-	memset(&sa, 0, sizeof(sa));
-	sa.sa_handler = (gpointer)gnome_segv_handle;
-	sigaction(SIGSEGV, &sa, NULL);
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_handler = (gpointer)gnome_segv_handle;
+    sigaction(SIGSEGV, &sa, NULL);
 #endif
-	return retval;
+    
+    gnome_initialized = TRUE;
+    break;
+  case POPT_CALLBACK_REASON_OPTION:
+    if(opt->val == -1) {
+      g_print ("Gnome %s %s\n", gnome_app_id, gnome_app_version);
+      exit(0);
+      _exit(1);
+    }
+    break;
+  }
 }
 
-error_t
-gnome_init (char *app_id, struct argp *app_args,
-	    int argc, char **argv,
-	    unsigned int flags, int *arg_index)
+static const struct poptOption gnome_options[] = {
+  {NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
+   &gnome_init_cb, 0, NULL, NULL},
+  {"version", 'V', POPT_ARG_NONE, NULL, -1},
+  POPT_AUTOHELP
+  {NULL, '\0', 0, NULL, 0}
+};
+
+static void
+gnome_register_options(void)
 {
-	return gnome_init_with_data (app_id, app_args, argc, argv,
-				     flags, arg_index, NULL);
+  gnomelib_register_popt_table(gtk_options, "GTK options");
+
+  gnomelib_register_popt_table(gnome_options, "GNOME GUI options");
 }
 
+int
+gnome_init_with_popt_table(const char *app_id,
+			   const char *app_version,
+			   int argc, char **argv,
+			   const struct poptOption *options,
+			   int flags,
+			   poptContext *return_ctx)
+{
+  poptContext ctx;
+  char *appdesc;
+  g_return_val_if_fail(gnome_initialized == FALSE, -1);
+
+  gnomelib_init (app_id, app_version);
+
+  gnome_register_options();
+
+  gnome_client_init();
+
+  if(options) {
+    appdesc = alloca(sizeof(" options") + strlen(app_id));
+    strcpy(appdesc, app_id); strcat(appdesc, " options");
+    gnomelib_register_popt_table(options, appdesc);
+  }
+
+  ctx = gnomelib_parse_args(argc, argv, flags);
+
+  if(return_ctx)
+    *return_ctx = ctx;
+  else
+    poptFreeContext(ctx);
+
+  return 0;
+}
+
+int
+gnome_init(const char *app_id,
+	   const char *app_version,
+	   int argc, char **argv)
+{
+  g_return_val_if_fail(gnome_initialized == FALSE, -1);
+
+  gnome_init_with_popt_table(app_id, app_version,
+			     argc, argv, NULL, 0, NULL);
+
+  return 0;
+}
 
 /* perhaps this belongs in libgnome.. move it if you like. */
 

@@ -139,6 +139,7 @@ gnome_headers = \
 	gnome-icon-item.h		\
 	gnome-icon-sel.h		\
 	gnome-icon-text.h		\
+	gnome-init.h			\
 	gnome-lamp.h			\
 	gnome-less.h			\
 	gnome-messagebox.h		\

@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
   GString *mystr;
   int firstarg;
   struct sigaction sa;
+  poptContext ctx;
+  char **args;
 
   /* We do this twice to make sure we don't start running ourselves... :) */
   memset(&sa, 0, sizeof(sa));
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
 
   bindtextdomain (PACKAGE, GNOMELOCALEDIR);
   textdomain (PACKAGE);
-  gnome_init("gnome_segv", NULL, 1, argv, 0, &firstarg);
+  gnome_init_with_popt_table("gnome_segv", VERSION, argc, argv, NULL, 0, &ctx);
 
   memset(&sa, 0, sizeof(sa));
   sa.sa_handler = SIG_IGN;
@@ -65,8 +67,10 @@ int main(int argc, char *argv[])
 			  TRUE);
 
   mystr = g_string_new(NULL);
+  args = poptGetArgs(ctx);
   g_string_sprintf(mystr, _("Application \"%s\" has a bug.\nSIGSEGV received at PC %#lx in PID %d.\n\n\nDo you want to exit this program?"),
-		   argv[firstarg], atol(argv[firstarg + 1]), getppid());
+		   args[0], atoi(args[1]), getppid());
+  poptFreeContext(ctx);
   lbl = gtk_label_new(mystr->str);
   gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->vbox),
 		    lbl);

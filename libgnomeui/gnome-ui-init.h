@@ -3,14 +3,19 @@
 
 BEGIN_GNOME_DECLS
 
-error_t gnome_init             	   (char *app_id, struct argp *app_parser,
-			       	    int argc, char **argv,
-			       	    unsigned int flags, int *arg_index);
-error_t gnome_init_with_data   	   (char *app_id, struct argp *app_parser,
-			       	    int argc, char **argv,
-			       	    unsigned int flags, int *arg_index,
-			       	    void *user_data);
-void    gnomeui_register_arguments (void);
+#include <popt.h>
+
+/* After these functions return, gnome is initialized and you can do
+   whatever you like. */
+int gnome_init(const char *app_id, const char *app_version,
+	       int argc, char **argv);
+/* return_ctx can be NULL if you don't want the poptContext to be returned */
+int gnome_init_with_popt_table(const char *app_id,
+			       const char *app_version,
+			       int argc, char **argv,
+			       const struct poptOption *options,
+			       int flags,
+			       poptContext *return_ctx);
 
 END_GNOME_DECLS
 

@@ -1017,7 +1017,8 @@ main(int argc, char **argv)
 {
 	GtkWidget *window, *hbox, *vbox, *table, *w;
 
-	gnome_init("stock_demo", NULL, argc, argv, 0, NULL);
+	gnome_init("stock_demo", VERSION, argc, argv);
+
 	textdomain(PACKAGE);
 
 	window = gnome_app_new("Gnome Stock Test", "Gnome Stock Test");

@@ -414,7 +414,7 @@ gnome_dentry_edit_split (char *text, int *argcp, char ***argvp)
     q = p;
     while (*p && ! isspace (*p))
       ++p;
-    (*argvp)[count++] = (char *) strndup (q, p - q);
+    (*argvp)[count++] = (char *) g_strndup (q, p - q);
   }
 
   (*argvp)[count] = NULL;
@@ -439,7 +439,7 @@ static void gnome_dentry_edit_sync_dentry(GnomeDEntryEdit * dee,
   if (text[0] != '\0') dentry->comment = g_strdup(text);
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->exec_entry));
-  gnome_string_array_free(dentry->exec);
+  g_strfreev(dentry->exec);
   if (text[0] != '\0') {
     gnome_dentry_edit_split (text, &dentry->exec_length, &dentry->exec);
   } else {

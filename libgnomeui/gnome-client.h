@@ -164,6 +164,7 @@ struct _GnomeClientClass
 
 guint        gnome_client_get_type (void);
 
+void gnome_client_init (void);
 
 /* Obsolet, use 'gnome_master_client' instead.  This function will be
    removed soon.  */
