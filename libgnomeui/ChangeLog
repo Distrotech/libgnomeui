@@ -1,3 +1,11 @@
+1998-12-10  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: gnome_mdi_active_*() become
+	gnome_mdi_get_active_*().
+	* gnome-mdi.c (book_button_release): raise the app with the
+	destination notebook. some documentation fixes.
+	(gnome_mdi_set_active_view): remove all the focus stuff.
+
 1998-12-09  Dave Camp  <campd@oit.edu>
 	* gnome-dateedit.c (select_clicked): Fixed the problem where 
 	the first time the Calendar button was pushed it didn't place

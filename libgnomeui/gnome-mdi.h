@@ -141,7 +141,7 @@ gint          gnome_mdi_add_view            (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_add_toplevel_view   (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
 
-GtkWidget     *gnome_mdi_active_view        (GnomeMDI *);
+GtkWidget     *gnome_mdi_get_active_view    (GnomeMDI *);
 void          gnome_mdi_set_active_view     (GnomeMDI *, GtkWidget *);
 
 /* manipulating children */
@@ -153,10 +153,10 @@ void          gnome_mdi_open_toplevel       (GnomeMDI *);
 
 void          gnome_mdi_update_child        (GnomeMDI *, GnomeMDIChild *);
 
-GnomeMDIChild *gnome_mdi_active_child       (GnomeMDI *);
+GnomeMDIChild *gnome_mdi_get_active_child   (GnomeMDI *);
 GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
 
-GnomeApp      *gnome_mdi_active_window      (GnomeMDI *);
+GnomeApp      *gnome_mdi_get_active_window  (GnomeMDI *);
 
 /*
  * the following two functions are here to make life easier if an application opens windows
@@ -171,8 +171,7 @@ void          gnome_mdi_unregister          (GnomeMDI *, GtkObject *);
 
 /*
  * convenience functions for retrieveing GnomeMDIChild and GnomeApp
- * objects associated with a particular view. These obsolete the
- * VIEW_GET_*() macros.
+ * objects associated with a particular view.
  */
 GnomeApp      *gnome_mdi_get_app_from_view    (GtkWidget *);
 GnomeMDIChild *gnome_mdi_get_child_from_view  (GtkWidget *);

@@ -80,9 +80,9 @@ static void            toplevel_focus           (GnomeApp *, GdkEventFocus *, Gn
 
 static void            top_add_view             (GnomeMDI *, GnomeMDIChild *, GtkWidget *);
 
-static GnomeUIInfo     *copy_ui_info_tree       (GnomeUIInfo *);
+static GnomeUIInfo     *copy_ui_info_tree       (const GnomeUIInfo *);
 static void            free_ui_info_tree        (GnomeUIInfo *);
-static gint            count_ui_info_items      (GnomeUIInfo *);
+static gint            count_ui_info_items      (const GnomeUIInfo *);
 
 /* convenience functions that call child's "virtual" functions */
 static GList           *child_create_menus       (GnomeMDIChild *, GtkWidget *);
@@ -282,7 +282,8 @@ static void gnome_mdi_init (GnomeMDI *mdi)
  * Creates a new MDI object. @appname and @title are used for
  * MDI's calling gnome_app_new(). 
  * 
- * Return value: A pointer to a newly allocated GnomeMDI object.
+ * Return value:
+ * A pointer to a new GnomeMDI object.
  **/
 GtkObject *gnome_mdi_new(gchar *appname, gchar *title) {
 	GnomeMDI *mdi;
@@ -309,7 +310,7 @@ static GtkWidget *child_set_label (GnomeMDIChild *child, GtkWidget *label)
 }
 
 /* the app-helper support routines */
-static GnomeUIInfo *copy_ui_info_tree (GnomeUIInfo source[])
+static GnomeUIInfo *copy_ui_info_tree (const GnomeUIInfo source[])
 {
 	GnomeUIInfo *copy;
 	int i, count;
@@ -337,7 +338,7 @@ static GnomeUIInfo *copy_ui_info_tree (GnomeUIInfo source[])
 	return copy;
 }
 
-static gint count_ui_info_items (GnomeUIInfo *ui_info)
+static gint count_ui_info_items (const GnomeUIInfo *ui_info)
 {
 	gint num;
 	
@@ -600,6 +601,9 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 					gtk_container_remove(GTK_CONTAINER(old_book), view);
 		
 					book_add_view(GTK_NOTEBOOK(new_book), view);
+
+					app = gnome_mdi_get_app_from_view(view);
+					gdk_window_raise(GTK_WIDGET(app)->window);
 		
 					if(old_book->cur_page == NULL) {
 						app = GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(old_book)));
@@ -1078,8 +1082,6 @@ void gnome_mdi_set_active_view (GnomeMDI *mdi, GtkWidget *view)
 	/* TODO: hmmm... I dont know how to give focus to the window, so that it would
 	   receive keyboard events */
 	gdk_window_raise(GTK_WIDGET(window)->window);
-	gtk_window_set_focus(window, view);
-	gtk_window_activate_focus(window);
 }
 
 /**
@@ -1094,11 +1096,11 @@ void gnome_mdi_set_active_view (GnomeMDI *mdi, GtkWidget *view)
  * An "add_view" signal is emitted to the MDI after the view has been
  * created, but before it is shown and added to the MDI, with a pointer to
  * the created view as its parameter. The view is added to the MDI only if
- * the signal handler (if it exists) returns TRUE. If the handler returns
- * FALSE, the created view is destroyed and not added to the MDI. 
+ * the signal handler (if it exists) returns %TRUE. If the handler returns
+ * %FALSE, the created view is destroyed and not added to the MDI. 
  * 
  * Return value:
- * TRUE if adding the view succeeded and FALSE otherwise.
+ * %TRUE if adding the view succeeded and %FALSE otherwise.
  **/
 gint gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
 {
@@ -1163,6 +1165,7 @@ gint gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
  * toplevel window unless the active one has no views in it. 
  * 
  * Return value: 
+ * %TRUE if adding the view succeeded and %FALSE otherwise.
  **/
 gint gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
 {
@@ -1219,10 +1222,10 @@ gint gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
  * Removes a view from an MDI. 
  * A "remove_view" signal is emitted to the MDI before actually removing
  * view. The view is removed only if the signal handler (if it exists and
- * the @force is set to FALSE) returns TRUE. 
+ * the @force is set to %FALSE) returns %TRUE. 
  * 
  * Return value: 
- * TRUE if the view was removed and FALSE otherwise.
+ * %TRUE if the view was removed and %FALSE otherwise.
  **/
 gint gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view, gint force)
 {
@@ -1288,11 +1291,11 @@ gint gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view, gint force)
  * a call to gnome_mdi_add_view. 
  * First an "add_child" signal is emitted to the MDI with a pointer to the
  * child as its parameter. The child is added to the MDI only if the signal
- * handler (if it exists) returns TRUE. If the handler returns FALSE, the
+ * handler (if it exists) returns %TRUE. If the handler returns %FALSE, the
  * child is not added to the MDI. 
  * 
  * Return value: 
- * TRUE if the child was added successfully and FALSE otherwise.
+ * %TRUE if the child was added successfully and %FALSE otherwise.
  **/
 gint gnome_mdi_add_child (GnomeMDI *mdi, GnomeMDIChild *child)
 {
@@ -1327,9 +1330,10 @@ gint gnome_mdi_add_child (GnomeMDI *mdi, GnomeMDIChild *child)
  * Removes a child and all of its views from the MDI. 
  * A "remove_child" signal is emitted to the MDI with @child as its parameter
  * before actually removing the child. The child is removed only if the signal
- * handler (if it exists and the @force is set to FALSE) returns TRUE. 
+ * handler (if it exists and the @force is set to %FALSE) returns %TRUE. 
  * 
  * Return value: 
+ * %TRUE if the removal was successful and %FALSE otherwise.
  **/
 gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
 {
@@ -1371,11 +1375,11 @@ gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
  * Removes all children and all views from the MDI. 
  * A "remove_child" signal is emitted to the MDI for each child before
  * actually trying to remove any. If signal handlers for all children (if
- * they exist and the @force is set to FALSE) return TRUE, all children
+ * they exist and the @force is set to %FALSE) return %TRUE, all children
  * and their views are removed and none otherwise. 
  * 
  * Return value:
- * TRUE if the removal was successful and FALSE otherwise.
+ * %TRUE if the removal was successful and %FALSE otherwise.
  **/
 gint gnome_mdi_remove_all (GnomeMDI *mdi, gint force)
 {
@@ -1609,16 +1613,16 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 }
 
 /**
- * gnome_mdi_active_child:
+ * gnome_mdi_get_active_child:
  * @mdi: A pointer to a GnomeMDI object.
  * 
  * Description:
  * Returns a pointer to the active GnomeMDIChild object.
  * 
  * Return value: 
- * A pointer to the active GnomeMDIChild object. NULL, if there is none.
+ * A pointer to the active GnomeMDIChild object. %NULL, if there is none.
  **/
-GnomeMDIChild *gnome_mdi_active_child (GnomeMDI *mdi)
+GnomeMDIChild *gnome_mdi_get_active_child (GnomeMDI *mdi)
 {
 	g_return_val_if_fail(mdi != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
@@ -1630,7 +1634,7 @@ GnomeMDIChild *gnome_mdi_active_child (GnomeMDI *mdi)
 }
 
 /**
- * gnome_mdi_active_view:
+ * gnome_mdi_get_active_view:
  * @mdi: A pointer to a GnomeMDI object.
  * 
  * Description:
@@ -1639,7 +1643,7 @@ GnomeMDIChild *gnome_mdi_active_child (GnomeMDI *mdi)
  * Return value: 
  * A pointer to a GtkWidget *.
  **/
-GtkWidget *gnome_mdi_active_view(GnomeMDI *mdi)
+GtkWidget *gnome_mdi_get_active_view(GnomeMDI *mdi)
 {
 	g_return_val_if_fail(mdi != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
@@ -1648,7 +1652,7 @@ GtkWidget *gnome_mdi_active_view(GnomeMDI *mdi)
 }
 
 /**
- * gnome_mdi_active_window:
+ * gnome_mdi_get_active_window:
  * @mdi: A pointer to a GnomeMDI object.
  * 
  * Description:
@@ -1657,7 +1661,7 @@ GtkWidget *gnome_mdi_active_view(GnomeMDI *mdi)
  * Return value:
  * A pointer to a GnomeApp that has the focus.
  **/
-GnomeApp *gnome_mdi_active_window (GnomeMDI *mdi)
+GnomeApp *gnome_mdi_get_active_window (GnomeMDI *mdi)
 {
 	g_return_val_if_fail(mdi != NULL, NULL);
 	g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
@@ -1676,8 +1680,8 @@ GnomeApp *gnome_mdi_active_window (GnomeMDI *mdi)
  * this structure is copied, the menus are created with
  * gnome_app_create_menus_with_data() function with mdi as the callback
  * user data. Finally, the pointer to the copy is assigned to the new
- * toplevel window (a GnomeApp widget) as data with key
- * %GNOME_MDI_MENUBAR_INFO_KEY. 
+ * toplevel window (a GnomeApp widget) and can be obtained by calling
+ * &gnome_mdi_get_menubar_info.
  **/
 void gnome_mdi_set_menubar_template (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl)
 {
@@ -1698,7 +1702,8 @@ void gnome_mdi_set_menubar_template (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl)
  * this structure is copied, the toolbar is created with
  * gnome_app_create_toolbar_with_data() function with mdi as the callback
  * user data. Finally, the pointer to the copy is assigned to the new toplevel
- * window (a GnomeApp widget) as data with key %GNOME_MDI_TOOLBAR_INFO_KEY. 
+ * window (a GnomeApp widget) and can be retrieved with a call to
+ * &gnome_mdi_get_toolbar_info. 
  **/
 void gnome_mdi_set_toolbar_template (GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl)
 {
@@ -1737,10 +1742,10 @@ void gnome_mdi_set_child_menu_path (GnomeMDI *mdi, const gchar *path)
  * Description:
  * Sets the position for insertion of menu items used to activate the MDI
  * children that were added to the MDI. See gnome_app_find_menu_pos for
- * details on menu paths. If the path is not set or set to NULL, these menu
+ * details on menu paths. If the path is not set or set to %NULL, these menu
  * items aren't going to be inserted in the MDI menu structure. Note that if
  * you want all menu items to be inserted in their own submenu, you have to
- * create that submenu (and leave it empty, of course). 
+ * create that submenu (and leave it empty, of course).
  **/
 void gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path)
 {
@@ -1756,7 +1761,7 @@ void gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path)
 /**
  * gnome_mdi_register:
  * @mdi: A pointer to a GnomeMDI object.
- * @o: Object to register.
+ * @object: Object to register.
  * 
  * Description:
  * Registers GtkObject @owith MDI. 
@@ -1768,23 +1773,23 @@ void gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path)
  * is closed. If no objects are registered, closing the last MDI window
  * results in MDI being destroyed. 
  **/
-void gnome_mdi_register (GnomeMDI *mdi, GtkObject *o)
+void gnome_mdi_register (GnomeMDI *mdi, GtkObject *object)
 {
-	if(!g_slist_find(mdi->registered, o))
-		mdi->registered = g_slist_append(mdi->registered, o);
+	if(!g_slist_find(mdi->registered, object))
+		mdi->registered = g_slist_append(mdi->registered, object);
 }
 
 /**
  * gnome_mdi_unregister:
  * @mdi: A pointer to a GnomeMDI object.
- * @o: Object to unregister.
+ * @object: Object to unregister.
  * 
  * Description:
- * Removes GtkObject @o from the list of registered objects. 
+ * Removes GtkObject @object from the list of registered objects. 
  **/
-void gnome_mdi_unregister (GnomeMDI *mdi, GtkObject *o)
+void gnome_mdi_unregister (GnomeMDI *mdi, GtkObject *object)
 {
-	mdi->registered = g_slist_remove(mdi->registered, o);
+	mdi->registered = g_slist_remove(mdi->registered, object);
 }
 
 /**
@@ -1881,7 +1886,8 @@ void gnome_mdi_set_tab_pos (GnomeMDI *mdi, GtkPositionType pos)
  * @app: A pointer to a GnomeApp widget created by the MDI.
  * 
  * Return value: 
- * A GnomeUIInfo array used for menubar in @app if the menubar has been created with a template. NULL otherwise.
+ * A GnomeUIInfo array used for menubar in @app if the menubar has been created with a template.
+ * %NULL otherwise.
  **/
 GnomeUIInfo *gnome_mdi_get_menubar_info (GnomeApp *app)
 {
@@ -1893,7 +1899,8 @@ GnomeUIInfo *gnome_mdi_get_menubar_info (GnomeApp *app)
  * @app: A pointer to a GnomeApp widget created by the MDI.
  * 
  * Return value: 
- * A GnomeUIInfo array used for toolbar in @app if the toolbar has been created with a template. NULL otherwise.
+ * A GnomeUIInfo array used for toolbar in @app if the toolbar has been created with a template.
+ * %NULL otherwise.
  **/
 GnomeUIInfo *gnome_mdi_get_toolbar_info (GnomeApp *app)
 {
@@ -1905,7 +1912,8 @@ GnomeUIInfo *gnome_mdi_get_toolbar_info (GnomeApp *app)
  * @app: A pointer to a GnomeApp widget created by the MDI.
  * 
  * Return value: 
- * A GnomeUIInfo array used for child's menus in @app if they have been created with a template. NULL otherwise.
+ * A GnomeUIInfo array used for child's menus in @app if they have been created with a template.
+ * %NULL otherwise.
  **/
 GnomeUIInfo *gnome_mdi_get_child_menu_info (GnomeApp *app)
 {
