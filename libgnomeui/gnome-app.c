@@ -26,7 +26,7 @@ static GtkWindowClass *parent_class = NULL;
 
 /* keep in sync with GnomeAppWidgetPositionType */
 static char *locations [] = {
-	"top", "botton", "left", "right", "float,", NULL
+	"top", "bottom", "left", "right", "float,", NULL
 };
 
 static GnomeAppWidgetPositionType
