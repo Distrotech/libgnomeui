@@ -78,6 +78,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_NEW         "New"
 #define GNOME_STOCK_PIXMAP_OPEN        "Open"
 #define GNOME_STOCK_PIXMAP_SAVE        "Save"
+#define GNOME_STOCK_PIXMAP_SAVE_AS     "Save As"
 #define GNOME_STOCK_PIXMAP_CUT         "Cut"
 #define GNOME_STOCK_PIXMAP_COPY        "Copy"
 #define GNOME_STOCK_PIXMAP_PASTE       "Paste"
@@ -277,6 +278,7 @@ GtkWidget             *gnome_stock_button          (char *type);
 
 #define GNOME_STOCK_MENU_NEW      "Menu_New"
 #define GNOME_STOCK_MENU_SAVE     "Menu_Save"
+#define GNOME_STOCK_MENU_SAVE_AS  "Menu_Save As"
 #define GNOME_STOCK_MENU_OPEN     "Menu_Open"
 #define GNOME_STOCK_MENU_QUIT     "Menu_Quit"
 #define GNOME_STOCK_MENU_CUT      "Menu_Cut"

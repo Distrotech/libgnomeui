@@ -1,3 +1,14 @@
+Tue Mar 17 22:45:47 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock/stock_demo: added "Save As" icon.
+
+Tue Mar 17 22:28:47 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.h: added dummy variable to include N_("blah")s for
+	i18n.
+
+	* gnome-stock.c (gnome_stock_button): use dgettext, not gettext.
+
 1998-03-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (gnome_app_do_menu_creation): The activate

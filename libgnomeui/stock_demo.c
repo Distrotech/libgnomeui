@@ -38,7 +38,7 @@ create_menu(GtkWidget *window)
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Save as..."));
+        w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE_AS, _("Save as..."));
         gtk_widget_show(w);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -185,6 +185,7 @@ struct _TbItems {
 static TbItems tb_items[] = {
 	{GNOME_STOCK_PIXMAP_NEW, NULL},
 	{GNOME_STOCK_PIXMAP_SAVE, NULL},
+	{GNOME_STOCK_PIXMAP_SAVE_AS, NULL},
 	{GNOME_STOCK_PIXMAP_OPEN, NULL},
 	{GNOME_STOCK_PIXMAP_CUT, NULL},
 	{GNOME_STOCK_PIXMAP_COPY, NULL},
