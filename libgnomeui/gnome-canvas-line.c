@@ -773,23 +773,58 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 }
 
+/* Returns a copy of the line's points without the endpoint adjustments for
+ * arrowheads.
+ */
+static GnomeCanvasPoints *
+get_points (GnomeCanvasLine *line)
+{
+	GnomeCanvasPoints *points;
+	int start_ofs, end_ofs;
+
+	if (line->num_points == 0)
+		return NULL;
+
+	start_ofs = end_ofs = 0;
+
+	points = gnome_canvas_points_new (line->num_points);
+
+	/* Invariant:  if first_coords or last_coords exist, then the line's
+	 * endpoints have been adjusted.
+	 */
+
+	if (line->first_coords) {
+		start_ofs = 1;
+
+		points->coords[0] = line->first_coords[0];
+		points->coords[1] = line->first_coords[1];
+	}
+
+	if (line->last_coords) {
+		end_ofs = 1;
+
+		points->coords[2 * (line->num_points - 1)] = line->last_coords[0];
+		points->coords[2 * (line->num_points - 1) + 1] = line->last_coords[1];
+	}
+
+	memcpy (points->coords + 2 * start_ofs,
+		line->coords + 2 * start_ofs,
+		2 * (line->num_points - (start_ofs + end_ofs)) * sizeof (double));
+
+	return points;
+}
+
 static void
 gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasLine *line;
-	GnomeCanvasPoints *points;
 	GdkColor *color;
 
 	line = GNOME_CANVAS_LINE (object);
 
 	switch (arg_id) {
 	case ARG_POINTS:
-		if (line->num_points != 0) {
-			points = gnome_canvas_points_new (line->num_points);
-			memcpy (points->coords, line->coords, 2 * line->num_points * sizeof (double));
-			GTK_VALUE_POINTER (*arg) = points;
-		} else
-			GTK_VALUE_POINTER (*arg) = NULL;
+		GTK_VALUE_POINTER (*arg) = get_points (line);
 		break;
 
 	case ARG_FILL_COLOR_GDK:

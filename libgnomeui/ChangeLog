@@ -1,3 +1,26 @@
+2000-02-15  Federico Mena Quintero  <federico@helixcode.com>
+
+	* gnome-canvas.c (uta_union_clip): New function to create the
+	union of two microtile arrays while clipping the result to a given
+	rectangle.  This is based on a wonderful problem analysis and
+	patch by Michael Meeks <michael@helixcode.com>.  He deserves a
+	beer.
+	(gnome_canvas_request_redraw_uta): Use uta_union_clip().  Now we
+	only queue redraws of microtile arrays clipped against the canvas
+	visible area.  This *is* the right thing to do.
+	(gnome_canvas_set_pixels_per_unit): No longer clear the redraw
+	area before scrolling/thawing.  This hack can rest in peace now.
+
+	* gnome-canvas-line.c (get_points): New function to copy the list
+	of the line's points without the endpoint adjustments for
+	arrowheads.  Based on a patch by Rusty Conover <rconover@zootweb.com>.
+	(gnome_canvas_line_get_arg): Use get_points().
+
+2000-02-15  Christopher James Lahey  <clahey@helixcode.com>
+
+	* gnome-canvas.c (emit_event): Fixed a bug where GDK_FOCUS_CHANGE
+	events weren't being dispatched properly.
+
 2000-01-16  Federico Mena Quintero  <federico@helixcode.com>
 
 	* gnome-canvas.c (gnome_canvas_key): Do not check for the window
