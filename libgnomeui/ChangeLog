@@ -1,3 +1,12 @@
+2001-08-28  Seth Nickell  <snickell@stanford.edu>
+
+	* gnome-icon-list.c:
+
+	GTK_SELECTION_EXTENDED is deprecated and means the same
+	thing as GTK_SELECTION_MULTIPLE. GCC really doesn't like
+	having two cases that evaluate to the same thing, so we
+	nix GTK_SELECTION_EXTENDED.
+
 Mon Aug 27 01:32:00 2001  George Lebl <jirka@5z.com>
 
 	* gnome-icon-entry.[ch], gnome-icon-sel.[ch]: bring back pre-selector

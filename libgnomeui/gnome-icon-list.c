@@ -842,7 +842,6 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 		return selection_one_icon_event (gil, icon, idx, on_text, event);
 
 	case GTK_SELECTION_MULTIPLE:
-	case GTK_SELECTION_EXTENDED:
 		return selection_many_icon_event (gil, icon, idx, on_text, event);
 
 	default:
@@ -1232,7 +1231,6 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 		case GTK_SELECTION_SINGLE:
 		case GTK_SELECTION_BROWSE:
 		case GTK_SELECTION_MULTIPLE:
-		case GTK_SELECTION_EXTENDED:
 			gnome_icon_list_unselect_icon (gil, pos);
 			break;
 
@@ -1384,7 +1382,6 @@ select_icon (Gil *gil, int pos, GdkEvent *event)
 		break;
 
 	case GTK_SELECTION_MULTIPLE:
-	case GTK_SELECTION_EXTENDED:
 		emit_select (gil, TRUE, pos, event);
 		break;
 
@@ -1421,7 +1418,6 @@ unselect_icon (Gil *gil, int pos, GdkEvent *event)
 	case GTK_SELECTION_SINGLE:
 	case GTK_SELECTION_BROWSE:
 	case GTK_SELECTION_MULTIPLE:
-	case GTK_SELECTION_EXTENDED:
 		emit_select (gil, FALSE, pos, event);
 		break;
 
