@@ -1,5 +1,5 @@
-/* GnomeIconLoaders - a loader for icon-themes
- * gnome-icon-loader.c Copyright (C) 2002 Red Hat, Inc.
+/* GnomeIconThemes - a loader for icon-themes
+ * gnome-icon-theme.c Copyright (C) 2002 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 #include <glib.h>
 #include <gconf/gconf-client.h>
 
-#include "gnome-icon-loader.h"
+#include "gnome-icon-theme.h"
 #include "gnome-theme-parser.h"
 
 /* general TODO:
@@ -46,7 +46,7 @@ typedef enum
   ICON_SUFFIX_PNG,  
 } IconSuffix;
 
-struct _GnomeIconLoaderPrivate
+struct _GnomeIconThemePrivate
 {
   gboolean custom_theme;
   char *current_theme;
@@ -98,9 +98,9 @@ typedef struct
   GHashTable *icon_data;
 } IconThemeDir;
 
-static void   gnome_icon_loader_class_init (GnomeIconLoaderClass *klass);
-static void   gnome_icon_loader_init       (GnomeIconLoader      *loader);
-static void   gnome_icon_loader_finalize   (GObject              *object);
+static void   gnome_icon_theme_class_init (GnomeIconThemeClass *klass);
+static void   gnome_icon_theme_init       (GnomeIconTheme      *icon_theme);
+static void   gnome_icon_theme_finalize   (GObject              *object);
 static void   theme_destroy                (IconTheme            *theme);
 static void   theme_dir_destroy            (IconThemeDir         *dir);
 static char * theme_lookup_icon            (IconTheme            *theme,
@@ -111,11 +111,11 @@ static char * theme_lookup_icon            (IconTheme            *theme,
 static void   theme_list_icons             (IconTheme            *theme,
 					    GHashTable           *icons,
 					    GQuark                context);
-static void   theme_subdir_load            (GnomeIconLoader      *loader,
+static void   theme_subdir_load            (GnomeIconTheme      *icon_theme,
 					    IconTheme            *theme,
 					    GnomeThemeFile       *theme_file,
 					    char                 *subdir);
-static void   blow_themes                  (GnomeIconLoaderPrivate *priv);
+static void   blow_themes                  (GnomeIconThemePrivate *priv);
 static void   gnome_icon_data_free         (GnomeIconData         *icon_data);
 
 static IconSuffix suffix_from_name         (const char           *name);
@@ -125,7 +125,7 @@ static guint		 signal_changed = 0;
 
 
 GType
-gnome_icon_loader_get_type (void)
+gnome_icon_theme_get_type (void)
 {
   static GType type = 0;
 
@@ -133,40 +133,40 @@ gnome_icon_loader_get_type (void)
     {
       static const GTypeInfo info =
 	{
-	  sizeof (GnomeIconLoaderClass),
+	  sizeof (GnomeIconThemeClass),
 	  NULL,           /* base_init */
 	  NULL,           /* base_finalize */
-	  (GClassInitFunc) gnome_icon_loader_class_init,
+	  (GClassInitFunc) gnome_icon_theme_class_init,
 	  NULL,           /* class_finalize */
 	  NULL,           /* class_data */
-	  sizeof (GnomeIconLoader),
+	  sizeof (GnomeIconTheme),
 	  0,              /* n_preallocs */
-	  (GInstanceInitFunc) gnome_icon_loader_init,
+	  (GInstanceInitFunc) gnome_icon_theme_init,
 	};
 
-      type = g_type_register_static (G_TYPE_OBJECT, "GnomeIconLoader", &info, 0);
+      type = g_type_register_static (G_TYPE_OBJECT, "GnomeIconTheme", &info, 0);
     }
 
   return type;
 }
 
-GnomeIconLoader *
-gnome_icon_loader_new (void)
+GnomeIconTheme *
+gnome_icon_theme_new (void)
 {
-  return g_object_new (GNOME_TYPE_ICON_LOADER, NULL);
+  return g_object_new (GNOME_TYPE_ICON_THEME, NULL);
 }
 
 static void
-gnome_icon_loader_class_init (GnomeIconLoaderClass *klass)
+gnome_icon_theme_class_init (GnomeIconThemeClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
-  gobject_class->finalize = gnome_icon_loader_finalize;
+  gobject_class->finalize = gnome_icon_theme_finalize;
 
   signal_changed = g_signal_new ("changed",
 				 G_TYPE_FROM_CLASS (klass),
 				 G_SIGNAL_RUN_LAST,
-				 G_STRUCT_OFFSET (GnomeIconLoaderClass, changed),
+				 G_STRUCT_OFFSET (GnomeIconThemeClass, changed),
 				 NULL, NULL,
 				 g_cclosure_marshal_VOID__VOID,
 				 G_TYPE_NONE, 0);
@@ -178,8 +178,8 @@ theme_changed (GConfClient* client,
 	       GConfEntry *entry,
 	       gpointer user_data)
 {
-  GnomeIconLoader *loader = user_data;
-  GnomeIconLoaderPrivate *priv = loader->priv;
+  GnomeIconTheme *icon_theme = user_data;
+  GnomeIconThemePrivate *priv = icon_theme->priv;
   const char *str;
   
 
@@ -192,17 +192,17 @@ theme_changed (GConfClient* client,
   priv->current_theme = g_strdup (str);
 
   blow_themes (priv);
-  g_signal_emit (G_OBJECT (loader), signal_changed, 0);
+  g_signal_emit (G_OBJECT (icon_theme), signal_changed, 0);
 }
 
 static void
-setup_gconf_handler (GnomeIconLoader *loader)
+setup_gconf_handler (GnomeIconTheme *icon_theme)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   GConfClient *client;
   char *theme;
   
-  priv = loader->priv;
+  priv = icon_theme->priv;
 
   client = gconf_client_get_default ();
 
@@ -216,7 +216,7 @@ setup_gconf_handler (GnomeIconLoader *loader)
   priv->theme_changed_id = gconf_client_notify_add (client,
 						    "/desktop/gnome/interface/icon_theme",
 						    theme_changed,
-						    loader, NULL, NULL);
+						    icon_theme, NULL, NULL);
 
   theme = gconf_client_get_string (client,
 				   "/desktop/gnome/interface/icon_theme",
@@ -232,12 +232,12 @@ setup_gconf_handler (GnomeIconLoader *loader)
 }
 
 static void
-remove_gconf_handler (GnomeIconLoader *loader)
+remove_gconf_handler (GnomeIconTheme *icon_theme)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   GConfClient *client;
   
-  priv = loader->priv;
+  priv = icon_theme->priv;
 
   g_assert (priv->theme_changed_id != 0);
 
@@ -250,13 +250,13 @@ remove_gconf_handler (GnomeIconLoader *loader)
 }
 
 static void
-gnome_icon_loader_init (GnomeIconLoader *loader)
+gnome_icon_theme_init (GnomeIconTheme *icon_theme)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
 
-  priv = g_new0 (GnomeIconLoaderPrivate, 1);
+  priv = g_new0 (GnomeIconThemePrivate, 1);
   
-  loader->priv = priv;
+  icon_theme->priv = priv;
 
   priv->custom_theme = FALSE;
   priv->current_theme = g_strdup ("default");
@@ -278,11 +278,11 @@ gnome_icon_loader_init (GnomeIconLoader *loader)
 
   priv->allow_svg = FALSE;
   
-  setup_gconf_handler (loader);
+  setup_gconf_handler (icon_theme);
 }
 
 static void
-blow_themes (GnomeIconLoaderPrivate *priv)
+blow_themes (GnomeIconThemePrivate *priv)
 {
   if (priv->themes_valid)
     {
@@ -298,14 +298,14 @@ blow_themes (GnomeIconLoaderPrivate *priv)
 }
 
 static void
-gnome_icon_loader_finalize (GObject *object)
+gnome_icon_theme_finalize (GObject *object)
 {
-  GnomeIconLoader *loader;
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconTheme *icon_theme;
+  GnomeIconThemePrivate *priv;
   int i;
 
-  loader = GNOME_ICON_LOADER (object);
-  priv = loader->priv;
+  icon_theme = GNOME_ICON_THEME (object);
+  priv = icon_theme->priv;
 
   g_free (priv->current_theme);
   priv->current_theme = NULL;
@@ -317,7 +317,7 @@ gnome_icon_loader_finalize (GObject *object)
   priv->search_path = NULL;
 
   if (priv->theme_changed_id)
-    remove_gconf_handler (loader);
+    remove_gconf_handler (icon_theme);
 
   blow_themes (priv);
 
@@ -325,36 +325,36 @@ gnome_icon_loader_finalize (GObject *object)
 }
 
 void
-gnome_icon_loader_set_allow_svg (GnomeIconLoader      *loader,
+gnome_icon_theme_set_allow_svg (GnomeIconTheme      *icon_theme,
 				 gboolean              allow_svg)
 {
   allow_svg = allow_svg != FALSE;
 
-  if (allow_svg == loader->priv->allow_svg)
+  if (allow_svg == icon_theme->priv->allow_svg)
     return;
   
-  loader->priv->allow_svg = allow_svg;
+  icon_theme->priv->allow_svg = allow_svg;
   
-  blow_themes (loader->priv);
+  blow_themes (icon_theme->priv);
   
-  g_signal_emit (G_OBJECT (loader), signal_changed, 0);
+  g_signal_emit (G_OBJECT (icon_theme), signal_changed, 0);
 }
 
 gboolean
-gnome_icon_loader_get_allow_svg (GnomeIconLoader *loader)
+gnome_icon_theme_get_allow_svg (GnomeIconTheme *icon_theme)
 {
-  return loader->priv->allow_svg;
+  return icon_theme->priv->allow_svg;
 }
 
 void
-gnome_icon_loader_set_search_path (GnomeIconLoader *loader,
+gnome_icon_theme_set_search_path (GnomeIconTheme *icon_theme,
 				   const char *path[],
 				   int         n_elements)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   int i;
 
-  priv = loader->priv;
+  priv = icon_theme->priv;
   for (i = 0; i < priv->search_path_len; i++)
     g_free (priv->search_path[i]);
 
@@ -366,19 +366,19 @@ gnome_icon_loader_set_search_path (GnomeIconLoader *loader,
     priv->search_path[i] = g_strdup (path[i]);
 
   blow_themes (priv);
-  g_signal_emit (G_OBJECT (loader), signal_changed, 0);
+  g_signal_emit (G_OBJECT (icon_theme), signal_changed, 0);
 }
 
 
 void
-gnome_icon_loader_get_search_path (GnomeIconLoader      *loader,
+gnome_icon_theme_get_search_path (GnomeIconTheme      *icon_theme,
 				   char                 **path[],
 				   int                   *n_elements)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   int i;
 
-  priv = loader->priv;
+  priv = icon_theme->priv;
   
   *path = g_new (char *, priv->search_path_len);
   *n_elements = priv->search_path_len;
@@ -388,29 +388,29 @@ gnome_icon_loader_get_search_path (GnomeIconLoader      *loader,
 }
 
 void
-gnome_icon_loader_append_search_path (GnomeIconLoader      *loader,
+gnome_icon_theme_append_search_path (GnomeIconTheme      *icon_theme,
 				      const char           *path)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
 
-  priv = loader->priv;
+  priv = icon_theme->priv;
   
   priv->search_path_len++;
   priv->search_path = g_realloc (priv->search_path, priv->search_path_len * sizeof(char *));
   priv->search_path[priv->search_path_len-1] = g_strdup (path);
 
   blow_themes (priv);
-  g_signal_emit (G_OBJECT (loader), signal_changed, 0);
+  g_signal_emit (G_OBJECT (icon_theme), signal_changed, 0);
 }
 
 void
-gnome_icon_loader_prepend_search_path (GnomeIconLoader      *loader,
+gnome_icon_theme_prepend_search_path (GnomeIconTheme      *icon_theme,
 				       const char           *path)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   int i;
 
-  priv = loader->priv;
+  priv = icon_theme->priv;
   
   priv->search_path_len++;
   priv->search_path = g_realloc (priv->search_path, priv->search_path_len * sizeof(char *));
@@ -423,41 +423,41 @@ gnome_icon_loader_prepend_search_path (GnomeIconLoader      *loader,
   priv->search_path[0] = g_strdup (path);
 
   blow_themes (priv);
-  g_signal_emit (G_OBJECT (loader), signal_changed, 0);
+  g_signal_emit (G_OBJECT (icon_theme), signal_changed, 0);
 }
 
 void
-gnome_icon_loader_set_custom_theme (GnomeIconLoader *loader,
+gnome_icon_theme_set_custom_theme (GnomeIconTheme *icon_theme,
 				    const char *theme_name)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
 
-  priv = loader->priv;
+  priv = icon_theme->priv;
   g_free (priv->current_theme);
   if (theme_name != NULL)
     {
       priv->current_theme = g_strdup (theme_name);
       priv->custom_theme = TRUE;
-      remove_gconf_handler (loader);
+      remove_gconf_handler (icon_theme);
     }
   else
     {
       priv->custom_theme = FALSE;
-      setup_gconf_handler (loader);
+      setup_gconf_handler (icon_theme);
     }
 
   blow_themes (priv);
-  g_signal_emit (G_OBJECT (loader), signal_changed, 0);
+  g_signal_emit (G_OBJECT (icon_theme), signal_changed, 0);
 }
 
 static void
-insert_theme (GnomeIconLoader *loader, const char *theme_name)
+insert_theme (GnomeIconTheme *icon_theme, const char *theme_name)
 {
   int i;
   GList *l;
   char **dirs;
   char **themes;
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   IconTheme *theme;
   char *path;
   char *contents;
@@ -465,7 +465,7 @@ insert_theme (GnomeIconLoader *loader, const char *theme_name)
   char *inherits;
   GnomeThemeFile *theme_file;
   
-  priv = loader->priv;
+  priv = icon_theme->priv;
   
   for (l = priv->themes; l != NULL; l = l->next)
     {
@@ -533,7 +533,7 @@ insert_theme (GnomeIconLoader *loader, const char *theme_name)
 
   theme->dirs = NULL;
   for (i = 0; dirs[i] != NULL; i++)
-      theme_subdir_load (loader, theme, theme_file, dirs[i]);
+      theme_subdir_load (icon_theme, theme, theme_file, dirs[i]);
   
   g_strfreev (dirs);
   
@@ -552,7 +552,7 @@ insert_theme (GnomeIconLoader *loader, const char *theme_name)
       themes = g_strsplit (inherits, ",", 0);
 
       for (i = 0; themes[i] != NULL; i++)
-	insert_theme (loader, themes[i]);
+	insert_theme (icon_theme, themes[i]);
       
       g_strfreev (themes);
 
@@ -582,9 +582,9 @@ my_g_str_has_suffix (const gchar  *str,
 }
 
 static void
-load_themes (GnomeIconLoader *loader)
+load_themes (GnomeIconTheme *icon_theme)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   GDir *gdir;
   int base;
   char *dir, *base_name, *dot;
@@ -593,19 +593,19 @@ load_themes (GnomeIconLoader *loader)
   char *old_file;
   IconSuffix old_suffix, new_suffix;
   
-  priv = loader->priv;
+  priv = icon_theme->priv;
 
   priv->all_icons = g_hash_table_new (g_str_hash, g_str_equal);
   
-  insert_theme (loader, priv->current_theme);
+  insert_theme (icon_theme, priv->current_theme);
   priv->themes = g_list_reverse (priv->themes);
   
   priv->unthemed_icons = g_hash_table_new_full (g_str_hash, g_str_equal,
 						g_free, g_free);
 
-  for (base = 0; base < loader->priv->search_path_len; base++)
+  for (base = 0; base < icon_theme->priv->search_path_len; base++)
     {
-      dir = loader->priv->search_path[base];
+      dir = icon_theme->priv->search_path[base];
       gdir = g_dir_open (dir, 0, NULL);
 
       if (gdir == NULL)
@@ -654,29 +654,20 @@ load_themes (GnomeIconLoader *loader)
 }
 
 char *
-gnome_icon_loader_lookup_icon (GnomeIconLoader      *loader,
-			       const char           *icon_name,
-			       int                   size,
-			       const GnomeIconData **icon_data)
+gnome_icon_theme_lookup_icon (GnomeIconTheme      *icon_theme,
+			      const char           *icon_name,
+			      int                   size,
+			      const GnomeIconData **icon_data,
+			      int                  *base_size)
 {
-  return gnome_icon_loader_lookup_icon_extended (loader, icon_name, size, icon_data, NULL);
-}
-
-char *
-gnome_icon_loader_lookup_icon_extended (GnomeIconLoader      *loader,
-					const char           *icon_name,
-					int                   size,
-					const GnomeIconData **icon_data,
-					int                  *base_size)
-{
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   GList *l;
   char *icon;
   
-  priv = loader->priv;
+  priv = icon_theme->priv;
   
   if (!priv->themes_valid)
-    load_themes (loader);
+    load_themes (icon_theme);
 
   if (icon_data)
     *icon_data = NULL;
@@ -704,15 +695,15 @@ gnome_icon_loader_lookup_icon_extended (GnomeIconLoader      *loader,
 }
 
 gboolean 
-gnome_icon_loader_has_icon (GnomeIconLoader      *loader,
+gnome_icon_theme_has_icon (GnomeIconTheme      *icon_theme,
 			    const char           *icon_name)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   
-  priv = loader->priv;
+  priv = icon_theme->priv;
   
   if (!priv->themes_valid)
-    load_themes (loader);
+    load_themes (icon_theme);
 
   return g_hash_table_lookup_extended (priv->all_icons,
 				       icon_name, NULL, NULL);
@@ -742,18 +733,18 @@ add_key_to_list (gpointer  key,
 
 /* Don't free the returned names */
 GList *
-gnome_icon_loader_list_icons (GnomeIconLoader *loader,
+gnome_icon_theme_list_icons (GnomeIconTheme *icon_theme,
 			      const char *context)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   GHashTable *icons;
   GList *list, *l;
   GQuark context_quark;
   
-  priv = loader->priv;
+  priv = icon_theme->priv;
   
   if (!priv->themes_valid)
-    load_themes (loader);
+    load_themes (icon_theme);
 
   if (context)
     {
@@ -791,16 +782,16 @@ gnome_icon_loader_list_icons (GnomeIconLoader *loader,
 }
 
 char *
-gnome_icon_loader_get_example_icon_name (GnomeIconLoader *loader)
+gnome_icon_theme_get_example_icon_name (GnomeIconTheme *icon_theme)
 {
-  GnomeIconLoaderPrivate *priv;
+  GnomeIconThemePrivate *priv;
   GList *l;
   IconTheme *theme;
   
-  priv = loader->priv;
+  priv = icon_theme->priv;
   
   if (!priv->themes_valid)
-    load_themes (loader);
+    load_themes (icon_theme);
 
   l = priv->themes;
   while (l != NULL)
@@ -816,7 +807,7 @@ gnome_icon_loader_get_example_icon_name (GnomeIconLoader *loader)
 }
 
 gboolean
-gnome_icon_loader_rescan_if_needed (GnomeIconLoader *loader)
+gnome_icon_theme_rescan_if_needed (GnomeIconTheme *icon_theme)
 {
   /* TODO */
   return FALSE;
@@ -1099,7 +1090,7 @@ load_icon_data (IconThemeDir *dir, const char *path, const char *name)
 }
 
 static void
-scan_directory (GnomeIconLoaderPrivate *loader,
+scan_directory (GnomeIconThemePrivate *icon_theme,
 		IconThemeDir *dir, char *full_dir, gboolean allow_svg)
 {
   GDir *gdir;
@@ -1148,14 +1139,14 @@ scan_directory (GnomeIconLoaderPrivate *loader,
 	g_hash_table_replace (dir->icons, base_name, GINT_TO_POINTER (suffix));
       else
 	g_free (base_name);
-      g_hash_table_insert (loader->all_icons, base_name, NULL);
+      g_hash_table_insert (icon_theme->all_icons, base_name, NULL);
     }
   
   g_dir_close (gdir);
 }
 
 static void
-theme_subdir_load (GnomeIconLoader *loader,
+theme_subdir_load (GnomeIconTheme *icon_theme,
 		   IconTheme *theme,
 		   GnomeThemeFile *theme_file,
 		   char *subdir)
@@ -1217,9 +1208,9 @@ theme_subdir_load (GnomeIconLoader *loader,
 				     &threshold))
     threshold = 2;
 
-  for (base = 0; base < loader->priv->search_path_len; base++)
+  for (base = 0; base < icon_theme->priv->search_path_len; base++)
     {
-      full_dir = g_build_filename (loader->priv->search_path[base],
+      full_dir = g_build_filename (icon_theme->priv->search_path[base],
 				   theme->name,
 				   subdir,
 				   NULL);
@@ -1235,7 +1226,7 @@ theme_subdir_load (GnomeIconLoader *loader,
 	  dir->dir = full_dir;
 	  dir->icon_data = NULL;
 	  
-	  scan_directory (loader->priv, dir, full_dir, loader->priv->allow_svg);
+	  scan_directory (icon_theme->priv, dir, full_dir, icon_theme->priv->allow_svg);
 
 	  theme->dirs = g_list_append (theme->dirs, dir);
 	}
@@ -1244,9 +1235,24 @@ theme_subdir_load (GnomeIconLoader *loader,
     }
 }
 
-static void
+void
 gnome_icon_data_free (GnomeIconData *icon_data)
 {
+  g_free (icon_data->attach_points);
   g_free (icon_data->display_name);
   g_free (icon_data);
 }
+
+GnomeIconData *
+gnome_icon_data_dup (GnomeIconData *icon_data)
+{
+  GnomeIconData *copy;
+
+  *copy = *icon_data;
+  copy->display_name = g_strdup (copy->display_name);
+  
+  if (copy->attach_points)
+    copy->attach_points = g_memdup (copy->attach_points,
+				    copy->n_attach_points * sizeof (GnomeIconDataPoint));
+}
+
