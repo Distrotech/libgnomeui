@@ -61,7 +61,6 @@ struct _GnomeThumbnailFactoryClass {
 GType                  gnome_thumbnail_factory_get_type (void);
 GnomeThumbnailFactory *gnome_thumbnail_factory_new      (GnomeThumbnailSize     size);
 
-/* Note: Doesn't verify mtime of thumbnail */
 char *                 gnome_thumbnail_factory_lookup   (GnomeThumbnailFactory *factory,
 							 const char            *uri,
 							 time_t                 mtime);
@@ -86,11 +85,13 @@ void                   gnome_thumbnail_factory_create_failed_thumbnail (GnomeThu
 
 
 /* Thumbnailing utils: */
+gboolean   gnome_thumbnail_has_uri           (GdkPixbuf          *pixbuf,
+					      const char         *uri);
 gboolean   gnome_thumbnail_is_valid          (GdkPixbuf          *pixbuf,
 					      const char         *uri,
 					      time_t              mtime);
-char *     gnome_thumbnail_md5               (char               *uri);
-char *     gnome_thumbnail_path_for_uri      (char               *uri,
+char *     gnome_thumbnail_md5               (const char         *uri);
+char *     gnome_thumbnail_path_for_uri      (const char         *uri,
 					      GnomeThumbnailSize  size);
 
 

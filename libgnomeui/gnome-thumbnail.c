@@ -850,7 +850,7 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
 }
 
 char *
-gnome_thumbnail_md5 (char *uri)
+gnome_thumbnail_md5 (const char *uri)
 {
   unsigned char digest[16];
 
@@ -859,7 +859,7 @@ gnome_thumbnail_md5 (char *uri)
 }
 
 char *
-gnome_thumbnail_path_for_uri (char               *uri,
+gnome_thumbnail_path_for_uri (const char         *uri,
 			      GnomeThumbnailSize  size)
 {
   char *md5;
@@ -881,6 +881,15 @@ gnome_thumbnail_path_for_uri (char               *uri,
   return path;
 }
 
+gboolean
+gnome_thumbnail_has_uri (GdkPixbuf          *pixbuf,
+			 const char         *uri)
+{
+  const char *thumb_uri;
+  
+  thumb_uri = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::URI");
+  return strcmp (uri, thumb_uri) == 0;
+}
 
 gboolean
 gnome_thumbnail_is_valid (GdkPixbuf          *pixbuf,
