@@ -1,3 +1,8 @@
+2001-12-21  Mark McLoughlin  <mark@skynet.ie>
+
+	* gnome-entry.c: (build_gconf_key): escape app_id before
+	using it in the gconf key.
+
 2001-12-19  jacob berkman  <jacob@ximian.com>
 
 	* gnome-stock-icons.h (GNOME_STOCK_PIXMAP_SCORES): define to

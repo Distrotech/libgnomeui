@@ -506,11 +506,20 @@ gnome_entry_get_max_saved (GnomeEntry *gentry)
 static char *
 build_gconf_key (GnomeEntry *gentry)
 {
-	return g_strconcat ("/apps/gnome-settings/",
-			    gnome_program_get_app_id (gnome_program_get()),
-			    "/history-",
-			    gentry->_priv->history_id,
-			    NULL);
+	gchar *retval;
+	gchar *app_id;
+
+	app_id = gconf_escape_key (gnome_program_get_app_id (gnome_program_get()), -1);
+
+	retval = g_strconcat ("/apps/gnome-settings/",
+			      gnome_program_get_app_id (gnome_program_get()),
+			      "/history-",
+			      gentry->_priv->history_id,
+			      NULL);
+
+	g_free (app_id);
+
+	return retval;
 }
 
 static void
