@@ -484,7 +484,7 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
   }
 
   {
-    GList *langs = gnome_i18n_get_language_list(NULL);
+    const GList *langs = gnome_i18n_get_language_list(NULL);
     GString *langparam = g_string_new(langs?langs->data:"");
 
     if(langs)

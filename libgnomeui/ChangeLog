@@ -1,3 +1,10 @@
+Wed Jul 12 02:47:22 2000  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.[ch], gnome-client.[ch], gnome-ditem-edit.c,
+	  gnome-font-picker.[ch], gnome-helpsys.c, gnome-paper-selector.c,
+	  oafgnome.c:  Do the const dance.  Fix warnings caused by const
+	  changes in libgnome.  Add some const returns where appropriate.
+
 2000-07-09  Karl Eichwalder  <ke@suse.de>
 
 	* gnome_segv.c (main): Fix message string typo.

@@ -117,7 +117,7 @@ gnome_paper_selector_init(GnomePaperSelector *self)
   GtkWidget *frame, *box, *table, *menu, *menuitem, *vbox, *wid;
   GdkPixmap *pix;
   GdkBitmap *mask;
-  GList *papers;
+  const GList *papers;
 
   if (default_unit == NULL)
     default_unit = gnome_unit_with_name(DEFAULT_UNIT);
@@ -401,7 +401,7 @@ gnome_paper_selector_get_paper(GnomePaperSelector *self)
 void
 gnome_paper_selector_set_paper(GnomePaperSelector *self, const gchar *paper)
 {
-  GList *l;
+  const GList *l;
   gint i;
   const GnomePaper *p = NULL;
 

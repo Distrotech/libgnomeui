@@ -108,14 +108,14 @@ void       gnome_font_picker_uw_set_widget    (GnomeFontPicker *gfp,
                                                GtkWidget       *widget);
 
 /* Functions to interface with GtkFontSelectionDialog */
-gchar*	   gnome_font_picker_get_font_name    (GnomeFontPicker *gfp);
+const gchar* gnome_font_picker_get_font_name    (GnomeFontPicker *gfp);
 
 GdkFont*   gnome_font_picker_get_font	      (GnomeFontPicker *gfp);
 
 gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
                                                const gchar     *fontname);
 
-gchar*	   gnome_font_picker_get_preview_text (GnomeFontPicker *gfp);
+const gchar* gnome_font_picker_get_preview_text (GnomeFontPicker *gfp);
 
 void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
                                                const gchar     *text);

@@ -207,7 +207,7 @@ GnomeClient *gnome_master_client 	         (void);
    which can not be described using the app's command line arguments (as
    set in the restart command). You may push the returned value using
    'gnome_config_push_prefix' and read or write any values you require. */
-gchar*       gnome_client_get_config_prefix        (GnomeClient *client);
+const gchar*       gnome_client_get_config_prefix        (GnomeClient *client);
 
 /* Get the config prefix that will be returned by the previous function
    for clients which have NOT been restarted or cloned (i.e. for clients 
@@ -218,7 +218,7 @@ gchar*       gnome_client_get_config_prefix        (GnomeClient *client);
    details that you wish to apply to ALL instances of the app. However, 
    this practice limits the users freedom to configure each instance in
    a different way so it should be used with caution. */
-gchar*       gnome_client_get_global_config_prefix (GnomeClient *client);
+const gchar*       gnome_client_get_global_config_prefix (GnomeClient *client);
 
 /* Set the value used for the global config prefix. The config prefixes 
    returned by gnome_client_get_config_prefix are formed by extending
@@ -417,12 +417,12 @@ void         gnome_client_set_id                 (GnomeClient *client,
 /* Get the client id of a session management client object.  If this
    object has never been connected to a session manager and a client
    id hasn't been set, this function return 'NULL'.  */
-gchar*       gnome_client_get_id                 (GnomeClient *client);
+const gchar*       gnome_client_get_id                 (GnomeClient *client);
 
 /* Get the client id from the last session.  If this client was not
    recreated from a previous session, returns NULL. The session 
    manager tries to maintain the same id from one session to another. */
-gchar*       gnome_client_get_previous_id        (GnomeClient *client);
+const gchar*       gnome_client_get_previous_id        (GnomeClient *client);
 
 /* Use the following functions, if you want to interact with the user
    during a "save_yourself" handler without being restricted to using 

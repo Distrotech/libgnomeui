@@ -1036,7 +1036,7 @@ gnome_help_view_display_callback (GtkWidget *widget, const char *help_path)
 char *
 gnome_help_path_resolve(const char *path, const char *file_type)
 {
-  GList *language_list;
+  const GList *language_list;
   char fnbuf[PATH_MAX], tmppath[PATH_MAX];
   char *appname, *filepath, *sectpath;
   char *res;
@@ -1098,7 +1098,7 @@ gnome_help_path_resolve(const char *path, const char *file_type)
 GSList *
 gnome_help_app_topics(const char *app_id)
 {
-  GList *language_list;
+  const GList *language_list;
   GSList *retval;
   char *topicfn;
   char fnbuf[PATH_MAX], aline[LINE_MAX];

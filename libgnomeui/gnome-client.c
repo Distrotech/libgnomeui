@@ -1992,7 +1992,7 @@ gnome_client_set_id (GnomeClient *client, const gchar *id)
  * Returns:  Session management ID for this client; NULL if not connected to a session manager.
  **/
 
-gchar *
+const gchar *
 gnome_client_get_id (GnomeClient *client)
 {
   g_return_val_if_fail (client != NULL, NULL);
@@ -2011,7 +2011,7 @@ gnome_client_get_id (GnomeClient *client)
  * session, or NULL if it wasn't in a previous session.
  **/
 
-gchar *
+const gchar *
 gnome_client_get_previous_id (GnomeClient *client)
 {
   g_return_val_if_fail (client != NULL, NULL);
@@ -2034,7 +2034,7 @@ gnome_client_get_previous_id (GnomeClient *client)
  * Returns: Config prefix.
  **/
 
-gchar *
+const gchar *
 gnome_client_get_config_prefix (GnomeClient *client)
 {
   if (!client || !GNOME_IS_CLIENT (client))
@@ -2044,7 +2044,7 @@ gnome_client_get_config_prefix (GnomeClient *client)
       return gnome_client_get_global_config_prefix (client);
 
   if (!client->config_prefix)
-    client->config_prefix = gnome_client_get_global_config_prefix (client);
+    client->config_prefix = (char *)gnome_client_get_global_config_prefix (client);
 
   return client->config_prefix;
 }
@@ -2102,7 +2102,7 @@ gnome_client_set_global_config_prefix (GnomeClient *client, const gchar* prefix)
  * Returns:  The config prefix as a newly allocated string
  **/
 
-gchar *
+const gchar *
 gnome_client_get_global_config_prefix (GnomeClient *client)
 {
   if (client == NULL)

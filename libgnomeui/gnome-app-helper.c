@@ -65,7 +65,7 @@
 #include "gtkpixmapmenuitem.h"
 
 /* prototypes */
-static gint g_strncmp_ignore_char( gchar *first, gchar *second,
+static gint g_strncmp_ignore_char( const gchar *first, const gchar *second,
 				   gint length, gchar ignored );
 
 
@@ -467,7 +467,7 @@ setup_pixmap_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
 /* Creates  a menu item label. It will also return the underlined 
  * letter's keyval if keyval is not NULL. */
 static GtkWidget *
-create_label (char *label_text, guint *keyval)
+create_label (const char *label_text, guint *keyval)
 {
 	guint kv;
 	GtkWidget *label;
@@ -616,7 +616,7 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
     {
       gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
                            "apphelper_statusbar_hint",
-                           L_(uiinfo->hint));
+                           (gpointer)L_(uiinfo->hint));
 
       gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
                           "select",
@@ -725,7 +725,7 @@ install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
     {
       gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
                            "apphelper_appbar_hint",
-                           L_(uiinfo->hint));
+                           (gpointer)L_(uiinfo->hint));
 
       gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
                           "select",
@@ -1928,7 +1928,7 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
  **/
 
 static gint
-g_strncmp_ignore_char( gchar *first, gchar *second, gint length, gchar ignored )
+g_strncmp_ignore_char( const gchar *first, const gchar *second, gint length, gchar ignored )
 {
         gint i, j;
 	for ( i = 0, j = 0; i < length; i++, j++ )
@@ -1977,7 +1977,8 @@ gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos)
 	gchar *label = NULL;
 	GList *children;
 	gchar *name_end;
-	gchar *part, *transl;
+	gchar *part;
+	const gchar *transl;
 	gint p;
 	int  path_len;
 	int  stripped_path_len;
@@ -2285,7 +2286,7 @@ gnome_app_insert_menus_interp (GnomeApp *app, const gchar *path,
 }
 
 #ifdef ENABLE_NLS
-gchar *
+const gchar *
 gnome_app_helper_gettext (const gchar *str)
 {
 	char *s;

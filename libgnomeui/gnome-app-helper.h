@@ -498,7 +498,7 @@ typedef struct {
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
           GNOME_APP_CONFIGURABLE_ITEM_END_GAME, (GdkModifierType) 0, NULL }
 
-gchar * gnome_app_helper_gettext (const gchar *string);
+const gchar * gnome_app_helper_gettext (const gchar *string);
 
 #ifdef ENABLE_NLS
 #define D_(x) dgettext (PACKAGE, x)

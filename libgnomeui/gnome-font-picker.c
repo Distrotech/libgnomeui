@@ -432,7 +432,7 @@ void       gnome_font_picker_uw_set_widget    (GnomeFontPicker *gfp,
  * Pointer to an internal copy of the font name.
  */
 
-gchar*	   gnome_font_picker_get_font_name    (GnomeFontPicker *gfp)
+const gchar*	   gnome_font_picker_get_font_name    (GnomeFontPicker *gfp)
 {
     g_return_val_if_fail (gfp != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_FONT_PICKER (gfp), NULL);
@@ -518,7 +518,7 @@ gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
  * font dialog is being displayed.
  */
 
-gchar*	   gnome_font_picker_get_preview_text (GnomeFontPicker *gfp)
+const gchar*	   gnome_font_picker_get_preview_text (GnomeFontPicker *gfp)
 {
     g_return_val_if_fail (gfp != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_FONT_PICKER (gfp), NULL);
