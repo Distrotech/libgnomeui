@@ -187,19 +187,19 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_container_add(GTK_CONTAINER(dialog), bf);
   gtk_widget_show(bf);
 
-  vbox = gtk_vbox_new(FALSE, 0);
+  vbox = gtk_vbox_new(FALSE, GNOME_PAD);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 
-			      0);
+			      GNOME_PAD_SMALL);
   gtk_container_add(GTK_CONTAINER(bf), vbox);
   gtk_widget_show(vbox);
 
   gtk_window_set_policy (GTK_WINDOW (dialog), FALSE, 
 			 FALSE, FALSE);
 
-  dialog->vbox = gtk_vbox_new(FALSE, 0);
+  dialog->vbox = gtk_vbox_new(FALSE, GNOME_PAD);
   gtk_box_pack_start (GTK_BOX (vbox), dialog->vbox, 
 		      TRUE, TRUE,
-		      0);
+		      GNOME_PAD_SMALL);
 
   gnome_window_icon_set_from_default (GTK_WINDOW (dialog));
   gtk_widget_show(dialog->vbox);
@@ -218,7 +218,7 @@ gnome_dialog_init_action_area (GnomeDialog * dialog)
 			     gnome_preferences_get_button_layout());
 
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog->action_area), 
-			      0);
+			      GNOME_PAD);
 
   gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->action_area, 
 		    FALSE, TRUE, 0);
@@ -227,7 +227,7 @@ gnome_dialog_init_action_area (GnomeDialog * dialog)
   separator = gtk_hseparator_new ();
   gtk_box_pack_end (GTK_BOX (dialog->vbox), separator, 
 		      FALSE, TRUE,
-		      0);
+		      GNOME_PAD_SMALL);
   gtk_widget_show (separator);
 }
 
