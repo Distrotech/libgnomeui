@@ -918,11 +918,15 @@ struct default_AccelEntry default_accel_hash[] = {
 	{GNOME_STOCK_MENU_CUT, {'X', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_COPY, {'C', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_PASTE, {'V', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_PROP, {0, 0}},
 	{GNOME_STOCK_MENU_PREF, {'E', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_ABOUT, {'A', GDK_MOD1_MASK}},
+	{GNOME_STOCK_MENU_SCORES, {0, 0}},
 	{GNOME_STOCK_MENU_UNDO, {'Z', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_PRINT, {'P', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_SEARCH, {'S', GDK_MOD1_MASK}},
+	{GNOME_STOCK_MENU_BACK, {'B', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_FORWARD, {'F', GDK_CONTROL_MASK}},
 	{NULL}
 };
 
@@ -1118,32 +1122,33 @@ accel_dlg_select_ok(GtkWidget *widget, GtkWindow *window)
 {
 	AccelEntry entry;
 	GtkToggleButton *check;
-	gchar *key, *s;
+	gchar *key, *s, *s2;
 	int row;
 
 	key = gtk_entry_get_text(GTK_ENTRY(gtk_object_get_data(GTK_OBJECT(window), "key")));
 	if (!key) {
 		entry.key = 0;
 		entry.mod = 0;
-		return;
+	} else {
+		accel_from_string(key, &entry.key, &entry.mod);
+		entry.mod = 0;
+		check = gtk_object_get_data(GTK_OBJECT(window), "shift");
+		if (check->active)
+			entry.mod |= GDK_SHIFT_MASK;
+		check = gtk_object_get_data(GTK_OBJECT(window), "control");
+		if (check->active)
+			entry.mod |= GDK_CONTROL_MASK;
+		check = gtk_object_get_data(GTK_OBJECT(window), "alt");
+		if (check->active)
+			entry.mod |= GDK_MOD1_MASK;
 	}
-	accel_from_string(key, &entry.key, &entry.mod);
-	entry.mod = 0;
-	check = gtk_object_get_data(GTK_OBJECT(window), "shift");
-	if (check->active)
-		entry.mod |= GDK_SHIFT_MASK;
-	check = gtk_object_get_data(GTK_OBJECT(window), "control");
-	if (check->active)
-		entry.mod |= GDK_CONTROL_MASK;
-	check = gtk_object_get_data(GTK_OBJECT(window), "alt");
-	if (check->active)
-		entry.mod |= GDK_MOD1_MASK;
 	row = (int)gtk_object_get_data(GTK_OBJECT(window), "row");
 	gtk_clist_get_text(GTK_CLIST(gtk_object_get_data(GTK_OBJECT(window), "clist")),
 			   row, 1, &s);
 	if (!s) s = "";
-	if (!accel_to_string(&entry)) return;
-	if (g_strcasecmp(accel_to_string(&entry), s)) {
+	s2 = accel_to_string(&entry);
+	if (!s2) s2 = "";
+	if (g_strcasecmp(s2, s)) {
 		gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_object_get_data(GTK_OBJECT(window), "box")));
 		gtk_clist_set_text(GTK_CLIST(gtk_object_get_data(GTK_OBJECT(window),
 								 "clist")),
@@ -1162,8 +1167,14 @@ accel_dlg_select(GtkCList *widget, int row, int col, GdkEventButton *event)
 	char *s;
 
 	gtk_clist_unselect_row(widget, row, col);
+	s = NULL;
 	gtk_clist_get_text(widget, row, col, &s);
-	accel_from_string(s, &entry.key, &entry.mod);
+	if (s) {
+		accel_from_string(s, &entry.key, &entry.mod);
+	} else {
+		entry.key = 0;
+		entry.mod = 0;
+	}
 	window = gtk_dialog_new();
 	gtk_window_set_title(GTK_WINDOW(window), "Menu Accelerator");
 	gtk_object_set_data(GTK_OBJECT(window), "clist", widget);
@@ -1190,12 +1201,14 @@ accel_dlg_select(GtkCList *widget, int row, int col, GdkEventButton *event)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 1, 2, 1, 2);
 	gtk_object_set_data(GTK_OBJECT(window), "key", w);
-	s = g_strdup(accel_to_string(&entry));
-	if (strrchr(s, '+'))
-		gtk_entry_set_text(GTK_ENTRY(w), strrchr(s, '+') + 1);
-	else
-		gtk_entry_set_text(GTK_ENTRY(w), s);
-	g_free(s);
+	if (accel_to_string(&entry)) {
+		s = g_strdup(accel_to_string(&entry));
+		if (strrchr(s, '+'))
+			gtk_entry_set_text(GTK_ENTRY(w), strrchr(s, '+') + 1);
+		else
+			gtk_entry_set_text(GTK_ENTRY(w), s);
+		g_free(s);
+	}
 
 	w = gtk_check_button_new_with_label("Control");
 	gtk_widget_show(w);

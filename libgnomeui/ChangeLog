@@ -1,3 +1,8 @@
+Sun Mar 23 02:24:44 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.c: fixed some segfaults when clicking on empty
+	accelerators.
+
 Sun Mar 23 00:09:49 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.c: Added config dialog for menu accelerators. This might
