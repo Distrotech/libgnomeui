@@ -14,8 +14,9 @@ lib_LTLIBRARIES = libgnomeui.la
 #
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
-INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) $(GDK_IMLIB_CFLAGS) $(SUPPORTINCS) \
+INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
+	-I$(includedir) $(GDK_IMLIB_CFLAGS) \
         -DGNOMELIBDIR=\""$(libdir)"\" \
         -DGNOMEDATADIR=\""$(datadir)"\" \
         -DGNOMEBINDIR=\""$(bindir)"\" \
