@@ -1,3 +1,11 @@
+2000-06-15  Jody Goldberg <jgoldberg@home.com>
+
+	* gnome-calculator.c (set_result) : setlocale returns a static buffer.
+	  Copy it to safety.  Set the locale AFTER storing the current
+	  setting.
+	(add_digit) : Ditto.
+	(negate_val) : Ditto.
+
 Tue Jun 13 02:54:21 2000  George Lebl <jirka@5z.com>
 
 	* gnome-druid.c: take out an unused static prototype for _paint, and
