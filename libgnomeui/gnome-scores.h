@@ -59,20 +59,15 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_SCORES_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_SCORES))
 
 typedef struct _GnomeScores        GnomeScores;
+typedef struct _GnomeScoresPrivate GnomeScoresPrivate;
 typedef struct _GnomeScoresClass   GnomeScoresClass;
 
 struct _GnomeScores
 {
   GnomeDialog dialog;
 
-  GtkWidget *but_clear;
-
-  GtkWidget *logo;
-  GtkWidget **label_names;
-  GtkWidget **label_scores;
-  GtkWidget **label_times;
-
-  guint	    n_scores;
+  /*< private >*/
+  GnomeScoresPrivate *_priv;
 };
 
 struct _GnomeScoresClass
@@ -102,6 +97,12 @@ GtkWidget *       /* returns the pointer to the displayed window */
 				    current player, as returned by
 				    gnome_score_log. */
 		);
+/* Same as above, but with a pixmap logo instead of just text */
+GtkWidget *
+	gnome_scores_display_with_pixmap (gchar *pixmap_logo,
+					  gchar *app_name,
+					  gchar *level,
+					  int pos);
 
 /* Creates the high-scores window. */
 GtkWidget* gnome_scores_new (
@@ -109,8 +110,16 @@ GtkWidget* gnome_scores_new (
 		gchar **names,  	/* Names of the players. */
 		gfloat *scores,		/* Scores */
 		time_t *times, 		/* Time in which the scores were done */
-		guint clear		/* Add a "Clear" Button? */
+		gboolean clear		/* Add a "Clear" Button? */
 		);
+
+/* Constructor for bindings / subclassing */
+void gnome_scores_construct (GnomeScores *gs,
+			     guint n_scores, 
+			     gchar **names, 
+			     gfloat *scores,
+			     time_t *times,
+			     gboolean clear);
 
 /* Creates a label to be the logo */
 void gnome_scores_set_logo_label (

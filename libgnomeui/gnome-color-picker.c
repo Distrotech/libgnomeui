@@ -471,7 +471,7 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 
 	cp->_priv->title = g_strdup (_("Pick a color")); /* default title */
 
-	/* Create the buffer for the image so that we can create an imlib image.  Also create the
+	/* Create the buffer for the image so that we can create an image.  Also create the
 	 * picker's pixmap.
 	 */
 

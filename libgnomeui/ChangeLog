@@ -1,3 +1,12 @@
+Tue Jul 04 01:44:21 2000  George Lebl <jirka@5z.com>
+
+	* gnome-color-picker.c:  Excorcise imlib reference from a label :)
+
+	* gnome-scores.[ch]:  Add and use a private pointer.  Allow setting
+	  logo multiple times.  Add a _construct method.  Add a
+	  _display_with_pixmap function to use a pixmap logo rather then just
+	  a title.
+
 2000-07-03  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-druid-page-standard.c: add finalize function.  Move
