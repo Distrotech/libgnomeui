@@ -1,3 +1,8 @@
+Sun Jan 30 15:44:35 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dentry-edit.c: use gnome_config_assemble_vector instead of
+	  g_flatten_vector to fix bug #1372
+
 2000-01-28  Havoc Pennington  <hp@redhat.com>
 
 	* gnome-propertybox.c (dialog_clicked_cb): Close bug 4378, do the
