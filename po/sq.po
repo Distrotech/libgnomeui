@@ -1,3 +1,4 @@
+# translation of libgnomeui.HEAD.sq.po to Albanian
 # Albanian translation of libgnomeui
 # Copyright (C) 2001, 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
@@ -6,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD\n"
+"Project-Id-Version: libgnomeui.HEAD.sq\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-16 02:57+0100\n"
-"PO-Revision-Date: 2004-01-16 03:00+0100\n"
+"POT-Creation-Date: 2004-01-30 04:21+0100\n"
+"PO-Revision-Date: 2004-01-31 23:46+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +60,7 @@ msgstr "Emri programit "
 
 #: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
-msgstr "Emri i programit "
+msgstr "Emri i programit"
 
 #: libgnomeui/gnome-about.c:386
 msgid "Program version"
@@ -191,7 +192,7 @@ msgstr "Fi_les/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr "_Dri_taret"
+msgstr "_Dritaret"
 
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
@@ -240,7 +241,7 @@ msgstr "_Rikthe"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr "Riktheje tek njÃ« nga versionet e ruajtur tÃ« file"
+msgstr "Riktheje tek njÃ« nga versionet e ruajtura tÃ« file"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
@@ -258,7 +259,7 @@ msgstr "Konfiguro faq_en"
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Konfiguro rregullimet e faqes pÃ«r printerin tuaj "
+msgstr "Konfiguro rregullimet e faqes pÃ«r printerin tuaj aktual"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -284,7 +285,7 @@ msgstr "Mbylle aplikativin"
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
-msgstr "_Prije"
+msgstr "Pri_je"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
@@ -307,7 +308,7 @@ msgstr "_Ngjite"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "Ngjit shÃ«nimet"
+msgstr "Ngjit nga shÃ«nimet"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
@@ -437,7 +438,7 @@ msgstr "Fillo njÃ« lojÃ« tÃ« re"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr "_NdÃ«rprit (pusho) lojÃ«n"
+msgstr "_Pezullo lojÃ«n"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
@@ -486,7 +487,7 @@ msgstr "Shiko pikët"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr "_Fund loje"
+msgstr "_Fundi i lojÃ«s"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
@@ -500,23 +501,23 @@ msgstr "_PÃ«rmbajtja"
 msgid "View help for this application"
 msgstr "Shiko ndihmÃ«n nÃ« lidhje me kÃ«tÃ« aplikativ"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Tekst nÃ«n ikona"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Tekst përparsor krahas ikonave"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "VetÃ«m ikona"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "VetÃ«m tekst"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Konfigurimi i prezgjedhur i desktop (%s)"
@@ -612,7 +613,7 @@ msgstr "Passwordi juaj do tÃ« transmetohet i pakriptuar."
 
 #: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
-msgstr "Passwordi juaj do tÃ« transmetohet i kriptuar"
+msgstr "Passwordi juaj do tÃ« transmetohet i kriptuar."
 
 #: libgnomeui/gnome-authentication-manager.c:69
 #: libgnomeui/gnome-authentication-manager.c:272
@@ -653,7 +654,7 @@ msgstr "Disaktivoi lidhjen manazhuesit të seancës"
 msgid "Session management"
 msgstr "Manazhimi i seancës"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Anullo daljen"
 
@@ -663,11 +664,11 @@ msgstr "Mora tÃ« dhÃ«na tÃ« pavlefshme ngjyre\n"
 
 #: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
-msgstr "Zgjedhja e ngjyrave"
+msgstr "ZgjedhÃ«si i ngjyrÃ«s"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "Hap një dritare dialogu për të zgjedhur ngjyrën"
+msgstr "Hap njÃ« dritare dialogu pÃ«r tÃ« pÃ«rcaktuar ngjyrÃ«n"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -981,7 +982,7 @@ msgstr "Titulli i dritares sÃ« dialogut tÃ« zgjedhjes"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr "MÃ«nyra"
+msgstr "Modaliteti"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
@@ -1005,7 +1006,7 @@ msgstr "GtkFont i zgjedhur"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Teksti i pamjes sÃ« parÃ«"
+msgstr "Pamja e parÃ« e tekstit"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
@@ -1029,11 +1030,11 @@ msgstr "MadhÃ«sia e gÃ«rmave pÃ«r etiketÃ«n nÃ« modalitetin informacione mbi gÃ«
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "Paraqit dimensionin"
+msgstr "Shfaq dimensionin"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "Paraqit dimensionin nÃ« modalitetin informacione mbi gÃ«rmat"
+msgstr "Shfaq dimensionin nÃ« modalitetin informacione mbi gÃ«rmat"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1152,7 +1153,7 @@ msgstr "E pamundur gjetja e njÃ« hbox, duke pÃ«rdorur zgjedhjen normale tÃ« file
 
 #: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
-msgstr "Pamja e parÃ«"
+msgstr "Shikoje"
 
 #: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
@@ -1224,7 +1225,7 @@ msgstr "Pyetje"
 
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
-msgstr "Mesazhi"
+msgstr "Mesazh"
 
 #: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
@@ -1260,7 +1261,7 @@ msgstr "Asnjë imazh"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "Pamja e parÃ« e imazhit"
+msgstr "Pamja e parÃ« e figurÃ«s"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
@@ -1303,7 +1304,7 @@ msgstr "ListÃ« e pikÃ«zuar"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr "ListÃ« e numÃ«ruar"
+msgstr "ListÃ« e numÃ«rzuar"
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
@@ -1317,27 +1318,32 @@ msgstr "Zvogëlo ngushtimin"
 msgid "About"
 msgstr "Informacione"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr "Ç'aktivo dritaren e dialogut të crash"
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "Display X qÃ« duhet pÃ«rdorur"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "Libraria për GUI e GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "U verifikuan  gabime shumëfishe segmentimi; e pamundur shfaqja e dritares së "
 "dialogut të gabimeve\n"
 
-#: libgnomeui/gnome-ui-init.c:719
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1346,7 +1352,7 @@ msgstr ""
 "Gabim segmentimi!\n"
 "E pamundur shfaqja e dritares së dialogut relativ\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1362,38 +1368,35 @@ msgstr ""
 "Ki kujdes të ruash të gjithë files e ndryshuar përpara se të mbyllësh këtë "
 "dialog."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Aplikativi \"%s\" (procesi %d) ka shkuar në crash\n"
-"për shkak të një gabimi fatal.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "Aplikativi \"%s\" përfundoi në menyrë të papritur."
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "proçesi %d: %s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Mund të informoni zhvilluesit mbi çfarë ndodhi për t'i ndihmuar që ta korrigjojnë.  "
+"Ose mund të nisni aplikativin përsëri tani."
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Përdorimi: gnome_segv2 EMRI_PROG NUM_SHËN\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Dërgo një raport mbi bug"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr "Informo zhvilluesit"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Debug"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Për informacione të hollësishme vizitoni faqen për crash të aplikativëve të "
-"GNOME"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
