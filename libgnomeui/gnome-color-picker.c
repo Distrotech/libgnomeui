@@ -337,8 +337,6 @@ expose_event (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 	GnomeColorPicker *cp;
 
 	cp = GNOME_COLOR_PICKER (data);
-	if (cp->_priv->gc == NULL)
-		cp->_priv->gc = gdk_gc_new (widget->window);
 
 	gdk_pixbuf_render_to_drawable (cp->_priv->pixbuf,
 				       widget->window,
@@ -361,8 +359,12 @@ gnome_color_picker_realize (GtkWidget *widget)
 
 	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
 
+	if (cp->_priv->gc == NULL)
+		cp->_priv->gc = gdk_gc_new (widget->window);
+
 	render (cp);
 }
+
 static void
 gnome_color_picker_style_set (GtkWidget *widget, GtkStyle *previous_style)
 {

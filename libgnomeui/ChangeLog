@@ -1,3 +1,9 @@
+2001-10-10  Michael Meeks  <michael@ximian.com>
+
+	* gnome-color-picker.c (expose_event): don't setup gc here
+	(gnome_color_picker_realize): set it up here instead so we
+	don't get warnings from (render_dither).
+
 2001-10-04  James Henstridge  <james@daa.com.au>
 
 	* gnome-icon-list.c (gnome_icon_list_class_init): change second
