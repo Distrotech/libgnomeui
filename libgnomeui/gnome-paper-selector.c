@@ -38,6 +38,26 @@
 #include "portrait.xpm"
 #include "landscape.xpm"
 
+struct _GnomePaperSelectorPrivate {
+  const GnomeUnit *unit;
+  const GnomePaper *paper;
+
+  GtkWidget *paper_size, *paper_label;
+  GtkWidget *orient_portrait, *orient_landscape;
+  GtkWidget *tmargin, *bmargin, *lmargin, *rmargin;
+  GtkWidget *scaling;
+  GtkWidget *fittopage;
+
+  GtkWidget *darea;
+
+  GdkGC *gc;
+
+  /* position of paper preview */
+  gint16 x, y, width, height;
+
+  gboolean block_changed : 1;
+};
+
 static const GnomeUnit *default_unit = NULL;
 static const GnomeUnit *point_unit = NULL;
 static const GnomePaper *default_paper = NULL;
@@ -119,6 +139,8 @@ gnome_paper_selector_init(GnomePaperSelector *self)
   GdkBitmap *mask;
   const GList *papers;
 
+  self->_priv = g_new0(GnomePaperSelectorPrivate, 1);
+
   if (default_unit == NULL)
     default_unit = gnome_unit_with_name(DEFAULT_UNIT);
   if (point_unit == NULL)
@@ -141,8 +163,8 @@ gnome_paper_selector_init(GnomePaperSelector *self)
   gtk_container_add(GTK_CONTAINER(frame), box);
   gtk_widget_show(box);
 
-  self->paper_size = gtk_option_menu_new();
-  gtk_box_pack_start(GTK_BOX(box), self->paper_size, TRUE, FALSE, 0);
+  self->_priv->paper_size = gtk_option_menu_new();
+  gtk_box_pack_start(GTK_BOX(box), self->_priv->paper_size, TRUE, FALSE, 0);
 
   menu = gtk_menu_new();
   for (papers = gnome_paper_name_list(); papers; papers = papers->next) {
@@ -155,12 +177,12 @@ gnome_paper_selector_init(GnomePaperSelector *self)
     gtk_container_add(GTK_CONTAINER(menu), menuitem);
     gtk_widget_show(menuitem);
   }
-  gtk_option_menu_set_menu(GTK_OPTION_MENU(self->paper_size), menu);
-  gtk_widget_show(self->paper_size);
+  gtk_option_menu_set_menu(GTK_OPTION_MENU(self->_priv->paper_size), menu);
+  gtk_widget_show(self->_priv->paper_size);
 
-  self->paper_label = gtk_label_new("");
-  gtk_box_pack_start(GTK_BOX(box), self->paper_label, TRUE, TRUE, 0);
-  gtk_widget_show(self->paper_label);
+  self->_priv->paper_label = gtk_label_new("");
+  gtk_box_pack_start(GTK_BOX(box), self->_priv->paper_label, TRUE, TRUE, 0);
+  gtk_widget_show(self->_priv->paper_label);
 
   /* orientation */
   frame = gtk_frame_new(_("Orientation"));
@@ -173,9 +195,9 @@ gnome_paper_selector_init(GnomePaperSelector *self)
   gtk_container_add(GTK_CONTAINER(frame), box);
   gtk_widget_show(box);
 
-  self->orient_portrait = gtk_radio_button_new(NULL);
+  self->_priv->orient_portrait = gtk_radio_button_new(NULL);
   vbox = gtk_vbox_new(FALSE, GNOME_PAD_SMALL);
-  gtk_container_add(GTK_CONTAINER(self->orient_portrait), vbox);
+  gtk_container_add(GTK_CONTAINER(self->_priv->orient_portrait), vbox);
   gtk_widget_show(vbox);
   pix = gdk_pixmap_colormap_create_from_xpm_d(NULL,
 		gtk_widget_get_colormap(GTK_WIDGET(self)), &mask, NULL,
@@ -189,13 +211,13 @@ gnome_paper_selector_init(GnomePaperSelector *self)
   gtk_box_pack_start(GTK_BOX(vbox), wid, TRUE, TRUE, 0);
   gtk_widget_show(wid);
 
-  gtk_box_pack_start(GTK_BOX(box), self->orient_portrait, TRUE, TRUE, 0);
-  gtk_widget_show(self->orient_portrait);
+  gtk_box_pack_start(GTK_BOX(box), self->_priv->orient_portrait, TRUE, TRUE, 0);
+  gtk_widget_show(self->_priv->orient_portrait);
 
-  self->orient_landscape = gtk_radio_button_new(
-	gtk_radio_button_group(GTK_RADIO_BUTTON(self->orient_portrait)));
+  self->_priv->orient_landscape = gtk_radio_button_new(
+	gtk_radio_button_group(GTK_RADIO_BUTTON(self->_priv->orient_portrait)));
   vbox = gtk_vbox_new(FALSE, GNOME_PAD_SMALL);
-  gtk_container_add(GTK_CONTAINER(self->orient_landscape), vbox);
+  gtk_container_add(GTK_CONTAINER(self->_priv->orient_landscape), vbox);
   gtk_widget_show(vbox);
   pix = gdk_pixmap_colormap_create_from_xpm_d(NULL,
 		gtk_widget_get_colormap(GTK_WIDGET(self)), &mask, NULL,
@@ -209,8 +231,8 @@ gnome_paper_selector_init(GnomePaperSelector *self)
   gtk_box_pack_start(GTK_BOX(vbox), wid, TRUE, TRUE, 0);
   gtk_widget_show(wid);
 
-  gtk_box_pack_start(GTK_BOX(box), self->orient_landscape, TRUE, TRUE, 0);
-  gtk_widget_show(self->orient_landscape);
+  gtk_box_pack_start(GTK_BOX(box), self->_priv->orient_landscape, TRUE, TRUE, 0);
+  gtk_widget_show(self->_priv->orient_landscape);
 
   /* margins */
   frame = gtk_frame_new(_("Margins"));
@@ -231,12 +253,12 @@ gnome_paper_selector_init(GnomePaperSelector *self)
 		   GTK_FILL, GTK_FILL|GTK_EXPAND, 0, 0);
   gtk_widget_show(wid);
 
-  self->tmargin = gnome_unit_spinner_new(
+  self->_priv->tmargin = gnome_unit_spinner_new(
 	GTK_ADJUSTMENT(gtk_adjustment_new(1, 0,100, 0.1,10,10)),
 	2, default_unit);
-  gtk_table_attach(GTK_TABLE(table), self->tmargin, 1,2, 0,1,
+  gtk_table_attach(GTK_TABLE(table), self->_priv->tmargin, 1,2, 0,1,
 		   GTK_FILL|GTK_EXPAND, GTK_FILL|GTK_EXPAND, 0, 0);
-  gtk_widget_show(self->tmargin);
+  gtk_widget_show(self->_priv->tmargin);
 
   wid = gtk_label_new(_("Bottom:"));
   gtk_misc_set_alignment(GTK_MISC(wid), 1.0, 0.5);
@@ -244,12 +266,12 @@ gnome_paper_selector_init(GnomePaperSelector *self)
 		   GTK_FILL, GTK_FILL|GTK_EXPAND, 0, 0);
   gtk_widget_show(wid);
 
-  self->bmargin = gnome_unit_spinner_new(
+  self->_priv->bmargin = gnome_unit_spinner_new(
 	GTK_ADJUSTMENT(gtk_adjustment_new(1, 0,100, 0.1,10,10)),
 	2, default_unit);
-  gtk_table_attach(GTK_TABLE(table), self->bmargin, 1,2, 1,2,
+  gtk_table_attach(GTK_TABLE(table), self->_priv->bmargin, 1,2, 1,2,
 		   GTK_FILL|GTK_EXPAND, GTK_FILL|GTK_EXPAND, 0, 0);
-  gtk_widget_show(self->bmargin);
+  gtk_widget_show(self->_priv->bmargin);
 
   wid = gtk_label_new(_("Left:"));
   gtk_misc_set_alignment(GTK_MISC(wid), 1.0, 0.5);
@@ -257,12 +279,12 @@ gnome_paper_selector_init(GnomePaperSelector *self)
 		   GTK_FILL, GTK_FILL|GTK_EXPAND, 0, 0);
   gtk_widget_show(wid);
 
-  self->lmargin = gnome_unit_spinner_new(
+  self->_priv->lmargin = gnome_unit_spinner_new(
 	GTK_ADJUSTMENT(gtk_adjustment_new(1, 0,100, 0.1,10,10)),
 	2, default_unit);
-  gtk_table_attach(GTK_TABLE(table), self->lmargin, 1,2, 2,3,
+  gtk_table_attach(GTK_TABLE(table), self->_priv->lmargin, 1,2, 2,3,
 		   GTK_FILL|GTK_EXPAND, GTK_FILL|GTK_EXPAND, 0, 0);
-  gtk_widget_show(self->lmargin);
+  gtk_widget_show(self->_priv->lmargin);
 
   wid = gtk_label_new(_("Right:"));
   gtk_misc_set_alignment(GTK_MISC(wid), 1.0, 0.5);
@@ -270,12 +292,12 @@ gnome_paper_selector_init(GnomePaperSelector *self)
 		   GTK_FILL, GTK_FILL|GTK_EXPAND, 0, 0);
   gtk_widget_show(wid);
 
-  self->rmargin = gnome_unit_spinner_new(
+  self->_priv->rmargin = gnome_unit_spinner_new(
 	GTK_ADJUSTMENT(gtk_adjustment_new(1, 0,100, 0.1,10,10)),
 	2, default_unit);
-  gtk_table_attach(GTK_TABLE(table), self->rmargin, 1,2, 3,4,
+  gtk_table_attach(GTK_TABLE(table), self->_priv->rmargin, 1,2, 3,4,
 		   GTK_FILL|GTK_EXPAND, GTK_FILL|GTK_EXPAND, 0, 0);
-  gtk_widget_show(self->rmargin);
+  gtk_widget_show(self->_priv->rmargin);
 
   /* Scaling */
   frame = gtk_frame_new(_("Scaling"));
@@ -288,52 +310,52 @@ gnome_paper_selector_init(GnomePaperSelector *self)
   gtk_container_add(GTK_CONTAINER(frame), box);
   gtk_widget_show(box);
 
-  self->scaling = gtk_spin_button_new(
+  self->_priv->scaling = gtk_spin_button_new(
 	GTK_ADJUSTMENT(gtk_adjustment_new(100,1,10000, 1,10,10)), 1, 1);
-  gtk_box_pack_start(GTK_BOX(box), self->scaling, TRUE, FALSE, 0);
-  gtk_widget_show(self->scaling);
+  gtk_box_pack_start(GTK_BOX(box), self->_priv->scaling, TRUE, FALSE, 0);
+  gtk_widget_show(self->_priv->scaling);
 
-  self->fittopage = gtk_button_new_with_label(_("Fit to Page"));
-  gtk_box_pack_start(GTK_BOX(box), self->fittopage, TRUE, FALSE, 0);
-  gtk_widget_show(self->fittopage);
+  self->_priv->fittopage = gtk_button_new_with_label(_("Fit to Page"));
+  gtk_box_pack_start(GTK_BOX(box), self->_priv->fittopage, TRUE, FALSE, 0);
+  gtk_widget_show(self->_priv->fittopage);
 
   /* the drawing area */
-  self->darea = gtk_drawing_area_new();
-  gtk_table_attach(GTK_TABLE(self), self->darea, 1,2, 1,3,
+  self->_priv->darea = gtk_drawing_area_new();
+  gtk_table_attach(GTK_TABLE(self), self->_priv->darea, 1,2, 1,3,
 		   GTK_FILL|GTK_EXPAND, GTK_FILL|GTK_EXPAND, 0, 0);
-  gtk_widget_show(self->darea);
+  gtk_widget_show(self->_priv->darea);
 
   /* connect the signal handlers */
-  gtk_signal_connect_object(GTK_OBJECT(self->orient_portrait), "toggled",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->orient_portrait), "toggled",
 			    GTK_SIGNAL_FUNC(orient_changed), GTK_OBJECT(self));
 
-  gtk_signal_connect_object(GTK_OBJECT(self->tmargin), "changed",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->tmargin), "changed",
 			    GTK_SIGNAL_FUNC(margin_changed), GTK_OBJECT(self));
-  gtk_signal_connect_object(GTK_OBJECT(self->bmargin), "changed",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->bmargin), "changed",
 			    GTK_SIGNAL_FUNC(margin_changed), GTK_OBJECT(self));
-  gtk_signal_connect_object(GTK_OBJECT(self->lmargin), "changed",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->lmargin), "changed",
 			    GTK_SIGNAL_FUNC(margin_changed), GTK_OBJECT(self));
-  gtk_signal_connect_object(GTK_OBJECT(self->rmargin), "changed",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->rmargin), "changed",
 			    GTK_SIGNAL_FUNC(margin_changed), GTK_OBJECT(self));
 
-  gtk_signal_connect_object(GTK_OBJECT(self->scaling), "changed",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->scaling), "changed",
 			    GTK_SIGNAL_FUNC(scale_changed), GTK_OBJECT(self));
-  gtk_signal_connect_object(GTK_OBJECT(self->fittopage), "pressed",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->fittopage), "pressed",
 			    GTK_SIGNAL_FUNC(fittopage_pressed),
 			    GTK_OBJECT(self));
 
-  gtk_signal_connect_object(GTK_OBJECT(self->darea), "size_allocate",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->darea), "size_allocate",
 			    GTK_SIGNAL_FUNC(darea_size_allocate),
 			    GTK_OBJECT(self));
-  gtk_signal_connect_object(GTK_OBJECT(self->darea), "expose_event",
+  gtk_signal_connect_object(GTK_OBJECT(self->_priv->darea), "expose_event",
 			    GTK_SIGNAL_FUNC(darea_expose_event),
 			    GTK_OBJECT(self));
 
-  self->unit = default_unit;
-  self->paper = default_paper;
+  self->_priv->unit = default_unit;
+  self->_priv->paper = default_paper;
 
-  self->gc = NULL;
-  self->block_changed = FALSE;
+  self->_priv->gc = NULL;
+  self->_priv->block_changed = FALSE;
 }
 
 /**
@@ -364,11 +386,11 @@ gnome_paper_selector_new_with_unit(const GnomeUnit *unit)
   GnomePaperSelector *self = gtk_type_new(gnome_paper_selector_get_type());
 
   if (unit) {
-    self->unit = unit;
-    gnome_unit_spinner_change_units(GNOME_UNIT_SPINNER(self->tmargin), unit);
-    gnome_unit_spinner_change_units(GNOME_UNIT_SPINNER(self->bmargin), unit);
-    gnome_unit_spinner_change_units(GNOME_UNIT_SPINNER(self->lmargin), unit);
-    gnome_unit_spinner_change_units(GNOME_UNIT_SPINNER(self->rmargin), unit);
+    self->_priv->unit = unit;
+    gnome_unit_spinner_change_units(GNOME_UNIT_SPINNER(self->_priv->tmargin), unit);
+    gnome_unit_spinner_change_units(GNOME_UNIT_SPINNER(self->_priv->bmargin), unit);
+    gnome_unit_spinner_change_units(GNOME_UNIT_SPINNER(self->_priv->lmargin), unit);
+    gnome_unit_spinner_change_units(GNOME_UNIT_SPINNER(self->_priv->rmargin), unit);
   }
   gnome_paper_selector_set_paper(self, DEFAULT_PAPER);
   return GTK_WIDGET(self);
@@ -387,7 +409,7 @@ gnome_paper_selector_get_paper(GnomePaperSelector *self)
 {
   g_return_val_if_fail(self != NULL, NULL);
 
-  return self->paper;
+  return self->_priv->paper;
 }
 
 /**
@@ -416,9 +438,9 @@ gnome_paper_selector_set_paper(GnomePaperSelector *self, const gchar *paper)
   for (l = gnome_paper_name_list(), i = 0; l; l = l->next, i++)
     if (!strcmp((const gchar *)l->data, paper))
       break;
-  gtk_option_menu_set_history(GTK_OPTION_MENU(self->paper_size), i);
+  gtk_option_menu_set_history(GTK_OPTION_MENU(self->_priv->paper_size), i);
   gtk_menu_item_activate(
-	GTK_MENU_ITEM(GTK_OPTION_MENU(self->paper_size)->menu_item));
+	GTK_MENU_ITEM(GTK_OPTION_MENU(self->_priv->paper_size)->menu_item));
 }
 
 /**
@@ -442,19 +464,19 @@ gnome_paper_selector_get_margins(GnomePaperSelector *self,
   g_return_if_fail(self != NULL);
 
   if (!unit)
-    unit = self->unit;
+    unit = self->_priv->unit;
 
   if (tmargin)
-    *tmargin = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->tmargin),
+    *tmargin = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->tmargin),
 					    unit);
   if (bmargin)
-    *bmargin = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->bmargin),
+    *bmargin = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->bmargin),
 					    unit);
   if (lmargin)
-    *lmargin = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->lmargin),
+    *lmargin = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->lmargin),
 					    unit);
   if (rmargin)
-    *rmargin = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->rmargin),
+    *rmargin = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->rmargin),
 					    unit);
 }
 
@@ -478,18 +500,19 @@ gnome_paper_selector_set_margins(GnomePaperSelector *self,
 {
   g_return_if_fail(self != NULL);
 
-  if (!unit) unit = self->unit;
+  if ( ! unit)
+	  unit = self->_priv->unit;
 
-  self->block_changed = TRUE;
-  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->tmargin), tmargin,
+  self->_priv->block_changed = TRUE;
+  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->_priv->tmargin), tmargin,
 			       unit);
-  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->bmargin), bmargin,
+  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->_priv->bmargin), bmargin,
 			       unit);
-  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->lmargin), lmargin,
+  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->_priv->lmargin), lmargin,
 			       unit);
-  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->rmargin), rmargin,
+  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->_priv->rmargin), rmargin,
 			       unit);
-  self->block_changed = FALSE;
+  self->_priv->block_changed = FALSE;
 
   gtk_signal_emit(GTK_OBJECT(self), ps_signals[CHANGED]);
 }
@@ -507,7 +530,7 @@ gnome_paper_selector_get_orientation(GnomePaperSelector *self)
 {
   g_return_val_if_fail(self != NULL, GNOME_PAPER_ORIENT_PORTRAIT);
 
-  if (GTK_TOGGLE_BUTTON(self->orient_portrait)->active)
+  if (GTK_TOGGLE_BUTTON(self->_priv->orient_portrait)->active)
     return GNOME_PAPER_ORIENT_PORTRAIT;
   else
     return GNOME_PAPER_ORIENT_LANDSCAPE;
@@ -528,11 +551,11 @@ gnome_paper_selector_set_orientation(GnomePaperSelector *self,
 
   switch (orient) {
   case GNOME_PAPER_ORIENT_PORTRAIT:
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(self->orient_portrait),
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(self->_priv->orient_portrait),
 				 TRUE);
     break;
   case GNOME_PAPER_ORIENT_LANDSCAPE:
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(self->orient_landscape),
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(self->_priv->orient_landscape),
 				 TRUE);
     break;
   }
@@ -551,7 +574,7 @@ gnome_paper_selector_get_scaling(GnomePaperSelector *self)
 {
   g_return_val_if_fail(self != NULL, 0.0);
 
-  return GTK_SPIN_BUTTON(self->scaling)->adjustment->value / 100.0;
+  return GTK_SPIN_BUTTON(self->_priv->scaling)->adjustment->value / 100.0;
 }
 
 /**
@@ -566,8 +589,8 @@ gnome_paper_selector_set_scaling(GnomePaperSelector *self, gfloat scaling)
 {
   g_return_if_fail(self != NULL);
 
-  GTK_SPIN_BUTTON(self->scaling)->adjustment->value = scaling * 100.0;
-  gtk_adjustment_value_changed(GTK_SPIN_BUTTON(self->scaling)->adjustment);
+  GTK_SPIN_BUTTON(self->_priv->scaling)->adjustment->value = scaling * 100.0;
+  gtk_adjustment_value_changed(GTK_SPIN_BUTTON(self->_priv->scaling)->adjustment);
 }
 
 /**
@@ -589,23 +612,24 @@ gnome_paper_selector_get_effective_area(GnomePaperSelector *self,
 
   g_return_if_fail(self != NULL);
 
-  if (!unit) unit = self->unit;
+  if ( ! unit)
+	  unit = self->_priv->unit;
 
-  if (GTK_TOGGLE_BUTTON(self->orient_portrait)->active) {
-    w = gnome_paper_pswidth(self->paper);
-    h = gnome_paper_psheight(self->paper);
+  if (GTK_TOGGLE_BUTTON(self->_priv->orient_portrait)->active) {
+    w = gnome_paper_pswidth(self->_priv->paper);
+    h = gnome_paper_psheight(self->_priv->paper);
   } else {
-    h = gnome_paper_pswidth(self->paper);
-    w = gnome_paper_psheight(self->paper);
+    h = gnome_paper_pswidth(self->_priv->paper);
+    w = gnome_paper_psheight(self->_priv->paper);
   }
   w = gnome_unit_convert(w, point_unit, unit);
   h = gnome_unit_convert(h, point_unit, unit);
 
-  h -= gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->tmargin), unit);
-  h -= gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->bmargin), unit);
-  w -= gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->lmargin), unit);
-  w -= gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->rmargin), unit);
-  scaling = GTK_SPIN_BUTTON(self->scaling)->adjustment->value / 100.0;
+  h -= gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->tmargin), unit);
+  h -= gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->bmargin), unit);
+  w -= gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->lmargin), unit);
+  w -= gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->rmargin), unit);
+  scaling = GTK_SPIN_BUTTON(self->_priv->scaling)->adjustment->value / 100.0;
   h /= scaling;
   w /= scaling;
 
@@ -621,30 +645,30 @@ fittopage_pressed(GnomePaperSelector *self)
 
 static void size_page(GnomePaperSelector *self, GtkAllocation *a)
 {
-  self->width = a->width - 3;
-  self->height = a->height - 3;
+  self->_priv->width = a->width - 3;
+  self->_priv->height = a->height - 3;
 
   /* change to correct metrics */
-  if (GTK_TOGGLE_BUTTON(self->orient_portrait)->active) {
-    if (self->width * gnome_paper_psheight(self->paper) >
-	self->height * gnome_paper_pswidth(self->paper))
-      self->width = self->height * gnome_paper_pswidth(self->paper) /
-	gnome_paper_psheight(self->paper);
+  if (GTK_TOGGLE_BUTTON(self->_priv->orient_portrait)->active) {
+    if (self->_priv->width * gnome_paper_psheight(self->_priv->paper) >
+	self->_priv->height * gnome_paper_pswidth(self->_priv->paper))
+      self->_priv->width = self->_priv->height * gnome_paper_pswidth(self->_priv->paper) /
+	gnome_paper_psheight(self->_priv->paper);
     else
-      self->height = self->width * gnome_paper_psheight(self->paper) /
-	gnome_paper_pswidth(self->paper);
+      self->_priv->height = self->_priv->width * gnome_paper_psheight(self->_priv->paper) /
+	gnome_paper_pswidth(self->_priv->paper);
   } else {
-    if (self->width * gnome_paper_pswidth(self->paper) >
-	self->height * gnome_paper_psheight(self->paper))
-      self->width = self->height * gnome_paper_psheight(self->paper) /
-	gnome_paper_pswidth(self->paper);
+    if (self->_priv->width * gnome_paper_pswidth(self->_priv->paper) >
+	self->_priv->height * gnome_paper_psheight(self->_priv->paper))
+      self->_priv->width = self->_priv->height * gnome_paper_psheight(self->_priv->paper) /
+	gnome_paper_pswidth(self->_priv->paper);
     else
-      self->height = self->width * gnome_paper_pswidth(self->paper) /
-	gnome_paper_psheight(self->paper);
+      self->_priv->height = self->_priv->width * gnome_paper_pswidth(self->_priv->paper) /
+	gnome_paper_psheight(self->_priv->paper);
   }
 
-  self->x = (a->width - self->width - 3) / 2;
-  self->y = (a->height - self->height - 3) / 2;
+  self->_priv->x = (a->width - self->_priv->width - 3) / 2;
+  self->_priv->y = (a->height - self->_priv->height - 3) / 2;
 }
 
 static void
@@ -656,7 +680,7 @@ darea_size_allocate(GnomePaperSelector *self, GtkAllocation *allocation)
 static gint
 darea_expose_event(GnomePaperSelector *self, GdkEventExpose *event)
 {
-  GdkWindow *window= self->darea->window;
+  GdkWindow *window= self->_priv->darea->window;
   gfloat val;
   gint num;
   GdkGC *black_gc = gtk_widget_get_style(GTK_WIDGET(self))->black_gc;
@@ -666,75 +690,75 @@ darea_expose_event(GnomePaperSelector *self, GdkEventExpose *event)
     return FALSE;
 
   /* setup gc ... */
-  if (!self->gc) {
+  if (!self->_priv->gc) {
     GdkColor blue;
 
-    self->gc = gdk_gc_new(window);
+    self->_priv->gc = gdk_gc_new(window);
     blue.red = 0;
     blue.green = 0;
     blue.blue = 0x7fff;
     gdk_color_alloc(gtk_widget_get_colormap(GTK_WIDGET(self)), &blue);
-    gdk_gc_set_foreground(self->gc, &blue);
+    gdk_gc_set_foreground(self->_priv->gc, &blue);
   }
 
   gdk_window_clear_area (window,
                          0, 0,
-                         self->darea->allocation.width,
-                         self->darea->allocation.height);
+                         self->_priv->darea->allocation.width,
+                         self->_priv->darea->allocation.height);
 
   /* draw the page image */
-  gdk_draw_rectangle(window, black_gc, TRUE, self->x+3, self->y+3,
-		     self->width, self->height);
-  gdk_draw_rectangle(window, white_gc, TRUE, self->x, self->y,
-		     self->width, self->height);
-  gdk_draw_rectangle(window, black_gc, FALSE, self->x, self->y,
-		     self->width-1, self->height-1);
+  gdk_draw_rectangle(window, black_gc, TRUE, self->_priv->x+3, self->_priv->y+3,
+		     self->_priv->width, self->_priv->height);
+  gdk_draw_rectangle(window, white_gc, TRUE, self->_priv->x, self->_priv->y,
+		     self->_priv->width, self->_priv->height);
+  gdk_draw_rectangle(window, black_gc, FALSE, self->_priv->x, self->_priv->y,
+		     self->_priv->width-1, self->_priv->height-1);
 
   /* draw margins */
-  if (GTK_TOGGLE_BUTTON(self->orient_portrait)->active) {
-    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->tmargin),
+  if (GTK_TOGGLE_BUTTON(self->_priv->orient_portrait)->active) {
+    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->tmargin),
 				       point_unit);
-    num = self->y + val * self->height /gnome_paper_psheight(self->paper);
-    gdk_draw_line(window, self->gc, self->x+1, num, self->x+self->width-2,num);
+    num = self->_priv->y + val * self->_priv->height /gnome_paper_psheight(self->_priv->paper);
+    gdk_draw_line(window, self->_priv->gc, self->_priv->x+1, num, self->_priv->x+self->_priv->width-2,num);
 
-    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->bmargin),
+    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->bmargin),
 				       point_unit);
-    num = self->y + self->height -
-      val * self->height / gnome_paper_psheight(self->paper);
-    gdk_draw_line(window, self->gc, self->x+1, num, self->x+self->width-2,num);
+    num = self->_priv->y + self->_priv->height -
+      val * self->_priv->height / gnome_paper_psheight(self->_priv->paper);
+    gdk_draw_line(window, self->_priv->gc, self->_priv->x+1, num, self->_priv->x+self->_priv->width-2,num);
 
-    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->lmargin),
+    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->lmargin),
 				       point_unit);
-    num = self->x + val * self->width / gnome_paper_pswidth(self->paper);
-    gdk_draw_line(window, self->gc, num, self->y+1,num,self->y+self->height-2);
+    num = self->_priv->x + val * self->_priv->width / gnome_paper_pswidth(self->_priv->paper);
+    gdk_draw_line(window, self->_priv->gc, num, self->_priv->y+1,num,self->_priv->y+self->_priv->height-2);
 
-    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->rmargin),
+    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->rmargin),
 				       point_unit);
-    num = self->x + self->width -
-      val * self->width / gnome_paper_pswidth(self->paper);
-    gdk_draw_line(window, self->gc, num, self->y+1,num,self->y+self->height-2);
+    num = self->_priv->x + self->_priv->width -
+      val * self->_priv->width / gnome_paper_pswidth(self->_priv->paper);
+    gdk_draw_line(window, self->_priv->gc, num, self->_priv->y+1,num,self->_priv->y+self->_priv->height-2);
   } else {
-    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->tmargin),
+    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->tmargin),
 				       point_unit);
-    num = self->y + val * self->height /gnome_paper_pswidth(self->paper);
-    gdk_draw_line(window, self->gc, self->x+1, num, self->x+self->width-2,num);
+    num = self->_priv->y + val * self->_priv->height /gnome_paper_pswidth(self->_priv->paper);
+    gdk_draw_line(window, self->_priv->gc, self->_priv->x+1, num, self->_priv->x+self->_priv->width-2,num);
 
-    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->bmargin),
+    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->bmargin),
 				       point_unit);
-    num = self->y + self->height -
-      val * self->height / gnome_paper_pswidth(self->paper);
-    gdk_draw_line(window, self->gc, self->x+1, num, self->x+self->width-2,num);
+    num = self->_priv->y + self->_priv->height -
+      val * self->_priv->height / gnome_paper_pswidth(self->_priv->paper);
+    gdk_draw_line(window, self->_priv->gc, self->_priv->x+1, num, self->_priv->x+self->_priv->width-2,num);
 
-    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->lmargin),
+    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->lmargin),
 				       point_unit);
-    num = self->x + val * self->width / gnome_paper_psheight(self->paper);
-    gdk_draw_line(window, self->gc, num, self->y+1,num,self->y+self->height-2);
+    num = self->_priv->x + val * self->_priv->width / gnome_paper_psheight(self->_priv->paper);
+    gdk_draw_line(window, self->_priv->gc, num, self->_priv->y+1,num,self->_priv->y+self->_priv->height-2);
 
-    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->rmargin),
+    val = gnome_unit_spinner_get_value(GNOME_UNIT_SPINNER(self->_priv->rmargin),
 				       point_unit);
-    num = self->x + self->width -
-      val * self->width / gnome_paper_psheight(self->paper);
-    gdk_draw_line(window, self->gc, num, self->y+1,num,self->y+self->height-2);
+    num = self->_priv->x + self->_priv->width -
+      val * self->_priv->width / gnome_paper_psheight(self->_priv->paper);
+    gdk_draw_line(window, self->_priv->gc, num, self->_priv->y+1,num,self->_priv->y+self->_priv->height-2);
   }
 
   return FALSE;
@@ -745,49 +769,49 @@ paper_size_change(GtkMenuItem *item, GnomePaperSelector *self)
 {
   gchar buf[512];
 
-  self->paper = (const GnomePaper *)gtk_object_get_user_data(GTK_OBJECT(item));
-  size_page(self, &self->darea->allocation);
-  gtk_widget_queue_draw(self->darea);
+  self->_priv->paper = (const GnomePaper *)gtk_object_get_user_data(GTK_OBJECT(item));
+  size_page(self, &self->_priv->darea->allocation);
+  gtk_widget_queue_draw(self->_priv->darea);
 
-  self->block_changed = TRUE;
-  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->tmargin),
-			     gnome_paper_tmargin(self->paper), point_unit);
-  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->bmargin),
-			     gnome_paper_bmargin(self->paper), point_unit);
-  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->lmargin),
-			     gnome_paper_lmargin(self->paper), point_unit);
-  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->rmargin),
-			     gnome_paper_rmargin(self->paper), point_unit);
+  self->_priv->block_changed = TRUE;
+  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->_priv->tmargin),
+			     gnome_paper_tmargin(self->_priv->paper), point_unit);
+  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->_priv->bmargin),
+			     gnome_paper_bmargin(self->_priv->paper), point_unit);
+  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->_priv->lmargin),
+			     gnome_paper_lmargin(self->_priv->paper), point_unit);
+  gnome_unit_spinner_set_value(GNOME_UNIT_SPINNER(self->_priv->rmargin),
+			     gnome_paper_rmargin(self->_priv->paper), point_unit);
 
-  if (GTK_TOGGLE_BUTTON(self->orient_portrait)->active) {
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->tmargin))->upper =
-      gnome_paper_psheight(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->bmargin))->upper =
-      gnome_paper_psheight(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->lmargin))->upper =
-      gnome_paper_pswidth(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->rmargin))->upper =
-      gnome_paper_pswidth(self->paper);
+  if (GTK_TOGGLE_BUTTON(self->_priv->orient_portrait)->active) {
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->tmargin))->upper =
+      gnome_paper_psheight(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->bmargin))->upper =
+      gnome_paper_psheight(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->lmargin))->upper =
+      gnome_paper_pswidth(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->rmargin))->upper =
+      gnome_paper_pswidth(self->_priv->paper);
   } else {
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->tmargin))->upper =
-      gnome_paper_pswidth(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->bmargin))->upper =
-      gnome_paper_pswidth(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->lmargin))->upper =
-      gnome_paper_psheight(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->rmargin))->upper =
-      gnome_paper_psheight(self->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->tmargin))->upper =
+      gnome_paper_pswidth(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->bmargin))->upper =
+      gnome_paper_pswidth(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->lmargin))->upper =
+      gnome_paper_psheight(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->rmargin))->upper =
+      gnome_paper_psheight(self->_priv->paper);
   }
-  self->block_changed = FALSE;
+  self->_priv->block_changed = FALSE;
 
   g_snprintf(buf, sizeof(buf), _("%0.3g%s x %0.3g%s"),
-	     gnome_unit_convert(gnome_paper_pswidth(self->paper),
-				point_unit, self->unit),
-	     gnome_unit_abbrev(self->unit),
-	     gnome_unit_convert(gnome_paper_psheight(self->paper),
-				point_unit, self->unit),
-	     gnome_unit_abbrev(self->unit));
-  gtk_label_set(GTK_LABEL(self->paper_label), buf);
+	     gnome_unit_convert(gnome_paper_pswidth(self->_priv->paper),
+				point_unit, self->_priv->unit),
+	     gnome_unit_abbrev(self->_priv->unit),
+	     gnome_unit_convert(gnome_paper_psheight(self->_priv->paper),
+				point_unit, self->_priv->unit),
+	     gnome_unit_abbrev(self->_priv->unit));
+  gtk_label_set(GTK_LABEL(self->_priv->paper_label), buf);
 
   gtk_signal_emit(GTK_OBJECT(self), ps_signals[CHANGED]);
 }
@@ -795,45 +819,45 @@ paper_size_change(GtkMenuItem *item, GnomePaperSelector *self)
 static void
 orient_changed(GnomePaperSelector *self)
 {
-  size_page(self, &self->darea->allocation);
-  gtk_widget_queue_draw(self->darea);
+  size_page(self, &self->_priv->darea->allocation);
+  gtk_widget_queue_draw(self->_priv->darea);
 
-  if (GTK_TOGGLE_BUTTON(self->orient_portrait)->active) {
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->tmargin))->upper =
-      gnome_paper_psheight(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->bmargin))->upper =
-      gnome_paper_psheight(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->lmargin))->upper =
-      gnome_paper_pswidth(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->rmargin))->upper =
-      gnome_paper_pswidth(self->paper);
+  if (GTK_TOGGLE_BUTTON(self->_priv->orient_portrait)->active) {
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->tmargin))->upper =
+      gnome_paper_psheight(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->bmargin))->upper =
+      gnome_paper_psheight(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->lmargin))->upper =
+      gnome_paper_pswidth(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->rmargin))->upper =
+      gnome_paper_pswidth(self->_priv->paper);
   } else {
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->tmargin))->upper =
-      gnome_paper_pswidth(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->bmargin))->upper =
-      gnome_paper_pswidth(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->lmargin))->upper =
-      gnome_paper_psheight(self->paper);
-    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->rmargin))->upper =
-      gnome_paper_psheight(self->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->tmargin))->upper =
+      gnome_paper_pswidth(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->bmargin))->upper =
+      gnome_paper_pswidth(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->lmargin))->upper =
+      gnome_paper_psheight(self->_priv->paper);
+    gtk_spin_button_get_adjustment(GTK_SPIN_BUTTON(self->_priv->rmargin))->upper =
+      gnome_paper_psheight(self->_priv->paper);
   }
 
-  if (!self->block_changed)
+  if (!self->_priv->block_changed)
     gtk_signal_emit(GTK_OBJECT(self), ps_signals[CHANGED]);
 }
 
 static void
 margin_changed(GnomePaperSelector *self)
 {
-  gtk_widget_queue_draw(self->darea);
-  if (!self->block_changed)
+  gtk_widget_queue_draw(self->_priv->darea);
+  if (!self->_priv->block_changed)
     gtk_signal_emit(GTK_OBJECT(self), ps_signals[CHANGED]);
 }
 
 static void
 scale_changed(GnomePaperSelector *self)
 {
-  if (!self->block_changed)
+  if (!self->_priv->block_changed)
     gtk_signal_emit(GTK_OBJECT(self), ps_signals[CHANGED]);
 }
 
@@ -845,8 +869,12 @@ gnome_paper_selector_destroy(GtkObject *object)
   g_return_if_fail(object != NULL);
 
   self = GNOME_PAPER_SELECTOR(object);
-  if (self->gc)
-    gdk_gc_unref(self->gc);
+  if (self->_priv->gc)
+    gdk_gc_unref(self->_priv->gc);
+  self->_priv->gc = NULL;
+
+  g_free(self->_priv);
+  self->_priv = NULL;
 
   if (parent_class->destroy)
     (* parent_class->destroy)(object);

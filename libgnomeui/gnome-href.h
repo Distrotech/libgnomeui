@@ -72,12 +72,13 @@ const gchar *gnome_href_get_url(GnomeHRef *href);
 void gnome_href_set_text(GnomeHRef *href, const gchar *text);
 const gchar *gnome_href_get_text(GnomeHRef *href);
 
+#ifndef GNOME_EXCLUDE_DEPRECATED
 /* DEPRECATED!, use set/get_text */
 void gnome_href_set_label(GnomeHRef *href, const gchar *label);
 const gchar *gnome_href_get_label(GnomeHRef *href);
-
-/* the label can be accessed with gtk_label_get and gtk_label_get */
+#endif
 
 END_GNOME_DECLS
+
 #endif
 

@@ -42,8 +42,9 @@ BEGIN_GNOME_DECLS
 
 #define DIA_IS_PAGE_LAYOUT(obj) GTK_CHECK_TYPE(obj, gnome_paper_selector_get_type())
 
-typedef struct _GnomePaperSelector GnomePaperSelector;
-typedef struct _GnomePaperSelectorClass GnomePaperSelectorClass;
+typedef struct _GnomePaperSelector        GnomePaperSelector;
+typedef struct _GnomePaperSelectorPrivate GnomePaperSelectorPrivate;
+typedef struct _GnomePaperSelectorClass   GnomePaperSelectorClass;
 
 typedef enum {
   GNOME_PAPER_ORIENT_PORTRAIT,
@@ -54,23 +55,7 @@ struct _GnomePaperSelector {
   GtkTable parent;
 
   /*<private>*/
-  const GnomeUnit *unit;
-  const GnomePaper *paper;
-
-  GtkWidget *paper_size, *paper_label;
-  GtkWidget *orient_portrait, *orient_landscape;
-  GtkWidget *tmargin, *bmargin, *lmargin, *rmargin;
-  GtkWidget *scaling;
-  GtkWidget *fittopage;
-
-  GtkWidget *darea;
-
-  GdkGC *gc;
-
-  /* position of paper preview */
-  gint16 x, y, width, height;
-
-  gboolean block_changed : 1;
+  GnomePaperSelectorPrivate *_priv;
 };
 
 struct _GnomePaperSelectorClass {

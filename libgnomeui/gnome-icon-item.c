@@ -1108,7 +1108,7 @@ gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
  * Returns the current text string in an icon text item.  The client should not
  * free this string, as it is internal to the icon text item.
  */
-char *
+const char *
 gnome_icon_text_item_get_text (GnomeIconTextItem *iti)
 {
 	ItiPrivate *priv;

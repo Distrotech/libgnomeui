@@ -1093,7 +1093,8 @@ gnome_help_path_resolve(const char *path, const char *file_type)
  * gnome_help_app_topics:
  * @app_id: The application's ID string
  *
- * Returns: A GSList of strings. The strings are in pairs, topic description then help path.
+ * Returns: A newly allocated GSList of newly allocate strings.
+ * The strings are in pairs, topic description then help path.
  */
 GSList *
 gnome_help_app_topics(const char *app_id)

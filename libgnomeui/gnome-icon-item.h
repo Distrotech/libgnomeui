@@ -118,7 +118,7 @@ void     gnome_icon_text_item_setxy         (GnomeIconTextItem *iti,
 void     gnome_icon_text_item_select        (GnomeIconTextItem *iti,
 					     int                sel);
 
-char    *gnome_icon_text_item_get_text      (GnomeIconTextItem *iti);
+const char *gnome_icon_text_item_get_text   (GnomeIconTextItem *iti);
 
 void     gnome_icon_text_item_start_editing (GnomeIconTextItem *iti);
 void     gnome_icon_text_item_stop_editing  (GnomeIconTextItem *iti,

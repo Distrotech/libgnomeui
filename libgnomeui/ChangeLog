@@ -1,3 +1,16 @@
+Wed Jul 12 15:56:58 2000  George Lebl <jirka@5z.com>
+
+	* gnome-helpsys.c: minor documentation fix
+
+	* gnome-href.h: surround deprecated stuff by #ifndef
+	  GNOME_EXCLUDE_DEPRECATED
+
+	* gnome-icon-item.[ch]:  return const char * when it's
+	  an internal string
+
+	* gnome-paper-selector.[ch]:  Use a private pointer and
+	  a private structure
+
 Wed Jul 12 02:47:22 2000  George Lebl <jirka@5z.com>
 
 	* gnome-app-helper.[ch], gnome-client.[ch], gnome-ditem-edit.c,
