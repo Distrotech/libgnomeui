@@ -1,3 +1,9 @@
+2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-entry.c: Fix entry items not being
+	cleared properly. Patch from Marco Pesenti Gritti. Fixes
+	bug #105388.
+	
 2003-05-21  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* libgnomeui/gnome-ui-init.c: (libgnomeui_segv_handle): Try to
