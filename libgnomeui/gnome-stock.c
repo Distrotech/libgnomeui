@@ -82,7 +82,7 @@ gnome_stock_init(GnomeStock *stock)
 
         /* we cache the pixbufs for stock icons, plus some of them contain shared
            read-only data, so it's typically more efficient to keep the pixbuf */
-        gnome_pixmap_set_mode(GNOME_PIXMAP(stock), GNOME_PIXMAP_KEEP_PIXBUF);
+/*        gnome_pixmap_set_mode(GNOME_PIXMAP(stock), GNOME_PIXMAP_KEEP_PIXBUF);*/
 }
 
 /**
@@ -193,9 +193,9 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
            while we could share the insensitive versions in our hash table.
            It's an open question which is the right thing...
         */
-        gnome_pixmap_set_pixbufs(GNOME_PIXMAP(stock),
-                                 pixbufs,
-                                 bitmasks);
+        gnome_pixmap_set_pixbufs_at_state (GNOME_PIXMAP(stock),
+					   pixbufs,
+					   bitmasks);
 
 	return;
 }
@@ -1571,7 +1571,8 @@ gnome_stock_pixmap_gdk (const char    *icon,
 
         gnome_pixbuf_render(pixbuf,
                             pixmap,
-                            mask);
+                            mask,
+			    128);
 
         gdk_pixbuf_unref(pixbuf);
 }
