@@ -381,6 +381,14 @@ get_menu_accel_group (GtkMenuShell *menu_shell)
 static void
 do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData *uibdata)
 {
+	gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
+			     GNOMEUIINFO_KEY_UIDATA,
+			     uiinfo->user_data);
+
+	gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
+			     GNOMEUIINFO_KEY_UIBDATA,
+			     uibdata->data);
+
 	if (uibdata->is_interp)
 		gtk_signal_connect_interp (GTK_OBJECT (uiinfo->widget), signal_name,
 					   uibdata->relay_func,

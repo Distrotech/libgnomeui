@@ -1,3 +1,9 @@
+1998-09-17  Martin Baulig  <baulig@merkur.uni-trier.de>
+
+	* gnome-app-helper.c (do_ui_signal_connect): Store both `uiinfo->user_data'
+	(GNOMEUIINFO_KEY_UIDATA) and `uibdata->data' (GNOMEUIINFO_KEY_UIBDATA) in
+	the widget using gtk_object_set_data().
+
 1998-09-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.[ch] (gnome_app_fill_menu_*): added a gint pos
