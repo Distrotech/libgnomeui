@@ -1,3 +1,7 @@
+2002-02-27  Johan Dahlin^W^WAnders Carlsson <andersca@gnu.org
+
+	* libgnomeui/libgnomeui.h: include gnome-icon-item.h
+
 2002-02-26  Richard Hult  <rhult@codefactory.se>
 
 	* libgnomeui/gnome-dateedit.c (select_clicked): Don't #if 0 the
