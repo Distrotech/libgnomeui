@@ -808,7 +808,9 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
  * @page: The page to be inserted.
  * 
  * Description: This will prepend a GnomeDruidPage into the internal list of
- * pages that the @druid has.
+ * pages that the @druid has.  Since #GnomeDruid is just a container, you will
+ * need to also call #gtk_widget_show on the page, otherwise the page will not
+ * be shown.
  **/
 void
 gnome_druid_prepend_page (GnomeDruid *druid,
@@ -829,7 +831,9 @@ gnome_druid_prepend_page (GnomeDruid *druid,
  * 
  * Description: This will insert @page after @back_page into the list of
  * internal pages that the @druid has.  If @back_page is not present in the list
- * or %NULL, @page will be prepended to the list.
+ * or %NULL, @page will be prepended to the list.  Since #GnomeDruid is just a
+ * container, you will need to also call #gtk_widget_show on the page,
+ * otherwise the page will not be shown.
  **/
 void
 gnome_druid_insert_page (GnomeDruid *druid,
@@ -874,12 +878,15 @@ gnome_druid_insert_page (GnomeDruid *druid,
 /**
  * gnome_druid_append_page: 
  * @druid: A Druid widget.
- * @page: The page to be appended.
+ * @page: The #GnomeDruidPage to be appended.
  * 
  * Description: This will append @page onto the end of the internal list.  
+ * Since #GnomeDruid is just a container, you will need to also call
+ * #gtk_widget_show on the page, otherwise the page will not be shown.
  **/
-void gnome_druid_append_page (GnomeDruid *druid,
-			      GnomeDruidPage *page)
+void
+gnome_druid_append_page (GnomeDruid *druid,
+			 GnomeDruidPage *page)
 {
 	GList *list;
 	g_return_if_fail (druid != NULL);
@@ -897,7 +904,7 @@ void gnome_druid_append_page (GnomeDruid *druid,
 /**
  * gnome_druid_set_page:
  * @druid: A Druid widget.
- * @page: The page to be brought to the foreground.
+ * @page: The #GnomeDruidPage to be brought to the foreground.
  * 
  * Description: This will make @page the currently showing page in the druid.
  * @page must already be in the druid.
