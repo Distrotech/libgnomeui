@@ -8,7 +8,11 @@ SUBDIRS = pixmaps
 noinst_PROGRAMS = stock_demo winhints_demo animator_demo dock_demo
 bin_PROGRAMS    = gnome_segv
 lib_LTLIBRARIES = libgnomeui.la
+
+if COMPILE_GNOME_COMPAT
 lib_LIBRARIES = libgnomeui10compat.a
+endif
+
 #
 # Install location for header files
 #
@@ -25,7 +29,8 @@ INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
         -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" \
 	-DG_LOG_DOMAIN=\"GnomeUI\"
 
-EXTRA_HEADERS = 
+if COMPILE_GNOME_COMPAT
+libgnomeui10compatincludedir = $(includedir)/libgnomeui/compat10
 
 libgnomeui10compat_a_SOURCES =\
 	gnome-font-selector.c 		\
@@ -35,13 +40,16 @@ libgnomeui10compat_a_SOURCES =\
 	gtkcauldron.c			\
 	gnomeui10-compat.c
 
-#libgnomeui10compat_a_HEADERS =\
-#	gnome-font-selector.h 		\
-#	gnome-guru.h			\
-#	gnome-spell.h			\
-#	gnome-startup.h			\
-#	gtkcauldron.h			\
-#	gnomeui10-compat.h
+libgnomeui10compatinclude_HEADERS = \
+	gnome-font-selector.h 		\
+	gnome-guru.h			\
+	gnome-spell.h			\
+	gnome-startup.h			\
+	gtkcauldron.h			\
+	gnomeui10-compat.h
+endif
+
+EXTRA_HEADERS = 
 
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
@@ -133,7 +141,6 @@ gnome_headers = \
 	gnome-canvas-widget.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
-	gnome-compat.h			\
 	gnome-dateedit.h		\
 	gnome-dentry-edit.h		\
 	gnome-dialog.h                  \
@@ -190,6 +197,7 @@ gnome_headers = \
 libgnomeuiinclude_HEADERS = \
 	$(gnome_headers)	\
 	gnometypebuiltins.h
+
 
 BUILT_SOURCES = \
 	gnometypebuiltins.h		\
