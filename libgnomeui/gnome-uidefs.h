@@ -36,6 +36,8 @@
 #define GNOME_OK 0
 #define GNOME_CANCEL 1
 
+#include <gdk/gdkkeysyms.h>
+
 /* These are keybindings, in GnomeUIInfo format. USE THEM OR DIE! 
    Add to the list as well..
 */

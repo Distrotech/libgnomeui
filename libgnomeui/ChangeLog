@@ -1,5 +1,12 @@
 1999-01-08  Nat Friedman  <nat@nat.org>
 
+	* gnome-appbar.c (gnome_appbar_construct): Moved the status bar to
+ 	the left side and the progress meter to the right side.
+
+	* gnome-uidefs.h: Include gdk/gdkkeysyms.h.
+
+1999-01-08  Nat Friedman  <nat@nat.org>
+
 	* gnome-app-helper.h (GNOMEUIINFO_MENU_FIND_AGAIN_ITEM): New menu
  	item.
 

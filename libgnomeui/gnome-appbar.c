@@ -305,13 +305,6 @@ gnome_appbar_construct(GnomeAppBar * ab,
   box->spacing = GNOME_PAD_SMALL;
   box->homogeneous = FALSE;
 
-  if ( has_progress ) {
-    ab->progress = gtk_progress_bar_new();
-    gtk_box_pack_start (box, ab->progress, FALSE, FALSE, 0);
-    gtk_widget_show (ab->progress);
-  }
-  else ab->progress = NULL;
-
   if ( has_status ) {
     if ( (interactivity == GNOME_PREFERENCES_ALWAYS) ||
 	 ( (interactivity == GNOME_PREFERENCES_USER) &&
@@ -359,6 +352,13 @@ gnome_appbar_construct(GnomeAppBar * ab,
     ab->status = NULL;
     ab->interactive = FALSE;
   }
+
+  if ( has_progress ) {
+    ab->progress = gtk_progress_bar_new();
+    gtk_box_pack_start (box, ab->progress, FALSE, FALSE, 0);
+    gtk_widget_show (ab->progress);
+  }
+  else ab->progress = NULL;
 
   if (ab->status) gtk_widget_show (ab->status);
 }
