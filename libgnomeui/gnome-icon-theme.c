@@ -165,7 +165,8 @@ gnome_icon_theme_finalize (GObject *object)
   icon_theme = GNOME_ICON_THEME (object);
   priv = icon_theme->priv;
 
-  g_object_unref (priv->gtk_theme);
+  if (priv->gtk_theme)
+    g_object_unref (priv->gtk_theme);
   
   g_free (priv);
 

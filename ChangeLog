@@ -1,3 +1,8 @@
+2004-01-19  Ross Burton  <ross@burtonini.com>
+
+	* libgnomeui/gnome-icon-theme.c (gnome_icon_theme_finalize):
+	Check that priv->gtk_theme is not NULL before unrefing it.
+
 2004-01-18  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/libgnomeui.h: Added #include of gnome-window.h.
