@@ -1,3 +1,8 @@
+1998-10-19  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: removed dnd_type member and g_free()ing
+	of it, since owen's changes made it redundant.
+	
 Sun Oct 18 18:59:33 1998  Owen Taylor  <otaylor@gtk.org>
 
 	* gnome-mdi.[ch] gnome-color-selector.c gnome-file-entry.c: 

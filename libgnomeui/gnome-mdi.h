@@ -89,7 +89,6 @@ struct _GnomeMDI {
   GtkPositionType tab_pos;
 
   gchar *appname, *title;
-  gchar *dnd_type;
 
   /* probably only one of these would do, but... redundancy rules ;) */
   GnomeMDIChild *active_child;

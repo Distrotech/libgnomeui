@@ -271,7 +271,6 @@ static void gnome_mdi_destroy(GtkObject *object) {
 
   g_free (mdi->appname);
   g_free (mdi->title);
-  g_free (mdi->dnd_type);
 
   if(GTK_OBJECT_CLASS(parent_class)->destroy)
     (* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
