@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-30 16:28+0200\n"
+"POT-Creation-Date: 2004-09-13 18:30+0200\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Jitendra Shah <jitendras@vsnl.com>\n"
 "Language-Team: Marathi <www.indictrans.org>\n"
@@ -34,18 +34,18 @@ msgstr "उपघटक 2"
 msgid "Hint for item 2"
 msgstr "घटक क्र. 2 साठी संकेत"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:653
+#: file-chooser/gtkfilesystemgnomevfs.c:668
 #, c-format
 msgid "%s is not a folder"
 msgstr ""
 
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: file-chooser/gtkfilesystemgnomevfs.c:860
+#: file-chooser/gtkfilesystemgnomevfs.c:875
 #, fuzzy
 msgid "Filesystem"
 msgstr "फाइली"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1524
+#: file-chooser/gtkfilesystemgnomevfs.c:1539
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""

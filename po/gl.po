@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-10 20:07+0200\n"
+"POT-Creation-Date: 2004-09-13 18:30+0200\n"
 "PO-Revision-Date: 2004-09-10 22:20+0200\n"
 "Last-Translator: Jesús Bravo Álvarez <suso@trasno.net>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -177,7 +177,6 @@ msgstr "Acerca de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -235,7 +234,6 @@ msgid "_Game"
 msgstr "Xo_go"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_xuda"
 
@@ -426,11 +424,11 @@ msgstr "Configurar a aplicación"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Acerca"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Acerca desta aplicación"
 
@@ -457,7 +455,7 @@ msgstr "Crear unha nova fiestra"
 msgid "_Close This Window"
 msgstr "_Pechar esta fiestra"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Pechar a fiestra actual"
 
@@ -1473,6 +1471,5 @@ msgstr "_Informar aos desenvolvedores"
 msgid "_Debug"
 msgstr "_Depurar"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Saír da proba"
+#~ msgid "Exit the test"
+#~ msgstr "Saír da proba"

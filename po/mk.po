@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-08 12:10+0200\n"
+"POT-Creation-Date: 2004-09-13 18:30+0200\n"
 "PO-Revision-Date: 2004-09-10 22:51+0200\n"
 "Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -66,8 +66,11 @@ msgstr "Не успеав да ја отворам датотеката '%s': %s
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Не успеав да ја вчитам сликата '%s': причината не е позната, најверојатно се работи за расипана датотека"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Не успеав да ја вчитам сликата '%s': причината не е позната, најверојатно се "
+"работи за расипана датотека"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -162,7 +165,8 @@ msgstr ""
 "ufo@linux.net.mk"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Заслуги за преведувачите."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -180,7 +184,6 @@ msgstr "За %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Датотека"
 
@@ -238,7 +241,6 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Помош"
 
@@ -429,11 +431,11 @@ msgstr "Конфигурирај ја апликацијата"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_За"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "За оваа апликација"
 
@@ -460,7 +462,7 @@ msgstr "Креирај нов прозорец"
 msgid "_Close This Window"
 msgstr "_Затвори го овој прозорец"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Затвори го тековниот прозорец"
 
@@ -776,7 +778,8 @@ msgstr "Одберете го времето од листа"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
+msgstr ""
+"gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -952,7 +955,8 @@ msgstr "Модално"
 
 #: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr "Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
+msgstr ""
+"Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
 
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
@@ -992,8 +996,8 @@ msgid ""
 "parameters."
 msgstr ""
 "GtkEntry што датотечниот запис го користи за записување на имиња на "
-"датотеки.  Можете да го употребите ова својство за да го добиете GtkEntry ако "
-"Ви треба да промените некои од овие параметри."
+"датотеки.  Можете да го употребите ова својство за да го добиете GtkEntry "
+"ако Ви треба да промените некои од овие параметри."
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
@@ -1116,8 +1120,8 @@ msgstr ""
 "Апликацијата \"%s\" се обиде да го промени аспектот од Вашата конфигурација "
 "која што Вашиот системс администратор или дистрибутер на оперативниот систем "
 "не Ви дозволува да ја промените. Некои од подесувањата кои што ги имате "
-"избрано нема да имаат ефект, или може да бидат повратени следниот пат "
-"кога ќе ја пуштите апликацијата."
+"избрано нема да имаат ефект, или може да бидат повратени следниот пат кога "
+"ќе ја пуштите апликацијата."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1174,7 +1178,9 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "Посебен идентификатор за записот за иконата.  Ова ке биде употребено за да се зачува листата со историја."
+msgstr ""
+"Посебен идентификатор за записот за иконата.  Ова ке биде употребено за да "
+"се зачува листата со историја."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1233,7 +1239,8 @@ msgstr "Одбирач на икони"
 
 #: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
-msgstr "Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да одберете икона."
+msgstr ""
+"Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да одберете икона."
 
 #: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
@@ -1248,8 +1255,8 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Овде треба да ги запишете името на директориумот каде што се "
-"сместени сликите од иконите."
+"Овде треба да ги запишете името на директориумот каде што се сместени "
+"сликите од иконите."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1437,8 +1444,8 @@ msgid ""
 msgstr ""
 "Менаџерот на сесии за Гном (процес %d) се сруши\n"
 "поради фатална грешка (%s).\n"
-"Кога ќе го затворите овој дијалог прозорец, сите апликации ќе бидат затворени "
-"а сесијата ќе биде завршена.\n"
+"Кога ќе го затворите овој дијалог прозорец, сите апликации ќе бидат "
+"затворени а сесијата ќе биде завршена.\n"
 "Зачувајте ги сите датотеки пред да го затворите дијалог прозорецот."
 
 #: libgnomeui/gnome_segv.c:112
@@ -1455,7 +1462,10 @@ msgstr "процес %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "Можете да ги информирате развивачите за тоа што се случило и да им помогнете да го поправат проблемот.  Или пак можете да ја рестартирате апликацијата веднаш."
+msgstr ""
+"Можете да ги информирате развивачите за тоа што се случило и да им помогнете "
+"да го поправат проблемот.  Или пак можете да ја рестартирате апликацијата "
+"веднаш."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1473,7 +1483,5 @@ msgstr "_Информирај ги развивачите"
 msgid "_Debug"
 msgstr "_Дебагирање"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Излез од тестот"
-
+#~ msgid "Exit the test"
+#~ msgstr "Излез од тестот"

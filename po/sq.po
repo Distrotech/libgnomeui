@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-30 16:28+0200\n"
+"POT-Creation-Date: 2004-09-13 18:30+0200\n"
 "PO-Revision-Date: 2004-07-27 11:04+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -32,16 +32,16 @@ msgstr "Objekt bir 2"
 msgid "Hint for item 2"
 msgstr "Propozime për objektin 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:653
+#: file-chooser/gtkfilesystemgnomevfs.c:668
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nuk është kartelë"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:860
+#: file-chooser/gtkfilesystemgnomevfs.c:875
 msgid "Filesystem"
 msgstr "File i sistemit"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1524
+#: file-chooser/gtkfilesystemgnomevfs.c:1539
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ruajtja e libërshënuesit dështoi (%s)"

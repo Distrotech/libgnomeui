@@ -60,6 +60,21 @@ than just displaying text (which is the common case for edge pages).
 
 </para>
 
+<!-- ##### ARG GnomeDruidPageStandard:contents-background ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:contents-background-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:contents-background-set ##### -->
+<para>
+
+</para>
+
 <!-- ##### ARG GnomeDruidPageStandard:logo ##### -->
 <para>
 

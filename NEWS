@@ -1,3 +1,29 @@
+libgnomeui 2.8.0
+----------------
+
+What's new since 2.7.2
+
+* Bug fixes:
+	- Improved GnomeDruid theme support (Rodney Dawes)
+	- File chooser backend fixes (Federico Mena Quintero, 
+				      Colin Walters)
+	- Authentication manager and password dialog support for
+	  anonymous logins (Laszlo Kovacs)
+	- Various fixes (Kjartan Maraas, Eric Zhao, William Jon McCann,
+			 Alexander Larsson)
+
+* Translations:
+	- New Breton translation (Thierry Vignaud)
+	- New Bostnian translation (Kenan Hadžiavdić)
+	- New Galician translation (Jesus Bravo Alvarez)
+	- Various updated translations (ar, az, bg, ca, cs, cy, da,
+					de, el, en_CA, en_GB, es, eu,
+					fi, gl, gu, hi, hu, ja, ko,
+					lt, mn, ms, ne, nl, nn, no,
+					pa, pl, pt, pt_BR, ro, ru, sk,
+					sq, sr, sv, tr, uk, wa, zh_CN,
+					zh_TW)
+
 libgnomeui 2.7.2
 ----------------
 

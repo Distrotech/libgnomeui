@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-12 04:24+0100\n"
+"POT-Creation-Date: 2004-09-13 18:30+0200\n"
 "PO-Revision-Date: 2004-09-12 04:31+0100\n"
 "Last-Translator: Dafydd Harries <daf@muse.19inch.net>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
@@ -172,7 +172,6 @@ msgstr "Ynghylch %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ffeil"
 
@@ -230,7 +229,6 @@ msgid "_Game"
 msgstr "_Gêm"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Cymorth"
 
@@ -421,11 +419,11 @@ msgstr "Cyflunio'r rhaglen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Ynghylch"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Ynghylch y rhaglen hwn"
 
@@ -452,7 +450,7 @@ msgstr "Creu ffenest newydd"
 msgid "_Close This Window"
 msgstr "_Cau'r Ffenest Hwn"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Cau y ffenest yma"
 
@@ -1470,9 +1468,8 @@ msgstr "_Cysylltu a'r Datblygwyr"
 msgid "_Debug"
 msgstr "_Datnamu"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Gadael y prawf"
+#~ msgid "Exit the test"
+#~ msgstr "Gadael y prawf"
 
 #~ msgid " domain %s"
 #~ msgstr " parth %s"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-02 12:39+0200\n"
+"POT-Creation-Date: 2004-09-13 18:30+0200\n"
 "PO-Revision-Date: 2004-08-04 17:25+0300\n"
 "Last-Translator: Ayman Hourieh <aymanh@gmail.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -35,16 +35,16 @@ msgstr "العنصر الإبن 2"
 msgid "Hint for item 2"
 msgstr "تلميحة للعنصر 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:650
+#: file-chooser/gtkfilesystemgnomevfs.c:668
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ليس دليلاً"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:857
+#: file-chooser/gtkfilesystemgnomevfs.c:875
 msgid "Filesystem"
 msgstr "نظام الملفات"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1521
+#: file-chooser/gtkfilesystemgnomevfs.c:1539
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "فشل حفظ العلامة (%s)"
@@ -63,8 +63,7 @@ msgstr "فشل فتح الملف '%s': %s"
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
-"فشل تحميل الصّورة '%s': السبب مجهول، قد يكون ملف الصّورة تالفاً"
+msgstr "فشل تحميل الصّورة '%s': السبب مجهول، قد يكون ملف الصّورة تالفاً"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -157,8 +156,7 @@ msgstr "المترجمون"
 #: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"شكر للمترجمين. يجب تعليم هذا النصّ على انه قابل للترجمة"
+msgstr "شكر للمترجمين. يجب تعليم هذا النصّ على انه قابل للترجمة"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -175,7 +173,6 @@ msgstr "حول %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_ملف"
 
@@ -233,7 +230,6 @@ msgid "_Game"
 msgstr "_لعبة"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_مساعدة"
 
@@ -424,11 +420,11 @@ msgstr "إعداد التطبيق"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_حول"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "حول هذا البرنامج"
 
@@ -455,7 +451,7 @@ msgstr "إنشاء نافذة جديدة"
 msgid "_Close This Window"
 msgstr "_غلق هذه النافذة"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "غلق النافذة الحالية"
 
@@ -628,11 +624,11 @@ msgstr "تفاعل"
 msgid "Level of user activity required."
 msgstr "مطلوب مستوى نشاط المستخدم."
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "بروكسي الـ HTTP يتطلب منك التسجيل.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -641,25 +637,25 @@ msgstr ""
 "يجب أن تسجل لتنفذ إلى \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "سترسل كلمة سرّك غير مشفّرة."
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "سترسل كلمة سرّك مشفّرة."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "التوثيق مطلوب"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "يجب عليك التسجيل للنفاذ إلى %s النطاق %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "يجب عليك التسجيل للنفاذ إلى %s\n"
@@ -935,7 +931,8 @@ msgstr "خانة الدلائل"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "ما إذا  خانة الملفات ستستخدم لإدخال أسماء الدلائل أو أسماء كاملة للملفات."
+msgstr ""
+"ما إذا  خانة الملفات ستستخدم لإدخال أسماء الدلائل أو أسماء كاملة للملفات."
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
@@ -1457,7 +1454,5 @@ msgstr "إ_بلاغ المطورين"
 msgid "_Debug"
 msgstr "_تنقيح"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "خروج من التجربة"
-
+#~ msgid "Exit the test"
+#~ msgstr "خروج من التجربة"
