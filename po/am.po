@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "POT-Creation-Date: 2003-01-23 15:33+0100\n"
-"PO-Revision-Date: 2003-01-14 11:02+EDT\n"
+"PO-Revision-Date: 2003-02-03 10:16+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
@@ -1232,7 +1232,7 @@ msgstr "ቃኝ"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
-msgstr "የቁልፉ መደብ"
+msgstr "የቁልፉ መተላለፊያ"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
@@ -1272,7 +1272,7 @@ msgstr "ጥያቄ"
 
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
-msgstr "መልእክት"
+msgstr "መልዕክት"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
