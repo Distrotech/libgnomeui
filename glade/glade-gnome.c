@@ -31,6 +31,7 @@
 #include <string.h>
 #include <glade/glade.h>
 #include <glade/glade-build.h>
+#include <glade/glade-private.h>
 
 #include <gnome.h>
 
@@ -316,6 +317,7 @@ toolbar_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		GtkWidget *child;
 		GList *tmp2;
 		gboolean is_button = FALSE;
+		gchar *group_name = NULL;
 
 		for (tmp2 = cinfo->child_attributes; tmp2; tmp2 = tmp2->next) {
 			GladeAttribute *attr = tmp2->data;
@@ -328,11 +330,11 @@ toolbar_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		 * a standard widget we are adding to the toolbar */
 		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
 			GladeAttribute *attr = tmp2->data;
-			if (!strcmp(attr->name, "child_name")) {
+			if (!strcmp(attr->name, "child_name"))
 				is_button = !strcmp(attr->value,
 						    "Toolbar:button");
-				break;
-			}
+			else if (!strcmp(attr->name, "group"))
+				group_name = attr->value;
 		}
 		if (is_button) {
 			char *label = NULL, *icon = NULL, *stock = NULL;
@@ -378,13 +380,33 @@ toolbar_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 					GTK_TOOLBAR_CHILD_TOGGLEBUTTON, NULL,
 					_(label), NULL, NULL, iconw, NULL,
 					NULL);
-			else if (!strcmp(cinfo->class, "GtkRadioButton"))
+			else if (!strcmp(cinfo->class, "GtkRadioButton")) {
 				child = gtk_toolbar_append_element(
 					GTK_TOOLBAR(w),
 					GTK_TOOLBAR_CHILD_RADIOBUTTON, NULL,
 					_(label), NULL, NULL, iconw, NULL,
 					NULL);
-			else
+
+				if (group_name) {
+					GSList *group =
+						g_hash_table_lookup(
+						    xml->priv->radio_groups,
+						    group_name);
+
+					gtk_radio_button_set_group(
+						GTK_RADIO_BUTTON(child),
+						group);
+					if (!group)
+						group_name =
+							g_strdup(group_name);
+					g_hash_table_insert(
+						xml->priv->radio_groups,
+						group_name,
+						gtk_radio_button_group(
+						    GTK_RADIO_BUTTON(child)));
+				}
+
+			} else
 				child = gtk_toolbar_append_item(GTK_TOOLBAR(w),
 					_(label), NULL, NULL, iconw, NULL,
 					NULL);
@@ -1158,7 +1180,7 @@ href_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
 	GList *tmp;
-	gchar *url = NULL, *label = NULL;
+	gchar *url = "", *label = NULL;
 
         for (tmp = info->attributes; tmp; tmp = tmp->next) {
 		GladeAttribute *attr = tmp->data;
@@ -1635,7 +1657,7 @@ pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 				gtk_widget_add_accelerator(wid,
 							   "activate_item",
 							   accel, key, 0,
-							   GTK_ACCEL_VISIBLE);
+							   0);
 			else {
 				/* not inside a GtkMenu -- must be on menubar*/
 				accel = glade_xml_ensure_accel(xml);
