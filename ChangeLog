@@ -1,3 +1,7 @@
+2001-11-26  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* *Makefile.am: remove -I*intl/ and -DVERSION from INCLUDES
+
 2001-11-22  Abel Cheung  <maddog@linux.org.hk>
 
 	* configure.in: LIBGNOMEUI_CFLAGS and LIBGNOMEUI_GLADE_CFLAGS needs
