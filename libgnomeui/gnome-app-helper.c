@@ -63,13 +63,12 @@
 #include <libgnome/gnome-preferences.h>
 
 /* keys used for get/set_data */
-const char *gnome_app_helper_gconf_client = "gnome-app-helper-gconf-client";
-const char *gnome_app_helper_menu_hint = "gnome-app-helper:menu-hint";
-const char *gnome_app_helper_pixmap_type = "gnome-app-helper-pixmap-type";
-const char *gnome_app_helper_pixmap_info = "gnome-app-helper-pixmap-info";
-const char *apphelper_statusbar_hint = "apphelper_statusbar_hint";
-const char *apphelper_appbar_hint = "apphelper_appbar_hint";
-const char *GtkMenu_uline_accel_group = "GtkMenu-uline-accel-group";
+static const char *gnome_app_helper_gconf_client = "gnome-app-helper-gconf-client";
+static const char *gnome_app_helper_menu_hint = "gnome-app-helper:menu-hint";
+static const char *gnome_app_helper_pixmap_type = "gnome-app-helper-pixmap-type";
+static const char *gnome_app_helper_pixmap_info = "gnome-app-helper-pixmap-info";
+static const char *apphelper_statusbar_hint = "apphelper_statusbar_hint";
+static const char *apphelper_appbar_hint = "apphelper_appbar_hint";
 
 /* prototypes */
 static gint g_strncmp_ignore_char( const gchar *first, const gchar *second,
@@ -932,7 +931,8 @@ gnome_save_accels (gpointer data)
 {
 	gchar *file_name;
 
-	file_name = g_concat_dir_and_file (gnome_user_accels_dir, gnome_program_get_app_id (gnome_program_get()));
+	file_name = g_concat_dir_and_file (gnome_user_accels_dir_get (),
+					   gnome_program_get_app_id (gnome_program_get()));
 	gtk_item_factory_dump_rc (file_name, NULL, TRUE);
 	g_free (file_name);
 

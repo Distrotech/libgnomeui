@@ -37,6 +37,7 @@
 
 #include "gnome-client.h"
 #include "gnome-uidefs.h"
+#include "gnome-ui-init.h"
 #include "gnome-ice.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkprivate.h>
@@ -843,19 +844,34 @@ static const struct poptOption options[] = {
   {NULL, '\0', 0, NULL, 0}
 };
 
-extern GnomeModuleInfo gtk_module_info;
-static GnomeModuleRequirement gnome_client_requirements[] = {
-  { "1.2.5", &gtk_module_info },
-  { NULL, NULL }
-};
+const GnomeModuleInfo *
+gnome_client_module_info_get (void)
+{
+	static GnomeModuleInfo module_info = {
+		"gnome-client", VERSION, N_("Session management"),
+		NULL, NULL,
+		gnome_client_pre_args_parse, gnome_client_post_args_parse,
+		(struct poptOption *)options,
+		NULL, NULL, NULL, NULL
+	};
 
-GnomeModuleInfo gnome_client_module_info = {
-  "gnome-client", VERSION, N_("Session management"),
-  gnome_client_requirements, NULL,
-  gnome_client_pre_args_parse, gnome_client_post_args_parse,
-  (struct poptOption *)options,
-  NULL, NULL, NULL, NULL
-};
+	if (module_info.requirements == NULL) {
+		static GnomeModuleRequirement req[3];
+
+		req[0].required_version = VERSION;
+		req[0].module_info = gnome_gtk_module_info_get ();
+
+		req[1].required_version = VERSION;
+		req[1].module_info = libgnome_module_info_get ();
+
+		req[2].required_version = NULL;
+		req[2].module_info = NULL;
+
+		module_info.requirements = req;
+	}
+
+	return &module_info;
+}
 
 /* Parse command-line arguments we recognize.  */
 static void

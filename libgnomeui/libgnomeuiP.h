@@ -35,6 +35,7 @@
 #include <libgnome.h>
 #include "gnome-macros.h"
 #include "gnometypebuiltins.h"
+#include "gnome-gconf-ui.h"
 
 G_BEGIN_DECLS
 

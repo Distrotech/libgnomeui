@@ -49,7 +49,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-app-util.c		\
 	gnome-appbar.c			\
 	gnome-stock-icons.c		\
-	gnome-canvas-init.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
 	gnome-dateedit.c		\
@@ -62,6 +61,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-entry.c			\
 	gnome-file-entry.c		\
 	gnome-gconf-ui.c		\
+	gnome-gconf-ui.h		\
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-i18nP.h			\
@@ -89,7 +89,6 @@ gnome_headers = \
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
 	gnome-appbar.h			\
-	gnome-canvas-init.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-dateedit.h		\
@@ -101,7 +100,6 @@ gnome_headers = \
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
-	gnome-gconf-ui.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-entry.h		\

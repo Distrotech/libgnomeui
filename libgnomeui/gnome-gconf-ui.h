@@ -26,14 +26,17 @@
 #ifndef GNOME_GCONF_UI_H
 #define GNOME_GCONF_UI_H
 
+/*
+ * This is a private libgnomeui headerfile
+ */
+
 #include <libgnome/gnome-program.h>
 
 /* GNOME GConf UI module; basically what this builds on
    the GConf module from libgnome, adding a GUI error box,
    etc..
 */
-
-extern GnomeModuleInfo gnome_gconf_ui_module_info;
+const GnomeModuleInfo * gnome_gconf_ui_module_info_get (void) G_GNUC_CONST;
 
 #endif
 

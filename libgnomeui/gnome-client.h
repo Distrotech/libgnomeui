@@ -180,8 +180,7 @@ struct _GnomeClientClass
   void (* disconnect)         (GnomeClient        *client);
 };
 
-extern GnomeModuleInfo gnome_client_module_info;
-#define GNOME_CLIENT_INIT GNOME_PARAM_MODULE,&gnome_client_module_info
+const GnomeModuleInfo *gnome_client_module_info_get (void) G_GNUC_CONST;
 #define GNOME_CLIENT_PARAM_SM_CONNECT "B:libgnomeui/gnome-client/sm_connect"
 
 /* For internal use by the gnome-libs: */

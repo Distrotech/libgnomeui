@@ -101,7 +101,7 @@ static void gnome_date_edit_get_property    (GObject            *object,
 					  GParamSpec         *pspec);
 
 /* to get around warnings */
-const char *strftime_date_format = "%x";
+static const char *strftime_date_format = "%x";
 
 /**
  * gnome_date_edit_get_type:

@@ -45,12 +45,10 @@
 #include <libgnomeui/gnome-color-picker.h>
 #include <libgnomeui/gnome-entry.h>
 #include <libgnomeui/gnome-file-entry.h>
-#include <libgnomeui/gnome-gconf-ui.h>
 
 #include <libgnomeui/gnome-icon-entry.h>
 #include <libgnomeui/gnome-icon-list.h>
 #include <libgnomeui/gnome-icon-sel.h>
-#include <libgnomeui/gnome-canvas-init.h>
 #include <libgnomeui/gnome-ui-init.h>
 #include <libgnomeui/gnome-macros.h>
 #include <libgnomeui/gnome-types.h>
@@ -75,9 +73,5 @@
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-pixmap-entry.h>
 #include <libgnomeui/gnome-propertybox.h>
-
-#ifdef COMPAT_1_0
-#include "compat/1.0/libgnomeui-compat-1.0.h"
-#endif
 
 #endif

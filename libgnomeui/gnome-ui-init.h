@@ -34,16 +34,24 @@ G_BEGIN_DECLS
 #define LIBGNOMEUI_PARAM_DISPLAY	"display"
 #define LIBGNOMEUI_PARAM_DEFAULT_ICON	"default-icon"
 
-extern GnomeModuleInfo libgnomeui_module_info;
-extern GnomeModuleInfo libbonoboui_module_info;
+#define LIBGNOMEUI_MODULE libgnomeui_module_info_get()
+const GnomeModuleInfo * libgnomeui_module_info_get (void) G_GNUC_CONST;
+#define GNOME_GTK_MODULE gnomeui_gtk_module_info_get()
+const GnomeModuleInfo * gnome_gtk_module_info_get (void) G_GNUC_CONST;
 
-/* The gnome_init define is in libgnomeui.h so it can be a macro */
-int gnome_init_with_popt_table(const char *app_id,
-			       const char *app_version,
-			       int argc, char **argv,
-			       const struct poptOption *options,
-			       int flags,
-			       poptContext *return_ctx);
+
+#ifndef GNOME_DISABLE_DEPRECATED
+/* use #gnome_program_init with the LIBGNOMEUI_MODULE */
+int gnome_init_with_popt_table (const char *app_id,
+				const char *app_version,
+				int argc, char **argv,
+				const struct poptOption *options,
+				int flags,
+				poptContext *return_ctx);
+#define gnome_init(app_id,app_version,argc,argv) \
+	gnome_init_with_popt_table (app_id, app_version, \
+				    argc, argv, NULL, 0, NULL)
+#endif
 
 
 G_END_DECLS

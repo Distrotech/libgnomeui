@@ -51,29 +51,23 @@ gnome_gconf_ui_pre_args_parse (GnomeProgram *app, GnomeModuleInfo *mod_info)
 		(gnome_default_gconf_client_error_handler);
 }
 
-static void
-gnome_gconf_ui_post_args_parse (GnomeProgram *app, GnomeModuleInfo *mod_info)
+const GnomeModuleInfo *
+gnome_gconf_ui_module_info_get (void)
 {
-	/* Nothing for now */
+	static GnomeModuleInfo module_info = {
+		"gnome-gconf-ui", VERSION, N_("GNOME GConf UI Support"),
+		NULL,
+		NULL /* instance init */,
+		gnome_gconf_ui_pre_args_parse,
+		NULL /* post_args_parse */,
+		NULL /* options */,
+		NULL /* init_pass */,
+		NULL /* class_init */,
+		NULL, NULL /* expansions */
+	};
+
+	return &module_info;
 }
-
-static GnomeModuleRequirement gnome_gconf_ui_requirements[] = {
-	{ VERSION, &gnome_gconf_module_info },
-        { NULL, NULL }
-};
-
-GnomeModuleInfo gnome_gconf_ui_module_info = {
-        "gnome-gconf-ui", VERSION, N_("GNOME GConf UI Support"),
-        gnome_gconf_ui_requirements,
-	NULL /* instance init */,
-        gnome_gconf_ui_pre_args_parse,
-	gnome_gconf_ui_post_args_parse,
-        NULL /* options */,
-	NULL /* init_pass */,
-	NULL /* class_init */,
-	NULL, NULL /* expansions */
-};
-
 
 typedef struct {
         GConfClient *client;

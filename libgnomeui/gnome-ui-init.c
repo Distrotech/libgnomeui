@@ -26,9 +26,7 @@
 
 /* Blame Elliot for most of this stuff*/
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+#include <config.h>
 
 #include <errno.h>
 #include <stdarg.h>
@@ -46,7 +44,6 @@
 #include "gnome-i18nP.h"
 
 #include <libgnome.h>
-#include <libgnomeui/gnome-canvas-init.h>
 
 #include "gnome-client.h"
 #include "gnome-gconf-ui.h"
@@ -58,43 +55,6 @@
 #include "libgnomeuiP.h"
 
 #include <gtk/gtkmain.h>
-
-/*****************************************************************************
- * libbonoboui
- *****************************************************************************/
-
-static void
-libbonoboui_pre_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
-{
-        /* Initialize libbonoboui here.
-         *
-         * Attention: libbonobo has already been initialized from libgnome !
-         */
-}
-
-static void
-libbonoboui_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
-{
-        /* Initialize libbonoboui here.
-         *
-         * Attention: libbonobo has already been initialized from libgnome !
-         */
-}
-
-static GnomeModuleRequirement libbonoboui_requirements[] = {
-        /* libgnome already depends on libbonobo, so we need to depend on
-         * libgnome here as well to make sure the init functions are called
-         * in the correct order. */
-        { VERSION, &libgnome_module_info },
-        { NULL, NULL }
-};
-
-GnomeModuleInfo libbonoboui_module_info = {
-        "libbonoboui", VERSION, N_("Bonobo UI"),
-        libbonoboui_requirements, NULL,
-        libbonoboui_pre_args_parse, libbonoboui_post_args_parse,
-        NULL, NULL, NULL, NULL, NULL
-};
 
 /*****************************************************************************
  * libgnomeui
@@ -112,14 +72,6 @@ static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_i
 static void libgnomeui_rc_parse (gchar *command);
 static void libgnomeui_segv_setup(gboolean post_arg_parse);
 
-static GnomeModuleRequirement libgnomeui_requirements[] = {
-        {VERSION, &gnome_gconf_ui_module_info},
-        {VERSION, &libgnome_module_info},
-        {VERSION, &libgnomecanvas_module_info},
-        {VERSION, &libbonoboui_module_info},
-        {NULL, NULL}
-};
-
 enum { ARG_DISABLE_CRASH_DIALOG=1, ARG_DISPLAY };
 
 static struct poptOption libgnomeui_options[] = {
@@ -132,14 +84,41 @@ static struct poptOption libgnomeui_options[] = {
 	{NULL, '\0', 0, NULL, 0}
 };
 
-GnomeModuleInfo libgnomeui_module_info = {
-        "libgnomeui", VERSION, "GNOME GUI Library",
-        libgnomeui_requirements, libgnomeui_instance_init,
-        libgnomeui_pre_args_parse, libgnomeui_post_args_parse,
-        libgnomeui_options,
-        libgnomeui_init_pass, libgnomeui_class_init,
-        NULL, NULL
-};
+const GnomeModuleInfo *
+libgnomeui_module_info_get (void)
+{
+	static GnomeModuleInfo module_info = {
+		"libgnomeui", VERSION, N_("GNOME GUI Library"),
+		NULL, libgnomeui_instance_init,
+		libgnomeui_pre_args_parse, libgnomeui_post_args_parse,
+		libgnomeui_options,
+		libgnomeui_init_pass, libgnomeui_class_init,
+		NULL, NULL
+	};
+
+	if (module_info.requirements == NULL) {
+		static GnomeModuleRequirement req[5];
+
+		req[0].required_version = VERSION;
+		req[0].module_info = gnome_gtk_module_info_get ();
+
+		req[1].required_version = VERSION;
+		req[1].module_info = libgnome_module_info_get ();
+
+		req[2].required_version = VERSION;
+		req[2].module_info = gnome_gconf_ui_module_info_get ();
+
+		req[3].required_version = VERSION;
+		req[3].module_info = gnome_client_module_info_get ();
+
+		req[4].required_version = NULL;
+		req[4].module_info = NULL;
+
+		module_info.requirements = req;
+	}
+
+	return &module_info;
+}
 
 typedef struct {
         guint crash_dialog_id;
@@ -526,19 +505,40 @@ static void libgnomeui_segv_handle(int signum)
 /* #warning "Solve the sound events situation" */
 
 /* backwards compat */
-int gnome_init_with_popt_table(const char *app_id,
-			       const char *app_version,
-			       int argc, char **argv,
-			       const struct poptOption *options,
-			       int flags,
-			       poptContext *return_ctx)
+/**
+ * gnome_init_with_popt_table:
+ * @app_id: Application id.
+ * @app_version: Application version.
+ * @argc: argument count (for example argc as received by main)
+ * @argv: argument vector (for example argv as received by main)
+ * @options: poptOption table with options to parse
+ * @flags: popt flags.
+ * @return_ctx: if non-NULL, the popt context is returned here.
+ *
+ * Initializes the application.  This sets up all of the GNOME
+ * internals and prepares them (imlib, gdk, session-management, triggers,
+ * sound, user preferences)
+ *
+ * Unlike #gnome_init, with #gnome_init_with_popt_table you can provide
+ * a table of popt options (popt is the command line argument parsing
+ * library).
+ *
+ * Deprecated, use #gnome_program_init with the LIBGNOMEUI_MODULE
+ */
+int
+gnome_init_with_popt_table (const char *app_id,
+			    const char *app_version,
+			    int argc, char **argv,
+			    const struct poptOption *options,
+			    int flags,
+			    poptContext *return_ctx)
 {
-        gnome_program_init(app_id, app_version,
-                           &libgnomeui_module_info,
-                           argc, argv,
-                           GNOME_PARAM_POPT_TABLE, options,
-                           GNOME_PARAM_POPT_FLAGS, flags,
-                           NULL);
+        gnome_program_init (app_id, app_version,
+			    LIBGNOMEUI_MODULE,
+			    argc, argv,
+			    GNOME_PARAM_POPT_TABLE, options,
+			    GNOME_PARAM_POPT_FLAGS, flags,
+			    NULL);
 
         if(return_ctx) {
                 GValue value = { 0, };
@@ -553,4 +553,188 @@ int gnome_init_with_popt_table(const char *app_id,
         return 0;
 }
 
+/**
+ * gnome_init:
+ * @app_id: Application id.
+ * @app_version: Application version.
+ * @argc: argument count (for example argc as received by main)
+ * @argv: argument vector (for example argv as received by main)
+ *
+ * Initializes the application.  This sets up all of the GNOME
+ * internals and prepares them (imlib, gdk, session-management, triggers,
+ * sound, user preferences)
+ * Deprecated, use #gnome_program_init with the LIBGNOMEUI_MODULE
+ */
+/* This is a macro */
 
+
+/*
+ * GTK init stuff
+ */
+
+typedef struct {
+	GPtrArray *gtk_args;
+} gnome_gtk_init_info;
+
+static void add_gtk_arg_callback (poptContext con,
+				  enum poptCallbackReason reason,
+				  const struct poptOption * opt,
+				  const char * arg, void * data);
+
+static struct poptOption gtk_options [] = {
+	{ NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE,
+	  &add_gtk_arg_callback, 0, NULL, NULL },
+
+	{ NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL },
+
+	{ "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gdk debugging flags to set"), N_("FLAGS")},
+
+	{ "gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gdk debugging flags to unset"), N_("FLAGS")},
+
+	{ "display", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("X display to use"), N_("DISPLAY")},
+
+	{ "sync", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Make X calls synchronous"), NULL},
+
+	{ "no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Don't use X shared memory extension"), NULL},
+
+	{ "name", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Program name as used by the window manager"), N_("NAME")},
+
+	{ "class", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Program class as used by the window manager"), N_("CLASS")},
+
+	{ "gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("HOST")},
+
+	{ "gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("PORT")},
+
+	{ "xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("STYLE")},
+
+	{ "xim-status", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("STYLE")},
+
+	{ "gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gtk+ debugging flags to set"), N_("FLAGS")},
+
+	{ "gtk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gtk+ debugging flags to unset"), N_("FLAGS")},
+
+	{ "g-fatal-warnings", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Make all warnings fatal"), NULL},
+
+	{ "gtk-module", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Load an additional Gtk module"), N_("MODULE")},
+
+	{ NULL, '\0', 0, NULL, 0}
+};
+
+
+static void
+gtk_pre_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
+{
+	struct poptOption *options, *ptr;
+	gnome_gtk_init_info *init_info = g_new0 (gnome_gtk_init_info, 1);
+	guint count = 1;
+
+	for (ptr = gtk_options;
+	     (ptr->argInfo != POPT_ARG_NONE) || (ptr->descrip != NULL);
+	     ptr++)
+		count++;
+
+	options = g_memdup (gtk_options, sizeof (struct poptOption) * count);
+	options->descrip = (const char *) init_info;
+
+	init_info->gtk_args = g_ptr_array_new ();
+
+	mod_info->options = options;
+}
+
+static void
+gtk_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
+{
+	gnome_gtk_init_info *init_info;
+	int final_argc;
+	char **final_argv;
+
+	g_message (G_STRLOC);
+
+	init_info = (gnome_gtk_init_info *) mod_info->options [0].descrip;
+
+	g_ptr_array_add (init_info->gtk_args, NULL);
+
+	final_argc = init_info->gtk_args->len - 1;
+	final_argv = g_memdup (init_info->gtk_args->pdata,
+			       sizeof (char *) * init_info->gtk_args->len);
+
+	gtk_init (&final_argc, &final_argv);
+
+	gdk_rgb_init();
+
+	g_free (mod_info->options);
+	mod_info->options = NULL;
+
+	g_ptr_array_free (init_info->gtk_args, TRUE);
+	g_free (init_info);
+}
+
+
+
+static void
+add_gtk_arg_callback (poptContext con, enum poptCallbackReason reason,
+		      const struct poptOption * opt,
+		      const char * arg, void * data)
+{
+	gnome_gtk_init_info *init_info = data;
+	char *newstr;
+
+	g_message (G_STRLOC ": %p", data);
+
+	switch (reason) {
+	case POPT_CALLBACK_REASON_PRE:
+		/* Note that the value of argv[0] passed to main() may be
+		 * different from the value that this passes to gtk
+		 */
+		g_ptr_array_add (init_info->gtk_args,
+				 (char *) g_strdup (poptGetInvocationName (con)));
+		break;
+		
+	case POPT_CALLBACK_REASON_OPTION:
+		switch (opt->argInfo) {
+		case POPT_ARG_STRING:
+		case POPT_ARG_INT:
+		case POPT_ARG_LONG:
+			newstr = g_strconcat ("--", opt->longName, "=", arg, NULL);
+			break;
+		default:
+			newstr = g_strconcat ("--", opt->longName, NULL);
+			break;
+		}
+
+		g_ptr_array_add (init_info->gtk_args, newstr);
+		/* XXX gnome-client tie-in */
+		break;
+	default:
+		break;
+	}
+}
+
+const GnomeModuleInfo *
+gnome_gtk_module_info_get (void)
+{
+	static GnomeModuleInfo module_info = {
+		"gtk", GTK_VERSION, N_("GTK+"),
+		NULL, NULL,
+		gtk_pre_args_parse, gtk_post_args_parse, gtk_options,
+		NULL,
+		NULL, NULL, NULL
+	};
+
+	return &module_info;
+}

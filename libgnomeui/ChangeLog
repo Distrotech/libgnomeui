@@ -1,3 +1,27 @@
+Sun Sep 02 23:49:34 2001  George Lebl <jirka@5z.com>
+
+	* Makefile.am, gnome-canvas-init.[ch], libgnomeui.h, gnome-ui-init.c:
+	  Move gtk init stuff to gnome-ui-init and wipe the canvas init stuff
+
+	* gnome-app-helper.c, gnome-dateedit.c: make constants private and
+	  remove unused ones, and use the getters for the gnome directories
+
+	* gnome-client.[ch], gnome-ui-init.c: require the gnome-client module
+	  and update it for the new way of doing gnome modules
+
+	* gnome-gconf-ui.[ch], libgnomeui.h:  make the header private and
+	  use the new module init stuff.
+
+	* gnome-ui-init.[ch]: do the getter style module stuff, and remove
+	  bonoboui stuff which is empty anyway.  Make the old style
+	  init stuff deprecated and add gnome_init macro, and put in
+	  docs from 1.0 for those.
+
+	* libgnomeui.h: remove the COMPAT_1_0 bit at the bottom, that's quite
+	  bogus
+
+	* libgnomeuiP.h: add gnome-gconf-ui.h here
+
 2001-09-02  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-stock-icons.c:
