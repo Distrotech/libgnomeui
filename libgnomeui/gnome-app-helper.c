@@ -378,7 +378,7 @@ showing_pixmaps_changed_notify(GConfClient            *client,
         GtkPixmapMenuItem *mi = GTK_PIXMAP_MENU_ITEM(w);
 
         if (value && value->type == GCONF_VALUE_BOOL) {
-                new_setting = gconf_value_bool(value);
+                new_setting = gconf_value_get_bool(value);
         }
 
         if (new_setting && (mi->pixmap == NULL)) {
@@ -2331,7 +2331,7 @@ dockitem_bevels_changed_notify(GConfClient            *client,
 
         if (value &&
             value->type == GCONF_VALUE_BOOL) {
-                bevels = gconf_value_bool(value);
+                bevels = gconf_value_get_bool(value);
         }
 
         set_bevels(dock_item, bevels);
@@ -2363,7 +2363,7 @@ toolbar_separators_changed_notify(GConfClient            *client,
 
         if (value &&
             value->type == GCONF_VALUE_BOOL) {
-                separators = gconf_value_bool(value);
+                separators = gconf_value_get_bool(value);
         }
 
         set_separators(toolbar, separators);
@@ -2389,9 +2389,9 @@ toolbar_relief_changed_notify(GConfClient            *client,
 
         if (value &&
             value->type == GCONF_VALUE_STRING &&
-            gconf_value_string(value) != NULL) {
+            gconf_value_get_string(value) != NULL) {
                 gconf_string_to_enum(toolbar_reliefs,
-                                     gconf_value_string(value),
+                                     gconf_value_get_string(value),
                                      (gint*)&style);
         }
 
@@ -2419,10 +2419,10 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
 
         if (value &&
             value->type == GCONF_VALUE_STRING &&
-            gconf_value_string(value) != NULL) {
+            gconf_value_get_string(value) != NULL) {
 
                 if (gconf_string_to_enum(toolbar_styles,
-                                         gconf_value_string(value),
+                                         gconf_value_get_string(value),
                                          (gint*)&style)) {
                         got_it = TRUE;
                 }
@@ -2481,9 +2481,9 @@ toolbar_style_changed_notify(GConfClient            *client,
         if (!got_it &&
             value &&
             value->type == GCONF_VALUE_STRING &&
-            gconf_value_string(value) != NULL) {
+            gconf_value_get_string(value) != NULL) {
                 gconf_string_to_enum(toolbar_styles,
-                                     gconf_value_string(value),
+                                     gconf_value_get_string(value),
                                      (gint*)&style);
         }
 

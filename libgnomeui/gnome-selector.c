@@ -819,13 +819,13 @@ gnome_selector_construct (GnomeSelector *selector,
     gtk_object_ref (GTK_OBJECT (priv->client));
 
     if (priv->history_id) {
-	priv->gconf_history_dir = gconf_concat_key_and_dir
+	priv->gconf_history_dir = gconf_concat_dir_and_key
 	    (GNOME_SELECTOR_GCONF_DIR, priv->history_id);
-	priv->gconf_history_key = gconf_concat_key_and_dir
+	priv->gconf_history_key = gconf_concat_dir_and_key
 	    (priv->gconf_history_dir, "history");
-	priv->gconf_dir_list_key = gconf_concat_key_and_dir
+	priv->gconf_dir_list_key = gconf_concat_dir_and_key
 	    (priv->gconf_history_dir, "dir-list");
-	priv->gconf_file_list_key = gconf_concat_key_and_dir
+	priv->gconf_file_list_key = gconf_concat_dir_and_key
 	    (priv->gconf_history_dir, "file-list");
 
 	gconf_client_add_dir (priv->client, priv->gconf_history_dir,

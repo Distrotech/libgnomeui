@@ -1,3 +1,9 @@
+2000-10-15  Martin Baulig  <baulig@suse.de>
+
+	* gnome-gconf.c: Reflect latest GConf API changes.
+	* gnome-app-helper.c: Likewise.
+	* gnome-selector.c: Likewise.
+
 2000-10-03  Martin Baulig  <baulig@suse.de>
 
 	* gnome-ditem-edit.c (fill_easy_page): Connect to the "changed" signal
