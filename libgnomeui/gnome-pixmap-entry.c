@@ -73,7 +73,7 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 		return;
 	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(im = gdk_imlib_load_image (t))) {
-		if(GTK_IS_PIXMAP(pentry->preview)) {
+		if(GNOME_IS_PIXMAP(pentry->preview)) {
 			gtk_widget_destroy(pentry->preview->parent);
 			pentry->preview = gtk_label_new(_("No Image"));
 			gtk_widget_show(pentry->preview);
@@ -82,7 +82,7 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 		}
 		return;
 	}
-	if(GTK_IS_PIXMAP(pentry->preview))
+	if(GNOME_IS_PIXMAP(pentry->preview))
 		gnome_pixmap_load_imlib (GNOME_PIXMAP(pentry->preview),im);
 	else {
 		gtk_widget_destroy(pentry->preview->parent);
@@ -434,7 +434,7 @@ char *
 gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)
 {
 	/*this happens if it doesn't exist or isn't an image*/
-	if(!GTK_IS_PIXMAP(pentry->preview))
+	if(!GNOME_IS_PIXMAP(pentry->preview))
 		return NULL;
 	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
 					      TRUE);

@@ -1,3 +1,9 @@
+1999-02-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-pixmap-entry.c (gnome_pixmap_entry_get_filename): Test for
+	a GnomePixmap, not a GtkPixmap.  This code sucks, btw.
+	(entry_changed): Likewise, and it also sucks, btw.
+
 1999-02-05  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock-item.c (gnome_dock_item_motion): Retrieve the pointer
