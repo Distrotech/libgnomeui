@@ -114,32 +114,37 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 		client= gnome_master_client ();
 	}
 	else if (key == ARGP_KEY_SUCCESS)
-	{
-		int i, copy_ac = our_argc;
-		char **copy = (char **) g_malloc (our_argc * sizeof (char *));
-
-		memcpy (copy, our_argv, our_argc * sizeof (char *));
-		our_argv[our_argc] = NULL;
-
-		gtk_init (&our_argc, &our_argv);
-		gdk_imlib_init ();
-		gnome_type_init();
-		
-#ifdef GTK_HAVE_FEATURES_1_1_0
-		/* New feature in 1.1 tree */
-		gtk_rc_set_image_loader(imlib_image_loader);
-#endif
-		gnome_rc_parse (program_invocation_name);
-
-		for (i = 0; i < copy_ac; ++i)
-			g_free (copy[i]);
-		g_free (copy);
-		g_free (our_argv); our_argv = NULL;
-	}
+		return 0;
 	else
 		return ARGP_ERR_UNKNOWN;
 
 	return 0;
+}
+
+/* Initialize gnome-related libraries, after argument parsing. */
+static void
+gnome_libs_init (void)
+{
+	int i, copy_ac = our_argc;
+	char **copy = (char **) g_malloc (our_argc * sizeof (char *));
+
+	memcpy (copy, our_argv, our_argc * sizeof (char *));
+	our_argv[our_argc] = NULL;
+
+	gtk_init (&our_argc, &our_argv);
+	gdk_imlib_init ();
+	gnome_type_init();
+		
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	/* New feature in 1.1 tree */
+	gtk_rc_set_image_loader(imlib_image_loader);
+#endif
+	gnome_rc_parse (program_invocation_name);
+
+	for (i = 0; i < copy_ac; ++i)
+		g_free (copy[i]);
+	g_free (copy);
+	g_free (our_argv); our_argv = NULL;
 }
 
 static struct argp our_gtk_parser =
@@ -274,7 +279,14 @@ gnome_init (char *app_id, struct argp *app_args,
 
 	/* Now parse command-line arguments.  */
 	retval = gnome_parse_arguments (app_args, argc, argv, flags, arg_index);
-	
+
+	/* Initialize related libraries if needed.  If argument
+	   parsing failed but flags contains ARGP_NO_EXIT or
+	   ARGP_NO_ERRS then initialize the related gnome libraries,
+	   since exit() wasn't called. */
+	if (retval == 0 || flags & (ARGP_NO_EXIT | ARGP_NO_ERRS))
+		gnome_libs_init ();
+
 	/*now set up the handeling of automatic config syncing*/
 	gnome_config_set_set_handler(set_handler,NULL);
 	gnome_config_set_sync_handler(sync_handler,NULL);
