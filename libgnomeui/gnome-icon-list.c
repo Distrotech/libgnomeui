@@ -322,12 +322,12 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 
 	/* Pixmap */
 
-	if (icon->mask) {
-		gdk_gc_set_clip_mask (ilist->fg_gc, icon->mask);
-		gdk_gc_set_clip_origin (ilist->fg_gc, xpix, ypix);
-	}
+	if (icon->pixmap) {
+		if (icon->mask) {
+			gdk_gc_set_clip_mask (ilist->fg_gc, icon->mask);
+			gdk_gc_set_clip_origin (ilist->fg_gc, xpix, ypix);
+		}
 
-	if (icon->pixmap)
 		gdk_draw_pixmap (ilist->ilist_window,
 				 ilist->fg_gc,
 				 icon->pixmap,
@@ -336,9 +336,10 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 				 width,
 				 height);
 
-	if (icon->mask) {
-		gdk_gc_set_clip_origin (ilist->fg_gc, 0, 0);
-		gdk_gc_set_clip_mask (ilist->fg_gc, NULL);
+		if (icon->mask) {
+			gdk_gc_set_clip_origin (ilist->fg_gc, 0, 0);
+			gdk_gc_set_clip_mask (ilist->fg_gc, NULL);
+		}
 	}
 
 	/* Text */
