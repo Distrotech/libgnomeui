@@ -294,6 +294,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 	      gtk_toolbar_append_item(GTK_TOOLBAR(parent_widget),
 				      _(tbinfo[i].label),
 				      _(tbinfo[i].hint),
+				      NULL,
 				      pmap,
 				      NULL, NULL);
 	    gnome_app_do_ui_accelerator_setup(app,

@@ -191,6 +191,7 @@ create_toolbar(GtkWidget *window)
 		t->widget = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
 						    t->icon,
 						    NULL,
+						    NULL,
 						    gnome_stock_pixmap_widget(window, t->icon),
 						    NULL, NULL);
 	}
