@@ -1,3 +1,7 @@
+1998-04-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-entry.c (gnome_file_entry_init): Undo the emission of
+	a signal on content change, as GtkText already emitted "changed". 
 Sat Apr 25 14:04:55 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock{.c,-imlib.h}: fixed apply/ok stock buttons, added trash

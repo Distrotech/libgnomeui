@@ -34,8 +34,6 @@ struct _GnomeFileEntry {
 
 struct _GnomeFileEntryClass {
 	GtkHBoxClass parent_class;
-
-        void (* value_changed)(GnomeFileEntry *fe);
 };
 
 

@@ -12,7 +12,7 @@ INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @GTK_CFLAGS@ @SUPPORTINCS@ \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 noinst_PROGRAMS = ted_demo stock_demo
-bin_PROGRAMS = gnome_segv
+bin_PROGRAMS    = gnome_segv
 lib_LTLIBRARIES = libgnomeui.la
 
 libgnomeui_la_SOURCES = \
