@@ -1,3 +1,15 @@
+2004-01-15  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_get_volume_for_path): Implement.
+	(gtk_file_system_gnome_vfs_list_roots): Removed.
+	(gtk_file_system_gnome_vfs_get_root_info): Removed.
+	(volume_mount_unmount_cb): Oops, emit "volumes-changed", not
+	"roots-changed".
+	(drive_connect_disconnect_cb): Likewise.
+	(struct _GtkFileSystemGnomeVFS): Removed the roots and local_roots
+	fields.
+
 2004-01-06  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystemgnomevfs.c

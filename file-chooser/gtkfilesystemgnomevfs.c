@@ -58,8 +58,6 @@ struct _GtkFileSystemGnomeVFS
   GObject parent_instance;
 
   GHashTable *folders;
-  GSList *roots;
-  GtkFileFolder *local_root;
 
   GnomeVFSVolumeMonitor *volume_monitor;
 
@@ -120,12 +118,10 @@ static void gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface         *if
 static void gtk_file_system_gnome_vfs_init       (GtkFileSystemGnomeVFS      *impl);
 static void gtk_file_system_gnome_vfs_finalize   (GObject                    *object);
 
-static GSList *       gtk_file_system_gnome_vfs_list_volumes  (GtkFileSystem      *file_system);
-static GSList *       gtk_file_system_gnome_vfs_list_roots    (GtkFileSystem      *file_system);
-static GtkFileInfo *  gtk_file_system_gnome_vfs_get_root_info (GtkFileSystem      *file_system,
-							       const GtkFilePath  *path,
-							       GtkFileInfoType     types,
-							       GError            **error);
+static GSList *             gtk_file_system_gnome_vfs_list_volumes        (GtkFileSystem     *file_system);
+static GtkFileSystemVolume *gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
+									   const GtkFilePath *path);
+
 static GtkFileFolder *gtk_file_system_gnome_vfs_get_folder    (GtkFileSystem      *file_system,
 							       const GtkFilePath  *path,
 							       GtkFileInfoType     types,
@@ -312,16 +308,6 @@ gtk_file_system_gnome_vfs_new (void)
 
   system_vfs->folders = g_hash_table_new (g_str_hash, g_str_equal);
 
-  /* Always display the file:/// root
-   */
-  local_path = gtk_file_path_new_dup ("file:///");
-  system_vfs->local_root = gtk_file_system_get_folder (GTK_FILE_SYSTEM (system_vfs),
-						       local_path,
-						       GTK_FILE_INFO_ALL,
-						       NULL);
-  g_assert (system_vfs->local_root);
-  gtk_file_path_free (local_path);
-
   return GTK_FILE_SYSTEM (system_vfs);
 }
 
@@ -339,9 +325,8 @@ static void
 gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
 {
   iface->list_volumes = gtk_file_system_gnome_vfs_list_volumes;
-  iface->list_roots = gtk_file_system_gnome_vfs_list_roots;
+  iface->get_volume_for_path = gtk_file_system_gnome_vfs_get_volume_for_path;
   iface->get_folder = gtk_file_system_gnome_vfs_get_folder;
-  iface->get_root_info = gtk_file_system_gnome_vfs_get_root_info;
   iface->create_folder = gtk_file_system_gnome_vfs_create_folder;
   iface->volume_free = gtk_file_system_gnome_vfs_volume_free;
   iface->volume_get_base_path = gtk_file_system_gnome_vfs_volume_get_base_path;
@@ -483,7 +468,6 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
 {
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (object);
 
-  g_object_unref (system_vfs->local_root);
   g_hash_table_destroy (system_vfs->folders);
 
   gconf_client_notify_remove (system_vfs->client, system_vfs->client_notify_id);
@@ -494,7 +478,7 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
 
   gnome_vfs_volume_monitor_unref (system_vfs->volume_monitor);
 
-  /* XXX Assert ->roots and ->folders should be empty
+  /* XXX Assert ->folders should be empty
    */
   system_parent_class->finalize (object);
 }
@@ -555,44 +539,31 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
   return result;
 }
 
-static GSList *
-gtk_file_system_gnome_vfs_list_roots (GtkFileSystem *file_system)
+static GtkFileSystemVolume *
+gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
+					       const GtkFilePath *path)
 {
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
-  GSList *result = NULL;
-  GSList *tmp_list;
+  GnomeVFSURI *uri;
+  GnomeVFSVolume *volume;
 
-  for (tmp_list = system_vfs->roots; tmp_list; tmp_list = tmp_list->next)
+  uri = gnome_vfs_uri_new (gtk_file_path_get_string (path));
+  if (!uri)
+    return NULL;
+
+  volume = NULL;
+
+  if (gnome_vfs_uri_is_local (uri))
     {
-      GtkFileFolderGnomeVFS *folder_vfs = tmp_list->data;
-      result = g_slist_prepend (result, gtk_file_path_new_dup (folder_vfs->uri));
+      const char *local_path;
+
+      local_path = gnome_vfs_uri_get_path (uri);
+      volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, local_path);
     }
 
-  return result;
-}
+  gnome_vfs_uri_unref (uri);
 
-static GtkFileInfo *
-gtk_file_system_gnome_vfs_get_root_info (GtkFileSystem     *file_system,
-					 const GtkFilePath *path,
-					 GtkFileInfoType    types,
-					 GError           **error)
-{
-  const gchar *uri = gtk_file_path_get_string (path);
-  GnomeVFSResult result;
-  GnomeVFSFileInfo *vfs_info;
-  GtkFileInfo *info = NULL;
-
-  vfs_info = gnome_vfs_file_info_new ();
-
-  result = gnome_vfs_get_file_info (uri, vfs_info, get_options (types));
-  if (result != GNOME_VFS_OK)
-    set_vfs_error (result, uri, error);
-  else
-    info = info_from_vfs_info (uri, vfs_info, types);
-
-  gnome_vfs_file_info_unref (vfs_info);
-
-  return info;
+  return (GtkFileSystemVolume *) volume;
 }
 
 static void
@@ -708,28 +679,6 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	  g_slist_free (uris);
 	}
     }
-  else
-    {
-      GSList *tmp_list;
-      gboolean found = FALSE;
-
-      for (tmp_list = system_vfs->roots; tmp_list; tmp_list = tmp_list->next)
-	{
-	  GtkFileFolderGnomeVFS *folder_vfs = tmp_list->data;
-	  if (strcmp (folder_vfs->uri, uri) == 0)
-	    {
-	      found = TRUE;
-	      break;
-	    }
-	}
-
-      if (!found)
-	{
-	  system_vfs->roots = g_slist_prepend (system_vfs->roots, folder_vfs);
-	  g_signal_emit_by_name (system_vfs, "roots-changed");
-	}
-    }
-
 
   return GTK_FILE_FOLDER (folder_vfs);
 }
@@ -1521,20 +1470,6 @@ gtk_file_folder_gnome_vfs_finalize (GObject *object)
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (object);
   GtkFileSystemGnomeVFS *system_vfs = folder_vfs->system;
 
-  if (system_vfs)
-    {
-      GSList *tmp_list;
-
-      for (tmp_list = system_vfs->roots; tmp_list; tmp_list = tmp_list->next)
-	{
-	  if (tmp_list->data == object)
-	    {
-	      system_vfs->roots = g_slist_delete_link (system_vfs->roots, tmp_list);
-	      g_signal_emit_by_name (system_vfs, "roots-changed");
-	    }
-	}
-    }
-
   if (folder_vfs->uri)
     g_hash_table_remove (system_vfs->folders, folder_vfs->uri);
   if (folder_vfs->async_handle)
@@ -1768,7 +1703,7 @@ volume_mount_unmount_cb (GnomeVFSVolumeMonitor *monitor,
 			 GnomeVFSVolume        *volume,
 			 GtkFileSystemGnomeVFS *system_vfs)
 {
-  g_signal_emit_by_name (system_vfs, "roots-changed");
+  g_signal_emit_by_name (system_vfs, "volumes-changed");
 }
 
 /* Callback used when a drive gets connected or disconnected */
@@ -1777,7 +1712,7 @@ drive_connect_disconnect_cb (GnomeVFSVolumeMonitor *monitor,
 			     GnomeVFSDrive         *drive,
 			     GtkFileSystemGnomeVFS *system_vfs)
 {
-  g_signal_emit_by_name (system_vfs, "roots-changed");
+  g_signal_emit_by_name (system_vfs, "volumes-changed");
 }
 
 static void
