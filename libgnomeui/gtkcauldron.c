@@ -325,14 +325,14 @@ static gint key_press_event (GtkWidget * window, GdkEventKey * event, struct key
 	if (event->keyval == GDK_Return || event->keyval == GDK_KP_Enter || event->keyval == GDK_ISO_Enter || event->keyval == GDK_3270_Enter) {
 	    *d->result = GTK_CAULDRON_ENTER;
 	    gtk_cauldron_get_results (*d->r);
-	    gtk_widget_destroy (window);
+	    gtk_main_quit ();
 	    return TRUE;
 	}
     }
     if (!(d->options & GTK_CAULDRON_IGNOREESCAPE)) {
 	if (event->keyval == GDK_Escape) {
 	    *d->result = GTK_CAULDRON_ESCAPE;
-	    gtk_widget_destroy (window);
+	    gtk_main_quit ();
 	    return TRUE;
 	}
     }
