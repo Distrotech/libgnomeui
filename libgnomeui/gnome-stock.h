@@ -147,6 +147,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_TOP         "Top"
 #define GNOME_STOCK_PIXMAP_BOTTOM      "Bottom"
 #define GNOME_STOCK_PIXMAP_ATTACH      "Attach"
+#define GNOME_STOCK_PIXMAP_INDEX       "Index"
 #define GNOME_STOCK_PIXMAP_FONT        "Font"
 #define GNOME_STOCK_PIXMAP_EXEC        "Exec"
 

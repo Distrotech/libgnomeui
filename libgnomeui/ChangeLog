@@ -1,3 +1,16 @@
+1998-11-05  Chris Lahey  <clahey@umich.edu>
+
+	* pixmaps/Makefile.am (stock_images): 
+	* gnome-stock.c: 
+	* gnome-stock.h: Added GNOME_STOCK_PIXMAP_INDEX, a small pile of
+	documents.
+
+	* pixmaps/stock_index.png: Added this file.  The image for
+	GNOME_STOCK_PIXMAP_INDEX.
+
+	* gnome-app.c (gnome_app_set_toolbar): Removed an incorrect #ifdef
+	to get flat toolbars to work.
+
 1998-11-05  Felix Bellaby <felix@pooh.u-net.com>
 
 	* gnome-client.c (options): Added CBFLAGS to make connection to
