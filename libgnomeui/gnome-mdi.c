@@ -1019,18 +1019,6 @@ void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {
   gtk_window_activate_focus(window);
 }
 
-void gnome_mdi_set_window_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
-  g_return_if_fail(mdi != NULL);
-  g_return_if_fail(GNOME_IS_MDI(mdi));
-  g_return_if_fail(app != NULL);
-  g_return_if_fail(GNOME_IS_APP(app));
-  g_return_if_fail(view != NULL);
-  g_return_if_fail(GTK_IS_WIDGET(view));
-
-  if(mdi->mode == GNOME_MDI_NOTEBOOK)
-    set_page_by_widget(GTK_NOTEBOOK(app->contents), view);
-}
-
 gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
   GtkWidget *view;
   gint ret = TRUE;
@@ -1279,11 +1267,13 @@ void gnome_mdi_open_toplevel(GnomeMDI *mdi) {
   g_return_if_fail(mdi != NULL);
   g_return_if_fail(GNOME_IS_MDI(mdi));
 
-  app_create(mdi);
-  if(mdi->mode == GNOME_MDI_NOTEBOOK)
-    book_create(mdi);
-
-  gtk_widget_show(GTK_WIDGET(mdi->active_window));
+  if( mdi->mode != GNOME_MDI_MODAL || mdi->windows == NULL ) {
+    app_create(mdi);
+    if(mdi->mode == GNOME_MDI_NOTEBOOK)
+      book_create(mdi);
+    
+    gtk_widget_show(GTK_WIDGET(mdi->active_window));
+  }
 }
 
 void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {
@@ -1302,7 +1292,7 @@ void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {
     /* for the time being all that update_child() does is update the children's names */
     if( (mdi->mode == GNOME_MDI_MODAL) || (mdi->mode == GNOME_MDI_TOPLEVEL) ) {
       /* in MODAL and TOPLEVEL modes the window title includes the active
-	 child name: "child_name - mdi_title" */
+         child name: "child_name - mdi_title" */
       gchar *fullname;
       
       fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);

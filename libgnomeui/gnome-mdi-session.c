@@ -275,10 +275,7 @@ gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
 		real_view = g_hash_table_lookup (view_hash, (gpointer) view);
 		if (!real_view) continue;
 
-		app = g_hash_table_lookup (window_hash, window_list->pdata [i]);
-		if (!app) continue;
-
-		gnome_mdi_set_window_view (mdi, app, real_view);
+		gnome_mdi_set_active_view (mdi, real_view);
 	}
 
 	/* Finally, set the active window. */

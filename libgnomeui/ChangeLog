@@ -1,3 +1,14 @@
+1998-10-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_open_toplevel): restrict MDI
+	to a single toplevel when in modal mode.
+	* gnome-mdi.[ch] (gnome_mdi_set_window_view): removed:
+	gnome_mdi_set_active_view does precisely that and even more!
+	* gnome-mdi-session.c (gnome_mdi_restore_state): replaced
+	gnome_mdi_set_window_view() with gnome_mdi_set_active_view()
+	and removed a hash table lookup for the app since mdi retrieves
+	it from the view.
+	
 1998-10-13  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-app-helper.c (create_menu_item): When the label is the

@@ -148,7 +148,6 @@ gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
 
 GtkWidget     *gnome_mdi_active_view        (GnomeMDI *);
 void          gnome_mdi_set_active_view     (GnomeMDI *, GtkWidget *);
-void          gnome_mdi_set_window_view     (GnomeMDI *, GnomeApp *, GtkWidget *);
 
 /* manipulating children */
 gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
