@@ -594,7 +594,9 @@ gnome_canvas_re_unrealize (GnomeCanvasItem *item)
 
 	if (!item->canvas->aa) {
 		gdk_gc_unref (re->fill_gc);
+		re->fill_gc = NULL;
 		gdk_gc_unref (re->outline_gc);
+		re->outline_gc = NULL;
 	}
 
 	if (re_parent_class->unrealize)

@@ -704,7 +704,9 @@ gnome_canvas_polygon_unrealize (GnomeCanvasItem *item)
 	poly = GNOME_CANVAS_POLYGON (item);
 
 	gdk_gc_unref (poly->fill_gc);
+	poly->fill_gc = NULL;
 	gdk_gc_unref (poly->outline_gc);
+	poly->outline_gc = NULL;
 
 	if (parent_class->unrealize)
 		(* parent_class->unrealize) (item);

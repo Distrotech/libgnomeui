@@ -829,6 +829,7 @@ gnome_canvas_text_unrealize (GnomeCanvasItem *item)
 	text = GNOME_CANVAS_TEXT (item);
 
 	gdk_gc_unref (text->gc);
+	text->gc = NULL;
 
 	if (parent_class->unrealize)
 		(* parent_class->unrealize) (item);

@@ -1,3 +1,17 @@
+1999-09-20  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_unrealize): Set the
+	gc fields to NULL after unrefing them.  Thanks to Damon Chaplin
+	for pointing this out.
+
+	* gnome-canvas-text.c (gnome_canvas_text_unrealize): Likewise.
+
+	* gnome-canvas-polygon.c (gnome_canvas_polygon_unrealize): Likewise.
+
+	* gnome-canvas-line.c (gnome_canvas_line_unrealize): Likewise.
+
+	* gnome-canvas-image.c (gnome_canvas_image_unrealize): Likewise.
+
 1999-09-19  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-dock-band.c: Don't size-allocate non-visible

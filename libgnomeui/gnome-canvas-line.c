@@ -1012,6 +1012,7 @@ gnome_canvas_line_unrealize (GnomeCanvasItem *item)
 	line = GNOME_CANVAS_LINE (item);
 
 	gdk_gc_unref (line->gc);
+	line->gc = NULL;
 
 	if (parent_class->unrealize)
 		(* parent_class->unrealize) (item);

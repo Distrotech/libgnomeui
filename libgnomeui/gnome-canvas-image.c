@@ -462,8 +462,10 @@ gnome_canvas_image_unrealize (GnomeCanvasItem *item)
 
 	image = GNOME_CANVAS_IMAGE (item);
 
-	if (!item->canvas->aa)
+	if (!item->canvas->aa) {
 		gdk_gc_unref (image->gc);
+		image->gc = NULL;
+	}
 
 	if (parent_class->unrealize)
 		(* parent_class->unrealize) (item);
