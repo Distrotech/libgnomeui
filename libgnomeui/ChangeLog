@@ -1,3 +1,8 @@
+1999-01-12  Manish Vachharajani <mvachhar@vger.rutgers.edu>
+
+	* gnome-ice.c (new_ice_connection): Set FD_CLOEXEC on 
+	ice connection descriptors
+
 1999-01-12  Chris Lahey  <clahey@umich.edu>
 
 	* gnome-app-helper.h, gnome-app-helper.c

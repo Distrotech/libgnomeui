@@ -7,6 +7,9 @@
 #include <X11/ICE/ICElib.h>
 #endif /* HAVE_LIBSM */
 
+#include <unistd.h>
+#include <fcntl.h>
+
 #include <gtk/gtk.h>
 #include "gnome-ice.h"
 
@@ -81,7 +84,10 @@ new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 	  g_hash_table_insert (__gnome_ice_internal_hash, connection, gnome_ice_internal);
 	}
 
-
+      /* Make sure we don't pass on these file descriptors to any
+         exec'ed children */
+       fcntl(IceConnectionNumber(connection),F_SETFD,
+	     fcntl(IceConnectionNumber(connection),F_GETFD,0) | FD_CLOEXEC);
        gnome_ice_internal->input_id = 
 	 gdk_input_add (IceConnectionNumber (connection),
 			GDK_INPUT_READ|GDK_INPUT_EXCEPTION,
