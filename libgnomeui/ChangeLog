@@ -1,3 +1,15 @@
+1998-07-30  Mark Crichton  <crichton@expert.cc.purdue.edu>
+
+	* gnome-popupmenu.c (gnome_app_create_popup_menus_custom):
+	The old reparent there was a bad thing.  Changed to a
+	container_add.  Mem leak still exists,will be fixed soon.
+	(gnome_app_create_popup_menus): Changed #if to #ifdef so
+	code would actually compile correctly.
+
+	Popup menu code is now "stable" for general testing now.  If
+	anyone can fix thebad display-ish bug I'm having, I'd appreciate
+	leads.
+
 1998-07-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-init.c: Fixup includes.

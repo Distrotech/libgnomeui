@@ -24,6 +24,7 @@
  */
 
 #include <config.h>
+#include <glib.h>
 #include <gdk/gdkkeysyms.h>
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
@@ -79,6 +80,7 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 	g_return_if_fail(app !=NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 
+	g_warning("We're here");
 	menubar = gtk_menu_new();
 	eb = gtk_event_box_new();
 	gtk_widget_set_events(eb, GDK_BUTTON_PRESS_MASK);
@@ -105,7 +107,7 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 	/* SLICK...thanks Tim Janik! */
 
 	gtk_container_add(GTK_CONTAINER(oldparent), eb);
-	gtk_widget_reparent(GTK_WIDGET(eb), child);
+	gtk_container_add(GTK_CONTAINER(eb), child);
 	gtk_container_child_setv(GTK_CONTAINER(oldparent), eb, nargs, temparg);
 
 	gtk_widget_show(eb);
@@ -129,7 +131,7 @@ void
 gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child,
 			      GnomeUIInfo *menudata, gpointer handler)
 {
-#if GTK_HAVE_FEATURES_1_1_0
+#ifdef GTK_HAVE_FEATURES_1_1_0
 
 	GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
 				      NULL, FALSE, NULL, NULL };
