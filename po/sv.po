@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-07-30 10:46+0200\n"
-"PO-Revision-Date: 2002-07-30 10:46+0200\n"
+"POT-Creation-Date: 2002-08-03 03:53+0200\n"
+"PO-Revision-Date: 2002-08-03 03:54+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,17 +20,19 @@ msgstr ""
 msgid "Credits"
 msgstr "Tack"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:223
 msgid "_Written by"
-msgstr "Skrivet av"
+msgstr "_Skrivet av"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:238
 msgid "_Documented by"
-msgstr "Dokumenterat av"
+msgstr "_Dokumenterat av"
 
 #: libgnomeui/gnome-about.c:253
 msgid "_Translated by"
-msgstr "Översatt av"
+msgstr "_Översatt av"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -89,9 +91,10 @@ msgstr "En ensam författarpost"
 msgid "Documenters"
 msgstr "Dokumentatörer"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
-msgstr "Lista med folk som dokumenterar programmet"
+msgstr "Lista med folk som dokumenterat programmet"
 
 #: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
@@ -117,7 +120,7 @@ msgstr "Logotyp"
 
 #: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
-msgstr "En logotyp för omrutan"
+msgstr "En logotyp för om-rutan"
 
 #: libgnomeui/gnome-about.c:493
 #, c-format
@@ -156,9 +159,10 @@ msgstr "Ange ID för sessionskontroll"
 msgid "ID"
 msgstr "ID"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-client.c:863
 msgid "Specify prefix of saved configuration"
-msgstr "Ange prefix på den sparade konfigurationen"
+msgstr "Ange prefix för den sparade konfigurationen"
 
 #: libgnomeui/gnome-client.c:863
 msgid "PREFIX"
@@ -402,7 +406,7 @@ msgid ""
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
 "Fel uppstod vid körning av URL-hanteraren.\n"
-"Var vänlig och kontrollera att inställningarna i kontrollpanelen är korrekta."
+"Kontrollera att inställningarna i kontrollpanelen är korrekta."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -430,6 +434,7 @@ msgstr ""
 "Segmenteringsfel!\n"
 "Kan inte visa kraschdialog\n"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome_segv.c:100
 #, c-format
 msgid ""
@@ -443,7 +448,7 @@ msgstr ""
 "på grund av ett allvarligt fel (%s).\n"
 "När du stänger den här dialogrutan kommer alla program att stängas och din "
 "session avslutas.\n"
-"Var vänlig och spara dina filer innan du stänger den här dialogrutan."
+"Spara dina filer innan du stänger den här dialogrutan."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -973,7 +978,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
 msgid "Browse Dialog Title"
-msgstr "Bläddra dialiogtitel"
+msgstr "Bläddra-dialogtitel"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
@@ -1101,15 +1106,15 @@ msgstr "Typsnitt"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "Det valda GtkFont"
+msgstr "Valt GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Förhandsgranskningstext"
+msgstr "Förhandsvisningstext"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Förhandsgranskningstext som visas i dialogen"
+msgstr "Förhandsvisningstext som visas i dialogen"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1156,13 +1161,14 @@ msgstr ""
 "del av de ändringar du valde kommer kanske inte att verkställas, eller "
 "kommer kanske inte att återställas nästa gång du använder detta program."
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Ett fel uppstod vid inläsning eller sparning av konfigurationsinformation "
+"Ett fel uppstod vid inläsning eller sparande av konfigurationsinformation "
 "för %s. En del av dina konfigurationsinställningar kommer kanske inte att "
 "fungera korrekt."
 
@@ -1290,9 +1296,10 @@ msgstr "Meddelande"
 msgid "Do Preview"
 msgstr "Förhandsgranska"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Huruvida pixmapposten ska ha en förhandsgranskning."
+msgstr "Huruvida pixmap-posten ska ha en förhandsvisning."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
@@ -1300,15 +1307,16 @@ msgstr "Ingen bild"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "Bildförhandsgranskning"
+msgstr "Bildförhandsvisning"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
-msgstr "En förhandsgranskning av bilden som är angiven för tillfället"
+msgstr "En förhandsvisning av bilden som är angiven för tillfället"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr "Bästa tio"
+msgstr "Tio bästa"
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
