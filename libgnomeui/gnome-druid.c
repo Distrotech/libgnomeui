@@ -132,6 +132,7 @@ gnome_druid_init (GnomeDruid *druid)
 	GTK_WIDGET_SET_FLAGS (druid->back, GTK_CAN_DEFAULT);
 	druid->next = gnome_stock_or_ordinary_button (GNOME_STOCK_BUTTON_NEXT);
 	GTK_WIDGET_SET_FLAGS (druid->next, GTK_CAN_DEFAULT);
+	GTK_WIDGET_SET_FLAGS (druid->next, GTK_HAS_FOCUS);
 	druid->cancel = gnome_stock_or_ordinary_button (GNOME_STOCK_BUTTON_CANCEL);
 	GTK_WIDGET_SET_FLAGS (druid->cancel, GTK_CAN_DEFAULT);
 	pixmap =  gnome_stock_pixmap_widget(NULL, GNOME_STOCK_BUTTON_APPLY);

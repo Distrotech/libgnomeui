@@ -1,3 +1,8 @@
+1999-11-04  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid.c (gnome_druid_init): patch from boc to give the
+	next button the focus.
+
 1999-11-04  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-app-helper.c: Patch from Eric Gillespie,
