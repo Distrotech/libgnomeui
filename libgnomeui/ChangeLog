@@ -1,3 +1,19 @@
+1999-11-16  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap-entry.c (refresh_preview): Fix call to gnome_pixmap_set_pixbuf()
+
+	* gnome-init.c (libgnomeui_pixbuf_image_loader): Fix
+	gnome_pixbuf_render() here. I have the bad feeling this breaks
+	things badly unless we always use the GdkRGB visual/cmap
+
+	* gnome-about.c (gnome_about_construct): fix to match new
+	gnome_pixbuf_render() API
+	(gnome_about_construct): Use GdkRGB visual/cmap for now
+
+	* libgnomeui.h: comment out icon stuff, and druid-page-finish
+
+	* gnome-pixmap.c (gnome_pixmap_set_pixbuf): Ref new pixbuf before clearing.
+
 Thu Nov 11 00:08:14 1999  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c: support more then 2 accelerators per key

@@ -601,7 +601,11 @@ gnome_about_construct (GnomeAbout *about,
 			   GTK_WIDGET(frame));
 	gtk_widget_show (frame);
 
+        gtk_widget_push_visual(gdk_rgb_get_visual());
+        gtk_widget_push_colormap(gdk_rgb_get_cmap());
 	drawing_area = gtk_drawing_area_new ();
+        gtk_widget_pop_visual();
+        gtk_widget_pop_colormap();
 
 	/* Make it have white bg color */
 	gtk_widget_set_name (drawing_area, "DrawingArea");
@@ -629,7 +633,8 @@ gnome_about_construct (GnomeAbout *about,
                         if (pixbuf != NULL) {
                                 gnome_pixbuf_render(pixbuf,
                                                     &ai->logo,
-                                                    &ai->mask);
+                                                    &ai->mask,
+                                                    128);
                                 
                                 gdk_pixbuf_unref(pixbuf);
                                 

@@ -50,10 +50,10 @@
 #ifndef GNOME_EXCLUDE_DEPRECATED
 #include "libgnomeui/gnome-guru.h"
 #endif
-#include "libgnomeui/gnome-icon-list.h"
+/* #include "libgnomeui/gnome-icon-list.h"
 #include "libgnomeui/gnome-icon-item.h"
 #include "libgnomeui/gnome-icon-sel.h"
-#include "libgnomeui/gnome-icon-entry.h"
+#include "libgnomeui/gnome-icon-entry.h" */
 #include "libgnomeui/gnome-init.h"
 #ifndef GNOME_EXCLUDE_DEPRECATED
 #include "libgnomeui/gnome-less.h"
@@ -107,7 +107,7 @@
 #include "libgnomeui/gnome-druid-page.h"
 #include "libgnomeui/gnome-druid-page-start.h"
 #include "libgnomeui/gnome-druid-page-standard.h"
-#include "libgnomeui/gnome-druid-page-finish.h"
+/* #include "libgnomeui/gnome-druid-page-finish.h" */
 
 #define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT
 

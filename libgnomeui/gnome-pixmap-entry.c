@@ -113,9 +113,9 @@ refresh_preview(GnomePixmapEntry *pentry)
 		return;
 	}
 	if(GNOME_IS_PIXMAP(pentry->preview)) {
-                gnome_pixmap_clear(GNOME_PIXMAP(pentry->preview));
+          gnome_pixmap_clear(GNOME_PIXMAP(pentry->preview));
                 gnome_pixmap_set_pixbuf (GNOME_PIXMAP(pentry->preview),
-                                         GTK_STATE_NORMAL, pixbuf);
+                                         pixbuf);
         } else {
 		gtk_widget_destroy(pentry->preview->parent);
 		pentry->preview = gnome_pixmap_new_from_pixbuf (pixbuf);

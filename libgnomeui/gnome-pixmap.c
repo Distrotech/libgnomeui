@@ -654,9 +654,9 @@ gnome_pixmap_set_pixbuf (GnomePixmap *gpixmap,
 	old_height = gpixmap->height;
 
 	/* make sure it's empty */
+        gdk_pixbuf_ref (pixbuf);
 	gnome_pixmap_clear (gpixmap);
 	gpixmap->original_image = pixbuf;
-	gdk_pixbuf_ref (pixbuf);
 
 	if (gdk_pixbuf_get_has_alpha (pixbuf)) {
 		gpixmap->original_scaled_mask
