@@ -778,7 +778,7 @@ static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 		mdi->windows = g_list_remove(mdi->windows, app);
 		gtk_widget_destroy(GTK_WIDGET(app));
 		
-		/* only destroy mdi if there are no external windows registered
+		/* only destroy mdi if there are no external objects registered
 		   with it. */
 		if(mdi->registered == NULL)
 			gtk_object_destroy(GTK_OBJECT(mdi));
@@ -786,7 +786,7 @@ static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 	else if(app->contents) {
 		child = gnome_mdi_get_child_from_view(app->contents);
 		if(g_list_length(child->views) == 1) {
-			/* if this is the last view, we should remove the child! */
+			/* if this is the last view, we have to remove the child! */
 			if(!gnome_mdi_remove_child(mdi, child, FALSE))
 				return TRUE;
 		}
@@ -1335,8 +1335,9 @@ gint gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view, gint force)
 	if( (mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL) ) {
 		window->contents = NULL;
 
-		/* if this is NOT the last toplevel, we destroy it */
-		if(g_list_length(mdi->windows) > 1) {
+		/* if this is NOT the last toplevel or a registered object exists,
+		   destroy the toplevel */
+		if(g_list_length(mdi->windows) > 1 || mdi->registered) {
 			mdi->windows = g_list_remove(mdi->windows, window);
 			gtk_widget_destroy(GTK_WIDGET(window));
 			if(mdi->active_window && view == mdi->active_view)
@@ -1347,8 +1348,9 @@ gint gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view, gint force)
 	}
 	else if(mdi->mode == GNOME_MDI_NOTEBOOK) {
 		if(GTK_NOTEBOOK(parent)->cur_page == NULL) {
-			if(g_list_length(mdi->windows) > 1) {
-				/* if this is NOT the last toplevel, destroy it! */
+			if(g_list_length(mdi->windows) > 1 || mdi->registered) {
+				/* if this is NOT the last toplevel or a registered object
+				   exists, destroy the toplevel */
 				mdi->windows = g_list_remove(mdi->windows, window);
 				gtk_widget_destroy(GTK_WIDGET(window));
 				if(mdi->active_window && view == mdi->active_view)

@@ -1,3 +1,8 @@
+1999-10-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_remove_view): if a registered object exists,
+	destroy an empty GnomeApp even if it is the last one.
+
 1999-10-22  Jonathan Blandford  <jrb@redhat.com>
 
 	* Makefile.am (libgnomeui10compatinclude_HEADERS): add this.
