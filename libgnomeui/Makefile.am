@@ -286,12 +286,13 @@ gnometypebuiltins_evals.c: @REBUILD@ makeenums.pl gnome.defs
 	&& $(PERL) makeenums.pl arrays $(gnome_headers) > gtbe.tmp \
 	&& mv gtbe.tmp gnometypebuiltins_evals.c
 
-stamp-gnomemarshal.h: @REBUILD@ gnomemarshal.list gnomemarshal.h
+stamp-gnomemarshal.h: @REBUILD@ gnomemarshal.list
 	cd $(srcdir) \
 	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --header >> xgen-gmh \
 	&& (cmp -s xgen-gmh gnomemarshal.h || cp xgen-gmh gnomemarshal.h) \
 	&& rm -f xgen-gmh xgen-gmh~ \
 	&& echo timestamp > $(@F)
+
 gnomemarshal.c: @REBUILD@ stamp-gnomemarshal.h
 	cd $(srcdir) \
 	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --body >> xgen-gmc \
@@ -318,6 +319,7 @@ EXTRA_DIST =					\
 	gnome.defs 				\
 	maketypes.awk				\
 	makeenums.pl				\
+	gnomemarshal.list			\
 	gnome-boxed.defs			\
 	gnometypebuiltins_vars.c		\
 	gnometypebuiltins_ids.c			\
