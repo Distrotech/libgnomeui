@@ -1295,19 +1295,19 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
 static gint
 g_strncmp_ignore_char( gchar *first, gchar *second, gint length, gchar ignored )
 {
-  gint i, j;
-  for ( i = 0, j = 0; i < length; i++, j++ )
-    {
-      while ( first[i] == ignored && i < length ) i++;
-      while ( second[j] == ignored ) j++;
-      if ( i == length )
+        gint i, j;
+	for ( i = 0, j = 0; i < length; i++, j++ )
+	{
+                while ( first[i] == ignored && i < length ) i++;
+		while ( second[j] == ignored ) j++;
+		if ( i == length )
+		        return 0;
+		if ( first[i] < second[j] )
+		        return -1; 
+		if ( first[i] > second[j] )
+		        return 1;
+	}
 	return 0;
-      if ( first[i] < second[j] )
-	return -1;
-      if ( first[i] > second[j] )
-	return 1;
-    }
-  return 0;
 }
 
 /* menu insertion/removal functions
@@ -1360,13 +1360,13 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 
 	stripped_path_len = path_len;
 	for ( p = 0; p < path_len; p++ )
-	  if( path[p] == '_' )
-	    stripped_path_len--;
+	        if( path[p] == '_' )
+		        stripped_path_len--;
 	
 	if (path_len == 0){
 
-		if (children && GTK_IS_TEAROFF_MENU_ITEM(children->data))
-			/* consider the position after the tear off item as the topmost one. */
+	        if (children && GTK_IS_TEAROFF_MENU_ITEM(children->data))
+		        /* consider the position after the tear off item as the topmost one. */
 			*pos = 1;
 		else
 			*pos = 0;
