@@ -18,7 +18,7 @@ int retval = 1;
 
 int main(int argc, char *argv[])
 {
-  GtkWidget *mainwin;
+  GtkWidget *mainwin, *urlbtn;
   gchar* msg;
   struct sigaction sa;
   poptContext ctx;
@@ -56,6 +56,11 @@ int main(int argc, char *argv[])
                                   GNOME_MESSAGE_BOX_ERROR,
                                   GNOME_STOCK_BUTTON_CLOSE,
                                   NULL);
+
+  urlbtn = gnome_href_new("http://www.gnome.org/application_crashed.shtml",
+                          _("Please visit the GNOME Application Crash page for more information"));
+  gtk_widget_show(urlbtn);
+  gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(mainwin)->vbox), urlbtn);
 
   g_free(msg);
 

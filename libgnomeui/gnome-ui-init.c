@@ -5,7 +5,7 @@
 #  include <config.h>
 #endif
 
-/* #define USE_SEGV_HANDLE 1 */
+#define USE_SEGV_HANDLE 1
 
 /* AIX requires this to be the first thing in the file.  */
 #ifndef __GNUC__
@@ -59,9 +59,8 @@ extern char *program_invocation_short_name;
 extern void  gnome_type_init (void);
 
 static void gnome_rc_parse(gchar *command);
-#ifdef USE_SEGV_HANDLE
-static void gnome_segv_handle(int signum);
-#endif
+static void gnome_segv_setup(gboolean post_arg_parse);
+
 static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 				     GdkColormap *colormap,
 				     GdkBitmap  **mask,
@@ -109,37 +108,34 @@ gnome_add_gtk_arg_callback(poptContext con,
 		 * different from the value that this passes to gtk
 		 */
 		g_ptr_array_add(gtk_args,
-				g_strdup(poptGetInvocationName(con)));
+				(char *)poptGetInvocationName(con));
 		break;
 		
 	case POPT_CALLBACK_REASON_OPTION:
-		newstr = g_strconcat("--", opt->longName, NULL);
+	        switch(opt->argInfo) {
+		case POPT_ARG_STRING:
+		case POPT_ARG_INT:
+		case POPT_ARG_LONG:
+		  newstr = g_strconcat("--", opt->longName, "=", arg, NULL);
+		  break;
+		default:
+		  newstr = g_strconcat("--", opt->longName, NULL);
+		  break;
+		}
+
 		g_ptr_array_add(gtk_args, newstr);
 		gnome_client_add_static_arg(client, newstr, NULL);
-		
-		if(opt->argInfo == POPT_ARG_STRING) {
-			g_ptr_array_add(gtk_args, (char *)arg);
-			gnome_client_add_static_arg(client, arg, NULL);
-		}
 		break;
 		
 	case POPT_CALLBACK_REASON_POST:
 		g_ptr_array_add(gtk_args, NULL);
+
 		final_argc = gtk_args->len - 1;
 		final_argv = g_memdup(gtk_args->pdata, sizeof(char *) * gtk_args->len);
-		
 		gtk_init(&final_argc, &final_argv);
-		
 		g_free(final_argv);
-#ifdef GNOME_CLIENT_WILL_COPY_ARGS
-		g_strfreev(gtk_args->pdata); /* this weirdness is here to eliminate
-						memory leaks if gtk_init() modifies
-						argv[] */
 		
-		g_ptr_array_free(gtk_args, FALSE);
-#else
 		g_ptr_array_free(gtk_args, TRUE);
-#endif
 		gtk_args = NULL;
 		gnome_gtk_initialized = TRUE;
 		file_name = g_concat_dir_and_file (gnome_user_accels_dir, gnome_app_id);
@@ -194,35 +190,14 @@ static void
 gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 	      const struct poptOption *opt)
 {
-#ifdef USE_SEGV_HANDLE
-        struct sigaction sa;
-#endif
-	
 	if(gnome_initialized)
 		return;
 	
 	switch(reason) {
 	case POPT_CALLBACK_REASON_PRE:
-		
-#ifdef USE_SEGV_HANDLE
-                /* Well, actually we haven't parsed options yet
-                   so --disable-crash-dialog can't take effect.
-                   But you could change this flag in the debugger.
-                */
-                if (!disable_crash_dialog) {
-                        /* 
-                         * Yes, we do this twice, so if an error occurs before init,
-                         * it will be caught, and if it happens after init, we'll override
-                         * gtk's handler
-                         */
-                        memset(&sa, 0, sizeof(sa));
-                        sa.sa_handler = (gpointer)gnome_segv_handle;
-                        sigaction(SIGSEGV, &sa, NULL);
-                }
-#endif
+                gnome_segv_setup(FALSE);
                 gtk_set_locale();
 		client = gnome_master_client();
-		
 		break;
 	case POPT_CALLBACK_REASON_POST:
 		gdk_imlib_init();
@@ -251,17 +226,8 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 			if (!(pixmaps == -1 || images == -1))
 				gdk_imlib_set_cache_info (0, images);
 		}
-	  
-#ifdef USE_SEGV_HANDLE
-                memset(&sa, 0, sizeof(sa));
-                if (!disable_crash_dialog) {
-                        sa.sa_handler = (gpointer)gnome_segv_handle;
 
-                } else {
-                        sa.sa_handler = SIG_DFL;
-                }                        
-                sigaction(SIGSEGV, &sa, NULL);
-#endif
+                gnome_segv_setup(TRUE);
 		
 		/* lame trigger stuff. This really needs to be sorted
 		   out better so that the trigger API is exported more
@@ -273,13 +239,10 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 		gnome_initialized = TRUE;
 		break;
 	case POPT_CALLBACK_REASON_OPTION:
-		if(opt->val == -1) {
-			g_print ("Gnome %s %s\n", gnome_app_id, gnome_app_version);
-			exit(0);
-		}
-                else if (opt->val == -2) {
+                if (opt->val == -2) {
                         disable_crash_dialog = TRUE;
                 }
+	default:
 		break;
 	}
 }
@@ -288,9 +251,7 @@ static const struct poptOption gnome_options[] = {
         { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
 	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	 &gnome_init_cb, 0, NULL, NULL},
-	{"version", 'V', POPT_ARG_NONE, NULL, -1},
 	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, -2},
-	POPT_AUTOHELP
 	{NULL, '\0', 0, NULL, 0}
 };
 
@@ -575,28 +536,78 @@ gnome_rc_parse (gchar *command)
 	gtk_rc_init ();
 }
 
+
+#ifdef USE_SEGV_HANDLE
+static void gnome_segv_handle(int signum);
+#endif
+
+static void
+gnome_segv_setup(gboolean post_arg_parse)
+{
+#ifdef USE_SEGV_HANDLE
+        static struct sigaction sa_saved_fpe, sa_saved_segv, sa_saved_bus;
+        struct sigaction sa;
+
+        memset(&sa, 0, sizeof(sa));
+        sa.sa_handler = (gpointer)gnome_segv_handle;
+ 
+        /* 
+         * Yes, we do this twice, so if an error occurs before init,
+         * it will be caught, and if it happens after init, we'll override
+         * gtk's handler
+         */
+       if(post_arg_parse) {
+                struct sigaction *setptr_segv, *setptr_fpe, *setptr_bus;
+
+                if(disable_crash_dialog) {
+                        setptr_segv = &sa_saved_segv;
+                        setptr_fpe = &sa_saved_fpe;
+                        setptr_bus = &sa_saved_bus;
+                } else
+                        setptr_segv = setptr_fpe = setptr_bus = &sa;
+
+                sigaction(SIGSEGV, setptr_segv, NULL);
+                sigaction(SIGFPE, setptr_fpe, NULL);
+                sigaction(SIGBUS, setptr_bus, NULL);
+        } else {
+                struct sigaction *setptr;
+                char *ctmp;
+
+                /* Well, actually we haven't parsed options yet
+                   so --disable-crash-dialog can't take effect.
+                   But you could change this flag in the debugger. -hp
+
+                   ...or use an environment variable - ecl
+                */
+                ctmp = getenv("DISABLE_CRASH_DIALOG");
+                if(ctmp)
+                        disable_crash_dialog = atoi(ctmp)?TRUE:FALSE;
+
+                setptr = disable_crash_dialog?NULL:&sa;
+
+                sigaction(SIGSEGV, setptr, &sa_saved_segv);
+                sigaction(SIGFPE, setptr, &sa_saved_fpe);
+                sigaction(SIGBUS, setptr, &sa_saved_bus);
+        }
+#endif
+}
+
 #ifdef USE_SEGV_HANDLE
 static void gnome_segv_handle(int signum)
 {
 	static int in_segv = 0;
 	pid_t pid;
 	
-	
-        if (in_segv > 11) {
-                /* The fprintf() was segfaulting, we are just totally hosed */
-                exit(1);
-        }
-
-        if (in_segv > 10) {
-                /* dialog display isn't working out */
-                fprintf(stderr, _("10 fatal errors, giving up on displaying error dialog"));
-                exit(1);
-        }
-
-	if (in_segv > 0)
-		return;
-	
 	in_segv++;
+
+        if (in_segv > 2) {
+                /* The fprintf() was segfaulting, we are just totally hosed */
+                _exit(1);
+        } else if (in_segv > 1) {
+                /* dialog display isn't working out */
+                fprintf(stderr, _("Giving up on displaying error dialog"));
+                _exit(1);
+        }
 
         /* Make sure we release grabs */
         gdk_pointer_ungrab(GDK_CURRENT_TIME);
@@ -604,26 +615,32 @@ static void gnome_segv_handle(int signum)
 
         gdk_flush();
         
-	pid = fork();
-	
-	if (pid) {
+	if ((pid = fork())) {
                 /* Wait for user to see the dialog, then exit. */
+                /* Why wait at all? */
 		int estatus;
 		pid_t eret;
-		
+
 		eret = waitpid(pid, &estatus, 0);
 		
-                exit(1);
+                _exit(1);
 	} else {
 		char buf[32];
+
 		g_snprintf(buf, sizeof(buf), "%d", signum);
+
 		/* Child process */
 		execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
 		      program_invocation_name, buf, NULL);
+
+                execlp("gnome_segv", "gnome_segv", program_invocation_name, buf, NULL);
+
+                _exit(99);
 	}
+
 	in_segv--;
 }
-#endif /* USE_SEGV_HANDLE */
+#endif
 
 static GdkPixmap *
 imlib_image_loader(GdkWindow   *window,
