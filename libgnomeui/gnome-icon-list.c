@@ -560,6 +560,9 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
+		priv->edit_pending = FALSE;
+		priv->select_pending = FALSE;
+
 		/* Ignore wheel mouse clicks for now */
 		if (event->button.button > 3)
 			break;
@@ -706,11 +709,13 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
+		priv->edit_pending = FALSE;
+		priv->select_pending = FALSE;
+
 		/* Ignore wheel mouse clicks for now */
 		if (event->button.button > 3)
 			break;
 
-		priv->select_pending = FALSE;
 		do_select = TRUE;
 
 		if (additive || range) {

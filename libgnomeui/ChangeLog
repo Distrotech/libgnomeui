@@ -1,3 +1,10 @@
+1999-08-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (selection_one_icon_event): Reset the
+	edit_pending and select_pending flags before starting to process a
+	button press.
+	(selection_many_icon_event): Likewise.
+
 1999-08-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (do_select_many): Added an argument to specify
