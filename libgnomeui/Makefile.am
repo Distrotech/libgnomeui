@@ -20,8 +20,7 @@ libgnomeui_la_SOURCES = \
 	gnome-app.c			\
 	gnome-app-helper.c		\
 	gnome-color-selector.c 		\
-	gnome-canvas.c			\
-	gnome-canvas-rect-ellipse.c	\
+	@GNOME_CANVAS_SRC@		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -62,8 +61,7 @@ libgnomeui_la_SOURCES = \
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
         gnome-actionarea.h     		\
-	gnome-canvas.h			\
-	gnome-canvas-rect-ellipse.h	\
+	@GNOME_CANVAS_HED@		\
 	gnome-app.h			\
 	gnome-app-helper.h		\
 	gnome-dialog.h                  \

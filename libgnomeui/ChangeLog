@@ -1,3 +1,9 @@
+Wed Jun 10 14:19:39 EDT 1998 Gregory McLean <gregm@comstar.net>
+
+	* gnome-canvas-* stuff gets automaticly turned on and off
+	  depending on which gtk you build against. As I'm not an auto*
+	  guru I'm fairly sure its not bullet proof but it works for me.
+
 Wed Jun 10 13:07:09 EDT 1998 Gregory McLean <gregm@comstar.net>
 
 	* Wheee libgnomeui now compiles (with the exception of the
