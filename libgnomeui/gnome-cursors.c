@@ -159,7 +159,7 @@ static const char * egg_timer4_xpm[] = {
 "   ..........   "};
 
 static const char * pointing_hand_xpm[] = {
-"16 20 3 1",
+"16 19 3 1",
 "       c None",
 ".      c #000000",
 "+      c #FFFFFF",
@@ -296,8 +296,8 @@ static const char hand_open_mask_bits[] = {
    0x80, 0x7f, 0x00, 0x80, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
 
-#define WHITE { 65535, 65535, 65535, 0 }
-#define BLACK { 0, 0, 0, 0 }
+#define WHITE { 0x0000, 0xff00, 0xff00, 0xff00 }
+#define BLACK { 0x0000, 0x0000, 0x0000, 0x0000 }
 
 
 static GnomeStockCursor default_cursors[] = {
@@ -330,8 +330,8 @@ static GnomeStockCursor default_cursors[] = {
                 pointing_hand_xpm, /* cursor_data */
                 NULL, /* xbm mask */
                 NULL, NULL, /* bitmap/mask */
-                BLACK, /* foreground */
-                WHITE, /* background */
+                WHITE, /* foreground */
+                BLACK, /* background */
                 5, 0,     /* hotspot */
                 -1, -1,   /* w x h */
                 0,        /* alpha */
@@ -342,8 +342,8 @@ static GnomeStockCursor default_cursors[] = {
                 (gchar*)hand_open_data_bits, /* cursor_data */
                 (gchar*)hand_open_mask_bits,
                 NULL, NULL, /* bitmap/mask */
-                BLACK, /* foreground */
-                WHITE, /* background */
+                WHITE, /* foreground */
+                BLACK, /* background */
                 10, 10,     /* hotspot */
                 hand_open_data_width, hand_open_data_height,   /* w x h */
                 0,        /* alpha */

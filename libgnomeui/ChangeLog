@@ -1,3 +1,9 @@
+2000-01-14  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-cursors.c: Changed the cursor foreground/background WHITE
+	color to white instead of yellow (there was an offset bug in the
+	R/G/B values). Corrected height of PointingHand cursor.
+
 2000-01-13  Havoc Pennington  <hp@redhat.com>
 
 	* gnome-gconf.c: fix the version of liboafgnome we require.
@@ -24,6 +30,7 @@
 	use in popup help. Still lacking the proper tag set, and for some
 	reason it's not getting the button press/release events.
 
+>>>>>>> 1.1235
 2000-01-13  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-cursors.c (gnome_stock_cursor_new): Fixed the GDK crash
