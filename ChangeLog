@@ -1,3 +1,7 @@
+2001-03-24  Martin Baulig  <baulig@suse.de>
+
+	* configure.in: Set package name to `libgnomeui-2'.
+
 2001-03-05  Martin Baulig  <baulig@suse.de>
 
 	* configure.in: Depend on libgnomecanvas and libxml.
