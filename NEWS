@@ -32,6 +32,8 @@ Library:
 	icon entry.
 	* Enable color palette in the color picker (Gustavo Carneiro)
 	* Clear entry items properly in gnome-entry.c (Marco Pesenti Gritti)
+	* Fix problems with python-based apps and non-initialized
+	memory. (Marcus at freebsd org)
 
 Translations:
 
