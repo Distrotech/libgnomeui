@@ -583,7 +583,7 @@ gnome_app_add_dock_item (GnomeApp *app,
 					    band_num,
 					    band_position,
 					    offset);
-	else {
+	else
 		gnome_dock_add_item (GNOME_DOCK(app->dock),
 				     GNOME_DOCK_ITEM( item),
 				     placement,
@@ -591,10 +591,10 @@ gnome_app_add_dock_item (GnomeApp *app,
 				     band_position,
 				     offset,
 				     FALSE);
-		gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
-					 "layout_changed",
-					 (gpointer) app);
-	}
+
+	gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
+				 "layout_changed",
+				 (gpointer) app);
 }
 
 /**
