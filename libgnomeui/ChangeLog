@@ -1,3 +1,28 @@
+1999-01-10  Nat Friedman  <nat@nat.org>
+
+	* gnome-uidefs.h (GNOME_KEY_NAME_REDO_MOVE): New macro.
+	(GNOME_KEY_MOD_REDO_MOVE): Likewise.
+	(GNOME_KEY_NAME_UNDO_MOVE): Likewise.
+	(GNOME_KEY_MOD_UNDO_MOVE): Likewise.
+	(GNOME_KEY_NAME_PAUSE_GAME): Likewise.
+	(GNOME_KEY_MOD_PAUSE_GAME): Likewise.
+	(GNOME_KEY_NAME_NEW_GAME): Likewise.
+	(GNOME_KEY_MOD_NEW_GAME): Likewise.
+
+	* gnome-app-helper.h (GNOMEUIINFO_SUBTREE_HINT): New macro.
+	(GNOMEUIINFO_MENU_PAUSE_GAME_ITEM): Likewise
+	(GNOMEUIINFO_MENU_NEW_GAME_ITEM): Likewise
+	(GNOMEUIINFO_MENU_END_GAME_ITEM): Likewise
+	(GNOMEUIINFO_MENU_GAME_TREE): Likewise.
+
+1999-01-09  Nat Friedman  <nat@nat.org>
+
+	* gnome-app-helper.h
+	(GNOMEUIINFO_MENU_RESTART_GAME_ITEM): New macro
+	(GNOMEUIINFO_MENU_RESTART_UNDO_MOVE_ITEM): Likewise
+	(GNOMEUIINFO_MENU_RESTART_HINT_ITEM): Likewise
+	(GNOMEUIINFO_MENU_RESTART_SCORES_ITEM): Likewise
+	
 1999-01-10  Dave Camp (campd@oit.edu)
 
 	* gnome-dateedit.c: Hides the calendar widget on signal

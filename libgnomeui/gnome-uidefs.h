@@ -86,7 +86,17 @@
 
 #define GNOME_KEY_NAME_NEW_WINDOW       0
 #define GNOME_KEY_MOD_NEW_WINDOW        (0)
-
 #define GNOME_KEY_NAME_CLOSE_WINDOW     0
 #define GNOME_KEY_MOD_CLOSE_WINDOW      (0)
+
+#define GNOME_KEY_NAME_REDO_MOVE        'R'
+#define GNOME_KEY_MOD_REDO_MOVE         (GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_UNDO_MOVE        'Z'
+#define GNOME_KEY_MOD_UNDO_MOVE         (GDK_CONTROL_MASK)
+
+#define GNOME_KEY_NAME_PAUSE_GAME       0
+#define GNOME_KEY_MOD_PAUSE_GAME        (0)
+#define GNOME_KEY_NAME_NEW_GAME         'N'
+#define GNOME_KEY_MOD_NEW_GAME          (GDK_CONTROL_MASK)
+
 #endif

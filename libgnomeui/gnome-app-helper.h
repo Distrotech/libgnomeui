@@ -166,6 +166,11 @@ typedef struct {
 	{ GNOME_APP_UI_SUBTREE, label, NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 
+/* Insert a subtree with a hint */
+#define GNOMEUIINFO_SUBTREE_HINT(label, hint, tree) \
+	{ GNOME_APP_UI_SUBTREE, label, hint, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+
 /* Insert a subtree (submenu) with a stock icon */
 #define GNOMEUIINFO_SUBTREE_STOCK(label, tree, stock_id) \
 	{ GNOME_APP_UI_SUBTREE, label, NULL, tree, NULL, NULL, \
@@ -330,7 +335,7 @@ typedef struct {
           GNOME_KEY_NAME_REPLACE, GNOME_KEY_MOD_REPLACE, NULL }
 
 #define GNOMEUIINFO_MENU_PROPERTIES_ITEM(cb, data)                          \
-        { GNOME_APP_UI_ITEM, N_("_Properties..."),                           \
+        { GNOME_APP_UI_ITEM, N_("_Properties..."),                          \
           N_("Modify the file's properties"),                               \
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,              \
@@ -340,7 +345,7 @@ typedef struct {
  * The Settings menu
  */
 #define GNOMEUIINFO_MENU_PREFERENCES_ITEM(cb, data)                         \
-        { GNOME_APP_UI_ITEM, N_("_Preferences..."),                          \
+        { GNOME_APP_UI_ITEM, N_("_Preferences..."),                         \
           N_("Configure the application"),                                  \
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,              \
@@ -362,6 +367,56 @@ typedef struct {
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,              \
           GNOME_KEY_NAME_CLOSE_WINDOW, GNOME_KEY_MOD_CLOSE_WINDOW, NULL }
+/*
+ * The "Game" menu
+ */
+#define GNOMEUIINFO_MENU_NEW_GAME_ITEM(cb, data)                            \
+        { GNOME_APP_UI_ITEM, N_("_New game"),                               \
+          N_("Start a new game"), cb, (gpointer)(data),                     \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,             \
+          GNOME_KEY_NAME_NEW_GAME,  GNOME_KEY_MOD_NEW_GAME, NULL }
+
+#define GNOMEUIINFO_MENU_PAUSE_GAME_ITEM(cb, data)                          \
+        { GNOME_APP_UI_ITEM, N_("_Pause game"),                             \
+          N_("Pause the game"), cb, (gpointer)(data),                       \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TIMER_STOP,        \
+          GNOME_KEY_NAME_PAUSE_GAME,  GNOME_KEY_MOD_PAUSE_GAME, NULL }
+
+#define GNOMEUIINFO_MENU_RESTART_GAME_ITEM(cb, data)                        \
+        { GNOME_APP_UI_ITEM, N_("_Restart game"),                           \
+          N_("Restart the game"), cb, (gpointer)(data),                     \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,             \
+          0,  0, NULL }
+
+#define GNOMEUIINFO_MENU_UNDO_MOVE_ITEM(cb, data)                           \
+        { GNOME_APP_UI_ITEM, N_("_Undo move"),                              \
+          N_("Undo the last move"), cb, (gpointer)(data),                   \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UNDO,              \
+          GNOME_KEY_NAME_UNDO_MOVE,  GNOME_KEY_MOD_UNDO_MOVE, NULL }
+
+#define GNOMEUIINFO_MENU_REDO_MOVE_ITEM(cb, data)                           \
+        { GNOME_APP_UI_ITEM, N_("_Redo move"),                              \
+          N_("Redo the undone move"), cb, (gpointer)(data),                 \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,              \
+          GNOME_KEY_NAME_REDO_MOVE,  GNOME_KEY_MOD_REDO_MOVE, NULL }
+
+#define GNOMEUIINFO_MENU_HINT_ITEM(cb, data)                                \
+        { GNOME_APP_UI_ITEM, N_("_Hint"),                                   \
+          N_("Get a hint for your next move"), cb, (gpointer)(data),        \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,             \
+          0,  0, NULL }
+
+#define GNOMEUIINFO_MENU_SCORES_ITEM(cb, data)                              \
+        { GNOME_APP_UI_ITEM, N_("_Scores..."),                              \
+          N_("View the scores"), cb, (gpointer)(data),                      \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SCORES,            \
+          0,  (GdkModifierType) 0, NULL }
+
+#define GNOMEUIINFO_MENU_END_GAME_ITEM(cb, data)                            \
+        { GNOME_APP_UI_ITEM, N_("_End game"),                               \
+          N_("End the current game"), cb, (gpointer)(data),                 \
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,             \
+          0,  (GdkModifierType) 0, NULL }
 
 /*
  * And the "Help" menu
@@ -393,6 +448,9 @@ typedef struct {
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_HELP_TREE(tree) \
 	{ GNOME_APP_UI_SUBTREE, N_("_Help"), NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_GAME_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("_Game"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 		
 /*these are strings to be used for paths when working with the menus stuff*/
