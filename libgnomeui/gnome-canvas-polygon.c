@@ -13,6 +13,7 @@
 #include <string.h>
 #include "gnome-canvas-polygon.h"
 #include "gnome-canvas-util.h"
+#include "gnometypebuiltins.h"
 
 
 #define NUM_STATIC_POINTS 256	/* Number of static points to use to avoid allocating arrays */
@@ -105,13 +106,13 @@ gnome_canvas_polygon_class_init (GnomeCanvasPolygonClass *class)
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::points", GTK_TYPE_POINTER, GTK_ARG_READWRITE, ARG_POINTS);
+	gtk_object_add_arg_type ("GnomeCanvasPolygon::points", GTK_TYPE_GNOME_CANVAS_POINTS, GTK_ARG_READWRITE, ARG_POINTS);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_OUTLINE_STIPPLE);
+	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_stipple", GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
+	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_stipple", GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_OUTLINE_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 

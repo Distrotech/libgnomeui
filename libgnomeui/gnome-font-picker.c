@@ -135,7 +135,7 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 				GTK_SIGNAL_OFFSET (GnomeFontPickerClass, font_set),
 				gnome_font_picker_marshal_signal_1,
 				GTK_TYPE_NONE, 1,
-				GTK_TYPE_POINTER);
+				GTK_TYPE_STRING);
 
 	gtk_object_class_add_signals (object_class, font_picker_signals, LAST_SIGNAL);
 

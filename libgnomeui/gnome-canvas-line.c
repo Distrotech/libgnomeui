@@ -13,6 +13,7 @@
 #include <string.h>
 #include "gnome-canvas-line.h"
 #include "gnome-canvas-util.h"
+#include "gnometypebuiltins.h"
 
 
 #define DEFAULT_SPLINE_STEPS 12		/* this is what Tk uses */
@@ -114,10 +115,10 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasLine::points", GTK_TYPE_POINTER, GTK_ARG_READWRITE, ARG_POINTS);
+	gtk_object_add_arg_type ("GnomeCanvasLine::points", GTK_TYPE_GNOME_CANVAS_POINTS, GTK_ARG_READWRITE, ARG_POINTS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasLine::fill_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
+	gtk_object_add_arg_type ("GnomeCanvasLine::fill_stipple", GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::cap_style", GTK_TYPE_GDK_CAP_STYLE, GTK_ARG_READWRITE, ARG_CAP_STYLE);

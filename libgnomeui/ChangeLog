@@ -1,3 +1,25 @@
+1998-11-26  James Henstridge  <james@daa.com.au>
+
+	* gnometypes.c: added ability to register new boxed types.  This
+	is encapsulated in the function gnome_type_register_boxed, which
+	maybe should be moved to GTK.
+
+	* gnome-boxed.defs: added definitions of GdkImlibImage and
+	GnomeCanvasPoints, so type id's will be generated for them.
+
+	* gnome-canvas-image.c, gnome-canvas-line.c,
+	gnome-canvas-polygon.c, gnome-canvas-rect-ellipse.c,
+	gnome-canvas-text.c: changed occurences of GTK_TYPE_POINTER to
+	GTK_TYPE_GDK_IMLIB_IMAGE or GTK_TYPE_GNOME_CANVAS_POINTS where
+	appropriate.  Also changed the type for the stipples from
+	GTK_TYPE_BOXED to GTK_TYPE_GDK_WINDOW.
+
+	* gnome-font-picker.c: changed the argument to the font_set
+	signal from GTK_TYPE_POINTER to GTK_TYPE_STRING.
+
+	* gnome-icon-list.c: changed argument to (un)select_icon signals
+	from GTK_TYPE_POINTER to GTK_TYPE_GDK_EVENT.
+
 1998-11-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtk-ted.c (gtk_ted_init): Buglette fix.

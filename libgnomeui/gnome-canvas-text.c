@@ -114,7 +114,7 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasText::y_offset", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y_OFFSET);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_stipple", GTK_TYPE_BOXED, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
+	gtk_object_add_arg_type ("GnomeCanvasText::fill_stipple", GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasText::text_width", GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_WIDTH);
 	gtk_object_add_arg_type ("GnomeCanvasText::text_height", GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_HEIGHT);
 

@@ -11,6 +11,7 @@
 #include <config.h>
 #include <math.h>
 #include "gnome-canvas-image.h"
+#include "gnometypebuiltins.h"
 
 
 enum {
@@ -82,7 +83,7 @@ gnome_canvas_image_class_init (GnomeCanvasImageClass *class)
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasImage::image", GTK_TYPE_POINTER, GTK_ARG_READWRITE, ARG_IMAGE);
+	gtk_object_add_arg_type ("GnomeCanvasImage::image", GTK_TYPE_GDK_IMLIB_IMAGE, GTK_ARG_READWRITE, ARG_IMAGE);
 	gtk_object_add_arg_type ("GnomeCanvasImage::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
 	gtk_object_add_arg_type ("GnomeCanvasImage::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
 	gtk_object_add_arg_type ("GnomeCanvasImage::width", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_WIDTH);

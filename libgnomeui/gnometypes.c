@@ -5,6 +5,22 @@
 #include "gnometypebuiltins_vars.c"
 #include "gnometypebuiltins_evals.c"
 
+/* maybe this should be put in GTK */
+static GtkType
+gnome_type_register_boxed (gchar *name) {
+  GtkTypeInfo info;
+
+  info.type_name = name;
+  info.object_size = 0;
+  info.class_size = 0;
+  info.class_init_func = NULL;
+  info.object_init_func = NULL;
+  info.reserved_1 = NULL;
+  info.reserved_2 = NULL;
+
+  return gtk_type_unique(GTK_TYPE_BOXED, &info);
+}
+
 void
 gnome_type_init() {
   int i;
@@ -27,6 +43,8 @@ gnome_type_init() {
       	type_id = gtk_type_register_enum (builtin_info[i].type_name, builtin_info[i].values);
       else if ( builtin_info[i].parent == GTK_TYPE_FLAGS )
       	type_id = gtk_type_register_flags (builtin_info[i].type_name, builtin_info[i].values);
+      else if ( builtin_info[i].parent == GTK_TYPE_BOXED )
+        type_id = gnome_type_register_boxed (builtin_info[i].type_name);
 
       g_assert (type_id != GTK_TYPE_INVALID);
       (*builtin_info[i].type_id) = type_id;
