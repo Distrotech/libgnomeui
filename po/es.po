@@ -11,7 +11,7 @@ msgstr ""
 "Last-Translator: Germán Poo Caamaño <gpoo@ubiobio.cl>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libgnomeui/gnome-about.c:194
@@ -19,19 +19,16 @@ msgid "Credits"
 msgstr "Créditos"
 
 #: libgnomeui/gnome-about.c:222
-#, fuzzy
 msgid "_Written by"
-msgstr "Escrito por"
+msgstr "_Escrito por"
 
 #: libgnomeui/gnome-about.c:237
-#, fuzzy
 msgid "_Documented by"
-msgstr "Documentado por"
+msgstr "_Documentado por"
 
 #: libgnomeui/gnome-about.c:252
-#, fuzzy
 msgid "_Translated by"
-msgstr "Traducido por"
+msgstr "_Traducido por"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:309
@@ -359,12 +356,10 @@ msgid "End World Hunger"
 msgstr "Fin del Hambre Mundial"
 
 #: libgnomeui/gnome-href.c:137
-#, fuzzy
 msgid "Link color"
 msgstr "Color del enlace"
 
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Color used to draw the link"
 msgstr "Color usado para dibujar el enlace"
 
@@ -1010,9 +1005,8 @@ msgid "Select file"
 msgstr "Seleccionar archivo"
 
 #: libgnomeui/gnome-file-entry.c:627
-#, fuzzy
 msgid "_Browse..."
-msgstr "Navegar..."
+msgstr "_Navegar..."
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1093,7 +1087,7 @@ msgstr "Soporte para GNOME GConf UI"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "_Detalles"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, fuzzy, c-format

@@ -1,3 +1,7 @@
+2002-04-27  Carlos Perello Marin <carlos@gnome-db.org>
+
+	* es.po: Fixed an error with encoding.
+
 2002-04-27  Hasbullah Bin Pit <sebol@ikhlas.com>
 
 	* ms.po: Updated Malay Translation.
