@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
-"POT-Creation-Date: 2004-02-03 11:16+0100\n"
-"PO-Revision-Date: 2004-02-01 16:45+0000\n"
+"Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
+"POT-Creation-Date: 2004-02-18 22:47+0000\n"
+"PO-Revision-Date: 2004-02-18 22:50+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
-"Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -140,6 +140,7 @@ msgstr "Sobre %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -197,6 +198,7 @@ msgid "_Game"
 msgstr "_Jogo"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -387,11 +389,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -418,7 +420,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Fechar a janela actual"
 
@@ -659,10 +661,6 @@ msgstr "Cancelar Terminar Sessão"
 msgid "Received invalid color data\n"
 msgstr "Recebidos dados de cor inválidos\n"
 
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Selector de Cor"
-
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "Abrir um diálogo para especificar a cor"
@@ -855,11 +853,11 @@ msgstr "Entrada GTK"
 msgid "The GTK entry"
 msgstr "A entrada GTK"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "ID Histórico"
 
-#: libgnomeui/gnome-file-entry.c:221
+#: libgnomeui/gnome-file-entry.c:227
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -867,19 +865,19 @@ msgstr ""
 "Identificador único para a entrada de ficheiro. Será utilizado para gravar a "
 "lista de histórico."
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Título do Diálogo de Procura"
 
-#: libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:236
 msgid "Title for the Browse file dialog."
 msgstr "O título do diálogo de Procura de ficheiro."
 
-#: libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:243
 msgid "Directory Entry"
 msgstr "Entrada de Directório"
 
-#: libgnomeui/gnome-file-entry.c:238
+#: libgnomeui/gnome-file-entry.c:244
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -887,35 +885,35 @@ msgstr ""
 "Se a entrada de ficheiro está a ser utilizada para introduzir nomes de "
 "directórios ou nomes completos de ficheiros."
 
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
 msgstr "Modal"
 
-#: libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Whether the Browse file window should be modal."
 msgstr "Se a janela de Procura de ficheiros deverá ou não ser modal."
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Filename that should be displayed in the file entry."
 msgstr "Ficheiro que deverá ser apresentado na entrada de ficheiro."
 
-#: libgnomeui/gnome-file-entry.c:263
+#: libgnomeui/gnome-file-entry.c:269
 msgid "Default Path"
 msgstr "Caminho por Omissão"
 
-#: libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:270
 msgid "Default path for the Browse file window."
 msgstr "Caminho por omissão para a janela de Procura de ficheiro."
 
-#: libgnomeui/gnome-file-entry.c:271
+#: libgnomeui/gnome-file-entry.c:277
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:278
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -925,11 +923,11 @@ msgstr ""
 "ficheiros. Pode utilizar esta propriedade para obter a GnomeEntry se "
 "necessitar de alterar ou verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:282
+#: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:283
+#: libgnomeui/gnome-file-entry.c:289
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -939,23 +937,35 @@ msgstr ""
 "Pode utilizar esta propriedade para obter a GtkEntry se necessitar de "
 "alterar ou verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:535
+#: libgnomeui/gnome-file-entry.c:299
+msgid "Use GtkFileChooser"
+msgstr "Utilizar GtkFileChooser"
+
+#: libgnomeui/gnome-file-entry.c:300
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"Se utilizar o novo widget GtkFileChooser ou o widget GtkFileSelection para "
+"seleccionar ficheiros."
+
+#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
 msgstr "Seleccionar ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path"
 msgstr "Caminho"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path to file"
 msgstr "Caminho para o ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:683
+#: libgnomeui/gnome-file-entry.c:775
 msgid "_Browse..."
 msgstr "_Procurar..."
 
-#: libgnomeui/gnome-file-entry.c:684
+#: libgnomeui/gnome-file-entry.c:776
 msgid "Pop up a file selector to choose a file"
 msgstr "Surge um selector de ficheiros para seleccionar um"
 
@@ -1102,7 +1112,7 @@ msgstr ""
 "Verifique as suas definições na ferramenta de preferências 'Aplicações "
 "Preferidas'."
 
-#: libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1110,27 +1120,27 @@ msgstr ""
 "Identificador único para a entrada de ícone. Será utilizado para gravar a "
 "lista de histórico."
 
-#: libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
 msgstr "O título do diálogo de Procura de ícone."
 
-#: libgnomeui/gnome-icon-entry.c:193
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr "Directório Pixmap"
 
-#: libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
 msgstr "O directório onde serão procurados os ícones."
 
-#: libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Nome de ficheiro que deverá ser mostrado na entrada de ícone."
 
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
 msgstr "Diálogo de selecção"
 
-#: libgnomeui/gnome-icon-entry.c:211
+#: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1139,51 +1149,43 @@ msgstr ""
 "GtkDialog caso necessite de alterar ou verificar qualquer uma das suas "
 "propriedades."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr "Sem Ícone"
 
-#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Incapaz de encontrar uma hbox, a utilizar selecção de ficheiro normal"
-
-#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
-msgid "Preview"
-msgstr "Antever"
-
-#: libgnomeui/gnome-icon-entry.c:756
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "Diálogo de selecção de ícone"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "Este diálogo permite-lhe seleccionar um ícone."
 
-#: libgnomeui/gnome-icon-entry.c:763
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "Selector de ícones"
 
-#: libgnomeui/gnome-icon-entry.c:764
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "Seleccione o ícone que deseja."
 
-#: libgnomeui/gnome-icon-entry.c:988
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
 msgstr "Selector de Ícones"
 
-#: libgnomeui/gnome-icon-entry.c:989
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
 msgstr "Este botão irá abrir uma janela que lhe permite seleccionar um ícone."
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
 msgstr "Procurar"
 
-#: libgnomeui/gnome-icon-entry.c:1014
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
 msgstr "Caminho de ícones"
 
-#: libgnomeui/gnome-icon-entry.c:1015
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1205,23 +1207,23 @@ msgstr "GnomeIconSelection: incapaz de abrir directório '%s'"
 msgid "Loading Icons..."
 msgstr "A Ler Ícones..."
 
-#: libgnomeui/gnome-messagebox.c:108
+#: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "Informação"
 
-#: libgnomeui/gnome-messagebox.c:113
+#: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "Aviso"
 
-#: libgnomeui/gnome-messagebox.c:119
+#: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "Erro"
 
-#: libgnomeui/gnome-messagebox.c:125
+#: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "Questão"
 
-#: libgnomeui/gnome-messagebox.c:130
+#: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "Mensagem"
 
@@ -1245,25 +1247,33 @@ msgstr "Recordar senha para esta sessão"
 msgid "Save password in keyring"
 msgstr "Gravar senha no chaveiro"
 
-#: libgnomeui/gnome-pixmap-entry.c:113
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "Tem Antevisão"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Se a entrada de pixmap deverá ou não ter uma antevisão."
 
-#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "Sem Imagem"
 
-#: libgnomeui/gnome-pixmap-entry.c:205
+#: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "Antever Imagem"
 
-#: libgnomeui/gnome-pixmap-entry.c:206
+#: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "Uma antevisão da imagem actualmente seleccionada"
+
+#: libgnomeui/gnome-pixmap-entry.c:414
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Incapaz de encontrar uma hbox, a utilizar selecção de ficheiro normal"
+
+#: libgnomeui/gnome-pixmap-entry.c:420
+msgid "Preview"
+msgstr "Antever"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1385,16 +1395,24 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Utilização: gnome_segv2 nomeapp numsig\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "_Reiniciar a Aplicação"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Informar os Programadores"
+msgid "_Inform Developers"
+msgstr "_Informar os Programadores"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Depurar"
+msgid "_Debug"
+msgstr "_Depurar"
 
-#~ msgid "Exit the test"
-#~ msgstr "Sair do teste"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Sair do teste"
+
+#~ msgid "Color Selector"
+#~ msgstr "Selector de Cor"
 
 #~ msgid ""
 #~ "Application \"%s\" (process %d) has crashed\n"
