@@ -1,3 +1,11 @@
+Fri Dec 22 22:58:50 2000  George Lebl <jirka@5z.com>
+
+	* gnome-winhints.c:  When setting hints, add all the hints to the
+	  mask for the client message when the window is already mapped.
+	  This is needed for the do not cover hint to get through.  Sawfish
+	  already implements this and it's needed for the panel to work
+	  fully.
+
 Sun Dec 17 14:41:54 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dock-layout.c:  In the destroy handler actually call

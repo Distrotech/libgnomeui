@@ -208,7 +208,7 @@ gnome_win_hints_get_state(GtkWidget *window)
 }
 
 void
-gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
+gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints hints)
 {
   GdkWindowPrivate *priv;
   XEvent xev;
@@ -231,8 +231,10 @@ gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
       xev.xclient.data.l[0] = (long)(WIN_HINTS_SKIP_FOCUS | 
 				     WIN_HINTS_SKIP_WINLIST | 
 				     WIN_HINTS_SKIP_TASKBAR | 
-				     WIN_HINTS_GROUP_TRANSIENT);
-      xev.xclient.data.l[1] = (long)skip;
+				     WIN_HINTS_GROUP_TRANSIENT |
+				     WIN_HINTS_FOCUS_ON_CLICK |
+				     WIN_HINTS_DO_NOT_COVER);
+      xev.xclient.data.l[1] = (long)hints;
       xev.xclient.data.l[2] = gdk_time_get();
       
       XSendEvent(GDK_DISPLAY(), GDK_ROOT_WINDOW(), False, 
@@ -242,7 +244,7 @@ gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
     {
       long data[1];
       
-      data[0] = (long)skip;
+      data[0] = (long)hints;
       XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_HINTS,
 		      XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data,
 		      1);
