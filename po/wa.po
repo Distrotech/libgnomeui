@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-05 20:29+0200\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-08-05 21:47+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -36,16 +36,16 @@ msgstr "Cayet efant 2"
 msgid "Hint for item 2"
 msgstr "Racsegne pol cayet 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:650
+#: file-chooser/gtkfilesystemgnomevfs.c:652
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s n' est nén on ridant"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:857
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 msgid "Filesystem"
 msgstr "Sistinme di fitchîs"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1521
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Li schapaedje del rimåke a fwait berwete (%s)"
@@ -62,8 +62,11 @@ msgstr "Dji n' a savou drovi li fitchî «%s»: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Dji n' a savou tcherdjî l' imådje «%s»: li råjhon n' est nén cnoxhowe, motoit bén on cron fitchî"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Dji n' a savou tcherdjî l' imådje «%s»: li råjhon n' est nén cnoxhowe, "
+"motoit bén on cron fitchî"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -154,7 +157,8 @@ msgid "Translator credits"
 msgstr "Gråces po les ratourneus"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come "
 "ratournåve."
@@ -174,7 +178,6 @@ msgstr "Åd fwait di %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitchî"
 
@@ -232,7 +235,6 @@ msgid "_Game"
 msgstr "_Djeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aidance"
 
@@ -423,11 +425,11 @@ msgstr "Apontyî li programe"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Å_d fwait"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Åd fwait di ç' programe chal"
 
@@ -454,7 +456,7 @@ msgstr "Fé on novea purnea"
 msgid "_Close This Window"
 msgstr "_Clôre ci purnea chal"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Clôre ci purnea chal"
 
@@ -918,7 +920,9 @@ msgstr "ID d' l' istwere"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr "Idintifiant unike po l' intrêye do fitchî.  I serè-st eployî po schaper l' djivêye di l'  istwere."
+msgstr ""
+"Idintifiant unike po l' intrêye do fitchî.  I serè-st eployî po schaper "
+"l' djivêye di l'  istwere."
 
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
@@ -1024,7 +1028,8 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
+msgstr ""
+"Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1243,7 +1248,8 @@ msgstr "Chal vos dvoz mete li no do ridant ki les imådjetes sont-st å dvins."
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
+msgstr ""
+"GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1466,7 +1472,5 @@ msgstr "El d_ire åzès programeus"
 msgid "_Debug"
 msgstr "_Disbugaedje"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Moussî foû do sayaedje"
-
+#~ msgid "Exit the test"
+#~ msgstr "Moussî foû do sayaedje"

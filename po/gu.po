@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-09 12:04+0200\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-08-09 15:44+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "<magnet@magnet-i.com>\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
 "\n"
 
 # demos/mdi_demo.c:128
@@ -39,17 +40,17 @@ msgstr "બાળ વસ્તુ ૨"
 msgid "Hint for item 2"
 msgstr "વસ્તુ ૨ માટે સંકેત"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:650
+#: file-chooser/gtkfilesystemgnomevfs.c:652
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s એ ફોલ્ડર નથી"
 
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: file-chooser/gtkfilesystemgnomevfs.c:857
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 msgid "Filesystem"
 msgstr "ફાઈલસિસ્ટમ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1521
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "બુકમાર્ક સંગ્રહવામાં નિષ્ફળ (%s)"
@@ -66,7 +67,8 @@ msgstr "ફાઈલ '%s' ખોલવામાં નિષ્ફળ: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "ચિત્ર '%s' લાવવામાં નિષ્ફળ: કારણ જાણતા નથી, કદાચ ચિત્ર બગડેલુ હશે"
 
 #: libgnomeui/gnome-about.c:198
@@ -182,7 +184,8 @@ msgstr ""
 
 # libgnomeui/gnome-about.c:389
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "અનુવાદકને યશ.અા શબ્દમાળાને અનુવાદ માટે યોગ્ય શબ્દમાળા તરીકે ચિન્હિત કરવી"
 
 # libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
@@ -205,7 +208,6 @@ msgstr "%s ના વિશે"
 # test-gnome/testgnome.xml.h:5
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ફાઇલ (_F)"
 
@@ -278,7 +280,6 @@ msgstr "રમત (_G)"
 # libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 # test-gnome/testgnome.xml.h:6
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "મદદ (_H)"
 
@@ -508,12 +509,12 @@ msgstr "કાર્યક્રમની રુપરેખા બનાવો"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "ના વિશે (_A)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "આ કાર્યક્રમ વિશે"
 
@@ -546,7 +547,7 @@ msgid "_Close This Window"
 msgstr "આ વિન્ડો બંધ કરો (_C)"
 
 # libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "વર્તમાન વિન્ડો બંધ કરો"
 
@@ -1133,7 +1134,8 @@ msgstr "ડીરેક્ટરી પ્રવેશ"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "શું આ ફાઇલ પ્રવેશનો ઉપયોગ ડીરેક્ટરીના નામ અથવા પૂરેપૂરા ફાઇલના નામ નાખવા માટે વપરાય છે."
+msgstr ""
+"શું આ ફાઇલ પ્રવેશનો ઉપયોગ ડીરેક્ટરીના નામ અથવા પૂરેપૂરા ફાઇલના નામ નાખવા માટે વપરાય છે."
 
 # libgnomeui/gnome-file-entry.c:216
 #: libgnomeui/gnome-file-entry.c:255
@@ -1409,7 +1411,8 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "ચિહ્નના દાખલા માટેની અનન્ય ઓળખાણ.ઇતિહાસની યાદીનો સંગ્રહ કરવા માટે આનોઉપયોગ થશે."
+msgstr ""
+"ચિહ્નના દાખલા માટેની અનન્ય ઓળખાણ.ઇતિહાસની યાદીનો સંગ્રહ કરવા માટે આનોઉપયોગ થશે."
 
 # libgnomeui/gnome-icon-entry.c:173
 #: libgnomeui/gnome-icon-entry.c:187
@@ -1734,7 +1737,5 @@ msgstr "વિકસાવનારાઓને જાણ કરો (_I)"
 msgid "_Debug"
 msgstr "ભૂલ શોધો (_D)"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ચકાસણી બંધ કરો"
-
+#~ msgid "Exit the test"
+#~ msgstr "ચકાસણી બંધ કરો"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-02-22 20:01+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkish <gnome@azitt.com>\n"
@@ -31,12 +31,17 @@ msgstr "Törəmə Üzv 2"
 msgid "Hint for item 2"
 msgstr "İkinci üzv üçün ipucu"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
+#: file-chooser/gtkfilesystemgnomevfs.c:652
+#, c-format
+msgid "%s is not a folder"
+msgstr ""
+
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 #, fuzzy
 msgid "Filesystem"
 msgstr "Fayl_lar"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""
@@ -1398,12 +1403,14 @@ msgstr "GNOME GUI Kitabxanası"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Çoxlu parçalanma xətaları meydana gəldi: xəta dialoqu göstərilə bilmir\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-02-23 17:51-0600\n"
 "Last-Translator: Dinesh Nadarajah <dinesh_list@sbcglobal.net>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -30,12 +30,17 @@ msgstr "சேய் உருப்படி 2"
 msgid "Hint for item 2"
 msgstr "உருப்படி 2'க்கு குறிப்பிடு"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
+#: file-chooser/gtkfilesystemgnomevfs.c:652
+#, c-format
+msgid "%s is not a folder"
+msgstr ""
+
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 #, fuzzy
 msgid "Filesystem"
 msgstr "கோ_ப்புகள்"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""
@@ -1376,11 +1381,13 @@ msgstr "கனோம் GUI நூலகம்"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "பல பகுதியாக்கல் பிழைகள் நடைபெற்றுள்ளன; பிழை உரையாடலை காண்பிக்க முடியாது\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

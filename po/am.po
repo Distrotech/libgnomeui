@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2003-02-03 10:16+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
@@ -31,12 +31,17 @@ msgstr "የልጅ ዕቃ ቍጥር 2"
 msgid "Hint for item 2"
 msgstr "ጥቆማ ለተራ ቍጥር 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
+#: file-chooser/gtkfilesystemgnomevfs.c:652
+#, c-format
+msgid "%s is not a folder"
+msgstr ""
+
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 #, fuzzy
 msgid "Filesystem"
 msgstr "ፋ_ይሎች"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""
@@ -1385,11 +1390,13 @@ msgstr "የGNOME GUI ስብስብ"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "የተለያዩ ክፍሎች ላይ ስህተት ተከስቷል፥ ስሕተቱን ማሳየት አልተቻለም\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

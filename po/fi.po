@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-02-28 19:22+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -34,12 +34,17 @@ msgstr "Lapsikohta 2"
 msgid "Hint for item 2"
 msgstr "Kohdan 2 vinkki"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
+#: file-chooser/gtkfilesystemgnomevfs.c:652
+#, c-format
+msgid "%s is not a folder"
+msgstr ""
+
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 #, fuzzy
 msgid "Filesystem"
 msgstr "Tie_dostot"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""
@@ -1400,11 +1405,13 @@ msgstr "GNOMEn GUI-asetukset"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Monia muistialueen ylityksiä tapahtui: virheikkunaa ei voi näyttää\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

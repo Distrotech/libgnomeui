@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-22 04:27+0200\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-07-22 14:41+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@redhat.com>\n"
 "Language-Team: Punjabi <pa@li.org>\n"
@@ -33,16 +33,16 @@ msgstr "ਚਲਾਇਡ ਇਕਾਈ 2"
 msgid "Hint for item 2"
 msgstr "ਇਕਾਈ 2 ਲਈ ਸੰਕੇਤ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:650
+#: file-chooser/gtkfilesystemgnomevfs.c:652
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ਇੱਕ ਫੋਲਡਰ ਨਹੀਂ ਹੈ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:857
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 msgid "Filesystem"
 msgstr "ਫਾਇਲਸਿਸਟਮ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1521
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "ਬੁੱਕਮਾਰਕ ਨੂੰ ਸੰਭਾਲਣ ਵਿੱਚ ਗਲਤੀ(%s)"
@@ -59,8 +59,10 @@ msgstr "ਫਾਇਲ '%s' ਖੋਲਣ ਵਿੱਚ ਅਸਫਲ: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "ਚਿੱਤਰ '%s' ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: ਕਾਰਨ ਜਾਣਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ ਹੈ, ਸੰਭਵ ਤੌਰ ਤੇ ਫਾਇਲ ਨਿਕਾਰਾ ਹੈ"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"ਚਿੱਤਰ '%s' ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: ਕਾਰਨ ਜਾਣਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ ਹੈ, ਸੰਭਵ ਤੌਰ ਤੇ ਫਾਇਲ ਨਿਕਾਰਾ ਹੈ"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -151,7 +153,8 @@ msgid "Translator credits"
 msgstr "aalam@redhat.com"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "ਭਾਸ਼ਾ ਤਬਦੀਲੀ ਦਾ ਮਾਣ"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -169,7 +172,6 @@ msgstr "%s ਬਾਰੇ"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ਫਾਇਲ਼"
 
@@ -227,7 +229,6 @@ msgid "_Game"
 msgstr "ਖੇਡ"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "ਸਹਾਇਤਾ"
 
@@ -418,11 +419,11 @@ msgstr "ਕਾਰਜ ਦੀ ਸੰਰਚਨਾ"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "ਬਾਰੇ"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "ਇਸ ਕਾਰਜ ਬਾਰੇ"
 
@@ -449,7 +450,7 @@ msgstr "ਨਵਾਂ ਝਰੋਖਾ ਬਣਾਉ"
 msgid "_Close This Window"
 msgstr "ਇਹ ਝਰੋਖਾ ਬੰਦ ਕਰੋ"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "ਮੌਜੂਦਾ ਝਰੋਖਾ ਬੰਦ ਕਰੋ"
 
@@ -989,7 +990,8 @@ msgstr "GtkFileChooser ਵਰਤੋਂ"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "ਕੀ ਚੁਣੀਆਂ ਫਾਇਲ਼ਾਂ ਲਈ ਨਵਾਂ GtkFileChooser ਵਿਦਗਿਟ ਜਾਂ GtkFileSelection ਵਿਦਗਿਟਵਰਤਣਾ ਹੈ"
+msgstr ""
+"ਕੀ ਚੁਣੀਆਂ ਫਾਇਲ਼ਾਂ ਲਈ ਨਵਾਂ GtkFileChooser ਵਿਦਗਿਟ ਜਾਂ GtkFileSelection ਵਿਦਗਿਟਵਰਤਣਾ ਹੈ"
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1449,7 +1451,5 @@ msgstr "ਵਿਕਾਸਵਾਦੀਆਂ ਲਈ ਜਾਣਕਾਰੀ "
 msgid "_Debug"
 msgstr "ਡੀਬੱਗ "
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ਜਾਂਚ ਤੋ ਬਾਹਰ"
-
+#~ msgid "Exit the test"
+#~ msgstr "ਜਾਂਚ ਤੋ ਬਾਹਰ"

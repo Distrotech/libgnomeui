@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-03-08 15:11+0200\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -32,12 +32,17 @@ msgstr "Элемэнт-нашчадак 2"
 msgid "Hint for item 2"
 msgstr "Падказка для элемэнту 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
+#: file-chooser/gtkfilesystemgnomevfs.c:652
+#, c-format
+msgid "%s is not a folder"
+msgstr ""
+
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 #, fuzzy
 msgid "Filesystem"
 msgstr "Фай_лы"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""
@@ -1402,11 +1407,13 @@ msgstr "Бібліятэка графічнага спалучэньня кар�
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Шматлікія сыстэмныя памылкі; немагчыма паказаць дыялёг з памылкамі\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

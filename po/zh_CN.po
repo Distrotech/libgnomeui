@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-01 20:06+0200\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-08-02 02:13+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -32,16 +32,16 @@ msgstr "子项目 2"
 msgid "Hint for item 2"
 msgstr "项目 2 的提示"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:650
+#: file-chooser/gtkfilesystemgnomevfs.c:652
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是文件夹"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:857
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 msgid "Filesystem"
 msgstr "文件系统"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1521
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "书签保存失败(%s)"
@@ -60,8 +60,7 @@ msgstr "打开文件“%s”失败：%s"
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
-"装入图像“%s”失败：原因未知，可能是图像文件损坏"
+msgstr "装入图像“%s”失败：原因未知，可能是图像文件损坏"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -178,7 +177,6 @@ msgstr "关于 %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "文件(_F)"
 
@@ -236,7 +234,6 @@ msgid "_Game"
 msgstr "游戏(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "帮助(_H)"
 
@@ -433,11 +430,11 @@ msgstr "配置应用程序"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "关于(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "关于此应用程序"
 
@@ -465,7 +462,7 @@ msgstr "创建一个新窗口"
 msgid "_Close This Window"
 msgstr "关闭此窗口(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "关闭当前窗口"
 
@@ -1523,7 +1520,5 @@ msgstr "通知开发者(_I)"
 msgid "_Debug"
 msgstr "调试(_D)"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "退出测试"
-
+#~ msgid "Exit the test"
+#~ msgstr "退出测试"

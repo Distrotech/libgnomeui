@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
+"POT-Creation-Date: 2004-08-16 13:40+0200\n"
 "PO-Revision-Date: 2004-04-05 04:07+0500\n"
 "Last-Translator: Pawan Chitrakar <pawan@mpp.org.np>\n"
 "Language-Team: Nepali <nlp@mpp.org.np>\n"
@@ -32,11 +32,16 @@ msgstr "सानोतिनो आइटम २"
 msgid "Hint for item 2"
 msgstr "आइटमको लागि ईशारा २"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
+#: file-chooser/gtkfilesystemgnomevfs.c:652
+#, c-format
+msgid "%s is not a folder"
+msgstr ""
+
+#: file-chooser/gtkfilesystemgnomevfs.c:859
 msgid "Filesystem"
 msgstr "फाइलसिस्टम"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "पृष्ठ चिन्ह संग्रह गर्न सकिएन (%s)"
@@ -1386,11 +1391,13 @@ msgstr "जीनोम जीयुआई पुस्तकालय"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "अनेक किसिमका खराब तत्वहरु भटियो; गल्ती संबाद देखाउन सकिँदैन\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
