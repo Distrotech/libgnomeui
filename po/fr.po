@@ -8,15 +8,15 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.5.3\n"
-"POT-Creation-Date: 2004-02-03 11:16+0100\n"
-"PO-Revision-Date: 2004-01-25 00:42+0100\n"
+"Project-Id-Version: libgnomeui 2.5.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-13 11:37+0100\n"
+"PO-Revision-Date: 2004-02-13 11:33+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -144,6 +144,7 @@ msgstr "À propos de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -201,6 +202,7 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -391,11 +393,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -422,7 +424,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -577,7 +579,7 @@ msgstr "A une progression"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Crée un widget de progression."
+msgstr "Crée un composant graphique de progression."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
@@ -585,7 +587,7 @@ msgstr "A un état"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Crée un widget d'état."
+msgstr "Crée un composant graphique d'état."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -651,21 +653,17 @@ msgstr "PRÉFIXE"
 msgid "Disable connection to session manager"
 msgstr "Désactive la connexion avec le gestionnaire de sessions"
 
-#: libgnomeui/gnome-client.c:975
+#: libgnomeui/gnome-client.c:974
 msgid "Session management"
 msgstr "Gestion de session"
 
-#: libgnomeui/gnome-client.c:2475
+#: libgnomeui/gnome-client.c:2474
 msgid "Cancel Logout"
 msgstr "Annuler la demande de fin de session"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Données de couleur reçues non valides\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Sélecteur de couleurs"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
@@ -860,11 +858,11 @@ msgstr "Entrée GTK"
 msgid "The GTK entry"
 msgstr "L'entrée GTK"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "ID d'historique"
 
-#: libgnomeui/gnome-file-entry.c:221
+#: libgnomeui/gnome-file-entry.c:227
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -872,19 +870,19 @@ msgstr ""
 "Identificateur unique pour l'entrée de fichier. Il sera utilisé pour "
 "enregistrer la liste d'historique."
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Titre de la boîte de dialogue de sélection de fichiers"
 
-#: libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:236
 msgid "Title for the Browse file dialog."
 msgstr "Titre pour la boîte de dialogue de sélection de fichiers."
 
-#: libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:243
 msgid "Directory Entry"
 msgstr "Entrée de répertoire"
 
-#: libgnomeui/gnome-file-entry.c:238
+#: libgnomeui/gnome-file-entry.c:244
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -892,35 +890,35 @@ msgstr ""
 "Définit si l'entrée du fichier est utilisée pour saisir des noms de "
 "répertoires ou des noms de fichiers complets."
 
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
 msgstr "Modal"
 
-#: libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Whether the Browse file window should be modal."
 msgstr "Définit si la fenêtre de sélection de fichiers doit être modale."
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Nom du fichier"
 
-#: libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Filename that should be displayed in the file entry."
 msgstr "Nom du fichier qui doit être affiché dans l'entrée de fichier."
 
-#: libgnomeui/gnome-file-entry.c:263
+#: libgnomeui/gnome-file-entry.c:269
 msgid "Default Path"
 msgstr "Chemin par défaut"
 
-#: libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:270
 msgid "Default path for the Browse file window."
 msgstr "Chemin par défaut pour la fenêtre de sélection de fichiers."
 
-#: libgnomeui/gnome-file-entry.c:271
+#: libgnomeui/gnome-file-entry.c:277
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:278
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -930,11 +928,11 @@ msgstr ""
 "Vous pouvez utiliser cette propriété pour obtenir le GnomeEntry si vous "
 "devez modifier ou interroger un de ses paramètres."
 
-#: libgnomeui/gnome-file-entry.c:282
+#: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:283
+#: libgnomeui/gnome-file-entry.c:289
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -944,23 +942,35 @@ msgstr ""
 "Vous pouvez utiliser cette propriété pour obtenir le GtkEntry si vous devez "
 "modifier ou interroger un de ses paramètres."
 
-#: libgnomeui/gnome-file-entry.c:535
+#: libgnomeui/gnome-file-entry.c:299
+msgid "Use GtkFileChooser"
+msgstr "Utiliser GtkFileChooser"
+
+#: libgnomeui/gnome-file-entry.c:300
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"Indique si il faut utiliser le nouveau composant graphique GtkFileChooser ou "
+"le composant graphique GtkFileSelection pour sélectionner des fichiers."
+
+#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
 msgstr "Sélectionnez un fichier"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path"
 msgstr "Chemin"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path to file"
 msgstr "Chemin du fichier"
 
-#: libgnomeui/gnome-file-entry.c:683
+#: libgnomeui/gnome-file-entry.c:775
 msgid "_Browse..."
 msgstr "_Parcourir..."
 
-#: libgnomeui/gnome-file-entry.c:684
+#: libgnomeui/gnome-file-entry.c:776
 msgid "Pop up a file selector to choose a file"
 msgstr "Affiche un sélecteur de fichiers pour choisir un fichier"
 
@@ -1111,7 +1121,7 @@ msgstr ""
 "Veuillez vérifier vos réglages dans l'outil de Préférences « Applications "
 "préférées »."
 
-#: libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1119,27 +1129,27 @@ msgstr ""
 "Identifieur unique pour l'entrée d'icône.  Il sera utilisé pour enregistrer "
 "la liste d'historique."
 
-#: libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
 msgstr "Titre pour la boîte de dialogue de parcours d'icônes."
 
-#: libgnomeui/gnome-icon-entry.c:193
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr "Répertoire de pixmaps"
 
-#: libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
 msgstr "Répertoire dans lequel chercher les icônes."
 
-#: libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Nom du fichier qui doit être affiché dans l'entrée d'icônes."
 
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
 msgstr "Boîte de dialogue de sélection"
 
-#: libgnomeui/gnome-icon-entry.c:211
+#: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1148,54 +1158,45 @@ msgstr ""
 "propriété pour obtenir le GtkDialog si vous devez modifier ou interroger "
 "n'importe laquelle de ses propriétés"
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr ""
 "Aucune\n"
 "icône"
 
-#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
-msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
-"Impossible de trouver un hbox, utilisation d'un sélecteur de fichiers normal"
-
-#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
-msgid "Preview"
-msgstr "Aperçu"
-
-#: libgnomeui/gnome-icon-entry.c:756
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "Boîte de dialogue de sélection d'icônes"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "Cette boîte de dialogue vous permet de sélectionner une icône."
 
-#: libgnomeui/gnome-icon-entry.c:763
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "Sélecteur d'icônes"
 
-#: libgnomeui/gnome-icon-entry.c:764
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "Veuillez choisir l'icône que vous souhaitez."
 
-#: libgnomeui/gnome-icon-entry.c:988
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
 msgstr "Sélecteur d'icônes"
 
-#: libgnomeui/gnome-icon-entry.c:989
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
 msgstr "Ce bouton ouvrira une fenêtre vous permettant de choisir une icône."
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
 msgstr "Parcourir"
 
-#: libgnomeui/gnome-icon-entry.c:1014
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
 msgstr "Chemin de l'icône"
 
-#: libgnomeui/gnome-icon-entry.c:1015
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1215,23 +1216,23 @@ msgstr "GnomeIconSelection : impossible d'ouvrir le répertoire « %s »"
 msgid "Loading Icons..."
 msgstr "Chargement des icônes..."
 
-#: libgnomeui/gnome-messagebox.c:108
+#: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "Information"
 
-#: libgnomeui/gnome-messagebox.c:113
+#: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "Avertissement"
 
-#: libgnomeui/gnome-messagebox.c:119
+#: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "Erreur"
 
-#: libgnomeui/gnome-messagebox.c:125
+#: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "Question"
 
-#: libgnomeui/gnome-messagebox.c:130
+#: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "Message"
 
@@ -1255,25 +1256,34 @@ msgstr "Se souvenir du mot de passe pour cette session"
 msgid "Save password in keyring"
 msgstr "Enregistrer le mot de passe dans le porte-clé"
 
-#: libgnomeui/gnome-pixmap-entry.c:113
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "Effectuer un aperçu"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Définit si l'entrée de pixmap doit avoir un aperçu."
 
-#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "Aucune image"
 
-#: libgnomeui/gnome-pixmap-entry.c:205
+#: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "Aperçu de l'image"
 
-#: libgnomeui/gnome-pixmap-entry.c:206
+#: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "Un aperçu de l'image spécifiée"
+
+#: libgnomeui/gnome-pixmap-entry.c:414
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+"Impossible de trouver un hbox, utilisation d'un sélecteur de fichiers normal"
+
+#: libgnomeui/gnome-pixmap-entry.c:420
+msgid "Preview"
+msgstr "Aperçu"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1343,14 +1353,15 @@ msgid "GNOME GUI Library"
 msgstr "Bibliothèque d'interface graphique GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:708
+#: libgnomeui/gnome-ui-init.c:707
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Plusieurs erreurs de segmentation sont survenues ; impossible d'afficher la "
 "boîte de dialogue d'erreur\n"
 
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:721
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1405,427 +1416,6 @@ msgstr "Informer les développeurs"
 msgid "Debug"
 msgstr "Débogage"
 
-#~ msgid "Exit the test"
-#~ msgstr "Quitter le test"
-
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "L'application « %s » (processus %d) s'est\n"
-#~ "bloquée à la suite d'une erreur fatale.\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "Transmettre un rapport d'anomalies"
-
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
-
-#~ msgid "_Credits"
-#~ msgstr "_Crédits"
-
-#~ msgid "Find _Again"
-#~ msgstr "Rechercher à _nouveau"
-
-#~ msgid "Both text and icons"
-#~ msgstr "À la fois texte et icônes"
-
-#~ msgid "Both text and icons when horizontal, just icons when vertical"
-#~ msgstr ""
-#~ "À la fois texte et icônes quand horizontal, juste les icônes quand "
-#~ "vertical"
-
-#~ msgid "E_xit"
-#~ msgstr "_Quitter"
-
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "Détails de l'erreur GConf : %s\n"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Options de débogage de Gdk à activer"
-
-#~ msgid "FLAGS"
-#~ msgstr "DRAPEAUX"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Options de débogage de Gdk à désactiver"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Utiliser des appels X synchrones"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "Ne pas utiliser l'extension mémoire partagée de X11"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Nom du programme tel qu'utilisé par le gestionnaire de fenêtres"
-
-#~ msgid "NAME"
-#~ msgstr "NOM"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Classe du programme tel qu'utilisé par le gestionnaire de fenêtres"
-
-#~ msgid "CLASS"
-#~ msgstr "CLASSE"
-
-#~ msgid "HOST"
-#~ msgstr "HÔTE"
-
-#~ msgid "PORT"
-#~ msgstr "PORT"
-
-#~ msgid "STYLE"
-#~ msgstr "STYLE"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Options de débogage de Gtk+ à activer"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Options de débogage de Gtk+ à désactiver"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Rendre tous les avertissements fatals"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Charger un module Gtk additionnel"
-
-#~ msgid "MODULE"
-#~ msgstr "MODULE"
-
-#~ msgid "Author"
-#~ msgstr "Auteur"
-
-#, fuzzy
-#~ msgid "Background start position"
-#~ msgstr "Position de l'icône"
-
-#, fuzzy
-#~ msgid "Background end position"
-#~ msgstr "Position de l'icône"
-
-#, fuzzy
-#~ msgid "Copyright font"
-#~ msgstr "Copyright (C) 1998"
-
-#, fuzzy
-#~ msgid "Comments font"
-#~ msgstr "Commentaire"
-
-#, fuzzy
-#~ msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "wmhints-test"
-#~ msgstr "wmhints-test"
-
-#~ msgid "winhints-test"
-#~ msgstr "winhints-test"
-
-#~ msgid "Layer:"
-#~ msgstr "Calque :"
-
-#~ msgid "Above Dock"
-#~ msgstr "Au-dessus du dock"
-
-#~ msgid "Dock"
-#~ msgstr "Dock"
-
-#~ msgid "On Top"
-#~ msgstr "Au-dessus"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Below"
-#~ msgstr "En-dessous"
-
-#~ msgid "Desktop"
-#~ msgstr "Bureau"
-
-#~ msgid "Set Layer"
-#~ msgstr "Définir le calque"
-
-#~ msgid "Workspaces:"
-#~ msgstr "Espaces de travail :"
-
-#~ msgid "Set Workspace"
-#~ msgstr "Définir l'espace de travail"
-
-#~ msgid "State Toggles:"
-#~ msgstr "Commutateurs d'état :"
-
-#~ msgid "Minimized"
-#~ msgstr "Minimisé"
-
-#~ msgid "Maximized Vertical"
-#~ msgstr "Maximisé verticalement"
-
-#~ msgid "Maximized Horizontal"
-#~ msgstr "Maximisé horizontalement"
-
-#~ msgid "Hidden"
-#~ msgstr "Caché"
-
-#~ msgid "Shaded"
-#~ msgstr "Ombré"
-
-#~ msgid "Fixed Position"
-#~ msgstr "Position fixe"
-
-#~ msgid "Ignore on Arrange"
-#~ msgstr "Ignorer les arrangements"
-
-#~ msgid "Set State"
-#~ msgstr "Définir l'état"
-
-#~ msgid "Skip Toggles:"
-#~ msgstr "Ignorer les commutateurs :"
-
-#~ msgid "Skip Focus"
-#~ msgstr "Ignorer le focus"
-
-#~ msgid "Skip Window Menu"
-#~ msgstr "Ignorer les menus de fenêtre"
-
-#~ msgid "Skip Taskbar / WinList"
-#~ msgstr "Ignorer la barre des tâches et la liste des fenêtres"
-
-#~ msgid "Set Skip"
-#~ msgstr "Appliquer"
-
-#~ msgid "WIN_HINTS Test"
-#~ msgstr "WIN_HINTS Test"
-
-#~ msgid ""
-#~ "Simple test app to check how the WIN_HINTS work.\n"
-#~ "And to test the gnome_win_hints_* functions for errors. :)"
-#~ msgstr ""
-#~ "Simple application de test pour contrôler comment les WIN_HINTS "
-#~ "fonctionnent.\n"
-#~ "Et pour tester les fonctions gnome_win_hints_*. :)"
-
-#~ msgid "Bonobo UI"
-#~ msgstr "IU Bonobo"
-
-#~ msgid "Loop type"
-#~ msgstr "Type de boucle"
-
-#~ msgid "The type of loop the GnomeAnimator uses"
-#~ msgstr "Le type de boucle que GnomeAnimator utilise"
-
-#~ msgid "Animation direction"
-#~ msgstr "Direction de l'animation"
-
-#~ msgid "Number of frames"
-#~ msgstr "Nombre de trames"
-
-#~ msgid "Total number of frames in animation"
-#~ msgstr "Nombre total de trames dans l'animation"
-
-#~ msgid "Current frame number"
-#~ msgstr "Numéro de la trame en cours"
-
-#~ msgid "Animation status"
-#~ msgstr "État de l'animation"
-
-#~ msgid "Speed"
-#~ msgstr "Vitesse"
-
-#~ msgid "Name:"
-#~ msgstr "Nom :"
-
-#~ msgid "Comment:"
-#~ msgstr "Commentaire :"
-
-#~ msgid "Type:"
-#~ msgstr "Type :"
-
-#~ msgid "Run in Terminal"
-#~ msgstr "Lancer dans un terminal"
-
-#~ msgid "Simple drag and drop"
-#~ msgstr "Glisser/déposer simple"
-
-#~ msgid ""
-#~ "In the following commands you should use %s in the spot where the\n"
-#~ "filename/URL should be substituted.  If you leave the field blank\n"
-#~ "drops will not be accepted.  If this application can accept\n"
-#~ "multiple files or URLs as arguments after its command name check the box "
-#~ "above."
-#~ msgstr ""
-#~ "Dans la commande suivante vous devriez utiliser %s dans le point où\n"
-#~ "le nom de fichier/URL devrait être substitué.  Si vous laissez le champ\n"
-#~ "vide, les déposés ne seront pas accepté.  Si cette application peut\n"
-#~ "accepter plusieurs fichiers ou URLs comme arguments aprés son nom de\n"
-#~ "commande, cochez la boîte ci-dessus."
-
-#~ msgid "Command for file drops:"
-#~ msgstr "Commande pour les fichiers déposés :"
-
-#~ msgid "Drop one file at a time only."
-#~ msgstr "Déposer un fichier à la fois seulement."
-
-#~ msgid "Command for URL drops:"
-#~ msgstr "Commande pour les URLs déposées :"
-
-#~ msgid "Drop one URL at a time only."
-#~ msgstr "Déposer une URL à la fois seulement."
-
-#~ msgid "Try this before using:"
-#~ msgstr "Essayer cette commande avant :"
-
-#~ msgid "Window titles to wait for (comma separated):"
-#~ msgstr "Titres de fenêtres à attendre (séparé par des virgules) :"
-
-#~ msgid "Name/Comment translations:"
-#~ msgstr "Traductions nom/commentaire :"
-
-#~ msgid "Language"
-#~ msgstr "Langue"
-
-#~ msgid "Add/Set"
-#~ msgstr "Ajouter/Changer"
-
-#~ msgid "Basic"
-#~ msgstr "Basique"
-
-#~ msgid "Drag and Drop"
-#~ msgstr "Glisser et Déposer"
-
-#~ msgid "Advanced"
-#~ msgstr "Avancée"
-
-#~ msgid "_Popup"
-#~ msgstr "_Popup"
-
-#~ msgid "Show help in temporary popup windows"
-#~ msgstr "Afficher l'aide dans une fenêtre surgissante temporaire"
-
-#~ msgid "_Embedded"
-#~ msgstr "_Encapsulé"
-
-#~ msgid "Show help in a help browser window"
-#~ msgstr "Afficher l'aide dans une fenêtre de navigation d'aide"
-
-#~ msgid "App style"
-#~ msgstr "Style d'application"
-
-#~ msgid "The style of GnomeHelpView"
-#~ msgstr "Le style de GnomeHelpView"
-
-#~ msgid "App style priority"
-#~ msgstr "Priorité du style d'application"
-
-#~ msgid "The priority of style of GnomeHelpView"
-#~ msgstr "La priorité du style de GnomeHelpView"
-
-#~ msgid "Toplevel"
-#~ msgstr "1er niveau"
-
-#~ msgid "The toplevel widget"
-#~ msgstr "Le widget de haut niveau"
-
-#~ msgid "Show help for a specific region of the application"
-#~ msgstr "Affiche l'aide pour une région particulière de l'application"
-
-#~ msgid "Style"
-#~ msgstr "Style"
-
-#~ msgid "Change the way help is displayed"
-#~ msgstr "Change la manière dont l'aide est affiché"
-
-#~ msgid "No help is available for the selected portion of the application."
-#~ msgstr ""
-#~ "Aucune aide n'est disponible pour la portion sélectionné de l'application."
-
-#~ msgid "Cought GnomeURL error: %s"
-#~ msgstr "Erreur GnomeURL : %s"
-
-#~ msgid "Paper Size"
-#~ msgstr "Taille du papier"
-
-#~ msgid "Portrait"
-#~ msgstr "Portrait"
-
-#~ msgid "Landscape"
-#~ msgstr "Paysage"
-
-#~ msgid "Margins"
-#~ msgstr "Marges"
-
-#~ msgid "Top:"
-#~ msgstr "Haut :"
-
-#~ msgid "Bottom:"
-#~ msgstr "Bas :"
-
-#~ msgid "Left:"
-#~ msgstr "Gauche :"
-
-#~ msgid "Right:"
-#~ msgstr "Droite :"
-
-#~ msgid "Fit to Page"
-#~ msgstr "Ajuster à la page"
-
-#~ msgid "%0.3g%s x %0.3g%s"
-#~ msgstr "%0.3g%s x %0.3g%s"
-
-#~ msgid "Bottom left"
-#~ msgstr "Bas gauche"
-
-#~ msgid "Top right"
-#~ msgstr "Haut droit"
-
-#~ msgid "Bottom right"
-#~ msgstr "Bas droit"
-
-#~ msgid "Tile children"
-#~ msgstr "Aligner les fils"
-
-#~ msgid "Cascade children"
-#~ msgstr "Cascader les fils"
-
-#~ msgid "Arrange icons"
-#~ msgstr "Arranger les icônes"
-
-#~ msgid "Autoarrange icons"
-#~ msgstr "Arrangement automatique des icônes"
-
-#~ msgid "App Specific"
-#~ msgstr "Spécifique à l'application"
-
-#~ msgid "bad GnomeRecentDocument attribute: %s\n"
-#~ msgstr "mauvais attribut GnomeRecentDocument : %s\n"
-
-#~ msgid "Unknown"
-#~ msgstr "Inconnu"
-
-#~ msgid "Clear..."
-#~ msgstr "Vider..."
-
-#~ msgid "Add"
-#~ msgstr "Ajouter"
-
-#~ msgid "OK"
-#~ msgstr "Valider"
-
-#~ msgid "Apply"
-#~ msgstr "Appliquer"
-
-#~ msgid "Cancel"
-#~ msgstr "Annuler"
-
-#~ msgid "No"
-#~ msgstr "Non"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Quitter le test"
