@@ -10,7 +10,7 @@ msgstr ""
 "Last-Translator: George Lebl <jirka@5z.com>\n"
 "Language-Team: cs <cs@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libgnomeui/gnome-about.c:194
@@ -27,7 +27,7 @@ msgstr "_Zdokumentovali"
 
 #: libgnomeui/gnome-about.c:253
 msgid "_Translated by"
-msgstr "_P¯eloæili"
+msgstr "_P≈ôelo≈æili"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -36,11 +36,11 @@ msgstr "_Kredity"
 
 #: libgnomeui/gnome-about.c:352
 msgid "Program name"
-msgstr "JmÈno programu"
+msgstr "Jm√©no programu"
 
 #: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
-msgstr "JmÈno programu"
+msgstr "Jm√©no programu"
 
 #: libgnomeui/gnome-about.c:360
 msgid "Program version"
@@ -68,7 +68,7 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:382
 msgid "Authors"
-msgstr "Auto¯i"
+msgstr "Auto≈ôi"
 
 #: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
@@ -243,11 +243,11 @@ msgstr ""
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
-msgstr "Kalend·¯"
+msgstr "Kalend√°≈ô"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
-msgstr "Vyber Ëas"
+msgstr "Vyber ƒças"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
@@ -305,15 +305,15 @@ msgstr ""
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr "Barva pozadÌ"
+msgstr "Barva pozad√≠"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr "Barva pozadÌ"
+msgstr "Barva pozad√≠"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr "Barva pozadÌ jako GdkColor"
+msgstr "Barva pozad√≠ jako GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
@@ -378,7 +378,7 @@ msgstr ""
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
-msgstr "UkonËit hlad ve svÏtÏ"
+msgstr "Ukonƒçit hlad ve svƒõtƒõ"
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
@@ -440,7 +440,7 @@ msgid ""
 "(%s)"
 msgstr ""
 "Aplikace \"%s\" (proces %d) se zhroutila\n"
-"kv˘li smrtelnÈ chybÏ.\n"
+"kv≈Øli smrteln√© chybƒõ.\n"
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:122
@@ -449,7 +449,7 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
-msgstr "Podat zpr·vu o chybÏ"
+msgstr "Podat zpr√°vu o chybƒõ"
 
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
@@ -518,11 +518,11 @@ msgstr "_Soubor/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "⁄_pravy"
+msgstr "√ö_pravy"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr "⁄_pravy/"
+msgstr "√ö_pravy/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
@@ -534,20 +534,20 @@ msgstr "_Pohled/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr "Nas_tavenÌ"
+msgstr "Nas_taven√≠"
 
 #: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
-msgstr "Nas_tavenÌ/"
+msgstr "Nas_taven√≠/"
 
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
-msgstr "_Nov˝"
+msgstr "_Nov√Ω"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
-msgstr "_Nov˝/"
+msgstr "_Nov√Ω/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
@@ -567,7 +567,7 @@ msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
-msgstr "_N·povÏda"
+msgstr "_N√°povƒõda"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -576,16 +576,16 @@ msgstr "_Okna/"
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
-msgstr "_Otev¯Ìt..."
+msgstr "_Otev≈ô√≠t..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr "Otev¯Ìt soubor"
+msgstr "Otev≈ô√≠t soubor"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
-msgstr "_Uloæit"
+msgstr "_Ulo≈æit"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
@@ -594,7 +594,7 @@ msgstr ""
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Uloæit _jako..."
+msgstr "Ulo≈æit _jako..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
@@ -603,7 +603,7 @@ msgstr ""
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
-msgstr "_Vr·tit"
+msgstr "_Vr√°tit"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
@@ -621,7 +621,7 @@ msgstr "Vytisknout tento soubor"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "_NastavenÌ tisku..."
+msgstr "_Nastaven√≠ tisku..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -630,11 +630,11 @@ msgstr ""
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
-msgstr "_Zav¯Ìt"
+msgstr "_Zav≈ô√≠t"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Zav¯Ìt tento soubor"
+msgstr "Zav≈ô√≠t tento soubor"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
@@ -643,7 +643,7 @@ msgstr "_Konec"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
-msgstr "UkonËit aplikaci"
+msgstr "Ukonƒçit aplikaci"
 
 #.
 #. * The "Edit" menu
@@ -655,22 +655,22 @@ msgstr "V_yjmout"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "V_yjmout v˝bÏr"
+msgstr "V_yjmout v√Ωbƒõr"
 
 #. 10
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "_KopÌrovat"
+msgstr "_Kop√≠rovat"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "_KopÌrovat v˝bÏr"
+msgstr "_Kop√≠rovat v√Ωbƒõr"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
-msgstr "_Vloæit"
+msgstr "_Vlo≈æit"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
@@ -688,7 +688,7 @@ msgstr ""
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "_ZpÏt"
+msgstr "_Zpƒõt"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
@@ -706,7 +706,7 @@ msgstr ""
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "_NajÌt..."
+msgstr "_Naj√≠t..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
@@ -715,7 +715,7 @@ msgstr ""
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "NajÌt _dalπÌ"
+msgstr "Naj√≠t _dal≈°√≠"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -724,7 +724,7 @@ msgstr ""
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "Vy_mÏnit..."
+msgstr "Vy_mƒõnit..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -747,7 +747,7 @@ msgstr ""
 #: libgnomeui/gnome-app-helper.c:211
 #, fuzzy
 msgid "Prefere_nces"
-msgstr "_NastavenÌ..."
+msgstr "_Nastaven√≠..."
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -764,15 +764,15 @@ msgstr "_O aplikaci"
 
 #: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
-msgstr "O tÈto aplikaci"
+msgstr "O t√©to aplikaci"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
-msgstr "Vyber _vπe"
+msgstr "Vyber _v≈°e"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr "Vybrat vπechno"
+msgstr "Vybrat v≈°echno"
 
 #.
 #. * Window menu
@@ -798,7 +798,7 @@ msgstr ""
 #.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
-msgstr "_Nov· hra"
+msgstr "_Nov√° hra"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
@@ -847,7 +847,7 @@ msgstr ""
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
-msgstr "_SkÛre..."
+msgstr "_Sk√≥re..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
@@ -981,7 +981,7 @@ msgstr ""
 #: libgnomeui/gnome-file-entry.c:246
 #, fuzzy
 msgid "Modal"
-msgstr "MÛd"
+msgstr "M√≥d"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
@@ -1039,7 +1039,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
-msgstr "_ProbÌrat..."
+msgstr "_Prob√≠rat..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
@@ -1063,7 +1063,7 @@ msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr "MÛd"
+msgstr "M√≥d"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
@@ -1175,7 +1175,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
-msgstr "Æ·dn˝ ikon"
+msgstr "≈Ω√°dn√Ω ikon"
 
 #: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
@@ -1183,7 +1183,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
-msgstr "N·hled"
+msgstr "N√°hled"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
@@ -1211,7 +1211,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
-msgstr "ProbÌrat"
+msgstr "Prob√≠rat"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
@@ -1235,7 +1235,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr "NaËÌtam ikony..."
+msgstr "Naƒç√≠tam ikony..."
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
@@ -1243,7 +1243,7 @@ msgstr "Informace"
 
 #: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
-msgstr "Varov·nÌ"
+msgstr "Varov√°n√≠"
 
 #: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
@@ -1251,15 +1251,15 @@ msgstr "Chyba"
 
 #: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
-msgstr "Ot·zka"
+msgstr "Ot√°zka"
 
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
-msgstr "Hl·πka"
+msgstr "Hl√°≈°ka"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
-msgstr "DÏlat n·hled"
+msgstr "Dƒõlat n√°hled"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
@@ -1267,11 +1267,11 @@ msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
-msgstr "Æ·dn˝ obr·zek"
+msgstr "≈Ω√°dn√Ω obr√°zek"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "N·hled obr·zku"
+msgstr "N√°hled obr√°zku"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
@@ -1279,15 +1279,15 @@ msgstr ""
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr "VrchnÌch deset"
+msgstr "Vrchn√≠ch deset"
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
-msgstr "Uæivatel"
+msgstr "U≈æivatel"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr "SkÛre"
+msgstr "Sk√≥re"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
@@ -1301,4 +1301,4 @@ msgid "Sans 14"
 msgstr "Sans 14"
 
 #~ msgid "Exit the test"
-#~ msgstr "UkonËit test"
+#~ msgstr "Ukonƒçit test"

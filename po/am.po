@@ -12,7 +12,7 @@ msgstr ""
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libgnomeui/gnome-about.c:194
@@ -107,8 +107,7 @@ msgstr "የተርጓሚው አመለካከት"
 #: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"የተርጓሚዎቹ አመለካከት። ይህ ሐረግ ሊተርጎም የሚችል ተብሎ ምልክት መደረግ አለበት"
+msgstr "የተርጓሚዎቹ አመለካከት። ይህ ሐረግ ሊተርጎም የሚችል ተብሎ ምልክት መደረግ አለበት"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -258,7 +257,9 @@ msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date deprecated፣ አገልግሎቱ ስለቀነሰ use gnome_date_edit_get_timeን ተጠቀሙ"
+msgstr ""
+"gnome_date_edit_get_date deprecated፣ አገልግሎቱ ስለቀነሰ use "
+"gnome_date_edit_get_timeን ተጠቀሙ"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -438,9 +439,8 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"የGNOME ክፍል መምሪያ (ድርጊት %d) ጊዜ በማይሰጥ ስህተት ተቋርጧል።"
-"ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞች ይዘጉና ከውይይትዎ ይወጣሉ።"
-"እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ ከመዝጋትዎ በፊት ያስቀምጧቸው።"
+"የGNOME ክፍል መምሪያ (ድርጊት %d) ጊዜ በማይሰጥ ስህተት ተቋርጧል።ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞች "
+"ይዘጉና ከውይይትዎ ይወጣሉ።እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ ከመዝጋትዎ በፊት ያስቀምጧቸው።"
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -972,7 +972,7 @@ msgstr "የመምረጫው መመልከቻ አርእስት"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
-msgstr "ለአማራጩ የፋይል መመልከቻ አርእስት"""
+msgstr "ለአማራጩ የፋይል መመልከቻ አርእስት"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
@@ -982,8 +982,7 @@ msgstr "የማውጫው መግቢያ"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"የፋይሉ መግቢያ የማውጫ ስሞችን ለማስገባት ወይንም የፋይል ስሞችን ለማጠናቀቅ ተጠቅሞ እንደሆነ።"
+msgstr "የፋይሉ መግቢያ የማውጫ ስሞችን ለማስገባት ወይንም የፋይል ስሞችን ለማጠናቀቅ ተጠቅሞ እንደሆነ።"
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1019,8 +1018,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"ፋይል ማስገቢያው GnomeEntryን የፋይል ስሞችን ለማስገባት ይጠቀምበታል።  "
-"ይህንን አካል የፋይሎችን አቀማመጥ ለማሻሻል ወይንም ለመጠየቅ መጠቀም ይችላሉ።"
+"ፋይል ማስገቢያው GnomeEntryን የፋይል ስሞችን ለማስገባት ይጠቀምበታል።  ይህንን አካል የፋይሎችን አቀማመጥ "
+"ለማሻሻል ወይንም ለመጠየቅ መጠቀም ይችላሉ።"
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1032,8 +1031,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntryን ፋይል ማስገቢያው የፋይል ስሞችን ለማስገባት ይጠቀምበታል። "
-"ይህንን አካል የፋይሎችን አቀማመጥ ለማሻሻል ወይንም ለመጠየቅ መጠቀም ይችላሉ።"
+"GtkEntryን ፋይል ማስገቢያው የፋይል ስሞችን ለማስገባት ይጠቀምበታል። ይህንን አካል የፋይሎችን አቀማመጥ ለማሻሻል "
+"ወይንም ለመጠየቅ መጠቀም ይችላሉ።"
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
@@ -1062,6 +1061,7 @@ msgstr "sans 12"
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "የፊደል ቅርጽ ምረጥ"
@@ -1142,10 +1142,9 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"የሚጠቀሙበት ፕሮግራምሩ \"%s\" የሲስተሙ አስተዳደር ወይም ኮምፒውተር ሻጩ "
-"እንዲለውጡ የማይፈቅድልዎትን የማስተካከያዎትን አቅጣጫ ለመለወጥ ሙከራ አድርጓል። "
-"አንዳንድ የመረጡአቸው አቀማመጦች የመጠቀሚያ ፕሮግራሙን በሚቀጥለው ጊዜ ሲጠቀሙ "
-"ለውጦችን ላይ ቀበሉ ወይም ደግሞ እንደገና መልሰው ሳያወጧቸው ይችላሉ።"
+"የሚጠቀሙበት ፕሮግራምሩ \"%s\" የሲስተሙ አስተዳደር ወይም ኮምፒውተር ሻጩ እንዲለውጡ የማይፈቅድልዎትን "
+"የማስተካከያዎትን አቅጣጫ ለመለወጥ ሙከራ አድርጓል። አንዳንድ የመረጡአቸው አቀማመጦች የመጠቀሚያ ፕሮግራሙን በሚቀጥለው "
+"ጊዜ ሲጠቀሙ ለውጦችን ላይ ቀበሉ ወይም ደግሞ እንደገና መልሰው ሳያወጧቸው ይችላሉ።"
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1153,16 +1152,14 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"ለ%s የመረጃውን ማስተካከያ በሚጭንበት ወይንም በሚያስቀምጥበት ጊዜ ስሕተት ተከስቷል።"
-"አንዳንድ የማስተካከያው ማዘጋጃዎችዎ በትክክል ላይሰሩ ይችላሉ።"
-
+"ለ%s የመረጃውን ማስተካከያ በሚጭንበት ወይንም በሚያስቀምጥበት ጊዜ ስሕተት ተከስቷል።አንዳንድ የማስተካከያው ማዘጋጃዎችዎ "
+"በትክክል ላይሰሩ ይችላሉ።"
 
 #: libgnomeui/gnome-icon-entry.c:176
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ለምልክቱ መግቢያ የተለየ መለያ። ይህ የሚጠቅመው የታሪኩን ዝርዝር ለማስቀመጥ ነው።"
+msgstr "ለምልክቱ መግቢያ የተለየ መለያ። ይህ የሚጠቅመው የታሪኩን ዝርዝር ለማስቀመጥ ነው።"
 
 #: libgnomeui/gnome-icon-entry.c:185
 msgid "Title for the Browse icon dialog."
@@ -1189,8 +1186,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"የምልክት መራጭ መምረጫ። በGtkDialog ውስጥ ያለውን ማንኛውንም ነገር ለማሻሻል "
-"ወይንም ለመጠየቅ ከፈለጉ ይህንን መምረጫ መጠቀም ይችላሉ።"
+"የምልክት መራጭ መምረጫ። በGtkDialog ውስጥ ያለውን ማንኛውንም ነገር ለማሻሻል ወይንም ለመጠየቅ ከፈለጉ ይህንን "
+"መምረጫ መጠቀም ይችላሉ።"
 
 #: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
 msgid "No Icon"
