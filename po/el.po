@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.0\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-04-21 21:32+0100\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -1348,11 +1348,6 @@ msgstr "_Τέλος παιχνιδιού"
 msgid "End the current game"
 msgstr "Τερματισμός του τρέχοντος παιχνιδιού"
 
-#: libgnomeui/gnome-app-helper.c:1144
-#, fuzzy
-msgid "_Contents"
-msgstr "Περιεχόμενα _Βοήθειας"
-
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
 #
@@ -1992,6 +1987,10 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#, fuzzy
+#~ msgid "_Contents"
+#~ msgstr "Περιεχόμενα _Βοήθειας"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#

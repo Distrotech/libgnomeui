@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-03-03 17:35+0100\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -881,10 +881,6 @@ msgstr "_Fine gioco"
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "Termina la partita corrente"
-
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:1145
 #, fuzzy

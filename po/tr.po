@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.102.0\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2001-08-16 14:12+0200\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -872,10 +872,6 @@ msgstr "_Oyunu bitir"
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "Oyunu bitir"
-
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:1145
 #, fuzzy

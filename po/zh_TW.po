@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.117.2\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-06-05 00:20+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -874,10 +874,6 @@ msgstr "結束遊戲(_E)"
 msgid "End the current game"
 msgstr "結束目前的遊戲"
 
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr "內容(_C)"
-
 #: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "顯示有關此程式的說明文件"
@@ -1316,6 +1312,9 @@ msgstr "%x(%a) %T"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "_Contents"
+#~ msgstr "內容(_C)"
 
 #~ msgid "Exit the test"
 #~ msgstr "結束測試"

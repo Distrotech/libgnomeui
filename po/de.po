@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.16\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-05-01 23:25+0200\n"
 "Last-Translator: Benjamin Greiner <benjamin.greiner@gmx.net>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -889,12 +889,6 @@ msgstr "Spiel _beenden"
 msgid "End the current game"
 msgstr "Das aktuelle Spiel beenden"
 
-# CHECK
-#: libgnomeui/gnome-app-helper.c:1144
-#, fuzzy
-msgid "_Contents"
-msgstr "_Hilfeinhalt"
-
 #: libgnomeui/gnome-app-helper.c:1145
 #, fuzzy
 msgid "View help for this application"
@@ -1362,6 +1356,11 @@ msgstr "%a, %d. %m. %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+# CHECK
+#, fuzzy
+#~ msgid "_Contents"
+#~ msgstr "_Hilfeinhalt"
 
 #~ msgid "Find _Again"
 #~ msgstr "_Weitersuchen"

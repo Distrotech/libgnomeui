@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.12\n"
-"POT-Creation-Date: 2002-06-10 11:00+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-06-10 11:08+0200\n"
 "Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -105,7 +105,8 @@ msgid "Translator credits"
 msgstr "Vertëjai"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Vertëjø sàraðas. Ðià eilutæ turi bûti galima iðversti"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -517,7 +518,6 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Byla"
 
@@ -575,7 +575,6 @@ msgid "_Game"
 msgstr "Þai_dimas"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pagalba"
 
@@ -766,11 +765,11 @@ msgstr "Sutvarkyti programà"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Apie"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Apie ðià programà"
 
@@ -797,7 +796,7 @@ msgstr "Sukurti naujà langà"
 msgid "_Close This Window"
 msgstr "_Uþdaryti ðá langà"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Uþdaryti esamà langà"
 
@@ -868,10 +867,6 @@ msgstr "_Baigti þaidimà"
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "Baigti esamà þaidimà"
-
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr "_Turinys"
 
 #: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
@@ -1313,7 +1308,8 @@ msgstr "%a, %Y %b %d, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Iðeiti ið testo"
+#~ msgid "_Contents"
+#~ msgstr "_Turinys"
 
+#~ msgid "Exit the test"
+#~ msgstr "Iðeiti ið testo"

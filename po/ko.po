@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.117.2\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-05-30 15:32+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -873,10 +873,6 @@ msgstr "게임 끝(_E)"
 msgid "End the current game"
 msgstr "현재 게임 끝내기"
 
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr "목차(_C)"
-
 #: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "이 프로그램에 대한 도움말 보기"
@@ -1334,6 +1330,9 @@ msgstr "%Y %b %d %a %T"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "_Contents"
+#~ msgstr "목차(_C)"
 
 #~ msgid "Exit the test"
 #~ msgstr "테스트 끝내기"

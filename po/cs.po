@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: George Lebl <jirka@5z.com>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -859,10 +859,6 @@ msgstr "Kon_ec hry"
 msgid "End the current game"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr "O_bsah"
-
 #: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr ""
@@ -1297,6 +1293,9 @@ msgstr "%T %a %d. %b %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "_Contents"
+#~ msgstr "O_bsah"
 
 #~ msgid "Exit the test"
 #~ msgstr "Ukonèit test"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2002-06-10 14:21+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-05-23 15:55+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -518,7 +518,6 @@ msgstr "Hint for oppføring 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -576,7 +575,6 @@ msgid "_Game"
 msgstr "_Spill"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -767,11 +765,11 @@ msgstr "Konfigurer applikasjonen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Om denne applikasjonen"
 
@@ -798,7 +796,7 @@ msgstr "Opprett et nytt vindu"
 msgid "_Close This Window"
 msgstr "L_ukk dette vinduet"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Lukk aktivt vindu"
 
@@ -869,10 +867,6 @@ msgstr "_Avslutt spillet"
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "Avslutt aktivt spill"
-
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr "_Innhold"
 
 #: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
@@ -1328,9 +1322,11 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Avslutt testprogrammet"
+#~ msgid "_Contents"
+#~ msgstr "_Innhold"
+
+#~ msgid "Exit the test"
+#~ msgstr "Avslutt testprogrammet"
 
 #~ msgid "Exit the program"
 #~ msgstr "Avslutt programmet"

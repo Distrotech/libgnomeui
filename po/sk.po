@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-05-28 10:01+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -872,10 +872,6 @@ msgstr "Koni_ec hry"
 msgid "End the current game"
 msgstr "Koniec aktuálnej hry"
 
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr "_Obsah"
-
 #: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "Zobrazi» pomocníka pre túto aplikáciu"
@@ -1329,6 +1325,9 @@ msgstr "%a %d.%m.%Y %H:%M"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "_Contents"
+#~ msgstr "_Obsah"
 
 #~ msgid "Exit the test"
 #~ msgstr "Ukonèi» test"

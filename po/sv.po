@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-05-25 16:07+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -872,10 +872,6 @@ msgstr "_Avsluta spelet"
 msgid "End the current game"
 msgstr "Avsluta det aktuella spelet"
 
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr "_Innehåll"
-
 #: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "Visa hjälp för detta program"
@@ -1330,6 +1326,9 @@ msgstr "%a %d %b %H.%M %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "_Contents"
+#~ msgstr "_Innehåll"
 
 #~ msgid "Exit the test"
 #~ msgstr "Avsluta testet"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.113.0\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"POT-Creation-Date: 2002-06-11 23:02+0200\n"
 "PO-Revision-Date: 2002-03-24 19:54+0900\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -888,11 +888,6 @@ msgstr "ゲーム終了(_E)"
 msgid "End the current game"
 msgstr "今のゲームを終了する"
 
-#: libgnomeui/gnome-app-helper.c:1144
-#, fuzzy
-msgid "_Contents"
-msgstr "これのヘルプ(_H)"
-
 #: libgnomeui/gnome-app-helper.c:1145
 #, fuzzy
 msgid "View help for this application"
@@ -1350,6 +1345,10 @@ msgstr "%Y年%m月%d日(%a) %T"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#, fuzzy
+#~ msgid "_Contents"
+#~ msgstr "これのヘルプ(_H)"
 
 #~ msgid "_Print"
 #~ msgstr "印刷(_P)"
