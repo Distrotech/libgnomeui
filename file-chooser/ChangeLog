@@ -1,3 +1,14 @@
+2003-09-05  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserimpldefault.c (create_filter): New function.
+	(create_directory_tree): New function.
+	(create_file_list): New function.
+	(create_filename_entry): New function.
+	(gtk_file_chooser_impl_default_constructor): Use the functions
+	above rather than creating the whole file chooser megawidget here,
+	for readability.  This will also let us rearrange the user
+	interface more easily.
+
 Wed Sep  3 16:38:59 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* glib-interface-propreties-0.5.patch: Remove excess
