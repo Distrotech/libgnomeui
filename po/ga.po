@@ -758,7 +758,7 @@ msgstr ""
 #. About
 #: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr ""
+msgstr "F_aoi"
 
 #: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
@@ -777,11 +777,11 @@ msgstr ""
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr ""
+msgstr "Oscail Fh_uinneog nua"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr ""
+msgstr "Oscail Fhuinneog nua"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
@@ -796,7 +796,7 @@ msgstr ""
 #.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
-msgstr ""
+msgstr "Cluich _Nua"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
@@ -894,11 +894,11 @@ msgstr ""
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
-msgstr ""
+msgstr "EARRAID:"
 
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr ""
+msgstr "Aire:"
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
@@ -938,7 +938,7 @@ msgstr ""
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr ""
+msgstr "Stair id"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -950,7 +950,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
-msgstr ""
+msgstr "Stair ID"
 
 #: libgnomeui/gnome-file-entry.c:221
 msgid ""
@@ -1240,7 +1240,7 @@ msgstr "Eolas"
 
 #: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
-msgstr ""
+msgstr "Aire"
 
 #: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
