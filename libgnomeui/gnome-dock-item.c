@@ -120,16 +120,19 @@ static guint
 get_preferred_width (GnomeDockItem *dock_item)
 {
   GtkWidget *child;
-  guint preferred_width;
+  guint preferred_width = 0;
 
   child = GTK_BIN (dock_item)->child;
 
-  if (! check_guint_arg (GTK_OBJECT (child), "preferred_width", &preferred_width))
+  if (child != NULL)
     {
-      GtkRequisition child_requisition;
+      if (! check_guint_arg (GTK_OBJECT (child), "preferred_width", &preferred_width))
+        {
+          GtkRequisition child_requisition;
   
-      gtk_widget_get_child_requisition (child, &child_requisition);
-      preferred_width = child_requisition.width;
+          gtk_widget_get_child_requisition (child, &child_requisition);
+          preferred_width = child_requisition.width;
+        }
     }
 
   if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
@@ -144,16 +147,19 @@ static guint
 get_preferred_height (GnomeDockItem *dock_item)
 {
   GtkWidget *child;
-  guint preferred_height;
+  guint preferred_height = 0;
 
   child = GTK_BIN (dock_item)->child;
 
-  if (! check_guint_arg (GTK_OBJECT (child), "preferred_height", &preferred_height))
+  if (child != NULL)
     {
-      GtkRequisition child_requisition;
+      if (! check_guint_arg (GTK_OBJECT (child), "preferred_height", &preferred_height))
+      {
+        GtkRequisition child_requisition;
   
-      gtk_widget_get_child_requisition (child, &child_requisition);
-      preferred_height = child_requisition.height;
+        gtk_widget_get_child_requisition (child, &child_requisition);
+        preferred_height = child_requisition.height;
+      }
     }
 
   if (dock_item->orientation == GTK_ORIENTATION_VERTICAL)
