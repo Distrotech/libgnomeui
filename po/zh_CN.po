@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-24 11:24+0100\n"
-"PO-Revision-Date: 2004-01-23 20:02+0800\n"
+"POT-Creation-Date: 2004-02-29 21:48+0100\n"
+"PO-Revision-Date: 2004-03-01 10:07+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -147,6 +147,7 @@ msgstr "关于 %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "文件(_F)"
 
@@ -204,6 +205,7 @@ msgid "_Game"
 msgstr "游戏(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "帮助(_H)"
 
@@ -400,11 +402,11 @@ msgstr "配置应用程序"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "关于(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "关于此应用程序"
 
@@ -432,7 +434,7 @@ msgstr "创建一个新窗口"
 msgid "_Close This Window"
 msgstr "关闭此窗口(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "关闭当前窗口"
 
@@ -975,35 +977,36 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "使用 GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:300
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
+"是使用新的 GtkFileChooser 部件，还是使用 GtkFileSelection 部件来选择文件。"
 
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "选择文件"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path"
 msgstr "路径"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path to file"
 msgstr "文件路径"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 msgid "_Browse..."
 msgstr "浏览(_B)..."
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "弹出用于选择文件的文件选择器"
 
@@ -1449,23 +1452,21 @@ msgstr "用法：gnome_segv2 程序名 信号数\n"
 
 # SUN CHANGED MESSAGE
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "退出应用程序"
+msgstr "重新启动应用程序(_R)"
 
 #: libgnomeui/gnome_segv.c:166
-#, fuzzy
 msgid "_Inform Developers"
-msgstr "通知开发者"
+msgstr "通知开发者(_I)"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "调试"
+msgstr "调试(_D)"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "退出测试"
 
 # SUN CHANGED MESSAGE
 #~ msgid "Color Selector"
 #~ msgstr "颜色选择器"
-
-#~ msgid "Exit the test"
-#~ msgstr "退出测试"
