@@ -49,6 +49,7 @@ static GtkWidget *
 create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, gpointer pixmap_info, int indent_missing_pixmaps)
 {
 	GtkWidget *pixmap;
+	char *name;
 
 	pixmap = NULL;
 
@@ -70,7 +71,15 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, gpointer pixmap
 		break;
 
 	case GNOME_APP_PIXMAP_FILENAME:
-		pixmap = gnome_pixmap_new_from_file (pixmap_info);
+		name = gnome_pixmap_file (pixmap_info);
+
+		if (!name)
+			g_warning ("Could not find GNOME pixmap file %s", pixmap_info);
+		else {
+			pixmap = gnome_pixmap_new_from_file (name);
+			g_free (name);
+		}
+
 		break;
 
 	default:

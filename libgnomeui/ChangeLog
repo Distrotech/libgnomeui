@@ -2,6 +2,9 @@
 
 	* gnome-app-helper.c (create_menu_item): Set separators as
 	insensitive so that they cannot be selected.
+	(create_pixmap): Look for pixmap files in the standard pixmap
+	paths.  This was accidentally removed during the rewrite of
+	GnomeAppHelper - my bad :-(
 
 1998-09-21  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
