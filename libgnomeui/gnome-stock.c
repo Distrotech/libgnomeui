@@ -1,12 +1,12 @@
 #include <config.h>
 #include <stdlib.h>
 #include <string.h>
+#include <libintl.h>
 #include <glib.h>
 #include <gdk/gdk.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkhbox.h>
 #include <gtk/gtksignal.h>
-#include "../intl/libintl.h"
 #include "libgnome/gnome-defs.h"
 #include "gnome-stock.h"
 
