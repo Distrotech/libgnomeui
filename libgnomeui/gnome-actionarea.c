@@ -29,7 +29,7 @@ gnome_build_action_area (GtkDialog *      dlg,
   GtkWidget *button;
   int i;
 
-  gtk_container_border_width (GTK_CONTAINER (dlg->action_area), 2);
+  gtk_container_border_width (GTK_CONTAINER (dlg->action_area), 4);
 
   for (i = 0; i < num_actions; i++)
     {
