@@ -1,3 +1,16 @@
+1998-05-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkcalendar.c (gtk_calendar_thaw): Remove warnings
+	Make the internal color names static.
+
+	* gnome-stock.c (gnome_stock_transparent_window): New routine for
+	creating toplevel shaped popup windows from the stock icons.
+	These are used to make DnD icons easily availble to applications
+	that need them.
+
+	New icons: imlib_not and imlib_multiple_file: The "can not drop
+	here" and the "various files are being dragged".
+
 Thu May 21 18:43:14 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.c (build_disabled_pixmap): destroy the GC when done

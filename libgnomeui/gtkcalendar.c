@@ -52,7 +52,7 @@ enum {
   MONTH_NEXT
 };
 
-GdkColor black = {0, 0, 0, 0}, 
+static GdkColor black = {0, 0, 0, 0}, 
   green = {0, 0, 50000, 0}, 
   blue = {0, 0, 0, 65535}, 
   gray25 = {0, 16384, 16384, 16384}, 
@@ -1425,14 +1425,14 @@ gtk_calendar_paint_arrow (GtkWidget *widget, guint arrow)
 void
 gtk_calendar_freeze (GtkCalendar *calendar)
 {
-  g_return_val_if_fail (GTK_IS_CALENDAR (calendar), FALSE);
+  g_return_if_fail (GTK_IS_CALENDAR (calendar));
   calendar->frozen++;
 }
 
 void
 gtk_calendar_thaw (GtkCalendar *calendar)
 {
-  g_return_val_if_fail (GTK_IS_CALENDAR (calendar), FALSE);
+  g_return_if_fail (GTK_IS_CALENDAR (calendar));
   if (calendar->frozen){
       calendar->frozen--;
       if (calendar->frozen)
