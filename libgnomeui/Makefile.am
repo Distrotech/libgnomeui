@@ -19,7 +19,7 @@ endif
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
 INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) 		\
-	-I$(top_srcdir)/oaf -I$(top_builddir)/oaf	\
+	$(OAF_CFLAGS)					\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
 	$(GDK_IMLIB_CFLAGS)				\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
@@ -314,7 +314,7 @@ EXTRA_DIST =					\
 	gnometypebuiltins_evals.c
 
 libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir) \
-		-L`cd $(top_builddir); pwd`/oaf/liboaf/.libs -loaf \
+		$(OAF_LIBS)					\
 		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome \
 		-L`cd $(top_builddir); pwd`/libart_lgpl/.libs -lart_lgpl \
 		$(LIBGNOMEUI_LIBS)
