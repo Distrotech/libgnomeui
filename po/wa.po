@@ -10,32 +10,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2001-06-07 16:32+0200\n"
+"POT-Creation-Date: 2001-08-14 16:53+0200\n"
 "PO-Revision-Date: 1999-02-07 17:37+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: demos/mdi_demo.c:116
-#, fuzzy
-msgid "Child Item 1"
-msgstr "Cayet 1"
-
-#: demos/mdi_demo.c:117
-#, fuzzy
-msgid "Hint for item 1"
-msgstr "Candjî li bouye"
-
-#: demos/mdi_demo.c:119
-msgid "Child Item 2"
-msgstr ""
-
-#: demos/mdi_demo.c:120
-#, fuzzy
-msgid "Hint for item 2"
-msgstr "Candjî li bouye"
 
 #: demos/winhints_demo.c:49
 msgid "wmhints-test"
@@ -145,19 +126,19 @@ msgstr "Passer Bår ås Usteyes / WinList"
 msgid "Set Skip"
 msgstr "Mete Passer Hute"
 
-#: demos/winhints_demo.c:260 libgnomeui/gnome-about.c:1163
+#: demos/winhints_demo.c:260 libgnomeui/gnome-stock-icons.c:142
 msgid "About"
 msgstr "Å dfait"
 
-#: demos/winhints_demo.c:414
+#: demos/winhints_demo.c:407
 msgid "WIN_HINTS Test"
 msgstr "Saye WIN_HINTS"
 
-#: demos/winhints_demo.c:415
+#: demos/winhints_demo.c:408
 msgid "Copyright (C) 1998"
 msgstr "Copyright © 1998"
 
-#: demos/winhints_demo.c:417
+#: demos/winhints_demo.c:409
 msgid ""
 "Simple test app to check how the WIN_HINTS work.\n"
 "And to test the gnome_win_hints_* functions for errors. :)"
@@ -165,73 +146,6 @@ msgstr ""
 "Simpe programe po sayî cmint c' est ki les WIN_HINTS rotèt.\n"
 "Mins eto po sayî les foncsions gnome_win_hints_* èt vey s' i gn a des "
 "arokes :)"
-
-#: libgnomeui/gnome-about.c:353
-msgid "Author:"
-msgstr "Ôteu:"
-
-#: libgnomeui/gnome-about.c:362 libgnomeui/gnome-about.c:366
-msgid "Authors:"
-msgstr "Oteurs:"
-
-#: libgnomeui/gnome-about.c:745
-msgid "Authors: "
-msgstr "Ôteus: "
-
-#: libgnomeui/gnome-about.c:1262 libgnomeui/gnome-href.c:398
-msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
-msgstr ""
-
-#: libgnomeui/gnome-animator.c:136
-#, fuzzy
-msgid "Loop type"
-msgstr "Sôrte d' enondaedje:"
-
-#: libgnomeui/gnome-animator.c:137
-msgid "The type of loop the GnomeAnimator uses"
-msgstr ""
-
-#: libgnomeui/gnome-animator.c:145
-#, fuzzy
-msgid "Direction"
-msgstr "Viè:"
-
-#: libgnomeui/gnome-animator.c:146
-#, fuzzy
-msgid "Animation direction"
-msgstr "Sinse do tecse"
-
-#: libgnomeui/gnome-animator.c:154
-msgid "Number of frames"
-msgstr "Nombe di cådes"
-
-#: libgnomeui/gnome-animator.c:155
-msgid "Total number of frames in animation"
-msgstr ""
-
-#: libgnomeui/gnome-animator.c:163
-msgid "Current frame"
-msgstr "Cåde do moumint"
-
-#: libgnomeui/gnome-animator.c:164
-#, fuzzy
-msgid "Current frame number"
-msgstr "Limerô do djoû d' oûy:"
-
-#: libgnomeui/gnome-animator.c:172 libgnomeui/gnome-animator.c:173
-#, fuzzy
-msgid "Animation status"
-msgstr "Animåcion"
-
-#: libgnomeui/gnome-animator.c:181
-msgid "Speed"
-msgstr "Roedeu"
-
-#: libgnomeui/gnome-animator.c:182
-msgid "Animation speed"
-msgstr "Roedeu di l' animåcion"
 
 #: libgnomeui/gnome-canvas-init.c:52
 msgid "Gdk debugging flags to set"
@@ -246,11 +160,11 @@ msgstr "DRAPEAS"
 msgid "Gdk debugging flags to unset"
 msgstr "Drapeas di disbugaedje di Gdk a dismete"
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:134
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr "Håynaedje X a eployî"
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:134
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr "HÅYNAEDJE"
 
@@ -346,162 +260,57 @@ msgstr ""
 msgid "Pick a color"
 msgstr "Tchwezixhoz ene coleur"
 
-#: libgnomeui/gnome-dateedit.c:358
+#: libgnomeui/gnome-dateedit.c:407
 msgid "Time"
 msgstr "Eure"
 
-#: libgnomeui/gnome-dateedit.c:359
+#: libgnomeui/gnome-dateedit.c:408
 msgid "The time currentlyselected"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:370
+#: libgnomeui/gnome-dateedit.c:419
 msgid "DateEdit Flags"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:371
+#: libgnomeui/gnome-dateedit.c:420
 msgid "Flags for how DateEdit looks"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:380
+#: libgnomeui/gnome-dateedit.c:429
 msgid "Lower Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:381
+#: libgnomeui/gnome-dateedit.c:430
 msgid "Lower hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:391
+#: libgnomeui/gnome-dateedit.c:440
 #, fuzzy
 msgid "Upper Hour"
 msgstr "Groupe di l' ûzeu"
 
-#: libgnomeui/gnome-dateedit.c:392
+#: libgnomeui/gnome-dateedit.c:441
 msgid "Upper hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:402
+#: libgnomeui/gnome-dateedit.c:451
 #, fuzzy
 msgid "Initial Time"
 msgstr "Sititchî l' eure"
 
-#: libgnomeui/gnome-dateedit.c:403
+#: libgnomeui/gnome-dateedit.c:452
 #, fuzzy
 msgid "The initial time"
 msgstr "Tins totå:"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:646
+#: libgnomeui/gnome-dateedit.c:696
 msgid "Calendar"
 msgstr "Calindrî"
 
-#: libgnomeui/gnome-dateedit.c:842
+#: libgnomeui/gnome-dateedit.c:922
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:202
-msgid "Name:"
-msgstr "No:"
-
-#: libgnomeui/gnome-ditem-edit.c:215
-msgid "Comment:"
-msgstr "Rawete:"
-
-#: libgnomeui/gnome-ditem-edit.c:225
-msgid "Command:"
-msgstr "Comande:"
-
-#: libgnomeui/gnome-ditem-edit.c:235
-msgid "Type:"
-msgstr "Sôrte:"
-
-#: libgnomeui/gnome-ditem-edit.c:252
-msgid "Icon:"
-msgstr "Imådjete:"
-
-#: libgnomeui/gnome-ditem-edit.c:277
-msgid "Run in Terminal"
-msgstr "Enonder dins on terminå"
-
-#: libgnomeui/gnome-ditem-edit.c:303
-msgid "Simple drag and drop"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:325
-#, c-format
-msgid ""
-"In the following commands you should use %s in the spot where the\n"
-"filename/URL should be substituted.  If you leave the field blank\n"
-"drops will not be accepted.  If this application can accept\n"
-"multiple files or URLs as arguments after its command name check the box "
-"above."
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:337
-#, fuzzy
-msgid "Command for file drops:"
-msgstr "Li comande «%s» a fwait berwete"
-
-#: libgnomeui/gnome-ditem-edit.c:347
-msgid "Drop one file at a time only."
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:359
-#, fuzzy
-msgid "Command for URL drops:"
-msgstr "Coleur di dvant del roye di comandes:"
-
-#: libgnomeui/gnome-ditem-edit.c:369
-msgid "Drop one URL at a time only."
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:482
-msgid "Try this before using:"
-msgstr "Sayîz çouci dvant:"
-
-#: libgnomeui/gnome-ditem-edit.c:492
-msgid "Documentation:"
-msgstr "Documintåcion:"
-
-#: libgnomeui/gnome-ditem-edit.c:502
-msgid "Window titles to wait for (comma separated):"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:512
-msgid "Name/Comment translations:"
-msgstr "Ratoûrnaedje do No/Rawete:"
-
-#: libgnomeui/gnome-ditem-edit.c:515
-msgid "Language"
-msgstr "Lingaedje"
-
-#: libgnomeui/gnome-ditem-edit.c:516
-msgid "Name"
-msgstr "No"
-
-#: libgnomeui/gnome-ditem-edit.c:517
-msgid "Comment"
-msgstr "Rawete"
-
-#: libgnomeui/gnome-ditem-edit.c:545
-msgid "Add/Set"
-msgstr "Radjouter/Mete"
-
-#: libgnomeui/gnome-ditem-edit.c:550 libgnomeui/gnome-stock-icons.c:261
-msgid "Remove"
-msgstr "Bodjî"
-
-#: libgnomeui/gnome-ditem-edit.c:594
-msgid "Basic"
-msgstr "Po les apurdisses"
-
-#: libgnomeui/gnome-ditem-edit.c:598
-#, fuzzy
-msgid "Drag and Drop"
-msgstr "Ûzeus èt gropes"
-
-#: libgnomeui/gnome-ditem-edit.c:602
-msgid "Advanced"
-msgstr "Sipepieu"
 
 #: libgnomeui/gnome-druid-page-edge.c:352
 #: libgnomeui/gnome-druid-page-standard.c:301
@@ -512,308 +321,63 @@ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 
-#: libgnomeui/gnome-font-picker.c:55
-msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
-msgstr "-*-helvetica-medium-r-normal-*-14-*-*-*-p-*-*-*,*"
-
-#: libgnomeui/gnome-font-picker.c:56
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"Mi trûte a les balzins, co pés ki l' grîjhe cawe di m' pôve fayé vexhå!"
-
-#: libgnomeui/gnome-font-picker.c:57
-msgid "Pick a Font"
-msgstr "Tchwezixhoz ene fonte"
-
-#: libgnomeui/gnome-font-picker.c:858 libgnomeui/gnome-stock-icons.c:279
-msgid "Font"
-msgstr "Fonte"
-
-#: libgnomeui/gnome-gconf.c:476
-msgid "GNOME GConf Support"
+#: libgnomeui/gnome-druid.c:128
+msgid "Show Finish"
 msgstr ""
 
-#: libgnomeui/gnome-gconf.c:516
-#, c-format
-msgid ""
-"You attempted to change an aspect of your configuration that your system "
-"administrator or operating system vendor does not allow you to change. Some "
-"of the settings you have selected may not take effect, or may not be "
-"restored next time you use this application (%s)."
+#: libgnomeui/gnome-druid.c:129
+msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr ""
 
-#: libgnomeui/gnome-gconf.c:519
-#, c-format
-msgid ""
-"An error occurred while loading or saving configuration information for %s. "
-"Some of your configuration settings may not work properly."
-msgstr ""
-
-#: libgnomeui/gnome-gconf.c:541
-#, fuzzy, c-format
-msgid "GConf error details: %s\n"
-msgstr "Parfondeu di coleur: %s\n"
-
-#: libgnomeui/gnome-helpsys.c:114
+#: libgnomeui/gnome-druid.c:136
 #, fuzzy
-msgid "_Popup"
-msgstr "Pop"
-
-#: libgnomeui/gnome-helpsys.c:115
-msgid "Show help in temporary popup windows"
-msgstr ""
-
-#: libgnomeui/gnome-helpsys.c:117
-msgid "_Embedded"
-msgstr ""
-
-#: libgnomeui/gnome-helpsys.c:118
-#, fuzzy
-msgid "Show help inside the application window"
-msgstr "Apontyî l' programe"
-
-#: libgnomeui/gnome-helpsys.c:120
-msgid "_Browser"
-msgstr "_Betchteu"
-
-#: libgnomeui/gnome-helpsys.c:121
-#, fuzzy
-msgid "Show help in a help browser window"
-msgstr "Drovî on novea purnea pol foyteuse"
-
-#: libgnomeui/gnome-helpsys.c:169
-#, fuzzy
-msgid "App style"
-msgstr "Aplikete"
-
-#: libgnomeui/gnome-helpsys.c:170
-msgid "The style of GnomeHelpView"
-msgstr ""
-
-#: libgnomeui/gnome-helpsys.c:179
-msgid "App style priority"
-msgstr ""
-
-#: libgnomeui/gnome-helpsys.c:180
-msgid "The priority of style of GnomeHelpView"
-msgstr ""
-
-#. orientation
-#: libgnomeui/gnome-helpsys.c:189 libgnomeui/gnome-helpsys.c:190
-#: libgnomeui/gnome-paper-selector.c:191
-msgid "Orientation"
-msgstr "Plaeçmint"
-
-#: libgnomeui/gnome-helpsys.c:199
-msgid "Toplevel"
-msgstr "Tofér al copete"
-
-#: libgnomeui/gnome-helpsys.c:200
-msgid "The toplevel widget"
-msgstr ""
-
-#: libgnomeui/gnome-helpsys.c:218 libgnomeui/gnome-stock-icons.c:274
-msgid "Help"
+msgid "Show Help"
 msgstr "Aidance"
 
-#: libgnomeui/gnome-helpsys.c:219
-msgid "Show help for a specific region of the application"
+#: libgnomeui/gnome-druid.c:137
+msgid "Show the 'Help' button"
 msgstr ""
 
-#: libgnomeui/gnome-helpsys.c:225
-msgid "Style"
-msgstr "Stîle"
-
-#: libgnomeui/gnome-helpsys.c:226
-#, fuzzy
-msgid "Change the way help is displayed"
-msgstr "Candjî li roedeu di l' animåcion."
-
-#: libgnomeui/gnome-helpsys.c:930 libgnomeui/gnome-helpsys.c:1033
-#, fuzzy
-msgid "No help is available for the selected portion of the application."
-msgstr "Dji rgrete, i gn a nole aidance po ces apontiaedjes la."
-
-#. FIXME: properly handle the error!
-#: libgnomeui/gnome-helpsys.c:1207
-#, c-format
-msgid "Cought GnomeURL error: %s"
-msgstr ""
-
-#: libgnomeui/gnome-href.c:111
+#: libgnomeui/gnome-href.c:110
 msgid "URL"
 msgstr "Hårdeye"
 
-#: libgnomeui/gnome-href.c:112
+#: libgnomeui/gnome-href.c:111
 msgid "The URL that GnomeHRef activates"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:119
+#: libgnomeui/gnome-href.c:118
 msgid "Text"
 msgstr "Tecse"
 
-#: libgnomeui/gnome-href.c:120
+#: libgnomeui/gnome-href.c:119
 #, fuzzy
 msgid "The text on the button"
 msgstr "Mostrer des fretches sol boton po catchî"
 
-#: libgnomeui/gnome-href.c:121
+#: libgnomeui/gnome-href.c:120
 msgid "End World Hunger"
 msgstr ""
 
-#: libgnomeui/gnome-init.c:92
+#: libgnomeui/gnome-href.c:397
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+
+#: libgnomeui/gnome-ui-init.c:90
 #, fuzzy
 msgid "Bonobo UI"
 msgstr "Gnobots II"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-init.c:511
+#: libgnomeui/gnome-ui-init.c:465
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "I gn a yeu pus d' ene aroke di segmentåcion; dji n' pout mostrer li purnea "
 "d' aroke\n"
 
-#. paper size
-#: libgnomeui/gnome-paper-selector.c:159
-msgid "Paper Size"
-msgstr "Grandeu do papî"
-
-#: libgnomeui/gnome-paper-selector.c:213
-msgid "Portrait"
-msgstr "D' astampé"
-
-#: libgnomeui/gnome-paper-selector.c:233
-msgid "Landscape"
-msgstr "Di coutchî"
-
-#. margins
-#: libgnomeui/gnome-paper-selector.c:241
-#, fuzzy
-msgid "Margins"
-msgstr "Maisse"
-
-#: libgnomeui/gnome-paper-selector.c:253
-msgid "Top:"
-msgstr "Al copete:"
-
-#: libgnomeui/gnome-paper-selector.c:266
-msgid "Bottom:"
-msgstr "Al valeye:"
-
-#: libgnomeui/gnome-paper-selector.c:279
-msgid "Left:"
-msgstr "Hintche:"
-
-#: libgnomeui/gnome-paper-selector.c:292
-msgid "Right:"
-msgstr "Droete:"
-
-#. Scaling
-#: libgnomeui/gnome-paper-selector.c:306
-#, fuzzy
-msgid "Scaling"
-msgstr "Dji schape"
-
-#: libgnomeui/gnome-paper-selector.c:321
-#, fuzzy
-msgid "Fit to Page"
-msgstr "Fitchî a djower"
-
-#: libgnomeui/gnome-paper-selector.c:810
-#, c-format
-msgid "%0.3g%s x %0.3g%s"
-msgstr "%0.3g%s x %0.3g%s"
-
-#: libgnomeui/gnome-paper-selector.c:1040
-msgid "Page Setup"
-msgstr "Apontiaedje del pådje"
-
-#: libgnomeui/gnome-popup-help.c:56
-msgid "_Help with this"
-msgstr "_Aidance avou çoula"
-
-#: libgnomeui/gnome-popup-help.c:62
-msgid "Cu_t"
-msgstr "Cô_per"
-
-#: libgnomeui/gnome-popup-help.c:64
-msgid "_Copy"
-msgstr "_Copyî"
-
-#: libgnomeui/gnome-popup-help.c:66
-msgid "_Paste"
-msgstr "C_laper"
-
-#. to be kept in sync with GtkCornerType enumeration
-#: libgnomeui/gnome-pouch.c:782
-msgid "Top left"
-msgstr "Al copete èt al hintche"
-
-#: libgnomeui/gnome-pouch.c:783
-msgid "Bottom left"
-msgstr "Al valeye èt al hintche"
-
-#: libgnomeui/gnome-pouch.c:784
-msgid "Top right"
-msgstr "Al copete èt al droete"
-
-#: libgnomeui/gnome-pouch.c:785
-msgid "Bottom right"
-msgstr "Al valeye èt al droete"
-
-#. to be kept in sync with GtkOrientation enumeration
-#: libgnomeui/gnome-pouch.c:796
-msgid "Horizontal"
-msgstr "Di coûtchî"
-
-#: libgnomeui/gnome-pouch.c:797
-msgid "Vertical"
-msgstr "D' astampé"
-
-#: libgnomeui/gnome-pouch.c:807
-msgid "Icon position"
-msgstr "Eplaeçmint del imådjete"
-
-#: libgnomeui/gnome-pouch.c:808
-msgid "Icon orientation"
-msgstr "Eplaeçmint del imådjete"
-
-#: libgnomeui/gnome-pouch.c:810
-msgid "Tile children"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:811
-#, fuzzy
-msgid "Cascade children"
-msgstr "Fitchî pol muchete"
-
-#: libgnomeui/gnome-pouch.c:813
-msgid "Arrange icons"
-msgstr "Arindjî les imådjetes"
-
-#: libgnomeui/gnome-pouch.c:814
-msgid "Autoarrange icons"
-msgstr "Arindjî les imådjetes åtomaticmint"
-
-#: libgnomeui/gnome-recently-used.c:111
-msgid "App Specific"
-msgstr ""
-
-#: libgnomeui/gnome-recently-used.c:112
-#, fuzzy
-msgid "Is this list application specific"
-msgstr "Å dfait di ci programe chal"
-
-#: libgnomeui/gnome-recently-used.c:893
-#, c-format
-msgid "bad GnomeRecentDocument attribute: %s\n"
-msgstr ""
-
-#: libgnomeui/gnome-recently-used.c:1123
-msgid "Unknown"
-msgstr "Nén cnoxhou"
-
-#: libgnomeui/gnome_segv.c:91
+#: libgnomeui/gnome_segv.c:92
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -828,7 +392,7 @@ msgstr ""
 "vont esse clôyous eto.\n"
 "Schapez tos vos fitchîs dvant di clôre ci purnea chal."
 
-#: libgnomeui/gnome_segv.c:101
+#: libgnomeui/gnome_segv.c:102
 #, c-format
 msgid ""
 "Application \"%s\" (process %d) has crashed\n"
@@ -839,124 +403,361 @@ msgstr ""
 "s' est crashé a cåze d' ene aroke moirt.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:111
 msgid "Usage: gnome_segv appname signum\n"
 msgstr "Po s' è siervî: gnome_segv nodiprograme limsign\n"
 
-#: libgnomeui/gnome_segv.c:126
+#: libgnomeui/gnome_segv.c:127
 msgid "Submit a bug report"
 msgstr "Evoyî on rapoirt di bug"
 
-#: libgnomeui/gnome_segv.c:137
+#: libgnomeui/gnome_segv.c:138
 msgid "Debug"
 msgstr "Disbogaedje"
 
-#: libgnomeui/gnome_segv.c:145
+#: libgnomeui/gnome_segv.c:146
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:152
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Loukîz li pådje GNOME Application Crash po pus d' informåcion"
 
-#: libgnomeui/oafgnome.c:242
-msgid "Username:"
-msgstr "No d' ûzeu:"
-
-#: libgnomeui/oafgnome.c:256
-msgid "Password:"
-msgstr "Mot di passe:"
-
-#: components/gnome-image-entry-component.c:593
-#: components/gnome-image-entry-component.c:610
-msgid "No Image"
-msgstr "Nole Imådje"
-
-#: libgnomeui/gnome-selector-component.c:449
-msgid "Browse..."
-msgstr "Foyter..."
-
-#: libgnomeui/gnome-selector-component.c:463
-msgid "Default..."
-msgstr "Prémetou..."
-
-#: libgnomeui/gnome-selector-component.c:479
-msgid "Clear..."
-msgstr "Netyî..."
-
-#: libgnomeui/gnome-stock-icons.c:258
-msgid "Add"
-msgstr "Radjouter"
-
-#: libgnomeui/gnome-stock-icons.c:259
-msgid "Clear"
-msgstr "Netyî"
-
-#: libgnomeui/gnome-stock-icons.c:260
-msgid "Select Color"
-msgstr "Tchwezi ene coleur"
-
-#: libgnomeui/gnome-stock-icons.c:262
+#: libgnomeui/gnome-stock-icons.c:136
 msgid "Table Borders"
 msgstr "Boirds del tåve"
 
-#: libgnomeui/gnome-stock-icons.c:263
+#: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Fill"
 msgstr "Rimplixhaedje del tåve"
 
-#: libgnomeui/gnome-stock-icons.c:264
+#: libgnomeui/gnome-stock-icons.c:138
 msgid "Bulleted List"
 msgstr "Djîveye avou des ponts"
 
-#: libgnomeui/gnome-stock-icons.c:265
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Numbered List"
 msgstr "Djîveye avou des limerôs"
 
-#: libgnomeui/gnome-stock-icons.c:266
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Indent"
 msgstr "Ritrait"
 
-#: libgnomeui/gnome-stock-icons.c:267
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Un-Indent"
 msgstr "Disfé li Ritrait"
 
-#: libgnomeui/gnome-stock-icons.c:268
-msgid "OK"
-msgstr "I Va"
+#, fuzzy
+#~ msgid "Child Item 1"
+#~ msgstr "Cayet 1"
 
-#: libgnomeui/gnome-stock-icons.c:269
-msgid "Apply"
-msgstr "Mete èn oûve"
+#, fuzzy
+#~ msgid "Hint for item 1"
+#~ msgstr "Candjî li bouye"
 
-#: libgnomeui/gnome-stock-icons.c:270
-msgid "Cancel"
-msgstr "Rinoncî"
+#, fuzzy
+#~ msgid "Hint for item 2"
+#~ msgstr "Candjî li bouye"
 
-#: libgnomeui/gnome-stock-icons.c:271
-msgid "Close"
-msgstr "Clôre"
+#~ msgid "Author:"
+#~ msgstr "Ôteu:"
 
-#: libgnomeui/gnome-stock-icons.c:272
-msgid "Yes"
-msgstr "Oyi"
+#~ msgid "Authors:"
+#~ msgstr "Oteurs:"
 
-#: libgnomeui/gnome-stock-icons.c:273
-msgid "No"
-msgstr "Neni"
+#~ msgid "Authors: "
+#~ msgstr "Ôteus: "
 
-#: libgnomeui/gnome-stock-icons.c:275
-msgid "Next"
-msgstr "Shûvant"
+#, fuzzy
+#~ msgid "Loop type"
+#~ msgstr "Sôrte d' enondaedje:"
 
-#: libgnomeui/gnome-stock-icons.c:276
-msgid "Prev"
-msgstr "Di dvant"
+#, fuzzy
+#~ msgid "Direction"
+#~ msgstr "Viè:"
 
-#: libgnomeui/gnome-stock-icons.c:277
-msgid "Up"
-msgstr "Copete"
+#, fuzzy
+#~ msgid "Animation direction"
+#~ msgstr "Sinse do tecse"
 
-#: libgnomeui/gnome-stock-icons.c:278
-msgid "Down"
-msgstr "Bas"
+#~ msgid "Number of frames"
+#~ msgstr "Nombe di cådes"
 
+#~ msgid "Current frame"
+#~ msgstr "Cåde do moumint"
+
+#, fuzzy
+#~ msgid "Current frame number"
+#~ msgstr "Limerô do djoû d' oûy:"
+
+#, fuzzy
+#~ msgid "Animation status"
+#~ msgstr "Animåcion"
+
+#~ msgid "Speed"
+#~ msgstr "Roedeu"
+
+#~ msgid "Animation speed"
+#~ msgstr "Roedeu di l' animåcion"
+
+#~ msgid "Name:"
+#~ msgstr "No:"
+
+#~ msgid "Comment:"
+#~ msgstr "Rawete:"
+
+#~ msgid "Command:"
+#~ msgstr "Comande:"
+
+#~ msgid "Type:"
+#~ msgstr "Sôrte:"
+
+#~ msgid "Icon:"
+#~ msgstr "Imådjete:"
+
+#~ msgid "Run in Terminal"
+#~ msgstr "Enonder dins on terminå"
+
+#, fuzzy
+#~ msgid "Command for file drops:"
+#~ msgstr "Li comande «%s» a fwait berwete"
+
+#, fuzzy
+#~ msgid "Command for URL drops:"
+#~ msgstr "Coleur di dvant del roye di comandes:"
+
+#~ msgid "Try this before using:"
+#~ msgstr "Sayîz çouci dvant:"
+
+#~ msgid "Documentation:"
+#~ msgstr "Documintåcion:"
+
+#~ msgid "Name/Comment translations:"
+#~ msgstr "Ratoûrnaedje do No/Rawete:"
+
+#~ msgid "Language"
+#~ msgstr "Lingaedje"
+
+#~ msgid "Name"
+#~ msgstr "No"
+
+#~ msgid "Comment"
+#~ msgstr "Rawete"
+
+#~ msgid "Add/Set"
+#~ msgstr "Radjouter/Mete"
+
+#~ msgid "Remove"
+#~ msgstr "Bodjî"
+
+#~ msgid "Basic"
+#~ msgstr "Po les apurdisses"
+
+#, fuzzy
+#~ msgid "Drag and Drop"
+#~ msgstr "Ûzeus èt gropes"
+
+#~ msgid "Advanced"
+#~ msgstr "Sipepieu"
+
+#~ msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+#~ msgstr "-*-helvetica-medium-r-normal-*-14-*-*-*-p-*-*-*,*"
+
+#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#~ msgstr ""
+#~ "Mi trûte a les balzins, co pés ki l' grîjhe cawe di m' pôve fayé vexhå!"
+
+#~ msgid "Pick a Font"
+#~ msgstr "Tchwezixhoz ene fonte"
+
+#~ msgid "Font"
+#~ msgstr "Fonte"
+
+#, fuzzy
+#~ msgid "GConf error details: %s\n"
+#~ msgstr "Parfondeu di coleur: %s\n"
+
+#, fuzzy
+#~ msgid "_Popup"
+#~ msgstr "Pop"
+
+#, fuzzy
+#~ msgid "Show help inside the application window"
+#~ msgstr "Apontyî l' programe"
+
+#~ msgid "_Browser"
+#~ msgstr "_Betchteu"
+
+#, fuzzy
+#~ msgid "Show help in a help browser window"
+#~ msgstr "Drovî on novea purnea pol foyteuse"
+
+#, fuzzy
+#~ msgid "App style"
+#~ msgstr "Aplikete"
+
+#~ msgid "Orientation"
+#~ msgstr "Plaeçmint"
+
+#~ msgid "Toplevel"
+#~ msgstr "Tofér al copete"
+
+#~ msgid "Style"
+#~ msgstr "Stîle"
+
+#, fuzzy
+#~ msgid "Change the way help is displayed"
+#~ msgstr "Candjî li roedeu di l' animåcion."
+
+#, fuzzy
+#~ msgid "No help is available for the selected portion of the application."
+#~ msgstr "Dji rgrete, i gn a nole aidance po ces apontiaedjes la."
+
+#~ msgid "Paper Size"
+#~ msgstr "Grandeu do papî"
+
+#~ msgid "Portrait"
+#~ msgstr "D' astampé"
+
+#~ msgid "Landscape"
+#~ msgstr "Di coutchî"
+
+#, fuzzy
+#~ msgid "Margins"
+#~ msgstr "Maisse"
+
+#~ msgid "Top:"
+#~ msgstr "Al copete:"
+
+#~ msgid "Bottom:"
+#~ msgstr "Al valeye:"
+
+#~ msgid "Left:"
+#~ msgstr "Hintche:"
+
+#~ msgid "Right:"
+#~ msgstr "Droete:"
+
+#, fuzzy
+#~ msgid "Scaling"
+#~ msgstr "Dji schape"
+
+#, fuzzy
+#~ msgid "Fit to Page"
+#~ msgstr "Fitchî a djower"
+
+#~ msgid "%0.3g%s x %0.3g%s"
+#~ msgstr "%0.3g%s x %0.3g%s"
+
+#~ msgid "Page Setup"
+#~ msgstr "Apontiaedje del pådje"
+
+#~ msgid "_Help with this"
+#~ msgstr "_Aidance avou çoula"
+
+#~ msgid "Cu_t"
+#~ msgstr "Cô_per"
+
+#~ msgid "_Copy"
+#~ msgstr "_Copyî"
+
+#~ msgid "_Paste"
+#~ msgstr "C_laper"
+
+#~ msgid "Top left"
+#~ msgstr "Al copete èt al hintche"
+
+#~ msgid "Bottom left"
+#~ msgstr "Al valeye èt al hintche"
+
+#~ msgid "Top right"
+#~ msgstr "Al copete èt al droete"
+
+#~ msgid "Bottom right"
+#~ msgstr "Al valeye èt al droete"
+
+#~ msgid "Horizontal"
+#~ msgstr "Di coûtchî"
+
+#~ msgid "Vertical"
+#~ msgstr "D' astampé"
+
+#~ msgid "Icon position"
+#~ msgstr "Eplaeçmint del imådjete"
+
+#~ msgid "Icon orientation"
+#~ msgstr "Eplaeçmint del imådjete"
+
+#, fuzzy
+#~ msgid "Cascade children"
+#~ msgstr "Fitchî pol muchete"
+
+#~ msgid "Arrange icons"
+#~ msgstr "Arindjî les imådjetes"
+
+#~ msgid "Autoarrange icons"
+#~ msgstr "Arindjî les imådjetes åtomaticmint"
+
+#, fuzzy
+#~ msgid "Is this list application specific"
+#~ msgstr "Å dfait di ci programe chal"
+
+#~ msgid "Unknown"
+#~ msgstr "Nén cnoxhou"
+
+#~ msgid "Username:"
+#~ msgstr "No d' ûzeu:"
+
+#~ msgid "Password:"
+#~ msgstr "Mot di passe:"
+
+#~ msgid "No Image"
+#~ msgstr "Nole Imådje"
+
+#~ msgid "Browse..."
+#~ msgstr "Foyter..."
+
+#~ msgid "Default..."
+#~ msgstr "Prémetou..."
+
+#~ msgid "Clear..."
+#~ msgstr "Netyî..."
+
+#~ msgid "Add"
+#~ msgstr "Radjouter"
+
+#~ msgid "Clear"
+#~ msgstr "Netyî"
+
+#~ msgid "Select Color"
+#~ msgstr "Tchwezi ene coleur"
+
+#~ msgid "OK"
+#~ msgstr "I Va"
+
+#~ msgid "Apply"
+#~ msgstr "Mete èn oûve"
+
+#~ msgid "Cancel"
+#~ msgstr "Rinoncî"
+
+#~ msgid "Close"
+#~ msgstr "Clôre"
+
+#~ msgid "Yes"
+#~ msgstr "Oyi"
+
+#~ msgid "No"
+#~ msgstr "Neni"
+
+#~ msgid "Next"
+#~ msgstr "Shûvant"
+
+#~ msgid "Prev"
+#~ msgstr "Di dvant"
+
+#~ msgid "Up"
+#~ msgstr "Copete"
+
+#~ msgid "Down"
+#~ msgstr "Bas"

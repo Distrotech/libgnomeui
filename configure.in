@@ -1,7 +1,7 @@
 AC_INIT(libgnomeui)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(libgnomeui-2, 1.96.0)
+AM_INIT_AUTOMAKE(libgnomeui-2, 1.102.0)
 
 AM_MAINTAINER_MODE
 
@@ -38,15 +38,15 @@ AM_CONDITIONAL(FALSE, test x = y)
 dnl
 dnl Start of pkg-config checks
 dnl
-PKG_CHECK_MODULES(LIBGNOMEUI, libgnome-2.0 >= 1.101.0 libgnomecanvas-2.0 >= 1.96.2 libbonoboui-2.0 >= 1.97.0)
+PKG_CHECK_MODULES(LIBGNOMEUI, libgnome-2.0 >= 1.102.0 libgnomecanvas-2.0 >= 1.102.0 libbonoboui-2.0 >= 1.97.0)
 AC_SUBST(LIBGNOMEUI_CFLAGS)
 AC_SUBST(LIBGNOMEUI_LIBS)
 
-PKG_CHECK_MODULES(LIBGNOMEUI_COMPONENTS, libgnome-2.0 >= 1.101.0 libgnomecanvas-2.0 >= 1.96.2 libbonoboui-2.0 >= 1.97.0)
+PKG_CHECK_MODULES(LIBGNOMEUI_COMPONENTS, libgnome-2.0 >= 1.102.0 libgnomecanvas-2.0 >= 1.102.0 libbonoboui-2.0 >= 1.97.0)
 AC_SUBST(LIBGNOMEUI_COMPONENTS_CFLAGS)
 AC_SUBST(LIBGNOMEUI_COMPONENTS_LIBS)
 
-PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, libgnome-2.0 >= 1.101.0 libgnomecanvas-2.0 >= 1.96.2 libbonoboui-2.0 >= 1.97.0)
+PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, libgnome-2.0 >= 1.102.0 libgnomecanvas-2.0 >= 1.102.0 libbonoboui-2.0 >= 1.97.0)
 AC_SUBST(LIBGNOMEUI_DEMOS_CFLAGS)
 AC_SUBST(LIBGNOMEUI_DEMOS_LIBS)
 
@@ -92,7 +92,6 @@ po/Makefile.in
 libgnomeui/Makefile
 libgnomeui/libgnomeui-2.0.pc
 libgnomeui/pixmaps/Makefile
-components/Makefile
 images/Makefile
 demos/Makefile
 test-gnome/Makefile

@@ -35,6 +35,7 @@
 #include "testgnome.h"
 #include "bomb.xpm"
 
+#ifdef FIXME
 static const gchar *authors[] = {
 	"Richard Hestilow",
 	"Federico Mena",
@@ -46,6 +47,7 @@ static const gchar *authors[] = {
 	"Martin Baulig",
 	NULL
 };
+#endif
 
 static void
 test_exit (TestGnomeApp *app)
@@ -86,6 +88,7 @@ verb_FileExit_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname)
 static void
 verb_HelpAbout_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname)
 {
+#ifdef FIXME
 	GtkWidget *about = gnome_about_new ("GNOME Test Program", VERSION,
 					    "(C) 1998-2001 The Free Software Foundation",
 					    "Program to display GNOME functions.",
@@ -94,7 +97,7 @@ verb_HelpAbout_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname
 					    NULL,
 					    NULL);
 	gtk_widget_show (about);
-
+#endif
 }
 
 static BonoboUIVerb verbs[] = {

@@ -7,29 +7,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2001-07-07 01:12+0200\n"
+"POT-Creation-Date: 2001-08-14 16:53+0200\n"
 "PO-Revision-Date: 2001-07-07 01:23+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: demos/mdi_demo.c:129
-msgid "Child Item 1"
-msgstr "Barnobjekt 1"
-
-#: demos/mdi_demo.c:130
-msgid "Hint for item 1"
-msgstr "Tips för objekt 1"
-
-#: demos/mdi_demo.c:132
-msgid "Child Item 2"
-msgstr "Barnobjekt 2"
-
-#: demos/mdi_demo.c:133
-msgid "Hint for item 2"
-msgstr "Tips för objekt 2"
 
 #: demos/winhints_demo.c:49
 msgid "wmhints-test"
@@ -139,45 +123,25 @@ msgstr "Hoppa över aktivitetslist/fönsterlista"
 msgid "Set Skip"
 msgstr "Välj vad som ska hoppas över"
 
-#: demos/winhints_demo.c:260 libgnomeui/gnome-about.c:1162
+#: demos/winhints_demo.c:260 libgnomeui/gnome-stock-icons.c:142
 msgid "About"
 msgstr "Om"
 
-#: demos/winhints_demo.c:414
+#: demos/winhints_demo.c:407
 msgid "WIN_HINTS Test"
 msgstr "WIN_HINTS-test"
 
-#: demos/winhints_demo.c:415
+#: demos/winhints_demo.c:408
 msgid "Copyright (C) 1998"
 msgstr "Copyright © 1998"
 
-#: demos/winhints_demo.c:417
+#: demos/winhints_demo.c:409
 msgid ""
 "Simple test app to check how the WIN_HINTS work.\n"
 "And to test the gnome_win_hints_* functions for errors. :)"
 msgstr ""
 "Enkelt testprogram för att kontrollera hur WIN_HINTS fungerar,\n"
 "och leta efter fel i gnome_win_hints_*-funktionerna. :)"
-
-#: libgnomeui/gnome-about.c:352
-msgid "Author:"
-msgstr "Författare:"
-
-#: libgnomeui/gnome-about.c:361 libgnomeui/gnome-about.c:365
-msgid "Authors:"
-msgstr "Författare:"
-
-#: libgnomeui/gnome-about.c:744
-msgid "Authors: "
-msgstr "Författare: "
-
-#: libgnomeui/gnome-about.c:1255 libgnomeui/gnome-href.c:397
-msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
-msgstr ""
-"Fel uppstod vid körning av URL-hanteraren.\n"
-"Var vänlig och kontrollera att inställningarna i kontrollpanelen är korrekta."
 
 #: libgnomeui/gnome-canvas-init.c:52
 msgid "Gdk debugging flags to set"
@@ -192,11 +156,11 @@ msgstr "FLAGGOR"
 msgid "Gdk debugging flags to unset"
 msgstr "Felsökningsflaggor för Gdk som inte ska användas"
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:128
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr "X-display som skall användas"
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:128
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
@@ -292,161 +256,54 @@ msgstr "Mottog ogiltig färgdata\n"
 msgid "Pick a color"
 msgstr "Välj en färg"
 
-#: libgnomeui/gnome-dateedit.c:352
+#: libgnomeui/gnome-dateedit.c:407
 msgid "Time"
 msgstr "Tid"
 
-#: libgnomeui/gnome-dateedit.c:353
+#: libgnomeui/gnome-dateedit.c:408
 msgid "The time currentlyselected"
 msgstr "Tiden som är vald för tillfället"
 
-#: libgnomeui/gnome-dateedit.c:364
+#: libgnomeui/gnome-dateedit.c:419
 msgid "DateEdit Flags"
 msgstr "DateEdit-flaggor"
 
-#: libgnomeui/gnome-dateedit.c:365
+#: libgnomeui/gnome-dateedit.c:420
 msgid "Flags for how DateEdit looks"
 msgstr "Flaggor för hur DateEdit ser ut"
 
-#: libgnomeui/gnome-dateedit.c:374
+#: libgnomeui/gnome-dateedit.c:429
 msgid "Lower Hour"
 msgstr "Minska timme"
 
-#: libgnomeui/gnome-dateedit.c:375
+#: libgnomeui/gnome-dateedit.c:430
 msgid "Lower hour in the time popup selector"
 msgstr "Minska timme i popup-tidsväljaren"
 
-#: libgnomeui/gnome-dateedit.c:385
+#: libgnomeui/gnome-dateedit.c:440
 msgid "Upper Hour"
 msgstr "Öka timme"
 
-#: libgnomeui/gnome-dateedit.c:386
+#: libgnomeui/gnome-dateedit.c:441
 msgid "Upper hour in the time popup selector"
 msgstr "Öka timme i popup-tidsväljaren"
 
-#: libgnomeui/gnome-dateedit.c:396
+#: libgnomeui/gnome-dateedit.c:451
 msgid "Initial Time"
 msgstr "Starttid"
 
-#: libgnomeui/gnome-dateedit.c:397
+#: libgnomeui/gnome-dateedit.c:452
 msgid "The initial time"
 msgstr "Starttiden"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:640
+#: libgnomeui/gnome-dateedit.c:696
 msgid "Calendar"
 msgstr "Kalender"
 
-#: libgnomeui/gnome-dateedit.c:836
+#: libgnomeui/gnome-dateedit.c:922
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date är föråldrat, använd gnome_date_edit_get_time"
-
-#: libgnomeui/gnome-ditem-edit.c:202
-msgid "Name:"
-msgstr "Namn:"
-
-#: libgnomeui/gnome-ditem-edit.c:215
-msgid "Comment:"
-msgstr "Kommentar:"
-
-#: libgnomeui/gnome-ditem-edit.c:225
-msgid "Command:"
-msgstr "Kommando:"
-
-#: libgnomeui/gnome-ditem-edit.c:235
-msgid "Type:"
-msgstr "Typ:"
-
-#: libgnomeui/gnome-ditem-edit.c:252
-msgid "Icon:"
-msgstr "Ikon:"
-
-#: libgnomeui/gnome-ditem-edit.c:277
-msgid "Run in Terminal"
-msgstr "Kör i terminal"
-
-#: libgnomeui/gnome-ditem-edit.c:303
-msgid "Simple drag and drop"
-msgstr "Enkel dra-och-släpp"
-
-#: libgnomeui/gnome-ditem-edit.c:325
-#, c-format
-msgid ""
-"In the following commands you should use %s in the spot where the\n"
-"filename/URL should be substituted.  If you leave the field blank\n"
-"drops will not be accepted.  If this application can accept\n"
-"multiple files or URLs as arguments after its command name check the box "
-"above."
-msgstr ""
-"I de följande kommandona kan du använda %s på den plats där\n"
-"filnamnet/URL:en ska hamna. Om du lämnar fältet tomt kommer\n"
-"släpp inte att tillåtas. Om det här programmet klarar av\n"
-"flera filer eller URL:er som argument efter dess kommando-\n"
-"namn kan du kryssa i rutan ovan."
-
-#: libgnomeui/gnome-ditem-edit.c:337
-msgid "Command for file drops:"
-msgstr "Kommando för filsläpp:"
-
-#: libgnomeui/gnome-ditem-edit.c:347
-msgid "Drop one file at a time only."
-msgstr "Släpp endast en fil i taget."
-
-#: libgnomeui/gnome-ditem-edit.c:359
-msgid "Command for URL drops:"
-msgstr "Kommando för URL-släpp:"
-
-#: libgnomeui/gnome-ditem-edit.c:369
-msgid "Drop one URL at a time only."
-msgstr "Släpp endast en URL i taget."
-
-#: libgnomeui/gnome-ditem-edit.c:482
-msgid "Try this before using:"
-msgstr "Försök detta innan användning:"
-
-#: libgnomeui/gnome-ditem-edit.c:492
-msgid "Documentation:"
-msgstr "Dokumentation:"
-
-#: libgnomeui/gnome-ditem-edit.c:502
-msgid "Window titles to wait for (comma separated):"
-msgstr "Fönstertitlar som ska väntas på (kommaseparerad):"
-
-#: libgnomeui/gnome-ditem-edit.c:512
-msgid "Name/Comment translations:"
-msgstr "Översättningar av namn/kommentar:"
-
-#: libgnomeui/gnome-ditem-edit.c:515
-msgid "Language"
-msgstr "Språk"
-
-#: libgnomeui/gnome-ditem-edit.c:516
-msgid "Name"
-msgstr "Namn"
-
-#: libgnomeui/gnome-ditem-edit.c:517
-msgid "Comment"
-msgstr "Kommentar"
-
-#: libgnomeui/gnome-ditem-edit.c:545
-msgid "Add/Set"
-msgstr "Lägg till/ändra"
-
-#: libgnomeui/gnome-ditem-edit.c:550 libgnomeui/gnome-stock-icons.c:261
-msgid "Remove"
-msgstr "Ta bort"
-
-#: libgnomeui/gnome-ditem-edit.c:594
-msgid "Basic"
-msgstr "Grundläggande"
-
-#: libgnomeui/gnome-ditem-edit.c:598
-msgid "Drag and Drop"
-msgstr "Dra och släpp"
-
-#: libgnomeui/gnome-ditem-edit.c:602
-msgid "Advanced"
-msgstr "Avancerat"
 
 #: libgnomeui/gnome-druid-page-edge.c:352
 #: libgnomeui/gnome-druid-page-standard.c:301
@@ -473,10 +330,6 @@ msgstr "Visa hjälp"
 msgid "Show the 'Help' button"
 msgstr "Visa \"Hjälp\"-knappen"
 
-#: libgnomeui/gnome-font-picker.c:858 libgnomeui/gnome-stock-icons.c:279
-msgid "Font"
-msgstr "Typsnitt"
-
 #: libgnomeui/gnome-href.c:110
 msgid "URL"
 msgstr "URL"
@@ -497,138 +350,22 @@ msgstr "Texten på knappen"
 msgid "End World Hunger"
 msgstr "Få slut på världshungern"
 
-#: libgnomeui/gnome-init.c:91
+#: libgnomeui/gnome-href.c:397
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+"Fel uppstod vid körning av URL-hanteraren.\n"
+"Var vänlig och kontrollera att inställningarna i kontrollpanelen är korrekta."
+
+#: libgnomeui/gnome-ui-init.c:90
 msgid "Bonobo UI"
 msgstr "Bonobo-användargränssnitt"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-init.c:466
+#: libgnomeui/gnome-ui-init.c:465
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
-
-#. paper size
-#: libgnomeui/gnome-paper-selector.c:159
-msgid "Paper Size"
-msgstr "Pappersstorlek"
-
-#. orientation
-#: libgnomeui/gnome-paper-selector.c:191
-msgid "Orientation"
-msgstr "Orientering"
-
-#: libgnomeui/gnome-paper-selector.c:213
-msgid "Portrait"
-msgstr "Stående"
-
-#: libgnomeui/gnome-paper-selector.c:233
-msgid "Landscape"
-msgstr "Liggande"
-
-#. margins
-#: libgnomeui/gnome-paper-selector.c:241
-msgid "Margins"
-msgstr "Marginaler"
-
-#: libgnomeui/gnome-paper-selector.c:253
-msgid "Top:"
-msgstr "Ovansida:"
-
-#: libgnomeui/gnome-paper-selector.c:266
-msgid "Bottom:"
-msgstr "Undersida:"
-
-#: libgnomeui/gnome-paper-selector.c:279
-msgid "Left:"
-msgstr "Vänster:"
-
-#: libgnomeui/gnome-paper-selector.c:292
-msgid "Right:"
-msgstr "Höger:"
-
-#. Scaling
-#: libgnomeui/gnome-paper-selector.c:306
-msgid "Scaling"
-msgstr "Skalning"
-
-#: libgnomeui/gnome-paper-selector.c:321
-msgid "Fit to Page"
-msgstr "Anpassa till sidan"
-
-#: libgnomeui/gnome-paper-selector.c:810
-#, c-format
-msgid "%0.3g%s x %0.3g%s"
-msgstr "%0.3g%s × %0.3g%s"
-
-#: libgnomeui/gnome-paper-selector.c:1040
-msgid "Page Setup"
-msgstr "Egenskaper för sidan"
-
-#. to be kept in sync with GtkCornerType enumeration
-#: libgnomeui/gnome-pouch.c:783
-msgid "Top left"
-msgstr "Övre vänster"
-
-#: libgnomeui/gnome-pouch.c:784
-msgid "Bottom left"
-msgstr "Nedre vänster"
-
-#: libgnomeui/gnome-pouch.c:785
-msgid "Top right"
-msgstr "Övre höger"
-
-#: libgnomeui/gnome-pouch.c:786
-msgid "Bottom right"
-msgstr "Nedre höger"
-
-#. to be kept in sync with GtkOrientation enumeration
-#: libgnomeui/gnome-pouch.c:797
-msgid "Horizontal"
-msgstr "Vågrät"
-
-#: libgnomeui/gnome-pouch.c:798
-msgid "Vertical"
-msgstr "Lodrät"
-
-#: libgnomeui/gnome-pouch.c:808
-msgid "Icon position"
-msgstr "Ikonposition"
-
-#: libgnomeui/gnome-pouch.c:809
-msgid "Icon orientation"
-msgstr "Ikonorientering"
-
-#: libgnomeui/gnome-pouch.c:811
-msgid "Tile children"
-msgstr "Plattlägg barn"
-
-#: libgnomeui/gnome-pouch.c:812
-msgid "Cascade children"
-msgstr "Kaskadlägg barn"
-
-#: libgnomeui/gnome-pouch.c:814
-msgid "Arrange icons"
-msgstr "Arrangera ikoner"
-
-#: libgnomeui/gnome-pouch.c:815
-msgid "Autoarrange icons"
-msgstr "Arrangera ikoner automatiskt"
-
-#: libgnomeui/gnome-recently-used.c:111
-msgid "App Specific"
-msgstr "Programspecifikt"
-
-#: libgnomeui/gnome-recently-used.c:112
-msgid "Is this list application specific"
-msgstr "Är den här listan programspecifik"
-
-#: libgnomeui/gnome-recently-used.c:893
-#, c-format
-msgid "bad GnomeRecentDocument attribute: %s\n"
-msgstr "felaktigt GnomeRecentDocument-attribut: %s\n"
-
-#: libgnomeui/gnome-recently-used.c:1123
-msgid "Unknown"
-msgstr "Okänd"
 
 #: libgnomeui/gnome_segv.c:92
 #, c-format
@@ -676,93 +413,270 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Besök GNOMEs programkraschsida för mer information"
 
-#: libgnomeui/oafgnome.c:242
-msgid "Username:"
-msgstr "Användarnamn:"
-
-#: libgnomeui/oafgnome.c:256
-msgid "Password:"
-msgstr "Lösenord:"
-
-#: libgnomeui/gnome-stock-icons.c:258
-msgid "Add"
-msgstr "Lägg till"
-
-#: libgnomeui/gnome-stock-icons.c:259
-msgid "Clear"
-msgstr "Töm"
-
-#: libgnomeui/gnome-stock-icons.c:260
-msgid "Select Color"
-msgstr "Välj färg"
-
-#: libgnomeui/gnome-stock-icons.c:262
+#: libgnomeui/gnome-stock-icons.c:136
 msgid "Table Borders"
 msgstr "Tabellkanter"
 
-#: libgnomeui/gnome-stock-icons.c:263
+#: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Fill"
 msgstr "Fyll tabell"
 
-#: libgnomeui/gnome-stock-icons.c:264
+#: libgnomeui/gnome-stock-icons.c:138
 msgid "Bulleted List"
 msgstr "Onumrerad lista"
 
-#: libgnomeui/gnome-stock-icons.c:265
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Numbered List"
 msgstr "Numrerad lista"
 
-#: libgnomeui/gnome-stock-icons.c:266
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Indent"
 msgstr "Gör indrag"
 
-#: libgnomeui/gnome-stock-icons.c:267
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Un-Indent"
 msgstr "Ta bort indrag"
 
-#: libgnomeui/gnome-stock-icons.c:268
-msgid "OK"
-msgstr "OK"
+#~ msgid "Child Item 1"
+#~ msgstr "Barnobjekt 1"
 
-#: libgnomeui/gnome-stock-icons.c:269
-msgid "Apply"
-msgstr "Verkställ"
+#~ msgid "Hint for item 1"
+#~ msgstr "Tips för objekt 1"
 
-#: libgnomeui/gnome-stock-icons.c:270
-msgid "Cancel"
-msgstr "Avbryt"
+#~ msgid "Child Item 2"
+#~ msgstr "Barnobjekt 2"
 
-#: libgnomeui/gnome-stock-icons.c:271
-msgid "Close"
-msgstr "Stäng"
+#~ msgid "Hint for item 2"
+#~ msgstr "Tips för objekt 2"
 
-#: libgnomeui/gnome-stock-icons.c:272
-msgid "Yes"
-msgstr "Ja"
+#~ msgid "Author:"
+#~ msgstr "Författare:"
 
-#: libgnomeui/gnome-stock-icons.c:273
-msgid "No"
-msgstr "Nej"
+#~ msgid "Authors:"
+#~ msgstr "Författare:"
 
-#: libgnomeui/gnome-stock-icons.c:274
-msgid "Help"
-msgstr "Hjälp"
+#~ msgid "Authors: "
+#~ msgstr "Författare: "
 
-#: libgnomeui/gnome-stock-icons.c:275
-msgid "Next"
-msgstr "Nästa"
+#~ msgid "Name:"
+#~ msgstr "Namn:"
 
-#: libgnomeui/gnome-stock-icons.c:276
-msgid "Prev"
-msgstr "Föreg"
+#~ msgid "Comment:"
+#~ msgstr "Kommentar:"
 
-#: libgnomeui/gnome-stock-icons.c:277
-msgid "Up"
-msgstr "Upp"
+#~ msgid "Command:"
+#~ msgstr "Kommando:"
 
-#: libgnomeui/gnome-stock-icons.c:278
-msgid "Down"
-msgstr "Ner"
+#~ msgid "Type:"
+#~ msgstr "Typ:"
+
+#~ msgid "Icon:"
+#~ msgstr "Ikon:"
+
+#~ msgid "Run in Terminal"
+#~ msgstr "Kör i terminal"
+
+#~ msgid "Simple drag and drop"
+#~ msgstr "Enkel dra-och-släpp"
+
+#~ msgid ""
+#~ "In the following commands you should use %s in the spot where the\n"
+#~ "filename/URL should be substituted.  If you leave the field blank\n"
+#~ "drops will not be accepted.  If this application can accept\n"
+#~ "multiple files or URLs as arguments after its command name check the box "
+#~ "above."
+#~ msgstr ""
+#~ "I de följande kommandona kan du använda %s på den plats där\n"
+#~ "filnamnet/URL:en ska hamna. Om du lämnar fältet tomt kommer\n"
+#~ "släpp inte att tillåtas. Om det här programmet klarar av\n"
+#~ "flera filer eller URL:er som argument efter dess kommando-\n"
+#~ "namn kan du kryssa i rutan ovan."
+
+#~ msgid "Command for file drops:"
+#~ msgstr "Kommando för filsläpp:"
+
+#~ msgid "Drop one file at a time only."
+#~ msgstr "Släpp endast en fil i taget."
+
+#~ msgid "Command for URL drops:"
+#~ msgstr "Kommando för URL-släpp:"
+
+#~ msgid "Drop one URL at a time only."
+#~ msgstr "Släpp endast en URL i taget."
+
+#~ msgid "Try this before using:"
+#~ msgstr "Försök detta innan användning:"
+
+#~ msgid "Documentation:"
+#~ msgstr "Dokumentation:"
+
+#~ msgid "Window titles to wait for (comma separated):"
+#~ msgstr "Fönstertitlar som ska väntas på (kommaseparerad):"
+
+#~ msgid "Name/Comment translations:"
+#~ msgstr "Översättningar av namn/kommentar:"
+
+#~ msgid "Language"
+#~ msgstr "Språk"
+
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid "Comment"
+#~ msgstr "Kommentar"
+
+#~ msgid "Add/Set"
+#~ msgstr "Lägg till/ändra"
+
+#~ msgid "Remove"
+#~ msgstr "Ta bort"
+
+#~ msgid "Basic"
+#~ msgstr "Grundläggande"
+
+#~ msgid "Drag and Drop"
+#~ msgstr "Dra och släpp"
+
+#~ msgid "Advanced"
+#~ msgstr "Avancerat"
+
+#~ msgid "Font"
+#~ msgstr "Typsnitt"
+
+#~ msgid "Paper Size"
+#~ msgstr "Pappersstorlek"
+
+#~ msgid "Orientation"
+#~ msgstr "Orientering"
+
+#~ msgid "Portrait"
+#~ msgstr "Stående"
+
+#~ msgid "Landscape"
+#~ msgstr "Liggande"
+
+#~ msgid "Margins"
+#~ msgstr "Marginaler"
+
+#~ msgid "Top:"
+#~ msgstr "Ovansida:"
+
+#~ msgid "Bottom:"
+#~ msgstr "Undersida:"
+
+#~ msgid "Left:"
+#~ msgstr "Vänster:"
+
+#~ msgid "Right:"
+#~ msgstr "Höger:"
+
+#~ msgid "Scaling"
+#~ msgstr "Skalning"
+
+#~ msgid "Fit to Page"
+#~ msgstr "Anpassa till sidan"
+
+#~ msgid "%0.3g%s x %0.3g%s"
+#~ msgstr "%0.3g%s × %0.3g%s"
+
+#~ msgid "Page Setup"
+#~ msgstr "Egenskaper för sidan"
+
+#~ msgid "Top left"
+#~ msgstr "Övre vänster"
+
+#~ msgid "Bottom left"
+#~ msgstr "Nedre vänster"
+
+#~ msgid "Top right"
+#~ msgstr "Övre höger"
+
+#~ msgid "Bottom right"
+#~ msgstr "Nedre höger"
+
+#~ msgid "Horizontal"
+#~ msgstr "Vågrät"
+
+#~ msgid "Vertical"
+#~ msgstr "Lodrät"
+
+#~ msgid "Icon position"
+#~ msgstr "Ikonposition"
+
+#~ msgid "Icon orientation"
+#~ msgstr "Ikonorientering"
+
+#~ msgid "Tile children"
+#~ msgstr "Plattlägg barn"
+
+#~ msgid "Cascade children"
+#~ msgstr "Kaskadlägg barn"
+
+#~ msgid "Arrange icons"
+#~ msgstr "Arrangera ikoner"
+
+#~ msgid "Autoarrange icons"
+#~ msgstr "Arrangera ikoner automatiskt"
+
+#~ msgid "App Specific"
+#~ msgstr "Programspecifikt"
+
+#~ msgid "Is this list application specific"
+#~ msgstr "Är den här listan programspecifik"
+
+#~ msgid "bad GnomeRecentDocument attribute: %s\n"
+#~ msgstr "felaktigt GnomeRecentDocument-attribut: %s\n"
+
+#~ msgid "Unknown"
+#~ msgstr "Okänd"
+
+#~ msgid "Username:"
+#~ msgstr "Användarnamn:"
+
+#~ msgid "Password:"
+#~ msgstr "Lösenord:"
+
+#~ msgid "Add"
+#~ msgstr "Lägg till"
+
+#~ msgid "Clear"
+#~ msgstr "Töm"
+
+#~ msgid "Select Color"
+#~ msgstr "Välj färg"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Apply"
+#~ msgstr "Verkställ"
+
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
+
+#~ msgid "Close"
+#~ msgstr "Stäng"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "No"
+#~ msgstr "Nej"
+
+#~ msgid "Help"
+#~ msgstr "Hjälp"
+
+#~ msgid "Next"
+#~ msgstr "Nästa"
+
+#~ msgid "Prev"
+#~ msgstr "Föreg"
+
+#~ msgid "Up"
+#~ msgstr "Upp"
+
+#~ msgid "Down"
+#~ msgstr "Ner"
 
 #~ msgid "Loop type"
 #~ msgstr "Slingtyp"

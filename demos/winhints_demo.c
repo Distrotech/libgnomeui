@@ -400,6 +400,7 @@ void skip_cb (GtkWidget *widget, void *data)
 
 void about_cb(GtkWidget *widget, gpointer data)
 {
+#ifdef FIXME
   GtkWidget *about;
   const gchar *authors[] = {"Max Watson", NULL};
 
@@ -412,5 +413,6 @@ void about_cb(GtkWidget *widget, gpointer data)
 			   NULL,
                            NULL);
   gtk_widget_show (about);
+#endif
 }
 

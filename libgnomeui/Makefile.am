@@ -170,8 +170,8 @@ gnome_segv_SOURCES = gnome_segv.c
 
 EXTRA_DIST =					\
 	AUTHORS					\
-	gnome.defs 				\
 	gnome-boxed.defs			\
+	gnometype_inits.c			\
 	libgnomeui-2.0.pc.in
 
 libgnomeui_2_la_LDFLAGS = \

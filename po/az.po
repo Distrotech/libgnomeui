@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2001-05-30 12:02+0200\n"
+"POT-Creation-Date: 2001-08-14 16:53+0200\n"
 "PO-Revision-Date: 2001-06-01 17:35GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -13,22 +13,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
-
-#: demos/mdi_demo.c:116
-msgid "Child Item 1"
-msgstr "Törəmə Üzv 1"
-
-#: demos/mdi_demo.c:117
-msgid "Hint for item 1"
-msgstr "Birinci üzv üçün ipucu"
-
-#: demos/mdi_demo.c:119
-msgid "Child Item 2"
-msgstr "Törəmə Üzv 2"
-
-#: demos/mdi_demo.c:120
-msgid "Hint for item 2"
-msgstr "İkinci üzv üçün ipucu"
 
 #: demos/winhints_demo.c:49
 msgid "wmhints-test"
@@ -138,89 +122,25 @@ msgstr "Vəzifə Çubuğu / Pəncərə Siyahısını Nəzərə Alma"
 msgid "Set Skip"
 msgstr "Keçişi Seç"
 
-#: demos/winhints_demo.c:260 libgnomeui/gnome-about.c:1158
+#: demos/winhints_demo.c:260 libgnomeui/gnome-stock-icons.c:142
 msgid "About"
 msgstr "Haqqında"
 
-#: demos/winhints_demo.c:414
+#: demos/winhints_demo.c:407
 msgid "WIN_HINTS Test"
 msgstr "WIN_HINTS Sınağı"
 
-#: demos/winhints_demo.c:415
+#: demos/winhints_demo.c:408
 msgid "Copyright (C) 1998"
 msgstr "Təlif haqqı (C) 1998"
 
-#: demos/winhints_demo.c:417
+#: demos/winhints_demo.c:409
 msgid ""
 "Simple test app to check how the WIN_HINTS work.\n"
 "And to test the gnome_win_hints_* functions for errors. :)"
 msgstr ""
 "Proqramları WIN_HINTSin işləmə qaydasını sınamaq üçün yoxla.\n"
 "Və gnome_win_hints_* functionu xətalar üçün yoxla. :)"
-
-#: libgnomeui/gnome-about.c:351
-msgid "Author:"
-msgstr "Müəllif:"
-
-#: libgnomeui/gnome-about.c:360 libgnomeui/gnome-about.c:364
-msgid "Authors:"
-msgstr "Müəlliflər:"
-
-#: libgnomeui/gnome-about.c:740
-msgid "Authors: "
-msgstr "Müəlliflər: "
-
-#: libgnomeui/gnome-about.c:1257 libgnomeui/gnome-href.c:398
-msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
-msgstr ""
-"URL göstəricisini başladırkən xəta oldu.\n"
-"İdarə mərkəzinin qurğularını bir yoxlayın."
-
-#: libgnomeui/gnome-animator.c:136
-msgid "Loop type"
-msgstr "İlgək növü"
-
-#: libgnomeui/gnome-animator.c:137
-msgid "The type of loop the GnomeAnimator uses"
-msgstr "GnomeAnimator istifadəsində olan ilgək növü"
-
-#: libgnomeui/gnome-animator.c:145
-msgid "Direction"
-msgstr "Tərəf"
-
-#: libgnomeui/gnome-animator.c:146
-msgid "Animation direction"
-msgstr "Animasiya tərəfi"
-
-#: libgnomeui/gnome-animator.c:154
-msgid "Number of frames"
-msgstr "Çərçivə miqdarı"
-
-#: libgnomeui/gnome-animator.c:155
-msgid "Total number of frames in animation"
-msgstr "Animasıyadakı çərçivə miqdarı"
-
-#: libgnomeui/gnome-animator.c:163
-msgid "Current frame"
-msgstr "Hazırkı çərçivə"
-
-#: libgnomeui/gnome-animator.c:164
-msgid "Current frame number"
-msgstr "Haırkı çərçivə nömrəsi"
-
-#: libgnomeui/gnome-animator.c:172 libgnomeui/gnome-animator.c:173
-msgid "Animation status"
-msgstr "Animasiya vəziyyəti"
-
-#: libgnomeui/gnome-animator.c:181
-msgid "Speed"
-msgstr "Sür'ət"
-
-#: libgnomeui/gnome-animator.c:182
-msgid "Animation speed"
-msgstr "Animasiya sür'əti"
 
 #: libgnomeui/gnome-canvas-init.c:52
 msgid "Gdk debugging flags to set"
@@ -235,11 +155,11 @@ msgstr "BAYRAQLAR"
 msgid "Gdk debugging flags to unset"
 msgstr "Seçilməyəcək Gdk xəta həlli bayraqları"
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:134
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr "İstifadə ediləcək X ekranı"
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:134
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr "EKRAN"
 
@@ -335,162 +255,55 @@ msgstr "Xətalı rəng mə'lumatı alındı\n"
 msgid "Pick a color"
 msgstr "Rəng Seç"
 
-#: libgnomeui/gnome-dateedit.c:358
+#: libgnomeui/gnome-dateedit.c:407
 msgid "Time"
 msgstr "Zaman"
 
-#: libgnomeui/gnome-dateedit.c:359
+#: libgnomeui/gnome-dateedit.c:408
 msgid "The time currentlyselected"
 msgstr "Hal hazırkı vaxt"
 
-#: libgnomeui/gnome-dateedit.c:370
+#: libgnomeui/gnome-dateedit.c:419
 msgid "DateEdit Flags"
 msgstr "DataEdit bayraqları"
 
-#: libgnomeui/gnome-dateedit.c:371
+#: libgnomeui/gnome-dateedit.c:420
 msgid "Flags for how DateEdit looks"
 msgstr "DataEdit görünüşü üçün bayraqlar"
 
-#: libgnomeui/gnome-dateedit.c:380
+#: libgnomeui/gnome-dateedit.c:429
 msgid "Lower Hour"
 msgstr "Aşağı Saat"
 
-#: libgnomeui/gnome-dateedit.c:381
+#: libgnomeui/gnome-dateedit.c:430
 msgid "Lower hour in the time popup selector"
 msgstr "Vaxt sıçrama seçicisində ən aşağı saat"
 
-#: libgnomeui/gnome-dateedit.c:391
+#: libgnomeui/gnome-dateedit.c:440
 msgid "Upper Hour"
 msgstr "Üst Saat"
 
-#: libgnomeui/gnome-dateedit.c:392
+#: libgnomeui/gnome-dateedit.c:441
 msgid "Upper hour in the time popup selector"
 msgstr "Vaxt sıçrama seçicisində ən yuxarı saat"
 
-#: libgnomeui/gnome-dateedit.c:402
+#: libgnomeui/gnome-dateedit.c:451
 msgid "Initial Time"
 msgstr "Başlanğıç Vaxtı"
 
-#: libgnomeui/gnome-dateedit.c:403
+#: libgnomeui/gnome-dateedit.c:452
 msgid "The initial time"
 msgstr "Başlanğıc vaxtı"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:646
+#: libgnomeui/gnome-dateedit.c:696
 msgid "Calendar"
 msgstr "Təqvim"
 
-#: libgnomeui/gnome-dateedit.c:842
+#: libgnomeui/gnome-dateedit.c:922
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date olmadı, gnome_date_edit_get_time istifadə edin"
-
-#: libgnomeui/gnome-ditem-edit.c:202
-msgid "Name:"
-msgstr "Ad:"
-
-#: libgnomeui/gnome-ditem-edit.c:215
-msgid "Comment:"
-msgstr "Şərh:"
-
-#: libgnomeui/gnome-ditem-edit.c:225
-msgid "Command:"
-msgstr "Əmr:"
-
-#: libgnomeui/gnome-ditem-edit.c:235
-msgid "Type:"
-msgstr "Növ:"
-
-#: libgnomeui/gnome-ditem-edit.c:252
-msgid "Icon:"
-msgstr "Timsal:"
-
-#: libgnomeui/gnome-ditem-edit.c:277
-msgid "Run in Terminal"
-msgstr "Terminalda işə sal"
-
-#: libgnomeui/gnome-ditem-edit.c:303
-msgid "Simple drag and drop"
-msgstr "Sadə sürüklə və burax"
-
-#: libgnomeui/gnome-ditem-edit.c:325
-#, c-format
-msgid ""
-"In the following commands you should use %s in the spot where the\n"
-"filename/URL should be substituted.  If you leave the field blank\n"
-"drops will not be accepted.  If this application can accept\n"
-"multiple files or URLs as arguments after its command name check the box "
-"above."
 msgstr ""
-"Bu əmrlərdə fayladı/URL girilən yerdə %s\n"
-"istifadə etməlisiniz.  Əgər girişləri boş buraxsanız\n"
-"əməliyyatınız yerinə gətirilməyəcək.  Əgər bu proqram "
-"tə'minatı\n"
-"bir çox fayl və URlləri qəbul edirsə əmrdən sonra yuxarıdakı qutunu "
-"işarətləyin."
-
-#: libgnomeui/gnome-ditem-edit.c:337
-msgid "Command for file drops:"
-msgstr "Fayl buraxılması üçün əmr:"
-
-#: libgnomeui/gnome-ditem-edit.c:347
-msgid "Drop one file at a time only."
-msgstr "Bir dəfədə tək fayl burax."
-
-#: libgnomeui/gnome-ditem-edit.c:359
-msgid "Command for URL drops:"
-msgstr "URL buraxılması üçün əmr:"
-
-#: libgnomeui/gnome-ditem-edit.c:369
-msgid "Drop one URL at a time only."
-msgstr "Bir dəfədə tək URL burax."
-
-#: libgnomeui/gnome-ditem-edit.c:482
-msgid "Try this before using:"
-msgstr "İstifadədən əvvəl bunu sınayın:"
-
-#: libgnomeui/gnome-ditem-edit.c:492
-msgid "Documentation:"
-msgstr "Sənədlər:"
-
-#: libgnomeui/gnome-ditem-edit.c:502
-msgid "Window titles to wait for (comma separated):"
-msgstr "Gözlədilən pəncərə adları (vergüllə ayrılıb):"
-
-#: libgnomeui/gnome-ditem-edit.c:512
-msgid "Name/Comment translations:"
-msgstr "Ad/Qeyd tərcümələri:"
-
-#: libgnomeui/gnome-ditem-edit.c:515
-msgid "Language"
-msgstr "Dil"
-
-#: libgnomeui/gnome-ditem-edit.c:516
-msgid "Name"
-msgstr "Ad"
-
-#: libgnomeui/gnome-ditem-edit.c:517
-msgid "Comment"
-msgstr "Şərh"
-
-#: libgnomeui/gnome-ditem-edit.c:545
-msgid "Add/Set"
-msgstr "Əlavə et/Seç"
-
-#: libgnomeui/gnome-ditem-edit.c:550 libgnomeui/gnome-stock-icons.c:261
-msgid "Remove"
-msgstr "Çıxart"
-
-#: libgnomeui/gnome-ditem-edit.c:594
-msgid "Basic"
-msgstr "Əsas"
-
-#: libgnomeui/gnome-ditem-edit.c:598
-msgid "Drag and Drop"
-msgstr "Sürüklə və Burax"
-
-#: libgnomeui/gnome-ditem-edit.c:602
-msgid "Advanced"
-msgstr "Ətraflı"
+"gnome_date_edit_get_date olmadı, gnome_date_edit_get_time istifadə edin"
 
 #: libgnomeui/gnome-druid-page-edge.c:352
 #: libgnomeui/gnome-druid-page-standard.c:301
@@ -501,288 +314,63 @@ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-"
 
-#: libgnomeui/gnome-font-picker.c:858 libgnomeui/gnome-stock-icons.c:279
-msgid "Font"
-msgstr "Yazı Növü"
-
-#: libgnomeui/gnome-gconf.c:476
-msgid "GNOME GConf Support"
-msgstr "GNOME GConf Dəstəyi"
-
-#: libgnomeui/gnome-gconf.c:516
-#, c-format
-msgid ""
-"You attempted to change an aspect of your configuration that your system "
-"administrator or operating system vendor does not allow you to change. Some "
-"of the settings you have selected may not take effect, or may not be "
-"restored next time you use this application (%s)."
+#: libgnomeui/gnome-druid.c:128
+msgid "Show Finish"
 msgstr ""
-"Siz sistem idarəcinizin icazə vermədiyi bir qurğunu dəyişdirməyə "
-"çalışırsınız. Seçdiyiniz bu qurğlurdan bə'ziləri ya heç işə "
-"düşməyəcək ya da bir sonrakı (%s) proqram tə'minatını işə "
-"saldığınızda geriyə yüklənə bilməyəcək."
 
-#: libgnomeui/gnome-gconf.c:519
-#, c-format
-msgid ""
-"An error occurred while loading or saving configuration information for %s. "
-"Some of your configuration settings may not work properly."
+#: libgnomeui/gnome-druid.c:129
+msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr ""
-"%s üçün quraşdırma mə'lumatınız qeyd edilirkən xəta oldu. "
-"Qurğularınızdan bə'ziləri düzgün ışləməyə bilər."
 
-#: libgnomeui/gnome-gconf.c:541
-#, c-format
-msgid "GConf error details: %s\n"
-msgstr "GConf xəta mündəricatı: %s\n"
-
-#: libgnomeui/gnome-helpsys.c:114
-msgid "_Popup"
-msgstr "_SıçrayanPəncərə"
-
-#: libgnomeui/gnome-helpsys.c:115
-msgid "Show help in temporary popup windows"
-msgstr "Köməyi sıçrayan pəncərələrdə göstər"
-
-#: libgnomeui/gnome-helpsys.c:117
-msgid "_Embedded"
-msgstr "_Basdırılmış"
-
-#: libgnomeui/gnome-helpsys.c:118
-msgid "Show help inside the application window"
-msgstr "Köməyi proqram tə'minatı pəncərəsi içində göstər"
-
-#: libgnomeui/gnome-helpsys.c:120
-msgid "_Browser"
-msgstr "_Gəz"
-
-#: libgnomeui/gnome-helpsys.c:121
-msgid "Show help in a help browser window"
-msgstr "Köməyi səyahət pəncərəsində göstər"
-
-#: libgnomeui/gnome-helpsys.c:169
-msgid "App style"
-msgstr "Proqram tə'minatı tərzi"
-
-#: libgnomeui/gnome-helpsys.c:170
-msgid "The style of GnomeHelpView"
-msgstr "GnomeHelpView göstəriliş tərzi"
-
-#: libgnomeui/gnome-helpsys.c:179
-msgid "App style priority"
-msgstr "Proqram tə'minatı tərzi xüsusiyyətləri"
-
-#: libgnomeui/gnome-helpsys.c:180
-msgid "The priority of style of GnomeHelpView"
-msgstr "GnomeHelpView göstərilmə tərzi"
-
-#. orientation
-#: libgnomeui/gnome-helpsys.c:189 libgnomeui/gnome-helpsys.c:190
-#: libgnomeui/gnome-paper-selector.c:191
-msgid "Orientation"
-msgstr "İstiqamət"
-
-#: libgnomeui/gnome-helpsys.c:199
-msgid "Toplevel"
-msgstr "Ən üst səviyyə"
-
-#: libgnomeui/gnome-helpsys.c:200
-msgid "The toplevel widget"
-msgstr "Ən üst pəncərə"
-
-#: libgnomeui/gnome-helpsys.c:218 libgnomeui/gnome-stock-icons.c:274
-msgid "Help"
+#: libgnomeui/gnome-druid.c:136
+#, fuzzy
+msgid "Show Help"
 msgstr "Yardım"
 
-#: libgnomeui/gnome-helpsys.c:219
-msgid "Show help for a specific region of the application"
-msgstr "Proqram tə'minatının xüsusi yerləri üçün kömək göstər"
+#: libgnomeui/gnome-druid.c:137
+msgid "Show the 'Help' button"
+msgstr ""
 
-#: libgnomeui/gnome-helpsys.c:225
-msgid "Style"
-msgstr "Tərz"
-
-#: libgnomeui/gnome-helpsys.c:226
-msgid "Change the way help is displayed"
-msgstr "Köməyin göstərilmə şəklini dəyişdir"
-
-#: libgnomeui/gnome-helpsys.c:930 libgnomeui/gnome-helpsys.c:1033
-msgid "No help is available for the selected portion of the application."
-msgstr "Proqram tə'minatının seçilən bölgəsi üçün kömək yoxdur."
-
-#. FIXME: properly handle the error!
-#: libgnomeui/gnome-helpsys.c:1207
-#, c-format
-msgid "Cought GnomeURL error: %s"
-msgstr "GnomeURL xətası alındı: %s"
-
-#: libgnomeui/gnome-href.c:111
+#: libgnomeui/gnome-href.c:110
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:112
+#: libgnomeui/gnome-href.c:111
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRefin fəallaşdırdığı URL"
 
-#: libgnomeui/gnome-href.c:119
+#: libgnomeui/gnome-href.c:118
 msgid "Text"
 msgstr "Mətn"
 
-#: libgnomeui/gnome-href.c:120
+#: libgnomeui/gnome-href.c:119
 msgid "The text on the button"
 msgstr "Düymə üstündəki mətn"
 
-#: libgnomeui/gnome-href.c:121
+#: libgnomeui/gnome-href.c:120
 msgid "End World Hunger"
 msgstr "World Hunger sonu"
 
-#: libgnomeui/gnome-init.c:92
+#: libgnomeui/gnome-href.c:397
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+"URL göstəricisini başladırkən xəta oldu.\n"
+"İdarə mərkəzinin qurğularını bir yoxlayın."
+
+#: libgnomeui/gnome-ui-init.c:90
 msgid "Bonobo UI"
 msgstr "IU Bonobo"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-init.c:497
+#: libgnomeui/gnome-ui-init.c:465
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"Çoxlu parçalanma xətaları meydana geldi: xəta göstəricisini "
-"göstərə bilmirəm\n"
+"Çoxlu parçalanma xətaları meydana geldi: xəta göstəricisini göstərə "
+"bilmirəm\n"
 
-#. paper size
-#: libgnomeui/gnome-paper-selector.c:159
-msgid "Paper Size"
-msgstr "Kağız Böyüklüyü"
-
-#: libgnomeui/gnome-paper-selector.c:213
-msgid "Portrait"
-msgstr "Portret"
-
-#: libgnomeui/gnome-paper-selector.c:233
-msgid "Landscape"
-msgstr "Mənzərə"
-
-#. margins
-#: libgnomeui/gnome-paper-selector.c:241
-msgid "Margins"
-msgstr "Kənarlar"
-
-#: libgnomeui/gnome-paper-selector.c:253
-msgid "Top:"
-msgstr "Üst:"
-
-#: libgnomeui/gnome-paper-selector.c:266
-msgid "Bottom:"
-msgstr "Alt:"
-
-#: libgnomeui/gnome-paper-selector.c:279
-msgid "Left:"
-msgstr "Sol:"
-
-#: libgnomeui/gnome-paper-selector.c:292
-msgid "Right:"
-msgstr "Sağ:"
-
-#. Scaling
-#: libgnomeui/gnome-paper-selector.c:306
-msgid "Scaling"
-msgstr "Böyütmə"
-
-#: libgnomeui/gnome-paper-selector.c:321
-msgid "Fit to Page"
-msgstr "Səhifəyə yaraşdır"
-
-#: libgnomeui/gnome-paper-selector.c:810
-#, c-format
-msgid "%0.3g%s x %0.3g%s"
-msgstr "%0.3g%s x %0.3g%s"
-
-#: libgnomeui/gnome-paper-selector.c:1040
-msgid "Page Setup"
-msgstr "Səhifə Quruluşu"
-
-#: libgnomeui/gnome-popup-help.c:56
-msgid "_Help with this"
-msgstr "Buna _Kömək et"
-
-#: libgnomeui/gnome-popup-help.c:62
-msgid "Cu_t"
-msgstr "K_əs"
-
-#: libgnomeui/gnome-popup-help.c:64
-msgid "_Copy"
-msgstr "_Köçürt"
-
-#: libgnomeui/gnome-popup-help.c:66
-msgid "_Paste"
-msgstr "_Yapışdır"
-
-#. to be kept in sync with GtkCornerType enumeration
-#: libgnomeui/gnome-pouch.c:782
-msgid "Top left"
-msgstr "Üst sol"
-
-#: libgnomeui/gnome-pouch.c:783
-msgid "Bottom left"
-msgstr "Alt sol"
-
-#: libgnomeui/gnome-pouch.c:784
-msgid "Top right"
-msgstr "Üst sağ"
-
-#: libgnomeui/gnome-pouch.c:785
-msgid "Bottom right"
-msgstr "Alt sağ"
-
-#. to be kept in sync with GtkOrientation enumeration
-#: libgnomeui/gnome-pouch.c:796
-msgid "Horizontal"
-msgstr "Üfüqi"
-
-#: libgnomeui/gnome-pouch.c:797
-msgid "Vertical"
-msgstr "Şaquli"
-
-#: libgnomeui/gnome-pouch.c:807
-msgid "Icon position"
-msgstr "Timsal yerləri"
-
-#: libgnomeui/gnome-pouch.c:808
-msgid "Icon orientation"
-msgstr "Timsal istiqaməti"
-
-#: libgnomeui/gnome-pouch.c:810
-msgid "Tile children"
-msgstr "Törəməni döşə"
-
-#: libgnomeui/gnome-pouch.c:811
-msgid "Cascade children"
-msgstr "Törəmənı daşır"
-
-#: libgnomeui/gnome-pouch.c:813
-msgid "Arrange icons"
-msgstr "Timsalları düz"
-
-#: libgnomeui/gnome-pouch.c:814
-msgid "Autoarrange icons"
-msgstr "Timsalları avtomatik düz"
-
-#: libgnomeui/gnome-recently-used.c:111
-msgid "App Specific"
-msgstr "Proqram Tə'minatına Xas"
-
-#: libgnomeui/gnome-recently-used.c:112
-msgid "Is this list application specific"
-msgstr "Siyahıdakı proqram tə'minatları spesifikdir"
-
-#: libgnomeui/gnome-recently-used.c:893
-#, c-format
-msgid "bad GnomeRecentDocument attribute: %s\n"
-msgstr "xətalı GnomeRecentDocument atributu %s\n"
-
-#: libgnomeui/gnome-recently-used.c:1123
-msgid "Unknown"
-msgstr "Namə'lum"
-
-#: libgnomeui/gnome_segv.c:91
+#: libgnomeui/gnome_segv.c:92
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -793,11 +381,11 @@ msgid ""
 msgstr ""
 "GNOME gedişat idarəcisi (əməliyyat %d) dağıldı.\n"
 "(%s) ölümcül xətasına bağlıdır.\n"
-"Bu xəbər qutusunu qapatdığınız vaxt bütün uyğulamalarınız "
-"qurtarılacaq və gedişatdan da çıxılacaq.\n"
+"Bu xəbər qutusunu qapatdığınız vaxt bütün uyğulamalarınız qurtarılacaq və "
+"gedişatdan da çıxılacaq.\n"
 "Lütfən bu qutunu qapatrmadan əvvəl bütün fayllarını qeyd edin."
 
-#: libgnomeui/gnome_segv.c:101
+#: libgnomeui/gnome_segv.c:102
 #, c-format
 msgid ""
 "Application \"%s\" (process %d) has crashed\n"
@@ -808,126 +396,418 @@ msgstr ""
 "Ölümcül xəta oldu.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:111
 msgid "Usage: gnome_segv appname signum\n"
 msgstr "İstifadə qaydası: gnome_segv proqram adı nömrəsi\n"
 
-#: libgnomeui/gnome_segv.c:126
+#: libgnomeui/gnome_segv.c:127
 msgid "Submit a bug report"
 msgstr "Xəta raportunu yolla"
 
-#: libgnomeui/gnome_segv.c:137
+#: libgnomeui/gnome_segv.c:138
 msgid "Debug"
 msgstr "Həll Et"
 
-#: libgnomeui/gnome_segv.c:145
+#: libgnomeui/gnome_segv.c:146
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:152
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
-"Lütfən ətraflı mə'lumat üçün GNOME Proqram tə'minatı Xətası "
-"səhifəsini ziyarət edin"
+"Lütfən ətraflı mə'lumat üçün GNOME Proqram tə'minatı Xətası səhifəsini "
+"ziyarət edin"
 
-#: libgnomeui/oafgnome.c:242
-msgid "Username:"
-msgstr "İstifadəçi Adı:"
-
-#: libgnomeui/oafgnome.c:256
-msgid "Password:"
-msgstr "Parol:"
-
-#: components/gnome-image-entry-component.c:502
-#: components/gnome-image-entry-component.c:519
-msgid "No Image"
-msgstr "Görünüş Yoxdur"
-
-#: libgnomeui/gnome-selector-component.c:417
-msgid "Browse..."
-msgstr "Gəz..."
-
-#: libgnomeui/gnome-selector-component.c:431
-msgid "Default..."
-msgstr "Əsas..."
-
-#: libgnomeui/gnome-selector-component.c:447
-msgid "Clear..."
-msgstr "Təmizlə..."
-
-#: libgnomeui/gnome-stock-icons.c:258
-msgid "Add"
-msgstr "Əlavə Et"
-
-#: libgnomeui/gnome-stock-icons.c:259
-msgid "Clear"
-msgstr "Təmizlə"
-
-#: libgnomeui/gnome-stock-icons.c:260
-msgid "Select Color"
-msgstr "Rəng Seç"
-
-#: libgnomeui/gnome-stock-icons.c:262
+#: libgnomeui/gnome-stock-icons.c:136
 msgid "Table Borders"
 msgstr "Cədvəl Kənarı"
 
-#: libgnomeui/gnome-stock-icons.c:263
+#: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Fill"
 msgstr "Cədvəli Doldur"
 
-#: libgnomeui/gnome-stock-icons.c:264
+#: libgnomeui/gnome-stock-icons.c:138
 msgid "Bulleted List"
 msgstr "Düyməli Siyahı"
 
-#: libgnomeui/gnome-stock-icons.c:265
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Numbered List"
 msgstr "Rəqəmlənmiş Siyahı"
 
-#: libgnomeui/gnome-stock-icons.c:266
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Indent"
 msgstr "İçəridən Başlama"
 
-#: libgnomeui/gnome-stock-icons.c:267
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Un-Indent"
 msgstr "Başa Gətirmə"
 
-#: libgnomeui/gnome-stock-icons.c:268
-msgid "OK"
-msgstr "Oldu"
+#~ msgid "Child Item 1"
+#~ msgstr "Törəmə Üzv 1"
 
-#: libgnomeui/gnome-stock-icons.c:269
-msgid "Apply"
-msgstr "Əlavə Et"
+#~ msgid "Hint for item 1"
+#~ msgstr "Birinci üzv üçün ipucu"
 
-#: libgnomeui/gnome-stock-icons.c:270
-msgid "Cancel"
-msgstr "Ləğv et"
+#~ msgid "Child Item 2"
+#~ msgstr "Törəmə Üzv 2"
 
-#: libgnomeui/gnome-stock-icons.c:271
-msgid "Close"
-msgstr "Qapat"
+#~ msgid "Hint for item 2"
+#~ msgstr "İkinci üzv üçün ipucu"
 
-#: libgnomeui/gnome-stock-icons.c:272
-msgid "Yes"
-msgstr "Bəli"
+#~ msgid "Author:"
+#~ msgstr "Müəllif:"
 
-#: libgnomeui/gnome-stock-icons.c:273
-msgid "No"
-msgstr "Xeyr"
+#~ msgid "Authors:"
+#~ msgstr "Müəlliflər:"
 
-#: libgnomeui/gnome-stock-icons.c:275
-msgid "Next"
-msgstr "Sonrakı"
+#~ msgid "Authors: "
+#~ msgstr "Müəlliflər: "
 
-#: libgnomeui/gnome-stock-icons.c:276
-msgid "Prev"
-msgstr "Geri"
+#~ msgid "Loop type"
+#~ msgstr "İlgək növü"
 
-#: libgnomeui/gnome-stock-icons.c:277
-msgid "Up"
-msgstr "Yuxarı"
+#~ msgid "The type of loop the GnomeAnimator uses"
+#~ msgstr "GnomeAnimator istifadəsində olan ilgək növü"
 
-#: libgnomeui/gnome-stock-icons.c:278
-msgid "Down"
-msgstr "Aşağı"
+#~ msgid "Direction"
+#~ msgstr "Tərəf"
 
+#~ msgid "Animation direction"
+#~ msgstr "Animasiya tərəfi"
+
+#~ msgid "Number of frames"
+#~ msgstr "Çərçivə miqdarı"
+
+#~ msgid "Total number of frames in animation"
+#~ msgstr "Animasıyadakı çərçivə miqdarı"
+
+#~ msgid "Current frame"
+#~ msgstr "Hazırkı çərçivə"
+
+#~ msgid "Current frame number"
+#~ msgstr "Haırkı çərçivə nömrəsi"
+
+#~ msgid "Animation status"
+#~ msgstr "Animasiya vəziyyəti"
+
+#~ msgid "Speed"
+#~ msgstr "Sür'ət"
+
+#~ msgid "Animation speed"
+#~ msgstr "Animasiya sür'əti"
+
+#~ msgid "Name:"
+#~ msgstr "Ad:"
+
+#~ msgid "Comment:"
+#~ msgstr "Şərh:"
+
+#~ msgid "Command:"
+#~ msgstr "Əmr:"
+
+#~ msgid "Type:"
+#~ msgstr "Növ:"
+
+#~ msgid "Icon:"
+#~ msgstr "Timsal:"
+
+#~ msgid "Run in Terminal"
+#~ msgstr "Terminalda işə sal"
+
+#~ msgid "Simple drag and drop"
+#~ msgstr "Sadə sürüklə və burax"
+
+#~ msgid ""
+#~ "In the following commands you should use %s in the spot where the\n"
+#~ "filename/URL should be substituted.  If you leave the field blank\n"
+#~ "drops will not be accepted.  If this application can accept\n"
+#~ "multiple files or URLs as arguments after its command name check the box "
+#~ "above."
+#~ msgstr ""
+#~ "Bu əmrlərdə fayladı/URL girilən yerdə %s\n"
+#~ "istifadə etməlisiniz.  Əgər girişləri boş buraxsanız\n"
+#~ "əməliyyatınız yerinə gətirilməyəcək.  Əgər bu proqram tə'minatı\n"
+#~ "bir çox fayl və URlləri qəbul edirsə əmrdən sonra yuxarıdakı qutunu "
+#~ "işarətləyin."
+
+#~ msgid "Command for file drops:"
+#~ msgstr "Fayl buraxılması üçün əmr:"
+
+#~ msgid "Drop one file at a time only."
+#~ msgstr "Bir dəfədə tək fayl burax."
+
+#~ msgid "Command for URL drops:"
+#~ msgstr "URL buraxılması üçün əmr:"
+
+#~ msgid "Drop one URL at a time only."
+#~ msgstr "Bir dəfədə tək URL burax."
+
+#~ msgid "Try this before using:"
+#~ msgstr "İstifadədən əvvəl bunu sınayın:"
+
+#~ msgid "Documentation:"
+#~ msgstr "Sənədlər:"
+
+#~ msgid "Window titles to wait for (comma separated):"
+#~ msgstr "Gözlədilən pəncərə adları (vergüllə ayrılıb):"
+
+#~ msgid "Name/Comment translations:"
+#~ msgstr "Ad/Qeyd tərcümələri:"
+
+#~ msgid "Language"
+#~ msgstr "Dil"
+
+#~ msgid "Name"
+#~ msgstr "Ad"
+
+#~ msgid "Comment"
+#~ msgstr "Şərh"
+
+#~ msgid "Add/Set"
+#~ msgstr "Əlavə et/Seç"
+
+#~ msgid "Remove"
+#~ msgstr "Çıxart"
+
+#~ msgid "Basic"
+#~ msgstr "Əsas"
+
+#~ msgid "Drag and Drop"
+#~ msgstr "Sürüklə və Burax"
+
+#~ msgid "Advanced"
+#~ msgstr "Ətraflı"
+
+#~ msgid "Font"
+#~ msgstr "Yazı Növü"
+
+#~ msgid "GNOME GConf Support"
+#~ msgstr "GNOME GConf Dəstəyi"
+
+#~ msgid ""
+#~ "You attempted to change an aspect of your configuration that your system "
+#~ "administrator or operating system vendor does not allow you to change. "
+#~ "Some of the settings you have selected may not take effect, or may not be "
+#~ "restored next time you use this application (%s)."
+#~ msgstr ""
+#~ "Siz sistem idarəcinizin icazə vermədiyi bir qurğunu dəyişdirməyə "
+#~ "çalışırsınız. Seçdiyiniz bu qurğlurdan bə'ziləri ya heç işə düşməyəcək ya "
+#~ "da bir sonrakı (%s) proqram tə'minatını işə saldığınızda geriyə yüklənə "
+#~ "bilməyəcək."
+
+#~ msgid ""
+#~ "An error occurred while loading or saving configuration information for %"
+#~ "s. Some of your configuration settings may not work properly."
+#~ msgstr ""
+#~ "%s üçün quraşdırma mə'lumatınız qeyd edilirkən xəta oldu. Qurğularınızdan "
+#~ "bə'ziləri düzgün ışləməyə bilər."
+
+#~ msgid "GConf error details: %s\n"
+#~ msgstr "GConf xəta mündəricatı: %s\n"
+
+#~ msgid "_Popup"
+#~ msgstr "_SıçrayanPəncərə"
+
+#~ msgid "Show help in temporary popup windows"
+#~ msgstr "Köməyi sıçrayan pəncərələrdə göstər"
+
+#~ msgid "_Embedded"
+#~ msgstr "_Basdırılmış"
+
+#~ msgid "Show help inside the application window"
+#~ msgstr "Köməyi proqram tə'minatı pəncərəsi içində göstər"
+
+#~ msgid "_Browser"
+#~ msgstr "_Gəz"
+
+#~ msgid "Show help in a help browser window"
+#~ msgstr "Köməyi səyahət pəncərəsində göstər"
+
+#~ msgid "App style"
+#~ msgstr "Proqram tə'minatı tərzi"
+
+#~ msgid "The style of GnomeHelpView"
+#~ msgstr "GnomeHelpView göstəriliş tərzi"
+
+#~ msgid "App style priority"
+#~ msgstr "Proqram tə'minatı tərzi xüsusiyyətləri"
+
+#~ msgid "The priority of style of GnomeHelpView"
+#~ msgstr "GnomeHelpView göstərilmə tərzi"
+
+#~ msgid "Orientation"
+#~ msgstr "İstiqamət"
+
+#~ msgid "Toplevel"
+#~ msgstr "Ən üst səviyyə"
+
+#~ msgid "The toplevel widget"
+#~ msgstr "Ən üst pəncərə"
+
+#~ msgid "Show help for a specific region of the application"
+#~ msgstr "Proqram tə'minatının xüsusi yerləri üçün kömək göstər"
+
+#~ msgid "Style"
+#~ msgstr "Tərz"
+
+#~ msgid "Change the way help is displayed"
+#~ msgstr "Köməyin göstərilmə şəklini dəyişdir"
+
+#~ msgid "No help is available for the selected portion of the application."
+#~ msgstr "Proqram tə'minatının seçilən bölgəsi üçün kömək yoxdur."
+
+#~ msgid "Cought GnomeURL error: %s"
+#~ msgstr "GnomeURL xətası alındı: %s"
+
+#~ msgid "Paper Size"
+#~ msgstr "Kağız Böyüklüyü"
+
+#~ msgid "Portrait"
+#~ msgstr "Portret"
+
+#~ msgid "Landscape"
+#~ msgstr "Mənzərə"
+
+#~ msgid "Margins"
+#~ msgstr "Kənarlar"
+
+#~ msgid "Top:"
+#~ msgstr "Üst:"
+
+#~ msgid "Bottom:"
+#~ msgstr "Alt:"
+
+#~ msgid "Left:"
+#~ msgstr "Sol:"
+
+#~ msgid "Right:"
+#~ msgstr "Sağ:"
+
+#~ msgid "Scaling"
+#~ msgstr "Böyütmə"
+
+#~ msgid "Fit to Page"
+#~ msgstr "Səhifəyə yaraşdır"
+
+#~ msgid "%0.3g%s x %0.3g%s"
+#~ msgstr "%0.3g%s x %0.3g%s"
+
+#~ msgid "Page Setup"
+#~ msgstr "Səhifə Quruluşu"
+
+#~ msgid "_Help with this"
+#~ msgstr "Buna _Kömək et"
+
+#~ msgid "Cu_t"
+#~ msgstr "K_əs"
+
+#~ msgid "_Copy"
+#~ msgstr "_Köçürt"
+
+#~ msgid "_Paste"
+#~ msgstr "_Yapışdır"
+
+#~ msgid "Top left"
+#~ msgstr "Üst sol"
+
+#~ msgid "Bottom left"
+#~ msgstr "Alt sol"
+
+#~ msgid "Top right"
+#~ msgstr "Üst sağ"
+
+#~ msgid "Bottom right"
+#~ msgstr "Alt sağ"
+
+#~ msgid "Horizontal"
+#~ msgstr "Üfüqi"
+
+#~ msgid "Vertical"
+#~ msgstr "Şaquli"
+
+#~ msgid "Icon position"
+#~ msgstr "Timsal yerləri"
+
+#~ msgid "Icon orientation"
+#~ msgstr "Timsal istiqaməti"
+
+#~ msgid "Tile children"
+#~ msgstr "Törəməni döşə"
+
+#~ msgid "Cascade children"
+#~ msgstr "Törəmənı daşır"
+
+#~ msgid "Arrange icons"
+#~ msgstr "Timsalları düz"
+
+#~ msgid "Autoarrange icons"
+#~ msgstr "Timsalları avtomatik düz"
+
+#~ msgid "App Specific"
+#~ msgstr "Proqram Tə'minatına Xas"
+
+#~ msgid "Is this list application specific"
+#~ msgstr "Siyahıdakı proqram tə'minatları spesifikdir"
+
+#~ msgid "bad GnomeRecentDocument attribute: %s\n"
+#~ msgstr "xətalı GnomeRecentDocument atributu %s\n"
+
+#~ msgid "Unknown"
+#~ msgstr "Namə'lum"
+
+#~ msgid "Username:"
+#~ msgstr "İstifadəçi Adı:"
+
+#~ msgid "Password:"
+#~ msgstr "Parol:"
+
+#~ msgid "No Image"
+#~ msgstr "Görünüş Yoxdur"
+
+#~ msgid "Browse..."
+#~ msgstr "Gəz..."
+
+#~ msgid "Default..."
+#~ msgstr "Əsas..."
+
+#~ msgid "Clear..."
+#~ msgstr "Təmizlə..."
+
+#~ msgid "Add"
+#~ msgstr "Əlavə Et"
+
+#~ msgid "Clear"
+#~ msgstr "Təmizlə"
+
+#~ msgid "Select Color"
+#~ msgstr "Rəng Seç"
+
+#~ msgid "OK"
+#~ msgstr "Oldu"
+
+#~ msgid "Apply"
+#~ msgstr "Əlavə Et"
+
+#~ msgid "Cancel"
+#~ msgstr "Ləğv et"
+
+#~ msgid "Close"
+#~ msgstr "Qapat"
+
+#~ msgid "Yes"
+#~ msgstr "Bəli"
+
+#~ msgid "No"
+#~ msgstr "Xeyr"
+
+#~ msgid "Next"
+#~ msgstr "Sonrakı"
+
+#~ msgid "Prev"
+#~ msgstr "Geri"
+
+#~ msgid "Up"
+#~ msgstr "Yuxarı"
+
+#~ msgid "Down"
+#~ msgstr "Aşağı"

@@ -1,6 +1,12 @@
 2001-08-14  Martin Baulig  <baulig@suse.de>
 
+	Released libgnomeui 1.102.0 "Roswell".
+
+	* configure.in: Bumpbed version number to 1.102.0.
+
 	* NEWS: Start to write the NEWS file for the release.
+
+	* Makefile.am: Don't build the components/ directory.
 
 2001-08-11  Martin Baulig  <baulig@suse.de>
 

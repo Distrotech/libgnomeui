@@ -5,29 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2001-07-07 13:10+0200\n"
+"POT-Creation-Date: 2001-08-14 16:53+0200\n"
 "PO-Revision-Date: 2001-07-07 13:13+02:00\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: demos/mdi_demo.c:129
-msgid "Child Item 1"
-msgstr ""
-
-#: demos/mdi_demo.c:130
-msgid "Hint for item 1"
-msgstr ""
-
-#: demos/mdi_demo.c:132
-msgid "Child Item 2"
-msgstr ""
-
-#: demos/mdi_demo.c:133
-msgid "Hint for item 2"
-msgstr ""
 
 #: demos/winhints_demo.c:49
 msgid "wmhints-test"
@@ -137,40 +121,22 @@ msgstr ""
 msgid "Set Skip"
 msgstr ""
 
-#: demos/winhints_demo.c:260 libgnomeui/gnome-about.c:1162
+#: demos/winhints_demo.c:260 libgnomeui/gnome-stock-icons.c:142
 msgid "About"
 msgstr ""
 
-#: demos/winhints_demo.c:414
+#: demos/winhints_demo.c:407
 msgid "WIN_HINTS Test"
 msgstr ""
 
-#: demos/winhints_demo.c:415
+#: demos/winhints_demo.c:408
 msgid "Copyright (C) 1998"
 msgstr ""
 
-#: demos/winhints_demo.c:417
+#: demos/winhints_demo.c:409
 msgid ""
 "Simple test app to check how the WIN_HINTS work.\n"
 "And to test the gnome_win_hints_* functions for errors. :)"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:352
-msgid "Author:"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:361 libgnomeui/gnome-about.c:365
-msgid "Authors:"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:744
-msgid "Authors: "
-msgstr ""
-
-#: libgnomeui/gnome-about.c:1255 libgnomeui/gnome-href.c:397
-msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
 msgstr ""
 
 #: libgnomeui/gnome-canvas-init.c:52
@@ -186,11 +152,11 @@ msgstr ""
 msgid "Gdk debugging flags to unset"
 msgstr ""
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:128
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr ""
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:128
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr ""
 
@@ -286,156 +252,54 @@ msgstr ""
 msgid "Pick a color"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:352
+#: libgnomeui/gnome-dateedit.c:407
 msgid "Time"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:353
+#: libgnomeui/gnome-dateedit.c:408
 msgid "The time currentlyselected"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:364
+#: libgnomeui/gnome-dateedit.c:419
 msgid "DateEdit Flags"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:365
+#: libgnomeui/gnome-dateedit.c:420
 msgid "Flags for how DateEdit looks"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:374
+#: libgnomeui/gnome-dateedit.c:429
 msgid "Lower Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:375
+#: libgnomeui/gnome-dateedit.c:430
 msgid "Lower hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:385
+#: libgnomeui/gnome-dateedit.c:440
 msgid "Upper Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:386
+#: libgnomeui/gnome-dateedit.c:441
 msgid "Upper hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:396
+#: libgnomeui/gnome-dateedit.c:451
 msgid "Initial Time"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:397
+#: libgnomeui/gnome-dateedit.c:452
 msgid "The initial time"
 msgstr ""
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:640
+#: libgnomeui/gnome-dateedit.c:696
 msgid "Calendar"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:836
+#: libgnomeui/gnome-dateedit.c:922
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:202
-msgid "Name:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:215
-msgid "Comment:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:225
-msgid "Command:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:235
-msgid "Type:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:252
-msgid "Icon:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:277
-msgid "Run in Terminal"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:303
-msgid "Simple drag and drop"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:325
-#, c-format
-msgid ""
-"In the following commands you should use %s in the spot where the\n"
-"filename/URL should be substituted.  If you leave the field blank\n"
-"drops will not be accepted.  If this application can accept\n"
-"multiple files or URLs as arguments after its command name check the box "
-"above."
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:337
-msgid "Command for file drops:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:347
-msgid "Drop one file at a time only."
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:359
-msgid "Command for URL drops:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:369
-msgid "Drop one URL at a time only."
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:482
-msgid "Try this before using:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:492
-msgid "Documentation:"
-msgstr "Documentazione:"
-
-#: libgnomeui/gnome-ditem-edit.c:502
-msgid "Window titles to wait for (comma separated):"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:512
-msgid "Name/Comment translations:"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:515
-msgid "Language"
-msgstr "Lingua"
-
-#: libgnomeui/gnome-ditem-edit.c:516
-msgid "Name"
-msgstr "Nome"
-
-#: libgnomeui/gnome-ditem-edit.c:517
-msgid "Comment"
-msgstr "Commento"
-
-#: libgnomeui/gnome-ditem-edit.c:545
-msgid "Add/Set"
-msgstr "Add/Imposta"
-
-#: libgnomeui/gnome-ditem-edit.c:550 libgnomeui/gnome-stock-icons.c:261
-msgid "Remove"
-msgstr "Rimuovi"
-
-#: libgnomeui/gnome-ditem-edit.c:594
-msgid "Basic"
-msgstr "Base"
-
-#: libgnomeui/gnome-ditem-edit.c:598
-msgid "Drag and Drop"
-msgstr ""
-
-#: libgnomeui/gnome-ditem-edit.c:602
-msgid "Advanced"
-msgstr "Avanzato"
 
 #: libgnomeui/gnome-druid-page-edge.c:352
 #: libgnomeui/gnome-druid-page-standard.c:301
@@ -462,22 +326,6 @@ msgstr "Mostra aiuto"
 msgid "Show the 'Help' button"
 msgstr "Mostra il pulsante 'Aiuto'"
 
-#: libgnomeui/gnome-font-picker.c:55
-msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
-msgstr ""
-
-#: libgnomeui/gnome-font-picker.c:56
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-
-#: libgnomeui/gnome-font-picker.c:57
-msgid "Pick a Font"
-msgstr ""
-
-#: libgnomeui/gnome-font-picker.c:858 libgnomeui/gnome-stock-icons.c:279
-msgid "Font"
-msgstr "Carattere"
-
 #: libgnomeui/gnome-href.c:110
 msgid "URL"
 msgstr "URL"
@@ -498,137 +346,19 @@ msgstr "Il testo del pulsante"
 msgid "End World Hunger"
 msgstr "Fine alla fame nel mondo"
 
-#: libgnomeui/gnome-init.c:91
+#: libgnomeui/gnome-href.c:397
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+
+#: libgnomeui/gnome-ui-init.c:90
 msgid "Bonobo UI"
 msgstr "UI Bonobo"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-init.c:466
+#: libgnomeui/gnome-ui-init.c:465
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-
-#. paper size
-#: libgnomeui/gnome-paper-selector.c:159
-msgid "Paper Size"
-msgstr "Dimensione carta"
-
-#. orientation
-#: libgnomeui/gnome-paper-selector.c:191
-msgid "Orientation"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:213
-msgid "Portrait"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:233
-msgid "Landscape"
-msgstr ""
-
-#. margins
-#: libgnomeui/gnome-paper-selector.c:241
-msgid "Margins"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:253
-msgid "Top:"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:266
-msgid "Bottom:"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:279
-msgid "Left:"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:292
-msgid "Right:"
-msgstr ""
-
-#. Scaling
-#: libgnomeui/gnome-paper-selector.c:306
-msgid "Scaling"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:321
-msgid "Fit to Page"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:810
-#, c-format
-msgid "%0.3g%s x %0.3g%s"
-msgstr ""
-
-#: libgnomeui/gnome-paper-selector.c:1040
-msgid "Page Setup"
-msgstr ""
-
-#. to be kept in sync with GtkCornerType enumeration
-#: libgnomeui/gnome-pouch.c:783
-msgid "Top left"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:784
-msgid "Bottom left"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:785
-msgid "Top right"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:786
-msgid "Bottom right"
-msgstr ""
-
-#. to be kept in sync with GtkOrientation enumeration
-#: libgnomeui/gnome-pouch.c:797
-msgid "Horizontal"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:798
-msgid "Vertical"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:808
-msgid "Icon position"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:809
-msgid "Icon orientation"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:811
-msgid "Tile children"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:812
-msgid "Cascade children"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:814
-msgid "Arrange icons"
-msgstr ""
-
-#: libgnomeui/gnome-pouch.c:815
-msgid "Autoarrange icons"
-msgstr ""
-
-#: libgnomeui/gnome-recently-used.c:111
-msgid "App Specific"
-msgstr ""
-
-#: libgnomeui/gnome-recently-used.c:112
-msgid "Is this list application specific"
-msgstr ""
-
-#: libgnomeui/gnome-recently-used.c:893
-#, c-format
-msgid "bad GnomeRecentDocument attribute: %s\n"
-msgstr ""
-
-#: libgnomeui/gnome-recently-used.c:1123
-msgid "Unknown"
 msgstr ""
 
 #: libgnomeui/gnome_segv.c:92
@@ -669,90 +399,104 @@ msgstr ""
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 
-#: libgnomeui/oafgnome.c:242
-msgid "Username:"
-msgstr "Nome utente:"
-
-#: libgnomeui/oafgnome.c:256
-msgid "Password:"
-msgstr "Password:"
-
-#: libgnomeui/gnome-stock-icons.c:258
-msgid "Add"
-msgstr "Aggiungi"
-
-#: libgnomeui/gnome-stock-icons.c:259
-msgid "Clear"
-msgstr "Cancella"
-
-#: libgnomeui/gnome-stock-icons.c:260
-msgid "Select Color"
-msgstr "Selezionare colore"
-
-#: libgnomeui/gnome-stock-icons.c:262
+#: libgnomeui/gnome-stock-icons.c:136
 msgid "Table Borders"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:263
+#: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Fill"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:264
+#: libgnomeui/gnome-stock-icons.c:138
 msgid "Bulleted List"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:265
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Numbered List"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:266
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Indent"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:267
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Un-Indent"
 msgstr ""
 
-#: libgnomeui/gnome-stock-icons.c:268
-msgid "OK"
-msgstr "OK"
+#~ msgid "Documentation:"
+#~ msgstr "Documentazione:"
 
-#: libgnomeui/gnome-stock-icons.c:269
-msgid "Apply"
-msgstr "Applica"
+#~ msgid "Language"
+#~ msgstr "Lingua"
 
-#: libgnomeui/gnome-stock-icons.c:270
-msgid "Cancel"
-msgstr "Annulla"
+#~ msgid "Name"
+#~ msgstr "Nome"
 
-#: libgnomeui/gnome-stock-icons.c:271
-msgid "Close"
-msgstr "Chiudi"
+#~ msgid "Comment"
+#~ msgstr "Commento"
 
-#: libgnomeui/gnome-stock-icons.c:272
-msgid "Yes"
-msgstr "Si"
+#~ msgid "Add/Set"
+#~ msgstr "Add/Imposta"
 
-#: libgnomeui/gnome-stock-icons.c:273
-msgid "No"
-msgstr "No"
+#~ msgid "Remove"
+#~ msgstr "Rimuovi"
 
-#: libgnomeui/gnome-stock-icons.c:274
-msgid "Help"
-msgstr "Aiuto"
+#~ msgid "Basic"
+#~ msgstr "Base"
 
-#: libgnomeui/gnome-stock-icons.c:275
-msgid "Next"
-msgstr "Successivo"
+#~ msgid "Advanced"
+#~ msgstr "Avanzato"
 
-#: libgnomeui/gnome-stock-icons.c:276
-msgid "Prev"
-msgstr "Precedente"
+#~ msgid "Font"
+#~ msgstr "Carattere"
 
-#: libgnomeui/gnome-stock-icons.c:277
-msgid "Up"
-msgstr "Alto"
+#~ msgid "Paper Size"
+#~ msgstr "Dimensione carta"
 
-#: libgnomeui/gnome-stock-icons.c:278
-msgid "Down"
-msgstr "Basso"
+#~ msgid "Username:"
+#~ msgstr "Nome utente:"
+
+#~ msgid "Password:"
+#~ msgstr "Password:"
+
+#~ msgid "Add"
+#~ msgstr "Aggiungi"
+
+#~ msgid "Clear"
+#~ msgstr "Cancella"
+
+#~ msgid "Select Color"
+#~ msgstr "Selezionare colore"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Apply"
+#~ msgstr "Applica"
+
+#~ msgid "Cancel"
+#~ msgstr "Annulla"
+
+#~ msgid "Close"
+#~ msgstr "Chiudi"
+
+#~ msgid "Yes"
+#~ msgstr "Si"
+
+#~ msgid "No"
+#~ msgstr "No"
+
+#~ msgid "Help"
+#~ msgstr "Aiuto"
+
+#~ msgid "Next"
+#~ msgstr "Successivo"
+
+#~ msgid "Prev"
+#~ msgstr "Precedente"
+
+#~ msgid "Up"
+#~ msgstr "Alto"
+
+#~ msgid "Down"
+#~ msgstr "Basso"
