@@ -1,3 +1,17 @@
+Sun Sep 27 16:54:33 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.[ch]: still fiddling with this f**king background
+	colors. changed GnomeStock structure.
+	* gnome-stock.c (create_pixmap_from_imlib_scaled): check via
+	gnome_config if we want imlib's or out own resizing.
+	(build_disabled_pixmap): check via gnome_config how the disabled pixmap
+	should be built.
+	* gnome-pixmap.[ch] (gnome_pixmap_new_from_rgb_d_shaped_at_size,
+	gnome_pixmap_load_rgb_d_shaped_at_size): new functions.
+	* gnome-app-helper.c (create_pixmap_and_label): check via gnome_config
+	if we want icons in menus to keep consistance with
+	gnome_stock_menu_item.
+
 1998-09-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_reparent): Added all the usual

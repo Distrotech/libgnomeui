@@ -42,6 +42,11 @@ GtkWidget *gnome_pixmap_new_from_rgb_d         (unsigned char *data, unsigned ch
 GtkWidget *gnome_pixmap_new_from_rgb_d_shaped  (unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						GdkImlibColor *shape_color);
+GtkWidget * gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
+					        unsigned char *alpha,
+					        int rgb_width, int rgb_height,
+					        int width, int height,
+					        GdkImlibColor *shape_color);
 GtkWidget *gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						int width, int height);
@@ -59,6 +64,12 @@ void       gnome_pixmap_load_rgb_d             (GnomePixmap *gpixmap, unsigned c
 void       gnome_pixmap_load_rgb_d_shaped      (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						GdkImlibColor *shape_color);
+void gnome_pixmap_load_rgb_d_shaped_at_size    (GnomePixmap *gpixmap,
+					        unsigned char *data,
+					        unsigned char *alpha,
+					        int rgb_width, int rgb_height,
+					        int width, int height,
+					        GdkImlibColor *shape_color);
 void       gnome_pixmap_load_rgb_d_at_size     (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						int width, int height);

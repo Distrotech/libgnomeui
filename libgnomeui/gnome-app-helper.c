@@ -111,7 +111,10 @@ create_pixmap_and_label (char *label_text, GnomeUIPixmapType pixmap_type, gpoint
 	 * displayed or not
 	 */
 
-	pixmap = create_pixmap (hbox, pixmap_type, pixmap_info, indent_missing_pixmaps);
+	if (gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true"))
+		pixmap = create_pixmap (hbox, pixmap_type, pixmap_info, indent_missing_pixmaps);
+	else
+		pixmap = NULL;
 
 	if (pixmap) {
 		gtk_box_pack_start (GTK_BOX (hbox), pixmap, FALSE, FALSE, 0);

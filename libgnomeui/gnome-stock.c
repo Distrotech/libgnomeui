@@ -47,16 +47,6 @@
 
 
 
-/*
- * Hmmm, I'm not sure, if using color context can consume to much colors,
- * so one can define this here. If defined, all color context modes other
- * then true/pseudo color and gray lead to the old shading method for
- * insensitive pixmaps. If undefined, the newer method will always be used
- */
-#define NOT_ALWAYS_SHADE
-
-
-
 #include "pixmaps/gnome-stock-imlib.h"
 
 
@@ -405,12 +395,8 @@ gnome_stock_state_changed(GtkWidget *widget, guint prev_state)
 	GnomeStock *w = GNOME_STOCK(widget);
 	GnomePixmap *pixmap;
 	GtkWidget *tmp;
-	static GHashTable *hash = NULL;
-	guint32 c1, c2;
+	guint32 c;
 
-	if (!hash) {
-		hash = g_hash_table_new(g_direct_hash, g_direct_equal);
-	}
 	if (widget->parent) {
 		GdkWindow *w;
 		tmp = widget->parent;
@@ -422,40 +408,43 @@ gnome_stock_state_changed(GtkWidget *widget, guint prev_state)
 	} else {
 		tmp = widget;
 	}
-	c1 = (tmp->style->bg[tmp->state].red >> 8) |
+	c = (tmp->style->bg[tmp->state].red >> 8) |
 		(tmp->style->bg[tmp->state].green & 0xff00) |
 		((tmp->style->bg[tmp->state].blue & 0xff00) << 8);
-	if (0 != (c2 = (guint32)g_hash_table_lookup(hash, widget))) {
-		if (c1 != c2) {
-			if (w->regular) {
-				gtk_widget_unref(GTK_WIDGET(w->regular));
-				w->regular = NULL;
-			}
-			if (w->disabled) {
-				gtk_widget_unref(GTK_WIDGET(w->disabled));
-				w->disabled = NULL;
-			}
-			if (w->focused) {
-				gtk_widget_unref(GTK_WIDGET(w->focused));
-				w->focused = NULL;
-			}
-			w->current = NULL;
-		}
-	}
-	g_hash_table_insert(hash, widget, (void *)c1);
 	pixmap = NULL;
 	/* if (GTK_WIDGET_HAS_FOCUS(widget)) { */
 	if (tmp->state == GTK_STATE_PRELIGHT) {
+		if ((c != w->c_focused) && (w->focused)) {
+			if (w->current == w->focused)
+				w->current = NULL;
+			gtk_widget_unref(GTK_WIDGET(w->focused));
+			w->focused = NULL;
+		}
+		w->c_focused = c;
 		if (!w->focused) {
 			w->focused = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_FOCUSED);
 		}
 		pixmap = w->focused;
 	} else if (!GTK_WIDGET_IS_SENSITIVE(widget)) {
+		if ((c != w->c_disabled) && (w->disabled)) {
+			if (w->current == w->disabled)
+				w->current = NULL;
+			gtk_widget_unref(GTK_WIDGET(w->disabled));
+			w->disabled = NULL;
+		}
+		w->c_disabled = c;
 		if (!w->disabled) {
 			w->disabled = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_DISABLED);
 		}
 		pixmap = w->disabled;
 	} else {
+		if ((c != w->c_regular) && (w->regular)) {
+			if (w->current == w->regular)
+				w->current = NULL;
+			gtk_widget_unref(GTK_WIDGET(w->regular));
+			w->regular = NULL;
+		}
+		w->c_regular = c;
 		if (!w->regular) {
 			w->regular = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_REGULAR);
 		}
@@ -877,6 +866,7 @@ stock_pixmaps(void)
 	
 #if defined(DEBUG) && 0
 	{
+		time_t time(time_t *);
 		time_t t;
 		int i;
 		unsigned char *bla;
@@ -953,9 +943,13 @@ create_pixmap_from_imlib_scaled(GtkWidget *window, GtkStateType state,
 
 	if ((data->width != data->scaled_width) ||
 	    (data->height != data->scaled_height)) {
-		d = scale_down(window, state, (gchar *)data->rgb_data,
-			       data->width, data->height, data->scaled_width,
-			       data->scaled_height);
+		if (!gnome_config_get_bool("/Gnome/Icons/ImlibResize=false"))
+			d = scale_down(window, state, (gchar *)data->rgb_data,
+				       data->width, data->height,
+				       data->scaled_width,
+				       data->scaled_height);
+		else
+			return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped_at_size((gchar *)data->rgb_data, NULL, data->width, data->height, data->scaled_width, data->scaled_height, &shape_color);
 	} else {
 		d = (gchar *)data->rgb_data;
 	}
@@ -987,14 +981,18 @@ build_disabled_pixmap(GtkWidget *window, GtkStateType state,
 	GdkVisual *visual;
 	GdkImage *image;
 	GdkColorContext *cc;
-	GdkColor color;
 	GdkColormap *cmap;
 	gint32 red, green, blue;
-#ifdef NOT_ALWAYS_SHADE
 	GtkStyle *style;
-#endif
+	int use_stripple = -1;
 
 	g_return_if_fail(window != NULL);
+
+	/* values for use_stripple:
+	 * 0 - decide upon the value of cc->mode
+	 * 1 - always stripple
+	 * 2 - always shade */
+	use_stripple = gnome_config_get_int("/Gnome/Icons/Shade=0");
 
 	gdk_window_get_size(pixmap, &w, &h);
 	visual = gtk_widget_get_visual(GTK_WIDGET(*inout_pixmap));
@@ -1002,13 +1000,13 @@ build_disabled_pixmap(GtkWidget *window, GtkStateType state,
 	gc = gdk_gc_new (pixmap);
 
 	cc = gdk_color_context_new(visual, cmap);
-#ifdef NOT_ALWAYS_SHADE
-	if ((cc->mode != GDK_CC_MODE_TRUE) &&
-	    (cc->mode != GDK_CC_MODE_MY_GRAY)) {
+	if (((cc->mode != GDK_CC_MODE_TRUE) &&
+	     (cc->mode != GDK_CC_MODE_MY_GRAY) &&
+	     (use_stripple != 2)) || 
+	    (use_stripple == 1)) {
 		gdk_color_context_free(cc);
 		style = gtk_widget_get_style(window);
-		color = style->bg[state];
-		gdk_gc_set_foreground (gc, &color);
+		gdk_gc_set_foreground (gc, &style->bg[state]);
 		for (y = 0; y < h; y ++) {
 			for (x = y % 2; x < w; x += 2) {
 				gdk_draw_point(pixmap, gc, x, y);
@@ -1017,15 +1015,13 @@ build_disabled_pixmap(GtkWidget *window, GtkStateType state,
 		gdk_gc_destroy(gc);
 		return;
 	}
-#endif
 
 	image = gdk_image_get(pixmap, 0, 0, w, h);
 	gdk_gc_get_values(gc, &vals);
 	style = gtk_widget_get_style(window);
-	color = style->bg[state];
-	red = color.red;
-	green = color.green;
-	blue = color.blue;
+	red = style->bg[state].red;
+	green = style->bg[state].green;
+	blue = style->bg[state].blue;
 	for (y = 0; y < h; y++) {
 		for (x = 0; x < w; x++) {
 			GdkColor c;
@@ -1389,21 +1385,17 @@ gnome_stock_or_ordinary_button (const char *type)
 /*  menus  */
 /***********/
 
-static int use_icons = -1;
-
 GtkWidget *
 gnome_stock_menu_item(const char *type, const char *text)
 {
 	GtkWidget *hbox, *w, *menu_item;
+	int use_icons;
 
 	g_return_val_if_fail(type != NULL, NULL);
 	g_return_val_if_fail(gnome_stock_pixmap_checkfor(type, GNOME_STOCK_PIXMAP_REGULAR), NULL);
 	g_return_val_if_fail(text != NULL, NULL);
 
-	if (use_icons == -1) {
-		use_icons =
-			gnome_config_get_bool("Gnome/Icons/MenusUseIcons=true");
-	}
+	use_icons = gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true");
 	if (use_icons) {
 		hbox = gtk_hbox_new(FALSE, 2);
 		gtk_widget_show(hbox);

@@ -215,6 +215,26 @@ gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
 }
 
 GtkWidget *
+gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
+					    unsigned char *alpha,
+					    int rgb_width, int rgb_height,
+					    int width, int height,
+					    GdkImlibColor *shape_color)
+{
+	GnomePixmap *gpixmap;
+
+	g_return_val_if_fail(data != NULL, NULL);
+
+	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
+	gnome_pixmap_load_rgb_d_shaped_at_size (gpixmap, data, alpha,
+						rgb_width, rgb_height,
+						width, height,
+						shape_color);
+
+	return GTK_WIDGET (gpixmap);
+}
+
+GtkWidget *
 gnome_pixmap_new_from_imlib (GdkImlibImage *im)
 {
 	GnomePixmap *gpixmap;
@@ -606,6 +626,26 @@ gnome_pixmap_load_rgb_d_at_size (GnomePixmap *gpixmap, unsigned char *data, unsi
 	g_return_if_fail (height > 0);
 
 	load_rgb_d (gpixmap, data, alpha, rgb_width, rgb_height, TRUE, width, height);
+}
+
+void
+gnome_pixmap_load_rgb_d_shaped_at_size (GnomePixmap *gpixmap,
+					unsigned char *data,
+					unsigned char *alpha,
+					int rgb_width, int rgb_height,
+					int width, int height,
+					GdkImlibColor *shape_color)
+{
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (rgb_width > 0);
+	g_return_if_fail (rgb_height > 0);
+	g_return_if_fail (width > 0);
+	g_return_if_fail (height > 0);
+
+	load_rgb_d_shaped (gpixmap, data, alpha, rgb_width, rgb_height, TRUE,
+			   width, height, shape_color);
 }
 
 void

@@ -312,6 +312,7 @@ struct _GnomeStock {
 	GnomePixmap *regular, *disabled, *focused; /* pixmap cache */
 	GnomePixmap *current;
 	char *icon;
+	guint32 c_regular, c_disabled, c_focused;
 };
 
 struct _GnomeStockClass {
