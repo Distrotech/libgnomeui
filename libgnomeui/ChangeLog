@@ -1,3 +1,8 @@
+2001-02-23  Martin Baulig  <baulig@suse.de>
+
+	* gnome-init.c (gtk_pre_args_parse): Comment out setting
+	of `gtk_debug_flags' which has gone from GTK+.
+
 2001-01-15  Darin Adler  <darin@eazel.com>
 
 	* gnome-canvas.h: Fixed comment that was "improved" back
@@ -24,11 +29,6 @@
 	_, for the popt table names. 
 	(gnome_init_with_popt_table): Remove g_free that screws up the
 	popt option section.
-
-2001-02-23  Martin Baulig  <baulig@suse.de>
-
-	* gnome-init.c (gtk_pre_args_parse): Comment out setting
-	of `gtk_debug_flags' which has gone from GTK+.
 
 2001-01-29  John Harper  <jsh@eazel.com>
 

@@ -139,8 +139,10 @@ struct {
 static void
 gtk_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
 {
+#if 0
 	if (g_getenv ("GTK_DEBUG_OBJECTS"))
 		gtk_debug_flags |= GTK_DEBUG_OBJECTS;
+#endif
 		
         gnome_gtk_init_info.gtk_args = g_ptr_array_new();
 }
@@ -253,7 +255,7 @@ libgnomeui_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
         gboolean ctype_set;
         char *ctype, *old_ctype = NULL;
         gboolean do_crash_dialog = TRUE;
-        char *envar;
+        const char *envar;
 
         envar = g_getenv("GNOME_DISABLE_CRASH_DIALOG");
         if(envar)
