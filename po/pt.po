@@ -1,122 +1,122 @@
 # libgnomeui's Portuguese Translation
-# Copyright (C) 2001 Free Software Foundation, Inc.
+# Copyright (C) 2001 libgnomeui
+# Distributed under the same licence as the libgnomeui package
 # Duarte Loreto <happyguy_pt@hotmail.com>, 2002, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.2\n"
-"POT-Creation-Date: 2003-05-02 21:51+0100\n"
-"PO-Revision-Date: 2003-05-02 21:40+0000\n"
+"Project-Id-Version: 2.4\n"
+"POT-Creation-Date: 2003-05-20 01:17+0000\n"
+"PO-Revision-Date: 2003-05-20 01:20+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: libgnomeui/gnome-about.c:194
+#: libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr "Créditos"
 
-#: libgnomeui/gnome-about.c:223
+#: libgnomeui/gnome-about.c:230
 msgid "Written by"
 msgstr "Escrito por"
 
-#: libgnomeui/gnome-about.c:238
+#: libgnomeui/gnome-about.c:245
 msgid "Documented by"
 msgstr "Documentado por"
 
-#: libgnomeui/gnome-about.c:253
+#: libgnomeui/gnome-about.c:260
 msgid "Translated by"
 msgstr "Traduzido por"
 
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "_Créditos"
+#: libgnomeui/gnome-about.c:323
+msgid "C_redits"
+msgstr "C_réditos"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:378
 msgid "Program name"
 msgstr "Nome aplicação"
 
-#: libgnomeui/gnome-about.c:353
+#: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
 msgstr "O nome da aplicação"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:386
 msgid "Program version"
 msgstr "Versão aplicação"
 
-#: libgnomeui/gnome-about.c:361
+#: libgnomeui/gnome-about.c:387
 msgid "The version of the program"
 msgstr "A versão da aplicação"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
 msgstr "Texto de copyright"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
 msgstr "Informação de copyright da aplicação"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:401
 msgid "Comments string"
 msgstr "Texto de comentários"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
 msgstr "Comentários sobre a aplicação"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:408
 msgid "Authors"
 msgstr "Autores"
 
-#: libgnomeui/gnome-about.c:383
+#: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
 msgstr "Listagem dos autores da aplicação"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:411
 msgid "Author entry"
 msgstr "Registo autor"
 
-#: libgnomeui/gnome-about.c:386
+#: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
 msgstr "Um registo único de autor"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:419
 msgid "Documenters"
 msgstr "Documentadores"
 
-#: libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
 msgstr "Listagem de pessoas que documentam a aplicação"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
 msgstr "Registo documentador"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
 msgstr "Um registo único de documentador"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
 msgstr "Créditos de tradutores"
 
-#: libgnomeui/gnome-about.c:406
+#: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Crédito aos tradutores. Esta expressão deverá ser marcada como traduzível"
 
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logotipo"
 
-#: libgnomeui/gnome-about.c:414
+#: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
 msgstr "Um logotipo para a caixa sobre"
 
-#: libgnomeui/gnome-about.c:493
+#: libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
 msgstr "Sobre %s"
@@ -145,31 +145,31 @@ msgstr "Interactividade"
 msgid "Level of user activity required."
 msgstr "Nível de interactividade do utilizador requerida."
 
-#: libgnomeui/gnome-client.c:864
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "Especificar ID de gestão de sessão"
 
-#: libgnomeui/gnome-client.c:864
+#: libgnomeui/gnome-client.c:863
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:867
+#: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
 msgstr "Especificar prefixo da configuração gravada"
 
-#: libgnomeui/gnome-client.c:867
+#: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "PREFIXO"
 
-#: libgnomeui/gnome-client.c:870
+#: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
 msgstr "Desabilitar ligação ao gestor de sessões"
 
-#: libgnomeui/gnome-client.c:976
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Gestão de sessões"
 
-#: libgnomeui/gnome-client.c:2481
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Cancelar Terminar Sessão"
 
@@ -415,14 +415,14 @@ msgid "GNOME GUI Library"
 msgstr "Biblioteca GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
+#: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Ocorreram múltiplas falhas de segmentação; incapaz de mostrar diálogo de "
 "erro\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
+#: libgnomeui/gnome-ui-init.c:632
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1047,23 +1047,23 @@ msgstr ""
 "utilizar esta propriedade para obter a GtkEntry caso necessite de alterar ou "
 "verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Seleccionar ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Caminho"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Caminho para o ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Navegar..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Surge um selecctor de ficheiro para seleccionar um"
 
@@ -1206,7 +1206,7 @@ msgstr ""
 "GtkDialog caso necessite de alterar ou verificar qualquer uma das suas "
 "propriedades."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Sem Ícone"
 
@@ -1218,39 +1218,39 @@ msgstr "Incapaz de encontrar uma hbox, a utilizar selecção de ficheiro normal"
 msgid "Preview"
 msgstr "Antever"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Diálogo de selecção ícone"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Este diálogo permite-lhe seleccionar um ícone."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Selector Ícones"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Seleccione o ícone que deseja."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Selector Ícones"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Este botão irá abrir uma janela que lhe permite seleccionar um ícone."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Navegar"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Caminho ícones"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1338,6 +1338,9 @@ msgstr "Sans 14"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Sair do teste"
+
+#~ msgid "_Credits"
+#~ msgstr "_Créditos"
 
 #~ msgid "Find _Again"
 #~ msgstr "Procurar _Novamente"
