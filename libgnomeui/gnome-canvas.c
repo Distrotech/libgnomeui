@@ -10,8 +10,6 @@
 
 /* TO-DO list for the canvas:
  *
- * - Fix refcounting and destruction of items.
- *
  * - Have the canvas carry a list of areas to repaint.  If a request_repaint is made for an area
  *   that does not touch any of the areas of the list, queue the new area.  Else, grow the existing,
  *   touched area (see Gnumeric for reasons).
@@ -1209,8 +1207,6 @@ gnome_canvas_destroy (GtkObject *object)
 
 	if (GTK_OBJECT_CLASS (canvas_parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (canvas_parent_class)->destroy) (object);
-
-	printf ("canvas destroyed!\n");
 }
 
 GtkWidget *
