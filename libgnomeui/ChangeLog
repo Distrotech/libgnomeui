@@ -1,3 +1,9 @@
+2001-02-26  Martin Baulig  <baulig@suse.de>
+
+	* gnome-stock.h: Reverted to the state of gnome-libs stable.
+
+	* gnome-stock.[ch]: Tagged them as `before-martin-reverted-it'.
+
 2001-02-25  Martin Baulig  <baulig@suse.de>
 
 	* gnome-entry.[ch]: Move all deprecated functions to libcompat.
