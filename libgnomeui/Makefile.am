@@ -21,7 +21,7 @@ libgnomeuiincludedir = $(includedir)/libgnomeui
 INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) 		\
 	$(OAF_CFLAGS)					\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
-	$(GDK_IMLIB_CFLAGS)				\
+	-I$(top_srcdir)/gdk-pixbuf/src			\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
         -DGNOMEBINDIR=\""$(bindir)"\" 			\
@@ -69,7 +69,14 @@ libgnomeui10compat_a_SOURCES =\
 	gnome-spell.c			\
 	gnome-startup.c			\
 	gtkcauldron.c			\
-	gnomeui10-compat.c
+	gnome-canvas-image.c		\
+	gnome-canvas-load.c		\
+	gnomeui10-compat.c		\
+	gnome-druid-page-finish.c	\
+	gnome-icon-list.c		\
+	gnome-icon-item.c		\
+	gnome-icon-sel.c		\
+	gnome-icon-text.c
 
 libgnomeui10compatinclude_HEADERS = \
 	libgnomeui10compat.h		\
@@ -78,7 +85,15 @@ libgnomeui10compatinclude_HEADERS = \
 	gnome-spell.h			\
 	gnome-startup.h			\
 	gtkcauldron.h			\
-	gnomeui10-compat.h
+	gnome-canvas-image.h		\
+	gnome-canvas-load.h		\
+	gnomeui10-compat.h		\
+	gnome-druid-page-finish.h	\
+	gnome-icon-list.h		\
+	gnome-icon-item.h		\
+	gnome-icon-sel.h		\
+	gnome-icon-text.h
+
 endif
 
 EXTRA_HEADERS = 
@@ -92,10 +107,9 @@ libgnomeui_la_SOURCES = \
 	gnome-app-util.c		\
 	gnome-calculator.c              \
 	gnome-canvas.c			\
-##	gnome-canvas-image.c		\
-##	gnome-canvas-load.c		\
 	gnome-canvas-line.c		\
 	gnome-canvas-rect-ellipse.c	\
+	gnome-canvas-pixbuf.c		\
 	gnome-canvas-polygon.c		\
 	gnome-canvas-text.c		\
 	gnome-canvas-util.c		\
@@ -103,7 +117,7 @@ libgnomeui_la_SOURCES = \
 	gnome-client.c			\
 ##	gnome-color-picker.c		\
 	gnome-dateedit.c		\
-##	gnome-dentry-edit.c		\
+	gnome-dentry-edit.c		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -111,11 +125,10 @@ libgnomeui_la_SOURCES = \
 	gnome-dock-band.c		\
 	gnome-dock-item.c		\
 	gnome-dock-layout.c		\
-##	gnome-druid.c			\
-##	gnome-druid-page.c		\
-##	gnome-druid-page-start.c	\
-##	gnome-druid-page-standard.c	\
-##	gnome-druid-page-finish.c	\
+	gnome-druid.c			\
+	gnome-druid-page.c		\
+	gnome-druid-page-start.c	\
+	gnome-druid-page-standard.c	\
 	gnome-geometry.c		\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
@@ -123,10 +136,6 @@ libgnomeui_la_SOURCES = \
 	gnome-helpsys.c			\
 	gnome-href.c			\
 	gnome-ice.c			\
-##	gnome-icon-list.c		\
-##	gnome-icon-item.c		\
-##	gnome-icon-sel.c		\
-##	gnome-icon-text.c		\
 ##	gnome-icon-entry.c		\
 	gnome-init.c			\
 	gnome-less.c			\
@@ -166,17 +175,15 @@ gnome_headers = \
 	gnome-app-util.h		\
 	gnome-calculator.h              \
 	gnome-canvas.h			\
-##	gnome-canvas-image.h		\
 	gnome-canvas-line.h		\
-##	gnome-canvas-load.h		\
 	gnome-canvas-rect-ellipse.h	\
+	gnome-canvas-pixbuf.h		\
 	gnome-canvas-polygon.h		\
 	gnome-canvas-text.h		\
 	gnome-canvas-util.h		\
 	gnome-canvas-widget.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
-##	gnome-compat.h			\
 	gnome-dateedit.h		\
 	gnome-dentry-edit.h		\
 	gnome-dialog.h                  \
@@ -190,7 +197,6 @@ gnome_headers = \
 	gnome-druid-page.h		\
 	gnome-druid-page-start.h	\
 	gnome-druid-page-standard.h	\
-##	gnome-druid-page-finish.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\
@@ -198,10 +204,6 @@ gnome_headers = \
 	gnome-helpsys.h			\
 	gnome-href.h			\
 	gnome-ice.h			\
-##	gnome-icon-list.h		\
-##	gnome-icon-item.h		\
-##	gnome-icon-sel.h		\
-##	gnome-icon-text.h		\
 ##	gnome-icon-entry.h		\
 	gnome-init.h			\
 	gnome-less.h			\
