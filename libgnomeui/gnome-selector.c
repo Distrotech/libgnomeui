@@ -304,7 +304,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   clear),
-			gtk_marshal_VOID__UINT,
+			gnome_marshal_VOID__UINT,
 			GTK_TYPE_NONE, 1,
 			GTK_TYPE_UINT);
     gnome_selector_signals [FREEZE_SIGNAL] =
@@ -340,8 +340,8 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   get_uri),
-			gtk_marshal_POINTER__VOID,
-			GTK_TYPE_POINTER,
+			gnome_marshal_STRING__VOID,
+			GTK_TYPE_STRING,
 			0);
     gnome_selector_signals [SET_URI_SIGNAL] =
 	gtk_signal_new ("set_uri",
@@ -359,7 +359,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_file),
-			gnome_marshal_VOID__POINTER_INT_UINT_BOXED,
+			gnome_marshal_VOID__STRING_INT_UINT_BOXED,
 			GTK_TYPE_NONE, 4,
 			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
@@ -369,7 +369,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_directory),
-			gnome_marshal_VOID__POINTER_INT_UINT_BOXED,
+			gnome_marshal_VOID__STRING_INT_UINT_BOXED,
 			GTK_TYPE_NONE, 4,
 			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
@@ -379,7 +379,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_uri),
-			gnome_marshal_VOID__POINTER_INT_UINT_BOXED,
+			gnome_marshal_VOID__STRING_INT_UINT_BOXED,
 			GTK_TYPE_NONE, 4,
 			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
@@ -389,7 +389,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   update_uri_list),
-			gtk_marshal_VOID__UINT,
+			gnome_marshal_VOID__UINT,
 			GTK_TYPE_NONE, 1,
 			GTK_TYPE_UINT);
     gnome_selector_signals [GET_SELECTION_MODE_SIGNAL] =
@@ -415,7 +415,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   get_selection),
-			gtk_marshal_POINTER__VOID,
+			gnome_marshal_POINTER__VOID,
 			GTK_TYPE_POINTER,
 			0);
     gnome_selector_signals [SELECTION_CHANGED_SIGNAL] =
@@ -433,8 +433,8 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   get_entry_text),
-			gtk_marshal_POINTER__VOID,
-			GTK_TYPE_POINTER,
+			gnome_marshal_STRING__VOID,
+			GTK_TYPE_STRING,
 			0);
     gnome_selector_signals [SET_ENTRY_TEXT_SIGNAL] =
 	gtk_signal_new ("set_entry_text",
@@ -442,7 +442,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   set_entry_text),
-			gtk_marshal_VOID__POINTER,
+			gtk_marshal_VOID__STRING,
 			GTK_TYPE_NONE,
 			1,
 			GTK_TYPE_STRING);

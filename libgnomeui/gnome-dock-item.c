@@ -299,7 +299,7 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
 		    GTK_RUN_LAST,
 		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeDockItemClass, orientation_changed),
-		    gtk_marshal_NONE__ENUM,
+		    gtk_marshal_VOID__ENUM,
 		    GTK_TYPE_NONE, 0, GTK_TYPE_ENUM);
 
   

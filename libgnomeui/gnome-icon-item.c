@@ -827,7 +827,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, text_changed),
-			gtk_marshal_BOOL__NONE,
+			gtk_marshal_BOOLEAN__VOID,
 			GTK_TYPE_BOOL, 0);
 
 	iti_signals [HEIGHT_CHANGED] =
@@ -836,7 +836,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, height_changed),
-			gtk_marshal_NONE__NONE,
+			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE, 0);
 
 	iti_signals [WIDTH_CHANGED] =
@@ -845,7 +845,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, width_changed),
-			gtk_marshal_NONE__NONE,
+			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE, 0);
 
 	iti_signals[EDITING_STARTED] =
@@ -854,7 +854,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, editing_started),
-			gtk_marshal_NONE__NONE,
+			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE, 0);
 
 	iti_signals[EDITING_STOPPED] =
@@ -863,7 +863,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, editing_stopped),
-			gtk_marshal_NONE__NONE,
+			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE, 0);
 
 	iti_signals[SELECTION_STARTED] =
@@ -872,7 +872,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_FIRST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, selection_started),
-			gtk_marshal_NONE__NONE,
+			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE, 0);
 
 	iti_signals[SELECTION_STOPPED] =
@@ -881,7 +881,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_FIRST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, selection_stopped),
-			gtk_marshal_NONE__NONE,
+			gtk_marshal_VOID__VOID,
 			GTK_TYPE_NONE, 0);
 
 

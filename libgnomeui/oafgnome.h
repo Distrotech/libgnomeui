@@ -26,7 +26,7 @@
 #ifndef OAF_GNOME_H
 #define OAF_GNOME_H 1
 
-#include <libgnome/gnomelib-init2.h>
+#include <libgnome/gnome-program.h>
 
 extern GnomeModuleInfo liboafgnome_module_info;
 

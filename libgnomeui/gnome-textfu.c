@@ -314,7 +314,7 @@ gnome_textfu_class_init (GnomeTextFuClass *klass)
                     GTK_RUN_FIRST,
                     GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (GnomeTextFuClass, activate_uri),
-                    gtk_marshal_NONE__STRING,
+                    gtk_marshal_VOID__STRING,
                     GTK_TYPE_NONE, 1, GTK_TYPE_STRING);
 
 

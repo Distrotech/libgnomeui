@@ -30,7 +30,7 @@
 
 #include "gnome-vfs-util.h"
 
-#include <gtk/gdk-pixbuf-loader.h>
+#include <gdk-pixbuf/gdk-pixbuf-loader.h>
 #include <libgnomevfs/gnome-vfs-async-ops.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
 #include <libgnomevfs/gnome-vfs-utils.h>

@@ -474,13 +474,20 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
   argv[argc++] = iornum_buf;
 
   {
-    char *mydisplay = NULL;
-    gnome_program_attributes_get(gnome_program_get(), LIBGNOMEUI_PARAM_DISPLAY, &mydisplay, NULL);
+    const char *mydisplay = NULL;
+    GValue value = { 0, };
+
+    g_value_init (&value, G_TYPE_STRING);
+    g_object_get_property (G_OBJECT (gnome_program_get()),
+			   LIBGNOMEUI_PARAM_DISPLAY, &value);
+    mydisplay = g_value_get_string (&value);
 
     g_assert(mydisplay);
 
     g_snprintf(display_buf, sizeof(display_buf), "--display=%s%s", (mydisplay[0]==':')?oaf_hostname_get():"", mydisplay);
     argv[argc++] = display_buf;
+
+    g_value_unset (&value);
   }
 
   {

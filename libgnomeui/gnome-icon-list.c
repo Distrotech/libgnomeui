@@ -1881,7 +1881,7 @@ gil_class_init (GilClass *gil_class)
 			GTK_RUN_FIRST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, select_icon),
-			gnome_marshal_VOID__INT_POINTER,
+			gnome_marshal_VOID__INT_BOXED,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_INT,
 			GTK_TYPE_GDK_EVENT);
@@ -1892,7 +1892,7 @@ gil_class_init (GilClass *gil_class)
 			GTK_RUN_FIRST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, unselect_icon),
-			gnome_marshal_VOID__INT_POINTER,
+			gnome_marshal_VOID__INT_BOXED,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_INT,
 			GTK_TYPE_GDK_EVENT);
@@ -1903,7 +1903,7 @@ gil_class_init (GilClass *gil_class)
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, text_changed),
-			gnome_marshal_BOOLEAN__INT_POINTER,
+			gnome_marshal_BOOLEAN__INT_STRING,
 			GTK_TYPE_BOOL, 2,
 			GTK_TYPE_INT,
 			GTK_TYPE_POINTER);

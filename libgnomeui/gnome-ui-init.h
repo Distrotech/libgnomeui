@@ -28,17 +28,15 @@
 
 BEGIN_GNOME_DECLS
 
-#include "libgnome/gnomelib-init2.h"
+#include "libgnome/gnome-program.h"
 
-
-extern const char libgnomeui_param_crash_dialog[], libgnomeui_param_display[], libgnomeui_param_default_icon[];
-#define LIBGNOMEUI_PARAM_CRASH_DIALOG libgnomeui_param_crash_dialog
-#define LIBGNOMEUI_PARAM_DISPLAY libgnomeui_param_display
-#define LIBGNOMEUI_PARAM_DEFAULT_ICON libgnomeui_param_default_icon
+#define LIBGNOMEUI_PARAM_CRASH_DIALOG	"crash-dialog"
+#define LIBGNOMEUI_PARAM_DISPLAY	"display"
+#define LIBGNOMEUI_PARAM_DEFAULT_ICON	"default-icon"
 
 extern GnomeModuleInfo libgnomeui_module_info, gtk_module_info;
 
-#define LIBGNOMEUI_INIT GNOME_PARAM_MODULE,&libgnomeui_module_info
+#define LIBGNOMEUI_INIT GNOME_PARAM_MODULE_INFO,&libgnomeui_module_info
 
 /* The gnome_init define is in libgnomeui.h so it can be a macro */
 int gnome_init_with_popt_table(const char *app_id,

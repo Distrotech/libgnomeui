@@ -27,9 +27,6 @@
 #ifndef LIBGNOMEUI_H
 #define LIBGNOMEUI_H
 
-/* XXX: hmm this should be defined by the app I guess */
-#define GNOME_EXCLUDE_DEPRECATED 1
-
 #include "libgnome/gnome-defs.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"
@@ -37,9 +34,6 @@
 #include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-appbar.h"
 #include "libgnomeui/gnome-app-helper.h"
-#ifndef GNOME_EXCLUDE_EXPERIMENTAL
-#include "libgnomeui/gnome-app-util.h"
-#endif
 #include "libgnomeui/gnome-canvas.h"
 #include "libgnomeui/gnome-canvas-pixbuf.h"
 #include "libgnomeui/gnome-canvas-line.h"
@@ -52,20 +46,12 @@
 #include "libgnomeui/gnome-cursors.h"
 #include "libgnomeui/gnome-dialog.h"
 #include "libgnomeui/gnome-dialog-util.h"
-/* There are nice third-party libs for this; 
-   but maybe we should leave it. Let's assume it's
-   up in the air, but people who aren't cutting 
-   edge probably don't want to fool with it */
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gnome-dns.h"
-#endif
 #include "libgnomeui/gnome-dock.h"
 #include "libgnomeui/gnome-dock-band.h"
 #include "libgnomeui/gnome-dock-item.h"
 #include "libgnomeui/gnome-entry.h"
 #include "libgnomeui/gnome-selector.h"
 #include "libgnomeui/gnome-file-selector.h"
-#include "libgnomeui/gnome-file-entry.h"
 #include "libgnomeui/gnome-font-picker.h"
 #include "libgnomeui/gnome-gconf.h"
 #include "libgnomeui/gnome-geometry.h"
@@ -79,7 +65,6 @@
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-macros.h"
 #include "libgnomeui/gnome-messagebox.h"
-#include "libgnomeui/gnome-number-entry.h"
 /* Considering moving this to gnome-print, so this file 
    is deprecated but the API isn't */
 #include "libgnomeui/gnome-paper-selector.h"
@@ -87,10 +72,6 @@
 #include "libgnomeui/gnome-popup-menu.h"
 #include "libgnomeui/gnome-popup-help.h"
 #include "libgnomeui/gnome-pixmap.h"
-#include "libgnomeui/gnome-pixmap-entry.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gnome-preferences.h"
-#endif
 #include "libgnomeui/gnome-propertybox.h"
 #include "libgnomeui/gnome-scores.h"
 #include "libgnomeui/gnome-types.h"
@@ -100,7 +81,6 @@
 #include "libgnomeui/gtkdial.h"
 #include "libgnomeui/gtkpixmapmenuitem.h"
 #include "libgnomeui/gnome-dateedit.h"
-#include "libgnomeui/gnome-calculator.h"
 #include "libgnomeui/gnome-mdi.h"
 #include "libgnomeui/gnome-mdi-child.h"
 #include "libgnomeui/gnome-mdi-generic-child.h"
@@ -108,9 +88,6 @@
 #include "libgnomeui/gnometypebuiltins.h"
 #include "libgnomeui/gnome-winhints.h"
 #include "libgnomeui/gnome-href.h"
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gnome-procbar.h"
-#endif
 #include "libgnomeui/gnome-druid.h"
 #include "libgnomeui/gnome-druid-page.h"
 #include "libgnomeui/gnome-druid-page-edge.h"

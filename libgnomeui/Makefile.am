@@ -26,6 +26,7 @@ INCLUDES = \
 	$(GLIB_CFLAGS)					\
 	$(GTK_CFLAGS)					\
 	$(OAF_CFLAGS)					\
+	$(XML_CFLAGS)					\
 	$(LIBART_CFLAGS)				\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
@@ -329,7 +330,7 @@ libgnomeui_2_la_LDFLAGS = \
 
 #		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome-$(GNOME_INTERFACE_VERSION)
 
-libgnomeui_2_la_LIBADD = $(LIBGNOMEUI_LIBS) -lICE -lSM -lz -lxml
+libgnomeui_2_la_LIBADD = $(LIBGNOMEUI_LIBS) -lICE -lSM -lz $(XML_LIBS)
 
 LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 			\

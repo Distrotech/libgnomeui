@@ -49,7 +49,7 @@
 #include "wap-textfu.h"
 #include "gnome-cursors.h"
 #include "gnome-dialog-util.h"
-#include <libgnome/gnomelib-init2.h>
+#include <libgnome/gnome-program.h>
 #include <gdk/gdkx.h>
 
 #include <stdio.h>

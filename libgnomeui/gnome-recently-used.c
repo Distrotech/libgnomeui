@@ -29,7 +29,7 @@
 #include <sys/time.h>
 #include <stdlib.h>
 
-#include <libgnome/gnomelib-init2.h>
+#include <libgnome/gnome-program.h>
 
 #include <gtk/gtk.h>
 

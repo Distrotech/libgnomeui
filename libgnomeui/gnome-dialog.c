@@ -32,6 +32,8 @@
 #include "gnome-preferences.h"
 #include "gnome-dialog-util.h"
 
+#include "libgnomeuiP.h"
+
 struct _GnomeDialogPrivate {
   GtkWidget      *action_area; /* A button box, not an hbox */
 
@@ -109,7 +111,7 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
 		    GTK_RUN_LAST,
 		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeDialogClass, close),
-		    gtk_marshal_INT__NONE,
+		    gnome_marshal_INT__VOID,
 		    GTK_TYPE_INT, 0);
 
   dialog_signals[CLICKED] =
@@ -185,7 +187,7 @@ gnome_dialog_init_action_area (GnomeDialog * dialog)
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->_priv->action_area),
 			     gnome_preferences_get_button_layout());
 
-  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog->_priv->action_area), 
+  gtk_button_box_set_spacing (GTK_BOX (dialog->_priv->action_area), 
 			      GNOME_PAD);
 
   gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->_priv->action_area, 

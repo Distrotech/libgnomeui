@@ -46,6 +46,8 @@
 #include "gnome-mdi-child.h"
 #include "gnome-mdiP.h"
 
+#include "libgnomeuiP.h"
+
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
@@ -171,50 +173,50 @@ gnome_mdi_class_init (GnomeMDIClass *klass)
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE(object_class),
 				GTK_SIGNAL_OFFSET (GnomeMDIClass, add_child),
-				gtk_marshal_BOOLEAN__POINTER,
-				GTK_TYPE_BOOL, 1, gnome_mdi_child_get_type());
+				gnome_marshal_BOOLEAN__OBJECT,
+				GTK_TYPE_BOOL, 1, GNOME_TYPE_MDI_CHILD);
 	mdi_signals[REMOVE_CHILD] =
 		gtk_signal_new ("remove_child",
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE(object_class),
 				GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_child),
-				gtk_marshal_BOOLEAN__POINTER,
-				GTK_TYPE_BOOL, 1, gnome_mdi_child_get_type());
+				gnome_marshal_BOOLEAN__OBJECT,
+				GTK_TYPE_BOOL, 1, GNOME_TYPE_MDI_CHILD);
 	mdi_signals[ADD_VIEW] =
 		gtk_signal_new ("add_view",
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE(object_class),
 				GTK_SIGNAL_OFFSET (GnomeMDIClass, add_view),
-				gtk_marshal_BOOLEAN__POINTER,
-				GTK_TYPE_BOOL, 1, gtk_widget_get_type());
+				gnome_marshal_BOOLEAN__OBJECT,
+				GTK_TYPE_BOOL, 1, GTK_TYPE_WIDGET);
 	mdi_signals[REMOVE_VIEW] =
 		gtk_signal_new ("remove_view",
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE(object_class),
 				GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_view),
-				gtk_marshal_BOOLEAN__POINTER,
-				GTK_TYPE_BOOL, 1, gtk_widget_get_type());
+				gnome_marshal_BOOLEAN__OBJECT,
+				GTK_TYPE_BOOL, 1, GTK_TYPE_WIDGET);
 	mdi_signals[CHILD_CHANGED] =
 		gtk_signal_new ("child_changed",
 				GTK_RUN_FIRST,
 				GTK_CLASS_TYPE(object_class),
 				GTK_SIGNAL_OFFSET (GnomeMDIClass, child_changed),
-				gtk_marshal_VOID__POINTER,
-				GTK_TYPE_NONE, 1, gnome_mdi_child_get_type());
+				gtk_marshal_VOID__OBJECT,
+				GTK_TYPE_NONE, 1, GNOME_TYPE_MDI_CHILD);
 	mdi_signals[VIEW_CHANGED] =
 		gtk_signal_new ("view_changed",
 				GTK_RUN_FIRST,
 				GTK_CLASS_TYPE(object_class),
 				GTK_SIGNAL_OFFSET(GnomeMDIClass, view_changed),
-				gtk_marshal_VOID__POINTER,
-				GTK_TYPE_NONE, 1, gtk_widget_get_type());
+				gtk_marshal_VOID__OBJECT,
+				GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
 	mdi_signals[APP_CREATED] =
 		gtk_signal_new ("app_created",
 				GTK_RUN_FIRST,
 				GTK_CLASS_TYPE(object_class),
 				GTK_SIGNAL_OFFSET (GnomeMDIClass, app_created),
-				gtk_marshal_VOID__POINTER,
-				GTK_TYPE_NONE, 1, gnome_app_get_type());
+				gtk_marshal_VOID__OBJECT,
+				GTK_TYPE_NONE, 1, GNOME_TYPE_APP);
 	
 	
 	klass->add_child = NULL;

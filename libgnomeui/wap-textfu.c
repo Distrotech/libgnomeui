@@ -39,7 +39,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <gtk/gdk-pixbuf-loader.h>
+#include <gobject/gobject.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf-loader.h>
 #include <gdk/gdkkeysyms.h>
 #include "wap-textfu.h"
 
@@ -2227,49 +2229,49 @@ wap_textfu_class_init (WapTextFuClass *klass)
                     GTK_RUN_FIRST,
                     GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (WapTextFuClass, link_followed),
-                    gtk_marshal_NONE__STRING,
+                    gtk_marshal_VOID__STRING,
                     GTK_TYPE_NONE, 1, GTK_TYPE_STRING);
   textfu_signals[ANCHOR_FOLLOWED] = 
     gtk_signal_new ("anchor_followed",
                     GTK_RUN_FIRST,
                     GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (WapTextFuClass, anchor_followed),
-                    gtk_marshal_NONE__POINTER,
+                    gtk_marshal_VOID__POINTER,
                     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
   textfu_signals[PREV_FOLLOWED] = 
     gtk_signal_new ("prev_followed",
                     GTK_RUN_FIRST,
                     GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (WapTextFuClass, prev_followed),
-                    gtk_marshal_NONE__NONE,
+                    gtk_marshal_VOID__VOID,
                     GTK_TYPE_NONE, 0);
   textfu_signals[LOAD_DONE] = 
     gtk_signal_new ("load_done",
                     GTK_RUN_FIRST,
                     GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (WapTextFuClass, load_done),
-                    gtk_marshal_NONE__NONE,
+                    gtk_marshal_VOID__VOID,
                     GTK_TYPE_NONE, 0);
   textfu_signals[LOAD_ERROR] = 
     gtk_signal_new ("load_error",
                     GTK_RUN_FIRST,
                     GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (WapTextFuClass, load_error),
-                    gtk_marshal_NONE__NONE,
+                    gtk_marshal_VOID__VOID,
                     GTK_TYPE_NONE, 0);
   textfu_signals[ACTIVATE_CARD] = 
     gtk_signal_new ("activate_card",
                     GTK_RUN_FIRST,
                     GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (WapTextFuClass, activate_card),
-                    gtk_marshal_NONE__POINTER,
+                    gtk_marshal_VOID__POINTER,
                     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
   textfu_signals[DEACTIVATE_CARD] = 
     gtk_signal_new ("deactivate_card",
                     GTK_RUN_FIRST,
                     GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (WapTextFuClass, deactivate_card),
-                    gtk_marshal_NONE__POINTER,
+                    gtk_marshal_VOID__POINTER,
                     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
 
 
