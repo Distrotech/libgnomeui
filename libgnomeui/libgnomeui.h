@@ -3,8 +3,6 @@
 
 #define GNOME_EXCLUDE_DEPRECATED 1
 
-#include "libgnomeui/gnome-compat.h"
-
 #include "libgnome/gnome-defs.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"

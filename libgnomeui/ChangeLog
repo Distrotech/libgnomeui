@@ -1,3 +1,8 @@
+1999-12-07  Martin Baulig  <martin@home-of-linux.org>
+
+	* libgnomeui.h: Don't include "gnome-compat.h" which does no longer
+	exist.
+
 1999-12-05  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-dialog.c (gnome_dialog_button_clicked): no need for saving
