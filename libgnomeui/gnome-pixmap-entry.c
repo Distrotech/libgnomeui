@@ -57,8 +57,6 @@
 #include <libgnomevfs/gnome-vfs-mime.h>
 
 struct _GnomePixmapEntryPrivate {
-	GtkWidget *fentry;
-
 	GtkWidget *preview;
 	GtkWidget *preview_sw;
 	
@@ -171,8 +169,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 	if( ! pentry->_priv->preview)
 		return;
 	
-	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),
-					   FALSE);
+	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry), FALSE);
 
 	if(pentry->_priv->last_preview && t
 	   &&
@@ -232,8 +229,6 @@ changed_timeout_func(gpointer data)
 {
 	GSList *li,*tmp;
 
-	GDK_THREADS_ENTER();
-
 	tmp = changed_pentries;
 	changed_pentries = NULL;
 	if(tmp) {
@@ -244,8 +239,6 @@ changed_timeout_func(gpointer data)
 		return TRUE;
 	}
 	change_timeout = 0;
-
-	GDK_THREADS_LEAVE();
 
 	return FALSE;
 }
@@ -333,14 +326,6 @@ pentry_destroy(GtkObject *object)
 	/* remember, destroy can be run multiple times! */
 
 	pentry = GNOME_PIXMAP_ENTRY(object);
-
-	if(pentry->_priv->preview_sw)
-		gtk_widget_unref(pentry->_priv->preview_sw);
-	pentry->_priv->preview_sw = NULL;
-
-	if(pentry->_priv->preview)
-		gtk_widget_unref(pentry->_priv->preview);
-	pentry->_priv->preview = NULL;
 
 	g_free(pentry->_priv->last_preview);
 	pentry->_priv->last_preview = NULL;
@@ -472,8 +457,7 @@ drag_data_get  (GtkWidget          *widget,
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 
-	file = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),
-					      TRUE);
+	file = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry), TRUE);
 
 	if(!file) {
 		/*FIXME: cancel the drag*/

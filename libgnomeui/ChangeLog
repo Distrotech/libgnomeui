@@ -1,5 +1,14 @@
 2001-09-05  Anders Carlsson  <andersca@gnu.org>
 
+	* Makefile.am:	Build gnome-about.c and install gnome-about.h
+	
+	* gnome-pixmap-entry.c: (refresh_preview), (changed_timeout_func),
+	(pentry_destroy), (drag_data_get): Fix a double-free bug and remove
+	the unused GnomeFileEntry variable since we now inherit from 
+	GnomeFileEntry.
+
+2001-09-05  Anders Carlsson  <andersca@gnu.org>
+
 	* gnome-about.h: Add new GnomeAbout widget.
 
 	* gnome-about.c: Add new GnomeAbout widget.

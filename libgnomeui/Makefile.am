@@ -44,6 +44,7 @@ noinst_HEADERS = \
 libgnomeui_2_la_SOURCES = \
 	gnometypebuiltins.h		\
 	gnometypebuiltins.c		\
+	gnome-about.c			\
 	gnome-app.c			\
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
@@ -86,6 +87,7 @@ libgnomeui_2_la_SOURCES = \
 
 ## this lists all the non-generated headers
 gnome_headers = \
+	gnome-about.h			\
 	gnome-app.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
