@@ -51,6 +51,10 @@ AM_CONDITIONAL(FALSE, test x = y)
 dnl
 dnl Start of pkg-config checks
 dnl
+GNOME_PKGCONFIG_CHECK_MODULES(LIBGNOME, libgnome-2.0:1.96.0)
+AC_SUBST(LIBGNOME_CFLAGS)
+AC_SUBST(LIBGNOME_LIBS)
+
 GNOME_PKGCONFIG_CHECK_MODULES(LIBGNOMECANVAS, libgnomecanvas-2.0:1.96.0)
 AC_SUBST(LIBGNOMECANVAS_CFLAGS)
 AC_SUBST(LIBGNOMECANVAS_LIBS)
@@ -59,9 +63,9 @@ dnl AC_SUBST GTK+ version
 GTK_VERSION=`$PKG_CONFIG --modversion gtk+-2.0`
 AC_SUBST(GTK_VERSION)
 
-dnl GNOME_PKGCONFIG_CHECK_MODULES(LIBBONOBO, libbonobo-2.0:1.96.0)
-dnl AC_SUBST(LIBBONOBO_CFLAGS)
-dnl AC_SUBST(LIBBONOBO_LIBS)
+GNOME_PKGCONFIG_CHECK_MODULES(LIBBONOBOUI, libbonoboui-2.0:1.96.0)
+AC_SUBST(LIBBONOBOUI_CFLAGS)
+AC_SUBST(LIBBONOBOUI_LIBS)
 
 AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
 gnome-libs. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))

@@ -1,3 +1,7 @@
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
+	* configure.in: Depend on libbonoboui.
+
 2001-04-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Added nn and no to ALL_LINGUAS.
