@@ -250,10 +250,9 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
        hidden in glib that already does this :) */
        
     if(gnome_config_get_bool("/sound/system/settings/start_esd=true")
-       && gnome_config_get_bool("/sound/system/settings/event_sounds=true")) {
+       && gnome_config_get_bool("/sound/system/settings/event_sounds=true")
+       && gnome_triggerlist_topnode) {
       int n;
-
-      g_assert(gnome_triggerlist_topnode != NULL);
 
       for(n = 0; n < gnome_triggerlist_topnode->numsubtrees; n++) {
 	if(!strcmp(gnome_triggerlist_topnode->subtrees[n]->nodename,

@@ -2,6 +2,7 @@
 
 	* gnome-init.c (gnome_init_cb):
 	Added null-ptr-deref sanity checks.
+	Bugfix for trigger stuff to handle absent trigger list.
 
 1998-12-09  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
