@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2001-06-16 00:05-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -18,16 +18,16 @@ msgid "Credits"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+msgid "Written by"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:238
 #, fuzzy
-msgid "_Documented by"
+msgid "Documented by"
 msgstr "¬Å½Á¡ì¸ø:"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
+msgid "Translated by"
 msgstr ""
 
 #. Add the credits button

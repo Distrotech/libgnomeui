@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-08-03 15:36+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -22,16 +22,19 @@ msgstr "Tack"
 
 # SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+#, fuzzy
+msgid "Written by"
 msgstr "_Skrivet av"
 
 # SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
+#, fuzzy
+msgid "Documented by"
 msgstr "_Dokumenterat av"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
+#, fuzzy
+msgid "Translated by"
 msgstr "_Översatt av"
 
 #. Add the credits button

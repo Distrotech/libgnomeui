@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.1\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-07-22 13:09+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <gnome@softcatala.net>\n"
@@ -19,15 +19,18 @@ msgid "Credits"
 msgstr "Crèdits"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+#, fuzzy
+msgid "Written by"
 msgstr "_Escrit per"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
+#, fuzzy
+msgid "Documented by"
 msgstr "_Documentat per"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
+#, fuzzy
+msgid "Translated by"
 msgstr "_Traduït per"
 
 #. Add the credits button

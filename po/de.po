@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-11-15 12:57+0200\n"
 "Last-Translator: Benjamin Greiner <benjamin.greiner@gmx.net>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -20,15 +20,18 @@ msgid "Credits"
 msgstr "Mitwirkende"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+#, fuzzy
+msgid "Written by"
 msgstr "_Programm von"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
+#, fuzzy
+msgid "Documented by"
 msgstr "_Dokumentation von"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
+#, fuzzy
+msgid "Translated by"
 msgstr "_Übersetzung von"
 
 #. Add the credits button

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-05-25 23:28MET\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
@@ -23,15 +23,18 @@ msgid "Credits"
 msgstr "Gråces"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+#, fuzzy
+msgid "Written by"
 msgstr "_Sicrît pa"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
+#, fuzzy
+msgid "Documented by"
 msgstr "_Documinté pa"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
+#, fuzzy
+msgid "Translated by"
 msgstr "_Ratourné pa"
 
 #. Add the credits button

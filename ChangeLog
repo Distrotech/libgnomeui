@@ -1,3 +1,8 @@
+2002-11-27  Anders Carlsson  <andersca@gnu.org>
+
+	* libgnomeui/gnome-stock-icons.h: Include gtkstock.h.
+	#97429, reported by Ettore Perazzoli.
+
 2002-11-23  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* configure.in: Fix gtk-doc version detection.

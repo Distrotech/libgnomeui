@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.7\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-01-25 06:21+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: nynorsk <nn@li.org>\n"
@@ -18,17 +18,17 @@ msgid "Credits"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+msgid "Written by"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:238
 #, fuzzy
-msgid "_Documented by"
+msgid "Documented by"
 msgstr "Dokumenterar"
 
 #: libgnomeui/gnome-about.c:253
 #, fuzzy
-msgid "_Translated by"
+msgid "Translated by"
 msgstr "Omsetjarkreditering"
 
 #. Add the credits button

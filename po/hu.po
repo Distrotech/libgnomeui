@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-07-28 21:20+0100\n"
 "Last-Translator: Szabolcs Ban <shooby@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -19,15 +19,18 @@ msgid "Credits"
 msgstr "Köszönet"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+#, fuzzy
+msgid "Written by"
 msgstr "Ír_ta"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
+#, fuzzy
+msgid "Documented by"
 msgstr "_Dokumentáció"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
+#, fuzzy
+msgid "Translated by"
 msgstr "_Fordította"
 
 #. Add the credits button

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Anurag Seetha <anuragseetha@yahoo.com>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -22,19 +22,19 @@ msgstr "श्रेय"
 # libgnomeui/gnome-about.c:210
 #: libgnomeui/gnome-about.c:223
 #, fuzzy
-msgid "_Written by"
+msgid "Written by"
 msgstr "लेखक"
 
 # libgnomeui/gnome-about.c:224
 #: libgnomeui/gnome-about.c:238
 #, fuzzy
-msgid "_Documented by"
+msgid "Documented by"
 msgstr "दस्तावेज लेखक"
 
 # libgnomeui/gnome-about.c:238
 #: libgnomeui/gnome-about.c:253
 #, fuzzy
-msgid "_Translated by"
+msgid "Translated by"
 msgstr "अनुवादक"
 
 # libgnomeui/gnome-about.c:295

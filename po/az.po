@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2001-12-19 19:49GMT+0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
@@ -19,17 +19,17 @@ msgid "Credits"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+msgid "Written by"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:238
 #, fuzzy
-msgid "_Documented by"
+msgid "Documented by"
 msgstr "Sənədləşdirici"
 
 #: libgnomeui/gnome-about.c:253
 #, fuzzy
-msgid "_Translated by"
+msgid "Translated by"
 msgstr "Tərcüməçi kreditləri"
 
 #. Add the credits button

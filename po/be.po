@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-11-04 09:32+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-11-05 11:36+0200\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -17,15 +17,18 @@ msgid "Credits"
 msgstr "Падзякі"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+#, fuzzy
+msgid "Written by"
 msgstr "_Аўтары"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
+#, fuzzy
+msgid "Documented by"
 msgstr "Аўтары _дакумэнтацыі"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
+#, fuzzy
+msgid "Translated by"
 msgstr "Аўтары _перакладу"
 
 #. Add the credits button
@@ -102,7 +105,8 @@ msgid "Translator credits"
 msgstr "Перакладчыкі інтэрфэйсу"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Падзякі перакладчыкам. Гэты радок мусьць быць пазначаны для перакладу."
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -413,12 +417,12 @@ msgid "GNOME GUI Library"
 msgstr "Бібліятэка графічнага інтэрфэйсу карыстальніку Gnome"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Шматлікія сыстэмныя памылкі; немагчыма паказаць дыялёг з памылкамі\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:631
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -520,7 +524,6 @@ msgstr "Падказка для элемэнту 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -578,7 +581,6 @@ msgid "_Game"
 msgstr "_Гульня"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Дапамога"
 
@@ -769,11 +771,11 @@ msgstr "Наладзіць дастасаваньне"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Пра праграму"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Пра праграму"
 
@@ -800,7 +802,7 @@ msgstr "Стварыць новае акно"
 msgid "_Close This Window"
 msgstr "Зачыніць _гэтае акно"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Зачыніць бягучае акно"
 
@@ -1331,7 +1333,5 @@ msgstr "%a, %d %b"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Выйсьці з тэсту"
-
+#~ msgid "Exit the test"
+#~ msgstr "Выйсьці з тэсту"

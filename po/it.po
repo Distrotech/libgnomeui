@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
+"POT-Creation-Date: 2002-11-27 22:03+0100\n"
 "PO-Revision-Date: 2002-03-03 17:35+0100\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -19,17 +19,17 @@ msgstr "Autori"
 
 #: libgnomeui/gnome-about.c:223
 #, fuzzy
-msgid "_Written by"
+msgid "Written by"
 msgstr "Scritto da"
 
 #: libgnomeui/gnome-about.c:238
 #, fuzzy
-msgid "_Documented by"
+msgid "Documented by"
 msgstr "Documentato da"
 
 #: libgnomeui/gnome-about.c:253
 #, fuzzy
-msgid "_Translated by"
+msgid "Translated by"
 msgstr "Tradotto da"
 
 #. Add the credits button
