@@ -434,7 +434,7 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 					 PROP_TIME,
 					 g_param_spec_ulong ("time",
 							     _("Time"),
-							     _("The time currently"
+							     _("The time currently "
 							       "selected"),
 							     0, G_MAXULONG,
 							     0,
