@@ -47,7 +47,7 @@ add_sized (GtkIconFactory *factory,
     GtkIconSource *source;
     GdkPixbuf *pixbuf;
 
-    pixbuf = gdk_pixbuf_new_from_stream (-1, inline_data, FALSE, NULL);
+    pixbuf = gdk_pixbuf_new_from_inline (-1, inline_data, FALSE, NULL);
 
     source = gtk_icon_source_new ();
     gtk_icon_source_set_pixbuf (source, pixbuf);
@@ -72,7 +72,7 @@ add_unsized (GtkIconFactory *factory,
     GtkIconSource *source;
     GdkPixbuf *pixbuf;
 
-    pixbuf = gdk_pixbuf_new_from_stream (-1, inline_data, FALSE, NULL);
+    pixbuf = gdk_pixbuf_new_from_inline (-1, inline_data, FALSE, NULL);
 
     source = gtk_icon_source_new ();
     gtk_icon_source_set_pixbuf (source, pixbuf);

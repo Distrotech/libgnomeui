@@ -1,3 +1,8 @@
+2001-10-10  jacob berkman  <jacob@ximian.com>
+
+	* gnome-stock-icons.c (add_unsized): 
+	(add_sized): update to new pixbuf api
+
 Tue Oct 09 19:35:23 2001  George Lebl <jirka@5z.com>
 
 	* gnome-gconf-ui.[ch], gnome-app-helper.c, gnome-app.c,
