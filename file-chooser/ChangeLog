@@ -1,3 +1,17 @@
+Wed Jul 23 17:52:01 2003  Owen Taylor  <otaylor@redhat.com>
+
+	* testfilechooser.c: Add over-big test case for preview
+	(much of size from a modified copy of
+	gdk_pixbuf_new_from_file_at_size())
+
+	* gtkfilechooserutils.[ch] gtkfilechooser.c
+	gtkfilechooserprivate.h gtkfilechooserimpldefault.c:
+	Add get_preview_path() as a virtual function; implement
+	update-preview signal that was in the header file.
+
+	* gtkfilechooserimpldefault.c: Finish a simple preview
+	widget implementation.
+
 Wed Jul 23 11:23:43 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* gtkfilefilter.[ch]: File filter objects.
