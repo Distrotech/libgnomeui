@@ -465,6 +465,7 @@ struct _GnomeCanvas {
 	/* GC for temporary draw pixmap */
 	GdkGC *pixmap_gc;
 
+
 	/* Whether items need update at next idle loop iteration */
 	unsigned int need_update : 1;
 
@@ -482,6 +483,9 @@ struct _GnomeCanvas {
 
 	/* Whether the canvas is in antialiased mode or not */
 	unsigned int aa : 1;
+
+	/* dither mode for aa drawing */
+	unsigned int dither : 2;
 };
 
 struct _GnomeCanvasClass {
@@ -594,6 +598,15 @@ gulong gnome_canvas_get_color_pixel (GnomeCanvas *canvas,
  */
 void gnome_canvas_set_stipple_origin (GnomeCanvas *canvas, GdkGC *gc);
 
+/* Controls the dithering used when the canvase renders.
+ * Only applicable to antialiased canvases - ignored by non-antialiased canvases.
+ */
+void gnome_canvas_set_dither (GnomeCanvas *canvas, GdkRgbDither dither);
+
+/* Returns the dither mode of an antialiased canvas.
+ * Only applicable to antialiased canvases - ignored by non-antialiased canvases.
+ */
+GdkRgbDither gnome_canvas_get_dither (GnomeCanvas *canvas);
 
 END_GNOME_DECLS
 

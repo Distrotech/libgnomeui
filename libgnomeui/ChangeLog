@@ -1,3 +1,9 @@
+2000-11-30  Mike Engber  <engber@eazel.com>
+
+	* gnome-canvas.c:
+	* gnome-canvas.h:
+	add dithered rendering support for antialiased canvases
+
 2000-11-28  Morten Welinder  <terra@diku.dk>
 
 	* gnome-druid-page-standard.c

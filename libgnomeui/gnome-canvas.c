@@ -2300,6 +2300,8 @@ gnome_canvas_init (GnomeCanvas *canvas)
 	canvas->pick_event.crossing.x = 0;
 	canvas->pick_event.crossing.y = 0;
 
+	canvas->dither = GDK_RGB_DITHER_NORMAL;
+
 	gtk_layout_set_hadjustment (GTK_LAYOUT (canvas), NULL);
 	gtk_layout_set_vadjustment (GTK_LAYOUT (canvas), NULL);
 
@@ -3265,16 +3267,18 @@ paint (GnomeCanvas *canvas)
 							     + canvas->zoom_yofs),
 							    width, height);
 				} else {
-					gdk_draw_rgb_image (canvas->layout.bin_window,
+					gdk_draw_rgb_image_dithalign (canvas->layout.bin_window,
 							    canvas->pixmap_gc,
 							    (draw_x1 - DISPLAY_X1 (canvas)
 							     + canvas->zoom_xofs),
 							    (draw_y1 - DISPLAY_Y1 (canvas)
 							     + canvas->zoom_yofs),
 							    width, height,
-							    GDK_RGB_DITHER_NONE,
+							    canvas->dither,
 							    buf.buf,
-							    IMAGE_WIDTH_AA * 3);
+							    IMAGE_WIDTH_AA * 3,
+							    canvas->draw_xofs,
+							    canvas->draw_yofs);
 				}
 				canvas->draw_xofs = draw_x1;
 				canvas->draw_yofs = draw_y1;
@@ -4136,4 +4140,39 @@ gnome_canvas_set_stipple_origin (GnomeCanvas *canvas, GdkGC *gc)
 	g_return_if_fail (gc != NULL);
 
 	gdk_gc_set_ts_origin (gc, -canvas->draw_xofs, -canvas->draw_yofs);
+}
+
+/**
+ * gnome_canvas_set_dither:
+ * @canvas: A canvas.
+ * @dither: Type of dither used to render an antialiased canvas.
+ *
+ * Controls dithered rendering for antialiased canvases. The value of dither
+ * should be; #GDK_RGB_DITHER_NONE, #GDK_RGB_DITHER_NORMAL, or
+ * #GDK_RGB_DITHER_MAX. The default canvas setting is #GDK_RGB_DITHER_NORMAL.
+ **/
+void
+gnome_canvas_set_dither (GnomeCanvas *canvas, GdkRgbDither dither)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	canvas->dither = dither;
+}
+
+/**
+ * gnome_canvas_get_dither:
+ * @canvas: A canvas.
+ *
+ * Returns the type of dithering used to render an antialiased canvas.
+ * 
+ * Return value: The dither setting.
+ **/
+GdkRgbDither
+gnome_canvas_get_dither (GnomeCanvas *canvas)
+{
+	g_return_val_if_fail (canvas != NULL, GDK_RGB_DITHER_NONE);
+	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), GDK_RGB_DITHER_NONE);
+
+	return canvas->dither;
 }
