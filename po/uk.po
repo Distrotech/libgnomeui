@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-04-22 12:30+0200\n"
+"POT-Creation-Date: 2002-04-29 16:20+0200\n"
 "PO-Revision-Date: 2002-04-11 09:55+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -124,55 +124,55 @@ msgstr "Емблема для блоку інформації про прогр�
 msgid "About %s"
 msgstr "Про %s"
 
-#: libgnomeui/gnome-appbar.c:748
+#: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
 msgstr "Має поступ"
 
-#: libgnomeui/gnome-appbar.c:749
+#: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
 msgstr "Створити віджет поступу."
 
-#: libgnomeui/gnome-appbar.c:756
+#: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
 msgstr "Має стан"
 
-#: libgnomeui/gnome-appbar.c:757
+#: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
 msgstr "Створити віджет стану."
 
-#: libgnomeui/gnome-appbar.c:764
+#: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
 msgstr "Інтерактивність"
 
-#: libgnomeui/gnome-appbar.c:765
+#: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
 msgstr "Вимагається рівень активності користувача."
 
-#: libgnomeui/gnome-client.c:833
+#: libgnomeui/gnome-client.c:836
 msgid "Specify session management ID"
 msgstr "Вказати ідентифікатор керування сеансом"
 
-#: libgnomeui/gnome-client.c:833
+#: libgnomeui/gnome-client.c:836
 msgid "ID"
 msgstr "ІДЕНТИФІКАТОР"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:839
 msgid "Specify prefix of saved configuration"
 msgstr "Вказати префікс збереженої конфіґурації"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:839
 msgid "PREFIX"
 msgstr "ПРЕФІКС"
 
-#: libgnomeui/gnome-client.c:839
+#: libgnomeui/gnome-client.c:842
 msgid "Disable connection to session manager"
 msgstr "Вимкнути з'єднання з менеджером сеансів"
 
-#: libgnomeui/gnome-client.c:945
+#: libgnomeui/gnome-client.c:948
 msgid "Session management"
 msgstr "Керування сеансами"
 
-#: libgnomeui/gnome-client.c:2483
+#: libgnomeui/gnome-client.c:2486
 msgid "Cancel Logout"
 msgstr "Відмінити завершення роботи"
 
@@ -184,52 +184,52 @@ msgstr "Отримано невірні дані кольору\n"
 msgid "Pick a color"
 msgstr "Вибрати колір"
 
-#: libgnomeui/gnome-dateedit.c:455
+#: libgnomeui/gnome-dateedit.c:476
 msgid "Time"
 msgstr "Час"
 
-#: libgnomeui/gnome-dateedit.c:456
+#: libgnomeui/gnome-dateedit.c:477
 msgid "The time currently selected"
 msgstr "Вибраний час"
 
-#: libgnomeui/gnome-dateedit.c:468
+#: libgnomeui/gnome-dateedit.c:489
 msgid "DateEdit Flags"
 msgstr "Індикатори DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:490
 msgid "Flags for how DateEdit looks"
 msgstr "Індикатори вигляду DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:478
+#: libgnomeui/gnome-dateedit.c:499
 msgid "Lower Hour"
 msgstr "Нижня година"
 
-#: libgnomeui/gnome-dateedit.c:479
+#: libgnomeui/gnome-dateedit.c:500
 msgid "Lower hour in the time popup selector"
 msgstr "Нижня година у вибирачі часу"
 
-#: libgnomeui/gnome-dateedit.c:489
+#: libgnomeui/gnome-dateedit.c:510
 msgid "Upper Hour"
 msgstr "Верхня година"
 
-#: libgnomeui/gnome-dateedit.c:490
+#: libgnomeui/gnome-dateedit.c:511
 msgid "Upper hour in the time popup selector"
 msgstr "Верхня година у вибирачі часу"
 
-#: libgnomeui/gnome-dateedit.c:500
+#: libgnomeui/gnome-dateedit.c:521
 msgid "Initial Time"
 msgstr "Початковий час"
 
-#: libgnomeui/gnome-dateedit.c:501
+#: libgnomeui/gnome-dateedit.c:522
 msgid "The initial time"
 msgstr "Початковий час"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:730
+#: libgnomeui/gnome-dateedit.c:751
 msgid "Calendar"
 msgstr "Календар"
 
-#: libgnomeui/gnome-dateedit.c:960
+#: libgnomeui/gnome-dateedit.c:981
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "функція gnome_date_edit_get_date небажаний, використовуйте "
@@ -431,19 +431,19 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Використання: gnome_segv2 назва_програми номер_сиґналу\n"
 
-#: libgnomeui/gnome_segv.c:138
+#: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
 msgstr "Підготувати звіт про помилку"
 
-#: libgnomeui/gnome_segv.c:149
+#: libgnomeui/gnome_segv.c:151
 msgid "Debug"
 msgstr "Налагодження"
 
-#: libgnomeui/gnome_segv.c:157
+#: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:163
+#: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Будь ласка, відвідайте сторінку збоїв прогам GNOME для додаткової інформації"
@@ -493,7 +493,7 @@ msgid "Hint for item 2"
 msgstr "Довідка елемента 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:530
 msgid "_File"
 msgstr "_Файл"
 
@@ -501,7 +501,7 @@ msgstr "_Файл"
 msgid "_File/"
 msgstr "_Файл/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:533
 msgid "_Edit"
 msgstr "Ви_правлення"
 
@@ -509,7 +509,7 @@ msgstr "Ви_правлення"
 msgid "_Edit/"
 msgstr "Ви_правлення/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:536
 msgid "_View"
 msgstr "Відо_браження"
 
@@ -517,7 +517,7 @@ msgstr "Відо_браження"
 msgid "_View/"
 msgstr "Відо_браження"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:539
 msgid "_Settings"
 msgstr "В_становлення"
 
@@ -526,7 +526,7 @@ msgid "_Settings/"
 msgstr "В_становлення/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:300
 msgid "_New"
 msgstr "_Новий"
 
@@ -534,7 +534,7 @@ msgstr "_Новий"
 msgid "_New/"
 msgstr "_Новий/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:542
 msgid "Fi_les"
 msgstr "Фай_ли"
 
@@ -542,15 +542,15 @@ msgstr "Фай_ли"
 msgid "Fi_les/"
 msgstr "Фай_ли/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:545
 msgid "_Windows"
 msgstr "_Вікна"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:551
 msgid "_Game"
 msgstr "_Гра"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:548
 msgid "_Help"
 msgstr "_Довідка"
 
@@ -623,12 +623,14 @@ msgstr "Закрити поточний файл"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-msgid "E_xit"
-msgstr "Ви_йти"
+#, fuzzy
+msgid "_Quit"
+msgstr "Ви_різати"
 
 #: libgnomeui/gnome-app-helper.c:147
-msgid "Exit the program"
-msgstr "Вийти з програми"
+#, fuzzy
+msgid "Quit the application"
+msgstr "Про програму"
 
 #.
 #. * The "Edit" menu
@@ -848,19 +850,23 @@ msgstr "Завершити поточну гру"
 msgid "_Help Contents"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2402
+#: libgnomeui/gnome-app-helper.c:2463
 msgid "Both text and icons"
 msgstr "Текст і піктограми"
 
-#: libgnomeui/gnome-app-helper.c:2403
+#: libgnomeui/gnome-app-helper.c:2464
+msgid "Both text and icons when horizontal, just icons when vertical"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2465
 msgid "Icons only"
 msgstr "Лише піктограми"
 
-#: libgnomeui/gnome-app-helper.c:2404
+#: libgnomeui/gnome-app-helper.c:2466
 msgid "Text only"
 msgstr "Лише текст"
 
-#: libgnomeui/gnome-app-helper.c:2455
+#: libgnomeui/gnome-app-helper.c:2526
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Типове для стільниці (%s)"
@@ -913,23 +919,23 @@ msgstr "Ідентифікатор програми"
 msgid "The application ID string"
 msgstr "Ідентифікаційний рядок програми"
 
-#: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Ідентифікатор історії"
 
-#: libgnomeui/gnome-entry.c:178
+#: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
 msgstr "Запис GTK"
 
-#: libgnomeui/gnome-entry.c:179
+#: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "Запис GTK"
 
-#: libgnomeui/gnome-file-entry.c:194 libgnomeui/gnome-icon-entry.c:170
+#: libgnomeui/gnome-file-entry.c:217 libgnomeui/gnome-icon-entry.c:173
 msgid "History ID"
 msgstr "Ідентифікатор історії"
 
-#: libgnomeui/gnome-file-entry.c:195
+#: libgnomeui/gnome-file-entry.c:218
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -937,19 +943,19 @@ msgstr ""
 "Унікальний ідентифікатор поля файлу. Він використовуватиметься для "
 "збереження списку історії."
 
-#: libgnomeui/gnome-file-entry.c:203 libgnomeui/gnome-icon-entry.c:179
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:182
 msgid "Browse Dialog Title"
 msgstr "Заголовок вікна вибору"
 
-#: libgnomeui/gnome-file-entry.c:204
+#: libgnomeui/gnome-file-entry.c:227
 msgid "Title for the Browse file dialog."
 msgstr "Заголовок вікна вибору файлів"
 
-#: libgnomeui/gnome-file-entry.c:211
+#: libgnomeui/gnome-file-entry.c:234
 msgid "Directory Entry"
 msgstr "Поле каталогу"
 
-#: libgnomeui/gnome-file-entry.c:212
+#: libgnomeui/gnome-file-entry.c:235
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -957,58 +963,58 @@ msgstr ""
 "Поле файлу використовуватиметься для вводу назв каталогів чи повних назв "
 "файлів."
 
-#: libgnomeui/gnome-file-entry.c:220
+#: libgnomeui/gnome-file-entry.c:243
 msgid "Modal"
 msgstr "Модальне"
 
-#: libgnomeui/gnome-file-entry.c:221
+#: libgnomeui/gnome-file-entry.c:244
 msgid "Whether the Browse file window should be modal."
 msgstr "Чи має вікно вибору файлу бути модальним."
 
-#: libgnomeui/gnome-file-entry.c:228 libgnomeui/gnome-icon-entry.c:195
+#: libgnomeui/gnome-file-entry.c:251 libgnomeui/gnome-icon-entry.c:198
 msgid "Filename"
 msgstr "Файл"
 
-#: libgnomeui/gnome-file-entry.c:229
+#: libgnomeui/gnome-file-entry.c:252
 msgid "Filename that should be displayed in the file entry."
 msgstr "Назва файлу, що відображатиметься у полі файлу."
 
-#: libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:260
 msgid "Default Path"
 msgstr "Початковий шлях"
 
-#: libgnomeui/gnome-file-entry.c:238
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Default path for the Browse file window."
 msgstr "Початковий шлях для вікна перегляду файлів."
 
-#: libgnomeui/gnome-file-entry.c:245
+#: libgnomeui/gnome-file-entry.c:268
 #, fuzzy
 msgid "GnomeEntry"
 msgstr "Запис GTK"
 
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:269
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:256
+#: libgnomeui/gnome-file-entry.c:279
 msgid "GtkEntry"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:257
+#: libgnomeui/gnome-file-entry.c:280
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:489
+#: libgnomeui/gnome-file-entry.c:514
 msgid "Select file"
 msgstr "Вибрати файл"
 
-#: libgnomeui/gnome-file-entry.c:627
+#: libgnomeui/gnome-file-entry.c:652
 msgid "_Browse..."
 msgstr "_Вибрати..."
 
@@ -1116,33 +1122,33 @@ msgstr ""
 "інформації для %s. Деякі з ваших конфіґураційних параметрів можуть працювати "
 "невірно."
 
-#: libgnomeui/gnome-icon-entry.c:171
+#: libgnomeui/gnome-icon-entry.c:174
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:183
 msgid "Title for the Browse icon dialog."
 msgstr "Заголовок вікна вибору піктограм"
 
-#: libgnomeui/gnome-icon-entry.c:187
+#: libgnomeui/gnome-icon-entry.c:190
 msgid "Pixmap Directory"
 msgstr "Каталог піктограм"
 
-#: libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-icon-entry.c:191
 msgid "Directory that will be searched for icons."
 msgstr "Каталог для пошуку поктограм."
 
-#: libgnomeui/gnome-icon-entry.c:196
+#: libgnomeui/gnome-icon-entry.c:199
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Назва файлу, що відображатиметься в полі піктограми."
 
-#: libgnomeui/gnome-icon-entry.c:204
+#: libgnomeui/gnome-icon-entry.c:207
 msgid "Picker dialog"
 msgstr "Діалог вибору"
 
-#: libgnomeui/gnome-icon-entry.c:205
+#: libgnomeui/gnome-icon-entry.c:208
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1150,20 +1156,20 @@ msgstr ""
 "Діалог вибору пактограм. Ви можете цю властивість, щоб отримати GtkDialog, "
 "якщо вам необхідно змінити чи опитати його властивості."
 
-#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:941
+#: libgnomeui/gnome-icon-entry.c:317 libgnomeui/gnome-icon-entry.c:963
 msgid "No Icon"
 msgstr "Немає піктограми"
 
-#: libgnomeui/gnome-icon-entry.c:522 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:525 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 "Незнайдено горизонтального блоку, використовується звичайний вибір файлу"
 
-#: libgnomeui/gnome-icon-entry.c:528 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "Перегляд"
 
-#: libgnomeui/gnome-icon-entry.c:963
+#: libgnomeui/gnome-icon-entry.c:985
 msgid "Browse"
 msgstr "Вибрати"
 
@@ -1243,6 +1249,12 @@ msgstr "%a %d %b %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr ""
+
+#~ msgid "E_xit"
+#~ msgstr "Ви_йти"
+
+#~ msgid "Exit the program"
+#~ msgstr "Вийти з програми"
 
 #~ msgid "Exit the test"
 #~ msgstr "Вийти з тесту"

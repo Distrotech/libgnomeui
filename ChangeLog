@@ -1,5 +1,7 @@
 2002-04-29  Anders Carlsson  <andersca@gnu.org>
 
+	* Release 1.116.0
+
 	* libgnomeui/gnome-app-helper.c:
 	(menus_have_tearoff_changed_notify), (gnome_app_fill_menu_custom):
 	* libgnomeui/gnome-app.c: (remove_notification_cb),
