@@ -139,6 +139,7 @@ static GtkStockItem builtin_items [] =
     { GNOME_STOCK_TEXT_NUMBERED_LIST, N_("Numbered List"), 0, 0, GETTEXT_PACKAGE },
     { GNOME_STOCK_TEXT_INDENT, N_("Indent"), 0, 0, GETTEXT_PACKAGE },
     { GNOME_STOCK_TEXT_UNINDENT, N_("Un-Indent"), 0, 0, GETTEXT_PACKAGE },
+    { GNOME_STOCK_ABOUT, N_("About"), 0, 0, GETTEXT_PACKAGE },
 };
 
 void
