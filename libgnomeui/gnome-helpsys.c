@@ -1285,25 +1285,52 @@ gnome_help_app_topics(const char *app_id)
 GtkWidget *
 gnome_widget_set_name(GtkWidget *widget, const char *name)
 {
-  gtk_widget_set_name(widget, name);
+	g_return_val_if_fail(widget != NULL, NULL);
+	g_return_val_if_fail(GTK_IS_WIDGET(widget), NULL);
 
-  return widget;
+	gtk_widget_set_name(widget, name);
+
+	return widget;
 }
+
+/*
+ * Tooltips
+ */
+
+static GtkTooltips *tooltips = NULL;
 
 /**
  * gnome_widget_set_tooltip:
  * @widget: A widget
  * @tiptext: The text to be placed in the tooltip
  *
- * Returns:
+ * Description:  Sets a tooltip for a widget
  */
 void
 gnome_widget_set_tooltip (GtkWidget *widget, const char *tiptext)
 {
-  static GtkTooltips *tips = NULL;
+	g_return_val_if_fail(widget != NULL, NULL);
+	g_return_val_if_fail(GTK_IS_WIDGET(widget), NULL);
 
-  if(!tips)
-    tips = gtk_tooltips_new();
+	if( ! tooltips)
+		tooltips = gtk_tooltips_new();
 
-  gtk_tooltips_set_tip(tips, widget, tiptext, NULL);
+	gtk_tooltips_set_tip(tooltips, widget, tiptext, NULL);
+}
+
+/**
+ * gnome_widget_get_tooltips:
+ *
+ * Description:  Gets the tooltips object so that you can
+ * manipulate tooltips that were set with #gnome_widget_set_tooltip
+ * 
+ * Returns:  a #GtkTooltips object
+ */
+GtkTooltips *
+gnome_widget_get_tooltips (void)
+{
+	if( ! tooltips)
+		tooltips = gtk_tooltips_new();
+
+	return tooltips;
 }

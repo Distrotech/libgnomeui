@@ -117,6 +117,7 @@ GSList *	gnome_help_app_topics		(const char *app_id);
 /*** Utility routines ***/
 void		gnome_widget_set_tooltip	(GtkWidget *widget,
 						 const char *tiptext);
+GtkTooltips *	gnome_widget_get_tooltips	(void);
 GtkWidget *	gnome_widget_set_name		(GtkWidget *widget,
 						 const char *name);
 

@@ -1,3 +1,9 @@
+Fri Aug 04 05:28:14 2000  George Lebl <jirka@5z.com>
+
+	* gnome-helpsys.[ch]:  Add a way to get at the GtkTooltips
+	  object used in gnome_widget_set_tooltip and add some precondition
+	  checks.
+
 Fri Aug 04 05:08:26 2000  George Lebl <jirka@5z.com>
 
 	* gnome-helpsys.[ch]:  In the grand tradition of most probably
