@@ -1,5 +1,11 @@
 1999-09-17  Federico Mena Quintero  <federico@redhat.com>
 
+	* gnome-dock.c (gnome_dock_add_floating_item): Do realization,
+	mapping, and redraw queueing the right way.
+	(gnome_dock_set_client_area): Likewise.
+
+	* gnome-dock-band.c (gnome_dock_band_insert): Likewise.
+
 	* gnome-app.c (gnome_app_set_contents): Do all the proper checks
 	with respect to the dock's new client area.  Also, connect a
 	signal handler to the parent_set signal of the contents.

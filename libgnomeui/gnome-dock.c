@@ -73,7 +73,7 @@ static void     gnome_dock_forall              (GtkContainer *container,
                                                 gboolean include_internals,
                                                 GtkCallback callback,
                                                 gpointer callback_data);
-          
+
 static void     size_request_v                 (GList *list,
                                                 GtkRequisition *requisition);
 static void     size_request_h                 (GList *list,
@@ -105,7 +105,7 @@ static gboolean remove_from_band_list          (GList **list,
 static void     forall_helper                  (GList *list,
                                                 GtkCallback callback,
                                                 gpointer callback_data);
-      
+
 static void     drag_begin                     (GtkWidget *widget,
                                                 gpointer data);
 static void     drag_end_bands                 (GList **list,
@@ -138,7 +138,7 @@ static void     drag_snap                      (GnomeDock *dock,
 static void     drag_motion                    (GtkWidget *widget,
                                                 gint x, gint y,
                                                 gpointer data);
-      
+
 static GnomeDockItem *get_docked_item_by_name  (GnomeDock *dock,
                                                 const gchar *name,
                                                 GnomeDockPlacement *placement_return,
@@ -888,7 +888,7 @@ drag_floating (GnomeDock *dock,
       else
         client_allocation = NULL;
 
-      if (rel_x < 0 
+      if (rel_x < 0
           || rel_x >= dock_allocation->width
           || rel_y < 0
           || rel_y >= dock_allocation->height
@@ -965,7 +965,7 @@ drag_check (GnomeDock *dock,
                   if (y < alloc->y + alloc->height / 2
                       && drag_to (dock, item, lp, x, y, FALSE))
                     return TRUE;
-                  else 
+                  else
                     return drag_new (dock, item, area, lp, x, y, FALSE);
                 }
             }
@@ -1279,9 +1279,9 @@ gnome_dock_get_type (void)
 
 /**
  * gnome_dock_new:
- * 
+ *
  * Description: Creates a new #GnomeDock widget.
- * 
+ *
  * Return value: The new widget.
  **/
 GtkWidget *
@@ -1305,7 +1305,7 @@ gnome_dock_new (void)
  * gnome_dock_allow_floating_items:
  * @dock: A pointer to a #GnomeDock widget
  * @enable: Specifies whether floating items are allowed in this dock
- * 
+ *
  * Description: Enable or disable floating items on @dock, according
  * to @enable.
  **/
@@ -1325,7 +1325,7 @@ gnome_dock_allow_floating_items (GnomeDock *dock,
  * @position: Position of the item in the specified band
  * @offset: Offset (in pixels) from the previous item in the same band
  * @in_new_band: Specifies whether a new band must be created for this item
- * 
+ *
  * Description: Add @item to @dock.  @placement can be either
  * %GNOME_DOCK_TOP, %GNOME_DOCK_RIGHT, %GNOME_DOCK_BOTTOM or
  * %GNOME_DOCK_LEFT, and specifies what area of the dock should
@@ -1419,7 +1419,7 @@ gnome_dock_add_item (GnomeDock *dock,
  * @x: X-coordinate for the floating item
  * @y: Y-coordinate for the floating item
  * @orientation: Orientation for the new item.
- * 
+ *
  * Description: Add @item to @dock and make it floating at the
  * specified (@x, @y) coordinates (relative to the root window of the
  * screen).
@@ -1446,23 +1446,15 @@ gnome_dock_add_floating_item (GnomeDock *dock,
 
   gtk_widget_set_parent (widget, GTK_WIDGET (dock));
 
-  if (GTK_WIDGET_VISIBLE (GTK_WIDGET (dock)))
-    {
-      if (GTK_WIDGET_REALIZED (GTK_WIDGET (dock))
-          && !GTK_WIDGET_REALIZED (item))
-        gtk_widget_realize (GTK_WIDGET (item));
+  if (GTK_WIDGET_REALIZED (widget->parent))
+    gtk_widget_realize (widget);
 
-      if (GTK_WIDGET_MAPPED (GTK_WIDGET (dock))
-          && ! GTK_WIDGET_MAPPED (item)
-          && GTK_WIDGET_VISIBLE (item)) /* as stated by `widget_system.txt' */
-        gtk_widget_map (GTK_WIDGET (item));
-    }
-
-  if (GTK_WIDGET_VISIBLE (dock))
+  if (GTK_WIDGET_VISIBLE (widget->parent) && GTK_WIDGET_VISIBLE (widget))
     {
-      /* gtk_widget_queue_resize (GTK_WIDGET (dock)); */
-      if (GTK_WIDGET_VISIBLE (item))
-        gtk_widget_queue_resize (GTK_WIDGET (item));
+      if (GTK_WIDGET_MAPPED (widget->parent))
+	gtk_widget_map (widget);
+
+      gtk_widget_queue_resize (widget);
     }
 
   gnome_dock_item_detach (item, x, y);
@@ -1479,7 +1471,7 @@ gnome_dock_add_floating_item (GnomeDock *dock,
  * gnome_dock_set_client_area:
  * @dock: A #GnomeDock widget
  * @widget: The widget to be used for the client area.
- * 
+ *
  * Description: Specify a widget for the dock's client area.
  **/
 void
@@ -1488,7 +1480,7 @@ gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget)
   g_return_if_fail (dock != NULL);
 
   if (widget != NULL)
-      gtk_widget_ref (widget);
+    gtk_widget_ref (widget);
 
   if (dock->client_area != NULL)
     gtk_widget_unparent (dock->client_area);
@@ -1498,19 +1490,16 @@ gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget)
       gtk_widget_set_parent (widget, GTK_WIDGET (dock));
       dock->client_area = widget;
 
-      if (GTK_WIDGET_VISIBLE (widget->parent))
-        {
-          if (GTK_WIDGET_REALIZED (widget->parent) &&
-              !GTK_WIDGET_REALIZED (widget))
-            gtk_widget_realize (widget);
-      
-          if (GTK_WIDGET_MAPPED (widget->parent) &&
-              !GTK_WIDGET_MAPPED (widget))
-            gtk_widget_map (widget);
-        }
-  
-      if (GTK_WIDGET_VISIBLE (widget) && GTK_WIDGET_VISIBLE (dock))
-        gtk_widget_queue_resize (widget);
+      if (GTK_WIDGET_REALIZED (widget->parent))
+	gtk_widget_realize (widget);
+
+      if (GTK_WIDGET_VISIBLE (widget->parent) && GTK_WIDGET_VISIBLE (widget))
+	{
+	  if (GTK_WIDGET_MAPPED (widget->parent))
+	    gtk_widget_map (widget);
+
+	  gtk_widget_queue_resize (widget);
+	}
     }
   else
     {
@@ -1526,10 +1515,10 @@ gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget)
 /**
  * gnome_dock_get_client_area:
  * @dock: A #GnomeDock widget.
- * 
+ *
  * Description: Retrieve the widget being used as the client area in
  * @dock.
- * 
+ *
  * Returns: The client area widget.
  **/
 GtkWidget *
@@ -1548,13 +1537,13 @@ gnome_dock_get_client_area (GnomeDock *dock)
  * of the item within the band
  * @offset_return: A pointer to a variable holding the offset of the item
  * from the previous item in the same band
- * 
+ *
  * Description: Retrieve the dock item named @name; information about
  * its position in the dock is returned via @placement_return,
  * @num_band_return, @band_position_return and @offset_return.  If
  * the placement is %GNOME_DOCK_FLOATING *@num_band_return,
  * *@band_position_return and *@offset_return are not set.
- * 
+ *
  * Returns: The named #GnomeDockItem widget, or %NULL if no item with
  * such name exists.
  **/
@@ -1638,9 +1627,9 @@ layout_add_bands (GnomeDock *dock,
 /**
  * gnome_dock_get_layout:
  * @dock: A #GnomeDock widget
- * 
+ *
  * Description: Retrieve the layout of @dock.
- * 
+ *
  * Returns: @dock's layout as a #GnomeDockLayout object.
  **/
 GnomeDockLayout *
@@ -1664,9 +1653,9 @@ gnome_dock_get_layout (GnomeDock *dock)
  * gnome_dock_add_from_layout:
  * @dock: The #GnomeDock widget
  * @layout: A #GnomeDockLayout widget
- * 
+ *
  * Description: Add all the items in @layout to the specified @dock.
- * 
+ *
  * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
  **/
 gboolean
