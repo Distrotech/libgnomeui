@@ -1,3 +1,14 @@
+2003-09-09  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserimpldefault.c (tree_selection_changed): Make the
+	list model read in directory information as well.
+	(set_cell_text_bold_if_folder): New utility function.  Sets a
+	cell's text, making it bold if the file info is a folder.
+	(list_name_data_func): Use set_cell_text_bold_if_folder().
+	(list_mtime_data_func): Use set_cell_text_bold_if_folder().
+	(list_size_data_func): Don't set anything if the file info is a
+	folder.
+
 2003-09-08  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystem.c (gtk_file_info_free): Free the display_key.
