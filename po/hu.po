@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2003-10-14 22:04+0200\n"
-"PO-Revision-Date: 2003-10-14 22:07+0200\n"
+"POT-Creation-Date: 2003-12-01 14:14+0100\n"
+"PO-Revision-Date: 2003-12-01 14:15+0100\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -1259,7 +1259,7 @@ msgstr "Pontszám"
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr "%Y. %B %-d., %A, %T"
+msgstr "%Y. %B %e., %A, %T"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
