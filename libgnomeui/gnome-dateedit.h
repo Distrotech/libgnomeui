@@ -32,4 +32,6 @@ GtkWidget *gnome_date_edit_new            (time_t the_time);
 void      gnome_date_edit_set_time        (GnomeDateEdit *gde, time_t the_time);
 void      gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour);
 
+END_GNOME_DECLS
+
 #endif
