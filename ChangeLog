@@ -1,3 +1,16 @@
+2002-04-04  jacob berkman  <jacob@ximian.com>
+
+	* libgnomeui/gnome-app-helper.c (create_help_entries): just create
+	1 entry which shows the table on contents
+	(help_view_display_callback): display our help file
+	(quote_string):
+	(get_toc_location):
+	(get_best_toc_location):
+	(get_topics): kill unused functions
+
+	fixes #73312, based on patch from Satyajit Kanungo
+	<satyajit.kanungo@wipro.com>
+	
 2002-04-04  Anders Carlsson  <andersca@gnu.org>
 
 	* libgnomeui/gnome-icon-sel.c: Remove debugging output.

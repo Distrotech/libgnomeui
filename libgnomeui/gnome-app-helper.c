@@ -1073,145 +1073,14 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	return pos;
 }
 
-static char *
-quote_string (const char *string)
-{
-	GString *new_string = g_string_new ("'");
-	int i;
-
-	for (i = 0; string[i] != '\0'; i++) {
-		if (string[i] == '\'') {
-			g_string_append (new_string, "'\\''");
-		} else {
-			g_string_append_c (new_string, string[i]);
-		}
-	}
-	g_string_append_c (new_string, '\'');
-
-	return g_string_free (new_string, FALSE);
-}
-
-static char *
-get_toc_location (const char *locale, const char *docname)
-{
-	char *cmd;
-	char *quoted;
-	char toc_location[PATH_MAX + 1];
-	FILE *fp;
-	int bytes;
-
-	quoted = quote_string (docname);
-	cmd = g_strdup_printf ("scrollkeeper-get-toc-from-docpath %s/%s",
-			       locale, quoted);
-	g_free (quoted);
-
-	fp = popen (cmd, "r");
-
-	g_free (cmd);
-
-	bytes = fread ((void *)toc_location, sizeof(char), PATH_MAX, fp);
-	if (pclose (fp) == 0 &&
-	    bytes > 0) {
-		/* cut the trailing '\n', and make
-		 * sure there is a null char */
-		toc_location[bytes - 1] = '\0';
-		return g_strdup (toc_location);
-	} else {
-		return NULL;
-	}
-}
-
-static char *
-get_best_toc_location (const char *docname)
-{
-	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
-
-	while (list != NULL) {
-		const char *locale = list->data;
-		char *ret = get_toc_location (locale, docname);
-		if (ret != NULL)
-			return ret;
-
-		list = list->next;
-	}
-
-	return NULL;
-}
-
-static GSList *
-get_topics (const char *docname)
-{
-	xmlDocPtr toc_doc;
-	GSList *list = NULL;
-	xmlNodePtr next_child;
-	errorSAXFunc xml_error_handler;
-    	warningSAXFunc xml_warning_handler;
-    	fatalErrorSAXFunc xml_fatal_error_handler;
-
-	char *toc_location = get_best_toc_location (docname);
-
-	if (toc_location == NULL)
-		return NULL;
-
-	/* Evil thing stolen from nautilus, this just looks
-	 * so evil it's not even pretty */
-	xml_error_handler = xmlDefaultSAXHandler.error;
-	xmlDefaultSAXHandler.error = NULL;
-	xml_warning_handler = xmlDefaultSAXHandler.warning;
-	xmlDefaultSAXHandler.warning = NULL;
-	xml_fatal_error_handler = xmlDefaultSAXHandler.fatalError;
-	xmlDefaultSAXHandler.fatalError = NULL;
-	toc_doc = xmlParseFile (toc_location);
-	xmlDefaultSAXHandler.error = xml_error_handler;
-    	xmlDefaultSAXHandler.warning = xml_warning_handler;
-    	xmlDefaultSAXHandler.fatalError = xml_fatal_error_handler;
-
-	if (toc_doc == NULL) {
-		g_free (toc_location);
-		return NULL;
-	}
-
-	/* FIXME: this is a TREE!!!! we only read toplevels */
-	for (next_child = toc_doc->xmlRootNode->xmlChildrenNode;
-	     next_child != NULL;
-	     next_child = next_child->next) {
-		if (g_ascii_strncasecmp (next_child->name,
-					 "tocsect", strlen ("tocsect")) == 0) {
-			char *content = xmlNodeGetContent (next_child);
-			char *linkid = xmlGetProp (next_child, "linkid");
-
-			if (content != NULL &&
-			    linkid != NULL) {
-				list = g_slist_append (list,
-						       g_strdup (content));
-				list = g_slist_append (list,
-						       g_strdup (linkid));
-			}
-
-			if (content != NULL)
-				xmlFree (content);
-		}
-	}
-
-	xmlFreeDoc (toc_doc);
-
-	return list;
-}
-
 static void
 help_view_display_callback (GtkWidget *w, gpointer data)
 {
-	char *section = data;
-	char *docname = g_object_get_data (G_OBJECT (w), "docname");
+	char *file_name = data;
 
 	/* FIXME: handle errors somehow */
-	if (docname == NULL ||
-	    section == NULL)
-		return;
-
-	/* FIXME: handle errors somehow */
-	gnome_help_display (docname,
-			    section,
+	gnome_help_display (file_name,
+			    NULL,
 			    NULL /* error */);
 }
 
@@ -1220,52 +1089,22 @@ help_view_display_callback (GtkWidget *w, gpointer data)
 static int
 create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 {
-	GSList *topics, *cur;
+	GtkWidget *item;
+	GtkWidget *label;
 
-	uiinfo->widget = NULL; /* No relevant widget, as we may have created
-				  several of them */
+	item = gtk_menu_item_new ();
+	label = create_label (_("_Help Contents"));
+	gtk_container_add (GTK_CONTAINER (item), label);
 
-	if (!uiinfo->moreinfo) {
-		g_warning ("GnomeUIInfo->moreinfo cannot be NULL for "
-				"GNOME_APP_UI_HELP");
-		return pos;
-	}
+	g_signal_connect_data (item, "activate",
+			       G_CALLBACK (help_view_display_callback),
+			       g_strdup (uiinfo->moreinfo), 
+			       (GClosureNotify) g_free, 0);
 
-	topics = get_topics ((const char *)uiinfo->moreinfo);
+	gtk_menu_shell_insert (menu_shell, item, pos);
+	gtk_widget_show (item);
 
-	for (cur = topics; cur && cur->next; cur = cur->next->next) {
-		GtkWidget *item;
-		GtkWidget *label;
-
-		item = gtk_menu_item_new ();
-		label = create_label (cur->data);
-		g_free(cur->data);
-		cur->data = NULL;
-
-		gtk_container_add (GTK_CONTAINER (item), label);
-/*		gtk_widget_lock_accelerators (item); */
-
-		g_object_set_data_full (G_OBJECT (item), "docname",
-					g_strdup (uiinfo->moreinfo),
-					g_free);
-
-		g_signal_connect_data (item, "activate",
-				       G_CALLBACK (help_view_display_callback),
-				       cur->next->data,
-				       (GClosureNotify) g_free,
-				       0);
-
-		cur->next->data = NULL;
-
-		gtk_menu_shell_insert (menu_shell, item, pos);
-		pos++;
-
-		gtk_widget_show (item);
-
-	}
-	g_slist_free(topics);
-
-	return pos;
+	return ++pos;
 }
 
 typedef struct
