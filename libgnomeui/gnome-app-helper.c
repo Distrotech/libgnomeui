@@ -26,12 +26,12 @@
 #include <ctype.h>
 #include <gtk/gtk.h>
 
-static void gnome_app_do_menu_creation        (GnomeApp *app,
+void gnome_app_do_menu_creation        (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       gint pos,
 					       GnomeUIInfo *menuinfo,
 					       GnomeUIBuilderData *uidata);
-static void gnome_app_do_ui_signal_connect    (GnomeApp *app,
+void gnome_app_do_ui_signal_connect    (GnomeApp *app,
 					       GnomeUIInfo *info_item,
 					       gchar *signal_name,
 					       GnomeUIBuilderData *uidata);
@@ -56,7 +56,7 @@ static void gnome_app_add_radio_toolbar_entries(GnomeApp *app,
 						GnomeUIInfo *tbinfo,
 						GnomeUIBuilderData *uidata);
 
-static void
+void
 gnome_app_do_menu_creation(GnomeApp *app,
 			   GtkWidget *parent_widget,
 			   gint pos,
@@ -606,7 +606,7 @@ gnome_app_create_toolbar_interp (GnomeApp *app,
   gnome_app_create_toolbar_custom(app, tbinfo, &uidata);
 }
 
-static void
+void
 gnome_app_do_ui_signal_connect (GnomeApp *app,
 				GnomeUIInfo *info_item,
 				gchar *signal_name,

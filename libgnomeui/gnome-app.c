@@ -159,6 +159,9 @@ gnome_app_configure_positions (GnomeApp *app)
 		if (app->menubar->parent->parent)
 			gtk_container_remove (GTK_CONTAINER(app->table), handlebox);
 
+		/* FUCK ME ... what is pos_menubar? */
+		g_message("pos_menubar: %d\n", app->pos_menubar);
+
 		gtk_table_attach(GTK_TABLE(app->table),
 				 handlebox,
 				 0, 3,

@@ -29,6 +29,9 @@
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-net.h"
+#ifdef GTK_HAVE_ACCEL_GROUP
+#include "libgnomeui/gnome-popupmenu.h"
+#endif
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-propertybox.h"
