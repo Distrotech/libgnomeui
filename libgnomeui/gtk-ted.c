@@ -314,6 +314,7 @@ lift_me (GtkWidget *w, GdkEventButton *event, GtkWidget *target)
 	gtk_widget_show (top);
 	gdk_pointer_grab (w->window, FALSE, GDK_BUTTON1_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
 			  NULL, NULL, GDK_CURRENT_TIME);
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "button_press_event");
 }
 
 /*
