@@ -1,3 +1,20 @@
+libgnomeui 2.9.2
+----------------
+
+What's new since 2.9.1
+
+* Bug fixes:
+	- Fix thread safety issues in the file chooser (Alex)
+	- Fix issues with loading/reloading in the file chooser
+	  (Federico)
+
+* Translations:
+	* Added Xhosa (xh)
+	* Updated Belarusian (be), Czech (cs), Estii (el), 
+	  Spanish (es), Greek (el), Finnish (fi), Lithuanian (lt), 
+	  Norwegian bokmål (no/nb), Persian (fa), Thai (th),
+	  Welsh (cy), 
+ 
 libgnomeui 2.9.1
 ----------------
 
