@@ -29,6 +29,16 @@
 #include <libart_lgpl/art_rect_svp.h>
 
 
+/**
+ * gnome_canvas_points_new:
+ * @num_points: The number of points to allocate space for in the array.
+ * 
+ * Creates a structure that should be used to pass an array of points to
+ * items.
+ * 
+ * Return value: A newly-created array of points.  It should be filled in
+ * by the user.
+ **/
 GnomeCanvasPoints *
 gnome_canvas_points_new (int num_points)
 {
@@ -44,6 +54,14 @@ gnome_canvas_points_new (int num_points)
 	return points;
 }
 
+/**
+ * gnome_canvas_points_ref:
+ * @points: A canvas points structure.
+ * 
+ * Increases the reference count of the specified points structure.
+ * 
+ * Return value: The canvas points structure itself.
+ **/
 GnomeCanvasPoints *
 gnome_canvas_points_ref (GnomeCanvasPoints *points)
 {
@@ -53,18 +71,47 @@ gnome_canvas_points_ref (GnomeCanvasPoints *points)
 	return points;
 }
 
+/**
+ * gnome_canvas_points_free:
+ * @points: A canvas points structure.
+ * 
+ * Decreases the reference count of the specified points structure.  If it
+ * reaches zero, then the structure is freed.
+ **/
 void
 gnome_canvas_points_free (GnomeCanvasPoints *points)
 {
 	g_return_if_fail (points != NULL);
 
 	points->ref_count -= 1;
-	if (points->ref_count == 0){
+	if (points->ref_count == 0) {
 		g_free (points->coords);
 		g_free (points);
 	}
 }
 
+/**
+ * gnome_canvas_get_miter_points:
+ * @x1: X coordinate of the first point
+ * @y1: Y coordinate of the first point
+ * @x2: X coordinate of the second (angle) point
+ * @y2: Y coordinate of the second (angle) point
+ * @x3: X coordinate of the third point
+ * @y3: Y coordinate of the third point
+ * @width: Width of the line
+ * @mx1: The X coordinate of the first miter point is returned here.
+ * @my1: The Y coordinate of the first miter point is returned here.
+ * @mx2: The X coordinate of the second miter point is returned here.
+ * @my2: The Y coordinate of the second miter point is returned here.
+ * 
+ * Given three points forming an angle, computes the coordinates of the inside
+ * and outside points of the mitered corner formed by a line of a given width at
+ * that angle.
+ * 
+ * Return value: FALSE if the angle is less than 11 degrees (this is the same
+ * threshold as X uses.  If this occurs, the return points are not modified.
+ * Otherwise, returns TRUE.
+ **/
 int
 gnome_canvas_get_miter_points (double x1, double y1, double x2, double y2, double x3, double y3,
 			       double width,
@@ -122,6 +169,21 @@ gnome_canvas_get_miter_points (double x1, double y1, double x2, double y2, doubl
 	return TRUE;
 }
 
+/**
+ * gnome_canvas_get_butt_points:
+ * @x1: X coordinate of first point in the line
+ * @y1: Y cooordinate of first point in the line
+ * @x2: X coordinate of second point (endpoint) of the line
+ * @y2: Y coordinate of second point (endpoint) of the line
+ * @width: Width of the line
+ * @project: Whether the butt points should project out by width/2 distance
+ * @bx1: X coordinate of first butt point is returned here
+ * @by1: Y coordinate of first butt point is returned here
+ * @bx2: X coordinate of second butt point is returned here
+ * @by2: Y coordinate of second butt point is returned here
+ * 
+ * Computes the butt points of a line segment.
+ **/
 void
 gnome_canvas_get_butt_points (double x1, double y1, double x2, double y2,
 			      double width, int project,
@@ -156,6 +218,19 @@ gnome_canvas_get_butt_points (double x1, double y1, double x2, double y2,
 	}
 }
 
+/**
+ * gnome_canvas_polygon_to_point:
+ * @poly: Vertices of the polygon.  X coordinates are in the even indices, and Y
+ * coordinates are in the odd indices
+ * @num_points: Number of points in the polygon
+ * @x: X coordinate of the point
+ * @y: Y coordinate of the point
+ * 
+ * Computes the distance between a point and a polygon.
+ * 
+ * Return value: The distance from the point to the polygon, or zero if the
+ * point is inside the polygon.
+ **/
 double
 gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y)
 {
@@ -285,9 +360,7 @@ gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y)
  * Render the svp over the buf.
  **/
 void
-gnome_canvas_render_svp (GnomeCanvasBuf *buf,
-			 ArtSVP *svp,
-			 guint32 rgba)
+gnome_canvas_render_svp (GnomeCanvasBuf *buf, ArtSVP *svp, guint32 rgba)
 {
 	guint32 fg_color, bg_color;
 
@@ -316,8 +389,8 @@ gnome_canvas_render_svp (GnomeCanvasBuf *buf,
  * @p_svp: a pointer to the existing svp
  * @new_svp: the new svp
  *
- * Sets the svp to the new value, requesting repaint on what's changed. This function takes responsibility for
- * freeing new_svp.
+ * Sets the svp to the new value, requesting repaint on what's changed. This
+ * function takes responsibility for freeing new_svp.
  **/
 void
 gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp)
@@ -356,8 +429,8 @@ gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp)
  * @new_svp: the new svp
  * @clip_svp: a clip path, if non-null
  *
- * Sets the svp to the new value, clipping if necessary, and requesting repaint on what's changed. This function takes
- * responsibility for freeing new_svp.
+ * Sets the svp to the new value, clipping if necessary, and requesting repaint
+ * on what's changed. This function takes responsibility for freeing new_svp.
  **/
 void
 gnome_canvas_update_svp_clip (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp, ArtSVP *clip_svp)
@@ -375,12 +448,9 @@ gnome_canvas_update_svp_clip (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_s
 
 /**
  * gnome_canvas_item_reset_bounds:
- * @item: the canvas item containing the svp that needs updating.
- * @p_svp: a pointer to the existing svp
- * @new_svp: the new svp
- *
- * Sets the svp to the new value, requesting repaint on what's changed. This function takes responsibility for
- * freeing new_svp. This routine also adds the svp's bbox to the item's.
+ * @item: A canvas item
+ * 
+ * Resets the bounding box of a canvas item to an empty rectangle.
  **/
 void
 gnome_canvas_item_reset_bounds (GnomeCanvasItem *item)
@@ -397,8 +467,9 @@ gnome_canvas_item_reset_bounds (GnomeCanvasItem *item)
  * @p_svp: a pointer to the existing svp
  * @new_svp: the new svp
  *
- * Sets the svp to the new value, requesting repaint on what's changed. This function takes responsibility for
- * freeing new_svp. This routine also adds the svp's bbox to the item's.
+ * Sets the svp to the new value, requesting repaint on what's changed. This
+ * function takes responsibility for freeing new_svp. This routine also adds the
+ * svp's bbox to the item's.
  **/
 void
 gnome_canvas_item_update_svp (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new_svp)
@@ -426,11 +497,12 @@ gnome_canvas_item_update_svp (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new
  * @new_svp: the new svp
  * @clip_svp: a clip path, if non-null
  *
- * Sets the svp to the new value, clipping if necessary, and requesting repaint on what's changed. This function takes
- * responsibility for freeing new_svp.
+ * Sets the svp to the new value, clipping if necessary, and requesting repaint
+ * on what's changed. This function takes responsibility for freeing new_svp.
  **/
 void
-gnome_canvas_item_update_svp_clip (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new_svp, ArtSVP *clip_svp)
+gnome_canvas_item_update_svp_clip (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new_svp,
+				   ArtSVP *clip_svp)
 {
 	ArtSVP *clipped_svp;
 
@@ -471,13 +543,15 @@ gnome_canvas_item_request_redraw_svp (GnomeCanvasItem *item, const ArtSVP *svp)
 /**
  * gnome_canvas_update_bbox:
  * @canvas: the canvas needing update
- * @x1, @y1, @x2, @y2: the new bbox
+ * @x1: Left coordinate of the new bounding box
+ * @y1: Top coordinate of the new bounding box
+ * @x2: Right coordinate of the new bounding box
+ * @y2: Bottom coordinate of the new bounding box
  *
  * Sets the bbox to the new value, requesting full repaint.
  **/
 void
-gnome_canvas_update_bbox (GnomeCanvasItem *item,
-			  int x1, int y1, int x2, int y2)
+gnome_canvas_update_bbox (GnomeCanvasItem *item, int x1, int y1, int x2, int y2)
 {
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	item->x1 = x1;
@@ -502,7 +576,10 @@ gnome_canvas_buf_ensure_buf (GnomeCanvasBuf *buf)
 	if (!buf->is_buf) {
 		bufptr = buf->buf;
 		for (y = buf->rect.y0; y < buf->rect.y1; y++) {
-			art_rgb_fill_run (bufptr, buf->bg_color >> 16, (buf->bg_color >> 8) & 0xff, buf->bg_color & 0xff,
+			art_rgb_fill_run (bufptr,
+					  buf->bg_color >> 16,
+					  (buf->bg_color >> 8) & 0xff,
+					  buf->bg_color & 0xff,
 					  buf->rect.x1 - buf->rect.x0);
 			bufptr += buf->buf_rowstride;
 		}

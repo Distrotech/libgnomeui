@@ -1,3 +1,8 @@
+1999-03-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-util.c: Added documentation for the functions that
+	were missing it.
+
 1999-03-04  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-canvas-util.h (gnome_canvas_points_unref): 

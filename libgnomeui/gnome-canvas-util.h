@@ -77,23 +77,22 @@ double gnome_canvas_polygon_to_point (double *poly, int num_points, double x, do
 
 
 /* Render the svp over the buf. */
-void
-gnome_canvas_render_svp (GnomeCanvasBuf *buf,
-			 ArtSVP *svp,
-			 guint32 rgba);
+void gnome_canvas_render_svp (GnomeCanvasBuf *buf, ArtSVP *svp, guint32 rgba);
 
 /* Sets the svp to the new value, requesting repaint on what's changed. This function takes responsibility for
  * freeing new_svp.
  */
 void gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp);
 
-/* Sets the svp to the new value, clipping if necessary, and requesting repaint on what's changed. This function takes
- * responsibility for freeing new_svp.
+/* Sets the svp to the new value, clipping if necessary, and requesting repaint
+ * on what's changed. This function takes responsibility for freeing new_svp.
  */
-void gnome_canvas_update_svp_clip (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp, ArtSVP *clip_svp);
+void gnome_canvas_update_svp_clip (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp,
+				   ArtSVP *clip_svp);
 
-/* Sets the svp to the new value, requesting repaint on what's changed. This function takes responsibility for
- * freeing new_svp. This routine also adds the svp's bbox to the item's.
+/* Sets the svp to the new value, requesting repaint on what's changed. This
+ * function takes responsibility for freeing new_svp. This routine also adds the
+ * svp's bbox to the item's.
  */
 void gnome_canvas_item_reset_bounds (GnomeCanvasItem *item);
 
@@ -102,22 +101,22 @@ void gnome_canvas_item_reset_bounds (GnomeCanvasItem *item);
  */
 void gnome_canvas_item_update_svp (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new_svp);
 
-/* Sets the svp to the new value, clipping if necessary, and requesting repaint on what's changed. This function takes
- * responsibility for freeing new_svp.
+/* Sets the svp to the new value, clipping if necessary, and requesting repaint
+ * on what's changed. This function takes responsibility for freeing new_svp.
  */
-void gnome_canvas_item_update_svp_clip (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new_svp, ArtSVP *clip_svp);
+void gnome_canvas_item_update_svp_clip (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new_svp,
+					ArtSVP *clip_svp);
 
-/* Request redraw of the svp if in aa mode, or the entire item in in xlib mode.
- */ 
+/* Request redraw of the svp if in aa mode, or the entire item in in xlib
+ * mode.
+ */
 void gnome_canvas_item_request_redraw_svp (GnomeCanvasItem *item, const ArtSVP *svp);
 
 /* Sets the bbox to the new value, requesting full repaint. */
-void gnome_canvas_update_bbox (GnomeCanvasItem *item,
-			       int x1, int y1, int x2, int y2);
+void gnome_canvas_update_bbox (GnomeCanvasItem *item, int x1, int y1, int x2, int y2);
 
 /* Ensure that the buffer is in RGB format, suitable for compositing. */
-void
-gnome_canvas_buf_ensure_buf (GnomeCanvasBuf *buf);
+void gnome_canvas_buf_ensure_buf (GnomeCanvasBuf *buf);
 
 END_GNOME_DECLS
 
