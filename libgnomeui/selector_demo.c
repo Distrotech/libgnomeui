@@ -57,6 +57,18 @@ selection_cb (void)
 	}
 }
 
+static void
+load_history_cb (void)
+{
+	gnome_selector_load_history (GNOME_SELECTOR (iselector));
+}
+
+static void
+save_history_cb (void)
+{
+	gnome_selector_save_history (GNOME_SELECTOR (iselector));
+}
+
 static GnomeUIInfo file_menu[] = {
 	{ GNOME_APP_UI_ITEM, "Exit", NULL, quit_cb, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'X',
@@ -68,7 +80,11 @@ static GnomeUIInfo test_menu[] = {
 	{ GNOME_APP_UI_ITEM, "Display file list", NULL, file_list_cb, NULL,
 	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 'f', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, "Display selection", NULL, selection_cb, NULL,
+	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 'l', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "Save history", NULL, save_history_cb, NULL,
 	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 's', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "Load history", NULL, load_history_cb, NULL,
+	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 'l', GDK_CONTROL_MASK, NULL },
         { GNOME_APP_UI_ENDOFINFO }
 };
 

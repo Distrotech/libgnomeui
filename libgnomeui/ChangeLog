@@ -1,3 +1,10 @@
+2000-08-06  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector.c: Support history loading and saving.
+	(gnome_selector_get_history_id, gnome_selector_set_history_id):
+	Removed; it makes not much sense to change this after the widget
+	has been created.
+
 Fri Aug 04 05:28:14 2000  George Lebl <jirka@5z.com>
 
 	* gnome-helpsys.[ch]:  Add a way to get at the GtkTooltips

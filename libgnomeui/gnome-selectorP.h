@@ -32,13 +32,19 @@
 #include <gtk/gtkvbox.h>
 #include <libgnome/gnome-defs.h>
 #include "gnome-selector.h"
-#include "gnome-entry.h"
+
+#include <gconf/gconf-client.h>
 
 BEGIN_GNOME_DECLS
 
 struct _GnomeSelectorPrivate {
+	GConfClient *client;
+
 	gchar       *history_id;
 	gchar       *dialog_title;
+
+	gchar       *gconf_history_dir;
+	gchar       *gconf_history_key;
 
 	GSList      *dir_list;
 	GSList      *file_list;

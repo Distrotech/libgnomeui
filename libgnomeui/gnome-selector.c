@@ -37,15 +37,14 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
-#include <gtk/gtkentry.h>
+#include <gtk/gtkhbox.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkbutton.h>
-#include <gtk/gtklist.h>
-#include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
 #include "libgnome/libgnomeP.h"
 #include "gnome-selectorP.h"
 #include "gnome-uidefs.h"
+#include "gnome-gconf.h"
 
 
 static void gnome_selector_class_init    (GnomeSelectorClass *class);
@@ -79,6 +78,7 @@ static void     update_file_list_handler (GnomeSelector   *selector);
 static void     free_entry_func          (gpointer         data,
 					  gpointer         user_data);
 
+#define GNOME_SELECTOR_GCONF_DIR "/desktop/standard/gnome-selector"
 
 static GtkVBoxClass *parent_class;
 
@@ -630,6 +630,19 @@ gnome_selector_construct (GnomeSelector *selector,
 
 	priv->flags = flags;
 
+	priv->client = gnome_get_gconf_client ();
+	gtk_object_ref (GTK_OBJECT (priv->client));
+
+	if (priv->history_id) {
+		priv->gconf_history_dir = gconf_concat_key_and_dir
+			(GNOME_SELECTOR_GCONF_DIR, priv->history_id);
+		priv->gconf_history_key = gconf_concat_key_and_dir
+			(priv->gconf_history_dir, "history");
+
+		gconf_client_add_dir (priv->client, priv->gconf_history_dir,
+				      GCONF_CLIENT_PRELOAD_NONE, NULL);
+	}
+
 	priv->selector_widget = selector_widget;
 	if (priv->selector_widget)
 		gtk_widget_ref (priv->selector_widget);
@@ -704,6 +717,17 @@ gnome_selector_destroy (GtkObject *object)
 
 	selector = GNOME_SELECTOR (object);
 
+	if (selector->_priv->client) {
+		if (selector->_priv->gconf_history_dir)
+			gconf_client_remove_dir
+				(selector->_priv->client,
+				 selector->_priv->gconf_history_dir,
+				 NULL);
+
+		gtk_object_unref (GTK_OBJECT (selector->_priv->client));
+		selector->_priv->client = NULL;
+	}
+
 	if (selector->_priv->selector_widget) {
 		gtk_widget_unref (selector->_priv->selector_widget);
 		selector->_priv->selector_widget = NULL;
@@ -740,6 +764,8 @@ gnome_selector_finalize (GObject *object)
 				 free_entry_func, selector);
 		g_free (selector->_priv->dialog_title);
 		g_free (selector->_priv->history_id);
+		g_free (selector->_priv->gconf_history_dir);
+		g_free (selector->_priv->gconf_history_key);
 	}
 
 	g_free (selector->_priv);
@@ -1261,27 +1287,6 @@ gnome_selector_activate_entry (GnomeSelector *selector)
 			 gnome_selector_signals [ACTIVATE_ENTRY_SIGNAL]);
 }
 
-const gchar *
-gnome_selector_get_history_id (GnomeSelector *selector)
-{
-	g_return_val_if_fail (selector != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
-
-	return selector->_priv->history_id;
-}
-
-void
-gnome_selector_set_history_id (GnomeSelector *selector,
-			       const gchar   *history_id)
-{
-	g_return_if_fail (selector != NULL);
-	g_return_if_fail (GNOME_IS_SELECTOR (selector));
-
-	if (selector->_priv->history_id)
-		g_free (selector->_priv->history_id);
-	selector->_priv->history_id = g_strdup (history_id);
-}
-
 guint
 gnome_selector_get_history_length (GnomeSelector *selector)
 {
@@ -1350,8 +1355,8 @@ gnome_selector_set_history_length (GnomeSelector *selector,
 }
 
 static void
-gnome_selector_add_history (GnomeSelector *selector, gboolean save,
-			    const gchar *text, gboolean append)
+_gnome_selector_add_history (GnomeSelector *selector, gboolean save,
+			     const gchar *text, gboolean append)
 {
 	GnomeSelectorHistoryItem *item;
 	GSList *node;
@@ -1391,7 +1396,7 @@ gnome_selector_prepend_history (GnomeSelector *selector, gboolean save,
 	g_return_if_fail (GNOME_IS_SELECTOR (selector));
 	g_return_if_fail (text != NULL);
 
-	gnome_selector_add_history (selector, save, text, FALSE);
+	_gnome_selector_add_history (selector, save, text, FALSE);
 }
 
 void
@@ -1402,7 +1407,7 @@ gnome_selector_append_history (GnomeSelector *selector, gboolean save,
 	g_return_if_fail (GNOME_IS_SELECTOR (selector));
 	g_return_if_fail (text != NULL);
 
-	gnome_selector_add_history (selector, save, text, TRUE);
+	_gnome_selector_add_history (selector, save, text, TRUE);
 }
 
 GSList *
@@ -1440,24 +1445,67 @@ gnome_selector_set_history (GnomeSelector *selector, GSList *history)
 	set_history_changed (selector);
 }
 
+static GSList *
+_gnome_selector_history_to_list (GnomeSelector *selector, gboolean only_save)
+{
+	GSList *thelist = NULL, *c;
+
+	g_return_val_if_fail (selector != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+	for (c = selector->_priv->history; c; c = c->next) {
+		GnomeSelectorHistoryItem *item = c->data;
+
+		if (only_save && !item->save)
+			continue;
+
+		thelist = g_slist_prepend (thelist, item->text);
+	}
+
+	thelist = g_slist_reverse (thelist);
+	return thelist;
+}
+
 void
 gnome_selector_load_history (GnomeSelector *selector)
 {
+	GSList *thelist;
+
 	g_return_if_fail (selector != NULL);
 	g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-	g_warning (G_STRLOC ": Not yet implemented.");
+	if (!selector->_priv->gconf_history_key)
+		return;
 
-	set_history_changed (selector);
+	thelist = gconf_client_get_list (selector->_priv->client,
+					 selector->_priv->gconf_history_key,
+					 GCONF_VALUE_STRING, NULL);
+
+	gnome_selector_set_history (selector, thelist);
+
+	g_slist_foreach (thelist, (GFunc) g_free, NULL);
+	g_slist_free (thelist);
 }
 
 void
 gnome_selector_save_history (GnomeSelector *selector)
 {
+	GSList *thelist;
+	gboolean result;
+
 	g_return_if_fail (selector != NULL);
 	g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-	g_warning (G_STRLOC ": Not yet implemented.");
+	if (!selector->_priv->gconf_history_key)
+		return;
+
+	thelist = _gnome_selector_history_to_list (selector, TRUE);
+
+	result = gconf_client_set_list (selector->_priv->client,
+					selector->_priv->gconf_history_key,
+					GCONF_VALUE_STRING, thelist, NULL);
+
+	g_slist_free (thelist);
 }
 
 void

@@ -194,11 +194,6 @@ void         gnome_selector_set_entry_text     (GnomeSelector *selector,
  * function to send an "activate" signal to it. */
 void         gnome_selector_activate_entry     (GnomeSelector *selector);
 
-/* Get/set the history id. */
-const gchar *gnome_selector_get_history_id     (GnomeSelector *selector);
-void         gnome_selector_set_history_id     (GnomeSelector *selector,
-                                                const gchar   *history_id);
-
 /* Get/set maximum number of history items we save. */
 guint        gnome_selector_get_history_length (GnomeSelector *selector);
 void         gnome_selector_set_history_length (GnomeSelector *selector,
