@@ -1,5 +1,8 @@
 2000-07-25  Martin Baulig  <baulig@suse.de>
 
+	* gnome-entry.[ch]: "privatized" it, added necessary accessor
+	functions for the now hidden members and added GtkArg stuff.
+
 	* gnome-procbar.[ch]: Marked this as deprecated and moved
 	it into the compat library.
 

@@ -45,6 +45,8 @@
 #define DEFAULT_MAX_HISTORY_SAVED 10  /* This seems to make more sense then 60*/
 
 struct _GnomeEntryPrivate {
+	gchar     *history_id;
+
 	GList     *items;
 
 	guint16    max_saved;
@@ -64,9 +66,20 @@ static void gnome_entry_init       (GnomeEntry      *gentry);
 static void gnome_entry_destroy    (GtkObject       *object);
 static void gnome_entry_finalize   (GObject         *object);
 
+static void entry_set_arg          (GtkObject       *object,
+				    GtkArg          *arg,
+				    guint           arg_id);
+static void entry_get_arg          (GtkObject       *object,
+				    GtkArg          *arg,
+				    guint           arg_id);
 
 static GtkComboClass *parent_class;
 
+enum {
+	ARG_0,
+	ARG_HISTORY_ID,
+	ARG_GTK_ENTRY
+};
 
 guint
 gnome_entry_get_type (void)
@@ -102,8 +115,56 @@ gnome_entry_class_init (GnomeEntryClass *class)
 
 	parent_class = gtk_type_class (gtk_combo_get_type ());
 
+	gtk_object_add_arg_type("GnomeEntry::history_id",
+				GTK_TYPE_STRING,
+				GTK_ARG_WRITABLE,
+				ARG_HISTORY_ID);
+	gtk_object_add_arg_type("GnomeEntry::gtk_entry",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READABLE,
+				ARG_GTK_ENTRY);
+
 	object_class->destroy = gnome_entry_destroy;
 	gobject_class->finalize = gnome_entry_finalize;
+	object_class->get_arg = entry_get_arg;
+	object_class->set_arg = entry_set_arg;
+}
+
+static void
+entry_set_arg (GtkObject *object,
+	       GtkArg *arg,
+	       guint arg_id)
+{
+	GnomeEntry *self;
+
+	self = GNOME_ENTRY (object);
+
+	switch (arg_id) {
+	case ARG_HISTORY_ID:
+		gnome_entry_set_history_id (self, GTK_VALUE_STRING(*arg));
+		gnome_entry_load_history (self);
+		break;
+	default:
+		break;
+	}
+}
+
+static void
+entry_get_arg (GtkObject *object,
+	       GtkArg *arg,
+	       guint arg_id)
+{
+	GnomeEntry *self;
+
+	self = GNOME_ENTRY (object);
+
+	switch (arg_id) {
+	case ARG_HISTORY_ID:
+		GTK_VALUE_STRING(*arg) = self->_priv->history_id;
+		break;
+	default:
+		break;
+	}
 }
 
 static void
@@ -138,10 +199,10 @@ gnome_entry_init (GnomeEntry *gentry)
 {
 	gentry->_priv = g_new0(GnomeEntryPrivate, 1);
 
-	gentry->_priv->changed    = FALSE;
-	gentry->history_id = NULL;
-	gentry->_priv->items      = NULL;
-	gentry->_priv->max_saved  = DEFAULT_MAX_HISTORY_SAVED;
+	gentry->_priv->changed      = FALSE;
+	gentry->_priv->history_id   = NULL;
+	gentry->_priv->items        = NULL;
+	gentry->_priv->max_saved    = DEFAULT_MAX_HISTORY_SAVED;
 
 	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (gentry)), "changed",
 			    (GtkSignalFunc) entry_changed,
@@ -220,8 +281,6 @@ static void
 gnome_entry_destroy (GtkObject *object)
 {
 	GnomeEntry *gentry;
-	GtkWidget *entry;
-	gchar *text;
 
 	/* remember, destroy can be run multiple times! */
 
@@ -230,7 +289,10 @@ gnome_entry_destroy (GtkObject *object)
 
 	gentry = GNOME_ENTRY (object);
 
-	if(gentry->history_id) {
+	if(gentry->_priv->history_id) {
+		GtkWidget *entry;
+		gchar *text;
+
 		entry = gnome_entry_gtk_entry (gentry);
 		text = gtk_entry_get_text (GTK_ENTRY (entry));
 
@@ -246,8 +308,8 @@ gnome_entry_destroy (GtkObject *object)
 
 		gnome_entry_save_history (gentry);
 
-		g_free (gentry->history_id);
-		gentry->history_id = NULL;
+		g_free (gentry->_priv->history_id);
+		gentry->_priv->history_id = NULL;
 
 		free_items (gentry);
 	}
@@ -290,7 +352,6 @@ gnome_entry_gtk_entry (GnomeEntry *gentry)
 	return GTK_COMBO (gentry)->entry;
 }
 
-
 /**
  * gnome_entry_set_history_id
  * @gentry: Pointer to GnomeEntry object.
@@ -308,10 +369,27 @@ gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (gentry->history_id)
-		g_free (gentry->history_id);
+	if (gentry->_priv->history_id)
+		g_free (gentry->_priv->history_id);
 
-	gentry->history_id = g_strdup (history_id); /* this handles NULL correctly */
+	gentry->_priv->history_id = g_strdup (history_id); /* this handles NULL correctly */
+}
+
+/**
+ * gnome_entry_get_history_id
+ * @gentry: Pointer to GnomeEntry object.
+ *
+ * Description: Returns the current history id of the GnomeEntry widget.
+ *
+ * Returns: The current history id.
+ */
+const gchar *
+gnome_entry_get_history_id (GnomeEntry *gentry)
+{
+	g_return_val_if_fail (gentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
+
+	return gentry->_priv->history_id;
 }
 
 
@@ -362,7 +440,7 @@ build_prefix (GnomeEntry *gentry, gboolean trailing_slash)
 	return g_strconcat ("/",
 			       gnome_program_get_name(gnome_program_get()),
 			       "/History: ",
-			       gentry->history_id,
+			       gentry->_priv->history_id,
 			       trailing_slash ? "/" : "",
 			       NULL);
 }
@@ -518,7 +596,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gnome_program_get_name(gnome_program_get()) && gentry->history_id))
+	if (!(gnome_program_get_name(gnome_program_get()) && gentry->_priv->history_id))
 		return;
 
 	free_items (gentry);
@@ -602,7 +680,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gnome_program_get_name(gnome_program_get()) && gentry->history_id))
+	if (!(gnome_program_get_name(gnome_program_get()) && gentry->_priv->history_id))
 		return;
 
 	prefix = build_prefix (gentry, TRUE);
