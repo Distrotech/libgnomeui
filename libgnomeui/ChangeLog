@@ -1,3 +1,8 @@
+2000-12-20  Martin Baulig  <baulig@suse.de>
+
+	* gnome-canvas-image.c: Removed.  This has been obsolated by
+	gnome-canvas-pixbuf.c and wasn't even compiled for a longer time.
+
 Sun Dec 17 14:28:05 2000  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c: attach INV button in the same way as other
