@@ -1,3 +1,9 @@
+1998-12-08  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app.c, gnome-app-helper.[ch]: Update for integrated
+	GtkToolbar space style functionality (obsoletes
+	gnome_app_toolbar_configure; removed).
+
 1998-12-08  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* libgnomeui.h: #Include "libgnomeui/gnome-dock.h"

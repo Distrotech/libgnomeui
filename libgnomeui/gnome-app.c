@@ -243,7 +243,6 @@ gnome_app_configure_positions (GnomeApp *app)
 					  0, 0);
 		}
 
-		gnome_app_configure_toolbar (GTK_TOOLBAR (app->toolbar));
 		gtk_widget_show (handlebox);
 		gtk_widget_unref (handlebox);
 	}
@@ -601,6 +600,8 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 
 	app->menubar = GTK_WIDGET(menubar);
 
+	/* Configure menu to gnome preferences, if possible.
+	 * (sync to gnome-app-helper.c:gnome_app_fill_menu_custom) */
 	if (!gnome_preferences_get_menubar_relief ())
 		gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar), GTK_SHADOW_NONE);
 	
@@ -670,15 +671,16 @@ gnome_app_set_toolbar (GnomeApp *app,
 	  gtk_widget_set_events(hb, GDK_BUTTON_PRESS_MASK);
 	}
 
-	if ( gnome_preferences_get_toolbar_relief() ||
-	     !gnome_preferences_get_toolbar_lines() ) {
-	  gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar), GNOME_PAD);
-	} else {
-	  gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar), GNOME_PAD_SMALL);
-	}
+	/* Configure toolbar to gnome preferences, if possible.
+	 * (sync to gnome_app_helper.c:gnome_app_toolbar_custom) */
+	if (gnome_preferences_get_toolbar_lines ()) {
+		gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_LINE);
+		gtk_toolbar_set_space_size (toolbar, GNOME_PAD * 2);
+	} else
+		gtk_toolbar_set_space_size (toolbar, GNOME_PAD);
 
-	if ( !gnome_preferences_get_toolbar_relief() )
-	  gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
+	if (!gnome_preferences_get_toolbar_relief ())
+		gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
 	
 	if (!gnome_preferences_get_toolbar_labels ())
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);

@@ -771,8 +771,8 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 	uiinfo->widget = GTK_WIDGET (menu_shell);
 
-	/* Configure menu to gnome preferences, if possible */
-	
+	/* Configure menu to gnome preferences, if possible.
+	 * (sync to gnome-app.c:gnome_app_set_menus) */
 	if (!gnome_preferences_get_menubar_relief () && GTK_IS_MENU_BAR (menu_shell))
 		gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (menu_shell), GTK_SHADOW_NONE);
 }
@@ -909,29 +909,8 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio,
 
 	switch (uiinfo->type) {
 	case GNOME_APP_UI_SEPARATOR:
-		if (gnome_preferences_get_toolbar_relief () ||
-		    !gnome_preferences_get_toolbar_lines ()) {
-			gtk_toolbar_append_space (toolbar);
-			uiinfo->widget = NULL; /* no meaningful widget for a 
-						  space */
-		} else {
-			GtkWidget *separator;
-			
-			if (toolbar->orientation == GTK_ORIENTATION_VERTICAL) {
-				separator = gtk_hseparator_new ();
-				gtk_widget_set_usize (separator, 
-						GNOME_PAD * 2, 0);
-			} else {
-				separator = gtk_vseparator_new ();
-				gtk_widget_set_usize (separator, 0, 
-						GNOME_PAD * 2);
-			}
-			gtk_widget_show (separator);
-			gtk_toolbar_append_space (toolbar);
-			gtk_toolbar_append_widget (toolbar, separator, NULL, NULL);
-			gtk_toolbar_append_space (toolbar);
-			uiinfo->widget = separator;
-		}
+		gtk_toolbar_append_space (toolbar);
+		uiinfo->widget = NULL; /* no meaningful widget for a space */
 		break;
 
 	case GNOME_APP_UI_ITEM:
@@ -1092,75 +1071,19 @@ gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 
 	uiinfo->widget = GTK_WIDGET (toolbar);
 
-	/* Configure toolbar to gnome preferences, if possible */
-	
-	if (gnome_preferences_get_toolbar_relief () ||
-	    !gnome_preferences_get_toolbar_lines ())
+	/* Configure toolbar to gnome preferences, if possible.
+	 * (sync to gnome_app.c:gnome_app_set_toolbar) */	
+	if (gnome_preferences_get_toolbar_lines ()) {
+		gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_LINE);
+		gtk_toolbar_set_space_size (toolbar, GNOME_PAD * 2);
+	} else
 		gtk_toolbar_set_space_size (toolbar, GNOME_PAD);
-	else
-		gtk_toolbar_set_space_size (toolbar, GNOME_PAD_SMALL);
-	
+
 	if (!gnome_preferences_get_toolbar_relief ())
 		gtk_toolbar_set_button_relief (toolbar, GTK_RELIEF_NONE);
 
 	if (!gnome_preferences_get_toolbar_labels ())
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
-}
-
-/**
- * gnome_app_configure_toolbar:
- * @toolbar: Toolbar created with gnome_app_fill_toolbar
- * 
- * Description: Configures a Gnome app toolbar to account for any changes in 
- * orientation, etc.
- **/
-void
-gnome_app_configure_toolbar (GtkToolbar *toolbar)
-{
-	GList *list;
-	int index;
-	GtkOrientation orientation;
-
-	g_return_if_fail (toolbar != NULL);
-	g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
-
-	orientation = GTK_TOOLBAR (toolbar)->orientation;
-
-	for (index = 0, list = toolbar->children; list; ++index) {
-		GtkToolbarChild *child = list->data;
-		GtkWidget *widget;
-		GtkWidget *separator;
-
-		list = list->next;
-		
-		if (!child || !child->widget ||
-		    child->type != GTK_TOOLBAR_CHILD_WIDGET ||
-		    !GTK_IS_SEPARATOR(child->widget) ||
-		    ((orientation == GTK_ORIENTATION_VERTICAL &&
-		      GTK_IS_HSEPARATOR (child->widget)) ||
-		     (orientation == GTK_ORIENTATION_HORIZONTAL &&
-		      GTK_IS_VSEPARATOR (child->widget))))
-			continue;
-
-		widget = child->widget;
-
-		/* Remove widget from toolbar */
-		gtk_container_remove (GTK_CONTAINER (toolbar), widget);
-		
-		/* Create new separator */
-		if (orientation == GTK_ORIENTATION_VERTICAL) {
-			separator = gtk_hseparator_new ();
-			gtk_widget_set_usize (separator, GNOME_PAD * 2, 0);
-		} else {
-			separator = gtk_vseparator_new ();
-			gtk_widget_set_usize (separator, 0, GNOME_PAD * 2);
-		}
-		gtk_widget_show (separator);
-
-		/* Insert into current position */
-		gtk_toolbar_insert_widget (toolbar, separator, NULL, NULL, 
-				index);
-	}
 }
 
 /**
