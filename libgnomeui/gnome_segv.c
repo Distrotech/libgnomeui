@@ -90,6 +90,11 @@ int main(int argc, char *argv[])
   if (args && args[0] && args[1])
     {
       char *base = g_path_get_basename (args[0]);
+      gsize bytes_read;
+      gsize bytes_written;
+      gchar* utfstr=g_locale_to_utf8(g_strsignal(atoi(args[1])),-1,&bytes_read,&bytes_written,NULL);
+      gchar* progstr=g_locale_to_utf8(args[0], -1, &bytes_read, &bytes_written, NULL);
+      
       if (strcmp(base, "gnome-session") == 0)
         {
           msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\n"
@@ -97,31 +102,35 @@ int main(int argc, char *argv[])
                                   "When you close this dialog, all applications will close "
                                   "and your session will exit.\n"
                                   "Please save all your files before closing this dialog."),
-                                getppid(), g_strsignal(atoi(args[1])));
+                                getppid(), utfstr);
           bb_sm_disable = 1;
         }
       else
         {
           msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed\ndue to a fatal error.\n(%s)"),
-                                args[0], getppid(), g_strsignal(atoi(args[1])));
+                                progstr, getppid(), utfstr);
         }
+      g_free(progstr);
+      g_free(utfstr);
       g_free(base);
       if(args[2])
 	app_version = args[2];
     }
   else
     {
-      fprintf(stderr, _("Usage: gnome_segv2 appname signum\n"));
+      gsize bytes_read;
+      gsize bytes_written;
+      gchar* localestr=g_locale_from_utf8(_("Usage: gnome_segv2 appname signum\n"),-1,&bytes_read,&bytes_written,NULL);
+      fprintf(stderr, localestr);
+      g_free(localestr);
       return 1;
     }
   appname = g_strdup(args[0]);
-
   mainwin = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
                                     GTK_MESSAGE_ERROR,
                                     GTK_BUTTONS_CLOSE,
                                     msg);
-
-
+  g_free(msg);
   
   bug_buddy_path = g_find_program_in_path ("bug-buddy");
   if (bug_buddy_path != NULL)
@@ -156,7 +165,6 @@ int main(int argc, char *argv[])
   gtk_widget_show(urlbtn);
   gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->vbox), urlbtn);
 
-  g_free(msg);
 
   res = gtk_dialog_run(GTK_DIALOG(mainwin));
 
