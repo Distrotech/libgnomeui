@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-29 04:41+0100\n"
+"POT-Creation-Date: 2004-01-13 05:12+0100\n"
 "PO-Revision-Date: 2002-12-29 15:05+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -380,7 +380,7 @@ msgstr "Eigenschappen van het bestand wijzigen"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr "Voorkeure_n"
+msgstr "_Voorkeuren"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -944,23 +944,23 @@ msgstr ""
 "eigenschap gebruiken om zonodig de GtkEntry op te vragen voor het aanpassen "
 "of opvragen van zijn parameters."
 
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "Kies bestand"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "Pad"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "Pad naar bestand"
 
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "_Bladeren..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "Bestandskiezer tonen om een bestand te selecteren"
 
@@ -1336,13 +1336,14 @@ msgstr "GNOME GUI-bibliotheek"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:705
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Er traden meerdere segmentatiefouten op; kan het fout-dialoogvenster niet "
 "tonen\n"
 
-#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:719
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1399,3 +1400,4 @@ msgstr "Bekijk de 'GNOME Application Crash'-pagina voor meer informatie"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Test afsluiten"
+
