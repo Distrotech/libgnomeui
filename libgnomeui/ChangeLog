@@ -1,3 +1,9 @@
+Fri Dec 14 16:24:04 2001  Jonathan Blandford  <jrb@redhat.com>
+
+	* libgnomeui.schemas: remove half-backed schema here.
+
+	* gnome-app-helper.c (setup_image_menu_item): change schema key.
+
 2001-12-14  Anders Carlsson  <andersca@gnu.org>
 
 	* Makefile.am: Fix marshal build.

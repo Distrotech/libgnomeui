@@ -467,7 +467,7 @@ setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
                                  conf, (GtkDestroyNotify)g_object_unref);
 
         if (gconf_client_get_bool(conf,
-                                  "/desktop/gnome/menus/show-icons",
+                                  "/desktop/gnome/interface/menus-have-icons",
                                   NULL)) {
                 GtkWidget *pixmap;
 
@@ -482,7 +482,7 @@ setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
         }
 
         notify_id = gconf_client_notify_add(conf,
-                                            "/desktop/gnome/menus/show-icons",
+                                            "/desktop/gnome/interface/menus-have-icons",
                                             showing_pixmaps_changed_notify,
                                             mi, NULL, NULL);
 
