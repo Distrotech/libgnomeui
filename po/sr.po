@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.4\n"
 "POT-Creation-Date: 2003-08-25 20:29+0200\n"
-"PO-Revision-Date: 2003-07-08 21:17+0200\n"
+"PO-Revision-Date: 2003-09-10 22:24+0200\n"
 "Last-Translator: Бојан Живановић <bojanz@panet.co.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr "Наговештај за 2. ставку"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
-msgstr "Захвале"
+msgstr "Заслуге"
 
 #: libgnomeui/gnome-about.c:230
 msgid "Written by"
@@ -51,7 +51,7 @@ msgstr "Превео"
 
 #: libgnomeui/gnome-about.c:323
 msgid "C_redits"
-msgstr "_Захвале"
+msgstr "_Заслуге"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
