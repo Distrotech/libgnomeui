@@ -2406,7 +2406,6 @@ gnome_app_insert_menus_interp (GnomeApp *app, const gchar *path,
 	gnome_app_insert_menus_custom(app, path, menuinfo, &uidata);
 }
 
-#ifdef ENABLE_NLS
 const gchar *
 gnome_app_helper_gettext (const gchar *str)
 {
@@ -2418,7 +2417,6 @@ gnome_app_helper_gettext (const gchar *str)
 
 	return s;
 }
-#endif
 
 static GConfEnumStringPair toolbar_styles[] = {
         { GTK_TOOLBAR_TEXT, "text" },
