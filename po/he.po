@@ -1,34 +1,37 @@
+# translation of libgnomeui.HEAD.he.po to Hebrew
 # translation of libgnomeui.gnome-2-0.he.po to Hebrew
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # Gil Osher <dolfin@rpg.org.il>, 2002
+# Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.gnome-2-0.he\n"
-"POT-Creation-Date: 2002-11-27 05:40+0100\n"
-"PO-Revision-Date: 2002-09-17 21:03+0300\n"
-"Last-Translator: Gil Osher <dolfin@rpg.org.il>\n"
+"Project-Id-Version: libgnomeui.HEAD.he\n"
+"POT-Creation-Date: 2002-11-30 06:04+0100\n"
+"PO-Revision-Date: 2002-11-30 22:48+0200\n"
+"Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0beta2\n"
 
 #: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr "תודות"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
-msgstr "_נכתב על-ידי"
+msgid "Written by"
+msgstr "נכתב על-ידי"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
-msgstr "_תועד על-ידי"
+msgid "Documented by"
+msgstr "תועד על-ידי"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
-msgstr "תו_רגם על-ידי"
+msgid "Translated by"
+msgstr "תורגם על-ידי"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -104,8 +107,7 @@ msgid "Translator credits"
 msgstr "תודות למתרגמים"
 
 #: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "תודות למתרגמים. מחרוזת זו צריכה להיות מסומנת כניתנת לתרגום"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -127,7 +129,7 @@ msgstr "יש התקדמות"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr ""
+msgstr "צור פריט פס התקדמות."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
@@ -135,15 +137,15 @@ msgstr "יש מצב"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr ""
+msgstr "צור פריט מצב."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
-msgstr ""
+msgstr "אינטראקטיביות"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
-msgstr ""
+msgstr "רמת פעילות משתמש דרושה."
 
 #: libgnomeui/gnome-client.c:860
 msgid "Specify session management ID"
@@ -167,7 +169,7 @@ msgstr ""
 
 #: libgnomeui/gnome-client.c:972
 msgid "Session management"
-msgstr ""
+msgstr "ניהול תצורות הפעלה"
 
 #: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
@@ -175,7 +177,7 @@ msgstr "בטל התחברות"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr ""
+msgstr "קיבל מידע צבע לא תקני\n"
 
 #: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
@@ -199,11 +201,11 @@ msgstr "הזמן הנוכחי שנבחר"
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
-msgstr ""
+msgstr "דגלי DateEdit"
 
 #: libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
-msgstr ""
+msgstr "דגלים הקובעים איך DateEdit יראה"
 
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
@@ -273,11 +275,11 @@ msgstr "תמונת לוגו"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
-msgstr ""
+msgstr "חתימת מים עילית"
 
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr ""
+msgstr "תמונת חתימת מים למעלה"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
@@ -285,7 +287,7 @@ msgstr "צבע הכותרת"
 
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
-msgstr ""
+msgstr "צבע קדמת הכותרת"
 
 #: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
@@ -293,7 +295,7 @@ msgstr "צבע הכותרת"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr ""
+msgstr "צבע קדמת הכותרת כ GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
@@ -314,7 +316,7 @@ msgstr "צבע רקע"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr ""
+msgstr "צבע רקע כ GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
@@ -335,7 +337,7 @@ msgstr "צבע רקע הלוגו"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
-msgstr ""
+msgstr "צבע רקע לוגו כ GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
@@ -396,7 +398,7 @@ msgstr "כפתור זה יקח אותך לכתובת שהוא מציג."
 #: libgnomeui/gnome-href.c:393
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"Please check the settings inPreferred Applications if they are correct."
 msgstr ""
 
 #: libgnomeui/gnome-ui-init.c:113
@@ -412,12 +414,12 @@ msgid "GNOME GUI Library"
 msgstr "ספריית ממשק המשתמש של GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:631
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -434,6 +436,11 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
+"מנהל תצורת העבודה של GNOME (תהליך %d) התרסק\n"
+"עקב שגיאה חמורה (%s).\n"
+"כאשר תסגור את תיבת דו-שיח זו, כל היישומים יסגרו ותצורת ההפעלה שלך "
+"תסתיים.\n"
+"אנא שמור את כל הקבצים שלך לפני סגירת תיבת דו-שיח זו."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -443,7 +450,7 @@ msgid ""
 "(%s)"
 msgstr ""
 "היישום \"%s\" (תהליך %d) התרסק\n"
-"עקב שגיאה מכרעת.\n"
+"עקב שגיאה חמורה.\n"
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:122
@@ -947,11 +954,11 @@ msgstr "זיהוי היסטוריה"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr ""
+msgstr "ערך GTK"
 
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr ""
+msgstr "ערך ה GTK"
 
 #: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
@@ -965,15 +972,15 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr ""
+msgstr "כותרת תיבת דו-שיח עיון"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
-msgstr ""
+msgstr "כותרת לתיבת הדו-שיח עיון."
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr ""
+msgstr "ערך סיפרייה"
 
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
@@ -983,7 +990,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
-msgstr "מודל"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
@@ -995,7 +1002,7 @@ msgstr "שם הקובץ"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
-msgstr ""
+msgstr "שם הקובץ שצריך להיות מוצג בערך הקובץ."
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
@@ -1003,11 +1010,11 @@ msgstr "נתיב ברירת מחדל"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "נתיב ברירת מחדל לחלון העיון."
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
-msgstr ""
+msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid ""
@@ -1018,7 +1025,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
-msgstr ""
+msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:283
 msgid ""
@@ -1053,9 +1060,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz\n"
-"אבגדהוזחטיכלמנסעפצקרשת"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz אבגדהוזחטיכלמנסעפצקרשת"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1063,7 +1068,7 @@ msgstr "בחר גופן"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "הכותרת של תיבת דו-השיח לבחירה"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -1071,7 +1076,7 @@ msgstr "מצב"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr ""
+msgstr "מצב הפעולה של בוחר הגופנים"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
@@ -1087,7 +1092,7 @@ msgstr "גופן"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr ""
+msgstr "ה GtkFont הנבחר"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
@@ -1123,7 +1128,7 @@ msgstr "הצג גודל במצג מידע גופן"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr ""
+msgstr "תמיכה בממשק המשתמש GConf ל GNOME"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
@@ -1137,6 +1142,9 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
+"היישום \"%s\" ניסה לשנות חלק מהגדרותיך שמנהל הרשת או יצרני מערכת ההפעלה "
+"לא מרשים לך לשנות. חלק מההגדרות שבחרת יכולים לא לצאת לפועל, או שלא ישוחזרו "
+"בפעם הבאה שתפעיל את היישום."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1144,12 +1152,14 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
+"ארעה שגיאה בזמן טעינת או שמירת מידע ההגדרות ל %s. "
+"חלק מהגדרותיך לא יפעלו כראוי."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
+msgstr "מזהה יחודי לערך הסמל.  זה ישמש לשמירת רשימת ההסיטוריה."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1176,6 +1186,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"תיבת דו-דיח לבחירת סמל.  אתה יכול להשתמש במאפיין זה כדי לקבל את ה GtkDialog אם אתה "
+"צריך לשנות או לבדוק כל אחד ממאפייניו."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
@@ -1267,7 +1279,7 @@ msgstr "בצע תצוגה מקדימה"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "האם לערך מפת הפיקסלים צריכה להיות תצוגה מקדימה."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
@@ -1291,7 +1303,7 @@ msgstr "משתמש"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr "תוצאה"
+msgstr "ניקוד"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
@@ -1306,4 +1318,5 @@ msgstr "Sans 14"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
-msgstr "צא מהבדיקה"
+msgstr "יציאה מהבדיקה"
+
