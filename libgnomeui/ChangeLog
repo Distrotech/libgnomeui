@@ -1,3 +1,7 @@
+1999-09-28  Elliot Lee  <sopwith@redhat.com>
+	* gnome-dock-item.c: If an item is really small, don't subtract
+	  DRAG_HANDLE_SIZE from it to make its size < 0.
+
 1999-09-28  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-init.c (gnome_segv_handle): Improve the "can't display

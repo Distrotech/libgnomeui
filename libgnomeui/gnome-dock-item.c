@@ -575,9 +575,9 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
           if (GNOME_DOCK_ITEM_NOT_LOCKED (di))
             {
               if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
-                child_allocation.width -= DRAG_HANDLE_SIZE;
+		child_allocation.width = MAX((int)child_allocation.width - DRAG_HANDLE_SIZE, 1);
               else
-                child_allocation.height -= DRAG_HANDLE_SIZE;
+		child_allocation.height = MAX(child_allocation.height - DRAG_HANDLE_SIZE, 1);
             }
 
 	  if (GTK_WIDGET_REALIZED (di))
