@@ -41,6 +41,7 @@ typedef enum
 {
   ICON_SUFFIX_NONE = 0,
   ICON_SUFFIX_XPM,
+  ICON_SUFFIX_SVGZ,
   ICON_SUFFIX_SVG,
   ICON_SUFFIX_PNG,  
 } IconSuffix;
@@ -658,7 +659,8 @@ load_themes (GnomeIconTheme *icon_theme)
       while ((file = g_dir_read_name (gdir)))
 	{
 	  if (my_g_str_has_suffix (file, ".png") ||
-	      (priv->allow_svg && my_g_str_has_suffix (file, ".svg")) ||
+	      (priv->allow_svg && (my_g_str_has_suffix (file, ".svg") ||
+				   my_g_str_has_suffix (file, ".svgz"))) ||
 	      my_g_str_has_suffix (file, ".xpm"))
 	    {
 	      abs_file = g_build_filename (dir, file, NULL);
@@ -973,6 +975,8 @@ string_from_suffix (IconSuffix suffix)
       return ".xpm";
     case ICON_SUFFIX_SVG:
       return ".svg";
+    case ICON_SUFFIX_SVGZ:
+      return ".svgz";
     case ICON_SUFFIX_PNG:
       return ".png";
     default:
@@ -990,6 +994,8 @@ suffix_from_name (const char *name)
     retval = ICON_SUFFIX_PNG;
   else if (my_g_str_has_suffix (name, ".svg"))
     retval = ICON_SUFFIX_SVG;
+  else if (my_g_str_has_suffix (name, ".svgz"))
+    retval = ICON_SUFFIX_SVGZ;
   else if (my_g_str_has_suffix (name, ".xpm"))
     retval = ICON_SUFFIX_XPM;
   else
@@ -1223,7 +1229,7 @@ scan_directory (GnomeIconThemePrivate *icon_theme,
 
       suffix = suffix_from_name (name);
       if (suffix == ICON_SUFFIX_NONE ||
-	  (suffix == ICON_SUFFIX_SVG && !allow_svg))
+	  ((suffix == ICON_SUFFIX_SVG || suffix == ICON_SUFFIX_SVGZ) && !allow_svg))
 	continue;
       
       base_name = g_strdup (name);

@@ -1,3 +1,9 @@
+2003-06-15  Anders Carlsson  <andersca@codefactory.se>
+
+	* libgnomeui/gnome-icon-theme.c: (load_themes),
+	(string_from_suffix), (suffix_from_name), (scan_directory):
+	Treat files ending with ".svgz" as svg files. 
+	
 2003-06-05  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-thumbnail.c (gnome_thumbnail_factory_ensure_failed_uptodate):
