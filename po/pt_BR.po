@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-04-29 16:20+0200\n"
+"POT-Creation-Date: 2002-04-29 23:00+0200\n"
 "PO-Revision-Date: 2002-03-28 17:30+0000\n"
 "Last-Translator: Evandro F. Giovanini <evandrofg@ig.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -492,7 +492,7 @@ msgid "Hint for item 2"
 msgstr "Dica para item 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
 msgid "_File"
 msgstr "_Arquivo"
 
@@ -500,7 +500,7 @@ msgstr "_Arquivo"
 msgid "_File/"
 msgstr "_Arquivo/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
 msgid "_Edit"
 msgstr "_Editar"
 
@@ -508,7 +508,7 @@ msgstr "_Editar"
 msgid "_Edit/"
 msgstr "_Editar/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
 msgid "_View"
 msgstr "_Ver"
 
@@ -516,7 +516,7 @@ msgstr "_Ver"
 msgid "_View/"
 msgstr "_Ver/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
 msgid "_Settings"
 msgstr "_Parâmetros"
 
@@ -525,7 +525,7 @@ msgid "_Settings/"
 msgstr "_Parâmetros/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:300
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
 msgid "_New"
 msgstr "_Novo"
 
@@ -533,7 +533,7 @@ msgstr "_Novo"
 msgid "_New/"
 msgstr "_Novo/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
 msgid "Fi_les"
 msgstr "Ar_quivos"
 
@@ -541,15 +541,15 @@ msgstr "Ar_quivos"
 msgid "Fi_les/"
 msgstr "Ar_quivos/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:545
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
 msgid "_Windows"
 msgstr "_Janelas"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
 msgid "_Game"
 msgstr "_Jogo"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:548
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -910,11 +910,11 @@ msgstr "  - OK? (sim ou não)"
 msgid "Progress"
 msgstr "Progresso"
 
-#: libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "App ID"
 
-#: libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "A expressão ID da aplicação"
 

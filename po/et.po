@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-04-29 16:20+0200\n"
+"POT-Creation-Date: 2002-04-29 23:00+0200\n"
 "PO-Revision-Date: 2002-03-21 23:41+0200\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -477,7 +477,7 @@ msgid "Hint for item 2"
 msgstr ""
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
 msgid "_File"
 msgstr "_Fail"
 
@@ -485,7 +485,7 @@ msgstr "_Fail"
 msgid "_File/"
 msgstr "_Fail/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
 msgid "_Edit"
 msgstr "_Redaktor"
 
@@ -493,7 +493,7 @@ msgstr "_Redaktor"
 msgid "_Edit/"
 msgstr "_Redaktor/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
 msgid "_View"
 msgstr "_Vaade"
 
@@ -501,7 +501,7 @@ msgstr "_Vaade"
 msgid "_View/"
 msgstr "_Vaade/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
 msgid "_Settings"
 msgstr "_Sätted"
 
@@ -510,7 +510,7 @@ msgid "_Settings/"
 msgstr "_Sätted/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:300
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
 msgid "_New"
 msgstr "_Uus"
 
@@ -518,7 +518,7 @@ msgstr "_Uus"
 msgid "_New/"
 msgstr "_Uus/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
 msgid "Fi_les"
 msgstr "Fai_lid"
 
@@ -526,15 +526,15 @@ msgstr "Fai_lid"
 msgid "Fi_les/"
 msgstr "Fai_lid/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:545
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
 msgid "_Windows"
 msgstr "A_knad"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
 msgid "_Game"
 msgstr "_Mäng"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:548
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
 msgid "_Help"
 msgstr "_Abi"
 
@@ -895,11 +895,11 @@ msgstr " - sobib? (jah või ei)"
 msgid "Progress"
 msgstr ""
 
-#: libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr ""
 
-#: libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr ""
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-04-29 16:20+0200\n"
+"POT-Creation-Date: 2002-04-29 23:00+0200\n"
 "PO-Revision-Date: 2002-04-11 09:55+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -493,7 +493,7 @@ msgid "Hint for item 2"
 msgstr "Довідка елемента 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
 msgid "_File"
 msgstr "_Файл"
 
@@ -501,7 +501,7 @@ msgstr "_Файл"
 msgid "_File/"
 msgstr "_Файл/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
 msgid "_Edit"
 msgstr "Ви_правлення"
 
@@ -509,7 +509,7 @@ msgstr "Ви_правлення"
 msgid "_Edit/"
 msgstr "Ви_правлення/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
 msgid "_View"
 msgstr "Відо_браження"
 
@@ -517,7 +517,7 @@ msgstr "Відо_браження"
 msgid "_View/"
 msgstr "Відо_браження"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
 msgid "_Settings"
 msgstr "В_становлення"
 
@@ -526,7 +526,7 @@ msgid "_Settings/"
 msgstr "В_становлення/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:300
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
 msgid "_New"
 msgstr "_Новий"
 
@@ -534,7 +534,7 @@ msgstr "_Новий"
 msgid "_New/"
 msgstr "_Новий/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
 msgid "Fi_les"
 msgstr "Фай_ли"
 
@@ -542,15 +542,15 @@ msgstr "Фай_ли"
 msgid "Fi_les/"
 msgstr "Фай_ли/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:545
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
 msgid "_Windows"
 msgstr "_Вікна"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
 msgid "_Game"
 msgstr "_Гра"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:548
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
 msgid "_Help"
 msgstr "_Довідка"
 
@@ -911,11 +911,11 @@ msgstr "  - Гаразд? (так чи ні)"
 msgid "Progress"
 msgstr "Поступ"
 
-#: libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "Ідентифікатор програми"
 
-#: libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "Ідентифікаційний рядок програми"
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.16\n"
-"POT-Creation-Date: 2002-04-29 16:20+0200\n"
+"POT-Creation-Date: 2002-04-29 23:00+0200\n"
 "PO-Revision-Date: 2002-04-03 20:55+0200\n"
 "Last-Translator: Benjamin Greiner <benjamin.greiner@gmx.net>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -502,7 +502,7 @@ msgid "Hint for item 2"
 msgstr "Hinweis für Kindelement 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
 msgid "_File"
 msgstr "_Datei"
 
@@ -510,7 +510,7 @@ msgstr "_Datei"
 msgid "_File/"
 msgstr "_Datei/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
@@ -518,7 +518,7 @@ msgstr "_Bearbeiten"
 msgid "_Edit/"
 msgstr "_Bearbeiten/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
 msgid "_View"
 msgstr "_Ansicht"
 
@@ -526,7 +526,7 @@ msgstr "_Ansicht"
 msgid "_View/"
 msgstr "_Ansicht/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
 msgid "_Settings"
 msgstr "E_instellungen"
 
@@ -535,7 +535,7 @@ msgid "_Settings/"
 msgstr "E_instellungen/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:300
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
 msgid "_New"
 msgstr "_Neu"
 
@@ -543,7 +543,7 @@ msgstr "_Neu"
 msgid "_New/"
 msgstr "_Neu/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
 msgid "Fi_les"
 msgstr "_Dateien"
 
@@ -551,15 +551,15 @@ msgstr "_Dateien"
 msgid "Fi_les/"
 msgstr "Da_teien/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:545
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
 msgid "_Windows"
 msgstr "_Fenster"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
 msgid "_Game"
 msgstr "_Spiel"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:548
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -921,11 +921,11 @@ msgstr "  - OK? (ja oder nein)"
 msgid "Progress"
 msgstr "Fortschritt"
 
-#: libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "Anw.-Kennung"
 
-#: libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "Die Kennungszeichenfolge der Anwendung"
 

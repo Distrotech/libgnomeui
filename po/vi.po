@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-04-29 16:20+0200\n"
+"POT-Creation-Date: 2002-04-29 23:00+0200\n"
 "PO-Revision-Date: 2002-04-15 19:27+01:00\n"
 "Last-Translator: Hoang Ngoc Tu <hntu@gmx.de>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -495,7 +495,7 @@ msgid "Hint for item 2"
 msgstr "Chỉ dẫn cho mục 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
 msgid "_File"
 msgstr "_Tập tin"
 
@@ -503,7 +503,7 @@ msgstr "_Tập tin"
 msgid "_File/"
 msgstr "_Tập tin/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
 msgid "_Edit"
 msgstr "_Biên tập"
 
@@ -511,7 +511,7 @@ msgstr "_Biên tập"
 msgid "_Edit/"
 msgstr "_Biên tập/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
 msgid "_View"
 msgstr "_Xem"
 
@@ -519,7 +519,7 @@ msgstr "_Xem"
 msgid "_View/"
 msgstr "_Xem"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
 msgid "_Settings"
 msgstr "Điề_u chỉnh"
 
@@ -528,7 +528,7 @@ msgid "_Settings/"
 msgstr "Điề_u chỉnh/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:300
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
 msgid "_New"
 msgstr "Mới"
 
@@ -536,7 +536,7 @@ msgstr "Mới"
 msgid "_New/"
 msgstr "Mới/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
 msgid "Fi_les"
 msgstr "Các tập tin"
 
@@ -544,15 +544,15 @@ msgstr "Các tập tin"
 msgid "Fi_les/"
 msgstr "Các tập tin"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:545
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
 msgid "_Windows"
 msgstr "Các cửa sổ"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
 msgid "_Game"
 msgstr "Trò chơi"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:548
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
 msgid "_Help"
 msgstr "_Chỉ dẫn"
 
@@ -913,11 +913,11 @@ msgstr "  - OK? (có hoặc không)"
 msgid "Progress"
 msgstr "Tiến triển"
 
-#: libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "Ứng dụng ID"
 
-#: libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "Chuỗi của ứng dụng ID"
 

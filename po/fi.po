@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-04-29 16:20+0200\n"
+"POT-Creation-Date: 2002-04-29 23:00+0200\n"
 "PO-Revision-Date: 2002-04-19 20:28+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -491,7 +491,7 @@ msgid "Hint for item 2"
 msgstr "Kohdan 2 vinkki"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
 msgid "_File"
 msgstr "_Tiedosto"
 
@@ -499,7 +499,7 @@ msgstr "_Tiedosto"
 msgid "_File/"
 msgstr "_Tiedosto/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
 msgid "_Edit"
 msgstr "_Muokkaa"
 
@@ -507,7 +507,7 @@ msgstr "_Muokkaa"
 msgid "_Edit/"
 msgstr "_Muokkaa/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
 msgid "_View"
 msgstr "_Näytä"
 
@@ -515,7 +515,7 @@ msgstr "_Näytä"
 msgid "_View/"
 msgstr "_Näytä/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
 msgid "_Settings"
 msgstr "_Asetukset"
 
@@ -524,7 +524,7 @@ msgid "_Settings/"
 msgstr "_Asetukset/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:300
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
 msgid "_New"
 msgstr "_Uusi"
 
@@ -532,7 +532,7 @@ msgstr "_Uusi"
 msgid "_New/"
 msgstr "_Uusi/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
 msgid "Fi_les"
 msgstr "Tie_dostot"
 
@@ -540,15 +540,15 @@ msgstr "Tie_dostot"
 msgid "Fi_les/"
 msgstr "Tie_dostot/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:545
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
 msgid "_Windows"
 msgstr "_Ikkunat"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
 msgid "_Game"
 msgstr "_Peli"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:548
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -909,11 +909,11 @@ msgstr "  - OK? (kyllä tai ei)"
 msgid "Progress"
 msgstr "Edistyminen"
 
-#: libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "Ohjelman ID"
 
-#: libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "Ohjelman ID-merkkijono"
 
