@@ -142,7 +142,7 @@ gnome_app_configure_positions (GnomeApp *app)
 	
 	/* 2. the toolbar */
 	if (app->toolbar){
-		GtkWidget *handlebox = app->menubar->parent;
+		GtkWidget *handlebox = app->toolbar->parent;
 		int offset = 0;
 
 		gtk_widget_ref (handlebox);
