@@ -6,20 +6,20 @@
 # Héctor García Álvarez <hector@scouts-es.org>, 2001.
 # Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.
 # Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2002,2003.
-# Francisco Javier F. Serrador <serrador@arrakis.es>, 2003
+# Francisco Javier F. Serrador <serrador@arrakis.es>, 2003.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD.es\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-06-11 18:15+0000\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-06 04:23+0200\n"
+"PO-Revision-Date: 2003-09-06 13:14+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@arrakis.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "First-Translator: Germán Poo Caamaño <gpoo@ubiobio.cl>\n"
-"X-Generator: KBabel 1.0.1\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -115,19 +115,18 @@ msgstr "Listado de las personas que han documentado el programa"
 
 #: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
-msgstr "Registro del(los) documentadore(s)"
+msgstr "Entrada del documentador"
 
 #: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
-msgstr "Un registro simple del(los) documentador(es)"
+msgstr "Una entrada simple del documentador"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -138,7 +137,7 @@ msgstr "Logotipo"
 
 #: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
-msgstr "Un logotipo para el diálogo «acerca de»"
+msgstr "Un logotipo para el diálogo «Acerca de»"
 
 #: libgnomeui/gnome-about.c:519
 #, c-format
@@ -147,6 +146,7 @@ msgstr "Acerca de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Archivo"
 
@@ -204,6 +204,7 @@ msgid "_Game"
 msgstr "_Juego"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_yuda"
 
@@ -289,7 +290,7 @@ msgstr "Sale de la aplicación"
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
-msgstr "C_ortar"
+msgstr "Cor_tar"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
@@ -375,7 +376,7 @@ msgstr "_Propiedades"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Modificar las propiedades del archivo"
+msgstr "Modifica las propiedades del archivo"
 
 #.
 #. * The Settings menu
@@ -394,11 +395,11 @@ msgstr "Configura la aplicación"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "_Acerca de"
+msgstr "A_cerca de"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
@@ -425,9 +426,9 @@ msgstr "Crear una ventana nueva"
 msgid "_Close This Window"
 msgstr "_Cerrar esta ventana"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "Cerrar la ventana actual"
+msgstr "Cierra la ventana actual"
 
 #.
 #. * The "Game" menu
@@ -499,7 +500,7 @@ msgstr "Finaliza el juego actual"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr "_Contenidos"
+msgstr "_Índice"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
@@ -580,7 +581,7 @@ msgstr "Tiene progreso"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Crear una nuevo widget de progreso."
+msgstr "Crear un nuevo widget de progreso."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
@@ -613,11 +614,11 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr "Su contraseña se transmitirá sin encriptar."
+msgstr "Su contraseña se transmitirá sin cifrar."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr "Su contraseña se transmitirá encriptada."
+msgstr "Su contraseña se transmitirá cifrada."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
@@ -1009,8 +1010,7 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
-"Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1185,7 +1185,7 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Aquí puede introducir el nombre del directorio donde están ubicadaslas "
+"Aquí puede introducir el nombre del directorio donde están ubicadas "
 "imágenes de los iconos."
 
 #: libgnomeui/gnome-icon-sel.c:293
@@ -1373,11 +1373,12 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Para obtener más información visite la página «Error en Aplicaciones GNOME»"
+msgstr "Para obtener más información visite la página «Error en Aplicaciones GNOME»"
 
-#~ msgid "Exit the test"
-#~ msgstr "Salir del test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Salir del test"
 
 #~ msgid "_Credits"
 #~ msgstr "_Créditos"
+
