@@ -64,7 +64,6 @@
 #include "libgnomeui/gtkspell.h"
 #include "libgnomeui/gnome-dateedit.h"
 #include "libgnomeui/gnome-calculator.h"
-#include "libgnomeui/gnome-lamp.h"
 #include "libgnomeui/gnome-mdi.h"
 #include "libgnomeui/gnome-mdi-child.h"
 #include "libgnomeui/gnome-mdi-session.h"

@@ -1,3 +1,11 @@
+1998-11-05  Jeff Garzik  <jgarzik@pobox.com>
+
+	* Makefile.am, libgnomeui.h: removed gnome-lamp.[ch]
+	* stock_demo.c: removed ifdef'd gnome_lamp widget code
+	* winhints_demo.c: made authors var const-correct
+	* gnome-lamp.[ch]: removed (general consensus considers
+	  gnome-lamp unused and ugly)
+
 1998-11-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-item.[ch] (gnome_icon_text_item_get_text): New public

@@ -407,7 +407,7 @@ void skip_cb (GtkWidget *widget, void *data)
 void about_cb(GtkWidget *widget, gpointer data)
 {
   GtkWidget *about;
-  gchar *authors[] = {"Max Watson", NULL};
+  const gchar *authors[] = {"Max Watson", NULL};
   
   about = gnome_about_new ( _("WIN_HINTS Test"), "0.1",
 			   _("Copyright (C)1998"),

@@ -72,7 +72,6 @@ libgnomeui_la_SOURCES = \
 	gnome-icon-sel.c		\
 	gnome-icon-text.c		\
 	gnome-init.c			\
-	gnome-lamp.c			\
 	gnome-less.c			\
 	gnome-mdi.c			\
 	gnome-mdi-child.c		\
@@ -142,7 +141,6 @@ gnome_headers = \
 	gnome-icon-sel.h		\
 	gnome-icon-text.h		\
 	gnome-init.h			\
-	gnome-lamp.h			\
 	gnome-less.h			\
 	gnome-messagebox.h		\
 	gnome-mdi.h			\
