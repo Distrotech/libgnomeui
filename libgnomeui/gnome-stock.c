@@ -137,9 +137,11 @@ gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
 {
         g_return_if_fail(widget != NULL);
         g_return_if_fail(requisition != NULL);
-        /* Okay, since I should not load the pixmaps as long as
-           there's no GdkWindow for them, I will guess a size of 16x16
-           for the icons, as long as widget->window is NULL */
+        /*
+	 * Okay, since I should not load the pixmaps as long as there's no
+	 * GdkWindow for them, I will guess a size of 16x16 for the icons,
+	 * as long as widget->window is NULL
+	 */
         if (widget->window == NULL) {
                 if (requisition->width < 16)
                         requisition->width = 16;
@@ -153,6 +155,7 @@ gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
                         pmap->regular =
                                 gnome_stock_pixmap(widget, pmap->icon,
                                                    GNOME_STOCK_PIXMAP_REGULAR);
+			gtk_widget_show(GTK_WIDGET(pmap->regular));
                 }
                 gdk_window_get_size(pmap->regular->pixmap, &w, &h);
                 requisition->width = w;
