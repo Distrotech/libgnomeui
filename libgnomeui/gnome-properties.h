@@ -26,7 +26,7 @@ void gnome_property_configurator_register (GnomePropertyConfigurator *,
 void gnome_property_configurator_setup (GnomePropertyConfigurator *);
 gint gnome_property_configurator_request (GnomePropertyConfigurator *,
 					  GnomePropertyRequest);
-gint gnome_property_configurator_request_foreach (GnomePropertyConfigurator *th,
+void gnome_property_configurator_request_foreach (GnomePropertyConfigurator *th,
 						  GnomePropertyRequest r);
 
 END_GNOME_DECLS

@@ -68,7 +68,7 @@ request (int (*cb)(GnomePropertyRequest), GnomePropertyRequest r)
 	(*cb) (r);
 }
 
-gint
+void
 gnome_property_configurator_request_foreach (GnomePropertyConfigurator *th,
 					     GnomePropertyRequest r)
 {
