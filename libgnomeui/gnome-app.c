@@ -525,6 +525,9 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 
 	app->menubar = GTK_WIDGET(menubar);
 
+	if (!gnome_preferences_get_menubar_relief ())
+		gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar), GTK_SHADOW_NONE);
+	
 	gtk_signal_connect(GTK_OBJECT(hb), "button_press_event",
 			   GTK_SIGNAL_FUNC(gnome_app_rightclick_menubar), app);
 	gtk_widget_show(app->menubar);

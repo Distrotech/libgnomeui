@@ -594,8 +594,6 @@ gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilde
 	g_return_if_fail (uibdata != NULL);
 
 	menubar = gtk_menu_bar_new ();
-	if (!gnome_preferences_get_menubar_relief ())
-		gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (menubar), GTK_SHADOW_NONE);
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, app->accel_group, TRUE, FALSE, 0);
 	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
 }

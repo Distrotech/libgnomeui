@@ -1,5 +1,8 @@
 1998-11-21  Andrew T. Veliath  <andrewtv@usa.net>
 
+	* gnome-app-helper.c (gnome_app_create_menus_custom): Move menu
+	relief setting code to gnome_app.c (gnome_app_set_menus).
+
 	* gnome-preferences.c (gnome_preferences_load_custom): Toolbar
 	button relief default changed to "=false" to match
 	GnomePreferences structure default.
