@@ -9,6 +9,12 @@
 	(gnome_app_add_toolbar): Put the dock item into a new dock band.
 	The toolbar now goes into band 1 (instead of band 0).
 
+1998-12-17  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app.c (gnome_app_set_menus): Make menubar relief agree
+	with with toolbar relief (relief on the dock item, around
+	handles).
+
 Thu Dec 17  Felix Bellaby  <felix@pooh.u-net.com>
 	* gnome-client.c (gnome_client_connect, gnome_client_set_id): remove
 	some code left over from old config file naming scheme.
