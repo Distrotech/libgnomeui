@@ -589,7 +589,7 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 	gtk_box_pack_start (GTK_BOX (hbox), fentry->_priv->gentry, TRUE, TRUE, 0);
 	gtk_widget_show (fentry->_priv->gentry);
 
-	button = gtk_button_new_with_label (_("Browse..."));
+	button = gtk_button_new_with_mnemonic (_("_Browse..."));
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (browse_clicked_signal),
 			  fentry);
