@@ -1,5 +1,14 @@
 1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-canvas.c (gnome_canvas_item_get_bounds): Applied patch
+	from Richard Hult <rhult@hem2.passagen.se>; I had goofed up with
+	min/max coordinate computation.
+
+	* gnome-dialog-util.c (request_dialog): Set the entry to be the
+	focused widget.
+
+1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gnome-icon-list.c (gil_destroy): In addition to removing the
 	timer, reset the timer_tag variable.
 

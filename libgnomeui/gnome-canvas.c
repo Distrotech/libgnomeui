@@ -1392,8 +1392,8 @@ gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, dou
 
 		mx1 = MIN (q1.x, q2.x);
 		my1 = MIN (q1.y, q2.y);
-		mx2 = MIN (q3.x, q4.x);
-		my2 = MIN (q4.x, q4.y);
+		mx2 = MAX (q3.x, q4.x);
+		my2 = MAX (q3.y, q4.y);
 
 		if (mx1 < mx2) {
 			tx1 = mx1;
