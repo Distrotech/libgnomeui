@@ -426,6 +426,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     else if (options & GTK_CAULDRON_POPUP)
 	how = GTK_WINDOW_POPUP;
     window = gtk_window_new (how);
+    gtk_window_position (window, GTK_WIN_POS_MOUSE);
     accel_table = gtk_accel_group_new ();
     gtk_window_add_accel_group (GTK_WINDOW (window), accel_table);
 
