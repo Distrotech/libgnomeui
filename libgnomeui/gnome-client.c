@@ -10,6 +10,8 @@
 #include "gnome.h"
 #include "gnome-client.h"
 #include <gtk/gtk.h>
+#include <gdk/gdkprivate.h>
+#include <X11/Xatom.h>
 
 #ifndef HAVE_LIBSM
 typedef gpointer SmPointer;
@@ -125,6 +127,57 @@ static GtkObjectClass *parent_class = NULL;
 static gint client_signals[LAST_SIGNAL] = { 0 };
 
 static const char *sm_client_id_arg_name = "--sm-client-id";
+static const char *sm_client_id_prop="SM_CLIENT_ID";
+
+/*****************************************************************************/
+/* Managing the default client */
+
+static GnomeClient *default_client= NULL;
+
+static void
+default_client_connect (GnomeClient *client,
+			gint         restarted,
+			gpointer     client_data)
+{
+  char *client_id= gnome_client_get_id (client);
+  
+  /* FIXME */
+  XChangeProperty (gdk_display, gdk_leader_window,
+		   XInternAtom(gdk_display, "SM_CLIENT_ID", False),
+		   XA_STRING, 8, GDK_PROP_MODE_REPLACE,
+		   (unsigned char *) client_id,
+		   strlen(client_id));               
+}
+
+static void
+default_client_disconnect (GnomeClient *client,
+			   gpointer client_data)
+{
+  XDeleteProperty(gdk_display, gdk_leader_window,
+		  XInternAtom(gdk_display, "SM_CLIENT_ID", False));
+}
+
+void
+gnome_default_client_init (gint argc, gchar *argv[])
+{
+  g_return_if_fail (default_client == NULL);
+  
+  default_client= gnome_client_new_without_connection (argc, argv);
+
+  if (default_client)
+    {
+      gtk_signal_connect (GTK_OBJECT (default_client), "connect",
+			  GTK_SIGNAL_FUNC (default_client_connect), NULL);
+      gtk_signal_connect (GTK_OBJECT (default_client), "disconnect",
+			  GTK_SIGNAL_FUNC (default_client_disconnect), NULL);
+    }
+}
+
+GnomeClient *
+gnome_get_default_client (void)
+{
+  return default_client;
+}
 
 /*****************************************************************************/
 /* GTK-class managing functions */
