@@ -1,3 +1,9 @@
+1999-06-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (selection_many_icon_event): Sigh, we did need
+	selection_pending flags after all.  Added them to the private
+	structure as well.
+
 Wed Jun 23 14:48:29 1999  Raph Levien  <raph@gimp.org>
 
 	* Makefile.am: Reverted Pablo Saratxaga's changes. I'm not sure

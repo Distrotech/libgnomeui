@@ -150,6 +150,9 @@ typedef struct {
 	/* Rubberband rectangle */
 	GnomeCanvasItem *sel_rect;
 
+	/* Saved event for a pending selection */
+	GdkEvent select_pending_event;
+
 	/* Whether the icon texts are editable */
 	guint is_editable : 1;
 
@@ -164,6 +167,12 @@ typedef struct {
 
 	/* Whether the user clicked on an unselected icon's text */
 	guint select_on_text : 1;
+
+	/* Whether selection is pending after a button press */
+	guint select_pending : 1;
+
+	/* Whether the icon that is pending selection was selected to begin with */
+	guint select_pending_was_selected : 1;
 } GilPrivate;
 
 
@@ -827,6 +836,9 @@ select_range (Gil *gil, Icon *icon, int idx, GdkEvent *event)
 		if (!i->selected)
 			emit_select (gil, TRUE, a, NULL);
 	}
+
+	/* Actually notify the client of the event */
+	emit_select (gil, TRUE, idx, event);
 }
 
 /* Handles icon selection for MULTIPLE or EXTENDED selection modes */
@@ -866,11 +878,13 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 {
 	GilPrivate *priv;
 	int retval;
-	int has_modifier;
+	int additive, range;
 
 	priv = gil->priv;
 	retval = FALSE;
-	has_modifier = event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK);
+
+	range = (event->button.state & GDK_SHIFT_MASK) != 0;
+	additive = (event->button.state & GDK_CONTROL_MASK) != 0;
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
@@ -878,11 +892,25 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 		if (event->button.button > 3)
 			break;
 
-		if (!on_text || !icon->selected || has_modifier) {
-			if (on_text && (!icon->selected || has_modifier))
+		priv->select_pending = FALSE;
+
+		if (!on_text || !icon->selected || additive || range) {
+			if (on_text && (!icon->selected || additive || range))
 				priv->select_on_text = TRUE;
 
-			do_select_many (gil, icon, idx, event);
+			if ((icon->selected && !additive && !range)
+			    || (additive && !range)) {
+				priv->select_pending = TRUE;
+				priv->select_pending_event = *event;
+				priv->select_pending_was_selected = icon->selected;
+
+				/* We have to emit this so that the client will
+				 * know about the click.
+				 */
+				emit_select (gil, TRUE, idx, event);
+			} else
+				do_select_many (gil, icon, idx, event);
+
 			retval = TRUE;
 		}
 
@@ -901,6 +929,13 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 	case GDK_BUTTON_RELEASE:
 		if (on_text && priv->select_on_text) {
 			priv->select_on_text = FALSE;
+			retval = TRUE;
+		}
+
+		if (priv->select_pending) {
+			icon->selected = priv->select_pending_was_selected;
+			do_select_many (gil, icon, idx, &priv->select_pending_event);
+			priv->select_pending = FALSE;
 			retval = TRUE;
 		}
 
