@@ -728,11 +728,9 @@ add_key_to_list (gpointer  key,
 {
   GList **list = user_data;
 
-  *list = g_list_prepend (*list, key);
+  *list = g_list_prepend (*list, g_strdup (key));
 }
 
-
-/* Don't free the returned names */
 GList *
 gnome_icon_theme_list_icons (GnomeIconTheme *icon_theme,
 			      const char *context)
