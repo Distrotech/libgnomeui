@@ -10,12 +10,10 @@
 static void
 message_dlg_clicked(GtkWidget *widget, int button,gpointer data)
 {
-	GtkWidget *box = data;
-
 	if (button == 0) /* Yes */
 		gtk_main_quit();
 	else /* No */
-		gnome_dialog_close(GNOME_DIALOG(box));
+		gnome_dialog_close(GNOME_DIALOG(widget));
 }
 
 static gboolean
@@ -30,7 +28,7 @@ message_dlg(GtkWidget *widget, gpointer data)
 				       GNOME_STOCK_BUTTON_NO,
 				       NULL);
 	  gtk_signal_connect (GTK_OBJECT (box), "clicked",
-			      GTK_SIGNAL_FUNC (message_dlg_clicked), box);
+			      GTK_SIGNAL_FUNC (message_dlg_clicked), NULL);
 
 	  gnome_dialog_set_modal (GNOME_DIALOG(box));
 	  gnome_dialog_close_hides(GNOME_DIALOG(box), TRUE);
