@@ -69,8 +69,9 @@ gnome_app_add (GtkContainer *container,
 	g_return_if_fail (container != NULL);
 	g_return_if_fail (GNOME_IS_APP (container));
 	g_return_if_fail (widget != NULL);
-	
-	gnome_app_set_contents (GNOME_APP (container), widget);
+
+	/* Buggy sigh */
+/*	gnome_app_set_contents (GNOME_APP (container), widget); */
 }
 
 static void
