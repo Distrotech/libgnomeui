@@ -91,29 +91,15 @@ gnome_canvas_register_rect_ellipse (void)
 static void
 re_calc_bounds (GnomeCanvas *canvas, RectEllipse *re)
 {
-	if (re->width_pixels) {
-		gnome_canvas_w2c (canvas,
-				  re->x1 - re->width / 2,
-				  re->y1 - re->width / 2,
-				  &re->item.x1,
-				  &re->item.y1);
-		gnome_canvas_w2c (canvas,
-				  re->x2 + re->width / 2,
-				  re->y2 + re->width / 2,
-				  &re->item.x2,
-				  &re->item.y2);
-	} else {
-		gnome_canvas_w2c (canvas,
-				  re->x1 - re->width * canvas->pixels_per_unit / 2,
-				  re->y1 - re->width * canvas->pixels_per_unit / 2,
-				  &re->item.x1,
-				  &re->item.y1);
-		gnome_canvas_w2c (canvas,
-				  re->x2 + re->width * canvas->pixels_per_unit / 2,
-				  re->y2 + re->width * canvas->pixels_per_unit / 2,
-				  &re->item.x2,
-				  &re->item.y2);
-	}
+	double hwidth;
+
+	if (re->width_pixels)
+		hwidth = (re->width / canvas->pixels_per_unit) / 2.0;
+	else
+		hwidth = re->width / 2.0;
+
+	gnome_canvas_w2c (canvas, re->x1 - hwidth, re->y1 - hwidth, &re->item.x1, &re->item.y1);
+	gnome_canvas_w2c (canvas, re->x2 + hwidth, re->y2 + hwidth, &re->item.x2, &re->item.y2);
 
 	/* Some safety fudging */
 
@@ -252,7 +238,8 @@ re_configure (GnomeCanvas *canvas, GnomeCanvasItem *item, va_list args, int reco
 				calc_gcs = TRUE;
 				calc_bounds = TRUE;
 			} else {
-				g_warning ("Unknown canvas rectangle/ellipse configuration option %s", (char *) key);
+				g_warning ("Unknown canvas rectangle/ellipse configuration option %s",
+					   (char *) key);
 				done = TRUE;
 			}
 		} while (!done);
@@ -401,7 +388,7 @@ rect_point (GnomeCanvas *canvas, GnomeCanvasItem *item, double x, double y)
 
 	if (rect->outline_set) {
 		if (rect->width_pixels)
-			hwidth = rect->width * canvas->pixels_per_unit / 2.0;
+			hwidth = (rect->width / canvas->pixels_per_unit) / 2.0;
 		else
 			hwidth = rect->width / 2.0;
 
@@ -409,8 +396,7 @@ rect_point (GnomeCanvas *canvas, GnomeCanvasItem *item, double x, double y)
 		y1 -= hwidth;
 		x2 += hwidth;
 		y2 += hwidth;
-	}
-	else
+	} else
 		hwidth = 0.0;
 
 	/* Is point inside rectangle (which can be hollow if it has no fill set)? */
@@ -442,9 +428,21 @@ rect_point (GnomeCanvas *canvas, GnomeCanvasItem *item, double x, double y)
 
 	/* Point is outside rectangle */
 
-	return 1000.0; /* FIXME */
+	if (x < x1)
+		dx = x1 - x;
+	else if (x > x2)
+		dx = x - x2;
+	else
+		dx = 0.0;
 
-	/* AQUI AQUI AQUI */
+	if (y < y1)
+		dy = y1 - y;
+	else if (y > y2)
+		dy = y - y2;
+	else
+		dy = 0.0;
+
+	return sqrt (dx * dx + dy * dy);
 }
 
 static GtkVisibility
@@ -459,7 +457,7 @@ static double
 ellipse_point (GnomeCanvas *canvas, GnomeCanvasItem *item, double x, double y)
 {
 	/* FIXME */
-	return 0.0;
+	return 10000.0;
 }
 
 static GtkVisibility

@@ -209,7 +209,7 @@ binding_hash (gpointer key)
 static gint
 binding_compare (gpointer a, gpointer b)
 {
-	return GPOINTER_TO_INT (a) - GPOINTER_TO_INT (b);
+	return GPOINTER_TO_INT (a) == GPOINTER_TO_INT (b);
 }
 
 static void
@@ -304,11 +304,10 @@ execute_bindings (GnomeCanvas *canvas, GdkEvent *event)
 	int emit;
 	Binding *b;
 	gint finished;
+	GnomeCanvasId cid;
 
 	if (!canvas->current_item)
 		return;
-
-	printf ("aqui\n");
 
 	list = get_bindings_for_event (canvas, event->type);
 
@@ -333,9 +332,11 @@ execute_bindings (GnomeCanvas *canvas, GdkEvent *event)
 		}
 
 		if (emit) {
-			printf ("emitiendo\n");
+			cid.type = GNOME_CANVAS_ID_ITEM;
+			cid.data = canvas->current_item;
+
 			gtk_signal_emit (GTK_OBJECT (canvas), canvas_signals[ITEM_EVENT],
-					 &b->cid,
+					 &cid,
 					 event,
 					 b->user_data,
 					 &finished);
@@ -666,18 +667,28 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 
 	if (event != &canvas->pick_event) {
 		if ((event->type == GDK_MOTION_NOTIFY) || (event->type == GDK_BUTTON_RELEASE)) {
+			/* these fields have the same offsets in both types of events */
+
 			canvas->pick_event.crossing.type       = GDK_ENTER_NOTIFY;
 			canvas->pick_event.crossing.window     = event->motion.window;
 			canvas->pick_event.crossing.send_event = event->motion.send_event;
 			canvas->pick_event.crossing.subwindow  = NULL;
 			canvas->pick_event.crossing.x          = event->motion.x;
 			canvas->pick_event.crossing.y          = event->motion.y;
-			canvas->pick_event.crossing.x_root     = event->motion.x_root;
-			canvas->pick_event.crossing.y_root     = event->motion.y_root;
 			canvas->pick_event.crossing.mode       = GDK_CROSSING_NORMAL;
 			canvas->pick_event.crossing.detail     = GDK_NOTIFY_NONLINEAR;
 			canvas->pick_event.crossing.focus      = FALSE;
 			canvas->pick_event.crossing.state      = event->motion.state;
+
+			/* these fields don't have the same offsets in both types of events */
+
+			if (event->type == GDK_MOTION_NOTIFY) {
+				canvas->pick_event.crossing.x_root = event->motion.x_root;
+				canvas->pick_event.crossing.y_root = event->motion.y_root;
+			} else {
+				canvas->pick_event.crossing.x_root = event->button.x_root;
+				canvas->pick_event.crossing.y_root = event->button.y_root;
+			}
 		} else
 			canvas->pick_event = *event;
 	}
@@ -690,8 +701,16 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 	/* LeaveNotify means that there is no current item, so we don't look for one */
 
 	if (canvas->pick_event.type != GDK_LEAVE_NOTIFY) {
-		x = event->crossing.x + canvas->display_x1;
-		y = event->crossing.y + canvas->display_y1;
+		/* these fields don't have the same offsets in both types of events */
+
+		if (canvas->pick_event.type == GDK_ENTER_NOTIFY) {
+			x = canvas->pick_event.crossing.x + canvas->display_x1;
+			y = canvas->pick_event.crossing.y + canvas->display_y1;
+		} else {
+			x = canvas->pick_event.motion.x + canvas->display_x1;
+			y = canvas->pick_event.motion.y + canvas->display_y1;
+		}
+
 		canvas->new_current_item = find_closest_item (canvas, (int) (x + 0.5), (int) (y + 0.5));
 	} else
 		canvas->new_current_item = NULL;
@@ -731,7 +750,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		return;
 	}
 
-	/* Handle the case where the GNOME_CANVAS_LEFT_GRABBED_ITEM flag was set */
+	/* Handle the rest of cases */
 
 	canvas->flags &= ~GNOME_CANVAS_LEFT_GRABBED_ITEM;
 	canvas->current_item = canvas->new_current_item;
@@ -823,8 +842,6 @@ gnome_canvas_motion (GtkWidget *widget, GdkEventMotion *event)
 	g_return_val_if_fail (event != NULL, FALSE);
 
 	canvas = GNOME_CANVAS (widget);
-
-	printf ("gnome_canvas_motion\n");
 
 	canvas->state = event->state;
 	pick_current_item (canvas, (GdkEvent *) event);
@@ -995,6 +1012,7 @@ foreach_id (GnomeCanvas *canvas, GnomeCanvasId cid, ForeachFunc func, va_list ar
 static void
 configure_item (GnomeCanvas *canvas, GnomeCanvasItem *item, va_list args, gpointer data)
 {
+	gnome_canvas_request_redraw (canvas, item->x1, item->y1, item->x2, item->y2);
 	(* item->type->configure) (canvas, item, args, FALSE);
 	gnome_canvas_request_redraw (canvas, item->x1, item->y1, item->x2, item->y2);
 }
@@ -1010,6 +1028,8 @@ gnome_canvas_configure (GnomeCanvas *canvas, GnomeCanvasId cid, ...)
 	va_start (args, cid);
 	foreach_id (canvas, cid, configure_item, args, NULL);
 	va_end (args);
+
+	canvas->flags |= GNOME_CANVAS_NEED_REPICK;
 }
 
 int
@@ -1062,12 +1082,7 @@ gnome_canvas_set_background (GnomeCanvas *canvas, GnomeCanvasColor color_type, .
 		else
 			gdk_window_set_background (widget->window, &widget->style->bg[GTK_STATE_NORMAL]);
 
-		/* FIXME: should we queue a redraw or just gdk_window_clear_area_e() ? */
-		if (GTK_WIDGET_DRAWABLE (widget))
-			gdk_window_clear_area_e (widget->window,
-						 0, 0,
-						 widget->allocation.width,
-						 widget->allocation.height);
+		gtk_widget_draw (widget, NULL);
 	}
 }
 
@@ -1224,6 +1239,7 @@ gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, doubl
 	canvas->display_x1 = 0;
 	canvas->display_y1 = 0;
 
+	canvas->flags |= GNOME_CANVAS_NEED_REPICK;
 	reconfigure_items (canvas);
 	gtk_widget_draw (GTK_WIDGET (canvas), NULL);
 }
@@ -1253,6 +1269,7 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 			  &canvas->display_x1,
 			  &canvas->display_y1);
 
+	canvas->flags |= GNOME_CANVAS_NEED_REPICK;
 	reconfigure_items (canvas);
 	gtk_widget_draw (GTK_WIDGET (canvas), NULL);
 }
