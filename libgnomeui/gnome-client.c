@@ -437,6 +437,7 @@ client_unset (GnomeClient *client, gchar *name)
     SmcDeleteProperties ((SmcConn) client->smc_conn, 1, &name);
 }
 
+#endif /* HAVE_LIBSM */
 
 static void
 client_set_state (GnomeClient *client, GnomeClientState state)
@@ -444,8 +445,6 @@ client_set_state (GnomeClient *client, GnomeClientState state)
   client->state= state;
 }
 
-
-#endif /* HAVE_LIBSM */
 
 /*****************************************************************************/
 /* Callback functions  */
@@ -2097,6 +2096,72 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
 #endif /* HAVE_LIBSM */
 }
 
+static void
+gnome_client_save_dialog_show (GnomeClient *client, gint key,
+			       GnomeDialogType type, GnomeDialog* dialog)
+{
+  gboolean shutdown_cancelled;
+  gint cancel_button = g_list_length (dialog->buttons);
+
+  if (client->shutdown) 
+    gnome_dialog_append_button (dialog, _("Cancel Logout"));
+  shutdown_cancelled = (cancel_button == gnome_dialog_run_and_close (dialog));
+  gnome_interaction_key_return (key, shutdown_cancelled);
+}
+
+/**
+ * gnome_client_save_any_dialog
+ * @client: Pointer to GNOME session client object.
+ * @dialog: Pointer to GNOME dialog widget.
+ *
+ * Description:
+ * May be called during a "save_youself" handler to request that a 
+ * (modal) dialog is presented to the user. The session manager decides 
+ * when the dialog is shown but it will not be shown it unless the 
+ * interact_style == GNOME_INTERACT_ANY. A "Cancel Logout" button 
+ * will be added during a shutdown.
+ **/
+void         
+gnome_client_save_any_dialog (GnomeClient *client, GnomeDialog *dialog)
+{
+  g_return_if_fail (client != NULL);
+  g_return_if_fail (dialog != NULL);
+  g_return_if_fail (GNOME_IS_CLIENT (client));
+  g_return_if_fail (GNOME_IS_DIALOG (dialog));
+
+  if (client->interact_style == GNOME_INTERACT_ANY)
+      gnome_client_request_interaction (client, 
+					GNOME_DIALOG_NORMAL, 
+					gnome_client_save_dialog_show,
+					(gpointer) dialog);
+}
+
+/**
+ * gnome_client_save_error_dialog
+ * @client: Pointer to GNOME session client object.
+ * @dialog: Pointer to GNOME dialog widget.
+ *
+ * Description:
+ * May be called during a "save_youself" handler when an error has occured 
+ * during the save. The session manager decides when the dialog is shown 
+ * but it will not be shown when the interact_style == GNOME_INTERACT_NONE.
+ * A "Cancel Logout" button will be added during a shutdown.
+ **/
+
+void         
+gnome_client_save_error_dialog (GnomeClient *client, GnomeDialog *dialog)
+{
+  g_return_if_fail (client != NULL);
+  g_return_if_fail (dialog != NULL);
+  g_return_if_fail (GNOME_IS_CLIENT (client));
+  g_return_if_fail (GNOME_IS_DIALOG (dialog));
+
+  if (client->interact_style != GNOME_INTERACT_NONE)
+    gnome_client_request_interaction (client, 
+				      GNOME_DIALOG_ERROR, 
+				      gnome_client_save_dialog_show,
+				      (gpointer) dialog);
+}
 
 /**
  * gnome_client_request_interaction

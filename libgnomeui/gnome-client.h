@@ -26,6 +26,7 @@
 #include <sys/types.h>
 #include <gtk/gtkobject.h>
 #include <libgnome/gnome-defs.h>
+#include <libgnomeui/gnome-dialog.h>
 
 BEGIN_GNOME_DECLS
 
@@ -298,6 +299,21 @@ void         gnome_client_add_static_arg (GnomeClient *client, ...);
    saveing.  */
 void         gnome_client_request_phase_2        (GnomeClient *client);
 
+/* The following function may be called during a "save_youself" handler
+ * to request that a (modal) dialog is presented to the user. The session 
+ * manager decides when the dialog is shown and it will not be shown
+ * unless the interact_style == GNOME_INTERACT_ANY. A "Cancel Logout"
+ * button will be added during a shutdown. */
+void         gnome_client_save_any_dialog       (GnomeClient *client,
+					         GnomeDialog *dialog);
+
+/* The following function may be called during a "save_youself" handler
+ * when an error has occured during the save. The session manager decides 
+ * when the dialog is shown and it will not be shown when the interact_style
+ * == GNOME_INTERACT_NONE.  A "Cancel Logout" button will be added 
+ * during a shutdown. */
+void         gnome_client_save_error_dialog      (GnomeClient *client,
+					          GnomeDialog *dialog);
 
 /* Use the following functions, if you want to interact with the user
    will saveing his data.  If the session manager decides that it's

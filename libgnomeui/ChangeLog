@@ -1,3 +1,8 @@
+Fri Dec 11 21:36:48 1998  Felix Bellaby  <felix@pooh.u-net.com>
+
+	* gnome-client.[ch] (gnome_client_save_any_dialog): more interact API
+	(gnome_client_save_error_dialog): more interact API
+	
 Fri Dec 11 03:16:17 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-icon-item.c (gnome_icon_text_item_stop_editing):
