@@ -1,3 +1,9 @@
+1999-12-15  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid.c (gnome_druid_insert_page): only map the page if
+	it's the only page. otherwise, unmap it.  This should let us add
+	pages to an already mapped druid.
+
 1999-12-14  Havoc Pennington  <hp@redhat.com>
 
 	* libgnomeui.schemas: schemas file for UI Preferences.

@@ -217,6 +217,8 @@ gnome_druid_size_request (GtkWidget *widget,
 			gtk_widget_size_request (GTK_WIDGET (child), &child_requisition);
 			temp_width = MAX (temp_width, child_requisition.width);
 			temp_height = MAX (temp_height, child_requisition.height);
+			if (GTK_WIDGET_MAPPED (child) && child != druid->current)
+				gtk_widget_unmap (child);
 		}
 	}
 	
@@ -697,13 +699,13 @@ gnome_druid_insert_page (GnomeDruid *druid,
 		gtk_widget_realize (GTK_WIDGET (page));
 
 	if (GTK_WIDGET_VISIBLE (GTK_WIDGET (druid)) && GTK_WIDGET_VISIBLE (GTK_WIDGET (page))) {
-		if (GTK_WIDGET_MAPPED (GTK_WIDGET (druid)))
-			gtk_widget_map (GTK_WIDGET (page));
-		gtk_widget_queue_resize (GTK_WIDGET (page));
+		if (GTK_WIDGET_MAPPED (GTK_WIDGET (page)))
+			gtk_widget_unmap (GTK_WIDGET (page));
+		gtk_widget_queue_resize (GTK_WIDGET (druid));
 	}
-	
-	/* if it's the first page, we want to bring it to the foreground. */
-	if (druid->children->data == (gpointer) page)
+
+	/* if it's the first and only page, we want to bring it to the foreground. */
+	if (druid->children->next == NULL)
 		gnome_druid_set_page (druid, page);
 }
 
