@@ -33,7 +33,7 @@ libgnomeui10compat_a_SOURCES =\
 	gnome-spell.c			\
 	gnome-startup.c			\
 	gtkcauldron.c			\
-	gnome-compat.c
+	gnomeui10-compat.c
 
 #libgnomeui10compat_a_HEADERS =\
 #	gnome-font-selector.h 		\
@@ -41,7 +41,7 @@ libgnomeui10compat_a_SOURCES =\
 #	gnome-spell.h			\
 #	gnome-startup.h			\
 #	gtkcauldron.h			\
-#	gnome-compat.h
+#	gnomeui10-compat.h
 
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
