@@ -342,6 +342,8 @@ gnome_href_set_text (GnomeHRef *href, const gchar *text)
   g_free(pattern);
 }
 
+#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
+
 /**
  * gnome_href_get_label
  * @href: Pointer to GnomeHRef widget
@@ -376,6 +378,8 @@ gnome_href_set_label (GnomeHRef *href, const gchar *label)
 	g_warning("gnome_href_set_label is deprecated, use gnome_href_set_text");
 	gnome_href_set_text(href, label);
 }
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
 
 static void
 gnome_href_clicked (GtkButton *button)

@@ -775,6 +775,8 @@ gnome_less_get_font_description(GnomeLess * gl)
 }
 
 
+#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
+
 /***************************************************************************/
 /* DEPRECATED */
 /**
@@ -819,4 +821,6 @@ void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
 		gnome_less_set_font_standard(gl);
 	}
 }
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
 

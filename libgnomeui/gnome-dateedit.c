@@ -833,6 +833,8 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 	return mktime (&tm);
 }
 
+#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
+
 /**
  * gnome_date_edit_get_date:
  * @gde: The GnomeDateEdit widget
@@ -845,6 +847,8 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 	g_warning(_("gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"));
 	return gnome_date_edit_get_time(gde);
 }
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
 
 
 /**

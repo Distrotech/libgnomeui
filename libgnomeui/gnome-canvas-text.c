@@ -38,6 +38,7 @@
 #include <pango/pangoft2.h>
 
 #include "libart_lgpl/art_affine.h"
+#include "libart_lgpl/art_rgb_a_affine.h"
 #include "libart_lgpl/art_rgb.h"
 #include "libart_lgpl/art_rgb_bitmap_affine.h"
 #include "gnome-canvas-util.h"

@@ -328,6 +328,8 @@ gnome_property_box_set_modified (GnomePropertyBox *property_box, gboolean state)
 	set_sensitive (property_box, state);
 }
 
+#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
+
 /* Deprecated */
 void
 gnome_property_box_set_state (GnomePropertyBox *property_box, gboolean state)
@@ -337,6 +339,8 @@ gnome_property_box_set_state (GnomePropertyBox *property_box, gboolean state)
 #endif
         gnome_property_box_set_modified (property_box, state);
 }
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
 
 static void
 global_apply (GnomePropertyBox *property_box)

@@ -341,6 +341,7 @@ entry_activated_cb (GtkWidget *widget, gpointer data)
 	gnome_selector_activate_entry (GNOME_SELECTOR (data));
 }
 
+#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
 
 /**
  * gnome_entry_gtk_entry
@@ -402,7 +403,6 @@ gnome_entry_get_history_id (GnomeEntry *gentry)
 
 	return gentry->_priv->history_id;
 }
-
 
 /**
  * gnome_entry_set_max_saved
@@ -556,3 +556,6 @@ gnome_entry_save_history (GnomeEntry *gentry)
 
 	gnome_selector_save_history (GNOME_SELECTOR (gentry));
 }
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
+

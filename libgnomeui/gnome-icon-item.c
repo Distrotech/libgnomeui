@@ -129,7 +129,7 @@ static void
 layout_text (Iti *iti)
 {
 	ItiPrivate *priv;
-	char *text;
+	const char *text;
 	int old_width, old_height;
 	int width, height;
 

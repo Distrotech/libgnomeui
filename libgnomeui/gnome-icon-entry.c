@@ -792,6 +792,8 @@ gnome_icon_entry_set_preview_size (GnomeIconEntry *ientry,
 }
 
 
+#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
+
 /**
  * gnome_icon_entry_set_pixmap_subdir:
  * @ientry: the GnomeIconEntry to work with
@@ -863,4 +865,6 @@ gnome_icon_entry_get_filename (GnomeIconEntry *ientry)
 
 	return gnome_selector_get_uri (GNOME_SELECTOR (ientry));
 }
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
 

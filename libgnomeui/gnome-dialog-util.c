@@ -387,7 +387,7 @@ static void
 dialog_string_callback (GnomeMessageBox * mbox, gint button, callback_info * data)
 {
   gchar * s = NULL;
-  gchar * tmp;
+  const char * tmp;
   GnomeStringCallback func = (GnomeStringCallback)data->function;
 
   if (button == 0) {
@@ -452,6 +452,7 @@ request_dialog (const gchar * request, const gchar * default_text, const guint16
   return mbox;
 }
 
+#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
 
 /* Get a string. */
 /**
@@ -507,6 +508,8 @@ gnome_request_password_dialog_parented (const gchar * prompt,
   g_message("gnome_request_password_dialog_parented is deprecated, use gnome_request_dialog instead.");
   return request_dialog (prompt, NULL, 0, callback, data, TRUE, parent);
 }
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
 
 /**
  * gnome_request_dialog:

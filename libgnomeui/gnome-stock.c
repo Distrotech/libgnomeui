@@ -1348,7 +1348,8 @@ accel_dlg_select_ok(GtkWidget *widget, GtkWindow *window)
 {
 	AccelEntry entry;
 	GtkToggleButton *check;
-	gchar *key, *s, *s2;
+	gchar *s, *s2;
+        const char *key;
 	int row;
 
 	key = gtk_entry_get_text(GTK_ENTRY(gtk_object_get_data(GTK_OBJECT(window), "key")));
@@ -1356,7 +1357,7 @@ accel_dlg_select_ok(GtkWidget *widget, GtkWindow *window)
 		entry.key = 0;
 		entry.mod = 0;
 	} else {
-		accel_from_string(key, &entry.key, &entry.mod);
+		accel_from_string((gchar *) key, &entry.key, &entry.mod);
 		entry.mod = 0;
 		check = gtk_object_get_data(GTK_OBJECT(window), "shift");
 		if (check->active)
