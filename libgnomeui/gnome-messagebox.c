@@ -234,7 +234,7 @@ gnome_messagebox_new (gchar           *message,
 		if (text == NULL)
 			break;
 
-		button = gtk_button_new_with_label (button1);
+		button = gtk_button_new_with_label (text);
 		GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
 		gtk_widget_set_usize (button, GNOME_MESSAGEBOX_BUTTON_WIDTH,
 				      GNOME_MESSAGEBOX_BUTTON_HEIGHT);
@@ -284,6 +284,6 @@ gnome_messagebox_button_clicked (GtkWidget   *button,
 		list = list->next;
 	}
 
-	g_list_free (messagebox->buttons);
+	g_list_free (GNOME_MESSAGEBOX (messagebox)->buttons);
 	gtk_widget_destroy (messagebox);
 }
