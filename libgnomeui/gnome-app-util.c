@@ -20,7 +20,10 @@
 #include <config.h>
 
 #include "gnome-app-util.h"
+
 #include "libgnome/gnome-i18nP.h"
+#include "libgnome/gnome-util.h"
+
 #include "gnome-stock.h"
 #include "gnome-dialog-util.h"
 #include "gnome-dialog.h"
@@ -29,8 +32,6 @@
 #include "gnome-appbar.h"
 
 #include <gtk/gtk.h>
-
-#define NOT_IMPLEMENTED g_warning("Interactive status bar not implemented.\n")
 
 static gboolean 
 gnome_app_has_appbar_progress(GnomeApp * app)
@@ -46,14 +47,49 @@ gnome_app_has_appbar_status(GnomeApp * app)
 	   (GNOME_APPBAR_HAS_STATUS(app->statusbar)) );
 }
 
+static gboolean
+gnome_app_interactive_statusbar(GnomeApp * app)
+{
+ return ( gnome_app_has_appbar_status (app) && 
+	  gnome_preferences_get_statusbar_dialog() &&
+	  gnome_preferences_get_statusbar_interactive() );
+}
+
 /* ================================================================== */
 
 /* =================================================================== */
+/* Simple messages */
 
+static void
+ack_cb(GnomeAppBar * bar, gpointer data)
+{
+  gnome_appbar_clear_prompt(bar);
+}
+
+static void
+ack_clear_prompt_cb(GnomeAppBar * bar, gpointer data)
+{
+#ifdef GNOME_ENABLE_DEBUG
+  g_print("Clearing prompt (ack)\n");
+#endif
+
+  gtk_signal_disconnect_by_func(GTK_OBJECT(bar), 
+				GTK_SIGNAL_FUNC(ack_cb),
+				data);
+  gtk_signal_disconnect_by_func(GTK_OBJECT(bar), 
+				GTK_SIGNAL_FUNC(ack_clear_prompt_cb),
+				data);
+}
 
 static void gnome_app_message_bar (GnomeApp * app, const gchar * message)
 {
-  NOT_IMPLEMENTED;
+  gchar * prompt = g_copy_strings(message, _(" (press return)"), NULL);
+  gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, FALSE);
+  g_free(prompt);
+  gtk_signal_connect(GTK_OBJECT(app->statusbar), "user_response",
+		     GTK_SIGNAL_FUNC(ack_cb), NULL);
+  gtk_signal_connect(GTK_OBJECT(app->statusbar), "clear_prompt",
+		     GTK_SIGNAL_FUNC(ack_clear_prompt_cb), NULL);
 }
 
 GtkWidget *
@@ -63,7 +99,7 @@ gnome_app_message (GnomeApp * app, const gchar * message)
   g_return_val_if_fail(GNOME_IS_APP(app), NULL);
 
   if ( gnome_preferences_get_statusbar_dialog() &&
-       gnome_app_has_appbar_status(app) ) {
+       gnome_app_interactive_statusbar(app) ) {
     gnome_app_message_bar ( app, message );
     return NULL;
   }
@@ -71,6 +107,57 @@ gnome_app_message (GnomeApp * app, const gchar * message)
     return gnome_ok_dialog(message);
   }
 }
+
+static void 
+gnome_app_error_bar(GnomeApp * app, const gchar * error)
+{
+  gchar * s = g_copy_strings(_("ERROR: "), error, NULL);
+  gdk_beep();
+  gnome_app_message_bar(app, s);
+  g_free(s);
+}
+
+GtkWidget * 
+gnome_app_error (GnomeApp * app, const gchar * error)
+{
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(error != NULL, NULL);
+
+  if ( gnome_app_interactive_statusbar(app) ) {
+    gnome_app_error_bar(app, error);
+    return NULL;
+  }
+  else return gnome_error_dialog (error);
+}
+
+static void gnome_app_warning_bar (GnomeApp * app, const gchar * warning)
+{
+  gchar * s = g_copy_strings(_("Warning: "), warning, NULL);
+  gdk_beep();
+  gnome_app_flash(app, s);
+  g_free(s);
+}
+
+GtkWidget * 
+gnome_app_warning (GnomeApp * app, const gchar * warning)
+{
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(warning != NULL, NULL);
+
+  if ( gnome_app_has_appbar_status(app) && 
+       gnome_preferences_get_statusbar_dialog() ) {
+    gnome_app_warning_bar(app, warning);
+    return NULL;
+  }
+  else {
+    return gnome_warning_dialog(warning);
+  }
+}
+
+/* =================================================== */
+/* Flash */
 
 struct _MessageInfo {
   GnomeApp * app;
@@ -97,7 +184,7 @@ remove_timeout_cb ( GtkWidget * app, MessageInfo * mi )
   g_free(mi);
 }
 
-static const guint32 flash_length = 5000; /* 5 seconds, I hope */
+static const guint32 flash_length = 3000; /* 3 seconds, I hope */
 
 void 
 gnome_app_flash (GnomeApp * app, const gchar * flash)
@@ -107,11 +194,6 @@ gnome_app_flash (GnomeApp * app, const gchar * flash)
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
   g_return_if_fail(flash != NULL);
-
-  /* An alternative and less messy way to write this function would be 
-     to make gnome_appbar_update() a public function (it's in .c now) and 
-     have the timeout call that after the flash_length. But I don't think
-     that function should be public. */
 
   /* OK to call app_flash without a statusbar */
   if ( gnome_app_has_appbar_status(app) ) {
@@ -138,67 +220,82 @@ gnome_app_flash (GnomeApp * app, const gchar * flash)
   }   
 }
 
+/* ========================================================== */
 
-static gboolean
-gnome_app_interactive_statusbar(GnomeApp * app)
+typedef struct {
+  GnomeReplyCallback callback;
+  gpointer data;
+} ReplyInfo;
+
+static void
+bar_reply_cb(GnomeAppBar * ab, ReplyInfo * ri)
 {
- return ( gnome_app_has_appbar_status (app) && 
-	  gnome_preferences_get_statusbar_dialog() &&
-	  gnome_preferences_get_statusbar_interactive() );
-}
+  gchar * response;
 
-static void 
-gnome_app_error_bar(GnomeApp * app, const gchar * error)
-{
-  NOT_IMPLEMENTED;
-}
+  response = gnome_appbar_get_response(ab);
+  g_return_if_fail(response != NULL);
 
-GtkWidget * 
-gnome_app_error (GnomeApp * app, const gchar * error)
-{
-  g_return_val_if_fail(app != NULL, NULL);
-  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
-  g_return_val_if_fail(error != NULL, NULL);
+#ifdef GNOME_ENABLE_DEBUG
+  g_print("Got reply: \"%s\"\n", response);
+#endif
 
-  if ( gnome_app_interactive_statusbar(app) ) {
-    gnome_app_error_bar(app, error);
+  if ( (g_strcasecmp(_("y"), response) == 0) || 
+       (g_strcasecmp(_("yes"), response) == 0) ) {
+    (* (ri->callback)) (GNOME_YES, ri->data);
   }
-  /* else */
-  return gnome_error_dialog (error);
-}
-
-static void gnome_app_warning_bar (GnomeApp * app, const gchar * warning)
-{
-  /* This is kind of a lame implementation? Maybe fix it later */
-  gdk_beep();
-  gnome_app_flash(app, warning);
-}
-
-GtkWidget * 
-gnome_app_warning (GnomeApp * app, const gchar * warning)
-{
-  g_return_val_if_fail(app != NULL, NULL);
-  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
-  g_return_val_if_fail(warning != NULL, NULL);
-
-  if ( gnome_app_has_appbar_status(app) && 
-       gnome_preferences_get_statusbar_dialog() ) {
-    gnome_app_warning_bar(app, warning);
-    return NULL;
+  else if ( (g_strcasecmp(_("n"), response) == 0) || 
+	    (g_strcasecmp(_("no"), response) == 0) ) {
+    (* (ri->callback)) (GNOME_NO, ri->data);
   }
   else {
-    return gnome_warning_dialog(warning);
+    g_free(response);
+    gdk_beep(); /* Kind of lame; better to give a helpful message */
+    return;
   }
+  g_free(response);
+  gnome_appbar_clear_prompt(ab);
+  return;
 }
 
-/* ========================================================== */
+/* FIXME this can all be done as a special case of request_string
+   where we check the string for yes/no afterward. */
+
+static void
+reply_clear_prompt_cb(GnomeAppBar * ab, ReplyInfo * ri)
+{
+#ifdef GNOME_ENABLE_DEBUG
+  g_print("Clear prompt callback (reply)\n");
+#endif
+  gtk_signal_disconnect_by_func(GTK_OBJECT(ab), 
+				GTK_SIGNAL_FUNC(bar_reply_cb),
+				ri);
+  gtk_signal_disconnect_by_func(GTK_OBJECT(ab), 
+				GTK_SIGNAL_FUNC(reply_clear_prompt_cb),
+				ri);
+  g_free(ri);
+}
 
 static void 
 gnome_app_reply_bar(GnomeApp * app, const gchar * question,
 		    GnomeReplyCallback callback, gpointer data,
 		    gboolean yes_or_ok, gboolean modal)
 {
-  NOT_IMPLEMENTED;
+  gchar * prompt;
+  ReplyInfo * ri;
+
+  prompt = g_copy_strings(question, yes_or_ok ? _(" (yes or no)") : 
+			  _("  - OK? (yes or no)"), NULL);
+  gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, modal);
+  g_free(prompt);
+  
+  ri = g_new(ReplyInfo, 1);
+  ri->callback = callback;
+  ri->data     = data;
+
+  gtk_signal_connect(GTK_OBJECT(app->statusbar), "user_response",
+		     GTK_SIGNAL_FUNC(bar_reply_cb), ri);
+  gtk_signal_connect(GTK_OBJECT(app->statusbar), "clear_prompt",
+		     GTK_SIGNAL_FUNC(reply_clear_prompt_cb), ri);
 }
 
 GtkWidget * 
@@ -273,11 +370,71 @@ gnome_app_ok_cancel_modal (GnomeApp * app, const gchar * message,
   }
 }
 
-static void gnome_app_request_bar  (GnomeApp * app, const gchar * prompt,
-				    GnomeStringCallback callback, 
-				    gpointer data, gboolean password)
+typedef struct {
+  GnomeStringCallback callback;
+  gpointer data;
+} RequestInfo;
+
+
+static void 
+bar_request_cb(GnomeAppBar * ab, RequestInfo * ri)
 {
-  NOT_IMPLEMENTED;
+  gchar * response;
+
+  response = gnome_appbar_get_response(ab);
+  g_return_if_fail(response != NULL);
+
+#ifdef GNOME_ENABLE_DEBUG
+  g_print("Got string: \"%s\"\n", response);
+#endif
+
+  /* response isn't freed because the callback expects an 
+     allocated string. */
+  (* (ri->callback)) (response, ri->data);
+
+  gnome_appbar_clear_prompt(ab);
+  return;
+}
+
+static void
+request_clear_prompt_cb(GnomeAppBar * ab, RequestInfo * ri)
+{
+#ifdef GNOME_ENABLE_DEBUG
+  g_print("Clearing prompt (request)\n");
+#endif
+
+
+  gtk_signal_disconnect_by_func(GTK_OBJECT(ab), 
+				GTK_SIGNAL_FUNC(bar_request_cb),
+				ri);
+  gtk_signal_disconnect_by_func(GTK_OBJECT(ab), 
+				GTK_SIGNAL_FUNC(request_clear_prompt_cb),
+				ri);
+  g_free(ri);
+}
+
+static void 
+gnome_app_request_bar  (GnomeApp * app, const gchar * prompt,
+			GnomeStringCallback callback, 
+			gpointer data, gboolean password)
+{
+  if (password == TRUE) {
+    g_warning("Password support not implemented for appbar");
+  }
+  else {
+    RequestInfo * ri;
+    
+    gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, FALSE);
+    
+    ri = g_new(RequestInfo, 1);
+    ri->callback = callback;
+    ri->data     = data;
+    
+    gtk_signal_connect(GTK_OBJECT(app->statusbar), "user_response",
+		       GTK_SIGNAL_FUNC(bar_request_cb), ri);   
+    gtk_signal_connect(GTK_OBJECT(app->statusbar), "clear_prompt",
+		       GTK_SIGNAL_FUNC(request_clear_prompt_cb), ri);     
+  }
 }
 
 GtkWidget * 
@@ -289,7 +446,13 @@ gnome_app_request_string (GnomeApp * app, const gchar * prompt,
   g_return_val_if_fail(prompt != NULL, NULL);
   g_return_val_if_fail(callback != NULL, NULL);
 
-  return gnome_request_string_dialog(prompt, callback, data);
+  if ( gnome_app_interactive_statusbar(app) ) {
+    gnome_app_request_bar(app, prompt, callback, data, FALSE);
+    return NULL;
+  }
+  else {
+    return gnome_request_string_dialog(prompt, callback, data);   
+  }
 }
 
 
@@ -301,6 +464,8 @@ gnome_app_request_password (GnomeApp * app, const gchar * prompt,
   g_return_val_if_fail(GNOME_IS_APP(app), NULL);
   g_return_val_if_fail(prompt != NULL, NULL);
   g_return_val_if_fail(callback != NULL, NULL);
+
+  /* FIXME implement for AppBar */
 
   return gnome_request_password_dialog(prompt, callback, data);
 }
@@ -323,7 +488,7 @@ typedef struct {
 /* Works for statusbar and dialog both. */
 static gint progress_timeout_cb (ProgressKeyReal * key)
 {
-  gfloat percent;
+  gdouble percent;
   percent = (* key->percentage_cb)(key->data);
   gnome_app_set_progress (key, percent);
   return TRUE;
@@ -377,6 +542,14 @@ progress_bar (GnomeApp * app, const gchar * description, ProgressKeyReal * key)
   gnome_appbar_set_status(GNOME_APPBAR(key->widget), description);
 }
 
+static void
+stop_progress_cb(GnomeApp * app, GnomeAppProgressKey key)
+{
+  gnome_app_progress_done(key);
+}
+
+/* FIXME share code between manual and timeout */
+
 GnomeAppProgressKey 
 gnome_app_progress_timeout (GnomeApp * app, 
 			    const gchar * description,
@@ -410,6 +583,11 @@ gnome_app_progress_timeout (GnomeApp * app,
 				       (GtkFunction) progress_timeout_cb,
 				       key );
 
+  /* Make sure progress stops if the app is destroyed. */
+  gtk_signal_connect(GTK_OBJECT(app), "destroy",
+		     GTK_SIGNAL_FUNC(stop_progress_cb),
+		     key);
+
   return key;
 }
 
@@ -439,10 +617,15 @@ gnome_app_progress_manual (GnomeApp * app,
     progress_dialog (description, key);
   }
 
+  /* Make sure progress stops if the app is destroyed. */
+  gtk_signal_connect(GTK_OBJECT(app), "destroy",
+		     GTK_SIGNAL_FUNC(stop_progress_cb),
+		     key);
+
   return key;
 }
 
-void gnome_app_set_progress (GnomeAppProgressKey key, gfloat percent)
+void gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent)
 {
   ProgressKeyReal * real_key = (GnomeAppProgressKey) key;
 

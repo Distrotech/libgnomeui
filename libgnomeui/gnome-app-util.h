@@ -75,7 +75,7 @@ gnome_app_request_password (GnomeApp * app, const gchar * prompt,
 /* ========================================================== */
 
 /* Returns the fraction of the task done at a given time. */
-typedef gfloat (* GnomeAppProgressFunc) (gpointer data);
+typedef gdouble (* GnomeAppProgressFunc) (gpointer data);
 
 /* What to call if the operation is canceled. */
 typedef void (* GnomeAppProgressCancelFunc) (gpointer data);
@@ -106,7 +106,7 @@ gnome_app_progress_manual (GnomeApp * app,
 
 /* Only makes sense with manual. */
 void 
-gnome_app_set_progress (GnomeAppProgressKey key, gfloat percent);
+gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent);
 
 /* Call this when the progress meter should go away. Automatically 
    called if progress is cancelled. */

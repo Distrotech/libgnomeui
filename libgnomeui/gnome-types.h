@@ -16,6 +16,12 @@ typedef void (* GnomeStringCallback)(gchar * string, gpointer data);
    "reply" */
 typedef void (* GnomeReplyCallback)(gint reply, gpointer data);
 
+/* Do something never, only when the user wants, or always. */
+typedef enum {
+  GNOME_PREFERENCES_NEVER,
+  GNOME_PREFERENCES_USER,
+  GNOME_PREFERENCES_ALWAYS
+} GnomePreferencesType;
 
 END_GNOME_DECLS
 

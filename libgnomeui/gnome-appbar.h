@@ -27,6 +27,7 @@
 #include <gtk/gtkhbox.h>
 
 #include "libgnome/gnome-defs.h"
+#include "gnome-types.h"
 
 BEGIN_GNOME_DECLS
 
@@ -52,6 +53,11 @@ struct _GnomeAppBar
      all up in the air for now. */
   GtkWidget * progress;
   GtkWidget * status;
+  gint interactive : 1; /* This means status is an entry rather than a
+			   label, for the moment. */
+  gint editable_start; /* The first editable position in the interactive
+			  buffer. */
+  gchar * prompt; /* The text of a prompt, if any. */
 
   /* Keep it simple; no contexts. 
      if (status_stack) display_top_of_stack;
@@ -65,12 +71,20 @@ struct _GnomeAppBar
 struct _GnomeAppBarClass
 {
   GtkHBoxClass parent_class;
+
+  /* Emitted when the user hits enter after a prompt. */
+  void (* user_response) (GnomeAppBar * ab);
+  /* Emitted when the prompt is cleared. */
+  void (* clear_prompt)  (GnomeAppBar * ab);
 };
+
+#define GNOME_APPBAR_INTERACTIVE(ab) ((ab) ? (ab)->interactive : FALSE)
 
 guint      gnome_appbar_get_type     	(void);
 
 GtkWidget* gnome_appbar_new          	(gboolean has_progress, 
-					 gboolean has_status);
+					 gboolean has_status,
+					 GnomePreferencesType interactivity);
 
 /* Sets the status label without changing widget state; next set or push
    will destroy this permanently. */
@@ -96,6 +110,15 @@ void	   gnome_appbar_set_progress	(GnomeAppBar * statusbar,
    to disappear. */
 void       gnome_appbar_refresh         (GnomeAppBar * appbar);
 
+/* Put a prompt in the appbar and wait for a response. When the 
+   user responds or cancels, a user_response signal is emitted. */
+void       gnome_appbar_set_prompt          (GnomeAppBar * appbar,
+					     const gchar * prompt,
+					     gboolean modal);
+/* Remove any prompt */
+void       gnome_appbar_clear_prompt    (GnomeAppBar * appbar);				       
+/* Get the response to the prompt, if any. Result must be g_free'd. */
+gchar *    gnome_appbar_get_response    (GnomeAppBar * appbar);				       
 END_GNOME_DECLS
 
 #endif /* __GNOME_APPBAR_H__ */

@@ -97,7 +97,7 @@ static GtkWidget * reply_dialog (const gchar * question,
 		     info);
 
   if (modal) {
-    gtk_grab_add(mbox);
+    gnome_dialog_set_modal(GNOME_DIALOG(mbox));
     gtk_window_position(GTK_WINDOW(mbox), GTK_WIN_POS_CENTER);
   }
 

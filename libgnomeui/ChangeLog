@@ -1,3 +1,16 @@
+Sun Jul 12 22:57:55 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-app-util.c: Implementations for interactive appbar
+	and appbar progress bar.
+	* gnome-app-util.h: Change set_progress to use gdouble rather
+	than gfloat.
+	* gnome-appbar.h, gnome-appbar.c: Try implementing interactive
+	minibuffer with a GtkEntry hack. It doesn't work so good; think of
+	it as a prototype.
+	* gnome-types.h: GnomePreferencesType enum 
+	* gnome-dialog-util.c: Use set_modal instead of grab_add for modal
+	dialogs; this fixes a bug (the "modal" dialogs weren't).
+
 Fri Jul 10 10:19:38 1998  Tim Janik  <timj@gtk.org>
 
 	* gnome-app-helper.c (gnome_app_do_menu_creation): 
