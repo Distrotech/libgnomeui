@@ -19,6 +19,7 @@
 #include "gnome-pixmap.h"
 #include "gnome-stock.h"
 #include <string.h>
+#include <stdio.h>
 #include <ctype.h>
 #include <gtk/gtk.h>
 
