@@ -240,7 +240,7 @@ typedef struct {
         { GNOME_APP_UI_ITEM, N_("_Print"), N_("Print the current file"),    \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,                   \
-          GNOME_KEY_NAME_PRINT,  GNOME_KEY_NAME_PRINT_SETUP, NULL }
+          GNOME_KEY_NAME_PRINT,  GNOME_KEY_MOD_PRINT, NULL }
 
 #define GNOMEUIINFO_MENU_PRINT_SETUP_ITEM(cb, data)                         \
         { GNOME_APP_UI_ITEM, N_("Print S_etup..."),                         \
@@ -319,7 +319,7 @@ typedef struct {
  */
 #define GNOMEUIINFO_MENU_ABOUT_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM, N_("_About..."),                               \
-          N_("About this application")NULL, cb, (gpointer)(data),           \
+          N_("About this application"), cb, (gpointer)(data),           \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,             \
           0,  (GdkModifierType) 0, NULL }
 	  
