@@ -201,7 +201,7 @@ gnome_guru_construct                 (GnomeGuru   * guru,
 		       guru);
     
     gtk_box_pack_start(GTK_BOX(dialog->vbox),
-		       guru, TRUE, TRUE, 0);
+		       GTK_WIDGET(guru), TRUE, TRUE, 0);
   }
   else {
     GtkWidget* seplabel;
@@ -272,7 +272,7 @@ gnome_guru_construct                 (GnomeGuru   * guru,
 
     hbox = gtk_hbox_new(FALSE,0);
     
-    gtk_box_pack_start(GTK_BOX(dialog ? dialog->vbox : guru),
+    gtk_box_pack_start(GTK_BOX(dialog ? dialog->vbox : GTK_WIDGET(guru)),
 		       hbox,
 		       TRUE, TRUE, GNOME_PAD_SMALL);
     gtk_box_pack_start(GTK_BOX(hbox),
@@ -284,7 +284,7 @@ gnome_guru_construct                 (GnomeGuru   * guru,
     gtk_widget_show_all(hbox);
   }
   else {
-    gtk_box_pack_start(GTK_BOX(dialog ? dialog->vbox : guru),
+    gtk_box_pack_start(GTK_BOX(dialog ? dialog->vbox : GTK_WIDGET(guru)),
 		       guru->page_box,
 		       TRUE, TRUE, 0);
     gtk_widget_show_all(guru->page_box);
