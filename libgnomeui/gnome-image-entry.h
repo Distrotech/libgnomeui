@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -52,14 +52,14 @@ typedef struct _GnomeImageEntryPrivate GnomeImageEntryPrivate;
 typedef struct _GnomeImageEntryClass   GnomeImageEntryClass;
 
 struct _GnomeImageEntry {
-	GnomeSelectorClient client;
+    GnomeSelectorClient client;
 
-	/*< private >*/
-	GnomeImageEntryPrivate *_priv;
+    /*< private >*/
+    GnomeImageEntryPrivate *_priv;
 };
 
 struct _GnomeImageEntryClass {
-	GnomeSelectorClientClass parent_class;
+    GnomeSelectorClientClass parent_class;
 };
 
 

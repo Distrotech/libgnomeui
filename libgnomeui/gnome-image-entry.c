@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -71,24 +71,24 @@ static GnomeSelectorClientClass *parent_class;
 GType
 gnome_image_entry_get_type (void)
 {
-	static GType entry_type = 0;
+    static GType entry_type = 0;
 
-	if (!entry_type) {
-		GtkTypeInfo entry_info = {
-			"GnomeImageEntry",
-			sizeof (GnomeImageEntry),
-			sizeof (GnomeImageEntryClass),
-			(GtkClassInitFunc) gnome_image_entry_class_init,
-			(GtkObjectInitFunc) gnome_image_entry_init,
-			NULL,
-			NULL,
-			NULL
-		};
+    if (!entry_type) {
+	GtkTypeInfo entry_info = {
+	    "GnomeImageEntry",
+	    sizeof (GnomeImageEntry),
+	    sizeof (GnomeImageEntryClass),
+	    (GtkClassInitFunc) gnome_image_entry_class_init,
+	    (GtkObjectInitFunc) gnome_image_entry_init,
+	    NULL,
+	    NULL,
+	    NULL
+	};
 
-		entry_type = gtk_type_unique (gnome_selector_client_get_type (), &entry_info);
-	}
+	entry_type = gtk_type_unique (gnome_selector_client_get_type (), &entry_info);
+    }
 
-	return entry_type;
+    return entry_type;
 }
 
 static void
@@ -149,105 +149,105 @@ gnome_image_entry_get_property (GObject *object, guint param_id, GValue *value,
 static void
 gnome_image_entry_class_init (GnomeImageEntryClass *class)
 {
-	GObjectClass *object_class;
+    GObjectClass *object_class;
 
-	object_class = (GObjectClass *) class;
+    object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gnome_selector_client_get_type ());
+    parent_class = gtk_type_class (gnome_selector_client_get_type ());
 
-	object_class->finalize = gnome_image_entry_finalize;
+    object_class->finalize = gnome_image_entry_finalize;
 
-	object_class->get_property = gnome_image_entry_get_property;
-	object_class->set_property = gnome_image_entry_set_property;
+    object_class->get_property = gnome_image_entry_get_property;
+    object_class->set_property = gnome_image_entry_set_property;
 
-	/* Construction properties */
-	g_object_class_install_property
-		(object_class,
-		 PROP_IS_PIXMAP_ENTRY,
-		 g_param_spec_boolean ("is-pixmap-entry", NULL, NULL,
-				       FALSE,
-				       (G_PARAM_READABLE | G_PARAM_WRITABLE |
-					G_PARAM_CONSTRUCT_ONLY)));
+    /* Construction properties */
+    g_object_class_install_property
+	(object_class,
+	 PROP_IS_PIXMAP_ENTRY,
+	 g_param_spec_boolean ("is-pixmap-entry", NULL, NULL,
+			       FALSE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
 
-	/* Normal properties */
-	g_object_class_install_property
-		(object_class,
-		 PROP_PREVIEW_X,
-		 g_param_spec_uint ("preview-x", NULL, NULL,
-				    0, G_MAXINT, ICON_SIZE,
-				    (G_PARAM_READABLE | G_PARAM_WRITABLE |
-				     G_PARAM_CONSTRUCT)));
-	g_object_class_install_property
-		(object_class,
-		 PROP_PREVIEW_Y,
-		 g_param_spec_uint ("preview-y", NULL, NULL,
-				    0, G_MAXINT, ICON_SIZE,
-				    (G_PARAM_READABLE | G_PARAM_WRITABLE |
-				     G_PARAM_CONSTRUCT)));
+    /* Normal properties */
+    g_object_class_install_property
+	(object_class,
+	 PROP_PREVIEW_X,
+	 g_param_spec_uint ("preview-x", NULL, NULL,
+			    0, G_MAXINT, ICON_SIZE,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT)));
+    g_object_class_install_property
+	(object_class,
+	 PROP_PREVIEW_Y,
+	 g_param_spec_uint ("preview-y", NULL, NULL,
+			    0, G_MAXINT, ICON_SIZE,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT)));
 }
 
 static void
 gnome_image_entry_init (GnomeImageEntry *gentry)
 {
-	gentry->_priv = g_new0 (GnomeImageEntryPrivate, 1);
+    gentry->_priv = g_new0 (GnomeImageEntryPrivate, 1);
 }
 
 GtkWidget *
 gnome_image_entry_new_icon_entry (void)
 {
-	GnomeImageEntry *ientry;
+    GnomeImageEntry *ientry;
 
-	ientry = g_object_new (gnome_image_entry_get_type (),
-			       "is-pixmap-entry", FALSE, NULL);
+    ientry = g_object_new (gnome_image_entry_get_type (),
+			   "is-pixmap-entry", FALSE, NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct
-		(GNOME_SELECTOR_CLIENT (ientry),
-		 "OAFIID:GNOME_UI_Component_ImageEntry",
-		 CORBA_OBJECT_NIL);
+    return (GtkWidget *) gnome_selector_client_construct
+	(GNOME_SELECTOR_CLIENT (ientry),
+	 "OAFIID:GNOME_UI_Component_ImageEntry",
+	 CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
 gnome_image_entry_new_pixmap_entry (guint preview_x, guint preview_y)
 {
-	GnomeImageEntry *ientry;
+    GnomeImageEntry *ientry;
 
-	ientry = g_object_new (gnome_image_entry_get_type (),
-			       "preview-x", preview_x, "preview-y", preview_y,
-			       "is-pixmap-entry", TRUE, NULL);
+    ientry = g_object_new (gnome_image_entry_get_type (),
+			   "preview-x", preview_x, "preview-y", preview_y,
+			   "is-pixmap-entry", TRUE, NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct
-		(GNOME_SELECTOR_CLIENT (ientry),
-		 "OAFIID:GNOME_UI_Component_ImageEntry",
-		 CORBA_OBJECT_NIL);
+    return (GtkWidget *) gnome_selector_client_construct
+	(GNOME_SELECTOR_CLIENT (ientry),
+	 "OAFIID:GNOME_UI_Component_ImageEntry",
+	 CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
 gnome_image_entry_new_from_selector (GNOME_Selector     corba_selector,
 				     Bonobo_UIContainer uic)
 {
-	GnomeImageEntry *ientry;
+    GnomeImageEntry *ientry;
 
-	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-	ientry = g_object_new (gnome_image_entry_get_type (), NULL);
+    ientry = g_object_new (gnome_image_entry_get_type (), NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct_from_objref
-		(GNOME_SELECTOR_CLIENT (ientry), corba_selector, uic);
+    return (GtkWidget *) gnome_selector_client_construct_from_objref
+	(GNOME_SELECTOR_CLIENT (ientry), corba_selector, uic);
 }
 
 static void
 gnome_image_entry_finalize (GObject *object)
 {
-	GnomeImageEntry *ientry;
+    GnomeImageEntry *ientry;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_IMAGE_ENTRY (object));
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_IMAGE_ENTRY (object));
 
-	ientry = GNOME_IMAGE_ENTRY (object);
+    ientry = GNOME_IMAGE_ENTRY (object);
 
-	g_free (ientry->_priv);
-	ientry->_priv = NULL;
+    g_free (ientry->_priv);
+    ientry->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+    if (G_OBJECT_CLASS (parent_class)->finalize)
+	(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
