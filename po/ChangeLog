@@ -1,3 +1,7 @@
+2003-04-24  Abel Cheung  <maddog@linux.org.hk>
+
+	* az.po: Mark wrong entry(ies) as fuzzy (msgfmt check failed).
+
 2003-04-23  Joel Brich <joel.brich@laposte.net>
 
 	* eo.po: Updated Esperanto translation

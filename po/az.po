@@ -1148,7 +1148,7 @@ msgid "_Details"
 msgstr "_Ətraflı"
 
 #: libgnomeui/gnome-gconf-ui.c:169
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
 "that your system administrator or operating system vendor does not allow you "
