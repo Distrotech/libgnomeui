@@ -1,3 +1,9 @@
+Thu Apr 30 11:45:38 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-app-helper.c (gnome_app_create_menus_custom,
+	gnome_app_do_toolbar_creation): if GnomeApp gets a new accelerator
+	table, add it to the window.
+
 Thu Apr 30 01:27:52 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h, gnome-appsmenu.c: Removed.

@@ -233,6 +233,9 @@ gnome_app_create_menus_custom (GnomeApp *app,
 			       GnomeUIBuilderData uibdata)
 {
   GtkWidget *menubar;
+  GtkAcceleratorTable *at;
+  int set_accel;
+
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
   g_return_if_fail(app->menubar == NULL);
@@ -240,8 +243,15 @@ gnome_app_create_menus_custom (GnomeApp *app,
   menubar = gtk_menu_bar_new ();
   gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
 	
+  at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
+  set_accel = (at == NULL);
   if (menuinfo)
     gnome_app_do_menu_creation(app, app->menubar, menuinfo, uibdata);
+  if (set_accel) {
+    at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
+    if (at)
+      gtk_window_add_accelerator_table(GTK_WINDOW(app), at);
+  }
 }
 
 void
@@ -291,9 +301,12 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 			      GnomeUIInfo *tbinfo,
 			      GnomeUIBuilderData uidata)
 {
-  int i;
+  int i, set_accel;
+  GtkAcceleratorTable *at;
   GtkWidget *pmap;
-	
+
+  set_accel = (NULL == gtk_object_get_data(GTK_OBJECT(app),
+					   "GtkAcceleratorTable"));
   if(!GTK_WIDGET(app)->window)
     gtk_widget_realize(GTK_WIDGET(app));
 	
@@ -352,6 +365,11 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 	}
     }
   tbinfo[i].widget = parent_widget;
+  if (set_accel) {
+    at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
+    if (at)
+      gtk_window_add_accelerator_table(GTK_WINDOW(app), at);
+  }
 }
 
 static void
