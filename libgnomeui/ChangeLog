@@ -1,5 +1,11 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* Makefile.am, libgnomeui.h: Moved all temporarily disabled
+	stuff to a new `unused_SOURCES' target and #ifdef FIXME them
+	in libgnome.h.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	Temporarily removed gnome-helpsys, gnome-popup-menu,
 	gnome-popup-help and gnome-textfu from the build.
 

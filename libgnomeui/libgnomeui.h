@@ -33,6 +33,7 @@
 #include <libgnomeui/gnome-animator.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-appbar.h>
+#include <libgnomeui/gnome-app-helper.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-line.h>
@@ -52,7 +53,6 @@
 #include <libgnomeui/gnome-font-picker.h>
 #include <libgnomeui/gnome-gconf.h>
 #include <libgnomeui/gnome-geometry.h>
-#include <libgnomeui/gnome-helpsys.h>
 
 #include <libgnomeui/gnome-icon-list.h>
 #include <libgnomeui/gnome-icon-item.h>
@@ -66,8 +66,6 @@
    is deprecated but the API isn't */
 #include <libgnomeui/gnome-paper-selector.h>
 #include <libgnomeui/gnome-unit-spinner.h>
-#include <libgnomeui/gnome-popup-menu.h>
-#include <libgnomeui/gnome-popup-help.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-types.h>
 #include <libgnomeui/gnome-stock-icons.h>
@@ -75,10 +73,6 @@
 #include <libgnomeui/gtk-clock.h>
 #include <libgnomeui/gtkdial.h>
 #include <libgnomeui/gnome-dateedit.h>
-#include <libgnomeui/gnome-mdi.h>
-#include <libgnomeui/gnome-mdi-child.h>
-#include <libgnomeui/gnome-mdi-generic-child.h>
-#include <libgnomeui/gnome-mdi-session.h>
 #include <libgnomeui/gnometypebuiltins.h>
 #include <libgnomeui/gnome-winhints.h>
 #include <libgnomeui/gnome-href.h>
@@ -87,8 +81,19 @@
 #include <libgnomeui/gnome-druid-page-edge.h>
 #include <libgnomeui/gnome-druid-page-standard.h>
 #include <libgnomeui/oafgnome.h>
-#include <libgnomeui/gnome-textfu.h>
 #include <libgnomeui/gnome-vfs-util.h>
+#include <libgnomeui/wap-textfu.h>
+
+#ifdef FIXME
+#include <libgnomeui/gnome-mdi.h>
+#include <libgnomeui/gnome-mdi-child.h>
+#include <libgnomeui/gnome-mdi-generic-child.h>
+#include <libgnomeui/gnome-mdi-session.h>
+#include <libgnomeui/gnome-helpsys.h>
+#include <libgnomeui/gnome-popup-menu.h>
+#include <libgnomeui/gnome-popup-help.h>
+#include <libgnomeui/gnome-textfu.h>
+#endif
 
 #ifdef COMPAT_1_0
 #include "compat/1.0/libgnomeui-compat-1.0.h"

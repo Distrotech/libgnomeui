@@ -40,6 +40,32 @@ EXTRA_HEADERS =
 noinst_HEADERS = \
 	libgnomeuiP.h
 
+EXTRA_PROGRAMS = unused
+
+unused_SOURCES = \
+	gnome-mdi.c			\
+	gnome-mdiP.h			\
+	gnome-mdi-child.c		\
+	gnome-mdi-generic-child.c       \
+	gnome-mdi-session.c		\
+	gnome-popup-menu.c		\
+	gnome-popup-help.c		\
+	gnome-pouch.c			\
+	gnome-pouchP.h			\
+	gnome-roo.c			\
+	gnome-helpsys.c			\
+	gnome-textfu.c			\
+	gnome-mdi.h			\
+	gnome-mdi-child.h		\
+	gnome-mdi-generic-child.h	\
+	gnome-mdi-session.h		\
+	gnome-popup-menu.h		\
+	gnome-popup-help.h		\
+	gnome-pouch.h			\
+	gnome-roo.h			\
+	gnome-helpsys.h			\
+	gnome-textfu.h
+
 libgnomeui_2_la_SOURCES = \
 	gnome-stock-icons.c		\
 	gnome-about.c			\
@@ -115,7 +141,6 @@ gnome_headers = \
         gnome-font-picker.h		\
 	gnome-gconf.h			\
 	gnome-geometry.h		\
-	gnome-helpsys.h			\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-entry.h		\
@@ -126,16 +151,8 @@ gnome_headers = \
 	gnome-init.h			\
 	gnome-less.h			\
 	gnome-macros.h			\
-	gnome-mdi.h			\
-	gnome-mdi-child.h		\
-	gnome-mdi-generic-child.h	\
-	gnome-mdi-session.h		\
-	gnome-popup-menu.h		\
-	gnome-popup-help.h		\
-	gnome-pouch.h			\
         gnome-paper-selector.h		\
 	gnome-pixmap.h			\
-	gnome-roo.h			\
 	gnome-selector.h		\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
@@ -146,7 +163,6 @@ gnome_headers = \
 	gtk-clock.h			\
 	libgnomeui.h			\
 	gnome-vfs-util.h		\
-	gnome-textfu.h			\
 	gnome-window.h			\
 	wap-textfu.h			\
 	oafgnome.h
