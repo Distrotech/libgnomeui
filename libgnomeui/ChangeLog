@@ -1,5 +1,9 @@
 1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
+        * gnome-stock.[ch]: New tb_scores pixmap for the games.
+	
+1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
+
         * gnome-about.c (gnome_about_new): Now uses a stock button for OK.
 	
 1998-02-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>

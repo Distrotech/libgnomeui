@@ -264,6 +264,7 @@ GtkWidget             *gnome_stock_button          (char *type);
 #define GNOME_STOCK_MENU_PASTE    "Menu_Paste"
 #define GNOME_STOCK_MENU_PROP     "Menu_Properties"
 #define GNOME_STOCK_MENU_ABOUT    "Menu_About"
+#define GNOME_STOCK_MENU_SCORES   "Menu_Scores"
 #define GNOME_STOCK_MENU_BLANK    "Menu_"
 
 /* returns a GtkMenuItem with an stock icon and text */

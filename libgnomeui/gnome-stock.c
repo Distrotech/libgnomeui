@@ -45,6 +45,7 @@
 #include "pixmaps/tb_properties.xpm"
 #include "pixmaps/tb_unknown.xpm"
 #include "pixmaps/tb_exit.xpm"
+#include "pixmaps/tb_scores.xpm"
 #include "gnome-stock-xpm.h"
 #endif /* not USE_GDK_IMLIB */
 
@@ -330,6 +331,7 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_MENU_COPY, GNOME_STOCK_PIXMAP_REGULAR, menu_copy_xpm, 16, 16},
         {GNOME_STOCK_MENU_PASTE, GNOME_STOCK_PIXMAP_REGULAR, menu_paste_xpm, 16, 16},
         {GNOME_STOCK_MENU_PROP, GNOME_STOCK_PIXMAP_REGULAR, menu_prop_xpm, 16, 16},
+        {GNOME_STOCK_MENU_SCORES, GNOME_STOCK_PIXMAP_REGULAR, menu_scores_xpm, 20, 20},
         {GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_about_xpm, 16, 16},
 	/* TODO: I shouldn't waste a pixmap for that */
         {GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, menu_blank_xpm, 16, 16},
