@@ -1,13 +1,14 @@
 # Hungarian translation for libgnomeui
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Emese Kovacs <emese@gnome.hu>, 2002.
+# Szabolcs Ban <shooby@gnome.hu>, 2002.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
-"PO-Revision-Date: 2002-05-19 19:45+0100\n"
-"Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
+"POT-Creation-Date: 2002-07-28 09:31+0200\n"
+"PO-Revision-Date: 2002-07-28 21:20+0100\n"
+"Last-Translator: Szabolcs Ban <shooby@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgstr "_Fordította"
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
 msgid "_Credits"
-msgstr "_Jó pontok"
+msgstr "_Köszönet"
 
 #: libgnomeui/gnome-about.c:352
 msgid "Program name"
@@ -177,13 +178,12 @@ msgid "Received invalid color data\n"
 msgstr "Érvénytelen szín adat\n"
 
 #: libgnomeui/gnome-color-picker.c:464
-#, fuzzy
 msgid "Color Selector"
-msgstr "A kijelölés törlése"
+msgstr "Színválasztó"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "A szín meghatározásához párbeszédablakot nyit"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -234,13 +234,12 @@ msgid "Date"
 msgstr "Dátum"
 
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "Fájl kiválasztása"
+msgstr "Válassz dátumot"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Válaszd ki a dátumot a naptárból"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -248,13 +247,12 @@ msgid "Calendar"
 msgstr "Naptár"
 
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "Fájl kiválasztása"
+msgstr "Válaszd ki az időt"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Válaszd ki az időt a listából"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -395,7 +393,7 @@ msgstr "A hivatkozás ilyen színnel jelenik meg"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "Ez a gomb a rajta található URL-re visz."
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
@@ -525,6 +523,7 @@ msgstr "Hint a 2. gyermek elemhez"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fájl"
 
@@ -582,6 +581,7 @@ msgid "_Game"
 msgstr "_Játék"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Sú_gó"
 
@@ -748,8 +748,8 @@ msgstr "Karakterlánc cseréje"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
-msgstr "_Tulajdonságok..."
+msgid "_Properties"
+msgstr "_Tulajdonságok"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -760,8 +760,8 @@ msgstr "A fájl tulajdonságainak módosítása"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
-msgstr "_Beállítások..."
+msgid "Prefere_nces"
+msgstr "_Beállítások"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -772,11 +772,11 @@ msgstr "Az alkalmazás beállításai"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Névjegy"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
@@ -803,7 +803,7 @@ msgstr "Új ablakot hoz létre"
 msgid "_Close This Window"
 msgstr "_Ablak bezárása"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "A jelenlegi ablak bezárása"
 
@@ -1048,14 +1048,12 @@ msgid "Select file"
 msgstr "Fájl kiválasztása"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path"
-msgstr "_Beillesztés"
+msgstr "Útvonal"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path to file"
-msgstr "A jelenlegi fájl mentése"
+msgstr "Útvonal a fájlhoz"
 
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
@@ -1063,7 +1061,7 @@ msgstr "_Keresés..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "A fájlkezelő ablakot dobja fel egy fájl kiválasztásához"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1079,7 +1077,7 @@ msgstr "Válassz betűtípust"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "A kiválasztó párbeszédablak címe"
+msgstr "A kijelölő párbeszédablak címe"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -1087,7 +1085,7 @@ msgstr "Mód"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr "A betűtípus-kiválasztó működési mődja"
+msgstr "A betűtípus-választó működési mődja"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
@@ -1176,7 +1174,7 @@ msgstr "Az ikon egyedi azonosítója. Ez lesz használva az előzmények listáb
 
 #: libgnomeui/gnome-icon-entry.c:185
 msgid "Title for the Browse icon dialog."
-msgstr "A kiválasztó párbeszédablak cimkéje."
+msgstr "Az ikonválasztó párbeszédablak cimkéje."
 
 #: libgnomeui/gnome-icon-entry.c:192
 msgid "Pixmap Directory"
@@ -1204,7 +1202,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
 msgid "No Icon"
-msgstr "Nincs ikon"
+msgstr "Nincs\nikon"
 
 #: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
@@ -1215,29 +1213,28 @@ msgid "Preview"
 msgstr "Előnézet"
 
 #: libgnomeui/gnome-icon-entry.c:752
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "A kiválasztó párbeszédablak címe"
+msgstr "Ikonválasztó párbeszédablak"
 
 #: libgnomeui/gnome-icon-entry.c:753
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Ez a párbeszédablak egy ikon kiválasztásában segít."
 
 #: libgnomeui/gnome-icon-entry.c:759
 msgid "Icon selector"
-msgstr ""
+msgstr "Ikonválasztó"
 
 #: libgnomeui/gnome-icon-entry.c:760
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Kérlek válassz ki egy ikont."
 
 #: libgnomeui/gnome-icon-entry.c:984
 msgid "Icon Selector"
-msgstr ""
+msgstr "Ikonválasztó"
 
 #: libgnomeui/gnome-icon-entry.c:985
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Ez a gomb egy ikonválasztó párbeszédablakot dob fel."
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
@@ -1245,13 +1242,14 @@ msgstr "Keresés"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
-msgstr ""
+msgstr "Ikon útvonal"
 
 #: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
+"Itt beviheted az ikon nevét vagy a könyvtárat, ahol az ikonok vannak."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1293,21 +1291,19 @@ msgstr "Előnézet készítése"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Ha a kép betöltő mezőnek lehet előnézete."
+msgstr "A kép beviteli mezőben van előnézet."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "Nincs kép"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "Előnézet"
+msgstr "Kép előnézet"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
-#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr "A jelenleg kijelölt idő"
+msgstr "A kiválasztott kép előnézete"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1332,11 +1328,12 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Kilépés a tesztből"
+
 #~ msgid "_Contents"
 #~ msgstr "_Tartalom"
-
-#~ msgid "Exit the test"
-#~ msgstr "Kilépés a tesztből"
 
 #~ msgid "Find _Again"
 #~ msgstr "Következő _találat"
