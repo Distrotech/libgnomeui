@@ -18,7 +18,6 @@ Mon Jan 05 17:21:19 2004  George Lebl <jirka@5z.com>
 	  the entry field is empty.  That is, set the file selector path
 	  to this.
 
->>>>>>> 1.360
 2004-01-04  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-password-dialog.h: Remove extra comma
