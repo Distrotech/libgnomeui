@@ -1,5 +1,10 @@
 2000-01-28  Havoc Pennington  <hp@redhat.com>
 
+	* gtkpixmapmenuitem.c (gtk_pixmap_menu_item_set_pixmap): The
+	mapping/realizing here was a bit wrong.
+
+2000-01-28  Havoc Pennington  <hp@redhat.com>
+
 	* gnome-number-entry.c (browse_clicked): set transient parent, 
 	bug 2497
 

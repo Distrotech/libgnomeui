@@ -172,13 +172,14 @@ gtk_pixmap_menu_item_set_pixmap (GtkPixmapMenuItem *menu_item,
   gtk_widget_set_parent (pixmap, GTK_WIDGET (menu_item));
   menu_item->pixmap = pixmap;
 
-  if (GTK_WIDGET_VISIBLE (pixmap->parent)) {
-    if (GTK_WIDGET_REALIZED (pixmap->parent) &&
-	!GTK_WIDGET_REALIZED (pixmap))
-      gtk_widget_realize (pixmap);
-      
+  if (GTK_WIDGET_REALIZED (pixmap->parent) &&
+      !GTK_WIDGET_REALIZED (pixmap))
+    gtk_widget_realize (pixmap);
+  
+  if (GTK_WIDGET_VISIBLE (pixmap->parent)) {      
     if (GTK_WIDGET_MAPPED (pixmap->parent) &&
-	!GTK_WIDGET_MAPPED (pixmap))
+	GTK_WIDGET_VISIBLE(pixmap) &&
+        !GTK_WIDGET_MAPPED (pixmap))
       gtk_widget_map (pixmap);
   }
   
@@ -303,3 +304,15 @@ gtk_pixmap_menu_item_remove (GtkContainer *container,
   if (widget_was_visible)
     gtk_widget_queue_resize (GTK_WIDGET (container));
 }
+
+
+
+
+
+
+
+
+
+
+
+
