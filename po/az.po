@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2001-11-30 11:16+0100\n"
+"POT-Creation-Date: 2001-12-14 16:07+0100\n"
 "PO-Revision-Date: 2001-06-01 17:35GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -225,99 +225,99 @@ msgstr "Sənədlər:"
 msgid "About %s"
 msgstr "Haqqında"
 
-#: libgnomeui/gnome-client.c:834
+#: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
 msgstr "Gedişat IDsini göstər"
 
-#: libgnomeui/gnome-client.c:834
+#: libgnomeui/gnome-client.c:835
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:838
 msgid "Specify prefix of saved configuration"
 msgstr "Qeyd edilmiş qurğuların prefiksini göstər"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:838
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:840
+#: libgnomeui/gnome-client.c:841
 msgid "Disable connection to session manager"
 msgstr "Gedişat idarəcisinə bağlantıya mane ol"
 
-#: libgnomeui/gnome-client.c:946
+#: libgnomeui/gnome-client.c:947
 msgid "Session management"
 msgstr "Gedişat idarəsi"
 
-#: libgnomeui/gnome-client.c:2472
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Çıxışı Ləğv Et"
 
-#: libgnomeui/gnome-color-picker.c:403
+#: libgnomeui/gnome-color-picker.c:404
 msgid "Received invalid color data\n"
 msgstr "Xətalı rəng mə'lumatı alındı\n"
 
-#: libgnomeui/gnome-color-picker.c:467
+#: libgnomeui/gnome-color-picker.c:468
 msgid "Pick a color"
 msgstr "Rəng Seç"
 
-#: libgnomeui/gnome-dateedit.c:418
+#: libgnomeui/gnome-dateedit.c:420
 msgid "Time"
 msgstr "Zaman"
 
-#: libgnomeui/gnome-dateedit.c:419
+#: libgnomeui/gnome-dateedit.c:421
 msgid "The time currentlyselected"
 msgstr "Hal hazırkı vaxt"
 
-#: libgnomeui/gnome-dateedit.c:431
+#: libgnomeui/gnome-dateedit.c:433
 msgid "DateEdit Flags"
 msgstr "DataEdit bayraqları"
 
-#: libgnomeui/gnome-dateedit.c:432
+#: libgnomeui/gnome-dateedit.c:434
 msgid "Flags for how DateEdit looks"
 msgstr "DataEdit görünüşü üçün bayraqlar"
 
-#: libgnomeui/gnome-dateedit.c:441
+#: libgnomeui/gnome-dateedit.c:443
 msgid "Lower Hour"
 msgstr "Aşağı Saat"
 
-#: libgnomeui/gnome-dateedit.c:442
+#: libgnomeui/gnome-dateedit.c:444
 msgid "Lower hour in the time popup selector"
 msgstr "Vaxt sıçrama seçicisində ən aşağı saat"
 
-#: libgnomeui/gnome-dateedit.c:452
+#: libgnomeui/gnome-dateedit.c:454
 msgid "Upper Hour"
 msgstr "Üst Saat"
 
-#: libgnomeui/gnome-dateedit.c:453
+#: libgnomeui/gnome-dateedit.c:455
 msgid "Upper hour in the time popup selector"
 msgstr "Vaxt sıçrama seçicisində ən yuxarı saat"
 
-#: libgnomeui/gnome-dateedit.c:463
+#: libgnomeui/gnome-dateedit.c:465
 msgid "Initial Time"
 msgstr "Başlanğıç Vaxtı"
 
-#: libgnomeui/gnome-dateedit.c:464
+#: libgnomeui/gnome-dateedit.c:466
 msgid "The initial time"
 msgstr "Başlanğıc vaxtı"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:700
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "Təqvim"
 
-#: libgnomeui/gnome-dateedit.c:926
+#: libgnomeui/gnome-dateedit.c:928
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date olmadı, gnome_date_edit_get_time istifadə edin"
 
-#: libgnomeui/gnome-druid-page-edge.c:352
-msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#: libgnomeui/gnome-druid-page-edge.c:342
+msgid "Helvetical Bold 18"
+msgstr ""
 
-#: libgnomeui/gnome-druid-page-edge.c:361
-msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-"
+#: libgnomeui/gnome-druid-page-edge.c:353
+msgid "Helvetical Medium 12"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:133
 #: libgnomeui/gnome-font-picker.c:156
@@ -459,27 +459,27 @@ msgstr ""
 "URL göstəricisini başladırkən xəta oldu.\n"
 "İdarə mərkəzinin qurğularını bir yoxlayın."
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "X display to use"
 msgstr "İstifadə ediləcək X ekranı"
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "DISPLAY"
 msgstr "EKRAN"
 
-#: libgnomeui/gnome-ui-init.c:103
+#: libgnomeui/gnome-ui-init.c:104
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Kitabxanası"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:465
+#: libgnomeui/gnome-ui-init.c:474
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Çoxlu parçalanma xətaları meydana geldi: xəta göstəricisini göstərə "
 "bilmirəm\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:479
+#: libgnomeui/gnome-ui-init.c:488
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -487,76 +487,76 @@ msgstr ""
 "Parçalanma xətası!\n"
 "Xəta dialoqunu göstərə bilmirəm\n"
 
-#: libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:620
 msgid "Gdk debugging flags to set"
 msgstr "Seçiləcək Gdk xəta həlli bayraqları"
 
-#: libgnomeui/gnome-ui-init.c:611 libgnomeui/gnome-ui-init.c:614
-#: libgnomeui/gnome-ui-init.c:655 libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:620 libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:664 libgnomeui/gnome-ui-init.c:667
 msgid "FLAGS"
 msgstr "BAYRAQLAR"
 
-#: libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Gdk debugging flags to unset"
 msgstr "Seçilməyəcək Gdk xəta həlli bayraqları"
 
-#: libgnomeui/gnome-ui-init.c:622
+#: libgnomeui/gnome-ui-init.c:631
 msgid "Make X calls synchronous"
 msgstr "X çağrılarını sinxronlaşdır"
 
-#: libgnomeui/gnome-ui-init.c:628
+#: libgnomeui/gnome-ui-init.c:637
 msgid "Don't use X shared memory extension"
 msgstr "Bölüşülmüş X yaddaşı uzantılarını istifadə etmə"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:641
 msgid "Program name as used by the window manager"
 msgstr "Pəncərə idarəcisi tərəfindən istifadə edilən proqram adı"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:641
 msgid "NAME"
 msgstr "AD"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:644
 msgid "Program class as used by the window manager"
 msgstr "Pəncərə idarəcisi tərəfindən istifadə edilən proqram sinifi"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:644
 msgid "CLASS"
 msgstr "SİNİF"
 
-#: libgnomeui/gnome-ui-init.c:639
+#: libgnomeui/gnome-ui-init.c:648
 msgid "HOST"
 msgstr "QOVŞAQ"
 
-#: libgnomeui/gnome-ui-init.c:643
+#: libgnomeui/gnome-ui-init.c:652
 msgid "PORT"
 msgstr "QAPI"
 
-#: libgnomeui/gnome-ui-init.c:648 libgnomeui/gnome-ui-init.c:651
+#: libgnomeui/gnome-ui-init.c:657 libgnomeui/gnome-ui-init.c:660
 msgid "STYLE"
 msgstr "TƏRZ"
 
-#: libgnomeui/gnome-ui-init.c:655
+#: libgnomeui/gnome-ui-init.c:664
 msgid "Gtk+ debugging flags to set"
 msgstr "Seçiləcək Gdk+ xəta həlli bayraqları"
 
-#: libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:667
 msgid "Gtk+ debugging flags to unset"
 msgstr "Seçilməyəcək Gdk+ xəta həlli bayraqları"
 
-#: libgnomeui/gnome-ui-init.c:661
+#: libgnomeui/gnome-ui-init.c:670
 msgid "Make all warnings fatal"
 msgstr "Bütün xəbərdarlıqları ölümcülləşdir"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:673
 msgid "Load an additional Gtk module"
 msgstr "Əlavə Gtk modulu yüklə"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:673
 msgid "MODULE"
 msgstr "MODUL"
 
-#: libgnomeui/gnome-ui-init.c:769
+#: libgnomeui/gnome-ui-init.c:778
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -1178,20 +1178,20 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "GConf xəta mündəricatı: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:858
+#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
 #, fuzzy
 msgid "No Icon"
 msgstr "Timsal Yoxdur"
 
-#: libgnomeui/gnome-icon-entry.c:459 libgnomeui/gnome-pixmap-entry.c:373
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:373
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hbox tapıla bilmir, normal fayl seçkisi işlədirəm"
 
-#: libgnomeui/gnome-icon-entry.c:465 libgnomeui/gnome-pixmap-entry.c:379
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:379
 msgid "Preview"
 msgstr "Nümayiş"
 
-#: libgnomeui/gnome-icon-entry.c:879
+#: libgnomeui/gnome-icon-entry.c:882
 msgid "Browse"
 msgstr "Gəz"
 
@@ -1205,27 +1205,27 @@ msgstr "GnomeIconSelection: '%s' ya mövcud deyil ya da cərgə deyildir"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: '%s' cərgəsi açıla bilmir"
 
-#: libgnomeui/gnome-icon-sel.c:411
+#: libgnomeui/gnome-icon-sel.c:414
 msgid "Loading Icons..."
 msgstr "Timsallar Yüklənir..."
 
-#: libgnomeui/gnome-messagebox.c:116
+#: libgnomeui/gnome-messagebox.c:110
 msgid "Information"
 msgstr "Məlumat"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:115
 msgid "Warning"
 msgstr "Xəbərdarlıq"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:121
 msgid "Error"
 msgstr "Xəta"
 
-#: libgnomeui/gnome-messagebox.c:133
+#: libgnomeui/gnome-messagebox.c:127
 msgid "Question"
 msgstr "Sual"
 
-#: libgnomeui/gnome-messagebox.c:138
+#: libgnomeui/gnome-messagebox.c:132
 msgid "Message"
 msgstr "İsmarıc"
 
@@ -1264,6 +1264,12 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:407
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-"
 
 #~ msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
 #~ msgstr "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"

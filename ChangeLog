@@ -1,3 +1,8 @@
+2001-12-14  Anders Carlsson  <andersca@gnu.org>
+
+	* configure.in: Up version, disable tests/
+	until it works with srcdir!=builddir.
+
 2001-12-13  Darin Adler  <darin@bentspoon.com>
 
 	* acconfig.h:

@@ -1,7 +1,7 @@
 AC_INIT(libgnomeui)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(libgnomeui, 1.107.0)
+AM_INIT_AUTOMAKE(libgnomeui, 1.108.0)
 
 AM_MAINTAINER_MODE
 
@@ -56,7 +56,7 @@ CPPFLAGS="$sm_save_cppflags"
 dnl
 dnl Start of pkg-config checks
 dnl
-GNOMEUI_MODULES="libgnome-2.0 >= 1.105.0 libgnomecanvas-2.0 >= 1.105.0 libbonoboui-2.0 >= 1.106 gconf-2.0 >= 1.1.1"
+GNOMEUI_MODULES="libgnome-2.0 >= 1.108.0 libgnomecanvas-2.0 >= 1.108.0 libbonoboui-2.0 >= 1.108.1 gconf-2.0 >= 1.1.1"
 PKG_CHECK_MODULES(LIBGNOMEUI, $GNOMEUI_MODULES gnome-vfs-module-2.0 >= 1.9.3)
 AC_SUBST(LIBGNOMEUI_CFLAGS)
 AC_SUBST(LIBGNOMEUI_LIBS)
@@ -69,7 +69,7 @@ PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, $GNOMEUI_MODULES)
 AC_SUBST(LIBGNOMEUI_DEMOS_CFLAGS)
 AC_SUBST(LIBGNOMEUI_DEMOS_LIBS)
 
-PKG_CHECK_MODULES(LIBGNOMEUI_GLADE, $GNOMEUI_MODULES libglade-2.0 >= 1.99.3 gnome-vfs-module-2.0 >= 1.9.3)
+PKG_CHECK_MODULES(LIBGNOMEUI_GLADE, $GNOMEUI_MODULES libglade-2.0 >= 1.99.5 gnome-vfs-module-2.0 >= 1.9.3)
 AC_SUBST(LIBGNOMEUI_GLADE_CFLAGS)
 AC_SUBST(LIBGNOMEUI_GLADE_LIBS)
 AC_PATH_PROG(LIBGLADE_CONVERT, libglade-convert)
@@ -181,7 +181,6 @@ glade/Makefile
 images/Makefile
 demos/Makefile
 test-gnome/Makefile
-tests/Makefile
 doc/Makefile
 doc/reference/Makefile
 ])

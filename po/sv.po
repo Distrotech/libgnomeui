@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2001-12-08 18:47+0100\n"
+"POT-Creation-Date: 2001-12-14 16:07+0100\n"
 "PO-Revision-Date: 2001-12-08 18:47+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -438,25 +438,25 @@ msgstr ""
 "Fel uppstod vid körning av URL-hanteraren.\n"
 "Var vänlig och kontrollera att inställningarna i kontrollpanelen är korrekta."
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:626
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "X display to use"
 msgstr "X-display som skall användas"
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:626
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:103
+#: libgnomeui/gnome-ui-init.c:104
 msgid "GNOME GUI Library"
 msgstr "GNOME-bibliotek för grafiska användargränssnitt"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:473
+#: libgnomeui/gnome-ui-init.c:474
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:487
+#: libgnomeui/gnome-ui-init.c:488
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -464,76 +464,76 @@ msgstr ""
 "Segmenteringsfel!\n"
 "Kan inte visa kraschdialog\n"
 
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:620
 msgid "Gdk debugging flags to set"
 msgstr "Felsökningsflaggor för Gdk som ska användas"
 
-#: libgnomeui/gnome-ui-init.c:619 libgnomeui/gnome-ui-init.c:622
-#: libgnomeui/gnome-ui-init.c:663 libgnomeui/gnome-ui-init.c:666
+#: libgnomeui/gnome-ui-init.c:620 libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:664 libgnomeui/gnome-ui-init.c:667
 msgid "FLAGS"
 msgstr "FLAGGOR"
 
-#: libgnomeui/gnome-ui-init.c:622
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Gdk debugging flags to unset"
 msgstr "Felsökningsflaggor för Gdk som inte ska användas"
 
-#: libgnomeui/gnome-ui-init.c:630
+#: libgnomeui/gnome-ui-init.c:631
 msgid "Make X calls synchronous"
 msgstr "Använd synkrona X-anrop"
 
-#: libgnomeui/gnome-ui-init.c:636
+#: libgnomeui/gnome-ui-init.c:637
 msgid "Don't use X shared memory extension"
 msgstr "Använd inte X-tillägg för delat minne (shared memory extension)"
 
-#: libgnomeui/gnome-ui-init.c:640
+#: libgnomeui/gnome-ui-init.c:641
 msgid "Program name as used by the window manager"
 msgstr "Det programnamn som används av fönsterhanteraren"
 
-#: libgnomeui/gnome-ui-init.c:640
+#: libgnomeui/gnome-ui-init.c:641
 msgid "NAME"
 msgstr "NAMN"
 
-#: libgnomeui/gnome-ui-init.c:643
+#: libgnomeui/gnome-ui-init.c:644
 msgid "Program class as used by the window manager"
 msgstr "Den programklass som används av fönsterhanteraren"
 
-#: libgnomeui/gnome-ui-init.c:643
+#: libgnomeui/gnome-ui-init.c:644
 msgid "CLASS"
 msgstr "KLASS"
 
-#: libgnomeui/gnome-ui-init.c:647
+#: libgnomeui/gnome-ui-init.c:648
 msgid "HOST"
 msgstr "VÄRD"
 
-#: libgnomeui/gnome-ui-init.c:651
+#: libgnomeui/gnome-ui-init.c:652
 msgid "PORT"
 msgstr "PORT"
 
-#: libgnomeui/gnome-ui-init.c:656 libgnomeui/gnome-ui-init.c:659
+#: libgnomeui/gnome-ui-init.c:657 libgnomeui/gnome-ui-init.c:660
 msgid "STYLE"
 msgstr "STIL"
 
-#: libgnomeui/gnome-ui-init.c:663
+#: libgnomeui/gnome-ui-init.c:664
 msgid "Gtk+ debugging flags to set"
 msgstr "Felsökningsflaggor för Gtk+ som ska användas"
 
-#: libgnomeui/gnome-ui-init.c:666
+#: libgnomeui/gnome-ui-init.c:667
 msgid "Gtk+ debugging flags to unset"
 msgstr "Felsökningsflaggor för Gtk+ som inte ska användas"
 
-#: libgnomeui/gnome-ui-init.c:669
+#: libgnomeui/gnome-ui-init.c:670
 msgid "Make all warnings fatal"
 msgstr "Gör alla varningar allvarliga"
 
-#: libgnomeui/gnome-ui-init.c:672
+#: libgnomeui/gnome-ui-init.c:673
 msgid "Load an additional Gtk module"
 msgstr "Ladda in en extra Gtk-modul"
 
-#: libgnomeui/gnome-ui-init.c:672
+#: libgnomeui/gnome-ui-init.c:673
 msgid "MODULE"
 msgstr "MODUL"
 
-#: libgnomeui/gnome-ui-init.c:777
+#: libgnomeui/gnome-ui-init.c:778
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -629,7 +629,6 @@ msgstr "Tips för objekt 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:83 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -687,7 +686,6 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:97 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -878,11 +876,11 @@ msgstr "Konfigurera programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:222
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:223 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:223
 msgid "About this application"
 msgstr "Om detta program"
 
@@ -909,7 +907,7 @@ msgstr "Skapa ett nytt fönster"
 msgid "_Close This Window"
 msgstr "_Stäng detta fönster"
 
-#: libgnomeui/gnome-app-helper.c:241 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:241
 msgid "Close the current window"
 msgstr "Stäng det aktuella fönstret"
 
@@ -1183,23 +1181,23 @@ msgstr "GnomeIconSelection: kunde inte öppna katalogen \"%s\""
 msgid "Loading Icons..."
 msgstr "Läser in ikoner..."
 
-#: libgnomeui/gnome-messagebox.c:111
+#: libgnomeui/gnome-messagebox.c:110
 msgid "Information"
 msgstr "Information"
 
-#: libgnomeui/gnome-messagebox.c:116
+#: libgnomeui/gnome-messagebox.c:115
 msgid "Warning"
 msgstr "Varning"
 
-#: libgnomeui/gnome-messagebox.c:122
+#: libgnomeui/gnome-messagebox.c:121
 msgid "Error"
 msgstr "Fel"
 
-#: libgnomeui/gnome-messagebox.c:128
+#: libgnomeui/gnome-messagebox.c:127
 msgid "Question"
 msgstr "Fråga"
 
-#: libgnomeui/gnome-messagebox.c:133
+#: libgnomeui/gnome-messagebox.c:132
 msgid "Message"
 msgstr "Meddelande"
 
@@ -1238,9 +1236,8 @@ msgstr "%a %d %b %H.%M %Y"
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Avsluta testet"
+#~ msgid "Exit the test"
+#~ msgstr "Avsluta testet"
 
 #~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 #~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"

@@ -59,7 +59,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-marshal-main.c		\
-	gnome-marshal.h			\
 	gnome-messagebox.c		\
 	gnome-mdi.c			\
 	gnome-mdi-child.c		\
@@ -211,10 +210,9 @@ $(srcdir)/gnome-marshal.c: @REBUILD@ Makefile.am gnome-marshal.list
 	&& cp xgen-gmc gnome-marshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
 
-gnome-marshal-main.c: $(srcdir)/gnome-marshal.c $(srcdir)/gnome-marshal.h
-
 BUILT_SOURCES =					\
-	gnome-marshal-main.c
+	gnome-marshal.h				\
+	gnome-marshal.c
 
 EXTRA_DIST =					\
 	AUTHORS					\

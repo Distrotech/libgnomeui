@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2001-11-30 11:16+0100\n"
+"POT-Creation-Date: 2001-12-14 16:07+0100\n"
 "PO-Revision-Date: 2001-05-30 12:12+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@eikonex.org>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -214,99 +214,99 @@ msgstr "Documentation :"
 msgid "About %s"
 msgstr "À propos"
 
-#: libgnomeui/gnome-client.c:834
+#: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
 msgstr "Spécifiez l'ID de gestion de session"
 
-#: libgnomeui/gnome-client.c:834
+#: libgnomeui/gnome-client.c:835
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:838
 msgid "Specify prefix of saved configuration"
 msgstr "Spécifiez le préfixe de la configuration sauvegardée"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:838
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:840
+#: libgnomeui/gnome-client.c:841
 msgid "Disable connection to session manager"
 msgstr "Désactive la connexion avec le gestionnaire de session"
 
-#: libgnomeui/gnome-client.c:946
+#: libgnomeui/gnome-client.c:947
 msgid "Session management"
 msgstr "Gestion de session"
 
-#: libgnomeui/gnome-client.c:2472
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Annuler la demande de fin de session"
 
-#: libgnomeui/gnome-color-picker.c:403
+#: libgnomeui/gnome-color-picker.c:404
 msgid "Received invalid color data\n"
 msgstr "Donnée de couleur invalide reçue\n"
 
-#: libgnomeui/gnome-color-picker.c:467
+#: libgnomeui/gnome-color-picker.c:468
 msgid "Pick a color"
 msgstr "Choisissez une couleur"
 
-#: libgnomeui/gnome-dateedit.c:418
+#: libgnomeui/gnome-dateedit.c:420
 msgid "Time"
 msgstr "heure"
 
-#: libgnomeui/gnome-dateedit.c:419
+#: libgnomeui/gnome-dateedit.c:421
 msgid "The time currentlyselected"
 msgstr "L'heure actuellement sélectionné"
 
-#: libgnomeui/gnome-dateedit.c:431
+#: libgnomeui/gnome-dateedit.c:433
 msgid "DateEdit Flags"
 msgstr "Drapeaux DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:432
+#: libgnomeui/gnome-dateedit.c:434
 msgid "Flags for how DateEdit looks"
 msgstr "Drapeaux indiquant comment apparait DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:441
+#: libgnomeui/gnome-dateedit.c:443
 msgid "Lower Hour"
 msgstr "Heure basse"
 
-#: libgnomeui/gnome-dateedit.c:442
+#: libgnomeui/gnome-dateedit.c:444
 msgid "Lower hour in the time popup selector"
 msgstr "Heure fractionnée dans le popup de sélection d'heure"
 
-#: libgnomeui/gnome-dateedit.c:452
+#: libgnomeui/gnome-dateedit.c:454
 msgid "Upper Hour"
 msgstr "Heure haute"
 
-#: libgnomeui/gnome-dateedit.c:453
+#: libgnomeui/gnome-dateedit.c:455
 msgid "Upper hour in the time popup selector"
 msgstr "Haure haute dans le popup de sélection d'heure"
 
-#: libgnomeui/gnome-dateedit.c:463
+#: libgnomeui/gnome-dateedit.c:465
 msgid "Initial Time"
 msgstr "Date initiale"
 
-#: libgnomeui/gnome-dateedit.c:464
+#: libgnomeui/gnome-dateedit.c:466
 msgid "The initial time"
 msgstr "La date initiale"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:700
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "Calendrier"
 
-#: libgnomeui/gnome-dateedit.c:926
+#: libgnomeui/gnome-dateedit.c:928
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date déconseillé, utiliser gnome_date_edit_get_time"
 
-#: libgnomeui/gnome-druid-page-edge.c:352
-msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#: libgnomeui/gnome-druid-page-edge.c:342
+msgid "Helvetical Bold 18"
+msgstr ""
 
-#: libgnomeui/gnome-druid-page-edge.c:361
-msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#: libgnomeui/gnome-druid-page-edge.c:353
+msgid "Helvetical Medium 12"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:133
 #: libgnomeui/gnome-font-picker.c:156
@@ -453,27 +453,27 @@ msgstr ""
 "veuillez vérifier les réglages dans le centre de contrôle si ils sont "
 "corrects."
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "X display to use"
 msgstr "Visuel X à utiliser"
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "DISPLAY"
 msgstr "VISUEL"
 
-#: libgnomeui/gnome-ui-init.c:103
+#: libgnomeui/gnome-ui-init.c:104
 msgid "GNOME GUI Library"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:465
+#: libgnomeui/gnome-ui-init.c:474
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Plusieurs erreurs de segmentation sont apparues ; ne peut afficher de "
 "dialogue d'erreur\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:479
+#: libgnomeui/gnome-ui-init.c:488
 #, fuzzy
 msgid ""
 "Segmentation fault!\n"
@@ -482,76 +482,76 @@ msgstr ""
 "Plusieurs erreurs de segmentation sont apparues ; ne peut afficher de "
 "dialogue d'erreur\n"
 
-#: libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:620
 msgid "Gdk debugging flags to set"
 msgstr "Options de débogage de Gdk à activer"
 
-#: libgnomeui/gnome-ui-init.c:611 libgnomeui/gnome-ui-init.c:614
-#: libgnomeui/gnome-ui-init.c:655 libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:620 libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:664 libgnomeui/gnome-ui-init.c:667
 msgid "FLAGS"
 msgstr "DRAPEAUX"
 
-#: libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Gdk debugging flags to unset"
 msgstr "Options de débogage de Gdk à désactiver"
 
-#: libgnomeui/gnome-ui-init.c:622
+#: libgnomeui/gnome-ui-init.c:631
 msgid "Make X calls synchronous"
 msgstr "Utiliser des appels X synchrones"
 
-#: libgnomeui/gnome-ui-init.c:628
+#: libgnomeui/gnome-ui-init.c:637
 msgid "Don't use X shared memory extension"
 msgstr "Ne pas utiliser l'extension mémoire partagée de X11"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:641
 msgid "Program name as used by the window manager"
 msgstr "Nom du programme tel qu'utilisé par le gestionnaire de fenêtres"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:641
 msgid "NAME"
 msgstr "NOM"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:644
 msgid "Program class as used by the window manager"
 msgstr "Classe du programme tel qu'utilisé par le gestionnaire de fenêtres"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:644
 msgid "CLASS"
 msgstr "CLASSE"
 
-#: libgnomeui/gnome-ui-init.c:639
+#: libgnomeui/gnome-ui-init.c:648
 msgid "HOST"
 msgstr "HÔTE"
 
-#: libgnomeui/gnome-ui-init.c:643
+#: libgnomeui/gnome-ui-init.c:652
 msgid "PORT"
 msgstr "PORT"
 
-#: libgnomeui/gnome-ui-init.c:648 libgnomeui/gnome-ui-init.c:651
+#: libgnomeui/gnome-ui-init.c:657 libgnomeui/gnome-ui-init.c:660
 msgid "STYLE"
 msgstr "STYLE"
 
-#: libgnomeui/gnome-ui-init.c:655
+#: libgnomeui/gnome-ui-init.c:664
 msgid "Gtk+ debugging flags to set"
 msgstr "Options de débogage de Gtk+ à activer"
 
-#: libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:667
 msgid "Gtk+ debugging flags to unset"
 msgstr "Options de débogage de Gtk+ à désactiver"
 
-#: libgnomeui/gnome-ui-init.c:661
+#: libgnomeui/gnome-ui-init.c:670
 msgid "Make all warnings fatal"
 msgstr "Rendre tous les avertissements fatals"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:673
 msgid "Load an additional Gtk module"
 msgstr "Charger un module Gtk additionnel"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:673
 msgid "MODULE"
 msgstr "MODULE"
 
-#: libgnomeui/gnome-ui-init.c:769
+#: libgnomeui/gnome-ui-init.c:778
 msgid "GTK+"
 msgstr ""
 
@@ -1190,21 +1190,21 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "Détails de l'erreur GConf : %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:858
+#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
 #, fuzzy
 msgid "No Icon"
 msgstr "Icône :"
 
-#: libgnomeui/gnome-icon-entry.c:459 libgnomeui/gnome-pixmap-entry.c:373
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:373
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:465 libgnomeui/gnome-pixmap-entry.c:379
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:379
 #, fuzzy
 msgid "Preview"
 msgstr "Précédent"
 
-#: libgnomeui/gnome-icon-entry.c:879
+#: libgnomeui/gnome-icon-entry.c:882
 #, fuzzy
 msgid "Browse"
 msgstr "_Parcourir"
@@ -1219,28 +1219,28 @@ msgstr ""
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr ""
 
-#: libgnomeui/gnome-icon-sel.c:411
+#: libgnomeui/gnome-icon-sel.c:414
 msgid "Loading Icons..."
 msgstr ""
 
-#: libgnomeui/gnome-messagebox.c:116
+#: libgnomeui/gnome-messagebox.c:110
 #, fuzzy
 msgid "Information"
 msgstr "Orientation de l'icône"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:115
 msgid "Warning"
 msgstr ""
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:121
 msgid "Error"
 msgstr ""
 
-#: libgnomeui/gnome-messagebox.c:133
+#: libgnomeui/gnome-messagebox.c:127
 msgid "Question"
 msgstr ""
 
-#: libgnomeui/gnome-messagebox.c:138
+#: libgnomeui/gnome-messagebox.c:132
 msgid "Message"
 msgstr ""
 
@@ -1282,6 +1282,12 @@ msgstr ""
 #, fuzzy
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 
 #~ msgid "wmhints-test"
 #~ msgstr "wmhints-test"

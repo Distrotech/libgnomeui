@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2001-12-06 11:26+0200\n"
+"POT-Creation-Date: 2001-12-14 16:07+0100\n"
 "PO-Revision-Date: 2001-12-06 12:26+0200\n"
 "Last-Translator: Yuriy Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -68,7 +68,8 @@ msgstr "Інформація про перекладачів"
 #: libgnomeui/gnome-about.c:222
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "Інформація про перекладачів. Цей рядок має бути позначеним до перекладу"
+msgstr ""
+"Інформація про перекладачів. Цей рядок має бути позначеним до перекладу"
 
 #: libgnomeui/gnome-about.c:229 libgnomeui/gnome-about.c:670
 msgid "Documenters"
@@ -203,98 +204,100 @@ msgstr "Автор документації"
 msgid "About %s"
 msgstr "Про %s"
 
-#: libgnomeui/gnome-client.c:834
+#: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
 msgstr "Вказати ідентифікатор керування сеансом"
 
-#: libgnomeui/gnome-client.c:834
+#: libgnomeui/gnome-client.c:835
 msgid "ID"
 msgstr "ІДЕНТИФІКАТОР"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:838
 msgid "Specify prefix of saved configuration"
 msgstr "Вказати префікс збереженої конфіґурації"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:838
 msgid "PREFIX"
 msgstr "ПРЕФІКС"
 
-#: libgnomeui/gnome-client.c:840
+#: libgnomeui/gnome-client.c:841
 msgid "Disable connection to session manager"
 msgstr "Вимкнути з'єднання з менеджером сеансів"
 
-#: libgnomeui/gnome-client.c:946
+#: libgnomeui/gnome-client.c:947
 msgid "Session management"
 msgstr "Керування сеансами"
 
-#: libgnomeui/gnome-client.c:2472
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Відмінити завершення роботи"
 
-#: libgnomeui/gnome-color-picker.c:403
+#: libgnomeui/gnome-color-picker.c:404
 msgid "Received invalid color data\n"
 msgstr "Отримано невірні дані кольору\n"
 
-#: libgnomeui/gnome-color-picker.c:467
+#: libgnomeui/gnome-color-picker.c:468
 msgid "Pick a color"
 msgstr "Вибрати колір"
 
-#: libgnomeui/gnome-dateedit.c:418
+#: libgnomeui/gnome-dateedit.c:420
 msgid "Time"
 msgstr "Час"
 
-#: libgnomeui/gnome-dateedit.c:419
+#: libgnomeui/gnome-dateedit.c:421
 msgid "The time currentlyselected"
 msgstr "Вибраний час"
 
-#: libgnomeui/gnome-dateedit.c:431
+#: libgnomeui/gnome-dateedit.c:433
 msgid "DateEdit Flags"
 msgstr "Індикатори DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:432
+#: libgnomeui/gnome-dateedit.c:434
 msgid "Flags for how DateEdit looks"
 msgstr "Індикатори вигляду DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:441
+#: libgnomeui/gnome-dateedit.c:443
 msgid "Lower Hour"
 msgstr "Нижня година"
 
-#: libgnomeui/gnome-dateedit.c:442
+#: libgnomeui/gnome-dateedit.c:444
 msgid "Lower hour in the time popup selector"
 msgstr "Нижня година у вибирачі часу"
 
-#: libgnomeui/gnome-dateedit.c:452
+#: libgnomeui/gnome-dateedit.c:454
 msgid "Upper Hour"
 msgstr "Верхня година"
 
-#: libgnomeui/gnome-dateedit.c:453
+#: libgnomeui/gnome-dateedit.c:455
 msgid "Upper hour in the time popup selector"
 msgstr "Верхня година у вибирачі часу"
 
-#: libgnomeui/gnome-dateedit.c:463
+#: libgnomeui/gnome-dateedit.c:465
 msgid "Initial Time"
 msgstr "Початковий час"
 
-#: libgnomeui/gnome-dateedit.c:464
+#: libgnomeui/gnome-dateedit.c:466
 msgid "The initial time"
 msgstr "Початковий час"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:700
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "Календар"
 
-#: libgnomeui/gnome-dateedit.c:926
+#: libgnomeui/gnome-dateedit.c:928
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "функція gnome_date_edit_get_date небажаний, використовуйте gnome_date_edit_get_time"
+msgstr ""
+"функція gnome_date_edit_get_date небажаний, використовуйте "
+"gnome_date_edit_get_time"
 
-#: libgnomeui/gnome-druid-page-edge.c:352
-msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#: libgnomeui/gnome-druid-page-edge.c:342
+msgid "Helvetical Bold 18"
+msgstr ""
 
-#: libgnomeui/gnome-druid-page-edge.c:361
-msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#: libgnomeui/gnome-druid-page-edge.c:353
+msgid "Helvetical Medium 12"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:133
 #: libgnomeui/gnome-font-picker.c:156
@@ -435,25 +438,26 @@ msgstr ""
 "Сталася помилка під час спроби запустити обробника URL.\n"
 "Будь ласка, переконайтесь, що в Центр Керування вірно налаштувано."
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "X display to use"
 msgstr "X-дисплей до використання"
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЙ"
 
-#: libgnomeui/gnome-ui-init.c:103
+#: libgnomeui/gnome-ui-init.c:104
 msgid "GNOME GUI Library"
 msgstr "Бібліотека ГІК GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:465
+#: libgnomeui/gnome-ui-init.c:474
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Множинний збій сеґментації; неможливо відобразити повідомлення про помилку\n"
+msgstr ""
+"Множинний збій сеґментації; неможливо відобразити повідомлення про помилку\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:479
+#: libgnomeui/gnome-ui-init.c:488
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -461,76 +465,76 @@ msgstr ""
 "Збій сеґментації!\n"
 "Неможливо відобразити діалог збою\n"
 
-#: libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:620
 msgid "Gdk debugging flags to set"
 msgstr "Індикатори налагодження GTK до встановлення"
 
-#: libgnomeui/gnome-ui-init.c:611 libgnomeui/gnome-ui-init.c:614
-#: libgnomeui/gnome-ui-init.c:655 libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:620 libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:664 libgnomeui/gnome-ui-init.c:667
 msgid "FLAGS"
 msgstr "ІНДИКАТОРИ"
 
-#: libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Gdk debugging flags to unset"
 msgstr "Індикатори налагодження GTK до зняття"
 
-#: libgnomeui/gnome-ui-init.c:622
+#: libgnomeui/gnome-ui-init.c:631
 msgid "Make X calls synchronous"
 msgstr "Робити синхронні виклики X Window"
 
-#: libgnomeui/gnome-ui-init.c:628
+#: libgnomeui/gnome-ui-init.c:637
 msgid "Don't use X shared memory extension"
 msgstr "Не використовувати розширення пам'яті W Window"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:641
 msgid "Program name as used by the window manager"
 msgstr "Назва програми, що використовується віконним менеджером"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:641
 msgid "NAME"
 msgstr "НАЗВА"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:644
 msgid "Program class as used by the window manager"
 msgstr "Клас програми, що використовується віконним менеджером"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:644
 msgid "CLASS"
 msgstr "КЛАС"
 
-#: libgnomeui/gnome-ui-init.c:639
+#: libgnomeui/gnome-ui-init.c:648
 msgid "HOST"
 msgstr "ХОСТ"
 
-#: libgnomeui/gnome-ui-init.c:643
+#: libgnomeui/gnome-ui-init.c:652
 msgid "PORT"
 msgstr "ПОРТ"
 
-#: libgnomeui/gnome-ui-init.c:648 libgnomeui/gnome-ui-init.c:651
+#: libgnomeui/gnome-ui-init.c:657 libgnomeui/gnome-ui-init.c:660
 msgid "STYLE"
 msgstr "СТИЛЬ"
 
-#: libgnomeui/gnome-ui-init.c:655
+#: libgnomeui/gnome-ui-init.c:664
 msgid "Gtk+ debugging flags to set"
 msgstr "Індикатори налагодження GTK+ до встановлення"
 
-#: libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:667
 msgid "Gtk+ debugging flags to unset"
 msgstr "Індикатори налагодження GTK+ до зняття"
 
-#: libgnomeui/gnome-ui-init.c:661
+#: libgnomeui/gnome-ui-init.c:670
 msgid "Make all warnings fatal"
 msgstr "Зробити всі попередження фатальними"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:673
 msgid "Load an additional Gtk module"
 msgstr "Завантажити додатковий модуль GTK"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:673
 msgid "MODULE"
 msgstr "МОДУЛЬ"
 
-#: libgnomeui/gnome-ui-init.c:769
+#: libgnomeui/gnome-ui-init.c:778
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -545,8 +549,8 @@ msgid ""
 msgstr ""
 "Менеджер сеансів GNOME (процес %d) зазнав збою\n"
 "через фатальну помилку (%s).\n"
-"Коли ви закриєте це діалогове вікно, всі програми буде закрито, а ваш "
-"сеанс завершено.\n"
+"Коли ви закриєте це діалогове вікно, всі програми буде закрито, а ваш сеанс "
+"завершено.\n"
 "Будь ласка, збережіть всі ваші файли перед закриттям цього діалогового вікна."
 
 #: libgnomeui/gnome_segv.c:105
@@ -578,7 +582,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:155
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Будь ласка, відвідайте сторінку збоїв прогам GNOME для додаткової інформації"
+msgstr ""
+"Будь ласка, відвідайте сторінку збоїв прогам GNOME для додаткової інформації"
 
 #: libgnomeui/gnome-stock-icons.c:135
 msgid "Table Borders"
@@ -624,7 +629,8 @@ msgstr "Спадкоємний елемент 2"
 msgid "Hint for item 2"
 msgstr "Довідка елемента 2"
 
-#: libgnomeui/gnome-app-helper.c:83 test-gnome/testgnome.xml.h:5
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:83 libgnomeui/gnome-app-helper.h:513
 msgid "_File"
 msgstr "_Файл"
 
@@ -632,7 +638,7 @@ msgstr "_Файл"
 msgid "_File/"
 msgstr "_Файл/"
 
-#: libgnomeui/gnome-app-helper.c:85
+#: libgnomeui/gnome-app-helper.c:85 libgnomeui/gnome-app-helper.h:516
 msgid "_Edit"
 msgstr "Ви_правлення"
 
@@ -640,7 +646,7 @@ msgstr "Ви_правлення"
 msgid "_Edit/"
 msgstr "Ви_правлення/"
 
-#: libgnomeui/gnome-app-helper.c:87
+#: libgnomeui/gnome-app-helper.c:87 libgnomeui/gnome-app-helper.h:519
 msgid "_View"
 msgstr "Відо_браження"
 
@@ -648,7 +654,7 @@ msgstr "Відо_браження"
 msgid "_View/"
 msgstr "Відо_браження"
 
-#: libgnomeui/gnome-app-helper.c:89
+#: libgnomeui/gnome-app-helper.c:89 libgnomeui/gnome-app-helper.h:522
 msgid "_Settings"
 msgstr "В_становлення"
 
@@ -656,7 +662,8 @@ msgstr "В_становлення"
 msgid "_Settings/"
 msgstr "В_становлення/"
 
-#: libgnomeui/gnome-app-helper.c:91
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:91 libgnomeui/gnome-app-helper.h:295
 msgid "_New"
 msgstr "_Новий"
 
@@ -664,7 +671,7 @@ msgstr "_Новий"
 msgid "_New/"
 msgstr "_Новий/"
 
-#: libgnomeui/gnome-app-helper.c:93
+#: libgnomeui/gnome-app-helper.c:93 libgnomeui/gnome-app-helper.h:525
 msgid "Fi_les"
 msgstr "Фай_ли"
 
@@ -672,15 +679,15 @@ msgstr "Фай_ли"
 msgid "Fi_les/"
 msgstr "Фай_ли/"
 
-#: libgnomeui/gnome-app-helper.c:95
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:528
 msgid "_Windows"
 msgstr "_Вікна"
 
-#: libgnomeui/gnome-app-helper.c:96
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:534
 msgid "_Game"
 msgstr "_Гра"
 
-#: libgnomeui/gnome-app-helper.c:97 test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:97 libgnomeui/gnome-app-helper.h:531
 msgid "_Help"
 msgstr "_Довідка"
 
@@ -871,11 +878,11 @@ msgstr "Налаштувати програму"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:222
 msgid "_About"
 msgstr "_Про"
 
-#: libgnomeui/gnome-app-helper.c:223 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:223
 msgid "About this application"
 msgstr "Про програму"
 
@@ -902,7 +909,7 @@ msgstr "Створити нове вікно"
 msgid "_Close This Window"
 msgstr "_Закрити це вікно"
 
-#: libgnomeui/gnome-app-helper.c:241 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:241
 msgid "Close the current window"
 msgstr "Закрити поточне вікно"
 
@@ -1042,6 +1049,19 @@ msgstr "Вибрати файл"
 msgid "Browse..."
 msgstr "Вибрати..."
 
+#: libgnomeui/gnome-font-picker.c:67
+msgid "sans 12"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:68
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:69
+#, fuzzy
+msgid "Pick a Font"
+msgstr "Вибрати колір"
+
 #: libgnomeui/gnome-font-picker.c:157
 msgid "The title of the selection dialog box"
 msgstr "Заголовок вікна вибору"
@@ -1115,9 +1135,9 @@ msgid ""
 "restored next time you use this application (%s)."
 msgstr ""
 "Ви спробували змінити вигляд ваших налаштувань, в той час, як системний "
-"адміністратор чи постачальник операційної системи не дозволяє вам змінювати. Деякі "
-"з вибраних вами параметрів не матимуть ефекту, або їх не буде відновлено при наступному "
-"використанні цієї програми (%s)."
+"адміністратор чи постачальник операційної системи не дозволяє вам змінювати. "
+"Деякі з вибраних вами параметрів не матимуть ефекту, або їх не буде "
+"відновлено при наступному використанні цієї програми (%s)."
 
 #: libgnomeui/gnome-gconf-ui.c:115
 #, c-format
@@ -1125,27 +1145,29 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Трапилася помилка під час завантаження чи збереження конфіґураційної інформації для %s. "
-"Деякі з ваших конфіґураційних параметрів можуть працювати невірно."
+"Трапилася помилка під час завантаження чи збереження конфіґураційної "
+"інформації для %s. Деякі з ваших конфіґураційних параметрів можуть працювати "
+"невірно."
 
 #: libgnomeui/gnome-gconf-ui.c:139
 #, c-format
 msgid "GConf error details: %s\n"
 msgstr "Подробиці помилки GConf: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:858
+#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
 msgid "No Icon"
 msgstr "Немає піктограми"
 
-#: libgnomeui/gnome-icon-entry.c:459 libgnomeui/gnome-pixmap-entry.c:373
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:373
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Незнайдено горизонтального блоку, використовується звичайний вибір файлу"
+msgstr ""
+"Незнайдено горизонтального блоку, використовується звичайний вибір файлу"
 
-#: libgnomeui/gnome-icon-entry.c:465 libgnomeui/gnome-pixmap-entry.c:379
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:379
 msgid "Preview"
 msgstr "Перегляд"
 
-#: libgnomeui/gnome-icon-entry.c:879
+#: libgnomeui/gnome-icon-entry.c:882
 msgid "Browse"
 msgstr "Вибрати"
 
@@ -1159,27 +1181,27 @@ msgstr "GnomeIconSelection: каталогу \"%s\" не існує"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: не вдалося відкрити каталог \"%s\""
 
-#: libgnomeui/gnome-icon-sel.c:411
+#: libgnomeui/gnome-icon-sel.c:414
 msgid "Loading Icons..."
 msgstr "Завантаження піктограм..."
 
-#: libgnomeui/gnome-messagebox.c:116
+#: libgnomeui/gnome-messagebox.c:110
 msgid "Information"
 msgstr "Інформація"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:115
 msgid "Warning"
 msgstr "Попередження"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:121
 msgid "Error"
 msgstr "Помилка"
 
-#: libgnomeui/gnome-messagebox.c:133
+#: libgnomeui/gnome-messagebox.c:127
 msgid "Question"
 msgstr "Запитання"
 
-#: libgnomeui/gnome-messagebox.c:138
+#: libgnomeui/gnome-messagebox.c:132
 msgid "Message"
 msgstr "Повідомлення"
 
@@ -1218,6 +1240,11 @@ msgstr "%a %d %b %T %Y"
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Вийти з тесту"
+#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+
+#~ msgid "Exit the test"
+#~ msgstr "Вийти з тесту"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2\n"
-"POT-Creation-Date: 2001-11-30 11:16+0100\n"
+"POT-Creation-Date: 2001-12-14 16:07+0100\n"
 "PO-Revision-Date: 2001-09-22 11:01+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -215,98 +215,98 @@ msgstr ""
 msgid "About %s"
 msgstr "關於"
 
-#: libgnomeui/gnome-client.c:834
+#: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
 msgstr "指定工作環境 ID"
 
-#: libgnomeui/gnome-client.c:834
+#: libgnomeui/gnome-client.c:835
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:838
 msgid "Specify prefix of saved configuration"
 msgstr "指定舊設定檔的前置字"
 
-#: libgnomeui/gnome-client.c:837
+#: libgnomeui/gnome-client.c:838
 msgid "PREFIX"
 msgstr "前置字"
 
-#: libgnomeui/gnome-client.c:840
+#: libgnomeui/gnome-client.c:841
 msgid "Disable connection to session manager"
 msgstr "中斷連線到工作環境總管"
 
-#: libgnomeui/gnome-client.c:946
+#: libgnomeui/gnome-client.c:947
 msgid "Session management"
 msgstr "工作環境管理"
 
-#: libgnomeui/gnome-client.c:2472
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "取消登出"
 
-#: libgnomeui/gnome-color-picker.c:403
+#: libgnomeui/gnome-color-picker.c:404
 msgid "Received invalid color data\n"
 msgstr "收到不合規格的色彩資料\n"
 
-#: libgnomeui/gnome-color-picker.c:467
+#: libgnomeui/gnome-color-picker.c:468
 msgid "Pick a color"
 msgstr "選取一個色彩"
 
-#: libgnomeui/gnome-dateedit.c:418
+#: libgnomeui/gnome-dateedit.c:420
 msgid "Time"
 msgstr "時間"
 
-#: libgnomeui/gnome-dateedit.c:419
+#: libgnomeui/gnome-dateedit.c:421
 msgid "The time currentlyselected"
 msgstr "目前選定的時間"
 
-#: libgnomeui/gnome-dateedit.c:431
+#: libgnomeui/gnome-dateedit.c:433
 msgid "DateEdit Flags"
 msgstr "日期元件選項"
 
-#: libgnomeui/gnome-dateedit.c:432
+#: libgnomeui/gnome-dateedit.c:434
 msgid "Flags for how DateEdit looks"
 msgstr "設定日期元件顯示時的外觀"
 
-#: libgnomeui/gnome-dateedit.c:441
+#: libgnomeui/gnome-dateedit.c:443
 msgid "Lower Hour"
 msgstr "時間下限"
 
-#: libgnomeui/gnome-dateedit.c:442
+#: libgnomeui/gnome-dateedit.c:444
 msgid "Lower hour in the time popup selector"
 msgstr "彈出式時間元件的時間下限"
 
-#: libgnomeui/gnome-dateedit.c:452
+#: libgnomeui/gnome-dateedit.c:454
 msgid "Upper Hour"
 msgstr "時間上限"
 
-#: libgnomeui/gnome-dateedit.c:453
+#: libgnomeui/gnome-dateedit.c:455
 msgid "Upper hour in the time popup selector"
 msgstr "彈出式時間元件的時間上限"
 
-#: libgnomeui/gnome-dateedit.c:463
+#: libgnomeui/gnome-dateedit.c:465
 msgid "Initial Time"
 msgstr "初始時間"
 
-#: libgnomeui/gnome-dateedit.c:464
+#: libgnomeui/gnome-dateedit.c:466
 msgid "The initial time"
 msgstr "初始時所顯示的時間"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:700
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "日曆"
 
-#: libgnomeui/gnome-dateedit.c:926
+#: libgnomeui/gnome-dateedit.c:928
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date 已停用，請使用 gnome_date_edit_get_time"
 
-#: libgnomeui/gnome-druid-page-edge.c:352
-msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#: libgnomeui/gnome-druid-page-edge.c:342
+msgid "Helvetical Bold 18"
+msgstr ""
 
-#: libgnomeui/gnome-druid-page-edge.c:361
-msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#: libgnomeui/gnome-druid-page-edge.c:353
+msgid "Helvetical Medium 12"
+msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:133
 #: libgnomeui/gnome-font-picker.c:156
@@ -448,25 +448,25 @@ msgstr ""
 "當嘗試啟動這個 URL 的處理程式時發生錯誤。\n"
 "請檢查在控制中心內的有關設定是否正確。 "
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "X display to use"
 msgstr "所使用的 X 顯示環境"
 
-#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
 msgid "DISPLAY"
 msgstr "顯示環境"
 
-#: libgnomeui/gnome-ui-init.c:103
+#: libgnomeui/gnome-ui-init.c:104
 msgid "GNOME GUI Library"
 msgstr "GNOME 圖形介面函式庫"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:465
+#: libgnomeui/gnome-ui-init.c:474
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "發生了非常嚴重的錯誤；無法顯示錯誤對話盒\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:479
+#: libgnomeui/gnome-ui-init.c:488
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -474,76 +474,76 @@ msgstr ""
 "嚴重錯誤！\n"
 "無法顯示錯誤對話盒\n"
 
-#: libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:620
 msgid "Gdk debugging flags to set"
 msgstr "設置 Gdk 除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:611 libgnomeui/gnome-ui-init.c:614
-#: libgnomeui/gnome-ui-init.c:655 libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:620 libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:664 libgnomeui/gnome-ui-init.c:667
 msgid "FLAGS"
 msgstr "除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Gdk debugging flags to unset"
 msgstr "取消設置 Gdk 除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:622
+#: libgnomeui/gnome-ui-init.c:631
 msgid "Make X calls synchronous"
 msgstr "將 X 的呼叫同步"
 
-#: libgnomeui/gnome-ui-init.c:628
+#: libgnomeui/gnome-ui-init.c:637
 msgid "Don't use X shared memory extension"
 msgstr "不要使用 X 的共用延伸記憶體"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:641
 msgid "Program name as used by the window manager"
 msgstr "視窗管理員所使用的程式名稱"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:641
 msgid "NAME"
 msgstr "程式名稱"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:644
 msgid "Program class as used by the window manager"
 msgstr "視窗管理員所使用的程式類別"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:644
 msgid "CLASS"
 msgstr "類別"
 
-#: libgnomeui/gnome-ui-init.c:639
+#: libgnomeui/gnome-ui-init.c:648
 msgid "HOST"
 msgstr "主機名稱"
 
-#: libgnomeui/gnome-ui-init.c:643
+#: libgnomeui/gnome-ui-init.c:652
 msgid "PORT"
 msgstr "埠號"
 
-#: libgnomeui/gnome-ui-init.c:648 libgnomeui/gnome-ui-init.c:651
+#: libgnomeui/gnome-ui-init.c:657 libgnomeui/gnome-ui-init.c:660
 msgid "STYLE"
 msgstr "樣式"
 
-#: libgnomeui/gnome-ui-init.c:655
+#: libgnomeui/gnome-ui-init.c:664
 msgid "Gtk+ debugging flags to set"
 msgstr "設置 Gtk+ 除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:658
+#: libgnomeui/gnome-ui-init.c:667
 msgid "Gtk+ debugging flags to unset"
 msgstr "取消設置 Gtk+ 除錯選項"
 
-#: libgnomeui/gnome-ui-init.c:661
+#: libgnomeui/gnome-ui-init.c:670
 msgid "Make all warnings fatal"
 msgstr "將所有警告視為嚴重錯誤"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:673
 msgid "Load an additional Gtk module"
 msgstr "載入另外的 Gtk 模組"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:673
 msgid "MODULE"
 msgstr "模組"
 
-#: libgnomeui/gnome-ui-init.c:769
+#: libgnomeui/gnome-ui-init.c:778
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -1156,19 +1156,19 @@ msgstr "當載入或儲存 %s 的設定資料時發生錯誤。某些設定將�
 msgid "GConf error details: %s\n"
 msgstr "GConf 詳細錯誤：%s\n"
 
-#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:858
+#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
 msgid "No Icon"
 msgstr "無圖示"
 
-#: libgnomeui/gnome-icon-entry.c:459 libgnomeui/gnome-pixmap-entry.c:373
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:373
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "無法找到水平容器元件，使用一般的檔案選取對話盒"
 
-#: libgnomeui/gnome-icon-entry.c:465 libgnomeui/gnome-pixmap-entry.c:379
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:379
 msgid "Preview"
 msgstr "預覽"
 
-#: libgnomeui/gnome-icon-entry.c:879
+#: libgnomeui/gnome-icon-entry.c:882
 msgid "Browse"
 msgstr "瀏覽"
 
@@ -1182,27 +1182,27 @@ msgstr "圖示選擇：'%s' 不存在或不是一個目錄"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "圖示選擇：無法開啟目錄 '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:411
+#: libgnomeui/gnome-icon-sel.c:414
 msgid "Loading Icons..."
 msgstr "載入圖示"
 
-#: libgnomeui/gnome-messagebox.c:116
+#: libgnomeui/gnome-messagebox.c:110
 msgid "Information"
 msgstr "資訊"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:115
 msgid "Warning"
 msgstr "警告"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:121
 msgid "Error"
 msgstr "錯誤"
 
-#: libgnomeui/gnome-messagebox.c:133
+#: libgnomeui/gnome-messagebox.c:127
 msgid "Question"
 msgstr "問題"
 
-#: libgnomeui/gnome-messagebox.c:138
+#: libgnomeui/gnome-messagebox.c:132
 msgid "Message"
 msgstr "訊息"
 
@@ -1240,6 +1240,12 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:407
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+
+#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 
 #~ msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
 #~ msgstr "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
