@@ -1,5 +1,7 @@
 /* libglade - a library for building interfaces from XML files at runtime
- * Copyright (C) 1998  James Henstridge <james@daa.com.au>
+ * Copyright (C) 1998, 1999  James Henstridge <james@daa.com.au>
+ * Copyright (C) 1999 Miguel de Icaza (miguel@gnu.org)
+ *
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -41,6 +43,7 @@ typedef struct {
         const char *extension;
         const char *mapping;
 } gnome_map_t;
+
 static gnome_map_t gnome_stock_button_mapping [] = {
         { "APPLY",  GNOME_STOCK_BUTTON_APPLY  },
         { "CANCEL", GNOME_STOCK_BUTTON_CANCEL },
@@ -133,7 +136,8 @@ stock_button_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
-color_picker_new(GladeXML *xml, GNode *node) {
+color_picker_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid = gnome_color_picker_new();
         xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 
@@ -156,7 +160,8 @@ color_picker_new(GladeXML *xml, GNode *node) {
 }
 
 static GtkWidget *
-font_picker_new(GladeXML *xml, GNode *node) {
+font_picker_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid = gnome_font_picker_new();
         xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 	gboolean use_font = FALSE;
@@ -201,7 +206,8 @@ icon_entry_new(GladeXML *xml, GNode *node) {
 */
 
 static GtkWidget *
-href_new(GladeXML *xml, GNode *node) {
+href_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid;
         xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 	gchar *url = NULL, *label = NULL;
@@ -226,7 +232,8 @@ href_new(GladeXML *xml, GNode *node) {
 }
 
 static GtkWidget *
-entry_new(GladeXML *xml, GNode *node) {
+entry_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid;
 	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 	gchar *history_id = NULL;
@@ -250,7 +257,8 @@ entry_new(GladeXML *xml, GNode *node) {
 }
 
 static GtkWidget *
-file_entry_new(GladeXML *xml, GNode *node) {
+file_entry_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid;
 	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 	gchar *history_id = NULL, *title = NULL;
@@ -281,7 +289,8 @@ file_entry_new(GladeXML *xml, GNode *node) {
 }
 
 static GtkWidget *
-clock_new(GladeXML *xml, GNode *node) {
+clock_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid;
 	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 	GtkClockType ctype = GTK_CLOCK_REALTIME;
@@ -316,7 +325,8 @@ clock_new(GladeXML *xml, GNode *node) {
 /* -- GnomeAnimator not finished */
 
 static GtkWidget *
-less_new(GladeXML *xml, GNode *node) {
+less_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid = gnome_less_new();
         xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 
@@ -333,22 +343,26 @@ less_new(GladeXML *xml, GNode *node) {
 }
 
 static GtkWidget *
-calculator_new(GladeXML *xml, GNode *node) {
+calculator_new(GladeXML *xml, GNode *node)
+{
 	return gnome_calculator_new();
 }
 
 static GtkWidget *
-paper_selector_new(GladeXML *xml, GNode *node) {
+paper_selector_new(GladeXML *xml, GNode *node)
+{
 	return gnome_paper_selector_new();
 }
 
 static GtkWidget *
-spell_new(GladeXML *xml, GNode *node) {
+spell_new(GladeXML *xml, GNode *node)
+{
 	return gnome_spell_new();
 }
 
 static GtkWidget *
-dial_new(GladeXML *xml, GNode *node) {
+dial_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid = gtk_dial_new(glade_get_adjustment(node));
         xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 
@@ -409,7 +423,7 @@ about_new(GladeXML *xml, GNode *node) {
 
 /* -- routines to initialise these widgets with libglade -- */
 
-static const GladeWidgetBuildData widget_data[] = {
+static const GladeWidgetBuildData widget_data [] = {
 	/* this one is an alias for the stock button widget */
 	{ "GnomeStockButton", stock_button_new, glade_standard_build_children},
 	/* this is for the stock button hack ... */
@@ -430,6 +444,7 @@ static const GladeWidgetBuildData widget_data[] = {
 	{ NULL, NULL, NULL }
 };
 
-void glade_init_gnome_widgets(void) {
+void glade_init_gnome_widgets(void)
+{
 	glade_register_widgets(widget_data);
 }
