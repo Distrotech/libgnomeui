@@ -1,5 +1,10 @@
 2004-04-16  Alexander Larsson  <alexl@redhat.com>
 
+	* file-chooser/gtkfilesystemgnomevfs.c (gtk_file_system_gnome_vfs_volume_render_icon):
+	Use same icon for Filesystem as computer:.
+
+2004-04-16  Alexander Larsson  <alexl@redhat.com>
+
 	* libgnomeui/gnome-authentication-manager.c:
 	Some threadsafeness for callbacks.
 
