@@ -1,3 +1,20 @@
+2001-04-26  Martin Baulig  <baulig@suse.de>
+
+	NOTE: The following list contains files which are still in CVS and
+	files which have never been in POTFILES.in; please do not add them
+	because they will go away in about a week.
+
+	If you want to translate these files, please go to the libcompat
+	module and translate them there.
+
+	* POTFILES.in: Removed demos/stock_demo.c, demos/winhints_demo.c,
+	libgnomeui/gnome-app-helper.[ch], libgnomeui/gnome-app-util.[ch],
+	libgnomeui/gnome-dialog.[ch], libgnomeui/gnome-dock*.[ch],
+	libgnomeui/gnome-messagebox.[ch], libgnomeui/gnome-scores.[ch],
+	libgnomeui/gnome-stock.[ch], demos/dock_demo.c,
+	libgnomeui/gnome-cursors.[ch], libgnomeui/gtkpixmapmenuitem.[ch],
+	libgnomeui/gnome-gconf.[ch].
+
 2001-04-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Added Norwegian (bokmål) translation.
