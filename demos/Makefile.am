@@ -23,7 +23,9 @@ noinst_PROGRAMS = \
 	selector_demo		\
 	winhints_demo		\
 	dock_demo 		\
-	animator_demo		\
+	animator_demo
+
+EXTRA_PROGRAMS = \
 	mdi_demo
 
 selector_demo_SOURCES = selector_demo.c

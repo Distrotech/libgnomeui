@@ -1,5 +1,10 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* Makefile.am: Temporarily diabled mdi_demo until GnomeMDI
+	is back in libgnomeui.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* winhints_demo.c: Use the GTK+ API to access our stock icons.
 
 2001-04-26  Martin Baulig  <baulig@suse.de>
