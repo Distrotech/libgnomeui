@@ -1,3 +1,4 @@
+/*  -*- Mode: C; c-set-style: linux; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* Stock icons, buttons, and menu items.
    Copyright (C) 1997, 1998 Free Software Foundation
 

@@ -1,9 +1,24 @@
-/* GNOME GUI Library, second iteration of GnomePixmap
- * Copyright (C) 1997, 1998, 1999 the Free Software Foundation
- *
- *
- * GnomePixmap v2: Havoc Pennington
- */
+/*  -*- Mode: C; c-set-style: linux; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+
+   Copyright (C) 1999 Red Hat, Inc.
+    
+   The Gnome Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The Gnome Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the Gnome Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+
+   GnomePixmap Developers: Havoc Pennington, Jonathan Blandford
+*/
 
 #include <config.h>
 #include "gnome-pixmap.h"
@@ -505,13 +520,6 @@ set_pixbufs(GnomePixmap* gpixmap, GdkPixbuf* pixbufs[5], GdkBitmap* masks[5])
         resize_to_fit(gpixmap);
 }
 
-
-/*
- * This really should not be here; but it is until we write the filtered affine
- * transformer for libart
- */
-
-
 static void
 free_buffer (gpointer user_data, gpointer data)
 {
@@ -554,13 +562,15 @@ gnome_pixmap_new (void)
  * if the file isn't found/loaded, you get an empty widget.
  * to detect errors just do:
  *
+ * <programlisting>
  * gdk_pixbuf_new_from_file (filename);
  * if (pixbuf != NULL) {
  *         gpixmap = gnome_pixmap_new_from_pixbuf (pixbuf);
  * } else {
  *         // handle your error...
  * }
- *
+ * </programlisting>
+ * 
  * Return value: A newly allocated @GnomePixmap with the file at @filename loaded.
  **/
 GtkWidget*

@@ -28,9 +28,6 @@ BEGIN_GNOME_DECLS
 void gnome_preferences_load(void);
 void gnome_preferences_save(void);
 
-void gnome_preferences_load_custom(GnomePreferences *settings);
-void gnome_preferences_save_custom(GnomePreferences *settings);
-
 /* How buttons are layed out in dialogs */
 GtkButtonBoxStyle gnome_preferences_get_button_layout (void);
 void              gnome_preferences_set_button_layout (GtkButtonBoxStyle style);

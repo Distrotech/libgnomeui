@@ -1,3 +1,18 @@
+1999-12-21  Havoc Pennington  <hp@redhat.com>
+
+	* oafgnome.c (rcmd_activator): make it compile
+
+	* gnome-preferences.h: take load/save custom out of the header
+	(this hasn't compiled for ages, don't know why no one noticed).
+
+	* gnome-stock.h, gnome-stock.c: emacs magic
+
+	* gnome-pixmap.c, gnome-pixmap.h: Add copyright notices and file
+	magic. comment cleanup
+
+	* gnome-ditem-edit.h, gnome-ditem-edit.c: mostly cut-and-paste 
+	from gnome-dentry-edit, not testable until we get the icon list.
+	
 Tue Dec 21 02:06:25 1999  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.[ch]: make the get_result be a function rather
