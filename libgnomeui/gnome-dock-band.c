@@ -213,7 +213,13 @@ gnome_dock_band_size_request (GtkWidget *widget,
         {
           GtkRequisition req;
 
-          gtk_widget_size_request (c->widget, &req);
+	  req.width = req.height = 0;
+
+          if (GNOME_IS_DOCK_ITEM (c->widget))
+            gnome_dock_item_handle_size_request(GNOME_DOCK_ITEM (c->widget),
+                                                &req);
+	  else
+	    gtk_widget_size_request (c->widget, &req);
 
           if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
             c->max_space_requisition = req.width;
@@ -221,10 +227,6 @@ gnome_dock_band_size_request (GtkWidget *widget,
             c->max_space_requisition = req.height;
 
           band->max_space_requisition += c->max_space_requisition;
-
-          if (GNOME_IS_DOCK_ITEM (c->widget))
-            gnome_dock_item_handle_size_request(GNOME_DOCK_ITEM (c->widget),
-                                                &req);
 
           if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
             {
