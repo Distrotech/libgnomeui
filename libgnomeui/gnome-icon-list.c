@@ -3232,7 +3232,7 @@ impl_selection_ref_selection (AtkSelection *selection, gint i)
 
 	widget = GTK_ACCESSIBLE (selection)->widget;
 	if (!widget)
-		return FALSE;
+		return NULL;
 
 	gil = GNOME_ICON_LIST (widget);
 
@@ -3263,7 +3263,7 @@ impl_selection_get_selection_count (AtkSelection *selection)
 
 	widget = GTK_ACCESSIBLE (selection)->widget;
 	if (!widget)
-		return FALSE;
+		return 0;
 
 	gil = GNOME_ICON_LIST (widget);
 	sel = gnome_icon_list_get_selection (gil);
