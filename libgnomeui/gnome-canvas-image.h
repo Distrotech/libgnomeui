@@ -28,6 +28,7 @@ BEGIN_GNOME_DECLS
  * name		type			read/write	description
  * ------------------------------------------------------------------------------------------
  * image	GdkImlibImage*		RW		Pointer to a GdkImlibImage
+ * pixbuf	ArtPixBuf*		W		Pointer to an ArtPixBuf (aa-mode)
  * x		double			RW		X coordinate of anchor point
  * y		double			RW		Y coordinate of anchor point
  * width	double			RW		Width to scale image to, in canvas units

@@ -23,6 +23,7 @@
 enum {
 	ARG_0,
 	ARG_IMAGE,
+	ARG_PIXBUF,
 	ARG_X,
 	ARG_Y,
 	ARG_WIDTH,
@@ -92,6 +93,7 @@ gnome_canvas_image_class_init (GnomeCanvasImageClass *class)
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
 	gtk_object_add_arg_type ("GnomeCanvasImage::image", GTK_TYPE_GDK_IMLIB_IMAGE, GTK_ARG_READWRITE, ARG_IMAGE);
+	gtk_object_add_arg_type ("GnomeCanvasImage::pixbuf", GTK_TYPE_BOXED, GTK_ARG_WRITABLE, ARG_PIXBUF);
 	gtk_object_add_arg_type ("GnomeCanvasImage::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
 	gtk_object_add_arg_type ("GnomeCanvasImage::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
 	gtk_object_add_arg_type ("GnomeCanvasImage::width", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_WIDTH);
@@ -283,6 +285,17 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			if (image->pixbuf != NULL)
 				art_pixbuf_free (image->pixbuf);
 			image->pixbuf = pixbuf_from_imlib_image (image->im);
+		}
+		update = TRUE;
+		break;
+
+	case ARG_PIXBUF:
+		/* The pixmap and mask will be freed when the item is reconfigured */
+		if (item->canvas->aa && GTK_VALUE_BOXED (*arg)) {
+			image->im = NULL;
+			if (image->pixbuf != NULL)
+				art_pixbuf_free (image->pixbuf);
+			image->pixbuf = GTK_VALUE_BOXED (*arg);
 		}
 		update = TRUE;
 		break;
@@ -703,7 +716,6 @@ gnome_canvas_image_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 static ArtPixBuf *
 pixbuf_from_imlib_image (GdkImlibImage *im)
 {
-	ArtPixBuf *pixbuf;
 	art_u8 *pixels;
 	int width, height, rowstride;
 	int x, y;
