@@ -6,15 +6,15 @@
 #
 # Typo-fixes from Gareth Bowker. 
 # 
-# adnabyddiaeths, adnabyddwr, dynodwr, neu denodydd? Rhaid i dewis.
+# adnabyddiaeth, adnabyddwr, dynodwr, neu dynodydd? Rhaid dewis.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-26 00:45+0100\n"
-"PO-Revision-Date: 2005-01-14 03:58+0000\n"
-"Last-Translator: Telsa Gwynne <hobbit@aloss.ukuu.org.uk>\n"
+"PO-Revision-Date: 2005-01-30 21:30+0000\n"
+"Last-Translator: Rhys Jones <rhys@sucs.org>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,7 @@ msgstr "Methwyd agor ffeil '%s': %s"
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
-"Methwyd llwytho delwedd '%s': rheswm anhysbys, ffeil delwedd llygredig, "
+"Methwyd llwytho delwedd '%s': rheswm anhysbys, ffeil delwedd lygredig, "
 "mae'n debyg"
 
 #: libgnomeui/gnome-about.c:198
@@ -94,7 +94,7 @@ msgstr "Enw rhaglen"
 
 #: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
-msgstr "Enw y rhaglen"
+msgstr "Enw'r rhaglen"
 
 #: libgnomeui/gnome-about.c:386
 msgid "Program version"
@@ -154,12 +154,12 @@ msgstr "Cofnod ysgrifennwr dogfennaeth sengl"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "Clodau cyfieithwyr"
+msgstr "Diolchiadau cyfieithwyr"
 
 #: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "Clodau i'r cyfieithwyr. Dylir marcio'r llinyn hwn yn gyfiaithadwy"
+msgstr "Diolchiadau i'r cyfieithwyr. Dylid marcio'r llinyn hwn yn gyfieithadwy"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -265,7 +265,7 @@ msgstr "Cadw _Fel..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Cadw'r ffeil cyfredol gyda enw newydd"
+msgstr "Cadw'r ffeil cyfredol gydag enw newydd"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -848,7 +848,7 @@ msgstr "Gosodwyd lliw cefndir"
 
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr "Mae lliw y cefndir wedi ei osod"
+msgstr "Mae lliw'r cefndir wedi ei osod"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
@@ -869,7 +869,7 @@ msgstr "Lliw Cefndir Cynnwys wedi gosod"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Contents Background color is set"
-msgstr "Mae Lliw y Cefndir y Cynnwys wedi ei osod"
+msgstr "Mae Lliw Cefndir y Cynnwys wedi ei osod"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -958,9 +958,10 @@ msgstr ""
 msgid "Modal"
 msgstr "Modal"
 
+# modal -> moddol (Termiadur Ysgol)
 #: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr "A ddylai'r ffenest ffeil Pori fod yn fodal."
+msgstr "A ddylai'r ffenest ffeil Pori fod yn foddol."
 
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
@@ -989,7 +990,7 @@ msgid ""
 "its parameters."
 msgstr ""
 "Y GnomeEntry mae'r cofnod ffeil yn ei ddefnyddio er mwyn mewnbynnu enwau "
-"ffeiliau. Gallwch ddefnyddio'r priodwedd hwn er mwyn cael y GnomeEntry os "
+"ffeiliau. Gallwch ddefnyddio'r briodwedd hon er mwyn cael y GnomeEntry os "
 "ydych angen edrych ar neu newid ei briodweddau."
 
 #: libgnomeui/gnome-file-entry.c:291
@@ -1003,7 +1004,7 @@ msgid ""
 "parameters."
 msgstr ""
 "Y GtkEntry mae'r cofnod ffeil yn ei ddefnyddio er mwyn mewnbynnu enwau "
-"ffeiliau. Gallwch ddefnyddio'r priodwedd hwn er mwyn cael y GtkEntry os "
+"ffeiliau. Gallwch ddefnyddio'r briodwedd hon er mwyn cael y GtkEntry os "
 "ydych angen edrych ar neu newid ei briodweddau."
 
 #: libgnomeui/gnome-file-entry.c:302
@@ -1128,7 +1129,7 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Fe geisiodd y rhaglen \"%s\" newid agwedd o'ch cyfluniad mae gweinyddwr eich "
-"system neu gwerthwr eich system weithredu wedi eich gwahardd rhag newid. "
+"system neu werthwr eich system weithredu wedi eich gwahardd rhag newid. "
 "Efallai ni fydd rhai o'ch gosodiadau yn cymryd effaith, neu ni chaent eu "
 "adfer y tro nesaf rydych yn defnyddio'r rhaglen."
 
@@ -1147,7 +1148,7 @@ msgstr "LAU"
 
 #: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
-msgstr "Yr LAU mae GnomeHRef yn ei weithredu"
+msgstr "Y LAU mae GnomeHRef yn ei weithredu"
 
 #: libgnomeui/gnome-href.c:131
 msgid "Text"
@@ -1178,7 +1179,7 @@ msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Digwyddodd gwall wrth geisio gweithredu y porwr gwe dewisol.\n"
+"Digwyddodd gwall wrth geisio gweithredu'r porwr gwe dewisol.\n"
 "Gwiriwch y gosodiadau yn y deialog 'Rhaglenni Dewisol' os gwelwch yn dda."
 
 #: libgnomeui/gnome-icon-entry.c:178
@@ -1186,7 +1187,7 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Dynodydd unigryw ar gyfer y cofnod eicon. Fe ddefnyddir hyn ar gyfer cadw y "
+"Dynodydd unigryw ar gyfer y cofnod eicon. Fe ddefnyddir hyn ar gyfer cadw'r "
 "rhestr hanes."
 
 #: libgnomeui/gnome-icon-entry.c:187
@@ -1214,7 +1215,7 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Deialog dewis eicon. Gallwch ddefnyddio'r priodwedd hwn er mwyn cael y "
+"Deialog dewis eicon. Gallwch ddefnyddio'r briodwedd hon er mwyn cael y "
 "GtkDialog os ydych angen edrych ar neu newid ei briodweddau."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
@@ -1258,7 +1259,7 @@ msgstr "Llwybr eiconau"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Yma fe ddylwch roi enw'r cyfeiriadur sy'n cynnwys delweddau eicon."
+msgstr "Yma fe ddylech roi enw'r cyfeiriadur sy'n cynnwys delweddau eicon."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1316,7 +1317,7 @@ msgstr "Cysylltu fel d_efnyddiwr:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
-msgstr "Cofio'r cyfrinair ar gyfer y sesiwn hwn"
+msgstr "Cofio'r cyfrinair ar gyfer y sesiwn hon"
 
 #: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
@@ -1444,7 +1445,7 @@ msgid ""
 "Please save all your files before closing this dialog."
 msgstr ""
 "Mae'r Rheolwr Sesiynau GNOME (y proses %d) wedi chwalu\n"
-"oherwydd gwall terfynnol (%s).\n"
+"oherwydd gwall terfynol (%s).\n"
 "Ar ôl i chi gau'r deialog hwn, fe fydd pob rhaglen yn cau ac fe fydd eich "
 "sesiwn yn terfynu.\n"
 "Arbedwch eich ffeiliau i gyd cyn cau'r deialog hwn os gwelwch yn dda."
@@ -1464,7 +1465,7 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"Gallwch ddweud i ddatblygwyr y rhaglen beth ddigwyddod er mwyn eu cynorthwyo "
+"Gallwch ddweud wrth ddatblygwyr y rhaglen beth ddigwyddodd er mwyn eu cynorthwyo "
 "nhw i'w drwsio. Neu gallwch ailgychwyn y rhaglen nawr."
 
 #: libgnomeui/gnome_segv.c:137
@@ -1477,7 +1478,7 @@ msgstr "_Ailgychwyn y Rhaglen"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
-msgstr "_Cysylltu a'r Datblygwyr"
+msgstr "_Cysylltu â'r Datblygwyr"
 
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
