@@ -13,16 +13,19 @@
 #include <gtk/gtk.h>
 
 static void gnome_app_do_menu_creation        (GtkWidget *parent_widget,
-					       GnomeMenuInfo *menuinfo);
+					       GnomeMenuInfo *menuinfo,
+					       gpointer data);
 static void gnome_app_do_toolbar_creation     (GnomeApp *app,
 					       GtkWidget *parent_widget,
-					       GnomeToolbarInfo *tbinfo);
+					       GnomeToolbarInfo *tbinfo,
+					       gpointer data);
 static void gnome_app_add_help_menu_entries   (GtkWidget *parent_widget,
 				               GnomeMenuInfo *menuinfo);
 
 static void
 gnome_app_do_menu_creation(GtkWidget *parent_widget,
-			   GnomeMenuInfo *menuinfo)
+			   GnomeMenuInfo *menuinfo,
+			   gpointer data)
 {
 	int i;
 	for(i = 0; menuinfo[i].type != GNOME_APP_MENU_ENDOFINFO; i++)
@@ -34,27 +37,37 @@ gnome_app_do_menu_creation(GtkWidget *parent_widget,
 		}
 		else
 		{
-		    menuinfo[i].widget =
-			gtk_menu_item_new_with_label(menuinfo[i].label);
+		    if(menuinfo[i].type == GNOME_APP_MENU_SEPARATOR)
+		      {
+			menuinfo[i].widget =
+			  gtk_menu_item_new();
+		      }
+		    else
+		      {
+			menuinfo[i].widget =
+			  gtk_menu_item_new_with_label(menuinfo[i].label);
+		      }
+
 		    gtk_widget_show(menuinfo[i].widget);
 		    gtk_menu_shell_append(GTK_MENU_SHELL(parent_widget),
 					  menuinfo[i].widget);
-		
+		    
 		    if (menuinfo[i].type == GNOME_APP_MENU_ITEM)
-		    {
+		      {
 			gtk_signal_connect(GTK_OBJECT(menuinfo[i].widget),
 					   "activate",
-					   menuinfo[i].moreinfo, NULL);
-		    }
+					   menuinfo[i].moreinfo, data);
+		      }
 		    else if(menuinfo[i].type == GNOME_APP_MENU_SUBMENU)
-		    {
+		      {
 			GtkWidget *submenu;
 			submenu = gtk_menu_new();
 			gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuinfo[i].widget),
 						  submenu);
 			gnome_app_do_menu_creation(submenu,
-						   menuinfo[i].moreinfo);
-		    }
+						   menuinfo[i].moreinfo,
+						   data);
+		      }
 		}
 	}
 }
@@ -117,13 +130,32 @@ gnome_app_create_menus(GnomeApp *app,
 	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
 	
 	if(menuinfo)
-		gnome_app_do_menu_creation(app->menubar, menuinfo);
+		gnome_app_do_menu_creation(app->menubar, menuinfo, NULL);
+}
+
+void
+gnome_app_create_menus_with_data(GnomeApp *app,
+				 GnomeMenuInfo *menuinfo,
+				 gpointer data)
+{
+	GtkWidget *menubar;
+	
+	g_return_if_fail(app != NULL);
+	g_return_if_fail(GNOME_IS_APP(app));
+	g_return_if_fail(app->menubar == NULL);
+
+	menubar = gtk_menu_bar_new ();
+	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
+	
+	if(menuinfo)
+		gnome_app_do_menu_creation(app->menubar, menuinfo, data);
 }
 
 static void
 gnome_app_do_toolbar_creation(GnomeApp *app,
 			      GtkWidget *parent_widget,
-			      GnomeToolbarInfo *tbinfo)
+			      GnomeToolbarInfo *tbinfo,
+			      gpointer data)
 {
 	int i;
 	GtkWidget *pmap;
@@ -150,7 +182,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 						tbinfo[i].tooltip_text,
 						pmap,
 						tbinfo[i].clicked_callback,
-						NULL);
+						data);
 		}
 		else if(tbinfo[i].type == GNOME_APP_TOOLBAR_SPACE)
 		{
@@ -170,6 +202,21 @@ void gnome_app_create_toolbar(GnomeApp *app,
 		gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH)));
 	
 	if(toolbarinfo)
-		gnome_app_do_toolbar_creation(app, app->toolbar, toolbarinfo);
+		gnome_app_do_toolbar_creation(app, app->toolbar, toolbarinfo, NULL);
+}
+
+void gnome_app_create_toolbar_with_data(GnomeApp *app,
+					GnomeToolbarInfo *toolbarinfo,
+					gpointer data)
+{
+	g_return_if_fail(app != NULL);
+	g_return_if_fail(GNOME_IS_APP(app));
+	g_return_if_fail(app->toolbar == NULL);
+	
+	gnome_app_set_toolbar (app, GTK_TOOLBAR (
+		gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH)));
+	
+	if(toolbarinfo)
+		gnome_app_do_toolbar_creation(app, app->toolbar, toolbarinfo, data);
 }
 

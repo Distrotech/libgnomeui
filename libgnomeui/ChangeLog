@@ -1,3 +1,18 @@
+1998-02-14  Christoph Toshok <toshok@hungry.com>
+	* gnome-app-helper.c (gnome_app_create_menus_with_data): new
+	function, to handle the (common) case of creating an entire menu
+	system with the same callback data.
+	(gnome_app_create_toolbar_with_data): analogous addition for
+	toolbars.
+	(gnome_app_do_menu_create): add data parameter, which is passed in
+	by both gnome_app_create_menus_with_dat and
+	gnome_app_create_menus, and which is passed on to
+	gtk_signal_connect.  Also, add handling for new menuinfo type,
+	GNOME_APP_MENU_SEPARATOR.
+	(gnome_app_do_toolbar_create): analogous change for toolbars.
+	* gnome-app-helper.h: wrap with BEGIN_GNOME_DECLS/END_GNOME_DECLS
+	and add GNOME_APP_MENU_HELP enum.
+	
 1998-02-14  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* libgnomeui.h: includes the new session management
