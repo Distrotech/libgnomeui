@@ -1295,6 +1295,9 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 	if (priv->icons >= priv->last_selected_idx)
 		priv->last_selected_idx = -1;
 
+	if (priv->icons >= priv->focus_icon)
+		priv->focus_icon = -1;
+	
 	if (priv->last_selected_icon == icon)
 		priv->last_selected_icon = NULL;
 
