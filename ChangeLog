@@ -1,3 +1,7 @@
+2001-12-08  Glynn Foster  <glynn.foster@sun.com>
+
+	* libgnomeui/Makefile.am: Build fix.
+
 2001-12-07  jacob berkman  <jacob@ximian.com>
 
 	* Makefile.am:

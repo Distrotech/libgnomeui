@@ -34,11 +34,6 @@ INCLUDES = \
 
 EXTRA_HEADERS = 
 
-noinst_HEADERS = \
-	gnome-i18nP.h			\
-	gnome-gconf-ui.h		\
-	libgnomeuiP.h
-
 libgnomeui_2_la_SOURCES = \
 	gnometypebuiltins.h		\
 	gnometypebuiltins.c		\
@@ -64,6 +59,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-marshal.c			\
+	gnome-marshal.h			\
 	gnome-messagebox.c		\
 	gnome-mdi.c			\
 	gnome-mdi-child.c		\
@@ -83,7 +79,9 @@ libgnomeui_2_la_SOURCES = \
 	gnome-vfs-util.c		\
 	gnome-window.c			\
 	gnome-window-icon.c		\
-	$(noinst_HEADERS)
+	gnome-i18nP.h			\
+	gnome-gconf-ui.h		\
+	libgnomeuiP.h
 
 ## this lists all the non-generated headers
 gnome_headers = \
