@@ -88,8 +88,9 @@ main (int argc, char **argv)
   /* I am having troubles with CVS gnome-libs today, so let's do
      things by hand.  */
 
-  gnome_program_init ("dock_demo", "1.0", argc, argv, GNOME_PARAM_MODULE_INFO,
-		      libgnomeui_module_info, NULL);
+  gnome_program_init ("dock_demo", "1.0", argc, argv,
+		      GNOME_PARAM_MODULE_INFO,
+		      &libgnomeui_module_info, NULL);
 
   app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (app), "Test!");
