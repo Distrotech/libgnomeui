@@ -1,5 +1,13 @@
 2003-10-01  Federico Mena Quintero  <federico@ximian.com>
 
+	* gtkfilechooserimpldefault.c (name_sort_func): Simplify with a
+	macro.  This bloats the compiled code, but at least it makes the
+	human-readable code not egregiously ugly.
+	(size_sort_func): Likewise.
+	(mtime_sort_func): Likewise.
+
+2003-10-01  Federico Mena Quintero  <federico@ximian.com>
+
 	* gtkfilechooserimpldefault.c (tree_selection_changed): Use enum
 	values instead of plain numbers for the file lists's sort columns.
 	(create_file_list): Likewise.
