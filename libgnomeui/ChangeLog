@@ -1,3 +1,7 @@
+1998-02-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-pixmap.c (gnome_pixmap_init): GnomePixmap is a GTK_BASIC widget.
+
 1998-02-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-pixmap.c (load_file): New internal function that takes

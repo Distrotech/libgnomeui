@@ -53,6 +53,8 @@ gnome_pixmap_get_type (void)
 static void
 gnome_pixmap_init (GnomePixmap *gpixmap)
 {
+	GTK_WIDGET_SET_FLAGS (gpixmap, GTK_BASIC);
+
 	gpixmap->pixmap = NULL;
 	gpixmap->mask = NULL;
 }
