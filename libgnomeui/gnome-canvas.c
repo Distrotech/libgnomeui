@@ -29,20 +29,16 @@
  *
  * - Curve support for line item.
  *
- * - Arc item.
+ * - Arc item (Havoc has it; to be integrated in GnomeCanvasEllipse).
  *
  * - Sane font handling API.
  *
  * - Get_arg methods for items:
  *   - How to fetch the outline width and know whether it is in pixels or units?
- *
- * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
  */
 
 /*
  * Raph's TODO list for the antialiased canvas integration:
- *
- * - The underlying libart code is not bulletproof yet, more work there for sure.
  *
  * - ::point() method for text item not accurate when affine transformed.
  *
@@ -83,9 +79,7 @@ enum {
 static void gnome_canvas_request_update (GnomeCanvas *canvas);
 
 
-typedef gint (* GnomeCanvasItemSignal1) (GtkObject *item,
-					 gpointer   arg1,
-					 gpointer   data);
+typedef gint (* GnomeCanvasItemSignal1) (GtkObject *item, gpointer arg1, gpointer data);
 
 static void gnome_canvas_item_marshal_signal_1 (GtkObject     *object,
 						GtkSignalFunc  func,
@@ -124,7 +118,7 @@ gnome_canvas_item_get_type (void)
 	static GtkType canvas_item_type = 0;
 
 	if (!canvas_item_type) {
-		GtkTypeInfo canvas_item_info = {
+		static const GtkTypeInfo canvas_item_info = {
 			"GnomeCanvasItem",
 			sizeof (GnomeCanvasItem),
 			sizeof (GnomeCanvasItemClass),
@@ -263,7 +257,7 @@ item_post_create_setup (GnomeCanvasItem *item)
 
 /**
  * gnome_canvas_item_construct:
- * @item: The item to construct.
+ * @item: An unconstructed canvas item.
  * @parent: The parent group for the item.
  * @first_arg_name: The name of the first argument for configuring the item.
  * @args: The list of arguments used to configure the item.
@@ -310,7 +304,7 @@ gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
 
 /**
  * gnome_canvas_item_constructv:
- * @item: The item to construct.
+ * @item: An unconstructed canvas item.
  * @parent: The parent group for the item.
  * @nargs: The number of arguments used to configure the item.
  * @args: The list of arguments used to configure the item.
@@ -509,7 +503,8 @@ gnome_canvas_item_invoke_update (GnomeCanvasItem *item, double *affine, ArtSVP *
  * inverse of the item's transform, maintaining the affine invariant.
  */
 static double
-gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item)
+gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
+				GnomeCanvasItem **actual_item)
 {
 #ifdef HACKISH_AFFINE
 	double i2w[6], w2c[6], i2c[6], c2i[6];
@@ -528,12 +523,16 @@ gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int c
 	y = i.y;
 #endif
 
-	return (* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->point) (item, x, y, cx, cy, actual_item);
+	return (* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->point) (
+		item, x, y, cx, cy, actual_item);
 }
 
 /* Marshaler for the "event" signal of canvas items */
 static void
-gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpointer func_data, GtkArg *args)
+gnome_canvas_item_marshal_signal_1 (GtkObject *object,
+				    GtkSignalFunc func,
+				    gpointer func_data,
+				    GtkArg *args)
 {
 	GnomeCanvasItemSignal1 rfunc;
 	gint *return_val;
@@ -549,12 +548,12 @@ gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoin
 
 /**
  * gnome_canvas_item_set:
- * @item: The item to configure.
+ * @item: A canvas item.
  * @first_arg_name: The list of object argument name/value pairs used to configure the item.
  * @Varargs:
  *
- * Configures a canvas item.  The arguments in the item are set to the specified values,
- * and the item is repainted as appropriate.
+ * Configures a canvas item.  The arguments in the item are set to the specified
+ * values, and the item is repainted as appropriate.
  **/
 void
 gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
@@ -569,12 +568,12 @@ gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 
 /**
  * gnome_canvas_item_set_valist:
- * @item: The item to configure.
+ * @item: A canvas item.
  * @first_arg_name: The name of the first argument used to configure the item.
  * @args: The list of object argument name/value pairs used to configure the item.
  *
- * Configures a canvas item.  The arguments in the item are set to the specified values,
- * and the item is repainted as appropriate.
+ * Configures a canvas item.  The arguments in the item are set to the specified
+ * values, and the item is repainted as appropriate.
  **/
 void
 gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name, va_list args)
@@ -589,7 +588,8 @@ gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name
 	arg_list = NULL;
 	info_list = NULL;
 
-	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item), &arg_list, &info_list, first_arg_name, args);
+	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item),
+					 &arg_list, &info_list, first_arg_name, args);
 
 	if (error) {
 		g_warning ("gnome_canvas_item_set(): %s", error);
@@ -616,12 +616,12 @@ gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name
 
 /**
  * gnome_canvas_item_setv:
- * @item: The item to configure.
+ * @item: A canvas item.
  * @nargs: The number of arguments used to configure the item.
  * @args: The arguments used to configure the item.
  *
- * Configures a canvas item.  The arguments in the item are set to the specified values,
- * and the item is repainted as appropriate.
+ * Configures a canvas item.  The arguments in the item are set to the specified
+ * values, and the item is repainted as appropriate.
  **/
 void
 gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
@@ -635,10 +635,11 @@ gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
 
 /**
  * gnome_canvas_item_affine_relative:
- * @item: The item to transform.
- * @affine: the affine with which to transform the item
+ * @item: A canvas item.
+ * @affine: An affine transformation matrix.
  *
- * Apply a relative affine transformation to the item.
+ * Combines the specified affine transformation matrix with the item's current
+ * transformation.
  **/
 #define GCIAR_EPSILON 1e-6
 void
@@ -677,8 +678,12 @@ gnome_canvas_item_affine_relative (GnomeCanvasItem *item, const double affine[6]
 				new_affine = g_new (double, 6);
 				for (i = 0; i < 4; i++)
 					new_affine[i] = affine[i];
-				new_affine[4] = item->xform[0] * affine[0] + item->xform[1] * affine[2] + affine[4];
-				new_affine[5] = item->xform[0] * affine[1] + item->xform[1] * affine[3] + affine[5];
+				new_affine[4] = (item->xform[0] * affine[0]
+						 + item->xform[1] * affine[2]
+						 + affine[4]);
+				new_affine[5] = (item->xform[0] * affine[1]
+						 + item->xform[1] * affine[3]
+						 + affine[5]);
 				g_free (item->xform);
 				item->xform = new_affine;
 			}
@@ -704,10 +709,11 @@ gnome_canvas_item_affine_relative (GnomeCanvasItem *item, const double affine[6]
 
 /**
  * gnome_canvas_item_affine_absolute:
- * @item: The item to transform.
- * @affine: the affine with which to replace the transform of the item
+ * @item: A canvas item.
+ * @affine: An affine transformation matrix.
  *
- * Apply an absolute affine transformation to the item.
+ * Makes the item's affine transformation matrix be equal to the specified
+ * matrix.
  **/
 void
 gnome_canvas_item_affine_absolute (GnomeCanvasItem *item, const double affine[6])
@@ -758,11 +764,12 @@ gnome_canvas_item_affine_absolute (GnomeCanvasItem *item, const double affine[6]
 
 /**
  * gnome_canvas_item_move:
- * @item: The item to move.
- * @dx: The horizontal distance.
- * @dy: The vertical distance.
+ * @item: A canvas item.
+ * @dx: Horizontal offset.
+ * @dy: Vertical offset.
  *
- * Moves a canvas item by the specified distance, which must be specified in canvas units.
+ * Moves a canvas item by creating an affine transformation matrix for
+ * translation by using the specified values.
  **/
 #ifndef OLD_XFORM
 void
@@ -857,12 +864,12 @@ put_item_after (GList *link, GList *before)
 
 /**
  * gnome_canvas_item_raise:
- * @item: The item to raise in its parent's stack.
- * @positions: The number of steps to raise the item.
+ * @item: A canvas item.
+ * @positions: Number of steps to raise the item.
  *
- * Raises the item in its parent's stack by the specified number of positions.  If
- * the number of positions is greater than the distance to the top of the stack, then
- * the item is put at the top.
+ * Raises the item in its parent's stack by the specified number of positions.
+ * If the number of positions is greater than the distance to the top of the
+ * stack, then the item is put at the top.
  **/
 void
 gnome_canvas_item_raise (GnomeCanvasItem *item, int positions)
@@ -896,12 +903,12 @@ gnome_canvas_item_raise (GnomeCanvasItem *item, int positions)
 
 /**
  * gnome_canvas_item_lower:
- * @item: The item to lower in its parent's stack.
- * @positions: The number of steps to lower the item.
+ * @item: A canvas item.
+ * @positions: Number of steps to lower the item.
  *
- * Lowers the item in its parent's stack by the specified number of positions.  If
- * the number of positions is greater than the distance to the bottom of the stack, then
- * the item is put at the bottom.
+ * Lowers the item in its parent's stack by the specified number of positions.
+ * If the number of positions is greater than the distance to the bottom of the
+ * stack, then the item is put at the bottom.
  **/
 void
 gnome_canvas_item_lower (GnomeCanvasItem *item, int positions)
@@ -935,7 +942,7 @@ gnome_canvas_item_lower (GnomeCanvasItem *item, int positions)
 
 /**
  * gnome_canvas_item_raise_to_top:
- * @item: The item to raise in its parent's stack.
+ * @item: A canvas item.
  *
  * Raises an item to the top of its parent's stack.
  **/
@@ -964,7 +971,7 @@ gnome_canvas_item_raise_to_top (GnomeCanvasItem *item)
 
 /**
  * gnome_canvas_item_lower_to_bottom:
- * @item: The item to lower in its parent's stack.
+ * @item: A canvas item.
  *
  * Lowers an item to the bottom of its parent's stack.
  **/
@@ -993,9 +1000,9 @@ gnome_canvas_item_lower_to_bottom (GnomeCanvasItem *item)
 
 /**
  * gnome_canvas_item_show:
- * @item: The item to show.
+ * @item: A canvas item.
  *
- * Shows an item.  If the item was already shown, then no action is taken.
+ * Shows a canvas item.  If the item was already shown, then no action is taken.
  **/
 void
 gnome_canvas_item_show (GnomeCanvasItem *item)
@@ -1015,9 +1022,10 @@ gnome_canvas_item_show (GnomeCanvasItem *item)
 
 /**
  * gnome_canvas_item_hide:
- * @item: The item to hide.
+ * @item: A canvas item.
  *
- * Hides an item.  If the item was already hidden, then no action is taken.
+ * Hides a canvas item.  If the item was already hidden, then no action is
+ * taken.
  **/
 void
 gnome_canvas_item_hide (GnomeCanvasItem *item)
@@ -1037,19 +1045,21 @@ gnome_canvas_item_hide (GnomeCanvasItem *item)
 
 /**
  * gnome_canvas_item_grab:
- * @item: The item to grab.
+ * @item: A canvas item.
  * @event_mask: Mask of events that will be sent to this item.
  * @cursor: If non-NULL, the cursor that will be used while the grab is active.
  * @etime: The timestamp required for grabbing the mouse, or GDK_CURRENT_TIME.
  *
- * Specifies that all events that match the specified event mask should be sent to the specified
- * item, and also grabs the mouse by calling gdk_pointer_grab().  The event mask is also used when
- * grabbing the pointer.  If @cursor is not NULL, then that cursor is used while the grab is active.
+ * Specifies that all events that match the specified event mask should be sent
+ * to the specified item, and also grabs the mouse by calling
+ * gdk_pointer_grab().  The event mask is also used when grabbing the pointer.
+ * If @cursor is not NULL, then that cursor is used while the grab is active.
  * The @etime parameter is the timestamp required for grabbing the mouse.
  *
- * Return value: If an item was already grabbed, it returns %AlreadyGrabbed.  If the specified
- * item is not visible, then it returns GrabNotViewable.  Else, it returns the result of
- * calling gdk_pointer_grab().
+ * Return value: If an item was already grabbed, it returns %AlreadyGrabbed.  If
+ * the specified item was hidden by calling gnome_canvas_item_hide(), then it
+ * returns %GrabNotViewable.  Else, it returns the result of calling
+ * gdk_pointer_grab().
  **/
 int
 gnome_canvas_item_grab (GnomeCanvasItem *item, guint event_mask, GdkCursor *cursor, guint32 etime)
@@ -1086,10 +1096,11 @@ gnome_canvas_item_grab (GnomeCanvasItem *item, guint event_mask, GdkCursor *curs
 
 /**
  * gnome_canvas_item_ungrab:
- * @item: The item that was grabbed in the canvas.
+ * @item: A canvas item that holds a grab.
  * @etime: The timestamp for ungrabbing the mouse.
  *
- * Ungrabs the item, which must have been grabbed in the canvas, and ungrabs the mouse.
+ * Ungrabs the item, which must have been grabbed in the canvas, and ungrabs the
+ * mouse.
  **/
 void
 gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime)
@@ -1108,10 +1119,11 @@ gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime)
 
 /**
  * gnome_canvas_item_i2w_affine:
- * @item: The item whose coordinate system will be used for conversion.
- * @affine: The affine transform used to convert item to world coordinates.
+ * @item: A canvas item
+ * @affine: An affine transformation matrix (return value).
  *
- * Gets the affine transform that converts from item-relative coordinates to world coordinates.
+ * Gets the affine transform that converts from the item's coordinate system to
+ * world coordinates.
  **/
 #ifdef OLD_XFORM
 void
@@ -1161,12 +1173,12 @@ gnome_canvas_item_i2w_affine (GnomeCanvasItem *item, double affine[6])
 
 /**
  * gnome_canvas_item_w2i:
- * @item: The item whose coordinate system will be used for conversion.
- * @x: the X world coordinate to convert to item-relative coordinates.
- * @y: the Y world coordinate to convert to item-relative coordinates.
+ * @item: A canvas item.
+ * @x: X coordinate to convert (input/output value).
+ * @y: Y coordinate to convert (input/output value).
  *
- * Converts from world coordinates to item-relative coordinates.  The converted coordinates
- * are returned in the same variables.
+ * Converts a coordinate pair from world coordinates to item-relative
+ * coordinates.
  **/
 void
 gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y)
@@ -1176,6 +1188,8 @@ gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y)
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (x != NULL);
+	g_return_if_fail (y != NULL);
 
 	gnome_canvas_item_i2w_affine (item, affine);
 	art_affine_invert (inv, affine);
@@ -1189,12 +1203,12 @@ gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y)
 
 /**
  * gnome_canvas_item_i2w:
- * @item: The item whose coordinate system will be used for conversion.
- * @x: If non-NULL, the X item-relative coordinate to convert to world coordinates.
- * @y: If non-NULL, the Y item-relative coordinate to convert to world coordinates.
+ * @item: A canvas item.
+ * @x: X coordinate to convert (input/output value).
+ * @y: Y coordinate to convert (input/output value).
  *
- * Converts from item-relative coordinates to world coordinates.  The converted coordinates
- * are returned in the same variables.
+ * Converts a coordinate pair from item-relative coordinates to world
+ * coordinates.
  **/
 void
 gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
@@ -1204,6 +1218,8 @@ gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (x != NULL);
+	g_return_if_fail (y != NULL);
 
 	gnome_canvas_item_i2w_affine (item, affine);
 	i.x = *x;
@@ -1215,10 +1231,11 @@ gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
 
 /**
  * gnome_canvas_item_i2c_affine:
- * @item: The item whose coordinate system will be used for conversion.
- * @affine: The affine transform used to convert item to canvas coordinates.
+ * @item: A canvas item.
+ * @affine: An affine transformation matrix (return value).
  *
- * Gets the affine transform that converts from item-relative coordinates to canvas coordinates.
+ * Gets the affine transform that converts from item-relative coordinates to
+ * canvas pixel coordinates.
  **/
 void
 gnome_canvas_item_i2c_affine (GnomeCanvasItem *item, double affine[6])
@@ -1241,23 +1258,14 @@ is_descendant (GnomeCanvasItem *item, GnomeCanvasItem *parent)
 	return FALSE;
 }
 
-/*
- * gnome_canvas_item_reparent:
- * @item:      Item to reparent
- * @new_group: New group where the item is moved to
- *
- * This moves the item from its current group to the group specified
- * in NEW_GROUP.
- */
-
 /**
  * gnome_canvas_item_reparent:
- * @item: The item whose parent should be changed.
- * @new_group: The new parent group.
+ * @item: A canvas item.
+ * @new_group: A canvas group.
  *
- * Changes the parent of the specified item to be the new group.  The item keeps its group-relative
- * coordinates as for its old parent, so the item may change its absolute position within the
- * canvas.
+ * Changes the parent of the specified item to be the new group.  The item keeps
+ * its group-relative coordinates as for its old parent, so the item may change
+ * its absolute position within the canvas.
  **/
 void
 gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
@@ -1270,9 +1278,9 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 	/* Both items need to be in the same canvas */
 	g_return_if_fail (item->canvas == GNOME_CANVAS_ITEM (new_group)->canvas);
 
-	/* The group cannot be an inferior of the item or be the item itself -- this also takes care
-	 * of the case where the item is the root item of the canvas.
-	 */
+	/* The group cannot be an inferior of the item or be the item itself --
+	 * this also takes care of the case where the item is the root item of
+	 * the canvas.  */
 	g_return_if_fail (!is_descendant (GNOME_CANVAS_ITEM (new_group), item));
 
 	/* Everything is ok, now actually reparent the item */
@@ -1285,10 +1293,9 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 	item->parent = GNOME_CANVAS_ITEM (new_group);
 	group_add (new_group, item);
 
-	/* Rebuild the new parent group's bounds.  This will take care of reconfiguring the item and
-	 * all its children.
+	/* Rebuild the new parent group's bounds.  This will take care of
+	 * reconfiguring the item and all its children.
 	 */
-
 	gnome_canvas_group_child_bounds (new_group, NULL);
 
 	/* Redraw and repick */
@@ -1301,10 +1308,11 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 
 /**
  * gnome_canvas_item_grab_focus:
- * @item: The item to which keyboard events should be sent.
+ * @item: A canvas item.
  *
- * Makes the specified item take the keyboard focus.  If the canvas itself did not have
- * the focus, it sets it as well.
+ * Makes the specified item take the keyboard focus, so all keyboard events will
+ * be sent to it.  If the canvas widget itself did not have the focus, it grabs
+ * it as well.
  **/
 void
 gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
@@ -1334,14 +1342,14 @@ gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
 
 /**
  * gnome_canvas_item_get_bounds:
- * @item: The item to query the bounding box for.
- * @x1: If non-NULL, returns the leftmost edge of the bounding box.
- * @y1: If non-NULL, returns the upper edge of the bounding box.
- * @x2: If non-NULL, returns the rightmost edge of the bounding box.
- * @y2: If non-NULL, returns the lower edge of the bounding box.
+ * @item: A canvas item.
+ * @x1: Leftmost edge of the bounding box (return value).
+ * @y1: Upper edge of the bounding box (return value).
+ * @x2: Rightmost edge of the bounding box (return value).
+ * @y2: Lower edge of the bounding box (return value).
  *
- * Queries the bounding box of the specified item.  The bounds are returned in
- * the coordinate system of the item's parent.
+ * Queries the bounding box of a canvas item.  The bounds are returned in the
+ * coordinate system of the item's parent.
  **/
 void
 gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
@@ -1359,7 +1367,8 @@ gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, dou
 	/* Get the item's bounds in its coordinate system */
 
 	if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->bounds)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->bounds) (item, &tx1, &ty1, &tx2, &ty2);
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->bounds) (
+			item, &tx1, &ty1, &tx2, &ty2);
 
 	/* Make the bounds relative to the item's parent coordinate system */
 
@@ -1419,12 +1428,11 @@ gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, dou
 
 /**
  * gnome_canvas_item_request_update
- * @item:
+ * @item: A canvas item.
  *
- * Description: Request that the update method of the item gets called sometime before the next
- * render (generally from the idle loop).
+ * To be used only by item implementations.  Requests that the canvas queue an
+ * update for the specified item.
  **/
-
 void
 gnome_canvas_item_request_update (GnomeCanvasItem *item)
 {
@@ -1462,17 +1470,19 @@ static void gnome_canvas_group_get_arg     (GtkObject             *object,
 					    guint                  arg_id);
 static void gnome_canvas_group_destroy     (GtkObject             *object);
 
-static void   gnome_canvas_group_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
+static void   gnome_canvas_group_update      (GnomeCanvasItem *item, double *affine,
+					      ArtSVP *clip_path, int flags);
 static void   gnome_canvas_group_realize     (GnomeCanvasItem *item);
 static void   gnome_canvas_group_unrealize   (GnomeCanvasItem *item);
 static void   gnome_canvas_group_map         (GnomeCanvasItem *item);
 static void   gnome_canvas_group_unmap       (GnomeCanvasItem *item);
 static void   gnome_canvas_group_draw        (GnomeCanvasItem *item, GdkDrawable *drawable,
 					      int x, int y, int width, int height);
-static double gnome_canvas_group_point       (GnomeCanvasItem *item, double x, double y, int cx, int cy,
+static double gnome_canvas_group_point       (GnomeCanvasItem *item, double x, double y,
+					      int cx, int cy,
 					      GnomeCanvasItem **actual_item);
-static void   gnome_canvas_group_translate   (GnomeCanvasItem *item, double dx, double dy);
-static void   gnome_canvas_group_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
+static void   gnome_canvas_group_bounds      (GnomeCanvasItem *item, double *x1, double *y1,
+					      double *x2, double *y2);
 static void   gnome_canvas_group_render      (GnomeCanvasItem *item,
 					      GnomeCanvasBuf *buf);
 
@@ -1483,7 +1493,8 @@ static GnomeCanvasItemClass *group_parent_class;
 /**
  * gnome_canvas_group_get_type:
  *
- * Registers the &GnomeCanvasGroup class if necessary, and returns the type ID associated to it.
+ * Registers the &GnomeCanvasGroup class if necessary, and returns the type ID
+ * associated to it.
  *
  * Return value:  The type ID of the &GnomeCanvasGroup class.
  **/
@@ -1493,7 +1504,7 @@ gnome_canvas_group_get_type (void)
 	static GtkType group_type = 0;
 
 	if (!group_type) {
-		GtkTypeInfo group_info = {
+		static const GtkTypeInfo group_info = {
 			"GnomeCanvasGroup",
 			sizeof (GnomeCanvasGroup),
 			sizeof (GnomeCanvasGroupClass),
@@ -1521,8 +1532,10 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 
 	group_parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasGroup::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, GROUP_ARG_X);
-	gtk_object_add_arg_type ("GnomeCanvasGroup::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, GROUP_ARG_Y);
+	gtk_object_add_arg_type ("GnomeCanvasGroup::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE,
+				 GROUP_ARG_X);
+	gtk_object_add_arg_type ("GnomeCanvasGroup::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE,
+				 GROUP_ARG_Y);
 
 	object_class->set_arg = gnome_canvas_group_set_arg;
 	object_class->get_arg = gnome_canvas_group_get_arg;
@@ -1536,7 +1549,6 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 	item_class->draw = gnome_canvas_group_draw;
 	item_class->render = gnome_canvas_group_render;
 	item_class->point = gnome_canvas_group_point;
-	item_class->translate = gnome_canvas_group_translate;
 	item_class->bounds = gnome_canvas_group_bounds;
 }
 
@@ -1799,7 +1811,8 @@ gnome_canvas_group_unmap (GnomeCanvasItem *item)
 
 /* Draw handler for canvas groups */
 static void
-gnome_canvas_group_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y, int width, int height)
+gnome_canvas_group_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
+			 int x, int y, int width, int height)
 {
 	GnomeCanvasGroup *group;
 	GList *list;
@@ -1821,13 +1834,15 @@ gnome_canvas_group_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, in
 			&& (child->x2 > child->canvas->redraw_x1)
 			&& (child->y2 > child->canvas->redraw_y2)))
 			if (GNOME_CANVAS_ITEM_CLASS (child->object.klass)->draw)
-				(* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->draw) (child, drawable, x, y, width, height);
+				(* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->draw) (
+					child, drawable, x, y, width, height);
 	}
 }
 
 /* Point handler for canvas groups */
 static double
-gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item)
+gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
+			  GnomeCanvasItem **actual_item)
 {
 	GnomeCanvasGroup *group;
 	GList *list;
@@ -1874,32 +1889,14 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 
 		if (has_point
 		    && point_item
-		    && ((int) (dist * item->canvas->pixels_per_unit + 0.5) <= item->canvas->close_enough)) {
+		    && ((int) (dist * item->canvas->pixels_per_unit + 0.5)
+			<= item->canvas->close_enough)) {
 			best = dist;
 			*actual_item = point_item;
 		}
 	}
 
 	return best;
-}
-
-/* Translate handler for canvas groups */
-static void
-gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
-{
-#ifdef OLD_XFORM
-	GnomeCanvasGroup *group;
-
-	group = GNOME_CANVAS_GROUP (item);
-
-	group->xpos += dx;
-	group->ypos += dy;
-
-	gnome_canvas_group_child_bounds (group, NULL);
-
-	if (item->parent)
-		gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
-#endif
 }
 
 /* Bounds handler for canvas groups */
@@ -2006,7 +2003,8 @@ gnome_canvas_group_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 			&& (child->x2 > child->canvas->redraw_x1)
 			&& (child->y2 > child->canvas->redraw_y2)))
 			if (GNOME_CANVAS_ITEM_CLASS (child->object.klass)->render)
-				(* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->render) (child, buf);
+				(* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->render) (
+					child, buf);
 	}
 }
 
@@ -2069,18 +2067,15 @@ group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 
 /**
  * gnome_canvas_group_child_bounds:
- * @group: The group to notify about a child's bounds changes.
- * @item: If non-NULL, the item whose bounds changed.  Otherwise, specifies that the whole
- * group's bounding box and its subgroups' should be recomputed recursively.
+ * @group:
+ * @item:
  *
- * For use only by item implementations.  If the specified @item is non-NULL, then it notifies
- * the group that the item's bounding box has changed, and thus the group should be adjusted
- * accordingly.  If the specified @item is NULL, then the group's bounding box and its
- * subgroup's will be recomputed recursively.
+ * Deprecated.
  **/
 void
 gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
+#if 0
 	GnomeCanvasItem *gitem;
 	GList *list;
 	int first;
@@ -2146,6 +2141,7 @@ gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 			}
 		}
 	}
+#endif
 }
 
 
@@ -2190,7 +2186,8 @@ static GtkLayoutClass *canvas_parent_class;
 /**
  * gnome_canvas_get_type:
  *
- * Registers the &GnomeCanvas class if necessary, and returns the type ID associated to it.
+ * Registers the &GnomeCanvas class if necessary, and returns the type ID
+ * associated to it.
  *
  * Return value:  The type ID of the &GnomeCanvas class.
  **/
@@ -2200,7 +2197,7 @@ gnome_canvas_get_type (void)
 	static GtkType canvas_type = 0;
 
 	if (!canvas_type) {
-		GtkTypeInfo canvas_info = {
+		static const GtkTypeInfo canvas_info = {
 			"GnomeCanvas",
 			sizeof (GnomeCanvas),
 			sizeof (GnomeCanvasClass),
@@ -2349,15 +2346,16 @@ gnome_canvas_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (canvas_parent_class)->destroy) (object);
 }
 
-
 /**
  * gnome_canvas_new:
+ * @void:
  *
- * Creates a new empty canvas.  If the user wishes to use the image item inside this canvas, then
- * the gdk_imlib visual and colormap should be pushed into Gtk+'s stack before calling this
- * function, and they can be popped afterwards.
+ * Creates a new empty canvas in non-antialiased mode.  If you wish to use the
+ * &GnomeCanvasImage item inside this canvas, then you must push the gdk_imlib
+ * visual and colormap before calling this function, and they can be popped
+ * afterwards.
  *
- * Return value: The newly-created canvas.
+ * Return value: A newly-created canvas.
  **/
 GtkWidget *
 gnome_canvas_new (void)
@@ -2367,10 +2365,13 @@ gnome_canvas_new (void)
 
 /**
  * gnome_canvas_new_aa:
+ * @void:
  *
- * Creates a new antialiased empty canvas.  You want to push the GdkRgb colormap and visual for this.
+ * Creates a new empty canvas in antialiased mode.  You should push the GdkRGB
+ * visual and colormap before calling this functions, and they can be popped
+ * afterwards.
  *
- * Return value: The newly-created canvas.
+ * Return value: A newly-created antialiased canvas.
  **/
 GtkWidget *
 gnome_canvas_new_aa (void)
@@ -2507,8 +2508,10 @@ gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 	gnome_canvas_request_redraw (canvas,
 				     area->x + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
 				     area->y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs,
-				     area->x + area->width + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
-				     area->y + area->height + DISPLAY_Y1 (canvas) - canvas->zoom_yofs);
+				     (area->x + area->width + DISPLAY_X1 (canvas)
+				      - canvas->zoom_xofs),
+				     (area->y + area->height + DISPLAY_Y1 (canvas)
+				      - canvas->zoom_yofs));
 }
 
 /* Handles scrolling of the canvas.  Adjusts the scrolling and zooming offset to
@@ -2570,7 +2573,8 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 	if (changed)
 		gtk_layout_freeze (GTK_LAYOUT (canvas));
 
-	if ((scroll_maxx != (int) canvas->layout.width) || (scroll_maxy != (int) canvas->layout.height))
+	if ((scroll_maxx != (int) canvas->layout.width)
+	    || (scroll_maxy != (int) canvas->layout.height))
 		gtk_layout_set_size (GTK_LAYOUT (canvas), scroll_maxx, scroll_maxy);
 
 	if (changed_x) {
@@ -2673,8 +2677,8 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 			return FALSE;
 	}
 
-	/* Convert to world coordinates -- we have two cases because of diferent offsets of the
-	 * fields in the event structures.
+	/* Convert to world coordinates -- we have two cases because of diferent
+	 * offsets of the fields in the event structures.
 	 */
 
 	ev = *event;
@@ -2748,11 +2752,10 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 
 	retval = FALSE;
 
-	/*
-	 * If a button is down, we'll perform enter and leave events on the current item, but not
-	 * enter on any other item.  This is more or less like X pointer grabbing for canvas items.
+	/* If a button is down, we'll perform enter and leave events on the
+	 * current item, but not enter on any other item.  This is more or less
+	 * like X pointer grabbing for canvas items.
 	 */
-
 	button_down = canvas->state & (GDK_BUTTON1_MASK
 				       | GDK_BUTTON2_MASK
 				       | GDK_BUTTON3_MASK
@@ -2761,12 +2764,11 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 	if (!button_down)
 		canvas->left_grabbed_item = FALSE;
 
-	/*
-	 * Save the event in the canvas.  This is used to synthesize enter and leave events in case
-	 * the current item changes.  It is also used to re-pick the current item if the current one
-	 * gets deleted.  Also, synthesize an enter event.
+	/* Save the event in the canvas.  This is used to synthesize enter and
+	 * leave events in case the current item changes.  It is also used to
+	 * re-pick the current item if the current one gets deleted.  Also,
+	 * synthesize an enter event.
 	 */
-
 	if (event != &canvas->pick_event) {
 		if ((event->type == GDK_MOTION_NOTIFY) || (event->type == GDK_BUTTON_RELEASE)) {
 			/* these fields have the same offsets in both types of events */
@@ -2924,11 +2926,9 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 	case GDK_BUTTON_PRESS:
 	case GDK_2BUTTON_PRESS:
 	case GDK_3BUTTON_PRESS:
-		/*
-		 * Pick the current item as if the button were not pressed, and then process the
-		 * event.
+		/* Pick the current item as if the button were not pressed, and
+		 * then process the event.
 		 */
-
 		canvas->state = event->state;
 		pick_current_item (canvas, (GdkEvent *) event);
 		canvas->state ^= mask;
@@ -2936,11 +2936,9 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 		break;
 
 	case GDK_BUTTON_RELEASE:
-		/*
-		 * Process the event as if the button were pressed, then repick after the button has
-		 * been released
+		/* Process the event as if the button were pressed, then repick
+		 * after the button has been released
 		 */
-
 		canvas->state = event->state;
 		retval = emit_event (canvas, (GdkEvent *) event);
 		event->state ^= mask;
@@ -3158,25 +3156,28 @@ paint (GnomeCanvas *canvas)
 				buf.is_bg = 1;
 				buf.is_buf = 0;
 
-				if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE) {
-					if ((* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->render) != NULL)
-						(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->render) (canvas->root, &buf);
-					/* else warning? */
-				}
+				if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+					(* GNOME_CANVAS_ITEM_CLASS (
+						canvas->root->object.klass)->render) (
+							canvas->root, &buf);
 
 				if (buf.is_bg) {
 					gdk_rgb_gc_set_foreground (canvas->pixmap_gc, buf.bg_color);
 					gdk_draw_rectangle (canvas->layout.bin_window,
 							    canvas->pixmap_gc,
 							    TRUE,
-							    draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
-							    draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
+							    (draw_x1 - DISPLAY_X1 (canvas)
+							     + canvas->zoom_xofs),
+							    (draw_y1 - DISPLAY_Y1 (canvas)
+							     + canvas->zoom_yofs),
 							    width, height);
 				} else {
 					gdk_draw_rgb_image (canvas->layout.bin_window,
 							    canvas->pixmap_gc,
-							    draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
-							    draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
+							    (draw_x1 - DISPLAY_X1 (canvas)
+							     + canvas->zoom_xofs),
+							    (draw_y1 - DISPLAY_Y1 (canvas)
+							     + canvas->zoom_yofs),
 							    width, height,
 							    GDK_RGB_DITHER_NONE,
 							    buf.buf,
@@ -3187,9 +3188,11 @@ paint (GnomeCanvas *canvas)
 				g_free (buf.buf);
 
 			} else {
-				pixmap = gdk_pixmap_new (canvas->layout.bin_window, width, height, gtk_widget_get_visual (widget)->depth);
+				pixmap = gdk_pixmap_new (canvas->layout.bin_window, width, height,
+							 gtk_widget_get_visual (widget)->depth);
 
-				gdk_gc_set_foreground (canvas->pixmap_gc, &widget->style->bg[GTK_STATE_NORMAL]);
+				gdk_gc_set_foreground (canvas->pixmap_gc,
+						       &widget->style->bg[GTK_STATE_NORMAL]);
 				gdk_draw_rectangle (pixmap,
 						    canvas->pixmap_gc,
 						    TRUE,
@@ -3199,9 +3202,11 @@ paint (GnomeCanvas *canvas)
 				/* Draw the items that intersect the area */
 
 				if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
-					(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->draw) (canvas->root, pixmap,
-												draw_x1, draw_y1,
-												width, height);
+					(* GNOME_CANVAS_ITEM_CLASS (
+						canvas->root->object.klass)->draw) (
+							canvas->root, pixmap,
+							draw_x1, draw_y1,
+							width, height);
 #if 0
 				gdk_draw_line (pixmap,
 					       widget->style->black_gc,
@@ -3288,11 +3293,11 @@ add_idle (GnomeCanvas *canvas)
 
 /**
  * gnome_canvas_root:
- * @canvas: The canvas whose root group should be extracted.
+ * @canvas: A canvas.
  *
  * Queries the root group of a canvas.
  *
- * Return value: The root group of the canvas.
+ * Return value: The root group of the specified canvas.
  **/
 GnomeCanvasGroup *
 gnome_canvas_root (GnomeCanvas *canvas)
@@ -3306,15 +3311,15 @@ gnome_canvas_root (GnomeCanvas *canvas)
 
 /**
  * gnome_canvas_set_scroll_region:
- * @canvas: The canvas to set the scroll region for.
+ * @canvas: A canvas.
  * @x1: Leftmost limit of the scrolling region.
  * @y1: Upper limit of the scrolling region.
  * @x2: Rightmost limit of the scrolling region.
  * @y2: Lower limit of the scrolling region.
  *
- * Sets the scrolling region of the canvas to the specified rectangle.  The canvas
- * will then be able to scroll only within this region.  The view of the canvas is
- * adjusted as appropriate to display as much of the new region as possible.
+ * Sets the scrolling region of a canvas to the specified rectangle.  The canvas
+ * will then be able to scroll only within this region.  The view of the canvas
+ * is adjusted as appropriate to display as much of the new region as possible.
  **/
 void
 gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, double x2, double y2)
@@ -3349,7 +3354,8 @@ gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, doubl
 	canvas->need_repick = TRUE;
 #if 0
 	/* todo: should be requesting update */
-	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
+	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (
+		canvas->root, NULL, NULL, 0);
 #endif
 
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
@@ -3358,13 +3364,13 @@ gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, doubl
 
 /**
  * gnome_canvas_get_scroll_region:
- * @canvas: The canvas whose scroll region should be queried.
- * @x1: If non-NULL, returns the leftmost limit of the scrolling region.
- * @y1: If non-NULL, returns the upper limit of the scrolling region.
- * @x2: If non-NULL, returns the rightmost limit of the scrolling region.
- * @y2: If non-NULL, returns the lower limit of the scrolling region.
+ * @canvas: A canvas.
+ * @x1: Leftmost limit of the scrolling region (return value).
+ * @y1: Upper limit of the scrolling region (return value).
+ * @x2: Rightmost limit of the scrolling region (return value).
+ * @y2: Lower limit of the scrolling region (return value).
  *
- * Queries the scroll region of the canvas.
+ * Queries the scrolling region of a canvas.
  **/
 void
 gnome_canvas_get_scroll_region (GnomeCanvas *canvas, double *x1, double *y1, double *x2, double *y2)
@@ -3387,11 +3393,11 @@ gnome_canvas_get_scroll_region (GnomeCanvas *canvas, double *x1, double *y1, dou
 
 /**
  * gnome_canvas_set_pixels_per_unit:
- * @canvas: The canvas whose zoom factor should be changed.
+ * @canvas: A canvas.
  * @n: The number of pixels that correspond to one canvas unit.
  *
- * Sets the zooming factor of the canvas by specifying the number of pixels that correspond to
- * one canvas unit.
+ * Sets the zooming factor of a canvas by specifying the number of pixels that
+ * correspond to one canvas unit.
  **/
 void
 gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
@@ -3433,7 +3439,8 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 
 	canvas->need_repick = TRUE;
 #ifdef OLD_XFORM
-	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
+	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (
+		canvas->root, NULL, NULL, 0);
 #else
 
 #endif
@@ -3443,13 +3450,14 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 
 /**
  * gnome_canvas_scroll_to:
- * @canvas: The canvas to scroll.
+ * @canvas: A canvas.
  * @cx: Horizontal scrolling offset in canvas pixel units.
  * @cy: Vertical scrolling offset in canvas pixel units.
  *
- * Makes the canvas scroll to the specified offsets, given in canvas pixel units.  The canvas
- * will adjust the view so that it is not outside the scrolling region.  This function is typically
- * not used, as it is better to hook scrollbars to the canvas layout's scrolling adjusments.
+ * Makes a canvas scroll to the specified offsets, given in canvas pixel units.
+ * The canvas will adjust the view so that it is not outside the scrolling
+ * region.  This function is typically not used, as it is better to hook
+ * scrollbars to the canvas layout's scrolling adjusments.
  **/
 void
 gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy)
@@ -3462,11 +3470,12 @@ gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy)
 
 /**
  * gnome_canvas_get_scroll_offsets:
- * @canvas: The canvas whose scrolling offsets should be queried.
- * @cx: If non-NULL, returns the horizontal scrolling offset.
- * @cy: If non-NULL, returns the vertical scrolling offset.
+ * @canvas: A canvas.
+ * @cx: Horizontal scrolling offset (return value).
+ * @cy: Vertical scrolling offset (return value).
  *
- * Queries the scrolling offsets of the canvas.
+ * Queries the scrolling offsets of a canvas.  The values are returned in canvas
+ * pixel units.
  **/
 void
 gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy)
@@ -3483,12 +3492,12 @@ gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy)
 
 /**
  * gnome_canvas_update_now:
- * @canvas: The canvas whose view should be updated.
+ * @canvas: A canvas.
  *
- * Forces an immediate redraw or update of the canvas.  If the canvas does not
- * have any pending redraw requests, then no action is taken.  This is typically
- * only used by applications that need explicit control of when the display is
- * updated, like games.  It is not needed by normal applications.
+ * Forces an immediate update and redraw of a canvas.  If the canvas does not
+ * have any pending update or redraw requests, then no action is taken.  This is
+ * typically only used by applications that need explicit control of when the
+ * display is updated, like games.  It is not needed by normal applications.
  */
 void
 gnome_canvas_update_now (GnomeCanvas *canvas)
@@ -3505,12 +3514,12 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 
 /**
  * gnome_canvas_get_item_at:
- * @canvas: The canvas from which to get the item
- * @x: X position in world coordinates
- * @y: Y position in world coordinates
+ * @canvas: A canvas.
+ * @x: X position in world coordinates.
+ * @y: Y position in world coordinates.
  *
- * Looks for the item that is under the specified position (given in world
- * coordinates).
+ * Looks for the item that is under the specified position, which must be
+ * specified in world coordinates.
  *
  * Return value: The sought item, or NULL if no item is at the specified
  * coordinates.
@@ -3534,13 +3543,7 @@ gnome_canvas_get_item_at (GnomeCanvas *canvas, double x, double y)
 		return NULL;
 }
 
-/**
- * gnome_canvas_request_update
- * @canvas:
- *
- * Description: Schedules an update () invocation for the next idle loop.
- **/
-
+/* Queues an update of the canvas */
 static void
 gnome_canvas_request_update (GnomeCanvas *canvas)
 {
@@ -3550,10 +3553,11 @@ gnome_canvas_request_update (GnomeCanvas *canvas)
 
 /**
  * gnome_canvas_request_redraw_uta:
- * @canvas: The canvas whose area needs to be redrawn.
+ * @canvas: A canvas.
  * @uta: Microtile array that specifies the area to be redrawn.
  *
- * Informs a canvas that the specified area, given as a microtile array, needs to be repainted.
+ * Informs a canvas that the specified area, given as a microtile array, needs
+ * to be repainted.  To be used only by item implementations.
  **/
 void
 gnome_canvas_request_redraw_uta (GnomeCanvas *canvas,
@@ -3580,16 +3584,16 @@ gnome_canvas_request_redraw_uta (GnomeCanvas *canvas,
 
 /**
  * gnome_canvas_request_redraw:
- * @canvas: The canvas whose area needs to be redrawn.
+ * @canvas: A canvas.
  * @x1: Leftmost coordinate of the rectangle to be redrawn.
  * @y1: Upper coordinate of the rectangle to be redrawn.
  * @x2: Rightmost coordinate of the rectangle to be redrawn, plus 1.
  * @y2: Lower coordinate of the rectangle to be redrawn, plus 1.
  *
- * Convenience function that informs a canvas that the specified area, specified as a
- * rectangle, needs to be repainted.  This function converts the rectangle to a microtile
- * array and feeds it to gnome_canvas_request_redraw_uta().  The rectangle includes
- * @x1 and @y1, but not @x2 and @y2.
+ * Convenience function that informs a canvas that the specified rectangle needs
+ * to be repainted.  This function converts the rectangle to a microtile array
+ * and feeds it to gnome_canvas_request_redraw_uta().  The rectangle includes
+ * @x1 and @y1, but not @x2 and @y2.  To be used only by item implementations.
  **/
 void
 gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2)
@@ -3627,10 +3631,11 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 
 /**
  * gnome_canvas_w2c_affine:
- * @canvas: The canvas whose coordinates need conversion.
- * @affine:
+ * @canvas: A canvas.
+ * @affine: An affine transformation matrix (return value).
  *
- * Gets the affine transform that converts world coordinates into canvas pixel coordinates.
+ * Gets the affine transform that converts from world coordinates to canvas
+ * pixel coordinates.
  **/
 void
 gnome_canvas_w2c_affine (GnomeCanvas *canvas, double affine[6])
@@ -3654,14 +3659,13 @@ gnome_canvas_w2c_affine (GnomeCanvas *canvas, double affine[6])
 
 /**
  * gnome_canvas_w2c:
- * @canvas: The canvas whose coordinates need conversion.
+ * @canvas: A canvas.
  * @wx: World X coordinate.
  * @wy: World Y coordinate.
- * @cx: If non-NULL, returns the converted X pixel coordinate.
- * @cy: If non-NULL, returns the converted Y pixel coordinate.
+ * @cx: X pixel coordinate (return value).
+ * @cy: Y pixel coordinate (return value).
  *
- * Converts world coordinates into canvas pixel coordinates.  Usually only needed
- * by item implementations.
+ * Converts world coordinates into canvas pixel coordinates.
  **/
 void
 gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy)
@@ -3684,15 +3688,14 @@ gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy)
 
 /**
  * gnome_canvas_w2c_d:
- * @canvas: The canvas whose coordinates need conversion.
+ * @canvas: A canvas.
  * @wx: World X coordinate.
  * @wy: World Y coordinate.
- * @cx: If non-NULL, returns the converted X pixel coordinate.
- * @cy: If non-NULL, returns the converted Y pixel coordinate.
+ * @cx: X pixel coordinate (return value).
+ * @cy: Y pixel coordinate (return value).
  *
- * Converts world coordinates into canvas pixel coordinates.  Usually only needed
- * by item implementations. This version results in double coordinates, which
- * are useful in antialiased implementations.
+ * Converts world coordinates into canvas pixel coordinates.  This version
+ * returns coordinates in floating point coordinates, for greater precision.
  **/
 void
 gnome_canvas_w2c_d (GnomeCanvas *canvas, double wx, double wy, double *cx, double *cy)
@@ -3716,14 +3719,13 @@ gnome_canvas_w2c_d (GnomeCanvas *canvas, double wx, double wy, double *cx, doubl
 
 /**
  * gnome_canvas_c2w:
- * @canvas: The canvas whose coordinates need conversion.
+ * @canvas: A canvas.
  * @cx: Canvas pixel X coordinate.
  * @cy: Canvas pixel Y coordinate.
- * @wx: If non-NULL, returns the converted X world coordinate.
- * @wy: If non-NULL, returns the converted Y world coordinate.
+ * @wx: X world coordinate (return value).
+ * @wy: Y world coordinate (return value).
  *
- * Converts canvas pixel coordinates to world coordinates.  Usually only needed
- * by item implementations.
+ * Converts canvas pixel coordinates to world coordinates.
  **/
 void
 gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *wy)
@@ -3748,41 +3750,46 @@ gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *wy)
 
 /**
  * gnome_canvas_window_to_world:
- * @canvas: The canvas whose coordinates need conversion.
+ * @canvas: A canvas.
  * @winx: Window-relative X coordinate.
  * @winy: Window-relative Y coordinate.
- * @worldx: If non-NULL, returns the converted X world coordinate.
- * @worldy: If non-NULL, returns the converted Y world coordinate.
+ * @worldx: X world coordinate (return value).
+ * @worldy: Y world coordinate (return value).
  *
- * Converts window-relative coordinates into world coordinates.  Use this when you need to
- * convert from mouse coordinates into world coordinates, for example.
+ * Converts window-relative coordinates into world coordinates.  You can use
+ * this when you need to convert mouse coordinates into world coordinates, for
+ * example.
  **/
 void
-gnome_canvas_window_to_world (GnomeCanvas *canvas, double winx, double winy, double *worldx, double *worldy)
+gnome_canvas_window_to_world (GnomeCanvas *canvas, double winx, double winy,
+			      double *worldx, double *worldy)
 {
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
 	if (worldx)
-		*worldx = canvas->scroll_x1 + (winx + DISPLAY_X1 (canvas) - canvas->zoom_xofs) / canvas->pixels_per_unit;
+		*worldx = canvas->scroll_x1 + ((winx + DISPLAY_X1 (canvas) - canvas->zoom_xofs)
+					       / canvas->pixels_per_unit);
 
 	if (worldy)
-		*worldy = canvas->scroll_y1 + (winy + DISPLAY_Y1 (canvas) - canvas->zoom_yofs) / canvas->pixels_per_unit;
+		*worldy = canvas->scroll_y1 + ((winy + DISPLAY_Y1 (canvas) - canvas->zoom_yofs)
+					       / canvas->pixels_per_unit);
 }
 
 
 /**
  * gnome_canvas_world_to_window:
- * @canvas: The canvas whose coordinates need conversion.
+ * @canvas: A canvas.
  * @worldx: World X coordinate.
  * @worldy: World Y coordinate.
- * @winx: If non-NULL, returns the converted X window-relative coordinate.
- * @winy: If non-NULL, returns the converted Y window-relative coordinate.
+ * @winx: X window-relative coordinate.
+ * @winy: Y window-relative coordinate.
  *
  * Converts world coordinates into window-relative coordinates.
  **/
 void
-gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy, double *winx, double *winy)
+gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy,
+			      double *winx, double *winy)
 {
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
@@ -3800,16 +3807,17 @@ gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy,
 
 /**
  * gnome_canvas_get_color:
- * @canvas: The canvas in which to allocate the color.
+ * @canvas: A canvas.
  * @spec: X color specification, or NULL for "transparent".
  * @color: Returns the allocated color.
  *
- * Allocates a color based on the specified X color specification.  As a convenience to item
- * implementations, it returns TRUE if the color was allocated, or FALSE if the specification
- * was NULL.  A NULL color specification is considered as "transparent" by the canvas.
+ * Allocates a color based on the specified X color specification.  As a
+ * convenience to item implementations, it returns TRUE if the color was
+ * allocated, or FALSE if the specification was NULL.  A NULL color
+ * specification is considered as "transparent" by the canvas.
  *
- * Return value: TRUE if @spec is non-NULL and the color is allocated.  If @spec is NULL,
- * then returns FALSE.
+ * Return value: TRUE if @spec is non-NULL and the color is allocated.  If @spec
+ * is NULL, then returns FALSE.
  **/
 int
 gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
@@ -3844,13 +3852,14 @@ gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
 }
 
 /**
- * gnome_canvas_get_color:
- * @canvas: The canvas in which to allocate the color.
- * @rgba: RGB color specification
+ * gnome_canvas_get_color_pixel:
+ * @canvas: A canvas.
+ * @rgba: RGBA color specification.
  *
- * Allocates a color from the RGB value passed into this function.
+ * Allocates a color from the RGBA value passed into this function.  The alpha
+ * opacity value is discarded, since normal X colors do not support it.
  *
- * Return value: Pixel value for this color.
+ * Return value: Allocated pixel value corresponding to the specified color.
  **/
 gulong
 gnome_canvas_get_color_pixel (GnomeCanvas *canvas,
@@ -3880,11 +3889,12 @@ gnome_canvas_get_color_pixel (GnomeCanvas *canvas,
 
 /**
  * gnome_canvas_set_stipple_origin:
- * @canvas: The canvas relative to which the stipple origin should be set.
+ * @canvas: A canvas.
  * @gc: GC on which to set the stipple origin.
  *
- * Sets the stipple origin of the specified GC as is appropriate for the canvas.  This is
- * typically only needed by item implementations.
+ * Sets the stipple origin of the specified GC as is appropriate for the canvas,
+ * so that it will be aligned with other stipple patterns used by canvas items.
+ * This is typically only needed by item implementations.
  **/
 void
 gnome_canvas_set_stipple_origin (GnomeCanvas *canvas, GdkGC *gc)

@@ -1,5 +1,9 @@
 1999-07-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-canvas.c: Updated all documentation comments.  All
+	functions in gnome-canvas.c now have correct and complete
+	documentation.
+
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_set_arg):
 	ARG_*_COLOR_GDK only take the pixel value into account, not the
 	color->{red,green,blue} values.
