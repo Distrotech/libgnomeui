@@ -1,3 +1,7 @@
+2003-02-08  Fatih Demir <kabalak@gtranslator.org>
+
+	* tr.po: Committed updated Turkish translation by Arman.
+
 2003-02-04  Abel Cheung  <maddog@linux.org.hk>
 
 	* zh_TW.po: Updated traditional Chinese translation.
@@ -12,7 +16,7 @@
 
 2003-01-29  Pablo Gonzalo del Campo <pablodc@bigfoot.com>
 
-    * es.po: Fixed a hotkey mistake.
+	* es.po: Fixed a hotkey mistake.
 
 2003-01-23  Yuriy Syrota <rastaman renome.rovno.ua>
 
