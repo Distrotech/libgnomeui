@@ -93,6 +93,7 @@ gnome_message_box_new (const gchar           *message,
 	GnomeMessageBox *message_box;
 	GtkWidget *label, *hbox;
 	GtkWidget *pixmap = NULL;
+	GtkWidget *alignment;
 	char *s;
 	GtkStyle *style;
 
@@ -169,9 +170,19 @@ gnome_message_box_new (const gchar           *message,
 
 	label = gtk_label_new (message);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_padding (GTK_MISC (label), GNOME_PAD, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 	gtk_widget_show (label);
 
+	/* Add some extra space on the right to balance the pixmap */
+	if (pixmap) {
+		alignment = gtk_alignment_new (0., 0., 0., 0.);
+		gtk_widget_set_usize (alignment, GNOME_PAD, -1);
+		gtk_widget_show (alignment);
+		
+		gtk_box_pack_start (GTK_BOX (hbox), alignment, FALSE, FALSE, 0);
+	}
+	
 	while (TRUE) {
 	  gchar * button_name;
 

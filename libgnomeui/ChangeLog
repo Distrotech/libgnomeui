@@ -1,3 +1,9 @@
+1999-03-09  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-messagebox.c (gnome_message_box_new): Adjust the
+	padding around message boxes for a more attractive
+	appearance.
+
 1999-03-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dock-item.c (draw_textured_frame): Actually make use of
