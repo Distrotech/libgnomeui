@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2002-01-29 12:22+0100\n"
+"POT-Creation-Date: 2002-02-11 14:59+0100\n"
 "PO-Revision-Date: 2002-01-28 20:35+0100\n"
 "Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -13,97 +13,106 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. Authors
-#: libgnomeui/gnome-about.c:94
-msgid "Author"
-msgstr "Szerző"
+#: libgnomeui/gnome-about.c:97
+msgid "Written by"
+msgstr ""
 
-#: libgnomeui/gnome-about.c:94 libgnomeui/gnome-about.c:270
-msgid "Authors"
-msgstr "Szerzők"
-
-#: libgnomeui/gnome-about.c:118
-msgid "Documenter"
+#: libgnomeui/gnome-about.c:127
+#, fuzzy
+msgid "Documented by"
 msgstr "Dokumentáció írója"
 
-#: libgnomeui/gnome-about.c:118 libgnomeui/gnome-about.c:281
-msgid "Documenters"
-msgstr "Dokumentáció írói"
-
-#: libgnomeui/gnome-about.c:146 libgnomeui/gnome-about.c:293
-msgid "Translator credits"
+#: libgnomeui/gnome-about.c:156
+#, fuzzy
+msgid "Translated by"
 msgstr "Fordítók"
 
-#: libgnomeui/gnome-about.c:240
+#: libgnomeui/gnome-about.c:186
+msgid "Credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:310
 msgid "Program name"
 msgstr "Programnév"
 
-#: libgnomeui/gnome-about.c:241
+#: libgnomeui/gnome-about.c:311
 msgid "The name of the program"
 msgstr "A program neve"
 
-#: libgnomeui/gnome-about.c:248
+#: libgnomeui/gnome-about.c:318
 msgid "Program version"
 msgstr "Programverzió"
 
-#: libgnomeui/gnome-about.c:249
+#: libgnomeui/gnome-about.c:319
 msgid "The version of the program"
 msgstr "A program változata"
 
-#: libgnomeui/gnome-about.c:255
+#: libgnomeui/gnome-about.c:325
 msgid "Copyright string"
 msgstr "Copyright szöveg"
 
-#: libgnomeui/gnome-about.c:256
+#: libgnomeui/gnome-about.c:326
 msgid "Copyright information for the program"
 msgstr "Copyright információ a programról"
 
-#: libgnomeui/gnome-about.c:263
+#: libgnomeui/gnome-about.c:333
 msgid "Comments string"
 msgstr "Megjegyzések"
 
-#: libgnomeui/gnome-about.c:264
+#: libgnomeui/gnome-about.c:334
 msgid "Comments about the program"
 msgstr "Megjegyzések a programról"
 
-#: libgnomeui/gnome-about.c:271
+#: libgnomeui/gnome-about.c:340
+msgid "Authors"
+msgstr "Szerzők"
+
+#: libgnomeui/gnome-about.c:341
 msgid "List of authors of the programs"
 msgstr "A program szerzőinek listája"
 
-#: libgnomeui/gnome-about.c:273
+#: libgnomeui/gnome-about.c:343
 msgid "Author entry"
 msgstr "Szerző bejegyzés"
 
-#: libgnomeui/gnome-about.c:274
+#: libgnomeui/gnome-about.c:344
 msgid "A single author entry"
 msgstr "Egy szerző a sok közül"
 
-#: libgnomeui/gnome-about.c:282
+#: libgnomeui/gnome-about.c:351
+msgid "Documenters"
+msgstr "Dokumentáció írói"
+
+#: libgnomeui/gnome-about.c:352
 msgid "List of people documenting the program"
 msgstr "A program dokumentációját író emberek listája"
 
-#: libgnomeui/gnome-about.c:284
+#: libgnomeui/gnome-about.c:354
 msgid "Documenter entry"
 msgstr "Doksiíró bejegyzés"
 
-#: libgnomeui/gnome-about.c:285
+#: libgnomeui/gnome-about.c:355
 msgid "A single documenter entry"
 msgstr "Egy doksiíró a sok közül"
 
-#: libgnomeui/gnome-about.c:294
+#: libgnomeui/gnome-about.c:363
+msgid "Translator credits"
+msgstr "Fordítók"
+
+#: libgnomeui/gnome-about.c:364
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "A fordítók listája. Ez a sztring fordítható."
 
-#: libgnomeui/gnome-about.c:301 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:371 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logó"
 
-#: libgnomeui/gnome-about.c:302
+#: libgnomeui/gnome-about.c:372
 msgid "A logo for the about box"
 msgstr "Logó a névjegy ablakban"
 
-#: libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:451
 #, c-format
 msgid "About %s"
 msgstr "%s névjegye"
@@ -168,52 +177,52 @@ msgstr "Érvénytelen szín adat\n"
 msgid "Pick a color"
 msgstr "Válassz egy színt"
 
-#: libgnomeui/gnome-dateedit.c:435
+#: libgnomeui/gnome-dateedit.c:430
 msgid "Time"
 msgstr "Idő"
 
-#: libgnomeui/gnome-dateedit.c:436
+#: libgnomeui/gnome-dateedit.c:431
 msgid "The time currently selected"
 msgstr "A jelenleg kijelölt idő"
 
-#: libgnomeui/gnome-dateedit.c:448
+#: libgnomeui/gnome-dateedit.c:443
 msgid "DateEdit Flags"
 msgstr "DateEdit Flagek"
 
-#: libgnomeui/gnome-dateedit.c:449
+#: libgnomeui/gnome-dateedit.c:444
 msgid "Flags for how DateEdit looks"
 msgstr "Flagek a DateEdit kinézetéhez"
 
-#: libgnomeui/gnome-dateedit.c:458
+#: libgnomeui/gnome-dateedit.c:453
 msgid "Lower Hour"
 msgstr "Alsó óra"
 
-#: libgnomeui/gnome-dateedit.c:459
+#: libgnomeui/gnome-dateedit.c:454
 msgid "Lower hour in the time popup selector"
 msgstr "A felbukkanó időkiválasztó alsó órája"
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:464
 msgid "Upper Hour"
 msgstr "Felső óra"
 
-#: libgnomeui/gnome-dateedit.c:470
+#: libgnomeui/gnome-dateedit.c:465
 msgid "Upper hour in the time popup selector"
 msgstr "A felbukkanó időkiválasztó felső órája"
 
-#: libgnomeui/gnome-dateedit.c:480
+#: libgnomeui/gnome-dateedit.c:475
 msgid "Initial Time"
 msgstr "Kezdeti idő"
 
-#: libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:476
 msgid "The initial time"
 msgstr "A kezdeti idő"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:727
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "Naptár"
 
-#: libgnomeui/gnome-dateedit.c:959
+#: libgnomeui/gnome-dateedit.c:935
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "a gnome_date_edit_get_date már elavult, használd a gnome_date_edit_get_time-"
@@ -358,11 +367,11 @@ msgstr ""
 "Hiba történt a URL kezelő indításakor.\n"
 "Ellenőrizd a beállításokat a Vezérlőpulton."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "X display to use"
 msgstr "Használandó X képernyő"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
@@ -371,13 +380,13 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI programkönyvtár"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:592
+#: libgnomeui/gnome-ui-init.c:569
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Többszörös szegmentációs hiba; hibapárbeszéd megjelenítése sikertelen\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:606
+#: libgnomeui/gnome-ui-init.c:583
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -385,80 +394,80 @@ msgstr ""
 "Szegmentációs hiba!\n"
 "Az összeomlás párbeszéd megjelenítése sikertelen\n"
 
-#: libgnomeui/gnome-ui-init.c:738
+#: libgnomeui/gnome-ui-init.c:715
 msgid "Gdk debugging flags to set"
 msgstr "Beállítandó Gdk hibakereső flag-ek"
 
-#: libgnomeui/gnome-ui-init.c:738 libgnomeui/gnome-ui-init.c:741
-#: libgnomeui/gnome-ui-init.c:782 libgnomeui/gnome-ui-init.c:785
+#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
+#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
 msgid "FLAGS"
 msgstr "FLAGS"
 
-#: libgnomeui/gnome-ui-init.c:741
+#: libgnomeui/gnome-ui-init.c:718
 msgid "Gdk debugging flags to unset"
 msgstr "Törlendő Gdk hibakareső flag-ek"
 
-#: libgnomeui/gnome-ui-init.c:749
+#: libgnomeui/gnome-ui-init.c:726
 msgid "Make X calls synchronous"
 msgstr "Szinkron X hívások beállítása"
 
-#: libgnomeui/gnome-ui-init.c:755
+#: libgnomeui/gnome-ui-init.c:732
 msgid "Don't use X shared memory extension"
 msgstr "Ne használj X osztott memória kiterjesztést (shared memory extension)"
 
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:736
 msgid "Program name as used by the window manager"
 msgstr "Program neve az ablakkezelő számára"
 
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:736
 msgid "NAME"
 msgstr "NAME"
 
-#: libgnomeui/gnome-ui-init.c:762
+#: libgnomeui/gnome-ui-init.c:739
 msgid "Program class as used by the window manager"
 msgstr "Program osztálya az ablakkezelő számára"
 
-#: libgnomeui/gnome-ui-init.c:762
+#: libgnomeui/gnome-ui-init.c:739
 msgid "CLASS"
 msgstr "CLASS"
 
-#: libgnomeui/gnome-ui-init.c:766
+#: libgnomeui/gnome-ui-init.c:743
 msgid "HOST"
 msgstr "HOST"
 
-#: libgnomeui/gnome-ui-init.c:770
+#: libgnomeui/gnome-ui-init.c:747
 msgid "PORT"
 msgstr "PORT"
 
-#: libgnomeui/gnome-ui-init.c:775 libgnomeui/gnome-ui-init.c:778
+#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
 msgid "STYLE"
 msgstr "STYLE"
 
-#: libgnomeui/gnome-ui-init.c:782
+#: libgnomeui/gnome-ui-init.c:759
 msgid "Gtk+ debugging flags to set"
 msgstr "Beállítandó Gtk+ hibakereső flag-ek"
 
-#: libgnomeui/gnome-ui-init.c:785
+#: libgnomeui/gnome-ui-init.c:762
 msgid "Gtk+ debugging flags to unset"
 msgstr "Törlendő Gtk+ hibakereső flag-ek"
 
-#: libgnomeui/gnome-ui-init.c:788
+#: libgnomeui/gnome-ui-init.c:765
 msgid "Make all warnings fatal"
 msgstr "Minden figyelmeztetés (warning) végzetes"
 
-#: libgnomeui/gnome-ui-init.c:791
+#: libgnomeui/gnome-ui-init.c:768
 msgid "Load an additional Gtk module"
 msgstr "További Gtk modul betöltése"
 
-#: libgnomeui/gnome-ui-init.c:791
+#: libgnomeui/gnome-ui-init.c:768
 msgid "MODULE"
 msgstr "MODULE"
 
-#: libgnomeui/gnome-ui-init.c:896
+#: libgnomeui/gnome-ui-init.c:873
 msgid "GTK+"
 msgstr "GTK+"
 
-#: libgnomeui/gnome_segv.c:95
+#: libgnomeui/gnome_segv.c:100
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -473,7 +482,7 @@ msgstr ""
 "és véget ér a munkafolyamat.\n"
 "Ments el minden fájlt az ablak bezárása előtt."
 
-#: libgnomeui/gnome_segv.c:105
+#: libgnomeui/gnome_segv.c:110
 #, c-format
 msgid ""
 "Application \"%s\" (process %d) has crashed\n"
@@ -484,52 +493,52 @@ msgstr ""
 "miatt összeomlott.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:114
+#: libgnomeui/gnome_segv.c:123
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Használat: gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:130
+#: libgnomeui/gnome_segv.c:139
 msgid "Submit a bug report"
 msgstr "Hibajelentés feladása"
 
-#: libgnomeui/gnome_segv.c:141
+#: libgnomeui/gnome_segv.c:150
 msgid "Debug"
 msgstr "Hibakeresés"
 
-#: libgnomeui/gnome_segv.c:149
+#: libgnomeui/gnome_segv.c:158
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:155
+#: libgnomeui/gnome_segv.c:164
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Kérlek további információért látogass el a GNOME Application Crash oldalra"
 
-#: libgnomeui/gnome-stock-icons.c:135
+#: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
 msgstr "Táblázat kerete"
 
-#: libgnomeui/gnome-stock-icons.c:136
+#: libgnomeui/gnome-stock-icons.c:138
 msgid "Table Fill"
 msgstr "Táblára kitöltése"
 
-#: libgnomeui/gnome-stock-icons.c:137
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Bulleted List"
 msgstr "Pontozott lista"
 
-#: libgnomeui/gnome-stock-icons.c:138
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Numbered List"
 msgstr "Számozott lista"
 
-#: libgnomeui/gnome-stock-icons.c:139
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Indent"
 msgstr "Behúzás"
 
-#: libgnomeui/gnome-stock-icons.c:140
+#: libgnomeui/gnome-stock-icons.c:142
 msgid "Un-Indent"
 msgstr "Kihúzás"
 
-#: libgnomeui/gnome-stock-icons.c:141
+#: libgnomeui/gnome-stock-icons.c:143
 msgid "About"
 msgstr "Névjegy"
 
@@ -1139,7 +1148,7 @@ msgstr "Kérdés"
 msgid "Message"
 msgstr "Üzenet"
 
-#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:496
+#: libgnomeui/gnome-pixmap-entry.c:184 libgnomeui/gnome-pixmap-entry.c:496
 msgid "No Image"
 msgstr "Nincs kép"
 
@@ -1173,3 +1182,6 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Author"
+#~ msgstr "Szerző"

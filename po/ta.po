@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2002-01-29 12:22+0100\n"
+"POT-Creation-Date: 2002-02-11 14:59+0100\n"
 "PO-Revision-Date: 2001-06-16 00:05-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -13,104 +13,110 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. Authors
-#: libgnomeui/gnome-about.c:94
-#, fuzzy
-msgid "Author"
-msgstr "¬º¢¡¢Â÷:"
-
-#: libgnomeui/gnome-about.c:94 libgnomeui/gnome-about.c:270
-#, fuzzy
-msgid "Authors"
-msgstr "¬º¢¡¢Â÷¸û:"
-
-#: libgnomeui/gnome-about.c:118
-#, fuzzy
-msgid "Documenter"
-msgstr "¬Å½Á¡ì¸ø:"
-
-#: libgnomeui/gnome-about.c:118 libgnomeui/gnome-about.c:281
-#, fuzzy
-msgid "Documenters"
-msgstr "¬Å½Á¡ì¸ø:"
-
-#: libgnomeui/gnome-about.c:146 libgnomeui/gnome-about.c:293
-msgid "Translator credits"
+#: libgnomeui/gnome-about.c:97
+msgid "Written by"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:240
+#: libgnomeui/gnome-about.c:127
+#, fuzzy
+msgid "Documented by"
+msgstr "¬Å½Á¡ì¸ø:"
+
+#: libgnomeui/gnome-about.c:156
+msgid "Translated by"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:186
+msgid "Credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:310
 msgid "Program name"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:241
+#: libgnomeui/gnome-about.c:311
 msgid "The name of the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:248
+#: libgnomeui/gnome-about.c:318
 msgid "Program version"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:249
+#: libgnomeui/gnome-about.c:319
 msgid "The version of the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:255
+#: libgnomeui/gnome-about.c:325
 msgid "Copyright string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:256
+#: libgnomeui/gnome-about.c:326
 msgid "Copyright information for the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:263
+#: libgnomeui/gnome-about.c:333
 #, fuzzy
 msgid "Comments string"
 msgstr "ÌÈ¢ôÒ¨Ã"
 
-#: libgnomeui/gnome-about.c:264
+#: libgnomeui/gnome-about.c:334
 msgid "Comments about the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:271
+#: libgnomeui/gnome-about.c:340
+#, fuzzy
+msgid "Authors"
+msgstr "¬º¢¡¢Â÷¸û:"
+
+#: libgnomeui/gnome-about.c:341
 msgid "List of authors of the programs"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:273
+#: libgnomeui/gnome-about.c:343
 #, fuzzy
 msgid "Author entry"
 msgstr "¬º¢¡¢Â÷¸û: "
 
-#: libgnomeui/gnome-about.c:274
+#: libgnomeui/gnome-about.c:344
 msgid "A single author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:282
+#: libgnomeui/gnome-about.c:351
+#, fuzzy
+msgid "Documenters"
+msgstr "¬Å½Á¡ì¸ø:"
+
+#: libgnomeui/gnome-about.c:352
 msgid "List of people documenting the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:284
+#: libgnomeui/gnome-about.c:354
 #, fuzzy
 msgid "Documenter entry"
 msgstr "¬Å½Á¡ì¸ø:"
 
-#: libgnomeui/gnome-about.c:285
+#: libgnomeui/gnome-about.c:355
 msgid "A single documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:294
+#: libgnomeui/gnome-about.c:363
+msgid "Translator credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:364
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:301 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:371 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:302
+#: libgnomeui/gnome-about.c:372
 msgid "A logo for the about box"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:451
 #, fuzzy, c-format
 msgid "About %s"
 msgstr "ÀüÈ¢"
@@ -175,53 +181,53 @@ msgstr "À¢¨ÆÂ¡É Åñ½ò ¾Ã× ¸¢¨¼ì¸ôÀğÎûÇĞ\n"
 msgid "Pick a color"
 msgstr "´Õ ¿¢Èò¨¾ §¾÷ó¦¾Î"
 
-#: libgnomeui/gnome-dateedit.c:435
+#: libgnomeui/gnome-dateedit.c:430
 msgid "Time"
 msgstr "§¿Ãõ"
 
-#: libgnomeui/gnome-dateedit.c:436
+#: libgnomeui/gnome-dateedit.c:431
 #, fuzzy
 msgid "The time currently selected"
 msgstr "¾ü§À¡Ğ §¾÷ó¦¾Îì¸ôÀğÎûÇ §¿Ãõ"
 
-#: libgnomeui/gnome-dateedit.c:448
+#: libgnomeui/gnome-dateedit.c:443
 msgid "DateEdit Flags"
 msgstr "DateEdit ¦¸¡Ê¸û"
 
-#: libgnomeui/gnome-dateedit.c:449
+#: libgnomeui/gnome-dateedit.c:444
 msgid "Flags for how DateEdit looks"
 msgstr "DateEdit ±ôÀÊ ¸¡ñÀ¢ì¸ôÀÎõ ±ıÀ¾ı ¦¸¡Ê¸û"
 
-#: libgnomeui/gnome-dateedit.c:458
+#: libgnomeui/gnome-dateedit.c:453
 msgid "Lower Hour"
 msgstr "¸£ú «¨Ã-Á½¢"
 
-#: libgnomeui/gnome-dateedit.c:459
+#: libgnomeui/gnome-dateedit.c:454
 msgid "Lower hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:464
 msgid "Upper Hour"
 msgstr "§Áø «¨Ã-Á½¢"
 
-#: libgnomeui/gnome-dateedit.c:470
+#: libgnomeui/gnome-dateedit.c:465
 msgid "Upper hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:480
+#: libgnomeui/gnome-dateedit.c:475
 msgid "Initial Time"
 msgstr "¦¾¡¼ì¸ §¿Ãõ"
 
-#: libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:476
 msgid "The initial time"
 msgstr "¦¾¡¼ì¸ §¿Ãõ"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:727
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "Àïº¡í¸õ"
 
-#: libgnomeui/gnome-dateedit.c:959
+#: libgnomeui/gnome-dateedit.c:935
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date ÀÂıÀÎò¾ §Åñ¼¡õ, gnome_date_edit_get_time ÀÂıÀÎò¾×õ"
@@ -369,11 +375,11 @@ msgstr ""
 "URL ¨¸ôÀ¢Ê¨Â ¦¾¡¼í¸ ÓÂüº¢ò¾ §À¡Ğ À¢¨Æ ¿¨¼¦ÀüÈĞ.\n"
 "Control Center'Â¢ø «¨Á×¸û ºÃ¢Â¡ ±ñÚ À¡÷ì¸×õ."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "X display to use"
 msgstr "¯À§Â¡¸¢ì¸ §ÅñÊÂ X ¸¡ğº¢"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "DISPLAY"
 msgstr "¸¡ğº¢"
 
@@ -382,92 +388,92 @@ msgid "GNOME GUI Library"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:592
+#: libgnomeui/gnome-ui-init.c:569
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨ÃÂ¡¼¨Ä ¸¡ñÀ¢ì¸ ÓÊÂ¡Ğ\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:606
+#: libgnomeui/gnome-ui-init.c:583
 #, fuzzy
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨ÃÂ¡¼¨Ä ¸¡ñÀ¢ì¸ ÓÊÂ¡Ğ\n"
 
-#: libgnomeui/gnome-ui-init.c:738
+#: libgnomeui/gnome-ui-init.c:715
 msgid "Gdk debugging flags to set"
 msgstr "Gdk À¢¨Æ-¿£ìÌÅ¾ü¸¡¸ «¨Áì¸ §ÅñÊÂ ¦¸¡Ê¸û"
 
-#: libgnomeui/gnome-ui-init.c:738 libgnomeui/gnome-ui-init.c:741
-#: libgnomeui/gnome-ui-init.c:782 libgnomeui/gnome-ui-init.c:785
+#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
+#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
 msgid "FLAGS"
 msgstr "¦¸¡Ê¸û"
 
-#: libgnomeui/gnome-ui-init.c:741
+#: libgnomeui/gnome-ui-init.c:718
 msgid "Gdk debugging flags to unset"
 msgstr "Gdk À¢¨Æ-¿£ì¸ ÍÆ¢ôÀÎò¾ §ÅñÊÂ ¦¸¡Ê¸û"
 
-#: libgnomeui/gnome-ui-init.c:749
+#: libgnomeui/gnome-ui-init.c:726
 msgid "Make X calls synchronous"
 msgstr "X «¨ÆôÒ¸¨Ç ´ò¾¢Âì¸î ¦ºö"
 
-#: libgnomeui/gnome-ui-init.c:755
+#: libgnomeui/gnome-ui-init.c:732
 msgid "Don't use X shared memory extension"
 msgstr "À¸¢÷-¿¢¨ÉÅ¸ ¿£ğÊô¨À X'Â¢ø ¯À§Â¡¸¢ì¸ §Åñ¼¡õ"
 
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:736
 msgid "Program name as used by the window manager"
 msgstr "º¡ÇÃ§ÁÄ¡Ç÷ ÀÂıÀÎòĞõ ¿¢Ãø ¦ÀÂ÷"
 
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:736
 msgid "NAME"
 msgstr "¦ÀÂ÷"
 
-#: libgnomeui/gnome-ui-init.c:762
+#: libgnomeui/gnome-ui-init.c:739
 msgid "Program class as used by the window manager"
 msgstr "º¡ÇÃ§ÁÄ¡Ç÷ ÀÂıÀÎòĞõ ¿¢Ãø ÅÌôÒ"
 
-#: libgnomeui/gnome-ui-init.c:762
+#: libgnomeui/gnome-ui-init.c:739
 msgid "CLASS"
 msgstr "ÅÌôÒ"
 
-#: libgnomeui/gnome-ui-init.c:766
+#: libgnomeui/gnome-ui-init.c:743
 msgid "HOST"
 msgstr "Å¢Õó§¾¡õÒ"
 
-#: libgnomeui/gnome-ui-init.c:770
+#: libgnomeui/gnome-ui-init.c:747
 msgid "PORT"
 msgstr "Ğ¨È"
 
-#: libgnomeui/gnome-ui-init.c:775 libgnomeui/gnome-ui-init.c:778
+#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
 msgid "STYLE"
 msgstr "ÀñÒ"
 
-#: libgnomeui/gnome-ui-init.c:782
+#: libgnomeui/gnome-ui-init.c:759
 msgid "Gtk+ debugging flags to set"
 msgstr "Gtk+ À¢¨Æ ¿£ì¸ «¨Áì¸ §ÅñÊÂ ¦¸¡Ê¸û"
 
-#: libgnomeui/gnome-ui-init.c:785
+#: libgnomeui/gnome-ui-init.c:762
 msgid "Gtk+ debugging flags to unset"
 msgstr "Gtk+ À¢¨Æ ¿£ì¸ ÍÆ¢ôÀÎò¾ §ÅñÊÂ ¦¸¡Ê¸û"
 
-#: libgnomeui/gnome-ui-init.c:788
+#: libgnomeui/gnome-ui-init.c:765
 msgid "Make all warnings fatal"
 msgstr "«¨ÉòĞ ±îº¡¢ì¨¸¸¨ÇÔõ ¦¸¡ø À¢¨ÆÂ¡ìÌ"
 
-#: libgnomeui/gnome-ui-init.c:791
+#: libgnomeui/gnome-ui-init.c:768
 msgid "Load an additional Gtk module"
 msgstr "§ÁÖõ µ÷ Gtk Ü¨È¨Â ²üÚ"
 
-#: libgnomeui/gnome-ui-init.c:791
+#: libgnomeui/gnome-ui-init.c:768
 msgid "MODULE"
 msgstr "ÜÚ"
 
-#: libgnomeui/gnome-ui-init.c:896
+#: libgnomeui/gnome-ui-init.c:873
 msgid "GTK+"
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:95
+#: libgnomeui/gnome_segv.c:100
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -477,7 +483,7 @@ msgid ""
 "Please save all your files before closing this dialog."
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:105
+#: libgnomeui/gnome_segv.c:110
 #, c-format
 msgid ""
 "Application \"%s\" (process %d) has crashed\n"
@@ -488,52 +494,52 @@ msgstr ""
 "ÓÈ¢× «¨¼óĞøÄĞ.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:114
+#: libgnomeui/gnome_segv.c:123
 #, fuzzy
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "¯À§Â¡¸¢ôÒ: gnome_segv ÀÂıÀ¡Î_¦ÀÂ÷ signum\n"
 
-#: libgnomeui/gnome_segv.c:130
+#: libgnomeui/gnome_segv.c:139
 msgid "Submit a bug report"
 msgstr "À¢¨Æ «È¢ì¨¸ «¼íÌ"
 
-#: libgnomeui/gnome_segv.c:141
+#: libgnomeui/gnome_segv.c:150
 msgid "Debug"
 msgstr "À¢¨Æ ¿£ìÌ"
 
-#: libgnomeui/gnome_segv.c:149
+#: libgnomeui/gnome_segv.c:158
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:155
+#: libgnomeui/gnome_segv.c:164
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "¾Â×¦ºöĞ, ¾¸ÅÖìÌ ¸§É¡õ ÀÂıÀ¡Î ÓÈ¢× Àì¸ò¨¾ À¡÷ì¸×õ"
 
-#: libgnomeui/gnome-stock-icons.c:135
+#: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
 msgstr "«ğ¼Å¨½ ±ø¨Ä¸û"
 
-#: libgnomeui/gnome-stock-icons.c:136
+#: libgnomeui/gnome-stock-icons.c:138
 msgid "Table Fill"
 msgstr "«ğ¼Å¨½¨Â ¿¢ÃôÒ"
 
-#: libgnomeui/gnome-stock-icons.c:137
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Bulleted List"
 msgstr "ÌñÎÀ¨¼ò¾ ÀğÊ"
 
-#: libgnomeui/gnome-stock-icons.c:138
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Numbered List"
 msgstr "±ñÀ¨¼ò¾ ÀğÊ"
 
-#: libgnomeui/gnome-stock-icons.c:139
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Indent"
 msgstr "¯û¾û"
 
-#: libgnomeui/gnome-stock-icons.c:140
+#: libgnomeui/gnome-stock-icons.c:142
 msgid "Un-Indent"
 msgstr "¯û¾ûÇ¡§¾"
 
-#: libgnomeui/gnome-stock-icons.c:141
+#: libgnomeui/gnome-stock-icons.c:143
 msgid "About"
 msgstr "ÀüÈ¢"
 
@@ -1159,7 +1165,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:496
+#: libgnomeui/gnome-pixmap-entry.c:184 libgnomeui/gnome-pixmap-entry.c:496
 msgid "No Image"
 msgstr "¯ÕÅõ ¸¢¨¼Â¡Ğ"
 
@@ -1196,6 +1202,10 @@ msgstr ""
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Author"
+#~ msgstr "¬º¢¡¢Â÷:"
 
 #, fuzzy
 #~ msgid "Background start position"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.12\n"
-"POT-Creation-Date: 2002-02-09 19:37+0200\n"
+"POT-Creation-Date: 2002-02-11 14:59+0100\n"
 "PO-Revision-Date: 2001-05-20 22:11+0200\n"
 "Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -14,98 +14,106 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. Authors
-#: libgnomeui/gnome-about.c:94
-msgid "Author"
-msgstr "Autorius"
+#: libgnomeui/gnome-about.c:97
+msgid "Written by"
+msgstr ""
 
-#: libgnomeui/gnome-about.c:94 libgnomeui/gnome-about.c:284
-msgid "Authors"
-msgstr "Autoriai"
-
-#: libgnomeui/gnome-about.c:118
-msgid "Documenter"
+#: libgnomeui/gnome-about.c:127
+#, fuzzy
+msgid "Documented by"
 msgstr "Dokumentuotojas"
 
-#: libgnomeui/gnome-about.c:118 libgnomeui/gnome-about.c:295
-msgid "Documenters"
-msgstr "Dokumentuotojai"
-
-#: libgnomeui/gnome-about.c:146 libgnomeui/gnome-about.c:307
-msgid "Translator credits"
+#: libgnomeui/gnome-about.c:156
+#, fuzzy
+msgid "Translated by"
 msgstr "Vertëjai"
 
-#: libgnomeui/gnome-about.c:254
+#: libgnomeui/gnome-about.c:186
+msgid "Credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:310
 msgid "Program name"
 msgstr "Programos pavadinimas"
 
-#: libgnomeui/gnome-about.c:255
+#: libgnomeui/gnome-about.c:311
 msgid "The name of the program"
 msgstr "Programos pavadinimas"
 
-#: libgnomeui/gnome-about.c:262
+#: libgnomeui/gnome-about.c:318
 msgid "Program version"
 msgstr "Programos versija"
 
-#: libgnomeui/gnome-about.c:263
+#: libgnomeui/gnome-about.c:319
 msgid "The version of the program"
 msgstr "Programos versija"
 
-#: libgnomeui/gnome-about.c:269
+#: libgnomeui/gnome-about.c:325
 msgid "Copyright string"
 msgstr "Autorinës teisës"
 
-#: libgnomeui/gnome-about.c:270
+#: libgnomeui/gnome-about.c:326
 msgid "Copyright information for the program"
 msgstr "Autoriniø teisiø informacija apie programà"
 
-#: libgnomeui/gnome-about.c:277
+#: libgnomeui/gnome-about.c:333
 msgid "Comments string"
 msgstr "Paaiðkinimai"
 
-#: libgnomeui/gnome-about.c:278
+#: libgnomeui/gnome-about.c:334
 msgid "Comments about the program"
 msgstr "Paaiðkinimas, kà programa daro"
 
-#: libgnomeui/gnome-about.c:285
+#: libgnomeui/gnome-about.c:340
+msgid "Authors"
+msgstr "Autoriai"
+
+#: libgnomeui/gnome-about.c:341
 msgid "List of authors of the programs"
 msgstr "Programos autoriø sàraðas"
 
-#: libgnomeui/gnome-about.c:287
+#: libgnomeui/gnome-about.c:343
 msgid "Author entry"
 msgstr "Autoriaus laukas"
 
-#: libgnomeui/gnome-about.c:288
+#: libgnomeui/gnome-about.c:344
 msgid "A single author entry"
 msgstr "Vieno autoriaus laukas"
 
-#: libgnomeui/gnome-about.c:296
+#: libgnomeui/gnome-about.c:351
+msgid "Documenters"
+msgstr "Dokumentuotojai"
+
+#: libgnomeui/gnome-about.c:352
 msgid "List of people documenting the program"
 msgstr "Sàraðas þmoniø, dokumentavusiø programà"
 
-#: libgnomeui/gnome-about.c:298
+#: libgnomeui/gnome-about.c:354
 msgid "Documenter entry"
 msgstr "Dokumentuotojø laukas"
 
-#: libgnomeui/gnome-about.c:299
+#: libgnomeui/gnome-about.c:355
 msgid "A single documenter entry"
 msgstr "Vieno dokumentuotojo laukas"
 
-#: libgnomeui/gnome-about.c:308
+#: libgnomeui/gnome-about.c:363
+msgid "Translator credits"
+msgstr "Vertëjai"
+
+#: libgnomeui/gnome-about.c:364
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Vertëjø sàraðas. Ðià eilutæ turi bûti galima iðversti"
+msgstr "Vertëjø sàraðas. Ðià eilutæ turi bûti galima iðversti"
 
-#: libgnomeui/gnome-about.c:315 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:371 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: libgnomeui/gnome-about.c:316
+#: libgnomeui/gnome-about.c:372
 msgid "A logo for the about box"
 msgstr "Logotipas apie langui"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:451
 #, c-format
 msgid "About %s"
 msgstr "Apie %s"
@@ -170,52 +178,52 @@ msgstr ""
 msgid "Pick a color"
 msgstr "Pasirink spalvà"
 
-#: libgnomeui/gnome-dateedit.c:435
+#: libgnomeui/gnome-dateedit.c:430
 msgid "Time"
 msgstr "Laikas"
 
-#: libgnomeui/gnome-dateedit.c:436
+#: libgnomeui/gnome-dateedit.c:431
 msgid "The time currently selected"
 msgstr "Dabar pasirinktas laikas"
 
-#: libgnomeui/gnome-dateedit.c:448
+#: libgnomeui/gnome-dateedit.c:443
 msgid "DateEdit Flags"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:449
+#: libgnomeui/gnome-dateedit.c:444
 msgid "Flags for how DateEdit looks"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:458
+#: libgnomeui/gnome-dateedit.c:453
 msgid "Lower Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:459
+#: libgnomeui/gnome-dateedit.c:454
 msgid "Lower hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:464
 msgid "Upper Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:470
+#: libgnomeui/gnome-dateedit.c:465
 msgid "Upper hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:480
+#: libgnomeui/gnome-dateedit.c:475
 msgid "Initial Time"
 msgstr "Pradinis laikas"
 
-#: libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:476
 msgid "The initial time"
 msgstr "Pradinë laiko reikðmë"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:727
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "Kalendorius"
 
-#: libgnomeui/gnome-dateedit.c:959
+#: libgnomeui/gnome-dateedit.c:935
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 
@@ -356,11 +364,11 @@ msgid ""
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "X display to use"
 msgstr "Kurá X'ø ekranà naudoti"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "DISPLAY"
 msgstr "EKRANAS"
 
@@ -369,92 +377,92 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI biblioteka"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:592
+#: libgnomeui/gnome-ui-init.c:569
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Ávyko keletas segmentacijos klaidø; negaliu parodyti klaidos dialogo\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:606
+#: libgnomeui/gnome-ui-init.c:583
 #, fuzzy
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr "Ávyko keletas segmentacijos klaidø; negaliu parodyti klaidos dialogo\n"
 
-#: libgnomeui/gnome-ui-init.c:738
+#: libgnomeui/gnome-ui-init.c:715
 msgid "Gdk debugging flags to set"
 msgstr "Gdk derinimo þymës, kurias uþdëti"
 
-#: libgnomeui/gnome-ui-init.c:738 libgnomeui/gnome-ui-init.c:741
-#: libgnomeui/gnome-ui-init.c:782 libgnomeui/gnome-ui-init.c:785
+#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
+#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
 msgid "FLAGS"
 msgstr "ÞYMËS"
 
-#: libgnomeui/gnome-ui-init.c:741
+#: libgnomeui/gnome-ui-init.c:718
 msgid "Gdk debugging flags to unset"
 msgstr "Gdk derinimo þymës, kurias nuimti"
 
-#: libgnomeui/gnome-ui-init.c:749
+#: libgnomeui/gnome-ui-init.c:726
 msgid "Make X calls synchronous"
 msgstr "Padaryti X kreiptis sinchroniðkas"
 
-#: libgnomeui/gnome-ui-init.c:755
+#: libgnomeui/gnome-ui-init.c:732
 msgid "Don't use X shared memory extension"
 msgstr "Nenaudoti X bendrosios atminties iðplëtimo"
 
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:736
 msgid "Program name as used by the window manager"
 msgstr "Programos pavadinimas, naudojamas langø tvarkyklës"
 
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:736
 msgid "NAME"
 msgstr "PAVAD"
 
-#: libgnomeui/gnome-ui-init.c:762
+#: libgnomeui/gnome-ui-init.c:739
 msgid "Program class as used by the window manager"
 msgstr "Programos klasë, naudojama langø tvarkyklës"
 
-#: libgnomeui/gnome-ui-init.c:762
+#: libgnomeui/gnome-ui-init.c:739
 msgid "CLASS"
 msgstr "KLASË"
 
-#: libgnomeui/gnome-ui-init.c:766
+#: libgnomeui/gnome-ui-init.c:743
 msgid "HOST"
 msgstr "HOST"
 
-#: libgnomeui/gnome-ui-init.c:770
+#: libgnomeui/gnome-ui-init.c:747
 msgid "PORT"
 msgstr "PRIEV"
 
-#: libgnomeui/gnome-ui-init.c:775 libgnomeui/gnome-ui-init.c:778
+#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
 msgid "STYLE"
 msgstr "STILIUS"
 
-#: libgnomeui/gnome-ui-init.c:782
+#: libgnomeui/gnome-ui-init.c:759
 msgid "Gtk+ debugging flags to set"
 msgstr "Gtk+ derinimo þymës, kurias uþdëti"
 
-#: libgnomeui/gnome-ui-init.c:785
+#: libgnomeui/gnome-ui-init.c:762
 msgid "Gtk+ debugging flags to unset"
 msgstr "Gtk+ derinimo þymës, kurias nuimti"
 
-#: libgnomeui/gnome-ui-init.c:788
+#: libgnomeui/gnome-ui-init.c:765
 msgid "Make all warnings fatal"
 msgstr "Padaryti visus perspëjimus lemtingais"
 
-#: libgnomeui/gnome-ui-init.c:791
+#: libgnomeui/gnome-ui-init.c:768
 msgid "Load an additional Gtk module"
 msgstr "Ákelti papildomà Gtk modulá"
 
-#: libgnomeui/gnome-ui-init.c:791
+#: libgnomeui/gnome-ui-init.c:768
 msgid "MODULE"
 msgstr "MODULIS"
 
-#: libgnomeui/gnome-ui-init.c:896
+#: libgnomeui/gnome-ui-init.c:873
 msgid "GTK+"
 msgstr "GTK+"
 
-#: libgnomeui/gnome_segv.c:95
+#: libgnomeui/gnome_segv.c:100
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -468,7 +476,7 @@ msgstr ""
 "Uþdarius ðá dialogà, visos programos ir sesija bus uþdarytos.\n"
 "Prieð uþdarydami, iðsaugokite visas savo bylas."
 
-#: libgnomeui/gnome_segv.c:105
+#: libgnomeui/gnome_segv.c:110
 #, c-format
 msgid ""
 "Application \"%s\" (process %d) has crashed\n"
@@ -479,51 +487,51 @@ msgstr ""
 "dël lemtingos klaidos.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:114
+#: libgnomeui/gnome_segv.c:123
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Vartojimas: gnome_segv2 programa signalas\n"
 
-#: libgnomeui/gnome_segv.c:130
+#: libgnomeui/gnome_segv.c:139
 msgid "Submit a bug report"
 msgstr "Pateikti klaidos ataskaità"
 
-#: libgnomeui/gnome_segv.c:141
+#: libgnomeui/gnome_segv.c:150
 msgid "Debug"
 msgstr "Derinti"
 
-#: libgnomeui/gnome_segv.c:149
+#: libgnomeui/gnome_segv.c:158
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:155
+#: libgnomeui/gnome_segv.c:164
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Aplankykite GNOME Programø Lûþimo puslapá, norëdami suþinoti daugiau"
 
-#: libgnomeui/gnome-stock-icons.c:135
+#: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
 msgstr "Lentelës rëmeliai"
 
-#: libgnomeui/gnome-stock-icons.c:136
+#: libgnomeui/gnome-stock-icons.c:138
 msgid "Table Fill"
 msgstr "Lentelës uþpildas"
 
-#: libgnomeui/gnome-stock-icons.c:137
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Bulleted List"
 msgstr "Suþymëtas sàraðas"
 
-#: libgnomeui/gnome-stock-icons.c:138
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Numbered List"
 msgstr "Numeruotas sàraðas"
 
-#: libgnomeui/gnome-stock-icons.c:139
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Indent"
 msgstr "Átraukti"
 
-#: libgnomeui/gnome-stock-icons.c:140
+#: libgnomeui/gnome-stock-icons.c:142
 msgid "Un-Indent"
 msgstr "Atitraukti"
 
-#: libgnomeui/gnome-stock-icons.c:141
+#: libgnomeui/gnome-stock-icons.c:143
 msgid "About"
 msgstr "Apie"
 
@@ -545,7 +553,6 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Byla"
 
@@ -603,7 +610,6 @@ msgid "_Game"
 msgstr "Þai_dimas"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pagalba"
 
@@ -794,11 +800,11 @@ msgstr "Sutvarkyti programà"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Apie"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Apie ðià programà"
 
@@ -825,7 +831,7 @@ msgstr "Sukurti naujà langà"
 msgid "_Close This Window"
 msgstr "_Uþdaryti ðá langà"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Uþdaryti esamà langà"
 
@@ -1131,7 +1137,7 @@ msgstr "Klausimas"
 msgid "Message"
 msgstr "Praneðimas"
 
-#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:496
+#: libgnomeui/gnome-pixmap-entry.c:184 libgnomeui/gnome-pixmap-entry.c:496
 msgid "No Image"
 msgstr "Jokio paveikslëlio"
 
@@ -1166,7 +1172,8 @@ msgstr "%a, %Y %b %d, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Iðeiti ið testo"
+#~ msgid "Author"
+#~ msgstr "Autorius"
 
+#~ msgid "Exit the test"
+#~ msgstr "Iðeiti ið testo"
