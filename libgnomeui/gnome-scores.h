@@ -123,9 +123,6 @@ void gnome_scores_set_colors (
 		GdkColor *col		/* Array of colors. */
 		);
 
-/* test */
-int test();
-
 END_GNOME_DECLS
 
 #endif /* GNOME_SCORES_H */

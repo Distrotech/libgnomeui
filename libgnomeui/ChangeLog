@@ -1,5 +1,7 @@
 Sat Feb 14 17:15:18 1998  Tom Tromey  <tromey@cygnus.com>
 
+	* gnome-scores.h (test): Removed declaration.
+
 	* gnome-client.h: Removed RCS "Id" line.
 
 1998-02-15  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
