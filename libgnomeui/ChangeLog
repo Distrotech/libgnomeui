@@ -1,3 +1,8 @@
+1998-07-03  Chris Lahey  <clahey@umich.edu>
+
+	* libgnomeui.h: Check for GDK_HAVE_FULL_CROSSING_EVENT before
+	including gnome-canvas.h and gnome-canvas-rect-ellipse.h.
+
 Fri Jul  3 16:51:31 CDT 1998  Richard Hestilow  <hestgray@ionet.net>
 
 	* gnome-app.c (gnome_app_set_toolbar) : Added check for 

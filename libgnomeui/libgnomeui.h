@@ -10,8 +10,10 @@
 #include "libgnomeui/gnome-app-helper.h"
 #include "libgnomeui/gnome-app-util.h"
 #include "libgnomeui/gnome-actionarea.h"
+#ifdef GDK_HAVE_FULL_CROSSING_EVENT
 #include "libgnomeui/gnome-canvas.h"
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"
+#endif
 #include "libgnomeui/gnome-color-selector.h"
 #include "libgnomeui/gnome-dialog.h"
 #include "libgnomeui/gnome-dialog-util.h"
