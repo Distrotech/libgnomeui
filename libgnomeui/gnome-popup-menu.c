@@ -85,14 +85,14 @@ popup_connect_func (GnomeUIInfo *uiinfo, const char *signal_name, GnomeUIBuilder
 
 /**
  * gnome_popup_menu_new_with_accelgroup
- * @uiinfo:
- * @accelgroup:
+ * @uiinfo: A #GnomeUIInfo array describing the new menu.
+ * @accelgroup: A #GtkAccelGroup describing the accelerator key structure.
  *
- * Creates a popup menu out of the specified uiinfo array.  Use
+ * Creates a popup menu out of the specified @uiinfo array.  Use
  * gnome_popup_menu_do_popup() to pop the menu up, or attach it to a
  * window with gnome_popup_menu_attach().
  *
- * Returns a menu widget
+ * Returns: A menu widget.
  */
 GtkWidget *
 gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
@@ -123,7 +123,7 @@ gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
 
 /**
  * gnome_popup_menu_new
- * @uiinfo:
+ * @uiinfo: A #GnomeUIInfo array describing the new menu.
  *
  * This function behaves just like
  * gnome_popup_menu_new_with_accelgroup(), except that it creates an
@@ -131,7 +131,7 @@ gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
  * gnome_popup_menu_get_accel_group() to get the accelgroup that is
  * created.
  *
- * Returns a menu widget
+ * Returns: A menu widget.
  *
  */
 GtkWidget *
@@ -142,12 +142,13 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 
 /**
  * gnome_popup_menu_get_accel_group
- * @menu:
+ * @menu: A menu widget.
  *
- * Returns the accelgroup associated with the specified GtkMenu.  This
- * is the accelgroup that was created by gnome_popup_menu_new().  If
- * you want to specify the accelgroup that the popup menu accelerators
- * use, then use gnome_popup_menu_new_with_accelgroup().
+ * This function is used to retrieve the accelgroup that was created by
+ * gnome_popup_menu_new(). If you want to specify the accelgroup that the popup
+ * menu accelerators use, then use gnome_popup_menu_new_with_accelgroup().
+ *
+ * Returns: The accelgroup associated with the specified #GtkMenu.
  */
 GtkAccelGroup *
 gnome_popup_menu_get_accel_group(GtkMenu *menu)
@@ -162,8 +163,9 @@ gnome_popup_menu_get_accel_group(GtkMenu *menu)
 #endif
 }
 
-/* Callback used when a button is pressed in a widget attached to a popup menu.  It decides whether
- * the menu should be popped up and does the appropriate stuff.
+/* Callback used when a button is pressed in a widget attached to a popup
+ * menu.  It decides whether the menu should be popped up and does the
+ * appropriate stuff.
  */
 static gint
 real_popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
@@ -275,9 +277,9 @@ popup_attach_widget_destroyed (GtkWidget *widget, gpointer data)
 
 /**
  * gnome_popup_menu_attach:
- * @popup:
- * @widget:
- * @user_data:
+ * @popup: A menu widget.
+ * @widget: The widget to attach the popup menu to.
+ * @user_data: Application specific data passed to the callback.
  *
  * Attaches the specified popup menu to the specified widget.  The
  * menu can then be activated by pressing mouse button 3 over the
@@ -295,8 +297,8 @@ popup_attach_widget_destroyed (GtkWidget *widget, gpointer data)
  * widgets it is attached to are destroyed, the popup menu will be
  * destroyed as well.
  *
- * Under the current implementation, setting a popup menu for a NO_WINDOW widget and then reparenting
- * that widget will cause Bad Things to happen.
+ * Under the current implementation, setting a popup menu for a NO_WINDOW
+ * widget and then reparenting that widget will cause Bad Things to happen.
  */
 void
 gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
@@ -366,14 +368,15 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 
 /**
  * gnome_popup_menu_do_popup:
- * @popup:
- * @pos_func:
- * @pos_data:
- * @event:
- * @user_data:
- * @for_widget:
+ * @popup: A menu widget.
+ * @pos_func: A user supplied function to position the menu or %NULL.
+ * @pos_data: User supplied data to pass to @pos_func.
+ * @event: A #GdkEventButton structure containing the event that triggered the
+ * menu (or %NULL).
+ * @user_data: Application specific data passed to the menu callback.
+ * @for_widget: The widget for which the popup was triggered.
  *
- * You can use this function to pop up a menu.  When a menu item *
+ * You can use this function to pop up a menu.  When a menu item
  * callback is invoked, the specified user_data will be passed to it.
  *
  * The pos_func and pos_data parameters are the same as for
@@ -441,17 +444,17 @@ get_active_index (GtkMenu *menu)
 
 /**
  * gnome_popup_menu_do_popup_modal:
- * @popup:
- * @pos_func:
- * @pos_data:
- * @event:
- * @user_data:
- * @for_widget:
+ * @popup: A menu widget.
+ * @pos_func: A user supplied function to position the menu or %NULL.
+ * @pos_data: User supplied data to pass to @pos_func.
+ * @event: A #GdkEventButton structure containing the event that triggered the
+ * menu (or %NULL).
+ * @user_data: Application specific data passed to the menu callback.
+ * @for_widget: The widget for which the popup was triggered.
  *
- * Same as above, but runs the popup menu modally and returns the
- * index of the selected item, or -1 if none.
+ * Same as gnome_popup_do_modal(), but runs the popup menu modally.
  *
- * Returns:
+ * Returns: The index of the selected item or -1 if no item selected.
  */
 int
 gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
@@ -492,6 +495,13 @@ gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func,
 	return get_active_index (GTK_MENU (popup));
 }
 
+/**
+ * gnome_popup_menu_append:
+ * @popup: An existing popup menu.
+ * @uiinfo: A #GnomeUIInfo array describing new menu elements.
+ *
+ * Appends the menu items in @uiinfo the @popup menu.
+ */
 void
 gnome_popup_menu_append (GtkWidget *popup, GnomeUIInfo *uiinfo)
 {
@@ -519,12 +529,12 @@ gnome_popup_menu_append (GtkWidget *popup, GnomeUIInfo *uiinfo)
 
 /**
  * gnome_gtk_widget_add_popup_items:
- * @widget: The widget to append popup menu items for
- * @uiinfo: The array holding information on the menu items
- * @user_data: The user_data to pass to the callbacks for the menu items
+ * @widget: The widget to append popup menu items for.
+ * @uiinfo: A #GnomeUIInfo array describing new menu elements.
+ * @user_data: The user_data to pass to the callbacks for the menu items.
  *
- * This creates a new popup menu for the widget if none exists, and
- * then adds the items in 'uiinfo' to the widget's popup menu.
+ * This creates a new popup menu for @widget if none exists, and then adds the
+ * items in @uiinfo to the popup menu of @widget.
  */
 void
 gnome_gtk_widget_add_popup_items (GtkWidget *widget, GnomeUIInfo *uiinfo, gpointer user_data)

@@ -27,10 +27,13 @@ typedef struct _GnomeThemeFile GnomeThemeFile;
 typedef void (* GnomeThemeFileSectionFunc) (GnomeThemeFile *df,
 					    const char       *name,
 					    gpointer          data);
+
+/* If @key is %NULL, @value is a comment line. */
+/* @value is raw, unescaped data. */
 typedef void (* GnomeThemeFileLineFunc) (GnomeThemeFile *df,
-					 const char       *key, /* If NULL, value is comment line */
+					 const char       *key,
 					 const char       *locale,
-					 const char       *value, /* This is raw unescaped data */
+					 const char       *value,
 					 gpointer          data);
 
 typedef enum 

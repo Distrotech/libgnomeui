@@ -12,3 +12,5 @@ libgnomeui.hierachy
 *.stamp
 libgnomeui-symbols.txt
 libgnomeui.hierarchy
+libgnomeui.prerequisites
+libgnomeui.interfaces

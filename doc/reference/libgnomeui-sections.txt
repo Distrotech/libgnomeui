@@ -317,7 +317,6 @@ GNOME_DRUID_PAGE_STANDARD_GET_CLASS
 
 <SUBSECTION Private>
 GnomeDruidPageStandardPrivate
-gnome_druid_page_standard_construct
 
 </SECTION>
 
@@ -539,7 +538,6 @@ GnomeIconTextItemPrivate
 
 <SECTION>
 <FILE>gnome-icon-list</FILE>
-GnomeIconListPrivate
 GnomeIconListMode
 <TITLE>GnomeIconList</TITLE>
 GnomeIconList
@@ -589,6 +587,50 @@ gnome_icon_list_get_type
 GNOME_ICON_LIST_CLASS
 GNOME_IS_ICON_LIST_CLASS
 GNOME_ICON_LIST_GET_CLASS
+
+<SUBSECTION Private>
+GnomeIconListPrivate
+</SECTION>
+
+<SECTION>
+<FILE>gnome-icon-lookup</FILE>
+<TITLE>GnomeIconLookup</TITLE>
+GnomeIconLookupFlags
+GnomeIconLookupResultFlags
+gnome_icon_lookup
+gnome_icon_lookup_sync
+</SECTION>
+
+<SECTION>
+<FILE>gnome-icon-theme</FILE>
+<TITLE>GnomeIconTheme</TITLE>
+GnomeIconThemeClass
+GnomeIconTheme
+gnome_icon_theme_new
+gnome_icon_theme_get_search_path
+gnome_icon_theme_set_search_path
+gnome_icon_theme_get_allow_svg
+gnome_icon_theme_set_allow_svg
+gnome_icon_theme_get_example_icon_name
+gnome_icon_theme_append_search_path
+gnome_icon_theme_prepend_search_path
+gnome_icon_theme_set_custom_theme
+gnome_icon_theme_lookup_icon
+gnome_icon_theme_has_icon
+gnome_icon_theme_list_icons
+gnome_icon_theme_rescan_if_needed
+gnome_icon_data_dup
+gnome_icon_data_free
+
+<SUBSECTION Standard>
+GNOME_IS_ICON_THEME
+GNOME_IS_ICON_THEME_CLASS
+GNOME_ICON_THEME
+GNOME_ICON_THEME_CLASS
+GNOME_ICON_THEME_GET_CLASS
+
+<SUBSECTION Private>
+GnomeIconThemePrivate
 </SECTION>
 
 <SECTION>
@@ -617,6 +659,55 @@ GNOME_ICON_SELECTION_GET_CLASS
 <SUBSECTION Private>
 GnomeIconSelectionPrivate
 
+</SECTION>
+
+<SECTION>
+<FILE>gnome-thumbnail</FILE>
+<TITLE>GnomeThumbnail</TITLE>
+GnomeThumbnailFactory
+GnomeThumbnailSize
+GnomeThumbnailFactoryClass
+gnome_thumbnail_factory_new
+gnome_thumbnail_factory_lookup
+gnome_thumbnail_factory_has_valid_failed_thumbnail
+gnome_thumbnail_factory_can_thumbnail
+gnome_thumbnail_factory_generate_thumbnail
+gnome_thumbnail_factory_save_thumbnail
+gnome_thumbnail_factory_create_failed_thumbnail
+gnome_thumbnail_scale_down_pixbuf
+gnome_thumbnail_has_uri
+gnome_thumbnail_is_valid
+gnome_thumbnail_md5
+gnome_thumbnail_path_for_uri
+
+<SUBSECTION Standard>
+GNOME_THUMBNAIL_FACTORY
+GNOME_THUMBNAIL_FACTORY_CLASS
+GNOME_IS_THUMBNAIL_FACTORY
+GNOME_IS_THUMBNAIL_FACTORY_CLASS
+
+<SUBSECTION Private>
+GnomeThumbnailFactoryPrivate
+</SECTION>
+
+<SECTION>
+<FILE>gnome-theme-parse</FILE>
+<TITLE>GnomeThemeFile</TITLE>
+GnomeThemeFile
+GnomeThemeFileSectionFunc
+GnomeThemeFileParseError
+GnomeThemeFileLineFunc
+gnome_theme_file_new_from_string
+gnome_theme_file_to_string
+gnome_theme_file_free
+gnome_theme_file_foreach_section
+gnome_theme_file_foreach_key
+gnome_theme_file_get_raw
+gnome_theme_file_get_integer
+gnome_theme_file_get_string
+gnome_theme_file_get_locale_string
+GNOME_THEME_FILE_PARSE_ERROR
+gnome_theme_file_parse_error_quark
 </SECTION>
 
 <SECTION>
@@ -1340,6 +1431,16 @@ GNOME_TYPE_MDI_MODE
 gnome_mdi_mode_get_type
 GNOME_TYPE_PREFERENCES_TYPE
 gnome_preferences_type_get_type
+GNOME_TYPE_THUMBNAIL_SIZE
+gnome_thumbnail_size_get_type
+GNOME_TYPE_ICON_LOOKUP_FLAGS
+gnome_icon_lookup_flags_get_type
+GNOME_TYPE_ICON_LOOKUP_RESULT_FLAGS
+gnome_icon_lookup_result_flags_get_type
+GNOME_TYPE_ICON_THEME
+gnome_icon_theme_get_type
+GNOME_TYPE_THUMBNAIL_FACTORY
+gnome_thumbnail_factory_get_type
 </SECTION>
 
 <SECTION>

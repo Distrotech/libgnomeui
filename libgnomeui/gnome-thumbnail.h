@@ -35,7 +35,7 @@ G_BEGIN_DECLS
 
 typedef enum {
   GNOME_THUMBNAIL_SIZE_NORMAL,
-  GNOME_THUMBNAIL_SIZE_LARGE,
+  GNOME_THUMBNAIL_SIZE_LARGE
 } GnomeThumbnailSize;
 
 #define GNOME_TYPE_THUMBNAIL_FACTORY	(gnome_thumbnail_factory_get_type ())

@@ -13,6 +13,10 @@
 <!ENTITY libgnomeui-GnomeFontPicker SYSTEM "sgml/gnome-font-picker.sgml">
 <!ENTITY libgnomeui-GnomeHRef SYSTEM "sgml/gnome-href.sgml">
 <!ENTITY libgnomeui-GnomeIconList SYSTEM "sgml/gnome-icon-list.sgml">
+<!ENTITY libgnomeui-GnomeIconLookup SYSTEM "sgml/gnome-icon-lookup.sgml">
+<!ENTITY libgnomeui-GnomeIconTheme SYSTEM "sgml/gnome-icon-theme.sgml">
+<!ENTITY libgnomeui-GnomeThemeFile SYSTEM "sgml/gnome-theme-parse.sgml">
+<!ENTITY libgnomeui-GnomeThumbnail SYSTEM "sgml/gnome-thumbnail.sgml">
 <!ENTITY libgnomeui-GnomeApp SYSTEM "sgml/gnome-app.sgml">
 <!ENTITY libgnomeui-GnomeMDIGenericChild SYSTEM "sgml/gnome-mdi-generic-child.sgml">
 <!ENTITY libgnomeui-GnomeMDI SYSTEM "sgml/gnome-mdi.sgml">
@@ -115,7 +119,11 @@
       &libgnomeui-GnomeHRef;
       &libgnomeui-GnomeIconEntry;
       &libgnomeui-GnomeIconList;
+      &libgnomeui-GnomeIconLookup;
+      &libgnomeui-GnomeIconTheme;
       &libgnomeui-GnomeIconSelection;
+      &libgnomeui-GnomeThemeFile;
+      &libgnomeui-GnomeThumbnail;
       &libgnomeui-GnomeMessageBox;
       &libgnomeui-GnomePixmap;
       &libgnomeui-GnomePixmapEntry;

@@ -699,7 +699,7 @@ gnome_about_get_property (GObject *object, guint prop_id, GValue *value, GParamS
  * @translator_credits: The translator for the current locale.
  * @logo_pixbuf: The application's logo.
  *
- * Construct an application's credits box. The @authors array canot be empty
+ * Construct an application's credits box. The @authors array cannot be empty
  * and the @translator_credits should be marked as a translatable string (so
  * that only the translator for the currently active locale is displayed).
  *

@@ -1190,8 +1190,7 @@ A pre-defined path to the "Windows" menu (when the menu is created using
 <!-- ##### FUNCTION gnome_app_helper_gettext ##### -->
 <para>
 Translate @string by calling gettext() and then, if that did not change the
-string, dgettext() with the domain set to the application's name (as defined
-by the GETTEXT_PACKAGE variable when the application was compiled).
+string, dgettext() with the domain set to libgnome's message domain.
 </para>
 
 @string: The string to translate.
@@ -1208,9 +1207,8 @@ Syntactic sugar for gnome_app_helper_gettext().
 
 <!-- ##### MACRO D_ ##### -->
 <para>
-Syntactic sugar for calling dgettext() with the domain set to the application's
-name (as defined by the GETTEXT_PACKAGE variable when the application was
-compiled).
+Syntactic sugar for calling dgettext() with the domain set to lignome's message
+domain.
 </para>
 
 @x: 

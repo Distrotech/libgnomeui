@@ -222,8 +222,8 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
  *
  * GNOME_ICON_LOOKUP_RESULT_FLAGS_THUMBNAIL - The returned file is a thumbnail.
  *
- * Return value: the name of an icon or an absolute filename of an image to
- *               use for the file.
+ * Returns: The name of an icon or an absolute filename of an image to
+ *          use for the file.
  **/
 char *
 gnome_icon_lookup (GnomeIconTheme             *icon_theme,
@@ -304,7 +304,7 @@ gnome_icon_lookup (GnomeIconTheme             *icon_theme,
 }
 
 /**
- * gnome_icon_lookup:
+ * gnome_icon_lookup_sync:
  * @icon_theme: a #GnomeIconTheme
  * @thumbnail_factory: an optional #GnomeThumbnailFactory used to look up thumbnails
  * @file_uri: the uri of the file
@@ -315,8 +315,8 @@ gnome_icon_lookup (GnomeIconTheme             *icon_theme,
  * This function tries to locate an icon in @icon_theme that can be used
  * to represent the file passed. See gnome_icon_lookup() for more information.
  * 
- * Return value: the name of an icon or an absolute filename of an image to
- *               use for the file.
+ * Returns: The name of an icon or an absolute filename of an image to
+ *          use for the file.
  */
 char *
 gnome_icon_lookup_sync (GnomeIconTheme          *icon_theme,

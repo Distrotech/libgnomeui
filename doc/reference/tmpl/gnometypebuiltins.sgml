@@ -239,3 +239,78 @@ gnometypebuiltins
 @Returns: 
 
 
+<!-- ##### MACRO GNOME_TYPE_THUMBNAIL_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_thumbnail_size_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_ICON_LOOKUP_FLAGS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_icon_lookup_flags_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_ICON_LOOKUP_RESULT_FLAGS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_icon_lookup_result_flags_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_ICON_THEME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_icon_theme_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_THUMBNAIL_FACTORY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_thumbnail_factory_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
