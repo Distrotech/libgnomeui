@@ -414,7 +414,8 @@ gnome_fill_info (GtkWidget *widget,
 	/* FIXME: dirty hack, but it solves i18n problem without rewriting the
 	   drawing code..  */
 	style = gtk_style_ref (widget->style);
-
+	gtk_widget_ensure_style(widget);
+ 
 	gtk_widget_set_name (widget, "Title");
 	gai->font_title = gdk_font_ref (widget->style->font);
 

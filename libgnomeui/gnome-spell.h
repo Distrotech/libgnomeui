@@ -39,7 +39,7 @@ typedef struct _GnomeSpellClass GnomeSpellClass;
 typedef struct _GnomeSpellInfo GnomeSpellInfo;
 
 struct _GnomeSpellInfo {
-	gchar* original;
+	const gchar* original;
 	gchar* replacement;
 	gchar* word;
 	guint offset;
@@ -88,11 +88,11 @@ guint 		gnome_spell_get_type(void);
 
 GtkWidget* 	gnome_spell_new(void);
 /* check str for mispelled words  returns 0 if words are ok */
-gint 		gnome_spell_check(GnomeSpell* gtkspell, gchar* str);
+gint 		gnome_spell_check(GnomeSpell* gtkspell, const gchar* str);
 /* accept word for this session only */
-void 		gnome_spell_accept(GnomeSpell* gtkspell, gchar* word);
+void 		gnome_spell_accept(GnomeSpell* gtkspell, const gchar* word);
 /* insert word in personal dictionary */
-void 		gnome_spell_insert(GnomeSpell* gtkspell, gchar* word, gint lowercase);
+void 		gnome_spell_insert(GnomeSpell* gtkspell, const gchar* word, gboolean lowercase);
 /* go for the next word */
 int			gnome_spell_next(GnomeSpell* gtkspell);
 /* kill the ispell process */

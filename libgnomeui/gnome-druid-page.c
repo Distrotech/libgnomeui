@@ -17,6 +17,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <config.h>
+
 #include <gnome.h>
 #include "gnome-druid-page.h"
 
@@ -35,6 +37,10 @@ static void gnome_druid_page_size_request       (GtkWidget               *widget
 						 GtkRequisition          *requisition);
 static void gnome_druid_page_size_allocate      (GtkWidget		 *widget,
 						 GtkAllocation           *allocation);
+static void gnome_druid_page_draw               (GtkWidget               *widget,
+						 GdkRectangle            *area);
+static gint gnome_druid_page_expose             (GtkWidget               *widget,
+						 GdkEventExpose          *event);
 static void gnome_druid_page_realize            (GtkWidget		 *widget);
 
 static GtkBinClass *parent_class = NULL;
@@ -112,8 +118,8 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 				GTK_RUN_LAST,
 				object_class->type,
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, cancel),
-				gtk_marshal_NONE__POINTER,
-				GTK_TYPE_NONE, 1,
+				gtk_marshal_BOOL__POINTER,
+				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_POINTER);
 
 
@@ -121,6 +127,8 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 
 	widget_class->size_request = gnome_druid_page_size_request;
 	widget_class->size_allocate = gnome_druid_page_size_allocate;
+	widget_class->draw = gnome_druid_page_draw;
+	widget_class->expose_event = gnome_druid_page_expose;
 	widget_class->realize = gnome_druid_page_realize;
 }
 
@@ -182,6 +190,59 @@ gnome_druid_page_size_allocate (GtkWidget *widget,
 	}
 }
 static void
+gnome_druid_page_paint (GtkWidget     *widget,
+			GdkRectangle *area)
+{
+	gtk_paint_flat_box (widget->style, widget->window, GTK_STATE_NORMAL, 
+			    GTK_SHADOW_NONE, area, widget, "base", 0, 0, -1, -1);
+}
+
+static void
+gnome_druid_page_draw (GtkWidget               *widget,
+		       GdkRectangle            *area)
+{
+	GdkRectangle child_area;
+
+	if (!GTK_WIDGET_APP_PAINTABLE (widget))
+		gnome_druid_page_paint (widget, area);
+
+	if (GTK_WIDGET_DRAWABLE (widget)) {
+		GdkRectangle tmp_area;
+
+		tmp_area = *area;
+		tmp_area.x -= GTK_CONTAINER (widget)->border_width;
+		tmp_area.y -= GTK_CONTAINER (widget)->border_width;
+
+		if (GTK_BIN (widget)->child && gtk_widget_intersect (GTK_BIN (widget)->child, &tmp_area, &child_area)) {
+			gtk_widget_draw (GTK_BIN (widget)->child, &child_area);
+		}
+	}
+}
+static gint
+gnome_druid_page_expose (GtkWidget               *widget,
+			 GdkEventExpose          *event)
+{
+	GdkEventExpose child_event;
+
+	g_return_val_if_fail (widget != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (widget), FALSE);
+	g_return_val_if_fail (event != NULL, FALSE);
+
+	if (!GTK_WIDGET_APP_PAINTABLE (widget))
+		gnome_druid_page_paint (widget, &event->area);
+
+	if (GTK_WIDGET_DRAWABLE (widget)) {
+		child_event = *event;
+		if (GTK_BIN (widget)->child && GTK_WIDGET_NO_WINDOW (GTK_BIN (widget)->child) &&
+		    gtk_widget_intersect (GTK_BIN (widget)->child, &event->area, &child_event.area)) {
+			gtk_widget_event (GTK_BIN (widget)->child, (GdkEvent*) &child_event);
+		}
+	}
+
+	return FALSE;
+}
+
+static void
 gnome_druid_page_realize (GtkWidget *widget)
 {
 	GdkWindowAttr attributes;
@@ -214,6 +275,7 @@ gnome_druid_page_realize (GtkWidget *widget)
   
 	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
 	gdk_window_set_user_data (widget->window, widget);
+	gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
 
 	widget->style = gtk_style_attach (widget->style, widget->window);
 	gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);

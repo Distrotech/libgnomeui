@@ -1,5 +1,5 @@
 /* gnome-druid.c
- * Copyright (C) 1999  J. Arthur Random
+ * Copyright (C) 1999 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,6 +17,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <config.h>
+
 #include <gnome.h>
 #include "gnome-druid.h"
 enum {
@@ -30,10 +32,19 @@ static void gnome_druid_size_request    (GtkWidget               *widget,
 					 GtkRequisition          *requisition);
 static void gnome_druid_size_allocate   (GtkWidget               *widget,
 					 GtkAllocation           *allocation);
+static void gnome_druid_draw            (GtkWidget               *widget,
+					 GdkRectangle            *area);
+static void gnome_druid_paint           (GtkWidget               *widget,
+					 GdkRectangle            *area);
+static gint gnome_druid_expose          (GtkWidget               *widget,
+					 GdkEventExpose          *event);
 static void gnome_druid_map             (GtkWidget               *widget);
 static void gnome_druid_unmap           (GtkWidget               *widget);
+static GtkType gnome_druid_child_type   (GtkContainer            *container);
 static void gnome_druid_add             (GtkContainer            *widget,
 					 GtkWidget               *page);
+static void gnome_druid_remove          (GtkContainer            *widget,
+					 GtkWidget               *child);
 static void gnome_druid_forall          (GtkContainer            *container,
 					 gboolean                include_internals,
 					 GtkCallback             callback,
@@ -100,9 +111,13 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 	widget_class->size_allocate = gnome_druid_size_allocate;
 	widget_class->map = gnome_druid_map;
 	widget_class->unmap = gnome_druid_unmap;
+	widget_class->draw = gnome_druid_draw;
+	widget_class->expose_event = gnome_druid_expose;
 
 	container_class->forall = gnome_druid_forall;
 	container_class->add = gnome_druid_add;
+	container_class->remove = gnome_druid_remove;
+	container_class->child_type = gnome_druid_child_type;
 }
 
 static void
@@ -164,8 +179,17 @@ gnome_druid_destroy (GtkObject *object)
 	g_return_if_fail (GNOME_IS_DRUID (object));
 
 	druid = GNOME_DRUID (object);
+        GTK_OBJECT_CLASS(parent_class)->destroy(object);
+
+	gtk_widget_destroy (druid->back);
+	gtk_widget_destroy (druid->next);
+	gtk_widget_destroy (druid->cancel);
+	gtk_widget_destroy (druid->finish);
 	g_list_free (druid->children);
+        druid->children = NULL;
+
 }
+
 static void
 gnome_druid_size_request (GtkWidget *widget,
 			  GtkRequisition *requisition)
@@ -279,8 +303,8 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	gtk_widget_size_allocate (druid->back, &child_allocation);
 
 	/* Put up the GnomeDruidPage */
-	child_allocation.x = GNOME_PAD_SMALL;
-	child_allocation.y = GNOME_PAD_SMALL;
+	child_allocation.x = allocation->x + GNOME_PAD_SMALL;
+	child_allocation.y = allocation->y + GNOME_PAD_SMALL;
 	child_allocation.width =
 		((allocation->width - 2* GNOME_PAD_SMALL) > 0) ?
 		(allocation->width - 2* GNOME_PAD_SMALL):0;
@@ -292,6 +316,12 @@ gnome_druid_size_allocate (GtkWidget *widget,
 			gtk_widget_size_allocate (GTK_WIDGET (list->data), &child_allocation);
 		}
 	}
+}
+
+static GtkType
+gnome_druid_child_type (GtkContainer *container)
+{
+	return gnome_druid_page_get_type ();
 }
 
 static void
@@ -351,6 +381,32 @@ gnome_druid_add (GtkContainer *widget,
 
 	gnome_druid_append_page (GNOME_DRUID (widget), GNOME_DRUID_PAGE (page));
 }
+static void
+gnome_druid_remove (GtkContainer *widget,
+		    GtkWidget *child)
+{
+	GnomeDruid *druid;
+	GList *list;
+	
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GNOME_IS_DRUID (widget));
+	g_return_if_fail (child != NULL);
+
+	druid = GNOME_DRUID (widget);
+
+	list = g_list_find (druid->children, child);
+	/* Is it a page? */ 
+	if (list != NULL) {
+		/* If we are mapped and visible, we want to deal with changing the page. */
+		if ((GTK_WIDGET_MAPPED (GTK_WIDGET (widget))) &&
+		    (list->data == (gpointer) druid->current) &&
+		    (list->next != NULL)) {
+			gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->next->data));
+		}
+	}
+	druid->children = g_list_remove (druid->children, child);
+	gtk_widget_unparent (child);
+}
 
 static void
 gnome_druid_forall (GtkContainer *container,
@@ -382,6 +438,97 @@ gnome_druid_forall (GtkContainer *container,
 		(* callback) (druid->finish, callback_data);
 	}
 }
+static void
+gnome_druid_draw (GtkWidget    *widget,
+		  GdkRectangle *area)
+{
+	GnomeDruid *druid;
+	GdkRectangle child_area;
+	GtkWidget *child;
+	GList *children;
+  
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GNOME_IS_DRUID (widget));
+
+	if (GTK_WIDGET_DRAWABLE (widget)) {
+		druid = GNOME_DRUID (widget);
+		children = druid->children;
+
+		while (children) {
+			child = GTK_WIDGET (children->data);
+			children = children->next;
+	     
+			if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area)) {
+				gtk_widget_draw (child, &child_area);
+			}
+		}
+		child = druid->back;
+		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
+			gtk_widget_draw (child, &child_area);
+		child = druid->next;
+		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
+			gtk_widget_draw (child, &child_area);
+		child = druid->cancel;
+		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
+			gtk_widget_draw (child, &child_area);
+		child = druid->finish;
+		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
+			gtk_widget_draw (child, &child_area);
+	}
+}
+
+static gint
+gnome_druid_expose (GtkWidget      *widget,
+		    GdkEventExpose *event)
+{
+	GnomeDruid *druid;
+	GtkWidget *child;
+	GdkEventExpose child_event;
+	GList *children;
+
+	g_return_val_if_fail (widget != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_DRUID (widget), FALSE);
+	g_return_val_if_fail (event != NULL, FALSE);
+
+	if (GTK_WIDGET_DRAWABLE (widget)) {
+		druid = GNOME_DRUID (widget);
+		child_event = *event;
+		children = druid->children;
+
+		while (children) {
+			child = GTK_WIDGET (children->data);
+			children = children->next;
+
+			if (GTK_WIDGET_DRAWABLE (child) &&
+			    GTK_WIDGET_NO_WINDOW (child) &&
+			    gtk_widget_intersect (child, &event->area, &child_event.area)) {
+				gtk_widget_event (child, (GdkEvent*) &child_event);
+			}
+		}
+		child = druid->back;
+		if (GTK_WIDGET_DRAWABLE (child) &&
+		    GTK_WIDGET_NO_WINDOW (child) &&
+		    gtk_widget_intersect (child, &event->area, &child_event.area))
+			gtk_widget_event (child, (GdkEvent*) &child_event);
+		child = druid->next;
+		if (GTK_WIDGET_DRAWABLE (child) &&
+		    GTK_WIDGET_NO_WINDOW (child) &&
+		    gtk_widget_intersect (child, &event->area, &child_event.area))
+			gtk_widget_event (child, (GdkEvent*) &child_event);
+		child = druid->cancel;
+		if (GTK_WIDGET_DRAWABLE (child) &&
+		    GTK_WIDGET_NO_WINDOW (child) &&
+		    gtk_widget_intersect (child, &event->area, &child_event.area))
+			gtk_widget_event (child, (GdkEvent*) &child_event);
+		child = druid->finish;
+		if (GTK_WIDGET_DRAWABLE (child) &&
+		    GTK_WIDGET_NO_WINDOW (child) &&
+		    gtk_widget_intersect (child, &event->area, &child_event.area))
+			gtk_widget_event (child, (GdkEvent*) &child_event);
+	}
+	return FALSE;
+}
+
 static void
 gnome_druid_back_callback (GtkWidget *button, GnomeDruid *druid)
 {
@@ -541,6 +688,19 @@ gnome_druid_insert_page (GnomeDruid *druid,
 		new_el->data = (gpointer) page;
 	}
 	gtk_widget_set_parent (GTK_WIDGET (page), GTK_WIDGET (druid));
+
+	if (GTK_WIDGET_REALIZED (GTK_WIDGET (druid)))
+		gtk_widget_realize (GTK_WIDGET (page));
+
+	if (GTK_WIDGET_VISIBLE (GTK_WIDGET (druid)) && GTK_WIDGET_VISIBLE (GTK_WIDGET (page))) {
+		if (GTK_WIDGET_MAPPED (GTK_WIDGET (druid)))
+			gtk_widget_map (GTK_WIDGET (page));
+		gtk_widget_queue_resize (GTK_WIDGET (page));
+	}
+	
+	/* if it's the first page, we want to bring it to the foreground. */
+	if (druid->children->data == (gpointer) page)
+		gnome_druid_set_page (druid, page);
 }
 
 /**

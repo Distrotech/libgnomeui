@@ -601,8 +601,8 @@ gnome_app_request_string (GnomeApp * app, const gchar * prompt,
     return NULL;
   }
   else {
-    return gnome_request_string_dialog_parented(prompt, callback, data,
-						GTK_WINDOW(app));   
+    return gnome_request_dialog(FALSE, prompt, NULL, 0,
+				callback, data, GTK_WINDOW(app));   
   }
 }
 
@@ -633,8 +633,8 @@ gnome_app_request_password (GnomeApp * app, const gchar * prompt,
 
   /* FIXME implement for AppBar */
 
-  return gnome_request_password_dialog_parented(prompt, callback, data,
-						GTK_WINDOW(app));
+  return gnome_request_dialog(TRUE, prompt, NULL, 0,
+			      callback, data, GTK_WINDOW(app));   
 }
 
 /* ================================================== */

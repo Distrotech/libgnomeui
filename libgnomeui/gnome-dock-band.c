@@ -43,39 +43,39 @@
 #else
 #define DEBUG(x)
 #endif
-     
+
 
 
 static void     gnome_dock_band_class_init    (GnomeDockBandClass *class);
-                                              
+
 static void     gnome_dock_band_init          (GnomeDockBand *app);
-                                              
+
 static void     gnome_dock_band_size_request  (GtkWidget *widget,
                                                GtkRequisition *requisition);
-                                              
+
 static void     gnome_dock_band_size_allocate (GtkWidget *widget,
                                                GtkAllocation *allocation);
-                                              
+
 static void     gnome_dock_band_map           (GtkWidget *widget);
 static void     gnome_dock_band_unmap         (GtkWidget *widget);
-                                              
+
 static void     gnome_dock_band_draw          (GtkWidget *widget,
                                                GdkRectangle *area);
-                                              
+
 static gint     gnome_dock_band_expose        (GtkWidget *widget,
                                                GdkEventExpose *event);
-                                              
+
 static void     gnome_dock_band_add           (GtkContainer *container,
                                                GtkWidget *child);
-                                              
+
 static void     gnome_dock_band_remove        (GtkContainer *container,
                                                GtkWidget *widget);
-                                              
+
 static void     gnome_dock_band_forall        (GtkContainer *container,
                                                gboolean include_internals,
                                                GtkCallback callback,
                                                gpointer callback_data);
-                                              
+
 static void     size_allocate_child           (GnomeDockBand *band,
                                                GnomeDockBandChild *child,
                                                guint space,
@@ -201,7 +201,7 @@ gnome_dock_band_size_request (GtkWidget *widget,
 
   band->max_space_requisition = 0;
   band->tot_offsets = 0;
-  
+
   requisition->width = 0;
   requisition->height = 0;
 
@@ -307,25 +307,29 @@ size_allocate_small (GnomeDockBand *band,
       guint child_requested_space;
 
       child = lp->data;
-      child->real_offset = 0;
 
-      if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
-        child_requested_space = child->widget->requisition.width;
-      else
-        child_requested_space = child->widget->requisition.height;
-
-      if (space < child->max_space_requisition
-          || (space - child->max_space_requisition
-              < requested_space - child_requested_space))
-        break;
-
-      space -= child->max_space_requisition;
-      requested_space -= child_requested_space;
-      max_space_requisition -= child->max_space_requisition;
-
-      size_allocate_child (band, child,
-                           child->max_space_requisition,
-                           &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = 0;
+	  
+	  if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
+	    child_requested_space = child->widget->requisition.width;
+	  else
+	    child_requested_space = child->widget->requisition.height;
+	  
+	  if (space < child->max_space_requisition
+	      || (space - child->max_space_requisition
+		  < requested_space - child_requested_space))
+	    break;
+	  
+	  space -= child->max_space_requisition;
+	  requested_space -= child_requested_space;
+	  max_space_requisition -= child->max_space_requisition;
+	  
+	  size_allocate_child (band, child,
+			       child->max_space_requisition,
+			       &child_allocation);
+	}
     }
 
   if (lp != NULL)
@@ -334,20 +338,24 @@ size_allocate_small (GnomeDockBand *band,
       guint child_requested_space, child_space;
 
       child = lp->data;
-      child->real_offset = 0;
 
-      if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
-        child_requested_space = child->widget->requisition.width;
-      else
-        child_requested_space = child->widget->requisition.height;
-
-      requested_space -= child_requested_space;
-      child_space = space - requested_space;
-      space -= child_space;
-
-      size_allocate_child (band, child,
-                           child_space,
-                           &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = 0;
+	  
+	  if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
+	    child_requested_space = child->widget->requisition.width;
+	  else
+	    child_requested_space = child->widget->requisition.height;
+	  
+	  requested_space -= child_requested_space;
+	  child_space = space - requested_space;
+	  space -= child_space;
+	  
+	  size_allocate_child (band, child,
+			       child_space,
+			       &child_allocation);
+	}
 
       lp = lp->next;
     }
@@ -357,16 +365,21 @@ size_allocate_small (GnomeDockBand *band,
       GnomeDockBandChild *child;
 
       child = lp->data;
-      child->real_offset = 0;
 
-      if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
-        size_allocate_child (band, child,
-                             child->widget->requisition.width,
-                             &child_allocation);
-      else
-        size_allocate_child (band, child,
-                             child->widget->requisition.height,
-                             &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = 0;
+	  child->real_offset = 0;
+
+	  if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
+	    size_allocate_child (band, child,
+				 child->widget->requisition.width,
+				 &child_allocation);
+	  else
+	    size_allocate_child (band, child,
+				 child->widget->requisition.height,
+				 &child_allocation);
+	}
     }
 }
 
@@ -397,11 +410,15 @@ size_allocate_medium (GnomeDockBand *band,
       GnomeDockBandChild *child;
 
       child = lp->data;
-      child->real_offset = (guint) ((float) child->offset * factor + .5);
 
-      size_allocate_child (band, child,
-                           child->max_space_requisition,
-                           &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = (guint) ((float) child->offset * factor + .5);
+	  
+	  size_allocate_child (band, child,
+			       child->max_space_requisition,
+			       &child_allocation);
+	}
     }
 }
 
@@ -426,11 +443,15 @@ size_allocate_large (GnomeDockBand *band,
       GnomeDockBandChild *child;
 
       child = lp->data;
-      child->real_offset = child->offset;
 
-      size_allocate_child (band, child,
-                           child->max_space_requisition,
-                           &child_allocation);
+      if (GTK_WIDGET_VISIBLE (child->widget))
+        {
+	  child->real_offset = child->offset;
+
+	  size_allocate_child (band, child,
+			       child->max_space_requisition,
+			       &child_allocation);
+	}
     }
 }
 
@@ -452,7 +473,7 @@ gnome_dock_band_size_allocate (GtkWidget *widget,
       GnomeDockBandChild *c;
 
       c = (GnomeDockBandChild *) band->children->data;
-      if (GNOME_IS_DOCK_ITEM (c->widget))
+      if (GNOME_IS_DOCK_ITEM (c->widget) && GTK_WIDGET_VISIBLE (c->widget))
         {
           GnomeDockItemBehavior behavior;
           GnomeDockItem *item;
@@ -619,7 +640,7 @@ gnome_dock_band_remove (GtkContainer *container, GtkWidget *widget)
         band->floating_child = NULL;
 
       was_visible = GTK_WIDGET_VISIBLE (widget);
-      widget->parent = NULL;    /* FIXME? */
+      gtk_widget_unparent (widget);
 
       band->children = g_list_remove_link (band->children, child);
       g_free (child->data);
@@ -1385,7 +1406,7 @@ dock_empty_right (GnomeDockBand *band,
       else
         {
           attempt_move_backward (band, where, excess - new_offset);
-          new_offset = 0; 
+          new_offset = 0;
         }
     }
 
@@ -1414,9 +1435,9 @@ dock_empty_right (GnomeDockBand *band,
 
 /**
  * gnome_dock_band_new:
- * 
+ *
  * Description: Create a new GnomeDockBand widget.
- * 
+ *
  * Returns: The new GnomeDockBand widget.
  **/
 GtkWidget *
@@ -1463,7 +1484,7 @@ gnome_dock_band_get_type (void)
  * gnome_dock_band_set_orientation:
  * @band: A GnomeDockBand widget
  * @orientation: New orientation for @band
- * 
+ *
  * Description: Set the orientation for @band.
  **/
 void
@@ -1479,9 +1500,9 @@ gnome_dock_band_set_orientation (GnomeDockBand *band,
 /**
  * gnome_dock_band_get_orientation:
  * @band: A GnomeDockBand widget
- * 
+ *
  * Description: Retrieve the orientation of the specified @band.
- * 
+ *
  * Returns: The orientation of @band.
  **/
 GtkOrientation
@@ -1496,11 +1517,11 @@ gnome_dock_band_get_orientation (GnomeDockBand *band)
  * @child: The widget to be added to @band
  * @offset: Offset from the previous item
  * @position: Position within the @band
- * 
+ *
  * Description: Add @child to @band at the specified @position, with
  * the specified @offset from the previous item (or from the beginning
  * of the band, if this is the first item).
- * 
+ *
  * Returns: %TRUE if successful, %FALSE if the operation fails.
  **/
 gboolean
@@ -1544,23 +1565,15 @@ gnome_dock_band_insert (GnomeDockBand *band,
 
   gtk_widget_set_parent (child, GTK_WIDGET (band));
 
-  if (GTK_WIDGET_VISIBLE (GTK_WIDGET (band)))
-    {
-      if (GTK_WIDGET_REALIZED (GTK_WIDGET (band))
-          && !GTK_WIDGET_REALIZED (child))
-        gtk_widget_realize (child);
+  if (GTK_WIDGET_REALIZED (child->parent))
+    gtk_widget_realize (child);
 
-      if (GTK_WIDGET_MAPPED (GTK_WIDGET (band))
-          && !GTK_WIDGET_MAPPED (child)
-          && GTK_WIDGET_VISIBLE (child)) /* as stated by `widget_system.txt' */
-        gtk_widget_map (child);
-    }
-
-  if (GTK_WIDGET_VISIBLE (band))
+  if (GTK_WIDGET_VISIBLE (child->parent) && GTK_WIDGET_VISIBLE (child))
     {
-      /* gtk_widget_queue_resize (GTK_WIDGET (band)); */
-      if (GTK_WIDGET_VISIBLE (child))
-        gtk_widget_queue_resize (GTK_WIDGET (child));
+      if (GTK_WIDGET_MAPPED (child->parent))
+	gtk_widget_map (child);
+
+      gtk_widget_queue_resize (child);
     }
 
   band->num_children++;
@@ -1598,10 +1611,10 @@ gnome_dock_band_move_child (GnomeDockBand *band,
  * @band: A GnomeDockBand widget
  * @child: A widget to be added to @band
  * @offset: Offset (in pixels) from the beginning of the band
- * 
+ *
  * Description: Add @child to @band with the specified @offset as the
  * first element.
- * 
+ *
  * Returns: %TRUE if successful, %FALSE if the operation fails.
  **/
 gboolean
@@ -1617,10 +1630,10 @@ gnome_dock_band_prepend (GnomeDockBand *band,
  * @band: A GnomeDockBand widget
  * @child: A widget to be added to @band
  * @offset: Offset (in pixels) from the last item of the band
- * 
+ *
  * Description: Add @child to @band with the specified @offset as the
  * last element.
- * 
+ *
  * Returns: %TRUE if successful, %FALSE if the operation fails.
  **/
 gboolean
@@ -1636,7 +1649,7 @@ gnome_dock_band_append (GnomeDockBand *band,
  * @band: A GnomeDockBand widget
  * @child: Child of @band whose offset must be changed
  * @offset: New offset value for @child
- * 
+ *
  * Description: Set the offset for the specified @child of @band.
  **/
 void
@@ -1661,9 +1674,9 @@ gnome_dock_band_set_child_offset (GnomeDockBand *band,
  * gnome_dock_band_get_child_offset:
  * @band: A GnomeDockBand widget
  * @child: Child of @band whose offset must be retrieved
- * 
+ *
  * Description: Retrieve the offset of @child in @band.
- * 
+ *
  * Returns: The offset of @child.
  **/
 guint
@@ -1687,9 +1700,9 @@ gnome_dock_band_get_child_offset (GnomeDockBand *band,
 /**
  * gnome_dock_band_get_num_children:
  * @band: A GnomeDockBand widget
- * 
+ *
  * Description: Retrieve the number of children in @band.
- * 
+ *
  * Returns: The number of children in @band.
  **/
 guint
@@ -1835,7 +1848,7 @@ gnome_dock_band_drag_end (GnomeDockBand *band, GnomeDockItem *item)
   if (band->floating_child != NULL)
     {
       GnomeDockBandChild *f;
-      
+
       /* Minimal sanity check.  */
       f = (GnomeDockBandChild *) band->floating_child->data;
       g_return_if_fail (f->widget == GTK_WIDGET (item));
@@ -1858,10 +1871,10 @@ gnome_dock_band_drag_end (GnomeDockBand *band, GnomeDockItem *item)
  * the named child
  * @offset_return:  Pointer to a variable holding the offset of the
  * named child
- * 
+ *
  * Description: Retrieve a named item from @band, and return its
  * position and offset in *@position_return and @offset_return.
- * 
+ *
  * Return value: The child whose name is @name, or %NULL if no child
  * of @band has such name.
  **/

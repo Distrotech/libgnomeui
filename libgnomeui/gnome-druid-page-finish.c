@@ -17,6 +17,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <config.h>
+
 #include <gnome.h>
 #include "gnome-druid-page-finish.h"
 #include "gnome-druid.h"
@@ -38,6 +40,7 @@ static GnomeDruidPageClass *parent_class = NULL;
 #define LOGO_WIDTH 50.0
 #define DRUID_PAGE_HEIGHT 318
 #define DRUID_PAGE_WIDTH 516
+#define DRUID_PAGE_LEFT_WIDTH 100.0
 
 GtkType
 gnome_druid_page_finish_get_type (void)
@@ -77,7 +80,6 @@ gnome_druid_page_finish_class_init (GnomeDruidPageFinishClass *klass)
 	parent_class = gtk_type_class (gnome_druid_page_get_type ());
 }
 
-
 static void
 gnome_druid_page_finish_init (GnomeDruidPageFinish *druid_page_finish)
 {
@@ -107,11 +109,25 @@ gnome_druid_page_finish_init (GnomeDruidPageFinish *druid_page_finish)
 	gtk_widget_show (druid_page_finish->canvas);
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (druid_page_finish->canvas), 0.0, 0.0, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
 	gtk_container_add (GTK_CONTAINER (druid_page_finish), druid_page_finish->canvas);
-
 }
+
 static void
 gnome_druid_page_finish_configure_size (GnomeDruidPageFinish *druid_page_finish, gint width, gint height)
 {
+	gfloat watermark_width = DRUID_PAGE_LEFT_WIDTH;
+	gfloat watermark_height = (gfloat) height - LOGO_WIDTH + GNOME_PAD * 2.0;
+	gfloat watermark_ypos = LOGO_WIDTH + GNOME_PAD * 2.0;
+
+	if (druid_page_finish->watermark_image) {
+		watermark_width = druid_page_finish->watermark_image->rgb_width;
+		watermark_height = druid_page_finish->watermark_image->rgb_height;
+		watermark_ypos = (gfloat) height - watermark_height;
+		if (watermark_width < 1)
+			watermark_width = 1.0;
+		if (watermark_height < 1)
+			watermark_height = 1.0;
+	}
+
 	gnome_canvas_item_set (druid_page_finish->background_item,
 			       "x1", 0.0,
 			       "y1", 0.0,
@@ -119,7 +135,7 @@ gnome_druid_page_finish_configure_size (GnomeDruidPageFinish *druid_page_finish,
 			       "y2", (gfloat) height,
 			       "width_units", 1.0, NULL);
 	gnome_canvas_item_set (druid_page_finish->textbox_item,
-			       "x1", (gfloat) width * 0.3,
+			       "x1", (gfloat) watermark_width,
 			       "y1", (gfloat) LOGO_WIDTH + GNOME_PAD * 2.0,
 			       "x2", (gfloat) width,
 			       "y2", (gfloat) height,
@@ -138,10 +154,10 @@ gnome_druid_page_finish_configure_size (GnomeDruidPageFinish *druid_page_finish,
 			       "height", (gfloat) LOGO_WIDTH, NULL);
 	gnome_canvas_item_set (druid_page_finish->watermark_item,
 			       "x", 0.0,
-			       "y", LOGO_WIDTH + GNOME_PAD * 2.0,
+			       "y", watermark_ypos,
 			       "anchor", GTK_ANCHOR_NORTH_WEST,
-			       "width", width * 0.3,
-			       "height", (gfloat) height - LOGO_WIDTH + GNOME_PAD * 2.0,
+			       "width", watermark_width,
+			       "height", watermark_height,
 			       NULL);
 	gnome_canvas_item_set (druid_page_finish->title_item,
 			       "x", 15.0, 
@@ -149,7 +165,7 @@ gnome_druid_page_finish_configure_size (GnomeDruidPageFinish *druid_page_finish,
 			       "anchor", GTK_ANCHOR_WEST,
 			       NULL);
 	gnome_canvas_item_set (druid_page_finish->text_item,
-			       "x", width * 0.65,
+			       "x", ((width - watermark_width) * 0.5) + watermark_width,
 			       "y", LOGO_WIDTH + GNOME_PAD * 2.0 + (height - (LOGO_WIDTH + GNOME_PAD * 2.0))/ 2.0,
 			       "anchor", GTK_ANCHOR_CENTER,
 			       NULL);
@@ -258,7 +274,7 @@ gnome_druid_page_finish_realize (GtkWidget *widget)
 GtkWidget *
 gnome_druid_page_finish_new (void)
 {
-	GtkWidget *retval =  GTK_WIDGET (gtk_type_new (gnome_druid_page_finish_get_type ()));
+	GtkWidget *retval = GTK_WIDGET (gtk_type_new (gnome_druid_page_finish_get_type ()));
 	GNOME_DRUID_PAGE_FINISH (retval)->title = g_strdup ("");
 	GNOME_DRUID_PAGE_FINISH (retval)->text = g_strdup ("");
 	GNOME_DRUID_PAGE_FINISH (retval)->logo_image = NULL;
@@ -267,9 +283,9 @@ gnome_druid_page_finish_new (void)
 	return retval;
 }
 GtkWidget *
-gnome_druid_page_finish_new_with_vals (gchar *title, gchar* text, GdkImlibImage *logo, GdkImlibImage *watermark)
+gnome_druid_page_finish_new_with_vals (const gchar *title, const gchar* text, GdkImlibImage *logo, GdkImlibImage *watermark)
 {
-	GtkWidget *retval =  gnome_druid_page_finish_new ();
+	GtkWidget *retval = GTK_WIDGET (gtk_type_new (gnome_druid_page_finish_get_type ()));
 	GNOME_DRUID_PAGE_FINISH (retval)->title = g_strdup (title);
 	GNOME_DRUID_PAGE_FINISH (retval)->text = g_strdup (text);
 	GNOME_DRUID_PAGE_FINISH (retval)->logo_image = logo;
@@ -404,7 +420,7 @@ gnome_druid_page_finish_set_text_color    (GnomeDruidPageFinish *druid_page_fini
 }
 void
 gnome_druid_page_finish_set_text          (GnomeDruidPageFinish *druid_page_finish,
-					  gchar *text)
+					  const gchar *text)
 {
 	g_return_if_fail (druid_page_finish != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_FINISH (druid_page_finish));
@@ -417,7 +433,7 @@ gnome_druid_page_finish_set_text          (GnomeDruidPageFinish *druid_page_fini
 }
 void
 gnome_druid_page_finish_set_title         (GnomeDruidPageFinish *druid_page_finish,
-					  gchar *title)
+					  const gchar *title)
 {
 	g_return_if_fail (druid_page_finish != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_FINISH (druid_page_finish));
@@ -446,7 +462,7 @@ gnome_druid_page_finish_set_watermark     (GnomeDruidPageFinish *druid_page_fini
 	g_return_if_fail (druid_page_finish != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_FINISH (druid_page_finish));
 
-	druid_page_finish->logo_image = watermark;
+	druid_page_finish->watermark_image = watermark;
 	gnome_canvas_item_set (druid_page_finish->watermark_item,
 			       "image", druid_page_finish->watermark_image, NULL);
 }

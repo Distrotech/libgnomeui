@@ -72,9 +72,11 @@ gint	  gnome_property_box_append_page (GnomePropertyBox *property_box,
 					  GtkWidget *child,
 					  GtkWidget *tab_label);
 
+#ifndef GNOME_EXCLUDE_DEPRECATED
 /* Deprecated, use set_modified */
 void      gnome_property_box_set_state   (GnomePropertyBox *property_box,
 					  gboolean state);
+#endif
 
 END_GNOME_DECLS
 

@@ -19,6 +19,7 @@
 */
 
 #include <config.h>
+#include <string.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtknotebook.h>
 #include "gnome-properties.h"

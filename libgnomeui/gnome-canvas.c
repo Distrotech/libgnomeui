@@ -675,6 +675,7 @@ gnome_canvas_item_affine_relative (GnomeCanvasItem *item, const double affine[6]
 			if (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL) {
 				art_affine_multiply (item->xform, item->xform, affine);
 			} else {
+				item->object.flags |= GNOME_CANVAS_ITEM_AFFINE_FULL;
 				new_affine = g_new (double, 6);
 				for (i = 0; i < 4; i++)
 					new_affine[i] = affine[i];
@@ -1355,9 +1356,10 @@ void
 gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
 	double tx1, ty1, tx2, ty2;
-	double mx1, my1, mx2, my2;
 	ArtPoint p1, p2, p3, p4;
 	ArtPoint q1, q2, q3, q4;
+	double min_x1, min_y1, min_x2, min_y2;
+	double max_x1, max_y1, max_x2, max_y2;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
@@ -1383,26 +1385,42 @@ gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, dou
 		art_affine_point (&q3, &p3, item->xform);
 		art_affine_point (&q4, &p4, item->xform);
 
-		mx1 = MIN (q1.x, q2.x);
-		my1 = MIN (q1.y, q2.y);
-		mx2 = MAX (q3.x, q4.x);
-		my2 = MAX (q3.y, q4.y);
-
-		if (mx1 < mx2) {
-			tx1 = mx1;
-			tx2 = mx2;
+		if (q1.x < q2.x) {
+			min_x1 = q1.x;
+			max_x1 = q2.x;
 		} else {
-			tx1 = mx2;
-			tx2 = mx1;
+			min_x1 = q2.x;
+			max_x1 = q1.x;
 		}
 
-		if (my1 < my2) {
-			ty1 = my1;
-			ty2 = my2;
+		if (q1.y < q2.y) {
+			min_y1 = q1.y;
+			max_y1 = q2.y;
 		} else {
-			ty1 = my2;
-			ty2 = my1;
+			min_y1 = q2.y;
+			max_y1 = q1.y;
 		}
+
+		if (q3.x < q4.x) {
+			min_x2 = q3.x;
+			max_x2 = q4.x;
+		} else {
+			min_x2 = q4.x;
+			max_x2 = q3.x;
+		}
+
+		if (q3.y < q4.y) {
+			min_y2 = q3.y;
+			max_y2 = q4.y;
+		} else {
+			min_y2 = q4.y;
+			max_y2 = q3.y;
+		}
+
+		tx1 = MIN (min_x1, min_x2);
+		ty1 = MIN (min_y1, min_y2);
+		tx2 = MAX (max_x1, max_x2);
+		ty2 = MAX (max_y1, max_y2);
 	} else if (item->xform) {
 		tx1 += item->xform[0];
 		ty1 += item->xform[1];
@@ -2267,6 +2285,10 @@ gnome_canvas_init (GnomeCanvas *canvas)
 
 	canvas->pixels_per_unit = 1.0;
 
+	canvas->pick_event.type = GDK_LEAVE_NOTIFY;
+	canvas->pick_event.crossing.x = 0;
+	canvas->pick_event.crossing.y = 0;
+
 	gtk_layout_set_hadjustment (GTK_LAYOUT (canvas), NULL);
 	gtk_layout_set_vadjustment (GTK_LAYOUT (canvas), NULL);
 
@@ -2310,6 +2332,8 @@ shutdown_transients (GnomeCanvas *canvas)
 	 */
 	if (canvas->need_redraw) {
 		canvas->need_redraw = FALSE;
+		art_uta_free (canvas->redraw_area);
+		canvas->redraw_area = NULL;
 		canvas->redraw_x1 = 0;
 		canvas->redraw_y1 = 0;
 		canvas->redraw_x2 = 0;
@@ -2378,8 +2402,15 @@ gnome_canvas_new_aa (void)
 {
 	GnomeCanvas *canvas;
 
-	g_warning ("The antialiased canvas is buggy.  Please do not use it unless "
-		   "you know what you are doing.");
+	{
+		static int warning_shown = 0;
+
+		if (!warning_shown){
+			g_message ("The antialiased canvas is buggy.  Please do not use it unless "
+				   "you know what you are doing.");
+			warning_shown = 1;
+		}
+	}
 
 	canvas = gtk_type_new (gnome_canvas_get_type ());
 	canvas->aa = 1;
@@ -2520,7 +2551,7 @@ gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 static void
 scroll_to (GnomeCanvas *canvas, int cx, int cy)
 {
-	int scroll_maxx, scroll_maxy;
+	int scroll_width, scroll_height;
 	int right_limit, bottom_limit;
 	int old_zoom_xofs, old_zoom_yofs;
 	int changed, changed_x, changed_y;
@@ -2529,18 +2560,25 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 	canvas_width = GTK_WIDGET (canvas)->allocation.width;
 	canvas_height = GTK_WIDGET (canvas)->allocation.height;
 
-	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2, &scroll_maxx, &scroll_maxy);
+	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2,
+			  &scroll_width, &scroll_height);
 
-	right_limit = scroll_maxx - canvas_width;
-	bottom_limit = scroll_maxy - canvas_height;
+	/* The values computed indicate the maximum pixel offset, so we add one
+	 * to get the width and height.
+	 */
+	scroll_width++;
+	scroll_height++;
+
+	right_limit = scroll_width - canvas_width;
+	bottom_limit = scroll_height - canvas_height;
 
 	old_zoom_xofs = canvas->zoom_xofs;
 	old_zoom_yofs = canvas->zoom_yofs;
 
 	if (right_limit < 0) {
 		cx = 0;
-		canvas->zoom_xofs = (canvas_width - scroll_maxx) / 2;
-		scroll_maxx = canvas_width;
+		canvas->zoom_xofs = (canvas_width - scroll_width) / 2;
+		scroll_width = canvas_width;
 	} else if (cx < 0) {
 		cx = 0;
 		canvas->zoom_xofs = 0;
@@ -2552,8 +2590,8 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 
 	if (bottom_limit < 0) {
 		cy = 0;
-		canvas->zoom_yofs = (canvas_height - scroll_maxy) / 2;
-		scroll_maxy = canvas_height;
+		canvas->zoom_yofs = (canvas_height - scroll_height) / 2;
+		scroll_height = canvas_height;
 	} else if (cy < 0) {
 		cy = 0;
 		canvas->zoom_yofs = 0;
@@ -2573,9 +2611,9 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 	if (changed)
 		gtk_layout_freeze (GTK_LAYOUT (canvas));
 
-	if ((scroll_maxx != (int) canvas->layout.width)
-	    || (scroll_maxy != (int) canvas->layout.height))
-		gtk_layout_set_size (GTK_LAYOUT (canvas), scroll_maxx, scroll_maxy);
+	if ((scroll_width != (int) canvas->layout.width)
+	    || (scroll_height != (int) canvas->layout.height))
+		gtk_layout_set_size (GTK_LAYOUT (canvas), scroll_width, scroll_height);
 
 	if (changed_x) {
 		canvas->layout.hadjustment->value = cx;
@@ -2998,6 +3036,7 @@ gnome_canvas_expose (GtkWidget *widget, GdkEventExpose *event)
 
 	uta = art_uta_from_irect (&rect);
 	gnome_canvas_request_redraw_uta (canvas, uta);
+	gnome_canvas_update_now (canvas);
 
 	return FALSE;
 }
@@ -3241,16 +3280,9 @@ paint (GnomeCanvas *canvas)
 	canvas->redraw_y2 = 0;
 }
 
-/* Idle handler for the canvas.  It deals with pending updates and redraws. */
-static gint
-idle_handler (gpointer data)
+static void
+do_update (GnomeCanvas *canvas)
 {
-	GnomeCanvas *canvas;
-
-	GDK_THREADS_ENTER ();
-
-	canvas = GNOME_CANVAS (data);
-
 	/* Cause the update if necessary */
 
 	if (canvas->need_update) {
@@ -3272,6 +3304,18 @@ idle_handler (gpointer data)
 
 	if (GTK_WIDGET_DRAWABLE (canvas))
 		paint (canvas);
+}
+
+/* Idle handler for the canvas.  It deals with pending updates and redraws. */
+static gint
+idle_handler (gpointer data)
+{
+	GnomeCanvas *canvas;
+
+	GDK_THREADS_ENTER ();
+
+	canvas = GNOME_CANVAS (data);
+	do_update (canvas);
 
 	/* Reset idle id */
 	canvas->idle_id = 0;
@@ -3435,6 +3479,21 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 
 	gtk_layout_freeze (GTK_LAYOUT (canvas));
 
+	/* Clear the redraw area to avoid creating enormous microtile unions.
+	 * The new area (visible area) will be re-queued when we thaw the
+	 * layout.
+	 */
+
+	if (canvas->need_redraw) {
+		canvas->need_redraw = FALSE;
+		art_uta_free (canvas->redraw_area);
+		canvas->redraw_area = NULL;
+		canvas->redraw_x1 = 0;
+		canvas->redraw_y1 = 0;
+		canvas->redraw_x2 = 0;
+		canvas->redraw_y2 = 0;
+	}
+
 	scroll_to (canvas, x1, y1);
 
 	canvas->need_repick = TRUE;
@@ -3509,7 +3568,7 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 		return;
 
 	remove_idle (canvas);
-	idle_handler (canvas);
+	do_update (canvas);
 }
 
 /**
@@ -3820,7 +3879,7 @@ gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy,
  * is NULL, then returns FALSE.
  **/
 int
-gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
+gnome_canvas_get_color (GnomeCanvas *canvas, const char *spec, GdkColor *color)
 {
 	gint n;
 

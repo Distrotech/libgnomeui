@@ -108,6 +108,7 @@ gnome_entry_init (GnomeEntry *gentry)
 			    (GtkSignalFunc) entry_activated,
 			    gentry);
 	gtk_combo_disable_activate (GTK_COMBO (gentry));
+        gtk_combo_set_case_sensitive (GTK_COMBO (gentry), TRUE);
 }
 
 
@@ -127,6 +128,10 @@ gnome_entry_new (const gchar *history_id)
 	GnomeEntry *gentry;
 
 	gentry = gtk_type_new (gnome_entry_get_type ());
+
+        /* Keep in sync with gnome_icon_entry_new() - or better yet,
+           add a _construct() method once we are in development
+           branch.  */
 
 	gnome_entry_set_history_id (gentry, history_id);
 	gnome_entry_load_history (gentry);

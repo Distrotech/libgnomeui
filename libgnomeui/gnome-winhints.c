@@ -6,23 +6,23 @@
 #include <gdk/gdkprivate.h>
 #include "gnome-winhints.h"
 
-#define CARD32 long
-
 /* these are the X atoms for the hints we use */
-Atom _XA_WIN_PROTOCOLS;
-Atom _XA_WIN_WORKSPACE;
-Atom _XA_WIN_WORKSPACE_COUNT;
-Atom _XA_WIN_WORKSPACE_NAMES;
-Atom _XA_WIN_STATE;
-Atom _XA_WIN_HINTS;
-Atom _XA_WIN_PROTOCOLS;
-Atom _XA_WIN_LAYER;
-Atom _XA_WIN_ICONS;
-Atom _XA_WIN_CLIENT_LIST;
-Atom _XA_WIN_APP_STATE;
-Atom _XA_WIN_EXPANDED_SIZE;
-Atom _XA_WIN_CLIENT_MOVING;
-Atom _XA_WIN_SUPPORTING_WM_CHECK;
+static Atom _XA_WIN_PROTOCOLS;
+static Atom _XA_WIN_WORKSPACE;
+static Atom _XA_WIN_WORKSPACE_COUNT;
+static Atom _XA_WIN_WORKSPACE_NAMES;
+static Atom _XA_WIN_STATE;
+static Atom _XA_WIN_HINTS;
+static Atom _XA_WIN_PROTOCOLS;
+static Atom _XA_WIN_LAYER;
+static Atom _XA_WIN_ICONS;
+static Atom _XA_WIN_CLIENT_LIST;
+static Atom _XA_WIN_APP_STATE;
+static Atom _XA_WIN_EXPANDED_SIZE;
+static Atom _XA_WIN_CLIENT_MOVING;
+static Atom _XA_WIN_SUPPORTING_WM_CHECK;
+
+static int need_init = TRUE;
 
 void
 gnome_win_hints_init(void)
@@ -44,6 +44,7 @@ gnome_win_hints_init(void)
   _XA_WIN_EXPANDED_SIZE = XInternAtom(GDK_DISPLAY(), XA_WIN_EXPANDED_SIZE, False);
   _XA_WIN_CLIENT_MOVING = XInternAtom(GDK_DISPLAY(), XA_WIN_CLIENT_MOVING, False);
   _XA_WIN_SUPPORTING_WM_CHECK = XInternAtom(GDK_DISPLAY(), XA_WIN_SUPPORTING_WM_CHECK, False);
+  need_init = FALSE;
 }
 
 void
@@ -52,6 +53,9 @@ gnome_win_hints_set_layer(GtkWidget *window, GnomeWinLayer layer)
   XEvent xev;
   GdkWindowPrivate *priv;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;
@@ -64,7 +68,7 @@ gnome_win_hints_set_layer(GtkWidget *window, GnomeWinLayer layer)
       xev.xclient.window = priv->xwindow;
       xev.xclient.message_type = _XA_WIN_LAYER;
       xev.xclient.format = 32;
-      xev.xclient.data.l[0] = (CARD32)layer;
+      xev.xclient.data.l[0] = (long)layer;
       xev.xclient.data.l[1] = gdk_time_get();
       
       XSendEvent(GDK_DISPLAY(), GDK_ROOT_WINDOW(), False,
@@ -92,8 +96,11 @@ gnome_win_hints_get_layer(GtkWidget *window)
   unsigned long count;
   unsigned long bytes_remain;
   unsigned char *prop;
-  CARD32 layer;
+  long layer;
   gint prev_error;
+
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -123,6 +130,9 @@ gnome_win_hints_set_state(GtkWidget *window, GnomeWinState state)
   XEvent xev;
   gint prev_error;
   
+  if (need_init)
+    gnome_win_hints_init();
+  
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   priv = (GdkWindowPrivate*)(GTK_WIDGET(window)->window);
@@ -134,16 +144,16 @@ gnome_win_hints_set_state(GtkWidget *window, GnomeWinState state)
       xev.xclient.window = priv->xwindow;
       xev.xclient.message_type = _XA_WIN_STATE;
       xev.xclient.format = 32;
-      xev.xclient.data.l[0] = (CARD32)(WIN_STATE_STICKY |
-				       WIN_STATE_MAXIMIZED_VERT |
-				       WIN_STATE_MAXIMIZED_HORIZ |
-				       WIN_STATE_HIDDEN |
-				       WIN_STATE_SHADED |
-				       WIN_STATE_HID_WORKSPACE |
-				       WIN_STATE_HID_TRANSIENT |
-				       WIN_STATE_FIXED_POSITION |
-				       WIN_STATE_ARRANGE_IGNORE);
-      xev.xclient.data.l[1] = (CARD32)state;
+      xev.xclient.data.l[0] = (long)(WIN_STATE_STICKY |
+				     WIN_STATE_MAXIMIZED_VERT |
+				     WIN_STATE_MAXIMIZED_HORIZ |
+				     WIN_STATE_HIDDEN |
+				     WIN_STATE_SHADED |
+				     WIN_STATE_HID_WORKSPACE |
+				     WIN_STATE_HID_TRANSIENT |
+				     WIN_STATE_FIXED_POSITION |
+				     WIN_STATE_ARRANGE_IGNORE);
+      xev.xclient.data.l[1] = (long)state;
       xev.xclient.data.l[2] = gdk_time_get();
       
       XSendEvent(GDK_DISPLAY(), GDK_ROOT_WINDOW(), False, 
@@ -153,7 +163,7 @@ gnome_win_hints_set_state(GtkWidget *window, GnomeWinState state)
     {
       long data[1];
       
-      data[0] = (CARD32)state;
+      data[0] = (long)state;
       XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_STATE,
 		      XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data,
 		      1);
@@ -172,6 +182,9 @@ gnome_win_hints_get_state(GtkWidget *window)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -201,6 +214,9 @@ gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
   XEvent xev;
   gint prev_error;
   
+  if (need_init)
+    gnome_win_hints_init();
+  
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   priv = (GdkWindowPrivate*)(GTK_WIDGET(window)->window);
@@ -212,11 +228,11 @@ gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
       xev.xclient.window = priv->xwindow;
       xev.xclient.message_type = _XA_WIN_HINTS;
       xev.xclient.format = 32;
-      xev.xclient.data.l[0] = (CARD32)(WIN_HINTS_SKIP_FOCUS | 
-				       WIN_HINTS_SKIP_WINLIST | 
-				       WIN_HINTS_SKIP_TASKBAR | 
-				       WIN_HINTS_GROUP_TRANSIENT);
-      xev.xclient.data.l[1] = (CARD32)skip;
+      xev.xclient.data.l[0] = (long)(WIN_HINTS_SKIP_FOCUS | 
+				     WIN_HINTS_SKIP_WINLIST | 
+				     WIN_HINTS_SKIP_TASKBAR | 
+				     WIN_HINTS_GROUP_TRANSIENT);
+      xev.xclient.data.l[1] = (long)skip;
       xev.xclient.data.l[2] = gdk_time_get();
       
       XSendEvent(GDK_DISPLAY(), GDK_ROOT_WINDOW(), False, 
@@ -226,7 +242,7 @@ gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
     {
       long data[1];
       
-      data[0] = (CARD32)skip;
+      data[0] = (long)skip;
       XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_HINTS,
 		      XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data,
 		      1);
@@ -245,6 +261,9 @@ gnome_win_hints_get_hints(GtkWidget *window)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -274,11 +293,14 @@ gnome_win_hints_set_workspace(GtkWidget *window, gint workspace)
   long data[1];
   gint prev_error;
   
+  if (need_init)
+    gnome_win_hints_init();
+  
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   priv = (GdkWindowPrivate*)(GTK_WIDGET(window)->window);
 
-  data[0] = (CARD32)workspace;
+  data[0] = (long)workspace;
   XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_WORKSPACE,
 		  XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data,
 		  1);
@@ -296,6 +318,9 @@ gnome_win_hints_get_workspace(GtkWidget *window)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -323,6 +348,9 @@ gnome_win_hints_set_current_workspace(gint workspace)
   XEvent xev;
   gint prev_error;
   
+  if (need_init)
+    gnome_win_hints_init();
+  
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   xev.type = ClientMessage;
@@ -346,8 +374,11 @@ gnome_win_hints_get_current_workspace(void)
   unsigned long count;
   unsigned long bytes_remain;
   unsigned char *prop;
-  CARD32 ws = 0;
+  long ws = 0;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -358,7 +389,7 @@ gnome_win_hints_get_current_workspace(void)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 1)
         {
-	  CARD32 n = *(long *)prop;
+	  long n = *(long *)prop;
 	  
 	  ws = (gint)n;
         }
@@ -376,6 +407,9 @@ gnome_win_hints_get_workspace_names(void)
   char **list;
   int count, i;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -409,6 +443,9 @@ gnome_win_hints_get_workspace_count(void)
   unsigned char *prop;
   gint prev_error;
   
+  if (need_init)
+    gnome_win_hints_init();
+  
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   wscount = 1;
@@ -419,7 +456,7 @@ gnome_win_hints_get_workspace_count(void)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 1)
         {
-	  CARD32 n = *(long *)prop;
+	  long n = *(long *)prop;
 	  wscount = (gint)n;
         }
       XFree(prop);
@@ -435,14 +472,17 @@ gnome_win_hints_set_expanded_size(GtkWidget *window, gint x, gint y, gint width,
   long data[4];
   gint prev_error;
   
+  if (need_init)
+    gnome_win_hints_init();
+  
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   priv = (GdkWindowPrivate*)(GTK_WIDGET(window)->window);
   
-  data[0] = (CARD32)x;
-  data[1] = (CARD32)y;
-  data[2] = (CARD32)width;
-  data[3] = (CARD32)height;
+  data[0] = (long)x;
+  data[1] = (long)y;
+  data[2] = (long)width;
+  data[3] = (long)height;
   XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_APP_STATE,
 		  XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data,
 		  4);
@@ -459,6 +499,9 @@ gnome_win_hints_get_expanded_size(GtkWidget *window, gint *x, gint *y, gint *wid
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -494,11 +537,14 @@ gnome_win_hints_set_app_state(GtkWidget *window,  GnomeWinAppState state)
   long data[1];
   gint prev_error;
   
+  if (need_init)
+    gnome_win_hints_init();
+  
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   priv = (GdkWindowPrivate*)(GTK_WIDGET(window)->window);
   
-  data[0] = (CARD32)state;
+  data[0] = (long)state;
   XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_APP_STATE,
 		  XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data,
 		  1);
@@ -516,6 +562,9 @@ gnome_win_hints_get_app_state(GtkWidget *window)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -544,6 +593,9 @@ gnome_win_hints_set_moving(GtkWidget *window, gboolean moving)
   long data[1];
   gint prev_error;
   
+  if (need_init)
+    gnome_win_hints_init();
+  
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
   priv = (GdkWindowPrivate*)(GTK_WIDGET(window)->window);
@@ -567,6 +619,9 @@ gnome_win_hints_wm_exists(void)
   unsigned long bytes_remain;
   unsigned char *prop, *prop2;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  
@@ -612,6 +667,9 @@ gnome_win_hints_get_client_window_ids(void)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+  
+  if (need_init)
+    gnome_win_hints_init();
   
   prev_error = gdk_error_warnings;
   gdk_error_warnings = 0;  

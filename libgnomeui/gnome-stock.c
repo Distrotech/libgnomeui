@@ -90,7 +90,7 @@ gnome_stock_pixmap_widget_destroy(GtkObject *object)
  * value in prev_state.
  */
 static void
-gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
+gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, GtkStateType prev_state)
 {
 	GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
 	GnomePixmap *pixmap;
@@ -307,12 +307,19 @@ gnome_stock_destroy(GtkObject *object)
 	g_return_if_fail(GNOME_IS_STOCK(object));
 
 	stock = GNOME_STOCK(object);
-	if (stock->regular)
-		gtk_widget_destroy(GTK_WIDGET(stock->regular));
-	if (stock->disabled)
-		gtk_widget_destroy(GTK_WIDGET(stock->disabled));
-	if (stock->focused)
-		gtk_widget_destroy(GTK_WIDGET(stock->focused));
+	stock->current = NULL;
+	if (stock->regular) {
+		gtk_widget_unref (GTK_WIDGET(stock->regular));
+		stock->regular = NULL;
+	}
+	if (stock->disabled) {
+		gtk_widget_unref (GTK_WIDGET(stock->disabled));
+		stock->disabled = NULL;
+	}
+	if (stock->focused) {
+		gtk_widget_unref (GTK_WIDGET(stock->focused));
+		stock->focused = NULL;
+	}
 	if (stock->icon)
 		g_free(stock->icon);
 
@@ -385,7 +392,7 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
  * value in prev_state.
  */
 static void
-gnome_stock_state_changed(GtkWidget *widget, guint prev_state)
+gnome_stock_state_changed(GtkWidget *widget, GtkStateType prev_state)
 {
 	GnomeStock *w = GNOME_STOCK(widget);
 	GnomePixmap *pixmap;
@@ -1369,7 +1376,7 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 	use_label = gnome_config_get_bool("/Gnome/Icons/ButtonUseLabels=true");
 
 	if ((use_label) || (!use_icon) || (!pixmap)) {
-		label = gtk_label_new(text);
+		label = gtk_label_new(_(text));
 		gtk_widget_show(label);
 		gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
 	}

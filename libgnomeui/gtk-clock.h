@@ -11,10 +11,9 @@
 
 #include <time.h>
 #include <gtk/gtk.h>
+#include <libgnome/gnome-defs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_GNOME_DECLS
 
 #define GTK_CLOCK(obj) GTK_CHECK_CAST(obj, gtk_clock_get_type(), GtkClock)
 #define GTK_CLOCK_CLASS(class) GTK_CHECK_CAST_CLASS(class, gtk_clock_get_type(), GtkClockClass)
@@ -47,14 +46,12 @@ struct _GtkClockClass {
 
 guint gtk_clock_get_type(void);
 GtkWidget *gtk_clock_new(GtkClockType type);
-void gtk_clock_set_format(GtkClock *gclock, gchar *fmt);
+void gtk_clock_set_format(GtkClock *gclock, const gchar *fmt);
 void gtk_clock_set_seconds(GtkClock *gclock, time_t seconds);
 void gtk_clock_set_update_interval(GtkClock *gclock, gint seconds);
 void gtk_clock_start(GtkClock *gclock);
 void gtk_clock_stop(GtkClock *gclock);
 
-#ifdef __cplusplus
-}
-#endif
+END_GNOME_DECLS
 
 #endif /* __GTK_CLOCK_H__ */

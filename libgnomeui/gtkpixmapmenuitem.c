@@ -3,6 +3,9 @@
 #include "gtkpixmapmenuitem.h"
 #include <gtk/gtkaccellabel.h>
 #include <gtk/gtksignal.h>
+#include <gtk/gtkmenuitem.h>
+#include <gtk/gtkmenu.h>
+#include <gtk/gtkcontainer.h>
 
 static void gtk_pixmap_menu_item_class_init    (GtkPixmapMenuItemClass *klass);
 static void gtk_pixmap_menu_item_init          (GtkPixmapMenuItem      *menu_item);
@@ -28,7 +31,8 @@ static void gtk_pixmap_menu_item_remove        (GtkContainer *container,
 					       
 static GtkMenuItemClass *parent_class = NULL;
 
-#define INDENT 18
+#define BORDER_SPACING  3
+#define PMAP_WIDTH 20
 
 GtkType
 gtk_pixmap_menu_item_get_type (void)
@@ -55,6 +59,16 @@ gtk_pixmap_menu_item_get_type (void)
 
   return pixmap_menu_item_type;
 }
+
+/**
+ * gtk_pixmap_menu_item_new
+ *
+ * Creates a new pixmap menu item. Use gtk_pixmap_menu_item_set_pixmap() 
+ * to set the pixmap wich is displayed at the left side.
+ *
+ * Returns:
+ * &GtkWidget pointer to new menu item
+ **/
 
 GtkWidget*
 gtk_pixmap_menu_item_new (void)
@@ -85,13 +99,19 @@ gtk_pixmap_menu_item_class_init (GtkPixmapMenuItemClass *klass)
 
   container_class->forall = gtk_pixmap_menu_item_forall;
   container_class->remove = gtk_pixmap_menu_item_remove;
-  menu_item_class->toggle_size = INDENT;
+
+  menu_item_class->toggle_size = MAX (menu_item_class->toggle_size, PMAP_WIDTH);
 }
 
 static void
 gtk_pixmap_menu_item_init (GtkPixmapMenuItem *menu_item)
 {
+  GtkMenuItem *mi;
+
+  mi = GTK_MENU_ITEM (menu_item);
+
   menu_item->pixmap = NULL;
+  mi->toggle_size = MAX (mi->toggle_size, PMAP_WIDTH);
 }
 
 static void
@@ -129,6 +149,15 @@ gtk_pixmap_menu_item_expose (GtkWidget      *widget,
 
   return FALSE;
 }
+
+/**
+ * gtk_pixmap_menu_item_set_pixmap
+ * @menu_item: Pointer to the pixmap menu item
+ * @pixmap: Pointer to a pixmap widget
+ *
+ * Set the pixmap of the menu item.
+ *
+ **/
 
 void
 gtk_pixmap_menu_item_set_pixmap (GtkPixmapMenuItem *menu_item,
@@ -180,25 +209,28 @@ static void
 gtk_pixmap_menu_item_size_allocate (GtkWidget        *widget,
 				    GtkAllocation    *allocation)
 {
-  GtkPixmapMenuItem *menu_item;
-  GtkAllocation child_allocation;
+  GtkPixmapMenuItem *pmenu_item;
 
-  g_return_if_fail (widget != NULL);
-  g_return_if_fail (GTK_IS_PIXMAP_MENU_ITEM (widget));
-  g_return_if_fail (allocation != NULL);
+  pmenu_item = GTK_PIXMAP_MENU_ITEM(widget);
 
-  menu_item = GTK_PIXMAP_MENU_ITEM(widget);
+  if (pmenu_item->pixmap && GTK_WIDGET_VISIBLE(pmenu_item))
+    {
+      GtkAllocation child_allocation;
+      int border_width;
 
-  if (menu_item->pixmap) {
-    child_allocation.x = GTK_CONTAINER (widget)->border_width+
-      widget->style->klass->xthickness + 3;
-    child_allocation.y = GTK_CONTAINER (widget)->border_width+4;
-    child_allocation.width = INDENT-child_allocation.x;
-    child_allocation.height = allocation->height-2*child_allocation.y;
-    gtk_widget_size_allocate (menu_item->pixmap, &child_allocation);
-  }  
+      border_width = GTK_CONTAINER (widget)->border_width;
 
-  GTK_WIDGET_CLASS(parent_class)->size_allocate(widget,allocation);
+      child_allocation.width = pmenu_item->pixmap->requisition.width;
+      child_allocation.height = pmenu_item->pixmap->requisition.height;
+      child_allocation.x = border_width + BORDER_SPACING;
+      child_allocation.y = (border_width + BORDER_SPACING
+			    + (((allocation->height - child_allocation.height) - child_allocation.x)
+			       / 2)); /* center pixmaps vertically */
+      gtk_widget_size_allocate (pmenu_item->pixmap, &child_allocation);
+    }
+
+  if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
+    GTK_WIDGET_CLASS(parent_class)->size_allocate (widget, allocation);
 }
 
 static void
@@ -237,10 +269,11 @@ gtk_pixmap_menu_item_size_request (GtkWidget      *widget,
 
   menu_item = GTK_PIXMAP_MENU_ITEM (widget);
   
-  /* some widgets needs this */
   if (menu_item->pixmap)
-    gtk_widget_size_request(menu_item->pixmap,&req);
-    
+    gtk_widget_size_request(menu_item->pixmap, &req);
+
+  requisition->height = MAX(req.height + GTK_CONTAINER(widget)->border_width + BORDER_SPACING, requisition->height);
+  requisition->width += (req.width + GTK_CONTAINER(widget)->border_width + BORDER_SPACING);
 }
 
 static void

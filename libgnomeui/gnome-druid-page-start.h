@@ -23,10 +23,8 @@
 #include <gdk_imlib.h>
 #include "gnome-canvas.h"
 #include "gnome-druid-page.h"
-#ifdef __cplusplus
-extern "C" {
-#pragma }
-#endif /* __cplusplus */
+
+BEGIN_GNOME_DECLS
 
 #define GNOME_TYPE_DRUID_PAGE_START			(gnome_druid_page_start_get_type ())
 #define GNOME_DRUID_PAGE_START(obj)			(GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID_PAGE_START, GnomeDruidPageStart))
@@ -71,8 +69,8 @@ struct _GnomeDruidPageStartClass
 
 GtkType    gnome_druid_page_start_get_type    (void);
 GtkWidget *gnome_druid_page_start_new         (void);
-GtkWidget *gnome_druid_page_start_new_with_vals(gchar *title,
-					       gchar* text,
+GtkWidget *gnome_druid_page_start_new_with_vals(const gchar *title,
+					       const gchar* text,
 					       GdkImlibImage *logo,
 					       GdkImlibImage *watermark);
 void gnome_druid_page_start_set_bg_color      (GnomeDruidPageStart *druid_page_start,
@@ -86,17 +84,14 @@ void gnome_druid_page_start_set_title_color   (GnomeDruidPageStart *druid_page_s
 void gnome_druid_page_start_set_text_color    (GnomeDruidPageStart *druid_page_start,
 					       GdkColor *color);
 void gnome_druid_page_start_set_text          (GnomeDruidPageStart *druid_page_start,
-					       gchar *text);
+					       const gchar *text);
 void gnome_druid_page_start_set_title         (GnomeDruidPageStart *druid_page_start,
-					       gchar *title);
+					       const gchar *title);
 void gnome_druid_page_start_set_logo          (GnomeDruidPageStart *druid_page_start,
 					       GdkImlibImage *logo_image);
 void gnome_druid_page_start_set_watermark     (GnomeDruidPageStart *druid_page_start,
 					       GdkImlibImage *watermark);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __GNOME_DRUID_PAGE_START_H__ */

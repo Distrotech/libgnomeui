@@ -103,13 +103,13 @@ gtk_ted_get_type ()
 }
 
 void
-gtk_ted_set_app_name (char *str)
+gtk_ted_set_app_name (const gchar *str)
 {
 	app_name = g_strdup (str);
 }
 
 static struct ted_widget_info *
-gtk_ted_widget_info_new (GtkWidget *widget, char *name, int col, int row)
+gtk_ted_widget_info_new (GtkWidget *widget, const gchar *name, gint col, gint row)
 {
  	struct ted_widget_info *wi;
 	
@@ -523,8 +523,8 @@ gtk_ted_input_activate (GtkWidget *entry, void *data)
 	gtk_main_quit ();
 }
 
-static char *
-gtk_ted_get_string (char *title)
+static gchar *
+gtk_ted_get_string (const gchar *title)
 {
 	GtkWidget *dialog, *box, *entry, *label;
 	char *str;
@@ -558,9 +558,9 @@ gtk_ted_add_frame (GtkWidget *widget, GtkTed *ted)
 {
 	struct ted_widget_info *wi;
 	GtkWidget *f, *e;
-	char *name;
-	char my_name [40];
-	static int frame_count;
+	gchar *name;
+	gchar my_name [40];
+	static gint frame_count;
 	
 	name = gtk_ted_get_string ("Type in frame title:");
 	if (!name)
@@ -584,8 +584,8 @@ gtk_ted_add_separator (GtkWidget *widget, GtkTed *ted)
 {
 	struct ted_widget_info *wi;
 	GtkWidget *e, *s;
-	char my_name [40];
-	static int sep_count;
+	gchar my_name [40];
+	static gint sep_count;
 	
 	e = gtk_event_box_new ();
 	gtk_widget_show (e);
@@ -603,11 +603,11 @@ gtk_ted_add_separator (GtkWidget *widget, GtkTed *ted)
 	gtk_ted_add (ted, e, my_name);
 }
 
-static char *
-gtk_ted_render_pos (int f)
+static gchar *
+gtk_ted_render_pos (gint f)
 {
-	static char buf [8];
-	char *p = buf;
+	static gchar buf [8];
+	gchar *p = buf;
 
 	if (STICK_S (f))
 		*p++ = 's';
@@ -622,9 +622,9 @@ gtk_ted_render_pos (int f)
 }
 
 static int
-gtk_ted_parse_pos (char *str)
+gtk_ted_parse_pos (gchar *str)
 {
-	int flags;
+	gint flags;
 
 	flags = 0;
 	
@@ -645,7 +645,7 @@ static void
 gtk_ted_save (GtkWidget *widget, GtkTed *ted)
 {
 	GList *child;
-	char *filename;
+	gchar *filename;
 	
 	filename = gtk_ted_get_string ("Output file name (use 'layout' for quickly load/save testing)");
 	if (!filename)
@@ -833,17 +833,17 @@ gtk_ted_load_frame (GtkTed *ted, char *prefix, char *secname)
 }
 
 static void
-gtk_ted_load_layout (GtkTed *ted, char *layout_file)
+gtk_ted_load_layout (GtkTed *ted, const gchar *layout_file)
 {
 	struct ted_widget_info *wi;
 	char *name;
-	char *full, *sec_name, *layout;
+	gchar *full, *sec_name, *layout;
 	void *iter;
 	int  len = strlen (ted->dialog_name);
 	char *p;
 			
 	if (layout_file)
-		full = layout_file;
+		full = g_strdup(layout_file);
 	else {
 		name = g_strconcat ("layout/", app_name, NULL);
 		full = gnome_datadir_file (name);
@@ -855,8 +855,8 @@ gtk_ted_load_layout (GtkTed *ted, char *layout_file)
 	} else {
 		layout = g_strdup ("=./layout=");
 	}
-	if (full != layout_file)
-		g_free (full);
+
+	g_free (full);
 
 	iter = gnome_config_init_iterator_sections (layout);
 	while ((iter = gnome_config_iterator_next (iter, &sec_name, NULL)) != NULL){
@@ -1148,11 +1148,11 @@ gtk_ted_widget_control_new (GtkTed *ted, GtkWidget *widget, char *name)
 }
 
 void
-gtk_ted_add (GtkTed *ted, GtkWidget *widget, char *original_name)
+gtk_ted_add (GtkTed *ted, GtkWidget *widget, const gchar *original_name)
 {
 	GtkWidget *align;
 	struct ted_widget_info *wi;
-	char *name = g_strdup (original_name), *p;
+	gchar *name = g_strdup (original_name), *p;
 
 	if ((p = strchr (name, '|')) != NULL){
 		*p = 0;
@@ -1282,7 +1282,7 @@ gtk_ted_prepare (GtkTed *ted)
 }
 
 GtkWidget *
-gtk_ted_new_layout (char *name, char *layout)
+gtk_ted_new_layout (const gchar *name, const gchar *layout)
 {
 	GtkTed *ted;
 
@@ -1295,7 +1295,7 @@ gtk_ted_new_layout (char *name, char *layout)
 }
 
 GtkWidget *
-gtk_ted_new (char *name)
+gtk_ted_new (const gchar *name)
 {
 	return gtk_ted_new_layout (name, NULL);
 }

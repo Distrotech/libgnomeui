@@ -32,7 +32,7 @@ BEGIN_GNOME_DECLS
 #define gnome_widget_add_help(widget, help) \
 	(gnome_widget_add_help_with_uidata((widget),(help),NULL, NULL))
 void gnome_widget_add_help_with_uidata  (GtkWidget *widget,
-					 gchar *help,
+					 const gchar *help,
 					 GnomeUIInfo *menuinfo,
 					 gpointer user_data);
 

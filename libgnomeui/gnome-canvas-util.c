@@ -436,6 +436,7 @@ gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp)
 #else
 		repaint_uta = art_uta_from_svp (old_svp);
 		gnome_canvas_request_redraw_uta (canvas, repaint_uta);
+		art_svp_free (old_svp);
 		repaint_uta = art_uta_from_svp (new_svp);
 		gnome_canvas_request_redraw_uta (canvas, repaint_uta);
 #endif

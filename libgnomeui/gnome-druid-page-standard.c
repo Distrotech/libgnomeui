@@ -17,6 +17,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <config.h>
+
 #include <gnome.h>
 #include "gnome-druid.h"
 #include "gnome-druid-page-standard.h"
@@ -101,14 +103,26 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 	druid_page_standard->vbox = gtk_vbox_new (FALSE, 0);
 	druid_page_standard->canvas = gnome_canvas_new ();
 	druid_page_standard->side_bar = gtk_drawing_area_new ();
+	druid_page_standard->bottom_bar = gtk_drawing_area_new ();
+	druid_page_standard->right_bar = gtk_drawing_area_new ();
 	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->side_bar),
 			       15, 10);
+	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->bottom_bar),
+			       10, 1);
+	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->right_bar),
+			       1, 10);
 	rc_style = gtk_rc_style_new ();
 	rc_style->bg[GTK_STATE_NORMAL].red = 6400;
 	rc_style->bg[GTK_STATE_NORMAL].green = 6400;
 	rc_style->bg[GTK_STATE_NORMAL].blue = 28672;
 	rc_style->color_flags[GTK_STATE_NORMAL] = GTK_RC_BG;
+	gtk_rc_style_ref (rc_style);
 	gtk_widget_modify_style (druid_page_standard->side_bar, rc_style);
+	gtk_rc_style_ref (rc_style);
+	gtk_widget_modify_style (druid_page_standard->bottom_bar, rc_style);
+	gtk_rc_style_ref (rc_style);
+	gtk_widget_modify_style (druid_page_standard->right_bar, rc_style);
+
 	/* FIXME: can I just ref the old style? */
 	rc_style = gtk_rc_style_new ();
 	rc_style->bg[GTK_STATE_NORMAL].red = 6400;
@@ -118,12 +132,14 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 	gtk_widget_modify_style (druid_page_standard->canvas, rc_style);
 	gtk_box_pack_start (GTK_BOX (vbox), druid_page_standard->canvas, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX (vbox), druid_page_standard->bottom_bar, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), druid_page_standard->side_bar, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), druid_page_standard->vbox, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX (hbox), druid_page_standard->right_bar, FALSE, FALSE, 0);
 	gtk_widget_set_usize (druid_page_standard->canvas, 508, LOGO_WIDTH + GNOME_PAD * 2);
 	gtk_container_set_border_width (GTK_CONTAINER (druid_page_standard), 0);
 	gtk_container_add (GTK_CONTAINER (druid_page_standard), vbox);
-
+	gtk_widget_show_all (vbox);
 }
 static void
 gnome_druid_page_standard_configure_size (GnomeDruidPageStandard *druid_page_standard, gint width, gint height)
@@ -154,15 +170,18 @@ gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard
 	druid_page_standard->background_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
+
 	druid_page_standard->logoframe_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
+
 	druid_page_standard->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
 				       gnome_canvas_image_get_type (), NULL);
-	if (druid_page_standard->logo_image != NULL)
+	if (druid_page_standard->logo_image != NULL) {
 		gnome_canvas_item_set (druid_page_standard->logo_item,
 				       "image", druid_page_standard->logo_image, NULL);
+	}
 	druid_page_standard->title_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
 				       gnome_canvas_text_get_type (), 
@@ -239,7 +258,7 @@ gnome_druid_page_standard_new (void)
 	return retval;
 }
 GtkWidget *
-gnome_druid_page_standard_new_with_vals (gchar *title, GdkImlibImage *logo)
+gnome_druid_page_standard_new_with_vals (const gchar *title, GdkImlibImage *logo)
 {
 	GtkWidget *retval = GTK_WIDGET (gtk_type_new (gnome_druid_page_standard_get_type ()));
 	GNOME_DRUID_PAGE_STANDARD (retval)->title = g_strdup (title);
@@ -249,7 +268,7 @@ gnome_druid_page_standard_new_with_vals (gchar *title, GdkImlibImage *logo)
 }
 void
 gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_standard,
-					  GdkColor *color)
+					     GdkColor *color)
 {
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
@@ -264,11 +283,36 @@ gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_
 	druid_page_standard->background_color.blue = color->blue;
 
 	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
+		GtkStyle *style;
 		GdkColormap *cmap = gdk_imlib_get_colormap ();
+
 		gdk_colormap_alloc_color (cmap, &druid_page_standard->background_color, FALSE, TRUE);
+
+		style = gtk_style_copy (gtk_widget_get_style (druid_page_standard->side_bar));
+		style->bg[GTK_STATE_NORMAL].red = color->red;
+		style->bg[GTK_STATE_NORMAL].green = color->green;
+		style->bg[GTK_STATE_NORMAL].blue = color->blue;
+		gtk_widget_set_style (druid_page_standard->side_bar, style);
+		gtk_widget_set_style (druid_page_standard->bottom_bar, style);
+		gtk_widget_set_style (druid_page_standard->right_bar, style);
+
 		gnome_canvas_item_set (druid_page_standard->background_item,
 				       "fill_color_gdk", &druid_page_standard->background_color,
 				       NULL);
+	} else {
+		GtkRcStyle *rc_style;
+
+		rc_style = gtk_rc_style_new ();
+		rc_style->bg[GTK_STATE_NORMAL].red = color->red;
+		rc_style->bg[GTK_STATE_NORMAL].green = color->green;
+		rc_style->bg[GTK_STATE_NORMAL].blue = color->blue;
+		rc_style->color_flags[GTK_STATE_NORMAL] = GTK_RC_BG;
+		gtk_rc_style_ref (rc_style);
+		gtk_widget_modify_style (druid_page_standard->side_bar, rc_style);
+		gtk_rc_style_ref (rc_style);
+		gtk_widget_modify_style (druid_page_standard->bottom_bar, rc_style);
+		gtk_rc_style_ref (rc_style);
+		gtk_widget_modify_style (druid_page_standard->right_bar, rc_style);
 	}
 }
 void
@@ -322,7 +366,7 @@ gnome_druid_page_standard_set_title_color   (GnomeDruidPageStandard *druid_page_
 }
 void
 gnome_druid_page_standard_set_title         (GnomeDruidPageStandard *druid_page_standard,
-					  gchar *title)
+					  const gchar *title)
 {
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
@@ -344,3 +388,4 @@ gnome_druid_page_standard_set_logo          (GnomeDruidPageStandard *druid_page_
 	gnome_canvas_item_set (druid_page_standard->logo_item,
 			       "image", druid_page_standard->logo_image, NULL);
 }
+

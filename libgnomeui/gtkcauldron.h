@@ -20,11 +20,9 @@
 #define __GTK_CAULDRON_H__
 
 #include <gtk/gtkwidget.h>
+#include <libgnome/gnome-defs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
+BEGIN_GNOME_DECLS
 
 #define GTK_CAULDRON_TOPLEVEL	(0x1L<<0)
 #define GTK_CAULDRON_DIALOG		(0x1L<<1)
@@ -70,9 +68,13 @@ enum {
 
 extern gchar *GTK_CAULDRON_ENTER;
 extern gchar *GTK_CAULDRON_ESCAPE;
+#define GTK_CAULDRON_ERROR ((gchar *) (-1))
 
 /* GTK_CAULDRON_TYPE_CALLBACK : */
 typedef GtkWidget *(*GtkCauldronCustomCallback) (GtkWidget * widget, gpointer user_data);
+
+/* if gtk_dialog_cauldron_parse() returns GTK_CAULDRON_ERROR */
+gchar *gtk_dialog_cauldron_get_error (void);
 
 /* for straight C usage */
 gchar *gtk_dialog_cauldron (const gchar * title, glong options, ...);
@@ -90,10 +92,7 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options,
 				  gpointer user_data,
 				  GtkWidget *parent);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __GTK_CAULDRON_H__ */
 

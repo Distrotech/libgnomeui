@@ -148,6 +148,16 @@ table_attach_label(GtkTable * table, GtkWidget * w,
 		   0, 0);
 }
 
+static void 
+table_attach_list(GtkTable * table, GtkWidget * w,
+		  gint l, gint r, gint t, gint b)
+{
+  gtk_table_attach(table, w, l, r, t, b,
+		   GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+		   GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+		   0, 0);
+}
+
 static GtkWidget *
 label_new (char *text)
 {
@@ -248,9 +258,107 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
 }
 
 static void
+set_list_width(GtkWidget *clist, char *text[])
+{
+  int i;
+  int cols = GTK_CLIST(clist)->columns;
+  GtkCList *cl = GTK_CLIST(clist);
+  for(i=0;i<cols;i++) {
+    int w = gdk_string_width(clist->style->font,text[i]);
+    if(cl->column[i].width < w)
+      gtk_clist_set_column_width(cl,i,w);
+  }
+}
+
+static void
+translations_select_row(GtkCList *cl, int row, int column,
+			GdkEvent *event, GnomeDEntryEdit *dee)
+{
+  char *lang;
+  char *name;
+  char *comment;
+  gtk_clist_get_text(cl,row,0,&lang);
+  gtk_clist_get_text(cl,row,1,&name);
+  gtk_clist_get_text(cl,row,2,&comment);
+	
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_lang_entry), lang);
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), name);
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), comment);
+}
+
+static void
+translations_add(GtkWidget *button, GnomeDEntryEdit *dee)
+{
+  int i;
+  char *lang;
+  char *name;
+  char *comment;
+  char *text[3];
+  GList *language_list;
+  const char *curlang;
+  GtkCList *cl = GTK_CLIST(dee->translations);
+
+  lang = gtk_entry_get_text(GTK_ENTRY(dee->transl_lang_entry));
+  name = gtk_entry_get_text(GTK_ENTRY(dee->transl_name_entry));
+  comment = gtk_entry_get_text(GTK_ENTRY(dee->transl_comment_entry));
+  
+  g_assert(lang && name && comment);
+	
+  lang = g_strstrip(g_strdup(lang));
+	
+  /*we are setting the current language so set the easy page entries*/
+  /*FIXME: do the opposite as well!, but that's not that crucial*/
+  language_list = gnome_i18n_get_language_list("LC_ALL");
+  curlang = language_list ? language_list->data : NULL;
+  if ((curlang && strcmp(curlang,lang)==0) ||
+      ((!curlang || strcmp(curlang,"C")==0) && !*lang)) {
+    gtk_entry_set_text(GTK_ENTRY(dee->name_entry),name);
+    gtk_entry_set_text(GTK_ENTRY(dee->comment_entry),comment);
+  }
+
+  for (i=0;i<cl->rows;i++) {
+    char *s;
+    gtk_clist_get_text(cl,i,0,&s);
+    if (strcmp(lang,s)==0) {
+      gtk_clist_set_text(cl,i,1,name);
+      gtk_clist_set_text(cl,i,2,comment);
+      text[0] = s;
+      text[1] = name;
+      text[2] = comment;
+      set_list_width (GTK_WIDGET(cl), text);
+      gtk_signal_emit (GTK_OBJECT(dee),
+		       dentry_edit_signals[CHANGED], NULL);
+      g_free (lang);
+      return;
+    }
+  }
+  text[0]=lang;
+  text[1]=name;
+  text[2]=comment;
+  set_list_width(GTK_WIDGET(cl),text);
+  gtk_clist_append(cl,text);
+  gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
+  
+  g_free(lang);
+}
+
+static void
+translations_remove(GtkWidget *button, GnomeDEntryEdit *dee)
+{
+  GtkCList *cl = GTK_CLIST(dee->translations);
+  if(cl->selection == NULL)
+  	return;
+  gtk_clist_remove(cl,GPOINTER_TO_INT(cl->selection->data));
+  gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
+}
+
+static void
 fill_advanced_page(GnomeDEntryEdit * dee, GtkWidget * page)
 {
   GtkWidget * label;
+  GtkWidget * button;
+  GtkWidget * box;
+  char *transl[3];
 
   label = label_new(_("Try this before using:"));
   table_attach_label(GTK_TABLE(page),label, 0, 1, 0, 1);
@@ -271,6 +379,50 @@ fill_advanced_page(GnomeDEntryEdit * dee, GtkWidget * page)
 			    "changed",
 			    GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
 			    GTK_OBJECT(dee));
+
+  label = gtk_label_new(_("Name/Comment translations:"));
+  table_attach_label(GTK_TABLE(page),label, 0, 2, 2, 3);
+  
+  transl[0] = _("Language");
+  transl[1] = _("Name");
+  transl[2] = _("Comment");
+  dee->translations = gtk_clist_new_with_titles(3,transl);
+  set_list_width(dee->translations,transl);
+  box = gtk_scrolled_window_new(NULL,NULL);
+  gtk_widget_set_usize(box,0,120);
+  gtk_container_add(GTK_CONTAINER(box),dee->translations);
+  table_attach_list(GTK_TABLE(page),box, 0, 2, 3, 4);
+  gtk_clist_column_titles_passive(GTK_CLIST(dee->translations));
+  gtk_signal_connect(GTK_OBJECT(dee->translations),"select_row",
+		     GTK_SIGNAL_FUNC(translations_select_row),
+		     dee);
+
+  box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
+  table_attach_entry(GTK_TABLE(page),box, 0, 2, 4, 5);
+  
+  dee->transl_lang_entry = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(box),dee->transl_lang_entry,FALSE,FALSE,0);
+  gtk_widget_set_usize(dee->transl_lang_entry,50,0);
+
+  dee->transl_name_entry = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(box),dee->transl_name_entry,TRUE,TRUE,0);
+
+  dee->transl_comment_entry = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(box),dee->transl_comment_entry,TRUE,TRUE,0);
+
+  box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
+  table_attach_entry(GTK_TABLE(page),box, 0, 2, 5, 6);
+  
+  button = gtk_button_new_with_label(_("Add/Set"));
+  gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
+  gtk_signal_connect(GTK_OBJECT(button),"clicked",
+		     GTK_SIGNAL_FUNC(translations_add),
+		     dee);
+  button = gtk_button_new_with_label(_("Remove"));
+  gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
+  gtk_signal_connect(GTK_OBJECT(button),"clicked",
+		     GTK_SIGNAL_FUNC(translations_remove),
+		     dee);
 }
 
 static GtkWidget *
@@ -302,12 +454,12 @@ gnome_dentry_edit_init (GnomeDEntryEdit *dee)
 /**
  * gnome_dentry_edit_new
  *
- * Description: Creates a new GnomeDEntryEdit object. The object is not
+ * Description: Creates a new #GnomeDEntryEdit object. The object is not
  * a widget, but just an object which creates some widgets which you have
  * to add to a notebook. Use the #gnome_dentry_edit_new_notebook to add
  * pages to the notebook.
  *
- * Returns: Newly-created GnomeDEntryEdit object.
+ * Returns: Newly-created #GnomeDEntryEdit object.
  */
 GtkObject *
 gnome_dentry_edit_new (void)
@@ -329,13 +481,13 @@ gnome_dentry_edit_new (void)
 
 
 /**
- * gnome_dentry_edit_new
+ * gnome_dentry_edit_new_notebook
  * @notebook: notebook to add the pages to
  *
- * Description: Creates a new GnomeDEntryEdit object and adds it's pages
+ * Description: Creates a new #GnomeDEntryEdit object and adds it's pages
  * to the @notebook specified in the parameter.
  *
- * Returns: Newly-created GnomeDEntryEdit object.
+ * Returns: Newly-created #GnomeDEntryEdit object.
  */
 GtkObject *
 gnome_dentry_edit_new_notebook (GtkNotebook *notebook)
@@ -365,8 +517,13 @@ gnome_dentry_edit_new_notebook (GtkNotebook *notebook)
 static void
 gnome_dentry_edit_destroy (GtkObject *dee)
 {
+  GnomeDEntryEdit *de;
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
+
+  de = GNOME_DENTRY_EDIT(dee);
+
+  gtk_widget_destroy(de->icon_entry);
 
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dee);
@@ -378,8 +535,10 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
 			       GnomeDesktopEntry *dentry)
 {
   gchar * s = NULL;
+  GList *i18n_list,*li;
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
+  
 
   gtk_entry_set_text(GTK_ENTRY(dee->name_entry), 
 		     dentry->name ? dentry->name : "");
@@ -405,6 +564,19 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
 
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->terminal_button),
 			       dentry->terminal);
+  
+  /*set the names and comments from our i18n list*/
+  gtk_clist_clear (GTK_CLIST(dee->translations));
+  i18n_list = gnome_desktop_entry_get_i18n_list (dentry);
+  for (li=i18n_list; li; li=li->next) {
+    char *text[3];
+    GnomeDesktopEntryI18N *e = li->data;
+    text[0] = e->lang?e->lang:"";
+    text[1] = e->name?e->name:"";
+    text[2] = e->comment?e->comment:"";
+    set_list_width (dee->translations,text);
+    gtk_clist_append (GTK_CLIST(dee->translations),text);
+  }
 }
 
 /* Conform dentry to display */
@@ -412,7 +584,9 @@ static void
 gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
 			      GnomeDesktopEntry *dentry)
 {
+  GList *i18n_list = NULL;
   gchar * text;
+  int i;
 
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
@@ -471,11 +645,32 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
   dentry->location = NULL;
   g_free(dentry->geometry);
   dentry->geometry = NULL;
+
+  for(i=0;i<GTK_CLIST(dee->translations)->rows;i++) {
+    char *lang,*name,*comment;
+    GnomeDesktopEntryI18N *i18n_entry;
+    gtk_clist_get_text(GTK_CLIST(dee->translations),i,0,&lang);
+    gtk_clist_get_text(GTK_CLIST(dee->translations),i,1,&name);
+    gtk_clist_get_text(GTK_CLIST(dee->translations),i,2,&comment);
+    if(!*lang) lang = NULL;
+    if(!*name) name = NULL;
+    if(!*comment) comment = NULL;
+    if(!name && !comment)
+      continue;
+
+    i18n_entry = g_new0(GnomeDesktopEntryI18N,1);
+    i18n_entry->lang = lang?g_strdup(lang):NULL;
+    i18n_entry->name = name?g_strdup(name):NULL;
+    i18n_entry->comment = comment?g_strdup(comment):NULL;
+    i18n_list = g_list_prepend(i18n_list,i18n_entry);
+  }
+  gnome_desktop_entry_free_i18n_list(gnome_desktop_entry_get_i18n_list(dentry));
+  gnome_desktop_entry_set_i18n_list(dentry,i18n_list);
 }
 
 /**
  * gnome_dentry_edit_load_file
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  * @path: file to load into the editting areas
  *
  * Description: Load a .desktop file and update the editting areas
@@ -506,11 +701,11 @@ gnome_dentry_edit_load_file(GnomeDEntryEdit *dee,
 
 /**
  * gnome_dentry_edit_set_dentry
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  * @dentry: #GnomeDesktopEntry to use
  *
  * Description: Destroy existing dentry and replace
- * it with this one, updating the DEntryEdit to reflect it.
+ * it with this one, updating the #GnomeDEntryEdit to reflect it.
  *
  * Returns:
  */
@@ -525,9 +720,25 @@ gnome_dentry_edit_set_dentry(GnomeDEntryEdit *dee,
   gnome_dentry_edit_sync_display(dee, dentry);
 }
 
+/*XXX: whoops!!!!, this call is left here just for binary
+  compatibility, it should be gnome_dentry_edit_get_dentry*/
+/**
+ * gnome_dentry_get_dentry
+ * @dee: #GnomeDEntryEdit object to work with
+ *
+ * Description: This call is actually the #gnome_dentry_edit_get_dentry,
+ * it should not be used, it is left ONLY for compatibility reasons.
+ *
+ * Returns: a newly allocated #GnomeDesktopEntry structure.
+ */
+GnomeDesktopEntry *
+gnome_dentry_get_dentry(GnomeDEntryEdit *dee)
+{
+	return gnome_dentry_edit_get_dentry(dee);
+}
 /**
  * gnome_dentry_edit_get_dentry
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
  * Description: Get the current status of the editting areas
  * as a #GnomeDesktopEntry structure.
@@ -535,7 +746,7 @@ gnome_dentry_edit_set_dentry(GnomeDEntryEdit *dee,
  * Returns: a newly allocated #GnomeDesktopEntry structure.
  */
 GnomeDesktopEntry *
-gnome_dentry_get_dentry(GnomeDEntryEdit *dee)
+gnome_dentry_edit_get_dentry(GnomeDEntryEdit *dee)
 {
   GnomeDesktopEntry * newentry;
 
@@ -549,7 +760,7 @@ gnome_dentry_get_dentry(GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_clear
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
  * Description: Clear the editting areas.
  *
@@ -567,6 +778,10 @@ gnome_dentry_edit_clear(GnomeDEntryEdit *dee)
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), "");
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), "");
   gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry),"");
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_lang_entry), "");
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), "");
+  gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), "");
+  gtk_clist_clear(GTK_CLIST(dee->translations));
 }
 
 static void
@@ -589,9 +804,11 @@ gnome_dentry_edit_name_changed(GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_get_icon
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
- * Description: Get the icon filename.
+ * Description: Get the icon filename. The icon is entered into a
+ * #GnomeIconEntry, so the semantics of this call are the same as
+ * for #gnome_icon_entry_get_filename
  *
  * Returns: a newly allocated string with the filename of the icon
  */
@@ -605,7 +822,7 @@ gnome_dentry_edit_get_icon(GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_get_name
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
  * Description: Get the Name field from the dentry.
  *
@@ -622,11 +839,11 @@ gnome_dentry_edit_get_name (GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_get_name_entry
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
- * Description: Get the entry widget (a GtkEntry) for the Name field.
+ * Description: Get the entry widget (a #GtkEntry) for the Name field.
  *
- * Returns: a pointer to a GtkEntry widget used for the Name field
+ * Returns: a pointer to a #GtkEntry widget used for the Name field
  */
 GtkWidget *
 gnome_dentry_get_name_entry (GnomeDEntryEdit *dee)
@@ -636,11 +853,11 @@ gnome_dentry_get_name_entry (GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_get_comment_entry
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
- * Description: Get the entry widget (a GtkEntry) for the Comment field.
+ * Description: Get the entry widget (a #GtkEntry) for the Comment field.
  *
- * Returns: a pointer to a GtkEntry widget used for the Comment field
+ * Returns: a pointer to a #GtkEntry widget used for the Comment field
  */
 GtkWidget *
 gnome_dentry_get_comment_entry (GnomeDEntryEdit *dee)
@@ -650,12 +867,12 @@ gnome_dentry_get_comment_entry (GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_get_exec_entry
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
- * Description: Get the entry widget (a GtkEntry) for the Command
+ * Description: Get the entry widget (a #GtkEntry) for the Command
  * (exec) field.
  *
- * Returns: a pointer to a GtkEntry widget used for the Command (exec) field
+ * Returns: a pointer to a #GtkEntry widget used for the Command (exec) field
  */
 GtkWidget *
 gnome_dentry_get_exec_entry (GnomeDEntryEdit *dee)
@@ -665,11 +882,11 @@ gnome_dentry_get_exec_entry (GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_get_tryexec_entry
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
- * Description: Get the entry widget (a GtkEntry) for the TryExec field.
+ * Description: Get the entry widget (a #GtkEntry) for the TryExec field.
  *
- * Returns: a pointer to a GtkEntry widget used for the TryExec field
+ * Returns: a pointer to a #GtkEntry widget used for the TryExec field
  */
 GtkWidget *
 gnome_dentry_get_tryexec_entry (GnomeDEntryEdit *dee)
@@ -679,12 +896,12 @@ gnome_dentry_get_tryexec_entry (GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_get_doc_entry
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
- * Description: Get the entry widget (a GtkEntry) for the
+ * Description: Get the entry widget (a #GtkEntry) for the
  * Documentation field.
  *
- * Returns: a pointer to a GtkEntry widget used for the
+ * Returns: a pointer to a #GtkEntry widget used for the
  * Documentation field
  */
 GtkWidget *
@@ -695,7 +912,7 @@ gnome_dentry_get_doc_entry (GnomeDEntryEdit *dee)
 
 /**
  * gnome_dentry_edit_get_icon_entry
- * @dee: GnomeDEntryEdit object to work with
+ * @dee: #GnomeDEntryEdit object to work with
  *
  * Description: Get the entry widget (a #GnomeIconEntry) for the icon field
  *

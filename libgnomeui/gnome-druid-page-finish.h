@@ -23,10 +23,8 @@
 #include <gdk_imlib.h>
 #include "gnome-canvas.h"
 #include "gnome-druid-page.h"
-#ifdef __cplusplus
-extern "C" {
-#pragma }
-#endif /* __cplusplus */
+
+BEGIN_GNOME_DECLS
 
 #define GNOME_TYPE_DRUID_PAGE_FINISH			(gnome_druid_page_finish_get_type ())
 #define GNOME_DRUID_PAGE_FINISH(obj)			(GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID_PAGE_FINISH, GnomeDruidPageFinish))
@@ -71,8 +69,8 @@ struct _GnomeDruidPageFinishClass
 
 GtkType    gnome_druid_page_finish_get_type    (void);
 GtkWidget *gnome_druid_page_finish_new         (void);
-GtkWidget *gnome_druid_page_finish_new_with_vals(gchar *title,
-					       gchar* text,
+GtkWidget *gnome_druid_page_finish_new_with_vals(const gchar *title,
+					       const gchar* text,
 					       GdkImlibImage *logo,
 					       GdkImlibImage *watermark);
 void gnome_druid_page_finish_set_bg_color      (GnomeDruidPageFinish *druid_page_finish,
@@ -86,17 +84,14 @@ void gnome_druid_page_finish_set_title_color   (GnomeDruidPageFinish *druid_page
 void gnome_druid_page_finish_set_text_color    (GnomeDruidPageFinish *druid_page_finish,
 					       GdkColor *color);
 void gnome_druid_page_finish_set_text          (GnomeDruidPageFinish *druid_page_finish,
-					       gchar *text);
+					       const gchar *text);
 void gnome_druid_page_finish_set_title         (GnomeDruidPageFinish *druid_page_finish,
-					       gchar *title);
+					       const gchar *title);
 void gnome_druid_page_finish_set_logo          (GnomeDruidPageFinish *druid_page_finish,
 					       GdkImlibImage *logo_image);
 void gnome_druid_page_finish_set_watermark     (GnomeDruidPageFinish *druid_page_finish,
 					       GdkImlibImage *watermark);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __GNOME_DRUID_PAGE_FINISH_H__ */

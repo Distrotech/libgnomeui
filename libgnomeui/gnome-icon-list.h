@@ -123,7 +123,7 @@ int            gnome_icon_list_append              (GnomeIconList *gil,
 						    const char *text);
 int            gnome_icon_list_append_imlib        (GnomeIconList *gil,
 						    GdkImlibImage *im,
-						    char *text);
+						    const char *text);
 void           gnome_icon_list_clear               (GnomeIconList *gil);
 void           gnome_icon_list_remove              (GnomeIconList *gil, int pos);
 

@@ -154,6 +154,7 @@ gnome_font_picker_init (GnomeFontPicker *gfp)
     gfp->font_name     = NULL;
     gfp->preview_text  = NULL;
     gfp->use_font_in_label     = FALSE;
+    gfp->use_font_in_label_size = 14;
     gfp->show_size     = TRUE;
     gfp->font_dialog   = NULL;
     gfp->title         = g_strdup(_("Pick a Font"));
@@ -795,7 +796,9 @@ void gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
     /* Load font */
     font=gdk_font_load(pStr);
     if (!font)
-	    font = gdk_font_load ("fixed");
+      return; /* Use widget default */
+
+    g_return_if_fail( font != NULL );
 
     /* Change label style */
     gtk_widget_ensure_style(gfp->font_label);

@@ -96,7 +96,7 @@ static void                update                  (GnomeAnimator *animator);
 static GnomeAnimatorFrame *append_frame            (GnomeAnimator *animator);
 static void                state_or_style_changed  (GnomeAnimator *animator);
 static void                state_changed           (GtkWidget *widget,
-                                                    guint previous_state);
+                                                    GtkStateType previous_state);
 static void                style_set               (GtkWidget *widget,
                                                     GtkStyle *previous_style);
 static gint                timer_cb                (gpointer data);
@@ -157,8 +157,6 @@ free_all_frames (GnomeAnimator *animator)
 
       if (p->pixmap != NULL)
         gdk_imlib_free_pixmap (p->pixmap);
-      if (p->mask != NULL)
-        gdk_imlib_free_bitmap (p->mask);
 
       pnext = p->next;
       g_free (p);
@@ -210,7 +208,8 @@ prepare_aux_pixmaps (GnomeAnimator *animator)
         }
 
       if (widget->requisition.width > 0
-          && widget->requisition.height > 0)
+          && widget->requisition.height > 0
+          && GTK_WIDGET_REALIZED(widget))
         {
           privat->offscreen_pixmap = gdk_pixmap_new (widget->window,
                                                      widget->requisition.width,
@@ -280,15 +279,17 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
   animator = GNOME_ANIMATOR (widget);
 
-  gdk_window_clear_area (widget->window,
-                         widget->allocation.x, widget->allocation.y,
-                         widget->allocation.width, widget->allocation.height);
+  if (GTK_WIDGET_REALIZED(widget))
+          gdk_window_clear_area (widget->window,
+                                 widget->allocation.x, widget->allocation.y,
+                                 widget->allocation.width, widget->allocation.height);
 
   widget->allocation = *allocation;
 
-  gdk_window_clear_area (widget->window,
-                         widget->allocation.x, widget->allocation.y,
-                         widget->allocation.width, widget->allocation.height);
+  if (GTK_WIDGET_REALIZED(widget))
+          gdk_window_clear_area (widget->window,
+                                 widget->allocation.x, widget->allocation.y,
+                                 widget->allocation.width, widget->allocation.height);
 
   animator->privat->area.x = (widget->allocation.x
                               + (widget->allocation.width
@@ -308,6 +309,17 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 static void
 paint (GnomeAnimator *animator, GdkRectangle *area)
 {
+  /* FIXME this is a bad hack, because I don't want to introduce
+     a new realize()/unrealize() pair in the stable libs right now
+     and risk screwing things up
+  */
+  if (animator->privat->offscreen_pixmap == NULL &&
+      GTK_WIDGET_REALIZED(GTK_WIDGET(animator)))
+    {
+      prepare_aux_pixmaps (animator);
+      draw_background_pixmap (animator);
+    }
+        
   if (animator->num_frames > 0
       && animator->privat->offscreen_pixmap != NULL)
     {
@@ -445,7 +457,7 @@ state_or_style_changed (GnomeAnimator *animator)
 }
 
 static void
-state_changed (GtkWidget *widget, guint previous_state)
+state_changed (GtkWidget *widget, GtkStateType previous_state)
 {
   g_assert (GNOME_IS_ANIMATOR (widget));
   state_or_style_changed (GNOME_ANIMATOR (widget));
@@ -890,7 +902,7 @@ gnome_animator_append_frames_from_imlib_at_size (GnomeAnimator *animator,
 
   if (tmp_mask != NULL)
     {
-      gdk_imlib_free_bitmap (tmp_mask);
+      /* Imlib already freed the mask, so don't free it again */
       gdk_gc_unref (mask_gc);
     }
 

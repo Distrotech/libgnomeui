@@ -49,6 +49,8 @@ typedef struct
 	gboolean in_use;
 	/* pipefd's to communicate to server with */
 	gint pipefd[2];
+	/* tag for gdk_input_add */
+	gint input_tag;
 } DnsServer;
 
 static DnsServer dns_server[GNOME_DNS_MAX_SERVERS];
@@ -127,10 +129,11 @@ void gnome_dns_init (gint server_count)
 static void
 gnome_dns_server_req (gint server, const char *hostname) {
 	dns_server[server].in_use = TRUE;
-	gdk_input_add(dns_server[server].pipefd[0],
-		      GDK_INPUT_READ,
-		      (GdkInputFunction) gnome_dns_callback,
-		      GINT_TO_POINTER (server));
+	dns_server[server].input_tag = gdk_input_add(
+			dns_server[server].pipefd[0],
+			GDK_INPUT_READ,
+			(GdkInputFunction) gnome_dns_callback,
+			GINT_TO_POINTER (server));
 	write (dns_server[server].pipefd[1], hostname, strlen (hostname) + 1);
 }
 
@@ -141,17 +144,17 @@ gnome_dns_server_req (gint server, const char *hostname) {
  * @callback_data: data to pass to the callback function
  *
  * Description:
- * looks up an address and returns a tag for use with
+ * Looks up an address and returns a tag for use with
  * gnome_dns_abort() if desired.  May not return -1 if
  * hostname was in cache.
  *
  * Callback function is called when dns_lookup is complete.
  *
  * Side effects:
- * a new dns server may be spawned if all the current servers
+ * A new dns server may be spawned if all the current servers
  * are in use.
  *
- * Returns:  a tag identifying this lookup or 0 if lookup was
+ * Returns: A tag identifying this lookup or 0 if lookup was
  * in cache.
  */
 
@@ -168,42 +171,45 @@ guint32 gnome_dns_lookup (const char *hostname,
 		if (!strcmp (hostname, dns_cache[i].hostname))
 			break;
 	
-	/* if it hit, call the callback immediately. */
-	if (i < dns_cache_size && dns_cache[i].server == -1) {
+	/* if it hit a non null answer, call the callback immediately. */
+	if (i < dns_cache_size && dns_cache[i].server == -1 &&
+	    dns_cache[i].ip_addr != 0) {
 		callback (dns_cache[i].ip_addr, callback_data);
 		return 0;
 	}
 	
 	/* It didn't hit in the cache with an answer - need to put request
 	 into the dns_con table. */
-	if (i < dns_cache_size) {
+	if (i < dns_cache_size && dns_cache[i].server != -1) {
 		/* hit in cache but answer hasn't come back yet. */
 		server = dns_cache[i].server;
 	} else {
-		/* missed in cache -- create a cache entry */
-		if (dns_cache_size == dns_cache_size_max) {
-			dns_cache_size_max <<= 1;
-			dns_cache = g_realloc (dns_cache, dns_cache_size_max * sizeof (GnomeDnsCache));
+		if (i == dns_cache_size) {
+			/* missed in cache -- create a cache entry */
+			if (dns_cache_size == dns_cache_size_max) {
+				dns_cache_size_max <<= 1;
+				dns_cache = g_realloc (dns_cache, dns_cache_size_max * sizeof (GnomeDnsCache));
+			}
+			dns_cache[i].hostname = g_strdup (hostname);
+			dns_cache_size++;
 		}
-		dns_cache[dns_cache_size].hostname = g_strdup (hostname);
 		/* Find a server we can send the request to. */
 		for (server = 0; server < num_servers; server++)
 			if (!dns_server[server].in_use) {
 				break;
 			}
 		if (server < num_servers) {
-			/* found an unused server - give it the request */
-			gnome_dns_server_req (server, hostname);
-			dns_cache[dns_cache_size].server = server;
+			dns_cache[i].server = server;
 		} else {
 			/* no unused servers - fork a new one */
-			dns_cache[dns_cache_size].server = gnome_dns_create_server();
-			if (dns_cache[dns_cache_size].server < 0) {
+			server = dns_cache[i].server = gnome_dns_create_server();
+			if (dns_cache[i].server < 0) {
 				g_error ("Unable to fork: %s", g_strerror(errno));
 			}
-			
 		}
-		dns_cache_size++;
+
+		/* found the server - give it the request */
+		gnome_dns_server_req (server, hostname);
 	}
 	
 	if (dns_con_size == dns_con_size_max) {
@@ -228,7 +234,7 @@ guint32 gnome_dns_lookup (const char *hostname,
  *
  * Description:
  * Aborts a previous call to gnome_dns_lookup().
- * DNS Callback function is not called.
+ * DNS callback function is not called.
  */
 
 void
@@ -238,6 +244,9 @@ gnome_dns_abort (guint32 tag)
 	
 	for (i = 0; i < dns_con_size; i++) {
 		if (dns_con[i].tag == tag) {
+			if (dns_con[i].server >= 0) {
+				gdk_input_remove(dns_server[dns_con[i].server].input_tag);
+			}
 			g_free (dns_con[i].hostname);
 			dns_con[i] = dns_con[--dns_con_size];
 			return;
@@ -280,7 +289,7 @@ static void gnome_dns_callback(gpointer serv_num, gint source,
 	server_num = GPOINTER_TO_INT (serv_num);
 	
 #ifdef VERBOSE    
-	g_printf("callback called!\n");
+	g_print("callback called!\n");
 #endif
 	/* read ip from server.  It's done as a single int rather than a string.
 	 * hopefully it works ok */
@@ -288,8 +297,12 @@ static void gnome_dns_callback(gpointer serv_num, gint source,
 		g_error("reading from pipe: %s\n", g_strerror(errno));
 	
 #ifdef VERBOSE
-	g_printf("ip_addr in callback is %x\n", ip_addr);
+	g_print("ip_addr in callback is %x\n", ip_addr);
 #endif
+	
+	/* Don't call this function anymore 
+	 * (unless gnome_dns_server_request is called again) */
+	gdk_input_remove(dns_server[server_num].input_tag);
 	
 	/* write ip address into cache. */
 	for (i = 0; i < dns_cache_size; i++)

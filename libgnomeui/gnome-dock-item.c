@@ -575,9 +575,9 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
           if (GNOME_DOCK_ITEM_NOT_LOCKED (di))
             {
               if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
-                child_allocation.width -= DRAG_HANDLE_SIZE;
+		child_allocation.width = MAX((int)child_allocation.width - DRAG_HANDLE_SIZE, 1);
               else
-                child_allocation.height -= DRAG_HANDLE_SIZE;
+		child_allocation.height = MAX(child_allocation.height - DRAG_HANDLE_SIZE, 1);
             }
 
 	  if (GTK_WIDGET_REALIZED (di))
@@ -921,6 +921,29 @@ gnome_dock_item_delete_event (GtkWidget *widget,
 
 
 /**
+ * gnome_dock_item_construct:
+ * @new: a #GnomeDockItem.
+ * @name: Name for the new item
+ * @behavior: Behavior for the new item
+ * 
+ * Description: Constructs the @new GnomeDockItem named @name, with the
+ * specified @behavior.
+ * 
+ * Returns: A new GnomeDockItem widget.
+ **/
+void
+gnome_dock_item_construct (GnomeDockItem *new,
+			   const gchar *name,
+			   GnomeDockItemBehavior behavior)
+{
+	g_return_if_fail (new != NULL);
+	g_return_if_fail (GNOME_IS_DOCK_ITEM (new));
+	
+	new->name = g_strdup (name);
+	new->behavior = behavior;
+}
+
+/**
  * gnome_dock_item_new:
  * @name: Name for the new item
  * @behavior: Behavior for the new item
@@ -938,8 +961,7 @@ gnome_dock_item_new (const gchar *name,
 
   new = GNOME_DOCK_ITEM (gtk_type_new (gnome_dock_item_get_type ()));
 
-  new->name = g_strdup (name);
-  new->behavior = behavior;
+  gnome_dock_item_construct (new, name, behavior);
 
   return GTK_WIDGET (new);
 }

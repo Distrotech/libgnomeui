@@ -137,7 +137,6 @@ guint gnome_font_selector_get_type(void)
 static void
 gnome_font_selector_class_init(GnomeFontSelectorClass *klass)
 {
-  text_get_fonts(klass);
 }
 
 static void
@@ -168,6 +167,7 @@ gnome_font_selector_init(GtkWidget *widget)
   text_tool = GNOME_FONT_SELECTOR(widget);
 
   klass = GNOME_FONT_SELECTOR_CLASS(GTK_OBJECT(widget)->klass);
+  text_get_fonts(klass);
 
   font_info = klass->font_info;
   nfonts = klass->nfonts;
@@ -821,6 +821,9 @@ text_get_fonts (GnomeFontSelectorClass *klass)
   gint index;
   gint i, j;
 
+  if(klass->font_info)
+    return;
+
   /* construct a valid font pattern */
 
   fontnames = XListFonts (GDK_DISPLAY(), "-*-*-*-*-*-*-0-0-75-75-*-0-*-*", 32767, &num_fonts);
@@ -1064,7 +1067,7 @@ text_insert_field (GSList      *list,
 
   while (temp_list)
     {
-      cmp = strcmp (field, temp_list->data);
+      cmp = strcmp (field, (gchar*) temp_list->data);
       if (cmp == 0)
 	{
 	  g_free (field);

@@ -14,7 +14,8 @@
 #include <gtk/gtkcompat.h>
 #include "gnome-color-picker.h"
 #include <libgnome/gnome-i18nP.h>
-
+#include <gdk/gdkkeysyms.h>
+#include <gtk/gtkbutton.h>
 
 /* These are the dimensions of the color sample in the color picker */
 #define COLOR_PICKER_WIDTH  20
@@ -371,8 +372,10 @@ gnome_color_picker_destroy (GtkObject *object)
 /**
  * gnome_color_picker_new
  *
- * Description:
- * Creates a new GNOME color picker widget.
+ * Creates a new GNOME color picker widget. This returns a widget in the form of a small button
+ * containing a swatch representing the current selected color. When the button is clicked,
+ * a color-selection dialog will open, allowing the user to select a color. The swatch will be
+ * updated to reflect the new color when the user finishes.
  *
  * Returns:
  * Pointer to new GNOME color picker widget.
@@ -426,6 +429,16 @@ cs_ok_clicked (GtkWidget *widget, gpointer data)
 			 r, g, b, a);
 }
 
+static int
+key_pressed (GtkWidget *widget, GdkEventKey *event, GnomeColorPicker *cp)
+{
+	if (event->keyval == GDK_Escape){
+		gtk_button_clicked (GTK_BUTTON (GTK_COLOR_SELECTION_DIALOG (widget)->cancel_button));
+		return 1;
+	}
+	return 0;
+}
+
 static void
 gnome_color_picker_clicked (GtkButton *button)
 {
@@ -453,6 +466,8 @@ gnome_color_picker_clicked (GtkButton *button)
 				    (GtkSignalFunc) cs_destroy,
 				    cp);
 
+		gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "key_press_event",
+				    (GtkSignalFunc) key_pressed, cp);
 		gtk_signal_connect (GTK_OBJECT (csd->ok_button), "clicked",
 				    (GtkSignalFunc) cs_ok_clicked,
 				    cp);
@@ -490,10 +505,10 @@ gnome_color_picker_clicked (GtkButton *button)
  * @r: Red color component, values are in [0.0, 1.0]
  * @g: Green color component, values are in [0.0, 1.0]
  * @b: Blue color component, values are in [0.0, 1.0]
- * @a: Alpha color component, values are in [0.0, 1.0]
+ * @a: Alpha component, values are in [0.0, 1.0]
  *
  * Description:
- * Set color currently shown in color picker widget.
+ * Set color shown in the color picker widget using floating point values.
  */
 
 void
@@ -525,7 +540,7 @@ gnome_color_picker_set_d (GnomeColorPicker *cp, gdouble r, gdouble g, gdouble b,
  * @a: Output location of alpha color component, values are in [0.0, 1.0]
  *
  * Description:
- * Retrieve color currently set in color picker widget.
+ * Retrieve color currently selected in the color picker widget in the form of floating point values.
  */
 
 void
@@ -554,10 +569,10 @@ gnome_color_picker_get_d (GnomeColorPicker *cp, gdouble *r, gdouble *g, gdouble 
  * @r: Red color component, values are in [0, 255]
  * @g: Green color component, values are in [0, 255]
  * @b: Blue color component, values are in [0, 255]
- * @a: Alpha color component, values are in [0, 255]
+ * @a: Alpha component, values are in [0, 255]
  *
  * Description:
- * Set color currently set in color picker widget.
+ * Set color shown in the color picker widget using 8-bit integer values.
  */
 
 void
@@ -586,7 +601,7 @@ gnome_color_picker_set_i8 (GnomeColorPicker *cp, guint8 r, guint8 g, guint8 b, g
  * @a: Output location of alpha color component, values are in [0, 255]
  *
  * Description:
- * Retrieve color currently set in color picker widget.
+ * Retrieve color currently selected in the color picker widget in the form of 8-bit integer values.
  */
 
 void
@@ -615,10 +630,10 @@ gnome_color_picker_get_i8 (GnomeColorPicker *cp, guint8 *r, guint8 *g, guint8 *b
  * @r: Red color component, values are in [0, 65535]
  * @g: Green color component, values are in [0, 65535]
  * @b: Blue color component, values are in [0, 65535]
- * @a: Alpha color component, values are in [0, 65535]
+ * @a: Alpha component, values are in [0, 65535]
  *
  * Description:
- * Set color currently set in color picker widget.
+ * Set color shown in the color picker widget using 16-bit integer values.
  */
 
 void
@@ -647,7 +662,7 @@ gnome_color_picker_set_i16 (GnomeColorPicker *cp, gushort r, gushort g, gushort 
  * @a: Output location of alpha color component, values are in [0, 65535]
  *
  * Description:
- * Retrieve color currently set in color picker widget.
+ * Retrieve color currently selected in the color picker widget in the form of 16-bit integer values.
  */
 
 void
@@ -696,10 +711,10 @@ gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither)
 /**
  * gnome_color_picker_set_use_alpha
  * @cp: Pointer to GNOME color picker widget.
- * @dither: %TRUE if color sample should use alpha channel, %FALSE if not.
+ * @use_alpha: %TRUE if color sample should use alpha channel, %FALSE if not.
  *
  * Description:
- * Sets whether the picker should use the alpha channel or not.
+ * Sets whether or not the picker should use the alpha channel.
  */
 
 void
@@ -752,4 +767,3 @@ gnome_color_picker_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoi
 		   GTK_VALUE_UINT (args[3]),
 		   func_data);
 }
-

@@ -56,6 +56,18 @@ gnome_scores_init (GnomeScores *gs) {}
 static void
 gnome_scores_class_init (GnomeScoresClass *class) {}
 
+/**
+ * gnome_scores_new:
+ * @n_scores:
+ * @names:
+ * @scores:
+ * @times:
+ * @clear:
+ *
+ * Description:
+ *
+ * Returns: A new #GnomeScores widget
+ */
 GtkWidget * 
 gnome_scores_new (  guint n_scores, 
 		    gchar **names, 
@@ -68,7 +80,7 @@ gnome_scores_new (  guint n_scores,
 	GtkTable	*table;
 	GtkWidget	*label;
 	gchar     	tmp[10];
-	gchar     	*tmp2;
+	gchar     	tmp2[20];
 	guint i;
 	const gchar * buttons[] = { GNOME_STOCK_BUTTON_OK, NULL };
 
@@ -108,7 +120,16 @@ gnome_scores_new (  guint n_scores,
 		gtk_widget_show ( gs->label_scores[i] );
 		gtk_table_attach_defaults ( table, gs->label_scores[i], 1, 2, i+1, i+2);
 
-		tmp2 = ctime( &(times[i]) );
+		/* the localized string should fit (after replacing the %a %b
+		   etc) in ~18 chars; so drop some if needed; after all this
+		   is for games scores, there is no need for extra precision.
+		   %a is abbreviated weekday, %A is full weekday,
+		   %b %B are abbreviated and full monthname, %Y is year,
+		   %d is day of month, %m is month number, %T full hour,
+		   %H hours, %M minutes, %S seconds
+		*/
+		strftime(tmp2,sizeof(tmp2),_("%a %b %d %T %Y"),
+			 localtime( &(times[i]) ));
 		tmp2[strlen(tmp2)-1]=0;
 		gs->label_times[i] = gtk_label_new ( tmp2 );
 		gtk_widget_show ( gs->label_times[i] );
@@ -136,6 +157,16 @@ gnome_scores_new (  guint n_scores,
 	return retval;
 }
 
+/**
+ * gnome_scores_set_color:
+ * @gs: A #GnomeScores widget
+ * @n:
+ * @col:
+ *
+ * Description:
+ *
+ * Returns:
+ */
 void
 gnome_scores_set_color(GnomeScores *gs, guint n, GdkColor *col)
 {
@@ -151,6 +182,15 @@ gnome_scores_set_color(GnomeScores *gs, guint n, GdkColor *col)
 	gtk_style_unref(s);
 }
 
+/**
+ * gnome_scores_set_def_color:
+ * @gs: A #GnomeScores widget
+ * @col:
+ *
+ * Description:
+ *
+ * Returns:
+ */
 void
 gnome_scores_set_def_color(GnomeScores *gs, GdkColor *col)
 {
@@ -161,6 +201,15 @@ gnome_scores_set_def_color(GnomeScores *gs, GdkColor *col)
 	}
 }
 
+/**
+ * gnome_scores_set_colors:
+ * @gs: A #GnomeScores widget
+ * @col:
+ *
+ * Description:
+ *
+ * Returns:
+ */
 void
 gnome_scores_set_colors(GnomeScores *gs, GdkColor *col)
 {
@@ -171,6 +220,15 @@ gnome_scores_set_colors(GnomeScores *gs, GdkColor *col)
 	}
 }
 
+/**
+ * gnome_scores_set_current_player:
+ * @gs: A #GnomeScores widget
+ * @i:
+ *
+ * Description:
+ *
+ * Returns:
+ */
 void
 gnome_scores_set_current_player (GnomeScores *gs, gint i)
 {
@@ -179,7 +237,17 @@ gnome_scores_set_current_player (GnomeScores *gs, gint i)
 	gtk_widget_set_name(GTK_WIDGET(gs->label_times[i]), "CurrentPlayer");
 }
 
-void gnome_scores_set_logo_label_title (GnomeScores *gs, gchar *txt)
+/**
+ * gnome_scores_set_logo_label_title:
+ * @gs: A #GnomeScores widget
+ * @txt:
+ *
+ * Description:
+ *
+ * Returns:
+ */
+void
+gnome_scores_set_logo_label_title (GnomeScores *gs, gchar *txt)
 {
 	if(gs->logo) {
 		g_print("Warning: gnome_scores_set_logo_* can be called only once\n");
@@ -193,8 +261,20 @@ void gnome_scores_set_logo_label_title (GnomeScores *gs, gchar *txt)
 }
 
 
-void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
-				  GdkColor *col)
+/**
+ * gnome_scores_set_logo_label:
+ * @gs: A #GnomeScores widget
+ * @txt:
+ * @font:
+ * @col:
+ *
+ * Description:
+ *
+ * Returns:
+ */
+void
+gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
+			     GdkColor *col)
 {
 	GtkStyle *s = gtk_style_new(); /* i believe that i should copy the default style
 					  and change only the fg & font fields, how? */
@@ -224,7 +304,17 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 	gtk_widget_show (gs->logo);
 }
 
-void gnome_scores_set_logo_widget (GnomeScores *gs, GtkWidget *w)
+/**
+ * gnome_scores_set_logo_widget:
+ * @gs: A #GnomeScores widget
+ * @w:
+ *
+ * Description:
+ *
+ * Returns:
+ */
+void
+gnome_scores_set_logo_widget (GnomeScores *gs, GtkWidget *w)
 {
 
 	if(gs->logo) {
@@ -236,7 +326,17 @@ void gnome_scores_set_logo_widget (GnomeScores *gs, GtkWidget *w)
 	gtk_box_pack_end (GTK_BOX(GNOME_DIALOG(gs)->vbox), gs->logo, TRUE, TRUE, 0);
 }
 
-void gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
+/**
+ * gnome_scores_set_logo_pixmap:
+ * @gs: A #GnomeScores widget
+ * @pix_name:
+ *
+ * Description:
+ *
+ * Returns:
+ */
+void
+gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
 {
 	GtkStyle *style;
 
@@ -254,6 +354,17 @@ void gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
 	gtk_widget_show (gs->logo);
 }
 
+/**
+ * gnome_scores_display:
+ * @gs: A #GnomeScores widget
+ * @app_name:
+ * @level:
+ * @pos:
+ *
+ * Description:
+ *
+ * Returns:
+ */
 void
 gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos)
 {

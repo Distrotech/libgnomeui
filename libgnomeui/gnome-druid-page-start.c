@@ -1,5 +1,5 @@
 /* gnome-druid-page-start.c
- * Copyright (C) 1999  Red Hat, Inc. 
+ * Copyright (C) 1999  Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,6 +16,8 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+
+#include <config.h>
 
 #include <gnome.h>
 #include "gnome-druid-page-start.h"
@@ -38,6 +40,7 @@ static GnomeDruidPageClass *parent_class = NULL;
 #define LOGO_WIDTH 50.0
 #define DRUID_PAGE_HEIGHT 318
 #define DRUID_PAGE_WIDTH 516
+#define DRUID_PAGE_LEFT_WIDTH 100.0
 
 GtkType
 gnome_druid_page_start_get_type (void)
@@ -77,7 +80,6 @@ gnome_druid_page_start_class_init (GnomeDruidPageStartClass *klass)
 	parent_class = gtk_type_class (gnome_druid_page_get_type ());
 }
 
-
 static void
 gnome_druid_page_start_init (GnomeDruidPageStart *druid_page_start)
 {
@@ -100,7 +102,7 @@ gnome_druid_page_start_init (GnomeDruidPageStart *druid_page_start)
 	druid_page_start->text_color.green = 0;
 	druid_page_start->text_color.blue = 0;
 
-	/* Set up the canvas */ 
+	/* Set up the canvas */
 	gtk_container_set_border_width (GTK_CONTAINER (druid_page_start), 0);
 	druid_page_start->canvas = gnome_canvas_new ();
 	gtk_widget_set_usize (druid_page_start->canvas, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
@@ -109,9 +111,24 @@ gnome_druid_page_start_init (GnomeDruidPageStart *druid_page_start)
 	gtk_container_add (GTK_CONTAINER (druid_page_start), druid_page_start->canvas);
 
 }
+
 static void
 gnome_druid_page_start_configure_size (GnomeDruidPageStart *druid_page_start, gint width, gint height)
 {
+	gfloat watermark_width = DRUID_PAGE_LEFT_WIDTH;
+	gfloat watermark_height = (gfloat) height - LOGO_WIDTH + GNOME_PAD * 2.0;
+	gfloat watermark_ypos = LOGO_WIDTH + GNOME_PAD * 2.0;
+
+	if (druid_page_start->watermark_image) {
+		watermark_width = druid_page_start->watermark_image->rgb_width;
+		watermark_height = druid_page_start->watermark_image->rgb_height;
+		watermark_ypos = (gfloat) height - watermark_height;
+		if (watermark_width < 1)
+			watermark_width = 1.0;
+		if (watermark_height < 1)
+			watermark_height = 1.0;
+	}
+
 	gnome_canvas_item_set (druid_page_start->background_item,
 			       "x1", 0.0,
 			       "y1", 0.0,
@@ -119,7 +136,7 @@ gnome_druid_page_start_configure_size (GnomeDruidPageStart *druid_page_start, gi
 			       "y2", (gfloat) height,
 			       "width_units", 1.0, NULL);
 	gnome_canvas_item_set (druid_page_start->textbox_item,
-			       "x1", width * 0.3,
+			       "x1", watermark_width,
 			       "y1", LOGO_WIDTH + GNOME_PAD * 2.0,
 			       "x2", (gfloat) width,
 			       "y2", (gfloat) height,
@@ -138,18 +155,18 @@ gnome_druid_page_start_configure_size (GnomeDruidPageStart *druid_page_start, gi
 			       "height", (gfloat) LOGO_WIDTH, NULL);
 	gnome_canvas_item_set (druid_page_start->watermark_item,
 			       "x", 0.0,
-			       "y", LOGO_WIDTH + GNOME_PAD * 2.0,
+			       "y", watermark_ypos,
 			       "anchor", GTK_ANCHOR_NORTH_WEST,
-			       "width", width * 0.3,
-			       "height", (gfloat) height - LOGO_WIDTH + GNOME_PAD * 2.0,
+			       "width", watermark_width,
+			       "height", watermark_height,
 			       NULL);
 	gnome_canvas_item_set (druid_page_start->title_item,
-			       "x", 15.0, 
+			       "x", 15.0,
 			       "y", (gfloat) GNOME_PAD + LOGO_WIDTH / 2.0,
 			       "anchor", GTK_ANCHOR_WEST,
 			       NULL);
 	gnome_canvas_item_set (druid_page_start->text_item,
-			       "x", width * 0.65,
+			       "x", ((width - watermark_width) * 0.5) + watermark_width,
 			       "y", LOGO_WIDTH + GNOME_PAD * 2.0 + (height - (LOGO_WIDTH + GNOME_PAD * 2.0))/ 2.0,
 			       "anchor", GTK_ANCHOR_CENTER,
 			       NULL);
@@ -162,30 +179,37 @@ gnome_druid_page_start_construct (GnomeDruidPageStart *druid_page_start)
 	druid_page_start->background_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
+
 	druid_page_start->textbox_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
+
 	druid_page_start->logoframe_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
+
 	druid_page_start->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
 				       gnome_canvas_image_get_type (),
 				       "image", druid_page_start->logo_image, NULL);
+
 	if (druid_page_start->logo_image != NULL)
 		gnome_canvas_item_set (druid_page_start->logo_item,
 				       "image", druid_page_start->logo_image, NULL);
+
 
 	druid_page_start->watermark_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
 				       gnome_canvas_image_get_type (),
 				       "image", druid_page_start->watermark_image, NULL);
+
 	druid_page_start->title_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
-				       gnome_canvas_text_get_type (), 
+				       gnome_canvas_text_get_type (),
 				       "text", druid_page_start->title,
 				       "font", "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-1",
 				       NULL);
+
 	druid_page_start->text_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
 				       gnome_canvas_text_get_type (),
@@ -258,9 +282,9 @@ gnome_druid_page_start_realize (GtkWidget *widget)
 
 /**
  * gnome_druid_page_start_new:
- * 
+ *
  * Creates a new GnomeDruidPageStart widget.
- * 
+ *
  * Return value: Pointer to new GnomeDruidPageStart
  **/
 /* Public functions */
@@ -281,16 +305,17 @@ gnome_druid_page_start_new (void)
  * @text: The introduction text.
  * @logo: The logo in the upper right corner.
  * @watermark: The watermark on the left.
- * 
+ *
  * This will create a new GNOME Druid start page, with the values
  * given.  It is acceptable for any of them to be %NULL.
- * 
+ *
  * Return value: GtkWidget pointer to new GnomeDruidPageStart.
  **/
 GtkWidget *
-gnome_druid_page_start_new_with_vals (gchar *title, gchar* text, GdkImlibImage *logo, GdkImlibImage *watermark)
+gnome_druid_page_start_new_with_vals (const gchar *title, const gchar* text,
+				      GdkImlibImage *logo, GdkImlibImage *watermark)
 {
-	GtkWidget *retval =  gnome_druid_page_start_new ();
+	GtkWidget *retval =  GTK_WIDGET (gtk_type_new (gnome_druid_page_start_get_type ()));
 	GNOME_DRUID_PAGE_START (retval)->title = g_strdup (title);
 	GNOME_DRUID_PAGE_START (retval)->text = g_strdup (text);
 	GNOME_DRUID_PAGE_START (retval)->logo_image = logo;
@@ -303,7 +328,7 @@ gnome_druid_page_start_new_with_vals (gchar *title, gchar* text, GdkImlibImage *
  * gnome_druid_page_start_set_bg_color:
  * @druid_page_start: A DruidPageStart.
  * @color: The new background color.
- * 
+ *
  * This will set the background color to be the @color.  You do not
  * need to allocate the color, as the @druid_page_start will do it for
  * you.
@@ -435,7 +460,7 @@ gnome_druid_page_start_set_text_color    (GnomeDruidPageStart *druid_page_start,
 }
 void
 gnome_druid_page_start_set_text          (GnomeDruidPageStart *druid_page_start,
-					  gchar *text)
+					  const gchar *text)
 {
 	g_return_if_fail (druid_page_start != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_START (druid_page_start));
@@ -448,7 +473,7 @@ gnome_druid_page_start_set_text          (GnomeDruidPageStart *druid_page_start,
 }
 void
 gnome_druid_page_start_set_title         (GnomeDruidPageStart *druid_page_start,
-					  gchar *title)
+					  const gchar *title)
 {
 	g_return_if_fail (druid_page_start != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_START (druid_page_start));

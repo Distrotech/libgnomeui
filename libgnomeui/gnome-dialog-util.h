@@ -79,6 +79,7 @@ GtkWidget * gnome_ok_cancel_dialog_modal_parented (const gchar * message,
 						   gpointer data,
 						   GtkWindow * parent);
 
+#ifndef GNOME_EXCLUDE_DEPRECATED
 /* This function is deprecated; use gnome_request_dialog() instead. */
 GtkWidget * gnome_request_string_dialog           (const gchar * prompt,
 						   GnomeStringCallback callback,
@@ -100,6 +101,7 @@ GtkWidget * gnome_request_password_dialog_parented(const gchar * prompt,
 						   GnomeStringCallback callback,
 						   gpointer data,
 						   GtkWindow * parent);
+#endif
 
 /* Dialog containing a prompt and a text entry field for a response */
 GtkWidget * gnome_request_dialog (gboolean password,

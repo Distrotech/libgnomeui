@@ -199,7 +199,7 @@ layout_changed (GtkWidget *w, gpointer data)
  **/
 
 GtkWidget *
-gnome_app_new(gchar *appname, char *title)
+gnome_app_new(const gchar *appname, const gchar *title)
 {
 	GnomeApp *app;
 
@@ -222,7 +222,7 @@ gnome_app_new(gchar *appname, char *title)
  **/
 
 void 
-gnome_app_construct (GnomeApp *app, gchar *appname, char *title)
+gnome_app_construct (GnomeApp *app, const gchar *appname, const gchar *title)
 {
 	g_return_if_fail (appname != NULL);
 
@@ -254,6 +254,25 @@ gnome_app_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/* Callback for an app's contents' parent_set signal.  We set the app->contents
+ * to NULL and detach the signal.
+ */
+static void
+contents_parent_set (GtkWidget *widget, GtkWidget *previous_parent, gpointer data)
+{
+	GnomeApp *app;
+
+	app = GNOME_APP (data);
+
+	g_assert (previous_parent == app->dock);
+
+	gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
+				       GTK_SIGNAL_FUNC (contents_parent_set),
+				       data);
+
+	app->contents = NULL;
+}
+
 /**
  * gnome_app_set_contents
  * @app: Pointer to GNOME app object.
@@ -262,19 +281,30 @@ gnome_app_destroy (GtkObject *object)
  * Description:
  * Sets the content area of the GNOME app's main window.
  **/
-
 void
 gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
 {
+	GtkWidget *new_contents;
+
 	g_return_if_fail (app != NULL);
 	g_return_if_fail (GNOME_IS_APP(app));
 	g_return_if_fail (app->dock != NULL);
-	g_return_if_fail (app->contents == NULL);
+	g_return_if_fail (contents != NULL);
+	g_return_if_fail (GTK_IS_WIDGET (contents));
 
 	gnome_dock_set_client_area (GNOME_DOCK (app->dock), contents);
-	gtk_widget_show (contents);
 
-	app->contents = contents;
+	/* Re-fetch it in case it did not change */
+	new_contents = gnome_dock_get_client_area (GNOME_DOCK (app->dock));
+
+	if (new_contents == contents && new_contents != app->contents) {
+		gtk_widget_show (new_contents);
+		gtk_signal_connect (GTK_OBJECT (new_contents), "parent_set",
+				    GTK_SIGNAL_FUNC (contents_parent_set),
+				    app);
+
+		app->contents = new_contents;
+	}
 }
 
 /**
@@ -525,7 +555,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 
 
 /**
- * gnome_app_add_docked:
+ * gnome_app_add_dock_item:
  * @app: A &GnomeApp widget
  * @item: Dock item to be added to @app's dock.
  * @placement: Placement for the dock item
@@ -553,7 +583,7 @@ gnome_app_add_dock_item (GnomeApp *app,
 					    band_num,
 					    band_position,
 					    offset);
-	else {
+	else
 		gnome_dock_add_item (GNOME_DOCK(app->dock),
 				     GNOME_DOCK_ITEM( item),
 				     placement,
@@ -561,10 +591,10 @@ gnome_app_add_dock_item (GnomeApp *app,
 				     band_position,
 				     offset,
 				     FALSE);
-		gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
-					 "layout_changed",
-					 (gpointer) app);
-	}
+
+	gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
+				 "layout_changed",
+				 (gpointer) app);
 }
 
 /**

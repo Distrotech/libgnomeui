@@ -1,34 +1,767 @@
-1999-08-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+1999-12-12  Elliot Lee  <sopwith@redhat.com>
 
-	* gnome-canvas-rect-ellipse.h (GnomeCanvasRE): Moved private
-	fields to a private structure in the .c file.
+	* gtkpixmapmenuitem.c: OK, size_allocate was just not making
+	things look nice. It seems that the hack with the toggle_size is
+	"the way" - at least it looks nice now.
 
-	* gnome-canvas-rect-ellipse.c (REPrivate): New private structure
-	for the abstract rect/ellipse item.
-	(gnome_canvas_re_set_arg): Queue updates and never redraws.
-	Sanitized the way colors are handled; now all information (RGBA
-	and pixel info) is available at all times after an update.
-	(get_color_arg): Helper function for gnome_canvas_re_get_arg() so
-	that it always returns consistent color information.
-	(update_gc): Helper function for gnome_canvas_re_update().  We now
-	use the gtk_gc memoization functions to share GCs between canvas
-	items.
-	(gnome_canvas_re_unrealize): Release the GCs using gtk_gc.
-	(get_corners): Helper function for everyone else so that the user
-	can specify coordinates in disorder (i.e. x1 > x2 and such).
-	(update_non_aa): Update function for rectangles and ellipses in
-	the non-antialiased case.
-	(gnome_canvas_re_update): Sanitized.  Update color information
-	properly.  Removed the gnome_canvas_re_update_shared() function.
-	(gnome_canvas_rect_draw): Sanitized.
+Sun Dec 12 10:57:40 1999  George Lebl <jirka@5z.com>
 
-	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_class_init): Added
-	new "width" and "width_is_in_pixels" readable object arguments to
-	query the outline width and whether it was specified in pixels or
-	in units.
-	(gnome_canvas_re_get_arg): Handle the new arguments.
+	* gnome-calculator.c: check for number on stack AFTER we reduce
+	  stack, this fixes a segfault where reduce_stack actually did
+	  reduce the stack. Fixes bug #4330
 
-	* gnome-icon-list.h: Fixed some comments.
+Sun Dec  5 17:55:53 1999  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gnome-about.c (gnome_fill_info): Applied the patch from KUSANO
+	Takayuki <AE5T-KSN@asahi-net.or.jp>.  This fixed the problem that
+	gtkrc* file didn't affect on GnomeAbout.  (Closes bug #2603)
+
+1999-12-05  Elliot Lee  <sopwith@redhat.com>
+
+	* gtkpixmapmenuitem.c: Fix size_request/size_allocate - was HORRIBLY broken before.
+
+1999-11-24  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-app.c (gnome_app_add_dock_item): emit the "layout_changed" signal even if adding the dock item to app->layout.
+
+Thu Nov 18 11:20:01 1999  George Lebl <jirka@5z.com>
+
+	* gnome-entry-edit.c: when syncing display with a dentry, clear
+	  the translations list first. Fixes bug #3652.
+
+1999-11-11  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* gnome_segv.c (main): correctly detect if gnome-session
+	crashed when gnome-session was run with a full path (ie from
+	gdm2).   Disable SM on bug-buddy if gnome-session crashed,
+	and pass parameters to bug-buddy via command line options,
+	and not through the environment.
+
+Wed Nov 10 20:15:10 1999  George Lebl <jirka@5z.com>
+
+	* gnome-propertybox.c: use GPOINTER_TO_INT to cast from pointer
+	  to int. in _set_modified method use the same assert checks as in
+	  the _changed method.
+
+Wed Nov 10 17:55:10 1999  George Lebl <jirka@5z.com>
+
+	* gnome-icon-sel.c: apply memory leak fix from
+	  david meybohm <dm89754@ucf.edu>.  It keeps a list of the imlib
+	  images that are loaded and destroyes them on reload.
+
+1999-11-03  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (gnome_canvas_item_get_bounds): Fixed ordering of
+	bounding vertices.  Now we *do* return the correct bounding box.
+
+1999-11-03  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (gnome_canvas_init): Fixed long-standing problem
+	with the canvas->pick_event not being properly initialized.  This
+	caused spurious EnterNotify events to be sent to items right after
+	the canvas was created and the mouse had never been inside it.
+
+1999-11-02  Kjartan Maraas  <kmaraas@online.no>
+
+	* gnome-druid-page-standard.c: #include <config.h>
+	* gnome-druid-page-start.c: ditto.
+	* gnome-druid-page-finish.c: ditto.
+	* gnome-druid-page.c: ditto.
+	* gnome-druid.c: ditto.
+	* gnome-stock.c (gnome_pixmap_button): Marked label creation
+	with _() to make buttons translatable.
+		
+1999-10-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_remove_view): if a registered object exists,
+	destroy an empty GnomeApp even if it is the last one.
+
+1999-10-21  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (gnome_canvas_set_pixels_per_unit): Clear the
+	redraw area to avoid creating enormous microtile arrays when we
+	zoom repeatedly.
+
+1999-10-20  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-init.c: Fix the memory leak AND avoid the bug from the first fix.
+
+Mon Oct 18 21:51:43 1999  George Lebl  <jirka@5z.com>
+
+        * gnome-app-util.c: use gnome_request_dialog directly instead
+          of using old deprecated functions
+
+1999-10-19  Elliot Lee  <sopwith@redhat.com>
+	* gnome-init.c: Revert Tue Oct  5 02:35:47 1999  Owen Taylor  <otaylor@redhat.com>
+
+1999-10-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-session.c (restore_window): take care of the case when
+	there are no children to restore: merely open a new, empty toplevel
+	window.
+
+1999-09-28  Elliot Lee  <sopwith@redhat.com>
+	* gnome-init.c (gnome_segv_handle): Only dump core if $GNOME_DUMP_CORE is set.
+	  Pass the app version to gnome_segv.
+	* gnome_segv.c: add more items to the URL that is given to the user (app
+	version, 
+
+1999-10-06  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* gnome_segv.c (main): add a hook for the soon-to-be available
+	bug-buddy program
+
+Tue Oct  5 02:35:47 1999  Owen Taylor  <otaylor@redhat.com>
+ 
+ 	* gnome-init.c (initialize_gtk_signal_relay): Free value
+ 	returned from gnome-config.
+ 
+1999-10-05  Russell Steinthal  <rms39@columbia.edu>
+	* gnome-dateedit.c (gnome_date_edit_get_date): Improve handling of
+	invalid times: don't segfault when there is no colon in a time,
+	default omitted trailing time fields (i.e. allow 8 for 8:00:00).
+	Allow entry of seconds.
+
+1999-10-03  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock.c (drag_floating): Realize, map and queue_resize the
+	new child manually.
+
+	* gnome-dock-band.c (gnome_dock_band_remove): Do
+	`gtk_widget_unparent' on the removed widget instead of just
+	NULLing the `parent' member.  This way refcounting on the
+	GnomeDockBand children should be done right.  Many many thanks to
+	Morten who detected there was a leak somewhere in the GnomeDock*
+	widgets.  (And some curses to the author who had even put a
+	`FIXME' comment in that code and forgot to correct it. ;-))
+
+1999-09-30  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-icon-entry.c (show_icon_selection): Replace getcwd with
+	g_get_current_dir here too.
+	(show_icon_selection): ditto.
+
+	* gnome-file-entry.c (gnome_file_entry_get_full_path): Use
+	g_get_current_dir here. 
+
+1999-09-28  Elliot Lee  <sopwith@redhat.com>
+	* gnome-dock-item.c: If an item is really small, don't subtract
+	  DRAG_HANDLE_SIZE from it to make its size < 0.
+
+1999-09-28  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-init.c (gnome_segv_handle): Improve the "can't display
+	error dialog" error message.
+
+1999-09-27  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi-session.c (gnome_mdi_save_state): Call
+	gnome_config_sync () when we're done.
+
+1999-09-26  Martin Baulig  <martin@home-of-linux.org>
+
+	* gtkdial.c (gtk_dial_set_percentage, gtk_dial_set_value): Allow
+ 	you to set the upper limit as well (use <= instead of <).
+
+1999-09-24  Morten Welinder  <terra@diku.dk>
+
+	* gnome-dock-layout.c (gnome_dock_layout_destroy): Don't walk and
+ 	muck with the same list simultaneously.
+	(remove_item): Handle remove of first item also.
+
+1999-09-24  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi-session.c (view_window_func): Return NULL unless
+	the widget is realized.
+
+Fri Sep 24 01:24:40 1999  Tim Janik  <timj@gtk.org>
+
+	* gnome-canvas.c (gnome_canvas_new_aa): make the AA canvas warning a
+	message, so --g-fatal-warnings remains usefull (bug#2234).
+
+1999-09-23  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-procbar.c: Added g_return_if_fail () at places where this
+	would cause a crash otherwise.
+
+1999-09-09  Vincent Renardias <vincent@ldsol.com>
+
+	* gnome_segv.c: i18n the URL of the Crash page too.
+	  Added a comment for translators too.
+
+1999-09-22  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (do_update): Moved updated functionality to here.
+	(idle_handler): Do GDK_THREADS_ENTER/LEAVE() here, and call do_update().
+	(gnome_canvas_update_now): Call do_update(), not idle_handler().
+
+	Patch from Owen Taylor (otaylor@redhat.com) to fix deadlock when
+	using threads.
+
+1999-09-20  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-propertybox.c (gnome_property_box_init): Set the `OK'
+	button as the default one, and do not set it insensitive anymore.
+	(set_sensitive): Do not change sensitivity of the `OK' button
+	anymore.
+	(dialog_clicked_cb): Check the dirty flag for the current page.
+	If the page is not dirty, just close instead of applying and
+	closing: this makes sure the old behavior is preserved even if now
+	OK is no longer insensitive when the page is not dirty.
+
+1999-09-20  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_unrealize): Set the
+	gc fields to NULL after unrefing them.  Thanks to Damon Chaplin
+	for pointing this out.
+
+	* gnome-canvas-text.c (gnome_canvas_text_unrealize): Likewise.
+
+	* gnome-canvas-polygon.c (gnome_canvas_polygon_unrealize): Likewise.
+
+	* gnome-canvas-line.c (gnome_canvas_line_unrealize): Likewise.
+
+	* gnome-canvas-image.c (gnome_canvas_image_unrealize): Likewise.
+
+1999-09-19  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-dock-band.c: Don't size-allocate non-visible
+	children, since we don't size-request them. This will
+	avoid problems with warnings since otherwise we
+	will allocating the children with junk allocations.
+
+1999-09-20  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-appbar.c (gnome_appbar_construct): Put alignment back in
+	so that the label is still left-aligned.
+
+1999-09-19  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-appbar.c (gnome_appbar_construct): Set horizontal usize on
+	the label to 1, so that it does not stupidly change size when the
+	text is larger than the available space.
+
+1999-09-19  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-animator.c (prepare_aux_pixmaps): only create pixmaps
+	if we are realized
+	(size_allocate): Don't do the gdk_window_clear_area() calls
+	unless we are realized
+	(paint): Create backing store here if necessary... bad hack,
+	need realize/unrealize eventually
+
+	Bug reported by Damon Chaplin
+
+	* gnome-dateedit.c (gnome_date_edit_set_popup_range): Regenerate
+	the popup
+	(gnome_date_edit_set_flags): Use ~ instead of ! for bitwise
+	negation. 
+	(gnome_date_edit_set_flags): Set new flags at the beginning 
+	of the function
+
+	All three bugs reported by Damon Chaplin
+	
+	* gnome-font-picker.c (gnome_font_picker_init): Set a default
+	for use_font_in_label_size, bug reported by Damon Chaplin
+
+1999-09-18  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (scroll_to): Fixed little off-by-one error in
+	size computation.
+
+1999-09-17  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (gnome_canvas_expose): Process exposures
+	immediately.  This makes scrolling a lot nicer.
+
+	* gnome-dock.c (gnome_dock_add_floating_item): Do realization,
+	mapping, and redraw queueing the right way.
+	(gnome_dock_set_client_area): Likewise.
+
+	* gnome-dock-band.c (gnome_dock_band_insert): Likewise.
+
+	* gnome-app.c (gnome_app_set_contents): Do all the proper checks
+	with respect to the dock's new client area.  Also, connect a
+	signal handler to the parent_set signal of the contents.
+	(contents_parent_set): Set the app->contents to NULL when the
+	contents are unparented.  This fixes a bug where the app would
+	keep a dangling pointer to the contents when they were removed.
+
+	Note that GnomeDock has an inconsistency with the way the other
+	GtkContainers work; it should barf if its client area is not NULL
+	instead of unparenting it when you try to set a new client area.
+
+	* gnome_segv.c (main): Const correctness for the args variable.
+	If you want this abominable little program to go in, at least make
+	sure it builds cleanly!
+
+1999-09-17  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dateedit.h, gnome-dateedit.c: Revert the new consistent
+	function names. This patch should be applied, but not in the
+	stable branch just before 1.0.50 because it's forward
+	incompatible. It can go in after we branch the development
+	gnome-libs.
+
+1999-09-17  Havoc Pennington  <hp@pobox.com>
+
+	* gnome_segv.c (main): If the crashing process is called
+	"gnome-session," tell the user that they are totally hosed and 
+	should save docs in all apps.
+
+1999-09-17  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dateedit.c (gnome_date_edit_set_date): New function, same
+	as `gnome_date_edit_set_time()'.
+	(gnome_date_edit_get_time): New function, same as
+	`gnome_date_edit_get_date()'.
+
+1999-09-17  Havoc Pennington  <hp@pobox.com>
+
+	* gnome_segv.c (main): Don't connect to session manager.
+
+1999-09-17  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock.c (gnome_dock_draw): Draw all the floating children
+	as well.
+	(drag_check): Added snap factor for dock detaching.
+	(drag_new): Make sure the offset for the new child is not
+	negative.
+
+1999-09-14  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-text.c (gnome_canvas_text_init): Do not load a
+	default fontset.  This is fantastically inefficient, since we have
+	to pull the whole big fontset from the server even if we never use
+	it again and replace it immediately with the user-specified font.
+	(gnome_canvas_suck_font): Take into account the fact that the font
+	may be NULL.
+	(get_bounds_item_relative): Likewise.
+	(gnome_canvas_text_draw): Likewise.
+	(gnome_canvas_text_render): Likewise.
+	(gnome_canvas_text_point): Likewise.
+	(gnome_canvas_text_set_arg): Do not try to load a default font if
+	loading the user-specified one fails.
+	(gnome_canvas_text_destroy): Free the sucked font.
+
+1999-09-13  Karl Eichwalder  <ke@suse.de>
+
+	* winhints_demo.c (about_cb): Add missing \n.
+
+1999-09-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (top_add_view, gnome_mdi_add_view,
+	gnome_mdi_add_toplevel_view): show view prior to setting it an
+	app content.
+	
+1999-09-13  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-image.c (recalc_if_needed): Only render the image's
+	pixmap if the final width and height are not zero.
+	(gnome_canvas_image_draw): Take into account the fact that we may
+	not have a pixmap at all.
+
+1999-09-11  Roberto Zunino <zunino@cli.di.unipi.it>
+
+	* gnome-dns.c: Do not cache 0.0.0.0 results (ie, not found).
+	Do not abuse gdk_input_add.
+
+1999-09-06  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-canvas.c (gnome_canvas_new_aa): Only warn one time about
+	the buginess of the Canvas.
+
+1999-09-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-color-picker.c (key_pressed): Provide a way to cancel a
+	color picker dialog by pressing escape.
+
+	* gnome-init.c (gnome_segv_handle): Use abort instead of exit().
+
+1999-09-07  Havoc Pennington  <hp@pobox.com>
+
+        * gnome-app-helper.h (GnomeUIInfo): Change pixmap_info to
+	gconstpointer. Closes bug 1864.
+	
+	* gnome-app-helper.c (create_pixmap): Take a const argument.
+
+1999-09-07  Elliot Lee  <sopwith@redhat.com>
+	* gnome-font-selector.c: Don't use X in class_init()...
+
+1999-09-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_remove_child): in MODAL mode automatically
+	activate another child if it exists.
+
+1999-09-05  Tim Gerla  <timg@means.net>
+
+	* gtkdial.c: Started docs
+	* gnome-dns.c: Typo fixes
+
+1999-09-05    <jrb@redhat.com>
+
+	* gnome-druid-page-finish.c
+	(gnome_druid_page_finish_set_watermark): fix typo (thanks Damon).
+
+1999-09-04  Tim Gerla  <timg@means.net>
+
+	* gnome-pixmap-entry.c (gnome_pixmap_entry_new): Docs
+	* gnome-spell.c: Doc updates
+	* gnome-href.c: Doc updates
+
+1999-09-04  Tim Gerla 	<timg@means.net>
+
+	* gnome-color-picker.c: Doc updates
+	* gnome-number-entry.c: More docs
+
+1999-09-03  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page-finish.c
+	(gnome_druid_page_finish_new_with_vals): don't call gnome_druid_page_finish_new
+	(gnome_druid_page_finish_construct): new policy for watermarks.
+
+	* gnome-druid-page-start.c
+	(gnome_druid_page_start_configure_size): new policy for watermark images.
+	(gnome_druid_page_start_new_with_vals): don't call
+	gnome_druid_page_start_new.
+
+1999-09-02  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_set_bg_color): set the color of the
+	outside frame.
+
+	* gnome-druid-page.c (gnome_druid_page_paint): Add paint
+	function.  Now redraw problem is gone.
+
+1999-09-01  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid.c (gnome_druid_insert_page): Make the first page in
+	the list be shown.
+	(gnome_druid_remove): If a page is deleted, and it is being shown,
+	show the next page.
+	(gnome_druid_insert_page): if a child is added, and the druid is
+	mapped, then map the child to.  Same with realization.
+
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_configure_size): show internal widgets.
+
+1999-08-31  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (book_create): show notebook before adding it to
+	the gnome-app in case the former will be mapped.
+	(set_active_view): fixed a bug that caused active_child not to get
+	properly set on rare occasions.
+	(gnome_mdi_remove_view): a fix similar to the above.
+
+1999-08-30  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-file-entry.c (gnome_file_entry_get_full_path): Use
+	getcwd() correctly.  This really needs to be done in a portable
+	fashion.  Do tilde expansion, because this thing is supposed to
+	return valid pathnames.
+	(tilde_expand): Stole function from mc/src/utilunix.c to do tilde
+	expansion, glib-ified it.
+
+1999-08-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_append_imlib): Made text const.
+
+	* gnome-canvas.c (gnome_canvas_get_color): Make spec argument take
+	a const char *.
+
+Sun Aug 29 01:14:35 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-winhints.c,gnome-init.c: take out implicit initialization
+	  of the atoms, and do it only when we need it. Also replaced all
+	  CARD32 by long since this was being done by the preprocessor
+	  anyway, and made all local Atom variables static.
+
+1999-08-28  Havoc Pennington  <hp@pobox.com>
+
+	* TODO: Long-overdue TODO update.
+
+Sat Aug 28 10:32:53 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.c: fix warnings
+
+1999-08-28  Karl Eichwalder  <ke@suse.de>
+
+	* winhints_demo.c (about_cb): Avoid too long lines.
+
+1999-08-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-procbar.c (gnome_proc_bar_construct): New function. 
+
+	* gnome-pixmap-entry.c (gnome_pixmap_entry_construct): New function.
+
+	* gnome-dock-item.c (gnome_dock_item_construct): New function.
+
+	* gnome-file-entry.c (gnome_file_entry_construct): New function,
+	per request from Guillaume.
+
+Fri Aug 27 15:41:48 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.c: use the new gnome-dentry interface for 
+	  getting the i18n lists
+
+Fri Aug 27 10:30:10 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.[ch]: add a way to edit the translations of
+	  name and comment on the advanced page
+
+1999-08-26  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-util.c (gnome_canvas_update_svp): Free the old
+	svp.  BUGFIX:  GNOME bug tracker #1991.
+
+1999-08-25  Havoc Pennington  <hp@pobox.com>
+
+	* gnome_segv.c (main): Translate usage string,
+	enhance the error message.
+
+	* gnome-init.c (gnome_init_cb): Set flag if we should
+	--disable-crash-dialog; install the signal handler 
+	based on the flag.
+	(gnome_options): Add --disable-crash-dialog option
+	(gnome_segv_handle): Give up after 10 segfaults; 
+	try to release grabs before popping up the dialog.
+
+1999-08-23  Herbert Valerio Riedel  <hvr@hvrlab.dhs.org>
+
+	* gnome-procbar.[ch] (gnome_proc_bar_set_values): made val[] const
+
+	* gtk-ted.[ch], gnome-spell.[ch], gnome-popup-help.[ch], 
+	gnome-pixmap-entry.[ch], gnome-number-entry.[ch], gnome-mdi.[ch],
+	gnome-mdi-generic-child.[ch], gnome-mdi-child.[ch], gnome-entry.[ch],
+	gnome-icon-text.[ch], gnome-icon-entry.[ch], gnome-druid-page-start.[ch],
+	gnome-druid-page-standard.[ch], gnome-druid-page-finish.[ch], 
+	gnome-client.[ch]: marked some more char* args const
+
+1999-08-22  Herbert Valerio Riedel  <hvr@hvrlab.dhs.org>
+
+	* gnome-icon-entry.c (gnome_icon_entry_new): added missing GNOME_ENTRY
+	* gnome-properties.c: added <string.h>
+	* gtkpixmapmenuitem.h, gtkcauldron.h, gtkdial.h, 
+	gnome-druid-page-start.h, gnome-paper-selector.h,
+	gnome-druid-page-standard.h, gnome-druid.h, gnome-druid-page-finish.h, 
+	gnome-druid-page.h: extern "C" replaced by ..._GNOME_DECLS
+	* gnome-canvas-load.[ch], gnome-app-helper.[ch], gnome-app.[ch], 
+	gtk-clock.[ch], gnome-file-entry.[ch], gnome-paper-selector.[ch]: 
+	marked some char* args const
+	* gnome-font-selector.c: strcmp() args casted to (char*)
+	
+1999-08-22  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-icon-sel.c (gnome_icon_selection_show_icons): Check
+	for destroyed or stop_loading on every iteration, instead of 
+	after all events are expired; should fix bug 1883.
+
+1999-08-22  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-icon-entry.c (gnome_icon_entry_new): Load the entry's
+	history. Doh. We maybe should have a construct() method for
+	GnomeEntry. Added "keep in sync" comment. Fixes bug 1701, fix from
+	Chris Gonnerman <chris.gonnerman@usa.net>
+
+	* gnome-entry.c (gnome_entry_new): Add comment about syncing.
+
+	* gnome-file-entry.c (gnome_file_entry_new): Add comment about
+	syncing these functions.
+	
+1999-08-22  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-icon-list.c (gnome_icon_list_thaw): Show the item on 
+	thaw, even if the dirty flag is not set (so it works if you 
+	freeze then thaw without ever changing anything). Fix from 
+	David Meybohm <dm89754@ucf.edu> closes bug 1833.
+
+1999-08-22  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-icon-sel.c (gnome_icon_selection_show_icons): Patch from 
+	David Meybohm <dm89754@ucf.edu> fixes multiple-progress-bar bug
+	(happened when changing directories during loading). Closes bug 
+	1832.
+
+Sat Aug 21 12:47:28 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap.c: fix docs for gnome_pixmap_load_file_at_size
+
+Sat Aug 21 12:45:09 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap.c: pretty up the inline docs and divide
+	  Description and Returns
+
+	* gnome-scores.c: add the "/**" comments, but without any
+	  descriptions
+
+Sat Aug 21 12:19:53 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dock.c: document gnome_dock_add_from_layout
+
+	* gnome-doct.c,gnome-dock-layout.c: add #'s for crossreferencing
+
+Sat Aug 21 11:54:16 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-procbar.c: completely document the API
+
+Sat Aug 21 11:31:07 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.[ch]: there was a typo in the object, and
+	  there was a call named gnome_dentry_get_dentry, which is the
+	  wrong naming, it should be gnome_dentry_edit_get_dentry, so
+	  I added the latter one and left in the first one for compatibility
+	  but marked it as "not to be used". Also updated other parts of
+	  the documentation
+
+Sat Aug 21 11:18:47 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dialog.c: the # is used to crosslink not the &, and
+	  add a return type description to newv
+
+Sat Aug 21 11:13:54 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-client.c: touched up docs for
+	  gnome_client_get_global_config_prefix, still this file has
+	  a bunch of things that need fixing in the docs
+
+Sat Aug 21 11:06:57 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-app.c: fix so that documentation for gnome_app_add_dock_item
+	  is actually read
+
+1999-08-19  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-animator.c (free_all_frames): Don't free the mask, since
+	it has already been freed by imlib.
+	(gnome_animator_append_frames_from_imlib_at_size): Likewise.
+
+	* gnome-canvas-image.c (free_pixmap_and_mask): Sigh.  Tell imlib
+	to *only* free the pixmap, not the mask as well.  When you tell
+	imlib to free a pixmap, it will also free its associated mask.  Is
+	that broken, or what?
+
+1999-08-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid.c (gnome_druid_size_allocate): Patch from damon to
+	put the child in the right place.
+	(gnome_druid_expose): Now I have achieved further enlightenment in
+	the ways of writing a GtkContainer.
+	(gnome_druid_draw): Thanks Owen/HP.  Further Container-hood.
+
+1999-08-19  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-icon-entry.c (show_icon_selection): Patch from 
+	David Meybohm <dm89754@ucf.edu> fixes a race condition
+	segfault (set iconsel as user data before any possibility
+	we might ask for user data)
+
+1999-08-18  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-entry.c (gnome_entry_init): Set combo case-insensitive.
+	Closes bug 1939.
+
+1999-08-18  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-font-picker.c (gnome_font_picker_label_use_font_in_label): 
+	If we can't load the font, then don't set it. Fixes bug
+	1625.
+	
+1999-08-17  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-canvas.h: Mark new_aa() experimental
+
+	* gnome-dialog-util.h: request_string_dialog() is 
+	deprecated.
+
+	* gnome-messagebox.h: Couple deprecated routines in here...
+
+	* gnome-propertybox.h: Deprecate couple of these
+
+	* libgnomeui.h: Deprecate/experimentalize some stuff
+
+1999-08-17  Tim P. Gerla  <timg@means.net>
+
+	* gnome-less.c: Add documentation
+
+1999-08-17  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Typo fix; do
+	set the gc foreground if the canvas is not AA.
+
+	* gnome-canvas-text.c (gnome_canvas_text_set_arg): Likewise.
+
+1999-08-17  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-popup-help.c (helpwindow_destroy_callback): remove
+	debugging statements.
+
+	* gnome-druid.c (gnome_druid_remove): many changes to make us act
+	as a nicer container.
+
+1999-08-16  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-druid.c (gnome_druid_destroy): chain up to parent's
+	destroy method
+
+1999-08-16  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page-standard.c (gnome_druid_page_standard_init):
+	cleaned up the druid a little.
+
+1999-08-13  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-icon-list.c (gil_button_press): Do not rubberband-select
+	if we are already selecting.
+
+	* gnome-icon-item.c (gnome_icon_text_item_select): If the icon
+	text item gets unselected while it is being edited, ask for
+	acceptance with iti_edition_accept() instead of blindly accepting
+	the current string.
+
+1999-08-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (selection_one_icon_event): Reset the
+	edit_pending and select_pending flags before starting to process a
+	button press.
+	(selection_many_icon_event): Likewise.
+
+1999-08-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (do_select_many): Added an argument to specify
+	whether it should actually use the event in the emission.
+	(selection_many_icon_event): I am such a doofus.  Fixed delayed
+	computation for icons that are already selected.  This fixes DnD
+	and menus everywhere else.
+
+1999-08-08  Chris Lahey  <clahey@umich.edu>
+
+	* gnome-canvas-widget.c (gnome_canvas_widget_set_arg): Made it so
+	that if an argument is already set to the value given, it doesn't
+	change it or go through an update step.
+
+1999-08-06  Morten Welinder  <terra@diku.dk>
+
+       * gnome-canvas.c (shutdown_transients): Plug leak.
+
+1999-08-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-pixmap-entry.c (ensure_update): New function to ensure
+	that a pixmap entry is not in the wait queue for updates.
+	(gnome_pixmap_entry_get_filename): Fixed a race condition where
+	this function would return an incorrect NULL if the client called
+	it before the pixmap entry update timer expires.  This would make
+	the panel crash.
+
+1999-08-04  Morten Welinder  <terra@diku.dk>
+
+	* gnome-stock.c (gnome_stock_destroy): Unref pixmaps.
+
+1999-08-04  Larry Ewing  <lewing@gimp.org>
+
+	* gnome-canvas.c (gnome_canvas_item_affine_relative): BUGFIX: make sure
+	that we properly set the GNOME_CANVAS_ITEM_AFFINE_FULL flag when 
+	appropriate.
 
 1999-07-31  Tom Tromey  <tromey@cygnus.com>
 
@@ -6022,6 +6755,12 @@ Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Take the
 	absolute value of the width/height arguments.
 
+1999-08-04  Larry Ewing  <lewing@gimp.org>
+
+	* gnome-canvas.c (gnome_canvas_item_affine_relative): BUGFIX: make sure
+	that we properly set the GNOME_CANVAS_ITEM_AFFINE_FULL flag when 
+	appropriate.
+
 1998-08-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_draw): Use the zoom offsets when
@@ -6053,6 +6792,38 @@ Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 	* gnome-mdi.c (gnome_mdi_set_tab_pos): sets the desired tab position
 	for MDI notebook widgets.
 	(book_create): set the desired tab position of created notebook widgets.
+
+1999-08-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-rect-ellipse.h (GnomeCanvasRE): Moved private
+	fields to a private structure in the .c file.
+
+	* gnome-canvas-rect-ellipse.c (REPrivate): New private structure
+	for the abstract rect/ellipse item.
+	(gnome_canvas_re_set_arg): Queue updates and never redraws.
+	Sanitized the way colors are handled; now all information (RGBA
+	and pixel info) is available at all times after an update.
+	(get_color_arg): Helper function for gnome_canvas_re_get_arg() so
+	that it always returns consistent color information.
+	(update_gc): Helper function for gnome_canvas_re_update().  We now
+	use the gtk_gc memoization functions to share GCs between canvas
+	items.
+	(gnome_canvas_re_unrealize): Release the GCs using gtk_gc.
+	(get_corners): Helper function for everyone else so that the user
+	can specify coordinates in disorder (i.e. x1 > x2 and such).
+	(update_non_aa): Update function for rectangles and ellipses in
+	the non-antialiased case.
+	(gnome_canvas_re_update): Sanitized.  Update color information
+	properly.  Removed the gnome_canvas_re_update_shared() function.
+	(gnome_canvas_rect_draw): Sanitized.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_class_init): Added
+	new "width" and "width_is_in_pixels" readable object arguments to
+	query the outline width and whether it was specified in pixels or
+	in units.
+	(gnome_canvas_re_get_arg): Handle the new arguments.
+
+	* gnome-icon-list.h: Fixed some comments.
 
 1998-08-02  Raja R Harinath  <harinath@cs.umn.edu>
 

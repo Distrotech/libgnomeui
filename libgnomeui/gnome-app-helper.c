@@ -227,7 +227,7 @@ static GnomeUIInfo menu_defaults[] = {
 	/*
 	 * Window menu
 	 */
-        { GNOME_APP_UI_ITEM, N_("Create _New Window"),
+        { GNOME_APP_UI_ITEM, N_("Create New _Window"),
           N_("Create a new window"),
           NULL, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
@@ -330,7 +330,7 @@ static gchar *menu_names[] =
 
 static GtkWidget *
 create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, 
-		gpointer pixmap_info)
+		gconstpointer pixmap_info)
 {
 	GtkWidget *pixmap;
 	char *name;
@@ -344,7 +344,7 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type,
 
 	case GNOME_APP_PIXMAP_DATA:
 		if (pixmap_info)
-			pixmap = gnome_pixmap_new_from_xpm_d (pixmap_info);
+			pixmap = gnome_pixmap_new_from_xpm_d ((char**)pixmap_info);
 
 		break;
 
@@ -1911,7 +1911,7 @@ g_strncmp_ignore_char( gchar *first, gchar *second, gint length, gchar ignored )
  **/
 
 GtkWidget *
-gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
+gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos)
 {
 	GtkBin *item;
 	gchar *label = NULL;
@@ -2010,7 +2010,7 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
  **/
 
 void
-gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
+gnome_app_remove_menus(GnomeApp *app, const gchar *path, gint items)
 {
 	GtkWidget *parent, *child;
 	GList *children;
@@ -2066,7 +2066,7 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
  **/
 
 void
-gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items)
+gnome_app_remove_menu_range (GnomeApp *app, const gchar *path, gint start, gint items)
 {
 	GtkWidget *parent, *child;
 	GList *children;
@@ -2119,7 +2119,7 @@ gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items)
  **/
 
 void
-gnome_app_insert_menus_custom (GnomeApp *app, gchar *path, 
+gnome_app_insert_menus_custom (GnomeApp *app, const gchar *path, 
 		GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata)
 {
 	GtkWidget *parent;
@@ -2154,7 +2154,7 @@ gnome_app_insert_menus_custom (GnomeApp *app, gchar *path,
 
 void
 gnome_app_insert_menus (GnomeApp *app,
-			gchar *path,
+			const gchar *path,
 			GnomeUIInfo *menuinfo)
 {
 	GnomeUIBuilderData uidata =
@@ -2178,7 +2178,7 @@ gnome_app_insert_menus (GnomeApp *app,
  **/
 
 void
-gnome_app_insert_menus_with_data (GnomeApp *app, gchar *path, 
+gnome_app_insert_menus_with_data (GnomeApp *app, const gchar *path, 
 		GnomeUIInfo *menuinfo, gpointer data)
 {
 	GnomeUIBuilderData uidata =
@@ -2206,7 +2206,7 @@ gnome_app_insert_menus_with_data (GnomeApp *app, gchar *path,
  **/
 
 void
-gnome_app_insert_menus_interp (GnomeApp *app, gchar *path, 
+gnome_app_insert_menus_interp (GnomeApp *app, const gchar *path, 
 		GnomeUIInfo *menuinfo, GtkCallbackMarshal relay_func, 
 		gpointer data, GtkDestroyNotify destroy_func)
 {
@@ -2225,8 +2225,8 @@ gnome_app_insert_menus_interp (GnomeApp *app, gchar *path,
 }
 
 #ifdef ENABLE_NLS
-char *
-gnome_app_helper_gettext (char *str)
+gchar *
+gnome_app_helper_gettext (const gchar *str)
 {
 	char *s;
 

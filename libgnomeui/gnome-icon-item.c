@@ -1071,7 +1071,7 @@ gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
 	iti->selected = sel ? TRUE : FALSE;
 
 	if (!iti->selected && iti->editing)
-		iti_stop_editing (iti);
+		iti_edition_accept (iti);
 
 	priv->need_state_update = TRUE;
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (iti));

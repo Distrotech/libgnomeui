@@ -6,27 +6,27 @@
 BEGIN_GNOME_DECLS
 
 typedef struct {
-	char *text;
-	int width;
+	gchar *text;
+	gint width;
 	GdkWChar *text_wc;	/* text in wide characters */
-	int text_length;	/* number of characters */
+	gint text_length;	/* number of characters */
 } GnomeIconTextInfoRow;
 
 typedef struct {
 	GList *rows;
 	GdkFont *font;
-	int width;
-	int height;
-	int baseline_skip;
+	gint width;
+	gint height;
+	gint baseline_skip;
 } GnomeIconTextInfo;
 
-GnomeIconTextInfo *gnome_icon_layout_text    (GdkFont *font, char *text,
-					      char *separators, int max_width,
-					      int confine);
+GnomeIconTextInfo *gnome_icon_layout_text    (GdkFont *font, const gchar *text,
+					      const gchar *separators, gint max_width,
+					      gboolean confine);
 
 void               gnome_icon_paint_text     (GnomeIconTextInfo *ti,
 					      GdkDrawable *drawable, GdkGC *gc,
-					      int x, int y,
+					      gint x, gint y,
 					      GtkJustification just);
 
 void               gnome_icon_text_info_free (GnomeIconTextInfo *ti);

@@ -560,6 +560,9 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
+		priv->edit_pending = FALSE;
+		priv->select_pending = FALSE;
+
 		/* Ignore wheel mouse clicks for now */
 		if (event->button.button > 3)
 			break;
@@ -653,7 +656,7 @@ select_range (Gil *gil, Icon *icon, int idx, GdkEvent *event)
 
 /* Handles icon selection for MULTIPLE or EXTENDED selection modes */
 static void
-do_select_many (Gil *gil, Icon *icon, int idx, GdkEvent *event)
+do_select_many (Gil *gil, Icon *icon, int idx, GdkEvent *event, int use_event)
 {
 	GilPrivate *priv;
 	int range, additive;
@@ -672,14 +675,14 @@ do_select_many (Gil *gil, Icon *icon, int idx, GdkEvent *event)
 
 	if (!range) {
 		if (additive)
-			emit_select (gil, !icon->selected, idx, event);
+			emit_select (gil, !icon->selected, idx, use_event ? event : NULL);
 		else
-			emit_select (gil, TRUE, idx, event);
+			emit_select (gil, TRUE, idx, use_event ? event : NULL);
 
 		priv->last_selected_idx = idx;
 		priv->last_selected_icon = icon;
 	} else
-		select_range (gil, icon, idx, event);
+		select_range (gil, icon, idx, use_event ? event : NULL);
 }
 
 /* Event handler for icons when we are in MULTIPLE or EXTENDED mode */
@@ -706,11 +709,13 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
+		priv->edit_pending = FALSE;
+		priv->select_pending = FALSE;
+
 		/* Ignore wheel mouse clicks for now */
 		if (event->button.button > 3)
 			break;
 
-		priv->select_pending = FALSE;
 		do_select = TRUE;
 
 		if (additive || range) {
@@ -725,14 +730,27 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 				emit_select (gil, TRUE, idx, event);
 				do_select = FALSE;
 			}
+		} else if (icon->selected) {
+			priv->select_pending = TRUE;
+			priv->select_pending_event = *event;
+			priv->select_pending_was_selected = icon->selected;
+
+			if (on_text && priv->is_editable && event->button.button == 1)
+				priv->edit_pending = TRUE;
+
+			emit_select (gil, TRUE, idx, event);
+			do_select = FALSE;
+		}
+#if 0
 		} else if (icon->selected && on_text && priv->is_editable
 			   && event->button.button == 1) {
 			priv->edit_pending = TRUE;
 			do_select = FALSE;
 		}
+#endif
 
 		if (do_select)
-			do_select_many (gil, icon, idx, event);
+			do_select_many (gil, icon, idx, event, TRUE);
 
 		retval = TRUE;
 		break;
@@ -750,6 +768,19 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 	case GDK_BUTTON_RELEASE:
 		if (priv->select_pending) {
 			icon->selected = priv->select_pending_was_selected;
+			do_select_many (gil, icon, idx, &priv->select_pending_event, FALSE);
+			priv->select_pending = FALSE;
+			retval = TRUE;
+		}
+
+		if (priv->edit_pending) {
+			gnome_icon_text_item_start_editing (text);
+			priv->edit_pending = FALSE;
+			retval = TRUE;
+		}
+#if 0
+		if (priv->select_pending) {
+			icon->selected = priv->select_pending_was_selected;
 			do_select_many (gil, icon, idx, &priv->select_pending_event);
 			priv->select_pending = FALSE;
 			retval = TRUE;
@@ -758,6 +789,7 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 			priv->edit_pending = FALSE;
 			retval = TRUE;
 		}
+#endif
 
 		break;
 
@@ -888,15 +920,23 @@ icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 
 	icon = g_new0 (Icon, 1);
 
-	icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
-		group,
-		gnome_canvas_image_get_type (),
-		"x", 0.0,
-		"y", 0.0,
-		"width", (double) im->rgb_width,
-		"height", (double) im->rgb_height,
-		"image", im,
-		NULL));
+	if (im)
+		icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
+			group,
+			gnome_canvas_image_get_type (),
+			"x", 0.0,
+			"y", 0.0,
+			"width", (double) im->rgb_width,
+			"height", (double) im->rgb_height,
+			"image", im,
+			NULL));
+	else
+		icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
+			group,
+			gnome_canvas_image_get_type (),
+			"x", 0.0,
+			"y", 0.0,
+			NULL));
 
 	icon->text = GNOME_ICON_TEXT_ITEM (gnome_canvas_item_new (
 		group,
@@ -1070,7 +1110,7 @@ gnome_icon_list_insert (GnomeIconList *gil, int pos, const char *icon_filename, 
  * the specified Imlib image.
  */
 int
-gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, char *text)
+gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 {
 	Icon *icon;
 
@@ -1507,6 +1547,9 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 
 	if (only_one)
 		return TRUE;
+
+	if (priv->selecting)
+		return FALSE;
 
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &tx, &ty);
 	priv->sel_start_x = tx;
@@ -2223,7 +2266,7 @@ gnome_icon_list_freeze (GnomeIconList *gil)
 void
 gnome_icon_list_thaw (GnomeIconList *gil)
 {
-	GilPrivate *priv;
+        GilPrivate *priv;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
@@ -2234,11 +2277,10 @@ gnome_icon_list_thaw (GnomeIconList *gil)
 
 	priv->frozen--;
 
-	if (!priv->dirty)
-		return;
-
-	gil_layout_all_icons (gil);
-	gil_scrollbar_adjust (gil);
+	if (priv->dirty) {
+                gil_layout_all_icons (gil);
+                gil_scrollbar_adjust (gil);
+        }
 
 	if (priv->frozen == 0)
 		gnome_canvas_item_show (GNOME_CANVAS (gil)->root);

@@ -29,12 +29,12 @@ struct _GnomeFileEntry {
 
 	char *browse_dialog_title;
 	char *default_path;
-	
+
 	/*the file dialog widget*/
 	GtkWidget *fsw;
-	
+
 	int is_modal;
-	
+
 	int directory_entry; /*optional flag to only do directories*/
 
 	GtkWidget *gentry;
@@ -42,9 +42,9 @@ struct _GnomeFileEntry {
 
 struct _GnomeFileEntryClass {
 	GtkHBoxClass parent_class;
-	
+
 	/*if you want to modify the browse dialog, bind this with
-	  connect_after and modify object->fsw, or you could just 
+	  connect_after and modify object->fsw, or you could just
 	  create your own and set it to object->fsw in a normally
 	  connected handler, it has to be a gtk_file_selection though*/
 	void (* browse_clicked)(GnomeFileEntry *fentry);
@@ -52,17 +52,20 @@ struct _GnomeFileEntryClass {
 
 
 guint      gnome_file_entry_get_type    (void);
-GtkWidget *gnome_file_entry_new         (char *history_id,
-					 char *browse_dialog_title);
+GtkWidget *gnome_file_entry_new         (const char *history_id,
+					 const char *browse_dialog_title);
+void       gnome_file_entry_construct  (GnomeFileEntry *fentry,
+					const char *history_id,
+					const char *browse_dialog_title);
 
 GtkWidget *gnome_file_entry_gnome_entry (GnomeFileEntry *fentry);
 GtkWidget *gnome_file_entry_gtk_entry   (GnomeFileEntry *fentry);
 void       gnome_file_entry_set_title   (GnomeFileEntry *fentry,
-					 char *browse_dialog_title);
+					 const char *browse_dialog_title);
 
 /*set default path for the browse dialog*/
 void	   gnome_file_entry_set_default_path(GnomeFileEntry *fentry,
-					     char *path);
+					     const char *path);
 
 /*sets up the file entry to be a directory picker rather then a file picker*/
 void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
