@@ -212,7 +212,7 @@ gnome_app_instance_init (GnomeApp *app)
 			    "layout_changed",
 			    GTK_SIGNAL_FUNC (layout_changed),
 			    (gpointer) app);
-
+	
 	app->enable_layout_config = TRUE;
 
 	g_object_get (G_OBJECT (gnome_program_get ()),
@@ -466,7 +466,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	behavior = (BONOBO_DOCK_ITEM_BEH_EXCLUSIVE
 		    | BONOBO_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	
-	if ( ! gnome_gconf_get_bool ("/desktop/gnome/interface/menubar-detachable"))
+	if ( ! gnome_gconf_get_bool ("/desktop/gnome/interface/menubar_detachable"))
 		behavior |= BONOBO_DOCK_ITEM_BEH_LOCKED;
 
 	dock_item = bonobo_dock_item_new (GNOME_APP_MENUBAR_NAME,
@@ -474,27 +474,9 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
 
 	app->menubar = GTK_WIDGET (menubar);
-
-	/* To have menubar relief agree with the toolbar (and have the relief
-	 * outside of smaller handles), substitute the dock item's relief for
-	 * the menubar's relief, but don't change the size of the menubar in
-	 * the process. */
-#ifdef FIXME
-	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar),
-				      GTK_SHADOW_NONE);
-#endif
-	if (gnome_gconf_get_bool ("/desktop/gnome/interface/menubar-relief")) {
-		guint border_width;
-		
-		gtk_container_set_border_width (GTK_CONTAINER (dock_item), 2);
-		border_width = GTK_CONTAINER (app->menubar)->border_width;
-		if (border_width >= 2)
-			border_width -= 2;
-		gtk_container_set_border_width (GTK_CONTAINER (app->menubar),
-						border_width);
-	} else
-		bonobo_dock_item_set_shadow_type (BONOBO_DOCK_ITEM (dock_item),
-						 GTK_SHADOW_NONE);
+	
+	bonobo_dock_item_set_shadow_type (BONOBO_DOCK_ITEM (dock_item),
+					  GTK_SHADOW_NONE);
 
 	if (app->layout != NULL)
 		bonobo_dock_layout_add_item (app->layout,
@@ -663,7 +645,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 	   requirement.  We only do this for backwards compatibility.  */
 	behavior = BONOBO_DOCK_ITEM_BEH_EXCLUSIVE;
 	
-	if ( ! gnome_gconf_get_bool ("/desktop/gnome/interface/toolbar-detachable"))
+	if ( ! gnome_gconf_get_bool ("/desktop/gnome/interface/toolbar_detachable"))
 		behavior |= BONOBO_DOCK_ITEM_BEH_LOCKED;
 	
 	gnome_app_add_toolbar (app, toolbar,

@@ -1,3 +1,20 @@
+2002-01-16  Anders Carlsson  <set EMAIL_ADDRESS environment variable>
+
+	* gnome-about.c: 
+	Make the about box a bit nicer.
+	
+	* gnome-app-helper.c: (setup_image_menu_item),
+	(gnome_app_fill_menu_custom), (gnome_app_create_menus_custom),
+	(per_app_toolbar_style_changed_notify),
+	(toolbar_style_changed_notify), (style_menu_item_activated),
+	(global_menu_item_activated), (create_and_popup_toolbar_menu),
+	(button_press), (gnome_app_setup_toolbar):
+	Update for new gconf schemas.
+	
+	* gnome-app.c: (gnome_app_instance_init), (gnome_app_set_menus),
+	(gnome_app_set_toolbar):
+	Update for new gconf schemas.
+	
 2002-01-15  Jody Goldberg <jody@gnome.org>
 
 	* gnome-app-helper.c (create_toolbar_item) : toggle items should use
