@@ -63,6 +63,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-druid-page-standard.c	\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
+	gnome-font-picker.c		\
 	gnome-gconf-ui.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
@@ -104,6 +105,7 @@ gnome_headers = \
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
+	gnome-font-picker.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-entry.h		\

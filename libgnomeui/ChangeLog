@@ -1,3 +1,19 @@
+Sun Oct 21 00:24:59 2001  George Lebl <jirka@5z.com>
+
+	* libgnomeui.h: add font-picker it's now installed
+
+	* gnome-font-picker.[ch]: port to pango, though it still doesn't
+	  work completely, it doesn't crash now and is almost sane
+
+2001-10-14  Bastien Nocera  <hadess@hadess.net>
+
+	* Makefile.am:
+	* gnome-font-picker.c: (gnome_font_picker_class_init),
+	(gnome_font_picker_set_property), (gnome_font_picker_get_property),
+	(gnome_font_picker_uw_get_widget),
+	(gnome_font_picker_label_use_font_in_label): fixes and
+	porting to gnome2
+
 Wed Oct 17 18:08:34 2001  George Lebl <jirka@5z.com>
 
 	* gnome-ui-init.c: #if 0 out  some options which don't seem to be

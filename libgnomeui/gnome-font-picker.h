@@ -99,7 +99,9 @@ GtkWidget * gnome_font_picker_uw_get_widget    (GnomeFontPicker *gfp);
 /* Functions to interface with GtkFontSelectionDialog */
 const gchar* gnome_font_picker_get_font_name  (GnomeFontPicker *gfp);
 
+#ifndef GTK_DISABLE_DEPRECATED
 GdkFont*   gnome_font_picker_get_font	      (GnomeFontPicker *gfp);
+#endif /* GTK_DISABLE_DEPRECATED */
 
 gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
                                                const gchar     *fontname);
