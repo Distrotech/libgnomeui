@@ -1,5 +1,13 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* selector_demo.c: Use the Bonobo UI API.
+
+	* winhints_demo.c: Use BonoboWindow, not GnomeApp.
+
+	* dock_demo.c: Removed; this is now in libbonoboui.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* Makefile.am: Temporarily diabled mdi_demo until GnomeMDI
 	is back in libgnomeui.
 

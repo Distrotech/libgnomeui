@@ -22,7 +22,6 @@ LDADD =	\
 noinst_PROGRAMS = \
 	selector_demo		\
 	winhints_demo		\
-	dock_demo 		\
 	animator_demo
 
 EXTRA_PROGRAMS = \
@@ -33,8 +32,6 @@ selector_demo_SOURCES = selector_demo.c
 winhints_demo_SOURCES = winhints_demo.c
 
 animator_demo_SOURCES = animator_demo.c
-
-dock_demo_SOURCES = dock_demo.c
 
 mdi_demo_SOURCES = mdi_demo.c
 

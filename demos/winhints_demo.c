@@ -3,6 +3,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-winhints.h>
+#include <bonobo/bonobo-win.h>
 
 
 void layers_cb (GtkWidget *widget, void *data);
@@ -45,7 +46,7 @@ static void prepare_app(void)
   GList *tmp_list;
   
   
-  app = gnome_app_new (_("wmhints-test"), _("winhints-test"));
+  app = bonobo_window_new (_("wmhints-test"), _("winhints-test"));
   gtk_widget_realize (app);
   gtk_signal_connect (GTK_OBJECT (app), "delete_event",
                       GTK_SIGNAL_FUNC (quit_cb),
@@ -58,7 +59,7 @@ static void prepare_app(void)
     fprintf(stderr, "Your WM does not support GNOME extended hints\n");
   
   mvb=gtk_vbox_new(FALSE, 0);
-  gnome_app_set_contents ( GNOME_APP (app), mvb);
+  bonobo_window_set_contents (BONOBO_WINDOW (app), mvb);
   gtk_widget_show (mvb);
   gtk_widget_realize(app);
 
