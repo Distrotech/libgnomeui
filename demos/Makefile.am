@@ -6,11 +6,12 @@ INCLUDES = \
 	-I$(top_srcdir)/libgnomeui			\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMECANVAS_CFLAGS)			\
-        -DGNOMELIBDIR=\""$(libdir)"\" 			\
-        -DGNOMEDATADIR=\""$(datadir)"\" 		\
-        -DGNOMEBINDIR=\""$(bindir)"\" 			\
-        -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" 	\
-        -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" 	\
+        -DGNOMEUILIBDIR=\""$(libdir)"\" 		\
+        -DGNOMEUIDATADIR=\""$(datadir)"\" 		\
+        -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
+        -DGNOMEUIBINDIR=\""$(bindir)"\" 		\
+        -DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
+        -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	-DVERSION=\"$(VERSION)\"
 
