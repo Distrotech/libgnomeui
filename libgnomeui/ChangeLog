@@ -1,5 +1,8 @@
 1999-01-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-icon-item.c (iti_start_selecting): Use an I-beam cursor
+	while selecting.
+
 	* gnome-icon-item.h (GnomeIconTextItemClass): Added
 	"selection_started" and "selection_stopped" signals.  These are
 	required when the user of the icon text item handles grabs on its

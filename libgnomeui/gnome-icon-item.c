@@ -564,13 +564,16 @@ static void
 iti_start_selecting (Iti *iti, int idx, guint32 event_time)
 {
 	GtkEditable *e = GTK_EDITABLE (iti->entry);
+	GdkCursor *ibeam;
 	
 	gtk_editable_select_region (e, idx, idx);
 	gtk_editable_set_position (e, idx);
+	ibeam = gdk_cursor_new (GDK_XTERM);
 	gnome_canvas_item_grab (GNOME_CANVAS_ITEM (iti),
 				GDK_BUTTON_RELEASE_MASK |
 				GDK_POINTER_MOTION_MASK,
-				NULL, event_time);
+				ibeam, event_time);
+	gdk_cursor_destroy (ibeam);
 
 	gtk_editable_select_region (e, idx, idx);
 	e->current_pos = e->selection_start_pos;
@@ -810,7 +813,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			gtk_marshal_NONE__NONE,
 			GTK_TYPE_NONE, 0);
 
-	iti_signals[SELECTION_STARTED] =
+	iti_signals[SELECTION_STOPPED] =
 		gtk_signal_new (
 			"selection_stopped",
 			GTK_RUN_FIRST,
