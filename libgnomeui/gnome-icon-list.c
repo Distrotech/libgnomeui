@@ -236,7 +236,7 @@ static void
 icon_get_height (Icon *icon, int *icon_height, int *text_height)
 {
 	double d_icon_height, dy1, dy2;
-	gtk_object_get(GTK_OBJECT(icon->image), "height", &d_icon_height, NULL);
+	g_object_get (G_OBJECT (icon->image), "height", &d_icon_height, NULL);
 	gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->text), NULL, &dy1, NULL, &dy2);
 	*icon_height = d_icon_height;
 	*text_height = dy2 - dy1;
@@ -284,7 +284,7 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 
 	priv = gil->_priv;
 
-	gtk_object_get(GTK_OBJECT(icon->image), "height", &d_icon_image_height, NULL);
+	g_object_get (G_OBJECT (icon->image), "height", &d_icon_image_height, NULL);
 	icon_image_height = d_icon_image_height;
 	g_assert(icon_image_height != 0);
 	if (icon_height > icon_image_height)
@@ -292,7 +292,7 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 	else
 		y_offset = 0;
 
-	gtk_object_get(GTK_OBJECT(icon->image), "width", &d_icon_image_width, NULL);
+	g_object_get (G_OBJECT (icon->image), "width", &d_icon_image_width, NULL);
 	icon_image_width = d_icon_image_width;
 	g_assert(icon_image_width != 0);
 	if (priv->icon_width > icon_image_width)
@@ -621,7 +621,7 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 	 * destroyed by one of the signal handlers.
 	 */
 	text = icon->text;
-	gtk_object_ref (GTK_OBJECT (text));
+	g_object_ref (G_OBJECT (text));
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
@@ -669,7 +669,7 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 	if (on_text && retval)
 		gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "event");
 
-	gtk_object_unref (GTK_OBJECT (text));
+	g_object_unref (G_OBJECT (text));
 
 	return retval;
 }
@@ -759,7 +759,7 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 	 * destroyed by one of the signal handlers.
 	 */
 	text = icon->text;
-	gtk_object_ref (GTK_OBJECT (text));
+	g_object_ref (G_OBJECT (text));
 
 	range = (event->button.state & GDK_SHIFT_MASK) != 0;
 	additive = (event->button.state & GDK_CONTROL_MASK) != 0;
@@ -841,7 +841,7 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 	if (on_text && retval)
 		gtk_signal_emit_stop_by_name (GTK_OBJECT (text), "event");
 
-	gtk_object_unref (GTK_OBJECT (text));
+	g_object_unref (G_OBJECT (text));
 
 	return retval;
 }
@@ -982,27 +982,27 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 					0, 0, priv->icon_width, NULL,
 					text, priv->is_editable, priv->static_text);
 	
-	gtk_signal_connect (GTK_OBJECT (icon->image), "event",
-			    GTK_SIGNAL_FUNC (icon_event),
-			    icon);
-	icon->text_event_id = gtk_signal_connect (GTK_OBJECT (icon->text), "event",
-						  GTK_SIGNAL_FUNC (icon_event),
-						  icon);
+	g_signal_connect (G_OBJECT (icon->image), "event",
+			  G_CALLBACK (icon_event),
+			  icon);
+	icon->text_event_id = g_signal_connect (G_OBJECT (icon->text), "event",
+						G_CALLBACK (icon_event),
+						icon);
 
 #if 0
-	gtk_signal_connect (GTK_OBJECT (icon->text), "editing_started",
-			    GTK_SIGNAL_FUNC (editing_started),
-			    icon);
-	gtk_signal_connect (GTK_OBJECT (icon->text), "editing_stopped",
-			    GTK_SIGNAL_FUNC (editing_stopped),
-			    icon);
+	g_signal_connect (G_OBJECT (icon->text), "editing_started",
+			  G_CALLBACK (editing_started),
+			  icon);
+	g_signal_connect (G_OBJECT (icon->text), "editing_stopped",
+			  G_CALLBACK (editing_stopped),
+			  icon);
 
-	gtk_signal_connect (GTK_OBJECT (icon->text), "text_changed",
-			    GTK_SIGNAL_FUNC (text_changed),
-			    icon);
-	gtk_signal_connect (GTK_OBJECT (icon->text), "height_changed",
-			    GTK_SIGNAL_FUNC (height_changed),
-			    icon);
+	g_signal_connect (G_OBJECT (icon->text), "text_changed",
+			  G_CALLBACK (text_changed),
+			  icon);
+	g_signal_connect (G_OBJECT (icon->text), "height_changed",
+			  G_CALLBACK (height_changed),
+			  icon);
 #endif
 
 	return icon;
@@ -1339,12 +1339,12 @@ gil_destroy (GtkObject *object)
 	}
 
 	if (gil->adj) {
-		gtk_object_unref (GTK_OBJECT (gil->adj));
+		g_object_unref (G_OBJECT (gil->adj));
 		gil->adj = NULL;
 	}
 	
 	if (gil->hadj) {
-		gtk_object_unref (GTK_OBJECT (gil->hadj));
+		g_object_unref (G_OBJECT (gil->hadj));
 		gil->hadj = NULL;
 	}
 	
@@ -2288,12 +2288,12 @@ gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 	old_adjustment = gil->hadj;
 
 	if (gil->hadj)
-		gtk_object_unref (GTK_OBJECT (gil->hadj));
+		g_object_unref (G_OBJECT (gil->hadj));
 
 	gil->hadj = hadj;
 
 	if (gil->hadj) {
-		gtk_object_ref (GTK_OBJECT (gil->hadj));
+		g_object_ref (G_OBJECT (gil->hadj));
 		/* The horizontal adjustment is not used, so set some default
 		 * values to indicate that everything is visible horizontally.
 		 */
@@ -2340,18 +2340,18 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 
 	if (gil->adj) {
 		gtk_signal_disconnect_by_data (GTK_OBJECT (gil->adj), gil);
-		gtk_object_unref (GTK_OBJECT (gil->adj));
+		g_object_unref (G_OBJECT (gil->adj));
 	}
 
 	gil->adj = vadj;
 
 	if (gil->adj) {
-		gtk_object_ref (GTK_OBJECT (gil->adj));
+		g_object_ref (G_OBJECT (gil->adj));
 		gtk_object_sink (GTK_OBJECT (gil->adj));
-		gtk_signal_connect (GTK_OBJECT (gil->adj), "value_changed",
-				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
-		gtk_signal_connect (GTK_OBJECT (gil->adj), "changed",
-				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
+		g_signal_connect (G_OBJECT (gil->adj), "value_changed",
+				  G_CALLBACK (gil_adj_value_changed), gil);
+		g_signal_connect (G_OBJECT (gil->adj), "changed",
+				  G_CALLBACK (gil_adj_value_changed), gil);
 	}
 
 	if (!gil->adj || !old_adjustment)
