@@ -144,7 +144,7 @@ gnome_canvas_get_miter_points (double x1, double y1, double x2, double y2, doubl
 
 	if (theta > M_PI)
 		theta -= 2.0 * M_PI;
-	else if (theta < M_PI)
+	else if (theta < -M_PI)
 		theta += 2.0 * M_PI;
 
 	if ((theta < ELEVEN_DEGREES) && (theta > -ELEVEN_DEGREES))

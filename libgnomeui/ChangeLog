@@ -1,3 +1,9 @@
+1999-05-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-util.c (gnome_canvas_get_miter_points): Fixed M_PI
+	-> -M_PI typo.  Thanks to Roger Fearick (fearick@physci.uct.ac.za)
+	for reporting this.
+
 1999-05-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_list_remove): Optimization: only
