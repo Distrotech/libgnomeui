@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-18 04:08+0200\n"
+"POT-Creation-Date: 2004-08-19 12:07+0200\n"
 "PO-Revision-Date: 2004-07-27 11:04+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -84,7 +84,6 @@ msgstr "Përkthyer nga"
 msgid "C_redits"
 msgstr "Falende_rime"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
 msgstr "Emri i programit"
@@ -93,7 +92,6 @@ msgstr "Emri i programit"
 msgid "The name of the program"
 msgstr "Emri i programit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-about.c:386
 msgid "Program version"
 msgstr "Versioni i programit"
@@ -102,7 +100,6 @@ msgstr "Versioni i programit"
 msgid "The version of the program"
 msgstr "Versioni i programit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
 msgstr "Teksti i Copyright"
@@ -111,7 +108,6 @@ msgstr "Teksti i Copyright"
 msgid "Copyright information for the program"
 msgstr "Informacione në lidhje me copyright mbi programin"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-about.c:401
 msgid "Comments string"
 msgstr "Teksti i Komenteve"
@@ -132,7 +128,6 @@ msgstr "Lista e autorëve të programeve"
 msgid "Author entry"
 msgstr "Të dhënat e autorit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
 msgstr "Një zë i vetëm autori"
@@ -141,7 +136,6 @@ msgstr "Një zë i vetëm autori"
 msgid "Documenters"
 msgstr "Dokumentues"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
 msgstr "Lista e personave dokumentues të programit"
@@ -150,7 +144,6 @@ msgstr "Lista e personave dokumentues të programit"
 msgid "Documenter entry"
 msgstr "Zëri i dokumentuesit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
 msgstr "Një zë i vetëm dokumentuesi"
@@ -272,7 +265,6 @@ msgstr "Ruaje _Si..."
 msgid "Save the current file with a different name"
 msgstr "Ruaj file aktual me një emër tjetër"
 
-#. GRUT modified this item
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
@@ -282,7 +274,6 @@ msgstr "_Kthe mbrapa"
 msgid "Revert to a saved version of the file"
 msgstr "Riktheje tek njëri nga versionet e ruajtur të file"
 
-#. GRUT modified this item
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
@@ -310,7 +301,6 @@ msgstr "_Mbyll"
 msgid "Close the current file"
 msgstr "Mbylle file aktual"
 
-#. GRUT modified this item
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
@@ -787,7 +777,6 @@ msgstr ""
 msgid "Title"
 msgstr "Titulli"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "Titulli i drejtuesit"
@@ -800,37 +789,30 @@ msgstr "Figura e logo-s"
 msgid "Top Watermark"
 msgstr "Filigrana e sipërme"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr "Figura e filigranës për pjesën e sipërme"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr "Balli i titullit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr "Ngjyra e ballit të titullit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr "Ngjyra e ballit të titullit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr "Ngjyra e ballit të titullit shprehur si GdkColor"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr "Rregullimi i ngjyrës ballore të titullit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr "Ngjyra ballore për titullin u përcaktua"
@@ -844,17 +826,14 @@ msgstr "Ngjyra e Sfondit"
 msgid "Background color"
 msgstr "Ngjyra e sfondit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr "Ngjyra e sfondit shprehur si GdkColor"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr "Rregullimi i ngjyrës së sfondit"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr "Ngjyra e sfondit u përcaktua"
@@ -880,7 +859,6 @@ msgstr "Rregullimi i ngjyrës së sfondit të përmbajtjes"
 msgid "Contents Background color is set"
 msgstr "Ngjyra e sfondit të përmbajtjes u vendos"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
@@ -890,17 +868,14 @@ msgstr "Ngjyra e sfondit të logo-s"
 msgid "Logo Background color"
 msgstr "Ngjyra e sfondit të logo"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Ngjyra e sfondit të logo si ngjyrë GDkColor"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Rregullimi i ngjyrës së sfondit të logo-s"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Ngjyra e sfondit të logo u përcaktua"
@@ -1029,9 +1004,10 @@ msgstr ""
 "Nëse duhet përdorur instrumenti i ri GtkFileChooser apo instrumenti "
 "GtkFileSelection për të zgjedhur files."
 
+#. GRUT modified this item
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
-msgstr "Zgjidh file"
+msgstr "Zgjidh një file"
 
 #: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
@@ -1125,7 +1101,6 @@ msgstr "Shfaq madhësinë e gërmave në modalitetin informacione mbi gërmat"
 msgid "GNOME GConf UI Support"
 msgstr "Suporti GNOME GConf UI"
 
-#. GRUT modified this item
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
 msgstr "_Detaje"
