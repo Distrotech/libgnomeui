@@ -1,3 +1,7 @@
+1999-01-11  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* Makefile.am (gtkrc_DATA): Added gtkrc.ja and gtkrc.ko.
+
 1998-10-11  James Henstridge  <james@daa.com.au>
 
 	* gnome-canvas.c (pick_current_item): set subwindow to NULL before
