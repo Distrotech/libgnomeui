@@ -1,5 +1,6 @@
 /* GNOME color selector in a button.
  * Written by Federico Mena <federico@nuclecu.unam.mx>
+ * FIXME Copyright notice needed
  */
 
 
@@ -232,7 +233,7 @@ gnome_color_selector_new(SetColorFunc set_color_func,
 void
 gnome_color_selector_destroy(GnomeColorSelector *gcs)
 {
-	g_assert(gcs != NULL);
+	g_return_if_fail(gcs != NULL);
 
 	if (gcs->buf)
 		g_free(gcs->buf);
@@ -247,7 +248,7 @@ gnome_color_selector_destroy(GnomeColorSelector *gcs)
 GtkWidget *
 gnome_color_selector_get_button(GnomeColorSelector *gcs)
 {
-	g_assert(gcs != NULL);
+	g_return_if_fail(gcs != NULL);
 
 	return gcs->button;
 } /* gnome_color_selector_get_button */
@@ -259,7 +260,7 @@ gnome_color_selector_set_color(GnomeColorSelector *gcs,
 			       double              g,
 			       double              b)
 {
-	g_assert(gcs != NULL);
+	g_return_if_fail(gcs != NULL);
 
 	gcs->r = CLAMP(r, 0.0, 1.0);
 	gcs->g = CLAMP(g, 0.0, 1.0);
@@ -279,7 +280,7 @@ gnome_color_selector_set_color_int(GnomeColorSelector *gcs,
 				   int                 b,
 				   int                 scale)
 {
-	g_assert(gcs != NULL);
+	g_return_if_fail(gcs != NULL);
 
 	gnome_color_selector_set_color(gcs,
 				       (double) r / scale,
@@ -294,10 +295,10 @@ gnome_color_selector_get_color(GnomeColorSelector *gcs,
 			       double             *g,
 			       double             *b)
 {
-	g_assert(gcs != NULL);
-	g_assert(r != NULL);
-	g_assert(g != NULL);
-	g_assert(b != NULL);
+	g_return_if_fail(gcs != NULL);
+	g_return_if_fail(r != NULL);
+	g_return_if_fail(g != NULL);
+	g_return_if_fail(b != NULL);
 
 	*r = gcs->r;
 	*g = gcs->g;
@@ -312,10 +313,10 @@ gnome_color_selector_get_color_int(GnomeColorSelector *gcs,
 				   int                *b,
 				   int                 scale)
 {
-	g_assert(gcs != NULL);
-	g_assert(r != NULL);
-	g_assert(g != NULL);
-	g_assert(b != NULL);
+	g_return_if_fail(gcs != NULL);
+	g_return_if_fail(r != NULL);
+	g_return_if_fail(g != NULL);
+	g_return_if_fail(b != NULL);
 
 	*r = (int) (gcs->r * scale + 0.5);
 	*g = (int) (gcs->g * scale + 0.5);

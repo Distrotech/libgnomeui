@@ -2,8 +2,8 @@
 #include <string.h>
 #include "libgnome/gnome-defs.h"
 #include "gnome-properties.h"
-#include "gnome-actionarea.h"
 #include "gnome-propertybox.h"
+#include "libgnome/gnome-config.h"
 
 GnomePropertyConfigurator *
 gnome_property_configurator_new (void)
@@ -19,8 +19,10 @@ gnome_property_configurator_new (void)
 void
 gnome_property_configurator_destroy (GnomePropertyConfigurator *this)
 {
-	if (this->property_box)
-		gtk_widget_destroy (this->property_box);
+        g_return_if_fail ( this != NULL );
+	
+	/* The property box should have closed itself. */
+
 	g_list_free (this->props);
 }
 
@@ -30,6 +32,9 @@ void
 gnome_property_configurator_register (GnomePropertyConfigurator *this,
 				      int (*callback)(GnomePropertyRequest))
 {
+        g_return_if_fail ( this != NULL );
+	g_return_if_fail ( callback != NULL );
+
 	this->props = g_list_append (this->props, callback);
 }
 
@@ -56,8 +61,9 @@ apply_page (GtkObject *object, gint page, gpointer data)
 void
 gnome_property_configurator_setup (GnomePropertyConfigurator *this)
 {
+        g_return_if_fail ( this != NULL );
+
 	this->property_box = gnome_property_box_new ();
-	gtk_widget_show (this->property_box);
 
 	gtk_signal_connect (GTK_OBJECT (this->property_box), "apply",
 			    (GtkSignalFunc) apply_page, (gpointer) this);
@@ -70,8 +76,15 @@ request (int (*cb)(GnomePropertyRequest), GnomePropertyRequest r)
 }
 
 void
-gnome_property_configurator_request_foreach (GnomePropertyConfigurator *th,
+gnome_property_configurator_request_foreach (GnomePropertyConfigurator *this,
 					     GnomePropertyRequest r)
 {
-	g_list_foreach (th->props, (GFunc)request, (gpointer)r);
+        g_return_if_fail ( this != NULL );
+	/* Range check */
+	g_return_if_fail ( ( r >= 0 ) && ( r <= GNOME_PROPERTY_SETUP ) );
+
+	g_list_foreach (this->props, (GFunc)request, (gpointer)r);
 }
+
+
+

@@ -29,6 +29,8 @@ gnome_build_action_area (GtkDialog *      dlg,
   GtkWidget *button;
   int i;
 
+  g_warning("Gnome Action Area is deprecated and is going away VERY soon.\n");
+
   gtk_container_border_width (GTK_CONTAINER (dlg->action_area), 4);
 
   for (i = 0; i < num_actions; i++)

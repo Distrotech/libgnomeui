@@ -331,6 +331,8 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	struct tm *mytm;
 	char buffer [40];
 
+	g_return_if_fail(gde != NULL);
+
 	if (the_time == 0)
 		the_time = time (NULL);
 	gde->initial_time = the_time;
@@ -354,6 +356,8 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 void
 gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour)
 {
+        g_return_if_fail(gde != NULL);
+
 	gde->lower_hour = low_hour;
 	gde->upper_hour = up_hour;
 }
@@ -460,6 +464,10 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 {
 	struct tm tm;
 	char *str, *flags;
+
+	/* Assert, because we're just hosed if it's NULL */
+	g_assert(gde != NULL);
+	g_assert(GNOME_IS_DATE_EDIT(gde));
 	
 	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->date_entry)), "%d/%d/%d",
 		&tm.tm_mon, &tm.tm_mday, &tm.tm_year); /* FIXME: internationalize this - strptime()*/
