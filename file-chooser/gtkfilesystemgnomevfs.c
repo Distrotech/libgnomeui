@@ -465,7 +465,8 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
 
   /* Add root, first in the list */
   volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, "/");
-  result = g_slist_prepend (result, volume);
+  if (volume)
+    result = g_slist_prepend (result, volume);
   
   return result;
 }

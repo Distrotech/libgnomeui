@@ -1,3 +1,9 @@
+2004-07-18  Colin Walters  <walters@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	  (gtk_file_system_gnome_vfs_list_volumes): Avoid crash if
+	  gnome_vfs_volume_monitor_get_volume_for_path returns NULL.
+
 2004-06-24  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-authentication-manager.c:
