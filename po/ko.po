@@ -4,14 +4,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
-"PO-Revision-Date: 2003-09-24 00:27+0900\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-10 06:15+0900\n"
+"PO-Revision-Date: 2004-01-10 06:16+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -137,6 +137,7 @@ msgstr "%s 정보"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -194,6 +195,7 @@ msgid "_Game"
 msgstr "게임(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -384,11 +386,11 @@ msgstr "프로그램을 설정합니다"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "정보(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "이 프로그램에 대한 정보"
 
@@ -415,7 +417,7 @@ msgstr "새로운 창을 만듭니다"
 msgid "_Close This Window"
 msgstr "창 닫기(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "현재 창을 닫습니다"
 
@@ -617,14 +619,12 @@ msgstr "인증이 필요합니다"
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " 도메인 %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"\"%s\"에 접근하려면 로그인을 해야 합니다.\n"
-"%s"
+msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다."
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -939,23 +939,23 @@ msgstr ""
 "파일 엔트리가 파일이름의 입력에 사용하는 GnomeEntry.  이 등록 정보를 사용해 "
 "GtkEntry를 얻어 내 그 매개 변수의 값을 알아보거나 바꿀 수 있습니다."
 
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "파일 선택"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "경로"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "파일의 경로"
 
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "찾아보기(_B)..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "파일을 선택할 수 있는 파일 선택 창을 띄웁니다"
 
@@ -1227,7 +1227,7 @@ msgstr "사용자이름(_U):"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "도메인(_D):"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1235,11 +1235,11 @@ msgstr "열쇠글(_P):"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "이 세션동안 열쇠글 기억"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "키링에 열쇠글 저장"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1386,5 +1386,6 @@ msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "자세한 정보는 그놈 응용프로그램의 비정상 종료 안내 웹페이지에 있습니다."
 
-#~ msgid "Exit the test"
-#~ msgstr "테스트 끝내기"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "테스트 끝내기"
