@@ -226,7 +226,7 @@ set_result(GnomeCalculator *gc)
 
 	gc->result = stack->d.number;
 
-	g_snprintf(gc->result_string,13,"% 12lg",gc->result);
+	g_snprintf(gc->result_string,13,"% 12.12lg",gc->result);
 	put_led_font(gc);
 }
 
@@ -584,6 +584,45 @@ drg_toggle(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
+static gint
+set_pi(GtkWidget *w, gpointer data)
+{
+	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
+
+	g_return_val_if_fail(gc!=NULL,TRUE);
+
+	if(gc->stack==NULL ||
+	   ((CalculatorStack *)gc->stack->data)->type!=CALCULATOR_NUMBER) {
+		gc->add_digit = TRUE;
+		gc->result = M_PI;
+		push_input(gc);
+	} else
+		((CalculatorStack *)gc->stack->data)->d.number = M_PI;
+
+	set_result(gc);
+
+	return TRUE;
+}
+
+static gint
+set_e(GtkWidget *w, gpointer data)
+{
+	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
+
+	g_return_val_if_fail(gc!=NULL,TRUE);
+
+	if(gc->stack==NULL ||
+	   ((CalculatorStack *)gc->stack->data)->type!=CALCULATOR_NUMBER) {
+		gc->add_digit = TRUE;
+		gc->result = M_E;
+		push_input(gc);
+	} else
+		((CalculatorStack *)gc->stack->data)->d.number = M_E;
+
+	set_result(gc);
+
+	return TRUE;
+}
 
 static gint
 gnome_calculator_realized(GtkWidget *w, gpointer data)
@@ -686,6 +725,14 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,1,2);
 
+	w=gtk_button_new_with_label("e");
+	gtk_signal_connect(GTK_OBJECT(w),"clicked",
+			   GTK_SIGNAL_FUNC(set_e),
+			   gc);
+	gtk_object_set_user_data(GTK_OBJECT(w),gc);
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,2,3);
+
 	w=gtk_button_new_with_label("EE");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",
 			   GTK_SIGNAL_FUNC(add_digit),
@@ -717,6 +764,14 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gtk_object_set_user_data(GTK_OBJECT(w),gc);
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,2,3);
+
+	w=gtk_button_new_with_label("PI");
+	gtk_signal_connect(GTK_OBJECT(w),"clicked",
+			   GTK_SIGNAL_FUNC(set_pi),
+			   gc);
+	gtk_object_set_user_data(GTK_OBJECT(w),gc);
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(GTK_TABLE(table),w,0,1,3,4);
 
 	w=gtk_button_new_with_label("/");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",

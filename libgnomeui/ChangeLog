@@ -1,3 +1,8 @@
+Sun Apr 12 23:43:11 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.c: added e and PI buttons and made
+	  the display have more digits after .
+
 Sun Apr 12 23:28:02 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calcualtor.c: DEG/RAD/GRAD modeswitching button
