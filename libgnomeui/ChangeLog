@@ -2,6 +2,7 @@
 
 	* gnome-pixmap.c (gnome_pixmap_expose): Repaint only the exposed area.
 	(gnome_pixmap_size_allocate): Center the pixmap's window on its allocation.
+	(setup_window_and_style): Center the window on the widget's allocation.
 
 1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
 

@@ -204,14 +204,14 @@ setup_window_and_style (GnomePixmap *gpixmap)
 		visual = gdk_imlib_get_visual ();
 		colormap = gdk_imlib_get_colormap ();
 	} else {
-		w = h = 1;
+		w = h = 0;
 		visual = gtk_widget_get_visual (widget);
 		colormap = gtk_widget_get_colormap (widget);
 	}
 
 	attributes.window_type = GDK_WINDOW_CHILD;
-	attributes.x = widget->allocation.x;
-	attributes.y = widget->allocation.y;
+	attributes.x = widget->allocation.x + (widget->allocation.width - w) / 2;
+	attributes.y = widget->allocation.y + (widget->allocation.height - h) / 2;
 	attributes.width = w;
 	attributes.height = h;
 	attributes.wclass = GDK_INPUT_OUTPUT;
