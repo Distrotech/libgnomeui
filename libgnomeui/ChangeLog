@@ -8,7 +8,7 @@
 	winhints_demo.c:
 
         Replaced sprintf calls with g_snprintf.
-        Updated a couple hardcoded length values to instead of sizeof().
+        Updated a couple hardcoded length values to instead use sizeof().
 
 Thu Nov 26 21:20:10 1998  George Lebl  <jirka@5z.com>
 
