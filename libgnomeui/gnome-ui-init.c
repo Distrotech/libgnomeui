@@ -307,7 +307,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 
         gnome_type_init();
         /* #warning FIXME: here... gtk_rc ... */
-        libgnomeui_rc_parse (program, program_invocation_name);
+        libgnomeui_rc_parse (program, g_get_prgname ());
 
         libgnomeui_segv_setup (program, TRUE);
 
@@ -516,11 +516,11 @@ static void libgnomeui_segv_handle(int signum)
 
 		/* Child process */
 		execl (GNOMEUIBINDIR "/gnome_segv2", GNOMEUIBINDIR "/gnome_segv",
-		       program_invocation_name, buf,
+		       g_get_prgname (), buf,
 		       gnome_program_get_app_version (program), NULL);
 
                 execlp ("gnome_segv2", "gnome_segv2",
-			program_invocation_name, buf,
+			g_get_prgname (), buf,
 			gnome_program_get_app_version (program), NULL);
 
                 _exit(99);

@@ -1385,7 +1385,7 @@ gnome_client_new_without_connection (void)
   /* Non-glibc systems do not get this set on the master_client until 
      client_parse_func but this is not a problem.
      The SM specs require explictly require that this is the value: */
-  client->program = g_strdup (program_invocation_name);
+  client->program = g_strdup (g_get_prgname ());
 
   return client;
 }

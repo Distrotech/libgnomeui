@@ -1,3 +1,10 @@
+2001-12-08  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-ui-init.c (libgnomeui_segv_handle): 
+	* gnome-client.c (gnome_client_new_without_connection): 
+	* gnome-app.c (gnome_app_class_init): use g_get_prgname () instead
+	of program_invocation_name
+
 2001-12-08  James Henstridge  <james@daa.com.au>
 
 	* gnome-appbar.c (gnome_appbar_constructor): _priv->interactivity

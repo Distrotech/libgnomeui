@@ -149,7 +149,7 @@ gnome_app_class_init (GnomeAppClass *class)
 				      g_param_spec_string ("app_id",
 							   _("App ID"),
 							   _("The application ID string"),
-							   program_invocation_short_name,
+							   g_get_prgname (),
 							   (G_PARAM_READABLE |
 							    G_PARAM_WRITABLE)));
 }
