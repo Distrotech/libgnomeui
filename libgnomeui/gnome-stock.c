@@ -951,31 +951,26 @@ create_pixmap_from_imlib_scaled(GtkWidget *window, GtkStateType state,
 				GnomeStockPixmapEntryImlibScaled *data)
 {
 	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
-	gchar *d;
 	GnomePixmap *ret;
-	int need_free;
+	gchar *d;
 
 	if ((data->width != data->scaled_width) ||
 	    (data->height != data->scaled_height)) {
-		if (!gnome_config_get_bool("/Gnome/Icons/ImlibResize=false"))
+		if (!gnome_config_get_bool("/Gnome/Icons/ImlibResize=false")) {
 			d = scale_down(window, state, (gchar *)data->rgb_data,
 				       data->width, data->height,
 				       data->scaled_width,
 				       data->scaled_height);
-		else
+			ret = (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped(d, NULL, data->scaled_width, data->scaled_height, &shape_color);
+			g_free(d);
+			return ret;
+		} else {
 			return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped_at_size((gchar *)data->rgb_data, NULL, data->width, data->height, data->scaled_width, data->scaled_height, &shape_color);
-		need_free = 1;
+		}
 	} else {
-		d = (gchar *)data->rgb_data;
-		need_free = 0;
+		return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped((gchar *)data->rgb_data, NULL, data->scaled_width, data->scaled_height, &shape_color);
 	}
 
-	ret = (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped(d, NULL,
-								data->scaled_width,
-								data->scaled_height,
-								&shape_color);
-	if (need_free) g_free(d);
-	return ret;
 }
 
 
@@ -1130,7 +1125,6 @@ gnome_stock_pixmap_widget_at_size(GtkWidget *window, const char *icon,
 {
 	GnomeStockPixmapEntry *entry;
 	GnomeStockPixmapEntryImlibScaled *new_entry;
-	GtkWidget *w;
 	GdkImlibImage *im;
 	char name[512];
 
