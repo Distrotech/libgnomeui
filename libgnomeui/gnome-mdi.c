@@ -861,8 +861,10 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
       }
     }
   }
-  else
+  else 
     gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, NULL);
+
+  mdi->active_view = view;
 }
 
 static void app_destroy(GnomeApp *app) {
