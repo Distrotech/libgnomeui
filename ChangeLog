@@ -1,6 +1,12 @@
 2001-04-11  Martin Baulig  <baulig@suse.de>
 
-	* images/: New directory. Copied here from gnome-libs.
+	* libgnomeui/: This has now been copied over in CVS. There's a
+	GNOME_LIBS_MODULE_SPLIT tag which refers to the latest version
+	in gnome-libs.
+
+	* images/: New directory. Copied here from gnome-libs. There's a
+	GNOME_LIBS_MODULE_SPLIT tag which refers to the latest version
+	in gnome-libs.
 
 2001-03-24  Martin Baulig  <baulig@suse.de>
 
