@@ -683,13 +683,6 @@ properties_from_type (GObject     *object,
       GParamSpec *spec = specs[i];
       gboolean can_modify;
 
-      if (G_IS_PARAM_SPEC_OVERRIDE (spec))
-	{
-	  GParamSpec *redirect_target = g_object_property_get_redirect_target (spec);
-	  if (redirect_target)
-	    spec = redirect_target;
-	}
-      
       prop_edit = NULL;
 
       can_modify = ((spec->flags & G_PARAM_WRITABLE) != 0 &&
