@@ -294,6 +294,11 @@ Sun Apr 30 02:12:53 2000  George Lebl <jirka@5z.com>
 
 	* gnome-recently-used.c:  fix warning
 
+2000-04-28  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-about.c (gnome_about_load_logo): Applied Jason Leach's
+	patch to handle absolute filenames for the added logo
+
 2000-04-19  Federico Mena Quintero  <federico@helixcode.com>
 
 	* gnome-calculator.c: Keep around a pixmap and a reference count
@@ -316,6 +321,7 @@ Sun Apr 30 02:12:53 2000  George Lebl <jirka@5z.com>
 	(negate_val): Likewise.
 	(store_m): Likewise.
 	(sum_m): Likewise.
+
 2000-04-20  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-color-picker.c (gnome_color_picker_init): gdk_pixbuf API changes

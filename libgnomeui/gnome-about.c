@@ -714,7 +714,11 @@ gnome_about_load_logo(GnomeAboutInfo *ai, const gchar *logo)
 
 	if (logo && GNOME_ABOUT_SHOW_LOGO)
 	{
-		filename = gnome_pixmap_file(logo);
+		if (g_path_is_absolute (logo) && g_file_exists (logo))
+			filename = g_strdup (logo);
+		else
+			filename = gnome_pixmap_file (logo);
+		
 		if (filename != NULL)
 		{
 			GdkPixbuf *pixbuf;
