@@ -1,3 +1,7 @@
+1999-02-11 The Rasterman <raster@redhat.com>
+
+	* gnome-winhints.h: added WIN_HINTS_DO_NOT_COVER to hints enum
+
 1999-02-11  Arturo Espinosa <arturo@nuclecu.unam.mx>
 
 	* gnome-stock.c: 

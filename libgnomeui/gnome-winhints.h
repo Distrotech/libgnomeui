@@ -75,7 +75,8 @@ typedef enum
   WIN_HINTS_SKIP_WINLIST    = (1<<1), /* not in win list */
   WIN_HINTS_SKIP_TASKBAR    = (1<<2), /* not on taskbar */
   WIN_HINTS_GROUP_TRANSIENT = (1<<3), /* ??????? */
-  WIN_HINTS_FOCUS_ON_CLICK  = (1<<4)  /* app only accepts focus when clicked */
+  WIN_HINTS_FOCUS_ON_CLICK  = (1<<4), /* app only accepts focus when clicked */
+  WIN_HINTS_DO_NOT_COVER    = (1<<5)  /* attempt to not cover this window */
 } GnomeWinHints;
 
 typedef enum
