@@ -1,5 +1,20 @@
 2001-05-20  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector-component.c
+	(PROP_USE_DEFAULT_ENTRY_WIDGET, PROP_USE_DEFAULT_SELECTOR_WIDGET,
+	PROP_WANT_BROWSE_BUTTON, PROP_WANT_CLEAR_BUTTON, PROP_WANT_DEFAULT_BUTTON):
+	Removed these properties
+	(do_construct_handler): Use the client's property bag.
+
+	* gnome-selector-client.c
+	(PROP_WANT_ENTRY_WIDGET, PROP_WANT_SELECTOR_WIDGET, PROP_WANT_BROWSE_BUTTON,
+	PROP_WANT_CLEAR_BUTTON, PROP_WANT_DEFAULT_BUTTON, PROP_BROWSE_DIALOG_MONIKER):
+	New properties.
+	(gnome_selector_client_construct): Create a new property bag and proxy our
+	GObject's properties.
+
+2001-05-20  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector-client.h
 	(gnome_selector_client_new): Take a `const gchar *moniker'.
 	(gnome_selector_client_construct): Likewise.
