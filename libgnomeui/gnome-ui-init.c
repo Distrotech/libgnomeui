@@ -91,8 +91,11 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 
 		gtk_init (&our_argc, &our_argv);
 		gdk_imlib_init ();
-		gtk_rc_set_image_loader(imlib_image_loader);
 		
+#ifdef GTK_HAVE_RC_SET_IMAGE_LOADER
+		/* New feature in 1.1 tree */
+		gtk_rc_set_image_loader(imlib_image_loader);
+#endif
 		gnome_rc_parse (program_invocation_name);
 
 		for (i = 0; i < copy_ac; ++i)
