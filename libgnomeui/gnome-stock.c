@@ -703,6 +703,7 @@ build_disabled_pixmap(GtkWidget *window, GnomePixmap **inout_pixmap)
 				gdk_draw_point(pixmap, gc, x, y);
 			}
 		}
+		gdk_gc_destroy(gc);
 		return;
 	}
 #endif
@@ -735,6 +736,7 @@ build_disabled_pixmap(GtkWidget *window, GnomePixmap **inout_pixmap)
 	}
 	gdk_draw_image(pixmap, gc, image, 0, 0, 0, 0, w, h);
 	gdk_image_destroy(image);
+	gdk_gc_destroy(gc);
 	gdk_color_context_free(cc);
 }
 

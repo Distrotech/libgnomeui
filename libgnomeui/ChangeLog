@@ -1,3 +1,10 @@
+Thu May 21 18:43:14 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.c (build_disabled_pixmap): destroy the GC when done
+
+	* gnome-lamp.[ch]: new files. Proposal for the basic implementation of
+	lamps/beacons.
+
 1998-05-21  John Ellis  <johne@bellatlantic.net>
 
 	* gnome-pixmap.h: changed char *data in

@@ -371,9 +371,20 @@ toggle_button(GtkWidget *button, GnomeStockPixmapWidget *w)
 
 
 static void
+lamp_value_changed(GtkAdjustment *adj, GnomeLamp *lamp)
+{
+	GdkColor c;
+
+	c.red = (adj->value / 100.0) * 0xf000;
+	c.green = (1.0 - (adj->value / 100.0)) * 0xf000;
+	c.blue = (c.red < 0x8000) ? c.red + 0x8000 : c.green + 0x8000;
+	gnome_lamp_set_color(lamp, &c);
+}
+
+static void
 fill_table(GtkWidget *window, GtkTable *table)
 {
-	GtkWidget *w, *button;
+	GtkWidget *w, *button, *lamp;
 	gint row, column;
 
 	row = column = 0;
@@ -693,6 +704,18 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
 #endif
+
+	column++;
+	lamp = gnome_lamp_new();
+	gtk_widget_show(lamp);
+	gtk_table_attach_defaults(table, lamp, column, column + 1, row, row + 1);
+	w = (GtkWidget *)gtk_adjustment_new(0.0, 0.0, 110.0, 1.0, 10.0, 10.0);
+	gtk_signal_connect(GTK_OBJECT(w), "value_changed",
+			   (GtkSignalFunc)lamp_value_changed, lamp);
+	lamp_value_changed(GTK_ADJUSTMENT(w), GNOME_LAMP(lamp));
+	w = gtk_hscale_new(GTK_ADJUSTMENT(w));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
 
 	gtk_table_set_col_spacings(table, 10);
 	gtk_table_set_row_spacing(table, 2, 10);

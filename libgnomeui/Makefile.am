@@ -50,6 +50,7 @@ libgnomeui_la_SOURCES = \
 	gtk-socket.c			\
 	gtkcalendar.c			\
 	gnome-dateedit.c		\
+	gnome-lamp.c			\
 	gnome-calculator.c
 
 libgnomeuiinclude_HEADERS = 		\
@@ -88,6 +89,7 @@ libgnomeuiinclude_HEADERS = 		\
 	libgnomeui.h			\
 	gtkcalendar.h			\
 	gnome-dateedit.h		\
+	gnome-lamp.h			\
 	gnome-calculator.h
 
 gnome_segv_SOURCES = gnome_segv.c
