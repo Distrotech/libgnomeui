@@ -633,8 +633,14 @@ relay_gtk_signal(GtkObject *object,
   if(gtk_object_get_data_by_id(object, disable_sound_quark))
     return TRUE;
 
-  if(GTK_IS_WIDGET(object) && !GTK_WIDGET_DRAWABLE(object))
-    return TRUE;
+  if(GTK_IS_WIDGET(object)) {
+    if(!GTK_WIDGET_DRAWABLE(object))
+      return TRUE;
+
+    if(GTK_IS_MENU_ITEM(object) && GTK_MENU_ITEM(object)->submenu)
+      return TRUE;
+  }
+
 
   gnome_triggers_vdo("", NULL, (const char **)pieces);
 
