@@ -69,6 +69,7 @@
 #include <libgnomeui/gnome-vfs-util.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-pixmap-entry.h>
+#include <libgnomeui/gnome-propertybox.h>
 
 #ifdef COMPAT_1_0
 #include "compat/1.0/libgnomeui-compat-1.0.h"

@@ -69,6 +69,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-messagebox.c		\
 	gnome-pixmap.c			\
 	gnome-pixmap-entry.c		\
+	gnome-propertybox.c		\
 	gnome-ui-init.c			\
 	gnometypes.c			\
 	gnome-icon-entry.c		\
@@ -107,6 +108,7 @@ gnome_headers = \
 	gnome-messagebox.h		\
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
+	gnome-propertybox.h		\
 	gnome-ui-init.h			\
 	gnome-stock-icons.h		\
 	gnome-types.h			\

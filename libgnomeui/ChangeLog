@@ -1,3 +1,14 @@
+Thu Aug 30 19:50:09 2001  George Lebl <jirka@5z.com>
+
+	* gnome-propertybox.[ch], libgnomeui.h, Makefile.am:  Add the
+	  deprecated gnome-propertybox widget.  Exactly the same as 1.0
+	  version and all under _DISABLE_DEPRECATED
+
+	* gnome-entry.h, gnome-file-entry.h:  In case it will at some point
+	  be possible to add insert_text and delete_text signals and have
+	  the filtering semantics work, added two reserved pointers in the
+	  class structures.
+
 Thu Aug 30 18:51:12 2001  George Lebl <jirka@5z.com>
 
 	* gnome-macros.h: Fix typo in parent_class declaration

@@ -70,6 +70,10 @@ struct _GnomeEntryClass {
 	/* Like the GtkEntry signals */
 	void (* changed) (GnomeEntry *entry);
 	void (* activate) (GnomeEntry *entry);
+
+	gpointer reserved1, reserved2; /* Reserved for future use,
+					  we'll need to proxy insert_text
+					  and delete_text signals */
 };
 
 

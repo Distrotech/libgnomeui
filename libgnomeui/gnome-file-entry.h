@@ -83,6 +83,10 @@ struct _GnomeFileEntryClass {
 	/* Like in GtkEntry */
 	void (* changed) (GnomeFileEntry *fentry);
 	void (* activate) (GnomeFileEntry *fentry);
+
+	gpointer reserved1, reserved2; /* Reserved for future use,
+					  we'll need to proxy insert_text
+					  and delete_text signals */
 };
 
 
