@@ -55,8 +55,6 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-pixmap.h"
 
-#include <glade/glade.h>
-
 extern void gnome_type_init (void);
 
 const char libgnomeui_param_crash_dialog[]="B:libgnomeui/show_crash_dialog";
@@ -302,8 +300,6 @@ libgnomeui_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
         gnome_preferences_load();
 
         libgnomeui_segv_setup(TRUE);
-
-        glade_gnome_init();
 }
 
 static void
