@@ -19,6 +19,7 @@
 #include <config.h>
 #include <stdarg.h>
 #include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-util.h"
 #include "gnome-messagebox.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
@@ -140,6 +141,11 @@ gnome_message_box_init (GnomeMessageBox *message_box)
 	message_box->modal = FALSE;
 }
 
+
+#define INFO_PIXMAP     "gnome-default.png"
+#define WARNING_PIXMAP  "gnome-default.png"
+#define ERROR_PIXMAP    "gnome-default.png"
+#define QUESTION_PIXMAP "gnome-default.png"
 GtkWidget*
 gnome_message_box_new (gchar           *message,
 		      gchar           *message_box_type, ...)
@@ -151,9 +157,7 @@ gnome_message_box_new (gchar           *message,
 	GtkWidget *label;
 	GtkWidget *separator;
 
-	GtkWidget *pixmapwid;
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;                 
+	GtkWidget *pixmap;
 	GtkStyle *style;
 
 	va_start (ap, message_box_type);
@@ -170,35 +174,19 @@ gnome_message_box_new (gchar           *message,
 
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Information"));
-		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (message_box)->window, 
-						     &mask, 
-						     &style->bg[GTK_STATE_NORMAL],
-						     "bomb.xpm");
+		pixmap = gnome_pixmap_new_from_file(gnome_pixmap_file(INFO_PIXMAP));
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Warning"));
-		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (message_box)->window,
-						     &mask, 
-						     &style->bg[GTK_STATE_NORMAL],
-						     "bomb.xpm");
+		pixmap = gnome_pixmap_new_from_file(gnome_pixmap_file(WARNING_PIXMAP));
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Error"));
-		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (message_box)->window, 
-						     &mask, 
-						     &style->bg[GTK_STATE_NORMAL],
-						     "bomb.xpm");
+		pixmap = gnome_pixmap_new_from_file(gnome_pixmap_file(ERROR_PIXMAP));
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (message_box), _("Question"));
-		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (message_box)->window, 
-						     &mask, 
-						     &style->bg[GTK_STATE_NORMAL],
-						     "bomb.xpm");
+		pixmap = gnome_pixmap_new_from_file(gnome_pixmap_file(QUESTION_PIXMAP));
 	}
 	else
 	{
@@ -216,9 +204,8 @@ gnome_message_box_new (gchar           *message,
 
 	if (pixmap)
 	{
-		pixmapwid = gtk_pixmap_new (pixmap, mask);
-		gtk_box_pack_start (GTK_BOX (hbox), pixmapwid, FALSE, TRUE, 0);
-		gtk_widget_show (pixmapwid);
+		gtk_box_pack_start (GTK_BOX (hbox), pixmap, FALSE, TRUE, 0);
+		gtk_widget_show (pixmap);
 	}
 
 	label = gtk_label_new (message);

@@ -1,5 +1,13 @@
 Tue Mar 24 19:24:23 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
 
+	* gnome-messagebox.c (gnome_message_box_new): use
+	gnome_pixmap_new_from_file for pixmap loading
+
+	We will have to supply some pixmaps for the gnome message box. I
+	couldn't find any "bomp.{xpm,png}".
+
+Tue Mar 24 19:24:23 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
+
 	* gnome-app-helper.c (gnome_app_do_ui_accelerator_setup): use
 	gtk_widget_install_accelerator to make the accelerators visible in
 	the menu
