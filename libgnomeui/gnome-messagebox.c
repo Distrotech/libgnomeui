@@ -20,6 +20,7 @@
 #include <stdarg.h>
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
+#include "libgnome/gnome-i18nP.h"
 #include "gnome-messagebox.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
@@ -31,26 +32,6 @@
 #define GNOME_MESSAGE_BOX_WIDTH  425
 #define GNOME_MESSAGE_BOX_HEIGHT 125
 
-
-/* Library must use dgettext, not gettext.  */
-#ifdef ENABLE_NLS
-#    include <libintl.h>
-#    define _(String) dgettext (PACKAGE, String)
-#    ifdef gettext_noop
-#        define N_(String) gettext_noop (String)
-#    else
-#        define N_(String) (String)
-#    endif
-#else
-/* Stubs that do something close enough.  */
-#    define textdomain(String) (String)
-#    define gettext(String) (String)
-#    define dgettext(Domain,Message) (Message)
-#    define dcgettext(Domain,Message,Type) (Message)
-#    define bindtextdomain(Domain,Directory) (Domain)
-#    define _(String) (String)
-#    define N_(String) (String)
-#endif
 
 static void gnome_message_box_class_init (GnomeMessageBoxClass *klass);
 static void gnome_message_box_init       (GnomeMessageBox      *messagebox);

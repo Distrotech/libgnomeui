@@ -1,3 +1,54 @@
+Mon Apr  6 13:10:43 CDT 1998 Havoc Pennington  <hp@pobox.com>
+
+	* gnome-about.h (GnomeAboutButton): typedef removed.
+	* gnome-about.h (GNOME_ABOUT_BUTTON_WIDTH,
+	GNOME_ABOUT_BUTTON_HEIGHT): defines removed.
+	* gnome-about.h, gnome-about.c: GnomeAbout now derives from 
+	GnomeDialog. 
+	* gnome-about.c: Unused signal enum removed.
+	* gnome-about.c (parent_class): Unused global variable 
+	removed.
+	* gnome-about.c: Removed button-creating code, since
+	GnomeDialog handles it.
+	* gnome-about.c (gnome_about_button_clicked): Callback
+	removed, GnomeDialog handles it.
+	* gnome-about.c: Removed border-width code; use default
+	border from GnomeDialog.
+	* gnome-about.c (gnome_destroy_about): Fixed memory leak;
+	function freed uninitialized tmp variable rather than 
+	gai->names. Removed tmp declaration.
+	* libgnomeui.h: #include <libgnomeui/gnome-dialog.h>
+	* gnome-net.h: use BEGIN_GNOME_DECLS
+	* gnome-net.c (gnome_net_gets): changed if (errno = EAGAIN)
+	to if (errno == EAGAIN). 
+	* gnome-about.c, gnome-net.c, gnome-scores.c, 
+	gnome-propertybox.c: #include specific headers, not <gnome.h>
+	* gnome-propertybox.c, gnome-messagebox.c, gnome-dialog.c:
+	Removed i18n defines; will use new private header.
+	* gnome-actionarea.h: Added a "deprecated" comment.
+	* gnome-dialog.h, gnome-dialog.c (gnome_dialog_set_sensitive):
+	New function to set button sensitivity.
+	* gnome-propertybox.h, gnome-propertybox.c: Now derives from 
+	GnomeDialog.
+	* gnome-propertybox.c (GNOME_PAD): Removed this #define.
+	* gnome-propertybox.c (dialog_clicked_cb): new function.
+	* gnome-propertybox.c: Changed signature of previous button
+	callbacks. They are now called from dialog_clicked_cb, so 
+	they have no button argument.
+	* gnome-propertybox.c (gnome_property_box_init): Don't set 
+	up button box or vbox, since GnomeDialog now handles that.
+	* gnome-propertybox.c (global_apply): return if
+	property_box->items == NULL. Initialize variable 'item' to 
+	NULL, to make -Wall happy.
+	* gnome-dialog.c (gnome_dialog_button_clicked): Since 
+	PropertyBox destroyed itself when this function emitted 
+	"clicked", and this function then tried to look at a 
+	GnomeDialog struct member, there was a bug. Fixed.
+	* gnome-propertybox.c (gnome_property_box_init): Don't do
+	the 3D frame, since GnomeDialog handles it.
+	* gnome-dialog.c (gnome_dialog_init): Added a nice 3D bevel
+	to the edge of the dialog, like gnome-propertybox had.
+
 1998-04-06  Marc Ewing  <marc@redhat.com>
 
 	* gtk-socket.[ch]: change "id" parameter name to "wid"

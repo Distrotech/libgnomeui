@@ -59,6 +59,9 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 void       gnome_dialog_set_modal      (GnomeDialog *dialog);
 void       gnome_dialog_set_default    (GnomeDialog *dialog,
 					gint         button);
+void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
+					gint         button,
+					gboolean     setting);
 /* Whether to destroy after emitting clicked signal - 
    default is FALSE */
 void       gnome_dialog_set_destroy    (GnomeDialog * dialog,

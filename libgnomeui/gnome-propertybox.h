@@ -20,6 +20,9 @@
 #ifndef __GNOME_PROPERTY_BOX_H__
 #define __GNOME_PROPERTY_BOX_H__
 
+#include "gnome-dialog.h"
+#include "libgnome/gnome-defs.h"
+
 BEGIN_GNOME_DECLS
 
 #define GNOME_PROPERTY_BOX(Obj)         GTK_CHECK_CAST (Obj, gnome_property_box_get_type (), GnomePropertyBox)
@@ -38,7 +41,7 @@ struct _GnomePropertyBoxItem
 
 struct _GnomePropertyBox
 {
-	GtkWindow window;
+	GnomeDialog dialog;
 
 	GtkWidget *notebook;	    /* The notebook widget.  */
 	GtkWidget *ok_button;	    /* OK button.  */
@@ -52,7 +55,7 @@ struct _GnomePropertyBox
 
 struct _GnomePropertyBoxClass
 {
-	GtkWindowClass parent_class;
+	GnomeDialogClass parent_class;
 
 	void (* apply) (GnomePropertyBox *propertybox);
 	void (* help)  (GnomePropertyBox *propertybox);

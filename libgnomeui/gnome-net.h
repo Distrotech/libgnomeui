@@ -2,6 +2,10 @@
 #ifndef __GNOME_NET_H__
 #define __GNOME_NET_H__
 
+#include <libgnome/gnome-defs.h>
+
+BEGIN_GNOME_DECLS
+
 #define GNOME_NET_OK  0
 #define GNOME_NET_EOF 1
 #define GNOME_NET_ERROR 2
@@ -31,5 +35,7 @@ void gnome_net_read_callback_remove(gint sock);
 
 gint gnome_net_gets(gint sock, GString *gs);
 gint gnome_net_printf(gint sock, gchar *format, ...);
+
+END_GNOME_DECLS
 
 #endif

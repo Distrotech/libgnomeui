@@ -25,34 +25,21 @@
 
 #include <config.h>
 
+#include "gnome-propertybox.h"
+#include "libgnome/gnome-util.h"
+#include "libgnome/gnome-i18nP.h"
+#include "gnome-stock.h"
+#include "libgnome/gnome-config.h"
 #include <gtk/gtk.h>
-#include <gnome.h>
 
-/* Library must use dgettext, not gettext.  */
-#ifdef ENABLE_NLS
-#    include <libintl.h>
-#    undef _
-#    define _(String) dgettext (PACKAGE, String)
-#    ifdef gettext_noop
-#        define N_(String) gettext_noop (String)
-#    else
-#        define N_(String) (String)
-#    endif
-#else
-/* Stubs that do something close enough.  */
-#    define textdomain(String) (String)
-#    define gettext(String) (String)
-#    define dgettext(Domain,Message) (Message)
-#    define dcgettext(Domain,Message,Type) (Message)
-#    define bindtextdomain(Domain,Directory) (Domain)
-#    define _(String) (String)
-#    define N_(String) (String)
-#endif
-
-
-/* FIXME: define more globally.  */
-#define GNOME_PAD 10
-
+/* The buttons in the GnomeDialog */
+enum 
+{
+  OK_BUTTON,
+  APPLY_BUTTON,
+  CLOSE_BUTTON,
+  HELP_BUTTON
+};
 
 enum
 {
@@ -72,14 +59,17 @@ static void gnome_property_box_marshal_signal (GtkObject *object,
 					       GtkArg *args);
 static void gnome_property_box_destroy (GtkObject *object);
 
-static void global_apply (GtkObject *button, GnomePropertyBox *property_box);
-static void help (GtkObject *button, GnomePropertyBox *property_box);
-static void apply_and_close (GtkObject *button,
-			     GnomePropertyBox *property_box);
-static void just_close (GtkObject *button, GnomePropertyBox *property_box);
+/* These four are called from dialog_clicked_cb(), depending
+   on which button was clicked. */
+static void global_apply (GnomePropertyBox *property_box);
+static void help (GnomePropertyBox *property_box);
+static void apply_and_close (GnomePropertyBox *property_box);
+static void just_close (GnomePropertyBox *property_box);
 
+static void dialog_clicked_cb(GnomeDialog * dialog, gint button,
+			      gpointer data);
 
-static GtkWindowClass *parent_class = NULL;
+static GnomeDialogClass *parent_class = NULL;
 
 static gint property_box_signals[LAST_SIGNAL] = { 0 };
 
@@ -99,7 +89,7 @@ gnome_property_box_get_type (void)
 			(GtkArgGetFunc) NULL
 		};
 
-		property_box_type = gtk_type_unique (gtk_window_get_type (),
+		property_box_type = gtk_type_unique (gnome_dialog_get_type (),
 						     &property_box_info);
 	}
 
@@ -119,7 +109,7 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 
 	object_class->destroy = gnome_property_box_destroy;
 
-	parent_class = gtk_type_class (gtk_window_get_type ());
+	parent_class = gtk_type_class (gnome_dialog_get_type ());
 
 	property_box_signals[APPLY] =
 		gtk_signal_new ("apply",
@@ -157,67 +147,43 @@ gnome_property_box_marshal_signal (GtkObject *object,
 static void
 gnome_property_box_init (GnomePropertyBox *property_box)
 {
-	GtkWidget *vbox, *hbox, *bf;
+	GList * button_list;
 
 	property_box->notebook = gtk_notebook_new ();
 
-	property_box->ok_button = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
-	property_box->apply_button
-		= gnome_stock_button (GNOME_STOCK_BUTTON_APPLY);
-	property_box->cancel_button
-		= gnome_stock_button (GNOME_STOCK_BUTTON_CLOSE);
-	property_box->help_button
-		= gnome_stock_button (GNOME_STOCK_BUTTON_HELP);
+	gnome_dialog_append_buttons(GNOME_DIALOG(property_box),
+				    GNOME_STOCK_BUTTON_OK,
+				    GNOME_STOCK_BUTTON_APPLY,
+				    GNOME_STOCK_BUTTON_CLOSE,
+				    GNOME_STOCK_BUTTON_HELP,
+				    NULL);
+
+	/* This is sort of unattractive */
+
+	button_list = GNOME_DIALOG(property_box)->buttons;
+
+	property_box->ok_button = GTK_WIDGET(button_list->data);
+	button_list = button_list->next;
+	property_box->apply_button = GTK_WIDGET(button_list->data);
+	button_list = button_list->next;
+	property_box->cancel_button = GTK_WIDGET(button_list->data);
+	button_list = button_list->next;
+	property_box->help_button = GTK_WIDGET(button_list->data);
 
 	property_box->items = NULL;
 
 	gtk_widget_set_sensitive (property_box->ok_button, FALSE);
 	gtk_widget_set_sensitive (property_box->apply_button, FALSE);
 
-	gtk_signal_connect (GTK_OBJECT (property_box->ok_button), "clicked",
-			    GTK_SIGNAL_FUNC (apply_and_close), property_box);
-	gtk_signal_connect (GTK_OBJECT (property_box->apply_button), "clicked",
-			    GTK_SIGNAL_FUNC (global_apply), property_box);
-	gtk_signal_connect (GTK_OBJECT (property_box->cancel_button),
-			    "clicked",
-			    GTK_SIGNAL_FUNC (just_close), property_box);
-	gtk_signal_connect (GTK_OBJECT (property_box->help_button), "clicked",
-			    GTK_SIGNAL_FUNC (help), property_box);
+	gtk_signal_connect ( GTK_OBJECT(property_box), "clicked",
+			     GTK_SIGNAL_FUNC(dialog_clicked_cb),
+			     NULL );
 
-	/* FIXME: connect delete_event to run just_close?  */
-
-	hbox = gtk_hbutton_box_new ();
-	gtk_button_box_set_layout (GTK_BUTTON_BOX (hbox),
-				   GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing (GTK_BUTTON_BOX (hbox), GNOME_PAD);
-	gtk_container_border_width (GTK_CONTAINER (hbox), GNOME_PAD);
-
-	bf = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (bf), GTK_SHADOW_OUT);
-
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (property_box), vbox);
-
-	gtk_box_pack_start (GTK_BOX (vbox), property_box->notebook,
+	gtk_box_pack_start (GTK_BOX(GNOME_DIALOG(property_box)->vbox),
+			    property_box->notebook,
 			    TRUE, TRUE, 0);
 
-	gtk_container_add (GTK_CONTAINER (hbox), property_box->ok_button);
-	gtk_container_add (GTK_CONTAINER (hbox), property_box->apply_button);
-	gtk_container_add (GTK_CONTAINER (hbox), property_box->cancel_button);
-	gtk_container_add (GTK_CONTAINER (hbox), property_box->help_button);
-
-	gtk_container_add (GTK_CONTAINER (bf), hbox);
-	gtk_box_pack_end (GTK_BOX (vbox), bf, FALSE, FALSE, 0);
-
-	gtk_widget_show (property_box->ok_button);
-	gtk_widget_show (property_box->apply_button);
-	gtk_widget_show (property_box->cancel_button);
-	gtk_widget_show (property_box->help_button);
-
-	gtk_widget_show (hbox);
-	gtk_widget_show (bf);
 	gtk_widget_show (property_box->notebook);
-	gtk_widget_show (vbox);
 }
 
 static void
@@ -244,6 +210,31 @@ gnome_property_box_new (void)
 {
 	return gtk_type_new (gnome_property_box_get_type ());
 }
+
+static void dialog_clicked_cb(GnomeDialog * dialog, gint button,
+			      gpointer data)
+{
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_PROPERTY_BOX(dialog));
+
+  switch(button) {
+  case OK_BUTTON:
+    apply_and_close(GNOME_PROPERTY_BOX(dialog));
+    break;
+  case APPLY_BUTTON:
+    global_apply(GNOME_PROPERTY_BOX(dialog));
+    break;
+  case CLOSE_BUTTON:
+    just_close(GNOME_PROPERTY_BOX(dialog));
+    break;
+  case HELP_BUTTON:
+    help(GNOME_PROPERTY_BOX(dialog));
+    break;
+  default:
+    g_assert_not_reached();
+  }
+}
+
 
 static void
 set_sensitive (GnomePropertyBox *property_box, GnomePropertyBoxItem *item)
@@ -272,13 +263,14 @@ gnome_property_box_changed (GnomePropertyBox *property_box)
 	set_sensitive (property_box, item);
 }
 
-/* This is connected directly to the Apply button.  */
 static void
-global_apply (GtkObject *button, GnomePropertyBox *property_box)
+global_apply (GnomePropertyBox *property_box)
 {
 	GList *list;
-	GnomePropertyBoxItem *item;
+	GnomePropertyBoxItem *item = NULL; /* fixes a warning */
 	int n = 0;
+
+	g_return_if_fail(property_box->items != NULL);
 
 	for (list = property_box->items; list != NULL; list = list->next) {
 		item = (GnomePropertyBoxItem *) list->data;
@@ -298,13 +290,12 @@ global_apply (GtkObject *button, GnomePropertyBox *property_box)
 	gtk_signal_emit (GTK_OBJECT (property_box),
 			 property_box_signals[APPLY], -1);
 
-	/* Doesn't matter which item we use.  */
+	/* Doesn't matter which item we use. */
 	set_sensitive (property_box, item);
 }
 
-/* This is connected to the Help button.  */
 static void
-help (GtkObject *button, GnomePropertyBox *property_box)
+help (GnomePropertyBox *property_box)
 {
 	gint page;
 
@@ -314,24 +305,23 @@ help (GtkObject *button, GnomePropertyBox *property_box)
 			 page);
 }
 
-/* This is connected to the Cancel button.  */
 static void
-just_close (GtkObject *button, GnomePropertyBox *property_box)
+just_close (GnomePropertyBox *property_box)
 {
 	int delete_handled = FALSE;
 
 	gtk_signal_emit_by_name (GTK_OBJECT (property_box), "delete_event",
 				 NULL, &delete_handled);
-	if (!delete_handled)
+	if (!delete_handled) {
 		gtk_widget_destroy (GTK_WIDGET (property_box));
+	}
 }
 
-/* This is connected to the OK button.  */
 static void
-apply_and_close (GtkObject *button, GnomePropertyBox *property_box)
+apply_and_close (GnomePropertyBox *property_box)
 {
-	global_apply (button, property_box);
-	just_close (button, property_box);
+	global_apply (property_box);
+	just_close (property_box);
 }
 
 gint
@@ -350,3 +340,5 @@ gnome_property_box_append_page (GnomePropertyBox *property_box,
 
 	return g_list_length (property_box->items) - 1;
 }
+
+

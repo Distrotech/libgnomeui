@@ -10,7 +10,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdarg.h>
-#include <gnome.h>
+#include "gnome-net.h"
 
 /* `g_string_length' doesn't appear in the CVS version of `gtk+/glib',
    and I can't find a reference to it in its ChangeLog */
@@ -168,7 +168,7 @@ gint gnome_net_gets(gint sock, GString *gs)
                         if (g_string_length(nsd->s) == 0) return GNOME_NET_EOF;
                         return GNOME_NET_OK;
                 case -1:
-                        if (errno = EAGAIN) return GNOME_NET_AGAIN;
+                        if (errno == EAGAIN) return GNOME_NET_AGAIN;
                         return GNOME_NET_ERROR;
                 }
         }

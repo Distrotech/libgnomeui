@@ -12,8 +12,8 @@
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-score.h"
 #include "libgnome/gnome-string.h"
-#include <gnome.h>
-
+#include "libgnome/gnome-i18n.h"
+#include "gnome-stock.h"
 #include "gtk/gtk.h"
 
 #include "time.h"

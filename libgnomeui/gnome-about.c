@@ -18,15 +18,12 @@
  */
 
 #include <config.h>
-/*
- * #include "libgnome/gnome-i18n.h"
- */
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-util.h"
 #include "gnome-about.h"
+#include "libgnome/gnome-util.h"
+#include "libgnome/gnome-i18n.h"
+#include "gnome-stock.h"
 #include <strings.h>
 #include <gtk/gtk.h>
-#include <gnome.h>
 
 /* FONTS */
 #define HELVETICA_20_BFONT "-adobe-helvetica-bold-r-normal-*-20-*-*-*-*-*-*-*"
@@ -57,11 +54,6 @@ typedef struct
 		*font_comments;
 } GnomeAboutInfo;
 
-enum {
-	CLICKED,
-	LAST_SIGNAL
-};
-
 static void gnome_about_class_init (GnomeAboutClass *klass);
 static void gnome_about_init       (GnomeAbout      *about);
 static void gnome_about_repaint    (GtkWidget *w, 
@@ -74,7 +66,6 @@ static void gnome_about_display_comments (GdkWindow *win,
 					  gint x, gint y, gint w, 
 					  gchar *comments);
 
-static GtkWindowClass *parent_class;
 
 /* ----------------------------------------------------------------------
    NAME:	gnome_about_get_type
@@ -99,22 +90,10 @@ gnome_about_get_type ()
 			(GtkArgGetFunc) NULL,
 		};
 
-		about_type = gtk_type_unique (gtk_window_get_type (), &about_info);
+		about_type = gtk_type_unique (gnome_dialog_get_type (), &about_info);
 	}
 
 	return about_type;
-}
-
-/* ----------------------------------------------------------------------
-   NAME:	gnome_about_button_clicked
-   DESCRIPTION:	
-   ---------------------------------------------------------------------- */
-
-void
-gnome_about_button_clicked (GtkWidget   *button,
-                            GtkWidget   *about)
-{
-	gtk_widget_destroy(about);
 }
 
 /* ----------------------------------------------------------------------
@@ -510,7 +489,6 @@ gnome_fill_info (GtkWidget *widget,
 void
 gnome_destroy_about (GtkWidget *widget, gpointer *data)
 {
-	GList *tmp;
 	GnomeAboutInfo *gai;
 
 	gai = (GnomeAboutInfo *)data;
@@ -529,7 +507,7 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
 
 	/* Free memory used for authors */
 	g_list_foreach(gai->names, (GFunc)g_free, NULL);
-	g_list_free (tmp);
+	g_list_free (gai->names);
 
 }
 
@@ -564,11 +542,7 @@ gnome_about_new (gchar	*title,
 {
 	GnomeAbout *about;
 	GnomeAboutInfo *ai;
-	GtkWidget *hbox;
-	GtkWidget *vbox;
 	GtkWidget *frame;
-	GtkWidget *separator;
-	GtkWidget *button;
 	GtkWidget *drawing_area;
 	GtkStyle *style;
 
@@ -576,25 +550,18 @@ gnome_about_new (gchar	*title,
 
 	about = gtk_type_new (gnome_about_get_type ());
 
-	gtk_container_border_width (GTK_CONTAINER (about), 5);
-
 	gtk_window_set_title (GTK_WINDOW (about), _("About"));
 	gtk_window_set_policy (GTK_WINDOW (about), FALSE, FALSE, TRUE);
 
 	/* x = (gdk_screen_width ()  - w) / 2; */
 	/* y = (gdk_screen_height () - h) / 2;    */
 	/* gtk_widget_set_uposition ( GTK_WIDGET (about), x, y); */
-	gtk_container_border_width (GTK_CONTAINER (about), 3);
-                                                        
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (about), vbox);
-	gtk_widget_show (vbox);
-
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
 	gtk_container_border_width (GTK_CONTAINER (frame), 4);
-	gtk_container_add (GTK_CONTAINER (vbox), frame);
+	gtk_container_add (GTK_CONTAINER (GNOME_DIALOG(about)->vbox),
+			   frame);
 	gtk_widget_show (frame);
 
 	drawing_area = gtk_drawing_area_new ();
@@ -637,28 +604,12 @@ gnome_about_new (gchar	*title,
 
 	gtk_widget_show (drawing_area);
                                                  
+	gnome_dialog_append_buttons( GNOME_DIALOG(about),
+				     GNOME_STOCK_BUTTON_OK, 
+				     NULL );
 
-	separator = gtk_hseparator_new ();
-	gtk_box_pack_start (GTK_BOX (vbox), separator, FALSE, TRUE, 5);
-	gtk_widget_show (separator);
-
-	hbox = gtk_hbox_new (FALSE, 0);
-
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
-	gtk_widget_show (hbox);
-
-	button = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
-	gtk_widget_set_usize (GTK_WIDGET (button), 
-			      GNOME_ABOUT_BUTTON_WIDTH,
-			      GNOME_ABOUT_BUTTON_HEIGHT);
-	gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, FALSE, 0);
-	gtk_widget_grab_default (GTK_WIDGET (button));
-	gtk_widget_show (button);
-  
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    (GtkSignalFunc) gnome_about_button_clicked,
-			    about);
+	gnome_dialog_set_destroy( GNOME_DIALOG(about),
+				  TRUE );
 
 	return GTK_WIDGET (about);
 }

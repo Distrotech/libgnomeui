@@ -8,6 +8,7 @@
 #include "libgnomeui/gnome-app-helper.h"
 #include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-color-selector.h"
+#include "libgnomeui/gnome-dialog.h"
 #include "libgnomeui/gnome-dns.h"
 #include "libgnomeui/gnome-entry.h"
 #include "libgnomeui/gnome-file-entry.h"

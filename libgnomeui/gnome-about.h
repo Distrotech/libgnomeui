@@ -12,9 +12,8 @@
 #ifndef __GNOME_ABOUT_H__
 #define __GNOME_ABOUT_H__
 
-#include <gdk/gdk.h>
-#include <gtk/gtkwindow.h>
-#include <libgnome/gnome-defs.h>
+#include "libgnome/gnome-defs.h"
+#include "gnome-dialog.h"
 
 BEGIN_GNOME_DECLS
 
@@ -24,20 +23,15 @@ BEGIN_GNOME_DECLS
 
 typedef struct _GnomeAbout        GnomeAbout;
 typedef struct _GnomeAboutClass   GnomeAboutClass;
-typedef struct _GnomeAboutButton  GnomeAboutButton;
-
-#define GNOME_ABOUT_BUTTON_WIDTH 100
-#define GNOME_ABOUT_BUTTON_HEIGHT 40
 
 struct _GnomeAbout
 {
-  GtkWindow window;
+  GnomeDialog dialog;
 };
 
 struct _GnomeAboutClass
 {
-  GtkWindowClass parent_class;
-
+  GnomeDialogClass parent_class;
 };
 
 
@@ -68,3 +62,5 @@ GtkWidget* gnome_about_new	(gchar	*title, /* Name of the application. */
 END_GNOME_DECLS
 
 #endif /* __GNOME_ABOUT_H__ */
+
+

@@ -18,9 +18,10 @@
 
 #include <config.h>
 #include <stdarg.h>
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-util.h"
+
 #include "gnome-dialog.h"
+#include "libgnome/gnome-util.h"
+#include "libgnome/gnome-i18nP.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
 #include "libgnomeui/gnome-stock.h"
@@ -32,27 +33,6 @@
 #define GNOME_DIALOG_BUTTON_HEIGHT 40
 
 #define GNOME_DIALOG_BORDER_WIDTH 5
-
-/* Library must use dgettext, not gettext.  */
-#ifdef ENABLE_NLS
-#    include <libintl.h>
-#    define _(String) dgettext (PACKAGE, String)
-#    ifdef gettext_noop
-#        define N_(String) gettext_noop (String)
-#    else
-#        define N_(String) (String)
-#    endif
-#else
-/* Stubs that do something close enough.  */
-#    define textdomain(String) (String)
-#    define gettext(String) (String)
-#    define dgettext(Domain,Message) (Message)
-#    define dcgettext(Domain,Message,Type) (Message)
-#    define bindtextdomain(Domain,Directory) (Domain)
-#    define _(String) (String)
-#    define N_(String) (String)
-#endif
-
 
 enum {
   CLICKED,
@@ -148,19 +128,25 @@ gnome_dialog_init (GnomeDialog *dialog)
 {
   GtkWidget * vbox;
   GtkWidget * separator;
+  GtkWidget * bf;
 
   dialog->modal = FALSE;
   dialog->self_destruct = FALSE;
   dialog->buttons = NULL;
   
+  bf = gtk_frame_new (NULL);
+  gtk_frame_set_shadow_type (GTK_FRAME (bf), GTK_SHADOW_OUT);
+  gtk_container_add(GTK_CONTAINER(dialog), bf);
+  gtk_widget_show(bf);
+
   vbox = gtk_vbox_new(FALSE, GNOME_PAD);
-  gtk_container_add(GTK_CONTAINER(dialog), vbox);
+  gtk_container_border_width (GTK_CONTAINER (vbox), 
+			      GNOME_DIALOG_BORDER_WIDTH);
+  gtk_container_add(GTK_CONTAINER(bf), vbox);
   gtk_widget_show(vbox);
 
   gtk_window_set_policy (GTK_WINDOW (dialog), FALSE, 
 			 FALSE, FALSE);
-  gtk_container_border_width (GTK_CONTAINER (dialog), 
-			      GNOME_DIALOG_BORDER_WIDTH);
 
   dialog->vbox = gtk_vbox_new(FALSE, GNOME_PAD);
   gtk_box_pack_start (GTK_BOX (vbox), dialog->vbox, 
@@ -179,6 +165,7 @@ gnome_dialog_init (GnomeDialog *dialog)
 			      GTK_BUTTONBOX_END );
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog->action_area), 
 			      GNOME_PAD);
+
   gtk_box_pack_start (GTK_BOX (vbox), dialog->action_area, 
 		      FALSE, TRUE, 0);
   gtk_widget_show (dialog->action_area);
@@ -269,33 +256,75 @@ void       gnome_dialog_set_destroy    (GnomeDialog * dialog,
   dialog->self_destruct = self_destruct;
 }
 
-
-static void
-gnome_dialog_button_clicked (GtkWidget   *button, 
-			     GtkWidget   *dialog)
+void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
+					gint         button,
+					gboolean     setting)
 {
-  GList *list = GNOME_DIALOG (dialog)->buttons;
+  GList *list;
   int which = 0;
+  
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  list = GNOME_DIALOG (dialog)->buttons;
 
   while (list){
-    if (list->data == button) {
-      gtk_signal_emit (GTK_OBJECT (dialog), dialog_signals[CLICKED], 
-		       which);	
+    if (which == button) {
+      /* We've found the right one */
+      gtk_widget_set_sensitive(GTK_WIDGET(list->data), setting);
+      return;
     }
     list = list->next;
     which ++;
   }
   
-  if (GNOME_DIALOG(dialog)->self_destruct) {
+  /* If we didn't find the button, complain */
+  g_warning("Button number %d does not appear to exist\n", button); 
+}
+
+static void
+gnome_dialog_button_clicked (GtkWidget   *button, 
+			     GtkWidget   *dialog)
+{
+  GList *list;
+  int which = 0;
+  gboolean self_destruct;
+
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  self_destruct = GNOME_DIALOG(dialog)->self_destruct;
+  list = GNOME_DIALOG (dialog)->buttons;
+
+  while (list){
+    if (list->data == button) {
+      gtk_signal_emit (GTK_OBJECT (dialog), dialog_signals[CLICKED], 
+		       which);
+      break;
+    }
+    list = list->next;
+    which ++;
+  }
+  
+  /* The dialog may have been destroyed by the clicked
+     signal, which is why we had to save self_destruct.
+     Users should be careful not to set self_destruct 
+     and then destroy the dialog themselves too. */
+
+  if (self_destruct) {
     gtk_widget_destroy(dialog);
   }
 }
 
 static void gnome_dialog_destroy (GtkObject *dialog)
 {
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
   g_list_free(GNOME_DIALOG (dialog)->buttons);
-  
+
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dialog);
 }
+
+
+
 

@@ -29,6 +29,9 @@ typedef struct {
   GtkWidget *widget;
 } GnomeActionAreaItem;
 
+/* NOTE: This interface is going to go away soon, or at least be
+   changed. Don't use it. */
+
 void gnome_build_action_area (GtkDialog           * dlg,
 			      GnomeActionAreaItem * actions,
 			      int                 num_actions,
