@@ -21,15 +21,11 @@ LDADD =	\
 	$(INTLLIBS)
 
 noinst_PROGRAMS = \
-	libgnomeui-demos-server	\
-	selector_demo		\
 	winhints_demo
 
 EXTRA_PROGRAMS = \
 	mdi_demo		\
 	animator_demo
-
-selector_demo_SOURCES = selector_demo.c
 
 winhints_demo_SOURCES = winhints_demo.c
 

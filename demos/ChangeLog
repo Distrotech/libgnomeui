@@ -1,3 +1,8 @@
+2001-06-13  Martin Baulig  <baulig@suse.de>
+
+	* selector_demo.c: Moved to libgnome-extra/demos.
+	* libgnome-demos-server.c, libgnomeui-demos.oafinfo: Likewise.
+
 2001-06-11  Cody Russell  <bratsche@gnome.org>
 
 	* Makefile.am: Add GCONF_CFLAGS.
