@@ -1,5 +1,9 @@
 1998-07-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gtk-socket.h, gtk-plug.h: Fix prototypes
+
+1998-07-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
 	* Makefile.am (INCLUDES): Cosmetic cleanups.
 
 	* gnome-canvas.c (gnome_canvas_destroy): Use canvas_parent_class,

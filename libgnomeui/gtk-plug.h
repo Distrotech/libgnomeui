@@ -52,7 +52,7 @@ struct _GtkPlugClass
 };
 
 
-guint      gtk_plug_get_type ();
+guint      gtk_plug_get_type (void);
 GtkWidget* gtk_plug_new      (guint32 socket_id);
 
 
