@@ -1,19 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of libgnomeui-2.0.hi.po to Hindi
 # This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # Anurag Seetha <anuragseetha@yahoo.com>, 2003
-# 
+# G Karunakar <karunakar@freedomink.org>, 2003
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui HEAD\n"
-"POT-Creation-Date: 2003-08-05 21:31+0530\n"
-"PO-Revision-Date: 2003-08-06 16:05+0530\n"
-"Last-Translator: Anand Subramanian <anand.subra@wipro.com>\n"
-"Language-Team: Gnome Hindi Team<indlinux-hindi-gnome@lists.sourceforge.net>\n"
+"Project-Id-Version: libgnomeui-2.0.hi\n"
+"POT-Creation-Date: 2003-08-11 16:18+0530\n"
+"PO-Revision-Date: 2003-08-11 17:02+0530\n"
+"Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
+"Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
+"X-Generator: KBabel 1.0\n"
 
 # demos/mdi_demo.c:128
 #: demos/mdi_demo.c:128
@@ -140,8 +142,7 @@ msgstr "अनुवाद का श्रेय"
 
 # libgnomeui/gnome-about.c:389
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "अनुवादक को श्रेय. इस वाक्य को अनुवाद के योग्य चिन्हित किया जाए"
 
 # libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
@@ -327,7 +328,7 @@ msgstr "वर्तमान फाइल को बंद करें"
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr "बाहर (_Q)" 
+msgstr "बाहर (_Q)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 #: libgnomeui/gnome-app-helper.c:147
@@ -718,7 +719,7 @@ msgstr "उपयोगकर्ता की क्रिया का आव�
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "आपका एचटीटीपी प्रोक्सी आपको लोगिन करने की मांग करता है.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -726,6 +727,8 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"पहुंच बनाने के लिए लोगिन करें \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
@@ -737,7 +740,7 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "प्रमाणिकता जरुरी"
 
 # libgnomeui/gnome-client.c:833
 #: libgnomeui/gnome-client.c:863
@@ -1033,8 +1036,7 @@ msgstr "इतिहास क्रमांक"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"फाइल प्रविष्टि के लिए एक मात्र सूचक इसका उपयोग इतिहास को संग्रहित करने के लिए होता है"
+msgstr "फाइल प्रविष्टि के लिए एक मात्र सूचक इसका उपयोग इतिहास को संग्रहित करने के लिए होता है"
 
 # libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
@@ -1455,11 +1457,11 @@ msgstr "संदेश"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "उपयोगकर्ता नाम (_U):"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "पासवर्ड (_P):"
 
 # libgnomeui/gnome-pixmap-entry.c:118
 #: libgnomeui/gnome-pixmap-entry.c:113
@@ -1590,9 +1592,7 @@ msgid ""
 "Application \"%s\" (process %d) has crashed\n"
 "due to a fatal error.\n"
 "(%s)"
-msgstr ""
-"महत्वपूर्ण त्रुटि के कारण अनुप्रयोग \"%s\" (प्रोसेस %d) खराब हो गया है"
-"(%s)"
+msgstr "महत्वपूर्ण त्रुटि के कारण अनुप्रयोग \"%s\" (प्रोसेस %d) खराब हो गया है(%s)"
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1637,3 +1637,4 @@ msgstr "test से बाहर जाएं"
 # libgnomeui/gnome-app-helper.c:2563
 #~ msgid "Both text and icons"
 #~ msgstr "पाठ्य तथा आइकान दोनो"
+
