@@ -4,7 +4,6 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwidget.h>
-#include <gdk_imlib.h>
 
 #include <libgnome/gnome-defs.h>
 
@@ -41,19 +40,16 @@ GtkWidget *gnome_pixmap_new_from_rgb_d         (unsigned char *data, unsigned ch
 						int rgb_width, int rgb_height);
 GtkWidget *gnome_pixmap_new_from_rgb_d_shaped  (unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
-						GdkImlibColor *shape_color);
+                                                GdkColor* shape_color);
 GtkWidget * gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
 					        unsigned char *alpha,
 					        int rgb_width, int rgb_height,
 					        int width, int height,
-					        GdkImlibColor *shape_color);
+					        GdkColor *shape_color);
 GtkWidget *gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						int width, int height);
 GtkWidget *gnome_pixmap_new_from_gnome_pixmap  (GnomePixmap *gpixmap);
-GtkWidget *gnome_pixmap_new_from_imlib         (GdkImlibImage *im);
-GtkWidget *gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im,
-						int width, int height);
 
 void       gnome_pixmap_load_file              (GnomePixmap *gpixmap, const char *filename);
 void       gnome_pixmap_load_file_at_size      (GnomePixmap *gpixmap, const char *filename, int width, int height);
@@ -63,21 +59,29 @@ void       gnome_pixmap_load_rgb_d             (GnomePixmap *gpixmap, unsigned c
 						int rgb_width, int rgb_height);
 void       gnome_pixmap_load_rgb_d_shaped      (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
-						GdkImlibColor *shape_color);
+						GdkColor *shape_color);
 void gnome_pixmap_load_rgb_d_shaped_at_size    (GnomePixmap *gpixmap,
 					        unsigned char *data,
 					        unsigned char *alpha,
 					        int rgb_width, int rgb_height,
 					        int width, int height,
-					        GdkImlibColor *shape_color);
+					        GdkColor *shape_color);
 void       gnome_pixmap_load_rgb_d_at_size     (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						int width, int height);
+
+#if 0
+/* Compat library candidates */
+
 void       gnome_pixmap_load_imlib             (GnomePixmap *gpixmap,
 						GdkImlibImage *im);
 void       gnome_pixmap_load_imlib_at_size     (GnomePixmap *gpixmap,
 				                GdkImlibImage *im,
 						int width, int height);
+GtkWidget *gnome_pixmap_new_from_imlib         (GdkImlibImage *im);
+GtkWidget *gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im,
+						int width, int height);
+#endif 
 
 
 END_GNOME_DECLS
