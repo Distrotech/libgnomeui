@@ -12,6 +12,7 @@
 #include "libgnome/gnome-i18n.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
+#include "gnome-stock.h"
 #include "gnome-pixmap.h"
 #include "gnome-stock.h"
 #include <string.h>
@@ -54,6 +55,20 @@ gnome_app_do_menu_creation(GnomeApp *app,
 			   UIBuilderData uidata)
 {
   int i;
+  int has_stock_pixmaps = FALSE;
+
+  /* first check if any of them use the stock pixmaps, because if
+     they do we need to use gnome_stock_menu_item for all of them
+     so the menu text will be justified properly. */
+  for (i = 0; menuinfo[i].type != GNOME_APP_UI_ENDOFINFO; i++)
+    {
+      if (menuinfo[i].pixmap_type == GNOME_APP_PIXMAP_STOCK)
+	{
+	  has_stock_pixmaps = TRUE;
+	  break;
+	}
+    }
+
   for(i = 0; menuinfo[i].type != GNOME_APP_UI_ENDOFINFO; i++)
     {
       switch(menuinfo[i].type)
@@ -69,9 +84,12 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	  {
 	    if(menuinfo[i].type == GNOME_APP_UI_SEPARATOR)
 	      menuinfo[i].widget = gtk_menu_item_new();
-	    else if(menuinfo[i].pixmap_type == GNOME_APP_PIXMAP_STOCK)
+	    else if (has_stock_pixmaps
+		     || menuinfo[i].pixmap_type == GNOME_APP_PIXMAP_STOCK)
 	      menuinfo[i].widget =
-		gnome_stock_menu_item(menuinfo[i].pixmap_info,
+		gnome_stock_menu_item((menuinfo[i].pixmap_info 
+				       ? menuinfo[i].pixmap_info 
+				       : GNOME_STOCK_MENU_BLANK),
 				      _(menuinfo[i].label));
 	    else
 	      menuinfo[i].widget =
@@ -263,9 +281,9 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 						  (char *)tbinfo[i].pixmap_info);
 		break;
 	      case GNOME_APP_PIXMAP_STOCK:
-		pmap = GTK_WIDGET(gnome_stock_pixmap(GTK_WIDGET(app),
-						     tbinfo[i].pixmap_info,
-						     GNOME_STOCK_PIXMAP_REGULAR));
+		pmap = gnome_stock_pixmap_widget_new(GTK_WIDGET(app),
+						     (char *)tbinfo[i].pixmap_info);
+		break;
 	      default:
 		pmap = NULL; break;
 	      }
