@@ -11,9 +11,7 @@
 
 #include "libgnomeui/gnome-app-helper.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+BEGIN_GNOME_DECLS
 
 #define GNOME_MDI_CHILD(obj)          GTK_CHECK_CAST (obj, gnome_mdi_child_get_type (), GnomeMDIChild)
 #define GNOME_MDI_CHILD_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_mdi_child_get_type (), GnomeMDIChildClass)
@@ -58,18 +56,6 @@ void          gnome_mdi_child_remove_view      (GnomeMDIChild *, GtkWidget *view
 void          gnome_mdi_child_set_name         (GnomeMDIChild *, gchar *);
 void          gnome_mdi_child_set_menu_template(GnomeMDIChild *, GnomeUIInfo *);
 
+END_GNOME_DECLS
+
 #endif /* __GNOME_MDI_CHILD_H__ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-

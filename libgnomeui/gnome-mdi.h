@@ -36,9 +36,7 @@
 #include "gnome-rootwin.h"
 #include "gnome-mdi-child.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+BEGIN_GNOME_DECLS
 
 #define GNOME_MDI(obj)          GTK_CHECK_CAST (obj, gnome_mdi_get_type (), GnomeMDI)
 #define GNOME_MDI_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_mdi_get_type (), GnomeMDIClass)
@@ -111,18 +109,6 @@ gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_child        (GnomeMDI *, GnomeMDIChild *, gint);
 gint          gnome_mdi_remove_all          (GnomeMDI *, gint);
 
+END_GNOME_DECLS
+
 #endif /* __GNOME_MDI_H__ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-

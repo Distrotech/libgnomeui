@@ -1,3 +1,8 @@
+Sun Jun 07 17:24:15 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-mdi.h,gnome-mdi-child.h: fix the cplusplus stuff,and
+	  make it use GNOME_(BEGIN|END)_DECLS
+
 1998-06-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch]: a configurable MDI object.
