@@ -54,8 +54,6 @@ static void gnome_dock_item_get_arg        (GtkObject         *object,
                                             guint              arg_id);
 static void gnome_dock_item_destroy        (GtkObject         *object);
 static void gnome_dock_item_map            (GtkWidget         *widget);
-static gint gnome_dock_item_map_event      (GtkWidget         *widget,
-                                            GdkEventAny       *event);
 static void gnome_dock_item_unmap          (GtkWidget         *widget);
 static void gnome_dock_item_realize        (GtkWidget         *widget);
 static void gnome_dock_item_unrealize      (GtkWidget         *widget);
@@ -175,7 +173,6 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   object_class->destroy = gnome_dock_item_destroy;
 
   widget_class->map = gnome_dock_item_map;
-  widget_class->map_event = gnome_dock_item_map_event;
   widget_class->unmap = gnome_dock_item_unmap;
   widget_class->realize = gnome_dock_item_realize;
   widget_class->unrealize = gnome_dock_item_unrealize;
@@ -303,40 +300,6 @@ gnome_dock_item_map (GtkWidget *widget)
       && GTK_WIDGET_VISIBLE (bin->child)
       && !GTK_WIDGET_MAPPED (bin->child))
     gtk_widget_map (bin->child);
-}
-
-static gint
-gnome_dock_item_map_event (GtkWidget *widget,
-                           GdkEventAny *event)
-{
-#if 0
-  GnomeDockItem *dock_item;
-
-  g_return_val_if_fail (widget != NULL, FALSE);
-  g_return_val_if_fail (GNOME_IS_DOCK_ITEM (widget), FALSE);
-
-  dock_item = GNOME_DOCK_ITEM (widget);
-  if (dock_item->grab_on_map_event > 0)
-    {
-      gint x, y;
-
-      dock_item->grab_on_map_event--;
-
-      if (dock_item->is_floating)
-        {
-          /* FIXME: This is an *ugly* hack!  */
-          gdk_window_get_pointer (NULL, &x, &y, NULL);
-
-          gnome_dock_item_detach (dock_item,
-                                  x - dock_item->dragoff_x,
-                                  y - dock_item->dragoff_y);
-        }
-
-      gnome_dock_item_grab_pointer (dock_item);
-    }
-#endif
-
-  return TRUE;
 }
 
 static void
@@ -484,6 +447,7 @@ gnome_dock_item_size_request (GtkWidget      *widget,
 {
   GtkBin *bin;
   GnomeDockItem *dock_item;
+  GtkRequisition child_requisition;
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GNOME_IS_DOCK_ITEM (widget));
@@ -495,7 +459,12 @@ gnome_dock_item_size_request (GtkWidget      *widget,
   /* If our child is not visible, we still request its size, since
      we won't have any useful hint for our size otherwise.  */
   if (bin->child != NULL)
-    gtk_widget_size_request (bin->child, &bin->child->requisition);
+    gtk_widget_size_request (bin->child, &child_requisition);
+  else
+    {
+      child_requisition.width = 0;
+      child_requisition.height = 0;
+    }
 
   if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
@@ -503,8 +472,8 @@ gnome_dock_item_size_request (GtkWidget      *widget,
         GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
       if (bin->child != NULL)
         {
-          requisition->width += bin->child->requisition.width;
-          requisition->height = bin->child->requisition.height;
+          requisition->width += child_requisition.width;
+          requisition->height = child_requisition.height;
         }
       else
         requisition->height = 0;
@@ -515,8 +484,8 @@ gnome_dock_item_size_request (GtkWidget      *widget,
         GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
       if (bin->child != NULL)
         {
-          requisition->width = bin->child->requisition.width;
-          requisition->height += bin->child->requisition.height;
+          requisition->width = child_requisition.width;
+          requisition->height += child_requisition.height;
         }
       else
         requisition->width = 0;
@@ -800,6 +769,7 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
     return FALSE;
 
   event_handled = FALSE;
+
   if (event->button == 1 && event->type == GDK_BUTTON_PRESS)
     {
       GtkWidget *child;
@@ -831,7 +801,6 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
 	  di->dragoff_x = event->x;
 	  di->dragoff_y = event->y;
 
-	  gtk_grab_add (widget);
 	  di->in_drag = TRUE;
 
           gnome_dock_item_grab_pointer (di);
@@ -845,7 +814,6 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
   else if (event->type == GDK_BUTTON_RELEASE && di->in_drag)
     {
       gdk_pointer_ungrab (GDK_CURRENT_TIME);
-      gtk_grab_remove (widget);
       
       di->in_drag = FALSE;
 
@@ -934,7 +902,6 @@ gnome_dock_item_remove (GtkContainer *container,
   if (di->in_drag)
     {
       gdk_pointer_ungrab (GDK_CURRENT_TIME);
-      gtk_grab_remove (GTK_WIDGET (container));
       di->in_drag = FALSE;
     }
   
@@ -1139,13 +1106,13 @@ gnome_dock_item_grab_pointer (GnomeDockItem *item)
 
   /* Hm, not sure this is the right thing to do, but it seems to work.  */
   while (gdk_pointer_grab (item->bin_window,
-                        FALSE,
-                        (GDK_BUTTON1_MOTION_MASK |
-                         GDK_POINTER_MOTION_HINT_MASK |
-                         GDK_BUTTON_RELEASE_MASK),
-                        NULL,
-                        fleur,
-                        GDK_CURRENT_TIME) != 0);
+                           FALSE,
+                           (GDK_BUTTON1_MOTION_MASK |
+                            GDK_POINTER_MOTION_HINT_MASK |
+                            GDK_BUTTON_RELEASE_MASK),
+                           NULL,
+                           fleur,
+                           GDK_CURRENT_TIME) != 0);
 
   gdk_cursor_destroy (fleur);
 }

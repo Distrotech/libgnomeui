@@ -220,11 +220,12 @@ size_request_v (GList *list, GtkRequisition *requisition)
   for (; list != NULL; list = list->next)
     {
       GtkWidget *w;
+      GtkRequisition req;
 
       w = GTK_WIDGET (list->data);
-      gtk_widget_size_request (w, &w->requisition);
-      requisition->width += w->requisition.width;
-      requisition->height = MAX (requisition->height, w->requisition.height);
+      gtk_widget_size_request (w, &req);
+      requisition->width += req.width;
+      requisition->height = MAX (requisition->height, req.height);
     }
 }
 
@@ -234,11 +235,12 @@ size_request_h (GList *list, GtkRequisition *requisition)
   for (list = list; list != NULL; list = list->next)
     {
       GtkWidget *w;
+      GtkRequisition req;
 
       w = GTK_WIDGET (list->data);
-      gtk_widget_size_request (w, &w->requisition);
-      requisition->height += w->requisition.height;
-      requisition->width = MAX (requisition->width, w->requisition.width);
+      gtk_widget_size_request (w, &req);
+      requisition->height += req.height;
+      requisition->width = MAX (requisition->width, req.width);
     }
 }
 
@@ -251,12 +253,7 @@ gnome_dock_size_request (GtkWidget *widget, GtkRequisition *requisition)
   dock = GNOME_DOCK (widget);
 
   if (dock->client_area != NULL && GTK_WIDGET_VISIBLE (dock->client_area))
-    {
-      gtk_widget_size_request (dock->client_area,
-                               &dock->client_area->requisition);
-      requisition->width = dock->client_area->requisition.width;
-      requisition->height = dock->client_area->requisition.height;
-    }
+    gtk_widget_size_request (dock->client_area, requisition);
   else
     {
       requisition->width = 0;
@@ -875,7 +872,9 @@ drag_floating (GnomeDock *dock,
           gtk_widget_ref (item_widget);
 
           gnome_dock_item_detach (item, x, y);
-          gnome_dock_item_grab_pointer (item);
+
+          if (item->in_drag)
+            gnome_dock_item_grab_pointer (item);
 
           gtk_container_remove (GTK_CONTAINER (item_widget->parent),
                                 item_widget);

@@ -1,3 +1,21 @@
+1999-02-17  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock.c (drag_floating): No longer re-grab pointer.
+
+	* gnome-dock-item.c (gnome_dock_item_button_changed): Do not add a
+ 	GTK+ grab.
+	(gnome_dock_item_button_changed): Do not remove the GTK+ grab.
+	(gnome_dock_item_remove): Likewise.
+	(gnome_dock_item_grab_pointer): Grab on `item->window', not
+ 	`item->bin_window'.
+	(gnome_dock_item_map_event): Removed.
+
+	* gnome-dock-item.c (gnome_dock_item_size_request): Avoid calling
+ 	gtk_widget_size_request with `requisition' == `widget->requisition'.
+	(size_request_v): Likewise.
+	(size_request_h): Likewise.
+	(gnome_dock_size_request): Likewise.
+
 1999-02-15  Elliot Lee  <sopwith@redhat.com>
 
 	* gnome-init.c: Don't give sound events for widgets
