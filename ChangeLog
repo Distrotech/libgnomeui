@@ -1,3 +1,11 @@
+Tue May 07 22:55:14 2002  George Lebl <jirka@5z.com>
+
+	* libgnomeui/gnome-file-entry.c, libgnomeui/gnome-entry.c: do a bit
+	  of cut and pasting from GtkEntry to fix up the GtkEditable
+	  implementation of the file entry and the entry.  (the
+	  do_insert_text and do_delete_text impls).  Fixes bad crashes
+	  when you wish to use insert_text or delete text on these widgets.
+
 2002-05-07  Paolo Maggi  <maggi@athena.polito.it>
 
 	* libgnomeui/gnome-app-helper.c:

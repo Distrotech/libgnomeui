@@ -1104,10 +1104,66 @@ get_position (GtkEditable    *editable)
 	return gtk_editable_get_position (GTK_EDITABLE (entry));
 }
 
+/* Copied from gtkentry */
+static void
+do_insert_text (GtkEditable *editable,
+		const gchar *new_text,
+		gint         new_text_length,
+		gint        *position)
+{
+	GtkEntry *entry = GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable)));
+	gchar buf[64];
+	gchar *text;
+
+	if (*position < 0 || *position > entry->text_length)
+		*position = entry->text_length;
+
+	g_object_ref (G_OBJECT (editable));
+
+	if (new_text_length <= 63)
+		text = buf;
+	else
+		text = g_new (gchar, new_text_length + 1);
+
+	text[new_text_length] = '\0';
+	strncpy (text, new_text, new_text_length);
+
+	g_signal_emit_by_name (editable, "insert_text", text, new_text_length, position);
+
+	if (new_text_length > 63)
+		g_free (text);
+
+	g_object_unref (G_OBJECT (editable));
+}
+
+/* Copied from gtkentry */
+static void
+do_delete_text (GtkEditable *editable,
+		gint         start_pos,
+		gint         end_pos)
+{
+	GtkEntry *entry = GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable)));
+
+	if (end_pos < 0 || end_pos > entry->text_length)
+		end_pos = entry->text_length;
+	if (start_pos < 0)
+		start_pos = 0;
+	if (start_pos > end_pos)
+		start_pos = end_pos;
+
+	g_object_ref (G_OBJECT (editable));
+
+	g_signal_emit_by_name (editable, "delete_text", start_pos, end_pos);
+
+	g_object_unref (G_OBJECT (editable));
+}
+
 static void
 gnome_file_entry_editable_init (GtkEditableClass *iface)
 {
 	/* Just proxy to the GtkEntry */
+	iface->do_insert_text = do_insert_text;
+	iface->do_delete_text = do_delete_text;
 	iface->insert_text = insert_text;
 	iface->delete_text = delete_text;
 	iface->get_chars = get_chars;
