@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
-"POT-Creation-Date: 2002-11-01 12:43+0100\n"
-"PO-Revision-Date: 2002-04-14 14:53+0100\n"
+"POT-Creation-Date: 2002-11-18 17:44+0000\n"
+"PO-Revision-Date: 2002-11-18 17:45+0000\n"
 "Last-Translator: Abigail Brady <morwen@evilmagic.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,15 +18,15 @@ msgid "Credits"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
+msgid "Written by"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
+msgid "Documented by"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
+msgid "Translated by"
 msgstr ""
 
 #. Add the credits button
@@ -178,11 +178,11 @@ msgstr "Received invalid colour data\n"
 
 #: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
-msgstr ""
+msgstr "Colour Selector"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "Open a dialog to specify the colour"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -508,6 +508,7 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr ""
 
@@ -565,6 +566,7 @@ msgid "_Game"
 msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr ""
 
@@ -755,11 +757,11 @@ msgstr ""
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr ""
 
@@ -786,7 +788,7 @@ msgstr ""
 msgid "_Close This Window"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr ""
 
@@ -1050,9 +1052,8 @@ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:68
-#, fuzzy
 msgid "Pick a Font"
-msgstr "Pick a colour"
+msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -1295,4 +1296,8 @@ msgstr ""
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
+msgstr ""
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
 msgstr ""
