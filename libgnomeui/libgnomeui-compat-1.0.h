@@ -37,6 +37,7 @@
 #include <compat/1.0/libgnomeui/gnome-properties.h>
 #include <compat/1.0/libgnomeui/gnome-property-entries.h>
 /* #include <compat/1.0/libgnomeui/gnome-canvas-image.h> */
+#include <compat/1.0/libgnomeui/gnome-procbar.h>
 #include <compat/1.0/libgnomeui/gnomeui10-compat.h>
 
 #endif 

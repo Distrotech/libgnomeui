@@ -1,3 +1,8 @@
+2000-07-25  Martin Baulig  <baulig@suse.de>
+
+	* gnome-procbar.[ch]: Marked this as deprecated and moved
+	it into the compat library.
+
 2000-07-19  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi*.[ch]: "privatized" all structures. code cleanup.

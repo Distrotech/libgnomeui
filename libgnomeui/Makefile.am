@@ -77,6 +77,7 @@ libgnomeui_1_compat_2_a_SOURCES =\
 	gnome-dentry-edit.c		\
 	gnome-druid-page-start.c	\
 	gnome-druid-page-finish.c	\
+	gnome-procbar.c			\
 	gnome-properties.c		\
 	gnome-property-entries.c
 
@@ -95,6 +96,7 @@ libgnomeui10compatinclude_HEADERS = \
 	gnome-dns.h			\
 	gnome-druid-page-start.h	\
 	gnome-druid-page-finish.h	\
+	gnome-procbar.h			\
 	gnome-properties.h		\
 	gnome-property-entries.h
 
@@ -168,7 +170,6 @@ libgnomeui_2_la_SOURCES = \
         gnome-winhints.c		\
         gnome-paper-selector.c		\
 	gnome-unit-spinner.c		\
-	gnome-procbar.c			\
 	gnometypes.c			\
 	gtk-clock.c			\
 	gtkdial.c			\
@@ -248,7 +249,6 @@ gnome_headers = \
         gnome-winhints.h		\
         gnome-paper-selector.h		\
 	gnome-unit-spinner.h		\
-	gnome-procbar.h			\
 	gtkdial.h			\
 	gtk-clock.h			\
 	gtkpixmapmenuitem.h		\

@@ -105,7 +105,9 @@
 #include "libgnomeui/gnometypebuiltins.h"
 #include "libgnomeui/gnome-winhints.h"
 #include "libgnomeui/gnome-href.h"
+#ifndef GNOME_EXCLUDE_DEPRECATED
 #include "libgnomeui/gnome-procbar.h"
+#endif
 #include "libgnomeui/gnome-druid.h"
 #include "libgnomeui/gnome-druid-page.h"
 #include "libgnomeui/gnome-druid-page-edge.h"
