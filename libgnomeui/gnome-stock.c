@@ -649,7 +649,7 @@ scale_down(GtkWidget *window, unsigned char *datao, gint wo, gint ho, gint w, gi
 struct _default_entries_data {
 	char *icon, *subtype;
 	char *label;
-	gchar *rgb_data;
+	const gchar *rgb_data;
 	int width, height;
 	int scaled_width, scaled_height;
 };
@@ -708,6 +708,8 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_PIXMAP_BOOK_YELLOW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_BOOK_OPEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_open, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_NOT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_not, TB_W, TB_H, TB_W, TB_H},
+	{GNOME_STOCK_PIXMAP_CONVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_convert, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_JUMP_TO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_jump_to, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_MULTIPLE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_multiple_file, 32, 32 },
 	{GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exit, TB_W, TB_H, TB_W, TB_H},
 	{GNOME_STOCK_PIXMAP_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
@@ -762,6 +764,8 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_MENU_BOOK_BLUE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_blue, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_BOOK_YELLOW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_BOOK_OPEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_open, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_CONVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_convert, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_JUMP_TO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_jump_to, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
 	/* TODO: I shouldn't waste a pixmap for that */
 	{GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_blank, MENU_W, MENU_H, MENU_W, MENU_H}, 
@@ -870,7 +874,7 @@ create_pixmap_from_imlib(GtkWidget *window, GnomeStockPixmapEntryImlib *data)
 {
 	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
 
-	return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped(data->rgb_data,
+	return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped((gchar *)data->rgb_data,
 								 NULL,
 								 data->width,
 								 data->height,
@@ -887,10 +891,11 @@ create_pixmap_from_imlib_scaled(GtkWidget *window,
 
 	if ((data->width != data->scaled_width) ||
 	    (data->height != data->scaled_height)) {
-		d = scale_down(window, data->rgb_data, data->width, data->height,
-			       data->scaled_width, data->scaled_height);
+		d = scale_down(window, (gchar *)data->rgb_data, data->width,
+			       data->height, data->scaled_width,
+			       data->scaled_height);
 	} else {
-		d = data->rgb_data;
+		d = (gchar *)data->rgb_data;
 	}
 
 	return (GnomePixmap *)gnome_pixmap_new_from_rgb_d_shaped(d, NULL,
@@ -1710,7 +1715,7 @@ gnome_stock_transparent_window (const char *icon, const char *subtype)
 		break;
 	case GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED:
 	case GNOME_STOCK_PIXMAP_TYPE_IMLIB:
-		im = gdk_imlib_create_image_from_data (entry->imlib.rgb_data, NULL,
+		im = gdk_imlib_create_image_from_data ((gchar *)entry->imlib.rgb_data, NULL,
 						       entry->imlib.width, entry->imlib.height);
 		break;
 	 default:

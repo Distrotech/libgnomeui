@@ -1,3 +1,12 @@
+Mon Aug 24 23:43:47 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock-imlib.h: added convert and jump_to icons
+	* gnome-stock.h: added defines for the new icons
+	* gnome-stock.c: added entries for the new icons
+	added some `const's and (char *) typecasts to let gnome-stock
+	compile without warnings with -Wall
+	* stock_demo.c: added convert and jump_to icons
+
 1998-08-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-app.c (gnome_app_rightclick_menubar,

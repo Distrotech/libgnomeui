@@ -140,6 +140,8 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_QUIT        "Quit"
 #define GNOME_STOCK_PIXMAP_MULTIPLE    "Multiple"
 #define GNOME_STOCK_PIXMAP_NOT         "Not"
+#define GNOME_STOCK_PIXMAP_CONVERT     "Convert"
+#define GNOME_STOCK_PIXMAP_JUMP_TO     "Jump To"
 
 #define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
 
@@ -188,7 +190,7 @@ struct _GnomeStockPixmapEntryImlib {
         GnomeStockPixmapType type;
 	int width, height;
 	char *label;
-        gchar *rgb_data;
+        const gchar *rgb_data;
 	GdkImlibColor shape;
 };
 
@@ -198,7 +200,7 @@ struct _GnomeStockPixmapEntryImlibScaled {
         GnomeStockPixmapType type;
 	int width, height;
 	char *label;
-        gchar *rgb_data;
+        const gchar *rgb_data;
 	GdkImlibColor shape;
 	int scaled_width, scaled_height;
 };
@@ -443,6 +445,8 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_BOOK_BLUE    "Menu_Book Blue"
 #define GNOME_STOCK_MENU_BOOK_YELLOW  "Menu_Book Yellow"
 #define GNOME_STOCK_MENU_BOOK_OPEN    "Menu_Book Open"
+#define GNOME_STOCK_MENU_CONVERT      "Menu_Convert"
+#define GNOME_STOCK_MENU_JUMP_TO      "Menu_Jump To"
 
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT
 

@@ -774,6 +774,28 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_CONVERT));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_CONVERT));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Convert");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_JUMP_TO));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_JUMP_TO));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Jump To");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
 	column = 0; row += 3;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_BOOK_RED));
 	gtk_widget_show(w);
