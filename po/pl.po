@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
-"PO-Revision-Date: 2003-01-02 02:11+0100\n"
-"Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
+"POT-Creation-Date: 2003-06-27 21:57+0200\n"
+"PO-Revision-Date: 2003-06-27 21:59--100\n"
+"Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,9 +50,8 @@ msgid "Translated by"
 msgstr "Lokalizacja"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Zasługi"
+msgstr "Z_asługi"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -142,6 +141,7 @@ msgstr "Informacje o programie %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Plik"
 
@@ -199,6 +199,7 @@ msgid "_Game"
 msgstr "_Gra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Pomo_c"
 
@@ -389,11 +390,11 @@ msgstr "Konfiguruje aplikację"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Informacje o"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informacje o programie"
 
@@ -420,7 +421,7 @@ msgstr "Tworzy nowe okno"
 msgid "_Close This Window"
 msgstr "Za_mknij okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zamyka bieżące okno"
 
@@ -595,7 +596,7 @@ msgstr "Poziom wymaganej aktywności użytkownika."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Pośrednik HTTP wymaga zalogowania się.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -603,18 +604,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Aby uzyskać dostęp do \"%s\", musisz się zalogować.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Twoje hasło zostanie przesłane bez użycia szyfrowania."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Twoje hasło zostanie przesłane z użyciem szyfrowania."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Wymagane jest uwierzytelnienie"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1220,11 +1223,11 @@ msgstr "Komunikat"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "Nazwa _użytkownika:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Hasło:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1297,27 +1300,27 @@ msgstr "Cofnij wcięcie"
 msgid "About"
 msgstr "Informacje o"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "X display to use"
 msgstr "Wykorzystywany ekran X"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "DISPLAY"
 msgstr "EKRAN X"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:125
 msgid "GNOME GUI Library"
 msgstr "Biblioteka GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Kilkakrotnie wystąpiło niepoprawne odwołanie do pamięci; nie można "
 "wyświetlić okna z informacją o błędzie\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:637
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1372,8 +1375,6 @@ msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Odwiedź stronę \"GNOME Application Crash\", aby uzyskać więcej informacji"
 
-#~ msgid "_Credits"
-#~ msgstr "_Zasługi"
-
-#~ msgid "Exit the test"
-#~ msgstr "Kończy test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Kończy test"
