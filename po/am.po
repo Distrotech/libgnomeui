@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "POT-Creation-Date: 2002-10-03 05:33+0200\n"
-"PO-Revision-Date: 2002-10-03 21:49+EST\n"
+"PO-Revision-Date: 2002-10-24 12:17+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +183,7 @@ msgstr "ቀለም መራጭ"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "ቀለሙን ለመለየት መምረጫውን ይክፈቱ"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -239,7 +239,7 @@ msgstr "ቀን ምረጥ"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "ከቀን መቁጠሩያው ላይ ቀኑን ይምረጡ"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -393,7 +393,7 @@ msgstr "ማያያዣውን ለመሳል የተጠቀመው ቀለም"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "ይህ ቁልፍ እራሱ ወደሚያሳየው ወደ URI  ይወስድዎታል"
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
@@ -798,7 +798,7 @@ msgstr "አዲስ መስኮት ፍጠር"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "_ይሄንን መስኮት ዝጋ"
+msgstr "ይሄንን መስኮት _ዝጋ"
 
 #: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
@@ -874,7 +874,7 @@ msgstr "አሁን ያለውን ጨዋታ ጨርስ"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr "_ማውጫ"
+msgstr "_ይዞታዎች"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
@@ -882,11 +882,11 @@ msgstr "ለእዚህ መጠቀሚያ ፕሮግራም መረጃ አሳይ"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr ""
+msgstr "ጽሑፍ ከምልክቶቹ ስር"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr ""
+msgstr "ከምልክቶቹ ጐን ቀዳሚ ጽሑፍ"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
@@ -927,7 +927,7 @@ msgstr "n"
 
 #: libgnomeui/gnome-app-util.c:321
 msgid "no"
-msgstr "አይደለም"
+msgstr "አይ"
 
 #: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
@@ -1208,11 +1208,11 @@ msgstr "ቅድመ ዕይታ"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
-msgstr ""
+msgstr "የምልክቶች ምርጫ መምረጫ"
 
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "ይህ የመምረጫ ሳጥን ምልክቶችን ያስመርጥዎታል።"
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
@@ -1228,7 +1228,7 @@ msgstr "የቁልፍ መራጭ"
 
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "ይህ ቁልፍ ምልክቶችን እንድትመርጡ መስኮቱን ይከፍታል።"
 
 #: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
@@ -1243,6 +1243,7 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
+"በምልክቶቹ ምስል ቦታ የማውጫውን ስም ማስገባት አለብዎት።"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
