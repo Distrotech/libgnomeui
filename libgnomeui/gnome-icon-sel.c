@@ -143,8 +143,6 @@ static void gnome_icon_selection_destroy (GtkObject *o)
 	
 	gis = GNOME_ICON_SELECTION(o);
 
-	/* FIXME Does nothing, should come out */
-
 	/*clear our data if we have some*/
 	if(gis->file_list) {
 		g_list_foreach(gis->file_list,(GFunc)g_free,NULL);

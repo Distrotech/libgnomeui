@@ -28,6 +28,7 @@
 #include "gnome-dialog.h"
 #include "gnome-stock.h"
 #include "gnome-file-entry.h"
+#include "gnome-icon-list.h"
 #include "gnome-icon-sel.h"
 #include "gnome-icon-entry.h"
 
@@ -232,6 +233,15 @@ icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 }
 
 static void
+gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEntry *ientry)
+{
+	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
+		icon_selected_cb(NULL, ientry);
+		gtk_widget_hide(ientry->pick_dialog);
+	}
+}
+
+static void
 show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 {
 	GnomeFileEntry *fe = GNOME_FILE_ENTRY(ientry->fentry);
@@ -306,6 +316,9 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 					    0, /* OK button */
 					    GTK_SIGNAL_FUNC(icon_selected_cb),
 					    ientry);
+		gtk_signal_connect_after(GTK_OBJECT(GNOME_ICON_SELECTION(iconsel)->gil), "select_icon",
+					 GTK_SIGNAL_FUNC(gil_icon_selected_cb),
+					 ientry);
 		gtk_object_set_user_data(GTK_OBJECT(ientry), iconsel);
 	} else {
 		if(!GTK_WIDGET_VISIBLE(ientry->pick_dialog))
