@@ -1,3 +1,64 @@
+1998-12-14  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-app.c: Removed some `#if 0'ed stuff.
+	(DEFAULT_TOOLBAR_NAME, DEFAULT_MENUBAR_NAME): New string
+ 	constants.
+	(gnome_app_set_menus): Give the menubar the `DEFAULT_MENUBAR_NAME'.
+	(gnome_app_set_toolbar): Give the toolbar the
+	`DEFAULT_TOOLBAR_NAME'.  If not using toolbar reliefs, set the
+	dock item's border width to 1.
+
+	* dock_demo.c: Demonstrate usage of GnomeDockLayout by saving the
+	dock configuration on exit, and reloading it a startup.
+
+	* gnome-dock.h: Changed order of the `GnomeDockPositionType' so
+	that numbering goes clockwise.
+
+	* gnome-dock.c (drag_new): Return value made gboolean: return TRUE
+ 	iff successfull.
+	(drag_to): Likewise.
+	(drag_floating): Likewise.
+	(drag_check): Return a value according to what the `drag_*'
+ 	functions returned.
+        (gnome_dock_get_item_by_name): New function.
+	(get_docked_item_by_name): New helper function.
+	(get_floating_item_by_name): New helper function.
+ 	(gnome_dock_get_layout): New function to get the layout.
+	(layout_add_floating, layout_add_bands): New private helper
+ 	functions.
+	(gnome_dock_add_item): When creating the new band, orient it
+ 	appropriately.
+
+	* gnome-dock-layout.c, gnome-dock-layout.h: New files to handle
+	the docking layout.
+
+	* gnome-dock-item.c: Removed unused `GHOST_HEIGHT' and
+ 	`CHILDLESS_SIZE' constants.
+	(gnome_dock_item_init): Set the container's border width to 1.
+	(gnome_dock_item_size_request): Request space only for the handle.
+	(gnome_dock_item_detach): Size_allocate after reparenting, not
+ 	before.
+	(gnome_dock_item_size_request_with_child): New function.
+	(gnome_dock_item_init): Do not force a border width anymore.
+ 	(gnome_dock_item_new): New parameter `name'.
+
+	* gnome-dock-item.h (struct _GnomeDockItem): New member `name',
+ 	name of the item.  Member `child_detached' renamed to
+ 	`is_floating'.
+
+	* gnome-dock.c, gnome-dock.h: Occurrences of the words "detached"
+ 	and "undocked" replaced with "floating" for consistence.
+	* gnome-dock-item.c, gnome-dock-item.h: Likewise.
+
+	* gnome-dock-band.c (calc_prev_and_foll_space): Also consider the
+ 	extra allocated space as empty, reusable space.
+	(gnome_dock_band_layout_add): New function.
+	
+	* gnome-dock.c (drag_floating): New parameters `rel_x', `rel_y'.
+  	Detach only if the pointer is outside all the docking areas.  (To
+	be fixed.)
+	(drag_motion): Pass `rel_x' and `rel_y' to `drag_floating'.
+
 1998-12-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-init.c (gnome_init_cb): Remove the hack mentioned below.

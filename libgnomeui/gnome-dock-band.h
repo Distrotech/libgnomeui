@@ -20,12 +20,10 @@
    Author: Ettore Perazzoli <ettore@comm2000.it>
 */
 
-#ifndef GNOME_DOCK_BAND_H
-#define GNOME_DOCK_BAND_H
+#ifndef _GNOME_DOCK_BAND_H
+#define _GNOME_DOCK_BAND_H
 
 #include <libgnome/gnome-defs.h>
-
-#include "gnome-dock-item.h"
 
 BEGIN_GNOME_DECLS
 
@@ -42,6 +40,10 @@ typedef struct _GnomeDockBand GnomeDockBand;
 typedef struct _GnomeDockBandClass GnomeDockBandClass;
 typedef struct _GnomeDockBandChild GnomeDockBandChild;
 
+#include "gnome-dock.h"
+#include "gnome-dock-item.h"
+#include "gnome-dock-layout.h"
+
 struct _GnomeDockBand
 {
   GtkContainer container;
@@ -53,6 +55,9 @@ struct _GnomeDockBand
 
   GList *floating_child;        /* GnomeDockBandChild */
   gboolean doing_drag;
+
+  guint max_space_requisition;
+  guint tot_offsets;
 };
 
 struct _GnomeDockBandClass
@@ -76,45 +81,56 @@ struct _GnomeDockBandChild
 
   guint prev_space, foll_space;
   guint drag_prev_space, drag_foll_space;
+
+  guint max_space_requisition;
 };
 
-GtkWidget  *gnome_dock_band_new              (void);
-guint       gnome_dock_band_get_type         (void);
+GtkWidget     *gnome_dock_band_new              (void);
+guint          gnome_dock_band_get_type         (void);
+   
+void           gnome_dock_band_set_orientation  (GnomeDockBand *band,
+                                                 GtkOrientation orientation);
+GtkOrientation gnome_dock_band_get_orientation  (GnomeDockBand *band);
+   
+gboolean       gnome_dock_band_insert           (GnomeDockBand *band,
+                                                 GtkWidget *child,
+                                                 guint offset,
+                                                 gint position);
+gboolean       gnome_dock_band_prepend          (GnomeDockBand *band,
+                                                 GtkWidget *child,
+                                                 guint offset);
+gboolean       gnome_dock_band_append           (GnomeDockBand *band,
+                                                 GtkWidget *child,
+                                                 guint offset);
+    
+void           gnome_dock_band_set_child_offset (GnomeDockBand *band,
+                                                 GtkWidget *child,
+                                                 guint offset);
+guint          gnome_dock_band_get_child_offset (GnomeDockBand *band,
+                                                 GtkWidget *child); 
+void           gnome_dock_band_move_child       (GnomeDockBand *band,
+                                                 GList *old_child,
+                                                 guint new_num);
+   
+guint          gnome_dock_band_get_num_children (GnomeDockBand *band);
+    
+void           gnome_dock_band_drag_begin       (GnomeDockBand *band,
+                                                 GnomeDockItem *item);
+gboolean       gnome_dock_band_drag_to          (GnomeDockBand *band,
+                                                 GnomeDockItem *item,
+                                                 gint x, gint y);
+void           gnome_dock_band_drag_end         (GnomeDockBand *band,
+                                                 GnomeDockItem *item);
+   
+GnomeDockItem *gnome_dock_band_get_item_by_name (GnomeDockBand *band,
+                                                 const char *name,
+                                                 guint *position_return,
+                                                 guint *offset_return);
 
-void        gnome_dock_band_set_orientation  (GnomeDockBand *band,
-                                              GtkOrientation orientation);
-GtkOrientation gnome_dock_band_get_orientation (GnomeDockBand *band);
-
-gboolean    gnome_dock_band_insert           (GnomeDockBand *band,
-                                              GtkWidget *child,
-                                              guint offset,
-                                              gint position);
-gboolean    gnome_dock_band_prepend          (GnomeDockBand *band,
-                                              GtkWidget *child,
-                                              guint offset);
-gboolean    gnome_dock_band_append           (GnomeDockBand *band,
-                                              GtkWidget *child,
-                                              guint offset);
- 
-void        gnome_dock_band_set_child_offset (GnomeDockBand *band,
-                                              GtkWidget *child,
-                                              guint offset);
-guint       gnome_dock_band_get_child_offset (GnomeDockBand *band,
-                                              GtkWidget *child); 
-void        gnome_dock_band_move_child       (GnomeDockBand *band,
-                                              GList *old_child,
-                                              guint new_num);
-
-guint       gnome_dock_band_get_num_children (GnomeDockBand *band);
- 
-void        gnome_dock_band_drag_begin       (GnomeDockBand *band,
-                                              GnomeDockItem *item);
-void        gnome_dock_band_drag_to          (GnomeDockBand *band,
-                                              GnomeDockItem *item,
-                                              gint x, gint y);
-void        gnome_dock_band_drag_end         (GnomeDockBand *band,
-                                              GnomeDockItem *item);
-
+void           gnome_dock_band_layout_add       (GnomeDockBand *band,
+                                                 GnomeDockLayout *layout,
+                                                 GnomeDockPositionType position,
+                                                 guint band_num);
 END_GNOME_DECLS
 
 #endif

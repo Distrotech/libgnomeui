@@ -20,12 +20,10 @@
    Author: Ettore Perazzoli <ettore@comm2000.it>
 */
 
-#ifndef GNOMEDOCK_H
-#define GNOMEDOCK_H
+#ifndef _GNOME_DOCK_H
+#define _GNOME_DOCK_H
 
 #include <libgnome/gnome-defs.h>
-
-#include "gnome-dock-band.h"
 
 BEGIN_GNOME_DECLS
 
@@ -38,16 +36,19 @@ BEGIN_GNOME_DECLS
 
 typedef enum
 {
-  GNOME_DOCK_POS_LEFT,
-  GNOME_DOCK_POS_RIGHT,
   GNOME_DOCK_POS_TOP,
+  GNOME_DOCK_POS_RIGHT,
   GNOME_DOCK_POS_BOTTOM,
-  GNOME_DOCK_POS_DETACHED
+  GNOME_DOCK_POS_LEFT,
+  GNOME_DOCK_POS_FLOATING
 } GnomeDockPositionType;
 
 typedef struct _GnomeDock GnomeDock;
 typedef struct _GnomeDockClass GnomeDockClass;
 typedef struct _GnomeDockChild GnomeDockChild;
+
+#include "gnome-dock-band.h"
+#include "gnome-dock-layout.h"
 
 struct _GnomeDockChild
 {
@@ -71,7 +72,7 @@ struct _GnomeDock
   GList *left_bands;            /* GnomeDockChild */
 
   /* Children that are currently not docked.  */
-  GList *undocked_children;     /* GtkWidget * */
+  GList *floating_children;     /* GtkWidget */
 
   /* Client rectangle before drag.  */
   GtkAllocation client_rect;
@@ -82,22 +83,28 @@ struct _GnomeDockClass
   GtkContainerClass parent_class;
 };
 
-GtkWidget *gnome_dock_new             (void);
-guint      gnome_dock_get_type        (void);
+GtkWidget     *gnome_dock_new              (void);
+guint          gnome_dock_get_type         (void);
+                                           
+void           gnome_dock_add_item         (GnomeDock             *dock,
+                                            GtkWidget             *item,
+                                            GnomeDockPositionType  edge,
+                                            guint                  band_num,
+                                            guint                  offset,
+                                            gint                   position,
+                                            gboolean               in_new_band);
+         
+void           gnome_dock_set_client_area  (GnomeDock             *dock,
+                                            GtkWidget             *widget);
+ 
+GnomeDockItem *gnome_dock_get_item_by_name (GnomeDock *dock,
+                                            const gchar *name,
+                                            GnomeDockPositionType *position_return,
+                                            guint *num_band_return,
+                                            guint *band_position_return,
+                                            guint *offset_return);
 
-void       gnome_dock_prepend_band    (GnomeDock             *dock,
-                                       GtkWidget             *band);
-
-void       gnome_dock_add_item        (GnomeDock             *dock,
-                                       GtkWidget             *item,
-                                       GnomeDockPositionType  edge,
-                                       guint                  band_num,
-                                       guint                  offset,
-                                       gint                   position,
-                                       gboolean               in_new_band);
-
-void       gnome_dock_set_client_area (GnomeDock             *dock,
-                                       GtkWidget             *widget);
+GnomeDockLayout *gnome_dock_get_layout     (GnomeDock *dock);
 
 END_GNOME_DECLS
 

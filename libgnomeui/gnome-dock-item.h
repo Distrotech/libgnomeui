@@ -53,15 +53,17 @@ struct _GnomeDockItem
 {
   GtkBin bin;
 
+  gchar                *name;
+
   GdkWindow            *bin_window; /* parent window for children */
   GdkWindow            *float_window;
   GtkShadowType         shadow_type;
-       
+
   GtkOrientation        orientation;
   GnomeDockItemBehavior behavior;
 
   guint                 float_window_mapped : 1;
-  guint                 child_detached : 1;
+  guint                 is_floating : 1;
   guint                 in_drag : 1;
 
   /* If TRUE, the pointer must be grabbed on "map_event".  */
@@ -83,7 +85,10 @@ struct _GnomeDockItemClass
 
 /* Public methods.  */
 guint          gnome_dock_item_get_type        (void);
-GtkWidget*     gnome_dock_item_new            (GnomeDockItemBehavior behavior);
+GtkWidget     *gnome_dock_item_new             (const gchar *name,
+                                                GnomeDockItemBehavior behavior);
+
+char          *gnome_dock_item_get_name        (GnomeDockItem *dock_item);
 
 void           gnome_dock_item_set_shadow_type (GnomeDockItem *dock_item,
                                                 GtkShadowType type);
@@ -110,6 +115,9 @@ void           gnome_dock_item_grab_pointer    (GnomeDockItem *item);
 void           gnome_dock_item_drag_floating   (GnomeDockItem *item,
                                                 gint x, gint y);
 
+void           gnome_dock_item_handle_size_request
+                                               (GnomeDockItem *item,
+                                                GtkRequisition *requisition);
 END_GNOME_DECLS
 
 #endif /* _GNOME_DOCK_ITEM_H */

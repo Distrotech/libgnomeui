@@ -51,6 +51,7 @@ libgnomeui_la_SOURCES = \
 	gnome-dock.c			\
 	gnome-dock-band.c		\
 	gnome-dock-item.c		\
+	gnome-dock-layout.c		\
 	gnome-geometry.c		\
 	gnome-guru.c			\
 	gnome-entry.c			\
@@ -122,6 +123,7 @@ gnome_headers = \
 	gnome-dock.h			\
 	gnome-dock-band.h		\
 	gnome-dock-item.h		\
+	gnome-dock-layout.h		\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\

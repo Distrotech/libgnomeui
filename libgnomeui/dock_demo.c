@@ -1,7 +1,6 @@
 #include <gnome.h>
 
 #include "gnome-dock.h"
-#include "gnome-dock-item.h"
 
 static GtkWidget *app;
 static GtkWidget *dock;
@@ -48,8 +47,18 @@ static GnomeUIInfo toolbar_infos[5][10] = {
     GNOMEUIINFO_END }
 };
 
-void delete_callback (GtkWidget *w)
+static void delete_callback (GtkWidget *w)
 {
+  gchar *layout_string;
+  GnomeDockLayout *layout;
+
+  layout = gnome_dock_get_layout (GNOME_DOCK (dock));
+  layout_string = gnome_dock_layout_create_string (layout);
+  gnome_config_set_string ("Dock/Placement", layout_string);
+  gnome_config_sync ();
+
+  gtk_object_unref (GTK_OBJECT (layout));
+
   gtk_main_quit ();
 }
 
@@ -62,13 +71,13 @@ int
 main (int argc, char **argv)
 {
   GnomeUIBuilderData uibdata;
+  GtkObject *layout;
   int i;
 
   /* I am having troubles with CVS gnome-libs today, so let's do
      things by hand.  */
 
-  gtk_init (&argc, &argv);
-  gdk_imlib_init ();
+  gnome_init ("dock_demo", "1.0", argc, argv);
 
   app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (app), "Test!");
@@ -83,6 +92,10 @@ main (int argc, char **argv)
   uibdata.relay_func = NULL;
   uibdata.destroy_func = NULL;
 
+  gnome_config_push_prefix ("/DockTest/");
+
+  layout = gnome_dock_layout_new ();
+
   for (i = 0; i < 5; i++)
     {
       toolbars[i] = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL,
@@ -95,47 +108,65 @@ main (int argc, char **argv)
                                      NULL);
 
       if (i == 0)
-        dock_items[i] = gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
-                                             | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+        dock_items[i] = gnome_dock_item_new ("SomeBar",
+                                             /* GNOME_DOCK_ITEM_BEH_EXCLUSIVE */
+                                             GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
       else
-        dock_items[i] = gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_NORMAL);
+        {
+          gchar *name;
+
+          name = g_strdup_printf ("AnotherBar%d", i);
+          dock_items[i] = gnome_dock_item_new (name,
+                                               GNOME_DOCK_ITEM_BEH_NORMAL);
+        }
 
       gtk_container_set_border_width (GTK_CONTAINER (dock_items[i]), 1);
       gtk_container_add (GTK_CONTAINER (dock_items[i]), toolbars[i]);
 
       if (i < 3)
-        gnome_dock_add_item (GNOME_DOCK (dock),
-                             dock_items[i],
-                             GNOME_DOCK_POS_TOP,
-                             i, 0, 0, TRUE);
+        gnome_dock_layout_add (GNOME_DOCK_LAYOUT (layout),
+                               GNOME_DOCK_ITEM (dock_items[i]),
+                               GNOME_DOCK_POS_TOP,
+                               i, 0, 0);
       else
-        gnome_dock_add_item (GNOME_DOCK (dock),
-                             dock_items[i],
-                             GNOME_DOCK_POS_BOTTOM,
-                             i - 4, 0, 0, TRUE);
+        gnome_dock_layout_add (GNOME_DOCK_LAYOUT (layout),
+                               GNOME_DOCK_ITEM (dock_items[i]),
+                               GNOME_DOCK_POS_BOTTOM,
+                               i - 4, 0, 0);
 
       gtk_widget_show (toolbars[i]);
       gtk_widget_show (dock_items[i]);
     }
 
+  {
+    gchar *layout_string;
+
+    layout_string = gnome_config_get_string ("Dock/Placement");
+    gnome_dock_layout_parse_string (GNOME_DOCK_LAYOUT (layout),
+                                    layout_string);
+    g_free (layout_string);
+  }
+
+  gnome_dock_layout_add_to_dock (GNOME_DOCK_LAYOUT (layout),
+                                 GNOME_DOCK (dock));
+
+  gtk_object_unref (layout);
+
   client_frame = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type(GTK_FRAME (client_frame), GTK_SHADOW_IN);
   drawing_area = gtk_drawing_area_new();
-
-  gtk_container_add (GTK_CONTAINER (client_frame), drawing_area);
-
-  gnome_dock_set_client_area (GNOME_DOCK (dock), client_frame);
 
   gtk_signal_connect (GTK_OBJECT (app),
                       "delete_event",
                       GTK_SIGNAL_FUNC (delete_callback),
                       NULL);
 
+  gnome_dock_set_client_area (GNOME_DOCK (dock), client_frame);
   gtk_widget_show (client_frame);
   gtk_widget_show (drawing_area);
   gtk_widget_show (dock);
-  gtk_widget_show (app);
 
+  gtk_widget_show (app);
   gtk_main ();
 
   return 0;
