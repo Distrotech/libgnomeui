@@ -21,8 +21,7 @@ static void		restore_window		(GnomeMDI *, const gchar *,
 static void		set_active_window	(GnomeMDI *, GHashTable *, glong);
 
 
-static gpointer		window_list_func	(gpointer);
-static gpointer		widget_parent_func	(gpointer);
+static gpointer		view_window_func	(gpointer);
 
 static void             child_get_config_string (GnomeMDIChild *);
 
@@ -98,7 +97,7 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 	GPtrArray *windows, *views;
 	GnomeMDIChild *mdi_child;
 	guint k;
-		
+
 	windows = g_hash_table_lookup (child_windows, (gpointer) child);
 	if (!windows) return;
 
@@ -111,7 +110,7 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 	for (k = 0; k < windows->len; k++) {
 		if (windows->pdata [k] != (gpointer) window)
 			continue;
-		
+
 		if (*init)
 			gnome_mdi_add_view (mdi, mdi_child);
 		else {
@@ -180,7 +179,7 @@ set_active_window (GnomeMDI *mdi, GHashTable *window_hash, glong active_window)
 
 gboolean
 gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
-			 GnomeMDIChildCreate create_child_func)
+			 GnomeMDIChildCreator create_child_func)
 {
 	gchar key [BUFSIZ], *string;
 	GPtrArray *window_list, *child_list;
@@ -188,10 +187,14 @@ gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
 	GHashTable *child_views, *view_hash, *window_hash;
 	glong active_view = 0, active_window = 0;
 	guint i;
+	gint mode;
 
-	g_snprintf (key, sizeof(key), "%s/mdi_session=0", section);
-	if (gnome_config_get_int (key) == 0)
+	g_snprintf (key, sizeof(key), "%s/mdi_session=-1", section);
+	mode = gnome_config_get_int (key);
+	if (gnome_config_get_int (key) == -1)
 		return FALSE;
+
+	gnome_mdi_set_mode (mdi, mode);
 
 	child_hash = g_hash_table_new (NULL, NULL);
 	child_windows = g_hash_table_new (NULL, NULL);
@@ -246,7 +249,7 @@ gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
 
 		gnome_mdi_add_child (mdi, mdi_child);
 
-		g_hash_table_insert (child_hash, (gpointer) child, mdi_child);
+		g_hash_table_insert (child_hash, (gpointer)child, mdi_child);
 		
 		g_snprintf (key, sizeof(key), "%s/mdi_child_windows_%lx",
 			    section, child);
@@ -319,15 +322,9 @@ gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
 }
 
 static gpointer
-window_list_func (gpointer data)
+view_window_func (gpointer data)
 {
-	return ((GnomeApp *) data)->contents;
-}
-
-static gpointer
-widget_parent_func (gpointer data)
-{
-	return ((GtkWidget *) data)->parent;
+	return gnome_mdi_get_app_from_view(GTK_WIDGET(data));
 }
 
 void
@@ -339,8 +336,9 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 
 	gnome_config_clean_section (section);
 
+	/* save MDI mode */
 	g_snprintf (key, sizeof(key), "%s/mdi_session", section);
-	gnome_config_set_int (key, 1);
+	gnome_config_set_int (key, mdi->mode);
 
 	/* Write list of children. */
 
@@ -350,12 +348,12 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 	/* Write list of windows. */
 
 	g_snprintf (key, sizeof(key), "%s/mdi_windows", section);
-	config_set_list (key, mdi->windows, window_list_func);
+	config_set_list (key, mdi->windows, NULL);
 
 	/* Save active window. */
 
 	g_snprintf (key, sizeof(key), "%s/mdi_active_window", section);
-	g_snprintf (value, sizeof(value), "%lx", (glong) mdi->active_window->contents);
+	g_snprintf (value, sizeof(value), "%lx", (glong) mdi->active_window);
 	gnome_config_set_string (key, value);
 
 	/* Save active view. */
@@ -388,7 +386,7 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 
 		g_snprintf (key, sizeof(key), "%s/mdi_child_windows_%lx",
 			    section, (long) mdi_child);
-		config_set_list (key, mdi_child->views, widget_parent_func);
+		config_set_list (key, mdi_child->views, view_window_func);
 
 		g_snprintf (key, sizeof(key), "%s/mdi_child_views_%lx",
 			    section, (long) mdi_child);
@@ -409,10 +407,10 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 		gdk_window_get_geometry (GTK_WIDGET (app)->window,
 					 &x, &y, &w, &h, NULL);
 
-		gdk_window_get_position (GTK_WIDGET (app)->window, &x, &y);
+		gdk_window_get_origin (GTK_WIDGET (app)->window, &x, &y);
 
 		g_snprintf (key, sizeof(key), "%s/mdi_window_%lx",
-			    section, (long) app->contents);
+			    section, (long) app);
 		g_snprintf (value, sizeof(value), "%d/%d/%d/%d", x, y, w, h);
 
 		gnome_config_set_string (key, value);
@@ -420,7 +418,7 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 		view = gnome_mdi_get_view_from_window (mdi, app);
 
 		g_snprintf (key, sizeof(key), "%s/mdi_window_view_%lx",
-			    section, (long) app->contents);
+			    section, (long) app);
 		g_snprintf (value, sizeof(value), "%lx", (long) view);
 
 		gnome_config_set_string (key, value);

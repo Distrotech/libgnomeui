@@ -1,3 +1,18 @@
+1998-12-04  Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.h: removed GNOME_MDI_REDRAW enum.
+	* gnome-mdi.c (gnome_mdi_set_mode): fixed a bug that caused
+	a toplevel window to be opened during the initial call.
+	(gnome_mdi_add_toplevel_view): make it do what you want it
+	to (One Of The Few, Pink Floyd, Final Cut, 1983) ;).
+	* gnome-mdi-session.h: changed typedef GnomeMDIChildCreate to
+	GnomeMDIChildCreator - it sounds better ;).
+	* gnome-mdi-session.c (gnome_mdi_save_state): properly save
+	window origins. fixed window ids to REALLY be the pointers
+	to GnomeApps. session saving should now work for all modes.
+	(widget_parent_func): removed. use view_window_func instead.
+	(window_list_func): removed.
+
 1998-12-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c: Indentation fixes.  Also, the main canvas module

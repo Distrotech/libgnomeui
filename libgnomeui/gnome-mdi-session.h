@@ -15,17 +15,17 @@ BEGIN_GNOME_DECLS
 
 /* This function should parse the config string and return a newly
  * created GnomeMDIChild. */
-typedef GnomeMDIChild *(*GnomeMDIChildCreate) (const gchar *);
+typedef GnomeMDIChild *(*GnomeMDIChildCreator) (const gchar *);
 
 /* gnome_mdi_restore_state(): call this with the GnomeMDI object, the
  * config section and the function used to recreate the GnomeMDIChilds
  * from their config strings. */
-gboolean	gnome_mdi_restore_state		(GnomeMDI *, const gchar *,
-						 GnomeMDIChildCreate);
+gboolean	gnome_mdi_restore_state	(GnomeMDI *, const char *,
+					 GnomeMDIChildCreator);
 
 /* gnome_mdi_save_state (): call this with the GnomeMDI object as the
  * first and the config section as the second argument. */
-void		gnome_mdi_save_state		(GnomeMDI *, const gchar *);
+void		gnome_mdi_save_state	(GnomeMDI *, const gchar *);
 
 END_GNOME_DECLS
 
