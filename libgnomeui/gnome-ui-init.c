@@ -283,7 +283,7 @@ relay_gtk_signal(GSignalInvocationHint *hint,
 		 const GValue *param_values,
 		 gchar *signame)
 {
-  char *pieces[3] = {"gtk-events", NULL, NULL};
+  char *pieces[3] = {"gtk-events-2", NULL, NULL};
   static GQuark disable_sound_quark = 0;
   GObject *object = g_value_get_object (&param_values[0]);
 

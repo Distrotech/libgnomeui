@@ -321,7 +321,7 @@ _gnome_gconf_get_bool (const char *key)
 
 	ret = gconf_client_get_bool (client,
 				     key,
-				     NULL);
+                                     NULL);
 
 	g_object_unref (G_OBJECT (client));
 
