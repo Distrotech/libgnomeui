@@ -36,4 +36,22 @@
 #define GNOME_OK 0
 #define GNOME_CANCEL 1
 
+/* These are keybindings, in GnomeUIInfo format. USE THEM OR DIE! 
+   Add to the list as well..
+*/
+#define GNOME_KEY_EXIT 	"<control>Q"
+#define GNOME_KEY_CLOSE "<control>W"
+
+#define GNOME_KEY_CUT 	"<control>X"
+#define GNOME_KEY_COPY	"<control>C"
+#define GNOME_KEY_PASTE "<control>V"
+#define GNOME_KEY_CLEAR "<control>K"
+
+#define GNOME_KEY_UNDO  "<control>U"
+#define GNOME_KEY_REDO	"<control>R"
+
+#define GNOME_KEY_NEW	"<control>N"
+#define GNOME_KEY_SAVE	"<control>S"
+#define GNOME_KEY_OPEN	"<control>O"
+
 #endif
