@@ -43,6 +43,10 @@ typedef struct _GnomeDEntryEditClass GnomeDEntryEditClass;
 struct _GnomeDEntryEdit {
   GtkObject object;
   
+  /*semi public entries, you should however use macros to get these*/
+  GtkWidget *child1;
+  GtkWidget *child2;
+  
   /* Remaining fields are private - if you need them, 
      please add an accessor function. */
 
@@ -56,12 +60,7 @@ struct _GnomeDEntryEdit {
 
   GtkWidget *terminal_button;  
 
-  GtkWidget *desktop_icon;  /* a GnomePixmap or GtkLabel */
-  GtkWidget *icon_button;   /* a GtkButton holding desktop_icon */
-  GtkWidget *icon_label;    /* Label with icon filename */
-  gchar     *icon;          /* The full icon pathname */
-
-  GtkWidget *icon_dialog;
+  GtkWidget *icon_entry;
 };
 
 struct _GnomeDEntryEditClass {
@@ -79,9 +78,15 @@ struct _GnomeDEntryEditClass {
 
 guint       gnome_dentry_edit_get_type  (void);
 
+/*create a new dentry and get the children using the below macros
+  or use the utility new_notebook below*/
+GtkObject * gnome_dentry_edit_new       (void);
+#define gnome_dentry_edit_child1(d) (GNOME_DENTRY_EDIT(d)->child1)
+#define gnome_dentry_edit_child2(d) (GNOME_DENTRY_EDIT(d)->child2)
+
 /* Create a new edit in this notebook - appends two pages to the 
    notebook. */
-GtkObject * gnome_dentry_edit_new       (GtkNotebook * notebook);
+GtkObject * gnome_dentry_edit_new_notebook(GtkNotebook * notebook);
 
 void        gnome_dentry_edit_clear     (GnomeDEntryEdit * dee);
 
@@ -100,7 +105,7 @@ void        gnome_dentry_edit_set_dentry (GnomeDEntryEdit * dee,
 /* Generate a dentry based on the contents of the display */
 GnomeDesktopEntry * gnome_dentry_get_dentry(GnomeDEntryEdit * dee);
 
-/* Accessor functions - do NOT free returned string. */
+/* Return an allocated string, you need to g_free it. */
 gchar *     gnome_dentry_edit_get_icon   (GnomeDEntryEdit * dee);
 gchar *     gnome_dentry_edit_get_name   (GnomeDEntryEdit * dee);
 

@@ -31,7 +31,7 @@
 #include "gnome-dialog.h"
 #include "gnome-uidefs.h"
 #include "gnome-pixmap.h"
-#include "gnome-icon-sel.h"
+#include "gnome-icon-entry.h"
 
 static void gnome_dentry_edit_class_init (GnomeDEntryEditClass *klass);
 static void gnome_dentry_edit_init       (GnomeDEntryEdit      *messagebox);
@@ -47,11 +47,6 @@ static void gnome_dentry_edit_sync_dentry(GnomeDEntryEdit * dee,
 static void gnome_dentry_edit_changed(GnomeDEntryEdit * dee);
 static void gnome_dentry_edit_icon_changed(GnomeDEntryEdit * dee);
 static void gnome_dentry_edit_name_changed(GnomeDEntryEdit * dee);
-
-static void gnome_dentry_edit_set_icon(GnomeDEntryEdit * dee,
-				       const gchar * icon_name);
-
-static void show_icon_selection(GtkButton * b, GnomeDEntryEdit * dee);
 
 enum {
   CHANGED,
@@ -161,18 +156,19 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
 {
   GtkWidget * label;
   GList * types = NULL;
+  GtkWidget *e;
 
   label = gtk_label_new(_("Name:"));
   table_attach_label(GTK_TABLE(table), label, 0, 1, 0, 1);
 
   dee->name_entry = gtk_entry_new();
   table_attach_entry(GTK_TABLE(table),dee->name_entry, 1, 2, 0, 1);
-  gtk_signal_connect_object(GTK_OBJECT(dee->name_entry), "changed",
-			    GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
-			    GTK_OBJECT(dee));
-  gtk_signal_connect_object(GTK_OBJECT(dee->name_entry), "changed",
-			    GTK_SIGNAL_FUNC(gnome_dentry_edit_name_changed),
-			    GTK_OBJECT(dee));
+  gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->name_entry), "changed",
+					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
+					GTK_OBJECT(dee));
+  gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->name_entry), "changed",
+					GTK_SIGNAL_FUNC(gnome_dentry_edit_name_changed),
+					GTK_OBJECT(dee));
 
 
   label = gtk_label_new(_("Comment:"));
@@ -180,9 +176,9 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
 
   dee->comment_entry = gtk_entry_new();
   table_attach_entry(GTK_TABLE(table),dee->comment_entry, 1, 2, 1, 2);
-  gtk_signal_connect_object(GTK_OBJECT(dee->comment_entry), "changed",
-			    GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
-			    GTK_OBJECT(dee));
+  gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->comment_entry), "changed",
+					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
+					GTK_OBJECT(dee));
 
 
   label = gtk_label_new(_("Command:"));
@@ -190,9 +186,9 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
 
   dee->exec_entry = gtk_entry_new();
   table_attach_entry(GTK_TABLE(table),dee->exec_entry, 1, 2, 2, 3);
-  gtk_signal_connect_object(GTK_OBJECT(dee->exec_entry), "changed",
-			    GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
-			    GTK_OBJECT(dee));
+  gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->exec_entry), "changed",
+					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
+					GTK_OBJECT(dee));
 
 
   label = gtk_label_new(_("Type:"));
@@ -206,27 +202,23 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
   gtk_combo_set_value_in_list(GTK_COMBO(dee->type_combo), 
 			      FALSE, TRUE);
   table_attach_entry(GTK_TABLE(table),dee->type_combo, 1, 2, 3, 4);
-  gtk_signal_connect_object(GTK_OBJECT(GTK_COMBO(dee->type_combo)->entry), 
-			    "changed",
-			    GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
-			    GTK_OBJECT(dee));
+  gtk_signal_connect_object_while_alive(GTK_OBJECT(GTK_COMBO(dee->type_combo)->entry), 
+					"changed",
+					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
+					GTK_OBJECT(dee));
 
-  dee->icon_button = gtk_button_new();
-  gtk_widget_set_usize(dee->icon_button, 60, 60);
+  dee->icon_entry = gnome_icon_entry_new("icon",_("Choose an icon"));
+  e = gnome_icon_entry_gtk_entry(GNOME_ICON_ENTRY(dee->icon_entry));
+  gtk_signal_connect_object_while_alive(GTK_OBJECT(e),"changed",
+					GTK_SIGNAL_FUNC(gnome_dentry_edit_changed),
+					GTK_OBJECT(dee));
+  gtk_signal_connect_object_while_alive(GTK_OBJECT(e),"changed",
+					GTK_SIGNAL_FUNC(gnome_dentry_edit_icon_changed),
+					GTK_OBJECT(dee));
 
-  gtk_table_attach(GTK_TABLE(table),dee->icon_button, 
-		   0, 1, 5, 6, 0, 0, GNOME_PAD_SMALL, 
+  gtk_table_attach(GTK_TABLE(table),dee->icon_entry, 
+		   0, 2, 5, 6, 0, 0, GNOME_PAD_SMALL, 
 		   GNOME_PAD_SMALL);
-
-  gtk_signal_connect(GTK_OBJECT(dee->icon_button), "clicked",
-		     GTK_SIGNAL_FUNC(show_icon_selection),
-		     dee);
-
-  dee->icon_label = gtk_label_new("");
-  table_attach_label(GTK_TABLE(table),
-		     dee->icon_label, 1, 2, 5, 6);
-
-  gnome_dentry_edit_set_icon(dee, NULL);
 
   dee->terminal_button = 
     gtk_check_button_new_with_label (_("Run in Terminal"));
@@ -265,7 +257,7 @@ fill_advanced_page(GnomeDEntryEdit * dee, GtkWidget * page)
 }
 
 static GtkWidget *
-make_page(GtkWidget * notebook, const gchar * label)
+make_page(void)
 {
   GtkWidget * frame, * page;
 
@@ -277,48 +269,54 @@ make_page(GtkWidget * notebook, const gchar * label)
 
   gtk_container_add (GTK_CONTAINER(frame), page);
 
-  gtk_notebook_append_page ( GTK_NOTEBOOK(notebook), frame, 
-			     gtk_label_new(label) );
-
-  gtk_widget_show(frame);
-
-  return page;
+  return frame;
 } 
 
 static void
 gnome_dentry_edit_init (GnomeDEntryEdit *dee)
 {
-  dee->icon_dialog  = NULL;
-  dee->desktop_icon = NULL;
-  dee->icon         = NULL;
+  dee->child1       = NULL;
+  dee->child2       = NULL;
+}
+
+GtkObject * gnome_dentry_edit_new (void)
+{
+  GnomeDEntryEdit * dee;
+
+  dee = gtk_type_new(gnome_dentry_edit_get_type());
+
+  dee->child1 = make_page();
+  fill_easy_page(dee, GTK_BIN(dee->child1)->child);
+  gtk_widget_show_all(dee->child1);
+
+  dee->child2 = make_page();
+  fill_advanced_page(dee, GTK_BIN(dee->child2)->child);
+  gtk_widget_show_all(dee->child2);
+
+  return GTK_OBJECT (dee);
 }
 
 
-GtkObject * gnome_dentry_edit_new (GtkNotebook * notebook)
+GtkObject * gnome_dentry_edit_new_notebook (GtkNotebook * notebook)
 {
   GnomeDEntryEdit * dee;
-  GtkWidget * page;
 
   g_return_val_if_fail(notebook != NULL, NULL);
   
-  dee = gtk_type_new(gnome_dentry_edit_get_type());
+  dee = GNOME_DENTRY_EDIT(gnome_dentry_edit_new());
 
-  page = make_page(GTK_WIDGET(notebook), _("Easy"));
-  fill_easy_page(dee, page);
-  gtk_widget_show_all(page);
+  gtk_notebook_append_page ( GTK_NOTEBOOK(notebook), 
+			     dee->child1, 
+			     gtk_label_new(_("Easy")) );
 
-  page = make_page(GTK_WIDGET(notebook), _("Advanced"));
-  fill_advanced_page(dee, page);
-  gtk_widget_show_all(page);
+  gtk_notebook_append_page ( GTK_NOTEBOOK(notebook), 
+			     dee->child2, 
+			     gtk_label_new(_("Advanced")) );
 
   /* Destroy self with the notebook. */
   gtk_signal_connect_object(GTK_OBJECT(notebook), "destroy",
-			    GTK_SIGNAL_FUNC(gtk_object_destroy),
-			    GTK_OBJECT(dee));
-
-#ifdef GNOME_ENABLE_DEBUG
-  g_print("Dialog: %p\n", dee->icon_dialog);
-#endif
+					GTK_SIGNAL_FUNC(gtk_object_destroy),
+					GTK_OBJECT(dee));
 
   return GTK_OBJECT (dee);
 }
@@ -327,12 +325,6 @@ static void gnome_dentry_edit_destroy (GtkObject *dee)
 {
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
-
-  if (GNOME_DENTRY_EDIT(dee)->icon_dialog) {
-    gtk_widget_destroy(GNOME_DENTRY_EDIT(dee)->icon_dialog);
-  }
-  
-  g_free(GNOME_DENTRY_EDIT(dee)->icon);
 
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dee);
@@ -343,6 +335,7 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
 					   GnomeDesktopEntry * dentry)
 {
   gchar * s = NULL;
+  GtkWidget *e;
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
 
@@ -358,10 +351,8 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), 
 		     dentry->tryexec ? dentry->tryexec : "");
 
-  gnome_dentry_edit_set_icon(dee, dentry->icon);
-  if (dee->icon_dialog && dentry->icon)
-    gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(gtk_object_get_user_data(GTK_OBJECT(dee))),
-				     g_filename_pointer(dee->icon));
+  e = gnome_icon_entry_gtk_entry(GNOME_ICON_ENTRY(dee->icon_entry));
+  gtk_entry_set_text(GTK_ENTRY(e), dentry->icon ? dentry->icon : "");
 
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), 
 		     dentry->docpath ? dentry->docpath : "");
@@ -371,9 +362,6 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
 
   gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(dee->terminal_button),
 			      dentry->terminal);
-#ifdef GNOME_ENABLE_DEBUG
-  g_print("Dialog (sync display): %p\n", dee->icon_dialog);
-#endif
 }
 
 /* This is a simple-minded string splitter.  It splits on whitespace.
@@ -455,7 +443,7 @@ static void gnome_dentry_edit_sync_dentry(GnomeDEntryEdit * dee,
   if (text[0] != '\0') dentry->type = g_strdup(text);
   
   g_free(dentry->icon);
-  if (dee->icon) dentry->icon = g_strdup(g_filename_pointer(dee->icon));
+  dentry->icon = gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->icon_entry));
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->doc_entry));
   g_free(dentry->docpath);
@@ -519,16 +507,17 @@ GnomeDesktopEntry * gnome_dentry_get_dentry(GnomeDEntryEdit * dee)
 
 void        gnome_dentry_edit_clear     (GnomeDEntryEdit * dee)
 {
+  GtkWidget *e;
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
- 
+
   gtk_entry_set_text(GTK_ENTRY(dee->name_entry), "");
   gtk_entry_set_text(GTK_ENTRY(dee->comment_entry),"");
   gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), "");  
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), "");
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), "");
-
-  gnome_dentry_edit_set_icon(dee, NULL);
+  e = gnome_icon_entry_gtk_entry(GNOME_ICON_ENTRY(dee->icon_entry));
+  gtk_entry_set_text(GTK_ENTRY(e), "");
 }
 
 static void gnome_dentry_edit_changed(GnomeDEntryEdit * dee)
@@ -556,130 +545,14 @@ gchar *     gnome_dentry_edit_get_icon   (GnomeDEntryEdit * dee)
 {
   g_return_val_if_fail(dee != NULL, NULL);
  
-  return dee->icon;
+  return gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->icon_entry));
 }
 
 gchar *     gnome_dentry_edit_get_name   (GnomeDEntryEdit * dee)
 {
   gchar * name;
   name = gtk_entry_get_text(GTK_ENTRY(dee->name_entry));
-  return name;
-}
-
-static void gnome_dentry_edit_set_icon(GnomeDEntryEdit * dee,
-				       const gchar * icon_name)
-{
-  g_return_if_fail(dee != NULL);
-
-  g_free(dee->icon);
-  dee->icon = NULL;
-
-  if (dee->desktop_icon) gtk_widget_destroy(dee->desktop_icon);
-  dee->desktop_icon = NULL;
-
-  if (icon_name == NULL) {
-    dee->desktop_icon = gtk_label_new(_("No\nicon"));
-    if (!icon_name) icon_name = "";
-  }
-  else {
-    if (g_file_exists(icon_name)) {
-      dee->desktop_icon = 
-        gnome_pixmap_new_from_file(icon_name);
-    }
-    else {
-      gchar *icon_full_name = gnome_pixmap_file(icon_name);
-      dee->desktop_icon = 
-        gnome_pixmap_new_from_file(icon_full_name);
-      g_free(icon_full_name);
-    }
-    if (dee->desktop_icon == NULL) {
-      dee->desktop_icon = gtk_label_new(_("Couldn't\nload\nicon"));
-    }
-  }
-  
-  if ( dee->desktop_icon ) {
-    gtk_container_add(GTK_CONTAINER(dee->icon_button), 
-		      dee->desktop_icon);
-    gtk_widget_show( dee->desktop_icon );
-  }
-
-#ifdef GNOME_ENABLE_DEBUG
-  g_print("Setting icon name %s\n", g_filename_pointer(icon_name));
-#endif
-
-  gtk_label_set(GTK_LABEL(dee->icon_label),
-		g_filename_pointer(icon_name));
-
-  if (icon_name[0] != '\0') dee->icon = g_strdup(icon_name);
-
-  gnome_dentry_edit_changed(dee);
-  gnome_dentry_edit_icon_changed(dee);
-}
-
-static void icon_selected_cb(GtkButton * button, 
-			     GnomeDEntryEdit * dee)
-{
-  const gchar * icon;
-  GnomeIconSelection * gis;
-
-  gis =  gtk_object_get_user_data(GTK_OBJECT(dee));
-  icon = gnome_icon_selection_get_icon(gis, TRUE);
-
-  if (icon != NULL) 
-    gnome_dentry_edit_set_icon(dee, icon);
-}
-
-static void show_icon_selection(GtkButton * b, 
-				GnomeDEntryEdit * dee)
-{
-#ifdef GNOME_ENABLE_DEBUG
-  g_print("Dialog (show selection): %p\n", dee->icon_dialog);
-#endif
-  if ( dee->icon_dialog == NULL ) {
-    GtkWidget * iconsel;
-
-    dee->icon_dialog = 
-      gnome_dialog_new(_("Choose an icon"),
-		       GNOME_STOCK_BUTTON_OK,
-		       GNOME_STOCK_BUTTON_CANCEL,
-		       NULL);
-    gnome_dialog_close_hides(GNOME_DIALOG(dee->icon_dialog), TRUE);
-    gnome_dialog_set_close  (GNOME_DIALOG(dee->icon_dialog), TRUE);
-
-    gtk_window_set_policy(GTK_WINDOW(dee->icon_dialog), 
-			  TRUE, TRUE, TRUE);
-
-    iconsel = gnome_icon_selection_new();
-
-    /* FIXME this is all really broken, need to choose a 
-       better directory to look at */
-    gnome_icon_selection_add_defaults(GNOME_ICON_SELECTION(iconsel));
-
-    gtk_widget_set_usize(GNOME_ICON_SELECTION(iconsel)->clist , 250, 350);
-
-    gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(dee->icon_dialog)->vbox),
-		      iconsel);
-
-    gtk_widget_show_all(dee->icon_dialog);
-
-    gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(iconsel));
-
-    if (dee->icon) gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
-				     g_filename_pointer(dee->icon));
-
-    gnome_dialog_button_connect(GNOME_DIALOG(dee->icon_dialog), 
-				0, /* OK button */
-				GTK_SIGNAL_FUNC(icon_selected_cb),
-				dee);
-    gtk_object_set_user_data(GTK_OBJECT(dee), iconsel);
-  }
-  else {
-#ifdef GNOME_ENABLE_DEBUG
-    g_print("Already created dialog, just showing it\n");
-#endif
-    if ( ! GTK_WIDGET_VISIBLE(dee->icon_dialog) )
-      gtk_widget_show(dee->icon_dialog);
-  }
+  return g_strdup(name);
 }
 
 #ifdef TEST_DENTRY_EDIT

@@ -1,3 +1,11 @@
+Thu Nov 26 00:43:48 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.[ch]: now use icon_entry for the icon
+	  selection, also an important change is a slight api change
+	  for more consistency, _new doesn't take any argument, it will
+	  just create two pages for any kind of use, there is a function
+	  that acts like the onld _new, _new_notebook
+
 1998-11-25  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.[ch] (gnome_client_set_restart_style):
