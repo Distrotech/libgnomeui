@@ -319,6 +319,7 @@ EXTRA_DIST =					\
 	gnometypebuiltins_evals.c		\
 	portrait.xpm				\
 	landscape.xpm				\
+	libgnomeui-2.0.pc.in			\
 	$(oafinfo_DATA)
 
 libgnomeui_2_la_LDFLAGS = \
@@ -339,3 +340,6 @@ LDADD =	\
 	$(LIBART_LIBS)							\
 	$(PANGO_LIBS)							\
 	$(INTLLIBS)
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libgnomeui-2.0.pc
