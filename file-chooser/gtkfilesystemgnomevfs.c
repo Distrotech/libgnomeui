@@ -43,7 +43,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-volume-monitor.h>
 #include <libgnomevfs/gnome-vfs-drive.h>
-#include <glib/gi18n.h>
+#include <glib/gi18n-lib.h>
 
 #ifdef USE_GCONF
 #include <gconf/gconf-client.h>

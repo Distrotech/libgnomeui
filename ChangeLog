@@ -1,3 +1,10 @@
+2004-09-03  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: Include
+	the right header so i18n works properly. Patch
+	from Christian Persch <chpe at gnome org>. Closes
+	bug #144529.
+
 2004-08-30  Federico Mena Quintero  <federico@ximian.com>
 
 	Merged from the gnome-2-6 branch:
