@@ -1,3 +1,8 @@
+Fri Aug 31 04:00:30 2001  George Lebl <jirka@5z.com>
+
+	* testgnome.c: remove the test of the image entry since it no longer
+	  exists
+
 Tue Aug 28 02:08:17 2001  George Lebl <jirka@5z.com>
 
 	* test-gnome.c:  re-enable the test for gnome-file-entry.  For some

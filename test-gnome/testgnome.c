@@ -912,6 +912,7 @@ create_icon_list(void)
 /*
  * ImageEntry
  */
+#if 0
 
 static void
 create_image_entry(void)
@@ -926,6 +927,8 @@ create_image_entry(void)
 	gtk_widget_show(entry);
 	gtk_widget_show(app->app);
 }
+#endif
+
 #if 0
 /*
  * ImageSelector
@@ -983,7 +986,7 @@ main (int argc, char **argv)
 /*		{ "font picker", create_font_picker },*/
 		{ "href", create_href },
 		{ "icon list", create_icon_list },
-		{ "image entry", create_image_entry },
+/*		{ "image entry", create_image_entry }, */
 /*		{ "image selector", create_image_selector },*/
 /*		{ "paper selector", create_papersel },*/
 /*		{ "unit spinner", create_unit_spinner },*/
