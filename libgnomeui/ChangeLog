@@ -1,5 +1,12 @@
 1998-11-27  Martin Baulig  <martin@home-of-linux.org>
 
+	* gnome-dialog.c (gnome_dialog_init): Don't create separator and
+ 	action area here so it won't be shown if the dialog contains no
+	buttons at all.
+ 	(gnome_dialog_init_action_area): New static function to create
+ 	separator and action area.
+	(gnome_dialog_append_button*): Call gnome_dialog_init_action_area.
+
 	* gnome-dialog.c (gnome_dialog_append_button_with_pixmap):
 	New function to add arbitrary button with a pixmap, if the
 	pixmap is NULL this is equivalent to gnome_dialog_append_button.

@@ -51,8 +51,10 @@ static void gnome_dialog_marshal_signal_2 (GtkObject         *object,
 					   gpointer           func_data,
 					   GtkArg            *args);
 
-static void gnome_dialog_class_init (GnomeDialogClass *klass);
-static void gnome_dialog_init       (GnomeDialog      *messagebox);
+static void gnome_dialog_class_init       (GnomeDialogClass *klass);
+static void gnome_dialog_init             (GnomeDialog * dialog);
+static void gnome_dialog_init_action_area (GnomeDialog * dialog);
+
 
 static void gnome_dialog_button_clicked (GtkWidget   *button, 
 					 GtkWidget   *messagebox);
@@ -162,7 +164,6 @@ static void
 gnome_dialog_init (GnomeDialog *dialog)
 {
   GtkWidget * vbox;
-  GtkWidget * separator;
   GtkWidget * bf;
 
   g_return_if_fail(dialog != NULL);
@@ -200,12 +201,15 @@ gnome_dialog_init (GnomeDialog *dialog)
 		      TRUE, TRUE,
 		      GNOME_PAD_SMALL);
   gtk_widget_show(dialog->vbox);
+}
 
-  separator = gtk_hseparator_new ();
-  gtk_box_pack_start (GTK_BOX (vbox), separator, 
-		      FALSE, TRUE,
-		      GNOME_PAD_SMALL);
-  gtk_widget_show (separator);
+static void
+gnome_dialog_init_action_area (GnomeDialog * dialog)
+{
+  GtkWidget * separator;
+
+  if (dialog->action_area)
+    return;
 
   dialog->action_area = gtk_hbutton_box_new ();
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->action_area),
@@ -214,9 +218,15 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog->action_area), 
 			      GNOME_PAD);
 
-  gtk_box_pack_start (GTK_BOX (vbox), dialog->action_area, 
-		      FALSE, TRUE, 0);
+  gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->action_area, 
+		    FALSE, TRUE, 0);
   gtk_widget_show (dialog->action_area);
+
+  separator = gtk_hseparator_new ();
+  gtk_box_pack_end (GTK_BOX (dialog->vbox), separator, 
+		      FALSE, TRUE,
+		      GNOME_PAD_SMALL);
+  gtk_widget_show (separator);
 }
 
 void       
@@ -359,7 +369,9 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
 
   if (button_name != NULL) {
     GtkWidget *button;
-    
+
+    gnome_dialog_init_action_area (dialog);    
+
     button = gnome_stock_or_ordinary_button (button_name);
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
@@ -393,6 +405,8 @@ void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
     } else {
       button = gnome_stock_or_ordinary_button (button_name);
     }
+
+    gnome_dialog_init_action_area (dialog);    
 
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
