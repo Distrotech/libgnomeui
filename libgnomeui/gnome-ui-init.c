@@ -59,7 +59,7 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 						    our_gtk_options[- key - 1].name,
 						    NULL);
 		if (arg)
-			our_argv[our_argc++] = strdup (arg);
+			our_argv[our_argc++] = g_strdup (arg);
 	}
 	else if (key == ARGP_KEY_INIT)
 	{
@@ -69,12 +69,12 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 		   like `-foo bar'.  */
 		our_argv = (char **) malloc (2 * (state->argc + 1) * sizeof (char *));
 		our_argc = 0;
-		our_argv[our_argc++] = strdup (state->argv[0]);
+		our_argv[our_argc++] = g_strdup (state->argv[0]);
 	}
 	else if (key == ARGP_KEY_SUCCESS)
 	{
 		int i, copy_ac = our_argc;
-		char **copy = (char **) malloc (our_argc * sizeof (char *));
+		char **copy = (char **) g_malloc (our_argc * sizeof (char *));
 
 		memcpy (copy, our_argv, our_argc * sizeof (char *));
 		our_argv[our_argc] = NULL;
@@ -84,9 +84,9 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 		gnome_rc_parse (program_invocation_name);
 
 		for (i = 0; i < copy_ac; ++i)
-			free (copy[i]);
-		free (copy);
-		free (our_argv);
+			g_free (copy[i]);
+		g_free (copy);
+		g_free (our_argv);
 	}
 	else
 		return ARGP_ERR_UNKNOWN;
