@@ -5,8 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
-"PO-Revision-Date: 2003-05-28 17:14+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-24 12:30+0100\n"
+"PO-Revision-Date: 2003-12-24 12:39+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +138,8 @@ msgid "About %s"
 msgstr "O programe %s"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:552
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Súbo_r"
 
@@ -145,7 +147,7 @@ msgstr "Súbo_r"
 msgid "_File/"
 msgstr "Súbo_r/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:555
 msgid "_Edit"
 msgstr "_Upraviť"
 
@@ -153,7 +155,7 @@ msgstr "_Upraviť"
 msgid "_Edit/"
 msgstr "_Upraviť/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:558
 msgid "_View"
 msgstr "_Zobraziť"
 
@@ -161,7 +163,7 @@ msgstr "_Zobraziť"
 msgid "_View/"
 msgstr "_Zobraziť/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:561
 msgid "_Settings"
 msgstr "Na_stavenia"
 
@@ -170,7 +172,7 @@ msgid "_Settings/"
 msgstr "Na_stavenia/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:327
 msgid "_New"
 msgstr "_Nový"
 
@@ -178,7 +180,7 @@ msgstr "_Nový"
 msgid "_New/"
 msgstr "_Nový/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:564
 msgid "Fi_les"
 msgstr "Sú_bory"
 
@@ -186,15 +188,16 @@ msgstr "Sú_bory"
 msgid "Fi_les/"
 msgstr "Sú_bory/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:567
 msgid "_Windows"
 msgstr "_Okná"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:573
 msgid "_Game"
 msgstr "_Hra"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:570
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomocník"
 
@@ -385,11 +388,11 @@ msgstr "Konfigurovať aplikáciu"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O progr_ame"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informácie o tomto programe"
 
@@ -416,7 +419,7 @@ msgstr "Vytvoriť nové okno"
 msgid "_Close This Window"
 msgstr "_Zatvoriť toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvoriť aktuálne okno"
 
@@ -621,11 +624,9 @@ msgid " domain %s"
 msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Aby ste mohli pristupovať k \"%s\", musíte sa prihlásiť.\n"
-"%s"
+msgstr "Musíte sa prihlásiť, aby ste mohli pristupovať k %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1228,7 +1229,7 @@ msgstr "_Meno používateľa:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Doména:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1236,11 +1237,11 @@ msgstr "_Heslo:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Zapamätať si heslo pre toto sedenie"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Uložiť heslo na zväzok kľúčov"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1387,5 +1388,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Prosím navštívte stránku GNOME Application Crash pre viac informácií"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukončiť test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukončiť test"
