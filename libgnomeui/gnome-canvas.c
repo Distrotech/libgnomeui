@@ -3694,8 +3694,8 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 	bbox.x1 = x2;
 	bbox.y1 = y2;
 
-	visible.x0 = - canvas->zoom_xofs;
-	visible.y0 = - canvas->zoom_yofs;
+	visible.x0 = canvas->layout.hadjustment->value - canvas->zoom_xofs;
+	visible.y0 = canvas->layout.vadjustment->value - canvas->zoom_yofs;
 	visible.x1 = visible.x0 + GTK_WIDGET (canvas)->allocation.width;
 	visible.y1 = visible.y0 + GTK_WIDGET (canvas)->allocation.height;
 
