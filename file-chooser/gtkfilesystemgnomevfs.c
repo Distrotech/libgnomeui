@@ -1227,8 +1227,11 @@ static GnomeVFSFileInfoOptions
 get_options (GtkFileInfoType types)
 {
   GnomeVFSFileInfoOptions options = GNOME_VFS_FILE_INFO_FOLLOW_LINKS;
-
+#if 0
   if ((types & GTK_FILE_INFO_MIME_TYPE) || (types & GTK_FILE_INFO_ICON))
+#else
+  if (types & GTK_FILE_INFO_MIME_TYPE)
+#endif
     {
       options |= GNOME_VFS_FILE_INFO_GET_MIME_TYPE;
     }
@@ -1267,7 +1270,11 @@ info_from_vfs_info (const gchar      *uri,
   gtk_file_info_set_is_hidden (info, vfs_info->name && vfs_info->name[0] == '.');
   gtk_file_info_set_is_folder (info, vfs_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY);
 
+#if 0
   if ((types & GTK_FILE_INFO_MIME_TYPE) || (types & GTK_FILE_INFO_ICON))
+#else
+  if (types & GTK_FILE_INFO_MIME_TYPE)
+#endif
     {
       gtk_file_info_set_mime_type (info, vfs_info->mime_type);
     }
