@@ -1,3 +1,15 @@
+Fri Apr  4 17:30:27 2003  Owen Taylor  <otaylor@redhat.com>
+
+	* gtkfilechooserprivate.h gtkfilechooser.h: Move
+	interface definition into a private header so it
+	can refer to GtkFileSystem.
+
+	* *.[ch]: Switch over from using gchar *uri internally
+	to using GtkFilePath * internally, and add 
+	conversion routines to GtkFileSystem.
+
+	* TODO README: Updates.
+
 Thu Mar 27 16:47:18 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* Move to the GNOME CVS repository, start ChangeLog'ing

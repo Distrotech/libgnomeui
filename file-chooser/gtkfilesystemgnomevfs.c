@@ -94,50 +94,59 @@ struct _FolderChild
   GnomeVFSFileInfo *info;
 };
 
-static void gtk_file_system_gnome_vfs_class_init   (GtkFileSystemGnomeVFSClass *class);
-static void gtk_file_system_gnome_vfs_iface_init   (GtkFileSystemIface     *iface);
-static void gtk_file_system_gnome_vfs_init         (GtkFileSystemGnomeVFS      *impl);
-static void gtk_file_system_gnome_vfs_finalize     (GObject                *object);
+static void gtk_file_system_gnome_vfs_class_init (GtkFileSystemGnomeVFSClass *class);
+static void gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface         *iface);
+static void gtk_file_system_gnome_vfs_init       (GtkFileSystemGnomeVFS      *impl);
+static void gtk_file_system_gnome_vfs_finalize   (GObject                    *object);
 
-static GSList *       gtk_file_system_gnome_vfs_list_roots    (GtkFileSystem    *file_system);
-static GtkFileInfo *  gtk_file_system_gnome_vfs_get_root_info (GtkFileSystem    *file_system,
-							       const gchar      *uri,
-							       GtkFileInfoType   types,
-							       GError          **error);
-static GtkFileFolder *gtk_file_system_gnome_vfs_get_folder    (GtkFileSystem    *file_system,
-							       const gchar      *uri,
-							       GtkFileInfoType   types,
-							       GError          **error);
-static gboolean       gtk_file_system_gnome_vfs_create_folder (GtkFileSystem    *file_system,
-							       const gchar      *uri,
-							       GError          **error);
-static gboolean       gtk_file_system_gnome_vfs_get_parent    (GtkFileSystem    *file_system,
-							       const gchar      *text_uri,
-							       gchar           **parent,
-							       GError          **error);
-static gchar *        gtk_file_system_gnome_vfs_make_uri      (GtkFileSystem    *file_system,
-							       const gchar      *base_uri,
-							       const gchar      *display_name,
-							       GError          **error);
-static gboolean       gtk_file_system_gnome_vfs_parse         (GtkFileSystem    *file_system,
-							       const gchar      *base_uri,
-							       const gchar      *str,
-							       gchar           **folder,
-							       gchar           **file_part,
-							       GError          **error);
+static GSList *       gtk_file_system_gnome_vfs_list_roots    (GtkFileSystem      *file_system);
+static GtkFileInfo *  gtk_file_system_gnome_vfs_get_root_info (GtkFileSystem      *file_system,
+							       const GtkFilePath  *path,
+							       GtkFileInfoType     types,
+							       GError            **error);
+static GtkFileFolder *gtk_file_system_gnome_vfs_get_folder    (GtkFileSystem      *file_system,
+							       const GtkFilePath  *path,
+							       GtkFileInfoType     types,
+							       GError            **error);
+static gboolean       gtk_file_system_gnome_vfs_create_folder (GtkFileSystem      *file_system,
+							       const GtkFilePath  *path,
+							       GError            **error);
+static gboolean       gtk_file_system_gnome_vfs_get_parent    (GtkFileSystem      *file_system,
+							       const GtkFilePath  *path,
+							       GtkFilePath       **parent,
+							       GError            **error);
+static GtkFilePath *  gtk_file_system_gnome_vfs_make_path     (GtkFileSystem      *file_system,
+							       const GtkFilePath  *base_path,
+							       const gchar        *display_name,
+							       GError            **error);
+static gboolean       gtk_file_system_gnome_vfs_parse         (GtkFileSystem      *file_system,
+							       const GtkFilePath  *base_path,
+							       const gchar        *str,
+							       GtkFilePath       **folder,
+							       gchar             **file_part,
+							       GError            **error);
+
+static gchar *      gtk_file_system_gnome_vfs_path_to_uri      (GtkFileSystem     *file_system,
+								const GtkFilePath *path);
+static gchar *      gtk_file_system_gnome_vfs_path_to_filename (GtkFileSystem     *file_system,
+								const GtkFilePath *path);
+static GtkFilePath *gtk_file_system_gnome_vfs_uri_to_path      (GtkFileSystem     *file_system,
+								const gchar       *uri);
+static GtkFilePath *gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem     *file_system,
+								const gchar       *filename);
 
 static GType gtk_file_folder_gnome_vfs_get_type   (void);
 static void  gtk_file_folder_gnome_vfs_class_init (GtkFileFolderGnomeVFSClass *class);
-static void  gtk_file_folder_gnome_vfs_iface_init (GtkFileFolderIface     *iface);
+static void  gtk_file_folder_gnome_vfs_iface_init (GtkFileFolderIface         *iface);
 static void  gtk_file_folder_gnome_vfs_init       (GtkFileFolderGnomeVFS      *impl);
-static void  gtk_file_folder_gnome_vfs_finalize   (GObject                *object);
+static void  gtk_file_folder_gnome_vfs_finalize   (GObject                    *object);
 
-static GtkFileInfo *gtk_file_folder_gnome_vfs_get_info      (GtkFileFolder  *folder,
-							const gchar    *uri,
-							GError        **error);
-static gboolean     gtk_file_folder_gnome_vfs_list_children (GtkFileFolder  *folder,
-							GSList        **children,
-							GError        **error);
+static GtkFileInfo *gtk_file_folder_gnome_vfs_get_info      (GtkFileFolder      *folder,
+							     const GtkFilePath  *path,
+							     GError            **error);
+static gboolean     gtk_file_folder_gnome_vfs_list_children (GtkFileFolder      *folder,
+							     GSList            **children,
+							     GError            **error);
 
 static GtkFileInfo *           info_from_vfs_info (GnomeVFSFileInfo *vfs_info,
 						   GtkFileInfoType   types);
@@ -243,15 +252,19 @@ gtk_file_system_gnome_vfs_class_init (GtkFileSystemGnomeVFSClass *class)
 }
 
 static void
-gtk_file_system_gnome_vfs_iface_init   (GtkFileSystemIface *iface)
+gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
 {
   iface->list_roots = gtk_file_system_gnome_vfs_list_roots;
   iface->get_folder = gtk_file_system_gnome_vfs_get_folder;
   iface->get_root_info = gtk_file_system_gnome_vfs_get_root_info;
   iface->create_folder = gtk_file_system_gnome_vfs_create_folder;
   iface->get_parent = gtk_file_system_gnome_vfs_get_parent;
-  iface->make_uri = gtk_file_system_gnome_vfs_make_uri;
+  iface->make_path = gtk_file_system_gnome_vfs_make_path;
   iface->parse = gtk_file_system_gnome_vfs_parse;
+  iface->path_to_uri = gtk_file_system_gnome_vfs_path_to_uri;
+  iface->path_to_filename = gtk_file_system_gnome_vfs_path_to_filename;
+  iface->uri_to_path = gtk_file_system_gnome_vfs_uri_to_path;
+  iface->filename_to_path = gtk_file_system_gnome_vfs_filename_to_path;
 }
 
 static void
@@ -268,15 +281,16 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
 static GSList *
 gtk_file_system_gnome_vfs_list_roots (GtkFileSystem *file_system)
 {
-  return g_slist_append (NULL, g_strdup ("file:///"));
+  return g_slist_append (NULL, gtk_file_path_new_dup ("file:///"));
 }
 
 static GtkFileInfo *
-gtk_file_system_gnome_vfs_get_root_info (GtkFileSystem    *file_system,
-					 const gchar      *uri,
-					 GtkFileInfoType   types,
-					 GError          **error)
+gtk_file_system_gnome_vfs_get_root_info (GtkFileSystem     *file_system,
+					 const GtkFilePath *path,
+					 GtkFileInfoType    types,
+					 GError           **error)
 {
+  const gchar *uri = gtk_file_path_get_string (path);
   GnomeVFSResult result;
   GnomeVFSFileInfo *vfs_info;
   GtkFileInfo *info = NULL;
@@ -304,17 +318,18 @@ ensure_types (GtkFileFolderGnomeVFS *folder_vfs,
 
 
 static GtkFileFolder *
-gtk_file_system_gnome_vfs_get_folder (GtkFileSystem    *file_system,
-				      const gchar      *uri,
-				      GtkFileInfoType   types,
-				      GError          **error)
+gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
+				      const GtkFilePath *path,
+				      GtkFileInfoType    types,
+				      GError           **error)
 {
+  const gchar *uri = gtk_file_path_get_string (path);
+  GtkFilePath *parent_path;
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
   GtkFileFolderGnomeVFS *folder_vfs;
   GnomeVFSMonitorHandle *monitor;
   GnomeVFSAsyncHandle *async_handle;
   GnomeVFSResult result;
-  gchar *parent_uri;
 
   folder_vfs = g_hash_table_lookup (system_vfs->folders, uri);
   if (folder_vfs)
@@ -323,16 +338,18 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem    *file_system,
       return g_object_ref (folder_vfs);
     }
 
-  if (!gtk_file_system_get_parent (file_system, uri, &parent_uri, error))
+  if (!gtk_file_system_get_parent (file_system, path, &parent_path, error))
     return FALSE;
 
-  if (parent_uri)
+  if (parent_path)
     {
+      const gchar *parent_uri;
       GtkFileFolderGnomeVFS *parent_folder;
       GSList *uris;
       
+      parent_uri = gtk_file_path_get_string (parent_path);
       parent_folder = g_hash_table_lookup (system_vfs->folders, parent_uri);
-      g_free (parent_uri);
+      gtk_file_path_free (parent_path);
 
       if (parent_folder &&
 	  !g_hash_table_lookup (parent_folder->children, uri))
@@ -400,10 +417,11 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem    *file_system,
 }
 
 static gboolean
-gtk_file_system_gnome_vfs_create_folder (GtkFileSystem    *file_system,
-					 const gchar      *uri,
-					 GError          **error)
+gtk_file_system_gnome_vfs_create_folder (GtkFileSystem     *file_system,
+					 const GtkFilePath *path,
+					 GError           **error)
 {
+  const gchar *uri = gtk_file_path_get_string (path);
   GnomeVFSResult result;
 
   result = gnome_vfs_make_directory (uri,
@@ -422,27 +440,20 @@ gtk_file_system_gnome_vfs_create_folder (GtkFileSystem    *file_system,
 }
 
 static gboolean
-gtk_file_system_gnome_vfs_get_parent (GtkFileSystem    *file_system,
-				      const gchar      *text_uri,
-				      gchar           **parent,
-				      GError          **error)
+gtk_file_system_gnome_vfs_get_parent (GtkFileSystem     *file_system,
+				      const GtkFilePath *path,
+				      GtkFilePath      **parent,
+				      GError           **error)
 {
-  GnomeVFSURI *uri = gnome_vfs_uri_new (text_uri);
+  GnomeVFSURI *uri = gnome_vfs_uri_new (gtk_file_path_get_string (path));
   GnomeVFSURI *parent_uri;
-  
-  if (!uri)
-    {
-      g_set_error (error,
-		   GTK_FILE_SYSTEM_ERROR,
-		   GTK_FILE_SYSTEM_ERROR_INVALID_URI,
-		   "Invalid URI '%s'", text_uri);
-      return FALSE;
-    }
 
+  g_return_val_if_fail (uri != NULL, FALSE);
+  
   parent_uri = gnome_vfs_uri_get_parent (uri);
   if (parent_uri)
     {
-      *parent = gnome_vfs_uri_to_string (parent_uri, 0);
+      *parent = gtk_file_path_new_steal (gnome_vfs_uri_to_string (parent_uri, 0));
       gnome_vfs_uri_unref (parent_uri);
     }
   else
@@ -461,15 +472,8 @@ make_child_uri (const    gchar *base_uri,
   GnomeVFSURI *uri = gnome_vfs_uri_new (base_uri);
   GnomeVFSURI *child_uri;
   gchar *result;
-  
-  if (!uri)
-    {
-      g_set_error (error,
-		   GTK_FILE_SYSTEM_ERROR,
-		   GTK_FILE_SYSTEM_ERROR_INVALID_URI,
-		   "Invalid URI '%s'", base_uri);
-      return NULL;
-    }
+
+  g_return_val_if_fail (uri != NULL, NULL);
 
   child_uri = gnome_vfs_uri_append_file_name (uri, child_name);
 
@@ -481,11 +485,11 @@ make_child_uri (const    gchar *base_uri,
   return result;
 }
 
-static gchar *
-gtk_file_system_gnome_vfs_make_uri (GtkFileSystem *file_system,
-				    const gchar   *base_uri,
-				    const gchar   *display_name,
-				    GError       **error)
+static GtkFilePath *
+gtk_file_system_gnome_vfs_make_path (GtkFileSystem     *file_system,
+				     const GtkFilePath *base_path,
+				     const gchar       *display_name,
+				     GError           **error)
 {
   gchar *child_name;
   gchar *result;
@@ -505,11 +509,12 @@ gtk_file_system_gnome_vfs_make_uri (GtkFileSystem *file_system,
       return NULL;
     }
 
-  result = make_child_uri (base_uri, child_name, error);
+  result = make_child_uri (gtk_file_path_get_string (base_path),
+			   child_name, error);
   
   g_free (child_name);
 
-  return result;
+  return gtk_file_path_new_steal (result);
 }
 
 static gchar *
@@ -542,14 +547,15 @@ path_from_input (GtkFileSystemGnomeVFS *system_vfs,
 /* Very roughly based on eel_make_uri_from_input()
  */
 static gboolean
-gtk_file_system_gnome_vfs_parse (GtkFileSystem  *file_system,
-				 const gchar    *base_uri,
-				 const gchar    *str,
-				 gchar         **folder,
-				 gchar         **file_part,
-				 GError        **error)
+gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
+				 const GtkFilePath *base_path,
+				 const gchar       *str,
+				 GtkFilePath      **folder,
+				 gchar            **file_part,
+				 GError           **error)
 {
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
+  const gchar *base_uri = gtk_file_path_get_string (base_path);
   gchar *stripped;
   gchar *last_slash;
   gboolean result = FALSE;
@@ -564,7 +570,7 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem  *file_system,
   last_slash = strrchr (stripped, '/');
   if (!last_slash)
     {
-      *folder = g_strdup (base_uri);
+      *folder = gtk_file_path_copy (base_path);
       *file_part = g_strdup (stripped);
       result = TRUE;
     }
@@ -624,7 +630,7 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem  *file_system,
 
       host_and_path = g_strconcat (host_name, path, NULL);
       host_and_path_escaped = gnome_vfs_escape_host_and_path_string (host_and_path);
-      *folder = g_strconcat (scheme, "//", host_and_path_escaped, NULL);
+      *folder = gtk_file_path_new_steal (g_strconcat (scheme, "//", host_and_path_escaped, NULL));
       *file_part = file;
       result = TRUE;
       
@@ -683,7 +689,7 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem  *file_system,
       if (uri)
 	{
 	  *file_part = g_strdup (last_slash + 1);
-	  *folder = uri;
+	  *folder = gtk_file_path_new_steal (uri);
 
 	  result = TRUE;
 	}
@@ -693,6 +699,40 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem  *file_system,
   g_free (stripped);
   
   return result;
+}
+
+static gchar *
+gtk_file_system_gnome_vfs_path_to_uri (GtkFileSystem     *file_system,
+				       const GtkFilePath *path)
+{
+  return g_strdup (gtk_file_path_get_string (path));
+}
+
+static gchar *
+gtk_file_system_gnome_vfs_path_to_filename (GtkFileSystem     *file_system,
+					    const GtkFilePath *path)
+{
+  const gchar *uri = gtk_file_path_get_string (path);
+  
+  return gnome_vfs_get_local_path_from_uri (uri);
+}
+
+static GtkFilePath *
+gtk_file_system_gnome_vfs_uri_to_path (GtkFileSystem *file_system,
+				       const gchar   *uri)
+{
+  return gtk_file_path_new_dup (uri);
+}
+
+static GtkFilePath *
+gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem *file_system,
+					    const gchar   *filename)
+{
+  gchar *uri = gnome_vfs_get_uri_from_local_path (filename);
+  if (uri)
+    return gtk_file_path_new_steal (uri);
+  else
+    return NULL;
 }
 
 /*
@@ -778,13 +818,14 @@ gtk_file_folder_gnome_vfs_finalize (GObject *object)
 }
 
 static GtkFileInfo *
-gtk_file_folder_gnome_vfs_get_info (GtkFileFolder  *folder,
-				    const gchar    *uri,
-				    GError        **error)
+gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
+				    const GtkFilePath *path,
+				    GError           **error)
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
+  const gchar *uri = gtk_file_path_get_string (path);
   FolderChild *child;
-
+  
   child = g_hash_table_lookup (folder_vfs->children, uri);
   if (!child)
     {
@@ -808,7 +849,7 @@ list_children_foreach (gpointer key,
   FolderChild *child = value;
   GSList **list = user_data;
 
-  *list = g_slist_prepend (*list, g_strdup (child->uri));
+  *list = g_slist_prepend (*list, gtk_file_path_new_dup (child->uri));
 }
 
 static gboolean
