@@ -478,8 +478,10 @@ browse_clicked(GnomeFileEntry *fentry)
 					 ! fentry->_priv->directory_entry);
 
 		p = build_filename (fentry);
-		gtk_file_selection_set_filename (fs, p);
-		g_free (p);
+		if (p != NULL) {
+			gtk_file_selection_set_filename (fs, p);
+			g_free (p);
+		}
 		return;
 	}
 
