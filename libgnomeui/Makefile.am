@@ -226,8 +226,7 @@ EXTRA_DIST =					\
 	gnome-marshal.list			\
 	gnome-boxed.defs			\
 	gnometype_inits.c			\
-	libgnomeui-2.0.pc.in			\
-	$(schema_DATA)
+	libgnomeui-2.0.pc.in
 
 libgnomeui_2_la_LDFLAGS = \
 	-version-info $(LIB_VERSION)		\
@@ -239,15 +238,6 @@ libgnomeui_2_la_LIBADD = \
 
 LDADD = \
 	libgnomeui-2.la
-
-#
-# The GConf schema data installation voodoo
-#
-schemadir   = $(sysconfdir)/gconf/schemas
-schema_DATA = libgnomeui.schemas
-
-install-data-local:
-	GCONF_CONFIG_SOURCE=$(GCONF_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$(schema_DATA)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libgnomeui-2.0.pc
