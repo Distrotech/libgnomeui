@@ -1,3 +1,9 @@
+Sun Jan 03 17:57:52 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-file-entry.c: actually accept file drops of text/uri-list
+	  there is still a problem of multiple files being dropped, I
+	  just pick out the first one, is this the right solution?
+
 1999-01-03  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-dock.[ch]: removed all traces of struct _GnomeDockChild.

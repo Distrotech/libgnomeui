@@ -16,19 +16,20 @@
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
+#include "libgnome/gnome-mime.h"
 #include "gnome-file-entry.h"
 
 
 static void gnome_file_entry_class_init (GnomeFileEntryClass *class);
 static void gnome_file_entry_init       (GnomeFileEntry      *fentry);
 static void gnome_file_entry_finalize   (GtkObject           *object);
-static void gnome_file_entry_drag_data_received (GtkEntry         *widget,
+static void gnome_file_entry_drag_data_received (GtkWidget        *widget,
 						 GdkDragContext   *context,
 						 gint              x,
 						 gint              y,
 						 GtkSelectionData *data,
 						 guint             info,
-						 guint             time);
+						 guint32           time);
 static void browse_clicked(GnomeFileEntry *fentry);
 static GtkHBoxClass *parent_class;
 
@@ -82,8 +83,9 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 				     LAST_SIGNAL);
 
 	object_class->finalize = gnome_file_entry_finalize;
-	
+
 	class->browse_clicked = browse_clicked;
+	
 }
 
 static void
@@ -178,15 +180,28 @@ browse_clicked_signal(GtkWidget *widget, gpointer data)
 }
 
 static void
-gnome_file_entry_drag_data_received (GtkEntry         *widget,
+gnome_file_entry_drag_data_received (GtkWidget        *widget,
 				     GdkDragContext   *context,
 				     gint              x,
 				     gint              y,
 				     GtkSelectionData *selection_data,
 				     guint             info,
-				     guint             time)
+				     guint32           time)
 {
-	gtk_entry_set_text (widget, selection_data->data);
+	GList *files;
+
+	/*here we extract the filenames from the URI-list we recieved*/
+	files = gnome_uri_list_extract_filenames(selection_data->data);
+	/*if there's isn't a file*/
+	if(!files) {
+		gtk_drag_finish(context,FALSE,FALSE,time);
+		return;
+	}
+
+	gtk_entry_set_text (GTK_ENTRY(widget), files->data);
+
+	/*free the list of files we got*/
+	gnome_uri_list_free_strings (files);
 }
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
@@ -195,7 +210,7 @@ static void
 gnome_file_entry_init (GnomeFileEntry *fentry)
 {
 	GtkWidget *button, *the_gtk_entry;
-	static GtkTargetEntry drop_types[] = { { "url:ALL", 0, 0 } };
+	static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
 	fentry->browse_dialog_title = NULL;
 	fentry->default_path = NULL;
@@ -212,6 +227,10 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, ELEMENTS(drop_types), GDK_ACTION_COPY);
+
+	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "drag_data_received",
+			    GTK_SIGNAL_FUNC (gnome_file_entry_drag_data_received),
+			    NULL);
 
 	gtk_box_pack_start (GTK_BOX (fentry), fentry->gentry, TRUE, TRUE, 0);
 	gtk_widget_show (fentry->gentry);
