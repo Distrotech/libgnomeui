@@ -1868,6 +1868,28 @@ gnome_client_get_config_prefix (GnomeClient *client)
 static gchar* config_prefix = NULL;
 
 /**
+ * gnome_client_set_global_config_prefix
+ * @client: Pointer to GNOME session client object.
+ *
+ * Description:
+ *
+ * Returns:  Pointer to
+ **/
+
+void
+gnome_client_set_global_config_prefix (GnomeClient *client, gchar* prefix)
+{
+  if (client == NULL)
+    {
+      config_prefix= g_strdup (prefix);
+    }
+
+  g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
+  
+  client->global_config_prefix = g_srtdup (prefix);
+}
+
+/**
  * gnome_client_get_global_config_prefix
  * @client: Pointer to GNOME session client object.
  *
