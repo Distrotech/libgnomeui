@@ -60,7 +60,7 @@ struct _GnomeColorPickerClass {
 	 * values from the color picker.
 	 */
         /*  (should be gushort, but Gtk can't marshal that.) */
-	void (* color_set) (GnomeColorPicker *cp, guint r, guint g, guint b, gushort a);
+	void (* color_set) (GnomeColorPicker *cp, guint r, guint g, guint b, guint a);
 };
 
 
