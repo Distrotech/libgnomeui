@@ -307,7 +307,7 @@ static gchar *menu_names[] =
   "preferences",
   /* 20 */
   "about",
-  "select-all"
+  "select-all",
   "new-window",
   "close-window",
   "new-game",
