@@ -205,7 +205,7 @@ gnome_dialog_init (GnomeDialog *dialog)
 
   dialog->action_area = gtk_hbutton_box_new ();
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->action_area),
-			     gnome_preferences_global.dialog_buttons_style);
+			     gnome_preferences_get_button_layout());
 
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog->action_area), 
 			      GNOME_PAD);

@@ -22,11 +22,21 @@
 #include "libgnome/gnome-config.h"
 #include <string.h>
 
+typedef struct _GnomePreferences GnomePreferences;
+
+struct _GnomePreferences {
+  GtkButtonBoxStyle dialog_buttons_style;
+  int property_box_buttons_ok : 1;
+  int property_box_buttons_apply : 1;
+  int property_box_buttons_close : 1;
+  int property_box_buttons_help : 1;
+};
+
 /* 
- * Global variable holds current preferences.  
+ * Variable holds current preferences.  
  */
 
-GnomePreferences gnome_preferences_global =
+static GnomePreferences prefs =
 {
   GTK_BUTTONBOX_END,  /* Position of dialog buttons. */
   TRUE,               /* PropertyBox has OK button */
@@ -88,7 +98,7 @@ void gnome_preferences_load(void)
     i = 0;
     while ( i < NUM_BUTTON_STYLES ) {
       if ( strcasecmp(s, dialog_button_styles[i]) == 0 ) {
-	gnome_preferences_global.dialog_buttons_style = i;
+	prefs.dialog_buttons_style = i;
 	break;
       } 
       ++i;
@@ -108,19 +118,19 @@ void gnome_preferences_load(void)
 
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_OK_KEY"=true",
 					 NULL);
-  gnome_preferences_global.property_box_buttons_ok = b;
+  prefs.property_box_buttons_ok = b;
 
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_APPLY_KEY"=true",
 					 NULL);
-  gnome_preferences_global.property_box_buttons_apply = b;
+  prefs.property_box_buttons_apply = b;
 
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_CLOSE_KEY"=true",
 					 NULL);
-  gnome_preferences_global.property_box_buttons_close = b;
+  prefs.property_box_buttons_close = b;
 
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_HELP_KEY"=true",
 					 NULL);
-  gnome_preferences_global.property_box_buttons_help = b;
+  prefs.property_box_buttons_help = b;
 
   gnome_config_pop_prefix();
 }
@@ -130,8 +140,19 @@ void gnome_preferences_save(void)
   gnome_config_push_prefix(DIALOGS);
   
   gnome_config_set_string(DIALOG_BUTTONS_STYLE_KEY, 
-			  dialog_button_styles[gnome_preferences_global.dialog_buttons_style]);
+			  dialog_button_styles[prefs.dialog_buttons_style]);
 
   gnome_config_pop_prefix();
   gnome_config_sync();
+}
+
+GtkButtonBoxStyle gnome_preferences_get_button_layout (void)
+{
+  return prefs.dialog_buttons_style;
+}
+
+void              gnome_preferences_set_button_layout (GtkButtonBoxStyle style)
+{
+  g_return_if_fail( (style >= 0) && (style <= GTK_BUTTONBOX_END) );
+  prefs.dialog_buttons_style = style;
 }

@@ -13,28 +13,15 @@
 
 BEGIN_GNOME_DECLS
 
-/* Global config choices. App-specific choices are handles in GnomeApp. */
-typedef struct _GnomePreferences GnomePreferences;
+/* Global config choices. App-specific choices are handled in GnomeApp. */
 
-struct _GnomePreferences {
-  GtkButtonBoxStyle dialog_buttons_style;
-  int property_box_buttons_ok : 1;
-  int property_box_buttons_apply : 1;
-  int property_box_buttons_close : 1;
-  int property_box_buttons_help : 1;
-};
-
-
-/* Don't use this unless you know what you're doing. */
-extern GnomePreferences gnome_preferences_global;
-
+/* Load and sync the config file. */
 void gnome_preferences_load(void);
 void gnome_preferences_save(void);
+
+GtkButtonBoxStyle gnome_preferences_get_button_layout (void);
+void              gnome_preferences_set_button_layout (GtkButtonBoxStyle style);
 
 END_GNOME_DECLS
 
 #endif
-
-
-
-

@@ -1,3 +1,9 @@
+Sun May 17 12:01:55 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-preferences.h, gnome-preferences.c: Use access functions
+	instead of global struct.
+	* gnome-dialog.c: Use the access functions.
+
 Sun May 17 02:29:14 1998  Havoc Pennington  <hp@pobox.com>
 
 	* Makefile.am, libgnomeui.h: Include gnome-preferences. Cross
