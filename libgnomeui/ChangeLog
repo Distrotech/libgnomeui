@@ -1,3 +1,8 @@
+1998-09-09  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome-dentry-edit.c: Protect inclusion of `gnomesupport.h' with
+	NEED_GNOMESUPPORT_H. 
+
 Tue Sep  8 22:54:31 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-dentry-edit.c: Include gnomesupport.h for strndup.
