@@ -651,6 +651,7 @@ gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
 		case GNOME_APP_UI_ITEM:
 		case GNOME_APP_UI_TOGGLEITEM:
 		case GNOME_APP_UI_SEPARATOR:
+		case GNOME_APP_UI_HELP:
 			install_menuitem_hint_to_statusbar(uiinfo, bar);
 			break;
 		case GNOME_APP_UI_RADIOITEMS:
@@ -852,6 +853,7 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
 		case GNOME_APP_UI_ITEM:
 		case GNOME_APP_UI_TOGGLEITEM:
 		case GNOME_APP_UI_SEPARATOR:
+		case GNOME_APP_UI_HELP:
 			install_menuitem_hint_to_appbar(uiinfo, appbar);
 			break;
 		case GNOME_APP_UI_RADIOITEMS:
@@ -1126,6 +1128,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 	gchar *path;
 
 	uiinfo->widget = gtk_image_menu_item_new_with_mnemonic (_("_Contents"));
+	uiinfo->hint = g_strdup (_("View help for this application"));
 
 	setup_image_menu_item (uiinfo->widget, GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP);
 
