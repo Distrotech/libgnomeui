@@ -1,22 +1,22 @@
 # Danish translation of libgnomeui.
-# Copyright (C) 1998, 99, 2000, 01, 02, 03 Free Software Foundation, Inc.
+# Copyright (C) 1998, 99, 2000, 01, 02, 03, 04 Free Software Foundation, Inc.
 # Keld Simonsen <keld@dkuug.dk>, 2001.
 # Kjartan Maraas <kmaraas@gnome.org>, 1998, 1999, 2000
-# Ole Laursen <olau@hardworking.dk>, 2002, 03.
+# Ole Laursen <olau@hardworking.dk>, 2002, 03, 04.
 #
 # Se po-filen til Gtk+ for nogle konventioner.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
-"PO-Revision-Date: 2003-06-18 18:47+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-21 18:21+0100\n"
+"PO-Revision-Date: 2004-01-21 18:21+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -142,6 +142,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Spil"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjælp"
 
@@ -389,11 +391,11 @@ msgstr "Konfigurér programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om dette program"
 
@@ -420,7 +422,7 @@ msgstr "Opret et nyt vindue"
 msgid "_Close This Window"
 msgstr "L_uk dette vindue"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Luk det aktuelle vindue"
 
@@ -500,23 +502,23 @@ msgstr "_Indhold"
 msgid "View help for this application"
 msgstr "Vis hjælp til dette program"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Tekst under ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Prioriteret tekst ved siden af ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Kun ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Kun tekst"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Brug skrivebordsstandarden (%s)"
@@ -622,14 +624,12 @@ msgstr "Brugerverifikation krævet"
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " domæne %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Du skal logge på for at tilgå \"%s\".\n"
-"%s"
+msgstr "Du skal logge på for at tilgå %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -655,7 +655,7 @@ msgstr "Deaktivér forbindelse til sessionshåndtering"
 msgid "Session management"
 msgstr "Sessionshåndtering"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Annullér log ud"
 
@@ -1237,7 +1237,7 @@ msgstr "_Brugernavn:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Domæne:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1245,11 +1245,11 @@ msgstr "_Adgangskode:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Husk adgangskode for denne session"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Gem adgangskode i nøglering"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1325,25 +1325,31 @@ msgstr "Fjern indrykninger"
 msgid "About"
 msgstr "Om"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr "Deaktivér nedbrudsvindue"
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "X-terminal som skal bruges"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "TERMINAL"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "Gnome GUI-bibliotek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmentfejl opstod; kan ikke vise fejlvinduet\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1351,7 +1357,7 @@ msgstr ""
 "Segmentfejl!\n"
 "Kan ikke vise nedbrudsvinduet\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1366,45 +1372,39 @@ msgstr ""
 "afslutte.\n"
 "Gem alle åbne filer før du lukker dette vindue."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Programmet \"%s\" (proces %d) er gået ned\n"
-"pga. en fatal fejl.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "Programmet \"%s\" er uventet død."
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "proces %d: %s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Du kan informere udviklerne om hvad der er sket for at hjælpe dem til at "
+"rette problemet. Eller du kan genstarte programmet med det samme."
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Brug: gnome_segv2 programnavn signum\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Indsend en fejlrapport"
+#: libgnomeui/gnome_segv.c:165
+msgid "Inform Developers"
+msgstr "Informér udviklere"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:176
 msgid "Debug"
 msgstr "Fejlsøgning"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Besøg programnedbrudssiden for Gnome for yderligere oplysninger"
-
-#~ msgid "Exit the test"
-#~ msgstr "Afslut testprogrammet"
-
-#~ msgid "Both text and icons"
-#~ msgstr "Både tekst og ikoner"
-
-#~ msgid "Both text and icons when horizontal, just icons when vertical"
-#~ msgstr "Både tekst og ikoner når vandret, kun ikoner når lodret"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Afslut testprogrammet"
 
 #~ msgid "Gdk debugging flags to set"
 #~ msgstr "Gdk-fejlsøgningsflag som skal aktiveres"
