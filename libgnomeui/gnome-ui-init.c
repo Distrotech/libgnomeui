@@ -44,6 +44,9 @@ char *alloca ();
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-init.h"
 #include "libgnomeui/gnome-winhints.h"
+#ifdef HAVE_LOCALE_H
+#include <locale.h>
+#endif
 
 static void initialize_gtk_signal_relay(void);
 static gboolean
@@ -195,9 +198,35 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 	
 	switch(reason) {
 	case POPT_CALLBACK_REASON_PRE:
-                gnome_segv_setup(FALSE);
-                gtk_set_locale();
-		client = gnome_master_client();
+                {
+                        char *ctype, *old_ctype = NULL;
+                        gboolean ctype_set;
+
+                        gnome_segv_setup (FALSE);
+                        ctype = setlocale (LC_CTYPE, NULL);
+
+                        if (!strcmp(ctype, "C")) {
+                                old_ctype = g_strdup (getenv ("LC_CTYPE"));
+                                putenv ("LC_CTYPE=en_US");
+                                ctype_set = TRUE;
+                        } else
+                                ctype_set = FALSE;
+
+                        gtk_set_locale ();
+
+                        if (ctype_set) {
+                                char *setme;
+
+                                if (old_ctype) {
+                                        setme = g_strconcat ("LC_CTYPE=", old_ctype, NULL);
+                                        g_free(old_ctype);
+                                } else
+                                        setme = "LC_CTYPE";
+
+                                putenv (setme);
+                        }
+                        client = gnome_master_client();
+                }
 		break;
 	case POPT_CALLBACK_REASON_POST:
 		gdk_imlib_init();
