@@ -1,7 +1,9 @@
 /*
- * GnomeApp widget (C) 1998 Red Hat Software, Miguel de Icaza, 
- * Federico Menu, Chris Toshok.
+ * GnomeApp widget (C) 1998 Red Hat Software, The Free Software Foundation,
+ * Miguel de Icaza, Federico Menu, Chris Toshok.
+ *
  * Originally by Elliot Lee,
+ *
  * improvements and rearrangement by Miguel,
  * and I don't know what you other people did :)
  */
@@ -61,10 +63,24 @@ gnome_app_get_type(void)
 }
 
 static void
+gnome_app_add (GtkContainer *container,
+	       GtkWidget    *widget)
+{
+	g_return_if_fail (container != NULL);
+	g_return_if_fail (GNOME_IS_APP (container));
+	g_return_if_fail (widget != NULL);
+	
+	gnome_app_set_contents (GNOME_APP (container), widget);
+}
+
+static void
 gnome_app_class_init(GnomeAppClass *appclass)
 {
-	GtkObjectClass *object_class = GTK_OBJECT_CLASS(appclass);
+	GtkObjectClass *object_class = GTK_OBJECT_CLASS          (appclass);
+	GtkContainerClass *container_class = GTK_CONTAINER_CLASS (appclass);
+		
 	object_class->destroy = gnome_app_destroy;
+	container_class->add = gnome_app_add;
 }
 
 static void
