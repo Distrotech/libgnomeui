@@ -219,7 +219,7 @@ static void gnome_mdi_destroy (GtkObject *object)
 
 	gnome_mdi_remove_all(mdi, TRUE);
 
-	/* Note: This is BROOOOOKEN.  We need to figure out
+	/* FIXME: This is BROOOOOKEN.  We need to figure out
 	 * some better way to do this.  This may not even
 	 * work right now, but that's what the 1.0 version did
 	 *  -George*/
@@ -228,7 +228,7 @@ static void gnome_mdi_destroy (GtkObject *object)
 	   destruction of toplevel windows: it unrefs itself,
 	   thus taking care of the initial reference added
 	   upon mdi creation. */
-	if(G_OBJECT (object)->ref_count > 0 && !GTK_OBJECT_DESTROYED(object))
+	if (G_OBJECT (object)->ref_count > 0)
 		gtk_object_unref(object);
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)

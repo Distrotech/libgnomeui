@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 
 
   
-  bug_buddy_path = gnome_is_program_in_path ("bug-buddy");
+  bug_buddy_path = g_find_program_in_path ("bug-buddy");
   if (bug_buddy_path != NULL)
     {
       gtk_dialog_add_button(GTK_DIALOG(mainwin),
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
   debugger = g_getenv("GNOME_DEBUGGER");
   if (debugger && strlen(debugger)>0)
   {
-    debugger_path = gnome_is_program_in_path (debugger);
+    debugger_path = g_find_program_in_path (debugger);
     if (debugger_path != NULL)
       {
         gtk_dialog_add_button(GTK_DIALOG(mainwin),

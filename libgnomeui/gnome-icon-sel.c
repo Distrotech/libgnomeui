@@ -120,6 +120,11 @@ gnome_icon_selection_instance_init (GnomeIconSelection *gis)
 	gtk_container_add (GTK_CONTAINER (frame), gis->_priv->gil);
 	gtk_widget_show(gis->_priv->gil);
 
+	gtk_signal_connect (GTK_OBJECT (gis->_priv->gil), "destroy",
+			    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
+			    &(gis->_priv->gil));
+
+
 	gis->_priv->file_list = NULL;
 }
 
@@ -447,14 +452,13 @@ gnome_icon_selection_show_icons (GnomeIconSelection * gis)
 
 	gis->_priv->load_progressbar = NULL;
 
-	if ( ! GTK_OBJECT_DESTROYED (gis)) {
+	if (gis->_priv->gil != NULL)
 		gnome_icon_list_thaw (GNOME_ICON_LIST (gis->_priv->gil));
 
-		if (progressbar != NULL)
-			gtk_widget_destroy (progressbar);
-		if (label != NULL)
-			gtk_widget_destroy (label);
-	}
+	if (progressbar != NULL)
+		gtk_widget_destroy (progressbar);
+	if (label != NULL)
+		gtk_widget_destroy (label);
 
 	gtk_object_unref (GTK_OBJECT (gis));
 }

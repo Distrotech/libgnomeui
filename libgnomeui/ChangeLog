@@ -1,3 +1,12 @@
+Sun Nov 18 14:31:59 2001  George Lebl <jirka@5z.com>
+
+	* gnome-icon-sel.c, gnome-mdi.c: Get rid of GTK_OBJECT_DESTROYED
+	  usage.  The code was very very broken in those cases anyway
+	  actually.
+
+	* gnome_segv.c: use g_find_program_in_path instead of
+	  gnome_is_program_in_path
+
 Fri Nov 16 02:06:32 2001  George Lebl <jirka@5z.com>
 
 	* gnome-file-entry.c: change order of includes to make this compile
