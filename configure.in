@@ -11,10 +11,10 @@ AC_INIT(libgnomeui)
 LIBGNOMEUI_MAJOR_VERSION=2
 LIBGNOMEUI_MINOR_VERSION=6
 LIBGNOMEUI_MICRO_VERSION=1
-LIBGNOMEUI_INTERFACE_AGE=0
+LIBGNOMEUI_INTERFACE_AGE=1
 # If you need a modifier for the version number. 
 # Normally empty, but can be used to make "fixup" releases.
-LIBGNOMEUI_EXTRAVERSION=
+LIBGNOMEUI_EXTRAVERSION=.1
 
 dnl libtool versioning from libgnome
 
@@ -142,7 +142,7 @@ if test -z "$LIBGLADE_CONVERT" ; then
 fi
 
 dnl File Chooser stuff
-PKG_CHECK_MODULES(FILE_SYSTEM, gtk+-2.0 >= 2.3.2 gnome-vfs-2.0 >= 2.5.3)
+PKG_CHECK_MODULES(FILE_SYSTEM, gtk+-2.0 >= 2.4.1 gnome-vfs-2.0 >= 2.5.3)
 GTK_BINARY_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
 AC_SUBST(FILE_SYSTEM_CFLAGS)
 AC_SUBST(FILE_SYSTEM_LIBS)

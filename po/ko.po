@@ -942,7 +942,9 @@ msgstr "GtkFileChooser 사용"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "파일을 선택할 때 새로운 GtkFileChooser 위젯을 사용할 지 GtkFileSelection 위젯을 사용할 지."
+msgstr ""
+"파일을 선택할 때 새로운 GtkFileChooser 위젯을 사용할 지 GtkFileSelection 위젯"
+"을 사용할 지."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"

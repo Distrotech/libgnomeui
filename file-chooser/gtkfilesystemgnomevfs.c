@@ -962,7 +962,7 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
     {
       uri = gnome_vfs_volume_get_activation_uri (GNOME_VFS_VOLUME (volume));
       if (strcmp (uri, "file:///") == 0)
-	icon_name = g_strdup ("gnome-fs-harddisk");
+	icon_name = g_strdup ("gnome-dev-harddisk");
       else if (strcmp (uri, system_vfs->desktop_uri) == 0)
 	icon_name = g_strdup ("gnome-fs-desktop");
       else if (strcmp (uri, system_vfs->home_uri) == 0)

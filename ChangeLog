@@ -1,3 +1,14 @@
+=================== 2.6.1.1 ===================
+
+2004-05-02  Anders Carlsson  <andersca@gnome.org>
+
+	* configure.in: Fix soname, depend on gtk+ 2.4.1
+	and release 2.6.1.1
+
+	* file-chooser/gtkfilesystemgnomevfs.c 
+	(gtk_file_system_gnome_vfs_volume_render_icon): It's
+	gnome-dev-harddisk, not gnome-harddisk.
+
 2004-04-21  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c
