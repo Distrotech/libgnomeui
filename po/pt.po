@@ -1,12 +1,12 @@
 # libgnomeui's Portuguese Translation
 # Copyright (C) 2001 Free Software Foundation, Inc.
-# Duarte Loreto <happyguy_pt@hotmail.com>, 2002
+# Duarte Loreto <happyguy_pt@hotmail.com>, 2002, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
-"PO-Revision-Date: 2002-08-05 02:25+0000\n"
+"Project-Id-Version: 2.2\n"
+"POT-Creation-Date: 2003-02-02 14:51+0000\n"
+"PO-Revision-Date: 2003-02-02 14:52+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -18,19 +18,16 @@ msgid "Credits"
 msgstr "Créditos"
 
 #: libgnomeui/gnome-about.c:223
-#, fuzzy
 msgid "Written by"
-msgstr "_Escrito por"
+msgstr "Escrito por"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "Documented by"
-msgstr "_Documentado por"
+msgstr "Documentado por"
 
 #: libgnomeui/gnome-about.c:253
-#, fuzzy
 msgid "Translated by"
-msgstr "_Traduzido por"
+msgstr "Traduzido por"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -148,31 +145,31 @@ msgstr "Interactividade"
 msgid "Level of user activity required."
 msgstr "Nível de interactividade do utilizador requerida."
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:864
 msgid "Specify session management ID"
 msgstr "Especificar ID de gestão de sessão"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:864
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:867
 msgid "Specify prefix of saved configuration"
 msgstr "Especificar prefixo da configuração gravada"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:867
 msgid "PREFIX"
 msgstr "PREFIXO"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:870
 msgid "Disable connection to session manager"
 msgstr "Desabilitar ligação ao gestor de sessão"
 
-#: libgnomeui/gnome-client.c:972
+#: libgnomeui/gnome-client.c:976
 msgid "Session management"
 msgstr "Gestão de sessão"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2481
 msgid "Cancel Logout"
 msgstr "Cacelar terminar Sessão"
 
@@ -397,13 +394,12 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Este botão leva-lo-á ao URI que está à mostra."
 
 #: libgnomeui/gnome-href.c:393
-#, fuzzy
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Ocorreu um erro ao tentar lançar o gestor de URLs.\n"
-"Verifique se as suas definições no Centro de Controlo estão correctas."
+"Ocorreu um erro ao tentar lançar o we browser por omissão.\n"
+"Verifique se as suas definições na ferramenta de preferências 'Aplicações Preferidas'."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -525,6 +521,7 @@ msgstr "Dica para item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -582,6 +579,7 @@ msgid "_Game"
 msgstr "Jo_go"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -772,11 +770,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -803,7 +801,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Fechar a janela actual"
 
@@ -902,7 +900,7 @@ msgstr "Apenas Texto"
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr "Utilizar defeito do ambiente de trabalho (%s)"
+msgstr "Utilizar omissões do ambiente de trabalho (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -1014,11 +1012,11 @@ msgstr "Ficheiros que deverão ser mostrados na lista de ficheiros."
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
-msgstr "Caminho Defeito"
+msgstr "Caminho por Omissão"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr "Caminho defeito para a janela de selecção ficheiro."
+msgstr "Caminho por omissão para a janela de selecção ficheiro."
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
@@ -1336,8 +1334,9 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Sair do teste"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Sair do teste"
 
 #~ msgid "Find _Again"
 #~ msgstr "Procurar _Novamente"
