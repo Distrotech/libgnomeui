@@ -1,5 +1,9 @@
 2004-01-18  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/libgnomeui.h: Added #include of gnome-window.h.
+
+2004-01-18  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-app-helper.c: Handle "both-horiz" too.
 	Patch from Bryan Forbes. Closes #125323.
 	* libgnomeui/gnome-icon-theme.h: Merge fix for bug #119788.

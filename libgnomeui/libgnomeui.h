@@ -79,6 +79,7 @@
 #include <libgnomeui/gnome-pixmap-entry.h>
 #include <libgnomeui/gnome-popup-menu.h>
 #include <libgnomeui/gnome-propertybox.h>
+#include <libgnomeui/gnome-window.h>
 #include <libgnomeui/gnome-window-icon.h>
 #include <libgnomeui/gnome-password-dialog.h>
 #include <libgnomeui/gnome-help.h>
