@@ -94,5 +94,10 @@ functionality.
  * Use AbiWord centerDialog function in gnome_dialog_set_parent(),
    it's nicer than the dumb thing GnomeDialog does
 
+ * Add object arguments to all GtkObject's in the library
+
+ * Add gnome-popup-menu and gnome-popup-help menu creation variants
+   that leave the user_data in the GnomeUIInfo struct
+
  * Fix bugs!
 
