@@ -20,6 +20,7 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwindow.h>
+#include <gtk/gtkeditable.h>
 #include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
@@ -113,6 +114,12 @@ void       gnome_dialog_close_hides (GnomeDialog * dialog,
    TRUE.  */
 void       gnome_dialog_set_close      (GnomeDialog * dialog,
 					gboolean click_closes);
+
+/* Normally an editable widget will grab "Return" and keep it from 
+   activating the dialog's default button. This connects the activate
+   signal of the editable to the default button. */
+void       gnome_dialog_editable_enters   (GnomeDialog * dialog,
+					   GtkEditable * editable);
 
 /* *** Deprecated. Is a set_close wrapper now. */
 void       gnome_dialog_set_destroy (GnomeDialog * d, gboolean self_destruct);

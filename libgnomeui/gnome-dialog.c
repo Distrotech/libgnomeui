@@ -411,6 +411,19 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
 #endif
 }
 
+void       gnome_dialog_editable_enters   (GnomeDialog * dialog,
+					   GtkEditable * editable)
+{
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(editable != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+  g_return_if_fail(GTK_IS_EDITABLE(editable));
+
+  gtk_signal_connect_object(GTK_OBJECT(editable), "activate",
+			    GTK_SIGNAL_FUNC(gtk_window_activate_default), 
+			    GTK_OBJECT(dialog));
+}
+
 
 static void
 gnome_dialog_button_clicked (GtkWidget   *button, 

@@ -174,9 +174,7 @@ static GtkWidget * request_dialog (const gchar * request,
 		     entry, FALSE, FALSE, GNOME_PAD_SMALL );
 
   /* If Return is pressed in the text entry, propagate to the buttons */
-  gtk_signal_connect_object(GTK_OBJECT(entry), "activate",
-			    GTK_SIGNAL_FUNC(gtk_window_activate_default), 
-			    GTK_OBJECT(mbox));
+  gnome_dialog_editable_enters(GNOME_DIALOG(mbox), GTK_EDITABLE(entry));
 
   info = g_new(callback_info, 1);
 
