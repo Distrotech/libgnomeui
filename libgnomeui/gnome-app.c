@@ -596,6 +596,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	dock_item = gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
 					 | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
+	gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
 
 	gnome_dock_add_item (GNOME_DOCK (app->dock), dock_item,
 			     GNOME_DOCK_POS_TOP, 0, 0, 0, TRUE);
@@ -645,6 +646,8 @@ gnome_app_set_toolbar (GnomeApp *app,
 	gnome_dock_add_item (GNOME_DOCK (app->dock), dock_item,
 			     GNOME_DOCK_POS_TOP, 1, 0, 0, TRUE);
 	gtk_container_border_width (GTK_CONTAINER (toolbar), 1);
+	if (!gnome_preferences_get_toolbar_relief ())
+		gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
 
 	/* Configure toolbar to gnome preferences, if possible.  (Sync
 	   to gnome_app_helper.c:gnome_app_toolbar_custom.)  */
@@ -655,7 +658,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 		gtk_toolbar_set_space_size (toolbar, GNOME_PAD);
 	}
 
-	if (!gnome_preferences_get_toolbar_relief ())
+	if (!gnome_preferences_get_toolbar_relief_btn ())
 		gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
 	
 	if (!gnome_preferences_get_toolbar_labels ())

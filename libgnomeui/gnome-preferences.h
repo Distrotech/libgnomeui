@@ -27,11 +27,9 @@ struct _GnomePreferences {
   int property_box_buttons_help : 1;
   int statusbar_not_dialog : 1;
   int statusbar_is_interactive : 1;
-  int toolbar_handlebox : 1;
-  int menubar_handlebox : 1;
   int menubar_relief : 1;
   int toolbar_relief : 1;
-  int toolbar_flat : 1;
+  int toolbar_relief_btn : 1;
   int toolbar_lines : 1;
   int toolbar_labels : 1;
   int dialog_centered : 1;
@@ -63,25 +61,19 @@ void              gnome_preferences_set_statusbar_dialog     (gboolean statusbar
 gboolean          gnome_preferences_get_statusbar_interactive(void);
 void              gnome_preferences_set_statusbar_interactive(gboolean b);
 
-/* Whether to have handleboxes on the various parts of GnomeApp */
-gboolean          gnome_preferences_get_toolbar_handlebox    (void);
-void              gnome_preferences_set_toolbar_handlebox    (gboolean b);
-gboolean          gnome_preferences_get_menubar_handlebox    (void);
-void              gnome_preferences_set_menubar_handlebox    (gboolean b);
-
-/* Whether menubar has a beveled edge */
+/* Whether menubars have a beveled edge */
 gboolean          gnome_preferences_get_menubar_relief       (void);
 void              gnome_preferences_set_menubar_relief       (gboolean b);
 
-/* Whether toolbar buttons have a beveled edge */
+/* Whether toolbars have a beveled edge  */
 gboolean          gnome_preferences_get_toolbar_relief       (void);
 void              gnome_preferences_set_toolbar_relief       (gboolean b);
 
-/* Whether toolbars have a flattened look  */
-gboolean          gnome_preferences_get_toolbar_flat         (void);
-void              gnome_preferences_set_toolbar_flat         (gboolean b);
+/* Whether toolbar buttons have a beveled edge */
+gboolean          gnome_preferences_get_toolbar_relief_btn   (void);
+void              gnome_preferences_set_toolbar_relief_btn   (gboolean b);
 
-/* Whether toolbars show lines for separators  */
+/* Whether toolbars show lines in separators  */
 gboolean          gnome_preferences_get_toolbar_lines        (void);
 void              gnome_preferences_set_toolbar_lines        (gboolean b);
 

@@ -1097,7 +1097,7 @@ gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 	} else
 		gtk_toolbar_set_space_size (toolbar, GNOME_PAD);
 
-	if (!gnome_preferences_get_toolbar_relief ())
+	if (!gnome_preferences_get_toolbar_relief_btn ())
 		gtk_toolbar_set_button_relief (toolbar, GTK_RELIEF_NONE);
 
 	if (!gnome_preferences_get_toolbar_labels ())

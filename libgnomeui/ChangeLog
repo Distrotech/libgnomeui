@@ -1,3 +1,18 @@
+1998-12-10  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app-helper.c, gnome-app.c (gnome_app_set_menus):
+	(gnome_app_set_toolbar): Have gnome dock item adhere to gnome
+	preferences toolbar and menubar relief styles.
+
+	* gnome-preferences.[ch]: Updates and cleanups.
+
+	{toolbar,menubar}_handlebox preferences removed; obsoleted by
+	gnome-dock integration.
+
+	Renamed toolbar_relief to toolbar_btn_relief.  Renamed
+	toolbar_flat to toolbar_relief, inverting the logic for
+	consistency with menubar relief.
+
 1998-12-10  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (book_button_release): fixed some weird code that

@@ -36,11 +36,9 @@ static GnomePreferences prefs =
   TRUE,               /* PropertyBox has Help */
   FALSE,              /* Use dialogs, not the statusbar */
   FALSE,              /* Statusbar isn't interactive */
-  TRUE,               /* Toolbar has handlebox */
-  TRUE,               /* Menubar has handlebox */
   TRUE,               /* Menubars are relieved */
-  FALSE,              /* Toolbar buttons are not relieved */
-  FALSE,              /* Toolbars have a flattened look */
+  TRUE,               /* Toolbars are relieved */
+  FALSE,              /* Toolbar buttons are relieved */
   TRUE,               /* Toolbars show lines for separators */
   TRUE,               /* Toolbars show labels */
   TRUE,               /* Center dialogs over apps when possible */
@@ -114,12 +112,10 @@ static const gchar * const dialog_positions [] = {
 #define STATUSBAR_DIALOG_KEY       "StatusBar_not_Dialog"
 #define STATUSBAR_INTERACTIVE_KEY  "StatusBar_is_Interactive"
 
-#define TOOLBAR_HANDLEBOX_KEY      "Toolbar_has_Handlebox"
-#define MENUBAR_HANDLEBOX_KEY      "Menubar_has_Handlebox"
-
 #define MENUBAR_RELIEF_KEY         "Menubar_relieved"
-#define TOOLBAR_RELIEF_KEY         "Toolbar_relieved_buttons"
-#define TOOLBAR_FLAT_KEY           "Toolbar_flat"
+
+#define TOOLBAR_RELIEF_KEY         "Toolbar_relieved"
+#define TOOLBAR_RELIEF_BTN_KEY     "Toolbar_relieved_buttons"
 #define TOOLBAR_LINES_KEY          "Toolbar_lines"
 #define TOOLBAR_LABELS_KEY         "Toolbar_labels"
 
@@ -250,27 +246,17 @@ gnome_preferences_load_custom(GnomePreferences *settings)
   gnome_config_pop_prefix();
   gnome_config_push_prefix(APP);
 
-  b = gnome_config_get_bool_with_default(TOOLBAR_HANDLEBOX_KEY"=true",
-					 NULL);
-  
-  settings->toolbar_handlebox = b;
-
-  b = gnome_config_get_bool_with_default(MENUBAR_HANDLEBOX_KEY"=true",
-					 NULL);
-  
-  settings->menubar_handlebox = b;
-
   b = gnome_config_get_bool_with_default(MENUBAR_RELIEF_KEY"=true",
 					 NULL);
   settings->menubar_relief = b;
 
-  b = gnome_config_get_bool_with_default(TOOLBAR_RELIEF_KEY"=false",
+  b = gnome_config_get_bool_with_default(TOOLBAR_RELIEF_KEY"=true",
 					 NULL);
   settings->toolbar_relief = b;
 
-  b = gnome_config_get_bool_with_default(TOOLBAR_FLAT_KEY"=false",
+  b = gnome_config_get_bool_with_default(TOOLBAR_RELIEF_BTN_KEY"=false",
 					 NULL);
-  settings->toolbar_flat = b;
+  settings->toolbar_relief_btn = b;
 
   b = gnome_config_get_bool_with_default(TOOLBAR_LINES_KEY"=true",
 					 NULL);
@@ -338,16 +324,12 @@ gnome_preferences_save_custom(GnomePreferences *settings)
   gnome_config_pop_prefix();
   gnome_config_push_prefix(APP);
 
-  gnome_config_set_bool(TOOLBAR_HANDLEBOX_KEY,
-			settings->toolbar_handlebox);
-  gnome_config_set_bool(MENUBAR_HANDLEBOX_KEY,
-			settings->menubar_handlebox);
   gnome_config_set_bool(MENUBAR_RELIEF_KEY,
 			settings->menubar_relief);
   gnome_config_set_bool(TOOLBAR_RELIEF_KEY,
 			settings->toolbar_relief);
-  gnome_config_set_bool(TOOLBAR_FLAT_KEY,
-			settings->toolbar_flat);
+  gnome_config_set_bool(TOOLBAR_RELIEF_BTN_KEY,
+			settings->toolbar_relief_btn);
   gnome_config_set_bool(TOOLBAR_LINES_KEY,
 			settings->toolbar_lines);
   gnome_config_set_bool(TOOLBAR_LABELS_KEY,
@@ -407,26 +389,6 @@ void              gnome_preferences_set_statusbar_interactive(gboolean b)
   prefs.statusbar_is_interactive = b;
 }
 
-gboolean          gnome_preferences_get_toolbar_handlebox    (void)
-{
-  return prefs.toolbar_handlebox;
-}
-
-void              gnome_preferences_set_toolbar_handlebox    (gboolean b)
-{
-  prefs.toolbar_handlebox = b;
-}
-
-gboolean          gnome_preferences_get_menubar_handlebox    (void)
-{
-  return prefs.menubar_handlebox;
-}
-
-void              gnome_preferences_set_menubar_handlebox    (gboolean b)
-{
-  prefs.menubar_handlebox = b;
-}
-
 gboolean          gnome_preferences_get_menubar_relief    (void)
 {
   return prefs.menubar_relief;
@@ -447,14 +409,14 @@ void              gnome_preferences_set_toolbar_relief    (gboolean b)
   prefs.toolbar_relief = b;
 }
 
-gboolean          gnome_preferences_get_toolbar_flat      (void)
+gboolean          gnome_preferences_get_toolbar_relief_btn (void)
 {
-  return prefs.toolbar_flat;
+  return prefs.toolbar_relief_btn;
 }
 
-void              gnome_preferences_set_toolbar_flat      (gboolean b)
+void              gnome_preferences_set_toolbar_relief_btn (gboolean b)
 {
-  prefs.toolbar_flat = b;
+  prefs.toolbar_relief_btn = b;
 }
 
 gboolean          gnome_preferences_get_toolbar_lines     (void)
