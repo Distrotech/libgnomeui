@@ -1,3 +1,10 @@
+2000-01-07  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-pixmap.c: use the new gdk-pixbuf scaling functions.
+	* gnome-pixmap.h: use the new gdk-pixbuf scaling functions.
+	* gnome-stock.c (gdk_pixbuf_new_from_stock_pixmap_entry): use the
+	new gdk-pixbuf scaling functions.
+
 2000-01-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (app_book_delete_event, app_toplevel_delete_event):

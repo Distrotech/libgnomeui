@@ -513,9 +513,10 @@ gdk_pixbuf_new_from_stock_pixmap_entry (GnomeStockPixmapEntry *entry)
                 if (entry->scaled.unscaled_pixbuf != NULL) {
                         g_assert(entry->any.pixbuf == NULL);
 
-                        entry->any.pixbuf = gnome_pixbuf_scale(entry->scaled.unscaled_pixbuf,
-                                                               entry->scaled.scaled_width,
-                                                               entry->scaled.scaled_height);
+                        entry->any.pixbuf = gdk_pixbuf_scale_simple(entry->scaled.unscaled_pixbuf,
+                                                                    entry->scaled.scaled_width,
+                                                                    entry->scaled.scaled_height,
+                                                                    ART_FILTER_BILINEAR);
                 }
                 if (entry->any.pixbuf != NULL &&
                     entry->scaled.unscaled_pixbuf != NULL) {

@@ -125,9 +125,6 @@ END_GNOME_DECLS
 
 /* PRIVATE INTERNAL FUNCTIONS DO NOT USE */
 /* FIXME create a private header and move this there. */
-GdkPixbuf      *gnome_pixbuf_scale                   (GdkPixbuf        *pixbuf,
-						      gint              w,
-						      gint              h);
 GdkPixbuf      *gnome_pixbuf_build_insensitive       (GdkPixbuf        *pixbuf,
 						      guchar            red_bg,
 						      guchar            green_bg,
