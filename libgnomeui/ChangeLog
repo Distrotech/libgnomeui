@@ -1,3 +1,9 @@
+1999-01-02  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-app-helper.c:
+	Corrected g_strncmp_ignore_char doc comments, and made it
+	static to this module.
+
 1999-01-02  Chris Lahey  <clahey@umich.edu>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): Added

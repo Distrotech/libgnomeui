@@ -50,6 +50,12 @@
 #include "gtkpixmapmenuitem.h"
 
 
+/* prototypes */
+static gint g_strncmp_ignore_char( gchar *first, gchar *second,
+				   gint length, gchar ignored );
+
+
+
 /* Creates a pixmap appropriate for items.  The window parameter is required 
  * by gnome-stock (bleah) */
 
@@ -1270,7 +1276,7 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
 }
 
 /**
- * gnome_app_find_menu_pos
+ * g_strncmp_ignore_char
  * @first: The first string to compare
  * @second: The second string to compare
  * @length: The length of the first string to consider (the length of
@@ -1286,7 +1292,7 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
  * Returns 1 if the second comes before the first in lexicographical order.
  **/
 
-gint
+static gint
 g_strncmp_ignore_char( gchar *first, gchar *second, gint length, gchar ignored )
 {
   gint i, j;
