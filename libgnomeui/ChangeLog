@@ -1,3 +1,8 @@
+1998-10-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (emit_event): Emit events for hidden items as
+	well -- they need to get a LeaveNotify, at least.
+
 1998-10-16  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-icon-list.c (gil_button_press): If there's already a

@@ -1900,12 +1900,10 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
 	 * events.
 	 */
-	for (finished = FALSE; item && !finished; item = item->parent) {
-		if (item->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
-			gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
-					 &ev,
-					 &finished);
-	}
+	for (finished = FALSE; item && !finished; item = item->parent)
+		gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
+				 &ev,
+				 &finished);
 }
 
 static void
