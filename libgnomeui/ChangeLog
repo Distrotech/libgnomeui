@@ -1,3 +1,10 @@
+Sat Jan  2 15:00:19 1999  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas-line.c: Minor tweaks and tunes. The set_arg
+	updates are more consistent, the width of the line is now
+	set based on the items'affine transformation rather than
+	the global pixels_per_unit.
+
 Fri Jan  1 13:13:04 1999  Raph Levien  <raph@gimp.org>
 
 	* gnome-canvas.c (gnome_canvas_group_get_arg): fixed a bug
