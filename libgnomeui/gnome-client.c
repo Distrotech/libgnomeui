@@ -610,8 +610,16 @@ gnome_client_new_without_connection (void)
      parsing.  */
   client->clone_command   = NULL;
   client->restart_command = NULL;
-  
+
+#if 0
+  /* This suffers from an ordering problem on non-glibc machines.
+     `program_invocation_name' is not initialized yet.  */
   client->program = g_strdup (program_invocation_name);
+#else
+  /* This appears to be safe.  The `SmProgram' property does not
+     appear to be used to execute the program.  */
+  client->program = g_strdup (gnome_app_id);
+#endif
 
   return client;
 }
