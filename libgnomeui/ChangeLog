@@ -1,3 +1,7 @@
+Mon Jul 12 06:20:39 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.c: add inline docs
+
 1999-07-11  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): translate parts of

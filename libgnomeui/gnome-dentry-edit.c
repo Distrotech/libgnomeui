@@ -298,6 +298,17 @@ gnome_dentry_edit_init (GnomeDEntryEdit *dee)
   dee->child2       = NULL;
 }
 
+
+/**
+ * gnome_dentry_edit_new
+ *
+ * Description: Creates a new GnomeDEntryEdit object. The object is not
+ * a widget, but just an object which creates some widgets which you have
+ * to add to a notebook. Use the #gnome_dentry_edit_new_notebook to add
+ * pages to the notebook.
+ *
+ * Returns: Newly-created GnomeDEntryEdit object.
+ */
 GtkObject *
 gnome_dentry_edit_new (void)
 {
@@ -317,6 +328,15 @@ gnome_dentry_edit_new (void)
 }
 
 
+/**
+ * gnome_dentry_edit_new
+ * @notebook: notebook to add the pages to
+ *
+ * Description: Creates a new GnomeDEntryEdit object and adds it's pages
+ * to the @notebook specified in the parameter.
+ *
+ * Returns: Newly-created GnomeDEntryEdit object.
+ */
 GtkObject *
 gnome_dentry_edit_new_notebook (GtkNotebook *notebook)
 {
@@ -453,6 +473,16 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
   dentry->geometry = NULL;
 }
 
+/**
+ * gnome_dentry_edit_load_file
+ * @dee: GnomeDEntryEdit object to work with
+ * @path: file to load into the editting areas
+ *
+ * Description: Load a .desktop file and update the editting areas
+ * of the object accordingly.
+ *
+ * Returns:
+ */
 void
 gnome_dentry_edit_load_file(GnomeDEntryEdit *dee,
 			    const gchar *path)
@@ -474,8 +504,16 @@ gnome_dentry_edit_load_file(GnomeDEntryEdit *dee,
   }
 }
 
-/* Destroy existing dentry and replace it with this one,
-   updating the DEntryEdit to reflect it. */
+/**
+ * gnome_dentry_edit_set_dentry
+ * @dee: GnomeDEntryEdit object to work with
+ * @dentry: #GnomeDesktopEntry to use
+ *
+ * Description: Destroy existing dentry and replace
+ * it with this one, updating the DEntryEdit to reflect it.
+ *
+ * Returns:
+ */
 void
 gnome_dentry_edit_set_dentry(GnomeDEntryEdit *dee,
 			     GnomeDesktopEntry *dentry)
@@ -487,6 +525,15 @@ gnome_dentry_edit_set_dentry(GnomeDEntryEdit *dee,
   gnome_dentry_edit_sync_display(dee, dentry);
 }
 
+/**
+ * gnome_dentry_edit_get_dentry
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the current status of the editting areas
+ * as a #GnomeDesktopEntry structure.
+ *
+ * Returns: a newly allocated #GnomeDesktopEntry structure.
+ */
 GnomeDesktopEntry *
 gnome_dentry_get_dentry(GnomeDEntryEdit *dee)
 {
@@ -500,6 +547,14 @@ gnome_dentry_get_dentry(GnomeDEntryEdit *dee)
   return newentry;
 }
 
+/**
+ * gnome_dentry_edit_clear
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Clear the editting areas.
+ *
+ * Returns:
+ */
 void
 gnome_dentry_edit_clear(GnomeDEntryEdit *dee)
 {
@@ -532,6 +587,14 @@ gnome_dentry_edit_name_changed(GnomeDEntryEdit *dee)
   gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[NAME_CHANGED], NULL);
 }
 
+/**
+ * gnome_dentry_edit_get_icon
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the icon filename.
+ *
+ * Returns: a newly allocated string with the filename of the icon
+ */
 gchar *
 gnome_dentry_edit_get_icon(GnomeDEntryEdit *dee)
 {
@@ -540,6 +603,14 @@ gnome_dentry_edit_get_icon(GnomeDEntryEdit *dee)
   return gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->icon_entry));
 }
 
+/**
+ * gnome_dentry_edit_get_name
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the Name field from the dentry.
+ *
+ * Returns: a newly allocated string with the name of the dentry
+ */
 gchar *
 gnome_dentry_edit_get_name (GnomeDEntryEdit *dee)
 {
@@ -549,36 +620,87 @@ gnome_dentry_edit_get_name (GnomeDEntryEdit *dee)
   return g_strdup(name);
 }
 
+/**
+ * gnome_dentry_edit_get_name_entry
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the entry widget (a GtkEntry) for the Name field.
+ *
+ * Returns: a pointer to a GtkEntry widget used for the Name field
+ */
 GtkWidget *
 gnome_dentry_get_name_entry (GnomeDEntryEdit *dee)
 {
   return dee->name_entry;
 }
 
+/**
+ * gnome_dentry_edit_get_comment_entry
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the entry widget (a GtkEntry) for the Comment field.
+ *
+ * Returns: a pointer to a GtkEntry widget used for the Comment field
+ */
 GtkWidget *
 gnome_dentry_get_comment_entry (GnomeDEntryEdit *dee)
 {
   return dee->comment_entry;
 }
 
+/**
+ * gnome_dentry_edit_get_exec_entry
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the entry widget (a GtkEntry) for the Command
+ * (exec) field.
+ *
+ * Returns: a pointer to a GtkEntry widget used for the Command (exec) field
+ */
 GtkWidget *
 gnome_dentry_get_exec_entry (GnomeDEntryEdit *dee)
 {
   return dee->exec_entry;
 }
 
+/**
+ * gnome_dentry_edit_get_tryexec_entry
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the entry widget (a GtkEntry) for the TryExec field.
+ *
+ * Returns: a pointer to a GtkEntry widget used for the TryExec field
+ */
 GtkWidget *
 gnome_dentry_get_tryexec_entry (GnomeDEntryEdit *dee)
 {
   return dee->tryexec_entry;
 }
 
+/**
+ * gnome_dentry_edit_get_doc_entry
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the entry widget (a GtkEntry) for the
+ * Documentation field.
+ *
+ * Returns: a pointer to a GtkEntry widget used for the
+ * Documentation field
+ */
 GtkWidget *
 gnome_dentry_get_doc_entry (GnomeDEntryEdit *dee)
 {
   return dee->doc_entry;
 }
 
+/**
+ * gnome_dentry_edit_get_icon_entry
+ * @dee: GnomeDEntryEdit object to work with
+ *
+ * Description: Get the entry widget (a #GnomeIconEntry) for the icon field
+ *
+ * Returns: a pointer to a #GnomeIconEntry widget used for the icon field
+ */
 GtkWidget *
 gnome_dentry_get_icon_entry (GnomeDEntryEdit *dee)
 {
