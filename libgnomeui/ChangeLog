@@ -1,3 +1,7 @@
+Mon Mar  9 23:59:41 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtk-ted.c (gtk_ted_load_layout): Remove gracious printf.
+
 1998-03-09  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-init.c (gnome_init): Only set `program_invocation_name'

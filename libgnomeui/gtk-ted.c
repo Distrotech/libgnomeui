@@ -978,9 +978,6 @@ gtk_ted_load_layout (GtkTed *ted, char *layout_file)
 			wi = gtk_ted_load_frame (ted, layout, sec_name+len+1);
 			g_hash_table_insert (ted->widgets, wi->name, wi);
 		}
-
-
-		printf ("section name: %s\n", sec_name);
 	}
 	g_free (layout);
 }
