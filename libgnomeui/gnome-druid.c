@@ -1058,7 +1058,10 @@ gnome_druid_set_page (GnomeDruid *druid,
 	gnome_druid_page_prepare (druid->_priv->current);
 	if (GTK_WIDGET_VISIBLE (druid->_priv->current) && (GTK_WIDGET_MAPPED (druid))) {
 		gtk_widget_map (GTK_WIDGET (druid->_priv->current));
+		gtk_widget_set_sensitive (GTK_WIDGET (druid->_priv->current), TRUE);
 	}
-	if (old && GTK_WIDGET_MAPPED (old))
-	  gtk_widget_unmap (old);
+	if (old && GTK_WIDGET_MAPPED (old)) {
+		gtk_widget_unmap (old);
+		gtk_widget_set_sensitive (old, FALSE);
+	}
 }
