@@ -196,7 +196,6 @@
 
         * configure.in: Added "gu" (Gujarati) to ALL_LINGUAS.
 
->>>>>>> 1.421
 2004-04-06  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (fs_module_init): Ref the
