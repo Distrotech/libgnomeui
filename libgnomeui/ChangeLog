@@ -1,3 +1,10 @@
+1999-02-16  Ulrich Drepper  <drepper@cygnus.com>
+
+	* libgnomeui/gnome-about.c (gnome_about_display_comments): Use
+	strtok_r instead of strtok.
+	* libgnomeui/gnome-dateedit.c (gnome_date_edit_get_date): Likewise.
+	* libgnomeui/gnome-spell.c (gnome_spell_fill_info): Likewise.
+
 1999-02-17  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock.c (drag_floating): No longer re-grab pointer.

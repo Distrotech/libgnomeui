@@ -886,6 +886,7 @@ gnome_spell_fill_info(GnomeSpellInfo* sp, gchar* src) {
 	gchar* p;
 	gchar * reject = " ,\t\n\r\v:";
 	gint count;
+	char *tokp;
 
 	sp->offset = 0;
 	sp->original = NULL;
@@ -912,23 +913,23 @@ gnome_spell_fill_info(GnomeSpellInfo* sp, gchar* src) {
 		return;
 	}
 	++p;
-	p = strtok(p, reject);
+	p = strtok_r(p, reject, &tokp);
 	if ( !p ) return;
 	sp->word = g_strdup(p);
 	if ( *src == '#' ) {
 		sp->offset = atoi(p);
 		if ( sp->offset > 0 ) --sp->offset;
 	} else {
-		p = strtok(NULL, reject);
+		p = strtok_r(NULL, reject, &tokp);
 		if ( p ) {
 			count = atoi(p);
 		} else return;
-		p = strtok(NULL, reject);
+		p = strtok_r(NULL, reject, &tokp);
 		if ( p ) {
 			sp->offset = atoi(p);
 			if ( sp->offset > 0 ) --sp->offset;
 		} else return;
-		while ( (p=strtok(NULL, ",\n\t")) ) {
+		while ( (p=strtok_r(NULL, ",\n\t", &tokp)) ) {
 			while (p && isspace(*p)) ++p;
 			sp->words = g_slist_append(sp->words, g_strdup(p));
 		}
@@ -1137,4 +1138,3 @@ gnome_spell_kill(GnomeSpell* spell) {
 
 	spell->spell_pid = 0;
 }
-

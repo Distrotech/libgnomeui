@@ -22,7 +22,7 @@
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18nP.h"
 #include "gnome-stock.h"
-#include <strings.h>
+#include <string.h>
 #include <gtk/gtk.h>
 
 /* FONTS */
@@ -223,6 +223,8 @@ gnome_about_display_comments (GdkWindow *win,
 	char *buffer;
 	int  ypos, width, done;
 	GList *par, *tmp;
+	char *endp;
+	char *tokp;
 
 	width = w - 16;
 	if (comments == NULL)
@@ -237,7 +239,8 @@ gnome_about_display_comments (GdkWindow *win,
 	/* Make a list with each paragraph */
 	par = (GList *)NULL;
 
-	for (tok = strtok (buffer, "\n"); tok; tok = strtok (NULL, "\n")) {
+	for (tok = strtok_r (buffer, "\n", &tokp); tok;
+	     tok = strtok_r (NULL, "\n", &tokp)) {
 		par = g_list_append (par, g_strdup(tok));
 	}
 

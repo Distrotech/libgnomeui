@@ -583,10 +583,12 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 		tm.tm_year -= 1900;
 
 	if (gde->flags & GNOME_DATE_EDIT_SHOW_TIME) {
+		char *tokp;
+
 		str = g_strdup (gtk_entry_get_text (GTK_ENTRY (gde->time_entry)));
-		tm.tm_hour = atoi (strtok (str, ":"));
-		tm.tm_min  = atoi (strtok (NULL, ": "));
-		flags = strtok (NULL, ":");
+		tm.tm_hour = atoi (strtok_r (str, ":", &tokp));
+		tm.tm_min  = atoi (strtok_r (NULL, ": ", &tokp));
+		flags = strtok_r (NULL, ":", &tokp);
 
 		if (flags && (strcasecmp (flags, "PM") == 0)){
 			if (tm.tm_hour < 12)
