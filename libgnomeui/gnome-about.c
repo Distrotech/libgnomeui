@@ -613,6 +613,7 @@ gnome_about_fill_info (GtkWidget *widget,
 	/* Create fonts */
 	/* FIXME: dirty hack, but it solves i18n problem without rewriting the
 	   drawing code..  */
+	GTK_WIDGET_SET_FLAGS(widget, GTK_RC_STYLE);
 	style = gtk_style_ref (widget->style);
 
 	gtk_widget_set_name (widget, "Title");
