@@ -459,7 +459,7 @@ setup_uline_accel (GtkMenuShell  *menu_shell,
 						    gtk_menu_ensure_uline_accel_group (GTK_MENU (menu_shell)),
 						    keyval, 0,
 						    0);
-		if (accel_group)
+		if (GTK_IS_MENU_BAR (menu_shell) && accel_group)
 			gtk_widget_add_accelerator (menu_item,
 						    "activate_item", 
 						    accel_group,

@@ -1,3 +1,8 @@
+1999-05-26  Tim Janik <timj@couch.wilmington.net>
+
+	* gnome-app-helper.c (setup_uline_accel): only setup a global
+	ALT bound accelerator if we are dealing with menu bar items.
+
 1999-05-25  James Henstridge  <james@daa.com.au>
 
 	* gnome-canvas-line.c (gnome_canvas_line_point): when a new set of
