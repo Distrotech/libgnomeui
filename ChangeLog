@@ -1,3 +1,8 @@
+2001-11-22  Abel Cheung  <maddog@linux.org.hk>
+
+	* configure.in: LIBGNOMEUI_CFLAGS and LIBGNOMEUI_GLADE_CFLAGS needs
+	  gnome-vfs-module-2.0 include path.
+
 2001-11-08  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Upped version and Released 1.106.0
