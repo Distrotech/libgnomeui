@@ -19,7 +19,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtksignal.h>
-#include "gtksocket.h"
+#include "gtk-socket.h"
 
 /* Forward declararations */
 

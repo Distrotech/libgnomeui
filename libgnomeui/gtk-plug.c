@@ -17,7 +17,7 @@
  */
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
-#include "gtkplug.h"
+#include "gtk-plug.h"
 
 static void gtk_plug_class_init (GtkPlugClass *klass);
 static void gtk_plug_init       (GtkPlug      *plug);
