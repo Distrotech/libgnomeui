@@ -352,7 +352,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_VOID__STRING_BOXED,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+			GNOME_TYPE_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [ADD_FILE_SIGNAL] =
 	gtk_signal_new ("add_file",
 			GTK_RUN_LAST,
@@ -362,7 +362,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_VOID__STRING_INT_UINT_BOXED,
 			GTK_TYPE_NONE, 4,
 			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+			GNOME_TYPE_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [ADD_DIRECTORY_SIGNAL] =
 	gtk_signal_new ("add_directory",
 			GTK_RUN_LAST,
@@ -372,7 +372,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_VOID__STRING_INT_UINT_BOXED,
 			GTK_TYPE_NONE, 4,
 			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+			GNOME_TYPE_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [ADD_URI_SIGNAL] =
 	gtk_signal_new ("add_uri",
 			GTK_RUN_LAST,
@@ -382,7 +382,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_VOID__STRING_INT_UINT_BOXED,
 			GTK_TYPE_NONE, 4,
 			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+			GNOME_TYPE_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [UPDATE_URI_LIST_SIGNAL] =
 	gtk_signal_new ("update_uri_list",
 			GTK_RUN_LAST,
@@ -482,7 +482,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_VOID__POINTER_INT_BOOLEAN_BOXED,
 			GTK_TYPE_NONE, 4,
 			GTK_TYPE_POINTER, GTK_TYPE_INT, GTK_TYPE_BOOL,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+			GNOME_TYPE_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [CHECK_FILENAME_SIGNAL] =
 	gtk_signal_new ("check_filename",
 			GTK_RUN_LAST,
@@ -492,7 +492,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_VOID__STRING_BOXED,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+			GNOME_TYPE_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [CHECK_DIRECTORY_SIGNAL] =
 	gtk_signal_new ("check_directory",
 			GTK_RUN_LAST,
@@ -502,7 +502,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_VOID__STRING_BOXED,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+			GNOME_TYPE_SELECTOR_ASYNC_HANDLE);
 
     gobject_class->get_property = gnome_selector_get_property;
     gobject_class->set_property = gnome_selector_set_property;

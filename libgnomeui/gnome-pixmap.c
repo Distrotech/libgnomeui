@@ -199,7 +199,7 @@ gnome_pixmap_class_init (GnomePixmapClass *class)
                 (gobject_class,
                  PROP_DRAW_MODE,
                  g_param_spec_enum ("draw_mode", NULL, NULL,
-                                    GTK_TYPE_GNOME_PIXMAP_DRAW_MODE,
+                                    GNOME_TYPE_PIXMAP_DRAW_MODE,
                                     GNOME_PIXMAP_SIMPLE,
                                     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property

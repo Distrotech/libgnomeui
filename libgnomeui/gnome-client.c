@@ -223,7 +223,7 @@ interaction_key_use (InteractionKey *key)
       args[2].d.pointer_data= &key->tag;
 
       args[3].name          = "GnomeDialogType";
-      args[3].type          = GTK_TYPE_GNOME_DIALOG_TYPE;
+      args[3].type          = GNOME_TYPE_DIALOG_TYPE;
       args[3].d.pointer_data= &key->dialog_type;
 
       ((GtkCallbackMarshal)key->function) (NULL, key->data, 3, args);
@@ -1067,9 +1067,9 @@ gnome_client_class_init (GnomeClientClass *klass)
 		    gnome_marshal_BOOLEAN__INT_ENUM_BOOLEAN_ENUM_BOOLEAN,
 		    GTK_TYPE_BOOL, 5,
 		    GTK_TYPE_INT,
-		    GTK_TYPE_GNOME_SAVE_STYLE,
+		    GNOME_TYPE_SAVE_STYLE,
 		    GTK_TYPE_BOOL,
-		    GTK_TYPE_GNOME_INTERACT_STYLE,
+		    GNOME_TYPE_INTERACT_STYLE,
 		    GTK_TYPE_BOOL);
   client_signals[DIE] =
     gtk_signal_new ("die",
