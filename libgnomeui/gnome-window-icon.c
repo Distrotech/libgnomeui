@@ -11,6 +11,7 @@
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#include <stdlib.h>
 
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-window-icon.h"
@@ -57,6 +58,7 @@ window_destroyed (GtkWindow *w, IconData *data)
 	g_free (data);
 }
 
+#if 0
 static gint
 icon_window_expose (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 {
@@ -92,6 +94,7 @@ icon_window_expose (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 
 	return FALSE;
 }
+#endif
 
 static void
 icon_set (GtkWindow *w, IconData *icon_data)

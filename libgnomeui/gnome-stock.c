@@ -35,6 +35,7 @@
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
 #include "gnome-uidefs.h"
+#include "gnome-preferences.h"
 
 #include "pixmaps/gnome-stock-imlib.h"
 

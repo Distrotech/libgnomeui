@@ -1,3 +1,14 @@
+Tue Jun 13 02:54:21 2000  George Lebl <jirka@5z.com>
+
+	* gnome-druid.c: take out an unused static prototype for _paint, and
+	  cast child to GTK_WIDGET before calling gtk_widget_unmap
+
+	* gnome-stock.c: include "gnome-preferences.h"
+
+	* gnome-icon-window.c: include stdlib.h for the getenv and putenv,
+	  and #if 0 out a static function which is only called in code that
+	  it also #if 0'ed out
+
 Mon Jun 12 16:57:50 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dialog-util.c: fix a memory leak.  Free the info structure
