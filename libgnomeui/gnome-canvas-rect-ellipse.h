@@ -18,7 +18,25 @@
 BEGIN_GNOME_DECLS
 
 
-/* Base class for rectangle and ellipse item types */
+/* Base class for rectangle and ellipse item types.  These are defined by their top-left and
+ * bottom-right corners.  Rectangles and ellipses share the following arguments:
+ *
+ * name			type		read/write	description
+ * ------------------------------------------------------------------------------------------
+ * x1			double		RW		Leftmost coordinate of rectangle or ellipse
+ * y1			double		RW		Topmost coordinate of rectangle or ellipse
+ * x2			double		RW		Rightmost coordinate of rectangle or ellipse
+ * y2			double		RW		Bottommost coordinate of rectangle or ellipse
+ * fill_color		string		W		X color specification for fill color,
+ *							or NULL pointer for no color (transparent)
+ * fill_color_gdk	GdkColor*	W		Allocated GdkColor for fill
+ * outline_color	string		W		X color specification for outline color,
+ *							or NULL pointer for no color (transparent)
+ * outline_color_gdk	GdkColor*	W		Allocated GdkColor for outline
+ * width_pixels		uint		RW		Width of the outline in pixels.  The outline will
+ *							not be scaled when the canvas zoom factor is changed.
+ * width_units		double		RW		Width of the outline in canvas units.  The outline
+ * will be scaled when the canvas zoom factor is changed.  */
 
 
 #define GNOME_TYPE_CANVAS_RE            (gnome_canvas_re_get_type ())
@@ -57,7 +75,9 @@ struct _GnomeCanvasREClass {
 GtkType gnome_canvas_re_get_type (void);
 
 
-/* Rectangle item */
+/* Rectangle item.  No configurable or queryable arguments are available (use those in
+ * GnomeCanvasRE).
+ */
 
 
 #define GNOME_TYPE_CANVAS_RECT            (gnome_canvas_rect_get_type ())
@@ -83,7 +103,9 @@ struct _GnomeCanvasRectClass {
 GtkType gnome_canvas_rect_get_type (void);
 
 
-/* Ellipse item */
+/* Ellipse item.  No configurable or queryable arguments are available (use those in
+ * GnomeCanvasRE).
+ */
 
 
 #define GNOME_TYPE_CANVAS_ELLIPSE            (gnome_canvas_ellipse_get_type ())

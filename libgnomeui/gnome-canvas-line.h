@@ -18,6 +18,44 @@
 BEGIN_GNOME_DECLS
 
 
+/* Line item for the canvas.  This is a polyline with configurable width, cap/join styles, and arrowheads.
+ * If arrowheads are enabled, then three values are used to specify their shape:
+ *
+ *	arrow_shape_a:  Distance from tip of arrowhead to the center point.
+ *	arrow_shape_b:  Distance from tip of arrowhead to trailing point, measured along the shaft.
+ *	arrow_shape_c:	Distance of trailing point from outside edge of shaft.
+ *
+ * The following object arguments are available:
+ *
+ * name			type			read/write	description
+ * ------------------------------------------------------------------------------------------
+ * points		GnomeCanvasPoints*	RW		Pointer to a GnomeCanvasPoints structure.
+ *								This can be created by a call to
+ *								gnome_canvas_points_new() (in gnome-canvas-util.h).
+ *								X coordinates are in the even indices of the
+ *								points->coords array, Y coordinates are in
+ *								the odd indices.
+ * fill_color		string			W		X color specification for line
+ * fill_color_gdk	GdkColor*		W		Pointer to an allocated GdkColor
+ * width_pixels		uint			RW		Width of the line in pixels.  The line width
+ *								will not be scaled when the canvas zoom factor changes.
+ * width_units		double			RW		Width of the line in canvas units.  The line width
+ *								will be scaled when the canvas zoom factor changes.
+ * cap_style		GdkCapStyle		RW		Cap ("endpoint") style for the line.
+ * join_style		GdkJoinStyle		RW		Join ("vertex") style for the line.
+ * first_arrowhead	boolean			RW		Specifies whether to draw an arrowhead on the
+ *								first point of the line.
+ * last_arrowhead	boolean			RW		Specifies whether to draw an arrowhead on the
+ *								last point of the line.
+ * smooth		boolean			RW		Specifies whether to smooth the line using
+ *								parabolic splines.
+ * spline_steps		uint			RW		Specifies the number of steps to use when rendering curves.
+ * arrow_shape_a	double			RW		First arrow shape specifier.
+ * arrow_shape_b	double			RW		Second arrow shape specifier.
+ * arrow_shape_c	double			RW		Third arrow shape specifier.
+ */
+
+
 #define GNOME_TYPE_CANVAS_LINE            (gnome_canvas_line_get_type ())
 #define GNOME_CANVAS_LINE(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CANVAS_LINE, GnomeCanvasLine))
 #define GNOME_CANVAS_LINE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS_LINE, GnomeCanvasLineClass))

@@ -1,3 +1,13 @@
+1998-08-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-widget.h: 
+	* gnome-canvas-line.h:
+	* gnome-canvas-image.h:
+	* gnome-canvas-text.h:
+	* gnome-canvas-rect-ellipse.h:
+	* gnome-canvas.h: Documentation fixes and additions.  Added
+	descriptions of object arguments.
+
 1998-08-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_set_arg): Added

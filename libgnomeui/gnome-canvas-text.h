@@ -19,6 +19,23 @@
 BEGIN_GNOME_DECLS
 
 
+/* Text item for the canvas.  Text items are positioned by an anchor point and an anchor direction.
+ * The following object arguments are available:
+ *
+ * name			type			read/write	description
+ * ------------------------------------------------------------------------------------------
+ * text			string			RW		The string of the text label
+ * x			double			RW		X coordinate of anchor point
+ * y			double			RW		Y coordinate of anchor point
+ * font			string			W		X logical font descriptor
+ * font_gdk		GdkFont*		W		Pointer to a GdkFont
+ * anchor		GtkAnchorType		RW		Anchor side for the text
+ * justification	GtkJustification	RW		Justification for multiline text
+ * fill_color		string			W		X color specification for text
+ * fill_color_gdk	GdkColor*		W		Pointer to an allocated GdkColor
+ */
+
+
 #define GNOME_TYPE_CANVAS_TEXT            (gnome_canvas_text_get_type ())
 #define GNOME_CANVAS_TEXT(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CANVAS_TEXT, GnomeCanvasText))
 #define GNOME_CANVAS_TEXT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS_TEXT, GnomeCanvasTextClass))

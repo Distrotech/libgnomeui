@@ -31,7 +31,7 @@ typedef struct _GnomeCanvasGroupClass GnomeCanvasGroupClass;
 
 /* GnomeCanvasItem - base item class for canvas items
  *
- * All canvas items are derived from GnomeCanvasItems.  The only information a GnomeCanvasItem
+ * All canvas items are derived from GnomeCanvasItem.  The only information a GnomeCanvasItem
  * contains is its parent canvas, its parent canvas item group, and its bounding box in canvas pixel
  * coordinates.
  *
@@ -39,6 +39,7 @@ typedef struct _GnomeCanvasGroupClass GnomeCanvasGroupClass;
  * leaves.  Each canvas has a single root group, which can be obtained with the
  * gnome_canvas_get_root() function.
  *
+ * The abstract GnomeCanvasItem class does not have any configurable or queryable attributes.
  */
 
 
@@ -63,7 +64,7 @@ struct _GnomeCanvasItem {
 	GtkObject object;
 
 	GnomeCanvas *canvas;		/* The parent canvas for this item */
-	GnomeCanvasItem *parent;	/* The parent canvas item (of type GnomeCanvasGroup) */
+	GnomeCanvasItem *parent;	/* The parent canvas group (of type GnomeCanvasGroup) */
 
 	int x1, y1, x2, y2;		/* Bounding box for this item, in canvas pixel coordinates.
 					 * The bounding box contains (x1, y1) but not (x2, y2).
@@ -186,6 +187,13 @@ void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
  * move an adder, simply move the group that represents the adder.
  *
  * The (xpos, ypos) fields of a canvas group are the relative origin for the group's children.
+ *
+ * The following arguments are available:
+ *
+ * name		type		read/write	description
+ * --------------------------------------------------------------------------------
+ * x		double		RW		X coordinate of group's origin
+ * y		double		RW		Y coordinate of group's origin
  */
 
 
@@ -202,7 +210,7 @@ struct _GnomeCanvasGroup {
 	GList *item_list;
 	GList *item_list_end;
 
-	double xpos, ypos;
+	double xpos, ypos;	/* Point that defines the group's origin */
 };
 
 struct _GnomeCanvasGroupClass {

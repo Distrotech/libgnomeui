@@ -20,6 +20,20 @@
 BEGIN_GNOME_DECLS
 
 
+/* Image item for the canvas.  Images are positioned by anchoring them to a point.
+ * The following arguments are available:
+ *
+ * name		type			read/write	description
+ * ------------------------------------------------------------------------------------------
+ * image	GdkImlibImage*		RW		Pointer to a GdkImlibImage
+ * x		double			RW		X coordinate of anchor point
+ * y		double			RW		Y coordinate of anchor point
+ * width	double			RW		Width to scale image to, in canvas units
+ * height	double			RW		Height to scale image to, in canvas units
+ * anchor	GtkAnchorType		RW		Anchor side for the image
+ */
+
+
 #define GNOME_TYPE_CANVAS_IMAGE            (gnome_canvas_image_get_type ())
 #define GNOME_CANVAS_IMAGE(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CANVAS_IMAGE, GnomeCanvasImage))
 #define GNOME_CANVAS_IMAGE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS_IMAGE, GnomeCanvasImageClass))
