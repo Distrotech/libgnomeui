@@ -785,6 +785,7 @@ static void client_parse_func (poptContext ctx,
 
 /* Command-line arguments understood by this module.  */
 static const struct poptOption options[] = {
+  {NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
   {NULL, '\0', POPT_ARG_CALLBACK | POPT_CBFLAG_PRE | POPT_CBFLAG_POST, 
    client_parse_func, 0, NULL, NULL},
   {"sm-client-id", '\0', POPT_ARG_STRING, NULL, -1, 

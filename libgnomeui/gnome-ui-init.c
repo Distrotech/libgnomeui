@@ -124,6 +124,7 @@ gnome_add_gtk_arg_callback(poptContext con,
 }
 
 static const struct poptOption gtk_options [] = {
+        { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
 	{ NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	  &gnome_add_gtk_arg_callback, 0, NULL},
 	{ "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,

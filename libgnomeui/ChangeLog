@@ -1,3 +1,9 @@
+1999-01-20  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c: Added translation domain to table of options.
+
+	* gnome-init.c: Likewise
+
 1999-01-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (iti_edition_accept): Layout the text after we
