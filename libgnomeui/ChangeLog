@@ -1,3 +1,8 @@
+1999-09-23  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-procbar.c: Added g_return_if_fail () at places where this
+	would cause a crash otherwise.
+
 1999-09-09  Vincent Renardias <vincent@ldsol.com>
 
 	* libgnomeui/gnome_segv.c: i18n the URL of the Crash page too.

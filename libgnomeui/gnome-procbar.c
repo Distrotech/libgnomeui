@@ -237,6 +237,11 @@ gnome_proc_bar_setup_colors (GnomeProcBar *pb)
     GdkColormap *cmap;
     gint i;
 
+    g_return_if_fail (pb != NULL);
+    g_return_if_fail (GNOME_IS_PROC_BAR (pb));
+    g_return_if_fail (pb->bar != NULL);
+    g_return_if_fail (pb->bar->window != NULL);
+
     cmap = gdk_window_get_colormap (pb->bar->window);
     for (i=0; i<pb->n; i++)
 	gdk_color_alloc (cmap, &pb->colors [i]);
