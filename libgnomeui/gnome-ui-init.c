@@ -391,7 +391,6 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         gchar *filename;
 
         gnome_type_init();
-        /* #warning FIXME: here... gtk_rc ... */
         libgnomeui_rc_parse (program, g_get_prgname ());
 
         libgnomeui_segv_setup (program, TRUE);
@@ -488,7 +487,7 @@ libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
                                           GNOME_FILE_DOMAIN_DATADIR,
                                           "gtkrc-2.0", TRUE, NULL);
   	if (file) {
-  		gtk_rc_add_default_file (file); 
+  		gtk_rc_parse (file); 
 		g_free (file);
 	}
 
@@ -497,21 +496,21 @@ libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
                                           GNOME_FILE_DOMAIN_DATADIR,
                                           apprc, TRUE, NULL);
 	if (file) {
-                gtk_rc_add_default_file (file);
+                gtk_rc_parse (file);
                 g_free (file);
         }
 	
 	/* ~/.gnome/gtkrc */
 	file = gnome_util_home_file("gtkrc-2.0");
 	if (file) {
-		gtk_rc_add_default_file (file);
+		gtk_rc_parse (file);
 		g_free (file);
 	}
 	
 	/* ~/.gnome/<progname> */
 	file = gnome_util_home_file(apprc);
 	if (file) {
-		gtk_rc_add_default_file (file);
+		gtk_rc_parse (file);
 		g_free (file);
 	}
 }

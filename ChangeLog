@@ -1,3 +1,11 @@
+2002-05-17  Mark McLoughlin  <mark@skynet.ie>
+
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_rc_parse): since
+	this is called after gtk_rc_init, we need to parse the
+	rc files instead of adding them to the list of files
+	gtk_rc_init parses. Also removed FIXME, that I think this
+	fixes.
+
 Wed May 15 20:30:14 2002  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-file-entry.c: remove dnd dest from the gtk entry and
