@@ -231,7 +231,7 @@ gnome_pixmap_set_property (GObject            *object,
 
 	switch (param_id) {
 	case PROP_PIXBUF:
-		gnome_pixmap_set_pixbuf (self, GDK_PIXBUF (g_value_get_object (value)));
+                gnome_pixmap_set_pixbuf (self, (GdkPixbuf *) g_value_get_object (value));
 		break;
 	case PROP_PIXBUF_WIDTH:
 		gnome_pixmap_set_pixbuf_size (self, g_value_get_uint (value),
@@ -296,7 +296,7 @@ gnome_pixmap_get_property (GObject            *object,
 
 	switch (param_id) {
 	case PROP_PIXBUF:
-		g_value_set_object (value, G_OBJECT (gnome_pixmap_get_pixbuf (self)));
+		g_value_set_object (value, (GObject *) gnome_pixmap_get_pixbuf (self));
 		break;
 	case PROP_PIXBUF_WIDTH:
 		g_value_set_int (value, self->width);

@@ -287,7 +287,7 @@ gnome_canvas_widget_set_property (GObject            *object,
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasWidget *witem;
-	GtkObject *obj;
+	GObject *obj;
 	int update;
 	int calc_bounds;
 
@@ -307,10 +307,11 @@ gnome_canvas_widget_set_property (GObject            *object,
 			gtk_container_remove (GTK_CONTAINER (item->canvas), witem->widget);
 		}
 
-		obj = GTK_OBJECT (g_value_get_object (value));
+		obj = g_value_get_object (value);
 		if (obj) {
 			witem->widget = GTK_WIDGET (obj);
-			witem->destroy_id = gtk_signal_connect (obj, "destroy",
+			witem->destroy_id = gtk_signal_connect (GTK_OBJECT (obj),
+								"destroy",
 								(GtkSignalFunc) do_destroy,
 								witem);
 			gtk_layout_put (GTK_LAYOUT (item->canvas), witem->widget,
@@ -397,7 +398,7 @@ gnome_canvas_widget_get_property (GObject            *object,
 
 	switch (param_id) {
 	case PROP_WIDGET:
-		g_value_set_object (value, G_OBJECT (witem->widget));
+		g_value_set_object (value, (GObject *) witem->widget);
 		break;
 
 	case PROP_X:

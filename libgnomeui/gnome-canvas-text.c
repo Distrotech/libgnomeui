@@ -665,7 +665,7 @@ gnome_canvas_text_set_property (GObject            *object,
 		if (text->text)
 			g_free (text->text);
 
-		text->text = g_strdup (g_value_get_string (value));
+		text->text = g_value_dup_string (value);
 		split_into_lines (text);
 		recalc_bounds (text);
 		break;
@@ -680,39 +680,51 @@ gnome_canvas_text_set_property (GObject            *object,
 		recalc_bounds (text);
 		break;
 
-	case PROP_FONT:
-		if (text->font)
-			gdk_font_unref (text->font);
+	case PROP_FONT: {
+		gchar *font_name;
 
-		text->font = gdk_font_load (g_value_get_string (value));
+		font_name = g_value_get_string (value);
+		if (font_name) {
+			if (text->font)
+				gdk_font_unref (text->font);
 
-		if (item->canvas->aa) {
-			if (text->suckfont)
-				gnome_canvas_suck_font_free (text->suckfont);
+			text->font = gdk_font_load (font_name);
 
-			text->suckfont = gnome_canvas_suck_font (text->font);
+			if (item->canvas->aa) {
+				if (text->suckfont)
+					gnome_canvas_suck_font_free (text->suckfont);
+
+				text->suckfont = gnome_canvas_suck_font (text->font);
+			}
+
+			calc_line_widths (text);
+			recalc_bounds (text);
 		}
-
-		calc_line_widths (text);
-		recalc_bounds (text);
 		break;
+	}
 
-	case PROP_FONTSET:
-		if (text->font)
-			gdk_font_unref (text->font);
+	case PROP_FONTSET: {
+		gchar *fontset_name;
 
-		text->font = gdk_fontset_load (g_value_get_string (value));
+		fontset_name = g_value_get_string (value);
+		if (fontset_name) {
+			if (text->font)
+				gdk_font_unref (text->font);
 
-		if (item->canvas->aa) {
-			if (text->suckfont)
-				gnome_canvas_suck_font_free (text->suckfont);
+			text->font = gdk_fontset_load (fontset_name);
 
-			text->suckfont = gnome_canvas_suck_font (text->font);
+			if (item->canvas->aa) {
+				if (text->suckfont)
+					gnome_canvas_suck_font_free (text->suckfont);
+
+				text->suckfont = gnome_canvas_suck_font (text->font);
+			}
+
+			calc_line_widths (text);
+			recalc_bounds (text);
 		}
-
-		calc_line_widths (text);
-		recalc_bounds (text);
 		break;
+	}
 
 	case PROP_FONT_GDK:
 		if (text->font)
@@ -766,16 +778,21 @@ gnome_canvas_text_set_property (GObject            *object,
 		recalc_bounds (text);
 		break;
 
-        case PROP_FILL_COLOR:
-		if (g_value_get_string (value))
-			gdk_color_parse (g_value_get_string (value), &color);
+        case PROP_FILL_COLOR: {
+		gchar *color_name;
 
-		text->rgba = ((color.red & 0xff00) << 16 |
-			      (color.green & 0xff00) << 8 |
-			      (color.blue & 0xff00) |
-			      0xff);
-		color_changed = TRUE;
+		color_name = g_value_get_string (value);
+		if (color_name) {
+			gdk_color_parse (color_name, &color);
+
+			text->rgba = ((color.red & 0xff00) << 16 |
+				      (color.green & 0xff00) << 8 |
+				      (color.blue & 0xff00) |
+				      0xff);
+			color_changed = TRUE;
+		}
 		break;
+	}
 
 	case PROP_FILL_COLOR_GDK:
 		pcolor = g_value_get_boxed (value);
@@ -837,7 +854,7 @@ gnome_canvas_text_get_property (GObject            *object,
 
 	switch (param_id) {
 	case PROP_TEXT:
-		g_value_set_string (value, g_strdup (text->text));
+		g_value_set_string (value, text->text);
 		break;
 
 	case PROP_X:

@@ -336,7 +336,10 @@ gnome_canvas_pixbuf_set_property (GObject            *object,
 
 	switch (param_id) {
 	case PROP_PIXBUF:
-		pixbuf = GDK_PIXBUF (g_value_get_object (value));
+		if (g_value_get_object (value))
+			pixbuf = GDK_PIXBUF (g_value_get_object (value));
+		else
+			pixbuf = NULL;
 		if (pixbuf != priv->pixbuf) {
 			if (pixbuf) {
 				g_return_if_fail

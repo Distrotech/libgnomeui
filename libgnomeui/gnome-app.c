@@ -167,7 +167,7 @@ gnome_app_set_property (GObject       *object,
 	switch(param_id) {
 	case PROP_APP_ID:
 		g_free (app->name);
-		app->name = g_strdup (g_value_get_string (value));
+		app->name = g_value_dup_string (value);
 		g_free (app->prefix);
 		app->prefix = g_strconcat("/", app->name, "/", NULL);
 		break;

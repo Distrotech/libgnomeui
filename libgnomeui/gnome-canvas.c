@@ -285,7 +285,7 @@ gnome_canvas_item_set_property (GObject *gobject, guint param_id,
 	    if (item->parent != NULL)
 		g_warning ("Cannot set `parent' argument after item has "
 			   "already been constructed.");
-	    else {
+	    else if (g_value_get_object (value)) {
 		item->parent = GNOME_CANVAS_ITEM (g_value_get_object (value));
 		item->canvas = item->parent->canvas;
 		item_post_create_setup (item);

@@ -310,7 +310,7 @@ gnome_help_view_set_property (GObject *object,
 		break;
 	case PROP_TOPLEVEL:
 		gnome_help_view_set_toplevel (help_view,
-					      GTK_WIDGET (g_value_get_object (value)));
+					      (GtkWidget *) g_value_get_object (value));
 		break;
 	}
 
