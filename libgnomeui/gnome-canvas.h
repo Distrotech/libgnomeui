@@ -13,7 +13,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkcontainer.h>
-
+#include <stdarg.h>
 
 BEGIN_GNOME_DECLS
 
@@ -326,6 +326,12 @@ void gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *
  */
 int gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color);
 
+/* Constructors for use in language bindings. Don't use otherwise. */
+void gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
+				  GtkType type, va_list args);
+
+void gnome_canvas_item_constructv(GnomeCanvasItem *item, GnomeCanvasGroup *parent,
+				  GtkType type, guint nargs, GtkArg *args);
 
 END_GNOME_DECLS
 

@@ -42,7 +42,6 @@
 
 #include <config.h>
 #include <math.h>
-#include <stdarg.h>
 #include <gdk/gdkprivate.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
@@ -155,32 +154,28 @@ item_post_create_setup (GnomeCanvasItem *item)
 	item->canvas->need_repick = TRUE;
 }
 
-GnomeCanvasItem *
-gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, ...)
+void
+gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
+			     GtkType type, va_list args)
 {
-	GtkObject *obj;
-	GnomeCanvasItem *item;
-	va_list args;
+        GtkObject *obj;
 	GSList *arg_list;
 	GSList *info_list;
 	char *error;
 
-	g_return_val_if_fail (parent != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_CANVAS_GROUP (parent), NULL);
-	g_return_val_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()), NULL);
+	g_return_if_fail (parent != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_GROUP (parent));
+	g_return_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()));
 
-	obj = gtk_type_new (type);
+	obj = GTK_OBJECT(item);
 
-	item = GNOME_CANVAS_ITEM (obj);
 	item->parent = GNOME_CANVAS_ITEM (parent);
 	item->canvas = item->parent->canvas;
 
 	arg_list = NULL;
 	info_list = NULL;
 
-	va_start (args, type);
 	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj), &arg_list, &info_list, &args);
-	va_end (args);
 
 	if (error) {
 		g_warning ("gnome_canvas_item_new(): %s", error);
@@ -195,29 +190,61 @@ gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, ...)
 	}
 
 	item_post_create_setup (item);
-
-	return item;
 }
-
+ 
 GnomeCanvasItem *
-gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type, guint nargs, GtkArg *args)
+gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, ...)
 {
-	GtkObject *obj;
 	GnomeCanvasItem *item;
+	va_list args;
 
 	g_return_val_if_fail (parent != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_CANVAS_GROUP (parent), NULL);
 	g_return_val_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()), NULL);
 
-	obj = gtk_type_new (type);
+	item = GNOME_CANVAS_ITEM(gtk_type_new (type));
 
-	item = GNOME_CANVAS_ITEM (obj);
+	va_start (args, type);
+
+	gnome_canvas_item_construct(item, parent, type, args);
+
+	va_end (args);
+
+	return item;
+}
+
+void
+gnome_canvas_item_constructv(GnomeCanvasItem *item, GnomeCanvasGroup *parent,
+			     GtkType type, guint nargs, GtkArg *args)
+{
+	GtkObject *obj;
+
+	g_return_if_fail (parent != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_GROUP (parent));
+	g_return_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()));
+
+	obj = GTK_OBJECT(item);
+
 	item->parent = GNOME_CANVAS_ITEM (parent);
 	item->canvas = item->parent->canvas;
 
 	gtk_object_setv (obj, nargs, args);
 
 	item_post_create_setup (item);
+}
+
+GnomeCanvasItem *
+gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type, guint nargs, GtkArg *args)
+{
+	GnomeCanvasItem *item;
+
+	g_return_val_if_fail (parent != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_CANVAS_GROUP (parent), NULL);
+	g_return_val_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()), NULL);
+
+	item = GNOME_CANVAS_ITEM(gtk_type_new (type));
+
+	gnome_canvas_item_constructv(item, parent, type, nargs, args);
 
 	return item;
 }

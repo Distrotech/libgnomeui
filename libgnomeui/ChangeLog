@@ -1,3 +1,9 @@
+Sun Jul 19 22:54:12 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-canvas.h, gnome-canvas-c: Added
+	gnome_canvas_item_construct,
+	gnome_canvas_item_constructv
+
 Sun Jul 19 18:06:38 1998  Tom Tromey  <tromey@cygnus.com>
 
 	Reverted change of July 7:
