@@ -457,6 +457,9 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
   int argc = 0;
   CORBA_Object retval;
 
+  if(!regcat->hostname && !regcat->username)
+    return CORBA_OBJECT_NIL;
+
   argv[argc++] = basecmd;
   if(regcat->username)
     {
