@@ -1,3 +1,8 @@
+1999-05-24  David KAELBLING <drk@sgi.com>
+
+	* gtkcauldron.c (gtk_dialog_cauldron_parse): Assing to parent, do
+	not compare
+
 1999-05-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_shutdown): Free the

@@ -556,7 +556,7 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 
 /* this ensure that if we link with an old code, we don't get segfaults */
     if (options & GTK_CAULDRON_PARENT)
-	parent == parent_;
+	parent = parent_;
 
     stack = malloc (sizeof (*stack));
     memset (stack, 0, sizeof (*stack));
