@@ -1,3 +1,7 @@
+Tue Aug 28 22:38:38 2001  George Lebl <jirka@5z.com>
+
+	* gnome-gconf-ui.c: Make the OK button close the dialog
+
 2001-08-28  Seth Nickell  <snickell@stanford.edu>
 
 	* gnome-icon-list.c:
