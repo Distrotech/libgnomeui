@@ -3259,21 +3259,14 @@ paint (GnomeCanvas *canvas)
 	canvas->redraw_y2 = 0;
 }
 
-/* Idle handler for the canvas.  It deals with pending updates and redraws. */
-static gint
-idle_handler (gpointer data)
+static void
+do_update (GnomeCanvas *canvas)
 {
-	GnomeCanvas *canvas;
-
-	GDK_THREADS_ENTER ();
-
-	canvas = GNOME_CANVAS (data);
-
 	/* Cause the update if necessary */
 
 	if (canvas->need_update) {
 		double affine[6];
-
+		
 		art_affine_identity (affine);
 		gnome_canvas_item_invoke_update (canvas->root, affine, NULL, 0);
 		canvas->need_update = FALSE;
@@ -3290,6 +3283,18 @@ idle_handler (gpointer data)
 
 	if (GTK_WIDGET_DRAWABLE (canvas))
 		paint (canvas);
+}
+
+/* Idle handler for the canvas.  It deals with pending updates and redraws. */
+static gint
+idle_handler (gpointer data)
+{
+	GnomeCanvas *canvas;
+
+	GDK_THREADS_ENTER ();
+
+	canvas = GNOME_CANVAS (data);
+	do_update (canvas);
 
 	/* Reset idle id */
 	canvas->idle_id = 0;
@@ -3527,7 +3532,7 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 		return;
 
 	remove_idle (canvas);
-	idle_handler (canvas);
+	do_update (canvas);
 }
 
 /**

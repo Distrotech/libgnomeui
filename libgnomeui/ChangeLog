@@ -1,3 +1,12 @@
+1999-09-22  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (do_update): Moved updated functionality to here.
+	(idle_handler): Do GDK_THREADS_ENTER/LEAVE() here, and call do_update().
+	(gnome_canvas_update_now): Call do_update(), not idle_handler().
+
+	Patch from Owen Taylor (otaylor@redhat.com) to fix deadlock when
+	using threads.
+
 1999-09-20  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-propertybox.c (gnome_property_box_init): Make
