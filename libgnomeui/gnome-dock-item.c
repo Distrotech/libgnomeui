@@ -68,6 +68,7 @@ static void gnome_dock_item_get_arg        (GtkObject         *object,
                                             GtkArg            *arg,
                                             guint              arg_id);
 static void gnome_dock_item_destroy        (GtkObject         *object);
+static void gnome_dock_item_finalize       (GObject           *object);
 static void gnome_dock_item_map            (GtkWidget         *widget);
 static void gnome_dock_item_unmap          (GtkWidget         *widget);
 static void gnome_dock_item_realize        (GtkWidget         *widget);
@@ -130,10 +131,12 @@ static void
 gnome_dock_item_class_init (GnomeDockItemClass *class)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
 
   object_class = (GtkObjectClass *) class;
+  gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
   container_class = (GtkContainerClass *) class;
 
@@ -194,6 +197,7 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   gtk_object_class_add_signals (object_class, dock_item_signals, LAST_SIGNAL);
   
   object_class->destroy = gnome_dock_item_destroy;
+  gobject_class->finalize = gnome_dock_item_finalize;
 
   widget_class->map = gnome_dock_item_map;
   widget_class->unmap = gnome_dock_item_unmap;
@@ -295,15 +299,30 @@ gnome_dock_item_destroy (GtkObject *object)
   g_return_if_fail (GNOME_IS_DOCK_ITEM (object));
 
   di = GNOME_DOCK_ITEM (object);
+
   g_free (di->name);
   di->name = NULL;
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_dock_item_finalize (GObject *object)
+{
+  GnomeDockItem *di;
+
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (GNOME_IS_DOCK_ITEM (object));
+
+  di = GNOME_DOCK_ITEM (object);
 
   /* Free the private structure */
   g_free (di->_priv);
   di->_priv = NULL;
+
+  if (G_OBJECT_CLASS (parent_class)->finalize)
+    (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 static void

@@ -141,7 +141,7 @@ static void
 gnome_druid_page_init (GnomeDruidPage *druid_page)
 {
 	druid_page->_priv = NULL;
-	/* Note: If you add any privates make sure to add a destroy method and
+	/* Note: If you add any privates make sure to add a destroy/finalize method and
 	 * free the private struct */
 	GTK_WIDGET_UNSET_FLAGS (druid_page, GTK_NO_WINDOW);
 }

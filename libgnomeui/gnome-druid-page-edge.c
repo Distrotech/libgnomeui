@@ -44,6 +44,7 @@ struct _GnomeDruidPageEdgePrivate
 static void gnome_druid_page_edge_init   	(GnomeDruidPageEdge		*druid_page_edge);
 static void gnome_druid_page_edge_class_init	(GnomeDruidPageEdgeClass	*klass);
 static void gnome_druid_page_edge_destroy 	(GtkObject                      *object);
+static void gnome_druid_page_edge_finalize 	(GObject                        *object);
 static void gnome_druid_page_edge_construct     (GnomeDruidPageEdge             *druid_page_edge);
 static void gnome_druid_page_edge_configure_size(GnomeDruidPageEdge             *druid_page_edge,
 						 gint                            width,
@@ -91,10 +92,13 @@ static void
 gnome_druid_page_edge_class_init (GnomeDruidPageEdgeClass *klass)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 
 	object_class = (GtkObjectClass*) klass;
+	gobject_class = (GObjectClass*) klass;
 	object_class->destroy = gnome_druid_page_edge_destroy;
+	gobject_class->finalize = gnome_druid_page_edge_finalize;
 	widget_class = (GtkWidgetClass*) klass;
 	widget_class->size_allocate = gnome_druid_page_edge_size_allocate;
 	parent_class = gtk_type_class (gnome_druid_page_get_type ());
@@ -144,6 +148,17 @@ gnome_druid_page_edge_destroy(GtkObject *object)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }
 
+static void
+gnome_druid_page_edge_finalize(GObject *object)
+{
+	GnomeDruidPageEdge *druid_page_edge = GNOME_DRUID_PAGE_EDGE(object);
+
+	g_free(druid_page_edge->_priv);
+	druid_page_edge->_priv = NULL;
+
+	if(G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
+}
 
 static void
 gnome_druid_page_edge_configure_size (GnomeDruidPageEdge *druid_page_edge, gint width, gint height)

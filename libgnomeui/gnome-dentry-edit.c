@@ -526,7 +526,9 @@ gnome_dentry_edit_destroy (GtkObject *dee)
 
   de = GNOME_DENTRY_EDIT(dee);
 
-  gtk_widget_destroy(de->icon_entry);
+  if(de->icon_entry)
+	  gtk_widget_destroy(de->icon_entry);
+  de->icon_entry = NULL;
 
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dee);

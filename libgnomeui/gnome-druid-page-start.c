@@ -43,6 +43,7 @@ struct _GnomeDruidPageStartPrivate
 static void gnome_druid_page_start_init 	 (GnomeDruidPageStart		  *druid_page_start);
 static void gnome_druid_page_start_class_init	 (GnomeDruidPageStartClass	  *klass);
 static void gnome_druid_page_start_destroy 	 (GtkObject                       *object);
+static void gnome_druid_page_start_finalize 	 (GObject                         *object);
 static void gnome_druid_page_start_construct     (GnomeDruidPageStart             *druid_page_start);
 static void gnome_druid_page_start_configure_size(GnomeDruidPageStart             *druid_page_start,
 						  gint                             width,
@@ -90,10 +91,13 @@ static void
 gnome_druid_page_start_class_init (GnomeDruidPageStartClass *klass)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 
 	object_class = (GtkObjectClass*) klass;
+	gobject_class = (GObjectClass*) klass;
 	object_class->destroy = gnome_druid_page_start_destroy;
+	gobject_class->finalize = gnome_druid_page_start_finalize;
 	widget_class = (GtkWidgetClass*) klass;
 	widget_class->size_allocate = gnome_druid_page_start_size_allocate;
 	parent_class = gtk_type_class (gnome_druid_page_get_type ());
@@ -136,11 +140,20 @@ gnome_druid_page_start_destroy(GtkObject *object)
 {
 	GnomeDruidPageStart *druid_page_start = GNOME_DRUID_PAGE_START(object);
 
+	if(GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+}
+
+static void
+gnome_druid_page_start_finalize(GObject *object)
+{
+	GnomeDruidPageStart *druid_page_start = GNOME_DRUID_PAGE_START(object);
+
 	g_free(druid_page_start->_priv);
 	druid_page_start->_priv = NULL;
 
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+	if(G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
 }
 
 static void

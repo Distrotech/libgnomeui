@@ -1,3 +1,16 @@
+Fri Jul 14 05:33:16 2000  George Lebl <jirka@5z.com>
+
+	* gnome-about.c, gnome-animator.c, gnome-animator.h, gnome-app.c,
+	  gnome-appbar.c, gnome-calculator.c, gnome-client.c,
+	  gnome-color-picker.c, gnome-dateedit.c, gnome-dentry-edit.c,
+	  gnome-dialog.c, gnome-ditem-edit.c, gnome-dock-band.c,
+	  gnome-dock-item.c, gnome-dock-layout.c, gnome-dock.c,
+	  gnome-druid-page-edge.c, gnome-druid-page-finish.c,
+	  gnome-druid-page-standard.c, gnome-druid-page-start.c,
+	  gnome-druid-page.c, gnome-druid.c, gnome-entry.c:
+	  Move freeing of private structure into finalize, and make sure
+	  the default destroy handler can be called multiple times as
+	  gtk2.0 will do this to us.
 Fri Jul 14 04:14:50 2000  George Lebl <jirka@5z.com>
 
 	* gnome-cursors.c: allocate data for gdk_bitmap_create_from_data

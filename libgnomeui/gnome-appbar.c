@@ -70,7 +70,8 @@ struct _GnomeAppBarPrivate
 
 static void gnome_appbar_class_init               (GnomeAppBarClass *class);
 static void gnome_appbar_init                     (GnomeAppBar      *ab);
-static void gnome_appbar_destroy                  (GtkObject         *object);
+static void gnome_appbar_destroy                  (GtkObject        *object);
+static void gnome_appbar_finalize                 (GObject          *object);
      
 static GtkContainerClass *parent_class;
 
@@ -111,10 +112,12 @@ static void
 gnome_appbar_class_init (GnomeAppBarClass *class)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
 
   object_class = (GtkObjectClass *) class;
+  gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
   container_class = (GtkContainerClass *) class;
 
@@ -144,6 +147,7 @@ gnome_appbar_class_init (GnomeAppBarClass *class)
 				  and the clear_prompt function
 				  just emits. */
   object_class->destroy = gnome_appbar_destroy;
+  gobject_class->finalize = gnome_appbar_finalize;
 }
 
 static GSList * 
@@ -722,17 +726,35 @@ gnome_appbar_destroy (GtkObject *object)
   ab = GNOME_APPBAR (object);
   class = GNOME_APPBAR_GET_CLASS (ab);
 
-  gnome_appbar_clear_stack(ab);
+  if(ab->_priv->status_stack) {
+	  stringstack_free(ab->_priv->status_stack);
+	  ab->_priv->status_stack = NULL;
+  }
+
   /* g_free checks if these are NULL */
   g_free(ab->_priv->default_status);
   ab->_priv->default_status = NULL;;
   g_free(ab->_priv->prompt);
   ab->_priv->prompt = NULL;
 
+  if(GTK_OBJECT_CLASS (parent_class)->destroy)
+	  GTK_OBJECT_CLASS (parent_class)->destroy (object);
+}
+
+static void
+gnome_appbar_finalize (GObject *object)
+{
+  GnomeAppBar *ab;
+
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (GNOME_IS_APPBAR (object));
+
+  ab = GNOME_APPBAR (object);
+
   g_free(ab->_priv);
   ab->_priv = NULL;
 
-  GTK_OBJECT_CLASS (parent_class)->destroy (object);
+  if(G_OBJECT_CLASS (parent_class)->finalize)
+	  G_OBJECT_CLASS (parent_class)->finalize (object);
 }
-
 

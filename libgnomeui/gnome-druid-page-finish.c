@@ -42,6 +42,7 @@ struct _GnomeDruidPageFinishPrivate
 static void gnome_druid_page_finish_init 	  (GnomeDruidPageFinish		 *druid_page_finish);
 static void gnome_druid_page_finish_class_init	  (GnomeDruidPageFinishClass	 *klass);
 static void gnome_druid_page_finish_destroy 	  (GtkObject                     *object);
+static void gnome_druid_page_finish_finalize 	  (GObject                       *object);
 static void gnome_druid_page_finish_construct     (GnomeDruidPageFinish          *druid_page_finish);
 static void gnome_druid_page_finish_configure_size(GnomeDruidPageFinish          *druid_page_finish,
 						   gint                           width,
@@ -88,10 +89,13 @@ static void
 gnome_druid_page_finish_class_init (GnomeDruidPageFinishClass *klass)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 
 	object_class = (GtkObjectClass*) klass;
+	gobject_class = (GObjectClass*) klass;
 	object_class->destroy = gnome_druid_page_finish_destroy;
+	gobject_class->finalize = gnome_druid_page_finish_finalize;
 	widget_class = (GtkWidgetClass*) klass;
 	widget_class->size_allocate = gnome_druid_page_finish_size_allocate;
 	widget_class->realize = gnome_druid_page_finish_realize;
@@ -141,6 +145,17 @@ gnome_druid_page_finish_destroy(GtkObject *object)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }
 
+static void
+gnome_druid_page_finish_finalize(GObject *object)
+{
+	GnomeDruidPageFinish *druid_page_finish = GNOME_DRUID_PAGE_FINISH(object);
+
+	g_free(druid_page_finish->_priv);
+	druid_page_finish->_priv = NULL;
+
+	if(G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
+}
 
 static void
 gnome_druid_page_finish_configure_size (GnomeDruidPageFinish *druid_page_finish, gint width, gint height)

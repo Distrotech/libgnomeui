@@ -62,6 +62,7 @@ struct item {
 static void gnome_entry_class_init (GnomeEntryClass *class);
 static void gnome_entry_init       (GnomeEntry      *gentry);
 static void gnome_entry_destroy    (GtkObject       *object);
+static void gnome_entry_finalize   (GObject         *object);
 
 
 static GtkComboClass *parent_class;
@@ -94,12 +95,15 @@ static void
 gnome_entry_class_init (GnomeEntryClass *class)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
 	object_class = (GtkObjectClass *) class;
+	gobject_class = (GObjectClass *) class;
 
 	parent_class = gtk_type_class (gtk_combo_get_type ());
 
 	object_class->destroy = gnome_entry_destroy;
+	gobject_class->finalize = gnome_entry_finalize;
 }
 
 static void
@@ -224,33 +228,48 @@ gnome_entry_destroy (GtkObject *object)
 
 	gentry = GNOME_ENTRY (object);
 
-	entry = gnome_entry_gtk_entry (gentry);
-	text = gtk_entry_get_text (GTK_ENTRY (entry));
+	if(gentry->history_id) {
+		entry = gnome_entry_gtk_entry (gentry);
+		text = gtk_entry_get_text (GTK_ENTRY (entry));
 
-	if (gentry->_priv->changed && (strcmp (text, "") != 0)) {
-		struct item *item;
-		
-		item = g_new (struct item, 1);
-		item->save = 1;
-		item->text = g_strdup (text);
-		
-		gentry->_priv->items = g_list_prepend (gentry->_priv->items, item);
+		if (gentry->_priv->changed && (strcmp (text, "") != 0)) {
+			struct item *item;
+
+			item = g_new (struct item, 1);
+			item->save = 1;
+			item->text = g_strdup (text);
+
+			gentry->_priv->items = g_list_prepend (gentry->_priv->items, item);
+		}
+
+		gnome_entry_save_history (gentry);
+
+		g_free (gentry->history_id);
+		gentry->history_id = NULL;
+
+		free_items (gentry);
 	}
-
-	gnome_entry_save_history (gentry);
-
-	g_free (gentry->history_id);
-	gentry->history_id = NULL;
-
-	free_items (gentry);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_entry_finalize (GObject *object)
+{
+	GnomeEntry *gentry;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (object));
+
+	gentry = GNOME_ENTRY (object);
 
 	g_free(gentry->_priv);
 	gentry->_priv = NULL;
-}
 
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+}
 
 /**
  * gnome_entry_gtk_entry

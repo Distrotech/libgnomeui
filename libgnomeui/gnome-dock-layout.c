@@ -50,6 +50,7 @@ static void   gnome_dock_layout_class_init   (GnomeDockLayoutClass  *class);
 static void   gnome_dock_layout_init         (GnomeDockLayout *layout);
 
 static void   gnome_dock_layout_destroy      (GtkObject *object);
+static void   gnome_dock_layout_finalize     (GObject *object);
 
 static gint   item_compare_func              (gconstpointer a,
                                               gconstpointer b);
@@ -72,10 +73,13 @@ static void
 gnome_dock_layout_class_init (GnomeDockLayoutClass  *class)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
 
   object_class = (GtkObjectClass *) class;
+  gobject_class = (GObjectClass *) class;
 
   object_class->destroy = gnome_dock_layout_destroy;
+  gobject_class->finalize = gnome_dock_layout_finalize;
 
   parent_class = gtk_type_class (gtk_object_get_type ());
 }
@@ -102,10 +106,21 @@ gnome_dock_layout_destroy (GtkObject *object)
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
-  
+}
+
+static void
+gnome_dock_layout_finalize (GObject *object)
+{
+  GnomeDockLayout *layout;
+
+  layout = GNOME_DOCK_LAYOUT (object);
+
   /* Free the private structure */
   g_free (layout->_priv);
   layout->_priv = NULL;
+
+  if (G_OBJECT_CLASS (parent_class)->finalize)
+    (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 

@@ -101,6 +101,7 @@ struct _CalculatorStack {
 static void gnome_calculator_class_init	(GnomeCalculatorClass	*class);
 static void gnome_calculator_init	(GnomeCalculator	*gc);
 static void gnome_calculator_destroy	(GtkObject		*object);
+static void gnome_calculator_finalize	(GObject		*object);
 
 static GtkVBoxClass *parent_class;
 
@@ -173,10 +174,13 @@ static void
 gnome_calculator_class_init (GnomeCalculatorClass *class)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
 	object_class = (GtkObjectClass *) class;
+	gobject_class = (GObjectClass *) class;
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 	object_class->destroy = gnome_calculator_destroy;
+	gobject_class->finalize = gnome_calculator_finalize;
 
 	gnome_calculator_signals[RESULT_CHANGED_SIGNAL] =
 		gtk_signal_new("result_changed",
@@ -1398,13 +1402,29 @@ gnome_calculator_destroy (GtkObject *object)
 	while(gc->_priv->stack)
 		stack_pop(&gc->_priv->stack);
 
-	unref_font ();
-
-	g_free(gc->_priv);
-	gc->_priv = NULL;
-
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_calculator_finalize (GObject *object)
+{
+	GnomeCalculator *gc;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CALCULATOR (object));
+
+	gc = GNOME_CALCULATOR (object);
+
+	if(gc->_priv) {
+		unref_font ();
+
+		g_free(gc->_priv);
+		gc->_priv = NULL;
+	}
+
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 /**

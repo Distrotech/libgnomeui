@@ -98,6 +98,7 @@ static void gnome_color_picker_marshal_signal_1 (GtkObject     *object,
 static void gnome_color_picker_class_init (GnomeColorPickerClass *class);
 static void gnome_color_picker_init       (GnomeColorPicker      *cp);
 static void gnome_color_picker_destroy    (GtkObject             *object);
+static void gnome_color_picker_finalize   (GObject               *object);
 static void gnome_color_picker_clicked    (GtkButton             *button);
 static void gnome_color_picker_state_changed (GtkWidget *widget, GtkStateType previous_state);
 static void gnome_color_picker_realize (GtkWidget *widget);
@@ -157,10 +158,12 @@ static void
 gnome_color_picker_class_init (GnomeColorPickerClass *class)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 	GtkButtonClass *button_class;
 
 	object_class = (GtkObjectClass *) class;
+	gobject_class = (GObjectClass *) class;
 	button_class = (GtkButtonClass *) class;
 	widget_class = (GtkWidgetClass *) class;
 	parent_class = gtk_type_class (gtk_button_get_type ());
@@ -209,6 +212,7 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 				ARG_ALPHA);
 
 	object_class->destroy = gnome_color_picker_destroy;
+	gobject_class->finalize = gnome_color_picker_finalize;
 	object_class->get_arg = gnome_color_picker_get_arg;
 	object_class->set_arg = gnome_color_picker_set_arg;
 	widget_class->state_changed = gnome_color_picker_state_changed;
@@ -517,9 +521,11 @@ gnome_color_picker_destroy (GtkObject *object)
 
 	cp = GNOME_COLOR_PICKER (object);
 
-	gdk_pixbuf_unref (cp->_priv->pixbuf);
+	if(cp->_priv->pixbuf)
+		gdk_pixbuf_unref (cp->_priv->pixbuf);
 	cp->_priv->pixbuf = NULL;
-	gdk_gc_destroy (cp->_priv->gc);
+	if(cp->_priv->gc)
+		gdk_gc_destroy (cp->_priv->gc);
 	cp->_priv->gc = NULL;
 
 	if (cp->_priv->cs_dialog)
@@ -529,11 +535,25 @@ gnome_color_picker_destroy (GtkObject *object)
 	g_free (cp->_priv->title);
 	cp->_priv->title = NULL;
 
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_color_picker_finalize (GObject *object)
+{
+	GnomeColorPicker *cp;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_COLOR_PICKER (object));
+
+	cp = GNOME_COLOR_PICKER (object);
+
 	g_free (cp->_priv);
 	cp->_priv = NULL;
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 

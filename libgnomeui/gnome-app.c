@@ -70,6 +70,7 @@ struct _GnomeAppPrivate
 static void gnome_app_class_init (GnomeAppClass *class);
 static void gnome_app_init       (GnomeApp      *app);
 static void gnome_app_destroy    (GtkObject     *object);
+static void gnome_app_finalize   (GObject       *object);
 static void gnome_app_show       (GtkWidget *widget);
 static void gnome_app_set_arg (GtkObject      *object,
 			       GtkArg         *arg,
@@ -142,13 +143,16 @@ static void
 gnome_app_class_init (GnomeAppClass *class)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 
+	gobject_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
 
 	parent_class = gtk_type_class (gtk_window_get_type ());
 
+	gobject_class->finalize = gnome_app_finalize;
 	object_class->destroy = gnome_app_destroy;
 	object_class->set_arg = gnome_app_set_arg;
 	object_class->get_arg = gnome_app_get_arg;
@@ -333,8 +337,11 @@ gnome_app_destroy (GtkObject *object)
 	app->name = NULL;
 	g_free (app->prefix);
 	app->prefix = NULL;
-	gtk_accel_group_unref (app->accel_group);
-	app->accel_group = NULL;
+
+	if(app->accel_group) {
+		gtk_accel_group_unref (app->accel_group);
+		app->accel_group = NULL;
+	}
 
 	if (app->layout) {
 		gtk_object_unref (GTK_OBJECT (app->layout));
@@ -343,10 +350,24 @@ gnome_app_destroy (GtkObject *object)
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_app_finalize (GObject *object)
+{
+	GnomeApp *app;
+	
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_APP (object));
+
+	app = GNOME_APP (object);
 
 	/* Free private data */
 	g_free(app->_priv);
 	app->_priv = NULL;
+
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 /* Callback for an app's contents' parent_set signal.  We set the app->contents

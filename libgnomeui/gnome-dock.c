@@ -86,6 +86,7 @@ static void     gnome_dock_forall              (GtkContainer *container,
                                                 GtkCallback callback,
                                                 gpointer callback_data);
 static void     gnome_dock_destroy             (GtkObject *object);
+static void     gnome_dock_finalize            (GObject *object);
 
 static void     size_request_v                 (GList *list,
                                                 GtkRequisition *requisition);
@@ -175,16 +176,19 @@ static void
 gnome_dock_class_init (GnomeDockClass *class)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
 
   object_class = (GtkObjectClass *) class;
+  gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
   container_class = (GtkContainerClass *) class;
 
   parent_class = gtk_type_class (gtk_container_get_type ());
 
   object_class->destroy = gnome_dock_destroy;
+  gobject_class->finalize = gnome_dock_finalize;
 
   widget_class->size_request = gnome_dock_size_request;
   widget_class->size_allocate = gnome_dock_size_allocate;
@@ -778,13 +782,20 @@ gnome_dock_forall (GtkContainer *container,
 static void
 gnome_dock_destroy (GtkObject *object)
 {
-  GnomeDock *self = GNOME_DOCK (object);
-
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_dock_finalize (GObject *object)
+{
+  GnomeDock *self = GNOME_DOCK (object);
 
   g_free (self->_priv);
   self->_priv = NULL;
+
+  if (G_OBJECT_CLASS (parent_class)->finalize)
+    (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 

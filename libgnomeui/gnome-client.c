@@ -1182,26 +1182,40 @@ gnome_real_client_destroy (GtkObject *object)
     gnome_client_disconnect (client);
 
   g_free (client->client_id);
+  client->client_id = NULL;
   g_free (client->previous_id);
+  client->previous_id = NULL;
   g_free (client->config_prefix);
+  client->config_prefix = NULL;
   g_free (client->global_config_prefix);
+  client->global_config_prefix = NULL;
 
   g_list_foreach (client->static_args, (GFunc)g_free, NULL);
   g_list_free    (client->static_args);
+  client->static_args = NULL;
 
   g_strfreev (client->clone_command);
+  client->clone_command = NULL;
   g_free     (client->current_directory);
+  client->current_directory = NULL;
   g_strfreev (client->discard_command);
+  client->discard_command = NULL;
 
   g_hash_table_foreach_remove (client->environment, 
 			       (GHRFunc)environment_entry_remove, NULL);
   g_hash_table_destroy        (client->environment);
+  client->environment = NULL;
 
   g_free     (client->program);
+  client->program = NULL;
   g_strfreev (client->resign_command);
+  client->resign_command = NULL;
   g_strfreev (client->restart_command);
+  client->restart_command = NULL;
   g_strfreev (client->shutdown_command);
+  client->shutdown_command = NULL;
   g_free     (client->user_id);
+  client->user_id = NULL;
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);

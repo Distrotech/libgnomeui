@@ -42,6 +42,7 @@ enum {
 static void gnome_druid_init		(GnomeDruid		 *druid);
 static void gnome_druid_class_init	(GnomeDruidClass	 *klass);
 static void gnome_druid_destroy         (GtkObject               *object);
+static void gnome_druid_finalize        (GObject                 *object);
 static void gnome_druid_size_request    (GtkWidget               *widget,
 					 GtkRequisition          *requisition);
 static void gnome_druid_size_allocate   (GtkWidget               *widget,
@@ -100,10 +101,12 @@ static void
 gnome_druid_class_init (GnomeDruidClass *klass)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 	GtkContainerClass *container_class;
 
 	object_class = (GtkObjectClass*) klass;
+	gobject_class = (GObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
 	container_class = (GtkContainerClass*) klass;
 	parent_class = gtk_type_class (gtk_container_get_type ());
@@ -119,6 +122,7 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 	gtk_object_class_add_signals (object_class, druid_signals, LAST_SIGNAL);
 	
 	object_class->destroy = gnome_druid_destroy;
+	gobject_class->finalize = gnome_druid_finalize;
 	widget_class->size_request = gnome_druid_size_request;
 	widget_class->size_allocate = gnome_druid_size_allocate;
 	widget_class->map = gnome_druid_map;
@@ -195,22 +199,51 @@ gnome_druid_destroy (GtkObject *object)
 
 	druid = GNOME_DRUID (object);
 
+	if(druid->back) {
+		gtk_widget_destroy (druid->back);
+		gtk_widget_unref (druid->back);
+		druid->back = NULL;
+	}
+	if(druid->next) {
+		gtk_widget_destroy (druid->next);
+		gtk_widget_unref (druid->next);
+		druid->next = NULL;
+	}
+	if(druid->cancel) {
+		gtk_widget_destroy (druid->cancel);
+		gtk_widget_unref (druid->cancel);
+		druid->cancel = NULL;
+	}
+	if(druid->finish) {
+		gtk_widget_destroy (druid->finish);
+		gtk_widget_unref (druid->finish);
+		druid->finish = NULL;
+	}
+	if(druid->_priv->children) {
+		g_list_free (druid->_priv->children);
+		druid->_priv->children = NULL;
+	}
+
         if(GTK_OBJECT_CLASS(parent_class)->destroy)
         	GTK_OBJECT_CLASS(parent_class)->destroy(object);
 
-	gtk_widget_destroy (druid->back);
-	druid->back = NULL;
-	gtk_widget_destroy (druid->next);
-	druid->next = NULL;
-	gtk_widget_destroy (druid->cancel);
-	druid->cancel = NULL;
-	gtk_widget_destroy (druid->finish);
-	druid->finish = NULL;
-	g_list_free (druid->_priv->children);
-        druid->_priv->children = NULL;
+}
+
+static void
+gnome_druid_finalize (GObject *object)
+{
+	GnomeDruid *druid;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_DRUID (object));
+
+	druid = GNOME_DRUID (object);
 
 	g_free(druid->_priv);
 	druid->_priv = NULL;
+
+        if(G_OBJECT_CLASS(parent_class)->finalize)
+        	G_OBJECT_CLASS(parent_class)->finalize(object);
 }
 
 static void

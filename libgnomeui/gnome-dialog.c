@@ -73,6 +73,7 @@ static void gnome_dialog_button_clicked (GtkWidget   *button,
 static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e);
 static gint gnome_dialog_delete_event (GtkWidget * d, GdkEventAny * e);
 static void gnome_dialog_destroy (GtkObject *object);
+static void gnome_dialog_finalize (GObject *object);
 static void gnome_dialog_show (GtkWidget * d);
 static void gnome_dialog_close_real(GnomeDialog * d);
 
@@ -108,10 +109,12 @@ static void
 gnome_dialog_class_init (GnomeDialogClass *klass)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
   GtkWidgetClass *widget_class;
   GtkWindowClass *window_class;
 
   object_class = (GtkObjectClass*) klass;
+  gobject_class = (GObjectClass*) klass;
   widget_class = (GtkWidgetClass*) klass;
   window_class = (GtkWindowClass*) klass;
 
@@ -139,6 +142,7 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
   klass->clicked = NULL;
   klass->close = NULL;
   object_class->destroy = gnome_dialog_destroy;
+  gobject_class->finalize = gnome_dialog_finalize;
   widget_class->key_press_event = gnome_dialog_key_pressed;
   widget_class->delete_event = gnome_dialog_delete_event;
   widget_class->show = gnome_dialog_show;
@@ -1078,14 +1082,28 @@ static void gnome_dialog_destroy (GtkObject *object)
 
   dialog = GNOME_DIALOG(object);
 
-  g_list_free(dialog->buttons);
+  if(dialog->buttons)
+	  g_list_free(dialog->buttons);
   dialog->buttons = NULL;
+
+  if (GTK_OBJECT_CLASS(parent_class)->destroy)
+    (* (GTK_OBJECT_CLASS(parent_class)->destroy))(object);
+}
+
+static void gnome_dialog_finalize (GObject *object)
+{
+  GnomeDialog *dialog;
+
+  g_return_if_fail(object != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(object));
+
+  dialog = GNOME_DIALOG(object);
 
   g_free(dialog->_priv);
   dialog->_priv = NULL;
 
-  if (GTK_OBJECT_CLASS(parent_class)->destroy)
-    (* (GTK_OBJECT_CLASS(parent_class)->destroy))(object);
+  if (G_OBJECT_CLASS(parent_class)->finalize)
+    (* (G_OBJECT_CLASS(parent_class)->finalize))(object);
 }
 
 void gnome_dialog_close_real(GnomeDialog * dialog)

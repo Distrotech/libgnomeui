@@ -94,7 +94,7 @@ struct _GnomeAnimator
   gdouble playback_speed;
   GnomeAnimatorDrawMode mode;
 
-  GnomeAnimatorPrivate *internal;
+  GnomeAnimatorPrivate *_priv;
 };
 
 struct _GnomeAnimatorClass

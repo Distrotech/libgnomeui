@@ -87,6 +87,7 @@ static void     gnome_dock_band_forall        (GtkContainer *container,
                                                gpointer callback_data);
 
 static void     gnome_dock_band_destroy       (GtkObject *object);
+static void     gnome_dock_band_finalize      (GObject *object);
 
 static void     size_allocate_child           (GnomeDockBand *band,
                                                GnomeDockBandChild *child,
@@ -152,16 +153,19 @@ static void
 gnome_dock_band_class_init (GnomeDockBandClass *class)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
 
   object_class = (GtkObjectClass *) class;
+  gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
   container_class = (GtkContainerClass *) class;
 
   parent_class = gtk_type_class (gtk_container_get_type ());
 
   object_class->destroy = gnome_dock_band_destroy;
+  gobject_class->finalize = gnome_dock_band_finalize;
 
   widget_class->map = gnome_dock_band_map;
   widget_class->unmap = gnome_dock_band_unmap;
@@ -709,13 +713,20 @@ gnome_dock_band_forall (GtkContainer *container,
 static void
 gnome_dock_band_destroy (GtkObject *object)
 {
-  GnomeDockBand *self = GNOME_DOCK_BAND (object);
-
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_dock_band_finalize (GObject *object)
+{
+  GnomeDockBand *self = GNOME_DOCK_BAND (object);
 
   g_free (self->_priv);
   self->_priv = NULL;
+
+  if (G_OBJECT_CLASS (parent_class)->finalize)
+    (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 

@@ -181,10 +181,14 @@ gnome_druid_page_standard_finalize (GObject *object)
 {
 	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD(object);
 
+	g_free (druid_page_standard->title);
+	druid_page_standard->title = NULL;
+
 	g_free(druid_page_standard->_priv);
 	druid_page_standard->_priv = NULL;
 
-	g_free (druid_page_standard->title);
+	if (G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
 }
 
 

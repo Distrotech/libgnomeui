@@ -119,6 +119,7 @@ static GnomeDialogClass *parent_class = NULL;
 static void gnome_about_class_init (GnomeAboutClass *klass);
 static void gnome_about_init       (GnomeAbout      *about);
 static void gnome_about_destroy    (GtkObject       *object);
+static void gnome_about_finalize   (GObject         *object);
 
 static void gnome_about_calc_size (GnomeAboutInfo *ai);
 
@@ -174,11 +175,14 @@ static void
 gnome_about_class_init (GnomeAboutClass *klass)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
 	object_class = (GtkObjectClass *) klass;
+	gobject_class = (GObjectClass *) klass;
 	parent_class = gtk_type_class (gnome_dialog_get_type ());
 
 	object_class->destroy = gnome_about_destroy;
+	gobject_class->finalize = gnome_about_finalize;
 }
 
 static void
@@ -882,37 +886,48 @@ gnome_about_destroy (GtkObject *object)
 {
 	GnomeAbout *self = GNOME_ABOUT(object);
 
-	/* Free memory used for title, copyright and comments */
-	g_free (self->_priv->ai->title);
-	g_free (self->_priv->ai->copyright);
-	g_free (self->_priv->ai->comments);
+	if(self->_priv->ai) {
+		/* Free memory used for title, copyright and comments */
+		g_free (self->_priv->ai->title);
+		g_free (self->_priv->ai->copyright);
+		g_free (self->_priv->ai->comments);
 
-	/* Free GUI's. */
-	gdk_font_unref (self->_priv->ai->font_title);
-	gdk_font_unref (self->_priv->ai->font_copyright);
-	gdk_font_unref (self->_priv->ai->font_author);
-	gdk_font_unref (self->_priv->ai->font_names);
-	gdk_font_unref (self->_priv->ai->font_comments);
+		/* Free GUI's. */
+		gdk_font_unref (self->_priv->ai->font_title);
+		gdk_font_unref (self->_priv->ai->font_copyright);
+		gdk_font_unref (self->_priv->ai->font_author);
+		gdk_font_unref (self->_priv->ai->font_names);
+		gdk_font_unref (self->_priv->ai->font_comments);
 
-	/* Free colors */
-	gdk_color_free (self->_priv->ai->title_fg);
-	gdk_color_free (self->_priv->ai->title_bg);
-	gdk_color_free (self->_priv->ai->contents_fg);
-	gdk_color_free (self->_priv->ai->contents_bg);
-	
+		/* Free colors */
+		gdk_color_free (self->_priv->ai->title_fg);
+		gdk_color_free (self->_priv->ai->title_bg);
+		gdk_color_free (self->_priv->ai->contents_fg);
+		gdk_color_free (self->_priv->ai->contents_bg);
 
-	/* Free memory used for authors */
-	g_list_foreach (self->_priv->ai->names, (GFunc) g_free, NULL);
-	g_list_free (self->_priv->ai->names);
 
-	g_free (self->_priv->ai);
-	self->_priv->ai = NULL;
+		/* Free memory used for authors */
+		g_list_foreach (self->_priv->ai->names, (GFunc) g_free, NULL);
+		g_list_free (self->_priv->ai->names);
+
+		g_free (self->_priv->ai);
+		self->_priv->ai = NULL;
+	}
+
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_about_finalize (GObject *object)
+{
+	GnomeAbout *self = GNOME_ABOUT(object);
 
 	g_free (self->_priv);
 	self->_priv = NULL;
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 /**

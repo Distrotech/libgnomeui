@@ -81,6 +81,7 @@ static gint date_edit_signals [LAST_SIGNAL] = { 0 };
 static void gnome_date_edit_init         (GnomeDateEdit      *gde);
 static void gnome_date_edit_class_init   (GnomeDateEditClass *class);
 static void gnome_date_edit_destroy      (GtkObject          *object);
+static void gnome_date_edit_finalize     (GObject            *object);
 static void gnome_date_edit_forall       (GtkContainer       *container,
 					  gboolean	      include_internals,
 					  GtkCallback	      callback,
@@ -360,6 +361,7 @@ static void
 gnome_date_edit_class_init (GnomeDateEditClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GObjectClass *gobject_class = (GObjectClass *) class;
 	GtkContainerClass *container_class = (GtkContainerClass *) class;
 
 	object_class = (GtkObjectClass*) class;
@@ -404,6 +406,7 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 	container_class->forall = gnome_date_edit_forall;
 
 	object_class->destroy = gnome_date_edit_destroy;
+	gobject_class->finalize = gnome_date_edit_finalize;
 	object_class->get_arg = gnome_date_edit_get_arg;
 	object_class->set_arg = gnome_date_edit_set_arg;
 
@@ -430,14 +433,29 @@ gnome_date_edit_destroy (GtkObject *object)
 
 	gde = GNOME_DATE_EDIT (object);
 
-	gtk_widget_destroy (gde->_priv->cal_popup);
+	if(gde->_priv->cal_popup)
+		gtk_widget_destroy (gde->_priv->cal_popup);
 	gde->_priv->cal_popup = NULL;
+
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_date_edit_finalize (GObject *object)
+{
+	GnomeDateEdit *gde;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_DATE_EDIT (object));
+
+	gde = GNOME_DATE_EDIT (object);
 
 	g_free(gde->_priv);
 	gde->_priv = NULL;
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 static void
