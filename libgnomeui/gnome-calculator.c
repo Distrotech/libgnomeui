@@ -232,7 +232,7 @@ set_result(GnomeCalculator *gc)
 	for(i=12;i>0;i--) {
 		g_snprintf(format,20,"%c .%dlg",'%',i);
 		g_snprintf(buf,80,format,gc->result);
-		if(strlen(buf)<12)
+		if(strlen(buf)<=12)
 			break;
 	}
 	strncpy(gc->result_string,buf,12);
