@@ -1,3 +1,8 @@
+Mon Dec 28 20:56:18 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry.c: use the same function for breaking strings
+	  as gnome-config does.
+
 Sun Dec 27 21:47:41 1998 Gregory McLean <gregm@comstar.net>
 
 	* gnome-stock.[c|h] : added a stock cdrom icon that I found in
