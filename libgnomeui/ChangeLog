@@ -1,3 +1,15 @@
+1999-07-04  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-client.c: small fix for api docs.
+
+	* gnome-canvas.h: Fixed names.
+
+	* gnome-animator.h: Made the protypes use the same names.
+
+	* gnome-about.c: Fixed inline api docs.
+
+	* gnome-preferences.c: Fixed inline api docs.
+
 1999-06-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.h: The last argument to gnome_icon_list_new()

@@ -72,5 +72,5 @@
 #include "libgnomeui/gnome-winhints.h"
 #include "libgnomeui/gnome-href.h"
 #include "libgnomeui/gnome-procbar.h"
-
+#include "libgnomeui/gnome-druid.h"
 #endif

@@ -177,8 +177,11 @@ gnome_stock_pixmap_widget_init(GtkObject *obj)
 	w->focused = NULL;
 }
 
-
-
+/**
+ * gnome_stock_pixmap_widget_get_type:
+ *
+ * Returns the GtkType for the GnomeStockPixmap widget
+ */
 guint
 gnome_stock_pixmap_widget_get_type(void)
 {
@@ -199,10 +202,17 @@ gnome_stock_pixmap_widget_get_type(void)
 	return new_type;
 }
 
-
-
+/**
+ * gnome_stock_pixmap_widget_new:
+ * @window: deprecated.
+ * @icon: deprecated.
+ *
+ * This routine is deprecated.
+ *
+ * Returns: deprecated value.
+ */
 GtkWidget *
-gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon)
+gnome_stock_pixmap_widget_new (GtkWidget *window, const char *icon)
 {
 	GtkWidget *w;
 	GnomeStockPixmapWidget *p;
@@ -239,7 +249,7 @@ gnome_stock_pixmap_widget_set_icon(GnomeStock *widget,
 	/* FIXME: this is a hack. This functions prototype will have to
 	 * use the new GnomeStock widget */
 	gnome_stock_set_icon(GNOME_STOCK(widget), icon);
-	g_warning("gnome_stock_pixmap_widget_set_icon is depreciated.\n\t\t"
+	g_warning("gnome_stock_pixmap_widget_set_icon is deprecated.\n\t\t"
 		  "Please use gnome_stock_set_icon instead.");
 }
 #else /* !USE_NEW_GNOME_STOCK */
@@ -483,6 +493,11 @@ gnome_stock_init(GnomeStock *stock)
 	stock->icon = NULL;
 }
 
+/**
+ * gnome_stock_get_type:
+ *
+ * Returns: The GtkType for the #GnomeStock widget.
+ */
 guint
 gnome_stock_get_type(void)
 {
@@ -503,6 +518,11 @@ gnome_stock_get_type(void)
 	return new_type;
 }
 
+/** 
+ * gnome_stock_new:
+ *
+ * Returns: a new empty GnomeStock widget
+ */
 GtkWidget *
 gnome_stock_new(void)
 {
@@ -510,17 +530,36 @@ gnome_stock_new(void)
 }
 
 #if USE_NEW_GNOME_STOCK
+
+/**
+ * gnome_stock_pixmap_widget_new:
+ * @window: deprecated
+ * @icon: deprecated
+ *
+ * This routine is deprecated, please use gnome_stock_new_with_icon()
+ *
+ * Returns: A GtkWidget
+ */
 GtkWidget *
 gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon)
 {
 #ifdef DEBUG
-	g_message("gnome_stock_pixmap_widget_new is depriciated\n\t\t"
+	g_message("gnome_stock_pixmap_widget_new is deprecated\n\t\t"
 		  "Use gnome_stock_new_with_icon instead.");
 #endif
 	return gnome_stock_new_with_icon(icon);
 }
 #endif /* USE_NEW_GNOME_STOCK */
 
+/**
+ * gnome_stock_set_icon:
+ * @stock: The GnomeStock object on which to operate
+ * @icon: Icon code to set
+ *
+ * Sets the @stock object icon to be the one whose code is @icon.
+ *
+ * Returns: TRUE if the icon was set successfully.
+ */
 gboolean
 gnome_stock_set_icon(GnomeStock *stock, const char *icon)
 {
@@ -556,6 +595,13 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
 	return 1;
 }
 
+/**
+ * gnome_stock_new_with_icon:
+ * @icon: icon code.
+ *
+ * Returns: A GnomeStock widget created with the initial icon code
+ * set to @icon.
+ */ 
 GtkWidget *
 gnome_stock_new_with_icon(const char *icon)
 {
@@ -1155,8 +1201,6 @@ gnome_stock_pixmap(GtkWidget * window, const char *icon, const char *subtype)
 	return pixmap;
 }
 
-
-
 GtkWidget *
 gnome_stock_pixmap_widget_at_size(GtkWidget *window, const char *icon,
 				  guint width, guint height)
@@ -1380,6 +1424,15 @@ stock_button_from_entry (const char *type, GnomeStockPixmapEntry *entry)
 	return gnome_pixmap_button(pixmap, text);
 }
 
+/**
+ * gnome_stock_button:
+ * @type: gnome stock type code.
+ *
+ * Constructs a new #GtkButton which contains a stock icon and text
+ * whose type is @type.
+ *
+ * Returns: A configured #GtkButton widget
+ */
 GtkWidget *
 gnome_stock_button(const char *type)
 {
@@ -1391,6 +1444,20 @@ gnome_stock_button(const char *type)
 	return stock_button_from_entry (type, entry);
 }
 
+/**
+ * gnome_stock_or_ordinary_button:
+ * @type: gnome stock type code.
+ *
+ * It @type contains a valid GNOME stock code, it constructs a new
+ * #GtkButton which contains a stock icon and text for the matching
+ * type, or if the type does not exist, it creates a button with the
+ * label being the same as "type".
+ *
+ * The use of this routine is discouraged, given that on international 
+ * setups it might break subtly.
+ *
+ * Returns: A #GtkButton.
+ */
 GtkWidget *
 gnome_stock_or_ordinary_button (const char *type)
 {

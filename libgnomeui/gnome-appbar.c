@@ -616,7 +616,7 @@ gnome_appbar_clear_stack      (GnomeAppBar * appbar)
 
 /**
  * gnome_appbar_set_progress
- * @ab: Pointer to GNOME appbar object
+ * @appbar: Pointer to GNOME appbar object
  * @percentage: Percentage to which progress bar should be set.
  *
  * Description:
@@ -627,20 +627,20 @@ gnome_appbar_clear_stack      (GnomeAppBar * appbar)
  **/
 
 void
-gnome_appbar_set_progress(GnomeAppBar *ab,
+gnome_appbar_set_progress(GnomeAppBar *appbar,
 			  gfloat percentage)
 {
-  g_return_if_fail(ab != NULL);
-  g_return_if_fail(ab->progress != NULL);
-  g_return_if_fail(GNOME_IS_APPBAR(ab));
+  g_return_if_fail (appbar != NULL);
+  g_return_if_fail (appbar->progress != NULL);
+  g_return_if_fail (GNOME_IS_APPBAR(appbar));
 
-  gtk_progress_bar_update(GTK_PROGRESS_BAR(ab->progress), percentage);
+  gtk_progress_bar_update(GTK_PROGRESS_BAR(appbar->progress), percentage);
 }
 
 
 /**
  * gnome_appbar_get_progress
- * @ab: Pointer to GNOME appbar object
+ * @appbar: Pointer to GNOME appbar object
  *
  * Description:
  * Returns &GtkProgress widget pointer, so that the progress bar may be
@@ -652,13 +652,13 @@ gnome_appbar_set_progress(GnomeAppBar *ab,
  **/
 
 GtkProgress* 
-gnome_appbar_get_progress    (GnomeAppBar * ab)
+gnome_appbar_get_progress    (GnomeAppBar * appbar)
 {
-  g_return_val_if_fail(ab != NULL, NULL);
-  g_return_val_if_fail(ab->progress != NULL, NULL);
-  g_return_val_if_fail(GNOME_IS_APPBAR(ab), NULL);
+  g_return_val_if_fail(appbar != NULL, NULL);
+  g_return_val_if_fail(appbar->progress != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APPBAR(appbar), NULL);
 
-  return GTK_PROGRESS(ab->progress);
+  return GTK_PROGRESS(appbar->progress);
 }
 
 static void

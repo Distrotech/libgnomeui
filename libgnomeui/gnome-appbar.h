@@ -107,7 +107,7 @@ void       gnome_appbar_clear_stack      (GnomeAppBar * appbar);
 /* pure sugar - with a bad name, in light of the get_progress name
    which is not the opposite of set_progress. Maybe this function
    should die.*/
-void	     gnome_appbar_set_progress	  (GnomeAppBar * appbar,
+void	     gnome_appbar_set_progress	  (GnomeAppBar *appbar,
 					   gfloat percentage);
 /* use GtkProgress functions on returned value */
 GtkProgress* gnome_appbar_get_progress    (GnomeAppBar * appbar);

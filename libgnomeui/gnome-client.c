@@ -1707,9 +1707,8 @@ gnome_client_set_resign_command (GnomeClient *client,
  * gnome_client_set_restart_command
  * @client: Pointer to GNOME session client object.
  * @argc:
- * @argv[]:
+ * @argv:
  *
- * Description:
  **/
 
 void 

@@ -157,24 +157,23 @@ static gboolean
 enum_from_strings(gint * setme, gchar * findme, 
 		  const gchar * const array[], gint N)
 {
-  gboolean retval = FALSE;
-  gint i = 0;
-  if ( findme == NULL ) {
-    /* Leave default */
-    retval = TRUE;
-  }
-  else {
-    while ( i < N ) {
-      if ( g_strcasecmp(findme, array[i]) == 0 ) {
-	*setme = i;
-	retval = TRUE;
-	break;
-      } 
-      ++i;
-    }
-  }
+	gboolean retval = FALSE;
+	gint i = 0;
 
-  return retval;
+	if (findme == NULL) {
+		/* Leave default */
+		retval = TRUE;
+	} else {
+		while (i < N) {
+			if (g_strcasecmp(findme, array[i]) == 0) {
+				*setme = i;
+				retval = TRUE;
+				break;
+			} 
+			++i;
+		}
+	}
+	return retval;
 }
 
 /**
@@ -451,17 +450,16 @@ GtkButtonBoxStyle gnome_preferences_get_button_layout (void)
 
 
 /**
- * gnome_preferences_set_button_layout 
- * style: Enumerated type indicating the default GNOME dialog button style.
+ * gnome_preferences_set_button_layout :
+ * @style: Enumerated type indicating the default GNOME dialog button style.
  *
- * Description:
  * Set the default GNOME preferences object's default button style.
  **/
 
-void              gnome_preferences_set_button_layout (GtkButtonBoxStyle style)
+void gnome_preferences_set_button_layout (GtkButtonBoxStyle style)
 {
-  g_return_if_fail ((style <= GTK_BUTTONBOX_END));
-  prefs.dialog_buttons_style = style;
+	g_return_if_fail ((style <= GTK_BUTTONBOX_END));
+	prefs.dialog_buttons_style = style;
 }
 
 
@@ -482,13 +480,13 @@ gboolean          gnome_preferences_get_statusbar_dialog     (void)
 
 
 /**
- * gnome_preferences_set_statusbar_dialog     
- * b: %FALSE if statusbar is a dialog, %TRUE if not.
+ * gnome_preferences_set_statusbar_dialog:
+ * @b: %FALSE if statusbar is a dialog, %TRUE if not.
  *
- * Description:
  * Indicate whether or not the default for GNOME status bars
  * is a dialog.
- **/
+ *
+ */
 
 void              gnome_preferences_set_statusbar_dialog     (gboolean b)
 {
@@ -513,10 +511,9 @@ gboolean          gnome_preferences_get_statusbar_interactive(void)
 
 
 /**
- * gnome_preferences_set_statusbar_interactive
- * b: %TRUE if statusbar is interactive, %FALSE if not.
+ * gnome_preferences_set_statusbar_interactive:
+ * @b: %TRUE if statusbar is interactive, %FALSE if not.
  *
- * Description:
  * Indicate whether or not the GNOME status bars are, by default,
  * interactive.
  **/
@@ -544,10 +541,9 @@ gboolean gnome_preferences_get_statusbar_meter_on_right (void)
 
 
 /**
- * gnome_preferences_set_statusbar_meter_on_right 
- * statusbar_meter_on_right: %TRUE if statusbar meter is on the right side, %FALSE if not.
+ * gnome_preferences_set_statusbar_meter_on_right:
+ * @statusbar_meter_on_right: %TRUE if statusbar meter is on the right side, %FALSE if not.
  *
- * Description:
  * Indicate whether or not the GNOME status bars are, by default,
  * on the right-hand side.
  **/
@@ -560,16 +556,14 @@ gnome_preferences_set_statusbar_meter_on_right (gboolean statusbar_meter_on_righ
 
 
 /**
- * gnome_preferences_get_menubar_detachable   
+ * gnome_preferences_get_menubar_detachable:
  *
- * Description:
  * Determine whether or not a menu bar is, by default,
  * detachable from its parent frame.
  *
  * Returns:
  * %TRUE if menu bars are detachable, %FALSE if not.
- **/
-
+ */
 gboolean          gnome_preferences_get_menubar_detachable   (void)
 {
   return prefs.menubar_detachable;
@@ -577,14 +571,12 @@ gboolean          gnome_preferences_get_menubar_detachable   (void)
 
 
 /**
- * gnome_preferences_set_menubar_detachable   
- * b: %TRUE if menu bars are detachable, %FALSE if not.
+ * gnome_preferences_set_menubar_detachable:
+ * @b: %TRUE if menu bars are detachable, %FALSE if not.
  *
- * Description:
  * Indicate whether or not the GNOME menu bars are, by default,
  * detachable from their parent frame.
- **/
-
+ */
 void              gnome_preferences_set_menubar_detachable   (gboolean b)
 {
   prefs.menubar_detachable = b;
@@ -592,11 +584,10 @@ void              gnome_preferences_set_menubar_detachable   (gboolean b)
 
 
 /**
- * gnome_preferences_get_menubar_relief    
+ * gnome_preferences_get_menubar_relief:
  *
- * Description:
- **/
-
+ * Returns: the relieft settings for the menubar.
+ */
 gboolean          gnome_preferences_get_menubar_relief    (void)
 {
   return prefs.menubar_relief;
@@ -604,12 +595,10 @@ gboolean          gnome_preferences_get_menubar_relief    (void)
 
 
 /**
- * gnome_preferences_set_menubar_relief    
- * @b:
+ * gnome_preferences_set_menubar_relief:
+ * @b: 
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_menubar_relief    (gboolean b)
 {
   prefs.menubar_relief = b;
@@ -617,11 +606,9 @@ void              gnome_preferences_set_menubar_relief    (gboolean b)
 
 
 /**
- * gnome_preferences_get_toolbar_detachable   
+ * gnome_preferences_get_toolbar_detachable:
  *
- * Description:
- **/
-
+ */
 gboolean          gnome_preferences_get_toolbar_detachable   (void)
 {
   return prefs.toolbar_detachable;
@@ -629,12 +616,10 @@ gboolean          gnome_preferences_get_toolbar_detachable   (void)
 
 
 /**
- * gnome_preferences_set_toolbar_detachable   
+ * gnome_preferences_set_toolbar_detachable:
  * @b:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_toolbar_detachable   (gboolean b)
 {
   prefs.toolbar_detachable = b;
@@ -642,11 +627,9 @@ void              gnome_preferences_set_toolbar_detachable   (gboolean b)
 
 
 /**
- * gnome_preferences_get_toolbar_relief    
+ * gnome_preferences_get_toolbar_relief:
  *
- * Description:
- **/
-
+ */
 gboolean          gnome_preferences_get_toolbar_relief    (void)
 {
   return prefs.toolbar_relief;
@@ -654,12 +637,10 @@ gboolean          gnome_preferences_get_toolbar_relief    (void)
 
 
 /**
- * gnome_preferences_set_toolbar_relief    
+ * gnome_preferences_set_toolbar_relief:
  * @b:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_toolbar_relief    (gboolean b)
 {
   prefs.toolbar_relief = b;
@@ -667,11 +648,9 @@ void              gnome_preferences_set_toolbar_relief    (gboolean b)
 
 
 /**
- * gnome_preferences_get_toolbar_relief_btn 
+ * gnome_preferences_get_toolbar_relief_btn:
  *
- * Description:
- **/
-
+ */
 gboolean          gnome_preferences_get_toolbar_relief_btn (void)
 {
   return prefs.toolbar_relief_btn;
@@ -679,12 +658,10 @@ gboolean          gnome_preferences_get_toolbar_relief_btn (void)
 
 
 /**
- * gnome_preferences_set_toolbar_relief_btn 
+ * gnome_preferences_set_toolbar_relief_btn:
  * @b:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_toolbar_relief_btn (gboolean b)
 {
   prefs.toolbar_relief_btn = b;
@@ -692,11 +669,9 @@ void              gnome_preferences_set_toolbar_relief_btn (gboolean b)
 
 
 /**
- * gnome_preferences_get_toolbar_lines     
+ * gnome_preferences_get_toolbar_lines:
  *
- * Description:
- **/
-
+ */
 gboolean          gnome_preferences_get_toolbar_lines     (void)
 {
   return prefs.toolbar_lines;
@@ -704,12 +679,10 @@ gboolean          gnome_preferences_get_toolbar_lines     (void)
 
 
 /**
- * gnome_preferences_set_toolbar_lines     
+ * gnome_preferences_set_toolbar_lines:
  * @b:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_toolbar_lines     (gboolean b)
 {
   prefs.toolbar_lines = b;
@@ -717,11 +690,9 @@ void              gnome_preferences_set_toolbar_lines     (gboolean b)
 
 
 /**
- * gnome_preferences_get_toolbar_labels    
+ * gnome_preferences_get_toolbar_labels:
  *
- * Description:
- **/
-
+ */
 gboolean          gnome_preferences_get_toolbar_labels    (void)
 {
   return prefs.toolbar_labels;
@@ -729,12 +700,10 @@ gboolean          gnome_preferences_get_toolbar_labels    (void)
 
 
 /**
- * gnome_preferences_set_toolbar_labels    
+ * gnome_preferences_set_toolbar_labels:
  * @b:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_toolbar_labels    (gboolean b)
 {
   prefs.toolbar_labels = b;
@@ -742,11 +711,9 @@ void              gnome_preferences_set_toolbar_labels    (gboolean b)
 
 
 /**
- * gnome_preferences_get_dialog_centered      
+ * gnome_preferences_get_dialog_centered:
  *
- * Description:
- **/
-
+ */
 gboolean          gnome_preferences_get_dialog_centered      (void)
 {
   return prefs.dialog_centered;
@@ -754,12 +721,10 @@ gboolean          gnome_preferences_get_dialog_centered      (void)
 
 
 /**
- * gnome_preferences_set_dialog_centered      
+ * gnome_preferences_set_dialog_centered:
  * @b:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_dialog_centered      (gboolean b)
 {
   prefs.dialog_centered = b;
@@ -767,11 +732,9 @@ void              gnome_preferences_set_dialog_centered      (gboolean b)
 
 
 /**
- * gnome_preferences_get_dialog_type          
+ * gnome_preferences_get_dialog_type:
  *
- * Description:
- **/
-
+ */
 GtkWindowType     gnome_preferences_get_dialog_type          (void)
 {
   return prefs.dialog_type;
@@ -779,12 +742,10 @@ GtkWindowType     gnome_preferences_get_dialog_type          (void)
 
 
 /**
- * gnome_preferences_set_dialog_type          
+ * gnome_preferences_set_dialog_type:
  * @t:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_dialog_type          (GtkWindowType t)
 {
   prefs.dialog_type = t;
@@ -794,11 +755,9 @@ void              gnome_preferences_set_dialog_type          (GtkWindowType t)
    GTK_WIN_POS_MOUSE */
 
 /**
- * gnome_preferences_get_dialog_position      
+ * gnome_preferences_get_dialog_position:
  *
- * Description:
- **/
-
+ */
 GtkWindowPosition gnome_preferences_get_dialog_position      (void)
 {
   return prefs.dialog_position;
@@ -806,12 +765,10 @@ GtkWindowPosition gnome_preferences_get_dialog_position      (void)
 
 
 /**
- * gnome_preferences_set_dialog_position      
+ * gnome_preferences_set_dialog_position:
  * @p:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_dialog_position      (GtkWindowPosition p)
 {
   prefs.dialog_position = p;
@@ -819,11 +776,9 @@ void              gnome_preferences_set_dialog_position      (GtkWindowPosition 
 
 
 /**
- * gnome_preferences_get_mdi_mode             
+ * gnome_preferences_get_mdi_mode:
  *
- * Description:
- **/
-
+ */
 GnomeMDIMode      gnome_preferences_get_mdi_mode             (void)
 {
   return prefs.mdi_mode;
@@ -831,12 +786,10 @@ GnomeMDIMode      gnome_preferences_get_mdi_mode             (void)
 
 
 /**
- * gnome_preferences_set_mdi_mode             
+ * gnome_preferences_set_mdi_mode:
  * @m:
  *
- * Description:
- **/
-
+ */
 void              gnome_preferences_set_mdi_mode             (GnomeMDIMode m)
 {
   prefs.mdi_mode = m;
@@ -844,11 +797,9 @@ void              gnome_preferences_set_mdi_mode             (GnomeMDIMode m)
 
 
 /**
- * gnome_preferences_get_mdi_tab_pos          
+ * gnome_preferences_get_mdi_tab_pos:
  *
- * Description:
- **/
-
+ */
 GtkPositionType   gnome_preferences_get_mdi_tab_pos          (void)
 {
   return prefs.mdi_tab_pos;
@@ -856,11 +807,10 @@ GtkPositionType   gnome_preferences_get_mdi_tab_pos          (void)
 
 
 /**
- * gnome_preferences_set_mdi_tab_pos          
+ * gnome_preferences_set_mdi_tab_pos:
  * @p:
  *
- * Description:
- **/
+ */
 
 void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p)
 {
@@ -869,11 +819,9 @@ void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p)
 
 
 /**
- * gnome_preferences_get_property_box_apply 
+ * gnome_preferences_get_property_box_apply:
  *
- * Description:
- **/
-
+ */
 int gnome_preferences_get_property_box_apply (void)
 {
 	return prefs.property_box_buttons_apply;
@@ -881,11 +829,10 @@ int gnome_preferences_get_property_box_apply (void)
 
 
 /**
- * gnome_preferences_set_property_box_button_apply 
+ * gnome_preferences_set_property_box_button_apply:
  * @v:
  *
- * Description:
- **/
+ */
 
 void gnome_preferences_set_property_box_button_apply (int v)
 {
@@ -894,10 +841,9 @@ void gnome_preferences_set_property_box_button_apply (int v)
 
 
 /**
- * gnome_preferences_get_menus_have_tearoff 
+ * gnome_preferences_get_menus_have_tearoff:
  *
- * Description:
- **/
+ */
 
 gboolean gnome_preferences_get_menus_have_tearoff (void)
 {
@@ -906,12 +852,10 @@ gboolean gnome_preferences_get_menus_have_tearoff (void)
 
 
 /**
- * gnome_preferences_set_menus_have_tearoff 
+ * gnome_preferences_set_menus_have_tearoff:
  * @b:
  *
- * Description:
- **/
-
+ */
 void gnome_preferences_set_menus_have_tearoff (gboolean b)
 {
 	prefs.menus_have_tearoff = b;
@@ -919,11 +863,9 @@ void gnome_preferences_set_menus_have_tearoff (gboolean b)
 
 
 /**
- * gnome_preferences_get_menus_have_icons 
+ * gnome_preferences_get_menus_have_icons:
  *
- * Description:
- **/
-
+ */
 int gnome_preferences_get_menus_have_icons (void)
 {
 	return prefs.menus_have_icons;
@@ -931,12 +873,10 @@ int gnome_preferences_get_menus_have_icons (void)
 
 
 /**
- * gnome_preferences_set_menus_have_icons 
+ * gnome_preferences_set_menus_have_icons:
  * @have_icons:
  *
- * Description:
- **/
-
+ */
 void gnome_preferences_set_menus_have_icons (int have_icons)
 {
 	prefs.menus_have_icons = have_icons ? TRUE : FALSE;
@@ -944,11 +884,10 @@ void gnome_preferences_set_menus_have_icons (int have_icons)
 
 
 /**
- * gnome_preferences_get_disable_imlib_cache 
+ * gnome_preferences_get_disable_imlib_cache:
  *
  * Description:
- **/
-
+ */
 int gnome_preferences_get_disable_imlib_cache (void)
 {
 	return prefs.disable_imlib_cache;
@@ -956,13 +895,12 @@ int gnome_preferences_get_disable_imlib_cache (void)
 
 
 /**
- * gnome_preferences_set_disable_imlib_cache 
+ * gnome_preferences_set_disable_imlib_cache:
  * @disable_imlib_cache:
  *
- * Description:
- **/
-
+ */
 void gnome_preferences_set_disable_imlib_cache (int disable_imlib_cache)
 {
 	prefs.disable_imlib_cache = disable_imlib_cache ? TRUE : FALSE;
 }
+

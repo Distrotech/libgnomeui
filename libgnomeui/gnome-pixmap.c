@@ -33,7 +33,11 @@ static void setup_window_and_style     (GnomePixmap *gpixmap);
 
 static GtkWidgetClass *parent_class;
 
-
+/**
+ * gnome_pixmap_get_type:
+ *
+ * Returns: the GtkType for the GnomePixmap object
+ */
 guint
 gnome_pixmap_get_type (void)
 {

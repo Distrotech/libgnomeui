@@ -216,7 +216,7 @@ gboolean gnome_animator_advance                       (GnomeAnimator *animator,
 /* Set the number of current frame.  The result is immediately
    visible.  */
 void     gnome_animator_goto_frame                    (GnomeAnimator *animator,
-                                                       guint num_frame);
+                                                       guint frame_number);
 
 /* Get the number of current frame.  */
 guint    gnome_animator_get_current_frame_number      (GnomeAnimator *animator);
