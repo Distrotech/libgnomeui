@@ -579,7 +579,7 @@ gnome_segv_setup(gboolean post_arg_parse)
 
                    ...or use an environment variable - ecl
                 */
-                ctmp = getenv("DISABLE_CRASH_DIALOG");
+                ctmp = getenv("GNOME_DISABLE_CRASH_DIALOG");
                 if(ctmp)
                         disable_crash_dialog = atoi(ctmp)?TRUE:FALSE;
 
