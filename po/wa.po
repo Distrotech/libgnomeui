@@ -182,9 +182,8 @@ msgid "Received invalid color data\n"
 msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:464
-#, fuzzy
 msgid "Color Selector"
-msgstr "Netyî li tchuze"
+msgstr "Tchoezixheu di coleurs"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
@@ -239,13 +238,12 @@ msgid "Date"
 msgstr "Date"
 
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "Tchoezi fitchî"
+msgstr "Tchoezi l' date"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Tchoezixhoz l' date dins l' calindrî"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -253,13 +251,12 @@ msgid "Calendar"
 msgstr "Calindrî"
 
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "Tchoezi fitchî"
+msgstr "Tchoezi l' eure"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Tchoezixhoz l' eure dins l' djivêye"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -749,9 +746,8 @@ msgstr "Mete ene tchinne el plaece d' ene ôte"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
-msgstr "_Prôpietés..."
+msgstr "_Prôpietés"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -762,9 +758,8 @@ msgstr "Candjî les prôpietés do fitchî"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "_Preferinces..."
+msgstr "Preferi_nces"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -1046,14 +1041,12 @@ msgid "Select file"
 msgstr "Tchoezi fitchî"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path"
-msgstr "C_laper"
+msgstr "Tchimin"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path to file"
-msgstr "Schaper li fitchî do moumint"
+msgstr "Tchimin po-z ariver å fitchî"
 
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
@@ -1205,29 +1198,28 @@ msgid "Preview"
 msgstr "Vey divant"
 
 #: libgnomeui/gnome-icon-entry.c:750
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "Li tite do purnea di tchoezixhaedje"
+msgstr "Purnea di tchoezixhaedje des imådjetes"
 
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Ci purnea chal vos permete di tchoezi ene imådjete."
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
-msgstr ""
+msgstr "Tchoezixheu d' imådjetes"
 
 #: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Tchoezixhoz l' imådjete ki vos vloz, s' i vs plait."
 
 #: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
-msgstr ""
+msgstr "Tchoezixheu d' imådjetes"
 
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Ci boton chal drovrè on prunea por vos tchoezi ene imådjete."
 
 #: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
@@ -1235,7 +1227,7 @@ msgstr "Foyter"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
-msgstr ""
+msgstr "Tchimin del imådjete"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
