@@ -7,17 +7,20 @@
  * Author: George Lebl <jirka@5z.com>
  */
 #include <config.h>
+#include <sys/stat.h> /*stat*/
+#include <unistd.h> /*stat*/
+#include <gdk_imlib.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
+#include <gtk/gtkpixmap.h>
 #include <gtk/gtkscrolledwindow.h>
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
-#include "gnome-pixmap.h"
 #include "gnome-file-entry.h"
 #include "gnome-pixmap-entry.h"
 
@@ -56,26 +59,45 @@ gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
 }
 
+static int
+my_g_is_file (const char *filename)
+{
+	struct stat s;
+	
+	if(stat (filename, &s) != 0 ||
+	   S_ISDIR (s.st_mode))
+		return FALSE;
+	return TRUE;
+}
+
 static void
 entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 {
 	char *t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
-						 TRUE);
-	if(!t) {
+						 FALSE);
+	GdkImlibImage *im;
+	GdkPixmap *pix;
+	GdkBitmap *mask;
+	if(!t || !my_g_is_file(t) || !(im = gdk_imlib_load_image (t))) {
 		if(pentry->preview)
 			gtk_widget_destroy(pentry->preview);
 		pentry->preview = NULL;
 		return;
 	}
+	gdk_imlib_render (im, im->rgb_width,im->rgb_height);
+	pix = gdk_imlib_move_image (im);
+	mask = gdk_imlib_move_mask (im);
+
 	if(pentry->preview)
-		gnome_pixmap_load_file(GNOME_PIXMAP(pentry->preview),t);
+		gtk_pixmap_set(GTK_PIXMAP(pentry->preview),pix,mask);
 	else {
-		pentry->preview = gnome_pixmap_new_from_file(t);
+		pentry->preview = gtk_pixmap_new(pix,mask);
 		gtk_widget_show(pentry->preview);
 		gtk_container_add(GTK_CONTAINER(pentry->preview_sw),
 				  pentry->preview);
 	}
 	g_free(t);
+	gdk_imlib_destroy_image(im);
 }
 
 static void
@@ -199,4 +221,14 @@ gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 	
 	gtk_widget_set_usize(pentry->preview_sw,preview_w,preview_h);
+}
+
+char *
+gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)
+{
+	/*this happens if it doesn't exist or isn't a pixmap*/
+	if(!pentry->preview)
+		return NULL;
+	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
+					      TRUE);
 }

@@ -66,6 +66,9 @@ void	   gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 					       int preview_w,
 					       int preview_h);
 
+/*only return a file if it was possible to load it with imlib*/
+char      *gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry);
+
 END_GNOME_DECLS
 
 #endif

@@ -1,3 +1,12 @@
+Fri Nov 20 01:48:01 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-mdi.c: fix warnings about casting by using the G*_TO_*
+	  macros
+
+	* gnome-pixmap-entry.[ch]: add a get_filename function which
+	  returns a file only if it was able to load it as a pixmap with
+	  imlib. it also doesn't try to read directories as images anymore
+
 Fri Nov 20 00:21:45 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-segv.c: made button_click and delete_event static as to
