@@ -65,7 +65,6 @@ unused_SOURCES = \
 	gnome-roo.h			\
 	gnome-helpsys.h			\
 	gnome-textfu.h			\
-	gnome-icon-selector.c		\
 	gnome-ditem-edit.c
 
 libgnomeui_2_la_SOURCES = \
@@ -87,6 +86,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-file-entry.c		\
 	gnome-image-entry.c		\
 	gnome-image-entry-component.c	\
+	gnome-icon-selector-component.c	\
         gnome-font-picker.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
@@ -125,6 +125,7 @@ gnome_headers = \
 	gnome-file-entry.h		\
 	gnome-image-entry.h		\
 	gnome-image-entry-component.h	\
+	gnome-icon-selector-component.h	\
         gnome-font-picker.h		\
 	gnome-gconf.h			\
 	gnome-geometry.h		\
@@ -132,7 +133,6 @@ gnome_headers = \
 	gnome-ice.h			\
 	gnome-icon-item.h		\
 	gnome-icon-list.h		\
-	gnome-icon-selector.h		\
 	gnome-icon-text.h		\
 	gnome-init.h			\
 	gnome-less.h			\

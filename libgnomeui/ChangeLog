@@ -1,5 +1,9 @@
 2001-05-09  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-selector.[ch]: Renamed to gnome-icon-selector-component.[ch].
+
+2001-05-09  Martin Baulig  <baulig@suse.de>
+
 	* gnome-icon-entry.[ch]: Renamed to gnome-image-entry-component.[ch].
 
 	* gnome-image-entry-component.c: This is now a GnomeSelector component.
