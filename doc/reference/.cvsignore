@@ -14,3 +14,4 @@ libgnomeui-symbols.txt
 libgnomeui.hierarchy
 libgnomeui.prerequisites
 libgnomeui.interfaces
+version.xml
