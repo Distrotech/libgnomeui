@@ -124,37 +124,37 @@ struct _GnomeMDIClass {
 
 guint         gnome_mdi_get_type            (void);
 
-GtkObject     *gnome_mdi_new                (gchar *, gchar *);
+GtkObject     *gnome_mdi_new                (gchar *appname, gchar *title);
 
-void          gnome_mdi_set_mode            (GnomeMDI *, GnomeMDIMode);
+void          gnome_mdi_set_mode            (GnomeMDI *mdi, GnomeMDIMode mode);
 
 /* setting the menu and toolbar stuff */
-void          gnome_mdi_set_menubar_template(GnomeMDI *, GnomeUIInfo *);
-void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *);
-void          gnome_mdi_set_child_menu_path (GnomeMDI *, const gchar *);
-void          gnome_mdi_set_child_list_path (GnomeMDI *, const gchar *);
+void          gnome_mdi_set_menubar_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl);
+void          gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl);
+void          gnome_mdi_set_child_menu_path (GnomeMDI *mdi, const gchar *path);
+void          gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path);
 
 /* manipulating views */
-gint          gnome_mdi_add_view            (GnomeMDI *, GnomeMDIChild *);
-gint          gnome_mdi_add_toplevel_view   (GnomeMDI *, GnomeMDIChild *);
-gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
+gint          gnome_mdi_add_view            (GnomeMDI *mdi, GnomeMDIChild *child);
+gint          gnome_mdi_add_toplevel_view   (GnomeMDI *mdi, GnomeMDIChild *child);
+gint          gnome_mdi_remove_view         (GnomeMDI *mdi, GtkWidget *view, gint force);
 
-GtkWidget     *gnome_mdi_get_active_view    (GnomeMDI *);
-void          gnome_mdi_set_active_view     (GnomeMDI *, GtkWidget *);
+GtkWidget     *gnome_mdi_get_active_view    (GnomeMDI *mdi);
+void          gnome_mdi_set_active_view     (GnomeMDI *mdi, GtkWidget *view);
 
 /* manipulating children */
-gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
-gint          gnome_mdi_remove_child        (GnomeMDI *, GnomeMDIChild *, gint);
-gint          gnome_mdi_remove_all          (GnomeMDI *, gint);
+gint          gnome_mdi_add_child           (GnomeMDI *mdi, GnomeMDIChild *child);
+gint          gnome_mdi_remove_child        (GnomeMDI *mdi, GnomeMDIChild *child, gint force);
+gint          gnome_mdi_remove_all          (GnomeMDI *mdi, gint force);
 
-void          gnome_mdi_open_toplevel       (GnomeMDI *);
+void          gnome_mdi_open_toplevel       (GnomeMDI *mdi);
 
-void          gnome_mdi_update_child        (GnomeMDI *, GnomeMDIChild *);
+void          gnome_mdi_update_child        (GnomeMDI *mdi, GnomeMDIChild *child);
 
-GnomeMDIChild *gnome_mdi_get_active_child   (GnomeMDI *);
-GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
+GnomeMDIChild *gnome_mdi_get_active_child   (GnomeMDI *mdi);
+GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *mdi, gchar *name);
 
-GnomeApp      *gnome_mdi_get_active_window  (GnomeMDI *);
+GnomeApp      *gnome_mdi_get_active_window  (GnomeMDI *mdi);
 
 /*
  * the following two functions are here to make life easier if an application
@@ -165,17 +165,17 @@ GnomeApp      *gnome_mdi_get_active_window  (GnomeMDI *);
  * other hand, closing the last MDI window when no objects are registered
  * with the MDI will result in MDI being gtk_object_destroy()ed.
  */
-void          gnome_mdi_register            (GnomeMDI *, GtkObject *);
-void          gnome_mdi_unregister          (GnomeMDI *, GtkObject *);
+void          gnome_mdi_register            (GnomeMDI *mdi, GtkObject *object);
+void          gnome_mdi_unregister          (GnomeMDI *mdi, GtkObject *object);
 
 /*
  * convenience functions for retrieveing GnomeMDIChild and GnomeApp
  * objects associated with a particular view and for retrieveing the
  * visible view of a certain GnomeApp.
  */
-GnomeApp      *gnome_mdi_get_app_from_view    (GtkWidget *);
-GnomeMDIChild *gnome_mdi_get_child_from_view  (GtkWidget *);
-GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *, GnomeApp *);
+GnomeApp      *gnome_mdi_get_app_from_view    (GtkWidget *view);
+GnomeMDIChild *gnome_mdi_get_child_from_view  (GtkWidget *view);
+GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app);
 
 /* the following functions are used to obtain pointers to the GnomeUIInfo
  * structures for a specified MDI GnomeApp widget. this might be useful for
@@ -184,9 +184,9 @@ GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *, GnomeApp *);
  * GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees
  * and are non-NULL only if templates are used for menu/toolbar creation.
  */
-GnomeUIInfo   *gnome_mdi_get_menubar_info     (GnomeApp *);
-GnomeUIInfo   *gnome_mdi_get_toolbar_info     (GnomeApp *);
-GnomeUIInfo   *gnome_mdi_get_child_menu_info  (GnomeApp *);
+GnomeUIInfo   *gnome_mdi_get_menubar_info     (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_toolbar_info     (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_child_menu_info  (GnomeApp *app);
 
 END_GNOME_DECLS
 

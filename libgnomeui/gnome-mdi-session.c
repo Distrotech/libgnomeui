@@ -180,7 +180,8 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 
 		printf("app->layout == %08lx\n", app->layout);
 
-		/* this is a nasty hack before dock-layout gets a bit better */
+		/* this should be a nasty hack before dock-layout gets a bit better
+		   don't even know if it works, though ;) */
 		layout = gnome_dock_get_layout(GNOME_DOCK(app->dock));
 		gnome_dock_layout_parse_string(mdi->active_window->layout, string);
 		gtk_container_forall(GTK_CONTAINER(app->dock), remove_items, app->dock);

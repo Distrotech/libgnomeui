@@ -83,13 +83,13 @@ struct _GnomeMDIChildClass
 
 guint         gnome_mdi_child_get_type         (void);
 
-GtkWidget     *gnome_mdi_child_add_view        (GnomeMDIChild *);
+GtkWidget     *gnome_mdi_child_add_view        (GnomeMDIChild *mdi_child);
 
-void          gnome_mdi_child_remove_view      (GnomeMDIChild *, GtkWidget *view);
+void          gnome_mdi_child_remove_view      (GnomeMDIChild *mdi_child, GtkWidget *view);
 
-void          gnome_mdi_child_set_name         (GnomeMDIChild *, gchar *);
+void          gnome_mdi_child_set_name         (GnomeMDIChild *mdi_child, gchar *name);
 
-void          gnome_mdi_child_set_menu_template(GnomeMDIChild *, GnomeUIInfo *);
+void          gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl);
 
 END_GNOME_DECLS
 
