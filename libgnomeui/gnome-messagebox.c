@@ -282,6 +282,7 @@ gnome_messagebox_button_clicked (GtkWidget   *button,
 		if (list->data == button)
 			gtk_signal_emit (GTK_OBJECT (messagebox), messagebox_signals[CLICKED], which);	
 		list = list->next;
+		which ++;
 	}
 
 	g_list_free (GNOME_MESSAGEBOX (messagebox)->buttons);

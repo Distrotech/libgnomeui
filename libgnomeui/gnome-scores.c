@@ -196,6 +196,28 @@ gnome_scores_set_colors(GnomeScores *gs, GdkColor *col)
 	}
 }
 
+void
+gnome_scores_set_current_player (GnomeScores *gs, gint i)
+{
+	gtk_widget_set_name (GTK_WIDGET(gs->label_names[i]), "CurrentPlayer");
+	gtk_widget_set_name(GTK_WIDGET(gs->label_scores[i]), "CurrentPlayer");
+	gtk_widget_set_name(GTK_WIDGET(gs->label_times[i]), "CurrentPlayer");
+}
+
+void gnome_scores_set_logo_label_title (GnomeScores *gs, gchar *txt)
+{
+	if(gs->logo) {
+		g_print("Warning: gnome_scores_set_logo_* can be called only once\n");
+		return;
+	}
+
+	gs->logo = gtk_label_new(txt);
+	gtk_widget_set_name(GTK_WIDGET(gs->logo), "Logo");
+	gtk_box_pack_end (GTK_BOX(gs->vbox), gs->logo, TRUE, TRUE, 0);
+	gtk_widget_show (gs->logo);
+}
+
+
 void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 				  GdkColor *col)
 {
@@ -265,8 +287,8 @@ void
 gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos)
 {
 	GtkWidget *hs;
-	GdkColor ctitle = {0, 0, 0, 65535};
-	GdkColor col = {0, 65535, 0, 0};
+/*        	GdkColor ctitle = {0, 0, 0, 65535}; */
+/* 	GdkColor col = {0, 65535, 0, 0}; */
 	gchar **names = NULL;
 	gfloat *scores = NULL;
 	time_t *scoretimes = NULL;
@@ -275,11 +297,13 @@ gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos)
 	top = gnome_score_get_notable(app_name, level, &names, &scores, &scoretimes);
 	if (top > 0){
 		hs = gnome_scores_new(top, names, scores, scoretimes, 0);
-		gnome_scores_set_logo_label (GNOME_SCORES(hs), title, 0, 
-					     &ctitle);
+/* 		gnome_scores_set_logo_label (GNOME_SCORES(hs), title, 0,  */
+/* 					     &ctitle); */
+		gnome_scores_set_logo_label_title (GNOME_SCORES(hs), title);
 		if(pos)
-			gnome_scores_set_color(GNOME_SCORES(hs), pos-1, &col);
-
+/* 			gnome_scores_set_color(GNOME_SCORES(hs), pos-1, &col); */
+ 			gnome_scores_set_current_player(GNOME_SCORES(hs), pos-1);
+		
 		gtk_widget_show (hs);
 		gnome_string_array_free(names);
 		g_free(scores);

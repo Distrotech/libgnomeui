@@ -60,11 +60,15 @@ SGML =	\
 
 PIXMAPS = \
 	gnome-stock-ok.xpm		\
-	gnome-stock-cancel.xpm		\
+	gnome-stock-cancel.xpm		
+
+gtkrcdir = $(datadir)
+gtkrc_DATA = gtkrc
 
 EXTRA_DIST = \
 	$(PIXMAPS)			\
 	$(SGML)				\
+	$(gtkrc_DATA)			\
 	AUTHORS
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
@@ -81,6 +85,7 @@ stock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
+
 
 dist-hook:
 	mkdir $(distdir)/pixmaps

@@ -1,0 +1,16 @@
+# $(datadir)/gtkrc
+
+style "GnomeScores_CurrentPlayer_style"
+{
+  fg[NORMAL] = {1.0, 0.0, 0.0}
+}
+
+widget "*GnomeScores*.CurrentPlayer" style "GnomeScores_CurrentPlayer_style"
+
+style "GnomeScores_Logo_style"
+{
+  font = "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-iso8859-1"
+  fg[NORMAL] = {0.0, 0.0, 1.0}
+}
+
+widget "*GnomeScores*.Logo" style "GnomeScores_Logo_style"

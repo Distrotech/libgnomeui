@@ -123,6 +123,18 @@ void gnome_scores_set_colors (
 		GdkColor *col		/* Array of colors. */
 		);
 
+
+/* Creates a label to be the logo */
+void gnome_scores_set_logo_label_title (
+		GnomeScores *gs,	/* GNOME Scores widget. */
+		gchar *txt		/* Name of the logo. */
+		);
+
+/* Set the index of the current player in top ten. */
+void gnome_scores_set_current_player (
+		GnomeScores *gs,	/* GNOME Scores widget. */
+		gint i			/* Index of the current(from 0 to 9). */
+		);
 END_GNOME_DECLS
 
 #endif /* GNOME_SCORES_H */

@@ -1,3 +1,18 @@
+Tue Feb 17 00:16:49 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gnome-messagebox.c (gnome_messagebox_button_clicked): Fixed
+	buttonnumber counting.
+
+	* gnome-scores.[ch]: Fixed i18n problem.  All color/font settings
+ 	are in gtkrc.
+	(gnome_scores_set_logo_label_title): New function
+	(gnome_scores_set_current_player): New function.
+	* gnome-scores.c (gnome_scores_display): Use the above new
+	functions. 
+
+	* gtkrc: New file, the global gtk+ rc file of GNOME.
+	* Makefile.am: Added gtkrc. 
+
 1998-02-17  Eckehard Berns <eb@berns.prima.de>
 
 	* gnome-stock.[ch]: added width/height fields to the
@@ -5,6 +20,7 @@
 	correct values.
 
 Tue Feb 17 00:16:49 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
 
 	* gnome-scores.c (gnome_scores_set_color): gtk_style_unref() new
 	GtkStyle after gtk_widget_set_style.
