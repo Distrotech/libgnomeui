@@ -976,6 +976,10 @@ static void set_active_view(GnomeMDI *mdi, GtkWidget *view) {
   GnomeMDIChild *child, *old_child;
   GtkWidget *old_view;
 
+#ifdef GNOME_ENABLE_DEBUG
+  g_message("GnomeMDI: set_active_view() called");
+#endif
+
   if(view == mdi->active_view)
     return;
 
@@ -1004,17 +1008,15 @@ void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {
   g_return_if_fail(view != NULL);
   g_return_if_fail(GTK_IS_WIDGET(view));
 
-  set_active_view(mdi, view);
-
-  window = GTK_WINDOW(gnome_mdi_get_app_from_view(mdi->active_view));
+  window = GTK_WINDOW(gnome_mdi_get_app_from_view(view));
 
   if(mdi->mode == GNOME_MDI_NOTEBOOK)
-    set_page_by_widget(GTK_NOTEBOOK(GNOME_APP(window)->contents), mdi->active_view);
-
+    set_page_by_widget(GTK_NOTEBOOK(GNOME_APP(window)->contents), view);
+  
   /* TODO: hmmm... I dont know how to give focus to the window, so that it would
      receive keyboard events */
   gdk_window_raise(GTK_WIDGET(window)->window);
-  gtk_window_set_focus(window, mdi->active_view);
+  gtk_window_set_focus(window, view);
   gtk_window_activate_focus(window);
 }
 
