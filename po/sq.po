@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD.sq\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-13 17:55+0100\n"
-"PO-Revision-Date: 2004-02-13 15:39+0100\n"
+"POT-Creation-Date: 2004-02-18 11:37+0100\n"
+"PO-Revision-Date: 2004-02-18 11:39+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -122,8 +122,7 @@ msgid "Translator credits"
 msgstr "Falenderime pëkthyesit"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Kreditë e përkthyesve. Kjo frazë duhet shënuar si e përkthyeshme"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -650,11 +649,11 @@ msgstr "PREFIKSI"
 msgid "Disable connection to session manager"
 msgstr "Disaktivoi lidhjen manazhuesit të seancës"
 
-#: libgnomeui/gnome-client.c:974
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Manazhimi i seancës"
 
-#: libgnomeui/gnome-client.c:2474
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Anullo daljen"
 
@@ -1343,7 +1342,7 @@ msgid "GNOME GUI Library"
 msgstr "Libraria GUI e GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
+#: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1351,7 +1350,7 @@ msgstr ""
 "dialogut të gabimeve\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:721
+#: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1398,14 +1397,19 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "P�dorimi: gnome_segv2 EMRI_PROG NUM_SH�\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "_Rinis programin"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Informo zhvilluesit"
+msgid "_Inform Developers"
+msgstr "_Informo zhvilluesit"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Debug"
+msgid "_Debug"
+msgstr "_Debug"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Përfundo testin"
+
