@@ -1,3 +1,8 @@
+2002-01-07  jacob berkman  <jacob@ximian.com>
+
+	* gnome-dialog.c (gnome_dialog_init): remove the bevel border to
+	be consistent with GtkDialog
+
 2002-01-04  Duarte Loreto <happyguy_pt@hotmail.com>
 
         * gnome-dateedit.c: Fixed a small i18n glitch

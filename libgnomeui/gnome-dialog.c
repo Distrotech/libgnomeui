@@ -151,15 +151,10 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_window_add_accel_group (GTK_WINDOW(dialog), 
 			      dialog->accelerators);
 
-  bf = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (bf), GTK_SHADOW_OUT);
-  gtk_container_add(GTK_CONTAINER(dialog), bf);
-  gtk_widget_show(bf);
-
   vbox = gtk_vbox_new(FALSE, GNOME_PAD);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 
 			      GNOME_PAD_SMALL);
-  gtk_container_add(GTK_CONTAINER(bf), vbox);
+  gtk_container_add(GTK_CONTAINER(dialog), vbox);
   gtk_widget_show(vbox);
 
   gtk_window_set_policy (GTK_WINDOW (dialog), FALSE, 
