@@ -441,7 +441,7 @@ gnome_fill_info (GtkWidget *widget,
 	/* FIXME: this should use a GdkColorContext for allocation.
 	 * The cc structure should reside in the GnomeAboutClass so
 	 * that all about boxes share it. */
-	gdk_color_alloc (gtk_widget_get_default_colormap (), &gai->light_green);
+	gdk_color_alloc (gtk_widget_get_colormap (widget), &gai->light_green);
 
 	/* fill struct */
 	if(title) 
@@ -602,7 +602,15 @@ gnome_about_construct (GnomeAbout *about,
 			   GTK_WIDGET(frame));
 	gtk_widget_show (frame);
 
+	if (logo) {
+		gtk_widget_push_visual (gdk_imlib_get_visual ());
+		gtk_widget_push_colormap (gdk_imlib_get_colormap ());
+	}
 	drawing_area = gtk_drawing_area_new ();
+	if (logo) {
+		gtk_widget_pop_colormap ();
+		gtk_widget_pop_visual ();
+	}
 
 	/* Make it have white bg color */
 	gtk_widget_set_name (drawing_area, "DrawingArea");

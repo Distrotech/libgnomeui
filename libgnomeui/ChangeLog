@@ -1,3 +1,11 @@
+2000-05-03  Ian Peters  <itp@gnu.org>
+
+	* gnome-about.c (gnome_fill_info): Allocate about box shade of green
+	  color in the colormap of the widget, rather than the default colormap.
+	* gnome-about.c (gnome_about_construct): If the logo parameter isn't
+	  null, push the imlib colormap and visual when creating the drawing
+	  area.  Fixes a possible multi-depth BadMatch crash.
+
 2000-05-03  Iain Holems  <ih@csd.abdn.ac.uk>
 
 	* gnome-canvas-text.c (calc_line_widths): Changed to width to be 
