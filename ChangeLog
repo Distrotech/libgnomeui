@@ -1,3 +1,7 @@
+2004-02-07  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/Makefile.am: Remove more deprecated flags.
+
 2004-02-04  Padraig O'Briain <padraig.obriain@sun.com>
 
 	* libgnomeui/gnome-color-picker.c (gnome_color_picker_instance_init):
