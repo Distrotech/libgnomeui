@@ -118,9 +118,103 @@
    (user GNOME_PREFERENCES_USER)
    (always GNOME_PREFERENCES_ALWAYS))
 
+; enumerations from "gnome-winhints.h"
+
+(define-enum GnomeWinLayer
+   (desktop WIN_LAYER_DESKTOP)
+   (below WIN_LAYER_BELOW)
+   (normal WIN_LAYER_NORMAL)
+   (ontop WIN_LAYER_ONTOP)
+   (dock WIN_LAYER_DOCK)
+   (above-dock WIN_LAYER_ABOVE_DOCK))
+
+(define-flags GnomeWinState
+   (sticky WIN_STATE_STICKY)
+   (minimized WIN_STATE_MINIMIZED)
+   (maximized-vert WIN_STATE_MAXIMIZED_VERT)
+   (maximized-horiz WIN_STATE_MAXIMIZED_HORIZ)
+   (hidden WIN_STATE_HIDDEN)
+   (shaded WIN_STATE_SHADED)
+   (hid-workspace WIN_STATE_HID_WORKSPACE)
+   (hid-transient WIN_STATE_HID_TRANSIENT)
+   (fixed-position WIN_STATE_FIXED_POSITION)
+   (arrange-ignore WIN_STATE_ARRANGE_IGNORE))
+
+(define-flags GnomeWinHints
+   (skip-focus WIN_HINTS_SKIP_FOCUS)
+   (skip-winlist WIN_HINTS_SKIP_WINLIST)
+   (skip-taskbar WIN_HINTS_SKIP_TASKBAR)
+   (group-transient WIN_HINTS_GROUP_TRANSIENT))
+
+(define-enum GnomeWinAppState
+   (none WIN_APP_STATE_NONE)
+   (active1 WIN_APP_STATE_ACTIVE1)
+   (active2 WIN_APP_STATE_ACTIVE2)
+   (error1 WIN_APP_STATE_ERROR1)
+   (error2 WIN_APP_STATE_ERROR2)
+   (fatal-error1 WIN_APP_STATE_FATAL_ERROR1)
+   (fatal-error2 WIN_APP_STATE_FATAL_ERROR2)
+   (idle1 WIN_APP_STATE_IDLE1)
+   (idle2 WIN_APP_STATE_IDLE2)
+   (waiting1 WIN_APP_STATE_WAITING1)
+   (waiting2 WIN_APP_STATE_WAITING2)
+   (working1 WIN_APP_STATE_WORKING1)
+   (working2 WIN_APP_STATE_WORKING2)
+   (need-user-input1 WIN_APP_STATE_NEED_USER_INPUT1)
+   (need-user-input2 WIN_APP_STATE_NEED_USER_INPUT2)
+   (struggling1 WIN_APP_STATE_STRUGGLING1)
+   (struggling2 WIN_APP_STATE_STRUGGLING2)
+   (disk-traffic1 WIN_APP_STATE_DISK_TRAFFIC1)
+   (disk-traffic2 WIN_APP_STATE_DISK_TRAFFIC2)
+   (network-traffic1 WIN_APP_STATE_NETWORK_TRAFFIC1)
+   (network-traffic2 WIN_APP_STATE_NETWORK_TRAFFIC2)
+   (overloaded1 WIN_APP_STATE_OVERLOADED1)
+   (overloaded2 WIN_APP_STATE_OVERLOADED2)
+   (percent000-1 WIN_APP_STATE_PERCENT000_1)
+   (percent000-2 WIN_APP_STATE_PERCENT000_2)
+   (percent010-1 WIN_APP_STATE_PERCENT010_1)
+   (percent010-2 WIN_APP_STATE_PERCENT010_2)
+   (percent020-1 WIN_APP_STATE_PERCENT020_1)
+   (percent020-2 WIN_APP_STATE_PERCENT020_2)
+   (percent030-1 WIN_APP_STATE_PERCENT030_1)
+   (percent030-2 WIN_APP_STATE_PERCENT030_2)
+   (percent040-1 WIN_APP_STATE_PERCENT040_1)
+   (percent040-2 WIN_APP_STATE_PERCENT040_2)
+   (percent050-1 WIN_APP_STATE_PERCENT050_1)
+   (percent050-2 WIN_APP_STATE_PERCENT050_2)
+   (percent060-1 WIN_APP_STATE_PERCENT060_1)
+   (percent060-2 WIN_APP_STATE_PERCENT060_2)
+   (percent070-1 WIN_APP_STATE_PERCENT070_1)
+   (percent070-2 WIN_APP_STATE_PERCENT070_2)
+   (percent080-1 WIN_APP_STATE_PERCENT080_1)
+   (percent080-2 WIN_APP_STATE_PERCENT080_2)
+   (percent090-1 WIN_APP_STATE_PERCENT090_1)
+   (percent090-2 WIN_APP_STATE_PERCENT090_2)
+   (percent100-1 WIN_APP_STATE_PERCENT100_1)
+   (percent100-2 WIN_APP_STATE_PERCENT100_2))
+
 ; enumerations from "gtk-clock.h"
 
 (define-enum GtkClockType
    (increasing GTK_CLOCK_INCREASING)
    (decreasing GTK_CLOCK_DECREASING)
    (realtime GTK_CLOCK_REALTIME))
+
+; enumerations from "gtkcalendar.h"
+
+(define-enum GtkCalendarDisplayOptions
+   (show-heading GTK_CALENDAR_SHOW_HEADING)
+   (show-day-names GTK_CALENDAR_SHOW_DAY_NAMES)
+   (no-month-change GTK_CALENDAR_NO_MONTH_CHANGE))
+
+(define-enum GtkCalendarFont
+   (heading GTK_CALENDAR_FONT_HEADING)
+   (day-name GTK_CALENDAR_FONT_DAY_NAME)
+   (day GTK_CALENDAR_FONT_DAY))
+
+(define-enum GtkCalendarColor
+   (heading GTK_CALENDAR_COLOR_HEADING)
+   (day-name GTK_CALENDAR_COLOR_DAY_NAME)
+   (prev-month GTK_CALENDAR_COLOR_PREV_MONTH)
+   (next-month GTK_CALENDAR_COLOR_NEXT_MONTH)
+   (normal-day GTK_CALENDAR_COLOR_NORMAL_DAY))

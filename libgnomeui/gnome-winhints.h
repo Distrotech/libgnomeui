@@ -27,110 +27,157 @@
 BEGIN_GNOME_DECLS
 
 /* The hints we recognize */
-#define XA_WIN_PROTOCOLS       "WIN_PROTOCOLS"
-#define XA_WIN_ICONS           "WIN_ICONS"
-#define XA_WIN_WORKSPACE       "WIN_WORKSPACE"
-#define XA_WIN_WORKSPACE_COUNT "WIN_WORKSPACE_COUNT"
-#define XA_WIN_WORKSPACE_NAMES "_WIN_WORKSPACE_NAMES"    
-#define XA_WIN_LAYER           "WIN_LAYER"
-#define XA_WIN_STATE           "WIN_STATE"
-#define XA_WIN_HINTS           "WIN_HINTS"
-#define XA_WIN_WORKAREA        "WIN_WORKAREA"
+#define XA_WIN_PROTOCOLS           "WIN_PROTOCOLS"
+#define XA_WIN_ICONS               "WIN_ICONS"
+#define XA_WIN_WORKSPACE           "WIN_WORKSPACE"
+#define XA_WIN_WORKSPACE_COUNT     "WIN_WORKSPACE_COUNT"
+#define XA_WIN_WORKSPACE_NAMES     "WIN_WORKSPACE_NAMES"    
+#define XA_WIN_LAYER               "WIN_LAYER"
+#define XA_WIN_STATE               "WIN_STATE"
+#define XA_WIN_HINTS               "WIN_HINTS"
+#define XA_WIN_WORKAREA            "WIN_WORKAREA"
+#define XA_WIN_CLIENT_LIST         "WIN_CLIENT_LIST"
+#define XA_WIN_APP_STATE           "WIN_APP_STATE"
+#define XA_WIN_EXPANDED_SIZE       "WIN_EXPANDED_SIZE"
+#define XA_WIN_CLIENT_MOVING       "WIN_CLIENT_MOVING"
+#define XA_WIN_SUPPORTING_WM_CHECK "WIN_SUPPORTING_WM_CHECK"
 
 /* flags for the window layer */
-#define WinLayerCount          16
-#define WinLayerInvalid        0xFFFFFFFFUL
-#define WinLayerDesktop        0UL
-#define WinLayerBelow          2UL
-#define WinLayerNormal         4UL
-#define WinLayerOnTop          6UL
-#define WinLayerDock           8UL
-#define WinLayerAboveDock      10UL
+typedef enum
+{
+  WIN_LAYER_DESKTOP     = 0,
+  WIN_LAYER_BELOW       = 2,
+  WIN_LAYER_NORMAL      = 4,
+  WIN_LAYER_ONTOP       = 6,
+  WIN_LAYER_DOCK        = 8,
+  WIN_LAYER_ABOVE_DOCK  = 10
+} GnomeWinLayer;
 
 /* flags for the window state */
-#define WinStateAllWorkspaces  (1 << 0)   /* appears on all workspaces */
-#define WinStateMinimized      (1 << 1)
-#define WinStateMaximizedVert  (1 << 2)   /* maximized vertically */
-#define WinStateMaximizedHoriz (1 << 3)   /* maximized horizontally */
-#define WinStateHidden         (1 << 4)   /* not on taskbar if any, but still accessible */
-#define WinStateRollup         (1 << 5)   /* only titlebar visible */
-#define WinStateHidWorkspace   (1 << 6)   /* not on current workspace */
-#define WinStateHidTransient   (1 << 7)   /* hidden due to invisible owner window */
-#define WinStateDockHorizontal (1 << 8)
+typedef enum
+{
+  WIN_STATE_STICKY          = (1<<0), /* everyone knows sticky */
+  WIN_STATE_MINIMIZED       = (1<<1), /* ??? */
+  WIN_STATE_MAXIMIZED_VERT  = (1<<2), /* window in maximized V state */
+  WIN_STATE_MAXIMIZED_HORIZ = (1<<3), /* window in maximized H state */
+  WIN_STATE_HIDDEN          = (1<<4), /* not on taskbar but window visible */
+  WIN_STATE_SHADED          = (1<<5), /* shaded (NeXT style) */
+  WIN_STATE_HID_WORKSPACE   = (1<<6), /* not on current desktop */
+  WIN_STATE_HID_TRANSIENT   = (1<<7), /* owner of transient is hidden */
+  WIN_STATE_FIXED_POSITION  = (1<<8), /* window is fixed in position even */
+  WIN_STATE_ARRANGE_IGNORE  = (1<<9)  /* ignore for auto arranging */
+} GnomeWinState;
 
 /* flags for skip hint */
-#define WinHintsSkipFocus      (1 << 0)
-#define WinHintsSkipWindowMenu (1 << 1)
-#define WinHintsSkipTaskBar    (1 << 2)
-#define WinHintsGroupTransient (1 << 3)
+typedef enum
+{
+  WIN_HINTS_SKIP_FOCUS      = (1<<0), /* "alt-tab" skips this win */
+  WIN_HINTS_SKIP_WINLIST    = (1<<1), /* not in win list */
+  WIN_HINTS_SKIP_TASKBAR    = (1<<2), /* not on taskbar */
+  WIN_HINTS_GROUP_TRANSIENT = (1<<3)  /* ??????? */
+} GnomeWinHints;
 
-    
-    
-typedef struct _GnomeWinHintsSkip {
-    gboolean skipFocus;
-    gboolean skipWinMenu;
-    gboolean skipWinList;
-} GnomeWinHintsSkip;
+typedef enum
+{
+  WIN_APP_STATE_NONE,
+  WIN_APP_STATE_ACTIVE1,
+  WIN_APP_STATE_ACTIVE2,
+  WIN_APP_STATE_ERROR1,
+  WIN_APP_STATE_ERROR2,
+  WIN_APP_STATE_FATAL_ERROR1,
+  WIN_APP_STATE_FATAL_ERROR2,
+  WIN_APP_STATE_IDLE1,
+  WIN_APP_STATE_IDLE2,
+  WIN_APP_STATE_WAITING1,
+  WIN_APP_STATE_WAITING2,
+  WIN_APP_STATE_WORKING1,
+  WIN_APP_STATE_WORKING2,
+  WIN_APP_STATE_NEED_USER_INPUT1,
+  WIN_APP_STATE_NEED_USER_INPUT2,
+  WIN_APP_STATE_STRUGGLING1,
+  WIN_APP_STATE_STRUGGLING2,
+  WIN_APP_STATE_DISK_TRAFFIC1,
+  WIN_APP_STATE_DISK_TRAFFIC2,
+  WIN_APP_STATE_NETWORK_TRAFFIC1,
+  WIN_APP_STATE_NETWORK_TRAFFIC2,
+  WIN_APP_STATE_OVERLOADED1,
+  WIN_APP_STATE_OVERLOADED2,
+  WIN_APP_STATE_PERCENT000_1,
+  WIN_APP_STATE_PERCENT000_2,
+  WIN_APP_STATE_PERCENT010_1,
+  WIN_APP_STATE_PERCENT010_2,
+  WIN_APP_STATE_PERCENT020_1,
+  WIN_APP_STATE_PERCENT020_2,
+  WIN_APP_STATE_PERCENT030_1,
+  WIN_APP_STATE_PERCENT030_2,
+  WIN_APP_STATE_PERCENT040_1,
+  WIN_APP_STATE_PERCENT040_2,
+  WIN_APP_STATE_PERCENT050_1,
+  WIN_APP_STATE_PERCENT050_2,
+  WIN_APP_STATE_PERCENT060_1,
+  WIN_APP_STATE_PERCENT060_2,
+  WIN_APP_STATE_PERCENT070_1,
+  WIN_APP_STATE_PERCENT070_2,
+  WIN_APP_STATE_PERCENT080_1,
+  WIN_APP_STATE_PERCENT080_2,
+  WIN_APP_STATE_PERCENT090_1,
+  WIN_APP_STATE_PERCENT090_2,
+  WIN_APP_STATE_PERCENT100_1,
+  WIN_APP_STATE_PERCENT100_2
+} GnomeWinAppState;
 
 /* This must be called before any gnome_win_hints_* calls */
 void
-gnome_win_hints_init();
+gnome_win_hints_init(void);
 
-/* Set the current layer for window */
-gboolean
-gnome_win_hints_set_layer(GtkWidget *window, gulong layer);
-
-/* Get the current layer for window */
-gulong
+void
+gnome_win_hints_set_layer(GtkWidget *window, GnomeWinLayer layer);
+GnomeWinLayer
 gnome_win_hints_get_layer(GtkWidget *window);
 
-/* Return a GList of workspace names (char*) */
-GList*
-gnome_win_hints_get_workspace_list(GtkWidget *window);
+void
+gnome_win_hints_set_state(GtkWidget *window, GnomeWinState state);
+GnomeWinState
+gnome_win_hints_get_state(GtkWidget *window);
 
-/* Return the current number of defined workspaces */
-gint
-gnome_win_hints_get_workspace_count();
+void
+gnome_win_hints_set_hints(GtkWidget *window, GnomeWinHints skip);
+GnomeWinHints
+gnome_win_hints_get_hints(GtkWidget *window);
 
-/* Return the number of the currently active  workspace */
-gint
-gnome_win_hints_get_current_workspace();
-
-/* Set the currently active workspace */
-gboolean
-gnome_win_hints_set_current_workspace(gint workspace);
-
-/* Return the number of the workspace that window is on*/
+void
+gnome_win_hints_set_workspace(GtkWidget *window, gint workspace);
 gint
 gnome_win_hints_get_workspace(GtkWidget *window);
 
-/* set the workspace of window */
-gboolean
-gnome_win_hints_set_workspace(GtkWidget *window, gint workspace);
+void
+gnome_win_hints_set_current_workspace(gint workspace);
+gint
+gnome_win_hints_get_current_workspace(void);
 
-/* This is not yet implemented. It seems kind of messy. */
-/*
 GList*
-gnome_win_hints_get_hints(void);
-*/
+gnome_win_hints_get_workspace_names(void);
+gint
+gnome_win_hints_get_workspace_count(void);
 
-/* Set the skip properties of window. (task[bar,list], focus, window menu) */
+void
+gnome_win_hints_set_expanded_size(GtkWidget *window, gint x, gint y, gint width, gint height);
 gboolean
-gnome_win_hints_set_skip(GtkWidget *window, GnomeWinHintsSkip skip);
+gnome_win_hints_get_expanded_size(GtkWidget *window, gint *x, gint *y, gint *width, gint *height);
 
-/* Return the skip properties for window */
-GnomeWinHintsSkip
-gnome_win_hints_get_skip(GtkWidget *window);
+void
+gnome_win_hints_set_moving(GtkWidget *window, gboolean moving);
 
-/* Set the state of window */
+void
+gnome_win_hints_set_app_state(GtkWidget *window,  GnomeWinAppState state);
+GnomeWinAppState
+gnome_win_hints_get_app_state(GtkWidget *window);
+
+void
+gnome_win_hints_set_moving(GtkWidget *window, gboolean moving);
+
 gboolean
-gnome_win_hints_set_state(GtkWidget *window,  gint32 mask, gint32 state);
-
-/* Return the state info of window */
-gint32
-gnome_win_hints_get_state(GtkWidget *window);
-
-
+gnome_win_hints_wm_exists(void);
 END_GNOME_DECLS
 
 #endif

@@ -1,3 +1,10 @@
+1998-10-08  The Rasterman <raster@redhat.com>
+	* gnome-winhints.[ch]: moved to standard method of #defines in gtk+
+	and gnome by using enum's and all capitals. added extra support.
+	Cleaned up code. aded "check for a gnome compliant wm" code and
+	put this all into winhints_demo.c - currently onle E 0.15 in CVS
+	supports all of this. I hope other WM's will catch on soon.
+	
 1998-10-08  James Henstridge  <james@daa.com.au>
 
 	* gnome-href.[ch]:  Added a simple widget for embedding hyperlinks
