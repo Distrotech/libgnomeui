@@ -91,7 +91,6 @@ libgnomeui_2_la_SOURCES = \
 	gnometypes.c			\
 	gtk-clock.c			\
 	gtkdial.c			\
-	gtkpixmapmenuitem.c		\
 	gnome-icon-list.c		\
 	gnome-icon-item.c		\
 	gnome-icon-text.c		\
@@ -159,7 +158,6 @@ gnome_headers = \
         gnome-winhints.h		\
 	gtkdial.h			\
 	gtk-clock.h			\
-	gtkpixmapmenuitem.h		\
 	libgnomeui.h			\
 	gnome-vfs-util.h		\
 	gnome-textfu.h			\

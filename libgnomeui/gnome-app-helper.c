@@ -61,7 +61,6 @@
 #include "gnome-pixmap.h"
 #include "gnome-preferences.h"
 #include "gnome-stock.h"
-#include "gtkpixmapmenuitem.h"
 
 extern const gchar *gnome_user_accels_dir;
 
@@ -386,7 +385,7 @@ showing_pixmaps_changed_notify(GConfClient            *client,
 {
         gboolean new_setting = TRUE;
         GtkWidget *w = user_data;
-        GtkPixmapMenuItem *mi = GTK_PIXMAP_MENU_ITEM(w);
+        GtkImageMenuItem *mi = GTK_IMAGE_MENU_ITEM(w);
 	GConfValue *value;
 
 	value = gconf_entry_get_value (entry);
@@ -395,7 +394,7 @@ showing_pixmaps_changed_notify(GConfClient            *client,
                 new_setting = gconf_value_get_bool(value);
         }
 
-        if (new_setting && (mi->pixmap == NULL)) {
+        if (new_setting && (mi->image == NULL)) {
                 GtkWidget *pixmap;
                 GnomeUIPixmapType pixmap_type;
                 gconstpointer pixmap_info;
@@ -409,11 +408,9 @@ showing_pixmaps_changed_notify(GConfClient            *client,
 
                 gtk_widget_show(pixmap);
                 
-                gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(mi),
-                                                pixmap);
-                
-        } else if (!new_setting && (mi->pixmap != NULL)) {
-                gtk_container_remove(GTK_CONTAINER(mi), mi->pixmap);
+		g_object_set(G_OBJECT(mi), "image", pixmap, NULL);
+        } else if (!new_setting && (mi->image != NULL)) {
+		g_object_set(G_OBJECT(mi), "image", NULL, NULL);
         }
 }
 
@@ -433,13 +430,13 @@ remove_notify_cb(GtkObject *obj, gpointer data)
 }
 
 static void
-setup_pixmap_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
-                       gconstpointer pixmap_info)
+setup_image_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
+		      gconstpointer pixmap_info)
 {
         guint notify_id;
         GConfClient *conf;
         
-        g_return_if_fail(GTK_IS_PIXMAP_MENU_ITEM(mi));
+        g_return_if_fail(GTK_IS_IMAGE_MENU_ITEM(mi));
 
         gtk_object_set_data(GTK_OBJECT(mi), gnome_app_helper_pixmap_type,
                             GINT_TO_POINTER(pixmap_type));
@@ -463,8 +460,7 @@ setup_pixmap_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
 
                 gtk_widget_show(pixmap);
                 
-                gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(mi),
-                                                pixmap);
+		g_object_set(G_OBJECT(mi), "image", pixmap, NULL);
         }
 
         notify_id = gconf_client_notify_add(conf,
@@ -984,11 +980,12 @@ create_menu_item (GtkMenuShell       *menu_shell,
 
 		        if ((uiinfo->pixmap_type != GNOME_APP_PIXMAP_NONE) &&
 			    gnome_preferences_get_menus_have_icons()) {
-			        uiinfo->widget = gtk_pixmap_menu_item_new ();
+			        uiinfo->widget = gtk_image_menu_item_new (NULL,
+									  uiinfo->label ? uiinfo->label : "");
 
-                                setup_pixmap_menu_item(uiinfo->widget,
-                                                       uiinfo->pixmap_type, 
-                                                       uiinfo->pixmap_info);
+                                setup_image_menu_item(uiinfo->widget,
+						      uiinfo->pixmap_type, 
+						      uiinfo->pixmap_info);
 			} else
 			        uiinfo->widget = gtk_menu_item_new ();
 		}

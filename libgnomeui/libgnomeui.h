@@ -74,7 +74,6 @@
 #include <libgnomeui/gnome-client.h>
 #include <libgnomeui/gtk-clock.h>
 #include <libgnomeui/gtkdial.h>
-#include <libgnomeui/gtkpixmapmenuitem.h>
 #include <libgnomeui/gnome-dateedit.h>
 #include <libgnomeui/gnome-mdi.h>
 #include <libgnomeui/gnome-mdi-child.h>

@@ -1,5 +1,11 @@
 2001-04-26  Martin Baulig  <baulig@suse.de>
 
+	* gnome-app-helper.c: Use GtkImageMenuItem, not GtkPixmapMenuItem.
+
+	* gtkpixmapmenuitem.[ch]: Removed.
+
+2001-04-26  Martin Baulig  <baulig@suse.de>
+
 	* gnome-file-saver.[ch]: Removed.
 
 2001-04-26  Martin Baulig  <baulig@suse.de>
