@@ -1,5 +1,10 @@
 1998-03-01  Eckehard Berns  <eb@berns.prima.de>
 
+	* gnome-pixmap.c (gnome_pixmap_expose): I have to draw the pixmap on
+	every expose :-(
+
+1998-03-01  Eckehard Berns  <eb@berns.prima.de>
+
 	* gnome-pixmap.c: fixed GnomePixmaps positioning.
 
 	* gnome-stock.c (..._size_request): request size of current pixmap
