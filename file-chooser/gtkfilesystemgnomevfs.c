@@ -298,7 +298,6 @@ GtkFileSystem *
 gtk_file_system_gnome_vfs_new (void)
 {
   GtkFileSystemGnomeVFS *system_vfs;
-  GtkFilePath *local_path;
 
   gnome_vfs_init ();
 
@@ -554,14 +553,24 @@ gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
   volume = NULL;
 
   if (gnome_vfs_uri_is_local (uri))
-    {
-      const char *local_path;
+    while (uri)
+      {
+	const char *local_path;
+	GnomeVFSURI *parent;
 
-      local_path = gnome_vfs_uri_get_path (uri);
-      volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, local_path);
-    }
+	local_path = gnome_vfs_uri_get_path (uri);
+	volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, local_path);
 
-  gnome_vfs_uri_unref (uri);
+	if (gnome_vfs_volume_is_user_visible (volume))
+	  break;
+
+	parent = gnome_vfs_uri_get_parent (uri);
+	gnome_vfs_uri_unref (uri);
+	uri = parent;
+      }
+
+  if (uri)
+    gnome_vfs_uri_unref (uri);
 
   return (GtkFileSystemVolume *) volume;
 }

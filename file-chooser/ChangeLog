@@ -1,3 +1,10 @@
+2004-01-19  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_get_volume_for_path): Look upwards
+	through the parents of the path until we get a volume that is
+	user-visible.
+
 2004-01-15  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystemgnomevfs.c
