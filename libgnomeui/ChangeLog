@@ -1,3 +1,11 @@
+1998-10-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (create_radio_menu_items): Now returns the
+	updated `pos' parameter, since the functions that call it need it.
+	(create_help_entries): Likewise.
+	(gnome_app_fill_menu_custom): Update the position from
+	create_help_entries() and create_radio_menu_items().
+
 1998-10-29  Seth Alves  <alves@hungry.com>
 
 	* gnome-paper-selector.c (set_widgets_from_paper): pulled common

@@ -249,8 +249,8 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, Gnome
 		(* uibdata->connect_func) (uiinfo, "activate", uibdata);
 }
 
-/* Creates a group of radio menu items */
-static void
+/* Creates a group of radio menu items.  Returns the updated position parameter. */
+static int
 create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata, int right_justify,
 			 GtkAccelGroup *accel_group, int indent_missing_pixmaps, GtkAccelGroup *menu_accel_group, gint pos)
 {
@@ -282,6 +282,8 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIB
 			g_warning ("GnomeUIInfo element type %d is not valid inside a menu radio item group",
 				   (int) uiinfo->type);
 		}
+
+	return pos;
 }
 
 /* Frees a help menu entry when its corresponding menu item is destroyed */
@@ -297,8 +299,8 @@ free_help_menu_entry (GtkWidget *widget, gpointer data)
 	g_free (entry);
 }
 
-/* Creates the menu entries for help topics */
-static void
+/* Creates the menu entries for help topics.  Returns the updated position value. */
+static int
 create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int right_justify,
                      GtkAccelGroup *menu_accel_group, gint pos)
 {
@@ -314,7 +316,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int right_ju
 
 	if (!uiinfo->moreinfo) {
 		g_warning ("GnomeUIInfo->moreinfo cannot be NULL for GNOME_APP_UI_HELP");
-		return;
+		return pos;
 	}
 
 	/* Try to open help topics file */
@@ -327,7 +329,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int right_ju
 		if (topic_file)
 			g_free (topic_file);
 
-		return;
+		return pos;
 	}
 
 	/* Read in the help topics and create menu items for them */
@@ -375,8 +377,9 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int right_ju
 	}
 
 	fclose (file);
-	
 	uiinfo->widget = NULL; /* No relevant widget, as we may have created several of them */
+
+	return pos;
 }
 
 /* Returns the menu's internal accel_group, or creates a new one if no accel_group was attached */
@@ -477,13 +480,13 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, Gnome
 
 		case GNOME_APP_UI_HELP:
 			/* Create entries for the help topics */
-			create_help_entries (menu_shell, uiinfo, right_justify, menu_accel_group, pos);
+			pos = create_help_entries (menu_shell, uiinfo, right_justify, menu_accel_group, pos);
 			break;
 
 		case GNOME_APP_UI_RADIOITEMS:
 			/* Create the radio item group */
-			create_radio_menu_items (menu_shell, uiinfo->moreinfo, uibdata, right_justify, accel_group,
-						 indent_missing_pixmaps, menu_accel_group, pos);
+			pos = create_radio_menu_items (menu_shell, uiinfo->moreinfo, uibdata, right_justify, accel_group,
+						       indent_missing_pixmaps, menu_accel_group, pos);
 			break;
 
 		case GNOME_APP_UI_SEPARATOR:
