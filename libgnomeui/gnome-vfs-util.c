@@ -130,7 +130,9 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
 	}
     }
 
-    if (result != GNOME_VFS_OK) {
+    gdk_pixbuf_loader_close (loader, NULL);
+    
+    if (result != GNOME_VFS_OK && result != GNOME_VFS_ERROR_EOF) {
 	g_object_unref (G_OBJECT (loader));
 	gnome_vfs_close (handle);
 	return NULL;
