@@ -1,3 +1,8 @@
+2001-05-23  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector-client.c (gnome_selector_client_construct): Create the
+	property bag and use the factory.
+
 2001-05-21  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-client.c (PROP_WANT_ENTRY_WIDGET, PROP_WANT_SELECTOR_WIDGET,
