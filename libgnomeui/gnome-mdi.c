@@ -172,13 +172,13 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
 					      object_class->type,
 					      GTK_SIGNAL_OFFSET (GnomeMDIClass, create_menus),
 					      gnome_mdi_marshal_1,
-					      GTK_TYPE_POINTER, 1, GTK_TYPE_POINTER);
+					      gtk_widget_get_type(), 1, GTK_TYPE_POINTER);
   mdi_signals[CREATE_TOOLBAR] = gtk_signal_new ("create_toolbar",
 						GTK_RUN_LAST,
 						object_class->type,
 						GTK_SIGNAL_OFFSET (GnomeMDIClass, create_toolbar),
 						gnome_mdi_marshal_1,
-						GTK_TYPE_POINTER, 1, GTK_TYPE_POINTER);
+						gtk_widget_get_type(), 1, GTK_TYPE_POINTER);
   mdi_signals[ADD_CHILD] = gtk_signal_new ("add_child",
 					   GTK_RUN_LAST,
 					   object_class->type,

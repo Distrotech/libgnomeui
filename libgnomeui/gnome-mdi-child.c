@@ -10,6 +10,7 @@ static void gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void gnome_mdi_child_init             (GnomeMDIChild *);
 static void gnome_mdi_child_destroy          (GtkObject *);
 
+/* declare the functions from gnome-mdi.c that we need but are not public */
 void child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
 void child_list_menu_add_item(GnomeMDI *, GnomeMDIChild *);
 
@@ -20,16 +21,16 @@ enum {
 };
 
 typedef GtkWidget *(*GnomeMDIChildSignal1) (GtkObject *, gpointer);
-typedef GtkWidget *(*GnomeMDIChildSignal2) (GtkObject *, gpointer, gpointer);
+typedef GList     *(*GnomeMDIChildSignal2) (GtkObject *, gpointer, gpointer);
 
 static GtkObjectClass *parent_class = NULL;
 
 static gint mdi_child_signals[LAST_SIGNAL];
 
 static void gnome_mdi_child_marshal_1 (GtkObject	    *object,
-				      GtkSignalFunc   func,
-				      gpointer	    func_data,
-				      GtkArg	    *args) {
+				       GtkSignalFunc   func,
+				       gpointer	    func_data,
+				       GtkArg	    *args) {
   GnomeMDIChildSignal1 rfunc;
   gpointer *return_val;
   
@@ -40,9 +41,9 @@ static void gnome_mdi_child_marshal_1 (GtkObject	    *object,
 }
 
 static void gnome_mdi_child_marshal_2 (GtkObject	    *object,
-				      GtkSignalFunc   func,
-				      gpointer	    func_data,
-				      GtkArg	    *args) {
+				       GtkSignalFunc   func,
+				       gpointer	    func_data,
+				       GtkArg	    *args) {
   GnomeMDIChildSignal2 rfunc;
   gpointer *return_val;
   
@@ -84,7 +85,7 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *class) {
 						  object_class->type,
 						  GTK_SIGNAL_OFFSET (GnomeMDIChildClass, create_view),
 						  gnome_mdi_child_marshal_1,
-						  GTK_TYPE_POINTER, 0);
+						  gtk_widget_get_type(), 0);
   mdi_child_signals[CREATE_MENUS] = gtk_signal_new ("create_menus",
 						  GTK_RUN_LAST,
 						  object_class->type,

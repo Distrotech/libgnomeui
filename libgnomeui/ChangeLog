@@ -1,3 +1,9 @@
+1998-09-12  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c, gnome-mdi-child.c: changed some GTK_TYPE_POINTERs
+	in parameters passed to gtk_signal_new() to gtk_widget_get_type()
+	calls.
+	
 1998-09-11  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-child.c (gnome_mdi_child_set_name): moved the
