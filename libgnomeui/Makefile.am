@@ -200,8 +200,6 @@ gnome_headers = \
 	gnome-pouch.h			\
 	gnome-preferences.h		\
 	gnome-propertybox.h		\
-	gnome-properties.h     		\
-	gnome-property-entries.h	\
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
 	gnome-roo.h			\
