@@ -1,3 +1,9 @@
+Sun Oct 21 01:56:11 2001  George Lebl <jirka@5z.com>
+
+	* gnome-font-picker.c: fix font size foo, some other small fixes to
+	  use of pango,  Properly set use_label/size, add properties for
+	  use label, use label size, and show size.
+
 Sun Oct 21 00:24:59 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui.h: add font-picker it's now installed

@@ -79,8 +79,13 @@ enum {
 	PROP_TITLE,
 	PROP_MODE,
 	PROP_FONT_NAME,
-	PROP_FONT,
-	PROP_PREVIEW_TEXT
+	PROP_PREVIEW_TEXT,
+	PROP_USE_FONT_IN_LABEL,
+	PROP_LABEL_FONT_SIZE,
+	PROP_SHOW_SIZE,
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+	PROP_FONT
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
 };
 
 /* Prototypes */
@@ -174,6 +179,7 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 				      _(DEF_FONT_NAME),
 				      (G_PARAM_READABLE |
 				       G_PARAM_WRITABLE)));
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 	g_object_class_install_property
 		(gobject_class,
 		 PROP_FONT,
@@ -181,6 +187,7 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 				       _("Font"),
 				       _("The selected GtkFont"),
 				       G_PARAM_READABLE));
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
 	g_object_class_install_property
 		(gobject_class,
 		 PROP_PREVIEW_TEXT,
@@ -188,6 +195,35 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 				      _("Preview text"),
 				      _("Preview text shown in the dialog"),
 				      _(DEF_PREVIEW_TEXT),
+				      (G_PARAM_READABLE |
+				       G_PARAM_WRITABLE)));
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_USE_FONT_IN_LABEL,
+		 g_param_spec_boolean ("use-font-in-label",
+				       _("Use font in label"),
+				       _("Use font in the label in font info mode"),
+				       FALSE,
+				       (G_PARAM_READABLE |
+					G_PARAM_WRITABLE)));
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_LABEL_FONT_SIZE,
+		 g_param_spec_int ("label-font-size",
+				   _("Font size for label"),
+				   _("Font size for label in font info mode"),
+				   8 /* min */,
+				   72 /* max */,
+				   14 /* default */,
+				   (G_PARAM_READABLE |
+				    G_PARAM_WRITABLE)));
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_SHOW_SIZE,
+		 g_param_spec_boolean ("show-size",
+				      _("Show size"),
+				      _("Show size in font info mode"),
+				      TRUE,
 				      (G_PARAM_READABLE |
 				       G_PARAM_WRITABLE)));
 
@@ -243,7 +279,7 @@ gnome_font_picker_destroy (GtkObject *object)
 
     /* remember, destroy can be run multiple times! */
 
-    gfp = GNOME_FONT_PICKER(object);
+    gfp = GNOME_FONT_PICKER (object);
     
     if (gfp->_priv->font_dialog != NULL) {
 	    gtk_widget_destroy (gfp->_priv->font_dialog);
@@ -312,6 +348,21 @@ gnome_font_picker_set_property (GObject *object,
 		gnome_font_picker_set_preview_text
 			(self, g_value_get_string (value));
 		break;
+	case PROP_USE_FONT_IN_LABEL:
+		gnome_font_picker_fi_set_use_font_in_label
+			(self, g_value_get_boolean (value),
+			 self->_priv->use_font_in_label_size);
+		break;
+	case PROP_LABEL_FONT_SIZE:
+		gnome_font_picker_fi_set_use_font_in_label
+			(self,
+			 self->_priv->use_font_in_label,
+			 g_value_get_int (value));
+		break;
+	case PROP_SHOW_SIZE:
+		gnome_font_picker_fi_set_show_size
+			(self, g_value_get_boolean (value));
+		break;
 
 	default:
 		break;
@@ -342,13 +393,28 @@ gnome_font_picker_get_property (GObject *object,
 		g_value_set_string (value,
 				    gnome_font_picker_get_font_name (self));
 		break;
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 	case PROP_FONT:
 		g_value_set_pointer (value, gnome_font_picker_get_font (self));
 		break;
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
 	case PROP_PREVIEW_TEXT:
 		g_value_set_string (value,
 				    gnome_font_picker_get_preview_text (self));
 		break;
+	case PROP_USE_FONT_IN_LABEL:
+		g_value_set_boolean (value,
+				     self->_priv->use_font_in_label);
+		break;
+	case PROP_LABEL_FONT_SIZE:
+		g_value_set_int (value,
+				 self->_priv->use_font_in_label_size);
+		break;
+	case PROP_SHOW_SIZE:
+		g_value_set_boolean (value,
+				     self->_priv->show_size);
+		break;
+
 	default:
 		break;
 	}
@@ -502,23 +568,25 @@ void  gnome_font_picker_fi_set_use_font_in_label (GnomeFontPicker *gfp,
                                                   gboolean use_font_in_label,
                                                   gint size)
 {
-    g_return_if_fail (gfp != NULL);
-    g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
+	gboolean old_use_font_in_label;
+	int old_size;
 
-    if (gfp->_priv->mode==GNOME_FONT_PICKER_MODE_FONT_INFO) {
-        if (gfp->_priv->use_font_in_label!=use_font_in_label ||
-	    gfp->_priv->use_font_in_label_size!=size) {
+	g_return_if_fail (gfp != NULL);
+	g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
 
-            gfp->_priv->use_font_in_label=use_font_in_label;
-            gfp->_priv->use_font_in_label_size=size;
+	old_use_font_in_label = gfp->_priv->use_font_in_label;
+	old_size = gfp->_priv->use_font_in_label_size;
+	gfp->_priv->use_font_in_label = use_font_in_label;
+	gfp->_priv->use_font_in_label_size = size;
 
-            if (!gfp->_priv->use_font_in_label)
-                gtk_widget_restore_default_style(gfp->_priv->font_label);
-            else
-                gnome_font_picker_label_use_font_in_label(gfp);
-        }
-    }
-
+	if (gfp->_priv->mode == GNOME_FONT_PICKER_MODE_FONT_INFO &&
+	    (old_use_font_in_label != use_font_in_label ||
+	     old_size != size)) {
+		if (gfp->_priv->use_font_in_label)
+			gnome_font_picker_label_use_font_in_label (gfp);
+		else
+			gtk_widget_restore_default_style (gfp->_priv->font_label);
+	}
 } /* gnome_font_picker_fi_set_use_font_in_label */
 
 
@@ -942,14 +1010,15 @@ gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
 
 	/* Change size */
 	pango_font_description_set_size (desc,
-					 gfp->_priv->use_font_in_label_size);
+					 gfp->_priv->use_font_in_label_size *
+					 PANGO_SCALE);
 
 	/* FIXME: listen for style changes */
 	/* Change label style */
 	gtk_widget_ensure_style (gfp->_priv->font_label);
 	style = gtk_style_copy (gfp->_priv->font_label->style);
 	if (style->font_desc != NULL)
-		g_object_unref (G_OBJECT (style->font_desc));
+		pango_font_description_free (style->font_desc);
 
 	style->font_desc = desc;
 
@@ -978,7 +1047,7 @@ gnome_font_picker_update_font_info (GnomeFontPicker *gfp)
 	/* Extract font size */
 	if (gfp->_priv->show_size) {
 		int size = pango_font_description_get_size (desc);
-		char *size_str = g_strdup_printf ("%d", size);
+		char *size_str = g_strdup_printf ("%d", size / PANGO_SCALE);
 
 		gtk_label_set_text (GTK_LABEL (gfp->_priv->size_label), size_str);
 
