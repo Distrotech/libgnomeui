@@ -1,3 +1,9 @@
+1999-06-24  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-dock.c (gnome_dock_size_allocate): set minimum child
+	allocation width or height to 1 instead of 0. prevents some Gdk
+	segfaults.
+
 1999-06-24  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
 
 	* Added gtkrc.* files for all encodings I know of. Still missing is

@@ -378,7 +378,7 @@ gnome_dock_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
                                     allocation->width,
                                     -1);
 
-  child_allocation.height = MAX (bottom_bands_y - top_bands_y, 0);
+  child_allocation.height = MAX (bottom_bands_y - top_bands_y, 1);
 
   left_bands_x = size_allocate_v (dock->left_bands,
                                   allocation->x,
@@ -392,7 +392,7 @@ gnome_dock_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
                                    child_allocation.height,
                                    -1);
 
-  child_allocation.width = MAX (right_bands_x - left_bands_x, 0);
+  child_allocation.width = MAX (right_bands_x - left_bands_x, 1);
 
   child_allocation.x = left_bands_x;
   child_allocation.y = top_bands_y;
