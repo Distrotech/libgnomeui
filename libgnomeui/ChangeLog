@@ -1,3 +1,10 @@
+1998-12-21  James Henstridge  <james@daa.com.au>
+
+	* gnome-app-helper.c (gnome_app_remove_menu{s,_range}): don't
+	destroy widgets after calling gtk_container_remove on them.
+	The widgets should be automatically destroyed when their reference
+	count is decremented.
+
 1998-12-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-sel.c (gnome_icon_selection_init): Put a frame around

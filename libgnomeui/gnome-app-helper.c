@@ -1372,7 +1372,6 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
 		child = GTK_WIDGET(children->data);
 		children = children->next;
 		gtk_container_remove(GTK_CONTAINER(parent), child);
-    gtk_widget_destroy(child);
 		items--;
 	}
 	
@@ -1424,7 +1423,6 @@ gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items)
     child = GTK_WIDGET(children->data);
     children = children->next;
     gtk_container_remove(GTK_CONTAINER(parent), child);
-    gtk_widget_destroy(child);
     items--;
   }
 
