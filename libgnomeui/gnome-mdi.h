@@ -67,16 +67,15 @@ typedef enum {
   GNOME_MDI_NOTEBOOK,
   GNOME_MDI_TOPLEVEL,
   GNOME_MDI_MODAL,
-  GNOME_MDI_MS,
   GNOME_MDI_DEFAULT_MODE = 42,
   GNOME_MDI_REDRAW = -1		/* do not change mode, just ``redraw'' the display */
 } GnomeMDIMode;
 
-/* the following keys are used to gtk_object_set_data() copies of the appropriate menu and toolbar templates
- * to their GnomeApps. gtk_object_get_data(gnome_mdi_view_get_toplevel(view), key) will give you a pointer to
- * the data if you have a pointer to a view. this might be useful for enabling/disabling menu items (via
- * ui_info[i]->widget) when certain events happen. these GnomeUIInfo structures are exact copies of the
- * template GnomeUIInfo trees.
+/* the following keys are used to gtk_object_set_data() copies of the appropriate menu and
+ * toolbar templates to their GnomeApps. gtk_object_get_data(gnome_mdi_view_get_toplevel(view),
+ * key) will give you a pointer to the data if you have a pointer to a view. this might be
+ * useful for enabling/disabling menu items (via ui_info[i]->widget) when certain events
+ * happen. these GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees.
  */
 #define GNOME_MDI_TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
 #define GNOME_MDI_MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
@@ -155,6 +154,8 @@ void          gnome_mdi_set_window_view     (GnomeMDI *, GnomeApp *, GtkWidget *
 gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_child        (GnomeMDI *, GnomeMDIChild *, gint);
 gint          gnome_mdi_remove_all          (GnomeMDI *, gint);
+
+void          gnome_mdi_open_toplevel       (GnomeMDI *);
 
 void          gnome_mdi_update_child        (GnomeMDI *, GnomeMDIChild *);
 

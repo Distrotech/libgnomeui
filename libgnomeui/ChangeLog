@@ -1,3 +1,16 @@
+1998-10-12  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.h: remove GNOME_MDI_MS from GnomeMDIMode enums.
+	(gnome_mdi_open_toplevel): new function.
+	* gnome-mdi.c: removed all conditional code depending on
+	GNOME_MDI_MS.
+	(gnome_mdi_open_toplevel): new function.
+	(gnome_mdi_init): set initial mode to the one selected in
+	look and feel properties.
+	(gnome_mdi_set_mode): fix to accomodate the previous change.
+	(gnome_mdi_add_view, gnome_mdi_add_toplevel_view): fixed to
+	open a new toplevel if there isn't one.
+	
 1998-10-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-text.c (gnome_canvas_text_draw): Fixed stupid bug,

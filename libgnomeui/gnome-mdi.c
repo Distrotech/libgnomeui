@@ -265,7 +265,7 @@ static void gnome_mdi_destroy(GtkObject *object) {
 static void gnome_mdi_init (GnomeMDI *mdi) {
   gchar hostname[128] = "\0", pid[12];
 
-  mdi->mode = GNOME_MDI_DEFAULT_MODE;
+  mdi->mode = gnome_preferences_get_mdi_mode();
   mdi->tab_pos = gnome_preferences_get_mdi_tab_pos();
 
   mdi->children = NULL;
@@ -906,10 +906,6 @@ static void app_create(GnomeMDI *mdi) {
     func = GTK_SIGNAL_FUNC(app_close_top);
   else if(mdi->mode == GNOME_MDI_NOTEBOOK)
     func = GTK_SIGNAL_FUNC(app_close_book);
-#if 0
-  else if(mdi->mode == GNOME_MDI_MS)
-    func = GTK_SIGNAL_FUNC(app_close_ms);
-#endif
 
   gtk_signal_connect(GTK_OBJECT(window), "delete_event",
                      func, mdi);
@@ -1056,8 +1052,16 @@ gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
     return FALSE;
   }
 
-  if(mdi->mode == GNOME_MDI_NOTEBOOK)
+  if(mdi->active_window == NULL) {
+    app_create(mdi);
+    gtk_widget_show(GTK_WIDGET(mdi->active_window));
+  }
+
+  if(mdi->mode == GNOME_MDI_NOTEBOOK) {
+    if(mdi->active_window->contents == NULL)
+      book_create(mdi);
     book_add_view(GTK_NOTEBOOK(mdi->active_window->contents), view);
+  }
   else if(mdi->mode == GNOME_MDI_TOPLEVEL)
     /* add a new toplevel unless the remaining one is empty */
     top_add_view(mdi, child, view);
@@ -1071,10 +1075,6 @@ gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
     gnome_app_set_contents(mdi->active_window, view);
     app_set_view(mdi, mdi->active_window, view);
   }
-#if 0
-  else if(mdi->mode == GNOME_MDI_MS)
-    gnome_mdi_pouch_add(GNOME_MDI_POUCH(mdi->active_window->contents), view);
-#endif
 
   gtk_widget_show(view);
 
@@ -1102,14 +1102,20 @@ gint gnome_mdi_add_toplevel_view(GnomeMDI *mdi, GnomeMDIChild *child) {
     return FALSE;
   }
 
+  if(mdi->active_window == NULL) {
+    app_create(mdi);
+    gtk_widget_show(GTK_WIDGET(mdi->active_window));
+  } 
+
   if(mdi->mode == GNOME_MDI_NOTEBOOK) {
-    /* add a new toplevel unless the current one is empty */
-    if (mdi->active_window->contents &&
-	GTK_NOTEBOOK (mdi->active_window->contents)->cur_page) {
+    if(mdi->active_window->contents == NULL)
+      book_create(mdi);
+    else if(GTK_NOTEBOOK(mdi->active_window->contents)->cur_page) {
       app_create(mdi);
       book_create(mdi);
       gtk_widget_show(GTK_WIDGET(mdi->active_window));
     }
+    /* add a new toplevel unless the current one is empty */
     book_add_view(GTK_NOTEBOOK(mdi->active_window->contents), view);
   }
   else if(mdi->mode == GNOME_MDI_TOPLEVEL)
@@ -1125,10 +1131,6 @@ gint gnome_mdi_add_toplevel_view(GnomeMDI *mdi, GnomeMDIChild *child) {
     gnome_app_set_contents(mdi->active_window, view);
     app_set_view(mdi, mdi->active_window, view);
   }
-#if 0
-  else if(mdi->mode == GNOME_MDI_MS)
-    gnome_mdi_pouch_add(GNOME_MDI_POUCH(mdi->active_window->contents), view);
-#endif
 
   gtk_widget_show(view);
 
@@ -1158,14 +1160,7 @@ gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {
 
   window = gnome_mdi_get_app_from_view(view);
 
-#if 0
-  if(mdi->mode == GNOME_MDI_MS)
-    gnome_mdi_pouch_remove(GNOME_MDI_POUCH(GTK_WIDGET(parent)->parent), view);
-  else
-    gtk_container_remove(GTK_CONTAINER(parent), view);
-#else
   gtk_container_remove(GTK_CONTAINER(parent), view);
-#endif
 
   if( (mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL) ) {
     window->contents = NULL;
@@ -1280,6 +1275,17 @@ gint gnome_mdi_remove_all(GnomeMDI *mdi, gint force) {
   return TRUE;
 }
 
+void gnome_mdi_open_toplevel(GnomeMDI *mdi) {
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+
+  app_create(mdi);
+  if(mdi->mode == GNOME_MDI_NOTEBOOK)
+    book_create(mdi);
+
+  gtk_widget_show(GTK_WIDGET(mdi->active_window));
+}
+
 void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {
   GtkWidget *view;
   GList *view_node;
@@ -1344,6 +1350,9 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
   if(mode == GNOME_MDI_DEFAULT_MODE)
     mode = gnome_preferences_get_mdi_mode();
 
+  if(mdi->windows == NULL)
+    gnome_mdi_open_toplevel(mdi);
+
   if(mode == GNOME_MDI_REDRAW)
     mode = mdi->mode;
   else if(mdi->mode == mode)
@@ -1391,13 +1400,6 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
 
   if(mdi->mode == GNOME_MDI_NOTEBOOK)
     book_create(mdi);
-#if 0
-  else if(mdi->mode == GNOME_MDI_MS) {
-    us = gnome_mdi_pouch_new();
-    gtk_widget_show(us);
-    gnome_app_set_contents(mdi->active_window, us);
-  }
-#endif
 
   /* re-implant views in proper containers */
   child_node = mdi->children;
@@ -1424,10 +1426,6 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
         gnome_app_set_contents(mdi->active_window, view);
         app_set_view(mdi, mdi->active_window, view);
       }
-#if 0
-      else if(mdi->mode == GNOME_MDI_MS)
-        gnome_mdi_pouch_add(GNOME_MDI_POUCH(mdi->active_window->contents), view);
-#endif
 
       view_node = g_list_next(view_node);
     }
