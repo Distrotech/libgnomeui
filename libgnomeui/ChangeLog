@@ -1,3 +1,8 @@
+1998-12-12  James Henstridge  <james@daa.com.au>
+
+	* gnome-href.c: small cosmetic change for this widget.  Now the cursor
+	is the hand cursor, as in netscape.
+
 1998-12-12  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (set_page_by_widget): don't touch GtkNotebook's

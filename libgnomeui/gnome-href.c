@@ -26,6 +26,7 @@ static void gnome_href_class_init(GnomeHRefClass *klass);
 static void gnome_href_init(GnomeHRef *href);
 static void gnome_href_clicked(GtkButton *button);
 static void gnome_href_destroy(GtkObject *object);
+static void gnome_href_realize(GtkWidget *widget);
 
 static GtkObjectClass *parent_class;
 
@@ -55,12 +56,15 @@ guint gnome_href_get_type(void) {
 
 static void gnome_href_class_init(GnomeHRefClass *klass) {
   GtkObjectClass *object_class;
+  GtkWidgetClass *widget_class;
   GtkButtonClass *button_class;
 
   object_class = GTK_OBJECT_CLASS(klass);
+  widget_class = GTK_WIDGET_CLASS(klass);
   button_class = GTK_BUTTON_CLASS(klass);
   parent_class = GTK_OBJECT_CLASS(gtk_type_class(gtk_button_get_type()));
   object_class->destroy = gnome_href_destroy;
+  widget_class->realize = gnome_href_realize;
   button_class->clicked = gnome_href_clicked;
 }
 
@@ -210,4 +214,14 @@ static void gnome_href_destroy(GtkObject *object) {
     g_free(self->url);
   if (parent_class->destroy)
     (* parent_class->destroy)(object);
+}
+
+static void gnome_href_realize(GtkWidget *widget) {
+  GdkCursor *cursor;
+
+  if (GTK_WIDGET_CLASS(parent_class)->realize)
+    (* GTK_WIDGET_CLASS(parent_class)->realize)(widget);
+  cursor = gdk_cursor_new(GDK_HAND2);
+  gdk_window_set_cursor(widget->window, cursor);
+  gdk_cursor_destroy(cursor);
 }
