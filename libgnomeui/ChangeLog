@@ -1,3 +1,8 @@
+Mon Nov 29 09:17:02 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* gnome-app-helper.c: use GNOME_APP_PIXMAP_NONE instead of the
+          blank stock pixmap for configurable items.
+
 1999-11-28  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-pixmap.h: include gdk-pixbuf before gnome-defs, seems to

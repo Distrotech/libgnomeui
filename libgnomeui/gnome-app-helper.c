@@ -152,7 +152,7 @@ static GnomeUIInfo menu_defaults[] = {
 	/* Clear */
         { GNOME_APP_UI_ITEM, N_("C_lear"), N_("Clear the selection"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_APP_PIXMAP_NONE, NULL,
           GNOME_KEY_NAME_CLEAR, GNOME_KEY_MOD_CLEAR, NULL },
 	/* Undo */
         { GNOME_APP_UI_ITEM, N_("_Undo"), N_("Undo the last action"),
@@ -207,7 +207,7 @@ static GnomeUIInfo menu_defaults[] = {
 	{ GNOME_APP_UI_ITEM, N_("_Select All"),
           N_("Select everything"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_APP_PIXMAP_NONE, NULL,
           GNOME_KEY_NAME_SELECT_ALL, GNOME_KEY_MOD_SELECT_ALL, NULL },
 
 	/*
@@ -216,12 +216,12 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("Create New _Window"),
           N_("Create a new window"),
           NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_APP_PIXMAP_NONE, NULL,
           GNOME_KEY_NAME_NEW_WINDOW, GNOME_KEY_MOD_NEW_WINDOW, NULL },
         { GNOME_APP_UI_ITEM, N_("_Close This Window"),
           N_("Close the current window"),
           NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_APP_PIXMAP_NONE, NULL,
           GNOME_KEY_NAME_CLOSE_WINDOW, GNOME_KEY_MOD_CLOSE_WINDOW, NULL },
 
 	/*
@@ -230,7 +230,7 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("_New game"),
           N_("Start a new game"),
 	  NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_APP_PIXMAP_NONE, NULL,
           GNOME_KEY_NAME_NEW_GAME,  GNOME_KEY_MOD_NEW_GAME, NULL },
         { GNOME_APP_UI_ITEM, N_("_Pause game"),
           N_("Pause the game"), 
@@ -240,7 +240,7 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("_Restart game"),
           N_("Restart the game"),
 	  NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_APP_PIXMAP_NONE, NULL,
           0,  0, NULL },
         { GNOME_APP_UI_ITEM, N_("_Undo move"),
           N_("Undo the last move"),
@@ -255,7 +255,7 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("_Hint"),
           N_("Get a hint for your next move"),
 	  NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_APP_PIXMAP_NONE, NULL,
           0,  0, NULL },
 	/* 30 */
         { GNOME_APP_UI_ITEM, N_("_Scores..."),
@@ -266,7 +266,7 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("_End game"),
           N_("End the current game"),
 	  NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_APP_PIXMAP_NONE, NULL,
           0,  (GdkModifierType) 0, NULL }
 };
 
