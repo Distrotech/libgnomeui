@@ -1,3 +1,12 @@
+2001-10-13  Seth Nickell  <snickell@stanford.edu>
+
+	* libgnomeui.h:
+
+	gnome-font-picker.h is currently not an installed header
+	(nor is gnome-font-picker.c built, nor does it appear to
+	build on my system). Removing the include so things that
+	depend on libgnomeui will build.
+	
 2001-10-13  Bastien Nocera  <hadess@hadess.net>
 
 	* libgnomeui.h: gnome-font-picker.h was missing from the include
