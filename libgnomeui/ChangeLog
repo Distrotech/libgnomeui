@@ -1,3 +1,8 @@
+2002-02-12  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-about.c (gnome_about_display_credits_dialog): No need 
+	to call gtk_dialog_run here.
+
 2002-02-11  jacob berkman  <jacob@ximian.com>
 
 	* gnome-app-helper.c (do_ui_signal_connect):

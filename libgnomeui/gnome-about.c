@@ -182,11 +182,11 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 {
 	GtkWidget *dialog, *label, *hbox;
 	
-	dialog = gtk_dialog_new ();
-	gtk_window_set_title (GTK_WINDOW (dialog), _("Credits"));
-	
-	gtk_dialog_add_button (GTK_DIALOG (dialog),
-			       GTK_STOCK_OK, GTK_RESPONSE_OK);
+	dialog = gtk_dialog_new_with_buttons (_("Credits"),
+					      GTK_WINDOW (about),
+					      GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
+					      NULL);
 	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy), dialog);
 
@@ -213,8 +213,6 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 			  G_CALLBACK (gnome_about_update_translation_information_label), label);
 	
 	gtk_widget_show_all (dialog);
-	
-	gtk_dialog_run (GTK_DIALOG (dialog));
 }
 
 static void
