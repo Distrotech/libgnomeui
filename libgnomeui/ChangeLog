@@ -1,3 +1,17 @@
+1999-02-04  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-font-picker.[ch]:
+	- Added API docs.
+	- (gnome_font_picker_set_title): Made const-correct.
+	- Cast properly with GNOME_FONT_PICKER macro.
+	- Protect public functions with g_return_if_fail calls.
+	- Reformatted source a bit.
+	- Mark some internal function implementations static, as their
+	  prototypes were already marked this way.
+	- Add button mode enum value GNOME_FONT_PICKER_MODE_UNKNOWN for
+	  cases when no other mode is applicable.  (used only in error
+	  return values)
+
 1999-02-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dateedit.c (create_children): Set the proper flags for the

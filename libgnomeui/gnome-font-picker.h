@@ -32,7 +32,8 @@ BEGIN_GNOME_DECLS
 typedef enum {
     GNOME_FONT_PICKER_MODE_PIXMAP,
     GNOME_FONT_PICKER_MODE_FONT_INFO,
-    GNOME_FONT_PICKER_MODE_USER_WIDGET
+    GNOME_FONT_PICKER_MODE_USER_WIDGET,
+    GNOME_FONT_PICKER_MODE_UNKNOWN
 } GnomeFontPickerMode;
         
 
@@ -80,7 +81,7 @@ GtkType gnome_font_picker_get_type (void);
 GtkWidget *gnome_font_picker_new (void);
 
 /* Sets the title for the font selection dialog */
-void gnome_font_picker_set_title (GnomeFontPicker *gfp, char *title);
+void gnome_font_picker_set_title (GnomeFontPicker *gfp, const gchar *title);
 
 /* Button mode */
 GnomeFontPickerMode
@@ -100,20 +101,20 @@ void       gnome_font_picker_fi_set_show_size (GnomeFontPicker *gfp,
 
 /* With GNOME_FONT_PICKER_MODE_USER_WIDGET */
 void       gnome_font_picker_uw_set_widget    (GnomeFontPicker *gfp,
-                                                        GtkWidget *widget);
+                                               GtkWidget       *widget);
 
 /* Functions to interface with GtkFontSelectionDialog */
 gchar*	   gnome_font_picker_get_font_name    (GnomeFontPicker *gfp);
 
-GdkFont*   gnome_font_picker_get_font	       (GnomeFontPicker *gfp);
+GdkFont*   gnome_font_picker_get_font	      (GnomeFontPicker *gfp);
 
 gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
-                                                        const gchar       *fontname);
+                                               const gchar     *fontname);
 
 gchar*	   gnome_font_picker_get_preview_text (GnomeFontPicker *gfp);
 
 void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
-                                                 const gchar       *text);
+                                               const gchar     *text);
 
 
 END_GNOME_DECLS

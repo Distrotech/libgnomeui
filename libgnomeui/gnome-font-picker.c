@@ -217,6 +217,17 @@ gnome_font_picker_destroy (GtkObject *object)
  Public functions
  *************************************************************************/
 
+
+/**
+ * gnome_font_picker_new
+ *
+ * Description:
+ * Create new font picker widget.
+ *
+ * Returns:
+ * Pointer to new font picker widget.
+ */
+
 GtkWidget *
 gnome_font_picker_new (void)
 {
@@ -225,8 +236,17 @@ gnome_font_picker_new (void)
 
 
 
+/**
+ * gnome_font_picker_set_title
+ * @gfp: Pointer to GNOME font picker widget.
+ * @title: String containing font selection dialog title.
+ *
+ * Description:
+ * Sets the title for the font selection dialog.
+ */
+
 void
-gnome_font_picker_set_title (GnomeFontPicker *gfp, char *title)
+gnome_font_picker_set_title (GnomeFontPicker *gfp, const gchar *title)
 {
 	g_return_if_fail (gfp != NULL);
 	g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
@@ -241,16 +261,49 @@ gnome_font_picker_set_title (GnomeFontPicker *gfp, char *title)
             gtk_window_set_title(GTK_WINDOW(gfp->font_dialog),gfp->title);
 }
 
-/* Button Mode */
+
+/**
+ * gnome_font_picker_get_mode
+ * @gfp: Pointer to GNOME font picker widget.
+ *
+ * Description:
+ * Returns current font picker button mode (or what to show).  Possible
+ * values include %GNOME_FONT_PICKER_MODE_PIXMAP,
+ * %GNOME_FONT_PICKER_MODE_FONT_INFO, and 
+ * %GNOME_FONT_PICKER_MODE_USER_WIDGET.
+ *
+ * Returns:
+ * Button mode currently set in font picker widget, or 
+ * %GNOME_FONT_PICKER_MODE_UNKNOWN on error.
+ */
+
 GnomeFontPickerMode
-           gnome_font_picker_get_mode        (GnomeFontPicker *gfp)
+gnome_font_picker_get_mode        (GnomeFontPicker *gfp)
 {
+    g_return_val_if_fail (gfp != NULL, GNOME_FONT_PICKER_MODE_UNKNOWN);
+    g_return_val_if_fail (GNOME_IS_FONT_PICKER (gfp),
+			  GNOME_FONT_PICKER_MODE_UNKNOWN);
+
     return gfp->mode;
 } /* gnome_font_picker_get_mode */
 
+
+/**
+ * gnome_font_picker_set_mode
+ * @gfp: Pointer to GNOME font picker widget.
+ * @mode: Value of subsequent font picker button mode (or what to show)
+ *
+ * Description:
+ * Set value of subsequent font picker button mode (or what to show).
+ */
+
 void       gnome_font_picker_set_mode        (GnomeFontPicker *gfp,
-                                                        GnomeFontPickerMode mode)
+                                              GnomeFontPickerMode mode)
 {
+    g_return_if_fail (gfp != NULL);
+    g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
+    g_return_if_fail (mode != GNOME_FONT_PICKER_MODE_UNKNOWN);
+
     if (gfp->mode!=mode)
     {
         gfp->mode=mode;
@@ -267,15 +320,30 @@ void       gnome_font_picker_set_mode        (GnomeFontPicker *gfp,
     }
 } /* gnome_font_picker_set_mode */
 
-/* With  GNOME_FONT_PICKER_MODE_FONT_INFO */
-/* If use_font_in_label is true, font name will be writen using font choosed by user and
- using size passed to this function*/
-void       gnome_font_picker_fi_set_use_font_in_label (GnomeFontPicker *gfp,
-                                                        gboolean use_font_in_label,
-                                                        gint size)
+
+/**
+ * gnome_font_picker_fi_set_use_font_in_label
+ * @gfp: Pointer to GNOME font picker widget.
+ * @use_font_in_label: If %TRUE, font name will be written using font chosen.
+ * @size: Display font using this point size.
+ *
+ * Description:
+ * If @use_font_in_label is %TRUE, font name will be written using font chosen
+ * by user and using @size passed to this function.  This only applies if
+ * current button mode is %GNOME_FONT_PICKER_MODE_FONT_INFO.
+ */
+
+void  gnome_font_picker_fi_set_use_font_in_label (GnomeFontPicker *gfp,
+                                                  gboolean use_font_in_label,
+                                                  gint size)
 {
+    g_return_if_fail (gfp != NULL);
+    g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
+
     if (gfp->mode==GNOME_FONT_PICKER_MODE_FONT_INFO) {
-        if (gfp->use_font_in_label!=use_font_in_label || gfp->use_font_in_label_size!=size) {
+        if (gfp->use_font_in_label!=use_font_in_label ||
+	    gfp->use_font_in_label_size!=size) {
+
             gfp->use_font_in_label=use_font_in_label;
             gfp->use_font_in_label_size=size;
 
@@ -288,9 +356,24 @@ void       gnome_font_picker_fi_set_use_font_in_label (GnomeFontPicker *gfp,
 
 } /* gnome_font_picker_fi_set_use_font_in_label */
 
+
+/**
+ * gnome_font_picker_fi_set_show_size
+ * @gfp: Pointer to GNOME font picker widget.
+ * @show_size: %TRUE if font size should be displayed in dialog.
+ *
+ * Description:
+ * If @show_size is %TRUE, font size will be displayed along with font chosen
+ * by user.  This only applies if current button mode is
+ * %GNOME_FONT_PICKER_MODE_FONT_INFO.
+ */
+
 void       gnome_font_picker_fi_set_show_size (GnomeFontPicker *gfp,
                                                gboolean show_size)
 {
+    g_return_if_fail (gfp != NULL);
+    g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
+
     if (gfp->mode==GNOME_FONT_PICKER_MODE_FONT_INFO) {
         if (show_size!=gfp->show_size)
         {
@@ -308,10 +391,22 @@ void       gnome_font_picker_fi_set_show_size (GnomeFontPicker *gfp,
     }
 } /* gnome_font_picker_fi_set_show_size */
 
-/* With GNOME_FONT_PICKER-STYLE_USER_WIDGET */
+
+/**
+ * gnome_font_picker_uw_set_widget
+ * @gfp: Pointer to GNOME font picker widget.
+ * @widget: User widget to display for inside of font picker.
+ *
+ * Set the user-supplied @widget as the inside of the font picker.
+ * This only applies with GNOME_FONT_PICKER_MODE_USER_WIDGET.
+ */
+
 void       gnome_font_picker_uw_set_widget    (GnomeFontPicker *gfp,
                                                         GtkWidget *widget)
 {
+    g_return_if_fail (gfp != NULL);
+    g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
+
     if (gfp->mode==GNOME_FONT_PICKER_MODE_USER_WIDGET) {
         if (gfp->inside)
             gtk_container_remove(GTK_CONTAINER(gfp),gfp->inside);
@@ -323,9 +418,22 @@ void       gnome_font_picker_uw_set_widget    (GnomeFontPicker *gfp,
 
 } /* gnome_font_picker_uw_set_widget */
 
+
+/**
+ * gnome_font_picker_get_font_name
+ * @gfp: Pointer to GNOME font picker widget.
+ *
+ * Description:
+ * Retrieve name of font from font selection dialog.
+ *
+ * Returns:
+ * Pointer to an internal copy of the font name.
+ */
+
 gchar*	   gnome_font_picker_get_font_name    (GnomeFontPicker *gfp)
 {
-    g_return_val_if_fail(gfp != NULL, NULL);
+    g_return_val_if_fail (gfp != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_FONT_PICKER (gfp), NULL);
 
     if (gfp->font_dialog) {
         if (gfp->font_name)
@@ -336,22 +444,51 @@ gchar*	   gnome_font_picker_get_font_name    (GnomeFontPicker *gfp)
     return gfp->font_name;
 } /* gnome_font_picker_get_font_name */
 
+
+/**
+ * gnome_font_picker_get_font
+ * @gfp: Pointer to GNOME font picker widget.
+ *
+ * Description:
+ * Retrieve font info from font selection dialog.
+ *
+ * Returns:
+ * Return value of gtk_font_selection_dialog_get_font, or %NULL if
+ * font dialog is not being displayed.
+ */
+
 GdkFont*   gnome_font_picker_get_font	       (GnomeFontPicker *gfp)
 {
-    g_return_val_if_fail(gfp != NULL, NULL);
+    g_return_val_if_fail (gfp != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_FONT_PICKER (gfp), NULL);
     
     return (gfp->font_dialog ?
              gtk_font_selection_dialog_get_font(GTK_FONT_SELECTION_DIALOG(gfp->font_dialog)) :
              NULL);
 } /* gnome_font_picker_get_font */
 
+
+/**
+ * gnome_font_picker_set_font_name
+ * @gfp: Pointer to GNOME font picker widget.
+ * @fontname: Name of font to display in font selection dialog
+ *
+ * Description:
+ * Set or update currently-displayed font in font picker dialog.
+ *
+ * Returns:
+ * Return value of gtk_font_selection_dialog_set_font_name if the
+ * font selection dialog exists, otherwise %FALSE.
+ */
+
 gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
                                                  const gchar       *fontname)
 {
     gchar *tmp;
     
-    g_return_val_if_fail(gfp != NULL, FALSE);
-    g_return_val_if_fail(fontname != NULL, FALSE);
+    g_return_val_if_fail (gfp != NULL, FALSE);
+    g_return_val_if_fail (GNOME_IS_FONT_PICKER (gfp), FALSE);
+    g_return_val_if_fail (fontname != NULL, FALSE);
 
     tmp=g_strdup(fontname);
     if (gfp->font_name) g_free(gfp->font_name);
@@ -363,9 +500,23 @@ gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
         return FALSE;
 } /* gnome-font_selector_set_font_name */
 
+
+/**
+ * gnome_font_picker_get_preview_text
+ * @gfp: Pointer to GNOME font picker widget.
+ *
+ * Description:
+ * Retrieve preview text from font selection dialog if available.
+ *
+ * Returns:
+ * Reference to internal copy of preview text string, or %NULL if no
+ * font dialog is being displayed.
+ */
+
 gchar*	   gnome_font_picker_get_preview_text (GnomeFontPicker *gfp)
 {
-    g_return_val_if_fail(gfp != NULL, NULL);
+    g_return_val_if_fail (gfp != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_FONT_PICKER (gfp), NULL);
 
     if (gfp->font_dialog) {
         if (gfp->preview_text)
@@ -377,13 +528,25 @@ gchar*	   gnome_font_picker_get_preview_text (GnomeFontPicker *gfp)
     
 } /* gnome_font_picker_get_preview_text */
 
+
+/**
+ * gnome_font_picker_set_preview_text
+ * @gfp: Pointer to GNOME font picker widget.
+ * @text: New preview text
+ *
+ * Description:
+ * Set preview text in font picker, and in font selection dialog if one
+ * is being displayed.
+ */
+
 void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
-                                                 const gchar       *text)
+                                               const gchar     *text)
 {
     gchar *tmp;
     
-    g_return_if_fail(gfp != NULL);
-    g_return_if_fail(text != NULL);
+    g_return_if_fail (gfp != NULL);
+    g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
+    g_return_if_fail (text != NULL);
 
     tmp=g_strdup(text);
     if (gfp->preview_text) g_free(gfp->preview_text);
@@ -409,7 +572,7 @@ gnome_font_picker_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoin
 		   func_data);
 } /* gnome_font_picker_marshal_signal_1 */
 
-void
+static void
 gnome_font_picker_clicked(GtkButton *button)
 {
     GnomeFontPicker      *gfp;
@@ -456,13 +619,13 @@ gnome_font_picker_clicked(GtkButton *button)
     }/* if */
 } /* gnome_font_picker_clicked */
 
-void
+static void
 gnome_font_picker_dialog_ok_clicked(GtkWidget *widget,
 				gpointer   data)
 {
     GnomeFontPicker *gfp;
 
-    gfp = data;
+    gfp = GNOME_FONT_PICKER (data);
 
     gtk_widget_hide(gfp->font_dialog);
     
@@ -480,13 +643,13 @@ gnome_font_picker_dialog_ok_clicked(GtkWidget *widget,
 } /* gnome_font_picker_dialog_ok_clicked */
 
 
-void
+static void
 gnome_font_picker_dialog_cancel_clicked(GtkWidget *widget,
 				    gpointer   data)
 {
     GnomeFontPicker *gfp;
 
-    gfp = data;
+    gfp = GNOME_FONT_PICKER (data);
 
     gtk_widget_hide(gfp->font_dialog);
 
@@ -496,13 +659,13 @@ gnome_font_picker_dialog_cancel_clicked(GtkWidget *widget,
 
 } /* gnome_font_picker_dialog_cancel_clicked */
 
-gboolean
+static gboolean
 gnome_font_picker_dialog_delete_event(GtkWidget *widget,GdkEventAny *ev,
                                           gpointer   data)
 {
     GnomeFontPicker *gfp;
 
-    gfp=(GnomeFontPicker *) data;
+    gfp = GNOME_FONT_PICKER (data);
     
     /* Here we restore old values */
     gnome_font_picker_set_font_name(gfp,gfp->font_name);
@@ -517,7 +680,7 @@ gnome_font_picker_dialog_destroy(GtkWidget *widget,
 {
     GnomeFontPicker *gfp;
 
-    gfp=(GnomeFontPicker *) data;
+    gfp = GNOME_FONT_PICKER (data);
     
     /* Query GtkFontSelectionDialog before it get destroyed */
     /* These calls will update gfp->font_name and gfp->preview_text */
