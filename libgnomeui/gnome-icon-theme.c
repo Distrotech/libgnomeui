@@ -929,15 +929,17 @@ theme_dir_destroy (IconThemeDir *dir)
 }
 
 static int
-theme_dir_size_difference (IconThemeDir *dir, int size)
+theme_dir_size_difference (IconThemeDir *dir, int size, gboolean *smaller)
 {
   int min, max;
   switch (dir->type)
     {
     case ICON_THEME_DIR_FIXED:
+      *smaller = size < dir->size;
       return abs (size - dir->size);
       break;
     case ICON_THEME_DIR_SCALABLE:
+      *smaller = size < dir->min_size;
       if (size < dir->min_size)
 	return dir->min_size - size;
       if (size > dir->max_size)
@@ -947,6 +949,7 @@ theme_dir_size_difference (IconThemeDir *dir, int size)
     case ICON_THEME_DIR_THRESHOLD:
       min = dir->size - dir->threshold;
       max = dir->size + dir->threshold;
+      *smaller = size < min;
       if (size < min)
 	return min - size;
       if (size > max)
@@ -1003,6 +1006,7 @@ theme_lookup_icon (IconTheme *theme,
   IconThemeDir *dir, *min_dir;
   char *file, *absolute_file;
   int min_difference, difference;
+  gboolean smaller, has_larger;
   IconSuffix suffix;
 
   l = theme->dirs;
@@ -1010,7 +1014,7 @@ theme_lookup_icon (IconTheme *theme,
     {
       dir = l->data;
 
-      if (theme_dir_size_difference (dir, size) == 0)
+      if (theme_dir_size_difference (dir, size, &smaller) == 0)
 	{
 	  suffix = GPOINTER_TO_INT (g_hash_table_lookup (dir->icons, icon_name));
 	  if (suffix != ICON_SUFFIX_NONE) {
@@ -1033,17 +1037,31 @@ theme_lookup_icon (IconTheme *theme,
 
   min_difference = G_MAXINT;
   min_dir = NULL;
+  has_larger = FALSE;
   l = theme->dirs;
   while (l != NULL)
     {
       dir = l->data;
 
-      difference = theme_dir_size_difference (dir, size);
-      if (difference < min_difference &&
-	  g_hash_table_lookup (dir->icons, icon_name) != ICON_SUFFIX_NONE)
+      difference = theme_dir_size_difference (dir, size, &smaller);
+      if (!has_larger)
 	{
-	  min_difference = difference;
-	  min_dir = dir;
+	  if ((difference < min_difference || smaller) &&
+	      g_hash_table_lookup (dir->icons, icon_name) != ICON_SUFFIX_NONE)
+	    {
+	      min_difference = difference;
+	      min_dir = dir;
+	      has_larger = smaller;
+	    }
+	}
+      else
+	{
+	  if ((difference < min_difference && smaller) &&
+	      g_hash_table_lookup (dir->icons, icon_name) != ICON_SUFFIX_NONE)
+	    {
+	      min_difference = difference;
+	      min_dir = dir;
+	    }
 	}
       
       l = l->next;

@@ -1,3 +1,9 @@
+2003-01-14  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-icon-theme.c (theme_lookup_icon):
+	Don't scale up unless we have to. Scaling down gives
+	much better results.
+
 2003-01-12  Anders Carlsson  <andersca@gnu.org>
 
 	* libgnomeui/gnome-uidefs.h (GNOME_KEY_MOD_PAUSE_GAME): Use
