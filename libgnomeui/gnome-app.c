@@ -89,8 +89,15 @@ gnome_app_new(gchar *appname, char *title)
 		
 	retval = gtk_type_new(gnome_app_get_type());
 	app = GNOME_APP (retval);
-	app->name = g_strdup (appname);
-	app->prefix = g_copy_strings ("/", appname, "/", NULL);
+	if(app->name)
+	  {
+	    app->name = g_strdup (appname);
+	    app->prefix = g_copy_strings ("/", appname, "/", NULL);
+	  }
+	else
+	  {
+	    app->name = app->prefix = NULL;
+	  }
 	if (title)
 		gtk_window_set_title(GTK_WINDOW(retval), title);
 	
@@ -234,10 +241,14 @@ gnome_app_menu_set_position(GnomeApp *app, GnomeAppWidgetPositionType pos_menuba
 		gnome_app_set_contents(app, app->contents);
 
 	/* Save the new setting */
-	gnome_config_push_prefix (app->prefix);
-	gnome_config_set_string ("Placement/Menu", locations [pos_menubar]);
-	gnome_config_pop_prefix ();
-	gnome_config_sync ();
+	if(app->prefix)
+	  {
+	    gnome_config_push_prefix (app->prefix);
+	    gnome_config_set_string ("Placement/Menu",
+				     locations [pos_menubar]);
+	    gnome_config_pop_prefix ();
+	    gnome_config_sync ();
+	  }
 }
 
 void
@@ -284,10 +295,14 @@ gnome_app_toolbar_set_position(GnomeApp *app, GnomeAppWidgetPositionType pos_too
 		gnome_app_set_contents(app, app->contents);
 	
 	/* Save the new setting */
-	gnome_config_push_prefix (app->prefix);
-	gnome_config_set_string ("Placement/Toolbar", locations [pos_toolbar]);
-	gnome_config_pop_prefix ();
-	gnome_config_sync ();
+	if(app->prefix)
+	  {
+	    gnome_config_push_prefix (app->prefix);
+	    gnome_config_set_string ("Placement/Toolbar",
+				     locations [pos_toolbar]);
+	    gnome_config_pop_prefix ();
+	    gnome_config_sync ();
+	  }
 }
 
 /* These are used for knowing where to pack the contents into the
@@ -437,22 +452,28 @@ void gnome_app_set_menus     (GnomeApp *app,
 	gtk_container_add(GTK_CONTAINER(hb), app->menubar);
 
 	/* Load the position from the configuration file */
-	gnome_config_push_prefix (app->prefix);
-	location = gnome_config_get_string ("Placement/Menu=top");
-	pos = get_orientation (location);
+	if(app->prefix)
+	  {
+	    gnome_config_push_prefix (app->prefix);
+	    location = gnome_config_get_string ("Placement/Menu=top");
+	    pos = get_orientation (location);
+	  }
 
 	/* Menus can not go on left or right */
-	if (pos == GNOME_APP_POS_LEFT || pos == GNOME_APP_POS_RIGHT)
+	if (pos != GNOME_APP_POS_TOP && pos != GNOME_APP_POS_BOTTOM)
 		pos = GNOME_APP_POS_TOP;
 	gnome_app_menu_set_position (app, pos);
-	free (location);
-	gnome_config_pop_prefix ();
+	if(app->prefix)
+	  {
+	    g_free (location);
+	    gnome_config_pop_prefix ();
+	  }
 }
 
 void gnome_app_set_toolbar   (GnomeApp *app,
 			      GtkToolbar *toolbar)
 {
-	GnomeAppWidgetPositionType pos;
+	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
 	GtkWidget *hb;
 	char *location;
 
@@ -471,11 +492,16 @@ void gnome_app_set_toolbar   (GnomeApp *app,
 	gtk_container_add(GTK_CONTAINER(hb), app->toolbar);
 
 	/* Load the position from the configuration file */
-	gnome_config_push_prefix (app->prefix);
-	location = gnome_config_get_string ("Placement/Toolbar=top");
-	pos = get_orientation (location);
-	gnome_app_menu_set_position (app, pos);
-	free (location);
-	gnome_config_pop_prefix ();
+	if(app->prefix)
+	  {
+	    gnome_config_push_prefix (app->prefix);
+	    location = gnome_config_get_string ("Placement/Toolbar=top");
+	    pos = get_orientation (location);
+	    gnome_app_toolbar_set_position (app, pos);
+	    g_free (location);
+	    gnome_config_pop_prefix ();
+	  }
+	else
+	    gnome_app_toolbar_set_position (app, pos);
 }
 
