@@ -32,6 +32,7 @@ INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
 	$(SUPPORTINCS) 					\
 	$(GLIB_CFLAGS) $(GTK_CFLAGS)			\
 	$(OAF_CFLAGS)					\
+	$(LIBGLADE_CFLAGS)				\
 	$(LIBART_CFLAGS)				\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
@@ -184,6 +185,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-sel.c		\
 	gnome-icon-text.c		\
 	gnome-textfu.c			\
+	gnome-glade.c			\
 	$(gnorba_built)
 
 ## this lists all the non-generated headers
