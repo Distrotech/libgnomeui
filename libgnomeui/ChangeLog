@@ -1,3 +1,10 @@
+2001-03-21  Martin Baulig  <baulig@suse.de>
+
+	The canvas is now in its own libgnomecanvas-2 top-level module.
+
+	* gnome-canvas*.[ch]: Removed, moved to the new libgnomecanvas-2
+	module.
+
 2001-03-20  Martin Baulig  <baulig@suse.de>
 
 	* libgnomeui.h (GNOMEUI_INIT): Don't #define this here.
