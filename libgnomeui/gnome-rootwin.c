@@ -24,6 +24,13 @@ static void gnome_rootwin_size_allocate (GtkWidget         *widget,
 					 GtkAllocation     *allocation);
 static void gnome_rootwin_parent_set    (GtkWidget         *widget,
 					 GtkWidget         *previous_parent);
+static gint gnome_rootwin_expose        (GtkWidget      *widget,
+				         GdkEventExpose *event);
+static void gnome_rootwin_draw          (GtkWidget    *widget,
+					 GdkRectangle *area);
+static void gnome_rootwin_draw_focus    (GtkWidget *widget);
+static void gnome_rootwin_draw_default  (GtkWidget *widget);
+
 
 
 static GtkWindowClass *parent_class;
@@ -74,6 +81,33 @@ gnome_rootwin_class_init (GnomeRootWinClass *class)
 	widget_class->size_request = gnome_rootwin_size_request;
 	widget_class->size_allocate = gnome_rootwin_size_allocate;
 	widget_class->parent_set = gnome_rootwin_parent_set;
+
+        widget_class->expose_event = gnome_rootwin_expose;
+        widget_class->draw = gnome_rootwin_draw;
+        widget_class->draw_focus = gnome_rootwin_draw_focus;
+         widget_class->draw_default = gnome_rootwin_draw_default;
+}
+
+static gint
+gnome_rootwin_expose (GtkWidget      *widget,
+		      GdkEventExpose *event)
+{
+}
+
+static void
+gnome_rootwin_draw (GtkWidget    *widget,
+		    GdkRectangle *area)
+{
+}
+
+static void
+gnome_rootwin_draw_focus (GtkWidget *widget)
+{
+}
+
+static void
+gnome_rootwin_draw_default (GtkWidget *widget)
+{
 }
 
 GtkWidget *
@@ -164,11 +198,6 @@ gnome_rootwin_realize (GtkWidget *widget)
 	gdk_window_set_events (widget->window,
 			       (gtk_widget_get_events (widget)
 				| gdk_window_get_events (widget->window)
-				| GDK_EXPOSURE_MASK
-				| GDK_KEY_PRESS_MASK
-				| GDK_ENTER_NOTIFY_MASK
-				| GDK_LEAVE_NOTIFY_MASK
-				| GDK_FOCUS_CHANGE_MASK
 				| GDK_STRUCTURE_MASK));
 
 	widget->style = gtk_style_attach (widget->style, widget->window);
