@@ -145,6 +145,7 @@ static void gnome_mdi_child_finalize (GObject *obj)
 
 	if(mdi_child->name)
 		g_free(mdi_child->name);
+	mdi_child->name = NULL;
 
 	if(G_OBJECT_CLASS(parent_class)->finalize)
 		(* G_OBJECT_CLASS(parent_class)->finalize)(obj);
@@ -157,6 +158,8 @@ static void gnome_mdi_child_destroy (GtkObject *obj)
 #ifdef GNOME_ENABLE_DEBUG
 	g_message("GnomeMDIChild: destroying!\n");
 #endif
+
+	/* remember, destroy can be run multiple times! */
 
 	mdi_child = GNOME_MDI_CHILD(obj);
 

@@ -83,6 +83,7 @@ static void gnome_font_picker_marshal_signal_1 (GtkObject     *object,
 static void gnome_font_picker_class_init (GnomeFontPickerClass *class);
 static void gnome_font_picker_init       (GnomeFontPicker      *cp);
 static void gnome_font_picker_destroy    (GtkObject            *object);
+static void gnome_font_picker_finalize   (GObject              *object);
 static void gnome_font_picker_set_arg    (GtkObject            *object,
 					  GtkArg               *arg,
 					  guint                 arg_id);
@@ -152,9 +153,11 @@ static void
 gnome_font_picker_class_init (GnomeFontPickerClass *class)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 	GtkButtonClass *button_class;
 
 	object_class = (GtkObjectClass *) class;
+	gobject_class = (GObjectClass *) class;
 	button_class = (GtkButtonClass *) class;
 
 	parent_class = gtk_type_class (gtk_button_get_type ());
@@ -192,6 +195,7 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 	gtk_object_class_add_signals (object_class, font_picker_signals, LAST_SIGNAL);
 
 	object_class->destroy = gnome_font_picker_destroy;
+	gobject_class->finalize = gnome_font_picker_finalize;
 	object_class->get_arg = gnome_font_picker_get_arg;
 	object_class->set_arg = gnome_font_picker_set_arg;
 
@@ -239,6 +243,8 @@ gnome_font_picker_destroy (GtkObject *object)
     g_return_if_fail (object != NULL);
     g_return_if_fail (GNOME_IS_FONT_PICKER (object));
 
+    /* remember, destroy can be run multiple times! */
+
     gfp = GNOME_FONT_PICKER(object);
     
     if (gfp->font_dialog)
@@ -259,14 +265,29 @@ gnome_font_picker_destroy (GtkObject *object)
     g_free(gfp->_priv->title);
     gfp->_priv->title = NULL;
 
-    /* g_free handles NULL */
-    g_free(gfp->_priv);
-    gfp->_priv = NULL;
-
     if (GTK_OBJECT_CLASS (parent_class)->destroy)
         (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
     
 } /* gnome_font_picker_destroy */
+
+static void
+gnome_font_picker_finalize (GObject *object)
+{
+    GnomeFontPicker *gfp;
+    
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_FONT_PICKER (object));
+
+    gfp = GNOME_FONT_PICKER(object);
+    
+    /* g_free handles NULL */
+    g_free(gfp->_priv);
+    gfp->_priv = NULL;
+
+    if (G_OBJECT_CLASS (parent_class)->finalize)
+        (* G_OBJECT_CLASS (parent_class)->finalize) (object);
+    
+} /* gnome_font_picker_finalize */
 
 static void
 gnome_font_picker_set_arg (GtkObject *object,

@@ -43,6 +43,7 @@ struct _GnomeMessageBoxPrivate {
 static void gnome_message_box_class_init (GnomeMessageBoxClass *klass);
 static void gnome_message_box_init       (GnomeMessageBox      *messagebox);
 static void gnome_message_box_destroy    (GtkObject            *object);
+static void gnome_message_box_finalize   (GObject              *object);
 
 static GnomeDialogClass *parent_class;
 
@@ -75,11 +76,14 @@ static void
 gnome_message_box_class_init (GnomeMessageBoxClass *klass)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
 	object_class = (GtkObjectClass *)klass;
+	gobject_class = (GObjectClass *)klass;
 	parent_class = gtk_type_class (gnome_dialog_get_type ());
 
 	object_class->destroy = gnome_message_box_destroy;
+	gobject_class->finalize = gnome_message_box_finalize;
 }
 
 static void
@@ -91,14 +95,23 @@ gnome_message_box_init (GnomeMessageBox *message_box)
 static void
 gnome_message_box_destroy(GtkObject *object)
 {
+	/* remember, destroy can be run multiple times! */
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_message_box_finalize(GObject *object)
+{
 	GnomeMessageBox *mbox = GNOME_MESSAGE_BOX(object);
 
 	g_free(mbox->_priv);
 	mbox->_priv = NULL;
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
+
 
 static GtkWidget*
 gnome_pixmap_new_from_file_conditional(const gchar* filename)

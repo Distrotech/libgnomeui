@@ -223,6 +223,8 @@ gnome_entry_destroy (GtkObject *object)
 	GtkWidget *entry;
 	gchar *text;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (object));
 

@@ -461,6 +461,8 @@ static void gnome_mdi_destroy (GtkObject *object)
 
 	g_return_if_fail(object != NULL);
 	g_return_if_fail(GNOME_IS_MDI (object));
+
+	/* remember, destroy can be run multiple times! */
 	
 	mdi = GNOME_MDI(object);
 	
@@ -472,13 +474,14 @@ static void gnome_mdi_destroy (GtkObject *object)
 		remove_child(mdi, child);
 	}
 
-	/* FIXME: ref_count is a private member, this is bad */
 	/* this call tries to behave in a manner similar to
 	   destruction of toplevel windows: it unrefs itself,
 	   thus taking care of the initial reference added
 	   upon mdi creation. */
-	if(G_OBJECT(object)->ref_count > 0 && !GTK_OBJECT_DESTROYED(object))
+	if(mdi->has_user_refcount) {
+		mdi->has_user_refcount = 0;
 		gtk_object_unref(object);
+	}
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
@@ -504,6 +507,8 @@ static void gnome_mdi_init (GnomeMDI *mdi)
 	mdi->toolbar_template = NULL;
 	mdi->child_menu_path = NULL;
 	mdi->child_list_path = NULL;
+
+	mdi->has_user_refcount = 1;
 }
 
 static GList *child_create_menus (GnomeMDIChild *child, GtkWidget *view)

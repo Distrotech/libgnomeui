@@ -295,6 +295,8 @@ gnome_dock_item_destroy (GtkObject *object)
 {
   GnomeDockItem *di;
 
+  /* remember, destroy can be run multiple times! */
+
   g_return_if_fail (object != NULL);
   g_return_if_fail (GNOME_IS_DOCK_ITEM (object));
 

@@ -62,6 +62,7 @@ struct _GnomeFileEntryPrivate {
 static void gnome_file_entry_class_init (GnomeFileEntryClass *class);
 static void gnome_file_entry_init       (GnomeFileEntry      *fentry);
 static void gnome_file_entry_destroy    (GtkObject           *object);
+static void gnome_file_entry_finalize   (GObject             *object);
 static void gnome_file_entry_drag_data_received (GtkWidget        *widget,
 						 GdkDragContext   *context,
 						 gint              x,
@@ -124,8 +125,10 @@ static void
 gnome_file_entry_class_init (GnomeFileEntryClass *class)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
 	object_class = (GtkObjectClass *) class;
+	gobject_class = (GObjectClass *) class;
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
 
 	gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL] =
@@ -174,6 +177,7 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 				ARG_GTK_ENTRY);
 
 	object_class->destroy = gnome_file_entry_destroy;
+	gobject_class->finalize = gnome_file_entry_finalize;
 	object_class->get_arg = fentry_get_arg;
 	object_class->set_arg = fentry_set_arg;
 
@@ -451,6 +455,8 @@ gnome_file_entry_destroy (GtkObject *object)
 {
 	GnomeFileEntry *fentry;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (object));
 
@@ -471,6 +477,23 @@ gnome_file_entry_destroy (GtkObject *object)
 
 	g_free(fentry->_priv);
 	fentry->_priv = NULL;
+}
+
+static void
+gnome_file_entry_finalize (GObject *object)
+{
+	GnomeFileEntry *fentry;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_FILE_ENTRY (object));
+
+	fentry = GNOME_FILE_ENTRY (object);
+
+	g_free(fentry->_priv);
+	fentry->_priv = NULL;
+
+	if(G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 /**

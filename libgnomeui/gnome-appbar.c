@@ -720,6 +720,8 @@ gnome_appbar_destroy (GtkObject *object)
   GnomeAppBar *ab;
   GnomeAppBarClass *class;
 
+  /* remember, destroy can be run multiple times! */
+
   g_return_if_fail (object != NULL);
   g_return_if_fail (GNOME_IS_APPBAR (object));
 

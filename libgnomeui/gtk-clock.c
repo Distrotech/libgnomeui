@@ -64,6 +64,8 @@ static void gtk_clock_destroy(GtkObject *object)
 {
 	g_return_if_fail(object != NULL);
 
+	/* remember, destroy can be run multiple times! */
+
 	gtk_clock_stop(GTK_CLOCK(object));
 	GTK_OBJECT_CLASS(parent_class)->destroy(object);
 }

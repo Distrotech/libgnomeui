@@ -69,11 +69,12 @@ enum {
 };
 
 static guint ps_signals[LAST_SIGNAL] = { 0 };
-static GtkObjectClass *parent_class;
+static GtkTableClass *parent_class;
 
 static void gnome_paper_selector_class_init(GnomePaperSelectorClass *class);
 static void gnome_paper_selector_init(GnomePaperSelector *self);
 static void gnome_paper_selector_destroy(GtkObject *object);
+static void gnome_paper_selector_finalize(GObject *object);
 
 GtkType
 gnome_paper_selector_get_type(void)
@@ -100,8 +101,10 @@ static void
 gnome_paper_selector_class_init(GnomePaperSelectorClass *class)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
   
   object_class = (GtkObjectClass*) class;
+  gobject_class = (GObjectClass*) class;
   parent_class = gtk_type_class(gtk_table_get_type());
 
   ps_signals[CHANGED] =
@@ -121,6 +124,7 @@ gnome_paper_selector_class_init(GnomePaperSelectorClass *class)
   gtk_object_class_add_signals(object_class, ps_signals, LAST_SIGNAL);
 
   object_class->destroy = gnome_paper_selector_destroy;
+  gobject_class->finalize = gnome_paper_selector_finalize;
 }
 
 static void fittopage_pressed(GnomePaperSelector *self);
@@ -868,17 +872,33 @@ gnome_paper_selector_destroy(GtkObject *object)
 
   g_return_if_fail(object != NULL);
 
+  /* remember, destroy can be run multiple times! */
+
   self = GNOME_PAPER_SELECTOR(object);
   if (self->_priv->gc)
     gdk_gc_unref(self->_priv->gc);
   self->_priv->gc = NULL;
 
+  if (GTK_OBJECT_CLASS(parent_class)->destroy)
+    (* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+}
+
+static void
+gnome_paper_selector_finalize(GObject *object)
+{
+  GnomePaperSelector *self;
+
+  g_return_if_fail(object != NULL);
+
+  self = GNOME_PAPER_SELECTOR(object);
+
   g_free(self->_priv);
   self->_priv = NULL;
 
-  if (parent_class->destroy)
-    (* parent_class->destroy)(object);
+  if (G_OBJECT_CLASS(parent_class)->finalize)
+    (* G_OBJECT_CLASS(parent_class)->finalize)(object);
 }
+
 
 
 #ifdef OLD_PAGE_SELECTOR_API

@@ -152,7 +152,7 @@ static gint ask_ok = 0;
 
 static gint spell_signals[LAST_SIGNAL] = { 0 };
 
-/*static GtkVBoxClass* parent_class = 0;*/
+static GtkVBoxClass* parent_class = 0;
 
 static void
 gnome_spell_child_exited(pid_t pid, gint status, GnomeSpell * spell) {
@@ -769,19 +769,27 @@ build_widget(GnomeSpell* spell) {
 static void
 gnome_spell_destroy (GtkObject* s) {
 	GnomeSpell* spell = (GnomeSpell*)s;
+
+	/* remember, destroy can be run multiple times! */
+
 	if ( spell->tooltips )
 		gtk_object_unref(GTK_OBJECT(spell->tooltips));
+	pell->tooltips = NULL;
 	/* FIXME: sigchld handler */
 	if ( spell->rispell )
 		fclose(spell->rispell);
+	spell->rispell = NULL;
 	if ( spell->wispell )
 		fclose(spell->wispell);
+	spell->wispell = NULL;
 	if ( spell->spell_pid > 0 )
 		waitpid(spell->spell_pid, NULL, WNOHANG | WUNTRACED);
+	spell->spell_pid = 0;
 	if ( spell->spellinfo ) {
 		g_slist_foreach(spell->spellinfo, (GFunc)gnome_spell_fill_info, NULL);
 		g_slist_foreach(spell->spellinfo, (GFunc)g_free, NULL);
 		g_slist_free(spell->spellinfo);
+		spell->spellinfo = NULL;
 	}
 	if (filesel ) {
 		gtk_widget_destroy(filesel);
@@ -790,7 +798,11 @@ gnome_spell_destroy (GtkObject* s) {
 	if (spell->awords) {
 		g_slist_foreach(spell->awords, (GFunc)g_free, NULL);
 		g_slist_free(spell->awords);
+		spell->awords = NULL;
 	}
+
+	if(GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy) (object);
 }
 
 /**
@@ -827,6 +839,8 @@ gnome_spell_class_init(GnomeSpellClass* klass) {
 
 	object_class = (GtkObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
+
+	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
 	spell_signals[FOUND_WORD] = gtk_signal_new ("found_word",
 		GTK_RUN_FIRST|GTK_RUN_NO_RECURSE,

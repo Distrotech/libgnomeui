@@ -886,6 +886,8 @@ gnome_about_destroy (GtkObject *object)
 {
 	GnomeAbout *self = GNOME_ABOUT(object);
 
+	/* remember, destroy can be run multiple times! */
+
 	if(self->_priv->ai) {
 		/* Free memory used for title, copyright and comments */
 		g_free (self->_priv->ai->title);

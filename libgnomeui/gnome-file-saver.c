@@ -334,19 +334,23 @@ gnome_file_saver_destroy (GtkObject* object)
 {
         GnomeFileSaver* file_saver;
 
+	/* remember, destroy can be run multiple times! */
+
         file_saver = GNOME_FILE_SAVER (object);
         
-        if (file_saver->_priv->conf_notify != 0) {
-                gconf_client_notify_remove(file_saver->_priv->conf,
-                                           file_saver->_priv->conf_notify);
-                file_saver->_priv->conf_notify = 0;
-        }
+	if (file_saver->_priv->conf) {
+		if (file_saver->_priv->conf_notify != 0) {
+			gconf_client_notify_remove(file_saver->_priv->conf,
+						   file_saver->_priv->conf_notify);
+			file_saver->_priv->conf_notify = 0;
+		}
 
-        gconf_client_remove_dir(file_saver->_priv->conf,
-                                "/desktop/standard/save-locations");
-        
-        gtk_object_unref(GTK_OBJECT(file_saver->_priv->conf));
-        file_saver->_priv->conf = NULL;
+		gconf_client_remove_dir(file_saver->_priv->conf,
+					"/desktop/standard/save-locations");
+
+		gtk_object_unref(GTK_OBJECT(file_saver->_priv->conf));
+		file_saver->_priv->conf = NULL;
+	}
         
         (* GTK_OBJECT_CLASS(parent_class)->destroy) (object);
 }

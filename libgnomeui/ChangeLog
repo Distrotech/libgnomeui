@@ -1,3 +1,14 @@
+Fri Jul 14 17:10:54 2000  George Lebl <jirka@5z.com>
+
+	* *.c: fixup the destroy/finalize handlers.  Make sure destroy
+	  handlers can be called multiple times and move freeing of
+	  private structure to finalize.  Also all unref stuff is supposed
+	  to be in the destroy handler and not finalize according to gtk
+	  docs.
+
+	* gnome-icon-list.c: Make the typedefs standard and make the
+	  private structure standard.
+
 Fri Jul 14 05:39:40 2000  George Lebl <jirka@5z.com>
 
 	* gnome-messagebox.c: handle a case where no buttons were added.

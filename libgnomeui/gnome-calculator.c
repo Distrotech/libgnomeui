@@ -1394,6 +1394,8 @@ gnome_calculator_destroy (GtkObject *object)
 {
 	GnomeCalculator *gc;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_CALCULATOR (object));
 

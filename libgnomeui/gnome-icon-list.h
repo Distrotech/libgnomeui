@@ -48,6 +48,10 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_ICON_LIST_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ICON_LIST))
 #define GNOME_ICON_LIST_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_ICON_LIST, GnomeIconListClass))
 
+typedef struct _GnomeIconList        GnomeIconList;
+typedef struct _GnomeIconListPrivate GnomeIconListPrivate;
+typedef struct _GnomeIconListClass   GnomeIconListClass;
+
 typedef enum {
 	GNOME_ICON_LIST_ICONS,
 	GNOME_ICON_LIST_TEXT_BELOW,
@@ -59,30 +63,32 @@ typedef enum {
  * replaced with padding.  Please remove these fields when gnome-libs has
  * reached another major version and it is "fine" to break binary compatibility.
  */
-typedef struct {
+struct _GnomeIconList {
 	GnomeCanvas canvas;
+
+	/*< public >*/
 
 	/* Scroll adjustments */
 	GtkAdjustment *adj;
 	GtkAdjustment *hadj;
-
-	/* Private data */
-	gpointer priv; /* was GList *icon_list */
 
 	/* A list of integers with the indices of the currently selected icons */
 	GList *selection;
 
 	/* Number of icons in the list */
 	int icons;
-} GnomeIconList;
 
-typedef struct {
+	/*< private >*/
+	GnomeIconListPrivate * _priv;
+};
+
+struct _GnomeIconListClass {
 	GnomeCanvasClass parent_class;
 
 	void     (*select_icon)    (GnomeIconList *gil, gint num, GdkEvent *event);
 	void     (*unselect_icon)  (GnomeIconList *gil, gint num, GdkEvent *event);
 	gboolean (*text_changed)   (GnomeIconList *gil, gint num, const char *new_text);
-} GnomeIconListClass;
+};
 
 #define GNOME_ICON_LIST_IS_EDITABLE 1
 #define GNOME_ICON_LIST_STATIC_TEXT 2

@@ -117,6 +117,8 @@ class_init (GnomeAnimatorClass * class)
 static void
 destroy (GtkObject * object)
 {
+  /* remember, destroy can be run multiple times! */
+
   g_return_if_fail (object != NULL);
   g_return_if_fail (GNOME_IS_ANIMATOR (object));
 

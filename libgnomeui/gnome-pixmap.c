@@ -278,6 +278,8 @@ gnome_pixmap_destroy (GtkObject *object)
 {
 	GnomePixmap *gpixmap;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (object));
 

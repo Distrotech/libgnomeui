@@ -428,6 +428,8 @@ gnome_date_edit_destroy (GtkObject *object)
 {
 	GnomeDateEdit *gde;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_DATE_EDIT (object));
 

@@ -713,6 +713,7 @@ gnome_dock_band_forall (GtkContainer *container,
 static void
 gnome_dock_band_destroy (GtkObject *object)
 {
+  /* remember, destroy can be run multiple times! */
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }

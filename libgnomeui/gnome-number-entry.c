@@ -55,6 +55,7 @@ struct _GnomeNumberEntryPrivate {
 static void gnome_number_entry_class_init (GnomeNumberEntryClass *class);
 static void gnome_number_entry_init       (GnomeNumberEntry      *nentry);
 static void gnome_number_entry_destroy    (GtkObject             *object);
+static void gnome_number_entry_finalize   (GObject               *object);
 
 
 static GtkHBoxClass *parent_class;
@@ -86,10 +87,13 @@ static void
 gnome_number_entry_class_init (GnomeNumberEntryClass *class)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
 	object_class = (GtkObjectClass *) class;
+	gobject_class = (GObjectClass *) class;
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
 	object_class->destroy = gnome_number_entry_destroy;
+	gobject_class->finalize = gnome_number_entry_finalize;
 
 }
 
@@ -283,6 +287,8 @@ gnome_number_entry_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (object));
 
+	/* remember, destroy can be run multiple times! */
+
 	nentry = GNOME_NUMBER_ENTRY (object);
 
 	if (nentry->_priv->calc_dlg)
@@ -292,11 +298,25 @@ gnome_number_entry_destroy (GtkObject *object)
 	g_free (nentry->_priv->calc_dialog_title);
 	nentry->_priv->calc_dialog_title = NULL;
 
+	if(GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+static void
+gnome_number_entry_finalize (GObject *object)
+{
+	GnomeNumberEntry *nentry;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (object));
+
+	nentry = GNOME_NUMBER_ENTRY (object);
+
 	g_free(nentry->_priv);
 	nentry->_priv = NULL;
 
-	if(GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	if(G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 /**

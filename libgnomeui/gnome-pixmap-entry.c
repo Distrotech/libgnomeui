@@ -81,6 +81,7 @@ static void drag_data_received		  (GtkWidget        *widget,
 					   guint32           time,
 					   GnomePixmapEntry *pentry);
 static void pentry_destroy		  (GtkObject *object);
+static void pentry_finalize		  (GObject *object);
 static void pentry_set_arg                (GtkObject *object,
 					   GtkArg *arg,
 					   guint arg_id);
@@ -130,6 +131,7 @@ static void
 gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 {
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
+	GObjectClass *gobject_class = G_OBJECT_CLASS(class);
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
 	gtk_object_add_arg_type("GnomePixmapEntry::history_id",
@@ -158,6 +160,7 @@ gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 				ARG_GTK_ENTRY);
 
 	object_class->destroy = pentry_destroy;
+	gobject_class->finalize = pentry_finalize;
 	object_class->get_arg = pentry_get_arg;
 	object_class->set_arg = pentry_set_arg;
 
@@ -232,7 +235,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 
-	if(!pentry->_priv->preview)
+	if( ! pentry->_priv->preview)
 		return;
 	
 	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),
@@ -391,20 +394,45 @@ pentry_destroy(GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (object));
 
+	/* remember, destroy can be run multiple times! */
+
 	pentry = GNOME_PIXMAP_ENTRY(object);
 
+	if(pentry->_priv->preview_sw)
+		gtk_widget_unref(pentry->_priv->preview_sw);
+	pentry->_priv->preview_sw = NULL;
+
+	if(pentry->_priv->preview)
+		gtk_widget_unref(pentry->_priv->preview);
 	pentry->_priv->preview = NULL;
+
 	g_free(pentry->_priv->last_preview);
 	pentry->_priv->last_preview = NULL;
-	changed_pentries = g_slist_remove(changed_pentries, pentry);
 
-	g_free(pentry->_priv);
+	changed_pentries = g_slist_remove(changed_pentries, pentry);
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 
 }
 
+static void
+pentry_finalize(GObject *object)
+{
+	GnomePixmapEntry *pentry;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (object));
+
+	pentry = GNOME_PIXMAP_ENTRY(object);
+
+	g_free(pentry->_priv);
+	pentry->_priv = NULL;
+
+	if(G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
+
+}
 
 static void
 browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
@@ -513,6 +541,7 @@ static void
 turn_on_previewbox(GnomePixmapEntry *pentry)
 {
 	pentry->_priv->preview_sw = gtk_scrolled_window_new(NULL,NULL);
+	gtk_widget_ref(pentry->_priv->preview_sw);
 	gtk_drag_dest_set (GTK_WIDGET (pentry->_priv->preview_sw),
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
@@ -531,6 +560,7 @@ turn_on_previewbox(GnomePixmapEntry *pentry)
 	gtk_widget_show (pentry->_priv->preview_sw);
 
 	pentry->_priv->preview = gtk_label_new(_("No Image"));
+	gtk_widget_ref(pentry->_priv->preview);
 	gtk_widget_show(pentry->_priv->preview);
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->_priv->preview_sw),
 					      pentry->_priv->preview);
@@ -763,18 +793,24 @@ gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry, gboolean do_preview)
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 
-	if(pentry->_priv->do_preview == do_preview?1:0)
+	if(pentry->_priv->do_preview ? 1 : 0 == do_preview ? 1 : 0)
 		return;
 
-	pentry->_priv->do_preview = do_preview?1:0;
+	pentry->_priv->do_preview = do_preview ? 1 : 0;
 
 	if(do_preview) {
 		g_assert(pentry->_priv->preview_sw == NULL);
+		g_assert(pentry->_priv->preview == NULL);
 		turn_on_previewbox(pentry);
 	} else {
 		g_assert(pentry->_priv->preview_sw != NULL);
+		g_assert(pentry->_priv->preview != NULL);
 		gtk_widget_destroy(pentry->_priv->preview_sw);
+
+		gtk_widget_unref(pentry->_priv->preview_sw);
 		pentry->_priv->preview_sw = NULL;
+
+		gtk_widget_unref(pentry->_priv->preview);
 		pentry->_priv->preview = NULL;
 	}
 }

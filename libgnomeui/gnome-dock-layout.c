@@ -99,6 +99,8 @@ gnome_dock_layout_destroy (GtkObject *object)
 {
   GnomeDockLayout *layout;
 
+  /* remember, destroy can be run multiple times! */
+
   layout = GNOME_DOCK_LAYOUT (object);
 
   while (layout->items)

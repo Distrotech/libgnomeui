@@ -41,6 +41,7 @@ static void gnome_href_class_init(GnomeHRefClass *klass);
 static void gnome_href_init(GnomeHRef *href);
 static void gnome_href_clicked(GtkButton *button);
 static void gnome_href_destroy(GtkObject *object);
+static void gnome_href_finalize(GObject *object);
 static void gnome_href_get_arg(GtkObject *object,
 			       GtkArg *arg,
 			       guint arg_id);
@@ -55,7 +56,7 @@ static void drag_data_get     (GnomeHRef          *href,
 			       guint               time,
 			       gpointer            data);
 
-static GtkObjectClass *parent_class;
+static GtkButtonClass *parent_class;
 
 static const GtkTargetEntry http_drop_types[] = {
 	{ "text/uri-list",       0, 0 },
@@ -111,14 +112,13 @@ guint gnome_href_get_type(void) {
 }
 
 static void gnome_href_class_init(GnomeHRefClass *klass) {
-  GtkObjectClass *object_class;
-  GtkWidgetClass *widget_class;
-  GtkButtonClass *button_class;
 
-  object_class = GTK_OBJECT_CLASS(klass);
-  widget_class = GTK_WIDGET_CLASS(klass);
-  button_class = GTK_BUTTON_CLASS(klass);
-  parent_class = GTK_OBJECT_CLASS(gtk_type_class(gtk_button_get_type()));
+  GtkObjectClass *object_class = (GtkObjectClass *)klass;
+  GObjectClass *gobject_class = (GObjectClass *)klass;
+  GtkWidgetClass *widget_class = (GtkWidgetClass *)klass;
+  GtkButtonClass *button_class = (GtkButtonClass *)klass;
+
+  parent_class = gtk_type_class(gtk_button_get_type());
 
   gtk_object_add_arg_type("GnomeHRef::url",
 			  GTK_TYPE_STRING,
@@ -130,6 +130,7 @@ static void gnome_href_class_init(GnomeHRefClass *klass) {
 			  ARG_TEXT);
 
   object_class->destroy = gnome_href_destroy;
+  gobject_class->finalize = gnome_href_finalize;
   object_class->set_arg = gnome_href_set_arg;
   object_class->get_arg = gnome_href_get_arg;
   widget_class->realize = gnome_href_realize;
@@ -141,10 +142,14 @@ static void gnome_href_init(GnomeHRef *href) {
 	href->_priv = g_new0(GnomeHRefPrivate, 1);
 
 	href->_priv->label = gtk_label_new("");
+	gtk_widget_ref(href->_priv->label);
+
 	gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
 	gtk_container_add(GTK_CONTAINER(href), href->_priv->label);
 	gtk_widget_show(href->_priv->label);
+
 	href->_priv->url = NULL;
+
 	/* the source dest is set on set_url */
 	gtk_signal_connect (GTK_OBJECT (href), "drag_data_get",
 			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
@@ -387,6 +392,8 @@ static void gnome_href_clicked(GtkButton *button) {
 static void gnome_href_destroy(GtkObject *object) {
   GnomeHRef *href;
 
+  /* remember, destroy can be run multiple times! */
+
   g_return_if_fail(object != NULL);
   g_return_if_fail(GNOME_IS_HREF(object));
 
@@ -394,14 +401,31 @@ static void gnome_href_destroy(GtkObject *object) {
 
   g_free(href->_priv->url);
   href->_priv->url = NULL;
-  href->_priv->label = NULL;
+
+  if(href->_priv->label) {
+	  gtk_widget_unref(href->_priv->label);
+	  href->_priv->label = NULL;
+  }
+
+  if (GTK_OBJECT_CLASS(parent_class)->destroy)
+    (* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+}
+
+static void gnome_href_finalize(GObject *object) {
+  GnomeHRef *href;
+
+  g_return_if_fail(object != NULL);
+  g_return_if_fail(GNOME_IS_HREF(object));
+
+  href = GNOME_HREF(object);
 
   g_free(href->_priv);
   href->_priv = NULL;
 
-  if (parent_class->destroy)
-    (* parent_class->destroy)(object);
+  if (G_OBJECT_CLASS(parent_class)->finalize)
+    (* G_OBJECT_CLASS(parent_class)->finalize)(object);
 }
+
 
 static void gnome_href_realize(GtkWidget *widget) {
   GdkCursor *cursor;

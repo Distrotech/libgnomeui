@@ -91,6 +91,7 @@ static void drag_data_received		(GtkWidget        *widget,
 					 guint32           time,
 					 GnomeIconEntry   *ientry);
 static void ientry_destroy		(GtkObject *object);
+static void ientry_finalize		(GObject *object);
 static void ientry_get_arg		(GtkObject *object,
 					 GtkArg *arg,
 					 guint arg_id);
@@ -148,7 +149,9 @@ gnome_icon_entry_get_type (void)
 static void
 gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {
-	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
+	GtkObjectClass *object_class = (GtkObjectClass *)class;
+	GObjectClass *gobject_class = (GObjectClass *)class;
+
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
 	gnome_ientry_signals[CHANGED_SIGNAL] =
@@ -172,6 +175,7 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	class->changed = NULL;
 	class->browse = ientry_browse;
 
+	gobject_class->finalize = ientry_finalize;
 	object_class->destroy = ientry_destroy;
 
 	gtk_object_add_arg_type("GnomeIconEntry::history_id",
@@ -410,6 +414,8 @@ ientry_destroy(GtkObject *object)
 {
 	GnomeIconEntry *ientry;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (object));
 
@@ -417,18 +423,43 @@ ientry_destroy(GtkObject *object)
 
 	if(ientry->_priv->fentry)
 		gtk_widget_unref (ientry->_priv->fentry);
+	ientry->_priv->fentry = NULL;
+
 	if(ientry->_priv->pick_dialog)
 		gtk_widget_destroy(ientry->_priv->pick_dialog);
+	ientry->_priv->pick_dialog = NULL;
+
 	g_free(ientry->_priv->pick_dialog_dir);
+	ientry->_priv->pick_dialog_dir = NULL;
+
 	g_free(ientry->_priv->history_id);
+	ientry->_priv->history_id = NULL;
+
 	g_free(ientry->_priv->browse_dialog_title);
-	g_free(ientry->_priv);
+	ientry->_priv->browse_dialog_title = NULL;
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 
 }
 
+static void
+ientry_finalize(GObject *object)
+{
+	GnomeIconEntry *ientry;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_ICON_ENTRY (object));
+
+	ientry = GNOME_ICON_ENTRY(object);
+
+	g_free(ientry->_priv);
+	ientry->_priv = NULL;
+
+	if(G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
+
+}
 
 static void
 browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)

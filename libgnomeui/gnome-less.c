@@ -51,6 +51,7 @@ static void gnome_less_class_init (GnomeLessClass *klass);
 static void gnome_less_init       (GnomeLess      *messagebox);
 
 static void gnome_less_destroy    (GtkObject      *object);
+static void gnome_less_finalize   (GObject        *object);
 
 static GtkWindowClass *parent_class;
 
@@ -83,12 +84,15 @@ static void
 gnome_less_class_init (GnomeLessClass *klass)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
 
   object_class = (GtkObjectClass*) klass;
+  gobject_class = (GObjectClass*) klass;
 
   parent_class = gtk_type_class (gtk_vbox_get_type ());
 
   object_class->destroy = gnome_less_destroy;
+  gobject_class->finalize = gnome_less_finalize;
 }
 
 static void
@@ -140,6 +144,8 @@ static void gnome_less_destroy (GtkObject *object)
 {
 	GnomeLess *gl;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail(object != NULL);
 	g_return_if_fail(GNOME_IS_LESS(object));
 
@@ -149,11 +155,24 @@ static void gnome_less_destroy (GtkObject *object)
 		gdk_font_unref(gl->_priv->font);
 	gl->_priv->font = NULL;
 
+	if (GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(object);
+}
+
+static void gnome_less_finalize (GObject *object)
+{
+	GnomeLess *gl;
+
+	g_return_if_fail(object != NULL);
+	g_return_if_fail(GNOME_IS_LESS(object));
+
+	gl = GNOME_LESS(object);
+
 	g_free(gl->_priv);
 	gl->_priv = NULL;
 
-	if (GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(object);
+	if (G_OBJECT_CLASS(parent_class)->finalize)
+		(* (G_OBJECT_CLASS(parent_class)->finalize))(object);
 }
 
 /**

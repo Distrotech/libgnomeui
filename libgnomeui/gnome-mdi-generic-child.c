@@ -427,14 +427,20 @@ static void gnome_mdi_generic_child_destroy (GtkObject *obj)
 {
 	GnomeMDIGenericChild *child = GNOME_MDI_GENERIC_CHILD(obj);
 
+	/* remember, destroy can be run multiple times! */
+
 	if(child->create_view_dn)
 		child->create_view_dn(child->create_view_data);
+	child->create_view_dn = NULL;
 	if(child->create_menus_dn)
 		child->create_menus_dn(child->create_menus_data);
+	child->create_menus_dn = NULL;
 	if(child->get_config_string_dn)
 		child->get_config_string_dn(child->get_config_string_data);
+	child->get_config_string_dn = NULL;
 	if(child->set_label_dn)
 		child->set_label_dn(child->set_label_data);
+	child->set_label_dn = NULL;
 	
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(obj);

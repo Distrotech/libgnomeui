@@ -336,8 +336,12 @@ gnome_guru_destroy (GtkObject *object)
   guru->pages = NULL;
 
   /* Should destroy the one that's not in a container? */
-  gtk_widget_unref(guru->finish);
-  gtk_widget_unref(guru->next);
+  if(guru->finish)
+	  gtk_widget_unref(guru->finish);
+  guru->finish = NULL;
+  if(guru->next)
+	  gtk_widget_unref(guru->next);
+  guru->next = NULL;
 
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(object);

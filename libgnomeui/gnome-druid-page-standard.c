@@ -172,6 +172,7 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 static void
 gnome_druid_page_standard_destroy(GtkObject *object)
 {
+	/* remember, destroy can be run multiple times! */
 	if (GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }

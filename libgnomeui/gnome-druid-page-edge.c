@@ -139,10 +139,7 @@ gnome_druid_page_edge_init (GnomeDruidPageEdge *druid_page_edge)
 static void
 gnome_druid_page_edge_destroy(GtkObject *object)
 {
-	GnomeDruidPageEdge *druid_page_edge = GNOME_DRUID_PAGE_EDGE(object);
-
-	g_free(druid_page_edge->_priv);
-	druid_page_edge->_priv = NULL;
+	/* remember, destroy can be run multiple times! */
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);

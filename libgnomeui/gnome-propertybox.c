@@ -205,14 +205,12 @@ gnome_property_box_init (GnomePropertyBox *property_box)
 static void
 gnome_property_box_destroy (GtkObject *object)
 {
-	GnomePropertyBox *property_box;
-
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_PROPERTY_BOX (object));
+	/* remember, destroy can be run multiple times! */
 
-	property_box = GNOME_PROPERTY_BOX (object);
-
-	GTK_OBJECT_CLASS (parent_class)->destroy (object);
+	if(GTK_OBJECT_CLASS (parent_class)->destroy)
+		GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
 
 /**

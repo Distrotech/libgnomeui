@@ -194,6 +194,8 @@ gnome_druid_destroy (GtkObject *object)
 {
 	GnomeDruid *druid;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_DRUID (object));
 
@@ -201,22 +203,18 @@ gnome_druid_destroy (GtkObject *object)
 
 	if(druid->back) {
 		gtk_widget_destroy (druid->back);
-		gtk_widget_unref (druid->back);
 		druid->back = NULL;
 	}
 	if(druid->next) {
 		gtk_widget_destroy (druid->next);
-		gtk_widget_unref (druid->next);
 		druid->next = NULL;
 	}
 	if(druid->cancel) {
 		gtk_widget_destroy (druid->cancel);
-		gtk_widget_unref (druid->cancel);
 		druid->cancel = NULL;
 	}
 	if(druid->finish) {
 		gtk_widget_destroy (druid->finish);
-		gtk_widget_unref (druid->finish);
 		druid->finish = NULL;
 	}
 	if(druid->_priv->children) {

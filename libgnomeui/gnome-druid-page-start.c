@@ -138,8 +138,7 @@ gnome_druid_page_start_init (GnomeDruidPageStart *druid_page_start)
 static void
 gnome_druid_page_start_destroy(GtkObject *object)
 {
-	GnomeDruidPageStart *druid_page_start = GNOME_DRUID_PAGE_START(object);
-
+	/* remember, destroy can be run multiple times! */
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }

@@ -136,10 +136,7 @@ gnome_druid_page_finish_init (GnomeDruidPageFinish *druid_page_finish)
 static void
 gnome_druid_page_finish_destroy(GtkObject *object)
 {
-	GnomeDruidPageFinish *druid_page_finish = GNOME_DRUID_PAGE_FINISH(object);
-
-	g_free(druid_page_finish->_priv);
-	druid_page_finish->_priv = NULL;
+	/* remember, destroy can be run multiple times! */
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);

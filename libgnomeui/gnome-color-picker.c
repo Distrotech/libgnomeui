@@ -516,6 +516,8 @@ gnome_color_picker_destroy (GtkObject *object)
 {
 	GnomeColorPicker *cp;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (object));
 

@@ -316,55 +316,64 @@ static void
 gnome_recently_used_destroy (GtkObject* object)
 {
         GnomeRecentlyUsed* recently_used;
+        GSList *iter;
+
+	/* remember, destroy can be run multiple times! */
 
         recently_used = GNOME_RECENTLY_USED (object);
 
-        
-        (* parent_class->destroy) (object);
+	if(recently_used->_priv->add_list) {
+		iter = recently_used->_priv->add_list;
+		while (iter != NULL) {
+			gnome_recent_document_unref(iter->data);
+
+			iter = g_slist_next(iter);
+		}
+
+		g_slist_free(recently_used->_priv->add_list);
+		recently_used->_priv->add_list = NULL;
+	}
+
+	if(recently_used->_priv->hash) {
+		g_hash_table_foreach(recently_used->_priv->hash,
+				     destroy_foreach,
+				     recently_used);
+
+		g_hash_table_destroy(recently_used->_priv->hash);
+		recently_used->_priv->hash = NULL;
+	}
+
+	if (recently_used->_priv->conf) {
+		if (recently_used->_priv->conf_notify != 0) {
+			gconf_client_notify_remove(recently_used->_priv->conf,
+						   recently_used->_priv->conf_notify);
+			recently_used->_priv->conf_notify = 0;
+		}
+
+		gconf_client_remove_dir(recently_used->_priv->conf,
+					recently_used->_priv->key_root);
+
+
+		gtk_object_unref(GTK_OBJECT(recently_used->_priv->conf));
+		recently_used->_priv->conf = NULL;
+	}
+
+        if(GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy) (object);
 }
 
 static void
 gnome_recently_used_finalize (GObject* object)
 {
         GnomeRecentlyUsed* recently_used;
-        GSList *iter;
         
         recently_used = GNOME_RECENTLY_USED (object);
-
-        if (recently_used->_priv->conf_notify != 0) {
-                gconf_client_notify_remove(recently_used->_priv->conf,
-                                           recently_used->_priv->conf_notify);
-                recently_used->_priv->conf_notify = 0;
-        }
-
-        gconf_client_remove_dir(recently_used->_priv->conf,
-                                recently_used->_priv->key_root);
-
-        
-        iter = recently_used->_priv->add_list;
-        while (iter != NULL) {
-                gnome_recent_document_unref(iter->data);
-                
-                iter = g_slist_next(iter);
-        }
-
-        g_slist_free(recently_used->_priv->add_list);
-        recently_used->_priv->add_list = NULL;
-        
-        g_hash_table_foreach(recently_used->_priv->hash,
-                             destroy_foreach,
-                             recently_used);
-
-        g_hash_table_destroy(recently_used->_priv->hash);
-        recently_used->_priv->hash = NULL;
-        
-        gtk_object_unref(GTK_OBJECT(recently_used->_priv->conf));
-        recently_used->_priv->conf = NULL;
 
 	g_free(recently_used->_priv);
 	recently_used->_priv = NULL;
         
-        (* G_OBJECT_CLASS(parent_class)->finalize) (object);
+        if(G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize) (object);
 }
 
 /*

@@ -1172,6 +1172,8 @@ static void
 gnome_real_client_destroy (GtkObject *object)
 {
   GnomeClient *client;
+
+  /* remember, destroy can be run multiple times! */
   
   g_return_if_fail (object != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (object));
@@ -1190,9 +1192,11 @@ gnome_real_client_destroy (GtkObject *object)
   g_free (client->global_config_prefix);
   client->global_config_prefix = NULL;
 
-  g_list_foreach (client->static_args, (GFunc)g_free, NULL);
-  g_list_free    (client->static_args);
-  client->static_args = NULL;
+  if(client->static_args) {
+	  g_list_foreach (client->static_args, (GFunc)g_free, NULL);
+	  g_list_free    (client->static_args);
+	  client->static_args = NULL;
+  }
 
   g_strfreev (client->clone_command);
   client->clone_command = NULL;
@@ -1201,10 +1205,12 @@ gnome_real_client_destroy (GtkObject *object)
   g_strfreev (client->discard_command);
   client->discard_command = NULL;
 
-  g_hash_table_foreach_remove (client->environment, 
-			       (GHRFunc)environment_entry_remove, NULL);
-  g_hash_table_destroy        (client->environment);
-  client->environment = NULL;
+  if(client->environment) {
+	  g_hash_table_foreach_remove (client->environment, 
+				       (GHRFunc)environment_entry_remove, NULL);
+	  g_hash_table_destroy        (client->environment);
+	  client->environment = NULL;
+  }
 
   g_free     (client->program);
   client->program = NULL;

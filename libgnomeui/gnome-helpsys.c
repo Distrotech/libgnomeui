@@ -186,7 +186,14 @@ gnome_help_view_init (GnomeHelpView *help_view)
 static void
 gnome_help_view_destroy (GtkObject *obj)
 {
-  gtk_object_remove_data(GTK_OBJECT(GNOME_HELP_VIEW(obj)->toplevel), GNOME_APP_HELP_VIEW_NAME);
+  GnomeHelpView *help_view = (GnomeHelpView *)obj;
+  /* remember, destroy can be run multiple times! */
+
+  if(help_view->toplevel) {
+	  gtk_object_remove_data(GTK_OBJECT(help_view->toplevel), GNOME_APP_HELP_VIEW_NAME);
+	  gtk_object_unref(GTK_OBJECT(help_view->toplevel));
+	  help_view->toplevel = NULL;
+  }
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (obj);
@@ -206,7 +213,12 @@ gnome_help_view_set_arg (GtkObject *obj, GtkArg *arg, guint arg_id)
       help_view->app_style_priority = GTK_VALUE_INT(*arg);
       break;
     case ARG_TOPLEVEL:
+      if(help_view->toplevel) {
+	      gtk_object_remove_data(GTK_OBJECT(help_view->toplevel), GNOME_APP_HELP_VIEW_NAME);
+	      gtk_object_unref(GTK_OBJECT(help_view->toplevel));
+      }
       help_view->toplevel = GTK_WIDGET(GTK_VALUE_OBJECT(*arg));
+      gtk_object_ref(GTK_OBJECT(help_view->toplevel));
       gtk_object_set_data(GTK_VALUE_OBJECT(*arg), GNOME_APP_HELP_VIEW_NAME, help_view);
       break;
     }

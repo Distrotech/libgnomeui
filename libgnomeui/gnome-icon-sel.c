@@ -54,6 +54,7 @@ static void gnome_icon_selection_class_init (GnomeIconSelectionClass *klass);
 static void gnome_icon_selection_init       (GnomeIconSelection      *messagebox);
 
 static void gnome_icon_selection_destroy    (GtkObject               *object);
+static void gnome_icon_selection_finalize   (GObject                 *object);
 
 static GtkVBoxClass *parent_class;
 
@@ -88,12 +89,15 @@ static void
 gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
 
   object_class = (GtkObjectClass*) klass;
+  gobject_class = (GObjectClass*) klass;
 
   parent_class = gtk_type_class (gtk_vbox_get_type ());
 
   object_class->destroy = gnome_icon_selection_destroy;
+  gobject_class->finalize = gnome_icon_selection_finalize;
 }
 
 static void
@@ -161,6 +165,8 @@ static void gnome_icon_selection_destroy (GtkObject *o)
 
 	g_return_if_fail(o != NULL);
 	g_return_if_fail(GNOME_IS_ICON_SELECTION(o));
+
+	/* remember, destroy can be run multiple times! */
 	
 	gis = GNOME_ICON_SELECTION(o);
 
@@ -171,11 +177,24 @@ static void gnome_icon_selection_destroy (GtkObject *o)
 		gis->_priv->file_list = NULL;
 	}
 
+	if (GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(o);
+}
+
+static void gnome_icon_selection_finalize (GObject *o)
+{
+	GnomeIconSelection *gis;
+
+	g_return_if_fail(o != NULL);
+	g_return_if_fail(GNOME_IS_ICON_SELECTION(o));
+	
+	gis = GNOME_ICON_SELECTION(o);
+
 	g_free(gis->_priv);
 	gis->_priv = NULL;
 
-	if (GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(o);
+	if (G_OBJECT_CLASS(parent_class)->finalize)
+		(* (G_OBJECT_CLASS(parent_class)->finalize))(o);
 }
 
 /**

@@ -327,6 +327,8 @@ static void
 gnome_app_destroy (GtkObject *object)
 {
 	GnomeApp *app;
+
+	/* remember, destroy can be run multiple times! */
 	
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_APP (object));

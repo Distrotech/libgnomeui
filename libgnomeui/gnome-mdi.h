@@ -86,7 +86,9 @@ struct _GnomeMDI {
 	GnomeMDIMode mode : 3;
 
 	guint signal_id;
-	gint in_drag : 1;
+	guint in_drag : 1;
+
+	guint has_user_refcount : 1;
 };
 
 struct _GnomeMDIClass {

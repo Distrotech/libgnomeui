@@ -115,12 +115,15 @@ gnome_proc_bar_destroy (GtkObject *obj)
 {
   GnomeProcBar *pb = GNOME_PROC_BAR (obj);
 
+  /* remember, destroy can be run multiple times! */
+
   if (pb->_priv->tag != -1) {
     gtk_timeout_remove (pb->_priv->tag);
     pb->_priv->tag = -1;
   }
 
   gnome_proc_bar_free_colors (pb);
+
   g_free(pb->_priv->colors);
   pb->_priv->colors = NULL;
 
@@ -141,8 +144,8 @@ gnome_proc_bar_finalize (GObject *o)
     g_free(pb->_priv);
     pb->_priv = NULL;
 
-
-    (* G_OBJECT_CLASS (parent_class)->finalize) (o);
+    if(G_OBJECT_CLASS (parent_class)->finalize)
+	    (* G_OBJECT_CLASS (parent_class)->finalize) (o);
 }
 
 static void

@@ -55,6 +55,8 @@ gnome_stock_destroy(GtkObject *object)
 {
 	GnomeStock *stock;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail(object != NULL);
 	g_return_if_fail(GNOME_IS_STOCK(object));
 
