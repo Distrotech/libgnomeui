@@ -1,3 +1,6 @@
+1999-01-15  Szekeres István <szekeres@cyberspace.mht.bme.hu>
+	* gtk-clock.c: the widget is now destroyed correctly. 
+
 1999-01-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (gnome_mdi_remove_child): set parent to NULL just

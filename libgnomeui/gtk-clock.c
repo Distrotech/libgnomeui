@@ -14,6 +14,8 @@
 static void gtk_clock_class_init(GtkClockClass *klass);
 static void gtk_clock_init(GtkClock *clock);
 
+static GtkLabelClass *parent_class = NULL;
+
 guint gtk_clock_get_type(void)
 {
 	static guint gtkclock_type = 0;
@@ -33,8 +35,20 @@ guint gtk_clock_get_type(void)
 	return gtkclock_type;
 }
 
+static void gtk_clock_destroy(GtkObject *object)
+{
+	g_return_if_fail(object != NULL);
+
+	gtk_clock_stop(GTK_CLOCK(object));
+	GTK_OBJECT_CLASS(parent_class)->destroy(object);
+}
+
 static void gtk_clock_class_init(GtkClockClass *klass)
 {
+	GtkObjectClass *object_class = (GtkObjectClass *)klass;
+	
+	object_class->destroy = gtk_clock_destroy;
+	parent_class = gtk_type_class(gtk_label_get_type());
 }
 
 static void gtk_clock_init(GtkClock *clock)
