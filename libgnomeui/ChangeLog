@@ -1,3 +1,11 @@
+1998-07-15  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome-popupmenu.c (gnome_app_create_popup_menus): Declare `void'
+	return type.
+	(gnome_app_create_popup_menus_custom): Likewise.
+	* gnome-popupmenu.h: Coressponding changes.  Also add
+	{BEGIN,END}_GNOME_DECLS gaurds.
+
 Wed Jul 15 19:14:44 1998  Havoc Pennington  <hp@pobox.com>
 
 	* TODO: Updated.

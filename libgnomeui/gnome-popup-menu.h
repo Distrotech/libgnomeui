@@ -7,9 +7,16 @@
 #include <gtk/gtk.h>
 #include <libgnome/gnome-defs.h>
 
-gnome_app_create_popup_menus(GnomeApp *, GtkWidget *, GnomeUIInfo *, gpointer *);
+BEGIN_GNOME_DECLS
+
+void
+gnome_app_create_popup_menus(GnomeApp *, GtkWidget *, GnomeUIInfo *,
+			     gpointer *);
+void
 gnome_app_create_popup_menus_custom(GnomeApp *,
 				    GtkWidget *,
 				    GnomeUIInfo *,
        				    gpointer *,
 			            GnomeUIBuilderData *);
+
+END_GNOME_DECLS

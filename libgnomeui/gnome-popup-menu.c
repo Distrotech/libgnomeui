@@ -42,6 +42,7 @@ void gnome_app_rightclick_popup(GtkWidget *eb_widget, GdkEventButton *event, Gno
    	gtk_menu_popup (GTK_MENU(popup_menu), NULL, NULL, NULL, NULL, event->button, event->time);
 }
 
+void
 gnome_app_create_popup_menus_custom (GnomeApp *app,
 		 		     GtkWidget *child,
 		 		     GnomeUIInfo *menuinfo,
@@ -108,11 +109,14 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 		gnome_app_do_menu_creation(app, menubar, 0, menuinfo, uibdata);
 }
 
-gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child, GnomeUIInfo *menudata, gpointer *handler)
+void
+gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child,
+			      GnomeUIInfo *menudata, gpointer *handler)
 {
 	GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
 				      NULL, FALSE, NULL, NULL };
 
-	gnome_app_create_popup_menus_custom(app, child, menudata, handler, &uidata);
+	gnome_app_create_popup_menus_custom(app, child, menudata, handler,
+					    &uidata);
 }
 #endif /* GTK_HAVE_ACCEL_GROUP */
