@@ -44,6 +44,8 @@ struct _GnomeProcBar {
 	GtkWidget *label;
 	GtkWidget *frame;
 
+	gboolean vertical : 1;
+
 	GdkPixmap *bs;
 	GdkColor *colors;
 
@@ -66,6 +68,7 @@ GtkWidget * gnome_proc_bar_new             (GtkWidget *label,
 					    gint n, GdkColor *colors,
 					    gint (*cb)());
 void        gnome_proc_bar_set_values      (GnomeProcBar *pb, unsigned val []);
+void        gnome_proc_bar_set_orient      (GnomeProcBar *pb, gboolean vertical);
 void        gnome_proc_bar_start           (GnomeProcBar *pb, gint time, gpointer data);
 void        gnome_proc_bar_stop            (GnomeProcBar *pb);
 void        gnome_proc_bar_update          (GnomeProcBar *pb, GdkColor *colors);

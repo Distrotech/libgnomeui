@@ -321,3 +321,7 @@ gnome_proc_bar_update (GnomeProcBar *pb, GdkColor *colors)
 
 	gnome_proc_bar_setup_colors (pb);
 }
+
+void
+gnome_proc_bar_set_orient (GnomeProcBar *pb, gboolean vertical)
+{ }
