@@ -6,14 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
-"POT-Creation-Date: 2004-02-12 16:46+0100\n"
-"PO-Revision-Date: 2004-02-14 15:25+0200\n"
+"POT-Creation-Date: 2004-02-22 15:28+0100\n"
+"PO-Revision-Date: 2004-02-22 20:01+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkish <gnome@azitt.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -49,7 +48,7 @@ msgstr "Tərcüməçilər"
 
 #: libgnomeui/gnome-about.c:323
 msgid "C_redits"
-msgstr "Müə_lliflər"
+msgstr "_Müəlliflər"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -117,7 +116,7 @@ msgstr "Tək sənədləşdirici girişi"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "Tərcüməçilər haqqında"
+msgstr "Tərcüməçilər"
 
 #: libgnomeui/gnome-about.c:432
 msgid "Credits to the translators. This string should be marked as translatable"
@@ -244,7 +243,7 @@ msgstr "Hazırkı faylı başqa adla qeyd et"
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
-msgstr "_Çevir"
+msgstr "Ç_evir"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
@@ -253,7 +252,7 @@ msgstr "Faylın qeyd edilmiş şəklinə keç"
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr "_Çap Et..."
+msgstr "Ç_ap Et..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -262,7 +261,7 @@ msgstr "Hazırkı faylı çap et"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Çap _Köklənməsi..."
+msgstr "Çap _Qurğuları..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -271,7 +270,7 @@ msgstr "Hazırkı çapçının qurğularını kökləyin"
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
-msgstr "_bağla"
+msgstr "_Bağla"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
@@ -280,7 +279,7 @@ msgstr "Hazırkı faylı bağla"
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr "_Çıx"
+msgstr "Çı_x"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
@@ -302,7 +301,7 @@ msgstr "Seçili sahəni kəs"
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "_Köçür"
+msgstr "Köçü_r"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
@@ -329,7 +328,7 @@ msgstr "Seçili sahəni təmizlə"
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "Qa_ytar"
+msgstr "_Geri Al"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
@@ -338,7 +337,7 @@ msgstr "Axırıncı gedişi dala qaytar"
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "_Yenidən"
+msgstr "_Təkrarla"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
@@ -356,7 +355,7 @@ msgstr "Söz qatarı axtar"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "_Sonrakini Tap"
+msgstr "_Sonrakını Tap"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -386,11 +385,11 @@ msgstr "Fayl xassələrini təkmilləşdir"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr "_Xüsusiyyətlər"
+msgstr "_Seçimlər"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Proqram tə'minatını sazla"
+msgstr "Proqram tə'minatını quraşdırın"
 
 #. 20
 #.
@@ -428,7 +427,7 @@ msgstr "Yeni pəncərə yarat"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "Bu Pəncərəni _bağla"
+msgstr "Bu Pəncərəni _Bağla"
 
 #: libgnomeui/gnome-app-helper.c:240
 #: test-gnome/testgnome.xml.h:2
@@ -440,7 +439,7 @@ msgstr "Hazırkı pəncərəni bağla"
 #.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
-msgstr "_Yeni Oyun"
+msgstr "_Yeni oyun"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
@@ -562,19 +561,19 @@ msgstr "xeyir"
 
 #: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
-msgstr " (bəli və ya xeyir)"
+msgstr " (bəli ya da xeyir)"
 
 #: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
-msgstr "  - Oldu? (bəli və ya xeyir)"
+msgstr "  - Oldu? (bəli ya da xeyir)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr "Gedişat"
+msgstr "İrəliləmə"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr "Prq ID"
+msgstr "Prq ID-si"
 
 #: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
@@ -582,7 +581,7 @@ msgstr "Proqram "
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
-msgstr "Gedişatdadır"
+msgstr "İrəliləmə çubuğuna malikdir"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
@@ -660,11 +659,11 @@ msgstr "PREFIX"
 msgid "Disable connection to session manager"
 msgstr "Gedişat idarəçisinə bağlantıya mane ol"
 
-#: libgnomeui/gnome-client.c:974
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Gedişat idarəsi"
 
-#: libgnomeui/gnome-client.c:2474
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Çıxışı Ləğv Et"
 
@@ -1207,7 +1206,7 @@ msgstr "_Domen:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
-msgstr "_Parol:"
+msgstr "Ş_ifrə:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
@@ -1314,20 +1313,20 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI Kitabxanası"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
+#: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Çoxlu parçalanma xətaları meydana geldi: xəta göstəricisini göstərə bilmirəm\n"
+msgstr "Çoxlu parçalanma xətaları meydana gəldi: xəta dialoqu göstərilə bilmir\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:721
+#: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Parçalanma xətası!\n"
-"Xəta dialoqunu göstərə bilmirəm\n"
+"Xəta dialoqunu göstərilə bilmir\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1361,13 +1360,17 @@ msgstr "XƏtaları düzəltməkdə inkişafçılara kömək edə bilərsiniz.  Y
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "İstifadə qaydası: gnome_segv2 proqram-adı nömrəsi\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "Proqramı _Yenidən Başlat"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "İnkişafçılara Xəbər Ver"
+msgid "_Inform Developers"
+msgstr "_İnkişafçılara Xəbər Ver"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Xəta Həlli"
+msgid "_Debug"
+msgstr "_Xəta Həlli"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
