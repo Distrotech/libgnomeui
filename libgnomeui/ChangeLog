@@ -1,5 +1,8 @@
 1998-09-06  Martin Baulig  <martin@home-of-linux.org>
 
+	* gnome-mdi.c (gnome_mdi_set_mode, rootwin_drop): Make the newly
+	created windows have the same size the current view had before.
+
 	* gnome-mdi.h (gnome_mdi_active_view): New function.
 	(gnome_mdi_set_active_view): New function.
 

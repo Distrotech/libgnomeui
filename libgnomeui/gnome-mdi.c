@@ -648,7 +648,13 @@ static void rootwin_drop(GtkWidget *rw, GdkEvent *event, GnomeMDI *mdi) {
     return;
 
   if(old_book->cur_page) {
+    gint width, height;
+
     view = old_book->cur_page->child;
+
+    width = view->allocation.width;
+    height = view->allocation.height;
+
     gtk_container_remove(GTK_CONTAINER(old_book), view);
 
     app_create(mdi);
@@ -658,6 +664,8 @@ static void rootwin_drop(GtkWidget *rw, GdkEvent *event, GnomeMDI *mdi) {
     book_add_view(GTK_NOTEBOOK(new_book), view);
 
     gtk_window_position(GTK_WINDOW(mdi->active_window), GTK_WIN_POS_MOUSE);
+    
+    gtk_widget_set_usize (view, width, height);
 
     gtk_widget_show(GTK_WIDGET(mdi->active_window));
   }
@@ -1266,6 +1274,7 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
   GtkWidget *view;
   GnomeMDIChild *child;
   GList *child_node, *view_node;
+  gint width = -1, height = -1;
 
   g_return_if_fail(mdi != NULL);
   g_return_if_fail(GNOME_IS_MDI(mdi));
@@ -1277,6 +1286,12 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
     mode = mdi->mode;
   else if(mdi->mode == mode)
     return;
+
+  /* Get current width and height. */
+  if (mdi->active_view) {
+    width = mdi->active_view->allocation.width;
+    height = mdi->active_view->allocation.height;
+  }
 
   /* remove all views from their parents */
   child_node = mdi->children;
@@ -1329,6 +1344,9 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
     view_node = child->views;
     while(view_node) {
       view = GTK_WIDGET(view_node->data);
+
+      if ((width != -1) && (height != -1))
+	gtk_widget_set_usize (view, width, height);
 
       if(mdi->mode == GNOME_MDI_NOTEBOOK)
         book_add_view(GTK_NOTEBOOK(mdi->active_window->contents), view);
