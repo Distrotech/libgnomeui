@@ -1,3 +1,9 @@
+Sun Dec 12 10:57:40 1999  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: check for number on stack AFTER we reduce
+	  stack, this fixes a segfault where reduce_stack actually did
+	  reduce the stack. Fixes bug #4330
+
 Sun Dec  5 17:55:53 1999  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gnome-about.c (gnome_fill_info): Applied the patch from KUSANO
