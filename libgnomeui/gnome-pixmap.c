@@ -7,13 +7,15 @@
 
 #include <config.h>
 
+#if 0
 #include <X11/Xlib.h>
 #include <gdk/gdkx.h>
-#include <gdk_imlib.h>
+#endif
 #include "libgnome/gnome-defs.h"
 #include <gtk/gtk.h>                  /* These two includes should be remove once everyting */
 #include "libgnome/libgnomeP.h"        /* is switched to use the GnomePixmap widget.         */
 #include "gnome-pixmap.h"
+#include <gdk-pixbuf.h>
 
 
 static void gnome_pixmap_class_init    (GnomePixmapClass *class);
@@ -252,7 +254,7 @@ gnome_pixmap_new_from_rgb_d (unsigned char *data, unsigned char *alpha,
 GtkWidget *
 gnome_pixmap_new_from_rgb_d_shaped (unsigned char *data, unsigned char *alpha,
 				    int rgb_width, int rgb_height,
-				    GdkImlibColor *shape_color)
+				    GdkColor *shape_color)
 {
 	GnomePixmap *gpixmap;
 
@@ -291,8 +293,8 @@ gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
 
 	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
 	gnome_pixmap_load_rgb_d_at_size (gpixmap, data, alpha,
-					rgb_width, rgb_height,
-					width, height);
+                                         rgb_width, rgb_height,
+                                         width, height);
 
 	return GTK_WIDGET (gpixmap);
 }
@@ -317,7 +319,7 @@ gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
 					    unsigned char *alpha,
 					    int rgb_width, int rgb_height,
 					    int width, int height,
-					    GdkImlibColor *shape_color)
+					    GdkColor *shape_color)
 {
 	GnomePixmap *gpixmap;
 
@@ -328,56 +330,6 @@ gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
 						rgb_width, rgb_height,
 						width, height,
 						shape_color);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_imlib:
- * @im: A pointer to GdkImlibImage data
- *
- * Description: Returns a widget that contains the image, or %NULL
- * if it fails to load the image. Note that @im will not be
- * rendered after this call.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_imlib (GdkImlibImage *im)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(im != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_imlib (gpixmap, im);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_imlib_at_size:
- * @im: A pointer to GdkImlibImage data
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Returns a widget that contains the image scaled to
- * @width by @height pixels, or %NULL if it fails to load the image.
- * Note that @im will not be * rendered after this call.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im, int width, int height)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail (im != NULL, NULL);
-	g_return_val_if_fail (width > 0, NULL);
-	g_return_val_if_fail (height > 0, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_imlib_at_size (gpixmap, im, width, height);
 
 	return GTK_WIDGET (gpixmap);
 }
@@ -406,7 +358,7 @@ gnome_pixmap_new_from_gnome_pixmap (GnomePixmap *gpixmap_old)
 	if (GTK_WIDGET(gpixmap_old)->window)
 		visual = gdk_window_get_visual (GTK_WIDGET(gpixmap_old)->window);
 	else
-		visual = gdk_imlib_get_visual();
+		visual = gdk_rgb_get_visual();
 	gpixmap->pixmap = gdk_pixmap_new (gpixmap_old->pixmap,
 					  req.width, req.height,
 					  visual->depth);
@@ -453,8 +405,8 @@ setup_window_and_style (GnomePixmap *gpixmap)
 	} else {
 		w = h = 0;
 	}
-	imvisual = gdk_imlib_get_visual ();
-	imcolormap = gdk_imlib_get_colormap ();
+	imvisual = gdk_rgb_get_visual ();
+	imcolormap = gdk_rgb_get_cmap ();
 	visual = gtk_widget_get_visual (widget);
 	colormap = gtk_widget_get_colormap (widget);
 	if(GDK_VISUAL_XVISUAL(imvisual)->visualid !=
@@ -633,21 +585,36 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
 }
 
 static void
-finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int height, int destroy)
+gdk_pixbuf_render(GdkPixbuf* buf, GdkPixmap** pixmap, GdkBitmap** mask)
 {
-	if (!im)
+        g_warning("doesn't work");
+
+}
+
+static void
+finish_load (GnomePixmap *gpixmap, GdkPixbuf* buf,
+             gboolean scaled, int width, int height, gboolean unref)
+{
+        GdkPixbuf* old;
+        
+	if (buf == NULL)
 		return;
 
-	if (scaled)
-		gdk_imlib_render (im, width, height);
-	else
-		gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+	if (scaled) {
+                old = buf;
+		buf = gdk_pixbuf_scale(old, width, height);
+                if (unref)
+                        gdk_pixbuf_unref(buf);
+                else
+                        unref = TRUE; /* do unref our new copy */
+        }
 
-	gpixmap->pixmap = gdk_imlib_copy_image (im);
-	gpixmap->mask = gdk_imlib_copy_mask (im);
+        gdk_pixbuf_render(buf, &gpixmap->pixmap, &gpixmap->mask);
 
-	if (destroy)
-		gdk_imlib_destroy_image (im);
+	if (unref)
+		gdk_pixbuf_unref(buf);
+
+        buf = NULL;
 
 	if(!(GTK_WIDGET_FLAGS(gpixmap)&GTK_NO_WINDOW)) {
 		if (GTK_WIDGET_REALIZED (gpixmap)) {
@@ -667,23 +634,23 @@ finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int
 static void
 load_file (GnomePixmap *gpixmap, const char *filename, int scaled, int width, int height)
 {
-	GdkImlibImage *im;
+        GdkPixbuf* buf;
 
 	free_pixmap_and_mask (gpixmap);
 
-	im = gdk_imlib_load_image ((char *)filename);
-	finish_load (gpixmap, im, scaled, width, height, 1);
+        buf = gdk_pixbuf_load_image(filename);
+	finish_load (gpixmap, buf, scaled, width, height, TRUE);
 }
 
 static void
 load_xpm_d (GnomePixmap *gpixmap, char **xpm_data, int scaled, int width, int height)
 {
-	GdkImlibImage *im;
+        GdkPixbuf* buf;
 
 	free_pixmap_and_mask (gpixmap);
 
-	im = gdk_imlib_create_image_from_xpm_data (xpm_data);
-	finish_load (gpixmap, im, scaled, width, height, 1);
+        buf = gdk_pixbuf_new_from_xpm_d(xpm_data);
+	finish_load (gpixmap, buf, scaled, width, height, TRUE);
 }
 
 static void
@@ -691,12 +658,12 @@ load_rgb_d (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
 	    int rgb_width, int rgb_height,
 	    int scaled, int width, int height)
 {
-	GdkImlibImage *im;
+        GdkPixbuf* buf;
 
 	free_pixmap_and_mask (gpixmap);
 
-	im = gdk_imlib_create_image_from_data (data, alpha, rgb_width, rgb_height);
-	finish_load (gpixmap, im, scaled, width, height, 1);
+        buf = gdk_pixbuf_new_from_rgb_d(data, rgb_width, rgb_height);
+	finish_load (gpixmap, buf, scaled, width, height, TRUE);
 }
 
 static void
@@ -704,15 +671,14 @@ load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
 		   unsigned char *alpha,
 		   int rgb_width, int rgb_height,
 		   int scaled, int width, int height,
-		   GdkImlibColor *shape_color)
+		   GdkColor *shape_color)
 {
-	GdkImlibImage *im;
+        GdkPixbuf* buf;
 
 	free_pixmap_and_mask (gpixmap);
 
-	im = gdk_imlib_create_image_from_data (data, alpha, rgb_width, rgb_height);
-	gdk_imlib_set_image_shape (im, shape_color);
-	finish_load (gpixmap, im, scaled, width, height, 1);
+        buf = gdk_pixbuf_new_from_rgb_d_with_shape_color(data, rgb_width, rgb_height);
+	finish_load (gpixmap, buf, scaled, width, height, 1);
 }
 
 /**
@@ -834,7 +800,7 @@ void
 gnome_pixmap_load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
 				unsigned char *alpha,
 				int rgb_width, int rgb_height,
-				GdkImlibColor *shape_color)
+				GdkColor *shape_color)
 {
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
@@ -897,7 +863,7 @@ gnome_pixmap_load_rgb_d_shaped_at_size (GnomePixmap *gpixmap,
 					unsigned char *alpha,
 					int rgb_width, int rgb_height,
 					int width, int height,
-					GdkImlibColor *shape_color)
+					GdkColor *shape_color)
 {
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
@@ -910,6 +876,63 @@ gnome_pixmap_load_rgb_d_shaped_at_size (GnomePixmap *gpixmap,
 	load_rgb_d_shaped (gpixmap, data, alpha, rgb_width, rgb_height, TRUE,
 			   width, height, shape_color);
 }
+
+/*
+ * Compat
+ */
+
+#if 0
+
+/**
+ * gnome_pixmap_new_from_imlib:
+ * @im: A pointer to GdkImlibImage data
+ *
+ * Description: Returns a widget that contains the image, or %NULL
+ * if it fails to load the image. Note that @im will not be
+ * rendered after this call.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
+ */
+GtkWidget *
+gnome_pixmap_new_from_imlib (GdkImlibImage *im)
+{
+	GnomePixmap *gpixmap;
+
+	g_return_val_if_fail(im != NULL, NULL);
+
+	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
+	gnome_pixmap_load_imlib (gpixmap, im);
+
+	return GTK_WIDGET (gpixmap);
+}
+
+/**
+ * gnome_pixmap_new_from_imlib_at_size:
+ * @im: A pointer to GdkImlibImage data
+ * @width: desired width.
+ * @height: desired height.
+ *
+ * Description: Returns a widget that contains the image scaled to
+ * @width by @height pixels, or %NULL if it fails to load the image.
+ * Note that @im will not be * rendered after this call.
+ *
+ * Returns: A new #GnomePixmap widget or %NULL
+ */
+GtkWidget *
+gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im, int width, int height)
+{
+	GnomePixmap *gpixmap;
+
+	g_return_val_if_fail (im != NULL, NULL);
+	g_return_val_if_fail (width > 0, NULL);
+	g_return_val_if_fail (height > 0, NULL);
+
+	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
+	gnome_pixmap_load_imlib_at_size (gpixmap, im, width, height);
+
+	return GTK_WIDGET (gpixmap);
+}
+
 
 /**
  * gnome_pixmap_load_imlib:
@@ -955,3 +978,4 @@ gnome_pixmap_load_imlib_at_size (GnomePixmap *gpixmap,
 	finish_load (gpixmap, im, 1, width, height, 0);
 }
 
+#endif

@@ -16,6 +16,7 @@ libgnomeuiincludedir = $(includedir)/libgnomeui
 
 INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
+	-I$(top_srcdir)/gdk-pixbuf/src	\
 	-I$(includedir) $(GDK_IMLIB_CFLAGS) \
 	$(AUDIOFILE_CFLAGS) $(ESD_CFLAGS) \
         -DGNOMELIBDIR=\""$(libdir)"\" \
