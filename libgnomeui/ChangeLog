@@ -1,5 +1,18 @@
 Sun Feb 15 21:22:33 1998  Tom Tromey  <tromey@cygnus.com>
 
+	* libgnomeui.h: Include gnome-startup.h.
+	* Makefile.am (libgnomeui_la_SOURCES): Include gnome-startup.c.
+	(libgnomeuiinclude_HEADERS): Include gnome-startup.h.
+	* gnome-startup.c: New file.
+	* gnome-startup.h: New file.
+
+	* gnome-client.c (gnome_client_init): Initialize previous_id.
+	(gnome_real_client_destroy): Free previous_id if required.
+	(gnome_client_new_without_connection): Set previous_id.
+	(gnome_client_get_previous_id): New function.
+	* gnome-client.h (struct _GnomeClient): Added previous_id member.
+	(gnome_client_get_previous_id): Declare.
+
 	* gnome-client.h: Corrected comment.
 
 Sat Feb 14 17:15:18 1998  Tom Tromey  <tromey@cygnus.com>

@@ -94,6 +94,9 @@ struct _GnomeClient
   /* client id of this client */
   gchar              *client_id;
 
+  /* Previous client id of this client.  */
+  gchar		     *previous_id;
+
   /* The following properties are predefined in the X session
      management protocol.  The entries marked with a 'x' are required
      by the session management protocol.  The entries marked with a
@@ -180,6 +183,13 @@ void         gnome_client_set_id                 (GnomeClient *client,
    object has never been connected to a session manager and a client
    id hasn't been set, this function return 'NULL'.  */
 gchar       *gnome_client_get_id                 (GnomeClient *client);
+
+/* Get the client id from the last session.  If this object was not
+   recreated from a previous session, returns NULL.  This is useful
+   because a client might choose to store configuration information
+   in a location based on the session id; this old session id must be
+   recalled later to find the information.  */
+gchar       *gnome_client_get_previous_id        (GnomeClient *client);
 
 
 /* The follwing functions are used to set or unset some session

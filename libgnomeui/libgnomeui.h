@@ -16,6 +16,7 @@
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-properties.h"
 #include "libgnomeui/gnome-scores.h"
+#include "libgnomeui/gnome-startup.h"
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gtk-clock.h"

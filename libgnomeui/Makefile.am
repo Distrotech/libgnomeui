@@ -24,6 +24,7 @@ libgnomeui_la_SOURCES = \
 	gnome-properties.c		\
 	gnome-client.c			\
 	gnome-scores.c			\
+	gnome-startup.c			\
 	gnome-stock.c			\
 	gtk-clock.c			\
 	gtk-ted.c
@@ -44,6 +45,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-pixmap.h			\
 	gnome-client.h			\
 	gnome-scores.h			\
+	gnome-startup.h			\
 	gnome-stock.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\

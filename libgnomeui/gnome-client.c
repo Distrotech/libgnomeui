@@ -226,6 +226,7 @@ gnome_client_init (GnomeClient *client)
 {
   client->smc_conn          = NULL;
   client->client_id         = NULL;
+  client->previous_id       = NULL;
   client->input_id          = 0;
 
   /* Preset some default values.  */
@@ -284,7 +285,9 @@ gnome_real_client_destroy (GtkObject *object)
     gnome_client_disconnect (client);
 
   g_free (client->client_id);
-  
+  if (client->previous_id)
+    g_free (client->previous_id);
+
   array_free (client->clone_command);
   g_free     (client->current_directory);
   array_free (client->discard_command);
@@ -333,7 +336,10 @@ gnome_client_new_without_connection (gint argc, gchar *argv[])
    *  command line.  */
   client_id= array_has_sm_client_id_arg (client->restart_command);
   if (client_id)
-    client->client_id= g_strdup (client_id);
+    {
+      client->previous_id= g_strdup (client_id);
+      client->client_id= g_strdup (client_id);
+    }
   
   return client;
 }
@@ -731,6 +737,13 @@ gnome_client_get_id (GnomeClient *client)
   g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
   
   return client->client_id;
+}
+
+gchar *
+gnome_client_get_previous_id (GnomeClient *client)
+{
+  g_return_val_if_fail (client != NULL, NULL);
+  return client->previous_id;
 }
 
 /*****************************************************************************/
