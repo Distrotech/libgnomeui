@@ -37,6 +37,8 @@
 #define GETTEXT_PACKAGE PACKAGE
 #endif
 
+GtkIconSize gnome_icon_size_toolbar;
+
 static void G_GNUC_UNUSED
 add_sized (GtkIconFactory *factory,
            const guchar   *inline_data,

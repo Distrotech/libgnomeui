@@ -1,5 +1,11 @@
 2001-09-02  Anders Carlsson  <andersca@gnu.org>
 
+	* gnome-stock-icons.c:
+	* gnome-stock-icons.h:
+	Move gnome_icon_size_toolbar into the .c file.
+
+2001-09-02  Anders Carlsson  <andersca@gnu.org>
+
 	* gnome-href.c (gnome_href_clicked): Use the new gnome_url_show
 	api.
 

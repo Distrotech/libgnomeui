@@ -32,7 +32,7 @@
 G_BEGIN_DECLS
 
 #define GNOME_ICON_SIZE_TOOLBAR gnome_icon_size_toolbar
-GtkIconSize gnome_icon_size_toolbar;
+extern GtkIconSize gnome_icon_size_toolbar;
 
 extern void init_gnome_stock_icons (void);
 
