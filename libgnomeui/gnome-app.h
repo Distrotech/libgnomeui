@@ -42,6 +42,7 @@ struct _GnomeApp {
 	char     *prefix;	/* gnome config prefix */
 	GtkWidget *menubar;	/* The MenuBar */
 	GtkWidget *toolbar;	/* The Toolbar */
+        GtkWidget *statusbar;   /* The Statusbar */
 	GtkWidget *contents;	/* The contents */
 	GtkWidget *table;	/* The table widget that ties them all */
 	
@@ -60,6 +61,8 @@ void gnome_app_set_menus            (GnomeApp *app,
 			             GtkMenuBar *menubar);
 void gnome_app_set_toolbar          (GnomeApp *app,
 			             GtkToolbar *toolbar);
+void gnome_app_set_statusbar        (GnomeApp *app,
+			             GtkWidget *statusbar);
 void gnome_app_set_contents         (GnomeApp *app,
 			             GtkWidget *contents);
 void gnome_app_toolbar_set_position (GnomeApp *app,

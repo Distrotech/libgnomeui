@@ -88,7 +88,7 @@ static void
 gnome_app_init(GnomeApp *app)
 {
 	app->menubar = app->toolbar = app->contents = NULL;
-	app->table = gtk_table_new(3, 3, FALSE);
+	app->table = gtk_table_new(4, 3, FALSE);
 	gtk_widget_show(app->table);
 	gtk_container_add(GTK_CONTAINER(app), app->table);
 	
@@ -529,3 +529,30 @@ gnome_app_set_toolbar (GnomeApp *app,
 	if(at && !g_list_find(GTK_WINDOW(app)->accelerator_tables, at))
 		gtk_window_add_accelerator_table(GTK_WINDOW(app), at);
 }
+
+void
+gnome_app_set_statusbar (GnomeApp *app,
+		         GtkWidget *statusbar)
+{
+	g_return_if_fail(app != NULL);
+	g_return_if_fail(GNOME_IS_APP(app));
+	g_return_if_fail(statusbar != NULL);
+	g_return_if_fail(app->statusbar == NULL);
+
+	app->statusbar = GTK_WIDGET(statusbar);
+	gtk_widget_show(app->statusbar);
+
+	gtk_table_attach (GTK_TABLE (app->table),
+			  app->statusbar,
+			  0, 3,
+			  3, 4,
+			  GTK_EXPAND | GTK_FILL,
+			  GTK_SHRINK,
+			  0, 0);
+}
+
+
+
+
+
+

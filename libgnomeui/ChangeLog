@@ -1,3 +1,9 @@
+Wed May  6 01:29:33 1998  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app.[ch]: added gnome_app_set_statusbar() function
+	which simply allows for insertion of another widget in the
+	bottom row of the table.
+	
 Sun May  3 10:56:50 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-ice.c (ice_tag): Removed.
