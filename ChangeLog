@@ -1,3 +1,7 @@
+2003-12-29  Christian Rose  <menthos@menthos.com>
+
+	* configure.in: Added "hr" to ALL_LINGUAS.
+
 2003-12-28  Anders Carlsson  <andersca@gnome.org>
 
 	* configure.in: Release 2.5.2
