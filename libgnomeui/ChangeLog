@@ -1,5 +1,9 @@
 1998-08-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	Fixed a bug waiting to happen on my previous change: Specifically,
+	UI-properties would have been the only victim (change of the style
+	of a gnome-propertybox while using it).
+	
 	* gnome-propertybox.c (gnome_property_box_init): Implement support
 	for OK/CANCEL/HELP vs OK/APPLY/CLOSE/HELP modes. 
 

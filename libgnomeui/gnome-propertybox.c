@@ -223,7 +223,7 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 	pbox = GNOME_PROPERTY_BOX (dialog);
 	
 	/* Choose which style we did */
-	if (gnome_preferences_get_propery_box_apply ())
+	if (pbox->apply_button){
 		switch(button) {
 		case 0:
 			apply_and_close (GNOME_PROPERTY_BOX (dialog));
@@ -240,7 +240,7 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 		default:
 			g_assert_not_reached();
 		}
-	else {
+	} else {
 		switch(button) {
 		case 0:
 			apply_and_close (GNOME_PROPERTY_BOX (dialog));
