@@ -1,4 +1,4 @@
-/* GnomeApp widget */
+/* GnomeApp widget, by Elliot Lee <sopwith@cuc.edu> */
 
 #ifndef GNOME_APP_H
 #define GNOME_APP_H
@@ -53,7 +53,8 @@ struct _GnomeToolbarInfo {
   gpointer pixmap_info; /* Either a pointer to the char ** for the pixmap
 			   (for PMAP_DATA)
 			   or a char * for the filename (PMAP_FILENAME) */
-  GtkSignalFunc clicked_callback; /* Useful for TB_ITEMs only */ 
+  gpointer clicked_callback; /* Useful for TB_ITEMs only,
+				it's the GtkSignalFunc */
 };
 typedef struct _GnomeToolbarInfo GnomeToolbarInfo;
 

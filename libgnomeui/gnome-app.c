@@ -4,6 +4,8 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
+static void gnome_app_class_init(GnomeAppClass *appclass);
+static void gnome_app_destroy(GnomeApp *app);
 static void gnome_app_init(GnomeApp *app);
 static void gnome_app_do_menu_creation(GtkWidget *parent_widget,
 				       GnomeMenuInfo *menuinfo);
@@ -15,6 +17,7 @@ static void gnome_app_rightclick_event(GtkWidget *widget,
 				       GnomeApp *app);
 static void gnome_app_setpos_activate(GtkMenuItem *menu_item,
 				      GnomeApp *app);
+static GtkWindowClass *parent_class = NULL;
 
 guint
 gnome_app_get_type(void)
@@ -25,13 +28,21 @@ gnome_app_get_type(void)
       "GnomeApp",
       sizeof(GnomeApp),
       sizeof(GnomeAppClass),
-      (GtkClassInitFunc) NULL,
+      (GtkClassInitFunc) gnome_app_class_init,
       (GtkObjectInitFunc) gnome_app_init,
       (GtkArgFunc) NULL,
     };
     gnomeapp_type = gtk_type_unique(gtk_window_get_type(), &gnomeapp_info);
+    parent_class = gtk_type_class(gtk_window_get_type());
   }
   return gnomeapp_type;
+}
+
+static void gnome_app_class_init(GnomeAppClass *appclass)
+{
+  GtkObjectClass *object_class = GTK_OBJECT_CLASS(appclass);
+  g_print("gnome_app_class_init()\n");
+  object_class->destroy = gnome_app_destroy;
 }
 
 static void
@@ -56,6 +67,14 @@ gnome_app_new(gchar *appname)
     gtk_window_set_title(GTK_WINDOW(retval), appname);
   
   return retval;
+}
+
+static void gnome_app_destroy(GnomeApp *app)
+{
+  g_print("gnome_app_destroy()\n");
+
+  if(GTK_OBJECT_CLASS(parent_class)->destroy)
+    (* GTK_OBJECT_CLASS(parent_class)->destroy)(GTK_OBJECT(app));
 }
 
 static void
