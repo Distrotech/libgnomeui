@@ -1,3 +1,10 @@
+1998-12-13  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-init.c:
+	Created BROKEN_AXP_IMLIB define to eliminate BadMatch problems
+	on Alpha, with every single GNOME app that uses imlib.
+	FIXME: This is a hack that masks the real problem (whatever it is)
+
 1998-12-13  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-procbar.[ch]: New files. Added the GnomeProcBar that is

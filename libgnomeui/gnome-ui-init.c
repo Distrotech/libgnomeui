@@ -53,6 +53,15 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 
 
 
+/* Define BROKEN_AXP_IMLIB (uncomment the define below) to get GNOME
+ * apps working on the Alpha platform.
+ *
+ * FIXME: this merely masks the real problem, which has yet to be
+ * uncovered.  Symptoms are a badmatch error on any gnome app that uses
+ * gdk_imlib.
+ */
+/* #define BROKEN_AXP_IMLIB */
+
 /* The master client.  */
 static GnomeClient *client = NULL;
 
@@ -240,10 +249,12 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
     gtk_rc_set_image_loader(imlib_image_loader);
     gnome_rc_parse(program_invocation_name);
     gnome_preferences_load();
+#ifndef BROKEN_AXP_IMLIB
     if (gnome_preferences_get_disable_imlib_cache ()){
       _gdk_imlib_data->cache.on_image = 0;
       _gdk_imlib_data->cache.on_pixmap = 0;
     }
+#endif
     gnome_config_set_set_handler(set_handler,NULL);
     gnome_config_set_sync_handler(sync_handler,NULL);
     g_atexit(atexit_handler);
