@@ -184,7 +184,7 @@ _property_entry_font_entry_cb (GtkWidget *widget, FontCbData *cb_data)
 	*(temp_ptr->font_name_ptr) = font_name;
 	*(temp_ptr->font_ptr) = font;
 
-	gnome_property_object_changed (cb_data->object);
+	gnome_property_object_changed (cb_data->object->user_data);
 }
 
 /* Select button was presssed. */

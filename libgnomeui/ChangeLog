@@ -1,3 +1,9 @@
+1999-02-28  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-property-entries.c (_property_entry_font_entry_cb):
+	Send the changed signal to `cb_data->object->user_data' not
+	to `cb_data->object'.
+
 1999-02-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-canvas-util.c (gnome_canvas_points_free): Add ref/unref
