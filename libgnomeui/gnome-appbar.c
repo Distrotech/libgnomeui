@@ -41,10 +41,6 @@
 #include "gnome-uidefs.h"
 #include "gnometypebuiltins.h"
 
-#ifndef GNOME_ENABLE_DEBUG
-#define GNOME_ENABLE_DEBUG /* to be sure */
-#endif
-
 struct _GnomeAppBarPrivate
 {
   /* Private; there's no guarantee on the type of these in the
@@ -140,11 +136,6 @@ entry_delete_text_cb(GtkWidget * entry, gint start,
 
   if (ab->_priv->prompt == NULL) return; /* not prompting, so don't
 				     interfere. */
-#ifdef GNOME_ENABLE_DEBUG
-    g_print("Start is %d, stop is %d, start of editable is %d\n",
-	    start, stop, ab->_priv->editable_start);
-#endif
-
   if (start < ab->_priv->editable_start) {
     /* Block the signal, since it's trying to delete text
        that shouldn't be deleted. */
@@ -165,11 +156,6 @@ entry_insert_text_cb  (GtkEditable    *entry,
 				     interfere. */
 
   pos = gtk_editable_get_position(entry);
-
-#ifdef GNOME_ENABLE_DEBUG
-    g_print("Position is %d, start of editable is %d\n",
-	    pos, ab->_priv->editable_start);
-#endif
 
   if (pos < ab->_priv->editable_start) {
 
