@@ -144,7 +144,6 @@ int main(int argc, char *argv[])
                                                 GTK_MESSAGE_ERROR,
                                                 GTK_BUTTONS_NONE,
                                                 msg);
-  gtk_dialog_set_has_separator (GTK_DIALOG (mainwin), FALSE);
   gtk_dialog_set_default_response (GTK_DIALOG (mainwin), GTK_RESPONSE_CLOSE);
   g_free(msg);
 

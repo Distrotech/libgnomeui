@@ -1,3 +1,8 @@
+2004-04-12  Anders Carlsson  <andersca@gnome.org>
+
+	* libgnomeui/gnome_segv.c (main): Remove call to 
+	  gtk_dialog_set_has_separator.
+
 2004-04-09  Guntupalli Karunakar  <karunakar@freedomink.org>
 
         * configure.in: Added "gu" (Gujarati) to ALL_LINGUAS.
