@@ -1,12 +1,12 @@
-# liibgnomeui for GNOME 2.x cs.po file.
+# libgnomeui for GNOME 2.x cs.po file.
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Michal Bukovjan <bukm@centrum.cz>, 2002.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
-"PO-Revision-Date: 2002-12-06 12:45+0100\n"
+"POT-Creation-Date: 2003-02-25 20:23+0100\n"
+"PO-Revision-Date: 2003-02-22 23:55+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -457,7 +457,7 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Použití: gnome_segv2 appname signum\n"
+msgstr "Použití: gnome_segv2 jménoaplikace čsignálu\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
@@ -523,6 +523,7 @@ msgstr "Rada pro položku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Soubor"
 
@@ -580,6 +581,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Nápověda"
 
@@ -770,11 +772,11 @@ msgstr "Nastavit tuto aplikaci"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O aplikaci"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O této aplikaci"
 
@@ -801,7 +803,7 @@ msgstr "Vytvořit nové okno"
 msgid "_Close This Window"
 msgstr "_Zavřít toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zavřít aktuální okno"
 
@@ -971,7 +973,7 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Unikátní identifikátor pro položku souboru. Bude použit pro uložení seznamu "
+"Unikátní identifikátor pro výběr souboru. Bude použit pro uložení seznamu "
 "historie."
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
@@ -984,15 +986,15 @@ msgstr "Nadpis dialogu pro probírání souborů"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr "Položka adresáře"
+msgstr "Výběr adresáře"
 
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Zda-li je položka pro soubor použita pro zadání adresáře nebo úplných názvů "
-"souboru."
+"Jestli je výběr souboru použit pro zadání adresářů nebo úplných názvů "
+"souborů."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1000,7 +1002,7 @@ msgstr "Modální"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr "Zda-li má být okno dialogu pro probírání modální."
+msgstr "Jestli má být okno dialogu pro probírání modální."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -1008,7 +1010,7 @@ msgstr "Název souboru"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
-msgstr "Název souboru, který se má zobrazit v políčku souboru."
+msgstr "Název souboru, který se má zobrazit ve výběru souboru."
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
@@ -1028,9 +1030,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"Prvek GnomeEntry, který používá políčko pro soubor k zadání názvu souboru. "
-"Tento atribut lze použít k získání prvku GnomeEntry, chcete-li měnit nebo "
-"zjistit jeho parametry."
+"Prvek GnomeEntry, který používá výběr souboru k zadání názvu souboru. Tento "
+"atribut lze použít k získání prvku GnomeEntry, chcete-li měnit nebo zjistit "
+"jeho parametry."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1042,9 +1044,9 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"Prvek GtkEntry, který používá políčko pro soubor k zadání názvu souboru. "
-"Tento atribut lze použít k získání prvku GtkEntry, chcete-li měnit nebo "
-"zjistit jeho parametry."
+"Prvek GtkEntry, který používá výběr souboru k zadání názvu souboru. Tento "
+"atribut lze použít k získání prvku GtkEntry, chcete-li měnit nebo zjistit "
+"jeho parametry."
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
@@ -1173,7 +1175,7 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Unikátní identifikátor pro položku ikony. Bude použit pro uložení seznamu "
+"Unikátní identifikátor pro výběr ikony. Bude použit pro uložení seznamu "
 "historie."
 
 #: libgnomeui/gnome-icon-entry.c:186
@@ -1190,7 +1192,7 @@ msgstr "Adresář, ve kterém se budou hledat ikony."
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Název souboru, který by se měl zobrazovat v políčku ikony."
+msgstr "Název souboru, který by se měl zobrazovat ve výběru ikony."
 
 #: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
@@ -1294,7 +1296,7 @@ msgstr "Dělat náhled"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Zda-li by mělo mít políčko s obrázkem náhled."
+msgstr "Jestli by měl mít výběr obrázku náhled."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
@@ -1331,5 +1333,6 @@ msgstr "%T %a %d. %b %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukončit test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukončit test"
