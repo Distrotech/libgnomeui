@@ -1,3 +1,7 @@
+2002-03-02  Tõivo Leedjärv  <leedjarv@interest.ee>
+
+	* configure.in: Added et to ALL_LINGUAS.
+
 2002-02-27  Johan Dahlin^W^WAnders Carlsson <andersca@gnu.org
 
 	* libgnomeui/libgnomeui.h: include gnome-icon-item.h
