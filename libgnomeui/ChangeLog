@@ -1,3 +1,8 @@
+Thu May  7 15:47:21 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-about.c (gnome_about_new): Use set_close instead of
+	deprecated set_destroy.
+
 Wed May 06 23:00:55 1998  George Lebl  <jirka@5z.com>
 
 	* stock_demo.c: it's now possible to get rid of the damn

@@ -608,8 +608,8 @@ gnome_about_new (gchar	*title,
 				     GNOME_STOCK_BUTTON_OK, 
 				     NULL );
 
-	gnome_dialog_set_destroy( GNOME_DIALOG(about),
-				  TRUE );
+	gnome_dialog_set_close( GNOME_DIALOG(about),
+				TRUE );
 
 	return GTK_WIDGET (about);
 }
