@@ -37,16 +37,16 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_HREF(obj)         (GTK_CHECK_TYPE((obj), GNOME_TYPE_HREF))
 #define GNOME_IS_HREF_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_HREF))
 
-typedef struct _GnomeHRef GnomeHRef;
-typedef struct _GnomeHRefClass GnomeHRefClass;
+typedef struct _GnomeHRef        GnomeHRef;
+typedef struct _GnomeHRefPrivate GnomeHRefPrivate;
+typedef struct _GnomeHRefClass   GnomeHRefClass;
 
 
 struct _GnomeHRef {
   GtkButton button;
 
   /*< private >*/
-  gchar *url;
-  GtkWidget *label;
+  GnomeHRefPrivate *_priv;
 };
 
 struct _GnomeHRefClass {
@@ -66,14 +66,14 @@ void gnome_href_construct(GnomeHRef *href,
 			  const gchar *text);
 
 void gnome_href_set_url(GnomeHRef *href, const gchar *url);
-gchar *gnome_href_get_url(GnomeHRef *href);
+const gchar *gnome_href_get_url(GnomeHRef *href);
 
 void gnome_href_set_text(GnomeHRef *href, const gchar *text);
-gchar *gnome_href_get_text(GnomeHRef *href);
+const gchar *gnome_href_get_text(GnomeHRef *href);
 
-/* deprecated!, use set/get_text */
+/* DEPRECATED!, use set/get_text */
 void gnome_href_set_label(GnomeHRef *href, const gchar *label);
-gchar *gnome_href_get_label(GnomeHRef *href);
+const gchar *gnome_href_get_label(GnomeHRef *href);
 
 /* the label can be accessed with gtk_label_get and gtk_label_get */
 

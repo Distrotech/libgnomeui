@@ -32,6 +32,11 @@
 
 #include "libgnome/gnome-i18nP.h"
 
+struct _GnomeHRefPrivate {
+  gchar *url;
+  GtkWidget *label;
+};
+
 static void gnome_href_class_init(GnomeHRefClass *klass);
 static void gnome_href_init(GnomeHRef *href);
 static void gnome_href_clicked(GtkButton *button);
@@ -131,11 +136,14 @@ static void gnome_href_class_init(GnomeHRefClass *klass) {
 }
 
 static void gnome_href_init(GnomeHRef *href) {
-	href->label = gtk_label_new("");
+
+	href->_priv = g_new0(GnomeHRefPrivate, 1);
+
+	href->_priv->label = gtk_label_new("");
 	gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
-	gtk_container_add(GTK_CONTAINER(href), href->label);
-	gtk_widget_show(href->label);
-	href->url = NULL;
+	gtk_container_add(GTK_CONTAINER(href), href->_priv->label);
+	gtk_widget_show(href->_priv->label);
+	href->_priv->url = NULL;
 	/* the source dest is set on set_url */
 	gtk_signal_connect (GTK_OBJECT (href), "drag_data_get",
 			    GTK_SIGNAL_FUNC (drag_data_get), NULL);
@@ -152,14 +160,14 @@ drag_data_get(GnomeHRef          *href,
 	g_return_if_fail (href != NULL);
 	g_return_if_fail (GNOME_IS_HREF (href));
 
-	if(!href->url) {
+	if( ! href->_priv->url) {
 		/*FIXME: cancel the drag*/
 		return;
 	}
 
 	/* if this doesn't look like an url, it's probably a file */
-	if(strchr(href->url, ':') == NULL) {
-		char *s = g_strdup_printf("file:%s\r\n", href->url);
+	if(strchr(href->_priv->url, ':') == NULL) {
+		char *s = g_strdup_printf("file:%s\r\n", href->_priv->url);
 		gtk_selection_data_set (selection_data,
 					selection_data->target,
 					8, s, strlen(s)+1);
@@ -167,7 +175,7 @@ drag_data_get(GnomeHRef          *href,
 	} else {
 		gtk_selection_data_set (selection_data,
 					selection_data->target,
-					8, href->url, strlen(href->url)+1);
+					8, href->_priv->url, strlen(href->_priv->url)+1);
 	}
 }
 
@@ -191,7 +199,7 @@ void gnome_href_construct(GnomeHRef *href, const gchar *url, const gchar *text) 
 
   gnome_href_set_url(href, url);
 
-  if (!text)
+  if ( ! text)
     text = url;
 
   gnome_href_set_text(href, text);
@@ -235,10 +243,10 @@ GtkWidget *gnome_href_new(const gchar *url, const gchar *text) {
  * Returns:  Pointer to an internal URL string, or %NULL if failure.
  **/
 
-gchar *gnome_href_get_url(GnomeHRef *href) {
+const gchar *gnome_href_get_url(GnomeHRef *href) {
   g_return_val_if_fail(href != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_HREF(href), NULL);
-  return href->url;
+  return href->_priv->url;
 }
 
 
@@ -256,11 +264,11 @@ void gnome_href_set_url(GnomeHRef *href, const gchar *url) {
   g_return_if_fail(GNOME_IS_HREF(href));
   g_return_if_fail(url != NULL);
 
-  if (href->url) {
+  if (href->_priv->url) {
 	  gtk_drag_source_unset(GTK_WIDGET(href));
-	  g_free(href->url);
+	  g_free(href->_priv->url);
   }
-  href->url = g_strdup(url);
+  href->_priv->url = g_strdup(url);
   if(strncmp(url, "http://", 7) == 0 ||
      strncmp(url, "https://", 8) == 0) {
 	  gtk_drag_source_set (GTK_WIDGET(href),
@@ -292,13 +300,13 @@ void gnome_href_set_url(GnomeHRef *href, const gchar *url) {
  * Returns:  Pointer to text contained in the label widget.
  **/
 
-gchar *gnome_href_get_text(GnomeHRef *href) {
+const gchar *gnome_href_get_text(GnomeHRef *href) {
   gchar *ret;
 
   g_return_val_if_fail(href != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_HREF(href), NULL);
 
-  gtk_label_get(GTK_LABEL(href->label), &ret);
+  gtk_label_get(GTK_LABEL(href->_priv->label), &ret);
   return ret;
 }
 
@@ -322,8 +330,8 @@ void gnome_href_set_text(GnomeHRef *href, const gchar *text) {
 
   /* pattern used to set underline for string */
   pattern = g_strnfill(strlen(text), '_');
-  gtk_label_set_text(GTK_LABEL(href->label), text);
-  gtk_label_set_pattern(GTK_LABEL(href->label), pattern);
+  gtk_label_set_text(GTK_LABEL(href->_priv->label), text);
+  gtk_label_set_pattern(GTK_LABEL(href->_priv->label), pattern);
   g_free(pattern);
 }
 
@@ -335,7 +343,7 @@ void gnome_href_set_text(GnomeHRef *href, const gchar *text) {
  * deprecated, use #gnome_href_get_text
  **/
 
-gchar *gnome_href_get_label(GnomeHRef *href) {
+const gchar *gnome_href_get_label(GnomeHRef *href) {
 	g_warning("gnome_href_get_label is deprecated, use gnome_href_get_text");
 	return gnome_href_get_text(href);
 }
@@ -366,9 +374,9 @@ static void gnome_href_clicked(GtkButton *button) {
 
   href = GNOME_HREF(button);
 
-  g_return_if_fail(href->url);
+  g_return_if_fail(href->_priv->url != NULL);
 
-  if(!gnome_url_show(href->url))
+  if(!gnome_url_show(href->_priv->url))
 	  gnome_error_dialog(_("Error occured while trying to launch the "
 			       "URL handler.\n"
 			       "Please check the settings in the "
@@ -381,10 +389,13 @@ static void gnome_href_destroy(GtkObject *object) {
   g_return_if_fail(object != NULL);
   g_return_if_fail(GNOME_IS_HREF(object));
   href = GNOME_HREF(object);
-  if (href->url)
-    g_free(href->url);
+  g_free(href->_priv->url);
+  href->_priv->url = NULL;
+  href->_priv->label = NULL;
   if (parent_class->destroy)
     (* parent_class->destroy)(object);
+  g_free(href->_priv);
+  href->_priv = NULL;
 }
 
 static void gnome_href_realize(GtkWidget *widget) {
@@ -429,10 +440,12 @@ gnome_href_get_arg (GtkObject *object,
 
 	switch (arg_id) {
 	case ARG_URL:
-		GTK_VALUE_POINTER(*arg) = gnome_href_get_url(self);
+		/* cast because return is just not const */
+		GTK_VALUE_POINTER(*arg) = (char *)gnome_href_get_url(self);
 		break;
 	case ARG_TEXT:
-		GTK_VALUE_POINTER(*arg) = gnome_href_get_text(self);
+		/* cast because return is just not const */
+		GTK_VALUE_POINTER(*arg) = (char *)gnome_href_get_text(self);
 		break;
 	default:
 		break;

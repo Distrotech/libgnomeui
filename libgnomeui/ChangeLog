@@ -1,3 +1,9 @@
+Sun Jun 25 17:16:24 2000  George Lebl <jirka@5z.com>
+
+	* gnome-href.[ch]: use a private structure for privates, also
+	  make returns be (const gchar *) since the return should not
+	  be freed or modified.
+
 Sun Jun 25 17:00:17 2000  George Lebl <jirka@5z.com>
 
 	* gnome-app.[ch], gnome-dock*.[ch]:  Add a private pointer even
