@@ -1269,6 +1269,41 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
 	gnome_app_set_toolbar (app, GTK_TOOLBAR (toolbar));
 }
 
+/**
+ * gnome_app_find_menu_pos
+ * @first: The first string to compare
+ * @second: The second string to compare
+ * @length: The length of the first string to consider (the length of
+ *          which string you're considering matters because this
+ *          includes copies of the ignored character) 
+ * @ignored: The character to ignore
+ *
+ * Description:
+ * Does a strcmp, only considering the first length characters of
+ * first, and ignoring the ignored character in both strings.
+ * Returns -1 if first comes before second in lexicographical order,
+ * Returns 0 if they're equivalent, and
+ * Returns 1 if the second comes before the first in lexicographical order.
+ **/
+
+gint
+g_strncmp_ignore_char( gchar *first, gchar *second, gint length, gchar ignored )
+{
+  gint i, j;
+  for ( i = 0, j = 0; i < length; i++, j++ )
+    {
+      while ( first[i] == ignored && i < length ) i++;
+      while ( second[j] == ignored ) j++;
+      if ( i == length )
+	return 0;
+      if ( first[i] < second[j] )
+	return -1;
+      if ( first[i] > second[j] )
+	return 1;
+    }
+  return 0;
+}
+
 /* menu insertion/removal functions
  * <jaka.mocnik@kiss.uni-lj.si>
  *
@@ -1303,6 +1338,7 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 	gchar *name_end;
 	gint p;
 	int  path_len;
+	int  stripped_path_len;
 	
 	g_return_val_if_fail (parent != NULL, NULL);
 	g_return_val_if_fail (path != NULL, NULL);
@@ -1315,6 +1351,11 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 		path_len = strlen(path);
 	else
 		path_len = name_end - path;
+
+	stripped_path_len = path_len;
+	for ( p = 0; p < path_len; p++ )
+	  if( path[p] == '_' )
+	    stripped_path_len--;
 	
 	if (path_len == 0){
 
@@ -1343,7 +1384,8 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 		else
 			label = NULL; /* something that we just can't handle */
 		
-		if (label && (path_len == strlen (label)) && (strncmp (path, label, path_len) == 0)){
+		if (label && (stripped_path_len == strlen (label)) &&
+		    (g_strncmp_ignore_char (path, label, path_len, '_') == 0)){
 			if (name_end == NULL) {
 				*pos = p;
 				return parent;

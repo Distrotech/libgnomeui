@@ -1,3 +1,10 @@
+1999-01-02  Chris Lahey  <clahey@umich.edu>
+
+	* gnome-app-helper.c (gnome_app_find_menu_pos): Added
+	g_strncmp_ignore_char and used it to ignore '_' in menu paths.
+	This also required adding a variable stripped_path_length, the
+	length of the given path without the '_'s.
+
 1999-01-02  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-calculator.c, gnome-canvas-util.c,
