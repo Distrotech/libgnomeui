@@ -1,16 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Gnome yn Gymraeg.
-
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # www.gyfieithu.co.uk <kyfieithu@dotmon.com>, 2003
 # and gnome-cy@pengwyn.linux.org.uk mailing list.
-
 # This file is distributed under the same license as the libgnomeui package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-05-12 13:10+0200\n"
 "PO-Revision-Date: 2003-05-10 21:08+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
@@ -149,31 +147,31 @@ msgstr "Rhyngweithredaeth"
 msgid "Level of user activity required."
 msgstr "Faint o weithredoedd gan y defnyddiwr sydd angen."
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "Penodi ID rheolaeth sesiwn"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
 msgstr "Penodi rhagosodiad ffurfweddiad wedi ei gadw"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
 msgstr "Anablu'r cysylltiad i'r rheolwr sesiynau"
 
-#: libgnomeui/gnome-client.c:972
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Rheolaeth sesiynau"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Canslo Allgofnodi"
 
@@ -260,8 +258,8 @@ msgstr "Dewis yr amser o rhestr"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "dirmygwyd gnome_date_edit_get_date, defnyddiwch "
-"gnome_date_edit_get_time"
+msgstr ""
+"dirmygwyd gnome_date_edit_get_date, defnyddiwch gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -447,7 +445,6 @@ msgstr ""
 "sesiwn yn terfynnu.\n"
 "Arbedwch eich ffeiliau i gyd cyn cyn cau'r deialog hwn os gwelwch yn dda."
 
-
 #: libgnomeui/gnome_segv.c:110
 #, c-format
 msgid ""
@@ -525,6 +522,7 @@ msgstr "Awgrymiadau ynghylch eitem 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ffeil"
 
@@ -582,6 +580,7 @@ msgid "_Game"
 msgstr "_GÃªm"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Cymorth"
 
@@ -772,11 +771,11 @@ msgstr "Ffurfweddi'r rhaglen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Ynghylch"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Ynghylch y rhaglen hwn"
 
@@ -803,7 +802,7 @@ msgstr "Creu ffenest newydd"
 msgid "_Close This Window"
 msgstr "_Cau'r Ffenest Hwn"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Cau y ffenest yma"
 
@@ -1031,8 +1030,8 @@ msgid ""
 "its parameters."
 msgstr ""
 "Y GnomeEntry mae'r cofnod ffeil yn ei ddefnyddio er mwyn mewnbynnu enwau "
-"ffeiliau. Gallwch ddefnyddio'r priodwedd hwn er mwyn cael y "
-"GnomeEntry os ydych angen edrych ar neu newid ei briodweddau."
+"ffeiliau. Gallwch ddefnyddio'r priodwedd hwn er mwyn cael y GnomeEntry os "
+"ydych angen edrych ar neu newid ei briodweddau."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1045,27 +1044,26 @@ msgid ""
 "parameters."
 msgstr ""
 "Y GtkEntry mae'r cofnod ffeil yn ei ddefnyddio er mwyn mewnbynnu enwau "
-"ffeiliau. Gallwch ddefnyddio'r priodwedd hwn er mwyn cael y "
-"GtkEntry os ydych angen edrych ar neu newid ei briodweddau."
+"ffeiliau. Gallwch ddefnyddio'r priodwedd hwn er mwyn cael y GtkEntry os "
+"ydych angen edrych ar neu newid ei briodweddau."
 
-
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Dewis ffeil"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Llwybr"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Llwybr i ffeil"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Pori..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Dangos dewisydd ffeil er mwyn dewis ffeil"
 
@@ -1073,8 +1071,8 @@ msgstr "Dangos dewisydd ffeil er mwyn dewis ffeil"
 msgid "sans 12"
 msgstr "sans 12"
 
+# msgstr "AaBbCcCHchDdDDddEeFfFFffGgNGngHhIiJjLlLLllMmNnOoPpRrRHrhSsTtTHthUuWwYy"
 #: libgnomeui/gnome-font-picker.c:67
-#msgstr "AaBbCcCHchDdDDddEeFfFFffGgNGngHhIiJjLlLLllMmNnOoPpRrRHrhSsTtTHthUuWwYy"
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
@@ -1208,7 +1206,7 @@ msgstr ""
 "Deialog dewis eicon. Gallwch ddefnyddio'r priodwedd hwn er mwyn cael y "
 "GtkDialog os ydych angen edrych ar neu newid ei briodweddau."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Dim Eicon"
 
@@ -1220,45 +1218,44 @@ msgstr "Methu canfod hbox, defnyddio dewisydd ffeil arferol"
 msgid "Preview"
 msgstr "Rhagweld"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Deialog dewis eicon"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Mae'r blwch deialog yma yn caniatau i chi ddewis eicon."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Dewisydd eicon"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Dewiswch yr eicon fe hoffech os gwelwch yn dda."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Dewisydd Eicon"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
-msgstr "Fe fydd y botwm yma yn agor ffenest er mwyn caniatau i chi ddewis "
-"eicon."
+msgstr ""
+"Fe fydd y botwm yma yn agor ffenest er mwyn caniatau i chi ddewis eicon."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Pori"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Llwybr eiconau"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"Yma fe ddylwch roi enw'r cyfeiriadur sy'n cynnwys delweddau eicon."
+msgstr "Yma fe ddylwch roi enw'r cyfeiriadur sy'n cynnwys delweddau eicon."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1337,3 +1334,6 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Gadael y prawf"
