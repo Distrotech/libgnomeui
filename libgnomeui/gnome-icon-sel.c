@@ -139,6 +139,8 @@ GtkWidget* gnome_icon_selection_new (void)
 static void gnome_icon_selection_destroy (GtkObject *o)
 {
 	GnomeIconSelection *gis;
+	GSList *image_list;
+
 	g_return_if_fail(o != NULL);
 	g_return_if_fail(GNOME_IS_ICON_SELECTION(o));
 	
@@ -149,6 +151,14 @@ static void gnome_icon_selection_destroy (GtkObject *o)
 		g_list_foreach(gis->file_list,(GFunc)g_free,NULL);
 		g_list_free(gis->file_list);
 		gis->file_list = NULL;
+	}
+
+	/*free imlib icons if we have some*/
+	image_list = gtk_object_get_user_data(GTK_OBJECT(gis->gil));
+	if(image_list) {
+		g_slist_foreach(image_list,(GFunc)gdk_imlib_destroy_image,NULL);
+		g_slist_free(image_list);
+		gtk_object_set_user_data(GTK_OBJECT(gis->gil), NULL);
 	}
 
 	if (GTK_OBJECT_CLASS(parent_class)->destroy)
@@ -183,6 +193,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 {
 	GdkImlibImage *iml;
 	GdkImlibImage *im;
+	GSList *image_list;
 	int pos;
 	int w,h;
 	
@@ -217,11 +228,11 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	gnome_icon_list_set_icon_data_full(GNOME_ICON_LIST(gis->gil), pos, 
 					   g_strdup(path),
 					   (GtkDestroyNotify) g_free );
-	/*FIXME: sort of hack*/
-	gtk_signal_connect_object(GTK_OBJECT(gis->gil),"destroy",
-				  GTK_SIGNAL_FUNC(gdk_imlib_destroy_image),
-				  (GtkObject *)im);
 /* 	gdk_imlib_destroy_image(im); */ /* FIXME: this needs ref/unref capabilities in imlib */
+	/*keep track of imlib images for later destruction*/
+	image_list = gtk_object_get_user_data(GTK_OBJECT(gis->gil));
+	image_list = g_slist_prepend(image_list, im);
+	gtk_object_set_user_data(GTK_OBJECT(gis->gil), image_list);
 }
 
 static int sort_file_list( gconstpointer a, gconstpointer b)
@@ -441,6 +452,8 @@ gnome_icon_selection_stop_loading(GnomeIconSelection * gis)
 void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
 					   gboolean not_shown)
 {
+	GSList *image_list;
+
 	g_return_if_fail(gis != NULL);
 	g_return_if_fail(GNOME_IS_ICON_SELECTION(gis));
 
@@ -449,6 +462,14 @@ void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
 		g_list_foreach(gis->file_list,(GFunc)g_free,NULL);
 		g_list_free(gis->file_list);
 		gis->file_list = NULL;
+	}
+
+	/*free imlib icons if we have some*/
+	image_list = gtk_object_get_user_data(GTK_OBJECT(gis->gil));
+	if(image_list) {
+		g_slist_foreach(image_list,(GFunc)gdk_imlib_destroy_image,NULL);
+		g_slist_free(image_list);
+		gtk_object_set_user_data(GTK_OBJECT(gis->gil), NULL);
 	}
 
 	gnome_icon_list_clear(GNOME_ICON_LIST(gis->gil));

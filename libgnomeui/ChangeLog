@@ -1,3 +1,9 @@
+Wed Nov 10 17:55:10 1999  George Lebl <jirka@5z.com>
+
+	* gnome-icon-sel.c: apply memory leak fix from
+	  david meybohm <dm89754@ucf.edu>.  It keeps a list of the imlib
+	  images that are loaded and destroyes them on reload.
+
 1999-11-03  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas.c (gnome_canvas_item_get_bounds): Fixed ordering of
