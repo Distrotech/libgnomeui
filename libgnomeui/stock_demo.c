@@ -16,22 +16,31 @@ message_dlg_clicked(GtkWidget *widget, int button)
 }
 
 
+static gboolean block_close(GnomeDialog * d, gpointer ignored) 
+{
+  return TRUE;
+}
 
 static gboolean
 message_dlg(GtkWidget *widget, gpointer data)
 {
-	GnomeMessageBox *box;
+	static GtkWidget *box = NULL;
 
-	box = GNOME_MESSAGE_BOX (gnome_message_box_new ("Really quit?",
-							"question",
-				     			GNOME_STOCK_BUTTON_YES,
-				     			GNOME_STOCK_BUTTON_NO,
-				     			NULL));
-	gtk_signal_connect (GTK_OBJECT (box), "clicked",
-			    GTK_SIGNAL_FUNC (message_dlg_clicked), NULL);
+	if (box == NULL) {
+	  box = gnome_message_box_new ("Really quit?",
+				       GNOME_MESSAGE_BOX_QUESTION,
+				       GNOME_STOCK_BUTTON_YES,
+				       GNOME_STOCK_BUTTON_NO,
+				       NULL);
+	  gtk_signal_connect (GTK_OBJECT (box), "clicked",
+			      GTK_SIGNAL_FUNC (message_dlg_clicked), NULL);
 
-	gnome_message_box_set_modal (box);
-	gtk_widget_show (GTK_WIDGET (box));
+	  gnome_dialog_set_modal (GNOME_DIALOG(box));
+	  gnome_dialog_close_hides(GNOME_DIALOG(box), TRUE);
+	  gtk_signal_connect(GTK_OBJECT(box), "close", GTK_SIGNAL_FUNC(block_close),
+			     NULL);
+	}
+	gtk_widget_show (box);
 	return TRUE;
 }
 

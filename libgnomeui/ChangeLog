@@ -1,3 +1,21 @@
+Wed May  6 18:54:54 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.h, gnome-dialog.c: Recommit of April 30 changes;
+	difference is using a new "close" signal instead of delete_event.
+	However, the "close" signal marshaller segfaults for now.
+	* gnome-messagebox.c, gnome-propertybox.c: Use new gnome-dialog
+	stuff.
+	* gnome-uidefs.h: GNOME_YES, GNOME_NO to make button handling
+	more readable; also for use with gnome-app-util
+	* stock-demo.c: Use new dialog stuff; try to use "close" signal
+	just to expose the bug.
+	* TODO: Updated.
+	* gnome-app-util.h, gnome-app-util.c: Started on the
+	dialog/statusbar abstraction; status bar part doesn't work
+	yet.
+	* gnome-preferences.h: Define sections and keys for use in 
+	libgnomeui global preferences.
+
 Wed May  6 01:29:33 1998  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app.[ch]: added gnome_app_set_statusbar() function

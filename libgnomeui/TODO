@@ -12,25 +12,13 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
 * There should be stock menu items (not just stock pixmaps) for things like
   Open..., Save..., Save As..., Copy, Cut, Paste, Clear, Exit, About..., 
   etc. Stock menu items would include pixmap, label, and accelerator.
+  This is problematic for now, since accelerator support isn't finished 
+  and there seem to be i18n issues.
 
 * It would be even cooler if the API enforced policy on the locations of
   the menu items: on which menu, in which order.
 
 * gnome-app-helper stuff should right-justify the Help menu.
-
-* GnomeApp should have an optional status bar.
-
-* A GnomeApp API which configurably uses either the status bar (if
-  present) or dialogs for messages. e.g.
-
-    gnome_app_warning (GnomeApp * app, const gchar * message);
-    gnome_app_yes_no_question (GnomeApp * app, const gchar * question);
-    gnome_app_status (GnomeApp * app, const gchar * status); 
-
-* A way to configure libgnomeui. Does this exist? It would allow setting
-  global Gnome preferences. It should use gnome-config and not a gtkrc.
-  Ideally, however, it would allow setting gtkrc-type things, so 
-  editing gtkrc isn't necessary to get flashy color schemes on Gnome apps.
 
 * Stock accelerators should be configurable, this would be one use for
   the above config mechanism. Gtk already lets you config accelerators,
@@ -39,13 +27,38 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
 * gnome-less.[hc] isn't quite finished, and doesn't build by default
   due to the feature freeze. Fix this.
 
-* gnome-dialog should have a _set_hide method to hide on any click, 
-  instead of destroying. This can be a way to speed up a program's UI,
-  with a space tradeoff of course. gnome_dialog_close() should hide
-  rather than destroy if this flag is set.
-
 * Documentation, documentation, documentation... both commenting header
   files and writing real docs would help.
+
+* a GnomeFileSelection widget is needed; it will have to integrate well
+  with gmc, so might want to talk to Miguel. Also, lots of the 
+  GtkFileSelection functionality isn't in the public interface, but 
+  could be useful; so changing GtkFileSelection to allow sharing its
+  code might be necessary.
+
+* gnome-app.c uses its own config keys, rather than gnome-preferences; 
+  this is kind of bad. However, changing it would break people's current
+  settings.
+
+==================== Done or In Progress =========================
+
+* GnomeApp should have an optional status bar. 
+
+* A GnomeApp API which configurably uses either the status bar (if
+  present) or dialogs for messages. e.g.
+
+    gnome_app_warning (GnomeApp * app, const gchar * message);
+    gnome_app_yes_no_question (GnomeApp * app, const gchar * question);
+    gnome_app_status (GnomeApp * app, const gchar * status); 
+
+  [gnome-app-util.h]
+
+* A way to configure libgnomeui. Does this exist? It would allow setting
+  global Gnome preferences. It should use gnome-config and not a gtkrc.
+  Ideally, however, it would allow setting gtkrc-type things, so 
+  editing gtkrc isn't necessary to get flashy color schemes on Gnome apps.
+
+  [gnome-preferences.h]
 
 * gnome-propertybox could be expanded to allow user configuration.
   Some (popular -- see gnome list) ideas are to let the user get rid
@@ -53,7 +66,19 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
   (in this case it would appear inside the notebook page)
   In theory the API shouldn't change when this is done.
 
+  [gnome-preferences.h]
+
 * gnome-propertybox could also use a way to cause an OK to be aborted
   This would take the form of a flag that is cleared before a global
   apply, set via some new function, and checked before closing the
   window
+
+  [the "close" signal of GnomeDialog can be blocked by returning
+   false from a callback connected to it.]
+
+* gnome-dialog should have a _set_hide method to hide on any click, 
+  instead of destroying. This can be a way to speed up a program's UI,
+  with a space tradeoff of course. gnome_dialog_close() should hide
+  rather than destroy if this flag is set.
+
+  [gnome_dialog_just_hides]

@@ -33,4 +33,12 @@
 #define GNOME_BUTTON_WIDTH 100
 #define GNOME_BUTTON_HEIGHT 40
 
+/* These are the button numbers on a yes-no or ok-cancel GnomeDialog,
+   and in the gnome-app-util callbacks. Make the program more
+   readable, is all. */ 
+#define GNOME_YES 0 
+#define GNOME_NO 1 
+#define GNOME_OK 0
+#define GNOME_CANCEL 1
+
 #endif

@@ -159,8 +159,8 @@ gnome_message_box_new (const gchar           *message,
 	
 	va_end (ap);
 
-	gnome_dialog_set_destroy ( GNOME_DIALOG(message_box),
-				   TRUE );
+	gnome_dialog_set_close ( GNOME_DIALOG(message_box),
+				 TRUE );
 
 	return GTK_WIDGET (message_box);
 }
@@ -170,13 +170,15 @@ gnome_message_box_new (const gchar           *message,
 void
 gnome_message_box_set_modal (GnomeMessageBox     *message_box)
 {
+  g_warning("gnome_message_box_set_modal is deprecated.\n");
   gnome_dialog_set_modal(GNOME_DIALOG(message_box));
 }
 
 void
 gnome_message_box_set_default (GnomeMessageBox     *message_box,
-                              gint                button)
+			       gint                button)
 {
+  g_warning("gnome_message_box_set_default is deprecated.\n");
   gnome_dialog_set_default(GNOME_DIALOG(message_box), button);
 }
 

@@ -30,17 +30,24 @@ BEGIN_GNOME_DECLS
 
 typedef struct _GnomeDialog        GnomeDialog;
 typedef struct _GnomeDialogClass   GnomeDialogClass;
+
+/* what is this? is it used anywhere? FIXME */
 typedef struct _GnomeDialogButton  GnomeDialogButton;
 
+/* The vbox can be accessed directly; if you fool with anything else,
+   you're on your own. */
 struct _GnomeDialog
 {
   GtkWindow window;
   GtkWidget * vbox;
+
   GtkWidget * action_area; /* A button box, not an hbox */
 
   GList *buttons;
+  GtkAcceleratorTable * accelerators;
   int modal : 1;
-  int self_destruct : 1;
+  int click_closes : 1;
+  int just_hide : 1;
 };
 
 struct _GnomeDialogClass
@@ -48,6 +55,7 @@ struct _GnomeDialogClass
   GtkWindowClass parent_class;
 
   void (* clicked)  (GnomeDialog *dialog, gint button_number);
+  gboolean (* close) (GnomeDialog * dialog);
 };
 
 /* GnomeDialog creates an action area with the buttons of your choice.
@@ -81,11 +89,34 @@ void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
 					gint         button,
 					gboolean     setting);
 
-/* Whether to destroy after emitting clicked signal - default is
-   FALSE. If clicking *any* button should nuke the dialog, set it to
-   TRUE. */
-void       gnome_dialog_set_destroy    (GnomeDialog * dialog,
-					gboolean self_destruct);
+/* Set the accelerator for a button. Note that there are two
+   default accelerators: "Return" will be the same as clicking
+   the default button, and "Escape" will emit delete_event. 
+   (Note: neither of these is in the accelerator table,
+   Return is a Gtk default and Escape comes from a key press event
+   handler.) */
+void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
+					gint button,
+					const guchar accelerator_key,
+					guint8       accelerator_mods);
+
+/* Hide and optionally destroy. Destroys by default, use close_hides() 
+   to change this. */
+void       gnome_dialog_close (GnomeDialog * dialog);
+
+/* Make _close just hide, not destroy. */
+void       gnome_dialog_close_hides (GnomeDialog * dialog, 
+				     gboolean just_hide);
+
+/* Whether to close after emitting clicked signal - default is
+   FALSE. If clicking *any* button should close the dialog, set it to
+   TRUE.  */
+void       gnome_dialog_set_close      (GnomeDialog * dialog,
+					gboolean click_closes);
+
+/* *** Deprecated. Is a set_close wrapper now. */
+void       gnome_dialog_set_destroy (GnomeDialog * d, gboolean self_destruct);
+
 
 /* Use of append_buttons is discouraged, it's really
    meant for subclasses. */
