@@ -36,7 +36,6 @@
 #include "libgnomeui/gnome-init.h"
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-messagebox.h"
-#include "libgnomeui/gnome-net.h"
 #include "libgnomeui/gnome-number-entry.h"
 #include "libgnomeui/gnome-paper-selector.h"
 #include "libgnomeui/gnome-popup-menu.h"

@@ -69,7 +69,6 @@ libgnomeui_la_SOURCES = \
 	gnome-mdi-generic-child.c       \
 	gnome-mdi-session.c		\
 	gnome-messagebox.c		\
-	gnome-net.c			\
 	gnome-number-entry.c		\
 	gnome-pixmap.c			\
 	gnome-pixmap-entry.c		\
@@ -137,7 +136,6 @@ gnome_headers = \
 	gnome-mdi-generic-child.h	\
 	gnome-mdi-session.h		\
 	gnome-number-entry.h		\
-	gnome-net.h			\
 	gnome-popup-menu.h		\
 	gnome-popup-help.h		\
 	gnome-preferences.h		\
