@@ -13,9 +13,6 @@
 /* True if we've started listening to ICE.  */
 static int ice_init = 0;
 
-/* ICE connection tag as known by GDK event loop.  */
-static guint ice_tag;
-
 #ifdef HAVE_LIBSM
 
 /* This is called when data is available on an ICE connection.  */
@@ -36,12 +33,17 @@ static void
 new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 		    IcePointer *watch_data)
 {
-  if (opening)
-    ice_tag = gdk_input_add (IceConnectionNumber (connection),
-			     GDK_INPUT_READ, process_ice_messages,
-			     (gpointer) connection);
-  else
-    gdk_input_remove (ice_tag);
+  gint tag;
+
+  /* It turns out to be easier for us to always call gdk_input_add,
+     even if we are trying to remove the input.  The reason is that
+     this is simpler than keeping a hash table mapping connections
+     onto gdk tags.  This is losing.  */
+  tag = gdk_input_add (IceConnectionNumber (connection),
+		       GDK_INPUT_READ, process_ice_messages,
+		       (gpointer) connection);
+  if (! opening)
+    gdk_input_remove (tag);
 }
 
 #endif /* HAVE_LIBSM */
