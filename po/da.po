@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
-"POT-Creation-Date: 2002-11-30 16:15+0100\n"
-"PO-Revision-Date: 2002-11-30 16:15+0100\n"
+"POT-Creation-Date: 2002-12-07 17:51+0100\n"
+"PO-Revision-Date: 2002-12-07 17:55+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -399,11 +399,11 @@ msgstr "Denne knap vil bringe dig videre til den adresse den viser."
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings inPreferred Applications if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"En fejl opstod under forsøg på at starte URL-håndteringen.\n"
-"Kontroller at indstillingerne under 'Foretrukne programmer' er korrekte."
+"En fejl opstod under forsøg på at starte det forvalgte internetsurfningsprogram.\n"
+"Kontroller at indstillingerne under 'Foretrukne programmer' på panelet er korrekte."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -614,7 +614,7 @@ msgstr "Gem _som..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Gem en aktuelle fil under et nyt navn"
+msgstr "Gem den aktuelle fil under et nyt navn"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -726,7 +726,7 @@ msgstr "_Find..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr "Søg efter en tekst"
+msgstr "Søg efter et tekststykke"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
@@ -735,7 +735,7 @@ msgstr "Find n_æste"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "Søg igen efter den samme tekststreng"
+msgstr "Søg igen efter det samme tekststykke"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
@@ -744,7 +744,7 @@ msgstr "_Erstat..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr "Erstat en tekst"
+msgstr "Erstat tekststykke"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
