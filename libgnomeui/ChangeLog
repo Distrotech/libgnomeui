@@ -1,3 +1,18 @@
+2000-01-30  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-gconf.c (gnome_gconf_post_args_parse): Add the
+	"/desktop/gnome" gconf dir
+
+	* gnome-app-helper.c (create_pixmap): remove the window argument,
+	since gnome-stock is no longer this lame
+	(create_menu_item): Call setup_pixmap_menu_item
+	(setup_pixmap_menu_item): new function sets up a pixmap menu item
+	to respond appropriately to changes in whether menu icons should
+	be displayed	
+
+	* libgnomeui.h (GNOMEUI_INIT): Add GConf to the default
+	initialization, include gnome-gconf.h	
+	
 Sun Jan 30 15:44:35 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dentry-edit.c: use gnome_config_assemble_vector instead of

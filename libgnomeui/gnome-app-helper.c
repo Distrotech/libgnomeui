@@ -24,7 +24,8 @@
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-help.h"
-#include "libgnomeui/gnome-helpsys.h"
+#include "gnome-helpsys.h"
+#include "gnome-gconf.h"
 
 /* Note that this file must include gnome-i18n, and not gnome-i18nP, so that 
  * _() is the same as the one seen by the application.  This is moderately 
@@ -298,12 +299,10 @@ static gchar *menu_names[] =
 };
 
 
-/* Creates a pixmap appropriate for items.  The window parameter is required 
- * by gnome-stock (bleah) */
+/* Creates a pixmap appropriate for items.  */
 
 static GtkWidget *
-create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, 
-		gconstpointer pixmap_info)
+create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info)
 {
 	GtkWidget *pixmap;
 	char *name;
@@ -343,6 +342,102 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type,
 	}
 
 	return pixmap;
+}
+
+static void
+showing_pixmaps_changed_notify(GConfClient            *client,
+                               guint                   cnxn_id,
+                               const gchar            *key,
+                               GConfValue             *value,
+                               gboolean                is_default,
+                               gpointer                user_data)
+{
+        gboolean new_setting = TRUE;
+        GtkWidget *w = user_data;
+        GtkPixmapMenuItem *mi = GTK_PIXMAP_MENU_ITEM(w);
+
+        if (value && value->type == GCONF_VALUE_BOOL) {
+                new_setting = gconf_value_bool(value);
+        }
+
+        if (new_setting && (mi->pixmap == NULL)) {
+                GtkWidget *pixmap;
+                GnomeUIPixmapType pixmap_type;
+                gconstpointer pixmap_info;
+
+                pixmap_type = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(mi),
+                                                                  "gnome-app-helper-pixmap-type"));
+                pixmap_info = gtk_object_get_data(GTK_OBJECT(mi),
+                                                  "gnome-app-helper-pixmap-info");
+
+                pixmap = create_pixmap(pixmap_type, pixmap_info);
+
+                gtk_widget_show(pixmap);
+                
+                gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(mi),
+                                                pixmap);
+                
+        } else if (!new_setting && (mi->pixmap != NULL)) {
+                gtk_container_remove(GTK_CONTAINER(mi), mi->pixmap);
+        }
+}
+
+static void
+remove_notify_cb(GtkObject *mi, gpointer data)
+{
+        guint notify_id;
+        GConfClient *conf;
+        
+        notify_id = GPOINTER_TO_INT(data);
+
+        conf = gtk_object_get_data(mi, "gnome-app-helper-gconf-client");
+
+        gconf_client_notify_remove(conf, notify_id);
+}
+
+static void
+setup_pixmap_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
+                       gconstpointer pixmap_info)
+{
+        guint notify_id;
+        GConfClient *conf;
+        
+        g_return_if_fail(GTK_IS_PIXMAP_MENU_ITEM(mi));
+
+        gtk_object_set_data(GTK_OBJECT(mi), "gnome-app-helper-pixmap-type",
+                            GINT_TO_POINTER(pixmap_type));
+
+        gtk_object_set_data(GTK_OBJECT(mi), "gnome-app-helper-pixmap-info",
+                            (gpointer)pixmap_info);
+
+        
+        conf = gnome_get_gconf_client();
+
+        gtk_object_ref(GTK_OBJECT(conf));
+        
+        gtk_object_set_data_full(GTK_OBJECT(mi), "gnome-app-helper-gconf-client",
+                                 conf, (GtkDestroyNotify)gtk_object_unref);
+
+        if (gconf_client_get_bool(conf,
+                                  "/desktop/gnome/menus/show-icons",
+                                  NULL)) {
+                GtkWidget *pixmap;
+
+                pixmap = create_pixmap(pixmap_type, pixmap_info);
+
+                gtk_widget_show(pixmap);
+                
+                gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(mi),
+                                                pixmap);
+        }
+
+        notify_id = gconf_client_notify_add(conf,
+                                            "/desktop/gnome/menus/show-icons",
+                                            showing_pixmaps_changed_notify,
+                                            mi, NULL, NULL);
+
+        gtk_signal_connect(GTK_OBJECT(mi), "destroy",
+                           remove_notify_cb, GINT_TO_POINTER(notify_id));
 }
 
 /* Creates  a menu item label. It will also return the underlined 
@@ -819,7 +914,6 @@ create_menu_item (GtkMenuShell       *menu_shell,
 		  gint		      pos)
 {
 	GtkWidget *label;
-	GtkWidget *pixmap;
 	guint keyval;
 	int type;
 	
@@ -853,13 +947,10 @@ create_menu_item (GtkMenuShell       *menu_shell,
 			    gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true") && 
 			    gnome_preferences_get_menus_have_icons()) {
 			        uiinfo->widget = gtk_pixmap_menu_item_new ();
-				pixmap = create_pixmap (uiinfo->widget, uiinfo->pixmap_type, 
-							uiinfo->pixmap_info);
-				if (pixmap) {
-				        gtk_widget_show(pixmap);
-					gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(uiinfo->widget),
-									pixmap);
-				}
+
+                                setup_pixmap_menu_item(uiinfo->widget,
+                                                       uiinfo->pixmap_type, 
+                                                       uiinfo->pixmap_info);
 			} else
 			        uiinfo->widget = gtk_menu_item_new ();
 		}
@@ -1484,8 +1575,7 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio,
 	case GNOME_APP_UI_TOGGLEITEM:
 		/* Create the icon */
 
-		pixmap = create_pixmap (GTK_WIDGET (toolbar), 
-				uiinfo->pixmap_type, uiinfo->pixmap_info);
+		pixmap = create_pixmap (uiinfo->pixmap_type, uiinfo->pixmap_info);
 
 		/* Create the toolbar item */
 

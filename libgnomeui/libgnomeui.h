@@ -43,6 +43,7 @@
 #include "libgnomeui/gnome-entry.h"
 #include "libgnomeui/gnome-file-entry.h"
 #include "libgnomeui/gnome-font-picker.h"
+#include "libgnomeui/gnome-gconf.h"
 #include "libgnomeui/gnome-geometry.h"
 #include "libgnomeui/gnome-helpsys.h"
 
@@ -97,7 +98,7 @@
 #include "libgnomeui/oafgnome.h"
 #include "libgnomeui/gnome-textfu.h"
 
-#define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT
+#define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT,GNOME_GCONF_INIT
 
 #ifdef COMPAT_1_0
 #include "compat/1.0/libgnomeui-compat-1.0.h"
