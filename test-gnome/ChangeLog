@@ -1,3 +1,7 @@
+Sat Aug 25 20:18:48 2001  George Lebl <jirka@5z.com>
+
+	* testdruid.c: fix "unused" warning
+
 Sat Aug 25 00:33:41 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* testdruid.c (main): new test program.

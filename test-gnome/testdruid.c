@@ -16,7 +16,6 @@ main (int argc, char **argv)
   GtkWidget *window;
   GtkWidget *druid;
   GtkWidget *druid_page;
-  GtkWidget *hbox;
   gtk_init (&argc, &argv);
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
