@@ -221,7 +221,6 @@ gnome_message_box_newv (const gchar           *message,
 		        const gchar           *message_box_type,
 			const gchar 	     **buttons)
 {
-	va_list ap;
 	GnomeMessageBox *message_box;
 	GtkWidget *label, *hbox;
 	GtkWidget *pixmap = NULL;

@@ -98,7 +98,7 @@ gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
 {
 	GtkWidget *menu;
 	GnomeUIBuilderData uibdata;
-	gint i, length;
+	gint length;
 
 	g_return_val_if_fail (uiinfo != NULL, NULL);
 	g_return_val_if_fail (accelgroup != NULL, NULL);
@@ -241,8 +241,6 @@ void
 gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 			 gpointer user_data)
 {
-	int event_mask;
-
 	g_return_if_fail (popup != NULL);
 	g_return_if_fail (GTK_IS_MENU (popup));
 	g_return_if_fail (widget != NULL);

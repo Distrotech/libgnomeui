@@ -369,12 +369,6 @@ gtk_dial_expose (GtkWidget      *widget,
 		 GdkEventExpose *event)
 {
   GtkDial *dial;
-  GdkPoint points[3];
-  gdouble s,c;
-  gdouble theta;
-  gint xc, yc;
-  gint tick_length;
-  gint i;
 
   g_return_val_if_fail (widget != NULL, FALSE);
   g_return_val_if_fail (GTK_IS_DIAL (widget), FALSE);
@@ -695,10 +689,9 @@ gtk_dial_paint (GtkDial *dial)
   GdkGC     *gc1;
   GdkGC     *gc2;
   gdouble   s, c, theta;
-  gint      xc, yc, width, height;
+  gint      xc, yc;
   gint      tick_length;
   gint      i, t_x, t_y;
-  gfloat    aspect;
   char      buf[20];
 
   g_return_if_fail (dial != NULL);

@@ -93,16 +93,12 @@ static void   client_unset_config_prefix    (GnomeClient *client);
 
 static gchar** array_init_from_arg           (gint argc, 
 					      gchar *argv[]);
-static gchar** array_copy                    (gchar **source);
-
 
 static GtkObjectClass *parent_class = NULL;
 static gint client_signals[LAST_SIGNAL] = { 0 };
 
 static const char *sm_client_id_arg_name = "--sm-client-id";
 static const char *sm_config_prefix_arg_name = "--sm-config-prefix";
-static const char *sm_client_id_prop="SM_CLIENT_ID";
-
 
 /* The master client.  */
 static GnomeClient *master_client= NULL;
@@ -1142,8 +1138,6 @@ gnome_client_class_init (GnomeClientClass *klass)
 static void
 gnome_client_object_init (GnomeClient *client)
 {
-  struct passwd *pwd;
-
   client->smc_conn          = NULL;
   client->client_id         = NULL;
   client->previous_id       = NULL;
@@ -1369,7 +1363,6 @@ gnome_client_connect (GnomeClient *client)
 
   if (GNOME_CLIENT_CONNECTED (client))
     {
-      IceConn ice_conn;
       gint    restarted= FALSE;
 
       g_free (client->previous_id);
@@ -2774,30 +2767,5 @@ array_init_from_arg (gint argc, gchar *argv[])
       array[i] = NULL;
     }
 
-  return array;
-}
-
-static gchar **
-array_copy (gchar **source)
-{
-  gchar **array;
-  gint    argc;
-  int i, n;
-  
-  if (source == NULL)
-    return NULL;
-
-  /* Count number of elements in source array. */
-  for (n = 0; source[n]; n++) /* */;
-  
-  /* Allocate memory for array. */
-  array = g_new (gchar *, n + 1);
-
-  /* Copy the elements. */
-  for(i = 0; i < n; i++)
-    array[i] = g_strdup(source[i]);
-  
-  array[i] = NULL;
-  
   return array;
 }

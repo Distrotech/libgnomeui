@@ -224,7 +224,6 @@ gnome_about_display_comments (GdkWindow *win,
 	char *buffer;
 	int  ypos, width, done;
 	GList *par, *tmp;
-	char *endp;
 	char *tokp;
 
 	width = w - 16;

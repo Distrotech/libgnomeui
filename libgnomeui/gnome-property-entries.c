@@ -95,7 +95,6 @@ _property_entry_font_save_temp (GnomePropertyObject *object)
 static void
 _property_entry_font_discard_temp (GnomePropertyObject *object)
 {
-	FontProperties *prop_ptr = object->prop_data;
 	FontProperties *temp_ptr = object->temp_data;
 
 	g_free (temp_ptr->font_name);
@@ -111,7 +110,6 @@ _property_entry_font_apply (GtkFontSelectionDialog *fontsel)
 {
 	FontCbData *cb_data;
 	FontProperties *temp_ptr;
-	GtkWidget *entry;
 	gchar *font_name;
 	GdkFont *font;
 
@@ -202,7 +200,6 @@ _property_entry_font_entry_cb (GtkWidget *widget, FontCbData *cb_data)
 static void
 _property_entry_font_select_cb (GtkWidget *widget, FontCbData *cb_data)
 {
-	GtkWidget *entry = cb_data->entry;
 	FontProperties *temp_ptr = cb_data->object->temp_data;
 	GtkFontSelectionDialog *fontsel;
 

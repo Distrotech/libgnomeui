@@ -70,6 +70,7 @@ gtk_tooltips_free_string (gpointer data, gpointer user_data)
   if (data)
     g_free (data);
 }
+
 static void
 gnome_popup_help_layout_text (GtkWidget *helpwindow, GtkTooltipsData *data, gchar* text)
      /* Swiped from gtktooltips.c  (: */
@@ -160,6 +161,7 @@ gnome_popup_help_layout_text (GtkWidget *helpwindow, GtkTooltipsData *data, gcha
     }
   data->width += 8;    /* leave some border */
 }
+
 static gint
 gnome_popup_help_expose (GtkWidget *darea, GdkEventExpose *event, GtkTooltipsData *data)
 {
@@ -194,6 +196,7 @@ gnome_popup_help_expose (GtkWidget *darea, GdkEventExpose *event, GtkTooltipsDat
         }
         return FALSE;
 }
+
 static void
 gnome_popup_help_size_window (GtkWidget *helpwindow, GtkTooltipsData *data, gint *h, gint *w)
 {
@@ -219,13 +222,11 @@ gnome_popup_help_size_window (GtkWidget *helpwindow, GtkTooltipsData *data, gint
 
   gtk_widget_set_usize (helpwindow, *w + 1, *h + 1);
 }
+
 static void
 gnome_popup_help_place_window (GtkWidget *helpwindow, GtkWidget *widget, GtkTooltipsData *data, gint h, gint w)
 {
-  GtkStyle *style;
   gint x, y, scr_w, scr_h;
-  GdkGC *gc;
-  GList *el;
 
   scr_w = gdk_screen_width ();
   scr_h = gdk_screen_height ();
@@ -248,6 +249,7 @@ gnome_popup_help_place_window (GtkWidget *helpwindow, GtkWidget *widget, GtkTool
   gtk_widget_set_uposition (helpwindow, x, y);
   gtk_widget_show_now (helpwindow);
 }
+
 static GnomeUIInfo *
 append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info, GnomeUIInfo **cutptr)
 {
@@ -274,6 +276,7 @@ append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info, GnomeUIInfo **cutptr)
         /* er, i should free base here... */
         return retval;
 }
+
 static void
 helpwindow_click_callback (GtkWidget *widget, gpointer data)
 {
@@ -282,6 +285,7 @@ helpwindow_click_callback (GtkWidget *widget, gpointer data)
         gdk_pointer_ungrab (GDK_CURRENT_TIME);
 
 }
+
 static void
 helpwindow_destroy_callback (GtkWidget *widget, gpointer data)
 {
@@ -289,10 +293,10 @@ helpwindow_destroy_callback (GtkWidget *widget, gpointer data)
         g_print ("%s\n",(gchar*) data);
         g_free ((gchar*) data);
 }
+
 static void
 help_callback (GtkWidget *menu, gpointer unused)
 {
-        GtkStyle *style;
         GtkTooltipsData *data;
         gint h, w;
         GtkWidget *widget, *helpwindow, *darea;

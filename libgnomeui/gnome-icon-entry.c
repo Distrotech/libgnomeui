@@ -540,7 +540,6 @@ static void
 gnome_icon_entry_init (GnomeIconEntry *ientry)
 {
 	GtkWidget *w;
-	GtkWidget *align;
 	char *p;
 
 	gtk_box_set_spacing (GTK_BOX (ientry), 4);

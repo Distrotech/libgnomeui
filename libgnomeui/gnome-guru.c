@@ -405,7 +405,6 @@ gnome_guru_append_page               (GnomeGuru   * guru,
 				      GtkWidget   * widget)
 {
   GnomeGuruPage* new_page;
-  gboolean first_page = FALSE;
 
   g_return_if_fail(guru != NULL);
   g_return_if_fail(GNOME_IS_GURU(guru));

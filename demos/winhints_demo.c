@@ -35,7 +35,6 @@ int main(int argc, char *argv[])
 static void prepare_app(void)
 {
   GtkWidget *vb,*vb1, *hb, *hb1, *mvb;
-  GtkWidget *list_box;
   GtkWidget *sw;
   GtkWidget *frame;
   GtkWidget *item;
@@ -270,7 +269,6 @@ static void prepare_app(void)
 void layers_cb (GtkWidget *widget, void *data)
 {
   GtkWidget *list;
-  char buf[32];
   GnomeWinLayer new_layer;
   
   list = (GtkWidget*)data;

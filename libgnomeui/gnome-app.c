@@ -92,14 +92,6 @@ gnome_app_get_type (void)
 }
 
 static void
-gnome_app_add (GtkContainer *container, GtkWidget *widget)
-{
-	GnomeApp *gnome_app = GNOME_APP (container);
-
-	gnome_app_set_contents (gnome_app, widget);
-}
-
-static void
 gnome_app_class_init (GnomeAppClass *class)
 {
 	GtkObjectClass *object_class;
@@ -185,7 +177,6 @@ layout_changed (GtkWidget *w, gpointer data)
 
 	if (app->enable_layout_config) {
 		GnomeDockLayout *layout;
-		gchar *s;
 
 		layout = gnome_dock_get_layout (GNOME_DOCK (app->dock));
 		write_layout_config (app, layout);
@@ -404,8 +395,6 @@ gnome_app_set_statusbar_custom (GnomeApp *app,
 				GtkWidget *container,
 				GtkWidget *statusbar)
 {
-	GtkWidget *hbox;
-
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 	g_return_if_fail(container != NULL);

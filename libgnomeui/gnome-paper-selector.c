@@ -100,7 +100,6 @@ paper_size_system (GtkWidget *widget, gpointer data)
   const GnomeUnit *unit;
   const gchar *paper_name, *unit_name;
   double paper_width, paper_height;
-  GList	*l;
   gspaper = data;
   
   paper_name = gnome_paper_name_default();
@@ -211,12 +210,7 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
   GtkWidget *table, *label, *button;
   GtkTooltips *tooltips;
   GtkAdjustment *adj;
-  const GnomePaper *paper;
-  const GnomeUnit *unit;
-  const char *paper_name, *unitname;
   
-  gint i,j;
-      
   tooltips = gtk_tooltips_new();
   gtk_tooltips_enable (tooltips);
 

@@ -80,7 +80,7 @@ gnome_add_gtk_arg_callback(poptContext con,
 {
 	static int gnome_gtk_initialized = FALSE;
 	static GPtrArray *gtk_args = NULL;
-	char *newstr, *newarg;
+	char *newstr;
 	int final_argc;
 	char **final_argv;
 	

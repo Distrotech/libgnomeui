@@ -580,32 +580,6 @@ gtk_ted_add_frame (GtkWidget *widget, GtkTed *ted)
 }
 
 static void
-gtk_ted_add_label (GtkWidget *widget, GtkTed *ted)
-{
-	struct ted_widget_info *wi;
-	GtkWidget *f, *e;
-	char *name;
-	char my_name [40];
-	static int label_count;
-	
-	name = gtk_ted_get_string ("Type in label text:");
-	if (!name)
-		return;
-	e = gtk_event_box_new ();
-	gtk_widget_show (e);
-	f = gtk_label_new (name);
-	gtk_widget_show (f);
-	gtk_container_add (GTK_CONTAINER (e), f);
-
-	g_snprintf (my_name, sizeof(my_name), "Label-%d", label_count++);
-	wi = gtk_ted_widget_info_new (e, my_name, 0, 0);
-	g_hash_table_insert (ted->widgets, wi->name, wi);
-	wi->type = label_widget;
-	gtk_object_set_data (GTK_OBJECT (e), "ted_widget_info", wi);
-	gtk_ted_add (ted, e, my_name);
-}
-
-static void
 gtk_ted_add_separator (GtkWidget *widget, GtkTed *ted)
 {
 	struct ted_widget_info *wi;
@@ -627,29 +601,6 @@ gtk_ted_add_separator (GtkWidget *widget, GtkTed *ted)
 	
 	gtk_container_set_border_width (GTK_CONTAINER (e), 2);
 	gtk_ted_add (ted, e, my_name);
-}
-
-static char *
-gtk_ted_render_flags (int flags, int dir)
-{
-	static char buf [8];
-	char *p = buf;
-	
-	if (flags & GTK_EXPAND)
-		*p++ = 'e';
-	if (flags & GTK_FILL)
-		*p++ = 'f';
-	if (flags & GTK_SHRINK)
-		*p++ = 's';
-	if (dir == 0)
-		*p++ = '<';
-	else if (dir == 1)
-		*p++ = '.';
-	else
-		*p++ = '>';
-	*p = 0;
-	
-	return buf;
 }
 
 static char *
@@ -820,30 +771,6 @@ gtk_ted_init_editor (GtkTed *ted)
 	ted->top_row = TED_TOP_ROW;
 }
 
-static int
-gtk_ted_parse_flags (char *str, int *orientation)
-{
-	int flags = 0;
-	*orientation = 0;
-	
-	while (*str){
-		if (*str == 'e')
-			flags |= GTK_EXPAND;
-		else if (*str == 'f')
-			flags |= GTK_FILL;
-		else if (*str == 's')
-			flags |= GTK_SHRINK;
-		else if (*str == '<')
-			*orientation = 0;
-		else if (*str == '.')
-			*orientation = 1;
-		else if (*str == '>')
-			*orientation = 2;
-		str++;
-	}
-	return flags;
-}
-
 static struct ted_widget_info *
 gtk_ted_load_widget (GtkTed *ted, char *prefix, char *secname)
 {
@@ -896,32 +823,6 @@ gtk_ted_load_frame (GtkTed *ted, char *prefix, char *secname)
 	g_free (str);
 	wi->type = frame_widget;
 	wi->widget = gtk_ted_wrap (w = gtk_frame_new (p = gnome_config_get_string ("text")), wi);
-	gtk_object_set_data (GTK_OBJECT (wi->widget), "ted_widget_info", wi);
-	gtk_widget_show (wi->widget);
-	g_free (p);
-	wi->name = g_strdup (secname + 6);
-	gnome_config_pop_prefix ();
-	g_free (full);
-	return wi;
-}
-
-static struct ted_widget_info *
-gtk_ted_load_label (GtkTed *ted, char *prefix, char *secname)
-{
-	char *full = g_strconcat (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
-	struct ted_widget_info *wi = g_new (struct ted_widget_info, 1);
-	char *str, *p;
-	
-	wi->widget = 0;
-	
-	gnome_config_push_prefix (full);
-	str = gnome_config_get_string ("geometry");
-	sscanf (str, "%d,%d,%d,%d", &wi->start_col, &wi->start_row, &wi->col_span, &wi->row_span);
-	g_free (str);
-	wi->sticky = gtk_ted_parse_pos (str = gnome_config_get_string ("flags"));
-	g_free (str);
-	wi->type = frame_widget;
-	wi->widget = gtk_ted_wrap (gtk_label_new (p = gnome_config_get_string ("text")), wi);
 	gtk_object_set_data (GTK_OBJECT (wi->widget), "ted_widget_info", wi);
 	gtk_widget_show (wi->widget);
 	g_free (p);
@@ -1055,38 +956,6 @@ gtk_ted_checkbox_toggled (GtkWidget *widget, struct gtk_ted_checkbox_info *ci)
 }
 
 static void
-gtk_ted_new_checkbox (GtkWidget *box, struct ted_widget_info *wi, char *string, int value, int is_y)
-{
-	GtkWidget *check;
-	struct gtk_ted_checkbox_info *ci;
-	int toggle_val;
-
-	ci = g_new (struct gtk_ted_checkbox_info, 1);
-
-	ci->wi = wi;
-	ci->is_y = is_y;
-	ci->value = value;
-
-	toggle_val = 0;
-
-#if 0
-	if (is_y){
-		if (wi->flags_y & value)
-			toggle_val = 1;
-	} else {
-		if (wi->flags_x & value)
-			toggle_val = 1;
-	}
-#endif
-	
-	check = gtk_check_button_new_with_label (string);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), toggle_val);
-	gtk_box_pack_end_defaults (GTK_BOX (box), check);
-	gtk_widget_show (check);
-	gtk_signal_connect (GTK_OBJECT (check), "toggled", GTK_SIGNAL_FUNC (gtk_ted_checkbox_toggled), ci);
-}
-
-static void
 gtk_ted_orient_cb (GtkWidget *w, void *data)
 {
 	/*
@@ -1113,25 +982,6 @@ gtk_ted_setup_radio (GtkWidget *vbox, GtkWidget *widget, gchar *str, struct ted_
 			     
 	gtk_box_pack_start_defaults (GTK_BOX (vbox), widget);
 	gtk_widget_show (widget);
-}
-
-static GtkWidget *
-gtk_ted_nse_control (struct ted_widget_info *wi, char *a, char *b, int state)
-{
-	GtkWidget *vbox, *n, *c, *s;
-	
-	vbox = gtk_vbox_new (0, 0);
-	gtk_widget_show (vbox);
-	
-	n = gtk_radio_button_new_with_label (NULL, a);
-	gtk_ted_setup_radio (vbox, n, a, wi, 0, state == 0);
-	c = gtk_radio_button_new_with_label (gtk_radio_button_group (GTK_RADIO_BUTTON (n)), "Center");
-	gtk_ted_setup_radio (vbox, c, a, wi, 1, state == 1);
-	s = gtk_radio_button_new_with_label (gtk_radio_button_group (GTK_RADIO_BUTTON (n)), b);
-	gtk_ted_setup_radio (vbox, s, a, wi, 2, state == 2);
-
-	
-	return vbox;
 }
 
 static GtkWidget *

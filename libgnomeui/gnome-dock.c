@@ -978,7 +978,7 @@ drag_snap (GnomeDock *dock,
            GtkWidget *widget,
            gint x, gint y)
 {
-#define SNAP 20
+#define SNAP 50
   GnomeDockItem *item;
   GnomeDockItemBehavior item_behavior;
   gint win_x, win_y;

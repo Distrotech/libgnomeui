@@ -439,7 +439,6 @@ gnome_dock_band_size_allocate (GtkWidget *widget,
                                GtkAllocation *allocation)
 {
   GnomeDockBand *band;
-  GList *lp;
   guint space, requested_space;
 
   band = GNOME_DOCK_BAND (widget);
@@ -1112,7 +1111,6 @@ dock_empty (GnomeDockBand *band,
 {
   GnomeDockBandChild *floating_child;
   GnomeDockBandChild *c1, *c2;
-  GnomeDockItemBehavior behavior;
   GtkOrientation orig_item_orientation;
   GtkRequisition item_requisition;
   GList *lp;
@@ -1512,7 +1510,6 @@ gnome_dock_band_insert (GnomeDockBand *band,
                         gint position)
 {
   GnomeDockBandChild *band_child;
-  guint nchildren;
 
   DEBUG (("%08x", (unsigned int) band));
 
@@ -1782,10 +1779,8 @@ gnome_dock_band_drag_to (GnomeDockBand *band,
                          GnomeDockItem *item,
                          gint x, gint y)
 {
-  GnomeDockBandChild *next_child;
   GtkAllocation *allocation;
   GList *where;
-  gint x_offs;
   gboolean is_empty;
 
   g_return_val_if_fail (band->doing_drag, FALSE);

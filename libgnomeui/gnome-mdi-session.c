@@ -25,8 +25,6 @@ static void		set_active_window	(GnomeMDI *, GHashTable *, glong);
 
 static gpointer		view_window_func	(gpointer);
 
-static void             child_get_config_string (GnomeMDIChild *);
-
 static gchar *
 gnome_mdi_child_get_config_string (GnomeMDIChild *child)
 {
@@ -136,12 +134,6 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 				     views->pdata [k],
 				     mdi->active_view);
 	}
-}
-
-static void
-remove_items (GtkWidget *w, gpointer data)
-{
-	gtk_container_remove(GTK_CONTAINER(data), w);
 }
 
 static void
@@ -319,7 +311,6 @@ gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
 
 	for (i = 0; i < window_list->len; i++) {
 		GtkWidget *real_view;
-		GnomeApp *app;
 		glong view;
 		gint ret;
 

@@ -608,7 +608,6 @@ gnome_win_hints_get_client_window_ids(void)
   int i;
   Atom r_type;
   int r_format;
-  GdkWindowPrivate *priv;
   unsigned long count;
   unsigned long bytes_remain;
   unsigned char *prop;

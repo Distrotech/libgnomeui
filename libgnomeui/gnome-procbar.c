@@ -314,7 +314,6 @@ gnome_proc_bar_timeout (gpointer data)
 void
 gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
 {
-    unsigned tot = val [0];
     gint i;
     gint change = 0;
 
