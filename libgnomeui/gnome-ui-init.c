@@ -44,9 +44,10 @@
 
 #include <gtk/gtk.h>
 
-#include "libgnome/libgnomeP.h"
-#include "libgnome/gnome-program.h"
+#include <libgnome/gnome-util.h>
+#include <libgnome/gnome-program.h>
 
+#include "gnome-i18nP.h"
 #include "gnome-client.h"
 #include "gnome-preferences.h"
 #include "gnome-init.h"
