@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.16\n"
-"POT-Creation-Date: 2002-05-13 19:16+0200\n"
-"PO-Revision-Date: 2002-04-03 20:55+0200\n"
+"POT-Creation-Date: 2002-05-01 23:14+0200\n"
+"PO-Revision-Date: 2002-05-01 23:25+0200\n"
 "Last-Translator: Benjamin Greiner <benjamin.greiner@gmx.net>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,111 +19,108 @@ msgstr ""
 msgid "Credits"
 msgstr "Mitwirkende"
 
-#: libgnomeui/gnome-about.c:223
-#, fuzzy
+#: libgnomeui/gnome-about.c:222
 msgid "_Written by"
-msgstr "Autoren"
+msgstr "_Programm von"
 
-#: libgnomeui/gnome-about.c:238
-#, fuzzy
+#: libgnomeui/gnome-about.c:237
 msgid "_Documented by"
-msgstr "Dokumentation von"
+msgstr "_Dokumentation von"
 
-#: libgnomeui/gnome-about.c:253
-#, fuzzy
+#: libgnomeui/gnome-about.c:252
 msgid "_Translated by"
-msgstr "Übersetzung von"
+msgstr "_Übersetzung von"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:310
+#: libgnomeui/gnome-about.c:309
 msgid "_Credits"
 msgstr "_Mitwirkende"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:351
 msgid "Program name"
 msgstr "Programmname"
 
-#: libgnomeui/gnome-about.c:353
+#: libgnomeui/gnome-about.c:352
 msgid "The name of the program"
 msgstr "Name des Programms"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:359
 msgid "Program version"
 msgstr "Programmversion"
 
-#: libgnomeui/gnome-about.c:361
+#: libgnomeui/gnome-about.c:360
 msgid "The version of the program"
 msgstr "Version des Programms"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:366
 msgid "Copyright string"
 msgstr "Copyright-Text"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright information for the program"
 msgstr "Copyright-Informationen für das Programm"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:374
 msgid "Comments string"
 msgstr "Kommentar"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:375
 msgid "Comments about the program"
 msgstr "Kommentare zum Programm"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:381
 msgid "Authors"
 msgstr "Autoren"
 
-#: libgnomeui/gnome-about.c:383
+#: libgnomeui/gnome-about.c:382
 msgid "List of authors of the programs"
 msgstr "Liste der Programmautoren"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:384
 msgid "Author entry"
 msgstr "Autoreneintrag"
 
-#: libgnomeui/gnome-about.c:386
+#: libgnomeui/gnome-about.c:385
 msgid "A single author entry"
 msgstr "Einzelner Autoreneintrag"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:392
 msgid "Documenters"
 msgstr "Dokumentatoren"
 
-#: libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:393
 msgid "List of people documenting the program"
 msgstr "Liste der Dokumentatoren des Programms"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:395
 msgid "Documenter entry"
 msgstr "Dokumentatoreintrag"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:396
 msgid "A single documenter entry"
 msgstr "Einzelner Dokumentatoreintrag"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:404
 msgid "Translator credits"
 msgstr "Übersetzer"
 
 # CHECK
-#: libgnomeui/gnome-about.c:406
+#: libgnomeui/gnome-about.c:405
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Dank an die Übersetzer. Diese Zeichenfolge sollte als übersetzbar markiert "
 "werden."
 
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: libgnomeui/gnome-about.c:414
+#: libgnomeui/gnome-about.c:413
 msgid "A logo for the about box"
 msgstr "Logo für die Info-Box"
 
-#: libgnomeui/gnome-about.c:493
+#: libgnomeui/gnome-about.c:492
 #, c-format
 msgid "About %s"
 msgstr "Über %s"
@@ -367,9 +364,8 @@ msgid "Link color"
 msgstr "Link-Farbe"
 
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Color used to draw the link"
-msgstr "Farbe des Links"
+msgstr "Farbe, die zum Zeichnen des Links verwendet wird"
 
 #: libgnomeui/gnome-href.c:383
 msgid ""
@@ -503,6 +499,7 @@ msgstr "Hinweis für Kindelement 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datei"
 
@@ -560,6 +557,7 @@ msgid "_Game"
 msgstr "_Spiel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -605,8 +603,7 @@ msgstr "Die gespeicherte Version dieser Datei wiederherstellen"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
-msgid "_Print..."
+msgid "_Print"
 msgstr "_Drucken"
 
 #: libgnomeui/gnome-app-helper.c:131
@@ -633,22 +630,19 @@ msgstr "Die aktuelle Datei schließen"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "_Ausschneiden"
+msgstr "_Beenden"
 
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "Über diese Anwendung"
+msgstr "Die Anwendung beenden"
 
 #.
 #. * The "Edit" menu
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-#, fuzzy
-msgid "Cu_t"
+msgid "C_ut"
 msgstr "_Ausschneiden"
 
 #: libgnomeui/gnome-app-helper.c:155
@@ -712,8 +706,8 @@ msgstr "Nach einer Zeichenkette suchen"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-msgid "Find Ne_xt"
-msgstr ""
+msgid "Find _Again"
+msgstr "_Weitersuchen"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -721,8 +715,7 @@ msgstr "Dieselbe Zeichenkette abermals suchen"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
-msgid "R_eplace..."
+msgid "_Replace..."
 msgstr "_Ersetzen..."
 
 #: libgnomeui/gnome-app-helper.c:197
@@ -743,8 +736,7 @@ msgstr "Die Eigenschaften der Datei verändern"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
-msgid "Prefere_nces..."
+msgid "_Preferences..."
 msgstr "_Vorlieben..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -756,17 +748,16 @@ msgstr "Die Anwendung konfigurieren"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Über diese Anwendung"
 
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
-msgid "Select _All"
+msgid "_Select All"
 msgstr "Alles au_swählen"
 
 #: libgnomeui/gnome-app-helper.c:226
@@ -788,7 +779,7 @@ msgstr "Ein neues Fenster öffnen"
 msgid "_Close This Window"
 msgstr "Fenster _schließen"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Das aktuelle Fenster schließen"
 
@@ -861,35 +852,27 @@ msgid "End the current game"
 msgstr "Das aktuelle Spiel beenden"
 
 # CHECK
-#: libgnomeui/gnome-app-helper.c:1130
-#, fuzzy
-msgid "_Contents"
+#: libgnomeui/gnome-app-helper.c:1096
+msgid "_Help Contents"
 msgstr "_Hilfeinhalt"
 
-#: libgnomeui/gnome-app-helper.c:1131
-#, fuzzy
-msgid "View help for this application"
-msgstr "Über diese Anwendung"
+#: libgnomeui/gnome-app-helper.c:2463
+msgid "Both text and icons"
+msgstr "Text und Symbole"
 
-#: libgnomeui/gnome-app-helper.c:2515
-msgid "Text Below Icons"
-msgstr ""
+#: libgnomeui/gnome-app-helper.c:2464
+msgid "Both text and icons when horizontal, just icons when vertical"
+msgstr "Text und Symbole wenn horizontal, nur Symbole wenn vertikal"
 
-#: libgnomeui/gnome-app-helper.c:2516
-msgid "Text Beside Icons"
-msgstr ""
-
-#: libgnomeui/gnome-app-helper.c:2517
-#, fuzzy
-msgid "Icons Only"
+#: libgnomeui/gnome-app-helper.c:2465
+msgid "Icons only"
 msgstr "Nur Symbole"
 
-#: libgnomeui/gnome-app-helper.c:2518
-#, fuzzy
-msgid "Text Only"
+#: libgnomeui/gnome-app-helper.c:2466
+msgid "Text only"
 msgstr "Nur Text"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2526
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Desktopvorgaben verwenden (%s)"
@@ -958,12 +941,13 @@ msgstr "Der GTK-Eintrag"
 msgid "History ID"
 msgstr "Kennung der Chronik"
 
+# ID->Kennung, ergo identifier->Kennung
 #: libgnomeui/gnome-file-entry.c:218
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Eindeutiger Indentifizierer für den Dateieintrag.  Dies wird verwendet, um "
+"Eindeutige Kennung für den Dateieintrag.  Diese wird verwendet, um "
 "die Chronikliste zu speichern."
 
 #: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:182
@@ -1136,9 +1120,9 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Die Anwendung »%s« hat versucht, einen Aspekt der Konfiguration zu ändern, "
-"Ihr Systemadministrator oder Betriebssystemhändler nicht zu ändern erlaubt. "
+"die Ihr Systemadministrator oder Betriebssystemhändler nicht zu ändern erlaubt. "
 "Einige der von Ihnen gewählten Einstellungen könnten nicht in Kraft treten "
-"oder in der nächsten Sitzung mit dieser Anwendung (%s) nicht "
+"oder in der nächsten Sitzung mit dieser Anwendung nicht "
 "wiederhergestellt werden."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1156,7 +1140,7 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Eindeutiger Identifizierer für den Icon-Eintrag.  Dies wird verwendet, um "
+"Eindeutige Kennung für den Icon-Eintrag.  Dies wird verwendet, um "
 "die Chronikliste zu speichern."
 
 #: libgnomeui/gnome-icon-entry.c:183
@@ -1282,17 +1266,6 @@ msgstr "%a, %d. %m. %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Find _Again"
-#~ msgstr "_Weitersuchen"
-
-#~ msgid "Both text and icons"
-#~ msgstr "Text und Symbole"
-
-#~ msgid "E_xit"
-#~ msgstr "_Beenden"
-
-#~ msgid "Exit the program"
-#~ msgstr "Das Programm beenden"
-
-#~ msgid "Exit the test"
-#~ msgstr "Den Test beenden"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Den Test beenden"
