@@ -1,3 +1,8 @@
+2003-09-25  Balamurali Viswanathan <balamurali.viswanathan@wipro.com>
+
+	* libgnomeui/gnome-file-entry.c (browse_dialog_ok): Emit changed signal
+	instead of activate signal. Bug #123203
+
 2003-09-17  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-lookup.c (gnome_icon_lookup):

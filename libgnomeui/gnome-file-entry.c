@@ -407,7 +407,7 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	gtk_entry_set_text (GTK_ENTRY (entry), utf8_filename);
 	g_free (utf8_filename);
 	/* Is this evil? */
-	g_signal_emit_by_name (entry, "activate");
+	g_signal_emit_by_name (entry, "changed");
 	gtk_widget_destroy (GTK_WIDGET (fs));
 }
 
