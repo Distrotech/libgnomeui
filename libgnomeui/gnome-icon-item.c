@@ -854,6 +854,18 @@ gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
 	iti_queue_redraw (iti);
 }
 
+char *
+gnome_icon_text_item_get_text (GnomeIconTextItem *iti)
+{
+	g_return_val_if_fail (iti != NULL, NULL);
+	g_return_val_if_fail (IS_ITI (iti), NULL);
+
+	if (iti->editing)
+		return gtk_entry_get_text (iti->entry);
+	else
+		return iti->text;
+}
+
 GtkType
 gnome_icon_text_item_get_type (void)
 {

@@ -1,3 +1,10 @@
+1998-11-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-item.[ch] (gnome_icon_text_item_get_text): New public
+	function to query the text from the icon item.
+
+	* gnome-icon-list.c (text_changed): Use gnome_icon_text_item_get_text().
+
 1998-11-05  Chris Lahey  <clahey@umich.edu>
 
 	* pixmaps/Makefile.am (stock_images): 

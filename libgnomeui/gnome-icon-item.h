@@ -66,6 +66,9 @@ void     gnome_icon_text_item_setxy     (GnomeIconTextItem *iti,
 					 int      y);
 void     gnome_icon_text_item_select    (GnomeIconTextItem *iti,
 					 int      sel);
+char    *gnome_icon_text_item_get_text  (GnomeIconTextItem *iti);
+
+
 END_GNOME_DECLS
 #endif /* _GNOME_ICON_ITEM_H_ */
 

@@ -1,5 +1,5 @@
 /*
- * GnomeIconList widget - scrolable icon list
+ * GnomeIconList widget - scrollable icon list
  *
  * Copyright (C) 1998 the Free Software Foundation
  *
@@ -565,7 +565,7 @@ text_changed (GnomeCanvasItem *item, Icon *icon)
 	idx = gil_icon_to_index (gil, icon);
 	gtk_signal_emit (GTK_OBJECT (gil),
 			 gil_signals [TEXT_CHANGED],
-			 idx, gtk_entry_get_text (icon->text->entry),
+			 idx, gnome_icon_text_item_get_text (icon->text),
 			 &accept);
 	
 	return accept;
