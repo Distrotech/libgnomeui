@@ -1634,7 +1634,8 @@ pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 			if (accel)
 				gtk_widget_add_accelerator(wid,
 							   "activate_item",
-							   accel, key, 0, 0);
+							   accel, key, 0,
+							   GTK_ACCEL_VISIBLE);
 			else {
 				/* not inside a GtkMenu -- must be on menubar*/
 				accel = glade_xml_ensure_accel(xml);
