@@ -30,8 +30,6 @@
 /* #include <gdk_imlib.h> */
 
 
-/* Wether or not the new GnomeStock widget should be used */
-#define USE_NEW_GNOME_STOCK 1
 
 
 /* A short description:
@@ -293,42 +291,10 @@ union _GnomeStockPixmapEntry {
 
 
 
-#if !USE_NEW_GNOME_STOCK
-/* the GnomeStockPixmapWidget */
-
-#define GNOME_STOCK_PIXMAP_WIDGET(obj)         GTK_CHECK_CAST(obj, gnome_stock_pixmap_widget_get_type(), GnomeStockPixmapWidget)
-#define GNOME_STOCK_PIXMAP_WIDGET_CLASS(klass) GTK_CHECK_CAST_CLASS(obj, gnome_stock_pixmap_widget_get_type(), GnomeStockPixmapWidget)
-#define GNOME_IS_STOCK_PIXMAP_WIDGET(obj)      GTK_CHECK_TYPE(obj, gnome_stock_pixmap_widget_get_type())
-
-typedef struct _GnomeStockPixmapWidget         GnomeStockPixmapWidget;
-typedef struct _GnomeStockPixmapWidgetClass    GnomeStockPixmapWidgetClass;
-
-struct _GnomeStockPixmapWidget {
-	GtkVBox parent_object;
-
-        char *icon;
-	int width, height;      /* needed to answer size_requests even before
-			         * a pixmap is loaded/created */
-        GtkWidget   *window;    /* needed for style and gdk_pixmap_create... */
-        GnomePixmap *pixmap;    /* the pixmap currently shown */
-        GnomePixmap *regular, *disabled, *focused;  /* pixmap cache */
-};
-
-struct _GnomeStockPixmapWidgetClass {
-	GtkVBoxClass parent_class;
-};
-
-guint gnome_stock_pixmap_widget_get_type(void);
-GtkWidget *gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon);
-
-#else /* USE_NEW_GNOME_STOCK */
-
 #define GNOME_STOCK_PIXMAP_WIDGET GNOME_STOCK
 #define GNOME_IS_STOCK_PIXMAP_WIDGET GNOME_IS_STOCK
 
 GtkWidget *gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon);
-
-#endif /* USE_NEW_GNOME_STOCK */
 
 
 /* The new GnomeStock widget */
@@ -391,13 +357,8 @@ GtkWidget             *gnome_stock_pixmap_widget_at_size(GtkWidget *window,
 							 guint height);
 
 /* change the icon/look of a GnomeStockPixmapWidget */
-#if USE_NEW_GNOME_STOCK
 void gnome_stock_pixmap_widget_set_icon(GnomeStock *widget,
 					const char *icon);
-#else
-void gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
-					const char *icon);
-#endif
 
 /* register a pixmap. returns non-zero, if successful */
 gint                   gnome_stock_pixmap_register (const char *icon,
