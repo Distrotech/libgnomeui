@@ -478,9 +478,19 @@ reconfigure_arrows (GnomeCanvasLine *line)
 
 	/* Add fudge value for better-looking results */
 
-	shape_a = line->shape_a + 0.001;
-	shape_b = line->shape_b + 0.001;
-	shape_c = line->shape_c + width / 2.0 + 0.001;
+	shape_a = line->shape_a;
+	shape_b = line->shape_b;
+	shape_c = line->shape_c + width / 2.0;
+
+	if (line->width_pixels) {
+		shape_a /= line->item.canvas->pixels_per_unit;
+		shape_b /= line->item.canvas->pixels_per_unit;
+		shape_c /= line->item.canvas->pixels_per_unit;
+	}
+
+	shape_a += 0.001;
+	shape_b += 0.001;
+	shape_c += 0.001;
 
 	/* Compute the polygon for the first arrowhead and adjust the first point in the line so
 	 * that the line does not stick out past the leading edge of the arrowhead.
@@ -714,12 +724,18 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 		line_points = line->coords;
 	}
 
-	/* Compute a polygon for each edge of the line and test the point against it */
+	/* Compute a polygon for each edge of the line and test the point against it.  The effective
+	 * width of the line is adjusted so that it will be at least one pixel thick (so that zero
+	 * pixel-wide lines can be pickedup as well).
+	 */
 
 	if (line->width_pixels)
 		width = line->width / item->canvas->pixels_per_unit;
 	else
 		width = line->width;
+
+	if (width < (1.0 / item->canvas->pixels_per_unit))
+		width = 1.0 / item->canvas->pixels_per_unit;
 
 	changed_miter_to_bevel = 0;
 

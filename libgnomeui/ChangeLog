@@ -1,3 +1,12 @@
+1998-07-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-line.c (reconfigure_arrows): Do not scale the
+	arrows when the width of the line is specified in (unchanging)
+	pixels, to be consistent with the rest of the canvas.
+	(gnome_canvas_line_point): Adjust the effective width of the line
+	for the distance-to-point calculation so that even lines that are
+	logically less than one pixel thick can be picked up.
+
 1998-07-29  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-icon-list.h, gnome-icon-list.c: Put const on char* args.
