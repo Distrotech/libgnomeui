@@ -48,6 +48,7 @@ get_icon_name (const char          *file_uri,
 	       const char          *mime_type,
 	       GnomeIconLookupFlags flags)
 {
+
   if (file_info &&
       (file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE))
     {
@@ -75,6 +76,9 @@ get_icon_name (const char          *file_uri,
 	  break;
 	}
     }
+  
+  if (mime_type && g_ascii_strncasecmp (mime_type, "x-directory", strlen ("x-directory")) == 0)
+    return g_strdup (ICON_NAME_DIRECTORY);
   
   /* Regular or unknown: */
 

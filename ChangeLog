@@ -1,3 +1,9 @@
+2002-10-16  James Willcox  <jwillcox@gnome.org>
+
+	* libgnomeui/gnome-icon-lookup.c: (get_icon_name):
+	Make it so you can get the icon for a directory, even if
+	there is no GnomeVFSFileInfo available.
+
 2002-10-15  Paolo Maggi  <maggi@athena.polito.it>
 
 	* libgnomeui/gnome-entry.c (gnome_entry_save_history): save the list in
