@@ -1,3 +1,10 @@
+Sun Mar 23 00:09:49 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.c: Added config dialog for menu accelerators. This might
+	not be the proper place, but I didn't know where else to put it.
+
+	* stock_demo.c: Choosing preferences opens the accel config dlg.
+
 Sun Mar 22 19:16:58 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.[ch]: Added gnome_stock_menu_accel_parse.
