@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-05-03 15:17+0200\n"
+"POT-Creation-Date: 2004-06-02 04:05+0200\n"
+"PO-Revision-Date: 2004-06-02 11:31+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -140,6 +140,7 @@ msgstr "O %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Soubor"
 
@@ -197,6 +198,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Nápověda"
 
@@ -387,11 +389,11 @@ msgstr "Nastavit tuto aplikaci"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O aplikaci"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O této aplikaci"
 
@@ -418,7 +420,7 @@ msgstr "Vytvořit nové okno"
 msgid "_Close This Window"
 msgstr "_Zavřít toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zavřít aktuální okno"
 
@@ -805,22 +807,43 @@ msgstr "Barva pozadí je nastavena"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Barva pozadí obsahu"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Barva pozadí obsahu"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Barva pozadí obsahu jako GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Barva pozadí obsahu nastavena"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Barva pozadí obsahu je nastavena"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Barva pozadí loga"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Barva pozadí loga"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Barva pozadí loga jako GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Barva pozadí loga nastavena"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Barva pozadí loga je nastavena"
 
@@ -1404,8 +1427,9 @@ msgstr "_Informovat vývojáře"
 msgid "_Debug"
 msgstr "_Ladit"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukončit test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukončit test"
 
 #~ msgid "Color Selector"
 #~ msgstr "Výběr barvy"
