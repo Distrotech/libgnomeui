@@ -1,3 +1,8 @@
+1998-09-02  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi.c (gnome_mdi_rename_child): New function. This is
+	required to set the correct name in the menu item.
+
 1998-09-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (gnome_create_toolbar_with_data,

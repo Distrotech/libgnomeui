@@ -1174,6 +1174,25 @@ gint gnome_mdi_remove_all(GnomeMDI *mdi, gint force) {
   return TRUE;
 }
 
+void gnome_mdi_rename_child(GnomeMDI *mdi, GnomeMDIChild *child, gchar *name) {
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+  g_return_if_fail(child != NULL);
+  g_return_if_fail(GNOME_IS_MDI_CHILD(child));
+  g_return_if_fail(name != NULL);
+
+  /* We need to remove the menu item while the child has its old name,
+   * since child->name is required to find this item. */
+  
+  child_list_menu_remove_item(mdi, child);
+
+  gnome_mdi_child_set_name(child, name);
+
+  child_list_menu_add_item(mdi, child);
+
+  gnome_mdi_update_child(mdi, child);
+}
+
 void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {
   GtkWidget *view;
   GList *view_node;
