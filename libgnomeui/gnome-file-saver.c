@@ -21,16 +21,21 @@
 
 #include "gnome-file-saver.h"
 #include "gnome-gconf.h"
+#include "gnome-pixmap.h"
 #include <gtk/gtk.h>
+#include <libgnome/gnome-i18nP.h>
+#include <libgnome/gnome-util.h>
+#include <libgnome/gnome-mime-info.h>
+#include "gtkpixmapmenuitem.h"
+#include "gnome-stock.h"
 
 enum {
-        FILENAME_CHOSEN,
+        FINISHED,
         LAST_SIGNAL
 };
 
 enum {
         ARG_0,
-        ARG_FILENAME,
         LAST_ARG
 };
 
@@ -86,21 +91,17 @@ gnome_file_saver_class_init (GnomeFileSaverClass* klass)
 
         parent_class = gtk_type_class (gnome_dialog_get_type());
 
-        signals[FILENAME_CHOSEN] =
-                gtk_signal_new ("filename_chosen",
+        signals[FINISHED] =
+                gtk_signal_new ("finished",
                                 GTK_RUN_LAST,
                                 object_class->type,
-                                GTK_SIGNAL_OFFSET (GnomeFileSaverClass, filename_chosen),
+                                GTK_SIGNAL_OFFSET (GnomeFileSaverClass, finished),
                                 gtk_marshal_NONE__POINTER,
                                 GTK_TYPE_NONE, 1, GTK_TYPE_STRING);
         
         gtk_object_class_add_signals (object_class, signals, 
                                       LAST_SIGNAL);
-
         
-        gtk_object_add_arg_type ("GnomeFileSaver::filename", GTK_TYPE_STRING,
-                                 GTK_ARG_READABLE, ARG_FILENAME);
-
         object_class->set_arg = gnome_file_saver_set_arg;
         object_class->get_arg = gnome_file_saver_get_arg;
 
@@ -114,26 +115,115 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
         GnomeDialog *dialog;
         GSList *all_entries;
         GSList *iter;
+        GtkWidget *hbox;
+        GtkWidget *table;
+        GtkWidget *label;
+        GtkWidget *frame;
+        GtkWidget *vbox;
+        gchar *icon;
+
+        gtk_window_set_policy(GTK_WINDOW(file_saver), FALSE, TRUE, FALSE);
         
         dialog = GNOME_DIALOG(file_saver);
-        
-        file_saver->entry = gtk_entry_new();
-        file_saver->option = gtk_option_menu_new();
-        
-        gtk_box_pack_start (GTK_BOX(dialog->vbox),
-                            file_saver->entry,
-                            FALSE, FALSE, 6);
+
+        hbox = gtk_hbox_new(FALSE, 6);
 
         gtk_box_pack_start (GTK_BOX(dialog->vbox),
-                            file_saver->option,
+                            hbox,
                             FALSE, FALSE, 6);
 
-        file_saver->menu = gtk_menu_new();
+        icon = gnome_pixmap_file("mc/i-regular.png");
+
+        if (icon)
+                file_saver->type_pixmap = gnome_pixmap_new_from_file (icon);
+        else
+                file_saver->type_pixmap = gnome_pixmap_new ();
+
+        g_free (icon);
+        
+        frame = gtk_frame_new (NULL);
+        vbox = gtk_vbox_new (FALSE, 0);
+        gtk_container_add (GTK_CONTAINER (vbox), frame);
+        gtk_container_add (GTK_CONTAINER (frame), file_saver->type_pixmap);
+        
+        gtk_box_pack_start (GTK_BOX(hbox),
+                            vbox,
+                            FALSE, FALSE, 6);
+        
+        table = gtk_table_new (2, 3, FALSE);
+
+        gtk_box_pack_end (GTK_BOX(hbox),
+                          table,
+                          TRUE, TRUE, 6);
+        
+        label = gtk_label_new(_("File Name:"));
+        gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.5);
+        gtk_table_attach (GTK_TABLE(table),
+                          label,
+                          0, 1,
+                          0, 1,
+                          GTK_FILL, GTK_FILL, 3, 3);
+
+        label = gtk_label_new(_("Location:"));
+        gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.5);
+        gtk_table_attach (GTK_TABLE(table),
+                          label,
+                          0, 1,
+                          1, 2,
+                          GTK_FILL, GTK_FILL, 3, 3);
+
+        file_saver->type_label =  gtk_label_new(_("Save As Type:"));
+        gtk_misc_set_alignment(GTK_MISC(file_saver->type_label), 0.0, 0.5);
+        gtk_table_attach (GTK_TABLE(table),
+                          file_saver->type_label,
+                          0, 1,
+                          2, 3,
+                          GTK_FILL, GTK_FILL, 3, 3);
+        
+        file_saver->filename_entry = gtk_entry_new();
+
+        file_saver->location_option = gtk_option_menu_new();        
+        file_saver->location_menu = gtk_menu_new();
+
+        file_saver->type_option = gtk_option_menu_new();        
+        file_saver->type_menu = gtk_menu_new();
+        
+        gtk_table_attach (GTK_TABLE(table),
+                          file_saver->filename_entry,
+                          1, 2,
+                          0, 1,
+                          GTK_FILL | GTK_EXPAND,
+                          GTK_FILL,
+                          3, 3);
+
+        gtk_table_attach (GTK_TABLE(table),
+                          file_saver->location_option,
+                          1, 2,
+                          1, 2,
+                          GTK_FILL | GTK_EXPAND,
+                          GTK_FILL,
+                          3, 3);
+
+        gtk_table_attach (GTK_TABLE(table),
+                          file_saver->type_option,
+                          1, 2,
+                          2, 3,
+                          GTK_FILL | GTK_EXPAND,
+                          GTK_FILL,
+                          3, 3);
+        
+        /*
+         * Get the GConfClient object
+         */ 
         
         file_saver->conf = gnome_gconf_client_get();
 
         gtk_object_ref(GTK_OBJECT(file_saver->conf));
 
+        /*
+         * Fill in the Location menu
+         */
+        
         /* No preload because the explicit all_entries call below
            effectively results in a preload. */
         gconf_client_add_dir(file_saver->conf,
@@ -171,20 +261,40 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
                                         locations_changed_notify,
                                         file_saver, NULL, NULL);
 
-        gtk_widget_show(file_saver->menu);
+        gtk_widget_show(file_saver->location_menu);
         
         /* Must do _after_ filling the menu */
-        gtk_option_menu_set_menu(GTK_OPTION_MENU(file_saver->option),
-                                 file_saver->menu);
+        gtk_option_menu_set_menu(GTK_OPTION_MENU(file_saver->location_option),
+                                 file_saver->location_menu);
+
+        gtk_widget_show(file_saver->type_menu);
         
-        gtk_widget_show(file_saver->entry);
-        gtk_widget_show(file_saver->option);
+        /* Must do _after_ filling the menu */
+        gtk_option_menu_set_menu(GTK_OPTION_MENU(file_saver->type_option),
+                                 file_saver->type_menu);
+
+        gtk_widget_show_all(hbox);
+
+        /* Now hide the type stuff until we get mime types added */
+        gtk_widget_hide(file_saver->type_label);
+        gtk_widget_hide(file_saver->type_option);
+
+        gnome_dialog_append_buttons (GNOME_DIALOG (file_saver),
+                                     GNOME_STOCK_BUTTON_OK,
+                                     GNOME_STOCK_BUTTON_CANCEL,
+                                     NULL);
 }
 
-GnomeFileSaver*
-gnome_file_saver_new (void)
+GtkWidget*
+gnome_file_saver_new (const gchar* title, const gchar* saver_id)
 {
-        return GNOME_FILE_SAVER (gtk_type_new (gnome_file_saver_get_type ()));
+        GtkWidget *widget;
+
+        widget = GTK_WIDGET (gtk_type_new (gnome_file_saver_get_type ()));
+
+        gtk_window_set_title(GTK_WINDOW(widget), title);
+        
+        return widget;
 }
 
 static void
@@ -242,8 +352,6 @@ gnome_file_saver_get_arg (GtkObject* object, GtkArg* arg, guint arg_id)
         file_saver = GNOME_FILE_SAVER (object);
 
         switch (arg_id) {
-        case ARG_FILENAME:
-                break;
                 
         default:
                 arg->type = GTK_TYPE_INVALID;
@@ -251,16 +359,118 @@ gnome_file_saver_get_arg (GtkObject* object, GtkArg* arg, guint arg_id)
         }
 }
 
-gchar*
-gnome_file_saver_get_filename (GnomeFileSaver *saver)
-{
-        g_return_val_if_fail(GNOME_IS_FILE_SAVER(saver), NULL);
+/*
+ * MIME type stuff
+ */
 
-        /* FIXME */
+static void
+type_chosen_cb(GtkWidget* mi, GnomeFileSaver* file_saver)
+{
+        const gchar* mime_type;
+        const gchar* icon_file;
+        gchar* freeme = NULL;
+        GdkPixbuf *pixbuf;
         
-        return NULL;
+        mime_type = gtk_object_get_data(GTK_OBJECT(mi),
+                                        "mimetype");
+
+        g_assert(mime_type != NULL);
+
+        icon_file = gnome_mime_get_value(mime_type, "icon-filename");
+
+        if (icon_file == NULL) {
+                freeme = gnome_pixmap_file("mc/i-regular.png");
+                icon_file = freeme;
+        }
+
+        if (icon_file) {
+                printf("file %s\n", icon_file);
+                pixbuf = gdk_pixbuf_new_from_file(icon_file);
+        } else {
+                pixbuf = NULL;
+        }
+
+        if (pixbuf) {
+                printf("loaded ok\n");
+                gnome_pixmap_set_pixbuf (GNOME_PIXMAP(file_saver->type_pixmap),
+                                         pixbuf);
+                gdk_pixbuf_unref(pixbuf);
+        } else {
+                printf("no load\n");
+                gnome_pixmap_clear (GNOME_PIXMAP(file_saver->type_pixmap));
+        }
+                
+        g_free(freeme);
 }
 
+void
+gnome_file_saver_add_mime_type(GnomeFileSaver *file_saver,
+                               const gchar    *mime_type)
+{
+        GtkWidget *mi;
+        GtkWidget *pix;
+        const gchar* icon_file;
+        gchar* freeme = NULL;
+        const gchar* desc;
+        GtkWidget *label;
+
+        gtk_widget_show(file_saver->type_option);
+        gtk_widget_show(file_saver->type_label);
+        
+        icon_file = gnome_mime_get_value(mime_type, "icon-filename");
+        desc = gnome_mime_description(mime_type);
+        if (desc == NULL)
+                desc = mime_type;
+
+        if (icon_file == NULL) {
+                freeme = gnome_pixmap_file("mc/i-regular.png");
+                icon_file = freeme;
+        }
+        
+        if (icon_file) 
+                pix = gnome_pixmap_new_from_file_at_size(icon_file, 16, 16);
+        else
+                pix = NULL;
+
+        mi = gtk_pixmap_menu_item_new();
+        label = gtk_label_new(desc);
+        gtk_container_add(GTK_CONTAINER(mi), label);
+
+        if (pix)
+                gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(mi),
+                                                pix);
+
+        g_free(freeme);
+
+        gtk_object_set_data_full(GTK_OBJECT(mi),
+                                 "mimetype",
+                                 g_strdup(mime_type),
+                                 g_free);
+
+        gtk_signal_connect (GTK_OBJECT(mi),
+                            "activate",
+                            type_chosen_cb,
+                            file_saver);
+        
+        gtk_widget_show_all(mi);
+
+        gtk_menu_append(GTK_MENU(file_saver->type_menu),
+                        mi);        
+}
+
+void
+gnome_file_saver_add_mime_types(GnomeFileSaver *file_saver,
+                                const gchar    *mime_types[])
+{
+        const gchar** mtp;
+
+        mtp = mime_types;
+
+        while (*mtp) {
+                gnome_file_saver_add_mime_type(file_saver, *mtp);
+                ++mtp;
+        }
+}
 
 /*
  * Location list management
@@ -434,7 +644,7 @@ gnome_file_saver_update_location(GnomeFileSaver* file_saver,
                 file_saver->locations = g_slist_insert(file_saver->locations,
                                                        mi, count);
 
-                gtk_menu_insert(GTK_MENU(file_saver->menu),
+                gtk_menu_insert(GTK_MENU(file_saver->location_menu),
                                 mi, count);
         }
 }
@@ -456,7 +666,3 @@ locations_changed_notify(GConfClient* client, guint cnxn_id,
                 gnome_file_saver_remove_location(file_saver,
                                                  key);
 }
-
-
-
-

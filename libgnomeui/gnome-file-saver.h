@@ -43,26 +43,41 @@ struct _GnomeFileSaver {
         
         /* all private, don't even think about it */
 
-        GtkWidget *entry;
-        GtkWidget *option;
-        GtkWidget *menu;
+        GtkWidget *filename_entry;
+
+        GtkWidget *location_option;
+        GtkWidget *location_menu;
         
         GConfClient *conf;
         guint        conf_notify;
 
         GSList      *locations;
+
+        GtkWidget   *type_option;
+        GtkWidget   *type_menu;
+        GtkWidget   *type_pixmap;
+        GtkWidget   *type_label;
 };
 
 struct _GnomeFileSaverClass {
         GnomeDialogClass parent_class;
         
-        void (* filename_chosen) (GnomeFileSaver *saver,
-                                  const gchar    *filename);
+        void (* finished) (GnomeFileSaver *saver,
+                           const gchar    *filename,
+                           const gchar    *mime_type);
 };
 
 GtkType         gnome_file_saver_get_type     (void);
-GnomeFileSaver* gnome_file_saver_new          (void);
-gchar*          gnome_file_saver_get_filename (GnomeFileSaver *saver);
+GtkWidget*      gnome_file_saver_new          (const gchar    *title,
+                                               const gchar    *saver_id);
+
+void            gnome_file_saver_add_mime_type(GnomeFileSaver *file_saver,
+                                               const gchar    *mime_type);
+
+/* convenience wrapper; not language-binding friendly but also not
+   required to be wrapped */
+void            gnome_file_saver_add_mime_types(GnomeFileSaver *file_saver,
+                                                const gchar    *mime_types[]);
 
 #ifdef __cplusplus
 }

@@ -31,9 +31,17 @@ main(int argc, char** argv)
                            argc, argv, GNOMEUI_INIT, GNOME_GCONF_INIT,
                            NULL);
 
+        fs = gnome_file_saver_new("Save a File", "document-saver");
 
-        fs = gnome_file_saver_new();
+        gnome_file_saver_add_mime_type(GNOME_FILE_SAVER(fs),
+                                       "text/plain");
 
+        gnome_file_saver_add_mime_type(GNOME_FILE_SAVER(fs),
+                                       "text/html");
+
+        gnome_file_saver_add_mime_type(GNOME_FILE_SAVER(fs),
+                                       "image/gif");
+        
         gtk_widget_show(fs);
         
         gtk_main();
