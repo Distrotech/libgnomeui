@@ -1,3 +1,14 @@
+1998-11-29  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome-app-helper.c (create_menu_item): Don't put unprotected
+	newlines in strings.  It is not portable.
+	(create_radio_menu_items): Likewise.
+	(create_help_entries): Likewise.
+	(create_toolbar_item): Likewise.
+	(create_radio_toolbar_items): Likewise.
+	(gnome_app_remove_menus): Likewise.
+	(gnome_app_insert_menus_custom): Likewise.
+
 Sat Nov 28 21:30:09 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-sel.c: use GnomeIconList instead of CList, fixed

@@ -223,8 +223,8 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 		break;
 
 	default:
-		g_warning ("Invalid GnomeUIInfo type %d passed to 
-				create_menu_item()", (int) uiinfo->type);
+		g_warning ("Invalid GnomeUIInfo type %d passed to "
+			   "create_menu_item()", (int) uiinfo->type);
 		return;
 	}
 
@@ -303,8 +303,8 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 			break;
 
 		default:
-			g_warning ("GnomeUIInfo element type %d is not valid 
-					inside a menu radio item group",
+			g_warning ("GnomeUIInfo element type %d is not valid "
+				   "inside a menu radio item group",
 				   (int) uiinfo->type);
 		}
 
@@ -341,8 +341,8 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	guint keyval;
 
 	if (!uiinfo->moreinfo) {
-		g_warning ("GnomeUIInfo->moreinfo cannot be NULL for 
-				GNOME_APP_UI_HELP");
+		g_warning ("GnomeUIInfo->moreinfo cannot be NULL for "
+			   "GNOME_APP_UI_HELP");
 		return pos;
 	}
 
@@ -779,8 +779,8 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio,
 		break;
 
 	default:
-		g_warning ("Invalid GnomeUIInfo type %d passed to 
-				create_toolbar_item()", (int) uiinfo->type);
+		g_warning ("Invalid GnomeUIInfo type %d passed to "
+			   "create_toolbar_item()", (int) uiinfo->type);
 		return;
 	}
 
@@ -818,8 +818,8 @@ create_radio_toolbar_items (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 			break;
 
 		default:
-			g_warning ("GnomeUIInfo element type %d is not valid 
-					inside a toolbar radio item group",
+			g_warning ("GnomeUIInfo element type %d is not valid "
+				   "inside a toolbar radio item group",
 				   (int) uiinfo->type);
 		}
 }
@@ -1221,8 +1221,8 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
 		pos = 1;
 	
 	if( parent == NULL ) {
-		g_warning("gnome_app_remove_menus: couldn't find first item to 
-				remove!");
+		g_warning("gnome_app_remove_menus: couldn't find first item to"
+			  " remove!");
 		return;
 	}
 	
@@ -1317,8 +1317,8 @@ gnome_app_insert_menus_custom (GnomeApp *app, gchar *path,
 	/* find the parent menushell and position for insertion of menus */
 	parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
 	if(parent == NULL) {
-		g_warning("gnome_app_insert_menus_custom: couldn't find 
-				insertion point for menus!");
+		g_warning("gnome_app_insert_menus_custom: couldn't find "
+			  "insertion point for menus!");
 		return;
 	}
 	
