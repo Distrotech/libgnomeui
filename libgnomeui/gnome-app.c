@@ -263,6 +263,8 @@ gnome_app_set_contents(GnomeApp *app, GtkWidget *contents)
 
 	if(app->contents != NULL)
 		gtk_container_remove(GTK_CONTAINER(app->table), app->contents);
+
+	gtk_widget_ref (contents);
   
 	/* Is this going to work at all? I'll wager not
 	   XXX oops it worked, my mistake :) */

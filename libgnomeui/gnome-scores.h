@@ -1,9 +1,22 @@
 /* 
- * G(NOME|TK) Scores Widget by Horacio J. Peña <horape@compendium.com.ar>
- * 
- * Free software (under the terms of the GNU Library General Public License)
+ * "High Scores" Widget 
+ *
+ * AUTHOR: 
+ * Horacio J. Peña <horape@compendium.com.ar>
+ *
+ * This is free software (under the terms of the GNU LGPL)
+ *
+ * USAGE:
+ * Use the gnome_scores_display. The other functions are going to be
+ * discontinued... (ok, i should add pixmap support to *_display 
+ * before)
+ *
+ * DESCRIPTION:
+ * A specialized widget to display "High Scores" for games. It's 
+ * very integrated with the gnome-score stuff so you only need to
+ * call one function to do all the work...
+ *
  */
-
 
 #ifndef GNOME_SCORES_H
 #define GNOME_SCORES_H
@@ -40,21 +53,78 @@ struct _GnomeScoresClass
 };
 
 guint      gnome_scores_get_type (void);
-GtkWidget* gnome_scores_new (guint n_scores, gchar **names, gfloat *scores,
-				time_t *times, guint clear);
 
-void	   gnome_scores_set_logo_label  (GnomeScores *, gchar *, gchar *, GdkColor *);
-void	   gnome_scores_set_logo_pixmap (GnomeScores *, gchar *);
-void	   gnome_scores_set_logo_widget (GnomeScores *, GtkWidget *);
+/* Does all the work of displaying the best scores. 
 
-void	   gnome_scores_set_color       (GnomeScores *, guint, GdkColor*);
-void	   gnome_scores_set_def_color   (GnomeScores *, GdkColor*); 
+   It calls gnome_score_get_notables to retrieve the info,
+   creates the window, and show it.
 
-		/* Warning: in gnome_scores_set_colors GdkColor* is an
-		   array, not a pointer as in [set|def]_color */
-void	   gnome_scores_set_colors      (GnomeScores *, GdkColor*); 
+   USAGE:
 
-void       gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos);
+   pos = gnome_score_log(score, level, TRUE);
+   gnome_scores_display (_("Mi game"), "migame", level, pos);
+   */
+void       /* Doesn't return nothing */
+	gnome_scores_display (
+		gchar *title,    /* Title. */
+		gchar *app_name, /* Name of the application, as in 
+				    gnome_score_init. */
+		gchar *level, 	 /* Level of the game or NULL. */
+		int pos		 /* Position in the top ten of the
+				    current player, as returned by
+				    gnome_score_log. */
+		);
+
+/* Creates the high-scores window. */
+GtkWidget* gnome_scores_new (
+		guint n_scores, 	/* Number of positions. */
+		gchar **names,  	/* Names of the players. */
+		gfloat *scores,		/* Scores */
+		time_t *times, 		/* Time in which the scores were done */
+		guint clear		/* Add a "Clear" Button? */
+		);
+
+/* Creates a label to be the logo */
+void gnome_scores_set_logo_label (
+		GnomeScores *gs,	/* GNOME Scores widget. */
+		gchar *txt,		/* Text in the label. */
+		gchar *font,		/* Font to use in the label. */
+		GdkColor *color		/* Color to use in the label. */
+		);
+
+/* Creates a pixmap to be the logo */
+void gnome_scores_set_logo_pixmap (
+		GnomeScores *gs,	/* GNOME Scores widget. */
+		gchar *logo		/* Name of the .xpm. */
+		);
+
+/* Set an arbitrary widget to be the logo. */
+void gnome_scores_set_logo_widget (
+		GnomeScores *gs,	/* GNOME Scores widget. */
+		GtkWidget *w 		/* Widget to be used as logo. */
+		);
+
+/* Set the color of one entry. */
+void gnome_scores_set_color (
+		GnomeScores *gs,	/* GNOME Scores widget. */
+		guint pos,		/* Entry to be changed. */
+		GdkColor *col		/* Color. */
+		);
+
+/* Set the default color of the entries. */
+void gnome_scores_set_def_color (
+		GnomeScores *gs,	/* GNOME Scores widget. */
+		GdkColor *col		/* Color. */
+		); 
+
+/* Set the color of all the entries. */
+void gnome_scores_set_colors (
+		GnomeScores *gs,	
+		GdkColor *col		/* Array of colors. */
+		);
+
+/* test */
+int test();
 
 END_GNOME_DECLS
 
