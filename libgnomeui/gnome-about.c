@@ -27,6 +27,7 @@
 
 #include "gnome-about.h"
 
+#include <gtk/gtkbbox.h>
 #include <gtk/gtkdialog.h>
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkimage.h>
@@ -35,7 +36,6 @@
 #include <gtk/gtkstock.h>
 #include <gtk/gtktextview.h>
 #include <gtk/gtkvbox.h>
-#include <gtk/gtkvseparator.h>
 #include <libgnome/gnome-macros.h>
 
 
@@ -55,8 +55,6 @@ struct _GnomeAboutPrivate {
 	GtkWidget *name_label;
 	GtkWidget *comments_label;
 	GtkWidget *copyright_label;
-
-	GtkTextBuffer *text_buffer;
 };
 
 enum {
@@ -71,6 +69,8 @@ enum {
 	PROP_LOGO,
 };
 
+#define GNOME_RESPONSE_CREDITS 1
+
 static void gnome_about_finalize (GObject *object);
 static void gnome_about_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
 static void gnome_about_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
@@ -79,88 +79,140 @@ GNOME_CLASS_BOILERPLATE (GnomeAbout, gnome_about,
 			 GtkDialog, GTK_TYPE_DIALOG)
 
 static void
-gnome_about_update_text_buffer (GnomeAbout *about)
+gnome_about_update_authors_label (GnomeAbout *about, GtkWidget *label)
 {
-	GtkTextIter iter, start_iter, end_iter;
-	char *text;
-	GSList *tmp;
-
-	gtk_text_buffer_get_bounds (about->_priv->text_buffer, &start_iter, &end_iter);
-	gtk_text_buffer_delete (about->_priv->text_buffer, &start_iter, &end_iter);
+	GString *string;
+	GSList *list;
 	
-	gtk_text_buffer_get_iter_at_offset (about->_priv->text_buffer, &iter, 0);
+	if (about->_priv->authors == NULL) {
+		gtk_widget_hide (label);
+		return;
+	}
+	else {
+		gtk_widget_show (label);
+	}
 
-	/* Authors */
-	text = g_slist_length (about->_priv->authors) == 1 ? _("Author") : _("Authors");
+	string = g_string_new ("<b>");
+	g_string_append (string, _("Written by"));
+	g_string_append (string, "</b>\n");
 
-	gtk_text_buffer_insert_with_tags_by_name (about->_priv->text_buffer, &iter,
-						  text, -1,
-						  "heading", NULL);
+	for (list = about->_priv->authors; list; list = list->next) {
+		g_string_append (string, list->data);
+		g_string_append (string, "\n");
+	}
 	
-	gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-				"\n", -1);
-
-	for (tmp = about->_priv->authors; tmp; tmp = tmp->next) {
-		text = tmp->data;
-
-		gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-					text, -1);
-
-		gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-				"\n", -1);
-	}
-
-	gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-				"\n", -1);
-
-	/* Documenters */
-	if (about->_priv->documenters != NULL) {
-		text = g_slist_length (about->_priv->documenters) == 1 ? _("Documenter") : _("Documenters");
-
-		gtk_text_buffer_insert_with_tags_by_name (about->_priv->text_buffer, &iter,
-							  text, -1,
-							  "heading", NULL);
-		
-		gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-					"\n", -1);
-		
-		for (tmp = about->_priv->documenters; tmp; tmp = tmp->next) {
-			text = tmp->data;
-			
-			gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-						text, -1);
-			
-			gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-						"\n", -1);
-		}
-		
-		gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-					"\n", -1);
-
-
-	}
-
-	/* Translator credits */
-	if (about->_priv->translator_credits != NULL) {
-		gtk_text_buffer_insert_with_tags_by_name (about->_priv->text_buffer, &iter,
-							  _("Translator credits"), -1,
-							  "heading", NULL);
-		
-		gtk_text_buffer_insert (about->_priv->text_buffer, &iter,
-					"\n", -1);
-		gtk_text_buffer_insert_with_tags_by_name (about->_priv->text_buffer, &iter,
-							  about->_priv->translator_credits, -1,
-							  "wrapped", NULL);
-	}
+	gtk_label_set_markup (GTK_LABEL (label), string->str);
+	g_string_free (string, TRUE);
 }
 
+static void
+gnome_about_update_documenters_label (GnomeAbout *about, GtkWidget *label)
+{
+	GString *string;
+	GSList *list;
+	
+	if (about->_priv->documenters == NULL) {
+		gtk_widget_hide (label);
+		return;
+	}
+	else {
+		gtk_widget_show (label);
+	}
+
+	string = g_string_new ("<b>");
+	g_string_append (string, _("Documented by"));
+	g_string_append (string, "</b>\n");
+
+	for (list = about->_priv->documenters; list; list = list->next) {
+		g_string_append (string, list->data);
+		g_string_append (string, "\n");
+	}
+	
+	gtk_label_set_markup (GTK_LABEL (label), string->str);
+	g_string_free (string, TRUE);
+}
+
+static void
+gnome_about_update_translation_information_label (GnomeAbout *about, GtkWidget *label)
+{
+	GString *string;
+	
+	if (about->_priv->translator_credits == NULL) {
+		gtk_widget_hide (label);
+		return;
+	}
+	else {
+		gtk_widget_show (label);
+	}
+
+	string = g_string_new ("<b>");
+	g_string_append (string, _("Translated by"));
+	g_string_append (string, "</b>\n");
+	g_string_append (string, about->_priv->translator_credits);
+	gtk_label_set_markup (GTK_LABEL (label), string->str);
+	g_string_free (string, TRUE);
+		
+	
+}
+
+static GtkWidget *
+create_label (void)
+{
+	GtkWidget *label;
+	
+	label = gtk_label_new ("");
+	gtk_label_set_selectable (GTK_LABEL (label), TRUE);
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+
+	return label;
+}
+
+static void
+gnome_about_display_credits_dialog (GnomeAbout *about)
+{
+	GtkWidget *dialog, *label, *hbox;
+	
+	dialog = gtk_dialog_new ();
+	gtk_window_set_title (GTK_WINDOW (dialog), _("Credits"));
+	
+	gtk_dialog_add_button (GTK_DIALOG (dialog),
+			       GTK_STOCK_OK, GTK_RESPONSE_OK);
+	g_signal_connect (dialog, "response",
+			  G_CALLBACK (gtk_widget_destroy), dialog);
+
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), 8);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, TRUE, TRUE, 0);
+
+	label = create_label ();
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 4);
+	gnome_about_update_authors_label (about, label);
+	g_signal_connect (about, "notify::authors",
+			  G_CALLBACK (gnome_about_update_authors_label), label);
+
+	label = create_label ();
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 4);
+	gnome_about_update_documenters_label (about, label);
+	g_signal_connect (about, "notify::documenters",
+			  G_CALLBACK (gnome_about_update_documenters_label), label);
+		
+	label = create_label ();
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 4);
+	gnome_about_update_translation_information_label (about, label);
+	g_signal_connect (about, "notify::translator_credits",
+			  G_CALLBACK (gnome_about_update_translation_information_label), label);
+	
+	gtk_widget_show_all (dialog);
+	
+	gtk_dialog_run (GTK_DIALOG (dialog));
+}
 
 static void
 gnome_about_instance_init (GnomeAbout *about)
 {
 	GnomeAboutPrivate *priv;
-	GtkWidget *vbox, *hbox, *separator;
-	GtkWidget *scrolled_window, *text_view;
+	GtkWidget *vbox, *button;
 
 	/* Data */
 	
@@ -176,62 +228,53 @@ gnome_about_instance_init (GnomeAbout *about)
 	priv->documenters = NULL;
 
 	/* Widgets */
-
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about)->vbox), hbox, TRUE, TRUE, 0);
-
-	vbox = gtk_vbox_new (FALSE, 0);
+	vbox = gtk_vbox_new (FALSE, 8);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 8);
-	gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
 
-	separator = gtk_vseparator_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), separator, FALSE, FALSE, 0);
-
-	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-	gtk_box_pack_start (GTK_BOX (hbox), scrolled_window, TRUE, TRUE, 8);
-
-	priv->text_buffer = gtk_text_buffer_new (NULL);
-
-	gtk_text_buffer_create_tag (priv->text_buffer, "heading",
-				    "weight", PANGO_WEIGHT_BOLD,
-				    NULL);
-
-	gtk_text_buffer_create_tag (priv->text_buffer, "wrapped",
-				    "wrap_mode", GTK_WRAP_WORD,
-				    NULL);
-
-	text_view = gtk_text_view_new_with_buffer (priv->text_buffer);
-			      
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view), FALSE);
-	gtk_container_add (GTK_CONTAINER (scrolled_window), text_view);
-
-	gtk_widget_modify_base (text_view, GTK_STATE_NORMAL,
-				&GTK_WIDGET (about)->style->bg[GTK_STATE_NORMAL]);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about)->vbox), vbox, TRUE, TRUE, 0);
 
 	priv->logo_image = gtk_image_new ();
 	gtk_box_pack_start (GTK_BOX (vbox), priv->logo_image, FALSE, FALSE, 0);
 	priv->name_label = gtk_label_new (NULL);
+	gtk_label_set_selectable (GTK_LABEL (priv->name_label), TRUE);
+	gtk_label_set_justify (GTK_LABEL (priv->name_label), GTK_JUSTIFY_CENTER);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->name_label, FALSE, FALSE, 0);
 
 	priv->comments_label = gtk_label_new (NULL);
+	gtk_label_set_selectable (GTK_LABEL (priv->comments_label), TRUE);
+	gtk_label_set_justify (GTK_LABEL (priv->comments_label), GTK_JUSTIFY_CENTER);
 	gtk_label_set_line_wrap (GTK_LABEL (priv->comments_label), TRUE);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->comments_label, FALSE, FALSE, 0);
 
 	priv->copyright_label = gtk_label_new (NULL);
+	gtk_label_set_selectable (GTK_LABEL (priv->copyright_label), TRUE);	
+	gtk_label_set_justify (GTK_LABEL (priv->copyright_label), GTK_JUSTIFY_CENTER);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->copyright_label, FALSE, FALSE, 0);
 
-	gtk_widget_show_all (hbox);
-
+	gtk_widget_show_all (vbox);
+	
 	/* Add the OK button */
 	gtk_dialog_add_button (GTK_DIALOG (about), GTK_STOCK_OK, GTK_RESPONSE_OK);
 	gtk_dialog_set_default_response (GTK_DIALOG (about), GTK_RESPONSE_OK);
-	g_signal_connect (about, "response",
-			  G_CALLBACK (gtk_widget_destroy),
-			  NULL);
 
+	/* Add the credits button */
+	button = gtk_dialog_add_button (GTK_DIALOG (about), "_Credits", GNOME_RESPONSE_CREDITS);
+	gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (GTK_DIALOG (about)->action_area), button, TRUE);
 	
 	gtk_window_set_resizable (GTK_WINDOW (about), FALSE);
+}
+
+static void
+gnome_about_response (GtkDialog *dialog, gint response)
+{
+	switch (response) {
+	case GNOME_RESPONSE_CREDITS:
+		gnome_about_display_credits_dialog (GNOME_ABOUT (dialog));
+		break;
+	default:
+		gtk_widget_destroy (GTK_WIDGET (dialog));
+		break;
+	}
 }
 
 static void
@@ -239,14 +282,18 @@ gnome_about_class_init (GnomeAboutClass *klass)
 {
 	GObjectClass *object_class;
 	GtkWidgetClass *widget_class;
+	GtkDialogClass *dialog_class;
 	
 	object_class = (GObjectClass *)klass;
 	widget_class = (GtkWidgetClass *)klass;
+	dialog_class = (GtkDialogClass *)klass;
 	
 	object_class->set_property = gnome_about_set_property;
 	object_class->get_property = gnome_about_get_property;
 
 	object_class->finalize = gnome_about_finalize;
+
+	dialog_class->response = gnome_about_response;
 	
 	g_object_class_install_property (object_class,
 					 PROP_NAME,
@@ -334,17 +381,25 @@ gnome_about_set_translator_credits (GnomeAbout *about, const gchar *translator_c
 	g_free (about->_priv->translator_credits);
 
 	about->_priv->translator_credits = g_strdup (translator_credits);
-
-	gnome_about_update_text_buffer (about);
 }
 
 static void
 gnome_about_set_copyright (GnomeAbout *about, const gchar *copyright)
 {
+	char *copyright_string;
 	g_free (about->_priv->copyright);
 	about->_priv->copyright = copyright ? g_strdup (copyright) : NULL;
 
-	gtk_label_set_text (GTK_LABEL (about->_priv->copyright_label), about->_priv->copyright);
+	if (about->_priv->copyright != NULL) {
+		copyright_string = g_strdup_printf ("<span size=\"small\">%s</span>", about->_priv->copyright);
+	}
+	else {
+		copyright_string = NULL;
+	}
+
+	gtk_label_set_markup (GTK_LABEL (about->_priv->copyright_label), copyright_string);
+
+	g_free (copyright_string);
 }
 
 static void
@@ -467,8 +522,29 @@ gnome_about_set_persons (GnomeAbout *about, guint prop_id, const GValue *persons
 	default:
 		g_assert_not_reached ();
 	}
+}
 
-	gnome_about_update_text_buffer (about);
+static void
+set_value_array_from_list (GValue *value, GSList *list)
+{
+	GValueArray *array;
+	GValue tmp_value = { 0 };
+	GSList *tmp;
+	gint length;
+
+	length = g_slist_length (list);
+	array = g_value_array_new (length);
+
+	for (tmp = list; tmp; tmp = tmp->next) {
+		char *str = tmp->data;
+		
+		g_value_init (&tmp_value, G_TYPE_STRING);
+		g_value_set_string (&tmp_value, str);
+		g_value_array_append (array, &value);
+	}
+
+	g_value_set_boxed (value, array);
+	g_value_array_free (array);
 }
 
 static void
@@ -488,7 +564,14 @@ gnome_about_set_property (GObject *object, guint prop_id, const GValue *value, G
 		gnome_about_set_copyright (GNOME_ABOUT (object), g_value_get_string (value));
 		break;
 	case PROP_LOGO:
-		gtk_image_set_from_pixbuf (GTK_IMAGE (GNOME_ABOUT (object)->_priv->logo_image), g_value_get_object (value));
+		if (g_value_get_object (value) != NULL) {
+			gtk_image_set_from_pixbuf (GTK_IMAGE (GNOME_ABOUT (object)->_priv->logo_image),
+						   g_value_get_object (value));
+		}
+		else {
+			gtk_image_set_from_file (GTK_IMAGE (GNOME_ABOUT (object)->_priv->logo_image),
+						 GNOMEUIDATADIR"/pixmaps/gnome-about-logo.png");
+		}
 		break;
 	case PROP_AUTHORS:
 	case PROP_DOCUMENTERS:
@@ -506,7 +589,35 @@ gnome_about_set_property (GObject *object, guint prop_id, const GValue *value, G
 static void
 gnome_about_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
+	GnomeAbout *about;
+
+	about = GNOME_ABOUT (object);
+	
 	switch (prop_id) {
+	case PROP_NAME:
+		g_value_set_string (value, about->_priv->name);
+		break;
+	case PROP_VERSION:
+		g_value_set_string (value, about->_priv->version);
+		break;
+	case PROP_COPYRIGHT:
+		g_value_set_string (value, about->_priv->copyright);
+		break;
+	case PROP_COMMENTS:
+		g_value_set_string (value, about->_priv->comments);
+		break;
+	case PROP_TRANSLATOR_CREDITS:
+		g_value_set_string (value, about->_priv->translator_credits);
+		break;
+	case PROP_AUTHORS:
+		set_value_array_from_list (value, about->_priv->authors);
+		break;
+	case PROP_DOCUMENTERS:
+		set_value_array_from_list (value, about->_priv->documenters);
+		break;
+	case PROP_LOGO:
+		g_value_set_object (value, gtk_image_get_pixbuf (GTK_IMAGE (about->_priv->logo_image)));
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;

@@ -84,10 +84,6 @@ static gint date_edit_signals [LAST_SIGNAL] = { 0 };
 
 static void gnome_date_edit_destroy      (GtkObject          *object);
 static void gnome_date_edit_finalize     (GObject            *object);
-static void gnome_date_edit_forall       (GtkContainer       *container,
-					  gboolean	      include_internals,
-					  GtkCallback	      callback,
-					  gpointer	      callbabck_data);
 static void gnome_date_edit_set_property    (GObject            *object,
 					  guint               param_id,
 					  const GValue       *value,
@@ -286,7 +282,8 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
         position_popup (gde);
        
 	gtk_widget_show (gde->_priv->cal_popup);
-	gtk_widget_grab_focus (gde->_priv->cal_popup);
+	gtk_widget_grab_focus (gde->_priv->calendar);
+#if 0
 	gtk_grab_add (gde->_priv->cal_popup);
 
 	gdk_pointer_grab (gde->_priv->cal_popup->window, TRUE,
@@ -294,6 +291,7 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 			   | GDK_BUTTON_RELEASE_MASK
 			   | GDK_POINTER_MOTION_MASK),
 			  NULL, NULL, GDK_CURRENT_TIME);
+#endif
 }
 
 typedef struct {
@@ -421,8 +419,6 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 
 	object_class = (GtkObjectClass*) class;
 
-	container_class->forall = gnome_date_edit_forall;
-
 	object_class->destroy = gnome_date_edit_destroy;
 
 	gobject_class->finalize = gnome_date_edit_finalize;
@@ -547,25 +543,6 @@ gnome_date_edit_finalize (GObject *object)
 	gde->_priv = NULL;
 
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
-}
-
-static void
-gnome_date_edit_forall (GtkContainer *container, gboolean include_internals,
-			GtkCallback callback, gpointer callback_data)
-{
-	g_return_if_fail (container != NULL);
-	g_return_if_fail (GNOME_IS_DATE_EDIT (container));
-	g_return_if_fail (callback != NULL);
-
-	/* Let GtkBox handle things only if the internal widgets need to be
-	 * poked.
-	 */
-	if (include_internals)
-		GNOME_CALL_PARENT (GTK_CONTAINER_CLASS, forall,
-					   (container,
-					    include_internals,
-					    callback,
-					    callback_data));
 }
 
 static void

@@ -46,6 +46,7 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkscrolledwindow.h>
+#include <gtk/gtktreeview.h>
 
 #include "gnome-i18nP.h"
 
@@ -259,7 +260,7 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 }
 
 static void
-setup_preview(GtkWidget *widget)
+setup_preview(GtkTreeSelection *selection, GtkWidget *widget)
 {
 	const char *p;
 	GList *l;
@@ -269,7 +270,6 @@ setup_preview(GtkWidget *widget)
 	GtkWidget *frame;
 	GtkFileSelection *fs;
 
-	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
 	frame = g_object_get_data (G_OBJECT (widget), "frame");
@@ -354,7 +354,7 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 {
 	GtkWidget *w;
 	GtkWidget *hbox;
-
+	
 	GtkFileSelection *fs;
 
 	g_return_if_fail (fentry != NULL);
@@ -388,11 +388,11 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 	g_object_set_data (G_OBJECT (w), "fs", fs);
 
 	g_object_set_data (G_OBJECT (fs->file_list), "frame", w);
-	g_signal_connect (G_OBJECT (fs->file_list), "select_row",
-			  G_CALLBACK (setup_preview), NULL);
+	g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (fs->file_list))), "changed",
+			  G_CALLBACK (setup_preview), fs->file_list);
 	g_object_set_data (G_OBJECT (fs->selection_entry), "frame", w);
 	g_signal_connect (G_OBJECT (fs->selection_entry), "changed",
-			  GTK_SIGNAL_FUNC (setup_preview), NULL);
+			  GTK_SIGNAL_FUNC (setup_preview), fs->selection_entry);
 }
 
 static void
