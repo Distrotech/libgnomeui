@@ -138,16 +138,24 @@ gnome_about_repaint (GtkWidget *widget,
 		gc = gdk_gc_new (win);
 
 	gdk_window_clear (win);
-
+	
 	/* Draw pixmap first */
 	y = 1;
 	if (gai->logo)
 	{
 		y += 2;
 		x = (gai->w - gai->logo_w) / 2;
+		if (gai->mask) {
+			gdk_gc_set_clip_mask (gc, gai->mask);
+			gdk_gc_set_clip_origin (gc, x, y);
+		}
 		gdk_draw_pixmap (win, gc, gai->logo, 
 				 0, 0, x, y,
 				 gai->logo_w, gai->logo_h);
+		if (gai->mask) {
+			gdk_gc_set_clip_mask (gc, NULL);
+			gdk_gc_set_clip_origin (gc, 0, 0);
+		}
 		y += 2 + gai->logo_h;
 	}
       
@@ -167,7 +175,7 @@ gnome_about_repaint (GtkWidget *widget,
 				 gai->title);
 		y += 7 + gai->font_title->descent + 2;
 	}
-      
+
 	if (gai->copyright || gai->names || gai->comments)
 	{
 		gdk_gc_set_foreground (gc, light_green);
@@ -176,7 +184,7 @@ gnome_about_repaint (GtkWidget *widget,
 				    2, y, 
 				    gai->w-5, gai->h - y - 3);
 	}
-      
+
 	gdk_gc_set_foreground (gc, black);
 
 	if (gai->copyright)

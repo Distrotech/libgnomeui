@@ -1,3 +1,7 @@
+Sun Aug 09 14:37:58 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-about.c: draw the pixmap with the correct clip mask
+
 1998-08-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_reconfigure): 
