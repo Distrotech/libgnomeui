@@ -1,3 +1,9 @@
+2001-07-22  Martin Baulig  <baulig@suse.de>
+
+	* pixmaps/stock_scores.png: Removed, same as stock_menu_scores.png.
+
+	* gnome-stock-icons.[ch]: Cleaned this up.
+
 2001-07-21  Martin Baulig  <baulig@suse.de>
 
 	* pixmaps/: Removed all icons which are already in GTK+:

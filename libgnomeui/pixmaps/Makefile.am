@@ -24,7 +24,6 @@ stock_images = \
 	stock_mic.png \
 	stock_multiple_file.png \
 	stock_not.png \
-	stock_scores.png \
 	stock_table_borders.png \
 	stock_table_fill.png \
 	stock_text_bulleted_list.png \
