@@ -68,11 +68,16 @@ refresh_preview(GnomePixmapEntry *pentry)
 	char *t;
 	GdkImlibImage *im;
 
+	if(!pentry->preview)
+		return;
+
 	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
 					   FALSE);
 	
-	if(!pentry->preview)
+	if(pentry->last_preview && t && strcmp(t,pentry->last_preview)==0) {
+		g_free(t);
 		return;
+	}
 	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(im = gdk_imlib_load_image (t))) {
 		if(GNOME_IS_PIXMAP(pentry->preview)) {
@@ -81,7 +86,10 @@ refresh_preview(GnomePixmapEntry *pentry)
 			gtk_widget_show(pentry->preview);
 			gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
 							      pentry->preview);
+			g_free(pentry->last_preview);
+			pentry->last_preview = NULL;
 		}
+		g_free(t);
 		return;
 	}
 	if(GNOME_IS_PIXMAP(pentry->preview))
@@ -93,7 +101,8 @@ refresh_preview(GnomePixmapEntry *pentry)
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
 						      pentry->preview);
 	}
-	g_free(t);
+	g_free(pentry->last_preview);
+	pentry->last_preview = t;
 	gdk_imlib_destroy_image(im);
 }
 
@@ -106,13 +115,14 @@ changed_timeout_func(gpointer data)
 	GSList *li,*tmp;
 	tmp = changed_pentries;
 	changed_pentries = NULL;
-	change_timeout = -1;
 	if(tmp) {
 		for(li=tmp;li!=NULL;li=g_slist_next(li)) {
 			refresh_preview(li->data);
 		}
 		g_slist_free(tmp);
+		return TRUE;
 	}
+	change_timeout = -1;
 	return FALSE;
 }
 
@@ -179,6 +189,7 @@ static int
 pentry_destroy(GnomePixmapEntry *pentry)
 {
 	pentry->preview = NULL;
+	g_free(pentry->last_preview);
 	return FALSE;
 }
 
@@ -258,6 +269,8 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 			   GTK_SIGNAL_FUNC(pentry_destroy), NULL);
 	
 	pentry->do_preview = TRUE;
+	
+	pentry->last_preview = NULL;
 	
 	pentry->preview_sw = gtk_scrolled_window_new(NULL,NULL);
 	gtk_drag_dest_set (GTK_WIDGET (pentry->preview_sw),

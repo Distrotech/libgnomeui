@@ -1,3 +1,15 @@
+Tue Feb 23 00:31:53 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap.c: fix for the new requisition stuff so that
+	  set_usize works properly, use gdk_imlib_move_{image,mask} instead
+	  of the copy variety to save some time, and add some documentation
+	  to the functions that were missing it.
+
+	* gnome-pixmap-entry.[ch]: actually guarantee that disk isn't touched
+	  more then once a second when typing, fix a memory leak and cache
+	  the last image that was previewed, so that we don't load the same
+	  image over and over
+
 Sun Feb 21 19:06:51 1999  Maciej Stachowiak  <mstachow@alum.mit.edu>
 
 	* gnome-winhints.c (gnome_win_hints_get_workspace): This code was

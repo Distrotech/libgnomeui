@@ -36,6 +36,9 @@ struct _GnomePixmapEntry {
 			  the entry*/
 	GtkWidget *preview;
 	GtkWidget *preview_sw;
+	
+	/*very private*/
+	char *last_preview;
 };
 
 struct _GnomePixmapEntryClass {
