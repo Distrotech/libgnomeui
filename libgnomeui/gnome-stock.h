@@ -124,6 +124,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_MAIL_NEW    "New Mail"
 #define GNOME_STOCK_PIXMAP_TRASH       "Trash"
 #define GNOME_STOCK_PIXMAP_TRASH_FULL  "Trash Full"
+#define GNOME_STOCK_PIXMAP_UNDELETE    "Undelete"
 #define GNOME_STOCK_PIXMAP_SPELLCHECK  "Spellchecker"
 #define GNOME_STOCK_PIXMAP_MIC         "Microphone"
 #define GNOME_STOCK_PIXMAP_LINE_IN     "Line In"
@@ -339,6 +340,8 @@ void		      gnome_button_can_default    (GtkButton *button,
 #define GNOME_STOCK_BUTTON_CLOSE  "Button_Close"
 #define GNOME_STOCK_BUTTON_APPLY  "Button_Apply"
 #define GNOME_STOCK_BUTTON_HELP   "Button_Help"
+#define GNOME_STOCK_BUTTON_NEXT   "Button_Next"
+#define GNOME_STOCK_BUTTON_PREV   "Button_Prev"
 
 /* returns a default button widget for dialogs */
 GtkWidget             *gnome_stock_button          (const char *type);
@@ -387,6 +390,7 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_MAIL_NEW     "Menu_New Mail"
 #define GNOME_STOCK_MENU_TRASH        "Menu_Trash"
 #define GNOME_STOCK_MENU_TRASH_FULL   "Menu_Trash Full"
+#define GNOME_STOCK_MENU_UNDELETE     "Menu_Undelete"
 #define GNOME_STOCK_MENU_SPELLCHECK   "Menu_Spellchecker"
 #define GNOME_STOCK_MENU_MIC          "Menu_Microphone"
 #define GNOME_STOCK_MENU_LINE_IN      "Menu_Line In"

@@ -1,3 +1,8 @@
+Wed Aug  5 23:08:53 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock*: added tigert's undelete icon, changed yes/no buttons,
+	added prev/next button with images from back forward.
+
 Wed Aug  5 12:47:01 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-stock.c (gnome_stock_pixmap_widget_realize): A widget
@@ -56,7 +61,6 @@ Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
 	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Take the
 	absolute value of the width/height arguments.
 
->>>>>>> 1.365
 1998-08-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_draw): Use the zoom offsets when

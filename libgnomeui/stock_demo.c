@@ -578,6 +578,17 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
 	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_UNDELETE));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_UNDELETE));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Undelete");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_TRASH_FULL));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
@@ -929,6 +940,14 @@ main(int argc, char **argv)
 				  NULL);
 
 	w = gnome_stock_button(GNOME_STOCK_BUTTON_HELP);
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_NEXT);
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_PREV);
 	gtk_widget_show(w);
 	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
 
