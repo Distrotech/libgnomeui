@@ -1,3 +1,8 @@
+1998-10-28  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch] (gnome_mdi_register, gnome_mdi_unregister):
+	changed parameter from GtkWidget*  to GtkObject*.
+
 1998-10-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (get_bounds): New internal function to compute

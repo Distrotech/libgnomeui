@@ -184,8 +184,8 @@ GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
  * the last MDI window when no other windows are registered with the MDI will result in MDI
  * being gtk_object_destroy()ed.
  */
-void          gnome_mdi_register            (GnomeMDI *, GtkWidget *);
-void          gnome_mdi_unregister          (GnomeMDI *, GtkWidget *);
+void          gnome_mdi_register            (GnomeMDI *, GtkObject *);
+void          gnome_mdi_unregister          (GnomeMDI *, GtkObject *);
 
 /*
  * convenience functions for retrieveing GnomeMDIChild and GnomeApp

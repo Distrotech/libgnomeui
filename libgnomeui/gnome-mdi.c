@@ -1497,13 +1497,13 @@ void gnome_mdi_set_child_list_path(GnomeMDI *mdi, gchar *path) {
 	mdi->child_list_path = g_strdup(path);
 }
 
-void gnome_mdi_register(GnomeMDI *mdi, GtkWidget *w) {
-	if(!g_slist_find(mdi->registered, w))
-		mdi->registered = g_slist_append(mdi->registered, w);
+void gnome_mdi_register(GnomeMDI *mdi, GtkObject *o) {
+	if(!g_slist_find(mdi->registered, o))
+		mdi->registered = g_slist_append(mdi->registered, o);
 }
 
-void gnome_mdi_unregister(GnomeMDI *mdi, GtkWidget *w) {
-	mdi->registered = g_slist_remove(mdi->registered, w);
+void gnome_mdi_unregister(GnomeMDI *mdi, GtkObject *o) {
+	mdi->registered = g_slist_remove(mdi->registered, o);
 }
 
 GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *view) {
