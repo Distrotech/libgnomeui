@@ -1,4 +1,4 @@
-AC_INIT(libgnomeui)
+AC_PREREQ(2.54)
 
 # Making releases:
 #   LIBGNOMEUI_MICRO_VERSION += 1;
@@ -8,28 +8,55 @@ AC_INIT(libgnomeui)
 # if backwards compatibility has been broken,
 # set LIBGNOMEUI_BINARY_AGE and LIBGNOMEUI_INTERFACE_AGE to 0.
 #
-LIBGNOMEUI_MAJOR_VERSION=2
-LIBGNOMEUI_MINOR_VERSION=6
-LIBGNOMEUI_MICRO_VERSION=1
-LIBGNOMEUI_INTERFACE_AGE=1
+m4_define([libgnomeui_major_version], [2])
+m4_define([libgnomeui_minor_version], [6])
+m4_define([libgnomeui_micro_version], [1])
+m4_define([libgnomeui_interface_age], [1])
 # If you need a modifier for the version number. 
 # Normally empty, but can be used to make "fixup" releases.
-LIBGNOMEUI_EXTRAVERSION=.1
+m4_define([libgnomeui_extraversion], [.1])
+
+dnl Required versions of other packages
+m4_define([esound_required_version],         [0.2.26])
+m4_define([audiofile_required_version],      [0.2.3])
+m4_define([libgnome_required_version],       [2.0.0])
+m4_define([libgnomecanvas_required_version], [2.0.0])
+m4_define([libbonoboui_required_version],    [2.0.0])
+m4_define([gconf_required_version],          [1.1.11])
+m4_define([pango_required_version],          [1.1.2])
+m4_define([gtk_required_version],            [2.4.1])
+m4_define([gnomevfs_required_version],       [2.5.3])
+m4_define([libglade_required_version],       [2.0.0])
 
 dnl libtool versioning from libgnome
 
-LIBGNOMEUI_CURRENT=`expr 100 '*' $LIBGNOMEUI_MINOR_VERSION + $LIBGNOMEUI_MICRO_VERSION - $LIBGNOMEUI_INTERFACE_AGE`
-LIBGNOMEUI_BINARY_AGE=`expr 100 '*' $LIBGNOMEUI_MINOR_VERSION + $LIBGNOMEUI_MICRO_VERSION`
-LIBGNOMEUI_REVISION=$LIBGNOMEUI_INTERFACE_AGE
-LIBGNOMEUI_AGE=`expr $LIBGNOMEUI_BINARY_AGE - $LIBGNOMEUI_INTERFACE_AGE`
-LIBGNOMEUI_VERSION=$LIBGNOMEUI_MAJOR_VERSION.$LIBGNOMEUI_MINOR_VERSION.$LIBGNOMEUI_MICRO_VERSION$LIBGNOMEUI_EXTRAVERSION
+m4_define([libgnomeui_current], [m4_eval(100 * libgnomeui_minor_version + libgnomeui_micro_version - libgnomeui_interface_age)])
+m4_define([libgnomeui_binary_age], [m4_eval(100 * libgnomeui_minor_version + libgnomeui_micro_version)])
+m4_define([libgnomeui_revision], [libgnomeui_interface_age])
+m4_define([libgnomeui_age], [m4_eval(libgnomeui_binary_age - libgnomeui_interface_age)])
+m4_define([libgnomeui_version], [libgnomeui_major_version().libgnomeui_minor_version().libgnomeui_micro_version()libgnomeui_extraversion()])
+
+AC_INIT([libgnomeui], [libgnomeui_version],
+        [http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomeui])
+AC_CONFIG_SRCDIR([libgnomeui/libgnomeui.h])
+
+LIBGNOMEUI_MAJOR_VERSION=libgnomeui_major_version
+LIBGNOMEUI_MINOR_VERSION=libgnomeui_minor_version
+LIBGNOMEUI_MICRO_VERSION=libgnomeui_micro_version
+LIBGNOMEUI_INTERFACE_AGE=libgnomeui_interface_age
+
+dnl libtool versioning from libgnome
+
+LIBGNOMEUI_CURRENT=libgnomeui_current
+LIBGNOMEUI_REVISION=libgnomeui_revision
+LIBGNOMEUI_AGE=libgnomeui_age
 
 AC_SUBST(LIBGNOMEUI_CURRENT)
 AC_SUBST(LIBGNOMEUI_REVISION)
 AC_SUBST(LIBGNOMEUI_AGE)
 
+AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(libgnomeui, $LIBGNOMEUI_VERSION)
 
 AM_MAINTAINER_MODE
 
@@ -88,15 +115,14 @@ dnl
 dnl We first check for esound and audiofile (which has conditional
 dnl support built in)
 dnl
-AUDIOFILE_MODULE="audiofile >= 0.2.3"
-ESOUND_MODULE="esound >= 0.2.26"
-PKG_CHECK_MODULES(SOUND_TEST, $ESOUND_MODULE $AUDIOFILE_MODULE, [
+SOUND_MODULES="esound >= esound_required_version dnl
+  audiofile >= audiofile_required_version"
+PKG_CHECK_MODULES(SOUND_TEST, [$SOUND_MODULES], [
 	AC_DEFINE(HAVE_LIBAUDIOFILE)
 	AC_DEFINE(HAVE_ESD)
 	esd_msg=yes
 ],[
-	AUDIOFILE_MODULE=""
-	ESOUND_MODULE=""
+	SOUND_MODULES=""
 	esd_msg=no
 ])
 
@@ -119,34 +145,30 @@ dnl
 
 AC_SUBST(LIBJPEG)
 
-GNOMEUI_MODULES="libgnome-2.0 >= 2.0.0 libgnomecanvas-2.0 >= 2.0.0 libbonoboui-2.0 >= 2.0.0 gconf-2.0 >= 1.1.11 pango >= 1.1.2 gnome-vfs-2.0 >= 2.5.3 gnome-keyring-1"
-PKG_CHECK_MODULES(LIBGNOMEUI, $GNOMEUI_MODULES)
+GNOMEUI_MODULES="dnl
+  libgnome-2.0 >= libgnome_required_version dnl
+  libgnomecanvas-2.0 >= libgnomecanvas_required_version dnl
+  libbonoboui-2.0 >= libbonoboui_required_version dnl
+  gconf-2.0 >= gconf_required_version dnl
+  pango >= pango_required_version dnl
+  gnome-vfs-2.0 >= gnomevfs_required_version dnl
+  gnome-keyring-1"
+PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"
-AC_SUBST(LIBGNOMEUI_CFLAGS)
-AC_SUBST(LIBGNOMEUI_LIBS)
 
-PKG_CHECK_MODULES(LIBGNOMEUI_COMPONENTS, $GNOMEUI_MODULES)
-AC_SUBST(LIBGNOMEUI_COMPONENTS_CFLAGS)
-AC_SUBST(LIBGNOMEUI_COMPONENTS_LIBS)
-
-PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, $GNOMEUI_MODULES)
-AC_SUBST(LIBGNOMEUI_DEMOS_CFLAGS)
-AC_SUBST(LIBGNOMEUI_DEMOS_LIBS)
-
-PKG_CHECK_MODULES(LIBGNOMEUI_GLADE, $GNOMEUI_MODULES libglade-2.0 >= 2.0.0)
-AC_SUBST(LIBGNOMEUI_GLADE_CFLAGS)
-AC_SUBST(LIBGNOMEUI_GLADE_LIBS)
+PKG_CHECK_MODULES(LIBGNOMEUI_COMPONENTS, [$GNOMEUI_MODULES])
+PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, [$GNOMEUI_MODULES])
+PKG_CHECK_MODULES(LIBGNOMEUI_GLADE, [$GNOMEUI_MODULES dnl
+  libglade-2.0 >= libglade_required_version])
 AC_PATH_PROG(LIBGLADE_CONVERT, libglade-convert)
 if test -z "$LIBGLADE_CONVERT" ; then
 	AC_MSG_WARN([libglade-convert (from libglade 2.0) is needed for the checks in the tests directory.])
 fi
 
 dnl File Chooser stuff
-PKG_CHECK_MODULES(FILE_SYSTEM, gtk+-2.0 >= 2.4.1 gnome-vfs-2.0 >= 2.5.3)
-GTK_BINARY_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
-AC_SUBST(FILE_SYSTEM_CFLAGS)
-AC_SUBST(FILE_SYSTEM_LIBS)
-AC_SUBST(GTK_BINARY_VERSION)
+PKG_CHECK_MODULES(FILE_SYSTEM,
+ [gtk+-2.0 >= gtk_required_version dnl
+  gnome-vfs-2.0 >= gnomevfs_required_version])
 
 GTK_BINARY_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
 AC_SUBST(GTK_BINARY_VERSION)
@@ -154,53 +176,7 @@ AC_SUBST(GTK_BINARY_VERSION)
 dnl
 dnl Check for gtk-doc
 dnl
-AC_ARG_WITH(html-dir, [  --with-html-dir=PATH path to installed docs ])
-
-if test "x$with_html_dir" = "x" ; then
-  HTML_DIR='${datadir}/gtk-doc/html'
-else
-  HTML_DIR=$with_html_dir
-fi
-
-AC_SUBST(HTML_DIR)
-
-AC_CHECK_PROG(GTKDOC, gtkdoc-mkdb, true, false)
-
-gtk_doc_min_version=0.6
-if $GTKDOC ; then 
-    gtk_doc_version=`gtkdoc-mkdb --version`
-    AC_MSG_CHECKING([gtk-doc version ($gtk_doc_version) >= $gtk_doc_min_version])
-
-    IFS="${IFS= 	}"; gtk_save_IFS="$IFS"; IFS="."
-    set $gtk_doc_version
-    for min in $gtk_doc_min_version ; do
-        cur=$1; shift
-        if test -z $min ; then break; fi
-        if test -z $cur ; then GTKDOC=false; break; fi
-        if test $cur -gt $min ; then break ; fi
-        if test $cur -lt $min ; then GTKDOC=false; break ; fi
-    done
-    IFS="$gtk_save_IFS"
-
-   if $GTKDOC ; then
-      AC_MSG_RESULT(yes)
-   else
-      AC_MSG_RESULT(no)
-   fi
-fi
-
-dnl Let people disable the gtk-doc stuff.
-AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=auto]], enable_gtk_doc="$enableval", enable_gtk_doc=auto)
-
-if test x$enable_gtk_doc = xauto ; then
-  if test x$GTKDOC = xtrue ; then
-    enable_gtk_doc=yes
-  else
-    enable_gtk_doc=no 
-  fi
-fi
-
-AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
+GTK_DOC_CHECK([1.0])
 
 dnl Specify the gconf configuration source, 
 dnl default to xml::$(sysconfdir)/gconf/gconf.xml.defaults
@@ -262,7 +238,7 @@ if test "x$enable_rebuilds" = "xyes" && \
 fi
 AC_SUBST(REBUILD)
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 po/Makefile.in
 libgnomeui/Makefile
@@ -277,6 +253,8 @@ doc/Makefile
 doc/reference/Makefile
 doc/reference/version.xml
 ])
+
+AC_OUTPUT
 echo "configuration:
 	esd support: ${esd_msg}
 	doc build:   ${enable_gtk_doc}

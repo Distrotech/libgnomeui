@@ -16,18 +16,14 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"GnomeUI\"
 
 LDADD = \
-	$(top_builddir)/libgnomeui/libgnomeui-2.la 
-
-noinst_HEADERS = \
-	testgnome.h
+	$(top_builddir)/libgnomeui/libgnomeui-2.la $(LIBGNOMEUI_LIBS)
 
 noinst_PROGRAMS = \
 	test-gnome test-druid test-entry test-iconlist test-password-dialog
 
-
 test_gnome_SOURCES =		\
 	testgnome.c		\
-	$(noinst_HEADERS)
+	testgnome.h
 
 test_druid_SOURCES =	\
 	testdruid.c

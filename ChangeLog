@@ -1,3 +1,19 @@
+2004-05-06  James Henstridge  <james@daa.com.au>
+ 
+	* test-gnome/Makefile.am (test_gnome_SOURCES): move testgnome.h to
+ 	sources list.
+ 
+	* libgnomeui/Makefile.am: fix up readonly srcdir build of
+ 	generated files.  Don't build libgnomeui.defs since it wasn't
+ 	being distributed and it wasn't being used for anything.
+
+	* Makefile.am: require automake-1.7, and ensure that docs get
+ 	built during "make distcheck".
+
+	* configure.in: update configure script.
+
+	* autogen.sh (REQUIRED_AUTOMAKE_VERSION): require Automake 1.7
+
 2004-05-05  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-icon-list.c: (gnome_icon_list_select_all):
