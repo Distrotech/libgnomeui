@@ -1,3 +1,7 @@
+2001-07-08  Peter Williams  <peterw@ximian.com>
+
+	* configure.in (REBUILD): Add a REBUILD rule as in libgnome.
+
 2001-07-13  Darin Adler  <darin@bentspoon.com>
 
 	* configure.in: Remove duplicate macros.

@@ -1,3 +1,15 @@
+2001-07-08  Peter Williams  <peterw@ximian.com>
+
+	* Makefile.am ($(srcdir)/gnome.defs): Add $(srcdir)/
+	to these targets for when srcdir != builddir.
+	(gnometypebuiltins.c,h): Change from gnome-maketypes.awk
+	to the glib-mkenums script.
+	(gnometype_inits.c): But also provide hooks for one function
+	that will init all the types.
+	
+	* gnometypes.c (gnome_type_init): #include gnometype_inits.c
+	to initialize all of the types.
+
 2001-07-08  Martin Baulig  <baulig@suse.de>
 
 	* gnome-canvas-init.c (gtk_module_info): Added gtk_options.
