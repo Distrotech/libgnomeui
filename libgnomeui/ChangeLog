@@ -1,3 +1,9 @@
+1999-08-08  Chris Lahey  <clahey@umich.edu>
+
+	* gnome-canvas-widget.c (gnome_canvas_widget_set_arg): Made it so
+	that if an argument is already set to the value given, it doesn't
+	change it or go through an update step.
+
 1999-08-06  Morten Welinder  <terra@diku.dk>
 
        * gnome-canvas.c (shutdown_transients): Plug leak.

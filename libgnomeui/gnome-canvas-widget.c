@@ -249,33 +249,51 @@ gnome_canvas_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_X:
-		witem->x = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+	        if (witem->x != GTK_VALUE_DOUBLE (*arg))
+		{
+		        witem->x = GTK_VALUE_DOUBLE (*arg);
+			calc_bounds = TRUE;
+		}
 		break;
 
 	case ARG_Y:
-		witem->y = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+	        if (witem->y != GTK_VALUE_DOUBLE (*arg))
+		{
+		        witem->y = GTK_VALUE_DOUBLE (*arg);
+			calc_bounds = TRUE;
+		}
 		break;
 
 	case ARG_WIDTH:
-		witem->width = fabs (GTK_VALUE_DOUBLE (*arg));
-		update = TRUE;
+	        if (witem->width != fabs (GTK_VALUE_DOUBLE (*arg)))
+		{
+		        witem->width = fabs (GTK_VALUE_DOUBLE (*arg));
+			update = TRUE;
+		}
 		break;
 
 	case ARG_HEIGHT:
-		witem->height = fabs (GTK_VALUE_DOUBLE (*arg));
-		update = TRUE;
+	        if (witem->height != fabs (GTK_VALUE_DOUBLE (*arg)))
+		{
+		        witem->height = fabs (GTK_VALUE_DOUBLE (*arg));
+			update = TRUE;
+		}
 		break;
 
 	case ARG_ANCHOR:
-		witem->anchor = GTK_VALUE_ENUM (*arg);
-		update = TRUE;
+	        if (witem->anchor != GTK_VALUE_ENUM (*arg))
+		{
+		        witem->anchor = GTK_VALUE_ENUM (*arg);
+			update = TRUE;
+		}
 		break;
 
 	case ARG_SIZE_PIXELS:
-		witem->size_pixels = GTK_VALUE_BOOL (*arg);
-		update = TRUE;
+	        if (witem->size_pixels != GTK_VALUE_BOOL (*arg))
+		{
+		        witem->size_pixels = GTK_VALUE_BOOL (*arg);
+			update = TRUE;
+		}
 		break;
 
 	default:
