@@ -244,7 +244,6 @@ gnome_popup_help_place_window (GtkWidget *helpwindow, GtkWidget *widget, GtkTool
   gdk_window_get_pointer (NULL, &x, NULL, NULL);
   gdk_window_get_origin (widget->window, NULL, &y);
 
-  g_print ("w=%d, h=%d",w,h);
   x -= ((w >> 1) + 4);
 
   if ((x + w) > scr_w)

@@ -2,6 +2,7 @@
 
 	* gnome-popup-help.c (gnome_widget_add_help_with_uidata): added some more
 	sanity checking.
+	(gnome_popup_help_place_window): removed print statements too
 
 1998-10-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
