@@ -4,7 +4,7 @@
  * Originally by Elliot Lee, with hacking by Chris Toshok for *_data,
  * Marc Ewing added menu support, toggle and radio support,
  * and I don't know what you other people did :)
- * insert/removal functions by Jaka Mocnik
+ * menu insertion/removal functions by Jaka Mocnik
  */
 #include <config.h>
 #include <gdk/gdkkeysyms.h>
@@ -542,11 +542,22 @@ gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 }
 
 /*
- * path should be in the form "File/.../.../Something".
+ * menu insertion/removal functions
+ * <jaka.mocnik@kiss.uni-lj.si>
+ *
+ * the path argument should be in the form "File/.../.../Something".
  * "" will insert the item as the first one in the menubar
  * "File/" will insert it as the first one in the File menu
  * "File/Settings" will insert it after the Setting item in the File menu
- * I hope this explains use of the insert/remove functions.
+ * I hope this explains use of the insert/remove functions well enough.
+ */
+
+/*
+ * p = gnome_app_find_menu_pos(top, path, &pos)
+ * finds menu item described by path (see below for details) starting in the GtkMenuShell top
+ * and returns its parent GtkMenuShell and the position after this item in pos:
+ * gtk_menu_shell_insert(p, w, pos) would then insert widget w in GtkMenuShell p right after
+ * the menu item described by path.
  */
 GtkWidget *
 gnome_app_find_menu_pos (GtkWidget *parent,
@@ -597,6 +608,10 @@ gnome_app_find_menu_pos (GtkWidget *parent,
   return NULL;
 }
 
+/*
+ * gnome_app_remove_menus(app, path, num) removes num items from the existing app's menu structure
+ * begining with item described by path
+ */
 void
 gnome_app_remove_menus(GnomeApp *app,
 		       gchar *path,
@@ -609,12 +624,14 @@ gnome_app_remove_menus(GnomeApp *app,
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
 
+  /* find the first item (which is actually at position pos-1) to remove */
   parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
   if( (parent == NULL) || (pos < 1) ) {
     g_warning("gnome_app_remove_menus: couldn't find first item to remove!");
     return;
   }
 
+  /* remove items */
   children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
   while(children && items > 0) {
     child = GTK_WIDGET(children->data);
@@ -624,6 +641,10 @@ gnome_app_remove_menus(GnomeApp *app,
   }
 }
 
+/*
+ * gnome_app_insert_menus_custom(app, path, info, uibdata) inserts menus described by info
+ * in existing app's menu structure right after the item described by path.
+ */
 void
 gnome_app_insert_menus_custom (GnomeApp *app,
 			       gchar *path,
@@ -638,12 +659,14 @@ gnome_app_insert_menus_custom (GnomeApp *app,
   g_return_if_fail(GNOME_IS_APP(app));
   g_return_if_fail(app->menubar != NULL);
 
+  /* find the parent menushell and position for insertion of menus */
   parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
   if(parent == NULL) {
     g_warning("gnome_app_insert_menus_custom: couldn't find insertion point for menus!");
     return;
   }
 
+  /* create menus and insert them */
   gnome_app_do_menu_creation(app, parent, pos, menuinfo, uibdata);
 
   /* for the moment we don't set the accelerators */
