@@ -162,7 +162,7 @@ gnome_file_entry_mnemonic_activate (GtkWidget *widget,
 {
 	gboolean handled;
 	GnomeFileEntry *entry;
-	
+
 	entry = GNOME_FILE_ENTRY (widget);
 
 	group_cycling = group_cycling != FALSE;
@@ -181,13 +181,13 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
-	
+
 	parent_class = g_type_class_peek_parent (class);
 
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
-	
+
 	object_class->destroy = gnome_file_entry_destroy;
 
 	gobject_class->finalize = gnome_file_entry_finalize;
@@ -195,7 +195,7 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	gobject_class->get_property = fentry_get_property;
 
 	widget_class->mnemonic_activate = gnome_file_entry_mnemonic_activate;
-	
+
 	gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL] =
 		g_signal_new("browse_clicked",
 			     G_TYPE_FROM_CLASS (gobject_class),
@@ -459,6 +459,7 @@ build_filename (GnomeFileEntry *fentry)
 {
 	const char *text;
 	char *file;
+	int len;
 
 	g_return_val_if_fail (fentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry), NULL);
@@ -473,12 +474,21 @@ build_filename (GnomeFileEntry *fentry)
 	if (file == NULL)
 		return NULL;
 
-	/* Now append an '/' if it doesn't exist and we're in directory only mode */
-	if (fentry->_priv->directory_entry && strlen(file) > 0 &&
-	    file[strlen (file)] != G_DIR_SEPARATOR ) {
+	/* Now append a '/' if it doesn't exist and we're in directory only
+	 * mode.  We also have to do this if the file exists and it *is* a
+	 * directory.  Otherwise if filename is "/foo/bar/baz", the file
+	 * selector will in "/foo/bar" and put "baz" as in the filename entry
+	 * box, while "/foo/bar/baz/" is really a directory.
+	 */
+
+	len = strlen (file);
+
+	if (len != 0
+	    && file[len - 1] != G_DIR_SEPARATOR
+	    && (fentry->_priv->directory_entry || g_file_test (file, G_FILE_TEST_IS_DIR))) {
 		gchar *tmp;
 
-		tmp = g_strconcat (file, "/", NULL);
+		tmp = g_strconcat (file, G_DIR_SEPARATOR_S, NULL);
 
 		g_free (file);
 		return tmp;

@@ -1,3 +1,12 @@
+2002-05-22  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-file-entry.c (build_filename): Append a "/" to
+	the filename if we are in directory mode or if the file actually
+	exists and is a directory.  This will make the GtkFileSelection
+	look in the directory "/foo/bar/baz/" rather than thinking that we
+	want to look in "/foo/bar" and put "baz" in the filename entry
+	box.  Fixes bug #74319.
+
 2002-05-16  Jody Goldberg <jody@gnome.org>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=81442
