@@ -1,3 +1,7 @@
+2004-03-03  Tomasz Kłoczko <kloczek@pld.org.pl>
+
+	* cy.po: fixed format string specyfication bug.
+
 2004-03-02  Dafydd Harries  <daf@muse.19inch.net>
 
 	* cy.po: Updated Welsh translation.

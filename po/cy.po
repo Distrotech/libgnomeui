@@ -1381,7 +1381,7 @@ msgstr "Mae'r rhaglen \"%s\" wedi terfynu'n annisgwyl."
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr "proses %s: %s"
+msgstr "proses %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
