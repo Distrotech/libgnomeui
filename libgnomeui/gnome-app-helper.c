@@ -616,8 +616,8 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio, Gtk
 			uiinfo->widget = NULL; /* no meaningful widget for a space */
 		} else {
 			GtkWidget *separator = gtk_vseparator_new ();
+			gtk_widget_set_usize (separator, 0, GNOME_PAD * 2);
 			gtk_widget_show (separator);
-			gtk_widget_set_usize (separator, 0, GNOME_PAD * 3);
 			gtk_toolbar_append_space (toolbar);
 			gtk_toolbar_append_widget (toolbar, separator, NULL, NULL);
 			gtk_toolbar_append_space (toolbar);

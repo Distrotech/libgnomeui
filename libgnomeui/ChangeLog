@@ -1,5 +1,14 @@
 1998-11-21  Andrew T. Veliath  <andrewtv@usa.net>
 
+	* gnome-app.c (gnome_app_configure_toolbar_hseparators): New
+	function; reconfigures vseparators to horizontal.
+	(gnome_app_configure_toolbar_vseparators): New function;
+	reconfigures hseparators to vseparators.
+	(gnome_app_configure_positions): Reconfigure toolbar separators to
+	given orientation. Changed separator length to GNOME_PAD * 2 (also
+	in gnome-app-helper.c: create_toolbar_item).  Ideally, this should
+	be calculated as a fraction of toolbar button_maxw/button_maxh.
+
 	* gnome-app-helper.c (gnome_app_create_menus_custom): Move menu
 	relief setting code to gnome_app.c (gnome_app_set_menus).
 	(gnome_app_create_toolbar_custom): Move space size setting to

@@ -147,6 +147,90 @@ gnome_app_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/* Replace vseparators with hseparators in toolbar */
+static void
+gnome_app_configure_toolbar_hseparators (GnomeApp *app)
+{
+	GList *list;
+	GtkToolbar *toolbar;
+	int index;
+
+	g_return_if_fail (app != NULL);
+
+	if (!app->toolbar || gnome_preferences_get_toolbar_relief ())
+		return;
+
+	toolbar = GTK_TOOLBAR (app->toolbar);
+	
+	for (index = 0, list = toolbar->children; list; ++index) {
+		GtkToolbarChild *child = list->data;
+		GtkWidget *widget;
+		GtkWidget *separator;		
+
+		list = list->next;
+		
+		if (child->type != GTK_TOOLBAR_CHILD_WIDGET ||
+		    !child->widget ||
+		    !GTK_IS_VSEPARATOR (child->widget))
+			continue;
+
+		widget = child->widget;
+		
+		/* Remove widget from toolbar */
+		gtk_container_remove (GTK_CONTAINER (toolbar), widget);
+
+		/* Create new separator */
+		separator = gtk_hseparator_new ();
+		gtk_widget_set_usize (separator, GNOME_PAD * 2, 0);
+		gtk_widget_show (separator);
+
+		/* Insert into current position */
+		gtk_toolbar_insert_widget (toolbar, separator, NULL, NULL, index);
+	}
+}
+
+/* Replace hseparators with vseparators in toolbar */
+static void
+gnome_app_configure_toolbar_vseparators (GnomeApp *app)
+{
+	GList *list;
+	GtkToolbar *toolbar;
+	int index;
+
+	g_return_if_fail (app != NULL);
+
+	if (!app->toolbar || gnome_preferences_get_toolbar_relief ())
+		return;
+
+	toolbar = GTK_TOOLBAR (app->toolbar);
+	
+	for (index = 0, list = toolbar->children; list; ++index) {
+		GtkToolbarChild *child = list->data;
+		GtkWidget *widget;
+		GtkWidget *separator;		
+
+		list = list->next;
+		
+		if (child->type != GTK_TOOLBAR_CHILD_WIDGET ||
+		    !child->widget ||
+		    !GTK_IS_HSEPARATOR (child->widget))
+			continue;
+
+		widget = child->widget;
+		
+		/* Remove widget from toolbar */
+		gtk_container_remove (GTK_CONTAINER (toolbar), widget);
+
+		/* Create new separator */
+		separator = gtk_vseparator_new ();
+		gtk_widget_set_usize (separator, 0, GNOME_PAD * 2);
+		gtk_widget_show (separator);
+
+		/* Insert into current position */
+		gtk_toolbar_insert_widget (toolbar, separator, NULL, NULL, index);
+	}
+}
+
 /* Rearranges the children of the application window to their newly- configured positions */
 static void
 gnome_app_configure_positions (GnomeApp *app)
@@ -189,6 +273,7 @@ gnome_app_configure_positions (GnomeApp *app)
 			offset = 1;
 
 		if ((app->pos_toolbar == GNOME_APP_POS_LEFT) || (app->pos_toolbar == GNOME_APP_POS_RIGHT)) {
+			gnome_app_configure_toolbar_hseparators (app);
 			gtk_table_attach (GTK_TABLE (app->table),
 					  handlebox,
 					  (app->pos_toolbar == GNOME_APP_POS_LEFT) ? 0 : 2,
@@ -200,6 +285,8 @@ gnome_app_configure_positions (GnomeApp *app)
 		} else {
 			gint moffset;
 
+			gnome_app_configure_toolbar_vseparators (app);
+			
 			if (app->pos_menubar == app->pos_toolbar)
 				moffset = (app->pos_toolbar == GNOME_APP_POS_TOP) ? 1 : -1;
 			else
