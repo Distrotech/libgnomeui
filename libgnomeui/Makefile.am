@@ -14,7 +14,7 @@ lib_LTLIBRARIES = libgnomeui-2.la
 #
 # Install location for header files
 #
-libgnomeuiincludedir = $(includedir)/gnome/2/libgnomeui
+libgnomeuiincludedir = $(includedir)/gnome-2.0/libgnomeui
 
 INCLUDES = \
 	-I$(top_builddir)				\
