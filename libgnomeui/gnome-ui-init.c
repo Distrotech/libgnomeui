@@ -45,6 +45,7 @@
 
 #include <libgnome/libgnome.h>
 #include <bonobo/bonobo-ui-main.h>
+#include <gconf/gconf-client.h>
 
 #include "gnome-client.h"
 #include "gnome-gconf-ui.h"
@@ -91,6 +92,14 @@ static void libgnomeui_segv_setup	(GnomeProgram *program,
 
 /* Prototype for a private gnome_stock function */
 void _gnome_stock_icons_init (void);
+
+/* Whether to make noises when the user clicks a button, etc.  We cache it
+ * in a boolean rather than querying GConf every time.
+ */
+static gboolean use_event_sounds;
+
+/* GConf client for monitoring the event sounds option */
+static GConfClient *gconf_client = NULL;
 
 
 enum { ARG_DISABLE_CRASH_DIALOG=1, ARG_DISPLAY };
@@ -289,6 +298,9 @@ relay_gtk_signal(GSignalInvocationHint *hint,
 
   pieces[1] = signame;
 
+  if (!use_event_sounds)
+    return TRUE;
+
   if(!disable_sound_quark)
     disable_sound_quark = g_quark_from_static_string("gnome_disable_sound_events");
 
@@ -309,6 +321,13 @@ relay_gtk_signal(GSignalInvocationHint *hint,
 }
 #endif
 
+/* Callback used when the GConf event_sounds key's value changes */
+static void
+event_sounds_changed_cb (GConfClient* client, guint cnxn_id, GConfEntry *entry, gpointer data)
+{
+        use_event_sounds = gconf_value_get_bool (entry->value);
+}
+
 static void
 initialize_gtk_signal_relay (void)
 {
@@ -319,9 +338,18 @@ initialize_gtk_signal_relay (void)
 	
 	if (gnome_sound_connection_get () < 0)
 		return;
+
+        gconf_client = gconf_client_get_default ();
+        if (!gconf_client)
+                return;
+
+        gconf_client_add_dir (gconf_client, "/desktop/gnome/sound", GCONF_CLIENT_PRELOAD_NONE, NULL);
+
+        gconf_client_notify_add (gconf_client, "/desktop/gnome/sound/event_sounds",
+                                 event_sounds_changed_cb,
+                                 NULL, NULL, NULL);
 	
-	if (!gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds"))
-		return;
+        use_event_sounds = gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds");
 	
 	ctmp = gnome_config_file ("/sound/events/gtk-events-2.soundlist");
 	ctmp2 = g_strconcat ("=", ctmp, "=", NULL);

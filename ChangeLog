@@ -1,9 +1,17 @@
+2002-06-03  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-ui-init.c (relay_gtk_signal): See whether the
+	user has selected to make noises for events or not.
+	(initialize_gtk_signal_relay): Add a notification handler for the
+	event_sounds key.  Fixes #81442.
+
 2002-06-02  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "ca" to ALL_LINGUAS again. Updated and fixed
 	ca.po is added.
 
 2002-06-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
 	* doc/reference/tmpl/gnome-client.sgml,
 	  libgnomeui/gnome-client.c,
 	  doc/reference/tmpl/gnome-ui-init.sgml,
@@ -29,6 +37,7 @@
 
 
 2002-06-01  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
 	* doc/reference/Makefile.am: Add GNOME_DISABLE_DEPRECATED guards
 	  into the scanning.
 
