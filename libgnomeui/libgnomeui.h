@@ -11,7 +11,7 @@
 #include "libgnomeui/gnome-app-helper.h"
 #include "libgnomeui/gnome-app-util.h"
 #include "libgnomeui/gnome-actionarea.h"
-#ifdef GDK_HAVE_FULL_CROSSING_EVENT
+#ifdef GTK_HAVE_FEATURES_1_1_0
 #include "libgnomeui/gnome-canvas.h"
 #include "libgnomeui/gnome-canvas-image.h"
 #include "libgnomeui/gnome-canvas-line.h"
