@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs\n"
-"POT-Creation-Date: 2002-02-13 03:24+0100\n"
-"PO-Revision-Date: 2001-11-24 10:00+0800\n"
+"POT-Creation-Date: 2002-02-17 23:41+0800\n"
+"PO-Revision-Date: 2002-02-17 23:52+0800\n"
 "Last-Translator: Wang Li <charlesw1234@163.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -15,21 +15,19 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:187
 msgid "Credits"
-msgstr ""
+msgstr "感谢"
 
 #: libgnomeui/gnome-about.c:210
 msgid "Written by"
-msgstr ""
+msgstr "编写"
 
 #: libgnomeui/gnome-about.c:224
-#, fuzzy
 msgid "Documented by"
-msgstr "文档编写者"
+msgstr "文档"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "Translated by"
-msgstr "译者鸣谢"
+msgstr "译者"
 
 #: libgnomeui/gnome-about.c:335
 msgid "Program name"
@@ -97,12 +95,12 @@ msgstr "单个文档编写者条目"
 
 #: libgnomeui/gnome-about.c:388
 msgid "Translator credits"
-msgstr "译者鸣谢"
+msgstr "翻译"
 
 #: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "对译者的鸣谢。该字符串应该被标记为可翻译的"
+msgstr "Wang Li <charlesw1234@163.com>"
 
 #: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -118,31 +116,28 @@ msgid "About %s"
 msgstr "关于 %s"
 
 #: libgnomeui/gnome-appbar.c:762
-#, fuzzy
 msgid "Has Progress"
-msgstr "进度"
+msgstr "有进度"
 
 #: libgnomeui/gnome-appbar.c:763
-#, fuzzy
 msgid "Create a progress widget."
-msgstr "创建一个新窗口"
+msgstr "创建进度部件。"
 
 #: libgnomeui/gnome-appbar.c:770
 msgid "Has Status"
-msgstr ""
+msgstr "有状态"
 
 #: libgnomeui/gnome-appbar.c:771
-#, fuzzy
 msgid "Create a status widget."
-msgstr "创建一个新窗口"
+msgstr "创建状态部件。"
 
 #: libgnomeui/gnome-appbar.c:778
 msgid "Interactivity"
-msgstr ""
+msgstr "交互性"
 
 #: libgnomeui/gnome-appbar.c:779
 msgid "Level of user activity required."
-msgstr ""
+msgstr "需要的用户交互性级别。"
 
 #: libgnomeui/gnome-client.c:832
 msgid "Specify session management ID"
@@ -185,9 +180,8 @@ msgid "Time"
 msgstr "时间"
 
 #: libgnomeui/gnome-dateedit.c:431
-#, fuzzy
 msgid "The time currently selected"
-msgstr "当前选定时间"
+msgstr "当前选中的时间"
 
 #: libgnomeui/gnome-dateedit.c:443
 msgid "DateEdit Flags"
@@ -358,9 +352,8 @@ msgid "Link colour"
 msgstr "连接颜色"
 
 #: libgnomeui/gnome-href.c:135
-#, fuzzy
 msgid "Colour used to draw the link"
-msgstr "用于绘制连接的颜色"
+msgstr "用于绘制链接的颜色"
 
 #: libgnomeui/gnome-href.c:396
 msgid ""
@@ -603,11 +596,11 @@ msgstr "新建(_N)/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
 msgid "Fi_les"
-msgstr "文件(l)"
+msgstr "文件(_L)"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "文件(l)"
+msgstr "文件(_L)"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
 msgid "_Windows"
@@ -692,7 +685,7 @@ msgstr "关闭当前文件"
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "E_xit"
-msgstr "退出(_x)"
+msgstr "退出(_X)"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Exit the program"
@@ -811,7 +804,7 @@ msgstr "配置应用程序"
 #. About
 #: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "(_A)关于"
+msgstr "关于(_A)"
 
 #: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
@@ -914,21 +907,20 @@ msgstr "结束当前游戏"
 
 #: libgnomeui/gnome-app-helper.c:2578
 msgid "Both text and icons"
-msgstr ""
+msgstr "文字和图标"
 
 #: libgnomeui/gnome-app-helper.c:2579
 msgid "Icons only"
-msgstr ""
+msgstr "仅图标"
 
 #: libgnomeui/gnome-app-helper.c:2580
-#, fuzzy
 msgid "Text only"
-msgstr "文本"
+msgstr "仅文字"
 
 #: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr ""
+msgstr "使用桌面默认值(%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -1000,16 +992,15 @@ msgstr "浏览..."
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
-msgstr ""
+msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
-#, fuzzy
 msgid "Pick a Font"
-msgstr "选取颜色"
+msgstr "选取字体"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -1097,7 +1088,7 @@ msgstr ""
 #: libgnomeui/gnome-gconf-ui.c:139
 #, c-format
 msgid "GConf error details: %s\n"
-msgstr "GConf 错误详情： %s\n"
+msgstr "GConf 错误详情：%s\n"
 
 #: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
 msgid "No Icon"
@@ -1182,7 +1173,7 @@ msgstr "%Y-%m-%d(%a) %T"
 
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
-msgstr ""
+msgstr "Sans 14"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
