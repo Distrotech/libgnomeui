@@ -225,14 +225,14 @@ render (GnomeColorPicker *cp)
 				    COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
 	}
 	if (!GTK_WIDGET_IS_SENSITIVE (cp)) {
-		gdk_gc_set_stipple (GTK_WIDGET(cp)->style->bg_gc[GTK_STATE_NORMAL], stipple);
-		gdk_gc_set_fill (GTK_WIDGET(cp)->style->bg_gc[GTK_STATE_NORMAL], GDK_STIPPLED);
+		gdk_gc_set_stipple (cp->da->style->bg_gc[GTK_STATE_NORMAL], stipple);
+		gdk_gc_set_fill (cp->da->style->bg_gc[GTK_STATE_NORMAL], GDK_STIPPLED);
 		gdk_draw_rectangle (cp->pixmap,
-				    GTK_WIDGET(cp)->style->bg_gc[GTK_STATE_NORMAL],
+				    cp->da->style->bg_gc[GTK_STATE_NORMAL],
 				    TRUE,
 				    0, 0,
 				    COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
-		gdk_gc_set_fill (GTK_WIDGET(cp)->style->bg_gc[GTK_STATE_NORMAL], GDK_SOLID);
+		gdk_gc_set_fill (cp->da->style->bg_gc[GTK_STATE_NORMAL], GDK_SOLID);
 	}
 	
 }
