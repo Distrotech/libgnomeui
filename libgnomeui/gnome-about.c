@@ -24,9 +24,11 @@
 #include "libgnome/gnome-url.h"
 #include "gnome-stock.h"
 #include "gnome-canvas.h"
+#include "gnome-canvas-line.h"
 #include "gnome-canvas-rect-ellipse.h"
 #include "gnome-canvas-text.h"
 #include "gnome-canvas-pixbuf.h"
+#include "gnome-canvas-util.h"
 #include "gnome-cursors.h"
 #include <string.h>
 #include <gtk/gtk.h>
@@ -255,6 +257,7 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 			y += ai->font_title_url->ascent +
 				ai->font_title->descent +
 				GNOME_ABOUT_TITLE_URL_PADDING_DOWN;
+					    
 		}
 #endif /* GNOME_ABOUT_SHOW_URLS */
 		x = GNOME_ABOUT_PADDING_X;
@@ -966,37 +969,66 @@ static gint
 gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 		    gpointer data)
 {
+	
 	gchar *url = gtk_object_get_data(GTK_OBJECT(item), "url");
 	GdkCursor *cursor;
 	GdkWindow *window = GTK_WIDGET(item->canvas)->window;
+	static GnomeCanvasItem *underline = NULL;
 
 	if (!url)
-	    return 0;
+		return 0;
+	
 	
 	switch (event->type)
 	{
 	case GDK_ENTER_NOTIFY:
-	    if (url)
-	    {
-		cursor = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_POINTING_HAND); 
-		gdk_window_set_cursor(window, cursor);
-		gdk_cursor_destroy(cursor);
-	    }
-	    break;
+		if (url)
+		{
+			if (underline == NULL)
+			{
+				gdouble x1, x2, y1, y2;
+				GnomeCanvasPoints *points;
+
+
+				points = gnome_canvas_points_new (2);
+
+				gnome_canvas_item_get_bounds (item, &x1, &y1, &x2, &y2);
+
+				points->coords[0] = x1;
+				points->coords[1] = y2;
+				points->coords[2] = x2;
+				points->coords[3] = y2;
+				underline = gnome_canvas_item_new (gnome_canvas_root (item->canvas),
+								   gnome_canvas_line_get_type (),
+								   "points", points,
+								   "fill_color", "white",
+								   NULL);
+				gnome_canvas_points_unref (points);
+			}
+			cursor = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_POINTING_HAND); 
+			gdk_window_set_cursor(window, cursor);
+			gdk_cursor_destroy(cursor);
+		}
+		break;
 	case GDK_LEAVE_NOTIFY:
 		if (url)
 		{
-		    gdk_window_set_cursor(window, NULL);
+			if (underline != NULL)
+			{
+				gtk_object_destroy (GTK_OBJECT (underline));
+				underline = NULL;
+			}
+			gdk_window_set_cursor(window, NULL);
 		}
 		break;
 	case GDK_BUTTON_PRESS:
-	    if (url)
-	    {
-		gnome_url_show(url);
-	    }
-	    break;
+		if (url)
+		{
+			gnome_url_show(url);
+		}
+		break;
 	default:
-	    break;
+		break;
 	}
 	return 0;
 }
