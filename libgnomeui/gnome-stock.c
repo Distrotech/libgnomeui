@@ -254,11 +254,17 @@ typedef enum {
         GNOME_STOCK_PIXMAP_TYPE_FILE,
         GNOME_STOCK_PIXMAP_TYPE_PATH,
         GNOME_STOCK_PIXMAP_TYPE_PIXBUF,
-        GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED
+        GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED,
+        GNOME_STOCK_PIXMAP_TYPE_LAST
 } GnomeStockPixmapType;
+
+/* for even easier debugging */ 
+#define GNOME_IS_STOCK_PIXMAP_ENTRY(entry) \
+        (entry->type >= 0 && entry->type < GNOME_STOCK_PIXMAP_TYPE_LAST)
 
 struct _GnomeStockPixmapEntryAny {
         GnomeStockPixmapType type;
+	int ref_count;
 	char *label;
         GdkPixbuf *pixbuf;
 };
@@ -266,6 +272,7 @@ struct _GnomeStockPixmapEntryAny {
 /* a data entry holds a hardcoded pixmap */
 struct _GnomeStockPixmapEntryData {
         GnomeStockPixmapType type;
+	int ref_count;
 	char *label;
         GdkPixbuf *pixbuf;
         const gchar **xpm_data;
@@ -275,6 +282,7 @@ struct _GnomeStockPixmapEntryData {
    will be seached for using gnome_pixmap_file */
 struct _GnomeStockPixmapEntryFile {
         GnomeStockPixmapType type;
+	int ref_count;
 	char *label;
         GdkPixbuf *pixbuf;
         gchar *filename;
@@ -283,6 +291,7 @@ struct _GnomeStockPixmapEntryFile {
 /* a path entry holds the complete (absolut) path to the pixmap file */
 struct _GnomeStockPixmapEntryPath {
         GnomeStockPixmapType type;
+	int ref_count;
 	char *label;
         GdkPixbuf *pixbuf;
         gchar *pathname;
@@ -291,6 +300,7 @@ struct _GnomeStockPixmapEntryPath {
 /* a data entry holds a hardcoded pixmap */
 struct _GnomeStockPixmapEntryPixbuf {
         GnomeStockPixmapType type;
+	int ref_count;
         char *label;
         GdkPixbuf *pixbuf;
 };
@@ -348,6 +358,7 @@ gnome_stock_pixmap_entry_new_blank (GnomeStockPixmapType type, const gchar* labe
         g_assert(entry != NULL);
 
         entry->type = type;
+	entry->any.ref_count = 1;
         
         if (label != NULL)
                 entry->any.label = g_strdup(label);
@@ -355,7 +366,7 @@ gnome_stock_pixmap_entry_new_blank (GnomeStockPixmapType type, const gchar* labe
         return entry;
 }
 
-void
+static void
 gnome_stock_pixmap_entry_destroy (GnomeStockPixmapEntry* entry)
 {
         switch (entry->type) {
@@ -392,7 +403,44 @@ gnome_stock_pixmap_entry_destroy (GnomeStockPixmapEntry* entry)
         if (entry->any.label != NULL)
                 g_free(entry->any.label);
 
+	/* just in case we double free, then GNOME_IS_STOCK_PIXMAP_ENTRY
+	 * will fail */
+	entry->type = -1;
+
         g_free(entry);
+}
+
+/**
+ * gnome_stock_pixmap_entry_ref:
+ * @entry: gnome stock pixmap entry
+ *
+ * Description:  Increments the reference count on the entry
+ */
+void
+gnome_stock_pixmap_entry_ref (GnomeStockPixmapEntry* entry)
+{
+	g_return_if_fail (entry != NULL);
+	g_return_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry));
+
+	entry->any.ref_count++;
+}
+
+/**
+ * gnome_stock_pixmap_entry_unref:
+ * @entry: gnome stock pixmap entry
+ *
+ * Description:  Decrements the reference count on the entry, and
+ * destroys the structure if it went to 0
+ */
+void
+gnome_stock_pixmap_entry_unref (GnomeStockPixmapEntry* entry)
+{
+	g_return_if_fail (entry != NULL);
+	g_return_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry));
+
+	entry->any.ref_count--;
+	if(entry->any.ref_count == 0)
+		gnome_stock_pixmap_entry_destroy(entry);
 }
 
 GnomeStockPixmapEntry*
@@ -475,6 +523,9 @@ gnome_stock_pixmap_entry_new_from_xpm_data (const gchar** xpm_data, const gchar*
 GdkPixbuf*
 gdk_pixbuf_new_from_stock_pixmap_entry (GnomeStockPixmapEntry *entry)
 {
+	g_return_val_if_fail (entry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry), NULL);
+
         if (entry->any.pixbuf != NULL) {
                 /* Return the cached pixbuf, with refcount incremented. */
                 gdk_pixbuf_ref(entry->any.pixbuf);
@@ -760,10 +811,11 @@ hash_entry_set (HashEntry *he, GtkStateType state, GnomeStockPixmapEntry *entry)
         g_return_if_fail (state < 5);
         
         if (he->entries[state] != NULL) {
-                gnome_stock_pixmap_entry_destroy (he->entries[state]);
+                gnome_stock_pixmap_entry_unref (he->entries[state]);
                 he->entries[state] = NULL;
         }
 
+	gnome_stock_pixmap_entry_ref (entry);
         he->entries[state] = entry;
 }
 
@@ -817,9 +869,9 @@ stock_pixmaps(void)
                 pixbuf = gdk_pixbuf_new_from_data ( (guchar*) entries_data[i].rgb_data, /* cast const */
                                                     GDK_COLORSPACE_RGB,
                                                     TRUE,
+                                                    8,
                                                     entries_data[i].width,
                                                     entries_data[i].height,
-                                                    8,
                                                     /* rowstride */
                                                     entries_data[i].width * 4,
                                                     NULL, /* don't destroy data */
@@ -836,6 +888,9 @@ stock_pixmaps(void)
                 gdk_pixbuf_unref (pixbuf);
 
                 hash_insert (hash, entries_data[i].icon, entries_data[i].state, entry);
+		/* the above code has have reffed it in our database, so
+		 * we need to get rid of the initial refcount */
+		gnome_stock_pixmap_entry_unref(entry);
 	}
         
 	return hash;
@@ -862,7 +917,9 @@ gnome_stock_pixmap_register(const char *icon, GtkStateType state,
 {
         GHashTable* hash;
         
-	g_return_if_fail(entry != NULL);
+	g_return_if_fail (icon != NULL);
+	g_return_if_fail (entry != NULL);
+	g_return_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry));
 
         hash = stock_pixmaps();
         
@@ -877,6 +934,10 @@ gnome_stock_pixmap_change(const char *icon, GtkStateType state,
 {
 	GHashTable *hash;
         HashEntry *he;
+
+	g_return_if_fail (icon != NULL);
+	g_return_if_fail (entry != NULL);
+	g_return_if_fail (GNOME_IS_STOCK_PIXMAP_ENTRY(entry));
         
 	hash = stock_pixmaps();
 
@@ -896,6 +957,8 @@ gnome_stock_pixmap_lookup(const char *icon, GtkStateType state)
 {
 	GHashTable *hash;
         HashEntry *he;
+
+	g_return_val_if_fail(icon != NULL, NULL);
         
 	hash = stock_pixmaps();
 
@@ -904,6 +967,7 @@ gnome_stock_pixmap_lookup(const char *icon, GtkStateType state)
         if (he == NULL) {
                 return NULL;
         } else {
+                gnome_stock_pixmap_entry_ref(he->entries[state]);
                 return he->entries[state];
         }
 }
@@ -1200,7 +1264,7 @@ accel_hash(void) {
 	if (!hash) {
 		hash = g_hash_table_new(g_str_hash, g_str_equal);
 		for (p = default_accel_hash; p->type; p++)
-			g_hash_table_insert(hash, p->type, (gpointer) &p->entry);
+			g_hash_table_insert(hash, (gpointer) p->type, (gpointer) &p->entry);
 		g_hash_table_foreach(hash, accel_read_rc,
 				     "/Gnome/Accelerators/");
 	}

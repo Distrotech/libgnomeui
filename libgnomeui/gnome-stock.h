@@ -104,7 +104,8 @@ void gnome_stock_pixmap_gdk (const char *icon,
  * Hash entry datatype operations
  */
 
-void gnome_stock_pixmap_entry_destroy (GnomeStockPixmapEntry* entry);
+void gnome_stock_pixmap_entry_ref (GnomeStockPixmapEntry* entry);
+void gnome_stock_pixmap_entry_unref (GnomeStockPixmapEntry* entry);
 
 GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_gdk_pixbuf (GdkPixbuf *pixbuf,
                                                                      const gchar* label);

@@ -1,3 +1,9 @@
+Fri May 19 18:56:48 2000  George Lebl <jirka@5z.com>
+
+	* gnome-stock.[ch]: added refcount to the entries to make wrapping
+	  possible and fix the creation of new pixmaps from the data, so that
+	  the stock pixmaps now actually work.
+
 Thu May 18 20:31:16 2000  George Lebl <jirka@5z.com>
 
 	* gnome-ditem-edit.[ch]: fix api naming.  the child1,child2 are now
