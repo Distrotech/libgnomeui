@@ -285,19 +285,19 @@ gnome.defs: @REBUILD@ makeenums.pl gnome-boxed.defs $(gnome_headers)
 # generate type identifier header (GTK_TYPE_WIDGET_FLAGS)
 gnometypebuiltins.h: @REBUILD@ gnome.defs maketypes.awk
 	cd $(srcdir) \
-	&& $(AWK) -f maketypes.awk gnome.defs macros > gtb.tmp \
+	&& LC_COLLATE=C $(AWK) -f maketypes.awk gnome.defs macros > gtb.tmp \
 	&& mv gtb.tmp gnometypebuiltins.h
 
 # generate type identifier variables (GTK_TYPE_WIDGET_FLAGS)
 gnometypebuiltins_vars.c: @REBUILD@ gnome.defs maketypes.awk
 	cd $(srcdir) \
-	&& $(AWK) -f maketypes.awk gnome.defs variables > gtbv.tmp \
+	&& LC_COLLATE=C $(AWK) -f maketypes.awk gnome.defs variables > gtbv.tmp \
 	&& mv gtbv.tmp gnometypebuiltins_vars.c
 
 # generate type entries for type-id registration
 gnometypebuiltins_ids.c: @REBUILD@ gnome.defs maketypes.awk
 	cd $(srcdir) \
-	&& $(AWK) -f maketypes.awk gnome.defs entries > gtbi.tmp \
+	&& LC_COLLATE=C $(AWK) -f maketypes.awk gnome.defs entries > gtbi.tmp \
 	&& mv gtbi.tmp gnometypebuiltins_ids.c
 
 # generate enum value arrays

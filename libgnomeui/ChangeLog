@@ -1,3 +1,9 @@
+2000-05-10  Karl Eichwalder  <ke@suse.de>
+
+	* Makefile.am (gnometypebuiltins.h, gnometypebuiltins_vars.c,
+	gnometypebuiltins_ids.c): Add LC_COLLATE=C to avoid NLS nuisances
+	while calling awk.
+
 Mon May 08 17:21:33 2000  George Lebl <jirka@5z.com>
 
 	* gnome-icon-entry.c: when an absolute path is passed to
