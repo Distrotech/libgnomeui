@@ -1,3 +1,7 @@
+2001-11-28  jacob berkman  <jacob@ximian.com>
+
+	* configure.in: install the .schemas into $DESTDIR
+
 Tue Nov 27 17:48:02 2001  Owen Taylor  <otaylor@redhat.com>
 
 	* configure.in (GCONF_CONFIG_SOURCE): Add config tests
