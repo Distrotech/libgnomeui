@@ -1264,10 +1264,11 @@ static gint
 gil_button_release (GtkWidget *widget, GdkEventButton *event)
 {
 	Gil *gil = GIL (widget);
-
+	double x, y;
 
 	if (gil->sel_rect){
-		gil_mark_region (gil, (GdkEvent *) event, event->x, event->y);
+		gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &x, &y);
+		gil_mark_region (gil, (GdkEvent *) event, x, y);
 		gnome_canvas_item_ungrab (gil->sel_rect, event->time);
 		gtk_object_destroy (GTK_OBJECT (gil->sel_rect));
 		gil->sel_rect = NULL;
