@@ -1,6 +1,7 @@
 pixmapdir = $(datadir)/pixmaps
 
 pixmap_DATA = \
+	gnome-about-logo.png	\
 	gnome-info.png		\
 	gnome-error.png		\
 	gnome-question.png	\

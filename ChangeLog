@@ -1,3 +1,9 @@
+2002-02-11  Anders Carlsson  <andersca@gnu.org>
+
+	* images/gnome-about-logo.png: Add.
+
+	* images/Makefile.am (pixmapdir): add gnome-about-logo.png
+
 2002-02-10  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Add check for bind_textdomain_codeset.
