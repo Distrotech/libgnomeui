@@ -139,7 +139,7 @@ struct {
 static void
 gtk_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
 {
-	if (getenv ("GTK_DEBUG_OBJECTS"))
+	if (g_getenv ("GTK_DEBUG_OBJECTS"))
 		gtk_debug_flags |= GTK_DEBUG_OBJECTS;
 		
         gnome_gtk_init_info.gtk_args = g_ptr_array_new();
@@ -255,11 +255,11 @@ libgnomeui_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
         gboolean do_crash_dialog = TRUE;
         char *envar;
 
-        envar = getenv("GNOME_DISABLE_CRASH_DIALOG");
+        envar = g_getenv("GNOME_DISABLE_CRASH_DIALOG");
         if(envar)
                 do_crash_dialog = atoi(envar)?FALSE:TRUE;
         gnome_program_attributes_set(app, LIBGNOMEUI_PARAM_CRASH_DIALOG, do_crash_dialog, NULL);
-        gnome_program_attributes_set(app, LIBGNOMEUI_PARAM_DISPLAY, getenv("DISPLAY"), NULL);
+        gnome_program_attributes_set(app, LIBGNOMEUI_PARAM_DISPLAY, g_getenv("DISPLAY"), NULL);
 
         if(do_crash_dialog)
                 libgnomeui_segv_setup(FALSE);
@@ -269,7 +269,7 @@ libgnomeui_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
         ctype = setlocale (LC_CTYPE, NULL);
 
         if (!strcmp(ctype, "C")) {
-                old_ctype = g_strdup (getenv ("LC_CTYPE"));
+                old_ctype = g_strdup (g_getenv ("LC_CTYPE"));
                 putenv ("LC_CTYPE=en_US");
                 ctype_set = TRUE;
         } else
@@ -481,7 +481,7 @@ static void libgnomeui_segv_handle(int signum)
 		eret = waitpid(pid, &estatus, 0);
 
                 /* Don't use app attributes here - a lot of things are probably hosed */
-		if(getenv("GNOME_DUMP_CORE"))
+		if(g_getenv("GNOME_DUMP_CORE"))
 	                abort ();
 
 		_exit(1);

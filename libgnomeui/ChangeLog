@@ -1,3 +1,8 @@
+Thu Sep 28 03:35:44 2000  George Lebl <jirka@5z.com>
+
+	* gnome-client.c, gnome-init.c, gnome_segv.c: use g_getenv
+	  instead of getenv.
+
 2000-09-25  Iain Holmes  <iain@helixcode.com>
 
 	* gnome-propertybox.c (dialog_clicked_cb): Check all the pages for a 

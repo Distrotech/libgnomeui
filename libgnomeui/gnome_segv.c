@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
                                  _("Submit a bug report"));
     }
 
-  debugger = getenv("GNOME_DEBUGGER");
+  debugger = g_getenv("GNOME_DEBUGGER");
   if (debugger && strlen(debugger)>0)
   {
     debugger_path = gnome_is_program_in_path (debugger);

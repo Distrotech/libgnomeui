@@ -921,7 +921,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
   /* Set the master client's environment.  */
   for (i= 0; master_environment[i]; i++)
     {
-      char *value= getenv (master_environment[i]);
+      char *value= g_getenv (master_environment[i]);
 	      
       if (value)
 	gnome_client_set_environment (master_client,
@@ -1352,7 +1352,7 @@ gnome_client_connect (GnomeClient *client)
     callbacks.save_complete.client_data =
     callbacks.shutdown_cancelled.client_data = (SmPointer) client;
 
-  if (getenv ("SESSION_MANAGER"))
+  if (g_getenv ("SESSION_MANAGER"))
     {
       gchar error_string_ret[ERROR_STRING_LENGTH] = "";
       
