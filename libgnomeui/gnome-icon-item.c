@@ -711,6 +711,9 @@ iti_event (GnomeCanvasItem *item, GdkEvent *event)
 			if (iti->unselected_click || iti->editing)
 				return FALSE;
 
+			if (event->button.button != 1)
+				return FALSE;
+			
 			gnome_canvas_item_grab_focus (item);
 			iti_start_editing (iti);
 			iti_queue_redraw (iti);
