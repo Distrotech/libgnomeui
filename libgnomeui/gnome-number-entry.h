@@ -79,6 +79,8 @@ void       gnome_number_entry_set_title   (GnomeNumberEntry *nentry,
 					   const gchar *calc_dialog_title);
 
 gdouble    gnome_number_entry_get_number  (GnomeNumberEntry *nentry);
+void       gnome_number_entry_set_number  (GnomeNumberEntry *nentry,
+					   double number);
 
 
 END_GNOME_DECLS

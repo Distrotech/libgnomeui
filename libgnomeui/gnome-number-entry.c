@@ -110,7 +110,7 @@ calc_dialog_clicked (GtkWidget *widget, int button, gpointer data)
 
 /**
  * gnome_number_entry_get_number:
- * @nentry: Pointer to GnomeNumberEntry widget
+ * @nentry: Pointer to #GnomeNumberEntry widget
  *
  * Description: Get the current number from the entry
  *
@@ -123,8 +123,8 @@ gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 	gchar *text;
 	gdouble r;
 
-	g_return_val_if_fail (nentry != NULL,0.0);
-	g_return_val_if_fail (GNOME_IS_NUMBER_ENTRY (nentry),0.0);
+	g_return_val_if_fail (nentry != NULL, 0.0);
+	g_return_val_if_fail (GNOME_IS_NUMBER_ENTRY (nentry), 0.0);
 
 	entry = gnome_number_entry_gtk_entry (nentry);
 	
@@ -134,6 +134,29 @@ gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 	sscanf(text,"%lg",&r);
 	
 	return r;
+}
+
+/**
+ * gnome_number_entry_set_number:
+ * @nentry: Pointer to #GnomeNumberEntry widget
+ * @number: Number to set the entry to
+ *
+ * Description: Set the entry to @number
+ **/
+void
+gnome_number_entry_set_number(GnomeNumberEntry *nentry, double number)
+{
+	GtkWidget *entry;
+	gchar *text;
+
+	g_return_if_fail (nentry != NULL);
+	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (nentry));
+
+	entry = gnome_number_entry_gtk_entry (nentry);
+
+	text = g_strdup_printf("%g", number);
+	gtk_entry_set_text(GTK_ENTRY(entry), text);
+	g_free(text);
 }
 
 static void
