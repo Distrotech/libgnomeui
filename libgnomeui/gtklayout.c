@@ -33,6 +33,7 @@ static void     gtk_layout_realize_child      (GtkLayout      *layout,
 static void     gtk_layout_position_child     (GtkLayout      *layout,
 					       GtkLayoutChild *child,
 					       gboolean        force_allocate);
+static void     gtk_layout_position_children  (GtkLayout      *layout);
 
 static void     gtk_layout_expose_area        (GtkLayout      *layout,
 					       gint            x, 
@@ -213,6 +214,29 @@ gtk_layout_set_size (GtkLayout     *layout,
 
   layout->vadjustment->upper = layout->height;
   gtk_signal_emit_by_name (GTK_OBJECT (layout->vadjustment), "changed");
+}
+
+void
+gtk_layout_freeze (GtkLayout *layout)
+{
+  g_return_if_fail (layout != NULL);
+  g_return_if_fail (GTK_IS_LAYOUT (layout));
+
+  layout->frozen = TRUE;
+}
+
+void
+gtk_layout_thaw (GtkLayout *layout)
+{
+  g_return_if_fail (layout != NULL);
+  g_return_if_fail (GTK_IS_LAYOUT (layout));
+
+  if (!layout->frozen)
+    return;
+
+  layout->frozen = FALSE;
+  gtk_layout_position_children (layout);
+  gtk_widget_draw (GTK_WIDGET (layout), NULL);
 }
 
 /* Basic Object handling procedures
@@ -614,6 +638,20 @@ gtk_layout_position_child (GtkLayout      *layout,
 	gtk_widget_unmap (child->widget);
     }
 }
+
+static void
+gtk_layout_position_children (GtkLayout *layout)
+{
+  GList *tmp_list;
+
+  tmp_list = layout->children;
+  while (tmp_list)
+    {
+      gtk_layout_position_child (layout, tmp_list->data, FALSE);
+
+      tmp_list = tmp_list->next;
+    }
+}
   
 /* Callbacks */
 
@@ -692,7 +730,6 @@ static void
 gtk_layout_adjustment_changed (GtkAdjustment *adjustment,
 			       GtkLayout     *layout)
 {
-  GList *tmp_list;
   GtkWidget *widget;
   XEvent xevent;
   
@@ -706,13 +743,10 @@ gtk_layout_adjustment_changed (GtkAdjustment *adjustment,
   layout->xoffset = (gint)layout->hadjustment->value;
   layout->yoffset = (gint)layout->vadjustment->value;
 
-  tmp_list = layout->children;
-  while (tmp_list)
-    {
-      gtk_layout_position_child (layout, tmp_list->data, FALSE);
+  if (layout->frozen)
+    return;
 
-      tmp_list = tmp_list->next;
-    }
+  gtk_layout_position_children (layout);
 
   if (!GTK_WIDGET_MAPPED (layout))
     return;

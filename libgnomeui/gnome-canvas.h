@@ -246,8 +246,10 @@ struct _GnomeCanvas {
 
 	int redraw_x1, redraw_y1;
 	int redraw_x2, redraw_y2;		/* Area that needs redrawing.  Contains (x1, y1)
-						 * but not (x2, y2)
+						 * but not (x2, y2) -- specified in canvas pixel units.
 						 */
+
+	int zoom_xofs, zoom_yofs; 		/* Internal pixel offsets for when zoomed out */
 
 	int width, height;			/* Size of canvas window in pixels */
 
@@ -299,6 +301,9 @@ GnomeCanvasItem *gnome_canvas_root (GnomeCanvas *canvas);
 
 /* Sets the limits of the scrolling region */
 void gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, double x2, double y2);
+
+/* Gets the limits of the scrolling region */
+void gnome_canvas_get_scroll_region (GnomeCanvas *canvas, double *x1, double *y1, double *x2, double *y2);
 
 /* Sets the number of pixels that correspond to one unit in world coordinates */
 void gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n);

@@ -1,3 +1,27 @@
+1998-08-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_draw): Use the zoom offsets when
+	calculating coordinates.
+	(gnome_canvas_expose): Likewise.
+	(paint): Likewise.
+	(gnome_canvas_set_scroll_region): Likewise.
+	(gnome_canvas_set_pixels_per_unit): Likewise.
+	(pick_current_item): Likewise.
+	(window_to_world): Likewise.
+	(scroll_to): New internal function to scroll the canvas to a new
+	position.  It takes care of adjusting the scroll offset and zoom
+	offset to keep as much as possible of the canvas scrolling region
+	in view.
+	(gnome_canvas_scroll_to): Use the new scroll_to function.
+	(gnome_canvas_set_pixels_per_unit): Likewise.
+	(gnome_canvas_set_scroll_region): Likewise.
+	(gnome_canvas_size_allocate): Reset the adjustment page_size and
+	page_increment.
+
+	* gnome-canvas.h (struct _GnomeCanvas): New fields zoom_xofs and
+	zoom_yofs.  These are used to track the inset offsets to use when
+	the canvas is zoomed out.
+
 1998-08-03  Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.h: new GnomeMDI member tab_pos: stores the desired tab
@@ -14,6 +38,27 @@
 	* makeenums.pl (parse_entries): `srcdir' is now not passed in the
 	environment. 
 	
+1998-07-31  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_set_scroll_region):
+	(gnome_canvas_set_pixels_per_unit): Use gtk_layout_freeze/thaw().
+	(DISPLAY_X1): Use the layout->xoffset value instead of the
+	adjustment value.
+	(DISPLAY_Y1): Likewise.
+	(gnome_canvas_get_scroll_region): New public function to query the
+	scrolling limits of the canvas.
+
+	* gtklayout.c (gtk_layout_freeze):
+	(gtk_layout_thaw): Added public freeze/thaw functions for
+	GtkLayout.  These disable/enable moving and repainting of the
+	bin_window of the layout, respectively.
+	(gtk_layout_position_children): New private function to reposition
+	all the children in the layout.
+	(gtk_layout_adjustment_changed): Don't do anything but update the
+	offsets if it is frozen.  Use gtk_layout_position_children().
+
+	* gtklayout.h (struct _GtkLayout): Added frozen field.
+
 1998-07-31  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
         * gnome-mdi-child.h: GnomeMDIChild now has a pointer to his

@@ -1150,8 +1150,8 @@ static gint gnome_canvas_crossing       (GtkWidget        *widget,
 static GtkLayoutClass *canvas_parent_class;
 
 
-#define DISPLAY_X1(canvas) ((int) GNOME_CANVAS (canvas)->layout.hadjustment->value)
-#define DISPLAY_Y1(canvas) ((int) GNOME_CANVAS (canvas)->layout.vadjustment->value)
+#define DISPLAY_X1(canvas) (GNOME_CANVAS (canvas)->layout.xoffset)
+#define DISPLAY_Y1(canvas) (GNOME_CANVAS (canvas)->layout.yoffset)
 
 
 GtkType
@@ -1403,10 +1403,10 @@ gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 	canvas = GNOME_CANVAS (widget);
 
 	gnome_canvas_request_redraw (canvas,
-				     area->x + DISPLAY_X1 (canvas),
-				     area->y + DISPLAY_Y1 (canvas),
-				     area->x + area->width + DISPLAY_X1 (canvas),
-				     area->y + area->height + DISPLAY_Y1 (canvas));
+				     area->x + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
+				     area->y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs,
+				     area->x + area->width + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
+				     area->y + area->height + DISPLAY_Y1 (canvas) - canvas->zoom_yofs);
 }
 
 static void
@@ -1431,6 +1431,79 @@ gnome_canvas_size_request (GtkWidget *widget, GtkRequisition *requisition)
 }
 
 static void
+scroll_to (GnomeCanvas *canvas, int cx, int cy)
+{
+	int scroll_maxx, scroll_maxy;
+	int right_limit, bottom_limit;
+	int old_zoom_xofs, old_zoom_yofs;
+	int changed, changed_x, changed_y;
+
+	/* Adjust the scrolling offset and the zoom offset to keep as much as possible of the canvas
+	 * scrolling region in view.
+	 */
+
+	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2, &scroll_maxx, &scroll_maxy);
+
+	right_limit = scroll_maxx - canvas->width;
+	bottom_limit = scroll_maxy - canvas->height;
+
+	old_zoom_xofs = canvas->zoom_xofs;
+	old_zoom_yofs = canvas->zoom_yofs;
+
+	if (right_limit < 0) {
+		cx = 0;
+		canvas->zoom_xofs = (canvas->width - scroll_maxx) / 2;
+		scroll_maxx = canvas->width;
+	} else if (cx < 0) {
+		cx = 0;
+		canvas->zoom_xofs = 0;
+	} else if (cx > right_limit) {
+		cx = right_limit;
+		canvas->zoom_xofs = 0;
+	} else
+		canvas->zoom_xofs = 0;
+
+	if (bottom_limit < 0) {
+		cy = 0;
+		canvas->zoom_yofs = (canvas->height - scroll_maxy) / 2;
+		scroll_maxy = canvas->height;
+	} else if (cy < 0) {
+		cy = 0;
+		canvas->zoom_yofs = 0;
+	} else if (cy > bottom_limit) {
+		cy = bottom_limit;
+		canvas->zoom_yofs = 0;
+	} else
+		canvas->zoom_yofs = 0;
+
+	changed_x = ((int) canvas->layout.hadjustment->value) != cx;
+	changed_y = ((int) canvas->layout.vadjustment->value) != cy;
+
+	changed = ((canvas->zoom_xofs != old_zoom_xofs)
+		   || (canvas->zoom_yofs != old_zoom_yofs)
+		   || (changed_x && changed_y));
+
+	if (changed)
+		gtk_layout_freeze (GTK_LAYOUT (canvas));
+
+	if ((scroll_maxx != canvas->layout.width) || (scroll_maxy != canvas->layout.height))
+		gtk_layout_set_size (GTK_LAYOUT (canvas), scroll_maxx, scroll_maxy);
+
+	if (changed_x) {
+		canvas->layout.hadjustment->value = cx;
+		gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.hadjustment), "value_changed");
+	}
+
+	if (changed_y) {
+		canvas->layout.vadjustment->value = cy;
+		gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "value_changed");
+	}
+
+	if (changed)
+		gtk_layout_thaw (GTK_LAYOUT (canvas));
+}
+
+static void
 gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
 	GnomeCanvas *canvas;
@@ -1446,13 +1519,25 @@ gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
 	canvas->width = allocation->width;
 	canvas->height = allocation->height;
+
+	/* Recenter the view, if appropriate */
+
+	scroll_to (canvas, DISPLAY_X1 (canvas), DISPLAY_Y1 (canvas));
+
+	canvas->layout.hadjustment->page_size = allocation->width;
+	canvas->layout.hadjustment->page_increment = allocation->width / 2;
+	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.hadjustment), "changed");
+
+	canvas->layout.vadjustment->page_size = allocation->height;
+	canvas->layout.vadjustment->page_increment = allocation->height / 2;
+	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "changed");
 }
 
 static void
 window_to_world (GnomeCanvas *canvas, double *x, double *y)
 {
-	*x = canvas->scroll_x1 + (*x + DISPLAY_X1 (canvas)) / canvas->pixels_per_unit;
-	*y = canvas->scroll_y1 + (*y + DISPLAY_Y1 (canvas)) / canvas->pixels_per_unit;
+	*x = canvas->scroll_x1 + (*x + DISPLAY_X1 (canvas) - canvas->zoom_xofs) / canvas->pixels_per_unit;
+	*y = canvas->scroll_y1 + (*y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs) / canvas->pixels_per_unit;
 }
 
 static int
@@ -1617,11 +1702,11 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		/* these fields don't have the same offsets in both types of events */
 
 		if (canvas->pick_event.type == GDK_ENTER_NOTIFY) {
-			x = canvas->pick_event.crossing.x + DISPLAY_X1 (canvas);
-			y = canvas->pick_event.crossing.y + DISPLAY_Y1 (canvas);
+			x = canvas->pick_event.crossing.x + DISPLAY_X1 (canvas) - canvas->zoom_xofs;
+			y = canvas->pick_event.crossing.y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
 		} else {
-			x = canvas->pick_event.motion.x + DISPLAY_X1 (canvas);
-			y = canvas->pick_event.motion.y + DISPLAY_Y1 (canvas);
+			x = canvas->pick_event.motion.x + DISPLAY_X1 (canvas) - canvas->zoom_xofs;
+			y = canvas->pick_event.motion.y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
 		}
 
 		/* canvas pixel coords */
@@ -1783,10 +1868,10 @@ gnome_canvas_expose (GtkWidget *widget, GdkEventExpose *event)
 	canvas = GNOME_CANVAS (widget);
 
 	gnome_canvas_request_redraw (canvas,
-				     event->area.x + DISPLAY_X1 (canvas),
-				     event->area.y + DISPLAY_Y1 (canvas),
-				     event->area.x + event->area.width + DISPLAY_X1 (canvas),
-				     event->area.y + event->area.height + DISPLAY_Y1 (canvas));
+				     event->area.x + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
+				     event->area.y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs,
+				     event->area.x + event->area.width + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
+				     event->area.y + event->area.height + DISPLAY_Y1 (canvas) - canvas->zoom_yofs);
 
 	return FALSE;
 }
@@ -1843,10 +1928,10 @@ paint (GnomeCanvas *canvas)
 	 * 16-bit values.
 	 */
 
-	draw_x1 = DISPLAY_X1 (canvas);
-	draw_y1 = DISPLAY_Y1 (canvas);
-	draw_x2 = DISPLAY_X1 (canvas) + canvas->width;
-	draw_y2 = DISPLAY_Y1 (canvas) + canvas->height;
+	draw_x1 = DISPLAY_X1 (canvas) - canvas->zoom_xofs;
+	draw_y1 = DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
+	draw_x2 = draw_x1 + canvas->width;
+	draw_y2 = draw_y1 + canvas->height;
 
 	if (canvas->redraw_x1 > draw_x1)
 		draw_x1 = canvas->redraw_x1;
@@ -1898,7 +1983,8 @@ paint (GnomeCanvas *canvas)
 			 canvas->pixmap_gc,
 			 pixmap,
 			 0, 0,
-			 draw_x1 - DISPLAY_X1 (canvas), draw_y1 - DISPLAY_Y1 (canvas),
+			 draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
+			 draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
 			 width, height);
 
 	gdk_pixmap_unref (pixmap);
@@ -1946,27 +2032,55 @@ gnome_canvas_root (GnomeCanvas *canvas)
 void
 gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, double x2, double y2)
 {
-	int xmax, ymax;
+	double wxofs, wyofs;
+	int xofs, yofs;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	/* Set the new scrolling region.  If possible, do not move the visible contents of the
+	 * canvas.
+	 */
+
+	gnome_canvas_c2w (canvas,
+			  DISPLAY_X1 (canvas) - canvas->zoom_xofs,
+			  DISPLAY_Y1 (canvas) - canvas->zoom_yofs,
+			  &wxofs, &wyofs);
 
 	canvas->scroll_x1 = x1;
 	canvas->scroll_y1 = y1;
 	canvas->scroll_x2 = x2;
 	canvas->scroll_y2 = y2;
 
-	gnome_canvas_w2c (canvas, x2, y2, &xmax, &ymax);
-	gtk_layout_set_size (GTK_LAYOUT (canvas), xmax, ymax);
+	gnome_canvas_w2c (canvas, wxofs, wyofs, &xofs, &yofs);
 
-	canvas->layout.hadjustment->value = 0.0;
-	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.hadjustment), "value_changed");
+	gtk_layout_freeze (GTK_LAYOUT (canvas));
 
-	canvas->layout.vadjustment->value = 0.0;
-	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "value_changed");
+	scroll_to (canvas, xofs, yofs);
 
 	canvas->need_repick = TRUE;
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->reconfigure) (canvas->root);
+
+	gtk_layout_thaw (GTK_LAYOUT (canvas));
+}
+
+void
+gnome_canvas_get_scroll_region (GnomeCanvas *canvas, double *x1, double *y1, double *x2, double *y2)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	if (x1)
+		*x1 = canvas->scroll_x1;
+
+	if (y1)
+		*y1 = canvas->scroll_y1;
+
+	if (x2)
+		*x2 = canvas->scroll_x2;
+
+	if (y2)
+		*y2 = canvas->scroll_y2;
 }
 
 void
@@ -1974,7 +2088,6 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 {
 	double cx, cy;
 	int x1, y1;
-	int xmax, ymax;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
@@ -1983,8 +2096,8 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 	/* Re-center view */
 
 	gnome_canvas_c2w (canvas,
-			  DISPLAY_X1 (canvas) + canvas->width / 2,
-			  DISPLAY_Y1 (canvas) + canvas->height / 2,
+			  DISPLAY_X1 (canvas) - canvas->zoom_xofs + canvas->width / 2,
+			  DISPLAY_Y1 (canvas) - canvas->zoom_yofs + canvas->height / 2,
 			  &cx,
 			  &cy);
 
@@ -1995,17 +2108,14 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 			  cy - (canvas->height / (2.0 * n)),
 			  &x1, &y1);
 
-	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2, &xmax, &ymax);
-	gtk_layout_set_size (GTK_LAYOUT (canvas), xmax, ymax);
+	gtk_layout_freeze (GTK_LAYOUT (canvas));
 
-	canvas->layout.hadjustment->value = x1;
-	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.hadjustment), "value_changed");
-
-	canvas->layout.vadjustment->value = y1;
-	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "value_changed");
+	scroll_to (canvas, x1, y1);
 
 	canvas->need_repick = TRUE;
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->reconfigure) (canvas->root);
+
+	gtk_layout_thaw (GTK_LAYOUT (canvas));
 }
 
 void
@@ -2025,35 +2135,10 @@ gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height)
 void
 gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy)
 {
-	int hupper, vupper;
-
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
-	hupper = canvas->layout.hadjustment->upper;
-	vupper = canvas->layout.vadjustment->upper;
-
-	if (cx < 0)
-		cx = 0;
-
-	if (cx > (hupper - canvas->width))
-		cx = hupper - canvas->width;
-
-	if (cy < 0)
-		cy = 0;
-
-	if (cy > (vupper - canvas->height))
-		cy = vupper - canvas->height;
-
-	if (cx != (int) canvas->layout.hadjustment->value) {
-		canvas->layout.hadjustment->value = cx;
-		gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.hadjustment), "value_changed");
-	}
-
-	if (cy != (int) canvas->layout.vadjustment->value) {
-		canvas->layout.vadjustment->value = cy;
-		gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "value_changed");
-	}
+	scroll_to (canvas, cx, cy);
 }
 
 void

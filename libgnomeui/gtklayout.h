@@ -55,6 +55,8 @@ struct _GtkLayout {
   gulong configure_serial;
   gint scroll_x;
   gint scroll_y;
+
+  gint frozen : 1;
 };
 
 struct _GtkLayoutClass {
@@ -78,6 +80,13 @@ void           gtk_layout_move            (GtkLayout     *layout,
 void           gtk_layout_set_size        (GtkLayout     *layout, 
 			                   guint          width,
 			                   guint          height);
+
+/* These disable and enable moving and repainting the scrolling window of the GtkLayout,
+ * respectively.  If you want to update the layout's offsets but do not want it to
+ * repaint itself, you should use these functions.
+ */
+void           gtk_layout_freeze          (GtkLayout     *layout);
+void           gtk_layout_thaw            (GtkLayout     *layout);
 
 GtkAdjustment* gtk_layout_get_hadjustment (GtkLayout     *layout);
 GtkAdjustment* gtk_layout_get_vadjustment (GtkLayout     *layout);
