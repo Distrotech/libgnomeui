@@ -64,9 +64,6 @@ GType gnome_href_get_type(void) G_GNUC_CONST;
 GtkWidget *gnome_href_new(const gchar *url, const gchar *text);
 
 /* for bindings and subclassing, use the gnome_href_new from C */
-void gnome_href_construct(GnomeHRef *href,
-			  const gchar *url,
-			  const gchar *text);
 
 void gnome_href_set_url(GnomeHRef *href, const gchar *url);
 const gchar *gnome_href_get_url(GnomeHRef *href);

@@ -1,3 +1,13 @@
+2004-09-22  J.H.M. Dassen (Ray) <jdassen@debian.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=153151
+	* libgnomeui/gnome-entry.h: Removed prototype for
+	gnome_entry_construct, as that function was removed in
+	libgnomeui/gnome-entry.c 1.68 (2001-09-04).
+	* libgnomeui/gnome-href.h: Removed prototype for gnome_href_construct
+	as that function was removed in libgnomeui/gnome-href.c 1.31.2.1
+	(2001-08-30).
+
 2004-09-17  Matthias Clasen  <mclasen@redhat.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (gtk_file_system_gnome_vfs_parse): 

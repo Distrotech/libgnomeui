@@ -1,3 +1,12 @@
+libgnomeui 2.8.1
+----------------
+
+What's new since 2.8.0
+
+* Bug fixes:
+	- Removed prototypes for removed functions gnome_entry_construct and
+	  gnome_href_construct (J.H.M. Dassen (Ray))
+
 libgnomeui 2.8.0
 ----------------
 
