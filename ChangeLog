@@ -1,3 +1,7 @@
+2001-09-22  Abel Cheung <maddog@linux.org.hk>
+
+	* configure.in: Added "zh_TW" to ALL_LINGUAS.
+
 2001-09-22  Wang Jian <lark@linux.net.cn>
 
 	* configure.in(ALL_LINGUAS): Added zh_CN.
