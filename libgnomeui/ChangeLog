@@ -1,3 +1,9 @@
+Thu Apr 30 23:13:31 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.[ch]: added an accelerator table and
+	  accelerators since too many people complained about it.
+	  it doesn't work for the numpad which is kind of weird
+
 Thu Apr 30 21:31:43 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-client.c (client_set_prop_from_string): Don't include

@@ -54,6 +54,7 @@ struct _CalculatorButton {
 	gpointer data;
 	gpointer invdata;
 	gint convert_to_rad;
+	char key; /*key shortcut*/
 };
 
 typedef void (*GnomeCalcualtorResultChangedSignal) (GtkObject * object,
@@ -1035,53 +1036,53 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 
 static CalculatorButton buttons[8][5] = {
 	{
-		{N_("1/x"),(GtkSignalFunc)simple_func,c_inv,NULL,FALSE},
-		{N_("x^2"),(GtkSignalFunc)simple_func,c_pow2,sqrt,FALSE},
-		{N_("SQRT"),(GtkSignalFunc)simple_func,sqrt,c_pow2,FALSE},
-		{N_("CE/C"),(GtkSignalFunc)clear_calc,NULL,NULL,FALSE},
-		{N_("AC"),(GtkSignalFunc)reset_calc,NULL,NULL,FALSE}
+		{N_("1/x"),(GtkSignalFunc)simple_func,c_inv,NULL,FALSE,0},
+		{N_("x^2"),(GtkSignalFunc)simple_func,c_pow2,sqrt,FALSE,0},
+		{N_("SQRT"),(GtkSignalFunc)simple_func,sqrt,c_pow2,FALSE,0},
+		{N_("CE/C"),(GtkSignalFunc)clear_calc,NULL,NULL,FALSE,0},
+		{N_("AC"),(GtkSignalFunc)reset_calc,NULL,NULL,FALSE,0}
 	},{
 		{NULL,NULL,NULL,NULL}, /*inverse button*/
-		{N_("sin"),(GtkSignalFunc)simple_func,sin,asin,TRUE},
-		{N_("cos"),(GtkSignalFunc)simple_func,cos,acos,TRUE},
-		{N_("tan"),(GtkSignalFunc)simple_func,tan,atan,TRUE},
-		{N_("DEG"),(GtkSignalFunc)drg_toggle,NULL,NULL,FALSE}
+		{N_("sin"),(GtkSignalFunc)simple_func,sin,asin,TRUE,0},
+		{N_("cos"),(GtkSignalFunc)simple_func,cos,acos,TRUE,0},
+		{N_("tan"),(GtkSignalFunc)simple_func,tan,atan,TRUE,0},
+		{N_("DEG"),(GtkSignalFunc)drg_toggle,NULL,NULL,FALSE,0}
 	},{
-		{N_("e"),(GtkSignalFunc)set_e,NULL,NULL,FALSE},
-		{N_("EE"),(GtkSignalFunc)add_digit,"e+",NULL,FALSE},
-		{N_("log"),(GtkSignalFunc)simple_func,log10,c_pow10,FALSE},
-		{N_("ln"),(GtkSignalFunc)simple_func,log,c_powe,FALSE},
-		{N_("x^y"),(GtkSignalFunc)math_func,pow,NULL,FALSE}
+		{N_("e"),(GtkSignalFunc)set_e,NULL,NULL,FALSE,0},
+		{N_("EE"),(GtkSignalFunc)add_digit,"e+",NULL,FALSE,0},
+		{N_("log"),(GtkSignalFunc)simple_func,log10,c_pow10,FALSE,0},
+		{N_("ln"),(GtkSignalFunc)simple_func,log,c_powe,FALSE,0},
+		{N_("x^y"),(GtkSignalFunc)math_func,pow,NULL,FALSE,'^'}
 	},{
-		{N_("PI"),(GtkSignalFunc)set_pi,NULL,NULL,FALSE},
-		{N_("x!"),(GtkSignalFunc)simple_func,c_fact,NULL,FALSE},
-		{N_("("),(GtkSignalFunc)add_parenth,NULL,NULL,FALSE},
-		{N_(")"),(GtkSignalFunc)sub_parenth,NULL,NULL,FALSE},
-		{N_("/"),(GtkSignalFunc)math_func,c_div,NULL,FALSE}
+		{N_("PI"),(GtkSignalFunc)set_pi,NULL,NULL,FALSE,0},
+		{N_("x!"),(GtkSignalFunc)simple_func,c_fact,NULL,FALSE,'!'},
+		{N_("("),(GtkSignalFunc)add_parenth,NULL,NULL,FALSE,'('},
+		{N_(")"),(GtkSignalFunc)sub_parenth,NULL,NULL,FALSE,')'},
+		{N_("/"),(GtkSignalFunc)math_func,c_div,NULL,FALSE,'/'}
 	},{
-		{N_("STO"),(GtkSignalFunc)store_m,NULL,NULL,FALSE},
-		{N_("7"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("8"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("9"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("*"),(GtkSignalFunc)math_func,c_mul,NULL,FALSE}
+		{N_("STO"),(GtkSignalFunc)store_m,NULL,NULL,FALSE,0},
+		{N_("7"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'7'},
+		{N_("8"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'8'},
+		{N_("9"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'9'},
+		{N_("*"),(GtkSignalFunc)math_func,c_mul,NULL,FALSE,'*'}
 	},{
-		{N_("RCL"),(GtkSignalFunc)recall_m,NULL,NULL,FALSE},
-		{N_("4"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("5"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("6"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("-"),(GtkSignalFunc)math_func,c_sub,NULL,FALSE}
+		{N_("RCL"),(GtkSignalFunc)recall_m,NULL,NULL,FALSE,0},
+		{N_("4"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'4'},
+		{N_("5"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'5'},
+		{N_("6"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'6'},
+		{N_("-"),(GtkSignalFunc)math_func,c_sub,NULL,FALSE,'-'}
 	},{
-		{N_("SUM"),(GtkSignalFunc)sum_m,NULL,NULL,FALSE},
-		{N_("1"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("2"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("3"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("+"),(GtkSignalFunc)math_func,c_add,NULL,FALSE}
+		{N_("SUM"),(GtkSignalFunc)sum_m,NULL,NULL,FALSE,0},
+		{N_("1"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'1'},
+		{N_("2"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'2'},
+		{N_("3"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'3'},
+		{N_("+"),(GtkSignalFunc)math_func,c_add,NULL,FALSE,'+'}
 	},{
-		{N_("EXC"),(GtkSignalFunc)exchange_m,NULL,NULL,FALSE},
-		{N_("0"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("."),(GtkSignalFunc)add_digit,NULL,NULL,FALSE},
-		{N_("+/-"),(GtkSignalFunc)negate_val,c_neg,NULL,FALSE},
-		{N_("="),(GtkSignalFunc)no_func,NULL,NULL,FALSE}
+		{N_("EXC"),(GtkSignalFunc)exchange_m,NULL,NULL,FALSE,0},
+		{N_("0"),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'0'},
+		{N_("."),(GtkSignalFunc)add_digit,NULL,NULL,FALSE,'.'},
+		{N_("+/-"),(GtkSignalFunc)negate_val,c_neg,NULL,FALSE,0},
+		{N_("="),(GtkSignalFunc)no_func,NULL,NULL,FALSE,'='}
 	}
 };
 
@@ -1100,6 +1101,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gc->mode = GNOME_CALCULATOR_DEG;
 	gc->invert = FALSE;
 	gc->add_digit = FALSE;
+	gc->accel = gtk_accelerator_table_new();
 
 	gtk_signal_connect_after(GTK_OBJECT(gc),"realize",
 				 GTK_SIGNAL_FUNC(gnome_calculator_realized),
@@ -1118,10 +1120,29 @@ gnome_calculator_init (GnomeCalculator *gc)
 				gtk_signal_connect(GTK_OBJECT(w),"clicked",
 						   but->signal_func,
 						   but);
+				if(but->key) {
+					gtk_widget_install_accelerator(w,
+						gc->accel,
+						"clicked",
+						but->key,0);
+					gtk_widget_install_accelerator(w,
+						gc->accel,
+						"clicked",
+						but->key,
+						GDK_SHIFT_MASK);
+					gtk_widget_install_accelerator(w,
+						gc->accel,
+						"clicked",
+						but->key,
+						GDK_LOCK_MASK);
+				}
 				gtk_object_set_user_data(GTK_OBJECT(w),gc);
 				gtk_widget_show(w);
 				gtk_table_attach(GTK_TABLE(table),w,
-						 x,x+1,y,y+1, GTK_FILL | GTK_EXPAND | GTK_SHRINK, 0, 2, 2);
+						 x,x+1,y,y+1,
+						 GTK_FILL | GTK_EXPAND |
+						 	GTK_SHRINK,
+						 0, 2, 2);
 			}
 		}
 	}

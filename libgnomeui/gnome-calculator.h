@@ -46,6 +46,8 @@ struct _GnomeCalculator {
 	GtkWidget *invert_button;
 
 	GList *stack;
+
+	GtkAcceleratorTable *accel;
 };
 
 struct _GnomeCalculatorClass {
