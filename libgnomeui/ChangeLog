@@ -24,15 +24,13 @@
  	GTK+ grab.
 	(gnome_dock_item_button_changed): Do not remove the GTK+ grab.
 	(gnome_dock_item_remove): Likewise.
-	(gnome_dock_item_grab_pointer): Grab on `item->window', not
- 	`item->bin_window'.
 	(gnome_dock_item_map_event): Removed.
 
 	* gnome-dock-item.c (gnome_dock_item_size_request): Avoid calling
  	gtk_widget_size_request with `requisition' == `widget->requisition'.
-	(size_request_v): Likewise.
+	* gnome-dock.c (size_request_v): Likewise.
 	(size_request_h): Likewise.
-	* gnome-dock.c (gnome_dock_size_request): Likewise.
+	(gnome_dock_size_request): Likewise.
 
 1999-02-15  Elliot Lee  <sopwith@redhat.com>
 
