@@ -1,3 +1,8 @@
+2001-06-01  Martin Baulig  <baulig@suse.de>
+
+	* gnome-image-entry-component.c, gnome-icon-selector-component.c:
+	Use gnome_selector_set_vfs_filter() to set the directory filter.
+
 2001-05-23  Joe Shaw  <joe@ximian.com>
 
 	* gnome-image-entry-component.c (drag_data_received): Change
