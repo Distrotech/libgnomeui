@@ -224,7 +224,7 @@ gnome_druid_page_realize (GtkWidget *widget)
  * 
  * Description: This will emit the "next" signal for that particular page.  It
  * is called by gnome-druid exclusively.  It is expected that non-linear Druid's
- * will override this signal and return TRUE if it handles changing pages.
+ * will override this signal and return TRUE if it handles changing pages.  
  * 
  * Return value: This function will return FALSE by default.
  **/
