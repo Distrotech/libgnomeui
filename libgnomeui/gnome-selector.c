@@ -52,8 +52,9 @@
 
 #undef DEBUG_ASYNC_HANDLE
 
+typedef struct _GnomeSelectorListData    GnomeSelectorListData;
 typedef struct _GnomeSelectorHistoryItem GnomeSelectorHistoryItem;
-typedef struct _GnomeSelectorAsyncData GnomeSelectorAsyncData;
+typedef struct _GnomeSelectorAsyncData   GnomeSelectorAsyncData;
 
 struct _GnomeSelectorPrivate {
     GConfClient *client;
@@ -64,10 +65,8 @@ struct _GnomeSelectorPrivate {
     gchar       *gconf_history_dir;
     gchar       *gconf_history_key;
     gchar       *gconf_uri_list_key;
-    gchar       *gconf_default_uri_list_key;
 
-    GSList      *default_uri_list;
-    GSList      *uri_list;
+    GPtrArray   *lists;
 
     GSList      *history;
     guint        max_history_length;
@@ -92,6 +91,11 @@ struct _GnomeSelectorPrivate {
     guint        frozen;
 
     GList       *async_ops;
+};
+
+struct _GnomeSelectorListData {
+    GQuark quark;
+    GSList *list;
 };
 
 struct _GnomeSelectorHistoryItem {
@@ -145,29 +149,42 @@ static void gnome_selector_set_param           (GObject            *object,
 
 static void     update_handler                 (GnomeSelector   *selector);
 static void     browse_handler                 (GnomeSelector   *selector);
-static void     clear_handler                  (GnomeSelector   *selector);
-static void     clear_default_handler          (GnomeSelector   *selector);
+static void     clear_handler                  (GnomeSelector            *selector,
+						guint                     list_id);
 
 static gchar   *get_uri_handler                (GnomeSelector            *selector);
 static void     set_uri_handler                (GnomeSelector            *selector,
-                                                const gchar              *filename,
+                                                const gchar              *uri,
 						GnomeSelectorAsyncHandle *async_handle);
 
 static void     add_uri_handler                (GnomeSelector            *selector,
-                                                const gchar              *directory,
+                                                const gchar              *uri,
                                                 gint                      position,
+						guint                     list_id,
 						GnomeSelectorAsyncHandle *async_handle);
-static void     add_uri_default_handler        (GnomeSelector            *selector,
-                                                const gchar              *directory,
+
+static void     add_file_handler               (GnomeSelector            *selector,
+                                                const gchar              *uri,
                                                 gint                      position,
+						guint                     list_id,
+						GnomeSelectorAsyncHandle *async_handle);
+
+static void     add_directory_handler          (GnomeSelector            *selector,
+                                                const gchar              *uri,
+                                                gint                      position,
+						guint                     list_id,
+						GnomeSelectorAsyncHandle *async_handle);
+static void     add_uri_list_handler           (GnomeSelector            *selector,
+						GSList                   *list,
+						gint                      position,
+						guint                     list_id,
 						GnomeSelectorAsyncHandle *async_handle);
 
 static GSList  *get_uri_list_handler           (GnomeSelector            *selector,
-                                                gboolean                  defaultp);
+                                                guint                     list_id);
 
 static void     free_entry_func                (gpointer         data,
                                                 gpointer         user_data);
-static GSList  *_gnome_selector_copy_list      (GSList          *thelist);
 
 
 #define GNOME_SELECTOR_GCONF_DIR "/desktop/standard/gnome-selector"
@@ -180,15 +197,12 @@ enum {
     CHANGED_SIGNAL,
     BROWSE_SIGNAL,
     CLEAR_SIGNAL,
-    CLEAR_DEFAULT_SIGNAL,
     CHECK_FILENAME_SIGNAL,
     GET_URI_SIGNAL,
     SET_URI_SIGNAL,
     ADD_FILE_SIGNAL,
-    ADD_FILE_DEFAULT_SIGNAL,
     CHECK_DIRECTORY_SIGNAL,
     ADD_DIRECTORY_SIGNAL,
-    ADD_DIRECTORY_DEFAULT_SIGNAL,
     FREEZE_SIGNAL,
     UPDATE_SIGNAL,
     UPDATE_URI_LIST_SIGNAL,
@@ -201,8 +215,8 @@ enum {
     ACTIVATE_ENTRY_SIGNAL,
     HISTORY_CHANGED_SIGNAL,
     GET_URI_LIST_SIGNAL,
+    ADD_URI_LIST_SIGNAL,
     ADD_URI_SIGNAL,
-    ADD_URI_DEFAULT_SIGNAL,
     LAST_SIGNAL
 };
 
@@ -251,18 +265,9 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   clear),
-			gtk_signal_default_marshaller,
-			GTK_TYPE_NONE,
-			0);
-    gnome_selector_signals [CLEAR_DEFAULT_SIGNAL] =
-	gtk_signal_new ("clear_default",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   clear_default),
-			gtk_signal_default_marshaller,
-			GTK_TYPE_NONE,
-			0);
+			gtk_marshal_VOID__UINT,
+			GTK_TYPE_NONE, 1,
+			GTK_TYPE_UINT);
     gnome_selector_signals [FREEZE_SIGNAL] =
 	gtk_signal_new ("freeze",
 			GTK_RUN_LAST,
@@ -315,19 +320,9 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_file),
-			gnome_marshal_VOID__POINTER_INT_BOXED,
-			GTK_TYPE_NONE, 3,
-			GTK_TYPE_STRING, GTK_TYPE_INT,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
-    gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL] =
-	gtk_signal_new ("add_file_default",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   add_file_default),
-			gnome_marshal_VOID__POINTER_INT_BOXED,
-			GTK_TYPE_NONE, 3,
-			GTK_TYPE_STRING, GTK_TYPE_INT,
+			gnome_marshal_VOID__POINTER_INT_UINT_BOXED,
+			GTK_TYPE_NONE, 4,
+			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [ADD_DIRECTORY_SIGNAL] =
 	gtk_signal_new ("add_directory",
@@ -335,19 +330,9 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_directory),
-			gnome_marshal_VOID__POINTER_INT_BOXED,
-			GTK_TYPE_NONE, 3,
-			GTK_TYPE_STRING, GTK_TYPE_INT,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
-    gnome_selector_signals [ADD_DIRECTORY_DEFAULT_SIGNAL] =
-	gtk_signal_new ("add_directory_default",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   add_directory_default),
-			gnome_marshal_VOID__POINTER_INT_BOXED,
-			GTK_TYPE_NONE, 3,
-			GTK_TYPE_STRING, GTK_TYPE_INT,
+			gnome_marshal_VOID__POINTER_INT_UINT_BOXED,
+			GTK_TYPE_NONE, 4,
+			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [ADD_URI_SIGNAL] =
 	gtk_signal_new ("add_uri",
@@ -355,19 +340,9 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_uri),
-			gnome_marshal_VOID__POINTER_INT_BOXED,
-			GTK_TYPE_NONE, 3,
-			GTK_TYPE_STRING, GTK_TYPE_INT,
-			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
-    gnome_selector_signals [ADD_URI_DEFAULT_SIGNAL] =
-	gtk_signal_new ("add_uri_default",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   add_uri_default),
-			gnome_marshal_VOID__POINTER_INT_BOXED,
-			GTK_TYPE_NONE, 3,
-			GTK_TYPE_STRING, GTK_TYPE_INT,
+			gnome_marshal_VOID__POINTER_INT_UINT_BOXED,
+			GTK_TYPE_NONE, 4,
+			GTK_TYPE_STRING, GTK_TYPE_INT, GTK_TYPE_UINT,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [UPDATE_URI_LIST_SIGNAL] =
 	gtk_signal_new ("update_uri_list",
@@ -375,16 +350,16 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   update_uri_list),
-			gtk_signal_default_marshaller,
-			GTK_TYPE_NONE,
-			0);
+			gtk_marshal_VOID__UINT,
+			GTK_TYPE_NONE, 1,
+			GTK_TYPE_UINT);
     gnome_selector_signals [SET_SELECTION_MODE_SIGNAL] =
 	gtk_signal_new ("set_selection_mode",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   set_selection_mode),
-			gtk_marshal_VOID__BOXED,
+			gtk_marshal_VOID__ENUM,
 			GTK_TYPE_NONE, 1,
 			GTK_TYPE_SELECTION_MODE);
     gnome_selector_signals [GET_SELECTION_SIGNAL] =
@@ -451,6 +426,16 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_POINTER__BOOLEAN,
 			GTK_TYPE_POINTER, 1,
 			GTK_TYPE_BOOL);
+    gnome_selector_signals [ADD_URI_LIST_SIGNAL] =
+	gtk_signal_new ("add_uri_list",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   add_uri_list),
+			gnome_marshal_VOID__POINTER_INT_BOOLEAN_BOXED,
+			GTK_TYPE_NONE, 4,
+			GTK_TYPE_POINTER, GTK_TYPE_INT, GTK_TYPE_BOOL,
+			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [CHECK_FILENAME_SIGNAL] =
 	gtk_signal_new ("check_filename",
 			GTK_RUN_LAST,
@@ -482,16 +467,17 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
     class->browse = browse_handler;
     class->clear = clear_handler;
-    class->clear_default = clear_default_handler;
     class->update = update_handler;
 
     class->get_uri = get_uri_handler;
     class->set_uri = set_uri_handler;
 
     class->add_uri = add_uri_handler;
-    class->add_uri_default = add_uri_default_handler;
+    class->add_file = add_file_handler;
+    class->add_directory = add_directory_handler;
 
     class->get_uri_list = get_uri_list_handler;
+    class->add_uri_list = add_uri_list_handler;
 }
 
 static void
@@ -534,12 +520,22 @@ gnome_selector_get_param (GObject *object, guint param_id, GValue *value,
 static void
 gnome_selector_init (GnomeSelector *selector)
 {
+    guint i;
+
     selector->_priv = g_new0 (GnomeSelectorPrivate, 1);
 
     selector->_priv->changed = FALSE;
 
     selector->_priv->selector_widget = NULL;
     selector->_priv->browse_dialog = NULL;
+
+    selector->_priv->lists = g_ptr_array_sized_new (GNOME_SELECTOR_LIST_MAX);
+    for (i = 0; i < GNOME_SELECTOR_LIST_MAX; i++) {
+	GnomeSelectorListData *data;
+
+	data = g_new0 (GnomeSelectorListData, 1);
+	g_ptr_array_index (selector->_priv->lists, i) = data;
+    }
 }
 
 /*
@@ -552,8 +548,10 @@ update_handler (GnomeSelector *selector)
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
+#if 0
     if (selector->_priv->need_rebuild)
 	gnome_selector_update_uri_list (selector);
+#endif
 
     if (selector->_priv->history_changed)
 	gtk_signal_emit (GTK_OBJECT (selector),
@@ -588,27 +586,19 @@ free_entry_func (gpointer data, gpointer user_data)
 }
 
 static void
-clear_handler (GnomeSelector *selector)
+clear_handler (GnomeSelector *selector, guint list_id)
 {
+    GSList **list_ptr;
+
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-    g_slist_foreach (selector->_priv->uri_list, free_entry_func,
-		     selector);
-    g_slist_free (selector->_priv->uri_list);
-    selector->_priv->uri_list = NULL;
-}
+    list_ptr = _gnome_selector_get_list_by_id (selector, list_id);
+    g_assert (list_ptr != NULL);
 
-static void
-clear_default_handler (GnomeSelector *selector)
-{
-    g_return_if_fail (selector != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR (selector));
-
-    g_slist_foreach (selector->_priv->default_uri_list, free_entry_func,
-		     selector);
-    g_slist_free (selector->_priv->default_uri_list);
-    selector->_priv->default_uri_list = NULL;
+    g_slist_foreach (*list_ptr, free_entry_func, selector);
+    g_slist_free (*list_ptr);
+    *list_ptr = NULL;
 }
 
 static gchar *
@@ -627,8 +617,6 @@ set_uri_handler (GnomeSelector *selector, const gchar *filename,
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-    g_message (G_STRLOC ": '%s'", filename);
-
     gnome_selector_set_entry_text (selector, filename);
     /* gnome_selector_activate_entry (selector); */
 
@@ -638,59 +626,77 @@ set_uri_handler (GnomeSelector *selector, const gchar *filename,
 
 static void
 add_uri_handler (GnomeSelector *selector, const gchar *uri, gint position,
-		 GnomeSelectorAsyncHandle *async_handle)
+		 guint list_id, GnomeSelectorAsyncHandle *async_handle)
 {
+    GSList **list_ptr;
+
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
     g_return_if_fail (uri != NULL);
     g_return_if_fail (position >= -1);
 
-    g_message (G_STRLOC ": `%s' - %d", uri, position);
+    g_message (G_STRLOC ": `%s' - %d - %d", uri, list_id, position);
+
+    list_ptr = _gnome_selector_get_list_by_id (selector, list_id);
+    g_assert (list_ptr != NULL);
 
     if (position == -1)
-	selector->_priv->uri_list = g_slist_append
-	    (selector->_priv->uri_list, g_strdup (uri));
+	*list_ptr = g_slist_append (*list_ptr, g_strdup (uri));
     else
-	selector->_priv->uri_list = g_slist_insert
-	    (selector->_priv->uri_list, g_strdup (uri),
-	     position);
+	*list_ptr = g_slist_insert (*list_ptr, g_strdup (uri), position);
+
+    if (async_handle != NULL)
+	_gnome_selector_async_handle_completed (async_handle, TRUE);
 }
 
 static void
-add_uri_default_handler (GnomeSelector *selector, const gchar *uri,
-			 gint position, GnomeSelectorAsyncHandle *async_handle)
+add_file_handler (GnomeSelector *selector, const gchar *uri, gint position,
+		 guint list_id, GnomeSelectorAsyncHandle *async_handle)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
-    g_return_if_fail (uri != NULL);
-    g_return_if_fail (position >= -1);
- 
-    g_message (G_STRLOC ": `%s' - %d", uri, position);
 
-    if (position == -1)
-	selector->_priv->default_uri_list = g_slist_append
-	    (selector->_priv->default_uri_list, g_strdup (uri));
-    else
-	selector->_priv->default_uri_list = g_slist_insert
-	    (selector->_priv->default_uri_list, g_strdup (uri),
-	     position);
+    if (async_handle != NULL)
+	_gnome_selector_async_handle_completed (async_handle, TRUE);
 }
 
+static void
+add_directory_handler (GnomeSelector *selector, const gchar *uri, gint position,
+		       guint list_id, GnomeSelectorAsyncHandle *async_handle)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    if (async_handle != NULL)
+	_gnome_selector_async_handle_completed (async_handle, TRUE);
+}
+
+static void
+add_uri_list_handler (GnomeSelector *selector, GSList *list, gint position,
+		      guint list_id, GnomeSelectorAsyncHandle *async_handle)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    if (async_handle != NULL)
+	_gnome_selector_async_handle_completed (async_handle, TRUE);
+}
 
 static GSList *
-get_uri_list_handler (GnomeSelector *selector, gboolean defaultp)
+get_uri_list_handler (GnomeSelector *selector, guint list_id)
 {
+    GSList **list_ptr;
+
     g_return_val_if_fail (selector != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
 
-    g_message (G_STRLOC ": %d", defaultp);
+    g_message (G_STRLOC ": %d", list_id);
 
-    if (defaultp)
-	return _gnome_selector_copy_list (selector->_priv->default_uri_list);
-    else
-	return _gnome_selector_copy_list (selector->_priv->uri_list);
+    list_ptr = _gnome_selector_get_list_by_id (selector, list_id);
+    g_assert (list_ptr != NULL);
+
+    return _gnome_selector_deep_copy_slist (*list_ptr);
 }
-
 
 /*
  * Misc callbacks.
@@ -704,9 +710,36 @@ browse_clicked_cb (GtkWidget *widget, gpointer data)
 }
 
 static void
+default_clicked_async_cb (GnomeSelector *selector,
+			  GnomeSelectorAsyncHandle *async_handle,
+			  GnomeSelectorAsyncType async_type,
+			  const char *uri, GError *error,
+			  gboolean success, gpointer user_data)
+{
+    g_message (G_STRLOC ": %d - `%s' - %p", success, uri, async_handle);
+    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
+}
+
+static void
 default_clicked_cb (GtkWidget *widget, gpointer data)
 {
-    gnome_selector_set_to_defaults (GNOME_SELECTOR (data));
+    GnomeSelector *selector;
+    GSList *list;
+
+    g_return_if_fail (data != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (data));
+
+    selector = GNOME_SELECTOR (data);
+
+    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
+    list = gnome_selector_get_uri_list (selector, GNOME_SELECTOR_LIST_DEFAULT);
+    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
+    gnome_selector_clear (selector, GNOME_SELECTOR_LIST_PRIMARY);
+    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
+    gnome_selector_add_uri_list (selector, NULL, list, 0,
+				 GNOME_SELECTOR_LIST_PRIMARY,
+				 default_clicked_async_cb, NULL);
+    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
 }
 
 static void
@@ -761,8 +794,6 @@ gnome_selector_construct (GnomeSelector *selector,
 	    (GNOME_SELECTOR_GCONF_DIR, priv->history_id);
 	priv->gconf_history_key = gconf_concat_dir_and_key
 	    (priv->gconf_history_dir, "history");
-	priv->gconf_default_uri_list_key = gconf_concat_dir_and_key
-	    (priv->gconf_history_dir, "default-uri-list");
 	priv->gconf_uri_list_key = gconf_concat_dir_and_key
 	    (priv->gconf_history_dir, "uri-list");
 
@@ -901,15 +932,21 @@ gnome_selector_finalize (GObject *object)
     selector = GNOME_SELECTOR (object);
 
     if (selector->_priv) {
-	g_slist_foreach (selector->_priv->default_uri_list,
-			 free_entry_func, selector);
-	g_slist_foreach (selector->_priv->uri_list,
-			 free_entry_func, selector);
+	guint i;
+
+	for (i = 0; i < selector->_priv->lists->len; i++) {
+	    GnomeSelectorListData *data = g_ptr_array_index
+		(selector->_priv->lists, i);
+
+	    g_slist_foreach (data->list, free_entry_func, selector);
+	}
+
+	g_ptr_array_free (selector->_priv->lists, TRUE);
+
 	g_free (selector->_priv->dialog_title);
 	g_free (selector->_priv->history_id);
 	g_free (selector->_priv->gconf_history_dir);
 	g_free (selector->_priv->gconf_history_key);
-	g_free (selector->_priv->gconf_default_uri_list_key);
 	g_free (selector->_priv->gconf_uri_list_key);
     }
 
@@ -967,7 +1004,7 @@ gnome_selector_set_dialog_title (GnomeSelector *selector,
 }
 
 GSList *
-gnome_selector_get_uri_list (GnomeSelector *selector, gboolean defaultp)
+gnome_selector_get_uri_list (GnomeSelector *selector, guint list_id)
 {
     GSList *retval = NULL;
 
@@ -976,11 +1013,33 @@ gnome_selector_get_uri_list (GnomeSelector *selector, gboolean defaultp)
 
     gtk_signal_emit (GTK_OBJECT (selector),
 		     gnome_selector_signals [GET_URI_LIST_SIGNAL],
-		     defaultp, &retval);
+		     list_id, &retval);
 
     return retval;
 }
 
+void
+gnome_selector_add_uri_list (GnomeSelector *selector,
+			     GnomeSelectorAsyncHandle **async_handle_return,
+			     GSList *uri_list, gint position, guint list_id,
+			     GnomeSelectorAsyncFunc async_func,
+			     gpointer user_data)
+{
+    GnomeSelectorAsyncHandle *async_handle;
+
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    async_handle = _gnome_selector_async_handle_get
+	(selector, GNOME_SELECTOR_ASYNC_TYPE_ADD_URI_LIST,
+	 NULL, async_func, user_data);
+    if (async_handle_return != NULL)
+	*async_handle_return = async_handle;
+
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [ADD_URI_LIST_SIGNAL],
+		     uri_list, position, list_id, async_handle);
+}
 
 void
 gnome_selector_set_selection_mode (GnomeSelector *selector,
@@ -1039,18 +1098,15 @@ gnome_selector_update (GnomeSelector *selector)
  * Returns:
  */
 void
-gnome_selector_clear (GnomeSelector *selector, gboolean defaultp)
+gnome_selector_clear (GnomeSelector *selector, guint list_id)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
     gnome_selector_freeze (selector);
-    if (defaultp)
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [CLEAR_DEFAULT_SIGNAL]);
-    else
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [CLEAR_SIGNAL]);
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [CLEAR_SIGNAL],
+		     list_id);
     gnome_selector_thaw (selector);
 
     selector->_priv->need_rebuild = TRUE;
@@ -1131,13 +1187,14 @@ gnome_selector_set_uri (GnomeSelector *selector,
  * Returns:
  */
 void
-gnome_selector_update_uri_list (GnomeSelector *selector)
+gnome_selector_update_uri_list (GnomeSelector *selector, guint list_id)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
     gtk_signal_emit (GTK_OBJECT (selector),
-		     gnome_selector_signals [UPDATE_URI_LIST_SIGNAL]);
+		     gnome_selector_signals [UPDATE_URI_LIST_SIGNAL],
+		     list_id);
 }
 
 
@@ -1501,8 +1558,61 @@ gnome_selector_clear_history (GnomeSelector *selector)
     set_history_changed (selector);
 }
 
-static GSList *
-_gnome_selector_copy_list (GSList *thelist)
+guint
+_gnome_selector_register_list (GnomeSelector *selector, GQuark list_quark)
+{
+    GnomeSelectorListData *data;
+    guint i;
+
+    g_return_val_if_fail (selector != NULL, 0);
+    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), 0);
+
+    data = g_new0 (GnomeSelectorListData, 1);
+    data->quark = list_quark;
+
+    g_ptr_array_add (selector->_priv->lists, data);
+
+    for (i = 0; i < selector->_priv->lists->len; i++)
+	if (g_ptr_array_index (selector->_priv->lists, i) == data)
+	    return i;
+
+    g_assert_not_reached ();
+    return 0;
+}
+
+void
+_gnome_selector_unregister_list (GnomeSelector *selector, guint list_id)
+{
+    GnomeSelectorListData *data;
+
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    data = g_ptr_array_remove_index (selector->_priv->lists, list_id);
+    if (data == NULL)
+	return;
+
+    _gnome_selector_deep_free_slist (data->list);
+    g_free (data);
+}
+
+GSList **
+_gnome_selector_get_list_by_id (GnomeSelector *selector, guint list_id)
+{
+    GnomeSelectorListData *data;
+
+    g_return_val_if_fail (selector != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+    data = g_ptr_array_index (selector->_priv->lists, list_id);
+    if (data == NULL)
+	return NULL;
+    else
+	return &data->list;
+}
+
+GSList *
+_gnome_selector_deep_copy_slist (GSList *thelist)
 {
     GSList *retval = NULL, *c;
 
@@ -1513,50 +1623,37 @@ _gnome_selector_copy_list (GSList *thelist)
     return retval;
 }
 
-static void
-_gnome_selector_free_list (GSList *thelist)
+void
+_gnome_selector_deep_free_slist (GSList *thelist)
 {
     g_slist_foreach (thelist, (GFunc) g_free, NULL);
     g_slist_free (thelist);
 }
 
-void
-gnome_selector_set_to_defaults (GnomeSelector *selector)
-{
-    g_return_if_fail (selector != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR (selector));
-
-    g_warning (G_STRLOC ": this function is not yet implemented.");
-}
-
 static void
 gnome_selector_save_all (GnomeSelector *selector)
 {
-    GSList *default_uri_list, *uri_list;
+#if 0
+    GSList *uri_list;
     gboolean result;
+#endif
 
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-    if (!selector->_priv->gconf_default_uri_list_key ||
-	!selector->_priv->gconf_uri_list_key)
+#if 0
+    if (!selector->_priv->gconf_uri_list_key)
 	return;
 
-    default_uri_list = gnome_selector_get_uri_list (selector, TRUE);
     uri_list = gnome_selector_get_uri_list (selector, FALSE);
-
-    result = gconf_client_set_list (selector->_priv->client,
-				    selector->_priv->gconf_default_uri_list_key,
-				    GCONF_VALUE_STRING, default_uri_list,
-				    NULL);
 
     result = gconf_client_set_list (selector->_priv->client,
 				    selector->_priv->gconf_uri_list_key,
 				    GCONF_VALUE_STRING, uri_list,
 				    NULL);
 
-    _gnome_selector_free_list (default_uri_list);
-    _gnome_selector_free_list (uri_list);
+    _gnome_selector_deep_free_slist (uri_list);
+#endif
 }
 
 static void
@@ -1565,15 +1662,10 @@ gnome_selector_load_all (GnomeSelector *selector)
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-    if (!selector->_priv->gconf_default_uri_list_key ||
-	!selector->_priv->gconf_uri_list_key)
+    if (!selector->_priv->gconf_uri_list_key)
 	return;
 
-    selector->_priv->default_uri_list = gconf_client_get_list
-	(selector->_priv->client,
-	 selector->_priv->gconf_default_uri_list_key,
-	 GCONF_VALUE_STRING, NULL);
-
+#if 0
     selector->_priv->uri_list = gconf_client_get_list
 	(selector->_priv->client,
 	 selector->_priv->gconf_uri_list_key,
@@ -1585,6 +1677,7 @@ gnome_selector_load_all (GnomeSelector *selector)
 	selector->_priv->dirty = TRUE;
     else
 	gnome_selector_update (selector);
+#endif
 }
 
 GnomeSelectorAsyncHandle *
@@ -1608,6 +1701,9 @@ _gnome_selector_async_handle_get (GnomeSelector *selector,
     async_handle->uri = g_strdup (uri);
 
     gtk_object_ref (GTK_OBJECT (async_handle->selector));
+    g_message (G_STRLOC ": ref %p -> %p (%d)", async_handle,
+	       async_handle->selector,
+	       G_OBJECT (async_handle->selector)->ref_count);
 
     selector->_priv->async_ops = g_list_prepend (selector->_priv->async_ops,
 						 async_handle);
@@ -1679,6 +1775,7 @@ _gnome_selector_async_handle_completed (GnomeSelectorAsyncHandle *async_handle,
 
     g_return_if_fail (async_handle != NULL);
     g_assert (GNOME_IS_SELECTOR (async_handle->selector));
+    g_assert (!async_handle->destroyed);
 
     selector = async_handle->selector;
 
@@ -1776,6 +1873,10 @@ gnome_selector_async_handle_unref (GnomeSelectorAsyncHandle *async_handle)
 	if (async_handle->error)
 	    g_error_free (async_handle->error);
 
+	g_message (G_STRLOC ": unref %p -> %p (%d)", async_handle,
+		   async_handle->selector,
+		   G_OBJECT (async_handle->selector)->ref_count);
+
 	gtk_object_unref (GTK_OBJECT (async_handle->selector));
 	g_assert (async_handle->destroyed);
 
@@ -1838,7 +1939,7 @@ gnome_selector_check_directory (GnomeSelector *selector,
 void
 gnome_selector_add_file (GnomeSelector *selector,
 			 GnomeSelectorAsyncHandle **async_handle_return,
-			 const gchar *filename, gint position, gboolean defaultp,
+			 const gchar *filename, gint position, guint list_id,
 			 GnomeSelectorAsyncFunc async_func,
 			 gpointer user_data)
 {
@@ -1854,21 +1955,16 @@ gnome_selector_add_file (GnomeSelector *selector,
     if (async_handle_return != NULL)
 	*async_handle_return = async_handle;
 
-    if (defaultp)
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL],
-			 filename, position, async_handle);
-    else
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_FILE_SIGNAL],
-			 filename, position, async_handle);
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [ADD_FILE_SIGNAL],
+		     filename, position, list_id, async_handle);
 }
 
 void
 gnome_selector_add_directory (GnomeSelector *selector,
 			      GnomeSelectorAsyncHandle **async_handle_return,
-			      const gchar *directory, gint position, gboolean defaultp,
-			      GnomeSelectorAsyncFunc async_func,
+			      const gchar *directory, gint position,
+			      guint list_id, GnomeSelectorAsyncFunc async_func,
 			      gpointer user_data)
 {
     GnomeSelectorAsyncHandle *async_handle;
@@ -1883,20 +1979,15 @@ gnome_selector_add_directory (GnomeSelector *selector,
     if (async_handle_return != NULL)
 	*async_handle_return = async_handle;
 
-    if (defaultp)
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_DIRECTORY_DEFAULT_SIGNAL],
-			 directory, position, async_handle);
-    else
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_DIRECTORY_SIGNAL],
-			 directory, position, async_handle);
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [ADD_DIRECTORY_SIGNAL],
+		     directory, position, list_id, async_handle);
 }
 
 void
 gnome_selector_add_uri (GnomeSelector *selector,
 			GnomeSelectorAsyncHandle **async_handle_return,
-			const gchar *uri, gint position, gboolean defaultp,
+			const gchar *uri, gint position, guint list_id,
 			GnomeSelectorAsyncFunc async_func,
 			gpointer user_data)
 {
@@ -1912,14 +2003,9 @@ gnome_selector_add_uri (GnomeSelector *selector,
     if (async_handle_return != NULL)
 	*async_handle_return = async_handle;
 
-    if (defaultp)
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_URI_DEFAULT_SIGNAL],
-			 uri, position, async_handle);
-    else
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_URI_SIGNAL],
-			 uri, position, async_handle);
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [ADD_URI_SIGNAL],
+		     uri, position, list_id, async_handle);
 }
 
 

@@ -1,3 +1,33 @@
+2000-12-13  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector.h (GnomeSelector): Merged the "clear" and
+	"clear_default" signals into one "clear" signal with a `list_id'
+	argument; added `list_id' argument to the "update_uri_list"
+	signal; changed the `defaulpt' argument of the "get_uri_list"
+	signal to a `list_id' argument; added new "add_uri_list" signal;
+	merged the "add_file" and "add_file_default" signals into one
+	"add_file" signal with a `list_id' argument; did the same for the
+	"add_directory" and "add_uri" signals.
+	(gnome_selector_add_file): Changed the `gboolean defaultp' argument
+	into `guint list_id'.
+	(gnome_selector_add_directory): Likewise.
+	(gnome_selector_add_uri): Likewise.
+	(gnome_selector_get_uri_list): Likewise.
+	(gnome_selector_clear): Likewise.
+	(gnome_selector_update_uri_list): Added `guint list_id' argument.
+	(gnome_selector_add_uri_list): New function.
+	(gnome_selector_set_uri_list): Removed.
+	(gnome_selector_set_to_defaults): Removed.
+
+	* gnome-selectorP.h (_gnome_selector_register_list): New function.
+        (_gnome_selector_unregister_list): New function.
+	(_gnome_selector_get_list_by_id): New function.
+	(_gnome_selector_deep_copy_slist): New function.
+	(_gnome_selector_deep_free_slist): New function.
+
+	* gnome-selector.c: All handling with the lists now takes place here
+	and not in the subclasses.
+
 2000-12-08  Martin Baulig  <baulig@suse.de>
 
 	* animator_demo.c, dock_demo.c, mdi_demo.c, stock_demo.c,

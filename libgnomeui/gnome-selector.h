@@ -76,6 +76,12 @@ enum {
     GNOME_SELECTOR_AUTO_SAVE_ALL           = 1 << 17
 };
 
+enum {
+    GNOME_SELECTOR_LIST_PRIMARY            = 0,
+    GNOME_SELECTOR_LIST_DEFAULT,
+    GNOME_SELECTOR_LIST_MAX
+};
+
 #define GNOME_SELECTOR_USER_FLAGS          (~((1 << 16)-1))
 
 struct _GnomeSelector {
@@ -90,8 +96,8 @@ struct _GnomeSelectorClass {
 
     void     (*changed)               (GnomeSelector            *selector);
     void     (*browse)                (GnomeSelector            *selector);
-    void     (*clear)                 (GnomeSelector            *selector);
-    void     (*clear_default)         (GnomeSelector            *selector);
+    void     (*clear)                 (GnomeSelector            *selector,
+                                       guint                     list_id);
 
     void     (*freeze)                (GnomeSelector            *selector);
     void     (*update)                (GnomeSelector            *selector);
@@ -107,10 +113,16 @@ struct _GnomeSelectorClass {
                                        const gchar              *text);
     void     (*activate_entry)        (GnomeSelector            *selector);
 
-    void     (*update_uri_list)       (GnomeSelector            *selector);
+    void     (*update_uri_list)       (GnomeSelector            *selector,
+                                       guint                     list_id);
 
     GSList * (*get_uri_list)          (GnomeSelector            *selector,
-                                       gboolean                  defaultp);
+                                       guint                     list_id);
+    void     (*add_uri_list)          (GnomeSelector            *selector,
+                                       GSList                   *list,
+                                       gint                      position,
+                                       guint                     list_id,
+                                       GnomeSelectorAsyncHandle *async_handle);
 
     void     (*set_selection_mode)    (GnomeSelector            *selector,
                                        GtkSelectionMode          mode);
@@ -131,27 +143,18 @@ struct _GnomeSelectorClass {
     void     (*add_file)              (GnomeSelector            *selector,
                                        const gchar              *filename,
                                        gint                      position,
-                                       GnomeSelectorAsyncHandle *async_handle);
-    void     (*add_file_default)      (GnomeSelector            *selector,
-                                       const gchar              *filename,
-                                       gint                      position,
+                                       guint                     list_id,
                                        GnomeSelectorAsyncHandle *async_handle);
     void     (*add_directory)         (GnomeSelector            *selector,
                                        const gchar              *directory,
                                        gint                      position,
-                                       GnomeSelectorAsyncHandle *async_handle);
-    void     (*add_directory_default) (GnomeSelector            *selector,
-                                       const gchar              *directory,
-                                       gint                      position,
+                                       guint                     list_id,
                                        GnomeSelectorAsyncHandle *async_handle);
 
     void     (*add_uri)               (GnomeSelector            *selector,
                                        const gchar              *filename,
                                        gint                      position,
-                                       GnomeSelectorAsyncHandle *async_handle);
-    void     (*add_uri_default)       (GnomeSelector            *selector,
-                                       const gchar              *filename,
-                                       gint                      position,
+                                       guint                     list_id,
                                        GnomeSelectorAsyncHandle *async_handle);
 };
 
@@ -191,7 +194,7 @@ gnome_selector_add_file           (GnomeSelector             *selector,
                                    GnomeSelectorAsyncHandle **async_handle_return,
                                    const gchar               *filename,
                                    gint                       position,
-                                   gboolean                   defaultp,
+                                   guint                      list_id,
                                    GnomeSelectorAsyncFunc     async_func,
                                    gpointer                   user_data);
 
@@ -200,7 +203,7 @@ gnome_selector_add_directory      (GnomeSelector             *selector,
                                    GnomeSelectorAsyncHandle **async_handle_return,
                                    const gchar               *directory,
                                    gint                       position,
-                                   gboolean                   defaultp,
+                                   guint                      list_id,
                                    GnomeSelectorAsyncFunc     async_func,
                                    gpointer                   user_data);
 
@@ -209,7 +212,7 @@ gnome_selector_add_uri            (GnomeSelector             *selector,
                                    GnomeSelectorAsyncHandle **async_handle_return,
                                    const gchar               *filename,
                                    gint                       position,
-                                   gboolean                   defaultp,
+                                   guint                      list_id,
                                    GnomeSelectorAsyncFunc     async_func,
                                    gpointer                   user_data);
 
@@ -217,11 +220,15 @@ gnome_selector_add_uri            (GnomeSelector             *selector,
 /* Get/set file list (set will replace the old file list). */
 GSList *
 gnome_selector_get_uri_list       (GnomeSelector             *selector,
-                                   gboolean                   defaultp);
+                                   guint                      list_id);
 void
-gnome_selector_set_uri_list       (GnomeSelector             *selector,
+gnome_selector_add_uri_list       (GnomeSelector             *selector,
+                                   GnomeSelectorAsyncHandle **async_handle_return,
                                    GSList                    *uri_list,
-                                   gboolean                   defaultp);
+                                   gint                       position,
+                                   guint                      list_id,
+                                   GnomeSelectorAsyncFunc     async_func,
+                                   gpointer                   user_data);
 
 /* Get/set URI. */
 gchar *
@@ -237,12 +244,13 @@ gnome_selector_set_uri            (GnomeSelector             *selector,
 /* Remove all entries from the selector. */
 void
 gnome_selector_clear              (GnomeSelector             *selector,
-                                   gboolean                   defaultp);
+                                   guint                      list_id);
 
 /* Updates the internal file list. This will also read all the directories
  * from the directory list and add the files to an internal list. */
 void
-gnome_selector_update_uri_list    (GnomeSelector             *selector);
+gnome_selector_update_uri_list    (GnomeSelector             *selector,
+                                   guint                      list_id);
 
 /* Sets the selection mode. */
 void
@@ -324,10 +332,6 @@ gnome_selector_save_history       (GnomeSelector             *selector);
 
 void
 gnome_selector_clear_history      (GnomeSelector             *selector);
-
-/* Set the selector contents to the default values. */
-void
-gnome_selector_set_to_defaults    (GnomeSelector             *selector);
 
 /* Async operations. */
 void

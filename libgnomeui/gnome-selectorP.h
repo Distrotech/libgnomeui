@@ -45,36 +45,55 @@ enum {
     GNOME_SELECTOR_ASYNC_TYPE_ADD_FILE,
     GNOME_SELECTOR_ASYNC_TYPE_ADD_DIRECTORY,
     GNOME_SELECTOR_ASYNC_TYPE_ADD_URI,
+    GNOME_SELECTOR_ASYNC_TYPE_ADD_URI_LIST,
     GNOME_SELECTOR_ASYNC_TYPE_SET_URI,
     GNOME_SELECTOR_ASYNC_TYPE_LAST
 };
 
 GnomeSelectorAsyncHandle *
 _gnome_selector_async_handle_get        (GnomeSelector            *selector,
-					 GnomeSelectorAsyncType    async_type,
-					 const char               *uri,
-					 GnomeSelectorAsyncFunc    async_func,
-					 gpointer                  user_data);
+                                         GnomeSelectorAsyncType    async_type,
+                                         const char               *uri,
+                                         GnomeSelectorAsyncFunc    async_func,
+                                         gpointer                  user_data);
 
 void
 _gnome_selector_async_handle_add        (GnomeSelectorAsyncHandle *async_handle,
-					 gpointer                  async_data,
-					 GDestroyNotify            async_data_destroy);
+                                         gpointer                  async_data,
+                                         GDestroyNotify            async_data_destroy);
 
 void
 _gnome_selector_async_handle_remove     (GnomeSelectorAsyncHandle *async_handle,
-					 gpointer                  async_data);
+                                         gpointer                  async_data);
 
 void
 _gnome_selector_async_handle_completed  (GnomeSelectorAsyncHandle *async_handle,
-					 gboolean                  success);
+                                         gboolean                  success);
 
 void
 _gnome_selector_async_handle_destroy    (GnomeSelectorAsyncHandle *async_handle);
 
 void
 _gnome_selector_async_handle_set_error  (GnomeSelectorAsyncHandle *async_handle,
-					 GError                   *error);
+                                         GError                   *error);
+
+guint
+_gnome_selector_register_list           (GnomeSelector            *selector,
+                                         GQuark                    list_quark);
+
+void
+_gnome_selector_unregister_list         (GnomeSelector            *selector,
+                                         guint                     list_id);
+
+GSList **
+_gnome_selector_get_list_by_id          (GnomeSelector            *selector,
+                                         guint                     list_id);
+
+GSList *
+_gnome_selector_deep_copy_slist         (GSList                   *thelist);
+
+void
+_gnome_selector_deep_free_slist         (GSList                   *thelist);
 
 END_GNOME_DECLS
 

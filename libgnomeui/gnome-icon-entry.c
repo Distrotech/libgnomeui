@@ -508,8 +508,10 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 	gnome_icon_selector_add_defaults
 	    (GNOME_ICON_SELECTOR (ientry->_priv->icon_selector));
 
+#if 0
 	gnome_selector_set_to_defaults
 	    (GNOME_SELECTOR (ientry->_priv->icon_selector));
+#endif
 
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (browse_dialog)->vbox),
 			    ientry->_priv->icon_selector, TRUE, TRUE, 0);
