@@ -9,6 +9,9 @@
 #include "gnome-entry.h"
 
 
+#define DEFAULT_MAX_HISTORY_SAVED 60  /* Why 60?  Because MC defaults to that :-) */
+
+
 struct item {
 	int   save;
 	char *text;
@@ -140,6 +143,10 @@ void
 gnome_entry_load_history (GnomeEntry *gentry)
 {
 	char *prefix;
+	struct item *item;
+	int n;
+	char key[32];
+	char *value;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -153,7 +160,23 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	gnome_config_push_prefix (prefix);
 	g_free (prefix);
 
-	/* FIXME: finish this function */
+	for (n = 0; ; n++) {
+		sprintf (key, "%d", n);
+		value = gnome_config_get_string (key);
+		if (!value)
+			break;
+
+		item = g_new (struct item, 1);
+		item->save = TRUE;
+		item->text = value;
+
+		gentry->items = g_list_prepend (gentry->items, item);
+	}
+
+	/* Did we get anything? */
+
+	if (gentry->items)
+		; /* FIXME: set combo popdown strings */
 
 	gnome_config_pop_prefix ();
 }
