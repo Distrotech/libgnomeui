@@ -1,3 +1,24 @@
+1999-01-19  Nat Friedman  <nat@nat.org>
+
+	* gnome-popup-menu.c (gnome_popup_new_with_accelgroup):
+ 	gnome_popup_menu_new has been renamed to
+ 	gnome_popup_menu_new_with_accelgroup, and now allows the user to
+ 	specify the accelgroup for the popup menu.  It no longer clears
+ 	the accelerators for the menus, and now operates on the provided
+ 	uiinfo array instead of making a copy.  This is consistent with
+ 	the behavior of the other gnome menu functions.
+
+	(gnome_popup_menu_new): This now creates a new accelgroup and
+ 	calls into gnome_popup_menu_new_with_accelgroup.  The accelgroup
+ 	is attached to the returned menu widget.
+
+	(gnome_popup_menu_get_accel_group): A new function to get the
+	accelgroup created in gnome_popup_menu_new.
+
+	All of the API documentation has been moved into this file from
+ 	gnome-popup-menu.h and has been modified to conform to the API
+ 	commenting style.
+
 1999-01-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gil_realize): Set the icon list's background

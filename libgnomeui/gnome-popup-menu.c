@@ -79,18 +79,28 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
 	(* func) (object, user_data);
 }
 
+/**
+ * gnome_popup_menu_new_with_accelgroup
+ * @uiinfo:
+ * @accelgroup:
+ *
+ * Creates a popup menu out of the specified uiinfo array.  Use
+ * gnome_popup_menu_do_popup() to pop the menu up, or attach it to a
+ * window with gnome_popup_menu_attach().
+ */
 GtkWidget *
-gnome_popup_menu_new (GnomeUIInfo *uiinfo)
+gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
+				      GtkAccelGroup *accelgroup)
 {
 	GtkWidget *menu;
 	GnomeUIBuilderData uibdata;
-	GnomeUIInfo *actualinfo;
 	gint i, length;
 
 	g_return_val_if_fail (uiinfo != NULL, NULL);
 
-	/* We use our own callback marshaller so that it can fetch the popup user data
-	 * from the popup menu and pass it on to the user-defined callbacks.
+	/* We use our own callback marshaller so that it can fetch the
+	 * popup user data from the popup menu and pass it on to the
+	 * user-defined callbacks.
 	 */
 
 	uibdata.connect_func = popup_connect_func;
@@ -99,7 +109,8 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 	uibdata.relay_func = popup_marshal_func;
 	uibdata.destroy_func = NULL;
 
-	for( length = 0; uiinfo[length].type != GNOME_APP_UI_ENDOFINFO; length ++ )
+	for( length = 0; uiinfo[length].type != GNOME_APP_UI_ENDOFINFO;
+	     length ++ )
 	  {
 	    if ( uiinfo[length].type == GNOME_APP_UI_ITEM_CONFIGURABLE )
 	      gnome_app_ui_configure_configurable( uiinfo + length );
@@ -107,23 +118,67 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 
 	length ++;
 
-	actualinfo = g_new( GnomeUIInfo, length );
-	
-	for ( i = 0; i < length; i++ )
-	  {
-	    actualinfo[i] = uiinfo[i];
-	    actualinfo[i].accelerator_key = 0;
-	    actualinfo[i].ac_mods = 0;
-	  }
-	
 	menu = gtk_menu_new ();
         global_menushell_hack = menu;
-	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), actualinfo, &uibdata, NULL, FALSE, 0);
+	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo,
+				    &uibdata, accelgroup, FALSE, 0);
         global_menushell_hack = NULL;
 
-	g_free( actualinfo );
-
 	return menu;
+}
+
+/**
+ * gnome_popup_menu_new
+ * @uiinfo:
+ *
+ * This function behaves just like
+ * gnome_popup_menu_new_with_accelgroup(), except that it creates an
+ * accelgroup for you and attaches it to the menu object.  Use
+ * gnome_popup_menu_get_accel_group() to get the accelgroup that is
+ * created.
+ */
+GtkWidget *
+gnome_popup_menu_new (GnomeUIInfo *uiinfo)
+{
+  GtkAccelGroup *accelgroup;
+  GtkWidget *menu;
+
+  accelgroup = gtk_accel_group_new();
+  
+  menu = gnome_popup_menu_new_with_accelgroup(uiinfo, accelgroup);
+
+  gtk_accel_group_attach(accelgroup, GTK_OBJECT (menu));
+
+  return menu;
+}
+
+/**
+ * gnome_popup_menu_get_accel_group
+ * @menu: 
+ *
+ * Returns the accelgroup associated with the specified GtkMenu.  This
+ * is the accelgroup that was created by gnome_popup_menu_new().  If
+ * you want to specify the accelgroup that the popup menu accelerators
+ * use, then use gnome_popup_menu_new_with_accelgroup().
+ */
+GtkAccelGroup *
+gnome_popup_menu_get_accel_group(GtkMenu *menu)
+{
+  GSList *accel_group_list;
+
+  accel_group_list = gtk_accel_groups_from_object(GTK_OBJECT (menu));
+
+  if (accel_group_list == NULL)
+    return NULL;
+
+  /*
+   * It is ok to just return the first element in the list, because
+   * we attach the accelgroup to the menu just after the menu is
+   * created (in gnome_popup_menu_new), and the accelgroup we
+   * created is always going to be the first one.
+   *
+   */
+  return (GtkAccelGroup *) (accel_group_list->data);
 }
 
 /* Callback used when a button is pressed in a widget attached to a popup menu.  It decides whether
@@ -163,8 +218,31 @@ popup_attach_widget_destroyed (GtkWidget *widget, gpointer data)
 	gtk_object_unref (GTK_OBJECT (popup));
 }
 
+/**
+ * gnome_popup_menu_attach
+ * @popup
+ * @widget
+ * @user_data
+ *
+ * Attaches the specified popup menu to the specified widget.  The
+ * menu can then be activated by pressing mouse button 3 over the
+ * widget.  When a menu item callback is invoked, the specified
+ * user_data will be passed to it.
+ *
+ * This function requires the widget to have its own window
+ * (i.e. GTK_WIDGET_NO_WINDOW (widget) == FALSE), This function will
+ * try to set the GDK_BUTTON_PRESS_MASK flag on the widget's event
+ * mask if it does not have it yet; if this is the case, then the
+ * widget must not be realized for it to work.
+ *
+ * The popup menu can be attached to different widgets at the same
+ * time.  A reference count is kept on the popup menu; when all the
+ * widgets it is attached to are destroyed, the popup menu will be
+ * destroyed as well.
+ */
 void
-gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget, gpointer user_data)
+gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
+			 gpointer user_data)
 {
 	int event_mask;
 
@@ -201,6 +279,28 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget, gpointer user_data
 			    popup);
 }
 
+/**
+ * gnome_popup_menu_do_popup
+ * @popup
+ * @pos_func
+ * @pos_data
+ * @event
+ * @user_data
+ *
+ *
+ * You can use this function to pop up a menu.  When a menu item *
+ * callback is invoked, the specified user_data will be passed to it.
+ *
+ * The pos_func and pos_data parameters are the same as for
+ * gtk_menu_popup(), i.e. you can use them to specify a function to
+ * position the menu explicitly.  If you want the default position
+ * (near the mouse), pass NULL for these parameters.
+ *
+ * The event parameter is needed to figure out the mouse button that
+ * activated the menu and the time at which this happened.  If you
+ * pass in NULL, then no button and the current time will be used as
+ * defaults.
+ */
 void
 gnome_popup_menu_do_popup (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
 			   GdkEventButton *event, gpointer user_data)
@@ -254,6 +354,17 @@ get_active_index (GtkMenu *menu)
 	return -1;
 }
 
+/**
+ * gnome_popup_menu_do_popup_modal
+ * @popup
+ * @pos_func
+ * @pos_data
+ * @event
+ * @user_data
+ * 
+ * Same as above, but runs the popup menu modally and returns the
+ * index of the selected item, or -1 if none.
+ */
 int
 gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
 				 GdkEventButton *event, gpointer user_data)
