@@ -14,8 +14,8 @@
 #include <gdk_imlib.h>
 
 #include "libgnome/libgnomeP.h"
-#include "gnome-preferences.h"
-#include "libgnomeui/gnome-client.h"
+#include "gnome-gtk-utils.h"
+#include "libgnomeui/gnome-uidefs.h"
 
 /**** gnome_build_labelled_widget
       Inputs: 'labelstr' - A string that the 'child' widget is to be
@@ -29,7 +29,7 @@
 		   Returns 'hbox'
       Author: Elliot Lee <sopwith@redhat.com>
  */
-GtkWidget *gnome_build_labelled_widget(char *labelstr, GtkWidget *child);
+GtkWidget *gnome_build_labelled_widget(char *labelstr, GtkWidget *child)
 {
   GtkWidget *hbox, *label;
 
@@ -37,7 +37,7 @@ GtkWidget *gnome_build_labelled_widget(char *labelstr, GtkWidget *child);
 
   label = gtk_label_new(labelstr);
   gtk_widget_show(label);
-  gtk_box_pack_start(GTK_CONTAINER(hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
   gtk_widget_show(child);
   gtk_container_add(GTK_CONTAINER(hbox), child);
