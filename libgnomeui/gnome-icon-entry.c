@@ -595,9 +595,12 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 char *
 gnome_icon_entry_get_filename(GnomeIconEntry *ientry)
 {
-	/*this happens if it doesn't exist or isn't an image*/
-	if(!GNOME_IS_PIXMAP(GTK_BIN(ientry->pickbutton)->child))
+	GtkWidget *child = GTK_BIN(ientry->pickbutton)->child;
+	
+	/* this happens if it doesn't exist or isn't an image */
+	if(!GNOME_IS_PIXMAP(child))
 		return NULL;
+	
 	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
 					      TRUE);
 }
