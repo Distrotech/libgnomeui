@@ -118,9 +118,9 @@ gnome_headers = \
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
 	gnome-dns.h			\
-	gnome-dock.c			\
-	gnome-dock-band.c		\
-	gnome-dock-item.c		\
+	gnome-dock.h			\
+	gnome-dock-band.h		\
+	gnome-dock-item.h		\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\
