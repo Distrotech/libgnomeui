@@ -1827,6 +1827,32 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
   const gchar *uri = gtk_file_path_get_string (path);
   GnomeVFSFileInfo *info;
+
+  if (!path)
+    {
+      GnomeVFSURI *vfs_uri;
+      GnomeVFSResult result;
+      GtkFileInfo *file_info;
+
+      vfs_uri = gnome_vfs_uri_new (folder_vfs->uri);
+      g_assert (vfs_uri != NULL);
+
+      g_return_val_if_fail (!gnome_vfs_uri_has_parent (vfs_uri), NULL);
+      gnome_vfs_uri_unref (vfs_uri);
+
+      info = gnome_vfs_file_info_new ();
+      result = gnome_vfs_get_file_info (folder_vfs->uri, info, get_options (GTK_FILE_INFO_ALL));
+      if (result != GNOME_VFS_OK)
+	{
+	  file_info = NULL;
+	  set_vfs_error (result, folder_vfs->uri, error);
+	}
+      else
+	file_info = info_from_vfs_info (folder_vfs->uri, info, GTK_FILE_INFO_ALL);
+
+      gnome_vfs_file_info_unref (info);
+      return file_info;
+    }
   
   info = lookup_vfs_info_in_folder (folder, path, error);
 

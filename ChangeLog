@@ -1,3 +1,9 @@
+2004-03-14  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_folder_gnome_vfs_get_info): Handle the path being NULL
+	for root URIs.
+
 Sun Mar 14 01:05:29 2004  Jonathan Blandford  <jrb@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c
