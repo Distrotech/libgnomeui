@@ -1,3 +1,12 @@
+2001-04-14  Martin Baulig  <baulig@suse.de>
+
+	* gnome-init.h (gtk_module_info): Removed external declaration.
+	(LIBGNOMEUI_INIT): Removed #define.
+
+	* gnome-init.c (libgnome_module_requires): Added libgnomecanvas_module_info.
+	(gtk_module_info): Removed GTK+ init code; this is already in libgnomecanvas.
+	(BUILD_UNUSED_LEGACY_CODE): Removed all code which was #ifdef'ed out by this.
+
 2001-04-11  Martin Baulig  <baulig@suse.de>
 
 	* gnome-helpsys.c (gnome_help_view_find_help_id): Use
