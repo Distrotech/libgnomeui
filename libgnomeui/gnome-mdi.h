@@ -122,7 +122,7 @@ guint         gnome_mdi_get_type            (void);
 
 GtkObject     *gnome_mdi_new                (gchar *, gchar *);
 
-void          gnome_mdi_set_mode            (GnomeMDI *, gint);
+void          gnome_mdi_set_mode            (GnomeMDI *, GnomeMDIMode);
 
 /* setting the menu and toolbar stuff */
 void          gnome_mdi_set_menu_template   (GnomeMDI *, GnomeUIInfo *);

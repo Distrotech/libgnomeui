@@ -16,6 +16,7 @@
 
 #include <config.h>
 #include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-config.h"
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
 #include "gnome-app.h"
@@ -23,6 +24,9 @@
 #include "gnome-stock.h"
 #include "gnome-mdi.h"
 #include "gnome-mdi-child.h"
+
+#include <unistd.h>
+#include <stdio.h>
 
 static void             gnome_mdi_class_init     (GnomeMDIClass  *);
 static void             gnome_mdi_init           (GnomeMDI *);
@@ -38,12 +42,13 @@ static void             child_list_activated_cb    (GtkWidget *, GnomeMDI *);
 
 static void             app_create               (GnomeMDI *);
 static void             app_destroy              (GnomeApp *);
-static void             app_set_title            (GnomeMDI *, GnomeApp *);
 static void             app_set_view             (GnomeMDI *, GnomeApp *, GtkWidget *);
 
 static gint             app_close_top            (GnomeApp *, GdkEventAny *, GnomeMDI *);
 static gint             app_close_book           (GnomeApp *, GdkEventAny *, GnomeMDI *);
+#if 0
 static gint             app_close_ms             (GnomeApp *, GdkEventAny *, GnomeMDI *);
+#endif
 
 static void             set_page_by_widget       (GtkNotebook *, GtkWidget *);
 
@@ -51,7 +56,6 @@ static GtkWidget       *book_create              (GnomeMDI *);
 static void             book_switch_page         (GtkNotebook *, GtkNotebookPage *,
                                                   gint, GnomeMDI *);
 static void             book_add_view            (GtkNotebook *, GtkWidget *);
-static void             book_remove_view         (GtkWidget *, GnomeMDI *);
 
 static void             toplevel_focus           (GnomeApp *, GdkEventFocus *, GnomeMDI *);
 
@@ -332,20 +336,6 @@ static void free_ui_info_tree(GnomeUIInfo *root) {
   g_free(root);
 }
 
-static gint book_has_child(GtkNotebook *book, GtkWidget *child) {
-  GList *page_node;
-
-  page_node = book->children;
-  while(page_node) {
-    if( ((GtkNotebookPage *)page_node->data)->child == child)
-      return TRUE;
-
-    page_node = g_list_next(page_node);
-  }
-
-  return FALSE;
-}
-
 static void set_page_by_widget(GtkNotebook *book, GtkWidget *child) {
   GList *page_node;
   gint i = 0;
@@ -539,14 +529,6 @@ static void book_add_view(GtkNotebook *book, GtkWidget *view) {
   gtk_notebook_append_page(book, view, title_label);
 
   set_page_by_widget(book, view);  
-}
-
-static void book_remove_view(GtkWidget *view, GnomeMDI *mdi) {
-  GnomeMDIChild *child;
-
-  child = gnome_mdi_get_child_from_view(view);
-
-  gnome_mdi_remove_view(mdi, view, FALSE);
 }
 
 static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page_num, GnomeMDI *mdi) {
@@ -875,12 +857,10 @@ static void app_destroy(GnomeApp *app) {
 
 static void app_create(GnomeMDI *mdi) {
   GtkWidget *window;
-  GtkWidget *child_menu, *parent;
   GtkMenuBar *menubar = NULL;
   GtkToolbar *toolbar = NULL;
-  GtkSignalFunc func;
+  GtkSignalFunc func = NULL;
   GnomeUIInfo *ui_info;
-  gint pos = 0;
 
   window = gnome_app_new(mdi->appname, mdi->title);
 
@@ -1090,7 +1070,6 @@ gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {
 }
 
 gint gnome_mdi_add_child(GnomeMDI *mdi, GnomeMDIChild *child) {
-  GtkWidget *view;
   gint ret = TRUE;
 
   g_return_val_if_fail(mdi != NULL, FALSE);
@@ -1188,7 +1167,7 @@ GnomeMDIChild *gnome_mdi_find_child(GnomeMDI *mdi, gchar *name) {
   return NULL;
 }
 
-void gnome_mdi_set_mode(GnomeMDI *mdi, gint mode) {
+void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
   GtkWidget *view;
   GnomeMDIChild *child;
   GList *child_node, *view_node;

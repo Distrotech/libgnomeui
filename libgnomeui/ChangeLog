@@ -1,3 +1,10 @@
+1998-07-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: removed some unused variables and functions and
+	fixed some things that I forgot during the previous commit.
+	Thanks go to Tom Tromey for pointing things out and sending a patch.
+	
+
 1998-07-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app.c: don't use GTK_SHRINK flag when attaching toolbar,
