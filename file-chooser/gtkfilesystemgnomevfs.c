@@ -1350,7 +1350,12 @@ static GtkFilePath *
 gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem *file_system,
 					    const gchar   *filename)
 {
-  gchar *uri = gnome_vfs_get_uri_from_local_path (filename);
+  gchar *uri;
+  
+  if (!filename [0])
+	  return NULL;
+
+  uri = gnome_vfs_get_uri_from_local_path (filename);
   if (uri)
     {
       gchar *canonical;

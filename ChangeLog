@@ -1,3 +1,9 @@
+2005-03-26  Vincent Untz  <vincent@vuntz.net>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_filename_to_path): check for an empty string
+	Fix bug #169979.
+
 2005-03-07  Anders Carlsson  <andersca@imendio.com>
 
 	* configure.in: Release 2.10.0
