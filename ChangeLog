@@ -1,3 +1,7 @@
+2002-02-25  Darin Adler  <darin@bentspoon.com>
+
+	* configure.in: Call ourselves libgnomeui, not gnome-libs.
+
 2002-02-23  Havoc Pennington  <hp@pobox.com>
 
 	* libgnomeui/gnome-file-entry.c (gnome_file_entry_class_init):
