@@ -1,3 +1,4 @@
+/* -*- Mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; c-basic-offset: 2; -*- */
 #include <config.h>
 
 /* needed for sigaction and friends under 'gcc -ansi -pedantic' on 
@@ -40,12 +41,12 @@ int main(int argc, char *argv[])
   args = poptGetArgs(ctx);
   if (args && args[0] && args[1])
     {
-      msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed due to a bug in the software.\n(%s)\nFor more information, see http://www.gnome.org/application_crashed.shtml"),
-                       args[0], getppid(), g_strsignal(atoi(args[1])));
+      msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed\ndue to a fatal error.\n(%s)"),
+                            args[0], getppid(), g_strsignal(atoi(args[1])));
     }
   else
     {
-      fprintf(stderr, "Usage: gnome_segv appname signum\n");
+      fprintf(stderr, _("Usage: gnome_segv appname signum\n"));
       return 1;
     }
 

@@ -1,8 +1,11 @@
+/* -*- Mode: C; tab-width: 8; c-basic-offset: 8; indent-tabs-mode: nil -*- */
 /* Blame Elliot for the poptimization of this file */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
+
+/* #define USE_SEGV_HANDLE 1 */
 
 /* AIX requires this to be the first thing in the file.  */
 #ifndef __GNUC__
@@ -65,6 +68,11 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 				     GdkColor    *transparent_color,
 				     const gchar *filename);
 
+/* This isn't conditionally compiled based on USE_SEGV_HANDLE
+   because the --disable-crash-dialog option is always accepted,
+   even if it has no effect
+*/
+gboolean disable_crash_dialog = FALSE;
 
 
 /* The master client.  */
@@ -78,8 +86,8 @@ gnome_add_gtk_arg_callback(poptContext con,
 			   const struct poptOption * opt,
 			   const char * arg, void * data)
 {
-	static int gnome_gtk_initialized = FALSE;
-	static GPtrArray *gtk_args = NULL;
+        static int gnome_gtk_initialized = FALSE;
+        static GPtrArray *gtk_args = NULL;
 	char *newstr;
 	int final_argc;
 	char **final_argv;
@@ -187,7 +195,7 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 	      const struct poptOption *opt)
 {
 #ifdef USE_SEGV_HANDLE
-	struct sigaction sa;
+        struct sigaction sa;
 #endif
 	
 	if(gnome_initialized)
@@ -197,16 +205,22 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 	case POPT_CALLBACK_REASON_PRE:
 		
 #ifdef USE_SEGV_HANDLE
-		/* 
-		 * Yes, we do this twice, so if an error occurs before init,
-		 * it will be caught, and if it happens after init, we'll override
-		 * gtk's handler
-		 */
-		memset(&sa, 0, sizeof(sa));
-		sa.sa_handler = (gpointer)gnome_segv_handle;
-		sigaction(SIGSEGV, &sa, NULL);
+                /* Well, actually we haven't parsed options yet
+                   so --disable-crash-dialog can't take effect.
+                   But you could change this flag in the debugger.
+                */
+                if (!disable_crash_dialog) {
+                        /* 
+                         * Yes, we do this twice, so if an error occurs before init,
+                         * it will be caught, and if it happens after init, we'll override
+                         * gtk's handler
+                         */
+                        memset(&sa, 0, sizeof(sa));
+                        sa.sa_handler = (gpointer)gnome_segv_handle;
+                        sigaction(SIGSEGV, &sa, NULL);
+                }
 #endif
-		gtk_set_locale();
+                gtk_set_locale();
 		client = gnome_master_client();
 		
 		break;
@@ -239,9 +253,14 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 		}
 	  
 #ifdef USE_SEGV_HANDLE
-		memset(&sa, 0, sizeof(sa));
-		sa.sa_handler = (gpointer)gnome_segv_handle;
-		sigaction(SIGSEGV, &sa, NULL);
+                memset(&sa, 0, sizeof(sa));
+                if (!disable_crash_dialog) {
+                        sa.sa_handler = (gpointer)gnome_segv_handle;
+
+                } else {
+                        sa.sa_handler = SIG_DFL;
+                }                        
+                sigaction(SIGSEGV, &sa, NULL);
 #endif
 		
 		/* lame trigger stuff. This really needs to be sorted
@@ -257,8 +276,10 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 		if(opt->val == -1) {
 			g_print ("Gnome %s %s\n", gnome_app_id, gnome_app_version);
 			exit(0);
-			_exit(1);
 		}
+                else if (opt->val == -2) {
+                        disable_crash_dialog = TRUE;
+                }
 		break;
 	}
 }
@@ -268,6 +289,7 @@ static const struct poptOption gnome_options[] = {
 	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	 &gnome_init_cb, 0, NULL, NULL},
 	{"version", 'V', POPT_ARG_NONE, NULL, -1},
+	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, -2},
 	POPT_AUTOHELP
 	{NULL, '\0', 0, NULL, 0}
 };
@@ -560,14 +582,31 @@ static void gnome_segv_handle(int signum)
 	pid_t pid;
 	
 	
-	if(in_segv)
+        if (in_segv > 11) {
+                /* The fprintf() was segfaulting, we are just totally hosed */
+                exit(1);
+        }
+
+        if (in_segv > 10) {
+                /* dialog display isn't working out */
+                fprintf(stderr, _("10 fatal errors, giving up on displaying error dialog"));
+                exit(1);
+        }
+
+	if (in_segv > 0)
 		return;
 	
 	in_segv++;
-	
+
+        /* Make sure we release grabs */
+        gdk_pointer_ungrab(GDK_CURRENT_TIME);
+        gdk_keyboard_ungrab(GDK_CURRENT_TIME);
+
+        gdk_flush();
+        
 	pid = fork();
 	
-	if (pid){
+	if (pid) {
                 /* Wait for user to see the dialog, then exit. */
 		int estatus;
 		pid_t eret;

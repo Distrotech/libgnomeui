@@ -1,3 +1,15 @@
+1999-08-25  Havoc Pennington  <hp@pobox.com>
+
+	* gnome_segv.c (main): Translate usage string,
+	enhance the error message.
+
+	* gnome-init.c (gnome_init_cb): Set flag if we should
+	--disable-crash-dialog; install the signal handler 
+	based on the flag.
+	(gnome_options): Add --disable-crash-dialog option
+	(gnome_segv_handle): Give up after 10 segfaults; 
+	try to release grabs before popping up the dialog.
+
 1999-08-23  Herbert Valerio Riedel  <hvr@hvrlab.dhs.org>
 
 	* gnome-procbar.[ch] (gnome_proc_bar_set_values): made val[] const
