@@ -473,8 +473,6 @@ remove_hint_from_statusbar(GtkWidget* menuitem, gpointer data)
 static void
 install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
 {
-  char *i8l_hint;
-
   g_return_if_fail (uiinfo != NULL);
   g_return_if_fail (uiinfo->widget != NULL);
   g_return_if_fail (GTK_IS_MENU_ITEM(uiinfo->widget));
@@ -484,16 +482,9 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
 
   if (uiinfo->hint)
     {
-#ifdef ENABLE_NLS
-                i8l_hint = gettext (uiinfo->hint);
-		if ( i8l_hint == uiinfo->hint )
-			i8l_hint = dgettext (PACKAGE, uiinfo->hint);
-#else
-		i8l_hint = uiinfo->hint;
-#endif
       gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
                            "apphelper_statusbar_hint",
-                           i8l_hint);
+                           L_(uiinfo->hint));
 
       gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
                           "select",
@@ -578,7 +569,6 @@ remove_hint_from_appbar(GtkWidget* menuitem, gpointer data)
 static void
 install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
 {
-  char *i8l_hint;
   g_return_if_fail (uiinfo != NULL);
   g_return_if_fail (uiinfo->widget != NULL);
   g_return_if_fail (GTK_IS_MENU_ITEM(uiinfo->widget));
@@ -588,16 +578,9 @@ install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
 
   if (uiinfo->hint)
     {
-#ifdef ENABLE_NLS
-                i8l_hint = gettext (uiinfo->hint);
-		if ( i8l_hint == uiinfo->hint )
-			i8l_hint = dgettext (PACKAGE, uiinfo->hint);
-#else
-		i8l_hint = uiinfo->hint;
-#endif
       gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
                            "apphelper_appbar_hint",
-                           i8l_hint);
+                           L_(uiinfo->hint));
 
       gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
                           "select",
@@ -752,7 +735,6 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 {
 	GtkWidget *label;
 	GtkWidget *pixmap;
-	char *i8l_label;
 	guint keyval;
 	int type;
 	
@@ -822,20 +804,11 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	/* Don't use gettext on the empty string since gettext will map
 	 * the empty string to the header at the beginning of the .pot file. */
 
-	if (uiinfo->label [0] == '\0')
-		i8l_label = "";
-	else
-	{
-#ifdef ENABLE_NLS
-	        i8l_label = gettext (uiinfo->label);
-		if (i8l_label==uiinfo->label)
-			i8l_label = dgettext (PACKAGE, uiinfo->label);
-#else
-		i8l_label = uiinfo->label;
-#endif
-	}
-	
-	label = create_label (i8l_label, &keyval);
+	label = create_label ( uiinfo->label [0] == '\0'?
+			       "":(uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK ?
+				   D_(uiinfo->label):L_(uiinfo->label)),
+			       &keyval);
+
 	gtk_container_add (GTK_CONTAINER (uiinfo->widget), label);
 
 	gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (label), 
@@ -1441,8 +1414,8 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio,
 						    type,
 						    is_radio ? 
 						    *radio_group : NULL,
-						    _(uiinfo->label),
-						    _(uiinfo->hint),
+						    L_(uiinfo->label),
+						    L_(uiinfo->hint),
 						    NULL,
 						    pixmap,
 						    NULL,
@@ -2100,18 +2073,18 @@ gnome_app_insert_menus_interp (GnomeApp *app, gchar *path,
 	gnome_app_insert_menus_custom(app, path, menuinfo, &uidata);
 }
 
+#ifdef ENABLE_NLS
 char *
 gnome_app_helper_gettext (char *str)
 {
 	char *s;
 
-#ifdef ENABLE_NLS
-	s = dgettext (PACKAGE, str);
-#else
-	s = str;
-#endif
+        s = gettext (str);
+	if ( s == str )
+	        s = dgettext (PACKAGE, str);
 
 	return s;
 }
+#endif
 
 

@@ -471,7 +471,13 @@ typedef struct {
 
 char * gnome_app_helper_gettext (char *string);
 
-#define D_(x) gnome_app_helper_gettext(x)
+#ifdef ENABLE_NLS
+#define D_(x) dgettext (PACKAGE, x)
+#define L_(x) gnome_app_helper_gettext(x)
+#else
+#define D_(x) x
+#define L_(x) x
+#endif
 
 /* Some standard menus */
 #define GNOMEUIINFO_MENU_FILE_TREE(tree) \
