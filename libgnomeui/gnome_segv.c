@@ -1,3 +1,4 @@
+#include <config.h>
 #include <unistd.h>
 #include <gnome.h>
 #include <signal.h>
@@ -31,6 +32,9 @@ int main(int argc, char *argv[])
   sa.sa_handler = SIG_IGN;
   sigaction(SIGSEGV, &sa, NULL);
 
+
+  bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+  textdomain (PACKAGE);
   gnome_init("gnome_segv", NULL, 1, argv, 0, &firstarg);
 
   memset(&sa, 0, sizeof(sa));
@@ -51,7 +55,7 @@ int main(int argc, char *argv[])
   gtk_signal_connect(GTK_OBJECT(btn), "clicked",
 		     GTK_SIGNAL_FUNC(button_click), (gpointer)1);
 
-  btn = gtk_button_new_with_label("No, and ignore\nfuture SIGSEGV's");
+  btn = gtk_button_new_with_label(_("No, and ignore\nfuture SIGSEGV's"));
   gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->action_area),
 		    btn);
   gtk_signal_connect(GTK_OBJECT(btn), "clicked",
@@ -61,7 +65,7 @@ int main(int argc, char *argv[])
 			  TRUE);
 
   mystr = g_string_new(NULL);
-  g_string_sprintf(mystr, "Application \"%s\" has a bug.\nSIGSEGV received at PC %#lx in PID %d.\n\n\nDo you want to exit this program?",
+  g_string_sprintf(mystr, _("Application \"%s\" has a bug.\nSIGSEGV received at PC %#lx in PID %d.\n\n\nDo you want to exit this program?"),
 		   argv[firstarg], atol(argv[firstarg + 1]), getppid());
   lbl = gtk_label_new(mystr->str);
   gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->vbox),
