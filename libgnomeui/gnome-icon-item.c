@@ -29,6 +29,8 @@ enum {
 	WIDTH_CHANGED,
 	EDITING_STARTED,
 	EDITING_STOPPED,
+	SELECTION_STARTED,
+	SELECTION_STOPPED,
 	LAST_SIGNAL
 };
 
@@ -576,6 +578,8 @@ iti_start_selecting (Iti *iti, int idx, guint32 event_time)
 	iti->selecting = TRUE;
 
 	iti_queue_redraw (iti);
+
+	gtk_signal_emit (GTK_OBJECT (iti), iti_signals[SELECTION_STARTED]);
 }
 
 /*
@@ -594,6 +598,7 @@ iti_stop_selecting (Iti *iti, guint32 event_time)
 	iti->selecting = FALSE;
 
 	iti_queue_redraw (iti);
+	gtk_signal_emit (GTK_OBJECT (iti), iti_signals[SELECTION_STOPPED]);
 }
 
 /*
@@ -793,6 +798,24 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_LAST,
 			object_class->type,
 			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, editing_stopped),
+			gtk_marshal_NONE__NONE,
+			GTK_TYPE_NONE, 0);
+
+	iti_signals[SELECTION_STARTED] =
+		gtk_signal_new (
+			"selection_started",
+			GTK_RUN_FIRST,
+			object_class->type,
+			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, selection_started),
+			gtk_marshal_NONE__NONE,
+			GTK_TYPE_NONE, 0);
+
+	iti_signals[SELECTION_STARTED] =
+		gtk_signal_new (
+			"selection_stopped",
+			GTK_RUN_FIRST,
+			object_class->type,
+			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, selection_stopped),
 			gtk_marshal_NONE__NONE,
 			GTK_TYPE_NONE, 0);
 
