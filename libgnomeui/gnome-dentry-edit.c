@@ -325,7 +325,7 @@ translations_add(GtkWidget *button, GnomeDEntryEdit *dee)
       text[0] = s;
       text[1] = name;
       text[2] = comment;
-      set_list_width (cl, text);
+      set_list_width (GTK_WIDGET(cl), text);
       gtk_signal_emit (GTK_OBJECT(dee),
 		       dentry_edit_signals[CHANGED], NULL);
       g_free (lang);
@@ -335,7 +335,7 @@ translations_add(GtkWidget *button, GnomeDEntryEdit *dee)
   text[0]=lang;
   text[1]=name;
   text[2]=comment;
-  set_list_width(cl,text);
+  set_list_width(GTK_WIDGET(cl),text);
   gtk_clist_append(cl,text);
   gtk_signal_emit(GTK_OBJECT(dee), dentry_edit_signals[CHANGED], NULL);
   
@@ -387,7 +387,7 @@ fill_advanced_page(GnomeDEntryEdit * dee, GtkWidget * page)
   transl[1] = _("Name");
   transl[2] = _("Comment");
   dee->translations = gtk_clist_new_with_titles(3,transl);
-  set_list_width(GTK_CLIST(dee->translations),transl);
+  set_list_width(dee->translations,transl);
   box = gtk_scrolled_window_new(NULL,NULL);
   gtk_widget_set_usize(box,0,120);
   gtk_container_add(GTK_CONTAINER(box),dee->translations);
@@ -573,7 +573,7 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
     text[0] = e->lang?e->lang:"";
     text[1] = e->name?e->name:"";
     text[2] = e->comment?e->comment:"";
-    set_list_width (GTK_CLIST(dee->translations),text);
+    set_list_width (dee->translations,text);
     gtk_clist_append (GTK_CLIST(dee->translations),text);
   }
 }

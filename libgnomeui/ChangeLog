@@ -1,3 +1,7 @@
+Sat Aug 28 10:32:53 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.c: fix warnings
+
 1999-08-28  Karl Eichwalder  <ke@suse.de>
 
 	* winhints_demo.c (about_cb): Avoid too long lines.
