@@ -1086,25 +1086,25 @@ gnome_canvas_group_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, in
 {
 	GnomeCanvasGroup *group;
 	GList *list;
-	GnomeCanvasItem *i;
+	GnomeCanvasItem *child = 0;
 
 	group = GNOME_CANVAS_GROUP (item);
 
 	for (list = group->item_list; list; list = list->next) {
-		i = list->data;
+		child = list->data;
 
-		if (((i->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
-		     && ((item->x1 < (x + width))
-			 && (item->y1 < (y + height))
-			 && (item->x2 > x)
-			 && (item->y2 > y)))
-		    || ((GTK_OBJECT_FLAGS (item) & GNOME_CANVAS_ITEM_ALWAYS_REDRAW)
-			&& (item->x1 < item->canvas->redraw_x2)
-			&& (item->y1 < item->canvas->redraw_y2)
-			&& (item->x2 > item->canvas->redraw_x1)
-			&& (item->y2 > item->canvas->redraw_y2)))
-			if (GNOME_CANVAS_ITEM_CLASS (i->object.klass)->draw)
-				(* GNOME_CANVAS_ITEM_CLASS (i->object.klass)->draw) (i, drawable, x, y, width, height);
+		if (((child->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
+		     && ((child->x1 < (x + width))
+			 && (child->y1 < (y + height))
+			 && (child->x2 > x)
+			 && (child->y2 > y)))
+		    || ((GTK_OBJECT_FLAGS (child) & GNOME_CANVAS_ITEM_ALWAYS_REDRAW)
+			&& (child->x1 < child->canvas->redraw_x2)
+			&& (child->y1 < child->canvas->redraw_y2)
+			&& (child->x2 > child->canvas->redraw_x1)
+			&& (child->y2 > child->canvas->redraw_y2)))
+			if (GNOME_CANVAS_ITEM_CLASS (child->object.klass)->draw)
+				(* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->draw) (child, drawable, x, y, width, height);
 	}
 }
 

@@ -1,3 +1,12 @@
+1998-11-08  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-canvas.c (gnome_canvas_group_draw): 
+	In determining whether to redraw each child, the group was
+	comparing its own bounds to the redraw area on each iteration,
+	ignoring the child's bounds. So all children were redrawn in every
+	case. Fixed this typo from hell after staying up all night trying
+	to figure out why my app was so slow.
+
 1998-11-07  Jeff Garzik  <jgarzik@pobox.com>
 
 	* Makefile.am, libgnomeui.h: removed gnome-lamp.[ch]
