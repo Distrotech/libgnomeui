@@ -1,3 +1,8 @@
+Wed May 06 23:00:55 1998  George Lebl  <jirka@5z.com>
+
+	* stock_demo.c: it's now possible to get rid of the damn
+	  "really quit" window, without actually quitting
+
 Wed May 06 22:42:40 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-dialog.c: emitting the close signal passed a NULL
