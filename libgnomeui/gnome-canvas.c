@@ -2750,7 +2750,9 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	item = canvas->current_item;
 
 	if (canvas->focused_item
-	    && ((event->type == GDK_KEY_PRESS) || (event->type == GDK_KEY_RELEASE)))
+	    && ((event->type == GDK_KEY_PRESS)
+		|| (event->type == GDK_KEY_RELEASE)
+		|| (event->type == GDK_FOCUS_CHANGE)))
 		item = canvas->focused_item;
 
 	/* The event is propagated up the hierarchy (for if someone connected to
@@ -3477,21 +3479,6 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 
 	gtk_layout_freeze (GTK_LAYOUT (canvas));
 
-	/* Clear the redraw area to avoid creating enormous microtile unions.
-	 * The new area (visible area) will be re-queued when we thaw the
-	 * layout.
-	 */
-
-	if (canvas->need_redraw) {
-		canvas->need_redraw = FALSE;
-		art_uta_free (canvas->redraw_area);
-		canvas->redraw_area = NULL;
-		canvas->redraw_x1 = 0;
-		canvas->redraw_y1 = 0;
-		canvas->redraw_x2 = 0;
-		canvas->redraw_y2 = 0;
-	}
-
 	scroll_to (canvas, x1, y1);
 
 	canvas->need_repick = TRUE;
@@ -3608,6 +3595,125 @@ gnome_canvas_request_update (GnomeCanvas *canvas)
 	add_idle (canvas);
 }
 
+/* Computes the union of two microtile arrays while clipping the result to the
+ * specified rectangle.  Any of the specified utas can be NULL, in which case it
+ * is taken to be an empty region.
+ */
+static ArtUta *
+uta_union_clip (ArtUta *uta1, ArtUta *uta2, ArtIRect *clip)
+{
+	ArtUta *uta;
+	ArtUtaBbox *utiles;
+	int clip_x1, clip_y1, clip_x2, clip_y2;
+	int union_x1, union_y1, union_x2, union_y2;
+	int new_x1, new_y1, new_x2, new_y2;
+	int x, y;
+	int ofs, ofs1, ofs2;
+
+	g_assert (clip != NULL);
+
+	/* Compute the tile indices for the clipping rectangle */
+
+	clip_x1 = clip->x0 >> ART_UTILE_SHIFT;
+	clip_y1 = clip->y0 >> ART_UTILE_SHIFT;
+	clip_x2 = (clip->x1 >> ART_UTILE_SHIFT) + 1;
+	clip_y2 = (clip->y1 >> ART_UTILE_SHIFT) + 1;
+
+	/* Get the union of the bounds of both utas */
+
+	if (!uta1) {
+		if (!uta2)
+			return art_uta_new (clip_x1, clip_y1, clip_x1 + 1, clip_y1 + 1);
+
+		union_x1 = uta2->x0;
+		union_y1 = uta2->y0;
+		union_x2 = uta2->x0 + uta2->width;
+		union_y2 = uta2->y0 + uta2->height;
+	} else {
+		if (!uta2) {
+			union_x1 = uta1->x0;
+			union_y1 = uta1->y0;
+			union_x2 = uta1->x0 + uta1->width;
+			union_y2 = uta1->y0 + uta1->height;
+		} else {
+			union_x1 = MIN (uta1->x0, uta2->x0);
+			union_y1 = MIN (uta1->y0, uta2->y0);
+			union_x2 = MAX (uta1->x0 + uta1->width, uta2->x0 + uta2->width);
+			union_y2 = MAX (uta1->y0 + uta1->height, uta2->y0 + uta2->height);
+		}
+	}
+
+	/* Clip the union of the bounds */
+
+	new_x1 = MAX (clip_x1, union_x1);
+	new_y1 = MAX (clip_y1, union_y1);
+	new_x2 = MIN (clip_x2, union_x2);
+	new_y2 = MIN (clip_y2, union_y2);
+
+	if (new_x1 >= new_x2 || new_y1 >= new_y2)
+		return art_uta_new (clip_x1, clip_y1, clip_x1 + 1, clip_y1 + 1);
+
+	/* Make the new clipped union */
+
+	uta = art_new (ArtUta, 1);
+	uta->x0 = new_x1;
+	uta->y0 = new_y1;
+	uta->width = new_x2 - new_x1;
+	uta->height = new_y2 - new_y1;
+	uta->utiles = utiles = art_new (ArtUtaBbox, uta->width * uta->height);
+
+	ofs = 0;
+	ofs1 = ofs2 = 0;
+
+	for (y = new_y1; y < new_y2; y++) {
+		if (uta1)
+			ofs1 = (y - uta1->y0) * uta1->width + new_x1 - uta1->x0;
+
+		if (uta2)
+			ofs2 = (y - uta2->y0) * uta2->width + new_x1 - uta2->x0;
+
+		for (x = new_x1; x < new_x2; x++) {
+			ArtUtaBbox bb1, bb2, bb;
+
+			if (!uta1
+			    || x < uta1->x0 || y < uta1->y0
+			    || x >= uta1->x0 + uta1->width || y >= uta1->y0 + uta1->height)
+				bb1 = 0;
+			else
+				bb1 = uta1->utiles[ofs1];
+
+			if (!uta2
+			    || x < uta2->x0 || y < uta2->y0
+			    || x >= uta2->x0 + uta2->width || y >= uta2->y0 + uta2->height)
+				bb2 = 0;
+			else
+				bb2 = uta2->utiles[ofs2];
+
+			if (bb1 == 0)
+				bb = bb2;
+			else if (bb2 == 0)
+				bb = bb1;
+			else
+				bb = ART_UTA_BBOX_CONS (MIN (ART_UTA_BBOX_X0 (bb1),
+							     ART_UTA_BBOX_X0 (bb2)),
+							MIN (ART_UTA_BBOX_Y0 (bb1),
+							     ART_UTA_BBOX_Y0 (bb2)),
+							MAX (ART_UTA_BBOX_X1 (bb1),
+							     ART_UTA_BBOX_X1 (bb2)),
+							MAX (ART_UTA_BBOX_Y1 (bb1),
+							     ART_UTA_BBOX_Y1 (bb2)));
+
+			utiles[ofs] = bb;
+
+			ofs++;
+			ofs1++;
+			ofs2++;
+		}
+	}
+
+	return uta;
+}
+
 /**
  * gnome_canvas_request_redraw_uta:
  * @canvas: A canvas.
@@ -3620,18 +3726,34 @@ void
 gnome_canvas_request_redraw_uta (GnomeCanvas *canvas,
                                  ArtUta *uta)
 {
-	ArtUta *uta2;
+	ArtIRect visible;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+	g_return_if_fail (uta != NULL);
+
+	visible.x0 = DISPLAY_X1 (canvas) - canvas->zoom_xofs;
+	visible.y0 = DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
+	visible.x1 = visible.x0 + GTK_WIDGET (canvas)->allocation.width;
+	visible.y1 = visible.y0 + GTK_WIDGET (canvas)->allocation.height;
 
 	if (canvas->need_redraw) {
-		uta2 = art_uta_union (uta, canvas->redraw_area);
-		art_uta_free (uta);
+		ArtUta *new_uta;
+
+		g_assert (canvas->redraw_area != NULL);
+
+		new_uta = uta_union_clip (canvas->redraw_area, uta, &visible);
 		art_uta_free (canvas->redraw_area);
-		canvas->redraw_area = uta2;
+		art_uta_free (uta);
+		canvas->redraw_area = new_uta;
 	} else {
-		canvas->redraw_area = uta;
+		ArtUta *new_uta;
+
+		g_assert (canvas->redraw_area == NULL);
+
+		new_uta = uta_union_clip (uta, NULL, &visible);
+		art_uta_free (uta);
+		canvas->redraw_area = new_uta;
 		canvas->need_redraw = TRUE;
 	}
 
@@ -3659,7 +3781,6 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 	ArtIRect bbox;
 	ArtIRect visible;
 	ArtIRect clip;
-	gint w_width, w_height;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
