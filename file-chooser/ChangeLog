@@ -1,3 +1,8 @@
+2003-09-15  Bastien Nocera  <hadess@hadess.net>
+
+	* gtkfilefilter.c: (gtk_file_filter_filter): avoid crash when
+	selecting a new filter and clicking a different directory
+
 2003-09-10  Federico Mena Quintero  <federico@ximian.com>
 
 	* TODO: Added an API point about needing a way to fetch the hpaned
