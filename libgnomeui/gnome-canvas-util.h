@@ -9,9 +9,10 @@
  */
 
 #ifndef GNOME_CANVAS_UTIL_H
-#define GNOEM_CANVAS_UTIL_H
+#define GNOME_CANVAS_UTIL_H
 
 #include <libgnome/gnome-defs.h>
+#include <libart_lgpl/art_svp.h>
 
 
 BEGIN_GNOME_DECLS
@@ -69,6 +70,25 @@ void gnome_canvas_get_butt_points (double x1, double y1, double x2, double y2,
  */
 double gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y);
 
+
+/* Render the svp over the buf. */
+void
+gnome_canvas_render_svp (GnomeCanvasBuf *buf,
+			 ArtSVP *svp,
+			 guint32 rgba);
+
+/* Sets the svp to the new value, requesting repaint on what's changed. */
+void
+gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp);
+
+/* Sets the bbox to the new value, requesting full repaint. */
+void
+gnome_canvas_update_bbox (GnomeCanvasItem *item,
+			  int x1, int y1, int x2, int y2);
+
+/* Ensure that the buffer is in RGB format, suitable for compositing. */
+void
+gnome_canvas_buf_ensure_buf (GnomeCanvasBuf *buf);
 
 END_GNOME_DECLS
 

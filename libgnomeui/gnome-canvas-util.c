@@ -13,6 +13,11 @@
 #include <math.h>
 #include "gnome-canvas.h"
 #include "gnome-canvas-util.h"
+#include <libart_lgpl/art_uta.h>
+#include <libart_lgpl/art_svp.h>
+#include <libart_lgpl/art_rgb.h>
+#include <libart_lgpl/art_rgb_svp.h>
+#include <libart_lgpl/art_uta_svp.h>
 
 
 GnomeCanvasPoints *
@@ -245,4 +250,120 @@ gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y)
 		return 0.0;
 	else
 		return best;
+}
+
+/* Here are some helper functions for aa rendering: */
+
+/**
+ * gnome_canvas_render_svp:
+ * @buf: the canvas buffer to render over
+ * @svp: the vector path to render
+ * @rgba: the rgba color to render
+ *
+ * Render the svp over the buf.
+ **/
+void
+gnome_canvas_render_svp (GnomeCanvasBuf *buf,
+			 ArtSVP *svp,
+			 guint32 rgba)
+{
+	guint32 fg_color, bg_color;
+
+	if (buf->is_bg) {
+		bg_color = buf->bg_color;
+		fg_color = rgba >> 8; /* FIXME: this needs to be a composite */
+		art_rgb_svp_aa (svp,
+				buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+				fg_color, bg_color,
+				buf->buf, buf->buf_rowstride,
+				NULL);
+		buf->is_bg = 0;
+		buf->is_buf = 1;
+	} else {
+		art_rgb_svp_alpha (svp,
+				   buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+				   rgba,
+				   buf->buf, buf->buf_rowstride,
+				   NULL);
+	}
+}
+
+/**
+ * gnome_canvas_update_svp:
+ * @canvas: the canvas containing the svp that needs updating.
+ * @p_svp: a pointer to the existing svp
+ * @new_svp: the new svp
+ *
+ * Sets the svp to the new value, requesting repaint on what's changed.
+ **/
+void
+gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp)
+{
+	ArtSVP *old_svp;
+	ArtSVP *diff;
+	ArtUta *repaint_uta;
+
+	old_svp = *p_svp;
+	if (old_svp != NULL && new_svp != NULL) {
+#if 0
+		/* should work, but cores :( */
+		diff = art_svp_diff (old_svp, new_svp);
+		art_svp_free (old_svp);
+		repaint_uta = art_uta_from_svp (diff);
+		art_svp_free (diff);
+		gnome_canvas_request_redraw_uta (canvas, repaint_uta);
+#else
+		repaint_uta = art_uta_from_svp (old_svp);
+		gnome_canvas_request_redraw_uta (canvas, repaint_uta);
+		repaint_uta = art_uta_from_svp (new_svp);
+		gnome_canvas_request_redraw_uta (canvas, repaint_uta);
+#endif
+	} else if (old_svp != NULL) {
+		repaint_uta = art_uta_from_svp (old_svp);
+		art_svp_free (old_svp);
+		gnome_canvas_request_redraw_uta (canvas, repaint_uta);
+	}
+	*p_svp = new_svp;
+}
+
+/**
+ * gnome_canvas_update_bbox:
+ * @canvas: the canvas needing update
+ * @x1, @y1, @x2, @y2: the new bbox
+ *
+ * Sets the bbox to the new value, requesting full repaint.
+ **/
+void
+gnome_canvas_update_bbox (GnomeCanvasItem *item,
+			  int x1, int y1, int x2, int y2)
+{
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->x1 = x1;
+	item->y1 = y1;
+	item->x2 = x2;
+	item->y2 = y2;
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+}
+
+/**
+ * gnome_canvas_ensure_buf
+ * @buf: the buf that needs to be represened in RGB format
+ *
+ * Ensure that the buffer is in RGB format, suitable for compositing.
+ **/
+void
+gnome_canvas_buf_ensure_buf (GnomeCanvasBuf *buf)
+{
+	guchar *bufptr;
+	int y;
+
+	if (!buf->is_buf) {
+		bufptr = buf->buf;
+		for (y = buf->rect.y0; y < buf->rect.y1; y++) {
+			art_rgb_fill_run (buf->buf, buf->bg_color >> 16, (buf->bg_color >> 8) & 0xff, buf->bg_color & 0xff,
+					  buf->rect.x1 - buf->rect.x0);
+		}
+		bufptr += buf->buf_rowstride;
+		buf->is_buf = 1;
+	}
 }

@@ -85,6 +85,7 @@ static void gnome_canvas_item_realize   (GnomeCanvasItem *item);
 static void gnome_canvas_item_unrealize (GnomeCanvasItem *item);
 static void gnome_canvas_item_map       (GnomeCanvasItem *item);
 static void gnome_canvas_item_unmap     (GnomeCanvasItem *item);
+static void gnome_canvas_item_update    (GnomeCanvasItem *item);
 
 static int emit_event (GnomeCanvas *canvas, GdkEvent *event);
 
@@ -149,6 +150,7 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 	class->unrealize = gnome_canvas_item_unrealize;
 	class->map = gnome_canvas_item_map;
 	class->unmap = gnome_canvas_item_unmap;
+	class->update = gnome_canvas_item_update;
 }
 
 static void
@@ -393,6 +395,12 @@ gnome_canvas_item_unmap (GnomeCanvasItem *item)
 }
 
 static void
+gnome_canvas_item_update (GnomeCanvasItem *item)
+{
+	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_UPDATE);
+}
+
+static void
 gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpointer func_data, GtkArg *args)
 {
 	GnomeCanvasItemSignal1 rfunc;
@@ -513,8 +521,10 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 		return;
 	}
 
+	if (!item->canvas->aa)
 	redraw_if_visible (item);
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->translate) (item, dx, dy);
+	if (!item->canvas->aa)
 	redraw_if_visible (item);
 
 	item->canvas->need_repick = TRUE;
@@ -2496,6 +2506,8 @@ gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
 #define IMAGE_WIDTH_AA 256
 #define IMAGE_HEIGHT_AA 64
 
+#define noVERBOSE
+
 static void
 paint (GnomeCanvas *canvas)
 {
@@ -2507,6 +2519,9 @@ paint (GnomeCanvas *canvas)
 	ArtIRect *rects;
 	gint n_rects, i;
 
+#ifdef VERBOSE
+	g_print ("paint\n");
+#endif
 	if (canvas->need_update) {
 		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
 
@@ -2570,6 +2585,11 @@ paint (GnomeCanvas *canvas)
 				buf.bg_color = 0xffffff; /* FIXME; should be the same as the style's background color */
 				buf.is_bg = 1;
 				buf.is_buf = 0;
+
+#ifdef VERBOSE
+				g_print ("paint render (%d, %d) - (%d, %d)\n",
+					 draw_x1, draw_y1, draw_x2, draw_y2);
+#endif
 
 				if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE) {
 					if ((* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->render) != NULL)
@@ -2644,11 +2664,15 @@ paint (GnomeCanvas *canvas)
 	canvas->need_redraw = FALSE;
 }
 
+#define noVERBOSE
 static gint
 idle_handler (gpointer data)
 {
 	GnomeCanvas *canvas;
 
+#ifdef VERBOSE
+	g_print ("idle_handler {\n");
+#endif
 	canvas = data;
 
 	/* Pick new current item */
@@ -2668,6 +2692,10 @@ idle_handler (gpointer data)
 	canvas->redraw_y1 = 0;
 	canvas->redraw_x2 = 0;
 	canvas->redraw_y2 = 0;
+
+#ifdef VERBOSE
+	g_print ("idle_handler }\n");
+#endif
 
 	return FALSE;
 }
@@ -2875,6 +2903,9 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
+#ifdef VERBOSE
+	g_print ("update_now\n");
+#endif
 	if (!canvas->need_redraw)
 		return;
 
@@ -2897,7 +2928,7 @@ static void
 gnome_canvas_request_update (GnomeCanvas *canvas)
 {
 	if (!(canvas->need_update || canvas->need_redraw)) {
-		canvas->idle_id = gtk_idle_add_priority (GTK_PRIORITY_INTERNAL,
+		canvas->idle_id = gtk_idle_add_priority (GTK_PRIORITY_DEFAULT,
 							 idle_handler, canvas);
 	}
 	canvas->need_update = TRUE;
@@ -2927,7 +2958,7 @@ gnome_canvas_request_redraw_uta (GnomeCanvas *canvas,
 	} else {
 		canvas->redraw_area = uta;
 		canvas->need_redraw = TRUE;
-		canvas->idle_id = gtk_idle_add_priority (GTK_PRIORITY_INTERNAL,
+		canvas->idle_id = gtk_idle_add_priority (GTK_PRIORITY_DEFAULT,
 							 idle_handler, canvas);
 	}
 }
@@ -2954,6 +2985,10 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 	ArtIRect visible;
 	ArtIRect clip;
 
+#ifdef VERBOSE
+	g_print ("gnome_canvas_request_redraw %d %d %d %d\n",
+		 x1, y1, x2, y2);
+#endif
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 

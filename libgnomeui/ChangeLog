@@ -1,3 +1,15 @@
+Wed Dec 16 17:53:48 1998  Raph Levien  <raph@gimp.org>
+
+	So far, no changes that affect canvas users or xlib custom items.
+
+	* gnome-canvas-util.h:
+	* gnome-canvas-util.c: Added a number of routines that are helpful
+	for aa rendering.
+
+	* gnome-canvas-rect-ellipse.c: re-enabled the rendering.
+
+	* gnome-canvas.c: Provided default implementatoin of ::update ()
+	
 Thu Dec 17  Felix Bellaby  <felix@pooh.u-net.com>
 	* gnome-client.c (gnome_client_connect, gnome_client_set_id): remove
 	some code left over from old config file nameing scheme.
