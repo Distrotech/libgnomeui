@@ -8,9 +8,7 @@
 #include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-app-helper.h"
 #include "libgnomeui/gnome-actionarea.h"
-#if 0
 #include "libgnomeui/gnome-canvas.h"
-#endif
 #include "libgnomeui/gnome-color-selector.h"
 #include "libgnomeui/gnome-dialog.h"
 #include "libgnomeui/gnome-dialog-util.h"
