@@ -32,7 +32,38 @@ IGNORE_HFILES=				\
 	libgnomeui-access.h
 
 # Images to copy into HTML directory.
-HTML_IMAGES =
+HTML_IMAGES =								\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_attach.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_book_blue.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_book_green.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_book_open.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_book_red.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_book_yellow.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_line_in.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_mail_compose.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_mail_forward.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_mail.png			\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_mail_receive.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_mail_reply.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_mail_send.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_menu_about.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_menu_blank.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_mic.png			\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_midi.png			\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_multiple_file.png	\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_not.png			\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_scores.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_table_borders.png	\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_table_fill.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_text_bulleted_list.png	\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_text_indent.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_text_numbered_list.png	\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_text_unindent.png	\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_timer.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_timer_stopped.png	\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_trash_full.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_trash.png		\
+	$(top_srcdir)/libgnomeui/pixmaps/stock_volume.png
 
 # Extra SGML files that are included by $(DOC_MAIN_SGML_FILE).
 content_files =

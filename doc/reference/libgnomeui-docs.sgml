@@ -50,7 +50,7 @@
 
   <chapter>
     <title>GNOME UI Library (libgnomeui)</title>
-    <sect1>
+    <sect1 id="initialization">
       <title>Initialization and session management</title>
       <para>
       This section includes functions and parameters used to initialise GNOME
@@ -68,7 +68,7 @@
       &libgnomeui-gnome-ui-init;
       &libgnomeui-GnomeClient;
     </sect1>
-    <sect1>
+    <sect1 id="application-mgmt">
       <title>Application management</title>
       <para>
       After initializing <application>libgnomeui</application>, a typical
@@ -84,7 +84,7 @@
       &libgnomeui-GnomeAbout;
       &libgnomeui-gnome-popup-menu;
     </sect1>
-    <sect1>
+    <sect1 id="druids">
       <title>Druids</title>
       <para>
       Druids (sometimes called <emphasis>Wizards</emphasis> on other systems)
@@ -107,7 +107,7 @@
       &libgnomeui-GnomeDruidPageEdge;
       &libgnomeui-GnomeDruidPageStandard;
     </sect1>
-    <sect1>
+    <sect1 id="fixme">
       <title>FIXME</title>
       &libgnomeui-GnomeColorPicker;
       &libgnomeui-GnomeDateEdit;
@@ -127,7 +127,7 @@
       &libgnomeui-GnomePixmapEntry;
       &libgnomeui-GnomeScores;
     </sect1>
-    <sect1>
+    <sect1 id="miscellaneous">
       <title>Miscellaneous utility functions and macros</title>
       <para>
       This section collects together a number of useful auxillary functions
@@ -141,7 +141,7 @@
       &libgnomeui-gnome-uidefs;
       &libgnomeui-gnome-vfs-util;
     </sect1>
-    <sect1>
+    <sect1 id="deprecated">
       <title>Deprecated modules</title>
       &libgnomeui-gnome-app-util;
       &libgnomeui-GnomeMDI;
