@@ -1,3 +1,8 @@
+1999-07-11  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_find_menu_pos): translate parts of
+	the path on the fly to mend at least some of the localization issues.
+
 1999-07-10  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (app_set_view): fixed a problem with 

@@ -1915,8 +1915,9 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 {
 	GtkBin *item;
 	gchar *label = NULL;
-	GList *children, *hbox_children;
+	GList *children;
 	gchar *name_end;
+	gchar *part, *transl;
 	gint p;
 	int  path_len;
 	int  stripped_path_len;
@@ -1933,12 +1934,7 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 	else
 		path_len = name_end - path;
 
-	stripped_path_len = path_len;
-	for ( p = 0; p < path_len; p++ )
-	        if( path[p] == '_' )
-		        stripped_path_len--;
-	
-	if (path_len == 0){
+	if (path_len == 0) {
 
 	        if (children && GTK_IS_TEAROFF_MENU_ITEM(children->data))
 		        /* consider the position after the tear off item as the topmost one. */
@@ -1947,7 +1943,21 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 			*pos = 0;
 		return parent;
 	}
-	
+
+	/* this ugly thing should fix the localization problems */
+	part = g_malloc(path_len + 1);
+	if(!part)
+	        return NULL;
+	strncpy(part, path, path_len);
+	part[path_len] = '\0';
+	transl = L_(part);
+	path_len = strlen(transl);
+
+	stripped_path_len = path_len;
+	for ( p = 0; p < path_len; p++ )
+	        if( transl[p] == '_' )
+		        stripped_path_len--;
+		
 	p = 0;
 
 	while (children){
@@ -1964,22 +1974,27 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 			label = GTK_LABEL (item->child)->label;
 		else
 			label = NULL; /* something that we just can't handle */
-		
 		if (label && (stripped_path_len == strlen (label)) &&
-		    (g_strncmp_ignore_char (path, label, path_len, '_') == 0)){
+		    (g_strncmp_ignore_char (transl, label, path_len, '_') == 0)){
 			if (name_end == NULL) {
 				*pos = p;
+				g_free(part);
 				return parent;
 			}
-			else if (GTK_MENU_ITEM (item)->submenu)
+			else if (GTK_MENU_ITEM (item)->submenu) {
+			        g_free(part);
 				return gnome_app_find_menu_pos
 					(GTK_MENU_ITEM (item)->submenu, 
 					 (gchar *)(name_end + 1), pos);
-			else
+			}
+			else {
+			        g_free(part);
 				return NULL;
+			}
 		}
 	}
 	
+	g_free(part);
 	return NULL;
 }
 
