@@ -1,3 +1,9 @@
+Thu Aug 30 15:55:09 2001  George Lebl <jirka@5z.com>
+
+	* gnome-stock-icons.h: add all the deprecated gnome-stock id's and
+	  map them to the corresponding gtk-stock id's.  We're only missing
+	  TRASH right now
+
 Thu Aug 30 14:38:35 2001  George Lebl <jirka@5z.com>
 
 	* gnome-pixmap-entry.[ch], libgnomeui.h, Makefile.am:  Add back the
