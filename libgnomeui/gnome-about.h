@@ -40,8 +40,9 @@ guint      gnome_about_get_type       (void);
  *
  * USAGE:
  *
- *	gchar *authors[] = {"author1", "author2", ..., NULL};
- *
+ *	const gchar *authors[] = {"author1", "author2", ..., NULL};
+ *        (note: not having the 'const' will cause a warning during compile.)
+ * 
  *	GtkWidget *about = gnome_about_new ( _("GnoApp"), "1.2b",
  *				_("Copyright FSF (C) 1998"),
  *				authors,
