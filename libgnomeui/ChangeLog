@@ -1,5 +1,8 @@
 2001-12-28  jacob berkman  <jacob@ximian.com>
 
+	* gnome-vfs-util.h: gnome-vfs-types.h is deprecated, use
+	gnome-vfs-result.h
+
 	* gnome-dateedit.c (create_children): set expand to true for the
 	arrow, such that when time display is off it is properly centered
 	in the button

@@ -30,7 +30,7 @@
 
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <libgnomevfs/gnome-vfs-types.h>
+#include <libgnomevfs/gnome-vfs-result.h>
 
 G_BEGIN_DECLS
 
