@@ -2422,6 +2422,7 @@ static GConfEnumStringPair toolbar_styles[] = {
         { GTK_TOOLBAR_ICONS, "icons" },
         { GTK_TOOLBAR_BOTH, "both" },
         { GTK_TOOLBAR_BOTH_HORIZ, "both_horiz" },
+	{ GTK_TOOLBAR_BOTH_HORIZ, "both-horiz" },
 	{ -1, NULL }
 };
 
