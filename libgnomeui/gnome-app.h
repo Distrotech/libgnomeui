@@ -12,7 +12,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_APP(obj) GTK_CHECK_TYPE(obj, gnome_app_get_type())
 
 typedef struct _GnomeApp GnomeApp;
-typedef struct _GnomeAppClass GnomeAppClass;        
+typedef struct _GnomeAppClass GnomeAppClass;
 
 typedef enum 
 {
@@ -79,7 +79,7 @@ struct _GnomeApp {
 };
 
 struct _GnomeAppClass {
-  GtkWindow parent_class;
+  GtkWindowClass parent_class;
 };
 
 guint gnome_app_get_type    (void);

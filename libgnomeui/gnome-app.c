@@ -4,7 +4,6 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
-static void gnome_app_class_init(GnomeAppClass *klass);
 static void gnome_app_init(GnomeApp *app);
 static void gnome_app_do_menu_creation(GtkWidget *parent_widget,
 				       GnomeMenuInfo *menuinfo);
@@ -26,18 +25,13 @@ gnome_app_get_type(void)
       "GnomeApp",
       sizeof(GnomeApp),
       sizeof(GnomeAppClass),
-      (GtkClassInitFunc) gnome_app_class_init,
+      (GtkClassInitFunc) NULL,
       (GtkObjectInitFunc) gnome_app_init,
       (GtkArgFunc) NULL,
     };
     gnomeapp_type = gtk_type_unique(gtk_window_get_type(), &gnomeapp_info);
   }
   return gnomeapp_type;
-}
-
-static void
-gnome_app_class_init(GnomeAppClass *klass)
-{
 }
 
 static void
@@ -57,9 +51,10 @@ gnome_app_new(gchar *appname)
   GtkWidget *retval;
 
   retval = gtk_type_new(gnome_app_get_type());
+
   if(appname)
     gtk_window_set_title(GTK_WINDOW(retval), appname);
-
+  
   return retval;
 }
 
