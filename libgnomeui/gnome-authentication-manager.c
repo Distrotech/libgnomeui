@@ -34,6 +34,7 @@
 
 #include <config.h>
 #include "gnome-authentication-manager.h"
+#include "gnome-authentication-manager-private.h"
 
 #include <gnome.h>
 #include <libgnome/gnome-i18n.h>
@@ -154,10 +155,22 @@ static gint /* GtkFunction */
 present_authentication_dialog_nonblocking (CallbackInfo *info)
 {
 	GnomePasswordDialog *dialog;
+	GtkWidget *toplevel;
 
 	g_return_val_if_fail (info != NULL, 0);
 
 	dialog = construct_password_dialog (info->is_proxy_authentication, info->in_args);
+
+	toplevel = gtk_widget_get_toplevel (gtk_grab_get_current ());
+	if (toplevel && GTK_WIDGET_TOPLEVEL (toplevel)) {
+		/* There is a modal window, so we need to be modal too in order to
+		 * get input. We set the other modal dialog as parent, which
+		 * hopefully gives us better window management.
+		 */
+		gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+	} else {
+		gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
+	}
 
 	gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
 
@@ -368,12 +381,22 @@ static gint /* GtkFunction */
 present_full_authentication_dialog_nonblocking (FullCallbackInfo *info)
 {
 	GnomePasswordDialog *dialog;
+	GtkWidget *toplevel;
 
 	g_return_val_if_fail (info != NULL, 0);
 
 	dialog = construct_full_password_dialog (info->in_args);
 
-	gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
+	toplevel = gtk_widget_get_toplevel (gtk_grab_get_current ());
+	if (toplevel && GTK_WIDGET_TOPLEVEL (toplevel)) {
+		/* There is a modal window, so we need to be modal too in order to
+		 * get input. We set the other modal dialog as parent, which
+		 * hopefully gives us better window management.
+		 */
+		gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+	} else {
+		gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
+	}
 
 	g_signal_connect (dialog, "response", 
 			  G_CALLBACK (full_authentication_dialog_button_clicked), info);
@@ -730,3 +753,77 @@ gnome_authentication_manager_init (void)
 					       NULL);
 
 }
+
+void
+gnome_authentication_manager_push_async (void)
+{
+	gnome_vfs_async_module_callback_push (GNOME_VFS_MODULE_CALLBACK_AUTHENTICATION,
+					      vfs_async_authentication_callback, 
+					      GINT_TO_POINTER (0),
+					      NULL);
+	gnome_vfs_async_module_callback_push (GNOME_VFS_MODULE_CALLBACK_HTTP_PROXY_AUTHENTICATION, 
+					      vfs_async_authentication_callback, 
+					      GINT_TO_POINTER (1),
+					      NULL);
+	
+	gnome_vfs_async_module_callback_push (GNOME_VFS_MODULE_CALLBACK_FILL_AUTHENTICATION,
+					      vfs_async_fill_authentication_callback, 
+					      GINT_TO_POINTER (0),
+					      NULL);
+	gnome_vfs_async_module_callback_push (GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION,
+					      vfs_async_full_authentication_callback, 
+					      GINT_TO_POINTER (0),
+					      NULL);
+	gnome_vfs_async_module_callback_push (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION,
+					      vfs_async_save_authentication_callback, 
+					      GINT_TO_POINTER (0),
+					      NULL);
+}
+
+void
+gnome_authentication_manager_pop_async (void)
+{
+	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_AUTHENTICATION);
+	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_HTTP_PROXY_AUTHENTICATION);
+	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_FILL_AUTHENTICATION);
+	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION);
+	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION);
+}
+
+void
+gnome_authentication_manager_push_sync (void)
+{
+	
+	gnome_vfs_module_callback_push (GNOME_VFS_MODULE_CALLBACK_AUTHENTICATION,
+					vfs_authentication_callback, 
+					GINT_TO_POINTER (0),
+					NULL);
+	gnome_vfs_module_callback_push (GNOME_VFS_MODULE_CALLBACK_HTTP_PROXY_AUTHENTICATION, 
+					vfs_authentication_callback, 
+					GINT_TO_POINTER (1),
+					NULL);
+	
+	gnome_vfs_module_callback_push (GNOME_VFS_MODULE_CALLBACK_FILL_AUTHENTICATION,
+					vfs_fill_authentication_callback, 
+					GINT_TO_POINTER (0),
+					NULL);
+	gnome_vfs_module_callback_push (GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION,
+					vfs_full_authentication_callback, 
+					GINT_TO_POINTER (0),
+					NULL);
+	gnome_vfs_module_callback_push (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION,
+					vfs_save_authentication_callback, 
+					GINT_TO_POINTER (0),
+					NULL);
+}
+
+void
+gnome_authentication_manager_pop_sync (void)
+{
+	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_AUTHENTICATION);
+	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_HTTP_PROXY_AUTHENTICATION);
+	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_FILL_AUTHENTICATION);
+	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION);
+	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION);
+}
+

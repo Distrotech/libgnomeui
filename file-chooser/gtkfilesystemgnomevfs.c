@@ -525,12 +525,14 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 
   g_hash_table_foreach_remove (folder_vfs->children,
 			       remove_all, NULL);
+  gnome_authentication_manager_push_async ();
   gnome_vfs_async_load_directory (&folder_vfs->async_handle,
 				  folder_vfs->uri,
 				  get_options (folder_vfs->types),
 				  ITEMS_PER_NOTIFICATION,
 				  GNOME_VFS_PRIORITY_DEFAULT,
 				  directory_load_callback, folder_vfs);
+  gnome_authentication_manager_pop_async ();
 }
 
 static char *
@@ -585,10 +587,12 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 
   folder_vfs = g_object_new (GTK_TYPE_FILE_FOLDER_GNOME_VFS, NULL);
 
+  gnome_authentication_manager_push_sync ();
   result = gnome_vfs_monitor_add (&monitor,
 				  uri,
 				  GNOME_VFS_MONITOR_DIRECTORY,
 				  monitor_callback, folder_vfs);
+  gnome_authentication_manager_pop_sync ();
   if (result != GNOME_VFS_OK && result != GNOME_VFS_ERROR_NOT_SUPPORTED)
     {
       g_free (uri);
@@ -627,9 +631,11 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	  FolderChild *child;
 
 	  vfs_info = gnome_vfs_file_info_new ();
+	  gnome_authentication_manager_push_sync ();
 	  result = gnome_vfs_get_file_info (folder_vfs->uri,
 					    vfs_info,
 					    get_options (parent_folder->types));
+	  gnome_authentication_manager_pop_sync ();
 	  if (result != GNOME_VFS_OK)
 	    {
 	      gnome_vfs_file_info_unref (vfs_info);
@@ -661,10 +667,12 @@ gtk_file_system_gnome_vfs_create_folder (GtkFileSystem     *file_system,
   const gchar *uri = gtk_file_path_get_string (path);
   GnomeVFSResult result;
 
+  gnome_authentication_manager_push_sync ();
   result = gnome_vfs_make_directory (uri,
 				     GNOME_VFS_PERM_USER_ALL |
 				     GNOME_VFS_PERM_GROUP_ALL |
 				     GNOME_VFS_PERM_OTHER_READ);
+  gnome_authentication_manager_pop_sync ();
 
   if (result != GNOME_VFS_OK)
     {
@@ -764,7 +772,9 @@ gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem        *file_system,
 
       closure.system_vfs = system_vfs;
       closure.loop = g_main_loop_new (NULL, FALSE);
+      gnome_authentication_manager_push_sync ();
       gnome_vfs_drive_mount (GNOME_VFS_DRIVE (volume), volume_mount_cb, &closure);
+      gnome_authentication_manager_pop_sync ();
 
       GDK_THREADS_LEAVE ();
       g_main_loop_run (closure.loop);
@@ -1290,7 +1300,9 @@ get_vfs_info (GtkFileSystem     *file_system,
     {
       info = gnome_vfs_file_info_new ();
       uri = gtk_file_path_get_string (path);
+      gnome_authentication_manager_push_sync ();
       gnome_vfs_get_file_info (uri, info, get_options (types));
+      gnome_authentication_manager_pop_sync ();
     }
   
   gtk_file_path_free (parent_path);
@@ -1794,7 +1806,9 @@ lookup_vfs_info_in_folder (GtkFileFolder     *folder,
       GnomeVFSResult result;
       
       vfs_info = gnome_vfs_file_info_new ();
+      gnome_authentication_manager_push_sync ();
       result = gnome_vfs_get_file_info (uri, vfs_info, get_options (folder_vfs->types));
+      gnome_authentication_manager_pop_sync ();
       
       if (result != GNOME_VFS_OK)
 	set_vfs_error (result, uri, error);
@@ -1841,7 +1855,9 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
       gnome_vfs_uri_unref (vfs_uri);
 
       info = gnome_vfs_file_info_new ();
+      gnome_authentication_manager_push_sync ();
       result = gnome_vfs_get_file_info (folder_vfs->uri, info, get_options (GTK_FILE_INFO_ALL));
+      gnome_authentication_manager_pop_sync ();
       if (result != GNOME_VFS_OK)
 	{
 	  file_info = NULL;
@@ -2120,7 +2136,9 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
 	GnomeVFSFileInfo *vfs_info;
 
 	vfs_info = gnome_vfs_file_info_new ();
+	gnome_authentication_manager_push_sync ();
 	result = gnome_vfs_get_file_info (info_uri, vfs_info, get_options (folder_vfs->types));
+	gnome_authentication_manager_pop_sync ();
 
 	if (result == GNOME_VFS_OK)
 	  {

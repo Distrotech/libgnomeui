@@ -1,3 +1,19 @@
+2004-03-18  Alexander Larsson  <alexl@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: (load_dir),
+	(gtk_file_system_gnome_vfs_get_folder),
+	(gtk_file_system_gnome_vfs_create_folder),
+	(gtk_file_system_gnome_vfs_volume_mount), (get_vfs_info),
+	(lookup_vfs_info_in_folder), (gtk_file_folder_gnome_vfs_get_info),
+	(monitor_callback):
+	Use the new auth push/pop api
+
+	* libgnomeui/Makefile.am:
+	* libgnomeui/gnome-authentication-manager-private.h:
+	* libgnomeui/gnome-authentication-manager.c:
+	Add api to allow auth callback push/pop
+	Make auth dialog modal if there is a grab.
+
 2004-03-15  Anders Carlsson  <andersca@gnome.org>
 
 	* configure.in: Release 2.5.92

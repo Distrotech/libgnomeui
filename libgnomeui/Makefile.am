@@ -91,6 +91,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-password-dialog.h         \
 	gnome-authentication-manager.c  \
 	gnome-authentication-manager.h  \
+	gnome-authentication-manager-private.h  \
 	gnome-client.c
 
 ## this lists all the non-generated headers
