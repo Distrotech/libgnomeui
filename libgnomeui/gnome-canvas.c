@@ -3022,13 +3022,3 @@ gnome_canvas_set_stipple_origin (GnomeCanvas *canvas, GdkGC *gc)
 
 	gdk_gc_set_ts_origin (gc, -canvas->draw_xofs, -canvas->draw_yofs);
 }
-
-void
-dummy (void)
-{
-  ArtUta *uta;
-
-  uta = art_uta_new_coords (0, 0, 100, 100);
-
-  art_uta_free (uta);
-}

@@ -1,3 +1,7 @@
+1998-11-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c: Removed unused function "dummy".
+
 1998-11-25  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gnome-app-helper.c (gnome_app_configure_toolbar)
