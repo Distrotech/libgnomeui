@@ -1,3 +1,10 @@
+1999-01-11  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gtkrc.ko: New file.  gtkrc for Korean users.
+
+	* gnome-init.c (gnome_rc_parse): Use gtk_rc_add_default_file()
+	instead of gtk_rc_parse().
+
 1999-01-10  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-properties.c (gnome_property_object_register):

@@ -474,34 +474,35 @@ gnome_rc_parse (gchar *command)
 	
 	
 	/* <gnomedatadir>/gtkrc */
-	file = gnome_datadir_file("gtkrc");
+	file = gnome_unconditional_datadir_file("gtkrc");
 	if (file){
-		gtk_rc_parse (file);
+		gtk_rc_add_default_file (file);
 		g_free (file);
 	}
 
 	/* <gnomedatadir>/<progname> */
-	file = gnome_datadir_file(apprc);
+	file = gnome_unconditional_datadir_file(apprc);
 	if (file){
-		gtk_rc_parse (file);
+		gtk_rc_add_default_file (file);
 		g_free (file);
 	}
 	
 	/* ~/.gnome/gtkrc */
 	file = gnome_util_home_file("gtkrc");
 	if (file){
-		gtk_rc_parse (file);
+		gtk_rc_add_default_file (file);
 		g_free (file);
 	}
 	
 	/* ~/.gnome/<progname> */
 	file = gnome_util_home_file(apprc);
 	if (file){
-		gtk_rc_parse (file);
+		gtk_rc_add_default_file (file);
 		g_free (file);
 	}
 	
 	g_free (apprc);
+	gtk_rc_init ();
 }
 
 #ifdef USE_SEGV_HANDLE
