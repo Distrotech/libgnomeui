@@ -13,7 +13,6 @@
 #include <gtk/gtksignal.h>
 #include "gnome-canvas-widget.h"
 
-
 enum {
 	ARG_0,
 	ARG_WIDGET,
@@ -398,7 +397,7 @@ gnome_canvas_widget_point (GnomeCanvasItem *item, double x, double y,
 	else
 		dy = 0.0;
 
-	return sqrt (dx * dx + dy * dy);
+	return hypot(dx, dy);
 }
 
 static void

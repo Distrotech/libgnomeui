@@ -1023,7 +1023,7 @@ gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
 		if ((dx == 0) && (dy == 0))
 			return 0.0;
 
-		dist = sqrt (dx * dx + dy * dy);
+		dist = hypot(dx, dy);
 		if (dist < best)
 			best = dist;
 
@@ -1106,7 +1106,7 @@ gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
 		if ((dx == 0) && (dy == 0))
 			return 0.0;
 
-		dist = sqrt (dx * dx + dy * dy);
+		dist = hypot(dx, dy);
 		if (dist < best)
 			best = dist;
 

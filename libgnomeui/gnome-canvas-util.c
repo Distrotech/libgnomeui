@@ -28,7 +28,6 @@
 #include <libart_lgpl/art_uta_svp.h>
 #include <libart_lgpl/art_rect_svp.h>
 
-
 /**
  * gnome_canvas_points_new:
  * @num_points: The number of points to allocate space for in the array.
@@ -195,7 +194,7 @@ gnome_canvas_get_butt_points (double x1, double y1, double x2, double y2,
 	width *= 0.5;
 	dx = x2 - x1;
 	dy = y2 - y1;
-	length = sqrt (dx * dx + dy * dy);
+	length = hypot(dx, dy);
 
 	if (length < GNOME_CANVAS_EPSILON) {
 		*bx1 = *bx2 = x2;
@@ -334,7 +333,7 @@ gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y)
 
 		dx = x - px;
 		dy = y - py;
-		dist = sqrt (dx * dx + dy * dy);
+		dist = hypot(dx, dy);
 		if (dist < best)
 			best = dist;
 	}

@@ -423,7 +423,7 @@ reconfigure_arrows (GnomeCanvasLine *line)
 
 		dx = poly[0] - line->coords[2];
 		dy = poly[1] - line->coords[3];
-		length = sqrt (dx * dx + dy * dy);
+		length = hypot(dx, dy);
 		if (length < GNOME_CANVAS_EPSILON)
 			sin_theta = cos_theta = 0.0;
 		else {
@@ -467,7 +467,7 @@ reconfigure_arrows (GnomeCanvasLine *line)
 
 		dx = poly[0] - coords[0];
 		dy = poly[1] - coords[1];
-		length = sqrt (dx * dx + dy * dy);
+		length = hypot(dx, dy);
 		if (length < GNOME_CANVAS_EPSILON)
 			sin_theta = cos_theta = 0.0;
 		else {
@@ -1164,7 +1164,7 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 		    || ((line->join == GDK_JOIN_ROUND) && (i != num_points))) {
 			dx = coords[0] - x;
 			dy = coords[1] - y;
-			dist = sqrt (dx * dx + dy * dy) - width / 2.0;
+			dist = hypot(dx, dy) - width / 2.0;
 			if (dist < GNOME_CANVAS_EPSILON) {
 				best = 0.0;
 				goto done;
@@ -1246,7 +1246,7 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 	if (line->cap == GDK_CAP_ROUND) {
 		dx = coords[0] - x;
 		dy = coords[1] - y;
-		dist = sqrt (dx * dx + dy * dy) - width / 2.0;
+		dist = hypot(dx, dy) - width / 2.0;
 		if (dist < GNOME_CANVAS_EPSILON) {
 			best = 0.0;
 			goto done;
