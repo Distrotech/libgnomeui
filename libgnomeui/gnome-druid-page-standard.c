@@ -45,6 +45,7 @@ static void gnome_druid_page_standard_init	    (GnomeDruidPageStandard          
 static void gnome_druid_page_standard_class_init    (GnomeDruidPageStandardClass     *klass);
 static void gnome_druid_page_standard_destroy 	    (GtkObject                       *object);
 static void gnome_druid_page_standard_construct     (GnomeDruidPageStandard          *druid_page_standard);
+static void gnome_druid_page_standard_finalize          (GtkObject                       *widget);
 static void gnome_druid_page_standard_configure_size(GnomeDruidPageStandard          *druid_page_standard,
 						     gint                             width,
 						     gint                             height);
@@ -94,6 +95,7 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *klass)
 
 	object_class = (GtkObjectClass*) klass;
 	object_class->destroy = gnome_druid_page_standard_destroy;
+	object_class->finalize = gnome_druid_page_standard_finalize;
 	widget_class = (GtkWidgetClass*) klass;
 	widget_class->size_allocate = gnome_druid_page_standard_size_allocate;
 
@@ -168,14 +170,21 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 static void
 gnome_druid_page_standard_destroy(GtkObject *object)
 {
+	if (GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+}
+
+static void
+gnome_druid_page_standard_finalize (GtkObject *object)
+{
 	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD(object);
 
 	g_free(druid_page_standard->_priv);
 	druid_page_standard->_priv = NULL;
 
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+	g_free (druid_page_standard->title);
 }
+
 
 static void
 gnome_druid_page_standard_configure_size (GnomeDruidPageStandard *druid_page_standard, gint width, gint height)
