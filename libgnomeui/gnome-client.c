@@ -14,6 +14,7 @@
 #include <X11/Xatom.h>
 
 extern char *program_invocation_name;
+extern char *program_invocation_short_name;
 
 #ifndef HAVE_LIBSM
 typedef gpointer SmPointer;
@@ -93,6 +94,8 @@ static void   client_set_prop_from_array    (GnomeClient *client,
 					     gchar       *array[]);
 static void   client_unset_prop             (GnomeClient *client,
 					     gchar       *prop_name);
+
+static void   client_unset_config_prefix    (GnomeClient *client);
 
 #endif /* HAVE_LIBSM */
 
@@ -239,10 +242,10 @@ gnome_client_new_default (void)
 /*****************************************************************************/
 /* GTK-class managing functions */
 
-guint
+GtkType
 gnome_client_get_type (void)
 {
-  static guint client_type = 0;
+  static GtkType client_type = 0;
   
   if (!client_type)
     {
@@ -339,6 +342,8 @@ gnome_client_init (GnomeClient *client)
   client->client_id         = NULL;
   client->previous_id       = NULL;
   client->input_id          = 0;
+  client->config_prefix       = NULL;
+  client->global_config_prefix= NULL;
 
   /* Preset some default values.  */
   client->clone_command     = NULL;
@@ -397,6 +402,8 @@ gnome_real_client_destroy (GtkObject *object)
 
   g_free (client->client_id);
   g_free (client->previous_id);
+  g_free (client->config_prefix);
+  g_free (client->global_config_prefix);
 
   array_free (client->clone_command);
   g_free     (client->current_directory);
@@ -519,11 +526,15 @@ gnome_client_connect (GnomeClient *client)
       if (client->client_id == NULL)
 	{
 	  client->client_id = client_id;
+
+	  client_unset_config_prefix (client);
 	}
       else if (strcmp (client->client_id, client_id) != 0)
 	{
 	  g_free (client->client_id);
 	  client->client_id = client_id;
+
+	  client_unset_config_prefix (client);
 	}
       else
 	{
@@ -706,6 +717,8 @@ gnome_client_set_program (GnomeClient *client,
   g_free (client->program);
   
   client->program= g_strdup (program);
+
+  client_unset_config_prefix (client);  
 #ifdef HAVE_LIBSM
   client_set_prop_from_string (client, SmProgram, client->program);
 #endif /* HAVE_LIBSM */
@@ -847,6 +860,8 @@ gnome_client_set_id (GnomeClient *client, const gchar *id)
 
   g_free (client->client_id);
   client->client_id= g_strdup (id);
+
+  client_unset_config_prefix (client);
 }
 
 
@@ -863,8 +878,81 @@ gchar *
 gnome_client_get_previous_id (GnomeClient *client)
 {
   g_return_val_if_fail (client != NULL, NULL);
+  g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
+
   return client->previous_id;
 }
+
+
+static gchar *config_prefix= NULL;
+  
+gchar *
+gnome_client_get_config_prefix (GnomeClient *client)
+{
+  if (client == NULL)
+    {
+      if (!config_prefix)
+	config_prefix= g_copy_strings ("/", program_invocation_short_name, "/",
+				       NULL);
+
+      return config_prefix;
+    }
+
+  g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
+  
+  if (!client->config_prefix)
+    {
+      char *name;
+      name= strrchr (client->program, '/');
+
+      name= name ? (name+1) : client->program;
+            
+      if (client->client_id)
+	client->config_prefix= g_copy_strings ("/", name, "-id#", 
+					       client->client_id, "/", NULL);
+      else
+	client->config_prefix= g_copy_strings ("/", name, "/", NULL);
+    }
+
+  return client->config_prefix;
+}
+
+gchar *
+gnome_client_get_global_config_prefix (GnomeClient *client)
+{
+  if (client == NULL)
+    {
+      if (!config_prefix)
+	config_prefix= g_copy_strings ("/", program_invocation_short_name, "/",
+				       NULL);
+
+      return config_prefix;
+    }
+
+  g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
+  
+  if (!client->global_config_prefix)
+    {
+      char *name;
+      name= strrchr (client->program, '/');
+
+      name= name ? (name+1) : client->program;
+            
+      client->global_config_prefix= g_copy_strings ("/", name, "/", NULL);
+    }
+
+  return client->global_config_prefix;
+}
+
+static void
+client_unset_config_prefix (GnomeClient *client)
+{
+  g_free (client->config_prefix);
+  client->config_prefix= NULL;
+  g_free (client->global_config_prefix);
+  client->global_config_prefix= NULL;
+} 
+  
 
 /*****************************************************************************/
 
