@@ -646,26 +646,20 @@ pbox_page_unmapped (GtkWidget *page, GtkAccelGroup *accel_group)
 	gtk_window_remove_accel_group (GTK_WINDOW (dialog), accel_group);
 }
 
-static void
-pbox_page_destroyed (GtkWidget *page, GtkAccelGroup *accel_group)
-{
-	gtk_accel_group_unref (accel_group);
-}
-
 static void pbox_page_setup_signals (GtkWidget *page, GtkAccelGroup *accel)
 {
-	gtk_signal_connect (GTK_OBJECT (page),
+	gtk_accel_group_ref(accel);
+	gtk_signal_connect_full (GTK_OBJECT (page),
 			    "map",
-			    GTK_SIGNAL_FUNC (pbox_page_mapped),
-			    accel);
-	gtk_signal_connect (GTK_OBJECT (page),
+			    GTK_SIGNAL_FUNC (pbox_page_mapped), NULL, 
+			    accel, (GtkDestroyNotify)gtk_accel_group_unref,
+			    FALSE, FALSE);
+	gtk_accel_group_ref(accel);
+	gtk_signal_connect_full (GTK_OBJECT (page),
 			    "unmap",
-			    GTK_SIGNAL_FUNC (pbox_page_unmapped),
-			    accel);
-	gtk_signal_connect (GTK_OBJECT (page),
-			    "destroy",
-			    GTK_SIGNAL_FUNC (pbox_page_destroyed),
-			    accel);
+			    GTK_SIGNAL_FUNC (pbox_page_unmapped), NULL,
+			    accel, (GtkDestroyNotify)gtk_accel_group_unref,
+			    FALSE, FALSE);
 }
 
 
