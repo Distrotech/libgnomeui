@@ -1,3 +1,8 @@
+Tue Sep 04 00:04:00 2001  George Lebl <jirka@5z.com>
+
+	* Makefile.am, gnome-popup-menu.[ch], libgnomeui.h: bring back
+	  gnome-popup menu
+
 Mon Sep 03 03:34:36 2001  George Lebl <jirka@5z.com>
 
 	* gnome-app-helper.c: do gconf lazy init stuff

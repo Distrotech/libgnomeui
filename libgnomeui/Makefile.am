@@ -72,6 +72,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-mdi-session.c		\
 	gnome-pixmap.c			\
 	gnome-pixmap-entry.c		\
+	gnome-popup-menu.c		\
 	gnome-propertybox.c		\
 	gnome-scores.c			\
 	gnome-ui-init.c			\
@@ -113,6 +114,7 @@ gnome_headers = \
 	gnome-mdi-session.h		\
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
+	gnome-popup-menu.h		\
 	gnome-propertybox.h		\
 	gnome-scores.h			\
 	gnome-ui-init.h			\

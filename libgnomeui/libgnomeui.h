@@ -72,6 +72,7 @@
 #include <libgnomeui/gnome-vfs-util.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-pixmap-entry.h>
+#include <libgnomeui/gnome-popup-menu.h>
 #include <libgnomeui/gnome-propertybox.h>
 
 #endif
