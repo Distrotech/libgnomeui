@@ -375,6 +375,37 @@ gnome_app_set_statusbar (GnomeApp *app,
 	gtk_box_pack_start (GTK_BOX (app->vbox), hbox, FALSE, FALSE, 0);
 }
 
+/**
+ * gnome_app_set_statusbar_custom
+ * @app: Pointer to GNOME app object
+ * @container: container widget containing the statusbar
+ * @statusbar: Statusbar widget for main app window
+ *
+ * Description:
+ * Sets the status bar of the application window, but use @container
+ * as its container.
+ *
+ **/
+
+void
+gnome_app_set_statusbar_custom (GnomeApp *app,
+				GtkWidget *container,
+				GtkWidget *statusbar)
+{
+	GtkWidget *hbox;
+
+	g_return_if_fail(app != NULL);
+	g_return_if_fail(GNOME_IS_APP(app));
+	g_return_if_fail(container != NULL);
+	g_return_if_fail(GTK_IS_CONTAINER(container));
+	g_return_if_fail(statusbar != NULL);
+	g_return_if_fail(app->statusbar == NULL);
+
+	app->statusbar = GTK_WIDGET(statusbar);
+
+	gtk_box_pack_start (GTK_BOX (app->vbox), container, FALSE, FALSE, 0);
+}
+
 void
 gnome_app_add_toolbar (GnomeApp *app,
 		       GtkToolbar *toolbar,

@@ -1,3 +1,8 @@
+1999-02-05  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-app.c (gnome_app_set_statusbar_custom): New function taking
+	both a container and a statusbar widget.
+
 Thu Feb 04 22:56:28 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-dentry-edit.c: use set_icon method of icon entry as setting

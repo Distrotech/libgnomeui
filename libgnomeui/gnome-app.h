@@ -95,6 +95,12 @@ void gnome_app_set_toolbar (GnomeApp *app, GtkToolbar *toolbar);
 /* Sets the status bar of the application window */
 void gnome_app_set_statusbar (GnomeApp *app, GtkWidget *statusbar);
 
+/* Sets the status bar of the application window, but uses the given
+ * container widget rather than creating a new one. */
+void gnome_app_set_statusbar_custom (GnomeApp *app,
+				     GtkWidget *container,
+				     GtkWidget *statusbar);
+
 /* Sets the content area of the application window */
 void gnome_app_set_contents (GnomeApp *app, GtkWidget *contents);
 
