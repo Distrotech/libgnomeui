@@ -1,3 +1,8 @@
+1999-08-16  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page-standard.c (gnome_druid_page_standard_init):
+	cleaned up the druid a little.
+
 1999-08-13  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-icon-list.c (gil_button_press): Do not rubberband-select

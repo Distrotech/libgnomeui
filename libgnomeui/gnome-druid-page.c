@@ -112,8 +112,8 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 				GTK_RUN_LAST,
 				object_class->type,
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, cancel),
-				gtk_marshal_NONE__POINTER,
-				GTK_TYPE_NONE, 1,
+				gtk_marshal_BOOL__POINTER,
+				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_POINTER);
 
 
@@ -214,6 +214,7 @@ gnome_druid_page_realize (GtkWidget *widget)
   
 	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
 	gdk_window_set_user_data (widget->window, widget);
+	gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
 
 	widget->style = gtk_style_attach (widget->style, widget->window);
 	gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);

@@ -101,14 +101,23 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 	druid_page_standard->vbox = gtk_vbox_new (FALSE, 0);
 	druid_page_standard->canvas = gnome_canvas_new ();
 	druid_page_standard->side_bar = gtk_drawing_area_new ();
+	druid_page_standard->bottom_bar = gtk_drawing_area_new ();
+	druid_page_standard->right_bar = gtk_drawing_area_new ();
 	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->side_bar),
 			       15, 10);
+	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->bottom_bar),
+			       10, 1);
+	gtk_drawing_area_size (GTK_DRAWING_AREA (druid_page_standard->right_bar),
+			       1, 10);
 	rc_style = gtk_rc_style_new ();
 	rc_style->bg[GTK_STATE_NORMAL].red = 6400;
 	rc_style->bg[GTK_STATE_NORMAL].green = 6400;
 	rc_style->bg[GTK_STATE_NORMAL].blue = 28672;
 	rc_style->color_flags[GTK_STATE_NORMAL] = GTK_RC_BG;
 	gtk_widget_modify_style (druid_page_standard->side_bar, rc_style);
+	gtk_widget_modify_style (druid_page_standard->bottom_bar, rc_style);
+	gtk_widget_modify_style (druid_page_standard->right_bar, rc_style);
+
 	/* FIXME: can I just ref the old style? */
 	rc_style = gtk_rc_style_new ();
 	rc_style->bg[GTK_STATE_NORMAL].red = 6400;
@@ -118,8 +127,10 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 	gtk_widget_modify_style (druid_page_standard->canvas, rc_style);
 	gtk_box_pack_start (GTK_BOX (vbox), druid_page_standard->canvas, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX (vbox), druid_page_standard->bottom_bar, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), druid_page_standard->side_bar, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), druid_page_standard->vbox, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX (hbox), druid_page_standard->right_bar, FALSE, FALSE, 0);
 	gtk_widget_set_usize (druid_page_standard->canvas, 508, LOGO_WIDTH + GNOME_PAD * 2);
 	gtk_container_set_border_width (GTK_CONTAINER (druid_page_standard), 0);
 	gtk_container_add (GTK_CONTAINER (druid_page_standard), vbox);

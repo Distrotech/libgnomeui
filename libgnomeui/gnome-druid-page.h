@@ -47,7 +47,7 @@ struct _GnomeDruidPageClass
 	void     (*prepare)	(GnomeDruidPage *druid_page, GtkWidget *druid);
 	gboolean (*back)	(GnomeDruidPage *druid_page, GtkWidget *druid);
 	void     (*finish)	(GnomeDruidPage *druid_page, GtkWidget *druid);
-	void     (*cancel)	(GnomeDruidPage *druid_page, GtkWidget *druid);
+	gboolean (*cancel)	(GnomeDruidPage *druid_page, GtkWidget *druid);
 };
 
 

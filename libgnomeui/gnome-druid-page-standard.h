@@ -57,6 +57,8 @@ struct _GnomeDruidPageStandard
 	GnomeCanvasItem *logo_item;
 	GnomeCanvasItem *title_item;
 	GnomeCanvasItem *background_item;
+	GtkWidget *bottom_bar;
+	GtkWidget *right_bar;
 };
 struct _GnomeDruidPageStandardClass
 {
