@@ -10,6 +10,8 @@
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-i18n.h"
+#include "libgnome/gnome-score.h"
+#include "libgnome/gnome-string.h"
 
 #include "gtk/gtk.h"
 
@@ -188,12 +190,6 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 	if(col)
 		memcpy((void *) &s->fg[0], col, sizeof(GdkColor) );
 
-	if( font ) fo = font;
-	else fo = "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-iso8859-1";
-
-	if ((f = gdk_fontset_load (fo)))
-		s->font = f;
-
 	gs->logo = gtk_label_new(txt);
 	gtk_widget_set_style(GTK_WIDGET(gs->logo), s);
 	gtk_box_pack_end (GTK_BOX(gs->vbox), gs->logo, TRUE, TRUE, 0);
@@ -234,3 +230,29 @@ void gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
 	gtk_widget_show (gs->logo);
 }
 
+void
+gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos)
+{
+	GtkWidget *hs;
+	GdkColor ctitle = {0, 0, 0, 65535};
+	GdkColor col = {0, 65535, 0, 0};
+	gchar **names = NULL;
+	gfloat *scores = NULL;
+	time_t *scoretimes = NULL;
+	gint top;
+	int i;
+
+	top = gnome_score_get_notable(app_name, level, &names, &scores, &scoretimes);
+	if (top > 0){
+		hs = gnome_scores_new(top, names, scores, scoretimes, 0);
+		gnome_scores_set_logo_label (GNOME_SCORES(hs), title, 0, 
+					     &ctitle);
+		if(pos)
+			gnome_scores_set_color(GNOME_SCORES(hs), pos-1, &col);
+
+		gtk_widget_show (hs);
+		gnome_string_array_free(names);
+		g_free(scores);
+		g_free(scoretimes);
+	} 
+}

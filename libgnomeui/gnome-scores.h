@@ -54,6 +54,8 @@ void	   gnome_scores_set_def_color   (GnomeScores *, GdkColor*);
 		   array, not a pointer as in [set|def]_color */
 void	   gnome_scores_set_colors      (GnomeScores *, GdkColor*); 
 
+void       gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos);
+
 END_GNOME_DECLS
 
 #endif /* GNOME_SCORES_H */
