@@ -70,9 +70,13 @@ enum {
 
 extern gchar *GTK_CAULDRON_ENTER;
 extern gchar *GTK_CAULDRON_ESCAPE;
+#define GTK_CAULDRON_ERROR ((gchar *) (-1))
 
 /* GTK_CAULDRON_TYPE_CALLBACK : */
 typedef GtkWidget *(*GtkCauldronCustomCallback) (GtkWidget * widget, gpointer user_data);
+
+/* if gtk_dialog_cauldron_parse() returns GTK_CAULDRON_ERROR */
+gchar *gtk_dialog_cauldron_get_error (void);
 
 /* for straight C usage */
 gchar *gtk_dialog_cauldron (const gchar * title, glong options, ...);

@@ -38,8 +38,20 @@
 gchar *GTK_CAULDRON_ENTER = "GTK_CAULDRON_ENTER";
 gchar *GTK_CAULDRON_ESCAPE = "GTK_CAULDRON_ESCAPE";
 
+static gchar *gtk_dialog_cauldron_error = 0;
+
+gchar *gtk_dialog_cauldron_get_error (void)
+{
+    return gtk_dialog_cauldron_error;
+}
+
+static void gtk_dialog_cauldron_set_error (gchar *s)
+{
+    gtk_dialog_cauldron_error = s;
+}
+
 enum {
-    VERTICAL_HOMOGENOUS,
+    VERTICAL_HOMOGENOUS = 1,
     VERTICAL,
     HORIZONTAL_HOMOGENOUS,
     HORIZONTAL
@@ -196,7 +208,7 @@ static gint find_breaker (gchar * p)
 		return VERTICAL;
 	}
     }
-    g_error ("bracketing error in call to gtk_dialog_cauldron()");
+    gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): bracketing error in format string");
     return 0;
 }
 
@@ -222,25 +234,32 @@ typedef struct _GtkCauldronStack {
     GtkWidget *widget_stack[256];
 } GtkCauldronStack;
 
-static void widget_stack_push (GtkCauldronStack * s, GtkWidget * x)
+static int widget_stack_push (GtkCauldronStack * s, GtkWidget * x)
 {
-    if (s->widget_stack_pointer >= 250)
-	g_error ("to many widget's in gtk_dialog_cauldron()");
+    if (s->widget_stack_pointer >= 250) {
+	gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): maximum number of widgets exceeded");
+	return 1;
+    }
     s->widget_stack[s->widget_stack_pointer++] = x;
     s->widget_stack[s->widget_stack_pointer] = 0;
+    return 0;
 }
 
 static GtkWidget *widget_stack_pop (GtkCauldronStack * s)
 {
-    if (s->widget_stack_pointer <= 0)
-	g_error ("bracketing error in call to gtk_dialog_cauldron()");
+    if (s->widget_stack_pointer <= 0) {
+	gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): bracketing error in format string");
+	return 0;
+    }
     return s->widget_stack[--(s->widget_stack_pointer)];
 }
 
 static GtkWidget *widget_stack_top (GtkCauldronStack * s)
 {
-    if (s->widget_stack_pointer <= 0)
-	g_error ("bracketing error in call to gtk_dialog_cauldron()");
+    if (s->widget_stack_pointer <= 0) {
+	gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): bracketing error in format string");
+	return 0;
+    }
     s->widget_stack[s->widget_stack_pointer] = 0;
     return s->widget_stack[s->widget_stack_pointer - 1];
 }
@@ -260,14 +279,14 @@ static int option_is_present (gchar * p, gchar c)
     return present;
 }
 
-static void gtk_cauldron_box_add (GtkWidget * b, GtkWidget * w, gchar ** p, gint pixels_per_space)
+static int gtk_cauldron_box_add (GtkWidget * b, GtkWidget * w, gchar ** p, gint pixels_per_space)
 {
     gint expand = FALSE, fill = FALSE, padding = 0, shadow = -1;
     if (option_is_present (1 + *p, 'd')) {	/* 'd' for 'd'efault values */
 	gtk_container_add (GTK_CONTAINER (b), w);
 	while ((*p)[1] && strchr (CAULDRON_FMT_OPTIONS, (*p)[1]))
 	    (*p)++;
-	return;
+	return 0;
     }
     while ((*p)[1] && strchr (CAULDRON_FMT_OPTIONS, (*p)[1])) {
 	(*p)++;
@@ -307,7 +326,8 @@ static void gtk_cauldron_box_add (GtkWidget * b, GtkWidget * w, gchar ** p, gint
 	    } else if (GTK_IS_VIEWPORT (w) && shadow != -1) {
 		gtk_viewport_set_shadow_type (GTK_VIEWPORT (w), shadow);
 	    } else {
-		g_warning ("gtk_dialog_cauldron(): widget doesn't support setting of shadow type");
+		gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): widget doesn't support setting of shadow type");
+		return 1;
 	    }
 	    break;
 	default:
@@ -321,6 +341,7 @@ static void gtk_cauldron_box_add (GtkWidget * b, GtkWidget * w, gchar ** p, gint
 	gtk_box_pack_start (GTK_BOX (b), w, expand, fill, padding);
     } else if (GTK_IS_CONTAINER (b))
 	gtk_container_add (GTK_CONTAINER (b), w);
+    return 0;
 }
 
 /* }}} process packing options */
@@ -527,7 +548,11 @@ static GtkWidget *gtk_label_new_with_ampersand (const gchar * _label)
  * cancelled. GTK_CAULDRON_ENTER is returned if the user pressed
  * enter (return-on-enter can be overridden - see global options
  * below), and GTK_CAULDRON_ESCAPE is returned if the user
- * pressed escape. Otherwise the label of the widget that was used to
+ * pressed escape. GTK_CAULDRON_ERROR is returned by 
+ * gtk_dialog_cauldron_parse() if an error
+ * occurred (like a malformed format string). The error message can be
+ * retrieved by gtk_dialog_cauldron_get_error().
+ * Otherwise the label of the widget that was used to
  * exit the dialog is returned.
  *
  */
@@ -535,7 +560,7 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		 GtkCauldronNextArgCallback next_arg, gpointer user_data, GtkWidget *parent_)
 {
     GtkWidget *parent = 0;
-    GtkWidget *w = 0, *window, *f = 0;
+    GtkWidget *w = 0, *top, *window, *f = 0;
     GSList *radio_group = 0;
     gchar *p, *return_result = 0, *fmt;
     gint pixels_per_space = 3;
@@ -597,7 +622,8 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
     gtk_signal_connect (GTK_OBJECT (window), "key_press_event",
 			(GtkSignalFunc) key_press_event, (gpointer) & d);
 
-    widget_stack_push (stack, window);
+    if (widget_stack_push (stack, window))
+	return GTK_CAULDRON_ERROR;
 
 /* add outermost brackets to make parsing easier : */
     p = fmt = malloc (strlen (format) + 8);
@@ -617,14 +643,20 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 	    switch (find_breaker (p)) {
 	    case VERTICAL:
 	    case VERTICAL_HOMOGENOUS:
-		widget_stack_push (stack, gtk_vpaned_new ());
+		if (widget_stack_push (stack, gtk_vpaned_new ()))
+		    return GTK_CAULDRON_ERROR;
 		break;
 	    case HORIZONTAL:
 	    case HORIZONTAL_HOMOGENOUS:
-		widget_stack_push (stack, gtk_hpaned_new ());
+		if (widget_stack_push (stack, gtk_hpaned_new ()))
+		    return GTK_CAULDRON_ERROR;
 		break;
+	    default:
+		return GTK_CAULDRON_ERROR;
 	    }
-	    gtk_container_set_border_width (GTK_CONTAINER (widget_stack_top (stack)), pixels_per_space * space_after (p));
+	    if (!(top = widget_stack_top (stack)))
+		return GTK_CAULDRON_ERROR;
+	    gtk_container_set_border_width (GTK_CONTAINER (top), pixels_per_space * space_after (p));
 	    break;
 	case '(':
 	    if (strchr ("% \t([{<>}])", p[1])) {
@@ -636,17 +668,23 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		s = space_after (q) * pixels_per_space;
 		switch (find_breaker (p)) {
 		case VERTICAL:
-		    widget_stack_push (stack, gtk_vbox_new (FALSE, s));
+		    if (widget_stack_push (stack, gtk_vbox_new (FALSE, s)))
+			return GTK_CAULDRON_ERROR;
 		    break;
 		case VERTICAL_HOMOGENOUS:
-		    widget_stack_push (stack, gtk_vbox_new (TRUE, s));
+		    if (widget_stack_push (stack, gtk_vbox_new (TRUE, s)))
+			return GTK_CAULDRON_ERROR;
 		    break;
 		case HORIZONTAL:
-		    widget_stack_push (stack, gtk_hbox_new (FALSE, s));
+		    if (widget_stack_push (stack, gtk_hbox_new (FALSE, s)))
+			return GTK_CAULDRON_ERROR;
 		    break;
 		case HORIZONTAL_HOMOGENOUS:
-		    widget_stack_push (stack, gtk_hbox_new (TRUE, s));
+		    if (widget_stack_push (stack, gtk_hbox_new (TRUE, s)))
+			return GTK_CAULDRON_ERROR;
 		    break;
+		default:
+		    return GTK_CAULDRON_ERROR;
 		}
 	    } else {
 /* place a label right in here */
@@ -654,28 +692,35 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		label = g_strdup (p + 1);
 		p = strchr (p, ')');
 		if (!p) {
-		    g_error ("bracketing error in call to gtk_dialog_cauldron()");
-		    return 0;
+		    gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): bracketing error in format string");
+		    return GTK_CAULDRON_ERROR;
 		}
 		*(strchr (label, ')')) = '\0';
 		w = gtk_label_new_with_ampersand (label);
 		g_free (label);
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		if (!(top = widget_stack_top (stack)))
+		    return GTK_CAULDRON_ERROR;
+		if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+		    return GTK_CAULDRON_ERROR;
 		gtk_widget_show (w);
 		break;
 	    }
-	    gtk_container_set_border_width (GTK_CONTAINER (widget_stack_top (stack)), pixels_per_space * space_after (p));
+	    if (!(top = widget_stack_top (stack)))
+		return GTK_CAULDRON_ERROR;
+	    gtk_container_set_border_width (GTK_CONTAINER (top), pixels_per_space * space_after (p));
 	    break;
 	case '[':
-	    widget_stack_push (stack, gtk_frame_new (NULL));
+	    if (widget_stack_push (stack, gtk_frame_new (NULL)))
+		return GTK_CAULDRON_ERROR;
 	    break;
 	case '%':
 	    switch (c = *(++p)) {
 	    case '[':{
 		    char *label;
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
-		    widget_stack_push (stack, gtk_frame_new (label));
+		    if (widget_stack_push (stack, gtk_frame_new (label)))
+			return GTK_CAULDRON_ERROR;
 		    break;
 		}
 	    case 'L':{
@@ -683,7 +728,10 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
 		    w = gtk_label_new_with_ampersand (label);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			return GTK_CAULDRON_ERROR;
 		    gtk_widget_show (w);
 		    break;
 		}
@@ -726,21 +774,29 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		    }
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		    if (table) {
-			gtk_cauldron_box_add (widget_stack_top (stack), table, &p, pixels_per_space);
+			if (!(top = widget_stack_top (stack)))
+			    return GTK_CAULDRON_ERROR;
+			if (gtk_cauldron_box_add (top, table, &p, pixels_per_space))
+			    return GTK_CAULDRON_ERROR;
 			gtk_table_attach (GTK_TABLE (table), w, 0, 1, 0, 1,
 				      GTK_EXPAND | GTK_SHRINK | GTK_FILL,
 			       GTK_EXPAND | GTK_SHRINK | GTK_FILL, 0, 0);
 			gtk_widget_show (table);
 		    } else {
-			gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+			if (!(top = widget_stack_top (stack)))
+			    return GTK_CAULDRON_ERROR;
+			if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			    return GTK_CAULDRON_ERROR;
 		    }
 		    gtk_widget_show (w);
 		    if (*result) {
 			text_widget[ntext_widget] = w;
 			text[ntext_widget] = *result;
 			ntext_widget++;
-			if (ntext_widget >= MAX_TEXT_WIDGETS)
-			    g_error ("MAX_TEXT_WIDGETS exceeded in call to gtk_dialog_cauldron()");
+			if (ntext_widget >= MAX_TEXT_WIDGETS) {
+			    gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): maximum number of text widgets exceeded");
+			    return GTK_CAULDRON_ERROR;
+			}
 		    }
 		    break;
 		}
@@ -751,15 +807,20 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		next_arg (GTK_CAULDRON_TYPE_DOUBLE_P, user_data, &result);
 		next_arg (GTK_CAULDRON_TYPE_INT, user_data, &flags);
 		w = gnome_date_edit_new_flags ((time_t) *result, flags);
-		if (!result)
-		    g_warning ("gtk_dialog_cauldron(): date edit widget with place to store result = NULL");
+		if (!result) {
+		    gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): date edit widget: place to store result = NULL");
+		    return GTK_CAULDRON_ERROR;
+		}
 		new_result (r, get_gnome_date_edit_result, w, result);
 		if (option_is_present (p + 1, 'o')) {
 		    f = 0;
 		    get_child_entry (w, &f);
 		}
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		if (!(top = widget_stack_top (stack)))
+		    return GTK_CAULDRON_ERROR;
+		if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+		    return GTK_CAULDRON_ERROR;
 		gtk_widget_show (w);
 		break;
 	    }
@@ -831,7 +892,10 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 			get_child_entry (w, &f);
 		    }
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			return GTK_CAULDRON_ERROR;
 		    gtk_widget_show (w);
 		    break;
 		}
@@ -869,7 +933,10 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 			      GTK_SIGNAL_FUNC (gtk_cauldron_button_exit),
 					(gpointer) & b[ncauldron_button]);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			return GTK_CAULDRON_ERROR;
 		    gtk_widget_show (w);
 		    ncauldron_button++;
 		    break;
@@ -892,7 +959,10 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		    GTK_TOGGLE_BUTTON (w)->active = *result;
 		    new_result (r, get_check_result, w, result);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			return GTK_CAULDRON_ERROR;
 		    gtk_widget_show (w);
 		    if (label)
 			g_free (label);
@@ -925,16 +995,24 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		    if (option_is_present (p + 1, 'o'))
 			f = w;
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			return GTK_CAULDRON_ERROR;
 		    gtk_widget_show (w);
 		} else {
-		    if (GTK_IS_HBOX (widget_stack_top (stack))) {
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (GTK_IS_HBOX (top)) {
 			w = gtk_vseparator_new ();
 		    } else {
 			w = gtk_hseparator_new ();
 		    }
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			return GTK_CAULDRON_ERROR;
 		    gtk_widget_show (w);
 		}
 		break;
@@ -957,7 +1035,10 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), *result);
 		    new_result (r, get_check_result, w, result);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			return GTK_CAULDRON_ERROR;
 		    gtk_widget_show (w);
 		    if (label)
 			g_free (label);
@@ -972,10 +1053,14 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		    if (option_is_present (p + 1, 'o'))
 			f = w;
 		    if (w) {
-			gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+			if (!(top = widget_stack_top (stack)))
+			    return GTK_CAULDRON_ERROR;
+			if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+			    return GTK_CAULDRON_ERROR;
 			gtk_widget_show (w);
 		    } else {
-			g_warning ("user callback GtkCauldronCustomCallback returned null");
+			gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): user callback GtkCauldronCustomCallback returned null");
+			return GTK_CAULDRON_ERROR;
 		    }
 		    break;
 		}
@@ -986,30 +1071,42 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 	case ']':
 	    radio_group = 0;
 	    w = widget_stack_pop (stack);
+	    if (!w)
+		return GTK_CAULDRON_ERROR;
 	    if (GTK_IS_NOTEBOOK(w)) {
 		gtk_notebook_set_page (GTK_NOTEBOOK (w), 0);
 		w = widget_stack_pop (stack);
+		if (!w)
+		    return GTK_CAULDRON_ERROR;
 	    }
 	    if (option_is_present (p + 1, 'n')) {
 		gchar *label;
 /* adding to a notebook requires special handling : */
-		if (!GTK_IS_NOTEBOOK(widget_stack_top (stack))) {
+		if (!(top = widget_stack_top (stack)))
+		    return GTK_CAULDRON_ERROR;
+		if (!GTK_IS_NOTEBOOK(top)) {
 		    GtkWidget *notebook;
 		    notebook = gtk_notebook_new ();
 		    if (option_is_present (p + 1, 'v'))
 			gtk_notebook_set_tab_pos (GTK_NOTEBOOK (notebook), GTK_POS_LEFT);
 		    while (p[1] && strchr (CAULDRON_FMT_OPTIONS, p[1]))
 			p++;
-		    gtk_cauldron_box_add (widget_stack_top (stack), notebook, &p, pixels_per_space);
+		    if (!(top = widget_stack_top (stack)))
+			return GTK_CAULDRON_ERROR;
+		    if (gtk_cauldron_box_add (top, notebook, &p, pixels_per_space))
+			return GTK_CAULDRON_ERROR;
 		    gtk_widget_show (notebook);
-		    widget_stack_push (stack, notebook);
+		    if (widget_stack_push (stack, notebook))
+			return GTK_CAULDRON_ERROR;
 		} else {
 		    while (p[1] && strchr (CAULDRON_FMT_OPTIONS, p[1]))
 			p++;
 		}
 		next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		gtk_notebook_append_page (GTK_NOTEBOOK (widget_stack_top (stack)), w, gtk_label_new_with_ampersand (label));
+		if (!(top = widget_stack_top (stack)))
+		    return GTK_CAULDRON_ERROR;
+		gtk_notebook_append_page (GTK_NOTEBOOK (top), w, gtk_label_new_with_ampersand (label));
 	    } else if (option_is_present (p + 1, 'v') || option_is_present (p + 1, 'h')) {
 		GtkWidget *scrolled_window;
 		scrolled_window = gtk_scrolled_window_new (NULL, NULL);
@@ -1019,29 +1116,37 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 		gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), w);
 		gtk_widget_show (scrolled_window);
 		user_callbacks (scrolled_window, p + 1, next_arg, user_data, accel_table);
-		gtk_cauldron_box_add (widget_stack_top (stack), scrolled_window, &p, pixels_per_space);
+		if (!(top = widget_stack_top (stack)))
+		    return GTK_CAULDRON_ERROR;
+		if (gtk_cauldron_box_add (top, scrolled_window, &p, pixels_per_space))
+		    return GTK_CAULDRON_ERROR;
 	    } else {
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
+		if (!(top = widget_stack_top (stack)))
+		    return GTK_CAULDRON_ERROR;
+		if (gtk_cauldron_box_add (top, w, &p, pixels_per_space))
+		    return GTK_CAULDRON_ERROR;
 	    }
 	    gtk_widget_show (w);
 	    break;
 	default:{
-		gchar e[100] = "bad syntax in call to gtk_dialog_cauldron() at: ";
+		gchar e[100] = "gtk_dialog_cauldron(): bad syntax in format string at: ";
 		gint l;
 		l = strlen (e);
 		strncpy (e + l, p, 30);
 		strcpy (e + l + 30, "...");
-		g_error ("%s", e);
-		return 0;
+		gtk_dialog_cauldron_set_error (e);
+		return GTK_CAULDRON_ERROR;
 	    }
 	}
     }
     if (stack->widget_stack_pointer != 1) {
-	g_error ("bracketing error in call to gtk_dialog_cauldron()");
-	return 0;
+	gtk_dialog_cauldron_set_error ("gtk_dialog_cauldron(): bracketing error in format string");
+	return GTK_CAULDRON_ERROR;
     }
     w = widget_stack_pop (stack);
+    if (!w)
+	return GTK_CAULDRON_ERROR;
     gtk_widget_show (w);
 
     while (ntext_widget-- > 0) {
@@ -1170,7 +1275,7 @@ static void next_arg (gint type, va_list * ap, void *result)
 gchar *gtk_dialog_cauldron (const gchar * title, glong options,...)
 {
     gchar *r;
-    GtkWidget *parent;
+    GtkWidget *parent = 0;
     char *format;
     va_list ap;
     va_start (ap, options);
@@ -1179,6 +1284,8 @@ gchar *gtk_dialog_cauldron (const gchar * title, glong options,...)
     format = va_arg (ap, char *);
     r = gtk_dialog_cauldron_parse (title, options, format, (GtkCauldronNextArgCallback) next_arg, &ap, parent);
     va_end (ap);
+    if (r == GTK_CAULDRON_ERROR)
+	g_error (gtk_dialog_cauldron_get_error ());
     return r;
 }				/* }}} main */
 
