@@ -57,7 +57,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-entry.c			\
 	gnome-image-entry.c		\
 	gnome-image-selector.c		\
-        gnome-font-picker.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-ui-init.c			\
@@ -82,7 +81,6 @@ gnome_headers = \
 	gnome-entry.h			\
 	gnome-image-entry.h		\
 	gnome-image-selector.h		\
-        gnome-font-picker.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-list.h		\

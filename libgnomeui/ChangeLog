@@ -1,5 +1,9 @@
 2001-08-14  Martin Baulig  <baulig@suse.de>
 
+	* Makefile.am: Disabled GnomeFontPicker.
+
+2001-08-14  Martin Baulig  <baulig@suse.de>
+
 	* Makefile.am: Disabled GnomeAbout, don't link it into the
 	library and don't install the header file.
 
