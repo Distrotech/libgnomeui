@@ -1,12 +1,12 @@
 # Copyright (C) 2001-2002 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2001-2002.
-# Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2002
+# Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2002-2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
-"PO-Revision-Date: 2003-01-18 14:10+0300\n"
+"POT-Creation-Date: 2003-06-18 20:19+0400\n"
+"PO-Revision-Date: 2003-06-18 20:25+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,9 +46,8 @@ msgid "Translated by"
 msgstr "Перевод"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Авторы"
+msgstr "_Авторы"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -139,6 +138,7 @@ msgstr "О программе \"%s\""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -196,6 +196,7 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Справка"
 
@@ -386,11 +387,11 @@ msgstr "Настроить приложение"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_О программе"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Получить информацию об этой программе"
 
@@ -417,7 +418,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "_Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -592,7 +593,7 @@ msgstr "Требуется активность пользователя."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Прокси типа HTTP требует входа в сеанс.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -600,18 +601,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Необходимо войти в сеанс, чтобы иметь доступ к \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Ваш пароль будет передан незашифрованным."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Ваш пароль будет передан зашифрованным."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Аутентификация требуется"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -655,7 +658,7 @@ msgstr "Открыть диалог для определения цвета"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
-msgstr "Выберите цвет"
+msgstr "Выбрать цвет"
 
 #: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
@@ -1213,11 +1216,11 @@ msgstr "Сообщение"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "И-мя пользователя:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Пароль:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1290,27 +1293,27 @@ msgstr "Вернуть отступ"
 msgid "About"
 msgstr "О программе"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "X display to use"
 msgstr "Используемый дисплей X"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЙ"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:125
 msgid "GNOME GUI Library"
 msgstr "Библиотека пользовательского интерфейса среды Гном"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Возникли множественные ошибки сегментации; невозможно отобразить диалог об "
 "ошибке\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:637
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1366,11 +1369,12 @@ msgstr ""
 "Посетите страницу \"Сбой приложения среды Гном\" для получения "
 "дополнительной информации"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Выйти из теста"
+
 #~ msgid "_Credits"
 #~ msgstr "_Авторы"
-
-#~ msgid "Exit the test"
-#~ msgstr "Выйти из теста"
 
 #~ msgid "Find _Again"
 #~ msgstr "Найти _снова"
