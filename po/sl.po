@@ -538,11 +538,11 @@ msgstr "_Uredi/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "Pogled"
+msgstr "Po_gled"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "Pogled/"
+msgstr "Po_gled/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -1011,7 +1011,7 @@ msgstr "Privzeta pot"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr "Privzeta pot za okno brskalnika datotek"
+msgstr "Privzeta pot za okno brskalnika datotek."
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
@@ -1173,7 +1173,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:185
 msgid "Title for the Browse icon dialog."
-msgstr "Naziv dialoga za brksanje ikon"
+msgstr "Naziv dialoga za brksanje ikon."
 
 #: libgnomeui/gnome-icon-entry.c:192
 msgid "Pixmap Directory"
@@ -1181,7 +1181,7 @@ msgstr "Imenik slik"
 
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Directory that will be searched for icons."
-msgstr "Imenik v katerem naj se iščejo ikone"
+msgstr "Imenik v katerem naj se iščejo ikone."
 
 #: libgnomeui/gnome-icon-entry.c:201
 msgid "Filename that should be displayed in the icon entry."
