@@ -19,9 +19,6 @@ libgnomeuiincludedir = $(includedir)/libgnomeui-2.0/libgnomeui
 INCLUDES = \
 	-I$(top_builddir)				\
 	-I$(top_srcdir)					\
-        -DG_DISABLE_DEPRECATED				\
-        -DGDK_DISABLE_DEPRECATED			\
-        -DGDK_PIXBUF_DISABLE_DEPRECATED			\
         -DGNOMEUILIBDIR=\""$(libdir)"\" 		\
         -DGNOMEUIDATADIR=\""$(datadir)"\" 		\
         -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\

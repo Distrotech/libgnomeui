@@ -1032,6 +1032,7 @@ create_icon_list(void)
 
 	gnome_icon_list_append (GNOME_ICON_LIST(iconlist), "non-existant.png", "No Icon");
 
+	g_object_unref (pix);
 	gnome_icon_list_set_selection_mode (GNOME_ICON_LIST (iconlist), GTK_SELECTION_EXTENDED);
 	gnome_icon_list_thaw (GNOME_ICON_LIST (iconlist));
 	gtk_widget_show (iconlist);
