@@ -1275,7 +1275,7 @@ msgstr "Tarih"
 #.
 #: libgnomeui/gnome-scores.c:199
 msgid "%a %b %d %T %Y"
-msgstr "%a %d %b %T %Y"
+msgstr "%d %b %a %T %Y"
 
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
