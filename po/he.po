@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
-"POT-Creation-Date: 2003-01-21 11:16+0100\n"
+"POT-Creation-Date: 2003-01-23 15:33+0100\n"
 "PO-Revision-Date: 2003-01-05 21:32+0200\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"

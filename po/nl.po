@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
-"POT-Creation-Date: 2003-01-21 11:16+0100\n"
+"POT-Creation-Date: 2003-01-23 15:33+0100\n"
 "PO-Revision-Date: 2002-12-26 20:19+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"

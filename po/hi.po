@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
-"POT-Creation-Date: 2003-01-21 11:16+0100\n"
+"POT-Creation-Date: 2003-01-23 15:33+0100\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Anurag Seetha <anuragseetha@yahoo.com>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"

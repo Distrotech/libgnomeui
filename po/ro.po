@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.1\n"
-"POT-Creation-Date: 2003-01-22 12:12+0100\n"
+"POT-Creation-Date: 2003-01-23 15:33+0100\n"
 "PO-Revision-Date: 2003-01-22 21:22+0300\n"
 "Last-Translator: Marius Andreiana <marius galuna.ro>\n"
 "Language-Team: română <ro@li.org>\n"
@@ -524,7 +524,6 @@ msgstr "Sugestie pentru element 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fişier"
 
@@ -582,7 +581,6 @@ msgid "_Game"
 msgstr "_Joc"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajutor"
 
@@ -773,11 +771,11 @@ msgstr "Configurează aplicaţia"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Despre"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Despre această aplicaţie"
 
@@ -804,7 +802,7 @@ msgstr "Crează o fereastră nouă"
 msgid "_Close This Window"
 msgstr "_Închide această fereastră"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Închide fereastra curentă"
 
@@ -1258,8 +1256,7 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Aici ar trebui să introduceţi numele dosarului care conţine imaginile "
-"icon."
+"Aici ar trebui să introduceţi numele dosarului care conţine imaginile icon."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1338,6 +1335,5 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Ieşi din test"
+#~ msgid "Exit the test"
+#~ msgstr "Ieşi din test"

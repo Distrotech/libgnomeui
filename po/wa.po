@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2003-01-21 11:16+0100\n"
+"POT-Creation-Date: 2003-01-23 15:33+0100\n"
 "PO-Revision-Date: 2003-01-14 15:27+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"

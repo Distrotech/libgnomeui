@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.mn\n"
-"POT-Creation-Date: 2003-01-08 06:05+0100\n"
+"POT-Creation-Date: 2003-01-23 15:33+0100\n"
 "PO-Revision-Date: 2003-01-21 06:26+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -106,8 +106,10 @@ msgstr "Орчуулагч"
 
 # CHECK
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Орчуулагчдад талархал. Энэ үгс орчуулагдах боломжтойгоор тэмдэглэгджээ."
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Орчуулагчдад талархал. Энэ үгс орчуулагдах боломжтойгоор тэмдэглэгджээ."
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -258,8 +260,8 @@ msgstr "Жигсаалтаас цаг сонгох"
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
-"»gnome_date_edit_get_date« хуучирсан. Та »gnome_date_edit_get_time« "
-"-г хэрэглэнэ үү"
+"»gnome_date_edit_get_date« хуучирсан. Та »gnome_date_edit_get_time« -г "
+"хэрэглэнэ үү"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -402,8 +404,8 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Стандарт хөтөчийг ажиллуулхыг оролдоход алдаа гарлаа.\n"
-"Та түүнд хамаатай »Эрхэмлэсэн програмууд« гэсэн тохируулгын "
-"диалогоос тохируулгаа зөв эсэхийг шалгана уу."
+"Та түүнд хамаатай »Эрхэмлэсэн програмууд« гэсэн тохируулгын диалогоос "
+"тохируулгаа зөв эсэхийг шалгана уу."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -421,8 +423,8 @@ msgstr "GNOME-GUI-сан"
 #: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"Олон хандалтын (сегмент) эвдрэл гарлаа; Алдааны диалог ч бас "
-"харагдах боломжгүй шүү.\n"
+"Олон хандалтын (сегмент) эвдрэл гарлаа; Алдааны диалог ч бас харагдах "
+"боломжгүй шүү.\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:631
@@ -442,12 +444,10 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"GNOME-суултын менежер (Процесс-Ду. %d) ноцтой! алдааны улмаас "
-"гацлаа. (%s).\n"
-"Таныг энэ диалогийг хаах үед бүх программ хаагдаж таны суултыг "
-"дуусгана.\n"
-"Тиймээс та бүх хадгалаагүй байгаа файлуудаа энэ диалогийг хаахаасаа "
-"өмнө хадгалаж авна уу."
+"GNOME-суултын менежер (Процесс-Ду. %d) ноцтой! алдааны улмаас гацлаа. (%s).\n"
+"Таныг энэ диалогийг хаах үед бүх программ хаагдаж таны суултыг дуусгана.\n"
+"Тиймээс та бүх хадгалаагүй байгаа файлуудаа энэ диалогийг хаахаасаа өмнө "
+"хадгалаж авна уу."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -456,8 +456,7 @@ msgid ""
 "due to a fatal error.\n"
 "(%s)"
 msgstr ""
-"Программ »%s« (Процесс-Ду. %d) ноцтой! алдааны улмаас "
-"гацлаа:\n"
+"Программ »%s« (Процесс-Ду. %d) ноцтой! алдааны улмаас гацлаа:\n"
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:122
@@ -479,8 +478,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
-"Та дэлгэрэнгүй мэдээлэл авахдаа GNOME-н алдаа боловсруулагч "
-"вэб хаягаар зочилоно уу."
+"Та дэлгэрэнгүй мэдээлэл авахдаа GNOME-н алдаа боловсруулагч вэб хаягаар "
+"зочилоно уу."
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -528,7 +527,6 @@ msgstr "Хүү элемент 2 -н зөвлөмж"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -586,7 +584,6 @@ msgid "_Game"
 msgstr "_Тоглоом"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Тусламж"
 
@@ -777,11 +774,11 @@ msgstr "Программыг тохируулах"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Тухай"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Энэ программын тухай"
 
@@ -808,7 +805,7 @@ msgstr "Шинэ _цонх нээх"
 msgid "_Close This Window"
 msgstr "Цонх _хаах"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Энэ цонхыг хаах"
 
@@ -979,8 +976,8 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Файлын бичлэгт ялгаатай дугаар.  Энэ нь түүхийн жигсаалт "
-"хадгалахад хэрэглэгдэнэ."
+"Файлын бичлэгт ялгаатай дугаар.  Энэ нь түүхийн жигсаалт хадгалахад "
+"хэрэглэгдэнэ."
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
@@ -999,8 +996,7 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Файлын бичлэг лавлахын нэрийн оруулах эсвэл файлын бүтэн нэр "
-"хэрэглэх эсэх."
+"Файлын бичлэг лавлахын нэрийн оруулах эсвэл файлын бүтэн нэр хэрэглэх эсэх."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1036,9 +1032,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry, файлын бичлэгийг файлын нэр оруулахад хэрэглэдэг. "
-"Хэрвээ та түүний параметрийг өөрчилөх эсвэл хүсэлт тавих болбол "
-"энэ онцлогийг GnomeEntry -г авахдаа хэрэглэж болно,"
+"GnomeEntry, файлын бичлэгийг файлын нэр оруулахад хэрэглэдэг. Хэрвээ та "
+"түүний параметрийг өөрчилөх эсвэл хүсэлт тавих болбол энэ онцлогийг "
+"GnomeEntry -г авахдаа хэрэглэж болно,"
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1050,9 +1046,9 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GnomeEntry, файлын бичлэгийг файлын нэр оруулахад хэрэглэдэг. "
-"Хэрвээ та түүний параметрийг өөрчилөх эсвэл хүсэлт тавих болбол "
-"энэ онцлогийг GnomeEntry -г авахдаа хэрэглэж болно,"
+"GnomeEntry, файлын бичлэгийг файлын нэр оруулахад хэрэглэдэг. Хэрвээ та "
+"түүний параметрийг өөрчилөх эсвэл хүсэлт тавих болбол энэ онцлогийг "
+"GnomeEntry -г авахдаа хэрэглэж болно,"
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
@@ -1162,11 +1158,10 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"»%s« х.программ таны системын зохион байгуулагч эсвэл үйлдлийн "
-"систем үйлдвэрлэгчид чинь өөрчилөхийг зөвшөөрөөгүй тохируулгын "
-"хэсгээс өөрчилөхийг оролдож байна. Таны сонгосон хэдэн тохируулга "
-"хүчтэй нөлөөлж чадахгүй эсвэл таны дараагийн суултад энэ программ "
-"сэргэхгүй байж болно."
+"»%s« х.программ таны системын зохион байгуулагч эсвэл үйлдлийн систем "
+"үйлдвэрлэгчид чинь өөрчилөхийг зөвшөөрөөгүй тохируулгын хэсгээс өөрчилөхийг "
+"оролдож байна. Таны сонгосон хэдэн тохируулга хүчтэй нөлөөлж чадахгүй эсвэл "
+"таны дараагийн суултад энэ программ сэргэхгүй байж болно."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1174,16 +1169,16 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"%s -н тохируулгыг ачаалах эсвэл хадгалахад алдаа гарлаа "
-"Таны тохируулгын зарим нь зөв ажиллахгүй байна."
+"%s -н тохируулгыг ачаалах эсвэл хадгалахад алдаа гарлаа Таны тохируулгын "
+"зарим нь зөв ажиллахгүй байна."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Эмблем бичлэгийн түлхүүр аттрибут(давцахгүй ID).  Энэ нь таны "
-"түүхийг хадгалахад хэрэглэгдэнэ."
+"Эмблем бичлэгийн түлхүүр аттрибут(давцахгүй ID).  Энэ нь таны түүхийг "
+"хадгалахад хэрэглэгдэнэ."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1211,8 +1206,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Эмблем сонгогч диалог. Хэрвээ та түүний параметрийг өөрчилөх эсвэл "
-"хүсэлт тавих болбол энэ онцлогийг GtkDialog -г авахдаа хэрэглэж болно."
+"Эмблем сонгогч диалог. Хэрвээ та түүний параметрийг өөрчилөх эсвэл хүсэлт "
+"тавих болбол энэ онцлогийг GtkDialog -г авахдаа хэрэглэж болно."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
@@ -1341,7 +1336,5 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Тестийг дуусгах"
-
+#~ msgid "Exit the test"
+#~ msgstr "Тестийг дуусгах"

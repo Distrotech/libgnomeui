@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2003-01-21 11:16+0100\n"
+"POT-Creation-Date: 2003-01-23 15:33+0100\n"
 "PO-Revision-Date: 2001-06-16 00:05-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
