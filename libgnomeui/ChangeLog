@@ -1,5 +1,10 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* gnome-app.[ch], gnome-app-helper.[ch], gnome-appbar.[ch],
+	gnome-stock.[ch]: Removed.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* Makefile.am, libgnomeui.h: Moved all temporarily disabled
 	stuff to a new `unused_SOURCES' target and #ifdef FIXME them
 	in libgnome.h.

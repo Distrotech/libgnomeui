@@ -70,9 +70,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-stock-icons.c		\
 	gnome-about.c			\
 	gnome-animator.c		\
-	gnome-app.c			\
-	gnome-appbar.c			\
-	gnome-app-helper.c		\
 	gnome-canvas-init.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
@@ -119,9 +116,6 @@ libgnomeui_2_la_SOURCES = \
 gnome_headers = \
 	gnome-about.h			\
         gnome-animator.h		\
-	gnome-app.h			\
-	gnome-appbar.h			\
-	gnome-app-helper.h		\
 	gnome-canvas-init.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
