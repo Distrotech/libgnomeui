@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
-"POT-Creation-Date: 2002-02-28 21:17+0100\n"
-"PO-Revision-Date: 2002-02-28 21:18+0100\n"
+"POT-Creation-Date: 2002-03-28 19:54+0100\n"
+"PO-Revision-Date: 2002-03-28 19:54+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -375,104 +375,31 @@ msgstr ""
 "En fejl opstod under forsøg på at opstarte URL-håndteringen.\n"
 "Tjek venligst om indstillingerne i kontrolcenteret er korrekte."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "X-terminal som skal bruges"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "TERMINAL"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "Gnome GUI-bibliotek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmentfejl opstod; kan ikke vise fejlvinduet\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Segmentfejl!\n"
 "Kan ikke vise nedbrudsvinduet\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Gdk-fejlsøgningsflag som skal aktiveres"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "FLAG"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Gdk-fejlsøgningsflag som skal deaktiveres"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "Gør X-kald synkrone"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "Brug ikke X-udvidelse til delt hukommelse"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "Programnavn som benyttet af vindueshåndteringen"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "NAVN"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "Programklasse som benyttet af vindueshåndteringen"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "KLASSE"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "VÆRT"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "PORT"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "STIL"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Gtk+-fejlsøgningsflag som skal aktiveres"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Gtk+-fejlsøgningsflag som skal deaktiveres"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "Gør alle advarsler fatale"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "Indlæs et ekstra Gtk+-modul"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "MODUL"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -500,23 +427,23 @@ msgstr ""
 "pga. en fatal fejl.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Brug: gnome_segv2 programnavn signum\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Indsend en fejlrapport"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Fejlsøgning"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Besøg programnedbrudssiden for Gnome for yderligere oplysninger"
 
@@ -1118,7 +1045,7 @@ msgstr "Skrifttypenavn"
 msgid "Name of the selected font"
 msgstr "Navnet på den valgte skrifttype"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Skrifttype"
 
@@ -1162,20 +1089,24 @@ msgstr "Vis størrelse i skrifttypeinfotilstand"
 msgid "GNOME GConf UI Support"
 msgstr "GNOME GConf UI-understøttelse"
 
-#: libgnomeui/gnome-gconf-ui.c:107
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_Detaljer"
+
+#: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
 msgid ""
-"You attempted to change an aspect of your configuration that your system "
-"administrator or operating system vendor does not allow you to change. Some "
-"of the settings you have selected may not take effect, or may not be "
-"restored next time you use this application (%s)."
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
 msgstr ""
-"Du forsøgte at ændre et aspekt ved din konfiguration som din "
+"Programmet \"%s\" forsøgte at ændre et aspekt ved din konfiguration som din "
 "systemadministrator ikke tillader dig at ændre. Nogle af de indstillingerne "
 "du har angivet, vil muligvis ikke træde i kraft eller blive husket til næste "
-"gang du bruger dette program (%s)."
+"gang du bruger dette program."
 
-#: libgnomeui/gnome-gconf-ui.c:115
+#: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1183,11 +1114,6 @@ msgid ""
 msgstr ""
 "En fejl opstod under indlæsning eller gemning af konfigurationsoplysninger "
 "for %s. Nogle af indstillingerne virker måske ikke korrekt."
-
-#: libgnomeui/gnome-gconf-ui.c:139
-#, c-format
-msgid "GConf error details: %s\n"
-msgstr "Detaljer om GConf-fejl: %s\n"
 
 #: libgnomeui/gnome-icon-entry.c:164
 msgid ""
@@ -1328,3 +1254,60 @@ msgstr "Sans 14"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Afslut testprogrammet"
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Gdk-fejlsøgningsflag som skal aktiveres"
+
+#~ msgid "FLAGS"
+#~ msgstr "FLAG"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Gdk-fejlsøgningsflag som skal deaktiveres"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "Gør X-kald synkrone"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Brug ikke X-udvidelse til delt hukommelse"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Programnavn som benyttet af vindueshåndteringen"
+
+#~ msgid "NAME"
+#~ msgstr "NAVN"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Programklasse som benyttet af vindueshåndteringen"
+
+#~ msgid "CLASS"
+#~ msgstr "KLASSE"
+
+#~ msgid "HOST"
+#~ msgstr "VÆRT"
+
+#~ msgid "PORT"
+#~ msgstr "PORT"
+
+#~ msgid "STYLE"
+#~ msgstr "STIL"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Gtk+-fejlsøgningsflag som skal aktiveres"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Gtk+-fejlsøgningsflag som skal deaktiveres"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Gør alle advarsler fatale"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Indlæs et ekstra Gtk+-modul"
+
+#~ msgid "MODULE"
+#~ msgstr "MODUL"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
+
+#~ msgid "GConf error details: %s\n"
+#~ msgstr "Detaljer om GConf-fejl: %s\n"
