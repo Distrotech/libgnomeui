@@ -39,7 +39,6 @@
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
-#include <components/gnome-icon-selector-component.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
 #include "gnome-image-selector.h"
