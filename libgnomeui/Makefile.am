@@ -166,6 +166,7 @@ libgnomeui_2_0_la_SOURCES = \
 	gnome-icon-item.c		\
 	gnome-icon-sel.c		\
 	gnome-icon-text.c		\
+	gnome-textfu.c			\
 	$(gnorba_built)
 
 ## this lists all the non-generated headers
@@ -239,7 +240,8 @@ gnome_headers = \
 	gtk-clock.h			\
 	gtkpixmapmenuitem.h		\
 	libgnomeui.h			\
-	oafgnome.h
+	oafgnome.h			\
+	gnome-textfu.h
 
 libgnomeuiinclude_HEADERS =		\
 	$(gnome_headers)		\
@@ -333,10 +335,11 @@ EXTRA_DIST =					\
 
 libgnomeui_2_0_la_LDFLAGS = -version-info $(LIB_VERSION)				\
 		$(GDK_PIXBUF_LIBS)							\
-		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome-$(GNOME_INTERFACE_VERSION) \
 		$(OAF_LIBS)								\
 		$(GCONF_LIBS)					\
 		$(LIBGNOMEUI_LIBS)
+
+#		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome-$(GNOME_INTERFACE_VERSION)
 
 libgnomeui_2_0_la_LIBADD = $(LIBGNOMEUI_LIBS)
 

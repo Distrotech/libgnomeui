@@ -29,6 +29,8 @@ struct _GnomeHelpView {
   GtkWidget *toplevel;
   GtkWidget *toolbar, *content, *btn_help, *btn_style;
 
+  GnomeURLDisplayContext url_ctx;
+
   GtkOrientation orientation;
 
   GnomeHelpViewStylePriority style_prio;
@@ -37,8 +39,6 @@ struct _GnomeHelpView {
   GnomeHelpViewStyle style : 2;
 
   GnomeHelpViewStyle app_style : 2; /* Used to properly handle object args for style & prio */ 
-
-  GnomeURLDisplayContext url_ctx;
 };
 
 struct _GnomeHelpViewClass {
@@ -51,7 +51,7 @@ GtkWidget *gnome_help_view_new(GtkWidget *toplevel, GnomeHelpViewStyle app_style
 			       GnomeHelpViewStylePriority app_style_priority);
 GnomeHelpView *gnome_help_view_find(GtkWidget *awidget);
 void gnome_help_view_set_style(GnomeHelpView *help_view, GnomeHelpViewStyle style, GnomeHelpViewStylePriority style_priority);
-void gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path);
+void gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path, const char *help_type);
 void gnome_help_view_show_help_for(GnomeHelpView *help_view, GtkWidget *widget);
 void gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation orientation);
 

@@ -18,6 +18,9 @@
 #include "gnome-uidefs.h"
 #include "gnome-app-helper.h"
 #include "gnome-popup-menu.h"
+#include "gnome-textfu.h"
+#include "gnome-cursors.h"
+#include "gnome-dialog-util.h"
 #include <libgnome/gnomelib-init2.h>
 
 #include <stdio.h>
@@ -47,7 +50,6 @@ static void gnome_help_view_size_allocate (GtkWidget      *widget,
 					   GtkAllocation  *allocation);
 static void gnome_help_view_select_help(GtkWidget *btn, GnomeHelpView *help_view);
 static void gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view);
-static void gnome_help_view_interact(GtkWidget *btn, GnomeHelpView *help_view);
 static char *gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id);
 static const char *gnome_help_view_find_widget_id(GnomeHelpView *help_view, GtkWidget *widget);
 static char *gnome_help_view_get_base_url(void);
@@ -126,7 +128,6 @@ gnome_help_view_init (GnomeHelpView *help_view)
   help_view->style = GNOME_HELP_BROWSER;
   help_view->style_prio = G_PRIORITY_LOW;
 
-  help_view->content = gtk_text_new(NULL, NULL); /* For now */
   help_view->toolbar = gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
   help_view->btn_help = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->toolbar), _("Help"),
 						_("Show help for a specific region of the application"),
@@ -139,20 +140,7 @@ gnome_help_view_init (GnomeHelpView *help_view)
 						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_PREFERENCES),
 						gnome_help_view_select_style, help_view);
 
-  /* XXX fixme */
-#if 0
-  {
-    GnomeHelpViewClass *class;
-
-    class = GNOME_HELP_VIEW_CLASS(GTK_OBJECT(help_view)->klass);
-    gtk_widget_add_events(GTK_WIDGET(help_view), GDK_BUTTON_PRESS_MASK);
-    gtk_signal_connect (GTK_OBJECT(help_view), "button_press_event",
-			GTK_SIGNAL_FUNC(popup_button_pressed), help_view);
-  }
-#endif
-
   gtk_box_pack_start(GTK_BOX(help_view), help_view->toolbar, TRUE, TRUE, GNOME_PAD_SMALL);
-  gtk_box_pack_start(GTK_BOX(help_view), help_view->content, TRUE, TRUE, GNOME_PAD_SMALL);
 
   gtk_widget_show(help_view->toolbar);
   gtk_widget_show(help_view->btn_style);
@@ -537,9 +525,22 @@ static void
 gnome_help_view_update_style(GnomeHelpView *help_view)
 {
   if(help_view->style == GNOME_HELP_EMBEDDED)
-    gtk_widget_show(help_view->content);
+    {
+      if(help_view->content) /* Popup help */
+	gtk_widget_destroy(help_view->content->parent);
+
+      help_view->content = gnome_textfu_new();
+      gtk_box_pack_start(GTK_BOX(help_view), help_view->content, TRUE, TRUE, GNOME_PAD_SMALL);
+      gtk_widget_show(help_view->content);
+    }
   else
-    gtk_widget_hide(help_view->content);
+    {
+      if(help_view->content)
+	{
+	  gtk_container_remove(GTK_CONTAINER(help_view), help_view->content);
+	  help_view->content = NULL;
+	}
+    }
 }
 
 static void
@@ -582,23 +583,98 @@ gnome_help_view_set_style(GnomeHelpView *help_view,
   gnome_help_view_set_orientation(help_view, help_view->orientation);
 }
 
-void
-gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path)
+static void
+gtk_widget_destroy_2(GtkWidget *x, GnomeHelpView *help_view)
 {
+  help_view->content = NULL;
 }
 
-static const char *
-gnome_help_view_find_widget_id(GnomeHelpView *help_view, GtkWidget *widget)
+static void
+gnome_help_view_popup_activate_uri(GnomeTextFu *tf, const char *uri, GnomeHelpView *help_view)
 {
-  GtkWidget *cur;
+  gnome_help_view_show_url(help_view, uri, URL_GENERAL_HELPSYSTEM);
+}
 
-  for(cur = widget; cur; cur = cur->parent)
+static gint
+do_popup_destroy(GtkWidget *win, GdkEvent *event)
+{
+  gtk_widget_destroy(win);
+  return TRUE;
+}
+
+static void
+gnome_help_view_popup(GnomeHelpView *help_view, const char *file_path)
+{
+  GnomeTextFu *tf;
+  GtkWidget *win;
+
+  if(!help_view->content)
     {
-      if(cur->name)
-	return cur->name;
+      win = gtk_window_new(GTK_WINDOW_POPUP);
+      tf = GNOME_TEXTFU(gnome_textfu_new());
+      gnome_textfu_load_file(tf, file_path);
+
+      gtk_signal_connect_while_alive(GTK_OBJECT(win), "destroy", gtk_widget_destroy_2, help_view, GTK_OBJECT(help_view));
+      gtk_signal_connect(GTK_OBJECT(help_view), "destroy", gtk_widget_destroy_2, win);
+
+      gtk_signal_connect(GTK_OBJECT(tf), "activate_uri", gnome_help_view_popup_activate_uri, help_view);
+
+      gtk_container_add(GTK_CONTAINER(win), GTK_WIDGET(tf));
+      gtk_widget_show_all(win);
+
+      gtk_signal_connect_after(GTK_OBJECT(win), "button_release_event", GTK_SIGNAL_FUNC(do_popup_destroy), NULL);
+    }
+  else
+    gnome_textfu_load_file(GNOME_TEXTFU(help_view->content), file_path);
+}
+
+void
+gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path, const char *help_type)
+{
+  char *file_type, *file_path;
+  GnomeHelpViewStyle style;
+
+  style = help_view->style;
+  if(!help_type || strcmp(help_type, "popup"))
+    style = GNOME_HELP_BROWSER;
+
+  switch(style)
+    {
+    case GNOME_HELP_POPUP:
+    case GNOME_HELP_EMBEDDED:
+      file_type = "textfu";
+      break;
+    default:
+      file_type = "html";
+      break;
     }
 
-  return NULL;
+  file_path = gnome_help_path_resolve(help_path, file_type);
+
+  if(!file_path && !strcmp(file_type, "textfu"))
+    {
+      /* Fall back to browser if we can't find HTML */
+      file_path = gnome_help_path_resolve(help_path, "html");
+      style = GNOME_HELP_BROWSER;
+    }
+
+  if(!file_path)
+    return;
+
+  switch(style)
+    {
+    case GNOME_HELP_EMBEDDED:
+      gnome_textfu_load_file(GNOME_TEXTFU(help_view->content), file_path);
+      break;
+    case GNOME_HELP_POPUP:
+      gnome_help_view_popup(help_view, file_path);
+      break;
+    case GNOME_HELP_BROWSER:
+      gnome_help_view_show_url(help_view, file_path, URL_GENERAL_HELPSYSTEM);
+      break;
+    }
+
+  g_free(file_path);
 }
 
 void
@@ -612,6 +688,12 @@ gnome_help_view_show_help_for(GnomeHelpView *help_view, GtkWidget *widget)
       if(cur->name)
 	help_path = gnome_help_view_find_help_id(help_view, cur->name);
     }
+
+  if(help_path)
+    gnome_help_view_show_help(help_view, help_path, "popup");
+  else
+    gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
+			     gtk_widget_get_toplevel(widget));
 }
 
 void
@@ -639,9 +721,52 @@ gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation orienta
     }
 }
 
+static GdkCursor *choose_cursor = NULL;
+
+static gint
+gnome_help_view_process_event(GtkWidget *btn, GdkEvent *event, GnomeHelpView *help_view)
+{
+  GdkEventButton *evb;
+  GtkWidget *chosen_widget;
+
+  if(event->type == GDK_BUTTON_PRESS)
+    return TRUE;
+
+  if(event->type != GDK_BUTTON_RELEASE)
+    return FALSE;
+
+  evb = (GdkEventButton *)event;
+  gtk_signal_disconnect_by_func(GTK_OBJECT(btn), GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
+  gtk_grab_remove(btn);
+  gdk_pointer_ungrab(GDK_CURRENT_TIME);
+  gdk_flush();
+
+  g_message("Ungrabbed");
+
+  if(evb->window)
+    {
+      gdk_window_get_user_data(evb->window, (gpointer *)&chosen_widget);
+
+      g_message("We got a chosen widget of %p", chosen_widget);
+
+      if(chosen_widget)
+	gnome_help_view_show_help_for(help_view, chosen_widget);
+      else
+	gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
+				 gtk_widget_get_toplevel(btn));
+    }
+
+  return TRUE;
+}
+
 static void
 gnome_help_view_select_help(GtkWidget *btn, GnomeHelpView *help_view)
 {
+  gtk_signal_connect(GTK_OBJECT(btn), "event", GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
+  gtk_grab_add(btn); /* Use the button as a source of incoming events */
+  if(!choose_cursor)
+    choose_cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
+  gdk_pointer_grab(btn->window, FALSE, GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK, NULL, choose_cursor, GDK_CURRENT_TIME);
 }
 
 static void
@@ -670,34 +795,12 @@ popup_set_selection (GnomeHelpView *help_view)
   gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(popup_style_menu_items[n].widget), TRUE);
 }
 
-static gint
-popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
-{
-  GnomeHelpViewClass *class = GNOME_HELP_VIEW_CLASS(GTK_OBJECT(data)->klass);
-
-  if(event->button != 3)
-    return FALSE;
-
-  gtk_signal_emit_stop_by_name(GTK_OBJECT(widget), "button_press_event");
-
-  popup_set_selection((GnomeHelpView *)data);
-
-  gnome_popup_menu_do_popup(class->popup_menu, NULL, NULL, event, data, widget);
-
-  return TRUE;
-}
-
 static void
 gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view)
 {
   GnomeHelpViewClass *class = GNOME_HELP_VIEW_CLASS(GTK_OBJECT(help_view)->klass);
 
   gnome_popup_menu_do_popup(class->popup_menu, NULL, NULL, NULL, help_view, btn);
-}
-
-static void
-gnome_help_view_interact(GtkWidget *btn, GnomeHelpView *help_view)
-{
 }
 
 static char *
@@ -739,12 +842,6 @@ gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id)
   return retval;
 }
 
-static char *
-gnome_help_view_get_base_url(void)
-{
-  return NULL;
-}
-
 static void
 gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType type)
 {
@@ -774,7 +871,11 @@ gnome_help_view_display (GnomeHelpView *help_view, const char *help_path)
 
   if(url)
     {
-      gnome_help_view_show_url(help_view, url, URL_GENERAL_HELPSYSTEM);
+      if(help_view)
+	gnome_help_view_show_url(help_view, url, URL_GENERAL_HELPSYSTEM);
+      else
+	gnome_url_show(url);
+
       g_free(url);
     }
 }
@@ -840,13 +941,11 @@ gnome_help_path_resolve(const char *path, const char *file_type)
 		
       g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/%s.%s", appname, lang, filepath, file_type);
       res = gnome_help_file (fnbuf);
-
-/*      language_list = language_list->next;*/
     }
 
   if(res)
     {
-      ctmp = g_strdup_printf("file://%s%s%s", res, sectpath?"#":"", sectpath?sectpath:"");
+      ctmp = g_strdup_printf("file:///%s%s%s", res, sectpath?"#":"", sectpath?sectpath:"");
       g_free(res);
       res = ctmp;
     }
@@ -900,13 +999,13 @@ gnome_help_app_topics(const char *app_id)
       if(aline[0] == '\0' || aline[0] == '#')
 	continue;
 
-      for(ctmp = aline; *ctmp && !isspace(ctmp); ctmp++) /**/;
+      for(ctmp = aline; *ctmp && !isspace(*ctmp); ctmp++) /**/;
       if(*ctmp == '\0')
 	continue;
 
       *ctmp = '\0'; ctmp++;
       path_part = aline;
-      while(*ctmp && isspace(ctmp)) ctmp++;
+      while(*ctmp && isspace(*ctmp)) ctmp++;
       if(*ctmp == '\0')
 	continue;
 
