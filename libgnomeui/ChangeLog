@@ -1,3 +1,14 @@
+2001-12-08  James Henstridge  <james@daa.com.au>
+
+	* gnome-app-helper.c (create_label): make the accel label
+	use_underline, so that we have an underline.
+	(create_menu_item): get rid of keyval arg to create_label, and
+	don't bother setting up the uline.
+	(create_help_entries): same here.
+	(setup_uline_accel): remove useless function (not needed since
+	addition of mnemonic support).
+	(gtk_menu_ensure_uline_accel_group): remove this as well.
+
 2001-12-08  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-ui-init.c (libgnomeui_segv_handle): 

@@ -491,20 +491,15 @@ setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
 			   GINT_TO_POINTER(notify_id));
 }
 
-/* Creates  a menu item label. It will also return the underlined 
- * letter's keyval if keyval is not NULL. */
+/* Creates  a menu item label. */
 static GtkWidget *
-create_label (const char *label_text, guint *keyval)
+create_label (const char *label_text)
 {
-	guint kv;
 	GtkWidget *label;
 
 	label = gtk_accel_label_new (label_text);
-
-	kv = gtk_label_parse_uline (GTK_LABEL (label), label_text);
-	if (keyval)
-		*keyval = kv;
-
+	gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+	
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_widget_show (label);
 
@@ -520,59 +515,6 @@ setup_accelerator (GtkAccelGroup *accel_group, GnomeUIInfo *uiinfo,
 		gtk_widget_add_accelerator (uiinfo->widget, signal_name, 
 					    accel_group, uiinfo->accelerator_key, 
 					    uiinfo->ac_mods, accel_flags);
-}
-
-#if 0
-GtkAccelGroup*
-gtk_menu_ensure_uline_accel_group (GtkMenu *menu)
-{
-  GtkAccelGroup *accel_group;
-
-  g_return_val_if_fail (GTK_IS_MENU (menu), NULL);
-
-  accel_group = gtk_object_get_data (GTK_OBJECT (menu),
-				     GtkMenu_uline_accel_group);
-  if (!accel_group)
-    {
-      accel_group = gtk_accel_group_new ();
-      gtk_accel_group_attach (accel_group, GTK_OBJECT (menu));
-      gtk_object_set_data_full (GTK_OBJECT (menu),
-				GtkMenu_uline_accel_group,
-				accel_group,
-				(GtkDestroyNotify) gtk_accel_group_unref);
-    }
-
-  return accel_group;
-}
-#endif
-
-/* Creates the accelerators for the underlined letter in a menu item's label. 
- * The keyval is what gtk_label_parse_uline() returned.  If accel_group is not 
- * NULL, then the keyval will be put with MOD1 as modifier in it (i.e. for 
- * Alt-F in the _File menu).
- */
-static void
-setup_uline_accel (GtkMenuShell  *menu_shell,
-		   GtkAccelGroup *accel_group,
-		   GtkWidget     *menu_item,
-		   guint          keyval)
-{
-#if 0 /* FIXME FIXME FIXME */
-	if (keyval != GDK_VoidSymbol) {
-		if (GTK_IS_MENU (menu_shell))
-			gtk_widget_add_accelerator (menu_item,
-						    "activate_item",
-						    gtk_menu_ensure_uline_accel_group (GTK_MENU (menu_shell)),
-						    keyval, 0,
-						    0);
-		if (GTK_IS_MENU_BAR (menu_shell) && accel_group)
-			gtk_widget_add_accelerator (menu_item,
-						    "activate_item", 
-						    accel_group,
-						    keyval, GDK_MOD1_MASK,
-						    0);
-	}
-#endif
 }
 
 /* Callback to display hint in the statusbar when a menu item is 
@@ -954,7 +896,6 @@ create_menu_item (GtkMenuShell       *menu_shell,
 		  gint		      pos)
 {
 	GtkWidget *label;
-	guint keyval;
 	int type;
 	
 	/* Translate configurable menu items to normal menu items. */
@@ -1019,24 +960,15 @@ create_menu_item (GtkMenuShell       *menu_shell,
 	/* Don't use gettext on the empty string since gettext will map
 	 * the empty string to the header at the beginning of the .pot file. */
 
-	label = create_label ( uiinfo->label [0] == '\0'?
+	label = create_label ( uiinfo->label [0] == NULL?
 			       "":(uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK ?
-				   D_(uiinfo->label):L_(uiinfo->label)),
-			       &keyval);
+				   D_(uiinfo->label):L_(uiinfo->label)));
 
 	gtk_container_add (GTK_CONTAINER (uiinfo->widget), label);
 
 	gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (label), 
 					  uiinfo->widget);
 	
-	/* setup underline accelerators
-	 */
-	if (uline_accels)
-		setup_uline_accel (menu_shell,
-				   accel_group,
-				   uiinfo->widget,
-				   keyval);
-
 	/* install global accelerator
 	 */
 	{
@@ -1312,15 +1244,13 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 	for (cur = topics; cur && cur->next; cur = cur->next->next) {
 		GtkWidget *item;
 		GtkWidget *label;
-		guint keyval;
 
 		item = gtk_menu_item_new ();
-		label = create_label (cur->data, &keyval);
+		label = create_label (cur->data);
 		g_free(cur->data);
 		cur->data = NULL;
 
 		gtk_container_add (GTK_CONTAINER (item), label);
-		setup_uline_accel (menu_shell, NULL, item, keyval);
 /*		gtk_widget_lock_accelerators (item); */
 
 		gtk_object_set_data_full (GTK_OBJECT (item), "docname",
