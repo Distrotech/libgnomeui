@@ -5,15 +5,14 @@
 	window, to avoid BadMatch problems.  Also, the visual and colormap
 	should come from there.  Eliminated the window argument, as it is
 	no longer needed.
-
 	I still have a problem, though.  The widget needs to be realized
 	to pick its style (for the gc).  So I realize it if it is not
 	realized yet --- this will create a toplevel window if the widget
 	has not been parented yet, and looks extremely ugly, and doesn't
 	work.
-
 	(build_disabled_pixmap): OK, I now use a color context to paint
 	the stipple, so realization is not needed.
+	(build_disabled_pixmap): Removed unused variable style.
 
 1998-02-26  Eckehard Berns  <eb@berns.prima.de>
 

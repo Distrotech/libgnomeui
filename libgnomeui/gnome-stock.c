@@ -444,7 +444,6 @@ build_disabled_pixmap(GnomePixmap **inout_pixmap)
 {
         GdkGC *gc;
         GdkWindow *pixmap = (*inout_pixmap)->pixmap;
-        GtkStyle *style;
         gint w, h, x, y, n;
         GdkGCValues vals;
         GdkVisual *visual;
