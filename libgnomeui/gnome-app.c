@@ -264,7 +264,7 @@ contents_parent_set (GtkWidget *widget, GtkWidget *previous_parent, gpointer dat
 
 	app = GNOME_APP (data);
 
-	g_assert (previous_parent == GTK_WIDGET (app));
+	g_assert (previous_parent == app->dock);
 
 	gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
 				       GTK_SIGNAL_FUNC (contents_parent_set),
