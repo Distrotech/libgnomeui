@@ -84,6 +84,7 @@ libgnomeui_la_SOURCES = \
 	gnome-startup.c			\
 	gnome-stock.c			\
         gnome-winhints.c		\
+        gnome-paper-selector.c		\
 	gnometypes.c			\
 	gtkcauldron.c			\
 	gtklayout.c			\
@@ -146,6 +147,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-types.h			\
 	gnome-uidefs.h			\
         gnome-winhints.h		\
+        gnome-paper-selector.h		\
 	gnometypebuiltins.h		\
 	gtkcauldron.h			\
 	gtkdial.h			\

@@ -1,0 +1,73 @@
+/* GnomePaperSelector widget 
+ * Copyright (C) 1998 the Free Software Foundation
+ *
+ * Author: Dirk Luetjens <dirk@luedi.oche.de>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#ifndef GNOME_PAPER_SELECTOR_H
+#define GNOME_PAPER_SELECTOR_H
+
+#include <gtk/gtk.h>
+#include <libgnome/gnome-defs.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+BEGIN_GNOME_DECLS
+
+#define GNOME_PAPER_SELECTOR(obj)         GTK_CHECK_CAST (obj, gnome_paper_selector_get_type (), GnomePaperSelector)
+#define GNOME_PAPER_SELECTOR_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_paper_selector_get_type (), GnomePaperSelectorClass)
+#define GNOME_IS_PAPER_SELECTOR(obj)      GTK_CHECK_TYPE (obj, gnome_paper_selector_get_type ())
+
+
+typedef struct _GnomePaperSelector      GnomePaperSelector;
+typedef struct _GnomePaperSelectorClass GnomePaperSelectorClass;
+
+struct _GnomePaperSelector {
+  GtkVBox vbox;
+  
+  GtkWidget *paper;
+  GtkWidget *width;
+  GtkWidget *height;
+  GtkWidget *unit;
+  GtkWidget *unit_label;
+
+  gint paper_id;
+  gint width_id;
+  gint height_id;
+};
+
+struct _GnomePaperSelectorClass {
+  GtkVBoxClass parent_class;
+};
+
+guint		gnome_paper_selector_get_type	(void);
+GtkWidget	*gnome_paper_selector_new	(void);
+
+gchar		*gnome_paper_selector_get_name	(GnomePaperSelector *gspaper);
+gfloat		gnome_paper_selector_get_width	(GnomePaperSelector *gspaper);
+gfloat		gnome_paper_selector_get_height	(GnomePaperSelector *gspaper);
+
+
+END_GNOME_DECLS
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif 
