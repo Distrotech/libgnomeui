@@ -41,10 +41,23 @@ file_list_cb (void)
     GSList *list, *c;
 
     list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector),
-					 TRUE, FALSE);
+					 FALSE, FALSE);
 
     for (c = list; c; c = c->next) {
 	g_print ("FILE: `%s'\n", (gchar *) c->data);
+    }
+}
+
+static void
+directory_list_cb (void)
+{
+    GSList *list, *c;
+
+    list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector),
+					 TRUE, FALSE);
+
+    for (c = list; c; c = c->next) {
+	g_print ("DIRECTORY: `%s'\n", (gchar *) c->data);
     }
 }
 
@@ -82,8 +95,10 @@ static GnomeUIInfo file_menu[] = {
 static GnomeUIInfo test_menu[] = {
     { GNOME_APP_UI_ITEM, "Display file list", NULL, file_list_cb, NULL,
       NULL, GNOME_APP_PIXMAP_NONE, NULL, 'f', GDK_CONTROL_MASK, NULL },
+    { GNOME_APP_UI_ITEM, "Display directory list", NULL, directory_list_cb,
+      NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL, 'd', GDK_CONTROL_MASK, NULL },
     { GNOME_APP_UI_ITEM, "Display selection", NULL, selection_cb, NULL,
-      NULL, GNOME_APP_PIXMAP_NONE, NULL, 'l', GDK_CONTROL_MASK, NULL },
+      NULL, GNOME_APP_PIXMAP_NONE, NULL, 'c', GDK_CONTROL_MASK, NULL },
     { GNOME_APP_UI_ITEM, "Save history", NULL, save_history_cb, NULL,
       NULL, GNOME_APP_PIXMAP_NONE, NULL, 's', GDK_CONTROL_MASK, NULL },
     { GNOME_APP_UI_ITEM, "Load history", NULL, load_history_cb, NULL,

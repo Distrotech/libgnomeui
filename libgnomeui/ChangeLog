@@ -1,3 +1,27 @@
+2000-09-16  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-selector.h (GnomeSelector):
+	- renamed the "do_add" signal to "do_add_file".
+	- added "do_add_file_default", "do_add_directory" and
+	"do_add_directory_default" signals.
+	- added "get_file_list" signal.
+
+	* gnome-selector.c:
+	(add_file_handler): Renamed to `do_add_file_handler' and use
+	the "do_add_file" signal instead of the "add_file" one.
+	(add_file_default_handler): Likewise.
+	(add_directory_handler): Likewise.
+	(add_directory_default_handler): Likewise.
+	(update_file_list_handler): Removed.
+	(get_file_list_handler): New; implemnt "get_file_list" handler.
+
+	* gnome-selectorP.h (GnomeSelectorPrivate): Removed `total_list'
+	and `default_total_list' fields.
+
+	* gnome-file-selector.c (update_file_list_handler): Removed.
+	(add_directory_async_handler): Call the parent handler of the
+	"do_add_directory" signal.
+
 2000-09-16  Martin Baulig  <baulig@suse.de>
 
 	* gnome-file-selector.c: Use the boilerplate macros.

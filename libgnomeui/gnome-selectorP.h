@@ -51,11 +51,9 @@ struct _GnomeSelectorPrivate {
 
     GSList      *default_dir_list;
     GSList      *default_file_list;
-    GSList      *default_total_list;
 
     GSList      *dir_list;
     GSList      *file_list;
-    GSList      *total_list;
 
     GSList      *history;
     guint        max_history_length;
