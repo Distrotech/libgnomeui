@@ -36,34 +36,15 @@ G_BEGIN_DECLS
 #define GNOME_IS_ABOUT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ABOUT))
 #define GNOME_ABOUT_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_ABOUT, GnomeAboutClass))
 
-typedef struct _GnomeAbout GnomeAbout;
-typedef struct _GnomeAboutClass GnomeAboutClass;
+typedef struct _GnomeAbout        GnomeAbout;
+typedef struct _GnomeAboutClass   GnomeAboutClass;
+typedef struct _GnomeAboutPrivate GnomeAboutPrivate;
 
 struct _GnomeAbout {
 	GtkDialog parent_instance;
 
-	gchar *name;
-	gchar *version;
-	gchar *copyright;
-	gchar *comments;
-	
-	GSList *authors;
-	GSList *documenters;
-
-	gchar *translator_credits;
-	
-	gint displaying_state;
-	
-	GtkWidget *drawing_area;
-	
-	GdkPixbuf *background_pixbuf;
-	GdkPixbuf *rendered_background_pixbuf;
-	gdouble gradient_start_opacity, gradient_end_opacity;
-	gdouble gradient_start_position, gradient_end_position;
-
-	GdkPixbuf *logo_pixbuf;
-	gint logo_top_padding;
-	gint logo_right_padding;
+	/*< private >*/
+	GnomeAboutPrivate *_priv;
 };
 
 struct _GnomeAboutClass {

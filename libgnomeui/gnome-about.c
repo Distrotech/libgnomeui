@@ -59,6 +59,31 @@ enum {
 	NUMBER_OF_DISPLAYS
 };
 
+struct _GnomeAboutPrivate {
+	gchar *name;
+	gchar *version;
+	gchar *copyright;
+	gchar *comments;
+	
+	GSList *authors;
+	GSList *documenters;
+
+	gchar *translator_credits;
+	
+	gint displaying_state;
+	
+	GtkWidget *drawing_area;
+	
+	GdkPixbuf *background_pixbuf;
+	GdkPixbuf *rendered_background_pixbuf;
+	gdouble gradient_start_opacity, gradient_end_opacity;
+	gdouble gradient_start_position, gradient_end_position;
+
+	GdkPixbuf *logo_pixbuf;
+	gint logo_top_padding;
+	gint logo_right_padding;
+};
+
 typedef struct {
 	gchar *name;
 
@@ -87,53 +112,30 @@ enum {
 
 static void gnome_about_init (GnomeAbout *about);
 static void gnome_about_class_init (GnomeAboutClass *klass);
-/* FIXME:
 static void gnome_about_finalize (GObject *object);
- */
 static void gnome_about_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
 static void gnome_about_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
 
 static gboolean gnome_about_area_expose (GtkWidget *area, GdkEventExpose *event, gpointer data);
 static gboolean gnome_about_area_button_press (GtkWidget *area, GdkEventButton *button, gpointer data);
 
-GType
-gnome_about_get_type (void)
-{
-	static GType object_type = 0;
-
-	if (!object_type) {
-		static const GTypeInfo object_info = {
-			sizeof (GnomeAboutClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) gnome_about_class_init,
-			NULL, /* class_finalize */
-			NULL, /* class_data */
-			sizeof (GnomeAbout),
-			0, /* n_preallocs */
-			(GInstanceInitFunc) gnome_about_init,
-		};
-
-		object_type = g_type_register_static (GTK_TYPE_DIALOG,
-						      "GnomeAbout",
-						      &object_info, 0);
-	}
-
-	return object_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeAbout, gnome_about,
+			 GtkDialog, gtk_dialog)
 
 static void
 gnome_about_init (GnomeAbout *about)
 {
 	GtkWidget *frame;
 
-	about->gradient_start_opacity = 1.0;
-	about->gradient_end_opacity = 0.0;
-	about->gradient_start_position = 0.25;
-	about->gradient_end_position = 0.75;
+	about->_priv = g_new0 (GnomeAboutPrivate, 1);
 
-	about->logo_top_padding = 5;
-	about->logo_right_padding = 0;
+	about->_priv->gradient_start_opacity = 1.0;
+	about->_priv->gradient_end_opacity = 0.0;
+	about->_priv->gradient_start_position = 0.25;
+	about->_priv->gradient_end_position = 0.75;
+
+	about->_priv->logo_top_padding = 5;
+	about->_priv->logo_right_padding = 0;
 	
 	/* Create the frame */
 	frame = gtk_frame_new (NULL);
@@ -143,15 +145,15 @@ gnome_about_init (GnomeAbout *about)
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about)->vbox), frame, TRUE, TRUE, 0);
 
 	/* Create the drawing area */
-	about->drawing_area = gtk_drawing_area_new ();
-	gtk_widget_add_events (about->drawing_area, GDK_BUTTON_PRESS_MASK);
+	about->_priv->drawing_area = gtk_drawing_area_new ();
+	gtk_widget_add_events (about->_priv->drawing_area, GDK_BUTTON_PRESS_MASK);
 	
-	g_signal_connect (G_OBJECT (about->drawing_area), "expose_event",
+	g_signal_connect (G_OBJECT (about->_priv->drawing_area), "expose_event",
 			  G_CALLBACK (gnome_about_area_expose), about);
-	g_signal_connect (G_OBJECT (about->drawing_area), "button_press_event",
+	g_signal_connect (G_OBJECT (about->_priv->drawing_area), "button_press_event",
 			  G_CALLBACK (gnome_about_area_button_press), about);
-	gtk_widget_show (about->drawing_area);
-	gtk_container_add (GTK_CONTAINER (frame), about->drawing_area);
+	gtk_widget_show (about->_priv->drawing_area);
+	gtk_container_add (GTK_CONTAINER (frame), about->_priv->drawing_area);
 
 	/* Add the OK button */
 	gtk_dialog_add_button (GTK_DIALOG (about), GTK_STOCK_OK, GTK_RESPONSE_OK);
@@ -169,6 +171,7 @@ gnome_about_class_init (GnomeAboutClass *klass)
 	
 	object_class->set_property = gnome_about_set_property;
 	object_class->get_property = gnome_about_get_property;
+	object_class->finalize = gnome_about_finalize;
 
 	g_object_class_install_property (object_class,
 					 PROP_NAME,
@@ -334,6 +337,19 @@ gnome_about_class_init (GnomeAboutClass *klass)
 								      G_PARAM_READWRITE));
 }
 
+static void
+gnome_about_finalize (GObject *object)
+{
+	GnomeAbout *about = GNOME_ABOUT (object);
+
+	/* FIXME: free everything else here */
+
+	g_free (about->_priv);
+	about->_priv = NULL;
+
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+}
+
 static PangoLayout *
 gnome_about_create_pango_layout_with_style (GnomeAbout *about, const gchar *widget_style, PangoFontDescription **font_desc)
 {
@@ -362,11 +378,11 @@ gnome_about_create_pango_layout_with_style (GnomeAbout *about, const gchar *widg
 static GSList *
 gnome_about_get_displayed_person_list (GnomeAbout *about)
 {
-	switch (about->displaying_state) {
+	switch (about->_priv->displaying_state) {
 	case DISPLAYING_AUTHORS:
-		return about->authors;
+		return about->_priv->authors;
 	case DISPLAYING_DOCUMENTERS:
-		return about->documenters;
+		return about->_priv->documenters;
 	case DISPLAYING_TRANSLATOR_CREDITS:
 		return NULL;
 	default:
@@ -392,10 +408,10 @@ gnome_about_get_widest_entry (GnomeAbout *about)
 	for (i = 0; i < NUMBER_OF_DISPLAYS; i++) {
 		switch (i) {
 		case DISPLAYING_AUTHORS:
-			list = about->authors;
+			list = about->_priv->authors;
 			break;
 		case DISPLAYING_DOCUMENTERS:
-			list = about->documenters;
+			list = about->_priv->documenters;
 			break;
 		case DISPLAYING_TRANSLATOR_CREDITS:
 			/* Don't do anything for the translator credits */
@@ -463,15 +479,15 @@ gnome_about_draw_logo (GnomeAbout *about, GdkRectangle *area)
 	GdkPixbuf *pixbuf;
 	gint x, y;
 	
-	pixbuf = about->logo_pixbuf;
+	pixbuf = about->_priv->logo_pixbuf;
 
 	if (pixbuf == NULL)
 		return;
 
-	y = about->logo_top_padding;
-	x = about->drawing_area->allocation.width - about->logo_right_padding - gdk_pixbuf_get_width (pixbuf);
+	y = about->_priv->logo_top_padding;
+	x = about->_priv->drawing_area->allocation.width - about->_priv->logo_right_padding - gdk_pixbuf_get_width (pixbuf);
 	
-	gdk_pixbuf_render_to_drawable_alpha (pixbuf, about->drawing_area->window,
+	gdk_pixbuf_render_to_drawable_alpha (pixbuf, about->_priv->drawing_area->window,
 					     0, 0,
 					     x, y,
 					     gdk_pixbuf_get_width (pixbuf),
@@ -490,12 +506,12 @@ gnome_about_draw_background (GnomeAbout *about, GdkRectangle *area)
 {
 	GdkPixbuf *pixbuf;
 
-	pixbuf = about->rendered_background_pixbuf;
+	pixbuf = about->_priv->rendered_background_pixbuf;
 
 	if (pixbuf == NULL)
 		return;
 	
-	gdk_pixbuf_render_to_drawable_alpha (pixbuf, about->drawing_area->window,
+	gdk_pixbuf_render_to_drawable_alpha (pixbuf, about->_priv->drawing_area->window,
 					     0, 0, 0, 30,
 					     gdk_pixbuf_get_width (pixbuf),
 					     gdk_pixbuf_get_height (pixbuf),
@@ -513,9 +529,9 @@ gnome_about_draw_copyright (GnomeAbout *about, GdkRectangle *area)
 	PangoLayout *copyright_layout;
 
 	copyright_layout = gnome_about_create_pango_layout_with_style (about, "copyright_font", NULL);
-	pango_layout_set_text (copyright_layout, about->copyright, -1);
+	pango_layout_set_text (copyright_layout, about->_priv->copyright, -1);
 
-	gdk_draw_layout (about->drawing_area->window, about->drawing_area->style->black_gc, 3, 30, copyright_layout);
+	gdk_draw_layout (about->_priv->drawing_area->window, about->_priv->drawing_area->style->black_gc, 3, 30, copyright_layout);
 
 	g_object_unref (G_OBJECT (copyright_layout));
 }
@@ -526,10 +542,10 @@ gnome_about_draw_comments (GnomeAbout *about, GdkRectangle *area)
 	PangoLayout *comments_layout;
 
 	comments_layout = gnome_about_create_pango_layout_with_style (about, "comments_font", NULL);
-	pango_layout_set_text (comments_layout, about->comments, -1);
+	pango_layout_set_text (comments_layout, about->_priv->comments, -1);
 	pango_layout_set_width (comments_layout, 150 * PANGO_SCALE);
 	
-	gdk_draw_layout (about->drawing_area->window, about->drawing_area->style->black_gc, 8, 85, comments_layout);
+	gdk_draw_layout (about->_priv->drawing_area->window, about->_priv->drawing_area->style->black_gc, 8, 85, comments_layout);
 
 	g_object_unref (G_OBJECT (comments_layout));
 }
@@ -539,7 +555,7 @@ gnome_about_get_header_string (GnomeAbout *about)
 {
 	gchar *text;
 
-	text = g_strdup_printf ("%s %s", about->name, about->version);
+	text = g_strdup_printf ("%s %s", about->_priv->name, about->_priv->version);
 	
 	return text;
 }
@@ -552,16 +568,16 @@ gnome_about_draw_header (GnomeAbout *about, GdkRectangle *area)
 	gint y;
 	GdkGC *gc;
 	
-	gdk_draw_rectangle (about->drawing_area->window, about->drawing_area->style->white_gc, TRUE,
+	gdk_draw_rectangle (about->_priv->drawing_area->window, about->_priv->drawing_area->style->white_gc, TRUE,
 			    area->x, area->y, area->width, area->height);
 
 	for (y = 0; y < 30; y++) {
 		if (y % 2 == 0)
-			gc = about->drawing_area->style->dark_gc[GTK_STATE_SELECTED];
+			gc = about->_priv->drawing_area->style->dark_gc[GTK_STATE_SELECTED];
 		else
-			gc = about->drawing_area->style->light_gc[GTK_STATE_SELECTED];
+			gc = about->_priv->drawing_area->style->light_gc[GTK_STATE_SELECTED];
 		
-		gdk_draw_line (about->drawing_area->window, gc, 0, y, about->drawing_area->allocation.width, y);
+		gdk_draw_line (about->_priv->drawing_area->window, gc, 0, y, about->_priv->drawing_area->allocation.width, y);
 	}
 
 	header_layout = gnome_about_create_pango_layout_with_style (about, "header_font", NULL);
@@ -570,8 +586,8 @@ gnome_about_draw_header (GnomeAbout *about, GdkRectangle *area)
 	pango_layout_set_text (header_layout, text, -1);
 
 	/* Draw our header */
-	gdk_draw_layout (about->drawing_area->window, about->drawing_area->style->black_gc, 4, 2, header_layout);
-	gdk_draw_layout (about->drawing_area->window, about->drawing_area->style->white_gc, 3, 1, header_layout);
+	gdk_draw_layout (about->_priv->drawing_area->window, about->_priv->drawing_area->style->black_gc, 4, 2, header_layout);
+	gdk_draw_layout (about->_priv->drawing_area->window, about->_priv->drawing_area->style->white_gc, 3, 1, header_layout);
 
 	g_free (text);
 	g_object_unref (G_OBJECT (header_layout));
@@ -622,7 +638,7 @@ gnome_about_draw_names (GnomeAbout *about, GdkRectangle *area)
 		entry->is_displaying = TRUE;
 
 		pango_layout_set_text (name_list_layout, entry->name, -1);
-		gdk_draw_layout (about->drawing_area->window, about->drawing_area->style->black_gc,
+		gdk_draw_layout (about->_priv->drawing_area->window, about->_priv->drawing_area->style->black_gc,
 				 x, y, name_list_layout);
 		y += height;
 		rows++;
@@ -652,15 +668,15 @@ gnome_about_draw_name_header (GnomeAbout *about, GdkRectangle *area)
 
 	name_header_layout = gnome_about_create_pango_layout_with_style (about, "name_header_font", NULL);
 	
-	switch (about->displaying_state) {
+	switch (about->_priv->displaying_state) {
 	case DISPLAYING_AUTHORS:
-		header_str = g_slist_length (about->authors) == 1 ? _("Author") : _("Authors");
+		header_str = g_slist_length (about->_priv->authors) == 1 ? _("Author") : _("Authors");
 		break;
 	case DISPLAYING_TRANSLATOR_CREDITS:
 		header_str = _("Translator credits");
 		break;
 	case DISPLAYING_DOCUMENTERS:
-		header_str = g_slist_length (about->documenters) == 1 ? _("Documenter") : _("Documenters");
+		header_str = g_slist_length (about->_priv->documenters) == 1 ? _("Documenter") : _("Documenters");
 		break;
 	default:
 		g_assert_not_reached ();
@@ -668,7 +684,7 @@ gnome_about_draw_name_header (GnomeAbout *about, GdkRectangle *area)
 	}
 	
  	pango_layout_set_text (name_header_layout, header_str, -1);
-	gdk_draw_layout (about->drawing_area->window, about->drawing_area->style->black_gc, 170, 60 , name_header_layout);
+	gdk_draw_layout (about->_priv->drawing_area->window, about->_priv->drawing_area->style->black_gc, 170, 60 , name_header_layout);
 
 	g_object_unref (G_OBJECT (name_header_layout));
 }
@@ -697,24 +713,24 @@ gnome_about_area_button_press (GtkWidget *area, GdkEventButton *button, gpointer
 
 	/* We've displayed all entries */
 	if (undisplayed_entries == 0) {
-		switch (about->displaying_state) {
+		switch (about->_priv->displaying_state) {
 		case DISPLAYING_AUTHORS:
-			if (about->translator_credits != NULL)
-				about->displaying_state = DISPLAYING_TRANSLATOR_CREDITS;
-			else if (about->documenters != NULL)
-				about->displaying_state = DISPLAYING_DOCUMENTERS;
+			if (about->_priv->translator_credits != NULL)
+				about->_priv->displaying_state = DISPLAYING_TRANSLATOR_CREDITS;
+			else if (about->_priv->documenters != NULL)
+				about->_priv->displaying_state = DISPLAYING_DOCUMENTERS;
 			break;
 		case DISPLAYING_TRANSLATOR_CREDITS:
-			if (about->documenters != NULL)
-				about->displaying_state = DISPLAYING_DOCUMENTERS;
-			else if (about->authors != NULL)
-				about->displaying_state = DISPLAYING_AUTHORS;
+			if (about->_priv->documenters != NULL)
+				about->_priv->displaying_state = DISPLAYING_DOCUMENTERS;
+			else if (about->_priv->authors != NULL)
+				about->_priv->displaying_state = DISPLAYING_AUTHORS;
 			break;
 		case DISPLAYING_DOCUMENTERS:
-			if (about->authors != NULL)
-				about->displaying_state = DISPLAYING_AUTHORS;
-			else if (about->translator_credits != NULL)
-				about->displaying_state = DISPLAYING_TRANSLATOR_CREDITS;
+			if (about->_priv->authors != NULL)
+				about->_priv->displaying_state = DISPLAYING_AUTHORS;
+			else if (about->_priv->translator_credits != NULL)
+				about->_priv->displaying_state = DISPLAYING_TRANSLATOR_CREDITS;
 			break;
 		default:
 			g_assert_not_reached ();
@@ -751,14 +767,14 @@ gnome_about_update_size (GnomeAbout *about)
 
 	tmp_width = layout_width +
 		MINIMUM_TITLE_LOGO_PADDING +
-		(about->logo_pixbuf ? gdk_pixbuf_get_width (about->logo_pixbuf) : 0) +
-		about->logo_right_padding;
+		(about->_priv->logo_pixbuf ? gdk_pixbuf_get_width (about->_priv->logo_pixbuf) : 0) +
+		about->_priv->logo_right_padding;
 
 	if (tmp_width > width)
 		width = tmp_width;
 	
 	g_print ("updating size!\n");
-	gtk_widget_set_size_request (GTK_WIDGET (about->drawing_area), width, height);
+	gtk_widget_set_size_request (GTK_WIDGET (about->_priv->drawing_area), width, height);
 }
 
 static void
@@ -772,8 +788,8 @@ gnome_about_draw_translator_credits (GnomeAbout *about, GdkRectangle *area)
 	
 	layout = gnome_about_create_pango_layout_with_style (about, "name_list_font", NULL);
 
-	pango_layout_set_text (layout, about->translator_credits, -1);
-	gdk_draw_layout (about->drawing_area->window, about->drawing_area->style->black_gc,
+	pango_layout_set_text (layout, about->_priv->translator_credits, -1);
+	gdk_draw_layout (about->_priv->drawing_area->window, about->_priv->drawing_area->style->black_gc,
 			 x, y, layout);
 	g_object_unref (G_OBJECT (layout));
 }
@@ -788,7 +804,7 @@ gnome_about_area_expose (GtkWidget *area, GdkEventExpose *event, gpointer data)
 	gnome_about_draw_comments (about, &event->area);
 	gnome_about_draw_name_header (about, &event->area);
 
-	if (about->displaying_state == DISPLAYING_TRANSLATOR_CREDITS)
+	if (about->_priv->displaying_state == DISPLAYING_TRANSLATOR_CREDITS)
 		gnome_about_draw_translator_credits (about, &event->area);
 	else
 		gnome_about_draw_names (about, &event->area);
@@ -804,8 +820,8 @@ gnome_about_set_name (GnomeAbout *about, const gchar *name)
 {
 	gchar *title_string;
 
-	g_free (about->name);
-	about->name = g_strdup (name ? name : "");
+	g_free (about->_priv->name);
+	about->_priv->name = g_strdup (name ? name : "");
 
 	title_string = g_strdup_printf (_("About %s"), name);
 	gtk_window_set_title (GTK_WINDOW (about), title_string);
@@ -817,14 +833,14 @@ gnome_about_set_name (GnomeAbout *about, const gchar *name)
 static void
 gnome_about_set_version (GnomeAbout *about, const gchar *version)
 {
-	if (about->version != NULL &&
+	if (about->_priv->version != NULL &&
 	    version != NULL &&
-	    strcmp (about->version, version) == 0) {
+	    strcmp (about->_priv->version, version) == 0) {
 		return;
 	}
 	
-	g_free (about->version);
-	about->version = g_strdup (version ? version : "");
+	g_free (about->_priv->version);
+	about->_priv->version = g_strdup (version ? version : "");
 
 	gnome_about_update_size (about);
 }
@@ -832,8 +848,8 @@ gnome_about_set_version (GnomeAbout *about, const gchar *version)
 static void
 gnome_about_set_copyright (GnomeAbout *about, const gchar *copyright)
 {
-	g_free (about->copyright);
-	about->copyright = g_strdup (copyright ? copyright : "");
+	g_free (about->_priv->copyright);
+	about->_priv->copyright = g_strdup (copyright ? copyright : "");
 
 	gnome_about_update_size (about);
 }
@@ -860,16 +876,16 @@ gnome_about_update_background (GnomeAbout *about)
 	gdouble opacity, position;
 	gint width, height;
 	
-	if (about->rendered_background_pixbuf != NULL) {
-		g_object_unref (about->rendered_background_pixbuf);
+	if (about->_priv->rendered_background_pixbuf != NULL) {
+		g_object_unref (about->_priv->rendered_background_pixbuf);
 	}
 
-	if (about->background_pixbuf == NULL) {
-		about->rendered_background_pixbuf = NULL;
+	if (about->_priv->background_pixbuf == NULL) {
+		about->_priv->rendered_background_pixbuf = NULL;
 		return;
 	}
 	
-	pixbuf = gdk_pixbuf_copy (about->background_pixbuf);
+	pixbuf = gdk_pixbuf_copy (about->_priv->background_pixbuf);
 	width = gdk_pixbuf_get_width (pixbuf);
 	height = gdk_pixbuf_get_height (pixbuf);
 	
@@ -880,17 +896,17 @@ gnome_about_update_background (GnomeAbout *about)
 		for (j = 0; j < width; j++) {
 			position = (gdouble)j / (gdouble)width;
 
-			if (position < about->gradient_start_position) {
-				opacity = about->gradient_start_opacity;
+			if (position < about->_priv->gradient_start_position) {
+				opacity = about->_priv->gradient_start_opacity;
 			}
-			else if (position > about->gradient_end_position) {
-				opacity = about->gradient_end_opacity;
+			else if (position > about->_priv->gradient_end_position) {
+				opacity = about->_priv->gradient_end_opacity;
 			}
 			else {
 				gdouble normalized_position;
 
-				normalized_position = (position - about->gradient_start_position) / (about->gradient_end_position - about->gradient_start_position);
-				opacity = about->gradient_start_opacity + (about->gradient_end_opacity - about->gradient_start_opacity) * normalized_position;
+				normalized_position = (position - about->_priv->gradient_start_position) / (about->_priv->gradient_end_position - about->_priv->gradient_start_position);
+				opacity = about->_priv->gradient_start_opacity + (about->_priv->gradient_end_opacity - about->_priv->gradient_start_opacity) * normalized_position;
 			}
 			
 			*pixels++ = lighten_component (*pixels, opacity);
@@ -902,9 +918,9 @@ gnome_about_update_background (GnomeAbout *about)
 		}
 	}
 
-	about->rendered_background_pixbuf = pixbuf;
+	about->_priv->rendered_background_pixbuf = pixbuf;
 
-	gtk_widget_queue_draw (about->drawing_area);
+	gtk_widget_queue_draw (about->_priv->drawing_area);
 }
 
 static void
@@ -913,12 +929,12 @@ gnome_about_set_logo (GnomeAbout *about, GdkPixbuf *pixbuf)
 	if (pixbuf)
 		g_object_ref (pixbuf);
 
-	if (about->logo_pixbuf)
-		g_object_unref (about->logo_pixbuf);
+	if (about->_priv->logo_pixbuf)
+		g_object_unref (about->_priv->logo_pixbuf);
 
-	about->logo_pixbuf = pixbuf;
+	about->_priv->logo_pixbuf = pixbuf;
 
-	gtk_widget_queue_draw (about->drawing_area);
+	gtk_widget_queue_draw (about->_priv->drawing_area);
 }
 
 static void
@@ -927,10 +943,10 @@ gnome_about_set_background (GnomeAbout *about, GdkPixbuf *pixbuf)
 	if (pixbuf)
 		g_object_ref (pixbuf);
 	
-	if (about->background_pixbuf)
-		g_object_unref (about->background_pixbuf);
+	if (about->_priv->background_pixbuf)
+		g_object_unref (about->_priv->background_pixbuf);
 
-	about->background_pixbuf = pixbuf;
+	about->_priv->background_pixbuf = pixbuf;
 
 	gnome_about_update_background (about);
 	
@@ -940,10 +956,10 @@ gnome_about_set_background (GnomeAbout *about, GdkPixbuf *pixbuf)
 static void
 gnome_about_set_comments (GnomeAbout *about, const gchar *comments)
 {
-	g_free (about->comments);
-	about->comments = g_strdup (comments ? comments : "");
+	g_free (about->_priv->comments);
+	about->_priv->comments = g_strdup (comments ? comments : "");
 
-	gtk_widget_queue_draw (about->drawing_area);
+	gtk_widget_queue_draw (about->_priv->drawing_area);
 }
 
 static void
@@ -968,11 +984,11 @@ gnome_about_free_person_list (GSList *list)
 static void
 gnome_about_set_translator_credits (GnomeAbout *about, const gchar *translator_credits)
 {
-	g_free (about->translator_credits);
+	g_free (about->_priv->translator_credits);
 
-	about->translator_credits = g_strdup (translator_credits);
+	about->_priv->translator_credits = g_strdup (translator_credits);
 
-	gtk_widget_queue_draw (about->drawing_area);
+	gtk_widget_queue_draw (about->_priv->drawing_area);
 }
 
 static void
@@ -985,10 +1001,10 @@ gnome_about_set_persons (GnomeAbout *about, guint prop_id, const GValue *persons
 	/* Free the old list */
 	switch (prop_id) {
 	case PROP_AUTHORS:
-		list = about->authors;
+		list = about->_priv->authors;
 		break;
 	case PROP_DOCUMENTERS:
-		list = about->documenters;
+		list = about->_priv->documenters;
 		break;
 	default:
 		g_assert_not_reached ();
@@ -1019,10 +1035,10 @@ gnome_about_set_persons (GnomeAbout *about, guint prop_id, const GValue *persons
 
 	switch (prop_id) {
 	case PROP_AUTHORS:
-		about->authors = list;
+		about->_priv->authors = list;
 		break;
 	case PROP_DOCUMENTERS:
-		about->documenters = list;
+		about->_priv->documenters = list;
 		break;
 	default:
 		g_assert_not_reached ();
@@ -1038,43 +1054,43 @@ gnome_about_get_property (GObject *object, guint prop_id, GValue *value, GParamS
 
 	switch (prop_id) {
 	case PROP_NAME:
-		g_value_set_string (value, about->name);
+		g_value_set_string (value, about->_priv->name);
 		break;
 	case PROP_VERSION:
-		g_value_set_string (value, about->version);
+		g_value_set_string (value, about->_priv->version);
 		break;
 	case PROP_COPYRIGHT:
-		g_value_set_string (value, about->copyright);
+		g_value_set_string (value, about->_priv->copyright);
 		break;
 	case PROP_COMMENTS:
-		g_value_set_string (value, about->comments);
+		g_value_set_string (value, about->_priv->comments);
 		break;
 	case PROP_TRANSLATOR_CREDITS:
-		g_value_set_string (value, about->translator_credits);
+		g_value_set_string (value, about->_priv->translator_credits);
 		break;
 	case PROP_BACKGROUND:
-		g_value_set_object (value, about->background_pixbuf);
+		g_value_set_object (value, about->_priv->background_pixbuf);
 		break;
  	case PROP_BACKGROUND_START_OPACITY:
-		g_value_set_float (value, about->gradient_start_opacity);
+		g_value_set_float (value, about->_priv->gradient_start_opacity);
 		break;
 	case PROP_BACKGROUND_END_OPACITY:
-		g_value_set_float (value, about->gradient_end_opacity);
+		g_value_set_float (value, about->_priv->gradient_end_opacity);
 		break;
  	case PROP_BACKGROUND_START_POSITION:
-		g_value_set_float (value, about->gradient_start_position);
+		g_value_set_float (value, about->_priv->gradient_start_position);
 		break;
 	case PROP_BACKGROUND_END_POSITION:
-		g_value_set_float (value, about->gradient_end_position);
+		g_value_set_float (value, about->_priv->gradient_end_position);
 		break;
 	case PROP_LOGO:
-		g_value_set_object (value, about->logo_pixbuf);
+		g_value_set_object (value, about->_priv->logo_pixbuf);
 		break;
 	case PROP_LOGO_TOP_PADDING:
-		g_value_set_int (value, about->logo_top_padding);
+		g_value_set_int (value, about->_priv->logo_top_padding);
 		break;
 	case PROP_LOGO_RIGHT_PADDING:
-		g_value_set_int (value, about->logo_right_padding);
+		g_value_set_int (value, about->_priv->logo_right_padding);
 		break;
 
 	default:
@@ -1115,31 +1131,31 @@ gnome_about_set_property (GObject *object, guint prop_id, const GValue *value, G
 		gnome_about_set_background (about, g_value_get_object (value));
 		break;
 	case PROP_BACKGROUND_START_OPACITY:
-		about->gradient_start_opacity = g_value_get_float (value);
+		about->_priv->gradient_start_opacity = g_value_get_float (value);
 		gnome_about_update_background (about);
 		break;
 	case PROP_BACKGROUND_END_OPACITY:
-		about->gradient_end_opacity = g_value_get_float (value);
+		about->_priv->gradient_end_opacity = g_value_get_float (value);
 		gnome_about_update_background (about);
 		break;
 	case PROP_BACKGROUND_START_POSITION:
-		about->gradient_start_position = g_value_get_float (value);
+		about->_priv->gradient_start_position = g_value_get_float (value);
 		gnome_about_update_background (about);
 		break;
 	case PROP_BACKGROUND_END_POSITION:
-		about->gradient_end_position = g_value_get_float (value);
+		about->_priv->gradient_end_position = g_value_get_float (value);
 		gnome_about_update_background (about);
 		break;
 	case PROP_LOGO:
 		gnome_about_set_logo (about, g_value_get_object (value));
 		break;
 	case PROP_LOGO_TOP_PADDING:
-		about->logo_top_padding = g_value_get_int (value);
-		gtk_widget_queue_draw (about->drawing_area);
+		about->_priv->logo_top_padding = g_value_get_int (value);
+		gtk_widget_queue_draw (about->_priv->drawing_area);
 		break;
 	case PROP_LOGO_RIGHT_PADDING:
-		about->logo_right_padding = g_value_get_int (value);
-		gtk_widget_queue_draw (about->drawing_area);
+		about->_priv->logo_right_padding = g_value_get_int (value);
+		gtk_widget_queue_draw (about->_priv->drawing_area);
 		break;
 
 	default:
