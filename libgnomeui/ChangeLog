@@ -1,3 +1,8 @@
+Sat Aug 21 11:18:47 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dialog.c: the # is used to crosslink not the &, and
+	  add a return type description to newv
+
 Sat Aug 21 11:13:54 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-client.c: touched up docs for
