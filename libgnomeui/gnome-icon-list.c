@@ -13,13 +13,13 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkvscrollbar.h>
 #include "gnome-icon-list.h"
-
+#include <string.h>
 
 #define DEFAULT_ROW_SPACING  6
 #define DEFAULT_COL_SPACING  6
 #define DEFAULT_TEXT_SPACING 4
 #define DEFAULT_ICON_BORDER  4
-
+#define DEFAULT_WIDTH        70
 #define SCROLLBAR_SPACING    5 /* this is the same value as in GtkCList */
 
 #define ILIST_WIDTH(ilist) (ilist->icon_cols * (ilist->max_icon_width + ilist->col_spacing) - ilist->col_spacing)
@@ -32,7 +32,7 @@ typedef struct {
 
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
-	int text_width;
+	struct gnome_icon_text_info *ti;
 
 	GtkStateType state;
 
@@ -301,14 +301,13 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 		ypix = (ilist->max_icon_height - height) / 2;
 		xtext = 0;
 		ytext = 0;
-
 		break;
 
 	case GNOME_ICON_LIST_TEXT_BELOW:
 		xpix = (ilist->max_icon_width - width) / 2;
 		ypix = ilist->icon_border + (ilist->max_pixmap_height - height) / 2;
-		xtext = (ilist->max_icon_width - icon->text_width) / 2;
-		ytext = ilist->icon_border + ilist->max_pixmap_height + ilist->text_spacing + style->font->ascent;
+		xtext = 0;
+		ytext = ilist->icon_border + ilist->max_pixmap_height + ilist->text_spacing;
 
 		break;
 
@@ -354,11 +353,7 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 	/* Text */
 
 	if (ilist->mode != GNOME_ICON_LIST_ICONS)
-		gdk_draw_string (ilist->ilist_window,
-				 style->font,
-				 fg_gc,
-				 xtext, ytext,
-				 icon->text);
+		gnome_icon_paint_text (icon->ti, ilist->ilist_window, fg_gc, xtext, ytext, ilist->max_icon_width);
 }
 
 static void
@@ -659,12 +654,18 @@ gnome_icon_list_init (GnomeIconList *ilist)
 	gtk_signal_connect (GTK_OBJECT (adj), "value_changed",
 			    (GtkSignalFunc) vadjustment_value_changed,
 			    ilist);
+	gtk_signal_connect (GTK_OBJECT (adj), "changed",
+			    (GtkSignalFunc) vadjustment_value_changed,
+			    ilist);
 	gtk_widget_set_parent (ilist->vscrollbar, GTK_WIDGET (ilist));
 	gtk_widget_show (ilist->vscrollbar);
 
 	ilist->hscrollbar = gtk_hscrollbar_new (NULL);
 	adj = gtk_range_get_adjustment (GTK_RANGE (ilist->hscrollbar));
 	gtk_signal_connect (GTK_OBJECT (adj), "value_changed",
+			    (GtkSignalFunc) hadjustment_value_changed,
+			    ilist);
+	gtk_signal_connect (GTK_OBJECT (adj), "changed",
 			    (GtkSignalFunc) hadjustment_value_changed,
 			    ilist);
 	gtk_widget_set_parent (ilist->hscrollbar, GTK_WIDGET (ilist));
@@ -714,22 +715,25 @@ calc_icon_size (GnomeIconList *ilist, Icon *icon, int *width, int *height)
 	GdkFont *font;
 	int pixmap_w, pixmap_h;
 	int text_w, text_h;
+	static int desired_size;
 
 	if (!GTK_WIDGET_REALIZED (ilist))
 		g_warning ("calc_icon_size: oops, ilist not realized");
 
 	font = GTK_WIDGET (ilist)->style->font;
+	if (!desired_size){
+		desired_size = gdk_string_width (font, "XXXXXXXXXX");
+		if (desired_size == 0){
+			desired_size = 80;
+		}
+	}
 
-	/* FIXME!!!  This needs the font's lbearing/rbearing stuff to work perfectly.
-	 * Gdk does not provide it to us :-(
-	 */
-
-	icon->text_width = gdk_string_width (GTK_WIDGET (ilist)->style->font, icon->text);
+	icon->ti = gnome_icon_layout_text (font, icon->text, desired_size);
 
 	pixmap_w = icon->im ? icon->im->rgb_width : 0;
 	pixmap_h = icon->im ? icon->im->rgb_height : 0;
-	text_w = icon->text_width;
-	text_h = font->ascent + font->descent;
+	text_w = icon->ti->width;
+	text_h = icon->ti->height;
 
 	switch (ilist->mode) {
 	case GNOME_ICON_LIST_ICONS:
@@ -1503,9 +1507,7 @@ icon_new_from_imlib (GnomeIconList *ilist, GdkImlibImage *im, char *text)
 
 	icon->text = g_strdup (text);
 
-	icon->text_width = 0; /* this will be set by the recalc functions */
-
-	icon->state = GTK_STATE_NORMAL;
+    	icon->state = GTK_STATE_NORMAL;
 
 	icon->data = NULL;
 	icon->destroy = NULL;
@@ -1549,6 +1551,9 @@ icon_destroy (GnomeIconList *ilist, Icon *icon)
 	if (icon->text)
 		g_free (icon->text);
 
+	if (icon->ti)
+		gnome_icon_text_info_free (icon->ti);
+	
 	g_free (icon);
 }
 
@@ -2219,4 +2224,145 @@ gnome_icon_list_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpointe
 	rfunc = (GnomeIconListSignal1) func;
 
 	(* rfunc) (object, GTK_VALUE_INT (args[0]), GTK_VALUE_POINTER (args[1]), func_data);
+}
+
+static void
+free_string (gpointer data, gpointer user_data)
+{
+	if (data)
+		g_free (data);
+}
+
+void
+gnome_icon_text_info_free (struct gnome_icon_text_info *ti)
+{
+	g_list_foreach (ti->rows, free_string, NULL);
+	g_list_free (ti->rows);
+	g_free (ti);
+}
+
+struct gnome_icon_text_info *
+gnome_icon_layout_text (GdkFont *font, char *text, int max_width)
+{
+	struct gnome_icon_text_info *ti;
+	char *row_end, *row_text, *break_pos;
+	int i, row_width, window_width;
+	int len;
+
+	ti = g_new (struct gnome_icon_text_info, 1);
+
+	ti->rows = NULL;
+	ti->font = font;
+	ti->width = 0;
+	ti->height = 0;
+
+	ti->baseline_skip = ti->font->ascent + ti->font->descent;
+
+	window_width = 0;
+
+	while (*text) {
+		row_end = strchr (text, '\n');
+		if (!row_end)
+			row_end = strchr (text, '\0');
+
+		len = row_end - text + 1;
+		row_text = g_new (char, len);
+		memcpy (row_text, text, len - 1);
+		row_text[len - 1] = '\0';
+
+		/* Adjust the window's width or shorten the row until
+		 * it fits in the window.
+		 */
+
+		while (1) {
+			row_width = gdk_string_width (ti->font, row_text);
+			if (!window_width) {
+				/* make an initial guess at window's width */
+
+				if (row_width > max_width)
+					window_width = max_width;
+				else
+					window_width = row_width;
+			}
+
+			if (row_width <= window_width)
+				break;
+
+			if (strchr (row_text, ' ')){
+				/* the row is currently too wide, but we have
+				 * blanks in the row so we can break it into
+				 * smaller pieces
+				 */
+
+				int avg_width = row_width / strlen (row_text);
+
+				i = window_width;
+
+				if (avg_width != 0)
+					i /= avg_width;
+
+				if ((size_t) i >= len)
+					i = len - 1;
+
+				break_pos = strchr (row_text + i, ' ');
+				if (!break_pos) {
+					break_pos = row_text+ i;
+					while (*--break_pos != ' ');
+				}
+
+				*break_pos = '\0';
+			} else {
+				/* We can't break this row into any smaller
+				 * pieces, so we have no choice but to widen
+				 * the window
+				 *
+				 * For MC, we may want to modify the code above
+				 * so that it can also split the string on the
+				 * slahes of filenames.
+				 */
+
+				window_width = row_width;
+				break;
+			}
+		}
+
+		if (row_width > ti->width)
+			ti->width = row_width;
+
+		ti->rows = g_list_append (ti->rows, row_text);
+		ti->height += ti->baseline_skip;
+
+		text += strlen (row_text);
+		if (!*text)
+			break;
+
+		if (text[0] == '\n' && text[1]) {
+			/* end of paragraph and there is more text to come */
+			ti->rows = g_list_append (ti->rows, NULL);
+			ti->height += ti->baseline_skip / 2;
+		}
+
+		text++; /* skip blank or newline */
+	}
+
+	return ti;
+}
+
+void
+gnome_icon_paint_text (struct gnome_icon_text_info *ti, GdkDrawable *drawable, GdkGC *gc,
+		       int x_ofs, int y_ofs, int width)
+{
+	int y, w;
+	GList *item;
+
+	y = y_ofs + ti->font->ascent;
+
+	for (item = ti->rows; item; item = item->next) {
+		if (item->data) {
+			w = gdk_string_width (ti->font, item->data);
+			gdk_draw_string (drawable, ti->font, gc, x_ofs + (width - w) / 2, y, item->data);
+			y += ti->baseline_skip;
+		} else
+			y += ti->baseline_skip / 2;
+	}
 }

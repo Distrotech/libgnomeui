@@ -179,6 +179,32 @@ gnome_color_selector_button_clicked(GtkWidget *widget,
 	} /* if */
 } /* gnome_color_selector_button_clicked */
 
+static gint
+color_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, gpointer data)
+{
+	GnomeColorSelector *gcs = data;
+	int i;
+
+	if (strcmp (event->data_type, "application/x-color") == 0){
+		gdouble *dropped = data;
+		for (i = 0; i < event->data_numbytes / sizeof (gdouble); i++)
+			printf ("%g ", dropped[i]);
+		printf("\n");
+
+		gnome_color_selector_set_color (gcs, dropped [1], dropped [2], dropped [3]);
+	}
+	return FALSE;
+}
+
+static void
+setup_dnd (GtkWidget *preview, GnomeColorSelector *gcs)
+{
+	char *drop_types [] = { "application/x-color" };
+
+	gtk_widget_dnd_drop_set (GTK_WIDGET (preview), TRUE, drop_types, 1, 0);
+	gtk_signal_connect (GTK_OBJECT (preview), "drop_data_available_event",
+			    GTK_SIGNAL_FUNC (color_dropped), gcs);
+}
 
 GnomeColorSelector *
 gnome_color_selector_new(SetColorFunc set_color_func,
@@ -216,6 +242,8 @@ gnome_color_selector_new(SetColorFunc set_color_func,
 	gtk_widget_push_colormap (gtk_preview_get_cmap ());
 
 	gcs->preview = gtk_preview_new(GTK_PREVIEW_COLOR);
+	gtk_signal_connect (GTK_OBJECT (gcs->preview), "realize",
+			    GTK_SIGNAL_FUNC(setup_dnd), gcs);
 	gtk_preview_size(GTK_PREVIEW(gcs->preview), PREVIEW_WIDTH, PREVIEW_HEIGHT);
 
 	gtk_widget_pop_colormap ();

@@ -1,3 +1,14 @@
+1998-05-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_paint_text,
+	gnome_icon_layout_text, gnome_icon_text_info_free): moved from
+	gmc's gtrans.c code here.  Some more code reuse.
+	(gnome_icon_layout_text): The split routine should be improved to
+	split on various other characters to give us a better layout than
+	we currently have. 
+
+	Implemented icons with wrapped text. 
+
 Sun May 17 16:00:21 1998  Havoc Pennington  <hp@pobox.com>
 	
 	* gnome-dialog.h, gnome-dialog.c (gnome_dialog_editable_enters):

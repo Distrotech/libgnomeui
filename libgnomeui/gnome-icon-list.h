@@ -86,7 +86,6 @@ struct _GnomeIconListClass {
 	void (* unselect_icon) (GnomeIconList *ilist, gint num, GdkEvent *event);
 };
 
-
 guint          gnome_icon_list_get_type            (void);
 GtkWidget     *gnome_icon_list_new                 (void);
 
@@ -130,6 +129,21 @@ void           gnome_icon_list_set_border         (GnomeIconList *ilist, GtkShad
 int            gnome_icon_list_get_icon_at        (GnomeIconList *ilist, int x, int y);
 void           gnome_icon_list_unselect_all       (GnomeIconList *ilist, GdkEvent *event, void *keep);
 
+
+struct gnome_icon_text_info {
+	GList *rows;
+	GdkFont *font;
+	int width;
+	int height;
+	int baseline_skip;
+};
+
+/* Text layout routine for icons with text */
+void                         gnome_icon_text_info_free (struct gnome_icon_text_info *ti);
+struct gnome_icon_text_info *gnome_icon_layout_text    (GdkFont *font, char *text, int max_width);
+void                         gnome_icon_paint_text     (struct gnome_icon_text_info *ti,
+							GdkDrawable *drawable, GdkGC *gc,
+							int x_ofs, int y_ofs, int width);
 
 END_GNOME_DECLS
 
