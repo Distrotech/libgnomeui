@@ -1,3 +1,12 @@
+2002-05-14  Balamurali Viswanathan  <balamurali.viswanathan@wipro.com>
+
+	Fixes #81150 (patch integrated by Federico Mena Quintero
+	<federico@ximian.com>).
+
+	* configure.in: Check for new functions in gtk
+	* libgnomeui/gnome-client.c (client_set_restart_command): Save the
+	screen number in restart command 
+
 2002-05-21  Federico Mena Quintero  <federico@ximian.com>
 
 	Accessibility support for libgnomeui, by several people at Ximian.

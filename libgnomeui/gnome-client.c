@@ -86,6 +86,9 @@ static gint client_signals[LAST_SIGNAL] = { 0 };
 
 static const char *sm_client_id_arg_name G_GNUC_UNUSED = "--sm-client-id";
 static const char *sm_config_prefix_arg_name G_GNUC_UNUSED = "--sm-config-prefix";
+#ifdef HAVE_GDK_SCREEN_GET_NUMBER
+static const char *sm_screen G_GNUC_UNUSED = "--screen";
+#endif
 
 /* The master client.  */
 static GnomeClient *master_client= NULL;
@@ -433,6 +436,11 @@ client_set_restart_command (GnomeClient *client)
   gchar **ptr;
   gint    i = 0;
 
+#ifdef HAVE_GDK_SCREEN_GET_NUMBER
+  gint disp;
+  gchar *tmp;
+#endif
+
   SmPropValue *vals;
 
   if (!GNOME_CLIENT_CONNECTED (client) || (client->restart_command == NULL))
@@ -442,6 +450,11 @@ client_set_restart_command (GnomeClient *client)
 
   /* Add space for static arguments, config prefix and client id. */
   argc += g_list_length (client->static_args) + 4;
+
+#ifdef HAVE_GDK_SCREEN_GET_NUMBER
+  /* add two more for --screen */
+  argc += 2;
+#endif
 
   vals = g_new (SmPropValue, argc);
 
@@ -461,6 +474,17 @@ client_set_restart_command (GnomeClient *client)
   vals[i++].value = (char *) sm_client_id_arg_name;
   vals[i].length = strlen (client->client_id);
   vals[i++].value = client->client_id;
+
+#ifdef HAVE_GDK_SCREEN_GET_NUMBER
+  /* set the screen number */
+  disp = gdk_screen_get_number (gdk_get_default_screen ());
+  tmp = g_strdup_printf ("%d", disp);
+  vals[i].length = strlen (sm_screen);
+  vals[i++].value = (char *)sm_screen;
+  vals[i].length = strlen (tmp);
+  vals[i++].value = g_strdup(tmp);
+  g_free(tmp);
+#endif
 
   for (list = client->static_args; list; list = g_list_next (list))
     {
