@@ -1,3 +1,33 @@
+1999-12-13  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-rect-ellipse.c (REPrivate): Moved the previously
+	public fields to here.  Renamed with_pixels to width_in_pixels.
+	Added {fill,outline}_alpha_threshold arguments for hit testing.
+	Killed the have_fill_pixel and have_outline_pixel fields.  Removed
+	the pixel color fields, since we now compute them exclusively in
+	::update().
+	(gnome_canvas_re_class_init): Removed the {fill,outline}_color_gdk
+	arguments, since passing around pixel values makes no sense.
+	Removed the width_pixels and width_units arguments, and made width
+	and width_in_pixels read/write.
+	(gnome_canvas_re_destroy): Draw old area using
+	gnome_canvas_request_redraw().  Killed redraw_world_rect().
+	(gnome_canvas_re_set_arg): Removed cases for the old gdk color
+	arguments.  Check for success in call to gdk_color_parse().
+	Handle the {fill,outline}_alpha_threshold arguments.  Handle the
+	width and width_in_pixels arguments.
+	(gnome_canvas_re_get_arg): Handle fetching the fill and outline
+	colors in the new, simplified way, and killed all the old
+	auxiliary functions that used to do this.  Handle the fill/outline
+	alpha threshold arguments.
+	(update_non_aa): Use gnome_canvas_request_redraw().
+
+	* gnome-canvas-rect-ellipse.h (GnomeCanvasRE): Removed the padding
+	fields, and moved all the remaining fields to the private structure.
+
+	* gnome-canvas.h (GnomeCanvasItem): The bounding box will be
+	stored in canvas pixel coordinates, as ints, not as doubles.
+
 1999-12-12  Elliot Lee  <sopwith@redhat.com>
 
 	* gtkpixmapmenuitem.c: OK, size_allocate was just not making

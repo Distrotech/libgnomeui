@@ -1,13 +1,28 @@
-/* Rectangle and ellipse item types for GnomeCanvas widget
+/* GNOME libraries - Rectangle and ellipse items for the GNOME canvas.
  *
  * GnomeCanvas is basically a port of the Tk toolkit's most excellent canvas
  * widget.  Tk is copyrighted by the Regents of the University of California,
  * Sun Microsystems, and other parties.
  *
- * Copyright (C) 1998 The Free Software Foundation
+ * Copyright (C) 1999 The Free Software Foundation
  *
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  *          Raph Levien <raph@gimp.org>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
 #include <config.h>
@@ -20,33 +35,24 @@
 #include "libart_lgpl/art_svp_vpath.h"
 #include "libart_lgpl/art_rgb_svp.h"
 
-
-/* Base class for rectangle and ellipse item types */
-
-/* Object argument IDs */
-enum {
-	ARG_0,
-	ARG_X1,
-	ARG_Y1,
-	ARG_X2,
-	ARG_Y2,
-	ARG_FILL_COLOR,
-	ARG_FILL_COLOR_GDK,
-	ARG_FILL_COLOR_RGBA,
-	ARG_OUTLINE_COLOR,
-	ARG_OUTLINE_COLOR_GDK,
-	ARG_OUTLINE_COLOR_RGBA,
-	ARG_FILL_STIPPLE,
-	ARG_OUTLINE_STIPPLE,
-	ARG_WIDTH_PIXELS,
-	ARG_WIDTH_UNITS,
-	ARG_WIDTH,
-	ARG_WIDTH_IS_IN_PIXELS
-};
-
+
 
 /* Private data of the GnomeCanvasRE structure */
 typedef struct {
+	/* Corners of item */
+	double x1, y1, x2, y2;
+
+	/* Outline width */
+	double width;
+
+	/* Fill and outline colors, RGBA */
+	guint fill_color;
+	guint outline_color;
+
+	/* Alpha thresholds for hit-testing */
+	guint fill_alpha_threshold;
+	guint outline_alpha_threshold;
+
 	/* GCs for fill and outline */
 	GdkGC *fill_gc;
 	GdkGC *outline_gc;
@@ -59,12 +65,8 @@ typedef struct {
 	ArtSVP *fill_svp;
 	ArtSVP *outline_svp;
 
-	/* Whether the fill and outline colors are set */
-	guint fill_set : 1;
-	guint outline_set : 1;
-
 	/* Whether the outline width is specified in pixels or units */
-	guint width_pixels : 1;
+	guint width_in_pixels : 1;
 
 	/* Whether the item needs to be reshaped */
 	guint need_shape_update : 1;
@@ -72,43 +74,56 @@ typedef struct {
 	/* Whether the fill or outline properties have changed */
 	guint need_fill_update : 1;
 	guint need_outline_update : 1;
-
-	/* Whether we have the pixel or RGBA information for the colors */
-	guint have_fill_pixel : 1;
-	guint have_outline_pixel : 1;
 } REPrivate;
 
+
+
+/* Object argument IDs for the base rectangle/ellipse class */
+enum {
+	ARG_0,
+	ARG_X1,
+	ARG_Y1,
+	ARG_X2,
+	ARG_Y2,
+	ARG_FILL_COLOR,
+	ARG_FILL_COLOR_RGBA,
+	ARG_FILL_ALPHA_THRESHOLD,
+	ARG_OUTLINE_COLOR,
+	ARG_OUTLINE_COLOR_RGBA,
+	ARG_OUTLINE_ALPHA_THRESHOLD,
+	ARG_FILL_STIPPLE,
+	ARG_OUTLINE_STIPPLE,
+	ARG_WIDTH,
+	ARG_WIDTH_IN_PIXELS,
+};
 
 static void gnome_canvas_re_class_init (GnomeCanvasREClass *class);
-static void gnome_canvas_re_init       (GnomeCanvasRE      *re);
-static void gnome_canvas_re_destroy    (GtkObject          *object);
-static void gnome_canvas_re_set_arg    (GtkObject          *object,
-					GtkArg             *arg,
-					guint               arg_id);
-static void gnome_canvas_re_get_arg    (GtkObject          *object,
-					GtkArg             *arg,
-					guint               arg_id);
+static void gnome_canvas_re_init (GnomeCanvasRE *re);
+static void gnome_canvas_re_destroy (GtkObject *object);
+static void gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id);
+static void gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id);
 
-static void gnome_canvas_re_update      (GnomeCanvasItem *item, double *affine,
-					 ArtSVP *clip_path, int flags);
-static void gnome_canvas_re_unrealize   (GnomeCanvasItem *item);
-static void gnome_canvas_re_bounds      (GnomeCanvasItem *item,
-					 double *x1, double *y1, double *x2, double *y2);
+static void gnome_canvas_re_update (GnomeCanvasItem *item, double *affine,
+				    ArtSVP *clip_path, int flags);
+static void gnome_canvas_re_unrealize (GnomeCanvasItem *item);
+static void gnome_canvas_re_bounds (GnomeCanvasItem *item,
+				    double *x1, double *y1, double *x2, double *y2);
 
-static void gnome_canvas_re_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
+static void gnome_canvas_re_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 
 
 static GnomeCanvasItemClass *re_parent_class;
 
+
 
 /**
  * gnome_canvas_re_get_type:
  * @void:
  *
- * Registers the &GnomeCanvasRE class if necessary, and returns the type ID
+ * Registers the #GnomeCanvasRE class if necessary, and returns the type ID
  * associated to it.
  *
- * Return value: The type ID of the &GnomeCanvasRE class.
+ * Return value: The type ID of the #GnomeCanvasRE class.
  **/
 GtkType
 gnome_canvas_re_get_type (void)
@@ -155,28 +170,24 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y2);
 	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color",
 				 GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color_gdk",
-				 GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color_rgba",
 				 GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_COLOR_RGBA);
+	gtk_object_add_arg_type ("GnomeCanvasRE::fill_alpha_threshold",
+				 GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_ALPHA_THRESHOLD);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color",
 				 GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color_gdk",
-				 GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color_rgba",
 				 GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_RGBA);
+	gtk_object_add_arg_type ("GnomeCanvasRE::outline_alpha_threshold",
+				 GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_OUTLINE_ALPHA_THRESHOLD);
 	gtk_object_add_arg_type ("GnomeCanvasRE::fill_stipple",
 				 GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_stipple",
 				 GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_OUTLINE_STIPPLE);
-	gtk_object_add_arg_type ("GnomeCanvasRE::width_pixels",
-				 GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
-	gtk_object_add_arg_type ("GnomeCanvasRE::width_units",
-				 GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 	gtk_object_add_arg_type ("GnomeCanvasRE::width",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_WIDTH);
-	gtk_object_add_arg_type ("GnomeCanvasRE::width_is_in_pixels",
-				 GTK_TYPE_BOOL, GTK_ARG_READABLE, ARG_WIDTH_IS_IN_PIXELS);
+				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_WIDTH);
+	gtk_object_add_arg_type ("GnomeCanvasRE::width_in_pixels",
+				 GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_WIDTH_IN_PIXELS);
 
 	object_class->destroy = gnome_canvas_re_destroy;
 	object_class->set_arg = gnome_canvas_re_set_arg;
@@ -197,39 +208,13 @@ gnome_canvas_re_init (GnomeCanvasRE *re)
 	priv = g_new0 (REPrivate, 1);
 	re->priv = priv;
 
-	re->x1 = 0.0;
-	re->y1 = 0.0;
-	re->x2 = 0.0;
-	re->y2 = 0.0;
-	re->width = 0.0;
-}
-
-/* Converts a rectangle in world coordinates to canvas pixel coordinates and
- * queues a redraw of the result.
- */
-static void
-redraw_world_rect (GnomeCanvas *canvas, double x1, double y1, double x2, double y2)
-{
-	double w2c[6];
-	ArtPoint w1, c1, w2, c2;
-
-	gnome_canvas_w2c_affine (canvas, w2c);
-
-	w1.x = x1;
-	w1.y = y1;
-	w2.x = x2;
-	w2.y = y2;
-
-	art_affine_point (&c1, &w1, w2c);
-	art_affine_point (&c2, &w2, w2c);
-
-	/* Do we need fudging here? */
-
-	gnome_canvas_request_redraw (canvas,
-				     (int) floor (c1.x + 0.5),
-				     (int) floor (c1.y + 0.5),
-				     (int) floor (c2.x + 0.5) + 1,
-				     (int) floor (c2.y + 0.5) + 1);
+	priv->x1 = 0.0;
+	priv->y1 = 0.0;
+	priv->x2 = 0.0;
+	priv->y2 = 0.0;
+	priv->width = 0.0;
+	priv->fill_alpha_threshold = 1;
+	priv->outline_alpha_threshold = 1;
 }
 
 /* Destroy handler for the rect/ellipse item */
@@ -247,14 +232,7 @@ gnome_canvas_re_destroy (GtkObject *object)
 	item = GNOME_CANVAS_ITEM (re);
 	priv = re->priv;
 
-	/* Redraw last known area */
-
-	if (item->canvas->aa)
-		; /* FIXME */
-	else
-		redraw_world_rect (item->canvas, item->x1, item->y1, item->x2, item->y2);
-
-	/* Free everything */
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 
 	if (priv->fill_stipple)
 		gdk_bitmap_unref (priv->fill_stipple);
@@ -274,6 +252,8 @@ gnome_canvas_re_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (re_parent_class)->destroy) (object);
 }
 
+
+
 /* Set_arg handler for the rect/ellipse item */
 static void
 gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
@@ -282,38 +262,35 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasRE *re;
 	REPrivate *priv;
 	GdkColor color = { 0, 0, 0, 0 };
-	GdkColor *pcolor;
 	char *str;
+	guint val;
 	GdkBitmap *bitmap;
-	int have_pixel;
 
 	item = GNOME_CANVAS_ITEM (object);
 	re = GNOME_CANVAS_RE (object);
 	priv = re->priv;
 
-	have_pixel = FALSE;
-
 	switch (arg_id) {
 	case ARG_X1:
-		re->x1 = GTK_VALUE_DOUBLE (*arg);
+		priv->x1 = GTK_VALUE_DOUBLE (*arg);
 		priv->need_shape_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_Y1:
-		re->y1 = GTK_VALUE_DOUBLE (*arg);
+		priv->y1 = GTK_VALUE_DOUBLE (*arg);
 		priv->need_shape_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_X2:
-		re->x2 = GTK_VALUE_DOUBLE (*arg);
+		priv->x2 = GTK_VALUE_DOUBLE (*arg);
 		priv->need_shape_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_Y2:
-		re->y2 = GTK_VALUE_DOUBLE (*arg);
+		priv->y2 = GTK_VALUE_DOUBLE (*arg);
 		priv->need_shape_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
@@ -321,41 +298,30 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_FILL_COLOR:
 		str = GTK_VALUE_STRING (*arg);
 		if (str) {
-			gdk_color_parse (str, &color);
-			re->fill_color = ((color.red & 0xff00) << 16 |
-					  (color.green & 0xff00) << 8 |
-					  (color.blue & 0xff00) |
-					  0xff);
-			priv->fill_set = TRUE;
-		} else {
-			re->fill_color = 0; /* All transparent */
-			priv->fill_set = FALSE;
-		}
+			if (gdk_color_parse (str, &color))
+				priv->fill_color = ((color.red & 0xff00) << 16 |
+						    (color.green & 0xff00) << 8 |
+						    (color.blue & 0xff00) |
+						    0xff);
+			else
+				priv->fill_color = 0;
+		} else
+			priv->fill_color = 0; /* All transparent */
 
-		priv->have_fill_pixel = FALSE;
-		priv->need_fill_update = TRUE;
-		gnome_canvas_item_request_update (item);
-		break;
-
-	case ARG_FILL_COLOR_GDK:
-		pcolor = GTK_VALUE_BOXED (*arg);
-		if (pcolor) {
-			re->fill_pixel = pcolor->pixel;
-			priv->fill_set = TRUE;
-		} else {
-			re->fill_pixel = 0;
-			priv->fill_set = FALSE;
-		}
-
-		priv->have_fill_pixel = TRUE;
 		priv->need_fill_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_FILL_COLOR_RGBA:
-		re->fill_color = GTK_VALUE_UINT (*arg);
-		priv->fill_set = TRUE;
-		priv->have_fill_pixel = FALSE;
+		priv->fill_color = GTK_VALUE_UINT (*arg);
+		priv->need_fill_update = TRUE;
+		gnome_canvas_item_request_update (item);
+		break;
+
+	case ARG_FILL_ALPHA_THRESHOLD:
+		val = GTK_VALUE_UINT (*arg);
+		g_return_if_fail (val <= 255);
+		priv->fill_alpha_threshold = val;
 		priv->need_fill_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
@@ -363,41 +329,30 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_OUTLINE_COLOR:
 		str = GTK_VALUE_STRING (*arg);
 		if (str) {
-			gdk_color_parse (str, &color);
-			re->outline_color = ((color.red & 0xff00) << 16 |
-					     (color.green & 0xff00) << 8 |
-					     (color.blue & 0xff00) |
-					     0xff);
-			priv->outline_set = TRUE;
-		} else {
-			re->outline_color = 0; /* All transparent */
-			priv->outline_set = FALSE;
-		}
+			if (gdk_color_parse (str, &color))
+				priv->outline_color = ((color.red & 0xff00) << 16 |
+						       (color.green & 0xff00) << 8 |
+						       (color.blue & 0xff00) |
+						       0xff);
+			else
+				priv->outline_color = 0;
+		} else
+			priv->outline_color = 0; /* All transparent */
 
-		priv->have_outline_pixel = FALSE;
-		priv->need_outline_update = TRUE;
-		gnome_canvas_item_request_update (item);
-		break;
-
-	case ARG_OUTLINE_COLOR_GDK:
-		pcolor = GTK_VALUE_BOXED (*arg);
-		if (pcolor) {
-			re->outline_pixel = pcolor->pixel;
-			priv->outline_set = TRUE;
-		} else {
-			re->outline_pixel = 0;
-			priv->outline_set = FALSE;
-		}
-
-		priv->have_outline_pixel = TRUE;
 		priv->need_outline_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_OUTLINE_COLOR_RGBA:
-		re->outline_color = GTK_VALUE_UINT (*arg);
-		priv->outline_set = TRUE;
-		priv->have_outline_pixel = FALSE;
+		priv->outline_color = GTK_VALUE_UINT (*arg);
+		priv->need_outline_update = TRUE;
+		gnome_canvas_item_request_update (item);
+		break;
+
+	case ARG_OUTLINE_ALPHA_THRESHOLD:
+		val = GTK_VALUE_UINT (*arg);
+		g_return_if_fail (val <= 255);
+		priv->outline_alpha_threshold = val;
 		priv->need_outline_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
@@ -428,17 +383,15 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		gnome_canvas_item_request_update (item);
 		break;
 
-	case ARG_WIDTH_PIXELS:
-		re->width = GTK_VALUE_UINT (*arg);
-		priv->width_pixels = TRUE;
+	case ARG_WIDTH:
+		priv->width = GTK_VALUE_DOUBLE (*arg);
 		priv->need_shape_update = TRUE;
 		priv->need_outline_update = TRUE;
 		gnome_canvas_item_request_update (item);
 		break;
 
-	case ARG_WIDTH_UNITS:
-		re->width = fabs (GTK_VALUE_DOUBLE (*arg));
-		priv->width_pixels = FALSE;
+	case ARG_WIDTH_IN_PIXELS:
+		priv->width_in_pixels = GTK_VALUE_BOOL (*arg) ? TRUE : FALSE;
 		priv->need_shape_update = TRUE;
 		priv->need_outline_update = TRUE;
 		gnome_canvas_item_request_update (item);
@@ -447,72 +400,6 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	default:
 		break;
 	}
-}
-
-/* Ensures that all the color information for a rect/ellipse item is available,
- * and returns both the RGBA and pixel values that need to be stored.
- */
-static void
-ensure_color_info (GnomeCanvas *canvas, guint *ret_rgba, gulong *ret_pixel,
-		   guint rgba, gulong pixel, int is_set, int have_pixel)
-{
-	GdkColor color;
-
-	if (have_pixel) {
-		*ret_pixel = pixel;
-
-		if (is_set) {
-			color.pixel = pixel;
-			gdk_color_context_query_color (canvas->cc, &color);
-			*ret_rgba = ((color.red & 0xff00) << 16 |
-				     (color.green & 0xff00) << 8 |
-				     (color.blue & 0xff00) |
-				     0xff);
-		} else
-			*ret_rgba = 0; /* All transparent */
-	} else {
-		*ret_rgba = rgba;
-
-		if (is_set)
-			*ret_pixel = gnome_canvas_get_color_pixel (canvas, rgba);
-		else
-			*ret_pixel = 0; /* Transparent, so we can't do any better */
-	}
-}
-
-/* This is used by the gnome_canvas_re_get_arg() to query colors from a
- * rect/ellipse item.  It is ugly because it has to handle items that may or may
- * not need color updates, and if they do, they may have different parameters
- * set or not.
- */
-static void
-get_color_arg (GnomeCanvasRE *re, guint rgba, gulong pixel,
-	       int is_set, int have_pixel, int need_update,
-	       int want_gdk, GtkArg *arg)
-{
-	guint ret_rgba;
-	gulong ret_pixel;
-
-	if (need_update)
-		ensure_color_info (re->item.canvas, &ret_rgba, &ret_pixel,
-				   rgba, pixel, is_set, have_pixel);
-	else {
-		ret_rgba = rgba;
-		ret_pixel = pixel;
-	}
-
-	if (want_gdk) {
-		GdkColor *color;
-
-		color = g_new (GdkColor, 1);
-		color->pixel = ret_pixel;
-		color->red = ((ret_rgba & 0xff000000) >> 16) + ((ret_rgba & 0xff000000) >> 24);
-		color->green = ((ret_rgba & 0x00ff0000) >> 8) + ((ret_rgba & 0x00ff0000) >> 16);
-		color->blue = (ret_rgba & 0x0000ff00) + ((ret_rgba & 0x0000ff00) >> 8);
-
-		GTK_VALUE_BOXED (*arg) = color;
-	} else
-		GTK_VALUE_UINT (*arg) = ret_rgba;
 }
 
 /* Get_arg handler for the rect/ellipse item */
@@ -527,43 +414,35 @@ gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	switch (arg_id) {
 	case ARG_X1:
-		GTK_VALUE_DOUBLE (*arg) = re->x1;
+		GTK_VALUE_DOUBLE (*arg) = priv->x1;
 		break;
 
 	case ARG_Y1:
-		GTK_VALUE_DOUBLE (*arg) = re->y1;
+		GTK_VALUE_DOUBLE (*arg) = priv->y1;
 		break;
 
 	case ARG_X2:
-		GTK_VALUE_DOUBLE (*arg) = re->x2;
+		GTK_VALUE_DOUBLE (*arg) = priv->x2;
 		break;
 
 	case ARG_Y2:
-		GTK_VALUE_DOUBLE (*arg) = re->y2;
-		break;
-
-	case ARG_FILL_COLOR_GDK:
-		get_color_arg (re, re->fill_color, re->fill_pixel,
-			       priv->fill_set, priv->have_fill_pixel, priv->need_fill_update,
-			       TRUE, arg);
+		GTK_VALUE_DOUBLE (*arg) = priv->y2;
 		break;
 
 	case ARG_FILL_COLOR_RGBA:
-		get_color_arg (re, re->fill_color, re->fill_pixel,
-			       priv->fill_set, priv->have_fill_pixel, priv->need_fill_update,
-			       FALSE, arg);
+		GTK_VALUE_UINT (*arg) = priv->fill_color;
 		break;
 
-	case ARG_OUTLINE_COLOR_GDK:
-		get_color_arg (re, re->outline_color, re->outline_pixel,
-			       priv->outline_set, priv->have_outline_pixel, priv->need_outline_update,
-			       TRUE, arg);
+	case ARG_FILL_ALPHA_THRESHOLD:
+		GTK_VALUE_UINT (*arg) = priv->fill_alpha_threshold;
 		break;
 
 	case ARG_OUTLINE_COLOR_RGBA:
-		get_color_arg (re, re->outline_color, re->outline_pixel,
-			       priv->outline_set, priv->have_outline_pixel, priv->need_outline_update,
-			       FALSE, arg);
+		GTK_VALUE_UINT (*arg) = priv->outline_color;
+		break;
+
+	case ARG_OUTLINE_ALPHA_THRESHOLD:
+		GTK_VALUE_UINT (*arg) = priv->outline_alpha_threshold;
 		break;
 
 	case ARG_FILL_STIPPLE:
@@ -575,11 +454,11 @@ gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_WIDTH:
-		GTK_VALUE_DOUBLE (*arg) = re->width;
+		GTK_VALUE_DOUBLE (*arg) = priv->width;
 		break;
 
-	case ARG_WIDTH_IS_IN_PIXELS:
-		GTK_VALUE_BOOL (*arg) = priv->width_pixels;
+	case ARG_WIDTH_IN_PIXELS:
+		GTK_VALUE_BOOL (*arg) = priv->width_in_pixels;
 		break;
 
 	default:
@@ -587,6 +466,10 @@ gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 	}
 }
+
+
+
+/* Update sequence */
 
 /* Updates a possibly existing GC in the rect/ellipse item.  It uses the gtk_gc
  * memoization functions so that many similar canvas items can share GCs.
@@ -625,26 +508,32 @@ update_gc (GnomeCanvas *canvas, GdkGC **gc, gulong pixel,
 			  gtk_widget_get_colormap (GTK_WIDGET (canvas)),
 			  &values,
 			  mask);
+
+	g_assert (*gc != NULL);
 }
 
 /* Gets the corners of an rect/ellipse item, so that x1 <= x2 and y1 <= y2 */
 static void
 get_corners (GnomeCanvasRE *re, double *x1, double *y1, double *x2, double *y2)
 {
-	if (re->x1 < re->x2) {
-		*x1 = re->x1;
-		*x2 = re->x2;
+	REPrivate *priv;
+
+	priv = re->priv;
+
+	if (priv->x1 < priv->x2) {
+		*x1 = priv->x1;
+		*x2 = priv->x2;
 	} else {
-		*x1 = re->x2;
-		*x2 = re->x1;
+		*x1 = priv->x2;
+		*x2 = priv->x1;
 	}
 
-	if (re->y1 < re->y2) {
-		*y1 = re->y1;
-		*y2 = re->y2;
+	if (priv->y1 < priv->y2) {
+		*y1 = priv->y1;
+		*y2 = priv->y2;
 	} else {
-		*y1 = re->y2;
-		*y2 = re->y1;
+		*y1 = priv->y2;
+		*y2 = priv->y1;
 	}
 }
 
@@ -667,10 +556,10 @@ update_non_aa (GnomeCanvasRE *re, double *affine, ArtSVP *clip_path, int flags)
 	     && !(GTK_OBJECT_FLAGS (re) & GNOME_CANVAS_ITEM_VISIBLE))
 	    || (flags & GNOME_CANVAS_UPDATE_AFFINE)
 	    || priv->need_shape_update)
-		redraw_world_rect (item->canvas, item->x1, item->y1, item->x2, item->y2);
+		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 
-	/* If we need a shape update, or if the item changed visibility
-	 * to shown, recompute the bounding box.
+	/* If we need a shape update, or if the item changed visibility to
+	 * shown, recompute the bounding box.
 	 */
 	if (priv->need_shape_update
 	    || ((flags & GNOME_CANVAS_UPDATE_VISIBILITY)
@@ -681,10 +570,10 @@ update_non_aa (GnomeCanvasRE *re, double *affine, ArtSVP *clip_path, int flags)
 		double i2w[6];
 
 		get_corners (re, &i1.x, &i1.y, &i2.x, &i2.y);
-		if (priv->width_pixels)
-			hwidth = (re->width / item->canvas->pixels_per_unit) / 2.0;
+		if (priv->width_in_pixels)
+			hwidth = (priv->width / item->canvas->pixels_per_unit) / 2.0;
 		else
-			hwidth = re->width / 2.0;
+			hwidth = priv->width / 2.0;
 
 		i1.x -= hwidth;
 		i1.y -= hwidth;
@@ -705,10 +594,9 @@ update_non_aa (GnomeCanvasRE *re, double *affine, ArtSVP *clip_path, int flags)
 
 	/* If the fill our outline changed, we need to redraw, anyways */
 
-	redraw_world_rect (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	priv->need_fill_update = FALSE;
 	priv->need_outline_update = FALSE;
-
 }
 
 /* Update handler for the rect/ellipse item.  Both items share the outline and
@@ -719,8 +607,6 @@ gnome_canvas_re_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path
 {
 	GnomeCanvasRE *re;
 	REPrivate *priv;
-	guint rgba;
-	gulong pixel;
 
 	re = GNOME_CANVAS_RE (item);
 	priv = re->priv;
@@ -729,31 +615,27 @@ gnome_canvas_re_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path
 		(* re_parent_class->update) (item, affine, clip_path, flags);
 
 	if (priv->need_fill_update) {
-		ensure_color_info (item->canvas, &rgba, &pixel,
-				   re->fill_color, re->fill_pixel,
-				   priv->fill_set, priv->have_fill_pixel);
-		re->fill_color = rgba;
-		re->fill_pixel = pixel;
+		if (!item->canvas->aa) {
+			gulong pixel;
 
-		if (!item->canvas->aa)
-			update_gc (item->canvas, &priv->fill_gc, re->fill_pixel,
+			pixel = gnome_canvas_get_color_pixel (item->canvas, priv->fill_color);
+			update_gc (item->canvas, &priv->fill_gc, pixel,
 				   FALSE, 0.0, FALSE,
 				   priv->fill_stipple);
+		}
 
 		priv->need_fill_update = FALSE;
 	}
 
 	if (priv->need_outline_update) {
-		ensure_color_info (item->canvas, &rgba, &pixel,
-				   re->outline_color, re->outline_pixel,
-				   priv->outline_set, priv->have_outline_pixel);
-		re->outline_color = rgba;
-		re->outline_pixel = pixel;
+		if (!item->canvas->aa) {
+			gulong pixel;
 
-		if (!item->canvas->aa)
-			update_gc (item->canvas, &priv->outline_gc, re->outline_pixel,
-				   TRUE, re->width, priv->width_pixels,
+			pixel = gnome_canvas_get_color_pixel (item->canvas, priv->outline_color);
+			update_gc (item->canvas, &priv->outline_gc, pixel,
+				   TRUE, priv->width, priv->width_in_pixels,
 				   priv->outline_stipple);
+		}
 
 		priv->need_outline_update = FALSE;
 	}
@@ -765,6 +647,8 @@ gnome_canvas_re_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path
 	if (!item->canvas->aa)
 		update_non_aa (re, affine, clip_path, flags);
 }
+
+
 
 /* Unrealize handler for the rect/ellipse item */
 static void
@@ -802,10 +686,10 @@ gnome_canvas_re_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x
 	re = GNOME_CANVAS_RE (item);
 	priv = re->priv;
 
-	if (priv->width_pixels)
-		hwidth = (re->width / item->canvas->pixels_per_unit) / 2.0;
+	if (priv->width_in_pixels)
+		hwidth = (priv->width / item->canvas->pixels_per_unit) / 2.0;
 	else
-		hwidth = re->width / 2.0;
+		hwidth = priv->width / 2.0;
 
 	get_corners (re, &rx1, &ry1, &rx2, &ry2);
 
@@ -831,11 +715,10 @@ gnome_canvas_re_render (GnomeCanvasItem *item,
 #endif
 
 	if (priv->fill_svp)
-		gnome_canvas_render_svp (buf, priv->fill_svp, re->fill_color);
+		gnome_canvas_render_svp (buf, priv->fill_svp, priv->fill_color);
 
-	if (priv->outline_svp) {
-		gnome_canvas_render_svp (buf, priv->outline_svp, re->outline_color);
-	}
+	if (priv->outline_svp)
+		gnome_canvas_render_svp (buf, priv->outline_svp, priv->outline_color);
 }
 
 
@@ -987,7 +870,7 @@ gnome_canvas_rect_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_pa
 			/* We do the stroking by hand because it's simple enough
 			   and could save time. */
 
-			if (re->width_pixels)
+			if (re->width_in_pixels)
 				halfwidth = re->width * 0.5;
 			else
 				halfwidth = re->width * item->canvas->pixels_per_unit * 0.5;
@@ -1098,11 +981,11 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	 */
 
 	if (priv->fill_set
-	    && (priv->have_fill_pixel || (re->fill_color & 0xff) >= 128))
+	    && (priv->have_fill_pixel || (priv->fill_color & 0xff) >= 128))
 		gdk_draw_rectangle (drawable, priv->fill_gc, TRUE, x1, y1, w + 1, h + 1);
 
 	if (priv->outline_set
-	    && (priv->have_outline_pixel || (re->outline_color & 0xff) >= 128))
+	    && (priv->have_outline_pixel || (priv->outline_color & 0xff) >= 128))
 		gdk_draw_rectangle (drawable, priv->outline_gc, FALSE, x1, y1, w, h);
 
 	/* Reset stipple offsets */
@@ -1132,16 +1015,16 @@ gnome_canvas_rect_point (GnomeCanvasItem *item, double x, double y, int cx, int 
 
 	/* Find the bounds for the rectangle plus its outline width */
 
-	x1 = re->x1;
-	y1 = re->y1;
-	x2 = re->x2;
-	y2 = re->y2;
+	x1 = priv->x1;
+	y1 = priv->y1;
+	x2 = priv->x2;
+	y2 = priv->y2;
 
 	if (priv->outline_set) {
-		if (priv->width_pixels)
-			hwidth = (re->width / item->canvas->pixels_per_unit) / 2.0;
+		if (priv->width_in_pixels)
+			hwidth = (priv->width / item->canvas->pixels_per_unit) / 2.0;
 		else
-			hwidth = re->width / 2.0;
+			hwidth = priv->width / 2.0;
 
 		x1 -= hwidth;
 		y1 -= hwidth;
@@ -1274,10 +1157,10 @@ gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	gnome_canvas_w2c_affine (item->canvas, w2c);
 	art_affine_multiply (i2c, i2w, w2c);
 
-	i1.x = re->x1;
-	i1.y = re->y1;
-	i2.x = re->x2;
-	i2.y = re->y2;
+	i1.x = priv->x1;
+	i1.y = priv->y1;
+	i2.x = priv->x2;
+	i2.y = priv->y2;
 	art_affine_point (&c1, &i1, i2c);
 	art_affine_point (&c2, &i2, i2c);
 	x1 = c1.x;
@@ -1336,10 +1219,10 @@ gnome_canvas_ellipse_point (GnomeCanvasItem *item, double x, double y, int cx, i
 	*actual_item = item;
 
 	if (priv->outline_set) {
-		if (priv->width_pixels)
-			width = re->width / item->canvas->pixels_per_unit;
+		if (priv->width_in_pixels)
+			width = priv->width / item->canvas->pixels_per_unit;
 		else
-			width = re->width;
+			width = priv->width;
 	} else
 		width = 0.0;
 
@@ -1347,12 +1230,12 @@ gnome_canvas_ellipse_point (GnomeCanvasItem *item, double x, double y, int cx, i
 	 * considered as being scaled to a circle.
 	 */
 
-	dx = x - (re->x1 + re->x2) / 2.0;
-	dy = y - (re->y1 + re->y2) / 2.0;
+	dx = x - (priv->x1 + priv->x2) / 2.0;
+	dy = y - (priv->y1 + priv->y2) / 2.0;
 	center_dist = sqrt (dx * dx + dy * dy);
 
-	a = dx / ((re->x2 + width - re->x1) / 2.0);
-	b = dy / ((re->y2 + width - re->y1) / 2.0);
+	a = dx / ((priv->x2 + width - priv->x1) / 2.0);
+	b = dy / ((priv->y2 + width - priv->y1) / 2.0);
 	scaled_dist = sqrt (a * a + b * b);
 
 	/* If the scaled distance is greater than 1, then we are outside.  Compute the distance from
@@ -1376,8 +1259,8 @@ gnome_canvas_ellipse_point (GnomeCanvasItem *item, double x, double y, int cx, i
 	else {
 		/* Handle very small distance */
 
-		diamx = re->x2 - re->x1;
-		diamy = re->y2 - re->y1;
+		diamx = priv->x2 - priv->x1;
+		diamy = priv->y2 - priv->y1;
 
 		if (diamx < diamy)
 			outline_dist = (diamx - width) / 2.0;
@@ -1440,40 +1323,40 @@ gnome_canvas_ellipse_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip
 			 re->x1, re->y1, re->x2, re->y2);
 #endif
 
-		if (re->fill_set) {
-			gnome_canvas_gen_ellipse (vpath, re->x1, re->y1, re->x2, re->y2);
+		if (priv->fill_set) {
+			gnome_canvas_gen_ellipse (vpath, priv->x1, priv->y1, priv->x2, priv->y2);
 			vpath[N_PTS + 1].code = ART_END;
 			vpath[N_PTS + 1].x = 0;
 			vpath[N_PTS + 1].y = 0;
 
 			vpath2 = art_vpath_affine_transform (vpath, affine);
 
-			gnome_canvas_item_update_svp_clip (item, &re->fill_svp, art_svp_from_vpath (vpath2), clip_path);
+			gnome_canvas_item_update_svp_clip (item, &priv->fill_svp, art_svp_from_vpath (vpath2), clip_path);
 			art_free (vpath2);
 		} else
-			gnome_canvas_item_update_svp (item, &re->fill_svp, NULL);
+			gnome_canvas_item_update_svp (item, &priv->fill_svp, NULL);
 
-		if (re->outline_set) {
+		if (priv->outline_set) {
 			double halfwidth;
 
-			if (re->width_pixels)
-				halfwidth = (re->width / item->canvas->pixels_per_unit) * 0.5;
+			if (priv->width_in_pixels)
+				halfwidth = (priv->width / item->canvas->pixels_per_unit) * 0.5;
 			else
-				halfwidth = re->width * 0.5;
+				halfwidth = priv->width * 0.5;
 
 			if (halfwidth < 0.25)
 				halfwidth = 0.25;
 
 			i = 0;
 			gnome_canvas_gen_ellipse (vpath + i,
-						  re->x1 - halfwidth, re->y1 - halfwidth,
-						  re->x2 + halfwidth, re->y2 + halfwidth);
+						  priv->x1 - halfwidth, priv->y1 - halfwidth,
+						  priv->x2 + halfwidth, priv->y2 + halfwidth);
 			i = N_PTS + 1;
-			if (re->x2 - halfwidth > re->x1 + halfwidth &&
-			    re->y2 - halfwidth > re->y1 + halfwidth) {
+			if (priv->x2 - halfwidth > priv->x1 + halfwidth &&
+			    priv->y2 - halfwidth > priv->y1 + halfwidth) {
 				gnome_canvas_gen_ellipse (vpath + i,
-							  re->x1 + halfwidth, re->y2 - halfwidth,
-							  re->x2 - halfwidth, re->y1 + halfwidth);
+							  priv->x1 + halfwidth, priv->y2 - halfwidth,
+							  priv->x2 - halfwidth, priv->y1 + halfwidth);
 				i += N_PTS + 1;
 			}
 			vpath[i].code = ART_END;
@@ -1482,10 +1365,10 @@ gnome_canvas_ellipse_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip
 
 			vpath2 = art_vpath_affine_transform (vpath, affine);
 
-			gnome_canvas_item_update_svp_clip (item, &re->outline_svp, art_svp_from_vpath (vpath2), clip_path);
+			gnome_canvas_item_update_svp_clip (item, &priv->outline_svp, art_svp_from_vpath (vpath2), clip_path);
 			art_free (vpath2);
 		} else
-			gnome_canvas_item_update_svp (item, &re->outline_svp, NULL);
+			gnome_canvas_item_update_svp (item, &priv->outline_svp, NULL);
 	} else {
 		/* xlib rendering - just update the bbox */
 		get_bounds (re, &x0, &y0, &x1, &y1);

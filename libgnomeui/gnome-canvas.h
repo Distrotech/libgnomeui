@@ -128,8 +128,8 @@ struct _GnomeCanvasItem {
 	/* Parent canvas group for this item (a GnomeCanvasGroup) */
 	GnomeCanvasItem *parent;
 
-	/* Bounding box for this item (in world coordinates) */
-	double x1, y1, x2, y2;
+	/* Bounding box for this item, in canvas pixel coordinaets */
+	int x1, y1, x2, y2;
 
 	/* If NULL, assumed to be the identity tranform.  If flags does not have
 	 * AFFINE_FULL, then a two-element array containing a translation.  If
