@@ -1,3 +1,8 @@
+2000-10-04  Iain Holmes  <iain@helixcode.com>
+
+	* gnome-propertybox.c (dialog_clicked_cb): Check each page for the dirty
+	flag instead of the current one.
+
 2000-09-24  Jody Goldberg <jgoldberg@home.com>
 
 	* gnome-dock-item.c (gnome_dock_item_set_floating) : New function.

@@ -237,7 +237,8 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 {
 	GnomePropertyBox *pbox;
 	GtkWidget *page;
-	gboolean dirty;
+	GList *list;
+	gboolean dirty = FALSE;
 
 	g_return_if_fail(dialog != NULL);
 	g_return_if_fail(GNOME_IS_PROPERTY_BOX(dialog));
@@ -245,16 +246,24 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 	pbox = GNOME_PROPERTY_BOX (dialog);
 
         if (GTK_NOTEBOOK (pbox->notebook)->cur_page != NULL) {
-                page = GTK_NOTEBOOK (pbox->notebook)->cur_page->child;
-                g_assert (page != NULL);
+		
+		for (list = GTK_NOTEBOOK(pbox->notebook)->children;
+		     list != NULL;
+		     list = list->next) {
+			GtkNotebookPage *page = list->data;
+			g_assert (page != NULL);
+			
+			dirty = GPOINTER_TO_INT (gtk_object_get_data(GTK_OBJECT(page->child),
+								     GNOME_PROPERTY_BOX_DIRTY));
 
-                dirty = GPOINTER_TO_INT(gtk_object_get_data (GTK_OBJECT (page),
-                                                             GNOME_PROPERTY_BOX_DIRTY));
+			if (dirty)
+				break;
+		}
         } else {
                 page = NULL;
                 dirty = FALSE;
         }
-                
+	
 	/* Choose which style we did */
 	if (pbox->apply_button){
 		switch(button) {
