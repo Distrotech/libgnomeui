@@ -37,15 +37,17 @@
 BEGIN_GNOME_DECLS
 
 struct _GnomeSelectorPrivate {
-	GtkWidget   *gentry;
-	GtkWidget   *entry;
-
+	gchar       *history_id;
 	gchar       *dialog_title;
 
 	GSList      *dir_list;
 	GSList      *file_list;
 	GSList      *total_list;
 
+	GSList      *history;
+	guint        max_history_length;
+
+	GtkWidget   *entry_widget;
 	GtkWidget   *selector_widget;
 	GtkWidget   *browse_dialog;
 
@@ -57,12 +59,20 @@ struct _GnomeSelectorPrivate {
 	guint32      flags;
 
 	guint32      changed : 1;
+	guint32      history_changed : 1;
 	guint32      need_rebuild : 1;
 	guint32      dirty : 1;
 
 	guint        frozen;
 };
-	
+
+typedef struct _GnomeSelectorHistoryItem GnomeSelectorHistoryItem;
+
+struct _GnomeSelectorHistoryItem {
+	gboolean save;
+	gchar *text;
+};
+
 END_GNOME_DECLS
 
 #endif

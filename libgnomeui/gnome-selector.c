@@ -100,6 +100,10 @@ enum {
 	THAW_SIGNAL,
 	SET_SELECTION_MODE_SIGNAL,
 	GET_SELECTION_SIGNAL,
+	SET_ENTRY_TEXT_SIGNAL,
+	GET_ENTRY_TEXT_SIGNAL,
+	ACTIVATE_ENTRY_SIGNAL,
+	HISTORY_CHANGED_SIGNAL,
 	LAST_SIGNAL
 };
 
@@ -271,6 +275,43 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 				gtk_marshal_POINTER__NONE,
 				GTK_TYPE_POINTER,
 				0);
+	gnome_selector_signals [GET_ENTRY_TEXT_SIGNAL] =
+		gtk_signal_new ("get_entry_text",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   get_entry_text),
+				gtk_marshal_POINTER__NONE,
+				GTK_TYPE_POINTER,
+				0);
+	gnome_selector_signals [SET_ENTRY_TEXT_SIGNAL] =
+		gtk_signal_new ("set_entry_text",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   set_entry_text),
+				gtk_marshal_NONE__POINTER,
+				GTK_TYPE_NONE,
+				1,
+				GTK_TYPE_STRING);
+	gnome_selector_signals [ACTIVATE_ENTRY_SIGNAL] =
+		gtk_signal_new ("activate_entry",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   activate_entry),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE,
+				0);
+	gnome_selector_signals [HISTORY_CHANGED_SIGNAL] =
+		gtk_signal_new ("history_changed",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   history_changed),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE,
+				0);
 	gtk_object_class_add_signals (object_class,
 				      gnome_selector_signals,
 				      LAST_SIGNAL);
@@ -342,6 +383,11 @@ update_handler (GnomeSelector *selector)
 	if (selector->_priv->need_rebuild)
 		gnome_selector_update_file_list (selector);
 
+	if (selector->_priv->history_changed)
+		gtk_signal_emit (GTK_OBJECT (selector),
+				 gnome_selector_signals [HISTORY_CHANGED_SIGNAL]);
+
+	selector->_priv->history_changed = FALSE;
 	selector->_priv->dirty = FALSE;
 }
 
@@ -438,9 +484,8 @@ set_filename_handler (GnomeSelector *selector, const gchar *filename)
 	if (!gnome_selector_check_filename (selector, filename))
 		return FALSE;
 
-	gtk_entry_set_text (GTK_ENTRY (selector->_priv->entry), filename);
-	gtk_signal_emit_by_name (GTK_OBJECT (selector->_priv->entry),
-				 "activate");
+	gnome_selector_set_entry_text (selector, filename);
+	gnome_selector_activate_entry (selector);
 
 	return TRUE;
 }
@@ -547,28 +592,6 @@ clear_clicked_cb (GtkWidget *widget, gpointer data)
 	gnome_selector_clear (GNOME_SELECTOR (data));
 }
 
-static void
-entry_activated (GtkWidget *widget, gpointer data)
-{
-        GnomeSelector *selector;
-	gchar *text;
-
-        selector = GNOME_SELECTOR (data);
-	text = gtk_entry_get_text (GTK_ENTRY (selector->_priv->entry));
-
-	g_message (G_STRLOC ": '%s'", text);
-
-	gnome_selector_freeze (selector);
-
-	if (g_file_test (text, G_FILE_TEST_ISFILE)) {
-	    gnome_selector_append_file (selector, text);
-	} else if (g_file_test (text, G_FILE_TEST_ISDIR)) {
-	    gnome_selector_append_directory (selector, text);
-	}
-
-	gnome_selector_thaw (selector);
-}
-
 
 /**
  * gnome_selector_construct:
@@ -586,6 +609,7 @@ void
 gnome_selector_construct (GnomeSelector *selector, 
 			  const gchar *history_id,
 			  const gchar *dialog_title,
+			  GtkWidget *entry_widget,
 			  GtkWidget *selector_widget,
 			  GtkWidget *browse_dialog,
 			  guint32 flags)
@@ -597,9 +621,11 @@ gnome_selector_construct (GnomeSelector *selector,
 
 	priv = selector->_priv;
 
-	priv->gentry = gnome_entry_new (history_id);
-	priv->entry = gnome_entry_gtk_entry (GNOME_ENTRY (priv->gentry));
+	priv->entry_widget = entry_widget;
+	if (priv->entry_widget)
+		gtk_widget_ref (priv->entry_widget);
 
+	priv->history_id = g_strdup (history_id);
 	priv->dialog_title = g_strdup (dialog_title);
 
 	priv->flags = flags;
@@ -616,8 +642,10 @@ gnome_selector_construct (GnomeSelector *selector,
 
 	priv->hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 
-	gtk_box_pack_start (GTK_BOX (priv->hbox), priv->gentry,
-			    TRUE, TRUE, 0);
+	if (priv->entry_widget) {
+	    gtk_box_pack_start (GTK_BOX (priv->hbox), priv->entry_widget,
+				TRUE, TRUE, 0);
+	}
 
 	gtk_box_pack_start (GTK_BOX (priv->box), priv->hbox,
 			    TRUE, FALSE, GNOME_PAD_SMALL);
@@ -661,9 +689,6 @@ gnome_selector_construct (GnomeSelector *selector,
 
 	gtk_box_pack_start (GTK_BOX (selector), priv->box,
 			    TRUE, TRUE, GNOME_PAD_SMALL);
-
-	gtk_signal_connect (GTK_OBJECT (priv->entry), "activate",
-			    entry_activated, selector);
 }
 
 
@@ -689,10 +714,9 @@ gnome_selector_destroy (GtkObject *object)
 		selector->_priv->browse_dialog = NULL;
 	}
 
-	if (selector->_priv->gentry) {
-	    gtk_widget_destroy (selector->_priv->gentry);
-	    selector->_priv->gentry = NULL;
-	    selector->_priv->entry = NULL;
+	if (selector->_priv->entry_widget) {
+		gtk_widget_unref (selector->_priv->entry_widget);
+		selector->_priv->entry_widget = NULL;
 	}
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
@@ -715,6 +739,7 @@ gnome_selector_finalize (GObject *object)
 		g_slist_foreach (selector->_priv->file_list,
 				 free_entry_func, selector);
 		g_free (selector->_priv->dialog_title);
+		g_free (selector->_priv->history_id);
 	}
 
 	g_free (selector->_priv);
@@ -722,23 +747,6 @@ gnome_selector_finalize (GObject *object)
 
 	if (G_OBJECT_CLASS (parent_class)->finalize)
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
-}
-
-/**
- * gnome_selector_get_gnome_entry
- * @selector: Pointer to GnomeSelector object.
- *
- * Description: Obtain pointer to GnomeSelector's GnomeEntry widget
- *
- * Returns: Pointer to GnomeEntry widget.
- */
-GtkWidget *
-gnome_selector_get_gnome_entry (GnomeSelector *selector)
-{
-	g_return_val_if_fail (selector != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
-
-	return selector->_priv->gentry;
 }
 
 
@@ -1196,4 +1204,245 @@ gnome_selector_thaw (GnomeSelector *selector)
 		    gnome_selector_update (selector);
 		}
 	}
+}
+
+
+/**
+ * gnome_selector_get_entry_text
+ * @selector: Pointer to GnomeSelector object.
+ *
+ * Description:
+ *
+ * Returns:
+ */
+gchar *
+gnome_selector_get_entry_text (GnomeSelector *selector)
+{
+	gchar *retval = NULL;
+
+	g_return_val_if_fail (selector != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [GET_ENTRY_TEXT_SIGNAL],
+			 &retval);
+
+	return retval;
+}
+
+
+/**
+ * gnome_selector_set_entry_text
+ * @selector: Pointer to GnomeSelector object.
+ * @text: The text which should be set.
+ *
+ * Description:
+ *
+ * Returns:
+ */
+void
+gnome_selector_set_entry_text (GnomeSelector *selector, const gchar *text)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [SET_ENTRY_TEXT_SIGNAL],
+			 text);
+}
+
+void
+gnome_selector_activate_entry (GnomeSelector *selector)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ACTIVATE_ENTRY_SIGNAL]);
+}
+
+const gchar *
+gnome_selector_get_history_id (GnomeSelector *selector)
+{
+	g_return_val_if_fail (selector != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+	return selector->_priv->history_id;
+}
+
+void
+gnome_selector_set_history_id (GnomeSelector *selector,
+			       const gchar   *history_id)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	if (selector->_priv->history_id)
+		g_free (selector->_priv->history_id);
+	selector->_priv->history_id = g_strdup (history_id);
+}
+
+guint
+gnome_selector_get_history_length (GnomeSelector *selector)
+{
+	g_return_val_if_fail (selector != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), 0);
+
+	return selector->_priv->max_history_length;
+}
+
+static void
+free_history_item (GnomeSelectorHistoryItem *item, gpointer data)
+{
+	if (item != NULL)
+		g_free (item->text);
+	g_free (item);
+}
+
+static void
+set_history_changed (GnomeSelector *selector)
+{
+	if (selector->_priv->frozen)
+		selector->_priv->history_changed = TRUE;
+	else
+		gtk_signal_emit (GTK_OBJECT (selector),
+				 gnome_selector_signals [HISTORY_CHANGED_SIGNAL]);
+}
+
+void
+gnome_selector_set_history_length (GnomeSelector *selector,
+				   guint history_length)
+{
+	guint old_length;
+
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	/* truncate history if necessary. */
+	old_length = g_slist_length (selector->_priv->history);
+
+	if (old_length < history_length) {
+		guint prev_pos = (history_length > 0) ? history_length-1 : 0;
+		GSList *c = g_slist_nth (selector->_priv->history, prev_pos);
+
+		if (c) {
+			g_slist_foreach (c->next, (GFunc) free_history_item,
+					 selector);
+			g_slist_free (c->next);
+			c->next = NULL;
+
+			set_history_changed (selector);
+		}
+	}
+
+	selector->_priv->max_history_length = history_length;
+}
+
+void
+gnome_selector_prepend_history (GnomeSelector *selector, gboolean save,
+				const gchar *text)
+{
+	GnomeSelectorHistoryItem *item;
+
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+	g_return_if_fail (text != NULL);
+
+	item = g_new0 (GnomeSelectorHistoryItem, 1);
+	item->text = g_strdup (text);
+	item->save = save;
+
+	selector->_priv->history = g_slist_prepend
+		(selector->_priv->history, item);
+
+	set_history_changed (selector);
+}
+
+void
+gnome_selector_append_history (GnomeSelector *selector, gboolean save,
+			       const gchar *text)
+{
+	GnomeSelectorHistoryItem *item;
+
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+	g_return_if_fail (text != NULL);
+
+	item = g_new0 (GnomeSelectorHistoryItem, 1);
+	item->text = g_strdup (text);
+	item->save = save;
+
+	selector->_priv->history = g_slist_append
+		(selector->_priv->history, item);
+
+	set_history_changed (selector);
+}
+
+GSList *
+gnome_selector_get_history (GnomeSelector *selector)
+{
+	GSList *retval = NULL, *c;
+
+	g_return_val_if_fail (selector != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+	for (c = selector->_priv->history; c; c = c->next) {
+		GnomeSelectorHistoryItem *item = c->data;
+
+		retval = g_slist_prepend (retval, g_strdup (item->text));
+	}
+
+	return g_slist_reverse (retval);
+}
+
+void
+gnome_selector_set_history (GnomeSelector *selector, GSList *history)
+{
+	GSList *c;
+
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	gnome_selector_clear_history (selector);
+
+	for (c = history; c; c = c->next)
+		gnome_selector_prepend_history (selector, TRUE, c->data);
+
+	selector->_priv->history = g_slist_reverse (selector->_priv->history);
+
+	set_history_changed (selector);
+}
+
+void
+gnome_selector_load_history (GnomeSelector *selector)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	g_warning (G_STRLOC ": Not yet implemented.");
+
+	set_history_changed (selector);
+}
+
+void
+gnome_selector_save_history (GnomeSelector *selector)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	g_warning (G_STRLOC ": Not yet implemented.");
+}
+
+void
+gnome_selector_clear_history (GnomeSelector *selector)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	g_slist_foreach (selector->_priv->history,
+			 (GFunc) free_history_item, selector);
+	g_slist_free (selector->_priv->history);
+	selector->_priv->history = NULL;
+
+	set_history_changed (selector);
 }

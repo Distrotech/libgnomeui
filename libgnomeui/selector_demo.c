@@ -147,7 +147,6 @@ main (int argc, char **argv)
     GtkWidget *vbox;
     GtkWidget *frame1, *frame2;
     GtkWidget *fselector;
-    GtkWidget *selector;
 
     gnome_program_init ("selector_demo", "1.0", argc, argv,
 			GNOMEUI_INIT, NULL);
@@ -163,11 +162,7 @@ main (int argc, char **argv)
     gtk_box_pack_start (GTK_BOX (vbox), frame1, FALSE, FALSE,
 			GNOME_PAD);
 
-    selector = gtk_label_new ("<selector widget goes here>");
-
-    fselector = gnome_file_selector_new_custom ("test",
-						"Albert Einstein",
-						selector, NULL, 0);
+    fselector = gnome_file_selector_new ("test", "Albert Einstein");
 
     gtk_container_add (GTK_CONTAINER (frame1), fselector);
 
@@ -178,7 +173,7 @@ main (int argc, char **argv)
 
     iselector = gnome_icon_selector_new ("test2", NULL);
 
-    gnome_icon_selector_add_defaults (iselector);
+    gnome_icon_selector_add_defaults (GNOME_ICON_SELECTOR (iselector));
 
     gnome_selector_set_selection_mode (GNOME_SELECTOR (iselector),
 				       GTK_SELECTION_MULTIPLE);

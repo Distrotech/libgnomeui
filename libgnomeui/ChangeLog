@@ -1,3 +1,25 @@
+2000-08-03  Martin Baulig  <baulig@suse.de>
+
+	You can now use a customize entry widget in the GnomeSelector.
+
+	* gnome-selector.c (gnome_selector_construct): Added `entry_widget'
+	argument and added `GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET' enumeration
+	value to the flags.
+	(GnomeSelectorClass): Added `get_entry_text', `set_entry_text',
+	`activate_entry' and `history_changed' signals.
+	(gnome_selector_get/set_entry_text): New functions.
+	(gnome_selector_activate_entry): New function.
+	(gnome_selector_get/set_history_id): New functions.
+	(gnome_selector_get/set_history_length): New functions.
+	(gnome_selector_append/prepend_history): New functions.
+	(gnome_selector_get/set_history): New functions.
+	(gnome_selector_load/save_history): New functions.
+	(gnome_selector_clear_history): New function.
+
+	* gnome-file-selector.c: Use a GtkCombo as default entry widget.
+
+	* gnome-icon-selector.c: Derive from GnomeFileSelector.
+
 2000-08-02  Martin Baulig  <baulig@suse.de>
 
 	* gnome-icon-list.c (gnome_icon_list_insert_pixbuf): Added
