@@ -32,6 +32,7 @@
 #include "gtkfilesystemgnomevfs.h"
 
 #include <libgnomevfs/gnome-vfs.h>
+#include <gconf/gconf-client.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -54,6 +55,10 @@ struct _GtkFileSystemGnomeVFS
   GHashTable *folders;
   GSList *roots;
   GtkFileFolder *local_root;
+
+  GConfClient *client;
+  guint client_notify_id;
+  GSList *bookmarks;
 
   guint locale_encoded_filenames : 1;
 };
@@ -84,7 +89,7 @@ struct _GtkFileFolderGnomeVFS
   GnomeVFSMonitorHandle *monitor;
 
   GtkFileSystemGnomeVFS *system;
-  
+
   GHashTable *children;
 };
 
@@ -95,6 +100,10 @@ struct _FolderChild
   gchar *uri;
   GnomeVFSFileInfo *info;
 };
+
+/* GConf paths for the bookmarks; keep these two in sync */
+#define BOOKMARKS_KEY  "/desktop/gnome/interface/bookmark_folders"
+#define BOOKMARKS_PATH "/desktop/gnome/interface"
 
 static void gtk_file_system_gnome_vfs_class_init (GtkFileSystemGnomeVFSClass *class);
 static void gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface         *iface);
@@ -137,6 +146,12 @@ static GtkFilePath *gtk_file_system_gnome_vfs_uri_to_path      (GtkFileSystem   
 static GtkFilePath *gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem     *file_system,
 								const gchar       *filename);
 
+static gboolean       gtk_file_system_gnome_vfs_get_supports_bookmarks (GtkFileSystem *file_system);
+static void           gtk_file_system_gnome_vfs_set_bookmarks          (GtkFileSystem *file_system,
+									GSList        *bookmarks,
+									GError       **error);
+static GSList *       gtk_file_system_gnome_vfs_list_bookmarks         (GtkFileSystem *file_system);
+
 static GType gtk_file_folder_gnome_vfs_get_type   (void);
 static void  gtk_file_folder_gnome_vfs_class_init (GtkFileFolderGnomeVFSClass *class);
 static void  gtk_file_folder_gnome_vfs_iface_init (GtkFileFolderIface         *iface);
@@ -165,6 +180,15 @@ static void monitor_callback        (GnomeVFSMonitorHandle    *handle,
 				     const gchar              *info_uri,
 				     GnomeVFSMonitorEventType  event_type,
 				     gpointer                  user_data);
+
+static void set_bookmarks_from_value (GtkFileSystemGnomeVFS *system_vfs,
+				      GConfValue            *value,
+				      gboolean               emit_changed);
+
+static void client_notify_cb (GConfClient *client,
+			      guint        cnxn_id,
+			      GConfEntry  *entry,
+			      gpointer     data);
 
 static void  folder_child_free (FolderChild *child);
 
@@ -279,11 +303,33 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
   iface->path_to_filename = gtk_file_system_gnome_vfs_path_to_filename;
   iface->uri_to_path = gtk_file_system_gnome_vfs_uri_to_path;
   iface->filename_to_path = gtk_file_system_gnome_vfs_filename_to_path;
+  iface->get_supports_bookmarks = gtk_file_system_gnome_vfs_get_supports_bookmarks;
+  iface->set_bookmarks = gtk_file_system_gnome_vfs_set_bookmarks;
+  iface->list_bookmarks = gtk_file_system_gnome_vfs_list_bookmarks;
 }
 
 static void
-gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_gnome_vfs)
+gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 {
+  GConfValue *value;
+
+  system_vfs->client = gconf_client_get_default ();
+  system_vfs->bookmarks = NULL;
+
+  value = gconf_client_get (system_vfs->client, BOOKMARKS_KEY, NULL);
+  set_bookmarks_from_value (system_vfs, value, FALSE);
+  if (value)
+    gconf_value_free (value);
+
+  /* FIXME: use GError? */
+  gconf_client_add_dir (system_vfs->client, BOOKMARKS_PATH, GCONF_CLIENT_PRELOAD_NONE, NULL);
+
+  system_vfs->client_notify_id = gconf_client_notify_add (system_vfs->client,
+							  BOOKMARKS_KEY,
+							  client_notify_cb,
+							  system_vfs,
+							  NULL,
+							  NULL);
 }
 
 static void
@@ -293,6 +339,10 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
 
   g_object_unref (system_vfs->local_root);
   g_hash_table_destroy (system_vfs->folders);
+
+  gconf_client_notify_remove (system_vfs->client, system_vfs->client_notify_id);
+  g_object_unref (system_vfs->client);
+  gtk_file_paths_free (system_vfs->bookmarks);
 
   /* XXX Assert ->roots and ->folders should be empty
    */
@@ -800,6 +850,61 @@ gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem *file_system,
     return NULL;
 }
 
+static gboolean
+gtk_file_system_gnome_vfs_get_supports_bookmarks (GtkFileSystem *file_system)
+{
+  return TRUE;
+}
+
+static void
+gtk_file_system_gnome_vfs_set_bookmarks (GtkFileSystem *file_system,
+					 GSList        *bookmarks,
+					 GError       **error)
+{
+  GtkFileSystemGnomeVFS *system_vfs;
+  GSList *list, *l;;
+
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
+
+  list = NULL;
+
+  for (l = bookmarks; l; l = l->next)
+    {
+      GtkFilePath *path;
+      const char *str;
+
+      path = l->data;
+      str = gtk_file_path_get_string (path);
+
+      list = g_slist_prepend (list, (gpointer) str);
+    }
+
+  list = g_slist_reverse (list);
+
+  if (!gconf_client_set_list (system_vfs->client, BOOKMARKS_KEY,
+			      GCONF_VALUE_STRING,
+			      list,
+			      error))
+    goto out;
+
+  gtk_file_paths_free (system_vfs->bookmarks);
+  system_vfs->bookmarks = gtk_file_paths_copy (bookmarks);
+
+ out:
+
+  g_slist_free (list);
+}
+
+static GSList *
+gtk_file_system_gnome_vfs_list_bookmarks (GtkFileSystem *file_system)
+{
+  GtkFileSystemGnomeVFS *system_vfs;
+
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
+
+  return gtk_file_paths_copy (system_vfs->bookmarks);
+}
+
 /*
  * GtkFileFolderGnomeVFS
  */
@@ -1197,4 +1302,60 @@ has_valid_scheme (const char *uri)
   while (is_valid_scheme_character (*p));
   
   return *p == ':';
+}
+
+/* Sets the bookmarks list from a GConfValue */
+static void
+set_bookmarks_from_value (GtkFileSystemGnomeVFS *system_vfs,
+			  GConfValue            *value,
+			  gboolean               emit_changed)
+{
+  gtk_file_paths_free (system_vfs->bookmarks);
+  system_vfs->bookmarks = NULL;
+
+  if (value && gconf_value_get_list_type (value) == GCONF_VALUE_STRING)
+    {
+      GSList *list, *l;
+
+      list = gconf_value_get_list (value);
+
+      for (l = list; l; l = l->next)
+	{
+	  GConfValue *v;
+	  const char *uri;
+	  GtkFilePath *path;
+
+	  v = l->data;
+	  uri = gconf_value_get_string (v);
+	  path = gtk_file_system_uri_to_path (GTK_FILE_SYSTEM (system_vfs), uri);
+
+	  if (!path)
+	    continue;
+
+	  system_vfs->bookmarks = g_slist_prepend (system_vfs->bookmarks, path);
+	}
+
+      system_vfs->bookmarks = g_slist_reverse (system_vfs->bookmarks);
+    }
+
+  if (emit_changed)
+    g_signal_emit_by_name (system_vfs, "bookmarks-changed");
+}
+
+static void
+client_notify_cb (GConfClient *client,
+		  guint        cnxn_id,
+		  GConfEntry  *entry,
+		  gpointer     data)
+{
+  GtkFileSystemGnomeVFS *system_vfs;
+  GConfValue *value;
+
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (data);
+
+  if (strcmp (gconf_entry_get_key (entry), BOOKMARKS_KEY) != 0)
+    return;
+
+  value = gconf_entry_get_value (entry);
+  set_bookmarks_from_value (system_vfs, value, TRUE);
 }

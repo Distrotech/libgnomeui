@@ -1,3 +1,55 @@
+2003-10-07  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystem.h (struct _GtkFileSystemIface): Added methods for
+	::get_supports_bookmarks(), ::set_bookmarks(), ::list_bookmarks().
+	Added a ::bookmarks_changed() signal.
+
+	* gtkfilesystem.c (gtk_file_system_get_supports_bookmarks): New function.
+	(gtk_file_system_set_bookmarks): New function.
+	(gtk_file_system_list_bookmarks): New function.
+	(gtk_file_system_base_init): Create the "bookmarks-changed" signal.
+	(gtk_file_paths_copy): New function.
+
+	* gtkfilesystemunix.c (gtk_file_system_unix_get_supports_bookmarks): Implement.
+	(gtk_file_system_unix_set_bookmarks): Implement.
+	(gtk_file_system_unix_get_bookmarks): Implement.
+
+	* gtkfilesystemgnomevfs.c (struct _GtkFileSystemGnomeVFS): Added
+	fields for the bookmarks and the GConfClient.
+	(gtk_file_system_gnome_vfs_set_bookmarks): Implement.
+	(gtk_file_system_gnome_vfs_list_bookmarks): Implement.
+
+	* gtkfilechooserprivate.h (struct _GtkFileChooserIface): Added
+	methods for ::set_shortcut_folders(), ::list_shortcut_folders().
+
+	* gtkfilechooser.c (gtk_file_chooser_set_shortcut_folders): New
+	function.
+	(gtk_file_chooser_list_shortcut_folders): New function.
+
+	* gtkfilechooserimpldefault.c (create_shortcuts_model): Unref the
+	old shortcuts model if it exists.  Create the nodes for the
+	app-specific shortcut folders.
+	(struct _GtkFileChooserImplDefault): Added a field for the
+	shortcut_folders.
+	(gtk_file_chooser_impl_default_set_shortcut_folders): Implement.
+	(select_shortcuts_folder): New helper function.
+	(gtk_file_chooser_impl_default_set_current_folder): Use
+	select_shortcuts_folder().
+	(shortcuts_append_path): Get the file info here, instead of the
+	caller.
+	(shortcuts_append_home): Use shortcuts_append_path().
+	(shortcuts_append_file_system_roots): Likewise.
+	(create_shortcuts_model): Add the app-specific shortcut folders
+	and the bookmarks.
+	(gtk_file_chooser_impl_default_list_shortcut_folders): Implement.
+	(create_shortcuts_tree): Added a button to let the user add the
+	current folder to the bookmarks.
+	(gtk_file_chooser_impl_default_set_property): Connect to
+	"bookmarks-changed" on the file system.
+	(shortcuts_append_bookmarks): New function.
+
+	* configure.ac: Depend on GConf.
+
 2003-10-01  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilechooserimpldefault.c (name_sort_func): Simplify with a
