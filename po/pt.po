@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-04-01 01:39+0100\n"
+"POT-Creation-Date: 2002-04-22 12:30+0200\n"
 "PO-Revision-Date: 2002-04-01 01:40+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -13,135 +13,138 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: libgnomeui/gnome-about.c:187
+#: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr "Créditos"
 
-#: libgnomeui/gnome-about.c:210
-msgid "Written by"
+#: libgnomeui/gnome-about.c:222
+#, fuzzy
+msgid "_Written by"
 msgstr "Escrito por"
 
-#: libgnomeui/gnome-about.c:224
-msgid "Documented by"
+#: libgnomeui/gnome-about.c:237
+#, fuzzy
+msgid "_Documented by"
 msgstr "Documentado por"
 
-#: libgnomeui/gnome-about.c:238
-msgid "Translated by"
+#: libgnomeui/gnome-about.c:252
+#, fuzzy
+msgid "_Translated by"
 msgstr "Traduzido por"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:295
+#: libgnomeui/gnome-about.c:309
 msgid "_Credits"
 msgstr "_Créditos"
 
-#: libgnomeui/gnome-about.c:335
+#: libgnomeui/gnome-about.c:351
 msgid "Program name"
 msgstr "Nome aplicação"
 
-#: libgnomeui/gnome-about.c:336
+#: libgnomeui/gnome-about.c:352
 msgid "The name of the program"
 msgstr "O nome da aplicação"
 
-#: libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:359
 msgid "Program version"
 msgstr "Versão aplicação"
 
-#: libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:360
 msgid "The version of the program"
 msgstr "A versão da aplicação"
 
-#: libgnomeui/gnome-about.c:350
+#: libgnomeui/gnome-about.c:366
 msgid "Copyright string"
 msgstr "Texto de copyright"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright information for the program"
 msgstr "Informação de copyright da aplicação"
 
-#: libgnomeui/gnome-about.c:358
+#: libgnomeui/gnome-about.c:374
 msgid "Comments string"
 msgstr "Texto de comentários"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:375
 msgid "Comments about the program"
 msgstr "Comentários sobre a aplicação"
 
-#: libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:381
 msgid "Authors"
 msgstr "Autores"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:382
 msgid "List of authors of the programs"
 msgstr "Listagem dos autores da aplicação"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:384
 msgid "Author entry"
 msgstr "Registo autor"
 
-#: libgnomeui/gnome-about.c:369
+#: libgnomeui/gnome-about.c:385
 msgid "A single author entry"
 msgstr "Um registo único de autor"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:392
 msgid "Documenters"
 msgstr "Documentadores"
 
-#: libgnomeui/gnome-about.c:377
+#: libgnomeui/gnome-about.c:393
 msgid "List of people documenting the program"
 msgstr "Listagem de pessoas que documentam a aplicação"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:395
 msgid "Documenter entry"
 msgstr "Registo documentador"
 
-#: libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:396
 msgid "A single documenter entry"
 msgstr "Um registo único de documentador"
 
-#: libgnomeui/gnome-about.c:388
+#: libgnomeui/gnome-about.c:404
 msgid "Translator credits"
 msgstr "Créditos de tradutores"
 
-#: libgnomeui/gnome-about.c:389
+#: libgnomeui/gnome-about.c:405
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Crédito aos tradutores. Esta expressão deverá ser marcada como traduzível"
 
-#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logotipo"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:413
 msgid "A logo for the about box"
 msgstr "Um logotipo para a caixa sobre"
 
-#: libgnomeui/gnome-about.c:476
+#: libgnomeui/gnome-about.c:492
 #, c-format
 msgid "About %s"
 msgstr "Sobre %s"
 
-#: libgnomeui/gnome-appbar.c:762
+#: libgnomeui/gnome-appbar.c:748
 msgid "Has Progress"
 msgstr "Tem Progresso"
 
-#: libgnomeui/gnome-appbar.c:763
+#: libgnomeui/gnome-appbar.c:749
 msgid "Create a progress widget."
 msgstr "Criar um widget de progresso."
 
-#: libgnomeui/gnome-appbar.c:770
+#: libgnomeui/gnome-appbar.c:756
 msgid "Has Status"
 msgstr "Tem Estado"
 
-#: libgnomeui/gnome-appbar.c:771
+#: libgnomeui/gnome-appbar.c:757
 msgid "Create a status widget."
 msgstr "Criar um widget de estados."
 
-#: libgnomeui/gnome-appbar.c:778
+#: libgnomeui/gnome-appbar.c:764
 msgid "Interactivity"
 msgstr "Interactividade"
 
-#: libgnomeui/gnome-appbar.c:779
+#: libgnomeui/gnome-appbar.c:765
 msgid "Level of user activity required."
 msgstr "Nível de interactividade do utilizador requerida."
 
@@ -177,56 +180,56 @@ msgstr "Cacelar terminar Sessão"
 msgid "Received invalid color data\n"
 msgstr "Recebidos dados de cor inválidos\n"
 
-#: libgnomeui/gnome-color-picker.c:468
+#: libgnomeui/gnome-color-picker.c:471
 msgid "Pick a color"
 msgstr "Seleccione uma cor"
 
-#: libgnomeui/gnome-dateedit.c:468
+#: libgnomeui/gnome-dateedit.c:455
 msgid "Time"
 msgstr "Hora"
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:456
 msgid "The time currently selected"
 msgstr "A hora actualmente seleccionada"
 
-#: libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:468
 msgid "DateEdit Flags"
 msgstr "Flags Edição Data"
 
-#: libgnomeui/gnome-dateedit.c:482
+#: libgnomeui/gnome-dateedit.c:469
 msgid "Flags for how DateEdit looks"
 msgstr "Flags do aspecto da Edição de Data (DateEdit)"
 
-#: libgnomeui/gnome-dateedit.c:491
+#: libgnomeui/gnome-dateedit.c:478
 msgid "Lower Hour"
 msgstr "Hora Inferior"
 
-#: libgnomeui/gnome-dateedit.c:492
+#: libgnomeui/gnome-dateedit.c:479
 msgid "Lower hour in the time popup selector"
 msgstr "Hora inferior no selector de popup de horas"
 
-#: libgnomeui/gnome-dateedit.c:502
+#: libgnomeui/gnome-dateedit.c:489
 msgid "Upper Hour"
 msgstr "Hora Superior"
 
-#: libgnomeui/gnome-dateedit.c:503
+#: libgnomeui/gnome-dateedit.c:490
 msgid "Upper hour in the time popup selector"
 msgstr "Hora superior no selector de popup de horas"
 
-#: libgnomeui/gnome-dateedit.c:513
+#: libgnomeui/gnome-dateedit.c:500
 msgid "Initial Time"
 msgstr "Hora Inicial"
 
-#: libgnomeui/gnome-dateedit.c:514
+#: libgnomeui/gnome-dateedit.c:501
 msgid "The initial time"
 msgstr "A hora inicial"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:745
+#: libgnomeui/gnome-dateedit.c:730
 msgid "Calendar"
 msgstr "Calendário"
 
-#: libgnomeui/gnome-dateedit.c:975
+#: libgnomeui/gnome-dateedit.c:960
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date obsoleta, utilize gnome_date_edit_get_time"
 
@@ -333,35 +336,37 @@ msgstr "Mostrar Ajuda"
 msgid "Show the 'Help' button"
 msgstr "Mostrar o botão 'Ajuda'"
 
-#: libgnomeui/gnome-href.c:118
+#: libgnomeui/gnome-href.c:121
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:119
+#: libgnomeui/gnome-href.c:122
 msgid "The URL that GnomeHRef activates"
 msgstr "O URL que o GnomeHRef activa"
 
-#: libgnomeui/gnome-href.c:126
+#: libgnomeui/gnome-href.c:129
 msgid "Text"
 msgstr "Texto"
 
-#: libgnomeui/gnome-href.c:127
+#: libgnomeui/gnome-href.c:130
 msgid "The text on the button"
 msgstr "O texto do botão"
 
-#: libgnomeui/gnome-href.c:128
+#: libgnomeui/gnome-href.c:131
 msgid "End World Hunger"
 msgstr "Terminar Fome Mundial"
 
-#: libgnomeui/gnome-href.c:134
-msgid "Link colour"
+#: libgnomeui/gnome-href.c:137
+#, fuzzy
+msgid "Link color"
 msgstr "Cor link"
 
-#: libgnomeui/gnome-href.c:135
-msgid "Colour used to draw the link"
+#: libgnomeui/gnome-href.c:138
+#, fuzzy
+msgid "Color used to draw the link"
 msgstr "A cor utilizada para sublinhar o link"
 
-#: libgnomeui/gnome-href.c:396
+#: libgnomeui/gnome-href.c:383
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -489,7 +494,6 @@ msgstr "Dica para item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -547,7 +551,6 @@ msgid "_Game"
 msgstr "Jo_go"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -738,11 +741,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -769,7 +772,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Fechar a janela actual"
 
@@ -841,19 +844,23 @@ msgstr "T_erminar jogo"
 msgid "End the current game"
 msgstr "Terminar o jogo actual"
 
-#: libgnomeui/gnome-app-helper.c:2563
+#: libgnomeui/gnome-app-helper.c:1096
+msgid "_Help Contents"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2402
 msgid "Both text and icons"
 msgstr "Ambos texto e ícones"
 
-#: libgnomeui/gnome-app-helper.c:2564
+#: libgnomeui/gnome-app-helper.c:2403
 msgid "Icons only"
 msgstr "Apenas ícones"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2404
 msgid "Text only"
 msgstr "Apenas texto"
 
-#: libgnomeui/gnome-app-helper.c:2616
+#: libgnomeui/gnome-app-helper.c:2455
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Utilizar defeito do ambiente de trabalho (%s)"
@@ -918,11 +925,11 @@ msgstr "Entrada GTK"
 msgid "The GTK entry"
 msgstr "A entrada GTK"
 
-#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#: libgnomeui/gnome-file-entry.c:194 libgnomeui/gnome-icon-entry.c:170
 msgid "History ID"
 msgstr "ID Histórico"
 
-#: libgnomeui/gnome-file-entry.c:191
+#: libgnomeui/gnome-file-entry.c:195
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -930,19 +937,19 @@ msgstr ""
 "Identificador único para a entrada de ficheiro. Será utilizado para gravar a "
 "lista de histórico."
 
-#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+#: libgnomeui/gnome-file-entry.c:203 libgnomeui/gnome-icon-entry.c:179
 msgid "Browse Dialog Title"
 msgstr "Título do Diálogo de Procura"
 
-#: libgnomeui/gnome-file-entry.c:200
+#: libgnomeui/gnome-file-entry.c:204
 msgid "Title for the Browse file dialog."
 msgstr "O título do diálogo de selecção de ficheiro."
 
-#: libgnomeui/gnome-file-entry.c:207
+#: libgnomeui/gnome-file-entry.c:211
 msgid "Directory Entry"
 msgstr "Entrada Directório"
 
-#: libgnomeui/gnome-file-entry.c:208
+#: libgnomeui/gnome-file-entry.c:212
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -950,35 +957,35 @@ msgstr ""
 "Se a entrada de ficheiro está ou não a ser utilizada para introduzir nomes "
 "de directórios ou nomes completos de ficheiros."
 
-#: libgnomeui/gnome-file-entry.c:216
+#: libgnomeui/gnome-file-entry.c:220
 msgid "Modal"
 msgstr "Modal"
 
-#: libgnomeui/gnome-file-entry.c:217
+#: libgnomeui/gnome-file-entry.c:221
 msgid "Whether the Browse file window should be modal."
 msgstr "Se a janela de selecção de ficheiros deverá ou não ser modal."
 
-#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:228 libgnomeui/gnome-icon-entry.c:195
 msgid "Filename"
 msgstr "Ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:225
+#: libgnomeui/gnome-file-entry.c:229
 msgid "Filename that should be displayed in the file entry."
 msgstr "Ficheiros que deverão ser mostrados na lista de ficheiros."
 
-#: libgnomeui/gnome-file-entry.c:233
+#: libgnomeui/gnome-file-entry.c:237
 msgid "Default Path"
 msgstr "Caminho Defeito"
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:238
 msgid "Default path for the Browse file window."
 msgstr "Caminho defeito para a janela de selecção ficheiro."
 
-#: libgnomeui/gnome-file-entry.c:241
+#: libgnomeui/gnome-file-entry.c:245
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:242
+#: libgnomeui/gnome-file-entry.c:246
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -988,11 +995,11 @@ msgstr ""
 "ficheiros. Pode utilizar esta propriedade para obter a GnomeEntry se "
 "necessitar de modificar ou verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:256
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:257
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1002,12 +1009,13 @@ msgstr ""
 "utilizar esta propriedade para obter a GtkEntry caso necessite de modificar "
 "ou verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:418
+#: libgnomeui/gnome-file-entry.c:489
 msgid "Select file"
 msgstr "Seleccionar ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:592
-msgid "Browse..."
+#: libgnomeui/gnome-file-entry.c:627
+#, fuzzy
+msgid "_Browse..."
 msgstr "Navegar..."
 
 #: libgnomeui/gnome-font-picker.c:66
@@ -1100,8 +1108,8 @@ msgid ""
 msgstr ""
 "A aplicação \"%s\" tentou modificar um parâmetro da sua configuração que o "
 "administrador do seu sistema ou o vendedor do sistema não lhe permitem "
-"modificar. Algumas das definições que seleccionou poderão não tomar efeito, ou "
-"poderão não ser repostas da próxima vez que utilizar esta aplicação."
+"modificar. Algumas das definições que seleccionou poderão não tomar efeito, "
+"ou poderão não ser repostas da próxima vez que utilizar esta aplicação."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1112,7 +1120,7 @@ msgstr ""
 "Ocorreu um erro ao ler ou gravar informação de configuração para %s. Algumas "
 "das suas definições de configuração poderão não funcionar correctamente."
 
-#: libgnomeui/gnome-icon-entry.c:164
+#: libgnomeui/gnome-icon-entry.c:171
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1120,27 +1128,27 @@ msgstr ""
 "Identificador único para a entrada de ícone. Será utilizado para gravar a "
 "lista de histórico."
 
-#: libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-icon-entry.c:180
 msgid "Title for the Browse icon dialog."
 msgstr "O título do diálogo de selecção de ícone."
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Pixmap Directory"
 msgstr "Directório Pixmap"
 
-#: libgnomeui/gnome-icon-entry.c:181
+#: libgnomeui/gnome-icon-entry.c:188
 msgid "Directory that will be searched for icons."
 msgstr "O directório onde serão procurados os ícones."
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Nome de ficheiro que deverá ser mostrado na entrada de ícone."
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:204
 msgid "Picker dialog"
 msgstr "Diálogo selecção"
 
-#: libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-icon-entry.c:205
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1149,19 +1157,19 @@ msgstr ""
 "GtkDialog caso necessite de alterar ou verificar qualquer uma das suas "
 "propriedades."
 
-#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
+#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:941
 msgid "No Icon"
 msgstr "Sem Ícone"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:522 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Incapaz de encontrar uma hbox, a utilizar selecção de ficheiro normal"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:528 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "Prever"
 
-#: libgnomeui/gnome-icon-entry.c:930
+#: libgnomeui/gnome-icon-entry.c:963
 msgid "Browse"
 msgstr "Navegar"
 
@@ -1175,7 +1183,7 @@ msgstr "GnomeIconSelection: '%s' não existe ou não é um directório"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: incapaz de abrir directório '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:411
+#: libgnomeui/gnome-icon-sel.c:406
 msgid "Loading Icons..."
 msgstr "A Ler Ícones..."
 
@@ -1242,9 +1250,8 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Sair do teste"
+#~ msgid "Exit the test"
+#~ msgstr "Sair do teste"
 
 #~ msgid "GConf error details: %s\n"
 #~ msgstr "Detalhes de erro GConf: %s\n"

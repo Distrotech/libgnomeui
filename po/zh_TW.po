@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.113.0\n"
-"POT-Creation-Date: 2002-03-30 00:09+0100\n"
+"POT-Creation-Date: 2002-04-22 12:30+0200\n"
 "PO-Revision-Date: 2002-03-28 06:59+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -13,143 +13,143 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:187
+#: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:210
-msgid "Written by"
+#: libgnomeui/gnome-about.c:222
+msgid "_Written by"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:224
-msgid "Documented by"
+#: libgnomeui/gnome-about.c:237
+msgid "_Documented by"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:238
-msgid "Translated by"
+#: libgnomeui/gnome-about.c:252
+msgid "_Translated by"
 msgstr ""
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:295
+#: libgnomeui/gnome-about.c:309
 #, fuzzy
 msgid "_Credits"
 msgstr "編輯 (_E)"
 
-#: libgnomeui/gnome-about.c:335
+#: libgnomeui/gnome-about.c:351
 #, fuzzy
 msgid "Program name"
 msgstr "進度對話盒"
 
-#: libgnomeui/gnome-about.c:336
+#: libgnomeui/gnome-about.c:352
 #, fuzzy
 msgid "The name of the program"
 msgstr "結束程式"
 
-#: libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:359
 #, fuzzy
 msgid "Program version"
 msgstr "進度對話盒"
 
-#: libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:360
 #, fuzzy
 msgid "The version of the program"
 msgstr "結束程式"
 
-#: libgnomeui/gnome-about.c:350
+#: libgnomeui/gnome-about.c:366
 msgid "Copyright string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright information for the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:358
+#: libgnomeui/gnome-about.c:374
 msgid "Comments string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:375
 #, fuzzy
 msgid "Comments about the program"
 msgstr "結束程式"
 
-#: libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:381
 msgid "Authors"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:382
 msgid "List of authors of the programs"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:384
 msgid "Author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:369
+#: libgnomeui/gnome-about.c:385
 msgid "A single author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:392
 msgid "Documenters"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:377
+#: libgnomeui/gnome-about.c:393
 msgid "List of people documenting the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:395
 msgid "Documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:396
 msgid "A single documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:388
+#: libgnomeui/gnome-about.c:404
 msgid "Translator credits"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:389
+#: libgnomeui/gnome-about.c:405
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "標誌"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:413
 msgid "A logo for the about box"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:476
+#: libgnomeui/gnome-about.c:492
 #, c-format
 msgid "About %s"
 msgstr "關於 %s"
 
-#: libgnomeui/gnome-appbar.c:762
+#: libgnomeui/gnome-appbar.c:748
 #, fuzzy
 msgid "Has Progress"
 msgstr "進度對話盒"
 
-#: libgnomeui/gnome-appbar.c:763
+#: libgnomeui/gnome-appbar.c:749
 #, fuzzy
 msgid "Create a progress widget."
 msgstr "建立一個新的視窗"
 
-#: libgnomeui/gnome-appbar.c:770
+#: libgnomeui/gnome-appbar.c:756
 msgid "Has Status"
 msgstr ""
 
-#: libgnomeui/gnome-appbar.c:771
+#: libgnomeui/gnome-appbar.c:757
 #, fuzzy
 msgid "Create a status widget."
 msgstr "建立一個新的視窗"
 
-#: libgnomeui/gnome-appbar.c:778
+#: libgnomeui/gnome-appbar.c:764
 msgid "Interactivity"
 msgstr ""
 
-#: libgnomeui/gnome-appbar.c:779
+#: libgnomeui/gnome-appbar.c:765
 msgid "Level of user activity required."
 msgstr ""
 
@@ -185,57 +185,57 @@ msgstr "取消登出"
 msgid "Received invalid color data\n"
 msgstr "收到不合規格的色彩資料\n"
 
-#: libgnomeui/gnome-color-picker.c:468
+#: libgnomeui/gnome-color-picker.c:471
 msgid "Pick a color"
 msgstr "選取一個色彩"
 
-#: libgnomeui/gnome-dateedit.c:468
+#: libgnomeui/gnome-dateedit.c:455
 msgid "Time"
 msgstr "時間"
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:456
 #, fuzzy
 msgid "The time currently selected"
 msgstr "目前選定的時間"
 
-#: libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:468
 msgid "DateEdit Flags"
 msgstr "日期元件選項"
 
-#: libgnomeui/gnome-dateedit.c:482
+#: libgnomeui/gnome-dateedit.c:469
 msgid "Flags for how DateEdit looks"
 msgstr "設定日期元件顯示時的外觀"
 
-#: libgnomeui/gnome-dateedit.c:491
+#: libgnomeui/gnome-dateedit.c:478
 msgid "Lower Hour"
 msgstr "時間下限"
 
-#: libgnomeui/gnome-dateedit.c:492
+#: libgnomeui/gnome-dateedit.c:479
 msgid "Lower hour in the time popup selector"
 msgstr "彈出式時間元件的時間下限"
 
-#: libgnomeui/gnome-dateedit.c:502
+#: libgnomeui/gnome-dateedit.c:489
 msgid "Upper Hour"
 msgstr "時間上限"
 
-#: libgnomeui/gnome-dateedit.c:503
+#: libgnomeui/gnome-dateedit.c:490
 msgid "Upper hour in the time popup selector"
 msgstr "彈出式時間元件的時間上限"
 
-#: libgnomeui/gnome-dateedit.c:513
+#: libgnomeui/gnome-dateedit.c:500
 msgid "Initial Time"
 msgstr "初始時間"
 
-#: libgnomeui/gnome-dateedit.c:514
+#: libgnomeui/gnome-dateedit.c:501
 msgid "The initial time"
 msgstr "初始時所顯示的時間"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:745
+#: libgnomeui/gnome-dateedit.c:730
 msgid "Calendar"
 msgstr "日曆"
 
-#: libgnomeui/gnome-dateedit.c:975
+#: libgnomeui/gnome-dateedit.c:960
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date 已停用，請使用 gnome_date_edit_get_time"
 
@@ -342,36 +342,36 @@ msgstr "顯示說明"
 msgid "Show the 'Help' button"
 msgstr "顯示 '說明' 按鈕"
 
-#: libgnomeui/gnome-href.c:118
+#: libgnomeui/gnome-href.c:121
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:119
+#: libgnomeui/gnome-href.c:122
 msgid "The URL that GnomeHRef activates"
 msgstr "連結元件所啟動的 URL"
 
-#: libgnomeui/gnome-href.c:126
+#: libgnomeui/gnome-href.c:129
 msgid "Text"
 msgstr "句子"
 
-#: libgnomeui/gnome-href.c:127
+#: libgnomeui/gnome-href.c:130
 msgid "The text on the button"
 msgstr "在按鈕上所顯示的句子"
 
-#: libgnomeui/gnome-href.c:128
+#: libgnomeui/gnome-href.c:131
 msgid "End World Hunger"
 msgstr "絕世飢餓"
 
-#: libgnomeui/gnome-href.c:134
+#: libgnomeui/gnome-href.c:137
 #, fuzzy
-msgid "Link colour"
+msgid "Link color"
 msgstr "選取一個色彩"
 
-#: libgnomeui/gnome-href.c:135
-msgid "Colour used to draw the link"
+#: libgnomeui/gnome-href.c:138
+msgid "Color used to draw the link"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:396
+#: libgnomeui/gnome-href.c:383
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -846,20 +846,24 @@ msgstr "結束遊戲 (_E)"
 msgid "End the current game"
 msgstr "結束目前的遊戲"
 
-#: libgnomeui/gnome-app-helper.c:2563
+#: libgnomeui/gnome-app-helper.c:1096
+msgid "_Help Contents"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2402
 msgid "Both text and icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2564
+#: libgnomeui/gnome-app-helper.c:2403
 msgid "Icons only"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2404
 #, fuzzy
 msgid "Text only"
 msgstr "句子"
 
-#: libgnomeui/gnome-app-helper.c:2616
+#: libgnomeui/gnome-app-helper.c:2455
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -924,92 +928,93 @@ msgstr "GTK 輸入元件"
 msgid "The GTK entry"
 msgstr "GTK 的輸入元件"
 
-#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#: libgnomeui/gnome-file-entry.c:194 libgnomeui/gnome-icon-entry.c:170
 #, fuzzy
 msgid "History ID"
 msgstr "id 紀錄"
 
-#: libgnomeui/gnome-file-entry.c:191
+#: libgnomeui/gnome-file-entry.c:195
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+#: libgnomeui/gnome-file-entry.c:203 libgnomeui/gnome-icon-entry.c:179
 msgid "Browse Dialog Title"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:200
+#: libgnomeui/gnome-file-entry.c:204
 #, fuzzy
 msgid "Title for the Browse file dialog."
 msgstr "對話盒的標題"
 
-#: libgnomeui/gnome-file-entry.c:207
+#: libgnomeui/gnome-file-entry.c:211
 msgid "Directory Entry"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:208
+#: libgnomeui/gnome-file-entry.c:212
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:216
+#: libgnomeui/gnome-file-entry.c:220
 #, fuzzy
 msgid "Modal"
 msgstr "模式"
 
-#: libgnomeui/gnome-file-entry.c:217
+#: libgnomeui/gnome-file-entry.c:221
 msgid "Whether the Browse file window should be modal."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:228 libgnomeui/gnome-icon-entry.c:195
 #, fuzzy
 msgid "Filename"
 msgstr "檔案 (_F)"
 
-#: libgnomeui/gnome-file-entry.c:225
+#: libgnomeui/gnome-file-entry.c:229
 msgid "Filename that should be displayed in the file entry."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:233
+#: libgnomeui/gnome-file-entry.c:237
 #, fuzzy
 msgid "Default Path"
 msgstr "預設圖示"
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:238
 msgid "Default path for the Browse file window."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:241
+#: libgnomeui/gnome-file-entry.c:245
 #, fuzzy
 msgid "GnomeEntry"
 msgstr "GTK 輸入元件"
 
-#: libgnomeui/gnome-file-entry.c:242
+#: libgnomeui/gnome-file-entry.c:246
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:256
 msgid "GtkEntry"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:257
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:418
+#: libgnomeui/gnome-file-entry.c:489
 msgid "Select file"
 msgstr "選取檔案"
 
-#: libgnomeui/gnome-file-entry.c:592
-msgid "Browse..."
+#: libgnomeui/gnome-file-entry.c:627
+#, fuzzy
+msgid "_Browse..."
 msgstr "瀏覽..."
 
 #: libgnomeui/gnome-font-picker.c:66
@@ -1111,53 +1116,53 @@ msgid ""
 "Some of your configuration settings may not work properly."
 msgstr "當載入或儲存 %s 的設定資料時發生錯誤。某些設定將不會正常運作。"
 
-#: libgnomeui/gnome-icon-entry.c:164
+#: libgnomeui/gnome-icon-entry.c:171
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-icon-entry.c:180
 #, fuzzy
 msgid "Title for the Browse icon dialog."
 msgstr "對話盒的標題"
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Pixmap Directory"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:181
+#: libgnomeui/gnome-icon-entry.c:188
 msgid "Directory that will be searched for icons."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Filename that should be displayed in the icon entry."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:204
 #, fuzzy
 msgid "Picker dialog"
 msgstr "選取一個色彩"
 
-#: libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-icon-entry.c:205
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
+#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:941
 msgid "No Icon"
 msgstr "無圖示"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:522 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "無法找到水平容器元件，使用一般的檔案選取對話盒"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:528 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "預覽"
 
-#: libgnomeui/gnome-icon-entry.c:930
+#: libgnomeui/gnome-icon-entry.c:963
 msgid "Browse"
 msgstr "瀏覽"
 
@@ -1171,7 +1176,7 @@ msgstr "圖示選擇：'%s' 不存在或不是一個目錄"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "圖示選擇：無法開啟目錄 '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:411
+#: libgnomeui/gnome-icon-sel.c:406
 msgid "Loading Icons..."
 msgstr "載入圖示"
 

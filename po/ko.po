@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.1\n"
-"POT-Creation-Date: 2002-04-22 12:30+0900\n"
+"POT-Creation-Date: 2002-04-22 12:30+0200\n"
 "PO-Revision-Date: 2002-04-22 12:33+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -491,7 +491,6 @@ msgstr "항목 2의 힌트"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -549,7 +548,6 @@ msgid "_Game"
 msgstr "게임(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -740,11 +738,11 @@ msgstr "프로그램 설정하기"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "정보(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "이 프로그램에 대한 정보"
 
@@ -771,7 +769,7 @@ msgstr "새로운 창 만들기"
 msgid "_Close This Window"
 msgstr "창 닫기(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "현재 창 닫기"
 
@@ -1159,7 +1157,7 @@ msgstr ""
 "아이콘 선택 대화 상자.  이 등록 정보를 사용해 GtkDialog를 얻어 내 그 파라미터"
 "의 값을 알아보거나 변경할 수 있습니다."
 
-#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:927
+#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:941
 msgid "No Icon"
 msgstr "아이콘 없음"
 
@@ -1171,7 +1169,7 @@ msgstr "hbox를 찾을 수 없음, 보통 파일 선택을 사용함"
 msgid "Preview"
 msgstr "미리 보기"
 
-#: libgnomeui/gnome-icon-entry.c:949
+#: libgnomeui/gnome-icon-entry.c:963
 msgid "Browse"
 msgstr "찾아보기"
 
@@ -1252,6 +1250,5 @@ msgstr "%Y %b %d %a %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "테스트 끝내기"
+#~ msgid "Exit the test"
+#~ msgstr "테스트 끝내기"

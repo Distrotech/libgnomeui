@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-04-11 10:32+0300\n"
+"POT-Creation-Date: 2002-04-22 12:30+0200\n"
 "PO-Revision-Date: 2002-04-11 09:55+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -13,109 +13,113 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:187
+#: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr "Інформація про авторів"
 
-#: libgnomeui/gnome-about.c:210
-msgid "Written by"
+#: libgnomeui/gnome-about.c:222
+#, fuzzy
+msgid "_Written by"
 msgstr "Автори"
 
-#: libgnomeui/gnome-about.c:224
-msgid "Documented by"
+#: libgnomeui/gnome-about.c:237
+#, fuzzy
+msgid "_Documented by"
 msgstr "Автори документації"
 
-#: libgnomeui/gnome-about.c:238
-msgid "Translated by"
+#: libgnomeui/gnome-about.c:252
+#, fuzzy
+msgid "_Translated by"
 msgstr "Перекладачі"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:295
+#: libgnomeui/gnome-about.c:309
 msgid "_Credits"
 msgstr "Інформація про _авторів"
 
-#: libgnomeui/gnome-about.c:335
+#: libgnomeui/gnome-about.c:351
 msgid "Program name"
 msgstr "Назва програми"
 
-#: libgnomeui/gnome-about.c:336
+#: libgnomeui/gnome-about.c:352
 msgid "The name of the program"
 msgstr "Назва програми"
 
-#: libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:359
 msgid "Program version"
 msgstr "Версія програми"
 
-#: libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:360
 msgid "The version of the program"
 msgstr "Версія програми"
 
-#: libgnomeui/gnome-about.c:350
+#: libgnomeui/gnome-about.c:366
 msgid "Copyright string"
 msgstr "Авторські права"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright information for the program"
 msgstr "Інформація про авторські права на програму"
 
-#: libgnomeui/gnome-about.c:358
+#: libgnomeui/gnome-about.c:374
 msgid "Comments string"
 msgstr "Коментарі"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:375
 msgid "Comments about the program"
 msgstr "Коментарі про програму"
 
-#: libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:381
 msgid "Authors"
 msgstr "Автори"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:382
 msgid "List of authors of the programs"
 msgstr "Список авторів програми"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:384
 msgid "Author entry"
 msgstr "Запис про автора"
 
-#: libgnomeui/gnome-about.c:369
+#: libgnomeui/gnome-about.c:385
 msgid "A single author entry"
 msgstr "Запис про одного автора"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:392
 msgid "Documenters"
 msgstr "Автори документації"
 
-#: libgnomeui/gnome-about.c:377
+#: libgnomeui/gnome-about.c:393
 msgid "List of people documenting the program"
 msgstr "Список авторів документації до програми"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:395
 msgid "Documenter entry"
 msgstr "Запис про автора документації"
 
-#: libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:396
 msgid "A single documenter entry"
 msgstr "Запис про одного автора документації"
 
-#: libgnomeui/gnome-about.c:388
+#: libgnomeui/gnome-about.c:404
 msgid "Translator credits"
 msgstr "Інформація про перекладачів"
 
-#: libgnomeui/gnome-about.c:389
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Інформація про перекладачів. Цей рядок має бути позначеним до перекладу"
+#: libgnomeui/gnome-about.c:405
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Інформація про перекладачів. Цей рядок має бути позначеним до перекладу"
 
-#: libgnomeui/gnome-about.c:396
-#: libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Емблема"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:413
 msgid "A logo for the about box"
 msgstr "Емблема для блоку інформації про програму"
 
-#: libgnomeui/gnome-about.c:476
+#: libgnomeui/gnome-about.c:492
 #, c-format
 msgid "About %s"
 msgstr "Про %s"
@@ -173,12 +177,8 @@ msgid "Cancel Logout"
 msgstr "Відмінити завершення роботи"
 
 #: libgnomeui/gnome-color-picker.c:405
-msgid ""
-"Received invalid color data\n"
-""
-msgstr ""
-"Отримано невірні дані кольору\n"
-""
+msgid "Received invalid color data\n"
+msgstr "Отримано невірні дані кольору\n"
 
 #: libgnomeui/gnome-color-picker.c:471
 msgid "Pick a color"
@@ -231,7 +231,9 @@ msgstr "Календар"
 
 #: libgnomeui/gnome-dateedit.c:960
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "функція gnome_date_edit_get_date небажаний, використовуйте gnome_date_edit_get_time"
+msgstr ""
+"функція gnome_date_edit_get_date небажаний, використовуйте "
+"gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -386,35 +388,32 @@ msgstr "Бібліотека ГІК GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:564
-msgid ""
-"Multiple segmentation faults occurred; can't display error dialog\n"
-""
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Множинний збій сеґментації; неможливо відобразити повідомлення про помилку\n"
-""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
-""
 msgstr ""
 "Збій сеґментації!\n"
 "Неможливо відобразити діалог збою\n"
-""
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session will exit.\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 "Менеджер сеансів GNOME (процес %d) зазнав збою\n"
 "через фатальну помилку (%s).\n"
-"Коли ви закриєте це діалогове вікно, всі програми буде закрито, а ваш сеанс завершено.\n"
+"Коли ви закриєте це діалогове вікно, всі програми буде закрито, а ваш сеанс "
+"завершено.\n"
 "Будь ласка, збережіть всі ваші файли перед закриттям цього діалогового вікна."
 
 #: libgnomeui/gnome_segv.c:110
@@ -429,12 +428,8 @@ msgstr ""
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:122
-msgid ""
-"Usage: gnome_segv2 appname signum\n"
-""
-msgstr ""
-"Використання: gnome_segv2 назва_програми номер_сиґналу\n"
-""
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Використання: gnome_segv2 назва_програми номер_сиґналу\n"
 
 #: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
@@ -450,7 +445,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Будь ласка, відвідайте сторінку збоїв прогам GNOME для додаткової інформації"
+msgstr ""
+"Будь ласка, відвідайте сторінку збоїв прогам GNOME для додаткової інформації"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -496,8 +492,8 @@ msgstr "Спадкоємний елемент 2"
 msgid "Hint for item 2"
 msgstr "Довідка елемента 2"
 
-#: libgnomeui/gnome-app-helper.c:82
-#: test-gnome/testgnome.xml.h:5
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
 msgid "_File"
 msgstr "_Файл"
 
@@ -505,7 +501,7 @@ msgstr "_Файл"
 msgid "_File/"
 msgstr "_Файл/"
 
-#: libgnomeui/gnome-app-helper.c:84
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
 msgid "_Edit"
 msgstr "Ви_правлення"
 
@@ -513,7 +509,7 @@ msgstr "Ви_правлення"
 msgid "_Edit/"
 msgstr "Ви_правлення/"
 
-#: libgnomeui/gnome-app-helper.c:86
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
 msgid "_View"
 msgstr "Відо_браження"
 
@@ -521,7 +517,7 @@ msgstr "Відо_браження"
 msgid "_View/"
 msgstr "Відо_браження"
 
-#: libgnomeui/gnome-app-helper.c:88
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
 msgid "_Settings"
 msgstr "В_становлення"
 
@@ -529,7 +525,8 @@ msgstr "В_становлення"
 msgid "_Settings/"
 msgstr "В_становлення/"
 
-#: libgnomeui/gnome-app-helper.c:90
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
 msgid "_New"
 msgstr "_Новий"
 
@@ -537,7 +534,7 @@ msgstr "_Новий"
 msgid "_New/"
 msgstr "_Новий/"
 
-#: libgnomeui/gnome-app-helper.c:92
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
 msgid "Fi_les"
 msgstr "Фай_ли"
 
@@ -545,16 +542,15 @@ msgstr "Фай_ли"
 msgid "Fi_les/"
 msgstr "Фай_ли/"
 
-#: libgnomeui/gnome-app-helper.c:94
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
 msgid "_Windows"
 msgstr "_Вікна"
 
-#: libgnomeui/gnome-app-helper.c:95
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
 msgid "_Game"
 msgstr "_Гра"
 
-#: libgnomeui/gnome-app-helper.c:96
-#: test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 msgid "_Help"
 msgstr "_Довідка"
 
@@ -746,12 +742,10 @@ msgstr "Налаштувати програму"
 #.
 #. About
 #: libgnomeui/gnome-app-helper.c:221
-#: test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Про"
 
 #: libgnomeui/gnome-app-helper.c:222
-#: test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Про програму"
 
@@ -779,7 +773,6 @@ msgid "_Close This Window"
 msgstr "_Закрити це вікно"
 
 #: libgnomeui/gnome-app-helper.c:240
-#: test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Закрити поточне вікно"
 
@@ -920,8 +913,7 @@ msgstr "Ідентифікатор програми"
 msgid "The application ID string"
 msgstr "Ідентифікаційний рядок програми"
 
-#: libgnomeui/gnome-entry.c:171
-#: libgnomeui/gnome-entry.c:172
+#: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
 msgid "History id"
 msgstr "Ідентифікатор історії"
 
@@ -933,81 +925,105 @@ msgstr "Запис GTK"
 msgid "The GTK entry"
 msgstr "Запис GTK"
 
-#: libgnomeui/gnome-file-entry.c:190
-#: libgnomeui/gnome-icon-entry.c:163
+#: libgnomeui/gnome-file-entry.c:194 libgnomeui/gnome-icon-entry.c:170
 msgid "History ID"
 msgstr "Ідентифікатор історії"
 
-#: libgnomeui/gnome-file-entry.c:191
-msgid "Unique identifier for the file entry.  This will be used to save the history list."
-msgstr "Унікальний ідентифікатор поля файлу. Він використовуватиметься для збереження списку історії."
+#: libgnomeui/gnome-file-entry.c:195
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Унікальний ідентифікатор поля файлу. Він використовуватиметься для "
+"збереження списку історії."
 
-#: libgnomeui/gnome-file-entry.c:199
-#: libgnomeui/gnome-icon-entry.c:172
+#: libgnomeui/gnome-file-entry.c:203 libgnomeui/gnome-icon-entry.c:179
 msgid "Browse Dialog Title"
 msgstr "Заголовок вікна вибору"
 
-#: libgnomeui/gnome-file-entry.c:200
+#: libgnomeui/gnome-file-entry.c:204
 msgid "Title for the Browse file dialog."
 msgstr "Заголовок вікна вибору файлів"
 
-#: libgnomeui/gnome-file-entry.c:207
+#: libgnomeui/gnome-file-entry.c:211
 msgid "Directory Entry"
 msgstr "Поле каталогу"
 
-#: libgnomeui/gnome-file-entry.c:208
-msgid "Whether the file entry is being used to enter directory names or complete filenames."
-msgstr "Поле файлу використовуватиметься для вводу назв каталогів чи повних назв файлів."
+#: libgnomeui/gnome-file-entry.c:212
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"Поле файлу використовуватиметься для вводу назв каталогів чи повних назв "
+"файлів."
 
-#: libgnomeui/gnome-file-entry.c:216
+#: libgnomeui/gnome-file-entry.c:220
 msgid "Modal"
 msgstr "Модальне"
 
-#: libgnomeui/gnome-file-entry.c:217
+#: libgnomeui/gnome-file-entry.c:221
 msgid "Whether the Browse file window should be modal."
 msgstr "Чи має вікно вибору файлу бути модальним."
 
-#: libgnomeui/gnome-file-entry.c:224
-#: libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:228 libgnomeui/gnome-icon-entry.c:195
 msgid "Filename"
 msgstr "Файл"
 
-#: libgnomeui/gnome-file-entry.c:225
+#: libgnomeui/gnome-file-entry.c:229
 msgid "Filename that should be displayed in the file entry."
 msgstr "Назва файлу, що відображатиметься у полі файлу."
 
-#: libgnomeui/gnome-file-entry.c:233
+#: libgnomeui/gnome-file-entry.c:237
 msgid "Default Path"
 msgstr "Початковий шлях"
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:238
 msgid "Default path for the Browse file window."
 msgstr "Початковий шлях для вікна перегляду файлів."
 
-#: libgnomeui/gnome-file-entry.c:241
+#: libgnomeui/gnome-file-entry.c:245
 #, fuzzy
 msgid "GnomeEntry"
 msgstr "Запис GTK"
 
-#: libgnomeui/gnome-file-entry.c:242
-msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
+#: libgnomeui/gnome-file-entry.c:246
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:256
 msgid "GtkEntry"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:253
-msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
+#: libgnomeui/gnome-file-entry.c:257
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:481
+#: libgnomeui/gnome-file-entry.c:489
 msgid "Select file"
 msgstr "Вибрати файл"
 
-#: libgnomeui/gnome-file-entry.c:619
+#: libgnomeui/gnome-file-entry.c:627
 msgid "_Browse..."
 msgstr "_Вибрати..."
+
+#: libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:68
+#, fuzzy
+msgid "Pick a Font"
+msgstr "Вибрати колір"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -1029,8 +1045,7 @@ msgstr "Назва шрифту"
 msgid "Name of the selected font"
 msgstr "Назва вибраного шрифту"
 
-#: libgnomeui/gnome-font-picker.c:184
-#: libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Шрифт"
 
@@ -1080,58 +1095,75 @@ msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, fuzzy, c-format
-msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
-msgstr "Ви спробували змінити вигляд ваших налаштувань, в той час, як системний адміністратор чи постачальник операційної системи не дозволяє вам змінювати. Деякі з вибраних вами параметрів не матимуть ефекту, або їх не буде відновлено при наступному використанні цієї програми (%s)."
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"Ви спробували змінити вигляд ваших налаштувань, в той час, як системний "
+"адміністратор чи постачальник операційної системи не дозволяє вам змінювати. "
+"Деякі з вибраних вами параметрів не матимуть ефекту, або їх не буде "
+"відновлено при наступному використанні цієї програми (%s)."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
-msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
-msgstr "Трапилася помилка під час завантаження чи збереження конфіґураційної інформації для %s. Деякі з ваших конфіґураційних параметрів можуть працювати невірно."
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"Трапилася помилка під час завантаження чи збереження конфіґураційної "
+"інформації для %s. Деякі з ваших конфіґураційних параметрів можуть працювати "
+"невірно."
 
-#: libgnomeui/gnome-icon-entry.c:164
-msgid "Unique identifier for the icon entry.  This will be used to save the history list."
+#: libgnomeui/gnome-icon-entry.c:171
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-icon-entry.c:180
 msgid "Title for the Browse icon dialog."
 msgstr "Заголовок вікна вибору піктограм"
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Pixmap Directory"
 msgstr "Каталог піктограм"
 
-#: libgnomeui/gnome-icon-entry.c:181
+#: libgnomeui/gnome-icon-entry.c:188
 msgid "Directory that will be searched for icons."
 msgstr "Каталог для пошуку поктограм."
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Назва файлу, що відображатиметься в полі піктограми."
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:204
 msgid "Picker dialog"
 msgstr "Діалог вибору"
 
-#: libgnomeui/gnome-icon-entry.c:198
-msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
-msgstr "Діалог вибору пактограм. Ви можете цю властивість, щоб отримати GtkDialog, якщо вам необхідно змінити чи опитати його властивості."
+#: libgnomeui/gnome-icon-entry.c:205
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Діалог вибору пактограм. Ви можете цю властивість, щоб отримати GtkDialog, "
+"якщо вам необхідно змінити чи опитати його властивості."
 
-#: libgnomeui/gnome-icon-entry.c:306
-#: libgnomeui/gnome-icon-entry.c:908
+#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:941
 msgid "No Icon"
 msgstr "Немає піктограми"
 
-#: libgnomeui/gnome-icon-entry.c:511
-#: libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:522 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Незнайдено горизонтального блоку, використовується звичайний вибір файлу"
+msgstr ""
+"Незнайдено горизонтального блоку, використовується звичайний вибір файлу"
 
-#: libgnomeui/gnome-icon-entry.c:517
-#: libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:528 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "Перегляд"
 
-#: libgnomeui/gnome-icon-entry.c:930
+#: libgnomeui/gnome-icon-entry.c:963
 msgid "Browse"
 msgstr "Вибрати"
 
@@ -1177,8 +1209,7 @@ msgstr "Зробити перегляд"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Чи має поле піктограми містити перегляд."
 
-#: libgnomeui/gnome-pixmap-entry.c:193
-#: libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
 msgid "No Image"
 msgstr "Немає зображення"
 
@@ -1213,7 +1244,5 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr ""
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Вийти з тесту"
-
+#~ msgid "Exit the test"
+#~ msgstr "Вийти з тесту"

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-04-19 19:58+0300\n"
+"POT-Creation-Date: 2002-04-22 12:30+0200\n"
 "PO-Revision-Date: 2002-04-19 20:28+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -17,109 +17,109 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:187
+#: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr "Tekijät"
 
-#: libgnomeui/gnome-about.c:211
+#: libgnomeui/gnome-about.c:222
 msgid "_Written by"
 msgstr "_Tekijät:"
 
-#: libgnomeui/gnome-about.c:226
+#: libgnomeui/gnome-about.c:237
 msgid "_Documented by"
 msgstr "_Dokumentoijat:"
 
-#: libgnomeui/gnome-about.c:241
+#: libgnomeui/gnome-about.c:252
 msgid "_Translated by"
 msgstr "_Kääntäjät:"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:298
+#: libgnomeui/gnome-about.c:309
 msgid "_Credits"
 msgstr "_Tekijät"
 
-#: libgnomeui/gnome-about.c:338
+#: libgnomeui/gnome-about.c:351
 msgid "Program name"
 msgstr "Ohjelman nimi"
 
-#: libgnomeui/gnome-about.c:339
+#: libgnomeui/gnome-about.c:352
 msgid "The name of the program"
 msgstr "Ohjelman nimi"
 
-#: libgnomeui/gnome-about.c:346
+#: libgnomeui/gnome-about.c:359
 msgid "Program version"
 msgstr "Ohjelman versio"
 
-#: libgnomeui/gnome-about.c:347
+#: libgnomeui/gnome-about.c:360
 msgid "The version of the program"
 msgstr "Ohjelman versio"
 
-#: libgnomeui/gnome-about.c:353
+#: libgnomeui/gnome-about.c:366
 msgid "Copyright string"
 msgstr "Tekijänoikeudet"
 
-#: libgnomeui/gnome-about.c:354
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright information for the program"
 msgstr "Ohjelman tekijänoikeustiedot"
 
-#: libgnomeui/gnome-about.c:361
+#: libgnomeui/gnome-about.c:374
 msgid "Comments string"
 msgstr "Kommentit"
 
-#: libgnomeui/gnome-about.c:362
+#: libgnomeui/gnome-about.c:375
 msgid "Comments about the program"
 msgstr "Kommentteja ohjelmasta"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:381
 msgid "Authors"
 msgstr "Tekijät"
 
-#: libgnomeui/gnome-about.c:369
+#: libgnomeui/gnome-about.c:382
 msgid "List of authors of the programs"
 msgstr "Luettelo ohjelman tekijöistä"
 
-#: libgnomeui/gnome-about.c:371
+#: libgnomeui/gnome-about.c:384
 msgid "Author entry"
 msgstr "Tekijä"
 
-#: libgnomeui/gnome-about.c:372
+#: libgnomeui/gnome-about.c:385
 msgid "A single author entry"
 msgstr "Yksittäisen tekijän tiedot"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:392
 msgid "Documenters"
 msgstr "Dokumentoijat"
 
-#: libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:393
 msgid "List of people documenting the program"
 msgstr "Luettelo ohjelmaa dokumentoivista henkilöistä"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:395
 msgid "Documenter entry"
 msgstr "Dokumentoija"
 
-#: libgnomeui/gnome-about.c:383
+#: libgnomeui/gnome-about.c:396
 msgid "A single documenter entry"
 msgstr "Yksittäisen dokumentoijan tiedot"
 
-#: libgnomeui/gnome-about.c:391
+#: libgnomeui/gnome-about.c:404
 msgid "Translator credits"
 msgstr "Kääntäjä"
 
-#: libgnomeui/gnome-about.c:392
+#: libgnomeui/gnome-about.c:405
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "Ohjelman kääntäjät. Tämä merkkijono pitäisi merkitä käännettäväksi."
 
-#: libgnomeui/gnome-about.c:399 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: libgnomeui/gnome-about.c:400
+#: libgnomeui/gnome-about.c:413
 msgid "A logo for the about box"
 msgstr "Tietoikkunassa näkyvä logo"
 
-#: libgnomeui/gnome-about.c:479
+#: libgnomeui/gnome-about.c:492
 #, c-format
 msgid "About %s"
 msgstr "Tietoja ohjelmasta %s"
@@ -492,7 +492,6 @@ msgstr "Kohdan 2 vinkki"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
@@ -550,7 +549,6 @@ msgid "_Game"
 msgstr "_Peli"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -741,11 +739,11 @@ msgstr "Määrittele ohjelman asetukset"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Tietoja"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Tietoja tästä ohjelmasta"
 
@@ -772,7 +770,7 @@ msgstr "Luo uusi ikkuna"
 msgid "_Close This Window"
 msgstr "_Sulje tämä ikkuna"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Sulje tämä ikkuna"
 
@@ -925,85 +923,85 @@ msgstr "GTK-tekstikenttä"
 msgid "The GTK entry"
 msgstr "GTK-tekstikenttä"
 
-#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#: libgnomeui/gnome-file-entry.c:194 libgnomeui/gnome-icon-entry.c:170
 msgid "History ID"
 msgstr "Historiikin ID"
 
-#: libgnomeui/gnome-file-entry.c:191
+#: libgnomeui/gnome-file-entry.c:195
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+#: libgnomeui/gnome-file-entry.c:203 libgnomeui/gnome-icon-entry.c:179
 msgid "Browse Dialog Title"
 msgstr "Selausikkunan otsikko"
 
-#: libgnomeui/gnome-file-entry.c:200
+#: libgnomeui/gnome-file-entry.c:204
 msgid "Title for the Browse file dialog."
 msgstr "Selausikkunan otsikko."
 
-#: libgnomeui/gnome-file-entry.c:207
+#: libgnomeui/gnome-file-entry.c:211
 msgid "Directory Entry"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:208
+#: libgnomeui/gnome-file-entry.c:212
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:216
+#: libgnomeui/gnome-file-entry.c:220
 msgid "Modal"
 msgstr "Modaalinen"
 
-#: libgnomeui/gnome-file-entry.c:217
+#: libgnomeui/gnome-file-entry.c:221
 msgid "Whether the Browse file window should be modal."
 msgstr "Onko selausikkuna modaalinen."
 
-#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:228 libgnomeui/gnome-icon-entry.c:195
 msgid "Filename"
 msgstr "Tiedostonimi"
 
-#: libgnomeui/gnome-file-entry.c:225
+#: libgnomeui/gnome-file-entry.c:229
 msgid "Filename that should be displayed in the file entry."
 msgstr "Tiedostonimi, joka näkyy tiedostokentässä."
 
-#: libgnomeui/gnome-file-entry.c:233
+#: libgnomeui/gnome-file-entry.c:237
 msgid "Default Path"
 msgstr "Oletuspolku"
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:238
 msgid "Default path for the Browse file window."
 msgstr "Tiedostojen selausikkunan oletuspolku."
 
-#: libgnomeui/gnome-file-entry.c:241
+#: libgnomeui/gnome-file-entry.c:245
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:242
+#: libgnomeui/gnome-file-entry.c:246
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:256
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:257
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:481
+#: libgnomeui/gnome-file-entry.c:489
 msgid "Select file"
 msgstr "Valitse tiedosto"
 
-#: libgnomeui/gnome-file-entry.c:619
+#: libgnomeui/gnome-file-entry.c:627
 msgid "_Browse..."
 msgstr "_Selaa..."
 
@@ -1109,7 +1107,7 @@ msgstr ""
 "Virhe tapahtui ladatessa tai tallentaessa ohjelman %s asetustietoja. Jotkin "
 "asetuksistasi eivät välttämättä toimi kunnolla."
 
-#: libgnomeui/gnome-icon-entry.c:164
+#: libgnomeui/gnome-icon-entry.c:171
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1117,45 +1115,45 @@ msgstr ""
 "Kuvakekohdan yksilöllinen tunniste. Tätä käytetään historiikkiluettelon "
 "tallentamiseen."
 
-#: libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-icon-entry.c:180
 msgid "Title for the Browse icon dialog."
 msgstr "Kuvakkeiden selausikkunan otsikko."
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Pixmap Directory"
 msgstr "Kuvahakemisto"
 
-#: libgnomeui/gnome-icon-entry.c:181
+#: libgnomeui/gnome-icon-entry.c:188
 msgid "Directory that will be searched for icons."
 msgstr "Hakemisto, josta kuvakkeita etsitään."
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Tiedostonimi, joka näkyy tiedostokentässä."
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:204
 msgid "Picker dialog"
 msgstr "Valitsinikkuna"
 
-#: libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-icon-entry.c:205
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
+#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:941
 msgid "No Icon"
 msgstr "Ei kuvaketta"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:522 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Hboxia ei löydy, käytetään tavallista tiedostonvalintaa"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:528 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "Esikatselu"
 
-#: libgnomeui/gnome-icon-entry.c:930
+#: libgnomeui/gnome-icon-entry.c:963
 msgid "Browse"
 msgstr "Selaa"
 
@@ -1236,9 +1234,8 @@ msgstr "%a %d. %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Lopeta testi"
+#~ msgid "Exit the test"
+#~ msgstr "Lopeta testi"
 
 #~ msgid "GConf error details: %s\n"
 #~ msgstr "GConfin virhetiedot: %s\n"
