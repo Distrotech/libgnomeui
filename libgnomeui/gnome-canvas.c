@@ -54,6 +54,7 @@
 #include <gtk/gtksignal.h>
 #include "gnome-canvas.h"
 #include "libart_lgpl/art_misc.h"
+#include "libart_lgpl/art_uta.h"
 
 
 static void group_add    (GnomeCanvasGroup *group, GnomeCanvasItem *item);
@@ -2619,4 +2620,14 @@ gnome_canvas_set_stipple_origin (GnomeCanvas *canvas, GdkGC *gc)
 	g_return_if_fail (gc != NULL);
 
 	gdk_gc_set_ts_origin (gc, -canvas->draw_xofs, -canvas->draw_yofs);
+}
+
+void
+dummy (void)
+{
+  ArtUta *uta;
+
+  uta = art_uta_new_coords (0, 0, 100, 100);
+
+  art_uta_free (uta);
 }
