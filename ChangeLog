@@ -1,3 +1,8 @@
+2002-04-16  Richard Kinder <r_kinder@yahoo.com>
+
+	* libgnomeui/gnome-mdi.c (copy_ui_info_tree): remove bogus
+	g_malloc check.
+
 2002-04-15  Richard Hult  <rhult@codefactory.se>
 
 	* libgnomeui/gnome-href.c (gnome_href_style_set): Remove debug

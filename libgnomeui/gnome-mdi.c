@@ -332,11 +332,6 @@ static GnomeUIInfo *copy_ui_info_tree (const GnomeUIInfo source[])
 
 	copy = g_malloc(count*sizeof(GnomeUIInfo));
 
-	if(copy == NULL) {
-		g_warning("GnomeMDI: Could not allocate new GnomeUIInfo");
-		return NULL;
-	}
-
 	memcpy(copy, source, count*sizeof(GnomeUIInfo));
 
 	for(i = 0; i < count; i++) {
