@@ -610,14 +610,20 @@ static struct poptOption gtk_options [] = {
 	{ "gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
 	  N_("Gdk debugging flags to unset"), N_("FLAGS")},
 
+	  /* X11 only */
 	{ "display", '\0', POPT_ARG_STRING, NULL, 0,
 	  N_("X display to use"), N_("DISPLAY")},
 
+	  /* X11 only */
 	{ "sync", '\0', POPT_ARG_NONE, NULL, 0,
 	  N_("Make X calls synchronous"), NULL},
 
+	  /* FIXME: this doesn't seem to exist */
+#if 0
+	  /* X11 only */
 	{ "no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
 	  N_("Don't use X shared memory extension"), NULL},
+#endif
 
 	{ "name", '\0', POPT_ARG_STRING, NULL, 0,
 	  N_("Program name as used by the window manager"), N_("NAME")},
@@ -625,17 +631,22 @@ static struct poptOption gtk_options [] = {
 	{ "class", '\0', POPT_ARG_STRING, NULL, 0,
 	  N_("Program class as used by the window manager"), N_("CLASS")},
 
-	{ "gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
+	  /* X11 only */
+	{ "gxid-host", '\0', POPT_ARG_STRING, NULL, 0,
 	  NULL, N_("HOST")},
 
-	{ "gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
+	  /* X11 only */
+	{ "gxid-port", '\0', POPT_ARG_STRING, NULL, 0,
 	  NULL, N_("PORT")},
 
+	  /* FIXME: this doesn't seem to exist */
+#if 0
 	{ "xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
 	  NULL, N_("STYLE")},
 
 	{ "xim-status", '\0', POPT_ARG_STRING, NULL, 0,
 	  NULL, N_("STYLE")},
+#endif
 
 	{ "gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
 	  N_("Gtk+ debugging flags to set"), N_("FLAGS")},
@@ -685,9 +696,6 @@ gtk_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
 	gtk_init (&final_argc, &final_argv);
 
 	g_free (final_argv);
-
-	/* FIXME: is this still needed */
-	gdk_rgb_init();
 
 	for (i = 0; g_ptr_array_index (init_info->gtk_args, i) != NULL; i++) {
 		g_free (g_ptr_array_index (init_info->gtk_args, i));

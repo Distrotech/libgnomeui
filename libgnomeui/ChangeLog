@@ -1,3 +1,10 @@
+Wed Oct 17 18:08:34 2001  George Lebl <jirka@5z.com>
+
+	* gnome-ui-init.c: #if 0 out  some options which don't seem to be
+	  present in GTK+.  Note that some options are X11 only, we need
+	  some way to query these from gtk/gdk, I think that IS possible.
+	  Also don't call gdk_rgb_init anymore.
+
 2001-10-16  James Henstridge  <james@daa.com.au>
 
 	* gnome-href.c (gnome_href_class_init): install a "link_colour"
