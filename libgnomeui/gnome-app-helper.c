@@ -1140,8 +1140,9 @@ static int
 create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 {
 	gchar *path;
-
-	uiinfo->widget = gtk_image_menu_item_new_with_mnemonic (L_("_Contents"));
+	gchar *title = N_("_Contents");
+		
+	uiinfo->widget = gtk_image_menu_item_new_with_mnemonic (L_(title));
 	uiinfo->hint = g_strdup (_("View help for this application"));
 
 	setup_image_menu_item (uiinfo->widget, GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP);

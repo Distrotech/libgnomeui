@@ -1,3 +1,8 @@
+2002-08-03  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-app-helper.c: Fix up translation of
+	Help->Contents menu entry. (Zbigniew Chyla)
+	
 2002-07-29  Dave Camp  <dave@ximian.com>
 
 	* libgnomeui/gnome-icon-item.c: (send_focus_event): #ifed out the
