@@ -62,7 +62,7 @@ entry_find_internal_child(GladeXML *xml, GtkWidget *parent,
 }
 
 static GtkWidget *
-file_entry_find_internal_chid(GladeXML *xml, GtkWidget *parent,
+file_entry_find_internal_child(GladeXML *xml, GtkWidget *parent,
 			      const gchar *childname)
 {
     if (!strcmp (childname, "entry"))

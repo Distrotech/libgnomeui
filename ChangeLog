@@ -1,5 +1,8 @@
 2001-10-24  jacob berkman  <jacob@ximian.com>
 
+	* glade/glade-gnome.c: (file_entry_find_internal_child): fix a
+	tyop
+	
 	* glade/glade-gnome.c: move from libglade/glade/
 
 	* configure.in: add libglade check
