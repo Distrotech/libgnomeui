@@ -95,6 +95,7 @@ static void
 gnome_app_init(GnomeApp *app)
 {
 	app->menubar = app->toolbar = app->contents = NULL;
+	app->statusbar = NULL;
 	app->table = gtk_table_new(4, 3, FALSE);
 	gtk_widget_show(app->table);
 	gtk_container_add(GTK_CONTAINER(app), app->table);

@@ -21,18 +21,97 @@
 
 #include "gnome-app-util.h"
 #include "libgnome/gnome-i18nP.h"
-#include <gtk/gtk.h>
 #include "gnome-stock.h"
 #include "gnome-dialog-util.h"
+#include "gnome-dialog.h"
 #include "gnome-uidefs.h"
+#include "gnome-preferences.h"
 
-#define NOT_IMPLEMENTED g_warning("Status bar support not implemented.\n")
+#include <gtk/gtk.h>
+
+#define NOT_IMPLEMENTED g_warning("Interactive status bar not implemented.\n")
+
+static gboolean 
+gnome_app_has_statusbar(GnomeApp * app)
+{
+  g_return_val_if_fail(app != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_APP(app), FALSE);
+
+  return (app->statusbar != NULL);
+}
 
 /* ================================================================== */
 
 void gnome_app_set_status (GnomeApp * app, const gchar * status)
 {
-  NOT_IMPLEMENTED;
+  static guint messageid = 0; /* 0 is an invalid id AFAICT */
+  static guint contextid = 0;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+
+  /* It's OK to call the function without a statusbar */
+  if ( gnome_app_has_statusbar(app) ) {
+    if (contextid == 0) {
+      contextid = 
+	gtk_statusbar_get_context_id ( GTK_STATUSBAR(app->statusbar),
+				       "gnome_app_set_status_context" );
+    }
+
+    if (messageid != 0) {
+      gtk_statusbar_remove ( GTK_STATUSBAR(app->statusbar),
+			     contextid,
+			     messageid );
+    }
+
+    if (status != NULL) {
+      messageid = gtk_statusbar_push ( GTK_STATUSBAR(app->statusbar),
+				       contextid,
+				       status );
+    }
+  } 
+}
+
+void 
+gnome_app_pushpop (GnomeApp * app, const gchar * status, gboolean push_not_pop)
+{
+  static guint contextid = 0;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+
+  /* It's OK to call the function without a statusbar */
+  if ( gnome_app_has_statusbar(app) ) {
+    if (contextid == 0) {
+      contextid = 
+	gtk_statusbar_get_context_id ( GTK_STATUSBAR(app->statusbar),
+				       "gnome_app_pushpop_context" );
+    }
+
+    if ( push_not_pop ) {
+      gtk_statusbar_push ( GTK_STATUSBAR(app->statusbar),
+			   contextid,
+			   status );
+    }
+    else {
+      gtk_statusbar_pop ( GTK_STATUSBAR(app->statusbar),
+			  contextid );
+    }
+  } 
+}
+
+void 
+gnome_app_push_status (GnomeApp * app, const gchar * status)
+{
+  g_return_if_fail(status != NULL);
+
+  gnome_app_pushpop (app, status, TRUE);
+}
+
+void 
+gnome_app_pop_status  (GnomeApp * app)
+{
+  gnome_app_pushpop (app, NULL, FALSE);
 }
 
 /* =================================================================== */
@@ -43,76 +122,233 @@ static void gnome_app_message_bar (GnomeApp * app, const gchar * message)
   NOT_IMPLEMENTED;
 }
 
-void gnome_app_message (GnomeApp * app, const gchar * message)
+GtkWidget *
+gnome_app_message (GnomeApp * app, const gchar * message)
 {
-  /* if (user wants dialog, not statusbar) */
-  gnome_message_dialog(message);
-  /* else use statusbar. */
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+
+  if ( gnome_preferences_get_statusbar_dialog() &&
+       gnome_app_has_statusbar(app) ) {
+    gnome_app_message_bar ( app, message );
+    return NULL;
+  }
+  else {
+    return gnome_ok_dialog(message);
+  }
 }
 
-void gnome_app_flash (GnomeApp * app, const gchar * flash)
+struct _MessageInfo {
+  GnomeApp * app;
+  guint contextid;
+  guint messageid;
+  guint timeoutid;
+  guint handlerid;
+};
+
+typedef struct _MessageInfo MessageInfo;
+
+static gint
+remove_message_timeout (MessageInfo * mi) 
+{
+  gtk_statusbar_remove ( GTK_STATUSBAR(mi->app->statusbar), 
+			 mi->contextid, mi->messageid );
+  gtk_signal_disconnect(GTK_OBJECT(mi->app), mi->handlerid);
+  g_free ( mi );
+  return FALSE; /* removes the timeout */
+}
+
+/* Called if the app is destroyed before the timeout occurs. */
+static void
+remove_timeout_cb ( GtkWidget * app, MessageInfo * mi ) 
+{
+  gtk_timeout_remove(mi->timeoutid);
+  g_free(mi);
+}
+
+static const guint32 flash_length = 5000; /* 5 seconds, I hope */
+
+void 
+gnome_app_flash (GnomeApp * app, const gchar * flash)
 {
   /* This is a no-op for dialogs, since these messages aren't 
      important enough to pester users. */
-  NOT_IMPLEMENTED;
+  static guint contextid = 0;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+  g_return_if_fail(flash != NULL);
+
+  /* OK to call app_flash without a statusbar */
+  if ( gnome_app_has_statusbar(app) ) {
+    MessageInfo * mi;
+    guint timeoutid;
+    guint handlerid;
+    guint messageid;
+
+    if (contextid == 0) {
+      contextid = gtk_statusbar_get_context_id( GTK_STATUSBAR(app->statusbar),
+						"gnome_app_flash_context" );
+    }
+
+    mi = g_new(MessageInfo, 1);
+    
+    messageid = 
+      gtk_statusbar_push ( GTK_STATUSBAR(app->statusbar),
+			   contextid, flash );
+
+    timeoutid = 
+      gtk_timeout_add ( flash_length,
+			(GtkFunction) remove_message_timeout,
+			mi );
+    
+    handlerid = 
+      gtk_signal_connect ( GTK_OBJECT(app),
+			   "destroy",
+			   GTK_SIGNAL_FUNC(remove_timeout_cb),
+			   mi );
+
+    mi->contextid = contextid;
+    mi->messageid = messageid;
+    mi->timeoutid = timeoutid;
+    mi->handlerid = handlerid;
+    mi->app       = app;
+  } /* if ( gnome_app_has_statusbar (app) ) */   
 }
 
-static gnome_app_error_bar(GnomeApp * app, const gchar * error)
+
+static gboolean
+gnome_app_interactive_statusbar(GnomeApp * app)
+{
+ return ( gnome_app_has_statusbar (app) && 
+	  gnome_preferences_get_statusbar_dialog() &&
+	  gnome_preferences_get_statusbar_interactive() );
+}
+
+static void 
+gnome_app_error_bar(GnomeApp * app, const gchar * error)
 {
   NOT_IMPLEMENTED;
 }
 
-void gnome_app_error (GnomeApp * app, const gchar * error)
+GtkWidget * 
+gnome_app_error (GnomeApp * app, const gchar * error)
 {
-  gnome_error_dialog (error);
-}
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(error != NULL, NULL);
 
-static void gnome_app_warning_dialog (const gchar * warning)
-{
-  show_ok_box(warning, GNOME_MESSAGE_BOX_WARNING);
+  if ( gnome_app_interactive_statusbar(app) ) {
+    gnome_app_error_bar(app, error);
+  }
+  /* else */
+  return gnome_error_dialog (error);
 }
 
 static void gnome_app_warning_bar (GnomeApp * app, const gchar * warning)
 {
-  NOT_IMPLEMENTED;
+  /* This is kind of a lame implementation? Maybe fix it later */
+  gdk_beep();
+  gnome_app_flash(app, warning);
 }
 
-void gnome_app_warning (GnomeApp * app, const gchar * warning)
+GtkWidget * 
+gnome_app_warning (GnomeApp * app, const gchar * warning)
 {
-  gnome_warning_dialog(warning);
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(warning != NULL, NULL);
+
+  if ( gnome_app_has_statusbar(app) && 
+       gnome_preferences_get_statusbar_dialog() ) {
+    gnome_app_warning_bar(app, warning);
+    return NULL;
+  }
+  else {
+    return gnome_warning_dialog(warning);
+  }
 }
 
 /* ========================================================== */
 
-static void gnome_app_reply_bar(GnomeApp * app, const gchar * question,
-				GnomeReplyCallback callback, gpointer data,
-				gboolean yes_or_ok, gboolean modal)
+static void 
+gnome_app_reply_bar(GnomeApp * app, const gchar * question,
+		    GnomeReplyCallback callback, gpointer data,
+		    gboolean yes_or_ok, gboolean modal)
 {
   NOT_IMPLEMENTED;
 }
 
-void gnome_app_question (GnomeApp * app, const gchar * question,
-			 GnomeReplyCallback callback, gpointer data)
+GtkWidget * 
+gnome_app_question (GnomeApp * app, const gchar * question,
+		    GnomeReplyCallback callback, gpointer data)
 {
-  gnome_question_dialog(question, callback, data);
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(question != NULL, NULL);
+  g_return_val_if_fail(callback != NULL, NULL);
+
+  if ( gnome_app_interactive_statusbar(app) ) {
+    gnome_app_reply_bar(app, question, callback, data, TRUE, FALSE);
+    return NULL;
+  }
+  else {
+    return gnome_question_dialog(question, callback, data);
+  }
 }
 
-void gnome_app_question_modal (GnomeApp * app, const gchar * question,
-			       GnomeReplyCallback callback, gpointer data)
-{
-  gnome_question_dialog_modal(question, callback, data);
-}
-
-void gnome_app_ok_cancel (GnomeApp * app, const gchar * message,
+GtkWidget * 
+gnome_app_question_modal (GnomeApp * app, const gchar * question,
 			  GnomeReplyCallback callback, gpointer data)
 {
-  gnome_ok_cancel_dialog(message, callback, data);
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(question != NULL, NULL);
+  g_return_val_if_fail(callback != NULL, NULL);
+
+  if ( gnome_app_interactive_statusbar(app) ) {
+    gnome_app_reply_bar(app, question, callback, data, TRUE, TRUE);
+    return NULL;
+  }
+  else {
+    return gnome_question_dialog_modal(question, callback, data);
+  }
 }
 
-void gnome_app_ok_cancel_modal (GnomeApp * app, const gchar * message,
-				GnomeReplyCallback callback, gpointer data)
+GtkWidget * 
+gnome_app_ok_cancel (GnomeApp * app, const gchar * message,
+		     GnomeReplyCallback callback, gpointer data)
 {
-  gnome_ok_cancel_dialog_modal(message, callback, data);
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(message != NULL, NULL);
+  g_return_val_if_fail(callback != NULL, NULL);
+
+  if ( gnome_app_interactive_statusbar(app) ) {
+    gnome_app_reply_bar(app, message, callback, data, FALSE, FALSE);
+    return NULL;
+  }
+  else {
+    return gnome_ok_cancel_dialog(message, callback, data);
+  }
+}
+
+GtkWidget * 
+gnome_app_ok_cancel_modal (GnomeApp * app, const gchar * message,
+			   GnomeReplyCallback callback, gpointer data)
+{
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(message != NULL, NULL);
+  g_return_val_if_fail(callback != NULL, NULL);
+
+  if ( gnome_app_interactive_statusbar(app) ) {
+    gnome_app_reply_bar(app, message, callback, data, FALSE, TRUE);
+    return NULL;
+  }
+  else {
+    return gnome_ok_cancel_dialog_modal(message, callback, data);
+  }
 }
 
 static void gnome_app_request_bar  (GnomeApp * app, const gchar * prompt,
@@ -122,17 +358,29 @@ static void gnome_app_request_bar  (GnomeApp * app, const gchar * prompt,
   NOT_IMPLEMENTED;
 }
 
-void gnome_app_request_string (GnomeApp * app, const gchar * prompt,
-			       GnomeStringCallback callback, gpointer data)
+GtkWidget * 
+gnome_app_request_string (GnomeApp * app, const gchar * prompt,
+			  GnomeStringCallback callback, gpointer data)
 { 
-  gnome_request_string_dialog(prompt, callback, data);
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(prompt != NULL, NULL);
+  g_return_val_if_fail(callback != NULL, NULL);
+
+  return gnome_request_string_dialog(prompt, callback, data);
 }
 
 
-void gnome_app_request_password (GnomeApp * app, const gchar * prompt,
-				 GnomeStringCallback callback, gpointer data)
+GtkWidget * 
+gnome_app_request_password (GnomeApp * app, const gchar * prompt,
+			    GnomeStringCallback callback, gpointer data)
 {
-  gnome_request_password_dialog(prompt, callback, data);
+  g_return_val_if_fail(app != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_APP(app), NULL);
+  g_return_val_if_fail(prompt != NULL, NULL);
+  g_return_val_if_fail(callback != NULL, NULL);
+
+  return gnome_request_password_dialog(prompt, callback, data);
 }
 
 /* ================================================== */

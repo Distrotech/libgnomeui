@@ -7,6 +7,7 @@
 #include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-app-helper.h"
+#include "libgnomeui/gnome-app-util.h"
 #include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-canvas.h"
 #include "libgnomeui/gnome-color-selector.h"

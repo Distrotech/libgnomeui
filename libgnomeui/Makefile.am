@@ -27,6 +27,7 @@ libgnomeui_la_SOURCES = \
 	gnome-actionarea.c		\
 	gnome-app.c			\
 	gnome-app-helper.c		\
+	gnome-app-util.c		\
 	gnome-color-selector.c 		\
 	@GNOME_CANVAS_SRC@		\
 	gnome-dialog.c                  \
@@ -73,6 +74,7 @@ libgnomeuiinclude_HEADERS = 		\
 	@GNOME_CANVAS_HED@		\
 	gnome-app.h			\
 	gnome-app-helper.h		\
+	gnome-app-util.h		\
 	gnome-color-selector.h		\
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\

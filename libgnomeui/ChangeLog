@@ -1,3 +1,16 @@
+Mon Jun 29 00:35:47 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-app-util.h, gnome-app-util.c: Implementation for all
+	functions except interactive statusbar stuff. However,
+	ui-properties doesn't allow you to turn on interactive statusbar
+	yet, so all the functions should be usable if possibly buggy.
+	Also, many of the functions changed to return the dialog created.
+	* gnome-app.c: Initialize the statusbar member to NULL.	
+	* gnome-preferences.h, gnome-preferences.c: Add statusbar
+ 	vs. dialog options.
+	* libgnomeui.h: Add gnome-app-util.h
+	* Makefile.am: Add gnome-app-util.h, gnome-app-util.c
+
 1998-06-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-app.c (make_button_toolbar): i18n strings marked;  Added
