@@ -390,17 +390,22 @@ client_set_clone_command (GnomeClient *client)
 
   SmPropValue *vals;
   
-  if (!GNOME_CLIENT_CONNECTED (client) || (client->clone_command == NULL))
+  if (!GNOME_CLIENT_CONNECTED (client))
     return;
 
-  for (ptr = client->clone_command, argc = 0; *ptr ; ptr++) argc++;
+  ptr=client->clone_command ? client->clone_command : client->restart_command;
+
+  if (!ptr)
+    return;
+
+  for (argc = 0; *ptr ; ptr++) argc++;
 
   /* Add space for static arguments and config prefix. */
   argc += g_list_length (client->static_args) + 2;
 
   vals = g_new (SmPropValue, argc);
 
-  ptr = client->clone_command;
+  ptr=client->clone_command ? client->clone_command : client->restart_command;
 
   vals[0].length = strlen (*ptr);
   vals[0].value  = *ptr++;
@@ -830,7 +835,6 @@ client_parse_func (poptContext ctx,
 	 the master client while parsing the command line.  */
       gnome_client_set_restart_command (master_client, 1, 
 					&master_client->program);
-      gnome_client_set_clone_command (master_client, 0, NULL);      
     }
   else if (reason == POPT_CALLBACK_REASON_POST)
     {
@@ -892,6 +896,9 @@ static void
 master_client_disconnect (GnomeClient *client,
 			  gpointer client_data)
 {
+  if(client_grab_widget && gtk_grab_get_current() == client_grab_widget)
+    gtk_grab_remove(client_grab_widget);
+
   gdk_set_sm_client_id (NULL);
 }
 
@@ -1436,20 +1443,9 @@ gnome_client_set_clone_command (GnomeClient *client,
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
-  /* Usually the CloneCommand property is required.  If you unset the
-     CloneCommand property, we will use the RestartCommand instead.  */
-  if (argv == NULL)
-    {
-      g_return_if_fail (argc == 0);
-
-      g_strfreev (client->clone_command);
-      client->clone_command = array_copy (client->restart_command);
-    }
-  else
-    {
-      g_strfreev (client->clone_command);
-      client->clone_command = array_init_from_arg (argc, argv);
-    }
+  /* Whenever clone_command == NULL then restart_command is used instead */
+  g_strfreev (client->clone_command);
+  client->clone_command = array_init_from_arg (argc, argv);
 
 #ifdef HAVE_LIBSM
   client_set_clone_command (client);
@@ -2088,16 +2084,8 @@ gnome_real_client_connect (GnomeClient *client,
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
   
-  if (client->clone_command == 0)
-    client->clone_command = array_copy (client->restart_command);
-
 #ifdef HAVE_LIBSM
   /* We now set all non empty properties.  */
-  if (client->clone_command != NULL)
-    client_set_clone_command (client);
-  else
-    client_set_array (client, SmCloneCommand, NULL);
-
   client_set_string (client, SmCurrentDirectory, client->current_directory);
   client_set_array (client, SmDiscardCommand, client->discard_command);
   client_set_ghash (client, SmEnvironment, client->environment);
@@ -2110,10 +2098,8 @@ gnome_real_client_connect (GnomeClient *client,
   client_set_string (client, SmProgram, client->program);
   client_set_array (client, SmResignCommand, client->resign_command);
 
-  if (client->restart_command != NULL)
-    client_set_restart_command (client);
-  else
-    client_set_array (client, SmRestartCommand, NULL);
+  client_set_clone_command (client);
+  client_set_restart_command (client);
 
   switch (client->restart_style)
     {

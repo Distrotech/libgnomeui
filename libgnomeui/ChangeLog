@@ -1,3 +1,11 @@
+1999-02-01  Felix Bellaby <felix@pooh.u-net.com>
+
+	* gnome-client.c (client_set_clone_command, client_parse_function, 
+	 gnome_client_set_clone_command, gnome_real_client_connect): fix
+	failure to propogate changes in the restart command over to the 
+	clone command (when no clone command has been set).
+	(master_client_disconnect): avoid NULL client_grab_widget values.
+
 1999-01-31  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_destroy): Call
