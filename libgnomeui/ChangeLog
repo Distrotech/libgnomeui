@@ -1,5 +1,11 @@
 2001-04-18  Martin Baulig  <baulig@suse.de>
 
+	* gnome-init.c (libbonoboui_module_init): Added libbonoboui initialization here;
+	no "real" code here yet.
+	(libgnomeui_module_requirements): Added libbonobo.
+
+2001-04-18  Martin Baulig  <baulig@suse.de>
+
 	* gnome-icon-entry.c: Comment out gnome_uri_list_extract_filenames() to make
 	it compile [FIXME].
 

@@ -35,6 +35,7 @@ BEGIN_GNOME_DECLS
 #define LIBGNOMEUI_PARAM_DEFAULT_ICON	"default-icon"
 
 extern GnomeModuleInfo libgnomeui_module_info;
+extern GnomeModuleInfo libbonoboui_module_info;
 
 /* The gnome_init define is in libgnomeui.h so it can be a macro */
 int gnome_init_with_popt_table(const char *app_id,

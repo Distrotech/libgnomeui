@@ -56,7 +56,47 @@
 
 #include "libgnomeuiP.h"
 
-/******************* libgnomeui module ***********************/
+/*****************************************************************************
+ * libbonoboui
+ *****************************************************************************/
+
+static void
+libbonoboui_pre_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
+{
+        /* Initialize libbonoboui here.
+         *
+         * Attention: libbonobo has already been initialized from libgnome !
+         */
+}
+
+static void
+libbonoboui_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
+{
+        /* Initialize libbonoboui here.
+         *
+         * Attention: libbonobo has already been initialized from libgnome !
+         */
+}
+
+static GnomeModuleRequirement libbonoboui_requirements[] = {
+        /* libgnome already depends on libbonobo, so we need to depend on
+         * libgnome here as well to make sure the init functions are called
+         * in the correct order. */
+        { VERSION, &libgnome_module_info },
+        { NULL, NULL }
+};
+
+GnomeModuleInfo libbonoboui_module_info = {
+        "libbonoboui", VERSION, N_("Bonobo UI"),
+        libbonoboui_requirements,
+        libbonoboui_pre_args_parse, libbonoboui_post_args_parse,
+        NULL, NULL, NULL, NULL, NULL
+};
+
+/*****************************************************************************
+ * libgnomeui
+ *****************************************************************************/
+
 static void libgnomeui_arg_callback(poptContext con,
                                     enum poptCallbackReason reason,
                                     const struct poptOption * opt,
@@ -77,6 +117,7 @@ static void libgnomeui_segv_setup(gboolean post_arg_parse);
 static GnomeModuleRequirement libgnomeui_requirements[] = {
         {VERSION, &libgnome_module_info},
         {VERSION, &libgnomecanvas_module_info},
+        {VERSION, &libbonoboui_module_info},
         {NULL, NULL}
 };
 
