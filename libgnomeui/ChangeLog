@@ -1,3 +1,9 @@
+1999-09-19  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-appbar.c (gnome_appbar_construct): Set horizontal usize on
+	the label to 1, so that it does not stupidly change size when the
+	text is larger than the available space.
+
 1999-09-19  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-animator.c (prepare_aux_pixmaps): only create pixmaps
