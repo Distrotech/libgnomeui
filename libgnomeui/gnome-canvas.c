@@ -2086,7 +2086,7 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
-	if ((x1 == x2) || (y1 == y2))
+	if (!GTK_WIDGET_DRAWABLE (canvas) || (x1 == x2) || (y1 == y2))
 		return;
 
 	if (canvas->need_redraw) {

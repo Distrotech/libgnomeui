@@ -1,3 +1,8 @@
+1998-07-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_request_redraw): Do not do anything
+	if the widget is not drawable.
+
 1998-07-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-line.c (gnome_canvas_line_destroy): Doh, forgot to
