@@ -372,7 +372,6 @@ create_bitmap_and_mask_from_xpm (GdkBitmap **bitmap,
 	
 	sscanf (xpm [0], "%d %d %d %d", &width, &height, &colors, &pix);
 	
-	g_print ("width: %d\n", width);
  	g_assert (width%8 == 0);
 	pixmap_buffer = (char*) malloc (sizeof (char) * (width * height/8));
 	mask_buffer = (char*) malloc (sizeof (char) * (width * height/8));
