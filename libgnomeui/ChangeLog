@@ -8,6 +8,8 @@
 	(setup_uline_accel): remove useless function (not needed since
 	addition of mnemonic support).
 	(gtk_menu_ensure_uline_accel_group): remove this as well.
+	(create_menu_item): remove the uline_accels argument, as it is
+	useless.  It is still in the public APIs.
 
 2001-12-08  ERDI Gergo  <cactus@cactus.rulez.org>
 

@@ -892,7 +892,6 @@ create_menu_item (GtkMenuShell       *menu_shell,
 		  GSList            **radio_group,
 		  GnomeUIBuilderData *uibdata,
 		  GtkAccelGroup      *accel_group,
-		  gboolean	      uline_accels,
 		  gint		      pos)
 {
 	GtkWidget *label;
@@ -960,7 +959,7 @@ create_menu_item (GtkMenuShell       *menu_shell,
 	/* Don't use gettext on the empty string since gettext will map
 	 * the empty string to the header at the beginning of the .pot file. */
 
-	label = create_label ( uiinfo->label [0] == NULL?
+	label = create_label ( uiinfo->label == NULL?
 			       "":(uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK ?
 				   D_(uiinfo->label):L_(uiinfo->label)));
 
@@ -1067,7 +1066,7 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 		case GNOME_APP_UI_ITEM:
 			create_menu_item (menu_shell, uiinfo, TRUE,
 					  &group, uibdata, 
-					  accel_group, FALSE, pos);
+					  accel_group, pos);
 			pos++;
 			break;
 
@@ -1485,13 +1484,11 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 			if (uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK)
 				create_menu_item (menu_shell, uiinfo, FALSE,
 						  NULL, uibdata, 
-						  accel_group, uline_accels,
-						  pos);
+						  accel_group, pos);
 			else
 				create_menu_item (menu_shell, uiinfo, FALSE,
 						  NULL, uibdata, 
-						  accel_group, uline_accels,
-						  pos);
+						  accel_group, pos);
 			
 			if (uiinfo->type == GNOME_APP_UI_SUBTREE ||
 			    uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK) {
