@@ -138,7 +138,7 @@ menushell_build_children (GladeXML *xml, GtkWidget *w,
 #if 0
     GtkAccelGroup *uline = NULL;
     
-    if (strcmp (info->class, "GtkMenuBar") != 0) {
+    if (strcmp (info->classname, "GtkMenuBar") != 0) {
 	uline = gtk_menu_ensure_uline_accel_group (GTK_MENU (w));
 	glade_xml_push_uline_accel (xml, uline);
     }
@@ -194,7 +194,7 @@ menushell_build_children (GladeXML *xml, GtkWidget *w,
 	glade_xml_pop_uline_accel(xml);
 #endif
 #if 0
-    if (strcmp(info->class, "GtkMenuBar") != 0 &&
+    if (strcmp(info->classname, "GtkMenuBar") != 0 &&
 	gnome_preferences_get_menus_have_tearoff()) {
 	GtkWidget *tearoff = gtk_tearoff_menu_item_new();
 	
@@ -276,7 +276,7 @@ gnome_dock_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info)
 	for (i = 0; i < info->n_children; i++) {
 		childinfo = &info->children[i];
 
-		if (!strcmp (childinfo->child->class, "BonoboDockItem")) {
+		if (!strcmp (childinfo->child->classname, "BonoboDockItem")) {
 			gnome_add_dock_item (xml, w, info, childinfo);
 			continue;
 		}
