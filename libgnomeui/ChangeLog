@@ -1,3 +1,12 @@
+1999-06-08  Ettore Perazzoli  <ettore@comm2000.it>
+
+	Applied patch from Damon Chaplin to handle resizing of floating
+	dock items properly.
+	* gnome-dock.c (gnome_dock_size_request): Request size for all the
+	floating children too.
+	(gnome_dock_size_allocate): Allocate size for all the floating
+	children too.
+
 1999-06-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-app.c (gnome_app_set_menus): Apply suggestion from Damon

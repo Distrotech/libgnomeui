@@ -249,6 +249,7 @@ gnome_dock_size_request (GtkWidget *widget, GtkRequisition *requisition)
 {
   GnomeDock *dock;
   GtkContainer *container;
+  GList *lp;
 
   dock = GNOME_DOCK (widget);
 
@@ -264,6 +265,17 @@ gnome_dock_size_request (GtkWidget *widget, GtkRequisition *requisition)
   size_request_v (dock->right_bands, requisition);
   size_request_h (dock->top_bands, requisition);
   size_request_h (dock->bottom_bands, requisition);
+
+  lp = dock->floating_children;
+  while (lp != NULL)
+    {
+      GtkWidget *w;
+      GtkRequisition float_item_requisition;
+
+      w = lp->data;
+      lp = lp->next;
+      gtk_widget_size_request (w, &float_item_requisition);
+    }
 }
 
 
@@ -348,6 +360,7 @@ gnome_dock_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
   gint top_bands_y, bottom_bands_y;
   gint left_bands_x, right_bands_x;
   GtkAllocation child_allocation;
+  GList *lp;
 
   dock = GNOME_DOCK (widget);
 
@@ -388,6 +401,21 @@ gnome_dock_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
   if (dock->client_area != NULL && GTK_WIDGET_VISIBLE (dock->client_area))
     gtk_widget_size_allocate (dock->client_area, &child_allocation);
+
+  lp = dock->floating_children;
+  while (lp != NULL)
+    {
+      GtkWidget *w;
+      GtkAllocation float_item_allocation;
+
+      w = lp->data;
+      lp = lp->next;
+      float_item_allocation.x = 0;
+      float_item_allocation.y = 0;
+      float_item_allocation.width = w->requisition.width;
+      float_item_allocation.height = w->requisition.height;
+      gtk_widget_size_allocate (w, &float_item_allocation);
+    }
 }
 
 
