@@ -187,7 +187,7 @@ gnome_app_get_arg (GtkObject      *object,
 
 	switch(arg_id) {
 	case ARG_APP_ID:
-		GTK_VALUE_STRING(*arg) = app->name;
+		GTK_VALUE_STRING(*arg) = g_strdup(app->name);
 		break;
 	}
 }

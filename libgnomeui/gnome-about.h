@@ -51,11 +51,15 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_ABOUT_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ABOUT))
 
 typedef struct _GnomeAbout        GnomeAbout;
+typedef struct _GnomeAboutPrivate GnomeAboutPrivate;
 typedef struct _GnomeAboutClass   GnomeAboutClass;
 
 struct _GnomeAbout
 {
   GnomeDialog dialog;
+
+  /*< private >*/
+  GnomeAboutPrivate *_priv;
 };
 
 struct _GnomeAboutClass

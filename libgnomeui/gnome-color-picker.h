@@ -52,25 +52,15 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_COLOR_PICKER_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_COLOR_PICKER))
 
 
-typedef struct _GnomeColorPicker GnomeColorPicker;
-typedef struct _GnomeColorPickerClass GnomeColorPickerClass;
+typedef struct _GnomeColorPicker        GnomeColorPicker;
+typedef struct _GnomeColorPickerPrivate GnomeColorPickerPrivate;
+typedef struct _GnomeColorPickerClass   GnomeColorPickerClass;
 
 struct _GnomeColorPicker {
 	GtkButton button;
 
 	/*< private >*/
-	GdkPixbuf *pixbuf;	/* Pixbuf for rendering dithered sample */
-	GdkGC *gc;		/* GC for drawing */
-
-	GtkWidget *drawing_area;/* Drawing area for color sample */
-	GtkWidget *cs_dialog;	/* Color selection dialog */
-
-	gchar *title;		/* Title for the color selection window */
-
-	gdouble r, g, b, a;	/* Red, green, blue, and alpha values */
-
-	guint dither : 1;	/* Dither or just paint a solid color? */
-	guint use_alpha : 1;	/* Use alpha or not */
+	GnomeColorPickerPrivate *_priv;
 };
 
 struct _GnomeColorPickerClass {

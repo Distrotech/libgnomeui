@@ -41,6 +41,7 @@ BEGIN_GNOME_DECLS
 
 
 typedef struct _GnomeMessageBox        GnomeMessageBox;
+typedef struct _GnomeMessageBoxPrivate GnomeMessageBoxPrivate;
 typedef struct _GnomeMessageBoxClass   GnomeMessageBoxClass;
 typedef struct _GnomeMessageBoxButton  GnomeMessageBoxButton;
 
@@ -48,7 +49,7 @@ struct _GnomeMessageBox
 {
   GnomeDialog dialog;
   /*< private >*/
-  GtkWidget *label;
+  GnomeMessageBoxPrivate *_priv;
 };
 
 struct _GnomeMessageBoxClass

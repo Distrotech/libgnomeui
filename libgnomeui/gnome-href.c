@@ -120,11 +120,11 @@ static void gnome_href_class_init(GnomeHRefClass *klass) {
   parent_class = GTK_OBJECT_CLASS(gtk_type_class(gtk_button_get_type()));
 
   gtk_object_add_arg_type("GnomeHRef::url",
-			  GTK_TYPE_POINTER,
+			  GTK_TYPE_STRING,
 			  GTK_ARG_READWRITE,
 			  ARG_URL);
   gtk_object_add_arg_type("GnomeHRef::text",
-			  GTK_TYPE_POINTER,
+			  GTK_TYPE_STRING,
 			  GTK_ARG_READWRITE,
 			  ARG_TEXT);
 
@@ -388,14 +388,18 @@ static void gnome_href_destroy(GtkObject *object) {
 
   g_return_if_fail(object != NULL);
   g_return_if_fail(GNOME_IS_HREF(object));
+
   href = GNOME_HREF(object);
+
   g_free(href->_priv->url);
   href->_priv->url = NULL;
   href->_priv->label = NULL;
-  if (parent_class->destroy)
-    (* parent_class->destroy)(object);
+
   g_free(href->_priv);
   href->_priv = NULL;
+
+  if (parent_class->destroy)
+    (* parent_class->destroy)(object);
 }
 
 static void gnome_href_realize(GtkWidget *widget) {
@@ -419,10 +423,10 @@ gnome_href_set_arg (GtkObject *object,
 
 	switch (arg_id) {
 	case ARG_URL:
-		gnome_href_set_url(self, GTK_VALUE_POINTER(*arg));
+		gnome_href_set_url(self, GTK_VALUE_STRING(*arg));
 		break;
 	case ARG_TEXT:
-		gnome_href_set_text(self, GTK_VALUE_POINTER(*arg));
+		gnome_href_set_text(self, GTK_VALUE_STRING(*arg));
 		break;
 	default:
 		break;
@@ -440,12 +444,12 @@ gnome_href_get_arg (GtkObject *object,
 
 	switch (arg_id) {
 	case ARG_URL:
-		/* cast because return is just not const */
-		GTK_VALUE_POINTER(*arg) = (char *)gnome_href_get_url(self);
+		GTK_VALUE_STRING(*arg) =
+			g_strdup(gnome_href_get_url(self));
 		break;
 	case ARG_TEXT:
-		/* cast because return is just not const */
-		GTK_VALUE_POINTER(*arg) = (char *)gnome_href_get_text(self);
+		GTK_VALUE_STRING(*arg) =
+			g_strdup(gnome_href_get_text(self));
 		break;
 	default:
 		break;

@@ -140,11 +140,11 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 				     LAST_SIGNAL);
 
 	gtk_object_add_arg_type("GnomeFileEntry::history_id",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_WRITABLE,
 				ARG_HISTORY_ID);
 	gtk_object_add_arg_type("GnomeFileEntry::browse_dialog_title",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_WRITABLE,
 				ARG_BROWSE_DIALOG_TITLE);
 	gtk_object_add_arg_type("GnomeFileEntry::directory_entry",
@@ -156,11 +156,11 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 				GTK_ARG_READWRITE,
 				ARG_MODAL);
 	gtk_object_add_arg_type("GnomeFileEntry::filename",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_READWRITE,
 				ARG_FILENAME);
 	gtk_object_add_arg_type("GnomeFileEntry::default_path",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_WRITABLE,
 				ARG_FILENAME);
 	gtk_object_add_arg_type("GnomeFileEntry::gnome_entry",
@@ -204,13 +204,13 @@ fentry_set_arg (GtkObject *object,
 		gnome_file_entry_set_modal (self, GTK_VALUE_BOOL(*arg));
 		break;
 	case ARG_FILENAME:
-		gnome_file_entry_set_filename (self, GTK_VALUE_POINTER(*arg));
+		gnome_file_entry_set_filename (self, GTK_VALUE_STRING(*arg));
 		break;
 	case ARG_DEFAULT_PATH:
-		gnome_file_entry_set_default_path (self, GTK_VALUE_POINTER(*arg));
+		gnome_file_entry_set_default_path (self, GTK_VALUE_STRING(*arg));
 		break;
 	case ARG_BROWSE_DIALOG_TITLE:
-		gnome_file_entry_set_title (self, GTK_VALUE_POINTER(*arg));
+		gnome_file_entry_set_title (self, GTK_VALUE_STRING(*arg));
 		break;
 	default:
 		break;
@@ -238,7 +238,7 @@ fentry_get_arg (GtkObject *object,
 		GTK_VALUE_BOOL(*arg) = self->_priv->is_modal;
 		break;
 	case ARG_FILENAME:
-		GTK_VALUE_POINTER(*arg) =
+		GTK_VALUE_STRING(*arg) =
 			gnome_file_entry_get_full_path (self, FALSE);
 		break;
 	case ARG_GTK_ENTRY:

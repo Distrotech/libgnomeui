@@ -36,14 +36,18 @@
 #define GNOME_MESSAGE_BOX_WIDTH  425
 #define GNOME_MESSAGE_BOX_HEIGHT 125
 
+struct _GnomeMessageBoxPrivate {
+  GtkWidget *label;
+};
 
 static void gnome_message_box_class_init (GnomeMessageBoxClass *klass);
 static void gnome_message_box_init       (GnomeMessageBox      *messagebox);
+static void gnome_message_box_destroy    (GtkObject            *object);
 
 static GnomeDialogClass *parent_class;
 
 guint
-gnome_message_box_get_type ()
+gnome_message_box_get_type (void)
 {
 	static guint message_box_type = 0;
 
@@ -69,13 +73,30 @@ gnome_message_box_get_type ()
 static void
 gnome_message_box_class_init (GnomeMessageBoxClass *klass)
 {
+	GtkObjectClass *object_class;
+
+	object_class = (GtkObjectClass *)klass;
 	parent_class = gtk_type_class (gnome_dialog_get_type ());
+
+	object_class->destroy = gnome_message_box_destroy;
 }
 
 static void
 gnome_message_box_init (GnomeMessageBox *message_box)
 {
-  
+ 	message_box->_priv = g_new0(GnomeMessageBoxPrivate, 1); 
+}
+
+static void
+gnome_message_box_destroy(GtkObject *object)
+{
+	GnomeMessageBox *mbox = GNOME_MESSAGE_BOX(object);
+
+	g_free(mbox->_priv);
+	mbox->_priv = NULL;
+
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 static GtkWidget*
@@ -206,12 +227,12 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 		gtk_widget_show (pixmap);
 	}
 
-	messagebox->label = gtk_label_new (message);
-	gtk_label_set_justify (GTK_LABEL (messagebox->label), GTK_JUSTIFY_LEFT);
-        gtk_label_set_line_wrap (GTK_LABEL (messagebox->label), TRUE);
-	gtk_misc_set_padding (GTK_MISC (messagebox->label), GNOME_PAD, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), messagebox->label, TRUE, TRUE, 0);
-	gtk_widget_show (messagebox->label);
+	messagebox->_priv->label = gtk_label_new (message);
+	gtk_label_set_justify (GTK_LABEL (messagebox->_priv->label), GTK_JUSTIFY_LEFT);
+        gtk_label_set_line_wrap (GTK_LABEL (messagebox->_priv->label), TRUE);
+	gtk_misc_set_padding (GTK_MISC (messagebox->_priv->label), GNOME_PAD, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), messagebox->_priv->label, TRUE, TRUE, 0);
+	gtk_widget_show (messagebox->_priv->label);
 
 	/* Add some extra space on the right to balance the pixmap */
 	if (pixmap) {
@@ -334,5 +355,5 @@ gnome_message_box_get_label (GnomeMessageBox *messagebox)
 	g_return_val_if_fail (messagebox != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MESSAGE_BOX (messagebox), NULL);
 
-	return messagebox->label;
+	return messagebox->_priv->label;
 }

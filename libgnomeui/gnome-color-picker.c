@@ -50,6 +50,20 @@
 #define CHECK_DARK  (1.0 / 3.0)
 #define CHECK_LIGHT (2.0 / 3.0)
 
+struct _GnomeColorPickerPrivate {
+	GdkPixbuf *pixbuf;	/* Pixbuf for rendering dithered sample */
+	GdkGC *gc;		/* GC for drawing */
+
+	GtkWidget *drawing_area;/* Drawing area for color sample */
+	GtkWidget *cs_dialog;	/* Color selection dialog */
+
+	gchar *title;		/* Title for the color selection window */
+
+	gdouble r, g, b, a;	/* Red, green, blue, and alpha values */
+
+	guint dither : 1;	/* Dither or just paint a solid color? */
+	guint use_alpha : 1;	/* Use alpha or not */
+};
 
 enum {
 	ARG_0,
@@ -222,24 +236,24 @@ render_dither (GnomeColorPicker *cp)
 	insensitive_g = GTK_WIDGET(cp)->style->bg[GTK_STATE_INSENSITIVE].green >> 8;
 	insensitive_b = GTK_WIDGET(cp)->style->bg[GTK_STATE_INSENSITIVE].blue >> 8;
 
-	if (cp->use_alpha) {
-		dark_r = (int) ((CHECK_DARK + (cp->r - CHECK_DARK) * cp->a) * 255.0 + 0.5);
-		dark_g = (int) ((CHECK_DARK + (cp->g - CHECK_DARK) * cp->a) * 255.0 + 0.5);
-		dark_b = (int) ((CHECK_DARK + (cp->b - CHECK_DARK) * cp->a) * 255.0 + 0.5);
+	if (cp->_priv->use_alpha) {
+		dark_r = (int) ((CHECK_DARK + (cp->_priv->r - CHECK_DARK) * cp->_priv->a) * 255.0 + 0.5);
+		dark_g = (int) ((CHECK_DARK + (cp->_priv->g - CHECK_DARK) * cp->_priv->a) * 255.0 + 0.5);
+		dark_b = (int) ((CHECK_DARK + (cp->_priv->b - CHECK_DARK) * cp->_priv->a) * 255.0 + 0.5);
 
-		light_r = (int) ((CHECK_LIGHT + (cp->r - CHECK_LIGHT) * cp->a) * 255.0 + 0.5);
-		light_g = (int) ((CHECK_LIGHT + (cp->g - CHECK_LIGHT) * cp->a) * 255.0 + 0.5);
-		light_b = (int) ((CHECK_LIGHT + (cp->b - CHECK_LIGHT) * cp->a) * 255.0 + 0.5);
+		light_r = (int) ((CHECK_LIGHT + (cp->_priv->r - CHECK_LIGHT) * cp->_priv->a) * 255.0 + 0.5);
+		light_g = (int) ((CHECK_LIGHT + (cp->_priv->g - CHECK_LIGHT) * cp->_priv->a) * 255.0 + 0.5);
+		light_b = (int) ((CHECK_LIGHT + (cp->_priv->b - CHECK_LIGHT) * cp->_priv->a) * 255.0 + 0.5);
 	} else {
-		dark_r = light_r = (int) (cp->r * 255.0 + 0.5);
-		dark_g = light_g = (int) (cp->g * 255.0 + 0.5);
-		dark_b = light_b = (int) (cp->b * 255.0 + 0.5);
+		dark_r = light_r = (int) (cp->_priv->r * 255.0 + 0.5);
+		dark_g = light_g = (int) (cp->_priv->g * 255.0 + 0.5);
+		dark_b = light_b = (int) (cp->_priv->b * 255.0 + 0.5);
 	}
 
 	/* Fill image buffer */
 
-	pixels = gdk_pixbuf_get_pixels (cp->pixbuf);
-	rowstride = gdk_pixbuf_get_rowstride (cp->pixbuf);
+	pixels = gdk_pixbuf_get_pixels (cp->_priv->pixbuf);
+	rowstride = gdk_pixbuf_get_rowstride (cp->_priv->pixbuf);
 	for (j = 0; j < COLOR_PICKER_HEIGHT; j++) {
 		if ((j / CHECK_SIZE) & 1) {
 			c1[0] = dark_r;
@@ -275,10 +289,10 @@ render_dither (GnomeColorPicker *cp)
 			}
 		}
 	}
-	if (cp->drawing_area->window)
-		gdk_pixbuf_render_to_drawable (cp->pixbuf,
-					       cp->drawing_area->window,
-					       cp->gc,
+	if (cp->_priv->drawing_area->window)
+		gdk_pixbuf_render_to_drawable (cp->_priv->pixbuf,
+					       cp->_priv->drawing_area->window,
+					       cp->_priv->gc,
 					       0, 0, 0, 0,
 					       COLOR_PICKER_WIDTH,
 					       COLOR_PICKER_HEIGHT,
@@ -290,7 +304,7 @@ render_dither (GnomeColorPicker *cp)
 static void
 render (GnomeColorPicker *cp)
 {
-	if (cp->dither || cp->use_alpha)
+	if (cp->_priv->dither || cp->_priv->use_alpha)
 		render_dither (cp);
 	else {
 		gint i, j, rowstride;
@@ -299,8 +313,8 @@ render (GnomeColorPicker *cp)
 		guint8 insensitive_b = 0;
 		guchar *pixels;
 
-		pixels = gdk_pixbuf_get_pixels (cp->pixbuf);
-		rowstride = gdk_pixbuf_get_rowstride (cp->pixbuf);
+		pixels = gdk_pixbuf_get_pixels (cp->_priv->pixbuf);
+		rowstride = gdk_pixbuf_get_rowstride (cp->_priv->pixbuf);
 		insensitive_r = GTK_WIDGET (cp)->style->bg[GTK_STATE_INSENSITIVE].red >> 8;
 		insensitive_g = GTK_WIDGET (cp)->style->bg[GTK_STATE_INSENSITIVE].green >> 8;
 		insensitive_b = GTK_WIDGET (cp)->style->bg[GTK_STATE_INSENSITIVE].blue >> 8;
@@ -312,9 +326,9 @@ render (GnomeColorPicker *cp)
 					*(pixels + j * rowstride + i * 3 + 1) = insensitive_g;
 					*(pixels + j * rowstride + i * 3 + 2) = insensitive_b;
 				} else {
-					*(pixels + j * rowstride + i * 3) = cp->r * 255.0 + 0.5;
-					*(pixels + j * rowstride + i * 3 + 1) = cp->g * 255.0 + 0.5;
-					*(pixels + j * rowstride + i * 3 + 2) = cp->b * 255.0 + 0.5;
+					*(pixels + j * rowstride + i * 3) = cp->_priv->r * 255.0 + 0.5;
+					*(pixels + j * rowstride + i * 3 + 1) = cp->_priv->g * 255.0 + 0.5;
+					*(pixels + j * rowstride + i * 3 + 2) = cp->_priv->b * 255.0 + 0.5;
 				}
 			}
 		}
@@ -328,12 +342,12 @@ expose_event (GtkWidget *widget, GdkEventExpose *event, gpointer data)
 	GnomeColorPicker *cp;
 
 	cp = GNOME_COLOR_PICKER (data);
-	if (cp->gc == NULL)
-		cp->gc = gdk_gc_new (widget->window);
+	if (cp->_priv->gc == NULL)
+		cp->_priv->gc = gdk_gc_new (widget->window);
 
-	gdk_pixbuf_render_to_drawable (cp->pixbuf,
+	gdk_pixbuf_render_to_drawable (cp->_priv->pixbuf,
 				       widget->window,
-				       cp->gc,
+				       cp->_priv->gc,
 				       event->area.x,
 				       event->area.y,
 				       event->area.x,
@@ -431,6 +445,8 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	GtkWidget *frame;
 	/* Create the widgets */
 
+	cp->_priv = g_new0(GnomeColorPickerPrivate, 1);
+
 	alignment = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
 	gtk_container_set_border_width (GTK_CONTAINER (alignment), COLOR_PICKER_PAD);
 	gtk_container_add (GTK_CONTAINER (cp), alignment);
@@ -444,35 +460,35 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	gtk_widget_push_visual (gdk_rgb_get_visual ());
 	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 
-	cp->drawing_area = gtk_drawing_area_new ();
+	cp->_priv->drawing_area = gtk_drawing_area_new ();
 
-	gtk_drawing_area_size (GTK_DRAWING_AREA (cp->drawing_area), COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
-	gtk_signal_connect (GTK_OBJECT (cp->drawing_area), "expose_event",
+	gtk_drawing_area_size (GTK_DRAWING_AREA (cp->_priv->drawing_area), COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
+	gtk_signal_connect (GTK_OBJECT (cp->_priv->drawing_area), "expose_event",
 			    (GtkSignalFunc) expose_event,
 			    cp);
-	gtk_container_add (GTK_CONTAINER (frame), cp->drawing_area);
-	gtk_widget_show (cp->drawing_area);
+	gtk_container_add (GTK_CONTAINER (frame), cp->_priv->drawing_area);
+	gtk_widget_show (cp->_priv->drawing_area);
 
-	cp->title = g_strdup (_("Pick a color")); /* default title */
+	cp->_priv->title = g_strdup (_("Pick a color")); /* default title */
 
 	/* Create the buffer for the image so that we can create an imlib image.  Also create the
 	 * picker's pixmap.
 	 */
 
-	cp->pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
+	cp->_priv->pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
 
-	cp->gc = NULL;
+	cp->_priv->gc = NULL;
 	gtk_widget_pop_colormap ();
 	gtk_widget_pop_visual ();
 
 	/* Start with opaque black, dither on, alpha disabled */
 
-	cp->r = 0.0;
-	cp->g = 0.0;
-	cp->b = 0.0;
-	cp->a = 1.0;
-	cp->dither = TRUE;
-	cp->use_alpha = FALSE;
+	cp->_priv->r = 0.0;
+	cp->_priv->g = 0.0;
+	cp->_priv->b = 0.0;
+	cp->_priv->a = 1.0;
+	cp->_priv->dither = TRUE;
+	cp->_priv->use_alpha = FALSE;
 
 	gtk_drag_dest_set (GTK_WIDGET (cp),
 			   GTK_DEST_DEFAULT_MOTION |
@@ -501,14 +517,20 @@ gnome_color_picker_destroy (GtkObject *object)
 
 	cp = GNOME_COLOR_PICKER (object);
 
-	gdk_pixbuf_unref (cp->pixbuf);
-	gdk_gc_destroy (cp->gc);
+	gdk_pixbuf_unref (cp->_priv->pixbuf);
+	cp->_priv->pixbuf = NULL;
+	gdk_gc_destroy (cp->_priv->gc);
+	cp->_priv->gc = NULL;
 
-	if (cp->cs_dialog)
-		gtk_widget_destroy (cp->cs_dialog);
+	if (cp->_priv->cs_dialog)
+		gtk_widget_destroy (cp->_priv->cs_dialog);
+	cp->_priv->cs_dialog = NULL;
 
-	if (cp->title)
-		g_free (cp->title);
+	g_free (cp->_priv->title);
+	cp->_priv->title = NULL;
+
+	g_free (cp->_priv);
+	cp->_priv = NULL;
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -541,7 +563,7 @@ cs_destroy (GtkWidget *widget, gpointer data)
 
 	cp = GNOME_COLOR_PICKER (data);
 
-	cp->cs_dialog = NULL;
+	cp->_priv->cs_dialog = NULL;
 
 	return FALSE;
 }
@@ -556,17 +578,17 @@ cs_ok_clicked (GtkWidget *widget, gpointer data)
 
 	cp = GNOME_COLOR_PICKER (data);
 
-	gtk_color_selection_get_color (GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog)->colorsel),
+	gtk_color_selection_get_color (GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (cp->_priv->cs_dialog)->colorsel),
 				       color);
-	gtk_widget_destroy (cp->cs_dialog);
+	gtk_widget_destroy (cp->_priv->cs_dialog);
 
-	cp->r = color[0];
-	cp->g = color[1];
-	cp->b = color[2];
-	cp->a = cp->use_alpha ? color[3] : 1.0;
+	cp->_priv->r = color[0];
+	cp->_priv->g = color[1];
+	cp->_priv->b = color[2];
+	cp->_priv->a = cp->_priv->use_alpha ? color[3] : 1.0;
 
 	render (cp);
-	gtk_widget_draw (cp->drawing_area, NULL);
+	gtk_widget_draw (cp->_priv->drawing_area, NULL);
 
 	/* Notify the world that the color was set */
 
@@ -598,29 +620,29 @@ gnome_color_picker_clicked (GtkButton *button)
 	cp = GNOME_COLOR_PICKER (button);
 
 	/*if dialog already exists, make sure it's shown and raised*/
-	if(cp->cs_dialog) {
-		csd = GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog);
-		gtk_widget_show (cp->cs_dialog);
-		if (cp->cs_dialog->window)
-			gdk_window_raise(cp->cs_dialog->window);
+	if(cp->_priv->cs_dialog) {
+		csd = GTK_COLOR_SELECTION_DIALOG (cp->_priv->cs_dialog);
+		gtk_widget_show (cp->_priv->cs_dialog);
+		if (cp->_priv->cs_dialog->window)
+			gdk_window_raise(cp->_priv->cs_dialog->window);
 	} else {
 		/* Create the dialog and connects its buttons */
                 GtkWidget *parent;
 
                 parent = gtk_widget_get_toplevel(GTK_WIDGET(cp));
                 
-		cp->cs_dialog = gtk_color_selection_dialog_new (cp->title);
+		cp->_priv->cs_dialog = gtk_color_selection_dialog_new (cp->_priv->title);
 
                 if (parent)
-                        gtk_window_set_transient_for(GTK_WINDOW(cp->cs_dialog),
+                        gtk_window_set_transient_for(GTK_WINDOW(cp->_priv->cs_dialog),
                                                      GTK_WINDOW(parent));
                 
-		csd = GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog);
-		gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "destroy",
+		csd = GTK_COLOR_SELECTION_DIALOG (cp->_priv->cs_dialog);
+		gtk_signal_connect (GTK_OBJECT (cp->_priv->cs_dialog), "destroy",
 				    (GtkSignalFunc) cs_destroy,
 				    cp);
 
-		gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "key_press_event",
+		gtk_signal_connect (GTK_OBJECT (cp->_priv->cs_dialog), "key_press_event",
 				    (GtkSignalFunc) key_pressed, cp);
 		gtk_signal_connect (GTK_OBJECT (csd->ok_button), "clicked",
 				    (GtkSignalFunc) cs_ok_clicked,
@@ -628,28 +650,28 @@ gnome_color_picker_clicked (GtkButton *button)
 
 		gtk_signal_connect_object (GTK_OBJECT (csd->cancel_button), "clicked",
 					   (GtkSignalFunc) gtk_widget_destroy,
-					   GTK_OBJECT(cp->cs_dialog));
+					   GTK_OBJECT(cp->_priv->cs_dialog));
 
 		/* FIXME: do something about the help button */
 
-		gtk_window_set_position (GTK_WINDOW (cp->cs_dialog), GTK_WIN_POS_MOUSE);
+		gtk_window_set_position (GTK_WINDOW (cp->_priv->cs_dialog), GTK_WIN_POS_MOUSE);
 
 		/* If there is a grabed window, set new dialog as modal */
 		if (gtk_grab_get_current())
-			gtk_window_set_modal(GTK_WINDOW(cp->cs_dialog),TRUE);
+			gtk_window_set_modal(GTK_WINDOW(cp->_priv->cs_dialog),TRUE);
 	}
-	gtk_color_selection_set_opacity (GTK_COLOR_SELECTION (csd->colorsel), cp->use_alpha);
+	gtk_color_selection_set_opacity (GTK_COLOR_SELECTION (csd->colorsel), cp->_priv->use_alpha);
 
-	color[0] = cp->r;
-	color[1] = cp->g;
-	color[2] = cp->b;
-	color[3] = cp->use_alpha ? cp->a : 1.0;
+	color[0] = cp->_priv->r;
+	color[1] = cp->_priv->g;
+	color[2] = cp->_priv->b;
+	color[3] = cp->_priv->use_alpha ? cp->_priv->a : 1.0;
 
 	/* Hack: we set the color twice so that GtkColorSelection will remember its history */
 	gtk_color_selection_set_color (GTK_COLOR_SELECTION (csd->colorsel), color);
 	gtk_color_selection_set_color (GTK_COLOR_SELECTION (csd->colorsel), color);
 
-	gtk_widget_show (cp->cs_dialog);
+	gtk_widget_show (cp->_priv->cs_dialog);
 }
 
 
@@ -675,13 +697,13 @@ gnome_color_picker_set_d (GnomeColorPicker *cp, gdouble r, gdouble g, gdouble b,
 	g_return_if_fail ((b >=	0.0) && (b <= 1.0));
 	g_return_if_fail ((a >=	0.0) && (a <= 1.0));
 
-	cp->r = r;
-	cp->g = g;
-	cp->b = b;
-	cp->a = a;
+	cp->_priv->r = r;
+	cp->_priv->g = g;
+	cp->_priv->b = b;
+	cp->_priv->a = a;
 
 	render (cp);
-	gtk_widget_draw (cp->drawing_area, NULL);
+	gtk_widget_draw (cp->_priv->drawing_area, NULL);
 }
 
 
@@ -704,16 +726,16 @@ gnome_color_picker_get_d (GnomeColorPicker *cp, gdouble *r, gdouble *g, gdouble 
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 
 	if (r)
-		*r = cp->r;
+		*r = cp->_priv->r;
 
 	if (g)
-		*g = cp->g;
+		*g = cp->_priv->g;
 
 	if (b)
-		*b = cp->b;
+		*b = cp->_priv->b;
 
 	if (a)
-		*a = cp->a;
+		*a = cp->_priv->a;
 }
 
 
@@ -736,13 +758,13 @@ gnome_color_picker_set_i8 (GnomeColorPicker *cp, guint8 r, guint8 g, guint8 b, g
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 	/* Don't check range of r,g,b,a since it's a 8 bit unsigned type. */
 
-	cp->r = r / 255.0;
-	cp->g = g / 255.0;
-	cp->b = b / 255.0;
-	cp->a = a / 255.0;
+	cp->_priv->r = r / 255.0;
+	cp->_priv->g = g / 255.0;
+	cp->_priv->b = b / 255.0;
+	cp->_priv->a = a / 255.0;
 
 	render (cp);
-	gtk_widget_draw (cp->drawing_area, NULL);
+	gtk_widget_draw (cp->_priv->drawing_area, NULL);
 }
 
 
@@ -765,16 +787,16 @@ gnome_color_picker_get_i8 (GnomeColorPicker *cp, guint8 *r, guint8 *g, guint8 *b
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 
 	if (r)
-		*r = (guint8) (cp->r * 255.0 + 0.5);
+		*r = (guint8) (cp->_priv->r * 255.0 + 0.5);
 
 	if (g)
-		*g = (guint8) (cp->g * 255.0 + 0.5);
+		*g = (guint8) (cp->_priv->g * 255.0 + 0.5);
 
 	if (b)
-		*b = (guint8) (cp->b * 255.0 + 0.5);
+		*b = (guint8) (cp->_priv->b * 255.0 + 0.5);
 
 	if (a)
-		*a = (guint8) (cp->a * 255.0 + 0.5);
+		*a = (guint8) (cp->_priv->a * 255.0 + 0.5);
 }
 
 
@@ -797,13 +819,13 @@ gnome_color_picker_set_i16 (GnomeColorPicker *cp, gushort r, gushort g, gushort 
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 	/* Don't check range of r,g,b,a since it's a 16 bit unsigned type. */
 
-	cp->r = r / 65535.0;
-	cp->g = g / 65535.0;
-	cp->b = b / 65535.0;
-	cp->a = a / 65535.0;
+	cp->_priv->r = r / 65535.0;
+	cp->_priv->g = g / 65535.0;
+	cp->_priv->b = b / 65535.0;
+	cp->_priv->a = a / 65535.0;
 
 	render (cp);
-	gtk_widget_draw (cp->drawing_area, NULL);
+	gtk_widget_draw (cp->_priv->drawing_area, NULL);
 }
 
 
@@ -826,16 +848,16 @@ gnome_color_picker_get_i16 (GnomeColorPicker *cp, gushort *r, gushort *g, gushor
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 
 	if (r)
-		*r = (gushort) (cp->r * 65535.0 + 0.5);
+		*r = (gushort) (cp->_priv->r * 65535.0 + 0.5);
 
 	if (g)
-		*g = (gushort) (cp->g * 65535.0 + 0.5);
+		*g = (gushort) (cp->_priv->g * 65535.0 + 0.5);
 
 	if (b)
-		*b = (gushort) (cp->b * 65535.0 + 0.5);
+		*b = (gushort) (cp->_priv->b * 65535.0 + 0.5);
 
 	if (a)
-		*a = (gushort) (cp->a * 65535.0 + 0.5);
+		*a = (gushort) (cp->_priv->a * 65535.0 + 0.5);
 }
 
 
@@ -855,10 +877,10 @@ gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither)
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 
-	cp->dither = dither ? TRUE : FALSE;
+	cp->_priv->dither = dither ? TRUE : FALSE;
 
 	render (cp);
-	gtk_widget_draw (cp->drawing_area, NULL);
+	gtk_widget_draw (cp->_priv->drawing_area, NULL);
 }
 
 
@@ -879,7 +901,7 @@ gnome_color_picker_get_dither (GnomeColorPicker *cp)
 	g_return_val_if_fail (cp != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_COLOR_PICKER (cp), FALSE);
 
-	return cp->dither ? TRUE : FALSE;
+	return cp->_priv->dither ? TRUE : FALSE;
 }
 
 
@@ -898,10 +920,10 @@ gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha)
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 
-	cp->use_alpha = use_alpha ? TRUE : FALSE;
+	cp->_priv->use_alpha = use_alpha ? TRUE : FALSE;
 
 	render (cp);
-	gtk_widget_draw (cp->drawing_area, NULL);
+	gtk_widget_draw (cp->_priv->drawing_area, NULL);
 }
 
 /**
@@ -919,7 +941,7 @@ gnome_color_picker_get_use_alpha (GnomeColorPicker *cp)
 	g_return_val_if_fail (cp != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_COLOR_PICKER (cp), FALSE);
 
-	return cp->use_alpha ? TRUE : FALSE;
+	return cp->_priv->use_alpha ? TRUE : FALSE;
 }
 
 
@@ -939,13 +961,11 @@ gnome_color_picker_set_title (GnomeColorPicker *cp, const gchar *title)
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 	g_return_if_fail (title != NULL);
 
-	if (cp->title)
-		g_free (cp->title);
+	g_free (cp->_priv->title);
+	cp->_priv->title = g_strdup (title);
 
-	cp->title = g_strdup (title);
-
-	if (cp->cs_dialog)
-		gtk_window_set_title (GTK_WINDOW (cp->cs_dialog), cp->title);
+	if (cp->_priv->cs_dialog)
+		gtk_window_set_title (GTK_WINDOW (cp->_priv->cs_dialog), cp->_priv->title);
 }
 
 /**
@@ -964,7 +984,7 @@ gnome_color_picker_get_title (GnomeColorPicker *cp)
 	g_return_val_if_fail (cp != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_COLOR_PICKER (cp), NULL);
 
-	return cp->title;
+	return cp->_priv->title;
 }
 
 static void
@@ -999,7 +1019,7 @@ gnome_color_picker_set_arg (GtkObject *object,
 		gnome_color_picker_set_use_alpha(self, GTK_VALUE_BOOL(*arg));
 		break;
 	case ARG_TITLE:
-		gnome_color_picker_set_title(self, GTK_VALUE_POINTER(*arg));
+		gnome_color_picker_set_title(self, GTK_VALUE_STRING(*arg));
 		break;
 	case ARG_RED:
 		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
@@ -1044,8 +1064,7 @@ gnome_color_picker_get_arg (GtkObject *object,
 		GTK_VALUE_BOOL(*arg) = gnome_color_picker_get_use_alpha(self);
 		break;
 	case ARG_TITLE:
-		GTK_VALUE_POINTER(*arg) =
-			(char *)gnome_color_picker_get_title(self);
+		GTK_VALUE_STRING(*arg) = g_strdup(self->_priv->title);
 		break;
 	case ARG_RED:
 		gnome_color_picker_get_i16(self, &val, NULL, NULL, NULL);

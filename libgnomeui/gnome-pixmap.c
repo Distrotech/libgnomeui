@@ -170,7 +170,7 @@ gnome_pixmap_class_init (GnomePixmapClass *class)
 				GTK_ARG_READWRITE,
 				ARG_PIXBUF_HEIGHT);
 	gtk_object_add_arg_type("GnomePixmap::file",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_WRITABLE,
 				ARG_FILE);
 	gtk_object_add_arg_type("GnomePixmap::xpm_d",
@@ -215,7 +215,7 @@ gnome_pixmap_set_arg (GtkObject *object,
 		break;
 	case ARG_FILE: {
 		GdkPixbuf *pixbuf;
-		pixbuf = gdk_pixbuf_new_from_file (GTK_VALUE_POINTER (*arg));
+		pixbuf = gdk_pixbuf_new_from_file (GTK_VALUE_STRING (*arg));
 		if (pixbuf != NULL) {
 			gnome_pixmap_set_pixbuf (self, pixbuf);
 			gdk_pixbuf_unref (pixbuf);

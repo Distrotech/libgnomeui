@@ -132,11 +132,11 @@ gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
 	gtk_object_add_arg_type("GnomePixmapEntry::history_id",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_WRITABLE,
 				ARG_HISTORY_ID);
 	gtk_object_add_arg_type("GnomePixmapEntry::browse_dialog_title",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_WRITABLE,
 				ARG_BROWSE_DIALOG_TITLE);
 	gtk_object_add_arg_type("GnomePixmapEntry::do_preview",
@@ -178,13 +178,13 @@ pentry_set_arg (GtkObject *object,
 		fentry = GNOME_FILE_ENTRY(self->_priv->fentry);
 		gentry = gnome_file_entry_gnome_entry(fentry);
 		gnome_entry_set_history_id (GNOME_ENTRY(gentry),
-					    GTK_VALUE_POINTER(*arg));
+					    GTK_VALUE_STRING(*arg));
 		gnome_entry_load_history (GNOME_ENTRY(gentry));
 		break;
 	}
 	case ARG_BROWSE_DIALOG_TITLE:
 		gnome_file_entry_set_title (GNOME_FILE_ENTRY(self->_priv->fentry),
-					    GTK_VALUE_POINTER(*arg));
+					    GTK_VALUE_STRING(*arg));
 		break;
 	case ARG_DO_PREVIEW:
 		gnome_pixmap_entry_set_preview(self, GTK_VALUE_BOOL(*arg));

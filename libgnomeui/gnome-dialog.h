@@ -41,6 +41,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DIALOG))
 
 typedef struct _GnomeDialog        GnomeDialog;
+typedef struct _GnomeDialogPrivate GnomeDialogPrivate;
 typedef struct _GnomeDialogClass   GnomeDialogClass;
 
 /* The vbox can be accessed directly; if you fool with anything else,
@@ -51,6 +52,7 @@ struct _GnomeDialog
   /*< public >*/
   GtkWidget * vbox;
   /*< private >*/
+  GnomeDialogPrivate *_priv;
   GtkWidget * action_area; /* A button box, not an hbox */
 
   GList *buttons;

@@ -1,3 +1,25 @@
+Sun Jun 25 23:50:22 2000  George Lebl <jirka@5z.com>
+
+	* gnome-about.[ch]: Add a private structure.  This widget still needs
+	  to be cleaned up
+
+	* gnome-app.c: dup the app id string in the GtkArg get
+
+	* gnome-color-picker.[ch]: Use a private structure for privates. 
+	  Dup the title string on GtkArg get
+
+	* gnome-dialog.[ch]: Use a private structure for privates.
+
+	* gnome-pixmap-entry.c, gnome-file-entry.c, gnome-pixmap.c:
+	  use GTK_TYPE_STRING for string arguments
+
+	* gnome-href.[ch]: dup string on argument get
+
+	* gnome-icon-entry.c: make history_id and browse_dialog_title
+	  readable arguments and use GTK_TYPE_STRING
+
+	* gnome-messagebox.[ch]: use a private structure for privates
+
 Sun Jun 25 18:15:36 2000  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.[ch]: put privates into a private structure.  Add

@@ -108,8 +108,17 @@ typedef struct
 		*font_comments;
 } GnomeAboutInfo;
 
+struct _GnomeAboutPrivate {
+	/*FIXME: the GnomeAboutInfo thing is incredibly ugly, move those fields here
+	 * and make the parameters settable, etc.. */
+	GnomeAboutInfo *ai;
+};
+
+static GnomeDialogClass *parent_class = NULL;
+
 static void gnome_about_class_init (GnomeAboutClass *klass);
 static void gnome_about_init       (GnomeAbout      *about);
+static void gnome_about_destroy    (GtkObject       *object);
 
 static void gnome_about_calc_size (GnomeAboutInfo *ai);
 
@@ -137,7 +146,7 @@ static void gnome_about_fill_options (GtkWidget *widget,
  **/
 
 guint
-gnome_about_get_type ()
+gnome_about_get_type (void)
 {
 	static guint about_type = 0;
 
@@ -163,11 +172,21 @@ gnome_about_get_type ()
 static void
 gnome_about_class_init (GnomeAboutClass *klass)
 {
+	GtkObjectClass *object_class;
+
+	object_class = (GtkObjectClass *) klass;
+	parent_class = gtk_type_class (gnome_dialog_get_type ());
+
+	object_class->destroy = gnome_about_destroy;
 }
 
 static void
 gnome_about_init (GnomeAbout *about)
 {
+	about->_priv = NULL;
+	/* enable when privates are added
+	 * about->_priv = g_new0(GnomeAboutPrivate, 1);
+	 */
 }
 
 
@@ -849,41 +868,46 @@ static void gnome_about_fill_options (GtkWidget *widget,
 }
 
 /* ----------------------------------------------------------------------
-   NAME:	gnome_destroy_about
+   NAME:	gnome_about_destroy
    DESCRIPTION:	
    ---------------------------------------------------------------------- */
 
 static void
-gnome_destroy_about (GtkWidget *widget, gpointer *data)
+gnome_about_destroy (GtkObject *object)
 {
-	GnomeAboutInfo *ai;
-
-	ai = (GnomeAboutInfo *)data;
+	GnomeAbout *self = GNOME_ABOUT(object);
 
 	/* Free memory used for title, copyright and comments */
-	g_free (ai->title);
-	g_free (ai->copyright);
-	g_free (ai->comments);
+	g_free (self->_priv->ai->title);
+	g_free (self->_priv->ai->copyright);
+	g_free (self->_priv->ai->comments);
 
 	/* Free GUI's. */
-	gdk_font_unref (ai->font_title);
-	gdk_font_unref (ai->font_copyright);
-	gdk_font_unref (ai->font_author);
-	gdk_font_unref (ai->font_names);
-	gdk_font_unref (ai->font_comments);
+	gdk_font_unref (self->_priv->ai->font_title);
+	gdk_font_unref (self->_priv->ai->font_copyright);
+	gdk_font_unref (self->_priv->ai->font_author);
+	gdk_font_unref (self->_priv->ai->font_names);
+	gdk_font_unref (self->_priv->ai->font_comments);
 
 	/* Free colors */
-	gdk_color_free (ai->title_fg);
-	gdk_color_free (ai->title_bg);
-	gdk_color_free (ai->contents_fg);
-	gdk_color_free (ai->contents_bg);
+	gdk_color_free (self->_priv->ai->title_fg);
+	gdk_color_free (self->_priv->ai->title_bg);
+	gdk_color_free (self->_priv->ai->contents_fg);
+	gdk_color_free (self->_priv->ai->contents_bg);
 	
 
 	/* Free memory used for authors */
-	g_list_foreach (ai->names, (GFunc) g_free, NULL);
-	g_list_free (ai->names);
+	g_list_foreach (self->_priv->ai->names, (GFunc) g_free, NULL);
+	g_list_free (self->_priv->ai->names);
 
-	g_free (ai);
+	g_free (self->_priv->ai);
+	self->_priv->ai = NULL;
+
+	g_free (self->_priv);
+	self->_priv = NULL;
+
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 /**
@@ -1012,7 +1036,6 @@ gnome_about_construct (GnomeAbout *about,
 		       const gchar *comments,
 		       const gchar *logo)
 {
-	GnomeAboutInfo *ai;
 	GtkWidget *frame;
 	GtkWidget *canvas;
 
@@ -1039,23 +1062,20 @@ gnome_about_construct (GnomeAbout *about,
 	gtk_container_add (GTK_CONTAINER(frame), canvas);
 
 	/* Fill the GnomeAboutInfo */
-	ai = gnome_about_fill_info (canvas,
-				    title, version, url,
-				    copyright,
-				    authors, author_urls,
-				    comments,
-				    logo);
-	gnome_about_draw (GNOME_CANVAS(canvas), ai);
+	about->_priv->ai =
+		gnome_about_fill_info (canvas,
+				       title, version, url,
+				       copyright,
+				       authors, author_urls,
+				       comments,
+				       logo);
+	gnome_about_draw (GNOME_CANVAS(canvas), about->_priv->ai);
 	gtk_widget_show (canvas);
-
-	gtk_signal_connect (GTK_OBJECT(about),"destroy",
-			    GTK_SIGNAL_FUNC(gnome_destroy_about),ai);
 
 	gnome_dialog_append_button (GNOME_DIALOG (about),
 				    GNOME_STOCK_BUTTON_OK);
 
-	gnome_dialog_set_close( GNOME_DIALOG(about),
-				TRUE );
+	gnome_dialog_set_close (GNOME_DIALOG(about), TRUE);
 }
 
 static gint

@@ -174,19 +174,19 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	object_class->destroy = ientry_destroy;
 
 	gtk_object_add_arg_type("GnomeIconEntry::history_id",
-				GTK_TYPE_POINTER,
-				GTK_ARG_WRITABLE,
+				GTK_TYPE_STRING,
+				GTK_ARG_READWRITE,
 				ARG_HISTORY_ID);
 	gtk_object_add_arg_type("GnomeIconEntry::browse_dialog_title",
-				GTK_TYPE_POINTER,
-				GTK_ARG_WRITABLE,
+				GTK_TYPE_STRING,
+				GTK_ARG_READWRITE,
 				ARG_BROWSE_DIALOG_TITLE);
 	gtk_object_add_arg_type("GnomeIconEntry::pixmap_subdir",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_WRITABLE,
 				ARG_PIXMAP_SUBDIR);
 	gtk_object_add_arg_type("GnomeIconEntry::filename",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_STRING,
 				GTK_ARG_READWRITE,
 				ARG_FILENAME);
 	gtk_object_add_arg_type("GnomeIconEntry::pick_dialog",
@@ -209,18 +209,18 @@ ientry_set_arg (GtkObject *object,
 
 	switch (arg_id) {
 	case ARG_HISTORY_ID:
-		gnome_icon_entry_set_history_id(self, GTK_VALUE_POINTER(*arg));
+		gnome_icon_entry_set_history_id(self, GTK_VALUE_STRING(*arg));
 		break;
 	case ARG_BROWSE_DIALOG_TITLE:
 		gnome_icon_entry_set_browse_dialog_title
-			(self, GTK_VALUE_POINTER(*arg));
+			(self, GTK_VALUE_STRING(*arg));
 		break;
 	case ARG_PIXMAP_SUBDIR:
 		gnome_icon_entry_set_pixmap_subdir(self,
-						   GTK_VALUE_POINTER(*arg));
+						   GTK_VALUE_STRING(*arg));
 		break;
 	case ARG_FILENAME:
-		gnome_icon_entry_set_filename(self, GTK_VALUE_POINTER(*arg));
+		gnome_icon_entry_set_filename(self, GTK_VALUE_STRING(*arg));
 		break;
 	default:
 		break;
@@ -237,8 +237,14 @@ ientry_get_arg (GtkObject *object,
 	self = GNOME_ICON_ENTRY (object);
 
 	switch (arg_id) {
+	case ARG_HISTORY_ID:
+		GTK_VALUE_STRING(*arg) = g_strdup(self->_priv->history_id);
+		break;
+	case ARG_BROWSE_DIALOG_TITLE:
+		GTK_VALUE_STRING(*arg) = g_strdup(self->_priv->browse_dialog_title);
+		break;
 	case ARG_FILENAME:
-		GTK_VALUE_POINTER(*arg) = gnome_icon_entry_get_filename(self);
+		GTK_VALUE_STRING(*arg) = gnome_icon_entry_get_filename(self);
 		break;
 	case ARG_PICK_DIALOG:
 		GTK_VALUE_POINTER(*arg) = gnome_icon_entry_pick_dialog(self);
@@ -951,7 +957,7 @@ gnome_icon_entry_get_filename(GnomeIconEntry *ientry)
 	child = GTK_BIN(ientry->_priv->pickbutton)->child;
 	
 	/* this happens if it doesn't exist or isn't an image */
-	if(!GNOME_IS_PIXMAP(child))
+	if( ! GNOME_IS_PIXMAP(child))
 		return NULL;
 	
 	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),
