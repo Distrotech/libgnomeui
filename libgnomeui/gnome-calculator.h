@@ -6,7 +6,6 @@
 #ifndef GNOME_CALCULATOR_H
 #define GNOME_CALCULATOR_H
 
-
 #include <gdk/gdk.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkfeatures.h>

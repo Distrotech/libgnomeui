@@ -3,7 +3,7 @@
  * Author: George Lebl <jirka@5z.com>
  */
 
-#include <config.h>
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
