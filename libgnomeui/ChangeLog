@@ -1,5 +1,9 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* gnome-ditem.c: Use BonoboWindow, not GnomeApp.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	Temporarily remove GnomeMDI from the build so that we can
 	get rid of gnome-app.[ch] and gnome-app-helper.[ch].
 
