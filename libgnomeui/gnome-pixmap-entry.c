@@ -317,7 +317,7 @@ setup_preview(GtkWidget *widget)
 }
 
 static void
-pentry_destroy(GtkObject *object)
+pentry_destroy (GtkObject *object)
 {
 	GnomePixmapEntry *pentry;
 
@@ -326,34 +326,30 @@ pentry_destroy(GtkObject *object)
 
 	/* remember, destroy can be run multiple times! */
 
-	pentry = GNOME_PIXMAP_ENTRY(object);
+	pentry = GNOME_PIXMAP_ENTRY (object);
 
-	g_free(pentry->_priv->last_preview);
-	pentry->_priv->last_preview = NULL;
+	changed_pentries = g_slist_remove (changed_pentries, pentry);
 
-	changed_pentries = g_slist_remove(changed_pentries, pentry);
-
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
-
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
-pentry_finalize(GObject *object)
+pentry_finalize (GObject *object)
 {
 	GnomePixmapEntry *pentry;
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (object));
 
-	pentry = GNOME_PIXMAP_ENTRY(object);
+	pentry = GNOME_PIXMAP_ENTRY (object);
 
-	g_free(pentry->_priv);
+	g_free (pentry->_priv->last_preview);
+	pentry->_priv->last_preview = NULL;
+
+	g_free (pentry->_priv);
 	pentry->_priv = NULL;
 
-	if(G_OBJECT_CLASS(parent_class)->finalize)
-		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
-
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void

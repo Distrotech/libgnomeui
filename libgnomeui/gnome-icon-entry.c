@@ -389,7 +389,7 @@ setup_preview(GtkWidget *widget)
 }
 
 static void
-ientry_destroy(GtkObject *object)
+ientry_destroy (GtkObject *object)
 {
 	GnomeIconEntry *ientry;
 
@@ -398,32 +398,21 @@ ientry_destroy(GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (object));
 
-	ientry = GNOME_ICON_ENTRY(object);
+	ientry = GNOME_ICON_ENTRY (object);
 
-	if(ientry->_priv->fentry)
+	if (ientry->_priv->fentry != NULL)
 		gtk_widget_unref (ientry->_priv->fentry);
 	ientry->_priv->fentry = NULL;
 
-	if(ientry->_priv->pick_dialog)
-		gtk_widget_destroy(ientry->_priv->pick_dialog);
+	if (ientry->_priv->pick_dialog != NULL)
+		gtk_widget_destroy (ientry->_priv->pick_dialog);
 	ientry->_priv->pick_dialog = NULL;
 
-	g_free(ientry->_priv->pick_dialog_dir);
-	ientry->_priv->pick_dialog_dir = NULL;
-
-	g_free(ientry->_priv->history_id);
-	ientry->_priv->history_id = NULL;
-
-	g_free(ientry->_priv->browse_dialog_title);
-	ientry->_priv->browse_dialog_title = NULL;
-
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
-
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
-ientry_finalize(GObject *object)
+ientry_finalize (GObject *object)
 {
 	GnomeIconEntry *ientry;
 
@@ -432,12 +421,19 @@ ientry_finalize(GObject *object)
 
 	ientry = GNOME_ICON_ENTRY(object);
 
-	g_free(ientry->_priv);
+	g_free (ientry->_priv->pick_dialog_dir);
+	ientry->_priv->pick_dialog_dir = NULL;
+
+	g_free (ientry->_priv->history_id);
+	ientry->_priv->history_id = NULL;
+
+	g_free (ientry->_priv->browse_dialog_title);
+	ientry->_priv->browse_dialog_title = NULL;
+
+	g_free (ientry->_priv);
 	ientry->_priv = NULL;
 
-	if(G_OBJECT_CLASS(parent_class)->finalize)
-		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
-
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void

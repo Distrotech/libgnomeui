@@ -382,22 +382,19 @@ gnome_href_clicked (GtkButton *button)
 }
 
 static void
-gnome_href_destroy(GtkObject *object)
+gnome_href_destroy (GtkObject *object)
 {
 	GnomeHRef *href;
 
 	/* remember, destroy can be run multiple times! */
 
-	g_return_if_fail(object != NULL);
-	g_return_if_fail(GNOME_IS_HREF(object));
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_HREF(object));
 
-	href = GNOME_HREF(object);
+	href = GNOME_HREF (object);
 
-	g_free(href->_priv->url);
-	href->_priv->url = NULL;
-
-	if(href->_priv->label) {
-		gtk_widget_unref(href->_priv->label);
+	if (href->_priv->label != NULL) {
+		gtk_widget_unref (href->_priv->label);
 		href->_priv->label = NULL;
 	}
 
@@ -405,16 +402,19 @@ gnome_href_destroy(GtkObject *object)
 }
 
 static void
-gnome_href_finalize(GObject *object)
+gnome_href_finalize (GObject *object)
 {
 	GnomeHRef *href;
 
-	g_return_if_fail(object != NULL);
-	g_return_if_fail(GNOME_IS_HREF(object));
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_HREF(object));
 
-	href = GNOME_HREF(object);
+	href = GNOME_HREF (object);
 
-	g_free(href->_priv);
+	g_free (href->_priv->url);
+	href->_priv->url = NULL;
+
+	g_free (href->_priv);
 	href->_priv = NULL;
 
 	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));

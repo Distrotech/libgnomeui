@@ -57,7 +57,6 @@ struct _GnomeIconSelectionPrivate {
 static void gnome_icon_selection_class_init (GnomeIconSelectionClass *klass);
 static void gnome_icon_selection_instance_init (GnomeIconSelection   *gis);
 
-static void gnome_icon_selection_destroy    (GtkObject               *object);
 static void gnome_icon_selection_finalize   (GObject                 *object);
 
 static int sort_file_list		    (gconstpointer            a,
@@ -69,13 +68,10 @@ GNOME_CLASS_BOILERPLATE (GnomeIconSelection, gnome_icon_selection,
 static void
 gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 {
-  GtkObjectClass *object_class;
   GObjectClass *gobject_class;
 
-  object_class = (GtkObjectClass*) klass;
   gobject_class = (GObjectClass*) klass;
 
-  object_class->destroy = gnome_icon_selection_destroy;
   gobject_class->finalize = gnome_icon_selection_finalize;
 }
 
@@ -141,28 +137,6 @@ gnome_icon_selection_new (void)
 }
 
 static void
-gnome_icon_selection_destroy (GtkObject *object)
-{
-	GnomeIconSelection *gis;
-
-	g_return_if_fail(object != NULL);
-	g_return_if_fail(GNOME_IS_ICON_SELECTION(object));
-
-	/* remember, destroy can be run multiple times! */
-	
-	gis = GNOME_ICON_SELECTION(object);
-
-	/*clear our data if we have some*/
-	if(gis->_priv->file_list) {
-		g_list_foreach(gis->_priv->file_list,(GFunc)g_free,NULL);
-		g_list_free(gis->_priv->file_list);
-		gis->_priv->file_list = NULL;
-	}
-
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
-}
-
-static void
 gnome_icon_selection_finalize (GObject *object)
 {
 	GnomeIconSelection *gis;
@@ -172,7 +146,14 @@ gnome_icon_selection_finalize (GObject *object)
 	
 	gis = GNOME_ICON_SELECTION(object);
 
-	g_free(gis->_priv);
+	/*clear our data if we have some*/
+	if (gis->_priv->file_list != NULL) {
+		g_list_foreach (gis->_priv->file_list, (GFunc)g_free, NULL);
+		g_list_free (gis->_priv->file_list);
+		gis->_priv->file_list = NULL;
+	}
+
+	g_free (gis->_priv);
 	gis->_priv = NULL;
 
 	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));

@@ -21,6 +21,7 @@
 */
 
 #include <config.h>
+#include <libgnome/gnome-macros.h>
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
@@ -47,83 +48,31 @@ struct _GnomeMessageBoxPrivate {
 };
 
 static void gnome_message_box_class_init (GnomeMessageBoxClass *klass);
-static void gnome_message_box_init       (GnomeMessageBox      *messagebox);
-static void gnome_message_box_destroy    (GtkObject            *object);
-static void gnome_message_box_finalize   (GObject              *object);
+static void gnome_message_box_instance_init (GnomeMessageBox      *messagebox);
 static void gnome_message_box_construct  (GnomeMessageBox      *messagebox,
 					  const gchar          *message,
 					  const gchar          *message_box_type,
 					  const gchar         **buttons);
 
-static GnomeDialogClass *parent_class;
-
-GType
-gnome_message_box_get_type (void)
-{
-	static GType message_box_type = 0;
-
-	if (!message_box_type)
-	{
-		GtkTypeInfo message_box_info =
-		{
-			"GnomeMessageBox",
-			sizeof (GnomeMessageBox),
-			sizeof (GnomeMessageBoxClass),
-			(GtkClassInitFunc) gnome_message_box_class_init,
-			(GtkObjectInitFunc) gnome_message_box_init,
-			NULL,
-			NULL,
-			NULL
-		};
-
-		message_box_type = gtk_type_unique (GNOME_TYPE_DIALOG, &message_box_info);
-	}
-
-	return message_box_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeMessageBox, gnome_message_box,
+			 GnomeDialog, gnome_dialog, GNOME_TYPE_DIALOG)
 
 static void
 gnome_message_box_class_init (GnomeMessageBoxClass *klass)
 {
+	/*
 	GtkObjectClass *object_class;
-	GObjectClass *gobject_class;
 
 	object_class = (GtkObjectClass *)klass;
-	gobject_class = (GObjectClass *)klass;
-	parent_class = gtk_type_class (GNOME_TYPE_DIALOG);
-
-	object_class->destroy = gnome_message_box_destroy;
-	gobject_class->finalize = gnome_message_box_finalize;
+	*/
 }
 
 static void
-gnome_message_box_init (GnomeMessageBox *message_box)
+gnome_message_box_instance_init (GnomeMessageBox *message_box)
 {
 	/*
  	message_box->_priv = g_new0(GnomeMessageBoxPrivate, 1); 
 	*/
-}
-
-static void
-gnome_message_box_destroy(GtkObject *object)
-{
-	/* remember, destroy can be run multiple times! */
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
-}
-
-static void
-gnome_message_box_finalize(GObject *object)
-{
-	/*
-	GnomeMessageBox *mbox = GNOME_MESSAGE_BOX(object);
-
-	g_free(mbox->_priv);
-	mbox->_priv = NULL;
-	*/
-
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 /**

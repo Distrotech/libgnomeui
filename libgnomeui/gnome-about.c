@@ -337,19 +337,6 @@ gnome_about_class_init (GnomeAboutClass *klass)
 								      G_PARAM_READWRITE));
 }
 
-static void
-gnome_about_finalize (GObject *object)
-{
-	GnomeAbout *about = GNOME_ABOUT (object);
-
-	/* FIXME: free everything else here */
-
-	g_free (about->_priv);
-	about->_priv = NULL;
-
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
-}
-
 static PangoLayout *
 gnome_about_create_pango_layout_with_style (GnomeAbout *about, const gchar *widget_style, PangoFontDescription **font_desc)
 {
@@ -1025,7 +1012,7 @@ gnome_about_set_persons (GnomeAbout *about, guint prop_id, const GValue *persons
 	for (i = 0; i < value_array->n_values; i++) {
 		GnomeAboutEntry *entry;
 
-		entry = g_new (GnomeAboutEntry, 1);
+		entry = g_new0 (GnomeAboutEntry, 1);
 		entry->name = g_value_dup_string (&value_array->values[i]);
 		entry->is_displaying = FALSE;
 		entry->has_been_displayed = FALSE;
@@ -1239,3 +1226,33 @@ gnome_about_new (const gchar  *name,
 	return GTK_WIDGET (about);
 }
 
+static void
+gnome_about_finalize (GObject *object)
+{
+	GnomeAbout *about = GNOME_ABOUT (object);
+
+	g_free (about->_priv->name);
+	g_free (about->_priv->version);
+	g_free (about->_priv->copyright);
+	g_free (about->_priv->comments);
+
+	gnome_about_free_person_list (about->_priv->authors);
+	gnome_about_free_person_list (about->_priv->documenters);
+
+	g_free (about->_priv->translator_credits);
+	
+	if (about->_priv->background_pixbuf)
+		gdk_pixbuf_unref (about->_priv->background_pixbuf);
+	if (about->_priv->rendered_background_pixbuf)
+		gdk_pixbuf_unref (about->_priv->rendered_background_pixbuf);
+	if (about->_priv->logo_pixbuf)
+		gdk_pixbuf_unref (about->_priv->logo_pixbuf);
+
+	/* sanity: */
+	memset (about->_priv, 0xff, sizeof (GnomeAboutPrivate));
+
+	g_free (about->_priv);
+	about->_priv = NULL;
+
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+}

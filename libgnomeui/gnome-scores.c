@@ -60,7 +60,6 @@ struct _GnomeScoresPrivate
 
 static void gnome_scores_class_init (GnomeScoresClass *klass);
 static void gnome_scores_instance_init (GnomeScores      *scores);
-static void gnome_scores_destroy    (GtkObject        *object);
 static void gnome_scores_finalize   (GObject          *object);
 
 /**
@@ -124,32 +123,11 @@ gnome_scores_instance_init (GnomeScores *gs)
 static void
 gnome_scores_class_init (GnomeScoresClass *class)
 {
-	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
 
-	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 
-	object_class->destroy = gnome_scores_destroy;
 	gobject_class->finalize = gnome_scores_finalize;
-}
-
-static void
-gnome_scores_destroy(GtkObject *object)
-{
-	GnomeScores *gs = GNOME_SCORES(object);
-
-	/* remember, destroy can be run multiple times! */
-
-	g_free(gs->_priv->label_names);
-	gs->_priv->label_names = NULL;
-	g_free(gs->_priv->label_scores);
-	gs->_priv->label_scores = NULL;
-	g_free(gs->_priv->label_times);
-	gs->_priv->label_times = NULL;
-
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy) (object);
 }
 
 static void
@@ -157,11 +135,17 @@ gnome_scores_finalize(GObject *object)
 {
 	GnomeScores *gs = GNOME_SCORES(object);
 
-	g_free(gs->_priv);
+	g_free (gs->_priv->label_names);
+	gs->_priv->label_names = NULL;
+	g_free (gs->_priv->label_scores);
+	gs->_priv->label_scores = NULL;
+	g_free (gs->_priv->label_times);
+	gs->_priv->label_times = NULL;
+
+	g_free (gs->_priv);
 	gs->_priv = NULL;
 
-	if(G_OBJECT_CLASS(parent_class)->finalize)
-		(* G_OBJECT_CLASS(parent_class)->finalize) (object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**

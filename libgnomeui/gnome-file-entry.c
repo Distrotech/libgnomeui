@@ -551,14 +551,8 @@ gnome_file_entry_destroy (GtkObject *object)
 
 	fentry = GNOME_FILE_ENTRY (object);
 
-	g_free (fentry->_priv->browse_dialog_title);
-	fentry->_priv->browse_dialog_title = NULL;
-
-	g_free (fentry->default_path);
-	fentry->default_path = NULL;
-
 	if (fentry->fsw != NULL)
-		gtk_widget_destroy(fentry->fsw);
+		gtk_widget_destroy (fentry->fsw);
 	fentry->fsw = NULL;
 
 	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
@@ -574,7 +568,13 @@ gnome_file_entry_finalize (GObject *object)
 
 	fentry = GNOME_FILE_ENTRY (object);
 
-	g_free(fentry->_priv);
+	g_free (fentry->_priv->browse_dialog_title);
+	fentry->_priv->browse_dialog_title = NULL;
+
+	g_free (fentry->default_path);
+	fentry->default_path = NULL;
+
+	g_free (fentry->_priv);
 	fentry->_priv = NULL;
 
 	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));

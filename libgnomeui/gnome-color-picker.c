@@ -513,19 +513,13 @@ gnome_color_picker_destroy (GtkObject *object)
 
 	cp = GNOME_COLOR_PICKER (object);
 
-	if(cp->_priv->pixbuf)
-		gdk_pixbuf_unref (cp->_priv->pixbuf);
-	cp->_priv->pixbuf = NULL;
-	if(cp->_priv->gc)
+	if (cp->_priv->gc != NULL)
 		gdk_gc_destroy (cp->_priv->gc);
 	cp->_priv->gc = NULL;
 
-	if (cp->_priv->cs_dialog)
+	if (cp->_priv->cs_dialog != NULL)
 		gtk_widget_destroy (cp->_priv->cs_dialog);
 	cp->_priv->cs_dialog = NULL;
-
-	g_free (cp->_priv->title);
-	cp->_priv->title = NULL;
 
 	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
@@ -539,6 +533,13 @@ gnome_color_picker_finalize (GObject *object)
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (object));
 
 	cp = GNOME_COLOR_PICKER (object);
+
+	if (cp->_priv->pixbuf != NULL)
+		gdk_pixbuf_unref (cp->_priv->pixbuf);
+	cp->_priv->pixbuf = NULL;
+
+	g_free (cp->_priv->title);
+	cp->_priv->title = NULL;
 
 	g_free (cp->_priv);
 	cp->_priv = NULL;

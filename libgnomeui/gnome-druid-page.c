@@ -40,8 +40,6 @@ enum {
 
 static void gnome_druid_page_instance_init	(GnomeDruidPage		 *druid_page);
 static void gnome_druid_page_class_init  	(GnomeDruidPageClass	 *klass);
-static void gnome_druid_page_destroy  		(GtkObject		 *object);
-static void gnome_druid_page_finalize  		(GObject		 *object);
 static void gnome_druid_page_size_request       (GtkWidget               *widget, 
 						 GtkRequisition          *requisition);
 static void gnome_druid_page_size_allocate      (GtkWidget		 *widget,
@@ -60,11 +58,9 @@ static void
 gnome_druid_page_class_init (GnomeDruidPageClass *class)
 {
 	GtkObjectClass *object_class;
-	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 
 	object_class = (GtkObjectClass*) class;
-	gobject_class = (GObjectClass*) class;
 	widget_class = (GtkWidgetClass*) class;
 
 	druid_page_signals[NEXT] = 
@@ -108,10 +104,6 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_WIDGET);
 
-	gobject_class->finalize = gnome_druid_page_finalize;
-
-	object_class->destroy = gnome_druid_page_destroy;
-
 	widget_class->size_request = gnome_druid_page_size_request;
 	widget_class->size_allocate = gnome_druid_page_size_allocate;
 	widget_class->expose_event = gnome_druid_page_expose;
@@ -123,35 +115,14 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 	class->finish = NULL;
 }
 
-
 static void
 gnome_druid_page_instance_init (GnomeDruidPage *druid_page)
 {
-	/* enable if you add privates */
+	/* enable if you add privates, also add a destructor */
 	/*druid_page->_priv = g_new0 (GnomeDruidPagePrivate, 1);*/
 	druid_page->_priv = NULL;
 
 	GTK_WIDGET_UNSET_FLAGS (druid_page, GTK_NO_WINDOW);
-}
-
-static void
-gnome_druid_page_destroy (GtkObject *object)
-{
-	/* remember, destroy can be run multiple times! */
-
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
-}
-
-static void
-gnome_druid_page_finalize (GObject *object)
-{
-	/*GnomeDruidPage *druid_page = GNOME_DRUID_PAGE(object);*/
-
-	/* Enable if you add privates */
-	/*g_free(druid_page->_priv);
-	druid_page->_priv = NULL;*/
-
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void

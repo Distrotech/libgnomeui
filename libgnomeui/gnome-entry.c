@@ -57,14 +57,15 @@ enum {
 #define DEFAULT_MAX_HISTORY_SAVED 10  /* This seems to make more sense then 60*/
 
 struct _GnomeEntryPrivate {
-	gchar     *history_id;
+	gchar       *history_id;
 
-	GList     *items;
+	GList       *items;
 
-	guint16    max_saved;
-	guint32    changed : 1;
+	guint16      max_saved;
+	guint32      changed : 1;
 
-	guint      gconf_notify_id;
+	GConfClient *gconf_client;
+	guint        gconf_notify_id;
 };
 
 
@@ -77,6 +78,7 @@ struct item {
 static void gnome_entry_class_init (GnomeEntryClass *class);
 static void gnome_entry_init       (GnomeEntry      *gentry);
 static void gnome_entry_finalize   (GObject         *object);
+static void gnome_entry_destroy    (GtkObject       *object);
 
 static void gnome_entry_get_property (GObject        *object,
 				      guint           param_id,
@@ -167,6 +169,7 @@ gnome_entry_class_init (GnomeEntryClass *class)
 	class->changed = NULL;
 	class->activate = NULL;
 
+	object_class->destroy = gnome_entry_destroy;
 	gobject_class->finalize = gnome_entry_finalize;
 	gobject_class->set_property = gnome_entry_set_property;
 	gobject_class->get_property = gnome_entry_get_property;
@@ -324,34 +327,59 @@ free_items (GnomeEntry *gentry)
 }
 
 static void
-gnome_entry_finalize (GObject *object)
+gnome_entry_destroy (GtkObject *object)
 {
 	GnomeEntry *gentry;
-	GConfClient *client;
-	gchar *key;
+
+	/* Note: destroy can run multiple times */
 	
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (object));
 
 	gentry = GNOME_ENTRY (object);
 
-	gnomeui_gconf_lazy_init ();
-	client = gconf_client_get_default ();
-	key = build_gconf_key (gentry);
-	gconf_client_remove_dir (client, key, NULL);
-	g_free (key);
-	
-	if (gentry->_priv->gconf_notify_id != 0) {
-		gconf_client_notify_remove (client, gentry->_priv->gconf_notify_id);
+	if (gentry->_priv->gconf_client != NULL) {
+		gchar *key;
+
+		if (gentry->_priv->gconf_notify_id != 0) {
+			gconf_client_notify_remove
+				(gentry->_priv->gconf_client,
+				 gentry->_priv->gconf_notify_id);
+			gentry->_priv->gconf_notify_id = 0;
+		}
+
+		key = build_gconf_key (gentry);
+		gconf_client_remove_dir (gentry->_priv->gconf_client,
+					 key, NULL);
+		g_free (key);
+
+		g_object_unref (G_OBJECT (gentry->_priv->gconf_client));
+
+		gentry->_priv->gconf_client = NULL;
 	}
 
-	g_free(gentry->_priv);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+}
+
+static void
+gnome_entry_finalize (GObject *object)
+{
+	GnomeEntry *gentry;
+	
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (object));
+
+	gentry = GNOME_ENTRY (object);
+
+	g_free (gentry->_priv->history_id);
 	gentry->_priv = NULL;
 
-	g_object_unref (G_OBJECT (client));
-	
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+	free_items (gentry);
+
+	g_free (gentry->_priv);
+	gentry->_priv = NULL;
+
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**
@@ -389,7 +417,6 @@ void
 gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 {
 	gchar *key;
-	GConfClient *client;
 	
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -398,25 +425,25 @@ gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 	if (history_id == NULL)
 		return;
 
-	gentry->_priv->history_id = g_strdup (history_id); /* this handles NULL correctly */
+	gentry->_priv->history_id = g_strdup (history_id);
 
 	/* Register with gconf */
 	key = build_gconf_key (gentry);
-	gnomeui_gconf_lazy_init ();
-	client = gconf_client_get_default ();
 
-	gconf_client_add_dir (client,
+	gnomeui_gconf_lazy_init ();
+	gentry->_priv->gconf_client = gconf_client_get_default ();
+
+	gconf_client_add_dir (gentry->_priv->gconf_client,
 			      key,
 			      GCONF_CLIENT_PRELOAD_NONE,
 			      NULL);
 	
-	gentry->_priv->gconf_notify_id = gconf_client_notify_add (client,
+	gentry->_priv->gconf_notify_id = gconf_client_notify_add (gentry->_priv->gconf_client,
 								  key,
 								  gnome_entry_history_changed,
 								  gentry,
 								  NULL, NULL);
 
-	g_object_unref (G_OBJECT (client));
 	g_free (key);
 }
 
@@ -623,22 +650,22 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	struct item *item;
 	gchar *key;
 	GSList *gconf_items, *items;
-	GConfClient *client;
 	
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (gnome_program_get_app_id (gnome_program_get()) == NULL ||gentry->_priv->history_id == NULL)
+	if (gnome_program_get_app_id (gnome_program_get()) == NULL ||
+	    gentry->_priv->history_id == NULL)
 		return;
+
+	g_assert (gentry->_priv->gconf_client != NULL);
 
 	free_items (gentry);
 
 	key = build_gconf_key (gentry);
 
-	gnomeui_gconf_lazy_init ();
-	client = gconf_client_get_default ();
-	
-	gconf_items = gconf_client_get_list (client, key, GCONF_VALUE_STRING, NULL);
+	gconf_items = gconf_client_get_list (gentry->_priv->gconf_client,
+					     key, GCONF_VALUE_STRING, NULL);
 
 	for (items = gconf_items; items; items = items->next) {
 
@@ -652,7 +679,6 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	set_combo_items (gentry);
 
 	g_slist_free (gconf_items);
-	g_object_unref (G_OBJECT (client));
 }
 
 /**
@@ -695,7 +721,6 @@ static void
 gnome_entry_save_history (GnomeEntry *gentry)
 {
 	GList *items;
-	GConfClient *client;
 	GSList *gconf_items;
 	struct item *item;
 	gchar *key;
@@ -704,16 +729,19 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (gnome_program_get_app_id (gnome_program_get()) == NULL || gentry->_priv->history_id == NULL)
+	if (gnome_program_get_app_id (gnome_program_get()) == NULL ||
+	    gentry->_priv->history_id == NULL)
 		return;
 
+	g_assert (gentry->_priv->gconf_client != NULL);
+
 	key = build_gconf_key (gentry);
-	gnomeui_gconf_lazy_init ();
-	client = gconf_client_get_default ();
 
 	gconf_items = NULL;
 
-	for (n = 0, items = gentry->_priv->items; items && n < gentry->_priv->max_saved; items = items->next, n++) {
+	for (n = 0, items = gentry->_priv->items;
+	     items && n < gentry->_priv->max_saved;
+	     items = items->next, n++) {
 		item = items->data;
 
 		if (item->save && check_for_duplicates (gconf_items, item)) {
@@ -722,10 +750,9 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	}
 
 	/* Save the list */
-	gconf_client_set_list (client, key, GCONF_VALUE_STRING, gconf_items, NULL);
+	gconf_client_set_list (gentry->_priv->gconf_client, key, GCONF_VALUE_STRING, gconf_items, NULL);
 	
 	g_free (key);
-	g_object_unref (G_OBJECT (client));
 }
 
 static void

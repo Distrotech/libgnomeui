@@ -1,3 +1,27 @@
+Fri Sep 28 15:54:23 2001  George Lebl <jirka@5z.com>
+
+	* gnome-app.c: set the icon if the property of GnomeProgram is set.
+	  the string can be a ';' separated list of files, so that multiple
+	  icons can be optionally set.
+
+	* gnome-about.c, gnome-app.c, gnome-appbar.c, gnome-client.c
+	  gnome-color-picker.c, gnome-file-entry.c, gnome-href.c,
+	  gnome-icon-entry.c, gnome-icon-list.c, gnome-pixmap-entry.c,
+	  gnome-scores.c, gnome-entry.c, gnome-druid-page-edge.c,
+	  gnome-druid-page-standard.c, gnome-druid-page.c,
+	  gnome-font-picker.c, gnome-icon-sel.c, gnome-messagebox.c,
+	  gnome-propertybox.c:  Make finalize and destroy behave
+	  as described in gtk docs.  Add finalize where needed,
+	  and add some more use of the gnome-macros.h.  Also remove
+	  unused finalize and destroy overrides as they just add
+	  cruft code.
+
+	* gnome-about.c: Actually free stuff on finalize
+
+	* gnome-window-icon.c: add some preconditions
+
+	* gnome-entry.c: correct gconf usage 
+
 2001-09-26  Michael Meeks  <michael@ximian.com>
 
 	* libgnomeui-2.0.pc.in: add libbonoboui-2.0 for gnome

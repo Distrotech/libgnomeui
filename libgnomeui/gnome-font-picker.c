@@ -253,18 +253,6 @@ gnome_font_picker_destroy (GtkObject *object)
 	gfp->_priv->font_dialog = NULL;
       }
 
-    /* g_free handles NULL */
-    g_free(gfp->_priv->font_name);
-    gfp->_priv->font_name = NULL;
-
-    /* g_free handles NULL */
-    g_free(gfp->_priv->preview_text);
-    gfp->_priv->preview_text = NULL;
-
-    /* g_free handles NULL */
-    g_free(gfp->_priv->title);
-    gfp->_priv->title = NULL;
-
     GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
     
 } /* gnome_font_picker_destroy */
@@ -278,7 +266,19 @@ gnome_font_picker_finalize (GObject *object)
     g_return_if_fail (GNOME_IS_FONT_PICKER (object));
 
     gfp = GNOME_FONT_PICKER(object);
-    
+
+    /* g_free handles NULL */
+    g_free(gfp->_priv->font_name);
+    gfp->_priv->font_name = NULL;
+
+    /* g_free handles NULL */
+    g_free(gfp->_priv->preview_text);
+    gfp->_priv->preview_text = NULL;
+
+    /* g_free handles NULL */
+    g_free(gfp->_priv->title);
+    gfp->_priv->title = NULL;
+
     /* g_free handles NULL */
     g_free(gfp->_priv);
     gfp->_priv = NULL;

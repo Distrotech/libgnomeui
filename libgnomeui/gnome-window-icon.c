@@ -9,6 +9,7 @@
 
 #include "config.h"
 
+#include "libgnome/gnome-util.h"
 #include "libgnomeui/gnome-window-icon.h"
 
 #include <gdk/gdkpixbuf.h>
@@ -66,6 +67,10 @@ gnome_window_icon_set_from_file_list (GtkWindow *w, const char **filenames)
 {
 	GList *list;
 
+	g_return_if_fail (w != NULL);
+	g_return_if_fail (GTK_IS_WINDOW (w));
+	g_return_if_fail (filenames != NULL);
+
 	list = list_from_char_array (filenames);
 	gtk_window_set_icon_list (w, list);
 	free_list (list);
@@ -83,6 +88,10 @@ gnome_window_icon_set_from_file (GtkWindow *w, const char *filename)
 {
 	const char *filenames[2] = { NULL };
 
+	g_return_if_fail (w != NULL);
+	g_return_if_fail (GTK_IS_WINDOW (w));
+	g_return_if_fail (filename != NULL);
+
 	filenames[0] = filename;
 	gnome_window_icon_set_from_file_list (w, filenames);
 }
@@ -98,6 +107,8 @@ void
 gnome_window_icon_set_default_from_file_list (const char **filenames)
 {
 	GList *list;
+
+	g_return_if_fail (filenames != NULL);
 
 	list = list_from_char_array (filenames);
 	gtk_window_set_default_icon_list (list);
@@ -117,6 +128,8 @@ gnome_window_icon_set_default_from_file (const char *filename)
 {	
 	const char *filenames[2] = { NULL };
 
+	g_return_if_fail (filename != NULL);
+
 	/* FIXME: the vector const is wrong */
 	filenames[0] = filename;
 	gnome_window_icon_set_default_from_file_list (filenames);
@@ -130,19 +143,19 @@ gnome_window_icon_set_default_from_file (const char *filename)
  * automatically called by the gnome_init process.
  */
 void
-gnome_window_icon_init ()
+gnome_window_icon_init (void)
 {
 	GnomeClient *client;
-	char *filename;
+	const char *filename;
 
-	filename = getenv (GNOME_DESKTOP_ICON);
+	filename = g_getenv (GNOME_DESKTOP_ICON);
         if (!filename || !filename[0])
 		return;
 
 	gnome_window_icon_set_default_from_file (filename);
 
 	/* remove it from our environment */
-	putenv (GNOME_DESKTOP_ICON);
+	gnome_unsetenv (GNOME_DESKTOP_ICON);
 
 	client = gnome_master_client ();
 	if (!GNOME_CLIENT_CONNECTED (client))

@@ -56,6 +56,8 @@
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"
 #include "gnome-window.h"
+#include "gnome-window-icon.h"
+#include "gnome-ui-init.h"
 
 #include "gnome-app.h"
 
@@ -149,7 +151,7 @@ gnome_app_class_init (GnomeAppClass *class)
 				      g_param_spec_string ("app_id",
 							   _("App ID"),
 							   _("The application ID string"),
-							   NULL,
+							   program_invocation_short_name,
 							   (G_PARAM_READABLE |
 							    G_PARAM_WRITABLE)));
 }
@@ -190,10 +192,8 @@ gnome_app_get_property (GObject       *object,
 static void
 gnome_app_instance_init (GnomeApp *app)
 {
-	/* FIXME!!!!!!!
 	const char *str = NULL;
 	GValue value = { 0, };
-	*/
 
 	app->_priv = NULL;
 	/* XXX: when there is some private stuff enable this
@@ -222,15 +222,17 @@ gnome_app_instance_init (GnomeApp *app)
 
 	app->enable_layout_config = TRUE;
 
-	/* FIXME!!!!!!!
 	g_value_init (&value, G_TYPE_STRING);
 	g_object_get_property (G_OBJECT (gnome_program_get ()),
 			       LIBGNOMEUI_PARAM_DEFAULT_ICON, &value);
 	str = g_value_get_string (&value);
-	if (str != NULL)
-		gnome_window_set_icon_from_file (GTK_WINDOW (app), str, FALSE);
+	if (str != NULL) {
+		char **files = g_strsplit (str, ";", -1);
+		gnome_window_icon_set_from_file_list (GTK_WINDOW (app),
+						      (const char **)files);
+		g_strfreev (files);
+	}
 	g_value_unset (&value);
-	*/
 }
 
 static void
@@ -310,10 +312,8 @@ gnome_app_new (const gchar *appname, const gchar *title)
 	if (title != NULL) {
 		app = g_object_new (GNOME_TYPE_APP,
 				    "app_id", appname,
+				    "title", title,
 				    NULL);
-		gtk_object_set (GTK_OBJECT (app),
-				"title", title,
-				NULL);
 	} else {
 		app = g_object_new (GNOME_TYPE_APP,
 				    "app_id", appname,
@@ -340,10 +340,8 @@ gnome_app_construct (GnomeApp *app, const gchar *appname, const gchar *title)
 	if (title != NULL) {
 		g_object_set (G_OBJECT (app),
 			      "app_id", appname,
+			      "title", title,
 			      NULL);
-		gtk_object_set (GTK_OBJECT (app),
-				"title", title,
-				NULL);
 	} else {
 		g_object_set (G_OBJECT (app),
 			      "app_id", appname,
@@ -362,11 +360,6 @@ gnome_app_destroy (GtkObject *object)
 	g_return_if_fail (GNOME_IS_APP (object));
 
 	app = GNOME_APP (object);
-
-	g_free (app->name);
-	app->name = NULL;
-	g_free (app->prefix);
-	app->prefix = NULL;
 
 	if (app->accel_group != NULL) {
 		gtk_accel_group_unref (app->accel_group);
@@ -390,6 +383,11 @@ gnome_app_finalize (GObject *object)
 	g_return_if_fail (GNOME_IS_APP (object));
 
 	app = GNOME_APP (object);
+
+	g_free (app->name);
+	app->name = NULL;
+	g_free (app->prefix);
+	app->prefix = NULL;
 
 	/* Free private data */
 	g_free (app->_priv);

@@ -69,6 +69,7 @@ static void gnome_client_class_init              (GnomeClientClass *klass);
 static void gnome_client_instance_init           (GnomeClient      *client);
 
 static void gnome_real_client_destroy            (GtkObject        *object);
+static void gnome_real_client_finalize           (GObject          *object);
 static void gnome_real_client_save_complete      (GnomeClient      *client);
 static void gnome_real_client_shutdown_cancelled (GnomeClient      *client);
 static void gnome_real_client_connect            (GnomeClient      *client,
@@ -1152,6 +1153,7 @@ static void
 gnome_client_class_init (GnomeClientClass *klass)
 {
   GtkObjectClass *object_class = (GtkObjectClass*) klass;
+  GObjectClass *gobject_class = (GObjectClass*) klass;
   
   client_signals[SAVE_YOURSELF] =
     gtk_signal_new ("save_yourself",
@@ -1204,6 +1206,7 @@ gnome_client_class_init (GnomeClientClass *klass)
   
   
   object_class->destroy = gnome_real_client_destroy;
+  gobject_class->finalize = gnome_real_client_finalize;
   
   klass->save_yourself      = NULL;
   klass->die                = gnome_client_disconnect;
@@ -1269,8 +1272,21 @@ gnome_real_client_destroy (GtkObject *object)
   client = GNOME_CLIENT (object);
   
   if (GNOME_CLIENT_CONNECTED (client))
-    gnome_client_disconnect (client);
+	  gnome_client_disconnect (client);
 
+  GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+}
+
+static void
+gnome_real_client_finalize (GObject *object)
+{
+  GnomeClient *client;
+
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (GNOME_IS_CLIENT (object));
+  
+  client = GNOME_CLIENT (object);
+  
   g_free (client->client_id);
   client->client_id = NULL;
   g_free (client->previous_id);
@@ -1280,7 +1296,7 @@ gnome_real_client_destroy (GtkObject *object)
   g_free (client->global_config_prefix);
   client->global_config_prefix = NULL;
 
-  if(client->static_args) {
+  if (client->static_args != NULL) {
 	  g_list_foreach (client->static_args, (GFunc)g_free, NULL);
 	  g_list_free    (client->static_args);
 	  client->static_args = NULL;
@@ -1293,7 +1309,7 @@ gnome_real_client_destroy (GtkObject *object)
   g_strfreev (client->discard_command);
   client->discard_command = NULL;
 
-  if(client->environment) {
+  if(client->environment != NULL) {
 	  g_hash_table_foreach_remove (client->environment, 
 				       (GHRFunc)environment_entry_remove, NULL);
 	  g_hash_table_destroy        (client->environment);
@@ -1311,8 +1327,7 @@ gnome_real_client_destroy (GtkObject *object)
   g_free     (client->user_id);
   client->user_id = NULL;
 
-  if (GTK_OBJECT_CLASS (parent_class)->destroy)
-    (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /*****************************************************************************/

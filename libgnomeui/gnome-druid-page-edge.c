@@ -183,11 +183,6 @@ gnome_druid_page_edge_destroy(GtkObject *object)
 		gdk_pixbuf_unref (druid_page_edge->watermark_image);
 	druid_page_edge->watermark_image = NULL;
 
-	g_free (druid_page_edge->text);
-	druid_page_edge->text = NULL;
-	g_free (druid_page_edge->title);
-	druid_page_edge->title = NULL;
-
 	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
@@ -196,7 +191,12 @@ gnome_druid_page_edge_finalize(GObject *object)
 {
 	GnomeDruidPageEdge *druid_page_edge = GNOME_DRUID_PAGE_EDGE(object);
 
-	g_free(druid_page_edge->_priv);
+	g_free (druid_page_edge->text);
+	druid_page_edge->text = NULL;
+	g_free (druid_page_edge->title);
+	druid_page_edge->title = NULL;
+
+	g_free (druid_page_edge->_priv);
 	druid_page_edge->_priv = NULL;
 
 	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));

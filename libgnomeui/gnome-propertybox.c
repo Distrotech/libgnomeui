@@ -45,7 +45,6 @@ enum
 
 static void gnome_property_box_class_init     (GnomePropertyBoxClass *klass);
 static void gnome_property_box_instance_init  (GnomePropertyBox *property_box);
-static void gnome_property_box_destroy        (GtkObject *object);
 
 /*
  * These four are called from dialog_clicked_cb(), depending
@@ -67,14 +66,8 @@ static void
 gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 {
 	GtkObjectClass *object_class;
-	GtkWidgetClass *widget_class;
-	GtkWindowClass *window_class;
 
 	object_class = (GtkObjectClass*) klass;
-	widget_class = (GtkWidgetClass*) klass;
-	window_class = (GtkWindowClass*) klass;
-
-	object_class->destroy = gnome_property_box_destroy;
 
 	parent_class = gtk_type_class (GNOME_TYPE_DIALOG);
 
@@ -153,17 +146,6 @@ gnome_property_box_instance_init (GnomePropertyBox *property_box)
 			    TRUE, TRUE, 0);
 
 	gtk_widget_show (property_box->notebook);
-}
-
-static void
-gnome_property_box_destroy (GtkObject *object)
-{
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_PROPERTY_BOX (object));
-	/* remember, destroy can be run multiple times! */
-
-	if(GTK_OBJECT_CLASS (parent_class)->destroy)
-		GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
 
 /**

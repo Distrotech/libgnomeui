@@ -26,6 +26,7 @@
  */
 
 #include "config.h"
+#include <libgnome/gnome-macros.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
@@ -69,12 +70,9 @@ struct _GnomeAppBarPrivate
 
 
 static void gnome_appbar_class_init               (GnomeAppBarClass *class);
-static void gnome_appbar_init                     (GnomeAppBar      *ab);
-static void gnome_appbar_destroy                  (GtkObject        *object);
+static void gnome_appbar_instance_init            (GnomeAppBar      *ab);
 static void gnome_appbar_finalize                 (GObject          *object);
      
-static GtkContainerClass *parent_class;
-
 enum {
   USER_RESPONSE,
   CLEAR_PROMPT,
@@ -83,30 +81,8 @@ enum {
 
 static gint appbar_signals[LAST_SIGNAL] = { 0 };
 
-GType      
-gnome_appbar_get_type (void)
-{
-  static GType ab_type = 0;
-
-  if (!ab_type)
-    {
-      GtkTypeInfo ab_info =
-      {
-        "GnomeAppBar",
-        sizeof (GnomeAppBar),
-        sizeof (GnomeAppBarClass),
-        (GtkClassInitFunc) gnome_appbar_class_init,
-        (GtkObjectInitFunc) gnome_appbar_init,
-        NULL,
-        NULL,
-	NULL
-      };
-
-      ab_type = gtk_type_unique (GTK_TYPE_HBOX, &ab_info);
-    }
-
-  return ab_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeAppBar, gnome_appbar,
+			 GtkHBox, gtk_hbox, GTK_TYPE_HBOX)
 
 static void
 gnome_appbar_class_init (GnomeAppBarClass *class)
@@ -137,13 +113,10 @@ gnome_appbar_class_init (GnomeAppBarClass *class)
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
 
-  parent_class = gtk_type_class (GTK_TYPE_HBOX);
-  
   class->user_response = NULL;
   class->clear_prompt  = NULL; /* maybe should have a handler
 				  and the clear_prompt function
 				  just emits. */
-  object_class->destroy = gnome_appbar_destroy;
   gobject_class->finalize = gnome_appbar_finalize;
 }
 
@@ -253,7 +226,7 @@ entry_activate_cb(GtkWidget * entry, GnomeAppBar * ab)
 }
 
 static void
-gnome_appbar_init (GnomeAppBar *ab)
+gnome_appbar_instance_init (GnomeAppBar *ab)
 {
   ab->_priv                 = g_new0(GnomeAppBarPrivate, 1);
   ab->_priv->default_status = NULL;
@@ -712,35 +685,6 @@ gnome_appbar_get_status    (GnomeAppBar * appbar)
 }
 
 static void
-gnome_appbar_destroy (GtkObject *object)
-{
-  GnomeAppBar *ab;
-  GnomeAppBarClass *class;
-
-  /* remember, destroy can be run multiple times! */
-
-  g_return_if_fail (object != NULL);
-  g_return_if_fail (GNOME_IS_APPBAR (object));
-
-  ab = GNOME_APPBAR (object);
-  class = GNOME_APPBAR_GET_CLASS (ab);
-
-  if(ab->_priv->status_stack) {
-	  stringstack_free(ab->_priv->status_stack);
-	  ab->_priv->status_stack = NULL;
-  }
-
-  /* g_free checks if these are NULL */
-  g_free(ab->_priv->default_status);
-  ab->_priv->default_status = NULL;;
-  g_free(ab->_priv->prompt);
-  ab->_priv->prompt = NULL;
-
-  if(GTK_OBJECT_CLASS (parent_class)->destroy)
-	  GTK_OBJECT_CLASS (parent_class)->destroy (object);
-}
-
-static void
 gnome_appbar_finalize (GObject *object)
 {
   GnomeAppBar *ab;
@@ -750,10 +694,19 @@ gnome_appbar_finalize (GObject *object)
 
   ab = GNOME_APPBAR (object);
 
-  g_free(ab->_priv);
+  /* stringstack_free handles null correctly */
+  stringstack_free (ab->_priv->status_stack);
+  ab->_priv->status_stack = NULL;
+
+  /* g_free checks if these are NULL */
+  g_free (ab->_priv->default_status);
+  ab->_priv->default_status = NULL;
+  g_free (ab->_priv->prompt);
+  ab->_priv->prompt = NULL;
+
+  g_free (ab->_priv);
   ab->_priv = NULL;
 
-  if(G_OBJECT_CLASS (parent_class)->finalize)
-	  G_OBJECT_CLASS (parent_class)->finalize (object);
+  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 

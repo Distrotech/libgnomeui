@@ -473,6 +473,9 @@ gnome_druid_page_standard_finalize (GObject *object)
 {
 	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD(object);
 
+	g_free (druid_page_standard->title);
+	druid_page_standard->title = NULL;
+
 	g_free (druid_page_standard->_priv);
 	druid_page_standard->_priv = NULL;
 
@@ -494,9 +497,6 @@ gnome_druid_page_standard_destroy (GtkObject *object)
 	if (druid_page_standard->top_watermark != NULL)
 		gdk_pixbuf_unref (druid_page_standard->top_watermark);
 	druid_page_standard->top_watermark = NULL;
-
-	g_free (druid_page_standard->title);
-	druid_page_standard->title = NULL;
 
 	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
@@ -559,7 +559,7 @@ gnome_druid_page_standard_new_with_vals (const gchar *title,
 
 
 /**
- * gnome_druid_page_standard_set_logo:
+ * gnome_druid_page_standard_set_title:
  * @druid_page_standard: the #GnomeDruidPageStandard to work on
  * @title: the string to use as the new title text
  *

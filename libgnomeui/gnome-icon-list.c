@@ -1334,12 +1334,9 @@ gil_destroy (GtkObject *object)
 
 	gil = GIL (object);
 
-	g_free (gil->_priv->separators);
-	gil->_priv->separators = NULL;
-
 	gil->_priv->frozen = 1;
 	gil->_priv->dirty  = TRUE;
-	if(gil->_priv->icon_list) {
+	if (gil->_priv->icon_list != NULL) {
 		gnome_icon_list_clear (gil);
 		g_array_free(gil->_priv->icon_list, TRUE);
 	}
@@ -1350,8 +1347,7 @@ gil_destroy (GtkObject *object)
 		gil->_priv->timer_tag = 0;
 	}
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -1361,11 +1357,13 @@ gil_finalize (GObject *object)
 
 	gil = GIL (object);
 
+	g_free (gil->_priv->separators);
+	gil->_priv->separators = NULL;
+
 	g_free (gil->_priv);
 	gil->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(*G_OBJECT_CLASS (parent_class)->finalize) (object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 
