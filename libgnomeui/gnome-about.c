@@ -220,7 +220,7 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
 		
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw,
-					  gtk_label_new_with_mnemonic (_("_Written by")));
+					  gtk_label_new_with_mnemonic (_("Written by")));
 		gnome_about_update_authors_label (about, label);
 	}
 
@@ -235,7 +235,7 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
 
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw,
-					  gtk_label_new_with_mnemonic (_("_Documented by")));
+					  gtk_label_new_with_mnemonic (_("Documented by")));
 		gnome_about_update_documenters_label (about, label);
 	}
 
@@ -250,7 +250,7 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 		gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN (sw)->child), GTK_SHADOW_NONE);
 
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), sw,
-					  gtk_label_new_with_mnemonic (_("_Translated by")));
+					  gtk_label_new_with_mnemonic (_("Translated by")));
 		gnome_about_update_translation_information_label (about, label);
 	}
 	

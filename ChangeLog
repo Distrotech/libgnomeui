@@ -1,3 +1,9 @@
+2002-11-08  Deepa Natarajan  <deepa.natarajan@wipro.com>
+
+	* libgnomeui/gnome-about.c: Removed mnemonics for "Written by",
+	"Documented by" and "Translated by" notebook tabs which show up
+	in the about dialog. Fixes bug# 96699.
+
 2002-11-08  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	A small pile of fixes to make the API docs build without
