@@ -51,10 +51,10 @@
 #include <libgnome/gnome-program.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
-#include <libgnome/gnome-preferences.h>
 #include <bonobo/bonobo-dock.h>
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"
+#include "gnome-gconf-ui.h"
 #include "gnome-window.h"
 #include "gnome-window-icon.h"
 #include "gnome-ui-init.h"
@@ -474,7 +474,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	behavior = (BONOBO_DOCK_ITEM_BEH_EXCLUSIVE
 		    | BONOBO_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	
-	if (!gnome_preferences_get_menubar_detachable())
+	if ( ! gnome_gconf_get_bool ("/desktop/gnome/interface/menubar-detachable"))
 		behavior |= BONOBO_DOCK_ITEM_BEH_LOCKED;
 
 	dock_item = bonobo_dock_item_new (GNOME_APP_MENUBAR_NAME,
@@ -491,7 +491,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar),
 				      GTK_SHADOW_NONE);
 #endif
-	if (gnome_preferences_get_menubar_relief ()) {
+	if (gnome_gconf_get_bool ("/desktop/gnome/interface/menubar-relief")) {
 		guint border_width;
 		
 		gtk_container_set_border_width (GTK_CONTAINER (dock_item), 2);
@@ -671,7 +671,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 	   requirement.  We only do this for backwards compatibility.  */
 	behavior = BONOBO_DOCK_ITEM_BEH_EXCLUSIVE;
 	
-	if (!gnome_preferences_get_toolbar_detachable())
+	if ( ! gnome_gconf_get_bool ("/desktop/gnome/interface/toolbar-detachable"))
 		behavior |= BONOBO_DOCK_ITEM_BEH_LOCKED;
 	
 	gnome_app_add_toolbar (app, toolbar,

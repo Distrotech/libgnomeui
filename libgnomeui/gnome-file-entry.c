@@ -362,7 +362,8 @@ browse_clicked(GnomeFileEntry *fentry)
 	parent = gtk_widget_get_toplevel (GTK_WIDGET (fentry));
 	gtk_window_set_transient_for (GTK_WINDOW(fsw), GTK_WINDOW (parent));
 
-	if ( gnome_preferences_get_dialog_centered() ) {
+	/* FIXME! */
+	if ( 1 ) { /*gnome_preferences_get_dialog_centered() ) { */
 
 		/* User wants us to center over parent */
 

@@ -33,6 +33,10 @@
 #define GNOME_PAD_SMALL    4
 #define GNOME_PAD_BIG      12
 
+/* Deprecated with GnomeDialog, GTK has a much nicer way of
+ * doing this */
+#ifndef GNOME_DISABLE_DEPRECATED
+
 /* These are the button numbers on a yes-no or ok-cancel GnomeDialog,
    and in the gnome-app-util callbacks. Make the program more
    readable, is all. */ 
@@ -40,6 +44,8 @@
 #define GNOME_NO 1 
 #define GNOME_OK 0
 #define GNOME_CANCEL 1
+
+#endif
 
 #include <gdk/gdkkeysyms.h>
 

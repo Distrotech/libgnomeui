@@ -64,7 +64,6 @@
 #include "gnome-uidefs.h"
 #include "gnome-stock-icons.h"
 #include "gnome-gconf-ui.h"
-#include <libgnome/gnome-preferences.h>
 
 /* keys used for get/set_data */
 static const char *gnome_app_helper_gconf_client = "gnome-app-helper-gconf-client";
@@ -1555,7 +1554,7 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 					 accel_group, uline_accels, 0);
 
 				/* FIXME: make this runtime configurable */ 
-				if (gnome_preferences_get_menus_have_tearoff ()) {
+				if (gnome_gconf_get_bool ("/desktop/gnome/interface/menus-have-tearoff")) {
 					tearoff = gtk_tearoff_menu_item_new ();
 					gtk_widget_show (tearoff);
 					gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), tearoff);
@@ -1583,7 +1582,8 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 #ifdef FIXME
 	/* Configure menu to gnome preferences, if possible.
 	 * (sync to gnome-app.c:gnome_app_set_menus) */
-	if (!gnome_preferences_get_menubar_relief () && GTK_IS_MENU_BAR (menu_shell))
+	if ( ! gnome_gconf_get_bool ("/desktop/gnome/interface/menubar-relief") &&
+	     GTK_IS_MENU_BAR (menu_shell))
 		gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (menu_shell), GTK_SHADOW_NONE);
 #endif
 }
@@ -1749,7 +1749,7 @@ gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo,
 				    app->accel_group, TRUE, 0);
 
 	/* FIXME: make this runtime configurable */ 
-	if (gnome_preferences_get_menus_have_tearoff ()) {
+	if (gnome_gconf_get_bool ("/desktop/gnome/interface/menus-have-tearoff")) {
 		gchar *app_name;
 
 		app_name = GTK_WINDOW (app)->title;

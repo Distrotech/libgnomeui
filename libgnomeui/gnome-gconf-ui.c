@@ -212,3 +212,22 @@ _gnomeui_gconf_lazy_init (void)
 			      NULL);
         g_free (settings_dir);
 }
+
+gboolean
+_gnome_gconf_get_bool (const char *key)
+{
+	GConfClient *client;
+	gboolean ret;
+
+	gnomeui_gconf_lazy_init ();
+
+	client = gconf_client_get_default ();
+
+	ret = gconf_client_get_bool (client,
+				     key,
+				     NULL);
+
+	g_object_unref (G_OBJECT (client));
+
+	return ret;
+}

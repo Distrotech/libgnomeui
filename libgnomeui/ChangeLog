@@ -1,3 +1,15 @@
+Tue Oct 09 19:35:23 2001  George Lebl <jirka@5z.com>
+
+	* gnome-gconf-ui.[ch], gnome-app-helper.c, gnome-app.c,
+	  gnome-appbar.c, gnome-file-entry.c:  Get rid of any reference
+	  to gnome-preferences.h in the drive to whack them.  This means
+	  some preferences actually work again.  Some FIXMEs added where
+	  appropriate
+
+	* gnome-uidefs.c: only include the button defines if including
+	  deprecated stuff (these are the: GNOME_YES/NO/OK/CANCEL, they
+	  are only used with GnomeDialog, GtkDialog does smarter things)
+
 2001-10-10  Michael Meeks  <michael@ximian.com>
 
 	* gnome-color-picker.c (expose_event): don't setup gc here

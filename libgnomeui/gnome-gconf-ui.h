@@ -44,4 +44,7 @@ const GnomeModuleInfo * _gnome_gconf_ui_module_info_get	(void) G_GNUC_CONST;
 #define gnomeui_gconf_lazy_init _gnomeui_gconf_lazy_init
 void			_gnomeui_gconf_lazy_init	(void);
 
+#define gnome_gconf_get_bool _gnome_gconf_get_bool
+gboolean		_gnome_gconf_get_bool		(const char *key);
+
 #endif /* GNOME_GCONF_UI_H */

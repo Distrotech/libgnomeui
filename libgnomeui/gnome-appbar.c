@@ -33,10 +33,10 @@
 #include <string.h> /* for strlen */
 
 #include "gnome-appbar.h"
+#include "gnome-gconf-ui.h"
 
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-i18n.h>
-#include <libgnome/gnome-preferences.h>
 
 #include "gnome-uidefs.h"
 
@@ -277,7 +277,6 @@ gnome_appbar_new (gboolean has_progress,
   return GTK_WIDGET(ab);
 }
 
-
 /**
  * gnome_appbar_construct
  * @ab: Pointer to GNOME appbar object.
@@ -319,13 +318,16 @@ gnome_appbar_construct(GnomeAppBar * ab,
    * If the progress meter goes on the right then we place it after we
    * create the status line.
    */
-  if (has_progress && !gnome_preferences_get_statusbar_meter_on_right ())
+  if (has_progress &&
+      /* FIXME: this should listen to changes! */
+      ! gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-meter-on-right"))
     gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
 
   if ( has_status ) {
     if ( (interactivity == GNOME_PREFERENCES_ALWAYS) ||
 	 ( (interactivity == GNOME_PREFERENCES_USER) &&
-	   gnome_preferences_get_statusbar_interactive()) ) {
+	   /* FIXME: this should listen to changes! */
+	   gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-interactive")) ) {
       ab->_priv->interactive = TRUE;
    
       ab->_priv->status = gtk_entry_new();
@@ -371,7 +373,9 @@ gnome_appbar_construct(GnomeAppBar * ab,
     ab->_priv->interactive = FALSE;
   }
 
-  if (has_progress && gnome_preferences_get_statusbar_meter_on_right ())
+  if (has_progress &&
+      /* FIXME: this should listen to changes! */
+      gnome_gconf_get_bool ("/desktop/gnome/interface/statusbar-meter-on-right"))
     gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
 
   if (ab->_priv->status) gtk_widget_show (ab->_priv->status);
