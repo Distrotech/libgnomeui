@@ -46,7 +46,8 @@ struct _GnomeDruid
 	/*< private >*/
 	GnomeDruidPage *current;
 	GList *children;
-	gboolean show_finish; /* if TRUE, then we are showing the finish button instead of the next button */
+
+	gboolean show_finish : 1; /* if TRUE, then we are showing the finish button instead of the next button */
 };
 struct _GnomeDruidClass
 {

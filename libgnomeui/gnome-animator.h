@@ -44,6 +44,7 @@ BEGIN_GNOME_DECLS
 /* Current animator status.  */
 typedef enum
 {
+  /* Make sure to expand the bitfield size if you add to this enum (not bin-compat) */
     GNOME_ANIMATOR_STATUS_STOPPED,
     GNOME_ANIMATOR_STATUS_RUNNING
 } GnomeAnimatorStatus;
@@ -52,6 +53,7 @@ typedef enum
    forwards or (backwards).  */
 typedef enum
 {
+  /* Make sure to expand the bitfield size if you add to this enum (not bin-compat) */
     /* No loop: after the last (first) frame is played, the animation
        is stopped.  */
     GNOME_ANIMATOR_LOOP_NONE,
@@ -76,19 +78,16 @@ struct _GnomeAnimator
   {
     GtkWidget widget;
 
-    guint num_frames;
-
-    guint current_frame_number;
-
-    GnomeAnimatorStatus status;
-
-    GnomeAnimatorLoopType loop_type;
-
-    gint playback_direction;
+    GnomeAnimatorPrivate *privat;
 
     gdouble playback_speed;
 
-    GnomeAnimatorPrivate *privat;
+    guint16 num_frames;
+    guint16 current_frame_number;
+
+    GnomeAnimatorLoopType loop_type : 2;
+    gint playback_direction : 2;
+    GnomeAnimatorStatus status : 1;
   };
 
 struct _GnomeAnimatorClass

@@ -230,8 +230,8 @@ static gint space_after (gchar * p)
 /* {{{ a simple stack */
 
 typedef struct _GtkCauldronStack {
-    gint widget_stack_pointer;
     GtkWidget *widget_stack[256];
+    gint widget_stack_pointer;
 } GtkCauldronStack;
 
 static int widget_stack_push (GtkCauldronStack * s, GtkWidget * x)

@@ -56,6 +56,7 @@ typedef enum
 
 typedef enum
 {
+  /* update structure when adding an enum */
   GNOME_SAVE_GLOBAL,
   GNOME_SAVE_LOCAL,
   GNOME_SAVE_BOTH
@@ -63,6 +64,7 @@ typedef enum
 
 typedef enum
 {
+  /* update structure when adding an enum */
   GNOME_RESTART_IF_RUNNING,
   GNOME_RESTART_ANYWAY,
   GNOME_RESTART_IMMEDIATELY,
@@ -71,6 +73,7 @@ typedef enum
 
 typedef enum
 {
+  /* update structure when adding an enum */
   GNOME_CLIENT_IDLE,
   GNOME_CLIENT_SAVING_PHASE_1,
   GNOME_CLIENT_WAITING_FOR_PHASE_2,
@@ -99,7 +102,6 @@ struct _GnomeClient
 
   /* general information about the connection to the session manager */
   gpointer            smc_conn;
-  gint                input_id;
 
   /* client id of this client */
   gchar              *client_id;
@@ -132,19 +134,23 @@ struct _GnomeClient
   gchar             **shutdown_command;     /*[  ]*/
   gchar              *user_id;              /*[xs]*/
 
+  GSList             *interaction_keys;
+
+
+  gint                input_id;
+
   /* values sent with the last SaveYourself message */
-  GnomeSaveStyle      save_style;
-  GnomeInteractStyle  interact_style;
-  gboolean            shutdown;
-  gboolean            fast;
+  GnomeSaveStyle      save_style : 2;
+  GnomeInteractStyle  interact_style : 2;
 
   /* other internal state information */
-  GnomeClientState    state;
-  gboolean            save_phase_2_requested;
-  gboolean            save_successfull;
-  gboolean            save_yourself_emitted;
+  GnomeClientState    state : 3;
 
-  GSList             *interaction_keys;
+  gboolean            shutdown : 1;
+  gboolean            fast : 1;
+  gboolean            save_phase_2_requested : 1;
+  gboolean            save_successfull : 1;
+  gboolean            save_yourself_emitted : 1;
 };
 
 

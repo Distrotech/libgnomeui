@@ -58,34 +58,31 @@ typedef struct _GnomeCanvasPolygonClass GnomeCanvasPolygonClass;
 struct _GnomeCanvasPolygon {
 	GnomeCanvasItem item;
 
-	int num_points;			/* Number of points in the polygon */
 	double *coords;			/* Array of coordinates for the polygon's points.  X coords
 					 * are in the even indices, Y coords are in the odd indices.
 					 */
-
-	double width;			/* Width of polygon's outline */
-
-	guint fill_color;		/* Fill color, RGBA */
-	guint outline_color;		/* Outline color, RGBA */
-
-	gulong fill_pixel;		/* Color for fill */
-	gulong outline_pixel;		/* Color for outline */
-
 	GdkBitmap *fill_stipple;	/* Stipple for fill */
 	GdkBitmap *outline_stipple;	/* Stipple for outline */
 
 	GdkGC *fill_gc;			/* GC for filling */
 	GdkGC *outline_gc;		/* GC for outline */
+	ArtSVP *fill_svp;		/* The SVP for the filled shape */ /*AA*/
+	ArtSVP *outline_svp;		/* The SVP for the outline shape */ /*AA*/
+
+	gulong fill_pixel;		/* Color for fill */
+	gulong outline_pixel;		/* Color for outline */
+	double width;			/* Width of polygon's outline */
+
+	int num_points;			/* Number of points in the polygon */
+	guint fill_color;		/* Fill color, RGBA */
+	guint outline_color;		/* Outline color, RGBA */
+
+        guint32 fill_rgba;		/* RGBA color for filling */ /*AA*/
+	guint32 outline_rgba;		/* RGBA color for outline */ /*AA*/
 
 	guint fill_set : 1;		/* Is fill color set? */
 	guint outline_set : 1;		/* Is outline color set? */
 	guint width_pixels : 1;		/* Is outline width specified in pixels or units? */
-
-	/* Antialiased specific stuff follows */
-	guint32 fill_rgba;		/* RGBA color for filling */
-	ArtSVP *fill_svp;		/* The SVP for the filled shape */
-	guint32 outline_rgba;		/* RGBA color for outline */
-	ArtSVP *outline_svp;		/* The SVP for the outline shape */
 };
 
 struct _GnomeCanvasPolygonClass {

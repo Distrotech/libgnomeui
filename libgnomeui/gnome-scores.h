@@ -39,12 +39,13 @@ struct _GnomeScores
   GnomeDialog dialog;
 
   GtkWidget *but_clear;
-  guint	    n_scores;
 
   GtkWidget *logo;
   GtkWidget **label_names;
   GtkWidget **label_scores;
   GtkWidget **label_times;
+
+  guint	    n_scores;
 };
 
 struct _GnomeScoresClass

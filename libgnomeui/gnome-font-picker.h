@@ -53,17 +53,19 @@ struct _GnomeFontPicker {
         GtkWidget     *inside;
         GtkWidget     *font_label,*vsep,*size_label;
 
-        
+
         /* Do not change, use set/get functions */
-        GnomeFontPickerMode mode;
+        gchar         *title;
+        
         gchar         *font_name;
         gchar         *preview_text;
-        /* Only for GNOME_FONT_PICKER_MODE_FONT_INFO */
-        gboolean      use_font_in_label;
-        gboolean      use_font_in_label_size;
-        gboolean      show_size;
 
-        gchar         *title;
+        GnomeFontPickerMode mode : 2;
+
+        /* Only for GNOME_FONT_PICKER_MODE_FONT_INFO */
+        gboolean      use_font_in_label : 1;
+        gboolean      use_font_in_label_size : 1;
+        gboolean      show_size : 1;
 };
 
 struct _GnomeFontPickerClass {

@@ -24,6 +24,7 @@
 
 #include <config.h>
 #include <gtk/gtkmain.h>
+#include <stdlib.h>
 
 #include "gnome-animator.h"
 
@@ -38,27 +39,24 @@ struct _GnomeAnimatorFrame
     /* Shape mask (NULL if no shape mask).  */
     GdkBitmap *mask;
 
-    /* Size.  */
-    guint width;
-    guint height;
-
-    /* X/Y position in the widget.  */
-    gint x_offset;
-    gint y_offset;
+    /* Pointer to the next and previous frames.  */
+    GnomeAnimatorFrame *prev, *next;
 
     /* Interval for the next frame (as for `gtk_timeout_add()').  This
        value is divided by `playback_speed' before being used.  */
     guint32 interval;
 
-    /* Pointer to the next and previous frames.  */
-    GnomeAnimatorFrame *prev, *next;
+    /* Size.  */
+    guint16 width;
+    guint16 height;
+
+    /* X/Y position in the widget.  */
+    gint16 x_offset;
+    gint16 y_offset;
   };
 
 struct _GnomeAnimatorPrivate
   {
-    /* Timeout callback ID used for advancing playback.  */
-    guint timeout_id;
-
     /* Rectangle being used for the animation.  */
     GdkRectangle area;
 
@@ -77,6 +75,8 @@ struct _GnomeAnimatorPrivate
 
     /* Pointer to the current frame.  */
     GnomeAnimatorFrame *current_frame;
+    /* Timeout callback ID used for advancing playback.  */
+    guint timeout_id;
   };
 
 /* ------------------------------------------------------------------------- */
@@ -605,7 +605,7 @@ gnome_animator_set_playback_direction (GnomeAnimator *animator,
 {
   g_return_if_fail (animator != NULL);
 
-  animator->playback_direction = playback_direction;
+  animator->playback_direction = playback_direction/abs(playback_direction);
 }
 
 /**

@@ -25,8 +25,8 @@ BEGIN_GNOME_DECLS
  * number of points, so the array is 2*num_points elements big.
  */
 typedef struct {
-	int num_points;
 	double *coords;
+	int num_points;
 	int ref_count;
 } GnomeCanvasPoints;
 

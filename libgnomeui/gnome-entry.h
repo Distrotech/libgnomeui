@@ -25,11 +25,11 @@ typedef struct _GnomeEntryClass GnomeEntryClass;
 
 struct _GnomeEntry {
 	GtkCombo combo;
-
-	gboolean changed;
 	gchar   *history_id;
 	GList   *items;
-	guint    max_saved;
+
+	guint16    max_saved;
+	gboolean changed : 1;
 };
 
 struct _GnomeEntryClass {

@@ -43,8 +43,8 @@ struct _GnomeSpellInfo {
 	const gchar* original;
 	gchar* replacement;
 	gchar* word;
-	guint offset;
 	GSList * words;
+	guint offset;
 };
 
 struct _GnomeSpell {

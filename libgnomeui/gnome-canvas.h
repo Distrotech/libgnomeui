@@ -93,11 +93,11 @@ typedef struct {
 	/* 24-bit RGB buffer for rendering */
 	guchar *buf;
 
-	/* Rowstride for the buffer */
-	int buf_rowstride;
-
 	/* Rectangle describing the rendering area */
 	ArtIRect rect;
+
+	/* Rowstride for the buffer */
+	int buf_rowstride;
 
 	/* Background color, given as 0xrrggbb */
 	guint32 bg_color;
@@ -128,15 +128,15 @@ struct _GnomeCanvasItem {
 	/* Parent canvas group for this item (a GnomeCanvasGroup) */
 	GnomeCanvasItem *parent;
 
-	/* Bounding box for this item (in world coordinates) */
-	double x1, y1, x2, y2;
-
 	/* If NULL, assumed to be the identity tranform.  If flags does not have
 	 * AFFINE_FULL, then a two-element array containing a translation.  If
 	 * flags contains AFFINE_FULL, a six-element array containing an affine
 	 * transformation.
 	 */
 	double *xform;
+
+	/* Bounding box for this item (in world coordinates) */
+	double x1, y1, x2, y2;
 };
 
 struct _GnomeCanvasItemClass {
@@ -404,39 +404,11 @@ void gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *
 struct _GnomeCanvas {
 	GtkLayout layout;
 
-	/* Idle handler ID */
-	guint idle_id;
-
 	/* Root canvas group */
 	GnomeCanvasItem *root;
 
-	/* Signal handler ID for destruction of the root item */
-	guint root_destroy_id;
-
-	/* Scrolling region */
-	double scroll_x1, scroll_y1;
-	double scroll_x2, scroll_y2;
-
-	/* Scaling factor to be used for display */
-	double pixels_per_unit;
-
-	/* Area that is being redrawn.  Contains (x1, y1) but not (x2, y2).
-	 * Specified in canvas pixel coordinates.
-	 */
-	int redraw_x1, redraw_y1;
-	int redraw_x2, redraw_y2;
-
 	/* Area that needs redrawing, stored as a microtile array */
 	ArtUta *redraw_area;
-
-	/* Offsets of the temprary drawing pixmap */
-	int draw_xofs, draw_yofs;
-
-	/* Internal pixel offsets when zoomed out */
-	int zoom_xofs, zoom_yofs;
-
-	/* Last known modifier state, for deferred repick when a button is down */
-	int state;
 
 	/* The item containing the mouse pointer, or NULL if none */
 	GnomeCanvasItem *current_item;
@@ -447,23 +419,51 @@ struct _GnomeCanvas {
 	/* Item that holds a pointer grab, or NULL if none */
 	GnomeCanvasItem *grabbed_item;
 
-	/* Event mask specified when grabbing an item */
-	guint grabbed_event_mask;
-
 	/* If non-NULL, the currently focused item */
 	GnomeCanvasItem *focused_item;
-
-	/* Event on which selection of current item is based */
-	GdkEvent pick_event;
-
-	/* Tolerance distance for picking items */
-	int close_enough;
 
 	/* Color context used for color allocation */
 	GdkColorContext *cc;
 
 	/* GC for temporary draw pixmap */
 	GdkGC *pixmap_gc;
+
+	/* Event on which selection of current item is based */
+	GdkEvent pick_event;
+
+	/* Scrolling region */
+	double scroll_x1, scroll_y1;
+	double scroll_x2, scroll_y2;
+
+	/* Scaling factor to be used for display */
+	double pixels_per_unit;
+
+	/* Idle handler ID */
+	guint idle_id;
+
+	/* Signal handler ID for destruction of the root item */
+	guint root_destroy_id;
+
+	/* Area that is being redrawn.  Contains (x1, y1) but not (x2, y2).
+	 * Specified in canvas pixel coordinates.
+	 */
+	int redraw_x1, redraw_y1;
+	int redraw_x2, redraw_y2;
+
+	/* Offsets of the temprary drawing pixmap */
+	int draw_xofs, draw_yofs;
+
+	/* Internal pixel offsets when zoomed out */
+	int zoom_xofs, zoom_yofs;
+
+	/* Last known modifier state, for deferred repick when a button is down */
+	int state;
+
+	/* Event mask specified when grabbing an item */
+	guint grabbed_event_mask;
+
+	/* Tolerance distance for picking items */
+	int close_enough;
 
 	/* Whether items need update at next idle loop iteration */
 	unsigned int need_update : 1;

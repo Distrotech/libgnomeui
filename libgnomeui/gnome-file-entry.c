@@ -598,5 +598,5 @@ gnome_file_entry_set_directory(GnomeFileEntry *fentry, int directory_entry)
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
-	fentry->directory_entry = directory_entry;
+	fentry->directory_entry = directory_entry?TRUE:FALSE;
 }

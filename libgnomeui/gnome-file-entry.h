@@ -33,11 +33,11 @@ struct _GnomeFileEntry {
 	/*the file dialog widget*/
 	GtkWidget *fsw;
 
-	int is_modal;
-
-	int directory_entry; /*optional flag to only do directories*/
-
 	GtkWidget *gentry;
+
+	gboolean is_modal : 1;
+
+	gboolean directory_entry : 1; /*optional flag to only do directories*/
 };
 
 struct _GnomeFileEntryClass {

@@ -38,14 +38,14 @@ typedef struct {
 	GtkAdjustment *adj;
 	GtkAdjustment *hadj;
 
-	/* Number of icons in the list */
-	int icons;
-
 	/* Private data */
 	gpointer priv; /* was GList *icon_list */
 
 	/* A list of integers with the indices of the currently selected icons */
 	GList *selection;
+
+	/* Number of icons in the list */
+	int icons;
 } GnomeIconList;
 
 typedef struct {

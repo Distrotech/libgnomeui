@@ -71,7 +71,6 @@ typedef struct _GnomeCanvasLineClass GnomeCanvasLineClass;
 struct _GnomeCanvasLine {
 	GnomeCanvasItem item;
 
-	int num_points;		/* Number of points in the line */
 	double *coords;		/* Array of coordinates for the line's points.  X coords are in the
 				 * even indices, Y coords are in the odd indices.  If the line has
 				 * arrowheads then the first and last points have been adjusted to
@@ -80,39 +79,40 @@ struct _GnomeCanvasLine {
 				 * arrays, if they exist.
 				 */
 
-	double width;		/* Width of the line */
+	double *first_coords;	/* Array of points describing polygon for the first arrowhead */
+	double *last_coords;	/* Array of points describing polygon for the last arrowhead */
 
-	guint fill_color;	/* Fill color, RGBA */
-
-	gulong fill_pixel;	/* Color for line */
+	GdkGC *gc;		/* GC for drawing line */
 
 	GdkBitmap *stipple;	/* Stipple pattern */
 
-	GdkCapStyle cap;	/* Cap style for line */
-	GdkJoinStyle join;	/* Join style for line */
-	GdkLineStyle line_style;/* Style for the line */
+        ArtSVP *fill_svp;		/* The SVP for the outline shape */ /*AA*/
+	ArtSVP *first_svp;		/* The SVP for the first arrow */ /*AA*/
+	ArtSVP *last_svp;		/* The SVP for the last arrow */ /*AA*/
+
+	double width;		/* Width of the line */
 
 	double shape_a;		/* Distance from tip of arrowhead to center */
 	double shape_b;		/* Distance from tip of arrowhead to trailing point, measured along shaft */
 	double shape_c;		/* Distance of trailing points from outside edge of shaft */
 
-	double *first_coords;	/* Array of points describing polygon for the first arrowhead */
-	double *last_coords;	/* Array of points describing polygon for the last arrowhead */
+	GdkCapStyle cap;	/* Cap style for line */
+	GdkJoinStyle join;	/* Join style for line */
+	GdkLineStyle line_style;/* Style for the line */
+
+	gulong fill_pixel;	/* Color for line */
+
+	guint32 fill_rgba;		/* RGBA color for outline */ /*AA*/
+
+	int num_points;		/* Number of points in the line */
+	guint fill_color;	/* Fill color, RGBA */
 
 	int spline_steps;	/* Number of steps in each spline segment */
-
-	GdkGC *gc;		/* GC for drawing line */
 
 	guint width_pixels : 1;	/* Is the width specified in pixels or units? */
 	guint first_arrow : 1;	/* Draw first arrowhead? */
 	guint last_arrow : 1;	/* Draw last arrowhead? */
 	guint smooth : 1;	/* Smooth line (with parabolic splines)? */
-
-	/* Antialiased specific stuff follows */
-	guint32 fill_rgba;		/* RGBA color for outline */
-	ArtSVP *fill_svp;		/* The SVP for the outline shape */
-	ArtSVP *first_svp;		/* The SVP for the first arrow */
-	ArtSVP *last_svp;		/* The SVP for the last arrow */
 };
 
 struct _GnomeCanvasLineClass {

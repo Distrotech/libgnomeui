@@ -32,10 +32,6 @@ BEGIN_GNOME_DECLS
 typedef struct {
 	GnomeCanvasItem canvas_item;
 
-	/* Size and maximum allowed width */
-	int x, y;
-	int width;
-
 	/* Font name */
 	char *fontname;
 
@@ -47,6 +43,10 @@ typedef struct {
 
 	/* Text layout information */
 	GnomeIconTextInfo *ti;
+
+	/* Size and maximum allowed width */
+	int x, y;
+	int width;
 
 	/* Whether the text is being edited */
 	unsigned int editing : 1;

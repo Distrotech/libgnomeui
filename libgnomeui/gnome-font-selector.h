@@ -41,7 +41,6 @@ struct _GnomeFontSelectorClass
   GtkDialogClass parent_class;
 
   FontInfo **font_info;
-  gint nfonts;
 
   GSList *foundries;
   GSList *weights;
@@ -55,13 +54,15 @@ struct _GnomeFontSelectorClass
   gchar **set_width_array;
   gchar **spacing_array;
 
+  gpointer text_options;
+
+  gint nfonts;
+
   gint nfoundries;
   gint nweights;
   gint nslants;
   gint nset_widths;
   gint nspacings;
-
-  gpointer text_options;
 };
 
 struct _GnomeFontSelector
@@ -85,6 +86,7 @@ struct _GnomeFontSelector
   GtkWidget **spacing_items;
   GtkWidget *antialias_toggle;
   GdkFont *font;
+
   gint font_index;
   gint size_type;
   gint foundry;

@@ -38,27 +38,26 @@ typedef struct _GnomeProcBar GnomeProcBar;
 typedef struct _GnomeProcBarClass GnomeProcBarClass;
 
 struct _GnomeProcBar {
-
 	GtkHBox hbox;
 
 	GtkWidget *bar;
 	GtkWidget *label;
 	GtkWidget *frame;
 
-	gboolean vertical : 1;
-
 	GdkPixmap *bs;
 	GdkColor *colors;
+
+	gint (*cb)();
+	gpointer cb_data;
+
+	unsigned int *last;
 
 	gint colors_allocated;
 	gint first_request;
 	gint n;
 	gint tag;
 
-	unsigned *last;
-
-	gint (*cb)();
-	gpointer cb_data;
+	gboolean vertical : 1;
 };
 
 struct _GnomeProcBarClass {

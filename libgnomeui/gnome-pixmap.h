@@ -31,6 +31,7 @@
 BEGIN_GNOME_DECLS
 
 typedef enum {
+        /* update struct when adding enum values */
 	GNOME_PIXMAP_SIMPLE, /* No alpha blending */
 	GNOME_PIXMAP_COLOR   /* */
 } GnomePixmapDraw;
@@ -54,14 +55,11 @@ struct _GnomePixmap {
 	 * break your broken code.
 	 *                          -  hp + jrb + quartic + Jesse Ventura + GW Bush 
 	 */
-	GnomePixmapDraw mode;
 
 	GdkPixbuf *original_image;
 
 	GdkPixbuf *original_scaled_image;
 	GdkBitmap *original_scaled_mask;
-	gint width, height;
-	gint alpha_threshold;
 
         struct {
                 GdkPixbuf *pixbuf;
@@ -69,6 +67,11 @@ struct _GnomePixmap {
 		gfloat saturation;
 		gboolean pixelate;
         } image_data[5]; /* the five states */
+
+	gint width, height;
+	gint alpha_threshold;
+
+	GnomePixmapDraw mode : 2;
 };
 
 

@@ -26,16 +26,17 @@ typedef struct _GnomeHelpView GnomeHelpView;
 struct _GnomeHelpView {
   GtkBox parent_object;
 
-  GtkOrientation orientation;
-
-  GnomeHelpViewStyle style;
-  GnomeHelpViewStylePriority style_prio;
-
-  GnomeHelpViewStyle app_style; /* Used to properly handle object args for style & prio */ 
-  GnomeHelpViewStylePriority app_style_priority;
-
   GtkWidget *toplevel;
   GtkWidget *toolbar, *content, *btn_help, *btn_style;
+
+  GtkOrientation orientation;
+
+  GnomeHelpViewStylePriority style_prio;
+  GnomeHelpViewStylePriority app_style_priority;
+
+  GnomeHelpViewStyle style : 2;
+
+  GnomeHelpViewStyle app_style : 2; /* Used to properly handle object args for style & prio */ 
 
   GnomeURLDisplayContext url_ctx;
 };

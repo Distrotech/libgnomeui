@@ -32,6 +32,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DRUID_PAGE_EDGE_CLASS(klass)		(GTK_CHECK_CLASS_TYPE ((obj), GNOME_TYPE_DRUID_PAGE_EDGE))
 
 typedef enum {
+  /* update structure when adding enums */
 	GNOME_EDGE_START,
 	GNOME_EDGE_FINISH,
 	GNOME_EDGE_OTHER
@@ -44,14 +45,6 @@ typedef struct _GnomeDruidPageEdgeClass  GnomeDruidPageEdgeClass;
 struct _GnomeDruidPageEdge
 {
 	GnomeDruidPage parent;
-	GnomeEdgePosition position;
-
-	GdkColor background_color;
-	GdkColor textbox_color;
-	GdkColor logo_background_color;
-	GdkColor title_color;
-	GdkColor text_color;
-
 	gchar *title;
 	gchar *text;
 	GdkPixbuf *logo_image;
@@ -66,6 +59,15 @@ struct _GnomeDruidPageEdge
 	GnomeCanvasItem *logoframe_item;
 	GnomeCanvasItem *watermark_item;
 	GnomeCanvasItem *title_item;
+
+        /*< public >*/
+	GdkColor background_color;
+	GdkColor textbox_color;
+	GdkColor logo_background_color;
+	GdkColor title_color;
+	GdkColor text_color;
+
+	GnomeEdgePosition position : 2;
 };
 
 struct _GnomeDruidPageEdgeClass

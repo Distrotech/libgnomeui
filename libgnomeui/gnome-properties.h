@@ -45,7 +45,6 @@ typedef enum {
 } GnomePropertyAction;
 
 struct _GnomePropertyDescriptor {
-	guint size;
 	const gchar *label;
 	GtkWidget * (*init_func) (GnomePropertyObject *);
 	void (*apply_func) (GnomePropertyObject *);
@@ -57,6 +56,7 @@ struct _GnomePropertyDescriptor {
 	void (*discard_temp_func) (GnomePropertyObject *);
 	void (*changed_func) (GnomePropertyObject *);
 	GList *next;
+	guint size;
 };
 
 struct _GnomePropertyObject {

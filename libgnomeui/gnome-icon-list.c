@@ -91,9 +91,9 @@ typedef struct {
 
 /* A row of icons */
 typedef struct {
-	int y;
-	int icon_height, text_height;
 	GList *line_icons;
+	gint16 y;
+	gint16 icon_height, text_height;
 } IconLine;
 
 /* Private data of the GnomeIconList structure */
@@ -103,6 +103,17 @@ typedef struct {
 
 	/* List of rows of icons */
 	GList *lines;
+
+	/* Separators used to wrap the text below icons */
+	char *separators;
+
+	Icon *last_selected_icon;
+
+	/* Rubberband rectangle */
+	GnomeCanvasItem *sel_rect;
+
+	/* Saved event for a pending selection */
+	GdkEvent select_pending_event;
 
 	/* Max of the height of all the icon rows and window height */
 	int total_height;
@@ -122,12 +133,8 @@ typedef struct {
 	int text_spacing;
 	int icon_border;
 
-	/* Separators used to wrap the text below icons */
-	char *separators;
-
 	/* Index and pointer to last selected icon */
 	int last_selected_idx;
-	Icon *last_selected_icon;
 
 	/* Timeout ID for autoscrolling */
 	guint timer_tag;
@@ -145,12 +152,6 @@ typedef struct {
 
 	/* Modifier state when the selection began */
 	guint sel_state;
-
-	/* Rubberband rectangle */
-	GnomeCanvasItem *sel_rect;
-
-	/* Saved event for a pending selection */
-	GdkEvent select_pending_event;
 
 	/* Whether the icon texts are editable */
 	guint is_editable : 1;

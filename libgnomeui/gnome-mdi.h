@@ -41,23 +41,17 @@ typedef struct _GnomeMDI       GnomeMDI;
 typedef struct _GnomeMDIClass  GnomeMDIClass;
 
 typedef enum {
+	/* update struct when adding enums */
 	GNOME_MDI_NOTEBOOK,
 	GNOME_MDI_TOPLEVEL,
 	GNOME_MDI_MODAL,
-	GNOME_MDI_DEFAULT_MODE = 42
+	GNOME_MDI_DEFAULT_MODE
 } GnomeMDIMode;
 
 /* all of the GnomeMDI members are considered private and should
    only be accessed using the provided public API */
 struct _GnomeMDI {
 	GtkObject object;
-
-	GnomeMDIMode mode;
-
-	GtkPositionType tab_pos;
-
-	guint signal_id;
-	gint in_drag : 1;
 
 	gchar *appname, *title;
 
@@ -76,8 +70,15 @@ struct _GnomeMDI {
 	
     /* paths for insertion of mdi_child specific menus and mdi_child list menu via
        gnome-app-helper routines */
-	gchar *child_menu_path; 
+	gchar *child_menu_path;
 	gchar *child_list_path;
+
+	GtkPositionType tab_pos;
+
+	GnomeMDIMode mode : 2;
+
+	guint signal_id;
+	gint in_drag : 1;
 };
 
 struct _GnomeMDIClass {

@@ -45,12 +45,12 @@ static gint gnome_dns_create_server(void);
 
 typedef struct
 {
-	/* boolean to tell if server is doing a lookup */
-	gboolean in_use;
 	/* pipefd's to communicate to server with */
 	gint pipefd[2];
 	/* tag for gdk_input_add */
 	gint input_tag;
+	/* boolean to tell if server is doing a lookup */
+	gboolean in_use:1;
 } DnsServer;
 
 static DnsServer dns_server[GNOME_DNS_MAX_SERVERS];

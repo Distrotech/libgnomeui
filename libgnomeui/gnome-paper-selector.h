@@ -59,9 +59,9 @@ struct _GnomePaperSelector {
   GdkGC *gc;
 
   /* position of paper preview */
-  gint x, y, width, height;
+  gint16 x, y, width, height;
 
-  gboolean block_changed;
+  gboolean block_changed : 1;
 };
 
 struct _GnomePaperSelectorClass {

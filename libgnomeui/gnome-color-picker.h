@@ -36,8 +36,6 @@ typedef struct _GnomeColorPickerClass GnomeColorPickerClass;
 struct _GnomeColorPicker {
 	GtkButton button;
 
-	gdouble r, g, b, a;	/* Red, green, blue, and alpha values */
-
 	GdkPixbuf *pixbuf;	/* Pixbuf for rendering dithered sample */
 	GdkGC *gc;		/* GC for drawing */
 
@@ -45,6 +43,8 @@ struct _GnomeColorPicker {
 	GtkWidget *cs_dialog;	/* Color selection dialog */
 
 	gchar *title;		/* Title for the color selection window */
+
+	gdouble r, g, b, a;	/* Red, green, blue, and alpha values */
 
 	guint dither : 1;	/* Dither or just paint a solid color? */
 	guint use_alpha : 1;	/* Use alpha or not */

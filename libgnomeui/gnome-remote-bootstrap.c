@@ -15,9 +15,9 @@ struct poptOption options[] = {
 };
 
 typedef struct {
-  int pipe_fd, pipe_tag;
   FILE *pipe_fh;
   GMainLoop *ml;
+  int pipe_fd, pipe_tag;
 } proginfo;
 
 static gboolean handle_commands(GIOChannel *ioc, GIOCondition cond, gpointer data);

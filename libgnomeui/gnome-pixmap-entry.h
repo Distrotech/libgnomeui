@@ -32,13 +32,14 @@ struct _GnomePixmapEntry {
 	
 	GtkWidget *fentry;
 
-	gboolean do_preview; /*put a preview frame with the pixmap next to
-			       the entry*/
 	GtkWidget *preview;
 	GtkWidget *preview_sw;
 	
 	/*very private*/
 	gchar *last_preview;
+
+	gboolean do_preview : 1; /*put a preview frame with the pixmap next to
+			       the entry*/
 };
 
 struct _GnomePixmapEntryClass {

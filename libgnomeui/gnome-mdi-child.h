@@ -62,6 +62,7 @@ struct _GnomeMDIChild
 	/* default values for insertion of the child toolbar */
 	GnomeDockItemBehavior behavior;
 	GnomeDockPlacement placement;
+
 	gint band_num, band_pos, offset;
 };
 

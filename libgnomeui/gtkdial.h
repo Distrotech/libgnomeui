@@ -40,9 +40,11 @@ struct _GtkDial
   GdkPixmap     *offscreen_pixmap;
   GtkAdjustment *adjustment;
 
-  guint policy : 2;
-  guint view_only : 1;
-  guint8 button;
+  gfloat angle;
+  gfloat percentage;
+  gfloat old_value;
+  gfloat old_lower;
+  gfloat old_upper;
 
   /* Dimensions of dial components */
   gint radius;
@@ -50,12 +52,10 @@ struct _GtkDial
 
   guint32 timer;
 
-  gfloat angle;
-  gfloat percentage;
-  gfloat old_value;
-  gfloat old_lower;
-  gfloat old_upper;
+  guint8 button;
 
+  guint policy : 2;
+  guint view_only : 1;
 };
 
 struct _GtkDialClass

@@ -31,10 +31,11 @@ typedef struct {
 	GtkWidget *cal_popup;
 	GtkWidget *calendar;
 
+	time_t    initial_time;
+
 	int       lower_hour;
 	int       upper_hour;
 	
-	time_t    initial_time;
 	int       flags;
 } GnomeDateEdit;
 

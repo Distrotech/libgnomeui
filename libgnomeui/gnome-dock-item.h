@@ -75,8 +75,8 @@ struct _GnomeDockItem
   /* Position of the floating window.  */
   gint16                  float_x, float_y;
 
-  GtkOrientation        orientation : 1;
   GnomeDockItemBehavior behavior : 5;
+  GtkOrientation        orientation : 1;
 
   guint                 float_window_mapped : 1;
   guint                 is_floating : 1;

@@ -642,11 +642,11 @@ gnome_app_request_password (GnomeApp * app, const gchar * prompt,
 typedef struct {
   GtkWidget * bar; /* Progress bar, for dialog; NULL for AppBar */
   GtkWidget * widget; /* dialog or AppBar */
-  guint timeout_tag, handler_id;
   GnomeApp * app;
   GnomeAppProgressFunc percentage_cb;
   GnomeAppProgressCancelFunc cancel_cb;
   gpointer data;
+  guint timeout_tag, handler_id;
 } ProgressKeyReal;
 
 /* Invalid value, I hope. FIXME */

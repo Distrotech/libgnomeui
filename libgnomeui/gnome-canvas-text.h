@@ -85,23 +85,30 @@ struct _GnomeCanvasTextSuckFont {
 struct _GnomeCanvasText {
 	GnomeCanvasItem item;
 
+	GdkFont *font;			/* Font for text */
 	char *text;			/* Text to display */
+	GdkBitmap *stipple;		/* Stipple for text */
+	GdkGC *gc;			/* GC for drawing text */
+
+        GnomeCanvasTextSuckFont *suckfont; /* Sucked font */ /*AA*/
+
 	gpointer lines;			/* Text split into lines (private field) */
-	int num_lines;			/* Number of lines of text */
+
+	gulong pixel;			/* Fill color */
 
 	double x, y;			/* Position at anchor */
-	GdkFont *font;			/* Font for text */
-	GtkAnchorType anchor;		/* Anchor side for text */
-	GtkJustification justification;	/* Justification for text */
 
 	double clip_width;		/* Width of optional clip rectangle */
 	double clip_height;		/* Height of optional clip rectangle */
 
 	double xofs, yofs;		/* Text offset distance from anchor position */
 
-	gulong pixel;			/* Fill color */
-	GdkBitmap *stipple;		/* Stipple for text */
-	GdkGC *gc;			/* GC for drawing text */
+	double affine[6];               /* The item -> canvas affine */ /*AA*/
+
+	GtkAnchorType anchor;		/* Anchor side for text */
+	GtkJustification justification;	/* Justification for text */
+
+	int num_lines;			/* Number of lines of text */
 
 	int cx, cy;			/* Top-left canvas coordinates for text */
 	int clip_cx, clip_cy;		/* Top-left canvas coordinates for clip rectangle */
@@ -109,12 +116,9 @@ struct _GnomeCanvasText {
 	int max_width;			/* Maximum width of text lines */
 	int height;			/* Rendered text height in pixels */
 
-	guint clip : 1;			/* Use clip rectangle? */
+        guint32 rgba;			/* RGBA color for text */ /*AA*/
 
-	/* Antialiased specific stuff follows */
-	GnomeCanvasTextSuckFont *suckfont; /* Sucked font */
-	guint32 rgba;			/* RGBA color for text */
-	double affine[6];               /* The item -> canvas affine */
+	guint clip : 1;			/* Use clip rectangle? */
 };
 
 struct _GnomeCanvasTextClass {

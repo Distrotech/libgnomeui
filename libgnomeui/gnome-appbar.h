@@ -54,10 +54,6 @@ struct _GnomeAppBar
      all up in the air for now. */
   GtkWidget * progress;
   GtkWidget * status;
-  guint interactive : 1; /* This means status is an entry rather than a
-			   label, for the moment. */
-  gint editable_start; /* The first editable position in the interactive
-			  buffer. */
   gchar * prompt; /* The text of a prompt, if any. */
 
   /* Keep it simple; no contexts. 
@@ -67,6 +63,11 @@ struct _GnomeAppBar
   /* Also private by the way */
   GSList * status_stack;
   gchar  * default_status;
+
+  gint16 editable_start; /* The first editable position in the interactive
+			  buffer. */
+  gboolean interactive : 1; /* This means status is an entry rather than a
+			       label, for the moment. */
 };
 
 struct _GnomeAppBarClass

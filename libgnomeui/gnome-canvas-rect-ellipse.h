@@ -56,25 +56,24 @@ typedef struct _GnomeCanvasREClass GnomeCanvasREClass;
 struct _GnomeCanvasRE {
 	GnomeCanvasItem item;
 
-	double x1, y1, x2, y2;		/* Corners of item */
-	double width;			/* Outline width */
-
-	guint fill_color;		/* Fill color, RGBA */
-	guint outline_color;		/* Outline color, RGBA */
-
-	gulong fill_pixel;		/* Fill color */
-	gulong outline_pixel;		/* Outline color */
-
 	GdkBitmap *fill_stipple;	/* Stipple for fill */
 	GdkBitmap *outline_stipple;	/* Stipple for outline */
 
 	GdkGC *fill_gc;			/* GC for filling */
 	GdkGC *outline_gc;		/* GC for outline */
 
-	/* Antialiased specific stuff follows */
-
+	/* Antialiased specific stuff */
 	ArtSVP *fill_svp;		/* The SVP for the filled shape */
 	ArtSVP *outline_svp;		/* The SVP for the outline shape */
+
+	gulong fill_pixel;		/* Fill color */
+	gulong outline_pixel;		/* Outline color */
+
+	double x1, y1, x2, y2;		/* Corners of item */
+	double width;			/* Outline width */
+
+	guint fill_color;		/* Fill color, RGBA */
+	guint outline_color;		/* Outline color, RGBA */
 
 	/* Configuration flags */
 

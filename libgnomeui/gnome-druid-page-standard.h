@@ -40,9 +40,6 @@ struct _GnomeDruidPageStandard
 	GnomeDruidPage parent;
 
 	GtkWidget *vbox;
-	GdkColor background_color;
-	GdkColor logo_background_color;
-	GdkColor title_color;
 	GdkPixbuf *logo_image;
 
 	gchar *title;
@@ -56,6 +53,11 @@ struct _GnomeDruidPageStandard
 	GnomeCanvasItem *background_item;
 	GtkWidget *bottom_bar;
 	GtkWidget *right_bar;
+
+	/*< public >*/
+	GdkColor background_color;
+	GdkColor logo_background_color;
+	GdkColor title_color;
 };
 struct _GnomeDruidPageStandardClass
 {

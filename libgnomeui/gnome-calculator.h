@@ -31,22 +31,24 @@ typedef enum {
 struct _GnomeCalculator {
 	GtkVBox vbox;
 
-	gdouble result;
-	gchar result_string[13];
-	gdouble memory;
-
 	GtkWidget *display;
 
-	GnomeCalculatorMode mode;
+	GtkWidget *invert_button;
+
+	GList *stack;
+	GtkAccelGroup *accel;
+
+	gdouble result;
+	gdouble memory;
+
+	gchar result_string[13];
+
+	GnomeCalculatorMode mode : 2;
 
 	guint add_digit : 1;	/*add a digit instead of starting a new
 				  number*/
 	guint error : 1;
 	guint invert : 1;
-	GtkWidget *invert_button;
-
-	GList *stack;
-	GtkAccelGroup *accel;
 };
 
 struct _GnomeCalculatorClass {

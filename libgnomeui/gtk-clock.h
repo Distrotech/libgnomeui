@@ -23,6 +23,7 @@ typedef struct _GtkClock GtkClock;
 typedef struct _GtkClockClass GtkClockClass;
 
 typedef enum {
+  /* update struct when adding values to enum */
 	GTK_CLOCK_INCREASING,
 	GTK_CLOCK_DECREASING,
 	GTK_CLOCK_REALTIME
@@ -30,13 +31,14 @@ typedef enum {
 
 struct _GtkClock {
 	GtkLabel widget;
-	GtkClockType type;
-	gint timer_id;
-	gint update_interval;
-	time_t seconds;
-	time_t stopped;
 	gchar *fmt;
 	struct tm *tm;
+
+	time_t seconds;
+	time_t stopped;
+	GtkClockType type : 3;
+	gint timer_id;
+	gint update_interval;
 };
 
 struct _GtkClockClass {
