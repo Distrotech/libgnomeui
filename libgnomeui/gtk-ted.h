@@ -14,11 +14,12 @@ BEGIN_GNOME_DECLS
 typedef struct _GtkTed           GtkTed;
 typedef struct _GtkTedClass      GtkTedClass;
 
-guint		  gtk_ted_get_type     (void);
-void              gtk_ted_set_app_name (char *str);
-void              gtk_ted_prepare      (GtkTed *ted);
-GtkWidget         *gtk_ted_new         (char *dialog_name);
-void              gtk_ted_add          (GtkTed *ted, GtkWidget *widget, char *name);
+guint		  gtk_ted_get_type        (void);
+void              gtk_ted_set_app_name    (char *str);
+void              gtk_ted_prepare         (GtkTed *ted);
+GtkWidget         *gtk_ted_new            (char *dialog_name);
+GtkWidget         *gtk_ted_new_layout     (char *dialog_name, char *layout);
+void              gtk_ted_add             (GtkTed *ted, GtkWidget *widget, char *name);
 
 struct _GtkTed
 {

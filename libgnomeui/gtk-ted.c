@@ -75,10 +75,9 @@ gtk_ted_init (GtkTed *ted)
 	GtkWidget *table;
 
 	ted->dialog_name = NULL;
-	ted->widget_box = NULL;
+	ted->widget_box  = NULL;
 	ted->need_gui = 0;
 	ted->in_gui   = 0;
-	
 	ted->widgets = g_hash_table_new (g_str_hash, g_str_equal);
 
 	return table;
@@ -271,6 +270,7 @@ moveme (GtkWidget *w, GdkEvent *event, GtkWidget *widget)
 {
 	GtkWidget *top;
 
+	gtk_grab_remove (w);
 	for (top = w; top->parent; top = top->parent)
 		;
 	gtk_widget_set_uposition (top, event->motion.x_root, event->motion.y_root);
@@ -324,9 +324,18 @@ gtk_ted_prepare_editable_widget (struct ted_widget_info *wi, GtkWidget *ted_tabl
 {
 	GtkWidget *w = wi->widget;
 	GtkWidget *window;
-
+	int tag;
+	
 	/* window is the actual widget, as it is packed inside a GtkAdjustment */
 	window = GTK_WIDGET (GTK_BIN (w)->child);
+
+	/* Buttons have the "clicked" signal enabled, remove this one, this is
+	 * a gmc-specific hack;  the right fix is to find a way to disconnect the
+	 * "clicked" event
+	 */
+	tag = (int) gtk_object_get_data (GTK_OBJECT (window), "click-signal-tag");
+	if (tag)
+		gtk_signal_disconnect (GTK_OBJECT (window), tag);
 	
 	if (GTK_WIDGET_NO_WINDOW (window)){
 		GtkWidget *eventbox;
@@ -921,25 +930,30 @@ gtk_ted_load_label (GtkTed *ted, char *prefix, char *secname)
 }
 
 void
-gtk_ted_load_layout (GtkTed *ted)
+gtk_ted_load_layout (GtkTed *ted, char *layout_file)
 {
 	struct ted_widget_info *wi;
-	char *name = g_copy_strings ("layout/", app_name, NULL);
+	char *name;
 	char *full, *sec_name, *layout;
 	void *iter;
 	int  len = strlen (ted->dialog_name);
 	char *p;
 			
-	
-	full = gnome_datadir_file (name);
-	g_free (name);
+	if (layout_file)
+		full = layout_file;
+	else {
+		name = g_copy_strings ("layout/", app_name, NULL);
+		full = gnome_datadir_file (name);
+		g_free (name);
+	}
 	
 	if (g_file_exists (full)){
 		layout = g_copy_strings ("=", full, "=", NULL);
 	} else {
 		layout = g_strdup ("=./layout=");
 	}
-	g_free (full);
+	if (full != layout_file)
+		g_free (full);
 
 	iter = gnome_config_init_iterator_sections (layout);
 	while ((iter = gnome_config_iterator_next (iter, &sec_name, NULL)) != NULL){
@@ -1370,16 +1384,22 @@ gtk_ted_prepare (GtkTed *ted)
 }
 
 GtkWidget *
-gtk_ted_new (char *name)
+gtk_ted_new_layout (char *name, char *layout)
 {
 	GtkTed *ted;
 
 	ted = gtk_type_new (gtk_ted_get_type ());
 	ted->dialog_name = g_strdup (name);
-	gtk_ted_load_layout (ted);
+	gtk_ted_load_layout (ted, layout);
 	gtk_container_border_width (GTK_CONTAINER (ted), 6);
 	
 	return GTK_WIDGET (ted);
+}
+
+GtkWidget *
+gtk_ted_new (char *name)
+{
+	return gtk_ted_new_layout (name, NULL);
 }
 
 

@@ -1,3 +1,8 @@
+Wed Mar  4 00:14:01 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtk-ted.c (gtk_ted_new_layout): create widgets with an argument
+	that specifies where the layout is stored.
+
 1998-03-03  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-about.c (gnome_about_new): Uses /* */ comments, not //.
