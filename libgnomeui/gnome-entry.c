@@ -108,6 +108,7 @@ gnome_entry_init (GnomeEntry *gentry)
 			    (GtkSignalFunc) entry_activated,
 			    gentry);
 	gtk_combo_disable_activate (GTK_COMBO (gentry));
+        gtk_combo_set_case_sensitive (GTK_COMBO (gentry), TRUE);
 }
 
 

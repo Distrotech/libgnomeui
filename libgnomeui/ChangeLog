@@ -1,3 +1,8 @@
+1999-08-18  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-entry.c (gnome_entry_init): Set combo case-insensitive.
+	Closes bug 1939.
+	
 1999-08-17  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-canvas.h: Mark new_aa() experimental
