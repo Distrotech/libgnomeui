@@ -1,3 +1,11 @@
+1999-08-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (do_select_many): Added an argument to specify
+	whether it should actually use the event in the emission.
+	(selection_many_icon_event): I am such a doofus.  Fixed delayed
+	computation for icons that are already selected.  This fixes DnD
+	and menus everywhere else.
+
 1999-08-08  Chris Lahey  <clahey@umich.edu>
 
 	* gnome-canvas-widget.c (gnome_canvas_widget_set_arg): Made it so

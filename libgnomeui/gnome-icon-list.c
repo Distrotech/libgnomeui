@@ -653,7 +653,7 @@ select_range (Gil *gil, Icon *icon, int idx, GdkEvent *event)
 
 /* Handles icon selection for MULTIPLE or EXTENDED selection modes */
 static void
-do_select_many (Gil *gil, Icon *icon, int idx, GdkEvent *event)
+do_select_many (Gil *gil, Icon *icon, int idx, GdkEvent *event, int use_event)
 {
 	GilPrivate *priv;
 	int range, additive;
@@ -672,14 +672,14 @@ do_select_many (Gil *gil, Icon *icon, int idx, GdkEvent *event)
 
 	if (!range) {
 		if (additive)
-			emit_select (gil, !icon->selected, idx, event);
+			emit_select (gil, !icon->selected, idx, use_event ? event : NULL);
 		else
-			emit_select (gil, TRUE, idx, event);
+			emit_select (gil, TRUE, idx, use_event ? event : NULL);
 
 		priv->last_selected_idx = idx;
 		priv->last_selected_icon = icon;
 	} else
-		select_range (gil, icon, idx, event);
+		select_range (gil, icon, idx, use_event ? event : NULL);
 }
 
 /* Event handler for icons when we are in MULTIPLE or EXTENDED mode */
@@ -725,14 +725,27 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 				emit_select (gil, TRUE, idx, event);
 				do_select = FALSE;
 			}
+		} else if (icon->selected) {
+			priv->select_pending = TRUE;
+			priv->select_pending_event = *event;
+			priv->select_pending_was_selected = icon->selected;
+
+			if (on_text && priv->is_editable && event->button.button == 1)
+				priv->edit_pending = TRUE;
+
+			emit_select (gil, TRUE, idx, event);
+			do_select = FALSE;
+		}
+#if 0
 		} else if (icon->selected && on_text && priv->is_editable
 			   && event->button.button == 1) {
 			priv->edit_pending = TRUE;
 			do_select = FALSE;
 		}
+#endif
 
 		if (do_select)
-			do_select_many (gil, icon, idx, event);
+			do_select_many (gil, icon, idx, event, TRUE);
 
 		retval = TRUE;
 		break;
@@ -750,6 +763,19 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 	case GDK_BUTTON_RELEASE:
 		if (priv->select_pending) {
 			icon->selected = priv->select_pending_was_selected;
+			do_select_many (gil, icon, idx, &priv->select_pending_event, FALSE);
+			priv->select_pending = FALSE;
+			retval = TRUE;
+		}
+
+		if (priv->edit_pending) {
+			gnome_icon_text_item_start_editing (text);
+			priv->edit_pending = FALSE;
+			retval = TRUE;
+		}
+#if 0
+		if (priv->select_pending) {
+			icon->selected = priv->select_pending_was_selected;
 			do_select_many (gil, icon, idx, &priv->select_pending_event);
 			priv->select_pending = FALSE;
 			retval = TRUE;
@@ -758,6 +784,7 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 			priv->edit_pending = FALSE;
 			retval = TRUE;
 		}
+#endif
 
 		break;
 
