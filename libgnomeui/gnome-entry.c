@@ -197,9 +197,8 @@ gnome_entry_construct (GnomeEntry *gentry,
 
 	flags = GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
 
-	gnome_entry_construct_full (gentry, history_id, NULL, 
-				    gentry->_priv->combo, NULL, NULL,
-				    flags);
+	gnome_entry_construct_full (gentry, history_id, NULL, NULL,
+				    NULL, NULL, flags);
 }
 
 void
@@ -211,6 +210,8 @@ gnome_entry_construct_full (GnomeEntry *gentry,
 			    GtkWidget *browse_dialog,
 			    guint32 flags)
 {
+	guint32 newflags = flags;
+
 	g_return_if_fail (gentry != NULL);
 
 	/* Create the default selector widget if requested. */
@@ -233,13 +234,13 @@ gnome_entry_construct_full (GnomeEntry *gentry,
 		gtk_signal_connect (GTK_OBJECT (gentry->_priv->entry),
 				    "activate", entry_activated_cb, gentry);
 
-		flags &= ~GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
+		newflags &= ~GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
 	}
 
 	gnome_selector_construct (GNOME_SELECTOR (gentry),
 				  history_id, dialog_title,
 				  entry_widget, selector_widget,
-				  browse_dialog, flags);
+				  browse_dialog, newflags);
 }
 
 
@@ -389,8 +390,6 @@ entry_activated_cb (GtkWidget *widget, gpointer data)
 	gnome_selector_activate_entry (GNOME_SELECTOR (data));
 }
 
-
-#ifndef GNOME_EXCLUDE_DEPRECATED
 
 /**
  * gnome_entry_gtk_entry
@@ -606,5 +605,3 @@ gnome_entry_save_history (GnomeEntry *gentry)
 
 	gnome_selector_save_history (GNOME_SELECTOR (gentry));
 }
-
-#endif /* not GNOME_EXCLUDE_DEPRECATED */
