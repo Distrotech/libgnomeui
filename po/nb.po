@@ -710,7 +710,7 @@ msgstr "DateEdit flagg"
 
 #: libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
-msgstr "Flagg for hvordanm DateEdit ser ut"
+msgstr "Flagg for utseende for DateEdit"
 
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
