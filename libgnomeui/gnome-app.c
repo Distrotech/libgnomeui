@@ -124,33 +124,37 @@ gnome_app_configure_positions (GnomeApp *app)
 
 	/* 1.  The menubar: can go on top or bottom */
 	if (app->menubar){
-		if (app->menubar->parent->parent)
-			gtk_container_remove (GTK_CONTAINER(app->menubar->parent->parent),
-					      app->menubar->parent);
+		GtkWidget *handlebox = app->menubar->parent;
+
+		gtk_widget_ref (handlebox);
+		if (app->menubar->parent->parent) 
+			gtk_container_remove (GTK_CONTAINER(app->table), handlebox);
 		gtk_table_attach(GTK_TABLE(app->table),
-				 app->menubar->parent,
+				 handlebox,
 				 0, 3,
 				 (app->pos_menubar == GNOME_APP_POS_TOP)?0:2,
 				 (app->pos_menubar == GNOME_APP_POS_TOP)?1:3,
 				 GTK_EXPAND | GTK_FILL,
 				 GTK_SHRINK,
 				 0, 0);
+		gtk_widget_unref (handlebox);
 	}
 	
 	/* 2. the toolbar */
 	if (app->toolbar){
+		GtkWidget *handlebox = app->menubar->parent;
 		int offset = 0;
 
+		gtk_widget_ref (handlebox);
 		if (app->toolbar->parent->parent)
-			gtk_container_remove (GTK_CONTAINER(app->toolbar->parent->parent),
-					      app->toolbar->parent);
+			gtk_container_remove (GTK_CONTAINER(app->table), handlebox);
 
 		if(app->pos_menubar == GNOME_APP_POS_TOP)
 			offset = 1;
 		
 		if(app->pos_toolbar == GNOME_APP_POS_LEFT || app->pos_toolbar == GNOME_APP_POS_RIGHT){
 			gtk_table_attach(GTK_TABLE(app->table),
-					 app->toolbar->parent,
+					 handlebox,
 					 (app->pos_toolbar==GNOME_APP_POS_LEFT)?0:2,
 					 (app->pos_toolbar==GNOME_APP_POS_LEFT)?1:3,
 					 offset, 3,
@@ -173,6 +177,7 @@ gnome_app_configure_positions (GnomeApp *app)
 					 GTK_SHRINK,
 					 0, 0);
 		}
+		gtk_widget_unref (handlebox);
 	}
 	/* Repack any contents of ours */
 	if(app->contents) 
