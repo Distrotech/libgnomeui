@@ -1,3 +1,13 @@
+1999-02-10  James Henstridge  <james@daa.com.au>
+
+	* gnome-app-util.c: The gnome_app_progress_* functions would sometimes
+	cause a segfault.  There was code to make sure that stale progress
+	keys would get destroyed when the associated GnomeApp got destroyed.
+	If you cleaned up the key with gnome_app_progress_done, then a segfault
+	would occur when the GnomeApp got destroyed.  Now the cleanup
+	signal handler's id is saved and the handler is removed when the key
+	is destroyed.
+
 Tue Feb 09 18:51:08 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap-entry.c: fix this up, don't look up pixmaps more then

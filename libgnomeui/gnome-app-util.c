@@ -637,7 +637,7 @@ gnome_app_request_password (GnomeApp * app, const gchar * prompt,
 typedef struct {
   GtkWidget * bar; /* Progress bar, for dialog; NULL for AppBar */
   GtkWidget * widget; /* dialog or AppBar */
-  guint timeout_tag;
+  guint timeout_tag, handler_id;
   GnomeApp * app;
   GnomeAppProgressFunc percentage_cb;
   GnomeAppProgressCancelFunc cancel_cb;
@@ -762,9 +762,9 @@ gnome_app_progress_timeout (GnomeApp * app,
 				       key );
 
   /* Make sure progress stops if the app is destroyed. */
-  gtk_signal_connect(GTK_OBJECT(app), "destroy",
-		     GTK_SIGNAL_FUNC(stop_progress_cb),
-		     key);
+  key->handler_id = gtk_signal_connect(GTK_OBJECT(app), "destroy",
+				       GTK_SIGNAL_FUNC(stop_progress_cb),
+	 			       key);
 
   return key;
 }
@@ -810,9 +810,9 @@ gnome_app_progress_manual (GnomeApp * app,
   }
 
   /* Make sure progress stops if the app is destroyed. */
-  gtk_signal_connect(GTK_OBJECT(app), "destroy",
-		     GTK_SIGNAL_FUNC(stop_progress_cb),
-		     key);
+  key->handler_id = gtk_signal_connect(GTK_OBJECT(app), "destroy",
+				       GTK_SIGNAL_FUNC(stop_progress_cb),
+				       key);
 
   return key;
 }
@@ -861,6 +861,8 @@ void gnome_app_progress_done (GnomeAppProgressKey key)
   g_return_if_fail ( key != NULL );
 
   progress_timeout_remove((ProgressKeyReal *)key);
+
+  gtk_signal_disconnect(GTK_OBJECT(real_key->app), real_key->handler_id);
 
   if (real_key->bar) { /* It's a dialog */
     if (real_key->widget) gnome_dialog_close(GNOME_DIALOG(real_key->widget));
