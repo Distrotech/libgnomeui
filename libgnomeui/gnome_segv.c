@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 
   /* Before to change this link to something like
    * http://www.gnome.org/application_crashed.LL.shtml,
-   * ask webmaster@redhat.com for a copy of the source shtml file, translate it,
+   * ask webmaster@gnome.org for a copy of the source shtml file, translate it,
    * and send it back to him. */
   urlbtn = gnome_href_new(_("http://www.gnome.org/application_crashed.shtml"),
                           _("Please visit the GNOME Application Crash page for more information"));
