@@ -32,10 +32,9 @@
 #include <gtk/gtktypeutils.h>
 
 
-
+#include <libgnome/libgnome.h>
 #include "gnome-macros.h"
 #include "gnometypebuiltins.h"
-#include "gnomemarshal.h"
 
 G_BEGIN_DECLS
 

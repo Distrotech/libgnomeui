@@ -1,3 +1,7 @@
+2001-04-30  Martin Baulig  <baulig@suse.de>
+
+	* gnomemarshal.list, gnomemarshal-main.c: Moved to libgnome.
+
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
 	* gnome-dock*.[ch]: Removed; use BonoboDock instead.

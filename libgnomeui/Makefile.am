@@ -104,7 +104,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-text.c		\
 	gnome-vfs-util.c		\
 	gnome-window.c			\
-	gnomemarshal-main.c		\
 	wap-textfu.c			\
 	$(noinst_HEADERS)
 
@@ -163,9 +162,7 @@ BUILT_SOURCES = \
 	gnometypebuiltins.h		\
 	gnometypebuiltins_evals.c	\
 	gnometypebuiltins_ids.c		\
-	gnometypebuiltins_vars.c	\
-	gnomemarshal.h			\
-	gnomemarshal.c
+	gnometypebuiltins_vars.c
 
 # generate gnome.defs file from gnome-boxed.defs and *.h
 gnome.defs: $(GNOME_MAKEENUMS) gnome-boxed.defs $(gnome_headers)
@@ -198,19 +195,6 @@ gnometypebuiltins_evals.c: $(GNOME_MAKEENUMS) gnome.defs
 	&& $(GNOME_MAKEENUMS) arrays $(gnome_headers) > gtbe.tmp \
 	&& mv gtbe.tmp gnometypebuiltins_evals.c
 
-stamp-gnomemarshal.h: gnomemarshal.list
-	cd $(srcdir) \
-	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --header >> xgen-gmh \
-	&& (cmp -s xgen-gmh gnomemarshal.h || cp xgen-gmh gnomemarshal.h) \
-	&& rm -f xgen-gmh xgen-gmh~ \
-	&& echo timestamp > $(@F)
-
-gnomemarshal.h gnomemarshal.c: stamp-gnomemarshal.h
-	cd $(srcdir) \
-	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --body >> xgen-gmc \
-	&& cp xgen-gmc gnomemarshal.c \
-	&& rm -f xgen-gmc xgen-gmc~
-
 #######################
 
 gnome_segv_SOURCES = gnome_segv.c
@@ -226,7 +210,6 @@ EXTRA_DIST =					\
 	$(gtkrc_DATA)				\
 	AUTHORS					\
 	gnome.defs 				\
-	gnomemarshal.list			\
 	gnome-boxed.defs			\
 	gnometypebuiltins_vars.c		\
 	gnometypebuiltins_ids.c			\
