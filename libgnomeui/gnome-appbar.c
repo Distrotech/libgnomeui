@@ -293,8 +293,6 @@ gnome_appbar_construct(GnomeAppBar * ab,
   /* These checks are kind of gross because an unfinished object will
      be returned from _new instead of NULL */
 
-  /* Has to have either a progress bar or a status bar */
-  g_return_if_fail( (has_progress == TRUE) || (has_status == TRUE) );
   /* Can't be interactive if there's no status bar */
   g_return_if_fail( ((has_status == FALSE) && 
 		     (interactivity == GNOME_PREFERENCES_NEVER)) ||
