@@ -3,6 +3,7 @@
 
 #include "libgnome/gnome-defs.h"
 #include "libgnomeui/gnome-about.h"
+#include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-app-helper.h"
 #include "libgnomeui/gnome-actionarea.h"
@@ -13,7 +14,7 @@
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-net.h"
 #include "libgnomeui/gnome-pixmap.h"
-#include "libgnomeui/gnome-actionarea.h"
+#include "libgnomeui/gnome-properties.h"
 #include "libgnomeui/gnome-scores.h"
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-session.h"
