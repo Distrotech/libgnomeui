@@ -761,7 +761,8 @@ gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType 
       break;
     }
 
-  help_view->url_ctx = gnome_url_show_full(help_view->url_ctx, url, url_type);
+  help_view->url_ctx = gnome_url_show_full(help_view->url_ctx, url, url_type,
+					   GNOME_URL_DISPLAY_NEWWIN|GNOME_URL_DISPLAY_CLOSE_ATEXIT);
 }
 
 void
