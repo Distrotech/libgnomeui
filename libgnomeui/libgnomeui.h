@@ -42,6 +42,7 @@
 #include "libgnomeui/gnome-dateedit.h"
 #include "libgnomeui/gnome-calculator.h"
 #include "libgnomeui/gnome-lamp.h"
+#include "libgnomeui/gtkdial.h"
 
 BEGIN_GNOME_DECLS
 

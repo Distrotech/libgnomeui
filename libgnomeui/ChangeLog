@@ -1,3 +1,10 @@
+1998-06-03  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* libgnomeui.h:
+	* Makefile.am:
+	* gtkdial.[ch]: moved gtkdial from gnome-admin/gxsnmp/widgets
+ 	to libgnomeui.
+
 1998-06-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* libgnomeui.h: 
