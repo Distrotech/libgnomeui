@@ -580,7 +580,7 @@ msgstr "_ጨዋታ"
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "_ረዳት"
+msgstr "_መረጃ"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -607,7 +607,7 @@ msgstr "የአሁኑን ፋይል አስቀምጥ"
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "በ...ስም _አስቀምጥ"
+msgstr "በሌላ ስም _አስቀምጥ..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
@@ -652,7 +652,7 @@ msgstr "የአሁኑን ፋይል ዝጋ"
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr "_ማቆሚያ"
+msgstr "_ወጣ"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
