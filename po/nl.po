@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-21 12:58+0200\n"
 "PO-Revision-Date: 2002-05-28 01:50+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -141,6 +142,7 @@ msgstr "%s-info"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Bestand"
 
@@ -150,7 +152,7 @@ msgstr "_Bestand/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "B_ewerken"
+msgstr "Be_werken"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
@@ -158,7 +160,7 @@ msgstr "B_ewerken/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "Bee_ld"
+msgstr "Beel_d"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
@@ -198,6 +200,7 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hulp"
 
@@ -271,7 +274,7 @@ msgstr "Het huidige bestand sluiten"
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr "_Afsluiten"
+msgstr "A_fsluiten"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
@@ -388,11 +391,11 @@ msgstr "Verander de instellingen van het programma"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Over dit programma"
 
@@ -419,7 +422,7 @@ msgstr "Een nieuw venster creëren"
 msgid "_Close This Window"
 msgstr "Dit venster _sluiten"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Het huidige venster sluiten"
 
@@ -1296,27 +1299,27 @@ msgstr "Uitspringen"
 msgid "About"
 msgstr "Info"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "X display to use"
 msgstr "Het te gebruiken X-display"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:125
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibliotheek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Er traden meerdere segmentatiefouten op; kan het fout-dialoogvenster niet "
 "tonen\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:637
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1370,8 +1373,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Bekijk de 'GNOME Application Crash'-pagina voor meer informatie"
 
-#~ msgid "Exit the test"
-#~ msgstr "Test afsluiten"
-
-#~ msgid "_Credits"
-#~ msgstr "_Credits"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Test afsluiten"
