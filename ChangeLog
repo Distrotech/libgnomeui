@@ -1,3 +1,8 @@
+2004-02-25  Dennis Cranston <dennis_cranston at yahoo com>
+
+	* libgnomeui/gnome-file-entry.c: (browse_clicked):  fix the
+	folder-mode of GtkFileChooser.
+
 2004-02-24  Anders Carlsson  <andersca@gnome.org>
 
 	* Makefile.am:

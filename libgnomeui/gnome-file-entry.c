@@ -558,7 +558,7 @@ browse_clicked(GnomeFileEntry *fentry)
 				gdk_window_raise (fw->window);
 
 			gtk_file_chooser_set_folder_mode (GTK_FILE_CHOOSER (fw),
-							  fentry->_priv->directory_entry);
+							  fentry->_priv->directory_entry ? TRUE : FALSE);
 
 			p = build_filename (fentry);
 			if (p) {
@@ -602,7 +602,7 @@ browse_clicked(GnomeFileEntry *fentry)
 		gtk_dialog_set_default_response (GTK_DIALOG (fw), GTK_RESPONSE_ACCEPT);
 
 		gtk_file_chooser_set_folder_mode (GTK_FILE_CHOOSER (fw),
-						  fentry->_priv->directory_entry);
+						  fentry->_priv->directory_entry ? TRUE : FALSE);
 
 		p = build_filename (fentry);
 		if (p) {
