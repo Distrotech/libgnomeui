@@ -47,11 +47,11 @@ struct _GtkClockClass {
 
 guint gtk_clock_get_type(void);
 GtkWidget *gtk_clock_new(GtkClockType type);
-void gtk_clock_set_format(GtkClock *clock, gchar *fmt);
-void gtk_clock_set_seconds(GtkClock *clock, time_t seconds);
-void gtk_clock_set_update_interval(GtkClock *clock, gint seconds);
-void gtk_clock_start(GtkClock *clock);
-void gtk_clock_stop(GtkClock *clock);
+void gtk_clock_set_format(GtkClock *gclock, gchar *fmt);
+void gtk_clock_set_seconds(GtkClock *gclock, time_t seconds);
+void gtk_clock_set_update_interval(GtkClock *gclock, gint seconds);
+void gtk_clock_start(GtkClock *gclock);
+void gtk_clock_stop(GtkClock *gclock);
 
 #ifdef __cplusplus
 }
