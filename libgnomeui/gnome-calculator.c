@@ -1065,7 +1065,7 @@ static const CalculatorButton buttons[8][5] = {
 		{N_("1/x"),(GtkSignalFunc)simple_func,c_inv,NULL,FALSE,{0}},
 		{N_("x^2"),(GtkSignalFunc)simple_func,c_pow2,sqrt,FALSE,{0}},
 		{N_("SQRT"),(GtkSignalFunc)simple_func,sqrt,c_pow2,FALSE,{'r','R',0}},
-		{N_("CE/C"),(GtkSignalFunc)clear_calc,NULL,NULL,FALSE,{GDK_Clear,GDK_Backspace,0}},
+		{N_("CE/C"),(GtkSignalFunc)clear_calc,NULL,NULL,FALSE,{GDK_Clear,GDK_BackSpace,0}},
 		{N_("AC"),(GtkSignalFunc)reset_calc,NULL,NULL,FALSE,{GDK_Escape,0}}
 	},{
 		{NULL,NULL,NULL,NULL}, /*inverse button*/
