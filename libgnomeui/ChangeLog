@@ -1,3 +1,19 @@
+1998-07-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (paint): Fixed off-by-one bug in the rectangle
+	coordinates comparison.
+	(gnome_canvas_new): Use the construct function.
+	(gnome_canvas_construct): New public function; constructor useful
+	for derived classes and language bindings.
+
+	The canvas no longer supports unattached item sets, since the
+	application can take care of a list of arbitrary items by itself.
+	Only hierarchical groups are supported now.
+
+	(gnome_canvas_group_new): Removed this function.
+	(group_add): Made static and renamed from gnome_canvas_group_add.
+	(group_remove): Made static and renamed from gnome_canvas_group_remove.
+
 1998-07-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (gnome_mdi_add_view): check if view has been successfully

@@ -50,6 +50,9 @@
 #include "gnome-canvas.h"
 
 
+static void group_add    (GnomeCanvasGroup *group, GnomeCanvasItem *item);
+static void group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item);
+
 
 /*** GnomeCanvasItem ***/
 
@@ -143,7 +146,7 @@ item_post_create_setup (GnomeCanvasItem *item)
 	gtk_object_ref (obj);
 	gtk_object_sink (obj);
 
-	gnome_canvas_group_add (GNOME_CANVAS_GROUP (item->parent), item);
+	group_add (GNOME_CANVAS_GROUP (item->parent), item);
 
 	if (GTK_WIDGET_REALIZED (item->canvas) && GNOME_CANVAS_ITEM_CLASS (obj->klass)->realize)
 		(* GNOME_CANVAS_ITEM_CLASS (obj->klass)->realize) (item);
@@ -161,10 +164,10 @@ gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType ty
 {
 	GtkObject *obj;
 	GnomeCanvasItem *item;
-	va_list var_args;
-	GSList *arg_list = NULL;
-	GSList *info_list = NULL;
-	gchar *error;
+	va_list args;
+	GSList *arg_list;
+	GSList *info_list;
+	char *error;
 
 	g_return_val_if_fail (canvas != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), NULL);
@@ -178,35 +181,25 @@ gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType ty
 	item->canvas = canvas;
 	item->parent = GNOME_CANVAS_ITEM (parent);
 
+	arg_list = NULL;
+	info_list = NULL;
 
-	va_start (var_args, type);
-	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj),
-					 &arg_list,
-					 &info_list,
-					 &var_args);
-	va_end (var_args);
-	if (error)
-	  {
-	    g_warning ("gnome_canvas_item_new(): %s", error);
-	    g_free (error);
-	  }
-	else
-	  {
-	    GSList *slist_arg;
-	    GSList *slist_info;
+	va_start (args, type);
+	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj), &arg_list, &info_list, &args);
+	va_end (args);
 
-	    slist_arg = arg_list;
-	    slist_info = info_list;
-	    while (slist_arg)
-	      {
-		gtk_object_arg_set (obj, slist_arg->data, slist_info->data);
-		slist_arg = slist_arg->next;
-		slist_info = slist_info->next;
-	      }
-	    gtk_args_collect_cleanup (arg_list, info_list);
-	  }
+	if (error) {
+		g_warning ("gnome_canvas_item_new(): %s", error);
+		g_free (error);
+	} else {
+		GSList *arg, *info;
 
-	
+		for (arg = arg_list, info = info_list; arg; arg = arg->next, info = info->next)
+			gtk_object_arg_set (obj, arg->data, info->data);
+
+		gtk_args_collect_cleanup (arg_list, info_list);
+	}
+
 	item_post_create_setup (item);
 
 	return item;
@@ -251,7 +244,7 @@ gnome_canvas_item_shutdown (GtkObject *object)
 	item->canvas->need_repick = TRUE;
 
 	if (item->parent) {
-		gnome_canvas_group_remove (GNOME_CANVAS_GROUP (item->parent), item);
+		group_remove (GNOME_CANVAS_GROUP (item->parent), item);
 		gtk_object_unref (object);
 	}
 
@@ -282,48 +275,41 @@ gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoin
 void
 gnome_canvas_item_set (GnomeCanvasItem *item, ...)
 {
-	va_list var_args;
-	GSList *arg_list = NULL;
-	GSList *info_list = NULL;
-	gchar *error;
+	va_list args;
+	GSList *arg_list;
+	GSList *info_list;
+	char *error;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 
-	va_start (var_args, item);
-	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item),
-					 &arg_list,
-					 &info_list,
-					 &var_args);
-	va_end (var_args);
+	arg_list = NULL;
+	info_list = NULL;
 
-	if (error)
-	  {
-	    g_warning ("gnome_canvas_item_set(): %s", error);
-	    g_free (error);
-	  }
-	else if (arg_list)
-	  {
-	    GSList *slist_arg;
-	    GSList *slist_info;
-	    GtkObject *object;
+	va_start (args, item);
+	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item), &arg_list, &info_list, &args);
+	va_end (args);
 
-	    gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	if (error) {
+		g_warning ("gnome_canvas_item_set(): %s", error);
+		g_free (error);
+	} else if (arg_list) {
+		GSList *arg;
+		GSList *info;
+		GtkObject *object;
 
-	    object = GTK_OBJECT (item);
-	    slist_arg = arg_list;
-	    slist_info = info_list;
-	    while (slist_arg)
-	      {
-		gtk_object_arg_set (object, slist_arg->data, slist_info->data);
-		slist_arg = slist_arg->next;
-		slist_info = slist_info->next;
-	      }
-	    gtk_args_collect_cleanup (arg_list, info_list);
+		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 
-	    gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
-	    item->canvas->need_repick = TRUE;
-	  }
+		object = GTK_OBJECT (item);
+
+		for (arg = arg_list, info = info_list; arg; arg = arg->next, info = info->next)
+			gtk_object_arg_set (object, arg->data, info->data);
+
+		gtk_args_collect_cleanup (arg_list, info_list);
+
+		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+		item->canvas->need_repick = TRUE;
+	}
 }
 
 void
@@ -517,20 +503,6 @@ gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		if (item->parent)
 			gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 	}
-}
-
-GnomeCanvasItem *
-gnome_canvas_group_new (GnomeCanvas *canvas)
-{
-	GnomeCanvasItem *item;
-
-	g_return_val_if_fail (canvas != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), NULL);
-
-	item = GNOME_CANVAS_ITEM (gtk_type_new (gnome_canvas_group_get_type ()));
-	item->canvas = canvas;
-
-	return item;
 }
 
 static void
@@ -728,14 +700,9 @@ gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
 		gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 }
 
-void
-gnome_canvas_group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
+static void
+group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
-	g_return_if_fail (group != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS_GROUP (group));
-	g_return_if_fail (item != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
-
 	/* FIXME: should we reference the item? */
 
 	if (!group->item_list) {
@@ -747,8 +714,8 @@ gnome_canvas_group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 	gnome_canvas_group_child_bounds (group, item);
 }
 
-void
-gnome_canvas_group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item)
+static void
+group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
 	GList *list_item;
 
@@ -959,16 +926,29 @@ gnome_canvas_new (GdkVisual *visual, GdkColormap *colormap)
 
 	g_return_val_if_fail (visual != NULL, NULL);
 	g_return_val_if_fail (colormap != NULL, NULL);
-	
+
 	canvas = GNOME_CANVAS (gtk_type_new (gnome_canvas_get_type ()));
+	gnome_canvas_construct (canvas, visual, colormap);
+	return GTK_WIDGET (canvas);
+}
+
+void
+gnome_canvas_construct (GnomeCanvas *canvas, GdkVisual *visual, GdkColormap *colormap)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+	g_return_if_fail (visual != NULL);
+	g_return_if_fail (colormap != NULL);
 
 	canvas->visual = visual;
 	canvas->colormap = colormap;
 	canvas->cc = gdk_color_context_new (visual, colormap);
 
-	canvas->root = gnome_canvas_group_new (canvas);
+	/* Create the root item as a special case */
 
-	return GTK_WIDGET (canvas);
+	canvas->root = GNOME_CANVAS_ITEM (gtk_type_new (gnome_canvas_group_get_type ()));
+	canvas->root->canvas = canvas;
+	canvas->need_repick = TRUE;
 }
 
 static void
@@ -1546,7 +1526,7 @@ paint (GnomeCanvas *canvas)
 	if (canvas->redraw_y2 < draw_y2)
 		draw_y2 = canvas->redraw_y2;
 
-	if ((draw_x1 > draw_x2) || (draw_y1 > draw_y2))
+	if ((draw_x1 >= draw_x2) || (draw_y1 >= draw_y2))
 		return;
 
 	/* Set up the temporary pixmap */

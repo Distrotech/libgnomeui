@@ -22,8 +22,8 @@ BEGIN_GNOME_DECLS
 #define GNOME_CANVAS_EPSILON 1e-10
 
 
-typedef struct _GnomeCanvas      GnomeCanvas;
-typedef struct _GnomeCanvasClass GnomeCanvasClass;
+typedef struct _GnomeCanvas           GnomeCanvas;
+typedef struct _GnomeCanvasClass      GnomeCanvasClass;
 typedef struct _GnomeCanvasGroup      GnomeCanvasGroup;
 typedef struct _GnomeCanvasGroupClass GnomeCanvasGroupClass;
 
@@ -140,20 +140,14 @@ void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
 
 /* GnomeCanvasGroup - a group of canvas items
  *
- * A group can be used as a node in the hierarchical tree of groups/items inside a canvas -- this is
- * the most common use.  It can also be used as an independent set of canvas items.
+ * A group is a node in the hierarchical tree of groups/items inside a canvas.  Groups serve to
+ * give a logical structure to the items.
  *
  * Consider a circuit editor application that uses the canvas for its schematic display.
  * Hierarchically, there would be canvas groups that contain all the components needed for an
  * "adder", for example -- this includes some logic gates as well as wires.  You can move stuff
  * around in a convenient way by doing a gnome_canvas_item_move() of the hierarchical groups -- to
- * move an adder, simply move the group that represents the adder.  However, you may also want to
- * say, "make all the wires in the schematic have a red color".  Since the wires may be at different
- * levels in the hierarchy, you can instead store them separately in a set of wires and then call
- * gnome_canvas_configure() just for that set.
- *
- * When a group is being used as a set, neither its parent field, nor its bounding box and
- * (xpos, ypos) fields contain anything useful.
+ * move an adder, simply move the group that represents the adder.
  *
  * The (xpos, ypos) fields of a canvas group are the relative origin for the group's children.
  */
@@ -182,17 +176,6 @@ struct _GnomeCanvasGroupClass {
 
 /* Standard Gtk function */
 GtkType gnome_canvas_group_get_type (void);
-
-/* Create a new canvas group.  This is NOT inserted in the canvas; the group is intended to be used
- * as an independent set for canvas items.
- */
-GnomeCanvasItem *gnome_canvas_group_new (GnomeCanvas *canvas);
-
-/* Add an item to the top of a group */
-void gnome_canvas_group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item);
-
-/* Remove an item from a group */
-void gnome_canvas_group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item);
 
 /* For use only by the core and item type implementations.  If item is non-null, then the group adds
  * the item's bounds to the current group's bounds, and propagates it upwards in the item hierarchy.
@@ -241,7 +224,7 @@ struct _GnomeCanvas {
 
 	GnomeCanvasItem *current_item;		/* The item containing the mouse pointer, or NULL if none */
 	GnomeCanvasItem *new_current_item;	/* Item that is about to become current
-						 * (to track deletions and such)
+						 * (used to track deletions and such)
 						 */
 
 	GdkEvent pick_event;			/* Event on which selection of current item is based */
@@ -274,6 +257,9 @@ GtkType gnome_canvas_get_type (void);
  * the canvas.
  */
 GtkWidget *gnome_canvas_new (GdkVisual *visual, GdkColormap *colormap);
+
+/* Constructor useful for derived classes and language wrappers */
+void gnome_canvas_construct (GnomeCanvas *canvas, GdkVisual *visual, GdkColormap *colormap);
 
 /* Returns the root canvas item group of the canvas */
 GnomeCanvasItem *gnome_canvas_root (GnomeCanvas *canvas);
