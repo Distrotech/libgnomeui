@@ -1,3 +1,11 @@
+2003-10-13  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserimpldefault.c (check_bookmarks_sensitivity): Walk
+	the whole shortcuts model, not just the bookmarks part --- there
+	is no need to add bookmarks for "stock" volume items.
+	(gtk_file_chooser_impl_default_set_property): Oops, hide/show the
+	tree/list as appropriate for the folder_mode property.
+
 2003-10-12  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystemgnomevfs.c (gtk_file_folder_gnome_vfs_get_info):
