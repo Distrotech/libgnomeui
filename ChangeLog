@@ -1,3 +1,19 @@
+2003-07-01  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* fix a typo in configure.in that broke the build.
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c (vfs_src):
+	Fix a memory leak. Patch by Takuro Ashie <ashie@homa.ne.jp>.
+	Fixes bug #114928.
+
+2003-06-30  Leena Gunda  <leena.gunda@wipro.com> 
+
+	* libgnomeui/gnome-ui-init.c:
+	(event_sounds_changed_cb), (setup_event_listener):
+	Initialize sound handling for Gnome System Events.
+	(initialize_gnome_signal_relay): Add emission hook for the 'show' signal
+	associated with the message dialog.
+	(relay_gnome_signal): Trigger sound associated with the message type.
+
 2003-06-29  Telsa Gwynne  <hobbit@aloss.ukuu.org.uk>
 
 	* configure.in: Added "cy" (Welsh) to ALL_LINGUAS

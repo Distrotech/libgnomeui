@@ -1,4 +1,4 @@
-aC_INIT(libgnomeui)
+AC_INIT(libgnomeui)
 
 # Making releases:
 #   LIBGNOMEUI_MICRO_VERSION += 1;
