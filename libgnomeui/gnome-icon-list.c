@@ -111,7 +111,7 @@ typedef struct {
 
 	/* User data and destroy notify function */
 	gpointer data;
-	GtkDestroyNotify destroy;
+	GDestroyNotify destroy;
 
 	/* ID for the text item's event signal handler */
 	guint text_event_id;
@@ -2549,7 +2549,7 @@ gnome_icon_list_set_selection_mode (GnomeIconList *gil, GtkSelectionMode mode)
 void
 gnome_icon_list_set_icon_data_full (GnomeIconList *gil,
 				    int pos, gpointer data,
-				    GtkDestroyNotify destroy)
+				    GDestroyNotify destroy)
 {
 	Icon *icon;
 

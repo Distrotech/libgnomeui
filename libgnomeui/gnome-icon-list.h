@@ -186,7 +186,7 @@ void           gnome_icon_list_set_icon_data       (GnomeIconList *gil,
 						    int idx, gpointer data);
 void           gnome_icon_list_set_icon_data_full  (GnomeIconList *gil,
 						    int idx, gpointer data,
-						    GtkDestroyNotify destroy);
+						    GDestroyNotify destroy);
 int            gnome_icon_list_find_icon_from_data (GnomeIconList *gil,
 						    gpointer data);
 gpointer       gnome_icon_list_get_icon_data       (GnomeIconList *gil,
