@@ -27,20 +27,20 @@
 BEGIN_GNOME_DECLS
 
 /* The hints we recognize */
-#define XA_WIN_PROTOCOLS           "WIN_PROTOCOLS"
-#define XA_WIN_ICONS               "WIN_ICONS"
-#define XA_WIN_WORKSPACE           "WIN_WORKSPACE"
-#define XA_WIN_WORKSPACE_COUNT     "WIN_WORKSPACE_COUNT"
-#define XA_WIN_WORKSPACE_NAMES     "WIN_WORKSPACE_NAMES"    
-#define XA_WIN_LAYER               "WIN_LAYER"
-#define XA_WIN_STATE               "WIN_STATE"
-#define XA_WIN_HINTS               "WIN_HINTS"
-#define XA_WIN_WORKAREA            "WIN_WORKAREA"
-#define XA_WIN_CLIENT_LIST         "WIN_CLIENT_LIST"
-#define XA_WIN_APP_STATE           "WIN_APP_STATE"
-#define XA_WIN_EXPANDED_SIZE       "WIN_EXPANDED_SIZE"
-#define XA_WIN_CLIENT_MOVING       "WIN_CLIENT_MOVING"
-#define XA_WIN_SUPPORTING_WM_CHECK "WIN_SUPPORTING_WM_CHECK"
+#define XA_WIN_PROTOCOLS           "_WIN_PROTOCOLS"
+#define XA_WIN_ICONS               "_WIN_ICONS"
+#define XA_WIN_WORKSPACE           "_WIN_WORKSPACE"
+#define XA_WIN_WORKSPACE_COUNT     "_WIN_WORKSPACE_COUNT"
+#define XA_WIN_WORKSPACE_NAMES     "_WIN_WORKSPACE_NAMES"    
+#define XA_WIN_LAYER               "_WIN_LAYER"
+#define XA_WIN_STATE               "_WIN_STATE"
+#define XA_WIN_HINTS               "_WIN_HINTS"
+#define XA_WIN_WORKAREA            "_WIN_WORKAREA"
+#define XA_WIN_CLIENT_LIST         "_WIN_CLIENT_LIST"
+#define XA_WIN_APP_STATE           "_WIN_APP_STATE"
+#define XA_WIN_EXPANDED_SIZE       "_WIN_EXPANDED_SIZE"
+#define XA_WIN_CLIENT_MOVING       "_WIN_CLIENT_MOVING"
+#define XA_WIN_SUPPORTING_WM_CHECK "_WIN_SUPPORTING_WM_CHECK"
 
 /* flags for the window layer */
 typedef enum
