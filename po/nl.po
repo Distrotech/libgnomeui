@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-17 20:50+0100\n"
-"PO-Revision-Date: 2004-02-07 03:19+0100\n"
+"POT-Creation-Date: 2004-02-19 04:21+0100\n"
+"PO-Revision-Date: 2004-02-19 11:49+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -949,8 +949,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Of het nieuwe GtkFileChooser-element of het GtkFileSelection-element gebruikt "
-"moet worden om bestanden te selecteren."
+"Of het nieuwe GtkFileChooser-element of het GtkFileSelection-element "
+"gebruikt moet worden om bestanden te selecteren."
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -1402,13 +1402,17 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Gebruik: gnome_segv2 appnaam signum\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "Toepassing he_rstarten"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Ontwikkelaars verwittigen"
+msgid "_Inform Developers"
+msgstr "Ont_wikkelaars verwittigen"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Debug"
+msgid "_Debug"
+msgstr "_Debuggen"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
