@@ -1,3 +1,8 @@
+Wed Jun 10 21:19:25 EDT 1998 Gregory McLean <gregm@comstar.net>
+
+	* gnome-dialog-util.c : #include <config.h> (seeing as
+	we went through all the trouble of detcecting all this stuff...
+
 1998-06-10  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (EXTRA_libgnomeui_la_SOURCES): Add gnome-canva-*
