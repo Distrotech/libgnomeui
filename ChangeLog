@@ -1,3 +1,9 @@
+2005-01-25  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_render_icon): Free the file info.
+	Fixes #147303; patch by Christian Persch <chpe@gnome.org>.
+
 2005-01-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-password-dialog.c: (gnome_password_dialog_new):

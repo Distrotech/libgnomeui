@@ -1434,6 +1434,9 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
   else
     pixbuf = NULL;
 
+  if (info)
+    gnome_vfs_file_info_unref (info);
+
   return pixbuf;
 }
 
