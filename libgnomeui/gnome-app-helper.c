@@ -945,7 +945,6 @@ create_menu_item (GtkMenuShell       *menu_shell,
 			 */
 
 		        if ((uiinfo->pixmap_type != GNOME_APP_PIXMAP_NONE) &&
-			    gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true") && 
 			    gnome_preferences_get_menus_have_icons()) {
 			        uiinfo->widget = gtk_pixmap_menu_item_new ();
 
