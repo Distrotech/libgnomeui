@@ -1,4 +1,4 @@
-ב# translation of libgnomeui.gnome-2-0.he.po to Hebrew
+# translation of libgnomeui.gnome-2-0.he.po to Hebrew
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # Gil Osher <dolfin@rpg.org.il>, 2002
