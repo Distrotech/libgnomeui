@@ -432,6 +432,19 @@ gnome_druid_new (void)
 {
 	return GTK_WIDGET (gtk_type_new (gnome_druid_get_type ()));
 }
+
+/**
+ * gnome_druid_set_buttons_sensitive
+ * @druid: A Druid.
+ * @back_sensitive: The sensitivity of the back button.
+ * @next_sensitive: The sensitivity of the next button.
+ * @cancel_sensitive: The sensitivity of the cancel button.
+ *
+ * Description: Sets the sensitivity of the @druid's control-buttons.  If the
+ * variables are TRUE, then they will be clickable.  This function is used
+ * primarily by the actual GnomeDruidPage widgets.
+ **/
+
 void
 gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 				   gboolean back_sensitive,
@@ -445,6 +458,15 @@ gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 	gtk_widget_set_sensitive (druid->next, next_sensitive);
 	gtk_widget_set_sensitive (druid->cancel, cancel_sensitive);
 }
+/**
+ * gnome_druid_set_show_finish
+ * @druid: A Druid widget.
+ # @show_finish: If TRUE, then the "Cancel" button is changed to be "Finish"
+ *
+ * Description: Sets the text on the last button on the @druid.  If @show_finish
+ * is TRUE, then the text becomes "Finish".  If @show_finish is FALSE, then the
+ * text becomes "Cancel".
+ **/
 void
 gnome_druid_set_show_finish (GnomeDruid *druid,
 			     gboolean show_finish)
@@ -465,6 +487,14 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
 	}
 	druid->show_finish = show_finish;
 }
+/**
+ * gnome_druid_prepend_page:
+ * @druid: A Druid widget.
+ * @page: The page to be inserted.
+ * 
+ * Description: This will prepend a GnomeDruidPage into the internal list of
+ * pages that the @druid has.
+ **/
 void
 gnome_druid_prepend_page (GnomeDruid *druid,
 			  GnomeDruidPage *page)
@@ -476,6 +506,16 @@ gnome_druid_prepend_page (GnomeDruid *druid,
 
 	gnome_druid_insert_page (druid, NULL, page);
 }
+/**
+ * gnome_druid_insert_page:
+ * @druid: A Druid widget.
+ * @back_page: The page prior to the page to be inserted.
+ * @page: The page to insert.
+ * 
+ * Description: This will insert @page after @back_page into the list of
+ * internal pages that the @druid has.  If @back_page is not present in the list
+ * or NULL, @page will be prepended to the list.
+ **/
 void
 gnome_druid_insert_page (GnomeDruid *druid,
 			 GnomeDruidPage *back_page,
@@ -502,6 +542,14 @@ gnome_druid_insert_page (GnomeDruid *druid,
 	}
 	gtk_widget_set_parent (GTK_WIDGET (page), GTK_WIDGET (druid));
 }
+
+/**
+ * gnome_druid_append_page: 
+ * @druid: A Druid widget.
+ * @page: The page to be appended.
+ * 
+ * Description: This will append @page onto the end of the internal list.  
+ **/
 void gnome_druid_append_page (GnomeDruid *druid,
 			      GnomeDruidPage *page)
 {
@@ -518,6 +566,14 @@ void gnome_druid_append_page (GnomeDruid *druid,
 		gnome_druid_insert_page (druid, NULL, page);
 	}	
 }
+/**
+ * gnome_druid_set_page:
+ * @druid: A Druid widget.
+ * @page: The page to be brought to the foreground.
+ * 
+ * Description: This will make @page the currently showing page in the druid.
+ * @page must already be in the druid.
+ **/
 void
 gnome_druid_set_page (GnomeDruid *druid,
 		      GnomeDruidPage *page)
