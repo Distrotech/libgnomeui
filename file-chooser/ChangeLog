@@ -1,3 +1,8 @@
+Thu Mar 27 16:47:18 2003  Owen Taylor  <otaylor@redhat.com>
+
+	* Move to the GNOME CVS repository, start ChangeLog'ing
+	all changes.
+
 Fri Mar 21 15:32:56 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* Initial import into local CVS.
