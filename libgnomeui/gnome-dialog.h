@@ -51,7 +51,6 @@ struct _GnomeDialog
   unsigned int click_closes : 1;
   unsigned int just_hide : 1;
 
-  GtkWindow * parent;
 };
 
 struct _GnomeDialogClass
@@ -96,25 +95,11 @@ void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
 					       GtkSignalFunc callback,
 					       GtkObject * obj);
 
-/* Remember that modal dialogs are annoying! */
-
-/* DEPRECATED: Use gtk_window_set_modal instead. */
-void       gnome_dialog_set_modal      (GnomeDialog *dialog);
-
 /* Run the dialog, return the button # that was pressed or -1 if none.
    (this sets the dialog modal while it blocks)
  */
 gint       gnome_dialog_run	       (GnomeDialog *dialog);
-
-/* Run the dialog with gnome_dialog_run, and also call set_modal
-   to set the dialog modal permanently.
- */
-gint       gnome_dialog_run_modal      (GnomeDialog *dialog);
-/* Run the dialog, and hide it afterwards */
-gint       gnome_dialog_run_and_hide   (GnomeDialog * dialog);
-/* Run the dialog, and destroy it afterwards */
-gint       gnome_dialog_run_and_destroy(GnomeDialog * dialog);
-
+gint       gnome_dialog_run_and_close  (GnomeDialog *dialog);
 
 
 /* Set the default button. - it will have a little highlight, 
@@ -156,10 +141,6 @@ void       gnome_dialog_set_close      (GnomeDialog * dialog,
    signal of the editable to the default button. */
 void       gnome_dialog_editable_enters   (GnomeDialog * dialog,
 					   GtkEditable * editable);
-
-/* *** Deprecated. Is a set_close wrapper now. */
-void       gnome_dialog_set_destroy (GnomeDialog * d, gboolean self_destruct);
-
 
 /* Use of append_buttons is discouraged, it's really
    meant for subclasses. */

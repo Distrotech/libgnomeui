@@ -93,8 +93,7 @@
    (notebook GNOME_MDI_NOTEBOOK)
    (toplevel GNOME_MDI_TOPLEVEL)
    (modal GNOME_MDI_MODAL)
-   (default-mode GNOME_MDI_DEFAULT_MODE)
-   (redraw GNOME_MDI_REDRAW))
+   (default-mode GNOME_MDI_DEFAULT_MODE))
 
 ; enumerations from "gnome-properties.h"
 

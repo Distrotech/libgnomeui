@@ -172,7 +172,6 @@ gnome_dialog_init (GnomeDialog *dialog)
   dialog->just_hide = FALSE;
   dialog->click_closes = FALSE;
   dialog->buttons = NULL;
-  dialog->parent = NULL;
 
   GTK_WINDOW(dialog)->type = gnome_preferences_get_dialog_type();
   gtk_window_set_position(GTK_WINDOW(dialog), 
@@ -317,7 +316,7 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
   g_return_if_fail(parent != NULL);
   g_return_if_fail(GTK_IS_WINDOW(parent));
 
-  dialog->parent = parent;
+  gtk_window_set_transient_for (GTK_WINDOW(dialog), parent);
 
   if ( gnome_preferences_get_dialog_centered() ) {
 
@@ -451,19 +450,6 @@ void       gnome_dialog_append_buttons_with_pixmaps (GnomeDialog * dialog,
   }
 }
 
-void
-gnome_dialog_set_modal (GnomeDialog * dialog)
-{
-  g_return_if_fail(dialog != NULL);
-  g_return_if_fail(GNOME_IS_DIALOG(dialog));
-
-  g_warning("Please use gtk_window_set_modal() instead of gnome_dialog's.");
-
-  g_warning(" THIS FUNCTION WILL GO AWAY SOMETIME BEFORE DEC 15  ");
-
-  gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
-}
-
 struct GnomeDialogRunInfo {
   gint button_number;
   gint close_id, clicked_id, destroy_id;
@@ -524,23 +510,10 @@ gnome_dialog_mark_destroy(GnomeDialog* dialog,
   else gnome_dialog_shutdown_run(dialog, runinfo);
 }
 
-gint
-gnome_dialog_run_modal(GnomeDialog *dialog)
+static gint
+gnome_dialog_run_real(GnomeDialog* dialog, gboolean close_after)
 {
-  g_return_val_if_fail(dialog != NULL, -1);
-  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
-
-  g_warning("%s is deprecated, use gnome_dialog_run", __FUNCTION__);
-  g_warning(" THIS FUNCTION WILL GO AWAY SOMETIME BEFORE DEC 15  ");
-  
-  gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
-  return gnome_dialog_run(dialog);
-}
-
-gint
-gnome_dialog_run(GnomeDialog *dialog)
-{
-  gboolean was_modal, was_only_hidden;
+  gboolean was_modal;
   struct GnomeDialogRunInfo ri = {-1,-1,-1,-1,FALSE};
 
   g_return_val_if_fail(dialog != NULL, -1);
@@ -586,52 +559,26 @@ gnome_dialog_run(GnomeDialog *dialog)
 	gtk_signal_disconnect(GTK_OBJECT(dialog), ri.close_id);
 	gtk_signal_disconnect(GTK_OBJECT(dialog), ri.clicked_id);
       }
+
+    if (close_after)
+      {
+        gnome_dialog_close(dialog);
+      }
   }
 
   return ri.button_number;
 }
 
 gint
-gnome_dialog_run_and_hide (GnomeDialog * dialog)
+gnome_dialog_run(GnomeDialog *dialog)
 {
-  gint r;
-
-  g_return_val_if_fail(dialog != NULL, -1);
-  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);  
-
-  g_warning("%s is deprecated, use gnome_dialog_run", __FUNCTION__);
-  g_warning(" THIS FUNCTION WILL GO AWAY SOMETIME BEFORE DEC 15  ");
-
-  gnome_dialog_close_hides(dialog, TRUE);
-
-  r = gnome_dialog_run(dialog);
-
-  gnome_dialog_close(dialog); /* Causes a hide. */
-  return r;
+  return gnome_dialog_run_real(dialog,FALSE);
 }
 
 gint 
-gnome_dialog_run_and_destroy (GnomeDialog * dialog)
+gnome_dialog_run_and_close(GnomeDialog* dialog)
 {
-  gint r;
-  gboolean need_close;
-
-  g_return_val_if_fail(dialog != NULL, -1);
-  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);  
-
-  g_warning("%s is deprecated, use gnome_dialog_run", __FUNCTION__);
-  g_warning(" THIS FUNCTION WILL GO AWAY SOMETIME BEFORE DEC 15  ");
-
-  need_close = dialog->click_closes;
-
-  gnome_dialog_close_hides(dialog, FALSE);
-
-  r = gnome_dialog_run(dialog);
-
-  if(need_close)
-    gnome_dialog_close(dialog); /* Causes a destroy. */
-
-  return r;
+  return gnome_dialog_run_real(dialog,TRUE);
 }
 
 void
@@ -662,13 +609,6 @@ void       gnome_dialog_set_close    (GnomeDialog * dialog,
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
   dialog->click_closes = click_closes;
-}
-
-void       gnome_dialog_set_destroy (GnomeDialog * d, gboolean self_destruct)
-{
-  g_warning("gnome_dialog_set_destroy() is deprecated.\n");
-
-  gnome_dialog_set_close(d, self_destruct);
 }
 
 void       gnome_dialog_close_hides (GnomeDialog * dialog, 

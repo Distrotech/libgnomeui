@@ -1,3 +1,18 @@
+1998-12-07  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.h, gnome-dialog.c 
+	(gnome_dialog_run_and_hide): removed. 
+	(gnome_dialog_set_destroy): removed. 
+	(gnome_dialog_run_modal): removed. 
+	(gnome_dialog_run_and_destroy): removed.
+	(gnome_dialog_set_modal): removed.
+	(struct _GnomeDialog): Remove 'parent' member since
+	GtkWindow has one now.
+	
+	* gnome-dialog.c (gnome_dialog_set_parent): Call
+	gtk_window_set_transient_for() to attach dialog to its parent.
+	Nearly all dialogs should call gnome_dialog_set_parent() now!		
+	
 1998-12-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-child.[ch], gnome-mdi-generic-child.[ch]:
