@@ -388,16 +388,18 @@ browse_dialog_kill (GtkWidget *widget, gpointer data)
 static gchar *
 build_filename (GnomeFileEntry *fentry)
 {
-	const gchar *p;
+	gchar *p;
 	char *path;
-	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
+
+	p = tilde_expand (gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry))));
 
 	if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
 		path = g_build_filename (fentry->default_path, p, NULL);
 	} else {
 		path = g_strdup (p);
 	}
-
+	g_free (p);
+	
 	/* Now append an '/' if it doesn't exist and we're in directory only mode */
 	if (fentry->_priv->directory_entry && strlen(path) > 0 &&
 	    path[strlen (path)] != G_DIR_SEPARATOR ) {
