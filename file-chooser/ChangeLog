@@ -1,3 +1,15 @@
+2003-12-23  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c (struct _GtkFileSystemGnomeVFS): Changed
+	the icon_theme to be a GtkIconTheme rather than a GnomeIconTheme.
+	Added a screen field.
+	(gtk_file_system_gnome_vfs_init): Initialize the screen field.
+	(ensure_icon_theme): New function, ensures that the icon theme has
+	a screen set.
+	(gtk_file_system_gnome_vfs_volume_render_icon): Call ensure_icon_theme().
+	(gtk_file_system_gnome_vfs_render_icon): Likewise.
+	(get_icon_from_name): Use gtk_icon_theme_lookup_icon().
+
 2003-12-22  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystemgnomevfs.c: Add Novell copyright.

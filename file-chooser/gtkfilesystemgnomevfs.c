@@ -67,7 +67,8 @@ struct _GtkFileSystemGnomeVFS
   guint client_notify_id;
   GSList *bookmarks;
 
-  GnomeIconTheme *icon_theme;
+  GtkIconTheme *icon_theme;
+  GdkScreen *screen;
 
   guint locale_encoded_filenames : 1;
 };
@@ -385,7 +386,8 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 							  NULL,
 							  NULL);
 
-  system_vfs->icon_theme = gnome_icon_theme_new ();
+  system_vfs->icon_theme = gtk_icon_theme_new (); /* We will set the screen later */
+  system_vfs->screen = NULL;
   /* FIXME: listen for the "changed" signal in the icon theme? */
 
   system_vfs->volume_monitor = gnome_vfs_volume_monitor_ref (gnome_vfs_get_volume_monitor ());
@@ -890,6 +892,22 @@ gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_sys
     }
 }
 
+/* Ensures that the screen for the icon theme is set */
+static void
+ensure_icon_theme (GtkFileSystemGnomeVFS *system_vfs,
+		   GtkWidget             *widget)
+{
+  GdkScreen *screen;
+
+  screen = gtk_widget_get_screen (widget);
+
+  if (system_vfs->screen != screen)
+    {
+      system_vfs->screen = screen;
+      gtk_icon_theme_set_screen (system_vfs->icon_theme, system_vfs->screen);
+    }
+}
+
 /* Gets an icon from its standard icon name */
 static GdkPixbuf *
 get_icon_from_name (GtkFileSystemGnomeVFS *system_vfs,
@@ -906,16 +924,27 @@ get_icon_from_name (GtkFileSystemGnomeVFS *system_vfs,
     return NULL;
 
   if (icon_name[0] != '/')
-    real_icon_name = gnome_icon_theme_lookup_icon (system_vfs->icon_theme,
-						   icon_name,
-						   pixel_size,
-						   NULL,
-						   NULL);
+    {
+      GtkIconInfo *info;
+
+      info = gtk_icon_theme_lookup_icon (system_vfs->icon_theme,
+					 icon_name,
+					 pixel_size,
+					 0);
+
+      if (info)
+	{
+	  real_icon_name = g_strdup (gtk_icon_info_get_filename (info));
+	  gtk_icon_info_free (info);
+	}
+      else
+	return NULL;
+    }
   else
     real_icon_name = (char *) icon_name;
 
   /* FIXME: Use a cache */
-  unscaled = gdk_pixbuf_new_from_file (icon_name, error);
+  unscaled = gdk_pixbuf_new_from_file (real_icon_name, error);
 
   if (real_icon_name != (char *) icon_name)
     g_free (real_icon_name);
@@ -976,6 +1005,8 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
       g_warning ("%p is not a valid volume", volume);
       return NULL;
     }
+
+  ensure_icon_theme (system_vfs, widget);
 
   if (icon_name)
     {
@@ -1299,6 +1330,8 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
   pixbuf = NULL;
+
+  ensure_icon_theme (system_vfs, widget);
 
   uri = gtk_file_path_get_string (path);
   icon_name = gnome_icon_lookup_sync (system_vfs->icon_theme,
