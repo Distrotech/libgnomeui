@@ -131,6 +131,12 @@ Sat Aug 21 11:06:57 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-entry.c (gnome_entry_init): Set combo case-insensitive.
 	Closes bug 1939.
+
+1999-08-18  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-font-picker.c (gnome_font_picker_label_use_font_in_label): 
+	If we can't load the font, then don't set it. Fixes bug
+	1625.
 	
 1999-08-17  Havoc Pennington  <hp@pobox.com>
 
