@@ -18,10 +18,10 @@
 
 #include <config.h>
 #include <stdarg.h>
+#include "gnome-messagebox.h"
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18nP.h"
-#include "gnome-messagebox.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
 #include "libgnomeui/gnome-stock.h"
