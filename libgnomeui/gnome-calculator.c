@@ -558,6 +558,31 @@ exchange_m(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
+static gint
+drg_toggle(GtkWidget *w, gpointer data)
+{
+	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
+	GtkWidget *label = GTK_BUTTON(w)->child;
+
+	g_return_val_if_fail(gc!=NULL,TRUE);
+
+	if(gc->mode==GNOME_CALCULATOR_DEG)
+		gc->mode=GNOME_CALCULATOR_RAD;
+	else if(gc->mode==GNOME_CALCULATOR_RAD)
+		gc->mode=GNOME_CALCULATOR_GRAD;
+	else
+		gc->mode=GNOME_CALCULATOR_DEG;
+
+
+	if(gc->mode==GNOME_CALCULATOR_DEG)
+		gtk_label_set(GTK_LABEL(label),"DEG");
+	else if(gc->mode==GNOME_CALCULATOR_RAD)
+		gtk_label_set(GTK_LABEL(label),"RAD");
+	else
+		gtk_label_set(GTK_LABEL(label),"GRAD");
+
+	return TRUE;
+}
 
 
 static gint
@@ -652,6 +677,14 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gtk_object_set_user_data(GTK_OBJECT(w),gc);
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,0,1);
+
+	w=gtk_button_new_with_label("DEG");
+	gtk_signal_connect(GTK_OBJECT(w),"clicked",
+			   GTK_SIGNAL_FUNC(drg_toggle),
+			   gc);
+	gtk_object_set_user_data(GTK_OBJECT(w),gc);
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(GTK_TABLE(table),w,4,5,1,2);
 
 	w=gtk_button_new_with_label("EE");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",

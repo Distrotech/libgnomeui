@@ -1,3 +1,8 @@
+Sun Apr 12 23:28:02 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calcualtor.c: DEG/RAD/GRAD modeswitching button
+	  added
+
 Sun Apr 12 23:01:24 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.[ch]: now has pretty font display,
