@@ -181,12 +181,10 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 		mtm.tm_year -= 1900;
 
 	gtk_calendar_select_month (GTK_CALENDAR (gde->calendar), mtm.tm_mon, 1900 + mtm.tm_year);
+        gtk_calendar_select_day (GTK_CALENDAR (gde->calendar), mtm.tm_mday);
 
-	position_popup (gde);
-
-        gtk_widget_show (gde->calendar);
-
-	gtk_widget_realize (gde->cal_popup);
+        position_popup (gde);
+       
 	gtk_widget_show (gde->cal_popup);
 	gtk_widget_grab_focus (gde->cal_popup);
 	gtk_grab_add (gde->cal_popup);
@@ -479,6 +477,7 @@ create_children (GnomeDateEdit *gde, int show_time)
 	gtk_signal_connect (GTK_OBJECT (gde->calendar), "day_selected",
 			    GTK_SIGNAL_FUNC (day_selected), gde);
 	gtk_container_add (GTK_CONTAINER (frame), gde->calendar);
+        gtk_widget_show (gde->calendar);
 }
 
 /**

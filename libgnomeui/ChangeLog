@@ -1,3 +1,11 @@
+1998-12-09  Dave Camp  <campd@oit.edu>
+	* gnome-dateedit.c (select_clicked): Fixed the problem where 
+	the first time the Calendar button was pushed it didn't place
+	itself right.  Also made it select the correct date in the
+	calendar widget
+	(create_children): Put the gtk_widget_show on the calender 
+	back here.
+	
 1998-12-10  Andrew T. Veliath  <andrewtv@usa.net>
 
 	* gnome-app-helper.c, gnome-app.c (gnome_app_set_menus):
