@@ -66,12 +66,12 @@ EXTRA_DIST = \
 	AUTHORS
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
+libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs) $(LIBGNOME_LIBS)
 
 ted_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
-	$(GTK_LIBS) $(X_LIBS) $(x_libs) $(INTLLIBS) $(DL_LIB)
+	$(GTK_LIBS) $(X_LIBS) $(x_libs) $(LIBGNOME_LIBS)
 
 stock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
