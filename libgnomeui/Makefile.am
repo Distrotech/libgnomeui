@@ -75,6 +75,7 @@ ted_demo_LDADD =	\
 
 stock_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	$(top_builddir)/libgnome/libgnome.la 		\
 	$(LIBGNOMEUI_LIBS) 
 
 dist-hook:
