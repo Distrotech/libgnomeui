@@ -1,5 +1,20 @@
 2001-06-03  Martin Baulig  <baulig@suse.de>
 
+	* gnome-entry.c: Use the new GnomeEntryComponent.
+	(PROP_IS_FILE_ENTRY): New property; this widget can now be used both
+	as normal and as file entry.
+
+	* gnome-entry.[ch] (gnome_file_entry_new): New function.
+
+	* gnome-file-entry.[ch]: Removed.
+
+	* gnome-selector-component.c
+	(PROP_CONFIG_MONIKER): New property. This is a moniker to a Bonobo_PropertyBag
+	with the default configuration (look&feel) for the selector.
+	(ensure_properties_handler): Set defaults from the property bag.
+
+2001-06-03  Martin Baulig  <baulig@suse.de>
+
 	* gnome-icon-item.[ch]: Derive from GnomeCanvasText.
 
 2001-06-02  Martin Baulig  <baulig@suse.de>
