@@ -12,8 +12,7 @@
 #define GNOME_CANVAS_H
 
 #include <libgnome/gnome-defs.h>
-#include <gtk/gtkcontainer.h>
-#include <libgnomeui/gtklayout.h>
+#include <gtk/gtklayout.h>
 #include <stdarg.h>
 
 BEGIN_GNOME_DECLS

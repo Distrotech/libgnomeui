@@ -85,11 +85,8 @@ libgnomeui_la_SOURCES = \
         gnome-paper-selector.c		\
 	gnometypes.c			\
 	gtkcauldron.c			\
-	gtklayout.c			\
 	gtkspell.c			\
 	gtk-clock.c			\
-	gtk-plug.c			\
-	gtk-socket.c			\
 	gtk-ted.c			\
 	gtkdial.c
 
@@ -156,12 +153,9 @@ gnome_headers = \
         gnome-paper-selector.h		\
 	gtkcauldron.h			\
 	gtkdial.h			\
-	gtklayout.h			\
 	gtkspell.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\
-	gtk-plug.h			\
-	gtk-socket.h			\
 	libgnomeui.h
 
 libgnomeuiinclude_HEADERS = \

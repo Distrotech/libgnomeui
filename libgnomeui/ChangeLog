@@ -1,3 +1,8 @@
+Mon Nov 23 23:55:41 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* libgnomeui.h Makefile.am gtk{-plug,-socket,layout}.{c,h}
+	gnome-canvas.h:	Moved Plug/Socket and Layout widgets to GTK+.
+
 1998-11-23  Andrew T. Veliath  <andrewtv@usa.net>
 
 	* gnome-app.c (gnome_app_configure_toolbar_separators): Combined
