@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.4\n"
-"POT-Creation-Date: 2003-11-24 11:30+0100\n"
-"PO-Revision-Date: 2003-09-10 22:24+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-07 22:37+0100\n"
+"PO-Revision-Date: 2003-12-07 22:38+0100\n"
 "Last-Translator: Bojan Živanović <bojanz@panet.co.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -142,6 +142,7 @@ msgstr "O programu „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -389,11 +391,11 @@ msgstr "Podesi program"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O programu"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O ovom programu"
 
@@ -420,7 +422,7 @@ msgstr "Otvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori tekući prozor"
 
@@ -594,11 +596,11 @@ msgstr "Interaktivnost"
 msgid "Level of user activity required."
 msgstr "Koliko korisnik mora da sudeluje."
 
-#: libgnomeui/gnome-authentication-manager.c:60
+#: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Vaš HTTP proksi zahteva da se prijavite.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -607,17 +609,28 @@ msgstr ""
 "Morate se prijaviti da biste pristupili „%s“.\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:64
+#: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
 msgstr "Poslaće vašu lozinku bez šifrovanja."
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
 msgstr "Poslaće vašu lozinku šifrovano."
 
-#: libgnomeui/gnome-authentication-manager.c:68
+#: libgnomeui/gnome-authentication-manager.c:69
+#: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
 msgstr "Zahteva se identifikacija"
+
+#: libgnomeui/gnome-authentication-manager.c:265
+#, c-format
+msgid " domain %s"
+msgstr " domen %s"
+
+#: libgnomeui/gnome-authentication-manager.c:268
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "Morate se prijaviti da biste pristupili %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -916,9 +929,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete "
-"koristiti ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate "
-"ili izmenite neke njegove parametre."
+"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete koristiti "
+"ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate ili izmenite "
+"neke njegove parametre."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -960,7 +973,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbVvGgDdĐđEeŽžZzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtĆćUuFfHhCcČčDždžŠš"
+msgstr "AaBbVvGgDdĐđEeŽžZzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtĆćUuFfHhCcČčDŽdžŠš"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1043,8 +1056,8 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Program „%s“ je pokušao da izmeni podešavanja sistema za koja vaš "
-"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. "
-"Neka od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
+"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. Neka "
+"od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
 "narednom pokretanju programa."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1053,8 +1066,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %"
-"s. Neka od vaših postavki možda neće ispravno raditi."
+"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %s. "
+"Neka od vaših postavki možda neće ispravno raditi."
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -1216,13 +1229,25 @@ msgstr "Pitanje"
 msgid "Message"
 msgstr "Poruka"
 
-#: libgnomeui/gnome-password-dialog.c:253
+#: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
 msgstr "_Korisničko ime:"
 
-#: libgnomeui/gnome-password-dialog.c:254
+#: libgnomeui/gnome-password-dialog.c:221
+msgid "_Domain:"
+msgstr "_Domen:"
+
+#: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
 msgstr "_Lozinka:"
+
+#: libgnomeui/gnome-password-dialog.c:369
+msgid "Remember password for this session"
+msgstr "Zapamti lozinku za ovu sesiju"
+
+#: libgnomeui/gnome-password-dialog.c:371
+msgid "Save password in keyring"
+msgstr "Sačuvaj lozinku u prstenu ključeva"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1369,5 +1394,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Posetite Gnomovu stranicu za pukle programe za dodatne informacije"
 
-#~ msgid "Exit the test"
-#~ msgstr "Napustite probu"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Napustite probu"
