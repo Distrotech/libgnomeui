@@ -93,6 +93,7 @@ typedef struct {
 } GnomeIconListClass;
 
 guint          gnome_icon_list_get_type            (void);
+
 GtkWidget     *gnome_icon_list_new                 (guint         icon_width, 
 						    GtkAdjustment *adj,
 						    gboolean      is_editable);
@@ -106,10 +107,11 @@ void           gnome_icon_list_construct           (GnomeIconList *gil,
 void           gnome_icon_list_freeze              (GnomeIconList *gil);
 void           gnome_icon_list_thaw                (GnomeIconList *gil);
 
-/* Content manupulation on the Icon List */
+
 void           gnome_icon_list_insert              (GnomeIconList *gil,
 						    int pos, const char *icon_filename,
 						    const char *text);
+
 
 void           gnome_icon_list_insert_imlib        (GnomeIconList *gil,
 						    int pos, GdkImlibImage *im,
@@ -146,6 +148,8 @@ void           gnome_icon_list_set_text_spacing    (GnomeIconList *gil,
 						    int pixels);
 void           gnome_icon_list_set_icon_border     (GnomeIconList *gil,
 						    int pixels);
+void           gnome_icon_list_set_separators      (GnomeIconList *gil,
+						    const char *sep);
 
 /* Attaching information to the icons */
 void           gnome_icon_list_set_icon_data       (GnomeIconList *gil,
@@ -164,6 +168,7 @@ void           gnome_icon_list_moveto              (GnomeIconList *gil,
 GtkVisibility  gnome_icon_list_is_visible          (GnomeIconList *gil,
 						    int pos);
 
+int            gnome_icon_list_get_icon_at         (GnomeIconList *gil, int x, int y);
 #endif /* _GNOME_ICON_LIST_H_ */
 
 

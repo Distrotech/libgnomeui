@@ -143,7 +143,8 @@
    (skip-focus WIN_HINTS_SKIP_FOCUS)
    (skip-winlist WIN_HINTS_SKIP_WINLIST)
    (skip-taskbar WIN_HINTS_SKIP_TASKBAR)
-   (group-transient WIN_HINTS_GROUP_TRANSIENT))
+   (group-transient WIN_HINTS_GROUP_TRANSIENT)
+   (focus-on-click WIN_HINTS_FOCUS_ON_CLICK))
 
 (define-enum GnomeWinAppState
    (none WIN_APP_STATE_NONE)

@@ -240,6 +240,10 @@ iti_realize (GnomeCanvasItem *item)
 	
 	window = GTK_WIDGET (item->canvas)->window;
 
+	/* We can be realized before we are configured */
+	if (!iti->text)
+		return;
+	
 	font_load (iti);
 	layout_text (iti);
 }
@@ -254,7 +258,8 @@ iti_unrealize (GnomeCanvasItem *item)
 {
 	Iti *iti = ITI (item);
 
-	iti_stop_editing (iti);
+	if (iti->editing)
+		iti_stop_editing (iti);
 	
 	if (iti->font){
 		gdk_font_unref (iti->font);
@@ -755,18 +760,17 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 	
 	if (iti->fontname)
 		g_free (iti->fontname);
-	iti->fontname = g_strdup (iti_default_font_name ());
+	iti->fontname = g_strdup (fontname);
 
-	/*
-	 * if iti->font, it means this item is realized, so we have
-	 * to do all of the computations
-	 */
-	if (!iti->font)
-		return;
+	if (iti->font){
+		gdk_font_unref (iti->font);
+		iti->font = NULL;
+	}
 
-	gdk_font_unref (iti->font);
-	font_load (iti);
-	layout_text (iti);
+	if (GTK_OBJECT (iti)->flags & GNOME_CANVAS_ITEM_REALIZED){
+		font_load (iti);
+		layout_text (iti);
+	}
 }
 
 void
