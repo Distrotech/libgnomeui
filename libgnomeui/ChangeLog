@@ -1,3 +1,9 @@
+1998-10-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_new): Thanks to Havoc for
+	spotting this one-line bug.  I was leaking an icon-list and
+	returning an incorrectly created icon list widget.
+
 Thu Oct 15 03:33:21 CEST 1998  Eckehard Berns  <eb@berns.i-s-o.net>
 
 	* pixmaps/Makefile.am pixmaps/stock_attach.png: added attach pixmap.

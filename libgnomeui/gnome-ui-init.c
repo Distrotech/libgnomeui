@@ -299,6 +299,25 @@ gnome_init (char *app_id, struct argp *app_args,
 				     flags, arg_index, NULL);
 }
 
+
+static struct argp gnome_init_argc_argv_parser =
+{
+	argp_options, gnome_init_argc_argv_parse_an_arg, NULL, NULL, NULL, NULL, NULL
+};
+	
+error_t
+gnome_init_argc_argv (char *app_id, int *argc, char ***argv)
+{
+	int arg_index = 0;
+	error_t v;
+	
+	v = gnome_init (
+		app_id, &gnome_init_argc_argv_parser,
+		argc, argv, arg_index);
+
+	return v;
+}
+	
 /* perhaps this belongs in libgnome.. move it if you like. */
 
 /* automagically parse all the gtkrc files for us.

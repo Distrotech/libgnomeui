@@ -687,11 +687,19 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 }
 
 /**
+<<<<<<< gnome-icon-list.c
+ * gnome_icon_list_insert:
+ * @gil:  the icon list.
+ * @pos:  index where the icon should be inserted
+ * @im:   Imlib image containing the icons
+ * @text: text to display for the icon
+=======
  * gnome_icon_list_insert_imlib:
  * @gil:  the icon list.
  * @pos:  index where the icon should be inserted
  * @im:   Imlib image containing the icons
  * @text: text to display for the icon
+>>>>>>> 1.27
  *
  * Inserts the at the POS index in the GIL icon list an icon which is
  * on the IM imlib imageand with the TEXT string as its label.
@@ -1498,8 +1506,6 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
 	
-	gil = GIL (gtk_type_new (gnome_icon_list_get_type ()));
-
 	gnome_icon_list_construct (gil, icon_width, adj, is_editable);
 
 	return GTK_WIDGET (gil);
