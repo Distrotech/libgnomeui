@@ -581,7 +581,7 @@ void gnome_canvas_world_to_window (GnomeCanvas *canvas,
  * GdkColor.  If the string is null, then it returns FALSE. Otherwise, it
  * returns TRUE.
  */
-int gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color);
+int gnome_canvas_get_color (GnomeCanvas *canvas, const char *spec, GdkColor *color);
 
 /* Allocates a color from the RGB value passed into this function. */
 gulong gnome_canvas_get_color_pixel (GnomeCanvas *canvas,

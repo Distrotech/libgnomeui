@@ -3823,7 +3823,7 @@ gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy,
  * is NULL, then returns FALSE.
  **/
 int
-gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
+gnome_canvas_get_color (GnomeCanvas *canvas, const char *spec, GdkColor *color)
 {
 	gint n;
 

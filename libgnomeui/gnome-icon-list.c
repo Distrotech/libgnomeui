@@ -1102,7 +1102,7 @@ gnome_icon_list_insert (GnomeIconList *gil, int pos, const char *icon_filename, 
  * the specified Imlib image.
  */
 int
-gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, char *text)
+gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 {
 	Icon *icon;
 
