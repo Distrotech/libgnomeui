@@ -81,6 +81,9 @@ gnome_dock_layout_destroy (GtkObject *object)
 
   while (layout->items)
     remove_item (layout, layout->items);
+
+  if (GTK_OBJECT_CLASS (parent_class)->destroy)
+    (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 
