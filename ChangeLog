@@ -1,3 +1,8 @@
+2002-04-25  Jody Goldberg <jody@gnome.org>
+
+	* libgnomeui/gnome-app-helper.c (toolbar_styles) : add BOTH_HORIZ.
+	(create_and_popup_toolbar_menu) : ditto.
+
 2002-04-18  Murray Cumming  <murrayc@usa.net>
 
 	* glade/glade-gnome.c: Fixed use of GladeWidgetInfo "class" field

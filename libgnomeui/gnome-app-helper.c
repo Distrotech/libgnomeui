@@ -2260,7 +2260,8 @@ gnome_app_helper_gettext (const gchar *str)
 static GConfEnumStringPair toolbar_styles[] = {
         { GTK_TOOLBAR_TEXT, "text" },
         { GTK_TOOLBAR_ICONS, "icons" },
-        { GTK_TOOLBAR_BOTH, "both" }
+        { GTK_TOOLBAR_BOTH, "both" },
+        { GTK_TOOLBAR_BOTH_HORIZ, "both_horiz" }
 };
 
 static void
@@ -2388,9 +2389,9 @@ static void
 create_and_popup_toolbar_menu (GdkEventButton *event)
 {
 	GtkWidget *menu;
-	GtkWidget *item, *both_item, *icons_item, *text_item, *global_item;
+	GtkWidget *item, *both_item, *both_horiz_item, *icons_item, *text_item, *global_item;
 	GSList *group;
-	char *both, *icons, *text, *global;
+	char *both, *both_horiz, *icons, *text, *global;
 	char *str, *key;
 	GtkToolbarStyle toolbar_style;
 	GConfClient *conf;
@@ -2400,6 +2401,7 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 	menu = gtk_menu_new ();
 
 	both = _("Both text and icons");
+	both_horiz = _("Both text and icons when horizontal, just icons when vertical");
 	icons = _("Icons only");
 	text = _("Text only");
 
@@ -2408,6 +2410,12 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 			  G_CALLBACK (style_menu_item_activated), GINT_TO_POINTER (GTK_TOOLBAR_BOTH));
 	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (both_item));
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), both_item);
+
+	both_horiz_item = gtk_radio_menu_item_new_with_label (group, both_horiz);
+	g_signal_connect (both_item, "activate",
+			  G_CALLBACK (style_menu_item_activated), GINT_TO_POINTER (GTK_TOOLBAR_BOTH_HORIZ));
+	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (both_horiz_item));
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), both_horiz_item);
 
 	icons_item = gtk_radio_menu_item_new_with_label (group, icons);
 	g_signal_connect (icons_item, "activate",
@@ -2441,6 +2449,9 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 	switch (toolbar_style) {
 	case GTK_TOOLBAR_BOTH:
 		str = both;
+		break;
+	case GTK_TOOLBAR_BOTH_HORIZ:
+		str = both_horiz;
 		break;
 	case GTK_TOOLBAR_ICONS:
 		str = icons;
@@ -2480,6 +2491,9 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 		switch (toolbar_style) {
 		case GTK_TOOLBAR_BOTH:
 			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (both_item), TRUE);
+			break;
+		case GTK_TOOLBAR_BOTH_HORIZ:
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (both_horiz_item), TRUE);
 			break;
 		case GTK_TOOLBAR_ICONS:
 			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (icons_item), TRUE);
