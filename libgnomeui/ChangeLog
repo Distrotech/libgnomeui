@@ -1,5 +1,8 @@
 1999-01-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-icon-item.c (iti_edition_accept): Layout the text after we
+	stopped editing.
+
 	* gnome-icon-list.c (gil_get_icons_in_region): Return an empty
 	list if the rectangle is empty.  Also, return the list in sorted
 	order.

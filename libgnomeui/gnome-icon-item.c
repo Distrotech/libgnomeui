@@ -214,6 +214,8 @@ iti_edition_accept (Iti *iti)
 	}
 
 	iti_stop_editing (iti);
+	layout_text (iti);
+	iti_queue_redraw (iti);
 }
 
 static void
