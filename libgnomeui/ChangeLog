@@ -1,3 +1,11 @@
+Sat Oct 24 13:09:50 CEST 1998  Eckehard Berns  <eb@berns.i-s-o.net>
+
+	* pixmaps/stock_font.png: new stock icon
+	* pixmaps/Makefile.am: added stock_font.png
+	* gnome-stock.[ch]: added defines for stock_font.png (icon, menu and
+	button)
+	* stock_demo.c: added sample stock_font icons and button
+
 1998-10-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (icon_event): Mark the events as processed

@@ -12,7 +12,8 @@ stock_button_apply.png   stock_button_cancel.png   stock_button_close.png  \
 stock_button_no.png	 stock_button_ok.png       stock_button_yes.png    \
 stock_close.png	         stock_convert.png         stock_copy.png          \
 stock_cut.png	         stock_down_arrow.png      stock_exec.png	   \
-stock_exit.png           stock_first.png           stock_help.png	   \
+stock_exit.png           stock_first.png           stock_font.png          \
+stock_help.png	   \
 stock_home.png           stock_jump_to.png         stock_last.png	   \
 stock_left_arrow.png     stock_line_in.png         stock_mail.png	   \
 stock_mail_compose.png   stock_mail_forward.png    stock_mail_receive.png  \
