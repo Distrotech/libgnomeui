@@ -1,3 +1,12 @@
+2002-05-07  Paolo Maggi  <maggi@athena.polito.it>
+
+	* libgnomeui/gnome-app-helper.c:
+	* libgnomeui/gnome-uidefs.h: now gnome stock menus should be
+	HIG compliant
+
+	* libgnomeui/gnome-app-helper.c (create_help_entries): added 
+	an icon and an accellerator to the "Contents" menu item
+
 2002-05-06  Anders Carlsson  <andersca@gnu.org>
 
 	* libgnomeui/gnome-app-helper.c: (create_and_popup_toolbar_menu):

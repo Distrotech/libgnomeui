@@ -72,45 +72,45 @@
 #define GNOME_KEY_MOD_COPY	        (GDK_CONTROL_MASK)
 #define GNOME_KEY_NAME_PASTE 	        'v'
 #define GNOME_KEY_MOD_PASTE 	        (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_SELECT_ALL       0
-#define GNOME_KEY_MOD_SELECT_ALL        (0)
+#define GNOME_KEY_NAME_SELECT_ALL       'a'
+#define GNOME_KEY_MOD_SELECT_ALL        (GDK_CONTROL_MASK)
 #define GNOME_KEY_NAME_CLEAR 	        0
 #define GNOME_KEY_MOD_CLEAR 	        (0)
 
 #define GNOME_KEY_NAME_UNDO  	        'z'
 #define GNOME_KEY_MOD_UNDO  	        (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_REDO	        'r'
-#define GNOME_KEY_MOD_REDO	        (GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_REDO	        'z'
+#define GNOME_KEY_MOD_REDO	        (GDK_CONTROL_MASK | GDK_SHIFT_MASK)
 
 #define GNOME_KEY_NAME_SAVE	        's'
 #define GNOME_KEY_MOD_SAVE	        (GDK_CONTROL_MASK)
-#define GNOME_KEY_NAME_OPEN	        GDK_F3
-#define GNOME_KEY_MOD_OPEN	        (0)
-#define GNOME_KEY_NAME_SAVE_AS	        0
-#define GNOME_KEY_MOD_SAVE_AS           (0)
-#define GNOME_KEY_NAME_NEW	        0
-#define GNOME_KEY_MOD_NEW	        (0)
+#define GNOME_KEY_NAME_OPEN	        'o'
+#define GNOME_KEY_MOD_OPEN	        (GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_SAVE_AS	        's'
+#define GNOME_KEY_MOD_SAVE_AS           (GDK_CONTROL_MASK | GDK_SHIFT_MASK)
+#define GNOME_KEY_NAME_NEW	        'n'
+#define GNOME_KEY_MOD_NEW	        (GDK_CONTROL_MASK)
 
-#define GNOME_KEY_NAME_PRINT            0
-#define GNOME_KEY_MOD_PRINT             (0)
+#define GNOME_KEY_NAME_PRINT            'p'
+#define GNOME_KEY_MOD_PRINT             (GDK_CONTROL_MASK)
 
 #define GNOME_KEY_NAME_PRINT_SETUP      0
 #define GNOME_KEY_MOD_PRINT_SETUP       (0)
 
-#define GNOME_KEY_NAME_FIND             GDK_F6
-#define GNOME_KEY_MOD_FIND              (0)
-#define GNOME_KEY_NAME_FIND_AGAIN       GDK_F6
-#define GNOME_KEY_MOD_FIND_AGAIN        (GDK_SHIFT_MASK)
-#define GNOME_KEY_NAME_REPLACE          GDK_F7
-#define GNOME_KEY_MOD_REPLACE           (0)
+#define GNOME_KEY_NAME_FIND             'f'
+#define GNOME_KEY_MOD_FIND              (GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_FIND_AGAIN       'g'
+#define GNOME_KEY_MOD_FIND_AGAIN        (GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_REPLACE          'r'
+#define GNOME_KEY_MOD_REPLACE           (GDK_CONTROL_MASK)
 
 #define GNOME_KEY_NAME_NEW_WINDOW       0
 #define GNOME_KEY_MOD_NEW_WINDOW        (0)
 #define GNOME_KEY_NAME_CLOSE_WINDOW     0
 #define GNOME_KEY_MOD_CLOSE_WINDOW      (0)
 
-#define GNOME_KEY_NAME_REDO_MOVE        'r'
-#define GNOME_KEY_MOD_REDO_MOVE         (GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_REDO_MOVE        'z'
+#define GNOME_KEY_MOD_REDO_MOVE         (GDK_CONTROL_MASK | GDK_SHIFT_MASK)
 #define GNOME_KEY_NAME_UNDO_MOVE        'z'
 #define GNOME_KEY_MOD_UNDO_MOVE         (GDK_CONTROL_MASK)
 

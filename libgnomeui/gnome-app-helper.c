@@ -128,7 +128,7 @@ static GnomeUIInfo menu_defaults[] = {
           GNOME_APP_PIXMAP_STOCK, GTK_STOCK_REVERT_TO_SAVED,
           0,  (GdkModifierType) 0, NULL },
 	/* Print */
-        { GNOME_APP_UI_ITEM, N_("_Print"), N_("Print the current file"),
+        { GNOME_APP_UI_ITEM, N_("_Print..."), N_("Print the current file"),
           NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PRINT,
           GNOME_KEY_NAME_PRINT,  GNOME_KEY_MOD_PRINT, NULL },
@@ -152,7 +152,7 @@ static GnomeUIInfo menu_defaults[] = {
 	 * The "Edit" menu
 	 */
 	/* Cut */
-        { GNOME_APP_UI_ITEM, N_("C_ut"), N_("Cut the selection"),
+        { GNOME_APP_UI_ITEM, N_("Cu_t"), N_("Cut the selection"),
           NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GTK_STOCK_CUT,
           GNOME_KEY_NAME_CUT, GNOME_KEY_MOD_CUT, NULL },
@@ -188,13 +188,13 @@ static GnomeUIInfo menu_defaults[] = {
           GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND,
           GNOME_KEY_NAME_FIND, GNOME_KEY_MOD_FIND, NULL },
 	/* Find Again */
-        { GNOME_APP_UI_ITEM, N_("Find _Again"),
+        { GNOME_APP_UI_ITEM, N_("Find Ne_xt"),
           N_("Search again for the same string"),
           NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND,
           GNOME_KEY_NAME_FIND_AGAIN, GNOME_KEY_MOD_FIND_AGAIN, NULL },
 	/* Replace */
-        { GNOME_APP_UI_ITEM, N_("_Replace..."), N_("Replace a string"),
+        { GNOME_APP_UI_ITEM, N_("R_eplace..."), N_("Replace a string"),
           NULL, NULL, NULL,
           GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND_AND_REPLACE,
           GNOME_KEY_NAME_REPLACE, GNOME_KEY_MOD_REPLACE, NULL },
@@ -208,7 +208,7 @@ static GnomeUIInfo menu_defaults[] = {
 	 * The Settings menu
 	 */
 	/* Settings */
-        { GNOME_APP_UI_ITEM, N_("_Preferences..."),
+        { GNOME_APP_UI_ITEM, N_("Prefere_nces..."),
           N_("Configure the application"),
           NULL, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PREFERENCES,
@@ -222,7 +222,7 @@ static GnomeUIInfo menu_defaults[] = {
           N_("About this application"), NULL, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
           0,  (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("_Select All"),
+	{ GNOME_APP_UI_ITEM, N_("Select _All"),
           N_("Select everything"),
           NULL, NULL, NULL,
           GNOME_APP_PIXMAP_NONE, NULL,
@@ -1123,20 +1123,40 @@ help_view_display_callback (GtkWidget *w, gpointer data)
 static int
 create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 {
-	GtkWidget *item;
-	GtkWidget *label;
+	GtkWidget *image;
+	gchar *path;
 
-	item = gtk_menu_item_new ();
-	label = create_label (_("_Help Contents"));
-	gtk_container_add (GTK_CONTAINER (item), label);
+	image = gtk_image_new_from_stock (GTK_STOCK_HELP, GTK_ICON_SIZE_MENU);
 
-	g_signal_connect_data (item, "activate",
+	uiinfo->widget = gtk_menu_item_new ();
+
+	uiinfo->widget = gtk_image_menu_item_new_with_mnemonic (_("_Contents"));
+
+      	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (uiinfo->widget), image);
+
+	g_signal_connect_data (uiinfo->widget, "activate",
 			       G_CALLBACK (help_view_display_callback),
 			       g_strdup (uiinfo->moreinfo), 
 			       (GClosureNotify) g_free, 0);
 
-	gtk_menu_shell_insert (menu_shell, item, pos);
-	gtk_widget_show (item);
+	gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
+
+	/* Install global accelerator */
+
+	path = g_strdup_printf("<%s>/help-contents-item", 
+			       gnome_program_get_app_id (gnome_program_get()));
+	
+	/* Associate the key combo with the accel path */
+	gtk_accel_map_add_entry (path, GDK_F1, 0);
+
+	/* Associate the accel path with the menu item */
+	if (GTK_IS_MENU (menu_shell))
+		gtk_menu_item_set_accel_path (GTK_MENU_ITEM (uiinfo->widget),
+					      path);
+
+	g_free (path);
+	
+	gtk_widget_show_all (uiinfo->widget);
 
 	return ++pos;
 }
