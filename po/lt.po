@@ -1,10 +1,9 @@
 # Lithuanian translation of gnome-libs.
-# Copyright (C) 2000-2004 Free Software Foundation, Inc.
+# Copyright (C) 2000-2005 Free Software Foundation, Inc.
 # Kęstutis Kružikas <DrKestas@takas.lt>, 2000
 # Gediminas Paulauskas <menesis@delfi.lt>, 2000-2001.
 # Tomas Kuliavas <tokul@users.sourceforge.net>, 2004.
-# Žygimantas Beručka <uid0@akl.lt>, 2004.
-# Tomas Kuliavas <tokul@users.sourceforge.net>, 2004.
+# Žygimantas Beručka <uid0@akl.lt>, 2004-2005.
 # 
 # 
 msgid ""
@@ -12,7 +11,7 @@ msgstr ""
 "Project-Id-Version: gnome-libs HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-26 00:45+0100\n"
-"PO-Revision-Date: 2004-12-21 22:22+0200\n"
+"PO-Revision-Date: 2005-01-27 13:14+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +51,7 @@ msgstr "Žymelės saugojimas nepavyko (%s)"
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "Nepavyko gauti bylos '%s' informacijos: %s"
+msgstr "Nepavyko gauti bylos „%s“ informacijos: %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
@@ -184,11 +183,11 @@ msgstr "_Byla/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "K_eisti"
+msgstr "_Keisti"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr "K_eisti/"
+msgstr "_Keisti/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
@@ -200,11 +199,11 @@ msgstr "_Rodyti/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr "Nu_statymai"
+msgstr "_Nustatymai"
 
 #: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
-msgstr "Nu_statymai/"
+msgstr "_Nustatymai/"
 
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
@@ -287,7 +286,7 @@ msgstr "Spausdinti esamą bylą"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Spausdinimo nu_ostatos..."
+msgstr "Spausdinimo n_ustatymai..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -305,7 +304,7 @@ msgstr "Uždaryti esamą bylą"
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr "I_šeiti"
+msgstr "Iš_eiti"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
@@ -1408,7 +1407,7 @@ msgstr "GNOME GUI biblioteka"
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Įvyko keletas segmentacijos klaidų; negaliu parodyti klaidos dialogo\n"
+msgstr "Įvyko keletas segmentacijos klaidų; nepavyko parodyti klaidos dialogo\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1417,8 +1416,8 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-"Segmentacijos klaidų!\n"
-"Negaliu parodyti nulūžimo dialogo\n"
+"Segmentacijos klaida!\n"
+"Nepavyko parodyti nulūžimo dialogo\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1454,11 +1453,11 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Vartojimas: gnome_segv2 programa signalas\n"
+msgstr "Naudojimas: gnome_segv2 programa signalas\n"
 
 #: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
-msgstr "Pe_rleisti programa"
+msgstr "Pe_rleisti programą"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
@@ -1467,6 +1466,3 @@ msgstr "_Informuoti kūrėjus"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Derinti"
-
-#~ msgid "Exit the test"
-#~ msgstr "Išeiti iš testo"
