@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.8\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
-"PO-Revision-Date: 2004-06-18 01:15+0000\n"
+"Report-Msgid-Bugs-To: <happyguy_pt@hotmail.com>\n"
+"POT-Creation-Date: 2004-07-22 00:42+0100\n"
+"PO-Revision-Date: 2004-07-22 00:45+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -31,31 +31,37 @@ msgstr "Item Filho 2"
 msgid "Hint for item 2"
 msgstr "Dica para item 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
-#, fuzzy
-msgid "Filesystem"
-msgstr "Fic_heiros"
+#: file-chooser/gtkfilesystemgnomevfs.c:650
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s não é uma pasta"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:857
+msgid "Filesystem"
+msgstr "Sistema de Ficheiros"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1521
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Falha ao gravar os marcadores (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Incapaz de obter informação do ficheiro '%s': %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Incapaz de abrir o ficheiro '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
+"Falha ao ler a imagem '%s': motivo desconhecido, provavelmente um ficheiro "
+"de imagem corrompido"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -166,6 +172,7 @@ msgstr "Sobre %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -223,6 +230,7 @@ msgid "_Game"
 msgstr "_Jogo"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -413,11 +421,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -444,7 +452,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Fechar a janela actual"
 
@@ -1286,11 +1294,11 @@ msgstr "_Senha:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Ligar-se _anonimamente"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Ligar-se como um _utilizador:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1460,8 +1468,9 @@ msgstr "_Informar os Programadores"
 msgid "_Debug"
 msgstr "_Depurar"
 
-#~ msgid "Exit the test"
-#~ msgstr "Sair do teste"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Sair do teste"
 
 #~ msgid " domain %s"
 #~ msgstr " domínio %s"
