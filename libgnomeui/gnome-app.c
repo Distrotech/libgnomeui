@@ -210,13 +210,15 @@ gnome_app_toolbar_set_position(GnomeApp *app, GnomeAppWidgetPositionType pos_too
 	app->pos_toolbar = pos_toolbar;
 	
 	if(pos_toolbar == GNOME_APP_POS_LEFT || pos_toolbar == GNOME_APP_POS_RIGHT){
-		gtk_toolbar_set_orientation(GTK_TOOLBAR(app->toolbar),
-					    GTK_ORIENTATION_VERTICAL);
+		if (GTK_IS_TOOLBAR (app->toolbar))
+			gtk_toolbar_set_orientation(GTK_TOOLBAR(app->toolbar),
+						    GTK_ORIENTATION_VERTICAL);
 		gnome_app_configure_positions (app);
 	} else {
 		/* assume GNOME_APP_POS_TOP || GNOME_APP_POS_BOTTOM */
-		gtk_toolbar_set_orientation(GTK_TOOLBAR(app->toolbar),
-					    GTK_ORIENTATION_HORIZONTAL);
+		if (GTK_IS_TOOLBAR (app->toolbar))
+			gtk_toolbar_set_orientation(GTK_TOOLBAR(app->toolbar),
+						    GTK_ORIENTATION_HORIZONTAL);
 		gnome_app_configure_positions (app);
 	}
 	
@@ -447,7 +449,6 @@ void gnome_app_set_toolbar   (GnomeApp *app,
 	g_return_if_fail(GNOME_IS_APP(app));
 	g_return_if_fail(toolbar != NULL);
 	g_return_if_fail(app->toolbar == NULL);
-	g_return_if_fail(GTK_IS_TOOLBAR(toolbar));
 
 	hb = gtk_handle_box_new();
 	gtk_widget_show(hb);
