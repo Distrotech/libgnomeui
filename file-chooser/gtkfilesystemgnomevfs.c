@@ -1271,18 +1271,21 @@ get_vfs_info (GtkFileSystem     *file_system,
     return NULL;
   
   parent_uri = gtk_file_path_get_string (parent_path);
-  canonical_uri = make_uri_canonical (parent_uri);
-  folder_vfs = g_hash_table_lookup (system_vfs->folders, canonical_uri);
-  g_free (canonical_uri);
   info = NULL;
-  if (folder_vfs &&
-      (folder_vfs->types & types) == types)
+  if (parent_uri != NULL)
     {
-      info = lookup_vfs_info_in_folder (GTK_FILE_FOLDER (folder_vfs),
-					path,
-					NULL);
-      if (info)
-	gnome_vfs_file_info_ref (info);
+      canonical_uri = make_uri_canonical (parent_uri);
+      folder_vfs = g_hash_table_lookup (system_vfs->folders, canonical_uri);
+      g_free (canonical_uri);
+      if (folder_vfs &&
+	  (folder_vfs->types & types) == types)
+	{
+	  info = lookup_vfs_info_in_folder (GTK_FILE_FOLDER (folder_vfs),
+					    path,
+					    NULL);
+	  if (info)
+	    gnome_vfs_file_info_ref (info);
+	}
     }
   
   if (info == NULL)

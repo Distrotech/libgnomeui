@@ -1,3 +1,9 @@
+Fri Mar 12 02:48:56 2004  Jonathan Blandford  <jrb@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (get_vfs_info): Patch from
+	Alexander Larsson <alexl@redhat.com> to handle parent_path being
+	NULL.
+
 Thu Mar 11 22:33:10 2004  Jonathan Blandford  <jrb@gnome.org>
 
 	* file-chooser/Makefile.am (libgnome_vfs_la_LIBADD): patch from
