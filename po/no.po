@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2002-03-05 00:18+0100\n"
-"PO-Revision-Date: 2002-03-05 00:19+0100\n"
+"POT-Creation-Date: 2002-03-06 16:52+0100\n"
+"PO-Revision-Date: 2002-03-06 16:54+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -368,11 +368,11 @@ msgstr ""
 "En feil oppsto under forsøk på å starte opp URL-håndtereren.\n"
 "Vennligst sjekk om innstillingene i kontrollsenteret er korrekt."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:720
 msgid "X display to use"
 msgstr "X-display som skal brukes"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:720
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
@@ -381,12 +381,12 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibliotek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:567
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmenteringsfeil oppstod; kan ikke vise feildialogen\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:581
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -394,76 +394,76 @@ msgstr ""
 "Segmenteringsfeil!\n"
 "Kan ikke vise feildialogen\n"
 
-#: libgnomeui/gnome-ui-init.c:715
+#: libgnomeui/gnome-ui-init.c:713
 msgid "Gdk debugging flags to set"
 msgstr "Gdk avlusingsflagg som skal slås på"
 
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
+#: libgnomeui/gnome-ui-init.c:713 libgnomeui/gnome-ui-init.c:716
+#: libgnomeui/gnome-ui-init.c:757 libgnomeui/gnome-ui-init.c:760
 msgid "FLAGS"
 msgstr "FLAGG"
 
-#: libgnomeui/gnome-ui-init.c:718
+#: libgnomeui/gnome-ui-init.c:716
 msgid "Gdk debugging flags to unset"
 msgstr "Gdk avlusingsflagg som skal slås av"
 
-#: libgnomeui/gnome-ui-init.c:726
+#: libgnomeui/gnome-ui-init.c:724
 msgid "Make X calls synchronous"
 msgstr "Bruk synkrone X-kall"
 
-#: libgnomeui/gnome-ui-init.c:732
+#: libgnomeui/gnome-ui-init.c:730
 msgid "Don't use X shared memory extension"
 msgstr "Ikke bruk X-utvidelse for delt minne"
 
-#: libgnomeui/gnome-ui-init.c:736
+#: libgnomeui/gnome-ui-init.c:734
 msgid "Program name as used by the window manager"
 msgstr "Programnavn som brukt av vindusbehandleren"
 
-#: libgnomeui/gnome-ui-init.c:736
+#: libgnomeui/gnome-ui-init.c:734
 msgid "NAME"
 msgstr "NAVN"
 
-#: libgnomeui/gnome-ui-init.c:739
+#: libgnomeui/gnome-ui-init.c:737
 msgid "Program class as used by the window manager"
 msgstr "Programklasse som brukt av vindusbehandleren"
 
-#: libgnomeui/gnome-ui-init.c:739
+#: libgnomeui/gnome-ui-init.c:737
 msgid "CLASS"
 msgstr "KLASSE"
 
-#: libgnomeui/gnome-ui-init.c:743
+#: libgnomeui/gnome-ui-init.c:741
 msgid "HOST"
 msgstr "VERT"
 
-#: libgnomeui/gnome-ui-init.c:747
+#: libgnomeui/gnome-ui-init.c:745
 msgid "PORT"
 msgstr "PORT"
 
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
+#: libgnomeui/gnome-ui-init.c:750 libgnomeui/gnome-ui-init.c:753
 msgid "STYLE"
 msgstr "STIL"
 
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:757
 msgid "Gtk+ debugging flags to set"
 msgstr "Gtk+ avlusingsflagg som skal slås på"
 
-#: libgnomeui/gnome-ui-init.c:762
+#: libgnomeui/gnome-ui-init.c:760
 msgid "Gtk+ debugging flags to unset"
 msgstr "Gtk+ avlusingsflagg som skal slås av"
 
-#: libgnomeui/gnome-ui-init.c:765
+#: libgnomeui/gnome-ui-init.c:763
 msgid "Make all warnings fatal"
 msgstr "Gjør alle advarsler til fatale"
 
-#: libgnomeui/gnome-ui-init.c:768
+#: libgnomeui/gnome-ui-init.c:766
 msgid "Load an additional Gtk module"
 msgstr "Last tilleggsmodul for Gtk+"
 
-#: libgnomeui/gnome-ui-init.c:768
+#: libgnomeui/gnome-ui-init.c:766
 msgid "MODULE"
 msgstr "MODUL"
 
-#: libgnomeui/gnome-ui-init.c:873
+#: libgnomeui/gnome-ui-init.c:871
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -1052,7 +1052,7 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr ""
+msgstr "GnomeEntry som filoppføringen bruker til å oppgi filnavn. Du kan bruke denne egenskapen til å hente GnomeEntry hvis du trenger å endre det eller spørre på noen av dens parametere."
 
 #: libgnomeui/gnome-file-entry.c:252
 msgid "GtkEntry"
@@ -1063,7 +1063,7 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr ""
+msgstr "GtkEntry som filoppføringen bruker for å oppgi filnavn. Du kan bruke denne egenskapen til å hente GtkEntry hvis du trenger å endre den eller spørre på noen av dens parametere."
 
 #: libgnomeui/gnome-file-entry.c:418
 msgid "Select file"
