@@ -28,12 +28,13 @@
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-init.h"
 
+static void initialize_gtk_signal_relay(void);
 static gboolean
 relay_gtk_signal(GtkObject *object,
 		 guint signal_id,
 		 guint n_params,
 		 GtkArg *params,
-		 GnomeTriggerList *t);
+		 gchar *signame);
 
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
@@ -255,76 +256,12 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 		sigaction(SIGSEGV, &sa, NULL);
 #endif
 		
-		/* lame trigger stuff. This really needs to be sorted out better
-		   so that the trigger API is exported more - perhaps there's something
-		   hidden in glib that already does this :) */
-		
-		if(gnome_config_get_bool("/sound/system/settings/start_esd=true")
-		   && gnome_config_get_bool("/sound/system/settings/event_sounds=true")
-		   && gnome_triggerlist_topnode) {
-			int n;
-			
-			for(n = 0; n < gnome_triggerlist_topnode->numsubtrees; n++) {
-				if(!strcmp(gnome_triggerlist_topnode->subtrees[n]->nodename,
-					   "gtk-events"))
-					break;
-			}
-			
-			if(n < gnome_triggerlist_topnode->numsubtrees) {
-				GnomeTriggerList* gtk_events_node;
-				
-				gtk_events_node = gnome_triggerlist_topnode->subtrees[n];
-				g_assert(gtk_events_node != NULL);
-				
-				for(n = 0; n < gtk_events_node->numsubtrees; n++) {
-					int signums[5];
-					int nsigs, i;
-					char *signame;
-					gpointer hookdata = gtk_events_node->subtrees[n];
-					
-					g_assert(hookdata != NULL);
-					
-					signame = gtk_events_node->subtrees[n]->nodename;
-					g_assert(signame != NULL);
-					
-					/*
-					 * XXX this is an incredible hack based on a compile-time
-					 * knowledge of what gtk widgets do what, rather than
-					 */
-					if(!strcmp(signame, "activate")) {
-						gtk_type_class(gtk_menu_item_get_type());
-						signums[0] = gtk_signal_lookup(signame, gtk_menu_item_get_type());
-						
-						gtk_type_class(gtk_editable_get_type());
-						signums[1] = gtk_signal_lookup(signame, gtk_editable_get_type());
-						nsigs = 2;
-					} else if(!strcmp(signame, "toggled")) {
-						gtk_type_class(gtk_toggle_button_get_type());
-						signums[0] = gtk_signal_lookup(signame,
-									       gtk_toggle_button_get_type());
-						
-						gtk_type_class(gtk_check_menu_item_get_type());
-						signums[1] = gtk_signal_lookup(signame,
-									       gtk_check_menu_item_get_type());
-						nsigs = 2;
-					} else if(!strcmp(signame, "clicked")) {
-						gtk_type_class(gtk_button_get_type());
-						signums[0] = gtk_signal_lookup(signame, gtk_button_get_type());
-						nsigs = 1;
-					} else {
-						gtk_type_class(gtk_widget_get_type());
-						signums[0] = gtk_signal_lookup(signame, gtk_widget_get_type());
-						nsigs = 1;
-					}
-					
-					for(i = 0; i < nsigs; i++)
-						if(signums[i] > 0)
-							gtk_signal_add_emission_hook(signums[i],
-										     (GtkEmissionHook)relay_gtk_signal,
-										     hookdata);
-				}
-			}
-		}
+		/* lame trigger stuff. This really needs to be sorted
+		   out better so that the trigger API is exported more
+		   - perhaps there's something hidden in glib that
+		   already does this :) */
+
+		initialize_gtk_signal_relay();
 		
 		gnome_initialized = TRUE;
 		break;
@@ -584,28 +521,82 @@ relay_gtk_signal(GtkObject *object,
 		 guint signal_id,
 		 guint n_params,
 		 GtkArg *params,
-		 GnomeTriggerList *t)
+		 gchar *signame)
 {
 #ifdef HAVE_ESD
-  /* Yes, this short circuits the rest of the triggers mechanism. It's
-     easy to fix if we need to, though. */
-  if(gnome_sound_connection < 0) return TRUE;
+  char *pieces[3] = {"gtk-events", NULL, NULL};
+  pieces[1] = signame;
+  gnome_triggers_vdo("", NULL, (const char **)pieces);
 
-  if(t->actions[0]->u.media.cache_id == -1) {
-    char *buf = alloca(strlen(t->nodename) + sizeof("gtk-events/"));
+  return TRUE;
+#else
+  return FALSE; /* this shouldn't even happen... */
+#endif
+}
 
-    t->actions[0]->u.media.cache_id =
-      gnome_sound_sample_load(buf, t->actions[0]->u.media.file);
+static void
+initialize_gtk_signal_relay(void)
+{
+#ifdef HAVE_ESD
+  gpointer iter_signames;
+  char *signame;
+  char *ctmp, *ctmp2;
 
-    if(t->actions[0]->u.media.cache_id < 0)
-      t->actions[0]->u.media.cache_id = -2; /* don't even bother trying
-					     to play this sound, since
-					     loading failed */
+  if(gnome_sound_connection < 0)
+    return;
+
+  if(!gnome_config_get_bool("/sound/system/settings/event_sounds=true"))
+    return;
+
+  ctmp = gnome_config_file("/sound/events/gtk-events.soundlist");
+  g_strconcat3_a(ctmp2, "=", ctmp, "=");
+  g_free(ctmp);
+  iter_signames = gnome_config_init_iterator_sections(ctmp2);
+  gnome_config_push_prefix(ctmp2);
+
+  while((iter_signames = gnome_config_iterator_next(iter_signames,
+						    &signame, NULL))) {
+    int signums[5];
+    int nsigs, i;
+
+    /*
+     * XXX this is an incredible hack based on a compile-time
+     * knowledge of what gtk widgets do what, rather than
+     * anything based on the info available at runtime.
+     */
+    if(!strcmp(signame, "activate")) {
+      gtk_type_class(gtk_menu_item_get_type());
+      signums[0] = gtk_signal_lookup(signame, gtk_menu_item_get_type());
+						
+      gtk_type_class(gtk_editable_get_type());
+      signums[1] = gtk_signal_lookup(signame, gtk_editable_get_type());
+      nsigs = 2;
+    } else if(!strcmp(signame, "toggled")) {
+      gtk_type_class(gtk_toggle_button_get_type());
+      signums[0] = gtk_signal_lookup(signame,
+				     gtk_toggle_button_get_type());
+						
+      gtk_type_class(gtk_check_menu_item_get_type());
+      signums[1] = gtk_signal_lookup(signame,
+				     gtk_check_menu_item_get_type());
+      nsigs = 2;
+    } else if(!strcmp(signame, "clicked")) {
+      gtk_type_class(gtk_button_get_type());
+      signums[0] = gtk_signal_lookup(signame, gtk_button_get_type());
+      nsigs = 1;
+    } else {
+      gtk_type_class(gtk_widget_get_type());
+      signums[0] = gtk_signal_lookup(signame, gtk_widget_get_type());
+      nsigs = 1;
+    }
+
+    for(i = 0; i < nsigs; i++)
+      if(signums[i] > 0)
+	gtk_signal_add_emission_hook(signums[i],
+				     (GtkEmissionHook)relay_gtk_signal,
+				     signame);
   }
-
-  if(t->actions[0]->u.media.cache_id >= 0)
-    esd_sample_play(gnome_sound_connection, t->actions[0]->u.media.cache_id);
+  gnome_config_pop_prefix();
 
 #endif
-  return TRUE;
 }
