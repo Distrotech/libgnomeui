@@ -693,6 +693,13 @@ file_entry_set_max_saved (GladeXML *xml, GtkWidget *w,
 }
 
 static void
+file_entry_set_use_filechooser (GladeXML *xml, GtkWidget *w,
+			  const char *name, const char *value)
+{
+    g_object_set (G_OBJECT (w), "use_filechooser", BOOL (value), NULL);
+}
+
+static void
 icon_entry_set_max_saved (GladeXML *xml, GtkWidget *w,
 			  const char *name, const char *value)
 {
@@ -849,6 +856,7 @@ glade_module_register_widgets (void)
     glade_register_custom_prop (GNOME_TYPE_PIXMAP, "filename", pixmap_set_filename);
     glade_register_custom_prop (GNOME_TYPE_ENTRY, "max_saved", entry_set_max_saved);
     glade_register_custom_prop (GNOME_TYPE_FILE_ENTRY, "max_saved", file_entry_set_max_saved);
+    glade_register_custom_prop (GNOME_TYPE_FILE_ENTRY, "use_filechooser", file_entry_set_use_filechooser);
     glade_register_custom_prop (GNOME_TYPE_ICON_ENTRY, "max_saved", icon_entry_set_max_saved);
 
     glade_register_widget (GNOME_TYPE_ABOUT, NULL, NULL, NULL);

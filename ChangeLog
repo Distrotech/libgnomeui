@@ -1,3 +1,9 @@
+2004-02-09  Fernando Herrera  <fherrera@onirica.com>
+
+	* glade/glade-gnome.c: (file_entry_set_use_filechooser),
+	(glade_module_register_widgets): Register "use_filechooser" prop in
+	glade
+
 2004-02-09  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c: added "use_filechooser" property
