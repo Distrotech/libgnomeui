@@ -349,12 +349,16 @@ toolbar_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 						get_stock_name(stock));
 			} else if (icon) {
 				GdkPixmap *pix;
-				GdkBitmap *mask;
+				GdkBitmap *mask = NULL;
 				pix = gdk_pixmap_colormap_create_from_xpm(NULL,
 					gtk_widget_get_colormap(w), &mask,
 					NULL, icon);
 				g_free(icon);
-				iconw = gtk_pixmap_new(pix, mask);
+				if (pix)
+					iconw = gtk_pixmap_new(pix, mask);
+				else
+					iconw = gtk_type_new(
+						gtk_pixmap_get_type());
 				if (pix) gdk_pixmap_unref(pix);
 				if (mask) gdk_bitmap_unref(mask);
 			}
@@ -615,10 +619,16 @@ propbox_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		if (tmp2 == NULL || strcmp(attr->value, "Notebook:tab") != 0)
 			pages = g_list_append (pages, child);
 		else {
-			GtkWidget *page = pages->data;
+			GtkWidget *page;
 			guint key = glade_xml_get_parent_accel(xml);
 
-			pages = g_list_remove (pages, page);
+			if (pages) {
+				page = pages->data;
+				pages = g_list_remove (pages, page);
+			} else {
+				page = gtk_label_new("Unknown page");
+				gtk_widget_show(page);
+			}
 			gnome_property_box_append_page (GNOME_PROPERTY_BOX(w),
 							page, child);
 			if (key) {
