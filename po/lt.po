@@ -2,41 +2,39 @@
 # Copyright (C) 2000-2001 Free Software Foundation, Inc.
 # Kæstutis Kruþikas <DrKestas@takas.lt>, 2000
 # Gediminas Paulauskas <menesis@delfi.lt>, 2000-2001
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.12\n"
-"POT-Creation-Date: 2002-06-07 11:42+0200\n"
-"PO-Revision-Date: 2001-05-20 22:11+0200\n"
+"POT-Creation-Date: 2002-06-10 11:00+0200\n"
+"PO-Revision-Date: 2002-06-10 11:08+0200\n"
 "Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: libgnomeui/gnome-about.c:194
 msgid "Credits"
-msgstr ""
+msgstr "Padëkos"
 
 #: libgnomeui/gnome-about.c:223
 msgid "_Written by"
-msgstr ""
+msgstr "_Paraðë"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "_Documented by"
-msgstr "Dokumentuotojas"
+msgstr "_Dokumentavo"
 
 #: libgnomeui/gnome-about.c:253
-#, fuzzy
 msgid "_Translated by"
-msgstr "Vertëjai"
+msgstr "_Iðvertë"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
-#, fuzzy
 msgid "_Credits"
-msgstr "K_eisti"
+msgstr "_Padëkos"
 
 #: libgnomeui/gnome-about.c:352
 msgid "Program name"
@@ -107,8 +105,7 @@ msgid "Translator credits"
 msgstr "Vertëjai"
 
 #: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Vertëjø sàraðas. Ðià eilutæ turi bûti galima iðversti"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -238,13 +235,12 @@ msgid "Date"
 msgstr "Data"
 
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "Pasirink bylà"
+msgstr "Pasirink datà"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Pasirinkti datà ið kalendoriaus"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -252,13 +248,12 @@ msgid "Calendar"
 msgstr "Kalendorius"
 
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "Pasirink bylà"
+msgstr "Pasirink laikà"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Pasirinkti laikà ið sàraðo"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -388,14 +383,12 @@ msgid "End World Hunger"
 msgstr "Baigti pasaulio alká"
 
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Link color"
 msgstr "Nuorodos spalva"
 
 #: libgnomeui/gnome-href.c:139
-#, fuzzy
 msgid "Color used to draw the link"
-msgstr "Spalva, naudojama nuorodai pieðti"
+msgstr "Spalva naudojama nuorodai pieðti"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
@@ -426,11 +419,12 @@ msgstr "Ávyko keletas segmentacijos klaidø; negaliu parodyti klaidos dialogo\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:605
-#, fuzzy
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
-msgstr "Ávyko keletas segmentacijos klaidø; negaliu parodyti klaidos dialogo\n"
+msgstr ""
+"Segmentacijos klaidø!\n"
+"Negaliu parodyti nulûþimo dialogo\n"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -523,6 +517,7 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Byla"
 
@@ -580,6 +575,7 @@ msgid "_Game"
 msgstr "Þai_dimas"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pagalba"
 
@@ -625,9 +621,8 @@ msgstr "Atstatyti iki iðsaugotos bylos versijos"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
 msgid "_Print..."
-msgstr "S_pausdinti"
+msgstr "S_pausdinti..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -653,21 +648,18 @@ msgstr "Uþdaryti esamà bylà"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "_Iðkirpti"
+msgstr "I_ðeiti"
 
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "Apie ðià programà"
+msgstr "Iðeiti ið programos"
 
 #.
 #. * The "Edit" menu
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-#, fuzzy
 msgid "Cu_t"
 msgstr "_Iðkirpti"
 
@@ -733,7 +725,7 @@ msgstr "Ieðkoti eilutës"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "Rasti ki_tà"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -741,7 +733,6 @@ msgstr "Vël ieðkoti tos paèios eilutës"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
 msgid "R_eplace..."
 msgstr "_Pakeisti..."
 
@@ -763,9 +754,8 @@ msgstr "Keisti bylos savybes"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces..."
-msgstr "_Nuostatos..."
+msgstr "_Parinktys..."
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -776,18 +766,17 @@ msgstr "Sutvarkyti programà"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Apie"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Apie ðià programà"
 
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
 msgid "Select _All"
-msgstr "Paþymëti _visà"
+msgstr "Paþymëti _viskà"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
@@ -808,7 +797,7 @@ msgstr "Sukurti naujà langà"
 msgid "_Close This Window"
 msgstr "_Uþdaryti ðá langà"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Uþdaryti esamà langà"
 
@@ -882,28 +871,25 @@ msgstr "Baigti esamà þaidimà"
 
 #: libgnomeui/gnome-app-helper.c:1144
 msgid "_Contents"
-msgstr ""
+msgstr "_Turinys"
 
 #: libgnomeui/gnome-app-helper.c:1145
-#, fuzzy
 msgid "View help for this application"
-msgstr "Apie ðià programà"
+msgstr "Rodyti ðios programos þinynà"
 
 #: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
-msgstr ""
+msgstr "Tekstas po ikonomis"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
-msgstr ""
+msgstr "Svarbus tekstas ðalia ikonø"
 
 #: libgnomeui/gnome-app-helper.c:2567
-#, fuzzy
 msgid "Icons Only"
 msgstr "Tik ikonos"
 
 #: libgnomeui/gnome-app-helper.c:2568
-#, fuzzy
 msgid "Text Only"
 msgstr "Tik tekstas"
 
@@ -973,9 +959,8 @@ msgid "The GTK entry"
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:175
-#, fuzzy
 msgid "History ID"
-msgstr "Istorijos id"
+msgstr "Istorijos ID"
 
 #: libgnomeui/gnome-file-entry.c:221
 msgid ""
@@ -994,7 +979,7 @@ msgstr "Pasirinkimo dialogo pavadinimas"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr ""
+msgstr "Katalogo ávestis"
 
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
@@ -1003,18 +988,16 @@ msgid ""
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:246
-#, fuzzy
 msgid "Modal"
-msgstr "Veiksena"
+msgstr "Modalinis"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:200
-#, fuzzy
 msgid "Filename"
-msgstr "_Byla"
+msgstr "Bylos vardas"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
@@ -1030,7 +1013,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
-msgstr ""
+msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid ""
@@ -1041,7 +1024,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
-msgstr ""
+msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:283
 msgid ""
@@ -1055,19 +1038,16 @@ msgid "Select file"
 msgstr "Pasirink bylà"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path"
-msgstr "Á_dëti"
+msgstr "Kelias"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path to file"
-msgstr "Iðsaugoti esamà bylà"
+msgstr "Kelias iki bylos"
 
 #: libgnomeui/gnome-file-entry.c:672
-#, fuzzy
 msgid "_Browse..."
-msgstr "Narðyti..."
+msgstr "_Narðyti..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
@@ -1151,7 +1131,7 @@ msgstr "GNOME GConf UI palaikymas"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "_Iðsamiai"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
@@ -1193,9 +1173,8 @@ msgid "Filename that should be displayed in the icon entry."
 msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:209
-#, fuzzy
 msgid "Picker dialog"
-msgstr "Pasirink spalvà"
+msgstr "Pasirinkimo dialogas"
 
 #: libgnomeui/gnome-icon-entry.c:210
 msgid ""
@@ -1218,9 +1197,8 @@ msgid "Preview"
 msgstr "Perþiûra"
 
 #: libgnomeui/gnome-icon-entry.c:752
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "Pasirinkimo dialogo pavadinimas"
+msgstr "Ikonos pasirinkimo dialogas"
 
 #: libgnomeui/gnome-icon-entry.c:753
 msgid "This dialog box lets you select an icon."
@@ -1248,7 +1226,7 @@ msgstr "Narðyti"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
-msgstr ""
+msgstr "Ikonos kelias"
 
 #: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
@@ -1304,9 +1282,8 @@ msgid "No Image"
 msgstr "Jokio paveikslëlio"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "Perþiûra"
+msgstr "Paveikslëlio perþiûra"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 #, fuzzy
@@ -1336,74 +1313,7 @@ msgstr "%a, %Y %b %d, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Find _Again"
-#~ msgstr "Rasti _vël"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Iðeiti ið testo"
 
-#~ msgid "Both text and icons"
-#~ msgstr "Tekstas ir ikonos"
-
-#~ msgid "E_xit"
-#~ msgstr "I_ðeiti"
-
-#~ msgid "Exit the program"
-#~ msgstr "Iðeiti ið programos"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Gdk derinimo þymës, kurias uþdëti"
-
-#~ msgid "FLAGS"
-#~ msgstr "ÞYMËS"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Gdk derinimo þymës, kurias nuimti"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Padaryti X kreiptis sinchroniðkas"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "Nenaudoti X bendrosios atminties iðplëtimo"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Programos pavadinimas, naudojamas langø tvarkyklës"
-
-#~ msgid "NAME"
-#~ msgstr "PAVAD"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Programos klasë, naudojama langø tvarkyklës"
-
-#~ msgid "CLASS"
-#~ msgstr "KLASË"
-
-#~ msgid "HOST"
-#~ msgstr "HOST"
-
-#~ msgid "PORT"
-#~ msgstr "PRIEV"
-
-#~ msgid "STYLE"
-#~ msgstr "STILIUS"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Gtk+ derinimo þymës, kurias uþdëti"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Gtk+ derinimo þymës, kurias nuimti"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Padaryti visus perspëjimus lemtingais"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Ákelti papildomà Gtk modulá"
-
-#~ msgid "MODULE"
-#~ msgstr "MODULIS"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
-
-#~ msgid "Exit the test"
-#~ msgstr "Iðeiti ið testo"
-
-#~ msgid "Author"
-#~ msgstr "Autorius"
