@@ -194,8 +194,36 @@ browse_clicked(GnomeFileEntry *fentry, GnomePixmapEntry *pentry)
 }
 
 static void
+drag_data_received (GtkWidget        *widget,
+		    GdkDragContext   *context,
+		    gint              x,
+		    gint              y,
+		    GtkSelectionData *selection_data,
+		    guint             info,
+		    guint32           time,
+		    GnomePixmapEntry *pentry)
+{
+	GtkWidget *entry = gnome_pixmap_entry_gtk_entry(pentry);
+	GList *files;
+
+	/*here we extract the filenames from the URI-list we recieved*/
+	files = gnome_uri_list_extract_filenames(selection_data->data);
+	/*if there's isn't a file*/
+	if(!files) {
+		gtk_drag_finish(context,FALSE,FALSE,time);
+		return;
+	}
+
+	gtk_entry_set_text (GTK_ENTRY(entry), files->data);
+
+	/*free the list of files we got*/
+	gnome_uri_list_free_strings (files);
+}
+
+static void
 gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 {
+	static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 	GtkWidget *w;
 	char *p;
 
@@ -207,6 +235,13 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 	pentry->do_preview = TRUE;
 	
 	pentry->preview_sw = gtk_scrolled_window_new(NULL,NULL);
+	gtk_drag_dest_set (GTK_WIDGET (pentry->preview_sw),
+			   GTK_DEST_DEFAULT_MOTION |
+			   GTK_DEST_DEFAULT_HIGHLIGHT |
+			   GTK_DEST_DEFAULT_DROP,
+			   drop_types, 1, GDK_ACTION_COPY);
+	gtk_signal_connect (GTK_OBJECT (pentry->preview_sw), "drag_data_received",
+			    GTK_SIGNAL_FUNC (drag_data_received),pentry);
 	gtk_box_pack_start (GTK_BOX (pentry), pentry->preview_sw, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(pentry->preview_sw),
 				       GTK_POLICY_AUTOMATIC,

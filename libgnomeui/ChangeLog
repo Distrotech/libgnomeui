@@ -1,3 +1,8 @@
+Tue Jan 05 02:12:52 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap-entry.c,gnome-icon-entry.c: accept drops of
+	  files on the image previews
+
 Mon Jan 04 02:19:49 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-sel.c: when scaling icons, makes sure they're at least

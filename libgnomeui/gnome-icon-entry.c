@@ -327,8 +327,36 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 }
 
 static void
+drag_data_received (GtkWidget        *widget,
+		    GdkDragContext   *context,
+		    gint              x,
+		    gint              y,
+		    GtkSelectionData *selection_data,
+		    guint             info,
+		    guint32           time,
+		    GnomeIconEntry   *ientry)
+{
+	GtkWidget *entry = gnome_icon_entry_gtk_entry(ientry);
+	GList *files;
+
+	/*here we extract the filenames from the URI-list we recieved*/
+	files = gnome_uri_list_extract_filenames(selection_data->data);
+	/*if there's isn't a file*/
+	if(!files) {
+		gtk_drag_finish(context,FALSE,FALSE,time);
+		return;
+	}
+
+	gtk_entry_set_text (GTK_ENTRY(entry), files->data);
+
+	/*free the list of files we got*/
+	gnome_uri_list_free_strings (files);
+}
+
+static void
 gnome_icon_entry_init (GnomeIconEntry *ientry)
 {
+	static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 	GtkWidget *w;
 	char *p;
 
@@ -344,6 +372,13 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 	gtk_widget_show(w);
 	gtk_box_pack_start (GTK_BOX (ientry), w, TRUE, TRUE, 0);
 	ientry->pickbutton = gtk_button_new_with_label(_("No Icon"));
+	gtk_drag_dest_set (GTK_WIDGET (ientry->pickbutton),
+			   GTK_DEST_DEFAULT_MOTION |
+			   GTK_DEST_DEFAULT_HIGHLIGHT |
+			   GTK_DEST_DEFAULT_DROP,
+			   drop_types, 1, GDK_ACTION_COPY);
+	gtk_signal_connect (GTK_OBJECT (ientry->pickbutton), "drag_data_received",
+			    GTK_SIGNAL_FUNC (drag_data_received),ientry);
 	gtk_signal_connect(GTK_OBJECT(ientry->pickbutton), "clicked",
 			   GTK_SIGNAL_FUNC(show_icon_selection),ientry);
 	/*FIXME: 60x60 is just larger then default 48x48, though icon sizes
