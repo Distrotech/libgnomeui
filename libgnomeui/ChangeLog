@@ -1,3 +1,12 @@
+1999-12-01  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-canvas-pixbuf.h, gnome-canvas-pixbuf.c: Copy latest
+	version from gdk-pixbuf.  gdk-pixbuf has the master copy; do not
+	modify this libgnomeui copy.
+
+	* gnome-dialog.c (gnome_dialog_clicked): New function, 
+	emits the "clicked" signal
+
 Mon Nov 29 09:17:02 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gnome-app-helper.c: use GNOME_APP_PIXMAP_NONE instead of the

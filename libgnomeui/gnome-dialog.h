@@ -127,6 +127,9 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
    to change this. */
 void       gnome_dialog_close (GnomeDialog * dialog);
 
+/* Emit clicked signal */
+void       gnome_dialog_clicked (GnomeDialog *dialog, gint button_num);
+
 /* Make _close just hide, not destroy. */
 void       gnome_dialog_close_hides (GnomeDialog * dialog, 
 				     gboolean just_hide);

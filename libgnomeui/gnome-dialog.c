@@ -969,8 +969,7 @@ gnome_dialog_button_clicked (GtkWidget   *button,
 {
   GList *list;
   int which = 0;
-  gboolean click_closes;
-  
+
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
@@ -979,18 +978,42 @@ gnome_dialog_button_clicked (GtkWidget   *button,
 
   while (list){
     if (list->data == button) {
-      gtk_signal_emit (GTK_OBJECT (dialog), dialog_signals[CLICKED], 
-		       which);
+      gnome_dialog_clicked(GNOME_DIALOG(dialog), which);
+      /* Dialog may now be destroyed... */
       break;
     }
     list = list->next;
     ++which;
   }
+}
+
+/**
+ * gnome_dialog_close: Emit the "clicked" signal as if a button was pressed.
+ * @dialog: #GnomeDialog to click.
+ * @button_num: button number to pass to the "clicked" signal.
+ * 
+ * This function emits the "clicked" signal, simulating a click
+ * on the dialog buttons.
+ * 
+ **/
+void
+gnome_dialog_clicked (GnomeDialog *dialog,
+                      gint button_num)
+{
+  gboolean click_closes;
   
-  /* The dialog may have been destroyed by the clicked
-     signal, which is why we had to save self_destruct.
-     Users should be careful not to set self_destruct 
-     and then destroy the dialog themselves too. */
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  click_closes = GNOME_DIALOG(dialog)->click_closes;
+  
+  gtk_signal_emit (GTK_OBJECT (dialog), dialog_signals[CLICKED], 
+                   button_num);
+          
+  /* The dialog may have been destroyed by the clicked signal, which
+     is why we had to save the click_closes flag.  Users should be
+     careful not to set click_closes and then destroy the dialog
+     themselves too. */
 
   if (click_closes) {
     gnome_dialog_close(GNOME_DIALOG(dialog));
