@@ -1,5 +1,5 @@
 /* gnome-druid.c
- * Copyright (C) 1999  J. Arthur Random
+ * Copyright (C) 1999 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -165,7 +165,11 @@ gnome_druid_destroy (GtkObject *object)
 
 	druid = GNOME_DRUID (object);
 	g_list_free (druid->children);
+        druid->children = NULL;
+
+        GTK_OBJECT_CLASS(parent_class)->destroy(object);
 }
+
 static void
 gnome_druid_size_request (GtkWidget *widget,
 			  GtkRequisition *requisition)

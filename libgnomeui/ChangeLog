@@ -1,3 +1,8 @@
+1999-08-16  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-druid.c (gnome_druid_destroy): chain up to parent's
+	destroy method
+
 1999-08-16  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-druid-page-standard.c (gnome_druid_page_standard_init):
