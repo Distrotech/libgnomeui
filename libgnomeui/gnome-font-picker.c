@@ -181,21 +181,31 @@ gnome_font_picker_destroy (GtkObject *object)
     g_return_if_fail (object != NULL);
     g_return_if_fail (GNOME_IS_FONT_PICKER (object));
 
-
     gfp=GNOME_FONT_PICKER(object);
     
+    if (gfp->font_dialog)
+      {
+        gtk_widget_destroy(gfp->font_dialog);
+	gfp->font_dialog = NULL;
+      }
+
     if (gfp->font_name)
+      {
         g_free(gfp->font_name);
+	gfp->font_name = NULL;
+      }
 
     if (gfp->preview_text)
+      {
         g_free(gfp->preview_text);
+	gfp->preview_text = NULL;
+      }
 
     if (gfp->title)
+      {
         g_free(gfp->title);
-    
-    if (gfp->font_dialog)
-        gtk_widget_destroy(gfp->font_dialog);
-    
+	gfp->title = NULL;
+      }
 
     if (GTK_OBJECT_CLASS (parent_class)->destroy)
         (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -377,7 +387,7 @@ void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
 
     tmp=g_strdup(text);
     if (gfp->preview_text) g_free(gfp->preview_text);
-    gfp->preview_text= tmp;
+    gfp->preview_text=tmp;
 
     if (gfp->font_dialog)
         gtk_font_selection_dialog_set_preview_text(GTK_FONT_SELECTION_DIALOG(gfp->font_dialog),gfp->preview_text);

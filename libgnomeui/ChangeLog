@@ -1,3 +1,10 @@
+1998-11-22  Jay Painter <jpaint@serv.net>
+
+	* gnome-font-picker.c: fixed a dumb bug where the
+	gnome_font_picker_dialog_destroy would end up calling
+	g_free(gfp->preview_text), double-freeing the the memory
+	and killing the next call to malloc()
+
 1998-11-22  Andrew T. Veliath  <andrewtv@usa.net>
 
 	* gnome-app-helper.c (create_toolbar_item): Do not create line
