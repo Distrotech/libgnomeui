@@ -108,15 +108,41 @@ browse_clicked (GtkWidget *widget, gpointer data)
 }
 
 static void
+drop_data_available (GtkEntry *widget, GdkEventDropDataAvailable *data)
+{
+	
+	if (!data->data_numbytes)
+		return;
+
+	gtk_entry_set_text (widget, data->data);
+}
+
+/*
+ * Sets up dnd
+ */
+#define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
+static void
+realize (GtkObject *object, GtkEntry *entry)
+{
+	char *drop_types [] = { "url:ALL" };
+	
+	gtk_signal_connect (object, "drop_data_available_event", GTK_SIGNAL_FUNC (drop_data_available), NULL);
+	gdk_window_dnd_drop_set (entry->text_area, TRUE, drop_types, ELEMENTS(drop_types), FALSE);
+}
+
+static void
 gnome_file_entry_init (GnomeFileEntry *fentry)
 {
-	GtkWidget *button;
+	GtkWidget *button, *the_gtk_entry;
 
 	fentry->browse_dialog_title = NULL;
 
 	gtk_box_set_spacing (GTK_BOX (fentry), 4);
 
 	fentry->gentry = gnome_entry_new (NULL);
+	the_gtk_entry = gnome_file_entry_gtk_entry (fentry);
+	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "realize", GTK_SIGNAL_FUNC(realize), the_gtk_entry);
+	
 	gtk_box_pack_start (GTK_BOX (fentry), fentry->gentry, TRUE, TRUE, 0);
 	gtk_widget_show (fentry->gentry);
 

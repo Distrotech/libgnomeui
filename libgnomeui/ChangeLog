@@ -1,3 +1,9 @@
+1998-03-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-entry.c (realize): Added drop support to gnome
+	file-entries.  Now you can drag files from mc to the file entries
+	and guess what happens :-)
+
 Fri Mar 20 00:01:47 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gtk-plug.h: Changed `()' to `(void)'.
