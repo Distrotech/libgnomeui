@@ -1,3 +1,7 @@
+1999-06-10  Tuomas J. Lukka <lukka@iki.fi>
+
+	* gnome-popup-menu.c: remove reference to gtkfeatures.h
+
 1999-06-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-properties.h: Fix includes.

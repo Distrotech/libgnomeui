@@ -22,7 +22,6 @@
 
 #include <config.h>
 #include <gtk/gtkmain.h>
-#include <gtk/gtkfeatures.h>
 #include <gtk/gtkcompat.h>
 #include "gnome-popup-menu.h"
 
