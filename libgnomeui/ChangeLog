@@ -1,3 +1,9 @@
+1999-11-23  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page-edge.c (gnome_druid_page_edge_new): new
+	widget.  Moved gnome_druid_page_edge_finish/start away, and moved
+	their functionality into a single widget.
+
 1999-11-22  Jonathan Blandford  <jrb@redhat.com>
 
 	* Makefile.am: add gnome-canvas-pixbuf.  Retool the compat library

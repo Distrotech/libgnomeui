@@ -250,9 +250,21 @@ gnome_druid_page_edge_prepare (GnomeDruidPage *page,
 			       GtkWidget *druid,
 			       gpointer *data)
 {
-	gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), FALSE, TRUE, TRUE);
-	gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
-	gtk_widget_grab_default (GNOME_DRUID (druid)->next);
+	switch (GNOME_DRUID_PAGE_EDGE (page)->position) {
+	case GNOME_EDGE_START:
+		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), FALSE, TRUE, TRUE);
+		gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
+		gtk_widget_grab_default (GNOME_DRUID (druid)->next);
+		break;
+	case GNOME_EDGE_FINISH:
+		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, FALSE, TRUE);
+		gnome_druid_set_show_finish (GNOME_DRUID (druid), TRUE);
+		gtk_widget_grab_default (GNOME_DRUID (druid)->finish);
+		break;
+	default:
+		g_assert_not_reached ();
+		break;
+	}
 }
 
 
@@ -271,6 +283,7 @@ gnome_druid_page_edge_size_allocate   (GtkWidget               *widget,
 }
 
 #if 0
+{
 /* Fragment left behind by CVS.  Don't get it. */
 gnome_canvas_item_set (druid_page_edge->background_item,
 		       "fill_color_gdk", &(druid_page_edge->background_color),
@@ -291,6 +304,7 @@ gnome_canvas_item_set (druid_page_edge->text_item,
 GTK_WIDGET_CLASS (parent_class)->realize (widget);
 }
 #endif
+
 /**
  * gnome_druid_page_edge_new:
  *
@@ -300,15 +314,17 @@ GTK_WIDGET_CLASS (parent_class)->realize (widget);
  **/
 /* Public functions */
 GtkWidget *
-gnome_druid_page_edge_new (void)
+gnome_druid_page_edge_new (GnomeEdgePosition position)
 {
-GtkWidget *retval =  GTK_WIDGET (gtk_type_new (gnome_druid_page_edge_get_type ()));
-GNOME_DRUID_PAGE_EDGE (retval)->title = g_strdup ("");
-GNOME_DRUID_PAGE_EDGE (retval)->text = g_strdup ("");
-GNOME_DRUID_PAGE_EDGE (retval)->logo_image = NULL;
-GNOME_DRUID_PAGE_EDGE (retval)->watermark_image = NULL;
-gnome_druid_page_edge_construct (GNOME_DRUID_PAGE_EDGE (retval));
-return retval;
+	GtkWidget *retval =  GTK_WIDGET (gtk_type_new (gnome_druid_page_edge_get_type ()));
+
+	GNOME_DRUID_PAGE_EDGE (retval)->position = position;
+	GNOME_DRUID_PAGE_EDGE (retval)->title = g_strdup ("");
+	GNOME_DRUID_PAGE_EDGE (retval)->text = g_strdup ("");
+	GNOME_DRUID_PAGE_EDGE (retval)->logo_image = NULL;
+	GNOME_DRUID_PAGE_EDGE (retval)->watermark_image = NULL;
+	gnome_druid_page_edge_construct (GNOME_DRUID_PAGE_EDGE (retval));
+	return retval;
 }
 /**
  * gnome_druid_page_edge_new_with_vals:
@@ -323,13 +339,24 @@ return retval;
  * Return value: GtkWidget pointer to new GnomeDruidPageEdge.
  **/
 GtkWidget *
-gnome_druid_page_edge_new_with_vals (const gchar *title, const gchar* text,
-	GdkPixbuf *logo, GdkPixbuf *watermark)
+gnome_druid_page_edge_new_with_vals (GnomeEdgePosition position,
+				     const gchar *title,
+				     const gchar* text,
+				     GdkPixbuf *logo,
+				     GdkPixbuf *watermark)
 {
 	GtkWidget *retval =  GTK_WIDGET (gtk_type_new (gnome_druid_page_edge_get_type ()));
+
+	GNOME_DRUID_PAGE_EDGE (retval)->position = position;
 	GNOME_DRUID_PAGE_EDGE (retval)->title = g_strdup (title);
 	GNOME_DRUID_PAGE_EDGE (retval)->text = g_strdup (text);
+
+	if (logo)
+		gdk_pixbuf_ref (logo);
 	GNOME_DRUID_PAGE_EDGE (retval)->logo_image = logo;
+
+	if (watermark)
+		gdk_pixbuf_ref (watermark);
 	GNOME_DRUID_PAGE_EDGE (retval)->watermark_image = watermark;
 	gnome_druid_page_edge_construct (GNOME_DRUID_PAGE_EDGE (retval));
 	return retval;

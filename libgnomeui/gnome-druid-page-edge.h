@@ -31,6 +31,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DRUID_PAGE_EDGE(obj)			(GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID_PAGE_EDGE))
 #define GNOME_IS_DRUID_PAGE_EDGE_CLASS(klass)		(GTK_CHECK_CLASS_TYPE ((obj), GNOME_TYPE_DRUID_PAGE_EDGE))
 
+typedef enum {
+	GNOME_EDGE_START,
+	GNOME_EDGE_FINISH
+} GnomeEdgePosition;
+
 
 typedef struct _GnomeDruidPageEdge       GnomeDruidPageEdge;
 typedef struct _GnomeDruidPageEdgeClass  GnomeDruidPageEdgeClass;
@@ -38,6 +43,7 @@ typedef struct _GnomeDruidPageEdgeClass  GnomeDruidPageEdgeClass;
 struct _GnomeDruidPageEdge
 {
 	GnomeDruidPage parent;
+	GnomeEdgePosition position;
 
 	GdkColor background_color;
 	GdkColor textbox_color;
@@ -67,8 +73,9 @@ struct _GnomeDruidPageEdgeClass
 };
 
 GtkType    gnome_druid_page_edge_get_type          (void);
-GtkWidget *gnome_druid_page_edge_new               (void);
-GtkWidget *gnome_druid_page_edge_new_with_vals     (const gchar        *title,
+GtkWidget *gnome_druid_page_edge_new               (GnomeEdgePosition   position);
+GtkWidget *gnome_druid_page_edge_new_with_vals     (GnomeEdgePosition   position,
+						    const gchar        *title,
 						    const gchar        *text,
 						    GdkPixbuf          *logo,
 						    GdkPixbuf          *watermark);
