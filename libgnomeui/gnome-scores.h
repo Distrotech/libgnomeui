@@ -43,6 +43,8 @@
  *
  */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef GNOME_SCORES_H
 #define GNOME_SCORES_H
 
@@ -180,3 +182,5 @@ void gnome_scores_set_current_player (
 G_END_DECLS
 
 #endif /* GNOME_SCORES_H */
+
+#endif /* GNOME_DISABLE_DEPRECATED */
