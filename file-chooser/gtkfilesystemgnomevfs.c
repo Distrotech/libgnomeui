@@ -85,6 +85,7 @@ struct _GtkFileSystemGnomeVFS
   GSList *bookmarks;
 #endif
 
+  char *desktop_uri;
   guint locale_encoded_filenames : 1;
 };
 
@@ -334,10 +335,16 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
 static void
 gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 {
+  char *name;
 #ifdef USE_GCONF
   GConfValue *value;
 #endif
 
+
+  name = g_build_filename (g_get_home_dir (), "Desktop", NULL);
+  system_vfs->desktop_uri = (char *)gtk_file_system_filename_to_path (GTK_FILE_SYSTEM (system_vfs),
+								      name);
+  g_free (name);
   system_vfs->locale_encoded_filenames = (getenv ("G_BROKEN_FILENAMES") != NULL);
   system_vfs->folders = g_hash_table_new (g_str_hash, g_str_equal);
 
@@ -378,6 +385,7 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
 {
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (object);
 
+  g_free (system_vfs->desktop_uri);
   g_hash_table_destroy (system_vfs->folders);
 
 #ifdef USE_GCONF
@@ -919,6 +927,8 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
       uri = gnome_vfs_volume_get_activation_uri (GNOME_VFS_VOLUME (volume));
       if (strcmp (uri, "file:///") == 0)
 	icon_name = g_strdup ("gnome-fs-blockdev");
+      else if (strcmp (uri, system_vfs->desktop_uri) == 0)
+	icon_name = g_strdup ("gnome-fs-desktop");
       else
 	icon_name = gnome_vfs_volume_get_icon (GNOME_VFS_VOLUME (volume));
       g_free (uri);
@@ -1301,14 +1311,17 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
 
   info = get_vfs_info (file_system, path, GTK_FILE_INFO_MIME_TYPE);
   uri = gtk_file_path_get_string (path);
-  icon_name = gnome_icon_lookup (icon_theme,
-				 NULL,
-				 uri,
-				 NULL,
-				 info,
-				 info->mime_type,
-				 GNOME_ICON_LOOKUP_FLAGS_NONE,
-				 NULL);
+  if (strcmp (uri, system_vfs->desktop_uri) == 0)
+    icon_name = g_strdup ("gnome-fs-desktop");
+  else  
+    icon_name = gnome_icon_lookup (icon_theme,
+				   NULL,
+				   uri,
+				   NULL,
+				   info,
+				   info->mime_type,
+				   GNOME_ICON_LOOKUP_FLAGS_NONE,
+				   NULL);
   if (icon_name)
     {
       pixbuf = get_cached_icon (widget, icon_name, pixel_size);
