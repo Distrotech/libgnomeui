@@ -53,7 +53,6 @@
 
 static void            gnome_mdi_class_init(GnomeMDIClass  *);
 static void            gnome_mdi_init(GnomeMDI *);
-static void            gnome_mdi_destroy(GtkObject *);
 static void            gnome_mdi_finalize(GObject *);
 static void            gnome_mdi_app_create(GnomeMDI *, GnomeApp *);
 static void            gnome_mdi_view_changed(GnomeMDI *, GtkWidget *);
@@ -98,11 +97,6 @@ static void            remove_child(GnomeMDI *, GnomeMDIChild *);
 static GList           *child_create_menus(GnomeMDIChild *, GtkWidget *);
 static GtkWidget       *child_set_label(GnomeMDIChild *, GtkWidget *);
 
-static gboolean		    emit_boolean_pointer (GnomeMDI *mdi,
-											  int sig,
-											  GtkObject *pointer,
-											  gboolean default_return);
-
 /* a macro for getting the app's pouch (app->scrolledwindow->viewport->pouch) */
 #define get_pouch_from_app(app) \
         GNOME_POUCH(GTK_BIN(GTK_BIN(GNOME_APP(app)->contents)->child)->child)
@@ -122,100 +116,73 @@ enum {
 
 static gint mdi_signals[LAST_SIGNAL];
 
-GNOME_CLASS_BOILERPLATE (GnomeMDI, gnome_mdi, GtkObject, gtk_object);
-
-static gboolean
-emit_boolean_pointer (GnomeMDI *mdi, int sig,
-					  GtkObject *pointer,
-					  gboolean default_return)
-{
-	gboolean retval;
-	GValue params[2] = {{0}};
-	GValue rvalue = {0};
-
-	g_return_val_if_fail (GTK_IS_OBJECT (mdi), default_return);
-
-	g_value_init (params + 0, GTK_OBJECT_TYPE (mdi));
-	g_value_set_object (params + 0, G_OBJECT (mdi));
-
-	g_value_init (params + 1, GTK_OBJECT_TYPE (pointer));
-	g_value_set_object (params + 1, G_OBJECT (pointer));
-
-	g_value_init (&rvalue, G_TYPE_BOOLEAN);
-	g_value_set_boolean (&rvalue, default_return);
-
-	g_signal_emitv (params, mdi_signals[sig], 0, &rvalue);
-
-	retval = g_value_get_boolean (&rvalue);
-  
-	g_value_unset (params + 0);
-	g_value_unset (params + 1);
-	g_value_unset (&rvalue);
-
-	return retval;
-}
+GNOME_CLASS_BOILERPLATE (GnomeMDI, gnome_mdi, GObject, gtk_object);
 
 static void
 gnome_mdi_class_init (GnomeMDIClass *klass)
 {
-	GtkObjectClass *object_class;
-	GObjectClass *gobject_class;
+	GObjectClass *object_class;
 	
-	object_class = (GtkObjectClass*) klass;
-	gobject_class = (GObjectClass*) klass;
+	object_class = (GObjectClass*) klass;
 	
-	object_class->destroy = gnome_mdi_destroy;
-	gobject_class->finalize = gnome_mdi_finalize;
+	object_class->finalize = gnome_mdi_finalize;
 
 	mdi_signals[ADD_CHILD] =
-		gtk_signal_new ("add_child",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE(object_class),
-				GTK_SIGNAL_OFFSET (GnomeMDIClass, add_child),
-				gnome_marshal_BOOLEAN__OBJECT,
-				GTK_TYPE_BOOL, 1, GNOME_TYPE_MDI_CHILD);
+		g_signal_newc ("add_child",
+					   G_TYPE_FROM_CLASS (object_class),
+					   G_SIGNAL_RUN_LAST,
+					   G_STRUCT_OFFSET (GnomeMDIClass, add_child),
+					   NULL, NULL,
+					   gnome_marshal_BOOLEAN__OBJECT,
+					   G_TYPE_BOOLEAN, 1, GNOME_TYPE_MDI_CHILD);
 	mdi_signals[REMOVE_CHILD] =
-		gtk_signal_new ("remove_child",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE(object_class),
-				GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_child),
-				gnome_marshal_BOOLEAN__OBJECT,
-				GTK_TYPE_BOOL, 1, GNOME_TYPE_MDI_CHILD);
+		g_signal_newc ("remove_child",
+					   G_TYPE_FROM_CLASS (object_class),
+					   G_SIGNAL_RUN_LAST,
+					   G_STRUCT_OFFSET (GnomeMDIClass, remove_child),
+					   NULL, NULL,
+					   gnome_marshal_BOOLEAN__OBJECT,
+					   G_TYPE_BOOLEAN, 1, GNOME_TYPE_MDI_CHILD);
 	mdi_signals[ADD_VIEW] =
-		gtk_signal_new ("add_view",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE(object_class),
-				GTK_SIGNAL_OFFSET (GnomeMDIClass, add_view),
-				gnome_marshal_BOOLEAN__OBJECT,
-				GTK_TYPE_BOOL, 1, GTK_TYPE_WIDGET);
+		g_signal_newc ("add_view",
+					   G_TYPE_FROM_CLASS (object_class),
+					   G_SIGNAL_RUN_LAST,
+					   G_STRUCT_OFFSET (GnomeMDIClass, add_view),
+					   NULL, NULL,
+					   gnome_marshal_BOOLEAN__OBJECT,
+					   G_TYPE_BOOLEAN, 1, GTK_TYPE_WIDGET);
 	mdi_signals[REMOVE_VIEW] =
-		gtk_signal_new ("remove_view",
-				GTK_RUN_LAST,
-				GTK_CLASS_TYPE(object_class),
-				GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_view),
-				gnome_marshal_BOOLEAN__OBJECT,
-				GTK_TYPE_BOOL, 1, GTK_TYPE_WIDGET);
+		g_signal_newc ("remove_view",
+					   G_TYPE_FROM_CLASS (object_class),
+					   G_SIGNAL_RUN_LAST,
+					   G_STRUCT_OFFSET (GnomeMDIClass, remove_view),
+					   NULL, NULL,
+					   gnome_marshal_BOOLEAN__OBJECT,
+					   G_TYPE_BOOLEAN, 1, GTK_TYPE_WIDGET);
 	mdi_signals[CHILD_CHANGED] =
-		gtk_signal_new ("child_changed",
-				GTK_RUN_FIRST,
-				GTK_CLASS_TYPE(object_class),
-				GTK_SIGNAL_OFFSET (GnomeMDIClass, child_changed),
-				gtk_marshal_VOID__OBJECT,
-				GTK_TYPE_NONE, 1, GNOME_TYPE_MDI_CHILD);
+		g_signal_newc ("child_changed",
+					   G_TYPE_FROM_CLASS (object_class),
+					   G_SIGNAL_RUN_FIRST,
+					   G_STRUCT_OFFSET (GnomeMDIClass, child_changed),
+					   NULL, NULL,
+					   g_cclosure_marshal_VOID__OBJECT,
+					   G_TYPE_NONE, 1, GNOME_TYPE_MDI_CHILD);
 	mdi_signals[VIEW_CHANGED] =
-		gtk_signal_new ("view_changed",
-				GTK_RUN_FIRST,
-				GTK_CLASS_TYPE(object_class),
-				GTK_SIGNAL_OFFSET(GnomeMDIClass, view_changed),
-				gtk_marshal_VOID__OBJECT,
-				GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
+		g_signal_newc ("view_changed",
+					   G_TYPE_FROM_CLASS (object_class),
+					   G_SIGNAL_RUN_FIRST,
+					   G_STRUCT_OFFSET (GnomeMDIClass, view_changed),
+					   NULL, NULL,
+					   g_cclosure_marshal_VOID__OBJECT,
+					   G_TYPE_NONE, 1, GTK_TYPE_WIDGET);
 	mdi_signals[APP_CREATED] =
-		gtk_signal_new ("app_created",
-				GTK_RUN_FIRST,
-				GTK_CLASS_TYPE(object_class),
-				GTK_SIGNAL_OFFSET (GnomeMDIClass, app_created),
-				gtk_marshal_VOID__OBJECT,
-				GTK_TYPE_NONE, 1, GNOME_TYPE_APP);
+		g_signal_newc ("app_created",
+					   G_TYPE_FROM_CLASS (object_class),
+					   G_SIGNAL_RUN_FIRST,
+					   G_STRUCT_OFFSET (GnomeMDIClass, app_created),
+					   NULL, NULL,
+					   g_cclosure_marshal_VOID__OBJECT,
+					   G_TYPE_NONE, 1, GNOME_TYPE_APP);
 	
 	
 	klass->add_child = NULL;
@@ -422,6 +389,8 @@ static void
 gnome_mdi_finalize (GObject *object)
 {
     GnomeMDI *mdi;
+	GList *child_node;
+	GnomeMDIChild *child;
 
 	g_return_if_fail(object != NULL);
 	g_return_if_fail(GNOME_IS_MDI(object));
@@ -432,31 +401,6 @@ gnome_mdi_finalize (GObject *object)
 
 	mdi = GNOME_MDI(object);
 
-	if(mdi->priv->child_menu_path)
-		g_free(mdi->priv->child_menu_path);
-	if(mdi->priv->child_list_path)
-		g_free(mdi->priv->child_list_path);
-	
-	g_free(mdi->priv->appname);
-	g_free(mdi->priv->title);
-
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
-}
-
-static void
-gnome_mdi_destroy (GtkObject *object)
-{
-	GnomeMDI *mdi;
-	GList *child_node;
-	GnomeMDIChild *child;
-
-	g_return_if_fail(object != NULL);
-	g_return_if_fail(GNOME_IS_MDI (object));
-
-	/* remember, destroy can be run multiple times! */
-	
-	mdi = GNOME_MDI(object);
-	
 	/* remove all remaining children */
 	child_node = mdi->priv->children;
 	while(child_node) {
@@ -471,10 +415,18 @@ gnome_mdi_destroy (GtkObject *object)
 	   upon mdi creation. */
 	if (mdi->priv->has_user_refcount != 0) {
 		mdi->priv->has_user_refcount = 0;
-		gtk_object_unref(object);
+		g_object_unref(object);
 	}
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	if(mdi->priv->child_menu_path)
+		g_free(mdi->priv->child_menu_path);
+	if(mdi->priv->child_list_path)
+		g_free(mdi->priv->child_list_path);
+	
+	g_free(mdi->priv->appname);
+	g_free(mdi->priv->title);
+
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
@@ -1129,7 +1081,8 @@ app_wiw_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 			}
 			
 			if(node == NULL) {   /* all the views reside in this GnomeApp */
-				ret = emit_boolean_pointer (mdi, REMOVE_CHILD, GTK_OBJECT (child), FALSE);
+				g_signal_emit (G_OBJECT (mdi), mdi_signals [REMOVE_CHILD], 0,
+							   G_OBJECT (child), &ret);
 				if(!ret)
 					return TRUE;
 			}
@@ -1202,7 +1155,8 @@ app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 			}
 
 			if(node == NULL) {   /* all the views reside in this GnomeApp */
-				ret = emit_boolean_pointer (mdi, REMOVE_CHILD, GTK_OBJECT (child), FALSE);
+				g_signal_emit (G_OBJECT (mdi), mdi_signals [REMOVE_CHILD], 0,
+							   G_OBJECT (child), &ret);
 				if(!ret)
 					return TRUE;
 			}
@@ -1297,7 +1251,7 @@ app_create (GnomeMDI *mdi)
 	gtk_signal_connect(GTK_OBJECT(window), "destroy",
 					   GTK_SIGNAL_FUNC(app_destroy), mdi);
 
-	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[APP_CREATED], window);
+	g_signal_emit(G_OBJECT(mdi), mdi_signals[APP_CREATED], 0, window);
 
 	return window;
 }
@@ -1443,10 +1397,10 @@ set_active_view (GnomeMDI *mdi, GtkWidget *view)
 	mdi->priv->active_view = view;
 
 	if(mdi->priv->active_child != old_child)
-		gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[CHILD_CHANGED],
-						old_child);
+		g_signal_emit(G_OBJECT(mdi), mdi_signals[CHILD_CHANGED], 0,
+					  old_child);
 
-	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[VIEW_CHANGED], old_view);
+	g_signal_emit(G_OBJECT(mdi), mdi_signals[VIEW_CHANGED], 0, old_view);
 }
 
 /* the two functions below are supposed to be non-static but are not part
@@ -1647,7 +1601,8 @@ gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
 			return TRUE;
 	}
 
-	ret = emit_boolean_pointer (mdi, ADD_VIEW, GTK_OBJECT (view), TRUE);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [ADD_VIEW], 0,
+				   G_OBJECT (view), &ret);
 
 	if(ret == FALSE) {
 		gnome_mdi_child_remove_view(child, view);
@@ -1743,7 +1698,8 @@ gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
 	if(!view)
 		return FALSE;
 
-	ret = emit_boolean_pointer (mdi, ADD_VIEW, GTK_OBJECT (view), TRUE);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [ADD_VIEW], 0,
+				   G_OBJECT (view), &ret);
 
 	if(ret == FALSE) {
 		gnome_mdi_child_remove_view(child, view);
@@ -1814,7 +1770,8 @@ gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view)
 	g_return_val_if_fail(view != NULL, FALSE);
 	g_return_val_if_fail(GTK_IS_WIDGET(view), FALSE);
 
-	ret = emit_boolean_pointer (mdi, REMOVE_VIEW, GTK_OBJECT (view), TRUE);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [REMOVE_VIEW], 0,
+				   G_OBJECT (view), &ret);
 
 	if(ret == FALSE)
 		return FALSE;
@@ -1850,7 +1807,8 @@ gnome_mdi_add_child (GnomeMDI *mdi, GnomeMDIChild *child)
 	g_return_val_if_fail(child != NULL, FALSE);
 	g_return_val_if_fail(GNOME_IS_MDI_CHILD(child), FALSE);
 
-	ret = emit_boolean_pointer (mdi, ADD_CHILD, GTK_OBJECT (child), TRUE);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [ADD_CHILD], 0,
+				   G_OBJECT (child), &ret);
 
 	if(ret == FALSE)
 		return FALSE;
@@ -1888,7 +1846,8 @@ gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child)
 	g_return_val_if_fail(child != NULL, FALSE);
 	g_return_val_if_fail(GNOME_IS_MDI_CHILD(child), FALSE);
 
-	ret = emit_boolean_pointer (mdi, REMOVE_CHILD, GTK_OBJECT (child), TRUE);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [REMOVE_CHILD], 0,
+				   G_OBJECT (child), &ret);
 
 	if(ret == FALSE)
 		return FALSE;
@@ -1923,9 +1882,10 @@ gnome_mdi_remove_all (GnomeMDI *mdi)
 
 	child_node = mdi->priv->children;
 	while(child_node) {
-		handler_ret = emit_boolean_pointer
-			(mdi, REMOVE_CHILD,
-			 GTK_OBJECT (child_node->data), TRUE);
+		handler_ret = TRUE;
+		g_signal_emit (G_OBJECT (mdi), mdi_signals [REMOVE_CHILD], 0,
+					   G_OBJECT (child_node->data), &handler_ret);
+
 		child = GNOME_MDI_CHILD(child_node->data);
 		child_node = child_node->next;
 		if(handler_ret)
@@ -2324,7 +2284,7 @@ gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path)
  * @object: Object to register.
  * 
  * Description:
- * Registers #GtkObject @object with MDI. 
+ * Registers #GObject @object with MDI. 
  * This is mostly intended for applications that open other windows besides
  * those opened by the MDI and want to continue to run even when no MDI
  * windows exist (an example of this would be GIMP's window with tools, if
@@ -2334,7 +2294,7 @@ gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path)
  * results in MDI being destroyed. 
  **/
 void
-gnome_mdi_register (GnomeMDI *mdi, GtkObject *object)
+gnome_mdi_register (GnomeMDI *mdi, GObject *object)
 {
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
@@ -2351,10 +2311,10 @@ gnome_mdi_register (GnomeMDI *mdi, GtkObject *object)
  * @object: Object to unregister.
  * 
  * Description:
- * Removes #GtkObject @object from the list of registered objects. 
+ * Removes #GObject @object from the list of registered objects. 
  **/
 void
-gnome_mdi_unregister (GnomeMDI *mdi, GtkObject *object)
+gnome_mdi_unregister (GnomeMDI *mdi, GObject *object)
 {
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));

@@ -60,13 +60,13 @@ typedef enum {
 /* all of the GnomeMDI members are considered private and should
    only be accessed using the provided public API */
 struct _GnomeMDI {
-	GtkObject object;
+	GObject object;
 
 	GnomeMDIPrivate *priv;
 };
 
 struct _GnomeMDIClass {
-	GtkObjectClass parent_class;
+	GObjectClass parent_class;
 
 	gint        (*add_child)     (GnomeMDI *mdi, GnomeMDIChild *child);
 	gint        (*remove_child)  (GnomeMDI *mdi, GnomeMDIChild *child);
@@ -110,7 +110,7 @@ struct _GnomeMDIClass {
  *   no contents may be set since GnomeMDI uses them for purposes of its own!
  */
 
-GtkType        gnome_mdi_get_type            (void) G_GNUC_CONST;
+GType          gnome_mdi_get_type            (void) G_GNUC_CONST;
 
 GnomeMDI      *gnome_mdi_new                 (const gchar *appname, const gchar *title);
 void           gnome_mdi_construct           (GnomeMDI *mdi, const gchar *appname, const gchar *title);
@@ -151,8 +151,8 @@ GnomeApp      *gnome_mdi_get_active_window   (GnomeMDI *mdi);
  * other hand, closing the last MDI window when no objects are registered
  * with the MDI will result in MDI being gtk_object_destroy()ed.
  */
-void          gnome_mdi_register             (GnomeMDI *mdi, GtkObject *object);
-void          gnome_mdi_unregister           (GnomeMDI *mdi, GtkObject *object);
+void          gnome_mdi_register             (GnomeMDI *mdi, GObject *object);
+void          gnome_mdi_unregister           (GnomeMDI *mdi, GObject *object);
 
 /*
  * convenience functions for retrieveing GnomeMDIChild and GnomeApp

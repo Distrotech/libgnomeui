@@ -1,5 +1,9 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* gnome-mdi.[ch]: Made this a GObject, not a GtkObject.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* gnome-app-helper.c, gnome-druid.c, gnome-font-picker.c,
 	gnome-helpsys.c: Use the GTK+ API to access our stock icons.
 
