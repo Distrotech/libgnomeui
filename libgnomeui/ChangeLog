@@ -1,3 +1,8 @@
+1999-09-27  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi-session.c (gnome_mdi_save_state): Call
+	gnome_config_sync () when we're done.
+
 1999-09-26  Martin Baulig  <martin@home-of-linux.org>
 
 	* gtkdial.c (gtk_dial_set_percentage, gtk_dial_set_value): Allow

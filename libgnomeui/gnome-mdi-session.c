@@ -481,4 +481,6 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 
 		window = g_list_next (window);
 	}
+
+	gnome_config_sync ();
 }
