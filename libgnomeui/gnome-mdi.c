@@ -462,13 +462,16 @@ static void child_list_menu_remove_item(GnomeMDI *mdi, GnomeMDIChild *child) {
     app = GNOME_APP(app_node->data);
     menu = GTK_MENU_ITEM(gtk_object_get_data(GTK_OBJECT(app->menubar), MDI_CHILD_LIST_KEY));
 
-    shell = GTK_MENU_SHELL(menu->submenu);
+    if (menu)
+    {
+      shell = GTK_MENU_SHELL(menu->submenu);
 
-    item = find_item_by_label(shell, child->name);
+      item = find_item_by_label(shell, child->name);
     
-    gtk_container_remove(GTK_CONTAINER(shell), item);
+      gtk_container_remove(GTK_CONTAINER(shell), item);
     
-    gtk_widget_queue_resize (GTK_WIDGET (shell));
+      gtk_widget_queue_resize (GTK_WIDGET (shell));
+    }
 
     app_node = g_list_next(app_node);
   }
@@ -492,16 +495,17 @@ static void child_list_menu_add_item(GnomeMDI *mdi, GnomeMDIChild *child) {
 
     menu = GTK_MENU_ITEM(gtk_object_get_data(GTK_OBJECT(app->menubar), MDI_CHILD_LIST_KEY));
 
-    if((submenu = menu->submenu) == NULL) {
-      submenu = gtk_menu_new();
+    if(menu) {
+      if((submenu = menu->submenu) == NULL) {
+        submenu = gtk_menu_new();
 
-      gtk_menu_item_set_submenu(menu, submenu);
+        gtk_menu_item_set_submenu(menu, submenu);
+      }
+
+      gtk_menu_append(GTK_MENU(submenu), item);
+
+      gtk_widget_queue_resize(GTK_WIDGET(submenu));
     }
-
-    gtk_menu_append(GTK_MENU(submenu), item);
-
-    gtk_widget_queue_resize(GTK_WIDGET(submenu));
-
     app_node = g_list_next(app_node);
   }
 }
