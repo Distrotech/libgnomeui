@@ -81,8 +81,10 @@ int main(int argc, char *argv[])
     {
       bug_buddy_path = gnome_is_program_in_path ("bug-buddy");
       if (bug_buddy_path != NULL)
-        gnome_dialog_append_button(GNOME_DIALOG(mainwin),
-                                   _("Submit a bug report"));
+        {
+          gnome_dialog_append_button(GNOME_DIALOG(mainwin),
+                                     _("Submit a bug report"));
+        }
     }
   /* Please download http://www.gnome.org/application_crashed-shtml.txt,
    * translate the plain text, and send the file to webmaster@gnome.org. */
