@@ -926,7 +926,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
       g_free (cwd);
     }
 
-  gnome_program_attributes_set(app, GNOME_CLIENT_PARAM_SM_CONNECT, TRUE, NULL);
+  g_object_set (G_OBJECT (app), GNOME_CLIENT_PARAM_SM_CONNECT, TRUE, NULL);
 
   /* needed on non-glibc systems: */
   gnome_client_set_program (master_client, program_invocation_name);
@@ -941,8 +941,12 @@ static void
 gnome_client_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
 {
   gboolean do_connect = TRUE;
+  GValue value = { 0, };
 
-  gnome_program_attributes_get(app, GNOME_CLIENT_PARAM_SM_CONNECT, &do_connect, NULL);
+  g_value_init (&value, G_TYPE_BOOLEAN);
+  g_object_get_property (G_OBJECT (app), GNOME_CLIENT_PARAM_SM_CONNECT, &value);
+  do_connect = g_value_get_boolean (&value);
+  g_value_unset (&value);
 
   /* We're done, so we can connect to the session manager now.  */
   if (do_connect)
@@ -959,7 +963,8 @@ gnome_client_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
 void         
 gnome_client_disable_master_connection (void)
 {
-  gnome_program_attributes_set(gnome_program_get(), GNOME_CLIENT_PARAM_SM_CONNECT, FALSE, NULL);
+    g_object_set (G_OBJECT (gnome_program_get()),
+		  GNOME_CLIENT_PARAM_SM_CONNECT, FALSE, NULL);
 }
 
 /* Called at exit to ensure the ice connection is closed cleanly

@@ -45,8 +45,7 @@
 #include <gtk/gtk.h>
 
 #include "libgnome/libgnomeP.h"
-
-#define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT,GNOME_GCONF_INIT
+#include "libgnome/gnome-program.h"
 
 #include "gnome-client.h"
 #include "gnome-preferences.h"
@@ -262,8 +261,9 @@ libgnomeui_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
         envar = g_getenv("GNOME_DISABLE_CRASH_DIALOG");
         if(envar)
                 do_crash_dialog = atoi(envar)?FALSE:TRUE;
-        gnome_program_attributes_set(app, LIBGNOMEUI_PARAM_CRASH_DIALOG, do_crash_dialog, NULL);
-        gnome_program_attributes_set(app, LIBGNOMEUI_PARAM_DISPLAY, g_getenv("DISPLAY"), NULL);
+        g_object_set (G_OBJECT(app), LIBGNOMEUI_PARAM_CRASH_DIALOG,
+                      do_crash_dialog, LIBGNOMEUI_PARAM_DISPLAY,
+                      g_getenv("DISPLAY"), NULL);
 
         if(do_crash_dialog)
                 libgnomeui_segv_setup(FALSE);
@@ -312,14 +312,20 @@ libgnomeui_arg_callback(poptContext con,
                         const struct poptOption * opt,
                         const char * arg, void * data)
 {
+        GnomeProgram *program = gnome_program_get ();
+
         switch(reason) {
         case POPT_CALLBACK_REASON_OPTION:
                 switch(opt->val) {
                 case ARG_DISABLE_CRASH_DIALOG:
-                        gnome_program_attributes_set(gnome_program_get(), LIBGNOMEUI_PARAM_CRASH_DIALOG, FALSE, NULL);
+                        g_object_set (G_OBJECT (program),
+                                      LIBGNOMEUI_PARAM_CRASH_DIALOG,
+                                      FALSE, NULL);
                         break;
                 case ARG_DISPLAY:
-                        gnome_program_attributes_set(gnome_program_get(), LIBGNOMEUI_PARAM_DISPLAY, arg, NULL);
+                        g_object_set (G_OBJECT (program),
+                                      LIBGNOMEUI_PARAM_DISPLAY,
+                                      arg, NULL);
                         break;
                 }
                 break;
@@ -443,8 +449,13 @@ libgnomeui_segv_setup(gboolean post_arg_parse)
         static struct sigaction *setptr;
         struct sigaction sa;
         gboolean do_crash_dialog = TRUE;
+        GValue value = { 0, };
 
-        gnome_program_attributes_get(gnome_program_get(), LIBGNOMEUI_PARAM_CRASH_DIALOG, &do_crash_dialog, NULL);
+        g_value_init (&value, G_TYPE_BOOLEAN);
+        g_object_get_property (G_OBJECT (gnome_program_get()),
+                               LIBGNOMEUI_PARAM_CRASH_DIALOG, &value);
+        do_crash_dialog = g_value_get_boolean (&value);
+        g_value_unset (&value);
 
         memset(&sa, 0, sizeof(sa));
 
@@ -523,12 +534,20 @@ int gnome_init_with_popt_table(const char *app_id,
 			       int flags,
 			       poptContext *return_ctx)
 {
-        gnome_program_init(app_id, app_version, argc, argv, GNOMEUI_INIT,
-                      GNOME_PARAM_POPT_TABLE, options, GNOME_PARAM_POPT_FLAGS, flags,
-                      NULL);
+        gnome_program_init (app_id, app_version, argc, argv, LIBGNOMEUI_INIT,
+                            GNOME_PARAM_POPT_TABLE, options,
+                            GNOME_PARAM_POPT_FLAGS, flags,
+                            NULL);
 
-        if(return_ctx)
-                gnome_program_attributes_get(gnome_program_get(), GNOME_PARAM_POPT_CONTEXT, return_ctx, NULL);
+        if(return_ctx) {
+                GValue value = { 0, };
+
+                g_value_init (&value, G_TYPE_POINTER);
+                g_object_get_property (G_OBJECT (gnome_program_get()),
+                                       GNOME_PARAM_POPT_CONTEXT, &value);
+                *return_ctx = g_value_peek_pointer (&value);
+                g_value_unset (&value);
+        }
 
         return 0;
 }

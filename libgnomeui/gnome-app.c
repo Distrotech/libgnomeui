@@ -43,7 +43,7 @@
 
 #include <string.h>
 #include <gtk/gtk.h>
-#include "libgnome/gnomelib-init2.h"
+#include "libgnome/gnome-program.h"
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
@@ -190,6 +190,7 @@ static void
 gnome_app_init (GnomeApp *app)
 {
 	const char *str = NULL;
+	GValue value = { 0, };
 
 	app->_priv = NULL;
 	/* XXX: when there is some private stuff enable this
@@ -217,11 +218,13 @@ gnome_app_init (GnomeApp *app)
 	app->layout = gnome_dock_layout_new ();
 
 	app->enable_layout_config = TRUE;
-	gnome_program_attributes_get (gnome_program_get (),
-				      LIBGNOMEUI_PARAM_DEFAULT_ICON,
-				      &str, NULL);
+	g_value_init (&value, G_TYPE_STRING);
+	g_object_get_property (G_OBJECT (gnome_program_get ()),
+			       LIBGNOMEUI_PARAM_DEFAULT_ICON, &value);
+	str = g_value_get_string (&value);
 	if (str != NULL)
 		gnome_window_set_icon_from_file (GTK_WINDOW (app), str, FALSE);
+	g_value_unset (&value);
 }
 
 static void
