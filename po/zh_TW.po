@@ -1,14 +1,14 @@
 # traditional Chinese translation of libgnomeui.
-# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
+# Copyright (C) 2001, 02, 03, 04 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001-2002.
-# Abel Cheung <maddog@linux.org.hk>, 2002-2003.
+# Abel Cheung <maddog@linux.org.hk>, 2002-2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.3.3\n"
+"Project-Id-Version: libgnomeui 2.7.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-30 16:28+0200\n"
-"PO-Revision-Date: 2003-06-12 08:21+0800\n"
+"POT-Creation-Date: 2004-09-09 13:37+0800\n"
+"PO-Revision-Date: 2004-09-10 07:24+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -31,36 +31,35 @@ msgstr "副項目二"
 msgid "Hint for item 2"
 msgstr "項目二的提示"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:653
+#: file-chooser/gtkfilesystemgnomevfs.c:668
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "%s 不是資料夾"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:860
-#, fuzzy
+#: file-chooser/gtkfilesystemgnomevfs.c:875
 msgid "Filesystem"
-msgstr "檔案(_L)"
+msgstr "檔案系統"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1524
+#: file-chooser/gtkfilesystemgnomevfs.c:1539
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "無法儲存書籤 (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "無法擷取有關檔案‘%s’的資訊：%s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "無法開啟檔案‘%s’：%s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgstr "無法載入圖片‘%s’：原因不詳，有可能是圖片內容損壞"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -120,7 +119,7 @@ msgstr "作者"
 
 #: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
-msgstr "程式作者清單"
+msgstr "程式作者名單"
 
 #: libgnomeui/gnome-about.c:411
 msgid "Author entry"
@@ -136,7 +135,7 @@ msgstr "文件編寫員"
 
 #: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
-msgstr "為程式編寫文件的人員的清單"
+msgstr "為程式編寫文件的人員的名單"
 
 #: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
@@ -161,7 +160,7 @@ msgstr "標誌"
 
 #: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
-msgstr "顯示程式資訊的對話方塊中使用的標誌"
+msgstr "顯示程式資訊的對話方塊中所顯示的標誌"
 
 #: libgnomeui/gnome-about.c:519
 #, c-format
@@ -170,6 +169,7 @@ msgstr "關於 %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "檔案(_F)"
 
@@ -227,6 +227,7 @@ msgid "_Game"
 msgstr "遊戲(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "求助(_H)"
 
@@ -417,11 +418,11 @@ msgstr "修改有關本程式的設定"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "關於(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "顯示有關本程式的資訊"
 
@@ -448,7 +449,7 @@ msgstr "顯示新的視窗"
 msgid "_Close This Window"
 msgstr "關閉本視窗(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "關閉目前的視窗"
 
@@ -534,7 +535,7 @@ msgstr "圖示下顯示文字"
 
 #: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
-msgstr "部份圖示旁顯示文字"
+msgstr "重要圖示旁邊顯示文字"
 
 #: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
@@ -545,7 +546,7 @@ msgid "Text Only"
 msgstr "只顯示文字"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "使用桌面的預設設定 (%s)"
 
@@ -583,7 +584,7 @@ msgstr " (yes 或 no)"
 
 #: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
-msgstr " ─ 確定？ (yes 或 no)"
+msgstr " ─ 確定？(yes 或 no)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
@@ -647,19 +648,16 @@ msgstr "您的密碼會以加密的方式傳送。"
 msgid "Authentication Required"
 msgstr "需要認證"
 
+# FIXME: "domain" really means network domain? -- Abel
 #: libgnomeui/gnome-authentication-manager.c:299
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr ""
-"您必須登入方可存取“%s”。\n"
-"%s"
+msgstr "您必須登入方可存取 %s (網域 %s)\n"
 
 #: libgnomeui/gnome-authentication-manager.c:301
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"您必須登入方可存取“%s”。\n"
-"%s"
+msgstr "您必須登入方可存取 %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -723,7 +721,7 @@ msgstr "時間下限"
 
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
-msgstr "時間選擇元件中第一個顯示的時間"
+msgstr "選擇時間的元件中第一個顯示的時間"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
@@ -731,7 +729,7 @@ msgstr "時間上限"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr "時間選擇元件中最後一個顯示的時間"
+msgstr "選擇時間的元件中最後一個顯示的時間"
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
@@ -838,29 +836,24 @@ msgstr "已設定背景顏色"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "標誌背景顏色"
+msgstr "內容背景顏色"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "標誌背景顏色"
+msgstr "內容背景顏色"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "以 GdkColor 方式表示的背景顏色"
+msgstr "以 GdkColor 方式表示的內容背景顏色"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "背景顏色設定"
+msgstr "已設定內容背景顏色"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "已設定背景顏色"
+msgstr "已設定內容背景顏色"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -893,7 +886,7 @@ msgstr "顯示「完成」按鈕而不是「下一步」按鈕"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr "顯示說明"
+msgstr "顯示「求助」"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
@@ -991,13 +984,13 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "使用 GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "使用新的 GtkFileChooser 元件還是 GtkFileSelection 元件來選擇檔案。"
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1273,7 +1266,7 @@ msgstr "用戶名稱(_U)："
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
-msgstr ""
+msgstr "網域(_D)："
 
 #: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
@@ -1281,19 +1274,21 @@ msgstr "密碼(_P)："
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "以暱名方式連接(_A)"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "以指定用戶身分連接(_U)："
 
+# Difficult to explain "session" to newbies -- Abel
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
-msgstr ""
+msgstr "登出前記住密碼"
 
+# How can I translate "keyring"? -- Abel
 #: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
-msgstr ""
+msgstr "在鑰匙圈中儲存密碼"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1344,7 +1339,7 @@ msgstr "%x(%a) %T"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
-msgstr "AR PL KaitiM Big5 14"
+msgstr "Sans 14"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
@@ -1374,21 +1369,22 @@ msgstr "減少縮排"
 msgid "About"
 msgstr "關於"
 
+# Well, crash dialog is hard to translate and understand just by instinct
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "程式錯誤時不顯示任何對話方塊通知"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
-msgstr "準備使用的 X 畫面代號"
+msgstr "準備使用的 X 畫面編號"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
-msgstr "畫面代號"
+msgstr "畫面編號"
 
 #: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
-msgstr "GNOME 圖形界面函式庫"
+msgstr "GNOME 圖形介面函式庫"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
@@ -1423,39 +1419,38 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "程式“%s”不正常地結束。"
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "進程編號 %d：%s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr ""
+msgstr "您可以選擇通知程式開發人員，協助他們解決問題，或者直接重新啟動程式。"
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法：gnome_segv2 程式名稱 訊號號碼\n"
 
 #: libgnomeui/gnome_segv.c:153
-#, fuzzy
 msgid "_Restart Application"
-msgstr "離開程式"
+msgstr "重新啟動程式(_R)"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
-msgstr ""
+msgstr "通知開發人員(_I)"
 
 #: libgnomeui/gnome_segv.c:176
-#, fuzzy
 msgid "_Debug"
-msgstr "偵錯"
+msgstr "偵錯(_D)"
 
-#~ msgid "Color Selector"
-#~ msgstr "色彩選擇元件"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "結束測試"
 
 #~ msgid ""
 #~ "Application \"%s\" (process %d) has crashed\n"
@@ -1469,14 +1464,8 @@ msgstr "偵錯"
 #~ msgid "Submit a bug report"
 #~ msgstr "匯報錯誤報告"
 
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
 #~ msgid "Please visit the GNOME Application Crash page for more information"
 #~ msgstr "請到 GNOME 程式錯誤網頁獲取更多資訊"
-
-#~ msgid "Exit the test"
-#~ msgstr "結束測試"
 
 #~ msgid "_Credits"
 #~ msgstr "鳴謝(_C)"
