@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
-"PO-Revision-Date: 2003-08-17 08:57+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-23 04:56+0100\n"
+"PO-Revision-Date: 2004-01-23 20:02+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -30,7 +30,7 @@ msgstr "子项目 2"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "对项目 2 的提示"
+msgstr "项目 2 的提示"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -81,11 +81,11 @@ msgstr "关于程序的版权信息"
 
 #: libgnomeui/gnome-about.c:401
 msgid "Comments string"
-msgstr "注解字符串"
+msgstr "注释字符串"
 
 #: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
-msgstr "关于程序的注解"
+msgstr "关于程序的注释"
 
 #: libgnomeui/gnome-about.c:408
 msgid "Authors"
@@ -147,6 +147,7 @@ msgstr "关于 %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "文件(_F)"
 
@@ -204,6 +205,7 @@ msgid "_Game"
 msgstr "游戏(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "帮助(_H)"
 
@@ -400,13 +402,13 @@ msgstr "配置应用程序"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "关于(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "关于本应用程序"
+msgstr "关于此应用程序"
 
 # SUN CHANGED MESSAGE
 #: libgnomeui/gnome-app-helper.c:225
@@ -432,7 +434,7 @@ msgstr "创建一个新窗口"
 msgid "_Close This Window"
 msgstr "关闭此窗口(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "关闭当前窗口"
 
@@ -514,26 +516,26 @@ msgid "View help for this application"
 msgstr "查看此应用程序的帮助"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "文字在图标之下"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "文字在图标之后"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "仅有图标"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "仅有文字"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "使用桌面默认值(%s)"
@@ -639,14 +641,13 @@ msgstr "需要身份认证"
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " 域 %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
 msgstr ""
 "您必须登录才能访问“%s”。\n"
-"%s"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -672,9 +673,9 @@ msgstr "禁止连接到会话管理器"
 msgid "Session management"
 msgstr "会话管理"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
-msgstr "放弃注销"
+msgstr "取消注销"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
@@ -1010,7 +1011,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "明日复明日·万事成蹉跎"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1124,7 +1125,7 @@ msgstr "按钮上的文本"
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
-msgstr "结束这世界上的饥饿"
+msgstr "终结这世界上的饥饿"
 
 # SUN CHANGED MESSAGE
 #: libgnomeui/gnome-href.c:138
@@ -1233,7 +1234,7 @@ msgstr "此按钮将打开一个窗口，您可以从中选择图标。"
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
-msgstr "浏览..."
+msgstr "浏览"
 
 # SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:1014
@@ -1259,7 +1260,7 @@ msgstr "GnomeIconSelection：无法打开目录“%s”"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr "装入图标..."
+msgstr "正在装入图标..."
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
@@ -1287,7 +1288,7 @@ msgstr "用户名(_U)："
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "域(_D)："
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1295,11 +1296,11 @@ msgstr "密码(_P)："
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "此会话记住密码"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "在密钥环中保存密码"
 
 # SUN CHANGED MESSAGE
 #: libgnomeui/gnome-pixmap-entry.c:113
@@ -1376,25 +1377,31 @@ msgstr "不缩进文本"
 msgid "About"
 msgstr "关于"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr "禁用崩溃对话框"
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "使用的 X 显示接口"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "显示"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI 库"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "发生了多个段错误； 无法显示错误对话框\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1402,7 +1409,7 @@ msgstr ""
 "发生了段错误！\n"
 "无法显示错误对话框\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1416,36 +1423,37 @@ msgstr ""
 "当您关闭该对话框时, 将关闭所有应用程序并终止您的会话。\n"
 "请在关闭该对话框之前保存所有您的文件。"
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"应用程序 “%s” (进程 %d) 已经崩溃\n"
-"是以下致命错误导致的。\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "应用程序“%s”异常退出。"
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "进程 %d：%s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"您可以通知开发者所发生的一切，以便帮助他们修正此问题。不然，您可以立即"
+"重新启动应用程序。"
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法：gnome_segv2 程序名 信号数\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "提交错误报告"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr "通知开发者"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "调试"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "退出测试"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "详情请访问 GNOME 应用程序崩溃页面"
-
-#~ msgid "Exit the test"
-#~ msgstr "退出测试"
