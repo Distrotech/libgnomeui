@@ -1,12 +1,14 @@
-# libgnomeui for GNOME 2.x cs.po file.
+# Czech translation of libgnomeui.
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Michal Bukovjan <bukm@centrum.cz>, 2002.
+# Miloslav Trmac <mitr@volny.cz>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-11-24 11:30+0100\n"
-"PO-Revision-Date: 2003-05-29 14:45+0200\n"
+"Project-Id-Version: libgnomeui VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-08 04:21+0100\n"
+"PO-Revision-Date: 2003-12-08 10:31+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -137,6 +139,7 @@ msgstr "O %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Soubor"
 
@@ -194,6 +197,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Nápověda"
 
@@ -384,11 +388,11 @@ msgstr "Nastavit tuto aplikaci"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O aplikaci"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O této aplikaci"
 
@@ -415,7 +419,7 @@ msgstr "Vytvořit nové okno"
 msgid "_Close This Window"
 msgstr "_Zavřít toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zavřít aktuální okno"
 
@@ -588,11 +592,11 @@ msgstr "Interaktivita"
 msgid "Level of user activity required."
 msgstr "Úroveň požadované uživatelské aktivity."
 
-#: libgnomeui/gnome-authentication-manager.c:60
+#: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Vaše HTTP proxy vyžaduje, abyste se přihlásili.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:61
+#: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -601,17 +605,28 @@ msgstr ""
 "Pro přístup k \"%s\" se musíte přihlásit.\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:64
+#: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
 msgstr "Vaše heslo bude přenášeno nešifrovaně."
 
-#: libgnomeui/gnome-authentication-manager.c:65
+#: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
 msgstr "Vaše heslo bude přenášeno šifrovaně."
 
-#: libgnomeui/gnome-authentication-manager.c:68
+#: libgnomeui/gnome-authentication-manager.c:69
+#: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
 msgstr "Vyžadována autentizace"
+
+#: libgnomeui/gnome-authentication-manager.c:265
+#, c-format
+msgid " domain %s"
+msgstr " doména %s"
+
+#: libgnomeui/gnome-authentication-manager.c:268
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "Pro přístup k %s se musíte přihlásit\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1208,13 +1223,25 @@ msgstr "Otázka"
 msgid "Message"
 msgstr "Zpráva"
 
-#: libgnomeui/gnome-password-dialog.c:253
+#: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
 msgstr "_Jméno uživatele:"
 
-#: libgnomeui/gnome-password-dialog.c:254
+#: libgnomeui/gnome-password-dialog.c:221
+msgid "_Domain:"
+msgstr "_Doména:"
+
+#: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
 msgstr "_Heslo:"
+
+#: libgnomeui/gnome-password-dialog.c:369
+msgid "Remember password for this session"
+msgstr "Zapamatovat si heslo po dobu sezení"
+
+#: libgnomeui/gnome-password-dialog.c:371
+msgid "Save password in keyring"
+msgstr "Uložit heslo do klíčenky"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1363,5 +1390,6 @@ msgstr ""
 "Pro více informací prosím navštivte stránku GNOME Application Crash (selhání "
 "aplikace GNOME)"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukončit test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukončit test"
