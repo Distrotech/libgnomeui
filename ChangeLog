@@ -1,5 +1,7 @@
 2002-11-27  Anders Carlsson  <andersca@gnu.org>
 
+	* configure.in: Release 2.1.3
+
 	* libgnomeui/gnome-stock-icons.h: Include gtkstock.h.
 	#97429, reported by Ettore Perazzoli.
 
