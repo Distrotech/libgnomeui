@@ -1,3 +1,15 @@
+1999-09-20  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-propertybox.c (gnome_property_box_init): Make
+	(gnome_property_box_init): Set the `OK' button as the default one,
+	and do not set it insensitive anymore.
+	(set_sensitive): Do not change sensitivity of the `OK' button
+	anymore.
+	(dialog_clicked_cb): Check the dirty flag for the current page.
+	If the page is not dirty, just close instead of applying and
+	closing: this makes sure the old behavior is preserved even if now
+	OK is no longer insensitive when the page is not dirty.
+
 1999-09-20  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_unrealize): Set the

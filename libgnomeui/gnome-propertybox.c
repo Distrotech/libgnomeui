@@ -169,12 +169,13 @@ gnome_property_box_init (GnomePropertyBox *property_box)
 					     NULL);
 	}
 
+	gnome_dialog_set_default (GNOME_DIALOG (property_box), 0);
+
 	/* This is sort of unattractive */
 
 	button_list = GNOME_DIALOG(property_box)->buttons;
 
 	property_box->ok_button = GTK_WIDGET(button_list->data);
-	gtk_widget_set_sensitive (property_box->ok_button, FALSE);
 	button_list = button_list->next;
 	
 	if (gnome_preferences_get_property_box_apply ()){
@@ -235,16 +236,27 @@ static void
 dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 {
 	GnomePropertyBox *pbox;
+	GtkWidget *page;
+	gboolean dirty;
+
 	g_return_if_fail(dialog != NULL);
 	g_return_if_fail(GNOME_IS_PROPERTY_BOX(dialog));
 
 	pbox = GNOME_PROPERTY_BOX (dialog);
+	page = GTK_NOTEBOOK (pbox->notebook)->cur_page->child;
+	g_assert (page != NULL);
+
+	dirty = (gboolean) gtk_object_get_data (GTK_OBJECT (page),
+						GNOME_PROPERTY_BOX_DIRTY);
 	
 	/* Choose which style we did */
 	if (pbox->apply_button){
 		switch(button) {
 		case 0:
-			apply_and_close (GNOME_PROPERTY_BOX (dialog));
+			if (dirty)
+				apply_and_close (GNOME_PROPERTY_BOX (dialog));
+			else
+				just_close (GNOME_PROPERTY_BOX (dialog));
 			break;
 		case 1:
 			global_apply (GNOME_PROPERTY_BOX (dialog));
@@ -261,7 +273,10 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 	} else {
 		switch(button) {
 		case 0:
-			apply_and_close (GNOME_PROPERTY_BOX (dialog));
+			if (dirty)
+				apply_and_close (GNOME_PROPERTY_BOX (dialog));
+			else
+				just_close (GNOME_PROPERTY_BOX (dialog));
 			break;
 		case 1:
 			just_close (GNOME_PROPERTY_BOX (dialog));
@@ -279,9 +294,6 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 static void
 set_sensitive (GnomePropertyBox *property_box, gint dirty)
 {
-	if (property_box->ok_button)
-		gtk_widget_set_sensitive (property_box->ok_button, dirty);
-
 	if (property_box->apply_button)
 		gtk_widget_set_sensitive (property_box->apply_button, dirty);
 }
