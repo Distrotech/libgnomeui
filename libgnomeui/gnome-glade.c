@@ -472,7 +472,9 @@ static const gnome_map_t gnome_stock_pixmap_mapping [] = {
 	{ "MAIL_RPL", GNOME_STOCK_PIXMAP_MAIL_RPL },
 	{ "MAIL_SND", GNOME_STOCK_PIXMAP_MAIL_SND },
 	{ "MIC", GNOME_STOCK_PIXMAP_MIC },
+#ifdef GNOME_STOCK_PIXMAP_MIDI
 	{ "MIDI", GNOME_STOCK_PIXMAP_MIDI },
+#endif
 	{ "MULTIPLE", GNOME_STOCK_PIXMAP_MULTIPLE },
 	{ "NEW", GNOME_STOCK_PIXMAP_NEW },
 	{ "NOT", GNOME_STOCK_PIXMAP_NOT },
@@ -552,7 +554,9 @@ static const gnome_map_t gnome_stock_menu_mapping [] = {
 	{ "MAIL_RPL", GNOME_STOCK_MENU_MAIL_RPL },
 	{ "MAIL_SND", GNOME_STOCK_MENU_MAIL_SND },
 	{ "MIC", GNOME_STOCK_MENU_MIC },
+#ifdef GNOME_STOCK_MENU_MIDI
 	{ "MIDI", GNOME_STOCK_MENU_MIDI },
+#endif
 	{ "NEW", GNOME_STOCK_MENU_NEW },
 	{ "OPEN", GNOME_STOCK_MENU_OPEN },
 	{ "PASTE", GNOME_STOCK_MENU_PASTE },
@@ -1255,7 +1259,7 @@ gnomedialog_new(GladeXML *xml, GNode *node)
 	gint xpos = -1, ypos = -1;
 	gboolean allow_shrink = TRUE, allow_grow = TRUE, auto_shrink = FALSE;
 	gboolean auto_close = FALSE, hide_on_close = FALSE;
-	gchar *title = NULL;
+	gchar *title = NULL, *wmname = NULL, *wmclass = NULL;
 
 	for (; info; info = info->next) {
 		char *content = xmlNodeGetContent(info);
@@ -1280,11 +1284,20 @@ gnomedialog_new(GladeXML *xml, GNode *node)
 				title = g_strdup(content);
 			}
 			break;
+		case 'w':
+			if (!strcmp(info->name, "wmclass_name")) {
+				if (wmname) g_free(wmname);
+				wmname = g_strdup(content);
+			} else if (!strcmp(info->name, "wmclass_class")) {
+				if (wmclass) g_free(wmclass);
+				wmclass = g_strdup(content);
+			}
+			break;
 		case 'x':
-			if (info->name[1] == '\0') xpos = strtol(content, NULL, 0);
+			if (info->name[1] == '\0') xpos=strtol(content,NULL,0);
 			break;
 		case 'y':
-			if (info->name[1] == '\0') ypos = strtol(content, NULL, 0);
+			if (info->name[1] == '\0') ypos=strtol(content,NULL,0);
 			break;
 		}
 
@@ -1295,6 +1308,12 @@ gnomedialog_new(GladeXML *xml, GNode *node)
 	if (title) g_free(title);
 	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
 			      auto_shrink);
+	if (wmname || wmclass) {
+		gtk_window_set_wmclass(GTK_WINDOW(win),
+				       wmname?wmname:"", wmclass?wmclass:"");
+		if (wmname) g_free(wmname);
+		if (wmclass) g_free(wmclass);
+	}
 	gnome_dialog_set_close(GNOME_DIALOG(win), auto_close);
 	gnome_dialog_close_hides(GNOME_DIALOG(win), hide_on_close);
 	if (xpos >= 0 || ypos >= 0)
@@ -1367,7 +1386,7 @@ app_new(GladeXML *xml, GNode *node)
 {
 	GtkWidget *win;
 	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
-	gchar *title = NULL;
+	gchar *title = NULL, *wmname = NULL, *wmclass = NULL;
 	gboolean enable_layout = TRUE;
 	gboolean allow_shrink = TRUE, allow_grow = TRUE, auto_shrink = FALSE;
 
@@ -1393,6 +1412,15 @@ app_new(GladeXML *xml, GNode *node)
 				title = g_strdup(content);
 			}
 			break;
+		case 'w':
+			if (!strcmp(info->name, "wmclass_name")) {
+				if (wmname) g_free(wmname);
+				wmname = g_strdup(content);
+			} else if (!strcmp(info->name, "wmclass_class")) {
+				if (wmclass) g_free(wmclass);
+				wmclass = g_strdup(content);
+			}
+			break;
 		}
 		if (content) free(content);
 	}
@@ -1400,6 +1428,12 @@ app_new(GladeXML *xml, GNode *node)
 	if (title) g_free(title);
 	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
 			      auto_shrink);
+	if (wmname || wmclass) {
+		gtk_window_set_wmclass(GTK_WINDOW(win),
+				       wmname?wmname:"", wmclass?wmclass:"");
+		if (wmname) g_free(wmname);
+		if (wmclass) g_free(wmclass);
+	}
 	gnome_app_enable_layout_config(GNOME_APP(win), enable_layout);
 	return win;
 }
