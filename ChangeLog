@@ -1,3 +1,13 @@
+2004-06-24  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-authentication-manager.c:
+	Support for anonymous logins. Patch by laszlo.kovacs@sun.com.
+	Implement question callback.
+	
+	* libgnomeui/gnome-password-dialog.c:
+	* libgnomeui/gnome-password-dialog.h:
+	Support for anonymous logins. Patch by laszlo.kovacs@sun.com.
+
 2004-06-22  Federico Mena Quintero  <federico@ximian.com>
 
 	Fixes the libgnomeui part of #142308:

@@ -90,11 +90,15 @@ void                        gnome_password_dialog_set_show_remember (GnomePasswo
 void                        gnome_password_dialog_set_remember      (GnomePasswordDialog         *password_dialog,
 								     GnomePasswordDialogRemember  remember);
 GnomePasswordDialogRemember gnome_password_dialog_get_remember      (GnomePasswordDialog         *password_dialog);
+void                        gnome_password_dialog_set_show_userpass_buttons (GnomePasswordDialog         *password_dialog,
+                                                                     	     gboolean                     show_userpass_buttons);
 
 /* Attribute accessors */
 char *     gnome_password_dialog_get_username            (GnomePasswordDialog *password_dialog);
 char *     gnome_password_dialog_get_domain              (GnomePasswordDialog *password_dialog);
 char *     gnome_password_dialog_get_password            (GnomePasswordDialog *password_dialog);
+
+gboolean   gnome_password_dialog_anon_selected 		 (GnomePasswordDialog *password_dialog);
 
 G_END_DECLS
 

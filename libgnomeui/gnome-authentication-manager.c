@@ -301,6 +301,8 @@ construct_full_password_dialog (const GnomeVFSModuleCallbackFullAuthenticationIn
 	g_free (message);
 
 	gnome_password_dialog_set_domain (dialog, in_args->default_domain);
+	gnome_password_dialog_set_show_userpass_buttons (dialog,
+						in_args->flags & GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_ANON_SUPPORTED);
 	gnome_password_dialog_set_show_username (dialog, 
 						 in_args->flags & GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_NEED_USERNAME);
 	gnome_password_dialog_set_show_domain (dialog, 
@@ -322,9 +324,15 @@ full_auth_get_result_from_dialog (GnomePasswordDialog *dialog,
 	GnomePasswordDialogRemember remember;
 	if (result) {
 		out_args->abort_auth = FALSE;
-		out_args->username = gnome_password_dialog_get_username (dialog);
-		out_args->domain = gnome_password_dialog_get_domain (dialog);
-		out_args->password = gnome_password_dialog_get_password (dialog);
+		out_args->out_flags = 0;
+		if (gnome_password_dialog_anon_selected (dialog)) {
+			out_args->out_flags |= GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_OUT_ANON_SELECTED;
+		}
+		else {
+			out_args->username = gnome_password_dialog_get_username (dialog);
+			out_args->domain = gnome_password_dialog_get_domain (dialog);
+			out_args->password = gnome_password_dialog_get_password (dialog);
+		}
 
 		remember = gnome_password_dialog_get_remember (dialog);
 		if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_SESSION) {
@@ -721,6 +729,152 @@ vfs_save_authentication_callback (gconstpointer in, size_t in_size,
 	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
 }
 
+typedef struct {
+	const GnomeVFSModuleCallbackQuestionIn	*in_args;
+	GnomeVFSModuleCallbackQuestionOut		*out_args;
+
+	GnomeVFSModuleCallbackResponse response;
+	gpointer response_data;
+} QuestionCallbackInfo;
+
+static void
+question_dialog_button_clicked (GtkDialog *dialog, 
+				      gint button_number, 
+				      QuestionCallbackInfo *info)
+{
+	info->out_args->answer = button_number;
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+
+static void
+question_dialog_destroyed (GtkDialog *dialog, QuestionCallbackInfo *info)
+{
+	info->response (info->response_data);
+	g_free (info);
+}
+
+static void
+question_dialog_closed (GtkDialog *dialog, QuestionCallbackInfo *info)
+{
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+static GtkWidget *
+create_question_dialog (char *prim_msg, char *sec_msg, char **choices) 
+{
+	GtkWidget *dialog;
+	int cnt, len;
+	
+	dialog = gtk_message_dialog_new_with_markup (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE, "<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s",prim_msg, sec_msg);
+	
+	if (choices) {
+		/* First count the items in the list then 
+		 * add the buttons in reverse order */
+		for (len=0; choices[len] != NULL; len++); 
+		for (cnt=len-1; cnt >= 0; cnt--) {
+			/* Maybe we should define some gnome-vfs stockbuttons and 
+			 * then replace them here with gtk-stockbuttons */
+			gtk_dialog_add_button (GTK_DIALOG(dialog), choices[cnt], cnt);
+		}
+	}
+	return (dialog);
+}
+
+static gint /* GtkFunction */
+present_question_dialog_nonblocking (QuestionCallbackInfo *info)
+{
+	GtkWidget *dialog;
+	GtkWidget *toplevel, *current_grab;
+
+	g_return_val_if_fail (info != NULL, 0);
+
+	dialog = create_question_dialog (info->in_args->primary_message, info->in_args->secondary_message, info->in_args->choices);
+	
+	toplevel = NULL;
+	current_grab = gtk_grab_get_current ();
+	if (current_grab) {
+		toplevel = gtk_widget_get_toplevel (current_grab);
+	}
+	if (toplevel && GTK_WIDGET_TOPLEVEL (toplevel)) {
+		/* There is a modal window, so we need to be modal too in order to
+		 * get input. We set the other modal dialog as parent, which
+		 * hopefully gives us better window management.
+		 */
+		gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+		gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+	}
+
+	g_signal_connect (GTK_OBJECT(dialog), "response", 
+			  G_CALLBACK (question_dialog_button_clicked), info);
+	g_signal_connect (dialog, "close", 
+			  G_CALLBACK (question_dialog_closed), info);
+	g_signal_connect (dialog, "destroy", 
+			  G_CALLBACK (question_dialog_destroyed), info);
+	
+	gtk_widget_show (GTK_WIDGET (dialog));
+	return 0;
+}
+
+
+static void /* GnomeVFSAsyncModuleCallback */
+vfs_async_question_callback (gconstpointer in, size_t in_size, 
+			     gpointer out, size_t out_size, 
+			     gpointer user_data,
+			     GnomeVFSModuleCallbackResponse response,
+			     gpointer response_data)
+{
+	GnomeVFSModuleCallbackQuestionIn *in_real;
+	GnomeVFSModuleCallbackQuestionOut *out_real;
+	QuestionCallbackInfo *info;
+	
+	g_return_if_fail (sizeof (GnomeVFSModuleCallbackQuestionIn) == in_size
+		&& sizeof (GnomeVFSModuleCallbackQuestionOut) == out_size);
+
+	g_return_if_fail (in != NULL);
+	g_return_if_fail (out != NULL);
+
+	in_real = (GnomeVFSModuleCallbackQuestionIn *)in;
+	out_real = (GnomeVFSModuleCallbackQuestionOut *)out;
+	
+	out_real->answer = -1; /* Set a default value */
+
+	info = g_new (QuestionCallbackInfo, 1);
+	
+	info->in_args = in_real;
+	info->out_args = out_real;
+	info->response = response;
+	info->response_data = response_data;
+
+	present_question_dialog_nonblocking (info);
+}
+
+static void /* GnomeVFSModuleCallback */
+vfs_question_callback (gconstpointer in, size_t in_size, 
+		       gpointer out, size_t out_size, 
+		       gpointer user_data)
+{
+	GnomeVFSModuleCallbackQuestionIn *in_real;
+	GnomeVFSModuleCallbackQuestionOut *out_real;
+	GtkWidget *dialog;
+	
+	g_return_if_fail (sizeof (GnomeVFSModuleCallbackQuestionIn) == in_size
+		&& sizeof (GnomeVFSModuleCallbackQuestionOut) == out_size);
+
+	g_return_if_fail (in != NULL);
+	g_return_if_fail (out != NULL);
+
+	in_real = (GnomeVFSModuleCallbackQuestionIn *)in;
+	out_real = (GnomeVFSModuleCallbackQuestionOut *)out;
+	
+	out_real->answer = -1; /* Set a default value */
+	dialog = create_question_dialog (in_real->primary_message, in_real->secondary_message, in_real->choices);
+	out_real->answer = gtk_dialog_run (GTK_DIALOG(dialog));
+
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+
 /* If you call this, and you use threads with gtk+, you must never
  * hold the gdk lock while doing synchronous gnome-vfs calls. Otherwise
  * an authentication callback presenting a dialog could try to grab the
@@ -754,6 +908,10 @@ gnome_authentication_manager_init (void)
 						     vfs_async_save_authentication_callback, 
 						     GINT_TO_POINTER (0),
 						     NULL);
+	gnome_vfs_async_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_QUESTION,
+						     vfs_async_question_callback, 
+						     GINT_TO_POINTER (0),
+						     NULL);
 
 	/* These are in case someone makes a synchronous http call for
 	 * some reason. 
@@ -778,6 +936,10 @@ gnome_authentication_manager_init (void)
 					       NULL);
 	gnome_vfs_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION,
 					       vfs_save_authentication_callback, 
+					       GINT_TO_POINTER (0),
+					       NULL);
+	gnome_vfs_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_QUESTION,
+					       vfs_question_callback, 
 					       GINT_TO_POINTER (0),
 					       NULL);
 
@@ -807,6 +969,10 @@ gnome_authentication_manager_push_async (void)
 					      vfs_async_save_authentication_callback, 
 					      GINT_TO_POINTER (0),
 					      NULL);
+	gnome_vfs_async_module_callback_push (GNOME_VFS_MODULE_CALLBACK_QUESTION,
+					      vfs_async_question_callback, 
+					      GINT_TO_POINTER (0),
+					      NULL);
 }
 
 void
@@ -817,6 +983,7 @@ gnome_authentication_manager_pop_async (void)
 	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_FILL_AUTHENTICATION);
 	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION);
 	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION);
+	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_QUESTION);
 }
 
 void
@@ -844,6 +1011,10 @@ gnome_authentication_manager_push_sync (void)
 					vfs_save_authentication_callback, 
 					GINT_TO_POINTER (0),
 					NULL);
+	gnome_vfs_module_callback_push (GNOME_VFS_MODULE_CALLBACK_QUESTION,
+					vfs_question_callback, 
+					GINT_TO_POINTER (0),
+					NULL);
 }
 
 void
@@ -854,5 +1025,6 @@ gnome_authentication_manager_pop_sync (void)
 	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_FILL_AUTHENTICATION);
 	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION);
 	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION);
+	gnome_vfs_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_QUESTION);
 }
 

@@ -37,6 +37,7 @@
 #include <gtk/gtkstock.h>
 #include <gtk/gtktable.h>
 #include <gtk/gtkvbox.h>
+#include <gtk/gtkradiobutton.h>
 
 struct GnomePasswordDialogDetails
 {
@@ -61,6 +62,12 @@ struct GnomePasswordDialogDetails
 	
 	GtkWidget *remember_session_button;
 	GtkWidget *remember_forever_button;
+
+	GtkWidget *radio_vbox;
+	GtkWidget *connect_with_no_userpass_button;
+	GtkWidget *connect_with_userpass_button;
+
+	gboolean anon_support_on;
 };
 
 /* Caption table rows indices */
@@ -126,6 +133,7 @@ gnome_password_dialog_init (GnomePasswordDialog *password_dialog)
 	password_dialog->details = g_new0 (GnomePasswordDialogDetails, 1);
 	password_dialog->details->show_username = TRUE;
 	password_dialog->details->show_password = TRUE;
+	password_dialog->details->anon_support_on = FALSE;
 }
 
 /* GObjectClass methods */
@@ -173,7 +181,24 @@ dialog_close_callback (GtkWidget *widget, gpointer callback_data)
 }
 
 static void
-add_row (GtkWidget *table, int row, const char *label_text, GtkWidget *entry)
+userpass_radio_button_clicked (GtkWidget *widget, gpointer callback_data)
+{
+	GnomePasswordDialog *password_dialog;
+
+	password_dialog = GNOME_PASSWORD_DIALOG (callback_data);
+
+	if (widget == password_dialog->details->connect_with_no_userpass_button) {
+		gtk_widget_set_sensitive (
+			password_dialog->details->table, FALSE);
+	}
+	else { /* the other button */
+		gtk_widget_set_sensitive (
+                        password_dialog->details->table, TRUE);
+	}	
+}
+
+static void
+add_row (GtkWidget *table, int row, const char *label_text, GtkWidget *entry, int offset)
 {
 	GtkWidget *label;
 
@@ -185,7 +210,7 @@ add_row (GtkWidget *table, int row, const char *label_text, GtkWidget *entry)
 			  row, row + 1,
 			  GTK_FILL,
 			  (GTK_FILL|GTK_EXPAND),
-			  0, 0);
+			  offset, 0);
 	
 	gtk_table_attach (GTK_TABLE (table), entry,
 			  1, 2,
@@ -208,6 +233,14 @@ add_table_rows (GnomePasswordDialog *password_dialog)
 {
 	int row;
 	GtkWidget *table;
+	int offset;
+
+	if (password_dialog->details->anon_support_on) {
+		offset = 20;
+	}
+	else {
+		offset = 0;
+	}
 
 	table = password_dialog->details->table;
 	/* This will not kill the entries, since they are ref:ed */
@@ -216,11 +249,11 @@ add_table_rows (GnomePasswordDialog *password_dialog)
 	
 	row = 0;
 	if (password_dialog->details->show_username)
-		add_row (table, row++, _("_Username:"), password_dialog->details->username_entry);
+		add_row (table, row++, _("_Username:"), password_dialog->details->username_entry, offset);
 	if (password_dialog->details->show_domain)
-		add_row (table, row++, _("_Domain:"), password_dialog->details->domain_entry);
+		add_row (table, row++, _("_Domain:"), password_dialog->details->domain_entry, offset);
 	if (password_dialog->details->show_password)
-		add_row (table, row++, _("_Password:"), password_dialog->details->password_entry);
+		add_row (table, row++, _("_Password:"), password_dialog->details->password_entry, offset);
 
 	gtk_widget_show_all (table);
 }
@@ -267,6 +300,7 @@ gnome_password_dialog_new (const char	*dialog_title,
 	GtkWidget *hbox;
 	GtkWidget *vbox;
 	GtkWidget *dialog_icon;
+	GSList *group;
 
 	password_dialog = GNOME_PASSWORD_DIALOG (gtk_widget_new (gnome_password_dialog_get_type (), NULL));
 
@@ -290,6 +324,34 @@ gnome_password_dialog_new (const char	*dialog_title,
 			  G_CALLBACK (dialog_show_callback), password_dialog);
 	g_signal_connect (password_dialog, "close",
 			  G_CALLBACK (dialog_close_callback), password_dialog);
+
+	/* the radio buttons for anonymous login */
+	password_dialog->details->connect_with_no_userpass_button =
+                gtk_radio_button_new_with_mnemonic (NULL, _("Connect _anonymously"));
+	group = gtk_radio_button_get_group (
+			GTK_RADIO_BUTTON (password_dialog->details->connect_with_no_userpass_button));
+        password_dialog->details->connect_with_userpass_button =
+                gtk_radio_button_new_with_mnemonic (
+			group, _("Connect as _user:"));
+
+	if (username != NULL && *username != 0) {
+		gtk_toggle_button_set_active (password_dialog->details->connect_with_userpass_button, TRUE);
+	} else {
+		gtk_toggle_button_set_active (password_dialog->details->connect_with_no_userpass_button, TRUE);
+	}
+	
+	
+	password_dialog->details->radio_vbox = gtk_vbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (password_dialog->details->radio_vbox),
+		password_dialog->details->connect_with_no_userpass_button,
+		FALSE, FALSE, 0);	
+	gtk_box_pack_start (GTK_BOX (password_dialog->details->radio_vbox),
+                password_dialog->details->connect_with_userpass_button,
+                FALSE, FALSE, 0);
+	g_signal_connect (password_dialog->details->connect_with_no_userpass_button, "clicked",
+                          G_CALLBACK (userpass_radio_button_clicked), password_dialog);
+	g_signal_connect (password_dialog->details->connect_with_userpass_button, "clicked",
+                          G_CALLBACK (userpass_radio_button_clicked), password_dialog);	
 
 	/* The table that holds the captions */
 	password_dialog->details->table = table = gtk_table_new (3, 2, FALSE);
@@ -323,7 +385,7 @@ gnome_password_dialog_new (const char	*dialog_title,
 				  G_CALLBACK (gtk_window_activate_default),
 				  password_dialog);
 	add_table_rows (password_dialog);
-	
+
 	/* Adds some eye-candy to the dialog */
 	hbox = gtk_hbox_new (FALSE, 12);
 	dialog_icon = gtk_image_new_from_stock (GNOME_STOCK_AUTHENTICATION, GTK_ICON_SIZE_DIALOG);
@@ -348,6 +410,8 @@ gnome_password_dialog_new (const char	*dialog_title,
 				    TRUE,	/* fill */
 				    5);		/* padding */
 	}
+	gtk_box_pack_start (GTK_BOX (vbox), password_dialog->details->radio_vbox,
+                            TRUE, TRUE, 5);
 	gtk_box_pack_start (GTK_BOX (vbox), table, 
 			    TRUE, TRUE, 5);
 
@@ -520,6 +584,38 @@ gnome_password_dialog_get_password (GnomePasswordDialog *password_dialog)
 	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), NULL);
 
 	return g_strdup (gtk_entry_get_text (GTK_ENTRY (password_dialog->details->password_entry)));
+}
+
+void
+gnome_password_dialog_set_show_userpass_buttons (GnomePasswordDialog         *password_dialog,
+                                                 gboolean                     show_userpass_buttons)
+{
+        if (show_userpass_buttons) {
+                password_dialog->details->anon_support_on = TRUE;
+                gtk_widget_show (password_dialog->details->radio_vbox);
+                if (gtk_toggle_button_get_active (
+                        GTK_TOGGLE_BUTTON (password_dialog->details->connect_with_no_userpass_button))) {
+                        gtk_widget_set_sensitive (password_dialog->details->table, FALSE);
+                }
+                else {
+                        gtk_widget_set_sensitive (password_dialog->details->table, TRUE);
+                }
+        } else {
+                password_dialog->details->anon_support_on = FALSE;
+                gtk_widget_hide (password_dialog->details->radio_vbox);
+                gtk_widget_set_sensitive (password_dialog->details->table, TRUE);
+        }
+                                                                                                                             
+        add_table_rows (password_dialog);
+}
+
+gboolean
+gnome_password_dialog_anon_selected (GnomePasswordDialog *password_dialog)
+{
+	return password_dialog->details->anon_support_on &&
+		gtk_toggle_button_get_active (
+        		GTK_TOGGLE_BUTTON (
+				password_dialog->details->connect_with_no_userpass_button));
 }
 
 void
