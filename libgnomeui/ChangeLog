@@ -1,5 +1,11 @@
 2001-03-24  Martin Baulig  <baulig@suse.de>
 
+	* gnome-boxed.defs (GnomeCanvasPoints): Removed.
+	(GnomeSelectorAsyncHandle): This is refcounted and has
+	no init function.
+
+2001-03-24  Martin Baulig  <baulig@suse.de>
+
 	* maketypes.awk, makeenums.pl: Removed, we now use
 	gnome-maketypes.awk and gnome-makeenums.pl which gets
 	installed by libgnome-2.
