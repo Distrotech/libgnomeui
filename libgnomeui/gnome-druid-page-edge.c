@@ -49,8 +49,6 @@ struct _GnomeDruidPageEdgePrivate
 	GnomeCanvasItem *title_item;
 };
 
-static void gnome_druid_page_edge_instance_init	(GnomeDruidPageEdge		*druid_page_edge);
-static void gnome_druid_page_edge_class_init	(GnomeDruidPageEdgeClass	*klass);
 static void gnome_druid_page_edge_destroy 	(GtkObject                      *object);
 static void gnome_druid_page_edge_finalize 	(GObject                        *object);
 static void gnome_druid_page_edge_setup         (GnomeDruidPageEdge             *druid_page_edge);
@@ -68,8 +66,7 @@ static void gnome_druid_page_edge_prepare	(GnomeDruidPage		        *page,
 #define GDK_COLOR_TO_RGBA(color) GNOME_CANVAS_COLOR ((color).red/256, (color).green/256, (color).blue/256)
 
 GNOME_CLASS_BOILERPLATE (GnomeDruidPageEdge, gnome_druid_page_edge,
-			 GnomeDruidPage, gnome_druid_page,
-			 GNOME_TYPE_DRUID_PAGE);
+			 GnomeDruidPage, GNOME_TYPE_DRUID_PAGE);
 
 static void
 gnome_druid_page_edge_class_init (GnomeDruidPageEdgeClass *klass)

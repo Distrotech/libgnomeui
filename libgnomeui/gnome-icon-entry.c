@@ -77,8 +77,6 @@ struct _GnomeIconEntryPrivate {
 	gchar *browse_dialog_title;
 };
 
-static void gnome_icon_entry_class_init (GnomeIconEntryClass *class);
-static void gnome_icon_entry_instance_init (GnomeIconEntry      *ientry);
 static void drag_data_get		(GtkWidget          *widget,
 					 GdkDragContext     *context,
 					 GtkSelectionData   *selection_data,
@@ -123,7 +121,7 @@ enum {
 static gint gnome_ientry_signals[LAST_SIGNAL] = {0};
 
 GNOME_CLASS_BOILERPLATE (GnomeIconEntry, gnome_icon_entry,
-			 GtkVBox, gtk_vbox, GTK_TYPE_VBOX)
+			 GtkVBox, GTK_TYPE_VBOX)
 static void
 gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {

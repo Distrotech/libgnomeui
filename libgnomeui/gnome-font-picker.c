@@ -89,8 +89,6 @@ enum {
 };
 
 /* Prototypes */
-static void gnome_font_picker_class_init        (GnomeFontPickerClass *class);
-static void gnome_font_picker_instance_init	(GnomeFontPicker      *cp);
 static void gnome_font_picker_destroy		(GtkObject            *object);
 static void gnome_font_picker_finalize		(GObject              *object);
 static void gnome_font_picker_get_property	(GObject              *object,
@@ -128,7 +126,7 @@ static void gnome_font_picker_update_font_info	(GnomeFontPicker     *gfs);
 static guint font_picker_signals[LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE (GnomeFontPicker, gnome_font_picker,
-			 GtkButton, gtk_button, GTK_TYPE_BUTTON)
+			 GtkButton, GTK_TYPE_BUTTON)
 
 static void
 gnome_font_picker_class_init (GnomeFontPickerClass *class)

@@ -37,8 +37,6 @@ struct _GnomeHRefPrivate {
 	GtkWidget *label;
 };
 
-static void gnome_href_class_init	(GnomeHRefClass *klass);
-static void gnome_href_instance_init	(GnomeHRef *href);
 static void gnome_href_clicked		(GtkButton *button);
 static void gnome_href_destroy		(GtkObject *object);
 static void gnome_href_finalize		(GObject *object);
@@ -94,7 +92,7 @@ enum {
  **/
 /* The following defines the get_type */
 GNOME_CLASS_BOILERPLATE (GnomeHRef, gnome_href,
-			 GtkButton, gtk_button, GTK_TYPE_BUTTON)
+			 GtkButton, GTK_TYPE_BUTTON)
 
 static void
 gnome_href_class_init (GnomeHRefClass *klass)

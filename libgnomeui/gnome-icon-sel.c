@@ -59,9 +59,6 @@ struct _GnomeIconSelectionPrivate {
 	GtkWidget * load_progressbar;
 };
 
-static void gnome_icon_selection_class_init (GnomeIconSelectionClass *klass);
-static void gnome_icon_selection_instance_init (GnomeIconSelection   *gis);
-
 static void gnome_icon_selection_destroy    (GtkObject               *object);
 static void gnome_icon_selection_finalize   (GObject                 *object);
 
@@ -69,7 +66,7 @@ static int sort_file_list		    (gconstpointer            a,
 					     gconstpointer            b);
 
 GNOME_CLASS_BOILERPLATE (GnomeIconSelection, gnome_icon_selection,
-			 GtkVBox, gtk_vbox, GTK_TYPE_VBOX)
+			 GtkVBox, GTK_TYPE_VBOX)
 
 static void
 gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)

@@ -59,9 +59,6 @@ struct _GnomeDruidPageStandardPrivate
 };
 
 
-static void gnome_druid_page_standard_instance_init (GnomeDruidPageStandard      *druid_page_standard);
-static void gnome_druid_page_standard_class_init    (GnomeDruidPageStandardClass *class);
-
 static void gnome_druid_page_standard_get_property  (GObject                     *object,
 						     guint                        prop_id,
 						     GValue                      *value,
@@ -106,8 +103,7 @@ enum {
 };
 
 GNOME_CLASS_BOILERPLATE (GnomeDruidPageStandard, gnome_druid_page_standard,
-			 GnomeDruidPage, gnome_druid_page,
-			 GNOME_TYPE_DRUID_PAGE)
+			 GnomeDruidPage, GNOME_TYPE_DRUID_PAGE)
 
 static void
 gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *class)

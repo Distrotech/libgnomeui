@@ -67,8 +67,6 @@ struct _GnomePixmapEntryPrivate {
 };
 
 
-static void gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class);
-static void gnome_pixmap_entry_instance_init (GnomePixmapEntry      *pentry);
 static void drag_data_get		  (GtkWidget          *widget,
 					   GdkDragContext     *context,
 					   GtkSelectionData   *selection_data,
@@ -100,8 +98,7 @@ enum {
 };
 
 GNOME_CLASS_BOILERPLATE (GnomePixmapEntry, gnome_pixmap_entry,
-			 GnomeFileEntry, gnome_file_entry,
-			 GNOME_TYPE_FILE_ENTRY)
+			 GnomeFileEntry, GNOME_TYPE_FILE_ENTRY)
 
 static void
 gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)

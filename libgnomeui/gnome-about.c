@@ -111,8 +111,6 @@ enum {
 	PROP_LOGO_RIGHT_PADDING,
 };
 
-static void gnome_about_instance_init (GnomeAbout *about);
-static void gnome_about_class_init (GnomeAboutClass *klass);
 static void gnome_about_finalize (GObject *object);
 static void gnome_about_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
 static void gnome_about_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
@@ -121,7 +119,7 @@ static gboolean gnome_about_area_expose (GtkWidget *area, GdkEventExpose *event,
 static gboolean gnome_about_area_button_press (GtkWidget *area, GdkEventButton *button, gpointer data);
 
 GNOME_CLASS_BOILERPLATE (GnomeAbout, gnome_about,
-			 GtkDialog, gtk_dialog, GTK_TYPE_DIALOG)
+			 GtkDialog, GTK_TYPE_DIALOG)
 
 static void
 gnome_about_instance_init (GnomeAbout *about)

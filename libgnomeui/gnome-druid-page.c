@@ -38,8 +38,6 @@ enum {
 	LAST_SIGNAL
 };
 
-static void gnome_druid_page_instance_init	(GnomeDruidPage		 *druid_page);
-static void gnome_druid_page_class_init  	(GnomeDruidPageClass	 *klass);
 static void gnome_druid_page_size_request       (GtkWidget               *widget, 
 						 GtkRequisition          *requisition);
 static void gnome_druid_page_size_allocate      (GtkWidget		 *widget,
@@ -52,7 +50,7 @@ static void gnome_druid_page_realize            (GtkWidget		 *widget);
 static guint druid_page_signals[LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE (GnomeDruidPage, gnome_druid_page,
-			 GtkBin, gtk_bin, GTK_TYPE_BIN)
+			 GtkBin, GTK_TYPE_BIN)
 
 static void
 gnome_druid_page_class_init (GnomeDruidPageClass *class)

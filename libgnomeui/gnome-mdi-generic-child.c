@@ -47,8 +47,7 @@ static GtkWidget  *gnome_mdi_generic_child_set_label        (GnomeMDIGenericChil
 							     GtkWidget *old_label);
 
 GNOME_CLASS_BOILERPLATE (GnomeMDIGenericChild, gnome_mdi_generic_child,
-			 GnomeMDIChild, gnome_mdi_child,
-			 GNOME_TYPE_MDI_CHILD)
+						 GnomeMDIChild, GNOME_TYPE_MDI_CHILD)
 
 static void gnome_mdi_generic_child_class_init (GnomeMDIGenericChildClass *klass)
 {

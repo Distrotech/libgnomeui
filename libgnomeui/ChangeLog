@@ -1,3 +1,30 @@
+2001-11-12  Darin Adler  <darin@bentspoon.com>
+
+	* gnome-about.c:
+	* gnome-app.c:
+	* gnome-appbar.c:
+	* gnome-client.c:
+	* gnome-color-picker.c:
+	* gnome-dateedit.c:
+	* gnome-druid-page-edge.c:
+	* gnome-druid-page-standard.c:
+	* gnome-druid-page.c:
+	* gnome-druid.c:
+	* gnome-font-picker.c:
+	* gnome-href.c:
+	* gnome-icon-entry.c:
+	* gnome-icon-list.c:
+	* gnome-icon-sel.c:
+	* gnome-mdi-child.c:
+	* gnome-mdi-generic-child.c:
+	* gnome-mdi.c:
+	* gnome-messagebox.c:
+	* gnome-pixmap-entry.c:
+	* gnome-pixmap.c:
+	* gnome-propertybox.c:
+	* gnome-scores.c:
+	Updated for change to GNOME_CLASS_BOILERPLATE.
+
 2001-11-05  Maciej Stachowiak  <mjs@noisehavoc.org>
 
 	* gnome-file-entry.c, gnome-pixmap-entry.c, gnome-icon-entry.c,

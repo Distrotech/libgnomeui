@@ -69,8 +69,6 @@ struct _GnomeAppBarPrivate
 };
 
 
-static void gnome_appbar_class_init               (GnomeAppBarClass *class);
-static void gnome_appbar_instance_init            (GnomeAppBar      *ab);
 static void gnome_appbar_finalize                 (GObject          *object);
      
 enum {
@@ -82,7 +80,7 @@ enum {
 static gint appbar_signals[LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE (GnomeAppBar, gnome_appbar,
-			 GtkHBox, gtk_hbox, GTK_TYPE_HBOX)
+			 GtkHBox, GTK_TYPE_HBOX)
 
 static void
 gnome_appbar_class_init (GnomeAppBarClass *class)

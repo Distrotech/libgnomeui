@@ -65,9 +65,6 @@ enum {
   LAST_SIGNAL
 };
 
-static void gnome_client_class_init              (GnomeClientClass *klass);
-static void gnome_client_instance_init           (GnomeClient      *client);
-
 static void gnome_real_client_destroy            (GtkObject        *object);
 static void gnome_real_client_finalize           (GObject          *object);
 static void gnome_real_client_save_complete      (GnomeClient      *client);
@@ -1147,7 +1144,7 @@ gnome_master_client (void)
 /* GTK-class managing functions */
 
 GNOME_CLASS_BOILERPLATE (GnomeClient, gnome_client,
-			 GtkObject, gtk_object, GTK_TYPE_OBJECT)
+			 GtkObject, GTK_TYPE_OBJECT)
 
 static void
 gnome_client_class_init (GnomeClientClass *klass)

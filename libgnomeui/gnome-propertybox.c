@@ -43,9 +43,6 @@ enum
 	LAST_SIGNAL
 };
 
-static void gnome_property_box_class_init     (GnomePropertyBoxClass *klass);
-static void gnome_property_box_instance_init  (GnomePropertyBox *property_box);
-
 /*
  * These four are called from dialog_clicked_cb(), depending
  * on which button was clicked.
@@ -61,7 +58,7 @@ static void dialog_clicked_cb (GnomeDialog * dialog, gint button,
 static gint property_box_signals [LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE(GnomePropertyBox, gnome_property_box,
-			GnomeDialog, gnome_dialog, GNOME_TYPE_DIALOG);
+			GnomeDialog, GNOME_TYPE_DIALOG);
 static void
 gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 {

@@ -52,7 +52,7 @@ struct _GnomePixmapPrivate {
  * Returns: the type ID of the &GnomePixmap class.
  */
 GNOME_CLASS_BOILERPLATE (GnomePixmap, gnome_pixmap,
-			 GtkImage, gtk_image, GTK_TYPE_IMAGE)
+			 GtkImage, GTK_TYPE_IMAGE)
 
 /*
  * Widget functions

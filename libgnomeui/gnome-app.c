@@ -72,8 +72,6 @@ struct _GnomeAppPrivate
 };
 
 
-static void gnome_app_class_init  (GnomeAppClass *class);
-static void gnome_app_instance_init        (GnomeApp      *app);
 static void gnome_app_destroy     (GtkObject     *object);
 static void gnome_app_finalize    (GObject       *object);
 static void gnome_app_show        (GtkWidget     *widget);
@@ -94,7 +92,7 @@ static void   layout_changed      (GtkWidget     *widget,
 
 /* define _get_type and parent_class */
 GNOME_CLASS_BOILERPLATE (GnomeApp, gnome_app,
-			 GtkWindow, gtk_window, GTK_TYPE_WINDOW)
+			 GtkWindow, GTK_TYPE_WINDOW)
 
 static gchar *
 read_layout_config (GnomeApp *app)

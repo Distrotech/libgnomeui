@@ -45,8 +45,6 @@
 #include <stdio.h>
 #include <string.h>
 
-static void            gnome_mdi_class_init     (GnomeMDIClass  *);
-static void            gnome_mdi_instance_init  (GnomeMDI *);
 static void            gnome_mdi_destroy        (GtkObject *);
 static void            gnome_mdi_finalize       (GObject *);
 
@@ -116,7 +114,7 @@ typedef void       (*GnomeMDISignal2) (GtkObject *, gpointer, gpointer);
 static gint mdi_signals[LAST_SIGNAL];
 
 GNOME_CLASS_BOILERPLATE (GnomeMDI, gnome_mdi,
-			 GtkObject, gtk_object, GTK_TYPE_OBJECT)
+						 GtkObject, GTK_TYPE_OBJECT)
 
 static void gnome_mdi_class_init (GnomeMDIClass *class)
 {

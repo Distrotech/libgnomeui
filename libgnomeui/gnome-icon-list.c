@@ -84,10 +84,6 @@ typedef enum {
 
 static guint gil_signals[LAST_SIGNAL] = { 0 };
 
-static void gnome_icon_list_instance_init (Gil *gil);
-static void gnome_icon_list_class_init (GilClass *gil_class);
-
-
 /**
  * gnome_icon_list_get_type:
  *
@@ -97,8 +93,7 @@ static void gnome_icon_list_class_init (GilClass *gil_class);
  * Returns: The type ID of the &GnomeIconList class.
  */
 GNOME_CLASS_BOILERPLATE (GnomeIconList, gnome_icon_list,
-			 GnomeCanvas, gnome_canvas,
-			 GNOME_TYPE_CANVAS)
+			 GnomeCanvas, GNOME_TYPE_CANVAS)
 
 /* Icon structure */
 typedef struct {

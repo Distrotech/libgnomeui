@@ -83,8 +83,6 @@ enum {
 static gint date_edit_signals [LAST_SIGNAL] = { 0 };
 
 
-static void gnome_date_edit_instance_init(GnomeDateEdit      *gde);
-static void gnome_date_edit_class_init   (GnomeDateEditClass *class);
 static void gnome_date_edit_destroy      (GtkObject          *object);
 static void gnome_date_edit_finalize     (GObject            *object);
 static void gnome_date_edit_forall       (GtkContainer       *container,
@@ -110,7 +108,7 @@ static const char *strftime_date_format = "%x";
  */
 /* The following macro defines the get_type */
 GNOME_CLASS_BOILERPLATE(GnomeDateEdit, gnome_date_edit,
-			GtkHBox, gtk_hbox, GTK_TYPE_HBOX)
+			GtkHBox, GTK_TYPE_HBOX)
 
 static void
 hide_popup (GnomeDateEdit *gde)

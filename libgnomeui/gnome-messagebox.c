@@ -47,15 +47,13 @@ struct _GnomeMessageBoxPrivate {
 	int dummy;
 };
 
-static void gnome_message_box_class_init (GnomeMessageBoxClass *klass);
-static void gnome_message_box_instance_init (GnomeMessageBox      *messagebox);
 static void gnome_message_box_construct  (GnomeMessageBox      *messagebox,
 					  const gchar          *message,
 					  const gchar          *message_box_type,
 					  const gchar         **buttons);
 
 GNOME_CLASS_BOILERPLATE (GnomeMessageBox, gnome_message_box,
-			 GnomeDialog, gnome_dialog, GNOME_TYPE_DIALOG)
+			 GnomeDialog, GNOME_TYPE_DIALOG)
 
 static void
 gnome_message_box_class_init (GnomeMessageBoxClass *klass)

@@ -92,8 +92,6 @@ enum {
 	LAST_SIGNAL
 };
 
-static void gnome_color_picker_class_init (GnomeColorPickerClass *class);
-static void gnome_color_picker_instance_init (GnomeColorPicker      *cp);
 static void gnome_color_picker_destroy    (GtkObject             *object);
 static void gnome_color_picker_finalize   (GObject               *object);
 static void gnome_color_picker_clicked    (GtkButton             *button);
@@ -129,7 +127,7 @@ static guint color_picker_signals[LAST_SIGNAL] = { 0 };
 static GtkTargetEntry drop_types[] = { { "application/x-color", 0, 0 } };
 
 GNOME_CLASS_BOILERPLATE (GnomeColorPicker, gnome_color_picker,
-			 GtkButton, gtk_button, GTK_TYPE_BUTTON)
+			 GtkButton, GTK_TYPE_BUTTON)
 
 static void
 gnome_color_picker_class_init (GnomeColorPickerClass *class)

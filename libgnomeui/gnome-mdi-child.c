@@ -49,7 +49,7 @@ void _gnome_mdi_child_list_menu_remove_item (GnomeMDI *, GnomeMDIChild *);
 void _gnome_mdi_child_list_menu_add_item    (GnomeMDI *, GnomeMDIChild *);
 
 GNOME_CLASS_BOILERPLATE (GnomeMDIChild, gnome_mdi_child,
-			 GtkObject, gtk_object, GTK_TYPE_OBJECT)
+						 GtkObject, GTK_TYPE_OBJECT)
 
 
 static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass)

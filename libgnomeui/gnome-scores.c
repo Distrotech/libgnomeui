@@ -58,8 +58,6 @@ struct _GnomeScoresPrivate
   guint	      n_scores;
 };
 
-static void gnome_scores_class_init (GnomeScoresClass *klass);
-static void gnome_scores_instance_init (GnomeScores      *scores);
 static void gnome_scores_finalize   (GObject          *object);
 
 /**
@@ -68,7 +66,7 @@ static void gnome_scores_finalize   (GObject          *object);
  * Returns the GtkType for the GnomeScores widget
  */
 GNOME_CLASS_BOILERPLATE (GnomeScores, gnome_scores,
-			 GtkDialog, gtk_dialog, GTK_TYPE_DIALOG);
+			 GtkDialog, GTK_TYPE_DIALOG);
 
 static void 
 gnome_scores_instance_init (GnomeScores *gs)
