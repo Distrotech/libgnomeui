@@ -256,7 +256,7 @@ append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info, GnomeUIInfo **cutptr)
 
 	for (retval = base; retval&&retval->type != GNOME_APP_UI_ENDOFINFO; retval++, i++);
 	for (retval = info; retval&&retval->type != GNOME_APP_UI_ENDOFINFO; retval++, i++);
-        retval = g_malloc (sizeof (GnomeUIInfo[i+1]));
+        retval = g_new (GnomeUIInfo, i+1);
 
         for (i = 0;base&&base->type != GNOME_APP_UI_ENDOFINFO; base++, i++) {
                 retval[i] = base[0];
