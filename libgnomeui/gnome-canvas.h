@@ -135,12 +135,12 @@ void gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy);
  * cursor is non-NULL, it will be used during the duration of the grab.  Time is a proper X event
  * time parameter.  Returns the same values as XGrabPointer().
  */
-int gnome_canvas_item_grab (GnomeCanvasItem *item, unsigned int event_mask, GdkCursor *cursor, guint32 time);
+int gnome_canvas_item_grab (GnomeCanvasItem *item, unsigned int event_mask, GdkCursor *cursor, guint32 t_time);
 
 /* Ungrabs the mouse -- the specified item must be the same that was passed to
  * gnome_canvas_item_grab().  Time is a proper X event time parameter.
  */
-void gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 time);
+void gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 t_time);
 
 /* These functions convert from a coordinate system to another.  "w" is world coordinates and "i" is
  * item coordinates.
