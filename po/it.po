@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
+"POT-Creation-Date: 2004-01-14 08:43+0100\n"
 "PO-Revision-Date: 2003-08-28 11:07+0200\n"
 "Last-Translator: Alessio Frusciante <algol@firenze.linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -943,23 +943,23 @@ msgstr ""
 "questa proprietà per otterere il GtkEntry, se è necessario modificare o "
 "interrogare uno dei suoi parametri."
 
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "Selezionare file"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "Percorso"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "Percorso del file"
 
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "S_foglia..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "Apre un selettore di file per scegliere un file"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
+"POT-Creation-Date: 2004-01-14 08:43+0100\n"
 "PO-Revision-Date: 2003-10-01 14:07-0400\n"
 "Last-Translator: David Barzilay <barzilay@redhat.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
@@ -941,23 +941,23 @@ msgstr ""
 "Você pode utilizar esta propriedade para obter o GnomeEntry  se precisa "
 "modificar ou verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "Selecionar arquivo"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "Caminho"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "Caminho para o arquivo"
 
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "_Navegar..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "Abrir um selecionador de arquivos para escolher um arquivo"
 

@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-02 21:28+0100\n"
+"POT-Creation-Date: 2004-01-14 08:43+0100\n"
 "PO-Revision-Date: 2004-01-02 21:25+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -143,7 +143,6 @@ msgstr "À propos de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -201,7 +200,6 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -392,11 +390,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -423,7 +421,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -945,23 +943,23 @@ msgstr ""
 "Vous pouvez utiliser cette propriété pour obtenir le GtkEntry si vous devez "
 "modifier ou interroger un de ses paramètres."
 
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "Sélectionnez un fichier"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "Chemin"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "Chemin du fichier"
 
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "_Parcourir..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "Affiche un sélecteur de fichiers pour choisir un fichier"
 
@@ -1340,14 +1338,13 @@ msgstr "Bibliothèque d'interface graphique GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:705
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Plusieurs erreurs de segmentation sont survenues ; impossible d'afficher la "
 "boîte de dialogue d'erreur\n"
 
+#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:719
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1402,9 +1399,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Visitez la page GNOME Application Crash pour plus d'informations"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Quitter le test"
+#~ msgid "Exit the test"
+#~ msgstr "Quitter le test"
 
 #~ msgid "_Credits"
 #~ msgstr "_Crédits"

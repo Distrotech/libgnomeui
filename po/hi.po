@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui-2.0.hi\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
+"POT-Creation-Date: 2004-01-14 08:43+0100\n"
 "PO-Revision-Date: 2003-08-25 16:04+0530\n"
 "Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -1138,26 +1138,26 @@ msgstr ""
 "पैरामीटर को संशोधित करने का या किसी पैरामीटर से संबधित प्रश्न करने की आवश्यकता हो"
 
 # libgnomeui/gnome-file-entry.c:418
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "फाइल चयन करें"
 
 # libgnomeui/gnome-app-helper.c:166
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "पाथ"
 
 # libgnomeui/gnome-app-helper.c:114
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "फाइल का पाथ"
 
 # libgnomeui/gnome-file-entry.c:592
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "ब्राउज (_B)..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "फाइल चयन करने के लिये फाइल सेलेक्टर खोलें"
 

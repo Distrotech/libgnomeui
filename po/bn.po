@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libGNOMEui\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
+"POT-Creation-Date: 2004-01-14 08:43+0100\n"
 "PO-Revision-Date: 2003-08-29 09:31+0530\n"
 "Last-Translator: Progga <abulfazl@juniv.edu>\n"
 "Language-Team: Bangla <gnome-translation@bengalinux.org>\n"
@@ -939,23 +939,23 @@ msgstr ""
 "পরিবর্তন করতে বা এর কোন পরামিতি অনুসন্ধান করতে চান তবে এই বৈশিষ্ট্যটি ব্যবহার করতে "
 "পারেন।"
 
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "ফাইল নির্বাচন করুন"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "পাথ"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "ফাইলের পাথ"
 
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "_ব্রাউজ..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "ফাইল বাছাই করার জন্য একটি ফাইল নির্বাচক পপ আপ করার হোক"
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
+"POT-Creation-Date: 2004-01-14 08:43+0100\n"
 "PO-Revision-Date: 2003-09-13 10:29+0300\n"
 "Last-Translator: Peteris Krisjanis <peteris.krisjanis@os.lv>\n"
 "Language-Team: Latvian <ll10nt@laka.lv>\n"
@@ -942,23 +942,23 @@ msgstr ""
 "varat izmantot šo rekvizītu lai dabūtu GtkEntry ja jums vajag mainīt vai "
 "pārlūkot jebkuru no tā parametriem."
 
-#: libgnomeui/gnome-file-entry.c:533
+#: libgnomeui/gnome-file-entry.c:535
 msgid "Select file"
 msgstr "Izvēlieties failu"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path"
 msgstr "Ceļš"
 
-#: libgnomeui/gnome-file-entry.c:654
+#: libgnomeui/gnome-file-entry.c:656
 msgid "Path to file"
 msgstr "Ceļš uz failu"
 
-#: libgnomeui/gnome-file-entry.c:681
+#: libgnomeui/gnome-file-entry.c:683
 msgid "_Browse..."
 msgstr "_Lūkoties..."
 
-#: libgnomeui/gnome-file-entry.c:682
+#: libgnomeui/gnome-file-entry.c:684
 msgid "Pop up a file selector to choose a file"
 msgstr "Parādīt failu izvēlētāju, lai izvēlētos failu"
 
