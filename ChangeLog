@@ -1,5 +1,7 @@
 2001-03-24  Martin Baulig  <baulig@suse.de>
 
+	* configure.in: Removed the REBUILD alias.
+
 	* configure.in (GNOME_MAKETYPES, GNOME_MAKEENUMS): Check
 	for the `gnome-maketypes.awk' and `gnome-makeenums.pl'
 	scripts which are installed by libgnome-2 and AC_SUBST them.

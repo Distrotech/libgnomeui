@@ -193,44 +193,44 @@ BUILT_SOURCES = \
 	gnomemarshal.c
 
 # generate gnome.defs file from gnome-boxed.defs and *.h
-gnome.defs: @REBUILD@ $(GNOMEMAKEENUMS) gnome-boxed.defs $(gnome_headers)
+gnome.defs: $(GNOME_MAKEENUMS) gnome-boxed.defs $(gnome_headers)
 	cd $(srcdir) \
-	&& $(PERL) $(GNOMEMAKEENUMS) defs $(gnome_headers) > gd.tmp \
+	&& $(GNOME_MAKEENUMS) defs $(gnome_headers) > gd.tmp \
 	&& cat gnome-boxed.defs >> gd.tmp \
 	&& mv gd.tmp gnome.defs
 
 # generate type identifier header (GTK_TYPE_WIDGET_FLAGS)
-gnometypebuiltins.h: @REBUILD@ gnome.defs $(GNOMEMAKETYPES)
+gnometypebuiltins.h: gnome.defs $(GNOME_MAKETYPES)
 	cd $(srcdir) \
-	&& LC_COLLATE=C $(AWK) -f $(GNOMEMAKETYPES) gnome.defs macros > gtb.tmp \
+	&& LC_COLLATE=C $(GNOME_MAKETYPES) gnome.defs macros > gtb.tmp \
 	&& mv gtb.tmp gnometypebuiltins.h
 
 # generate type identifier variables (GTK_TYPE_WIDGET_FLAGS)
-gnometypebuiltins_vars.c: @REBUILD@ gnome.defs $(GNOMEMAKETYPES)
+gnometypebuiltins_vars.c: gnome.defs $(GNOME_MAKETYPES)
 	cd $(srcdir) \
-	&& LC_COLLATE=C $(AWK) -f $(GNOMEMAKETYPES) gnome.defs variables > gtbv.tmp \
+	&& LC_COLLATE=C $(GNOME_MAKETYPES) gnome.defs variables > gtbv.tmp \
 	&& mv gtbv.tmp gnometypebuiltins_vars.c
 
 # generate type entries for type-id registration
-gnometypebuiltins_ids.c: @REBUILD@ gnome.defs $(GNOMEMAKETYPES)
+gnometypebuiltins_ids.c: gnome.defs $(GNOME_MAKETYPES)
 	cd $(srcdir) \
-	&& LC_COLLATE=C $(AWK) -f $(GNOMEMAKETYPES) gnome.defs entries > gtbi.tmp \
+	&& LC_COLLATE=C $(GNOME_MAKETYPES) gnome.defs entries > gtbi.tmp \
 	&& mv gtbi.tmp gnometypebuiltins_ids.c
 
 # generate enum value arrays
-gnometypebuiltins_evals.c: @REBUILD@ $(GNOMEMAKEENUMS) gnome.defs
+gnometypebuiltins_evals.c: $(GNOME_MAKEENUMS) gnome.defs
 	cd $(srcdir) \
-	&& $(PERL) $(GNOMEMAKEENUMS) arrays $(gnome_headers) > gtbe.tmp \
+	&& $(GNOME_MAKEENUMS) arrays $(gnome_headers) > gtbe.tmp \
 	&& mv gtbe.tmp gnometypebuiltins_evals.c
 
-stamp-gnomemarshal.h: @REBUILD@ gnomemarshal.list
+stamp-gnomemarshal.h: gnomemarshal.list
 	cd $(srcdir) \
 	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --header >> xgen-gmh \
 	&& (cmp -s xgen-gmh gnomemarshal.h || cp xgen-gmh gnomemarshal.h) \
 	&& rm -f xgen-gmh xgen-gmh~ \
 	&& echo timestamp > $(@F)
 
-gnomemarshal.h gnomemarshal.c: @REBUILD@ stamp-gnomemarshal.h
+gnomemarshal.h gnomemarshal.c: stamp-gnomemarshal.h
 	cd $(srcdir) \
 	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --body >> xgen-gmc \
 	&& cp xgen-gmc gnomemarshal.c \
