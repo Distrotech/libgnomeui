@@ -1,3 +1,11 @@
+2002-01-13  Murray Cumming  <murrayc@usa.net>
+
+	* libgnomeui/gnome-app-helper.cc: gnome_app_find_menu_pos() was
+ 	not working, due to a faulty optimisation. I'm not sure what 
+ 	changed since gnome-libs 1.2, but the problem is solved by 
+ 	removing the optimisation. This fixes gnome_app_insert_menus(),
+ 	which uses it.
+
 2002-01-12 Hasbullah Bin Pit <sebol@ikhlas.com>
 
 	* configure.in: added ms in ALL_LINGUAS

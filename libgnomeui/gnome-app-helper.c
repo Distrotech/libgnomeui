@@ -2126,7 +2126,6 @@ gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos)
 	const gchar *transl;
 	gint p;
 	int  path_len;
-	int  stripped_path_len;
 	
 	g_return_val_if_fail (parent != NULL, NULL);
 	g_return_val_if_fail (path != NULL, NULL);
@@ -2158,11 +2157,6 @@ gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos)
 	part[path_len] = '\0';
 	transl = L_(part);
 	path_len = strlen(transl);
-
-	stripped_path_len = path_len;
-	for ( p = 0; p < path_len; p++ )
-	        if( transl[p] == '_' )
-		        stripped_path_len--;
 		
 	p = 0;
 
@@ -2180,8 +2174,7 @@ gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos)
 			label = GTK_LABEL (item->child)->label;
 		else
 			label = NULL; /* something that we just can't handle */
-		if (label && (stripped_path_len == strlen (label)) &&
-		    (g_strncmp_ignore_char (transl, label, path_len, '_') == 0)){
+		if (label && (g_strncmp_ignore_char (transl, label, path_len, '_') == 0)){
 			if (name_end == NULL) {
 				*pos = p;
 				g_free(part);
