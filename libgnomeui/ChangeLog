@@ -1,3 +1,7 @@
+1999-09-17  Havoc Pennington  <hp@pobox.com>
+
+	* gnome_segv.c (main): Don't connect to session manager.
+
 1999-09-17  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock.c (gnome_dock_draw): Draw all the floating children

@@ -32,6 +32,10 @@ int main(int argc, char *argv[])
 
   bindtextdomain (PACKAGE, GNOMELOCALEDIR);
   textdomain (PACKAGE);
+
+  /* in case gnome-session is segfaulting :-) */
+  gnome_client_disable_master_connection();
+  
   gnome_init_with_popt_table("gnome_segv", VERSION, argc, argv, NULL, 0, &ctx);
 
   memset(&sa, 0, sizeof(sa));
