@@ -1,0 +1,8 @@
+2000-12-08  Martin Baulig  <baulig@suse.de>
+
+	* animator_demo.c, dock_demo.c, mdi_demo.c, stock_demo.c,
+	selector_demo.c, winhints_demo.c: Moved here from libgnomeui.
+
+	* test-file-saver.c, test-recently-used.c: Moved here from
+	libgnomeui.
+
