@@ -1,7 +1,7 @@
 
 /* gnome-client.c - GNOME session management client support
  *
- * Copyright (C) 1998 Carsten Schaar
+ * Copyright (C) 1998, 1999 Carsten Schaar
  *
  * Author: Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>
  *
@@ -2591,48 +2591,7 @@ gnome_client_request_save (GnomeClient	       *client,
       g_assert_not_reached ();
       return;
     }
-  
-  if (shutdown) 
-    {
-      static GtkWidget *box = NULL;
-      static GtkWidget *but = NULL;
-      gboolean logout_prompt;
-      
-      gnome_config_push_prefix ("/Gnome/Session/");
-      logout_prompt = gnome_config_get_bool ("Prompt_for_logout=true");
 
-      if(logout_prompt) 
-	{
-	  if(! box) 
-	    {
-	      box = gnome_message_box_new(_("Really log out?"), 
-					  GNOME_MESSAGE_BOX_QUESTION,
-					  GNOME_STOCK_BUTTON_YES, 
-					  GNOME_STOCK_BUTTON_NO, NULL);
-	      gnome_dialog_set_default (GNOME_DIALOG (box), 0);
-	      gtk_window_set_wmclass(GTK_WINDOW(box),
-				     "Logout Dialog", "GnomeUI");
-	      gtk_window_set_policy (GTK_WINDOW (box), FALSE, FALSE, TRUE);
-	      
-	      but = gtk_check_button_new_with_label (_("Ask next time"));
-	      gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (box)->vbox),but,
-				  FALSE, TRUE, GNOME_PAD_SMALL);
-	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(but),TRUE);
-	      gnome_dialog_close_hides (GNOME_DIALOG (box), TRUE);
-	      gtk_widget_show_all (box);
-	      gdk_window_set_role (GTK_WIDGET(box)->window,
-				   "Gnome Logout Dialog");
-	    }
-	  shutdown = gnome_dialog_run_and_close (GNOME_DIALOG (box)) == 0;
-	  if (GTK_TOGGLE_BUTTON (but)->active != logout_prompt)
-	    {
-	      gnome_config_set_bool("Prompt_for_logout",
-				    GTK_TOGGLE_BUTTON (but)->active);
-	      gnome_config_sync ();
-	    }
-	  gnome_config_pop_prefix ();
-	}
-    }
   if (GNOME_CLIENT_CONNECTED (client))
     {
 #ifdef HAVE_LIBSM

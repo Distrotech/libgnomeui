@@ -1,3 +1,8 @@
+1999-07-31  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.c (gnome_client_request_save): Don't prompt for
+	logout.  This is now handled in the session manager.
+
 1999-07-31    <dmg@csg.uwaterloo.ca>
 
 	* gnome-file-entry.c: Updated the comments in the functions to
