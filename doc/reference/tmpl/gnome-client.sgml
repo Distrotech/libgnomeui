@@ -91,6 +91,13 @@ GnomeClient
 @data: 
 
 
+<!-- ##### MACRO GNOME_CLIENT_MODULE ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### FUNCTION gnome_client_module_info_get ##### -->
 <para>
 
@@ -270,6 +277,8 @@ GnomeClient
 </para>
 
 @client: 
+@id: 
+<!-- # Unused Parameters # -->
 @user_id: 
 
 
@@ -365,6 +374,8 @@ GnomeClient
 </para>
 
 @client: 
+@id: 
+<!-- # Unused Parameters # -->
 @client_id: 
 
 
@@ -386,12 +397,25 @@ GnomeClient
 @Returns: 
 
 
+<!-- ##### FUNCTION gnome_client_get_desktop_id ##### -->
+<para>
+
+</para>
+
+@client: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gnome_client_request_interaction ##### -->
 <para>
 
 </para>
 
 @client: 
+@dialog_type: 
+@function: 
+@data: 
+<!-- # Unused Parameters # -->
 @dialog: 
 @func: 
 @client_data: 
@@ -403,10 +427,13 @@ GnomeClient
 </para>
 
 @client: 
-@dialog: 
-@func: 
+@dialog_type: 
+@function: 
 @data: 
 @destroy: 
+<!-- # Unused Parameters # -->
+@dialog: 
+@func: 
 
 
 <!-- ##### FUNCTION gnome_interaction_key_return ##### -->

@@ -634,13 +634,15 @@ static void libgnomeui_segv_handle(int signum)
  *
  * Initializes the application.  This sets up all of the GNOME
  * internals and prepares them (imlib, gdk, session-management, triggers,
- * sound, user preferences)
+ * sound, user preferences).
  *
  * Unlike #gnome_init, with #gnome_init_with_popt_table you can provide
  * a table of popt options (popt is the command line argument parsing
  * library).
  *
- * Deprecated, use #gnome_program_init with the LIBGNOMEUI_MODULE
+ * Deprecated, use #gnome_program_init with the LIBGNOMEUI_MODULE.
+ *
+ * Returns: 0 (always)
  */
 int
 gnome_init_with_popt_table (const char *app_id,

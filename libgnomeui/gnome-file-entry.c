@@ -808,8 +808,6 @@ gnome_file_entry_gtk_entry (GnomeFileEntry *fentry)
  *
  * Description: Set the title of the browse dialog to @browse_dialog_title.
  * The new title will go into effect the next time the browse button is pressed.
- *
- * Returns: @fentry (the widget itself)
  **/
 void
 gnome_file_entry_set_title (GnomeFileEntry *fentry, const char *browse_dialog_title)
@@ -832,8 +830,6 @@ gnome_file_entry_set_title (GnomeFileEntry *fentry, const char *browse_dialog_ti
  * default path is only used if the entry is empty or if the current path
  * of the entry is not an absolute path, in which case the default
  * path is prepended to it before the dialog is started.
- *
- * Returns:
  **/
 void
 gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
@@ -945,6 +941,7 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 /**
  * gnome_file_entry_set_filename:
  * @fentry: The GnomeFileEntry widget to work with.
+ * @filename:
  *
  * Description: Sets the internal entry to this string.
  **/
@@ -967,8 +964,6 @@ gnome_file_entry_set_filename(GnomeFileEntry *fentry, const char *filename)
  * @is_modal: true if the window is to be modal, false otherwise.
  *
  * Description: Sets the modality of the browse dialog.
- *
- * Returns:
  **/
 void
 gnome_file_entry_set_modal(GnomeFileEntry *fentry, gboolean is_modal)
@@ -1006,8 +1001,6 @@ gnome_file_entry_get_modal(GnomeFileEntry *fentry)
  * @directory_entry is true, then #gnome_file_entry_get_full_path will
  * check for the file being a directory, and the browse dialog will have
  * the file list disabled.
- *
- * Returns:
  **/
 void
 gnome_file_entry_set_directory_entry(GnomeFileEntry *fentry, gboolean directory_entry)
@@ -1022,7 +1015,6 @@ gnome_file_entry_set_directory_entry(GnomeFileEntry *fentry, gboolean directory_
 /**
  * gnome_file_entry_get_directory_entry:
  * @fentry: The GnomeFileEntry widget to work with.
- * @directory_entry: boolean
  *
  * Description: Gets whether this is a directory only entry.
  * See also #gnome_file_entry_set_directory_entry.
@@ -1045,8 +1037,6 @@ gnome_file_entry_get_directory_entry(GnomeFileEntry *fentry)
  * @directory_entry: boolean
  *
  * Description:  Deprecated, use #gnome_file_entry_set_directory_entry
- *
- * Returns:
  **/
 void
 gnome_file_entry_set_directory(GnomeFileEntry *fentry, gboolean directory_entry)

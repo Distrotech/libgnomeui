@@ -179,6 +179,21 @@ gnometypebuiltins
 @Returns: 
 
 
+<!-- ##### MACRO GNOME_TYPE_FONT_PICKER_MODE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_font_picker_mode_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### MACRO GNOME_TYPE_ICON_LIST_MODE ##### -->
 <para>
 

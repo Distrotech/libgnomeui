@@ -2047,6 +2047,8 @@ g_strncmp_ignore_char( const gchar *first, const gchar *second, gint length, gch
  * position after this item in pos:  gtk_menu_shell_insert(p, w, pos)
  * would then insert widget w in GtkMenuShell p right after the menu item
  * described by path.
+ *
+ * Returns:
  **/
 
 GtkWidget *

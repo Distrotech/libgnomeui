@@ -148,16 +148,15 @@ gnome_scores_finalize(GObject *object)
 
 /**
  * gnome_scores_construct:
+ * @gs:
  * @n_scores: Number of positions.
  * @names: Names of the players.
  * @scores: Scores
  * @times: Time in which the scores were done
  * @clear: Add a "Clear" Button?
  *
- * Description: useful for language bindings and subclassing, not to be used by itself,
- * see #gnome_scores_new
- *
- * Returns:
+ * Description: useful for language bindings and subclassing, not to be used by
+ * itself, see #gnome_scores_new.
  */
 void
 gnome_scores_construct (  GnomeScores *gs,
@@ -254,8 +253,6 @@ gnome_scores_new (  guint n_scores,
  * @col: Color.
  *
  * Description: Set the color of one entry.
- *
- * Returns:
  */
 void
 gnome_scores_set_color(GnomeScores *gs, guint n, GdkColor *col)
@@ -284,8 +281,6 @@ gnome_scores_set_color(GnomeScores *gs, guint n, GdkColor *col)
  * @col: Color
  *
  * Description: Set the default color of the entries.
- *
- * Returns:
  */
 void
 gnome_scores_set_def_color(GnomeScores *gs, GdkColor *col)
@@ -307,8 +302,6 @@ gnome_scores_set_def_color(GnomeScores *gs, GdkColor *col)
  * @col: Array of colors.
  *
  * Description: Set the color of all the entries.
- *
- * Returns:
  */
 void
 gnome_scores_set_colors(GnomeScores *gs, GdkColor *col)
@@ -330,8 +323,6 @@ gnome_scores_set_colors(GnomeScores *gs, GdkColor *col)
  * @i: Index of the current(from 0 to 9).
  *
  * Description: Set the index of the current player in top ten.
- *
- * Returns:
  */
 void
 gnome_scores_set_current_player (GnomeScores *gs, gint i)
@@ -351,8 +342,6 @@ gnome_scores_set_current_player (GnomeScores *gs, gint i)
  * @txt: Name of the logo.
  *
  * Description: Creates a label to be the logo
- *
- * Returns:
  */
 void
 gnome_scores_set_logo_label_title (GnomeScores *gs, const gchar *txt)
@@ -381,8 +370,6 @@ gnome_scores_set_logo_label_title (GnomeScores *gs, const gchar *txt)
  * @col: Color to use in the label.
  *
  * Description: Creates a label to be the logo
- *
- * Returns:
  */
 void
 gnome_scores_set_logo_label (GnomeScores *gs,
@@ -426,8 +413,6 @@ gnome_scores_set_logo_label (GnomeScores *gs,
  * @w: Widget to be used as logo.
  *
  * Description:  Set an arbitrary widget to be the logo.
- *
- * Returns:
  */
 void
 gnome_scores_set_logo_widget (GnomeScores *gs, GtkWidget *w)
@@ -454,8 +439,6 @@ gnome_scores_set_logo_widget (GnomeScores *gs, GtkWidget *w)
  * @pix_name: filename of a pixmap
  *
  * Description:  Sets the logo on the scores dialog box to a pixmap
- *
- * Returns:
  */
 void
 gnome_scores_set_logo_pixmap (GnomeScores *gs, const gchar *pix_name)

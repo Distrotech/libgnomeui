@@ -1604,7 +1604,7 @@ gnome_client_get_flags (GnomeClient *client)
  * gnome_client_set_clone_command
  * @client: Pointer to GNOME session client object.
  * @argc: number of strings in the argv vector
- * @argv[]: argument strings, suitable for use with <function>execv()</function>
+ * @argv: argument strings, suitable for use with execv()
  *
  * Description: Set a command the session manager can use to create a new instance of the application.
  **/
@@ -1665,7 +1665,7 @@ gnome_client_set_current_directory (GnomeClient *client,
  * gnome_client_set_discard_command
  * @client: Pointer to GNOME session client object.
  * @argc: Number of strings in argv
- * @argv[]: Vector of strings such as those passed to <function>execv()</function>
+ * @argv: Vector of strings such as those passed to execv()
  *
  * Description: Provides a command to run when a client is removed
  * from the session. It might delete session-specific config files for
@@ -1831,11 +1831,11 @@ gnome_client_set_program (GnomeClient *client,
  * gnome_client_set_resign_command
  * @client: Pointer to GNOME session client object.
  * @argc: number of strings in argv
- * @argv[]: <function>execv()</function>-style command to undo the effects of the client.
+ * @argv: execv()-style command to undo the effects of the client.
  *
- * Description: Some clients can be "undone," removing their effects and deleting any
- * saved state. For example, xmodmap could register a resign command to undo the keymap
- * changes it saved.
+ * Description: Some clients can be "undone," removing their effects and
+ * deleting any saved state. For example, xmodmap could register a resign
+ * command to undo the keymap changes it saved.
  *
  * Used by clients that use the GNOME_RESTART_ANYWAY restart style to
  * to undo their effects (these clients usually perform initialisation
@@ -2000,7 +2000,7 @@ gnome_client_set_restart_style (GnomeClient *client,
  * gnome_client_set_shutdown_command
  * @client: Pointer to GNOME session client object.
  * @argc: number of strings in argv
- * @argv[]: command to shutdown the client if the client isn't running
+ * @argv: command to shutdown the client if the client isn't running
  *
  * Description: GNOME_RESTART_ANYWAY clients can set this command to run
  * when the user logs out but the client is no longer running.
@@ -2621,7 +2621,8 @@ gnome_client_request_interaction (GnomeClient *client,
  * @data: callback data
  * @destroy: function to destroy callback data
  *
- * Description: Used when you need to destroy the callback data after the interaction.
+ * Description: Used when you need to destroy the callback data after the
+ * interaction.
  **/
 
 void

@@ -868,8 +868,8 @@ gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 
 /**
  * gnome_druid_set_show_finish
- * @druid: A Druid widget.
- # @show_finish: If %TRUE, then the "Cancel" button is changed to be "Finish"
+ * @druid: A #GnomeDruid widget.
+ * @show_finish: If %TRUE, then the "Cancel" button is changed to be "Finish"
  *
  * Sets the "Help" button on the druid to be visible in the lower left corner of
  * the widget, if @show_finish is %TRUE.
@@ -894,11 +894,10 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
 }
 
 /**
- * gnome_druid_set_show_finish
- * @druid: A #GnomeDruid.
- # @show_finish: TRUE, if the "Help" button is to be shown.
+ * gnome_druid_set_show_help
+ * @druid: A #GnomeDruid
+ * @show_help: %TRUE, if the "Help" button is to be shown, %FALSE otherwise.
  *
- * Sets the
  **/
 void
 gnome_druid_set_show_help (GnomeDruid *druid,

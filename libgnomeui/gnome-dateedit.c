@@ -994,6 +994,8 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
  * @gde: The GnomeDateEdit widget
  *
  * Deprecated, use #gnome_date_edit_get_time
+ *
+ * Returns:
  */
 time_t
 gnome_date_edit_get_date (GnomeDateEdit *gde)

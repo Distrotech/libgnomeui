@@ -199,8 +199,6 @@ gnome_icon_selection_finalize (GObject *object)
  * Description: Adds the default pixmap directory into the selection
  * widget. It doesn't show the icons in the selection until you
  * do #gnome_icon_selection_show_icons.
- *
- * Returns:
  **/
 void
 gnome_icon_selection_add_defaults (GnomeIconSelection * gis)
@@ -279,8 +277,6 @@ static int sort_file_list( gconstpointer a, gconstpointer b)
  * Description: Adds the icons from the directory @dir to the
  * selection widget. It doesn't show the icons in the selection
  * until you do #gnome_icon_selection_show_icons.
- *
- * Returns:
  **/
 void
 gnome_icon_selection_add_directory (GnomeIconSelection * gis,
@@ -384,8 +380,6 @@ load_idle_func (gpointer data)
  * #gnome_icon_selection_add_directory. Before this function
  * is called the icons aren't actually added to the listing 
  * and can't be picked by the user.
- *
- * Returns:
  **/
 void
 gnome_icon_selection_show_icons (GnomeIconSelection * gis)
@@ -472,10 +466,8 @@ gnome_icon_selection_show_icons (GnomeIconSelection * gis)
  * harmless, it should be used say if the dialog was hidden
  * or when we want to quickly stop loading the images to do
  * something else without destroying the icon selection object.
- * The ramaining icons can be shown by
+ * The remaining icons can be shown by
  * #gnome_icon_selection_show_icons.
- *
- * Returns:
  **/
 void
 gnome_icon_selection_stop_loading (GnomeIconSelection * gis)
@@ -496,8 +488,6 @@ gnome_icon_selection_stop_loading (GnomeIconSelection * gis)
  * Description: Clear the currently shown icons, the ones
  * that weren't shown yet are not cleared unless the not_shown
  * parameter is given, in which case even those are cleared.
- *
- * Returns:
  **/
 void
 gnome_icon_selection_clear (GnomeIconSelection * gis,
@@ -559,8 +549,6 @@ gnome_icon_selection_get_icon (GnomeIconSelection * gis,
  *
  * Description: Selects the icon @filename. This icon must have
  * already been added and shown * (see @gnome_icon_selection_show_icons)
- *
- * Returns:
  **/
 void
 gnome_icon_selection_select_icon (GnomeIconSelection * gis,

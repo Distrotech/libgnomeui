@@ -66,6 +66,8 @@ GnomeScores
 @gs: 
 @txt: 
 @font: 
+@col: 
+<!-- # Unused Parameters # -->
 @color: 
 
 
@@ -75,6 +77,8 @@ GnomeScores
 </para>
 
 @gs: 
+@pix_name: 
+<!-- # Unused Parameters # -->
 @logo: 
 
 
@@ -93,8 +97,10 @@ GnomeScores
 </para>
 
 @gs: 
-@pos: 
+@n: 
 @col: 
+<!-- # Unused Parameters # -->
+@pos: 
 
 
 <!-- ##### FUNCTION gnome_scores_set_def_color ##### -->

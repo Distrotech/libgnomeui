@@ -1152,7 +1152,7 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
  * @gil:      An icon list.
  * @pos:      Position at which the new icon should be inserted.
  * @im:       Pixbuf image with the icon image.
- * @filename: Filename of the image file.
+ * @icon_filename: Filename of the image file.
  * @text:     Text to be used for the icon's caption.
  *
  * Inserts an icon in the specified icon list.  The icon is created from the
@@ -1200,11 +1200,13 @@ gnome_icon_list_insert (GnomeIconList *gil, int pos, const char *icon_filename, 
  * gnome_icon_list_append_pixbuf:
  * @gil:      An icon list.
  * @im:       Pixbuf image with the icon image.
- * @filename: Filename of the image file.
+ * @icon_filename: Filename of the image file.
  * @text:     Text to be used for the icon's caption.
  *
  * Appends an icon to the specified icon list.  The icon is created from
  * the specified Imlib image.
+ *
+ * Returns:
  */
 int
 gnome_icon_list_append_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
@@ -1228,6 +1230,8 @@ gnome_icon_list_append_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
  *
  * Appends an icon to the specified icon list.  The icon's image is loaded from
  * the specified file, and it is inserted at the @pos index.
+ *
+ * Returns:
  */
 int
 gnome_icon_list_append (GnomeIconList *gil, const char *icon_filename,
@@ -2417,7 +2421,7 @@ gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 /**
  * gnome_icon_list_set_vadjustment:
  * @gil: An icon list.
- * @hadj: Adjustment to be used for horizontal scrolling.
+ * @vadj: Adjustment to be used for horizontal scrolling.
  *
  * Sets the adjustment to be used for vertical scrolling.  This is normally not
  * required, as the icon list can be simply inserted in a &GtkScrolledWindow and
@@ -2467,6 +2471,7 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
  * gnome_icon_list_construct:
  * @gil: An icon list.
  * @icon_width: Width for the icon columns.
+ * @adj:
  * @flags: A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT.
  *
  * Constructor for the icon list, to be used by derived classes.
@@ -2495,14 +2500,16 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
 /**
  * gnome_icon_list_new: [constructor]
  * @icon_width: Width for the icon columns.
- * @flags:      A combination of %GNOME_ICON_LIST_IS_EDITABLE and %GNOME_ICON_LIST_STATIC_TEXT.
+ * @adj:
+ * @flags: A combination of %GNOME_ICON_LIST_IS_EDITABLE and
+ * %GNOME_ICON_LIST_STATIC_TEXT.
  *
  * Creates a new icon list widget.  The icon columns are allocated a width of
  * @icon_width pixels.  Icon captions will be word-wrapped to this width as
  * well.
  *
- * If @flags has the %GNOME_ICON_LIST_IS_EDITABLE flag set, then the user will be
- * able to edit the text in the icon captions, and the "text_changed" signal
+ * If @flags has the %GNOME_ICON_LIST_IS_EDITABLE flag set, then the user will
+ * be able to edit the text in the icon captions, and the "text_changed" signal
  * will be emitted when an icon's text is changed.
  *
  * If @flags has the %GNOME_ICON_LIST_STATIC_TEXT flags set, then the text
@@ -3024,7 +3031,7 @@ gnome_icon_list_get_selection (GnomeIconList *gil)
 
 
 /**
- * gnome_icon_list_get_selection:
+ * gnome_icon_list_get_icon_filename:
  * @gil: An icon list.
  * @idx: Index of an @icon.
  *

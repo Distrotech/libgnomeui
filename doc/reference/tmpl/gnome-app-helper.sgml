@@ -69,6 +69,13 @@ gnome-app-helper
 @GNOME_APP_CONFIGURABLE_ITEM_SCORES: 
 @GNOME_APP_CONFIGURABLE_ITEM_END_GAME: 
 
+<!-- ##### MACRO GNOME_APP_CONFIGURABLE_ITEM_EXIT ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### ENUM GnomeUIPixmapType ##### -->
 <para>
 
@@ -339,6 +346,15 @@ gnome-app-helper
 
 
 <!-- ##### MACRO GNOMEUIINFO_MENU_EXIT_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_QUIT_ITEM ##### -->
 <para>
 
 </para>
@@ -968,8 +984,10 @@ gnome-app-helper
 
 @app: 
 @path: 
-@menuinfo: 
+@uiinfo: 
 @uibdata: 
+<!-- # Unused Parameters # -->
+@menuinfo: 
 
 
 <!-- ##### FUNCTION gnome_app_insert_menus ##### -->
@@ -1030,6 +1048,8 @@ gnome-app-helper
 </para>
 
 @app: 
+@uiinfo: 
+<!-- # Unused Parameters # -->
 @uinfo: 
 
 

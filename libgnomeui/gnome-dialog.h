@@ -161,14 +161,14 @@ void       gnome_dialog_append_buttons  (GnomeDialog * dialog,
 					 const gchar * first,
 					 ...);
 void       gnome_dialog_append_button   (GnomeDialog * dialog,
-				         const gchar * name);
+				         const gchar * button_name);
 void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
 					 const gchar **buttons);
 
 /* Add button with arbitrary text and pixmap. */
 void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
-						   const gchar * name,
-						   const gchar * pixmap);
+						   const gchar * button_name,
+						   const gchar * pixmap_name);
 void       gnome_dialog_append_buttons_with_pixmaps (GnomeDialog * dialog,
 						     const gchar **names,
 						     const gchar **pixmaps);

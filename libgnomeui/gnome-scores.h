@@ -131,13 +131,13 @@ void gnome_scores_set_logo_label (
 		GnomeScores *gs,	/* GNOME Scores widget. */
 		const gchar *txt,	/* Text in the label. */
 		const gchar *font,	/* Font to use in the label. */
-		GdkColor *color		/* Color to use in the label. */
+		GdkColor *col		/* Color to use in the label. */
 		);
 
 /* Creates a pixmap to be the logo */
 void gnome_scores_set_logo_pixmap (
 		GnomeScores *gs,	/* GNOME Scores widget. */
-		const gchar *logo	/* Name of the .xpm. */
+		const gchar *pix_name	/* Name of the .xpm. */
 		);
 
 /* Set an arbitrary widget to be the logo. */
@@ -149,7 +149,7 @@ void gnome_scores_set_logo_widget (
 /* Set the color of one entry. */
 void gnome_scores_set_color (
 		GnomeScores *gs,	/* GNOME Scores widget. */
-		guint pos,		/* Entry to be changed. */
+		guint n,		/* Entry to be changed. */
 		GdkColor *col		/* Color. */
 		);
 

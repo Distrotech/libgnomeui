@@ -94,7 +94,7 @@ GtkWidget *gnome_druid_page_edge_new_with_vals     (GnomeEdgePosition   position
 						    GdkPixbuf	       *top_watermark);
 void       gnome_druid_page_edge_construct         (GnomeDruidPageEdge *druid_page_edge,
 						    GnomeEdgePosition   position,
-						    gboolean            antialiaed,
+						    gboolean            antialiased,
 						    const gchar        *title,
 						    const gchar        *text,
 						    GdkPixbuf          *logo,
@@ -119,7 +119,7 @@ void       gnome_druid_page_edge_set_logo          (GnomeDruidPageEdge *druid_pa
 void       gnome_druid_page_edge_set_watermark     (GnomeDruidPageEdge *druid_page_edge,
 						    GdkPixbuf          *watermark);
 void       gnome_druid_page_edge_set_top_watermark (GnomeDruidPageEdge *druid_page_edge,
-						    GdkPixbuf          *top_watermark);
+						    GdkPixbuf          *top_watermark_image);
 
 G_END_DECLS
 

@@ -371,7 +371,7 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
  * @pos_data:
  * @event:
  * @user_data:
- *
+ * @for_widget:
  *
  * You can use this function to pop up a menu.  When a menu item *
  * callback is invoked, the specified user_data will be passed to it.
@@ -446,9 +446,12 @@ get_active_index (GtkMenu *menu)
  * @pos_data:
  * @event:
  * @user_data:
+ * @for_widget:
  *
  * Same as above, but runs the popup menu modally and returns the
  * index of the selected item, or -1 if none.
+ *
+ * Returns:
  */
 int
 gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,

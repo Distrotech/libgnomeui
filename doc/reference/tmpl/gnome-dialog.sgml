@@ -173,6 +173,8 @@ GnomeDialog
 </para>
 
 @dialog: 
+@button_name: 
+<!-- # Unused Parameters # -->
 @name: 
 
 
@@ -191,6 +193,9 @@ GnomeDialog
 </para>
 
 @dialog: 
+@button_name: 
+@pixmap_name: 
+<!-- # Unused Parameters # -->
 @name: 
 @pixmap: 
 

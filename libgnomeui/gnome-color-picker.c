@@ -164,43 +164,50 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
         g_object_class_install_property
                 (gobject_class,
                  PROP_DITHER,
-                 g_param_spec_boolean ("dither", NULL, NULL,
+                 g_param_spec_boolean ("dither", NULL, 
+			               "Whether or not to dither to color",
 				       TRUE,
 				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_USE_ALPHA,
-                 g_param_spec_boolean ("use_alpha", NULL, NULL,
+                 g_param_spec_boolean ("use_alpha", NULL, 
+			               "Whether or not to give the color an alpha value",
 				       FALSE,
 				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_TITLE,
-                 g_param_spec_string ("title", NULL, NULL,
+                 g_param_spec_string ("title", NULL, 
+			              "The title to give to the color picker",
 				      NULL,
 				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_RED,
-                 g_param_spec_uint ("red", NULL, NULL,
+                 g_param_spec_uint ("red", NULL,
+			            "The amount of red in the chosen color",
 				    0, 255, 0,
 				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_GREEN,
-                 g_param_spec_uint ("green", NULL, NULL,
+                 g_param_spec_uint ("green", NULL, 
+			            "The amount of green in the chosen color",
 				    0, 255, 0,
 				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_BLUE,
-                 g_param_spec_uint ("blue", NULL, NULL,
+                 g_param_spec_uint ("blue", NULL, 
+			            "The amount of blue in the chosen color",
 				    0, 255, 0,
 				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_ALPHA,
-                 g_param_spec_uint ("alpha", NULL, NULL,
+                 g_param_spec_uint ("alpha", NULL, 
+			            "The alpha value of the chosen color",
 				    0, 255, 0,
 				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 

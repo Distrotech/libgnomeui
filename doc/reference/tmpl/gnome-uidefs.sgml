@@ -63,6 +63,20 @@ gnome-uidefs
 
 
 
+<!-- ##### MACRO GNOME_KEY_NAME_QUIT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_QUIT ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO GNOME_KEY_NAME_EXIT ##### -->
 <para>
 

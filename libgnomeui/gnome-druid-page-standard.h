@@ -103,9 +103,9 @@ void       gnome_druid_page_standard_set_contents_background (GnomeDruidPageStan
 
 /* Convenience Function */
 void       gnome_druid_page_standard_append_item             (GnomeDruidPageStandard *druid_page_standard,
-							      const gchar            *question_mnemonic,
+							      const gchar            *question,
 							      GtkWidget              *item,
-							      const gchar            *additional_info_markup);
+							      const gchar            *additional_info);
 
 G_END_DECLS
 

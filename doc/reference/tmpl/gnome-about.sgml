@@ -36,6 +36,22 @@ GnomeAbout
 @Returns: 
 
 
+<!-- ##### FUNCTION gnome_about_construct ##### -->
+<para>
+
+</para>
+
+@about: 
+@name: 
+@version: 
+@copyright: 
+@comments: 
+@authors: 
+@documenters: 
+@translator_credits: 
+@logo_pixbuf: 
+
+
 <!-- ##### ARG GnomeAbout:name ##### -->
 <para>
 

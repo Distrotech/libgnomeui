@@ -22,3 +22,17 @@ gnome-gconf-ui
 @Returns: 
 
 
+<!-- ##### MACRO gnomeui_gconf_lazy_init ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnome_gconf_get_bool ##### -->
+<para>
+
+</para>
+
+
+

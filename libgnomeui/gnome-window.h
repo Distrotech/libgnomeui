@@ -20,7 +20,7 @@
 G_BEGIN_DECLS
 
 /* set the window title */
-void gnome_window_toplevel_set_title (GtkWindow *w,
+void gnome_window_toplevel_set_title (GtkWindow *window,
 				      const gchar *doc_name,
 				      const gchar *app_name,
 				      const gchar *extension);

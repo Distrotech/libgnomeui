@@ -718,7 +718,7 @@ void gnome_app_remove_menu_range (GnomeApp *app, const gchar *path, gint start, 
 
 /* inserts menus described by uiinfo in existing app's menu structure right after the item described by path.
  */
-void gnome_app_insert_menus_custom (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo, GnomeUIBuilderData *uibdata);
+void gnome_app_insert_menus_custom (GnomeApp *app, const gchar *path, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata);
 
 /* FIXME: what does it do? */
 void gnome_app_insert_menus (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo);
@@ -743,7 +743,7 @@ void gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
 
 /* really? why can't it be automatic? */
 void gnome_app_install_menu_hints           (GnomeApp *app,
-                                             GnomeUIInfo *uinfo);
+                                             GnomeUIInfo *uiinfo);
 
 void gnome_app_setup_toolbar                (GtkToolbar *toolbar,
                                              BonoboDockItem *dock_item);

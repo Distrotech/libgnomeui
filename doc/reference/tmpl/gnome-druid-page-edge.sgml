@@ -70,12 +70,14 @@ GnomeDruidPageEdge
 
 @druid_page_edge: 
 @position: 
-@antialiaed: 
+@antialiased: 
 @title: 
 @text: 
 @logo: 
 @watermark: 
 @top_watermark: 
+<!-- # Unused Parameters # -->
+@antialiaed: 
 
 
 <!-- ##### FUNCTION gnome_druid_page_edge_set_bg_color ##### -->
@@ -165,6 +167,8 @@ GnomeDruidPageEdge
 </para>
 
 @druid_page_edge: 
+@top_watermark_image: 
+<!-- # Unused Parameters # -->
 @top_watermark: 
 
 

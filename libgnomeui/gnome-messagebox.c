@@ -77,8 +77,6 @@ gnome_message_box_instance_init (GnomeMessageBox *message_box)
  *
  * For language bindings or subclassing, from C use #gnome_message_box_new or
  * #gnome_message_box_newv
- *
- * Returns:
  */
 void
 gnome_message_box_construct (GnomeMessageBox       *messagebox,

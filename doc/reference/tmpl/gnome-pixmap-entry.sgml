@@ -36,10 +36,12 @@ GnomePixmapEntry
 
 </para>
 
-@gentry: 
+@pentry: 
 @history_id: 
 @browse_dialog_title: 
 @do_preview: 
+<!-- # Unused Parameters # -->
+@gentry: 
 
 
 <!-- ##### FUNCTION gnome_pixmap_entry_set_pixmap_subdir ##### -->

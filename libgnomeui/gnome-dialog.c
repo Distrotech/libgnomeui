@@ -385,10 +385,11 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
 }
 
 /**
- * gnome_dialog_append_button: Add a button to a dialog after its initial construction.
+ * gnome_dialog_append_button:
  * @dialog: #GnomeDialog to add button to.
  * @button_name: Button to add.
  *
+ * Add a button to a dialog after its initial construction.
  * This function is mostly for internal library use. You should use
  * gnome_dialog_new() instead. See that function for a description of
  * the button argument.
@@ -463,11 +464,12 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 
 
 /**
- * gnome_dialog_append_button_with_pixmap: Add a pixmap button to a dialog.
+ * gnome_dialog_append_button_with_pixmap:
  * @dialog: #GnomeDialog to add the button to.
  * @button_name: Name of the button, or stock button #define.
  * @pixmap_name: Stock pixmap name.
  *
+ * Add a pixmap button to a dialog.
  * gnome_dialog_new() does not permit custom buttons with pixmaps, so if you
  * want one of those you need to use this function.
  *

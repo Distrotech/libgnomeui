@@ -1044,8 +1044,6 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
  *
  * Description: For language bindings and subclassing, from C use
  * #gnome_icon_entry_new
- *
- * Returns:
  **/
 void
 gnome_icon_entry_construct (GnomeIconEntry *ientry,
@@ -1090,8 +1088,6 @@ gnome_icon_entry_new (const gchar *history_id, const gchar *browse_dialog_title)
  * pixmap directory to use as the default path for the file
  * entry.  The path can also be an absolute one.  If %NULL is passed
  * then the pixmap directory itself is used.
- *
- * Returns:
  **/
 void
 gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
@@ -1220,8 +1216,6 @@ gnome_icon_entry_pick_dialog(GnomeIconEntry *ientry)
  *
  * Description:  Set the title of the browse dialog.  It will not effect
  * an existing dialog.
- *
- * Returns:
  **/
 void
 gnome_icon_entry_set_browse_dialog_title(GnomeIconEntry *ientry,
@@ -1241,8 +1235,6 @@ gnome_icon_entry_set_browse_dialog_title(GnomeIconEntry *ientry,
  *
  * Description:  Set the history_id of the entry in the browse dialog
  * and reload the history
- *
- * Returns:
  **/
 void
 gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
@@ -1268,8 +1260,6 @@ gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
  * @filename: a filename
  *
  * Description: Deprecated in favour of #gnome_icon_entry_set_filename
- *
- * Returns:
  **/
 void
 gnome_icon_entry_set_icon(GnomeIconEntry *ientry,

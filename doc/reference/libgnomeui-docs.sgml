@@ -29,7 +29,6 @@
 <!ENTITY libgnomeui-gnome-app-helper SYSTEM "sgml/gnome-app-helper.sgml">
 <!ENTITY libgnomeui-gnome-app-util SYSTEM "sgml/gnome-app-util.sgml">
 <!ENTITY libgnomeui-gnome-mdi-session SYSTEM "sgml/gnome-mdi-session.sgml">
-<!ENTITY libgnomeui-gnome-macros SYSTEM "sgml/gnome-macros.sgml">
 <!ENTITY libgnomeui-gnome-ui-init SYSTEM "sgml/gnome-ui-init.sgml">
 <!ENTITY libgnomeui-gnome-dialog-util SYSTEM "sgml/gnome-dialog-util.sgml">
 <!ENTITY libgnomeui-gnome-gconf-ui SYSTEM "sgml/gnome-gconf-ui.sgml">
@@ -78,7 +77,6 @@
     &libgnomeui-gnome-app-helper;
     &libgnomeui-gnome-app-util;
     &libgnomeui-gnome-mdi-session;
-    &libgnomeui-gnome-macros;
     &libgnomeui-gnome-ui-init;
     &libgnomeui-gnome-dialog-util;
     &libgnomeui-gnome-gconf-ui;

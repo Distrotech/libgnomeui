@@ -67,9 +67,11 @@ GnomeMessageBox
 </para>
 
 @message: 
-@messagebox_type: 
+@message_box_type: 
 @Varargs: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@messagebox_type: 
 
 
 <!-- ##### FUNCTION gnome_message_box_newv ##### -->
@@ -78,8 +80,21 @@ GnomeMessageBox
 </para>
 
 @message: 
-@messagebox_type: 
+@message_box_type: 
 @buttons: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@messagebox_type: 
+
+
+<!-- ##### FUNCTION gnome_message_box_construct ##### -->
+<para>
+
+</para>
+
+@messagebox: 
+@message: 
+@message_box_type: 
+@buttons: 
 
 

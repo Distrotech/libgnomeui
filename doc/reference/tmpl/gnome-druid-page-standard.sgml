@@ -140,8 +140,11 @@ GnomeDruidPageStandard
 </para>
 
 @druid_page_standard: 
-@question_mnemonic: 
+@question: 
 @item: 
+@additional_info: 
+<!-- # Unused Parameters # -->
+@question_mnemonic: 
 @additional_info_markup: 
 
 

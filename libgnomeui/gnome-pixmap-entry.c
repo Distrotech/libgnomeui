@@ -646,8 +646,6 @@ gnome_pixmap_entry_preview_widget(GnomePixmapEntry *pentry)
  * Description: Sets the default path for the file entry. The new
  * subdirectory should be specified relative to the default GNOME
  * pixmap directory.
- *
- * Returns:
  **/
 void
 gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
@@ -678,8 +676,6 @@ gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
  * the entry.  If the preview is on, we also load the files and check
  * for them being real images.  If it is off, we don't check files
  * to be real image files.
- *
- * Returns:
  **/
 void
 gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry, gboolean do_preview)
@@ -717,8 +713,6 @@ gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry, gboolean do_preview)
  *
  * Description: Sets the minimum size of the preview frame in pixels.
  * This works only if the preview is enabled.
- *
- * Returns:
  **/
 void
 gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,

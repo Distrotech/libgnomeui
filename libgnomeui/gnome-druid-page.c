@@ -249,11 +249,10 @@ gnome_druid_page_realize (GtkWidget *widget)
 
 /**
  * gnome_druid_page_new:
- * @void:
  *
  * Creates a new #GnomeDruidPage.
  *
- * Return value: The newly created #GnomeDruidPage.
+ * Returns: The newly created #GnomeDruidPage.
  **/
 GtkWidget *
 gnome_druid_page_new (void)

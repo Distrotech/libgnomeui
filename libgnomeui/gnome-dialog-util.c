@@ -99,7 +99,7 @@ gnome_error_dialog (const gchar * error)
 
 /**
  * gnome_error_dialog_parented:
- * @warning: Message to display
+ * @error: Message to display
  * @parent: Parent window
  *
  * Description:  Creates and shows a error dialog.  This is an OK
@@ -464,8 +464,13 @@ request_dialog (const gchar * request, const gchar * default_text, const guint16
 /* Get a string. */
 /**
  * gnome_request_string_dialog:
+ * @prompt:
+ * @callback:
+ * @data:
  *
  * Description:  Deprecated, use #gnome_request_dialog
+ *
+ * Returns:
  **/
 GtkWidget *
 gnome_request_string_dialog  (const gchar * prompt,
@@ -477,8 +482,14 @@ gnome_request_string_dialog  (const gchar * prompt,
 
 /**
  * gnome_request_string_dialog_parented:
+ * @prompt:
+ * @callback:
+ * @data:
+ * @parent:
  *
  * Description:  Deprecated, use #gnome_request_dialog
+ *
+ * Returns:
  **/
 GtkWidget *
 gnome_request_string_dialog_parented (const gchar * prompt,
@@ -492,8 +503,13 @@ gnome_request_string_dialog_parented (const gchar * prompt,
 /* Request a string, but don't echo to the screen. */
 /**
  * gnome_request_password_dialog:
+ * @prompt:
+ * @callback:
+ * @data:
  *
- * Description:  Deprecated, use #gnome_request_dialog
+ * Deprecated, use #gnome_request_dialog instead.
+ *
+ * Returns:
  **/
 GtkWidget *
 gnome_request_password_dialog (const gchar * prompt, GnomeStringCallback callback, gpointer data)
@@ -504,8 +520,14 @@ gnome_request_password_dialog (const gchar * prompt, GnomeStringCallback callbac
 
 /**
  * gnome_request_password_dialog_parented:
+ * @prompt:
+ * @callback:
+ * @data:
+ * @parent:
  *
- * Description:  Deprecated, use #gnome_request_dialog
+ * Description:  Deprecated, use #gnome_request_dialog.
+ *
+ * Returns:
  **/
 GtkWidget *
 gnome_request_password_dialog_parented (const gchar * prompt,

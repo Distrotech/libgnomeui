@@ -188,6 +188,14 @@ gnome_druid_page_edge_instance_init (GnomeDruidPageEdge *page)
 
 /**
  * gnome_druid_page_edge_construct:
+ * @druid_page_edge:
+ * @position:
+ * @antialiased:
+ * @title:
+ * @text:
+ * @logo:
+ * @watermark:
+ * @top_watermark:
  *
  * Description:  Useful for subclassing and binding only
  **/
@@ -541,7 +549,7 @@ gnome_druid_page_edge_set_logo (GnomeDruidPageEdge *druid_page_edge,
 /**
  * gnome_druid_page_edge_set_watermark:
  * @druid_page_edge: the #GnomeDruidPageEdge to work on
- * @top_watermark_image: The #GdkPixbuf to use as a watermark
+ * @watermark: The #GdkPixbuf to use as a watermark
  *
  * Description:  Sets a #GdkPixbuf as the watermark on the left
  * strip on the druid.  If #top_watermark_image is %NULL, it is reset

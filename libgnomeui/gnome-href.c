@@ -338,8 +338,9 @@ gnome_href_set_text (GnomeHRef *href, const gchar *text)
  * gnome_href_get_label
  * @href: Pointer to GnomeHRef widget
  *
- * Description:
- * deprecated, use #gnome_href_get_text
+ * Deprecated, use #gnome_href_get_text.
+ *
+ * Returns:
  **/
 
 const gchar *

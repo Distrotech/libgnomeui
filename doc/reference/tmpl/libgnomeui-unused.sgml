@@ -1,3 +1,23 @@
+<!-- ##### SECTION ./tmpl/gnome-macros.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-macros.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-macros.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/gnome-macros.sgml:Title ##### -->
+gnome-macros
+
+
 <!-- ##### MACRO GNOME_CALL_PARENT_HANDLER ##### -->
 <para>
 
@@ -94,6 +114,12 @@
 
 
 <!-- ##### STRUCT GnomeDialogPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GnomeHRef:link-color ##### -->
 <para>
 
 </para>

@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-gnome-window
+libgnomeui-access
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -14,16 +14,11 @@ gnome-window
 
 </para>
 
-<!-- ##### FUNCTION gnome_window_toplevel_set_title ##### -->
+<!-- ##### USER_FUNCTION _AccessibilityClassInitFn ##### -->
 <para>
 
 </para>
 
-@window: 
-@doc_name: 
-@app_name: 
-@extension: 
-<!-- # Unused Parameters # -->
-@w: 
+@klass: 
 
 

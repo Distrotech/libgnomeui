@@ -496,8 +496,6 @@ gnome_entry_get_history_id (GnomeEntry *gentry)
  * to the config file, when #gnome_entry_save_history() is called.
  * Zero is an acceptable value for @max_saved, but the same thing is
  * accomplished by setting the history id of @gentry to %NULL.
- *
- * Returns:
  */
 void
 gnome_entry_set_max_saved (GnomeEntry *gentry, guint max_saved)
@@ -624,8 +622,6 @@ gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
  * the history list inside @gentry.  If @save is %TRUE, the history
  * item will be saved in the config file (assuming that @gentry's
  * history id is not %NULL).
- *
- * Returns:
  */
 void
 gnome_entry_prepend_history (GnomeEntry *gentry, gboolean save,
@@ -645,8 +641,6 @@ gnome_entry_prepend_history (GnomeEntry *gentry, gboolean save,
  * of the history list inside @gentry.  If @save is %TRUE, the
  * history item will be saved in the config file (assuming that
  * @gentry's history id is not %NULL).
- *
- * Returns:
  */
 void
 gnome_entry_append_history (GnomeEntry *gentry, gboolean save,
@@ -700,8 +694,6 @@ gnome_entry_load_history (GnomeEntry *gentry)
  *
  * Description:  Clears the history, you should call #gnome_entry_save_history
  * To make the change permanent.
- *
- * Returns:
  */
 void
 gnome_entry_clear_history (GnomeEntry *gentry)

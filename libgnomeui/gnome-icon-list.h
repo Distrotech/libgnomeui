@@ -123,11 +123,11 @@ void           gnome_icon_list_thaw                (GnomeIconList *gil);
 
 
 void           gnome_icon_list_insert              (GnomeIconList *gil,
-						    int idx,
+						    int pos,
 						    const char *icon_filename,
 						    const char *text);
 void           gnome_icon_list_insert_pixbuf       (GnomeIconList *gil,
-						    int idx,
+						    int pos,
 						    GdkPixbuf *im,
 						    const char *icon_filename,
 						    const char *text);
@@ -142,7 +142,7 @@ int            gnome_icon_list_append_pixbuf       (GnomeIconList *gil,
 
 void           gnome_icon_list_clear               (GnomeIconList *gil);
 void           gnome_icon_list_remove              (GnomeIconList *gil,
-						    int idx);
+						    int pos);
 
 guint          gnome_icon_list_get_num_icons       (GnomeIconList *gil);
 
@@ -152,9 +152,9 @@ GtkSelectionMode gnome_icon_list_get_selection_mode(GnomeIconList *gil);
 void           gnome_icon_list_set_selection_mode  (GnomeIconList *gil,
 						    GtkSelectionMode mode);
 void           gnome_icon_list_select_icon         (GnomeIconList *gil,
-						    int idx);
+						    int pos);
 void           gnome_icon_list_unselect_icon       (GnomeIconList *gil,
-						    int idx);
+						    int pos);
 int            gnome_icon_list_unselect_all        (GnomeIconList *gil);
 GList *        gnome_icon_list_get_selection       (GnomeIconList *gil);
 
@@ -185,18 +185,18 @@ int            gnome_icon_list_find_icon_from_filename (GnomeIconList *gil,
 void           gnome_icon_list_set_icon_data       (GnomeIconList *gil,
 						    int idx, gpointer data);
 void           gnome_icon_list_set_icon_data_full  (GnomeIconList *gil,
-						    int idx, gpointer data,
+						    int pos, gpointer data,
 						    GDestroyNotify destroy);
 int            gnome_icon_list_find_icon_from_data (GnomeIconList *gil,
 						    gpointer data);
 gpointer       gnome_icon_list_get_icon_data       (GnomeIconList *gil,
-						    int idx);
+						    int pos);
 
 /* Visibility */
 void           gnome_icon_list_moveto              (GnomeIconList *gil,
-						    int idx, double yalign);
+						    int pos, double yalign);
 GtkVisibility  gnome_icon_list_icon_is_visible     (GnomeIconList *gil,
-						    int idx);
+						    int pos);
 
 int            gnome_icon_list_get_icon_at         (GnomeIconList *gil,
 						    int x, int y);

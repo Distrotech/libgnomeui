@@ -340,7 +340,7 @@ void         gnome_client_set_process_id         (GnomeClient *client,
 void         gnome_client_set_program            (GnomeClient *client, 
 						  const gchar *program);
 void         gnome_client_set_user_id            (GnomeClient *client,
-						  const gchar *user_id);
+						  const gchar *id);
 
 /* The following function may be called during a "save_youself" handler
    to request that a (modal) dialog is presented to the user. The session 
@@ -422,7 +422,7 @@ void         gnome_client_disconnect             (GnomeClient *client);
 /* Set the client id.  This is only possible, if the client is not
    connected to a session manager.  */
 void         gnome_client_set_id                 (GnomeClient *client,
-						  const gchar *client_id);
+						  const gchar *id);
 
 /* Get the client id of a session management client object.  If this
    object has never been connected to a session manager and a client
@@ -449,13 +449,13 @@ const gchar*       gnome_client_get_desktop_id   (GnomeClient *client);
    clients from interacting until this key is returned with 
    'gnome_interaction_key_return'.  */
 void         gnome_client_request_interaction    (GnomeClient *client,
-						  GnomeDialogType dialog,
-						  GnomeInteractFunction func,
-						  gpointer client_data);
+						  GnomeDialogType dialog_type,
+						  GnomeInteractFunction function,
+						  gpointer data);
 
 void         gnome_client_request_interaction_interp (GnomeClient *client,
-						      GnomeDialogType dialog,
-						      GtkCallbackMarshal func,
+						      GnomeDialogType dialog_type,
+						      GtkCallbackMarshal function,
 						      gpointer data,
 						      GtkDestroyNotify destroy);
 

@@ -51,6 +51,24 @@ GnomeIconList
 @flags: 
 
 
+<!-- ##### FUNCTION gnome_icon_list_set_hadjustment ##### -->
+<para>
+
+</para>
+
+@gil: 
+@hadj: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_vadjustment ##### -->
+<para>
+
+</para>
+
+@gil: 
+@vadj: 
+
+
 <!-- ##### FUNCTION gnome_icon_list_freeze ##### -->
 <para>
 
@@ -73,9 +91,11 @@ GnomeIconList
 </para>
 
 @gil: 
-@idx: 
+@pos: 
 @icon_filename: 
 @text: 
+<!-- # Unused Parameters # -->
+@idx: 
 
 
 <!-- ##### FUNCTION gnome_icon_list_insert_pixbuf ##### -->
@@ -84,10 +104,12 @@ GnomeIconList
 </para>
 
 @gil: 
-@idx: 
+@pos: 
 @im: 
 @icon_filename: 
 @text: 
+<!-- # Unused Parameters # -->
+@idx: 
 
 
 <!-- ##### FUNCTION gnome_icon_list_append ##### -->
@@ -127,6 +149,8 @@ GnomeIconList
 </para>
 
 @gil: 
+@pos: 
+<!-- # Unused Parameters # -->
 @idx: 
 
 
@@ -163,6 +187,8 @@ GnomeIconList
 </para>
 
 @gil: 
+@pos: 
+<!-- # Unused Parameters # -->
 @idx: 
 
 
@@ -172,6 +198,8 @@ GnomeIconList
 </para>
 
 @gil: 
+@pos: 
+<!-- # Unused Parameters # -->
 @idx: 
 
 
@@ -191,6 +219,15 @@ GnomeIconList
 
 @gil: 
 @Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_focus_icon ##### -->
+<para>
+
+</para>
+
+@gil: 
+@idx: 
 
 
 <!-- ##### FUNCTION gnome_icon_list_set_icon_width ##### -->
@@ -283,9 +320,11 @@ GnomeIconList
 </para>
 
 @gil: 
-@idx: 
+@pos: 
 @data: 
 @destroy: 
+<!-- # Unused Parameters # -->
+@idx: 
 
 
 <!-- ##### FUNCTION gnome_icon_list_find_icon_from_data ##### -->
@@ -304,8 +343,10 @@ GnomeIconList
 </para>
 
 @gil: 
-@idx: 
+@pos: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@idx: 
 
 
 <!-- ##### FUNCTION gnome_icon_list_moveto ##### -->
@@ -314,8 +355,10 @@ GnomeIconList
 </para>
 
 @gil: 
-@idx: 
+@pos: 
 @yalign: 
+<!-- # Unused Parameters # -->
+@idx: 
 
 
 <!-- ##### FUNCTION gnome_icon_list_icon_is_visible ##### -->
@@ -324,8 +367,10 @@ GnomeIconList
 </para>
 
 @gil: 
-@idx: 
+@pos: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@idx: 
 
 
 <!-- ##### FUNCTION gnome_icon_list_get_icon_at ##### -->
@@ -345,6 +390,26 @@ GnomeIconList
 </para>
 
 @gil: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_icon_text_item ##### -->
+<para>
+
+</para>
+
+@gil: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_icon_pixbuf_item ##### -->
+<para>
+
+</para>
+
+@gil: 
+@idx: 
 @Returns: 
 
 

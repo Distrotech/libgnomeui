@@ -1,3 +1,41 @@
+2002-05-31  Malcolm Tredinnick <malcolm@tredinnick.org>
+	* libgnomeui/gnome-app-helper.c, gnome-app-helper.h,
+	gnome-client.c, gnome-client.h, gnome-color-picker.c,
+	gnome-dateedit.c, gnome-dialog-util.c, gnome-dialog.c,
+	gnome-dialog.h, gnome-druid-page-edge.c,
+	gnome-druid-page-edge.h, gnome-druid-page-standard.h,
+	gnome-druid-page.c, gnome-druid.c, gnome-entry.c,
+	gnome-file-entry.c, gnome-href.c, gnome-icon-entry.c,
+	gnome-icon-list.c, gnome-icon-list.h, gnome-icon-sel.c,
+	gnome-mdi-session.h, gnome-messagebox.c, gnome-messagebox.h,
+	gnome-pixmap-entry.c, gnome-pixmap-entry.h, gnome-popup-menu.c,
+	gnome-scores.c, gnome-scores.h, gnome-ui-init.c, gnome-window.h:
+	Lots of little changes to the API documentation comments (adding
+	parameters, removing old no-long-existing parameters, matching
+	variable names between function declarations and definitions).
+	This makes the API docs, such as they are, now build with 250
+	less warnings so that we can detect the real problems.
+
+	* doc/reference/tmpl/gnome-about.sgml, gnome-app-helper.sgml,
+	gnome-client.sgml, gnome-dialog.sgml,
+	gnome-druid-page-edge.sgml, gnome-druid-page-standard.sgml,
+	gnome-gconf-ui.sgml, gnome-href.sgml, gnome-icon-item.sgml,
+	gnome-icon-list.sgml, gnome-marshal.sgml,
+	gnome-mdi-session.sgml, gnome-messagebox.sgml,
+	gnome-pixmap-entry.sgml, gnome-scores.sgml, gnome-uidefs.sgml,
+	gnome-window-icon.sgml, gnome-window.sgml, gnome.sgml,
+	gnometypebuiltins.sgml, libgnomeui-access.sgml,
+	libgnomeui-unused.sgml: Changed template files as a result of
+	all the above fixes.
+
+	* doc/reference/libgnomeui-docs.sgml: Remove gnome-macros.sgml
+	template, since it's not used any longer.
+
+	* doc/reference/tmpl/gnome-macros.sgml: Removed. Obsolete.
+
+	* doc/reference/libgnomeui-sections.txt: A much more complete
+	version of this file. Still not ordered correctly, though.
+
 2002-05-30  Kristian Rietveld  <kris@gtk.org>
 
 	* glade/glade-gnome.c (gnome_add_dock_item): set the behavior of the
