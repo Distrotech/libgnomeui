@@ -1,3 +1,11 @@
+Thu Aug 30 04:08:18 2001  George Lebl <jirka@5z.com>
+
+	* gnome-pixmap.[ch]:  put the deprecated widget back here.
+	  Implements about 2/3's (The non imlib stuff) from 1.0 GnomePixmap
+	  and it's just a thin wrapper around GtkImage.  I took it originally
+	  from libgnome1-compat where the version is completely screwed since
+	  it didn't resemble the gnome1 widget at all :)
+
 Tue Aug 28 22:38:38 2001  George Lebl <jirka@5z.com>
 
 	* gnome-gconf-ui.c: Make the OK button close the dialog
