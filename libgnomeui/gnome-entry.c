@@ -46,6 +46,7 @@
 
 #include "gnome-gconf-ui.h"
 
+#include "libgnomeui-access.h"
 #include "gnome-entry.h"
 
 enum {

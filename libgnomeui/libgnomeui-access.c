@@ -1,3 +1,4 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
  * Copyright 2002 Sun Microsystems Inc.
  *
@@ -36,7 +37,6 @@ static gint
 is_gail_loaded (GtkWidget *widget)
 {
 	AtkObject *aobj;
-
 	if (gail_loaded == -1) {
 		aobj = gtk_widget_get_accessible (widget);
 		if (!GTK_IS_ACCESSIBLE (aobj))
@@ -66,41 +66,37 @@ _add_atk_name_desc (GtkWidget *widget, gchar *name, gchar *desc)
 		atk_object_set_description (aobj, desc);
 }
 
-/**
- * set_relation
- * @widget : The Gtk widget which is labelled by @label
- * @label : The label for the @widget.
- * @set_for : if 1, set ATK_RELATION_LABEL_FOR
- *	      if 0, don't set ATK_RELATION_LABEL_FOR.
- * Description : This function establishes atk relation
- * between a gtk widget and a label.
- */
 void
-_set_relation (GtkWidget *widget, GtkLabel *label, int set_for)
+_add_atk_description (GtkWidget *widget,
+		      gchar     *desc)
 {
-	AtkObject *aobject;
+	_add_atk_name_desc (widget, NULL, desc);
+}
+
+void
+_add_atk_relation (GtkWidget *widget1, GtkWidget *widget2,
+		   AtkRelationType w1_to_w2, AtkRelationType w2_to_w1)
+{
+	AtkObject      *atk_widget1;
+	AtkObject      *atk_widget2;
 	AtkRelationSet *relation_set;
-	AtkRelation *relation; 
-	AtkObject *targets[1];
+	AtkRelation    *relation;
+	AtkObject      *targets[1];
 
-	g_return_if_fail (GTK_IS_WIDGET(widget));
-	g_return_if_fail (GTK_IS_LABEL(label));
+	atk_widget1 = gtk_widget_get_accessible (widget1);
+	atk_widget2 = gtk_widget_get_accessible (widget2);
 
-	/* Return if GAIL is not loaded */
-	if (! is_gail_loaded (widget))
-		return;
-
-	aobject = gtk_widget_get_accessible (widget);
-
-	if (set_for)
-		/* Set the ATK_RELATION_LABEL_FOR relation */
-		gtk_label_set_mnemonic_widget (label, widget);
-
-	targets[0] = gtk_widget_get_accessible (GTK_WIDGET (label));
-
-	relation_set = atk_object_ref_relation_set (aobject);
-
-	relation = atk_relation_new (targets, 1, ATK_RELATION_LABELLED_BY);
+	/* Create the widget1 -> widget2 relation */
+	relation_set = atk_object_ref_relation_set (atk_widget1);
+	targets[0] = atk_widget2;
+	relation = atk_relation_new (targets, 1, w1_to_w2);
 	atk_relation_set_add (relation_set, relation);
-	g_object_unref (G_OBJECT (relation));
+	g_object_unref (relation);
+
+	/* Create the widget2 -> widget1 relation */
+	relation_set = atk_object_ref_relation_set (atk_widget2);
+	targets[0] = atk_widget1;
+	relation = atk_relation_new (targets, 1, w2_to_w1);
+	atk_relation_set_add (relation_set, relation);
+	g_object_unref (relation);
 }
