@@ -465,10 +465,19 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	setup_underlined_accelerator (insert_shortcuts ? accel_group : NULL,
 				      menu_accel_group, uiinfo->widget, keyval);
 
-	/* Connect to the signal */
+	/* Connect to the signal and set user data */
 
-	if (uiinfo->type != GNOME_APP_UI_SUBTREE)
+	if (uiinfo->type != GNOME_APP_UI_SUBTREE) {
+	        gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
+				     GNOMEUIINFO_KEY_UIDATA,
+				     uiinfo->user_data);
+
+		gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
+				     GNOMEUIINFO_KEY_UIBDATA,
+				     uibdata->data);
+
 		(* uibdata->connect_func) (uiinfo, "activate", uibdata);
+	}
 }
 
 /* Creates a group of radio menu items.  Returns the updated position parameter. */
@@ -628,14 +637,6 @@ static void
 do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, 
 		GnomeUIBuilderData *uibdata)
 {
-	gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
-			     GNOMEUIINFO_KEY_UIDATA,
-			     uiinfo->user_data);
-
-	gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
-			     GNOMEUIINFO_KEY_UIBDATA,
-			     uibdata->data);
-
 	if (uibdata->is_interp)
 		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), 
 				signal_name, NULL, uibdata->relay_func, 
