@@ -1,3 +1,7 @@
+1999-09-13  Karl Eichwalder  <ke@suse.de>
+
+	* winhints_demo.c (about_cb): Add missing \n.
+
 1999-09-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (top_add_view, gnome_mdi_add_view,
@@ -11,6 +15,7 @@
 	(gnome_canvas_image_draw): Take into account the fact that we may
 	not have a pixmap at all.
 
+>>>>>>> 1.1125
 1999-09-11  Roberto Zunino <zunino@cli.di.unipi.it>
 
 	* gnome-dns.c: Do not cache 0.0.0.0 results (ie, not found).

@@ -410,7 +410,7 @@ void about_cb(GtkWidget *widget, gpointer data)
   about = gnome_about_new (_("WIN_HINTS Test"), "0.1",
                            _("Copyright (C) 1998"),
                            authors,
-                           _("Simple test app to check how the WIN_HINTS work.  "
+                           _("Simple test app to check how the WIN_HINTS work.\n"
                              "And to test the gnome_win_hints_* functions for errors. :)"),
                            NULL);
   gtk_widget_show (about);
