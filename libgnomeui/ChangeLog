@@ -1,3 +1,7 @@
+Sat Aug 21 11:54:16 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-procbar.c: completely document the API
+
 Sat Aug 21 11:31:07 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-dentry-edit.[ch]: there was a typo in the object, and

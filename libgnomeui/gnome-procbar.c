@@ -111,15 +111,21 @@ gnome_proc_bar_init (GnomeProcBar *pb)
 
 /**
  * gnome_proc_bar_new:
- * @label: Either %NULL or a @GtkWidget that will be shown at the left
+ * @label: Either %NULL or a #GtkWidget that will be shown at the left
  * side of the process bar.
  * @n: Number of items.
- * @colors: Pointer to an array of @n @GdkColor elements.
+ * @colors: Pointer to an array of @n #GdkColor elements.
  * @cb: Callback function to update the process bar.
  *
- * Creates a new Gnome Process Bar.
+ * Description: Creates a new Gnome Process Bar with @n items with the
+ * colors of @colors. To do automatic updating, you set the @cb to a function
+ * which takes a single void pointer as an argument and returns %TRUE or %FALSE.
+ * When it returns %FALSE the timer stops running and the function stops getting
+ * called. You need to call #gnome_proc_bar_start with the time interval and
+ * the data argument that will be passed to the callback to actually start
+ * executing the timer.
  *
- * Returns the newly created @GnomeProcBar widget.
+ * Returns: The newly created #GnomeProcBar widget.
  */
 
 GtkWidget *
@@ -311,6 +317,16 @@ gnome_proc_bar_timeout (gpointer data)
 	return result;
 }
 
+/**
+ * gnome_proc_bar_set_values:
+ * @pb: Pointer to a #GnomeProcBar object
+ * @val: pointer to an array of @pb->n integers
+ *
+ * Description: Set the values of @pb to @val and redraw it. You will
+ * probably call this function in the callback to update the values.
+ *
+ * Returns:
+ */
 void
 gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
 {
@@ -339,6 +355,17 @@ gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
     gnome_proc_bar_draw (pb, val);
 }
 
+/**
+ * gnome_proc_bar_start:
+ * @pb: Pointer to a #GnomeProcBar object
+ * @gtime: time interval in ms
+ * @data: data to the callback
+ *
+ * Description: Start a timer, and call the callback that was set
+ * on #gnome_proc_bar_new with the @data.
+ *
+ * Returns:
+ */
 void
 gnome_proc_bar_start (GnomeProcBar *pb, gint gtime, gpointer data)
 
@@ -356,6 +383,14 @@ gnome_proc_bar_start (GnomeProcBar *pb, gint gtime, gpointer data)
     }
 }
 
+/**
+ * gnome_proc_bar_stop:
+ * @pb: Pointer to a #GnomeProcBar object
+ *
+ * Description: Stop running the callback in the timer.
+ *
+ * Returns:
+ */
 void
 gnome_proc_bar_stop (GnomeProcBar *pb)
 
@@ -369,6 +404,16 @@ gnome_proc_bar_stop (GnomeProcBar *pb)
     pb->tag = -1;
 }
 
+/**
+ * gnome_proc_bar_update:
+ * @pb: Pointer to a #GnomeProcBar object
+ * @colors: Pointer to an array of @pb->n #GdkColor elements
+ *
+ * Description: Update @pb with @colors. @pb is not redrawn,
+ * it is only redrawn when you call #gnome_proc_bar_set_values
+ *
+ * Returns:
+ */
 void
 gnome_proc_bar_update (GnomeProcBar *pb, GdkColor *colors)
 {
@@ -388,6 +433,16 @@ gnome_proc_bar_update (GnomeProcBar *pb, GdkColor *colors)
     gnome_proc_bar_setup_colors (pb);
 }
 
+/**
+ * gnome_proc_bar_set_orient:
+ * @pb: Pointer to a #GnomeProcBar object
+ * @vertical: %TRUE if vertical %FALSE if horizontal
+ *
+ * Description: Sets the orientation of @pb to vertical if
+ * @vertical is %TRUE or to horizontal if @vertical is %FALSE.
+ *
+ * Returns:
+ */
 void
 gnome_proc_bar_set_orient (GnomeProcBar *pb, gboolean vertical)
 {
