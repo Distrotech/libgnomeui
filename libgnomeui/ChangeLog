@@ -1,5 +1,13 @@
 1998-11-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-propertybox.c (gnome_property_box_append_page): Add checks
+	to the entry points.
+	(gnome_property_box_set_state): New function, lets you unsensitize
+	the properybox.
+	(gnome_property_box_changed): Check input parameters.
+
+	API document GnomePropertyBox.
+
 	* gnome-icon-list.c: (gnome_icon_list_new_thawed); New method to
 	create an IconList which starts up life in thawed state.
 

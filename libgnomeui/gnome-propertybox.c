@@ -67,6 +67,12 @@ static GnomeDialogClass *parent_class = NULL;
 
 static gint property_box_signals [LAST_SIGNAL] = { 0 };
 
+/**
+ * gnome_property_box_get_type:
+ *
+ * Internal routine that returns the GtkType of the
+ * GnomePropertyBox widget
+ */
 guint
 gnome_property_box_get_type (void)
 {
@@ -207,6 +213,18 @@ gnome_property_box_destroy (GtkObject *object)
 	GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
 
+/**
+ * gnome_property_box_new: [constructor]
+ *
+ * Creates a new GnomePropertyBox widget.  The PropertyBox widget
+ * is useful for making consistent configuration dialog boxes.
+ *
+ * When a setting has been made to a property in the PropertyBox
+ * your program needs to invoke the gnome_property_box_changed to signal
+ * a change (this will enable the Ok/Apply buttons).
+ *
+ * Returns a newly created GnomePropertyBox widget.
+ */
 GtkWidget *
 gnome_property_box_new (void)
 {
@@ -268,11 +286,21 @@ set_sensitive (GnomePropertyBox *property_box, gint dirty)
 		gtk_widget_set_sensitive (property_box->apply_button, dirty);
 }
 
+/**
+ * gnome_property_box_changed:
+ * @property_box: The GnomePropertyBox that contains the changed data
+ *
+ * When a setting has changed, the code needs to invoke this routine
+ * to make the Ok/Apply buttons sensitive.
+ */
 void
 gnome_property_box_changed (GnomePropertyBox *property_box)
 {
 	GtkWidget *page;
 
+	g_return_if_fail (property_box != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BOX (property_box));
+	
 	page = GTK_NOTEBOOK (property_box->notebook)->cur_page->child;
 	g_assert (page != NULL);
 	
@@ -281,6 +309,31 @@ gnome_property_box_changed (GnomePropertyBox *property_box)
 			    GINT_TO_POINTER(1));
 
 	set_sensitive (property_box, 1);
+}
+
+/**
+ * gnome_property_box_set_state:
+ * @property_box: The GnomePropertyBox that contains the changed data
+ * @state:        The state.  TRUE means modified, FALSE means unmodified.
+ *
+ * This sets the state of the GnomePropertyBox to the value in @state.
+ */
+void
+gnome_property_box_set_state (GnomePropertyBox *property_box, gboolean state)
+{
+	GtkWidget *page;
+
+	g_return_if_fail (property_box != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BOX (property_box));
+	
+	page = GTK_NOTEBOOK (property_box->notebook)->cur_page->child;
+	g_assert (page != NULL);
+	
+	gtk_object_set_data(GTK_OBJECT(page),
+			    GNOME_PROPERTY_BOX_DIRTY,
+			    GINT_TO_POINTER(state ? 1 : 0));
+
+	set_sensitive (property_box, state);
 }
 
 static void
@@ -341,11 +394,29 @@ apply_and_close (GnomePropertyBox *property_box)
 	just_close (property_box);
 }
 
+/**
+ * gnome_property_box_append_page:
+ * @property_box: The property box where we are inserting a new page
+ * @child:        The widget that is being inserted
+ * @tab_label:    The widget used as the label for this confiugration page
+ *
+ * Appends a new page to the GnomePropertyBox.
+ *
+ * Returns the assigned index of the page inside the GnomePropertyBox or
+ * -1 if one of the arguments is invalid.
+ */
 gint
 gnome_property_box_append_page (GnomePropertyBox *property_box,
 				GtkWidget *child,
 				GtkWidget *tab_label)
 {
+	g_return_val_if_fail (property_box != NULL, -1);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BOX (property_box), -1);
+	g_return_val_if_fail (child != NULL, -1);
+	g_return_val_if_fail (GTK_IS_WIDGET (child), -1);
+	g_return_val_if_fail (tab_label != NULL, -1);
+	g_return_val_if_fail (GTK_IS_WIDGET (tab_label), -1);
+		
 	gtk_notebook_append_page (GTK_NOTEBOOK (property_box->notebook),
 				  child, tab_label);
 
