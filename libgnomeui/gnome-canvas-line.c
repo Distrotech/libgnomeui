@@ -688,8 +688,6 @@ static void
 gnome_canvas_line_reconfigure (GnomeCanvasItem *item)
 {
 	GnomeCanvasLine *line;
-	GdkColor color;
-	int width;
 
 	line = GNOME_CANVAS_LINE (item);
 

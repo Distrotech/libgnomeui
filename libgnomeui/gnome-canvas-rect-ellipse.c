@@ -281,7 +281,6 @@ static void
 gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasRE *re;
-	GdkColor *color;
 
 	re = GNOME_CANVAS_RE (object);
 

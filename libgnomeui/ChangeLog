@@ -1,3 +1,8 @@
+1998-10-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-text.c (gnome_canvas_text_bounds): Fixed a little
+	y1->x1 confusion.
+
 1998-10-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-mdi-session.h: Fixup includes.

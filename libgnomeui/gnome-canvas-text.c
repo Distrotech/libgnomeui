@@ -531,7 +531,6 @@ static void
 gnome_canvas_text_reconfigure (GnomeCanvasItem *item)
 {
 	GnomeCanvasText *text;
-	GdkColor color;
 
 	text = GNOME_CANVAS_TEXT (item);
 
@@ -774,7 +773,7 @@ gnome_canvas_text_bounds (GnomeCanvasItem *item, double *x1, double *y1, double 
 	case GTK_ANCHOR_NE:
 	case GTK_ANCHOR_E:
 	case GTK_ANCHOR_SE:
-		*y1 -= width;
+		*x1 -= width;
 		break;
 	}
 
