@@ -143,13 +143,13 @@ fi
 
 dnl File Chooser stuff
 PKG_CHECK_MODULES(FILE_SYSTEM, gtk+-2.0 >= 2.3.2 gnome-vfs-2.0 >= 2.5.3)
-GTK_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
+GTK_BINARY_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
 AC_SUBST(FILE_SYSTEM_CFLAGS)
 AC_SUBST(FILE_SYSTEM_LIBS)
-AC_SUBST(GTK_VERSION)
+AC_SUBST(GTK_BINARY_VERSION)
 
-GTK_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
-AC_SUBST(GTK_VERSION)
+GTK_BINARY_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
+AC_SUBST(GTK_BINARY_VERSION)
 	
 dnl
 dnl Check for gtk-doc

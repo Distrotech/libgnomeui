@@ -18,7 +18,7 @@ INCLUDES =					\
 	$(NULL)
 
 module_flags = -export_dynamic -avoid-version -module -no-undefined
-modulesdir = $(libdir)/gtk-2.0/$(GTK_VERSION)/filesystems
+modulesdir = $(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/filesystems
 
 modules_LTLIBRARIES =				\
 	libgnome-vfs.la			\

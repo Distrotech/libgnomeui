@@ -1,3 +1,9 @@
+2004-03-05  Joe Marcus Clarke  <marcus@freebsd.org>
+
+	* configure.in:
+	* file-chooser/Makefile.am: install file-chooser GTK+ module in
+	$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/filesystems
+
 2004-03-03  Anders Carlsson  <andersca@gnome.org>
 
 	* configure.in: Release 2.5.90.1
