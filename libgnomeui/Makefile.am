@@ -74,6 +74,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-text.c		\
 	gnome-vfs-util.c		\
 	gnome-window.c			\
+	oafgnome.c			\
 	$(noinst_HEADERS)
 
 ## this lists all the non-generated headers

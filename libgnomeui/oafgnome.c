@@ -23,7 +23,6 @@
   @NOTATION@
  */
 
-#include "oafgnome.h"
 #include <signal.h>
 #include <popt.h>
 #include <errno.h>
@@ -32,45 +31,30 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <string.h>
 #include <gtk/gtk.h>
 
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-config.h>
-#include <liboaf/liboaf.h>
+#include <bonobo-activation/bonobo-activation.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdk.h>
 #include <libgnomeui/gnome-init.h>
 #include <libgnomeui/gnome-dialog-util.h>
 #include <libgnomeui/gnome-dialog.h>
+#include <libgnomeui/gnome-canvas-init.h>
+
+#include "oafgnome.h"
+
+#define ATOM_NAME "BONOBO_ACTIVATION_AC_IOR"
 
 static void og_pre_args_parse(GnomeProgram *app,
 			      GnomeModuleInfo *mod_info);
 static void og_post_args_parse(GnomeProgram *app,
 			       GnomeModuleInfo *mod_info);
-static OAFRegistrationLocation rootwin_regloc;
-static CORBA_Object rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
+static BonoboActivationBaseServiceRegistry rootwin_regloc;
+static CORBA_Object rcmd_activator(const BonoboActivationBaseService *regcat, const char **cmd,
 				   int ior_fd, CORBA_Environment *ev);
-
-static GnomeModuleInfo orbit_module_info = {
-  "ORBit", orbit_version, "CORBA implementation",
-   NULL,
-   NULL, NULL,
-   NULL,
-   NULL
-};
-
-static GnomeModuleRequirement libgnomeui_bonobo_activation_requirements[] = {
-  {"0.5.1", &orbit_module_info},
-  {NULL}
-};
-
-static GnomeModuleInfo libbonobo_activation_module_info = {
-  "liboaf", libgnomeui_bonobo_activation_version, "Object Activation Framework",
-  libgnomeui_bonobo_activation_requirements,
-  (GnomeModuleHook)bonobo_activation_preinit, (GnomeModuleHook)bonobo_activation_postinit,
-  (struct poptOption *)bonobo_activation_popt_options,
-  NULL
-};
 
 static GnomeModuleRequirement og_requirements[] = {
   {"0.0", &libgnomeui_bonobo_activation_module_info},
@@ -78,8 +62,8 @@ static GnomeModuleRequirement og_requirements[] = {
   {NULL}
 };
 
-GnomeModuleInfo libgnomeui_bonobo_actiation_module_info = {
-  "liboafgnome", VERSION, "OAF integration for GNOME programs",
+GnomeModuleInfo libgnomeui_bonobo_activation_module_info = {
+  "libbonobo-activation", VERSION, "Bonobo activation integration for GNOME programs",
   og_requirements,
   og_pre_args_parse, og_post_args_parse,
   NULL,
@@ -98,15 +82,15 @@ og_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 static void
 og_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
-  bonobo_activation_registration_location_add(&rootwin_regloc, -100, NULL);
-  bonobo_activation_registration_activator_add(rcmd_activator, 100);
+  bonobo_activation_base_service_registry_add (&rootwin_regloc, -100, NULL);
+  bonobo_activation_base_service_activator_add (rcmd_activator, 100);
 }
 
 /* Registration location stuff */
 #include <gdk/gdkx.h>
 
 static void
-rootwin_lock(const OAFRegistrationLocation *regloc,
+rootwin_lock(const BonoboActivationBaseServiceRegistry *regloc,
 	     gpointer user_data)
 {
   XGrabServer(GDK_DISPLAY());
@@ -114,7 +98,7 @@ rootwin_lock(const OAFRegistrationLocation *regloc,
 }
 
 static void
-rootwin_unlock(const OAFRegistrationLocation *regloc,
+rootwin_unlock(const BonoboActivationBaseServiceRegistry *regloc,
 	       gpointer user_data)
 {
   XUngrabServer(GDK_DISPLAY());
@@ -122,89 +106,93 @@ rootwin_unlock(const OAFRegistrationLocation *regloc,
 }
 
 static char *
-rootwin_check(const OAFRegistrationLocation *regloc,
-	      const OAFRegistrationCategory *regcat,
+rootwin_check(const BonoboActivationBaseServiceRegistry *regloc,
+	      const BonoboActivationBaseService *regcat,
 	      int *ret_distance, gpointer user_data)
 {
-  GdkAtom type;
-  int fmt;
-  char *ior = NULL;
-  gint actual_length;
+	GdkAtom type;
+	int fmt;
+	char *ior = NULL;
+	gint actual_length;
 
-  if(strcmp(regcat->name, "IDL:OAF/ActivationContext:1.0"))
-    return NULL;
+	if (strcmp (regcat->name, "IDL:Bonobo/ActivationContext:1.0"))
+		return NULL;
 
-  if(!
-     gdk_property_get (GDK_ROOT_PARENT(),
-		       gdk_atom_intern("OAFGNOME_AC_IOR", FALSE),
-		       gdk_atom_intern("STRING", FALSE),
-		       0, 99999, FALSE, &type, &fmt, &actual_length,
-		       (guchar **)&ior))
-    return NULL;
+	if (!gdk_property_get (
+		GDK_ROOT_PARENT(),
+		gdk_atom_intern (ATOM_NAME, FALSE),
+		gdk_atom_intern ("STRING", FALSE),
+		0, 99999, FALSE, &type, &fmt, &actual_length,
+		(guchar **)&ior))
 
-  return ior;
+		return NULL;
+
+	return ior;
 }
 
 static void
-rootwin_register(const OAFRegistrationLocation *regloc,
-		 const char *ior,
-		 const OAFRegistrationCategory *regcat,
-		 gpointer user_data)
+rootwin_register (const BonoboActivationBaseServiceRegistry *regloc,
+		  const char *ior,
+		  const BonoboActivationBaseService *regcat,
+		  gpointer user_data)
 {
-  gdk_property_change(GDK_ROOT_PARENT(), gdk_atom_intern("OAFGNOME_AC_IOR", FALSE),
-		      gdk_atom_intern("STRING", FALSE), 8, GDK_PROP_MODE_REPLACE, (guchar *) ior, strlen(ior));
+	gdk_property_change (
+		GDK_ROOT_PARENT (), gdk_atom_intern (ATOM_NAME, FALSE),
+		gdk_atom_intern ("STRING", FALSE), 8, GDK_PROP_MODE_REPLACE,
+		(guchar *) ior, strlen (ior));
 }
 
 static void
-rootwin_unregister(const OAFRegistrationLocation *regloc,
-		   const char *ior,
-		   const OAFRegistrationCategory *regcat,
-		   gpointer user_data)
+rootwin_unregister (const BonoboActivationBaseServiceRegistry *regloc,
+		    const char *ior,
+		    const BonoboActivationBaseService *regcat,
+		    gpointer user_data)
 {
-  gdk_property_delete(GDK_ROOT_PARENT(), gdk_atom_intern("OAFGNOME_AC_IOR", FALSE));
+	gdk_property_delete (
+		GDK_ROOT_PARENT (), gdk_atom_intern (ATOM_NAME, FALSE));
 }
 
-static OAFRegistrationLocation rootwin_regloc = {
-  rootwin_lock,
-  rootwin_unlock,
-  rootwin_check,
-  rootwin_register,
-  rootwin_unregister
+static BonoboActivationBaseServiceRegistry rootwin_regloc = {
+	rootwin_lock,
+	rootwin_unlock,
+	rootwin_check,
+	rootwin_register,
+	rootwin_unregister
 };
 
 /******** The "execute a remote command" hack :) *******/
 typedef struct {
-  const OAFRegistrationCategory *regcat;
+	const BonoboActivationBaseService *regcat;
 
-  char iorbuf[4096];
+	char iorbuf[4096];
 
-  int infd, outfd;
-  GString *in_buf;
-  FILE *in_fh, *out_fh;
+	int infd, outfd;
+	GString *in_buf;
+	FILE *in_fh, *out_fh;
 
-  guint out_tag;
+	guint out_tag;
 
-  enum { CONNECTING, ITEMWAIT, REMOTE_CONV, DONE } state;
-  const char **cmd;
+	enum { CONNECTING, ITEMWAIT, REMOTE_CONV, DONE } state;
+	const char **cmd;
 } RCMDRunInfo;
 
 static void
-item_send_val(gchar *string, gpointer data)
+item_send_val (gchar *string, gpointer data)
 {
-  RCMDRunInfo *ri = (RCMDRunInfo *)data;
+	RCMDRunInfo *ri = (RCMDRunInfo *)data;
 
-  if(string) {
-    fprintf(ri->in_fh, "%s\n", string);
-    g_free(string);
-    ri->state = CONNECTING;
-  }
+	if(string) {
+		fprintf (ri->in_fh, "%s\n", string);
+		g_free (string);
+		ri->state = CONNECTING;
+	}
 
-  gtk_main_quit();
+	gtk_main_quit ();
 }
 
 /* What a stupid replacement for expect. It will break if anything isn't working exactly right. Oh well :\ */
 static void
-rcmd_handle_connecting(RCMDRunInfo *ri)
+rcmd_handle_connecting (RCMDRunInfo *ri)
 {
   char aline[4096];
   int nchars;
@@ -231,6 +219,8 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
 
   /* Now, see if we have timed out or got a whole line */
 
+#warning FIXME
+#if 0
   if((ctmp = strstr(ri->in_buf->str, "login:")))
     {
       GtkWidget *prompt_dialog;
@@ -240,7 +230,7 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
       ri->state = ITEMWAIT;
 
       prompt_dialog = gnome_request_dialog(FALSE, N_("Username:"), g_get_user_name(), -1, item_send_val, ri, NULL);
-      gnome_dialog_run(GNOME_DIALOG(prompt_dialog));
+      gtk_dialog_run(GTK_DIALOG(prompt_dialog));
 
       if(ri->state == ITEMWAIT)
 	gtk_main_quit(); /* User cancelled, show is over */
@@ -254,7 +244,7 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
       ri->state = ITEMWAIT;
 
       prompt_dialog = gnome_request_dialog(TRUE, N_("Password:"), "", -1, item_send_val, ri, NULL);
-      gnome_dialog_run(GNOME_DIALOG(prompt_dialog));
+      gtk_dialog_run (GTK_DIALOG (prompt_dialog));
 
       if(ri->state == ITEMWAIT)
 	gtk_main_quit(); /* User cancelled, show is over */
@@ -285,6 +275,7 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
     {
       gtk_main_quit(); /* Can't connect */
     }
+#endif
 
   fflush(ri->in_fh);
 }
@@ -359,7 +350,7 @@ rcmd_handle_output(GIOChannel *src, GIOCondition condition, gpointer data)
 }
 
 static char *
-rcmd_run(const OAFRegistrationCategory *regcat, const char **argv, int argc, const char **remote_cmd)
+rcmd_run(const BonoboActivationBaseService *regcat, const char **argv, int argc, const char **remote_cmd)
 {
   RCMDRunInfo ri;
   int pipes_in[2], pipes_out[2];
@@ -448,10 +439,11 @@ rcmd_run(const OAFRegistrationCategory *regcat, const char **argv, int argc, con
 }
 
 static CORBA_Object
-rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
+rcmd_activator(const BonoboActivationBaseService *regcat, const char **cmd,
 	       int ior_fd, CORBA_Environment *ev)
 {
-  char *basecmd = gnome_config_get_string("/OAF/RemoteCommand=rsh");
+#warning FIXME: use bonobo-config to make this configurable.
+  char *basecmd = "rsh";
   char *ior_string;
   const char *argv[10/*XXX: MAGIC Number, but it's right*/];
   char iornum_buf[25], display_buf[512], langs_buf[512];
@@ -469,7 +461,8 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
     }
 
   argv[argc++] = regcat->hostname?regcat->hostname:"localhost";
-  argv[argc++] = "gnome-remote-bootstrap"; /* The command that runs on the remote end to start oafd for us */
+  argv[argc++] = "gnome-remote-bootstrap"; /* The command that runs on the remote end to start
+					      bonobo-activation-server for us */
   g_snprintf(iornum_buf, sizeof(iornum_buf), "--ior-fd=%d", ior_fd);
   argv[argc++] = iornum_buf;
 
@@ -490,8 +483,10 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
     g_value_unset (&value);
   }
 
+#warning FIXME intl
+#if 0
   {
-    const GList *langs = gnome_i18n_get_language_list(NULL);
+    const GList *langs = gnome_i18n_get_language_list (NULL);
     GString *langparam = g_string_new(langs?langs->data:"");
 
     if(langs)
@@ -505,6 +500,7 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
     g_string_free(langparam, TRUE);
     argv[argc++] = langs_buf;
   }
+#endif
 
   argv[argc] = NULL; /* The last one */
 

@@ -24,7 +24,7 @@ dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
 ALL_LINGUAS="az es fr it nn no sv ta tr wa"
-AM_GNOME2_GETTEXT
+AM_GLIB_GNU_GETTEXT
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
@@ -98,7 +98,6 @@ AC_SUBST(REBUILD)
 AC_OUTPUT([
 Makefile
 po/Makefile.in
-intl/Makefile
 libgnomeui/Makefile
 libgnomeui/libgnomeui-2.0.pc
 libgnomeui/pixmaps/Makefile
