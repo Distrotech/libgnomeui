@@ -73,6 +73,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-pixmap.c			\
 	gnome-pixmap-entry.c		\
 	gnome-propertybox.c		\
+	gnome-scores.c			\
 	gnome-ui-init.c			\
 	gnometypes.c			\
 	gnome-icon-entry.c		\
@@ -115,6 +116,7 @@ gnome_headers = \
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
 	gnome-propertybox.h		\
+	gnome-scores.h			\
 	gnome-ui-init.h			\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
