@@ -1,3 +1,11 @@
+1998-06-02  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_find_menu_pos): set *pos to 0 if
+	path is emtpy and check whether menuitem's child is NULL in order
+	not to SIGSEGV at separators in menus. Also added a call to
+	gtk_widget_queue_resize() on the parent widget at the end of
+	insertion or removal!
+	
 1998-06-01  Seth Alves  <alves@twitch.hungry.com>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): if path is empty,

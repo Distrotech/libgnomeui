@@ -150,6 +150,9 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	  break;
 	}
     }
+
+  gtk_widget_queue_resize (parent_widget);
+
   menuinfo[i].widget = parent_widget;
 }
 
@@ -574,9 +577,6 @@ gnome_app_find_menu_pos (GtkWidget *parent,
   g_return_val_if_fail(path != NULL, NULL);
   g_return_val_if_fail(pos != NULL, NULL);
 
-  if (strlen (path) == 0)
-    return parent;
-
   children = GTK_MENU_SHELL(parent)->children;
 
   name_end = strchr(path, '/');
@@ -585,16 +585,25 @@ gnome_app_find_menu_pos (GtkWidget *parent,
   else
     path_len = name_end - path;
 
+  if (path_len == 0) {
+    *pos = 0;
+    return parent;
+  }
+
   p = 0;
 
-  while( children && (path_len > 0) ) {
+  while( children ) {
     p++;
     item = GTK_BIN(children->data);
 
-    if(GTK_IS_LABEL(item->child))
+    if(!item->child)
+      label = NULL;
+    else if(GTK_IS_LABEL(item->child))
       label = GTK_LABEL(item->child);
     else if(GTK_IS_HBOX(item->child))
       label = GTK_LABEL(g_list_next(gtk_container_children(GTK_CONTAINER(item->child)))->data);
+    else
+      label = NULL;
 
     if( label && (strncmp(path, label->label, path_len) == 0) ) {
       if(name_end == NULL) {
@@ -629,7 +638,12 @@ gnome_app_remove_menus(GnomeApp *app,
 
   /* find the first item (which is actually at position pos-1) to remove */
   parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
-  if( (parent == NULL) || (pos < 1) ) {
+
+  /* in case of path ".../" remove the first item */
+  if(pos == 0)
+    pos = 1;
+
+  if( parent == NULL ) {
     g_warning("gnome_app_remove_menus: couldn't find first item to remove!");
     return;
   }
@@ -638,10 +652,13 @@ gnome_app_remove_menus(GnomeApp *app,
   children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
   while(children && items > 0) {
     child = GTK_WIDGET(children->data);
-    children = g_list_next(children);
+    /* children = g_list_next(children); */
     gtk_container_remove(GTK_CONTAINER(parent), child);
+    children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
     items--;
   }
+
+  gtk_widget_queue_resize(parent);
 }
 
 /*
