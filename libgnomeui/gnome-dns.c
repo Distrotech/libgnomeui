@@ -69,7 +69,7 @@ static int dns_cache_size, dns_cache_size_max;
 
 typedef struct
 {
-	gint tag;
+	guint32 tag;
 	gint server; /* -1 if waiting, otherwise index to dns_server[] */
 	char *hostname;
 	void (*callback) (guint32 ip_addr, void *callback_data);

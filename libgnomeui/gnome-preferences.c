@@ -360,7 +360,7 @@ GtkButtonBoxStyle gnome_preferences_get_button_layout (void)
 
 void              gnome_preferences_set_button_layout (GtkButtonBoxStyle style)
 {
-  g_return_if_fail( (style >= 0) && (style <= GTK_BUTTONBOX_END) );
+  g_return_if_fail ((style <= GTK_BUTTONBOX_END));
   prefs.dialog_buttons_style = style;
 }
 

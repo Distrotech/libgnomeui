@@ -19,7 +19,7 @@
 #include <config.h>
 
 #include <ctype.h>
-
+#include <string.h>
 #include "gnome-dentry-edit.h"
 
 #ifdef NEED_GNOMESUPPORT_H

@@ -65,7 +65,7 @@ gnome_scores_new (  guint n_scores,
 	GtkWidget	*label;
 	gchar     	tmp[10];
 	gchar     	*tmp2;
-	int i;
+	unsinged int i;
 	const gchar * buttons[] = { GNOME_STOCK_BUTTON_OK, NULL };
 
 	gnome_dialog_constructv(GNOME_DIALOG(retval),
@@ -150,7 +150,7 @@ gnome_scores_set_color(GnomeScores *gs, guint n, GdkColor *col)
 void
 gnome_scores_set_def_color(GnomeScores *gs, GdkColor *col)
 {
-	int i;
+	unsigned int i;
 
 	for(i=0;i<gs->n_scores;i++) {
 		gnome_scores_set_color(gs, i, col);
@@ -160,7 +160,7 @@ gnome_scores_set_def_color(GnomeScores *gs, GdkColor *col)
 void
 gnome_scores_set_colors(GnomeScores *gs, GdkColor *col)
 {
-	int i;
+	unsigned int i;
 
 	for(i=0;i<gs->n_scores;i++) {
 		gnome_scores_set_color(gs, i, col+i);

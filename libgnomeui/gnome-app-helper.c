@@ -828,7 +828,8 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 	gchar *label = NULL;
 	GList *children, *hbox_children;
 	gchar *name_end;
-	gint p, path_len;
+	gint p;
+	int  path_len;
 	
 	g_return_val_if_fail (parent != NULL, NULL);
 	g_return_val_if_fail (path != NULL, NULL);

@@ -16,6 +16,7 @@
 #include "libgnome/libgnomeP.h"
 #include "gnome-preferences.h"
 #include "libgnomeui/gnome-client.h"
+#include "libgnomeui/gnome-init.h"
 
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;

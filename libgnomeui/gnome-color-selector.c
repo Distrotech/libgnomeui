@@ -186,7 +186,7 @@ static gint
 color_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, gpointer data)
 {
 	GnomeColorSelector *gcs = data;
-	int i;
+	unsigned int i;
 
 	if (strcmp (event->data_type, "application/x-color") == 0){
 		gdouble *dropped = data;

@@ -82,7 +82,7 @@ gnome_property_configurator_request_foreach (GnomePropertyConfigurator *this,
 {
         g_return_if_fail ( this != NULL );
 	/* Range check */
-	g_return_if_fail ( ( r >= 0 ) && ( r <= GNOME_PROPERTY_SETUP ) );
+	g_return_if_fail (( r <= GNOME_PROPERTY_SETUP ));
 
 	g_list_foreach (this->props, (GFunc)request, (gpointer)r);
 }
