@@ -61,6 +61,7 @@
 #include "gnome-icon-list.h"
 #include "gnome-icon-sel.h"
 #include "gnome-icon-entry.h"
+#include "libgnomeui-access.h"
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
@@ -692,7 +693,17 @@ ientry_browse(GnomeIconEntry *ientry)
 				  G_CALLBACK (gtk_widget_destroyed),
 				  &priv->pick_dialog);
 
+		/* Set up accessible properties for the pick dialog */
+		_add_atk_name_desc (priv->pick_dialog,
+				    _("Icon selection dialog"),
+				    _("This dialog box lets you select an icon."));
+		_add_atk_relation (GTK_WIDGET (ientry), priv->pick_dialog,
+				   ATK_RELATION_CONTROLLER_FOR, ATK_RELATION_CONTROLLED_BY);
+
 		priv->icon_sel = gnome_icon_selection_new ();
+		_add_atk_name_desc (priv->icon_sel,
+				    _("Icon selector"),
+				    _("Please pick the icon you want."));
 
 		gnome_icon_selection_add_directory (GNOME_ICON_SELECTION (priv->icon_sel),
 						    priv->pick_dialog_dir);
@@ -928,6 +939,10 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 	gtk_widget_show (ientry->_priv->pickbutton);
 
 	ientry->_priv->fentry = gnome_file_entry_new (NULL, _("Browse"));
+	_add_atk_name_desc (ientry->_priv->fentry,
+			    _("Icon path"),
+			    _("Here you should enter the name of the directory "
+			      "where icon images are located."));
 	/*BORPORP */
 	gnome_file_entry_set_modal (GNOME_FILE_ENTRY (ientry->_priv->fentry),
 				    TRUE);
@@ -955,6 +970,11 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 
 	/*just in case there is a default that is an image*/
 	entry_changed(w,ientry);
+
+	/* Set our accessible name and description */
+	_add_atk_name_desc (GTK_WIDGET (ientry->_priv->pickbutton),
+			    _("Icon Selector"),
+			    _("This button will open a window to let you select an icon."));
 }
 
 /**

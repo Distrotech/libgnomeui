@@ -1,5 +1,13 @@
 2002-04-17  Federico Mena Quintero  <federico@ximian.com>
 
+	* libgnomeui/gnome-icon-entry.c (gnome_icon_entry_instance_init):
+	Added accessible name/description to the icon entry button.
+	(ientry_browse): Added name/description/relation to the pick dialog.
+	(gnome_icon_entry_instance_init): Added name/description to the
+	file entry and the icon selection widget.
+
+2002-04-17  Federico Mena Quintero  <federico@ximian.com>
+
 	* libgnomeui/gnome-href.c (gnome_href_instance_init): Add
 	accessible name/description to the HRef.
 
