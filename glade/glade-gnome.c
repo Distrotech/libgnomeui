@@ -135,6 +135,103 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
 	g_free(vboxname);
 }
 
+static void
+app_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
+		   const char *longname)
+{
+	xmlNodePtr info;
+	GNode *childnode;
+	char *content;
+
+	for (childnode = node->children; childnode;
+	     childnode = childnode->next) {
+		xmlNodePtr xmlnode = childnode->data;
+		GtkWidget *child;
+
+		for (xmlnode = xmlnode->childs; xmlnode; xmlnode=xmlnode->next)
+			if (!strcmp(xmlnode->name, "child_name"))
+				break;
+		content = xmlNodeGetContent(xmlnode);
+		if (xmlnode && !strcmp(content, "GnomeApp:dock")) {
+			/* the dock has already been created */
+			glade_xml_set_common_params(xml,
+					GTK_WIDGET(gnome_app_get_dock(GNOME_APP(w))),
+					childnode, longname, "GnomeDock");
+		} else if (xmlnode && !strcmp(content, "GnomeApp:appbar")) {
+			child = glade_xml_build_widget(xml,childnode,longname);
+			gnome_app_set_statusbar(GNOME_APP(w), child);
+		} else {
+			child = glade_xml_build_widget(xml,childnode,longname);
+			gtk_container_add(GTK_CONTAINER(w), child);
+		}
+		if (content) free(content);
+	}
+}
+
+static void
+dock_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
+		   const char *longname)
+{
+	xmlNodePtr info;
+	GNode *childnode;
+	char *content;
+
+	for (childnode = node->children; childnode;
+	     childnode = childnode->next) {
+		xmlNodePtr xmlnode = childnode->data;
+		GtkWidget *child;
+
+		for (xmlnode = xmlnode->childs; xmlnode; xmlnode=xmlnode->next)
+			if (!strcmp(xmlnode->name, "child_name"))
+				break;
+		content = xmlNodeGetContent(xmlnode);
+		if (xmlnode && !strcmp(content, "GnomeDock:contents")) {
+			child = glade_xml_build_widget(xml,childnode,longname);
+			gnome_dock_set_client_area(GNOME_DOCK(w), child);
+		} else {
+			/* a dock item */
+			GnomeDockPlacement placement = GNOME_DOCK_TOP;
+			guint band = 0, offset = 0;
+			gint position = 0;
+
+			child = glade_xml_build_widget(xml,childnode,longname);
+			if (content) free(content);
+			xmlnode = childnode->data;
+			for (xmlnode = xmlnode->childs; xmlnode;
+			     xmlnode = xmlnode->next) {
+				content = xmlNodeGetContent(xmlnode);
+				if (!strcmp(xmlnode->name, "placement"))
+					placement = glade_enum_from_string(
+						GTK_TYPE_GNOME_DOCK_PLACEMENT,
+						content);
+				else if (!strcmp(xmlnode->name, "band"))
+					band = strtoul(content, NULL, 0);
+				else if (!strcmp(xmlnode->name, "position"))
+					position = strtol(content, NULL, 0);
+				else if (!strcmp(xmlnode->name, "offset"))
+					offset = strtoul(content, NULL, 0);
+				if (content) free(content);
+			}
+			content = NULL;
+			gnome_dock_add_item(GNOME_DOCK(w),
+					    GNOME_DOCK_ITEM(child), placement,
+					    band, position, offset, FALSE);
+		}
+		if (content) free(content);
+	}
+}
+
+static void
+menuitem_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
+                         const char *longname)
+{
+        GtkWidget *menu;
+        if (!node->children) return;
+        menu = glade_xml_build_widget(xml, node->children, longname);
+        gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
+        gtk_widget_hide(menu); /* wierd things happen if menu is initially visible */
+}
+
 /* -- routines to build widgets -- */
 
 /* this is for the GnomeStockButton widget ... */
@@ -486,10 +583,142 @@ dial_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
-about_new(GladeXML *xml, GNode *node) {
+appbar_new(GladeXML *xml, GNode *node)
+{
+	GtkWidget *wid;
+	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	gboolean has_progress = TRUE, has_status = TRUE;
+
+	for (; info; info = info->next) {
+		char *content = xmlNodeGetContent(info);
+
+		if (!strcmp(info->name, "has_progress"))
+			has_progress = content[0] == 'T';
+		else if (!strcmp(info->name, "has_status"))
+			has_status = content[0] == 'T';
+		if (content) free(content);
+	}
+	wid = gnome_appbar_new(has_progress, has_status,
+			       GNOME_PREFERENCES_USER);
+	return wid;
+}
+
+static GtkWidget *
+dock_new(GladeXML *xml, GNode *node)
+{
+	GtkWidget *wid = gnome_dock_new();
+        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+
+	for (; info; info = info->next) {
+		char *content = xmlNodeGetContent(info);
+
+		if (!strcmp(info->name, "allow_floating"))
+			gnome_dock_allow_floating_items(GNOME_DOCK(wid),
+							content[0] == 'T');
+		if (content) free(content);
+	}
+
+	return wid;
+}
+
+static GtkWidget *
+dockitem_new(GladeXML *xml, GNode *node)
+{
 	GtkWidget *wid;
         xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
-	gchar *title = "AnApp", *version = "0.0", *copyright = NULL;
+	char *name = NULL;
+	GnomeDockItemBehavior behaviour = GNOME_DOCK_ITEM_BEH_NORMAL;
+	GtkShadowType shadow_type = GTK_SHADOW_OUT;
+	
+	for (; info; info = info->next) {
+		char *content = xmlNodeGetContent(info);
+
+		switch (info->name[0]) {
+		case 'e':
+			if (!strcmp(info->name, "exclusive"))
+				if (content[0] == 'T')
+					behaviour |= GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
+			break;
+		case 'l':
+			if (!strcmp(info->name, "locked"))
+				if (content[0] == 'T')
+					behaviour |= GNOME_DOCK_ITEM_BEH_LOCKED;
+			break;
+		case 'n':
+			if (!strcmp(info->name, "name")) {
+				if (name) g_free(name);
+				name = g_strdup(content);
+			} else if (!strcmp(info->name, "never_floating"))
+				if (content[0] == 'T')
+					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_FLOATING;
+			else if (!strcmp(info->name, "never_vertical"))
+				if (content[0] == 'T')
+					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL;
+			else if (!strcmp(info->name, "never_horizontal"))
+				if (content[0] == 'T')
+					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL;
+			break;
+		case 's':
+			if (!strcmp(info->name, "shadow_type"))
+				shadow_type = glade_enum_from_string(
+						GTK_TYPE_SHADOW_TYPE, content);
+			break;
+		}
+		if (content) free(content);
+	}
+	wid = gnome_dock_item_new(name, behaviour);
+	gnome_dock_item_set_shadow_type(GNOME_DOCK_ITEM(wid), shadow_type);
+	return wid;
+}
+
+static GtkWidget *
+pixmapmenuitem_new(GladeXML *xml, GNode *node)
+{
+	/* This needs to be rewritten to handle the GNOMEUIINFO_* macros.
+	 * For now, we have something that is useable, but not perfect */
+	GtkWidget *wid;
+        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	char *label = NULL, *stock_item = NULL;
+	gboolean right = FALSE;
+
+	for (; info; info = info->next) {
+		char *content = xmlNodeGetContent(info);
+
+		if (!strcmp(info->name, "label")) {
+			if (label) g_free(label);
+			label = g_strdup(content);
+		} else if (!strcmp(info->name, "stock_item")) {
+			if (stock_item) g_free(stock_item);
+			if (!strncmp(content, "GNOMEUIINFO_", 12))
+				stock_item = g_strdup(content+12);
+			else
+				stock_item = g_strdup(content);
+		} else if (!strcmp(info->name, "right_justify"))
+			right = content[0] == 'T';
+		if (content) free(content);
+	}
+	if (!label) {
+		label = stock_item;
+		stock_item = NULL;
+	}
+	if (label)
+		wid = gtk_menu_item_new_with_label(label);
+	else
+		wid = gtk_menu_item_new();
+	if (label) g_free(label);
+	if (stock_item) g_free(stock_item);
+	if (right)
+		gtk_menu_item_right_justify(GTK_MENU_ITEM(wid));
+	return wid;
+}
+
+static GtkWidget *
+about_new(GladeXML *xml, GNode *node)
+{
+	GtkWidget *wid;
+        xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	gchar *title = gnome_app_id, *version = gnome_app_version;
+	gchar *copyright = NULL;
 	gchar **authors = NULL;
 	gchar *comments = NULL, *logo = NULL;
 
@@ -637,6 +866,49 @@ messagebox_new(GladeXML *xml, GNode *node)
 	}
 	return win;
 }
+
+static GtkWidget *
+app_new(GladeXML *xml, GNode *node)
+{
+	GtkWidget *win;
+	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	gchar *title = NULL;
+	gboolean enable_layout = TRUE;
+	gboolean allow_shrink = TRUE, allow_grow = TRUE, auto_shrink = FALSE;
+
+	for (; info; info = info->next) {
+		char *content = xmlNodeGetContent(info);
+
+		switch (info->name[0]) {
+		case 'a':
+			if (!strcmp(info->name, "allow_grow"))
+				allow_grow = content[0] == 'T';
+			else if (!strcmp(info->name, "allow_shrink"))
+				allow_shrink = content[0] == 'T';
+			else if (!strcmp(info->name, "auto_shrink"))
+				auto_shrink = content[0] == 'T';
+			break;
+		case 'e':
+			if (!strcmp(info->name, "enable_layout_config"))
+				enable_layout = content[0] == 'T';
+			break;
+		case 't':
+			if (!strcmp(info->name, "title")) {
+				if (title) g_free(title);
+				title = g_strdup(content);
+			}
+			break;
+		}
+		if (content) free(content);
+	}
+	win = gnome_app_new(gnome_app_id, title);
+	if (title) g_free(title);
+	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
+			      auto_shrink);
+	gnome_app_enable_layout_config(GNOME_APP(win), enable_layout);
+	return win;
+}
+
 /* -- dialog box build routine goes here */
 
 /* -- routines to initialise these widgets with libglade -- */
@@ -658,10 +930,17 @@ static const GladeWidgetBuildData widget_data [] = {
 	{ "GnomePaperSelector", paper_selector_new, NULL },
 	{ "GnomeSpell",         spell_new,          NULL },
 	{ "GtkDial",            dial_new,           NULL },
+	{ "GnomeAppBar",        appbar_new,         NULL },
+
+	{ "GnomeDock",          dock_new,           dock_build_children},
+	{ "GnomeDockItem",      dockitem_new,   glade_standard_build_children},
+	{ "GtkMenuItem",        pixmapmenuitem_new, menuitem_build_children},
+	{ "GtkPixmapMenuItem",  pixmapmenuitem_new, menuitem_build_children},
 
 	{ "GnomeAbout",         about_new,          NULL },
 	{ "GnomeDialog",        gnomedialog_new,   gnomedialog_build_children},
 	{ "GnomeMessageBox",    messagebox_new,     NULL },
+	{ "GnomeApp",           app_new,            app_build_children},
 	{ NULL, NULL, NULL }
 };
 
