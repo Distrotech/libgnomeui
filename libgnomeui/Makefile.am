@@ -95,7 +95,6 @@ libgnomeui_2_la_SOURCES = \
 ## this lists all the non-generated headers
 gnome_headers = \
 	gnome-about.h			\
-        gnome-animator.h		\
 	gnome-canvas-init.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
