@@ -181,6 +181,104 @@ gnome_message_box_new (const gchar           *message,
 	return GTK_WIDGET (message_box);
 }
 
+GtkWidget*
+gnome_message_box_newv (const gchar           *message,
+		        const gchar           *message_box_type,
+			const gchar 	     **buttons)
+{
+	va_list ap;
+	GnomeMessageBox *message_box;
+	GtkWidget *label, *hbox;
+	GtkWidget *pixmap = NULL;
+	char *s;
+	GtkStyle *style;
+	gint i = 0;
+
+	message_box = gtk_type_new (gnome_message_box_get_type ());
+
+	style = gtk_widget_get_style (GTK_WIDGET (message_box));
+
+	/* Make noises, basically */
+	gnome_triggers_vdo(message, message_box_type, NULL);
+
+	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
+	{
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Information"));
+		s = gnome_pixmap_file("gnome-info.png");
+		if (s) {
+                        pixmap = gnome_pixmap_new_from_file(s);
+                        g_free(s);
+                }
+	}
+	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
+	{
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Warning"));
+		s = gnome_pixmap_file("gnome-warning.png");
+		if (s) {
+                        pixmap = gnome_pixmap_new_from_file(s);
+                        g_free(s);
+                }
+	}
+	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
+	{
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Error"));
+		s = gnome_pixmap_file("gnome-error");
+		if (s) {
+                        pixmap = gnome_pixmap_new_from_file(s);
+                        g_free(s);
+                }
+	}
+	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
+	{
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Question"));
+		s = gnome_pixmap_file("gnome-question.png");
+		if (s) {
+                        pixmap = gnome_pixmap_new_from_file(s);
+                        g_free(s);
+                }
+	}
+	else
+	{
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Message"));
+	}
+
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(GNOME_DIALOG(message_box)->vbox),
+			    hbox, TRUE, TRUE, 10);
+	gtk_widget_show (hbox);
+
+	if ( (pixmap == NULL) ||
+	     (GNOME_PIXMAP(pixmap)->pixmap == NULL) ) {
+        	if (pixmap) gtk_widget_destroy(pixmap);
+		s = gnome_pixmap_file("gnome-default.png");
+         	if (s) {
+			pixmap = gnome_pixmap_new_from_file(s);
+                        g_free(s);
+                } else
+			pixmap = NULL;
+	}
+	if (pixmap) {
+		gtk_box_pack_start (GTK_BOX(hbox), 
+				    pixmap, FALSE, TRUE, 0);
+		gtk_widget_show (pixmap);
+	}
+
+	label = gtk_label_new (message);
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+	gtk_widget_show (label);
+
+	while (buttons[i]) {
+	  gnome_dialog_append_button ( GNOME_DIALOG(message_box), 
+				       buttons[i]);
+	  i++;
+	};
+	
+	gnome_dialog_set_close ( GNOME_DIALOG(message_box),
+				 TRUE );
+
+	return GTK_WIDGET (message_box);
+}
+
 /* These two here for backwards compatibility */
 
 void

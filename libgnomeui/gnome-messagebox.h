@@ -48,17 +48,20 @@ struct _GnomeMessageBoxClass
 };
 
 
-guint      gnome_message_box_get_type       (void);
-GtkWidget* gnome_message_box_new (const gchar           *message,
-				  const gchar           *messagebox_type,
-				  ...);
+guint      gnome_message_box_get_type    (void);
+GtkWidget* gnome_message_box_new         (const gchar           *message,
+					  const gchar           *messagebox_type,
+					  ...);
 
+GtkWidget* gnome_message_box_newv        (const gchar           *message,
+					  const gchar           *messagebox_type,
+					  const gchar 	      **buttons);
 /* Deprecated in favor of gtk_window's version. Don't use. */
-void       gnome_message_box_set_modal      (GnomeMessageBox *messagebox);
+void       gnome_message_box_set_modal   (GnomeMessageBox *messagebox);
 
 /* Deprecated in favor of gnome_dialog_ variant. Don't use. */
-void       gnome_message_box_set_default    (GnomeMessageBox *messagebox,
-					     gint            button);
+void       gnome_message_box_set_default (GnomeMessageBox *messagebox,
+					  gint            button);
 
 END_GNOME_DECLS
 
