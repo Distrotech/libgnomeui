@@ -1,3 +1,10 @@
+1998-12-16  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock-item.c (gnome_dock_item_detach): Set the "transient
+	for" hint properly.
+        (gnome_dock_item_map_event): Do the `dock_item_detach()' hack
+ 	only if we are actually floating.
+
 1998-12-16  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-dock-item.c (gnome_dock_item_realize): set transient for

@@ -321,12 +321,16 @@ gnome_dock_item_map_event (GtkWidget *widget,
     {
       gint x, y;
 
-      /* FIXME: This is an *ugly* hack!  */
-      gdk_window_get_pointer (NULL, &x, &y, NULL);
+      if (dock_item->is_floating)
+        {
+          /* FIXME: This is an *ugly* hack!  */
+          gdk_window_get_pointer (NULL, &x, &y, NULL);
 
-      gnome_dock_item_detach (dock_item,
-                              x - dock_item->dragoff_x,
-                              y - dock_item->dragoff_y);
+          gnome_dock_item_detach (dock_item,
+                                  x - dock_item->dragoff_x,
+                                  y - dock_item->dragoff_y);
+        }
+
       gnome_dock_item_grab_pointer (dock_item);
     }
 
@@ -1131,6 +1135,9 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
 
   gdk_window_hide (GTK_WIDGET (item)->window);
   gnome_dock_item_draw (GTK_WIDGET (item), NULL);
+
+  gdk_window_set_transient_for (item->float_window,
+                                GTK_WIDGET (item)->parent->window);
 
   return TRUE;
 }
