@@ -1,3 +1,13 @@
+/*
+ * !!! MASTER CAUTION !!!!
+ *
+ * These files have been moved to libbonoboui and renamed to bonobo-dock*.[ch].
+ * We'll provide a compatibility wrapper with #defines in libgnomecompat soon, but
+ * at the moment I don't want to break the build here since libbonoboui doesn't work yet.
+ *
+ * If you do any changes in these files here, your work will be lost !
+ */
+
 /* WARNING ____ IMMATURE API ____ liable to change */
 
 /* gnome-dock.h
