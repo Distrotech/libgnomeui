@@ -39,7 +39,6 @@
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
-#include <libgnome/gnome-file-selector.h>
 #include <libgnomeui/gnome-selector-component.h>
 #include "gnome-macros.h"
 #include "gnome-file-entry.h"
