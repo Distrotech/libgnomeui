@@ -635,8 +635,6 @@ add_uri_handler (GnomeSelector *selector, const gchar *uri, gint position,
     g_return_if_fail (uri != NULL);
     g_return_if_fail (position >= -1);
 
-    g_message (G_STRLOC ": `%s' - %d - %d", uri, list_id, position);
-
     list_ptr = _gnome_selector_get_list_by_id (selector, list_id);
     g_assert (list_ptr != NULL);
 
@@ -690,8 +688,6 @@ get_uri_list_handler (GnomeSelector *selector, guint list_id)
     g_return_val_if_fail (selector != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
 
-    g_message (G_STRLOC ": %d", list_id);
-
     list_ptr = _gnome_selector_get_list_by_id (selector, list_id);
     g_assert (list_ptr != NULL);
 
@@ -710,17 +706,6 @@ browse_clicked_cb (GtkWidget *widget, gpointer data)
 }
 
 static void
-default_clicked_async_cb (GnomeSelector *selector,
-			  GnomeSelectorAsyncHandle *async_handle,
-			  GnomeSelectorAsyncType async_type,
-			  const char *uri, GError *error,
-			  gboolean success, gpointer user_data)
-{
-    g_message (G_STRLOC ": %d - `%s' - %p", success, uri, async_handle);
-    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
-}
-
-static void
 default_clicked_cb (GtkWidget *widget, gpointer data)
 {
     GnomeSelector *selector;
@@ -731,15 +716,10 @@ default_clicked_cb (GtkWidget *widget, gpointer data)
 
     selector = GNOME_SELECTOR (data);
 
-    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
     list = gnome_selector_get_uri_list (selector, GNOME_SELECTOR_LIST_DEFAULT);
-    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
     gnome_selector_clear (selector, GNOME_SELECTOR_LIST_PRIMARY);
-    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
     gnome_selector_add_uri_list (selector, NULL, list, 0,
-				 GNOME_SELECTOR_LIST_PRIMARY,
-				 default_clicked_async_cb, NULL);
-    g_message (G_STRLOC ": %p - %d", selector, G_OBJECT (selector)->ref_count);
+				 GNOME_SELECTOR_LIST_PRIMARY, NULL, NULL);
 }
 
 static void
@@ -1701,9 +1681,6 @@ _gnome_selector_async_handle_get (GnomeSelector *selector,
     async_handle->uri = g_strdup (uri);
 
     gtk_object_ref (GTK_OBJECT (async_handle->selector));
-    g_message (G_STRLOC ": ref %p -> %p (%d)", async_handle,
-	       async_handle->selector,
-	       G_OBJECT (async_handle->selector)->ref_count);
 
     selector->_priv->async_ops = g_list_prepend (selector->_priv->async_ops,
 						 async_handle);
@@ -1872,10 +1849,6 @@ gnome_selector_async_handle_unref (GnomeSelectorAsyncHandle *async_handle)
     if (async_handle->refcount <= 0) {
 	if (async_handle->error)
 	    g_error_free (async_handle->error);
-
-	g_message (G_STRLOC ": unref %p -> %p (%d)", async_handle,
-		   async_handle->selector,
-		   G_OBJECT (async_handle->selector)->ref_count);
 
 	gtk_object_unref (GTK_OBJECT (async_handle->selector));
 	g_assert (async_handle->destroyed);
