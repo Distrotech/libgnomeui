@@ -1,8 +1,8 @@
 .deps
 .libs
-*.o
-test-gnome
 test-druid
 test-entry
+test-gnome
+test-iconlist
 Makefile
 Makefile.in

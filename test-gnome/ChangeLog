@@ -1,3 +1,7 @@
+2001-12-13  Darin Adler  <darin@bentspoon.com>
+
+	* .cvsignore: Ignore test-iconlist.
+
 2001-11-30  Anders Carlsson  <andersca@gnu.org>
 
 	* testgnome.c (create_app_helper): Bring back the
