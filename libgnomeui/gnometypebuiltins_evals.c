@@ -93,11 +93,15 @@ static const GtkEnumValue _gnome_mdi_mode_values[] = {
   { GNOME_MDI_REDRAW, "GNOME_MDI_REDRAW", "redraw" },
   { 0, NULL, NULL }
 };
-static const GtkEnumValue _gnome_property_request_values[] = {
-  { GNOME_PROPERTY_READ, "GNOME_PROPERTY_READ", "read" },
-  { GNOME_PROPERTY_WRITE, "GNOME_PROPERTY_WRITE", "write" },
-  { GNOME_PROPERTY_APPLY, "GNOME_PROPERTY_APPLY", "apply" },
-  { GNOME_PROPERTY_SETUP, "GNOME_PROPERTY_SETUP", "setup" },
+static const GtkEnumValue _gnome_property_action_values[] = {
+  { GNOME_PROPERTY_ACTION_APPLY, "GNOME_PROPERTY_ACTION_APPLY", "apply" },
+  { GNOME_PROPERTY_ACTION_UPDATE, "GNOME_PROPERTY_ACTION_UPDATE", "update" },
+  { GNOME_PROPERTY_ACTION_LOAD, "GNOME_PROPERTY_ACTION_LOAD", "load" },
+  { GNOME_PROPERTY_ACTION_SAVE, "GNOME_PROPERTY_ACTION_SAVE", "save" },
+  { GNOME_PROPERTY_ACTION_LOAD_TEMP, "GNOME_PROPERTY_ACTION_LOAD_TEMP", "load-temp" },
+  { GNOME_PROPERTY_ACTION_SAVE_TEMP, "GNOME_PROPERTY_ACTION_SAVE_TEMP", "save-temp" },
+  { GNOME_PROPERTY_ACTION_DISCARD_TEMP, "GNOME_PROPERTY_ACTION_DISCARD_TEMP", "discard-temp" },
+  { GNOME_PROPERTY_ACTION_CHANGED, "GNOME_PROPERTY_ACTION_CHANGED", "changed" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_stock_pixmap_type_values[] = {

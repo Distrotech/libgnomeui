@@ -534,7 +534,6 @@ gnome_about_new (const gchar	*title,
 	g_return_val_if_fail (copyright != NULL, NULL);
 	g_return_val_if_fail (authors != NULL, NULL);
 	g_return_val_if_fail (comments != NULL, NULL);
-	g_return_val_if_fail (logo != NULL, NULL);
 	
 	about = gtk_type_new (gnome_about_get_type ());
 

@@ -98,11 +98,15 @@
 
 ; enumerations from "gnome-properties.h"
 
-(define-enum GnomePropertyRequest
-   (read GNOME_PROPERTY_READ)
-   (write GNOME_PROPERTY_WRITE)
-   (apply GNOME_PROPERTY_APPLY)
-   (setup GNOME_PROPERTY_SETUP))
+(define-enum GnomePropertyAction
+   (apply GNOME_PROPERTY_ACTION_APPLY)
+   (update GNOME_PROPERTY_ACTION_UPDATE)
+   (load GNOME_PROPERTY_ACTION_LOAD)
+   (save GNOME_PROPERTY_ACTION_SAVE)
+   (load-temp GNOME_PROPERTY_ACTION_LOAD_TEMP)
+   (save-temp GNOME_PROPERTY_ACTION_SAVE_TEMP)
+   (discard-temp GNOME_PROPERTY_ACTION_DISCARD_TEMP)
+   (changed GNOME_PROPERTY_ACTION_CHANGED))
 
 ; enumerations from "gnome-stock.h"
 
