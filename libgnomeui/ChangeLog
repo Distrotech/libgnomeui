@@ -1,3 +1,30 @@
+1998-09-29  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi-session.[ch]: New files.
+	(GnomeMDIChildCreate): New typedef. This is a pointer to a function
+	which parses the config string and creates a new GnomeMDIChild.
+	(gnome_mdi_save_state): Call this function when saving state with
+	the GnomeMDI object and the name of the config section to use.
+	(gnome_mdi_restore_state): Call this function with the GnomeMDI
+	object, the name of the config section and a (GnomeMDIChildCreate)
+	function pointer.
+
+	* gnome-mdi.c (gnome_mdi_add_toplevel_view): New function. Same as
+	`gnome_mdi_add_view', but when using GNOME_MDI_NOTEBOOK we add the
+	view to a newly created toplevel window.
+	* gnome-mdi.h (gnome_mdi_add_toplevel_view): Added prototype.
+
+	* gnome-mdi-child.c: Added new signal `get_config_string'. This
+	should be used in subclasses to return a config string representing
+	the object which can be used to recreate it when restarting from
+	the session manager.
+	* gnome-mdi-child.h (GnomeMDIChildClass): Added new signal handler
+	function `get_config_string'.
+
+	* libgnomeui.h: Include `gnome-mdi-session.h'.
+	* Makefile.am (libgnomeui_la_SOURCES): Added `gnome-mdi-session.c'.
+	(libgnomeuiinclude_HEADERS): Added `gnome-mdi-session.h'.
+
 1998-09-29  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c: Oops, fix a couple screwups in the last commit.

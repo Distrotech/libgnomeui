@@ -61,6 +61,7 @@
 #include "libgnomeui/gnome-lamp.h"
 #include "libgnomeui/gnome-mdi.h"
 #include "libgnomeui/gnome-mdi-child.h"
+#include "libgnomeui/gnome-mdi-session.h"
 #include "libgnomeui/gnometypebuiltins.h"
 #include "libgnomeui/gnome-winhints.h"
 

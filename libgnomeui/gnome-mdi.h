@@ -144,6 +144,7 @@ void          gnome_mdi_set_child_list_path (GnomeMDI *, gchar *);
 
 /* manipulating views */
 gint          gnome_mdi_add_view            (GnomeMDI *, GnomeMDIChild *);
+gint          gnome_mdi_add_toplevel_view   (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
 
 GtkWidget     *gnome_mdi_active_view        (GnomeMDI *);

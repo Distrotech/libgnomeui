@@ -39,6 +39,7 @@ struct _GnomeMDIChildClass
 
   GtkWidget * (*create_view)(GnomeMDIChild *); 
   GList     * (*create_menus)(GnomeMDIChild *, GtkWidget *); 
+  gchar     * (*get_config_string)(GnomeMDIChild *);
 };
 
 guint         gnome_mdi_child_get_type         (void);
