@@ -30,6 +30,9 @@
  * Add sanity checking to all parameters of API functions
  */
 
+#include "config.h"
+#include "gnome-macros.h"
+
 #include <glib.h>
 #include <ctype.h>
 #include <libgnome/gnome-defs.h>
@@ -196,12 +199,12 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
 
 	g_object_class_install_param (gobject_class,
 				      PARAM_TOPLEVEL,
-				      g_param_spec_enum ("toplevel",
-							 _("Toplevel"),
-							 _("The toplevel widget"),
-							 GTK_TYPE_WIDGET,
-							 (G_PARAM_READABLE |
-							  G_PARAM_WRITABLE)));
+				      g_param_spec_object ("toplevel",
+							   _("Toplevel"),
+							   _("The toplevel widget"),
+							   GTK_TYPE_WIDGET,
+							   (G_PARAM_READABLE |
+							    G_PARAM_WRITABLE)));
 }
 
 static void
@@ -291,7 +294,7 @@ gnome_help_view_set_param (GObject *object,
 	static GnomeHelpViewStyle style = GNOME_HELP_BROWSER;
 	static GnomeHelpViewStylePriority priority = G_PRIORITY_LOW;
 
-	GnomeHelpView *help_view = (GnomeHelpView *)obj;
+	GnomeHelpView *help_view = (GnomeHelpView *)object;
 
 	switch(param_id) {
 	case PARAM_APP_STYLE:
@@ -308,7 +311,7 @@ gnome_help_view_set_param (GObject *object,
 		break;
 	case PARAM_TOPLEVEL:
 		gnome_help_view_set_toplevel (help_view,
-					      g_value_get_object (value));
+					      GTK_WIDGET (g_value_get_object (value)));
 		break;
 	}
 
@@ -330,7 +333,7 @@ gnome_help_view_get_param (GObject *object,
 			   GParamSpec * pspec,
 			   const gchar *trailer)
 {
-	GnomeHelpView *help_view = GNOME_HELP_VIEW(obj);
+	GnomeHelpView *help_view = GNOME_HELP_VIEW (object);
 
 	switch(param_id) {
 	case PARAM_APP_STYLE:
@@ -343,7 +346,8 @@ gnome_help_view_get_param (GObject *object,
 		g_value_set_enum (value, help_view->_priv->orientation);
 		break;
 	case PARAM_TOPLEVEL:
-		g_value_set_object (value, help_view->_priv->toplevel);
+		/* Don't use G_OBJECT cast as it could be null */
+		g_value_set_object (value, (GObject *)help_view->_priv->toplevel);
 		break;
 	}
 }
