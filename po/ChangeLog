@@ -1,0 +1,6 @@
+2001-04-21  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* no.po: Added Norwegian (bokmål) translation.
+	* nn.po: Added Norwegian (nynorsk) translation.
+	* POTFILES.in: Populated.
+	
