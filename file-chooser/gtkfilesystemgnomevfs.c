@@ -1266,21 +1266,24 @@ get_vfs_info (GtkFileSystem     *file_system,
   canonical_uri = make_uri_canonical (parent_uri);
   folder_vfs = g_hash_table_lookup (system_vfs->folders, canonical_uri);
   g_free (canonical_uri);
+  info = NULL;
   if (folder_vfs &&
       (folder_vfs->types & types) == types)
     {
       info = lookup_vfs_info_in_folder (GTK_FILE_FOLDER (folder_vfs),
 					path,
 					NULL);
-      gnome_vfs_file_info_ref (info);
+      if (info)
+	gnome_vfs_file_info_ref (info);
     }
-  else
+  
+  if (info == NULL)
     {
       info = gnome_vfs_file_info_new ();
       uri = gtk_file_path_get_string (path);
       gnome_vfs_get_file_info (uri, info, get_options (types));
     }
-
+  
   gtk_file_path_free (parent_path);
   
   return info;
@@ -1776,9 +1779,11 @@ lookup_vfs_info_in_folder (GtkFileFolder     *folder,
 	}
       
       gnome_vfs_file_info_unref (vfs_info);
+
+      return child->info;
     }
   
-  return child->info;
+  return NULL;
 }
 static GtkFileInfo *
 gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
