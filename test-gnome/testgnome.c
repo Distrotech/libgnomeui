@@ -1000,7 +1000,8 @@ main (int argc, char **argv)
 	int i;
 
 	
-	gnome_program_init ("testGNOME", VERSION, &libgnomeui_module_info,
+	gnome_program_init ("testGNOME", VERSION,
+			    LIBGNOMEUI_MODULE,
 			    argc, argv, NULL);
 
 	app = create_newwin (FALSE, "testGNOME", "testGNOME");
