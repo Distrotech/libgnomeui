@@ -9,6 +9,7 @@
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-help.h"
+#include "libgnome/gnome-i18n.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-pixmap.h"
@@ -71,10 +72,10 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	    else if(menuinfo[i].pixmap_type == GNOME_APP_PIXMAP_STOCK)
 	      menuinfo[i].widget =
 		gnome_stock_menu_item(menuinfo[i].pixmap_info,
-				      menuinfo[i].label);
+				      N_(menuinfo[i].label));
 	    else
 	      menuinfo[i].widget =
-		gtk_menu_item_new_with_label(menuinfo[i].label);
+		gtk_menu_item_new_with_label(N_(menuinfo[i].label));
 
 	    gtk_widget_show(menuinfo[i].widget);
 	    gtk_menu_shell_append(GTK_MENU_SHELL(parent_widget),
@@ -108,6 +109,7 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	  break;
 	}
     }
+  menuinfo[i].widget = parent_widget;
 }
 
 static void
@@ -237,7 +239,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 			      UIBuilderData uidata)
 {
   int i;
-  GtkWidget *pmap, *w;
+  GtkWidget *pmap;
 	
   if(!GTK_WIDGET(app)->window)
     gtk_widget_realize(GTK_WIDGET(app));
@@ -270,8 +272,8 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 
 	    tbinfo[i].widget =
 	      gtk_toolbar_append_item(GTK_TOOLBAR(parent_widget),
-				      tbinfo[i].label,
-				      tbinfo[i].hint,
+				      N_(tbinfo[i].label),
+				      N_(tbinfo[i].hint),
 				      pmap,
 				      NULL, NULL);
 	    gnome_app_do_ui_accelerator_setup(app,
@@ -294,6 +296,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 	  break;
 	}
     }
+  tbinfo[i].widget = parent_widget;
 }
 
 void gnome_app_create_toolbar(GnomeApp *app,
