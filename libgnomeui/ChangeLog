@@ -7,8 +7,8 @@
 
 Tue Jan 18 00:56:46 2000  George Lebl <jirka@5z.com>
 
-	* gnome-pixmap.[ch]: fixup the pixmap entry to actually not even
-	  create the preview box if the do_preview is false.  This makes
+	* gnome-pixmap-entry.[ch]: fixup the pixmap entry to actually not
+	  even create the preview box if the do_preview is false.  This makes
 	  it not check the file for being a real image if the preview
 	  is off.
 
