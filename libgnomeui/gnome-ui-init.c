@@ -71,8 +71,8 @@ gnome_add_gtk_arg_callback(poptContext con,
 			   enum poptCallbackReason reason,
 			   const struct poptOption * opt,
 			   const char * arg, void * data);
-static void gtk_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info);
-static void gtk_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info);
+static void gtk_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
+static void gtk_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 
 static struct poptOption gtk_options [] = {
         { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
@@ -148,7 +148,7 @@ struct {
 } gnome_gtk_init_info = {0};
 
 static void
-gtk_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
+gtk_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
 #if 0
 	if (g_getenv ("GTK_DEBUG_OBJECTS"))
@@ -159,7 +159,7 @@ gtk_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
 }
 
 static void
-gtk_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
+gtk_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
         int i;
         int final_argc;
@@ -226,8 +226,8 @@ static void libgnomeui_arg_callback(poptContext con,
                                     enum poptCallbackReason reason,
                                     const struct poptOption * opt,
                                     const char * arg, void * data);
-static void libgnomeui_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info);
-static void libgnomeui_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info);
+static void libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
+static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_rc_parse (gchar *command);
 static GdkPixmap *libgnomeui_pixbuf_image_loader(GdkWindow   *window,
                                                  GdkColormap *colormap,
@@ -263,7 +263,7 @@ GnomeModuleInfo libgnomeui_module_info = {
 };
 
 static void
-libgnomeui_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
+libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
         gboolean ctype_set;
         char *ctype, *old_ctype = NULL;
@@ -308,7 +308,7 @@ libgnomeui_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
 }
 
 static void
-libgnomeui_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
+libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
         gnome_type_init();
         gtk_rc_set_image_loader(libgnomeui_pixbuf_image_loader);

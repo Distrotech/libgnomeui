@@ -63,6 +63,8 @@
 #include "gnome-stock.h"
 #include "gtkpixmapmenuitem.h"
 
+extern const gchar *gnome_user_accels_dir;
+
 /* keys used for get/set_data */
 const char *gnome_app_helper_gconf_client = "gnome-app-helper-gconf-client";
 const char *gnome_app_helper_menu_hint = "gnome-app-helper:menu-hint";

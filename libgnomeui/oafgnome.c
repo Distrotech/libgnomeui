@@ -44,9 +44,9 @@
 #include <libgnomeui/gnome-dialog.h>
 
 static void og_pre_args_parse(GnomeProgram *app,
-			      const GnomeModuleInfo *mod_info);
+			      GnomeModuleInfo *mod_info);
 static void og_post_args_parse(GnomeProgram *app,
-			       const GnomeModuleInfo *mod_info);
+			       GnomeModuleInfo *mod_info);
 static OAFRegistrationLocation rootwin_regloc;
 static CORBA_Object rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
 				   int ior_fd, CORBA_Environment *ev);
@@ -87,7 +87,7 @@ GnomeModuleInfo liboafgnome_module_info = {
 };
 
 static void
-og_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
+og_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
   int dumb_argc = 1;
   char *dumb_argv[] = {NULL};
@@ -96,7 +96,7 @@ og_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
 }
 
 static void
-og_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
+og_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
   oaf_registration_location_add(&rootwin_regloc, -100, NULL);
   oaf_registration_activator_add(rcmd_activator, 100);

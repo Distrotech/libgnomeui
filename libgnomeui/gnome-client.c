@@ -821,8 +821,8 @@ static void client_parse_func (poptContext ctx,
 			       enum poptCallbackReason reason,
 			       const struct poptOption *opt,
 			       const char *arg, void *data);
-static void gnome_client_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info);
-static void gnome_client_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info);
+static void gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
+static void gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 
 /* Command-line arguments understood by this module.  */
 enum { ARG_SM_CLIENT_ID=1, ARG_SM_CONFIG_PREFIX, ARG_SM_DISABLE };
@@ -888,7 +888,7 @@ client_parse_func (poptContext ctx,
 
 
 static void
-gnome_client_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
+gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
   int i;
   char *cwd;
@@ -938,7 +938,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
 }
 
 static void
-gnome_client_post_args_parse(GnomeProgram *app, const GnomeModuleInfo *mod_info)
+gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
   gboolean do_connect = TRUE;
   GValue value = { 0, };
