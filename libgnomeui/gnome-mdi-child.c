@@ -163,17 +163,17 @@ GtkWidget *gnome_mdi_child_add_view (GnomeMDIChild *mdi_child)
 /**
  * gnome_mdi_child_remove_view:
  * @mdi_child: A pointer to a GnomeMDIChild object.
- * @view: View to be destroyed.
+ * @view: View to be removed.
  * 
  * Description:
  * Removes view @view from the list of @mdi_child's views and
- * destroys it.
+ * unrefs it.
  **/
 void gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view)
 {
 	mdi_child->views = g_list_remove(mdi_child->views, view);
 
-	gtk_widget_destroy(view);
+	gtk_widget_unref(view);
 }
 
 /**

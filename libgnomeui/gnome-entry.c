@@ -156,8 +156,9 @@ gnome_entry_destroy (GtkObject *object)
 	entry = gnome_entry_gtk_entry (gentry);
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 
-	if (strcmp (text, "") != 0)
+	if (gentry->changed && (strcmp (text, "") != 0)) {
 		gnome_entry_prepend_history (gentry, TRUE, text);
+	}
 
 	gnome_entry_save_history (gentry);
 
@@ -279,8 +280,6 @@ set_combo_items (GnomeEntry *gentry)
 
 	gtklist = GTK_LIST (GTK_COMBO (gentry)->list);
 
-	gtk_container_block_resize (GTK_CONTAINER (gtklist));
-
 	/* We save the contents of the entry because when we insert
 	 * items on the combo list, the contents of the entry will get
 	 * changed.
@@ -306,8 +305,6 @@ set_combo_items (GnomeEntry *gentry)
 
 	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
 	g_free (tmp);
-
-	gtk_container_unblock_resize (GTK_CONTAINER (gtklist));
 }
 
 void

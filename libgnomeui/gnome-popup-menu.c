@@ -243,7 +243,6 @@ gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func,
 
 	g_return_val_if_fail (popup != NULL, -1);
 	g_return_val_if_fail (GTK_IS_WIDGET (popup), -1);
-	g_return_val_if_fail (event != NULL, -1);
 
 	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_do_popup_user_data", user_data);
 

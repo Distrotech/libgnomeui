@@ -261,6 +261,7 @@ gnome_file_entry_new (char *history_id, char *browse_dialog_title)
 	fentry = gtk_type_new (gnome_file_entry_get_type ());
 
 	gnome_entry_set_history_id (GNOME_ENTRY (fentry->gentry), history_id);
+	gnome_entry_load_history (GNOME_ENTRY(fentry->gentry));
 	gnome_file_entry_set_title (fentry, browse_dialog_title);
 
 	return GTK_WIDGET (fentry);
