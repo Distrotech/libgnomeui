@@ -827,7 +827,10 @@ stock_button_from_entry (char *type, GnomeStockPixmapEntry *entry)
 	hbox = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox);
 	gtk_container_add(GTK_CONTAINER(button), hbox);
-	label = gtk_label_new(dgettext(PACKAGE, entry->any.label));
+	if (entry->any.label)
+		label = gtk_label_new(dgettext(PACKAGE, entry->any.label));
+	else
+		label = gtk_label_new(dgettext(PACKAGE, type));
 	gtk_widget_show(label);
 	gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
 
