@@ -17,9 +17,33 @@ BEGIN_GNOME_DECLS
 
 /* Global config choices. App-specific choices are handled in GnomeApp. */
 
+typedef struct _GnomePreferences GnomePreferences;
+
+struct _GnomePreferences {
+  GtkButtonBoxStyle dialog_buttons_style;
+  int property_box_buttons_ok : 1;
+  int property_box_buttons_apply : 1;
+  int property_box_buttons_close : 1;
+  int property_box_buttons_help : 1;
+  int statusbar_not_dialog : 1;
+  int statusbar_is_interactive : 1;
+  int toolbar_handlebox : 1;
+  int menubar_handlebox : 1;
+  int toolbar_relief : 1;
+  int dialog_centered : 1;
+  int menus_have_icons : 1;
+  GtkWindowType dialog_type;
+  GtkWindowPosition dialog_position;
+  GnomeMDIMode mdi_mode;
+  GtkPositionType mdi_tab_pos;
+};
+
 /* Load and sync the config file. */
 void gnome_preferences_load(void);
 void gnome_preferences_save(void);
+
+void gnome_preferences_load_custom(GnomePreferences *settings);
+void gnome_preferences_save_custom(GnomePreferences *settings);
 
 /* How buttons are layed out in dialogs */
 GtkButtonBoxStyle gnome_preferences_get_button_layout (void);

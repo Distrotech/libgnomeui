@@ -22,27 +22,6 @@
 #include "libgnome/gnome-config.h"
 #include <string.h>
 
-typedef struct _GnomePreferences GnomePreferences;
-
-struct _GnomePreferences {
-  GtkButtonBoxStyle dialog_buttons_style;
-  int property_box_buttons_ok : 1;
-  int property_box_buttons_apply : 1;
-  int property_box_buttons_close : 1;
-  int property_box_buttons_help : 1;
-  int statusbar_not_dialog : 1;
-  int statusbar_is_interactive : 1;
-  int toolbar_handlebox : 1;
-  int menubar_handlebox : 1;
-  int toolbar_relief : 1;
-  int dialog_centered : 1;
-  int menus_have_icons : 1;
-  GtkWindowType dialog_type;
-  GtkWindowPosition dialog_position;
-  GnomeMDIMode mdi_mode;
-  GtkPositionType mdi_tab_pos;
-};
-
 /* 
  * Variable holds current preferences.  
  */
@@ -184,7 +163,8 @@ enum_from_strings(gint * setme, gchar * findme,
   return retval;
 }
 
-void gnome_preferences_load(void)
+void
+gnome_preferences_load_custom(GnomePreferences *settings)
 {
   /* Probably this function should be rewritten to use the 
    *  _preferences_get functions
@@ -197,7 +177,7 @@ void gnome_preferences_load(void)
   s = gnome_config_get_string(DIALOG_BUTTONS_STYLE_KEY);
 
 
-  if ( ! enum_from_strings((int*) &prefs.dialog_buttons_style, s,
+  if ( ! enum_from_strings((int*) &settings->dialog_buttons_style, s,
 			   dialog_button_styles, NUM_BUTTON_STYLES) ) {
     g_warning("Didn't recognize buttonbox style in libgnomeui config");
   }
@@ -206,7 +186,7 @@ void gnome_preferences_load(void)
   
   s = gnome_config_get_string(DIALOG_TYPE_KEY);
 
-  if ( ! enum_from_strings((int*) &prefs.dialog_type, s,
+  if ( ! enum_from_strings((int*) &settings->dialog_type, s,
 			   dialog_types, NUM_DIALOG_TYPES) ) {
     g_warning("Didn't recognize dialog type in libgnomeui config");
   }
@@ -215,7 +195,7 @@ void gnome_preferences_load(void)
   
   s = gnome_config_get_string(DIALOG_POSITION_KEY);
 
-  if ( ! enum_from_strings((int*) &prefs.dialog_position, s,
+  if ( ! enum_from_strings((int*) &settings->dialog_position, s,
 			   dialog_positions, NUM_DIALOG_POSITIONS) ) {
     g_warning("Didn't recognize dialog position in libgnomeui config");
   }  
@@ -229,35 +209,35 @@ void gnome_preferences_load(void)
 
   b = gnome_config_get_bool_with_default(DIALOG_CENTERED_KEY"=true",
 					 NULL);
-  prefs.dialog_centered = b;
+  settings->dialog_centered = b;
 
   /* This is unused for now */
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_OK_KEY"=true",
 					 NULL);
-  prefs.property_box_buttons_ok = b;
+  settings->property_box_buttons_ok = b;
 
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_APPLY_KEY"=true",
 					 NULL);
-  prefs.property_box_buttons_apply = b;
+  settings->property_box_buttons_apply = b;
 
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_CLOSE_KEY"=true",
 					 NULL);
-  prefs.property_box_buttons_close = b;
+  settings->property_box_buttons_close = b;
 
   b = gnome_config_get_bool_with_default(PROPERTY_BOX_BUTTONS_HELP_KEY"=true",
 					 NULL);
-  prefs.property_box_buttons_help = b;
+  settings->property_box_buttons_help = b;
 
   gnome_config_pop_prefix();
   gnome_config_push_prefix(STATUSBAR);
 
   b = gnome_config_get_bool_with_default(STATUSBAR_DIALOG_KEY"=false",
 					 NULL);
-  prefs.statusbar_not_dialog = b;
+  settings->statusbar_not_dialog = b;
   
   b = gnome_config_get_bool_with_default(STATUSBAR_INTERACTIVE_KEY"=false",
 					 NULL);
-  prefs.statusbar_is_interactive = b;
+  settings->statusbar_is_interactive = b;
 
   gnome_config_pop_prefix();
   gnome_config_push_prefix(APP);
@@ -265,27 +245,27 @@ void gnome_preferences_load(void)
   b = gnome_config_get_bool_with_default(TOOLBAR_HANDLEBOX_KEY"=true",
 					 NULL);
   
-  prefs.toolbar_handlebox = b;
+  settings->toolbar_handlebox = b;
 
   b = gnome_config_get_bool_with_default(MENUBAR_HANDLEBOX_KEY"=true",
 					 NULL);
   
-  prefs.menubar_handlebox = b;
+  settings->menubar_handlebox = b;
 
   b = gnome_config_get_bool_with_default(TOOLBAR_RELIEF_KEY"=true",
 					 NULL);
-  prefs.toolbar_relief = b;
+  settings->toolbar_relief = b;
 
   b = gnome_config_get_bool_with_default (MENUS_HAVE_ICONS_KEY"=true",
 					  NULL);
-  prefs.menus_have_icons = b;
+  settings->menus_have_icons = b;
 
   gnome_config_pop_prefix();
   gnome_config_push_prefix(MDI);
 
   s = gnome_config_get_string(MDI_MODE_KEY);
 
-  if ( ! enum_from_strings((int*) &prefs.mdi_mode, s,
+  if ( ! enum_from_strings((int*) &settings->mdi_mode, s,
 			   mdi_modes, NUM_MDI_MODES) ) {
     g_warning("Didn't recognize MDI mode in libgnomeui config");
   }
@@ -294,7 +274,7 @@ void gnome_preferences_load(void)
   
   s = gnome_config_get_string(MDI_TAB_POS_KEY);
 
-  if ( ! enum_from_strings((int*) &prefs.mdi_tab_pos, s,
+  if ( ! enum_from_strings((int*) &settings->mdi_tab_pos, s,
 			   tab_positions, NUM_TAB_POSITIONS) ) {
     g_warning("Didn't recognize MDI notebook tab position in libgnomeui config");
   }
@@ -304,53 +284,64 @@ void gnome_preferences_load(void)
   gnome_config_pop_prefix();
 }
 
-void gnome_preferences_save(void)
+void
+gnome_preferences_save_custom(GnomePreferences *settings)
 {
   gnome_config_push_prefix(DIALOGS);
   
   gnome_config_set_string(DIALOG_BUTTONS_STYLE_KEY, 
-			  dialog_button_styles[prefs.dialog_buttons_style]);
+			  dialog_button_styles[settings->dialog_buttons_style]);
 
   gnome_config_set_string(DIALOG_TYPE_KEY, 
-			  dialog_types[prefs.dialog_type]);
+			  dialog_types[settings->dialog_type]);
 
   gnome_config_set_string(DIALOG_POSITION_KEY, 
-			  dialog_positions[prefs.dialog_position]);
+			  dialog_positions[settings->dialog_position]);
   
   gnome_config_set_bool  (DIALOG_CENTERED_KEY,
-			  prefs.dialog_centered);
+			  settings->dialog_centered);
 
   gnome_config_pop_prefix();
 
   gnome_config_push_prefix(STATUSBAR);
 
   gnome_config_set_bool(STATUSBAR_DIALOG_KEY,
-			prefs.statusbar_not_dialog);
+			settings->statusbar_not_dialog);
   gnome_config_set_bool(STATUSBAR_INTERACTIVE_KEY,
-			prefs.statusbar_is_interactive);
+			settings->statusbar_is_interactive);
 
 
   gnome_config_pop_prefix();
   gnome_config_push_prefix(APP);
 
   gnome_config_set_bool(TOOLBAR_HANDLEBOX_KEY,
-			prefs.toolbar_handlebox);
+			settings->toolbar_handlebox);
   gnome_config_set_bool(MENUBAR_HANDLEBOX_KEY,
-			prefs.menubar_handlebox);
+			settings->menubar_handlebox);
   gnome_config_set_bool(TOOLBAR_RELIEF_KEY,
-			prefs.toolbar_relief);
+			settings->toolbar_relief);
   gnome_config_set_bool(MENUS_HAVE_ICONS_KEY,
-			prefs.menus_have_icons);
+			settings->menus_have_icons);
 
   gnome_config_pop_prefix();
   gnome_config_push_prefix(MDI);
 
-  gnome_config_set_string(MDI_MODE_KEY, mdi_modes[prefs.mdi_mode]);
-  gnome_config_set_string(MDI_TAB_POS_KEY, tab_positions[prefs.mdi_tab_pos]);
+  gnome_config_set_string(MDI_MODE_KEY, mdi_modes[settings->mdi_mode]);
+  gnome_config_set_string(MDI_TAB_POS_KEY, tab_positions[settings->mdi_tab_pos]);
 
   gnome_config_pop_prefix();
 
   gnome_config_sync();
+}
+
+void gnome_preferences_load(void)
+{
+  gnome_preferences_load_custom(&prefs);
+}
+
+void gnome_preferences_save(void)
+{
+  gnome_preferences_save_custom(&prefs);
 }
 
 GtkButtonBoxStyle gnome_preferences_get_button_layout (void)
