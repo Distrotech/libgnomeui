@@ -247,8 +247,7 @@ libgnomeui_class_init (GnomeProgramClass *klass, const GnomeModuleInfo *mod_info
                 libgnomeui_get_property,
                 libgnomeui_set_property,
                 g_param_spec_boolean (LIBGNOMEUI_PARAM_CRASH_DIALOG, NULL, NULL,
-                                      TRUE, (G_PARAM_READABLE | G_PARAM_WRITABLE |
-                                             G_PARAM_CONSTRUCT_ONLY)));
+                                      TRUE, (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         cdata->display_id = gnome_program_install_property (
                 klass,
                 libgnomeui_get_property,

@@ -1,3 +1,10 @@
+2004-02-03  Jeffrey Stedfast  <fejj@ximian.com>
+
+	* libgnomeui/gnome-ui-init.c (libgnomeui_class_init): Don't make
+	the "show-crash-dialog" property CONSTRUCT_ONLY because it can't
+	be set at construct time because we don't get to parse our args
+	until afterwards.
+
 2004-02-03  Anders Carlsson  <andersca@gnome.org>
 
 	* configure.in: Release 2.5.4
