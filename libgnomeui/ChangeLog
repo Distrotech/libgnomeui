@@ -1,5 +1,10 @@
 2000-12-15  Martin Baulig  <baulig@suse.de>
 
+	* gnome-canvas.c (gnome_canvas_item_class_init): Added "parent"
+	property to the GnomeCanvasItem.
+
+2000-12-15  Martin Baulig  <baulig@suse.de>
+
 	The big "while it is raining outside" cleanup to make it
 	work with the latest glib/gtk+ API:
 

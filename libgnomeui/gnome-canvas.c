@@ -95,6 +95,11 @@ static void group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item);
 
 
 enum {
+	ITEM_PROP_0,
+	ITEM_PROP_PARENT
+};
+
+enum {
 	ITEM_EVENT,
 	ITEM_LAST_SIGNAL
 };
@@ -106,6 +111,17 @@ static void gnome_canvas_request_update (GnomeCanvas *canvas);
 static void gnome_canvas_item_class_init (GnomeCanvasItemClass *class);
 static void gnome_canvas_item_init       (GnomeCanvasItem      *item);
 static void gnome_canvas_item_shutdown   (GObject              *object);
+static void gnome_canvas_item_set_property (GObject               *object,
+					    guint                  param_id,
+					    const GValue          *value,
+					    GParamSpec            *pspec,
+					    const gchar           *trailer);
+static void gnome_canvas_item_get_property (GObject               *object,
+					    guint                  param_id,
+					    GValue                *value,
+					    GParamSpec            *pspec,
+					    const gchar           *trailer);
+
 
 static void gnome_canvas_item_realize   (GnomeCanvasItem *item);
 static void gnome_canvas_item_unrealize (GnomeCanvasItem *item);
@@ -163,6 +179,15 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 	gobject_class = (GObjectClass *) class;
 
 	item_parent_class = gtk_type_class (gtk_object_get_type ());
+
+	gobject_class->set_property = gnome_canvas_item_set_property;
+	gobject_class->get_property = gnome_canvas_item_get_property;
+
+	g_object_class_install_property
+		(gobject_class, ITEM_PROP_PARENT,
+		 g_param_spec_object ("parent", NULL, NULL,
+				      GNOME_TYPE_CANVAS_ITEM,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 
 	item_signals[ITEM_EVENT] =
 		gtk_signal_new ("event",
@@ -240,6 +265,60 @@ item_post_create_setup (GnomeCanvasItem *item)
 
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	item->canvas->need_repick = TRUE;
+}
+
+/* Set_property handler for canvas items */
+static void
+gnome_canvas_item_set_property (GObject *gobject, guint param_id,
+				const GValue *value, GParamSpec *pspec,
+				const gchar *trailer)
+{
+	GnomeCanvasItem *item;
+
+	g_return_if_fail (gobject != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (gobject));
+
+	item = GNOME_CANVAS_ITEM (gobject);
+
+	switch (param_id) {
+	case ITEM_PROP_PARENT:
+	    if (item->parent != NULL)
+		g_warning ("Cannot set `parent' argument after item has "
+			   "already been constructed.");
+	    else {
+		item->parent = GNOME_CANVAS_ITEM (g_value_get_object (value));
+		item->canvas = item->parent->canvas;
+		item_post_create_setup (item);
+	    }
+	    break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, param_id, pspec);
+		break;
+	}
+}
+
+/* Get_property handler for canvas items */
+static void
+gnome_canvas_item_get_property (GObject *gobject, guint param_id,
+				GValue *value, GParamSpec *pspec,
+				const gchar *trailer)
+{
+	GnomeCanvasItem *item;
+
+	g_return_if_fail (gobject != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (gobject));
+
+	item = GNOME_CANVAS_ITEM (gobject);
+
+	switch (param_id) {
+	case ITEM_PROP_PARENT:
+		g_value_set_object (value, G_OBJECT (item->parent));
+		break;
+
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, param_id, pspec);
+		break;
+	}
 }
 
 /**
@@ -1530,6 +1609,7 @@ gnome_canvas_group_set_property (GObject *gobject, guint param_id,
 		break;
 
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, param_id, pspec);
 		break;
 	}
 
@@ -1583,6 +1663,9 @@ gnome_canvas_group_get_property (GObject *gobject, guint param_id,
 #endif
 		break;
 
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, param_id, pspec);
+		break;
 	}
 }
 
