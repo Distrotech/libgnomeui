@@ -42,7 +42,7 @@ static const gchar *authors[] = {
 	"Havoc Pennington",
 	"Miguel de Icaza",
 	"Jonathan Blandford",
-	"Carlos Perelló Marín",
+	"Carlos PerellÃ³ MarÃ­n",
 	"Martin Baulig",
 	NULL
 };

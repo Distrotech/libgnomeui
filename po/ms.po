@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-01-12 17:12+0800\n"
+"POT-Creation-Date: 2002-01-16 01:22+0100\n"
 "PO-Revision-Date: 2002-01-12 17:09+0800\n"
 "Last-Translator: Khairulanuar Abd Majid <khairul@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -13,204 +13,107 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. Authors
+#: libgnomeui/gnome-about.c:95
+msgid "Author"
+msgstr "Penulis"
+
+#: libgnomeui/gnome-about.c:95 libgnomeui/gnome-about.c:271
+msgid "Authors"
+msgstr "Penulis"
+
+# libgnomeui/gnome-dentry-edit.c:374
+#: libgnomeui/gnome-about.c:119
+msgid "Documenter"
+msgstr "Juru Dokumentasi"
+
+# libgnomeui/gnome-dentry-edit.c:374
+#: libgnomeui/gnome-about.c:119 libgnomeui/gnome-about.c:282
+msgid "Documenters"
+msgstr "Juru dokumentasi"
+
+#: libgnomeui/gnome-about.c:147 libgnomeui/gnome-about.c:294
+msgid "Translator credits"
+msgstr "Kredit penterjemah"
+
 # libgnomeui/gnome-app-util.c:687
-#: libgnomeui/gnome-about.c:181
+#: libgnomeui/gnome-about.c:241
 msgid "Program name"
 msgstr "Nama program"
 
 # libgnomeui/gnome-app-helper.c:160
-#: libgnomeui/gnome-about.c:182
+#: libgnomeui/gnome-about.c:242
 msgid "The name of the program"
 msgstr "Nama program itu"
 
 # libgnomeui/gnome-app-util.c:687
-#: libgnomeui/gnome-about.c:188
+#: libgnomeui/gnome-about.c:249
 msgid "Program version"
 msgstr "Versi program"
 
 # libgnomeui/gnome-app-helper.c:160
-#: libgnomeui/gnome-about.c:189
+#: libgnomeui/gnome-about.c:250
 msgid "The version of the program"
 msgstr "Versi program itu"
 
-#: libgnomeui/gnome-about.c:195
+#: libgnomeui/gnome-about.c:256
 msgid "Copyright string"
 msgstr "Hakcipta rentetan"
 
-#: libgnomeui/gnome-about.c:196
+#: libgnomeui/gnome-about.c:257
 msgid "Copyright information for the program"
 msgstr "Maklumat hakcipta program"
 
 # libgnomeui/gnome-dentry-edit.c:389
-#: libgnomeui/gnome-about.c:202
+#: libgnomeui/gnome-about.c:264
 msgid "Comments string"
 msgstr "Rentetan komen"
 
 # libgnomeui/gnome-app-helper.c:160
-#: libgnomeui/gnome-about.c:203
+#: libgnomeui/gnome-about.c:265
 msgid "Comments about the program"
 msgstr "Komen perihal program"
 
-#: libgnomeui/gnome-about.c:210 libgnomeui/gnome-about.c:664
-msgid "Authors"
-msgstr "Penulis"
-
-#: libgnomeui/gnome-about.c:211
+#: libgnomeui/gnome-about.c:272
 msgid "List of authors of the programs"
 msgstr "Senarai penulis program"
 
-#: libgnomeui/gnome-about.c:213
+#: libgnomeui/gnome-about.c:274
 msgid "Author entry"
 msgstr "Kemasukan Penulis"
 
-#: libgnomeui/gnome-about.c:214
+#: libgnomeui/gnome-about.c:275
 msgid "A single author entry"
 msgstr "Kemasukan penulis tunggal"
 
-#: libgnomeui/gnome-about.c:221 libgnomeui/gnome-about.c:667
-msgid "Translator credits"
-msgstr "Kredit penterjemah"
+#: libgnomeui/gnome-about.c:283
+msgid "List of people documenting the program"
+msgstr "Senarai penyumbang dokumentasi program"
 
-#: libgnomeui/gnome-about.c:222
+# libgnomeui/gnome-dentry-edit.c:374
+#: libgnomeui/gnome-about.c:285
+msgid "Documenter entry"
+msgstr "Kemasukan Juru dokumentasi"
+
+#: libgnomeui/gnome-about.c:286
+msgid "A single documenter entry"
+msgstr "Kemasukan juru dokumentasi tunggal"
+
+#: libgnomeui/gnome-about.c:295
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Kredit kepada penterjemah. Rentetan ini akan ditanda sebagai boleh diterjemah"
 
-# libgnomeui/gnome-dentry-edit.c:374
-#: libgnomeui/gnome-about.c:229 libgnomeui/gnome-about.c:670
-msgid "Documenters"
-msgstr "Juru dokumentasi"
-
-#: libgnomeui/gnome-about.c:230
-msgid "List of people documenting the program"
-msgstr "Senarai penyumbang dokumentasi program"
-
-# libgnomeui/gnome-dentry-edit.c:374
-#: libgnomeui/gnome-about.c:232
-msgid "Documenter entry"
-msgstr "Kemasukan Juru dokumentasi"
-
-#: libgnomeui/gnome-about.c:233
-msgid "A single documenter entry"
-msgstr "Kemasukan juru dokumentasi tunggal"
-
-#: libgnomeui/gnome-about.c:240
-msgid "Background"
-msgstr "Latar belakang"
-
-#: libgnomeui/gnome-about.c:241
-msgid "The background pixbuf to use"
-msgstr "pixbuf latar belakang untuk digunakan"
-
-#: libgnomeui/gnome-about.c:247
-msgid "Background start opacity"
-msgstr "Opacity permulaan latar belakang"
-
-#: libgnomeui/gnome-about.c:248
-msgid "Opacity at the start of the background"
-msgstr "Opacity pada permulaan latar belakang"
-
-#: libgnomeui/gnome-about.c:257
-msgid "Background end opacity"
-msgstr "Opacity penghujung latar belakang"
-
-#: libgnomeui/gnome-about.c:258
-msgid "Opacity at the end of the background"
-msgstr "Opacity pada penghujung latar belakang"
-
-#: libgnomeui/gnome-about.c:267
-msgid "Background start position"
-msgstr "Posisi permulaan latar belakang"
-
-#: libgnomeui/gnome-about.c:268
-msgid "Position at the start of the background"
-msgstr "Posisi pada permulaan latar belakang"
-
-#: libgnomeui/gnome-about.c:276
-msgid "Background end position"
-msgstr "Posisi penghujung latar belakang"
-
-#: libgnomeui/gnome-about.c:277
-msgid "Position at the end of the background"
-msgstr "Posisi pada penghujung latar belakang"
-
-#: libgnomeui/gnome-about.c:285 libgnomeui/gnome-druid-page-standard.c:141
+#: libgnomeui/gnome-about.c:302 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: libgnomeui/gnome-about.c:286
+#: libgnomeui/gnome-about.c:303
 msgid "A logo for the about box"
 msgstr "Logo pada kekotak perihal"
 
-#: libgnomeui/gnome-about.c:292
-msgid "Logo top padding"
-msgstr "padding logo atas"
-
-#: libgnomeui/gnome-about.c:293
-msgid "How far the logo is from the top"
-msgstr "Berapa jauh logo daripada atas"
-
-#: libgnomeui/gnome-about.c:302
-msgid "Logo right padding"
-msgstr "Padding logo kanan"
-
-#: libgnomeui/gnome-about.c:303
-msgid "How far the logo is from the right"
-msgstr "Berapa jauh logo daripada kanan"
-
-#: libgnomeui/gnome-about.c:312
-msgid "Header font"
-msgstr "Pengepala font"
-
-#: libgnomeui/gnome-about.c:313
-msgid "Header font description as a string"
-msgstr "Huraian pengepala font sebagai rentetan"
-
-# libgnomeui/winhints_demo.c:411
-#: libgnomeui/gnome-about.c:318
-msgid "Copyright font"
-msgstr "Hakcipta font"
-
-#: libgnomeui/gnome-about.c:319
-msgid "Copyright font description as a string"
-msgstr "Huraian hakcipta font sebagai rentetan"
-
-# libgnomeui/gnome-dentry-edit.c:389
-#: libgnomeui/gnome-about.c:324
-msgid "Comments font"
-msgstr "Komen font"
-
-#: libgnomeui/gnome-about.c:325
-msgid "Comments font description as a string"
-msgstr "Komen huraian font sebagai rentetan"
-
-#: libgnomeui/gnome-about.c:330
-msgid "Name header font"
-msgstr "Nama pengepala font"
-
-#: libgnomeui/gnome-about.c:331
-msgid "Name header font description as a string"
-msgstr "Namakan huraian pengepala font sebagai rentetan"
-
-#: libgnomeui/gnome-about.c:336
-msgid "Name list font"
-msgstr "Nama senarai font"
-
-#: libgnomeui/gnome-about.c:337
-msgid "Name list font description as a string"
-msgstr "Nama senarai huraian font sebagai rentetan"
-
-#: libgnomeui/gnome-about.c:664
-msgid "Author"
-msgstr "Penulis"
-
-# libgnomeui/gnome-dentry-edit.c:374
-#: libgnomeui/gnome-about.c:670
-msgid "Documenter"
-msgstr "Juru Dokumentasi"
-
-#: libgnomeui/gnome-about.c:817
+#: libgnomeui/gnome-about.c:366
 #, c-format
 msgid "About %s"
 msgstr "Perihal %s"
@@ -337,119 +240,111 @@ msgstr "Kalendar"
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date dianaktirikan, guna gnome_date_edit_get_time"
 
-#: libgnomeui/gnome-druid-page-edge.c:342
-msgid "Helvetical Bold 18"
-msgstr "Helvetical Bold 18"
-
-#: libgnomeui/gnome-druid-page-edge.c:353
-msgid "Helvetical Medium 12"
-msgstr "Helvetical Medium 12"
-
 # libgnomeui/gnome-app-helper.c:95 libgnomeui/stock_demo.c:184
-#: libgnomeui/gnome-druid-page-standard.c:133
+#: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:156
 msgid "Title"
 msgstr "Tajuk"
 
-#: libgnomeui/gnome-druid-page-standard.c:134
+#: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "Tajuk druid"
 
 # libgnomeui/gnome-pixmap-entry.c:106 libgnomeui/gnome-pixmap-entry.c:387
-#: libgnomeui/gnome-druid-page-standard.c:142
+#: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "Imej logo"
 
-#: libgnomeui/gnome-druid-page-standard.c:149
+#: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr "Watermark atas"
 
-#: libgnomeui/gnome-druid-page-standard.c:150
+#: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr "Imej watermark untuk atas"
 
-#: libgnomeui/gnome-druid-page-standard.c:157
+#: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr "Tajuk Latar depan"
 
-#: libgnomeui/gnome-druid-page-standard.c:158
+#: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr "Warna latar depan tajuk"
 
-#: libgnomeui/gnome-druid-page-standard.c:165
+#: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr "Warna Latar Depan Tajuk"
 
-#: libgnomeui/gnome-druid-page-standard.c:166
+#: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr "Warna latar depan tajuk sebagai GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:173
+#: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr "Tetapan warna Latar depan Tajuk"
 
-#: libgnomeui/gnome-druid-page-standard.c:174
+#: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr "Warna Latar depan Tajuk ditetapkan"
 
-#: libgnomeui/gnome-druid-page-standard.c:181
-#: libgnomeui/gnome-druid-page-standard.c:189
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr "Warna Latar Belakang"
 
-#: libgnomeui/gnome-druid-page-standard.c:182
+#: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr "Warna Latar Belakang"
 
-#: libgnomeui/gnome-druid-page-standard.c:190
+#: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr "Warna Latar Belakang sebagai GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:197
+#: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr "Tetapan warna latar belakang"
 
-#: libgnomeui/gnome-druid-page-standard.c:198
+#: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr "Warna latar belakang ditetapkan"
 
-#: libgnomeui/gnome-druid-page-standard.c:205
-#: libgnomeui/gnome-druid-page-standard.c:213
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
 msgstr "Warna Logo Latar Belakang"
 
-#: libgnomeui/gnome-druid-page-standard.c:206
+#: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
 msgstr "Warna Logo Latar Belakang"
 
-#: libgnomeui/gnome-druid-page-standard.c:214
+#: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
 msgstr "Warna Logo Latar Belakang sebagai GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:221
+#: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
 msgstr "Tetapan Warna Logo Latar Belakang"
 
-#: libgnomeui/gnome-druid-page-standard.c:222
+#: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
 msgstr "Warna Logo Latar Belakang ditetapkan"
 
 # libgnomeui/gnome-druid.c:136
-#: libgnomeui/gnome-druid.c:146
+#: libgnomeui/gnome-druid.c:148
 msgid "Show Finish"
 msgstr "Papar Tamat"
 
-#: libgnomeui/gnome-druid.c:147
+#: libgnomeui/gnome-druid.c:149
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Papar butang 'Tamat' selaian Butang 'Seterusnya'"
 
 # libgnomeui/gnome-app-helper.c:109 libgnomeui/gnome-stock.c:843
 # libgnomeui/stock_demo.c:290
-#: libgnomeui/gnome-druid.c:154
+#: libgnomeui/gnome-druid.c:156
 msgid "Show Help"
 msgstr "Papar Bantuan"
 
-#: libgnomeui/gnome-druid.c:155
+#: libgnomeui/gnome-druid.c:157
 msgid "Show the 'Help' button"
 msgstr "Papar Butang 'Bantuan'"
 
@@ -718,7 +613,6 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:83 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -781,7 +675,6 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:97 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Ba_ntuan"
 
@@ -1011,12 +904,12 @@ msgstr "Tetapkan aturan aturcara"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:222
 msgid "_About"
 msgstr "Perih_al"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:223 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:223
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -1049,7 +942,7 @@ msgid "_Close This Window"
 msgstr "T_utup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:241 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:241
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -1136,6 +1029,25 @@ msgstr "_Tamat permainan"
 #: libgnomeui/gnome-app-helper.c:286
 msgid "End the current game"
 msgstr "Tamatkan permainan ini"
+
+#: libgnomeui/gnome-app-helper.c:2574
+msgid "Both text and icons"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2575
+msgid "Icons only"
+msgstr ""
+
+# libgnomeui/gnome-stock.c:844
+#: libgnomeui/gnome-app-helper.c:2576
+#, fuzzy
+msgid "Text only"
+msgstr "Teks"
+
+#: libgnomeui/gnome-app-helper.c:2627
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr ""
 
 # libgnomeui/gnome-app-util.c:93
 #: libgnomeui/gnome-app-util.c:103
@@ -1430,7 +1342,86 @@ msgstr "%a %T %d %b %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+#~ msgid "Background"
+#~ msgstr "Latar belakang"
+
+#~ msgid "The background pixbuf to use"
+#~ msgstr "pixbuf latar belakang untuk digunakan"
+
+#~ msgid "Background start opacity"
+#~ msgstr "Opacity permulaan latar belakang"
+
+#~ msgid "Opacity at the start of the background"
+#~ msgstr "Opacity pada permulaan latar belakang"
+
+#~ msgid "Background end opacity"
+#~ msgstr "Opacity penghujung latar belakang"
+
+#~ msgid "Opacity at the end of the background"
+#~ msgstr "Opacity pada penghujung latar belakang"
+
+#~ msgid "Background start position"
+#~ msgstr "Posisi permulaan latar belakang"
+
+#~ msgid "Position at the start of the background"
+#~ msgstr "Posisi pada permulaan latar belakang"
+
+#~ msgid "Background end position"
+#~ msgstr "Posisi penghujung latar belakang"
+
+#~ msgid "Position at the end of the background"
+#~ msgstr "Posisi pada penghujung latar belakang"
+
+#~ msgid "Logo top padding"
+#~ msgstr "padding logo atas"
+
+#~ msgid "How far the logo is from the top"
+#~ msgstr "Berapa jauh logo daripada atas"
+
+#~ msgid "Logo right padding"
+#~ msgstr "Padding logo kanan"
+
+#~ msgid "How far the logo is from the right"
+#~ msgstr "Berapa jauh logo daripada kanan"
+
+#~ msgid "Header font"
+#~ msgstr "Pengepala font"
+
+#~ msgid "Header font description as a string"
+#~ msgstr "Huraian pengepala font sebagai rentetan"
+
+# libgnomeui/winhints_demo.c:411
+#~ msgid "Copyright font"
+#~ msgstr "Hakcipta font"
+
+#~ msgid "Copyright font description as a string"
+#~ msgstr "Huraian hakcipta font sebagai rentetan"
+
+# libgnomeui/gnome-dentry-edit.c:389
+#~ msgid "Comments font"
+#~ msgstr "Komen font"
+
+#~ msgid "Comments font description as a string"
+#~ msgstr "Komen huraian font sebagai rentetan"
+
+#~ msgid "Name header font"
+#~ msgstr "Nama pengepala font"
+
+#~ msgid "Name header font description as a string"
+#~ msgstr "Namakan huraian pengepala font sebagai rentetan"
+
+#~ msgid "Name list font"
+#~ msgstr "Nama senarai font"
+
+#~ msgid "Name list font description as a string"
+#~ msgstr "Nama senarai huraian font sebagai rentetan"
+
+#~ msgid "Helvetical Bold 18"
+#~ msgstr "Helvetical Bold 18"
+
+#~ msgid "Helvetical Medium 12"
+#~ msgstr "Helvetical Medium 12"
+
 # libgnomeui/gnome-app-helper.c:160
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Keluar ujian"
+#~ msgid "Exit the test"
+#~ msgstr "Keluar ujian"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2001-12-14 16:07+0100\n"
+"POT-Creation-Date: 2002-01-16 01:22+0100\n"
 "PO-Revision-Date: 2001-05-30 12:12+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@eikonex.org>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -13,206 +13,131 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:181
-msgid "Program name"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:182
-msgid "The name of the program"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:188
-msgid "Program version"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:189
-msgid "The version of the program"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:195
-msgid "Copyright string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:196
-msgid "Copyright information for the program"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:202
-#, fuzzy
-msgid "Comments string"
-msgstr "Commentaire"
-
-#: libgnomeui/gnome-about.c:203
-msgid "Comments about the program"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:210 libgnomeui/gnome-about.c:664
-#, fuzzy
-msgid "Authors"
-msgstr "Auteurs :"
-
-#: libgnomeui/gnome-about.c:211
-msgid "List of authors of the programs"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:213
-#, fuzzy
-msgid "Author entry"
-msgstr "Auteurs : "
-
-#: libgnomeui/gnome-about.c:214
-msgid "A single author entry"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:221 libgnomeui/gnome-about.c:667
-msgid "Translator credits"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:222
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:229 libgnomeui/gnome-about.c:670
-#, fuzzy
-msgid "Documenters"
-msgstr "Documentation :"
-
-#: libgnomeui/gnome-about.c:230
-msgid "List of people documenting the program"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:232
-#, fuzzy
-msgid "Documenter entry"
-msgstr "Documentation :"
-
-#: libgnomeui/gnome-about.c:233
-msgid "A single documenter entry"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:240
-msgid "Background"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:241
-msgid "The background pixbuf to use"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:247
-msgid "Background start opacity"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:248
-msgid "Opacity at the start of the background"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:257
-msgid "Background end opacity"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:258
-msgid "Opacity at the end of the background"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:267
-#, fuzzy
-msgid "Background start position"
-msgstr "Position de l'icône"
-
-#: libgnomeui/gnome-about.c:268
-msgid "Position at the start of the background"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:276
-#, fuzzy
-msgid "Background end position"
-msgstr "Position de l'icône"
-
-#: libgnomeui/gnome-about.c:277
-msgid "Position at the end of the background"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:285 libgnomeui/gnome-druid-page-standard.c:141
-msgid "Logo"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:286
-msgid "A logo for the about box"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:292
-msgid "Logo top padding"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:293
-msgid "How far the logo is from the top"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:302
-msgid "Logo right padding"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:303
-msgid "How far the logo is from the right"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:312
-msgid "Header font"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:313
-msgid "Header font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:318
-#, fuzzy
-msgid "Copyright font"
-msgstr "Copyright (C) 1998"
-
-#: libgnomeui/gnome-about.c:319
-msgid "Copyright font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:324
-#, fuzzy
-msgid "Comments font"
-msgstr "Commentaire"
-
-#: libgnomeui/gnome-about.c:325
-msgid "Comments font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:330
-msgid "Name header font"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:331
-msgid "Name header font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:336
-msgid "Name list font"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:337
-msgid "Name list font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:664
+#. Authors
+#: libgnomeui/gnome-about.c:95
 #, fuzzy
 msgid "Author"
 msgstr "Auteur :"
 
-#: libgnomeui/gnome-about.c:670
+#: libgnomeui/gnome-about.c:95 libgnomeui/gnome-about.c:271
+#, fuzzy
+msgid "Authors"
+msgstr "Auteurs :"
+
+#: libgnomeui/gnome-about.c:119
 #, fuzzy
 msgid "Documenter"
 msgstr "Documentation :"
 
-#: libgnomeui/gnome-about.c:817
+#: libgnomeui/gnome-about.c:119 libgnomeui/gnome-about.c:282
+#, fuzzy
+msgid "Documenters"
+msgstr "Documentation :"
+
+#: libgnomeui/gnome-about.c:147 libgnomeui/gnome-about.c:294
+msgid "Translator credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:241
+msgid "Program name"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:242
+msgid "The name of the program"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:249
+msgid "Program version"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:250
+msgid "The version of the program"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:256
+msgid "Copyright string"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:257
+msgid "Copyright information for the program"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:264
+#, fuzzy
+msgid "Comments string"
+msgstr "Commentaire"
+
+#: libgnomeui/gnome-about.c:265
+msgid "Comments about the program"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:272
+msgid "List of authors of the programs"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:274
+#, fuzzy
+msgid "Author entry"
+msgstr "Auteurs : "
+
+#: libgnomeui/gnome-about.c:275
+msgid "A single author entry"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:283
+msgid "List of people documenting the program"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:285
+#, fuzzy
+msgid "Documenter entry"
+msgstr "Documentation :"
+
+#: libgnomeui/gnome-about.c:286
+msgid "A single documenter entry"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:295
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:302 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:303
+msgid "A logo for the about box"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:366
 #, fuzzy, c-format
 msgid "About %s"
 msgstr "À propos"
+
+#: libgnomeui/gnome-appbar.c:762
+msgid "Has Progress"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Create a progress widget."
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:770
+msgid "Has Status"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:771
+msgid "Create a status widget."
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:778
+msgid "Interactivity"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:779
+msgid "Level of user activity required."
+msgstr ""
 
 #: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
@@ -250,167 +175,160 @@ msgstr "Donnée de couleur invalide reçue\n"
 msgid "Pick a color"
 msgstr "Choisissez une couleur"
 
-#: libgnomeui/gnome-dateedit.c:420
+#: libgnomeui/gnome-dateedit.c:436
 msgid "Time"
 msgstr "heure"
 
-#: libgnomeui/gnome-dateedit.c:421
-msgid "The time currentlyselected"
+#: libgnomeui/gnome-dateedit.c:437
+#, fuzzy
+msgid "The time currently selected"
 msgstr "L'heure actuellement sélectionné"
 
-#: libgnomeui/gnome-dateedit.c:433
+#: libgnomeui/gnome-dateedit.c:449
 msgid "DateEdit Flags"
 msgstr "Drapeaux DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:434
+#: libgnomeui/gnome-dateedit.c:450
 msgid "Flags for how DateEdit looks"
 msgstr "Drapeaux indiquant comment apparait DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:443
+#: libgnomeui/gnome-dateedit.c:459
 msgid "Lower Hour"
 msgstr "Heure basse"
 
-#: libgnomeui/gnome-dateedit.c:444
+#: libgnomeui/gnome-dateedit.c:460
 msgid "Lower hour in the time popup selector"
 msgstr "Heure fractionnée dans le popup de sélection d'heure"
 
-#: libgnomeui/gnome-dateedit.c:454
+#: libgnomeui/gnome-dateedit.c:470
 msgid "Upper Hour"
 msgstr "Heure haute"
 
-#: libgnomeui/gnome-dateedit.c:455
+#: libgnomeui/gnome-dateedit.c:471
 msgid "Upper hour in the time popup selector"
 msgstr "Haure haute dans le popup de sélection d'heure"
 
-#: libgnomeui/gnome-dateedit.c:465
+#: libgnomeui/gnome-dateedit.c:481
 msgid "Initial Time"
 msgstr "Date initiale"
 
-#: libgnomeui/gnome-dateedit.c:466
+#: libgnomeui/gnome-dateedit.c:482
 msgid "The initial time"
 msgstr "La date initiale"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:728
 msgid "Calendar"
 msgstr "Calendrier"
 
-#: libgnomeui/gnome-dateedit.c:928
+#: libgnomeui/gnome-dateedit.c:960
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date déconseillé, utiliser gnome_date_edit_get_time"
 
-#: libgnomeui/gnome-druid-page-edge.c:342
-msgid "Helvetical Bold 18"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-edge.c:353
-msgid "Helvetical Medium 12"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-standard.c:133
+#: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:156
 #, fuzzy
 msgid "Title"
 msgstr "heure"
 
-#: libgnomeui/gnome-druid-page-standard.c:134
+#: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:142
+#: libgnomeui/gnome-druid-page-standard.c:130
 #, fuzzy
 msgid "Logo image"
 msgstr "Pas d'image"
 
-#: libgnomeui/gnome-druid-page-standard.c:149
+#: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:150
+#: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:157
+#: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:158
+#: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:165
+#: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:166
+#: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:173
+#: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:174
+#: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:181
-#: libgnomeui/gnome-druid-page-standard.c:189
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:182
+#: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:190
+#: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:197
+#: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:198
+#: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:205
-#: libgnomeui/gnome-druid-page-standard.c:213
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:206
+#: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:214
+#: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:221
+#: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:222
+#: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
 msgstr ""
 
-#: libgnomeui/gnome-druid.c:146
+#: libgnomeui/gnome-druid.c:148
 msgid "Show Finish"
 msgstr ""
 
-#: libgnomeui/gnome-druid.c:147
+#: libgnomeui/gnome-druid.c:149
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr ""
 
-#: libgnomeui/gnome-druid.c:154
+#: libgnomeui/gnome-druid.c:156
 #, fuzzy
 msgid "Show Help"
 msgstr "Aide"
 
-#: libgnomeui/gnome-druid.c:155
+#: libgnomeui/gnome-druid.c:157
 msgid "Show the 'Help' button"
 msgstr ""
 
@@ -453,27 +371,27 @@ msgstr ""
 "veuillez vérifier les réglages dans le centre de contrôle si ils sont "
 "corrects."
 
-#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
 msgid "X display to use"
 msgstr "Visuel X à utiliser"
 
-#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
 msgid "DISPLAY"
 msgstr "VISUEL"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:111
 msgid "GNOME GUI Library"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:474
+#: libgnomeui/gnome-ui-init.c:592
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Plusieurs erreurs de segmentation sont apparues ; ne peut afficher de "
 "dialogue d'erreur\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:488
+#: libgnomeui/gnome-ui-init.c:606
 #, fuzzy
 msgid ""
 "Segmentation fault!\n"
@@ -482,76 +400,76 @@ msgstr ""
 "Plusieurs erreurs de segmentation sont apparues ; ne peut afficher de "
 "dialogue d'erreur\n"
 
-#: libgnomeui/gnome-ui-init.c:620
+#: libgnomeui/gnome-ui-init.c:738
 msgid "Gdk debugging flags to set"
 msgstr "Options de débogage de Gdk à activer"
 
-#: libgnomeui/gnome-ui-init.c:620 libgnomeui/gnome-ui-init.c:623
-#: libgnomeui/gnome-ui-init.c:664 libgnomeui/gnome-ui-init.c:667
+#: libgnomeui/gnome-ui-init.c:738 libgnomeui/gnome-ui-init.c:741
+#: libgnomeui/gnome-ui-init.c:782 libgnomeui/gnome-ui-init.c:785
 msgid "FLAGS"
 msgstr "DRAPEAUX"
 
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:741
 msgid "Gdk debugging flags to unset"
 msgstr "Options de débogage de Gdk à désactiver"
 
-#: libgnomeui/gnome-ui-init.c:631
+#: libgnomeui/gnome-ui-init.c:749
 msgid "Make X calls synchronous"
 msgstr "Utiliser des appels X synchrones"
 
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:755
 msgid "Don't use X shared memory extension"
 msgstr "Ne pas utiliser l'extension mémoire partagée de X11"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:759
 msgid "Program name as used by the window manager"
 msgstr "Nom du programme tel qu'utilisé par le gestionnaire de fenêtres"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:759
 msgid "NAME"
 msgstr "NOM"
 
-#: libgnomeui/gnome-ui-init.c:644
+#: libgnomeui/gnome-ui-init.c:762
 msgid "Program class as used by the window manager"
 msgstr "Classe du programme tel qu'utilisé par le gestionnaire de fenêtres"
 
-#: libgnomeui/gnome-ui-init.c:644
+#: libgnomeui/gnome-ui-init.c:762
 msgid "CLASS"
 msgstr "CLASSE"
 
-#: libgnomeui/gnome-ui-init.c:648
+#: libgnomeui/gnome-ui-init.c:766
 msgid "HOST"
 msgstr "HÔTE"
 
-#: libgnomeui/gnome-ui-init.c:652
+#: libgnomeui/gnome-ui-init.c:770
 msgid "PORT"
 msgstr "PORT"
 
-#: libgnomeui/gnome-ui-init.c:657 libgnomeui/gnome-ui-init.c:660
+#: libgnomeui/gnome-ui-init.c:775 libgnomeui/gnome-ui-init.c:778
 msgid "STYLE"
 msgstr "STYLE"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:782
 msgid "Gtk+ debugging flags to set"
 msgstr "Options de débogage de Gtk+ à activer"
 
-#: libgnomeui/gnome-ui-init.c:667
+#: libgnomeui/gnome-ui-init.c:785
 msgid "Gtk+ debugging flags to unset"
 msgstr "Options de débogage de Gtk+ à désactiver"
 
-#: libgnomeui/gnome-ui-init.c:670
+#: libgnomeui/gnome-ui-init.c:788
 msgid "Make all warnings fatal"
 msgstr "Rendre tous les avertissements fatals"
 
-#: libgnomeui/gnome-ui-init.c:673
+#: libgnomeui/gnome-ui-init.c:791
 msgid "Load an additional Gtk module"
 msgstr "Charger un module Gtk additionnel"
 
-#: libgnomeui/gnome-ui-init.c:673
+#: libgnomeui/gnome-ui-init.c:791
 msgid "MODULE"
 msgstr "MODULE"
 
-#: libgnomeui/gnome-ui-init.c:778
+#: libgnomeui/gnome-ui-init.c:896
 msgid "GTK+"
 msgstr ""
 
@@ -1011,6 +929,24 @@ msgstr ""
 msgid "End the current game"
 msgstr "Trame en cours"
 
+#: libgnomeui/gnome-app-helper.c:2574
+msgid "Both text and icons"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2575
+msgid "Icons only"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2576
+#, fuzzy
+msgid "Text only"
+msgstr "Texte"
+
+#: libgnomeui/gnome-app-helper.c:2627
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr ""
+
 #: libgnomeui/gnome-app-util.c:103
 msgid " (press return)"
 msgstr ""
@@ -1115,7 +1051,7 @@ msgstr "Police"
 msgid "Name of the selected font"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:975
+#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Police"
 
@@ -1195,11 +1131,11 @@ msgstr "Détails de l'erreur GConf : %s\n"
 msgid "No Icon"
 msgstr "Icône :"
 
-#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:373
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:378
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:379
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:384
 #, fuzzy
 msgid "Preview"
 msgstr "Précédent"
@@ -1244,7 +1180,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:491
+#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:496
 msgid "No Image"
 msgstr "Pas d'image"
 
@@ -1274,14 +1210,33 @@ msgstr "C_oller"
 #. %d is day of month, %m is month number, %T full hour,
 #. %H hours, %M minutes, %S seconds
 #.
-#: libgnomeui/gnome-scores.c:197
+#: libgnomeui/gnome-scores.c:199
 msgid "%a %b %d %T %Y"
 msgstr ""
 
-#: libgnomeui/gnome-scores.c:407
+#: libgnomeui/gnome-scores.c:412
+msgid "Sans 14"
+msgstr ""
+
 #, fuzzy
-msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
-msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+#~ msgid "Background start position"
+#~ msgstr "Position de l'icône"
+
+#, fuzzy
+#~ msgid "Background end position"
+#~ msgstr "Position de l'icône"
+
+#, fuzzy
+#~ msgid "Copyright font"
+#~ msgstr "Copyright (C) 1998"
+
+#, fuzzy
+#~ msgid "Comments font"
+#~ msgstr "Commentaire"
+
+#, fuzzy
+#~ msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
+#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 
 #~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 #~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"

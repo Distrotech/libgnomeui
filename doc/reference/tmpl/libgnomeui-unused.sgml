@@ -51,6 +51,48 @@
 </para>
 
 
+<!-- ##### ARG GnomeAbout:background ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GnomeAbout:background-end-opacity ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GnomeAbout:background-end-position ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GnomeAbout:background-start-opacity ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GnomeAbout:background-start-position ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GnomeAbout:logo-right-padding ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GnomeAbout:logo-top-padding ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### STRUCT GnomeDialogPrivate ##### -->
 <para>
 

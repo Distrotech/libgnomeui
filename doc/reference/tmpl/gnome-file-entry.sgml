@@ -174,12 +174,12 @@ GnomeFileEntry
 
 </para>
 
-<!-- ##### ARG GnomeFileEntry:default-path ##### -->
+<!-- ##### ARG GnomeFileEntry:filename ##### -->
 <para>
 
 </para>
 
-<!-- ##### ARG GnomeFileEntry:filename ##### -->
+<!-- ##### ARG GnomeFileEntry:default-path ##### -->
 <para>
 
 </para>

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.108.0\n"
-"POT-Creation-Date: 2001-12-23 23:44+0900\n"
+"POT-Creation-Date: 2002-01-16 01:22+0100\n"
 "PO-Revision-Date: 2001-12-23 23:56+0900\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -15,195 +15,127 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:181
-msgid "Program name"
-msgstr "プログラム名"
+#. Authors
+#: libgnomeui/gnome-about.c:95
+msgid "Author"
+msgstr "作者"
 
-#: libgnomeui/gnome-about.c:182
-msgid "The name of the program"
-msgstr "プログラムの名称"
-
-#: libgnomeui/gnome-about.c:188
-msgid "Program version"
-msgstr "プログラム バージョン"
-
-#: libgnomeui/gnome-about.c:189
-msgid "The version of the program"
-msgstr "プログラムのバージョン"
-
-#: libgnomeui/gnome-about.c:195
-msgid "Copyright string"
-msgstr "著作権文字列"
-
-#: libgnomeui/gnome-about.c:196
-msgid "Copyright information for the program"
-msgstr "プログラムの著作権情報"
-
-#: libgnomeui/gnome-about.c:202
-msgid "Comments string"
-msgstr "コメント文字列"
-
-#: libgnomeui/gnome-about.c:203
-msgid "Comments about the program"
-msgstr "プログラムについてのコメント"
-
-#: libgnomeui/gnome-about.c:210 libgnomeui/gnome-about.c:664
+#: libgnomeui/gnome-about.c:95 libgnomeui/gnome-about.c:271
 msgid "Authors"
 msgstr "作者一覧"
 
-#: libgnomeui/gnome-about.c:211
-msgid "List of authors of the programs"
-msgstr "プログラムの作者の一覧"
+#: libgnomeui/gnome-about.c:119
+msgid "Documenter"
+msgstr "文書著作者"
 
-#: libgnomeui/gnome-about.c:213
-msgid "Author entry"
-msgstr "作者エントリ"
+#: libgnomeui/gnome-about.c:119 libgnomeui/gnome-about.c:282
+msgid "Documenters"
+msgstr "文書著作者"
 
-#: libgnomeui/gnome-about.c:214
-msgid "A single author entry"
-msgstr "単一作者のエントリ"
-
-#: libgnomeui/gnome-about.c:221 libgnomeui/gnome-about.c:667
+#: libgnomeui/gnome-about.c:147 libgnomeui/gnome-about.c:294
 msgid "Translator credits"
 msgstr "翻訳者クレジット"
 
-#: libgnomeui/gnome-about.c:222
+#: libgnomeui/gnome-about.c:241
+msgid "Program name"
+msgstr "プログラム名"
+
+#: libgnomeui/gnome-about.c:242
+msgid "The name of the program"
+msgstr "プログラムの名称"
+
+#: libgnomeui/gnome-about.c:249
+msgid "Program version"
+msgstr "プログラム バージョン"
+
+#: libgnomeui/gnome-about.c:250
+msgid "The version of the program"
+msgstr "プログラムのバージョン"
+
+#: libgnomeui/gnome-about.c:256
+msgid "Copyright string"
+msgstr "著作権文字列"
+
+#: libgnomeui/gnome-about.c:257
+msgid "Copyright information for the program"
+msgstr "プログラムの著作権情報"
+
+#: libgnomeui/gnome-about.c:264
+msgid "Comments string"
+msgstr "コメント文字列"
+
+#: libgnomeui/gnome-about.c:265
+msgid "Comments about the program"
+msgstr "プログラムについてのコメント"
+
+#: libgnomeui/gnome-about.c:272
+msgid "List of authors of the programs"
+msgstr "プログラムの作者の一覧"
+
+#: libgnomeui/gnome-about.c:274
+msgid "Author entry"
+msgstr "作者エントリ"
+
+#: libgnomeui/gnome-about.c:275
+msgid "A single author entry"
+msgstr "単一作者のエントリ"
+
+#: libgnomeui/gnome-about.c:283
+msgid "List of people documenting the program"
+msgstr "プロウラムの文書化を行った人の一覧"
+
+#: libgnomeui/gnome-about.c:285
+msgid "Documenter entry"
+msgstr "文書著作者エントリ"
+
+#: libgnomeui/gnome-about.c:286
+msgid "A single documenter entry"
+msgstr "単一の文書著作者のエントリ"
+
+#: libgnomeui/gnome-about.c:295
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "翻訳者のクレジット。この文字列は翻訳可能としてマークすべきです"
 
-#: libgnomeui/gnome-about.c:229 libgnomeui/gnome-about.c:670
-msgid "Documenters"
-msgstr "文書著作者"
-
-#: libgnomeui/gnome-about.c:230
-msgid "List of people documenting the program"
-msgstr "プロウラムの文書化を行った人の一覧"
-
-#: libgnomeui/gnome-about.c:232
-msgid "Documenter entry"
-msgstr "文書著作者エントリ"
-
-#: libgnomeui/gnome-about.c:233
-msgid "A single documenter entry"
-msgstr "単一の文書著作者のエントリ"
-
-#: libgnomeui/gnome-about.c:240
-msgid "Background"
-msgstr "背景"
-
-#: libgnomeui/gnome-about.c:241
-msgid "The background pixbuf to use"
-msgstr "使用する背景の pixbuf"
-
-#: libgnomeui/gnome-about.c:247
-msgid "Background start opacity"
-msgstr "背景透過率最小値"
-
-#: libgnomeui/gnome-about.c:248
-msgid "Opacity at the start of the background"
-msgstr "背景の透過率の最小値"
-
-#: libgnomeui/gnome-about.c:257
-msgid "Background end opacity"
-msgstr "背景透過率最大値"
-
-#: libgnomeui/gnome-about.c:258
-msgid "Opacity at the end of the background"
-msgstr "背景の透過率の最大値"
-
-#: libgnomeui/gnome-about.c:267
-msgid "Background start position"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:268
-msgid "Position at the start of the background"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:276
-msgid "Background end position"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:277
-msgid "Position at the end of the background"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:285 libgnomeui/gnome-druid-page-standard.c:141
+#: libgnomeui/gnome-about.c:302 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "ロゴ"
 
-#: libgnomeui/gnome-about.c:286
+#: libgnomeui/gnome-about.c:303
 msgid "A logo for the about box"
 msgstr "情報ダイアログのロゴ"
 
-#: libgnomeui/gnome-about.c:292
-msgid "Logo top padding"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:293
-msgid "How far the logo is from the top"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:302
-msgid "Logo right padding"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:303
-msgid "How far the logo is from the right"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:312
-msgid "Header font"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:313
-msgid "Header font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:318
-msgid "Copyright font"
-msgstr "著作権表示フォント"
-
-#: libgnomeui/gnome-about.c:319
-msgid "Copyright font description as a string"
-msgstr "著作権の表示に使用するフォントの文字列表記"
-
-#: libgnomeui/gnome-about.c:324
-msgid "Comments font"
-msgstr "コメントフォント"
-
-#: libgnomeui/gnome-about.c:325
-msgid "Comments font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:330
-msgid "Name header font"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:331
-msgid "Name header font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:336
-msgid "Name list font"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:337
-msgid "Name list font description as a string"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:664
-msgid "Author"
-msgstr "作者"
-
-#: libgnomeui/gnome-about.c:670
-msgid "Documenter"
-msgstr "文書著作者"
-
-#: libgnomeui/gnome-about.c:817
+#: libgnomeui/gnome-about.c:366
 #, c-format
 msgid "About %s"
 msgstr "%s について"
+
+#: libgnomeui/gnome-appbar.c:762
+#, fuzzy
+msgid "Has Progress"
+msgstr "経過"
+
+#: libgnomeui/gnome-appbar.c:763
+#, fuzzy
+msgid "Create a progress widget."
+msgstr "新しいウインドウを開く"
+
+#: libgnomeui/gnome-appbar.c:770
+msgid "Has Status"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:771
+#, fuzzy
+msgid "Create a status widget."
+msgstr "新しいウインドウを開く"
+
+#: libgnomeui/gnome-appbar.c:778
+msgid "Interactivity"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:779
+msgid "Level of user activity required."
+msgstr ""
 
 #: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
@@ -241,163 +173,156 @@ msgstr ""
 msgid "Pick a color"
 msgstr "色の選択"
 
-#: libgnomeui/gnome-dateedit.c:420
+#: libgnomeui/gnome-dateedit.c:436
 msgid "Time"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:421
-msgid "The time currentlyselected"
-msgstr ""
+#: libgnomeui/gnome-dateedit.c:437
+#, fuzzy
+msgid "The time currently selected"
+msgstr "現在のファイルを保存"
 
-#: libgnomeui/gnome-dateedit.c:433
+#: libgnomeui/gnome-dateedit.c:449
 msgid "DateEdit Flags"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:434
+#: libgnomeui/gnome-dateedit.c:450
 msgid "Flags for how DateEdit looks"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:443
+#: libgnomeui/gnome-dateedit.c:459
 msgid "Lower Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:444
+#: libgnomeui/gnome-dateedit.c:460
 msgid "Lower hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:454
+#: libgnomeui/gnome-dateedit.c:470
 msgid "Upper Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:455
+#: libgnomeui/gnome-dateedit.c:471
 msgid "Upper hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:465
+#: libgnomeui/gnome-dateedit.c:481
 msgid "Initial Time"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:466
+#: libgnomeui/gnome-dateedit.c:482
 msgid "The initial time"
 msgstr ""
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:728
 msgid "Calendar"
 msgstr "カレンダー"
 
-#: libgnomeui/gnome-dateedit.c:928
+#: libgnomeui/gnome-dateedit.c:960
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-edge.c:342
-msgid "Helvetical Bold 18"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-edge.c:353
-msgid "Helvetical Medium 12"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-standard.c:133
+#: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:156
 msgid "Title"
 msgstr "タイトル"
 
-#: libgnomeui/gnome-druid-page-standard.c:134
+#: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "ドルイドのタイトル"
 
-#: libgnomeui/gnome-druid-page-standard.c:142
+#: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "ロゴ画像"
 
-#: libgnomeui/gnome-druid-page-standard.c:149
+#: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:150
+#: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:157
+#: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:158
+#: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:165
+#: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:166
+#: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:173
+#: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:174
+#: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:181
-#: libgnomeui/gnome-druid-page-standard.c:189
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:182
+#: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:190
+#: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:197
+#: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:198
+#: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:205
-#: libgnomeui/gnome-druid-page-standard.c:213
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:206
+#: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:214
+#: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:221
+#: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:222
+#: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
 msgstr ""
 
-#: libgnomeui/gnome-druid.c:146
+#: libgnomeui/gnome-druid.c:148
 msgid "Show Finish"
 msgstr "完了<"
 
-#: libgnomeui/gnome-druid.c:147
+#: libgnomeui/gnome-druid.c:149
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr ""
 
-#: libgnomeui/gnome-druid.c:154
+#: libgnomeui/gnome-druid.c:156
 msgid "Show Help"
 msgstr "ヘルプの表示"
 
-#: libgnomeui/gnome-druid.c:155
+#: libgnomeui/gnome-druid.c:157
 msgid "Show the 'Help' button"
 msgstr ""
 
@@ -435,27 +360,27 @@ msgid ""
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
 msgid "X display to use"
 msgstr "使用する X ディスプレイ"
 
-#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
 msgid "DISPLAY"
 msgstr "ディスプレイ"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:111
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI ライブラリ"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:474
+#: libgnomeui/gnome-ui-init.c:592
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "セグメンテーションフォルトが複数回発生しました; エラーダイログを表示できませ"
 "ん\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:488
+#: libgnomeui/gnome-ui-init.c:606
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -463,76 +388,76 @@ msgstr ""
 "セグメンテーションフォルト!\n"
 "クラッシュダイログを表示できません\n"
 
-#: libgnomeui/gnome-ui-init.c:620
+#: libgnomeui/gnome-ui-init.c:738
 msgid "Gdk debugging flags to set"
 msgstr "セットする GDK デバッグフラグ"
 
-#: libgnomeui/gnome-ui-init.c:620 libgnomeui/gnome-ui-init.c:623
-#: libgnomeui/gnome-ui-init.c:664 libgnomeui/gnome-ui-init.c:667
+#: libgnomeui/gnome-ui-init.c:738 libgnomeui/gnome-ui-init.c:741
+#: libgnomeui/gnome-ui-init.c:782 libgnomeui/gnome-ui-init.c:785
 msgid "FLAGS"
 msgstr "フラグ"
 
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:741
 msgid "Gdk debugging flags to unset"
 msgstr "外す GDK デバッグフラグ"
 
-#: libgnomeui/gnome-ui-init.c:631
+#: libgnomeui/gnome-ui-init.c:749
 msgid "Make X calls synchronous"
 msgstr "X の呼出を同期モードで行なう"
 
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:755
 msgid "Don't use X shared memory extension"
 msgstr "X 共有メモリ拡張を使用しない"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:759
 msgid "Program name as used by the window manager"
 msgstr "ウィンドウマネージャに指示するプログラム名"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:759
 msgid "NAME"
 msgstr "名前"
 
-#: libgnomeui/gnome-ui-init.c:644
+#: libgnomeui/gnome-ui-init.c:762
 msgid "Program class as used by the window manager"
 msgstr "ウィンドウマネージャに指示するクラス名"
 
-#: libgnomeui/gnome-ui-init.c:644
+#: libgnomeui/gnome-ui-init.c:762
 msgid "CLASS"
 msgstr "クラス"
 
-#: libgnomeui/gnome-ui-init.c:648
+#: libgnomeui/gnome-ui-init.c:766
 msgid "HOST"
 msgstr "ホスト"
 
-#: libgnomeui/gnome-ui-init.c:652
+#: libgnomeui/gnome-ui-init.c:770
 msgid "PORT"
 msgstr "ポート"
 
-#: libgnomeui/gnome-ui-init.c:657 libgnomeui/gnome-ui-init.c:660
+#: libgnomeui/gnome-ui-init.c:775 libgnomeui/gnome-ui-init.c:778
 msgid "STYLE"
 msgstr "スタイル"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:782
 msgid "Gtk+ debugging flags to set"
 msgstr "立てる GTK+ デバッグフラグ"
 
-#: libgnomeui/gnome-ui-init.c:667
+#: libgnomeui/gnome-ui-init.c:785
 msgid "Gtk+ debugging flags to unset"
 msgstr "下ろす GTK+ デバッグフラグ"
 
-#: libgnomeui/gnome-ui-init.c:670
+#: libgnomeui/gnome-ui-init.c:788
 msgid "Make all warnings fatal"
 msgstr "すべての警告を致命的にする"
 
-#: libgnomeui/gnome-ui-init.c:673
+#: libgnomeui/gnome-ui-init.c:791
 msgid "Load an additional Gtk module"
 msgstr "追加 GTK モジュールの読み込み"
 
-#: libgnomeui/gnome-ui-init.c:673
+#: libgnomeui/gnome-ui-init.c:791
 msgid "MODULE"
 msgstr "モジュール"
 
-#: libgnomeui/gnome-ui-init.c:778
+#: libgnomeui/gnome-ui-init.c:896
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -978,6 +903,25 @@ msgstr "ゲーム終了(_E)"
 msgid "End the current game"
 msgstr "今のゲームを終了する"
 
+#: libgnomeui/gnome-app-helper.c:2574
+#, fuzzy
+msgid "Both text and icons"
+msgstr "アイコンの選択"
+
+#: libgnomeui/gnome-app-helper.c:2575
+msgid "Icons only"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2576
+#, fuzzy
+msgid "Text only"
+msgstr "テキスト"
+
+#: libgnomeui/gnome-app-helper.c:2627
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr ""
+
 #: libgnomeui/gnome-app-util.c:103
 msgid " (press return)"
 msgstr " (リターンを押してください)"
@@ -1078,7 +1022,7 @@ msgstr "フォント名"
 msgid "Name of the selected font"
 msgstr "選択したフォントの名前"
 
-#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:975
+#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "フォント"
 
@@ -1147,11 +1091,11 @@ msgstr ""
 msgid "No Icon"
 msgstr "なし"
 
-#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:373
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:378
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hboxが見つからないので、普通のファイル選択を使います"
 
-#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:379
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:384
 msgid "Preview"
 msgstr "プレビュー"
 
@@ -1193,7 +1137,7 @@ msgstr "質問"
 msgid "Message"
 msgstr "メッセージ"
 
-#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:491
+#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:496
 msgid "No Image"
 msgstr "絵なし"
 
@@ -1220,13 +1164,40 @@ msgstr "日付"
 #. %d is day of month, %m is month number, %T full hour,
 #. %H hours, %M minutes, %S seconds
 #.
-#: libgnomeui/gnome-scores.c:197
+#: libgnomeui/gnome-scores.c:199
 msgid "%a %b %d %T %Y"
 msgstr "%Y年%m月%d日(%a) %T"
 
-#: libgnomeui/gnome-scores.c:407
-msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
+#: libgnomeui/gnome-scores.c:412
+msgid "Sans 14"
 msgstr ""
+
+#~ msgid "Background"
+#~ msgstr "背景"
+
+#~ msgid "The background pixbuf to use"
+#~ msgstr "使用する背景の pixbuf"
+
+#~ msgid "Background start opacity"
+#~ msgstr "背景透過率最小値"
+
+#~ msgid "Opacity at the start of the background"
+#~ msgstr "背景の透過率の最小値"
+
+#~ msgid "Background end opacity"
+#~ msgstr "背景透過率最大値"
+
+#~ msgid "Opacity at the end of the background"
+#~ msgstr "背景の透過率の最大値"
+
+#~ msgid "Copyright font"
+#~ msgstr "著作権表示フォント"
+
+#~ msgid "Copyright font description as a string"
+#~ msgstr "著作権の表示に使用するフォントの文字列表記"
+
+#~ msgid "Comments font"
+#~ msgstr "コメントフォント"
 
 #~ msgid "get"
 #~ msgstr "get"
@@ -1447,9 +1418,6 @@ msgstr ""
 
 #~ msgid "Icon:"
 #~ msgstr "アイコン:"
-
-#~ msgid "Choose an icon"
-#~ msgstr "アイコンの選択"
 
 #~ msgid "Run in Terminal"
 #~ msgstr "ターミナル内で実行"

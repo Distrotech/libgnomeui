@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2001-12-14 16:07+0100\n"
+"POT-Creation-Date: 2002-01-16 01:22+0100\n"
 "PO-Revision-Date: 2001-12-06 12:26+0200\n"
 "Last-Translator: Yuriy Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -13,196 +13,128 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:181
-msgid "Program name"
-msgstr "Назва програми"
+#. Authors
+#: libgnomeui/gnome-about.c:95
+msgid "Author"
+msgstr "Автор"
 
-#: libgnomeui/gnome-about.c:182
-msgid "The name of the program"
-msgstr "Назва програми"
-
-#: libgnomeui/gnome-about.c:188
-msgid "Program version"
-msgstr "Версія програми"
-
-#: libgnomeui/gnome-about.c:189
-msgid "The version of the program"
-msgstr "Версія програми"
-
-#: libgnomeui/gnome-about.c:195
-msgid "Copyright string"
-msgstr "Авторські права"
-
-#: libgnomeui/gnome-about.c:196
-msgid "Copyright information for the program"
-msgstr "Інформація про авторські права на програму"
-
-#: libgnomeui/gnome-about.c:202
-msgid "Comments string"
-msgstr "Коментарі"
-
-#: libgnomeui/gnome-about.c:203
-msgid "Comments about the program"
-msgstr "Коментарі про програму"
-
-#: libgnomeui/gnome-about.c:210 libgnomeui/gnome-about.c:664
+#: libgnomeui/gnome-about.c:95 libgnomeui/gnome-about.c:271
 msgid "Authors"
 msgstr "Автори"
 
-#: libgnomeui/gnome-about.c:211
-msgid "List of authors of the programs"
-msgstr "Список авторів програми"
+#: libgnomeui/gnome-about.c:119
+msgid "Documenter"
+msgstr "Автор документації"
 
-#: libgnomeui/gnome-about.c:213
-msgid "Author entry"
-msgstr "Запис про автора"
+#: libgnomeui/gnome-about.c:119 libgnomeui/gnome-about.c:282
+msgid "Documenters"
+msgstr "Автори документації"
 
-#: libgnomeui/gnome-about.c:214
-msgid "A single author entry"
-msgstr "Запис про одного автора"
-
-#: libgnomeui/gnome-about.c:221 libgnomeui/gnome-about.c:667
+#: libgnomeui/gnome-about.c:147 libgnomeui/gnome-about.c:294
 msgid "Translator credits"
 msgstr "Інформація про перекладачів"
 
-#: libgnomeui/gnome-about.c:222
+#: libgnomeui/gnome-about.c:241
+msgid "Program name"
+msgstr "Назва програми"
+
+#: libgnomeui/gnome-about.c:242
+msgid "The name of the program"
+msgstr "Назва програми"
+
+#: libgnomeui/gnome-about.c:249
+msgid "Program version"
+msgstr "Версія програми"
+
+#: libgnomeui/gnome-about.c:250
+msgid "The version of the program"
+msgstr "Версія програми"
+
+#: libgnomeui/gnome-about.c:256
+msgid "Copyright string"
+msgstr "Авторські права"
+
+#: libgnomeui/gnome-about.c:257
+msgid "Copyright information for the program"
+msgstr "Інформація про авторські права на програму"
+
+#: libgnomeui/gnome-about.c:264
+msgid "Comments string"
+msgstr "Коментарі"
+
+#: libgnomeui/gnome-about.c:265
+msgid "Comments about the program"
+msgstr "Коментарі про програму"
+
+#: libgnomeui/gnome-about.c:272
+msgid "List of authors of the programs"
+msgstr "Список авторів програми"
+
+#: libgnomeui/gnome-about.c:274
+msgid "Author entry"
+msgstr "Запис про автора"
+
+#: libgnomeui/gnome-about.c:275
+msgid "A single author entry"
+msgstr "Запис про одного автора"
+
+#: libgnomeui/gnome-about.c:283
+msgid "List of people documenting the program"
+msgstr "Список авторів документації до програми"
+
+#: libgnomeui/gnome-about.c:285
+msgid "Documenter entry"
+msgstr "Запис про автора документації"
+
+#: libgnomeui/gnome-about.c:286
+msgid "A single documenter entry"
+msgstr "Запис про одного автора документації"
+
+#: libgnomeui/gnome-about.c:295
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Інформація про перекладачів. Цей рядок має бути позначеним до перекладу"
 
-#: libgnomeui/gnome-about.c:229 libgnomeui/gnome-about.c:670
-msgid "Documenters"
-msgstr "Автори документації"
-
-#: libgnomeui/gnome-about.c:230
-msgid "List of people documenting the program"
-msgstr "Список авторів документації до програми"
-
-#: libgnomeui/gnome-about.c:232
-msgid "Documenter entry"
-msgstr "Запис про автора документації"
-
-#: libgnomeui/gnome-about.c:233
-msgid "A single documenter entry"
-msgstr "Запис про одного автора документації"
-
-#: libgnomeui/gnome-about.c:240
-msgid "Background"
-msgstr "Тло"
-
-#: libgnomeui/gnome-about.c:241
-msgid "The background pixbuf to use"
-msgstr "Зображення тла"
-
-#: libgnomeui/gnome-about.c:247
-msgid "Background start opacity"
-msgstr "Початкова непрозорість тла"
-
-#: libgnomeui/gnome-about.c:248
-msgid "Opacity at the start of the background"
-msgstr "Непрозорість на початку тла"
-
-#: libgnomeui/gnome-about.c:257
-msgid "Background end opacity"
-msgstr "Кінцева непрозорість тла"
-
-#: libgnomeui/gnome-about.c:258
-msgid "Opacity at the end of the background"
-msgstr "Напрозорість на кинці тла"
-
-#: libgnomeui/gnome-about.c:267
-msgid "Background start position"
-msgstr "Початкова позиція тла"
-
-#: libgnomeui/gnome-about.c:268
-msgid "Position at the start of the background"
-msgstr "Позиція на початку тла"
-
-#: libgnomeui/gnome-about.c:276
-msgid "Background end position"
-msgstr "Кінцева позиція тла"
-
-#: libgnomeui/gnome-about.c:277
-msgid "Position at the end of the background"
-msgstr "Позиція на кінці тла"
-
-#: libgnomeui/gnome-about.c:285 libgnomeui/gnome-druid-page-standard.c:141
+#: libgnomeui/gnome-about.c:302 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Емблема"
 
-#: libgnomeui/gnome-about.c:286
+#: libgnomeui/gnome-about.c:303
 msgid "A logo for the about box"
 msgstr "Емблема для блоку інформації про програму"
 
-#: libgnomeui/gnome-about.c:292
-msgid "Logo top padding"
-msgstr "Верхній відступ емблеми"
-
-#: libgnomeui/gnome-about.c:293
-msgid "How far the logo is from the top"
-msgstr "Віддаль емблеми від верху"
-
-#: libgnomeui/gnome-about.c:302
-msgid "Logo right padding"
-msgstr "Правий відступ емблеми"
-
-#: libgnomeui/gnome-about.c:303
-msgid "How far the logo is from the right"
-msgstr "Віддаль емблеми від правого краю"
-
-#: libgnomeui/gnome-about.c:312
-msgid "Header font"
-msgstr "Шрифт заголовка"
-
-#: libgnomeui/gnome-about.c:313
-msgid "Header font description as a string"
-msgstr "Опис шрифту заголовка у вигляді рядка"
-
-#: libgnomeui/gnome-about.c:318
-msgid "Copyright font"
-msgstr "Шрифт авторських прав"
-
-#: libgnomeui/gnome-about.c:319
-msgid "Copyright font description as a string"
-msgstr "Опис шрифту авторських прав у вигляді рядка"
-
-#: libgnomeui/gnome-about.c:324
-msgid "Comments font"
-msgstr "Шрифт коментарів"
-
-#: libgnomeui/gnome-about.c:325
-msgid "Comments font description as a string"
-msgstr "Опис шрифту коментарів у вигляді рядка"
-
-#: libgnomeui/gnome-about.c:330
-msgid "Name header font"
-msgstr "Шрифт назви заголовку"
-
-#: libgnomeui/gnome-about.c:331
-msgid "Name header font description as a string"
-msgstr "Опис шрифту назви заголовку у вигляді рядка"
-
-#: libgnomeui/gnome-about.c:336
-msgid "Name list font"
-msgstr "Шрифт назви списку"
-
-#: libgnomeui/gnome-about.c:337
-msgid "Name list font description as a string"
-msgstr "Опис шрифту назви списку у вигляді рядка"
-
-#: libgnomeui/gnome-about.c:664
-msgid "Author"
-msgstr "Автор"
-
-#: libgnomeui/gnome-about.c:670
-msgid "Documenter"
-msgstr "Автор документації"
-
-#: libgnomeui/gnome-about.c:817
+#: libgnomeui/gnome-about.c:366
 #, c-format
 msgid "About %s"
 msgstr "Про %s"
+
+#: libgnomeui/gnome-appbar.c:762
+#, fuzzy
+msgid "Has Progress"
+msgstr "Поступ"
+
+#: libgnomeui/gnome-appbar.c:763
+#, fuzzy
+msgid "Create a progress widget."
+msgstr "Створити нове вікно"
+
+#: libgnomeui/gnome-appbar.c:770
+msgid "Has Status"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:771
+#, fuzzy
+msgid "Create a status widget."
+msgstr "Створити нове вікно"
+
+#: libgnomeui/gnome-appbar.c:778
+msgid "Interactivity"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:779
+msgid "Level of user activity required."
+msgstr ""
 
 #: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
@@ -240,165 +172,158 @@ msgstr "Отримано невірні дані кольору\n"
 msgid "Pick a color"
 msgstr "Вибрати колір"
 
-#: libgnomeui/gnome-dateedit.c:420
+#: libgnomeui/gnome-dateedit.c:436
 msgid "Time"
 msgstr "Час"
 
-#: libgnomeui/gnome-dateedit.c:421
-msgid "The time currentlyselected"
+#: libgnomeui/gnome-dateedit.c:437
+#, fuzzy
+msgid "The time currently selected"
 msgstr "Вибраний час"
 
-#: libgnomeui/gnome-dateedit.c:433
+#: libgnomeui/gnome-dateedit.c:449
 msgid "DateEdit Flags"
 msgstr "Індикатори DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:434
+#: libgnomeui/gnome-dateedit.c:450
 msgid "Flags for how DateEdit looks"
 msgstr "Індикатори вигляду DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:443
+#: libgnomeui/gnome-dateedit.c:459
 msgid "Lower Hour"
 msgstr "Нижня година"
 
-#: libgnomeui/gnome-dateedit.c:444
+#: libgnomeui/gnome-dateedit.c:460
 msgid "Lower hour in the time popup selector"
 msgstr "Нижня година у вибирачі часу"
 
-#: libgnomeui/gnome-dateedit.c:454
+#: libgnomeui/gnome-dateedit.c:470
 msgid "Upper Hour"
 msgstr "Верхня година"
 
-#: libgnomeui/gnome-dateedit.c:455
+#: libgnomeui/gnome-dateedit.c:471
 msgid "Upper hour in the time popup selector"
 msgstr "Верхня година у вибирачі часу"
 
-#: libgnomeui/gnome-dateedit.c:465
+#: libgnomeui/gnome-dateedit.c:481
 msgid "Initial Time"
 msgstr "Початковий час"
 
-#: libgnomeui/gnome-dateedit.c:466
+#: libgnomeui/gnome-dateedit.c:482
 msgid "The initial time"
 msgstr "Початковий час"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:728
 msgid "Calendar"
 msgstr "Календар"
 
-#: libgnomeui/gnome-dateedit.c:928
+#: libgnomeui/gnome-dateedit.c:960
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "функція gnome_date_edit_get_date небажаний, використовуйте "
 "gnome_date_edit_get_time"
 
-#: libgnomeui/gnome-druid-page-edge.c:342
-msgid "Helvetical Bold 18"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-edge.c:353
-msgid "Helvetical Medium 12"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-standard.c:133
+#: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:156
 msgid "Title"
 msgstr "Заголовок"
 
-#: libgnomeui/gnome-druid-page-standard.c:134
+#: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "Заголовок друіда"
 
-#: libgnomeui/gnome-druid-page-standard.c:142
+#: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "Зображення емблеми"
 
-#: libgnomeui/gnome-druid-page-standard.c:149
+#: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:150
+#: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr ""
 
-#: libgnomeui/gnome-druid-page-standard.c:157
+#: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr "Передній план заголовка"
 
-#: libgnomeui/gnome-druid-page-standard.c:158
+#: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr "Колір переднього плану заголовка"
 
-#: libgnomeui/gnome-druid-page-standard.c:165
+#: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr "Колір переднього плану заголовка"
 
-#: libgnomeui/gnome-druid-page-standard.c:166
+#: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr "Колір переднього плану заголовка у вигляді GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:173
+#: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr "Колір переднього плану заголовка встановлено"
 
-#: libgnomeui/gnome-druid-page-standard.c:174
+#: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr "Колір переднього плану заголовка встановлено"
 
-#: libgnomeui/gnome-druid-page-standard.c:181
-#: libgnomeui/gnome-druid-page-standard.c:189
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr "Колір тла"
 
-#: libgnomeui/gnome-druid-page-standard.c:182
+#: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr "Колір тла"
 
-#: libgnomeui/gnome-druid-page-standard.c:190
+#: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr "Колір тла у вигляді GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:197
+#: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr "Колір тла встановлено"
 
-#: libgnomeui/gnome-druid-page-standard.c:198
+#: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr "Колір тла встановлено"
 
-#: libgnomeui/gnome-druid-page-standard.c:205
-#: libgnomeui/gnome-druid-page-standard.c:213
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
 msgstr "Колір тла логотипа"
 
-#: libgnomeui/gnome-druid-page-standard.c:206
+#: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
 msgstr "Колір тла логотипа"
 
-#: libgnomeui/gnome-druid-page-standard.c:214
+#: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
 msgstr "Колір тла логотипа у вигляді GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:221
+#: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
 msgstr "Колір тла логотипа встановлено"
 
-#: libgnomeui/gnome-druid-page-standard.c:222
+#: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
 msgstr "Колір тла логотипа встановлено"
 
-#: libgnomeui/gnome-druid.c:146
+#: libgnomeui/gnome-druid.c:148
 msgid "Show Finish"
 msgstr "Показати завершення"
 
-#: libgnomeui/gnome-druid.c:147
+#: libgnomeui/gnome-druid.c:149
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Показати кнопку завершення замість кнопки переходу далі"
 
-#: libgnomeui/gnome-druid.c:154
+#: libgnomeui/gnome-druid.c:156
 msgid "Show Help"
 msgstr "Показати довідку"
 
-#: libgnomeui/gnome-druid.c:155
+#: libgnomeui/gnome-druid.c:157
 msgid "Show the 'Help' button"
 msgstr "Показати кнопку довідки"
 
@@ -438,26 +363,26 @@ msgstr ""
 "Сталася помилка під час спроби запустити обробника URL.\n"
 "Будь ласка, переконайтесь, що в Центр Керування вірно налаштувано."
 
-#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
 msgid "X display to use"
 msgstr "X-дисплей до використання"
 
-#: libgnomeui/gnome-ui-init.c:96 libgnomeui/gnome-ui-init.c:627
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЙ"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:111
 msgid "GNOME GUI Library"
 msgstr "Бібліотека ГІК GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:474
+#: libgnomeui/gnome-ui-init.c:592
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Множинний збій сеґментації; неможливо відобразити повідомлення про помилку\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:488
+#: libgnomeui/gnome-ui-init.c:606
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -465,76 +390,76 @@ msgstr ""
 "Збій сеґментації!\n"
 "Неможливо відобразити діалог збою\n"
 
-#: libgnomeui/gnome-ui-init.c:620
+#: libgnomeui/gnome-ui-init.c:738
 msgid "Gdk debugging flags to set"
 msgstr "Індикатори налагодження GTK до встановлення"
 
-#: libgnomeui/gnome-ui-init.c:620 libgnomeui/gnome-ui-init.c:623
-#: libgnomeui/gnome-ui-init.c:664 libgnomeui/gnome-ui-init.c:667
+#: libgnomeui/gnome-ui-init.c:738 libgnomeui/gnome-ui-init.c:741
+#: libgnomeui/gnome-ui-init.c:782 libgnomeui/gnome-ui-init.c:785
 msgid "FLAGS"
 msgstr "ІНДИКАТОРИ"
 
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:741
 msgid "Gdk debugging flags to unset"
 msgstr "Індикатори налагодження GTK до зняття"
 
-#: libgnomeui/gnome-ui-init.c:631
+#: libgnomeui/gnome-ui-init.c:749
 msgid "Make X calls synchronous"
 msgstr "Робити синхронні виклики X Window"
 
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:755
 msgid "Don't use X shared memory extension"
 msgstr "Не використовувати розширення пам'яті W Window"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:759
 msgid "Program name as used by the window manager"
 msgstr "Назва програми, що використовується віконним менеджером"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:759
 msgid "NAME"
 msgstr "НАЗВА"
 
-#: libgnomeui/gnome-ui-init.c:644
+#: libgnomeui/gnome-ui-init.c:762
 msgid "Program class as used by the window manager"
 msgstr "Клас програми, що використовується віконним менеджером"
 
-#: libgnomeui/gnome-ui-init.c:644
+#: libgnomeui/gnome-ui-init.c:762
 msgid "CLASS"
 msgstr "КЛАС"
 
-#: libgnomeui/gnome-ui-init.c:648
+#: libgnomeui/gnome-ui-init.c:766
 msgid "HOST"
 msgstr "ХОСТ"
 
-#: libgnomeui/gnome-ui-init.c:652
+#: libgnomeui/gnome-ui-init.c:770
 msgid "PORT"
 msgstr "ПОРТ"
 
-#: libgnomeui/gnome-ui-init.c:657 libgnomeui/gnome-ui-init.c:660
+#: libgnomeui/gnome-ui-init.c:775 libgnomeui/gnome-ui-init.c:778
 msgid "STYLE"
 msgstr "СТИЛЬ"
 
-#: libgnomeui/gnome-ui-init.c:664
+#: libgnomeui/gnome-ui-init.c:782
 msgid "Gtk+ debugging flags to set"
 msgstr "Індикатори налагодження GTK+ до встановлення"
 
-#: libgnomeui/gnome-ui-init.c:667
+#: libgnomeui/gnome-ui-init.c:785
 msgid "Gtk+ debugging flags to unset"
 msgstr "Індикатори налагодження GTK+ до зняття"
 
-#: libgnomeui/gnome-ui-init.c:670
+#: libgnomeui/gnome-ui-init.c:788
 msgid "Make all warnings fatal"
 msgstr "Зробити всі попередження фатальними"
 
-#: libgnomeui/gnome-ui-init.c:673
+#: libgnomeui/gnome-ui-init.c:791
 msgid "Load an additional Gtk module"
 msgstr "Завантажити додатковий модуль GTK"
 
-#: libgnomeui/gnome-ui-init.c:673
+#: libgnomeui/gnome-ui-init.c:791
 msgid "MODULE"
 msgstr "МОДУЛЬ"
 
-#: libgnomeui/gnome-ui-init.c:778
+#: libgnomeui/gnome-ui-init.c:896
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -981,6 +906,24 @@ msgstr "_Завершити гру"
 msgid "End the current game"
 msgstr "Завершити поточну гру"
 
+#: libgnomeui/gnome-app-helper.c:2574
+msgid "Both text and icons"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2575
+msgid "Icons only"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2576
+#, fuzzy
+msgid "Text only"
+msgstr "Текст"
+
+#: libgnomeui/gnome-app-helper.c:2627
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr ""
+
 #: libgnomeui/gnome-app-util.c:103
 msgid " (press return)"
 msgstr " (натисніть ввід)"
@@ -1082,7 +1025,7 @@ msgstr "Назва шрифту"
 msgid "Name of the selected font"
 msgstr "Назва вибраного шрифту"
 
-#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:975
+#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Шрифт"
 
@@ -1158,12 +1101,12 @@ msgstr "Подробиці помилки GConf: %s\n"
 msgid "No Icon"
 msgstr "Немає піктограми"
 
-#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:373
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:378
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 "Незнайдено горизонтального блоку, використовується звичайний вибір файлу"
 
-#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:379
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:384
 msgid "Preview"
 msgstr "Перегляд"
 
@@ -1205,7 +1148,7 @@ msgstr "Запитання"
 msgid "Message"
 msgstr "Повідомлення"
 
-#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:491
+#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:496
 msgid "No Image"
 msgstr "Немає зображення"
 
@@ -1232,13 +1175,88 @@ msgstr "Дата"
 #. %d is day of month, %m is month number, %T full hour,
 #. %H hours, %M minutes, %S seconds
 #.
-#: libgnomeui/gnome-scores.c:197
+#: libgnomeui/gnome-scores.c:199
 msgid "%a %b %d %T %Y"
 msgstr "%a %d %b %T %Y"
 
-#: libgnomeui/gnome-scores.c:407
-msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
-msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
+#: libgnomeui/gnome-scores.c:412
+msgid "Sans 14"
+msgstr ""
+
+#~ msgid "Background"
+#~ msgstr "Тло"
+
+#~ msgid "The background pixbuf to use"
+#~ msgstr "Зображення тла"
+
+#~ msgid "Background start opacity"
+#~ msgstr "Початкова непрозорість тла"
+
+#~ msgid "Opacity at the start of the background"
+#~ msgstr "Непрозорість на початку тла"
+
+#~ msgid "Background end opacity"
+#~ msgstr "Кінцева непрозорість тла"
+
+#~ msgid "Opacity at the end of the background"
+#~ msgstr "Напрозорість на кинці тла"
+
+#~ msgid "Background start position"
+#~ msgstr "Початкова позиція тла"
+
+#~ msgid "Position at the start of the background"
+#~ msgstr "Позиція на початку тла"
+
+#~ msgid "Background end position"
+#~ msgstr "Кінцева позиція тла"
+
+#~ msgid "Position at the end of the background"
+#~ msgstr "Позиція на кінці тла"
+
+#~ msgid "Logo top padding"
+#~ msgstr "Верхній відступ емблеми"
+
+#~ msgid "How far the logo is from the top"
+#~ msgstr "Віддаль емблеми від верху"
+
+#~ msgid "Logo right padding"
+#~ msgstr "Правий відступ емблеми"
+
+#~ msgid "How far the logo is from the right"
+#~ msgstr "Віддаль емблеми від правого краю"
+
+#~ msgid "Header font"
+#~ msgstr "Шрифт заголовка"
+
+#~ msgid "Header font description as a string"
+#~ msgstr "Опис шрифту заголовка у вигляді рядка"
+
+#~ msgid "Copyright font"
+#~ msgstr "Шрифт авторських прав"
+
+#~ msgid "Copyright font description as a string"
+#~ msgstr "Опис шрифту авторських прав у вигляді рядка"
+
+#~ msgid "Comments font"
+#~ msgstr "Шрифт коментарів"
+
+#~ msgid "Comments font description as a string"
+#~ msgstr "Опис шрифту коментарів у вигляді рядка"
+
+#~ msgid "Name header font"
+#~ msgstr "Шрифт назви заголовку"
+
+#~ msgid "Name header font description as a string"
+#~ msgstr "Опис шрифту назви заголовку у вигляді рядка"
+
+#~ msgid "Name list font"
+#~ msgstr "Шрифт назви списку"
+
+#~ msgid "Name list font description as a string"
+#~ msgstr "Опис шрифту назви списку у вигляді рядка"
+
+#~ msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
+#~ msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 
 #~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 #~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
