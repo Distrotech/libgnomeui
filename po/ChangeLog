@@ -1,3 +1,7 @@
+2002-05-19  Szabolcs Ban <shooby@gnome.hu>
+
+	* hu.po: Corrected an encoding error
+
 Mon May 20 17:07:13 2002  George Lebl <jirka@5z.com>
 
 	* cs.po: add a czech translation file with a very few translations
