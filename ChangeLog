@@ -1,3 +1,11 @@
+2002-03-13  Michael Meeks  <michael@ximian.com>
+
+	* libgnomeui/gnome-ui-init.c
+	(gnome_gtk_module_info_get): chain on to
+	libbonoboui, for bin-compat.
+	(libgnomeui_module_info_get): prune the
+	requirements & depend on libbonoboui
+
 2002-03-10  Changwoo Ryu  <cwryu@debian.org>
 
 	* configure.in: Added 'ko' to ALL_LINGUAS.
