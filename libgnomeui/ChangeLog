@@ -1,3 +1,8 @@
+Thu Mar 26 13:29:18 1998  Radek Doulik  <gis@academy.cas.cz>
+
+	* gnome-client.c (gnome_client_flush): check HAVE_LIBSM, hope I don't
+	break something
+
 Wed Mar 25 01:30:00 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
 
 	* stock_demo.c: use the "Really quit?" message box for real.

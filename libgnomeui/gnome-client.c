@@ -444,13 +444,17 @@ gnome_client_new_without_connection (void)
 void
 gnome_client_flush (GnomeClient *client)
 {
+#ifdef HAVE_LIBSM
   IceConn conn;
+#endif
 
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_CLIENT_CONNECTED (client));
 
+#ifdef HAVE_LIBSM
   conn = SmcGetIceConnection (client->smc_conn);
   IceFlush (conn);
+#endif
 }
 
 /*****************************************************************************/
