@@ -1,5 +1,7 @@
 2001-06-14  Martin Baulig  <baulig@suse.de>
 
+	* gnome-textfu.[ch], gnome-popup-help.[ch], gnome-popup-menu.[ch]: Removed.
+
 	* gnome-helpsys.[ch], wap-textfu.[ch]: Removed.
 
 2001-06-14  Martin Baulig  <baulig@suse.de>

@@ -74,9 +74,6 @@
 #include <libgnomeui/gnome-mdi-child.h>
 #include <libgnomeui/gnome-mdi-generic-child.h>
 #include <libgnomeui/gnome-mdi-session.h>
-#include <libgnomeui/gnome-popup-menu.h>
-#include <libgnomeui/gnome-popup-help.h>
-#include <libgnomeui/gnome-textfu.h>
 #endif
 
 #ifdef COMPAT_1_0

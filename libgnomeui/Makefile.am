@@ -48,23 +48,15 @@ unused_SOURCES = \
 	gnome-mdi-child.c		\
 	gnome-mdi-generic-child.c       \
 	gnome-mdi-session.c		\
-	gnome-popup-menu.c		\
-	gnome-popup-help.c		\
 	gnome-pouch.c			\
 	gnome-pouchP.h			\
 	gnome-roo.c			\
-	gnome-helpsys.c			\
-	gnome-textfu.c			\
 	gnome-mdi.h			\
 	gnome-mdi-child.h		\
 	gnome-mdi-generic-child.h	\
 	gnome-mdi-session.h		\
-	gnome-popup-menu.h		\
-	gnome-popup-help.h		\
 	gnome-pouch.h			\
 	gnome-roo.h			\
-	gnome-helpsys.h			\
-	gnome-textfu.h			\
 	gnome-ditem-edit.c
 
 libgnomeui_2_la_SOURCES = \
