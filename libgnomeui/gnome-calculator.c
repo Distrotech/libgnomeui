@@ -58,6 +58,7 @@ static void gnome_calculator_destroy	(GtkObject		*object);
 static GtkVBoxClass *parent_class;
 
 static GdkPixmap * font_pixmap = NULL;
+static int calculator_count = 0;
 
 typedef struct _CalculatorButton CalculatorButton;
 struct _CalculatorButton {
@@ -141,6 +142,8 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 
 	class->result_changed = NULL;
 	gtk_object_class_add_signals (object_class, gnome_calculator_signals, LAST_SIGNAL);
+
+	calculator_count++;
 }
 
 #if 0 /*only used for debugging*/
@@ -1028,8 +1031,7 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 
 	if(font_pixmap == NULL) {
                 GdkPixbuf *pixbuf;
-		gchar *file =
-			gnome_unconditional_pixmap_file("calculator-font.png");
+		gchar *file = gnome_pixmap_file("calculator-font.png");
 
 		if(file == NULL) {
 			g_warning("Can't find calculator-font.png");
@@ -1236,6 +1238,12 @@ gnome_calculator_destroy (GtkObject *object)
 
 	while(gc->stack)
 		stack_pop(&gc->stack);
+
+	if((--calculator_count)==0 &&
+	   font_pixmap) {
+		gdk_pixmap_unref(font_pixmap);
+		font_pixmap = NULL;
+	}
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);

@@ -1,3 +1,10 @@
+Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: count active widgets and after we destroy
+	  the last one, kill our font pixmap, also don't use the
+	  unconditional pixmap file routine as we want to check if the
+	  file exists or not
+
 1999-11-05  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-pixmap.c (gnome_pixmap_set_mode): implemented
