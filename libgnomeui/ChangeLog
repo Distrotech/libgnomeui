@@ -1,3 +1,13 @@
+Sat May 25  1:58:00 1998  Cesar Miquel  <miquel@df.uba.ar>
+
+	* gnome-about.c Applied a patch provided by Changwoo Ryu 
+	<cwryu@adam.kaist.ac.kr> that makes the gnome_about_new's 
+	"logo" argument more convenient to use. It:
+
+ 		1) Uses gdk_imlib.  Goodbye, xpm.
+		2) Find the logo file in the pixmap 
+		   directory (by gnome_pixmap_file).
+
 Sat May 23 21:55:41 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c (gnome_dialog_run_modal): Don't call set_modal,
