@@ -358,7 +358,10 @@ gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
 static gpointer
 view_window_func (gpointer data)
 {
-	return gnome_mdi_get_app_from_view(GTK_WIDGET(data));
+	if (GTK_WIDGET_REALIZED (GTK_WIDGET (data)))
+		return gnome_mdi_get_app_from_view(GTK_WIDGET(data));
+	else
+		return NULL;
 }
 
 /**
