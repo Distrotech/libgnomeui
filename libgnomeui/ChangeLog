@@ -1,3 +1,8 @@
+1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gil_destroy): In addition to removing the
+	timer, reset the timer_tag variable.
+
 Mon Mar 15 04:48:10 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-list.c: remove timeout when widget is destroyed,
