@@ -136,12 +136,12 @@ static void gnome_selector_init                (GnomeSelector      *selector);
 static void gnome_selector_destroy             (GtkObject          *object);
 static void gnome_selector_finalize            (GObject            *object);
 
-static void gnome_selector_get_property           (GObject            *object,
+static void gnome_selector_get_property        (GObject            *object,
                                                 guint               param_id,
                                                 GValue             *value,
                                                 GParamSpec         *pspec,
                                                 const gchar        *trailer);
-static void gnome_selector_set_property           (GObject            *object,
+static void gnome_selector_set_property        (GObject            *object,
                                                 guint               param_id,
                                                 const GValue       *value,
                                                 GParamSpec         *pspec,
@@ -191,6 +191,9 @@ static void     free_entry_func                (gpointer         data,
 
 enum {
     PROP_0,
+    PROP_DIALOG_TITLE,
+    PROP_HISTORY_ID,
+    PROP_SELECTION_MODE
 };
 
 enum {
@@ -207,6 +210,7 @@ enum {
     UPDATE_SIGNAL,
     UPDATE_URI_LIST_SIGNAL,
     THAW_SIGNAL,
+    GET_SELECTION_MODE_SIGNAL,
     SET_SELECTION_MODE_SIGNAL,
     GET_SELECTION_SIGNAL,
     SELECTION_CHANGED_SIGNAL,
@@ -353,6 +357,14 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gtk_marshal_VOID__UINT,
 			GTK_TYPE_NONE, 1,
 			GTK_TYPE_UINT);
+    gnome_selector_signals [GET_SELECTION_MODE_SIGNAL] =
+	gtk_signal_new ("get_selection_mode",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   get_selection_mode),
+			gnome_marshal_ENUM__VOID,
+			GTK_TYPE_SELECTION_MODE, 0);
     gnome_selector_signals [SET_SELECTION_MODE_SIGNAL] =
 	gtk_signal_new ("set_selection_mode",
 			GTK_RUN_LAST,
@@ -457,10 +469,30 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_TYPE_STRING,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
 
-    object_class->destroy = gnome_selector_destroy;
-    gobject_class->finalize = gnome_selector_finalize;
     gobject_class->get_property = gnome_selector_get_property;
     gobject_class->set_property = gnome_selector_set_property;
+
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_DIALOG_TITLE,
+	 g_param_spec_string ("dialog_title", NULL, NULL,
+			      NULL,
+			      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_HISTORY_ID,
+	 g_param_spec_string ("history_id", NULL, NULL,
+			      NULL,
+			      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_SELECTION_MODE,
+	 g_param_spec_enum ("selection_mode", NULL, NULL,
+			    GTK_TYPE_SELECTION_MODE, GTK_SELECTION_SINGLE,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+
+    object_class->destroy = gnome_selector_destroy;
+    gobject_class->finalize = gnome_selector_finalize;
 
     class->browse = browse_handler;
     class->clear = clear_handler;
@@ -479,8 +511,8 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
 static void
 gnome_selector_set_property (GObject *object, guint param_id,
-			  const GValue *value, GParamSpec *pspec,
-			  const gchar *trailer)
+			     const GValue *value, GParamSpec *pspec,
+			     const gchar *trailer)
 {
     GnomeSelector *selector;
 
@@ -490,15 +522,24 @@ gnome_selector_set_property (GObject *object, guint param_id,
     selector = GNOME_SELECTOR (object);
 
     switch (param_id) {
+    case PROP_DIALOG_TITLE:
+	gnome_selector_set_dialog_title (selector, g_value_get_string (value));
+	break;
+    case PROP_HISTORY_ID:
+	gnome_selector_set_history_id (selector, g_value_get_string (value));
+	break;
+    case PROP_SELECTION_MODE:
+	gnome_selector_set_selection_mode (selector, g_value_get_enum (value));
+	break;
     default:
-	g_assert_not_reached ();
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 	break;
     }
 }
 
 static void
 gnome_selector_get_property (GObject *object, guint param_id, GValue *value,
-			  GParamSpec *pspec, const gchar *trailer)
+			     GParamSpec *pspec, const gchar *trailer)
 {
     GnomeSelector *selector;
 
@@ -508,8 +549,17 @@ gnome_selector_get_property (GObject *object, guint param_id, GValue *value,
     selector = GNOME_SELECTOR (object);
 
     switch (param_id) {
+    case PROP_DIALOG_TITLE:
+	g_value_set_string (value, gnome_selector_get_dialog_title (selector));
+	break;
+    case PROP_HISTORY_ID:
+	g_value_set_string (value, gnome_selector_get_history_id (selector));
+	break;
+    case PROP_SELECTION_MODE:
+	g_value_set_enum (value, gnome_selector_get_selection_mode (selector));
+	break;
     default:
-	g_assert_not_reached ();
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 	break;
     }
 }
@@ -978,6 +1028,35 @@ gnome_selector_set_dialog_title (GnomeSelector *selector,
 
     /* this is NULL safe. */
     selector->_priv->dialog_title = g_strdup (dialog_title);
+
+    g_object_notify (G_OBJECT (selector), "dialog_title");
+}
+
+const gchar *
+gnome_selector_get_history_id (GnomeSelector *selector)
+{
+    g_return_val_if_fail (selector != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+    return selector->_priv->history_id;
+}
+
+void
+gnome_selector_set_history_id (GnomeSelector *selector,
+			       const gchar *history_id)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    if (selector->_priv->history_id) {
+	g_free (selector->_priv->history_id);
+	selector->_priv->history_id = NULL;
+    }
+
+    /* this is NULL safe. */
+    selector->_priv->history_id = g_strdup (history_id);
+
+    g_object_notify (G_OBJECT (selector), "history_id");
 }
 
 GSList *
@@ -1016,6 +1095,21 @@ gnome_selector_add_uri_list (GnomeSelector *selector,
     gtk_signal_emit (GTK_OBJECT (selector),
 		     gnome_selector_signals [ADD_URI_LIST_SIGNAL],
 		     uri_list, position, list_id, async_handle);
+}
+
+GtkSelectionMode
+gnome_selector_get_selection_mode (GnomeSelector *selector)
+{
+    GtkSelectionMode mode = 0;
+
+    g_return_val_if_fail (selector != NULL, 0);
+    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), 0);
+
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [GET_SELECTION_MODE_SIGNAL],
+		     &mode);
+
+    return mode;
 }
 
 void

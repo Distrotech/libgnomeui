@@ -1,5 +1,17 @@
 2000-12-28  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector.h (gnome_selector_get_history_id): New function.
+	(gnome_selector_set_history_id): New function.
+	(GnomeSelector): Added "get_selection_mode" signal.
+	
+	* gnome-selector.c (PROP_DIALOG_TITLE, PROP_HISTORY_ID,
+	PROP_SELECTION_MODE): New properties.
+
+	* gnome-icon-list.c (gnome_icon_list_get_selection_mode):
+	New function.
+
+2000-12-28  Martin Baulig  <baulig@suse.de>
+
 	* gnome-color-picker.c: GtkArg -> GParam.
 
 	* gnome-icon-item.c (ItiPrivate): Removed

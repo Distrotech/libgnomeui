@@ -123,6 +123,7 @@ guint          gnome_icon_list_get_num_icons       (GnomeIconList *gil);
 
 
 /* Managing the selection */
+GtkSelectionMode gnome_icon_list_get_selection_mode(GnomeIconList *gil);
 void           gnome_icon_list_set_selection_mode  (GnomeIconList *gil,
 						    GtkSelectionMode mode);
 void           gnome_icon_list_select_icon         (GnomeIconList *gil,

@@ -2120,6 +2120,21 @@ gnome_icon_list_thaw (GnomeIconList *gil)
 }
 
 /**
+ * gnome_icon_list_get_selection_mode
+ * @gil:  An icon list.
+ *
+ * Returns the current selection mode for an icon list.
+ */
+GtkSelectionMode
+gnome_icon_list_get_selection_mode (GnomeIconList *gil)
+{
+	g_return_val_if_fail (gil != NULL, 0);
+	g_return_val_if_fail (IS_GIL (gil), 0);
+
+	return gil->_priv->selection_mode;
+}
+
+/**
  * gnome_icon_list_set_selection_mode
  * @gil:  An icon list.
  * @mode: New selection mode.

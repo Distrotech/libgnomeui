@@ -124,6 +124,7 @@ struct _GnomeSelectorClass {
                                        guint                     list_id,
                                        GnomeSelectorAsyncHandle *async_handle);
 
+    GtkSelectionMode (*get_selection_mode) (GnomeSelector       *selector);
     void     (*set_selection_mode)    (GnomeSelector            *selector,
                                        GtkSelectionMode          mode);
     GSList * (*get_selection)         (GnomeSelector            *selector);
@@ -252,7 +253,10 @@ void
 gnome_selector_update_uri_list    (GnomeSelector             *selector,
                                    guint                      list_id);
 
-/* Sets the selection mode. */
+/* Get/set the selection mode. */
+GtkSelectionMode
+gnome_selector_get_selection_mode (GnomeSelector             *selector);
+
 void
 gnome_selector_set_selection_mode (GnomeSelector             *selector,
                                    GtkSelectionMode           mode);
@@ -281,6 +285,14 @@ gnome_selector_get_dialog_title   (GnomeSelector             *selector);
 
 void
 gnome_selector_set_dialog_title   (GnomeSelector             *selector,
+                                   const gchar               *dialog_title);
+
+/* Get/set the history id. */
+const gchar *
+gnome_selector_get_history_id     (GnomeSelector             *selector);
+
+void
+gnome_selector_set_history_id     (GnomeSelector             *selector,
                                    const gchar               *dialog_title);
 
 /* Get/set the text in the entry widget. */
