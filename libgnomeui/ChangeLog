@@ -1,3 +1,8 @@
+1998-11-27  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-app-helper.h (GNOMEUIINFO_ITEM): Fixed typo (inserted
+	newline after backslash).
+
 1998-11-27  Justin Maurer  <justin@openprojects.net>
 
 	* gnome-app-helper.c: Added GNOMEUIINFO_SUBTREE_ITEM_STOCK macro. Added 

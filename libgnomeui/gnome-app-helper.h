@@ -128,7 +128,8 @@ typedef struct {
 					  (GnomeUIPixmapType) 0, NULL, 0, (GdkModifierType) 0, NULL }
 
 /* Insert an item with an inline xpm icon */
-#define GNOMEUIINFO_ITEM(label, tooltip, callback, xpm_data) \				{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
+#define GNOMEUIINFO_ITEM(label, tooltip, callback, xpm_data) \
+	{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, xpm_data, 0, (GdkModifierType) 0, NULL}
 
 /* Insert an item with a stock icon */
