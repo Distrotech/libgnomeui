@@ -191,7 +191,7 @@ gnome_scores_construct (  GnomeScores *gs,
 		/* TRANSLATORS NOTE: Date format used when showing scores in games.
 		 * Please refer to manpage of strftime(3) for complete reference.
 		 */
-		if(strftime(tmp2, sizeof(tmp2), _("%a %b %x %X %Y"),
+		if(strftime(tmp2, sizeof(tmp2), _("%a %b %d %T %Y"),
 			    localtime( &(times[i]) )) == 0) {
 			/* according to docs, if the string does not fit, the
 			 * contents of tmp2 are undefined, thus just use
