@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
 "POT-Creation-Date: 2002-08-05 20:50+0200\n"
-"PO-Revision-Date: 2002-07-21 10:56+0200\n"
+"PO-Revision-Date: 2002-08-06 11:09+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -870,7 +870,7 @@ msgstr "Avslutt aktivt spill"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr ""
+msgstr "_Innhold"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
