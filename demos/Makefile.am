@@ -28,26 +28,12 @@ LDADD =	\
 	$(INTLLIBS)
 
 noinst_PROGRAMS = \
-	test-recently-used	\
-	test-file-saver		\
 	selector_demo		\
 	stock_demo		\
 	winhints_demo		\
 	dock_demo 		\
 	animator_demo		\
 	mdi_demo
-
-gnome-file-saver.c:
-	@LN_S@ -f $(top_srcdir)/libgnomeui/gnome-file-saver.c
-
-gnome-recently-used.c:
-	@LN_S@ -f $(top_srcdir)/libgnomeui/gnome-recently-used.c
-
-test_file_saver_SOURCES = test-file-saver.c \
-	gnome-file-saver.c  ## here temporarily
-
-test_recently_used_SOURCES = test-recently-used.c \
-	gnome-recently-used.c  ## here temporarily
 
 selector_demo_SOURCES = selector_demo.c
 
