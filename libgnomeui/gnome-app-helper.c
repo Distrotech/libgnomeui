@@ -11,10 +11,6 @@
  *
  * - Find out how to disable on-the-fly hotkey changing for menu items (GtkAccelGroup locking?).
  *
- * - Rewrite gnome-popupmenu.
- *
- * - See if the insert/delete/find functions in this file are sane.
- *
  * - Write a custom container for the GnomeApp window so that you can have multiple toolbars and
  *   such.
  *
