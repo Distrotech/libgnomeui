@@ -1,3 +1,8 @@
+1999-08-26  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-util.c (gnome_canvas_update_svp): Free the old
+	svp.  BUGFIX:  GNOME bug tracker #1991.
+
 1999-08-25  Havoc Pennington  <hp@pobox.com>
 
 	* gnome_segv.c (main): Translate usage string,
