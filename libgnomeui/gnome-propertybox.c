@@ -300,6 +300,8 @@ gnome_property_box_changed (GnomePropertyBox *property_box)
 
 	g_return_if_fail (property_box != NULL);
 	g_return_if_fail (GNOME_IS_PROPERTY_BOX (property_box));
+	g_return_if_fail (property_box->notebook);
+	g_return_if_fail (GTK_NOTEBOOK (property_box->notebook)->cur_page);
 	
 	page = GTK_NOTEBOOK (property_box->notebook)->cur_page->child;
 	g_assert (page != NULL);
