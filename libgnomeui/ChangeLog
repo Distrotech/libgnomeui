@@ -1,3 +1,11 @@
+Sun Aug 26 09:18:55 2001  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.[ch], gnome-app-util.[ch], gnome-app.[ch],
+	  gnome-appbar.[ch]:  Committing sane HEAD versions of these for
+	  Anders to hack on.  Removed the helpsys stuff since we'll likely
+	  not use that.  Not added these to the build since they probably
+	  won't.  They need a bit of loving before that.
+
 Sat Aug 25 20:18:13 2001  George Lebl <jirka@5z.com>
 
 	* gnome-druid-page-standard.c:  Fix bad prototype
