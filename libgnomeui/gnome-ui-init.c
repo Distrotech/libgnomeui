@@ -611,10 +611,11 @@ initialize_gtk_signal_relay(void)
     return;
 
   ctmp = gnome_config_file("/sound/events/gtk-events.soundlist");
-  g_strconcat3_a(ctmp2, "=", ctmp, "=");
-  g_free(ctmp);
+  ctmp2 = g_strconcat ("=", ctmp, "=");
+  g_free (ctmp);
   iter_signames = gnome_config_init_iterator_sections(ctmp2);
   gnome_config_push_prefix(ctmp2);
+  g_free (ctmp2);
 
   while((iter_signames = gnome_config_iterator_next(iter_signames,
 						    &signame, NULL))) {
