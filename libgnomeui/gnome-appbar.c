@@ -35,7 +35,7 @@
 
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-i18n.h>
-#include <libgnomeui/gnome-preferences.h>
+#include <libgnome/gnome-preferences.h>
 
 #include "gnome-uidefs.h"
 

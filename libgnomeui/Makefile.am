@@ -84,7 +84,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-popup-help.c		\
 	gnome-pouch.c			\
 	gnome-pouchP.h			\
-	gnome-preferences.c		\
 	gnome-roo.c			\
         gnome-winhints.c		\
         gnome-paper-selector.c		\
@@ -147,7 +146,6 @@ gnome_headers = \
 	gnome-popup-help.h		\
 	gnome-pouch.h			\
         gnome-paper-selector.h		\
-	gnome-preferences.h		\
 	gnome-pixmap.h			\
 	gnome-roo.h			\
 	gnome-selector.h		\

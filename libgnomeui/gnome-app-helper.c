@@ -59,7 +59,7 @@
 #include "gnome-uidefs.h"
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
-#include "gnome-preferences.h"
+#include <libgnome/gnome-preferences.h>
 #include "gnome-stock.h"
 
 extern const gchar *gnome_user_accels_dir;

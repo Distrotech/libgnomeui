@@ -1,5 +1,10 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* gnome-preferences.[ch]: Removed. This is now in libgnome
+	and using bonobo-conf.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* gnome-canvas-init.c (libgnomecanvas_pre_args_parse):
 	There is no libgnomecanvas_init() function anymore.
 

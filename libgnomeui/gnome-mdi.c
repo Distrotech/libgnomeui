@@ -33,11 +33,11 @@
 #include <libgnome/gnome-config.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
+#include <libgnome/gnome-preferences.h>
 #include "gnome-app.h"
 #include "gnome-cursors.h"
 #include "gnome-dock-layout.h"
 #include "gnome-stock.h"
-#include "gnome-preferences.h"
 #include "gnome-pouch.h"
 #include "gnome-roo.h"
 #include "gnome-macros.h"
@@ -434,8 +434,10 @@ gnome_mdi_init (GnomeMDI *mdi)
 {
 	mdi->priv = g_new0(GnomeMDIPrivate, 1);
 
+#ifdef FIXME
 	mdi->priv->mode = gnome_preferences_get_mdi_mode();
 	mdi->priv->tab_pos = gnome_preferences_get_mdi_tab_pos();
+#endif
 	
 	mdi->priv->signal_id = 0;
 	mdi->priv->in_drag = FALSE;
@@ -2008,8 +2010,10 @@ gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 
+#ifdef FIXME
 	if(mode == GNOME_MDI_DEFAULT_MODE)
 		mode = gnome_preferences_get_mdi_mode();
+#endif
 
 	if(mdi->priv->active_view) {
 		width = mdi->priv->active_view->allocation.width;

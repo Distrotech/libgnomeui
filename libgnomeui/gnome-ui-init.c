@@ -46,7 +46,6 @@
 #include <libgnomeui/gnome-canvas-init.h>
 
 #include "gnome-client.h"
-#include "gnome-preferences.h"
 #include "gnome-init.h"
 #include "gnome-winhints.h"
 #include "gnome-gconf.h"
@@ -56,6 +55,8 @@
 #include "gnome-pixmap.h"
 
 #include "libgnomeuiP.h"
+
+#include <gtk/gtkmain.h>
 
 /*****************************************************************************
  * libbonoboui
@@ -303,7 +304,6 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         gnome_type_init();
         gtk_rc_set_image_loader(libgnomeui_pixbuf_image_loader);
         libgnomeui_rc_parse(program_invocation_name);
-        gnome_preferences_load();
 
         libgnomeui_segv_setup(TRUE);
 

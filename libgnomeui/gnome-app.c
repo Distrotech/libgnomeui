@@ -48,8 +48,9 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
+#include <libgnome/gnome-preferences.h>
+#include "gnome-app-helper.h"
 #include "gnome-uidefs.h"
-#include "gnome-preferences.h"
 #include "gnome-dock.h"
 #include "gnome-init.h"
 #include "gnome-helpsys.h"
