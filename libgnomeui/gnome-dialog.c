@@ -375,6 +375,39 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
   }
 }
 
+void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
+						   const gchar * button_name,
+						   const gchar * pixmap_name)
+{
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  if (button_name != NULL) {
+    GtkWidget *button;
+
+    if (pixmap_name != NULL) {
+      GtkWidget *pixmap;
+ 
+      pixmap = gnome_stock_new_with_icon (pixmap_name);
+      button = gnome_pixmap_button (pixmap, button_name);    
+    } else {
+      button = gnome_stock_or_ordinary_button (button_name);
+    }
+
+    GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
+    gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
+
+    gtk_widget_grab_default (button);
+    gtk_widget_show (button);
+    
+    gtk_signal_connect_after (GTK_OBJECT (button), "clicked",
+			      (GtkSignalFunc) gnome_dialog_button_clicked,
+			      dialog);
+    
+    dialog->buttons = g_list_append (dialog->buttons, button);
+  }
+}
+
 void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
 					 const gchar ** buttons)
 {
@@ -384,6 +417,19 @@ void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
   while(*buttons != NULL) {
     gnome_dialog_append_button (dialog, *buttons);
     buttons++;
+  }
+}
+
+void       gnome_dialog_append_buttons_with_pixmaps (GnomeDialog * dialog,
+						     const gchar **names,
+						     const gchar **pixmaps)
+{
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  while(*names != NULL) {
+    gnome_dialog_append_button_with_pixmap (dialog, *names, *pixmaps);
+    names++; pixmaps++;
   }
 }
 

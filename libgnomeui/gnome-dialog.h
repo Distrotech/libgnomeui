@@ -171,6 +171,14 @@ void       gnome_dialog_append_button   (GnomeDialog * dialog,
 void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
 					 const gchar **buttons);
 
+/* Add button with arbitrary text and pixmap. */
+void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
+						   const gchar * name,
+						   const gchar * pixmap);
+void       gnome_dialog_append_buttons_with_pixmaps (GnomeDialog * dialog,
+						     const gchar **names,
+						     const gchar **pixmaps);
+
 /* Don't use this either; it's for bindings to languages other 
    than C (which makes the varargs kind of lame... feel free to fix)
    You want _new, see above. */
