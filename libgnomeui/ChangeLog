@@ -1,5 +1,8 @@
 1998-11-27  Jeff Garzik  <jgarzik@pobox.com>
 
+	* gnome-geometry.c:
+	Added API docs.
+
 	* gnome-calculator.c, gnome-client.c, gnome-dateedit.c,
 	gnome-entry.c, gnome-font-picker.c, gnome-font-selector.c,
 	gnome-geometry.c, gnome-init.c, gnome-mdi-session.c,
