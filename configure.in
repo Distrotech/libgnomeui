@@ -71,9 +71,9 @@ gnome-libs. You can download the latest version from ftp://people.redhat.com/sop
 AC_CHECK_HEADERS(dlfcn.h dl.h utmp.h locale.h mcheck.h unistd.h)
 
 dnl This is installed from GTK+ 2.0's gdk-pixbuf
-AC_PATH_PROG(MAKE_INLINE_PIXBUF, make-inline-pixbuf)
-test -z "$MAKE_INLINE_PIXBUF" && AC_MSG_ERROR([
-*** You need the make-inline-pixbuf tool which is installed
+AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource)
+test -z "$GDK_PIXBUF_CSOURCE" && AC_MSG_ERROR([
+*** You need the gdk-pixbuf-csource tool which is installed
 *** from GTK+ 2.0's gdk-pixbuf.
 ***
 *** Either the location where you installed your GTK+ 2.0 is

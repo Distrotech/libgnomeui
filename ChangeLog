@@ -1,3 +1,12 @@
+2001-06-28  Anders Carlsson  <andersca@codefactory.se>
+
+	* configure.in: change MAKE_INLINE_PIXBUF to 
+	GDK_PIXBUF_CSOURCE.
+	
+	* libgnomeui/gnome-stock-icons.c: (add_sized), (add_unsized): Change
+	gdk_pixbuf_new_from_inline to gdk_pixbuf_new_from_stream.
+	* libgnomeui/pixmaps/Makefile.am: change MAKE_INLINE_PIXBUF to GDK_PIXBUF_CSOURCE
+
 2001-06-26  Fatih Demir <kabalak@gtranslator.org>
 
 	* configure.in: Added ta to the languages list.
