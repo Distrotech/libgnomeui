@@ -352,6 +352,7 @@ gnome_appbar_construct(GnomeAppBar * ab,
       gtk_frame_set_shadow_type (GTK_FRAME(frame), GTK_SHADOW_IN);
       
       ab->status = gtk_label_new ("");
+      gtk_misc_set_alignment (GTK_MISC (ab->status), 0.0, 0.0);
       gtk_widget_set_usize (ab->status, 1, -1);
       
       gtk_box_pack_start (box, frame, TRUE, TRUE, 0);

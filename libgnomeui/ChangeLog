@@ -1,3 +1,8 @@
+1999-09-20  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-appbar.c (gnome_appbar_construct): Put alignment back in
+	so that the label is still left-aligned.
+
 1999-09-19  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-appbar.c (gnome_appbar_construct): Set horizontal usize on
