@@ -816,6 +816,33 @@ gnome_pixmap_set_draw_vals (GnomePixmap *gpixmap,
 }
 
 /**
+ * gnome_pixmap_get_draw_vals:
+ * @gpixmap: A @GnomePixmap.
+ * @state: The the state to set the modifications to
+ * @saturation: return location for the saturation offset
+ * @pixelate: return value for whether to draw the insensitive stipple
+ *
+ * Retrieve the values set by gnome_pixmap_set_draw_vals(). Either
+ * return location can be NULL if you don't care about it.
+ *
+ **/
+void
+gnome_pixmap_get_draw_vals           (GnomePixmap      *gpixmap,
+                                      GtkStateType      state,
+                                      gfloat           *saturation,
+                                      gboolean         *pixelate)
+{
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+	g_return_if_fail (state >= 0 && state < 5);
+
+        if (saturation)
+                *saturation = gpixmap->provided[state].saturation;
+        if (pixelate)
+                *pixelate = gpixmap->provided[state].pixelate;
+}
+
+/**
  * gnome_pixmap_set_draw_mode:
  * @gpixmap: A @GnomePixmap.
  * @mode: The new drawing mode.

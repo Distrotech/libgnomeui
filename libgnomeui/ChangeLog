@@ -1,3 +1,8 @@
+2000-01-16  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c (gnome_pixmap_get_draw_vals): new function 
+	to get the draw vals
+
 2000-01-15  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* Removed numerous compile-time warnings

@@ -120,6 +120,10 @@ void            gnome_pixmap_set_draw_vals           (GnomePixmap      *gpixmap,
 						      GtkStateType      state,
 						      gfloat            saturation,
 						      gboolean          pixelate);
+void            gnome_pixmap_get_draw_vals           (GnomePixmap      *gpixmap,
+						      GtkStateType      state,
+						      gfloat           *saturation,
+						      gboolean         *pixelate);
 void            gnome_pixmap_set_draw_mode           (GnomePixmap      *gpixmap,
 						      GnomePixmapDrawMode   mode);
 GnomePixmapDrawMode gnome_pixmap_get_draw_mode       (GnomePixmap      *gpixmap);
