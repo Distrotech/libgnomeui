@@ -157,7 +157,13 @@ gnome_entry_destroy (GtkObject *object)
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 
 	if (gentry->changed && (strcmp (text, "") != 0)) {
-		gnome_entry_prepend_history (gentry, TRUE, text);
+		struct item *item;
+		
+		item = g_new (struct item, 1);
+		item->save = 1;
+		item->text = g_strdup (text);
+		
+		gentry->items = g_list_prepend (gentry->items, item);
 	}
 
 	gnome_entry_save_history (gentry);
@@ -391,18 +397,16 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	gnome_config_push_prefix (prefix);
 	g_free (prefix);
 
-	for (n = 0, items = gentry->items; items; items = items->next) {
+	for (n = 0, items = gentry->items; items && n < DEFAULT_MAX_HISTORY_SAVED; items = items->next, n++) {
 		item = items->data;
 
 		if (item->save) {
 			if (check_for_duplicates (final_items, n, item)) {
 				final_items [n] = item;
-				g_snprintf (key, sizeof(key), "%d", n++);
+				g_snprintf (key, sizeof(key), "%d", n);
 				gnome_config_set_string (key, item->text);
 			}
 		}
-		if (n > DEFAULT_MAX_HISTORY_SAVED)
-			break;
 	}
 
 	gnome_config_pop_prefix ();

@@ -109,6 +109,7 @@ browse_dialog_kill (GtkWidget *widget, gpointer data)
 {
 	GnomeFileEntry *fentry;
 	fentry = GNOME_FILE_ENTRY (data);
+
 	fentry->fsw = NULL;
 }
 
@@ -164,6 +165,9 @@ browse_clicked(GnomeFileEntry *fentry)
 	gtk_signal_connect (GTK_OBJECT (fsw), "destroy",
 			    GTK_SIGNAL_FUNC(browse_dialog_kill),
 			    fentry);
+
+	if (gtk_grab_get_current ())
+		gtk_grab_add (fsw);
 
 	gtk_widget_show (fsw);
 	
@@ -252,7 +256,7 @@ gnome_file_entry_finalize (GtkObject *object)
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (object));
 
 	fentry = GNOME_FILE_ENTRY (object);
-
+	
 	if (fentry->browse_dialog_title)
 		g_free (fentry->browse_dialog_title);
 	if (fentry->default_path)
