@@ -11,6 +11,30 @@
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
 
+
+
+
+/*
+ * The stock buttons suck at this time. So maybe we should undefine
+ * BUTTON_WANT_ICON. If it is undefined, the stock buttons will not include
+ * a pixmap. I leave this defined, so that ppl see a difference between
+ * stock buttons and application buttons.
+ */
+#define BUTTON_WANT_ICON
+
+/*
+ * Hmmm, I'm not sure, if using color context can consume to much colors,
+ * so one can define this here. If defined, all color context modes other
+ * then true/pseudo color and gray lead to the old shading method for
+ * insensitive pixmaps. If undefined, the newer method will allways be used
+ */
+#define NOT_ALLWAYS_SHADE
+
+
+
+#ifdef USE_GDK_IMLIB
+#include "gnome-stock-imlib.h"
+#else /* not USE_GDK_IMLIB */
 #include "../programs/gtt/tb_new.xpm"
 #include "../programs/gtt/tb_save.xpm"
 #include "../programs/gtt/tb_open.xpm"
@@ -20,31 +44,17 @@
 #include "../programs/gtt/tb_properties.xpm"
 #include "../programs/gtt/tb_unknown.xpm"
 #include "../programs/gtt/tb_exit.xpm"
-#include "gnome-stock-ok.xpm"
-#include "gnome-stock-cancel.xpm"
-#include "gnome-stock-menu.c"
+#include "gnome-stock-xpm.h"
+#endif /* not USE_GDK_IMLIB */
+
 
 
 #define STOCK_SEP '.'
 #define STOCK_SEP_STR "."
 
-/* The stock buttons suck at this time. So maybe we should undefine
-   BUTTON_WANT_ICON. If it is undefined, the stock buttons will not
-   include a pixmap. I leave this defined, so that ppl see a
-   difference between stock buttons and application buttons. */
-#define BUTTON_WANT_ICON
-
-/* Hmmm, I'm not sure, if using color context can consume to much
-   colors, so one can define this here. If defined, all color context
-   modes other then true/pseudo color and gray lead to the old shading
-   method for insensitive pixmaps. If undefined, the newer method will
-   allways be used */
-#undef NOT_ALLWAYS_SHADE
-
-
-/**************************/
-/* GnomeStockPixmapWidget */
-/**************************/
+/*
+ * GnomeStockPixmapWidget
+ */
 
 static GtkVBoxClass *parent_class = NULL;
 
@@ -70,13 +80,18 @@ gnome_stock_pixmap_widget_destroy(GtkObject *object)
 
 
 
+/*
+ * This function has turned out to be the load_pixmap_function and is not
+ * used as signal catcher alone. That means, that you cannot trust the
+ * value in prev_state.
+ */
 static void
 gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
 {
         GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
         GtkPixmap *pixmap;
 
-#ifdef DEBUG
+#if defined(DEBUG) && 0
         g_return_if_fail(GTK_WIDGET_REALIZED(widget));
 #else /* DEBUG */
         if (!GTK_WIDGET_REALIZED(widget)) return;
@@ -135,8 +150,27 @@ static void
 gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
                                        GtkRequisition *requisition)
 {
+	GnomeStockPixmapWidget *pmap;
+
         g_return_if_fail(widget != NULL);
         g_return_if_fail(requisition != NULL);
+
+	pmap = GNOME_STOCK_PIXMAP_WIDGET(widget);
+#ifdef USE_GDK_IMLIB
+	/*
+	 * This would duplicate code without gdk_imlib. _With_ gdk_imlib
+	 * there is a good chance that the pixmap is created even before a
+	 * GdkWindow exists.
+	 */
+	if (pmap->regular) {
+		int w, h;
+		gdk_window_get_size((GdkWindow *)pmap->regular->pixmap,
+				    &w, &h);
+		requisition->width = w;
+		requisition->height = h;
+		return;
+	}
+#endif /* USE_GDK_IMLIB */
         /*
 	 * Okay, since I should not load the pixmaps as long as there's no
 	 * GdkWindow for them, I will guess a size of 16x16 for the icons,
@@ -148,9 +182,7 @@ gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
                 if (requisition->height < 16)
                         requisition->height = 16;
         } else {
-                GnomeStockPixmapWidget *pmap;
                 int w, h;
-                pmap = GNOME_STOCK_PIXMAP_WIDGET(widget);
                 if (!pmap->regular) {
                         pmap->regular =
                                 gnome_stock_pixmap(widget, pmap->icon,
@@ -234,6 +266,16 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
         p = GNOME_STOCK_PIXMAP_WIDGET(w);
         p->icon = g_strdup(icon);
         p->window = window;
+#ifdef USE_GDK_IMLIB
+	{
+		GnomeStockPixmapEntry *entry;
+		entry = gnome_stock_pixmap_checkfor(icon, GNOME_STOCK_PIXMAP_REGULAR);
+		if (entry->type == GNOME_STOCK_PIXMAP_TYPE_IMLIB) {
+			p->regular = gnome_stock_pixmap(NULL, icon, GNOME_STOCK_PIXMAP_REGULAR);
+			gtk_widget_show(GTK_WIDGET(p->regular));
+		}
+	}
+#endif /* USE_GDK_IMLIB */
 
 	return w;
 }
@@ -245,6 +287,39 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
 /****************/
 
 
+#ifdef USE_GDK_IMLIB
+struct _default_entries_data {
+        char *icon, *subtype;
+        gchar *rgb_data;
+	int width, height;
+};
+
+struct _default_entries_data entries_data[] = {
+        {GNOME_STOCK_PIXMAP_NEW, GNOME_STOCK_PIXMAP_REGULAR, imlib_new, 20, 20},
+        {GNOME_STOCK_PIXMAP_SAVE, GNOME_STOCK_PIXMAP_REGULAR, imlib_save, 20, 20},
+        {GNOME_STOCK_PIXMAP_OPEN, GNOME_STOCK_PIXMAP_REGULAR, imlib_open, 20, 20},
+        {GNOME_STOCK_PIXMAP_CUT, GNOME_STOCK_PIXMAP_REGULAR, imlib_cut, 20, 20},
+        {GNOME_STOCK_PIXMAP_COPY, GNOME_STOCK_PIXMAP_REGULAR, imlib_copy, 20, 20},
+        {GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, imlib_paste, 20, 20},
+        {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, imlib_properties, 20, 20},
+        {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, imlib_unknown, 20, 20},
+        {GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, imlib_exit, 20, 20},
+        {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, imlib_ok, 20, 20},
+        {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, imlib_ok, 20, 20},
+        {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, imlib_cancel, 20, 20},
+        {GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_new, 16, 16},
+        {GNOME_STOCK_MENU_SAVE, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_save, 16, 16},
+        {GNOME_STOCK_MENU_OPEN, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_open, 16, 16},
+        {GNOME_STOCK_MENU_EXIT, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_exit, 16, 16},
+        {GNOME_STOCK_MENU_CUT, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_cut, 16, 16},
+        {GNOME_STOCK_MENU_COPY, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_copy, 16, 16},
+        {GNOME_STOCK_MENU_PASTE, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_paste, 16, 16},
+        {GNOME_STOCK_MENU_PROP, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_prop, 16, 16},
+        {GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_about, 16, 16},
+	/* TODO: I shouldn't waste a pixmap for that */
+        {GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_blank, 16, 16},
+};
+#else /* not USE_GDK_IMLIB */
 struct _default_entries_data {
         char *icon, *subtype;
         gchar **xpm_data;
@@ -258,16 +333,25 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_PIXMAP_COPY, GNOME_STOCK_PIXMAP_REGULAR, tb_copy_xpm},
         {GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, tb_paste_xpm},
         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, tb_properties_xpm},
-/*         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm}, */
+        /* {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm}, */
         {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, tb_unknown_xpm},
         {GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, tb_exit_xpm},
         {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
         {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
         {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_cancel_xpm},
         {GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_new_xpm},
+        {GNOME_STOCK_MENU_SAVE, GNOME_STOCK_PIXMAP_REGULAR, menu_save_xpm},
+        {GNOME_STOCK_MENU_OPEN, GNOME_STOCK_PIXMAP_REGULAR, menu_open_xpm},
         {GNOME_STOCK_MENU_EXIT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_exit_xpm},
+        {GNOME_STOCK_MENU_CUT, GNOME_STOCK_PIXMAP_REGULAR, menu_cut_xpm},
+        {GNOME_STOCK_MENU_COPY, GNOME_STOCK_PIXMAP_REGULAR, menu_copy_xpm},
+        {GNOME_STOCK_MENU_PASTE, GNOME_STOCK_PIXMAP_REGULAR, menu_paste_xpm},
+        {GNOME_STOCK_MENU_PROP, GNOME_STOCK_PIXMAP_REGULAR, menu_prop_xpm},
         {GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_about_xpm},
+	/* TODO: I shouldn't waste a pixmap for that */
+        {GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, menu_blank_xpm},
 };
+#endif /* not USE_GDK_IMLIB */
 static int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
 
 
@@ -301,8 +385,19 @@ stock_pixmaps(void)
 
         for (i = 0; i < entries_data_num; i++) {
                 entry = g_malloc(sizeof(GnomeStockPixmapEntry));
+#ifdef USE_GDK_IMLIB
+		entry->type = GNOME_STOCK_PIXMAP_TYPE_IMLIB;
+		entry->imlib.rgb_data = entries_data[i].rgb_data;
+		entry->imlib.width = entries_data[i].width;
+		entry->imlib.height = entries_data[i].height;
+		entry->imlib.shape.r = 255;
+		entry->imlib.shape.g = 0;
+		entry->imlib.shape.b = 255;
+		entry->imlib.shape.pixel = 0;
+#else /* not USE_GDK_IMLIB */ 
                 entry->type = GNOME_STOCK_PIXMAP_TYPE_DATA;
                 entry->data.xpm_data = entries_data[i].xpm_data;
+#endif /* not USE_GDK_IMLIB */ 
                 g_hash_table_insert(hash,
                                     build_hash_key(entries_data[i].icon,
                                                    entries_data[i].subtype),
@@ -347,6 +442,48 @@ create_pixmap_from_data(GtkWidget *window, GnomeStockPixmapEntryData *data)
 
 
 
+#ifdef USE_GDK_IMLIB
+static GtkPixmap *
+create_pixmap_from_imlib(GtkWidget *window, GnomeStockPixmapEntryImlib *data)
+{
+        GtkPixmap *pixmap;
+	GdkPixmap *pmap;
+	GdkBitmap *bmap;
+	GdkImlibImage *im;
+
+	im = gdk_imlib_create_image_from_data(data->rgb_data, NULL,
+					      data->width, data->height);
+	gdk_imlib_set_image_shape(im, &data->shape);
+	gdk_imlib_render(im, data->width, data->height);
+	pmap = gdk_imlib_move_image(im);
+	bmap = gdk_imlib_move_mask(im);
+	gdk_imlib_kill_image(im);
+	pixmap = GTK_PIXMAP(gtk_pixmap_new(pmap, bmap));
+        return pixmap;
+}
+
+
+
+static GtkPixmap *
+create_pixmap_from_path(GnomeStockPixmapEntryPath *data)
+{
+        GtkPixmap *pixmap;
+	GdkPixmap *pmap;
+	GdkBitmap *bmap;
+	GdkImlibImage *im;
+
+	im = gdk_imlib_load_image(data->pathname);
+	gdk_imlib_render(im, im->rgb_width, im->rgb_height);
+	pmap = gdk_imlib_move_image(im);
+	bmap = gdk_imlib_move_mask(im);
+	gdk_imlib_kill_image(im);
+	pixmap = GTK_PIXMAP(gtk_pixmap_new(pmap, bmap));
+        return pixmap;
+}
+#endif /* USE_GDK_IMLIB */
+
+
+
 static void
 build_disabled_pixmap(GtkWidget *window, GtkPixmap **inout_pixmap)
 {
@@ -362,6 +499,7 @@ build_disabled_pixmap(GtkWidget *window, GtkPixmap **inout_pixmap)
         GdkColormap *cmap;
         gint32 red, green, blue;
 
+	g_return_if_fail(window != NULL);
         g_return_if_fail(window->window != NULL);
         style = gtk_widget_get_style(window);
         gc = style->bg_gc[GTK_STATE_INSENSITIVE];
@@ -428,18 +566,37 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
         GtkPixmap *pixmap;
 
         g_return_val_if_fail(icon != NULL, NULL);
-        g_return_val_if_fail(window != NULL, NULL);
-        g_return_val_if_fail(GTK_IS_WIDGET(window), NULL);
         /* subtype can be NULL, so not checked */
-
         entry = lookup(icon, subtype, TRUE);
         if (!entry) return NULL;
+
+#ifdef USE_GDK_IMLIB
+	/*
+	 * I don't need a window, if I create a pixmap from an ImlibImage
+	 */
+	if (entry->type != GNOME_STOCK_PIXMAP_TYPE_IMLIB) { 
+		g_return_val_if_fail(window != NULL, NULL);
+		g_return_val_if_fail(GTK_IS_WIDGET(window), NULL);
+	}
+#else /* not USE_GDK_IMLIB */ 
+	g_return_val_if_fail(window != NULL, NULL);
+	g_return_val_if_fail(GTK_IS_WIDGET(window), NULL);
+#endif /* not USE_GDK_IMLIB */
+
         pixmap = NULL;
         switch (entry->type) {
-        case GNOME_STOCK_PIXMAP_TYPE_DATA:
-                pixmap = create_pixmap_from_data(window, &(entry->data));
+	 case GNOME_STOCK_PIXMAP_TYPE_DATA:
+                pixmap = create_pixmap_from_data(window, &entry->data);
                 break;
-        default:
+#ifdef USE_GDK_IMLIB
+	 case GNOME_STOCK_PIXMAP_TYPE_PATH:
+		pixmap = create_pixmap_from_path(&entry->path);
+		break;
+	 case GNOME_STOCK_PIXMAP_TYPE_IMLIB:
+		pixmap = create_pixmap_from_imlib(window, &entry->imlib);
+		break;
+#endif /* USE_GDK_IMLIB */ 
+	 default:
                 g_assert_not_reached();
                 break;
         }

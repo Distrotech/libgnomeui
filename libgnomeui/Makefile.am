@@ -1,13 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 
-# DEFS += -Wall
-
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
 INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir)
 
 lib_LTLIBRARIES = libgnomeui.la
-noinst_PROGRAMS = ted_demo
+noinst_PROGRAMS = ted_demo stock_demo
 
 libgnomeui_la_SOURCES = \
 	gnome-actionarea.c		\
@@ -49,6 +47,8 @@ libgnomeuiinclude_HEADERS = 		\
 
 ted_demo_SOURCES = ted_demo.c
 
+stock_demo_SOURCES = stock_demo.c
+
 SGML =	\
 	gtk-ted.sgml
 
@@ -65,6 +65,11 @@ libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs)
 
 ted_demo_LDADD =	\
+	$(top_builddir)/libgnome/libgnome.la 		\
+	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	$(GTK_LIBS) $(X_LIBS) $(x_libs) $(INTLLIBS) $(DL_LIB)
+
+stock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(GTK_LIBS) $(X_LIBS) $(x_libs) $(INTLLIBS) $(DL_LIB)

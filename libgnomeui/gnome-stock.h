@@ -2,11 +2,30 @@
 #define __GNOME_STOCK_H__
 
 
+/*
+ * If defined, gdk_imlib is used for the pixmap stuff. That will help alot.
+ * As well for colormaps, as for determining the size of a pixmap before a
+ * GdkWindow is created.
+ * 
+ * TODO: I cannot define this here permanently because it will require,
+ * that all apps link against gdk_imlib. We will require a check, if
+ * gdk_imlib is installed on the particular system and include -lgdk_imlib
+ * in LIBS for that.
+ */
+#ifdef HAS_GDK_IMLIB
+#define USE_GDK_IMLIB
+#endif
+
+
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkbutton.h>
+
+#ifdef USE_GDK_IMLIB
+#include <gdk_imlib.h>
+#endif
 
 
 /* A short description:
@@ -97,7 +116,10 @@ typedef enum {
         GNOME_STOCK_PIXMAP_TYPE_DATA,
         GNOME_STOCK_PIXMAP_TYPE_FILE,
         GNOME_STOCK_PIXMAP_TYPE_PATH,
-        GNOME_STOCK_PIXMAP_TYPE_WIDGET
+        GNOME_STOCK_PIXMAP_TYPE_WIDGET,
+#ifdef USE_GDK_IMLIB
+	GNOME_STOCK_PIXMAP_TYPE_IMLIB,
+#endif /* USE_GDK_IMLIB */
 } GnomeStockPixmapType;
 
 
@@ -106,6 +128,17 @@ struct _GnomeStockPixmapEntryData {
         GnomeStockPixmapType type;
         gchar **xpm_data;
 };
+
+#ifdef USE_GDK_IMLIB
+/* a data entry holds a hardcoded pixmap */
+typedef struct _GnomeStockPixmapEntryImlib   GnomeStockPixmapEntryImlib;
+struct _GnomeStockPixmapEntryImlib {
+        GnomeStockPixmapType type;
+        gchar *rgb_data;
+	int width, height;
+	GdkImlibColor shape;
+};
+#endif
 
 /* a file entry holds a filename (no path) to the pixamp. this pixmap
    will be seached for using gnome_pixmap_file */
@@ -120,9 +153,8 @@ struct _GnomeStockPixmapEntryPath {
         gchar *pathname;
 };
 
-/* a widget entry holds a GnomeStockPixmapWidget. This kind of icon
-   can be used by a theme to completely change the handling of a stock
-   icon. */
+/* a widget entry holds a GnomeStockPixmapWidget. This kind of icon can be
+ * used by a theme to completely change the handling of a stock icon. */
 struct _GnomeStockPixmapEntryWidget {
         GnomeStockPixmapType type;
         GtkWidget *widget;
@@ -134,6 +166,9 @@ union _GnomeStockPixmapEntry {
         GnomeStockPixmapEntryFile file;
         GnomeStockPixmapEntryPath path;
         GnomeStockPixmapEntryWidget widget;
+#ifdef USE_GDK_IMLIB
+	GnomeStockPixmapEntryImlib imlib;
+#endif /* USE_GDK_IMLIB */ 
 };
 
 
@@ -207,8 +242,15 @@ GtkWidget             *gnome_stock_button          (char *type);
 /*  menus  */
 
 #define GNOME_STOCK_MENU_NEW      "Menu_New"
+#define GNOME_STOCK_MENU_SAVE     "Menu_Save"
+#define GNOME_STOCK_MENU_OPEN     "Menu_Open"
 #define GNOME_STOCK_MENU_EXIT     "Menu_Exit"
+#define GNOME_STOCK_MENU_CUT      "Menu_Cut"
+#define GNOME_STOCK_MENU_COPY     "Menu_Copy"
+#define GNOME_STOCK_MENU_PASTE    "Menu_Paste"
+#define GNOME_STOCK_MENU_PROP     "Menu_Properties"
 #define GNOME_STOCK_MENU_ABOUT    "Menu_About"
+#define GNOME_STOCK_MENU_BLANK    "Menu_"
 
 /* returns a GtkMenuItem with an stock icon and text */
 GtkWidget             *gnome_stock_menu_item       (char *type, char *text);
