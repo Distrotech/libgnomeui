@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-24 11:24+0100\n"
-"PO-Revision-Date: 2003-04-03 22:03+0600\n"
-"Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
+"POT-Creation-Date: 2004-02-27 18:27-0600\n"
+"PO-Revision-Date: 2004-02-23 17:51-0600\n"
+"Last-Translator: Dinesh Nadarajah <dinesh_list@sbcglobal.net>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,9 +47,8 @@ msgid "Translated by"
 msgstr "மொழிபெயர்ப்பாலர்"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "புகழ்கள்"
+msgstr "பு_கழ்கள்"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -139,6 +138,7 @@ msgstr "%s பற்றி"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_கோப்பு"
 
@@ -196,6 +196,7 @@ msgid "_Game"
 msgstr "_விளையாட்டு"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_உதவி"
 
@@ -386,11 +387,11 @@ msgstr "செயல்பாட்டை அமை வடிவப்படு�
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "பற்றி"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "இந்த செயல்பாட்டைப் பற்றி"
 
@@ -417,7 +418,7 @@ msgstr "புதிய ஒரு சாளரத்தைப் படை"
 msgid "_Close This Window"
 msgstr "_இந்த சாளரத்தை மூடு"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "தற்போதைய சாளரத்தை மூடு"
 
@@ -592,7 +593,7 @@ msgstr "வேண்டிய பயனர் செயற்பாடு அள
 
 #: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "உங்கள் http பதிவாணைக்கு பெயரும் கடவுச்சொல்லும் வேண்டும்.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
@@ -600,29 +601,31 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"\"%s\" அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "உங்கள் கடவுச்சொல் மறைக்குறியாக செலுத்தம் செய்யப்படாது."
 
 #: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "உங்கள் கடவுச்சொல் மறைக்குறியாக அனுப்பப்படும்."
 
 #: libgnomeui/gnome-authentication-manager.c:69
 #: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
-msgstr ""
+msgstr "பெயர்-கடவுச்சொல் வேண்டும்"
 
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " களம் %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
+msgstr "%s அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -926,7 +929,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "GtkFileChooser பயன்படுத்தவும்"
 
 #: libgnomeui/gnome-file-entry.c:300
 msgid ""
@@ -934,23 +937,23 @@ msgid ""
 "to select files."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "கோப்பு தெரிவுசெய்க"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path"
 msgstr "பாதை"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path to file"
 msgstr "கோப்பின் பாதை"
 
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 msgid "_Browse..."
 msgstr "_மேலோடு..."
 
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "கோப்பு தெரிவுசெய்வதற்கு 'கோப்பு தெரிவு உரையாடல்' காட்டுக"
 
@@ -1200,23 +1203,23 @@ msgstr "தகவல்"
 
 #: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
-msgstr ""
+msgstr "_பயனர்பெயர்:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_களம்:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
-msgstr ""
+msgstr "_கடவுச் சொல்:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "இந்த அமர்வின் கடவுச்சொல்லை நினைவு கொள்ளவும்"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "விசை-மோதிரத்தில் கடவுச்சொல்லை சேமிக்கவும்"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1299,7 +1302,7 @@ msgstr "பற்றி"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "முறிவு உரையாடலை முடக்குக"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
@@ -1342,12 +1345,12 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "\"%s\" செயற்பாடு எதிர்பாராமல் வெளியேறிவிட்டது."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "செயல் %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
@@ -1360,42 +1363,17 @@ msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "புழங்குதல்: gnome_segv பயன்பாடு_பெயர் signum\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "இந்த செயல்பாட்டிலிருந்து வெளிச்செல்"
+msgstr "செயல்பாடை மீண்டும் தொடங்கவும்"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
-msgstr ""
+msgstr "_நிரலருக்கு தெரிவிக்கவும்"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "பிழை நீக்கு"
+msgstr "_பிழை நீக்கு"
 
-#~ msgid "Color Selector"
-#~ msgstr "வண்ணம் தெரிவு செய்யுமிடம்"
-
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "பயன்பாடு \"%s\" (செயல் %d) கொல் பிழையால்\n"
-#~ "முறிவு அடைந்துல்லது.\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "பிழை அறிக்கை அடங்கு"
-
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr "தயவுசெய்து, தகவலுக்கு கனோம் பயன்பாடு முறிவு பக்கத்தை பார்க்கவும்"
-
-#~ msgid "_Credits"
-#~ msgstr "_புகழ்கள்"
-
-#~ msgid "Exit the test"
-#~ msgstr "பரிசோதனையிலிருந்து வெளியேறு"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "பரிசோதனையிலிருந்து வெளியேறு"
