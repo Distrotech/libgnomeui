@@ -1,3 +1,7 @@
+2004-02-03  Federico Mena Quintero  <federico@ximian.com>
+
+	* Moved from the gtkfilechooser module on CVS to gnome-vfs/gtk.
+
 2004-01-30  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystemgnomevfs.c: Use "#ifdef USE_GCONF" for the
