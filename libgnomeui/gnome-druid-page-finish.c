@@ -104,7 +104,13 @@ gnome_druid_page_finish_init (GnomeDruidPageFinish *druid_page_finish)
 
 	/* Set up the canvas */ 
 	gtk_container_set_border_width (GTK_CONTAINER (druid_page_finish), 0);
+
+	gtk_widget_push_visual (gdk_imlib_get_visual ());
+	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	druid_page_finish->canvas = gnome_canvas_new ();
+	gtk_widget_pop_colormap ();
+	gtk_widget_pop_visual ();
+	
 	gtk_widget_set_usize (druid_page_finish->canvas, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
 	gtk_widget_show (druid_page_finish->canvas);
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (druid_page_finish->canvas), 0.0, 0.0, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);

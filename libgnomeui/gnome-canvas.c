@@ -2423,7 +2423,12 @@ gnome_canvas_new_aa (void)
 		}
 	}
 
+	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
+	gtk_widget_push_visual (gdk_rgb_get_visual ());
 	canvas = gtk_type_new (gnome_canvas_get_type ());
+	gtk_widget_pop_colormap ();
+	gtk_widget_pop_visual ();
+	
 	canvas->aa = 1;
 	return GTK_WIDGET (canvas);
 }

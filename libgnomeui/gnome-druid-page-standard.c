@@ -101,7 +101,13 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 	vbox = gtk_vbox_new (FALSE, 0);
 	hbox = gtk_hbox_new (FALSE, 0);
 	druid_page_standard->vbox = gtk_vbox_new (FALSE, 0);
+	
+	gtk_widget_push_visual (gdk_imlib_get_visual ());
+	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	druid_page_standard->canvas = gnome_canvas_new ();
+	gtk_widget_pop_colormap ();
+	gtk_widget_pop_visual ();
+	
 	druid_page_standard->side_bar = gtk_drawing_area_new ();
 	druid_page_standard->bottom_bar = gtk_drawing_area_new ();
 	druid_page_standard->right_bar = gtk_drawing_area_new ();

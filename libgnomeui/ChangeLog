@@ -1,5 +1,18 @@
 2000-04-15  Miguel de Icaza  <miguel@gnu.org>
 
+	* gnome-druid-page-finish.c (gnome_druid_page_finish_init): Apply
+	more visual/colormap loving action here.
+
+	* gnome-druid-page-standard.c (gnome_druid_page_standard_init):
+	Ditto when it comes to loving.
+	
+	* gnome-druid-page-start.c (gnome_druid_page_start_init): My love
+	for colormap and visual issues is infinite.
+	
+	* gnome-canvas.c (gnome_canvas_new_aa): In the case of the AA
+	canvas, we can set the visual to one that will work out of the
+	box. 
+
 	* gnome-animator.c (gnome_animator_new_with_size): Use imlib
 	visuals/colormaps, as these are internally used by the widget.
 
