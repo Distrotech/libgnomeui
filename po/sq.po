@@ -8,12 +8,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.sq\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-12 15:14+0100\n"
-"PO-Revision-Date: 2004-02-12 12:31+0100\n"
+"POT-Creation-Date: 2004-02-13 17:55+0100\n"
+"PO-Revision-Date: 2004-02-13 15:39+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3\n"
 
@@ -23,7 +23,7 @@ msgstr "Objekt bir 1"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr "Propozime për objektin 1"
+msgstr "Propozime pÃ«r objektin 1"
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
@@ -31,7 +31,7 @@ msgstr "Objekt bir 2"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "Propozime për objektin 2"
+msgstr "Propozime pÃ«r objektin 2"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -47,7 +47,7 @@ msgstr "Dokumentuar nga"
 
 #: libgnomeui/gnome-about.c:260
 msgid "Translated by"
-msgstr "Përkthyer nga"
+msgstr "PÃ«rkthyer nga"
 
 #: libgnomeui/gnome-about.c:323
 msgid "C_redits"
@@ -71,11 +71,11 @@ msgstr "Versioni i programit"
 
 #: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
-msgstr "Stringa copyright"
+msgstr "Fraza e copyright"
 
 #: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
-msgstr "Informacione në lidhje mbi copyright për programin"
+msgstr "Informacione nÃ« lidhje me copyright mbi programin"
 
 #: libgnomeui/gnome-about.c:401
 msgid "Comments string"
@@ -83,23 +83,23 @@ msgstr "Stringa komenteve"
 
 #: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
-msgstr "Komente në lidhje me programin"
+msgstr "Komente nÃ« lidhje me programin"
 
 #: libgnomeui/gnome-about.c:408
 msgid "Authors"
-msgstr "Autorët"
+msgstr "AutorÃ«t"
 
 #: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
-msgstr "Lista e autorëve të programeve"
+msgstr "Lista e autorÃ«vee tÃ« programeve"
 
 #: libgnomeui/gnome-about.c:411
 msgid "Author entry"
-msgstr "Të dhënat e autorit"
+msgstr "TÃ« dhÃ«nat e autorit"
 
 #: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
-msgstr "Një e dhënë e vetme e autorit"
+msgstr "NjÃ« e dhÃ«nÃ« e vetme e autorit"
 
 #: libgnomeui/gnome-about.c:419
 msgid "Documenters"
@@ -111,20 +111,20 @@ msgstr "Lista e kujt ka dokumentuar programin"
 
 #: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
-msgstr "Zëri i dokumentuesit"
+msgstr "ZÃ«ri i dokumentuesit"
 
 #: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
-msgstr "Një e dhënë e vetme e dokumentuesit"
+msgstr "NjÃ« e dhÃ«nÃ« e vetme e dokumentuesit"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "Falenderime përkthyesit"
+msgstr "Falenderime pÃ«kthyesit"
 
 #: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "Kreditë e përkthyesve. Kjo frazë duhet shënuar si e përkthyeshme"
+msgstr "KreditÃ« e pÃ«rkthyesve. Kjo frazÃ« duhet shÃ«nuar si e pÃ«rkthyeshme"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -132,7 +132,7 @@ msgstr "Stema"
 
 #: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
-msgstr "Një logo për dritaren e informacioneve"
+msgstr "NjÃ« logo pÃ«r dritaren e informacioneve"
 
 #: libgnomeui/gnome-about.c:519
 #, c-format
@@ -201,7 +201,7 @@ msgstr "_Loja"
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "_Ndihmë"
+msgstr "_NdihmÃ«"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -214,7 +214,7 @@ msgstr "_Hap..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr "Hap një file"
+msgstr "Hap njÃ« file"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
@@ -232,7 +232,7 @@ msgstr "Ruaje _si..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Ruaj file aktual me një emër tjetër"
+msgstr "Ruaj file aktual me njÃ« emÃ«r tjetÃ«r"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -241,7 +241,7 @@ msgstr "_Rikthe"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr "Riktheje tek një nga versionet e ruajtura të file"
+msgstr "Riktheje tek njÃ«ri nga versionet e ruajtur tÃ« file"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
@@ -259,7 +259,7 @@ msgstr "Konfiguro faq_en"
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Konfiguro rregullimet e faqes për printerin tuaj aktual"
+msgstr "Konfiguro rregullimet e faqes pÃ«r printerin tuaj aktual"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -289,7 +289,7 @@ msgstr "Pri_je"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "Prije pjesën e zgjedhur"
+msgstr "Prije pjesÃ«n e zgjedhur"
 
 #. 10
 #. Copy
@@ -299,7 +299,7 @@ msgstr "_Kopjo"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Kopjo pjesën e zgjedhur"
+msgstr "Kopjo pjesÃ«n e zgjedhur"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -308,7 +308,7 @@ msgstr "_Ngjite"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "Ngjit nga shënimet"
+msgstr "Ngjit nga shÃ«nimet"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
@@ -317,7 +317,7 @@ msgstr "P_astro"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr "Fshi pjesën e zgjedhur"
+msgstr "Fshi pjesÃ«n e zgjedhur"
 
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
@@ -331,11 +331,11 @@ msgstr "Anullo veprimin e fundit"
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "_Përsërit"
+msgstr "_PÃ«rsÃ«rit"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Përsërit veprimin e anulluar"
+msgstr "PÃ«rsÃ«rit veprimin e anulluar"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -344,34 +344,34 @@ msgstr "_Gjej..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr "Kërko për një frazë"
+msgstr "KÃ«rko pÃ«r njÃ« frazÃ«"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "Gjej në va_zhdim"
+msgstr "Gjej nÃ« va_zhdim"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "Kërko akoma për të njëjtën frazë"
+msgstr "KÃ«rko akoma pÃ«r tÃ« njÃ«jtÃ«n frazÃ«"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "Z_evëndëso..."
+msgstr "Z_Ã«vendÃ«so..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr "Zevëndëso një frazë"
+msgstr "ZÃ«vendÃ«so njÃ« frazÃ«"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
-msgstr "_Pronësitë"
+msgstr "_PronÃ«sitÃ«"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Ndrysho pronësitë e file"
+msgstr "Ndrysho pronÃ«sitÃ« e file"
 
 #.
 #. * The Settings menu
@@ -396,7 +396,7 @@ msgstr "_Informacione"
 
 #: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Informacione mbi këtë program"
+msgstr "Informacione mbi kÃ«tÃ« program"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
@@ -404,22 +404,22 @@ msgstr "Zgjidh _gjithÃ§ka"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr "Zgjidh gjithçka"
+msgstr "Zgjidh gjithÃ§ka"
 
 #.
 #. * Window menu
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr "Krijo _dritare të re"
+msgstr "Krijo _dritare tÃ« re"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr "Krijo një dritare të re"
+msgstr "Krijo njÃ« dritare tÃ« re"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "_Mbylle këtë dritare"
+msgstr "_Mbylle kÃ«tÃ« dritare"
 
 #: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
@@ -430,43 +430,43 @@ msgstr "Mbyll dritaren aktuale"
 #.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
-msgstr "Lojë e _re"
+msgstr "LojÃ« e _re"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Fillo një lojë të re"
+msgstr "Fillo njÃ« lojÃ« tÃ« re"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr "_Pezullo lojën"
+msgstr "_Pezullo lojÃ«n"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Pezullo lojën"
+msgstr "Pezullo lojÃ«n"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
-msgstr "_Rifillo lojën"
+msgstr "_Rifillo lojÃ«n"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "Rifillo lojën"
+msgstr "Rifillo lojÃ«n"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr "_Anullo lëvizjen"
+msgstr "_Anullo lÃ«vizjen"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Anullo lëvizjen e fundit"
+msgstr "Anullo lÃ«vizjen e fundit"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "_Përsërit lëvizjen"
+msgstr "_PÃ«rsÃ«rit lÃ«vizjen"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Përsërit veprimin e anulluar"
+msgstr "PÃ«rsÃ«rit veprimin e anulluar"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -474,48 +474,48 @@ msgstr "_Propozo"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr "Merr një ndihmë për lëvizjen tuaj në vazhdim "
+msgstr "Merr njÃ« ndihmÃ« pÃ«r lÃ«vizjen tuaj nÃ« vazhdim "
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
-msgstr "_Pikët..."
+msgstr "_PikÃ«..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr "Shiko pikët"
+msgstr "Shiko pikÃ«t"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr "_Fundi i lojës"
+msgstr "_Fundi i lojÃ«s"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Përfundo lojën aktuale"
+msgstr "PÃ«rfundo lojÃ«n aktuale"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr "_Përmbajtja"
+msgstr "_PÃ«rmbajtja"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr "Shiko ndihmën në lidhje me këtë program"
+msgstr "Shiko ndihmÃ«n nÃ« lidhje me kÃ«tÃ« program"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
-msgstr "Tekst nën ikona"
+msgstr "Tekst nÃ« ikona"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
-msgstr "Tekst përparsor krahas ikonave"
+msgstr "Tekst pÃ«rparsor krahas ikonave"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
-msgstr "Vetëm ikona"
+msgstr "VetÃ«m ikona"
 
 #: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
-msgstr "Vetëm tekst"
+msgstr "VetÃ«m tekst"
 
 #: libgnomeui/gnome-app-helper.c:2631
 #, c-format
@@ -576,15 +576,15 @@ msgstr "Ka progres"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Krijo një widget progresi."
+msgstr "Krijo njÃ« widget progresi."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
-msgstr "Ka gjëndje"
+msgstr "Ka gjÃ«dje"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Krijo një widget gjëndjeje."
+msgstr "Krijo njÃ« widget gjÃ«ndjeje."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -592,11 +592,11 @@ msgstr "Interaktivitet"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
-msgstr "Niveli i kërkuar i aktivitetit të përdoruesit."
+msgstr "Niveli i kÃ«rkuar i aktivitetit tÃ« pÃ«doruesit."
 
 #: libgnomeui/gnome-authentication-manager.c:61
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "Proxy juaj HTTP kërkon që ju te jeni identifikuar.\n"
+msgstr "Proxy juaj HTTP kÃ«rkon qÃ« ju te jeni identifikuar.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:62
 #, c-format
@@ -604,21 +604,21 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
-"Duhet të jeni identifikuar që të hyni tek \"%s\".\n"
+"Duhet tÃ« jeni identifikuar qÃ« tÃ« hyni tek \"%s\".\n"
 "%s"
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
-msgstr "Passwordi juaj do të transmetohet i pakriptuar."
+msgstr "Passwordi juaj do tÃ« transmetohet i pakriptuar."
 
 #: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
-msgstr "Passwordi juaj do të transmetohet i kriptuar."
+msgstr "Passwordi juaj do tÃ« transmetohet i kriptuar."
 
 #: libgnomeui/gnome-authentication-manager.c:69
 #: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
-msgstr "Ã‹shtë i nevojshëm identifikimi"
+msgstr "Ã‹shtÃ« i nevojshÃ«m identifikimi"
 
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
@@ -628,11 +628,11 @@ msgstr " domain %s"
 #: libgnomeui/gnome-authentication-manager.c:268
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "Duhet të jeni identifikuar që të hyni tek %s\n"
+msgstr "Duhet tÃ« jeni identifikuar qÃ« tÃ« hyni tek %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
-msgstr "Specifiko ID e manazhuesit të seancës"
+msgstr "Specifiko ID e manazhuesit tÃ« seancÃ«s"
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
@@ -640,7 +640,7 @@ msgstr "ID"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
-msgstr "Specifiko prefiksin e konfigurimit të ruajtur"
+msgstr "Specifiko prefiksin e konfigurimit tÃ« ruajtur"
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
@@ -648,11 +648,11 @@ msgstr "PREFIKSI"
 
 #: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
-msgstr "Disaktivoi lidhjen manazhuesit të seancës"
+msgstr "Disaktivoi lidhjen manazhuesit tÃ« seancÃ«s"
 
 #: libgnomeui/gnome-client.c:974
 msgid "Session management"
-msgstr "Manazhimi i seancës"
+msgstr "Manazhimi i seancÃ«s"
 
 #: libgnomeui/gnome-client.c:2474
 msgid "Cancel Logout"
@@ -660,15 +660,15 @@ msgstr "Anullo daljen"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr "Mora të dhëna të pavlefshme ngjyre\n"
+msgstr "Mora tÃ« dhÃ«na tÃ« pavlefshme ngjyre\n"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "Hap një dritare dialogu për të përcaktuar ngjyrën"
+msgstr "Hap njÃ« dritare dialogu pÃ«r tÃ« pÃ«rcaktuar ngjyrÃ«n"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
-msgstr "Zgjidh një ngjyrë"
+msgstr "Zgjidh njÃ« ngjyrÃ«"
 
 #: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
@@ -684,7 +684,7 @@ msgstr "Parametrat DateEdit"
 
 #: libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
-msgstr "Parametrat mbi pamjen e jashtme të DateEdit"
+msgstr "Parametrat mbi pamjen e jashtme tÃ« DateEdit"
 
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
@@ -692,7 +692,7 @@ msgstr "Ora inferiore"
 
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
-msgstr "Ora inferiore tek zgjedhësi kontestual i datës"
+msgstr "Ora inferiore tek zgjedhÃ«si kontestual i datÃ«s"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
@@ -700,7 +700,7 @@ msgstr "Ora superiore"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr "Ora superiore tek zgjedhësi kontestual i datës"
+msgstr "Ora superiore tek zgjedhÃ«si kontestual i datÃ«s"
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
@@ -716,11 +716,11 @@ msgstr "Data"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select Date"
-msgstr "Zgjidh datën"
+msgstr "Zgjidh datÃ«n"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr "Zgjidh datën nga një kalendar"
+msgstr "Zgjidh datÃ«n nga njÃ« kalendar"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -729,17 +729,17 @@ msgstr "Kalendari"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
-msgstr "Zgjidh orën"
+msgstr "Zgjidh orÃ«n"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr "Zgjidh orën nga një listë"
+msgstr "Zgjidh orÃ«n nga njÃ« listÃ«"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
-"gnome_date_edit_get_date nuk përdoren më, është mirë të përdorësh "
-"gnome_date_edit_get_time"
+"gnome_date_edit_get_date nuk pÃ«rdoren mÃ«, Ã«shtÃ« mirÃ« tÃ« "
+"pÃ«rdorÃ«shgnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -756,35 +756,35 @@ msgstr "Figura e logo-s"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
-msgstr "Filigrana e sipërme"
+msgstr "Filigrana e sipÃ«rme"
 
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr "Imazhi filigrana që duhet përdorur sipër"
+msgstr "Imazhi filigrana qÃ« duhet pÃ«dorur sipÃ«r"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
-msgstr "Plani i parë i titullit"
+msgstr "Plani i parÃ« i titullit"
 
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
-msgstr "Ngjyra në plan të parë të titullit"
+msgstr "Ngjyra nÃ« plan tÃ« parÃ« tÃ« titullit"
 
 #: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
-msgstr "Ngjyra e planit të parë të titullit"
+msgstr "Ngjyra e planit tÃ« parÃ« tÃ« titullit"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr "Ngjyra në plan të parë të titullit si GdkColor"
+msgstr "Ngjyra nÃ« plan tÃ« parÃ« tÃ« titullit si GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
-msgstr "Ngjyra në plan të parë të titullit të vendosur"
+msgstr "Ngjyra nÃ« plan tÃ« parÃ« tÃ« titullit tÃ« vendosur"
 
 #: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
-msgstr "Ngjyra në plan të parë e titullit është vendosur"
+msgstr "Ngjyra nÃ« plan tÃ« parÃ« e titullit Ã«shtÃ« vendosur"
 
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
@@ -801,32 +801,32 @@ msgstr "Ngjyra e sfondit si GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr "Ngjyra e sfondit të vendosur"
+msgstr "Ngjyra e sfondit tÃ« vendosur"
 
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr "Ngjyra e sfondit është vendosur"
+msgstr "Ngjyra e sfondit Ã«shtÃ« vendosur"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
-msgstr "Ngjyra e Sfondit të logo"
+msgstr "Ngjyra e Sfondit tÃ« logo"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
-msgstr "Ngjyra e sfondit të logo"
+msgstr "Ngjyra e sfondit tÃ« logo"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
-msgstr "Ngjyra e sfondit të logo si GDkColor"
+msgstr "Ngjyra e sfondit tÃ« logo si GDkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
-msgstr "Ngjyra e sfondit të logo të vendosur"
+msgstr "Ngjyra e sfondit tÃ« logo tÃ« vendosur"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
-msgstr "Ngjyra e sfondit të logo është vendosur"
+msgstr "Ngjyra e sfondit tÃ« logo Ã«shtÃ« vendosur"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
@@ -834,19 +834,19 @@ msgstr "Shfaq pulsantin 'Fund'"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Shfaq pulsantin 'Fund' në vend të pulsantit \"Vazhdo\""
+msgstr "Shfaq pulsantin 'Fund' nÃ« vend tÃ« pulsantit \"Vazhdo\""
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr "Shfaq ndihmën"
+msgstr "Shfaq ndihmÃ«n"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr "Shfaq pulsantin 'Ndihmë'"
+msgstr "Shfaq pulsantin 'NdihmÃ«'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr "id kronollogjisë"
+msgstr "Id e kronollogjisÃ«"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -858,23 +858,23 @@ msgstr "Fusha GTK"
 
 #: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
-msgstr "ID kronollogjisë"
+msgstr "ID e kronollogjisÃ«"
 
 #: libgnomeui/gnome-file-entry.c:227
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Identifikues i vetëm për fushën file. Do të përdoret për të ruajtur listën e "
+"Identifikues i vetÃ«m pÃ«r fushÃ«n file. Do tÃ« pÃ«rdoret pÃ«r tÃ« ruajtur listÃ«n e "
 "historikut."
 
 #: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
-msgstr "Titulli i dritares së dialogut 'Shfleto'"
+msgstr "Titulli i dritares sÃ« dialogut 'Shfleto'"
 
 #: libgnomeui/gnome-file-entry.c:236
 msgid "Title for the Browse file dialog."
-msgstr "Titulli për dritaren e dialogut 'Shfleto file'."
+msgstr "Titulli pÃ«r dritaren e dialogut 'Shfleto file'."
 
 #: libgnomeui/gnome-file-entry.c:243
 msgid "Directory Entry"
@@ -885,8 +885,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Tregon nëse fusha file duhet të përdoret për të dhënë emrat e directory apo "
-"emrat e file kompletë."
+"Tregon nÃ«se fusha file duhet tÃ« pÃ«rdoret pÃ«r tÃ« dhÃ«nÃ« emrat e directory apo "
+"emrat e file kompletÃ«."
 
 #: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
@@ -894,7 +894,7 @@ msgstr "Modale"
 
 #: libgnomeui/gnome-file-entry.c:253
 msgid "Whether the Browse file window should be modal."
-msgstr "Tregon nëse dritarja 'Shfleto file' duhet të jetë modale."
+msgstr "Tregon nÃ«se dritarja 'Shfleto file' duhet tÃ« jetÃ« modale."
 
 #: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
@@ -902,7 +902,7 @@ msgstr "Emri i file"
 
 #: libgnomeui/gnome-file-entry.c:261
 msgid "Filename that should be displayed in the file entry."
-msgstr "Emri i file që duhet të shfaqet në fushën file."
+msgstr "Emri i file qÃ« duhet tÃ« shfaqet nÃ« fushÃ«n file."
 
 #: libgnomeui/gnome-file-entry.c:269
 msgid "Default Path"
@@ -910,7 +910,7 @@ msgstr "Pozicioni i prezgjedhur"
 
 #: libgnomeui/gnome-file-entry.c:270
 msgid "Default path for the Browse file window."
-msgstr "Pozocioni i prezgjedhur për dritaren 'Shfleto file'."
+msgstr "Pozicioni i prezgjedhur pÃ«r dritaren 'Shfleto file'."
 
 #: libgnomeui/gnome-file-entry.c:277
 msgid "GnomeEntry"
@@ -922,9 +922,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry që fusha file përdor për të dhënë emrat e files.  Mund të "
-"shfrytëzoni këtë veçori për të marrë GnomeEntry nëse ju duhet të ndryshoni "
-"apo të kërkoni njërin nga parametrat e saj."
+"GtkEntry qÃ« elementi file pÃ«rdor pÃ«r tÃ« dhÃ«nÃ« emrat e files.  Mund tÃ« "
+"shfrytÃ«zoni kÃ«tÃ« veÃ§ori pÃ«r tÃ« marrÃ« GtkEntry nÃ«se ju duhet tÃ« ndryshoni apo "
+"tÃ« kÃ«rkoni njÃ«rin nga parametrat e tij."
 
 #: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
@@ -936,21 +936,21 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry që fusha file përdor për të dhënë emrat e files.  Mund të "
-"shfrytëzoni këtë veçori për të marrë GtkEntry nëse ju duhet të ndryshoni apo "
-"të kërkoni njërin nga parametrat e tij."
+"GtkEntry qÃ« fusha file pÃ«rdor pÃ«r tÃ« dhÃ«nÃ« emrat e files.  Mund tÃ« "
+"shfrytÃ«zoni kÃ«tÃ« veÃ§ori pÃ«r tÃ« marrÃ« GtkEntry nÃ«se ju duhet tÃ« ndryshoni apo "
+"tÃ« kÃ«rkoni njÃ«rin nga parametrat e tij."
 
 #: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
-msgstr "Përdor GtkFileChooser"
+msgstr "PÃ«rdor GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:300
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Nëse duhet përdorur instrumenti i ri GtkFileChooser apo instrumenti "
-"GtkFileSelection për të zgjedhur files."
+"NÃ«se duhet pÃ«rdorur instrumenti i ri GtkFileChooser apo instrumenti "
+"GtkFileSelection pÃ«r tÃ« zgjedhur files."
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -962,7 +962,7 @@ msgstr "Pozicioni"
 
 #: libgnomeui/gnome-file-entry.c:748
 msgid "Path to file"
-msgstr "Pozicioni për tek file"
+msgstr "Pozicioni pÃ«r tek file"
 
 #: libgnomeui/gnome-file-entry.c:775
 msgid "_Browse..."
@@ -970,7 +970,7 @@ msgstr "_Shfleto..."
 
 #: libgnomeui/gnome-file-entry.c:776
 msgid "Pop up a file selector to choose a file"
-msgstr "Hap një zgjedhës files nga i cili mund të zgjidhet një file"
+msgstr "Hap njÃ« zgjedhÃ«s files nga i cili mund tÃ« zgjidhet njÃ« file"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -982,11 +982,11 @@ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr "Zgjidh një gërmë"
+msgstr "Zgjidh njÃ« gÃ«rmÃ«"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "Titulli i dritares së dialogut të zgjedhjes"
+msgstr "Titulli i dritares sÃ« dialogut tÃ« zgjedhjes"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -994,19 +994,19 @@ msgstr "Modaliteti"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr "Mënyra e punimit të zgjedhësit të gërmave"
+msgstr "MÃ«nyra e punimit tÃ« zgjedhÃ«sit tÃ« gÃ«rmave"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr "Emri i gërmave"
+msgstr "Emri i gÃ«rmave"
 
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr "Emri i gërmës së zgjedhur"
+msgstr "Emri i gÃ«rmÃ«s sÃ« zgjedhur"
 
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr "Gërmat"
+msgstr "GÃ«rmat"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
@@ -1014,27 +1014,27 @@ msgstr "GtkFont i zgjedhur"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Pamja e parë e tekstit"
+msgstr "Pamja e parÃ« e tekstit"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Pamja e parë e tekstit të shfaqur në dritaren e dialogut"
+msgstr "Pamja e parÃ« e tekstit tÃ« shfaqur nÃ« dritaren e dialogut"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "Përdor gërma në etiketë"
+msgstr "PÃ«rdor gÃ«rma nÃ« etiketÃ«"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Përdor gërmat në etiketë në modalitetin informacione mbi gërmat"
+msgstr "PÃ«rdor gÃ«rmat nÃ« etiketÃ« nÃ« modalitetin informacione mbi gÃ«rmat"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "Madhësia e gërmave për etiketën"
+msgstr "MadhÃ«sia e gÃ«rmave pÃ«r etiketÃ«n"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Madhësia e gërmave për etiketën në modalitetin informacione mbi gërmat"
+msgstr "MadhÃ«sia e gÃ«rmave pÃ«r etiketÃ«n nÃ« modalitetin informacione mbi gÃ«rmat"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1042,7 +1042,7 @@ msgstr "Shfaq dimensionin"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "Shfaq dimensionin në modalitetin informacione mbi gërmat"
+msgstr "Shfaq madhÃ«sinÃ« e gÃ«rmave nÃ« modalitetin informacione mbi gÃ«rmat"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1050,7 +1050,7 @@ msgstr "Suporti GNOME GConf UI"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr "_Hollësitë"
+msgstr "_HollÃ«sitÃ«"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
@@ -1060,10 +1060,10 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Programi \"%s\" po përpiqet të ndryshojë një aspekt të konfigurimit tuaj, "
-"veprim i ndaluar për ju nga ana e administratorit apo shitësit të sistemit "
-"operativ. Disa nga ndryshimet e kryera nga ju nuk do të ken ëefekt, ose do "
-"t'a humbasin efektin herën e ardhshme që do të përdorni këtë program."
+"Programi \"%s\" po pÃ«rpiqet tÃ« ndryshojÃ« njÃ« aspekt tÃ« konfigurimit tuaj, "
+"veprim i ndaluar pÃ«r ju nga ana e administratorit apo shitÃ«sit tÃ« sistemit "
+"operativ. Disa nga ndryshimet e kryera nga ju nuk do tÃ« kenÃ« efekt, ose do "
+"t'a humbasin efektin herÃ«n e ardhshme qÃ« do tÃ« pÃ«rdorni kÃ«tÃ« program."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1071,8 +1071,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Gabim gjatë leximit apo ruajtjes së informacioneve të konfigurimit për %s. "
-"Disa nga rregullimet e konfigurimit mund të mos punojnë korrektësisht."
+"Gabim gjatÃ« leximit apo ruajtjes sÃ« informacioneve tÃ« konfigurimit pÃ«r  %s. "
+"Disa nga rregullimet e konfigurimit mund tÃ« mos punojnÃ« si duhet."
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -1092,7 +1092,7 @@ msgstr "Teksti i pulsantit"
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
-msgstr "Fund urisë në botë"
+msgstr "Fund urisÃ« nÃ« botÃ«"
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
@@ -1100,18 +1100,18 @@ msgstr "Ngjyra e lidhjes"
 
 #: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
-msgstr "Ngjyra që duhet përdorur për të vizatuar lidhjen"
+msgstr "Ngjyra qÃ« duhet pÃ«rdorur pÃ«r tÃ« vizatuar lidhjen"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr "Ky pulsant ju çon tek URl e shkruar."
+msgstr "Ky pulsant ju Ã§on tek URl e shkruar."
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Gabim gjatë lëshimit të shfletuesit web të prezgjedhur.\n"
+"Gabim gjatÃ« lÃ«shimit tÃ« shfletuesit web tÃ« prezgjedhur.\n"
 "Kontrollo konfigurimin tek instrumenti i preferimeve 'Programet e preferuar'."
 
 #: libgnomeui/gnome-icon-entry.c:178
@@ -1119,12 +1119,12 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Identifikues i veçantë për fushën ikonë.  Do të përdoret për të ruajtur "
-"listën e kronollogjisë."
+"Identifikues i veÃ§antÃ« pÃ«r fushÃ«n ikonÃ«  Do tÃ« pÃ«rdoret pÃ«r tÃ« ruajtur "
+"listÃ«n e kronollogjisÃ«."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
-msgstr "Titulli i dritares së dialogut 'Shfleto ikonat'."
+msgstr "Titulli i dritares sÃ« dialogut 'Shfleto ikonat'."
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
@@ -1132,52 +1132,52 @@ msgstr "Directory e pixmap"
 
 #: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
-msgstr "Directory në tv cilën do të kërkohet për ikona."
+msgstr "Directory nÃ« tÃ« cilÃ«n do tÃ« kÃ«rkohet pÃ«r ikona."
 
 #: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Emri i file që duhet shfaqur tek fusha ikonat."
+msgstr "Emri i file qÃ« duhet shfaqur tek fusha ikonat."
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
-msgstr "Dritarja e dialogut të zgjedhësit"
+msgstr "Dritarja e dialogut tÃ« zgjedhÃ«sit"
 
 #: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Drittarja e dialogut e zgjedhësit të ikonave.  Mund të shfrytëzoni këtë "
-"veçori për të marrë një GtkDialog nëse ju duhet të ndryshoni apo të kërkoni "
-"njërin nga parametrat e tij."
+"Drittarja e dialogut e zgjedhÃ«sit tÃ« ikonave.  Mund tÃ« shfrytÃ«zoni kÃ«tÃ« "
+"veÃ§ori pÃ«r tÃ« marrÃ« njÃ« GtkDialog nÃ«se ju duhet tÃ« ndryshoni apo tÃ« kÃ«rkoni "
+"njÃ«rin nga parametrat e tij."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
-msgstr "Asnjë ikonë"
+msgstr "AsnjÃ« ikonÃ«"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
-msgstr "Dritarja e dialogut të zgjedhjes së ikonave"
+msgstr "Dritarja e dialogut tÃ« zgjedhjes sÃ« ikonave"
 
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr "Kjo dritare dialogu ju jep mundësinë të zgjidhni një ikonë."
+msgstr "Kjo dritare dialogu ju jep mundÃ«sinÃ« tÃ« zgjidhni njÃ« ikonÃ«."
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
-msgstr "Zgjedhësi i ikonave"
+msgstr "ZgjedhÃ«si i ikonave"
 
 #: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr "Ju lutem zgjidhni ikonën që dëshironi."
+msgstr "Ju lutem zgjidhni ikonÃ«n qÃ« dÃ«shironi."
 
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
-msgstr "Zgjedhësi i ikonave"
+msgstr "ZgjedhÃ«si i ikonave"
 
 #: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
-msgstr "Ky pulsant do të hapë një dritare nga ku mund të zgjidhni një ikonë."
+msgstr "Ky pulsant do tÃ« hapÃ« njÃ« dritare nga ku mund tÃ« zgjidhni njÃ« ikonÃ«."
 
 #: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
@@ -1185,18 +1185,18 @@ msgstr "Shfleto"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
-msgstr "Pozicioni ikonës"
+msgstr "Pozicioni ikonÃ«s"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Këtu duhet të shkruani emrin e directory ku gjenden imazhet ikona."
+msgstr "KÃ«tu duhet tÃ« shkruani emrin e directory ku gjenden figurat ikona."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: '%s' nuk ekziston ose nuk është një directory"
+msgstr "GnomeIconSelection: '%s' nuk ekziston ose nuk Ã«shtÃ« njÃ« directory"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1229,7 +1229,7 @@ msgstr "Mesazh"
 
 #: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
-msgstr "_Përdoruesi:"
+msgstr "_PÃ«rdoruesi:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
@@ -1237,39 +1237,39 @@ msgstr "_Domain:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
-msgstr "_Fjalëkalimi:"
+msgstr "_FjalÃ«kalimi:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr "Kujto password për këtë seancë"
+msgstr "Kujto password-in pÃ«r kÃ«tÃ« seancÃ«"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr "Ruaje password-in në keyring"
+msgstr "Ruaje password-in nÃ« keyring"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
-msgstr "Krijo pamjen e parë"
+msgstr "Krijo pamjen e parÃ«"
 
 #: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Tregon nëse fusha pixmap duhet të ketë një pamje të parë."
+msgstr "Tregon nÃ«se fusha pixmap duhet tÃ« ketÃ« njÃ« pamje tÃ« parÃ«"
 
 #: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
-msgstr "Asnjë imazh"
+msgstr "AsnjÃ« figurÃ«"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
-msgstr "Pamja e parë e figurës"
+msgstr "Pamja e parÃ« e figurÃ«s"
 
 #: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
-msgstr "Pamja e parë e imazhit të zgjedhur aktualisht"
+msgstr "Pamja e parÃ« e figurÃ«s sÃ« zgjedhur aktualisht"
 
 #: libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "E pamundur gjetja e një hbox, duke përdorur zgjedhjen normale të file"
+msgstr "E pamundur gjetja e njÃ« hbox, duke pÃ«rdorur zgjedhjen normale tÃ« file"
 
 #: libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
@@ -1277,15 +1277,15 @@ msgstr "Shikoje"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr "Klasifikimi 10 të parët"
+msgstr "Klasifikimi 10 tÃ« parÃ«ve"
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
-msgstr "Përdoruesi"
+msgstr "PÃ«rdoruesi"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr "Pikët"
+msgstr "PikÃ«"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
@@ -1300,19 +1300,19 @@ msgstr "Sans 14"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr "Kornizat e tabelës"
+msgstr "Kornizat e tabelÃ«s"
 
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
-msgstr "Mbushja e tabelës"
+msgstr "Mbushja e tabelÃ«s"
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr "Listë e pikëzuar"
+msgstr "ListÃ«e pikÃ«zuar"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr "Listë e numërzuar"
+msgstr "ListÃ« e numÃ«rzuar"
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
@@ -1320,7 +1320,7 @@ msgstr "Ngushto"
 
 #: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr "Zvogëlo ngushtimin"
+msgstr "ZvogÃ«lo ngushtimin"
 
 #: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
@@ -1328,11 +1328,11 @@ msgstr "Informacione"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr "Ç'aktivo dritaren e dialogut të crash"
+msgstr "Ã‡'aktivo dritaren e dialogut tÃ« crash"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
-msgstr "Display X që duhet përdorur"
+msgstr "Display X qÃ« duhet pÃ«rdorur"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
@@ -1340,15 +1340,15 @@ msgstr "DISPLAY"
 
 #: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
-msgstr "Libraria për GUI e GNOME"
+msgstr "Libraria GUI e GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:707
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"U verifikuan  gabime shumëfishe segmentimi; e pamundur shfaqja e dritares së "
-"dialogut të gabimeve\n"
+"U verifikuan  gabime shumÃ«fishe segmentimi; e pamundur shfaqja e dritares sÃ« "
+"dialogut tÃ« gabimeve\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:721
@@ -1358,7 +1358,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "Gabim segmentimi!\n"
-"E pamundur shfaqja e dritares së dialogut relativ\n"
+"E pamundur shfaqja e dritares sÃ« dialogut relativ\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1369,34 +1369,34 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"Manazhuesi i seancave të GNOME (procesi %d) shkoi në crash\n"
-"për shkak të një gabimi fatal (%s).\n"
-"Kur të mbyllni këtë dritare dialogu, të gjithë programet do të mbyllen dhe "
-"seanca juaj do të përfundohet.\n"
-"Ki kujdes të ruash të gjithë files e ndryshuar përpara se të mbyllësh këtë "
-"dialog."
+"Manazhuesi i seancave tÃ« GNOME (procesi %d) shkoi u bllokua\n"
+"pÃ«r shkak tÃ« njÃ« gabimi fatal (%s).\n"
+"Kur tÃ« mbyllni kÃ«tÃ« dritare dialogu, tÃ« gjithÃ« programet do tÃ« mbyllen dhe "
+"seanca juaj do tÃ« pÃ«rfundohet.\n"
+"Ki kujdes tÃ« ruash tÃ« gjithÃ« files e ndryshuar pÃ«rpara se tÃ« mbyllÃ«sh "
+"kÃ«tÃ«dialog."
 
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Programi \"%s\" përfundoi në menyrë të papritur."
+msgstr "Programi \"%s\" pÃ«rfundoi nÃ« menyrÃ« tÃ« papritur."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr "proçesi %d: %s"
+msgstr "proÃ§esi %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"Mund të informoni zhvilluesit mbi çfarë ndodhi për t'i ndihmuar që ta "
-"korrigjojnë.  Ose mund të nisni programin përsëri tani."
+"Mund tÃ« informoni zhvilluesit mbi Ã§farÃ« ndodhi pÃ«r  t'i ndihmuar qÃ« t'a "
+"korrigjojnÃ«  Ose mund tÃ« nisni programin pÃ«rsÃ«ri tani."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Përdorimi: gnome_segv2 EMRI_PROG NUM_SHËN\n"
+msgstr "Pï¿½dorimi: gnome_segv2 EMRI_PROG NUM_SHï¿½\n"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "Inform Developers"
@@ -1408,4 +1408,4 @@ msgstr "Debug"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
-msgstr "Përfundo testin"
+msgstr "PÃ«rfundo testin"
