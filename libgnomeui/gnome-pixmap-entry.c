@@ -63,11 +63,13 @@ gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 }
 
 static void
-entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
+refresh_preview(GnomePixmapEntry *pentry)
 {
-	char *t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
-						 FALSE);
+	char *t;
 	GdkImlibImage *im;
+
+	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
+					   FALSE);
 	
 	if(!pentry->preview)
 		return;
@@ -93,6 +95,39 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 	}
 	g_free(t);
 	gdk_imlib_destroy_image(im);
+}
+
+static int change_timeout = -1;
+static GSList *changed_pentries = NULL;
+
+static int
+changed_timeout_func(gpointer data)
+{
+	GSList *li,*tmp;
+	tmp = changed_pentries;
+	changed_pentries = NULL;
+	change_timeout = -1;
+	if(tmp) {
+		for(li=tmp;li!=NULL;li=g_slist_next(li)) {
+			refresh_preview(li->data);
+		}
+		g_slist_free(tmp);
+	}
+	return FALSE;
+}
+
+static void
+entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
+{
+	if(change_timeout == -1) {
+		refresh_preview(pentry);
+		change_timeout =
+			gtk_timeout_add(1000,changed_timeout_func,NULL);
+	} else {
+		if(!g_slist_find(changed_pentries,pentry))
+			changed_pentries = g_slist_prepend(changed_pentries,
+							   pentry);
+	}
 }
 
 static void
@@ -132,7 +167,7 @@ setup_preview(GtkWidget *widget)
 			h = 100;
 		}
 	}
-	pp = gnome_pixmap_new_from_imlib(im);
+	pp = gnome_pixmap_new_from_imlib_at_size(im,w,h);
 	gtk_widget_show(pp);
 	
 	gtk_container_add(GTK_CONTAINER(frame),pp);
@@ -261,7 +296,7 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 			   pentry);
 
 	/*just in case there is a default that is an image*/
-	entry_changed(w,pentry);
+	refresh_preview(pentry);
 }
 
 /**

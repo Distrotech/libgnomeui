@@ -1,3 +1,9 @@
+Tue Feb 09 18:51:08 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap-entry.c: fix this up, don't look up pixmaps more then
+	  once a second if the entry is changing, plus scale the preview in
+	  the file browser properly
+
 1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gil_button_press): Do nothing if the button
