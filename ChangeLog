@@ -1,3 +1,8 @@
+2004-04-15  Padraig O'Briain <padraig.obriain@sun.com>
+
+	* libgnomeui/gnome-about.c (gnome_about_instance_init): Remove
+	setting of role to ATK_ROLE_ALERT for bug #139541.
+
 2004-04-15  John C Barstow  <jbowtie@amathaine.com>
 
         * configure.in: Added "mi" (Maori) to ALL_LINGUAS.
