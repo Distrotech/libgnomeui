@@ -256,17 +256,19 @@ void gnome_dialog_constructv (GnomeDialog * dialog,
   if (title)
     gtk_window_set_title (GTK_WINDOW (dialog), title);
   
-  while (TRUE) {
-    
-    button_name = *buttons++;
-    
-    if (button_name == NULL) {
-      break;
-    }
-    
-    gnome_dialog_append_button( dialog, 
-				button_name);
-  };  
+  if (buttons) {
+    while (TRUE) {
+      
+      button_name = *buttons++;
+      
+      if (button_name == NULL) {
+	break;
+      }
+      
+      gnome_dialog_append_button( dialog, 
+				  button_name);
+    };
+  }
 
   /* argument list may be null if the user wants to do weird things to the
    * dialog, but we need to make sure this is initialized */
