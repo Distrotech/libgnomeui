@@ -1,9 +1,3 @@
-#ifndef GNOME_PROPERTIES_H
-#define GNOME_PROPERTIES_H
-#include <libgnome/gnome-defs.h>
-
-BEGIN_GNOME_DECLS
-
-END_GNOME_DECLS
-
-#endif
+/* This file is currently empty; I'm going to add new code here soon.
+   Oct 27 1998. Martin
+ */
