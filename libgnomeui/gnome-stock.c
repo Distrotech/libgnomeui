@@ -7,6 +7,7 @@
 #include <gtk/gtk.h>
 
 #include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18n.h"
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
@@ -69,9 +70,22 @@ gnome_stock_pixmap_widget_destroy(GtkObject *object)
 	w = GNOME_STOCK_PIXMAP_WIDGET (object);
 	
 	/* free resources */
-	if (w->regular) gtk_widget_destroy(GTK_WIDGET(w->regular));
-	if (w->disabled) gtk_widget_destroy(GTK_WIDGET(w->disabled));
-	if (w->focused) gtk_widget_destroy(GTK_WIDGET(w->focused));
+	if (w->pixmap) {
+		gtk_container_remove(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
+		w->pixmap = NULL;
+	}
+	if (w->regular) {
+		gtk_widget_unref(GTK_WIDGET(w->regular));
+		w->regular = NULL;
+	}
+	if (w->disabled) {
+		gtk_widget_unref(GTK_WIDGET(w->disabled));
+		w->disabled = NULL;
+	}
+	if (w->focused) {
+		gtk_widget_unref(GTK_WIDGET(w->focused));
+		w->focused = NULL;
+	}
         if (w->icon) g_free(w->icon);
 
 	if (GTK_OBJECT_CLASS(parent_class)->destroy)
@@ -91,11 +105,7 @@ gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
         GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
         GtkPixmap *pixmap;
 
-#if defined(DEBUG) && 0
-        g_return_if_fail(GTK_WIDGET_REALIZED(widget));
-#else /* DEBUG */
         if (!GTK_WIDGET_REALIZED(widget)) return;
-#endif /* DEBUG */
         pixmap = NULL;
         if (GTK_WIDGET_HAS_FOCUS(widget)) {
                 if (!w->focused) {
@@ -153,52 +163,12 @@ static void
 gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
                                        GtkRequisition *requisition)
 {
-	GnomeStockPixmapWidget *pmap;
+	g_return_if_fail(widget != NULL);
+	g_return_if_fail(requisition != NULL);
+	g_return_if_fail(GNOME_IS_STOCK_PIXMAP_WIDGET(widget));
 
-        g_return_if_fail(widget != NULL);
-        g_return_if_fail(requisition != NULL);
-
-	pmap = GNOME_STOCK_PIXMAP_WIDGET(widget);
-#ifdef USE_GDK_IMLIB
-	/*
-	 * This would duplicate code without gdk_imlib. _With_ gdk_imlib
-	 * there is a good chance that the pixmap is created even before a
-	 * GdkWindow exists.
-	 */
-	if (pmap->regular) {
-		int w, h;
-		gdk_window_get_size((GdkWindow *)pmap->regular->pixmap,
-				    &w, &h);
-		requisition->width = w;
-		requisition->height = h;
-		return;
-	}
-#endif /* USE_GDK_IMLIB */
-        /*
-	 * Okay, since I should not load the pixmaps as long as there's no
-	 * GdkWindow for them, I will guess a size of 16x16 for the icons,
-	 * as long as widget->window is NULL
-	 */
-        if (widget->window == NULL) {
-                if (requisition->width < 16)
-                        requisition->width = 16;
-                if (requisition->height < 16)
-                        requisition->height = 16;
-        } else {
-                int w, h;
-                if (!pmap->regular) {
-                        pmap->regular =
-                                gnome_stock_pixmap(widget, pmap->icon,
-                                                   GNOME_STOCK_PIXMAP_REGULAR);
-			gtk_widget_show(GTK_WIDGET(pmap->regular));
-                }
-		if (pmap->regular->pixmap)
-			gdk_window_get_size(pmap->regular->pixmap, &w, &h);
-		else
-			w = h = 16; /* FIXME */
-                requisition->width = w;
-                requisition->height = h;
-        }
+	requisition->width = GNOME_STOCK_PIXMAP_WIDGET(widget)->width;
+	requisition->height = GNOME_STOCK_PIXMAP_WIDGET(widget)->height;
 }
 
 
@@ -228,6 +198,8 @@ gnome_stock_pixmap_widget_init(GtkObject *obj)
 
         w = GNOME_STOCK_PIXMAP_WIDGET(obj);
         w->icon = NULL;
+	w->width = 0;
+	w->height = 0;
         w->window = NULL;
         w->pixmap = NULL;
         w->regular = NULL;
@@ -264,13 +236,17 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
 {
 	GtkWidget *w;
         GnomeStockPixmapWidget *p;
+	GnomeStockPixmapEntry *entry;
 
         g_return_val_if_fail(icon != NULL, NULL);
-        g_return_val_if_fail(gnome_stock_pixmap_checkfor(icon, GNOME_STOCK_PIXMAP_REGULAR), NULL);
+	entry = gnome_stock_pixmap_checkfor(icon, GNOME_STOCK_PIXMAP_REGULAR);
+        g_return_val_if_fail(entry != NULL, NULL);
 
 	w = gtk_type_new(gnome_stock_pixmap_widget_get_type());
         p = GNOME_STOCK_PIXMAP_WIDGET(w);
         p->icon = g_strdup(icon);
+	p->width = entry->any.width;
+	p->height = entry->any.height;
         p->window = window;
 #ifdef USE_GDK_IMLIB
 	{
@@ -329,33 +305,34 @@ struct _default_entries_data entries_data[] = {
 struct _default_entries_data {
         char *icon, *subtype;
         gchar **xpm_data;
+	int width, height;
 };
 
 struct _default_entries_data entries_data[] = {
-        {GNOME_STOCK_PIXMAP_NEW, GNOME_STOCK_PIXMAP_REGULAR, tb_new_xpm},
-        {GNOME_STOCK_PIXMAP_SAVE, GNOME_STOCK_PIXMAP_REGULAR, tb_save_xpm},
-        {GNOME_STOCK_PIXMAP_OPEN, GNOME_STOCK_PIXMAP_REGULAR, tb_open_xpm},
-        {GNOME_STOCK_PIXMAP_CUT, GNOME_STOCK_PIXMAP_REGULAR, tb_cut_xpm},
-        {GNOME_STOCK_PIXMAP_COPY, GNOME_STOCK_PIXMAP_REGULAR, tb_copy_xpm},
-        {GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, tb_paste_xpm},
-        {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, tb_properties_xpm},
-        /* {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm}, */
-        {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, tb_unknown_xpm},
-        {GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, tb_exit_xpm},
-        {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
-        {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
-        {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_cancel_xpm},
-        {GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_new_xpm},
-        {GNOME_STOCK_MENU_SAVE, GNOME_STOCK_PIXMAP_REGULAR, menu_save_xpm},
-        {GNOME_STOCK_MENU_OPEN, GNOME_STOCK_PIXMAP_REGULAR, menu_open_xpm},
-        {GNOME_STOCK_MENU_EXIT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_exit_xpm},
-        {GNOME_STOCK_MENU_CUT, GNOME_STOCK_PIXMAP_REGULAR, menu_cut_xpm},
-        {GNOME_STOCK_MENU_COPY, GNOME_STOCK_PIXMAP_REGULAR, menu_copy_xpm},
-        {GNOME_STOCK_MENU_PASTE, GNOME_STOCK_PIXMAP_REGULAR, menu_paste_xpm},
-        {GNOME_STOCK_MENU_PROP, GNOME_STOCK_PIXMAP_REGULAR, menu_prop_xpm},
-        {GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_about_xpm},
+        {GNOME_STOCK_PIXMAP_NEW, GNOME_STOCK_PIXMAP_REGULAR, tb_new_xpm, 20, 20},
+        {GNOME_STOCK_PIXMAP_SAVE, GNOME_STOCK_PIXMAP_REGULAR, tb_save_xpm, 20, 20},
+        {GNOME_STOCK_PIXMAP_OPEN, GNOME_STOCK_PIXMAP_REGULAR, tb_open_xpm, 20, 20},
+        {GNOME_STOCK_PIXMAP_CUT, GNOME_STOCK_PIXMAP_REGULAR, tb_cut_xpm, 20, 20},
+        {GNOME_STOCK_PIXMAP_COPY, GNOME_STOCK_PIXMAP_REGULAR, tb_copy_xpm, 20, 20},
+        {GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, tb_paste_xpm, 20, 20},
+        {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, tb_properties_xpm, 20, 20},
+        /* {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm, 20, 20}, */
+        {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, tb_unknown_xpm, 20, 20},
+        {GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, tb_exit_xpm, 20, 20},
+        {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm, 20, 20},
+        {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm, 20, 20},
+        {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_cancel_xpm, 20, 20},
+        {GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_new_xpm, 16, 16},
+        {GNOME_STOCK_MENU_SAVE, GNOME_STOCK_PIXMAP_REGULAR, menu_save_xpm, 16, 16},
+        {GNOME_STOCK_MENU_OPEN, GNOME_STOCK_PIXMAP_REGULAR, menu_open_xpm, 16, 16},
+        {GNOME_STOCK_MENU_EXIT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_exit_xpm, 16, 16},
+        {GNOME_STOCK_MENU_CUT, GNOME_STOCK_PIXMAP_REGULAR, menu_cut_xpm, 16, 16},
+        {GNOME_STOCK_MENU_COPY, GNOME_STOCK_PIXMAP_REGULAR, menu_copy_xpm, 16, 16},
+        {GNOME_STOCK_MENU_PASTE, GNOME_STOCK_PIXMAP_REGULAR, menu_paste_xpm, 16, 16},
+        {GNOME_STOCK_MENU_PROP, GNOME_STOCK_PIXMAP_REGULAR, menu_prop_xpm, 16, 16},
+        {GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_about_xpm, 16, 16},
 	/* TODO: I shouldn't waste a pixmap for that */
-        {GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, menu_blank_xpm},
+        {GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, menu_blank_xpm, 16, 16},
 };
 #endif /* not USE_GDK_IMLIB */
 static int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
@@ -382,11 +359,11 @@ stock_pixmaps(void)
 
         for (i = 0; i < entries_data_num; i++) {
                 entry = g_malloc(sizeof(GnomeStockPixmapEntry));
+		entry->any.width = entries_data[i].width;
+		entry->any.height = entries_data[i].height;
 #ifdef USE_GDK_IMLIB
 		entry->type = GNOME_STOCK_PIXMAP_TYPE_IMLIB;
 		entry->imlib.rgb_data = entries_data[i].rgb_data;
-		entry->imlib.width = entries_data[i].width;
-		entry->imlib.height = entries_data[i].height;
 		entry->imlib.shape.r = 255;
 		entry->imlib.shape.g = 0;
 		entry->imlib.shape.b = 255;
@@ -536,10 +513,10 @@ build_disabled_pixmap(GtkWidget *window, GtkPixmap **inout_pixmap)
                                 + green;
                         c.blue = (((gint32)c.blue - blue) >> 1)
                                 + blue;
-                        c.pixel = gdk_color_context_get_pixel(cc, c.red,
-                                                              c.green,
-                                                              c.blue,
-                                                              &failed);
+			c.pixel = gdk_color_context_get_pixel(cc, c.red,
+							      c.green,
+							      c.blue,
+							      &failed);
                         gdk_image_put_pixel(image, x, y, c.pixel);
                 }
         }

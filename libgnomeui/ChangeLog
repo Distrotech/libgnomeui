@@ -1,3 +1,9 @@
+1998-02-17  Eckehard Berns <eb@berns.prima.de>
+
+	* gnome-stock.[ch]: added width/height fields to the
+	GnomeStock...Entry structs to make sure a size_request gets the
+	correct values.
+
 Tue Feb 17 00:16:49 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gnome-scores.c (gnome_scores_set_color): gtk_style_unref() new

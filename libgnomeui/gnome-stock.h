@@ -105,6 +105,7 @@ BEGIN_GNOME_DECLS
 
 /* some internal definitions */
 
+typedef struct _GnomeStockPixmapEntryAny     GnomeStockPixmapEntryAny;
 typedef struct _GnomeStockPixmapEntryData    GnomeStockPixmapEntryData;
 typedef struct _GnomeStockPixmapEntryFile    GnomeStockPixmapEntryFile;
 typedef struct _GnomeStockPixmapEntryPath    GnomeStockPixmapEntryPath;
@@ -127,6 +128,7 @@ typedef enum {
 /* a data entry holds a hardcoded pixmap */
 struct _GnomeStockPixmapEntryData {
         GnomeStockPixmapType type;
+	int width, height;
         gchar **xpm_data;
 };
 
@@ -135,8 +137,8 @@ struct _GnomeStockPixmapEntryData {
 typedef struct _GnomeStockPixmapEntryImlib   GnomeStockPixmapEntryImlib;
 struct _GnomeStockPixmapEntryImlib {
         GnomeStockPixmapType type;
-        gchar *rgb_data;
 	int width, height;
+        gchar *rgb_data;
 	GdkImlibColor shape;
 };
 #endif
@@ -145,12 +147,14 @@ struct _GnomeStockPixmapEntryImlib {
    will be seached for using gnome_pixmap_file */
 struct _GnomeStockPixmapEntryFile {
         GnomeStockPixmapType type;
+	int width, height;
         gchar *filename;
 };
 
 /* a path entry holds the complete (absolut) path to the pixmap file */
 struct _GnomeStockPixmapEntryPath {
         GnomeStockPixmapType type;
+	int width, height;
         gchar *pathname;
 };
 
@@ -158,11 +162,18 @@ struct _GnomeStockPixmapEntryPath {
  * used by a theme to completely change the handling of a stock icon. */
 struct _GnomeStockPixmapEntryWidget {
         GnomeStockPixmapType type;
+	int width, height;
         GtkWidget *widget;
+};
+
+struct _GnomeStockPixmapEntryAny {
+        GnomeStockPixmapType type;
+	int width, height;
 };
 
 union _GnomeStockPixmapEntry {
         GnomeStockPixmapType type;
+        GnomeStockPixmapEntryAny any;
         GnomeStockPixmapEntryData data;
         GnomeStockPixmapEntryFile file;
         GnomeStockPixmapEntryPath path;
@@ -187,6 +198,8 @@ struct _GnomeStockPixmapWidget {
 	GtkVBox parent_object;
 
         char *icon;
+	int width, height;    /* needed to answer size_requests even before
+			       * a pixmap is loaded/created */
         GtkWidget *window;    /* needed for style and gdk_pixmap_create... */
         GtkPixmap *pixmap;    /* the pixmap currently shown */
         GtkPixmap *regular, *disabled, *focused;  /* pixmap cache */

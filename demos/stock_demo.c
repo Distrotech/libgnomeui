@@ -65,8 +65,9 @@ create_menu(GtkWidget *window)
         gtk_widget_show(w);
         gtk_widget_install_accelerator(w, accel, "activate",
                                        'Q', GDK_CONTROL_MASK);
-	gtk_signal_connect(GTK_OBJECT(w), "activate",
-			   (GtkSignalFunc)gtk_main_quit, NULL);
+	gtk_signal_connect_object(GTK_OBJECT(w), "activate",
+				  (GtkSignalFunc)gtk_widget_destroy,
+				  GTK_OBJECT(window));
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
@@ -244,6 +245,11 @@ main(int argc, char **argv)
 	window = gnome_app_new("Gnome Stock Test", "Gnome Stock Test");
 	gtk_window_set_wmclass(GTK_WINDOW(window), "stock_test",
 			       "GnomeStockTest");
+
+	gtk_signal_connect(GTK_OBJECT(window), "delete_event",
+			   GTK_SIGNAL_FUNC(gtk_widget_destroy), NULL);
+	gtk_signal_connect(GTK_OBJECT(window), "destroy",
+			   GTK_SIGNAL_FUNC(gtk_main_quit), NULL);
 	
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
