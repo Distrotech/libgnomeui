@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-09-13 05:05+0200\n"
+"POT-Creation-Date: 2002-11-20 16:19+0000\n"
 "PO-Revision-Date: 2002-09-13 15:09GMT\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -104,7 +104,8 @@ msgid "Translator credits"
 msgstr "Kredity překladatelů"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Kredity překladatelů. Tento řetězec by měl být označen k přeložení."
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -255,7 +256,8 @@ msgstr "Vyberte čas ze seznamu"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date je zastaralé, používejte gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date je zastaralé, používejte gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -415,7 +417,9 @@ msgstr "GNOME GUI knihovna"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Vyskytlo se několik chyb 'segmentation faults'; nelze zobrazit chybový dialog\n"
+msgstr ""
+"Vyskytlo se několik chyb 'segmentation faults'; nelze zobrazit chybový "
+"dialog\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:632
@@ -437,8 +441,8 @@ msgid ""
 msgstr ""
 "Správce sezení GNOME (proces %d) havaroval\n"
 "díky fatální chybě (%s).\n"
-"Poté, co zavřete tento dialog, budou všechny aplikace ukončeny a vaše "
-"sezení se ukončí.\n"
+"Poté, co zavřete tento dialog, budou všechny aplikace ukončeny a vaše sezení "
+"se ukončí.\n"
 "Uložte proto před zavřením tohoto dialogu všechny vaše soubory."
 
 #: libgnomeui/gnome_segv.c:110
@@ -470,7 +474,9 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Pro více informací prosím navštivte stránku GNOME Application Crash (selhání aplikace GNOME)"
+msgstr ""
+"Pro více informací prosím navštivte stránku GNOME Application Crash (selhání "
+"aplikace GNOME)"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -518,7 +524,6 @@ msgstr "Rada pro položku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Soubor"
 
@@ -576,7 +581,6 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Nápověda"
 
@@ -767,11 +771,11 @@ msgstr "Nastavit tuto aplikaci"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_O aplikaci"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "O této aplikaci"
 
@@ -798,7 +802,7 @@ msgstr "Vytvořit nové okno"
 msgid "_Close This Window"
 msgstr "_Zavřít toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zavřít aktuální okno"
 
@@ -988,8 +992,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Zda-li je položka pro soubor použita pro zadání adresáře nebo úplných "
-"názvů souboru."
+"Zda-li je položka pro soubor použita pro zadání adresáře nebo úplných názvů "
+"souboru."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1026,8 +1030,8 @@ msgid ""
 "its parameters."
 msgstr ""
 "Prvek GnomeEntry, který používá políčko pro soubor k zadání názvu souboru. "
-"Tento atribut lze použít k získání prvku GnomeEntry, chcete-li měnit nebo zjistit "
-"jeho parametry."
+"Tento atribut lze použít k získání prvku GnomeEntry, chcete-li měnit nebo "
+"zjistit jeho parametry."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1040,8 +1044,8 @@ msgid ""
 "parameters."
 msgstr ""
 "Prvek GtkEntry, který používá políčko pro soubor k zadání názvu souboru. "
-"Tento atribut lze použít k získání prvku GtkEntry, chcete-li měnit nebo zjistit "
-"jeho parametry."
+"Tento atribut lze použít k získání prvku GtkEntry, chcete-li měnit nebo "
+"zjistit jeho parametry."
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
@@ -1151,10 +1155,10 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Aplikace \"%s\" se pokusila změnit aspekt vašeho nastavení, které vám váš správce "
-"systému nebo dodavatel operačního systému nepovoluje změnit. Některé volby, které "
-"jste vybrali, nebudou mít vliv, nebo nebudou obnoveny při vašem příštím použití "
-"této aplikace."
+"Aplikace \"%s\" se pokusila změnit aspekt vašeho nastavení, které vám váš "
+"správce systému nebo dodavatel operačního systému nepovoluje změnit. Některé "
+"volby, které jste vybrali, nebudou mít vliv, nebo nebudou obnoveny při vašem "
+"příštím použití této aplikace."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1162,8 +1166,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Nastala chyba při nahrávání nebo ukládání informací o vašem nastavení pro %s. "
-"Některé volby vašeho nastavení nemusí fungovat správně."
+"Nastala chyba při nahrávání nebo ukládání informací o vašem nastavení pro %"
+"s. Některé volby vašeho nastavení nemusí fungovat správně."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
@@ -1198,8 +1202,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Dialog pro výběr ikony. Můžete použít tento atribut, chcete-li získat prvek GtkDialog "
-"a měnit nebo zjistit jeho parametry."
+"Dialog pro výběr ikony. Můžete použít tento atribut, chcete-li získat prvek "
+"GtkDialog a měnit nebo zjistit jeho parametry."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
@@ -1328,7 +1332,5 @@ msgstr "%T %a %d. %b %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Ukončit test"
-
+#~ msgid "Exit the test"
+#~ msgstr "Ukončit test"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
-"POT-Creation-Date: 2002-10-03 05:33+0200\n"
+"POT-Creation-Date: 2002-11-20 16:19+0000\n"
 "PO-Revision-Date: 2002-10-24 12:17+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
@@ -440,8 +440,8 @@ msgid ""
 msgstr ""
 "የGNOME ክፍል መምሪያ (ድርጊት %d) ጊዜ\n"
 "በማይሰጥ ስህተት ተቋርጧል (%s)።\n"
-"ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞችይዘጉና ከውይይትዎ ይወጣሉ።"
-"እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ ከመዝጋትዎ በፊት ያስቀምጧቸው።"
+"ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞችይዘጉና ከውይይትዎ ይወጣሉ።እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ "
+"ከመዝጋትዎ በፊት ያስቀምጧቸው።"
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -520,7 +520,6 @@ msgstr "ጥቆማ ለተራ ቍጥር 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_ፋይል"
 
@@ -578,7 +577,6 @@ msgid "_Game"
 msgstr "_ጨዋታ"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_መረጃ"
 
@@ -769,11 +767,11 @@ msgstr "ፕሮግራሙን አስተካክል"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_ስለ"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "ስለዚህ ፕሮግራም"
 
@@ -800,7 +798,7 @@ msgstr "አዲስ መስኮት ፍጠር"
 msgid "_Close This Window"
 msgstr "ይሄንን መስኮት _ዝጋ"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "የአሁኑን መስኮት ዝጋ"
 
@@ -1242,8 +1240,7 @@ msgstr "የቁልፉ መደብ"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"በምልክቶቹ ምስል ቦታ የማውጫውን ስም ማስገባት አለብዎት።"
+msgstr "በምልክቶቹ ምስል ቦታ የማውጫውን ስም ማስገባት አለብዎት።"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1322,6 +1319,5 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ከሙከራው ውጣ"
+#~ msgid "Exit the test"
+#~ msgstr "ከሙከራው ውጣ"

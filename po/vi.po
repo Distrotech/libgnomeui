@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-09-20 05:05+0200\n"
+"POT-Creation-Date: 2002-11-20 16:19+0000\n"
 "PO-Revision-Date: 2002-09-21 10:01+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
@@ -257,7 +257,8 @@ msgstr "Chọn thời gian từ danh sách"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date đã lỗi thời, hãy dùng gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date đã lỗi thời, hãy dùng gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -417,7 +418,9 @@ msgstr "Thư viện GNOME GUI"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Nhiều lỗi trong truy cập bộ nhớ (multiple segmentation fault) xuất hiện; không hiển thị được hộp thoại lỗi\n"
+msgstr ""
+"Nhiều lỗi trong truy cập bộ nhớ (multiple segmentation fault) xuất hiện; "
+"không hiển thị được hộp thoại lỗi\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:632
@@ -520,7 +523,6 @@ msgstr "Chỉ dẫn cho mục 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tập tin"
 
@@ -578,7 +580,6 @@ msgid "_Game"
 msgstr "_Trò chơi"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Trợ _giúp"
 
@@ -769,11 +770,11 @@ msgstr "Điều chỉnh cấu hình ứng dụng"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Giới thiệu"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Thông tin về ứng dụng này"
 
@@ -800,7 +801,7 @@ msgstr "Mở cửa sổ mới"
 msgid "_Close This Window"
 msgstr "Đón_g cửa sổ"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Đóng cửa sổ hiện thời"
 
@@ -1025,7 +1026,10 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr "GnomeEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng thuộc tính này để dùng GnomeEntry khi bạn cần thay đổi hay truy vấn bất kỳ một tham số nào của nó."
+msgstr ""
+"GnomeEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng "
+"thuộc tính này để dùng GnomeEntry khi bạn cần thay đổi hay truy vấn bất kỳ "
+"một tham số nào của nó."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1036,7 +1040,10 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr "GtkEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng thuộc tính này để dùng GtkEntry khi bạn cần thay đổi hay truy vấn bất kỳ một tham số nào của nó."
+msgstr ""
+"GtkEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng thuộc "
+"tính này để dùng GtkEntry khi bạn cần thay đổi hay truy vấn bất kỳ một tham "
+"số nào của nó."
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
@@ -1145,20 +1152,28 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr "Ứng dụng \"%s\" đã cố thay đổi những cấu hình mà quản trị hệ thống hoặc nhà sản xuất hệ điều hành không cho phép thay đổi. Vài thiết lập được chọn có thể sẽ không có tác dụng, hoặc không thể được lưu lần kế bạn dùng ứng dụng này."
+msgstr ""
+"Ứng dụng \"%s\" đã cố thay đổi những cấu hình mà quản trị hệ thống hoặc nhà "
+"sản xuất hệ điều hành không cho phép thay đổi. Vài thiết lập được chọn có "
+"thể sẽ không có tác dụng, hoặc không thể được lưu lần kế bạn dùng ứng dụng "
+"này."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr "Một lỗi đã xuất hiện trong khi nạp hoặc lưu thông tin cấu hình cho %s. Một vài thiết lập cấu hình có thể không làm việc chính xác."
+msgstr ""
+"Một lỗi đã xuất hiện trong khi nạp hoặc lưu thông tin cấu hình cho %s. Một "
+"vài thiết lập cấu hình có thể không làm việc chính xác."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "Định danh đơn nhất cho mục nhập biểu tượng. Nó sẽ được dùng để lưu danh sách lược sử."
+msgstr ""
+"Định danh đơn nhất cho mục nhập biểu tượng. Nó sẽ được dùng để lưu danh sách "
+"lược sử."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1184,7 +1199,9 @@ msgstr "Hộp thoại chọn"
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr "Hộp thoại chọn biểu tượng. Bạn có thể dùng tích chất này để lấy GtkDialog nếu bạn cần để sửa đổi hoặc hỏi đáp các tính chất của nó."
+msgstr ""
+"Hộp thoại chọn biểu tượng. Bạn có thể dùng tích chất này để lấy GtkDialog "
+"nếu bạn cần để sửa đổi hoặc hỏi đáp các tính chất của nó."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
@@ -1313,9 +1330,8 @@ msgstr "%a, %d.%m.%Y, %H.%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Kết thúc thử"
+#~ msgid "Exit the test"
+#~ msgstr "Kết thúc thử"
 
 #~ msgid "Find _Again"
 #~ msgstr "Tìm thêm"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.4\n"
-"POT-Creation-Date: 2002-09-26 05:04+0200\n"
+"POT-Creation-Date: 2002-11-20 16:19+0000\n"
 "PO-Revision-Date: 2002-09-29 02:29+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -518,7 +518,6 @@ msgstr "項目二的提示"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "檔案(_F)"
 
@@ -576,7 +575,6 @@ msgid "_Game"
 msgstr "遊戲(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "求助(_H)"
 
@@ -767,11 +765,11 @@ msgstr "修改程式設定"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "關於(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "顯示有關本程式的資訊"
 
@@ -798,7 +796,7 @@ msgstr "建立新的視窗"
 msgid "_Close This Window"
 msgstr "關閉本視窗(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "關閉目前的視窗"
 
@@ -1141,8 +1139,8 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"程式“%s”正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。"
-"一部份選定的設定可能不會生效，或是無法保留至下次啟動程式的時候。"
+"程式“%s”正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。一部份選定的"
+"設定可能不會生效，或是無法保留至下次啟動程式的時候。"
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1310,9 +1308,8 @@ msgstr "%x(%a) %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "結束測試"
+#~ msgid "Exit the test"
+#~ msgstr "結束測試"
 
 #~ msgid "Exit the program"
 #~ msgstr "結束程式"

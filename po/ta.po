@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2002-10-09 05:26+0200\n"
+"POT-Creation-Date: 2002-11-20 16:19+0000\n"
 "PO-Revision-Date: 2002-10-14 22:39--600\n"
 "Last-Translator:  <>\n"
 "Language-Team: Tamil <>\n"
@@ -103,11 +103,11 @@ msgid "Translator credits"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:413
-#: libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "º¢ýÉõ"
 
@@ -188,8 +188,7 @@ msgstr "Åñ½ò¨¾ ¦¾Ã¢× ¦ºöÅ¾ðÌ ´÷ ¯¨ÃÂ¡¼¨Äò ¾¢Èì�
 msgid "Pick a color"
 msgstr "´÷ Åñ½ò¨¾ ¦¾Ã¢× ¦ºöÂ×õ"
 
-#: libgnomeui/gnome-dateedit.c:479
-#: libgnomeui/gnome-dateedit.c:776
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "§¿Ãõ"
 
@@ -229,8 +228,7 @@ msgstr "¦¾¡¼ì¸ §¿Ãõ"
 msgid "The initial time"
 msgstr "¦¾¡¼íÌõ §¿Ãõ"
 
-#: libgnomeui/gnome-dateedit.c:739
-#: libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "¾¢¸¾¢"
 
@@ -257,7 +255,8 @@ msgstr "´÷ô ÀðÊÂ¢Ä¢ÕóÐ §¿Ãò¨¾ ¦¾Ã¢×¦ºö"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date ¿¢Ã¡¸Ã¢ì¸ôÀðÎûÇÐ, gnome_date_edit_get_time ÒÆí¸×õ"
+msgstr ""
+"gnome_date_edit_get_date ¿¢Ã¡¸Ã¢ì¸ôÀðÎûÇÐ, gnome_date_edit_get_time ÒÆí¸×õ"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -395,9 +394,11 @@ msgid "This button will take you to the URI that it displays."
 msgstr ""
 
 #: libgnomeui/gnome-href.c:393
-msgid "Error occured while trying to launch the URL handler.\n"
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
-msgstr "URL ¨¸ôÀ¢Ê¨Â ¦¾¡¼í¸ ÓÂüº¢ò¾ §À¡Ð À¢¨Æ ¿¨¼¦ÀüÈÐ.\n"
+msgstr ""
+"URL ¨¸ôÀ¢Ê¨Â ¦¾¡¼í¸ ÓÂüº¢ò¾ §À¡Ð À¢¨Æ ¿¨¼¦ÀüÈÐ.\n"
 "Control Center'Â¢ø «¨Á×¸¨Ç ºÃ¢À¡÷ì¸×õ."
 
 #: libgnomeui/gnome-ui-init.c:113
@@ -420,7 +421,8 @@ msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:632
 #, fuzzy
-msgid "Segmentation fault!\n"
+msgid ""
+"Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨ÃÂ¡¼¨Ä ¸¡ñÀ¢ì¸ ÓÊÂ¡Ð\n"
 
@@ -429,7 +431,8 @@ msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session will exit.\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 
@@ -509,9 +512,7 @@ msgid "Hint for item 2"
 msgstr "¯ÕôÀÊ 2'ìÌ ÌÈ¢ôÀ¢Î"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82
-#: libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "_§¸¡ôÒ"
 
@@ -519,8 +520,7 @@ msgstr "_§¸¡ôÒ"
 msgid "_File/"
 msgstr "_§¸¡ôÒ/"
 
-#: libgnomeui/gnome-app-helper.c:84
-#: libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_¦¾¡Ì"
 
@@ -528,8 +528,7 @@ msgstr "_¦¾¡Ì"
 msgid "_Edit/"
 msgstr "_¦¾¡Ì/"
 
-#: libgnomeui/gnome-app-helper.c:86
-#: libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_¸¡ðº¢"
 
@@ -537,8 +536,7 @@ msgstr "_¸¡ðº¢"
 msgid "_View/"
 msgstr "_¸¡ðº¢/"
 
-#: libgnomeui/gnome-app-helper.c:88
-#: libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_«¨ÁôÒ¸û"
 
@@ -547,8 +545,7 @@ msgid "_Settings/"
 msgstr "_«¨ÁôÒ¸û/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90
-#: libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Ò¾¢ÂÐ"
 
@@ -556,8 +553,7 @@ msgstr "_Ò¾¢ÂÐ"
 msgid "_New/"
 msgstr "_Ò¾¢ÂÐ/"
 
-#: libgnomeui/gnome-app-helper.c:92
-#: libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "§¸¡_ôÒ¸û"
 
@@ -565,19 +561,15 @@ msgstr "§¸¡_ôÒ¸û"
 msgid "Fi_les/"
 msgstr "§¸¡_ôÒ¸û/"
 
-#: libgnomeui/gnome-app-helper.c:94
-#: libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_º¡ÇÃí¸û"
 
-#: libgnomeui/gnome-app-helper.c:95
-#: libgnomeui/gnome-app-helper.h:572
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Å¢¨ÇÂ¡ðÎ"
 
-#: libgnomeui/gnome-app-helper.c:96
-#: libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_¯¾Å¢"
 
@@ -769,12 +761,10 @@ msgstr "¦ºÂøÀ¡ð¨¼ «¨Á ÅÊÅôÀÎòÐ"
 #.
 #. About
 #: libgnomeui/gnome-app-helper.c:221
-#: test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_ÀüÈ¢"
 
 #: libgnomeui/gnome-app-helper.c:222
-#: test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "­ó¾ ¦ºÂøÀ¡ð¨¼ô ÀüÈ¢"
 
@@ -802,7 +792,6 @@ msgid "_Close This Window"
 msgstr "_þó¾ º¡ÇÃò¨¾ ãÎ"
 
 #: libgnomeui/gnome-app-helper.c:240
-#: test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "¾ü§À¡¨¾Â º¡ÇÃò¨¾ ãÎ"
 
@@ -952,8 +941,7 @@ msgstr "¿¢Ãø ±ñ"
 msgid "The application ID string"
 msgstr ""
 
-#: libgnomeui/gnome-entry.c:193
-#: libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr ""
 
@@ -965,17 +953,17 @@ msgstr "GTK Ñ¨Æ×"
 msgid "The GTK entry"
 msgstr "GTK Ñ¨Æ×"
 
-#: libgnomeui/gnome-file-entry.c:220
-#: libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:221
-msgid "Unique identifier for the file entry.  This will be used to save the history list."
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:229
-#: libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr ""
 
@@ -988,7 +976,9 @@ msgid "Directory Entry"
 msgstr "«¨¼× Ñ¨Æ×"
 
 #: libgnomeui/gnome-file-entry.c:238
-msgid "Whether the file entry is being used to enter directory names or complete filenames."
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:246
@@ -999,8 +989,7 @@ msgstr ""
 msgid "Whether the Browse file window should be modal."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:254
-#: libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "§¸¡ôÒô ¦ÀÂ÷"
 
@@ -1021,7 +1010,10 @@ msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
-msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:282
@@ -1029,7 +1021,10 @@ msgid "GtkEntry"
 msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:283
-msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:527
@@ -1084,8 +1079,7 @@ msgstr "±ØòÐ Å¨¸ô ¦ÀÂ÷"
 msgid "Name of the selected font"
 msgstr "¦¾Ã¢× ¦ºöÂôÀðÎûÇ ±ØòÐ Å¨¸Â¢ý ¦ÀÂ÷"
 
-#: libgnomeui/gnome-font-picker.c:184
-#: libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "±ØòÐ Å¨¸"
 
@@ -1135,16 +1129,24 @@ msgstr "_Å¢ÅÃí¸û"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
-msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
 msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
-msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
 msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:177
-msgid "Unique identifier for the icon entry.  This will be used to save the history list."
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
 msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:186
@@ -1168,21 +1170,20 @@ msgid "Picker dialog"
 msgstr "¦¾Ã¢×¦ºöÔõ ¯¨ÃÂ¡¼ø"
 
 #: libgnomeui/gnome-icon-entry.c:211
-msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:320
-#: libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
 msgstr "ÌÚõÀ¼õ þø¨Ä"
 
-#: libgnomeui/gnome-icon-entry.c:531
-#: libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:537
-#: libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Óý¸¡ðº¢"
 
@@ -1219,7 +1220,9 @@ msgid "Icon path"
 msgstr "ÌÚõÀ¼ò¾¢ý À¡¨¾"
 
 #: libgnomeui/gnome-icon-entry.c:1009
-msgid "Here you should enter the name of the directory where icon images are located."
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
 msgstr ""
 
 #: libgnomeui/gnome-icon-sel.c:293
@@ -1264,8 +1267,7 @@ msgstr "Óý¸¡ðÎ"
 msgid "Whether the pixmap entry should have a preview."
 msgstr ""
 
-#: libgnomeui/gnome-pixmap-entry.c:188
-#: libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "¯ÕÅõ ¸¢¨¼Â¡Ð"
 
@@ -1300,7 +1302,5 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ÀÃ¢§º¡¾¨ÉÂ¢Ä¢ÕóÐ ¦ÅÇ¢§ÂÚ"
-
+#~ msgid "Exit the test"
+#~ msgstr "ÀÃ¢§º¡¾¨ÉÂ¢Ä¢ÕóÐ ¦ÅÇ¢§ÂÚ"
