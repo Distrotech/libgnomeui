@@ -1,3 +1,10 @@
+1999-08-13  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-icon-item.c (gnome_icon_text_item_select): If the icon
+	text item gets unselected while it is being edited, ask for
+	acceptance with iti_edition_accept() instead of blindly accepting
+	the current string.
+
 1999-08-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (selection_one_icon_event): Reset the
