@@ -58,7 +58,7 @@ struct _GnomeHRefClass {
  * GNOME href class methods
  */
 
-guint gnome_href_get_type(void);
+GtkType gnome_href_get_type(void);
 GtkWidget *gnome_href_new(const gchar *url, const gchar *text);
 
 /* for bindings and subclassing, use the gnome_href_new from C */

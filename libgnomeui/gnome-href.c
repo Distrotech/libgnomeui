@@ -21,6 +21,7 @@
 */
 
 #include "config.h"
+#include "gnome-macros.h"
 
 #include <string.h> /* for strlen */
 
@@ -56,8 +57,6 @@ static void drag_data_get     (GnomeHRef          *href,
 			       guint               time,
 			       gpointer            data);
 
-static GtkButtonClass *parent_class;
-
 static const GtkTargetEntry http_drop_types[] = {
 	{ "text/uri-list",       0, 0 },
 	{ "x-url/http",          0, 0 },
@@ -92,24 +91,9 @@ enum {
  *
  * Returns the type assigned to the GNOME href widget.
  **/
-
-guint gnome_href_get_type(void) {
-  static guint href_type = 0;
-  if (!href_type) {
-    GtkTypeInfo href_info = {
-      "GnomeHRef",
-      sizeof(GnomeHRef),
-      sizeof(GnomeHRefClass),
-      (GtkClassInitFunc) gnome_href_class_init,
-      (GtkObjectInitFunc) gnome_href_init,
-      NULL,
-      NULL,
-      NULL
-    };
-    href_type = gtk_type_unique(gtk_button_get_type(), &href_info);
-  }
-  return href_type;
-}
+/* The following defines the get_type */
+GNOME_CLASS_BOILERPLATE (GnomeHRef, gnome_href,
+			 GtkButton, gtk_button)
 
 static void gnome_href_class_init(GnomeHRefClass *klass) {
 
@@ -117,8 +101,6 @@ static void gnome_href_class_init(GnomeHRefClass *klass) {
   GObjectClass *gobject_class = (GObjectClass *)klass;
   GtkWidgetClass *widget_class = (GtkWidgetClass *)klass;
   GtkButtonClass *button_class = (GtkButtonClass *)klass;
-
-  parent_class = gtk_type_class(gtk_button_get_type());
 
   gtk_object_add_arg_type("GnomeHRef::url",
 			  GTK_TYPE_STRING,
@@ -375,8 +357,7 @@ static void gnome_href_clicked(GtkButton *button) {
   g_return_if_fail(button != NULL);
   g_return_if_fail(GNOME_IS_HREF(button));
 
-  if (GTK_BUTTON_CLASS(parent_class)->clicked)
-    (* GTK_BUTTON_CLASS(parent_class)->clicked)(button);
+  GNOME_CALL_PARENT_HANDLER (GTK_BUTTON_CLASS, clicked, (button));
 
   href = GNOME_HREF(button);
 
@@ -407,8 +388,7 @@ static void gnome_href_destroy(GtkObject *object) {
 	  href->_priv->label = NULL;
   }
 
-  if (GTK_OBJECT_CLASS(parent_class)->destroy)
-    (* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+  GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void gnome_href_finalize(GObject *object) {
@@ -422,16 +402,15 @@ static void gnome_href_finalize(GObject *object) {
   g_free(href->_priv);
   href->_priv = NULL;
 
-  if (G_OBJECT_CLASS(parent_class)->finalize)
-    (* G_OBJECT_CLASS(parent_class)->finalize)(object);
+  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 
 static void gnome_href_realize(GtkWidget *widget) {
   GdkCursor *cursor;
 
-  if (GTK_WIDGET_CLASS(parent_class)->realize)
-    (* GTK_WIDGET_CLASS(parent_class)->realize)(widget);
+  GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
+
   cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
   gdk_window_set_cursor(widget->window, cursor);
   gdk_cursor_destroy(cursor);
