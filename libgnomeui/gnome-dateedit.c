@@ -213,16 +213,3 @@ gnome_date_edit_new (time_t the_time)
 
 	return GTK_WIDGET (gde);
 }
-
-main (int argc, char *argv [])
-{
-	GtkWidget *gde, *top;
-	
-	gtk_init (&argc, &argv);
-
-	top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gde = gnome_date_edit_new (0);
-	gtk_container_add (GTK_CONTAINER (top), gde);
-	gtk_widget_show_all (top);
-	gtk_main ();
-}
