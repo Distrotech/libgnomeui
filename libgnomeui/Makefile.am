@@ -32,6 +32,7 @@ INCLUDES = \
 	$(LIBGNOME_CFLAGS)				\
 	$(LIBGNOMECANVAS_CFLAGS)			\
 	$(LIBBONOBOUI_CFLAGS)				\
+	$(GCONF_CFLAGS)					\
 	-DGTK_VERSION=\""$(GTK_VERSION)"\"		\
 	-DVERSION=\"$(VERSION)\"
 
@@ -222,6 +223,7 @@ libgnomeui_2_la_LDFLAGS = \
 libgnomeui_2_la_LIBADD = \
 	$(LIBGNOME_LIBS)			\
 	$(LIBGNOMECANVAS_LIBS)			\
+	$(GCONF_LIBS)				\
 	$(LIBBONOBOUI_LIBS)
 
 LDADD = \

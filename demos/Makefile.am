@@ -6,6 +6,7 @@ INCLUDES = \
 	-I$(top_srcdir)/libgnomeui			\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMECANVAS_CFLAGS)			\
+	$(GCONF_CFLAGS)					\
         -DGNOMEUILIBDIR=\""$(libdir)"\" 		\
         -DGNOMEUIDATADIR=\""$(datadir)"\" 		\
         -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\

@@ -3385,7 +3385,7 @@ static char *
 wap_textfu_get_var(WapTextFu *textfu, const char *varname, int n)
 {
   GList *l;
-  WapInputInfo *input;
+  WapInputInfo *input = NULL;
   PlacedItem *item;
 
   g_assert(varname[0] == '$');

@@ -1,3 +1,9 @@
+2001-06-11  Cody Russell  <bratsche@gnome.org>
+
+	* wap-textfu.c: Fix small warning so we can build with -Werror.
+
+	* Makefile.am: Add GCONF_CFLAGS and GCONF_LIBS.
+
 2001-06-10  Chema Celorio  <chema@celorio.com>
 
 	* gnome-selector-client.c (gnome_selector_client_construct_from_objref):

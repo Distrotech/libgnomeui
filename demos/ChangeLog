@@ -1,3 +1,7 @@
+2001-06-11  Cody Russell  <bratsche@gnome.org>
+
+	* Makefile.am: Add GCONF_CFLAGS.
+
 2001-05-19  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am: Comment out animator_demo.
