@@ -42,16 +42,15 @@ BEGIN_GNOME_DECLS
 
 /* Current animator status.  */
 typedef enum
-  {
+{
     GNOME_ANIMATOR_STATUS_STOPPED,
     GNOME_ANIMATOR_STATUS_RUNNING
-  }
-GnomeAnimatorStatus;
+} GnomeAnimatorStatus;
 
 /* Looping type.  The behavior depends on the playback direction,
    forwards or (backwards).  */
 typedef enum
-  {
+{
     /* No loop: after the last (first) frame is played, the animation
        is stopped.  */
     GNOME_ANIMATOR_LOOP_NONE,
@@ -63,8 +62,7 @@ typedef enum
     /* After the last (first) frame is played, the playback direction
        is reversed.  */
     GNOME_ANIMATOR_LOOP_PING_PONG
-  }
-GnomeAnimatorLoopType;
+} GnomeAnimatorLoopType;
 
 typedef struct _GnomeAnimator GnomeAnimator;
 typedef struct _GnomeAnimatorClass GnomeAnimatorClass;

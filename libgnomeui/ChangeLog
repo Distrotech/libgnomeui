@@ -1,3 +1,7 @@
+Wed Sep 30 01:52:39 PDT 1998 Manish Singh <yosh@gimp.org>
+
+	* gnome-animator.h: whitespace changes so makeenums.pl doesn't barf
+
 1998-09-29  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-animator.h (struct _GnomeAnimator): Removed `frames'
