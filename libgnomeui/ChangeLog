@@ -1,3 +1,7 @@
+1998-12-15  Martin Baulig  <baulig@merkur.uni-trier.de>
+
+	* pixmaps/Makefile.am (CLEANFILES): Add $(BUILT_SOURCES) here.
+
 Tue Dec 15  Felix Bellaby  <felix@pooh.u-net.com>
 	* gnome-client.c (gnome_dlient_set_config_prefix): new function
 	for use by clients like the panel that use special config names.
