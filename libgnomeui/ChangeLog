@@ -1,3 +1,25 @@
+1999-01-12  Chris Lahey  <clahey@umich.edu>
+
+	* gnome-app-helper.h, gnome-app-helper.c
+	(gnome_app_ui_configure_configurable): Added configurable
+	keybindings for menu items.  Items are configured by adding to
+	~/.gnome/Gnome in the [Menus] section.  The menu items available
+	for keybinding configuration are listed in gnome_app_helper.c
+	(menu_names).  The defaults are listed in gnome_app_helper.c
+	(menu_defaults).
+
+	Configuration consists of two (key, value) pairs for each menu
+	item.  The first is Menu-*-accelerator-key which is assigned a
+	value equal to the ASCII value of the key you want to bind to.
+	The second is Menu-*-ac-mods which is assigned the GdkModifierType
+	(in decimal) of the set of modifiers you want your keybinding to
+	take.  For this, Shift=1, Control=2, and Alt=4, and you can add.
+	See gtk+/gdk/gdktypes.h (GdkModifierType) for more info on
+	ac-mods.
+
+	* gnome.defs: This seems to be checked in for some reason, even
+	though it's autogenned.  I suppose I'll commit the changes to it.
+
 1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-init.c (initialize_gtk_signal_relay): Fix as posted by

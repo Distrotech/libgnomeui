@@ -55,6 +55,235 @@ static gint g_strncmp_ignore_char( gchar *first, gchar *second,
 				   gint length, gchar ignored );
 
 
+static GnomeUIInfo menu_defaults[] = {
+        /* New */
+        { GNOME_APP_UI_ITEM, NULL, NULL,
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+          GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL },
+        /* Open */
+        { GNOME_APP_UI_ITEM, N_("_Open..."), N_("Open a file"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
+          GNOME_KEY_NAME_OPEN, GNOME_KEY_MOD_OPEN, NULL },
+	/* Save */
+        { GNOME_APP_UI_ITEM, N_("_Save"), N_("Save the current file"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
+          GNOME_KEY_NAME_SAVE, GNOME_KEY_MOD_SAVE, NULL },
+	/* Save As */
+        { GNOME_APP_UI_ITEM, N_("Save _As..."),
+          N_("Save the current file with a different name"),
+          NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS,
+          GNOME_KEY_NAME_SAVE_AS, GNOME_KEY_MOD_SAVE_AS, NULL },
+	/* Revert */
+        { GNOME_APP_UI_ITEM, N_("_Revert"),
+          N_("Revert to a saved version of the file"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REVERT,
+          0,  (GdkModifierType) 0, NULL },
+	/* Print */
+        { GNOME_APP_UI_ITEM, N_("_Print"), N_("Print the current file"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,
+          GNOME_KEY_NAME_PRINT,  GNOME_KEY_MOD_PRINT, NULL },
+	/* Print Setup */
+        { GNOME_APP_UI_ITEM, N_("Print S_etup..."),
+          N_("Setup the page settings for your current printer"),
+          NULL, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,
+          GNOME_KEY_NAME_PRINT_SETUP,  GNOME_KEY_MOD_PRINT_SETUP, NULL },
+	/* Close */
+        { GNOME_APP_UI_ITEM, N_("_Close"), N_("Close the current file"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
+          GNOME_KEY_NAME_CLOSE, GNOME_KEY_MOD_CLOSE, NULL },
+	/* Exit */
+        { GNOME_APP_UI_ITEM, N_("E_xit"), N_("Exit the program"),
+          NULL, NULL, NULL, GNOME_APP_PIXMAP_STOCK,
+	  GNOME_STOCK_MENU_EXIT, GNOME_KEY_NAME_EXIT, GNOME_KEY_MOD_EXIT,
+	    NULL },
+	/*
+	 * The "Edit" menu
+	 */
+	/* Cut */
+        { GNOME_APP_UI_ITEM, N_("C_ut"), N_("Cut the selection"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
+          GNOME_KEY_NAME_CUT, GNOME_KEY_MOD_CUT, NULL },
+	/* 10 */
+	/* Copy */
+        { GNOME_APP_UI_ITEM, N_("_Copy"), N_("Copy the selection"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
+          GNOME_KEY_NAME_COPY, GNOME_KEY_MOD_COPY, NULL },
+	/* Paste */
+        { GNOME_APP_UI_ITEM, N_("_Paste"), N_("Paste the clipboard"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
+          GNOME_KEY_NAME_PASTE, GNOME_KEY_MOD_PASTE, NULL },
+	/* Clear */
+        { GNOME_APP_UI_ITEM, N_("C_lear"), N_("Clear the selection"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_KEY_NAME_CLEAR, GNOME_KEY_MOD_CLEAR, NULL },
+	/* Undo */
+        { GNOME_APP_UI_ITEM, N_("_Undo"), N_("Undo the last action"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UNDO,
+          GNOME_KEY_NAME_UNDO, GNOME_KEY_MOD_UNDO, NULL },
+	/* Redo */
+        { GNOME_APP_UI_ITEM, N_("_Redo"), N_("Redo the undone action"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,
+          GNOME_KEY_NAME_REDO, GNOME_KEY_MOD_REDO, NULL },
+	/* Find */
+        { GNOME_APP_UI_ITEM, N_("_Find..."),  N_("Search for a string"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+          GNOME_KEY_NAME_FIND, GNOME_KEY_MOD_FIND, NULL },
+	/* Find Again */
+        { GNOME_APP_UI_ITEM, N_("Find _Again"),
+          N_("Search again for the same string"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+          GNOME_KEY_NAME_FIND_AGAIN, GNOME_KEY_MOD_FIND_AGAIN, NULL },
+	/* Replace */
+        { GNOME_APP_UI_ITEM, N_("_Replace..."), N_("Replace a string"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SRCHRPL,
+          GNOME_KEY_NAME_REPLACE, GNOME_KEY_MOD_REPLACE, NULL },
+	/* Properties */
+        { GNOME_APP_UI_ITEM, N_("_Properties..."),
+          N_("Modify the file's properties"),
+          NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
+          0,  (GdkModifierType) 0, NULL },
+	/*
+	 * The Settings menu
+	 */
+	/* Settings */
+        { GNOME_APP_UI_ITEM, N_("_Preferences..."),
+          N_("Configure the application"),
+          NULL, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,
+          0,  (GdkModifierType) 0, NULL },
+	/* 20 */
+	/*
+	 * And the "Help" menu
+	 */
+	/* About */
+        { GNOME_APP_UI_ITEM, N_("_About..."),
+          N_("About this application"), NULL, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+          0,  (GdkModifierType) 0, NULL },
+	{ GNOME_APP_UI_ITEM, N_("_Select All"),
+          N_("Select everything"),
+          NULL, NULL, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_KEY_NAME_SELECT_ALL, GNOME_KEY_MOD_SELECT_ALL, NULL },
+
+	/*
+	 * Window menu
+	 */
+        { GNOME_APP_UI_ITEM, N_("_New Window..."),
+          N_("Create a new window"),
+          NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_KEY_NAME_NEW_WINDOW, GNOME_KEY_MOD_NEW_WINDOW, NULL },
+        { GNOME_APP_UI_ITEM, N_("_Close Window..."),
+          N_("Close the current window"),
+          NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_KEY_NAME_CLOSE_WINDOW, GNOME_KEY_MOD_CLOSE_WINDOW, NULL },
+
+	/*
+	 * The "Game" menu
+	 */
+        { GNOME_APP_UI_ITEM, N_("_New game"),
+          N_("Start a new game"),
+	  NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          GNOME_KEY_NAME_NEW_GAME,  GNOME_KEY_MOD_NEW_GAME, NULL },
+        { GNOME_APP_UI_ITEM, N_("_Pause game"),
+          N_("Pause the game"), 
+	  NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TIMER_STOP,
+          GNOME_KEY_NAME_PAUSE_GAME,  GNOME_KEY_MOD_PAUSE_GAME, NULL },
+        { GNOME_APP_UI_ITEM, N_("_Restart game"),
+          N_("Restart the game"),
+	  NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          0,  0, NULL },
+        { GNOME_APP_UI_ITEM, N_("_Undo move"),
+          N_("Undo the last move"),
+	  NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UNDO,
+          GNOME_KEY_NAME_UNDO_MOVE,  GNOME_KEY_MOD_UNDO_MOVE, NULL },
+        { GNOME_APP_UI_ITEM, N_("_Redo move"),
+          N_("Redo the undone move"),
+	  NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,
+          GNOME_KEY_NAME_REDO_MOVE,  GNOME_KEY_MOD_REDO_MOVE, NULL },
+        { GNOME_APP_UI_ITEM, N_("_Hint"),
+          N_("Get a hint for your next move"),
+	  NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          0,  0, NULL },
+	/* 30 */
+        { GNOME_APP_UI_ITEM, N_("_Scores..."),
+          N_("View the scores"),
+	  NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SCORES,
+          0,  (GdkModifierType) 0, NULL },
+        { GNOME_APP_UI_ITEM, N_("_End game"),
+          N_("End the current game"),
+	  NULL, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
+          0,  (GdkModifierType) 0, NULL }
+};
+
+static gchar *menu_names[] =
+{
+  /* 0 */
+  "new",
+  "open",
+  "save",
+  "save-as",
+  "revert",
+  "print",
+  "print-setup",
+  "close",
+  "exit",
+  "cut",
+  /* 10 */
+  "copy",
+  "paste",
+  "clear",
+  "undo",
+  "redo",
+  "find",
+  "find-again",
+  "replace",
+  "properties",
+  "preferences",
+  /* 20 */
+  "about",
+  "select-all"
+  "new-window",
+  "close-window",
+  "new-game",
+  "pause-game",
+  "restart-game",
+  "undo-move",
+  "redo-move",
+  "hint",
+  /* 30 */
+  "scores",
+  "end-game"
+};
+
 
 /* Creates a pixmap appropriate for items.  The window parameter is required 
  * by gnome-stock (bleah) */
@@ -327,6 +556,78 @@ install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
     }
 }
 
+static void
+gnome_app_ui_configure_configurable (GnomeUIInfo* uiinfo)
+{
+        GnomeUIInfoConfigurableTypes type = (GnomeUIInfoConfigurableTypes) uiinfo->accelerator_key;
+	
+	gboolean accelerator_key_def;
+	gchar *accelerator_key_string;
+	gint accelerator_key;
+	
+	gboolean ac_mods_def;
+	gchar *ac_mods_string;
+	gint ac_mods;
+	
+	if ( type != GNOME_APP_CONFIGURABLE_ITEM_NEW ) {
+#if 0
+	        gboolean label_def;
+		gchar *label_string;
+		gchar *label;
+	        gboolean hint_def;
+		gchar *hint_string;
+		gchar *hint;
+		
+		label_string = g_strdup_sprintf( "/Gnome/Menus/Menu-%s-label", menu_names[(int) type] );
+		label = gnome_config_get_string_with_default( label_string, &label_def);
+		if ( label_def )
+		  uiinfo->label = label;
+		else
+		  {
+#endif
+		    uiinfo->label = menu_defaults[(int) type].label;
+#if 0
+		    g_free( label );
+		  }
+		g_free( label_string );
+
+		hint_string = g_strdup_sprintf( "/Gnome/Menus/Menu-%s-hint", menu_names[(int) type] );
+		hint = gnome_config_get_string_with_default( hint_string, &hint_def);
+		if ( hint_def )
+		  uiinfo->hint = hint;
+		else
+		  {
+#endif
+		    uiinfo->hint = menu_defaults[(int) type].hint;
+#if 0
+		    g_free( hint );
+		  }
+		g_free( hint_string );
+#endif
+	}
+	uiinfo->pixmap_type = menu_defaults[(int) type].pixmap_type;
+	uiinfo->pixmap_info = menu_defaults[(int) type].pixmap_info;
+
+	accelerator_key_string = g_strdup_printf( "/Gnome/Menus/Menu-%s-accelerator-key", menu_names[(int) type] );
+	accelerator_key = gnome_config_get_int_with_default( accelerator_key_string, &accelerator_key_def);
+	if ( accelerator_key_def )
+	  uiinfo->accelerator_key = menu_defaults[(int) type].accelerator_key;
+	else
+	  uiinfo->accelerator_key = accelerator_key;
+	g_free( accelerator_key_string );
+	
+	ac_mods_string = g_strdup_printf( "/Gnome/Menus/Menu-%s-ac-mods", menu_names[(int) type] );
+	ac_mods = gnome_config_get_int_with_default( ac_mods_string, &ac_mods_def);
+	if ( ac_mods_def )
+	  uiinfo->ac_mods = menu_defaults[(int) type].ac_mods;
+	else
+	  uiinfo->ac_mods = (GdkModifierType) ac_mods;
+	g_free( ac_mods_string );
+
+	
+	uiinfo->type = GNOME_APP_UI_ITEM;
+}
+
 void
 gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
                                      GnomeUIInfo* uiinfo)
@@ -338,6 +639,12 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
   
   while (uiinfo->type != GNOME_APP_UI_ENDOFINFO)
     {
+
+      /* Translate configurable menu items to normal menu items. */
+      
+      if ( uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE ) {
+	        gnome_app_ui_configure_configurable( uiinfo );
+      }
       switch (uiinfo->type) {
       case GNOME_APP_UI_SUBTREE:
         gnome_app_install_appbar_menu_hints(appbar, uiinfo->moreinfo);
@@ -388,6 +695,12 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	GtkWidget *pixmap;
 	char *i8l_label;
 	guint keyval;
+
+	/* Translate configurable menu items to normal menu items. */
+
+	if ( uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE ) {
+	        gnome_app_ui_configure_configurable( uiinfo );
+	}
 
 	/* Create the menu item */
 
@@ -763,6 +1076,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 		case GNOME_APP_UI_SEPARATOR:
 		case GNOME_APP_UI_ITEM:
+		case GNOME_APP_UI_ITEM_CONFIGURABLE:
 		case GNOME_APP_UI_TOGGLEITEM:
 		case GNOME_APP_UI_SUBTREE:
 			create_menu_item (uiinfo, FALSE, NULL, uibdata, 
