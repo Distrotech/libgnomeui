@@ -27,6 +27,7 @@
 #define __GNOME_STOCK_IDS_H__
 
 #include <gmacros.h>
+#include <gtk/gtkiconfactory.h>
 
 G_BEGIN_DECLS
 
