@@ -1,5 +1,14 @@
 1998-08-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gtkcauldron.c: Fixup includes.
+	(user_callbacks): Made static.
+	Fixed for Gtk-1.1.  Could someone please test that it runs?  I
+	only fixed it for compilation.
+
+	* gtkcauldron.h: Fixup includes.
+
+	* libgnomeui.h: #include "gnome-number-entry.h"
+
 	* gnome-canvas.c (gnome_canvas_button): 
 	(gnome_canvas_motion): 
 	(gnome_canvas_expose): 

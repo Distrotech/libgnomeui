@@ -34,6 +34,7 @@
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-net.h"
+#include "libgnomeui/gnome-number-entry.h"
 #ifdef GTK_HAVE_FEATURES_1_1_0
 #include "libgnomeui/gnome-popupmenu.h"
 #endif

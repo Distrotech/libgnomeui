@@ -17,15 +17,18 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <gtk/gtk.h>
 #include "gtkcauldron.h"
 #define HAVE_GNOME
 #ifdef HAVE_GNOME
-#include <gnome.h>
+#include <gtk/gtk.h>
+#include "libgnomeui/gnome-file-entry.h"
+#include "libgnomeui/gnome-number-entry.h"
+#include "libgnomeui/gnome-stock.h"
 #endif
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 gchar *GTK_CAULDRON_ENTER = "GTK_CAULDRON_ENTER";
 gchar *GTK_CAULDRON_ESCAPE = "GTK_CAULDRON_ESCAPE";
@@ -357,7 +360,7 @@ static gint key_press_event (GtkWidget * window, GdkEventKey * event, struct key
 	(l)->result = (void *) (d);
 
 
-void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback next_arg, gpointer user_data, GtkAcceleratorTable * accel_table)
+static void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback next_arg, gpointer user_data, GtkAccelGroup * accel_table)
 {
     int npresent, i;
     npresent = option_is_present (p, 'a');
@@ -367,7 +370,7 @@ void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback next_a
 	next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &signal);
 	next_arg (GTK_CAULDRON_TYPE_INT, user_data, &key);
 	next_arg (GTK_CAULDRON_TYPE_INT, user_data, &mods);
-	gtk_widget_install_accelerator (GTK_WIDGET (w), accel_table, signal, key, mods);
+	gtk_widget_add_accelerator (w, signal, accel_table, key, mods, GTK_ACCEL_VISIBLE);
     }
     if (option_is_present (p, 'c')) {
 	GtkCauldronCustomCallback fud;
@@ -392,7 +395,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     gint how;
     struct cauldron_result *r = 0;
     struct key_press_event_data d;
-    GtkAcceleratorTable *accel_table;
+    GtkAccelGroup *accel_table;
 
 /* text widgets may only add text after the widget is realized,
    so we store text to be added in these, and then add it 
@@ -412,8 +415,8 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     else if (options & GTK_CAULDRON_POPUP)
 	how = GTK_WINDOW_POPUP;
     window = gtk_window_new (how);
-    accel_table = gtk_accelerator_table_new ();
-    gtk_window_add_accelerator_table (GTK_WINDOW (window), accel_table);
+    accel_table = gtk_accel_group_new ();
+    gtk_window_add_accel_group (GTK_WINDOW (window), accel_table);
 
     if (title)
 	gtk_window_set_title (GTK_WINDOW (window), title);
@@ -787,7 +790,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 
     gtk_main ();
 
-    gtk_accelerator_table_unref (accel_table);
+    gtk_window_remove_accel_group (GTK_WINDOW (window), accel_table);
 
     if (r) {
 	while (r->prev)

@@ -87,6 +87,7 @@ libgnomeui_la_SOURCES = \
 	gnome-stock-imlib.h		\
 	gnometypes.c			\
 	gtkcalendar.c			\
+	gtkcauldron.c			\
 	gtklayout.c			\
 	gtkspell.c			\
 	gtk-clock.c			\
