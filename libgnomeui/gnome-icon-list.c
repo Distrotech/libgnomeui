@@ -519,7 +519,7 @@ icon_event (Gil *gil, Icon *icon, GdkEvent *event)
 	case GDK_2BUTTON_PRESS:
 		gil->last_clicked = NULL;
 		toggle_icon (gil, icon, event);
-		return FALSE;
+		return TRUE;
 		
 	case GDK_BUTTON_RELEASE:
 		if (gil->last_clicked == NULL)
@@ -527,6 +527,7 @@ icon_event (Gil *gil, Icon *icon, GdkEvent *event)
 
 		toggle_icon (gil, gil->last_clicked, event);
 		return TRUE;
+
 	default:
 		return FALSE;
 	}

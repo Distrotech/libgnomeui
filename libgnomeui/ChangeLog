@@ -1,3 +1,12 @@
+1998-10-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (icon_event): Mark the events as processed
+	when calling toggle_icon.
+
+1998-10-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (icon_event): Fixed the handling of clicking.
+
 1998-10-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (iti_get_width): Handle the case where iti->ti
