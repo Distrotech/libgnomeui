@@ -67,7 +67,7 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
 			GladeAttribute *attr = tmp2->data;
 			if (!strcmp(attr->name, "child_name") &&
-			    !strcmp(attr->value, "Dialog:action_area")) {
+			    !strcmp(attr->value, "GnomeDialog:action_area")) {
 				is_action_area = TRUE;
 				break;
 			}
@@ -419,6 +419,102 @@ menushell_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		glade_xml_pop_uline_accel(xml);
 }
 
+static void
+entry_build_children (GladeXML *xml, GtkWidget *w,
+		      GladeWidgetInfo *info, const char *longname)
+{
+	GList *tmp;
+	GladeWidgetInfo *cinfo = NULL;
+	GtkEntry *entry;
+
+	for (tmp = info->children; tmp; tmp = tmp->next) {
+		GList *tmp2;
+		gchar *child_name = NULL;
+		cinfo = tmp->data;
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+			if (!strcmp(attr->name, "child_name")) {
+				child_name = attr->value;
+				break;
+			}
+		}
+		if (child_name && !strcmp(child_name, "GnomeEntry:entry"))
+			break;
+	}
+	if (!tmp)
+		return;
+	if (GNOME_IS_ENTRY(w))
+		entry = GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(w)));
+	else if (GNOME_IS_FILE_ENTRY(w))
+		entry = GTK_ENTRY(gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(w)));
+	else if (GNOME_IS_NUMBER_ENTRY(w))
+		entry = GTK_ENTRY(gnome_number_entry_gtk_entry(GNOME_NUMBER_ENTRY(w)));
+	else
+		return;
+
+	for (tmp = cinfo->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+		if (!strcmp(attr->name, "editable"))
+			gtk_entry_set_editable(entry, attr->value[0] == 'T');
+		else if (!strcmp(attr->name, "text_visible"))
+			gtk_entry_set_visibility(entry, attr->value[0] == 'T');
+		else if (!strcmp(attr->name, "text_max_length"))
+			gtk_entry_set_max_length(entry, strtol(attr->value,
+							       NULL, 0));
+		else if (!strcmp(attr->name, "text"))
+			gtk_entry_set_text(entry, attr->value);
+	}
+	glade_xml_set_common_params(xml, GTK_WIDGET(entry), cinfo, longname);
+}
+
+static void
+pixmap_entry_build_children (GladeXML *xml, GtkWidget *w,
+			     GladeWidgetInfo *info, const char *longname)
+{
+	GList *tmp;
+	GladeWidgetInfo *cinfo = NULL;
+	GnomeFileEntry *entry;
+	GnomeEntry *gentry;
+
+	for (tmp = info->children; tmp; tmp = tmp->next) {
+		GList *tmp2;
+		gchar *child_name = NULL;
+		cinfo = tmp->data;
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+			if (!strcmp(attr->name, "child_name")) {
+				child_name = attr->value;
+				break;
+			}
+		}
+		if (child_name && !strcmp(child_name,
+					  "GnomePixmapEntry:file-entry"))
+			break;
+	}
+	if (!tmp)
+		return;
+	entry = GNOME_FILE_ENTRY(gnome_pixmap_entry_gnome_file_entry(
+						GNOME_PIXMAP_ENTRY(w)));
+	gentry = GNOME_ENTRY(gnome_pixmap_entry_gnome_entry(
+						GNOME_PIXMAP_ENTRY(w)));
+
+	for (tmp = cinfo->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+		if (!strcmp(attr->name, "history_id"))
+			gnome_entry_set_history_id(gentry, attr->value);
+		else if (!strcmp(attr->name, "max_saved"))
+			gnome_entry_set_max_saved(gentry, strtol(attr->value,
+								 NULL, 0));
+		else if (!strcmp(attr->name, "title"))
+			gnome_file_entry_set_title(entry, attr->value);
+		else if (!strcmp(attr->name, "directory"))
+			gnome_file_entry_set_directory(entry,
+						       attr->value[0] == 'T');
+		else if (!strcmp(attr->name, "modal"))
+			gnome_file_entry_set_modal(entry, attr->value[0]=='T');
+	}
+	glade_xml_set_common_params(xml, GTK_WIDGET(entry), cinfo, longname);
+}
 /* -- routines to build widgets -- */
 
 /* this is for the GnomeStockButton widget ... */
@@ -846,14 +942,32 @@ font_picker_new(GladeXML *xml, GladeWidgetInfo *info)
 	return wid;
 }
 
-/* -- does not look like this widget is fully coded yet
 static GtkWidget *
-icon_entry_new(GladeXML *xml, GladeWidgetInfo *info)
+iconentry_new(GladeXML *xml, GladeWidgetInfo *info)
 {
-	GtkWidget *wid = gnome_color_picker_new();
+	GtkWidget *wid;
+	GList *tmp;
+	gchar *hid = NULL, *title = NULL;
+	gint saved = -1;
 
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+		if (!strcmp(attr->name, "title"))
+			title = attr->value;
+		else if (!strcmp(attr->name, "history_id"))
+			hid = attr->value;
+		else if (!strcmp(attr->name, "max_saved"))
+			saved = strtol(attr->value, NULL, 0);
+	}
+	wid = gnome_icon_entry_new(hid, title);
+	if (saved > 0)
+		gnome_entry_set_max_saved(
+			GNOME_ENTRY(gnome_icon_entry_gnome_entry(
+					 GNOME_ICON_ENTRY(wid))),
+			saved);
+	return wid;
 }
-*/
+
 
 static GtkWidget *
 href_new(GladeXML *xml, GladeWidgetInfo *info)
@@ -918,6 +1032,80 @@ file_entry_new(GladeXML *xml, GladeWidgetInfo *info)
 	wid = gnome_file_entry_new(history_id, _(title));
 	gnome_file_entry_set_directory(GNOME_FILE_ENTRY(wid), directory);
 	gnome_file_entry_set_modal(GNOME_FILE_ENTRY(wid), modal);
+	return wid;
+}
+
+static GtkWidget *
+number_entry_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid;
+	GList *tmp;
+	gchar *history_id = NULL, *title = NULL;
+	gint saved = 10;
+
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+		
+		if (!strcmp(attr->name, "history_id"))
+			history_id = attr->value;
+		else if (!strcmp(attr->name, "max_saved"))
+			saved = strtol(attr->value, NULL, 0);
+		else if (!strcmp(attr->name, "title"))
+			title = attr->value;
+	}
+	wid = gnome_number_entry_new(history_id, title);
+	if (saved > 0)
+		gnome_entry_set_max_saved(
+			GNOME_ENTRY(gnome_number_entry_gnome_entry(
+					 GNOME_NUMBER_ENTRY(wid))),
+			saved);
+	return wid;
+}
+
+static GtkWidget *
+pixmap_entry_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid;
+	GList *tmp;
+	gboolean preview = TRUE;
+
+        for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+		
+		if (!strcmp(attr->name, "history_id"))
+			preview = attr->value[0] == 'T'; 
+	}
+	wid = gnome_pixmap_entry_new(NULL, NULL, preview);
+	return wid;
+}
+
+static GtkWidget *
+date_edit_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid;
+	GList *tmp;
+	GnomeDateEditFlags flags = 0;
+	gint low = 7, high = 19;
+
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+
+		if (!strcmp(attr->name, "show_time")) {
+			if (attr->value[0] == 'T')
+				flags |= GNOME_DATE_EDIT_SHOW_TIME;
+		} else if (!strcmp(attr->name, "use_24_format")) {
+			if (attr->value[0] == 'T')
+				flags |= GNOME_DATE_EDIT_24_HR;
+		} else if (!strcmp(attr->name, "week_start_monday")) {
+			if (attr->value[0] == 'T')
+				flags |= GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY;
+		} else if (!strcmp(attr->name, "lower_hour"))
+			low = strtol(attr->value, NULL, 0);
+		else if (!strcmp(attr->name, "upper_hour"))
+			high = strtol(attr->value, NULL, 0);
+	}
+	wid = gnome_date_edit_new_flags(time(NULL), flags);
+	gnome_date_edit_set_popup_range(GNOME_DATE_EDIT(wid), low, high);
 	return wid;
 }
 
@@ -1008,6 +1196,47 @@ dial_new(GladeXML *xml, GladeWidgetInfo *info)
 }
 
 static GtkWidget *
+canvas_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid;
+	GList *tmp;
+	gboolean aa = FALSE;
+	gdouble sx1 = 0, sy1 = 0, sx2 = 100, sy2 = 100;
+	gdouble pixels_per_unit = 1;
+
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+
+		if (!strcmp(attr->name, "anti_aliased"))
+			aa = attr->value[0] == 'T';
+		else if (!strcmp(attr->name, "scroll_x1"))
+			sx1 = g_strtod(attr->value, NULL);
+		else if (!strcmp(attr->name, "scroll_y1"))
+			sy1 = g_strtod(attr->value, NULL);
+		else if (!strcmp(attr->name, "scroll_x2"))
+			sx2 = g_strtod(attr->value, NULL);
+		else if (!strcmp(attr->name, "scroll_y2"))
+			sy2 = g_strtod(attr->value, NULL);
+		else if (!strcmp(attr->name, "pixels_per_unit"))
+			pixels_per_unit = g_strtod(attr->value, NULL);
+	}
+	if (aa) {
+		gtk_widget_push_colormap(gdk_rgb_get_cmap());
+		gtk_widget_push_visual(gdk_rgb_get_visual());
+		wid = gnome_canvas_new_aa();
+	} else {
+		gtk_widget_push_colormap(gdk_imlib_get_colormap());
+		gtk_widget_push_visual(gdk_imlib_get_visual());
+		wid = gnome_canvas_new();
+	}
+	gtk_widget_pop_visual();
+	gtk_widget_pop_colormap();
+	gnome_canvas_set_scroll_region(GNOME_CANVAS(wid), sx1, sy1, sx2, sy2);
+	gnome_canvas_set_pixels_per_unit(GNOME_CANVAS(wid), pixels_per_unit);
+	return wid;
+}
+
+static GtkWidget *
 appbar_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
@@ -1070,15 +1299,16 @@ dockitem_new(GladeXML *xml, GladeWidgetInfo *info)
 		case 'n':
 			if (!strcmp(attr->name, "name"))
 				name = attr->value;
-			else if (!strcmp(attr->name, "never_floating"))
+			else if (!strcmp(attr->name, "never_floating")) {
 				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_FLOATING;
-			else if (!strcmp(attr->name, "never_vertical"))
+			} else if (!strcmp(attr->name, "never_vertical")) {
 				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL;
-			else if (!strcmp(attr->name, "never_horizontal"))
+			} else if (!strcmp(attr->name, "never_horizontal")) {
 				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL;
+			}
 			break;
 		case 's':
 			if (!strcmp(attr->name, "shadow_type"))
@@ -1411,15 +1641,20 @@ static const GladeWidgetBuildData widget_data [] = {
 
 	{ "GnomeColorPicker",   color_picker_new,   NULL },
 	{ "GnomeFontPicker",    font_picker_new,    NULL },
+	{ "GnomeIconEntry",     iconentry_new,      NULL },
 	{ "GnomeHRef",          href_new,           NULL },
-	{ "GnomeEntry",         entry_new,          NULL },
-	{ "GnomeFileEntry",     file_entry_new,     NULL },
+	{ "GnomeEntry",         entry_new,          entry_build_children },
+	{ "GnomeFileEntry",     file_entry_new,     entry_build_children },
+	{ "GnomeNumberEntry",   number_entry_new,   entry_build_children },
+	{ "GnomePixmapEntry",   pixmap_entry_new,pixmap_entry_build_children },
+	{ "GnomeDateEdit",      date_edit_new,      NULL },
 	{ "GtkClock",           clock_new,          NULL },
 	{ "GnomeLess",          less_new,           NULL },
 	{ "GnomeCalculator",    calculator_new,     NULL },
 	{ "GnomePaperSelector", paper_selector_new, NULL },
 	{ "GnomeSpell",         spell_new,          NULL },
 	{ "GtkDial",            dial_new,           NULL },
+	{ "GnomeCanvas",        canvas_new,         NULL },
 	{ "GnomeAppBar",        appbar_new,         NULL },
 
 	{ "GnomeDock",          dock_new,           dock_build_children},
