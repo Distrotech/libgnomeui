@@ -1,3 +1,7 @@
+2002-04-23  jacob berkman  <jacob@ximian.com>
+
+	* gnome_segv.c (main): set the default button to close
+
 2002-04-22  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-icon-entry.c: Use our own delete_event handler for the dialog

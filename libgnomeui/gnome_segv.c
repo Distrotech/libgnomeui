@@ -130,6 +130,8 @@ int main(int argc, char *argv[])
                                     GTK_BUTTONS_CLOSE,
                                     msg);
   g_free(msg);
+
+  gtk_dialog_set_default_response (GTK_DIALOG (mainwin), GTK_RESPONSE_CLOSE);
   
   bug_buddy_path = g_find_program_in_path ("bug-buddy");
   if (bug_buddy_path != NULL)
