@@ -1,3 +1,12 @@
+1999-08-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-pixmap-entry.c (ensure_update): New function to ensure
+	that a pixmap entry is not in the wait queue for updates.
+	(gnome_pixmap_entry_get_filename): Fixed a race condition where
+	this function would return an incorrect NULL if the client called
+	it before the pixmap entry update timer expires.  This would make
+	the panel crash.
+
 1999-08-04  Morten Welinder  <terra@diku.dk>
 
 	* gnome-stock.c (gnome_stock_destroy): Unref pixmaps.
