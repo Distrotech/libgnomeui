@@ -1,3 +1,12 @@
+1998-11-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-item.h (GnomeIconTextItemClass): Added an
+	"editing_stopped" signal.  It is emitted when the user presses
+	enter or esc and thus finishes editing the item.
+
+	* gnome-icon-item.c (iti_class_init): Create the new signal.
+	(iti_stop_editing): Emit the editing_stoppled signal.
+
 1998-11-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c: Updates to the TO-DO list.

@@ -46,9 +46,10 @@ typedef struct {
 	GnomeCanvasItemClass parent_class;
 
 	/* Signals we emit */
-	int  (*text_changed)     (GnomeIconTextItem *);
-	void (*height_changed)   (GnomeIconTextItem *);
-	void (*width_changed)    (GnomeIconTextItem *);
+	int  (* text_changed)     (GnomeIconTextItem *iti);
+	void (* height_changed)   (GnomeIconTextItem *iti);
+	void (* width_changed)    (GnomeIconTextItem *iti);
+	void (* editing_stopped)  (GnomeIconTextItem *iti);
 } GnomeIconTextItemClass;
 
 GtkType  gnome_icon_text_item_get_type  (void);

@@ -28,6 +28,7 @@ enum {
 	TEXT_CHANGED,
 	HEIGHT_CHANGED,
 	WIDTH_CHANGED,
+	EDITING_STOPPED,
 	LAST_SIGNAL
 };
 
@@ -188,6 +189,7 @@ iti_stop_editing (Iti *iti)
 	iti->entry_top = NULL;
 
 	iti_queue_redraw (iti);
+	gtk_signal_emit (GTK_OBJECT (iti), iti_signals[EDITING_STOPPED]);
 }
 
 /*
@@ -763,7 +765,16 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_SIGNAL_OFFSET(GnomeIconTextItemClass,width_changed),
 			gtk_marshal_NONE__NONE,
 			GTK_TYPE_NONE, 0);
-	
+
+	iti_signals[EDITING_STOPPED] =
+		gtk_signal_new (
+			"editing_stopped",
+			GTK_RUN_LAST,
+			object_class->type,
+			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, editing_stopped),
+			gtk_marshal_NONE__NONE,
+			GTK_TYPE_NONE, 0);
+
 	gtk_object_class_add_signals (object_class, iti_signals, LAST_SIGNAL);
 }
 
