@@ -103,6 +103,9 @@ void        gnome_dentry_edit_set_dentry (GnomeDEntryEdit * dee,
 					  GnomeDesktopEntry * dentry);
 
 /* Generate a dentry based on the contents of the display */
+GnomeDesktopEntry * gnome_dentry_edit_get_dentry(GnomeDEntryEdit * dee);
+/*XXX: whoops!!!!, this call is left here just for binary
+  compatibility, it should be gnome_dentry_edit_get_dentry*/
 GnomeDesktopEntry * gnome_dentry_get_dentry(GnomeDEntryEdit * dee);
 
 /* Return an allocated string, you need to g_free it. */

@@ -1,3 +1,12 @@
+Sat Aug 21 11:31:07 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.[ch]: there was a typo in the object, and
+	  there was a call named gnome_dentry_get_dentry, which is the
+	  wrong naming, it should be gnome_dentry_edit_get_dentry, so
+	  I added the latter one and left in the first one for compatibility
+	  but marked it as "not to be used". Also updated other parts of
+	  the documentation
+
 Sat Aug 21 11:18:47 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-dialog.c: the # is used to crosslink not the &, and
