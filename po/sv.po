@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-08-03 03:53+0200\n"
-"PO-Revision-Date: 2002-08-03 03:54+0200\n"
+"POT-Creation-Date: 2002-08-03 15:36+0200\n"
+"PO-Revision-Date: 2002-08-03 15:36+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -75,9 +75,10 @@ msgstr "Kommentarer om programmet"
 msgid "Authors"
 msgstr "Författare"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
-msgstr "Lista med författare av programmen"
+msgstr "Lista med programmens författare"
 
 #: libgnomeui/gnome-about.c:385
 msgid "Author entry"
@@ -182,7 +183,7 @@ msgstr "Avbryt utloggning"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr "Mottog ogiltig färgdata\n"
+msgstr "Mottog ogiltiga färgdata\n"
 
 #: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
@@ -1106,7 +1107,7 @@ msgstr "Typsnitt"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "Valt GtkFont"
+msgstr "Valt GtkFont-typsnitt"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
