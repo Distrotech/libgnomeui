@@ -1,3 +1,7 @@
+2004-03-15  Anders Carlsson  <andersca@gnome.org>
+
+	* configure.in: Release 2.5.92
+
 2004-03-14  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c

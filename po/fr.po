@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-09 20:31+0100\n"
+"POT-Creation-Date: 2004-03-15 23:38+0100\n"
 "PO-Revision-Date: 2004-03-07 15:08+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -856,11 +856,11 @@ msgstr "Entrée GTK"
 msgid "The GTK entry"
 msgstr "L'entrée GTK"
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "ID d'historique"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -868,19 +868,19 @@ msgstr ""
 "Identificateur unique pour l'entrée de fichier. Il sera utilisé pour "
 "enregistrer la liste d'historique."
 
-#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Titre de la boîte de dialogue de sélection de fichiers"
 
-#: libgnomeui/gnome-file-entry.c:236
+#: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
 msgstr "Titre pour la boîte de dialogue de sélection de fichiers."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr "Entrée de répertoire"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -888,35 +888,35 @@ msgstr ""
 "Définit si l'entrée du fichier est utilisée pour saisir des noms de "
 "répertoires ou des noms de fichiers complets."
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
 msgstr "Modal"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
 msgstr "Définit si la fenêtre de sélection de fichiers doit être modale."
 
-#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Nom du fichier"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
 msgstr "Nom du fichier qui doit être affiché dans l'entrée de fichier."
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr "Chemin par défaut"
 
-#: libgnomeui/gnome-file-entry.c:270
+#: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
 msgstr "Chemin par défaut pour la fenêtre de sélection de fichiers."
 
-#: libgnomeui/gnome-file-entry.c:277
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:278
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -926,11 +926,11 @@ msgstr ""
 "Vous pouvez utiliser cette propriété pour obtenir le GnomeEntry si vous "
 "devez modifier ou interroger un de ses paramètres."
 
-#: libgnomeui/gnome-file-entry.c:288
+#: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:289
+#: libgnomeui/gnome-file-entry.c:292
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -940,11 +940,11 @@ msgstr ""
 "Vous pouvez utiliser cette propriété pour obtenir le GtkEntry si vous devez "
 "modifier ou interroger un de ses paramètres."
 
-#: libgnomeui/gnome-file-entry.c:299
+#: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr "Utiliser GtkFileChooser"
 
-#: libgnomeui/gnome-file-entry.c:300
+#: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -952,23 +952,23 @@ msgstr ""
 "Indique si il faut utiliser le nouveau composant graphique GtkFileChooser ou "
 "le composant graphique GtkFileSelection pour sélectionner des fichiers."
 
-#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
+#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Sélectionnez un fichier"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
 msgstr "Chemin"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
 msgstr "Chemin du fichier"
 
-#: libgnomeui/gnome-file-entry.c:781
+#: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
 msgstr "_Parcourir..."
 
-#: libgnomeui/gnome-file-entry.c:782
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
 msgstr "Affiche un sélecteur de fichiers pour choisir un fichier"
 

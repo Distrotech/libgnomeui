@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-09 20:31+0100\n"
+"POT-Creation-Date: 2004-03-15 23:38+0100\n"
 "PO-Revision-Date: 2003-09-04 15:42+0200\n"
 "Last-Translator: Ivan Stojmirov <stojmir@linux.net.mk>\n"
 "Language-Team: Macedonian <gnomk-main@lists.sourceforge.net>\n"
@@ -864,11 +864,11 @@ msgstr "GTK влез"
 msgid "The GTK entry"
 msgstr "GTK влезот"
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "Историски ID"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -876,19 +876,19 @@ msgstr ""
 "Посбен идентификатор за датотечниот влез.  Ова ќе биде употребено за да се "
 "зачува историскиот лист."
 
-#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Разгледај Диалог Наслов"
 
-#: libgnomeui/gnome-file-entry.c:236
+#: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
 msgstr "Насловот за Разгледувај датотечниот дијалог."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr "Директориумски Влез"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -896,36 +896,36 @@ msgstr ""
 "Без оглед на датотечниот влез што е употребен за да се внесат иминњата на "
 "директориумите или имињата на датотеките."
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
 msgstr "Модално"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
 msgstr ""
 "Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
 
-#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Име на датотека"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
 msgstr "Името на датотеката што треба да биде прикажано во датотечниот влез."
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr "Преддфинирана Патека"
 
-#: libgnomeui/gnome-file-entry.c:270
+#: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
 msgstr "Преддефинираната патека за Разгледувај датотечниот прозор."
 
-#: libgnomeui/gnome-file-entry.c:277
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:278
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -935,11 +935,11 @@ msgstr ""
 "датотеки.  Можеш да го употребиш ова својство за да го добиеш GnomeEntry ако "
 "ти треба да ги модифицираш некои од овие параметри.."
 
-#: libgnomeui/gnome-file-entry.c:288
+#: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:289
+#: libgnomeui/gnome-file-entry.c:292
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -949,33 +949,33 @@ msgstr ""
 "датотеки.  Можеш да го употребиш ова својство за да го добиеш GtkEntry ако "
 "ти треба да ги модифицираш некои од овие параметри."
 
-#: libgnomeui/gnome-file-entry.c:299
+#: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:300
+#: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
+#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Слектирај датотека"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
 msgstr "Патека"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
 msgstr "Патека до датотека"
 
-#: libgnomeui/gnome-file-entry.c:781
+#: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
 msgstr "_Разгледувај..."
 
-#: libgnomeui/gnome-file-entry.c:782
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
 msgstr "Стисни на датотечниот селектор за да избереш датотека"
 

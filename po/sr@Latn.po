@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-09 20:31+0100\n"
+"POT-Creation-Date: 2004-03-15 23:38+0100\n"
 "PO-Revision-Date: 2004-02-20 02:33+0100\n"
 "Last-Translator: Bojan Suzic <bojans@teol.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
@@ -857,11 +857,11 @@ msgstr "GTK unos"
 msgid "The GTK entry"
 msgstr "GTK unos"
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "IB za istorijat"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -869,19 +869,19 @@ msgstr ""
 "Jedinstvena oznaka za datoteku. Ovo će se koristiti za snimanje spiska "
 "otvaranih datoteka (istorijat)."
 
-#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Naslov prozorčeta za pregled diska"
 
-#: libgnomeui/gnome-file-entry.c:236
+#: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
 msgstr "Naslov prozorčeta za pregled diska."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr "Unos direktorijuma"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -889,37 +889,37 @@ msgstr ""
 "Da li se polje za unos datoteke koristi za ime direktorijuma ili potpuna "
 "imena datoteka."
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
 msgstr "Modalni"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
 msgstr ""
 "Da li prozorče za pregled diska treba da bude modalni (blokira program dok "
 "se ne zatvori)."
 
-#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Ime datoteke"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
 msgstr "Ime datoteke koje se prikazuje u polju za datoteku."
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr "Podr_azumevana putanja"
 
-#: libgnomeui/gnome-file-entry.c:270
+#: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
 msgstr "Podrazumevana putanja za prozorče za pregled diska."
 
-#: libgnomeui/gnome-file-entry.c:277
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:278
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -929,11 +929,11 @@ msgstr ""
 "koristiti ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate "
 "ili izmenite neke njegove parametre."
 
-#: libgnomeui/gnome-file-entry.c:288
+#: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:289
+#: libgnomeui/gnome-file-entry.c:292
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -943,11 +943,11 @@ msgstr ""
 "ovu osobinu za dobijanje GtkEntry-a ukoliko želite da saznate ili izmenite "
 "neke njegove parametre."
 
-#: libgnomeui/gnome-file-entry.c:299
+#: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr "Koristi GtkFileChooser"
 
-#: libgnomeui/gnome-file-entry.c:300
+#: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -955,23 +955,23 @@ msgstr ""
 "Da li da koristim novi GtkFileChooser element ili GtkFileSelection element "
 "za izbor datoteka."
 
-#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
+#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Izaberite datoteku"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
 msgstr "Putanja"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
 msgstr "Putanja do datoteke"
 
-#: libgnomeui/gnome-file-entry.c:781
+#: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
 msgstr "_Pregledaj..."
 
-#: libgnomeui/gnome-file-entry.c:782
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
 msgstr "Izbaci izbirač datoteke za biranje datoteke"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-09 20:31+0100\n"
+"POT-Creation-Date: 2004-03-15 23:38+0100\n"
 "PO-Revision-Date: 2004-02-20 12:33+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -853,11 +853,11 @@ msgstr "Fusha GTK"
 msgid "The GTK entry"
 msgstr "Fusha GTK"
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "ID e kronollogjisë"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -865,19 +865,19 @@ msgstr ""
 "Identifikues i vetëm për fushën file. Do të përdoret për të ruajtur listën e "
 "historikut."
 
-#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Titulli i dritares së dialogut 'Shfleto'"
 
-#: libgnomeui/gnome-file-entry.c:236
+#: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
 msgstr "Titulli për dritaren e dialogut 'Shfleto file'."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr "Fusha directory"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -885,35 +885,35 @@ msgstr ""
 "Tregon nëse fusha file duhet të përdoret për të dhënë emrat e directory apo "
 "emrat e file kompletë."
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
 msgstr "Modale"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
 msgstr "Tregon nëse dritarja 'Shfleto file' duhet të jetë modale."
 
-#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Emri i file"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
 msgstr "Emri i file që duhet të shfaqet në fushën file."
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr "Pozicioni i prezgjedhur"
 
-#: libgnomeui/gnome-file-entry.c:270
+#: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
 msgstr "Pozicioni i prezgjedhur për dritaren 'Shfleto file'."
 
-#: libgnomeui/gnome-file-entry.c:277
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:278
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -923,11 +923,11 @@ msgstr ""
 "shfrytëzoni këtë veçori për të marrë GtkEntry nëse ju duhet të ndryshoni apo "
 "të kërkoni njërin nga parametrat e tij."
 
-#: libgnomeui/gnome-file-entry.c:288
+#: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:289
+#: libgnomeui/gnome-file-entry.c:292
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -937,11 +937,11 @@ msgstr ""
 "shfrytëzoni këtë veçori për të marrë GtkEntry nëse ju duhet të ndryshoni apo "
 "të kërkoni njërin nga parametrat e tij."
 
-#: libgnomeui/gnome-file-entry.c:299
+#: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr "Përdor GtkFileChooser"
 
-#: libgnomeui/gnome-file-entry.c:300
+#: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -949,23 +949,23 @@ msgstr ""
 "Nëse duhet përdorur instrumenti i ri GtkFileChooser apo instrumenti "
 "GtkFileSelection për të zgjedhur files."
 
-#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
+#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Zgjidh file"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
 msgstr "Pozicioni"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
 msgstr "Pozicioni për tek file"
 
-#: libgnomeui/gnome-file-entry.c:781
+#: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
 msgstr "_Shfleto..."
 
-#: libgnomeui/gnome-file-entry.c:782
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
 msgstr "Hap një zgjedhës files nga i cili mund të zgjidhet një file"
 

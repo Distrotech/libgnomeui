@@ -4,7 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 0\n"
-"POT-Creation-Date: 2004-03-13 13:11+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-03-15 23:38+0100\n"
 "PO-Revision-Date: 2004-03-13 13:11+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -118,7 +119,8 @@ msgid "Translator credits"
 msgstr "lokalizacija@linux.hr"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Prevoditelji"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -136,7 +138,6 @@ msgstr "Otprilike %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -194,7 +195,6 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -274,9 +274,10 @@ msgstr "_Završi"
 msgid "Quit the application"
 msgstr "Lijevo poravnano"
 
+#.
 #. * The "Edit" menu
-#. 
-#.  Cut
+#.
+#. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
 msgstr "Iz_reži"
@@ -286,7 +287,7 @@ msgid "Cut the selection"
 msgstr "Izreži označeno"
 
 #. 10
-#.  Copy
+#. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "_Kopiraj"
@@ -367,9 +368,10 @@ msgstr "_Svojstva"
 msgid "Modify the file's properties"
 msgstr "Promijeni svojstva datoteke"
 
+#.
 #. * The Settings menu
-#. 
-#.  Settings
+#.
+#. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
 msgstr "_Postavke"
@@ -379,15 +381,15 @@ msgid "Configure the application"
 msgstr "Podesite program"
 
 #. 20
-#. 
-#.  * And the "Help" menu
-#. 
-#.  About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_O"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "O ovoj aplikaciji"
 
@@ -399,7 +401,9 @@ msgstr "Označi _sve"
 msgid "Select everything"
 msgstr "Odaberite sve"
 
+#.
 #. * Window menu
+#.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "Stvori novi  _prozor"
@@ -412,11 +416,13 @@ msgstr "Stvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zatvori trenutni prozor"
 
+#.
 #. * The "Game" menu
+#.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
 msgstr "_Nova igra"
@@ -726,7 +732,8 @@ msgstr "Odaberite vrijeme sa popisa"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date je zastarjelo, koristite gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date je zastarjelo, koristite gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -843,11 +850,11 @@ msgstr "GTK zapis"
 msgid "The GTK entry"
 msgstr "GTK zapis"
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "ID povijesti"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -855,55 +862,54 @@ msgstr ""
 "Jedinstvena oznaka za stavku datoteke. Ovo će se koristiti za spremanje "
 "popisa povijesti."
 
-#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Ime dijaloga pregleda"
 
-#: libgnomeui/gnome-file-entry.c:236
+#: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
 msgstr "Naslov za dijalog pregledavanja datoteka."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr "Stavka mape"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Da se stavka datoteke koristi za upis imena mapa ili čitavog imena "
-"datoteka?"
+"Da se stavka datoteke koristi za upis imena mapa ili čitavog imena datoteka?"
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
 msgstr "Modalni"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
 msgstr "Da prozor pregledavanja datoteka bude obvezan?"
 
-#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Ime datoteke"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
 msgstr "Ime datoteke koje treba biti prikazano i stavku datoteke."
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr "Uobičajena putanja"
 
-#: libgnomeui/gnome-file-entry.c:270
+#: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
 msgstr "Uobičajena putanja za prozor pregledavanja datoteka."
 
-#: libgnomeui/gnome-file-entry.c:277
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:278
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -913,11 +919,11 @@ msgstr ""
 "ovo svojstvo za dohvaćanje GnomeEntry ako trebate mijenjati ili tražiti bilo "
 "koji parametar."
 
-#: libgnomeui/gnome-file-entry.c:288
+#: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:289
+#: libgnomeui/gnome-file-entry.c:292
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -927,33 +933,35 @@ msgstr ""
 "ovo svojstvo za dohvaćanje GtkEntry ako trebate mijenjati ili tražiti bilo "
 "koji parametar."
 
-#: libgnomeui/gnome-file-entry.c:299
+#: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr "Koristite GtkFileChooser"
 
-#: libgnomeui/gnome-file-entry.c:300
+#: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Da se za odabir datoteka koristi nova komponenta GtkFileChooser ili komponenta GtkFileSelection?"
+msgstr ""
+"Da se za odabir datoteka koristi nova komponenta GtkFileChooser ili "
+"komponenta GtkFileSelection?"
 
-#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
+#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Odaberite datoteku"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
 msgstr "Putanja"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
 msgstr "Putanja do datoteke"
 
-#: libgnomeui/gnome-file-entry.c:781
+#: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
 msgstr "_Pretraži..."
 
-#: libgnomeui/gnome-file-entry.c:782
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
 msgstr "Prikaži popis datoteka za odabir datoteke"
 
@@ -1096,7 +1104,8 @@ msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Dogodila se greška prilikom pokušaja pokretanja uobičajenog preglednika web-a.\n"
+"Dogodila se greška prilikom pokušaja pokretanja uobičajenog preglednika web-"
+"a.\n"
 "Molim, provjerite vaše postavke u 'Željeni programi' alatu postavki."
 
 #: libgnomeui/gnome-icon-entry.c:178
@@ -1272,7 +1281,8 @@ msgid "Score"
 msgstr "Rezultat"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
-#.  * Please refer to manpage of strftime(3) for complete reference.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
@@ -1327,10 +1337,15 @@ msgstr "Biblioteka GNOME GUI"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Dogodile su se višestruke segmentacijske greške; ne mogu prikazati dijalog s greškama\n"
+msgstr ""
+"Dogodile su se višestruke segmentacijske greške; ne mogu prikazati dijalog s "
+"greškama\n"
 
+#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1367,7 +1382,9 @@ msgstr "proces %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "Možete obavjestiti razvijatelje o tome što se dogodilo kako biste im pomogli popraviti taj problem ili možete ponovno pokrenuti program."
+msgstr ""
+"Možete obavjestiti razvijatelje o tome što se dogodilo kako biste im pomogli "
+"popraviti taj problem ili možete ponovno pokrenuti program."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1385,7 +1402,5 @@ msgstr "_Obavjesti razvijatelje"
 msgid "_Debug"
 msgstr "_Ispravljanje grešaka"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Isključi ispit"
-
+#~ msgid "Exit the test"
+#~ msgstr "Isključi ispit"

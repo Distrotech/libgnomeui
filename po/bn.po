@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libGNOMEui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-14 04:16+0100\n"
+"POT-Creation-Date: 2004-03-15 23:38+0100\n"
 "PO-Revision-Date: 2004-03-14 09:33+0530\n"
 "Last-Translator: Sayamindu Dasgupta <unmadindu@bengalinux.org> \n"
 "Language-Team: Bangla <gnome-translation@bengalinux.org>\n"
@@ -139,7 +139,6 @@ msgstr "%s পরিচিতি"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_ফাইল"
 
@@ -197,7 +196,6 @@ msgid "_Game"
 msgstr "_খেলা"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_সাহায্য"
 
@@ -388,11 +386,11 @@ msgstr "অ্যাপ্লিকেশনটিকে কনফিগার �
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_সফটওয়ার পরিচিতি"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "অ্যাপ্লিকেশন পরিচিতি"
 
@@ -419,7 +417,7 @@ msgstr "একটি নতুন উইন্ডো তৈরি করো"
 msgid "_Close This Window"
 msgstr "এই উইন্ডোটি _বন্ধ করো"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "বর্তমান উইন্ডোটিকে বন্ধ করো"
 
@@ -626,8 +624,7 @@ msgstr "ডোমেন %s"
 #: libgnomeui/gnome-authentication-manager.c:268
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"%s - কে পড়তে চাইলে আপনাকে লগ-ইন করতে হবে।\n"
+msgstr "%s - কে পড়তে চাইলে আপনাকে লগ-ইন করতে হবে।\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -945,8 +942,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"ফাইল নির্বাচন করার জন্য নতুন GtkFileChooser উইজেট ব্যবহৃত হবে, না কি, GtkFileSelection "
-"উইজেট"
+"ফাইল নির্বাচন করার জন্য নতুন GtkFileChooser উইজেট ব্যবহৃত হবে, না কি, "
+"GtkFileSelection উইজেট"
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1381,10 +1378,11 @@ msgstr "প্রসেস %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "এই ঘটনাটির কথা আপনি ডেভেলপারদের জানাতে পারেন,  "
-"অথবা আপনি এখনি অ্যাপ্লিকেশনটিকে পুনরায় চালু করতে পারেন"
-#FIXME 
+msgstr ""
+"এই ঘটনাটির কথা আপনি ডেভেলপারদের জানাতে পারেন,  অথবা আপনি এখনি অ্যাপ্লিকেশনটিকে "
+"পুনরায় চালু করতে পারেন"
 
+# FIXME 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "ব্যবহারের নিয়ম: gnome_segv2 appname signum\n"
@@ -1401,9 +1399,8 @@ msgstr "ডেভেলপারদের _জানান"
 msgid "_Debug"
 msgstr "ডিবাগ (_ড)"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "পরীক্ষা থেকে প্রস্থান করো"
+#~ msgid "Exit the test"
+#~ msgstr "পরীক্ষা থেকে প্রস্থান করো"
 
 #~ msgid "Color Selector"
 #~ msgstr "রং নির্বাচক"
