@@ -1,4 +1,9 @@
-2003-05-24  Kjartan Maraas  <set EMAIL_ADDRESS environment variable>
+2003-05-21  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_segv_handle): Try to
+	fix bug #84778 in a more portable fashion.
+
+2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-list.c: Fix bug #83748. The fonts in 
 	the icon label do not seem to be listening for font size 
