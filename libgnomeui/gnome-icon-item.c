@@ -457,7 +457,7 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y, GtkJustification 
 			gdk_draw_rectangle (drawable, bg_gc, TRUE,
 					    dx + x + xpos - xtra - 2,
 					    dy + y - ti->font->ascent - xtra,
-					    gdk_string_width (ti->font, text) + xtra * 2 + 3,
+					    gdk_string_width (ti->font, text) + xtra * 2 + 4,
 					    ti->baseline_skip + xtra*2 + 1);
 			gdk_draw_string (drawable, ti->font, fg_gc, dx + x + xpos, dy + y, text);
 		}
