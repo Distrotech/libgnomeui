@@ -223,7 +223,7 @@ gnome_druid_destroy (GtkObject *object)
 	druid->_priv->current = NULL;
 	while (druid->_priv->children != NULL) {
 		GnomeDruidPage *child = druid->_priv->children->data;
-		gnome_druid_remove (druid, child);
+		gtk_container_remove (GTK_CONTAINER (druid), GTK_WIDGET(child));
 	}
 
         if(GTK_OBJECT_CLASS(parent_class)->destroy)

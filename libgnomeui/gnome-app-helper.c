@@ -45,7 +45,6 @@
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
-#include "libgnome/gnome-help.h"
 #include "gnome-helpsys.h"
 #include "gnome-gconf.h"
 
@@ -1148,7 +1147,9 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 		return pos;
 	}
 
-	topics = gnome_help_app_topics ((const char *)uiinfo->moreinfo);
+#warning FIXME: this needs to use helpsys!!!!
+	topics = NULL;
+	/* topics = gnome_help_app_topics ((const char *)uiinfo->moreinfo);*/
 
 	for (cur = topics; cur && cur->next; cur = cur->next->next)
 	  {
@@ -1164,10 +1165,13 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 	    setup_uline_accel (menu_shell, NULL, item, keyval);
 	    gtk_widget_lock_accelerators (item);
 
+#warning FIXME: this needs to use helpsys!!!!
+	    /*
 	    gtk_signal_connect_full (GTK_OBJECT (item), "activate",
 				     (GtkSignalFunc) gnome_help_view_display_callback, NULL,
 				     cur->next->data, g_free,
 				     FALSE, FALSE);
+				     */
 
 	    gtk_menu_shell_insert (menu_shell, item, pos);
 	    pos++;

@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
   args = poptGetArgs(ctx);
   if (args && args[0] && args[1])
     {
-      char *base = g_path_basename (args[0]);
+      char *base = g_path_get_basename (args[0]);
       if (strcmp(base, "gnome-session") == 0)
         {
           msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\n"

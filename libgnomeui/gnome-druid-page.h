@@ -25,6 +25,7 @@
 
 #include <gtk/gtk.h>
 #include "libgnome/gnome-defs.h"
+#include "libgnomeui/gnome-canvas.h"
 
 BEGIN_GNOME_DECLS
 
@@ -33,7 +34,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_DRUID_PAGE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DRUID_PAGE, GnomeDruidPageClass))
 #define GNOME_IS_DRUID_PAGE(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID_PAGE))
 #define GNOME_IS_DRUID_PAGE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE))
-#define GNOME_DRUID_PAGE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DRUID_PAGE, GnomePageClass))
+#define GNOME_DRUID_PAGE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DRUID_PAGE, GnomeDruidPageClass))
 
 
 typedef struct _GnomeDruidPage        GnomeDruidPage;
@@ -56,15 +57,35 @@ struct _GnomeDruidPageClass
 	gboolean (*back)	(GnomeDruidPage *druid_page, GtkWidget *druid);
 	void     (*finish)	(GnomeDruidPage *druid_page, GtkWidget *druid);
 	gboolean (*cancel)	(GnomeDruidPage *druid_page, GtkWidget *druid);
+
+	/* Signal used for relaying out the canvas */
+	void     (*configure_canvas) (GnomeDruidPage *druid_page);
+
+	/* virtual */
+	void	 (*set_sidebar_shown) (GnomeDruidPage *druid_page,
+				       gboolean sidebar_shown);
 };
 
 
 GtkType  gnome_druid_page_get_type (void);
-gboolean gnome_druid_page_next     (GnomeDruidPage *druid_page);
-void     gnome_druid_page_prepare  (GnomeDruidPage *druid_page);
-gboolean gnome_druid_page_back     (GnomeDruidPage *druid_page);
-gboolean gnome_druid_page_cancel   (GnomeDruidPage *druid_page);
-void     gnome_druid_page_finish   (GnomeDruidPage *druid_page);
+
+void     gnome_druid_page_construct		(GnomeDruidPage *druid_page,
+						 gboolean antialiased);
+
+/* These are really to be only called from GnomeDruid */
+gboolean gnome_druid_page_next			(GnomeDruidPage *druid_page);
+void     gnome_druid_page_prepare		(GnomeDruidPage *druid_page);
+gboolean gnome_druid_page_back			(GnomeDruidPage *druid_page);
+gboolean gnome_druid_page_cancel		(GnomeDruidPage *druid_page);
+void     gnome_druid_page_finish		(GnomeDruidPage *druid_page);
+
+void     gnome_druid_page_configure_canvas	(GnomeDruidPage *druid_page);
+
+GnomeCanvas * gnome_druid_page_get_canvas	(GnomeDruidPage *druid_page);
+gboolean gnome_druid_page_get_sidebar_shown	(GnomeDruidPage *druid_page);
+void     gnome_druid_page_set_sidebar_shown	(GnomeDruidPage *druid_page,
+						 gboolean sidebar_shown);
+
 
 END_GNOME_DECLS
 

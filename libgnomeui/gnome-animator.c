@@ -327,14 +327,14 @@ get_current_frame (GnomeAnimator *animator, int *x_offset, int *y_offset)
 	 * I guess but I doubt it will ever be a problem */
 
 	pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8,
-				 animation->_priv->area.width,
-				 animation->_priv->area.height);
+				 animator->_priv->area.width,
+				 animator->_priv->area.height);
 
 	pixels = gdk_pixbuf_get_pixels (pixbuf);
 	rowstride = gdk_pixbuf_get_rowstride (pixbuf);
 
 	/* FIXME: is 0 full transparency or opaqueness? I always get confused */
-	memset(pixels, 0, rowstride * animation->_priv->area.height);
+	memset(pixels, 0, rowstride * animator->_priv->area.height);
 
 	framei = frame->prev;
 	while (framei->prev != NULL) {

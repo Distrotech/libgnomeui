@@ -75,7 +75,7 @@ increase_cb(GtkWidget *w, gpointer user_data)
 {
 	GtkWidget *view;
 	GnomeMDIChild *child;
-	GList *view_node;
+	const GList *view_node;
 	gint *counter;
 	gchar *name;
 

@@ -26,17 +26,25 @@
 #include <gnome.h>
 #include "gnome-druid-page.h"
 
+struct _GnomeDruidPagePrivate {
+	GnomeCanvas *canvas;
+	gboolean sidebar_shown;
+};
+
 enum {
 	NEXT,
 	PREPARE,
 	BACK,
 	FINISH,
 	CANCEL,
+	CONFIGURE_CANVAS,
 	LAST_SIGNAL
 };
 
 static void gnome_druid_page_init		(GnomeDruidPage		 *druid_page);
 static void gnome_druid_page_class_init  	(GnomeDruidPageClass	 *klass);
+static void gnome_druid_page_destroy  		(GtkObject		 *object);
+static void gnome_druid_page_finalize  		(GObject		 *object);
 static void gnome_druid_page_size_request       (GtkWidget               *widget, 
 						 GtkRequisition          *requisition);
 static void gnome_druid_page_size_allocate      (GtkWidget		 *widget,
@@ -46,6 +54,9 @@ static void gnome_druid_page_draw               (GtkWidget               *widget
 static gint gnome_druid_page_expose             (GtkWidget               *widget,
 						 GdkEventExpose          *event);
 static void gnome_druid_page_realize            (GtkWidget		 *widget);
+
+static void set_sidebar_shown			(GnomeDruidPage *druid_page,
+						 gboolean sidebar_shown);
 
 static GtkBinClass *parent_class = NULL;
 static guint druid_page_signals[LAST_SIGNAL] = { 0 };
@@ -78,9 +89,11 @@ static void
 gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
 
 	object_class = (GtkObjectClass*) klass;
+	gobject_class = (GObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
 	parent_class = gtk_type_class (gtk_bin_get_type ());
 
@@ -124,9 +137,24 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 				gtk_marshal_BOOL__POINTER,
 				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_POINTER);
-
+	druid_page_signals[CONFIGURE_CANVAS] = 
+		gtk_signal_new ("configure_canvas",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, configure_canvas),
+				gtk_signal_default_marshaller,
+				GTK_TYPE_NONE, 0);
 
 	gtk_object_class_add_signals (object_class, druid_page_signals, LAST_SIGNAL);
+	object_class->destroy = gnome_druid_page_destroy;
+	gobject_class->finalize = gnome_druid_page_finalize;
+
+	klass->next = NULL;
+	klass->prepare = NULL;
+	klass->back = NULL;
+	klass->finish = NULL;
+	klass->configure_canvas = NULL;
+	klass->set_sidebar_shown = set_sidebar_shown;
 
 	widget_class->size_request = gnome_druid_page_size_request;
 	widget_class->size_allocate = gnome_druid_page_size_allocate;
@@ -139,11 +167,61 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 static void
 gnome_druid_page_init (GnomeDruidPage *druid_page)
 {
-	druid_page->_priv = NULL;
-	/* Note: If you add any privates make sure to add a destroy/finalize method and
-	 * free the private struct */
+	druid_page->_priv = g_new0 (GnomeDruidPagePrivate, 1);
+
 	GTK_WIDGET_UNSET_FLAGS (druid_page, GTK_NO_WINDOW);
+
+	druid_page->_priv->canvas = NULL;
+	druid_page->_priv->sidebar_shown = TRUE;
 }
+
+void
+gnome_druid_page_construct (GnomeDruidPage *druid_page, gboolean antialiased)
+{
+	GtkWidget *widget;
+
+	g_return_if_fail (druid_page != NULL);
+	g_return_if_fail (GNOME_IS_DRUID_PAGE(druid_page));
+
+	if (antialiased) {
+		gtk_widget_push_colormap (gdk_rgb_get_cmap ());
+		widget = gnome_canvas_new_aa();
+		gtk_widget_pop_colormap ();
+	} else {
+		widget = gnome_canvas_new();
+	}
+
+	druid_page->_priv->canvas = GNOME_CANVAS (widget);
+	gtk_widget_ref (widget);
+}
+
+static void
+gnome_druid_page_destroy (GtkObject *object)
+{
+	GnomeDruidPage *druid_page = GNOME_DRUID_PAGE(object);
+
+	/* remember, destroy can be run multiple times! */
+
+	if (druid_page->_priv->canvas != NULL)
+		gtk_widget_unref(GTK_WIDGET(druid_page->_priv->canvas));
+	druid_page->_priv->canvas = NULL;
+
+	if (GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+}
+
+static void
+gnome_druid_page_finalize (GObject *object)
+{
+	GnomeDruidPage *druid_page = GNOME_DRUID_PAGE(object);
+
+	g_free(druid_page->_priv);
+	druid_page->_priv = NULL;
+
+	if (G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
+}
+
 static void
 gnome_druid_page_size_request (GtkWidget *widget, 
 			       GtkRequisition *requisition)
@@ -301,9 +379,15 @@ gboolean
 gnome_druid_page_next     (GnomeDruidPage *druid_page)
 {
 	gboolean retval = FALSE;
+
 	g_return_val_if_fail (druid_page != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (druid_page), FALSE);
-	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [NEXT], GTK_WIDGET (druid_page)->parent, &retval);
+
+	gtk_signal_emit (GTK_OBJECT (druid_page),
+			 druid_page_signals [NEXT],
+			 GTK_WIDGET (druid_page)->parent,
+			 &retval);
+
 	return retval;
 }
 /**
@@ -319,7 +403,9 @@ gnome_druid_page_prepare  (GnomeDruidPage *druid_page)
 	g_return_if_fail (druid_page != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (druid_page));
 
-	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [PREPARE], GTK_WIDGET (druid_page)->parent);
+	gtk_signal_emit (GTK_OBJECT (druid_page),
+			 druid_page_signals [PREPARE],
+			 GTK_WIDGET (druid_page)->parent);
 }
 /**
  * gnome_druid_page_back:
@@ -335,10 +421,15 @@ gboolean
 gnome_druid_page_back     (GnomeDruidPage *druid_page)
 {
 	gboolean retval = FALSE;
+
 	g_return_val_if_fail (druid_page != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (druid_page), FALSE);
   
-	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [BACK], GTK_WIDGET (druid_page)->parent, &retval);
+	gtk_signal_emit (GTK_OBJECT (druid_page),
+			 druid_page_signals [BACK],
+			 GTK_WIDGET (druid_page)->parent,
+			 &retval);
+
 	return retval;
 }
 /**
@@ -354,7 +445,9 @@ gnome_druid_page_finish   (GnomeDruidPage *druid_page)
 	g_return_if_fail (druid_page != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (druid_page));
   
-	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [FINISH], GTK_WIDGET (druid_page)->parent);
+	gtk_signal_emit (GTK_OBJECT (druid_page),
+			 druid_page_signals [FINISH],
+			 GTK_WIDGET (druid_page)->parent);
 }
 /**
  * gnome_druid_page_cancel:
@@ -370,8 +463,78 @@ gboolean
 gnome_druid_page_cancel   (GnomeDruidPage *druid_page)
 {
 	gboolean retval = FALSE;
+
 	g_return_val_if_fail (druid_page != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (druid_page), FALSE);
-	gtk_signal_emit (GTK_OBJECT (druid_page), druid_page_signals [CANCEL], GTK_WIDGET (druid_page)->parent, &retval);
+
+	gtk_signal_emit (GTK_OBJECT (druid_page),
+			 druid_page_signals [CANCEL],
+			 GTK_WIDGET (druid_page)->parent,
+			 &retval);
+
 	return retval;
+}
+
+/**
+ * FIXME:
+ **/
+GnomeCanvas *
+gnome_druid_page_get_canvas (GnomeDruidPage *druid_page)
+{
+	g_return_val_if_fail (druid_page != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (druid_page), NULL);
+
+	return druid_page->_priv->canvas;
+}
+
+/**
+ * FIXME:
+ **/
+gboolean
+gnome_druid_page_get_sidebar_shown (GnomeDruidPage *druid_page)
+{
+	g_return_val_if_fail (druid_page != NULL, TRUE);
+	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (druid_page), TRUE);
+
+	return druid_page->_priv->sidebar_shown;
+}
+
+static void
+set_sidebar_shown (GnomeDruidPage *druid_page, gboolean sidebar_shown)
+{
+	g_return_if_fail (druid_page != NULL);
+	g_return_if_fail (GNOME_IS_DRUID_PAGE (druid_page));
+
+	druid_page->_priv->sidebar_shown = sidebar_shown;
+}
+
+/**
+ * FIXME:
+ **/
+void
+gnome_druid_page_set_sidebar_shown (GnomeDruidPage *druid_page,
+				      gboolean sidebar_shown)
+{
+	g_return_if_fail (druid_page != NULL);
+	g_return_if_fail (GNOME_IS_DRUID_PAGE (druid_page));
+
+	if (GNOME_DRUID_PAGE_GET_CLASS(druid_page)->set_sidebar_shown)
+		GNOME_DRUID_PAGE_GET_CLASS(druid_page)->set_sidebar_shown(druid_page, sidebar_shown);
+}
+
+/**
+ * gnome_druid_page_configure_canvas:
+ * @druid_page: The #GnomeDruidPage to work on
+ *
+ * Description:  Cause the canvas items to relayout themselves,
+ * intended for intra-GnomeDruid use only.
+ **/
+void
+gnome_druid_page_configure_canvas (GnomeDruidPage *druid_page)
+{
+	g_return_if_fail (druid_page != NULL);
+	g_return_if_fail (GNOME_IS_DRUID_PAGE (druid_page));
+
+	gtk_signal_emit (GTK_OBJECT (druid_page),
+			 druid_page_signals [CONFIGURE_CANVAS]);
 }

@@ -1,3 +1,23 @@
+Thu Aug 24 02:23:51 2000  George Lebl <jirka@5z.com>
+
+	* gnome-animator.c: fix compile errors
+
+	* gnome-app-helper.c: put in FIXMEs and comment out the gnome_help
+	  stuff as that's now in compatlib and thus not used in libgnomeui
+
+	* gnome-druid-page.[ch], gnome-druid-page-edge.[ch],
+	  gnome-druid-page-standard.[ch]:  Try to unify/clean up code more.
+	  Add an option to hide the sidebar.  Make it possible to make
+	  a page use antialiased canvas optionally.  Move vanvas creation
+	  to GnomeDruidPage.  Other minor cleanups and doc fixes.
+
+	* gnome-druid.c: fix final removing of children
+
+	* gnome-icon-entry.c, gnome-icon-sel.c, gnome_segv.c:
+	  s/g_path_basename/g_path_get_basename/ (/me smacks self)
+
+	* gnome-roo.c, mdi_demo.c: warning fixes
+
 Tue Aug 22 19:15:15 2000  George Lebl <jirka@5z.com>
 
 	* gnome-druid*.[ch]: Minor cleanups, fix memory leaks on pages,

@@ -35,7 +35,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_DRUID_PAGE_EDGE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DRUID_PAGE_EDGE, GnomeDruidPageEdgeClass))
 #define GNOME_IS_DRUID_PAGE_EDGE(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID_PAGE_EDGE))
 #define GNOME_IS_DRUID_PAGE_EDGE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE_EDGE))
-#define GNOME_DRUID_PAGE_EDGE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DRUID_PAGE_EDGE, GnomePageEdgeClass))
+#define GNOME_DRUID_PAGE_EDGE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DRUID_PAGE_EDGE, GnomeDruidPageEdgeClass))
 
 typedef enum {
   /* update structure when adding enums */
@@ -77,7 +77,16 @@ struct _GnomeDruidPageEdgeClass
 
 GtkType    gnome_druid_page_edge_get_type          (void);
 GtkWidget *gnome_druid_page_edge_new               (GnomeEdgePosition   position);
+GtkWidget *gnome_druid_page_edge_new_aa            (GnomeEdgePosition   position);
 GtkWidget *gnome_druid_page_edge_new_with_vals     (GnomeEdgePosition   position,
+						    gboolean            antialiased,
+						    const gchar        *title,
+						    const gchar        *text,
+						    GdkPixbuf          *logo,
+						    GdkPixbuf          *watermark);
+void       gnome_druid_page_edge_construct         (GnomeDruidPageEdge *druid_page_edge,
+						    GnomeEdgePosition   position,
+						    gboolean            antialiaed,
 						    const gchar        *title,
 						    const gchar        *text,
 						    GdkPixbuf          *logo,

@@ -1153,7 +1153,8 @@ gnome_roo_set_title(GnomeRoo *roo, const gchar *title)
 const gchar *
 gnome_roo_get_title(GnomeRoo *roo)
 {
-	g_return_if_fail(GNOME_IS_ROO(roo));
+	g_return_val_if_fail(roo != NULL, NULL);
+	g_return_val_if_fail(GNOME_IS_ROO(roo), NULL);
 
 	return roo->priv->title;
 }

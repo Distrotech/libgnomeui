@@ -34,7 +34,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_DRUID_PAGE_STANDARD_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DRUID_PAGE_STANDARD, GnomeDruidPageStandardClass))
 #define GNOME_IS_DRUID_PAGE_STANDARD(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID_PAGE_STANDARD))
 #define GNOME_IS_DRUID_PAGE_STANDARD_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE_STANDARD))
-#define GNOME_DRUID_PAGE_STANDARD_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DRUID_PAGE_STANDARD, GnomePageStandardClass))
+#define GNOME_DRUID_PAGE_STANDARD_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DRUID_PAGE_STANDARD, GnomeDruidPageStandardClass))
 
 
 typedef struct _GnomeDruidPageStandard        GnomeDruidPageStandard;
@@ -65,16 +65,23 @@ struct _GnomeDruidPageStandardClass
 
 GtkType    gnome_druid_page_standard_get_type      (void);
 GtkWidget *gnome_druid_page_standard_new           (void);
-GtkWidget *gnome_druid_page_standard_new_with_vals (const gchar *title, GdkPixbuf *logo);
-void gnome_druid_page_standard_set_bg_color        (GnomeDruidPageStandard *druid_page_standard,
+GtkWidget *gnome_druid_page_standard_new_aa        (void);
+GtkWidget *gnome_druid_page_standard_new_with_vals (gboolean antialiased,
+						    const gchar *title,
+						    GdkPixbuf *logo);
+void       gnome_druid_page_standard_construct     (GnomeDruidPageStandard *druid_page_standard,
+						    gboolean antialiased,
+						    const gchar *title,
+						    GdkPixbuf *logo);
+void       gnome_druid_page_standard_set_bg_color  (GnomeDruidPageStandard *druid_page_standard,
 						    GdkColor *color);
-void gnome_druid_page_standard_set_logo_bg_color   (GnomeDruidPageStandard *druid_page_standard,
+void       gnome_druid_page_standard_set_logo_bg_color(GnomeDruidPageStandard *druid_page_standard,
 						    GdkColor *color);
-void gnome_druid_page_standard_set_title_color     (GnomeDruidPageStandard *druid_page_standard,
+void       gnome_druid_page_standard_set_title_color(GnomeDruidPageStandard *druid_page_standard,
 						    GdkColor *color);
-void gnome_druid_page_standard_set_title           (GnomeDruidPageStandard *druid_page_standard,
+void       gnome_druid_page_standard_set_title     (GnomeDruidPageStandard *druid_page_standard,
 						    const gchar *title);
-void gnome_druid_page_standard_set_logo            (GnomeDruidPageStandard *druid_page_standard,
+void       gnome_druid_page_standard_set_logo      (GnomeDruidPageStandard *druid_page_standard,
 						    GdkPixbuf *logo_image);
 
 END_GNOME_DECLS

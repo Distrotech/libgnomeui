@@ -256,7 +256,7 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	if(scaled == NULL)
 		return;
 	
-	base = g_path_basename(path);
+	base = g_path_get_basename(path);
 	pos = gnome_icon_list_append_pixbuf(GNOME_ICON_LIST(gis->_priv->gil),
 					    scaled, path, base);
 	g_free(base);
@@ -521,7 +521,7 @@ gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
 		if (full_path)
 			return g_strdup(p);
 		else
-			return g_path_basename(p);
+			return g_path_get_basename(p);
 	} else {
 		return NULL;
 	}
@@ -554,7 +554,7 @@ gnome_icon_selection_select_icon (GnomeIconSelection * gis,
 	for(pos = 0; pos < icons; pos++) {
 		char *base;
 		gchar * file = gnome_icon_list_get_icon_filename(gil, pos);
-		base = g_path_basename(file);
+		base = g_path_get_basename(file);
 		if (strcmp(base, filename) == 0) {
 			gnome_icon_list_select_icon(gil, pos);
 			g_free(base);
