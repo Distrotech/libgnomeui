@@ -115,10 +115,10 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 static void
 render_dither (GnomeColorPicker *cp)
 {
-	int dark_r, dark_g, dark_b;
-	int light_r, light_g, light_b;
-	int x, y;
-	int c1[3], c2[3];
+	gint dark_r, dark_g, dark_b;
+	gint light_r, light_g, light_b;
+	gint x, y;
+	gint c1[3], c2[3];
 	guchar *p;
 	GdkPixmap *pixmap;
 
@@ -198,9 +198,9 @@ render (GnomeColorPicker *cp)
 	if (cp->dither || cp->use_alpha)
 		render_dither (cp);
 	else {
-		c.red   = (int) (cp->r * 65535.0 + 0.5);
-		c.green = (int) (cp->g * 65535.0 + 0.5);
-		c.blue  = (int) (cp->b * 65535.0 + 0.5);
+		c.red   = (gushort) (cp->r * 65535.0 + 0.5);
+		c.green = (gushort) (cp->g * 65535.0 + 0.5);
+		c.blue  = (gushort) (cp->b * 65535.0 + 0.5);
 
 		gdk_imlib_best_color_get (&c);
 		gdk_gc_set_foreground (cp->gc, &c);
@@ -316,6 +316,17 @@ gnome_color_picker_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+
+/**
+ * gnome_color_picker_new
+ *
+ * Description:
+ * Creates a new GNOME color picker widget.
+ *
+ * Returns:
+ * Pointer to new GNOME color picker widget.
+ */
+
 GtkWidget *
 gnome_color_picker_new (void)
 {
@@ -323,12 +334,12 @@ gnome_color_picker_new (void)
 }
 
 /* Callback used when the color selection dialog is destroyed */
-static gint
+static gboolean
 cs_destroy (GtkWidget *widget, gpointer data)
 {
 	GnomeColorPicker *cp;
 
-	cp = data;
+	cp = GNOME_COLOR_PICKER (data);
 
 	cp->cs_dialog = NULL;
 
@@ -343,7 +354,7 @@ cs_ok_clicked (GtkWidget *widget, gpointer data)
 	gdouble color[4];
 	gushort r, g, b, a;
 
-	cp = data;
+	cp = GNOME_COLOR_PICKER (data);
 
 	gtk_color_selection_get_color (GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog)->colorsel),
 				       color);
@@ -421,6 +432,19 @@ gnome_color_picker_clicked (GtkButton *button)
 	gtk_widget_show (cp->cs_dialog);
 }
 
+
+/**
+ * gnome_color_picker_set_d
+ * @cp: Pointer to GNOME color picker widget.
+ * @r: Red color component, values are in [0.0, 1.0]
+ * @g: Green color component, values are in [0.0, 1.0]
+ * @b: Blue color component, values are in [0.0, 1.0]
+ * @a: Alpha color component, values are in [0.0, 1.0]
+ *
+ * Description:
+ * Set color currently shown in color picker widget.
+ */
+
 void
 gnome_color_picker_set_d (GnomeColorPicker *cp, gdouble r, gdouble g, gdouble b, gdouble a)
 {
@@ -439,6 +463,19 @@ gnome_color_picker_set_d (GnomeColorPicker *cp, gdouble r, gdouble g, gdouble b,
 	render (cp);
 	gtk_widget_draw (cp->da, NULL);
 }
+
+
+/**
+ * gnome_color_picker_get_d
+ * @cp: Pointer to GNOME color picker widget.
+ * @r: Output location of red color component, values are in [0.0, 1.0]
+ * @g: Output location of green color component, values are in [0.0, 1.0]
+ * @b: Output location of blue color component, values are in [0.0, 1.0]
+ * @a: Output location of alpha color component, values are in [0.0, 1.0]
+ *
+ * Description:
+ * Retrieve color currently set in color picker widget.
+ */
 
 void
 gnome_color_picker_get_d (GnomeColorPicker *cp, gdouble *r, gdouble *g, gdouble *b, gdouble *a)
@@ -459,6 +496,19 @@ gnome_color_picker_get_d (GnomeColorPicker *cp, gdouble *r, gdouble *g, gdouble 
 		*a = cp->a;
 }
 
+
+/**
+ * gnome_color_picker_set_i8
+ * @cp: Pointer to GNOME color picker widget.
+ * @r: Red color component, values are in [0, 255]
+ * @g: Green color component, values are in [0, 255]
+ * @b: Blue color component, values are in [0, 255]
+ * @a: Alpha color component, values are in [0, 255]
+ *
+ * Description:
+ * Set color currently set in color picker widget.
+ */
+
 void
 gnome_color_picker_set_i8 (GnomeColorPicker *cp, guint8 r, guint8 g, guint8 b, guint8 a)
 {
@@ -474,6 +524,19 @@ gnome_color_picker_set_i8 (GnomeColorPicker *cp, guint8 r, guint8 g, guint8 b, g
 	render (cp);
 	gtk_widget_draw (cp->da, NULL);
 }
+
+
+/**
+ * gnome_color_picker_get_i8
+ * @cp: Pointer to GNOME color picker widget.
+ * @r: Output location of red color component, values are in [0, 255]
+ * @g: Output location of green color component, values are in [0, 255]
+ * @b: Output location of blue color component, values are in [0, 255]
+ * @a: Output location of alpha color component, values are in [0, 255]
+ *
+ * Description:
+ * Retrieve color currently set in color picker widget.
+ */
 
 void
 gnome_color_picker_get_i8 (GnomeColorPicker *cp, guint8 *r, guint8 *g, guint8 *b, guint8 *a)
@@ -494,6 +557,19 @@ gnome_color_picker_get_i8 (GnomeColorPicker *cp, guint8 *r, guint8 *g, guint8 *b
 		*a = (guint8) (cp->a * 255.0 + 0.5);
 }
 
+
+/**
+ * gnome_color_picker_set_i16
+ * @cp: Pointer to GNOME color picker widget.
+ * @r: Red color component, values are in [0, 65535]
+ * @g: Green color component, values are in [0, 65535]
+ * @b: Blue color component, values are in [0, 65535]
+ * @a: Alpha color component, values are in [0, 65535]
+ *
+ * Description:
+ * Set color currently set in color picker widget.
+ */
+
 void
 gnome_color_picker_set_i16 (GnomeColorPicker *cp, gushort r, gushort g, gushort b, gushort a)
 {
@@ -509,6 +585,19 @@ gnome_color_picker_set_i16 (GnomeColorPicker *cp, gushort r, gushort g, gushort 
 	render (cp);
 	gtk_widget_draw (cp->da, NULL);
 }
+
+
+/**
+ * gnome_color_picker_get_i16
+ * @cp: Pointer to GNOME color picker widget.
+ * @r: Output location of red color component, values are in [0, 65535]
+ * @g: Output location of green color component, values are in [0, 65535]
+ * @b: Output location of blue color component, values are in [0, 65535]
+ * @a: Output location of alpha color component, values are in [0, 65535]
+ *
+ * Description:
+ * Retrieve color currently set in color picker widget.
+ */
 
 void
 gnome_color_picker_get_i16 (GnomeColorPicker *cp, gushort *r, gushort *g, gushort *b, gushort *a)
@@ -529,6 +618,17 @@ gnome_color_picker_get_i16 (GnomeColorPicker *cp, gushort *r, gushort *g, gushor
 		*a = (gushort) (cp->a * 65535.0 + 0.5);
 }
 
+
+/**
+ * gnome_color_picker_set_dither
+ * @cp: Pointer to GNOME color picker widget.
+ * @dither: %TRUE if color sample should be dithered, %FALSE if not.
+ *
+ * Description:
+ * Sets whether the picker should dither the color sample or just paint
+ * a solid rectangle.
+ */
+
 void
 gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither)
 {
@@ -540,6 +640,16 @@ gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither)
 	render (cp);
 	gtk_widget_draw (cp->da, NULL);
 }
+
+
+/**
+ * gnome_color_picker_set_use_alpha
+ * @cp: Pointer to GNOME color picker widget.
+ * @dither: %TRUE if color sample should use alpha channel, %FALSE if not.
+ *
+ * Description:
+ * Sets whether the picker should use the alpha channel or not.
+ */
 
 void
 gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha)
@@ -553,8 +663,18 @@ gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha)
 	gtk_widget_draw (cp->da, NULL);
 }
 
+
+/**
+ * gnome_color_picker_set_title
+ * @cp: Pointer to GNOME color picker widget.
+ * @title: String containing new window title.
+ *
+ * Description:
+ * Sets the title for the color selection dialog.
+ */
+
 void
-gnome_color_picker_set_title (GnomeColorPicker *cp, const char *title)
+gnome_color_picker_set_title (GnomeColorPicker *cp, const gchar *title)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
@@ -581,7 +701,4 @@ gnome_color_picker_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoi
 		   GTK_VALUE_UINT (args[3]),
 		   func_data);
 }
-
-
-
 

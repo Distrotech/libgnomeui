@@ -46,7 +46,7 @@ struct _GnomeColorPicker {
 	GtkWidget *da;		/* Drawing area for color sample */
 	GtkWidget *cs_dialog;	/* Color selection dialog */
 
-	char *title;		/* Title for the color selection window */
+	gchar *title;		/* Title for the color selection window */
 
 	guint dither : 1;	/* Dither or just paint a solid color? */
 	guint use_alpha : 1;	/* Use alpha or not */
@@ -89,7 +89,7 @@ void gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither);
 void gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha);
 
 /* Sets the title for the color selection dialog */
-void gnome_color_picker_set_title (GnomeColorPicker *cp, const char *title);
+void gnome_color_picker_set_title (GnomeColorPicker *cp, const gchar *title);
 
 
 END_GNOME_DECLS

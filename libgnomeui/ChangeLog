@@ -1,5 +1,10 @@
 1999-02-04  Jeff Garzik  <jgarzik@pobox.com>
 
+	* gnome-color-picker.[ch]:
+	- Added API docs.
+	- Corrected a few casts.
+	- Use Glib types where appropriate.
+
 	* gnome-entry.[ch]:
 	Added API documentation.
 	Added 'max_saved' setting and gnome_entry_set_max_saved() func.
