@@ -1,3 +1,9 @@
+1999-10-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-session.c (restore_window): take care of the case when
+	there are no children to restore: merely open a new, empty toplevel
+	window.
+
 1999-10-07  Elliot Lee  <sopwith@redhat.com>
 
 	* animator_demo.c, dock_demo.c, gnome-app-helper.c,
