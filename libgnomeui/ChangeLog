@@ -285,7 +285,6 @@ Wed Nov  4 11:31:57 1998  Owen Taylor  <otaylor@redhat.com>
 	(iti_realize): Remove unused Window
 	parameter. 
 
->>>>>>> 1.556
 Mon Oct 26 16:53:04 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-stock.c: Use gtk_widget_shape_combine_mask() instead
