@@ -44,7 +44,7 @@ enum {
 	PROP_WIDTH,
 	PROP_HEIGHT,
 	PROP_ANCHOR,
-	PROP_SIZE_IN_PIXELS
+	PROP_SIZE_PIXELS
 };
 
 
@@ -125,19 +125,19 @@ gnome_canvas_widget_class_init (GnomeCanvasWidgetClass *class)
 				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
-                 PROP_X,
+                 PROP_Y,
                  g_param_spec_double ("y", NULL, NULL,
 				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
 				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
-                 PROP_X,
+                 PROP_WIDTH,
                  g_param_spec_double ("width", NULL, NULL,
 				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
 				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
-                 PROP_X,
+                 PROP_HEIGHT,
                  g_param_spec_double ("height", NULL, NULL,
 				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
 				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
@@ -150,8 +150,8 @@ gnome_canvas_widget_class_init (GnomeCanvasWidgetClass *class)
                                     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
-                 PROP_SIZE_IN_PIXELS,
-                 g_param_spec_boolean ("size_in_pixels", NULL, NULL,
+                 PROP_SIZE_PIXELS,
+                 g_param_spec_boolean ("size_pixels", NULL, NULL,
 				       FALSE,
 				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 
@@ -361,7 +361,7 @@ gnome_canvas_widget_set_property (GObject            *object,
 		}
 		break;
 
-	case PROP_SIZE_IN_PIXELS:
+	case PROP_SIZE_PIXELS:
 	        if (witem->size_pixels != g_value_get_boolean (value))
 		{
 		        witem->size_pixels = g_value_get_boolean (value);
@@ -420,7 +420,7 @@ gnome_canvas_widget_get_property (GObject            *object,
 		g_value_set_enum (value, witem->anchor);
 		break;
 
-	case PROP_SIZE_IN_PIXELS:
+	case PROP_SIZE_PIXELS:
 		g_value_set_boolean (value, witem->size_pixels);
 		break;
 
