@@ -900,6 +900,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 		}
 	}
 	
+	items = 0;
 	if(view) {
 		child = gnome_mdi_get_child_from_view(view);
 		
@@ -922,7 +923,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 				( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
 				gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
 				gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
-				gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(count_ui_info_items(ui_info)));
+				items = count_ui_info_items(ui_info);
 			}
 			else {
 				menu_list = child_create_menus(child, view);
@@ -939,19 +940,17 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 						items++;
 					}
 					
-					gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
-					
 					g_list_free(menu_list);
 				}
 				else
-					gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
+					items = 0;
 			}
 		}
 	}
-	else {
+	else
 		gtk_window_set_title(GTK_WINDOW(app), mdi->title);
-		gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, NULL);
-	}
+
+	gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
 
 	if(parent)
 		gtk_widget_queue_resize(parent);
