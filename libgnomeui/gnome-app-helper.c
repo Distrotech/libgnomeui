@@ -1023,7 +1023,7 @@ create_menu_item (GtkMenuShell       *menu_shell,
 		GtkWidget *widget;
 
 		/* build up the menu item path */
-		gstring = g_string_new ("");
+		gstring = g_string_new (NULL);
 		widget = uiinfo->widget;
 		while (widget) {
 			if (GTK_IS_MENU_ITEM (widget)) {

@@ -61,7 +61,7 @@ struct _GnomePropertyBox
 	GtkWidget *cancel_button;   /* Cancel/Close button.  */
 	GtkWidget *help_button;	    /* Help button.  */
 
-	gpointer reserved; /* Reserved for a future private pointer if neccessary */
+	gpointer reserved; /* Reserved for a future private pointer if necessary */
 };
 
 struct _GnomePropertyBoxClass

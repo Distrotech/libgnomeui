@@ -191,7 +191,7 @@ gnome_scores_construct (  GnomeScores *gs,
 		/* TRANSLATORS NOTE: Date format used when showing scores in games.
 		 * Please refer to manpage of strftime(3) for complete reference.
 		 */
-		if(strftime(tmp2, sizeof(tmp2), _("%a %b %d %T %Y"),
+		if(strftime(tmp2, sizeof(tmp2), _("%a %b %x %X %Y"),
 			    localtime( &(times[i]) )) == 0) {
 			/* according to docs, if the string does not fit, the
 			 * contents of tmp2 are undefined, thus just use
@@ -487,10 +487,11 @@ gnome_scores_display (const gchar *title, const gchar *app_name, const gchar *le
  			gnome_scores_set_current_player(GNOME_SCORES(hs), pos-1);
 
 		gtk_widget_show (hs);
-		g_strfreev(names);
-		g_free(scores);
-		g_free(scoretimes);
 	}
+
+	g_strfreev(names);
+	g_free(scores);
+	g_free(scoretimes);
 
 	return hs;
 }
@@ -526,10 +527,11 @@ gnome_scores_display_with_pixmap (const gchar *pixmap_logo, const gchar *app_nam
  			gnome_scores_set_current_player(GNOME_SCORES(hs), pos-1);
 
 		gtk_widget_show (hs);
-		g_strfreev(names);
-		g_free(scores);
-		g_free(scoretimes);
 	}
+
+	g_strfreev(names);
+	g_free(scores);
+	g_free(scoretimes);
 
 	return hs;
 }

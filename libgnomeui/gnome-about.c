@@ -97,14 +97,14 @@ gnome_about_update_authors_label (GnomeAbout *about, GtkWidget *label)
 		gtk_widget_show (label);
 	}
 
-	string = g_string_new ("");
+	string = g_string_new (NULL);
 
 	for (list = about->_priv->authors; list; list = list->next) {
 		tmp = g_markup_escape_text (list->data, -1);
 		g_string_append (string, tmp);
 
 		if (list->next)
-			g_string_append (string, "\n");
+			g_string_append_c (string, '\n');
 		g_free (tmp);
 	}
 	
@@ -127,7 +127,7 @@ gnome_about_update_documenters_label (GnomeAbout *about, GtkWidget *label)
 		gtk_widget_show (label);
 	}
 
-	string = g_string_new ("");
+	string = g_string_new (NULL);
 
 	for (list = about->_priv->documenters; list; list = list->next) {
 		tmp = g_markup_escape_text (list->data, -1);
@@ -156,7 +156,7 @@ gnome_about_update_translation_information_label (GnomeAbout *about, GtkWidget *
 		gtk_widget_show (label);
 	}
 
-	string = g_string_new ("");
+	string = g_string_new (NULL);
 
 	tmp = g_markup_escape_text (about->_priv->translator_credits, -1);
 	g_string_append (string, tmp);
