@@ -17,10 +17,10 @@ typedef struct _GnomeAppClass GnomeAppClass;
 typedef enum 
 {
   POS_NOCHANGE = -1,
-  POS_LEFT = 0,
-  POS_RIGHT = 1,
-  POS_TOP = 2,
-  POS_BOTTOM = 3,
+  POS_TOP = 0,
+  POS_BOTTOM = 1,
+  POS_LEFT = 2,
+  POS_RIGHT = 3,
 } GnomeAppWidgetPositionType;
 
 typedef enum
@@ -74,7 +74,8 @@ struct _GnomeApp {
   GtkWidget *menubar /* GtkMenuBar */,
     *toolbar /* GtkToolbar */,
     *contents /* GtkContainer */;
-  GtkWidget *htable, *vtable; /* The table widgets that hold & pack it all */
+  GtkWidget *table; /* The table widgets that hold & pack it all */
+  GnomeAppWidgetPositionType pos_menubar, pos_toolbar;
 };
 
 struct _GnomeAppClass {

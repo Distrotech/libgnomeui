@@ -1,6 +1,7 @@
 #include "libgnome/gnome-defs.h"
 #include "gnome-app.h"
 #include "gnome-pixmap.h"
+#include <string.h>
 
 static void gnome_app_class_init(GnomeAppClass *klass);
 static void gnome_app_init(GnomeApp *app);
@@ -37,11 +38,11 @@ static void
 gnome_app_init(GnomeApp *app)
 {
   app->menubar = app->toolbar = app->contents = NULL;
+  app->table = gtk_table_new(3, 3, FALSE);
+  gtk_widget_show(app->table);
+  gtk_container_add(GTK_CONTAINER(app), app->table);
 
-  app->vtable = gtk_table_new(3, 1, FALSE);
-  gtk_widget_show(app->vtable);
-  app->htable = gtk_table_new(1, 3, FALSE);
-  gtk_widget_show(app->htable);
+  app->pos_menubar = app->pos_toolbar = POS_TOP;
 }
 
 GtkWidget *
@@ -79,7 +80,6 @@ gnome_app_do_menu_creation(GtkWidget *parent_widget,
 	  submenu = gtk_menu_new();
 	  gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuinfo[i].widget),
 				    submenu);
-	  gtk_widget_show(submenu);
 	  gnome_app_do_menu_creation(submenu, menuinfo[i].moreinfo);
 	}
     }
@@ -96,6 +96,7 @@ gnome_app_create_menu(GnomeApp *app,
   g_return_if_fail(GNOME_IS_APP(app));
   g_return_if_fail(app->menubar == NULL);
 
+  /*  hb = gtk_handle_box_new(); */
   hb = gtk_handle_box_new();
   gtk_widget_show(hb);
   app->menubar = gtk_menu_bar_new();
@@ -184,56 +185,90 @@ gnome_app_set_positions(GnomeApp *app,
   if(pos_menubar != POS_NOCHANGE)
     {
       g_return_if_fail(app->menubar != NULL);
+      g_return_if_fail(pos_menubar == POS_TOP
+		       || pos_menubar == POS_BOTTOM);
+
+      app->pos_menubar = pos_menubar;
 
       /* It's ->parent->parent because this is inside a GtkHandleBox */
       if(app->menubar->parent->parent)
 	gtk_container_remove(GTK_CONTAINER(app->menubar->parent->parent),
-			     app->menubar);
+			     app->menubar->parent);
       /* Obviously the menu bar can't have vertical orientation,
 	 so we don't support POS_LEFT or POS_RIGHT. */
-      gtk_table_attach_defaults(GTK_TABLE(app->vtable),
+      g_print("Menu bar goes from %d x %d to %d x %d\n",
+	      0,
+	      (pos_menubar==POS_TOP)?0:2,
+	      3,
+	      (pos_menubar==POS_TOP)?1:3);	      
+      gtk_table_attach_defaults(GTK_TABLE(app->table),
 				app->menubar->parent,
-				FALSE,
-				FALSE,
-				pos_menubar==POS_TOP?TRUE:FALSE,
-				pos_menubar==POS_BOTTOM?TRUE:FALSE);
-
+				0, 3,
+				(pos_menubar==POS_TOP)?0:2,
+				(pos_menubar==POS_TOP)?1:3);
     }
 
   if(pos_toolbar != POS_NOCHANGE)
     {
       g_return_if_fail(app->toolbar != NULL);
 
+      app->pos_toolbar = pos_toolbar;
+
       /* It's ->parent->parent because this is inside a GtkHandleBox */
       if(app->toolbar->parent->parent)
 	gtk_container_remove(GTK_CONTAINER(app->toolbar->parent->parent),
-			     app->toolbar);
+			     app->toolbar->parent);
       if(pos_toolbar == POS_LEFT
 	 || pos_toolbar == POS_RIGHT)
 	{
-	  gtk_table_attach_defaults(GTK_TABLE(app->htable),
-				    app->toolbar->parent,
-				    pos_toolbar==POS_LEFT?TRUE:FALSE,
-				    pos_toolbar==POS_RIGHT?TRUE:FALSE,
-				    FALSE,
-				    FALSE);
 	  gtk_toolbar_set_orientation(GTK_TOOLBAR(app->toolbar),
 				      GTK_ORIENTATION_VERTICAL);
+	  gtk_table_attach_defaults(GTK_TABLE(app->table),
+				    app->toolbar->parent,
+				    (pos_toolbar==POS_LEFT)?0:2,
+				    (pos_toolbar==POS_LEFT)?1:3,
+				    0, 3);
 	}
       else
 	{
+	  gint moffset;
+
+	  if(app->pos_menubar == pos_toolbar)
+	    moffset = (pos_toolbar == POS_TOP)?1:-1;
+	  else
+	    moffset = 0;
 	  /* assume POS_TOP || POS_BOTTOM */
-	  gtk_table_attach_defaults(GTK_TABLE(app->vtable),
-				    app->toolbar->parent,
-				    FALSE,
-				    FALSE,
-				    pos_toolbar==POS_TOP?TRUE:FALSE,
-				    pos_toolbar==POS_BOTTOM?TRUE:FALSE);
 	  gtk_toolbar_set_orientation(GTK_TOOLBAR(app->toolbar),
 				      GTK_ORIENTATION_HORIZONTAL);
+	  gtk_table_attach_defaults(GTK_TABLE(app->table),
+				    app->toolbar->parent,
+				    0, 3,
+				    (pos_toolbar==POS_TOP)?0:2 + moffset,
+				    (pos_toolbar==POS_TOP)?1:3 + moffset);
 	}
     }
+  if(app->contents) /* Repack any contents of ours */
+    gnome_app_set_contents(app, app->contents);
 }
+
+/* These are used for knowing where to pack the contents into the
+   table, so we don't have to recompute every time we set_contents */
+gint startys[2][4] = {
+  {2, 1, 1, 1},
+  {1, 0, 0, 0}
+};
+gint startxs[2][4] = {
+  {0, 0, 1, 0},
+  {0, 0, 1, 0}
+};
+gint endys[2][4] = {
+  {3, 2, 3, 3},
+  {2, 1, 2, 2}
+};
+gint endxs[2][4] = {
+  {3, 3, 3, 2},
+  {3, 3, 3, 2}
+};
 
 void
 gnome_app_set_contents(GnomeApp *app, GtkWidget *contents)
@@ -242,13 +277,21 @@ gnome_app_set_contents(GnomeApp *app, GtkWidget *contents)
   g_return_if_fail(GNOME_IS_APP(app));
 
   if(app->contents != NULL)
-    gtk_container_remove(GTK_CONTAINER(app->htable), app->contents);
-
-  /* Is this going to work at all? I'll wager not */
-  gtk_table_attach_defaults(GTK_TABLE(app->htable),
+    gtk_container_remove(GTK_CONTAINER(app->table), app->contents);
+  
+  /* Is this going to work at all? I'll wager not
+     XXX oops it worked, my mistake :) */
+  g_print("Contents go from %d x %d to %d x %d\n",
+			    startxs[app->pos_menubar][app->pos_toolbar],
+			    startys[app->pos_menubar][app->pos_toolbar],
+			    endxs[app->pos_menubar][app->pos_toolbar],
+			    endys[app->pos_menubar][app->pos_toolbar]);
+  gtk_table_attach_defaults(GTK_TABLE(app->table),
 			    contents,
-			    FALSE, FALSE,
-			    FALSE, FALSE);
+			    startxs[app->pos_menubar][app->pos_toolbar],
+			    endxs[app->pos_menubar][app->pos_toolbar],
+			    startys[app->pos_menubar][app->pos_toolbar],
+			    endys[app->pos_menubar][app->pos_toolbar]);
   app->contents = contents;
   gtk_widget_show(contents);
 }
