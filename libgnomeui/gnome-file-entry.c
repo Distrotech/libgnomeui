@@ -4,13 +4,14 @@
  *
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  */
-
+#include <config.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
-#include "libgnome/libgnome.h"
+#include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-i18nP.h"
 #include "gnome-file-entry.h"
 
 

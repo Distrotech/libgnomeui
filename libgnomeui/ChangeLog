@@ -1,3 +1,12 @@
+1998-06-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-entry.c: Remove the prefix_list get/set stuff.
+
+1998-06-29  Nuno Ferreira <nmrf@rnl.ist.utl.pt>
+
+	* gnome-file-entry.c: Include config.h, do not include
+	libgnomeui/libgnomeui.h, instead include libgnome/gnome-i18nP.h
+
 Mon Jun 29 03:04:30 1998  Havoc Pennington  <hp@pobox.com>
 
 	* TODO: Updated a little.
