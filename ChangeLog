@@ -1,3 +1,11 @@
+2004-11-23  Federico Mena Quintero  <federico@ximian.com>
+
+	Merged from gnome-2-8:
+
+	* file-chooser/gtkfilesystemgnomevfs.c (load_dir): Use a different
+	number of items per notification depending on whether the folder
+	system is local or not.
+
 2004-11-19  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "rw" to ALL_LINGUAS.

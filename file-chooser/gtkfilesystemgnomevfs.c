@@ -282,7 +282,8 @@ static FolderChild *lookup_folder_child_from_uri (GtkFileFolder     *folder,
 static GObjectClass *system_parent_class;
 static GObjectClass *folder_parent_class;
 
-#define ITEMS_PER_NOTIFICATION 100
+#define ITEMS_PER_LOCAL_NOTIFICATION 10000
+#define ITEMS_PER_REMOTE_NOTIFICATION 100
 
 /*
  * GtkFileSystemGnomeVFS
@@ -544,16 +545,24 @@ remove_all  (gpointer  key,
 static void
 load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 {
+  int num_items;
+
   if (folder_vfs->async_handle)
     gnome_vfs_async_cancel (folder_vfs->async_handle);
 
   g_hash_table_foreach_remove (folder_vfs->children,
 			       remove_all, NULL);
   gnome_authentication_manager_push_async ();
+
+  if (gnome_vfs_uri_is_local (folder_vfs->uri))
+    num_items = ITEMS_PER_LOCAL_NOTIFICATION;
+  else
+    num_items = ITEMS_PER_REMOTE_NOTIFICATION;
+
   gnome_vfs_async_load_directory (&folder_vfs->async_handle,
 				  folder_vfs->uri,
 				  get_options (folder_vfs->types),
-				  ITEMS_PER_NOTIFICATION,
+				  num_items,
 				  GNOME_VFS_PRIORITY_DEFAULT,
 				  directory_load_callback, folder_vfs);
   gnome_authentication_manager_pop_async ();
