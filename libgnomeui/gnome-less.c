@@ -199,10 +199,11 @@ gboolean gnome_less_show_command(GnomeLess * gl,
   else return TRUE;
 }
 
+#define GLESS_BUFSIZE 1024
+
 gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
 {
-  static const gint bufsize = 1024;
-  gchar buffer[bufsize];
+  gchar buffer [GLESS_BUFSIZE];
   gchar * s;
 
   g_return_val_if_fail(gl != NULL, FALSE);
@@ -215,7 +216,7 @@ gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
   
   errno = 0; /* Reset it to detect errors */
   while (TRUE) {
-    s = fgets(buffer, bufsize, f);
+    s = fgets(buffer, GLESS_BUFSIZE, f);
 
     if ( s == NULL ) break;
     

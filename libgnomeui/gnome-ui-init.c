@@ -1,6 +1,23 @@
 /* Blame Elliot for the poptimization of this file */
 
-#include <config.h>
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
+/* AIX requires this to be the first thing in the file.  */
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifdef _AIX
+ #pragma alloca
+#  else
+#   ifndef alloca /* predefined by HP cc +Olibcalls */
+char *alloca ();
+#   endif
+#  endif
+# endif
+#endif
 
 #include <errno.h>
 #include <stdarg.h>
@@ -13,10 +30,6 @@
 
 #include <gtk/gtk.h>
 #include <gdk_imlib.h>
-
-#ifdef HAVE_ALLOCA_H
-#include <alloca.h>
-#endif
 
 #ifdef HAVE_ESD
 #include <esd.h>
