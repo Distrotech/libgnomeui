@@ -514,6 +514,8 @@ char * gnome_app_helper_gettext (char *string);
 #define GNOME_MENU_VIEW_PATH D_("_View/")
 #define GNOME_MENU_SETTINGS_STRING D_("_Settings")
 #define GNOME_MENU_SETTINGS_PATH D_("_Settings/")
+#define GNOME_MENU_NEW_STRING D_("_New")
+#define GNOME_MENU_NEW_PATH D_("_New/")
 #define GNOME_MENU_FILES_STRING D_("Fi_les")
 #define GNOME_MENU_FILES_PATH D_("Fi_les/")
 #define GNOME_MENU_WINDOWS_STRING D_("_Windows")

@@ -82,6 +82,8 @@ static const char strings [] = {
 	N_("_View/"),
 	N_("_Settings"),
 	N_("_Settings/"),
+        N_("_New"),
+	N_("_New/"),
 	N_("Fi_les"),
 	N_("Fi_les/"),
 	N_("_Windows"),

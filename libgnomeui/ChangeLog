@@ -1,3 +1,11 @@
+1999-02-26  Sergey Panov <sipan@mit.edu>
+
+        * gnome-app-helper.c, gnome-app-helper.h: make "_New"
+        subtree menu item translatable
+
+	* gnome-canvas-text.c(gnome_canvas_text_set_arg): more
+	protection against font==NULL when "fontset" is used.
+
 1999-02-25  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-app-helper.c (gnome_app_fill_menu_custom): added a quick

@@ -536,6 +536,10 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			text->font = gdk_fontset_load ("-*-fixed-medium-r-semicondensed--13-120-75-75-c-60-*-*");
 			g_assert (text->font != NULL);
 		}
+		if (!text->font) {
+			text->font = gdk_font_load ("fixed");
+			g_assert (text->font != NULL);
+		}
 		if (item->canvas->aa) {
 			if (text->suckfont)
 				gnome_canvas_suck_font_free (text->suckfont);
