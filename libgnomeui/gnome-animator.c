@@ -1,5 +1,5 @@
 /* GNOME GUI Library
- * Copyright (C) 1998 the Free Software Foundation
+ * Copyright (C) 1998, 1999 the Free Software Foundation
  *
  * Author: Ettore Perazzoli (ettore@comm2000.it)
  *
@@ -231,16 +231,15 @@ static void
 draw_background_pixmap (GnomeAnimator *animator)
 {
   GnomeAnimatorPrivate *privat = animator->privat;
+  GtkWidget *widget;
 
-  if (privat->background_pixmap != NULL)
+  widget = GTK_WIDGET (animator);
+  if (privat->background_pixmap != NULL && widget->window != NULL)
     {
-      GtkWidget *widget;
       GtkStyle *style;
       guint state;
       GdkGC *gc;
-      gint x, y;
 
-      widget = GTK_WIDGET (animator);
       style = gtk_widget_get_style (widget->parent);
       state = GTK_WIDGET_STATE (widget->parent);
       gc = gdk_gc_new (widget->window);
@@ -273,7 +272,6 @@ static void
 size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
   GnomeAnimator *animator;
-  gint x, y;
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GNOME_IS_ANIMATOR (widget));
@@ -362,7 +360,6 @@ static void
 draw (GtkWidget *widget, GdkRectangle *area)
 {
   GnomeAnimator *animator;
-  GdkRectangle w_area, p_area;
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GNOME_IS_ANIMATOR (widget));
@@ -468,7 +465,7 @@ timer_cb (gpointer data)
   GnomeAnimator *animator;
 
   GDK_THREADS_ENTER ();
-  
+
   animator = GNOME_ANIMATOR (data);
   if (animator->status != GNOME_ANIMATOR_STATUS_STOPPED)
     gnome_animator_advance (animator, +1);
@@ -525,7 +522,8 @@ gnome_animator_new_with_size (guint width, guint height)
   animator = gtk_type_new (gnome_animator_get_type ());
   widget = GTK_WIDGET (animator);
 
-  gtk_widget_set_usize (widget, width, height);
+  widget->requisition.width = width;
+  widget->requisition.height = height;
 
   if (GTK_WIDGET_VISIBLE (widget))
     gtk_widget_queue_resize (widget);
@@ -647,7 +645,6 @@ gnome_animator_append_frame_from_imlib_at_size (GnomeAnimator *animator,
                                                 guint height)
 {
   GnomeAnimatorFrame *new_frame;
-  GdkPixmap *pixmap;
 
   g_return_val_if_fail (animator != NULL, FALSE);
   g_return_val_if_fail (image != NULL, FALSE);

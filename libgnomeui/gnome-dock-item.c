@@ -292,10 +292,7 @@ gnome_dock_item_map (GtkWidget *widget)
     gdk_window_show (widget->window);
 
   if (di->is_floating && !di->float_window_mapped)
-    {
-      gdk_window_show (di->float_window);
-      di->float_window_mapped = TRUE;
-    }
+    gnome_dock_item_detach (di, di->float_x, di->float_y);
 
   if (bin->child
       && GTK_WIDGET_VISIBLE (bin->child)
@@ -541,12 +538,15 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
 
       if (di->is_floating)
 	{
+          GtkRequisition child_requisition;
 	  guint float_width;
 	  guint float_height;
-	  
-	  child_allocation.width = child->requisition.width;
-	  child_allocation.height = child->requisition.height;
-	  
+
+	  gtk_widget_get_child_requisition (child, &child_requisition);
+
+          child_allocation.width = child_requisition.width;
+          child_allocation.height = child_requisition.height;
+
 	  float_width = child_allocation.width + 2 * border_width;
 	  float_height = child_allocation.height + 2 * border_width;
 	  
@@ -1144,14 +1144,14 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
 
   gdk_window_reparent (item->bin_window, item->float_window, 0, 0);
   gdk_window_set_hints (item->float_window, x, y, 0, 0, 0, 0, GDK_HINT_POS);
+
   gdk_window_show (item->float_window);
+  item->float_window_mapped = TRUE;
 
   allocation.x = allocation.y = 0;
   allocation.width = requisition.width;
   allocation.height = requisition.height;
   gtk_widget_size_allocate (GTK_WIDGET (item), &allocation);
-
-  item->float_window_mapped = TRUE;
 
   gdk_window_hide (GTK_WIDGET (item)->window);
   gnome_dock_item_draw (GTK_WIDGET (item), NULL);

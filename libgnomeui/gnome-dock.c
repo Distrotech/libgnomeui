@@ -1363,8 +1363,7 @@ gnome_dock_add_item (GnomeDock *dock,
           p = g_list_last (*band_ptr);
         }
 
-      if (placement == GNOME_DOCK_TOP
-          || placement == GNOME_DOCK_BOTTOM)
+      if (placement == GNOME_DOCK_TOP || placement == GNOME_DOCK_BOTTOM)
         gnome_dock_band_set_orientation (GNOME_DOCK_BAND (new_band),
                                          GTK_ORIENTATION_HORIZONTAL);
       else
@@ -1376,7 +1375,7 @@ gnome_dock_add_item (GnomeDock *dock,
       gtk_widget_queue_resize (GTK_WIDGET (dock));
     }
 
-  band = GNOME_DOCK_BAND(p->data);
+  band = GNOME_DOCK_BAND (p->data);
   gnome_dock_band_insert (band, GTK_WIDGET(item), offset, position);
 
   connect_drag_signals (dock, GTK_WIDGET(item));
@@ -1406,16 +1405,38 @@ gnome_dock_add_floating_item (GnomeDock *dock,
 
   g_return_if_fail (GNOME_IS_DOCK_ITEM (item));
 
+  gnome_dock_item_set_orientation (item, orientation);
+
   widget = GTK_WIDGET(item);
-
-  gnome_dock_item_set_orientation (GNOME_DOCK_ITEM (widget), orientation);
-
   gtk_widget_ref (widget);
+
+#if 0
   if (widget->parent != NULL)
-    gtk_container_remove (GTK_CONTAINER (widget->parent), widget);
+      gtk_container_remove (GTK_CONTAINER (widget->parent), widget);
+#endif
+
   gtk_widget_set_parent (widget, GTK_WIDGET (dock));
 
-  gnome_dock_item_detach (GNOME_DOCK_ITEM (widget), x, y);
+  if (GTK_WIDGET_VISIBLE (GTK_WIDGET (dock)))
+    {
+      if (GTK_WIDGET_REALIZED (GTK_WIDGET (dock))
+          && !GTK_WIDGET_REALIZED (item))
+        gtk_widget_realize (GTK_WIDGET (item));
+
+      if (GTK_WIDGET_MAPPED (GTK_WIDGET (dock))
+          && ! GTK_WIDGET_MAPPED (item)
+          && GTK_WIDGET_VISIBLE (item)) /* as stated by `widget_system.txt' */
+        gtk_widget_map (GTK_WIDGET (item));
+    }
+
+  if (GTK_WIDGET_VISIBLE (dock))
+    {
+      /* gtk_widget_queue_resize (GTK_WIDGET (dock)); */
+      if (GTK_WIDGET_VISIBLE (item))
+        gtk_widget_queue_resize (GTK_WIDGET (item));
+    }
+
+  gnome_dock_item_detach (item, x, y);
   dock->floating_children = g_list_prepend (dock->floating_children, widget);
 
   connect_drag_signals (dock, widget);
