@@ -142,7 +142,9 @@ static gboolean dock_empty_right              (GnomeDockBand *band,
                                                GList *where,
                                                gint x, gint y);
 
-
+static gboolean check_guint_arg               (GtkObject *object,
+					       const gchar *name,
+					       guint *value_return);
 
 
 static GtkContainerClass *parent_class = NULL;
@@ -243,9 +245,31 @@ gnome_dock_band_size_request (GtkWidget *widget,
 	    gtk_widget_size_request (c->widget, &req);
 
           if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
-            c->max_space_requisition = req.width;
+	    {
+	      gboolean has_preferred_width;
+	      guint preferred_width;
+
+	      has_preferred_width = check_guint_arg (GTK_OBJECT (c->widget),
+						     "preferred_width",
+						     &preferred_width);
+	      if (has_preferred_width)
+		c->max_space_requisition = MAX (preferred_width, req.width);
+	      else
+		c->max_space_requisition = req.width;
+	    }
           else
-            c->max_space_requisition = req.height;
+	    {
+	      gboolean has_preferred_height;
+	      guint preferred_height;
+
+	      has_preferred_height = check_guint_arg (GTK_OBJECT (c->widget),
+						      "preferred_height",
+						      &preferred_height);
+	      if (has_preferred_height)
+		c->max_space_requisition = MAX (preferred_height, req.height);
+	      else
+		c->max_space_requisition = req.height;
+	    }
 
           band->max_space_requisition += c->max_space_requisition;
 
@@ -327,19 +351,20 @@ size_allocate_small (GnomeDockBand *band,
   for (lp = band->children; lp != NULL; lp = lp->next)
     {
       GnomeDockBandChild *child;
-      guint child_requested_space;
 
       child = lp->data;
 
       if (GTK_WIDGET_VISIBLE (child->widget))
         {
+	  guint child_requested_space;
+
 	  child->real_offset = 0;
-	  
+
 	  if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
 	    child_requested_space = child->widget->requisition.width;
 	  else
 	    child_requested_space = child->widget->requisition.height;
-	  
+
 	  if (space < child->max_space_requisition
 	      || (space - child->max_space_requisition
 		  < requested_space - child_requested_space))
@@ -358,14 +383,14 @@ size_allocate_small (GnomeDockBand *band,
   if (lp != NULL)
     {
       GnomeDockBandChild *child;
-      guint child_requested_space, child_space;
+      guint child_space, child_requested_space;
 
       child = lp->data;
 
       if (GTK_WIDGET_VISIBLE (child->widget))
         {
 	  child->real_offset = 0;
-	  
+
 	  if (band->orientation == GTK_ORIENTATION_HORIZONTAL)
 	    child_requested_space = child->widget->requisition.width;
 	  else
@@ -1469,6 +1494,29 @@ dock_empty_right (GnomeDockBand *band,
 
   gtk_widget_queue_resize (floating_child->widget);
 
+  return TRUE;
+}
+
+
+
+/* Helper function.  */
+
+static gboolean
+check_guint_arg (GtkObject *object,
+		 const gchar *name,
+		 guint *value_return)
+{
+  GtkArgInfo *info;
+  gchar *error;
+
+  error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (object), name, &info);
+  if (error != NULL)
+    {
+      g_free (error);
+      return FALSE;
+    }
+
+  gtk_object_get (object, name, value_return, NULL);
   return TRUE;
 }
 

@@ -45,7 +45,9 @@ struct _GnomeDockItemPrivate
 enum {
   ARG_0,
   ARG_SHADOW,
-  ARG_ORIENTATION
+  ARG_ORIENTATION,
+  ARG_PREFERRED_WIDTH,
+  ARG_PREFERRED_HEIGHT
 };
 
 #define DRAG_HANDLE_SIZE 10
@@ -58,6 +60,13 @@ enum {
   ORIENTATION_CHANGED,
   LAST_SIGNAL
 };
+
+
+static gboolean  check_guint_arg       (GtkObject     *object,
+					const gchar   *name,
+					guint         *value_return);
+static guint     get_preferred_width   (GnomeDockItem *item);
+static guint     get_preferred_height  (GnomeDockItem *item);
 
 static void gnome_dock_item_class_init     (GnomeDockItemClass *klass);
 static void gnome_dock_item_init           (GnomeDockItem      *dock_item);
@@ -100,6 +109,76 @@ static gint gnome_dock_item_delete_event   (GtkWidget         *widget,
 
 static GtkBinClass *parent_class;
 static guint        dock_item_signals[LAST_SIGNAL] = { 0 };
+
+
+/* Helper functions.  */
+
+static gboolean
+check_guint_arg (GtkObject *object,
+		 const gchar *name,
+		 guint *value_return)
+{
+  GtkArgInfo *info;
+  gchar *error;
+
+  error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (object), name, &info);
+  if (error != NULL)
+    {
+      g_free (error);
+      return FALSE;
+    }
+
+  gtk_object_get (object, name, value_return, NULL);
+  return TRUE;
+}
+
+static guint
+get_preferred_width (GnomeDockItem *dock_item)
+{
+  GtkWidget *child;
+  guint preferred_width;
+
+  child = GTK_BIN (dock_item)->child;
+
+  if (! check_guint_arg (GTK_OBJECT (child), "preferred_width", &preferred_width))
+    {
+      GtkRequisition child_requisition;
+  
+      gtk_widget_get_child_requisition (child, &child_requisition);
+      preferred_width = child_requisition.width;
+    }
+
+  if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
+    preferred_width += GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
+
+  preferred_width += GTK_CONTAINER (dock_item)->border_width * 2;
+
+  return preferred_width;
+}
+
+static guint
+get_preferred_height (GnomeDockItem *dock_item)
+{
+  GtkWidget *child;
+  guint preferred_height;
+
+  child = GTK_BIN (dock_item)->child;
+
+  if (! check_guint_arg (GTK_OBJECT (child), "preferred_height", &preferred_height))
+    {
+      GtkRequisition child_requisition;
+  
+      gtk_widget_get_child_requisition (child, &child_requisition);
+      preferred_height = child_requisition.height;
+    }
+
+  if (dock_item->orientation == GTK_ORIENTATION_VERTICAL)
+    preferred_height += GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
+
+  preferred_height += GTK_CONTAINER (dock_item)->border_width * 2;
+
+  return preferred_height;
+}
 
 
 guint
@@ -148,6 +227,12 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   gtk_object_add_arg_type ("GnomeDockItem::orientation",
                            GTK_TYPE_ORIENTATION, GTK_ARG_READWRITE,
                            ARG_ORIENTATION);
+  gtk_object_add_arg_type ("GnomeDockItem::preferred_width",
+                           GTK_TYPE_UINT, GTK_ARG_READABLE,
+                           ARG_PREFERRED_WIDTH);
+  gtk_object_add_arg_type ("GnomeDockItem::preferred_height",
+                           GTK_TYPE_UINT, GTK_ARG_READABLE,
+                           ARG_PREFERRED_HEIGHT);
 
   object_class->set_arg = gnome_dock_item_set_arg;
   object_class->get_arg = gnome_dock_item_get_arg;
@@ -283,6 +368,12 @@ gnome_dock_item_get_arg (GtkObject *object,
       break;
     case ARG_ORIENTATION:
       GTK_VALUE_ENUM (*arg) = gnome_dock_item_get_orientation (dock_item);
+      break;
+    case ARG_PREFERRED_HEIGHT:
+      GTK_VALUE_UINT (*arg) = get_preferred_height (dock_item);
+      break;
+    case ARG_PREFERRED_WIDTH:
+      GTK_VALUE_UINT (*arg) = get_preferred_width (dock_item);
       break;
     default:
       arg->type = GTK_TYPE_INVALID;
@@ -916,6 +1007,8 @@ gnome_dock_item_add (GtkContainer *container,
                      GtkWidget    *widget)
 {
   GnomeDockItem *dock_item;
+  GtkArgInfo *info_p;
+  gchar *error;
 
   g_return_if_fail (GNOME_IS_DOCK_ITEM (container));
   g_return_if_fail (GTK_BIN (container)->child == NULL);
@@ -926,8 +1019,33 @@ gnome_dock_item_add (GtkContainer *container,
   gtk_widget_set_parent_window (widget, dock_item->bin_window);
   GTK_CONTAINER_CLASS (parent_class)->add (container, widget);
 
-  if (GTK_IS_TOOLBAR (widget))
-    gtk_toolbar_set_orientation (GTK_TOOLBAR (widget), dock_item->orientation);
+  error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (widget),
+				   "orientation", &info_p);
+  if (error)
+    g_free (error);
+  else
+    gtk_object_set (GTK_OBJECT (widget),
+		    "orientation", dock_item->orientation,
+		    NULL);
+}
+
+static void
+gnome_dock_item_set_floating (GnomeDockItem *item, gboolean val)
+{
+  item->is_floating = val;
+
+  /* If there is a child and it supports the 'is_floating' flag
+   * set that too.
+   */
+  if (item->bin.child != NULL) {
+    GtkArgInfo *info_p;
+    gchar *error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (item->bin.child),
+					    "is_floating", &info_p);
+    if (error)
+      g_free (error);
+    else
+      gtk_object_set (GTK_OBJECT (item->bin.child), "is_floating", val, NULL);
+  }
 }
 
 static void
@@ -943,7 +1061,7 @@ gnome_dock_item_remove (GtkContainer *container,
 
   if (di->is_floating)
     {
-      di->is_floating = FALSE;
+      gnome_dock_item_set_floating (di, FALSE);
       if (GTK_WIDGET_REALIZED (di))
 	{
 	  gdk_window_hide (di->float_window);
@@ -1103,6 +1221,9 @@ gboolean
 gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
                                  GtkOrientation orientation)
 {
+  GtkArgInfo *info_p;
+  gchar *error;
+
   g_return_val_if_fail (dock_item != NULL, FALSE);
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (dock_item), FALSE);
 
@@ -1116,10 +1237,16 @@ gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
 
       dock_item->orientation = orientation;
 
-      if (dock_item->bin.child != NULL
-          && GTK_IS_TOOLBAR (dock_item->bin.child))
-        gtk_toolbar_set_orientation (GTK_TOOLBAR (dock_item->bin.child),
-                                     orientation);
+      if (dock_item->bin.child != NULL) {
+	error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (dock_item->bin.child),
+					 "orientation", &info_p);
+	if (error)
+	  g_free (error);
+	else
+	  gtk_object_set (GTK_OBJECT (dock_item->bin.child),
+			  "orientation", orientation,
+			  NULL);
+      }
       if (GTK_WIDGET_DRAWABLE (dock_item))
         gtk_widget_queue_clear (GTK_WIDGET (dock_item));
       gtk_widget_queue_resize (GTK_WIDGET (dock_item));
@@ -1204,7 +1331,7 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   item->float_x = x;
   item->float_y = y;
 
-  item->is_floating = TRUE;
+  gnome_dock_item_set_floating (item, TRUE);
 
   if (! GTK_WIDGET_REALIZED (item))
     return TRUE;
@@ -1248,7 +1375,7 @@ gnome_dock_item_attach (GnomeDockItem *item, GtkWidget *parent, gint x, gint y)
       gdk_window_show (GTK_WIDGET (item)->window);
 
       item->float_window_mapped = FALSE;
-      item->is_floating = FALSE;
+      gnome_dock_item_set_floating (item, FALSE);
 
       gtk_widget_queue_resize (GTK_WIDGET (item));
 

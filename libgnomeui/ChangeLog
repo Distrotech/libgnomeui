@@ -1,3 +1,40 @@
+Sat Nov 04 22:14:02 2000  George Lebl <jirka@5z.com>
+
+	* merge some patches from stable, here are the entries:
+	2000-10-12  Ettore Perazzoli  <ettore@helixcode.com>
+
+		* gnome-dock-item.c: New args "preferred_width" and
+		  "preferred_height".
+		(gnome_dock_item_class_init): Set them up.
+		(gnome_dock_item_get_arg): Handle them.
+		(check_guint_arg): New helper function.
+		(get_preferred_width): New helper function.
+		(get_preferred_height): New helper function.
+
+		* gnome-dock-band.c (check_guint_arg): New helper function
+		  to get a guint arg only if it exists.
+		(gnome_dock_band_size_request): Calculate the
+		  max_preferred_width by checking the "preferred_width" or
+		  "preferred_height" arg through `check_guint_arg'.
+		(size_allocate_small): Changed the policy a bit so that we
+		  allocate the max_preferred_width if possible.
+
+	2000-09-24  Jody Goldberg <jgoldberg@home.com>
+
+		* gnome-dock-item.c (gnome_dock_item_set_floating) : New
+		  function.  set the is_floating argument of the child
+		  if the child supports it.
+		(gnome_dock_item_detach) : Use it here.
+		(gnome_dock_item_attach) : Use it here.
+		(gnome_dock_item_remove) : Use it here.
+
+	2000-09-23  Jody Goldberg <jgoldberg@home.com>
+
+		* gnome-dock-item.c (gnome_dock_item_set_orientation) : Do
+		  not hard code the use of gtktoolbar. any widget that has
+		  an 'orientation' argument will do.
+		(gnome_dock_item_add) : Ditto.
+
 2000-10-15  Chema Celorio  <chema@celorio.com>
  
  	* gnome-window.c (gnome_window_toplevel_set_title): new file &
