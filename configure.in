@@ -119,7 +119,7 @@ dnl
 
 AC_SUBST(LIBJPEG)
 
-GNOMEUI_MODULES="libgnome-2.0 >= 2.0.0 libgnomecanvas-2.0 >= 2.0.0 libbonoboui-2.0 >= 2.0.0 gconf-2.0 >= 1.1.11 pango >= 1.1.2 gnome-keyring-1"
+GNOMEUI_MODULES="libgnome-2.0 >= 2.0.0 libgnomecanvas-2.0 >= 2.0.0 libbonoboui-2.0 >= 2.0.0 gconf-2.0 >= 1.1.11 pango >= 1.1.2 gnome-vfs-2.0 >= 2.5.3 gnome-keyring-1"
 PKG_CHECK_MODULES(LIBGNOMEUI, $GNOMEUI_MODULES)
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"
 AC_SUBST(LIBGNOMEUI_CFLAGS)
