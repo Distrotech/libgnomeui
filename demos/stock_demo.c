@@ -47,7 +47,7 @@ create_menu(GtkWidget *window)
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Print..."));
+        w = gnome_stock_menu_item(GNOME_STOCK_MENU_PRINT, _("Print..."));
         gtk_widget_show(w);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -78,7 +78,7 @@ create_menu(GtkWidget *window)
 	
         menu = gtk_menu_new();
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Undo"));
+        w = gnome_stock_menu_item(GNOME_STOCK_MENU_UNDO, _("Undo"));
         gtk_widget_show(w);
         gtk_widget_install_accelerator(w, accel, "activate",
                                        'Z', GDK_CONTROL_MASK);
@@ -129,6 +129,11 @@ create_menu(GtkWidget *window)
 	gtk_menu_append(GTK_MENU(menu), w);
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_PROP, _("Properties..."));
+        gtk_widget_show(w);
+        gtk_menu_append(GTK_MENU(menu), w);
+	menu_items[i++] = w;
+
+        w = gnome_stock_menu_item(GNOME_STOCK_MENU_PREF, _("Preferences..."));
         gtk_widget_show(w);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
@@ -292,15 +297,22 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 5, 6, 1, 2);
 
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_NEW));
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_UNDO));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 0, 1, 2, 3);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_OPEN));
+	gtk_table_attach_defaults(table, w, 6, 7, 0, 1);
+	w = gtk_label_new("Undo");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 6, 7, 1, 2);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_SEARCH));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 1, 2, 2, 3);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_PASTE));
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_BACK));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 2, 3, 2, 3);
+	gtk_table_attach_defaults(table, w, 3, 4, 2, 3);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_FORWARD));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 4, 5, 2, 3);
 }
 
 

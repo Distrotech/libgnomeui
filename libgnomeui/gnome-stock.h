@@ -1,16 +1,12 @@
 /* GNOME GUI Library
  * Copyright (C) 1997 the Free Software Foundation
  *
- * Authors: Eckehard Berns
+ * Author: Eckehard Berns
  */
 
 #ifndef __GNOME_STOCK_H__
 #define __GNOME_STOCK_H__
 
-
-/* Use of gdk_imlib can be disabled here.
- */
-#define USE_GDK_IMLIB
 
 
 #include <libgnome/gnome-defs.h>
@@ -19,10 +15,7 @@
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkbutton.h>
 #include <libgnomeui/gnome-pixmap.h>
-
-#ifdef USE_GDK_IMLIB
-#include <gdk_imlib.h>
-#endif
+/* #include <gdk_imlib.h> */
 
 
 /* A short description:
@@ -96,6 +89,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_SEARCH      "Search"
 #define GNOME_STOCK_PIXMAP_BACK        "Back"
 #define GNOME_STOCK_PIXMAP_FORWARD     "Forward"
+#define GNOME_STOCK_PIXMAP_UNDO        "Undo"
 #define GNOME_STOCK_PIXMAP_QUIT        "Quit"
 
 #define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
@@ -123,12 +117,9 @@ typedef enum {
         GNOME_STOCK_PIXMAP_TYPE_DATA,
         GNOME_STOCK_PIXMAP_TYPE_FILE,
         GNOME_STOCK_PIXMAP_TYPE_PATH,
-        GNOME_STOCK_PIXMAP_TYPE_WIDGET
-#ifdef USE_GDK_IMLIB
-	,
+        GNOME_STOCK_PIXMAP_TYPE_WIDGET,
 	GNOME_STOCK_PIXMAP_TYPE_IMLIB,
 	GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED
-#endif /* USE_GDK_IMLIB */
 } GnomeStockPixmapType;
 
 
@@ -139,7 +130,6 @@ struct _GnomeStockPixmapEntryData {
         gchar **xpm_data;
 };
 
-#ifdef USE_GDK_IMLIB
 /* a data entry holds a hardcoded pixmap */
 typedef struct _GnomeStockPixmapEntryImlib   GnomeStockPixmapEntryImlib;
 struct _GnomeStockPixmapEntryImlib {
@@ -158,7 +148,6 @@ struct _GnomeStockPixmapEntryImlibScaled {
 	GdkImlibColor shape;
 	int scaled_width, scaled_height;
 };
-#endif
 
 /* a file entry holds a filename (no path) to the pixamp. this pixmap
    will be seached for using gnome_pixmap_file */
@@ -195,10 +184,8 @@ union _GnomeStockPixmapEntry {
         GnomeStockPixmapEntryFile file;
         GnomeStockPixmapEntryPath path;
         GnomeStockPixmapEntryWidget widget;
-#ifdef USE_GDK_IMLIB
 	GnomeStockPixmapEntryImlib imlib;
 	GnomeStockPixmapEntryImlibScaled imlib_s;
-#endif /* USE_GDK_IMLIB */ 
 };
 
 
@@ -291,6 +278,11 @@ GtkWidget             *gnome_stock_button          (char *type);
 #define GNOME_STOCK_MENU_PREF     "Menu_Preferences"
 #define GNOME_STOCK_MENU_ABOUT    "Menu_About"
 #define GNOME_STOCK_MENU_SCORES   "Menu_Scores"
+#define GNOME_STOCK_MENU_UNDO     "Menu_Undo"
+#define GNOME_STOCK_MENU_PRINT    "Menu_Print"
+#define GNOME_STOCK_MENU_SEARCH   "Menu_Search"
+#define GNOME_STOCK_MENU_BACK     "Menu_Back"
+#define GNOME_STOCK_MENU_FORWARD  "Menu_Forward"
 #define GNOME_STOCK_MENU_BLANK    "Menu_"
 
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT

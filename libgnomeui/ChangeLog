@@ -1,5 +1,12 @@
 1998-03-16  Eckehard Berns  <eb@berns.prima.de>
 
+	* gnome-stock/stock_demo: Added undo stock icon. Added some more
+	stock icons to the list of converted menu icons.
+
+	* gnome-stock-xpm-h: removed -- fully switched to imlib rgbs.
+
+1998-03-16  Eckehard Berns  <eb@berns.prima.de>
+
 	* gnome-stock*.[ch]: Added new icons for yes/no buttons. Added a
 	quick and durty scale_down function to convert the toolbar icons for
 	the menus. Hope it works on all mashines. Removed external reference
