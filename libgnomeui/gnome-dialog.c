@@ -25,9 +25,7 @@
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
 #include "libgnomeui/gnome-stock.h"
-
-/* FIXME: define more globally.  */
-#define GNOME_PAD 10
+#include "libgnomeui/gnome-uidefs.h"
 
 #define GNOME_DIALOG_BUTTON_WIDTH 100
 #define GNOME_DIALOG_BUTTON_HEIGHT 40

@@ -1,3 +1,9 @@
+Wed Apr  8 19:17:18 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.c, gnome-messagebox.c: Use gnome-uidefs.h
+	* libgnomeui.h: #include gnome-uidefs.h
+	* gnome-uidefs.h: New file. 
+
 1998-04-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtk-ted.c (lift_me): I never thought that

@@ -69,6 +69,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-startup.h			\
 	gnome-rootwin.h			\
 	gnome-stock.h			\
+	gnome-uidefs.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\
 	gtk-plug.h			\
