@@ -146,6 +146,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_DOWN        "Down"
 #define GNOME_STOCK_PIXMAP_TOP         "Top"
 #define GNOME_STOCK_PIXMAP_BOTTOM      "Bottom"
+#define GNOME_STOCK_PIXMAP_ATTACH      "Attach"
 #define GNOME_STOCK_PIXMAP_EXEC        "Exec"
 
 #define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
@@ -472,6 +473,7 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_DOWN         "Menu_Down"
 #define GNOME_STOCK_MENU_TOP          "Menu_Top"
 #define GNOME_STOCK_MENU_BOTTOM       "Menu_Bottom"
+#define GNOME_STOCK_MENU_ATTACH       "Menu_Attach"
 #define GNOME_STOCK_MENU_EXEC         "Menu_Exec"
 
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT

@@ -5,7 +5,7 @@ BITMAPS    = calculator-font.png
 pixmap_DATA = $(BITMAPS)
 
 # Please update this when you add more `stock_*.png' files
-stock_images = 							   \
+stock_images = stock_attach.png \
 stock_book_blue.png      stock_book_green.png      stock_book_open.png	   \
 stock_book_red.png       stock_book_yellow.png     stock_bottom.png	   \
 stock_button_apply.png   stock_button_cancel.png   stock_button_close.png  \
