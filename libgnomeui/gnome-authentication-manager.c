@@ -307,7 +307,8 @@ construct_full_password_dialog (const GnomeVFSModuleCallbackFullAuthenticationIn
 					       in_args->flags & GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_NEED_DOMAIN);
 	gnome_password_dialog_set_show_password (dialog, 
 						 in_args->flags & GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_NEED_PASSWORD);
-	gnome_password_dialog_set_show_remember (dialog, gnome_keyring_is_available ());
+	gnome_password_dialog_set_show_remember (dialog, gnome_keyring_is_available () && 
+							 in_args->flags & GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_SAVING_SUPPORTED);
 
 	return dialog;
 }
