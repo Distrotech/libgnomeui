@@ -89,15 +89,15 @@ GtkWidget     *gnome_dock_new               (void);
 guint          gnome_dock_get_type          (void);
                                             
 void           gnome_dock_add_item          (GnomeDock             *dock,
-                                             GtkWidget             *item,
+                                             GnomeDockItem         *item,
                                              GnomeDockPlacement  placement,
                                              guint                  band_num,
-                                             guint                  offset,
                                              gint                   position,
+                                             guint                  offset,
                                              gboolean               in_new_band);
 
 void           gnome_dock_add_floating_item (GnomeDock *dock,
-                                             GtkWidget *widget,
+                                             GnomeDockItem *widget,
                                              gint x, gint y,
                                              GtkOrientation orientation);
           

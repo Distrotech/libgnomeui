@@ -43,8 +43,6 @@
 #include <stdio.h>
 #include <string.h>
 
-/* #define GNOME_ENABLE_DEBUG */
-
 static void            gnome_mdi_class_init     (GnomeMDIClass  *);
 static void            gnome_mdi_init           (GnomeMDI *);
 static void            gnome_mdi_destroy        (GtkObject *);
@@ -310,7 +308,9 @@ static GtkWidget *child_set_label (GnomeMDIChild *child, GtkWidget *label)
 	return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->set_label(child, label, NULL);
 }
 
-/* the app-helper support routines */
+/* the app-helper support routines
+ * copying and freeing of GnomeUIInfo trees and counting items in them.
+ */
 static GnomeUIInfo *copy_ui_info_tree (const GnomeUIInfo source[])
 {
 	GnomeUIInfo *copy;
@@ -647,8 +647,6 @@ static GtkWidget *book_create (GnomeMDI *mdi)
 	
 	gnome_app_set_contents(mdi->active_window, us);
 	
-	/* gtk_widget_realize(us); */
-	
 	gtk_widget_add_events(us, GDK_BUTTON1_MOTION_MASK);
 
 	gtk_signal_connect(GTK_OBJECT(us), "switch_page",
@@ -721,8 +719,9 @@ static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 	
 	if(g_list_length(mdi->windows) == 1) {
 #if 0
-		/* since this is the last window, we only close it and destroy the MDI if
-		   ALL the remaining children can be closed, which we check in advance */
+		/* since this is the last window, we only close it and destroy the MDI
+		   if ALL the remaining children can be closed, which we check in
+		   advance */
 		child_node = mdi->children;
 		while(child_node) {
 			gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child_node->data, &handler_ret);
@@ -740,7 +739,8 @@ static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 		mdi->windows = g_list_remove(mdi->windows, app);
 		gtk_widget_destroy(GTK_WIDGET(app));
 		
-		/* only destroy mdi if there are no external windows registered with it. */
+		/* only destroy mdi if there are no external windows registered
+		   with it. */
 		if(mdi->registered == NULL)
 			gtk_object_destroy(GTK_OBJECT(mdi));
 	}
@@ -780,7 +780,8 @@ static gint app_close_book (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 		mdi->windows = g_list_remove(mdi->windows, app);
 		gtk_widget_destroy(GTK_WIDGET(app));
 		
-		/* only destroy mdi if there are no non-MDI windows registered with it. */
+		/* only destroy mdi if there are no non-MDI windows registered
+		   with it. */
 		if(mdi->registered == NULL)
 			gtk_object_destroy(GTK_OBJECT(mdi));
 	}
@@ -802,7 +803,8 @@ static gint app_close_book (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 			}
 			
 			if(node == NULL) {   /* all the views reside in this GnomeApp */
-				gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child, &handler_ret);
+				gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD],
+								child, &handler_ret);
 				if(handler_ret == FALSE)
 					return TRUE;
 			}
@@ -920,7 +922,7 @@ static void app_destroy (GnomeApp *app)
 	GnomeUIInfo *ui_info;
 	
 	/* free stuff that got allocated for this GnomeApp */
-	
+
 	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_MENUBAR_INFO_KEY);
 	if(ui_info)
 		free_ui_info_tree(ui_info);
@@ -943,16 +945,15 @@ static void app_create (GnomeMDI *mdi)
 	GnomeUIInfo *ui_info;
 	
 	window = gnome_app_new(mdi->appname, mdi->title);
+
+	/* don't do automagical layout saving */
+	GNOME_APP(window)->enable_layout_config = FALSE;
 	
-#if 0
 	/* is this really necessary? */
 	gtk_window_set_wmclass (GTK_WINDOW (window), mdi->appname, mdi->appname);
-#endif
   
 	gtk_window_set_policy(GTK_WINDOW(window), TRUE, TRUE, FALSE);
   
-	/* gtk_widget_realize(window); */
-
 	mdi->windows = g_list_append(mdi->windows, window);
 
 	if( (mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL))
@@ -1065,8 +1066,8 @@ void gnome_mdi_set_active_view (GnomeMDI *mdi, GtkWidget *view)
 	if(mdi->mode == GNOME_MDI_NOTEBOOK)
 		set_page_by_widget(GTK_NOTEBOOK(GNOME_APP(window)->contents), view);
   
-	/* TODO: hmmm... I dont know how to give focus to the window, so that it would
-	   receive keyboard events */
+	/* TODO: hmmm... I dont know how to give focus to the window, so that it
+	   would receive keyboard events */
 	gdk_window_raise(GTK_WIDGET(window)->window);
 }
 
@@ -1376,11 +1377,13 @@ gint gnome_mdi_remove_all (GnomeMDI *mdi, gint force)
 	g_return_val_if_fail(mdi != NULL, FALSE);
 	g_return_val_if_fail(GNOME_IS_MDI(mdi), FALSE);
 
-	/* first check if removal of any child will be prevented by the remove_child signal handler */
+	/* first check if removal of any child will be prevented by the
+	   remove_child signal handler */
 	if(!force) {
 		child_node = mdi->children;
 		while(child_node) {
-			gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child_node->data, &handler_ret);
+			gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD],
+							child_node->data, &handler_ret);
 
 			/* if any of the children may not be removed, none will be */
 			if(handler_ret == FALSE)
@@ -1390,8 +1393,8 @@ gint gnome_mdi_remove_all (GnomeMDI *mdi, gint force)
 		}
 	}
 
-	/* remove all the children with force arg set to true so that remove_child handlers
-	   are not called again */
+	/* remove all the children with force arg set to true so that remove_child
+	   handlers are not called again */
 	while(mdi->children) {
 		child = GNOME_MDI_CHILD(mdi->children->data);
 		mdi->children = g_list_next(mdi->children);
@@ -1451,14 +1454,17 @@ void gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
 	while(view_node) {
 		view = GTK_WIDGET(view_node->data);
 
-		/* for the time being all that update_child() does is update the children's names */
-		if( (mdi->mode == GNOME_MDI_MODAL) || (mdi->mode == GNOME_MDI_TOPLEVEL) ) {
+		/* for the time being all that update_child() does is update the
+		   children's names */
+		if( (mdi->mode == GNOME_MDI_MODAL) ||
+			(mdi->mode == GNOME_MDI_TOPLEVEL) ) {
 			/* in MODAL and TOPLEVEL modes the window title includes the active
 			   child name: "child_name - mdi_title" */
 			gchar *fullname;
       
 			fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);
-			gtk_window_set_title(GTK_WINDOW(gnome_mdi_get_app_from_view(view)), fullname);
+			gtk_window_set_title(GTK_WINDOW(gnome_mdi_get_app_from_view(view)),
+								 fullname);
 			g_free(fullname);
 		}
 		else if(mdi->mode == GNOME_MDI_NOTEBOOK) {
@@ -1518,12 +1524,18 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 	GnomeMDIChild *child;
 	GList *child_node, *view_node;
 	gint windows = (mdi->windows != NULL);
+	guint16 width = 0, height = 0;
 
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 
 	if(mode == GNOME_MDI_DEFAULT_MODE)
 		mode = gnome_preferences_get_mdi_mode();
+
+	if(mdi->active_view) {
+		width = mdi->active_view->allocation.width;
+		height = mdi->active_view->allocation.height;
+	}
 
 	/* remove all views from their parents */
 	child_node = mdi->children;
@@ -1533,14 +1545,16 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 		while(view_node) {
 			view = GTK_WIDGET(view_node->data);
 
-			if( (mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL) )
+			if( (mdi->mode == GNOME_MDI_TOPLEVEL) ||
+				(mdi->mode == GNOME_MDI_MODAL) )
 				gnome_mdi_get_app_from_view(view)->contents = NULL;
 
 			gtk_container_remove(GTK_CONTAINER(view->parent), view);
 
 			view_node = view_node->next;
 
-			/* if we are to change mode to MODAL, destroy all views except the active one */
+			/* if we are to change mode to MODAL, destroy all views except
+			   the active one */
 			if( (mode == GNOME_MDI_MODAL) && (view != mdi->active_view) )
 				gnome_mdi_child_remove_view(child, view);
 		}
@@ -1557,9 +1571,6 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 
 	mdi->mode = mode;
 
-	if(windows)
-		gnome_mdi_open_toplevel(mdi);
-
 	/* re-implant views in proper containers */
 	child_node = mdi->children;
 	while(child_node) {
@@ -1571,11 +1582,12 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 
 				if(mdi->mode == GNOME_MDI_NOTEBOOK)
 					book_create(mdi);
-
-				gtk_widget_show(GTK_WIDGET(mdi->active_window));
 			}
 
 			view = GTK_WIDGET(view_node->data);
+
+			if(width != 0)
+				gtk_widget_set_usize(view, width, height);
 
 			if(mdi->mode == GNOME_MDI_NOTEBOOK)
 				book_add_view(GTK_NOTEBOOK(mdi->active_window->contents), view);
@@ -1592,12 +1604,15 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 				app_set_view(mdi, mdi->active_window, view);
 			}
 
-			gtk_widget_set_usize(view, view->allocation.width, view->allocation.height);
-
 			view_node = view_node->next;
+
+			gtk_widget_show(GTK_WIDGET(mdi->active_window));
 		}
 		child_node = child_node->next;
 	}
+
+	if(windows && !mdi->active_window)
+		gnome_mdi_open_toplevel(mdi);
 }
 
 /**
@@ -1832,7 +1847,8 @@ GtkWidget *gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app)
 
 	if((mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL))
 		return app->contents;
-	else if((mdi->mode == GNOME_MDI_NOTEBOOK) && GTK_NOTEBOOK(app->contents)->cur_page)
+	else if( (mdi->mode == GNOME_MDI_NOTEBOOK) &&
+			 GTK_NOTEBOOK(app->contents)->cur_page)
 		return GTK_NOTEBOOK(app->contents)->cur_page->child;
 	else
 		return NULL;

@@ -337,7 +337,7 @@ gnome_dock_layout_add_to_dock (GnomeDockLayout *layout,
       if (item->placement == GNOME_DOCK_FLOATING)
         {
           gnome_dock_add_floating_item (dock,
-                                        GTK_WIDGET (item->item),
+                                        item->item,
                                         item->position.floating.x,
                                         item->position.floating.y,
                                         item->position.floating.orientation);
@@ -353,11 +353,11 @@ gnome_dock_layout_add_to_dock (GnomeDockLayout *layout,
             need_new = FALSE;
 
           gnome_dock_add_item (dock,
-                               GTK_WIDGET (item->item),
+                               item->item,
                                item->placement,
                                0,
-                               item->position.docked.offset,
                                0,
+                               item->position.docked.offset,
                                need_new);
 
           last_band_num = item->position.docked.band_num;

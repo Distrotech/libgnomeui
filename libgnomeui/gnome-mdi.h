@@ -157,28 +157,32 @@ GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
 GnomeApp      *gnome_mdi_get_active_window  (GnomeMDI *);
 
 /*
- * the following two functions are here to make life easier if an application opens windows
- * that should "keep the app alive" even if there are no MDI windows open. any such windows
- * should be registered with the MDI: as long as there is a window registered, the MDI will
- * not destroy itself (even if the last of its windows is closed). on the other hand, closing
- * the last MDI window when no other windows are registered with the MDI will result in MDI
- * being gtk_object_destroy()ed.
+ * the following two functions are here to make life easier if an application
+ * creates objects (like opening a window) that should "keep the application
+ * alive" even if there are no MDI windows open. any such windows should be
+ * registered with the MDI: as long as there is a window registered, the MDI
+ * will not destroy itself (even if the last of its windows is closed). on the
+ * other hand, closing the last MDI window when no objects are registered
+ * with the MDI will result in MDI being gtk_object_destroy()ed.
  */
 void          gnome_mdi_register            (GnomeMDI *, GtkObject *);
 void          gnome_mdi_unregister          (GnomeMDI *, GtkObject *);
 
 /*
  * convenience functions for retrieveing GnomeMDIChild and GnomeApp
- * objects associated with a particular view.
+ * objects associated with a particular view and for retrieveing the
+ * visible view of a certain GnomeApp.
  */
 GnomeApp      *gnome_mdi_get_app_from_view    (GtkWidget *);
 GnomeMDIChild *gnome_mdi_get_child_from_view  (GtkWidget *);
 GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *, GnomeApp *);
 
-/* the following functions are used to obtain pointers to the GnomeUIInfo structures for a
- * specified MDI GnomeApp widget. this might be useful for enabling/disabling menu items
- * (via ui_info[i]->widget) when certain events happen. these GnomeUIInfo structures are
- * exact copies of the template GnomeUIInfo trees.
+/* the following functions are used to obtain pointers to the GnomeUIInfo
+ * structures for a specified MDI GnomeApp widget. this might be useful for
+ * enabling/disabling menu items (via ui_info[i]->widget) when certain events
+ * happen or selecting the default menuitem in a radio item group. these
+ * GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees
+ * and are non-NULL only if templates are used for menu/toolbar creation.
  */
 GnomeUIInfo   *gnome_mdi_get_menubar_info     (GnomeApp *);
 GnomeUIInfo   *gnome_mdi_get_toolbar_info     (GnomeApp *);

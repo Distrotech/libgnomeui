@@ -63,7 +63,9 @@ struct _GnomeMDIGenericChildClass {
 };
 
 guint                gnome_mdi_generic_child_get_type (void);
+
 GnomeMDIGenericChild *gnome_mdi_generic_child_new     (gchar *name);
+
 void gnome_mdi_generic_child_set_view_creator     (GnomeMDIGenericChild *child,
 												   GnomeMDIChildViewCreator func,
                                                    gpointer data);

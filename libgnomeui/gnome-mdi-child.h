@@ -40,7 +40,6 @@ typedef struct _GnomeMDIChild       GnomeMDIChild;
 typedef struct _GnomeMDIChildClass  GnomeMDIChildClass;
 
 /* GnomeMDIChild
- *
  * is an abstract class. In order to use it, you have to either derive a
  * new class from it and set the proper virtual functions in its parent
  * GnomeMDIChildClass structure or use the GnomeMDIGenericChild class
@@ -66,9 +65,11 @@ typedef gchar     *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *, gpointer);
 typedef GtkWidget *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *, gpointer);
 
 /* note that if you override the set_label virtual function, it should return
- * a new widget if its GtkWidget * parameter is NULL and modify and return the old
- * widget otherwise (see gnome-mdi-child.c/gnome_mdi_child_set_book_label()).
+ * a new widget if its GtkWidget* parameter is NULL and modify and return the
+ * old widget otherwise.
+ * (see gnome-mdi-child.c/gnome_mdi_child_set_book_label() for an example).
  */
+
 struct _GnomeMDIChildClass
 {
 	GtkObjectClass parent_class;

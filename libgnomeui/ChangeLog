@@ -1,3 +1,15 @@
+1998-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app.c (gnome_app_set_*bar): for setting things after the
+	layout is gone, use insertion directly into dock.
+	* gnome-dock.[ch]: fixed functions to have GnomeDockItem* instead
+	of GtkWidget* as a parameter (like layout functions).
+	(gnome_dock_add_item): put offset behind position.
+	* gnome-mdi-session.c: save layouts of the windows, but don't
+	restore them as we have no method to properly do that yet.
+	* gnome-mdi.[ch], gnome-mdi-child.h, gnome-mdi-generic-child.h,
+	gnome-mdi-session.h: some bug fixes and some cosmetics.
+
 1998-12-14  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-app.c (gnome_app_set_toolbar): Honor preferences by

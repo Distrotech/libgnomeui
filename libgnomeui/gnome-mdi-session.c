@@ -2,6 +2,8 @@
 
 #include <config.h>
 #include "libgnome/libgnomeP.h"
+
+#include "gnome-dock-layout.h"
 #include "gnome-mdi-session.h"
 
 
@@ -137,6 +139,12 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 }
 
 static void
+remove_items (GtkWidget *w, gpointer data)
+{
+	gtk_container_remove(GTK_CONTAINER(data), w);
+}
+
+static void
 restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 		GHashTable *child_hash, GHashTable *child_windows,
 		GHashTable *child_views, GHashTable *view_hash,
@@ -160,6 +168,26 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 				      child_views, view_hash, window_hash,
 				      window, (glong) child_list->pdata [j],
 				      &init, x, y, w, h);
+
+	g_snprintf (key, sizeof(key), "%s/mdi_window_layout_%lx", section, window);
+	string = gnome_config_get_string (key);
+	if (!string) return;
+
+#if 0
+	{
+		GnomeApp *app = mdi->active_window;
+		GnomeDockLayout *layout;
+
+		printf("app->layout == %08lx\n", app->layout);
+
+		/* this is a nasty hack before dock-layout gets a bit better */
+		layout = gnome_dock_get_layout(GNOME_DOCK(app->dock));
+		gnome_dock_layout_parse_string(mdi->active_window->layout, string);
+		gtk_container_forall(GTK_CONTAINER(app->dock), remove_items, app->dock);
+		gnome_dock_add_from_layout(GNOME_DOCK(app->dock), layout);
+		gtk_object_unref(GTK_OBJECT(layout));
+	}
+#endif
 }
 
 static void
@@ -203,7 +231,7 @@ gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
 	guint i;
 	gint mode;
 
-	g_snprintf (key, sizeof(key), "%s/mdi_session=-1", section);
+	g_snprintf (key, sizeof(key), "%s/mdi_mode=-1", section);
 	mode = gnome_config_get_int (key);
 	if (gnome_config_get_int (key) == -1)
 		return FALSE;
@@ -422,7 +450,9 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 	window = mdi->windows;
 	while (window) {
 		GnomeApp *app;
+		GnomeDockLayout *layout;
 		GtkWidget *view;
+		gchar *string;
 
 		app = GNOME_APP (window->data);
 
@@ -444,6 +474,15 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 		g_snprintf (value, sizeof(value), "%lx", (long) view);
 
 		gnome_config_set_string (key, value);
+
+		g_snprintf(key, sizeof(key), "%s/mdi_window_layout_%lx",
+			   section, (long) app);
+
+		layout = gnome_dock_get_layout (GNOME_DOCK (app->dock));
+		string = gnome_dock_layout_create_string (layout);
+		gtk_object_unref (GTK_OBJECT (layout));
+		gnome_config_set_string(key, string);
+		g_free(string);
 
 		window = g_list_next (window);
 	}

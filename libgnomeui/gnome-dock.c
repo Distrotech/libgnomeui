@@ -544,7 +544,7 @@ gnome_dock_add (GtkContainer *container, GtkWidget *child)
   GnomeDock *dock;
 
   dock = GNOME_DOCK (container);
-  gnome_dock_add_item (dock, child, GNOME_DOCK_TOP, 0, 0, 0, TRUE);
+  gnome_dock_add_item (dock, GNOME_DOCK_ITEM(child), GNOME_DOCK_TOP, 0, 0, 0, TRUE);
 }
 
 static gboolean
@@ -1231,11 +1231,11 @@ gnome_dock_new (void)
 
 void
 gnome_dock_add_item (GnomeDock *dock,
-                     GtkWidget *item,
+                     GnomeDockItem *item,
                      GnomeDockPlacement placement,
                      guint band_num,
-                     guint offset,
                      gint position,
+                     guint offset,
                      gboolean in_new_band)
 {
   GnomeDockChild *c;
@@ -1307,18 +1307,22 @@ gnome_dock_add_item (GnomeDock *dock,
     }
 
   c = (GnomeDockChild *) p->data;
-  gnome_dock_band_insert (c->band, item, offset, position);
+  gnome_dock_band_insert (c->band, GTK_WIDGET(item), offset, position);
 
-  connect_drag_signals (dock, item);
+  connect_drag_signals (dock, GTK_WIDGET(item));
 }
 
 void
 gnome_dock_add_floating_item (GnomeDock *dock,
-                              GtkWidget *widget,
+                              GnomeDockItem *item,
                               gint x, gint y,
                               GtkOrientation orientation)
 {
-  g_return_if_fail (GNOME_IS_DOCK_ITEM (widget));
+  GtkWidget *widget;
+
+  g_return_if_fail (GNOME_IS_DOCK_ITEM (item));
+
+  widget = GTK_WIDGET(item);
 
   gnome_dock_item_set_orientation (GNOME_DOCK_ITEM (widget), orientation);
 
