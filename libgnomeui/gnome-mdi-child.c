@@ -173,9 +173,8 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name) {
   }
 }
 
-void gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl, gboolean cb_with_data) {
+void gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl) {
   mdi_child->menu_template = menu_tmpl;
-  mdi_child->menu_cb_with_data = cb_with_data;
 }
 
 

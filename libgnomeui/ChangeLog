@@ -78,24 +78,10 @@ Tue Sep 15 11:22:24 1998  Owen Taylor  <otaylor@redhat.com>
 	already have SubstructureRedirect when another app
 	gets the XID.
 
-1998-09-15  Martin Baulig  <martin@home-of-linux.org>
-
-	* gnome-mdi.c (gnome_mdi_set_menu_template): Added gboolean argument
-	to this function specifying whether to use the _with_data() functions
- 	when creating the menu/toolbar.
-	(gnome_mdi_set_toolbar_template): Likewise.
-	* gnome-mdi-child.c (gnome_mdi_child_set_menu_template): Likewise.
-
 1998-09-14  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (gnome_mdi_remove_view): fixed view removal to
 	update the menubar correctly.
-
-1998-09-12  Martin Baulig  <martin@home-of-linux.org>
-
-	* gnome-mdi.c: Use the gnome_app_*_menus() calls instead of their
-	gnome_app_*_menus_with_data() equivalents to allow users to pass
-	their own data.
 
 Sat Sep 12 13:50:29 1998 Paul Sheer <psheer@obsidian.co.za>
 
