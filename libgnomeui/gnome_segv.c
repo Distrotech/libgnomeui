@@ -2,7 +2,9 @@
 
 /* needed for sigaction and friends under 'gcc -ansi -pedantic' on 
  * GNU/Linux */
-#define _POSIX_SOURCE 1
+#ifndef _POSIX_SOURCE
+#  define _POSIX_SOURCE 1
+#endif
 #include <sys/types.h>
 
 #include <unistd.h>

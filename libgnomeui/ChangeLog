@@ -1,3 +1,9 @@
+1999-01-02  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-calculator.c, gnome-canvas-util.c,
+	  gnome_segv.c, gtkdial.c:
+	Include _xxx_SOURCE define for 'gcc -ansi -pedantic'.
+
 1999-01-01  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-session.c (gnome_mdi_save_state): fixed a bug

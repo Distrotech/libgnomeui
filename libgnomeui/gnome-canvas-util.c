@@ -11,7 +11,9 @@
 #include <config.h>
 
 /* needed for M_PI_2 under 'gcc -ansi -predantic' on GNU/Linux */
-#define _BSD_SOURCE 1
+#ifndef _BSD_SOURCE
+#  define _BSD_SOURCE 1
+#endif
 #include <sys/types.h>
 
 #include <glib.h>
