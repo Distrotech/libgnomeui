@@ -667,7 +667,6 @@ static void book_drop (GtkNotebook        *book,
 					   guint               info,
 					   guint               time,
 					   GnomeMDI           *mdi) {
-{
 	GtkWidget *view;
 	GtkNotebook *old_book;
 	GnomeApp *app;
