@@ -28,8 +28,21 @@
 #include "gnome-canvas-pixbuf.h"
 #include "gnome-druid.h"
 
-static void gnome_druid_page_start_init 	 (GnomeDruidPageStart		 *druid_page_start);
-static void gnome_druid_page_start_class_init	 (GnomeDruidPageStartClass	 *klass);
+struct _GnomeDruidPageStartPrivate
+{
+	GtkWidget *canvas;
+	GnomeCanvasItem *background_item;
+	GnomeCanvasItem *textbox_item;
+	GnomeCanvasItem *text_item;
+	GnomeCanvasItem *logo_item;
+	GnomeCanvasItem *logoframe_item;
+	GnomeCanvasItem *watermark_item;
+	GnomeCanvasItem *title_item;
+};
+
+static void gnome_druid_page_start_init 	 (GnomeDruidPageStart		  *druid_page_start);
+static void gnome_druid_page_start_class_init	 (GnomeDruidPageStartClass	  *klass);
+static void gnome_druid_page_start_destroy 	 (GtkObject                       *object);
 static void gnome_druid_page_start_construct     (GnomeDruidPageStart             *druid_page_start);
 static void gnome_druid_page_start_configure_size(GnomeDruidPageStart             *druid_page_start,
 						  gint                             width,
@@ -80,6 +93,7 @@ gnome_druid_page_start_class_init (GnomeDruidPageStartClass *klass)
 	GtkWidgetClass *widget_class;
 
 	object_class = (GtkObjectClass*) klass;
+	object_class->destroy = gnome_druid_page_start_destroy;
 	widget_class = (GtkWidgetClass*) klass;
 	widget_class->size_allocate = gnome_druid_page_start_size_allocate;
 	parent_class = gtk_type_class (gnome_druid_page_get_type ());
@@ -88,7 +102,7 @@ gnome_druid_page_start_class_init (GnomeDruidPageStartClass *klass)
 static void
 gnome_druid_page_start_init (GnomeDruidPageStart *druid_page_start)
 {
-
+	druid_pages_start->_priv = g_new0(GnomeDruidPageStartPrivate, 1);
 
 	/* initialize the color values */
 	druid_page_start->background_color.red = 6400; /* midnight blue */
@@ -109,12 +123,24 @@ gnome_druid_page_start_init (GnomeDruidPageStart *druid_page_start)
 
 	/* Set up the canvas */
 	gtk_container_set_border_width (GTK_CONTAINER (druid_page_start), 0);
-	druid_page_start->canvas = gnome_canvas_new ();
-	gtk_widget_set_usize (druid_page_start->canvas, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
-	gtk_widget_show (druid_page_start->canvas);
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (druid_page_start->canvas), 0.0, 0.0, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
-	gtk_container_add (GTK_CONTAINER (druid_page_start), druid_page_start->canvas);
+	druid_page_start->_priv->canvas = gnome_canvas_new ();
+	gtk_widget_set_usize (druid_page_start->_priv->canvas, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
+	gtk_widget_show (druid_page_start->_priv->canvas);
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (druid_page_start->_priv->canvas), 0.0, 0.0, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
+	gtk_container_add (GTK_CONTAINER (druid_page_start), druid_page_start->_priv->canvas);
 
+}
+
+static void
+gnome_druid_page_start_destroy(GtkObject *object)
+{
+	GnomeDruidPageStart *druid_page_start = GNOME_DRUID_PAGE_START(object);
+
+	g_free(druid_page_start->_priv);
+	druid_page_start->_priv = NULL;
+
+	if(GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }
 
 static void
@@ -134,41 +160,41 @@ gnome_druid_page_start_configure_size (GnomeDruidPageStart *druid_page_start, gi
 			watermark_height = 1.0;
 	}
 
-	gnome_canvas_item_set (druid_page_start->background_item,
+	gnome_canvas_item_set (druid_page_start->_priv->background_item,
 			       "x1", 0.0,
 			       "y1", 0.0,
 			       "x2", (gfloat) width,
 			       "y2", (gfloat) height,
 			       "width_units", 1.0, NULL);
-	gnome_canvas_item_set (druid_page_start->textbox_item,
+	gnome_canvas_item_set (druid_page_start->_priv->textbox_item,
 			       "x1", watermark_width,
 			       "y1", LOGO_WIDTH + GNOME_PAD * 2.0,
 			       "x2", (gfloat) width,
 			       "y2", (gfloat) height,
 			       "width_units", 1.0, NULL);
-	gnome_canvas_item_set (druid_page_start->logoframe_item,
+	gnome_canvas_item_set (druid_page_start->_priv->logoframe_item,
 			       "x1", (gfloat) width - LOGO_WIDTH -GNOME_PAD,
 			       "y1", (gfloat) GNOME_PAD,
 			       "x2", (gfloat) width - GNOME_PAD,
 			       "y2", (gfloat) GNOME_PAD + LOGO_WIDTH,
 			       "width_units", 1.0, NULL);
-	gnome_canvas_item_set (druid_page_start->logo_item,
+	gnome_canvas_item_set (druid_page_start->_priv->logo_item,
 			       "x", (gfloat) width - GNOME_PAD - LOGO_WIDTH,
 			       "y", (gfloat) GNOME_PAD,
 			       "width", (gfloat) LOGO_WIDTH,
 			       "height", (gfloat) LOGO_WIDTH, NULL);
-	gnome_canvas_item_set (druid_page_start->watermark_item,
+	gnome_canvas_item_set (druid_page_start->_priv->watermark_item,
 			       "x", 0.0,
 			       "y", watermark_ypos,
 			       "width", watermark_width,
 			       "height", watermark_height,
 			       NULL);
-	gnome_canvas_item_set (druid_page_start->title_item,
+	gnome_canvas_item_set (druid_page_start->_priv->title_item,
 			       "x", 15.0,
 			       "y", (gfloat) GNOME_PAD + LOGO_WIDTH / 2.0,
 			       "anchor", GTK_ANCHOR_WEST,
 			       NULL);
-	gnome_canvas_item_set (druid_page_start->text_item,
+	gnome_canvas_item_set (druid_page_start->_priv->text_item,
 			       "x", ((width - watermark_width) * 0.5) + watermark_width,
 			       "y", LOGO_WIDTH + GNOME_PAD * 2.0 + (height - (LOGO_WIDTH + GNOME_PAD * 2.0))/ 2.0,
 			       "anchor", GTK_ANCHOR_CENTER,
@@ -182,64 +208,64 @@ gnome_druid_page_start_construct (GnomeDruidPageStart *druid_page_start)
 
 	/* set up the rest of the page */
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->background_color);
-	druid_page_start->background_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
+	druid_page_start->_priv->background_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->_priv->canvas)),
 				       gnome_canvas_rect_get_type (),
 				       "fill_color_rgba", fill_color,
 				       NULL);
 
 	outline_color = fill_color;
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->textbox_color);
-	druid_page_start->textbox_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
+	druid_page_start->_priv->textbox_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->_priv->canvas)),
 				       gnome_canvas_rect_get_type (),
 				       "fill_color_rgba", fill_color,
 				       "outline_color_rgba", outline_color,
 				        NULL);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->logo_background_color);
-	druid_page_start->logoframe_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
+	druid_page_start->_priv->logoframe_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->_priv->canvas)),
 				       gnome_canvas_rect_get_type (),
 				       "fill_color_rgba", fill_color,
 				       NULL);
 
-	druid_page_start->logo_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
+	druid_page_start->_priv->logo_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->_priv->canvas)),
 				       gnome_canvas_pixbuf_get_type (),
 				       "x_set", TRUE, "y_set", TRUE,
 				       NULL);
 
 	if (druid_page_start->logo_image != NULL)
-		gnome_canvas_item_set (druid_page_start->logo_item,
+		gnome_canvas_item_set (druid_page_start->_priv->logo_item,
 				       "pixbuf", druid_page_start->logo_image, NULL);
 
-	druid_page_start->watermark_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
+	druid_page_start->_priv->watermark_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->_priv->canvas)),
 				       gnome_canvas_pixbuf_get_type (),
 				       "x_set", TRUE, "y_set", TRUE,
 				       NULL);
 
 	if (druid_page_start->watermark_image != NULL)
-		gnome_canvas_item_set (druid_page_start->watermark_item,
+		gnome_canvas_item_set (druid_page_start->_priv->watermark_item,
 				       "pixbuf", druid_page_start->watermark_image, NULL);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->title_color);
-	druid_page_start->title_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
+	druid_page_start->_priv->title_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->_priv->canvas)),
 				       gnome_canvas_text_get_type (),
 				       "text", druid_page_start->title,
 				       "fill_color_rgba", fill_color,
-				       "font", "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-1",
+				       "font", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"),
 				       NULL);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->text_color);
-	druid_page_start->text_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->canvas)),
+	druid_page_start->_priv->text_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_start->_priv->canvas)),
 				       gnome_canvas_text_get_type (),
 				       "text", druid_page_start->text,
 				       "justification", GTK_JUSTIFY_LEFT,
-				       "font", "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
+				       "font", _("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*"),
 				       "fill_color_rgba", fill_color,
 				       NULL);
 
@@ -265,7 +291,7 @@ gnome_druid_page_start_size_allocate   (GtkWidget               *widget,
 					GtkAllocation           *allocation)
 {
 	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (GNOME_DRUID_PAGE_START (widget)->canvas),
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (GNOME_DRUID_PAGE_START (widget)->_priv->canvas),
 					0.0, 0.0,
 					allocation->width,
 					allocation->height);
@@ -276,20 +302,20 @@ gnome_druid_page_start_size_allocate   (GtkWidget               *widget,
 
 #if 0
 /* Fragment left behind by CVS.  Don't get it. */
-	gnome_canvas_item_set (druid_page_start->background_item,
+	gnome_canvas_item_set (druid_page_start->_priv->background_item,
 			       "fill_color_gdk", &(druid_page_start->background_color),
 			       NULL);
-	gnome_canvas_item_set (druid_page_start->textbox_item,
+	gnome_canvas_item_set (druid_page_start->_priv->textbox_item,
 			       "fill_color_gdk", &(druid_page_start->textbox_color),
 			       "outline_color_gdk", &(druid_page_start->background_color),
 			       NULL);
-	gnome_canvas_item_set (druid_page_start->logoframe_item,
+	gnome_canvas_item_set (druid_page_start->_priv->logoframe_item,
 			       "fill_color_gdk", &druid_page_start->logo_background_color,
 			       NULL);
-	gnome_canvas_item_set (druid_page_start->title_item,
+	gnome_canvas_item_set (druid_page_start->_priv->title_item,
 			       "fill_color_gdk", &druid_page_start->title_color,
 			       NULL);
-	gnome_canvas_item_set (druid_page_start->text_item,
+	gnome_canvas_item_set (druid_page_start->_priv->text_item,
 			       "fill_color_gdk", &druid_page_start->text_color,
 			       NULL);
 	GTK_WIDGET_CLASS (parent_class)->realize (widget);
@@ -363,10 +389,10 @@ gnome_druid_page_start_set_bg_color      (GnomeDruidPageStart *druid_page_start,
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->background_color);
 
-	gnome_canvas_item_set (druid_page_start->textbox_item,
+	gnome_canvas_item_set (druid_page_start->_priv->textbox_item,
 			       "outline_color_rgba", fill_color,
 			       NULL);
-	gnome_canvas_item_set (druid_page_start->background_item,
+	gnome_canvas_item_set (druid_page_start->_priv->background_item,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
@@ -385,7 +411,7 @@ gnome_druid_page_start_set_textbox_color (GnomeDruidPageStart *druid_page_start,
 	druid_page_start->textbox_color.blue = color->blue;
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->textbox_color);
-	gnome_canvas_item_set (druid_page_start->textbox_item,
+	gnome_canvas_item_set (druid_page_start->_priv->textbox_item,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
@@ -404,7 +430,7 @@ gnome_druid_page_start_set_logo_bg_color (GnomeDruidPageStart *druid_page_start,
 	druid_page_start->logo_background_color.blue = color->blue;
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->logo_background_color);
-	gnome_canvas_item_set (druid_page_start->logoframe_item,
+	gnome_canvas_item_set (druid_page_start->_priv->logoframe_item,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
@@ -422,7 +448,7 @@ gnome_druid_page_start_set_title_color   (GnomeDruidPageStart *druid_page_start,
 	druid_page_start->title_color.blue = color->blue;
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->title_color);
-	gnome_canvas_item_set (druid_page_start->title_item,
+	gnome_canvas_item_set (druid_page_start->_priv->title_item,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
@@ -440,7 +466,7 @@ gnome_druid_page_start_set_text_color    (GnomeDruidPageStart *druid_page_start,
 	druid_page_start->text_color.blue = color->blue;
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_start->text_color);
-	gnome_canvas_item_set (druid_page_start->text_item,
+	gnome_canvas_item_set (druid_page_start->_priv->text_item,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 }
@@ -453,7 +479,7 @@ gnome_druid_page_start_set_text          (GnomeDruidPageStart *druid_page_start,
 
 	g_free (druid_page_start->text);
 	druid_page_start->text = g_strdup (text);
-	gnome_canvas_item_set (druid_page_start->text_item,
+	gnome_canvas_item_set (druid_page_start->_priv->text_item,
 			       "text", druid_page_start->text,
 			       NULL);
 }
@@ -466,7 +492,7 @@ gnome_druid_page_start_set_title         (GnomeDruidPageStart *druid_page_start,
 
 	g_free (druid_page_start->title);
 	druid_page_start->title = g_strdup (title);
-	gnome_canvas_item_set (druid_page_start->title_item,
+	gnome_canvas_item_set (druid_page_start->_priv->title_item,
 			       "text", druid_page_start->title,
 			       NULL);
 }
@@ -482,7 +508,7 @@ gnome_druid_page_start_set_logo          (GnomeDruidPageStart *druid_page_start,
 
 	druid_page_start->logo_image = logo_image;
 	gdk_pixbuf_ref (logo_image);
-	gnome_canvas_item_set (druid_page_start->logo_item,
+	gnome_canvas_item_set (druid_page_start->_priv->logo_item,
 			       "pixbuf", druid_page_start->logo_image, NULL);
 }
 void
@@ -497,6 +523,6 @@ gnome_druid_page_start_set_watermark     (GnomeDruidPageStart *druid_page_start,
 
 	druid_page_start->watermark_image = watermark;
 	gdk_pixbuf_ref (watermark);
-	gnome_canvas_item_set (druid_page_start->watermark_item,
+	gnome_canvas_item_set (druid_page_start->_priv->watermark_item,
 			       "pixbuf", druid_page_start->watermark_image, NULL);
 }

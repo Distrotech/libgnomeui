@@ -37,8 +37,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DRUID_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID))
 
 
-typedef struct _GnomeDruid       GnomeDruid;
-typedef struct _GnomeDruidClass  GnomeDruidClass;
+typedef struct _GnomeDruid        GnomeDruid;
+typedef struct _GnomeDruidPrivate GnomeDruidPrivate;
+typedef struct _GnomeDruidClass   GnomeDruidClass;
 
 struct _GnomeDruid
 {
@@ -49,10 +50,7 @@ struct _GnomeDruid
 	GtkWidget *finish;
 
 	/*< private >*/
-	GnomeDruidPage *current;
-	GList *children;
-
-	gboolean show_finish : 1; /* if TRUE, then we are showing the finish button instead of the next button */
+	GnomeDruidPrivate *_priv;
 };
 struct _GnomeDruidClass
 {

@@ -1,3 +1,15 @@
+Tue Jun 27 00:04:35 2000  George Lebl <jirka@5z.com>
+
+	* gnome-druid*.[ch]: Added private pointers to everything and moved
+	  the privates into it
+
+	* gnome-druid-page*.c: Mark the fonts translatable and add -*-*
+	  instead of iso8859-1 encoding
+
+	* gnome-font-picker.c: Mark the default font translatable and add
+	  -*-* instead of iso8859-1 encoding and also mark the default text
+	  for translation
+
 Mon Jun 26 13:31:01 2000  George Lebl <jirka@5z.com>
 
 	* gnome-animator.[ch]:  Remove dependence on knowing internals of

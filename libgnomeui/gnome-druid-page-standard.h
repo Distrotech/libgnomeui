@@ -36,8 +36,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DRUID_PAGE_STANDARD_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE_STANDARD))
 
 
-typedef struct _GnomeDruidPageStandard       GnomeDruidPageStandard;
-typedef struct _GnomeDruidPageStandardClass  GnomeDruidPageStandardClass;
+typedef struct _GnomeDruidPageStandard        GnomeDruidPageStandard;
+typedef struct _GnomeDruidPageStandardPrivate GnomeDruidPageStandardPrivate;
+typedef struct _GnomeDruidPageStandardClass   GnomeDruidPageStandardClass;
 
 struct _GnomeDruidPageStandard
 {
@@ -47,21 +48,13 @@ struct _GnomeDruidPageStandard
 	GdkPixbuf *logo_image;
 
 	gchar *title;
-	
-	/*< private >*/
-	GtkWidget *canvas;
-	GtkWidget *side_bar;
-	GnomeCanvasItem *logoframe_item;
-	GnomeCanvasItem *logo_item;
-	GnomeCanvasItem *title_item;
-	GnomeCanvasItem *background_item;
-	GtkWidget *bottom_bar;
-	GtkWidget *right_bar;
 
-	/*< public >*/
 	GdkColor background_color;
 	GdkColor logo_background_color;
 	GdkColor title_color;
+	
+	/*< private >*/
+	GnomeDruidPageStandardPrivate *_priv;
 };
 struct _GnomeDruidPageStandardClass
 {

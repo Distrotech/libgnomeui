@@ -27,6 +27,14 @@
 #include "gnome-uidefs.h"
 #include <libgnome/gnome-i18nP.h>
 
+struct _GnomeDruidPrivate
+{
+	GnomeDruidPage *current;
+	GList *children;
+
+	gboolean show_finish : 1; /* if TRUE, then we are showing the finish button instead of the next button */
+};
+
 enum {
 	CANCEL,
 	LAST_SIGNAL
@@ -129,6 +137,8 @@ gnome_druid_init (GnomeDruid *druid)
 {
 	GtkWidget *pixmap;
 
+	druid->_priv = g_new0(GnomeDruidPrivate, 1);
+
 	/* set up the buttons */
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (druid), GTK_NO_WINDOW);
 	pixmap =  gnome_stock_new_with_icon(GNOME_STOCK_BUTTON_PREV);
@@ -152,9 +162,9 @@ gnome_druid_init (GnomeDruid *druid)
 	gtk_widget_show (druid->finish);
 
 	/* other flags */
-	druid->current = NULL;
-	druid->children = NULL;
-	druid->show_finish = FALSE;
+	druid->_priv->current = NULL;
+	druid->_priv->children = NULL;
+	druid->_priv->show_finish = FALSE;
 	gtk_signal_connect (GTK_OBJECT (druid->back),
 			    "clicked",
 			    gnome_druid_back_callback,
@@ -184,15 +194,23 @@ gnome_druid_destroy (GtkObject *object)
 	g_return_if_fail (GNOME_IS_DRUID (object));
 
 	druid = GNOME_DRUID (object);
-        GTK_OBJECT_CLASS(parent_class)->destroy(object);
+
+        if(GTK_OBJECT_CLASS(parent_class)->destroy)
+        	GTK_OBJECT_CLASS(parent_class)->destroy(object);
 
 	gtk_widget_destroy (druid->back);
+	druid->back = NULL;
 	gtk_widget_destroy (druid->next);
+	druid->next = NULL;
 	gtk_widget_destroy (druid->cancel);
+	druid->cancel = NULL;
 	gtk_widget_destroy (druid->finish);
-	g_list_free (druid->children);
-        druid->children = NULL;
+	druid->finish = NULL;
+	g_list_free (druid->_priv->children);
+        druid->_priv->children = NULL;
 
+	g_free(druid->_priv);
+	druid->_priv = NULL;
 }
 
 static void
@@ -212,13 +230,13 @@ gnome_druid_size_request (GtkWidget *widget,
 	temp_height = temp_width = 0;
 
 	/* We find the maximum size of all children widgets */
-	for (list = druid->children; list; list = list->next) {
+	for (list = druid->_priv->children; list; list = list->next) {
 		child = GNOME_DRUID_PAGE (list->data);
 		if (GTK_WIDGET_VISIBLE (child)) {
 			gtk_widget_size_request (GTK_WIDGET (child), &child_requisition);
 			temp_width = MAX (temp_width, child_requisition.width);
 			temp_height = MAX (temp_height, child_requisition.height);
-			if (GTK_WIDGET_MAPPED (child) && child != druid->current)
+			if (GTK_WIDGET_MAPPED (child) && child != druid->_priv->current)
 				gtk_widget_unmap (GTK_WIDGET(child));
 		}
 	}
@@ -318,7 +336,7 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	child_allocation.height =
 		((allocation->height - 3 * GNOME_PAD_SMALL - button_height) > 0) ?
 		(allocation->height - 3 * GNOME_PAD_SMALL - button_height):0;
-	for (list = druid->children; list; list=list->next) {
+	for (list = druid->_priv->children; list; list=list->next) {
 		if (GTK_WIDGET_VISIBLE (list->data)) {
 			gtk_widget_size_allocate (GTK_WIDGET (list->data), &child_allocation);
 		}
@@ -343,15 +361,15 @@ gnome_druid_map (GtkWidget *widget)
 	GTK_WIDGET_SET_FLAGS (druid, GTK_MAPPED);
 
 	gtk_widget_map (druid->back);
-	if (druid->show_finish)
+	if (druid->_priv->show_finish)
 		gtk_widget_map (druid->finish);
 	else
 		gtk_widget_map (druid->next);
 	gtk_widget_map (druid->cancel);
-	if (druid->current &&
-	    GTK_WIDGET_VISIBLE (druid->current) &&
-	    !GTK_WIDGET_MAPPED (druid->current)) {
-		gtk_widget_map (GTK_WIDGET (druid->current));
+	if (druid->_priv->current &&
+	    GTK_WIDGET_VISIBLE (druid->_priv->current) &&
+	    !GTK_WIDGET_MAPPED (druid->_priv->current)) {
+		gtk_widget_map (GTK_WIDGET (druid->_priv->current));
 	}
 }
 
@@ -367,15 +385,15 @@ gnome_druid_unmap (GtkWidget *widget)
 	GTK_WIDGET_UNSET_FLAGS (druid, GTK_MAPPED);
 
 	gtk_widget_unmap (druid->back);
-	if (druid->show_finish)
+	if (druid->_priv->show_finish)
 		gtk_widget_unmap (druid->finish);
 	else
 		gtk_widget_unmap (druid->next);
 	gtk_widget_unmap (druid->cancel);
-	if (druid->current &&
-	    GTK_WIDGET_VISIBLE (druid->current) &&
-	    GTK_WIDGET_MAPPED (druid->current))
-		gtk_widget_unmap (GTK_WIDGET (druid->current));
+	if (druid->_priv->current &&
+	    GTK_WIDGET_VISIBLE (druid->_priv->current) &&
+	    GTK_WIDGET_MAPPED (druid->_priv->current))
+		gtk_widget_unmap (GTK_WIDGET (druid->_priv->current));
 }
 static void
 gnome_druid_add (GtkContainer *widget,
@@ -401,17 +419,17 @@ gnome_druid_remove (GtkContainer *widget,
 
 	druid = GNOME_DRUID (widget);
 
-	list = g_list_find (druid->children, child);
+	list = g_list_find (druid->_priv->children, child);
 	/* Is it a page? */ 
 	if (list != NULL) {
 		/* If we are mapped and visible, we want to deal with changing the page. */
 		if ((GTK_WIDGET_MAPPED (GTK_WIDGET (widget))) &&
-		    (list->data == (gpointer) druid->current) &&
+		    (list->data == (gpointer) druid->_priv->current) &&
 		    (list->next != NULL)) {
 			gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->next->data));
 		}
 	}
-	druid->children = g_list_remove (druid->children, child);
+	druid->_priv->children = g_list_remove (druid->_priv->children, child);
 	gtk_widget_unparent (child);
 }
 
@@ -431,7 +449,7 @@ gnome_druid_forall (GtkContainer *container,
 
 	druid = GNOME_DRUID (container);
 
-	children = druid->children;
+	children = druid->_priv->children;
 	while (children) {
 		child = children->data;
 		children = children->next;
@@ -459,7 +477,7 @@ gnome_druid_draw (GtkWidget    *widget,
 
 	if (GTK_WIDGET_DRAWABLE (widget)) {
 		druid = GNOME_DRUID (widget);
-		children = druid->children;
+		children = druid->_priv->children;
 
 		while (children) {
 			child = GTK_WIDGET (children->data);
@@ -500,7 +518,7 @@ gnome_druid_expose (GtkWidget      *widget,
 	if (GTK_WIDGET_DRAWABLE (widget)) {
 		druid = GNOME_DRUID (widget);
 		child_event = *event;
-		children = druid->children;
+		children = druid->_priv->children;
 
 		while (children) {
 			child = GTK_WIDGET (children->data);
@@ -540,13 +558,13 @@ static void
 gnome_druid_back_callback (GtkWidget *button, GnomeDruid *druid)
 {
 	GList *list;
-	g_return_if_fail (druid->current != NULL);
+	g_return_if_fail (druid->_priv->current != NULL);
 
-	if (gnome_druid_page_back (druid->current))
+	if (gnome_druid_page_back (druid->_priv->current))
 		return;
 
 	/* Make sure that we have a next list item */
-	list = g_list_find (druid->children, druid->current);
+	list = g_list_find (druid->_priv->children, druid->_priv->current);
 	g_return_if_fail (list->prev != NULL);
 	gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->prev->data));
 }
@@ -554,26 +572,26 @@ static void
 gnome_druid_next_callback (GtkWidget *button, GnomeDruid *druid)
 {
 	GList *list;
-	g_return_if_fail (druid->current != NULL);
+	g_return_if_fail (druid->_priv->current != NULL);
 
-	if (druid->show_finish == FALSE) {
-		if (gnome_druid_page_next (druid->current))
+	if (druid->_priv->show_finish == FALSE) {
+		if (gnome_druid_page_next (druid->_priv->current))
 			return;
 
 		/* Make sure that we have a next list item */
 		/* FIXME: we want to find the next VISIBLE one... */
-		list = g_list_find (druid->children, druid->current);
+		list = g_list_find (druid->_priv->children, druid->_priv->current);
 		g_return_if_fail (list->next != NULL);
 		gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->next->data));
 	} else {
-		gnome_druid_page_finish (druid->current);
+		gnome_druid_page_finish (druid->_priv->current);
 	}
 }
 static void
 gnome_druid_cancel_callback (GtkWidget *button, GtkWidget *druid)
 {
-     if (GNOME_DRUID (druid)->current) {
-	     if (gnome_druid_page_cancel (GNOME_DRUID (druid)->current))
+     if (GNOME_DRUID (druid)->_priv->current) {
+	     if (gnome_druid_page_cancel (GNOME_DRUID (druid)->_priv->current))
 		     return;
 
 	     gtk_signal_emit (GTK_OBJECT (druid), druid_signals [CANCEL]);
@@ -639,7 +657,7 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
 			gtk_widget_map (druid->next);
 		}
 	}
-	druid->show_finish = show_finish;
+	druid->_priv->show_finish = show_finish;
 }
 /**
  * gnome_druid_prepend_page:
@@ -682,9 +700,9 @@ gnome_druid_insert_page (GnomeDruid *druid,
 	g_return_if_fail (page != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (page));
 
-	list = g_list_find (druid->children, back_page);
+	list = g_list_find (druid->_priv->children, back_page);
 	if (list == NULL)
-		druid->children = g_list_prepend (druid->children, page);
+		druid->_priv->children = g_list_prepend (druid->_priv->children, page);
 	else {
 		GList *new_el = g_list_alloc ();
 		new_el->next = list->next;
@@ -706,7 +724,7 @@ gnome_druid_insert_page (GnomeDruid *druid,
 	}
 
 	/* if it's the first and only page, we want to bring it to the foreground. */
-	if (druid->children->next == NULL)
+	if (druid->_priv->children->next == NULL)
 		gnome_druid_set_page (druid, page);
 }
 
@@ -726,7 +744,7 @@ void gnome_druid_append_page (GnomeDruid *druid,
 	g_return_if_fail (page != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (page));
 
-	list = g_list_last (druid->children);
+	list = g_list_last (druid->_priv->children);
 	if (list) {
 		gnome_druid_insert_page (druid, GNOME_DRUID_PAGE (list->data), page);
 	} else {
@@ -752,18 +770,18 @@ gnome_druid_set_page (GnomeDruid *druid,
 	g_return_if_fail (page != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (page));
 
-	if (druid->current == page)
+	if (druid->_priv->current == page)
 	     return;
-	list = g_list_find (druid->children, page);
+	list = g_list_find (druid->_priv->children, page);
 	g_return_if_fail (list != NULL);
 
-	if ((druid->current) && (GTK_WIDGET_VISIBLE (druid->current)) && (GTK_WIDGET_MAPPED (druid))) {
-		old = GTK_WIDGET (druid->current);
+	if ((druid->_priv->current) && (GTK_WIDGET_VISIBLE (druid->_priv->current)) && (GTK_WIDGET_MAPPED (druid))) {
+		old = GTK_WIDGET (druid->_priv->current);
 	}
-	druid->current = GNOME_DRUID_PAGE (list->data);
-	gnome_druid_page_prepare (druid->current);
-	if (GTK_WIDGET_VISIBLE (druid->current) && (GTK_WIDGET_MAPPED (druid))) {
-		gtk_widget_map (GTK_WIDGET (druid->current));
+	druid->_priv->current = GNOME_DRUID_PAGE (list->data);
+	gnome_druid_page_prepare (druid->_priv->current);
+	if (GTK_WIDGET_VISIBLE (druid->_priv->current) && (GTK_WIDGET_MAPPED (druid))) {
+		gtk_widget_map (GTK_WIDGET (druid->_priv->current));
 	}
 	if (old && GTK_WIDGET_MAPPED (old))
 	  gtk_widget_unmap (old);

@@ -44,8 +44,9 @@ typedef enum {
 } GnomeEdgePosition;
 
 
-typedef struct _GnomeDruidPageEdge       GnomeDruidPageEdge;
-typedef struct _GnomeDruidPageEdgeClass  GnomeDruidPageEdgeClass;
+typedef struct _GnomeDruidPageEdge        GnomeDruidPageEdge;
+typedef struct _GnomeDruidPageEdgePrivate GnomeDruidPageEdgePrivate;
+typedef struct _GnomeDruidPageEdgeClass   GnomeDruidPageEdgeClass;
 
 struct _GnomeDruidPageEdge
 {
@@ -55,17 +56,6 @@ struct _GnomeDruidPageEdge
 	GdkPixbuf *logo_image;
 	GdkPixbuf *watermark_image;
 
-	/*< private >*/
-	GtkWidget *canvas;
-	GnomeCanvasItem *background_item;
-	GnomeCanvasItem *textbox_item;
-	GnomeCanvasItem *text_item;
-	GnomeCanvasItem *logo_item;
-	GnomeCanvasItem *logoframe_item;
-	GnomeCanvasItem *watermark_item;
-	GnomeCanvasItem *title_item;
-
-        /*< public >*/
 	GdkColor background_color;
 	GdkColor textbox_color;
 	GdkColor logo_background_color;
@@ -73,6 +63,9 @@ struct _GnomeDruidPageEdge
 	GdkColor text_color;
 
 	GnomeEdgePosition position : 2;
+
+	/*< private >*/
+	GnomeDruidPageEdgePrivate *_priv;
 };
 
 struct _GnomeDruidPageEdgeClass

@@ -38,8 +38,8 @@
 
 
 
-#define DEF_FONT_NAME "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-iso8859-1"
-#define DEF_PREVIEW_TEXT "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#define DEF_FONT_NAME N_("-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*")
+#define DEF_PREVIEW_TEXT N_("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz")
 
 /* Signals */
 enum {
@@ -166,8 +166,8 @@ gnome_font_picker_init (GnomeFontPicker *gfp)
     if (gfp->inside)
         gtk_container_add(GTK_CONTAINER(gfp),gfp->inside);
 
-    gnome_font_picker_set_font_name(gfp,DEF_FONT_NAME);
-    gnome_font_picker_set_preview_text(gfp,DEF_PREVIEW_TEXT);
+    gnome_font_picker_set_font_name(gfp,_(DEF_FONT_NAME));
+    gnome_font_picker_set_preview_text(gfp,_(DEF_PREVIEW_TEXT));
 
     if (gfp->mode==GNOME_FONT_PICKER_MODE_FONT_INFO) {
         /* Update */

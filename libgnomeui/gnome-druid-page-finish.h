@@ -37,8 +37,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DRUID_PAGE_FINISH_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE_FINISH))
 
 
-typedef struct _GnomeDruidPageFinish       GnomeDruidPageFinish;
-typedef struct _GnomeDruidPageFinishClass  GnomeDruidPageFinishClass;
+typedef struct _GnomeDruidPageFinish        GnomeDruidPageFinish;
+typedef struct _GnomeDruidPageFinishPrivate GnomeDruidPageFinishPrivate;
+typedef struct _GnomeDruidPageFinishClass   GnomeDruidPageFinishClass;
 
 struct _GnomeDruidPageFinish
 {
@@ -56,14 +57,7 @@ struct _GnomeDruidPageFinish
 	GdkImlibImage *watermark_image;
 
 	/*< private >*/
-	GtkWidget *canvas;
-	GnomeCanvasItem *background_item;
-	GnomeCanvasItem *textbox_item;
-	GnomeCanvasItem *text_item;
-	GnomeCanvasItem *logo_item;
-	GnomeCanvasItem *logoframe_item;
-	GnomeCanvasItem *watermark_item;
-	GnomeCanvasItem *title_item;
+	GnomeDruidPageFinishPrivate *_priv;
 };
 struct _GnomeDruidPageFinishClass
 {

@@ -32,8 +32,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DRUID_PAGE_START_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE_START))
 
 
-typedef struct _GnomeDruidPageStart       GnomeDruidPageStart;
-typedef struct _GnomeDruidPageStartClass  GnomeDruidPageStartClass;
+typedef struct _GnomeDruidPageStart        GnomeDruidPageStart;
+typedef struct _GnomeDruidPageStartPrivate GnomeDruidPageStartPrivate;
+typedef struct _GnomeDruidPageStartClass   GnomeDruidPageStartClass;
 
 struct _GnomeDruidPageStart
 {
@@ -51,14 +52,7 @@ struct _GnomeDruidPageStart
 	GdkPixbuf *watermark_image;
 
 	/*< private >*/
-	GtkWidget *canvas;
-	GnomeCanvasItem *background_item;
-	GnomeCanvasItem *textbox_item;
-	GnomeCanvasItem *text_item;
-	GnomeCanvasItem *logo_item;
-	GnomeCanvasItem *logoframe_item;
-	GnomeCanvasItem *watermark_item;
-	GnomeCanvasItem *title_item;
+	GnomeDruidPageStartPrivate *_priv;
 };
 struct _GnomeDruidPageStartClass
 {

@@ -35,12 +35,14 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_DRUID_PAGE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE))
 
 
-typedef struct _GnomeDruidPage       GnomeDruidPage;
-typedef struct _GnomeDruidPageClass  GnomeDruidPageClass;
+typedef struct _GnomeDruidPage        GnomeDruidPage;
+typedef struct _GnomeDruidPagePrivate GnomeDruidPagePrivate;
+typedef struct _GnomeDruidPageClass   GnomeDruidPageClass;
 
 struct _GnomeDruidPage
 {
 	GtkBin parent;
+	GnomeDruidPagePrivate *_priv;
 };
 struct _GnomeDruidPageClass
 {

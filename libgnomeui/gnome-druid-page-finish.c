@@ -27,18 +27,31 @@
 #include "gnome-druid-page-finish.h"
 #include "gnome-druid.h"
 
-static void gnome_druid_page_finish_init 	 (GnomeDruidPageFinish		 *druid_page_finish);
-static void gnome_druid_page_finish_class_init	 (GnomeDruidPageFinishClass	 *klass);
-static void gnome_druid_page_finish_construct     (GnomeDruidPageFinish             *druid_page_finish);
-static void gnome_druid_page_finish_configure_size(GnomeDruidPageFinish             *druid_page_finish,
-						  gint                             width,
-						  gint                             height);
-static void gnome_druid_page_finish_size_allocate (GtkWidget                       *widget,
-						  GtkAllocation                   *allocation);
-static void gnome_druid_page_finish_realize       (GtkWidget                       *widget);
-static void gnome_druid_page_finish_prepare	 (GnomeDruidPage		  *page,
-						  GtkWidget                       *druid,
-						  gpointer 			  *data);
+struct _GnomeDruidPageFinishPrivate
+{
+	GtkWidget *canvas;
+	GnomeCanvasItem *background_item;
+	GnomeCanvasItem *textbox_item;
+	GnomeCanvasItem *text_item;
+	GnomeCanvasItem *logo_item;
+	GnomeCanvasItem *logoframe_item;
+	GnomeCanvasItem *watermark_item;
+	GnomeCanvasItem *title_item;
+};
+
+static void gnome_druid_page_finish_init 	  (GnomeDruidPageFinish		 *druid_page_finish);
+static void gnome_druid_page_finish_class_init	  (GnomeDruidPageFinishClass	 *klass);
+static void gnome_druid_page_finish_destroy 	  (GtkObject                     *object);
+static void gnome_druid_page_finish_construct     (GnomeDruidPageFinish          *druid_page_finish);
+static void gnome_druid_page_finish_configure_size(GnomeDruidPageFinish          *druid_page_finish,
+						   gint                           width,
+						   gint                           height);
+static void gnome_druid_page_finish_size_allocate (GtkWidget                     *widget,
+						   GtkAllocation                 *allocation);
+static void gnome_druid_page_finish_realize       (GtkWidget                     *widget);
+static void gnome_druid_page_finish_prepare	  (GnomeDruidPage		 *page,
+						   GtkWidget                     *druid,
+						   gpointer 			 *data);
 static GnomeDruidPageClass *parent_class = NULL;
 
 #define LOGO_WIDTH 50.0
@@ -78,6 +91,7 @@ gnome_druid_page_finish_class_init (GnomeDruidPageFinishClass *klass)
 	GtkWidgetClass *widget_class;
 
 	object_class = (GtkObjectClass*) klass;
+	object_class->destroy = gnome_druid_page_finish_destroy;
 	widget_class = (GtkWidgetClass*) klass;
 	widget_class->size_allocate = gnome_druid_page_finish_size_allocate;
 	widget_class->realize = gnome_druid_page_finish_realize;
@@ -87,7 +101,7 @@ gnome_druid_page_finish_class_init (GnomeDruidPageFinishClass *klass)
 static void
 gnome_druid_page_finish_init (GnomeDruidPageFinish *druid_page_finish)
 {
-
+	druid_page_finish->_priv = g_new0(GnomeDruidPageFinishPrivate, 1);
 
 	/* initialize the color values */
 	druid_page_finish->background_color.red = 6400; /* midnight blue */
@@ -108,12 +122,25 @@ gnome_druid_page_finish_init (GnomeDruidPageFinish *druid_page_finish)
 
 	/* Set up the canvas */ 
 	gtk_container_set_border_width (GTK_CONTAINER (druid_page_finish), 0);
-	druid_page_finish->canvas = gnome_canvas_new ();
-	gtk_widget_set_usize (druid_page_finish->canvas, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
-	gtk_widget_show (druid_page_finish->canvas);
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (druid_page_finish->canvas), 0.0, 0.0, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
-	gtk_container_add (GTK_CONTAINER (druid_page_finish), druid_page_finish->canvas);
+	druid_page_finish->_priv->canvas = gnome_canvas_new ();
+	gtk_widget_set_usize (druid_page_finish->_priv->canvas, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
+	gtk_widget_show (druid_page_finish->_priv->canvas);
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (druid_page_finish->_priv->canvas), 0.0, 0.0, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
+	gtk_container_add (GTK_CONTAINER (druid_page_finish), druid_page_finish->_priv->canvas);
 }
+
+static void
+gnome_druid_page_finish_destroy(GtkObject *object)
+{
+	GnomeDruidPageFinish *druid_page_finish = GNOME_DRUID_PAGE_FINISH(object);
+
+	g_free(druid_page_finish->_priv);
+	druid_page_finish->_priv = NULL;
+
+	if(GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+}
+
 
 static void
 gnome_druid_page_finish_configure_size (GnomeDruidPageFinish *druid_page_finish, gint width, gint height)
@@ -132,43 +159,43 @@ gnome_druid_page_finish_configure_size (GnomeDruidPageFinish *druid_page_finish,
 			watermark_height = 1.0;
 	}
 
-	gnome_canvas_item_set (druid_page_finish->background_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->background_item,
 			       "x1", 0.0,
 			       "y1", 0.0,
 			       "x2", (gfloat) width,
 			       "y2", (gfloat) height,
 			       "width_units", 1.0, NULL);
-	gnome_canvas_item_set (druid_page_finish->textbox_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->textbox_item,
 			       "x1", (gfloat) watermark_width,
 			       "y1", (gfloat) LOGO_WIDTH + GNOME_PAD * 2.0,
 			       "x2", (gfloat) width,
 			       "y2", (gfloat) height,
 			       "width_units", 1.0, NULL);
-	gnome_canvas_item_set (druid_page_finish->logoframe_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->logoframe_item,
 			       "x1", (gfloat) width - LOGO_WIDTH -GNOME_PAD,
 			       "y1", (gfloat) GNOME_PAD,
 			       "x2", (gfloat) width - GNOME_PAD,
 			       "y2", (gfloat) GNOME_PAD + LOGO_WIDTH,
 			       "width_units", 1.0, NULL);
-	gnome_canvas_item_set (druid_page_finish->logo_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->logo_item,
 			       "x", (gfloat) width - GNOME_PAD - LOGO_WIDTH,
 			       "y", (gfloat) GNOME_PAD,
 			       "anchor", GTK_ANCHOR_NORTH_WEST,
 			       "width", (gfloat) LOGO_WIDTH,
 			       "height", (gfloat) LOGO_WIDTH, NULL);
-	gnome_canvas_item_set (druid_page_finish->watermark_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->watermark_item,
 			       "x", 0.0,
 			       "y", watermark_ypos,
 			       "anchor", GTK_ANCHOR_NORTH_WEST,
 			       "width", watermark_width,
 			       "height", watermark_height,
 			       NULL);
-	gnome_canvas_item_set (druid_page_finish->title_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->title_item,
 			       "x", 15.0, 
 			       "y", (gfloat) GNOME_PAD + LOGO_WIDTH / 2.0,
 			       "anchor", GTK_ANCHOR_WEST,
 			       NULL);
-	gnome_canvas_item_set (druid_page_finish->text_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->text_item,
 			       "x", ((width - watermark_width) * 0.5) + watermark_width,
 			       "y", LOGO_WIDTH + GNOME_PAD * 2.0 + (height - (LOGO_WIDTH + GNOME_PAD * 2.0))/ 2.0,
 			       "anchor", GTK_ANCHOR_CENTER,
@@ -179,37 +206,37 @@ static void
 gnome_druid_page_finish_construct (GnomeDruidPageFinish *druid_page_finish)
 {
 	/* set up the rest of the page */
-	druid_page_finish->background_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->canvas)),
+	druid_page_finish->_priv->background_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->_priv->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
-	druid_page_finish->textbox_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->canvas)),
+	druid_page_finish->_priv->textbox_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->_priv->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
-	druid_page_finish->logoframe_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->canvas)),
+	druid_page_finish->_priv->logoframe_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->_priv->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
-	druid_page_finish->logo_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->canvas)),
+	druid_page_finish->_priv->logo_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->_priv->canvas)),
 				       gnome_canvas_image_get_type (), NULL);
 	if (druid_page_finish->logo_image != NULL)
-		gnome_canvas_item_set (druid_page_finish->logo_item,
+		gnome_canvas_item_set (druid_page_finish->_priv->logo_item,
 				       "image", druid_page_finish->logo_image, NULL);
-	druid_page_finish->watermark_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->canvas)),
+	druid_page_finish->_priv->watermark_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->_priv->canvas)),
 				       gnome_canvas_image_get_type (),
 				       "image", druid_page_finish->watermark_image, NULL);
-	druid_page_finish->title_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->canvas)),
+	druid_page_finish->_priv->title_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->_priv->canvas)),
 				       gnome_canvas_text_get_type (), 
 				       "text", druid_page_finish->title,
-				       "font", "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-1",
+				       "font", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"),
 				       NULL);
-	druid_page_finish->text_item =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->canvas)),
+	druid_page_finish->_priv->text_item =
+		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_finish->_priv->canvas)),
 				       gnome_canvas_text_get_type (),
 				       "text", druid_page_finish->text,
 				       "justification", GTK_JUSTIFY_LEFT,
-				       "font", "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
+				       "font", _("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*"),
 				       NULL);
 
 	gnome_druid_page_finish_configure_size (druid_page_finish, DRUID_PAGE_WIDTH, DRUID_PAGE_HEIGHT);
@@ -234,7 +261,7 @@ gnome_druid_page_finish_size_allocate   (GtkWidget               *widget,
 					GtkAllocation           *allocation)
 {
 	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (GNOME_DRUID_PAGE_FINISH (widget)->canvas),
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (GNOME_DRUID_PAGE_FINISH (widget)->_priv->canvas),
 					0.0, 0.0,
 					allocation->width,
 					allocation->height);
@@ -255,20 +282,20 @@ gnome_druid_page_finish_realize (GtkWidget *widget)
 	gdk_colormap_alloc_color (cmap, &druid_page_finish->title_color, FALSE, TRUE);
 	gdk_colormap_alloc_color (cmap, &druid_page_finish->text_color, FALSE, TRUE);
 
-	gnome_canvas_item_set (druid_page_finish->background_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->background_item,
 			       "fill_color_gdk", &(druid_page_finish->background_color),
 			       NULL);
-	gnome_canvas_item_set (druid_page_finish->textbox_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->textbox_item,
 			       "fill_color_gdk", &(druid_page_finish->textbox_color),
 			       "outline_color_gdk", &(druid_page_finish->background_color),
 			       NULL);
-	gnome_canvas_item_set (druid_page_finish->logoframe_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->logoframe_item,
 			       "fill_color_gdk", &druid_page_finish->logo_background_color,
 			       NULL);
-	gnome_canvas_item_set (druid_page_finish->title_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->title_item,
 			       "fill_color_gdk", &druid_page_finish->title_color,
 			       NULL);
-	gnome_canvas_item_set (druid_page_finish->text_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->text_item,
 			       "fill_color_gdk", &druid_page_finish->text_color,
 			       NULL);
 	GTK_WIDGET_CLASS (parent_class)->realize (widget);
@@ -316,10 +343,10 @@ gnome_druid_page_finish_set_bg_color      (GnomeDruidPageFinish *druid_page_fini
 	if (GTK_WIDGET_REALIZED (druid_page_finish)) {
 		GdkColormap *cmap = gdk_imlib_get_colormap ();
 		gdk_colormap_alloc_color (cmap, &druid_page_finish->background_color, FALSE, TRUE);
-		gnome_canvas_item_set (druid_page_finish->textbox_item,
+		gnome_canvas_item_set (druid_page_finish->_priv->textbox_item,
 				       "outline_color_gdk", &druid_page_finish->background_color,
 				       NULL);
-		gnome_canvas_item_set (druid_page_finish->background_item,
+		gnome_canvas_item_set (druid_page_finish->_priv->background_item,
 				       "fill_color_gdk", &druid_page_finish->background_color,
 				       NULL);
 	}
@@ -343,7 +370,7 @@ gnome_druid_page_finish_set_textbox_color (GnomeDruidPageFinish *druid_page_fini
 	if (GTK_WIDGET_REALIZED (druid_page_finish)) {
 		GdkColormap *cmap = gdk_imlib_get_colormap ();
 		gdk_colormap_alloc_color (cmap, &druid_page_finish->textbox_color, FALSE, TRUE);
-		gnome_canvas_item_set (druid_page_finish->textbox_item,
+		gnome_canvas_item_set (druid_page_finish->_priv->textbox_item,
 				       "fill_color_gdk", &druid_page_finish->textbox_color,
 				       NULL);
 	}
@@ -367,7 +394,7 @@ gnome_druid_page_finish_set_logo_bg_color (GnomeDruidPageFinish *druid_page_fini
 	if (GTK_WIDGET_REALIZED (druid_page_finish)) {
 		GdkColormap *cmap = gdk_imlib_get_colormap ();
 		gdk_colormap_alloc_color (cmap, &druid_page_finish->logo_background_color, FALSE, TRUE);
-		gnome_canvas_item_set (druid_page_finish->logoframe_item,
+		gnome_canvas_item_set (druid_page_finish->_priv->logoframe_item,
 				       "fill_color_gdk", &druid_page_finish->logo_background_color,
 				       NULL);
 	}
@@ -391,7 +418,7 @@ gnome_druid_page_finish_set_title_color   (GnomeDruidPageFinish *druid_page_fini
 	if (GTK_WIDGET_REALIZED (druid_page_finish)) {
 		GdkColormap *cmap = gdk_imlib_get_colormap ();
 		gdk_colormap_alloc_color (cmap, &druid_page_finish->title_color, FALSE, TRUE);
-		gnome_canvas_item_set (druid_page_finish->title_item,
+		gnome_canvas_item_set (druid_page_finish->_priv->title_item,
 				       "fill_color_gdk", &druid_page_finish->title_color,
 				       NULL);
 	}
@@ -416,7 +443,7 @@ gnome_druid_page_finish_set_text_color    (GnomeDruidPageFinish *druid_page_fini
 	if (GTK_WIDGET_REALIZED (druid_page_finish)) {
 		GdkColormap *cmap = gdk_imlib_get_colormap ();
 		gdk_colormap_alloc_color (cmap, &druid_page_finish->text_color, FALSE, TRUE);
-		gnome_canvas_item_set (druid_page_finish->text_item,
+		gnome_canvas_item_set (druid_page_finish->_priv->text_item,
 				       "fill_color_gdk", &druid_page_finish->text_color,
 				       NULL);
 	}
@@ -431,7 +458,7 @@ gnome_druid_page_finish_set_text          (GnomeDruidPageFinish *druid_page_fini
 
 	g_free (druid_page_finish->text);
 	druid_page_finish->text = g_strdup (text);
-	gnome_canvas_item_set (druid_page_finish->text_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->text_item,
 			       "text", druid_page_finish->text,
 			       NULL);
 }
@@ -444,7 +471,7 @@ gnome_druid_page_finish_set_title         (GnomeDruidPageFinish *druid_page_fini
 
 	g_free (druid_page_finish->title);
 	druid_page_finish->title = g_strdup (title);
-	gnome_canvas_item_set (druid_page_finish->title_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->title_item,
 			       "text", druid_page_finish->title,
 			       NULL);
 }
@@ -456,7 +483,7 @@ gnome_druid_page_finish_set_logo          (GnomeDruidPageFinish *druid_page_fini
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_FINISH (druid_page_finish));
 
 	druid_page_finish->logo_image = logo_image;
-	gnome_canvas_item_set (druid_page_finish->logo_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->logo_item,
 			       "image", druid_page_finish->logo_image, NULL);
 }
 void
@@ -467,6 +494,6 @@ gnome_druid_page_finish_set_watermark     (GnomeDruidPageFinish *druid_page_fini
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_FINISH (druid_page_finish));
 
 	druid_page_finish->watermark_image = watermark;
-	gnome_canvas_item_set (druid_page_finish->watermark_item,
+	gnome_canvas_item_set (druid_page_finish->_priv->watermark_item,
 			       "image", druid_page_finish->watermark_image, NULL);
 }
