@@ -226,11 +226,11 @@ gnome_about_repaint (GtkWidget *widget,
   {
     y += 2 + gai->font_author->ascent;
     if (g_list_length (gai->names) == 1)
-      gdk_draw_string (win, gai->font_author, gc, 5, y, "Author:");
+      gdk_draw_string (win, gai->font_author, gc, 5, y, _("Author:") );
     else
-      gdk_draw_string (win, gai->font_author, gc, 5, y, "Authors:");
+      gdk_draw_string (win, gai->font_author, gc, 5, y, _("Authors:") );
   }
-  x = 5 + gdk_string_measure (gai->font_author, "Authors:") + 10;
+  x = 5 + gdk_string_measure (gai->font_author, _("Authors:")) + 10;
 
   name = g_list_first (gai->names);
   while (name)
@@ -405,7 +405,7 @@ gnome_about_calc_size (GnomeAboutInfo *gai)
 	  len[2] = tmpl;
 	name = name->next;
       }
-    tmpl = gdk_string_measure (gai->font_names, "Authors: ");
+    tmpl = gdk_string_measure (gai->font_names, _("Authors: "));
     len[2] += tmpl + 15;
     h += g_list_length (gai->names) * 
           (gai->font_names->descent + 
