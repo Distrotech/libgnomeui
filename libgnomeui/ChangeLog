@@ -1,5 +1,21 @@
 1998-04-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-dateedit.c (day_selected): Use gtk_calendar_get_date ().
+
+	* gtkcalendar.c (gtk_calendar_size_request): In libdate, months
+	are indexed in [1, 12].  Make the calculation of the max month
+	width know about this.
+	(gtk_calendar_get_date): Added gtk_calendar_get_date() function to
+	avoid the user having to access the widget's fields.
+
+	* gtkcalendar.h: Added prototype for gtk_calendar_get_date().
+
+	* gnome-dateedit.c (select_clicked): Add 1900 to the tm_year field
+	of the struct tm.  The calendar was getting the wrong year.
+	(day_selected): Synchronize calendar month and displayed month.
+	(gnome_date_edit_get_date): We have to test for >= 1900, not just >.
+	(gnome_date_edit_set_time): Add 1900 to tm_year.
+
 	* gnome-dateedit.c (gnome_date_edit_class_init): Initialize signal
 	handlers.
 	(gnome_date_edit_init): Changed flags passed to

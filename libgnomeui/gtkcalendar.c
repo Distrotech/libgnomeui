@@ -670,7 +670,7 @@ gtk_calendar_size_request (GtkWidget      *widget,
 
   /* Calculate max month string width */
   max_month_width = 0;
-  for (i = 0; i < 12; i++) {
+  for (i = 1; i <= 12; i++) {
     sprintf (buffer, "%s", month_name[i]);
     str_width = gdk_string_measure (cal->month_font, buffer);
     if (str_width > max_month_width)
@@ -1191,6 +1191,22 @@ gtk_calendar_unmark_day (GtkCalendar *calendar, gint day)
 
   if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
     gtk_calendar_paint_main(GTK_WIDGET(calendar));
+}
+
+void
+gtk_calendar_get_date (GtkCalendar *calendar, gint *year, gint *month, gint *day)
+{
+  g_return_if_fail (calendar != NULL);
+  g_return_if_fail (GTK_IS_CALENDAR (calendar));
+
+  if (year)
+	  *year = calendar->year;
+
+  if (month)
+	  *month = calendar->month;
+
+  if (day)
+	  *day = calendar->selected_day;
 }
 
 static gint

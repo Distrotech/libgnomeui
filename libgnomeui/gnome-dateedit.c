@@ -50,8 +50,11 @@ static void
 day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 {
 	char buffer [40];
+	gint year, month, day;
 
-	sprintf (buffer, "%d/%d/%d", calendar->month, calendar->selected_day, calendar->year);
+	gtk_calendar_get_date (calendar, &year, &month, &day);
+
+	sprintf (buffer, "%d/%d/%d", month + 1, day, year); /* FIXME: internationalize this - strftime()*/
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 	gtk_widget_destroy (gtk_widget_get_toplevel (GTK_WIDGET (calendar)));
 	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
@@ -68,7 +71,7 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 	mtm = localtime (&gde->initial_time);
 	calendar = (GtkCalendar *) gtk_calendar_new ();
 	
-	gtk_calendar_select_month (calendar, mtm->tm_mon, mtm->tm_year);
+	gtk_calendar_select_month (calendar, mtm->tm_mon, 1900 + mtm->tm_year);
 	gtk_calendar_display_options (calendar, GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_HEADING);
 	gtk_signal_connect (GTK_OBJECT (calendar), "day_selected",
 			    GTK_SIGNAL_FUNC (day_selected), gde);
@@ -221,7 +224,7 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 {
 	struct tm *mytm;
 	char buffer [40];
-	
+
 	if (the_time == 0)
 		the_time = time (NULL);
 	gde->initial_time = the_time;
@@ -229,7 +232,7 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	mytm = localtime (&the_time);
 
 	/* Set the date */
-	sprintf (buffer, "%d/%d/%d", mytm->tm_mon+1, mytm->tm_mday, mytm->tm_year);
+	sprintf (buffer, "%d/%d/%d", mytm->tm_mon + 1, mytm->tm_mday, 1900 + mytm->tm_year);
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 
 	/* Set the time */
@@ -262,10 +265,14 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 	char *str, *flags;
 	
 	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->date_entry)), "%d/%d/%d",
-		&tm.tm_mon, &tm.tm_mday, &tm.tm_year);
+		&tm.tm_mon, &tm.tm_mday, &tm.tm_year); /* FIXME: internationalize this - strptime()*/
 
 	tm.tm_mon--;
-	if (tm.tm_year > 1900)
+
+	/* Hope the user does not actually mean years early in the A.D. days...
+	 * This date widget will obviously not work for a history program :-)
+	 */
+	if (tm.tm_year >= 1900)
 		tm.tm_year -= 1900;
 
 	str = g_strdup (gtk_entry_get_text (GTK_ENTRY (gde->time_entry)));

@@ -150,6 +150,8 @@ void       gtk_calendar_set_color     	(GtkCalendar *calendar,
 void	   gtk_calendar_display_options (GtkCalendar *calendar,
                                          GtkCalendarDisplayOptions flags);
 
+void       gtk_calendar_get_date        (GtkCalendar *calendar, gint *year, gint *month, gint *day);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
