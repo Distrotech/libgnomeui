@@ -1,3 +1,7 @@
+Sat Feb 05 18:29:26 2000  George Lebl <jirka@5z.com>
+
+	* gnome-file-entry.[ch]: use gboolean in places of int for bools
+
 Sun Jan 30 16:58:54 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dentry-edit.c: properly cast dentry->exec
