@@ -1,3 +1,12 @@
+1998-10-21    <jrb@redhat.com>
+
+	* gnome-popup-help.c: Added popup help.  Everyone should use
+	this.
+
+	* libgnomeui.h: added the popup stuff.
+
+	* Makefile.am: added the popup-help stuff.
+
 1998-10-21  David Abilleira  <odaf@nexo.es>
 
 	* gnome-font-picker.h: removed "extern C" which is redundant with

@@ -39,6 +39,7 @@
 #include "libgnomeui/gnome-number-entry.h"
 #include "libgnomeui/gnome-paper-selector.h"
 #include "libgnomeui/gnome-popup-menu.h"
+#include "libgnomeui/gnome-popup-help.h"
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-propertybox.h"
