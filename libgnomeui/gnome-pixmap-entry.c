@@ -107,6 +107,10 @@ gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
 	GObjectClass *gobject_class = G_OBJECT_CLASS(class);
 
+	gobject_class->finalize = pentry_finalize;
+	gobject_class->set_property = pentry_set_property;
+	gobject_class->get_property = pentry_get_property;
+
 	g_object_class_install_property (gobject_class,
 					 PROP_DO_PREVIEW,
 					 g_param_spec_boolean (
@@ -117,9 +121,6 @@ gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 						 G_PARAM_READWRITE));
 
 	object_class->destroy = pentry_destroy;
-	gobject_class->finalize = pentry_finalize;
-	gobject_class->set_property = pentry_set_property;
-	gobject_class->get_property = pentry_get_property;
 }
 
 /* set_property handler for the pixmap entry */
