@@ -117,6 +117,17 @@ gnome_pixmap_new_from_file (char *filename)
 	return GTK_WIDGET (gpixmap);
 }
 
+GtkWidget *
+gnome_pixmap_new_from_file_at_size (char *filename, int width, int height)
+{
+	GnomePixmap *gpixmap;
+
+	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
+	gnome_pixmap_load_file_at_size (gpixmap, filename, width, height);
+
+	return GTK_WIDGET (gpixmap);
+}
+
 static void
 setup_window_and_style (GnomePixmap *gpixmap)
 {
@@ -242,14 +253,10 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
 	return FALSE;
 }
 
-void
-gnome_pixmap_load_file (GnomePixmap *gpixmap, char *filename)
+static void
+load_file (GnomePixmap *gpixmap, char *filename, int sized, int width, int height)
 {
 	GdkImlibImage *im;
-
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (filename != NULL);
 
 	free_pixmap_and_mask (gpixmap);
 
@@ -257,7 +264,10 @@ gnome_pixmap_load_file (GnomePixmap *gpixmap, char *filename)
 	if (!im)
 		return;
 
-	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+	if (sized)
+		gdk_imlib_render (im, width, height);
+	else
+		gdk_imlib_render (im, im->rgb_width, im->rgb_height);
 
 	gpixmap->pixmap = gdk_imlib_copy_image (im);
 	gpixmap->mask = gdk_imlib_copy_mask (im);
@@ -266,6 +276,31 @@ gnome_pixmap_load_file (GnomePixmap *gpixmap, char *filename)
 
 	if (GTK_WIDGET_REALIZED (gpixmap))
 		setup_window_and_style (gpixmap);
+
+	if (GTK_WIDGET_VISIBLE (gpixmap))
+		gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
+}
+
+void
+gnome_pixmap_load_file (GnomePixmap *gpixmap, char *filename)
+{
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+	g_return_if_fail (filename != NULL);
+
+	load_file (gpixmap, filename, FALSE, 0, 0);
+}
+
+void
+gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap, char *filename, int width, int height)
+{
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+	g_return_if_fail (filename != NULL);
+	g_return_if_fail (width > 0);
+	g_return_if_fail (height > 0);
+
+	load_file (gpixmap, filename, TRUE, width, height);
 }
 
 

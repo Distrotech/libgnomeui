@@ -29,11 +29,14 @@ struct _GnomePixmapClass {
 };
 
 
-guint      gnome_pixmap_get_type      (void);
+guint      gnome_pixmap_get_type              (void);
 
-GtkWidget *gnome_pixmap_new_from_file (char *filename);
+GtkWidget *gnome_pixmap_new_from_file         (char *filename);
+GtkWidget *gnome_pixmap_new_from_file_at_size (char *filename, int width, int height);
 
-void       gnome_pixmap_load_file     (GnomePixmap *gpixmap, char *filename);
+void       gnome_pixmap_load_file             (GnomePixmap *gpixmap, char *filename);
+void       gnome_pixmap_load_file_at_size     (GnomePixmap *gpixmap, char *filename, int width, int height);
+
 
 
 /* FIXME:  These are the old gnome-pixmap API functions.  They should

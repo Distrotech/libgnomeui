@@ -310,9 +310,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 						    (char **)tbinfo[i].pixmap_info);
 		break;
 	      case GNOME_APP_PIXMAP_FILENAME:
-		pmap = gnome_create_pixmap_widget(GTK_WIDGET(app),
-						  parent_widget,
-						  (char *)tbinfo[i].pixmap_info);
+		pmap = gnome_pixmap_new_from_file((char *)tbinfo[i].pixmap_info);
 		break;
 	      case GNOME_APP_PIXMAP_STOCK:
 		pmap = gnome_stock_pixmap_widget_new(GTK_WIDGET(app),

@@ -1,5 +1,20 @@
 1998-02-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-pixmap.c (load_file): New internal function that takes
+	care of file loading and widget setup.
+	(gnome_pixmap_load_file): Changed to use load_file() internally.
+	(gnome_pixmap_load_file_at_size): New function to load an image
+	file and resize it to the specified size.  For example, this is
+	useful to have a single icon size for the panel and just specify
+	the size one will use (full size for the launchers, half size for
+	menu items, etc.).
+
+	* gnome-app-helper.c (gnome_app_do_toolbar_creation): Use 
+	gnome_pixmap_new_from_file() widget instead of
+	gnome_create_pixmap_widget().  I did not replace the
+	g_c_p_widget_d() call because GnomePixmap does not support
+	creating pixmaps from xpm data yet.
+
 	* gnome-pixmap.c:
 	* gnome-pixmap.h: New GnomePixmap widget!  It was created to
 	replace the ugly gnome_create_pixmap_*() functions.  Now you can
