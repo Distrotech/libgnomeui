@@ -3,6 +3,39 @@
 #include <string.h>
 
 
+static void
+prop_dlg(GtkWidget *widget, gpointer data)
+{
+	GnomePropertyBox *box;
+	GtkWidget *w, *label;
+
+	box = GNOME_PROPERTY_BOX(gnome_property_box_new());
+	w = gtk_button_new_with_label("Click me (Page #1)");
+	gtk_signal_connect_object(GTK_OBJECT(w), "clicked",
+				  GTK_SIGNAL_FUNC(gnome_property_box_changed),
+				  GTK_OBJECT(box));
+	gtk_widget_show(w);
+	label = gtk_label_new("Page #1");
+	gtk_widget_show(label);
+	gnome_property_box_append_page(box, w, label);
+	w = gtk_button_new_with_label("Click me (Page #2)");
+	gtk_widget_show(w);
+	gtk_signal_connect_object(GTK_OBJECT(w), "clicked",
+				  GTK_SIGNAL_FUNC(gnome_property_box_changed),
+				  GTK_OBJECT(box));
+	label = gtk_label_new("Page #2");
+	gtk_widget_show(label);
+	gnome_property_box_append_page(box, w, label);
+	gtk_signal_connect_object(GTK_OBJECT(box->cancel_button), "clicked",
+				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
+				  GTK_OBJECT(box));
+	gtk_signal_connect_object(GTK_OBJECT(box->ok_button), "clicked",
+				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
+				  GTK_OBJECT(box));
+	gtk_widget_show(GTK_WIDGET(box));
+}
+
+
 static GtkWidget *menu_items[20], *frame;
 
 
@@ -12,6 +45,8 @@ create_menu(GtkWidget *window)
         GtkWidget *menubar, *w, *menu;
         GtkAcceleratorTable *accel;
 	int i = 0;
+	guchar key;
+	guint8 mod;
 
         accel = gtk_accelerator_table_new();
         menubar = gtk_menu_bar_new();
@@ -21,27 +56,29 @@ create_menu(GtkWidget *window)
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_NEW, _("New..."));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'N', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_NEW, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_OPEN, _("Open..."));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'O', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_OPEN, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE, _("Save"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'S', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SAVE, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE_AS, _("Save as..."));
         gtk_widget_show(w);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SAVE_AS, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
@@ -51,6 +88,8 @@ create_menu(GtkWidget *window)
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_PRINT, _("Print..."));
         gtk_widget_show(w);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PRINT, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
@@ -65,8 +104,8 @@ create_menu(GtkWidget *window)
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_QUIT, _("Quit"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'Q', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_QUIT, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 	gtk_signal_connect_object(GTK_OBJECT(w), "activate",
 				  (GtkSignalFunc)gtk_widget_destroy,
 				  GTK_OBJECT(window));
@@ -82,15 +121,13 @@ create_menu(GtkWidget *window)
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_UNDO, _("Undo"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'Z', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_UNDO, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Redo"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'R', GDK_CONTROL_MASK);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
@@ -100,29 +137,27 @@ create_menu(GtkWidget *window)
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Delete"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'D', GDK_MOD1_MASK);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_CUT, _("Cut"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'X', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_CUT, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_COPY, _("Copy"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'C', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_COPY, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_PASTE, _("Paste"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'V', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PASTE, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
@@ -132,11 +167,17 @@ create_menu(GtkWidget *window)
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_PROP, _("Properties..."));
         gtk_widget_show(w);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PROP, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
+	gtk_signal_connect(GTK_OBJECT(w), "activate",
+			   GTK_SIGNAL_FUNC(prop_dlg), NULL);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_PREF, _("Preferences..."));
         gtk_widget_show(w);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PREF, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
@@ -146,6 +187,8 @@ create_menu(GtkWidget *window)
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_SCORES, _("Scores..."));
         gtk_widget_show(w);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SCORES, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
@@ -159,8 +202,8 @@ create_menu(GtkWidget *window)
 
         w = gnome_stock_menu_item(GNOME_STOCK_MENU_ABOUT, _("About"));
         gtk_widget_show(w);
-        gtk_widget_install_accelerator(w, accel, "activate",
-                                       'A', GDK_CONTROL_MASK);
+	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_ABOUT, &key, &mod))
+        	gtk_widget_install_accelerator(w, accel, "activate", key, mod);
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
@@ -192,6 +235,7 @@ static TbItems tb_items[] = {
 	{GNOME_STOCK_PIXMAP_CUT, NULL},
 	{GNOME_STOCK_PIXMAP_COPY, NULL},
 	{GNOME_STOCK_PIXMAP_PASTE, NULL},
+#define TB_PROP 7
 	{GNOME_STOCK_PIXMAP_PROPERTIES, NULL},
 	{NULL, NULL}
 };
@@ -213,6 +257,8 @@ create_toolbar(GtkWidget *window)
 						    gnome_stock_pixmap_widget(window, t->icon),
 						    NULL, NULL);
 	}
+	gtk_signal_connect(GTK_OBJECT(tb_items[TB_PROP].widget), "clicked",
+				      (GtkSignalFunc)prop_dlg, NULL);
 
 	return toolbar;
 }
@@ -372,6 +418,8 @@ main(int argc, char **argv)
 	gtk_widget_show(vbox);
 	w = gtk_label_new("Click on `Cancel' to disable the toolbar and menu items\n"
 			  "Click on `OK' to enable the toolbar and menu items\n"
+			  "Select Edit->Properties or the Properties toolbar button\n"
+			  "to open a GnomePropertyBox\n"
 			  "Select File->Quit or the Close button to exit the app");
 	gtk_widget_show(w);
 	gtk_box_pack_start(GTK_BOX(vbox), w, TRUE, TRUE, 2);

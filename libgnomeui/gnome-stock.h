@@ -326,6 +326,8 @@ GtkWidget             *gnome_stock_or_ordinary_button (char *type);
 /* returns a GtkMenuItem with an stock icon and text */
 GtkWidget             *gnome_stock_menu_item       (char *type, char *text);
 
+gboolean	       gnome_stock_menu_accel      (char *type, guchar *key,
+						    guint8 *mod);
 
 END_GNOME_DECLS
 

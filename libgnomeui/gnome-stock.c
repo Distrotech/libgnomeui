@@ -24,6 +24,7 @@
 #include <libintl.h>
 #include <glib.h>
 #include <gdk/gdk.h>
+#include <gdk/gdktypes.h>
 #include <gtk/gtk.h>
 
 #include "libgnome/gnome-defs.h"
@@ -887,5 +888,69 @@ gnome_stock_menu_item(char *type, char *text)
         }
 
         return menu_item;
+}
+
+
+
+/***********************/
+/*  menu accelerators  */
+/***********************/
+
+typedef struct _AccelEntry AccelEntry;
+struct _AccelEntry {
+	guchar key;
+	guint8 mod;
+};
+
+struct default_AccelEntry {
+	char *type;
+	AccelEntry entry;
+};
+
+struct default_AccelEntry default_accel_hash[] = {
+	{GNOME_STOCK_MENU_NEW, {'N', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_OPEN, {'O', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_SAVE, {'S', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_SAVE_AS, {'A', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_QUIT, {'Q', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_CUT, {'X', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_COPY, {'C', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_PASTE, {'V', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_PREF, {'E', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_ABOUT, {'A', GDK_MOD1_MASK}},
+	{GNOME_STOCK_MENU_UNDO, {'Z', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_PRINT, {'P', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_SEARCH, {'S', GDK_MOD1_MASK}},
+	{NULL}
+};
+
+static GHashTable *
+accel_hash(void) {
+	static GHashTable *hash = NULL;
+	struct default_AccelEntry *p;
+
+	if (!hash) {
+		hash = g_hash_table_new(g_str_hash, g_str_equal);
+		for (p = default_accel_hash; p->type; p++)
+			g_hash_table_insert(hash, p->type, &p->entry);
+	}
+	return hash;
+}
+
+gboolean
+gnome_stock_menu_accel(char *type, guchar *key, guint8 *mod)
+{
+	AccelEntry *entry;
+
+	entry = g_hash_table_lookup(accel_hash(), type);
+	if (!entry) {
+		*key = 0;
+		*mod = 0;
+		return FALSE;
+	}
+
+	*key = entry->key;
+	*mod = entry->mod;
+	return (*key != 0);
 }
 

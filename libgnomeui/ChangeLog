@@ -1,3 +1,10 @@
+Sun Mar 22 16:04:00 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.[ch]: Added gnome_stock_menu_accel
+
+	* stock_demo.c: Use gnome_stock_menu_accel. Include GnomePropertyBox
+	sample.
+
 Sun Mar 22 10:26:09 1998  Radek Doulik  <rodo@aquarius>
 
 	* gnome-propertybox.c (just_close): send delete_event to property
