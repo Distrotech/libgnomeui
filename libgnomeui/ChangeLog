@@ -3,6 +3,7 @@
 	* gnome-pixmap.c (paint_with_pixbuf): now have all the composite
 	stuff done.  Still need to document et al., but the end is in
 	sight.
+	(generate_state): added docs.  Added a DARK_FACTOR to insensitive pixbufs.
 
 1999-11-16  Havoc Pennington  <hp@pobox.com>
 

@@ -34,7 +34,10 @@ static GtkMiscClass *parent_class = NULL;
 /**
  * gnome_pixmap_get_type:
  *
- * Returns: the GtkType for the GnomePixmap object
+ * Registers the &GnomePixmap class if necessary, and returns the type ID
+ * associated to it.
+ *
+ * Returns: the type ID of the &GnomePixmap class.
  */
 guint
 gnome_pixmap_get_type (void)
@@ -73,7 +76,7 @@ gnome_pixmap_init (GnomePixmap *gpixmap)
 	gpixmap->height = -1;
 	gpixmap->alpha_threshold = 128;
 	gpixmap->mode = GNOME_PIXMAP_SIMPLE;
-	gpixmap->mode = GNOME_PIXMAP_COLOR;/* REMOVE ME -- TESTING ONLY */
+
         for (i = 0; i < 5; i ++) {
                 gpixmap->image_data[i].pixbuf = NULL;
                 gpixmap->image_data[i].mask = NULL;
@@ -162,6 +165,17 @@ generate_state (GnomePixmap *gpixmap, gint state)
 					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) = intensity/2 + 127;
 					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 1) = intensity/2 + 127;
 					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 2) = intensity/2 + 127;
+				} else if (gpixmap->image_data[state].pixelate) {
+#define DARK_FACTOR 0.7
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) =
+						(guchar) (((1.0 - gpixmap->image_data[state].saturation) * intensity
+							   + gpixmap->image_data[state].saturation * (*(current_pixel)))) * DARK_FACTOR;
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 1) =
+						(guchar) (((1.0 - gpixmap->image_data[state].saturation) * intensity
+							   + gpixmap->image_data[state].saturation * (*(current_pixel + 1)))) * DARK_FACTOR;
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 2) =
+						(guchar) (((1.0 - gpixmap->image_data[state].saturation) * intensity
+							   + gpixmap->image_data[state].saturation * (*(current_pixel + 2)))) * DARK_FACTOR;
 				} else {
 					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) =
 						(guchar) ((1.0 - gpixmap->image_data[state].saturation) * intensity
@@ -245,7 +259,7 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
 
 #if 0
 	g_print ("width=%d\theight=%d\n", gdk_pixbuf_get_width (draw_source), gdk_pixbuf_get_height (draw_source));
-	g_print ("area->x=%d\tarea->y=%d\tarea->width=%d\tarea->height=%d\nx_off=%d\ty_off=%d\nright=%d\tleft=%d\ttop=%d\tbottom=%d\n\n", area->x, area->y, area->width, area->height, x_off, y_off, right_clip, left_clip, top_clip, bottom_clip); 
+	g_print ("area->x=%d\tarea->y=%d\tarea->width=%d\tarea->height=%d\nx_off=%d\ty_off=%d\nright=%d\tleft=%d\ttop=%d\tbottom=%d\n\n", area->x, area->y, area->width, area->height, x_off, y_off, right_clip, left_clip, top_clip, bottom_clip);
 #endif
 	if (gpixmap->mode == GNOME_PIXMAP_SIMPLE || !gdk_pixbuf_get_has_alpha (draw_source)) {
 		if (draw_mask) {
@@ -272,7 +286,7 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
 		gint i, j, height, width, rowstride, dest_rowstride;
 		gint r, g, b;
 		guchar *dest_pixels, *c, *a, *original_pixels;
-		
+
 
 		dest_source = gdk_pixbuf_new (ART_PIX_RGB,
 					      FALSE,
@@ -513,9 +527,17 @@ free_buffer (gpointer user_data, gpointer data)
  * Public functions
  */
 
-/* Creators */
+
+/**
+ * gnome_pixmap_new:
+ * @void:
+ *
+ * Creates a new empty @GnomePixmap.
+ *
+ * Return value: A newly-created @GnomePixmap
+ **/
 GtkWidget*
-gnome_pixmap_new()
+gnome_pixmap_new (void)
 {
         GtkWidget* widget;
 
@@ -528,16 +550,18 @@ gnome_pixmap_new()
  * gnome_pixmap_new_from_file:
  * @filename: The filename of the file to be loaded.
  *
- * note that the new_from_file functions give you no way to detect errors;
+ * Note that the new_from_file functions give you no way to detect errors;
  * if the file isn't found/loaded, you get an empty widget.
  * to detect errors just do:
  *
  * gdk_pixbuf_new_from_file (filename);
  * if (pixbuf != NULL) {
  *         gpixmap = gnome_pixmap_new_from_pixbuf (pixbuf);
+ * } else {
+ *         // handle your error...
  * }
  *
- * Return value: A newly allocated gnome pixmap with the file at @filename loaded.
+ * Return value: A newly allocated @GnomePixmap with the file at @filename loaded.
  **/
 GtkWidget*
 gnome_pixmap_new_from_file          (const char *filename)
@@ -557,12 +581,27 @@ gnome_pixmap_new_from_file          (const char *filename)
         return retval;
 }
 
+/**
+ * gnome_pixmap_new_from_file_at_size:
+ * @filename: The filename of the file to be loaded.
+ * @width: The width to scale the image to.
+ * @height: The height to scale the image to.
+ *
+ * Loads a new @GnomePixmap from a file, and scales it (if necessary) to the
+ * size indicated by @height and @width.  If either are set to -1, then the
+ * "natural" dimension of the image is used in place.  See
+ * @gnome_pixmap_new_from_file for information on error handling.
+ *
+ * Return value: value: A newly allocated @GnomePixmap with the file at @filename loaded.
+ **/
 GtkWidget*
 gnome_pixmap_new_from_file_at_size          (const gchar *filename, gint width, gint height)
 {
         GtkWidget *retval = NULL;
 
 	g_return_val_if_fail (filename != NULL, NULL);
+	g_return_val_if_fail (width >= -1, NULL);
+	g_return_val_if_fail (height >= -1, NULL);
 
 	retval = gnome_pixmap_new_from_file (filename);
 	gnome_pixmap_set_pixbuf_size (GNOME_PIXMAP (retval), width, height);
@@ -570,6 +609,18 @@ gnome_pixmap_new_from_file_at_size          (const gchar *filename, gint width, 
         return retval;
 }
 
+/**
+ * gnome_pixmap_new_from_file_at_size:
+ * @xpm_data: The xpm data to be loaded.
+ * @width: The width to scale the image to.
+ * @height: The height to scale the image to.
+ *
+ * Loads a new @GnomePixmap from the @xpm_data, and scales it (if necessary) to
+ * the size indicated by @height and @width.  If either are set to -1, then the
+ * "natural" dimension of the image is used in place.
+ *
+ * Return value: value: A newly allocated @GnomePixmap with the image from @xpm_data loaded.
+ **/
 GtkWidget*
 gnome_pixmap_new_from_xpm_d         (const char **xpm_data)
 {
@@ -589,12 +640,26 @@ gnome_pixmap_new_from_xpm_d         (const char **xpm_data)
         return retval;
 }
 
+/**
+ * gnome_pixmap_new_from_file_at_size:
+ * @xpm_data: The xpm data to be loaded.
+ * @width: The width to scale the image to.
+ * @height: The height to scale the image to.
+ *
+ * Loads a new @GnomePixmap from the @xpm_data, and scales it (if necessary) to
+ * the size indicated by @height and @width.  If either are set to -1, then the
+ * "natural" dimension of the image is used in place.
+ *
+ * Return value: value: A newly allocated @GnomePixmap with the image from @xpm_data loaded.
+ **/
 GtkWidget*
 gnome_pixmap_new_from_xpm_d_at_size (const char **xpm_data, int width, int height)
 {
         GtkWidget *retval = NULL;
 
 	g_return_val_if_fail (xpm_data != NULL, NULL);
+	g_return_val_if_fail (width >= -1, NULL);
+	g_return_val_if_fail (height >= -1, NULL);
 
 	retval = gnome_pixmap_new_from_xpm_d (xpm_data);
 	gnome_pixmap_set_pixbuf_size (GNOME_PIXMAP (retval), width, height);
@@ -602,6 +667,15 @@ gnome_pixmap_new_from_xpm_d_at_size (const char **xpm_data, int width, int heigh
         return retval;
 }
 
+
+/**
+ * gnome_pixmap_new_from_file_at_size:
+ * @pixbuf: The pixbuf to be loaded.
+ *
+ * Loads a new @GnomePixmap from the @pixbuf.
+ *
+ * Return value: value: A newly allocated @GnomePixmap with the image from @pixbuf loaded.
+ **/
 GtkWidget*
 gnome_pixmap_new_from_pixbuf          (GdkPixbuf *pixbuf)
 {
@@ -640,12 +714,26 @@ gnome_pixmap_new_from_pixbuf          (GdkPixbuf *pixbuf)
         /*return gnome_pixmap_new_from_pixbuf_at_size(pixbuf, -1, -1);*/
 }
 
+/**
+ * gnome_pixmap_new_from_file_at_size:
+ * @pixbuf: The pixbuf be loaded.
+ * @width: The width to scale the image to.
+ * @height: The height to scale the image to.
+ *
+ * Loads a new @GnomePixmap from the @pixbuf, and scales it (if necessary) to
+ * the size indicated by @height and @width.  If either are set to -1, then the
+ * "natural" dimension of the image is used in place.
+ *
+ * Return value: value: A newly allocated @GnomePixmap with the image from @pixbuf loaded.
+ **/
 GtkWidget*
 gnome_pixmap_new_from_pixbuf_at_size  (GdkPixbuf *pixbuf, gint width, gint height)
 {
         GtkWidget *retval = NULL;
 
 	g_return_val_if_fail (pixbuf != NULL, NULL);
+	g_return_val_if_fail (width >= -1, NULL);
+	g_return_val_if_fail (height >= -1, NULL);
 
 	retval = gnome_pixmap_new_from_pixbuf (pixbuf);
 	gnome_pixmap_set_pixbuf_size (GNOME_PIXMAP (retval), width, height);
@@ -653,6 +741,17 @@ gnome_pixmap_new_from_pixbuf_at_size  (GdkPixbuf *pixbuf, gint width, gint heigh
         return retval;
 }
 
+/**
+ * gnome_pixmap_set_pixbuf_size:
+ * @gpixmap: A @GnomePixmap.
+ * @width: The new width.
+ * @height: The new height.
+ *
+ * Sets the current size of the image displayed.  If there were custom "state"
+ * pixbufs set, as a side effect, they are discarded and must be re set at the
+ * new size.
+ *
+ **/
 /* Setters and getters */
 void
 gnome_pixmap_set_pixbuf_size (GnomePixmap      *gpixmap,
@@ -700,6 +799,18 @@ gnome_pixmap_set_pixbuf_size (GnomePixmap      *gpixmap,
 		gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
 }
 
+/**
+ * gnome_pixmap_get_pixbuf_size:
+ * @gpixmap: A @GnomePixmap
+ * @width: A pointer to place the width in.
+ * @height: A pointer to place the height in.
+ *
+ * Sets @width and @height to be the widgets current dimensions.  They will
+ * return the width or height of the image, or -1, -1 if the image's "natural"
+ * dimensions are used.  Either or both dimension arguments may be NULL, as
+ * necessary.
+ *
+ **/
 void
 gnome_pixmap_get_pixbuf_size (GnomePixmap      *gpixmap,
 			      gint             *width,
@@ -715,6 +826,18 @@ gnome_pixmap_get_pixbuf_size (GnomePixmap      *gpixmap,
 }
 
 
+/**
+ * gnome_pixmap_set_pixbuf:
+ * @gpixmap: A @GnomePixmap.
+ * @pixbuf: The new pixbuf.
+ *
+ * Sets the image shown to be that of the pixbuf.  If there is a current image
+ * used by the @gpixmap, it is discarded along with any pixmaps at a particular
+ * state.  However, the @gpixmap will keep the same geometry as the old image,
+ * or if the width or height are set to -1, it will inherit the new image's
+ * geometry.
+ *
+ **/
 void
 gnome_pixmap_set_pixbuf (GnomePixmap *gpixmap,
 			 GdkPixbuf *pixbuf)
@@ -724,6 +847,9 @@ gnome_pixmap_set_pixbuf (GnomePixmap *gpixmap,
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
 	g_return_if_fail (pixbuf != NULL);
+
+	if (pixbuf == gpixmap->original_image)
+		return;
 
 	old_width = gpixmap->width;
 	old_height = gpixmap->height;
@@ -758,6 +884,39 @@ gnome_pixmap_set_pixbuf (GnomePixmap *gpixmap,
 	}
 }
 
+
+/**
+ * gnome_pixmap_get_pixbuf:
+ * @gpixmap: A @GnomePixmap.
+ *
+ * Gets the current image used by @gpixmap.
+ *
+ * Return value: A pixbuf.
+ **/
+GdkPixbuf *
+gnome_pixmap_get_pixbuf (GnomePixmap      *gpixmap)
+{
+	g_return_val_if_fail (gpixmap != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_PIXMAP (gpixmap), NULL);
+
+	return gpixmap->original_image;
+}
+
+
+/**
+ * gnome_pixmap_set_pixbuf_at_state:
+ * @gpixmap: A @GnomePixmap.
+ * @state: The state being set.
+ * @pixbuf: The new image for the state.
+ * @mask: The mask for the new image.
+ *
+ * Sets a custom image for the image at @state.  For example, you can set the
+ * prelighted appearance to a different image from the normal one.  If
+ * necessary, the image will be scaled to the appropriate size.  The mask can
+ * also be optionally NULL.  The image set will be modified by the draw vals as
+ * normal.
+ *
+ **/
 void
 gnome_pixmap_set_pixbuf_at_state (GnomePixmap *gpixmap,
 				  GtkStateType state,
@@ -787,6 +946,18 @@ gnome_pixmap_set_pixbuf_at_state (GnomePixmap *gpixmap,
         set_pixbuf (gpixmap, state, pixbuf, mask);
 }
 
+/**
+ * gnome_pixmap_set_pixbufs_at_state:
+ * @gpixmap: A @GnomePixmap.
+ * @pixbufs: The images.
+ * @masks: The masks.
+ *
+ * Sets a custom image for all the possible states of the image.  Both @pixbufs
+ * and @masks are indexed by a GtkStateType.  Any or all of the images can be
+ * NULL, as necessary.  The image set will be modified by the draw vals as
+ * normal.
+ *
+ **/
 void
 gnome_pixmap_set_pixbufs_at_state (GnomePixmap *gpixmap,
 				   GdkPixbuf   *pixbufs[5],
@@ -814,6 +985,13 @@ gnome_pixmap_set_pixbufs_at_state (GnomePixmap *gpixmap,
         set_pixbufs(gpixmap, pixbufs, masks);
 }
 
+/**
+ * gnome_pixmap_clear:
+ * @gpixmap: A @GnomePixmap.
+ *
+ * Removes any images from @gpixmap.  If still visible, the image will appear empty.
+ *
+ **/
 void
 gnome_pixmap_clear (GnomePixmap *gpixmap)
 {
@@ -835,13 +1013,33 @@ gnome_pixmap_clear (GnomePixmap *gpixmap)
 		gdk_pixmap_unref (gpixmap->original_scaled_mask);
 		gpixmap->original_scaled_mask = NULL;
 	}
+
+        if (GTK_WIDGET_VISIBLE (gpixmap)) {
+		gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
+	}
 }
 
+/**
+ * gnome_pixmap_set_draw_vals:
+ * @gpixmap: A @GnomePixmap.
+ * @state: The the state to set the modifications to
+ * @saturation: The saturtion offset.
+ * @pixelate: Draw the insensitive stipple.
+ *
+ * Sets the modification parameters for a particular state.  The saturation
+ * level determines the amount of color in the image.  The default level of 1.0
+ * leaves the color unchanged while a level of 0.0 means the image is fully
+ * saturated, and has no color.  @saturation can be set to values greater then 1.0,
+ * or less then 0.0, but this produces less meaningful results.  If @pixelate is
+ * set to TRUE, then in adition to any saturation, a light stipple is overlayed
+ * over the image.
+ *
+ **/
 void
-gnome_pixmap_set_state (GnomePixmap *gpixmap,
-			GtkStateType state,
-			gfloat saturation,
-			gboolean pixelate)
+gnome_pixmap_set_draw_vals (GnomePixmap *gpixmap,
+			    GtkStateType state,
+			    gfloat saturation,
+			    gboolean pixelate)
 {
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
@@ -851,6 +1049,14 @@ gnome_pixmap_set_state (GnomePixmap *gpixmap,
 	gpixmap->image_data[state].pixelate = pixelate;
 }
 
+/**
+ * gnome_pixmap_set_draw_mode:
+ * @gpixmap: A @GnomePixmap.
+ * @mode: The new drawing mode.
+ *
+ * This sets the drawing mode of the image to be @mode.  The image
+ * must have an alpha channel if @GNOME_PIXMAP_COLOR is to be used.
+ **/
 void
 gnome_pixmap_set_draw_mode (GnomePixmap *gpixmap,
 			    GnomePixmapDraw mode)
@@ -861,6 +1067,9 @@ gnome_pixmap_set_draw_mode (GnomePixmap *gpixmap,
 	if (gpixmap->mode == mode)
 		return;
 
+	if (gpixmap->original_image && !gdk_pixbuf_get_has_alpha (gpixmap->original_image))
+		return;
+
 	gpixmap->mode = mode;
 	clear_old_images (gpixmap);
 
@@ -869,6 +1078,14 @@ gnome_pixmap_set_draw_mode (GnomePixmap *gpixmap,
 	}
 }
 
+/**
+ * gnome_pixmap_get_draw_mode:
+ * @gpixmap: A @GnomePixmap.
+ *
+ * Gets the current draw mode.
+ *
+ * Return value: The current @GnomePixmapDraw setting.
+ **/
 GnomePixmapDraw
 gnome_pixmap_get_draw_mode (GnomePixmap *gpixmap)
 {
@@ -878,6 +1095,16 @@ gnome_pixmap_get_draw_mode (GnomePixmap *gpixmap)
 	return gpixmap->mode;
 }
 
+/**
+ * gnome_pixmap_set_alpha_threshold:
+ * @gpixmap: A @GnomePixmap.
+ * @alpha_threshold: The alpha threshold
+ *
+ * Sets the alpha threshold for @gpixmap.  It is used to determine which pixels
+ * are shown when the image has an alpha channel, and is only used if no mask is
+ * set.
+ *
+ **/
 void
 gnome_pixmap_set_alpha_threshold (GnomePixmap *gpixmap,
 				  gint alpha_threshold)
@@ -908,6 +1135,14 @@ gnome_pixmap_set_alpha_threshold (GnomePixmap *gpixmap,
 	}
 }
 
+/**
+ * gnome_pixmap_get_alpha_threshold:
+ * @gpixmap: A @GnomePixmap.
+ *
+ * Gets the current alpha threshold.
+ *
+ * Return value: The alpha threshold
+ **/
 gint
 gnome_pixmap_get_alpha_threshold (GnomePixmap *gpixmap)
 {
@@ -916,7 +1151,6 @@ gnome_pixmap_get_alpha_threshold (GnomePixmap *gpixmap)
 
 	return gpixmap->alpha_threshold;
 }
-	
 
 
 

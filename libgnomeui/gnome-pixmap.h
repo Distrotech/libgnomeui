@@ -77,6 +77,7 @@ void            gnome_pixmap_get_pixbuf_size         (GnomePixmap      *gpixmap,
 						      gint             *height);
 void            gnome_pixmap_set_pixbuf              (GnomePixmap      *gpixmap,
 						      GdkPixbuf        *pixbuf);
+GdkPixbuf      *gnome_pixmap_get_pixbuf              (GnomePixmap      *gpixmap);
    
 /* Sets the individual states, instead of generating them. */
 void            gnome_pixmap_set_pixbuf_at_state     (GnomePixmap      *gpixmap,
@@ -86,7 +87,7 @@ void            gnome_pixmap_set_pixbuf_at_state     (GnomePixmap      *gpixmap,
 void            gnome_pixmap_set_pixbufs_at_state    (GnomePixmap      *gpixmap,
 						      GdkPixbuf        *pixbufs[5],
 						      GdkBitmap        *masks[5]);
-void            gnome_pixmap_set_state               (GnomePixmap      *gpixmap,
+void            gnome_pixmap_set_draw_vals           (GnomePixmap      *gpixmap,
 						      GtkStateType      state,
 						      gfloat            saturation,
 						      gboolean          pixelate);
