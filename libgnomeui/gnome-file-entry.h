@@ -40,6 +40,8 @@ struct _GnomeFileEntry {
 
 struct _GnomeFileEntryClass {
 	GtkHBoxClass parent_class;
+	
+	void (* browse_clicked)(GnomeFileEntry *fentry);
 };
 
 

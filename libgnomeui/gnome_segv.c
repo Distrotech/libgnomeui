@@ -6,13 +6,13 @@
 
 int retval = 1;
 
-void button_click(GtkWidget *button, int choice)
+static void button_click(GtkWidget *button, int choice)
 {
   retval = choice;
   gtk_main_quit();
 }
 
-gboolean delete_event(GtkWidget *awin)
+static gboolean delete_event(GtkWidget *awin)
 {
   retval = 1;
   gtk_main_quit();

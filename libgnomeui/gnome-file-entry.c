@@ -6,6 +6,7 @@
  */
 #include <config.h>
 #include <unistd.h> /*getcwd*/
+#include <sys/param.h> /*realpath*/
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
@@ -28,7 +29,7 @@ static void gnome_file_entry_drag_data_received (GtkEntry         *widget,
 						 GtkSelectionData *data,
 						 guint             info,
 						 guint             time);
-
+static void browse_clicked(GnomeFileEntry *fentry);
 static GtkHBoxClass *parent_class;
 
 guint
@@ -53,6 +54,13 @@ gnome_file_entry_get_type (void)
 	return file_entry_type;
 }
 
+enum {
+	BROWSE_CLICKED_SIGNAL,
+	LAST_SIGNAL
+};
+
+static int gnome_file_entry_signals[LAST_SIGNAL] = {0};
+
 static void
 gnome_file_entry_class_init (GnomeFileEntryClass *class)
 {
@@ -60,8 +68,22 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 
 	object_class = (GtkObjectClass *) class;
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
-	object_class->finalize = gnome_file_entry_finalize;
+	
+	gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL] =
+		gtk_signal_new("browse_clicked",
+			       GTK_RUN_LAST,
+			       object_class->type,
+			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
+			       			 browse_clicked),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE,
+			       0);
+	gtk_object_class_add_signals(object_class,gnome_file_entry_signals,
+				     LAST_SIGNAL);
 
+	object_class->finalize = gnome_file_entry_finalize;
+	
+	class->browse_clicked = browse_clicked;
 }
 
 static void
@@ -75,7 +97,8 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	fentry = GNOME_FILE_ENTRY (gtk_object_get_user_data (GTK_OBJECT (fs)));
 	entry = gnome_file_entry_gtk_entry (fentry);
 
-	gtk_entry_set_text (GTK_ENTRY (entry), gtk_file_selection_get_filename (fs));
+	gtk_entry_set_text (GTK_ENTRY (entry),
+			    gtk_file_selection_get_filename (fs));
 	gtk_widget_destroy (GTK_WIDGET (fs));
 }
 
@@ -88,15 +111,12 @@ browse_dialog_kill (GtkWidget *widget, gpointer data)
 }
 
 static void
-browse_clicked (GtkWidget *widget, gpointer data)
-{
-	GnomeFileEntry *fentry;
+browse_clicked(GnomeFileEntry *fentry)
+{	
 	GtkWidget *fsw;
 	GtkFileSelection *fs;
 	char *p;
 
-	fentry = GNOME_FILE_ENTRY (data);
-	
 	/*if it already exists make sure it's shown and raised*/
 	if(fentry->fsw) {
 		gtk_widget_show(fentry->fsw);
@@ -147,6 +167,13 @@ browse_clicked (GtkWidget *widget, gpointer data)
 }
 
 static void
+browse_clicked_signal(GtkWidget *widget, gpointer data)
+{
+	gtk_signal_emit(GTK_OBJECT(data),
+			gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL]);
+}
+
+static void
 gnome_file_entry_drag_data_received (GtkEntry         *widget,
 				     GdkDragContext   *context,
 				     gint              x,
@@ -186,7 +213,7 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 
 	button = gtk_button_new_with_label (_("Browse..."));
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    (GtkSignalFunc) browse_clicked,
+			    (GtkSignalFunc) browse_clicked_signal,
 			    fentry);
 	gtk_box_pack_start (GTK_BOX (fentry), button, FALSE, FALSE, 0);
 	gtk_widget_show (button);
@@ -258,14 +285,24 @@ gnome_file_entry_set_title (GnomeFileEntry *fentry, char *browse_dialog_title)
 void
 gnome_file_entry_set_default_path(GnomeFileEntry *fentry, char *path)
 {
+	char rpath[MAXPATHLEN+1];
+	char *p;
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
+	
+	if(path) {
+		if(realpath(path,rpath))
+			p = g_strdup(rpath);
+		else
+			p = NULL;
+	} else
+		p = NULL;
 
 	if(fentry->default_path)
 		g_free(fentry->default_path);
 	
 	/*handles NULL as well*/
-	fentry->default_path = g_strdup(path);
+	fentry->default_path = p;
 }
 
 char *

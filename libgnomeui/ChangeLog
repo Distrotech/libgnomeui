@@ -1,3 +1,18 @@
+Fri Nov 20 00:21:45 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-segv.c: made button_click and delete_event static as to
+	  get rid of a warning
+
+	* gnome-file-entry.[ch]: added browse_clicked signal, which will
+	  be used in pixmap entry for modifying the file selection dialog,
+	  also made the set_default_path run the path through realpath
+	  to get rid of weird things in paths
+
+	* gnome-pixmap-entry.[ch]: a new widget that uses the file entry
+	  and can include a preview of the image that was picked, in the
+	  future it will have a file selection widget that is a lot like
+	  the electric eyes one
+
 1998-11-20  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-popup-help.c (popup_pre_callback): Now Cut and Copy are
