@@ -1,3 +1,8 @@
+1998-11-27  Justin Maurer  <justin@openprojects.net>
+
+	* gnome-app-helper.c: Added GNOMEUIINFO_SUBTREE_ITEM_STOCK macro. Added 
+	GNOMEUIINFO_SUBTREE_STOCK macro (currently broken). Cleaned up comments.
+	
 1998-11-27  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-properties.[ch]: Scratched it. Please do not remove this

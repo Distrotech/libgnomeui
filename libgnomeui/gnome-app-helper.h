@@ -1,10 +1,13 @@
-/* GnomeApp widget (C) 1998 Red Hat Software, Miguel de Icaza, Federico Mena, Chris Toshok.
+/* GnomeApp widget (C) 1998 Red Hat Software, Miguel de Icaza, Federico Mena, 
+ * Chris Toshok.
  *
- * Originally by Elliot Lee, with hacking by Chris Toshok for *_data, Marc Ewing added menu support,
- * toggle and radio support, and I don't know what you other people did :) menu insertion/removal
- * functions by Jaka Mocnik.
+ * Originally by Elliot Lee, with hacking by Chris Toshok for *_data, 
+ * Marc Ewing added menu support, toggle and radio support, and I don't know 
+ * what you other people did :) menu insertion/removal functions by Jaka Mocnik.
+ * Some subtree hackage (and possibly various justification hacks) by Justin 
+ * Maurer.
  *
- * Major cleanups and rearrangements by Federico Mena.
+ * Major cleanups and rearrangements by Federico Mena and Justin Maurer.
  */
 
 #ifndef GNOME_APP_HELPER_H
@@ -14,29 +17,38 @@
 
 BEGIN_GNOME_DECLS
 
-/* This module lets you easily create menus and toolbars for your applications.  You basically
- * define a hierarchy of arrays of GnomeUIInfo structures, and you later call the provided functions
- * to create menu bars or tool bars.
+/* This module lets you easily create menus and toolbars for your 
+ * applications. You basically define a hierarchy of arrays of GnomeUIInfo 
+ * structures, and you later call the provided functions to create menu bars 
+ * or tool bars.
  */
 
-/* These values identify the item type that a particular GnomeUIInfo structure specifies */
+/* These values identify the item type that a particular GnomeUIInfo structure 
+ * specifies */
 typedef enum {
-	GNOME_APP_UI_ENDOFINFO,		/* No more items, use it at the end of an array */
-	GNOME_APP_UI_ITEM,		/* Normal item, or radio item if it is inside a radioitems group */
+	GNOME_APP_UI_ENDOFINFO,		/* No more items, use it at the end of 
+					   an array */
+	GNOME_APP_UI_ITEM,		/* Normal item, or radio item if it is 
+					   inside a radioitems group */
 	GNOME_APP_UI_TOGGLEITEM,	/* Toggle (check box) item */
 	GNOME_APP_UI_RADIOITEMS,	/* Radio item group */
-	GNOME_APP_UI_SUBTREE,		/* Item that defines a subtree/submenu */
-	GNOME_APP_UI_SEPARATOR,		/* Separator line (menus) or blank space (toolbars) */
-	GNOME_APP_UI_HELP,		/* Create a list of help topics, used in the Help menu */
-	GNOME_APP_UI_JUSTIFY_RIGHT,	/* Specifies that all subsequent items should be right-justified on the menubar */
-	GNOME_APP_UI_BUILDER_DATA	/* Specifies the builder data for the following entries, see
-					 * code for further info.
-					 */
-	/* one should be careful when using gnome_app_create_*_[custom|interp|with_data]() functions
-	 * with GnomeUIInfo arrays containing GNOME_APP_UI_BUILDER_DATA items since their
-	 * GnomeUIBuilderData structures completely override the ones generated or supplied by the
-	 * above functions.
-	 */
+	GNOME_APP_UI_SUBTREE,		/* Item that defines a 
+					   subtree/submenu */
+	GNOME_APP_UI_SEPARATOR,		/* Separator line (menus) or blank 
+					   space (toolbars) */
+	GNOME_APP_UI_HELP,		/* Create a list of help topics, 
+					   used in the Help menu */
+	GNOME_APP_UI_JUSTIFY_RIGHT,	/* Specifies that all subsequent items 
+					   should be right-justified on the 
+					   menubar */
+	GNOME_APP_UI_BUILDER_DATA	/* Specifies the builder data for the 
+					   following entries, see code for 
+					   further info */
+	/* one should be careful when using 
+	 * gnome_app_create_*_[custom|interp|with_data]() functions with 
+	 * GnomeUIInfo arrays containing GNOME_APP_UI_BUILDER_DATA items since 
+	 * their GnomeUIBuilderData structures completely override the ones 
+	 * generated or supplied by the above functions. */
 } GnomeUIInfoType;
 
 /* These values identify the type of pixmap used in an item */
@@ -44,60 +56,56 @@ typedef enum {
 	GNOME_APP_PIXMAP_NONE,		/* No pixmap specified */
 	GNOME_APP_PIXMAP_STOCK,		/* Use a stock pixmap (GnomeStock) */
 	GNOME_APP_PIXMAP_DATA,		/* Use a pixmap from inline xpm data */
-	GNOME_APP_PIXMAP_FILENAME	/* Use a pixmap from the specified filename */
+	GNOME_APP_PIXMAP_FILENAME	/* Use a pixmap from the specified 
+					   filename */
 } GnomeUIPixmapType;
 
-/* This is the structure that defines an item in a menu bar or toolbar.  The idea is to create
- * arrayw of such structures with the information needed to create menus or toolbars.  The most
- * convenient way to create such a structure is to use the GNOMEUIINFO_* macros provided below.
- */
+/* This is the structure that defines an item in a menu bar or toolbar.  The 
+ * idea is to create an array of such structures with the information needed 
+ * to create menus or toolbars.  The most convenient way to create such a 
+ * structure is to use the GNOMEUIINFO_* macros provided below. */
 typedef struct {
 	GnomeUIInfoType type;		/* Type of item */
-
 	gchar *label;			/* String to use in the label */
-
-	gchar *hint;			/* For toolbar items, the tooltip.  For menu items, the
-					 * status bar message.
-					 */
-
-	gpointer moreinfo;		/* For an item, toggleitem, or radioitem, this is a pointer
-					 * to the function to call when the item is activated.
-					 *
-					 * For a subtree, a pointer to another array of GnomeUIInfo
-					 * structures.
-					 *
-					 * For a radioitem lead entry, a pointer to an array of
-					 * GnomeUIInfo structures for the radio item group.
-					 *
-					 * For a help item, specifies the help node to load
-					 * (i.e. the application's identifier) or NULL for the main
-					 * program's name.
-					 *
-					 * For builder data, points to the GnomeUIBuilderData
-					 * structure for the following items.
-					 */
-
+	gchar *hint;			/* For toolbar items, the tooltip. For 
+					   menu items, the status bar message */
+	gpointer moreinfo;		/* For an item, toggleitem, or 
+					   radioitem, this is a pointer to the 
+					   function to call when the item is 
+					   activated. For a subtree, a pointer 
+					   to another array of GnomeUIInfo 
+					   structures. For a radioitem lead 
+					   entry, a pointer to an array of 
+					   GnomeUIInfo structures for the radio 
+					   item group. For a help item, 
+					   specifies the help node to load 
+					   (i.e. the application's identifier) 
+					   or NULL for the main program's name.
+					   For builder data, points to the 
+					   GnomeUIBuilderData structure for 
+					   the following items */
 	gpointer user_data;		/* Data pointer to pass to callbacks */
-
-	gpointer unused_data;		/* Reserved for future expansion, should be NULL */
-
+	gpointer unused_data;		/* Reserved for future expansion, 
+					   should be NULL */
 	GnomeUIPixmapType pixmap_type;	/* Type of pixmap for the item */
-
 	gpointer pixmap_info;		/* Pointer to the pixmap information:
 					 *
-					 * For GNOME_APP_PIXMAP_STOCK, a pointer to the stock icon name.
+					 * For GNOME_APP_PIXMAP_STOCK, a 
+					 * pointer to the stock icon name.
 					 *
-					 * For GNOME_APP_PIXMAP_DATA, a pointer to the inline xpm data.
+					 * For GNOME_APP_PIXMAP_DATA, a 
+					 * pointer to the inline xpm data.
 					 *
-					 * For GNOME_APP_PIXMAP_FILENAME, a pointer to the filename string.
+					 * For GNOME_APP_PIXMAP_FILENAME, a 
+					 * pointer to the filename string.
 					 */
-
 	guint accelerator_key;		/* Accelerator key, or 0 for none */
-	GdkModifierType ac_mods;	/* Mask of modifier keys for the accelerator */
+	GdkModifierType ac_mods;	/* Mask of modifier keys for the 
+					   accelerator */
 
-	GtkWidget *widget;		/* Filled in by gnome_app_create*, you can use this to tweak
-					 * the widgets once they have been created
-					 */
+	GtkWidget *widget;		/* Filled in by gnome_app_create*, you 
+					   can use this to tweak the widgets 
+					   once they have been created */
 } GnomeUIInfo;
 
 /* Callback data */
@@ -120,34 +128,28 @@ typedef struct {
 					  (GnomeUIPixmapType) 0, NULL, 0, (GdkModifierType) 0, NULL }
 
 /* Insert an item with an inline xpm icon */
-#define GNOMEUIINFO_ITEM(label, tooltip, callback, xpm_data)				\
-					{ GNOME_APP_UI_ITEM, label, tooltip, callback,	\
-					  NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,	\
-					  0, (GdkModifierType) 0, NULL}
+#define GNOMEUIINFO_ITEM(label, tooltip, callback, xpm_data) \				{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
+		GNOME_APP_PIXMAP_DATA, xpm_data, 0, (GdkModifierType) 0, NULL}
 
 /* Insert an item with a stock icon */
-#define GNOMEUIINFO_ITEM_STOCK(label, tooltip, callback, stock_id)			\
-					{ GNOME_APP_UI_ITEM, label, tooltip, callback,	\
-					  NULL, NULL, GNOME_APP_PIXMAP_STOCK, stock_id,	\
-					  0, (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_ITEM_STOCK(label, tooltip, callback, stock_id) \
+	{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
+		GNOME_APP_PIXMAP_STOCK, stock_id, 0, (GdkModifierType) 0, NULL }
 
 /* Insert an item with no icon */
-#define GNOMEUIINFO_ITEM_NONE(label, tooltip, callback)					\
-					{ GNOME_APP_UI_ITEM, label, tooltip, callback,	\
-					  NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL,	\
-					  0, (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_ITEM_NONE(label, tooltip, callback) \
+	{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
+		GNOME_APP_PIXMAP_NONE, NULL, 0, (GdkModifierType) 0, NULL }
 
 /* Insert an item with an inline xpm icon and a user data pointer */
-#define GNOMEUIINFO_ITEM_DATA(label, tooltip, callback, user_data, xpm_data)			\
-					{ GNOME_APP_UI_ITEM, label, tooltip, callback,		\
-					  user_data, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,	\
-					  0, (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_ITEM_DATA(label, tooltip, callback, user_data, xpm_data) \
+	{ GNOME_APP_UI_ITEM, label, tooltip, callback, user_data, NULL, \
+		GNOME_APP_PIXMAP_DATA, xpm_data, 0, (GdkModifierType) 0, NULL }
 
 /* Insert a toggle item (check box) with an inline xpm icon */
-#define GNOMEUIINFO_TOGGLEITEM(label, tooltip, callback, xpm_data)				\
-					{ GNOME_APP_UI_TOGGLEITEM, label, tooltip, callback,	\
-					  NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,		\
-					  0, (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_TOGGLEITEM(label, tooltip, callback, xpm_data) \
+	{ GNOME_APP_UI_TOGGLEITEM, label, tooltip, callback, NULL, NULL, \
+		GNOME_APP_PIXMAP_DATA, xpm_data, 0, (GdkModifierType) 0, NULL }
 
 /* Insert a toggle item (check box) with an inline xpm icon and a user data pointer */
 #define GNOMEUIINFO_TOGGLEITEM_DATA(label, tooltip, callback, user_data, xpm_data)		\
@@ -156,28 +158,35 @@ typedef struct {
 					  0, (GdkModifierType) 0, NULL }
 
 /* Insert all the help topics based on the application's id */
-#define GNOMEUIINFO_HELP(app_name)							\
-					{ GNOME_APP_UI_HELP, NULL, NULL, app_name,	\
-					  NULL, NULL, (GnomeUIPixmapType) 0, NULL, 0,	\
-					  (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_HELP(app_name) \
+	{ GNOME_APP_UI_HELP, NULL, NULL, app_name, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 
 /* Insert a subtree (submenu) */
-#define GNOMEUIINFO_SUBTREE(label, tree)						\
-					{ GNOME_APP_UI_SUBTREE, label, NULL, tree,	\
-					  NULL, NULL, (GnomeUIPixmapType) 0, NULL, 0,	\
-					  (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_SUBTREE(label, tree) \
+	{ GNOME_APP_UI_SUBTREE, label, NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 
+/* Insert a subtree (submenu) with a stock icon */
+#define GNOMEUIINFO_SUBTREE_STOCK(label, tree, stock_id) \
+	{ GNOME_APP_UI_SUBTREE, label, NULL, tree, NULL, NULL, \
+		GNOME_APP_PIXMAP_STOCK, stock_id, 0, (GdkModifierType) 0, NULL }
+
+
+/* Insert a subtree (submenu) menu item */
+#define GNOMEUIINFO_SUBTREE_ITEM_STOCK(label, tree, callback, stock_id)  \
+	{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
+		GNOME_APP_PIXMAP_STOCK, stock_id, 0, (GdkModifierType) 0, NULL }
+		
 /* Insert a list of radio items */
-#define GNOMEUIINFO_RADIOLIST(list)							\
-					{ GNOME_APP_UI_RADIOITEMS, NULL, NULL, list,	\
-					  NULL, NULL, (GnomeUIPixmapType) 0, NULL, 0,	\
-					  (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_RADIOLIST(list) \
+	{ GNOME_APP_UI_RADIOITEMS, NULL, NULL, list, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 
 /* Insert a radio item with an inline xpm icon */
-#define GNOMEUIINFO_RADIOITEM(label, tooltip, callback, xpm_data)				\
-					{ GNOME_APP_UI_RADIOITEMS, label, tooltip, callback,	\
-					  NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm,		\
-					  0, (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_RADIOITEM(label, tooltip, callback, xpm_data) \
+	{ GNOME_APP_UI_RADIOITEMS, label, tooltip, callback, NULL, NULL, \
+		GNOME_APP_PIXMAP_DATA, xpm, 0, (GdkModifierType) 0, NULL }
 
 /* Insert a radio item with an inline xpm icon and a user data pointer */
 #define GNOMEUIINFO_RADIOITEM_DATA(label, tooltip, callback, user_data, xpm_data)		\
