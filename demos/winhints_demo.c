@@ -1,7 +1,8 @@
 #include <config.h>
-#include <gnome.h>
 #include <gdk/gdkx.h>
-#include "gnome-winhints.h"
+#include <libgnome/gnome-i18n.h>
+#include <libgnomeui/libgnomeui.h>
+#include <libgnomeui/gnome-winhints.h>
 
 
 void layers_cb (GtkWidget *widget, void *data);
@@ -250,7 +251,8 @@ static void prepare_app(void)
   gtk_container_add(GTK_CONTAINER(button), hb);
   gtk_widget_show(hb);
 
-  apic = gnome_stock_new_with_icon (GNOME_STOCK_PIXMAP_HELP);
+  apic = gtk_image_new_from_stock (GNOME_STOCK_PIXMAP_HELP,
+				   GTK_ICON_SIZE_BUTTON);
   gtk_box_pack_start(GTK_BOX(hb), apic, FALSE, FALSE, 0);
   gtk_widget_show(apic);
 
@@ -258,7 +260,7 @@ static void prepare_app(void)
   gtk_box_pack_end(GTK_BOX(hb), label, FALSE, FALSE, 5);
   gtk_widget_show(label);
   
-  button = gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
+  button = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_CLOSE);
   gtk_box_pack_end(GTK_BOX(hb1), button, FALSE, FALSE, 0);
   gtk_signal_connect(GTK_OBJECT(button), "clicked",
                      GTK_SIGNAL_FUNC(quit_cb), lbox);
