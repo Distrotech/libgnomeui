@@ -25,13 +25,13 @@
  */
 
 #include <config.h>
-#include <libgnomeui/gnome-selector-widget.h>
+#include <libgnomeui/gnome-component-widget.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-async.h>
 #include <bonobo/bonobo-main.h>
 
-struct _GnomeSelectorWidgetPrivate {
+struct _GnomeComponentWidgetPrivate {
     gchar *moniker;
     Bonobo_Unknown corba_objref;
     Bonobo_UIContainer corba_ui_container;
@@ -40,11 +40,11 @@ struct _GnomeSelectorWidgetPrivate {
 };
 
 static GObject*
-gnome_selector_widget_constructor (GType                  type,
+gnome_component_widget_constructor (GType                  type,
 				   guint                  n_construct_properties,
 				   GObjectConstructParam *construct_properties);
 
-static BonoboWidgetClass *gnome_selector_widget_parent_class;
+static BonoboWidgetClass *gnome_component_widget_parent_class;
 
 enum {
     PROP_0,
@@ -56,26 +56,26 @@ enum {
 };
 
 static void
-gnome_selector_widget_finalize (GObject *object)
+gnome_component_widget_finalize (GObject *object)
 {
-    GnomeSelectorWidget *widget = GNOME_SELECTOR_WIDGET (object);
+    GnomeComponentWidget *widget = GNOME_COMPONENT_WIDGET (object);
 
     g_free (widget->_priv);
     widget->_priv = NULL;
 
-    G_OBJECT_CLASS (gnome_selector_widget_parent_class)->finalize (object);
+    G_OBJECT_CLASS (gnome_component_widget_parent_class)->finalize (object);
 }
 
 static void
-gnome_selector_widget_set_property (GObject *object, guint param_id,
+gnome_component_widget_set_property (GObject *object, guint param_id,
 				    const GValue *value, GParamSpec *pspec)
 {
-    GnomeSelectorWidget *widget;
+    GnomeComponentWidget *widget;
 
     g_return_if_fail (object != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR_WIDGET (object));
+    g_return_if_fail (GNOME_IS_COMPONENT_WIDGET (object));
 
-    widget = GNOME_SELECTOR_WIDGET (object);
+    widget = GNOME_COMPONENT_WIDGET (object);
 
     switch (param_id) {
     case PROP_MONIKER:
@@ -97,15 +97,15 @@ gnome_selector_widget_set_property (GObject *object, guint param_id,
 }
 
 static void
-gnome_selector_widget_get_property (GObject *object, guint param_id, GValue *value,
+gnome_component_widget_get_property (GObject *object, guint param_id, GValue *value,
 				    GParamSpec *pspec)
 {
-    GnomeSelectorWidget *widget;
+    GnomeComponentWidget *widget;
 
     g_return_if_fail (object != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR_WIDGET (object));
+    g_return_if_fail (GNOME_IS_COMPONENT_WIDGET (object));
 
-    widget = GNOME_SELECTOR_WIDGET (object);
+    widget = GNOME_COMPONENT_WIDGET (object);
 
     switch (param_id) {
     case PROP_MONIKER:
@@ -124,16 +124,16 @@ gnome_selector_widget_get_property (GObject *object, guint param_id, GValue *val
 }
 
 static void
-gnome_selector_widget_class_init (GnomeSelectorWidgetClass *klass)
+gnome_component_widget_class_init (GnomeComponentWidgetClass *klass)
 {
     GObjectClass *object_class = (GObjectClass *) klass;
 
-    gnome_selector_widget_parent_class = g_type_class_peek_parent (klass);
+    gnome_component_widget_parent_class = g_type_class_peek_parent (klass);
 
-    object_class->constructor = gnome_selector_widget_constructor;
-    object_class->finalize = gnome_selector_widget_finalize;
-    object_class->set_property = gnome_selector_widget_set_property;
-    object_class->get_property = gnome_selector_widget_get_property;
+    object_class->constructor = gnome_component_widget_constructor;
+    object_class->finalize = gnome_component_widget_finalize;
+    object_class->set_property = gnome_component_widget_set_property;
+    object_class->get_property = gnome_component_widget_get_property;
 
     /* Construction properties */
     g_object_class_install_property
@@ -158,23 +158,23 @@ gnome_selector_widget_class_init (GnomeSelectorWidgetClass *klass)
 }
 
 static void
-gnome_selector_widget_init (GnomeSelectorWidget *widget)
+gnome_component_widget_init (GnomeComponentWidget *widget)
 {
-    widget->_priv = g_new0 (GnomeSelectorWidgetPrivate, 1);
+    widget->_priv = g_new0 (GnomeComponentWidgetPrivate, 1);
 }
 
 GtkType
-gnome_selector_widget_get_type (void)
+gnome_component_widget_get_type (void)
 {
     static GtkType type = 0;
 
     if (! type) {
 	static const GtkTypeInfo info = {
-	    "GnomeSelectorWidget",
-	    sizeof (GnomeSelectorWidget),
-	    sizeof (GnomeSelectorWidgetClass),
-	    (GtkClassInitFunc) gnome_selector_widget_class_init,
-	    (GtkObjectInitFunc) gnome_selector_widget_init,
+	    "GnomeComponentWidget",
+	    sizeof (GnomeComponentWidget),
+	    sizeof (GnomeComponentWidgetClass),
+	    (GtkClassInitFunc) gnome_component_widget_class_init,
+	    (GtkObjectInitFunc) gnome_component_widget_init,
 	    NULL, /* reserved_1 */
 	    NULL, /* reserved_2 */
 	    (GtkClassInitFunc) NULL
@@ -186,16 +186,16 @@ gnome_selector_widget_get_type (void)
     return type;
 }
 
-extern GnomeSelectorWidget *
-gnome_selector_widget_do_construct (GnomeSelectorWidget *);
+extern GnomeComponentWidget *
+gnome_component_widget_do_construct (GnomeComponentWidget *);
 
-GnomeSelectorWidget *
-gnome_selector_widget_do_construct (GnomeSelectorWidget *widget)
+GnomeComponentWidget *
+gnome_component_widget_do_construct (GnomeComponentWidget *widget)
 {
-    GnomeSelectorWidgetPrivate *priv;
+    GnomeComponentWidgetPrivate *priv;
 
     g_return_val_if_fail (widget != NULL, NULL);
-    g_return_val_if_fail (GNOME_IS_SELECTOR_WIDGET (widget), NULL);
+    g_return_val_if_fail (GNOME_IS_COMPONENT_WIDGET (widget), NULL);
 
     priv = widget->_priv;
 
@@ -258,16 +258,16 @@ gnome_selector_widget_do_construct (GnomeSelectorWidget *widget)
 }
 
 static GObject*
-gnome_selector_widget_constructor (GType                  type,
+gnome_component_widget_constructor (GType                  type,
 				   guint                  n_construct_properties,
 				   GObjectConstructParam *construct_properties)
 {
-    GObject *object = G_OBJECT_CLASS (gnome_selector_widget_parent_class)->
+    GObject *object = G_OBJECT_CLASS (gnome_component_widget_parent_class)->
 	constructor (type, n_construct_properties, construct_properties);
-    GnomeSelectorWidget *widget = GNOME_SELECTOR_WIDGET (object);
+    GnomeComponentWidget *widget = GNOME_COMPONENT_WIDGET (object);
 
-    if (type == GNOME_TYPE_SELECTOR_WIDGET)
-	return (GObject *) gnome_selector_widget_do_construct (widget);
+    if (type == GNOME_TYPE_COMPONENT_WIDGET)
+	return (GObject *) gnome_component_widget_do_construct (widget);
     else
 	return object;
 }

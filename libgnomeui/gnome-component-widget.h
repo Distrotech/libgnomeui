@@ -24,13 +24,13 @@
   @NOTATION@
  */
 
-/* GnomeSelector widget
+/* GnomeComponent widget
  *
  * Author: Martin Baulig <baulig@suse.de>
  */
 
-#ifndef GNOME_SELECTOR_WIDGET_H
-#define GNOME_SELECTOR_WIDGET_H
+#ifndef GNOME_COMPONENT_WIDGET_H
+#define GNOME_COMPONENT_WIDGET_H
 
 
 #include <bonobo/bonobo-widget.h>
@@ -40,30 +40,30 @@
 G_BEGIN_DECLS
 
 
-#define GNOME_TYPE_SELECTOR_WIDGET            (gnome_selector_widget_get_type ())
-#define GNOME_SELECTOR_WIDGET(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_SELECTOR_WIDGET, GnomeSelectorWidget))
-#define GNOME_SELECTOR_WIDGET_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_SELECTOR_WIDGET, GnomeSelectorWidgetClass))
-#define GNOME_IS_SELECTOR_WIDGET(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_SELECTOR_WIDGET))
-#define GNOME_IS_SELECTOR_WIDGET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_SELECTOR_WIDGET))
+#define GNOME_TYPE_COMPONENT_WIDGET            (gnome_component_widget_get_type ())
+#define GNOME_COMPONENT_WIDGET(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_COMPONENT_WIDGET, GnomeComponentWidget))
+#define GNOME_COMPONENT_WIDGET_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_COMPONENT_WIDGET, GnomeComponentWidgetClass))
+#define GNOME_IS_COMPONENT_WIDGET(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_COMPONENT_WIDGET))
+#define GNOME_IS_COMPONENT_WIDGET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_COMPONENT_WIDGET))
 
 
-typedef struct _GnomeSelectorWidget             GnomeSelectorWidget;
-typedef struct _GnomeSelectorWidgetPrivate      GnomeSelectorWidgetPrivate;
-typedef struct _GnomeSelectorWidgetClass        GnomeSelectorWidgetClass;
+typedef struct _GnomeComponentWidget             GnomeComponentWidget;
+typedef struct _GnomeComponentWidgetPrivate      GnomeComponentWidgetPrivate;
+typedef struct _GnomeComponentWidgetClass        GnomeComponentWidgetClass;
 
-struct _GnomeSelectorWidget {
+struct _GnomeComponentWidget {
     BonoboWidget widget;
         
     /*< private >*/
-    GnomeSelectorWidgetPrivate *_priv;
+    GnomeComponentWidgetPrivate *_priv;
 };
 
-struct _GnomeSelectorWidgetClass {
+struct _GnomeComponentWidgetClass {
     BonoboWidgetClass parent_class;
 };
 
 GtkType
-gnome_selector_widget_get_type              (void) G_GNUC_CONST;
+gnome_component_widget_get_type              (void) G_GNUC_CONST;
 
 G_END_DECLS
 

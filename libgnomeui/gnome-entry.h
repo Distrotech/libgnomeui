@@ -33,8 +33,7 @@
 #define GNOME_ENTRY_H
 
 
-#include <libgnome/gnome-selector.h>
-#include <libgnomeui/gnome-selector-widget.h>
+#include <libgnomeui/gnome-component-widget.h>
 
 
 G_BEGIN_DECLS
@@ -53,14 +52,14 @@ typedef struct _GnomeEntryPrivate GnomeEntryPrivate;
 typedef struct _GnomeEntryClass   GnomeEntryClass;
 
 struct _GnomeEntry {
-    GnomeSelectorWidget widget;
+    GnomeComponentWidget widget;
 
     /*< private >*/
     GnomeEntryPrivate *_priv;
 };
 
 struct _GnomeEntryClass {
-    GnomeSelectorWidgetClass parent_class;
+    GnomeComponentWidgetClass parent_class;
 };
 
 

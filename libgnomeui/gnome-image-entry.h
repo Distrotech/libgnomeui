@@ -33,8 +33,7 @@
 #define GNOME_IMAGE_ENTRY_H
 
 
-#include <libgnome/gnome-selector.h>
-#include <libgnomeui/gnome-selector-widget.h>
+#include <libgnomeui/gnome-component-widget.h>
 
 
 G_BEGIN_DECLS
@@ -52,14 +51,14 @@ typedef struct _GnomeImageEntryPrivate GnomeImageEntryPrivate;
 typedef struct _GnomeImageEntryClass   GnomeImageEntryClass;
 
 struct _GnomeImageEntry {
-    GnomeSelectorWidget widget;
+    GnomeComponentWidget widget;
 
     /*< private >*/
     GnomeImageEntryPrivate *_priv;
 };
 
 struct _GnomeImageEntryClass {
-    GnomeSelectorWidgetClass parent_class;
+    GnomeComponentWidgetClass parent_class;
 };
 
 

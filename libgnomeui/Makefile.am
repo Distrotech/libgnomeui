@@ -80,10 +80,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-druid-page-edge.c		\
 	gnome-druid-page-standard.c	\
 	gnome-geometry.c		\
-	gnome-selector-client.c		\
-	gnome-selector-component.c	\
-	gnome-selector-dialog-client.c	\
-	gnome-selector-widget.c		\
+	gnome-component-widget.c	\
 	gnome-entry.c			\
 	gnome-image-entry.c		\
 	gnome-image-selector.c		\
@@ -119,10 +116,7 @@ gnome_headers = \
 	gnome-druid-page.h		\
 	gnome-druid-page-edge.h		\
 	gnome-druid-page-standard.h	\
-	gnome-selector-client.h		\
-	gnome-selector-component.h	\
-	gnome-selector-dialog-client.h	\
-	gnome-selector-widget.h		\
+	gnome-component-widget.h	\
 	gnome-entry.h			\
 	gnome-image-entry.h		\
 	gnome-image-selector.h		\

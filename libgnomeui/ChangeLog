@@ -1,3 +1,11 @@
+2001-06-13  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector-client.[ch]: Moved to libgnome-extra/libgnomeui.
+	* gnome-selector-dialog-client.[ch]: Likewise.
+	* gnome-selector-component.[ch]: Likewise.
+
+	* gnome-selector-widget.[ch]: Renamed to gnome-component-widget.[ch].
+
 2001-06-12  Martin Baulig  <baulig@suse.de>
 
 	* libgnomeui-2.0.pc.in: Depend on libgnomecanvas-2.0, but not on gconf-2.0.

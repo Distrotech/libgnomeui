@@ -72,7 +72,7 @@ gnome_image_entry_constructor (GType                  type,
 			       guint                  n_construct_properties,
 			       GObjectConstructParam *construct_properties);
 
-static GnomeSelectorWidgetClass *parent_class;
+static GnomeComponentWidgetClass *parent_class;
 
 GType
 gnome_image_entry_get_type (void)
@@ -91,7 +91,7 @@ gnome_image_entry_get_type (void)
 	    NULL
 	};
 
-	entry_type = gtk_type_unique (gnome_selector_widget_get_type (), &entry_info);
+	entry_type = gtk_type_unique (gnome_component_widget_get_type (), &entry_info);
     }
 
     return entry_type;
@@ -199,7 +199,7 @@ gnome_image_entry_init (GnomeImageEntry *gentry)
     gentry->_priv = g_new0 (GnomeImageEntryPrivate, 1);
 }
 
-extern GnomeSelectorWidget *gnome_selector_widget_do_construct (GnomeSelectorWidget *);
+extern GnomeComponentWidget *gnome_component_widget_do_construct (GnomeComponentWidget *);
 
 static GObject*
 gnome_image_entry_constructor (GType                  type,
@@ -244,7 +244,7 @@ gnome_image_entry_constructor (GType                  type,
 
  out:
     g_free (moniker);
-    if (!gnome_selector_widget_do_construct (GNOME_SELECTOR_WIDGET (ientry)))
+    if (!gnome_component_widget_do_construct (GNOME_COMPONENT_WIDGET (ientry)))
 	return NULL;
 
     return object;

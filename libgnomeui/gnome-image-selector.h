@@ -33,8 +33,7 @@
 #define GNOME_IMAGE_SELECTOR_H
 
 
-#include <libgnome/gnome-selector.h>
-#include <libgnomeui/gnome-selector-widget.h>
+#include <libgnomeui/gnome-component-widget.h>
 
 
 G_BEGIN_DECLS
@@ -52,14 +51,14 @@ typedef struct _GnomeImageSelectorPrivate GnomeImageSelectorPrivate;
 typedef struct _GnomeImageSelectorClass   GnomeImageSelectorClass;
 
 struct _GnomeImageSelector {
-    GnomeSelectorWidget widget;
+    GnomeComponentWidget widget;
 
     /*< private >*/
     GnomeImageSelectorPrivate *_priv;
 };
 
 struct _GnomeImageSelectorClass {
-    GnomeSelectorWidgetClass parent_class;
+    GnomeComponentWidgetClass parent_class;
 };
 
 

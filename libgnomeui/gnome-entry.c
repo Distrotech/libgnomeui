@@ -39,7 +39,6 @@
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
-#include <libgnome/gnome-selector.h>
 #include <bonobo/bonobo-exception.h>
 #include "gnome-macros.h"
 #include "gnome-entry.h"
@@ -62,7 +61,7 @@ gnome_entry_constructor (GType                  type,
 			 guint                  n_construct_properties,
 			 GObjectConstructParam *construct_properties);
 
-static GnomeSelectorWidget *parent_class;
+static GnomeComponentWidget *parent_class;
 
 enum {
     PROP_0,
@@ -88,7 +87,7 @@ gnome_entry_get_type (void)
 	    NULL
 	};
 
-	entry_type = gtk_type_unique (gnome_selector_widget_get_type (), &entry_info);
+	entry_type = gtk_type_unique (gnome_component_widget_get_type (), &entry_info);
     }
 
     return entry_type;
@@ -146,7 +145,7 @@ gnome_entry_class_init (GnomeEntryClass *class)
     object_class = (GtkObjectClass *) class;
     gobject_class = (GObjectClass *) class;
 
-    parent_class = gtk_type_class (gnome_selector_widget_get_type ());
+    parent_class = gtk_type_class (gnome_component_widget_get_type ());
 
     gobject_class->get_property = gnome_entry_get_property;
     gobject_class->set_property = gnome_entry_set_property;
@@ -170,7 +169,7 @@ gnome_entry_init (GnomeEntry *gentry)
     gentry->_priv = g_new0 (GnomeEntryPrivate, 1);
 }
 
-extern GnomeSelectorWidget *gnome_selector_widget_do_construct (GnomeSelectorWidget *);
+extern GnomeComponentWidget *gnome_component_widget_do_construct (GnomeComponentWidget *);
 
 static GObject*
 gnome_entry_constructor (GType                  type,
@@ -212,7 +211,7 @@ gnome_entry_constructor (GType                  type,
 
  out:
     g_free (moniker);
-    if (!gnome_selector_widget_do_construct (GNOME_SELECTOR_WIDGET (gentry)))
+    if (!gnome_component_widget_do_construct (GNOME_COMPONENT_WIDGET (gentry)))
 	return NULL;
 
     corba_objref = bonobo_widget_get_objref (BONOBO_WIDGET (gentry));
