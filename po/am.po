@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "POT-Creation-Date: 2002-10-03 05:33+0200\n"
-"PO-Revision-Date: 2002-12-21 22:37+EDT\n"
+"PO-Revision-Date: 2002-12-29 19:37+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
@@ -899,7 +899,7 @@ msgstr "ጽሑፉን ብቻ"
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr "ነባሩን ዴስክቶፕ ይጠቀሙ (%s)"
+msgstr "ነባሩን ሠሌዳ ይጠቀሙ (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
