@@ -1,6 +1,6 @@
 /* GNOME GUI Library
- * Copyright (C) 1998 Horacio J. Peña
- * Based in gnome-about, copyright (C) 1997 Jay Painter 
+ * Copyright (C) 1998 Cesar Miquel <miquel@df.uba.ar>
+ * Based in gnome-about, copyright (C) 1998 Horacio J. Peña
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,6 +20,7 @@
 #include <config.h>
 #include "libgnome/gnome-defs.h"
 #include "gnome-about.h"
+#include <strings.h>
 #include <gtk/gtk.h>
 
 /* Library must use dgettext, not gettext.  */
@@ -42,7 +43,34 @@
 #    define N_(String) (String)
 #endif
 
+/* FONTS */
+#define HELVETICA_20_BFONT "-adobe-helvetica-bold-r-normal-*-20-*-*-*-*-*-*-*"
+#define HELVETICA_14_BFONT "-adobe-helvetica-bold-r-normal-*-14-*-*-*-*-*-*-*"
+#define HELVETICA_12_BFONT "-adobe-helvetica-bold-r-normal-*-12-*-*-*-*-*-*-*"
+#define HELVETICA_12_FONT  "-adobe-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*"
+#define HELVETICA_10_FONT  "-adobe-helvetica-medium-r-normal-*-10-*-*-*-*-*-*-*"
 
+#define GNOME_ABOUT_DEFAULT_WIDTH               100
+#define GNOME_ABOUT_MAX_WIDTH                   600
+#define BASE_LINE_SKIP                          4
+
+typedef struct
+{
+  gchar	*title;
+  gchar *copyright;
+  GList *names;
+  gchar *comments;
+  GdkPixmap *logo;
+  GdkBitmap *mask;
+  gint logo_w, logo_h;
+  gint w, h;
+  GdkColor light_green;
+  GdkFont *font_title, 
+          *font_copyright, 
+          *font_author, 
+          *font_names,
+          *font_comments; 
+} GnomeAboutInfo;
 
 enum {
   CLICKED,
@@ -51,8 +79,22 @@ enum {
 
 static void gnome_about_class_init (GnomeAboutClass *klass);
 static void gnome_about_init       (GnomeAbout      *about);
+static void gnome_about_repaint    (GtkWidget *w, 
+				    GdkEventExpose *,
+				    GnomeAboutInfo *data);
+
+static void gnome_about_display_comments (GdkWindow *win, 
+					  GdkFont *font,
+					  GdkGC *gc, 
+					  gint x, gint y, gint w, 
+					  gchar *comments);
 
 static GtkWindowClass *parent_class;
+
+/* ----------------------------------------------------------------------
+   NAME:	gnome_about_get_type
+   DESCRIPTION:	
+   ---------------------------------------------------------------------- */
 
 guint
 gnome_about_get_type ()
@@ -78,6 +120,11 @@ gnome_about_get_type ()
   return about_type;
 }
 
+/* ----------------------------------------------------------------------
+   NAME:	gnome_about_button_clicked
+   DESCRIPTION:	
+   ---------------------------------------------------------------------- */
+
 void
 gnome_about_button_clicked (GtkWidget   *button,
                             GtkWidget   *about)
@@ -85,15 +132,455 @@ gnome_about_button_clicked (GtkWidget   *button,
 	gtk_widget_destroy(about);
 }
 
+/* ----------------------------------------------------------------------
+   NAME:	gnome_about_class_init
+   DESCRIPTION:	
+   ---------------------------------------------------------------------- */
+
 static void
 gnome_about_class_init (GnomeAboutClass *klass)
 {
 }
 
+/* ----------------------------------------------------------------------
+   NAME:	gome_about_init
+   DESCRIPTION:	
+   ---------------------------------------------------------------------- */
+
 static void
 gnome_about_init (GnomeAbout *about)
 {
 }
+
+/* ----------------------------------------------------------------------
+   NAME:	gome_about_repaint
+   DESCRIPTION:	
+   ---------------------------------------------------------------------- */
+
+void
+gnome_about_repaint (GtkWidget *widget, 
+		     GdkEventExpose *event,
+		     GnomeAboutInfo *gai)
+{
+  GdkWindow *win = widget->window;
+  GdkColor *black = &widget->style->black;
+  GdkColor *white = &widget->style->white;
+  GdkColor *light_green = &gai->light_green;
+  GList *name;
+  static GdkGC *gc = NULL;
+  int h, y, x;
+
+  if (gc == NULL)
+    gc = gdk_gc_new (win);
+
+  gdk_window_clear (win);
+
+  /* Draw pixmap first */
+  y = 1;
+  if (gai->logo)
+    {
+      y += 2;
+      x = (gai->w - gai->logo_w) / 2;
+      gdk_draw_pixmap (win, gc, gai->logo, 
+		       0, 0, x, y,
+		       gai->logo_w, gai->logo_h);
+      y += 2 + gai->logo_h;
+    }
+      
+  /* Draw title */
+  h = gai->font_title->descent + gai->font_title->ascent + 13;
+  if (gai->title)
+    {
+      y += 2;
+      gdk_gc_set_foreground (gc, black);
+      gdk_gc_set_background (gc, black);
+      gdk_draw_rectangle (win, gc, TRUE, 2, y, gai->w - 5, h);
+      y += h - 7 - gai->font_title->descent;
+      x = (gai->w - gdk_string_measure (gai->font_title, gai->title)) / 2;
+      gdk_gc_set_foreground (gc, white);
+      gdk_draw_string (win, gai->font_title, gc, 
+		       x, y, 
+		       gai->title);
+      y += 7 + gai->font_title->descent + 2;
+    }
+      
+  if (gai->copyright || gai->names || gai->comments)
+    {
+      gdk_gc_set_foreground (gc, light_green);
+      gdk_gc_set_background (gc, light_green);
+      gdk_draw_rectangle (win, gc, TRUE, 
+			  2, y, 
+			  gai->w-5, gai->h - y - 3);
+    }
+      
+  gdk_gc_set_foreground (gc, black);
+
+  if (gai->copyright)
+  {
+    y += 4 + gai->font_copyright->ascent;
+    gdk_draw_string (win, gai->font_copyright, gc, 5, y, gai->copyright);
+    y += gai->font_copyright->descent + 4;
+  }
+
+  if (gai->names)
+  {
+    y += 2 + gai->font_author->ascent;
+    if (g_list_length (gai->names) == 1)
+      gdk_draw_string (win, gai->font_author, gc, 5, y, "Author:");
+    else
+      gdk_draw_string (win, gai->font_author, gc, 5, y, "Authors:");
+  }
+  x = 5 + gdk_string_measure (gai->font_author, "Authors:") + 10;
+
+  name = g_list_first (gai->names);
+  while (name)
+  {
+    h = gai->font_names->descent + gai->font_names->ascent;
+    gdk_draw_string (win, gai->font_names, gc, x, y, (char *)name->data);
+    name = name->next;
+    if (name != NULL)
+      y += h;
+  }
+
+  if (gai->comments)
+    {
+    y += 2 + 2 * gai->font_comments->ascent;
+    gnome_about_display_comments (win, gai->font_comments, gc, 
+				  8, y, gai->w, 
+				  gai->comments);
+    }
+
+  return;
+
+
+}
+
+void
+gnome_about_display_comments (GdkWindow *win, 
+			      GdkFont *font,
+			      GdkGC *gc, 
+			      gint x, gint y, gint w, 
+			      char *comments)
+{
+  char *tok, *p1, *p2, *p3, c;
+  char *buffer;
+  int  ypos, width, done;
+  GList *par, *tmp;
+
+  width = w - 16;
+  if (comments == NULL)
+    return;
+
+  /* we need a buffer because strtok will modify the string! */
+  /* strtok is a cool but dangerous function. */
+  buffer = malloc (sizeof(char) * strlen(comments) + 1);
+  strcpy (buffer, comments);
+
+  ypos = y;
+
+  /* Make a list with each paragraph */
+  par = (GList *)NULL;
+  tok = strtok (buffer, "\n\0");
+  p1 = (char *)malloc (sizeof (char) * strlen (tok) + 1);
+  par = g_list_append (NULL, p1);
+  if (p1 != NULL)
+    strcpy (p1, tok);
+  else
+    return; /* error */
+  tok = strtok (NULL, "\n\0");
+  while (tok != (char *)NULL)
+  {
+    /* more than one par */
+    p1 = (char *)malloc (sizeof (char) * strlen (tok) + 1);
+    g_list_append (par, p1);
+    if (p1 != NULL)
+      strcpy (p1, tok);
+    else
+      return; /* error */
+    tok = strtok (NULL, "\n\0");
+  } 
+    
+  /* Print each paragraph */
+  tmp = par;
+  while (tmp != NULL)
+    {
+      done = FALSE;
+      p1 = p2 = tmp->data;
+      while (!done)
+	{
+	  c = *p1; *p1 = 0;
+	  while ( gdk_string_measure (font, p2) < width && c != 0)
+	    {
+	      *p1 = c; 
+	      p1++;
+	      c = *p1;
+	      *p1 = 0;
+	    }
+	  switch (c)
+	    {
+	    case ' ':
+	      p1++;
+	      gdk_draw_string (win, font, gc, x, ypos, p2);
+	      break;
+	    case '\0':
+	      done = TRUE;
+	      gdk_draw_string (win, font, gc, x, ypos, p2);
+	      break;
+	    default:
+	      p3 = p1;
+	      while (*p1 != ' ' && p1 > p2)
+		p1--;
+	      if (p1 == p2) 
+		{
+		  gdk_draw_string (win, font, gc, x, ypos, p2);
+		  *p3 = c;
+		  p1 = p3;
+		  break;
+		}
+	      else
+		{
+		  *p3 = c;
+		  *p1 = 0; 
+		  p1++;
+		  gdk_draw_string (win, font, gc, x, ypos, p2);
+		}
+	      break;
+	    }
+	  ypos += font->descent + font->ascent;
+	  p2 = p1;
+	}
+	free (tmp->data);
+	tmp = tmp->next;
+	ypos += BASE_LINE_SKIP; /* Skip a bit */
+    }
+
+  /* Free list memory */
+  g_list_free (par);
+  free (buffer);
+
+  return;
+}
+
+
+/* ----------------------------------------------------------------------
+   NAME:	gnome_about_calc_size
+   DESCRIPTION:	Calculates size of window WITHOUT counting pixmap. 
+   ---------------------------------------------------------------------- */
+
+void
+gnome_about_calc_size (GnomeAboutInfo *gai)
+{
+  GList *name;
+  gint num_pars, i, h, w, len[4], tmpl;
+  char *p;
+  gfloat maxlen;
+
+  w = GNOME_ABOUT_DEFAULT_WIDTH;
+  h = 1;
+
+  if (gai->title)
+    {
+    len[0] = gdk_string_measure (gai->font_title, gai->title);
+    h += 4 + gai->font_title->descent + gai->font_title->ascent + 14;
+    }
+  else
+    len[0] = 0;
+
+  if (gai->copyright)
+    {
+    h += gai->font_copyright->descent + gai->font_copyright->ascent + 8;
+    len[1] = gdk_string_measure (gai->font_copyright, gai->copyright);
+    }
+  else
+    len[1] = 0;
+
+  len[2] = 0;
+  if (gai->names)
+  {
+    name = g_list_first (gai->names);
+    while (name)
+      {
+	tmpl = gdk_string_measure (gai->font_names, name->data);
+	if (tmpl > len[2])
+	  len[2] = tmpl;
+	name = name->next;
+      }
+    tmpl = gdk_string_measure (gai->font_names, "Authors: ");
+    len[2] += tmpl + 15;
+    h += g_list_length (gai->names) * 
+          (gai->font_names->descent + 
+           gai->font_names->ascent + 
+           BASE_LINE_SKIP ) + 4;
+  }
+
+  maxlen = (gfloat) w;
+  for (i=0; i<3; i++)
+    if (len[i] > maxlen)
+      maxlen = (gfloat) len[i];
+    
+  w = (int) (maxlen * 1.2);
+  if ( w > GNOME_ABOUT_MAX_WIDTH )
+    w = GNOME_ABOUT_MAX_WIDTH;
+
+  if (gai->comments)
+    {
+      num_pars = 1;
+      p = gai->comments;
+      while (*p != '\0')
+	{
+	  if (*p == '\n')
+	    num_pars++;
+	  p++;
+	}
+      
+      i = gdk_string_measure (gai->font_comments, gai->comments);
+      i /= w - 16;
+      i += 1 + num_pars;;
+      h += i * (gai->font_comments->descent + gai->font_comments->ascent);
+    }
+
+  gai->w = w+4;
+  gai->h = h+3;
+
+  return;
+}  
+
+/* ----------------------------------------------------------------------
+   NAME:	gnome_fill_info
+   DESCRIPTION:	
+   ---------------------------------------------------------------------- */
+
+GnomeAboutInfo
+*gnome_fill_info (gchar	*title,
+		gchar	*version,
+		gchar   *copyright,
+		gchar   **authors,
+		gchar   *comments,
+		gchar   *logo)
+{
+  GnomeAboutInfo *gai;
+  GdkColor light_green = {0, 51914, 64764, 44718};
+  GList *l;
+  gchar *s;
+
+  /* alloc mem for struct */
+  gai = malloc (sizeof(GnomeAboutInfo)); 
+  if (gai == NULL)
+    return NULL;
+
+  /* Create fonts */
+  gai->font_title = gdk_font_load (HELVETICA_20_BFONT);   
+  gai->font_copyright = gdk_font_load (HELVETICA_14_BFONT);   
+  gai->font_author = gdk_font_load (HELVETICA_12_BFONT);   
+  gai->font_names = gdk_font_load (HELVETICA_12_FONT);   
+  gai->font_comments = gdk_font_load (HELVETICA_10_FONT);   
+
+  /* Add color */
+  memcpy (&gai->light_green, &light_green, sizeof (GdkColor));
+  gdk_color_alloc (gdk_colormap_get_system (), &gai->light_green);
+
+  /* fill struct */
+  if(title) 
+  {
+    s = "";
+    s = g_copy_strings (title, " ", version ? version : "", NULL);
+    gai->title = malloc (sizeof(char)*strlen(s)+1);
+    strcpy (gai->title, s);
+  }
+  else
+    gai->title = NULL;
+  
+  if (copyright)
+    {
+      gai->copyright = malloc (sizeof(char)*strlen(copyright)+1);
+      strcpy (gai->copyright, copyright);
+    }
+  else
+    gai->copyright = NULL;
+  
+  if (comments)
+    {
+      gai->comments = malloc (sizeof(char)*strlen(comments)+1);
+      strcpy (gai->comments, comments);
+    }
+  else
+    gai->comments = NULL;
+  
+  
+  gai->names = NULL;
+  if (authors && authors[0])
+    {
+      while( *authors ) 
+	{
+	  s = malloc (sizeof(char)*strlen( *authors)+1);
+	  if (s == NULL) 
+	    break;
+	  strcpy (s, *authors);
+	  gai->names = g_list_append (gai->names, (gpointer) s);
+	  authors++;
+	}
+    }
+
+  /* Calculate width of window */
+  gnome_about_calc_size (gai);
+
+
+  /* Done */
+  return gai;
+}
+
+/* ----------------------------------------------------------------------
+   NAME:	gnome_destroy_about
+   DESCRIPTION:	
+   ---------------------------------------------------------------------- */
+
+void
+gnome_destroy_about (GtkWidget *widget, gpointer *data)
+{
+  GList *tmp;
+  GnomeAboutInfo *gai;
+
+  gai = (GnomeAboutInfo *)data;
+
+  /* Free memory used for title, copyright and comments */
+  if (gai->title)
+    free (gai->title);
+  if (gai->copyright)
+    free (gai->copyright);
+  if (gai->comments)
+    free (gai->comments);
+
+  /* Free memory used for authors */
+  tmp = gai->names;
+  while (tmp)
+    {
+       free (tmp->data);
+       tmp = tmp->next;
+    } 
+  g_list_free (tmp);
+
+}
+
+/* ----------------------------------------------------------------------
+   NAME:	gnome_about_new
+   DESCRIPTION:	Main routine that creates the widget. The arguments are:
+                  title      ... Name of app.
+		  version    ... version number
+		  copyright  ... copyright string
+		  authors    ... NULL terminated list of authors
+		  comments   ... Other comments
+		  logo       ... a logo bitmap file.
+
+		a typical call would be:
+
+   gchar *authors[] = {"author1", "author2", ..., NULL};
+
+   GtkWdiget about = gnome_about_new ("GnoApp", "1.2b",
+                           "Copyright (C) 1998",
+			   authors,
+			   "Comment line 1\nComment line 2",
+			   "/usr/local/lib/pixmaps/app_icon.xpm");
+   ---------------------------------------------------------------------- */
 
 GtkWidget* 
 gnome_about_new (gchar	*title,
@@ -104,99 +591,79 @@ gnome_about_new (gchar	*title,
 		gchar   *logo)
 {
   GnomeAbout *about;
+  GnomeAboutInfo *ai;
   GtkWidget *hbox;
   GtkWidget *vbox;
-  GtkWidget *vbox_labels;
-  GtkWidget *vbox_authors;
   GtkWidget *frame;
-  GtkWidget *label;
   GtkWidget *separator;
   GtkWidget *button;
-
-  GtkWidget *pixmapwid;
-  GdkPixmap *pixmap = NULL;
-  GdkBitmap *mask;
+  GtkWidget *drawing_area;
   GtkStyle *style;
 
-  gchar *s;
+  gint w,h,x,y;
 
   about = gtk_type_new (gnome_about_get_type ());
 
   gtk_container_border_width (GTK_CONTAINER (about), 5);
 
-  style = gtk_widget_get_style (GTK_WIDGET (about));
-
   gtk_window_set_title (GTK_WINDOW (about), _("About"));
+  gtk_window_set_policy (GTK_WINDOW (about), FALSE, FALSE, TRUE);
 
-  if(logo)
- 	pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (about)->window, 
-					   &mask, 
-					   &style->bg[GTK_STATE_NORMAL],
-					   logo);
-
+  ai = gnome_fill_info (title, version, 
+			copyright, authors, 
+			comments, logo);
+  
+  w = ai->w; h = ai->h;
+  //x = (gdk_screen_width ()  - w) / 2;
+  //y = (gdk_screen_height () - h) / 2;   
+  //gtk_widget_set_uposition ( GTK_WIDGET (about), x, y);
+  gtk_container_border_width (GTK_CONTAINER (about), 3);
+                                                        
   vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (about), vbox);
   gtk_widget_show (vbox);
 
-  hbox = gtk_hbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 10);
-  gtk_widget_show (hbox);
-  
-  if (pixmap)
-    {
-      pixmapwid = gtk_pixmap_new (pixmap, mask);
-      gtk_box_pack_start (GTK_BOX (hbox), pixmapwid, FALSE, TRUE, 0);
-      gtk_widget_show (pixmapwid);
-    }
 
-  s = "";
-  if(title) 
-    	s = g_copy_strings (title, " ", version ? version : "", NULL);
-  frame = gtk_frame_new (s);
-  if(title) 
-  	g_free(s);
-  gtk_container_border_width (GTK_CONTAINER (frame), 5);
-  gtk_box_pack_start_defaults (GTK_BOX (hbox), frame);
+  frame = gtk_frame_new (NULL);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
+  gtk_container_border_width (GTK_CONTAINER (frame), 4);
+  gtk_container_add (GTK_CONTAINER (vbox), frame);
   gtk_widget_show (frame);
 
-  vbox_labels = gtk_vbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (frame), vbox_labels);
-  gtk_container_border_width (GTK_CONTAINER (vbox_labels), 5);
-  gtk_widget_show (vbox_labels);
+  drawing_area = gtk_drawing_area_new ();
 
-  if(copyright) 
+  /* Make it have white bg color */
+  style = gtk_style_new ();
+  style->bg[GTK_STATE_NORMAL].red   = (gushort) 65535;
+  style->bg[GTK_STATE_NORMAL].green = (gushort) 65535;
+  style->bg[GTK_STATE_NORMAL].blue  = (gushort) 65535; 
+  gtk_widget_set_style (drawing_area, style);
+
+  if (logo)
     {
-  	label = gtk_label_new (copyright);
-  	gtk_box_pack_start_defaults (GTK_BOX (vbox_labels), label);
-  	gtk_widget_show (label);
+      ai->logo = gdk_pixmap_create_from_xpm ( drawing_area->window,
+					       &ai->mask, 
+					       &style->bg[GTK_STATE_NORMAL],
+					       logo);
+      gdk_window_get_size ( (GdkWindow *) ai->logo, &ai->logo_w, &ai->logo_h);
+      h += 4 + ai->logo_h;
+      ai->h = h;
+      ai->w = MAX (w, (ai->logo_w + 6)); 
+      w = ai->w;
     }
+  else
+     ai->logo = NULL;
 
-  if (authors && authors[0]) 
-    {
-	frame = gtk_frame_new ( authors[1] ? _("Authors: \n") : _("Author: ") );
-  	gtk_container_border_width (GTK_CONTAINER (frame), 10);
-  	gtk_box_pack_start_defaults (GTK_BOX (vbox_labels), frame);
-  	gtk_widget_show (frame);
-    	
- 	vbox_authors = gtk_vbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (frame), vbox_authors);
-  	gtk_widget_show (vbox_authors);
-  
-	while( *authors ) {
-  		label = gtk_label_new ( *authors );
-  		gtk_box_pack_start (GTK_BOX (vbox_authors), label, TRUE, TRUE, 0);
-  		gtk_widget_show (label);
-		authors++;
-		}
-  	}
+  gtk_widget_set_usize ( GTK_WIDGET (drawing_area), w, h);
+  gtk_widget_set_events (drawing_area, GDK_EXPOSURE_MASK);
 
-  if(comments) 
-    {
-  	label = gtk_label_new (comments);
-  	gtk_box_pack_start_defaults (GTK_BOX (vbox_labels), label);
-  	gtk_widget_show (label);
-    }
-  	
+  gtk_signal_connect (GTK_OBJECT (drawing_area), "expose_event",
+                      (GtkSignalFunc) gnome_about_repaint, (gpointer) ai);
+
+  gtk_container_add (GTK_CONTAINER (frame), drawing_area);
+  gtk_widget_show (drawing_area);
+                                                 
+
   separator = gtk_hseparator_new ();
   gtk_box_pack_start (GTK_BOX (vbox), separator, FALSE, TRUE, 5);
   gtk_widget_show (separator);
@@ -220,3 +687,4 @@ gnome_about_new (gchar	*title,
 
   return GTK_WIDGET (about);
 }
+

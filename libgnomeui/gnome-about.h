@@ -1,6 +1,6 @@
 /* GNOME GUI Library
- * Copyright (C) 1998 Horacio J. Peña
- * Based in gnome-about, copyright (C) 1997 Jay Painter
+ * Copyright (C) 1998 Cesar Miquel <miquel@df.uba.ar>
+ * Based in gnome-about, copyright (C) 1998 Horacio J. Peña
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
