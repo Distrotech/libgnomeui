@@ -141,17 +141,17 @@ gnome_dns_server_req (gint server, const char *hostname) {
  * @callback_data: data to pass to the callback function
  *
  * Description:
- * looks up an address and returns a tag for use with
+ * Looks up an address and returns a tag for use with
  * gnome_dns_abort() if desired.  May not return -1 if
  * hostname was in cache.
  *
  * Callback function is called when dns_lookup is complete.
  *
  * Side effects:
- * a new dns server may be spawned if all the current servers
+ * A new dns server may be spawned if all the current servers
  * are in use.
  *
- * Returns:  a tag identifying this lookup or 0 if lookup was
+ * Returns: A tag identifying this lookup or 0 if lookup was
  * in cache.
  */
 
@@ -229,7 +229,7 @@ guint32 gnome_dns_lookup (const char *hostname,
  *
  * Description:
  * Aborts a previous call to gnome_dns_lookup().
- * DNS Callback function is not called.
+ * DNS callback function is not called.
  */
 
 void

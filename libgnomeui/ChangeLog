@@ -1,3 +1,8 @@
+1999-09-05  Tim Gerla  <timg@means.net>
+
+	* gtkdial.c: Started docs
+	* gnome-dns.c: Typo fixes
+
 1999-09-05    <jrb@redhat.com>
 
 	* gnome-druid-page-finish.c

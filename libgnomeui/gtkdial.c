@@ -135,6 +135,16 @@ gtk_dial_init (GtkDial *dial)
   dial->offscreen_pixmap = NULL;
 }
 
+/**
+ * gtk_dial_new
+ * @adjustment: Pointer to GtkAdjustment object
+ *
+ * This function creates a new GtkDial widget, and ties it to a
+ * specified GtkAdjustment. When the dial is moved, the adjustment is
+ * updated, and vice-versa.
+ *
+ * Returns: Pointer to new GtkDial widget.
+ **/
 GtkWidget*
 gtk_dial_new (GtkAdjustment *adjustment)
 {
@@ -167,6 +177,15 @@ gtk_dial_destroy (GtkObject *object)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/**
+ * gtk_dial_get_adjustment
+ * @dial: Pointer to GtkDial widget
+ *
+ * Description: Retrieves the GtkAdjustment associated with the
+ * GtkDial @dial.
+ *
+ * Returns: Pointer to GtkAdjustment object.
+ **/
 GtkAdjustment*
 gtk_dial_get_adjustment (GtkDial *dial)
 {
@@ -176,6 +195,17 @@ gtk_dial_get_adjustment (GtkDial *dial)
   return dial->adjustment;
 }
 
+/**
+ * gtk_dial_set_view_only
+ * @dial: Pointer to GtkDial widget
+ * @view_only: TRUE to set dial to read-only, FALSE to edit.
+ *
+ * Description: Specifies whether or not the user is to be able to
+ * edit the value represented by the dial widget. If @view_only is
+ * TRUE, the dial will be set to view-only mode, and the user will not 
+ * be able to edit it. If @view_only is FALSE, the user will be able
+ * to change the value represented.
+ **/
 void gtk_dial_set_view_only (GtkDial *dial,
 			     gboolean view_only)
 {
@@ -184,7 +214,16 @@ void gtk_dial_set_view_only (GtkDial *dial,
 
   dial->view_only = view_only;
 }
-
+/**
+ * gtk_dial_set_update_policy
+ * @dial: Pointer to GtkDial widget
+ * @policy: New policy type
+ * 
+ * Description: Sets the update policy of the GtkDial @dial to one of either
+ * %GTK_UPDATE_CONTINUOUS, %GTK_UPDATE_DISCONTINUOUS, or
+ * %GTK_UPDATE_DELAYED. Please see Gtk+ documentation for an
+ * explanation of these values.
+ **/
 void
 gtk_dial_set_update_policy (GtkDial      *dial,
 			     GtkUpdateType  policy)
@@ -195,6 +234,14 @@ gtk_dial_set_update_policy (GtkDial      *dial,
   dial->policy = policy;
 }
 
+/**
+ * gtk_dial_set_adjustment
+ * @dial: Pointer to GtkDial widget
+ * @adjustment: Pointer to GtkAdjustment object
+ *
+ * Description: Associates a new GtkAdjustment with GtkDial @dial
+ * widget. The old adjustment is removed and replaced with the new.
+ **/
 void
 gtk_dial_set_adjustment (GtkDial      *dial,
 			  GtkAdjustment *adjustment)
@@ -225,7 +272,17 @@ gtk_dial_set_adjustment (GtkDial      *dial,
 
   gtk_dial_update (dial);
 }
-
+/**
+ * gtk_dial_set_percentage
+ * @dial: Pointer to GtkDial widget
+ * @percent: New percentage
+ *
+ * Description: Sets the GtkDial's value to @percent of
+ * @dial->adjustment->upper. The upper value is set when the
+ * GtkAdjustment is created.
+ *
+ * Returns: New value of adjustment.
+ **/
 gfloat 
 gtk_dial_set_percentage (GtkDial *dial, gfloat percent)
 {
@@ -243,6 +300,14 @@ gtk_dial_set_percentage (GtkDial *dial, gfloat percent)
   return dial->adjustment->value;
 }
 
+/**
+ * gtk_dial_get_percentage
+ * @dial: Pointer to GtkDial widget
+ *
+ * Description: Retrieves the current percentage held in the dial widget.
+ *
+ * Returns: Current percentage.
+ **/
 gfloat
 gtk_dial_get_percentage (GtkDial *dial)
 {
@@ -252,6 +317,14 @@ gtk_dial_get_percentage (GtkDial *dial)
   return dial->percentage;
 }
 
+/**
+ * gtk_dial_get_value
+ * @dial: Pointer to GtkDial widget
+ *
+ * Description: Retrieves the current value helt in the dial widget.
+ *
+ * Returns: Current value
+ **/
 gfloat
 gtk_dial_get_value (GtkDial *dial)
 {
@@ -261,6 +334,16 @@ gtk_dial_get_value (GtkDial *dial)
   return dial->adjustment->value;
 }
 
+/**
+ * gtk_dial_set_value
+ * @dial: Pointer to GtkDial widget
+ * @value: New value
+ *
+ * Description: Sets the current value held in the GtkDial's
+ * adjustment object to @value.
+ *
+ * Returns: New percentage of value to the adjustment's upper limit.
+ **/
 gfloat
 gtk_dial_set_value (GtkDial *dial, gfloat value)
 {
