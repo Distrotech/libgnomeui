@@ -20,6 +20,60 @@ GnomeFileEntry
 </para>
 
 
+<!-- ##### SIGNAL GnomeFileEntry::activate ##### -->
+<para>
+
+</para>
+
+@fileentry: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeFileEntry::browse-clicked ##### -->
+<para>
+
+</para>
+
+@fileentry: the object which received the signal.
+
+<!-- ##### ARG GnomeFileEntry:browse-dialog-title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:default-path ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:directory-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:filename ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:gnome-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:gtk-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:history-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:modal ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_file_entry_new ##### -->
 <para>
 
@@ -139,58 +193,4 @@ GnomeFileEntry
 @fentry: 
 @directory_entry: 
 
-
-<!-- ##### SIGNAL GnomeFileEntry::activate ##### -->
-<para>
-
-</para>
-
-@fileentry: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeFileEntry::browse-clicked ##### -->
-<para>
-
-</para>
-
-@fileentry: the object which received the signal.
-
-<!-- ##### ARG GnomeFileEntry:browse-dialog-title ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFileEntry:default-path ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFileEntry:directory-entry ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFileEntry:filename ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFileEntry:gnome-entry ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFileEntry:gtk-entry ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFileEntry:history-id ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFileEntry:modal ##### -->
-<para>
-
-</para>
 

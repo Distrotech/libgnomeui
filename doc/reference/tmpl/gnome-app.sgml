@@ -41,6 +41,11 @@ menus, toolbar(s) and status bar.
 </para>
 
 
+<!-- ##### ARG GnomeApp:app-id ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_app_new ##### -->
 <para>
 
@@ -178,9 +183,4 @@ menus, toolbar(s) and status bar.
 @name: 
 @Returns: 
 
-
-<!-- ##### ARG GnomeApp:app-id ##### -->
-<para>
-
-</para>
 

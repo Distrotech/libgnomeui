@@ -21,6 +21,22 @@ Create generic dialog boxes.
 
 @vbox: 
 
+<!-- ##### SIGNAL GnomeDialog::clicked ##### -->
+<para>
+
+</para>
+
+@dialog: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeDialog::close ##### -->
+<para>
+
+</para>
+
+@dialog: the object which received the signal.
+@Returns: 
+
 <!-- ##### FUNCTION gnome_dialog_new ##### -->
 <para>
 
@@ -320,20 +336,4 @@ This button has been replaced by one in GTK+ and new code should use that.
 </para>
 
 
-
-<!-- ##### SIGNAL GnomeDialog::clicked ##### -->
-<para>
-
-</para>
-
-@dialog: the object which received the signal.
-@arg1: 
-
-<!-- ##### SIGNAL GnomeDialog::close ##### -->
-<para>
-
-</para>
-
-@dialog: the object which received the signal.
-@Returns: 
 

@@ -20,6 +20,21 @@ GnomeHRef
 </para>
 
 
+<!-- ##### ARG GnomeHRef:text ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeHRef:url ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeHRef:link-color ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_href_new ##### -->
 <para>
 
@@ -93,19 +108,4 @@ GnomeHRef
 @href: 
 @Returns: 
 
-
-<!-- ##### ARG GnomeHRef:text ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeHRef:url ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeHRef:link-color ##### -->
-<para>
-
-</para>
 

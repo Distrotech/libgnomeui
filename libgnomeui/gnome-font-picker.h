@@ -18,6 +18,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef GNOME_FONT_PICKER_H
 #define GNOME_FONT_PICKER_H
 
@@ -103,9 +105,7 @@ GtkWidget * gnome_font_picker_uw_get_widget    (GnomeFontPicker *gfp);
 /* Functions to interface with GtkFontSelectionDialog */
 const gchar* gnome_font_picker_get_font_name  (GnomeFontPicker *gfp);
 
-#ifndef GTK_DISABLE_DEPRECATED
 GdkFont*   gnome_font_picker_get_font	      (GnomeFontPicker *gfp);
-#endif /* GTK_DISABLE_DEPRECATED */
 
 gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
                                                const gchar     *fontname);
@@ -120,3 +120,5 @@ G_END_DECLS
 
     
 #endif /* GNOME_FONT_PICKER_H */
+
+#endif /* GTK_DISABLE_DEPRECATED */

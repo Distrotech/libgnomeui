@@ -20,10 +20,10 @@
   @NOTATION@
 */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef __GNOME_DIALOG_H__
 #define __GNOME_DIALOG_H__
-
-#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwindow.h>
@@ -205,6 +205,6 @@ void       gnome_dialog_constructv (GnomeDialog * dialog,
 
 G_END_DECLS
 
-#endif /* GNOME_DISABLE_DEPRECATED */
-
 #endif /* __GNOME_DIALOG_H__ */
+
+#endif /* GNOME_DISABLE_DEPRECATED */

@@ -45,6 +45,66 @@ than just displaying text (which is the common case for edge pages).
 @logo_background: 
 @contents_background: 
 
+<!-- ##### ARG GnomeDruidPageStandard:background ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:background-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:background-set ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo-background ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo-background-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:logo-background-set ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:title-foreground ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:title-foreground-gdk ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:title-foreground-set ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruidPageStandard:top-watermark ##### -->
+<para>
+
+</para>
+
 <!-- ##### MACRO gnome_druid_page_standard_set_bg_color ##### -->
 <para>
 This just calls gnome_druid_page_standard_set_background() and new code should
@@ -164,64 +224,4 @@ should use that function directly.
 @question_mnemonic: 
 @additional_info_markup: 
 
-
-<!-- ##### ARG GnomeDruidPageStandard:background ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:background-gdk ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:background-set ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:logo ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:logo-background ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:logo-background-gdk ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:logo-background-set ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:title ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:title-foreground ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:title-foreground-gdk ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:title-foreground-set ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruidPageStandard:top-watermark ##### -->
-<para>
-
-</para>
 

@@ -31,6 +31,7 @@
  *
  * Author: George Lebl <jirka@5z.com>
  */
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #ifndef GNOME_PIXMAP_ENTRY_H
 #define GNOME_PIXMAP_ENTRY_H
@@ -92,11 +93,9 @@ void       gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
 /* entry widgets */
 
 /* This is now derived from GnomeFileEntry, so use it's methods */
-#ifndef GNOME_DISABLE_DEPRECATED
 GtkWidget *gnome_pixmap_entry_gnome_file_entry(GnomePixmapEntry *pentry);
 GtkWidget *gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry);
 GtkWidget *gnome_pixmap_entry_gtk_entry   (GnomePixmapEntry *pentry);
-#endif
 
 /* preview widgets */
 GtkWidget  *gnome_pixmap_entry_scrolled_window(GnomePixmapEntry *pentry);
@@ -117,3 +116,5 @@ gchar      *gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry);
 G_END_DECLS
 
 #endif
+
+#endif /* GNOME_DISABLE_DEPRECATED */

@@ -29,6 +29,8 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef GNOME_ENTRY_H
 #define GNOME_ENTRY_H
 
@@ -105,3 +107,5 @@ void         gnome_entry_clear_history    (GnomeEntry  *gentry);
 G_END_DECLS
 
 #endif
+
+#endif /* GNOME_DISABLE_DEPRECATED */

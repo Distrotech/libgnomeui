@@ -29,6 +29,45 @@ GnomeDateEdit
 </para>
 
 
+<!-- ##### SIGNAL GnomeDateEdit::date-changed ##### -->
+<para>
+
+</para>
+
+@dateedit: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeDateEdit::time-changed ##### -->
+<para>
+
+</para>
+
+@dateedit: the object which received the signal.
+
+<!-- ##### ARG GnomeDateEdit:dateedit-flags ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDateEdit:initial-time ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDateEdit:lower-hour ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDateEdit:time ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDateEdit:upper-hour ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_date_edit_new ##### -->
 <para>
 
@@ -123,43 +162,4 @@ GnomeDateEdit
 @gde: 
 @Returns: 
 
-
-<!-- ##### SIGNAL GnomeDateEdit::date-changed ##### -->
-<para>
-
-</para>
-
-@dateedit: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeDateEdit::time-changed ##### -->
-<para>
-
-</para>
-
-@dateedit: the object which received the signal.
-
-<!-- ##### ARG GnomeDateEdit:dateedit-flags ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDateEdit:initial-time ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDateEdit:lower-hour ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDateEdit:time ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDateEdit:upper-hour ##### -->
-<para>
-
-</para>
 

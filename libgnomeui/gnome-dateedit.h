@@ -22,6 +22,7 @@
 /*
   @NOTATION@
  */
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #ifndef __GNOME_DATE_EDIT_H_
 #define __GNOME_DATE_EDIT_H_ 
@@ -90,10 +91,10 @@ int       gnome_date_edit_get_flags       (GnomeDateEdit *gde);
 
 time_t    gnome_date_edit_get_initial_time(GnomeDateEdit *gde);
 
-#ifndef GNOME_DISABLE_DEPRECATED
 time_t    gnome_date_edit_get_date        (GnomeDateEdit *gde);
-#endif /* GNOME_DISABLE_DEPRECATED */
 
 G_END_DECLS
 
 #endif
+
+#endif /* GNOME_DISABLE_DEPRECATED */

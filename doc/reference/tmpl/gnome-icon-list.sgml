@@ -29,6 +29,58 @@ GnomeIconList
 </para>
 
 
+<!-- ##### SIGNAL GnomeIconList::focus-icon ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeIconList::move-cursor ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL GnomeIconList::select-icon ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+@event: 
+
+<!-- ##### SIGNAL GnomeIconList::text-changed ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+@arg2: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeIconList::toggle-cursor-selection ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconList::unselect-icon ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+@event: 
+
 <!-- ##### FUNCTION gnome_icon_list_new ##### -->
 <para>
 
@@ -412,56 +464,4 @@ GnomeIconList
 @idx: 
 @Returns: 
 
-
-<!-- ##### SIGNAL GnomeIconList::focus-icon ##### -->
-<para>
-
-</para>
-
-@iconlist: the object which received the signal.
-@arg1: 
-
-<!-- ##### SIGNAL GnomeIconList::move-cursor ##### -->
-<para>
-
-</para>
-
-@iconlist: the object which received the signal.
-@arg1: 
-@arg2: 
-
-<!-- ##### SIGNAL GnomeIconList::select-icon ##### -->
-<para>
-
-</para>
-
-@iconlist: the object which received the signal.
-@arg1: 
-@event: 
-
-<!-- ##### SIGNAL GnomeIconList::text-changed ##### -->
-<para>
-
-</para>
-
-@iconlist: the object which received the signal.
-@arg1: 
-@arg2: 
-@Returns: 
-
-<!-- ##### SIGNAL GnomeIconList::toggle-cursor-selection ##### -->
-<para>
-
-</para>
-
-@iconlist: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeIconList::unselect-icon ##### -->
-<para>
-
-</para>
-
-@iconlist: the object which received the signal.
-@arg1: 
-@event: 
 

@@ -1,3 +1,16 @@
+Mon Oct 13 17:32:40 2003  Jonathan Blandford  <jrb@redhat.com>
+
+	* libgnomeui/gnome-window.h: deprecated
+	* libgnomeui/gnome-color-picker.h: deprecated
+	* libgnomeui/gnome-dateedit.h: deprecated
+	* libgnomeui/gnome-dialog.h: deprecated
+	* libgnomeui/gnome-entry.h: deprecated
+	* libgnomeui/gnome-file-entry.h: deprecated
+	* libgnomeui/gnome-font-picker.h: deprecated
+	* libgnomeui/gnome-pixmap-entry.h: deprecated
+	* libgnomeui/gnome-popup-menu.h: deprecated
+	* libgnomeui/gnome-window.h: deprecated
+
 2003-10-08  Mark McLoughlin  <markmc@sun.com>
 
 	* libgnomeui/libgnomeui-access.[ch]: re-license to LGPL.

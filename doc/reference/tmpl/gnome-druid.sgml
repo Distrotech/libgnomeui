@@ -22,6 +22,30 @@ widget, such as a dialog box for ultimate display.
 </para>
 
 
+<!-- ##### SIGNAL GnomeDruid::cancel ##### -->
+<para>
+
+</para>
+
+@druid: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeDruid::help ##### -->
+<para>
+
+</para>
+
+@druid: the object which received the signal.
+
+<!-- ##### ARG GnomeDruid:show-finish ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruid:show-help ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_druid_new ##### -->
 <para>
 
@@ -120,28 +144,4 @@ widget, such as a dialog box for ultimate display.
 @close_on_cancel: 
 @window: 
 
-
-<!-- ##### SIGNAL GnomeDruid::cancel ##### -->
-<para>
-
-</para>
-
-@druid: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeDruid::help ##### -->
-<para>
-
-</para>
-
-@druid: the object which received the signal.
-
-<!-- ##### ARG GnomeDruid:show-finish ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeDruid:show-help ##### -->
-<para>
-
-</para>
 

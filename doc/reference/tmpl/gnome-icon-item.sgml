@@ -20,6 +20,56 @@ GnomeIconTextItem
 </para>
 
 
+<!-- ##### SIGNAL GnomeIconTextItem::editing-started ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::editing-stopped ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::height-changed ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::selection-started ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::selection-stopped ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::text-changed ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+@Returns: 
+
+<!-- ##### SIGNAL GnomeIconTextItem::width-changed ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
 <!-- ##### FUNCTION gnome_icon_text_item_configure ##### -->
 <para>
 
@@ -97,54 +147,4 @@ GnomeIconTextItem
 @iti: 
 @Returns: 
 
-
-<!-- ##### SIGNAL GnomeIconTextItem::editing-started ##### -->
-<para>
-
-</para>
-
-@icontextitem: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeIconTextItem::editing-stopped ##### -->
-<para>
-
-</para>
-
-@icontextitem: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeIconTextItem::height-changed ##### -->
-<para>
-
-</para>
-
-@icontextitem: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeIconTextItem::selection-started ##### -->
-<para>
-
-</para>
-
-@icontextitem: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeIconTextItem::selection-stopped ##### -->
-<para>
-
-</para>
-
-@icontextitem: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeIconTextItem::text-changed ##### -->
-<para>
-
-</para>
-
-@icontextitem: the object which received the signal.
-@Returns: 
-
-<!-- ##### SIGNAL GnomeIconTextItem::width-changed ##### -->
-<para>
-
-</para>
-
-@icontextitem: the object which received the signal.
 

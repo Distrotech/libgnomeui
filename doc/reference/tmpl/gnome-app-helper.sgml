@@ -94,7 +94,7 @@ of an application is being discussed.
 @GNOME_APP_PIXMAP_DATA: 
 @GNOME_APP_PIXMAP_FILENAME: 
 
-<!-- ##### TYPEDEF GnomeUIInfo ##### -->
+<!-- ##### STRUCT GnomeUIInfo ##### -->
 <para>
 This is the structure that defines an item in a menu bar or toolbar.  The 
 idea is to create an array of such structures with the information needed 
@@ -134,6 +134,17 @@ function. It can be used to tweak the widgets once they have been created if
 the application requires that level of fine-grained control.
 </para>
 
+@type: 
+@label: 
+@hint: 
+@moreinfo: 
+@user_data: 
+@unused_data: 
+@pixmap_type: 
+@pixmap_info: 
+@accelerator_key: 
+@ac_mods: 
+@widget: 
 
 <!-- ##### STRUCT GnomeUIBuilderData ##### -->
 <para>

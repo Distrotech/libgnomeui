@@ -20,6 +20,22 @@ Create a tabbed dialog for setting properties and preferences.
 </para>
 
 
+<!-- ##### SIGNAL GnomePropertyBox::apply ##### -->
+<para>
+
+</para>
+
+@propertybox: the object which received the signal.
+@arg1: the notebook page number which emitted the signal.
+
+<!-- ##### SIGNAL GnomePropertyBox::help ##### -->
+<para>
+
+</para>
+
+@propertybox: the object which received the signal.
+@arg1: the notebook page number which emitted the signal.
+
 <!-- ##### FUNCTION gnome_property_box_new ##### -->
 <para>
 
@@ -64,20 +80,4 @@ Create a tabbed dialog for setting properties and preferences.
 @property_box: 
 @state: 
 
-
-<!-- ##### SIGNAL GnomePropertyBox::apply ##### -->
-<para>
-
-</para>
-
-@propertybox: the object which received the signal.
-@arg1: the notebook page number which emitted the signal.
-
-<!-- ##### SIGNAL GnomePropertyBox::help ##### -->
-<para>
-
-</para>
-
-@propertybox: the object which received the signal.
-@arg1: the notebook page number which emitted the signal.
 

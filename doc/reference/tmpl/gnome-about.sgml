@@ -25,38 +25,6 @@ displaying as three notebook pages.
 </para>
 
 
-<!-- ##### FUNCTION gnome_about_new ##### -->
-<para>
-
-</para>
-
-@name: 
-@version: 
-@copyright: 
-@comments: 
-@authors: 
-@documenters: 
-@translator_credits: 
-@logo_pixbuf: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gnome_about_construct ##### -->
-<para>
-
-</para>
-
-@about: 
-@name: 
-@version: 
-@copyright: 
-@comments: 
-@authors: 
-@documenters: 
-@translator_credits: 
-@logo_pixbuf: 
-
-
 <!-- ##### ARG GnomeAbout:authors ##### -->
 <para>
 
@@ -96,4 +64,36 @@ displaying as three notebook pages.
 <para>
 
 </para>
+
+<!-- ##### FUNCTION gnome_about_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@version: 
+@copyright: 
+@comments: 
+@authors: 
+@documenters: 
+@translator_credits: 
+@logo_pixbuf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_about_construct ##### -->
+<para>
+
+</para>
+
+@about: 
+@name: 
+@version: 
+@copyright: 
+@comments: 
+@authors: 
+@documenters: 
+@translator_credits: 
+@logo_pixbuf: 
+
 

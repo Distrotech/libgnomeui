@@ -20,6 +20,11 @@ GnomePixmapEntry
 </para>
 
 
+<!-- ##### ARG GnomePixmapEntry:do-preview ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_pixmap_entry_new ##### -->
 <para>
 
@@ -125,9 +130,4 @@ GnomePixmapEntry
 @pentry: 
 @Returns: 
 
-
-<!-- ##### ARG GnomePixmapEntry:do-preview ##### -->
-<para>
-
-</para>
 

@@ -27,6 +27,8 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef GNOME_COLOR_PICKER_H
 #define GNOME_COLOR_PICKER_H
 
@@ -115,3 +117,5 @@ const char * gnome_color_picker_get_title (GnomeColorPicker *cp);
 G_END_DECLS
 
 #endif
+
+#endif /* GNOME_DISABLE_DEPRECATED */

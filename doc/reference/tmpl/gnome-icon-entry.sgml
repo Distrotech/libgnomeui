@@ -26,6 +26,45 @@ GnomeIconEntry
 </para>
 
 
+<!-- ##### SIGNAL GnomeIconEntry::browse ##### -->
+<para>
+
+</para>
+
+@iconentry: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconEntry::changed ##### -->
+<para>
+
+</para>
+
+@iconentry: the object which received the signal.
+
+<!-- ##### ARG GnomeIconEntry:browse-dialog-title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:filename ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:history-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:pick-dialog ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:pixmap-subdir ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_icon_entry_new ##### -->
 <para>
 
@@ -136,43 +175,4 @@ GnomeIconEntry
 @ientry: 
 @Returns: 
 
-
-<!-- ##### SIGNAL GnomeIconEntry::browse ##### -->
-<para>
-
-</para>
-
-@iconentry: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeIconEntry::changed ##### -->
-<para>
-
-</para>
-
-@iconentry: the object which received the signal.
-
-<!-- ##### ARG GnomeIconEntry:browse-dialog-title ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeIconEntry:filename ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeIconEntry:history-id ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeIconEntry:pick-dialog ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeIconEntry:pixmap-subdir ##### -->
-<para>
-
-</para>
 

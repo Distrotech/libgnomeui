@@ -20,6 +20,52 @@ GnomeColorPicker
 </para>
 
 
+<!-- ##### SIGNAL GnomeColorPicker::color-set ##### -->
+<para>
+
+</para>
+
+@colorpicker: the object which received the signal.
+@arg1: 
+@arg2: 
+@arg3: 
+@arg4: 
+
+<!-- ##### ARG GnomeColorPicker:alpha ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:blue ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:dither ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:green ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:red ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeColorPicker:use-alpha ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_color_picker_new ##### -->
 <para>
 
@@ -153,50 +199,4 @@ GnomeColorPicker
 @cp: 
 @Returns: 
 
-
-<!-- ##### SIGNAL GnomeColorPicker::color-set ##### -->
-<para>
-
-</para>
-
-@colorpicker: the object which received the signal.
-@arg1: 
-@arg2: 
-@arg3: 
-@arg4: 
-
-<!-- ##### ARG GnomeColorPicker:alpha ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeColorPicker:blue ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeColorPicker:dither ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeColorPicker:green ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeColorPicker:red ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeColorPicker:title ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeColorPicker:use-alpha ##### -->
-<para>
-
-</para>
 

@@ -26,6 +26,23 @@ GnomeEntry
 </para>
 
 
+<!-- ##### SIGNAL GnomeEntry::activate ##### -->
+<para>
+
+</para>
+
+@entry: the object which received the signal.
+
+<!-- ##### ARG GnomeEntry:gtk-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeEntry:history-id ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_entry_new ##### -->
 <para>
 
@@ -116,21 +133,4 @@ GnomeEntry
 
 @gentry: 
 
-
-<!-- ##### SIGNAL GnomeEntry::activate ##### -->
-<para>
-
-</para>
-
-@entry: the object which received the signal.
-
-<!-- ##### ARG GnomeEntry:gtk-entry ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeEntry:history-id ##### -->
-<para>
-
-</para>
 

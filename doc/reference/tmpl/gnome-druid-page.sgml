@@ -25,6 +25,52 @@ The widget for a aprticular page in a druid.
 </para>
 
 
+<!-- ##### SIGNAL GnomeDruidPage::back ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: The #GnomeDruid containg this page.
+@Returns: %TRUE if the signal handler has changed the page (since this stops
+all further emission of the signal), %FALSE otherwise.
+
+<!-- ##### SIGNAL GnomeDruidPage::cancel ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: The #GnomeDruid containg this page.
+@Returns: %TRUE if the druid does not want to exit yet, %FALSE if the exit
+should continue.
+
+<!-- ##### SIGNAL GnomeDruidPage::finish ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: The #GnomeDruid containg this page.
+
+<!-- ##### SIGNAL GnomeDruidPage::next ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: The #GnomeDruid containg this page.
+@Returns: %TRUE if the signal handler has changed the page (since this stops
+all further emission of the signal), %FALSE otherwise.
+
+<!-- ##### SIGNAL GnomeDruidPage::prepare ##### -->
+<para>
+
+</para>
+
+@druidpage: the object which received the signal.
+@widget: The #GnomeDruid containg this page.
+
 <!-- ##### FUNCTION gnome_druid_page_new ##### -->
 <para>
 
@@ -75,50 +121,4 @@ The widget for a aprticular page in a druid.
 
 @druid_page: 
 
-
-<!-- ##### SIGNAL GnomeDruidPage::back ##### -->
-<para>
-
-</para>
-
-@druidpage: the object which received the signal.
-@widget: The #GnomeDruid containg this page.
-@Returns: %TRUE if the signal handler has changed the page (since this stops
-all further emission of the signal), %FALSE otherwise.
-
-<!-- ##### SIGNAL GnomeDruidPage::cancel ##### -->
-<para>
-
-</para>
-
-@druidpage: the object which received the signal.
-@widget: The #GnomeDruid containg this page.
-@Returns: %TRUE if the druid does not want to exit yet, %FALSE if the exit
-should continue.
-
-<!-- ##### SIGNAL GnomeDruidPage::finish ##### -->
-<para>
-
-</para>
-
-@druidpage: the object which received the signal.
-@widget: The #GnomeDruid containg this page.
-
-<!-- ##### SIGNAL GnomeDruidPage::next ##### -->
-<para>
-
-</para>
-
-@druidpage: the object which received the signal.
-@widget: The #GnomeDruid containg this page.
-@Returns: %TRUE if the signal handler has changed the page (since this stops
-all further emission of the signal), %FALSE otherwise.
-
-<!-- ##### SIGNAL GnomeDruidPage::prepare ##### -->
-<para>
-
-</para>
-
-@druidpage: the object which received the signal.
-@widget: The #GnomeDruid containg this page.
 

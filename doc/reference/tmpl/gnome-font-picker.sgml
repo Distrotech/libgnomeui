@@ -36,6 +36,54 @@ GnomeFontPicker
 </para>
 
 
+<!-- ##### SIGNAL GnomeFontPicker::font-set ##### -->
+<para>
+
+</para>
+
+@fontpicker: the object which received the signal.
+@arg1: 
+
+<!-- ##### ARG GnomeFontPicker:font ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:font-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:label-font-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:mode ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:preview-text ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:show-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:use-font-in-label ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gnome_font_picker_new ##### -->
 <para>
 
@@ -162,52 +210,4 @@ GnomeFontPicker
 @gfp: 
 @text: 
 
-
-<!-- ##### SIGNAL GnomeFontPicker::font-set ##### -->
-<para>
-
-</para>
-
-@fontpicker: the object which received the signal.
-@arg1: 
-
-<!-- ##### ARG GnomeFontPicker:font ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:font-name ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:label-font-size ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:mode ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:preview-text ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:show-size ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:title ##### -->
-<para>
-
-</para>
-
-<!-- ##### ARG GnomeFontPicker:use-font-in-label ##### -->
-<para>
-
-</para>
 

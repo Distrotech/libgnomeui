@@ -24,6 +24,8 @@
   @NOTATION@
 */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef GNOME_POPUPMENU_H
 #define GNOME_POPUPMENU_H
 
@@ -63,3 +65,4 @@ G_END_DECLS
 
 #endif
 
+#endif /* GNOME_DISABLE_DEPRECATED */

@@ -105,6 +105,60 @@ interaction with the session manager.
 </para>
 
 
+<!-- ##### SIGNAL GnomeClient::connect ##### -->
+<para>
+Called once the client has been connected to the signal manager.
+</para>
+
+@client: the object which received the signal.
+@arg1: %TRUE if the application has been restarted.
+
+<!-- ##### SIGNAL GnomeClient::die ##### -->
+<para>
+Called when the session manager wants the client to shut down.
+</para>
+
+@client: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeClient::disconnect ##### -->
+<para>
+Called when the client is disconnected from the session manager.
+</para>
+
+@client: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeClient::save-complete ##### -->
+<para>
+Called when the session manager has finished checkpointing all of the clients.
+Clients are then free to change their state.
+</para>
+
+@client: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeClient::save-yourself ##### -->
+<para>
+Called when either a "SaveYourself" or a "SaveYourselfPhase2" call is made by
+the session manager.
+</para>
+
+@client: the object which received the signal.
+@arg1: The phase of the "SaveYourself" command ('1' or '2').
+@arg2: The data which should be saved by the client (local, global or both).
+@arg3: %TRUE if the session manager is shutting down.
+@arg4: How the client is allowed to interact with the user while saving.
+@arg5: %TRUE if this is to be a "fast" shutdown (saving minimal data).
+@Returns: %TRUE if the "SaveYourself" was completed succesfully, %FALSE
+otherwise.
+
+<!-- ##### SIGNAL GnomeClient::shutdown-cancelled ##### -->
+<para>
+Called if the session manager had sent a "SaveYourself" to all clients in
+preparation for shutting down and the shutdown was then cancelled. A client can
+then continue running and change its state.
+</para>
+
+@client: the object which received the signal.
+
 <!-- ##### MACRO GNOME_CLIENT_PARAM_SM_CONNECT ##### -->
 <para>
 Passed as a parameter to the application's gnome_program_init() call (with a
@@ -460,58 +514,4 @@ gnome_client_set_discard_command (client, 3, argv);
 @key: 
 @cancel_shutdown: 
 
-
-<!-- ##### SIGNAL GnomeClient::connect ##### -->
-<para>
-Called once the client has been connected to the signal manager.
-</para>
-
-@client: the object which received the signal.
-@arg1: %TRUE if the application has been restarted.
-
-<!-- ##### SIGNAL GnomeClient::die ##### -->
-<para>
-Called when the session manager wants the client to shut down.
-</para>
-
-@client: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeClient::disconnect ##### -->
-<para>
-Called when the client is disconnected from the session manager.
-</para>
-
-@client: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeClient::save-complete ##### -->
-<para>
-Called when the session manager has finished checkpointing all of the clients.
-Clients are then free to change their state.
-</para>
-
-@client: the object which received the signal.
-
-<!-- ##### SIGNAL GnomeClient::save-yourself ##### -->
-<para>
-Called when either a "SaveYourself" or a "SaveYourselfPhase2" call is made by
-the session manager.
-</para>
-
-@client: the object which received the signal.
-@arg1: The phase of the "SaveYourself" command ('1' or '2').
-@arg2: The data which should be saved by the client (local, global or both).
-@arg3: %TRUE if the session manager is shutting down.
-@arg4: How the client is allowed to interact with the user while saving.
-@arg5: %TRUE if this is to be a "fast" shutdown (saving minimal data).
-@Returns: %TRUE if the "SaveYourself" was completed succesfully, %FALSE
-otherwise.
-
-<!-- ##### SIGNAL GnomeClient::shutdown-cancelled ##### -->
-<para>
-Called if the session manager had sent a "SaveYourself" to all clients in
-preparation for shutting down and the shutdown was then cancelled. A client can
-then continue running and change its state.
-</para>
-
-@client: the object which received the signal.
 
