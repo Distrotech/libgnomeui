@@ -3,6 +3,7 @@
 #include <config.h>
 
 #include <assert.h>
+#include <string.h>
 
 #include "gnome.h"
 #include "gnome-session.h"
