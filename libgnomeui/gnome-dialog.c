@@ -184,6 +184,9 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 	
   dialog = gtk_type_new (gnome_dialog_get_type ());
 
+  if (title)
+    gtk_window_set_title (GTK_WINDOW (dialog), title);
+
   while (TRUE) {
 
     button_name = va_arg (ap, gchar *);

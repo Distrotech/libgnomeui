@@ -1,3 +1,8 @@
+1998-04-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dialog.c (gnome_dialog_new): Actually set the window
+	title; it was just being ignored.
+
 Fri Apr 24 01:32:21 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock: added new icons by tigert
