@@ -44,23 +44,27 @@ BEGIN_GNOME_DECLS
  * =======================================================================
  */
 
-typedef struct GnomeGdkPixbufLoadHandle    GnomeGdkPixbufLoadHandle;
-typedef void (*GnomeGdkPixbufLoadCallback) (GnomeVFSResult  error,
-                                            GdkPixbuf      *pixbuf,
-                                            gpointer        callback_data);
+typedef struct GnomeGdkPixbufAsyncHandle    GnomeGdkPixbufAsyncHandle;
+typedef void (*GnomeGdkPixbufLoadCallback) (GnomeGdkPixbufAsyncHandle *handle,
+                                            GnomeVFSResult             error,
+                                            GdkPixbuf                 *pixbuf,
+                                            gpointer                   cb_data);
+typedef void (*GnomeGdkPixbufDoneCallback) (GnomeGdkPixbufAsyncHandle *handle,
+                                            gpointer                   cb_data);
 
 /* Loading a GdkPixbuf with a URI. */
 GdkPixbuf *
 gnome_gdk_pixbuf_new_from_uri        (const char                 *uri);
 
 /* Same thing async. */
-GnomeGdkPixbufLoadHandle *
+GnomeGdkPixbufAsyncHandle *
 gnome_gdk_pixbuf_new_from_uri_async  (const char                 *uri,
-                                      GnomeGdkPixbufLoadCallback  callback,
+                                      GnomeGdkPixbufLoadCallback  load_callback,
+                                      GnomeGdkPixbufDoneCallback  done_callback,
                                       gpointer                    callback_data);
 
 void
-gnome_gdk_pixbuf_new_from_uri_cancel (GnomeGdkPixbufLoadHandle   *handle);
+gnome_gdk_pixbuf_new_from_uri_cancel (GnomeGdkPixbufAsyncHandle  *handle);
 
 END_GNOME_DECLS
 
