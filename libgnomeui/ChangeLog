@@ -1,3 +1,20 @@
+2001-06-04  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector-widget.[ch]: New files.
+
+	* gnome-selector-client.[ch]: Derive from BonoboObject, not BonoboWidget.
+	(gnome_selector_client_new_from_objref): Take a Bonobo_Unknown, not a GNOME_Selector.
+        (gnome_selector_client_construct_from_objref): Likewise.
+
+	* gnome-entry.[ch]: Derive from GnomeSelectorWidget, not GnomeSelectorClient.
+	(gnome_entry_new_from_selector, gnome_entry_construct): Removed.
+
+	* gnome-image-entry.[ch]: Derive from GnomeSelectorWidget, not GnomeSelectorClient.
+	(gnome_image_entry_new_from_selector): Removed.
+
+	* gnome-image-selector.[ch]: Derive from GnomeSelectorWidget, not GnomeSelectorClient.
+	(gnome_image_selector_new_from_selector, gnome_image_selector_construct): Removed.	
+
 2001-06-03  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-dialog-client.c

@@ -40,10 +40,13 @@
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-selector.h>
+#include <bonobo/bonobo-exception.h>
 #include "gnome-macros.h"
 #include "gnome-entry.h"
 
 struct _GnomeEntryPrivate {
+    Bonobo_PropertyBag pbag;
+
     gboolean constructed;
 
     gboolean is_file_entry;
@@ -54,7 +57,12 @@ static void   gnome_entry_class_init   (GnomeEntryClass *class);
 static void   gnome_entry_init         (GnomeEntry      *gentry);
 static void   gnome_entry_finalize     (GObject         *object);
 
-static GnomeSelectorClientClass *parent_class;
+static GObject*
+gnome_entry_constructor (GType                  type,
+			 guint                  n_construct_properties,
+			 GObjectConstructParam *construct_properties);
+
+static GnomeSelectorWidget *parent_class;
 
 enum {
     PROP_0,
@@ -80,7 +88,7 @@ gnome_entry_get_type (void)
 	    NULL
 	};
 
-	entry_type = gtk_type_unique (gnome_selector_client_get_type (), &entry_info);
+	entry_type = gtk_type_unique (gnome_selector_widget_get_type (), &entry_info);
     }
 
     return entry_type;
@@ -138,7 +146,7 @@ gnome_entry_class_init (GnomeEntryClass *class)
     object_class = (GtkObjectClass *) class;
     gobject_class = (GObjectClass *) class;
 
-    parent_class = gtk_type_class (gnome_selector_client_get_type ());
+    parent_class = gtk_type_class (gnome_selector_widget_get_type ());
 
     gobject_class->get_property = gnome_entry_get_property;
     gobject_class->set_property = gnome_entry_set_property;
@@ -152,6 +160,7 @@ gnome_entry_class_init (GnomeEntryClass *class)
 			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
 				G_PARAM_CONSTRUCT_ONLY)));
 
+    gobject_class->constructor = gnome_entry_constructor;
     gobject_class->finalize = gnome_entry_finalize;
 }
 
@@ -161,61 +170,74 @@ gnome_entry_init (GnomeEntry *gentry)
     gentry->_priv = g_new0 (GnomeEntryPrivate, 1);
 }
 
-GtkWidget *
-gnome_entry_construct (GnomeEntry         *gentry,
-		       GNOME_Selector      corba_selector,
-		       Bonobo_UIContainer  uic)
-{
-    g_return_val_if_fail (gentry != NULL, NULL);
-    g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
-    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+extern GnomeSelectorWidget *gnome_selector_widget_do_construct (GnomeSelectorWidget *);
 
-    return (GtkWidget *) gnome_selector_client_construct_from_objref
-	(GNOME_SELECTOR_CLIENT (gentry), corba_selector, uic);
+static GObject*
+gnome_entry_constructor (GType                  type,
+			 guint                  n_construct_properties,
+			 GObjectConstructParam *construct_properties)
+{
+    GObject *object = G_OBJECT_CLASS (parent_class)->constructor
+	(type, n_construct_properties, construct_properties);
+    GnomeEntry *gentry = GNOME_ENTRY (object);
+    GnomeEntryPrivate *priv = gentry->_priv;
+    Bonobo_Unknown corba_objref = CORBA_OBJECT_NIL;
+    gchar *moniker = NULL;
+    GValue value = { 0, };
+    CORBA_Environment ev;
+
+    if (type != GNOME_TYPE_ENTRY)
+	return object;
+
+    g_value_init (&value, G_TYPE_POINTER);
+    g_object_get_property (object, "corba-objref", &value);
+    corba_objref = g_value_get_pointer (&value);
+    g_value_unset (&value);
+
+    if (corba_objref != CORBA_OBJECT_NIL)
+	goto out;
+
+    g_value_init (&value, G_TYPE_STRING);
+    g_object_get_property (object, "moniker", &value);
+    moniker = g_value_dup_string (&value);
+    g_value_unset (&value);
+
+    if (moniker != NULL)
+	goto out;
+
+    if (priv->is_file_entry)
+	g_object_set (object, "moniker", "OAFIID:GNOME_UI_Component_FileEntry", NULL);
+    else
+	g_object_set (object, "moniker", "OAFIID:GNOME_UI_Component_Entry", NULL);
+
+ out:
+    g_free (moniker);
+    if (!gnome_selector_widget_do_construct (GNOME_SELECTOR_WIDGET (gentry)))
+	return NULL;
+
+    corba_objref = bonobo_widget_get_objref (BONOBO_WIDGET (gentry));
+    if (corba_objref == CORBA_OBJECT_NIL) {
+	g_object_unref (object);
+	return NULL;
+    }
+
+    CORBA_exception_init (&ev);
+    priv->pbag = Bonobo_Unknown_queryInterface (corba_objref, "IDL:Bonobo/PropertyBag:1.0", &ev);
+    CORBA_exception_free (&ev);
+
+    return object;
 }
 
 GtkWidget *
 gnome_entry_new (void)
 {
-    GnomeEntry *entry;
-
-    entry = g_object_new (gnome_entry_get_type (),
-			  "is-file-entry", FALSE,
-			  NULL);
-
-    return (GtkWidget *) gnome_selector_client_construct
-	(GNOME_SELECTOR_CLIENT (entry),
-	 "OAFIID:GNOME_UI_Component_Entry",
-	 CORBA_OBJECT_NIL);
+    return g_object_new (gnome_entry_get_type (), "is-file-entry", FALSE, NULL);
 }
 
 GtkWidget *
 gnome_file_entry_new (void)
 {
-    GnomeEntry *entry;
-
-    entry = g_object_new (gnome_entry_get_type (),
-			  "is-file-entry", TRUE,
-			  NULL);
-
-    return (GtkWidget *) gnome_selector_client_construct
-	(GNOME_SELECTOR_CLIENT (entry),
-	 "OAFIID:GNOME_UI_Component_Entry",
-	 CORBA_OBJECT_NIL);
-}
-
-GtkWidget *
-gnome_entry_new_from_selector (GNOME_Selector     corba_selector,
-			       Bonobo_UIContainer uic)
-{
-    GnomeEntry *entry;
-
-    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
-
-    entry = g_object_new (gnome_entry_get_type (), NULL);
-
-    return (GtkWidget *) gnome_selector_client_construct_from_objref
-	(GNOME_SELECTOR_CLIENT (entry), corba_selector, uic);
+    return g_object_new (gnome_entry_get_type (), "is-file-entry", TRUE, NULL);
 }
 
 static void
@@ -240,12 +262,9 @@ gnome_entry_get_text (GnomeEntry *gentry)
 {
     g_return_val_if_fail (gentry != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
+    g_return_val_if_fail (gentry->_priv->pbag != CORBA_OBJECT_NIL, NULL);
 
-#ifdef FIXME
-    return gnome_selector_client_get_entry_text (GNOME_SELECTOR_CLIENT (gentry));
-#else
-    return NULL;
-#endif
+    return bonobo_pbclient_get_string (gentry->_priv->pbag, "entry-text", NULL);
 }
 
 void
@@ -253,10 +272,8 @@ gnome_entry_set_text (GnomeEntry *gentry, const gchar *text)
 {
     g_return_if_fail (gentry != NULL);
     g_return_if_fail (GNOME_IS_ENTRY (gentry));
+    g_return_if_fail (gentry->_priv->pbag != CORBA_OBJECT_NIL);
 
-#ifdef FIXME
-    gnome_selector_client_set_entry_text (GNOME_SELECTOR_CLIENT (gentry),
-					  text);
-#endif
+    bonobo_pbclient_set_string (gentry->_priv->pbag, "entry-text", text, NULL);
 }
 

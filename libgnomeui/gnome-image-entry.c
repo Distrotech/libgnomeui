@@ -40,6 +40,7 @@
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
 #include <bonobo/bonobo-moniker-util.h>
+#include <bonobo/bonobo-exception.h>
 #include "gnome-image-entry.h"
 
 #define ICON_SIZE 48
@@ -64,9 +65,14 @@ enum {
 
 static void   gnome_image_entry_class_init   (GnomeImageEntryClass *class);
 static void   gnome_image_entry_init         (GnomeImageEntry      *gentry);
-static void   gnome_image_entry_finalize     (GObject         *object);
+static void   gnome_image_entry_finalize     (GObject              *object);
 
-static GnomeSelectorClientClass *parent_class;
+static GObject*
+gnome_image_entry_constructor (GType                  type,
+			       guint                  n_construct_properties,
+			       GObjectConstructParam *construct_properties);
+
+static GnomeSelectorWidgetClass *parent_class;
 
 GType
 gnome_image_entry_get_type (void)
@@ -85,7 +91,7 @@ gnome_image_entry_get_type (void)
 	    NULL
 	};
 
-	entry_type = gtk_type_unique (gnome_selector_client_get_type (), &entry_info);
+	entry_type = gtk_type_unique (gnome_selector_widget_get_type (), &entry_info);
     }
 
     return entry_type;
@@ -153,8 +159,9 @@ gnome_image_entry_class_init (GnomeImageEntryClass *class)
 
     object_class = (GObjectClass *) class;
 
-    parent_class = gtk_type_class (gnome_selector_client_get_type ());
+    parent_class = gtk_type_class (bonobo_widget_get_type ());
 
+    object_class->constructor = gnome_image_entry_constructor;
     object_class->finalize = gnome_image_entry_finalize;
 
     object_class->get_property = gnome_image_entry_get_property;
@@ -192,47 +199,70 @@ gnome_image_entry_init (GnomeImageEntry *gentry)
     gentry->_priv = g_new0 (GnomeImageEntryPrivate, 1);
 }
 
+extern GnomeSelectorWidget *gnome_selector_widget_do_construct (GnomeSelectorWidget *);
+
+static GObject*
+gnome_image_entry_constructor (GType                  type,
+			       guint                  n_construct_properties,
+			       GObjectConstructParam *construct_properties)
+{
+    GObject *object = G_OBJECT_CLASS (parent_class)->constructor
+	(type, n_construct_properties, construct_properties);
+    GnomeImageEntry *ientry = GNOME_IMAGE_ENTRY (object);
+    GnomeImageEntryPrivate *priv = ientry->_priv;
+    Bonobo_Unknown corba_objref = CORBA_OBJECT_NIL;
+    gchar *moniker = NULL;
+    GValue value = { 0, };
+
+    if (type != GNOME_TYPE_IMAGE_ENTRY)
+	return object;
+
+    g_value_init (&value, G_TYPE_POINTER);
+    g_object_get_property (object, "corba-objref", &value);
+    corba_objref = g_value_get_pointer (&value);
+    g_value_unset (&value);
+
+    if (corba_objref != CORBA_OBJECT_NIL)
+	goto out;
+
+    g_value_init (&value, G_TYPE_STRING);
+    g_object_get_property (object, "moniker", &value);
+    moniker = g_value_dup_string (&value);
+    g_value_unset (&value);
+
+    if (moniker != NULL)
+	goto out;
+
+    if (priv->is_pixmap_entry)
+	moniker = g_strdup_printf ("%s!type=pixmap;preview-x=%d;preview-y=%d",
+				   "OAFIID:GNOME_UI_Component_ImageEntry_Item",
+				   priv->preview_x, priv->preview_y);
+    else
+	moniker = g_strdup_printf ("%s!type=icon", "OAFIID:GNOME_UI_Component_ImageEntry_Item");
+
+    g_object_set (object, "moniker", moniker, NULL);
+
+ out:
+    g_free (moniker);
+    if (!gnome_selector_widget_do_construct (GNOME_SELECTOR_WIDGET (ientry)))
+	return NULL;
+
+    return object;
+}
+
 GtkWidget *
 gnome_image_entry_new_icon_entry (void)
 {
-    GnomeImageEntry *ientry;
-
-    ientry = g_object_new (gnome_image_entry_get_type (),
-			   "is-pixmap-entry", FALSE, NULL);
-
-    return (GtkWidget *) gnome_selector_client_construct
-	(GNOME_SELECTOR_CLIENT (ientry),
-	 "OAFIID:GNOME_UI_Component_ImageEntry",
-	 CORBA_OBJECT_NIL);
+    return g_object_new (gnome_image_entry_get_type (),
+			 "is-pixmap-entry", FALSE, NULL);
 }
 
 GtkWidget *
 gnome_image_entry_new_pixmap_entry (guint preview_x, guint preview_y)
 {
-    GnomeImageEntry *ientry;
-
-    ientry = g_object_new (gnome_image_entry_get_type (),
-			   "preview-x", preview_x, "preview-y", preview_y,
-			   "is-pixmap-entry", TRUE, NULL);
-
-    return (GtkWidget *) gnome_selector_client_construct
-	(GNOME_SELECTOR_CLIENT (ientry),
-	 "OAFIID:GNOME_UI_Component_ImageEntry",
-	 CORBA_OBJECT_NIL);
-}
-
-GtkWidget *
-gnome_image_entry_new_from_selector (GNOME_Selector     corba_selector,
-				     Bonobo_UIContainer uic)
-{
-    GnomeImageEntry *ientry;
-
-    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
-
-    ientry = g_object_new (gnome_image_entry_get_type (), NULL);
-
-    return (GtkWidget *) gnome_selector_client_construct_from_objref
-	(GNOME_SELECTOR_CLIENT (ientry), corba_selector, uic);
+    return g_object_new (gnome_image_entry_get_type (),
+			 "preview-x", preview_x, "preview-y", preview_y,
+			 "is-pixmap-entry", TRUE, NULL);
 }
 
 static void

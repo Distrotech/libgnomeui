@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -34,7 +34,7 @@
 
 
 #include <libgnome/gnome-selector.h>
-#include <libgnomeui/gnome-selector-client.h>
+#include <libgnomeui/gnome-selector-widget.h>
 
 
 G_BEGIN_DECLS
@@ -53,34 +53,27 @@ typedef struct _GnomeEntryPrivate GnomeEntryPrivate;
 typedef struct _GnomeEntryClass   GnomeEntryClass;
 
 struct _GnomeEntry {
-	GnomeSelectorClient selector_client;
+    GnomeSelectorWidget widget;
 
-	/*< private >*/
-	GnomeEntryPrivate *_priv;
+    /*< private >*/
+    GnomeEntryPrivate *_priv;
 };
 
 struct _GnomeEntryClass {
-	GnomeSelectorClientClass parent_class;
+    GnomeSelectorWidgetClass parent_class;
 };
 
 
-GType        gnome_entry_get_type          (void) G_GNUC_CONST;
+GType        gnome_entry_get_type               (void) G_GNUC_CONST;
 
-GtkWidget   *gnome_entry_new               (void);
+GtkWidget   *gnome_entry_new                    (void);
 
-GtkWidget   *gnome_file_entry_new          (void);
+GtkWidget   *gnome_file_entry_new               (void);
 
-GtkWidget   *gnome_entry_new_from_selector (GNOME_Selector      corba_selector,
-                                            Bonobo_UIContainer  uic);
+gchar       *gnome_entry_get_text               (GnomeEntry         *gentry);
 
-GtkWidget   *gnome_entry_construct         (GnomeEntry         *gentry,
-                                            GNOME_Selector      corba_selector,
-                                            Bonobo_UIContainer  uic);
-
-gchar       *gnome_entry_get_text          (GnomeEntry         *gentry);
-
-void         gnome_entry_set_text          (GnomeEntry         *gentry,
-                                            const gchar        *text);
+void         gnome_entry_set_text               (GnomeEntry         *gentry,
+                                                 const gchar        *text);
 
 G_END_DECLS
 

@@ -34,7 +34,7 @@
 
 
 #include <libgnome/gnome-selector.h>
-#include <libgnomeui/gnome-selector-client.h>
+#include <libgnomeui/gnome-selector-widget.h>
 
 
 G_BEGIN_DECLS
@@ -52,27 +52,20 @@ typedef struct _GnomeImageSelectorPrivate GnomeImageSelectorPrivate;
 typedef struct _GnomeImageSelectorClass   GnomeImageSelectorClass;
 
 struct _GnomeImageSelector {
-    GnomeSelectorClient client;
+    GnomeSelectorWidget widget;
 
     /*< private >*/
     GnomeImageSelectorPrivate *_priv;
 };
 
 struct _GnomeImageSelectorClass {
-    GnomeSelectorClientClass parent_class;
+    GnomeSelectorWidgetClass parent_class;
 };
 
 
 GType        gnome_image_selector_get_type          (void) G_GNUC_CONST;
 
 GtkWidget   *gnome_image_selector_new               (void);
-
-GtkWidget   *gnome_image_selector_new_from_selector (GNOME_Selector       corba_selector,
-                                                     Bonobo_UIContainer   uic);
-
-GtkWidget   *gnome_image_selector_construct         (GnomeImageSelector  *iselector,
-                                                     GNOME_Selector       corba_selector,
-                                                     Bonobo_UIContainer   uic);
 
 G_END_DECLS
 

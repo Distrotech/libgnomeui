@@ -51,7 +51,12 @@ static void   gnome_image_selector_class_init   (GnomeImageSelectorClass *class)
 static void   gnome_image_selector_init         (GnomeImageSelector      *gselector);
 static void   gnome_image_selector_finalize     (GObject                 *object);
 
-static GnomeSelectorClientClass *parent_class;
+static GObject*
+gnome_image_selector_constructor (GType                  type,
+				  guint                  n_construct_properties,
+				  GObjectConstructParam *construct_properties);
+
+static GnomeSelectorWidgetClass *parent_class;
 
 GType
 gnome_image_selector_get_type (void)
@@ -70,7 +75,7 @@ gnome_image_selector_get_type (void)
 	    NULL
 	};
 
-	selector_type = gtk_type_unique (gnome_selector_client_get_type (), &selector_info);
+	selector_type = gtk_type_unique (gnome_selector_widget_get_type (), &selector_info);
     }
 
     return selector_type;
@@ -79,15 +84,14 @@ gnome_image_selector_get_type (void)
 static void
 gnome_image_selector_class_init (GnomeImageSelectorClass *class)
 {
-    GtkObjectClass *object_class;
-    GObjectClass *gobject_class;
+    GObjectClass *object_class;
 
-    object_class = (GtkObjectClass *) class;
-    gobject_class = (GObjectClass *) class;
+    object_class = (GObjectClass *) class;
 
-    parent_class = gtk_type_class (gnome_selector_client_get_type ());
+    parent_class = gtk_type_class (gnome_selector_widget_get_type ());
 
-    gobject_class->finalize = gnome_image_selector_finalize;
+    object_class->constructor = gnome_image_selector_constructor;
+    object_class->finalize = gnome_image_selector_finalize;
 }
 
 static void
@@ -96,32 +100,55 @@ gnome_image_selector_init (GnomeImageSelector *gselector)
     gselector->_priv = g_new0 (GnomeImageSelectorPrivate, 1);
 }
 
-GtkWidget *
-gnome_image_selector_new (void)
+extern GnomeSelectorWidget *gnome_selector_widget_do_construct (GnomeSelectorWidget *);
+
+static GObject*
+gnome_image_selector_constructor (GType                  type,
+				  guint                  n_construct_properties,
+				  GObjectConstructParam *construct_properties)
 {
-    GnomeImageSelector *iselector;
+    GObject *object = G_OBJECT_CLASS (parent_class)->constructor
+	(type, n_construct_properties, construct_properties);
+    GnomeImageSelector *iselector = GNOME_IMAGE_SELECTOR (object);
+    Bonobo_Unknown corba_objref = CORBA_OBJECT_NIL;
+    gchar *moniker = NULL;
+    GValue value = { 0, };
 
-    iselector = g_object_new (gnome_image_selector_get_type (),
-			      NULL);
+    if (type != GNOME_TYPE_IMAGE_SELECTOR)
+	return object;
 
-    return (GtkWidget *) gnome_selector_client_construct
-	(GNOME_SELECTOR_CLIENT (iselector),
-	 "OAFIID:GNOME_UI_Component_IconSelector",
-	 CORBA_OBJECT_NIL);
+    g_value_init (&value, G_TYPE_POINTER);
+    g_object_get_property (object, "corba-objref", &value);
+    corba_objref = g_value_get_pointer (&value);
+    g_value_unset (&value);
+
+    if (corba_objref != CORBA_OBJECT_NIL)
+	goto out;
+
+    g_value_init (&value, G_TYPE_STRING);
+    g_object_get_property (object, "moniker", &value);
+    moniker = g_value_dup_string (&value);
+    g_value_unset (&value);
+
+    if (moniker != NULL)
+	goto out;
+
+    moniker = g_strdup_printf ("OAFIID:GNOME_UI_Component_IconSelector");
+
+    g_object_set (object, "moniker", moniker, NULL);
+
+ out:
+    g_free (moniker);
+    if (!gnome_selector_widget_do_construct (GNOME_SELECTOR_WIDGET (iselector)))
+	return NULL;
+
+    return object;
 }
 
 GtkWidget *
-gnome_image_selector_new_from_selector (GNOME_Selector     corba_selector,
-					Bonobo_UIContainer uic)
+gnome_image_selector_new (void)
 {
-    GnomeImageSelector *iselector;
-
-    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
-
-    iselector = g_object_new (gnome_image_selector_get_type (), NULL);
-
-    return (GtkWidget *) gnome_selector_client_construct_from_objref
-	(GNOME_SELECTOR_CLIENT (iselector), corba_selector, uic);
+    return g_object_new (gnome_image_selector_get_type (), NULL);
 }
 
 static void

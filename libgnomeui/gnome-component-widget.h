@@ -24,116 +24,46 @@
   @NOTATION@
  */
 
-/* GnomeSelector client
+/* GnomeSelector widget
  *
  * Author: Martin Baulig <baulig@suse.de>
  */
 
-#ifndef GNOME_SELECTOR_CLIENT_H
-#define GNOME_SELECTOR_CLIENT_H
+#ifndef GNOME_SELECTOR_WIDGET_H
+#define GNOME_SELECTOR_WIDGET_H
 
 
 #include <bonobo/bonobo-widget.h>
-#include <libgnome/gnome-async-context.h>
 #include <libgnome/Gnome.h>
 
 
 G_BEGIN_DECLS
 
 
-#define GNOME_TYPE_SELECTOR_CLIENT            (gnome_selector_client_get_type ())
-#define GNOME_SELECTOR_CLIENT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_SELECTOR_CLIENT, GnomeSelectorClient))
-#define GNOME_SELECTOR_CLIENT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_SELECTOR_CLIENT, GnomeSelectorClientClass))
-#define GNOME_IS_SELECTOR_CLIENT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_SELECTOR_CLIENT))
-#define GNOME_IS_SELECTOR_CLIENT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_SELECTOR_CLIENT))
+#define GNOME_TYPE_SELECTOR_WIDGET            (gnome_selector_widget_get_type ())
+#define GNOME_SELECTOR_WIDGET(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_SELECTOR_WIDGET, GnomeSelectorWidget))
+#define GNOME_SELECTOR_WIDGET_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_SELECTOR_WIDGET, GnomeSelectorWidgetClass))
+#define GNOME_IS_SELECTOR_WIDGET(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_SELECTOR_WIDGET))
+#define GNOME_IS_SELECTOR_WIDGET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_SELECTOR_WIDGET))
 
 
-typedef struct _GnomeSelectorClient             GnomeSelectorClient;
-typedef struct _GnomeSelectorClientPrivate      GnomeSelectorClientPrivate;
-typedef struct _GnomeSelectorClientClass        GnomeSelectorClientClass;
+typedef struct _GnomeSelectorWidget             GnomeSelectorWidget;
+typedef struct _GnomeSelectorWidgetPrivate      GnomeSelectorWidgetPrivate;
+typedef struct _GnomeSelectorWidgetClass        GnomeSelectorWidgetClass;
 
-struct _GnomeSelectorClient {
+struct _GnomeSelectorWidget {
     BonoboWidget widget;
         
     /*< private >*/
-    GnomeSelectorClientPrivate *_priv;
+    GnomeSelectorWidgetPrivate *_priv;
 };
 
-struct _GnomeSelectorClientClass {
+struct _GnomeSelectorWidgetClass {
     BonoboWidgetClass parent_class;
-
-    void     (*activate_entry)              (GnomeSelectorClient   *client,
-					     const gchar           *entry_text);
 };
 
 GtkType
-gnome_selector_client_get_type              (void) G_GNUC_CONST;
-
-GnomeSelectorClient *
-gnome_selector_client_new                   (const gchar           *moniker,
-                                             Bonobo_UIContainer     uic);
-
-GnomeSelectorClient *
-gnome_selector_client_new_from_objref       (GNOME_Selector         corba_selector,
-                                             Bonobo_UIContainer     uic);
-
-GnomeSelectorClient *
-gnome_selector_client_construct             (GnomeSelectorClient   *client,
-                                             const gchar           *moniker,
-                                             Bonobo_UIContainer     uic);
-
-GnomeSelectorClient *
-gnome_selector_client_construct_from_objref (GnomeSelectorClient   *client,
-                                             GNOME_Selector         corba_selector,
-                                             Bonobo_UIContainer     uic);
-
-GNOME_Selector
-gnome_selector_client_get_selector          (GnomeSelectorClient   *client);
-
-/* If the entry widget is derived from GtkEditable, then we can use this
- * function to send an "activate" signal to it. */
-void
-gnome_selector_client_activate_entry        (GnomeSelectorClient   *client);
-
-void
-gnome_selector_client_check_uri             (GnomeSelectorClient   *client,
-                                             GnomeAsyncHandle     **handle_return,
-                                             const gchar           *uri,
-					     gboolean               directory_ok,
-                                             guint                  timeout_msec,
-                                             GnomeAsyncFunc         async_func,
-                                             gpointer               user_data);
-
-void
-gnome_selector_client_scan_directory        (GnomeSelectorClient   *client,
-                                             GnomeAsyncHandle     **handle_return,
-                                             const gchar           *uri,
-                                             guint                  timeout_msec,
-                                             GnomeAsyncFunc         async_func,
-                                             gpointer               user_data);
-
-/* Get/set URI. */
-
-gchar *
-gnome_selector_client_get_uri               (GnomeSelectorClient   *client);
-
-void
-gnome_selector_client_set_uri               (GnomeSelectorClient   *client,
-                                             GnomeAsyncHandle     **handle_return,
-                                             const gchar           *uri,
-                                             guint                  timeout_msec,
-                                             GnomeAsyncFunc         async_func,
-                                             gpointer               user_data);
-
-void
-gnome_selector_client_add_uri               (GnomeSelectorClient   *client,
-                                             GnomeAsyncHandle     **handle_return,
-                                             const gchar           *uri,
-					     glong                  position,
-					     guint                  list_id, 
-                                             guint                  timeout_msec,
-                                             GnomeAsyncFunc         async_func,
-                                             gpointer               user_data);
+gnome_selector_widget_get_type              (void) G_GNUC_CONST;
 
 G_END_DECLS
 
