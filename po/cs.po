@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-03 12:11+0200\n"
-"PO-Revision-Date: 2004-09-03 15:24+0200\n"
+"POT-Creation-Date: 2004-09-05 12:09+0200\n"
+"PO-Revision-Date: 2004-09-05 16:16+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1251,7 +1251,7 @@ msgstr "GnomeIconSelection:'%s' neexistuje nebo to není adresář"
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: nemohu otevřítb adresář '%s'"
+msgstr "GnomeIconSelection: nemohu otevřít adresář '%s'"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
