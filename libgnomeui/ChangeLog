@@ -1,3 +1,10 @@
+Tue Sep 15 11:22:24 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gtk-socket.c (gtk_socket_realize): Add a gdk_flush()
+	so that our newly created window is guaranteed to
+	already have SubstructureRedirect when another app
+	gets the XID.
+
 1998-09-15  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-mdi.c (gnome_mdi_set_menu_template): Added gboolean argument
