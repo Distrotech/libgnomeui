@@ -2605,7 +2605,7 @@ gnome_client_request_save (GnomeClient	       *client,
       SmcRequestSaveYourself ((SmcConn) client->smc_conn, _save_style,
 			      shutdown, _interact_style,
 			      fast, global);            
-#endif HAVE_LIBSM
+#endif
     }
   else 
     {

@@ -152,6 +152,9 @@ typedef struct {
 
 typedef struct {
         gboolean constructed;
+	gchar	*display;
+	gchar	*default_icon;
+	gboolean show_crash_dialog;
 } GnomeProgramPrivate_libgnomeui;
 
 static GQuark quark_gnome_program_private_libgnomeui = 0;
@@ -173,7 +176,14 @@ libgnomeui_get_property (GObject *object, guint param_id, GValue *value,
         cdata = g_type_get_qdata(G_OBJECT_TYPE(program), quark_gnome_program_class_libgnomeui);
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
 
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
+	if (param_id == cdata->default_icon_id)
+		g_value_set_string (value, priv->default_icon);
+	else if (param_id == cdata->crash_dialog_id)
+		g_value_set_boolean (value, priv->show_crash_dialog);
+	else if (param_id == cdata->display_id)
+		g_value_set_string (value, priv->display);
+	else 
+        	G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
 }
 
 static void
@@ -192,11 +202,15 @@ libgnomeui_set_property (GObject *object, guint param_id,
         cdata = g_type_get_qdata(G_OBJECT_TYPE(program), quark_gnome_program_class_libgnomeui);
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
 
-        switch(param_id) {
-        default:
+	if (param_id == cdata->default_icon_id)
+		priv->default_icon = g_strdup (g_value_get_string (value));
+	else if (param_id == cdata->crash_dialog_id)
+		priv->show_crash_dialog = g_value_get_boolean (value);
+	else if (param_id == cdata->display_id)
+		priv->display = g_strdup (g_value_get_string (value));
+	else {
                 g_message(G_STRLOC);
                 G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
-                break;
         }
 }
 

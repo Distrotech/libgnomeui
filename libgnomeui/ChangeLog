@@ -1,3 +1,11 @@
+2001-06-05  Mike Kestner  <mkestner@speakeasy.net>
+
+	* gnome-client.c : #endif token removed
+	* gnome-init.c (GnomeProgramPrivate_libgnomeui): added display, icon,
+	and crash_dialog fields.
+	(libgnomeui_get_property): handle icon, display, and crash_dlg params
+	(libgnomeui_set_property): handle icon, display, and crash_dlg params
+
 2001-06-04  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector-widget.[ch]: New files.
