@@ -675,6 +675,7 @@ gnome_canvas_item_affine_relative (GnomeCanvasItem *item, const double affine[6]
 			if (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL) {
 				art_affine_multiply (item->xform, item->xform, affine);
 			} else {
+				item->object.flags |= GNOME_CANVAS_ITEM_AFFINE_FULL;
 				new_affine = g_new (double, 6);
 				for (i = 0; i < 4; i++)
 					new_affine[i] = affine[i];
