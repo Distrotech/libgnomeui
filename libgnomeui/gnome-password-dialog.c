@@ -335,9 +335,9 @@ gnome_password_dialog_new (const char	*dialog_title,
 			group, _("Connect as _user:"));
 
 	if (username != NULL && *username != 0) {
-		gtk_toggle_button_set_active (password_dialog->details->connect_with_userpass_button, TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (password_dialog->details->connect_with_userpass_button), TRUE);
 	} else {
-		gtk_toggle_button_set_active (password_dialog->details->connect_with_no_userpass_button, TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (password_dialog->details->connect_with_no_userpass_button), TRUE);
 	}
 	
 	
