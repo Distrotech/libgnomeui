@@ -533,7 +533,7 @@ load_file (GnomePixmap *gpixmap, const char *filename, int scaled, int width, in
 
 	free_pixmap_and_mask (gpixmap);
 
-	im = gdk_imlib_load_image (filename);
+	im = gdk_imlib_load_image ((char *)filename);
 	finish_load (gpixmap, im, scaled, width, height, 1);
 }
 

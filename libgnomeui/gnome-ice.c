@@ -37,6 +37,8 @@ static GHashTable *__gnome_ice_internal_hash = NULL;
 
 #ifdef HAVE_LIBSM
 
+static void new_ice_connection (IceConn connection, IcePointer client_data, Bool opening, IcePointer *watch_data);
+
 /* This is called when data is available on an ICE connection.  */
 static gboolean
 process_ice_messages (gpointer client_data, gint source,

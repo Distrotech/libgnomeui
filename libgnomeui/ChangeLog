@@ -1,3 +1,14 @@
+Thu Dec 31 17:58:26 1998  George Lebl  <jirka@5z.com>
+
+	* dock_demo.c: just a warning fix
+
+	* gnome-ice.c: add a prototype for new_ice_connection to avoid
+	  a warning mess
+
+	* gnome-icon-text.c: avoid ambigous else by using {,}'s
+
+	* gnome-pixmap.c: avoid const warning
+
 Thu Dec 31 17:37:31 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-about.c: actually connect the destroy handler

@@ -97,7 +97,7 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 			if (word_end > row_end)
 				word_end = row_end;
 
-			if (gdk_text_width (font, text, word_end - text) > max_width)
+			if (gdk_text_width (font, text, word_end - text) > max_width) {
 				if (word_start == text) {
 					if (confine) {
 						/* We must force-split the word.  Look for a proper
@@ -108,12 +108,13 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 						for (i = 1; i < w_len; i++) {
 							w = gdk_text_width (font, word_start, i);
-							if (w > max_width)
+							if (w > max_width) {
 								if (i == 1)
 									/* Shit, not even a single character fits */
 									max_width = w;
 								else
 									break;
+							}
 						}
 
 						/* Create sub-row with the chars that fit */
@@ -147,6 +148,7 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 					word_end = old_word_end; /* Restore to region that does fit */
 					break; /* Stop the loop because we found something that doesn't fit */
 				}
+			}
 
 			s = word_end;
 		}

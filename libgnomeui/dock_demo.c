@@ -164,7 +164,7 @@ main (int argc, char **argv)
   gnome_dock_layout_add_to_dock (GNOME_DOCK_LAYOUT (layout),
                                  GNOME_DOCK (dock));
 
-  gtk_object_unref (layout);
+  gtk_object_unref (GTK_OBJECT(layout));
 
   client_frame = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type(GTK_FRAME (client_frame), GTK_SHADOW_IN);
