@@ -51,7 +51,6 @@ static gint make_inetaddr(gchar *host, gint port, struct sockaddr_in *sa)
 static gint net_socket_new(gchar *myhost, gint myport, gint domain, gint type,
 			   gint proto, gint nonblock)
 {
-	struct hostent *he;
 	struct sockaddr_in sa;
 
 	gint sock, fl;

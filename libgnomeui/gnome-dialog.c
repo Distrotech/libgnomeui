@@ -302,10 +302,9 @@ gint
 gnome_dialog_run_modal(GnomeDialog *dialog)
 {
   gint button_num = -1;
-  char *retval = NULL;
 
-  g_return_if_fail(dialog != NULL);
-  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+  g_return_val_if_fail(dialog != NULL,-1);
+  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
   gnome_dialog_set_modal(dialog);
   gnome_dialog_close_hides(dialog, TRUE);

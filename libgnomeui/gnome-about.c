@@ -132,7 +132,6 @@ gnome_about_repaint (GtkWidget *widget,
 	GdkColor *light_green = &gai->light_green;
 	GList *name;
 	static GdkGC *gc = NULL;
-	GdkFont *font;
 	int h, y, x;
 
 	if (gc == NULL)
@@ -303,7 +302,6 @@ gnome_about_display_comments (GdkWindow *win,
 		ypos += BASE_LINE_SKIP; /* Skip a bit */
 	}
 
-free_list:
 	/* Free list memory */
 	g_list_foreach(par, (GFunc)g_free, NULL);
 	g_list_free (par);
@@ -412,8 +410,6 @@ gnome_fill_info (GtkWidget *widget,
 {
 	GnomeAboutInfo *gai;
 	GdkColor light_green = {0, 51914, 64764, 44718};
-	GList *l;
-	gchar *s;
 	GtkStyle *style;
 
 	/* alloc mem for struct */
@@ -546,7 +542,7 @@ gnome_about_new (gchar	*title,
 	GtkWidget *drawing_area;
 	GtkStyle *style;
 
-	gint w,h,x,y;
+	gint w,h;
 
 	about = gtk_type_new (gnome_about_get_type ());
 

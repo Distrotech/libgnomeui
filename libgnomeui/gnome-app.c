@@ -62,6 +62,9 @@ gnome_app_get_type(void)
 	return gnomeapp_type;
 }
 
+#if 0
+/* Commented out until the code in gnome_app_class_init is removed or
+   deleted.  */
 static void
 gnome_app_add (GtkContainer *container,
 	       GtkWidget    *widget)
@@ -73,12 +76,13 @@ gnome_app_add (GtkContainer *container,
 	/* Buggy sigh */
 	gnome_app_set_contents (GNOME_APP (container), widget);
 }
+#endif
 
 static void
 gnome_app_class_init(GnomeAppClass *appclass)
 {
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS          (appclass);
-	GtkContainerClass *container_class = GTK_CONTAINER_CLASS (appclass);
+/*	GtkContainerClass *container_class = GTK_CONTAINER_CLASS (appclass);*/
 		
 	object_class->destroy = gnome_app_destroy;
 /*	container_class->add = gnome_app_add; */

@@ -11,6 +11,7 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "gnome-preferences.h"
 
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
@@ -144,10 +145,11 @@ gnome_init (char *app_id, struct argp *app_args,
 	    int argc, char **argv,
 	    unsigned int flags, int *arg_index)
 {
-	struct sigaction sa;
 	error_t retval;
 
 #if 0
+	struct sigaction sa;
+
 	/* Debugging segv when you have a pointer grab is less than
 	 * useful, Sop instead of removing the above #if 0, fix the DND
 	 */

@@ -431,8 +431,7 @@ GnomeClient *
 gnome_client_new_without_connection (void)
 {
   GnomeClient *client;
-  gchar       *client_id;
-  
+
   client= gtk_type_new (gnome_client_get_type ());
 
   /* Preset the CloneCommand, RestartCommand and Program properties.

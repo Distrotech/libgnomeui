@@ -54,4 +54,5 @@ main (int argc, char *argv[])
 	gtk_widget_show (w);
 	
 	gtk_main ();
+	return 0;
 }

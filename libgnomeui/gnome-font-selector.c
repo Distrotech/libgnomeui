@@ -1,7 +1,7 @@
 /* GnomeFontSelector widget, by Elliot Lee.
    Derived from app/text_tool.c in: */
 /* The GIMP -- an image manipulation program
- * Copyright (C) 1995 Spencer Kimball and Peter Mattis
+ * Copyright (C) 1995, 1998 Spencer Kimball and Peter Mattis
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,7 +66,10 @@ static void       text_ok_callback        (GtkWidget *, gpointer);
 static void       text_cancel_callback    (GtkWidget *, gpointer);
 static gint       text_delete_callback    (GtkWidget *, GdkEvent *, gpointer);
 static void       text_pixels_callback    (GtkWidget *, gpointer);
+#if 0
+/* Commented out until used.  */
 static void       text_points_callback    (GtkWidget *, gpointer);
+#endif
 static void       text_foundry_callback   (GtkWidget *, gpointer);
 static void       text_weight_callback    (GtkWidget *, gpointer);
 static void       text_slant_callback     (GtkWidget *, gpointer);
@@ -519,6 +522,8 @@ text_pixels_callback (GtkWidget *w,
     text_tool->size_type = old_value;
 }
 
+#if 0
+/* Commented out until used.  Is this useful?  */
 static void
 text_points_callback (GtkWidget *w,
 		      gpointer   client_data)
@@ -534,6 +539,7 @@ text_points_callback (GtkWidget *w,
   if (!text_load_font (text_tool))
     text_tool->size_type = old_value;
 }
+#endif
 
 static void
 text_foundry_callback (GtkWidget *w,
@@ -1240,8 +1246,6 @@ text_load_font (GnomeFontSelector *text_tool)
 gchar *
 gnome_font_selector_get_selected (GnomeFontSelector *text_tool)
 {
-  GdkFont *font;
-  gchar *fontname;
   double size;
   char *size_text;
   char *foundry_str;

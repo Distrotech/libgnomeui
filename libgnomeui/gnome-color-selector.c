@@ -276,7 +276,7 @@ gnome_color_selector_destroy(GnomeColorSelector *gcs)
 GtkWidget *
 gnome_color_selector_get_button(GnomeColorSelector *gcs)
 {
-	g_return_if_fail(gcs != NULL);
+	g_return_val_if_fail(gcs != NULL, NULL);
 
 	return gcs->button;
 } /* gnome_color_selector_get_button */

@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 1997 Ian Main
+ * Copyright (C) 1997, 1998 Ian Main
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,6 @@ typedef struct
 
 static DnsServer dns_server[GNOME_DNS_MAX_SERVERS];
 static int num_servers;
-static int server_init_cnt;
 
 typedef struct
 {
@@ -371,7 +370,6 @@ gint gnome_dns_create_server(void)
 	
 	/* for talking to dns server.  Once setup, always write to pipefd[1],
 	 * and read from pipefd[0]. */
-	int pipefd[2];
 	int pipefd0[2];
 	int pipefd1[2];
 	

@@ -45,8 +45,6 @@ typedef struct {
 
 static char *app_name;
 
-static GtkTableClass *parent_class = NULL;
-
 static void
 gtk_ted_destroy (GtkObject *object)
 {
@@ -1298,7 +1296,7 @@ gtk_ted_widget_control_new (GtkTed *ted, GtkWidget *widget, char *name)
 void
 gtk_ted_add (GtkTed *ted, GtkWidget *widget, char *original_name)
 {
-	GtkWidget *align, *event, *l;
+	GtkWidget *align;
 	struct ted_widget_info *wi;
 	char *name = g_strdup (original_name), *p;
 
