@@ -986,7 +986,7 @@ msgstr ""
 #: libgnomeui/gnome-file-entry.c:626
 #: libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
-msgstr "Vali fail"
+msgstr "Faili valimine"
 
 #: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
