@@ -27,11 +27,13 @@
  *   needs new toolbar is created but ONLY if the toolbar template is NULL!
  *
  * void child_changed(GnomeMDI *, GnomeMDIChild *)
- *   gets called each time when active  child is changed with the second argument
- *   pointing to the new active child (or NULL if no child is currently active).
+ *   gets called each time when active child is changed with the second argument
+ *   pointing to the new active child (or NULL if no child wil be active). mdi->active_view
+ *   and mdi->active_child still hold old values.
  *
  * void app_created(GnomeMDI *, GnomeApp *)
  *   is called with each newly created GnomeApp to allow the MDI user to customize it.
+ *   no contents may be set.
  */
 
 #ifndef __GNOME_MDI_H__
@@ -60,6 +62,15 @@ typedef struct _GnomeMDIClass  GnomeMDIClass;
 #define GNOME_MDI_TOPLEVEL   (1L << 3)      /* many toplevel windows */
 
 #define GNOME_MDI_MODE_FLAGS (GNOME_MDI_MS | GNOME_MDI_NOTEBOOK | GNOME_MDI_MODAL | GNOME_MDI_TOPLEVEL)
+
+/* the following keys are used to gtk_object_set_data() copies of the appropriate menu and toolbar templates
+ * to their GnomeApps. gtk_object_get_data(VIEW_GET_WINDOW(view), key) will give you a pointer to the data
+ * if you have a pointer to a view. this might be useful for enabling/disabling menus when certain events
+ * happen. these GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees.
+ */
+#define GNOME_MDI_TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
+#define GNOME_MDI_MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
+#define GNOME_MDI_CHILD_MENU_INFO_KEY        "MDIChildMenuUIInfo"
 
 struct _GnomeMDI {
   GtkObject object;

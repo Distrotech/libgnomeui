@@ -1,3 +1,10 @@
+1998-07-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c: fixed updating of active_view and active_child
+	throughout the code.
+	* gnome-mdi.h: made the GNOME_MDI_*_INFO_KEYs public. these allows
+	users to get access of the copies of menu and toolbar templates.
+
 1998-07-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-image.[ch]: New imlib image type for the canvas.
