@@ -34,11 +34,11 @@
 #define GNOME_FILE_ENTRY_H
 
 
-#include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-entry.h>
+#include <gtk/gtkvbox.h>
 
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 
 #define GNOME_TYPE_FILE_ENTRY            (gnome_file_entry_get_type ())
@@ -123,6 +123,6 @@ void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
 					  gboolean directory_entry);
 #endif /* GNOME_EXCLUDE_DEPRECATED */
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

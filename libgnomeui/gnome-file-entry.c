@@ -43,9 +43,7 @@
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
-#include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
-#include "libgnomeui/gnome-preferences.h"
 
 #include "libgnomeuiP.h"
 
