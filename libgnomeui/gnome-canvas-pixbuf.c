@@ -179,9 +179,9 @@ gnome_canvas_pixbuf_class_init (GnomeCanvasPixbufClass *class)
         g_object_class_install_property
                 (gobject_class,
                  PROP_WIDTH,
-                 g_param_spec_uint ("width", NULL, NULL,
-                                    0, G_MAXINT, 0,
-                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+                 g_param_spec_double ("width", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_WIDTH_SET,
@@ -197,9 +197,9 @@ gnome_canvas_pixbuf_class_init (GnomeCanvasPixbufClass *class)
         g_object_class_install_property
                 (gobject_class,
                  PROP_HEIGHT,
-                 g_param_spec_uint ("height", NULL, NULL,
-                                    0, G_MAXINT, 0,
-                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+                 g_param_spec_double ("height", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_HEIGHT_SET,
@@ -214,15 +214,9 @@ gnome_canvas_pixbuf_class_init (GnomeCanvasPixbufClass *class)
 				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
-                 PROP_PIXBUF,
-                 g_param_spec_object ("pixbuf", NULL, NULL,
-                                      GDK_TYPE_PIXBUF,
-                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
-        g_object_class_install_property
-                (gobject_class,
                  PROP_X,
-                 g_param_spec_uint ("x", NULL, NULL,
-                                    0, G_MAXINT, 0,
+                 g_param_spec_double ("x", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0,
                                     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
@@ -239,9 +233,9 @@ gnome_canvas_pixbuf_class_init (GnomeCanvasPixbufClass *class)
         g_object_class_install_property
                 (gobject_class,
                  PROP_Y,
-                 g_param_spec_uint ("y", NULL, NULL,
-                                    0, G_MAXINT, 0,
-                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+                 g_param_spec_double ("y", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
         g_object_class_install_property
                 (gobject_class,
                  PROP_Y_SET,
