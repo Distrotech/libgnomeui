@@ -39,7 +39,7 @@
 #include <libgnomecanvas/gnome-canvas-text.h>
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-util.h>
-#include <bonobo/bonobo-config-database.h>
+#include <bonobo/bonobo-property-bag-client.h>
 #include "gnome-cursors.h"
 #include <string.h>
 #include <gtk/gtk.h>
@@ -839,8 +839,8 @@ static void gnome_about_fill_options (GtkWidget *widget,
 	g_return_if_fail (priv != NULL);
 
 	/* Read GConf options */
-	priv->show_urls = bonobo_config_get_boolean (cd, "/about/show_urls", NULL);
-	priv->show_logo = bonobo_config_get_boolean (cd, "/about/show_logo", NULL);
+	priv->show_urls = bonobo_pbclient_get_boolean (cd, "/about/show_urls", NULL);
+	priv->show_logo = bonobo_pbclient_get_boolean (cd, "/about/show_logo", NULL);
 	
 	/* Create fonts and get colors*/
 	/* FIXME: dirty hack, but it solves i18n problem without rewriting the
