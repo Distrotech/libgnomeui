@@ -1,0 +1,409 @@
+#include <gnome.h>
+#include "gnome-winhints.h"
+
+
+void layers_cb (GtkWidget *widget, void *data);
+void about_cb (GtkWidget *widget, void *data);
+void state_cb (GtkWidget *widget, void *data);
+void skip_cb (GtkWidget *widget, void *data);
+void protocols_cb (GtkWidget *widget, void *data);
+void workspace_cb (GtkWidget *widget, void *data);
+void quit_cb (GtkWidget *widget, void *data);
+GList* get_workspaces();
+void prepare_app();
+
+GtkWidget *app;
+GtkWidget *lbox, *wsbox;
+GtkWidget *allwsbut;
+GList *ws_list;
+GtkWidget *minbut, *maxvbut, *maxhbut, *hidbut, *rollbut, *dockbut;
+GtkWidget *sfocbut, *smenubut, *sbarbut;
+
+int main(int argc, char *argv[])
+{
+  gnome_init ("winhints-test", NULL, argc, argv,
+	      0, NULL);
+
+  prepare_app ();
+
+  gtk_main ();
+
+  return 0;
+}
+
+void prepare_app()
+{
+  GtkWidget *vb,*vb1, *hb, *hb1, *mvb;
+  GtkWidget *list_box;
+  GtkWidget *sw;
+  GtkWidget *frame;
+  GtkWidget *item;
+  GtkWidget *button;
+  GtkWidget *apic, *label;
+  GList *tmp_list;
+
+  
+  app = gnome_app_new (_("wmhints-test"), _("winhints-test"));
+  gtk_widget_realize (app);
+  gtk_signal_connect (GTK_OBJECT (app), "delete_event",
+                      GTK_SIGNAL_FUNC (quit_cb),
+                      NULL);
+
+  /* this must be called after the app widget is realized */
+  gnome_win_hints_init();
+
+  mvb=gtk_vbox_new(FALSE, 0);
+  gnome_app_set_contents ( GNOME_APP (app), mvb);
+  gtk_widget_show (mvb);
+
+  hb=gtk_hbox_new(TRUE, 0);
+  gtk_box_pack_start(GTK_BOX(mvb), hb, FALSE, FALSE, 0);
+  gtk_widget_show (hb);
+
+  vb =gtk_vbox_new(FALSE,0);
+  gtk_box_pack_start(GTK_BOX(hb), vb, FALSE, FALSE, 0);
+  gtk_widget_show(vb);
+
+  frame=gtk_frame_new(_("Layer:"));
+  gtk_box_pack_start(GTK_BOX(vb), frame, FALSE, FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(frame), 5);
+  gtk_widget_show(frame);
+
+  vb1 =gtk_vbox_new(FALSE,0);
+  gtk_container_add(GTK_CONTAINER(frame), vb1);
+  gtk_container_border_width(GTK_CONTAINER(vb1), 5);
+  gtk_widget_show(vb1);
+
+  sw = gtk_scrolled_window_new(NULL, NULL);
+  gtk_widget_set_usize(sw, 100, 100);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw), GTK_POLICY_AUTOMATIC,
+                                 GTK_POLICY_AUTOMATIC);
+  gtk_box_pack_start(GTK_BOX(vb1), sw, FALSE, FALSE, 0);
+  gtk_widget_show(sw);
+
+  lbox = gtk_list_new();
+  gtk_container_add(GTK_CONTAINER(sw), lbox);
+  gtk_widget_show(lbox);
+
+  tmp_list=NULL;
+
+  item = gtk_list_item_new_with_label( _("Above Dock"));
+  tmp_list=g_list_prepend(tmp_list, item);
+  gtk_object_set_data(GTK_OBJECT(item), "layer", "10");
+  gtk_widget_show(item);
+  item = gtk_list_item_new_with_label( _("Dock"));
+  tmp_list=g_list_prepend(tmp_list, item);
+  gtk_object_set_data(GTK_OBJECT(item), "layer", "8");
+  gtk_widget_show(item);
+  item = gtk_list_item_new_with_label( _("On Top"));
+  tmp_list=g_list_prepend(tmp_list, item);
+  gtk_object_set_data(GTK_OBJECT(item), "layer", "6");
+  gtk_widget_show(item);
+  item = gtk_list_item_new_with_label( _("Normal"));
+  tmp_list=g_list_prepend(tmp_list, item);
+  gtk_object_set_data(GTK_OBJECT(item), "layer", "4");
+  gtk_widget_show(item);
+  item = gtk_list_item_new_with_label( _("Below"));
+  tmp_list=g_list_prepend(tmp_list, item);
+  gtk_object_set_data(GTK_OBJECT(item), "layer", "2");
+  gtk_widget_show(item);
+  item = gtk_list_item_new_with_label( _("Desktop"));
+  tmp_list=g_list_prepend(tmp_list, item);
+  gtk_object_set_data(GTK_OBJECT(item), "layer", "0");
+  gtk_widget_show(item);
+
+  gtk_list_append_items(GTK_LIST(lbox), tmp_list);
+  gtk_list_select_item(GTK_LIST(lbox), 2);
+  
+  button = gtk_button_new_with_label(_("Set Layer"));
+  gtk_box_pack_start(GTK_BOX(vb1), button, FALSE, FALSE, 2);
+  gtk_signal_connect(GTK_OBJECT(button), "clicked",
+                     GTK_SIGNAL_FUNC(layers_cb), lbox);
+  gtk_widget_show(button);
+
+
+  frame=gtk_frame_new(_("Workspaces:"));
+  gtk_box_pack_start(GTK_BOX(vb), frame, FALSE, FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(frame), 5);
+  gtk_widget_show(frame);
+  
+  vb1 =gtk_vbox_new(FALSE,0);
+  gtk_container_add(GTK_CONTAINER(frame), vb1);
+  gtk_container_border_width(GTK_CONTAINER(vb1), 5);
+  gtk_widget_show(vb1);
+
+  sw = gtk_scrolled_window_new(NULL, NULL);
+  gtk_widget_set_usize(sw, 100, 100);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw), GTK_POLICY_AUTOMATIC,
+                                 GTK_POLICY_AUTOMATIC);
+  gtk_box_pack_start(GTK_BOX(vb1), sw, FALSE, FALSE, 0);
+  gtk_widget_show(sw);
+
+  wsbox = gtk_list_new();
+  gtk_container_add(GTK_CONTAINER(sw), wsbox);
+  gtk_list_append_items(GTK_LIST(wsbox), get_workspaces());
+  gtk_widget_show(wsbox);
+
+  allwsbut = gtk_check_button_new_with_label(_("Occupy all workspaces"));
+  gtk_box_pack_start(GTK_BOX(vb1), allwsbut, FALSE, FALSE, 0);
+  gtk_widget_show(allwsbut);
+
+  button = gtk_button_new_with_label(_("Set Workspace"));
+  gtk_box_pack_start(GTK_BOX(vb1), button, FALSE, FALSE, 0);
+  gtk_signal_connect(GTK_OBJECT(button), "clicked",
+                     GTK_SIGNAL_FUNC(workspace_cb), lbox);
+  gtk_widget_show(button);
+
+  vb =gtk_vbox_new(FALSE,0);
+  gtk_box_pack_start(GTK_BOX(hb), vb, TRUE, TRUE, 0);
+  gtk_widget_show(vb);
+
+  frame=gtk_frame_new(_("State Toggles:"));
+  gtk_box_pack_start(GTK_BOX(vb), frame, FALSE, TRUE, 0);
+  gtk_container_border_width(GTK_CONTAINER(frame), 5);
+  gtk_widget_show(frame);
+
+  vb1 =gtk_vbox_new(FALSE,0);
+  gtk_container_add(GTK_CONTAINER(frame), vb1);
+  gtk_container_border_width(GTK_CONTAINER(vb1), 5);
+  gtk_widget_show(vb1);
+
+  minbut = gtk_check_button_new_with_label(_("Minimized"));
+  gtk_box_pack_start(GTK_BOX(vb1), minbut, FALSE, FALSE, 0);
+  gtk_widget_show(minbut);
+
+  maxvbut = gtk_check_button_new_with_label(_("Maximized Vertical"));
+  gtk_box_pack_start(GTK_BOX(vb1), maxvbut, FALSE, FALSE, 0);
+  gtk_widget_show(maxvbut);
+
+  maxhbut = gtk_check_button_new_with_label(_("Maximized Horizontal"));
+  gtk_box_pack_start(GTK_BOX(vb1), maxhbut, FALSE, FALSE, 0);
+  gtk_widget_show(maxhbut);
+
+  hidbut = gtk_check_button_new_with_label(_("Hidden"));
+  gtk_box_pack_start(GTK_BOX(vb1), hidbut, FALSE, FALSE, 0);
+  gtk_widget_show(hidbut);
+
+  rollbut = gtk_check_button_new_with_label(_("Roll-Up"));
+  gtk_box_pack_start(GTK_BOX(vb1), rollbut, FALSE, FALSE, 0);
+  gtk_widget_show(rollbut);
+
+  button = gtk_button_new_with_label(_("Set State"));
+  gtk_box_pack_start(GTK_BOX(vb1), button, FALSE, FALSE, 0);
+  gtk_signal_connect(GTK_OBJECT(button), "clicked",
+                     GTK_SIGNAL_FUNC(state_cb), lbox);
+  gtk_widget_show(button);
+
+  frame=gtk_frame_new(_("Skip Toggles:"));
+  gtk_box_pack_start(GTK_BOX(vb), frame, FALSE, FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(frame), 5);
+  gtk_widget_show(frame);
+
+  vb1 =gtk_vbox_new(FALSE,0);
+  gtk_container_add(GTK_CONTAINER(frame), vb1);
+  gtk_container_border_width(GTK_CONTAINER(vb1), 5);
+  gtk_widget_show(vb1);
+
+  sfocbut = gtk_check_button_new_with_label(_("Skip Focus"));
+  gtk_box_pack_start(GTK_BOX(vb1), sfocbut, FALSE, FALSE, 0);
+  gtk_widget_show(sfocbut);
+
+  smenubut = gtk_check_button_new_with_label(_("Skip Window Menu"));
+  gtk_box_pack_start(GTK_BOX(vb1), smenubut, FALSE, FALSE, 0);
+  gtk_widget_show(smenubut);
+
+  sbarbut = gtk_check_button_new_with_label(_("Skip Taskbar / WinList"));
+  gtk_box_pack_start(GTK_BOX(vb1), sbarbut, FALSE, FALSE, 0);
+  gtk_widget_show(sbarbut);
+
+  button = gtk_button_new_with_label(_("Set Skip"));
+  gtk_box_pack_start(GTK_BOX(vb1), button, FALSE, FALSE, 0);
+  gtk_signal_connect(GTK_OBJECT(button), "clicked",
+                     GTK_SIGNAL_FUNC(skip_cb), lbox);
+  gtk_widget_show(button);
+
+  hb1 = gtk_hbox_new(FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(mvb), hb1, FALSE, FALSE, 0);
+  gtk_widget_show(hb1);
+
+  button = gtk_button_new();
+  gtk_box_pack_end(GTK_BOX(hb1), button, FALSE, FALSE, 0);
+  gtk_signal_connect(GTK_OBJECT(button), "clicked",
+                     GTK_SIGNAL_FUNC(about_cb), lbox);
+  gtk_widget_show(button);
+
+  hb = gtk_hbox_new(FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(hb), 5);
+  gtk_container_add(GTK_CONTAINER(button), hb);
+  gtk_widget_show(hb);
+
+  apic = gnome_stock_pixmap_widget_new(GTK_WIDGET(app), GNOME_STOCK_PIXMAP_HELP);
+  gtk_box_pack_start(GTK_BOX(hb), apic, FALSE, FALSE, 0);
+  gtk_widget_show(apic);
+
+  label = gtk_label_new(_("About"));
+  gtk_box_pack_end(GTK_BOX(hb), label, FALSE, FALSE, 5);
+  gtk_widget_show(label);
+
+  button = gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
+  gtk_box_pack_end(GTK_BOX(hb1), button, FALSE, FALSE, 0);
+  gtk_signal_connect(GTK_OBJECT(button), "clicked",
+                     GTK_SIGNAL_FUNC(quit_cb), lbox);
+  gtk_widget_show(button);
+
+
+
+  gtk_widget_show (app);
+}
+
+void layers_cb (GtkWidget *widget, void *data)
+{
+    GtkWidget *list;
+    char buf[32];
+    gulong new_layer;
+    
+    list = (GtkWidget*)data;
+    if((GTK_LIST(list)->selection) == NULL)
+    {
+        printf("blah!\n");
+        return;
+    }
+    switch(atoi(gtk_object_get_data(GTK_OBJECT(GTK_LIST(list)->selection->data), "layer")))
+    {
+    case 0:
+        new_layer = 0UL;
+        break;
+    case 2:
+        new_layer = 2UL;
+        break;
+    case 4:
+        new_layer = 4UL;
+        break;
+    case 6:
+        new_layer = 6UL;
+        break;
+    case 8:
+        new_layer = 8UL;
+        break;
+    case 10:
+        new_layer = 10UL;
+        break;
+    default:
+        new_layer = 4UL;
+    }
+
+    gnome_win_hints_set_layer(GTK_WIDGET(app), new_layer);
+    
+    return;
+}
+
+void quit_cb (GtkWidget *widget, void *data)
+{
+  gtk_main_quit ();
+  return;
+}
+
+void workspace_cb (GtkWidget *widget, void *data)
+{
+    char tmpbuf[16];
+    gint ws;
+
+    /* set all workspaces - state change */
+    if(GTK_TOGGLE_BUTTON(allwsbut)->active)
+        gnome_win_hints_set_state(GTK_WIDGET(app), (gint32)WinStateAllWorkspaces, (1<<0));
+    else
+        gnome_win_hints_set_state(GTK_WIDGET(app), (gint32)WinStateAllWorkspaces, (0<<0));
+
+    /* change workspace to selection */
+    if(GTK_LIST(wsbox)->selection == NULL)
+        return;
+    sprintf(tmpbuf, "%s", gtk_object_get_data(GTK_OBJECT(GTK_LIST(wsbox)->selection->data), "ws"));
+    ws = atoi(tmpbuf);
+    gnome_win_hints_set_workspace(GTK_WIDGET(app), ws);
+    if(GTK_TOGGLE_BUTTON(allwsbut)->active)
+        gnome_win_hints_set_state(GTK_WIDGET(app), (gint32)WinStateAllWorkspaces, (1<<0));
+    else
+        gnome_win_hints_set_state(GTK_WIDGET(app), (gint32)WinStateAllWorkspaces, (0<<0));
+
+    return;
+}
+
+GList *get_workspaces()
+{
+    GList *tmp_list;
+    GtkWidget *item;
+    XTextProperty tp;
+    char **list;
+    int count, i;
+    char tmpbuf[1024];
+
+    XGetTextProperty(GDK_DISPLAY(), GDK_ROOT_WINDOW(), &tp, _XA_WIN_WORKSPACE_NAMES);
+
+    if(tp.value==NULL) return NULL;  /* current wm does not support this! */
+       
+    XTextPropertyToStringList(&tp, &list, &count);
+
+    tmp_list = NULL;
+    for(i=0; i<count; i++)
+    {
+        item = gtk_list_item_new_with_label(g_strdup(list[i]));
+        gtk_widget_show(item);
+        sprintf(tmpbuf, "%d", i);
+        gtk_object_set_data(GTK_OBJECT(item), "ws", g_strdup(tmpbuf));
+        tmp_list = g_list_append(tmp_list,item);
+    }
+
+    return tmp_list;
+}
+
+void state_cb (GtkWidget *widget, void *data)
+{
+    gint32 mask, state;
+
+    mask = WinStateMinimized | WinStateMaximizedVert | WinStateMaximizedHoriz |
+           WinStateHidden | WinStateRollup;
+    state = (gint32)0;
+
+    if(GTK_TOGGLE_BUTTON(minbut)->active)
+        state = state | WinStateMinimized;
+    if(GTK_TOGGLE_BUTTON(maxvbut)->active)
+        state = state | WinStateMaximizedVert;
+    if(GTK_TOGGLE_BUTTON(maxhbut)->active)
+        state = state | WinStateMaximizedHoriz;
+    if(GTK_TOGGLE_BUTTON(hidbut)->active)
+        state = state | WinStateHidden;
+    if(GTK_TOGGLE_BUTTON(rollbut)->active)
+        state = state | WinStateRollup;
+
+    gnome_win_hints_set_state(GTK_WIDGET(app), mask, state);
+    
+    return;
+}
+
+void skip_cb (GtkWidget *widget, void *data)
+{
+    GnomeWinHintsSkip skip;
+
+    skip.skipFocus = (GTK_TOGGLE_BUTTON(sfocbut)->active ? TRUE : FALSE);
+    skip.skipWinMenu = (GTK_TOGGLE_BUTTON(smenubut)->active ? TRUE : FALSE);
+    skip.skipWinList = (GTK_TOGGLE_BUTTON(sbarbut)->active ? TRUE : FALSE);
+        
+    gnome_win_hints_set_skip(GTK_WIDGET(app), skip);
+    return;
+}
+
+void about_cb(GtkWidget *widget, gpointer data)
+{
+    GtkWidget *about;
+    gchar *authors[] = {"Max Watson", NULL};
+
+    about = gnome_about_new ( _("WIN_HINTS Test"), "0.1",
+                              _("Copyright (C)1998"),
+                              authors,
+                              _("Simple test app to check how the WIN_HINTS work. And to test the gnome_win_hints_* functions for errors. :)"),
+                                NULL);
+    gtk_widget_show (about);
+
+    return;
+}                                
+
