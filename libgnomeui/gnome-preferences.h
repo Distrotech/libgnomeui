@@ -33,6 +33,7 @@ struct _GnomePreferences {
   int toolbar_relief : 1;
   int toolbar_flat : 1;
   int toolbar_lines : 1;
+  int toolbar_labels : 1;
   int dialog_centered : 1;
   int menus_have_icons : 1;
   GtkWindowType dialog_type;
@@ -83,6 +84,10 @@ void              gnome_preferences_set_toolbar_flat         (gboolean b);
 /* Whether toolbars show lines for separators  */
 gboolean          gnome_preferences_get_toolbar_lines        (void);
 void              gnome_preferences_set_toolbar_lines        (gboolean b);
+
+/* Whether toolbars show labels  */
+gboolean          gnome_preferences_get_toolbar_labels       (void);
+void              gnome_preferences_set_toolbar_labels       (gboolean b);
 
 /* Whether to try to center dialogs over their parent window.
    If it's possible, dialog_position is ignored. If not,

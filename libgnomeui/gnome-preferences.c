@@ -42,6 +42,7 @@ static GnomePreferences prefs =
   FALSE,              /* Toolbar buttons are not relieved */
   FALSE,              /* Toolbars have a flattened look */
   TRUE,               /* Toolbars show lines for separators */
+  TRUE,               /* Toolbars show labels */
   TRUE,               /* Center dialogs over apps when possible */
   TRUE,               /* Menu items have icons in them */
   GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
@@ -120,6 +121,7 @@ static const gchar * const dialog_positions [] = {
 #define TOOLBAR_RELIEF_KEY         "Toolbar_relieved_buttons"
 #define TOOLBAR_FLAT_KEY           "Toolbar_flat"
 #define TOOLBAR_LINES_KEY          "Toolbar_lines"
+#define TOOLBAR_LABELS_KEY         "Toolbar_labels"
 
 #define MENUS_HAVE_ICONS_KEY       "Menus_have_icons"
 
@@ -274,6 +276,10 @@ gnome_preferences_load_custom(GnomePreferences *settings)
 					 NULL);
   settings->toolbar_lines = b;
 
+  b = gnome_config_get_bool_with_default(TOOLBAR_LABELS_KEY"=true",
+					 NULL);
+  settings->toolbar_labels = b;
+
   b = gnome_config_get_bool_with_default (MENUS_HAVE_ICONS_KEY"=true",
 					  NULL);
   settings->menus_have_icons = b;
@@ -344,6 +350,8 @@ gnome_preferences_save_custom(GnomePreferences *settings)
 			settings->toolbar_flat);
   gnome_config_set_bool(TOOLBAR_LINES_KEY,
 			settings->toolbar_lines);
+  gnome_config_set_bool(TOOLBAR_LABELS_KEY,
+			settings->toolbar_labels);
   gnome_config_set_bool(MENUS_HAVE_ICONS_KEY,
 			settings->menus_have_icons);
 
@@ -457,6 +465,16 @@ gboolean          gnome_preferences_get_toolbar_lines     (void)
 void              gnome_preferences_set_toolbar_lines     (gboolean b)
 {
   prefs.toolbar_lines = b;
+}
+
+gboolean          gnome_preferences_get_toolbar_labels    (void)
+{
+  return prefs.toolbar_labels;
+}
+
+void              gnome_preferences_set_toolbar_labels    (gboolean b)
+{
+  prefs.toolbar_labels = b;
 }
 
 gboolean          gnome_preferences_get_dialog_centered      ()

@@ -1,5 +1,12 @@
 1998-11-24  Andrew T. Veliath  <andrewtv@usa.net>
 
+	* gnome-app.c (gnome_app_set_toolbar):
+	gnome-app-helper.c (gnome_app_fill_toolbar_custom): Listen to
+	toolbar labels setting.
+
+	* gnome-preferences.[ch] (prefs =): Add toolbar labels option,
+	default to use labels.
+
 	* gnome-app-helper.h: Add gnome_app_configure_toolbar public
 	prototype below gnome_app_fill_toolbar_custom.
 

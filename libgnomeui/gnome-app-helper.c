@@ -864,6 +864,9 @@ gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GnomeUI
 	
 	if (!gnome_preferences_get_toolbar_relief ())
 		gtk_toolbar_set_button_relief (toolbar, GTK_RELIEF_NONE);
+
+	if (!gnome_preferences_get_toolbar_labels ())
+		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
 }
 
 /**
