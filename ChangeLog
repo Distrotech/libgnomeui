@@ -1,8 +1,11 @@
 2002-06-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
-	* libgnomeui/gnome-app.c,
+	* doc/reference/tmpl/gnome-client.sgml,
 	  libgnomeui/gnome-client.c,
-	  libgnomeui/gnome-ui-init.c,
 	  doc/reference/tmpl/gnome-ui-init.sgml,
+	  libgnomeui/gnome-ui-init.c,
+	  doc/reference/tmpl/gnome-appbar.sgml,
+	  libgnomeui/gnome-appbar.c
+	  libgnomeui/gnome-app.c,
 	  doc/reference/tmpl/gnome-app.sgml: API documentation updates.
 
 	* doc/reference/libgnomeui-docs.sgml: One can never reorder this
@@ -14,8 +17,11 @@
 	  casualty of running gtk-doc a few times, really, but I want to
 	  pretend it was all intentional.
 
-	* doc/reference/Makefile.am: Don't both scanning
+	* doc/reference/Makefile.am: Don't bother scanning
 	  gnome-gconf-ui.h; it's just for internal use.
+
+	* doc/reference/tmpl/gnome-gconf-ui.sgml: Removed.
+
 
 2002-06-01  Malcolm Tredinnick <malcolm@commsecure.com.au>
 	* doc/reference/Makefile.am: Add GNOME_DISABLE_DEPRECATED guards
