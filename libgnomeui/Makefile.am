@@ -2,8 +2,7 @@
 
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
-INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @SUPPORTINCS@ \
-	-I$(top_srcdir)/support
+INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @SUPPORTINCS@
 
 lib_LTLIBRARIES = libgnomeui.la
 noinst_PROGRAMS = ted_demo stock_demo
@@ -61,15 +60,11 @@ stock_demo_SOURCES = stock_demo.c
 SGML =	\
 	gtk-ted.sgml
 
-PIXMAPS = \
-	gnome-stock-ok.xpm		\
-	gnome-stock-cancel.xpm		
 
 gtkrcdir = $(datadir)
 gtkrc_DATA = gtkrc
 
 EXTRA_DIST = \
-	$(PIXMAPS)			\
 	$(SGML)				\
 	$(gtkrc_DATA)			\
 	AUTHORS
@@ -89,6 +84,3 @@ stock_demo_LDADD =	\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
-dist-hook:
-	mkdir $(distdir)/pixmaps
-	cp $(srcdir)/pixmaps/*.xpm $(distdir)/pixmaps

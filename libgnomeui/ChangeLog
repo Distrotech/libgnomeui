@@ -1,3 +1,8 @@
+Thu Mar 12 15:50:27 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtk-ted.c (gtk_ted_set_spacings): Set the spacings for each line
+	with a hacky widget on every line.
+
 1998-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-pixmap.c: Added warnings of "don't use me" to all the

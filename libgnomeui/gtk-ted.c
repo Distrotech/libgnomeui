@@ -1349,15 +1349,52 @@ gtk_ted_setup_layout (gpointer key, gpointer value, gpointer user_data)
 {
 	GtkTed *ted = user_data;
 	struct ted_widget_info *wi = value;
+	int top_col, top_row;
 
+	top_col = wi->start_col + wi->col_span;
+	top_row = wi->start_row + wi->row_span;
+	
 	gtk_table_attach (GTK_TABLE (ted), wi->widget,
-			  wi->start_col, wi->start_col + wi->col_span,
-			  wi->start_row, wi->start_row + wi->row_span,
+			  wi->start_col, top_col,
+			  wi->start_row, top_row, 
 			  GTK_FILL | GTK_EXPAND, GTK_FILL | GTK_EXPAND, 0, 0);
-/*			  wi->flags_x, wi->flags_y, 0, 0); */
+	
+	if (top_col > ted->top_col)
+		ted->top_col = top_col;
+	if (top_row > ted->top_row)
+		ted->top_row = top_row;
+	
 	gtk_ted_align_new (wi->widget, wi);
 	ted->top_col = MAX (ted->top_col, wi->start_col + wi->col_span);
 	ted->top_row = MAX (ted->top_row, wi->start_row + wi->row_span);
+}
+
+void
+gtk_ted_set_spacings (GtkTed *ted)
+{
+	int i;
+	
+	for (i = 0; i < ted->top_col; i++){
+		GtkWidget *spacer;
+
+		spacer = gtk_hbox_new (0, 0);
+		gtk_widget_set_usize (spacer, 5, 5);
+		gtk_table_attach (GTK_TABLE (ted), spacer,
+				  i, i+1, 0, 1, 0, 0, 0, 0);
+		gtk_widget_show (spacer);
+	}
+	
+	for (i = 0; i < ted->top_row; i++){
+		GtkWidget *spacer;
+
+		spacer = gtk_hbox_new (0, 0);
+		gtk_widget_set_usize (spacer, 5, 5);
+		gtk_table_attach (GTK_TABLE (ted), spacer,
+				  0, 1, i, i+1, 0, 0, 0, 0);
+		gtk_widget_show (spacer);
+	}
+	gtk_table_set_row_spacings (GTK_TABLE (ted), 5);
+	gtk_table_set_col_spacings (GTK_TABLE (ted), 5);
 }
 
 void
@@ -1374,9 +1411,9 @@ gtk_ted_prepare (GtkTed *ted)
 		ted->in_gui = 1;
 		g_hash_table_foreach (ted->widgets, gtk_ted_prepare_widgets_edit, ted);
 	} else {
-		gtk_table_set_row_spacings (GTK_TABLE (ted), 5);
-		gtk_table_set_col_spacings (GTK_TABLE (ted), 5);
+		ted->top_col = ted->top_row = 0;
 		g_hash_table_foreach (ted->widgets, gtk_ted_setup_layout, ted);
+		gtk_ted_set_spacings (ted);
 	}
 }
 
