@@ -1,3 +1,8 @@
+2001-09-26  Michael Meeks  <michael@ximian.com>
+
+	* libgnomeui-2.0.pc.in: add libbonoboui-2.0 for gnome
+	dock stuff.
+
 2001-09-23  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* .cvsignore: Ignore gnome_segv2 binary.
