@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-05-02 22:01+0200\n"
-"PO-Revision-Date: 2003-05-03 01:47+0200\n"
+"POT-Creation-Date: 2003-05-03 13:10+0200\n"
+"PO-Revision-Date: 2003-05-03 19:05+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1326,7 +1326,7 @@ msgstr "Skóre"
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
 #: libgnomeui/gnome-scores.c:194
-msgid "%a %b %x %X %Y"
+msgid "%a %b %d %T %Y"
 msgstr "%T %a %d. %b %Y"
 
 #: libgnomeui/gnome-scores.c:395
