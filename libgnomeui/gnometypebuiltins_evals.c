@@ -196,3 +196,23 @@ static GtkEnumValue _gtk_clock_type_values[] = {
   { GTK_CLOCK_REALTIME, "GTK_CLOCK_REALTIME", "realtime" },
   { 0, NULL, NULL }
 };
+static GtkEnumValue _gtk_calendar_display_options_values[] = {
+  { GTK_CALENDAR_SHOW_HEADING, "GTK_CALENDAR_SHOW_HEADING", "show-heading" },
+  { GTK_CALENDAR_SHOW_DAY_NAMES, "GTK_CALENDAR_SHOW_DAY_NAMES", "show-day-names" },
+  { GTK_CALENDAR_NO_MONTH_CHANGE, "GTK_CALENDAR_NO_MONTH_CHANGE", "no-month-change" },
+  { 0, NULL, NULL }
+};
+static GtkEnumValue _gtk_calendar_font_values[] = {
+  { GTK_CALENDAR_FONT_HEADING, "GTK_CALENDAR_FONT_HEADING", "heading" },
+  { GTK_CALENDAR_FONT_DAY_NAME, "GTK_CALENDAR_FONT_DAY_NAME", "day-name" },
+  { GTK_CALENDAR_FONT_DAY, "GTK_CALENDAR_FONT_DAY", "day" },
+  { 0, NULL, NULL }
+};
+static GtkEnumValue _gtk_calendar_color_values[] = {
+  { GTK_CALENDAR_COLOR_HEADING, "GTK_CALENDAR_COLOR_HEADING", "heading" },
+  { GTK_CALENDAR_COLOR_DAY_NAME, "GTK_CALENDAR_COLOR_DAY_NAME", "day-name" },
+  { GTK_CALENDAR_COLOR_PREV_MONTH, "GTK_CALENDAR_COLOR_PREV_MONTH", "prev-month" },
+  { GTK_CALENDAR_COLOR_NEXT_MONTH, "GTK_CALENDAR_COLOR_NEXT_MONTH", "next-month" },
+  { GTK_CALENDAR_COLOR_NORMAL_DAY, "GTK_CALENDAR_COLOR_NORMAL_DAY", "normal-day" },
+  { 0, NULL, NULL }
+};
