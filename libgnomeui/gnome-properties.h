@@ -1,3 +1,5 @@
+/* WARNING ____ IMMATURE API ____ liable to change */
+
 /* gnome-properties.h - Properties interface.
 
    Copyright (C) 1998 Martin Baulig

@@ -1,3 +1,12 @@
+1998-12-13  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-property-entries.c (gnome_property_entry_colors): New
+	function. See gtop/procview.c and gtop/graph.c for an usage
+	example.
+
+	* gnome-properties.h: Marked as immature.
+	* gnome-property-entries.h: Marked as immature.
+
 1998-12-13  Andrew T. Veliath  <andrewtv@usa.net>
 
 	* gnome-preferences.[ch]: Resurrect {menubar,toolbar}_handlebox as

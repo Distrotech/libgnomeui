@@ -186,7 +186,7 @@ _property_entry_font_entry_cb (GtkWidget *widget, FontCbData *cb_data)
 	*(temp_ptr->font_name_ptr) = font_name;
 	*(temp_ptr->font_ptr) = font;
 
-	gnome_property_object_changed (cb_data->object->user_data);
+	gnome_property_object_changed (cb_data->object);
 }
 
 /* Select button was presssed. */
@@ -274,4 +274,85 @@ gnome_property_entry_font (GnomePropertyObject *object, const gchar *label,
 	g_free (descriptor);
 
 	return table;
+}
+
+/* =======================================================================
+ * Font properties object.
+ * =======================================================================
+ */
+
+typedef struct
+{
+	GdkColor *color;
+	GnomePropertyObject *object;
+} ColorsCbData;
+
+static void
+_property_entry_colors_changed_cb (GnomeColorPicker *cp, gint r, gint g,
+				   gint b, gint a, ColorsCbData *cb_data)
+{
+	gushort red, green, blue, alpha;
+	
+	gnome_color_picker_get_i16 (cp, &red, &green, &blue, &alpha);
+
+	cb_data->color->red   = red;
+	cb_data->color->green = green;
+	cb_data->color->blue  = blue;
+
+	gnome_property_object_changed (cb_data->object);
+}
+
+GtkWidget *
+gnome_property_entry_colors (GnomePropertyObject *object, const gchar *label,
+			     gint num_colors, gint columns, gint *table_pos,
+			     GdkColor *colors, const gchar *texts [])
+{
+	GtkWidget *frame, *table;
+	gint rows, i;
+
+	frame = gtk_frame_new (_(label));
+
+	rows = (num_colors < columns) ? 2 :
+		((num_colors+columns-1) / columns) << 1;
+
+	table = gtk_table_new (rows, columns, TRUE);
+	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+	gtk_container_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+
+	for (i = 0; i < num_colors; i++) {
+		ColorsCbData *cb_data;
+		GtkWidget *label, *cp;
+		gint row, col;
+
+		label = gtk_label_new (texts [i]);
+		cp = gnome_color_picker_new ();
+		gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (cp),
+					    colors [i].red,
+					    colors [i].green,
+					    colors [i].blue,
+					    0);
+
+		cb_data = g_new0 (ColorsCbData, 1);
+		cb_data->color = &colors [i];
+		cb_data->object = object;
+
+		gtk_signal_connect (GTK_OBJECT (cp), "color_set", 
+				    _property_entry_colors_changed_cb,
+				    cb_data);
+
+		col = table_pos ? table_pos [i] : i;
+		row = (col / columns) << 1;
+		col %= columns;
+
+		gtk_table_attach (GTK_TABLE (table), cp,
+				  col, col+1, row, row+1,
+				  GTK_FILL, GTK_SHRINK, 0, 0);
+		gtk_table_attach (GTK_TABLE (table), label,
+				  col, col+1, row+1, row+2,
+				  GTK_EXPAND, GTK_FILL, 0, 0);
+	}
+
+	gtk_container_add (GTK_CONTAINER (frame), table);
+	
+	return frame;
 }

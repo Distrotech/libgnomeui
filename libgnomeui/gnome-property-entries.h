@@ -1,3 +1,5 @@
+/* WARNING ____ IMMATURE API ____ liable to change */
+
 /* gnome-property-entries.h - Property entries.
 
    Copyright (C) 1998 Martin Baulig
@@ -29,6 +31,12 @@ BEGIN_GNOME_DECLS
 GtkWidget *
 gnome_property_entry_font (GnomePropertyObject *object, const gchar *label,
 			   gchar **font_name_ptr, GdkFont **font_ptr);
+
+/* Color properties. */
+GtkWidget *
+gnome_property_entry_colors (GnomePropertyObject *object, const gchar *label,
+			     gint num_colors, gint columns, gint *table_pos,
+			     GdkColor *colors, const gchar *texts []);
 
 END_GNOME_DECLS
 
