@@ -217,6 +217,10 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	gnome_icon_list_set_icon_data_full(GNOME_ICON_LIST(gis->gil), pos, 
 					   g_strdup(path),
 					   (GtkDestroyNotify) g_free );
+	/*FIXME: sort of hack*/
+	gtk_signal_connect_object(GTK_OBJECT(gis->gil),"destroy",
+				  GTK_SIGNAL_FUNC(gdk_imlib_destroy_image),
+				  (GtkObject *)im);
 /* 	gdk_imlib_destroy_image(im); */ /* FIXME: this needs ref/unref capabilities in imlib */
 }
 

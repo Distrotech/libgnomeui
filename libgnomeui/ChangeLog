@@ -1,3 +1,9 @@
+Thu May 27 00:02:39 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-sel.c: slighly ugly semi-fix for a memory leak there
+	  is something else that is also leaking, this only does part of the
+	  job, and it should really be handeled elsewhere me thinks
+
 1999-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_list_clear): Reset last_clicked
