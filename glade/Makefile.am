@@ -15,7 +15,7 @@ libgnome_la_LIBADD = \
 	$(LIBGNOMEUI_GLADE_LIBS)
 
 libgnome_la_LDFLAGS = \
-	-export-dynamic -module -avoid-version
+	-export-dynamic -module -avoid-version -no-undefined
 
 libgnome_la_SOURCES = \
 	glade-gnome.c

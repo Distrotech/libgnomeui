@@ -1,3 +1,13 @@
+2003-05-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* configure.in: call AC_LIBTOOL_WIN32_DLL which is necessary for
+	building shared library on win32 platform.
+
+	* libgnomeui/Makefile.am (libgnomeui_2_la_LDFLAGS):
+	* glade/Makefile.am (libgnome_la_LDFLAGS):
+	add -no-undefined which is necessary for building shared library
+	on some platforms (e.g. Win32, BeOS).
+
 2003-05-06  Danilo Šegan  <dsegan@gmx.net>
 
 	* configure.in: Added "sr" and "sr@Latn" to ALL_LINGUAS.
