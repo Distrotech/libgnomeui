@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-11 09:19+0100\n"
-"PO-Revision-Date: 2004-02-11 09:20+0100\n"
+"POT-Creation-Date: 2004-02-17 13:25+0100\n"
+"PO-Revision-Date: 2004-02-17 13:25+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -647,11 +647,11 @@ msgstr "PREFIKS"
 msgid "Disable connection to session manager"
 msgstr "Fjern forbindelse til sesjonsbehandler"
 
-#: libgnomeui/gnome-client.c:974
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Sesjonshåndtering"
 
-#: libgnomeui/gnome-client.c:2474
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Avbryt utlogging"
 
@@ -942,7 +942,9 @@ msgstr "Bruk GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Om man skal bruke den nye GtkFileChooser-komponenten eller GtkFileSelection for å velge filer."
+msgstr ""
+"Om man skal bruke den nye GtkFileChooser-komponenten eller GtkFileSelection "
+"for å velge filer."
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -1335,12 +1337,12 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibliotek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmenteringsfeil oppstod; kan ikke vise feildialogen\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:721
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1385,13 +1387,17 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Bruk: gnome_segv2 appname signum\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "Sta_rt applikasjonen på nytt"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Informer utviklerene"
+msgid "_Inform Developers"
+msgstr "_Informer utviklerene"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Feilsøk"
+msgid "_Debug"
+msgstr "_Feilsøk"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
