@@ -72,10 +72,10 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	    else if(menuinfo[i].pixmap_type == GNOME_APP_PIXMAP_STOCK)
 	      menuinfo[i].widget =
 		gnome_stock_menu_item(menuinfo[i].pixmap_info,
-				      N_(menuinfo[i].label));
+				      _(menuinfo[i].label));
 	    else
 	      menuinfo[i].widget =
-		gtk_menu_item_new_with_label(N_(menuinfo[i].label));
+		gtk_menu_item_new_with_label(_(menuinfo[i].label));
 
 	    gtk_widget_show(menuinfo[i].widget);
 	    gtk_menu_shell_append(GTK_MENU_SHELL(parent_widget),
@@ -272,8 +272,8 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 
 	    tbinfo[i].widget =
 	      gtk_toolbar_append_item(GTK_TOOLBAR(parent_widget),
-				      N_(tbinfo[i].label),
-				      N_(tbinfo[i].hint),
+				      _(tbinfo[i].label),
+				      _(tbinfo[i].hint),
 				      pmap,
 				      NULL, NULL);
 	    gnome_app_do_ui_accelerator_setup(app,
