@@ -1,3 +1,8 @@
+2001-12-18  jacob berkman  <jacob@ximian.com>
+
+	* reference/Makefile.am (scan-build.stamp): run gtkdoc-scangobj
+	rather than gtkdoc-scanobj
+
 2001-10-29  Seth Nickell  <snickell@stanford.edu>
 
 	* ChangeLog:
