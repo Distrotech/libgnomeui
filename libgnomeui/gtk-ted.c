@@ -722,7 +722,7 @@ gtk_ted_load_layout (GtkTed *ted)
 			continue;
 
 		if (strncmp (sec_name+len+1, "Widget-", 7) == 0){
-			if (p = strchr (sec_name+len+8, '|') != NULL)
+			if ((p = strchr (sec_name+len+8, '|')) != NULL)
 				*p = 0;
 
 			wi = gtk_ted_load_widget (ted, layout, sec_name+len+1);

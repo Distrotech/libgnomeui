@@ -19,6 +19,7 @@
 
 #include <config.h>
 #include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-util.h"
 #include "gnome-about.h"
 #include <strings.h>
 #include <gtk/gtk.h>
