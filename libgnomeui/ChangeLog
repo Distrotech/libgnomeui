@@ -1,3 +1,8 @@
+Fri Jan 11 20:36:01 2002  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-app.h gnome-client.h: Fix gboolean : 1 uses. (gboolean
+	is signed!)
+
 2002-01-10  jacob berkman  <jacob@ximian.com>
 
 	* gnome-dialog.c (gnome_dialog_init_action_area): use END layout

@@ -153,11 +153,11 @@ struct _GnomeClient
   /* other internal state information */
   GnomeClientState    state : 3;
 
-  gboolean            shutdown : 1;
-  gboolean            fast : 1;
-  gboolean            save_phase_2_requested : 1;
-  gboolean            save_successfull : 1;
-  gboolean            save_yourself_emitted : 1;
+  guint               shutdown : 1;
+  guint               fast : 1;
+  guint               save_phase_2_requested : 1;
+  guint               save_successfull : 1;
+  guint               save_yourself_emitted : 1;
 
   gpointer            reserved; /* Reserved for private struct */
 };

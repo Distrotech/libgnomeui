@@ -94,7 +94,7 @@ struct _GnomeApp {
 
 	/* If TRUE, the application uses gnome-config to retrieve and
            save the docking configuration automagically.  */
-	gboolean enable_layout_config : 1;
+	guint enable_layout_config : 1;
 
 	/*< private >*/
 	GnomeAppPrivate *_priv;
