@@ -549,7 +549,7 @@ static int
 image_event (GnomeCanvasImage *img, GdkEvent *event, Icon *icon)
 {
 	Gil *gil = GIL (GNOME_CANVAS_ITEM (icon->text)->canvas);
-				      
+
 	if (icon_event (gil, icon, event))
 		return 1;
 	

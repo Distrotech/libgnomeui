@@ -240,7 +240,7 @@ EXTRA_DIST =					\
 	gnometypebuiltins_ids.c			\
 	gnometypebuiltins_evals.c
 
-libgnomeui_la_LDFLAGS = -version-info 30:0:30 -rpath $(libdir)
+libgnomeui_la_LDFLAGS = -version-info 31:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\
