@@ -393,8 +393,8 @@ static __malloc_ptr_t my_realloc_hook(__malloc_ptr_t __ptr,
  * gnome_init_with_popt_table:
  * @app_id: Application id.
  * @app_version: Application version.
- * @argc: pointer to argc (for example, as received by main)
- * @argv: pointer to argc (for example, as received by main)
+ * @argc: argument count (for example argc as received by main)
+ * @argv: argument vector (for example argv as received by main)
  * @options: poptOption table with options to parse
  * @flags: popt flags.
  * @return_ctx: if non-NULL, the popt context is returned here.
@@ -466,8 +466,8 @@ gnome_init_with_popt_table(const char *app_id,
  * gnome_init:
  * @app_id: Application id.
  * @app_version: Application version.
- * @argc: argc (for example, as received by main)
- * @argv: argv (for example, as received by main)
+ * @argc: argument count (for example argc as received by main)
+ * @argv: argument vector (for example argv as received by main)
  *
  * Initializes the application.  This sets up all of the GNOME
  * internals and prepares them (imlib, gdk, session-management, triggers,
