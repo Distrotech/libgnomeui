@@ -1,3 +1,17 @@
+Wed Aug  5 12:47:01 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-stock.c (gnome_stock_pixmap_widget_realize): A widget
+	  is not allowed to changed it's requisition during the
+	  realize() method. Moved initial pixmap setting into
+	  new(). (Past changes have eliminated the need to
+	  have everything realized first.) This should keep 
+	  gtk_vbox_size_allocate() from getting confused. But  
+	  the entire widget needs to be rewritten from scratch,
+	  as a bin instead of the current GtkVBox hack.
+
+	* gnome-app-helper.c (gnome_app_do_menu_creation): Removed
+	  unecessary realize().
+
 1998-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtklayout.c (gtk_layout_size_allocate): Move_resize the

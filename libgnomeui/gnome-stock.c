@@ -121,7 +121,6 @@ gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
 	GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
 	GnomePixmap *pixmap;
 
-	if (!GTK_WIDGET_REALIZED(widget)) return;
 	pixmap = NULL;
 	if (GTK_WIDGET_HAS_FOCUS(widget)) {
 		if (!w->focused) {
@@ -158,22 +157,6 @@ gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
 
 
 static void
-gnome_stock_pixmap_widget_realize(GtkWidget *widget)
-{
-	GnomeStockPixmapWidget *p;
-
-	g_return_if_fail(widget != NULL);
-	if (parent_class)
-		(* GTK_WIDGET_CLASS(parent_class)->realize)(widget);
-	p = GNOME_STOCK_PIXMAP_WIDGET(widget);
-	if (p->pixmap) return;
-	g_return_if_fail(p->window != NULL);
-	gnome_stock_pixmap_widget_state_changed(widget, 0);
-}
-
-
-
-static void
 gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
 				       GtkRequisition *requisition)
 {
@@ -181,13 +164,9 @@ gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
 	g_return_if_fail(requisition != NULL);
 	g_return_if_fail(GNOME_IS_STOCK_PIXMAP_WIDGET(widget));
 
-	if (!GNOME_STOCK_PIXMAP_WIDGET(widget)->pixmap) {
-		requisition->width = GNOME_STOCK_PIXMAP_WIDGET(widget)->width;
-		requisition->height = GNOME_STOCK_PIXMAP_WIDGET(widget)->height;
-	} else {
+	if (GNOME_STOCK_PIXMAP_WIDGET(widget)->pixmap)
 		gtk_widget_size_request(GTK_WIDGET(GNOME_STOCK_PIXMAP_WIDGET(widget)->pixmap),
 					requisition);
-	}
 }
 
 
@@ -199,8 +178,6 @@ gnome_stock_pixmap_widget_class_init(GnomeStockPixmapWidgetClass *klass)
 	object_class->destroy = gnome_stock_pixmap_widget_destroy;
 	((GtkWidgetClass *)klass)->state_changed =
 		gnome_stock_pixmap_widget_state_changed;
-	((GtkWidgetClass *)klass)->realize =
-		gnome_stock_pixmap_widget_realize;
 	((GtkWidgetClass *)klass)->size_request =
 		gnome_stock_pixmap_widget_size_request;
 }
@@ -272,6 +249,9 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon)
 		p->height = entry->any.height;
 	}
 	p->window = window;
+
+	gnome_stock_pixmap_widget_state_changed(w, 0);
+
 	return w;
 }
 
@@ -697,7 +677,6 @@ build_disabled_pixmap(GtkWidget *window, GnomePixmap **inout_pixmap)
 #endif
 
 	g_return_if_fail(window != NULL);
-	g_return_if_fail(GTK_WIDGET_REALIZED(window));
 
 	gdk_window_get_size(pixmap, &w, &h);
 	visual = gtk_widget_get_visual(GTK_WIDGET(*inout_pixmap));
