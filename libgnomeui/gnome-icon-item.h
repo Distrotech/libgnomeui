@@ -23,7 +23,6 @@ typedef struct {
 	int      x, y;
 	int      width;		/* Our assigned width */
 	char     *fontname;	/* Font in which we display */
-	gboolean is_editable;	/* Is this editable? */
 
 	/* Hack: create an offscreen window, and place the entry there */
 	GtkEntry  *entry;
@@ -44,6 +43,8 @@ typedef struct {
 	unsigned int unselected_click:1;
         /* true if current selecting text with mouse */
 	unsigned int selecting:1;
+	unsigned int is_editable:1;
+	unsigned int is_text_allocated:1;
 } GnomeIconTextItem;
 
 typedef struct {
@@ -66,7 +67,8 @@ void     gnome_icon_text_item_configure    (GnomeIconTextItem *iti,
 					    int         width,
 					    const char *fontname,
 					    const char *text,
-					    gboolean is_editable);
+					    gboolean is_editable,
+					    gboolean is_static);
 void     gnome_icon_text_item_setxy        (GnomeIconTextItem *iti,
 					    int      x,
 					    int      y);

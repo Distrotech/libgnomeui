@@ -69,7 +69,9 @@ typedef struct {
 	GList *preserve_selection; 
 
 	int icon_width;		/* The icon width */
-	int is_editable;	/* Whether the icon names are editable or not  */
+
+	unsigned int is_editable:1;	/* Whether the icon names are editable or not  */
+	unsigned int static_text:1;     /* Whether we need to make a copy of the names */
 	
 	int last_selected;	/* Last icon selected */
 	void *last_clicked;	/* Icon * */
@@ -99,15 +101,21 @@ typedef struct {
 	gboolean (*text_changed)   (GnomeIconList *gil, gint num, const char *new_text);
 } GnomeIconListClass;
 
+#define GNOME_ICON_LIST_IS_EDITABLE 1
+#define GNOME_ICON_LIST_STATIC_TEXT 2
+
 guint          gnome_icon_list_get_type            (void);
 
 GtkWidget     *gnome_icon_list_new                 (guint         icon_width, 
 						    GtkAdjustment *adj,
 						    gboolean      is_editable);
+GtkWidget     *gnome_icon_list_new_flags           (guint         icon_width, 
+						    GtkAdjustment *adj,
+						    int           flags);
 void           gnome_icon_list_construct           (GnomeIconList *gil,
 						    guint icon_width,
 						    GtkAdjustment *adj,
-						    gboolean is_editable);
+						    int flags);
 
 void           gnome_icon_list_set_hadjustment    (GnomeIconList *gil,
 						   GtkAdjustment *hadj);

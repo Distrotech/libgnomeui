@@ -36,6 +36,8 @@ enum {
 
 static guint iti_signals [LAST_SIGNAL] = { 0 };
 
+static GdkFont *default_font;
+
 static char *
 iti_default_font_name (void)
 {
@@ -51,8 +53,12 @@ font_load (Iti *iti)
 		iti->fontname = NULL;
 	}
 	
-	if (!iti->font)
-		iti->font = gdk_font_load (iti_default_font_name ());
+	if (!iti->font){
+		if (!default_font)
+			default_font = gdk_font_load (iti_default_font_name ());
+		
+		iti->font = gdk_font_ref (default_font);
+	}
 }
 
 static void
@@ -167,7 +173,6 @@ layout_text (Iti *iti)
 	if (iti->editing)
 		text = gtk_entry_get_text (iti->entry);
 	else
-
 		text = iti->text;
 	
 	iti->ti = gnome_icon_layout_text (
@@ -209,8 +214,11 @@ iti_edition_accept (Iti *iti)
 
 	iti_queue_redraw (iti);
 	if (accept){
-		g_free (iti->text);
+		if (iti->is_text_allocated){
+			g_free (iti->text);
+		}
 		iti->text = g_strdup (gtk_entry_get_text (iti->entry));
+		iti->is_text_allocated = 1;
 	}
 
 	iti_stop_editing (iti);
@@ -314,8 +322,10 @@ iti_destroy (GtkObject *object)
 
 	if (iti->fontname)
 		g_free (iti->fontname);
-	if (iti->text)
-		g_free (iti->text);
+	if (iti->text){
+		if (iti->is_text_allocated)
+			g_free (iti->text);
+	}
 	
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(*GTK_OBJECT_CLASS (parent_class)->destroy)(object);
@@ -865,7 +875,8 @@ gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
 void
 gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 				int width, const char *fontname,
-				const char *text, gboolean is_editable)
+				const char *text,
+				gboolean is_editable, gboolean is_static)
 {
 	g_return_if_fail (iti != NULL);
 	g_return_if_fail (IS_ITI (iti));
@@ -876,9 +887,16 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 	iti->width = width - MARGIN_X * 2;
 	iti->is_editable = is_editable;
 	
-	if (iti->text)
-		g_free (iti->text);
-	iti->text = g_strdup (text);
+	if (iti->text){
+		if (iti->is_text_allocated)
+			g_free (iti->text);
+	}
+
+	iti->is_text_allocated = !is_static;
+	if (is_static)
+		iti->text = text;
+	else
+		iti->text = g_strdup (text);
 	
 	if (iti->fontname)
 		g_free (iti->fontname);

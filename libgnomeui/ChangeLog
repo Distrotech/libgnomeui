@@ -1,3 +1,18 @@
+1999-01-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_new_flags): New function.
+	Adds support for the text not being allocated on every icon
+	insertion. 
+
+	* gnome-icon-item.c (font_load): WEEE!  Major cpu resource hog
+	found.  I was loading the same font over and over assuming Gdk had
+	some sort of internal hash.  Well, it does not.
+
+	Load it once only. 
+
+	(gnome_icon_text_item_configure): Support for static text.  This
+	means that the text does not need to be strdup()ed. 
+
 Thu Jan 21 14:31:46 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-entry.c: fixed segfaults with gnome-entry, when an

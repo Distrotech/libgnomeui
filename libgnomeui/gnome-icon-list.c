@@ -646,7 +646,7 @@ icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 	gnome_icon_text_item_configure (
 		icon->text,
 		0, 0, gil->icon_width, NULL,
-		text, gil->is_editable);
+		text, gil->is_editable, gil->static_text);
 
 	icon->data = NULL;
 	icon->destroy = NULL;
@@ -1674,14 +1674,15 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 }
 
 void           
-gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *adj, gboolean is_editable)
+gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *adj, int flags)
 {
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 
 	gnome_icon_list_set_icon_width (gil, icon_width);
-	gil->is_editable = is_editable;
-
+	gil->is_editable = (flags & GNOME_ICON_LIST_IS_EDITABLE) != 0;
+	gil->static_text = (flags & GNOME_ICON_LIST_STATIC_TEXT) != 0;
+	
 	if (!adj)
 		adj = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0.1, 0.1));
 			
@@ -1691,10 +1692,10 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
 
 
 /**
- * gnome_icon_list_new: [constructor]
- * @icon_width:  Icon width.
- * @adj:         Scrolling adjustment.
- * @is_editable: whether editing changes can be made to this icon_list.
+ * gnome_icon_list_new_flags: [constructor]
+ * @icon_width: Icon width.
+ * @adj:        Scrolling adjustment.
+ * @flags:      flags that control the icon list creation
  *
  * Creates a new GnomeIconList widget.  Icons will be assumed to be at 
  * most ICON_WIDTH pixels of width.  Any text displayed for those icons
@@ -1707,15 +1708,18 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
  * Applications can use this adjustment stored inside the
  * GnomeIconList structure to construct scrollbars if they so desire.
  *
- * If IS_EDITABLE is TRUE, then the text on the icons will be permited to
- * be edited.  If the name changes the "text_changed" signal will be emitted.
+ * if flags has the GNOME_ICON_LIST_IS_EDITABLE flag set, then the
+ * text on the icons will be permited to be edited.  If the name
+ * changes the "text_changed" signal will be emitted.
+ *
+ * if flags has the GNOME_ICON_LIST_STATIC_TEXT flags set, then the
+ * text 
  *
  * Please note that the GnomeIconList starts life in Frozen state.  You are
  * supposed to fall gnome_icon_list_thaw on it as soon as possible.
- *
- */
+ * */
 GtkWidget *
-gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
+gnome_icon_list_new_flags (guint icon_width, GtkAdjustment *adj, int flags)
 {
 	Gil *gil;
 
@@ -1725,9 +1729,15 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
 	
-	gnome_icon_list_construct (gil, icon_width, adj, is_editable);
+	gnome_icon_list_construct (gil, icon_width, adj, flags);
 
 	return GTK_WIDGET (gil);
+}
+
+GtkWidget *
+gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, int flags)
+{
+	return gnome_icon_list_new_flags (icon_width, adj, flags & GNOME_ICON_LIST_IS_EDITABLE);
 }
 
 /**
