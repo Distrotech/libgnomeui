@@ -99,10 +99,7 @@ gnome_less_init (GnomeLess *gl)
 	/* FIXME: this is because gtktextview is broke! */
 	gtk_widget_set_scroll_adjustments(GTK_WIDGET(gl->text_view), NULL, NULL);
 
-	gl->_priv->text_tag = gtk_text_buffer_create_tag(gl->text_buffer, "text_tag");
-	gtk_object_set(GTK_OBJECT(gl->_priv->text_tag),
-		       "font_desc", gl->_priv->font_desc,
-		       NULL);
+	gl->_priv->text_tag = gtk_text_buffer_create_tag(gl->text_buffer, "text_tag", "font_desc", gl->_priv->font_desc, NULL);
 	gtk_text_buffer_get_bounds(gl->text_buffer, &start, &end);
 	gtk_text_buffer_apply_tag_by_name(gl->text_buffer, "text_tag", &start, &end);
 
