@@ -1,3 +1,12 @@
+Fri Nov 27 00:34:44 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap.c: check the visuals and if imlib and gdk visuals
+	  are the same, morph ourselves into a GTK_NO_WINDOW widget and
+	  work more like gtkpixmap
+
+	* gnome-stock.c: combine_mask only needs to be called if gnomepixmap
+	  is a window widget otherwise it spits out a warning
+
 1998-11-27  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-dialog-util: (gnome_question_dialog*, gnome_ok_cancel*):

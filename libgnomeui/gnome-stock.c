@@ -362,7 +362,8 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
 		gdk_draw_pixmap(gpixmap->mask, gc, pixmap->mask, 0, 0, 0, 0,
 				req.width, req.height);
 		gdk_gc_destroy(gc);
-		if (GTK_WIDGET(gpixmap)->window)
+		if (!(GTK_WIDGET_FLAGS(gpixmap)&GTK_NO_WINDOW) &&
+			GTK_WIDGET(gpixmap)->window)
 			gtk_widget_shape_combine_mask(GTK_WIDGET(gpixmap),
 						      gpixmap->mask, 0, 0);
 	}

@@ -7,6 +7,8 @@
 
 #include <config.h>
 
+#include <X11/Xlib.h>
+#include <gdk/gdkx.h>
 #include <gdk_imlib.h>
 #include "libgnome/gnome-defs.h"
 #include <gtk/gtk.h>                  /* These two includes should be remove once everyting */
@@ -301,6 +303,8 @@ setup_window_and_style (GnomePixmap *gpixmap)
 	gint attributes_mask;
 	GtkWidget *widget;
 	gint w, h;
+	GdkVisual *imvisual;
+	GdkColormap *imcolormap;
 	GdkVisual *visual;
 	GdkColormap *colormap;
 
@@ -315,33 +319,42 @@ setup_window_and_style (GnomePixmap *gpixmap)
 #endif
 	if (gpixmap->pixmap) {
 		gdk_window_get_size (gpixmap->pixmap, &w, &h);
-		visual = gdk_imlib_get_visual ();
-		colormap = gdk_imlib_get_colormap ();
 	} else {
 		w = h = 0;
-		visual = gtk_widget_get_visual (widget);
-		colormap = gtk_widget_get_colormap (widget);
 	}
+	imvisual = gdk_imlib_get_visual ();
+	imcolormap = gdk_imlib_get_colormap ();
+	visual = gtk_widget_get_visual (widget);
+	colormap = gtk_widget_get_colormap (widget);
+	if(GDK_VISUAL_XVISUAL(imvisual)->visualid !=
+	   GDK_VISUAL_XVISUAL(visual)->visualid) {
+		GTK_WIDGET_UNSET_FLAGS (widget, GTK_NO_WINDOW);
+		attributes.window_type = GDK_WINDOW_CHILD;
+		attributes.x = widget->allocation.x + (widget->allocation.width - w) / 2;
+		attributes.y = widget->allocation.y + (widget->allocation.height - h) / 2;
+		attributes.width = w;
+		attributes.height = h;
+		attributes.wclass = GDK_INPUT_OUTPUT;
+		attributes.visual = gpixmap->pixmap?imvisual:visual;
+		attributes.colormap = gpixmap->pixmap?imcolormap:colormap;
+		attributes.event_mask = (gtk_widget_get_events (widget)
+					 | GDK_EXPOSURE_MASK);
 
-	attributes.window_type = GDK_WINDOW_CHILD;
-	attributes.x = widget->allocation.x + (widget->allocation.width - w) / 2;
-	attributes.y = widget->allocation.y + (widget->allocation.height - h) / 2;
-	attributes.width = w;
-	attributes.height = h;
-	attributes.wclass = GDK_INPUT_OUTPUT;
-	attributes.visual = visual;
-	attributes.colormap = colormap;
-	attributes.event_mask = (gtk_widget_get_events (widget)
-				 | GDK_EXPOSURE_MASK);
+		attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
+		widget->window = gdk_window_new (gtk_widget_get_parent_window (widget),
+						 &attributes, attributes_mask);
+		gdk_window_set_user_data (widget->window, widget);
 
-	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget),
-					 &attributes, attributes_mask);
-	gdk_window_set_user_data (widget->window, widget);
-
-	if (gpixmap->mask)
-		gdk_window_shape_combine_mask (widget->window, gpixmap->mask, 0, 0);
+		if (gpixmap->mask)
+			gdk_window_shape_combine_mask (widget->window, gpixmap->mask, 0, 0);
+	} else {
+		GTK_WIDGET_SET_FLAGS (widget, GTK_NO_WINDOW);
+		if (widget->parent) {
+			widget->window = gtk_widget_get_parent_window (widget);
+			gdk_window_ref (widget->window);
+		}
+	}
 
 	widget->style = gtk_style_attach (widget->style, widget->window);
 	gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
@@ -391,7 +404,8 @@ gnome_pixmap_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
 	widget->allocation = *allocation;
 
-	if (GTK_WIDGET_REALIZED (widget))
+	if (GTK_WIDGET_REALIZED (widget) &&
+	    !(GTK_WIDGET_FLAGS(widget)&GTK_NO_WINDOW))
 		gdk_window_move (widget->window,
 				 allocation->x + (allocation->width - widget->requisition.width) / 2,
 				 allocation->y + (allocation->height - widget->requisition.height) / 2);
@@ -400,17 +414,40 @@ gnome_pixmap_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 static void
 paint (GnomePixmap *gpixmap, GdkRectangle *area)
 {
-	if (gpixmap->pixmap)
-		gdk_draw_pixmap (gpixmap->widget.window,
-				 gpixmap->widget.style->black_gc,
+	GtkWidget *widget = GTK_WIDGET(gpixmap);
+	if (!gpixmap->pixmap) {
+		gdk_window_clear_area (widget->window,
+				       area->x, area->y,
+				       area->width, area->height);
+		return;
+	}
+	if(!(GTK_WIDGET_FLAGS(widget)&GTK_NO_WINDOW)) {
+		gdk_draw_pixmap (widget->window,
+				 widget->style->black_gc,
 				 gpixmap->pixmap,
 				 area->x, area->y,
 				 area->x, area->y,
 				 area->width, area->height);
-	else
-		gdk_window_clear_area (gpixmap->widget.window,
-				       area->x, area->y,
-				       area->width, area->height);
+	} else {
+		int x,y;
+		x = widget->allocation.x + (widget->allocation.width - widget->requisition.width) / 2;
+		y = widget->allocation.y + (widget->allocation.height - widget->requisition.height) / 2;
+
+		if (gpixmap->mask) {
+			gdk_gc_set_clip_mask (widget->style->black_gc, gpixmap->mask);
+			gdk_gc_set_clip_origin (widget->style->black_gc, x, y);
+		}
+
+		gdk_draw_pixmap (widget->window,
+				 widget->style->black_gc,
+				 gpixmap->pixmap,
+				 0, 0, x, y, -1, -1);
+
+		if (gpixmap->mask) {
+			gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
+			gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
+		}
+	}
 }
 
 static void
@@ -423,22 +460,24 @@ gnome_pixmap_draw (GtkWidget *widget, GdkRectangle *area)
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (widget));
 	g_return_if_fail (area != NULL);
-
+	
 	if (GTK_WIDGET_DRAWABLE (widget)) {
 		gpixmap = GNOME_PIXMAP (widget);
 
-		/* Offset the area because the window does not fill the allocation */
+		if(!(GTK_WIDGET_FLAGS(gpixmap)&GTK_NO_WINDOW)) {
+			/* Offset the area because the window does not fill the allocation */
+			area->x -= (widget->allocation.width - widget->requisition.width) / 2;
+			area->y -= (widget->allocation.height - widget->requisition.height) / 2;
 
-		area->x -= (widget->allocation.width - widget->requisition.width) / 2;
-		area->y -= (widget->allocation.height - widget->requisition.height) / 2;
+			w_area.x = 0;
+			w_area.y = 0;
+			w_area.width = widget->requisition.width;
+			w_area.height = widget->requisition.height;
 
-		w_area.x = 0;
-		w_area.y = 0;
-		w_area.width = widget->requisition.width;
-		w_area.height = widget->requisition.height;
-
-		if (gdk_rectangle_intersect (area, &w_area, &p_area))
-			paint (gpixmap, &p_area);
+			if (gdk_rectangle_intersect (area, &w_area, &p_area))
+				paint (gpixmap, &p_area);
+		} else
+			paint (gpixmap, area);
 	}
 }
 
@@ -448,7 +487,7 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_PIXMAP (widget), FALSE);
 	g_return_val_if_fail (event != NULL, FALSE);
-
+	
 	if (GTK_WIDGET_DRAWABLE (widget))
 		paint (GNOME_PIXMAP (widget), &event->area);
 
@@ -472,15 +511,16 @@ finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int
 	if (destroy)
 		gdk_imlib_destroy_image (im);
 
-	if (GTK_WIDGET_REALIZED (gpixmap)) {
+	if(!(GTK_WIDGET_FLAGS(gpixmap)&GTK_NO_WINDOW)) {
+		if (GTK_WIDGET_REALIZED (gpixmap)) {
+			if (GTK_WIDGET_MAPPED (gpixmap))
+				gdk_window_hide (GTK_WIDGET (gpixmap)->window);
+			setup_window_and_style (gpixmap);
+		}
+
 		if (GTK_WIDGET_MAPPED (gpixmap))
-			gdk_window_hide (GTK_WIDGET (gpixmap)->window);
-
-		setup_window_and_style (gpixmap);
+			gdk_window_show (GTK_WIDGET (gpixmap)->window);
 	}
-
-	if (GTK_WIDGET_MAPPED (gpixmap))
-		gdk_window_show (GTK_WIDGET (gpixmap)->window);
 
 	if (GTK_WIDGET_VISIBLE (gpixmap))
 		gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
