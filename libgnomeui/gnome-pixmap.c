@@ -278,7 +278,9 @@ gnome_pixmap_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	widget->allocation = *allocation;
 
 	if (GTK_WIDGET_REALIZED (widget))
-		gdk_window_move (widget->window, allocation->x, allocation->y);
+		gdk_window_move (widget->window,
+				 allocation->x + (allocation->width - widget->requisition.width) / 2,
+				 allocation->y + (allocation->height - widget->requisition.height) / 2);
 }
 
 static gint
@@ -297,9 +299,13 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
 			gdk_draw_pixmap (widget->window,
 					 widget->style->black_gc,
 					 gpixmap->pixmap,
-					 0, 0, 0, 0, -1, -1);
+					 event->area.x, event->area.y,
+					 event->area.x, event->area.y,
+					 event->area.width, event->area.height);
 		else
-			gdk_window_clear (widget->window);
+			gdk_window_clear_area (widget->window,
+					       event->area.x, event->area.y,
+					       event->area.width, event->area.height);
 	}
 
 	return FALSE;

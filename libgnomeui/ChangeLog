@@ -1,3 +1,8 @@
+1998-02-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-pixmap.c (gnome_pixmap_expose): Repaint only the exposed area.
+	(gnome_pixmap_size_allocate): Center the pixmap's window on its allocation.
+
 1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
         * gnome-scores.c: Set window policy for the score dialog so that it
