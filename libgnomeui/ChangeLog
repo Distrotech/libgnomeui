@@ -1,3 +1,13 @@
+Thu Jun  4 14:53:55 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-lamp.h: new function gnome_lamp_set_window_type.
+
+	* gnome-lamp.c (gnome_lamp_set_window_type): new function to set the
+	wm hints for lamps/beacons.
+	(gnome_lamp_set_win_app_state): new static function to set the
+	WIN_APP_STATE window property. This is an implementation of raster's
+	proposal as found in the E sources (gnome.c).
+
 1998-06-03  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* libgnomeui.h:

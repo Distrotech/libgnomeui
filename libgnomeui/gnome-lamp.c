@@ -18,7 +18,12 @@
 
    Author: Eckehard Berns  */
 
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xatom.h>
+#include <gdk/gdkx.h>
 #include <gtk/gtkmain.h>
+#include <gtk/gtksignal.h>
 #include "gnome-lamp.h"
 
 /* timeout in msecs for blinking lamps */
@@ -893,5 +898,97 @@ gnome_lamp_set_color(GnomeLamp *lamp, const GdkColor *color)
 
 	lamp->color = *color;
 	gnome_lamp_set_pixmap_color(lamp);
+}
+
+
+/*
+ * window lamp/beacons
+ */
+
+typedef struct _WmLampMapping WmLampMapping;
+struct _WmLampMapping {
+	char *type;
+	guint32 hint; /* CARD32 */
+};
+
+WmLampMapping enl_mappings[] = {
+	{ GNOME_LAMP_IDLE, 7 },
+	{ GNOME_LAMP_BUSY, 1 },
+	{ GNOME_LAMP_INPUT, 13 },
+	{ GNOME_LAMP_WARNING, 3 },
+	{ GNOME_LAMP_ERROR, 5 },
+	{ GNOME_LAMP_PROC0, 23 },
+	{ GNOME_LAMP_PROC10, 25 },
+	{ GNOME_LAMP_PROC20, 27 },
+	{ GNOME_LAMP_PROC30, 29 },
+	{ GNOME_LAMP_PROC40, 31 },
+	{ GNOME_LAMP_PROC50, 33 },
+	{ GNOME_LAMP_PROC60, 35 },
+	{ GNOME_LAMP_PROC70, 37 },
+	{ GNOME_LAMP_PROC80, 39 },
+	{ GNOME_LAMP_PROC90, 41 },
+	{ NULL, 0 }
+};
+
+static void
+gnome_lamp_set_win_app_state(GdkWindow *window, guint32 value)
+{
+	Display *disp;
+	static Atom atom = None;
+	Window win;
+
+	g_return_if_fail(window != NULL);
+
+	disp = GDK_WINDOW_XDISPLAY(window);
+	win = GDK_WINDOW_XWINDOW(window);
+	if (atom == None)
+		atom = XInternAtom(disp, "WIN_APP_STATE", FALSE);
+	XChangeProperty(disp, win, atom, XA_CARDINAL, 32, PropModeReplace,
+			(guchar *)&value, 1);
+}
+
+static void
+gnome_lamp_update_window_type(GtkWindow *window, char *type)
+{
+	g_return_if_fail(window != NULL);
+	g_return_if_fail(GTK_IS_WINDOW(window));
+	g_return_if_fail(type != NULL);
+	g_return_if_fail(GTK_WIDGET(window)->window != NULL);
+
+	gnome_lamp_set_window_type(window, type);
+	gtk_signal_disconnect_by_func(GTK_OBJECT(window),
+				      (GtkSignalFunc)gnome_lamp_update_window_type,
+				      type);
+	g_free(type);
+}
+
+void
+gnome_lamp_set_window_type(GtkWindow *window, const char *type)
+{
+	WmLampMapping *p;
+
+	g_return_if_fail(window != NULL);
+	g_return_if_fail(GTK_IS_WINDOW(window));
+	g_return_if_fail(type != NULL);
+
+	/* TODO: currently only rasters WIN_APP_STATE hints are supported */
+	for (p = enl_mappings; p->type; p++) {
+		if (0 == strcmp(type, p->type))
+			break;
+	}
+	if (!p->type) {
+		g_warning("gnome_lamp_set_window_type: couldn't find type \"%s\"\n", type);
+		return;
+	}
+	if (GTK_WIDGET(window)->window) {
+		gnome_lamp_set_win_app_state(GTK_WIDGET(window)->window,
+					     p->hint);
+	} else {
+		/* connect to the realise signal once, so we can update the wm
+		 * hints as soon as a GdkWindow is created */
+		gtk_signal_connect_after(GTK_OBJECT(window), "realize",
+					 (GtkSignalFunc)gnome_lamp_update_window_type,
+					 g_strdup(type));
+	}
 }
 

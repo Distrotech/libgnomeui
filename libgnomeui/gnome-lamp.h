@@ -25,6 +25,7 @@
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkpixmap.h>
+#include <gtk/gtkwindow.h>
 #include <libgnomeui/gnome-pixmap.h>
 
 BEGIN_GNOME_DECLS
@@ -93,6 +94,10 @@ void          gnome_lamp_set_color      (GnomeLamp *lamp,
 					 const GdkColor *color);
 void          gnome_lamp_set_sequence   (GnomeLamp *lamp, const char *seq);
 void          gnome_lamp_set_type       (GnomeLamp *lamp, const char *type);
+
+/* if the wm supports it, this function can be used to set a GtkWindow's
+ * lamp/beacon to a spcific type */
+void          gnome_lamp_set_window_type (GtkWindow *window, const char *type);
 
 
 END_GNOME_DECLS
