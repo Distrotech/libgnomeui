@@ -350,14 +350,17 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
   gtk_entry_set_text(GTK_ENTRY(dee->comment_entry),
 		     dentry->comment ? dentry->comment : "");
   
-  if (dentry->exec_length != 0) s = g_flatten_vector(" ", dentry->exec);
+  if (dentry->exec) s = g_flatten_vector(" ", dentry->exec);
   gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), s ? s : "");
-  if (s) g_free(s);
+  g_free(s);
 
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), 
 		     dentry->tryexec ? dentry->tryexec : "");
 
   gnome_dentry_edit_set_icon(dee, dentry->icon);
+  if (dee->icon_dialog && dentry->icon)
+    gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(gtk_object_get_user_data(GTK_OBJECT(dee))),
+				     g_filename_pointer(dee->icon));
 
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), 
 		     dentry->docpath ? dentry->docpath : "");
@@ -384,36 +387,40 @@ static void gnome_dentry_edit_sync_dentry(GnomeDEntryEdit * dee,
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->name_entry));
   g_free(dentry->name);
-  dentry->name = g_strdup(text);
+  if (text[0] != '\0') dentry->name = g_strdup(text);
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->comment_entry));
   g_free(dentry->comment);
-  dentry->comment = g_strdup(text);
+  if (text[0] != '\0') dentry->comment = g_strdup(text);
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->exec_entry));
   /* OK, going to cheat here. It seems like a big pain to parse
      the text into a vector, and I don't understand all the issues; 
      plus gnome_desktop_entry_launch just flattens the vector anyway. */
   gnome_string_array_free(dentry->exec);
-  dentry->exec = g_malloc ( sizeof(char *) * 2 );
-  (dentry->exec)[0] = g_strdup(text);
-  (dentry->exec)[1] = NULL;
-  dentry->exec_length = 1; /* doesn't include NULL terminator */
+  if (text[0] != '\0') {
+    dentry->exec = g_malloc ( sizeof(char *) * 2 );
+    (dentry->exec)[0] = g_strdup(text);
+    (dentry->exec)[1] = NULL;
+    dentry->exec_length = 1; /* doesn't include NULL terminator */
+  } else {
+    dentry->exec_length = 0;
+  }
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->tryexec_entry));
   g_free(dentry->tryexec);
-  dentry->tryexec = g_strdup(text);
+  if (text[0] != '\0') dentry->tryexec = g_strdup(text);
   
   text = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(dee->type_combo)->entry));
   g_free(dentry->type);
-  dentry->type = g_strdup(text);
+  if (text[0] != '\0') dentry->type = g_strdup(text);
   
   g_free(dentry->icon);
-  dentry->icon = g_strdup(g_filename_pointer(dee->icon));
+  if (dee->icon) dentry->icon = g_strdup(g_filename_pointer(dee->icon));
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->doc_entry));
   g_free(dentry->docpath);
-  dentry->docpath = g_strdup(text);
+  if (text[0] != '\0') dentry->docpath = g_strdup(text);
 
   dentry->terminal = 
     GTK_TOGGLE_BUTTON(dee->terminal_button)->active;
@@ -531,7 +538,7 @@ static void gnome_dentry_edit_set_icon(GnomeDEntryEdit * dee,
   if (dee->desktop_icon) gtk_widget_destroy(dee->desktop_icon);
   dee->desktop_icon = NULL;
 
-  if (icon_name == NULL || !strcmp(icon_name,"")) {
+  if (icon_name == NULL) {
     dee->desktop_icon = gtk_label_new(_("No\nicon"));
     if (!icon_name) icon_name = "";
   }
@@ -564,7 +571,7 @@ static void gnome_dentry_edit_set_icon(GnomeDEntryEdit * dee,
   gtk_label_set(GTK_LABEL(dee->icon_label),
 		g_filename_pointer(icon_name));
 
-  dee->icon = g_strdup(icon_name);
+  if (icon_name[0] != '\0') dee->icon = g_strdup(icon_name);
 
   gnome_dentry_edit_changed(dee);
   gnome_dentry_edit_icon_changed(dee);
@@ -618,7 +625,7 @@ static void show_icon_selection(GtkButton * b,
 
     gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(iconsel));
 
-    gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
+    if (dee->icon) gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
 				     g_filename_pointer(dee->icon));
 
     gnome_dialog_button_connect(GNOME_DIALOG(dee->icon_dialog), 

@@ -1,3 +1,13 @@
+Fri Jul 24 02:34:31 1998  John Ellis  <johne@bellatlantic.net>
+
+	* gnome-dentry-edit.c:
+	(gnome_dentry_edit_sync_display): now update icon select dialog too.
+	(static void gnome_dentry_edit_sync_dentry): if text fields are blank,
+	set the corresponding dentry pointer NULL to avoid blank entries in
+	the .desktop files.
+	(gnome_dentry_edit_set_icon): now no icon sets the dentry->icon pointer
+	NULL instead of "", like the above this avoids blank entries.
+
 Thu Jul 23 00:59:23 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock: added `first' and `last' icons from gnomecard.
