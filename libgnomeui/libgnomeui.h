@@ -68,7 +68,11 @@ BEGIN_GNOME_DECLS
 
 error_t gnome_init (char *app_id, struct argp *app_parser,
 		    int argc, char **argv,
-		    unsigned int flags, int *arg_index, ...);
+		    unsigned int flags, int *arg_index);
+error_t gnome_init_with_data (char *app_id, struct argp *app_parser,
+			      int argc, char **argv,
+			      unsigned int flags, int *arg_index,
+			      void *user_data);
 
 END_GNOME_DECLS
 

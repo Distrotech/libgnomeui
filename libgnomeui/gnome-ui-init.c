@@ -227,13 +227,12 @@ atexit_handler(void)
 }
 
 error_t
-gnome_init (char *app_id, struct argp *app_args,
-	    int argc, char **argv,
-	    unsigned int flags, int *arg_index, ...)
+gnome_init_with_data (char *app_id, struct argp *app_args,
+		      int argc, char **argv,
+		      unsigned int flags, int *arg_index,
+		      void *user_data)
 {
-	va_list args;
 	error_t retval;
-	void *user_data = NULL;
 
 #ifdef USE_SEGV_HANDLE
 	struct sigaction sa;
@@ -275,11 +274,8 @@ gnome_init (char *app_id, struct argp *app_args,
 		argp_program_version_hook = default_version_func;
 
 	/* Now parse command-line arguments.  */
-	va_start (args, arg_index);
-	if (flags & ARGP_INPUT)
-		user_data = (void *) va_arg (args, char *);
-	retval = gnome_parse_arguments (app_args, argc, argv, flags, arg_index, user_data);
-	va_end (args);
+	retval = gnome_parse_arguments_with_data (app_args, argc, argv,
+						  flags, arg_index, user_data);
 	
 	/*now set up the handeling of automatic config syncing*/
 	gnome_config_set_set_handler(set_handler,NULL);
@@ -292,6 +288,15 @@ gnome_init (char *app_id, struct argp *app_args,
 	sigaction(SIGSEGV, &sa, NULL);
 #endif
 	return retval;
+}
+
+error_t
+gnome_init (char *app_id, struct argp *app_args,
+	    int argc, char **argv,
+	    unsigned int flags, int *arg_index)
+{
+	return gnome_init_with_data (app_id, app_args, argc, argv,
+				     flags, arg_index, NULL);
 }
 
 /* perhaps this belongs in libgnome.. move it if you like. */
