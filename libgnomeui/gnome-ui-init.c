@@ -27,6 +27,7 @@
 #include "gnome-preferences.h"
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-init.h"
+#include <gdk_imlib_private.h>
 
 static gboolean
 relay_gtk_signal(GtkObject *object,
@@ -169,40 +170,40 @@ gnome_add_gtk_arg_callback(poptContext con,
   }
 }
 
-static const struct poptOption gtk_options[] = {
-  {NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
-   &gnome_add_gtk_arg_callback, 0, NULL},
-  {"gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
-   N_("Gdk debugging flags to set"), N_("FLAGS")},
-  {"gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
-   N_("Gdk debugging flags to unset"), N_("FLAGS")},
-  {"display", '\0', POPT_ARG_STRING, NULL, 0,
-   N_("X display to use"), N_("DISPLAY")},
-  {"sync", '\0', POPT_ARG_NONE, NULL, 0,
-   N_("Make X calls synchronous"), NULL},
-  {"no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
-   N_("Don't use X shared memory extension"), NULL},
-  {"name", '\0', POPT_ARG_STRING, NULL, 0,
-   N_("Program name as used by the window manager"), N_("NAME")},
-  {"class", '\0', POPT_ARG_STRING, NULL, 0,
-   N_("Program class as used by the window manager"), N_("CLASS")},
-  {"gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
-   NULL, N_("HOST")},
-  {"gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
-   NULL, N_("PORT")},
-  {"xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
-   NULL, N_("STYLE")},
-  {"xim-status", '\0', POPT_ARG_STRING, NULL, 0,
-   NULL, N_("STYLE")},
-  {"gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
-   N_("Gtk+ debugging flags to set"), N_("FLAGS")},
-  {"gtk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
-   N_("Gtk+ debugging flags to unset"), N_("FLAGS")},
-  {"g-fatal-warnings", '\0', POPT_ARG_NONE, NULL, 0,
-   N_("Make all warnings fatal"), NULL},
-  {"gtk-module", '\0', POPT_ARG_STRING, NULL, 0,
-   N_("Load an additional Gtk module"), N_("MODULE")},
-  {NULL, '\0', 0, NULL, 0}
+static const struct poptOption gtk_options [] = {
+  { NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
+    &gnome_add_gtk_arg_callback, 0, NULL},
+  { "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+    N_("Gdk debugging flags to set"), N_("FLAGS")},
+  { "gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+    N_("Gdk debugging flags to unset"), N_("FLAGS")},
+  { "display", '\0', POPT_ARG_STRING, NULL, 0,
+    N_("X display to use"), N_("DISPLAY")},
+  { "sync", '\0', POPT_ARG_NONE, NULL, 0,
+    N_("Make X calls synchronous"), NULL},
+  { "no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
+    N_("Don't use X shared memory extension"), NULL},
+  { "name", '\0', POPT_ARG_STRING, NULL, 0,
+    N_("Program name as used by the window manager"), N_("NAME")},
+  { "class", '\0', POPT_ARG_STRING, NULL, 0,
+    N_("Program class as used by the window manager"), N_("CLASS")},
+  { "gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
+    NULL, N_("HOST")},
+  { "gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
+    NULL, N_("PORT")},
+  { "xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
+    NULL, N_("STYLE")},
+  { "xim-status", '\0', POPT_ARG_STRING, NULL, 0,
+    NULL, N_("STYLE")},
+  { "gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+    N_("Gtk+ debugging flags to set"), N_("FLAGS")},
+  { "gtk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+    N_("Gtk+ debugging flags to unset"), N_("FLAGS")},
+  { "g-fatal-warnings", '\0', POPT_ARG_NONE, NULL, 0,
+    N_("Make all warnings fatal"), NULL},
+  { "gtk-module", '\0', POPT_ARG_STRING, NULL, 0,
+    N_("Load an additional Gtk module"), N_("MODULE")},
+  { NULL, '\0', 0, NULL, 0}
 };
 
 static void
@@ -239,6 +240,10 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
     gtk_rc_set_image_loader(imlib_image_loader);
     gnome_rc_parse(program_invocation_name);
     gnome_preferences_load();
+    if (gnome_preferences_get_disable_imlib_cache ()){
+      _gdk_imlib_data->cache.on_image = 0;
+      _gdk_imlib_data->cache.on_pixmap = 0;
+    }
     gnome_config_set_set_handler(set_handler,NULL);
     gnome_config_set_sync_handler(sync_handler,NULL);
     g_atexit(atexit_handler);

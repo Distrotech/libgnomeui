@@ -43,6 +43,7 @@ static GnomePreferences prefs =
   TRUE,               /* Toolbars show labels */
   TRUE,               /* Center dialogs over apps when possible */
   TRUE,               /* Menu items have icons in them */
+  TRUE,               /* Disable the Imlib cache */
   GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
   GTK_WIN_POS_CENTER, /* Put dialogs in center of screen. */
   GNOME_MDI_NOTEBOOK, /* Use notebook MDI mode. */
@@ -60,6 +61,7 @@ static GnomePreferences prefs =
 #define STATUSBAR "/Gnome/UI_StatusBar/"
 #define APP       "/Gnome/UI_GnomeApp/"
 #define MDI       "/Gnome/UI_MDI/"
+#define CACHE     "/Gnome/Cache/"
 
 /* ==================== GnomeDialog ===================== */
 
@@ -120,6 +122,7 @@ static const gchar * const dialog_positions [] = {
 #define TOOLBAR_LABELS_KEY         "Toolbar_labels"
 
 #define MENUS_HAVE_ICONS_KEY       "Menus_have_icons"
+#define DISABLE_IMLIB_CACHE_KEY    "Disable_Imlib_cache"
 
 /* =========== MDI ================================= */
 
@@ -270,6 +273,10 @@ gnome_preferences_load_custom(GnomePreferences *settings)
 					  NULL);
   settings->menus_have_icons = b;
 
+  b = gnome_config_get_bool_with_default (DISABLE_IMLIB_CACHE_KEY"=true",
+					  NULL);
+  settings->disable_imlib_cache = b;
+  
   gnome_config_pop_prefix();
   gnome_config_push_prefix(MDI);
 
@@ -336,7 +343,8 @@ gnome_preferences_save_custom(GnomePreferences *settings)
 			settings->toolbar_labels);
   gnome_config_set_bool(MENUS_HAVE_ICONS_KEY,
 			settings->menus_have_icons);
-
+  gnome_config_set_bool(DISABLE_IMLIB_CACHE_KEY,
+			settings->disable_imlib_cache);
   gnome_config_pop_prefix();
   gnome_config_push_prefix(MDI);
 
@@ -513,4 +521,16 @@ void
 gnome_preferences_set_menus_have_icons (int have_icons)
 {
 	prefs.menus_have_icons = have_icons ? TRUE : FALSE;
+}
+
+int
+gnome_preferences_get_disable_imlib_cache (void)
+{
+	return prefs.disable_imlib_cache;
+}
+
+void
+gnome_preferences_set_disable_imlib_cache (int disable_imlib_cache)
+{
+	prefs.disable_imlib_cache = disable_imlib_cache ? TRUE : FALSE;
 }

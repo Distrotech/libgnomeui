@@ -1,3 +1,10 @@
+1998-12-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-preferences.c: Control the imlib cache from here.
+
+	* gnome-init.c: Acknowledge the setting from gnome-preferences to
+	the imlib cache.
+
 Fri Dec 11 21:36:48 1998  Felix Bellaby  <felix@pooh.u-net.com>
 
 	* gnome-client.[ch] (gnome_client_save_any_dialog): more interact API

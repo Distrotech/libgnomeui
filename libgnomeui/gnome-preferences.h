@@ -34,6 +34,7 @@ struct _GnomePreferences {
   int toolbar_labels : 1;
   int dialog_centered : 1;
   int menus_have_icons : 1;
+  int disable_imlib_cache : 1;
   GtkWindowType dialog_type;
   GtkWindowPosition dialog_position;
   GnomeMDIMode mdi_mode;
@@ -109,6 +110,10 @@ void              gnome_preferences_set_property_box_button_apply (int v);
 /* Whether menu items have icons in them or not */
 int               gnome_preferences_get_menus_have_icons (void);
 void              gnome_preferences_set_menus_have_icons (int have_icons);
+
+/* Whether we want to disable the imlib cache or not */
+int               gnome_preferences_get_disable_imlib_cache (void);
+void              gnome_preferences_set_disable_imlib_cache (int disable_imlib_cache);
 
 END_GNOME_DECLS
 
