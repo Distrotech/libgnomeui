@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2003-01-10 12:00+0100\n"
+"POT-Creation-Date: 2003-01-19 05:02+0100\n"
 "PO-Revision-Date: 2003-01-10 22:03+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
@@ -401,7 +401,8 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Lỗi khi thử khởi động trình duyệt web mặc định.\n"
-"Vui lòng xem lại các thiết đặt trong phần 'Các ứng dụng ưa thích' của công cụ cấu hình."
+"Vui lòng xem lại các thiết đặt trong phần 'Các ứng dụng ưa thích' của công "
+"cụ cấu hình."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
