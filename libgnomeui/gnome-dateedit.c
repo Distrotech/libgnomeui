@@ -5,6 +5,7 @@
  * Author: Miguel de Icaza
  */
 #include <config.h>
+#include <string.h>
 #include <time.h>
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
@@ -18,14 +19,13 @@ enum {
 	LAST_SIGNAL
 };
 
-static GtkHBoxClass *parent_class;
 static gint date_edit_signals [LAST_SIGNAL] = { 0 };
 
 static void gnome_date_edit_init       (GnomeDateEdit *gde);
 static void gnome_date_edit_class_init (GnomeDateEditClass *class);
 
 guint
-gnome_date_edit_get_type ()
+gnome_date_edit_get_type (void)
 {
 	static guint date_edit_type = 0;
 
@@ -219,7 +219,6 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 {
 	struct tm *mytm;
 	char buffer [40];
-	char *ct;
 	
 	if (the_time == 0)
 		the_time = time (NULL);

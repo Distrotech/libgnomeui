@@ -1,3 +1,10 @@
+1998-04-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dateedit.c: #include <string.h>
+	Removed unused global variable parent_class.
+
+	* gnome-dateedit.h: Add prototype for gnome_date_edit_get_type().
+
 1998-04-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-dateedit.c (fill_time_popup): Make the top boundary inclusive

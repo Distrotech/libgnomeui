@@ -31,6 +31,7 @@ typedef struct {
 	void (*date_changed) (void *);
 } GnomeDateEditClass;
 
+guint     gnome_date_edit_get_type        (void);
 GtkWidget *gnome_date_edit_new            (time_t the_time);
 
 void      gnome_date_edit_set_time        (GnomeDateEdit *gde, time_t the_time);
