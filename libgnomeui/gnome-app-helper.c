@@ -67,7 +67,6 @@ char *alloca ();
 #include "gnome-stock.h"
 #include "gtkpixmapmenuitem.h"
 
-
 /* prototypes */
 static gint g_strncmp_ignore_char( gchar *first, gchar *second,
 				   gint length, gchar ignored );
@@ -716,12 +715,15 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	GtkWidget *pixmap;
 	char *i8l_label;
 	guint keyval;
-
+	gboolean use_gnome_libs_catalog;
+	
 	/* Translate configurable menu items to normal menu items. */
 
 	if ( uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE ) {
 	        gnome_app_ui_configure_configurable( uiinfo );
-	}
+		use_gnome_libs_catalog = 1;
+	} else
+		use_gnome_libs_catalog = 0;
 
 	/* Create the menu item */
 
@@ -783,7 +785,20 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	/* Don't use gettext on the empty string since gettext will map
 	 * the empty string to the header at the beginning of the .pot file. */
 
-	i8l_label = (uiinfo->label [0] == '\0') ? "" : _(uiinfo->label);
+	if (uiinfo->label [0] == '\0')
+		i8l_label = "";
+	else
+	{
+#ifdef ENABLE_NLS
+		if (use_gnome_libs_catalog)
+			i8l_label = dgettext (PACKAGE, uiinfo->label);
+		else
+			i8l_label = gettext (uiinfo->label);
+#else
+		i8l_label = uiinfo->label;
+#endif
+	}
+	
 	label = create_label (i8l_label, &keyval);
 	gtk_container_add (GTK_CONTAINER (uiinfo->widget), label);
 
