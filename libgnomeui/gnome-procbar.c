@@ -41,7 +41,7 @@ static gint gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e, GnomeP
 static void gnome_proc_bar_size_request (GtkWidget *w, GtkRequisition *r, GnomeProcBar *pb);
 static void gnome_proc_bar_finalize (GtkObject *o);
 static void gnome_proc_bar_setup_colors (GnomeProcBar *pb);
-static void gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val []);
+static void gnome_proc_bar_draw (GnomeProcBar *pb, const guint val []);
 static void gnome_proc_bar_destroy (GtkObject *obj);
 static gint gnome_proc_bar_timeout (gpointer data);
 
@@ -247,7 +247,7 @@ gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e,
 #define A (pb->bar->allocation)
 
 static void
-gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val [])
+gnome_proc_bar_draw (GnomeProcBar *pb, const guint val [])
 {
     unsigned tot = 0;
     gint i;
@@ -328,7 +328,7 @@ gnome_proc_bar_timeout (gpointer data)
  * Returns:
  */
 void
-gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
+gnome_proc_bar_set_values (GnomeProcBar *pb, const guint val [])
 {
     gint i;
     gint change = 0;

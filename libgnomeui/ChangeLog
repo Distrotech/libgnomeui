@@ -1,5 +1,7 @@
 1999-08-23  Herbert Valerio Riedel  <hvr@hvrlab.dhs.org>
 
+	* gnome-procbar.[ch] (gnome_proc_bar_set_values): made val[] const
+
 	* gtk-ted.[ch], gnome-spell.[ch], gnome-popup-help.[ch], 
 	gnome-pixmap-entry.[ch], gnome-number-entry.[ch], gnome-mdi.[ch],
 	gnome-mdi-generic-child.[ch], gnome-mdi-child.[ch], gnome-entry.[ch],

@@ -69,7 +69,7 @@ guint       gnome_proc_bar_get_type        (void);
 GtkWidget * gnome_proc_bar_new             (GtkWidget *label,
 					    gint n, GdkColor *colors,
 					    gint (*cb)());
-void        gnome_proc_bar_set_values      (GnomeProcBar *pb, unsigned val []);
+void        gnome_proc_bar_set_values      (GnomeProcBar *pb, const guint val []);
 void        gnome_proc_bar_set_orient      (GnomeProcBar *pb, gboolean vertical);
 void        gnome_proc_bar_start           (GnomeProcBar *pb, gint gtime, gpointer data);
 void        gnome_proc_bar_stop            (GnomeProcBar *pb);
