@@ -167,38 +167,24 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
                 title_prefix = _("Information");
-		s = GNOMEUIPIXMAPDIR "/gnome-info.png";
-		if (s) {
-                        pixmap = gtk_image_new_from_file (s);
-                        g_free(s);
-                }
+		pixmap = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_DIALOG);
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
                 title_prefix = _("Warning");
-		s = GNOMEUIPIXMAPDIR "/gnome-warning.png";
-		if (s) {
-                        pixmap = gtk_image_new_from_file (s);
-                        g_free(s);
-                }
+		pixmap = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
+		
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
                 title_prefix = _("Error");
-		s = GNOMEUIPIXMAPDIR "/gnome-error.png";
-		if (s) {
-                        pixmap = gtk_image_new_from_file (s);
-                        g_free(s);
-                }
+		pixmap = gtk_image_new_from_stock (GTK_STOCK_DIALOG_ERROR, GTK_ICON_SIZE_DIALOG);
+
 	}
 	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
                 title_prefix = _("Question");
-		s = GNOMEUIPIXMAPDIR "/gnome-question.png";
-		if (s) {
-                        pixmap = gtk_image_new_from_file (s);
-                        g_free(s);
-                }
+		pixmap = gtk_image_new_from_stock (GTK_STOCK_DIALOG_QUESTION, GTK_ICON_SIZE_DIALOG);
 	}
 	else
 	{
@@ -223,15 +209,6 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 			    hbox, TRUE, TRUE, 10);
 	gtk_widget_show (hbox);
 
-	if (pixmap == NULL) {
-        	if (pixmap) gtk_widget_destroy(pixmap);
-		s = GNOMEUIPIXMAPDIR "/gnome-default-dlg.png";
-         	if (s) {
-			pixmap = gtk_image_new_from_file (s);
-                        g_free(s);
-                } else
-			pixmap = NULL;
-	}
 	if (pixmap) {
 		gtk_box_pack_start (GTK_BOX(hbox), 
 				    pixmap, FALSE, TRUE, 0);

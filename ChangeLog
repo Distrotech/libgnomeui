@@ -1,3 +1,9 @@
+2001-09-18  Anders Carlsson  <andersca@gnu.org>
+
+	* COPYING.LIB: Add this file.
+
+	* Makefile.am (EXTRA_DIST): Add COPYING.LIB
+
 2001-09-08  jacob berkman  <jacob@ximian.com>
 
 	* configure.in: fix the check a bit.  stoopid m4.
