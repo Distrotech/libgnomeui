@@ -108,7 +108,7 @@ gnome_message_box_new (const gchar           *message,
 	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
 		gtk_window_set_title (GTK_WINDOW (message_box), _("Information"));
-		s = gnome_pixmap_file("gnome-info.png");
+		s = gnome_unconditional_pixmap_file("gnome-info.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file(s);
                         g_free(s);
@@ -117,7 +117,7 @@ gnome_message_box_new (const gchar           *message,
 	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
 		gtk_window_set_title (GTK_WINDOW (message_box), _("Warning"));
-		s = gnome_pixmap_file("gnome-warning.png");
+		s = gnome_unconditional_pixmap_file("gnome-warning.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file(s);
                         g_free(s);
@@ -126,7 +126,7 @@ gnome_message_box_new (const gchar           *message,
 	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
 		gtk_window_set_title (GTK_WINDOW (message_box), _("Error"));
-		s = gnome_pixmap_file("gnome-error");
+		s = gnome_unconditional_pixmap_file("gnome-error.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file(s);
                         g_free(s);
@@ -135,7 +135,7 @@ gnome_message_box_new (const gchar           *message,
 	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
 		gtk_window_set_title (GTK_WINDOW (message_box), _("Question"));
-		s = gnome_pixmap_file("gnome-question.png");
+		s = gnome_unconditional_pixmap_file("gnome-question.png");
 		if (s) {
                         pixmap = gnome_pixmap_new_from_file(s);
                         g_free(s);
@@ -154,7 +154,7 @@ gnome_message_box_new (const gchar           *message,
 	if ( (pixmap == NULL) ||
 	     (GNOME_PIXMAP(pixmap)->pixmap == NULL) ) {
         	if (pixmap) gtk_widget_destroy(pixmap);
-		s = gnome_pixmap_file("gnome-default.png");
+		s = gnome_unconditional_pixmap_file ("gnome-default.png");
          	if (s) {
 			pixmap = gnome_pixmap_new_from_file(s);
                         g_free(s);
