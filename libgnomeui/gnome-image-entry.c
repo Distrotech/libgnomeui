@@ -114,7 +114,7 @@ gnome_image_entry_new_icon_entry (void)
 	GnomeSelector *selector;
 
 	selector = g_object_new (gnome_image_entry_component_get_type (),
-				 "is_pixmap_entry", FALSE);
+				 "is_pixmap_entry", FALSE, NULL);
 
 	return gnome_image_entry_new_from_selector (BONOBO_OBJREF (selector),
 						    CORBA_OBJECT_NIL);
@@ -127,7 +127,7 @@ gnome_image_entry_new_pixmap_entry (guint preview_x, guint preview_y)
 
 	selector = g_object_new (gnome_image_entry_component_get_type (),
 				 "preview_x", preview_x, "preview_y", preview_y,
-				 "is_pixmap_entry", TRUE);
+				 "is_pixmap_entry", TRUE, NULL);
 
 	return gnome_image_entry_new_from_selector (BONOBO_OBJREF (selector),
 						    CORBA_OBJECT_NIL);
