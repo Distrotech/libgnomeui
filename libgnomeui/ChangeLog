@@ -1,3 +1,8 @@
+1998-11-23  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appbar.c: Improve the docs a bit (mostly insignificant,
+	one mistake fixed).
+
 Mon Nov 23 17:11:26 EST 1998  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-animator.c, gnome-app.c, gnome-appbar.c: Documented.

@@ -239,13 +239,21 @@ gnome_appbar_init (GnomeAppBar *ab)
  * Create a new GNOME application status bar.  If @has_progress is
  * %TRUE, a small progress bar widget will be created, and placed on the
  * left side of the appbar.  If @has_status is %TRUE, a status bar,
- * possible an editable one, is created.
+ * possibly an editable one, is created.
  *
- * @interactivity declares the level of interactivity required between
- * the user and the app.  If it is set to %GNOME_PREFERENCES_NEVER, the
- * status bar is a label.  If it is set to %GNOME_PREFERENCES_USER or
- * %GNOME_PREFERENCES_ALWAYS the status bar is created as a text entry
- * widget.
+ * @interactivity determines whether the appbar is an interactive
+ * "minibuffer" or just a status bar.  If it is set to
+ * %GNOME_PREFERENCES_NEVER, it is never interactive.  If it is set to
+ * %GNOME_PREFERENCES_USER we respect user preferences from
+ * ui-properties. If it's %GNOME_PREFERENCES_ALWAYS we are interactive
+ * whether the user likes it or not. Basically, if your app supports
+ * both interactive and not (for example, if you use the
+ * gnome-app-util interfaces), you should use
+ * %GNOME_PREFERENCES_USER. Otherwise, use the setting you
+ * support. Please note that "interactive" mode is not functional now;
+ * GtkEntry is inadequate and so a custom widget will be written
+ * eventually.
+ *
  *
  * Returns:  Pointer to new GNOME appbar widget.
  **/
@@ -268,7 +276,7 @@ gnome_appbar_new (gboolean has_progress,
  * @ab: Pointer to GNOME appbar object.
  * @has_progress: %TRUE if appbar needs progress bar widget.
  * @has_status: %TRUE if appbar needs status bar widget.
- * @interactivity: Level of user activity required.
+ * @interactivity: See gnome_appbar_new() explanation.
  *
  * Description:
  * For use to bindings in languages other than C. Don't use.
@@ -630,7 +638,8 @@ gnome_appbar_set_progress(GnomeAppBar *ab,
  * manipulated further.
  *
  * Returns:
- * Pointer to appbar's progress bar object.
+ * Pointer to appbar's progress bar object. May be NULL if the appbar
+ * has no progress object.
  **/
 
 GtkProgress* 
