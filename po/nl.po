@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-07-07 13:11+0200\n"
 "PO-Revision-Date: 2002-05-28 01:50+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -142,6 +142,7 @@ msgstr "%s-info"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Bestand"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hulp"
 
@@ -307,7 +309,7 @@ msgstr "_Plakken"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "Vanaf het klembord plakken"
+msgstr "Plakken vanuit klembord"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
@@ -330,7 +332,7 @@ msgstr "Laatste bewerking ongedaan maken"
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "He_rhalen"
+msgstr "O_pnieuw"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
@@ -389,13 +391,13 @@ msgstr "Verander de instellingen van het programma"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Over dit programma"
+msgstr "Info over deze toepassing"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
@@ -420,7 +422,7 @@ msgstr "Een nieuw venster creëren"
 msgid "_Close This Window"
 msgstr "Dit venster _sluiten"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Het huidige venster sluiten"
 
@@ -1371,5 +1373,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Bekijk de 'GNOME Application Crash'-pagina voor meer informatie"
 
-#~ msgid "Exit the test"
-#~ msgstr "Test afsluiten"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Test afsluiten"
