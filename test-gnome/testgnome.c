@@ -88,8 +88,10 @@ verb_HelpAbout_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname
 {
 	GtkWidget *about = gnome_about_new ("GNOME Test Program", VERSION,
 					    "(C) 1998-2001 The Free Software Foundation",
-					    authors,
 					    "Program to display GNOME functions.",
+					    authors,
+					    NULL,
+					    NULL,
 					    NULL);
 	gtk_widget_show (about);
 

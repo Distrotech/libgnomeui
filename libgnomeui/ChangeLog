@@ -1,3 +1,10 @@
+2001-08-01  Anders Carlsson  <andersca@codefactory.se>
+
+	* gnome-about.c: Empty stub for API functions until I
+	can check in the real implementation.
+
+	* gnome-about.h: Add new API since it's July 32nd today :)
+
 2001-08-01  Michael Meeks  <michael@ximian.com>
 
 	* oafgnome.h: port to bonobo-activation.

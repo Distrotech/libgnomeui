@@ -1,3 +1,7 @@
+2001-08-01  Anders Carlsson  <andersca@codefactory.se>
+
+	* testgnome.c (verb_HelpAbout_cb): Update for new API.
+
 2001-07-30  Joe Shaw  <joe@ximian.com>
 
 	* testgnome.c (create_newwin): Get this building again by adding
