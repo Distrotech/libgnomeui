@@ -1,3 +1,5 @@
+/* WARNING ____ IMMATURE API ____ liable to change */
+
 /* GNOME GUI Library
  * Copyright (C) 1998 the Free Software Foundation
  *
