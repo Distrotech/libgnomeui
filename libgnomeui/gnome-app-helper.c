@@ -1276,24 +1276,26 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 		path_len = name_end - path;
 	
 	if (path_len == 0) {
-		*pos = 0;
+    if(children && GTK_IS_TEAROFF_MENU_ITEM(children->data))
+      /* consider the position after the tear off item as the topmost one. */
+      *pos = 1;
+    else
+      *pos = 0;
 		return parent;
 	}
 	
 	p = 0;
-	
-	while( children ) {
+
+	while(children) {
+		item = GTK_BIN(children->data);
+    children = children->next;
 		label = NULL;
 		p++;
-		item = GTK_BIN(children->data);
 		
-		if(!item->child) {
-			/* this is a separator, right? */
-			if (GTK_IS_TEAROFF_MENU_ITEM (item))
-				label = NULL;
-			else
-				label = "<Separator>";
-		}
+    if(GTK_IS_TEAROFF_MENU_ITEM(item))
+      label = NULL;
+		else if(!item->child)          /* this is a separator, right? */
+      label = "<Separator>";
 		else if(GTK_IS_LABEL(item->child))  /* a simple item with a 
 						       label */
 			label = GTK_LABEL (item->child)->label;
@@ -1324,8 +1326,6 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 			else
 				return NULL;
 		}
-		
-		children = g_list_next(children);
 	}
 	
 	return NULL;

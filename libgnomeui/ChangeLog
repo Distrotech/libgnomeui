@@ -1,3 +1,8 @@
+1998-12-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_find_menu_pos): consider the
+	position after the tear off item to be the topmost one.
+
 1998-12-17  Andrew T. Veliath  <andrewtv@usa.net>
 
 	* gnome-app-helper.c (gnome_app_fill_menu_custom): Prepend a
