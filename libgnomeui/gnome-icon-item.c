@@ -591,14 +591,16 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 				    xofs + 1, yofs + 1,
 				    w - 2, h - 2);
 
-	if (iti->focused && ! iti->editing) {
+	if (GTK_WIDGET_HAS_FOCUS (widget) && iti->focused && ! iti->editing) {
 		GdkRectangle r;
 
 		r.x = xofs;
 		r.y = yofs;
 		r.width = w - 1;
 		r.height = h - 1;
-		gtk_paint_focus (style, drawable, state, &r, widget, NULL,
+		gtk_paint_focus (style, drawable,
+				 iti->selected ? GTK_STATE_SELECTED: GTK_STATE_NORMAL,
+				 &r, widget, NULL,
 				 xofs, yofs, w - 1, h - 1);
 #if 0
 		gtk_draw_focus (style,

@@ -1,3 +1,12 @@
+2002-05-17  Anders Carlsson  <andersca@gnu.org>
+
+	* libgnomeui/gnome-icon-item.c: (gnome_icon_text_item_draw):
+	Draw focus correctly.
+	
+	* libgnomeui/gnome-icon-list.c: 
+	Select the first item on focus-in, also make cursor handling a bit
+	more sane. Fixes #81142, reported by Glynn Foster.
+	
 2002-05-17  Mark McLoughlin  <mark@skynet.ie>
 
 	* libgnomeui/gnome-ui-init.c: (libgnomeui_rc_parse): since

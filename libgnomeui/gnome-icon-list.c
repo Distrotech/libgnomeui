@@ -1579,36 +1579,29 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 		if (priv->focus_icon + 1 < priv->icons &&
 		    priv->focus_icon % items_per_line != (items_per_line - 1))
 			new_focus_icon++;
-		else
-			return;
 		break;
 
 	case GTK_DIR_LEFT:
 		if (priv->focus_icon - 1 >= 0 &&
 		    priv->focus_icon % items_per_line != 0)
 			new_focus_icon--;
-		else
-			return;
 		break;
 
 	case GTK_DIR_DOWN:
 		if (priv->focus_icon + items_per_line < priv->icons)
 			new_focus_icon += items_per_line;
-		else
-			return;
 		break;
 
 	case GTK_DIR_UP:
 		if (priv->focus_icon - items_per_line >= 0)
 			new_focus_icon -= items_per_line;
-		else
-			return;
 		break;
 	default:
 		break;
 	}
-
-	if (clear_selection) {
+	
+	if (clear_selection &&
+	    g_array_index (priv->icon_list, Icon *, new_focus_icon)->selected == FALSE) {
 		gnome_icon_list_unselect_all (gil);
 		gnome_icon_list_select_icon (gil, new_focus_icon);
 	}
@@ -2025,8 +2018,16 @@ gnome_icon_list_constructor (GType                  type,
 static gint
 gil_focus_in (GtkWidget *widget, GdkEventFocus *event)
 {
+	Gil *gil;
+
+	gil = GIL (widget);
+	
 	GTK_WIDGET_SET_FLAGS (widget, GTK_HAS_FOCUS);
 
+	if (gil->_priv->icons > 0 && gil->_priv->focus_icon == -1) {
+		gnome_icon_list_focus_icon (gil, 0);
+	}
+	
 	gtk_widget_queue_draw (widget);
 
 	return FALSE;
