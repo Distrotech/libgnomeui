@@ -1,3 +1,12 @@
+2000-05-05  Miguel de Icaza  <miguel@helixcode.com>
+
+	* gnome-canvas.c (gnome_canvas_new_aa): New policy.  Most of the
+	problems on the gnome-canvas-aa can be fixed.  So instead of
+	scaring off people with the AA canvas, we will address their needs
+	as the bug reports arrive.  
+
+	Discussed this with Federico today.
+
 2000-05-04  Jacob Berkman  <jacob@helixcode.com>
 
 	* gnome-window-icon.[ch]: wrapper for gdk_window_set_icon() which
