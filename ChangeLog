@@ -1,3 +1,7 @@
+2001-09-19  Darin Adler  <darin@bentspoon.com>
+
+	* .cvsignore: Ignore generated sgml directory.
+
 2001-09-18  Anders Carlsson  <andersca@gnu.org>
 
 	* COPYING.LIB: Add this file.
