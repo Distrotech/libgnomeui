@@ -6,18 +6,20 @@
 #
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Pablo Saratxaga <srtxg@chanae.alphanet.ch> 2001-2003
+# Pablo Saratxaga <pablo@walon.org>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-01-14 15:27+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-07-07 13:11+0200\n"
+"PO-Revision-Date: 2003-07-07 23:46+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -124,8 +126,7 @@ msgid "Translator credits"
 msgstr "Gråces po les ratourneus"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come "
 "ratournåve."
@@ -145,6 +146,7 @@ msgstr "Å dfait di %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitchî"
 
@@ -202,6 +204,7 @@ msgid "_Game"
 msgstr "_Djeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aidance"
 
@@ -392,11 +395,11 @@ msgstr "Apontyî li programe"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "Å _dfait"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Å dfait di ç' programe chal"
 
@@ -423,7 +426,7 @@ msgstr "Fé on novea purnea"
 msgid "_Close This Window"
 msgstr "_Clôre ci purnea chal"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Clôre ci purnea chal"
 
@@ -841,7 +844,7 @@ msgstr "Mostrer li boton «Aidance»"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr ""
+msgstr "ID del istwere"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -853,7 +856,7 @@ msgstr "L' intrêye GTK"
 
 #: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
-msgstr ""
+msgstr "ID del istwere"
 
 #: libgnomeui/gnome-file-entry.c:221
 msgid ""
@@ -953,8 +956,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
+msgstr "Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1089,6 +1091,8 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
+"Indintifiant unike pol intrêye del imådjete.  Çouchal serè-st eployî po "
+"schaper li djivêye del istwere."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1108,13 +1112,15 @@ msgstr "No do fitchî a esse håyné po l' intrêye del imådjete."
 
 #: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
-msgstr ""
+msgstr "Purnea di tchoezixhaedje"
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"Purnea di tchoezixhaedje des imådjetes. Vos ploz eployî cisse prôpieté po-z aveur li "
+"purnea GtkDialog si vos avoz mezåjhe di candjî ou dmander ene di ses prôpietés."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
@@ -1169,8 +1175,7 @@ msgstr "Chal vos dvoz mete li no do ridant ki les imådjetes sont-st å dvins."
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr ""
-"GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
+msgstr "GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1203,11 +1208,11 @@ msgstr "Messaedje"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "No d' _uzeu:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Sicret:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1276,7 +1281,7 @@ msgstr "Ritrait"
 
 #: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr "Disfé li Ritrait"
+msgstr "Disfé li rtrait"
 
 #: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
@@ -1298,7 +1303,7 @@ msgstr "Livreye di l' eterface grafike di GNOME"
 #: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"I gn a yeu pus d' ene aroke di segmentåcion; dji n' pou mostrer li purnea "
+"I gn a yeu pus d' ene aroke di segmintåcion; dji n' pou mostrer li purnea "
 "d' aroke\n"
 
 #. Eeeek! Can't show dialog
@@ -1307,7 +1312,7 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-"I gn a yeu pus d' ene aroke di segmentåcion!\n"
+"I gn a yeu pus d' ene aroke di segmintåcion!\n"
 "Dji n' pou mostrer li purnea d' aroke\n"
 
 #: libgnomeui/gnome_segv.c:100
@@ -1319,7 +1324,7 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"Li Manaedjeu di Session di GNOME (processus lº %d) s' est crashé\n"
+"Li Manaedjeu di Session di GNOME (processus lº %d) s' a crashé\n"
 "a cåze d' ene aroke moirt (%s).\n"
 "Cwand vos alez clôre ci purnea chal, tos les ôtes programes et vosse session "
 "vont esse cloyous eto.\n"
@@ -1333,7 +1338,7 @@ msgid ""
 "(%s)"
 msgstr ""
 "Li programe «%s» (processus lº %d)\n"
-"s' est crashé a cåze d' ene aroke moirt.\n"
+"s' a crashé a cåze d' ene aroke moirt.\n"
 "(%s)"
 
 #: libgnomeui/gnome_segv.c:122
@@ -1356,8 +1361,10 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Loukîz li pådje GNOME Application Crash po pus d' informåcion"
 
-#~ msgid "Exit the test"
-#~ msgstr "Moussî foû do sayaedje"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Moussî foû do sayaedje"
 
 #~ msgid "_Credits"
 #~ msgstr "_Gråces"
+
