@@ -58,6 +58,7 @@ static void gnome_help_view_set_style_popup(gpointer dummy, GnomeHelpView *help_
 static void gnome_help_view_set_style_embedded(gpointer dummy, GnomeHelpView *help_view);
 static void gnome_help_view_set_style_browser(gpointer dummy, GnomeHelpView *help_view);
 static gint popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data); 
+static gint gnome_help_view_process_event(GtkWidget *btn, GdkEvent *event, GnomeHelpView *help_view);
 
 static GnomeUIInfo popup_style_menu_items[] = {
   GNOMEUIINFO_RADIOITEM("_Popup", "Show help in temporary popup windows", gnome_help_view_set_style_popup, NULL),
@@ -634,6 +635,8 @@ gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path, const
   char *file_type, *file_path;
   GnomeHelpViewStyle style;
 
+  g_message("show_help: %s, %s", help_path, help_type);
+
   style = help_view->style;
   if(!help_type || strcmp(help_type, "popup"))
     style = GNOME_HELP_BROWSER;
@@ -693,7 +696,7 @@ gnome_help_view_show_help_for(GnomeHelpView *help_view, GtkWidget *widget)
     gnome_help_view_show_help(help_view, help_path, "popup");
   else
     gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
-			     gtk_widget_get_toplevel(widget));
+			     GTK_WINDOW(gtk_widget_get_toplevel(widget)));
 }
 
 void
@@ -701,9 +704,6 @@ gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation orienta
 {
   help_view->orientation = orientation;
 
-  /*
-    g_print("set_orientation %s\n", (orientation == GTK_ORIENTATION_VERTICAL)?"GTK_ORIENTATION_VERTICAL":"GTK_ORIENTATION_HORIZONTAL");
-  */
   switch(orientation)
     {
     case GTK_ORIENTATION_VERTICAL:
@@ -729,31 +729,26 @@ gnome_help_view_process_event(GtkWidget *btn, GdkEvent *event, GnomeHelpView *he
   GdkEventButton *evb;
   GtkWidget *chosen_widget;
 
-  if(event->type == GDK_BUTTON_PRESS)
-    return TRUE;
+  gtk_signal_emit_stop_by_name(GTK_OBJECT(btn), "event");
 
   if(event->type != GDK_BUTTON_RELEASE)
-    return FALSE;
+    return TRUE;
 
   evb = (GdkEventButton *)event;
   gtk_signal_disconnect_by_func(GTK_OBJECT(btn), GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
   gtk_grab_remove(btn);
-  gdk_pointer_ungrab(GDK_CURRENT_TIME);
+  gdk_pointer_ungrab(evb->time);
   gdk_flush();
-
-  g_message("Ungrabbed");
 
   if(evb->window)
     {
       gdk_window_get_user_data(evb->window, (gpointer *)&chosen_widget);
 
-      g_message("We got a chosen widget of %p", chosen_widget);
-
       if(chosen_widget)
 	gnome_help_view_show_help_for(help_view, chosen_widget);
-      else
+      else if(chosen_widget != help_view->btn_help)
 	gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
-				 gtk_widget_get_toplevel(btn));
+				 gtk_widget_get_toplevel(help_view->btn_help));
     }
 
   return TRUE;
@@ -762,11 +757,11 @@ gnome_help_view_process_event(GtkWidget *btn, GdkEvent *event, GnomeHelpView *he
 static void
 gnome_help_view_select_help(GtkWidget *btn, GnomeHelpView *help_view)
 {
-  gtk_signal_connect(GTK_OBJECT(btn), "event", GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
-  gtk_grab_add(btn); /* Use the button as a source of incoming events */
   if(!choose_cursor)
     choose_cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
-  gdk_pointer_grab(btn->window, FALSE, GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK, NULL, choose_cursor, GDK_CURRENT_TIME);
+  gtk_signal_connect(GTK_OBJECT(btn), "event", gnome_help_view_process_event, help_view);
+  gtk_grab_add(btn);
+  gdk_pointer_grab(btn->window, TRUE, GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK, NULL, choose_cursor, GDK_CURRENT_TIME);
 }
 
 static void
