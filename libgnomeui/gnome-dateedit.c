@@ -542,7 +542,7 @@ gnome_date_edit_new (time_t the_time, int show_time, int use_24_format)
  * Return value: the newly-created date editor widget.
  **/
 GtkWidget *
-gnome_date_edit_new_flags (time_t the_time, int flags)
+gnome_date_edit_new_flags (time_t the_time, GnomeDateEditFlags flags)
 {
 	GnomeDateEdit *gde;
 
@@ -612,7 +612,7 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
  * Changes the display flags on an existing date editor widget.
  **/
 void
-gnome_date_edit_set_flags (GnomeDateEdit *gde, int flags)
+gnome_date_edit_set_flags (GnomeDateEdit *gde, GnomeDateEditFlags flags)
 {
 	g_return_if_fail (gde != NULL);
 	g_return_if_fail (GNOME_IS_DATE_EDIT (gde));

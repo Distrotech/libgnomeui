@@ -1,3 +1,9 @@
+1999-02-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dateedit.c (gnome_date_edit_new_flags): 
+	(gnome_date_edit_set_flags): Changed int to GnomeDateEditFlags,
+	per James Henstridge's request.
+
 1999-02-05  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-dock.c (drag_check): fixed (hopefully) the docking

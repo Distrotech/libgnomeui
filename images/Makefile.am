@@ -6,3 +6,5 @@ pixmap_DATA = \
 	gnome-question.png	\
 	gnome-warning.png	\
 	gnome-default.png
+
+EXTRA_DIST=$(pixmap_DATA)
