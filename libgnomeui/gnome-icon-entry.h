@@ -103,6 +103,8 @@ void       gnome_icon_entry_set_browse_dialog_title(GnomeIconEntry *ientry,
 						    const gchar *browse_dialog_title);
 void       gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
 					   const gchar *history_id);
+void       gnome_icon_entry_set_max_saved (GnomeIconEntry *ientry,
+					   guint max_saved);
 
 GtkWidget *gnome_icon_entry_pick_dialog	(GnomeIconEntry *ientry);
 

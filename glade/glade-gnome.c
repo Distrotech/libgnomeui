@@ -696,9 +696,7 @@ static void
 icon_entry_set_max_saved (GladeXML *xml, GtkWidget *w,
 			  const char *name, const char *value)
 {
-    entry_set_max_saved (xml,
-			 gnome_icon_entry_gnome_entry (GNOME_ICON_ENTRY (w)),
-			 name, value);
+    gnome_icon_entry_set_max_saved (GNOME_ICON_ENTRY (w), INT (value));
 }
 
 static void

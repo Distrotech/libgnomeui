@@ -1250,6 +1250,28 @@ gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
 		      NULL);
 }
 
+/**
+ * gnome_icon_entry_set_max_saved:
+ * @ientry: the GnomeIconEntry to work with
+ * @max_saved: the maximum number of saved entries
+ *
+ * Description:  Set the max_saved of the entry in the browse dialog
+ *
+ * Returns:
+ **/
+void
+gnome_icon_entry_set_max_saved(GnomeIconEntry *ientry,
+			       guint max_saved)
+{
+	GtkWidget *gentry;
+
+	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+
+	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->_priv->fentry));
+	gnome_entry_set_max_saved (GNOME_ENTRY (gentry), max_saved);
+}
+
+
 /* DEPRECATED routines left for compatibility only, will disapear in
  * some very distant future */
 
