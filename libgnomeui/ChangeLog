@@ -1,3 +1,7 @@
+2001-09-23  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* .cvsignore: Ignore gnome_segv2 binary.
+
 2001-09-19  Ariel Rios  <ariel@gnu.org>
 
         * gnome-entry.c (check_for_duplicates):  Cast the
