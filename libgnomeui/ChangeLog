@@ -1,3 +1,8 @@
+Mon Jan 17 01:38:21 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: don't reduce stack on unary functions, a patch
+	  from "W. Adam Foran" <waforan@pathcom.com>
+
 Sun Jan 16 02:45:10 2000  George Lebl <jirka@5z.com>
 
 	* gnome-ditem-edit.[ch]: update for the new gnome-ditem stuff and make
