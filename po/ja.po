@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.108.0\n"
-"POT-Creation-Date: 2002-01-16 01:22+0100\n"
-"PO-Revision-Date: 2001-12-23 23:56+0900\n"
+"POT-Creation-Date: 2002-01-27 00:45+0900\n"
+"PO-Revision-Date: 2002-01-27 00:54+0900\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -16,215 +16,211 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. Authors
-#: libgnomeui/gnome-about.c:95
+#: libgnomeui/gnome-about.c:94
 msgid "Author"
 msgstr "作者"
 
-#: libgnomeui/gnome-about.c:95 libgnomeui/gnome-about.c:271
+#: libgnomeui/gnome-about.c:94 libgnomeui/gnome-about.c:270
 msgid "Authors"
 msgstr "作者一覧"
 
-#: libgnomeui/gnome-about.c:119
+#: libgnomeui/gnome-about.c:118
 msgid "Documenter"
 msgstr "文書著作者"
 
-#: libgnomeui/gnome-about.c:119 libgnomeui/gnome-about.c:282
+#: libgnomeui/gnome-about.c:118 libgnomeui/gnome-about.c:281
 msgid "Documenters"
 msgstr "文書著作者"
 
-#: libgnomeui/gnome-about.c:147 libgnomeui/gnome-about.c:294
+#: libgnomeui/gnome-about.c:146 libgnomeui/gnome-about.c:293
 msgid "Translator credits"
 msgstr "翻訳者クレジット"
 
-#: libgnomeui/gnome-about.c:241
+#: libgnomeui/gnome-about.c:240
 msgid "Program name"
 msgstr "プログラム名"
 
-#: libgnomeui/gnome-about.c:242
+#: libgnomeui/gnome-about.c:241
 msgid "The name of the program"
 msgstr "プログラムの名称"
 
-#: libgnomeui/gnome-about.c:249
+#: libgnomeui/gnome-about.c:248
 msgid "Program version"
 msgstr "プログラム バージョン"
 
-#: libgnomeui/gnome-about.c:250
+#: libgnomeui/gnome-about.c:249
 msgid "The version of the program"
 msgstr "プログラムのバージョン"
 
-#: libgnomeui/gnome-about.c:256
+#: libgnomeui/gnome-about.c:255
 msgid "Copyright string"
 msgstr "著作権文字列"
 
-#: libgnomeui/gnome-about.c:257
+#: libgnomeui/gnome-about.c:256
 msgid "Copyright information for the program"
 msgstr "プログラムの著作権情報"
 
-#: libgnomeui/gnome-about.c:264
+#: libgnomeui/gnome-about.c:263
 msgid "Comments string"
 msgstr "コメント文字列"
 
-#: libgnomeui/gnome-about.c:265
+#: libgnomeui/gnome-about.c:264
 msgid "Comments about the program"
 msgstr "プログラムについてのコメント"
 
-#: libgnomeui/gnome-about.c:272
+#: libgnomeui/gnome-about.c:271
 msgid "List of authors of the programs"
 msgstr "プログラムの作者の一覧"
 
-#: libgnomeui/gnome-about.c:274
+#: libgnomeui/gnome-about.c:273
 msgid "Author entry"
 msgstr "作者エントリ"
 
-#: libgnomeui/gnome-about.c:275
+#: libgnomeui/gnome-about.c:274
 msgid "A single author entry"
 msgstr "単一作者のエントリ"
 
-#: libgnomeui/gnome-about.c:283
+#: libgnomeui/gnome-about.c:282
 msgid "List of people documenting the program"
 msgstr "プロウラムの文書化を行った人の一覧"
 
-#: libgnomeui/gnome-about.c:285
+#: libgnomeui/gnome-about.c:284
 msgid "Documenter entry"
 msgstr "文書著作者エントリ"
 
-#: libgnomeui/gnome-about.c:286
+#: libgnomeui/gnome-about.c:285
 msgid "A single documenter entry"
 msgstr "単一の文書著作者のエントリ"
 
-#: libgnomeui/gnome-about.c:295
+#: libgnomeui/gnome-about.c:294
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "翻訳者のクレジット。この文字列は翻訳可能としてマークすべきです"
 
-#: libgnomeui/gnome-about.c:302 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:301 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "ロゴ"
 
-#: libgnomeui/gnome-about.c:303
+#: libgnomeui/gnome-about.c:302
 msgid "A logo for the about box"
 msgstr "情報ダイアログのロゴ"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:365
 #, c-format
 msgid "About %s"
 msgstr "%s について"
 
 #: libgnomeui/gnome-appbar.c:762
-#, fuzzy
 msgid "Has Progress"
-msgstr "経過"
+msgstr ""
 
 #: libgnomeui/gnome-appbar.c:763
-#, fuzzy
 msgid "Create a progress widget."
-msgstr "新しいウインドウを開く"
+msgstr ""
 
 #: libgnomeui/gnome-appbar.c:770
 msgid "Has Status"
-msgstr ""
+msgstr "ステータスあり"
 
 #: libgnomeui/gnome-appbar.c:771
-#, fuzzy
 msgid "Create a status widget."
-msgstr "新しいウインドウを開く"
+msgstr "ステータスウィジェットを作成する"
 
 #: libgnomeui/gnome-appbar.c:778
 msgid "Interactivity"
-msgstr ""
+msgstr "応答性"
 
 #: libgnomeui/gnome-appbar.c:779
 msgid "Level of user activity required."
-msgstr ""
+msgstr "必要とされるユーザのアクティビティのレベル"
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:832
 msgid "Specify session management ID"
 msgstr "セッションマネージメント ID の指定"
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:832
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:838
+#: libgnomeui/gnome-client.c:835
 msgid "Specify prefix of saved configuration"
 msgstr "設定を保存する際のプレフィクスを指定する"
 
-#: libgnomeui/gnome-client.c:838
+#: libgnomeui/gnome-client.c:835
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:841
+#: libgnomeui/gnome-client.c:838
 msgid "Disable connection to session manager"
 msgstr "セッションマネージャと接続しない"
 
-#: libgnomeui/gnome-client.c:947
+#: libgnomeui/gnome-client.c:944
 msgid "Session management"
 msgstr "セッション管理"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2478
 msgid "Cancel Logout"
 msgstr "ログアウトをキャンセル"
 
 #: libgnomeui/gnome-color-picker.c:404
 msgid "Received invalid color data\n"
-msgstr ""
+msgstr "おかしな色データを受けとりました\n"
 
 #: libgnomeui/gnome-color-picker.c:468
 msgid "Pick a color"
 msgstr "色の選択"
 
-#: libgnomeui/gnome-dateedit.c:436
+#: libgnomeui/gnome-dateedit.c:435
 msgid "Time"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:437
-#, fuzzy
+#: libgnomeui/gnome-dateedit.c:436
 msgid "The time currently selected"
-msgstr "現在のファイルを保存"
+msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:449
+#: libgnomeui/gnome-dateedit.c:448
 msgid "DateEdit Flags"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:450
+#: libgnomeui/gnome-dateedit.c:449
 msgid "Flags for how DateEdit looks"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:459
+#: libgnomeui/gnome-dateedit.c:458
 msgid "Lower Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:460
+#: libgnomeui/gnome-dateedit.c:459
 msgid "Lower hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:470
+#: libgnomeui/gnome-dateedit.c:469
 msgid "Upper Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:471
+#: libgnomeui/gnome-dateedit.c:470
 msgid "Upper hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:480
 msgid "Initial Time"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:482
+#: libgnomeui/gnome-dateedit.c:481
 msgid "The initial time"
 msgstr ""
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:728
+#: libgnomeui/gnome-dateedit.c:727
 msgid "Calendar"
 msgstr "カレンダー"
 
-#: libgnomeui/gnome-dateedit.c:960
+#: libgnomeui/gnome-dateedit.c:959
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-font-picker.c:155
 msgid "Title"
 msgstr "タイトル"
 
@@ -271,15 +267,15 @@ msgstr ""
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr ""
+msgstr "背景色"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr ""
+msgstr "背景の色"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr ""
+msgstr "GdkColor としての背景の色"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
@@ -292,15 +288,15 @@ msgstr ""
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
-msgstr ""
+msgstr "ロゴ背景色"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
-msgstr ""
+msgstr "ロゴの背景の色"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
-msgstr ""
+msgstr "GdkColor としてのロゴの背景の色"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
@@ -312,11 +308,11 @@ msgstr ""
 
 #: libgnomeui/gnome-druid.c:148
 msgid "Show Finish"
-msgstr "完了<"
+msgstr "完了の表示"
 
 #: libgnomeui/gnome-druid.c:149
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr ""
+msgstr "「次」ボタンではなく「完了」ボタンを表示する"
 
 #: libgnomeui/gnome-druid.c:156
 msgid "Show Help"
@@ -324,7 +320,7 @@ msgstr "ヘルプの表示"
 
 #: libgnomeui/gnome-druid.c:157
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "「ヘルプ」ボタンを表示する"
 
 #: libgnomeui/gnome-href.c:118
 msgid "URL"
@@ -537,155 +533,155 @@ msgstr "情報"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr ""
+msgstr "子アイテム 1"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr ""
+msgstr "アイテム 1 のヒント"
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr ""
+msgstr "子アイテム 2"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr ""
+msgstr "アイテム 2 のヒント"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:83 libgnomeui/gnome-app-helper.h:513
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: libgnomeui/gnome-app-helper.c:84
+#: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
 msgstr "ファイル(_F)/"
 
-#: libgnomeui/gnome-app-helper.c:85 libgnomeui/gnome-app-helper.h:516
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
 msgid "_Edit"
 msgstr "編集(_E)"
 
-#: libgnomeui/gnome-app-helper.c:86
+#: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
 msgstr "編集(_E)/"
 
-#: libgnomeui/gnome-app-helper.c:87 libgnomeui/gnome-app-helper.h:519
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
 msgid "_View"
 msgstr "表示(_V)"
 
-#: libgnomeui/gnome-app-helper.c:88
+#: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
 msgstr "表示(_V)/"
 
-#: libgnomeui/gnome-app-helper.c:89 libgnomeui/gnome-app-helper.h:522
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
 msgid "_Settings"
 msgstr "設定(_S)"
 
-#: libgnomeui/gnome-app-helper.c:90
+#: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
 msgstr "設定(_S)/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:91 libgnomeui/gnome-app-helper.h:295
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
 msgid "_New"
 msgstr "新規(_N)"
 
-#: libgnomeui/gnome-app-helper.c:92
+#: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
 msgstr "新規(_N)/"
 
-#: libgnomeui/gnome-app-helper.c:93 libgnomeui/gnome-app-helper.h:525
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
 msgid "Fi_les"
 msgstr "ファイル(_L)"
 
-#: libgnomeui/gnome-app-helper.c:94
+#: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
 msgstr "ファイル(_L)/"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:528
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
 msgid "_Windows"
 msgstr "ウインドウ(_W)"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:534
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
 msgid "_Game"
 msgstr "ゲーム(_G)"
 
-#: libgnomeui/gnome-app-helper.c:97 libgnomeui/gnome-app-helper.h:531
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: libgnomeui/gnome-app-helper.c:98
+#: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
 msgstr "ウインドウ(_W)/"
 
 #. Open
-#: libgnomeui/gnome-app-helper.c:110
+#: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
 msgstr "開く(_O)..."
 
-#: libgnomeui/gnome-app-helper.c:110
+#: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
 msgstr "ファイルを開く"
 
 #. Save
-#: libgnomeui/gnome-app-helper.c:115
+#: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: libgnomeui/gnome-app-helper.c:115
+#: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
 msgstr "現在のファイルを保存"
 
 #. Save As
-#: libgnomeui/gnome-app-helper.c:120
+#: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
 msgstr "名前をつけて保存(_A)..."
 
-#: libgnomeui/gnome-app-helper.c:121
+#: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
 msgstr "現在のファイルを別名で保存"
 
 #. Revert
-#: libgnomeui/gnome-app-helper.c:126
+#: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
 msgstr "戻す(_R)"
 
-#: libgnomeui/gnome-app-helper.c:127
+#: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
 msgstr "ファイルを保存されたものに戻す"
 
 #. Print
-#: libgnomeui/gnome-app-helper.c:132
+#: libgnomeui/gnome-app-helper.c:131
 msgid "_Print"
 msgstr "印刷(_P)"
 
-#: libgnomeui/gnome-app-helper.c:132
+#: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
 msgstr "現在のファイルを印刷"
 
 #. Print Setup
-#: libgnomeui/gnome-app-helper.c:137
+#: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
 msgstr "印刷の設定(_E)..."
 
-#: libgnomeui/gnome-app-helper.c:138
+#: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
 msgstr "使っているプリンタのページ設定"
 
 #. Close
-#: libgnomeui/gnome-app-helper.c:143
+#: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
 msgstr "閉じる(_C)"
 
-#: libgnomeui/gnome-app-helper.c:143
+#: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
 msgstr "現在のファイルを閉じる"
 
 #. Exit
-#: libgnomeui/gnome-app-helper.c:148
+#: libgnomeui/gnome-app-helper.c:147
 msgid "E_xit"
 msgstr "終了(_X)"
 
-#: libgnomeui/gnome-app-helper.c:148
+#: libgnomeui/gnome-app-helper.c:147
 msgid "Exit the program"
 msgstr "プログラムの終了"
 
@@ -693,93 +689,93 @@ msgstr "プログラムの終了"
 #. * The "Edit" menu
 #.
 #. Cut
-#: libgnomeui/gnome-app-helper.c:156
+#: libgnomeui/gnome-app-helper.c:155
 msgid "C_ut"
 msgstr "切取り(_U)"
 
-#: libgnomeui/gnome-app-helper.c:156
+#: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
 msgstr "セレクションを切取る"
 
 #. 10
 #. Copy
-#: libgnomeui/gnome-app-helper.c:162
+#: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "コピー(_C)"
 
-#: libgnomeui/gnome-app-helper.c:162
+#: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
 msgstr "セレクションをコピー"
 
 #. Paste
-#: libgnomeui/gnome-app-helper.c:167
+#: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
 msgstr "貼り付け(_P)"
 
-#: libgnomeui/gnome-app-helper.c:167
+#: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
 msgstr "クリップボードから貼り付け"
 
 #. Clear
-#: libgnomeui/gnome-app-helper.c:172
+#: libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
 msgstr "消去(_L)"
 
-#: libgnomeui/gnome-app-helper.c:172
+#: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
 msgstr "セレクションの消去"
 
 #. Undo
-#: libgnomeui/gnome-app-helper.c:177
+#: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
 msgstr "元に戻す(_U)"
 
-#: libgnomeui/gnome-app-helper.c:177
+#: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
 msgstr "直前の操作を取り消す"
 
 #. Redo
-#: libgnomeui/gnome-app-helper.c:182
+#: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
 msgstr "やり直し(_R)"
 
-#: libgnomeui/gnome-app-helper.c:182
+#: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
 msgstr "取り消した操作をやり直す"
 
 #. Find
-#: libgnomeui/gnome-app-helper.c:187
+#: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
 msgstr "検索(_F)..."
 
-#: libgnomeui/gnome-app-helper.c:187
+#: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
 msgstr "文字列を検索する"
 
 #. Find Again
-#: libgnomeui/gnome-app-helper.c:192
+#: libgnomeui/gnome-app-helper.c:191
 msgid "Find _Again"
 msgstr "再検索(_A)"
 
-#: libgnomeui/gnome-app-helper.c:193
+#: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
 msgstr "更に同じ文字列を探す"
 
 #. Replace
-#: libgnomeui/gnome-app-helper.c:198
+#: libgnomeui/gnome-app-helper.c:197
 msgid "_Replace..."
 msgstr "置換(_R)..."
 
-#: libgnomeui/gnome-app-helper.c:198
+#: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
 msgstr "文字列を置き換える"
 
 #. Properties
-#: libgnomeui/gnome-app-helper.c:203
+#: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties..."
 msgstr "プロパティ(_P)..."
 
-#: libgnomeui/gnome-app-helper.c:204
+#: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
 msgstr "ファイルのプロパティを変更する"
 
@@ -787,11 +783,11 @@ msgstr "ファイルのプロパティを変更する"
 #. * The Settings menu
 #.
 #. Settings
-#: libgnomeui/gnome-app-helper.c:212
+#: libgnomeui/gnome-app-helper.c:211
 msgid "_Preferences..."
 msgstr "設定(_P)..."
 
-#: libgnomeui/gnome-app-helper.c:213
+#: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
 msgstr "アプリケーションを設定する"
 
@@ -800,124 +796,122 @@ msgstr "アプリケーションを設定する"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "情報(_A)"
 
-#: libgnomeui/gnome-app-helper.c:223
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "このアプリケーションに関して"
 
-#: libgnomeui/gnome-app-helper.c:226
+#: libgnomeui/gnome-app-helper.c:225
 msgid "_Select All"
 msgstr "全選択(_A)"
 
-#: libgnomeui/gnome-app-helper.c:227
+#: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
 msgstr "すべてを選択する"
 
 #.
 #. * Window menu
 #.
-#: libgnomeui/gnome-app-helper.c:235
+#: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "新ウインドウを開く(_W)"
 
-#: libgnomeui/gnome-app-helper.c:236
+#: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
 msgstr "新しいウインドウを開く"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
 msgstr "ウインドウを閉じる(_C)"
 
-#: libgnomeui/gnome-app-helper.c:241
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "現在のウインドウを閉じる"
 
 #.
 #. * The "Game" menu
 #.
-#: libgnomeui/gnome-app-helper.c:249
+#: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
 msgstr "新ゲーム(_N)"
 
-#: libgnomeui/gnome-app-helper.c:250
+#: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
 msgstr "新しくゲームを始める"
 
-#: libgnomeui/gnome-app-helper.c:254
+#: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
 msgstr "ゲーム停止(_P)"
 
-#: libgnomeui/gnome-app-helper.c:255
+#: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
 msgstr "ゲームを一時停止する"
 
-#: libgnomeui/gnome-app-helper.c:259
+#: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
 msgstr "ゲーム再開(_R)"
 
-#: libgnomeui/gnome-app-helper.c:260
+#: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
 msgstr "ゲームを再開する"
 
-#: libgnomeui/gnome-app-helper.c:264
+#: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
 msgstr "待った(_U)"
 
-#: libgnomeui/gnome-app-helper.c:265
+#: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
 msgstr "直前の手を取り消す"
 
-#: libgnomeui/gnome-app-helper.c:269
+#: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
 msgstr "まあよい(_R)"
 
-#: libgnomeui/gnome-app-helper.c:270
+#: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
 msgstr "待ったした手を再び打つ"
 
-#: libgnomeui/gnome-app-helper.c:274
+#: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
 msgstr "ヒント(_H)"
 
-#: libgnomeui/gnome-app-helper.c:275
+#: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
 msgstr "次の手のヒントを見る"
 
 #. 30
-#: libgnomeui/gnome-app-helper.c:280
+#: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
 msgstr "得点(_S)..."
 
-#: libgnomeui/gnome-app-helper.c:281
+#: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
 msgstr "得点を見る"
 
-#: libgnomeui/gnome-app-helper.c:285
+#: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
 msgstr "ゲーム終了(_E)"
 
-#: libgnomeui/gnome-app-helper.c:286
+#: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "今のゲームを終了する"
 
-#: libgnomeui/gnome-app-helper.c:2574
-#, fuzzy
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Both text and icons"
-msgstr "アイコンの選択"
+msgstr "テキストとアイコンの両方"
+
+#: libgnomeui/gnome-app-helper.c:2574
+msgid "Icons only"
+msgstr "アイコンのみ"
 
 #: libgnomeui/gnome-app-helper.c:2575
-msgid "Icons only"
-msgstr ""
-
-#: libgnomeui/gnome-app-helper.c:2576
-#, fuzzy
 msgid "Text only"
-msgstr "テキスト"
+msgstr "テキストのみ"
 
-#: libgnomeui/gnome-app-helper.c:2627
+#: libgnomeui/gnome-app-helper.c:2626
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -964,15 +958,15 @@ msgstr "経過"
 
 #: libgnomeui/gnome-app.c:150
 msgid "App ID"
-msgstr ""
+msgstr "アプリ ID"
 
 #: libgnomeui/gnome-app.c:151
 msgid "The application ID string"
-msgstr ""
+msgstr "アプリケーション ID 文字列"
 
 #: libgnomeui/gnome-entry.c:169 libgnomeui/gnome-entry.c:170
 msgid "History id"
-msgstr ""
+msgstr "ヒストリ ID"
 
 #: libgnomeui/gnome-entry.c:176
 msgid "GTK entry"
@@ -990,75 +984,75 @@ msgstr "ファイルの選択"
 msgid "Browse..."
 msgstr "参照..."
 
-#: libgnomeui/gnome-font-picker.c:67
+#: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:68
+#: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:69
+#: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "フォントの選択"
 
-#: libgnomeui/gnome-font-picker.c:157
+#: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr "選択ダイアログのタイトル"
 
-#: libgnomeui/gnome-font-picker.c:165
+#: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr ""
+msgstr "モード"
 
-#: libgnomeui/gnome-font-picker.c:166
+#: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr ""
+msgstr "フォント選択の操作モード"
 
-#: libgnomeui/gnome-font-picker.c:175
+#: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
 msgstr "フォント名"
 
-#: libgnomeui/gnome-font-picker.c:176
+#: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
 msgstr "選択したフォントの名前"
 
-#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
 msgid "Font"
 msgstr "フォント"
 
-#: libgnomeui/gnome-font-picker.c:186
+#: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr ""
+msgstr "選択された GtkFont"
+
+#: libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "テキストのプレビュー"
 
 #: libgnomeui/gnome-font-picker.c:193
-msgid "Preview text"
-msgstr "プレビュー テキスト"
-
-#: libgnomeui/gnome-font-picker.c:194
 msgid "Preview text shown in the dialog"
-msgstr ""
+msgstr "ダイアログに表示されたテキストをプレビュー"
+
+#: libgnomeui/gnome-font-picker.c:201
+msgid "Use font in label"
+msgstr "ラベルにフォントを使用"
 
 #: libgnomeui/gnome-font-picker.c:202
-msgid "Use font in label"
-msgstr ""
-
-#: libgnomeui/gnome-font-picker.c:203
 msgid "Use font in the label in font info mode"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:211
+#: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr ""
+msgstr "ラベルのフォントサイズ"
 
-#: libgnomeui/gnome-font-picker.c:212
+#: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:222
+#: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
 msgstr "サイズの表示"
 
-#: libgnomeui/gnome-font-picker.c:223
+#: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
 msgstr ""
 
