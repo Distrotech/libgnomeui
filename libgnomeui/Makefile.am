@@ -41,6 +41,7 @@ libgnomeui10compat_a_SOURCES =\
 	gnomeui10-compat.c
 
 libgnomeui10compatinclude_HEADERS = \
+	libgnomeui10compat.h		\
 	gnome-font-selector.h 		\
 	gnome-guru.h			\
 	gnome-spell.h			\
