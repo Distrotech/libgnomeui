@@ -1,3 +1,7 @@
+Tue Jun 30 17:14:31 1998	Jonathan Blandford <jrb@redhat.com>
+	* gnome-app-helper.c: Modified gnome_app_add_radio_menu_entries()
+	to handle separators.
+
 1998-06-29  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch]: dnd types now differ for each process using MDI.

@@ -201,20 +201,28 @@ gnome_app_add_radio_menu_entries(GnomeApp *app,
   g_return_if_fail(menuinfo != NULL);
   while (menuinfo->type != GNOME_APP_UI_ENDOFINFO)
     {
-      menuinfo->widget = gtk_radio_menu_item_new_with_label(group, _(menuinfo->label));
-      group = gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(menuinfo->widget));
-
-      gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(menuinfo->widget), TRUE);
-      gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(menuinfo->widget), FALSE);
-
-      gtk_widget_show(menuinfo->widget);
-      gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
-      pos++;
-
-      uidata->connect_func(app, menuinfo, "activate", uidata);
-      gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo);
+      if (menuinfo->type == GNOME_APP_UI_SEPARATOR) {
+	menuinfo->widget = gtk_menu_item_new();
+	gtk_widget_show(menuinfo->widget);
+	gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
+	pos++;
+	menuinfo++;
+      }
+      else {
+	menuinfo->widget = gtk_radio_menu_item_new_with_label(group, _(menuinfo->label));
+	group = gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(menuinfo->widget));
 	
-      menuinfo++;
+	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(menuinfo->widget), TRUE);
+	gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(menuinfo->widget), FALSE);
+	gtk_widget_show(menuinfo->widget);
+	gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
+	pos++;
+
+	uidata->connect_func(app, menuinfo, "activate", uidata);
+	gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo);
+
+	menuinfo++;
+      }
     }
 
   return pos;
