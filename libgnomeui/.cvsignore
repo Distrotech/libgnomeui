@@ -15,3 +15,5 @@ gnometypebuiltins_ids.c
 gnometypebuiltins_vars.c
 libgnomeui-2.0.pc
 gnometypebuiltins.h
+gnome-marshal.c
+gnome-marshal.h
