@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-15 23:33+0900\n"
-"PO-Revision-Date: 2003-08-15 23:30+0900\n"
+"POT-Creation-Date: 2003-08-16 12:19+0900\n"
+"PO-Revision-Date: 2003-08-16 12:16+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -488,7 +488,7 @@ msgstr "得点を表示します"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr "終了(_E)"
+msgstr "ゲーム終了(_E)"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
@@ -828,7 +828,7 @@ msgstr "完了の表示"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "[次] ボタンではなく [完了] ボタンを表示する"
+msgstr "[進む] ボタンではなく [完了] ボタンを表示する"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
@@ -1248,7 +1248,7 @@ msgstr "ユーザ"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr "スコア"
+msgstr "得点"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
