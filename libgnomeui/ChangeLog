@@ -1,3 +1,10 @@
+1999-01-07  Chris Lahey  <clahey@umich.edu>
+
+	* gnome-paper-selector.h, gnome-paper-selector.c
+	(gnome_paper_selector_get_width, gnome_paper_selector_get_height):
+	Changed it so that these always returned values in units.  Also
+	added functions to return the margin values.
+
 1999-01-07  Nat Friedman  <nat@nat.org>
 
 	* gnome-uidefs.h: Replaced (GDK_CONTROL_MASK||GDK_SHIFT_MASK) with (GDK_CONTROL_MASK|GDK_SHIFT_MASK) throughout.

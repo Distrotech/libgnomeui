@@ -62,6 +62,10 @@ GtkWidget	*gnome_paper_selector_new	(void);
 gchar		*gnome_paper_selector_get_name	(GnomePaperSelector *gspaper);
 gfloat		gnome_paper_selector_get_width	(GnomePaperSelector *gspaper);
 gfloat		gnome_paper_selector_get_height	(GnomePaperSelector *gspaper);
+gfloat          gnome_paper_selector_get_left_margin   (GnomePaperSelector *gspaper);
+gfloat          gnome_paper_selector_get_right_margin  (GnomePaperSelector *gspaper);
+gfloat          gnome_paper_selector_get_top_margin    (GnomePaperSelector *gspaper);
+gfloat          gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper);
 
 
 END_GNOME_DECLS

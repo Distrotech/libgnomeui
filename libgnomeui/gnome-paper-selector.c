@@ -327,18 +327,90 @@ gchar *gnome_paper_selector_get_name (GnomePaperSelector *gspaper)
 
 gfloat gnome_paper_selector_get_width (GnomePaperSelector *gspaper)
 {
-  gfloat paper_width;
+  const Unit *unit;
+  gchar *unit_name;
+  gdouble paper_width;
+  gdouble in_unit_width;
 
-  paper_width = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->width));
+  unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
+  unit = gnome_unit_with_name (unit_name);
+
+  in_unit_width = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->width));
+
+  paper_width = gnome_paper_convert_to_points (in_unit_width, unit);
 
   return paper_width;
 }
 
 gfloat gnome_paper_selector_get_height (GnomePaperSelector *gspaper)
 {
-  gfloat paper_height;
+  const Unit *unit;
+  gchar *unit_name;
+  gdouble paper_height;
+  gdouble in_unit_height;
 
-  paper_height = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->height));
+  unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
+  unit = gnome_unit_with_name (unit_name);
+
+  in_unit_height = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->height));
+
+  paper_height = gnome_paper_convert_to_points (in_unit_height, unit);
 
   return paper_height;
+}
+
+gfloat gnome_paper_selector_get_left_margin (GnomePaperSelector *gspaper)
+{
+  const Paper *paper;
+  gchar *paper_name;
+  gdouble paper_lmargin;
+
+  paper_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry));
+  paper = gnome_paper_with_name (paper_name);
+
+  paper_lmargin = gnome_paper_lmargin( paper );
+
+  return paper_lmargin;
+}
+
+gfloat gnome_paper_selector_get_right_margin (GnomePaperSelector *gspaper)
+{
+  const Paper *paper;
+  gchar *paper_name;
+  gdouble paper_rmargin;
+
+  paper_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry));
+  paper = gnome_paper_with_name (paper_name);
+
+  paper_rmargin = gnome_paper_rmargin( paper );
+
+  return paper_rmargin;
+}
+
+gfloat gnome_paper_selector_get_top_margin (GnomePaperSelector *gspaper)
+{
+  const Paper *paper;
+  gchar *paper_name;
+  gdouble paper_tmargin;
+
+  paper_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry));
+  paper = gnome_paper_with_name (paper_name);
+
+  paper_tmargin = gnome_paper_tmargin( paper );
+
+  return paper_tmargin;
+}
+
+gfloat gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper)
+{
+  const Paper *paper;
+  gchar *paper_name;
+  gdouble paper_bmargin;
+
+  paper_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry));
+  paper = gnome_paper_with_name (paper_name);
+
+  paper_bmargin = gnome_paper_bmargin( paper );
+
+  return paper_bmargin;
 }
