@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-04-21 02:03+0900\n"
+"POT-Creation-Date: 2004-06-23 21:09+0900\n"
+"PO-Revision-Date: 2004-06-23 21:15+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -29,6 +29,31 @@ msgstr "하위 항목 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "항목 2의 힌트"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "파일시스템"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "책갈피 저장이 실패했습니다 (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "'%s' 파일에 대한 정보를 가져올 수 없습니다: %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "'%s' 파일을 여는 데 실패했습니다: %s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "'%s' 이미지를 읽어들이는 데 실패했습니다: 이유를 알 수 없으나, 깨진 그림 파일때문일 것입니다"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -138,6 +163,7 @@ msgstr "%s 정보"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -195,6 +221,7 @@ msgid "_Game"
 msgstr "게임(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -385,11 +412,11 @@ msgstr "프로그램을 설정합니다"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "정보(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "이 프로그램에 대한 정보"
 
@@ -416,7 +443,7 @@ msgstr "새 창을 만듭니다"
 msgid "_Close This Window"
 msgstr "창 닫기(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "현재 창을 닫습니다"
 
@@ -513,9 +540,9 @@ msgid "Text Only"
 msgstr "글자만"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "데스크탑 기본 사항 사용 (%s)"
+msgstr "데스크탑 기본값 사용 (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -616,9 +643,9 @@ msgid "Authentication Required"
 msgstr "인증이 필요합니다"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다\n"
+msgstr "도메인 %s의 %s에 접근하려면 로그인을 해야 합니다\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -805,22 +832,43 @@ msgstr "바탕색을 설정합니다"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "내용물 바탕색"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "내용물 바탕색"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "내용물 바탕색의 GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "내용물 바탕색 집합"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "내용물 바탕색이 집합입니다"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "로고 바탕색"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "로고 바탕색"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "로고 바탕색의 GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "로고 바탕색 설정"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "로고 바탕색을 설정합니다"
 
@@ -1401,8 +1449,6 @@ msgstr "개발자에게 알리기(_I)"
 msgid "_Debug"
 msgstr "디버깅(_D)"
 
-#~ msgid " domain %s"
-#~ msgstr " 도메인 %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "테스트 끝내기"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "테스트 끝내기"
