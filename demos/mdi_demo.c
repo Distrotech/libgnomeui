@@ -1,5 +1,4 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-#include <libgnome.h>
 #include <libgnomeui/gnome-init.h>
 #include <libgnomeui/gnome-mdi.h>
 #include <libgnomeui/gnome-mdi-generic-child.h>
