@@ -829,6 +829,70 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
+#undef COMPARE_TO_IMLIB
+#undef TRY_ENLARGE
+
+#define FILENAME "gnome-audio2.png"
+#ifndef COMPARE_TO_IMLIB
+	column++;
+#else
+	row += 3;
+	column = 0;
+#endif
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, FILENAME));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 2);
+	w = gtk_label_new(FILENAME);
+	gtk_widget_show(w);
+#ifdef TRY_ENLARGE
+	gtk_table_attach_defaults(table, w, column, column + 3, row + 2, row + 3);
+#else
+	gtk_table_attach_defaults(table, w, column, column + 2, row + 2, row + 3);
+#endif
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget_at_size(window, FILENAME, 24, 24));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget_at_size(window, FILENAME, 16, 16));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+#ifdef TRY_ENLARGE
+	/* XXX. yikes, that might crash */
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget_at_size(window, FILENAME, 64, 64));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 2);
+#endif
+#ifdef COMPARE_TO_IMLIB
+#define FILENAME2 (gnome_pixmap_file(FILENAME))
+	column++;
+	w = GTK_WIDGET(gnome_pixmap_new_from_file(FILENAME2));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 2);
+	w = gtk_label_new(FILENAME " via Imlib");
+	gtk_widget_show(w);
+#ifdef TRY_ENLARGE
+	gtk_table_attach_defaults(table, w, column, column + 3, row + 2, row + 3);
+#else
+	gtk_table_attach_defaults(table, w, column, column + 2, row + 2, row + 3);
+#endif
+	column++;
+	w = GTK_WIDGET(gnome_pixmap_new_from_file_at_size(FILENAME2, 24, 24));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_pixmap_new_from_file_at_size(FILENAME2, 16, 16));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+#ifdef TRY_ENLARGE
+	column++;
+	w = gnome_pixmap_new_from_file_at_size(FILENAME2, 64, 64);
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 2);
+#endif
+#undef FILENAME2
+#endif /* COMPARE_TO_IMLIB */
+#undef FILENAME
+
 #ifdef USE_BUTTON
 	column++;
 	w = gnome_pixmap_new_from_file(gnome_pixmap_file("gnome-unknown.png"));

@@ -1,3 +1,11 @@
+Wed Sep 23 17:04:05 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.[ch]: expanded the functionality of
+	gnome_stock_pixmap_widget to load GnomeStock widgets from files.
+	(gnome_stock_pixmap_widget_at_size): new function. Loads a GnomeStock
+	widget from a file and scales it using antializing.
+	* stock_demo.c: added an example how to use the new functionality.
+
 1998-09-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Avoid

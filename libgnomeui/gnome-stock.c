@@ -364,7 +364,8 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
 		if ((width != req.width) || (height != req.height)) {
 			gdk_pixmap_unref(gpixmap->pixmap);
 			gpixmap->pixmap = NULL;
-			gdk_pixmap_unref(gpixmap->mask);
+			if (gpixmap->mask)
+				gdk_pixmap_unref(gpixmap->mask);
 			gpixmap->mask = NULL;
 		}
 	}
@@ -372,22 +373,22 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
 		gpixmap->pixmap = gdk_pixmap_new(pixmap->pixmap,
 						 req.width, req.height,
 						 visual->depth);
-		gpixmap->mask = gdk_pixmap_new(pixmap->mask,
-					       req.width, req.height, 1);
 	}
 	gc = gdk_gc_new(gpixmap->pixmap);
 	gdk_draw_pixmap(gpixmap->pixmap, gc, pixmap->pixmap, 0, 0, 0, 0,
 			req.width, req.height);
 	gdk_gc_destroy(gc);
 	if (pixmap->mask) {
+		gpixmap->mask = gdk_pixmap_new(pixmap->mask,
+					       req.width, req.height, 1);
 		gc = gdk_gc_new(gpixmap->mask);
 		gdk_draw_pixmap(gpixmap->mask, gc, pixmap->mask, 0, 0, 0, 0,
 				req.width, req.height);
 		gdk_gc_destroy(gc);
+		if (GTK_WIDGET(gpixmap)->window)
+			gdk_window_shape_combine_mask(GTK_WIDGET(gpixmap)->window,
+						      gpixmap->mask, 0, 0);
 	}
-	if (GTK_WIDGET(gpixmap)->window)
-		gdk_window_shape_combine_mask(GTK_WIDGET(gpixmap)->window,
-					      gpixmap->mask, 0, 0);
 	/* XXX: this isn't needed always, but I found that in some
 	 * circumstances it is. */
 	gtk_widget_queue_draw(GTK_WIDGET(stock));
@@ -552,7 +553,7 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
 	g_return_val_if_fail(icon != NULL, 0);
 
 	entry = lookup(icon, GNOME_STOCK_PIXMAP_REGULAR, 0);
-	g_return_val_if_fail(entry != NULL, 0);
+	if (!entry) return 0;
 
 	if (stock->icon) {
 		if (0 == strcmp(icon, stock->icon))
@@ -1102,10 +1103,90 @@ gnome_stock_pixmap(GtkWidget *window, const char *icon, const char *subtype)
 
 
 GtkWidget *
+gnome_stock_pixmap_widget_at_size(GtkWidget *window, const char *icon,
+				  guint width, guint height)
+{
+	GnomeStockPixmapEntry *entry;
+	GnomeStockPixmapEntryImlibScaled *new_entry;
+	GtkWidget *w;
+	GdkImlibImage *im;
+	char name[512];
+
+	g_return_val_if_fail(icon != NULL, NULL);
+	g_snprintf(name, 511, "%s%ux%u", icon, width, height);
+	entry = lookup(name, GNOME_STOCK_PIXMAP_REGULAR, 0);
+	if (entry)
+		return gnome_stock_new_with_icon(name);
+	entry = lookup(icon, GNOME_STOCK_PIXMAP_REGULAR, 0);
+	if ((entry) &&
+	    ((entry->type == GNOME_STOCK_PIXMAP_TYPE_IMLIB) ||
+	     (entry->type == GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED))) {
+		new_entry = g_malloc(sizeof(GnomeStockPixmapEntryImlibScaled));
+		new_entry->type = GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED;
+		new_entry->label = NULL;
+		new_entry->scaled_width = width;
+		new_entry->scaled_height = height;
+		new_entry->width = entry->imlib.width;
+		new_entry->height = entry->imlib.height;
+		new_entry->rgb_data = entry->imlib.rgb_data;
+		new_entry->shape = entry->imlib.shape;
+	} else {
+		char *filename;
+		if (g_file_exists(icon))
+			filename = g_strdup(icon);
+		else
+			filename = gnome_pixmap_file(icon);
+		if (!filename) return NULL;
+		im = gdk_imlib_load_image(filename);
+		g_free(filename);
+		g_return_val_if_fail(im != NULL, NULL);
+		new_entry = g_malloc(sizeof(GnomeStockPixmapEntryImlibScaled));
+		new_entry->type = GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED;
+		new_entry->label = NULL;
+		new_entry->scaled_width = width;
+		new_entry->scaled_height = height;
+		new_entry->width = im->rgb_width;
+		new_entry->height = im->rgb_height;
+		new_entry->rgb_data = g_malloc(im->rgb_width * im->rgb_height * 3);
+		memcpy((char *)new_entry->rgb_data, im->rgb_data,
+		       im->rgb_width * im->rgb_height * 3);
+		new_entry->shape = im->shape_color;
+		gdk_imlib_destroy_image(im);
+	}
+	gnome_stock_pixmap_register(name, GNOME_STOCK_PIXMAP_REGULAR,
+				    (GnomeStockPixmapEntry *)new_entry);
+	return gnome_stock_new_with_icon(name);
+}
+
+
+
+GtkWidget *
 gnome_stock_pixmap_widget(GtkWidget *window, const char *icon)
 {
 #if USE_NEW_GNOME_STOCK
-	return gnome_stock_new_with_icon(icon);
+	GtkWidget *w;
+
+	w = gnome_stock_new_with_icon(icon);
+	if (!w) {
+		GnomeStockPixmapEntryPath *new_entry;
+		char *filename;
+		if (g_file_exists(icon))
+			filename = g_strdup(icon);
+		else
+			filename = gnome_pixmap_file(icon);
+		if (!filename) return NULL;
+		g_assert(!gnome_stock_pixmap_checkfor(icon, GNOME_STOCK_PIXMAP_REGULAR));
+		new_entry = g_malloc(sizeof(GnomeStockPixmapEntryPath));
+		new_entry->type = GNOME_STOCK_PIXMAP_TYPE_PATH;
+		new_entry->label = NULL;
+		new_entry->pathname = filename;
+		new_entry->width = 0;
+		new_entry->height = 0;
+		gnome_stock_pixmap_register(icon, GNOME_STOCK_PIXMAP_REGULAR,
+					    (GnomeStockPixmapEntry *)new_entry);
+		return gnome_stock_new_with_icon(icon);
+	}
+	return w;
 #else
 	GtkWidget *w;
 
