@@ -1,10 +1,15 @@
+2001-09-22  Wang Jian  <lark@linux.net.cn>
+
+	* zh_CN.po: Added Simplified Chinese translation.
+	(Merged from gnome-libs/po/zh_CN.po)
+
 2001-09-19  Héctor García Álvarez  <hector@scouts-es.org>
 
-        * es.po: Updated Spanish translation.
+	* es.po: Updated Spanish translation.
 	
 2001-09-15  Héctor García Álvarez  <hector@scouts-es.org>
 
-        * es.po: Updated Spanish translation.
+	* es.po: Updated Spanish translation.
 	
 Mon Sep 03 17:28:21 2001  George Lebl <jirka@5z.com>
 
@@ -61,7 +66,7 @@ Mon Sep 03 05:32:28 2001  George Lebl <jirka@5z.com>
 
 2001-06-19  Héctor García Álvarez  <hector@scouts-es.org>
 
-        * es.po: Added Spanish translation.
+	* es.po: Added Spanish translation.
 	* POTFILES.in: removed libgnomeui/gnome-animator.c since is no longer
 	there
 

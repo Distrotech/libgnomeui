@@ -1,3 +1,7 @@
+2001-09-22  Wang Jian <lark@linux.net.cn>
+
+	* configure.in(ALL_LINGUAS): Added zh_CN.
+
 2001-09-20  Frank Belew <frb@ximian.com>
 
 	* configure.in: removed AM_CONDITIONAL(FALSE...)
