@@ -1,3 +1,7 @@
+2002-01-14  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
+
+	* configure.in: added 'sk' to ALL_LINGUAS.
+
 2002-01-13  Murray Cumming  <murrayc@usa.net>
 
 	* libgnomeui/gnome-app-helper.cc: gnome_app_find_menu_pos() was

@@ -1,0 +1,1267 @@
+# libgnomeui sk.po
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# Marcel Telka <marcel@telka.sk>, 2002.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui\n"
+"POT-Creation-Date: 2002-01-13 21:34+0100\n"
+"PO-Revision-Date: 2002-01-13 21:32+0100\n"
+"Last-Translator: Marcel Telka <marcel@telka.sk>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libgnomeui/gnome-about.c:181
+msgid "Program name"
+msgstr "Názov programu"
+
+#: libgnomeui/gnome-about.c:182
+msgid "The name of the program"
+msgstr "Názov programu"
+
+#: libgnomeui/gnome-about.c:188
+msgid "Program version"
+msgstr "Verzia programu"
+
+#: libgnomeui/gnome-about.c:189
+msgid "The version of the program"
+msgstr "Verzia programu"
+
+#: libgnomeui/gnome-about.c:195
+msgid "Copyright string"
+msgstr "Autorské práva"
+
+#: libgnomeui/gnome-about.c:196
+msgid "Copyright information for the program"
+msgstr "Informácie o autorských právach k programu"
+
+#: libgnomeui/gnome-about.c:202
+msgid "Comments string"
+msgstr "Text komentára"
+
+#: libgnomeui/gnome-about.c:203
+msgid "Comments about the program"
+msgstr "Komentáre k programu"
+
+#: libgnomeui/gnome-about.c:210 libgnomeui/gnome-about.c:664
+msgid "Authors"
+msgstr "Autori"
+
+#: libgnomeui/gnome-about.c:211
+msgid "List of authors of the programs"
+msgstr "Zoznam autorov programu"
+
+#: libgnomeui/gnome-about.c:213
+msgid "Author entry"
+msgstr "Polo¾ka autora"
+
+#: libgnomeui/gnome-about.c:214
+msgid "A single author entry"
+msgstr "Polo¾ka jedného autora"
+
+#: libgnomeui/gnome-about.c:221 libgnomeui/gnome-about.c:667
+msgid "Translator credits"
+msgstr "Poïakovanie prekladateµom"
+
+#: libgnomeui/gnome-about.c:222
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Poïakovanie prekladateµom. Tento re»azec by mal by» oznaèený na preklad"
+
+#: libgnomeui/gnome-about.c:229 libgnomeui/gnome-about.c:670
+msgid "Documenters"
+msgstr "Autori dokumentácie"
+
+#: libgnomeui/gnome-about.c:230
+msgid "List of people documenting the program"
+msgstr "Zoznam µudí, ktorý program dokumentujú"
+
+#: libgnomeui/gnome-about.c:232
+msgid "Documenter entry"
+msgstr "Polo¾ka autora dokumentácie"
+
+#: libgnomeui/gnome-about.c:233
+msgid "A single documenter entry"
+msgstr "Polo¾ka jedného autora dokumentácie"
+
+#: libgnomeui/gnome-about.c:240
+msgid "Background"
+msgstr "Pozadie"
+
+#: libgnomeui/gnome-about.c:241
+msgid "The background pixbuf to use"
+msgstr "Pou¾it tento obrázok pozadia"
+
+#: libgnomeui/gnome-about.c:247
+msgid "Background start opacity"
+msgstr "Zaèiatoèná nepriehµadnos» pozadia"
+
+#: libgnomeui/gnome-about.c:248
+msgid "Opacity at the start of the background"
+msgstr "Nepriehµadnos» na zaèiatku pozadia"
+
+#: libgnomeui/gnome-about.c:257
+msgid "Background end opacity"
+msgstr "Koncová nepriehµadnos» pozadia"
+
+#: libgnomeui/gnome-about.c:258
+msgid "Opacity at the end of the background"
+msgstr "Nepriehµadnos» na konci pozadia"
+
+#: libgnomeui/gnome-about.c:267
+msgid "Background start position"
+msgstr "Poloha zaèiatku pozadia"
+
+#: libgnomeui/gnome-about.c:268
+msgid "Position at the start of the background"
+msgstr "Poloha na zaèiatku pozadia"
+
+#: libgnomeui/gnome-about.c:276
+msgid "Background end position"
+msgstr "Poloha konca pozadia"
+
+#: libgnomeui/gnome-about.c:277
+msgid "Position at the end of the background"
+msgstr "Poloha na konci pozadia"
+
+#: libgnomeui/gnome-about.c:285 libgnomeui/gnome-druid-page-standard.c:141
+msgid "Logo"
+msgstr "Logo"
+
+#: libgnomeui/gnome-about.c:286
+msgid "A logo for the about box"
+msgstr "Logo pre dialógové okno O programe"
+
+#: libgnomeui/gnome-about.c:292
+msgid "Logo top padding"
+msgstr "Posunutie loga zhora"
+
+#: libgnomeui/gnome-about.c:293
+msgid "How far the logo is from the top"
+msgstr "Ako ïaleko je logo od horného okraja"
+
+#: libgnomeui/gnome-about.c:302
+msgid "Logo right padding"
+msgstr "Posunutie loga sprava"
+
+#: libgnomeui/gnome-about.c:303
+msgid "How far the logo is from the right"
+msgstr "Ako ïaleko je logo od pravého okraja"
+
+#: libgnomeui/gnome-about.c:312
+msgid "Header font"
+msgstr "Typ písma hlavièky"
+
+#: libgnomeui/gnome-about.c:313
+msgid "Header font description as a string"
+msgstr "Popis typu písma hlavièky ako re»azec"
+
+#: libgnomeui/gnome-about.c:318
+msgid "Copyright font"
+msgstr "Typ písma autorských práv"
+
+#: libgnomeui/gnome-about.c:319
+msgid "Copyright font description as a string"
+msgstr "Popis typu písma autorských práv ako re»azec"
+
+#: libgnomeui/gnome-about.c:324
+msgid "Comments font"
+msgstr "Typ písma komentárov"
+
+#: libgnomeui/gnome-about.c:325
+msgid "Comments font description as a string"
+msgstr "Popis typu písma komentárov ako re»azec"
+
+#: libgnomeui/gnome-about.c:330
+msgid "Name header font"
+msgstr "Typ písma hlavièky názvu"
+
+#: libgnomeui/gnome-about.c:331
+msgid "Name header font description as a string"
+msgstr "Popis typu písma hlavièky názvu ako re»azec"
+
+#: libgnomeui/gnome-about.c:336
+msgid "Name list font"
+msgstr "Typ písma zoznamu názvu"
+
+#: libgnomeui/gnome-about.c:337
+msgid "Name list font description as a string"
+msgstr "Popis typu písma zoznamu názvu ako re»azec"
+
+#: libgnomeui/gnome-about.c:664
+msgid "Author"
+msgstr "Autor"
+
+#: libgnomeui/gnome-about.c:670
+msgid "Documenter"
+msgstr "Autor dokumentácie"
+
+#: libgnomeui/gnome-about.c:817
+#, c-format
+msgid "About %s"
+msgstr "O programe %s"
+
+#: libgnomeui/gnome-appbar.c:762
+msgid "Has Progress"
+msgstr "Má postup"
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Create a progress widget."
+msgstr "Vytvori» prvok postupu."
+
+#: libgnomeui/gnome-appbar.c:770
+msgid "Has Status"
+msgstr "Má stav"
+
+#: libgnomeui/gnome-appbar.c:771
+msgid "Create a status widget."
+msgstr "Vytvori» stavový prvok."
+
+#: libgnomeui/gnome-appbar.c:778
+msgid "Interactivity"
+msgstr "Interaktivita"
+
+#: libgnomeui/gnome-appbar.c:779
+msgid "Level of user activity required."
+msgstr "Po¾adovaná úroveò pou¾ívateµovej aktivity."
+
+#: libgnomeui/gnome-client.c:835
+msgid "Specify session management ID"
+msgstr "Zadajte identifikátor správy sedenia"
+
+#: libgnomeui/gnome-client.c:835
+msgid "ID"
+msgstr "Identifikátor"
+
+#: libgnomeui/gnome-client.c:838
+msgid "Specify prefix of saved configuration"
+msgstr "Zadajte predponu ulo¾enej konfigurácie"
+
+#: libgnomeui/gnome-client.c:838
+msgid "PREFIX"
+msgstr "PREDPONA"
+
+#: libgnomeui/gnome-client.c:841
+msgid "Disable connection to session manager"
+msgstr "Nepovoli» pripojenie na mana¾éra spojení"
+
+#: libgnomeui/gnome-client.c:947
+msgid "Session management"
+msgstr "Správa sedenia"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "Zru¹i» prihlasovanie"
+
+#: libgnomeui/gnome-color-picker.c:404
+msgid "Received invalid color data\n"
+msgstr "Prijaté neplatné údaje o farbe\n"
+
+#: libgnomeui/gnome-color-picker.c:468
+msgid "Pick a color"
+msgstr "Vybra» farbu"
+
+#: libgnomeui/gnome-dateedit.c:436
+msgid "Time"
+msgstr "Èas"
+
+#: libgnomeui/gnome-dateedit.c:437
+msgid "The time currently selected"
+msgstr "Aktuálne vybratý èas"
+
+#: libgnomeui/gnome-dateedit.c:449
+msgid "DateEdit Flags"
+msgstr "Príznaky DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:450
+msgid "Flags for how DateEdit looks"
+msgstr "Príznaky pre zobrazenie DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:459
+msgid "Lower Hour"
+msgstr "Ni¾¹ia hodina"
+
+#: libgnomeui/gnome-dateedit.c:460
+msgid "Lower hour in the time popup selector"
+msgstr "Ni¾¹ia hodina v okne pre výber èasu"
+
+#: libgnomeui/gnome-dateedit.c:470
+msgid "Upper Hour"
+msgstr "Vy¹¹ia hodina"
+
+#: libgnomeui/gnome-dateedit.c:471
+msgid "Upper hour in the time popup selector"
+msgstr "Vy¹¹ia hodina v okne pre výber èasu"
+
+#: libgnomeui/gnome-dateedit.c:481
+msgid "Initial Time"
+msgstr "Poèiatoèný èas"
+
+#: libgnomeui/gnome-dateedit.c:482
+msgid "The initial time"
+msgstr "Poèiatoèný èas"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:728
+msgid "Calendar"
+msgstr "Kalendár"
+
+#: libgnomeui/gnome-dateedit.c:960
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date je neodporúèané, pou¾ite gnome_date_edit_get_time"
+
+#: libgnomeui/gnome-druid-page-edge.c:342
+msgid "Helvetical Bold 18"
+msgstr "Helvetický tuèný 18"
+
+#: libgnomeui/gnome-druid-page-edge.c:353
+msgid "Helvetical Medium 12"
+msgstr "Helvetický polotuèný 12"
+
+#: libgnomeui/gnome-druid-page-standard.c:133
+#: libgnomeui/gnome-font-picker.c:156
+msgid "Title"
+msgstr "Titulok"
+
+#: libgnomeui/gnome-druid-page-standard.c:134
+msgid "Title of the druid"
+msgstr "Titulok èarodejníka"
+
+#: libgnomeui/gnome-druid-page-standard.c:142
+msgid "Logo image"
+msgstr "Obrázok loga"
+
+#: libgnomeui/gnome-druid-page-standard.c:149
+msgid "Top Watermark"
+msgstr "Pokry» vodotlaèou"
+
+#: libgnomeui/gnome-druid-page-standard.c:150
+msgid "Watermark image for the top"
+msgstr "Pokry» týmto obrázkom vodotlaèe"
+
+#: libgnomeui/gnome-druid-page-standard.c:157
+msgid "Title Foreground"
+msgstr "Titulok popredia"
+
+#: libgnomeui/gnome-druid-page-standard.c:158
+msgid "Foreground color of the title"
+msgstr "Farba popredia titulku"
+
+#: libgnomeui/gnome-druid-page-standard.c:165
+msgid "Title Foreground Color"
+msgstr "Farba popredia titulku"
+
+#: libgnomeui/gnome-druid-page-standard.c:166
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Farba popredia titulku ako GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:173
+msgid "Title Foreground color set"
+msgstr "Farba popredia titulku nastavená"
+
+#: libgnomeui/gnome-druid-page-standard.c:174
+msgid "Foreground color of the title is set"
+msgstr "Farba popredia titulku je nastavená"
+
+#: libgnomeui/gnome-druid-page-standard.c:181
+#: libgnomeui/gnome-druid-page-standard.c:189
+msgid "Background Color"
+msgstr "Farba pozadia"
+
+#: libgnomeui/gnome-druid-page-standard.c:182
+msgid "Background color"
+msgstr "Farba pozadia"
+
+#: libgnomeui/gnome-druid-page-standard.c:190
+msgid "Background color as a GdkColor"
+msgstr "Farba pozadia ako GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:197
+msgid "Background color set"
+msgstr "Farba pozadia nastavená"
+
+#: libgnomeui/gnome-druid-page-standard.c:198
+msgid "Background color is set"
+msgstr "Farba pozadia je nastavená"
+
+#: libgnomeui/gnome-druid-page-standard.c:205
+#: libgnomeui/gnome-druid-page-standard.c:213
+msgid "Logo Background Color"
+msgstr "Farba pozadia loga"
+
+#: libgnomeui/gnome-druid-page-standard.c:206
+msgid "Logo Background color"
+msgstr "Farba pozadia loga"
+
+#: libgnomeui/gnome-druid-page-standard.c:214
+msgid "Logo Background color as a GdkColor"
+msgstr "Farba pozadia loga ako GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:221
+msgid "Logo Background color set"
+msgstr "Farba pozadia loga nastavená"
+
+#: libgnomeui/gnome-druid-page-standard.c:222
+msgid "Logo Background color is set"
+msgstr "Farba pozadia loga je nastavená"
+
+#: libgnomeui/gnome-druid.c:146
+msgid "Show Finish"
+msgstr "Zobrazi» 'Ïalej'"
+
+#: libgnomeui/gnome-druid.c:147
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Zobrazi» tlaèítko 'Dokonèi»' namiesto tlaèítka 'Ïalej'"
+
+#: libgnomeui/gnome-druid.c:154
+msgid "Show Help"
+msgstr "Zobrazi» 'Pomocník'"
+
+#: libgnomeui/gnome-druid.c:155
+msgid "Show the 'Help' button"
+msgstr "Zobrazi» tlaèítko 'Pomocník'"
+
+#: libgnomeui/gnome-href.c:118
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:119
+msgid "The URL that GnomeHRef activates"
+msgstr "URL, ktoré aktivuje GnomeHRef"
+
+#: libgnomeui/gnome-href.c:126
+msgid "Text"
+msgstr "Text"
+
+#: libgnomeui/gnome-href.c:127
+msgid "The text on the button"
+msgstr "Text na tlaèítku"
+
+#: libgnomeui/gnome-href.c:128
+msgid "End World Hunger"
+msgstr "Ukonèi» svetový hlad"
+
+#: libgnomeui/gnome-href.c:134
+msgid "Link colour"
+msgstr "Farba linky"
+
+#: libgnomeui/gnome-href.c:135
+msgid "Colour used to draw the link"
+msgstr "Farba pou¾itá zobrazenie linky"
+
+#: libgnomeui/gnome-href.c:396
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+"Vyskytla sa chyba pri pokuse o spustenie ovládaèa URL.\n"
+"Prosím skontrolujte èi sú správne nastavenia v Ovládacom centre."
+
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
+msgid "X display to use"
+msgstr "Pou¾i» X displej"
+
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:745
+msgid "DISPLAY"
+msgstr "DISPLEJ"
+
+#: libgnomeui/gnome-ui-init.c:111
+msgid "GNOME GUI Library"
+msgstr "Kni¾nica GNOME GUI"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:592
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+"Vyskytli sa viacnásobné chyby segmentácie; nemô¾em zobrazi» dialógové okno s "
+"chybou\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:606
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Chyba segmentácie!\n"
+"Nemô¾em zobrazi» dialógové okno pádu\n"
+
+#: libgnomeui/gnome-ui-init.c:738
+msgid "Gdk debugging flags to set"
+msgstr "Nastavi» príznaky ladenia Gdk"
+
+#: libgnomeui/gnome-ui-init.c:738 libgnomeui/gnome-ui-init.c:741
+#: libgnomeui/gnome-ui-init.c:782 libgnomeui/gnome-ui-init.c:785
+msgid "FLAGS"
+msgstr "PRÍZNAKY"
+
+#: libgnomeui/gnome-ui-init.c:741
+msgid "Gdk debugging flags to unset"
+msgstr "Odznaèi» ladiace príznaky Gdk"
+
+#: libgnomeui/gnome-ui-init.c:749
+msgid "Make X calls synchronous"
+msgstr "Pou¾i» synchrónne volania X"
+
+#: libgnomeui/gnome-ui-init.c:755
+msgid "Don't use X shared memory extension"
+msgstr "Nepou¾i» ro¾írenie zdieµanej pamäte X"
+
+#: libgnomeui/gnome-ui-init.c:759
+msgid "Program name as used by the window manager"
+msgstr "Názov programu pou¾itý správcom okien"
+
+#: libgnomeui/gnome-ui-init.c:759
+msgid "NAME"
+msgstr "NÁZOV"
+
+#: libgnomeui/gnome-ui-init.c:762
+msgid "Program class as used by the window manager"
+msgstr "Trieda programu pou¾itá správcom okien"
+
+#: libgnomeui/gnome-ui-init.c:762
+msgid "CLASS"
+msgstr "TRIEDA"
+
+#: libgnomeui/gnome-ui-init.c:766
+msgid "HOST"
+msgstr "HOSTITE¥"
+
+#: libgnomeui/gnome-ui-init.c:770
+msgid "PORT"
+msgstr "PORT"
+
+#: libgnomeui/gnome-ui-init.c:775 libgnomeui/gnome-ui-init.c:778
+msgid "STYLE"
+msgstr "©TÝL"
+
+#: libgnomeui/gnome-ui-init.c:782
+msgid "Gtk+ debugging flags to set"
+msgstr "Nastavi» ladiace príznaky Gtk+"
+
+#: libgnomeui/gnome-ui-init.c:785
+msgid "Gtk+ debugging flags to unset"
+msgstr "Odznaèi» ladiace príznaky Gtk+"
+
+#: libgnomeui/gnome-ui-init.c:788
+msgid "Make all warnings fatal"
+msgstr "Spravi» v¹etky upozornenia záva¾né"
+
+#: libgnomeui/gnome-ui-init.c:791
+msgid "Load an additional Gtk module"
+msgstr "Nahra» prídavný Gtk modul"
+
+#: libgnomeui/gnome-ui-init.c:791
+msgid "MODULE"
+msgstr "MODUL"
+
+#: libgnomeui/gnome-ui-init.c:896
+msgid "GTK+"
+msgstr "GTK+"
+
+#: libgnomeui/gnome_segv.c:95
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"Správca sedení GNOME (proces %d) havaroval\n"
+"kvôli záva¾nej chybe (%s).\n"
+"Keï zatvoríte toto dialógové okno, v¹etky aplikácie budú zatvorené a va¹e "
+"sedenie bude ukonèené.\n"
+"Prosím ulo¾te v¹etky va¹e súbory pred zatvorením tohto dialógového okna."
+
+#: libgnomeui/gnome_segv.c:105
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Aplikácia \"%s\" (proces %d) havarovala\n"
+"kvôli záva¾nej chybe.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:114
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Pou¾itie: gnome_segv2 názovapl èíssig\n"
+
+#: libgnomeui/gnome_segv.c:130
+msgid "Submit a bug report"
+msgstr "Posla» správu o chybe"
+
+#: libgnomeui/gnome_segv.c:141
+msgid "Debug"
+msgstr "Ladenie"
+
+#: libgnomeui/gnome_segv.c:149
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:155
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "Prosím nav¹tívte stránku GNOME Application Crash pre viac informácií"
+
+#: libgnomeui/gnome-stock-icons.c:135
+msgid "Table Borders"
+msgstr "Okraje tabuµky"
+
+#: libgnomeui/gnome-stock-icons.c:136
+msgid "Table Fill"
+msgstr "Výplò tabuµky"
+
+#: libgnomeui/gnome-stock-icons.c:137
+msgid "Bulleted List"
+msgstr "Zoznam so znaèkou"
+
+#: libgnomeui/gnome-stock-icons.c:138
+msgid "Numbered List"
+msgstr "Èíslovaný zoznam"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Indent"
+msgstr "Odsadi»"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Un-Indent"
+msgstr "Od-odsadi»"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "About"
+msgstr "O programe"
+
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "Detská polo¾ka 1"
+
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "Rada pre polo¾ku 1"
+
+#: demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "Detská polo¾ka 2"
+
+#: demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "Rada pre polo¾ku 2"
+
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:83 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "Súbo_r"
+
+#: libgnomeui/gnome-app-helper.c:84
+msgid "_File/"
+msgstr "Súbo_r/"
+
+#: libgnomeui/gnome-app-helper.c:85 libgnomeui/gnome-app-helper.h:516
+msgid "_Edit"
+msgstr "_Upravi»"
+
+#: libgnomeui/gnome-app-helper.c:86
+msgid "_Edit/"
+msgstr "_Upravi»/"
+
+#: libgnomeui/gnome-app-helper.c:87 libgnomeui/gnome-app-helper.h:519
+msgid "_View"
+msgstr "_Zobrazi»"
+
+#: libgnomeui/gnome-app-helper.c:88
+msgid "_View/"
+msgstr "_Zobrazi»/"
+
+#: libgnomeui/gnome-app-helper.c:89 libgnomeui/gnome-app-helper.h:522
+msgid "_Settings"
+msgstr "Na_stavenia"
+
+#: libgnomeui/gnome-app-helper.c:90
+msgid "_Settings/"
+msgstr "Na_stavenia/"
+
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:91 libgnomeui/gnome-app-helper.h:295
+msgid "_New"
+msgstr "_Nový"
+
+#: libgnomeui/gnome-app-helper.c:92
+msgid "_New/"
+msgstr "_Nový/"
+
+#: libgnomeui/gnome-app-helper.c:93 libgnomeui/gnome-app-helper.h:525
+msgid "Fi_les"
+msgstr "Sú_bory"
+
+#: libgnomeui/gnome-app-helper.c:94
+msgid "Fi_les/"
+msgstr "Sú_bory/"
+
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:528
+msgid "_Windows"
+msgstr "_Okná"
+
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:534
+msgid "_Game"
+msgstr "_Hra"
+
+#: libgnomeui/gnome-app-helper.c:97 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "_Pomocník"
+
+#: libgnomeui/gnome-app-helper.c:98
+msgid "_Windows/"
+msgstr "_Okná/"
+
+#. Open
+#: libgnomeui/gnome-app-helper.c:110
+msgid "_Open..."
+msgstr "_Otvori»..."
+
+#: libgnomeui/gnome-app-helper.c:110
+msgid "Open a file"
+msgstr "Otvori» súbor"
+
+#. Save
+#: libgnomeui/gnome-app-helper.c:115
+msgid "_Save"
+msgstr "_Ulo¾i»"
+
+#: libgnomeui/gnome-app-helper.c:115
+msgid "Save the current file"
+msgstr "Ulo¾i» aktuálny súbor"
+
+#. Save As
+#: libgnomeui/gnome-app-helper.c:120
+msgid "Save _As..."
+msgstr "Ulo¾i» _ako..."
+
+#: libgnomeui/gnome-app-helper.c:121
+msgid "Save the current file with a different name"
+msgstr "Ulo¾i» aktuálny súbor pod iným menom"
+
+#. Revert
+#: libgnomeui/gnome-app-helper.c:126
+msgid "_Revert"
+msgstr "O_bnovi»"
+
+#: libgnomeui/gnome-app-helper.c:127
+msgid "Revert to a saved version of the file"
+msgstr "Vráti» sa k ulo¾enej verzii súboru"
+
+#. Print
+#: libgnomeui/gnome-app-helper.c:132
+msgid "_Print"
+msgstr "_Tlaèi»"
+
+#: libgnomeui/gnome-app-helper.c:132
+msgid "Print the current file"
+msgstr "Vytlaèi» aktuálny súbor"
+
+#. Print Setup
+#: libgnomeui/gnome-app-helper.c:137
+msgid "Print S_etup..."
+msgstr "Nastav_enie tlaèe..."
+
+#: libgnomeui/gnome-app-helper.c:138
+msgid "Setup the page settings for your current printer"
+msgstr "Nastavenie parametrov strany pre va¹u aktívnu tlaèiareò"
+
+#. Close
+#: libgnomeui/gnome-app-helper.c:143
+msgid "_Close"
+msgstr "_Zatvori»"
+
+#: libgnomeui/gnome-app-helper.c:143
+msgid "Close the current file"
+msgstr "Zatvori» aktuálny súbor"
+
+#. Exit
+#: libgnomeui/gnome-app-helper.c:148
+msgid "E_xit"
+msgstr "_Koniec"
+
+#: libgnomeui/gnome-app-helper.c:148
+msgid "Exit the program"
+msgstr "Ukonèi» program"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: libgnomeui/gnome-app-helper.c:156
+msgid "C_ut"
+msgstr "Vystr_ihnú»"
+
+#: libgnomeui/gnome-app-helper.c:156
+msgid "Cut the selection"
+msgstr "Vystrihnú» oznaèené"
+
+#. 10
+#. Copy
+#: libgnomeui/gnome-app-helper.c:162
+msgid "_Copy"
+msgstr "_Kopírova»"
+
+#: libgnomeui/gnome-app-helper.c:162
+msgid "Copy the selection"
+msgstr "Kopírova» oznaèené"
+
+#. Paste
+#: libgnomeui/gnome-app-helper.c:167
+msgid "_Paste"
+msgstr "_Vlo¾i»"
+
+#: libgnomeui/gnome-app-helper.c:167
+msgid "Paste the clipboard"
+msgstr "Vlo¾i» zo schránky"
+
+#. Clear
+#: libgnomeui/gnome-app-helper.c:172
+msgid "C_lear"
+msgstr "V_ymaza»"
+
+#: libgnomeui/gnome-app-helper.c:172
+msgid "Clear the selection"
+msgstr "Vymaza» oznaèené"
+
+#. Undo
+#: libgnomeui/gnome-app-helper.c:177
+msgid "_Undo"
+msgstr "_Vráti»"
+
+#: libgnomeui/gnome-app-helper.c:177
+msgid "Undo the last action"
+msgstr "Vráti» poslednú èinnos»"
+
+#. Redo
+#: libgnomeui/gnome-app-helper.c:182
+msgid "_Redo"
+msgstr "Sp_ravi» znova"
+
+#: libgnomeui/gnome-app-helper.c:182
+msgid "Redo the undone action"
+msgstr "Spravi» znova vrátenú èinnos»"
+
+#. Find
+#: libgnomeui/gnome-app-helper.c:187
+msgid "_Find..."
+msgstr "_Nájs»..."
+
+#: libgnomeui/gnome-app-helper.c:187
+msgid "Search for a string"
+msgstr "Vyhµada» re»azec"
+
+#. Find Again
+#: libgnomeui/gnome-app-helper.c:192
+msgid "Find _Again"
+msgstr "Nájs» znov_a"
+
+#: libgnomeui/gnome-app-helper.c:193
+msgid "Search again for the same string"
+msgstr "Vyhµada» ten istý re»azec znova"
+
+#. Replace
+#: libgnomeui/gnome-app-helper.c:198
+msgid "_Replace..."
+msgstr "Nah_radi»..."
+
+#: libgnomeui/gnome-app-helper.c:198
+msgid "Replace a string"
+msgstr "nahradi» re»azec"
+
+#. Properties
+#: libgnomeui/gnome-app-helper.c:203
+msgid "_Properties..."
+msgstr "_Vlastnosti..."
+
+#: libgnomeui/gnome-app-helper.c:204
+msgid "Modify the file's properties"
+msgstr "Upravi» vlastnosti súboru"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: libgnomeui/gnome-app-helper.c:212
+msgid "_Preferences..."
+msgstr "_Predvoµby..."
+
+#: libgnomeui/gnome-app-helper.c:213
+msgid "Configure the application"
+msgstr "Konfigurova» aplikáciu"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "O progr_ame"
+
+#: libgnomeui/gnome-app-helper.c:223 test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "Informácie o tomto programe"
+
+#: libgnomeui/gnome-app-helper.c:226
+msgid "_Select All"
+msgstr "_Oznaèi» v¹etko"
+
+#: libgnomeui/gnome-app-helper.c:227
+msgid "Select everything"
+msgstr "Oznaèi» v¹etko"
+
+#.
+#. * Window menu
+#.
+#: libgnomeui/gnome-app-helper.c:235
+msgid "Create New _Window"
+msgstr "Vytvori» nové _okno"
+
+#: libgnomeui/gnome-app-helper.c:236
+msgid "Create a new window"
+msgstr "Vytvori» nové okno"
+
+#: libgnomeui/gnome-app-helper.c:240
+msgid "_Close This Window"
+msgstr "_Zatvori» toto okno"
+
+#: libgnomeui/gnome-app-helper.c:241 test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "Zatvori» aktuálne okno"
+
+#.
+#. * The "Game" menu
+#.
+#: libgnomeui/gnome-app-helper.c:249
+msgid "_New game"
+msgstr "_Nová hra"
+
+#: libgnomeui/gnome-app-helper.c:250
+msgid "Start a new game"
+msgstr "Spustit novú hru"
+
+#: libgnomeui/gnome-app-helper.c:254
+msgid "_Pause game"
+msgstr "_Pozastavi» hru"
+
+#: libgnomeui/gnome-app-helper.c:255
+msgid "Pause the game"
+msgstr "Pozastavi» hru"
+
+#: libgnomeui/gnome-app-helper.c:259
+msgid "_Restart game"
+msgstr "_Re¹tartova» hru"
+
+#: libgnomeui/gnome-app-helper.c:260
+msgid "Restart the game"
+msgstr "Re¹tartova» hru"
+
+#: libgnomeui/gnome-app-helper.c:264
+msgid "_Undo move"
+msgstr "_Vráti» »ah"
+
+#: libgnomeui/gnome-app-helper.c:265
+msgid "Undo the last move"
+msgstr "Vráti» posledný »ah"
+
+#: libgnomeui/gnome-app-helper.c:269
+msgid "_Redo move"
+msgstr "Sp_ravi» znova »ah"
+
+#: libgnomeui/gnome-app-helper.c:270
+msgid "Redo the undone move"
+msgstr "Spravi» znova vrátený »ah"
+
+#: libgnomeui/gnome-app-helper.c:274
+msgid "_Hint"
+msgstr "_Rada"
+
+#: libgnomeui/gnome-app-helper.c:275
+msgid "Get a hint for your next move"
+msgstr "Dosta» radu pre vá¹ nasledujúci »ah"
+
+#. 30
+#: libgnomeui/gnome-app-helper.c:280
+msgid "_Scores..."
+msgstr "_Body..."
+
+#: libgnomeui/gnome-app-helper.c:281
+msgid "View the scores"
+msgstr "Zobrazi» body"
+
+#: libgnomeui/gnome-app-helper.c:285
+msgid "_End game"
+msgstr "Koni_ec hry"
+
+#: libgnomeui/gnome-app-helper.c:286
+msgid "End the current game"
+msgstr "Koniec aktuálnej hry"
+
+#: libgnomeui/gnome-app-util.c:103
+msgid " (press return)"
+msgstr " (stlaè return)"
+
+#: libgnomeui/gnome-app-util.c:147
+msgid "ERROR: "
+msgstr "CHYBA: "
+
+#: libgnomeui/gnome-app-util.c:184
+msgid "Warning: "
+msgstr "Upozornenie: "
+
+#: libgnomeui/gnome-app-util.c:322
+msgid "y"
+msgstr "a"
+
+#: libgnomeui/gnome-app-util.c:323
+msgid "yes"
+msgstr "áno"
+
+#: libgnomeui/gnome-app-util.c:326
+msgid "n"
+msgstr "n"
+
+#: libgnomeui/gnome-app-util.c:327
+msgid "no"
+msgstr "nie"
+
+#: libgnomeui/gnome-app-util.c:366
+msgid " (yes or no)"
+msgstr " (áno aleno nie)"
+
+#: libgnomeui/gnome-app-util.c:367
+msgid "  - OK? (yes or no)"
+msgstr "  - Ok? (áno alebo nie)"
+
+#: libgnomeui/gnome-app-util.c:699
+msgid "Progress"
+msgstr "Postup"
+
+#: libgnomeui/gnome-app.c:150
+msgid "App ID"
+msgstr "ID aplikácie"
+
+#: libgnomeui/gnome-app.c:151
+msgid "The application ID string"
+msgstr "Identifikaèný re»azec aplikácie"
+
+#: libgnomeui/gnome-entry.c:169 libgnomeui/gnome-entry.c:170
+msgid "History id"
+msgstr "Identifikátor histórie"
+
+#: libgnomeui/gnome-entry.c:176
+msgid "GTK entry"
+msgstr "Polo¾ka GTK"
+
+#: libgnomeui/gnome-entry.c:177
+msgid "The GTK entry"
+msgstr "Polo¾ka GTK"
+
+#: libgnomeui/gnome-file-entry.c:347
+msgid "Select file"
+msgstr "Vybra» súbor"
+
+#: libgnomeui/gnome-file-entry.c:523
+msgid "Browse..."
+msgstr "Prezera»..."
+
+#: libgnomeui/gnome-font-picker.c:67
+msgid "sans 12"
+msgstr "sans 12"
+
+#: libgnomeui/gnome-font-picker.c:68
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaÁaÄäBbCcÈèDdÏïEeÉéFfGgHhIiÍíJjKkLl¥µÅåMmNnÒòOoÓóÔôPpQqRrÀàSs©sTt«»UuÚúVvWwXxYyÝýZz®¾"
+
+#: libgnomeui/gnome-font-picker.c:69
+msgid "Pick a Font"
+msgstr "Vybra» typ písma"
+
+#: libgnomeui/gnome-font-picker.c:157
+msgid "The title of the selection dialog box"
+msgstr "Titulok dialógového okna výberu"
+
+#: libgnomeui/gnome-font-picker.c:165
+msgid "Mode"
+msgstr "Mód"
+
+#: libgnomeui/gnome-font-picker.c:166
+msgid "The mode of operation of the font picker"
+msgstr "Re¾im èinnosti okna pre výber typu písma"
+
+#: libgnomeui/gnome-font-picker.c:175
+msgid "Font name"
+msgstr "Názov typu písma"
+
+#: libgnomeui/gnome-font-picker.c:176
+msgid "Name of the selected font"
+msgstr "Názov vybratého písma"
+
+#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "Typ písma"
+
+#: libgnomeui/gnome-font-picker.c:186
+msgid "The selected GtkFont"
+msgstr "Vybratý GtkFont"
+
+#: libgnomeui/gnome-font-picker.c:193
+msgid "Preview text"
+msgstr "Text náhµadu"
+
+#: libgnomeui/gnome-font-picker.c:194
+msgid "Preview text shown in the dialog"
+msgstr "Náhµad textu zobrazeného v dialógovom okne"
+
+#: libgnomeui/gnome-font-picker.c:202
+msgid "Use font in label"
+msgstr "Pou¾i» písmo v návestí"
+
+#: libgnomeui/gnome-font-picker.c:203
+msgid "Use font in the label in font info mode"
+msgstr "Pou¾i» písmo v návestí v re¾ime informácie o type písma"
+
+#: libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label"
+msgstr "Veµkos» písma pre návestie"
+
+#: libgnomeui/gnome-font-picker.c:212
+msgid "Font size for label in font info mode"
+msgstr "Veµkos» písma pre návestie v re¾ime informácie o type písma"
+
+#: libgnomeui/gnome-font-picker.c:222
+msgid "Show size"
+msgstr "Zobrazi» veµkos»"
+
+#: libgnomeui/gnome-font-picker.c:223
+msgid "Show size in font info mode"
+msgstr "Zobrazi» veµkos» v re¾ime informácie o type písma"
+
+#: libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "Podpora UI GNOME GConf"
+
+#: libgnomeui/gnome-gconf-ui.c:107
+#, c-format
+msgid ""
+"You attempted to change an aspect of your configuration that your system "
+"administrator or operating system vendor does not allow you to change. Some "
+"of the settings you have selected may not take effect, or may not be "
+"restored next time you use this application (%s)."
+msgstr ""
+"Pokú¹ate sa zmeni» stav va¹ej konfigurácie, ktorý vám vá¹ správca systému "
+"alebo dodávateµ operaèného systému nepovolil nastavova». Niektoré z "
+"nastavení, ktoré ste zvolili sa nemusia prejavi» alebo nemusia by» obnovené "
+"pri nasledujúcom pou¾ití tejto aplikácie (%s)."
+
+#: libgnomeui/gnome-gconf-ui.c:115
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"Vyskytla sa chyba pri naèítavaní alebo ukladaní konfiguraènej informácie pre "
+"%s. Niektoré z va¹ich konfiguraèných nastavení nemusia pracova» správne."
+
+#: libgnomeui/gnome-gconf-ui.c:139
+#, c-format
+msgid "GConf error details: %s\n"
+msgstr "Podrobnosti chyby GConf: %s\n"
+
+#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
+msgid "No Icon"
+msgstr "Bez ikony"
+
+#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:378
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Nemô¾em nájs» hbox, pou¾ijem normálny výber písma"
+
+#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:384
+msgid "Preview"
+msgstr "Náhµad"
+
+#: libgnomeui/gnome-icon-entry.c:882
+msgid "Browse"
+msgstr "Prezera»"
+
+#: libgnomeui/gnome-icon-sel.c:297
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: '%s' neexistuje alebo nie je prieèinok"
+
+#: libgnomeui/gnome-icon-sel.c:305
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection: nemô¾em otvori» prieèinok '%s'"
+
+#: libgnomeui/gnome-icon-sel.c:414
+msgid "Loading Icons..."
+msgstr "Nahrávam ikony..."
+
+#: libgnomeui/gnome-messagebox.c:110
+msgid "Information"
+msgstr "Informácia"
+
+#: libgnomeui/gnome-messagebox.c:115
+msgid "Warning"
+msgstr "Upozornenie"
+
+#: libgnomeui/gnome-messagebox.c:121
+msgid "Error"
+msgstr "Chyba"
+
+#: libgnomeui/gnome-messagebox.c:127
+msgid "Question"
+msgstr "Otázka"
+
+#: libgnomeui/gnome-messagebox.c:132
+msgid "Message"
+msgstr "Správa"
+
+#: libgnomeui/gnome-pixmap-entry.c:183 libgnomeui/gnome-pixmap-entry.c:496
+msgid "No Image"
+msgstr "Bez obrázka"
+
+#: libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "Najlep¹ích 10"
+
+#: libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "Pou¾ívateµ"
+
+#: libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr "Body"
+
+#: libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Dátum"
+
+#. the localized string should fit (after replacing the %a %b
+#. etc) in ~18 chars.
+#. %a is abbreviated weekday, %A is full weekday,
+#. %b %B are abbreviated and full monthname, %Y is year,
+#. %d is day of month, %m is month number, %T full hour,
+#. %H hours, %M minutes, %S seconds
+#.
+#: libgnomeui/gnome-scores.c:199
+msgid "%a %b %d %T %Y"
+msgstr "%a %d.%m.%Y %H:%M"
+
+#: libgnomeui/gnome-scores.c:412
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukonèi» test"
