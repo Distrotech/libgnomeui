@@ -320,7 +320,7 @@ initialize_gtk_signal_relay (void)
 	if (gnome_sound_connection_get () < 0)
 		return;
 	
-	if (!gnome_config_get_bool ("/sound/system/settings/event_sounds=true"))
+	if (!gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds"))
 		return;
 	
 	ctmp = gnome_config_file ("/sound/events/gtk-events-2.soundlist");
