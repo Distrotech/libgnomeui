@@ -14,7 +14,6 @@ libgnomeui/gnome-font-picker.c
 libgnomeui/gnome-href.c
 libgnomeui/gnome-init.c
 libgnomeui/gnome-paper-selector.c
-libgnomeui/gnome-recently-used.c
 libgnomeui/gnome_segv.c
 libgnomeui/oafgnome.c
 libgnomeui/gnome-stock-icons.c
