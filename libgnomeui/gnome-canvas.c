@@ -3661,7 +3661,6 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 	ArtIRect bbox;
 	ArtIRect visible;
 	ArtIRect clip;
-	gint w_width, w_height;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
@@ -3699,7 +3698,6 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 void
 gnome_canvas_w2c_affine (GnomeCanvas *canvas, double affine[6])
 {
-	double x, y;
 	double zooom;
 
 	g_return_if_fail (canvas != NULL);

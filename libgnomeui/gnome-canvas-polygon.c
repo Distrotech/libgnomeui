@@ -225,7 +225,6 @@ get_bounds_canvas (GnomeCanvasPolygon *poly, double *bx1, double *by1, double *b
 	GnomeCanvasItem *item;
 	ArtDRect bbox_world;
 	ArtDRect bbox_canvas;
-	double i2w[6], w2c[6], i2c[6];
 
 	item = GNOME_CANVAS_ITEM (poly);
 
@@ -548,7 +547,6 @@ gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasPolygon *poly;
 	GnomeCanvasPoints *points;
-	GdkColor *color;
 
 	poly = GNOME_CANVAS_POLYGON (object);
 
@@ -597,7 +595,6 @@ gnome_canvas_polygon_render (GnomeCanvasItem *item,
 			     GnomeCanvasBuf *buf)
 {
 	GnomeCanvasPolygon *poly;
-	guint32 fg_color, bg_color;
 
 	poly = GNOME_CANVAS_POLYGON (item);
 
@@ -747,9 +744,6 @@ gnome_canvas_polygon_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	GnomeCanvasPolygon *poly;
 	GdkPoint static_points[NUM_STATIC_POINTS];
 	GdkPoint *points;
-	double dx, dy;
-	int cx, cy;
-	int i;
 	double i2c[6];
 
 	poly = GNOME_CANVAS_POLYGON (item);

@@ -1066,7 +1066,7 @@ struct _AccelEntry {
 };
 
 struct default_AccelEntry {
-	char *type;
+	const char *type;
 	AccelEntry entry;
 };
 
@@ -1438,7 +1438,7 @@ gnome_stock_menu_accel_dlg(char *section)
 			   NULL);
 	gtk_object_set_data(GTK_OBJECT(w), "box", box);
 	for (p = default_accel_hash; p->type; p++) {
-		row_data[0] = p->type;
+		row_data[0] = (char*)p->type;
 		row_data[1] = g_strdup(accel_to_string(&p->entry));
 		gtk_clist_append(GTK_CLIST(w), row_data);
 		g_free(row_data[1]);

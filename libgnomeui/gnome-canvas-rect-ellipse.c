@@ -208,9 +208,6 @@ static void
 recalc_bounds (GnomeCanvasRE *re)
 {
 	GnomeCanvasItem *item;
-	double x1, y1, x2, y2;
-	int cx1, cy1, cx2, cy2;
-	double hwidth;
 
 #ifdef VERBOSE
 	g_print ("re recalc_bounds\n");
@@ -861,7 +858,6 @@ gnome_canvas_rect_update (GnomeCanvasItem *item, double affine[6], ArtSVP *clip_
 	ArtVpath vpath[11];
 	ArtVpath *vpath2;
 	double x0, y0, x1, y1;
-	double dx, dy;
 	double halfwidth;
 	int i;
 

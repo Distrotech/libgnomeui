@@ -552,6 +552,7 @@ set_stipple (GnomeCanvasLine *line, GdkBitmap *stipple, int reconfigure)
 	}
 }
 
+#ifdef OLD_XFORM
 /* Convenience functions to recalculate the arrows and bounds of the line */
 static void
 reconfigure_arrows_and_bounds (GnomeCanvasLine *line)
@@ -559,6 +560,7 @@ reconfigure_arrows_and_bounds (GnomeCanvasLine *line)
 	reconfigure_arrows (line);
 	recalc_bounds (line);
 }
+#endif
 
 static void
 gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
