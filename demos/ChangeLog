@@ -1,5 +1,7 @@
 2001-04-26  Martin Baulig  <baulig@suse.de>
 
+	* stock_demo.c: Removed; this has been moved to libcompat/demos/.
+
 	* Makefile.am: Don't compile the stock_demo as the GnomeStock is
 	deprecated and will be moved to libcompat.
 
