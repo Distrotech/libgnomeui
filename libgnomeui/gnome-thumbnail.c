@@ -522,10 +522,9 @@ gnome_thumbnail_factory_ensure_failed_uptodate (GnomeThumbnailFactory *factory)
   struct stat statbuf;
   GnomeThumbnailFactoryPrivate *priv = factory->priv;
 
+  gettimeofday (&tv, NULL);
   if (priv->last_failed_time != 0)
     {
-      gettimeofday (&tv, NULL);
-
       if (tv.tv_sec >= priv->last_failed_time &&
 	  tv.tv_sec < priv->last_failed_time + SECONDS_BETWEEN_STATS)
 	return;

@@ -1,3 +1,8 @@
+2003-06-05  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-thumbnail.c (gnome_thumbnail_factory_ensure_failed_uptodate):
+	Avoid using uninitialized value tv.tv_sec
+
 Wed Jun 04 15:54:18 2003  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-password-dialog.c: fix cast warning
