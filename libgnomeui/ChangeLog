@@ -1,3 +1,18 @@
+2001-06-28  Michael Meeks  <michael@ximian.com>
+
+	* gnome-init.c (libgnomeui_post_args_parse): remove
+	gtk_rc_set_image_loader
+	(libgnomeui_pixbuf_image_loader): kill.
+	[ thanks to: Carlos Perelló Marín <carlos@gnome-db.org> ]
+	(libgnomeui_rc_parse): remove gtk_rc_init.
+
+	* pixmaps/Makefile.am (gnome-stock-pixbufs.h): update the stock
+	pixbuf building code.
+
+	* gnome-stock-icons.c (add_sized): use gdk_pixbuf_new_from_stream,
+	a randomly re-named and re-signatured method: great.
+	(add_unsized): ditto.
+
 2001-06-21  Mark Murnane  <Mark.Murnane@Sun.com>
 
 	* Changes made during 64-bit cleaning.

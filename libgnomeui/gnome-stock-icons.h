@@ -26,7 +26,7 @@
 #ifndef __GNOME_STOCK_ICONS_H__
 #define __GNOME_STOCK_ICONS_H__
 
-#include <gmacros.h>
+#include <glib/gmacros.h>
 #include <gtk/gtkiconfactory.h>
 
 G_BEGIN_DECLS

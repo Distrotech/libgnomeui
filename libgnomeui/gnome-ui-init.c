@@ -108,11 +108,6 @@ static void libgnomeui_instance_init(GnomeProgram *program, GnomeModuleInfo *mod
 static void libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_rc_parse (gchar *command);
-static GdkPixmap *libgnomeui_pixbuf_image_loader(GdkWindow   *window,
-                                                 GdkColormap *colormap,
-                                                 GdkBitmap  **mask,
-                                                 GdkColor    *transparent_color,
-                                                 const char *filename);
 static void libgnomeui_segv_setup(gboolean post_arg_parse);
 
 static GnomeModuleRequirement libgnomeui_requirements[] = {
@@ -315,7 +310,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         GnomeProgramPrivate_libgnomeui *priv = g_new0(GnomeProgramPrivate_libgnomeui, 1);
 
         gnome_type_init();
-        gtk_rc_set_image_loader(libgnomeui_pixbuf_image_loader);
+#warning FIXME: here... gtk_rc ...
         libgnomeui_rc_parse(program_invocation_name);
 
         libgnomeui_segv_setup(TRUE);
@@ -424,44 +419,10 @@ libgnomeui_rc_parse (gchar *command)
 		g_free (file);
 	}
 
+#warning gtk_rc_init removed, is this correct ?
+/*
 	gtk_rc_init ();
-}
-
-static GdkPixmap *
-libgnomeui_pixbuf_image_loader(GdkWindow   *window,
-                               GdkColormap *colormap,
-                               GdkBitmap  **maskp,
-                               GdkColor    *transparent_color,
-                               const char *filename)
-{
-	GdkPixmap *retval = NULL;
-        GdkBitmap *mask = NULL;
-        GdkPixbuf *pixbuf;
-        GError *error;
-
-        /* FIXME we are ignoring colormap and transparent color */
-        
-        error = NULL;
-        pixbuf = gdk_pixbuf_new_from_file(filename, &error);
-        if (error != NULL) {
-                g_warning (G_STRLOC ": cannot load %s: %s", filename,
-                           error->message);
-                g_error_free (error);
-        }
-
-        if (pixbuf == NULL)
-                return NULL;
-
-        gdk_pixbuf_render_pixmap_and_mask(pixbuf, &retval, &mask, 128);
-
-        gdk_pixbuf_unref(pixbuf);
-        
-        if (maskp)
-                *maskp = mask;
-        else
-                gdk_bitmap_unref(mask);
-
-        return retval;
+*/
 }
 
 /* crash handler */
