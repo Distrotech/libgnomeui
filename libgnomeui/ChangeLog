@@ -1,3 +1,11 @@
+Sun Sep 10 19:47:07 2000  George Lebl <jirka@5z.com>
+
+	* gnome-href.[ch]: Switch to GParam, and bunches of reformatting
+	  to more match standard gnome style.
+
+	* gnome-animator.c: use PARAM_ instead of ARG_ for the enum and
+	  match up the names and remove an unused enum value.
+
 Sun Sep 10 03:29:56 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dateedit.c:  Make sure that input to gtkcalendar is legal

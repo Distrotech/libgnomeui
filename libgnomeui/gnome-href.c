@@ -34,28 +34,32 @@
 #include "libgnome/gnome-i18nP.h"
 
 struct _GnomeHRefPrivate {
-  gchar *url;
-  GtkWidget *label;
+	gchar *url;
+	GtkWidget *label;
 };
 
-static void gnome_href_class_init(GnomeHRefClass *klass);
-static void gnome_href_init(GnomeHRef *href);
-static void gnome_href_clicked(GtkButton *button);
-static void gnome_href_destroy(GtkObject *object);
-static void gnome_href_finalize(GObject *object);
-static void gnome_href_get_arg(GtkObject *object,
-			       GtkArg *arg,
-			       guint arg_id);
-static void gnome_href_set_arg(GtkObject *object,
-			       GtkArg *arg,
-			       guint arg_id);
-static void gnome_href_realize(GtkWidget *widget);
-static void drag_data_get     (GnomeHRef          *href,
-			       GdkDragContext     *context,
-			       GtkSelectionData   *selection_data,
-			       guint               info,
-			       guint               time,
-			       gpointer            data);
+static void gnome_href_class_init	(GnomeHRefClass *klass);
+static void gnome_href_init		(GnomeHRef *href);
+static void gnome_href_clicked		(GtkButton *button);
+static void gnome_href_destroy		(GtkObject *object);
+static void gnome_href_finalize		(GObject *object);
+static void gnome_href_get_param	(GObject *object,
+					 guint param_id,
+					 GValue *value,
+					 GParamSpec * pspec,
+					 const gchar *trailer);
+static void gnome_href_set_param	(GObject *object,
+					 guint param_id,
+					 GValue * value,
+					 GParamSpec * pspec,
+					 const gchar * trailer);
+static void gnome_href_realize		(GtkWidget *widget);
+static void drag_data_get    		(GnomeHRef          *href,
+					 GdkDragContext     *context,
+					 GtkSelectionData   *selection_data,
+					 guint               info,
+					 guint               time,
+					 gpointer            data);
 
 static const GtkTargetEntry http_drop_types[] = {
 	{ "text/uri-list",       0, 0 },
@@ -81,9 +85,9 @@ static const gint n_other_drop_types =
 
 
 enum {
-	ARG_0,
-	ARG_URL,
-	ARG_TEXT
+	PARAM_0,
+	PARAM_URL,
+	PARAM_TEXT
 };
 
 /**
@@ -95,32 +99,45 @@ enum {
 GNOME_CLASS_BOILERPLATE (GnomeHRef, gnome_href,
 			 GtkButton, gtk_button)
 
-static void gnome_href_class_init(GnomeHRefClass *klass) {
+static void
+gnome_href_class_init (GnomeHRefClass *klass)
+{
+	GtkObjectClass *object_class = (GtkObjectClass *)klass;
+	GObjectClass *gobject_class = (GObjectClass *)klass;
+	GtkWidgetClass *widget_class = (GtkWidgetClass *)klass;
+	GtkButtonClass *button_class = (GtkButtonClass *)klass;
 
-  GtkObjectClass *object_class = (GtkObjectClass *)klass;
-  GObjectClass *gobject_class = (GObjectClass *)klass;
-  GtkWidgetClass *widget_class = (GtkWidgetClass *)klass;
-  GtkButtonClass *button_class = (GtkButtonClass *)klass;
+	/* By default we link to The World Food Programme */
+	g_object_class_install_param (gobject_class,
+				      PARAM_URL,
+				      g_param_spec_string ("url",
+							   _("URL"),
+							   _("The URL that GnomeHRef activates"),
+							   "http://www.wfp.org",
+							   (G_PARAM_READABLE |
+							    G_PARAM_WRITABLE)));
+	g_object_class_install_param (gobject_class,
+				      PARAM_TEXT,
+				      g_param_spec_string ("text",
+							   _("Text"),
+							   _("The text on the button"),
+							   _("End World Hunger"),
+							   (G_PARAM_READABLE |
+							    G_PARAM_WRITABLE)));
 
-  gtk_object_add_arg_type("GnomeHRef::url",
-			  GTK_TYPE_STRING,
-			  GTK_ARG_READWRITE,
-			  ARG_URL);
-  gtk_object_add_arg_type("GnomeHRef::text",
-			  GTK_TYPE_STRING,
-			  GTK_ARG_READWRITE,
-			  ARG_TEXT);
+	object_class->destroy = gnome_href_destroy;
 
-  object_class->destroy = gnome_href_destroy;
-  gobject_class->finalize = gnome_href_finalize;
-  object_class->set_arg = gnome_href_set_arg;
-  object_class->get_arg = gnome_href_get_arg;
-  widget_class->realize = gnome_href_realize;
-  button_class->clicked = gnome_href_clicked;
+	gobject_class->finalize = gnome_href_finalize;
+	gobject_class->set_param = gnome_href_set_param;
+	gobject_class->get_param = gnome_href_get_param;
+
+	widget_class->realize = gnome_href_realize;
+	button_class->clicked = gnome_href_clicked;
 }
 
-static void gnome_href_init(GnomeHRef *href) {
-
+static void
+gnome_href_init(GnomeHRef *href)
+{
 	href->_priv = g_new0(GnomeHRefPrivate, 1);
 
 	href->_priv->label = gtk_label_new("");
@@ -179,8 +196,9 @@ drag_data_get(GnomeHRef          *href,
  * Returns:
  **/
 
-void gnome_href_construct(GnomeHRef *href, const gchar *url, const gchar *text) {
-	
+void
+gnome_href_construct (GnomeHRef *href, const gchar *url, const gchar *text)
+{
   g_return_if_fail(href != NULL);
   g_return_if_fail(GNOME_IS_HREF(href));
   g_return_if_fail(url != NULL);
@@ -308,8 +326,9 @@ const gchar *gnome_href_get_text(GnomeHRef *href) {
  * Sets the internal label widget text (used to display a URL's link
  * text) to the value given in @label.
  **/
-
-void gnome_href_set_text(GnomeHRef *href, const gchar *text) {
+void
+gnome_href_set_text (GnomeHRef *href, const gchar *text)
+{
   gchar *pattern;
 
   g_return_if_fail(href != NULL);
@@ -331,7 +350,9 @@ void gnome_href_set_text(GnomeHRef *href, const gchar *text) {
  * deprecated, use #gnome_href_get_text
  **/
 
-const gchar *gnome_href_get_label(GnomeHRef *href) {
+const gchar *
+gnome_href_get_label(GnomeHRef *href)
+{
 	g_warning("gnome_href_get_label is deprecated, use gnome_href_get_text");
 	return gnome_href_get_text(href);
 }
@@ -346,12 +367,19 @@ const gchar *gnome_href_get_label(GnomeHRef *href) {
  * deprecated, use #gnome_href_set_text
  **/
 
-void gnome_href_set_label(GnomeHRef *href, const gchar *label) {
+void
+gnome_href_set_label (GnomeHRef *href, const gchar *label)
+{
+	g_return_if_fail(href != NULL);
+	g_return_if_fail(GNOME_IS_HREF(href));
+
 	g_warning("gnome_href_set_label is deprecated, use gnome_href_set_text");
 	gnome_href_set_text(href, label);
 }
 
-static void gnome_href_clicked(GtkButton *button) {
+static void
+gnome_href_clicked (GtkButton *button)
+{
   GnomeHRef *href;
 
   g_return_if_fail(button != NULL);
@@ -370,67 +398,77 @@ static void gnome_href_clicked(GtkButton *button) {
 			       "Control Center if they are correct."));
 }
 
-static void gnome_href_destroy(GtkObject *object) {
-  GnomeHRef *href;
+static void
+gnome_href_destroy(GtkObject *object)
+{
+	GnomeHRef *href;
 
-  /* remember, destroy can be run multiple times! */
+	/* remember, destroy can be run multiple times! */
 
-  g_return_if_fail(object != NULL);
-  g_return_if_fail(GNOME_IS_HREF(object));
+	g_return_if_fail(object != NULL);
+	g_return_if_fail(GNOME_IS_HREF(object));
 
-  href = GNOME_HREF(object);
+	href = GNOME_HREF(object);
 
-  g_free(href->_priv->url);
-  href->_priv->url = NULL;
+	g_free(href->_priv->url);
+	href->_priv->url = NULL;
 
-  if(href->_priv->label) {
-	  gtk_widget_unref(href->_priv->label);
-	  href->_priv->label = NULL;
-  }
+	if(href->_priv->label) {
+		gtk_widget_unref(href->_priv->label);
+		href->_priv->label = NULL;
+	}
 
-  GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
-}
-
-static void gnome_href_finalize(GObject *object) {
-  GnomeHRef *href;
-
-  g_return_if_fail(object != NULL);
-  g_return_if_fail(GNOME_IS_HREF(object));
-
-  href = GNOME_HREF(object);
-
-  g_free(href->_priv);
-  href->_priv = NULL;
-
-  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
-}
-
-
-static void gnome_href_realize(GtkWidget *widget) {
-  GdkCursor *cursor;
-
-  GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
-
-  cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
-  gdk_window_set_cursor(widget->window, cursor);
-  gdk_cursor_destroy(cursor);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
-gnome_href_set_arg (GtkObject *object,
-		    GtkArg *arg,
-		    guint arg_id)
+gnome_href_finalize(GObject *object)
+{
+	GnomeHRef *href;
+
+	g_return_if_fail(object != NULL);
+	g_return_if_fail(GNOME_IS_HREF(object));
+
+	href = GNOME_HREF(object);
+
+	g_free(href->_priv);
+	href->_priv = NULL;
+
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+}
+
+static void
+gnome_href_realize(GtkWidget *widget)
+{
+	GdkCursor *cursor;
+
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, realize, (widget));
+
+	cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
+	gdk_window_set_cursor(widget->window, cursor);
+	gdk_cursor_destroy(cursor);
+}
+
+static void
+gnome_href_set_param (GObject *object,
+		      guint param_id,
+		      GValue * value,
+		      GParamSpec * pspec,
+		      const gchar * trailer)
 {
 	GnomeHRef *self;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_HREF (object));
+
 	self = GNOME_HREF (object);
 
-	switch (arg_id) {
-	case ARG_URL:
-		gnome_href_set_url(self, GTK_VALUE_STRING(*arg));
+	switch (param_id) {
+	case PARAM_URL:
+		gnome_href_set_url(self, g_value_get_string (value));
 		break;
-	case ARG_TEXT:
-		gnome_href_set_text(self, GTK_VALUE_STRING(*arg));
+	case PARAM_TEXT:
+		gnome_href_set_text(self, g_value_get_string (value));
 		break;
 	default:
 		break;
@@ -438,22 +476,27 @@ gnome_href_set_arg (GtkObject *object,
 }
 
 static void
-gnome_href_get_arg (GtkObject *object,
-		    GtkArg *arg,
-		    guint arg_id)
+gnome_href_get_param (GObject *object,
+		      guint param_id,
+		      GValue *value,
+		      GParamSpec * pspec,
+		      const gchar *trailer)
 {
 	GnomeHRef *self;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_HREF (object));
+
 	self = GNOME_HREF (object);
 
-	switch (arg_id) {
-	case ARG_URL:
-		GTK_VALUE_STRING(*arg) =
-			g_strdup(gnome_href_get_url(self));
+	switch (param_id) {
+	case PARAM_URL:
+		g_value_set_string (value,
+				    gnome_href_get_url(self));
 		break;
-	case ARG_TEXT:
-		GTK_VALUE_STRING(*arg) =
-			g_strdup(gnome_href_get_text(self));
+	case PARAM_TEXT:
+		g_value_set_string (value,
+				    gnome_href_get_text(self));
 		break;
 	default:
 		break;
