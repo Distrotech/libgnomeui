@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.1\n"
-"POT-Creation-Date: 2002-07-28 12:32+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-07-28 12:31+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -527,7 +527,6 @@ msgstr "Astuce pour l'élément 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -585,7 +584,6 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -776,11 +774,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -807,7 +805,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -879,27 +877,31 @@ msgstr "_Arrêter la partie"
 msgid "End the current game"
 msgstr "Termine la partie en cours"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr "Contenu de l'_aide"
+
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Affiche l'aide pour cette application"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "Texte sous les icônes"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr "Priorité au texte sous les icônes"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "Icônes seulement"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "Texte seulement"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Utiliser la valeur par défaut du bureau (%s)"
@@ -1340,12 +1342,8 @@ msgstr "%a %d %b %Y, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Quitter le test"
-
-#~ msgid "_Contents"
-#~ msgstr "Contenu de l'_aide"
+#~ msgid "Exit the test"
+#~ msgstr "Quitter le test"
 
 #~ msgid "Find _Again"
 #~ msgstr "Rechercher à _nouveau"

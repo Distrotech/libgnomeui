@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Anurag Seetha <anuragseetha@yahoo.com>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -916,7 +916,8 @@ msgstr "स्ट्रिंग को बदलें"
 # libgnomeui/gnome-app-helper.c:202
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "गुणधर्म..."
 
 # libgnomeui/gnome-app-helper.c:203
@@ -931,7 +932,7 @@ msgstr "फाइल के गुणधर्म को सुधारें"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 #, fuzzy
-msgid "Prefere_nces..."
+msgid "Prefere_nces"
 msgstr "वरीयता"
 
 # libgnomeui/gnome-app-helper.c:212
@@ -1072,34 +1073,38 @@ msgstr "खेल समाप्त करें"
 msgid "End the current game"
 msgstr "वर्तमान खेल को समाप्त करें"
 
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr ""
+
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1146
 #, fuzzy
 msgid "View help for this application"
 msgstr "इस अनुप्रयोग के बारे में"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
 # libgnomeui/gnome-app-helper.c:2564
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 #, fuzzy
 msgid "Icons Only"
 msgstr "सिर्फ आइकान"
 
 # libgnomeui/gnome-app-helper.c:2565
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 #, fuzzy
 msgid "Text Only"
 msgstr "सिर्फ पाठ्य"
 
 # libgnomeui/gnome-app-helper.c:2616
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "डेस्कटाप डिफाल्ट (%s) का उपयोग करें"

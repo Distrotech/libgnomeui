@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
-"POT-Creation-Date: 2002-06-13 02:18+0900\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-06-13 02:25+0900\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -747,7 +747,8 @@ msgstr "文字列を置き換える"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "プロパティ(_P)..."
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -759,7 +760,8 @@ msgstr "ファイルのプロパティを変更する"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
+#, fuzzy
+msgid "Prefere_nces"
 msgstr "設定(_N)..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -874,27 +876,32 @@ msgstr "ゲーム終了(_E)"
 msgid "End the current game"
 msgstr "今のゲームを終了する"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+#, fuzzy
+msgid "_Contents"
+msgstr "これのヘルプ(_H)"
+
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "このアプリケーションのヘルプを表示"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "アイコンの下にテキスト"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr "アイコンの前にテキスト"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "アイコンのみ"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "テキストのみ"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "デスクトップのデフォルトを使用 (%s)"
@@ -1321,10 +1328,6 @@ msgstr "%Y年%m月%d日(%a) %T"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
-
-#, fuzzy
-#~ msgid "_Contents"
-#~ msgstr "これのヘルプ(_H)"
 
 #~ msgid "_Print"
 #~ msgstr "印刷(_P)"

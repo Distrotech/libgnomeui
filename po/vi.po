@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-06-30 05:10+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-04-15 19:27+01:00\n"
 "Last-Translator: Hoang Ngoc Tu <hntu@gmx.de>\n"
 "Language-Team: Gnome-Vi Team <gnomevi-list@lists.sourceforge.net>\n"
@@ -104,8 +104,10 @@ msgid "Translator credits"
 msgstr "Đóng góp dịch"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Những người cộng tác dịch. Dòng tin này cần được dánh dấu có thể dịch được"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Những người cộng tác dịch. Dòng tin này cần được dánh dấu có thể dịch được"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -520,7 +522,6 @@ msgstr "Chỉ dẫn cho mục 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tập tin"
 
@@ -578,7 +579,6 @@ msgid "_Game"
 msgstr "Trò chơi"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Chỉ dẫn"
 
@@ -745,7 +745,8 @@ msgstr "Thay thế một chuỗi mới"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "Đặc tính..."
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -757,7 +758,8 @@ msgstr "Sửa đổi các đặc tính của tập tin hiện thời"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
+#, fuzzy
+msgid "Prefere_nces"
 msgstr "_Sở thích..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -769,11 +771,11 @@ msgstr "Điều chỉnh cấu hình ứng dụng"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Về"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Thông tin về ứng dụng này"
 
@@ -800,7 +802,7 @@ msgstr "Mở một Cửa sổ mới"
 msgid "_Close This Window"
 msgstr "Đóng cửa sổ"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Đóng cửa sổ hiện thời"
 
@@ -872,27 +874,31 @@ msgstr "Kết thúc chơi"
 msgid "End the current game"
 msgstr "Kết thúc trò chơi hiện thời"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Xem trợ giúp cho ứng dụng này"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "Văn bản bên dưới Biểu tượng"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr "Văn bản ưu tiên cạnh biểu tượng"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "Chỉ có các Biểu tượng"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "Chỉ có Văn bản"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Dùng Màn Hình Nền mặc định (%s)"
@@ -966,8 +972,8 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Trình nhận dạng đơn nhất cho mục tập tin. Trình này sẽ được dùng để "
-"lưu danh sách lược sử."
+"Trình nhận dạng đơn nhất cho mục tập tin. Trình này sẽ được dùng để lưu danh "
+"sách lược sử."
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
 msgid "Browse Dialog Title"
@@ -986,8 +992,7 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Có nên dùng mục tập tin để nhập tên thư mục hay tên tập tin đầy đủ hay "
-"không."
+"Có nên dùng mục tập tin để nhập tên thư mục hay tên tập tin đầy đủ hay không."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1023,9 +1028,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng "
-"nó để nhận GnomeEntry khi bạn cần thay đổi hay tra vấn bất kỳ một tham "
-"số nào của nó."
+"GnomeEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng nó "
+"để nhận GnomeEntry khi bạn cần thay đổi hay tra vấn bất kỳ một tham số nào "
+"của nó."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1037,9 +1042,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng "
-"nó để nhận GtkEntry khi bạn cần thay đổi hay tra vấn bất kỳ một tham "
-"số nào của nó."
+"GtkEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng nó để "
+"nhận GtkEntry khi bạn cần thay đổi hay tra vấn bất kỳ một tham số nào của nó."
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
@@ -1322,9 +1326,8 @@ msgstr "%a, %d.%m.%Y, %H.%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Kết thúc thử"
+#~ msgid "Exit the test"
+#~ msgstr "Kết thúc thử"
 
 #~ msgid "Find _Again"
 #~ msgstr "Tìm thêm"
@@ -1403,4 +1406,3 @@ msgstr "Kết thúc thử"
 
 #~ msgid "Author"
 #~ msgstr "Tác giả"
-

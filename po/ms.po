@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-07-19 02:26+0800\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -570,7 +570,6 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -633,7 +632,6 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -862,12 +860,12 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Perihal"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -900,7 +898,7 @@ msgid "_Close This Window"
 msgstr "_Tutup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -988,29 +986,33 @@ msgstr "_Tamat permainan"
 msgid "End the current game"
 msgstr "Tamatkan permainan ini"
 
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr "_Kandungan"
+
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Lihat bantuan bagi aplikasi ini"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "Teks di Bawah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr "Teks Prioriti di Sebelah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "Ikon Sahaja"
 
 # libgnomeui/gnome-stock.c:844
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "Teks Sahaja"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Guna default desktop (%s)"
@@ -1488,12 +1490,8 @@ msgid "Sans 14"
 msgstr "Sans 14"
 
 # libgnomeui/gnome-app-helper.c:160
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Keluar ujian"
-
-#~ msgid "_Contents"
-#~ msgstr "_Kandungan"
+#~ msgid "Exit the test"
+#~ msgstr "Keluar ujian"
 
 # libgnomeui/gnome-app-helper.c:204
 #~ msgid "Find _Again"

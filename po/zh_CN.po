@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-02-17 23:52+0800\n"
 "Last-Translator: Wang Li <charlesw1234@163.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -754,7 +754,8 @@ msgstr "替换字符串"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "属性(_P)"
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -767,7 +768,7 @@ msgstr "修改文件属性"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 #, fuzzy
-msgid "Prefere_nces..."
+msgid "Prefere_nces"
 msgstr "选项(_P)..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -883,30 +884,34 @@ msgstr "结束游戏(_E)"
 msgid "End the current game"
 msgstr "结束当前游戏"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:1146
 #, fuzzy
 msgid "View help for this application"
 msgstr "关于本应用程序"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 #, fuzzy
 msgid "Icons Only"
 msgstr "仅图标"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 #, fuzzy
 msgid "Text Only"
 msgstr "仅文字"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "使用桌面默认值(%s)"

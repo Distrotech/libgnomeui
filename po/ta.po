@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2001-06-16 00:05-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -759,7 +759,7 @@ msgstr ""
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+msgid "_Properties"
 msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -771,7 +771,7 @@ msgstr ""
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
+msgid "Prefere_nces"
 msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -893,29 +893,34 @@ msgstr ""
 msgid "End the current game"
 msgstr "¾ü§À¡¨¾Â ºð¼¸õ"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+#, fuzzy
+msgid "_Contents"
+msgstr "_­¨¾ô ¦À¡ÕòÐ ¯¾Å¢ ¦ºö"
+
+#: libgnomeui/gnome-app-helper.c:1146
 #, fuzzy
 msgid "View help for this application"
 msgstr "­ó¾ ÀðÊ ¿¢Ãø ÌÈ¢ò¾¾¡"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 #, fuzzy
 msgid "Text Only"
 msgstr "¯¨Ã"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -1346,10 +1351,6 @@ msgstr ""
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr ""
-
-#, fuzzy
-#~ msgid "_Contents"
-#~ msgstr "_­¨¾ô ¦À¡ÕòÐ ¯¾Å¢ ¦ºö"
 
 #~ msgid "GConf error details: %s\n"
 #~ msgstr "GConf À¢¨ÆÂ¢ý Å¢ÅÃí¸û: %s\n"

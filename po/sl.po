@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-06-16 15:33+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2001-07-29 12:32+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -520,7 +520,6 @@ msgstr "Namig za predmet 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -578,7 +577,6 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoč"
 
@@ -745,7 +743,8 @@ msgstr "Zamenjaj niz"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "_Lastnosti..."
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -757,7 +756,8 @@ msgstr "Spremeni lastnosti datoteke"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
+#, fuzzy
+msgid "Prefere_nces"
 msgstr "_Nastavitve..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -769,11 +769,11 @@ msgstr "Nastavi program"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_O"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "O tem programu"
 
@@ -800,7 +800,7 @@ msgstr "Ustvari novo okno"
 msgid "_Close This Window"
 msgstr "_Zapri to okno"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zapri trenutno okno"
 
@@ -872,27 +872,31 @@ msgstr "_Končaj igro"
 msgid "End the current game"
 msgstr "Končaj trenutno igro"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr "_Vsebina"
+
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Glej pomoč za ta program"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "Besedilo pod ikonami"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr "Prednostno besedilo poleg ikon"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "Le ikone"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "Le besedilo"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Privzeto po namizju (%s)"
@@ -1327,12 +1331,8 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Izhod iz preizkusa"
-
-#~ msgid "_Contents"
-#~ msgstr "_Vsebina"
+#~ msgid "Exit the test"
+#~ msgstr "Izhod iz preizkusa"
 
 #~ msgid "Find _Again"
 #~ msgstr "Poišči z_nova"

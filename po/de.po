@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui cvs\n"
-"POT-Creation-Date: 2002-07-08 12:58+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-07-08 12:57+0200\n"
 "Last-Translator: Manuel Borchers <webmaster@matronix.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -531,7 +531,6 @@ msgstr "Hinweis für Kindelement 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datei"
 
@@ -589,7 +588,6 @@ msgid "_Game"
 msgstr "_Spiel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -756,7 +754,8 @@ msgstr "Eine Zeichenkette ersetzen"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "Ei_genschaften..."
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -768,7 +767,8 @@ msgstr "Die Eigenschaften der Datei verändern"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
+#, fuzzy
+msgid "Prefere_nces"
 msgstr "_Vorlieben..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -780,11 +780,11 @@ msgstr "Die Anwendung konfigurieren"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Über diese Anwendung"
 
@@ -811,7 +811,7 @@ msgstr "Ein neues Fenster öffnen"
 msgid "_Close This Window"
 msgstr "Fenster _schließen"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Das aktuelle Fenster schließen"
 
@@ -883,27 +883,33 @@ msgstr "Spiel _beenden"
 msgid "End the current game"
 msgstr "Das aktuelle Spiel beenden"
 
-#: libgnomeui/gnome-app-helper.c:1145
+# CHECK
+#: libgnomeui/gnome-app-helper.c:1143
+#, fuzzy
+msgid "_Contents"
+msgstr "_Hilfeinhalt"
+
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Hilfe zu dieser Anwendung zeigen"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "Text unter Symbolen"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr "Text neben Symbolen bevorzugen"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "Nur Symbole"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "Nur Text"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Desktopvorgaben verwenden (%s)"
@@ -1343,14 +1349,8 @@ msgstr "%a, %d. %m. %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Den Test beenden"
-
-# CHECK
-#, fuzzy
-#~ msgid "_Contents"
-#~ msgstr "_Hilfeinhalt"
+#~ msgid "Exit the test"
+#~ msgstr "Den Test beenden"
 
 #~ msgid "Find _Again"
 #~ msgstr "_Weitersuchen"

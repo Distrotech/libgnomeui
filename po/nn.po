@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.7\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-01-25 06:21+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: nynorsk <nn@li.org>\n"
@@ -754,7 +754,8 @@ msgstr "Erstatt ein tekststreng"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "Ei_genskapar ..."
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -767,7 +768,7 @@ msgstr "Endre eigenskapar for fila "
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 #, fuzzy
-msgid "Prefere_nces..."
+msgid "Prefere_nces"
 msgstr "_Innstillingar ..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -883,30 +884,34 @@ msgstr "_Avslutt spelet"
 msgid "End the current game"
 msgstr "Avslutt aktivt spel"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:1146
 #, fuzzy
 msgid "View help for this application"
 msgstr "Om dette programmet"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 #, fuzzy
 msgid "Icons Only"
 msgstr "Berre ikon"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 #, fuzzy
 msgid "Text Only"
 msgstr "Kun tekst"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Bruk førehandsvald for skrivebordet (%s)"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.0\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-04-21 21:32+0100\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -1158,7 +1158,8 @@ msgstr "Αντικατάσταση αλφαριθμητικού"
 #
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "_Ιδιότητες..."
 
 #
@@ -1179,7 +1180,7 @@ msgstr "Τροποποίηση ιδιοτήτων αρχείου"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 #, fuzzy
-msgid "Prefere_nces..."
+msgid "Prefere_nces"
 msgstr "_Προτιμήσεις..."
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
@@ -1348,6 +1349,11 @@ msgstr "_Τέλος παιχνιδιού"
 msgid "End the current game"
 msgstr "Τερματισμός του τρέχοντος παιχνιδιού"
 
+#: libgnomeui/gnome-app-helper.c:1143
+#, fuzzy
+msgid "_Contents"
+msgstr "Περιεχόμενα _Βοήθειας"
+
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
 #
@@ -1355,32 +1361,32 @@ msgstr "Τερματισμός του τρέχοντος παιχνιδιού"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1146
 #, fuzzy
 msgid "View help for this application"
 msgstr "Περί αυτής της εφαρμογής"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 #, fuzzy
 msgid "Icons Only"
 msgstr "Μόνο εικονίδια"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 #, fuzzy
 msgid "Text Only"
 msgstr "Μόνο κείμενο"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -1987,10 +1993,6 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
-
-#, fuzzy
-#~ msgid "_Contents"
-#~ msgstr "Περιεχόμενα _Βοήθειας"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#

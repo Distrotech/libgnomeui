@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-03-03 17:35+0100\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -753,7 +753,8 @@ msgstr "Sostituisce una stringa"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "_Proprietà..."
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -766,7 +767,7 @@ msgstr "Modifca le proprietà del file"
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
 #, fuzzy
-msgid "Prefere_nces..."
+msgid "Prefere_nces"
 msgstr "_Preferenze..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -882,30 +883,34 @@ msgstr "_Fine gioco"
 msgid "End the current game"
 msgstr "Termina la partita corrente"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:1146
 #, fuzzy
 msgid "View help for this application"
 msgstr "Su questa applicazione"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 #, fuzzy
 msgid "Icons Only"
 msgstr "Solo Icone"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 #, fuzzy
 msgid "Text Only"
 msgstr "Solo Testo"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Utilizza le impostazioni predefinite del desktop (%s)"

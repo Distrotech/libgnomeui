@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-08-05 20:50+0200\n"
 "PO-Revision-Date: 2002-07-28 20:16+0000\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -106,7 +106,8 @@ msgid "Translator credits"
 msgstr "Çevirenler"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Programý çevirenler."
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -460,7 +461,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Lütfen ayrýntýlý bilgi için Gnome Uygulama göçmesi sayfasýný ziyaret edin"
+msgstr ""
+"Lütfen ayrýntýlý bilgi için Gnome Uygulama göçmesi sayfasýný ziyaret edin"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -731,7 +733,8 @@ msgstr "Bir dizgiyi yer deðiþtir"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "Ö_zellikler"
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -743,7 +746,8 @@ msgstr "Bir dosyanýn özelliklerini düzenle"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
+#, fuzzy
+msgid "Prefere_nces"
 msgstr "_Tercihler..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -858,27 +862,31 @@ msgstr "_Oyunu bitir"
 msgid "End the current game"
 msgstr "Oyunu bitir"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Bu program hakkýnda yardým al"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "Simgeler Altýnda Metin"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "Sadece Simge"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "Sadece Metin"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Öntanýmlý masaüstü kullan (%s)"
@@ -1364,4 +1372,3 @@ msgstr "Sans 14"
 
 #~ msgid "Exit the test"
 #~ msgstr "Testten çýk"
-
