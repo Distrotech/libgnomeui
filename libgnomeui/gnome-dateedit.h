@@ -19,7 +19,6 @@ typedef struct {
 	GtkWidget *time_entry;
 	GtkWidget *time_popup;
 
-	time_t    time;
 	int       lower_hour;
 	int       upper_hour;
 } GnomeDateEdit;

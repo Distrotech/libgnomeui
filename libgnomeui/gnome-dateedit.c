@@ -12,6 +12,12 @@
 #include <libgnomeui/gtkcalendar.h>
 #include <libgnomeui/gnome-stock.h>
 
+typedef struct {
+	GnomeDateEdit gde;
+	
+	time_t time;
+} GnomeDateEditPrivate;
+
 enum {
 	DATE_CHANGED,
 	LAST_SIGNAL
@@ -30,7 +36,7 @@ gnome_date_edit_get_type ()
 	if (!date_edit_type){
 		GtkTypeInfo date_edit_info = {
 			"GnomeDateEdit",
-			sizeof (GnomeDateEdit),
+			sizeof (GnomeDateEditPrivate),
 			sizeof (GnomeDateEditClass),
 			NULL,
 			(GtkObjectInitFunc) gnome_date_edit_init,
@@ -45,8 +51,19 @@ gnome_date_edit_get_type ()
 }
 
 static void
-select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
+day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 {
+	char buffer [40];
+
+	sprintf (buffer, "%d/%d/%d", calendar->month, calendar->selected_day, calendar->year);
+	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
+	gtk_widget_destroy (gtk_widget_get_toplevel (GTK_WIDGET (calendar)));
+}
+
+static void
+select_clicked (GtkWidget *widget, GnomeDateEdit *_gde)
+{
+	GnomeDateEditPrivate *gde = (GnomeDateEditPrivate *) _gde;
 	GtkWidget *cal_win;
 	GtkCalendar *calendar;
 	struct tm *mtm;
@@ -57,7 +74,8 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 	
 	gtk_calendar_select_month (calendar, mtm->tm_mon, mtm->tm_year);
 	gtk_calendar_display_options (calendar, GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_HEADING);
-	
+	gtk_signal_connect (GTK_OBJECT (calendar), "day_selected",
+			    GTK_SIGNAL_FUNC (day_selected), gde);
 	gtk_container_add (GTK_CONTAINER (cal_win), (GtkWidget *) calendar);
 	gtk_widget_show_all (cal_win);
 }
@@ -175,8 +193,9 @@ gnome_date_edit_init (GnomeDateEdit *gde)
 }
 
 void
-gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
+gnome_date_edit_set_time (GnomeDateEdit *_gde, time_t the_time)
 {
+	GnomeDateEditPrivate *gde = (GnomeDateEditPrivate *) _gde;
 	struct tm *mytm;
 	char buffer [40];
 	char *ct;
@@ -189,11 +208,11 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 
 	/* Set the date */
 	sprintf (buffer, "%d/%d/%d", mytm->tm_mon, mytm->tm_mday, mytm->tm_year);
-	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
+	gtk_entry_set_text (GTK_ENTRY (_gde->date_entry), buffer);
 
 	/* Set the time */
 	strftime (buffer, sizeof (buffer), "%I:00 %p", mytm);
-	gtk_entry_set_text (GTK_ENTRY (gde->time_entry), buffer);
+	gtk_entry_set_text (GTK_ENTRY (_gde->time_entry), buffer);
 }
 
 void
