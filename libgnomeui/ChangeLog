@@ -1,3 +1,7 @@
+Mon Sep 03 00:42:33 2001  George Lebl <jirka@5z.com>
+
+	* gnome-ui-init.c: use the correct GTK+ version
+
 Sun Sep 02 23:49:34 2001  George Lebl <jirka@5z.com>
 
 	* Makefile.am, gnome-canvas-init.[ch], libgnomeui.h, gnome-ui-init.c:

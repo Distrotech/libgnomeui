@@ -729,7 +729,9 @@ const GnomeModuleInfo *
 gnome_gtk_module_info_get (void)
 {
 	static GnomeModuleInfo module_info = {
-		"gtk", GTK_VERSION, N_("GTK+"),
+		/* XXX the only decent version I found was this,
+		 * it should be the same as GTK though */
+		"gtk", GTK_PIXBUF_VERSION, N_("GTK+"),
 		NULL, NULL,
 		gtk_pre_args_parse, gtk_post_args_parse, gtk_options,
 		NULL,
