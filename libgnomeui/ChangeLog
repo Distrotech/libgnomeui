@@ -1,3 +1,7 @@
+1999-08-04  Morten Welinder  <terra@diku.dk>
+
+	* gnome-stock.c (gnome_stock_destroy): Unref pixmaps.
+
 1999-08-04  Larry Ewing  <lewing@gimp.org>
 
 	* gnome-canvas.c (gnome_canvas_item_affine_relative): BUGFIX: make sure

@@ -307,12 +307,19 @@ gnome_stock_destroy(GtkObject *object)
 	g_return_if_fail(GNOME_IS_STOCK(object));
 
 	stock = GNOME_STOCK(object);
-	if (stock->regular)
-		gtk_widget_destroy(GTK_WIDGET(stock->regular));
-	if (stock->disabled)
-		gtk_widget_destroy(GTK_WIDGET(stock->disabled));
-	if (stock->focused)
-		gtk_widget_destroy(GTK_WIDGET(stock->focused));
+	stock->current = NULL;
+	if (stock->regular) {
+		gtk_widget_unref (GTK_WIDGET(stock->regular));
+		stock->regular = NULL;
+	}
+	if (stock->disabled) {
+		gtk_widget_unref (GTK_WIDGET(stock->disabled));
+		stock->disabled = NULL;
+	}
+	if (stock->focused) {
+		gtk_widget_unref (GTK_WIDGET(stock->focused));
+		stock->focused = NULL;
+	}
 	if (stock->icon)
 		g_free(stock->icon);
 
