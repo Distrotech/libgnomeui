@@ -1,5 +1,11 @@
 2002-05-15  Federico Mena Quintero  <federico@ximian.com>
 
+	* libgnomeui/gnome-icon-item.c (update_pango_layout): Use
+	PANGO_WRAP_WORD most of the time, until we get a word that is
+	wider than the layout width.  In this case, switch to
+	PANGO_WRAP_CHAR.  Fixes #78508 in a semi-ugly way, but currently
+	PangoLayout provides no other way to do this.
+
 	* libgnomeui/gnome-icon-list.c (gil_get_items_per_line): Do a
 	slightly better computation of how many icons fit in a row, by
 	remembering that there are DEFAULT_COL_SPACING pixels between the
