@@ -1,3 +1,8 @@
+Mon Aug 24 22:51:50 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gtk-socket.c (gtk_socket_realize): Use 
+	gtk_widget_get_parent_window() to get the parent window.
+
 Mon Aug 24 19:01:02 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_size_request/allocate): Don't
