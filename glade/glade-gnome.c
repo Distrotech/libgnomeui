@@ -34,6 +34,13 @@
 
 #include <gnome.h>
 
+#ifndef ENABLE_NLS
+/* a slight optimisation when gettext is off */
+#define glade_xml_gettext(xml, msgid) (msgid)
+#endif
+#undef _
+#define _(msgid) (glade_xml_gettext(xml, msgid))
+
 static const char *get_stock_name (const char *stock_name);
 static gboolean get_stock_uiinfo (const char *stock_name, GnomeUIInfo *info);
 
@@ -316,7 +323,7 @@ toolbar_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
 				if (mask) gdk_bitmap_unref(mask);
 			}
 			child = gtk_toolbar_append_item(GTK_TOOLBAR(w),
-							label, NULL, NULL,
+							_(label), NULL, NULL,
 							iconw, NULL, NULL);
 			glade_xml_set_common_params(xml, child, childnode,
 						    longname, "GtkButton");
@@ -379,14 +386,17 @@ menushell_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
 			content = xmlNodeGetContent(xmlnode);
 			if (!strcmp(xmlnode->name, "label")) {
 				if (tmp1) g_free(tmp1);
-				tmp1 = infos[0].label = g_strdup(content);
+				tmp1 = g_strdup(content);
+				infos[0].label = _(tmp1);
 			} else if (!strcmp(xmlnode->name, "tooltip")) {
 				if (tmp2) g_free(tmp2);
-				tmp2 = infos[0].hint = g_strdup(content);
+				tmp2 = g_strdup(content);
+				infos[0].hint = _(tmp2);
 			}
 			if (content) free(content);
 		}
-		gnome_app_fill_menu(GTK_MENU_SHELL(w), infos, NULL, TRUE,
+		gnome_app_fill_menu(GTK_MENU_SHELL(w), infos,
+				    gtk_accel_group_get_default(), TRUE,
 				    childnum);
 		child = infos[0].widget;
 		if (tmp1) g_free(tmp1);
@@ -746,7 +756,7 @@ stock_button_new(GladeXML *xml, GNode *node)
                         free(content);
         }
         if (string != NULL) {
-                button = gtk_button_new_with_label(string);
+                button = gtk_button_new_with_label(_(string));
         } else if (stock != NULL) {
 		const char *tmp = get_stock_name(stock);
 		if (tmp)
@@ -780,7 +790,7 @@ color_picker_new(GladeXML *xml, GNode *node)
 				GNOME_COLOR_PICKER(wid), content[0] == 'T');
 		else if (!strcmp(info->name, "title"))
 			gnome_color_picker_set_title(GNOME_COLOR_PICKER(wid),
-						     content);
+						     _(content));
 		if (content)
 			free(content);
 	}
@@ -800,7 +810,7 @@ font_picker_new(GladeXML *xml, GNode *node)
 		
 		if (!strcmp(info->name, "title"))
 			gnome_font_picker_set_title(GNOME_FONT_PICKER(wid),
-						    content);
+						    _(content));
 		else if (!strcmp(info->name, "preview_text"))
 			gnome_font_picker_set_preview_text(
 				GNOME_FONT_PICKER(wid), content);
@@ -853,7 +863,7 @@ href_new(GladeXML *xml, GNode *node)
 		if (content)
 			free(content);
 	}
-	wid = gnome_href_new(url, label);
+	wid = gnome_href_new(url, _(label));
 	if (url) g_free(url);
 	if (label) g_free(label);
 	return wid;
@@ -908,7 +918,7 @@ file_entry_new(GladeXML *xml, GNode *node)
 		if (content)
 			free(content);
 	}
-	wid = gnome_file_entry_new(history_id, title);
+	wid = gnome_file_entry_new(history_id, _(title));
 	if (history_id) g_free(history_id);
 	if (title) g_free(title);
 	gnome_file_entry_set_directory(GNOME_FILE_ENTRY(wid), directory);
@@ -943,7 +953,7 @@ clock_new(GladeXML *xml, GNode *node)
 			free(content);
 	}
 	wid = gtk_clock_new(ctype);
-	gtk_clock_set_format(GTK_CLOCK(wid), format);
+	gtk_clock_set_format(GTK_CLOCK(wid), _(format));
 	if (format) g_free(format);
 	gtk_clock_set_seconds(GTK_CLOCK(wid), seconds);
 	gtk_clock_set_update_interval(GTK_CLOCK(wid), interval);
@@ -1135,7 +1145,7 @@ pixmapmenuitem_new(GladeXML *xml, GNode *node)
 	}
 	wid = gtk_pixmap_menu_item_new();
 	if (label) {
-		GtkWidget *lwid = gtk_label_new(label);
+		GtkWidget *lwid = gtk_label_new(_(label));
 		gtk_container_add(GTK_CONTAINER(wid), lwid);
 		gtk_widget_show(lwid);
 		g_free(label);
@@ -1226,8 +1236,8 @@ about_new(GladeXML *xml, GNode *node)
 		if (content)
 			free(content);
 	}
-	wid = gnome_about_new(title, version, copyright,
-			      (const gchar **)authors, comments, logo);
+	wid = gnome_about_new(title, version, _(copyright),
+			      (const gchar **)authors, _(comments), logo);
 	/* if (title) g_free(title); */
 	/* if (version) g_free(version); */
 	if (copyright) g_free(copyright);
@@ -1281,7 +1291,7 @@ gnomedialog_new(GladeXML *xml, GNode *node)
 		if (content)
 			free(content);
 	}
-	win = gnome_dialog_new(title, NULL);
+	win = gnome_dialog_new(_(title), NULL);
 	if (title) g_free(title);
 	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
 			      auto_shrink);
@@ -1330,7 +1340,7 @@ messagebox_new(GladeXML *xml, GNode *node)
 		if (content) free(content);
 	}
 	/* create the message box with no buttons */
-	win = gnome_message_box_new(message, typename, NULL);
+	win = gnome_message_box_new(_(message), typename, NULL);
 	/* the message box contains a vbox which contains a hbuttonbox ... */
 	child = node->children->children;
 	/* the children of the hbuttonbox are the buttons ... */
@@ -1386,7 +1396,7 @@ app_new(GladeXML *xml, GNode *node)
 		}
 		if (content) free(content);
 	}
-	win = gnome_app_new(gnome_app_id, title);
+	win = gnome_app_new(gnome_app_id, _(title));
 	if (title) g_free(title);
 	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
 			      auto_shrink);
