@@ -1,3 +1,22 @@
+2000-09-12  Martin Baulig  <baulig@suse.de>
+
+	* gnome-icon-entry.h (GnomeIconEntry): Derive this from GnomeSelector.
+	(gnome_icon_entry_construct_full): New function.
+	(gnome_icon_entry_get_icon_selector): New function.
+	(gnome_icon_entry_get_filename): This function is now deprecated; use
+	the GnomeSelector functions instead.
+	(gnome_icon_entry_set_filename): Likewise.
+	(gnome_icon_entry_set_pixmap_subdir): This function is now deprecated.
+	(gnome_icon_entry_set_browse_dialog_title): Removed.
+	(gnome_icon_entry_set_history_id): Removed.
+	(gnome_icon_entry_pick_dialog): Removed.
+ 	(gnome_icon_entry_set_icon): Removed.
+	(gnome_icon_entry_gnome_file_entry): Removed.
+	(gnome_icon_entry_gnome_entry): Removed.
+	(gnome_icon_entry_gtk_entry): Removed.
+
+	* gnome-icon-entry.c: Totally rewrote this file from scratch.
+
 2000-09-11  Martin Baulig  <baulig@suse.de>
 
 	* gnome-file-selector.h (GnomeFileSelector): Derive from GnomeEntry.
