@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-09-27 23:20+0200\n"
+"POT-Creation-Date: 2002-10-14 11:39+0200\n"
 "PO-Revision-Date: 2002-08-19 21:01+0800\n"
 "Last-Translator: Wang Li <charles@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -434,12 +434,12 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI 库"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "发生了多个段错误； 无法显示错误对话框\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:631
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-09-27 23:20+0200\n"
+"POT-Creation-Date: 2002-10-14 11:39+0200\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Anurag Seetha <anuragseetha@yahoo.com>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -519,13 +519,13 @@ msgstr "GNOME GUI लाइब्रेरी"
 
 # libgnomeui/gnome-ui-init.c:564
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "कई हिस्सों में एक साथ खराबी त्रुटि संदेश नहीं दिए जा सकते\n"
 
 # libgnomeui/gnome-ui-init.c:578
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:631
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

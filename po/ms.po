@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-09-27 23:20+0200\n"
+"POT-Creation-Date: 2002-10-14 11:39+0200\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -452,13 +452,13 @@ msgstr "Pustaka GUI GNOME"
 
 # libgnomeui/gnome-init.c:642
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Beberapa ralat segmentasi berlaku; tidak dapat paparkan dialog ralat\n"
 
 # libgnomeui/gnome-init.c:642
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:631
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
