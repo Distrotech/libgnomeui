@@ -194,6 +194,14 @@ gnome_dock_layout_get_type (void)
 
   return layout_type;
 }
+
+/**
+ * gnome_dock_layout_new:
+ * 
+ * Description: Create a new GnomeDockLayout widget.
+ * 
+ * Returns: The new GnomeDockLayout widget.
+ **/
    
 GnomeDockLayout *
 gnome_dock_layout_new (void)
@@ -205,6 +213,19 @@ gnome_dock_layout_new (void)
   return new;
 }
 
+/**
+ * gnome_dock_layout_add_item:
+ * @layout: A GnomeDockLayout widget
+ * @item: The dock item to be added to @layout
+ * @placement: Placement of @item in @layout
+ * @band_num: Band number
+ * @band_position: Position within the band
+ * @offset: Distance from the previous element in the band
+ * 
+ * Description: Add @item to @layout with the specified parameters.
+ * 
+ * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
+ **/
 gboolean
 gnome_dock_layout_add_item (GnomeDockLayout *layout,
                             GnomeDockItem *item,
@@ -228,6 +249,20 @@ gnome_dock_layout_add_item (GnomeDockLayout *layout,
 
   return TRUE;
 }
+
+/**
+ * gnome_dock_layout_add_floating_item:
+ * @layout: A GnomeDockLayout widget
+ * @item: The dock item to be added to @layout
+ * @x: X-coordinate for the floating item
+ * @y: Y-coordinate for the floating item
+ * @orientation: Orientation for the floating item
+ * 
+ * Description: Add @item to @layout as a floating item with the
+ * specified (@x, @y) position and @orientation.
+ * 
+ * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
+ **/
    
 gboolean
 gnome_dock_layout_add_floating_item (GnomeDockLayout *layout,
@@ -251,6 +286,15 @@ gnome_dock_layout_add_floating_item (GnomeDockLayout *layout,
   return TRUE;
 }
 
+/**
+ * gnome_dock_layout_get_item:
+ * @layout: A GnomeDockLayout widget
+ * @item: The GnomeDockItem to be retrieved
+ * 
+ * Description: Retrieve a layout item.
+ * 
+ * Returns: The retrieved GnomeDockLayoutItem widget.
+ **/
 GnomeDockLayoutItem *
 gnome_dock_layout_get_item (GnomeDockLayout *layout,
                             GnomeDockItem *item)
@@ -265,6 +309,15 @@ gnome_dock_layout_get_item (GnomeDockLayout *layout,
     return list->data;
 }
 
+/**
+ * gnome_dock_layout_get_item_by_name:
+ * @layout: A GnomeDockLayout widget
+ * @name: Name of the item to be retrieved
+ * 
+ * Description: Retrieve the dock item named @name.
+ * 
+ * Returns: The named GnomeDockLayoutItem widget.
+ **/
 GnomeDockLayoutItem *
 gnome_dock_layout_get_item_by_name (GnomeDockLayout *layout,
                                     const gchar *name)
@@ -279,6 +332,15 @@ gnome_dock_layout_get_item_by_name (GnomeDockLayout *layout,
     return list->data;
 }
 
+/**
+ * gnome_dock_layout_remove_item:
+ * @layout: A GnomeDockLayout widget
+ * @item: The GnomeDockItem to be removed
+ * 
+ * Description: Remove the specified @item from @layout.
+ * 
+ * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
+ **/
 gboolean
 gnome_dock_layout_remove_item (GnomeDockLayout *layout,
                                GnomeDockItem *item)
@@ -294,6 +356,15 @@ gnome_dock_layout_remove_item (GnomeDockLayout *layout,
   return TRUE;
 }
 
+/**
+ * gnome_dock_layout_remove_item_by_name:
+ * @layout: A GnomeDockLayout widget
+ * @name: Name of the GnomeDockItem to be removed
+ * 
+ * Description: Remove the item named @name from @layout.
+ * 
+ * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
+ **/
 gboolean
 gnome_dock_layout_remove_item_by_name (GnomeDockLayout *layout,
                                        const gchar *name)
@@ -311,6 +382,15 @@ gnome_dock_layout_remove_item_by_name (GnomeDockLayout *layout,
 
 
 
+/**
+ * gnome_dock_layout_add_to_dock:
+ * @layout: A GnomeDockLayout widget
+ * @dock: The GnomeDock widget the layout items must be added to
+ * 
+ * Description: Add all the items in @layout to the specified @dock.
+ * 
+ * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
+ **/
 gboolean
 gnome_dock_layout_add_to_dock (GnomeDockLayout *layout,
                                GnomeDock *dock)
@@ -374,6 +454,14 @@ gnome_dock_layout_add_to_dock (GnomeDockLayout *layout,
 
 /* Layout string functions.  */
 
+/**
+ * gnome_dock_layout_create_string:
+ * @layout: A GnomeDockLayout widget
+ * 
+ * Description: Generate a string describing the layout in @layout.
+ * 
+ * Returns: The (malloced) layout string for @layout.
+ **/
 gchar *
 gnome_dock_layout_create_string (GnomeDockLayout *layout)
 {
@@ -428,6 +516,16 @@ gnome_dock_layout_create_string (GnomeDockLayout *layout)
   return retval;
 }
 
+/**
+ * gnome_dock_layout_parse_string:
+ * @layout: A GnomeDockLayout widget
+ * @string: A layout string to be parsed
+ * 
+ * Description: Parse the layout string @string, and move around the
+ * items in @layout accordingly.
+ * 
+ * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
+ **/
 gboolean gnome_dock_layout_parse_string (GnomeDockLayout *layout,
                                          const gchar *string)
 {
