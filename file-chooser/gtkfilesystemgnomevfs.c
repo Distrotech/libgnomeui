@@ -30,11 +30,17 @@
  *            John Sullivan <sullivan@eazel.com>
  */
 
+/* TODO:
+ * - icon cacheing
+ *  - handle local only property
+ */
+
 #include "gtkfilesystemgnomevfs.h"
 
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-volume-monitor.h>
 #include <libgnomevfs/gnome-vfs-drive.h>
+#include <libgnomevfs/gnome-vfs-i18n.h>
 
 #ifdef USE_GCONF
 #include <gconf/gconf-client.h>
@@ -57,6 +63,9 @@ typedef struct _GtkFileSystemGnomeVFSClass GtkFileSystemGnomeVFSClass;
 #define GTK_IS_FILE_SYSTEM_GNOME_VFS_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_FILE_SYSTEM_GNOME_VFS))
 #define GTK_FILE_SYSTEM_GNOME_VFS_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FILE_SYSTEM_GNOME_VFS, GtkFileSystemGnomeVFSClass))
 
+static GType type_gtk_file_system_gnome_vfs = 0;
+static GType type_gtk_file_folder_gnome_vfs = 0;
+
 struct _GtkFileSystemGnomeVFSClass
 {
   GObjectClass parent_class;
@@ -76,13 +85,12 @@ struct _GtkFileSystemGnomeVFS
   GSList *bookmarks;
 #endif
 
-  GtkIconTheme *icon_theme;
   GdkScreen *screen;
 
   guint locale_encoded_filenames : 1;
 };
 
-#define GTK_TYPE_FILE_FOLDER_GNOME_VFS             (gtk_file_folder_gnome_vfs_get_type ())
+#define GTK_TYPE_FILE_FOLDER_GNOME_VFS             (gtk_file_folder_gnome_vfs_get_type())
 #define GTK_FILE_FOLDER_GNOME_VFS(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_FOLDER_GNOME_VFS, GtkFileFolderGnomeVFS))
 #define GTK_IS_FILE_FOLDER_GNOME_VFS(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_FOLDER_GNOME_VFS))
 #define GTK_FILE_FOLDER_GNOME_VFS_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FILE_FOLDER_GNOME_VFS, GtkFileFolderGnomeVFSClass))
@@ -265,41 +273,8 @@ static GObjectClass *folder_parent_class;
 GType
 gtk_file_system_gnome_vfs_get_type (void)
 {
-  static GType file_system_gnome_vfs_type = 0;
-
-  if (!file_system_gnome_vfs_type)
-    {
-      static const GTypeInfo file_system_gnome_vfs_info =
-      {
-	sizeof (GtkFileSystemGnomeVFSClass),
-	NULL,		/* base_init */
-	NULL,		/* base_finalize */
-	(GClassInitFunc) gtk_file_system_gnome_vfs_class_init,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	sizeof (GtkFileSystemGnomeVFS),
-	0,		/* n_preallocs */
-	(GInstanceInitFunc) gtk_file_system_gnome_vfs_init,
-      };
-
-      static const GInterfaceInfo file_system_info =
-      {
-	(GInterfaceInitFunc) gtk_file_system_gnome_vfs_iface_init, /* interface_init */
-	NULL,			                              /* interface_finalize */
-	NULL			                              /* interface_data */
-      };
-
-      file_system_gnome_vfs_type = g_type_register_static (G_TYPE_OBJECT,
-							   "GtkFileSystemGnomeVFS",
-							   &file_system_gnome_vfs_info, 0);
-      g_type_add_interface_static (file_system_gnome_vfs_type,
-				   GTK_TYPE_FILE_SYSTEM,
-				   &file_system_info);
-    }
-
-  return file_system_gnome_vfs_type;
+  return type_gtk_file_system_gnome_vfs;
 }
-
 /**
  * gtk_file_system_gnome_vfs_new:
  *
@@ -314,13 +289,7 @@ gtk_file_system_gnome_vfs_new (void)
 {
   GtkFileSystemGnomeVFS *system_vfs;
 
-  gnome_vfs_init ();
-
   system_vfs = g_object_new (GTK_TYPE_FILE_SYSTEM_GNOME_VFS, NULL);
-
-  system_vfs->locale_encoded_filenames = (getenv ("G_BROKEN_FILENAMES") != NULL);
-
-  system_vfs->folders = g_hash_table_new (g_str_hash, g_str_equal);
 
   return GTK_FILE_SYSTEM (system_vfs);
 }
@@ -367,7 +336,9 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 #ifdef USE_GCONF
   GConfValue *value;
 #endif
-  GList *list, *l;
+
+  system_vfs->locale_encoded_filenames = (getenv ("G_BROKEN_FILENAMES") != NULL);
+  system_vfs->folders = g_hash_table_new (g_str_hash, g_str_equal);
 
   #ifdef USE_GCONF
   system_vfs->client = gconf_client_get_default ();
@@ -389,9 +360,8 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 							  NULL);
 #endif
 
-  system_vfs->icon_theme = gtk_icon_theme_new (); /* We will set the screen later */
-  system_vfs->screen = NULL;
-  /* FIXME: listen for the "changed" signal in the icon theme? */
+  /* FIXME: listen for the "changed" signal in the icon theme?
+   * Not needed until we add cacheing */
 
   system_vfs->volume_monitor = gnome_vfs_volume_monitor_ref (gnome_vfs_get_volume_monitor ());
   g_signal_connect (system_vfs->volume_monitor, "volume-mounted",
@@ -403,82 +373,6 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
   g_signal_connect (system_vfs->volume_monitor, "drive-disconnected",
 		    G_CALLBACK (drive_connect_disconnect_cb), system_vfs);
 
-  list = gnome_vfs_volume_monitor_get_connected_drives (system_vfs->volume_monitor);
-
-  for (l = list; l; l = l->next)
-    {
-      GnomeVFSDrive *drive;
-      GnomeVFSVolume *volume;
-      char *device_path;
-      char *activation_uri;
-      char *display_name;
-
-      drive = l->data;
-      device_path = gnome_vfs_drive_get_device_path (drive);
-      activation_uri = gnome_vfs_drive_get_activation_uri (drive);
-      display_name = gnome_vfs_drive_get_display_name (drive);
-      g_print ("Drive device path %s\n"
-	       "\tactivation URI %s\n"
-	       "\tdisplay name %s\n"
-	       "\tuser visible? %s\n",
-	       device_path, activation_uri, display_name,
-	       gnome_vfs_drive_is_user_visible (drive) ? "YES" : "NO");
-      g_free (device_path);
-      g_free (activation_uri);
-      g_free (display_name);
-
-      volume = gnome_vfs_drive_get_mounted_volume (drive);
-      if (volume)
-	{
-	  device_path = gnome_vfs_volume_get_device_path (volume);
-	  activation_uri = gnome_vfs_volume_get_activation_uri (volume);
-	  display_name = gnome_vfs_volume_get_display_name (volume);
-	  g_print ("\tVolume device path %s\n"
-		   "\tVolume activation URI %s\n"
-		   "\tVolume display name %s\n"
-		   "\tVolume user visible? %s\n",
-		   device_path, activation_uri, display_name,
-		   gnome_vfs_volume_is_user_visible (volume) ? "YES" : "NO");
-	  g_free (device_path);
-	  g_free (activation_uri);
-	  g_free (display_name);
-	  gnome_vfs_volume_unref (volume);
-	}
-      else
-	g_print ("\tNo volume\n");
-
-      gnome_vfs_drive_unref (drive);
-    }
-
-  g_list_free (list);
-
-  list = gnome_vfs_volume_monitor_get_mounted_volumes (system_vfs->volume_monitor);
-
-  for (l = list; l; l = l->next)
-    {
-      GnomeVFSVolume *volume;
-      char *device_path;
-      char *activation_uri;
-      char *display_name;
-
-      volume = l->data;
-
-      device_path = gnome_vfs_volume_get_device_path (volume);
-      activation_uri = gnome_vfs_volume_get_activation_uri (volume);
-      display_name = gnome_vfs_volume_get_display_name (volume);
-      g_print ("Volume device path %s\n"
-	       "\tactivation URI %s\n"
-	       "\tdisplay name %s\n"
-	       "\tuser visible? %s\n",
-	       device_path, activation_uri, display_name,
-	       gnome_vfs_volume_is_user_visible (volume) ? "YES" : "NO");
-      g_free (device_path);
-      g_free (activation_uri);
-      g_free (display_name);
-      gnome_vfs_volume_unref (volume);
-    }
-
-  g_list_free (list);
 }
 
 static void
@@ -493,8 +387,6 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
   g_object_unref (system_vfs->client);
   gtk_file_paths_free (system_vfs->bookmarks);
 #endif
-
-  g_object_unref (system_vfs->icon_theme);
 
   gnome_vfs_volume_monitor_unref (system_vfs->volume_monitor);
 
@@ -542,7 +434,10 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
       drive = gnome_vfs_volume_get_drive (volume);
 
       if (!drive && gnome_vfs_volume_is_user_visible (volume))
+	{
+	  gnome_vfs_drive_unref (drive);
 	  result = g_slist_prepend (result, volume);
+	}
       else
 	{
 	  gnome_vfs_drive_unref (drive);
@@ -573,23 +468,26 @@ gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
 
   volume = NULL;
 
-  if (gnome_vfs_uri_is_local (uri))
+  if (strcmp (uri->method_string, "file") == 0) 
     while (uri)
       {
 	const char *local_path;
 	GnomeVFSURI *parent;
-
+	
 	local_path = gnome_vfs_uri_get_path (uri);
 	volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, local_path);
-
+	
+	if (volume == NULL)
+	  break;
+	
 	if (gnome_vfs_volume_is_user_visible (volume))
 	  break;
-
+	
 	parent = gnome_vfs_uri_get_parent (uri);
 	gnome_vfs_uri_unref (uri);
 	uri = parent;
       }
-
+  
   if (uri)
     gnome_vfs_uri_unref (uri);
 
@@ -638,6 +536,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
       return g_object_ref (folder_vfs);
     }
 
+  /* ALEX: what about '/' ? */
   if (!gtk_file_system_get_parent (file_system, path, &parent_path, error))
     return FALSE;
 
@@ -721,6 +620,7 @@ gtk_file_system_gnome_vfs_create_folder (GtkFileSystem     *file_system,
   const gchar *uri = gtk_file_path_get_string (path);
   GnomeVFSResult result;
 
+  /* ALEX: This can't be a good default */
   result = gnome_vfs_make_directory (uri,
 				     (GNOME_VFS_PERM_USER_ALL |
 				      GNOME_VFS_PERM_GROUP_ALL |
@@ -870,22 +770,6 @@ gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_sys
     }
 }
 
-/* Ensures that the screen for the icon theme is set */
-static void
-ensure_icon_theme (GtkFileSystemGnomeVFS *system_vfs,
-		   GtkWidget             *widget)
-{
-  GdkScreen *screen;
-
-  screen = gtk_widget_get_screen (widget);
-
-  if (system_vfs->screen != screen)
-    {
-      system_vfs->screen = screen;
-      gtk_icon_theme_set_screen (system_vfs->icon_theme, system_vfs->screen);
-    }
-}
-
 /* Gets an icon from its standard icon name */
 static GdkPixbuf *
 get_icon_from_name (GtkFileSystemGnomeVFS *system_vfs,
@@ -894,6 +778,7 @@ get_icon_from_name (GtkFileSystemGnomeVFS *system_vfs,
 		    gint                   pixel_size,
 		    GError               **error)
 {
+  GtkIconTheme *icon_theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (widget));
   GdkPixbuf *pixbuf;
   GdkPixbuf *unscaled;
   char *real_icon_name;
@@ -905,7 +790,7 @@ get_icon_from_name (GtkFileSystemGnomeVFS *system_vfs,
     {
       GtkIconInfo *info;
 
-      info = gtk_icon_theme_lookup_icon (system_vfs->icon_theme,
+      info = gtk_icon_theme_lookup_icon (icon_theme,
 					 icon_name,
 					 pixel_size,
 					 0);
@@ -924,6 +809,8 @@ get_icon_from_name (GtkFileSystemGnomeVFS *system_vfs,
   /* FIXME: Use a cache */
   unscaled = gdk_pixbuf_new_from_file (real_icon_name, error);
 
+  /* ALEX: This scaling seems to ignore the icon theme stuff */
+  
   if (real_icon_name != (char *) icon_name)
     g_free (real_icon_name);
 
@@ -971,11 +858,21 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
   GtkFileSystemGnomeVFS *system_vfs;
   char *icon_name;
   GdkPixbuf *pixbuf;
+  GnomeVFSVolume *mounted_volume;
 
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
   if (GNOME_IS_VFS_DRIVE (volume))
-    icon_name = gnome_vfs_drive_get_icon (GNOME_VFS_DRIVE (volume));
+    {
+      mounted_volume = gnome_vfs_drive_get_mounted_volume (GNOME_VFS_DRIVE (volume));
+      if (mounted_volume)
+	{
+	  icon_name = gnome_vfs_volume_get_icon (mounted_volume);
+	  gnome_vfs_volume_unref (mounted_volume);
+	}
+      else
+	icon_name = gnome_vfs_drive_get_icon (GNOME_VFS_DRIVE (volume));
+    }
   else if (GNOME_IS_VFS_VOLUME (volume))
     icon_name = gnome_vfs_volume_get_icon (GNOME_VFS_VOLUME (volume));
   else
@@ -983,8 +880,6 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
       g_warning ("%p is not a valid volume", volume);
       return NULL;
     }
-
-  ensure_icon_theme (system_vfs, widget);
 
   if (icon_name)
     {
@@ -1300,6 +1195,7 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
 				       gint               pixel_size,
 				       GError           **error)
 {
+  GtkIconTheme *icon_theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (widget));
   GtkFileSystemGnomeVFS *system_vfs;
   const char *uri;
   GdkPixbuf *pixbuf;
@@ -1309,10 +1205,8 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
 
   pixbuf = NULL;
 
-  ensure_icon_theme (system_vfs, widget);
-
   uri = gtk_file_path_get_string (path);
-  icon_name = gnome_icon_lookup_sync (system_vfs->icon_theme,
+  icon_name = gnome_icon_lookup_sync (icon_theme,
 				      NULL,
 				      uri,
 				      NULL,
@@ -1361,6 +1255,7 @@ bookmark_list_read (GSList **bookmarks, GError **error)
 
   filename = bookmark_get_filename (FALSE);
   *bookmarks = NULL;
+  result = FALSE;
 
   if (g_file_get_contents (filename, &contents, NULL, error))
     {
@@ -1694,39 +1589,7 @@ gtk_file_system_gnome_vfs_list_bookmarks (GtkFileSystem *file_system)
 static GType
 gtk_file_folder_gnome_vfs_get_type (void)
 {
-  static GType file_folder_gnome_vfs_type = 0;
-
-  if (!file_folder_gnome_vfs_type)
-    {
-      static const GTypeInfo file_folder_gnome_vfs_info =
-      {
-	sizeof (GtkFileFolderGnomeVFSClass),
-	NULL,		/* base_init */
-	NULL,		/* base_finalize */
-	(GClassInitFunc) gtk_file_folder_gnome_vfs_class_init,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	sizeof (GtkFileFolderGnomeVFS),
-	0,		/* n_preallocs */
-	(GInstanceInitFunc) gtk_file_folder_gnome_vfs_init,
-      };
-
-      static const GInterfaceInfo file_folder_info =
-      {
-	(GInterfaceInitFunc) gtk_file_folder_gnome_vfs_iface_init, /* interface_init */
-	NULL,			                              /* interface_finalize */
-	NULL			                              /* interface_data */
-      };
-
-      file_folder_gnome_vfs_type = g_type_register_static (G_TYPE_OBJECT,
-							   "GtkFileFolderGnomeVFS",
-							   &file_folder_gnome_vfs_info, 0);
-      g_type_add_interface_static (file_folder_gnome_vfs_type,
-				   GTK_TYPE_FILE_FOLDER,
-				   &file_folder_info);
-    }
-
-  return file_folder_gnome_vfs_type;
+  return type_gtk_file_folder_gnome_vfs;
 }
 
 static void
@@ -2197,3 +2060,91 @@ client_notify_cb (GConfClient *client,
   set_bookmarks_from_value (system_vfs, value, TRUE);
 }
 #endif
+
+/* GtkFileSystem module calls */
+
+void fs_module_init (GTypeModule    *module);
+void fs_module_exit (void);
+GtkFileSystem *fs_module_create (void);
+
+void 
+fs_module_init (GTypeModule    *module)
+{
+
+  gnome_vfs_init ();
+
+  {
+    static const GTypeInfo file_system_gnome_vfs_info =
+      {
+	sizeof (GtkFileSystemGnomeVFSClass),
+	NULL,		/* base_init */
+	NULL,		/* base_finalize */
+	(GClassInitFunc) gtk_file_system_gnome_vfs_class_init,
+	NULL,		/* class_finalize */
+	NULL,		/* class_data */
+	sizeof (GtkFileSystemGnomeVFS),
+	0,		/* n_preallocs */
+	(GInstanceInitFunc) gtk_file_system_gnome_vfs_init,
+      };
+    static const GInterfaceInfo file_system_info =
+      {
+	(GInterfaceInitFunc) gtk_file_system_gnome_vfs_iface_init, /* interface_init */
+	NULL,			                              /* interface_finalize */
+	NULL			                              /* interface_data */
+      };
+    
+    
+    type_gtk_file_system_gnome_vfs = 
+      g_type_module_register_type (module,
+				   G_TYPE_OBJECT,
+				   "GtkFileSystemGnomeVFS",
+				   &file_system_gnome_vfs_info, 0);
+
+    g_type_module_add_interface (module,
+				 GTK_TYPE_FILE_SYSTEM_GNOME_VFS,
+				 GTK_TYPE_FILE_SYSTEM,
+				 &file_system_info);
+  }
+
+  {
+    static const GTypeInfo file_folder_gnome_vfs_info =
+      {
+	sizeof (GtkFileFolderGnomeVFSClass),
+	NULL,		/* base_init */
+	NULL,		/* base_finalize */
+	(GClassInitFunc) gtk_file_folder_gnome_vfs_class_init,
+	NULL,		/* class_finalize */
+	NULL,		/* class_data */
+	sizeof (GtkFileFolderGnomeVFS),
+	0,		/* n_preallocs */
+	(GInstanceInitFunc) gtk_file_folder_gnome_vfs_init,
+      };
+    
+    static const GInterfaceInfo file_folder_info =
+      {
+	(GInterfaceInitFunc) gtk_file_folder_gnome_vfs_iface_init, /* interface_init */
+	NULL,			                              /* interface_finalize */
+	NULL			                              /* interface_data */
+      };
+    
+    type_gtk_file_folder_gnome_vfs = g_type_module_register_type (module,
+								  G_TYPE_OBJECT,
+								  "GtkFileFolderGnomeVFS",
+								  &file_folder_gnome_vfs_info, 0);
+    g_type_module_add_interface (module,
+				 type_gtk_file_folder_gnome_vfs,
+				 GTK_TYPE_FILE_FOLDER,
+				 &file_folder_info);
+  }
+}
+
+void 
+fs_module_exit (void)
+{
+}
+
+GtkFileSystem *     
+fs_module_create (void)
+{
+  return gtk_file_system_gnome_vfs_new ();
+}
