@@ -441,10 +441,6 @@ gnome_dialog_button_clicked (GtkWidget   *button,
      and then destroy the dialog themselves too. */
 
   if (click_closes) {
-#ifdef GNOME_ENABLE_DEBUG
-    g_print("click_closes set, closing dialog.\n");
-    fflush(stdout);
-#endif
     gnome_dialog_close(GNOME_DIALOG(dialog));
   }
 }
@@ -455,14 +451,8 @@ static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e)
 
   if(e->keyval == GDK_Escape)
     {
-#ifdef GNOME_ENABLE_DEBUG
-      g_print("Escape pressed, closing dialog\n");
-      fflush(stdout);
-#endif
       gnome_dialog_close(GNOME_DIALOG(d));
-#if 0
-      gtk_signal_emit_stop_by_name(GTK_OBJECT(d), "key_press_event");
-#endif
+
       return TRUE; /* Stop the event? is this TRUE or FALSE? */
     } 
 
@@ -499,11 +489,6 @@ void gnome_dialog_close_real(GnomeDialog * dialog)
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-#ifdef GNOME_ENABLE_DEBUG
-  g_print("Closing dialog for real, close signal not handled\n");
-  fflush(stdout);
-#endif
-
   gtk_widget_hide(GTK_WIDGET(dialog));
 
   if ( dialog->modal ) 
@@ -512,11 +497,6 @@ void gnome_dialog_close_real(GnomeDialog * dialog)
 					    the grab - very weird. */
 
   if ( ! dialog->just_hide ) {
-#ifdef GNOME_ENABLE_DEBUG
-    g_print("Destroying dialog, not set to hide-only\n");
-    fflush(stdout);
-#endif
-
     gtk_widget_destroy (GTK_WIDGET (dialog));
   }
 }

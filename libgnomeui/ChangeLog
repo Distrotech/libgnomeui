@@ -1,3 +1,7 @@
+Thu May  7 21:46:24 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.c: Take out debug printfs.
+
 1998-05-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c: Changed required for gmc icon view.
