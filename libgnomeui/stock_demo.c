@@ -496,6 +496,26 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = gtk_label_new("Receive Mail");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 6, 7, 5, 6);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_TRASH));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 7, 8, 0, 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_TRASH));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 7, 8, 1, 2);
+	w = gtk_label_new("Trash");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 7, 8, 2, 3);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_TRASH_FULL));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 7, 8, 3, 4);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_TRASH_FULL));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 7, 8, 4, 5);
+	w = gtk_label_new("Trash Full");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 7, 8, 5, 6);
 }
 
 
