@@ -3,7 +3,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-winhints.h>
-#include <bonobo/bonobo-win.h>
+#include <bonobo/bonobo-window.h>
 
 
 void layers_cb (GtkWidget *widget, void *data);

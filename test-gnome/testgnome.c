@@ -29,7 +29,7 @@
 #include <libgnomeui.h>
 #include <libgnomeui/gnome-window.h>
 #include <bonobo/bonobo-main.h>
-#include <bonobo/bonobo-win.h>
+#include <bonobo/bonobo-window.h>
 #include <bonobo/bonobo-ui-util.h>
 
 #include "testgnome.h"
