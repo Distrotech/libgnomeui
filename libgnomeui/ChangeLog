@@ -1,3 +1,8 @@
+1999-03-22  Pavel Machek  <pavel@ucw.cz>
+
+	* gnome-winhints.c (gnome_win_hints_init): g_return_if_fails()
+	added to make core more robust
+
 Sun Mar 21 01:01:48 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-{icon,pixmap,number}-entry.c: added argument checks everywhere

@@ -27,6 +27,7 @@ gnome_win_hints_init(void)
 {
   /* Get the atoms we are working with, creating them if necessary.
    */
+  g_return_if_fail(GDK_DISPLAY());
   _XA_WIN_PROTOCOLS = XInternAtom(GDK_DISPLAY(), XA_WIN_PROTOCOLS, False);
   _XA_WIN_STATE = XInternAtom(GDK_DISPLAY(), XA_WIN_STATE, False);
   _XA_WIN_WORKSPACE = XInternAtom(GDK_DISPLAY(), XA_WIN_WORKSPACE, False);
