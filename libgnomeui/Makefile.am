@@ -127,7 +127,6 @@ gnome_headers = \
 	gnome-image-entry.h		\
 	gnome-image-selector.h		\
         gnome-font-picker.h		\
-	gnome-gconf.h			\
 	gnome-geometry.h		\
 	gnome-href.h			\
 	gnome-ice.h			\

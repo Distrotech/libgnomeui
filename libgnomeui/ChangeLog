@@ -1,3 +1,7 @@
+2001-06-12  Martin Baulig  <baulig@suse.de>
+
+	* gnome-gconf.[ch]: Removed.
+
 2001-06-11  Cody Russell  <bratsche@gnome.org>
 
 	* wap-textfu.c: Fix small warning so we can build with -Werror.

@@ -45,7 +45,6 @@
 #include <libgnomeui/gnome-image-entry.h>
 #include <libgnomeui/gnome-image-selector.h>
 #include <libgnomeui/gnome-font-picker.h>
-#include <libgnomeui/gnome-gconf.h>
 #include <libgnomeui/gnome-geometry.h>
 
 #include <libgnomeui/gnome-icon-list.h>
