@@ -1,3 +1,19 @@
+1999-02-02  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-icon-entry.c: Massive changes.  It now works (fingers
+	crossed.)  Only current issue is that selecting garbage silently
+	reverts.  This should be an easy fix, but it is an easy fix
+	tomorrow, as I need some food.
+
+	* gnome-entry.c (gnome_entry_new): gtk_combo_disable_active of all
+	gnome-entries.  Return should "activate" like a normal entry,
+	dammit.
+
+	* gnome-file-entry.c (browse_dialog_ok): we emit the "activate"
+	signal of the file entry.  This lets us know for sure when a file
+	is entered.  Unless I'm missing something, there's no really good
+	API for finding when someone has changed a file name.
+
 1999-02-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_list_clear): Free the selection

@@ -32,6 +32,8 @@
 #include "gnome-icon-list.h"
 #include "gnome-icon-sel.h"
 #include "gnome-icon-entry.h"
+#include <sys/stat.h>
+#include <unistd.h>
 
 
 static void gnome_icon_entry_class_init (GnomeIconEntryClass *class);
@@ -67,7 +69,28 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
 }
+static void
+entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
+{
+	struct stat buf;
+	GnomeIconSelection * gis;
+	gchar *filename = gtk_entry_get_text (GTK_ENTRY (widget));
 
+	if (!filename)
+		return;
+
+	stat (filename, &buf);
+	if (S_ISDIR (buf.st_mode)) {
+		gis = gtk_object_get_user_data(GTK_OBJECT(ientry));
+		gnome_icon_selection_clear (gis, TRUE);
+		gnome_icon_selection_add_directory (gis, filename);
+		if (gis->file_list)
+			gnome_icon_selection_show_icons(gis);
+	} else {
+		/* We pretend like ok has been called */
+		gtk_widget_hide (ientry->pick_dialog);
+	}
+}
 static void
 entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 {
@@ -174,6 +197,8 @@ setup_preview(GtkWidget *widget)
 static int
 ientry_destroy(GnomeIconEntry *ientry)
 {
+	if(ientry->fentry)
+		gtk_widget_unref (ientry->fentry);
 	if(ientry->pick_dialog)
 		gtk_widget_destroy(ientry->pick_dialog);
 	if(ientry->pick_dialog_dir)
@@ -230,15 +255,27 @@ icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 	if (icon != NULL) {
 		GtkWidget *e = gnome_icon_entry_gtk_entry(ientry);
 		gtk_entry_set_text(GTK_ENTRY(e),icon);
+		entry_changed (NULL, ientry);
 	}
 }
 
 static void
 gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEntry *ientry)
 {
-	icon_selected_cb(NULL, ientry);
+	const gchar * icon;
+	GnomeIconSelection * gis;
+
+	gis =  gtk_object_get_user_data(GTK_OBJECT(ientry));
+	icon = gnome_icon_selection_get_icon(gis, TRUE);
+
+	if (icon != NULL) {
+		GtkWidget *e = gnome_icon_entry_gtk_entry(ientry);
+		gtk_entry_set_text(GTK_ENTRY(e),icon);
+		
+	}
 
 	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
+		entry_changed (NULL, ientry);
 		gtk_widget_hide(ientry->pick_dialog);
 	}
 }
@@ -263,6 +300,8 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 			p = g_strdup(cwd);
 			free(cwd);
 		}
+		gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry))),
+				    p);
 	}
 
 	/*figure out the directory*/
@@ -283,13 +322,14 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 	   strcmp(p,ientry->pick_dialog_dir)!=0) {
 		GtkWidget * iconsel;
 		
-		if(ientry->pick_dialog)
+		if(ientry->pick_dialog) {
+			gtk_container_remove (GTK_CONTAINER (ientry->fentry->parent), ientry->fentry);
 			gtk_widget_destroy(ientry->pick_dialog);
+		}
 		
 		if(ientry->pick_dialog_dir)
 			g_free(ientry->pick_dialog_dir);
 		ientry->pick_dialog_dir = p;
-
 		ientry->pick_dialog = 
 			gnome_dialog_new(GNOME_FILE_ENTRY(ientry->fentry)->browse_dialog_title,
 					 GNOME_STOCK_BUTTON_OK,
@@ -298,7 +338,6 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 		if (GTK_WINDOW (tl)->modal) {
 			gtk_window_set_modal (GTK_WINDOW (ientry->pick_dialog), TRUE);
 			gnome_dialog_set_parent (GNOME_DIALOG (ientry->pick_dialog), GTK_WINDOW (tl)); 
-			gnome_file_entry_set_modal (GNOME_FILE_ENTRY (ientry->fentry), TRUE);
 		}
 		gnome_dialog_close_hides(GNOME_DIALOG(ientry->pick_dialog), TRUE);
 		gnome_dialog_set_close  (GNOME_DIALOG(ientry->pick_dialog), TRUE);
@@ -402,6 +441,9 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 	gtk_widget_show (ientry->pickbutton);
 
 	ientry->fentry = gnome_file_entry_new (NULL,NULL);
+	/*BORPORP */
+	gnome_file_entry_set_modal (GNOME_FILE_ENTRY (ientry->fentry), TRUE);
+	gtk_widget_ref (ientry->fentry);
 	gtk_signal_connect_after(GTK_OBJECT(ientry->fentry),"browse_clicked",
 				 GTK_SIGNAL_FUNC(browse_clicked),
 				 ientry);
@@ -413,10 +455,14 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 	g_free(p);
 	
 	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(ientry->fentry));
-	gtk_signal_connect_while_alive(GTK_OBJECT(w),"changed",
+/*	gtk_signal_connect_while_alive(GTK_OBJECT(w), "changed",
 				       GTK_SIGNAL_FUNC(entry_changed),
+				       ientry, GTK_OBJECT(ientry));*/
+	gtk_signal_connect_while_alive(GTK_OBJECT(w), "activate",
+				       GTK_SIGNAL_FUNC(entry_activated),
 				       ientry, GTK_OBJECT(ientry));
-
+	
+	
 	/*just in case there is a default that is an image*/
 	entry_changed(w,ientry);
 }

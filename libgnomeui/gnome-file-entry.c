@@ -102,6 +102,8 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 
 	gtk_entry_set_text (GTK_ENTRY (entry),
 			    gtk_file_selection_get_filename (fs));
+	/* Is this evil? */
+	gtk_signal_emit_by_name (GTK_OBJECT (entry), "activate"); 
 	gtk_widget_destroy (GTK_WIDGET (fs));
 }
 

@@ -106,6 +106,7 @@ gnome_entry_init (GnomeEntry *gentry)
 	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (gentry)), "activate",
 			    (GtkSignalFunc) entry_activated,
 			    gentry);
+	gtk_combo_disable_activate (GTK_COMBO (gentry));
 }
 
 GtkWidget *
@@ -117,7 +118,6 @@ gnome_entry_new (char *history_id)
 
 	gnome_entry_set_history_id (gentry, history_id);
 	gnome_entry_load_history (gentry);
-
 	return GTK_WIDGET (gentry);
 }
 
