@@ -1,3 +1,8 @@
+2001-06-15  Martin Baulig  <baulig@suse.de>
+
+	* POTFILES.in: Removed libgnomeui/gnome-helpsys.c and
+	libgnomeui/gnome-popup-help.c
+
 2001-06-13  Martin Baulig  <baulig@suse.de>
 
 	* POTFILES.in: Removed components/gnome-image-entry-component.c and
