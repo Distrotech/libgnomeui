@@ -1,5 +1,20 @@
 2003-09-10  Federico Mena Quintero  <federico@ximian.com>
 
+	* TODO: Added an API point about needing a way to fetch the hpaned
+	position so we can save it.
+
+	* gtkfilechooser.c (_gtk_file_chooser_get_paths): Fixed API docs.
+	(gtk_file_chooser_get_uris): Likewise.
+	(gtk_file_chooser_get_filenames): Likewise.
+
+	* gtkfilechooserdialog.c (file_chooser_widget_file_activated): New
+	callback, calls gtk_window_activate_default().
+
+	* testfilechooser.c (response_cb): Print the selected files if the
+	user clicks OK.
+
+2003-09-10  Federico Mena Quintero  <federico@ximian.com>
+
 	* gtkfilechooserimpldefault.c (create_file_list): Connect to
 	"row_activated" on the file list.
 	(list_row_activated): New function.  Changes to folders or emits
