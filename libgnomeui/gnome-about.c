@@ -16,10 +16,25 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
+#include <config.h>
 #include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-i18n.h"
 #include "gnome-about.h"
 #include <gtk/gtk.h>
+
+/* Library must use dgettext, not gettext.  */
+#ifdef ENABLE_NLS
+#    ifdef HAVE_LIBINTL_H
+#       include <libintl.h>
+#    endif
+#    define _(String) dgettext (PACKAGE, String)
+#    ifdef gettext_noop
+#        define N_(String) gettext_noop (String)
+#    else
+#        define N_(String) (String)
+#    endif
+#else
+
 
 enum {
   CLICKED,
