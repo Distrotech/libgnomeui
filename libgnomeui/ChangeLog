@@ -1,3 +1,9 @@
+Fri Feb 26 15:39:58 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-entry.c: fix problem with chooser dialog when the
+	  directory stopped existing, it will go into the default directory
+	  now
+
 1999-02-27  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gtkrc.ja, gtkrc.ko: Removed default style, as gtk+ already has

@@ -301,7 +301,17 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 		p = d;
 		if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
 			g_free (p);
-			return;
+			if(fe->default_path)
+				p = g_strdup(fe->default_path);
+			else {
+				/*get around the g_free/free issue*/
+				char *cwd = getcwd(NULL,0);
+				p = g_strdup(cwd);
+				free(cwd);
+			}
+			gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry))),
+				    p);
+			g_return_if_fail(g_file_test (p,G_FILE_TEST_ISDIR));
 		}
 	}
 	
