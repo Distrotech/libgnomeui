@@ -75,8 +75,6 @@ struct _GtkCalendar
   GtkCalendarDisplayOptions  display_flags;
   GdkColor marked_date_color[31];
 
-  gint day_under_cursor;
-
   /* Header Information */
   GdkWindow *arrow_win[4];
   gint       arrow_state[4];
@@ -96,12 +94,17 @@ struct _GtkCalendar
   GdkColor cursor_colors[3];
   GdkColor background_color;
   GdkColor foreground_color;
+  GdkColor highlight_back_color;
   GdkCursor *cross;
 
   gint day_width;
   GdkRectangle header_button[4];
   GdkRectangle rect_days[6][7];
   gint days[6][7];
+
+  gint highlight_row;
+  gint highlight_col;
+  gint selected_day;
 };
 
 struct _GtkCalendarClass
