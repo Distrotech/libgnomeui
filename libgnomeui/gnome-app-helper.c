@@ -39,11 +39,11 @@ static void gnome_app_do_toolbar_creation     (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       GnomeUIInfo *tbinfo,
 					       GnomeUIBuilderData uidata);
-static void gnome_app_add_help_menu_entries   (GnomeApp *app,
+static gint gnome_app_add_help_menu_entries   (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       gint pos,
 				               GnomeUIInfo *menuinfo_item);
-static void gnome_app_add_radio_menu_entries  (GnomeApp *app,
+static gint gnome_app_add_radio_menu_entries  (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       gint pos,
 					       GnomeUIInfo *menuinfo,
@@ -86,12 +86,12 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	  break;
 
 	case GNOME_APP_UI_HELP:
-	  gnome_app_add_help_menu_entries(app, parent_widget, pos, &menuinfo[i]);
+	  pos = gnome_app_add_help_menu_entries(app, parent_widget, pos, &menuinfo[i]);
 	  break;
 
 	case GNOME_APP_UI_RADIOITEMS:
-	  gnome_app_add_radio_menu_entries(app, parent_widget, pos,
-					   menuinfo[i].moreinfo, uidata);
+	  pos = gnome_app_add_radio_menu_entries(app, parent_widget, pos,
+                                           menuinfo[i].moreinfo, uidata);
 	  break;
 	  
 	case GNOME_APP_UI_SEPARATOR:
@@ -189,7 +189,7 @@ gnome_app_do_menu_creation(GnomeApp *app,
   menuinfo[i].widget = parent_widget;
 }
 
-static void
+static gint
 gnome_app_add_radio_menu_entries(GnomeApp *app,
 				 GtkWidget *parent_widget,
 				 gint pos,
@@ -216,9 +216,11 @@ gnome_app_add_radio_menu_entries(GnomeApp *app,
 	
       menuinfo++;
     }
+
+  return pos;
 }
 
-static void
+static gint
 gnome_app_add_help_menu_entries(GnomeApp *app,
 				GtkWidget *parent_widget,
 				gint pos,
@@ -267,21 +269,23 @@ gnome_app_add_help_menu_entries(GnomeApp *app,
       menuinfo_item->widget = gtk_menu_item_new_with_label(s);
       gtk_widget_show(menuinfo_item->widget);
       if(menuinfo_item->accelerator_key)
-	{
-	  gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo_item);
-	  menuinfo_item->accelerator_key = 0;
-	}
+        {
+          gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo_item);
+          menuinfo_item->accelerator_key = 0;
+        }
       gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo_item->widget, pos);
       pos++;
 
       gtk_signal_connect(GTK_OBJECT (menuinfo_item->widget), "activate",
 			 (gpointer) gnome_help_display,
-			 (gpointer) entry);
-    }
+                         (gpointer) entry);
+      }
   menuinfo_item->widget = NULL; /* We have a bunch of widgets,
 				   so this is useless ;-) */
     
   fclose(f);
+
+  return pos;
 }
 
 void

@@ -1,3 +1,8 @@
+1998-06-18  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+ 	
+	* gnome-app-helper.c: changed gnome_app_add_[radio|help]_menu_entries() to
+	return new pos so that insertion works properly.
+	
 Thu Jun 18 02:47:26 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-number-entry.[ch]: new entry type modeled after file
