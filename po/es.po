@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
-"POT-Creation-Date: 2001-10-13 23:40+0200\n"
+"POT-Creation-Date: 2001-10-23 23:18+0200\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -299,7 +299,7 @@ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
-#: libgnomeui/gnome-font-picker.c:146
+#: libgnomeui/gnome-font-picker.c:158
 msgid "Title"
 msgstr "Título"
 
@@ -421,7 +421,15 @@ msgstr "El texto del botón"
 msgid "End World Hunger"
 msgstr "Fin del Hambre Mundial"
 
-#: libgnomeui/gnome-href.c:375
+#: libgnomeui/gnome-href.c:136
+msgid "Link colour"
+msgstr "Color del enlace"
+
+#: libgnomeui/gnome-href.c:137
+msgid "Colour ysed to draw the link"
+msgstr "Color usado para dibujar el enlace"
+
+#: libgnomeui/gnome-href.c:398
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -429,27 +437,27 @@ msgstr ""
 "Ha ocurrido un erro mientras intentada ejecutar el amenjador de URL.\n"
 "Por favor compruebe si la configuración del Centro de Control es correcta."
 
-#: libgnomeui/gnome-ui-init.c:88 libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:615
 msgid "X display to use"
 msgstr "diplay X a usar"
 
-#: libgnomeui/gnome-ui-init.c:88 libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:95 libgnomeui/gnome-ui-init.c:615
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:96
+#: libgnomeui/gnome-ui-init.c:103
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Library"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:454
+#: libgnomeui/gnome-ui-init.c:462
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Han ocurrido multiples errores de segmentación; no puedo mostrar el diálogo "
 "de error\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:468
+#: libgnomeui/gnome-ui-init.c:476
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -457,76 +465,76 @@ msgstr ""
 "¡Violación de segmento!\n"
 "No puedo mostrar el diálogo de error\n"
 
-#: libgnomeui/gnome-ui-init.c:599
+#: libgnomeui/gnome-ui-init.c:608
 msgid "Gdk debugging flags to set"
 msgstr "Seleccionar la opción de depurado de Gdk"
 
-#: libgnomeui/gnome-ui-init.c:599 libgnomeui/gnome-ui-init.c:602
-#: libgnomeui/gnome-ui-init.c:632 libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:608 libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:652 libgnomeui/gnome-ui-init.c:655
 msgid "FLAGS"
 msgstr "BANDERAS"
 
-#: libgnomeui/gnome-ui-init.c:602
+#: libgnomeui/gnome-ui-init.c:611
 msgid "Gdk debugging flags to unset"
 msgstr "Deseleccionar la opción de depurado de Gdk"
 
-#: libgnomeui/gnome-ui-init.c:608
+#: libgnomeui/gnome-ui-init.c:619
 msgid "Make X calls synchronous"
 msgstr "Hacer llamadas X sincronas"
 
-#: libgnomeui/gnome-ui-init.c:611
+#: libgnomeui/gnome-ui-init.c:625
 msgid "Don't use X shared memory extension"
 msgstr "No usar las extensiones de memoria compartida de las X"
 
-#: libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:629
 msgid "Program name as used by the window manager"
 msgstr "Nombre del programa usado por el administrador de ventanas"
 
-#: libgnomeui/gnome-ui-init.c:614
+#: libgnomeui/gnome-ui-init.c:629
 msgid "NAME"
 msgstr "NOMBRE"
 
-#: libgnomeui/gnome-ui-init.c:617
+#: libgnomeui/gnome-ui-init.c:632
 msgid "Program class as used by the window manager"
 msgstr "Clase del programa usado por el manejador de ventanas"
 
-#: libgnomeui/gnome-ui-init.c:617
+#: libgnomeui/gnome-ui-init.c:632
 msgid "CLASS"
 msgstr "CLASE"
 
-#: libgnomeui/gnome-ui-init.c:620
+#: libgnomeui/gnome-ui-init.c:636
 msgid "HOST"
 msgstr "SERVIDOR"
 
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:640
 msgid "PORT"
 msgstr "PUERTO"
 
-#: libgnomeui/gnome-ui-init.c:626 libgnomeui/gnome-ui-init.c:629
+#: libgnomeui/gnome-ui-init.c:645 libgnomeui/gnome-ui-init.c:648
 msgid "STYLE"
 msgstr "ESTILO"
 
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:652
 msgid "Gtk+ debugging flags to set"
 msgstr "Seleccionar la opción de depurado de Gtk+"
 
-#: libgnomeui/gnome-ui-init.c:635
+#: libgnomeui/gnome-ui-init.c:655
 msgid "Gtk+ debugging flags to unset"
 msgstr "Deseleccionar la opción de depurado de Gtk+"
 
-#: libgnomeui/gnome-ui-init.c:638
+#: libgnomeui/gnome-ui-init.c:658
 msgid "Make all warnings fatal"
 msgstr "Hacer todos los avisos fatales"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:661
 msgid "Load an additional Gtk module"
 msgstr "Cargar un módulo Gtk adicional"
 
-#: libgnomeui/gnome-ui-init.c:641
+#: libgnomeui/gnome-ui-init.c:661
 msgid "MODULE"
 msgstr "MODULO"
 
-#: libgnomeui/gnome-ui-init.c:736
+#: libgnomeui/gnome-ui-init.c:766
 msgid "GTK+"
 msgstr "GTK+"
 
@@ -1023,78 +1031,97 @@ msgstr "ID de la aplicación"
 msgid "The application ID string"
 msgstr "La cadena ID de la aplicación"
 
-#: libgnomeui/gnome-entry.c:180 libgnomeui/gnome-entry.c:181
+#: libgnomeui/gnome-entry.c:169 libgnomeui/gnome-entry.c:170
 msgid "History id"
 msgstr "Id histórico"
 
-#: libgnomeui/gnome-entry.c:187
+#: libgnomeui/gnome-entry.c:176
 msgid "GTK entry"
 msgstr "Entrada GTK"
 
-#: libgnomeui/gnome-entry.c:188
+#: libgnomeui/gnome-entry.c:177
 msgid "The GTK entry"
 msgstr "La entrada GTK"
 
-#: libgnomeui/gnome-file-entry.c:358
+#: libgnomeui/gnome-file-entry.c:347
 msgid "Select file"
 msgstr "Seleccionar archivo"
 
-#: libgnomeui/gnome-file-entry.c:535
+#: libgnomeui/gnome-file-entry.c:523
 msgid "Browse..."
 msgstr "Navegar..."
 
-#: libgnomeui/gnome-font-picker.c:63
-msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
-msgstr "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+#: libgnomeui/gnome-font-picker.c:67
+msgid "sans 12"
+msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:64
+#: libgnomeui/gnome-font-picker.c:68
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
-#: libgnomeui/gnome-font-picker.c:65
+#: libgnomeui/gnome-font-picker.c:69
 msgid "Pick a Font"
 msgstr "Elija una fuente"
 
-#: libgnomeui/gnome-font-picker.c:147
+#: libgnomeui/gnome-font-picker.c:159
 msgid "The title of the selection dialog box"
 msgstr "El título de la ventana del diálogo de selección"
 
-#: libgnomeui/gnome-font-picker.c:155
+#: libgnomeui/gnome-font-picker.c:167
 msgid "Mode"
 msgstr "Modo"
 
-#: libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-font-picker.c:168
 msgid "The mode of operation of the font picker"
 msgstr "El modo de operar del selector de fuentes"
 
-#: libgnomeui/gnome-font-picker.c:165
+#: libgnomeui/gnome-font-picker.c:177
 msgid "Font name"
 msgstr "Nombre de la fuente"
 
-#: libgnomeui/gnome-font-picker.c:166
+#: libgnomeui/gnome-font-picker.c:178
 msgid "Name of the selected font"
 msgstr "Nombre de la fuente seleccionada"
 
-#: libgnomeui/gnome-font-picker.c:174 libgnomeui/gnome-font-picker.c:899
+#: libgnomeui/gnome-font-picker.c:187 libgnomeui/gnome-font-picker.c:977
 msgid "Font"
 msgstr "Fuente"
 
-#: libgnomeui/gnome-font-picker.c:175
+#: libgnomeui/gnome-font-picker.c:188
 msgid "The selected GtkFont"
 msgstr "La GdkFont seleccionada"
 
-#: libgnomeui/gnome-font-picker.c:181
+#: libgnomeui/gnome-font-picker.c:195
 msgid "Preview text"
 msgstr "Previsualización del texto"
 
-#: libgnomeui/gnome-font-picker.c:182
+#: libgnomeui/gnome-font-picker.c:196
 msgid "Preview text shown in the dialog"
 msgstr "Previsualizar el texto mostrado en el diálogo"
 
-#. note: do not use strncpy, it sucks
-#: libgnomeui/gnome-font-picker.c:939
-msgid "Unknown"
-msgstr "Desconocido"
+#: libgnomeui/gnome-font-picker.c:204
+msgid "Use font in label"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:205
+msgid "Use font in the label in font info mode"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:213
+msgid "Font size for label"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:214
+msgid "Font size for label in font info mode"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:224
+msgid "Show size"
+msgstr "Mostrar tamaño"
+
+#: libgnomeui/gnome-font-picker.c:225
+msgid "Show size in font info mode"
+msgstr "Muestra el tamaño en modo información de la fuente"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1213,28 +1240,24 @@ msgstr "%a %b %d %T %Y"
 msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
 
-#. Pixmap
-#: test-gnome/testgnome.c:738
-msgid "Default Pixmap"
-msgstr "Pixmaps por defecto"
-
-#: test-gnome/testgnome.c:747 test-gnome/testgnome.c:787
-#: test-gnome/testgnome.c:814
-msgid "If you choose a font it will appear here"
-msgstr "Si eliges una fuente aparecerá aquí"
-
-#: test-gnome/testgnome.c:763
-msgid "Use Font in button with size"
-msgstr "Usar fuente en botón con tamaño"
-
-#: test-gnome/testgnome.c:770
-msgid "Show font size"
-msgstr "Mostrar tamaño de la fuente"
-
-#: test-gnome/testgnome.c:808
-msgid "This is an hbox with pixmap and text"
-msgstr "Este es un hboxcon un pixmaps y texto"
-
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Salir de la prueba"
+
+#~ msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+#~ msgstr "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
+
+#~ msgid "Unknown"
+#~ msgstr "Desconocido"
+
+#~ msgid "Default Pixmap"
+#~ msgstr "Pixmaps por defecto"
+
+#~ msgid "If you choose a font it will appear here"
+#~ msgstr "Si eliges una fuente aparecerá aquí"
+
+#~ msgid "Use Font in button with size"
+#~ msgstr "Usar fuente en botón con tamaño"
+
+#~ msgid "This is an hbox with pixmap and text"
+#~ msgstr "Este es un hboxcon un pixmaps y texto"
