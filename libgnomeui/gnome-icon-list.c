@@ -142,6 +142,12 @@ struct _GnomeIconListPrivate {
 	/* Selection mode */
 	GtkSelectionMode selection_mode;
 
+	/* A list of integers with the indices of the currently selected icons */
+	GList *selection;
+
+	/* Number of icons in the list */
+	int icons;
+
 	/* Freeze count */
 	int frozen;
 
@@ -556,7 +562,7 @@ sync_selection (Gil *gil, int pos, SyncType type)
 {
 	GList *list;
 
-	for (list = gil->selection; list; list = list->next) {
+	for (list = gil->_priv->selection; list; list = list->next) {
 		if (GPOINTER_TO_INT (list->data) >= pos) {
 			int i = GPOINTER_TO_INT (list->data);
 
@@ -1041,7 +1047,7 @@ icon_list_append (Gil *gil, Icon *icon)
 
 	priv = gil->_priv;
 
-	pos = gil->icons++;
+	pos = priv->icons++;
 	g_array_append_val(priv->icon_list, icon);
 
 	switch (priv->selection_mode) {
@@ -1060,7 +1066,7 @@ icon_list_append (Gil *gil, Icon *icon)
 	} else
 		priv->dirty = TRUE;
 
-	return gil->icons - 1;
+	return priv->icons - 1;
 }
 
 static void
@@ -1070,13 +1076,13 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 
 	priv = gil->_priv;
 
-	if (pos == gil->icons) {
+	if (pos == priv->icons) {
 		icon_list_append (gil, icon);
 		return;
 	}
 
 	g_array_insert_val(priv->icon_list, pos, icon);
-	gil->icons++;
+	priv->icons++;
 
 	switch (priv->selection_mode) {
 	case GTK_SELECTION_BROWSE:
@@ -1218,7 +1224,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (pos >= 0 && pos < gil->icons);
+	g_return_if_fail (pos >= 0 && pos < gil->_priv->icons);
 
 	priv = gil->_priv;
 
@@ -1243,14 +1249,14 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 	}
 
 	g_array_remove_index(priv->icon_list, pos);
-	gil->icons--;
+	priv->icons--;
 
 	sync_selection (gil, pos, SYNC_REMOVE);
 
 	if (was_selected) {
 		switch (priv->selection_mode) {
 		case GTK_SELECTION_BROWSE:
-			if (pos == gil->icons)
+			if (pos == priv->icons)
 				gnome_icon_list_select_icon (gil, pos - 1);
 			else
 				gnome_icon_list_select_icon (gil, pos);
@@ -1262,7 +1268,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 		}
 	}
 
-	if (gil->icons >= priv->last_selected_idx)
+	if (priv->icons >= priv->last_selected_idx)
 		priv->last_selected_idx = -1;
 
 	if (priv->last_selected_icon == icon)
@@ -1302,10 +1308,10 @@ gnome_icon_list_clear (GnomeIconList *gil)
 
 	gil_free_line_info (gil);
 
-	g_list_free (gil->selection);
-	gil->selection = NULL;
+	g_list_free (priv->selection);
+	priv->selection = NULL;
 	g_array_set_size(priv->icon_list, 0);
-	gil->icons = 0;
+	priv->icons = 0;
 	priv->last_selected_idx = -1;
 	priv->last_selected_icon = NULL;
 
@@ -1406,7 +1412,7 @@ gnome_icon_list_select_icon (GnomeIconList *gil, int pos)
 {
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (pos >= 0 && pos < gil->icons);
+	g_return_if_fail (pos >= 0 && pos < gil->_priv->icons);
 
 	select_icon (gil, pos, NULL);
 }
@@ -1443,7 +1449,7 @@ gnome_icon_list_unselect_icon (GnomeIconList *gil, int pos)
 {
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (pos >= 0 && pos < gil->icons);
+	g_return_if_fail (pos >= 0 && pos < gil->_priv->icons);
 
 	unselect_icon (gil, pos, NULL);
 }
@@ -1516,7 +1522,7 @@ real_select_icon (Gil *gil, gint num, GdkEvent *event)
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (num >= 0 && num < gil->icons);
+	g_return_if_fail (num >= 0 && num < gil->_priv->icons);
 
 	priv = gil->_priv;
 
@@ -1527,7 +1533,7 @@ real_select_icon (Gil *gil, gint num, GdkEvent *event)
 
 	icon->selected = TRUE;
 	gnome_icon_text_item_select (icon->text, TRUE);
-	gil->selection = g_list_append (gil->selection, GINT_TO_POINTER (num));
+	priv->selection = g_list_append (priv->selection, GINT_TO_POINTER (num));
 }
 
 static void
@@ -1538,7 +1544,7 @@ real_unselect_icon (Gil *gil, gint num, GdkEvent *event)
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (num >= 0 && num < gil->icons);
+	g_return_if_fail (num >= 0 && num < gil->_priv->icons);
 
 	priv = gil->_priv;
 
@@ -1549,7 +1555,7 @@ real_unselect_icon (Gil *gil, gint num, GdkEvent *event)
 
 	icon->selected = FALSE;
 	gnome_icon_text_item_select (icon->text, FALSE);
-	gil->selection = g_list_remove (gil->selection, GINT_TO_POINTER (num));
+	priv->selection = g_list_remove (priv->selection, GINT_TO_POINTER (num));
 }
 
 /* Saves the selection of the icon list to temporary storage */
@@ -2193,7 +2199,7 @@ gnome_icon_list_set_icon_data_full (GnomeIconList *gil,
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (pos >= 0 && pos < gil->icons);
+	g_return_if_fail (pos >= 0 && pos < gil->_priv->icons);
 
 	icon = g_array_index (gil->_priv->icon_list, Icon*, pos);
 	icon->data = data;
@@ -2229,7 +2235,7 @@ gnome_icon_list_get_icon_data (GnomeIconList *gil, int pos)
 
 	g_return_val_if_fail (gil != NULL, NULL);
 	g_return_val_if_fail (IS_GIL (gil), NULL);
-	g_return_val_if_fail (pos >= 0 && pos < gil->icons, NULL);
+	g_return_val_if_fail (pos >= 0 && pos < gil->_priv->icons, NULL);
 
 	icon = g_array_index (gil->_priv->icon_list, Icon*, pos);
 	return icon->data;
@@ -2412,7 +2418,7 @@ gnome_icon_list_moveto (GnomeIconList *gil, int pos, double yalign)
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (pos >= 0 && pos < gil->icons);
+	g_return_if_fail (pos >= 0 && pos < gil->_priv->icons);
 	g_return_if_fail (yalign >= 0.0 && yalign <= 1.0);
 
 	priv = gil->_priv;
@@ -2455,7 +2461,8 @@ gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 
 	g_return_val_if_fail (gil != NULL, GTK_VISIBILITY_NONE);
 	g_return_val_if_fail (IS_GIL (gil), GTK_VISIBILITY_NONE);
-	g_return_val_if_fail (pos >= 0 && pos < gil->icons, GTK_VISIBILITY_NONE);
+	g_return_val_if_fail (pos >= 0 && pos < gil->_priv->icons,
+			      GTK_VISIBILITY_NONE);
 
 	priv = gil->_priv;
 
@@ -2549,4 +2556,34 @@ gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 	}
 
 	return -1;
+}
+
+
+/**
+ * gnome_icon_list_get_num_icons:
+ * @gil: An icon list.
+ *
+ * Returns the number of icons in the icon list.
+ */
+guint
+gnome_icon_list_get_num_icons (GnomeIconList *gil)
+{
+	g_return_val_if_fail (GNOME_IS_ICON_LIST (gil), 0);
+
+	return gil->_priv->icons;
+}
+
+
+/**
+ * gnome_icon_list_get_selection:
+ * @gil: An icon list.
+ *
+ * Returns a list of integers with the indices of the currently selected icons.
+ */
+GList *
+gnome_icon_list_get_selection (GnomeIconList *gil)
+{
+	g_return_val_if_fail (GNOME_IS_ICON_LIST (gil), NULL);
+
+	return gil->_priv->selection;
 }

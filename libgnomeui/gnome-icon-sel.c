@@ -513,7 +513,7 @@ gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
 
   g_return_val_if_fail(gis != NULL, NULL);
 
-  sel = GNOME_ICON_LIST(gis->_priv->gil)->selection;
+  sel = gnome_icon_list_get_selection(GNOME_ICON_LIST(gis->_priv->gil));
   if ( sel ) {
     gchar * p;
     gint pos = GPOINTER_TO_INT(sel->data);
@@ -543,7 +543,7 @@ void  gnome_icon_selection_select_icon    (GnomeIconSelection * gis,
   g_return_if_fail(gis != NULL);
   g_return_if_fail(filename != NULL);
 
-  icons = GNOME_ICON_LIST(gis->_priv->gil)->icons;
+  icons = gnome_icon_list_get_num_icons(GNOME_ICON_LIST(gis->_priv->gil));
   pos = 0;
 
   while ( pos < icons ) {

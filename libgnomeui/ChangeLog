@@ -1,5 +1,10 @@
 2000-07-31  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-list.h (GnomeIconList): Made the `selection' and
+	`icons' fields private and added the necessary accessor functions.
+	(gnome_icon_list_get_num_icons): New function.
+	(gnome_icon_list_get_selection): New function.
+
 	* gnome-icon-list.c (gnome_icon_list_unselect_all): Removed the
 	"for internal use only" arguments.
 
