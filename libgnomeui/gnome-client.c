@@ -828,7 +828,7 @@ static void gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod
 /* Command-line arguments understood by this module.  */
 enum { ARG_SM_CLIENT_ID=1, ARG_SM_CONFIG_PREFIX, ARG_SM_DISABLE };
 static const struct poptOption options[] = {
-  {NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
+  {NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL},
 
   {NULL, '\0', POPT_ARG_CALLBACK | POPT_CBFLAG_PRE | POPT_CBFLAG_POST, 
    client_parse_func, 0, NULL, NULL},

@@ -2485,7 +2485,7 @@ gnome_app_helper_gettext (const gchar *str)
 
         s = gettext (str);
 	if ( s == str )
-	        s = dgettext (PACKAGE, str);
+	        s = dgettext (GETTEXT_PACKAGE, str);
 
 	return s;
 }

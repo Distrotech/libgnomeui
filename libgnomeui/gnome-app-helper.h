@@ -501,7 +501,7 @@ typedef struct {
 const gchar * gnome_app_helper_gettext (const gchar *string);
 
 #ifdef ENABLE_NLS
-#define D_(x) dgettext (PACKAGE, x)
+#define D_(x) dgettext (GETTEXT_PACKAGE, x)
 #define L_(x) gnome_app_helper_gettext(x)
 #else
 #define D_(x) x

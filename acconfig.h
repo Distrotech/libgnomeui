@@ -4,3 +4,4 @@
 #undef HAVE_GETTEXT
 #undef HAVE_LC_MESSAGES
 #undef HAVE_STPCPY
+#undef GETTEXT_PACKAGE

@@ -87,7 +87,7 @@ void _gnome_stock_icons_init (void);
 enum { ARG_DISABLE_CRASH_DIALOG=1, ARG_DISPLAY };
 
 static struct poptOption libgnomeui_options[] = {
-        {NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
+        {NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL},
 	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	 &libgnomeui_arg_callback, 0, NULL, NULL},
 	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, ARG_DISABLE_CRASH_DIALOG},
@@ -602,7 +602,7 @@ static struct poptOption gtk_options [] = {
 	{ NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE,
 	  &add_gtk_arg_callback, 0, NULL, NULL },
 
-	{ NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL },
+	{ NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL },
 
 	{ "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
 	  N_("Gdk debugging flags to set"), N_("FLAGS")},

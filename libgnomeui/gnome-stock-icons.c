@@ -33,10 +33,6 @@
 #include <libgnomeui/gnome-stock-icons.h>
 #include "pixmaps/gnome-stock-pixbufs.h"
 
-#ifndef GETTEXT_PACKAGE
-#define GETTEXT_PACKAGE PACKAGE
-#endif
-
 /* Prototype for a private function */
 void _gnome_stock_icons_init (void);
 

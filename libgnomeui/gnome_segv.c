@@ -74,8 +74,8 @@ int main(int argc, char *argv[])
   sigaction(SIGSEGV, &sa, NULL);
 
 
-  bindtextdomain (PACKAGE, GNOMEUILOCALEDIR);
-  textdomain (PACKAGE);
+  bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+  textdomain (GETTEXT_PACKAGE);
 
   /* in case gnome-session is segfaulting :-) */
   gnome_client_disable_master_connection();

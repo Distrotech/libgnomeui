@@ -1,3 +1,16 @@
+2001-10-29  jacob berkman  <jacob@ximian.com>
+
+	* gnome_segv.c (main): use GETTEXT_PACKAGE
+
+	* gnome-ui-init.c: use GETTEXT_PACKAGE
+
+	* gnome-stock-icons.c: remove GETTEXT_PACKAGE definition
+
+	* gnome-i18nP.h (GNOME_EXPLICIT_TRANSLATION_DOMAIN): use
+	GETTEXT_PACKAGE
+
+	* gnome-client.c: use GETTEXT_PACKAGE where appropriate
+
 2001-10-28  jacob berkman  <jacob@ximian.com>
 
 	* gnome-ui-init.c (libgnomeui_segv_handle): pass
