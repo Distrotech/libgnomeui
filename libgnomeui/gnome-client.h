@@ -1,11 +1,22 @@
-/* 
- * gnome_client Widget
+/* gnome-client.h - GNOME session management client support
  *
- * AUTHOR:
- * Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de
+ * Copyright (C) 1998 Carsten Schaar
  *
- * DESCRIPTION:
- * Session management support for Gnome apps.
+ * Author: Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
 #ifndef GNOME_CLIENT_H
@@ -16,32 +27,7 @@
 #include <gtk/gtkobject.h>
 #include <libgnome/gnome-defs.h>
 
-/* If we don't have libSM, then we just define bogus values for the
-   things we need from SMlib.h.  The values don't matter because this
-   whole library is just stubbed out in this case.  */
-#ifdef HAVE_LIBSM
-#include <X11/SM/SMlib.h>
-#else /* HAVE_LIBSM */
-#define SmInteractStyleNone     0
-#define SmInteractStyleErrors   1
-#define SmInteractStyleAny      2
-#define SmDialogError           0
-#define SmDialogNormal          1
-#define SmSaveGlobal            0
-#define SmSaveLocal             1
-#define SmSaveBoth              2
-#define SmRestartIfRunning      0
-#define SmRestartAnyway         1
-#define SmRestartImmediately    2
-#define SmRestartNever          3
-#endif /* !HAVE_LIBSM */
-
 BEGIN_GNOME_DECLS
-
-#ifndef HAVE_LIBSM
-typedef struct _SmcConn *SmcConn;
-#endif /* !HAVE_LIBSM */
-
 
 #define GNOME_CLIENT(obj)           GTK_CHECK_CAST (obj, gnome_client_get_type (), GnomeClient)
 #define GNOME_CLIENT_CLASS(klass)   GTK_CHECK_CLASS_CAST (klass, gnome_client_get_type (), GnomeClientClass)
@@ -52,33 +38,33 @@ typedef struct _SmcConn *SmcConn;
 typedef struct _GnomeClient      GnomeClient;
 typedef struct _GnomeClientClass GnomeClientClass;
 
-/* Some redefinitions so we can use familiar names.  */
+
 typedef enum
 {
-  GNOME_INTERACT_NONE = SmInteractStyleNone,
-  GNOME_INTERACT_ERRORS = SmInteractStyleErrors,
-  GNOME_INTERACT_ANY = SmInteractStyleAny
+  GNOME_INTERACT_NONE,
+  GNOME_INTERACT_ERRORS,
+  GNOME_INTERACT_ANY
 } GnomeInteractStyle;
 
 typedef enum
 {
-  GNOME_DIALOG_ERROR = SmDialogError,
-  GNOME_DIALOG_NORMAL = SmDialogNormal
+  GNOME_DIALOG_ERROR,
+  GNOME_DIALOG_NORMAL
 } GnomeDialogType;
 
 typedef enum
 {
-  GNOME_SAVE_GLOBAL = SmSaveGlobal,
-  GNOME_SAVE_LOCAL = SmSaveLocal,
-  GNOME_SAVE_BOTH = SmSaveBoth
+  GNOME_SAVE_GLOBAL,
+  GNOME_SAVE_LOCAL,
+  GNOME_SAVE_BOTH
 } GnomeSaveStyle;
 
 typedef enum
 {
-  GNOME_RESTART_IF_RUNNING = SmRestartIfRunning,
-  GNOME_RESTART_ANYWAY = SmRestartAnyway,
-  GNOME_RESTART_IMMEDIATELY = SmRestartImmediately,
-  GNOME_RESTART_NEVER = SmRestartNever
+  GNOME_RESTART_IF_RUNNING,
+  GNOME_RESTART_ANYWAY,
+  GNOME_RESTART_IMMEDIATELY,
+  GNOME_RESTART_NEVER
 } GnomeRestartStyle;
 
 typedef enum
@@ -98,7 +84,7 @@ struct _GnomeClient
   GtkObject           object;
 
   /* general information about the connection to the session manager */
-  SmcConn             smc_conn;
+  gpointer            smc_conn;
   gint                input_id;
 
   /* client id of this client */
@@ -133,7 +119,7 @@ struct _GnomeClient
   gchar              *user_id;              /*[xs]*/
 
   /* values sent with the last SaveYourself message */
-  GnomeSaveStyle      save_type;
+  GnomeSaveStyle      save_style;
   gint                shutdown;
   GnomeInteractStyle  interact_style;
   gint                fast;
@@ -331,8 +317,8 @@ void         gnome_client_request_interaction_interp (GnomeClient *client,
 
 /* 'gnome_interaction_key_return' is used to tell gnome, that you are
    finished with interaction */
-void         gnome_interaction_key_return        (gint key,
-						  gint cancel_shutdown);
+void         gnome_interaction_key_return        (gint     key,
+						  gboolean cancel_shutdown);
 
 /* Request the session manager to save the session in some way.  This
    can also be used to request a logout.  If IS_GLOBAL is true, then

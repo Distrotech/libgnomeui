@@ -1,3 +1,22 @@
+1998-11-25  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.[ch] (gnome_client_set_restart_style):
+	(gnome_real_client_connect):
+	(gnome_client_request_save):
+	(client_save_yourself_callback):
+	(gnome_client_request_interaction_internal):
+	(enum GnomeInteractStyle):
+	(enum GnomeDialogType):
+	(enum GnomeSaveStyle):
+	(enum GnomeRestartStyle): Removed the enum's dependence on XSM
+ 	definitions.  'gnome-client.h' does not depend on 'SMlib.h'
+ 	anymore.
+ 	(gnome_interaction_key_return): Changed int-typed boolean arg to
+ 	gboolean.
+	
+	* gnome-client.h (struct _GnomeClient): Renamed member 'save_type'
+ 	in 'save_style'.
+
 1998-11-25  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-client.c (gnome_client_new_without_connection): 
@@ -25,6 +44,11 @@
 	* gtkcauldron.h (constants): Altered the values of a few of the
 	constants (previously GTK_CAULDRON_SPACE15 & GTK_CAULDRON_IGNOREESCAPE
 	was non zero).
+
+1998-11-24  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c (struct _GnomeInteraceData): Made 'in_use' and
+ 	'interp' of type 'gboolean'.
 
 1998-11-24  James Henstridge  <james@daa.com.au>
 
@@ -63,7 +87,8 @@
 
 1998-11-24  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
-	* gnome-client.c: Removed definition of 'gnome_client_new_default'.
+	* gnome-client.c: Removed definition of
+ 	'gnome_client_new_default'.
 
 	* gnome-client.h: Removed declaration of
  	'gnome_client_new_default'.

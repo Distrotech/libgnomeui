@@ -1,4 +1,23 @@
-/* gnome-client.c - */
+/* gnome-client.c - GNOME session management client support
+ *
+ * Copyright (C) 1998 Carsten Schaar
+ *
+ * Author: Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
 
 #include <config.h>
 #include <stdlib.h>
@@ -18,9 +37,9 @@
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
 
-#ifndef HAVE_LIBSM
-typedef gpointer SmPointer;
-#endif /* !HAVE_LIBSM */
+#ifdef HAVE_LIBSM
+#include <X11/SM/SMlib.h>
+#endif /* HAVE_LIBSM */
 
 enum {
   SAVE_YOURSELF,
@@ -34,7 +53,7 @@ enum {
 
 typedef gint (*GnomeClientSignal1) (GnomeClient        *client,
 				    gint                phase,
-				    GnomeRestartStyle   save_style,
+				    GnomeSaveStyle      save_style,
 				    gint                shutdown,
 				    GnomeInteractStyle  interact_style,
 				    gint                fast,
@@ -66,7 +85,7 @@ static void gnome_real_client_disconnect         (GnomeClient      *client);
 
 static void client_save_yourself_callback      (SmcConn   smc_conn,
 						SmPointer client_data,
-						int       save_type,
+						int       save_style,
 						Bool      shutdown,
 						int       interact,
 						Bool      fast);
@@ -104,9 +123,9 @@ static void   client_set_prop_from_array_with_arg (GnomeClient *client,
 static void   client_unset_prop             (GnomeClient *client,
 					     gchar       *prop_name);
 
-static void   client_unset_config_prefix    (GnomeClient *client);
-
 #endif /* HAVE_LIBSM */
+
+static void   client_unset_config_prefix    (GnomeClient *client);
 
 static gchar** array_init_from_arg           (gint argc, 
 					      gchar *argv[]);
@@ -121,8 +140,8 @@ struct _GnomeInteractData
   gint                   tag;
   GnomeClient           *client;
   GnomeDialogType        dialog_type;
-  gint                   in_use;
-  gint                   interp;
+  gboolean               in_use;
+  gboolean               interp;
   GnomeInteractFunction  function;
   gpointer               data;
   GtkDestroyNotify       destroy;
@@ -371,7 +390,7 @@ gnome_cloned_client (void)
 {
   if (!cloned_client && cloned_id)
     {
-      /* The 'cloned_client' gets only created, when it's needed.  */
+      /* The 'cloned_client' is only created, when it's needed.  */
       cloned_client= gnome_client_new_without_connection ();
       gnome_client_set_id (cloned_client, cloned_id);
     }
@@ -646,7 +665,7 @@ gnome_client_flush (GnomeClient *client)
   g_return_if_fail (GNOME_CLIENT_CONNECTED (client));
 
 #ifdef HAVE_LIBSM
-  conn = SmcGetIceConnection (client->smc_conn);
+  conn = SmcGetIceConnection ((SmcConn) client->smc_conn);
   IceFlush (conn);
 #endif
 }
@@ -693,7 +712,7 @@ gnome_client_connect (GnomeClient *client)
     {
       gchar error_string_ret[ERROR_STRING_LENGTH] = "";
       
-      client->smc_conn = 
+      client->smc_conn= (gpointer)
 	SmcOpenConnection (NULL, &context, 
 			   SmProtoMajor, SmProtoMinor,
 			   SmcSaveYourselfProcMask | SmcDieProcMask |
@@ -733,7 +752,7 @@ gnome_client_connect (GnomeClient *client)
 	}
       
       /* Lets call 'gnome_process_ice_messages' if new data arrives.  */
-      ice_conn = SmcGetIceConnection (client->smc_conn);
+      ice_conn = SmcGetIceConnection ((SmcConn) client->smc_conn);
       client->input_id= gdk_input_add (IceConnectionNumber (ice_conn),
 				       GDK_INPUT_READ, 
 				       gnome_process_ice_messages,
@@ -1111,12 +1130,38 @@ gnome_client_set_restart_style (GnomeClient *client,
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
-  client->restart_style= style;
-
+  switch (style)
+    {
+    case GNOME_RESTART_IF_RUNNING:
 #ifdef HAVE_LIBSM
-  client_set_prop_from_gchar (client, SmRestartStyleHint, 
-			      (gchar) client->restart_style);
+      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartIfRunning);
+      break;
 #endif /* HAVE_LIBSM */
+      
+    case GNOME_RESTART_ANYWAY:
+#ifdef HAVE_LIBSM
+      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartAnyway);
+      break;
+#endif /* HAVE_LIBSM */
+
+    case GNOME_RESTART_IMMEDIATELY:
+#ifdef HAVE_LIBSM
+      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartImmediately);
+      break;
+#endif /* HAVE_LIBSM */
+
+    case GNOME_RESTART_NEVER:
+#ifdef HAVE_LIBSM
+      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartNever);
+#endif /* HAVE_LIBSM */
+      break;
+
+    default:
+      g_assert_not_reached ();
+      return;
+    }
+
+  client->restart_style= style;
 }
 
 
@@ -1402,7 +1447,7 @@ gnome_real_client_shutdown_cancelled (GnomeClient *client)
 
 #ifdef HAVE_LIBSM
   if (client->state == GNOME_CLIENT_SAVING)
-    SmcSaveYourselfDone (client->smc_conn, False);
+    SmcSaveYourselfDone ((SmcConn) client->smc_conn, False);
   
   client->state = GNOME_CLIENT_IDLE;
 
@@ -1467,9 +1512,28 @@ gnome_real_client_connect (GnomeClient *client,
   else
     client_set_prop_from_array (client, SmRestartCommand, NULL);
 
-  if (client->restart_style != -1)
-    client_set_prop_from_gchar (client, SmRestartStyleHint,
-				(gchar)client->restart_style);
+  switch (client->restart_style)
+    {
+    case GNOME_RESTART_IF_RUNNING:
+      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartIfRunning);
+      break;
+      
+    case GNOME_RESTART_ANYWAY:
+      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartAnyway);
+      break;
+
+    case GNOME_RESTART_IMMEDIATELY:
+      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartImmediately);
+      break;
+
+    case GNOME_RESTART_NEVER:
+      client_set_prop_from_gchar (client, SmRestartStyleHint, SmRestartNever);
+      break;
+
+    default:
+      break;
+    }
+
   client_set_prop_from_array (client, SmShutdownCommand,
 			      client->shutdown_command);
   client_set_prop_from_string (client, SmUserID,
@@ -1490,7 +1554,7 @@ gnome_real_client_disconnect (GnomeClient *client)
 #ifdef HAVE_LIBSM
   if (GNOME_CLIENT_CONNECTED (client))
     {
-      SmcCloseConnection (client->smc_conn, 0, NULL);
+      SmcCloseConnection ((SmcConn) client->smc_conn, 0, NULL);
       client->smc_conn = NULL;
     }
   
@@ -1520,16 +1584,39 @@ gnome_real_client_disconnect (GnomeClient *client)
 static void
 gnome_client_request_interaction_internal (GnomeClient           *client,
 					   GnomeDialogType        dialog_type,
-					   gint                   interp,
+					   gboolean               interp,
 					   GnomeInteractFunction  function,
 					   gpointer               data,
 					   GtkDestroyNotify       destroy) 
 {
+#ifdef HAVE_LIBSM
   static gint interaction_tag = 1;
   GnomeInteractData *interactf;
+  int _dialog_type;
+#endif
   
+  /* Convert GnomeDialogType into XSM library values */
+  switch (dialog_type)
+    {
+    case GNOME_DIALOG_ERROR:
 #ifdef HAVE_LIBSM
+      _dialog_type= SmDialogError;
+#endif
+      break;
+      
+    case GNOME_DIALOG_NORMAL:
+#ifdef HAVE_LIBSM
+      _dialog_type= SmDialogError;
+#endif
+      break;
+      
+    default:
+      g_assert_not_reached ();
+      return;
+    };
 
+#ifdef HAVE_LIBSM
+  
   interactf = g_new (GnomeInteractData, 1);
   
   g_return_if_fail (interactf != NULL);
@@ -1546,8 +1633,8 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
   interact_functions = g_list_append (interact_functions, interactf);
   client->number_of_interact_requests++;
 
-  SmcInteractRequest (client->smc_conn, 
-		      dialog_type, 
+  SmcInteractRequest ((SmcConn) client->smc_conn, 
+		      _dialog_type, 
 		      client_interact_callback, 
 		      (SmPointer) client);
 
@@ -1722,14 +1809,69 @@ gnome_client_request_save (GnomeClient	       *client,
 			   gboolean		fast,
 			   gboolean		global)
 {
+#ifdef HAVE_LIBSM
+  int _save_style;
+  int _interact_style;
+#endif
+  
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
+
+  switch (save_style)
+    {
+    case GNOME_SAVE_GLOBAL:
+#ifdef HAVE_LIBSM
+      _save_style= SmSaveGlobal;
+      break;
+#endif
+      
+    case GNOME_SAVE_LOCAL:
+#ifdef HAVE_LIBSM
+      _save_style= SmSaveLocal;
+      break;
+#endif
+      
+    case GNOME_SAVE_BOTH:
+#ifdef HAVE_LIBSM
+      _save_style= SmSaveBoth;
+#endif
+      break;
+      
+    default:
+      g_assert_not_reached ();
+      return;
+    }
+
+  switch (interact_style)
+    {
+    case GNOME_INTERACT_NONE:
+#ifdef HAVE_LIBSM
+      _interact_style= SmInteractStyleNone;
+      break;
+#endif
+      
+    case GNOME_INTERACT_ERRORS:
+#ifdef HAVE_LIBSM
+      _interact_style= SmInteractStyleErrors;
+      break;
+#endif
+      
+    case GNOME_INTERACT_ANY:
+#ifdef HAVE_LIBSM
+      _interact_style= SmInteractStyleAny;
+#endif
+      break;
+      
+    default:
+      g_assert_not_reached ();
+      return;
+    }
   
 #ifdef HAVE_LIBSM
   if (GNOME_CLIENT_CONNECTED (client))
     {
-      SmcRequestSaveYourself (client->smc_conn, save_style,
-			      shutdown, interact_style,
+      SmcRequestSaveYourself ((SmcConn) client->smc_conn, _save_style,
+			      shutdown, _interact_style,
 			      fast, global);            
     }
 #endif HAVE_LIBSM
@@ -1748,8 +1890,8 @@ gnome_client_request_save (GnomeClient	       *client,
  **/
 
 void
-gnome_interaction_key_return (gint key,
-			      gint cancel_shutdown)
+gnome_interaction_key_return (gint     key,
+			      gboolean cancel_shutdown)
 {
 #ifdef HAVE_LIBSM
   GList             *temp_list;
@@ -1786,19 +1928,19 @@ gnome_interaction_key_return (gint key,
   if (cancel_shutdown && !client->shutdown)
     cancel_shutdown= FALSE;
   
-  SmcInteractDone (client->smc_conn, cancel_shutdown);
+  SmcInteractDone ((SmcConn) client->smc_conn, cancel_shutdown);
   
   if (client->number_of_interact_requests == 0)
     {
       if (client->save_phase_2_requested && (client->phase == 1))
 	{
-	  SmcRequestSaveYourselfPhase2 (client->smc_conn,
+	  SmcRequestSaveYourselfPhase2 ((SmcConn) client->smc_conn,
 					client_save_phase_2_callback,
 					(SmPointer) client);
 	}
       else
 	{
-	  SmcSaveYourselfDone (client->smc_conn, 
+	  SmcSaveYourselfDone ((SmcConn) client->smc_conn, 
 			       client->save_successfull);
 
 	  client->state =
@@ -1833,7 +1975,7 @@ client_set_prop_from_string (GnomeClient *client,
   val.length = strlen (value)+1;
   val.value  = value;
   proplist[0] = &prop;
-  SmcSetProperties (client->smc_conn, 1, proplist);
+  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
 }
 
 void
@@ -1856,7 +1998,7 @@ client_set_prop_from_gchar (GnomeClient *client,
   val.length = 1;
   val.value  = &value;
   proplist[0] = &prop;
-  SmcSetProperties (client->smc_conn, 1, proplist);
+  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
 }
 
 static void
@@ -1877,7 +2019,7 @@ client_set_prop_from_glist (GnomeClient *client,
 
   if (list == NULL)
     {
-      SmcDeleteProperties (client->smc_conn, 1, &prop_name);
+      SmcDeleteProperties ((SmcConn) client->smc_conn, 1, &prop_name);
       return;
     }
 
@@ -1896,7 +2038,7 @@ client_set_prop_from_glist (GnomeClient *client,
   prop.num_vals = argc;
   prop.vals     = vals;
   proplist[0]   = &prop;
-  SmcSetProperties (client->smc_conn, 1, proplist);
+  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
 
   g_free (vals);
 }		   
@@ -1934,7 +2076,7 @@ client_set_prop_from_array (GnomeClient *client,
   prop.num_vals = argc;
   prop.vals     = vals;
   proplist[0]   = &prop;
-  SmcSetProperties (client->smc_conn, 1, proplist);
+  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
 
   g_free (vals);
 }		   
@@ -1997,7 +2139,7 @@ client_set_prop_from_array_with_arg (GnomeClient *client,
   prop.num_vals = argc;
   prop.vals     = vals;
   proplist[0]   = &prop;
-  SmcSetProperties (client->smc_conn, 1, proplist);
+  SmcSetProperties ((SmcConn) client->smc_conn, 1, proplist);
 
   g_free (vals);
 }		   
@@ -2008,7 +2150,7 @@ client_unset_prop (GnomeClient *client, gchar *prop_name)
   g_return_if_fail (prop_name  != NULL);
 
   if (GNOME_CLIENT_CONNECTED (client))
-    SmcDeleteProperties (client->smc_conn, 1, &prop_name);
+    SmcDeleteProperties ((SmcConn) client->smc_conn, 1, &prop_name);
 }
 
 #endif /* HAVE_LIBSM */
@@ -2025,8 +2167,8 @@ gnome_process_ice_messages (gpointer client_data,
   IceProcessMessagesStatus  status;
   GnomeClient              *client = (GnomeClient*) client_data;
   
-  status = IceProcessMessages (SmcGetIceConnection (client->smc_conn),
-			       NULL, NULL);
+  status = IceProcessMessages 
+    (SmcGetIceConnection ((SmcConn) client->smc_conn), NULL, NULL);
   
   if (status == IceProcessMessagesIOError)
     {
@@ -2034,6 +2176,8 @@ gnome_process_ice_messages (gpointer client_data,
       /* FIXME: sent error messages */
     }
 }
+
+#ifdef HAVE_LIBSM
 
 static void
 client_save_yourself_callback (SmcConn   smc_conn,
@@ -2045,9 +2189,37 @@ client_save_yourself_callback (SmcConn   smc_conn,
 {
   GnomeClient *client = (GnomeClient*) client_data;
 
-  client->save_type          = (GnomeSaveStyle)     save_style;
+  switch (save_style)
+    {
+    case SmSaveGlobal:
+      client->save_style= GNOME_SAVE_GLOBAL;
+      break;
+      
+    case SmSaveLocal:
+      client->save_style= GNOME_SAVE_LOCAL;
+      break;
+      
+    case SmSaveBoth:
+    default:
+      client->save_style= GNOME_SAVE_BOTH;
+      break;
+    }
   client->shutdown           = (gint)               shutdown;
-  client->interact_style     = (GnomeInteractStyle) interact_style;
+  switch (interact_style)
+    {
+    case SmInteractStyleErrors:
+      client->interact_style= GNOME_INTERACT_ERRORS;
+      break;
+      
+    case SmInteractStyleAny:
+      client->interact_style= GNOME_INTERACT_ANY;
+      break;
+      
+    case SmInteractStyleNone:
+    default:
+      client->interact_style= GNOME_INTERACT_NONE;
+      break;
+    }
   client->fast               = (gint)               fast;
   client->phase              = 1;
 
@@ -2058,14 +2230,17 @@ client_save_yourself_callback (SmcConn   smc_conn,
 
   gtk_signal_emit (GTK_OBJECT (client), 
 		   client_signals[SAVE_YOURSELF],
-		   1, save_style, shutdown, interact_style, fast);
+		   1, 
+		   client->save_style, 
+		   shutdown, 
+		   client->interact_style, 
+		   fast);
 
-#ifdef HAVE_LIBSM
   if (client->number_of_interact_requests == 0)
     {
       if (client->save_phase_2_requested)
 	{
-	  SmcRequestSaveYourselfPhase2 (client->smc_conn,
+	  SmcRequestSaveYourselfPhase2 ((SmcConn) client->smc_conn,
 					client_save_phase_2_callback,
 					(SmPointer) client);
 	}
@@ -2075,14 +2250,15 @@ client_save_yourself_callback (SmcConn   smc_conn,
 	    client->save_successfull = FALSE;
 
 	  if (client->state == GNOME_CLIENT_SAVING)
-	    SmcSaveYourselfDone (client->smc_conn, client->save_successfull);
+	    SmcSaveYourselfDone ((SmcConn) client->smc_conn, 
+				 client->save_successfull);
 
 	  client->state = 
 	    (client->shutdown) ? GNOME_CLIENT_WAITING : GNOME_CLIENT_IDLE;
 	}
     }
-#endif HAVE_LIBSM
 }
+#endif HAVE_LIBSM
 
 static void
 client_die_callback (SmcConn smc_conn, SmPointer client_data)
@@ -2140,7 +2316,7 @@ client_save_phase_2_callback (SmcConn smc_conn, SmPointer client_data)
  
   gtk_signal_emit (GTK_OBJECT (client), client_signals[SAVE_YOURSELF],
 		   2,
-		   client->save_type,
+		   client->save_style,
 		   client->shutdown,
 		   client->interact_style,
 		   client->fast);
@@ -2148,7 +2324,7 @@ client_save_phase_2_callback (SmcConn smc_conn, SmPointer client_data)
   if (client->number_of_interact_requests == 0)
     {
       if (client->state == GNOME_CLIENT_SAVING)
-	SmcSaveYourselfDone (client->smc_conn, 
+	SmcSaveYourselfDone ((SmcConn) client->smc_conn, 
 			     client->save_successfull);
 
       client->state =
