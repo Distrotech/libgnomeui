@@ -24,6 +24,7 @@
 #include <gtk/gtkscrolledwindow.h>
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18nP.h"
+#include "libgnome/gnome-mime.h"
 #include "libgnome/gnome-util.h"
 #include "gnome-dialog.h"
 #include "gnome-stock.h"

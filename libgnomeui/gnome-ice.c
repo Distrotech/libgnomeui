@@ -85,7 +85,7 @@ new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
        gnome_ice_internal->input_id = 
 	 gdk_input_add (IceConnectionNumber (connection),
 			GDK_INPUT_READ|GDK_INPUT_EXCEPTION,
-			process_ice_messages,
+			(GdkInputFunction)process_ice_messages,
 			(gpointer) connection);
     }
   else 
