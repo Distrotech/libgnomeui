@@ -5,118 +5,117 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
-"PO-Revision-Date: 2003-01-13 00:05+0100\n"
+"POT-Creation-Date: 2003-05-20 07:20+0200\n"
+"PO-Revision-Date: 2003-05-20 07:21+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:194
+#: libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr "Poďakovanie"
 
-#: libgnomeui/gnome-about.c:223
+#: libgnomeui/gnome-about.c:230
 msgid "Written by"
 msgstr "Napísal"
 
-#: libgnomeui/gnome-about.c:238
+#: libgnomeui/gnome-about.c:245
 msgid "Documented by"
 msgstr "Autor dokumentácie"
 
-#: libgnomeui/gnome-about.c:253
+#: libgnomeui/gnome-about.c:260
 msgid "Translated by"
 msgstr "Prekladateľ"
 
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
+#: libgnomeui/gnome-about.c:323
+msgid "C_redits"
 msgstr "_Poďakovanie"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:378
 msgid "Program name"
 msgstr "Názov programu"
 
-#: libgnomeui/gnome-about.c:353
+#: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
 msgstr "Názov programu"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:386
 msgid "Program version"
 msgstr "Verzia programu"
 
-#: libgnomeui/gnome-about.c:361
+#: libgnomeui/gnome-about.c:387
 msgid "The version of the program"
 msgstr "Verzia programu"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
 msgstr "Autorské práva"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
 msgstr "Informácie o autorských právach k programu"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:401
 msgid "Comments string"
 msgstr "Text komentára"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
 msgstr "Komentáre k programu"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:408
 msgid "Authors"
 msgstr "Autori"
 
-#: libgnomeui/gnome-about.c:383
+#: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
 msgstr "Zoznam autorov programu"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:411
 msgid "Author entry"
 msgstr "Položka autora"
 
-#: libgnomeui/gnome-about.c:386
+#: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
 msgstr "Položka jedného autora"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:419
 msgid "Documenters"
 msgstr "Autori dokumentácie"
 
-#: libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
 msgstr "Zoznam ľudí, ktorý program dokumentujú"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
 msgstr "Položka autora dokumentácie"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
 msgstr "Položka jedného autora dokumentácie"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
 msgstr "Poďakovanie prekladateľom"
 
-#: libgnomeui/gnome-about.c:406
+#: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Poďakovanie prekladateľom. Tento reťazec by mal byť označený na preklad"
 
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: libgnomeui/gnome-about.c:414
+#: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
 msgstr "Logo pre dialógové okno O programe"
 
-#: libgnomeui/gnome-about.c:493
+#: libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
 msgstr "O programe %s"
@@ -145,31 +144,31 @@ msgstr "Interaktivita"
 msgid "Level of user activity required."
 msgstr "Požadovaná úroveň používateľovej aktivity."
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "Zadajte identifikátor správy sedenia"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "ID"
 msgstr "Identifikátor"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
 msgstr "Zadajte predponu uloženej konfigurácie"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "PREDPONA"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
 msgstr "Nepovoliť pripojenie na manažéra spojení"
 
-#: libgnomeui/gnome-client.c:972
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Správa sedenia"
 
-#: libgnomeui/gnome-client.c:2470
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Zrušiť prihlasovanie"
 
@@ -415,14 +414,14 @@ msgid "GNOME GUI Library"
 msgstr "Knižnica GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
+#: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Vyskytli sa viacnásobné chyby segmentácie; nemôžem zobraziť dialógové okno s "
 "chybou\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
+#: libgnomeui/gnome-ui-init.c:632
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -522,6 +521,7 @@ msgstr "Rada pre položku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Súbo_r"
 
@@ -579,6 +579,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomocník"
 
@@ -769,11 +770,11 @@ msgstr "Konfigurovať aplikáciu"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O progr_ame"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informácie o tomto programe"
 
@@ -800,7 +801,7 @@ msgstr "Vytvoriť nové okno"
 msgid "_Close This Window"
 msgstr "_Zatvoriť toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvoriť aktuálne okno"
 
@@ -1330,5 +1331,6 @@ msgstr "%a %d.%m.%Y %H:%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukončiť test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukončiť test"
