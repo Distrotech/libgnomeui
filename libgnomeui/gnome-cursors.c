@@ -583,14 +583,14 @@ gnome_stock_cursor_new (const char *cursorname)
 		build_cursor_table ();
 	
 	cursor = g_hash_table_lookup (cursortable, cursorname);
-
+	
 	if (cursor == NULL) {
 		g_warning ("Unknown cursor %s", cursorname);
 		return NULL;
 	}
 
-        if (cursor->type != GNOME_CURSOR_STANDARD && cursor->pmap == NULL) {
-        
+        if (cursor->type != GNOME_CURSOR_STANDARD && cursor->pmap == NULL)
+	{
                 switch (cursor->type) {
                 case GNOME_CURSOR_XBM:
                         pmap = gdk_bitmap_create_from_data (NULL,
@@ -632,12 +632,20 @@ gnome_stock_cursor_new (const char *cursorname)
                 }
         }
 
+	if (pmap && mask)
+	{
+		cursor->pmap = pmap;
+		cursor->mask = mask;
+	}
+	
+
         if (cursor->type != GNOME_CURSOR_STANDARD) {
-                if (pmap == NULL)
+                if (!cursor->pmap)
                         return NULL;
-                else {
-                        gdk_cursor = gdk_cursor_new_from_pixmap (pmap, 
-                                                                 mask,
+                else
+		{
+                        gdk_cursor = gdk_cursor_new_from_pixmap (cursor->pmap, 
+                                                                 cursor->mask,
                                                                  &cursor->foreground,
                                                                  &cursor->background,
                                                                  cursor->hotspot_x, 
@@ -646,10 +654,7 @@ gnome_stock_cursor_new (const char *cursorname)
         } else {
                 return gdk_cursor_new(GPOINTER_TO_INT(cursor->cursor_data));
         }
-          
-        cursor->pmap = pmap;
-        cursor->mask = mask;
-        
+	
 	return gdk_cursor;
 }
 
