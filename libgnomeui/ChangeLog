@@ -1,3 +1,10 @@
+1999-02-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_clear): Free the selection
+	list.  I wonder how anything ever worked without this.  After 1.0
+	I promise to rewrite the icon list in a sane way that does not
+	imitate GtkCList.
+
 1999-02-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-messagebox.c (gnome_message_box_new): Use

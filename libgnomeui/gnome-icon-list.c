@@ -915,20 +915,23 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
  * gnome_icon_list_clear:
  * @gil: the icon list to clear
  *
- * Clears the contents for the icon list
+ * Clears the contents for the icon list.
  */
 void
 gnome_icon_list_clear (GnomeIconList *gil)
 {
 	GList *l;
-	
+
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 
 	for (l = gil->icon_list; l; l = l->next)
 		icon_destroy (l->data);
+
 	gil_free_line_info (gil);
 
+	g_list_free (gil->selection);
+	gil->selection = NULL;
 	gil->icon_list = NULL;
 	gil->icons = 0;
 }
