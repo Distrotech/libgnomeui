@@ -226,6 +226,7 @@ gil_free_line_info (Gil *gil)
 	}
 	g_list_free (gil->lines);
 	gil->lines = NULL;
+	gil->total_height = 0;
 }
 
 static void
@@ -316,15 +317,21 @@ gil_scrollbar_adjust (Gil *gil)
 	}
 	if (!step_increment)
 		step_increment = 10;
-	
+
+	gil->total_height = MAX (height, GTK_WIDGET (gil)->allocation.height);
+
 	wx = wy = 0;
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), 0, 0, &wx, &wy);
-	
+
 	gil->adj->upper = height;
-	gil->adj->value = wy;
 	gil->adj->step_increment = step_increment;
 	gil->adj->page_increment = GTK_WIDGET (gil)->allocation.height;
 	gil->adj->page_size = GTK_WIDGET (gil)->allocation.height;
+
+	if (wy > gil->adj->upper - gil->adj->page_size)
+		wy = gil->adj->upper - gil->adj->page_size;
+
+	gil->adj->value = wy;
 
 	gtk_adjustment_changed (gil->adj);
 }
@@ -1171,13 +1178,15 @@ gil_mark_region (Gil *gil, GdkEvent *event, double x, double y)
 	if (x2 >= GTK_WIDGET (gil)->allocation.width)
 		x2 = GTK_WIDGET (gil)->allocation.width - 1;
 
+	if (y2 >= gil->total_height)
+		y2 = gil->total_height - 1;
+
 	gnome_canvas_item_set (gil->sel_rect,
 			       "x1", x1,
 			       "y1", y1,
 			       "x2", x2,
 			       "y2", y2,
 			       NULL);
-
 
 	icons = gil_get_icons_in_region (gil, x1, y1, x2, y2);
 		
@@ -1304,13 +1313,17 @@ scroll_timeout (gpointer data)
 {
 	Gil *gil = data;
 	double x, y;
+	int value;
 
-	if (gil->adj->value + gil->value_diff > gil->adj->upper)
-		return TRUE;
-	
-	gtk_adjustment_set_value (gil->adj, gil->adj->value + gil->value_diff);
+	value = gil->adj->value + gil->value_diff;
+	if (value > gil->adj->upper - gil->adj->page_size)
+		value = gil->adj->upper - gil->adj->page_size;
 
-	gnome_canvas_window_to_world (GNOME_CANVAS (gil), gil->event_last_x, gil->event_last_y, &x, &y);
+	gtk_adjustment_set_value (gil->adj, value);
+
+	gnome_canvas_window_to_world (GNOME_CANVAS (gil),
+				      gil->event_last_x, gil->event_last_y,
+				      &x, &y);
 	gil_mark_region (gil, NULL, x, y);
 
 	return TRUE;
@@ -1637,6 +1650,8 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 		gtk_object_ref (GTK_OBJECT (gil->adj));
 		gtk_object_sink (GTK_OBJECT (gil->adj));
 		gtk_signal_connect (GTK_OBJECT (gil->adj), "value_changed",
+				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
+		gtk_signal_connect (GTK_OBJECT (gil->adj), "changed",
 				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
 	}
 

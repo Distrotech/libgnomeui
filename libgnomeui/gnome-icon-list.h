@@ -82,6 +82,7 @@ typedef struct {
 	
 	/* Opaque to the user */
 	GList *lines;
+	int total_height;	/* Max of the height of all the icon rows and window height */
 
 	/* Mouse band selection state */
 	double sel_start_x;

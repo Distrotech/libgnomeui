@@ -1,5 +1,19 @@
 1999-01-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-icon-list.h (GnomeIconList): Added a total_height field
+	that holds the maximum of the height of all the icon rows and the
+	window height.
+
+	* gnome-icon-list.c (scroll_timeout): Do not allow auto-scrolling
+	to go past the end of the icon list.
+	(gnome_icon_list_set_vadjustment): Connect to the "changed" signal
+	of the adjustment as well, to notice when the whole adjustment
+	changes (this happens on gil_scrollbar_adjust()).
+	(gil_scrollbar_adjust): Compute the gil->total_height.
+	(gil_mark_region): Do not paint the selection rectangle past the
+	gil->total_height.  This makes the icon list not look amateurish
+	anymore.
+
 	* gnome-canvas-image.c (gnome_canvas_image_update): Check whether
 	image->im is NULL and do not crash if it is.  Thanks to Erik
 	Andersen <andersen@xmission.com> for pointing this out.
