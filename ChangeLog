@@ -1,3 +1,9 @@
+2002-02-23  Havoc Pennington  <hp@pobox.com>
+
+	* libgnomeui/gnome-file-entry.c (gnome_file_entry_class_init):
+	fill in set_property/get_property prior to installing properties
+	so glib won't whine.
+
 2002-02-23  Jody Goldberg <jody@gnome.org>
 
 	* libgnomeui/gnome-uidefs.h : Use lower case for the stock accelerator

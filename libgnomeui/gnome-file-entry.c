@@ -160,6 +160,12 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 
+	object_class->destroy = gnome_file_entry_destroy;
+
+	gobject_class->finalize = gnome_file_entry_finalize;
+	gobject_class->set_property = fentry_set_property;
+	gobject_class->get_property = fentry_get_property;
+	
 	gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL] =
 		g_signal_new("browse_clicked",
 			     G_TYPE_FROM_CLASS (gobject_class),
@@ -250,12 +256,6 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 						   "or query any of its parameters."),
 						 GTK_TYPE_ENTRY,
 						 G_PARAM_READABLE));
-
-	object_class->destroy = gnome_file_entry_destroy;
-
-	gobject_class->finalize = gnome_file_entry_finalize;
-	gobject_class->set_property = fentry_set_property;
-	gobject_class->get_property = fentry_get_property;
 
 	class->browse_clicked = browse_clicked;
 	class->activate = NULL;
