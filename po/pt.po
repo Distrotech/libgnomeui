@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.2\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
-"PO-Revision-Date: 2003-02-02 14:52+0000\n"
+"POT-Creation-Date: 2003-05-02 21:51+0100\n"
+"PO-Revision-Date: 2003-05-02 21:40+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -145,33 +145,33 @@ msgstr "Interactividade"
 msgid "Level of user activity required."
 msgstr "Nível de interactividade do utilizador requerida."
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:864
 msgid "Specify session management ID"
 msgstr "Especificar ID de gestão de sessão"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:864
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:867
 msgid "Specify prefix of saved configuration"
 msgstr "Especificar prefixo da configuração gravada"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:867
 msgid "PREFIX"
 msgstr "PREFIXO"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:870
 msgid "Disable connection to session manager"
-msgstr "Desabilitar ligação ao gestor de sessão"
+msgstr "Desabilitar ligação ao gestor de sessões"
 
-#: libgnomeui/gnome-client.c:972
+#: libgnomeui/gnome-client.c:976
 msgid "Session management"
-msgstr "Gestão de sessão"
+msgstr "Gestão de sessões"
 
-#: libgnomeui/gnome-client.c:2470
+#: libgnomeui/gnome-client.c:2481
 msgid "Cancel Logout"
-msgstr "Cacelar terminar Sessão"
+msgstr "Cancelar Terminar Sessão"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
@@ -322,7 +322,7 @@ msgstr "Cor de fundo definida"
 
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr "A cor de fundo definida"
+msgstr "A cor de fundo está definida"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
@@ -343,7 +343,7 @@ msgstr "Cor Fundo definida"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
-msgstr "A cor de fundo definida"
+msgstr "A cor de fundo está definida"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
@@ -391,14 +391,14 @@ msgstr "A cor utilizada para sublinhar o link"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr "Este botão leva-lo-á ao URI que está à mostra."
+msgstr "Este botão leva-lo-á ao URI que ele apresenta."
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Ocorreu um erro ao tentar lançar o we browser por omissão.\n"
+"Ocorreu um erro ao tentar lançar o web browser por omissão.\n"
 "Verifique se as suas definições na ferramenta de preferências 'Aplicações "
 "Preferidas'."
 
@@ -522,6 +522,7 @@ msgstr "Dica para item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -579,6 +580,7 @@ msgid "_Game"
 msgstr "Jo_go"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -750,7 +752,7 @@ msgstr "_Propriedades"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Modificar as propriedades do ficheiro"
+msgstr "Alterar as propriedades do ficheiro"
 
 #.
 #. * The Settings menu
@@ -769,11 +771,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -800,7 +802,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Fechar a janela actual"
 
@@ -1029,7 +1031,7 @@ msgid ""
 msgstr ""
 "GnomeEntry que a selecção de ficheiros utiliza para inserir nomes de "
 "ficheiros. Pode utilizar esta propriedade para obter a GnomeEntry se "
-"necessitar de modificar ou verificar qualquer um dos seus parâmetros."
+"necessitar de alterar ou verificar qualquer um dos seus parâmetros."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1041,27 +1043,27 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry que a selecção de ficheiros utiliza para inseriri ficheiros. Pode "
-"utilizar esta propriedade para obter a GtkEntry caso necessite de modificar "
-"ou verificar qualquer um dos seus parâmetros."
+"GtkEntry que a selecção de ficheiros utiliza para inserir ficheiros. Pode "
+"utilizar esta propriedade para obter a GtkEntry caso necessite de alterar ou "
+"verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
 msgstr "Seleccionar ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:645
 msgid "Path"
 msgstr "Caminho"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:645
 msgid "Path to file"
 msgstr "Caminho para o ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
 msgstr "_Navegar..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
 msgstr "Surge um selecctor de ficheiro para seleccionar um"
 
@@ -1107,11 +1109,11 @@ msgstr "A GtkFont seleccionada"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Prever texto"
+msgstr "Antever texto"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Prever o texto mostrando-o no diálogo"
+msgstr "Antever o texto apresentado no diálogo"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1153,10 +1155,10 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"A aplicação \"%s\" tentou modificar um parâmetro da sua configuração que o "
+"A aplicação \"%s\" tentou alterar um parâmetro da sua configuração que o "
 "administrador do seu sistema ou o vendedor do sistema não lhe permitem "
-"modificar. Algumas das definições que seleccionou poderão não tomar efeito, "
-"ou poderão não ser repostas da próxima vez que utilizar esta aplicação."
+"alterar. Algumas das definições que seleccionou poderão não tomar efeito, ou "
+"poderão não ser repostas da próxima vez que utilizar esta aplicação."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1204,7 +1206,7 @@ msgstr ""
 "GtkDialog caso necessite de alterar ou verificar qualquer uma das suas "
 "propriedades."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
 msgstr "Sem Ícone"
 
@@ -1214,41 +1216,41 @@ msgstr "Incapaz de encontrar uma hbox, a utilizar selecção de ficheiro normal"
 
 #: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
-msgstr "Prever"
+msgstr "Antever"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "Diálogo de selecção ícone"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "Este diálogo permite-lhe seleccionar um ícone."
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "Selector Ícones"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "Seleccione o ícone que deseja."
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
 msgstr "Selector Ícones"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
-msgstr "Este botão irá abrir uma janela que lhe permitir seleccionar um ícone."
+msgstr "Este botão irá abrir uma janela que lhe permite seleccionar um ícone."
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
 msgstr "Navegar"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
 msgstr "Caminho ícones"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1292,11 +1294,11 @@ msgstr "Mensagem"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
-msgstr "Prever"
+msgstr "Antever"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Se a entrada de pizmap deverá ou não ter uma previsão."
+msgstr "Se a entrada de pixmap deverá ou não ter uma antevisão."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
@@ -1304,11 +1306,11 @@ msgstr "Sem Imagem"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "Prever Imagem"
+msgstr "Antever Imagem"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
-msgstr "Uma previsão da imagem actualmente seleccionada"
+msgstr "Uma antevisão da imagem actualmente seleccionada"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1327,14 +1329,15 @@ msgstr "Pontuação"
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr "%a %d %b %T %Y"
+msgstr "%a %b %d %T %Y"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Sair do teste"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Sair do teste"
 
 #~ msgid "Find _Again"
 #~ msgstr "Procurar _Novamente"
