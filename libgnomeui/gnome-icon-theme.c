@@ -268,7 +268,7 @@ gnome_icon_theme_init (GnomeIconTheme *icon_theme)
   icon_theme->priv = priv;
 
   priv->custom_theme = FALSE;
-  priv->current_theme = g_strdup ("default");
+  priv->current_theme = g_strdup ("hicolor");
   priv->search_path = g_new (char *, 5);
   
 
@@ -636,7 +636,7 @@ load_themes (GnomeIconTheme *icon_theme)
   
   insert_theme (icon_theme, priv->current_theme);
   /* Always look in the "default" icon theme */
-  insert_theme (icon_theme, "default");
+  insert_theme (icon_theme, "hicolor");
   priv->themes = g_list_reverse (priv->themes);
   
   priv->unthemed_icons = g_hash_table_new_full (g_str_hash, g_str_equal,

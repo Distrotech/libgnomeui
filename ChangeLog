@@ -1,3 +1,8 @@
+2002-12-06  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-icon-theme.c:
+	The fallback theme is called "hicolor" in the latest spec.
+
 2002-12-02  Glynn Foster  <glynn.foster@sun.com>
 
 	* libgnomeui/gnome-href.c: (gnome_href_clicked): Update for a nicer
