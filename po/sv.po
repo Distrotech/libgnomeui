@@ -1,0 +1,788 @@
+# Swedish messages for libgnomeui-2.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Christian Rose <menthos@menthos.com>, 2001.
+#
+# $Id$
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui-2\n"
+"POT-Creation-Date: 2001-06-16 13:45+0200\n"
+"PO-Revision-Date: 2001-06-16 15:35+0200\n"
+"Last-Translator: Christian Rose <menthos@menthos.com>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: demos/mdi_demo.c:129
+msgid "Child Item 1"
+msgstr "Barnobjekt 1"
+
+#: demos/mdi_demo.c:130
+msgid "Hint for item 1"
+msgstr "Tips för objekt 1"
+
+#: demos/mdi_demo.c:132
+msgid "Child Item 2"
+msgstr "Barnobjekt 2"
+
+#: demos/mdi_demo.c:133
+msgid "Hint for item 2"
+msgstr "Tips för objekt 2"
+
+#: demos/winhints_demo.c:49
+msgid "wmhints-test"
+msgstr "wmhints-test"
+
+#: demos/winhints_demo.c:49
+msgid "winhints-test"
+msgstr "winhints-test"
+
+#: demos/winhints_demo.c:74
+msgid "Layer:"
+msgstr "Lager:"
+
+#: demos/winhints_demo.c:97
+msgid "Above Dock"
+msgstr "Över dockan"
+
+#: demos/winhints_demo.c:101
+msgid "Dock"
+msgstr "Docka"
+
+#: demos/winhints_demo.c:105
+msgid "On Top"
+msgstr "Över"
+
+#: demos/winhints_demo.c:109
+msgid "Normal"
+msgstr "Normal"
+
+#: demos/winhints_demo.c:113
+msgid "Below"
+msgstr "Under"
+
+#: demos/winhints_demo.c:117
+msgid "Desktop"
+msgstr "Skrivbord"
+
+#: demos/winhints_demo.c:125
+msgid "Set Layer"
+msgstr "Ställ in lager"
+
+#: demos/winhints_demo.c:132
+msgid "Workspaces:"
+msgstr "Arbetsytor:"
+
+#: demos/winhints_demo.c:154
+msgid "Sticky"
+msgstr "Klistrig"
+
+#: demos/winhints_demo.c:158
+msgid "Set Workspace"
+msgstr "Ställ in arbetsyta"
+
+#: demos/winhints_demo.c:168
+msgid "State Toggles:"
+msgstr "Tillståndsväxlar:"
+
+#: demos/winhints_demo.c:178
+msgid "Minimized"
+msgstr "Minimerad"
+
+#: demos/winhints_demo.c:182
+msgid "Maximized Vertical"
+msgstr "Maximerad lodrätt"
+
+#: demos/winhints_demo.c:186
+msgid "Maximized Horizontal"
+msgstr "Maximerad vågrätt"
+
+#: demos/winhints_demo.c:190
+msgid "Hidden"
+msgstr "Gömd"
+
+#: demos/winhints_demo.c:194
+msgid "Shaded"
+msgstr "Ihoprullad"
+
+#: demos/winhints_demo.c:198
+msgid "Fixed Position"
+msgstr "Fix position"
+
+#: demos/winhints_demo.c:202
+msgid "Ignore on Arrange"
+msgstr "Ignorera vid städning"
+
+#: demos/winhints_demo.c:206
+msgid "Set State"
+msgstr "Ställ in tillstånd"
+
+#: demos/winhints_demo.c:212
+msgid "Skip Toggles:"
+msgstr "Hoppa över växlare:"
+
+#: demos/winhints_demo.c:222
+msgid "Skip Focus"
+msgstr "Hoppa över fokus"
+
+#: demos/winhints_demo.c:226
+msgid "Skip Window Menu"
+msgstr "Hoppa över fönstermeny"
+
+#: demos/winhints_demo.c:230
+msgid "Skip Taskbar / WinList"
+msgstr "Hoppa över aktivitetslist/fönsterlista"
+
+#: demos/winhints_demo.c:234
+msgid "Set Skip"
+msgstr "Välj vad som ska hoppas över"
+
+#: demos/winhints_demo.c:260 libgnomeui/gnome-about.c:1162
+msgid "About"
+msgstr "Om"
+
+#: demos/winhints_demo.c:414
+msgid "WIN_HINTS Test"
+msgstr "WIN_HINTS-test"
+
+#: demos/winhints_demo.c:415
+msgid "Copyright (C) 1998"
+msgstr "Copyright © 1998"
+
+#: demos/winhints_demo.c:417
+msgid ""
+"Simple test app to check how the WIN_HINTS work.\n"
+"And to test the gnome_win_hints_* functions for errors. :)"
+msgstr ""
+"Enkelt testprogram för att kontrollera hur WIN_HINTS fungerar,\n"
+"och leta efter fel i gnome_win_hints_*-funktionerna. :)"
+
+#: libgnomeui/gnome-about.c:352
+msgid "Author:"
+msgstr "Författare:"
+
+#: libgnomeui/gnome-about.c:361 libgnomeui/gnome-about.c:365
+msgid "Authors:"
+msgstr "Författare:"
+
+#: libgnomeui/gnome-about.c:744
+msgid "Authors: "
+msgstr "Författare: "
+
+#: libgnomeui/gnome-about.c:1255 libgnomeui/gnome-href.c:397
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+"Fel uppstod vid körning av URL-hanteraren.\n"
+"Var vänlig och kontrollera att inställningarna i kontrollpanelen är korrekta."
+
+#: libgnomeui/gnome-animator.c:136
+msgid "Loop type"
+msgstr "Slingtyp"
+
+#: libgnomeui/gnome-animator.c:137
+msgid "The type of loop the GnomeAnimator uses"
+msgstr "Slingtypen som GnomeAnimator använder"
+
+#: libgnomeui/gnome-animator.c:145
+msgid "Direction"
+msgstr "Riktning"
+
+#: libgnomeui/gnome-animator.c:146
+msgid "Animation direction"
+msgstr "Animationsriktning"
+
+#: libgnomeui/gnome-animator.c:154
+msgid "Number of frames"
+msgstr "Antal ramar"
+
+#: libgnomeui/gnome-animator.c:155
+msgid "Total number of frames in animation"
+msgstr "Totala antalet ramar i animeringen"
+
+#: libgnomeui/gnome-animator.c:163
+msgid "Current frame"
+msgstr "Aktuell ram"
+
+#: libgnomeui/gnome-animator.c:164
+msgid "Current frame number"
+msgstr "Aktuellt ramnummer"
+
+#: libgnomeui/gnome-animator.c:172 libgnomeui/gnome-animator.c:173
+msgid "Animation status"
+msgstr "Animationsstatus"
+
+#: libgnomeui/gnome-animator.c:181
+msgid "Speed"
+msgstr "Hastighet"
+
+#: libgnomeui/gnome-animator.c:182
+msgid "Animation speed"
+msgstr "Animationshastighet"
+
+#: libgnomeui/gnome-canvas-init.c:52
+msgid "Gdk debugging flags to set"
+msgstr "Felsökningsflaggor för Gdk som ska användas"
+
+#: libgnomeui/gnome-canvas-init.c:52 libgnomeui/gnome-canvas-init.c:55 libgnomeui/gnome-canvas-init.c:85 libgnomeui/gnome-canvas-init.c:88
+msgid "FLAGS"
+msgstr "FLAGGOR"
+
+#: libgnomeui/gnome-canvas-init.c:55
+msgid "Gdk debugging flags to unset"
+msgstr "Felsökningsflaggor för Gdk som inte ska användas"
+
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:133
+msgid "X display to use"
+msgstr "X-display som skall användas"
+
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:133
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: libgnomeui/gnome-canvas-init.c:61
+msgid "Make X calls synchronous"
+msgstr "Använd synkrona X-anrop"
+
+#: libgnomeui/gnome-canvas-init.c:64
+msgid "Don't use X shared memory extension"
+msgstr "Använd inte X-tillägg för delat minne (shared memory extension)"
+
+#: libgnomeui/gnome-canvas-init.c:67
+msgid "Program name as used by the window manager"
+msgstr "Det programnamn som används av fönsterhanteraren"
+
+#: libgnomeui/gnome-canvas-init.c:67
+msgid "NAME"
+msgstr "NAMN"
+
+#: libgnomeui/gnome-canvas-init.c:70
+msgid "Program class as used by the window manager"
+msgstr "Den programklass som används av fönsterhanteraren"
+
+#: libgnomeui/gnome-canvas-init.c:70
+msgid "CLASS"
+msgstr "KLASS"
+
+#: libgnomeui/gnome-canvas-init.c:73
+msgid "HOST"
+msgstr "VÄRD"
+
+#: libgnomeui/gnome-canvas-init.c:76
+msgid "PORT"
+msgstr "PORT"
+
+#: libgnomeui/gnome-canvas-init.c:79 libgnomeui/gnome-canvas-init.c:82
+msgid "STYLE"
+msgstr "STIL"
+
+#: libgnomeui/gnome-canvas-init.c:85
+msgid "Gtk+ debugging flags to set"
+msgstr "Felsökningsflaggor för Gtk+ som ska användas"
+
+#: libgnomeui/gnome-canvas-init.c:88
+msgid "Gtk+ debugging flags to unset"
+msgstr "Felsökningsflaggor för Gtk+ som inte ska användas"
+
+#: libgnomeui/gnome-canvas-init.c:91
+msgid "Make all warnings fatal"
+msgstr "Gör alla varningar allvarliga"
+
+#: libgnomeui/gnome-canvas-init.c:94
+msgid "Load an additional Gtk module"
+msgstr "Ladda in en extra Gtk-modul"
+
+#: libgnomeui/gnome-canvas-init.c:94
+msgid "MODULE"
+msgstr "MODUL"
+
+#: libgnomeui/gnome-client.c:834
+msgid "Specify session management ID"
+msgstr "Ange ID för sessionskontroll"
+
+#: libgnomeui/gnome-client.c:834
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:837
+msgid "Specify prefix of saved configuration"
+msgstr "Ange prefix på den sparade konfigurationen"
+
+#: libgnomeui/gnome-client.c:837
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: libgnomeui/gnome-client.c:840
+msgid "Disable connection to session manager"
+msgstr "Stäng av koppling till sessionshanteraren"
+
+#: libgnomeui/gnome-client.c:852
+msgid "Session management"
+msgstr "Sessionshantering"
+
+#: libgnomeui/gnome-client.c:2343
+msgid "Cancel Logout"
+msgstr "Avbryt utloggning"
+
+#: libgnomeui/gnome-color-picker.c:421
+msgid "Received invalid color data\n"
+msgstr "Mottog ogiltig färgdata\n"
+
+#: libgnomeui/gnome-color-picker.c:485
+msgid "Pick a color"
+msgstr "Välj en färg"
+
+#: libgnomeui/gnome-dateedit.c:352
+msgid "Time"
+msgstr "Tid"
+
+#: libgnomeui/gnome-dateedit.c:353
+msgid "The time currentlyselected"
+msgstr "Tiden som är vald för tillfället"
+
+#: libgnomeui/gnome-dateedit.c:364
+msgid "DateEdit Flags"
+msgstr "DateEdit-flaggor"
+
+#: libgnomeui/gnome-dateedit.c:365
+msgid "Flags for how DateEdit looks"
+msgstr "Flaggor för hur DateEdit ser ut"
+
+#: libgnomeui/gnome-dateedit.c:374
+msgid "Lower Hour"
+msgstr "Minska timme"
+
+#: libgnomeui/gnome-dateedit.c:375
+msgid "Lower hour in the time popup selector"
+msgstr "Minska timme i popup-tidsväljaren"
+
+#: libgnomeui/gnome-dateedit.c:385
+msgid "Upper Hour"
+msgstr "Öka timme"
+
+#: libgnomeui/gnome-dateedit.c:386
+msgid "Upper hour in the time popup selector"
+msgstr "Öka timme i popup-tidsväljaren"
+
+#: libgnomeui/gnome-dateedit.c:396
+msgid "Initial Time"
+msgstr "Starttid"
+
+#: libgnomeui/gnome-dateedit.c:397
+msgid "The initial time"
+msgstr "Starttiden"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:640
+msgid "Calendar"
+msgstr "Kalender"
+
+#: libgnomeui/gnome-dateedit.c:836
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date är föråldrat, använd gnome_date_edit_get_time"
+
+#: libgnomeui/gnome-ditem-edit.c:202
+msgid "Name:"
+msgstr "Namn:"
+
+#: libgnomeui/gnome-ditem-edit.c:215
+msgid "Comment:"
+msgstr "Kommentar:"
+
+#: libgnomeui/gnome-ditem-edit.c:225
+msgid "Command:"
+msgstr "Kommando:"
+
+#: libgnomeui/gnome-ditem-edit.c:235
+msgid "Type:"
+msgstr "Typ:"
+
+#: libgnomeui/gnome-ditem-edit.c:252
+msgid "Icon:"
+msgstr "Ikon:"
+
+#: libgnomeui/gnome-ditem-edit.c:277
+msgid "Run in Terminal"
+msgstr "Kör i terminal"
+
+#: libgnomeui/gnome-ditem-edit.c:303
+msgid "Simple drag and drop"
+msgstr "Enkel dra-och-släpp"
+
+#: libgnomeui/gnome-ditem-edit.c:325
+#, c-format
+msgid ""
+"In the following commands you should use %s in the spot where the\n"
+"filename/URL should be substituted.  If you leave the field blank\n"
+"drops will not be accepted.  If this application can accept\n"
+"multiple files or URLs as arguments after its command name check the box above."
+msgstr ""
+"I de följande kommandona kan du använda %s på den plats där\n"
+"filnamnet/URL:en ska hamna. Om du lämnar fältet tomt kommer\n"
+"släpp inte att tillåtas. Om det här programmet klarar av\n"
+"flera filer eller URL:er som argument efter dess kommando-\n"
+"namn kan du kryssa i rutan ovan."
+
+#: libgnomeui/gnome-ditem-edit.c:337
+msgid "Command for file drops:"
+msgstr "Kommando för filsläpp:"
+
+#: libgnomeui/gnome-ditem-edit.c:347
+msgid "Drop one file at a time only."
+msgstr "Släpp endast en fil i taget."
+
+#: libgnomeui/gnome-ditem-edit.c:359
+msgid "Command for URL drops:"
+msgstr "Kommando för URL-släpp:"
+
+#: libgnomeui/gnome-ditem-edit.c:369
+msgid "Drop one URL at a time only."
+msgstr "Släpp endast en URL i taget."
+
+#: libgnomeui/gnome-ditem-edit.c:482
+msgid "Try this before using:"
+msgstr "Försök detta innan användning:"
+
+#: libgnomeui/gnome-ditem-edit.c:492
+msgid "Documentation:"
+msgstr "Dokumentation:"
+
+#: libgnomeui/gnome-ditem-edit.c:502
+msgid "Window titles to wait for (comma separated):"
+msgstr "Fönstertitlar som ska väntas på (kommaseparerad):"
+
+#: libgnomeui/gnome-ditem-edit.c:512
+msgid "Name/Comment translations:"
+msgstr "Översättningar av namn/kommentar:"
+
+#: libgnomeui/gnome-ditem-edit.c:515
+msgid "Language"
+msgstr "Språk"
+
+#: libgnomeui/gnome-ditem-edit.c:516
+msgid "Name"
+msgstr "Namn"
+
+#: libgnomeui/gnome-ditem-edit.c:517
+msgid "Comment"
+msgstr "Kommentar"
+
+#: libgnomeui/gnome-ditem-edit.c:545
+msgid "Add/Set"
+msgstr "Lägg till/ändra"
+
+#: libgnomeui/gnome-ditem-edit.c:550 libgnomeui/gnome-stock-icons.c:261
+msgid "Remove"
+msgstr "Ta bort"
+
+#: libgnomeui/gnome-ditem-edit.c:594
+msgid "Basic"
+msgstr "Grundläggande"
+
+#: libgnomeui/gnome-ditem-edit.c:598
+msgid "Drag and Drop"
+msgstr "Dra och släpp"
+
+#: libgnomeui/gnome-ditem-edit.c:602
+msgid "Advanced"
+msgstr "Avancerat"
+
+#: libgnomeui/gnome-druid-page-edge.c:352 libgnomeui/gnome-druid-page-standard.c:301
+msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
+
+#: libgnomeui/gnome-druid-page-edge.c:361
+msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+
+#: libgnomeui/gnome-font-picker.c:858 libgnomeui/gnome-stock-icons.c:279
+msgid "Font"
+msgstr "Typsnitt"
+
+#: libgnomeui/gnome-href.c:110
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:111
+msgid "The URL that GnomeHRef activates"
+msgstr "URL:en som GnomeHRef aktiverar"
+
+#: libgnomeui/gnome-href.c:118
+msgid "Text"
+msgstr "Text"
+
+#: libgnomeui/gnome-href.c:119
+msgid "The text on the button"
+msgstr "Texten på knappen"
+
+#: libgnomeui/gnome-href.c:120
+msgid "End World Hunger"
+msgstr "Få slut på världshungern"
+
+#: libgnomeui/gnome-init.c:91
+msgid "Bonobo UI"
+msgstr "Bonobo-användargränssnitt"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-init.c:510
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
+
+#. paper size
+#: libgnomeui/gnome-paper-selector.c:159
+msgid "Paper Size"
+msgstr "Pappersstorlek"
+
+#. orientation
+#: libgnomeui/gnome-paper-selector.c:191
+msgid "Orientation"
+msgstr "Orientering"
+
+#: libgnomeui/gnome-paper-selector.c:213
+msgid "Portrait"
+msgstr "Stående"
+
+#: libgnomeui/gnome-paper-selector.c:233
+msgid "Landscape"
+msgstr "Liggande"
+
+#. margins
+#: libgnomeui/gnome-paper-selector.c:241
+msgid "Margins"
+msgstr "Marginaler"
+
+#: libgnomeui/gnome-paper-selector.c:253
+msgid "Top:"
+msgstr "Ovansida:"
+
+#: libgnomeui/gnome-paper-selector.c:266
+msgid "Bottom:"
+msgstr "Undersida:"
+
+#: libgnomeui/gnome-paper-selector.c:279
+msgid "Left:"
+msgstr "Vänster:"
+
+#: libgnomeui/gnome-paper-selector.c:292
+msgid "Right:"
+msgstr "Höger:"
+
+#. Scaling
+#: libgnomeui/gnome-paper-selector.c:306
+msgid "Scaling"
+msgstr "Skalning"
+
+#: libgnomeui/gnome-paper-selector.c:321
+msgid "Fit to Page"
+msgstr "Anpassa till sidan"
+
+#: libgnomeui/gnome-paper-selector.c:810
+#, c-format
+msgid "%0.3g%s x %0.3g%s"
+msgstr "%0.3g%s × %0.3g%s"
+
+#: libgnomeui/gnome-paper-selector.c:1040
+msgid "Page Setup"
+msgstr "Egenskaper för sidan"
+
+#. to be kept in sync with GtkCornerType enumeration
+#: libgnomeui/gnome-pouch.c:783
+msgid "Top left"
+msgstr "Övre vänster"
+
+#: libgnomeui/gnome-pouch.c:784
+msgid "Bottom left"
+msgstr "Nedre vänster"
+
+#: libgnomeui/gnome-pouch.c:785
+msgid "Top right"
+msgstr "Övre höger"
+
+#: libgnomeui/gnome-pouch.c:786
+msgid "Bottom right"
+msgstr "Nedre höger"
+
+#. to be kept in sync with GtkOrientation enumeration
+#: libgnomeui/gnome-pouch.c:797
+msgid "Horizontal"
+msgstr "Vågrät"
+
+#: libgnomeui/gnome-pouch.c:798
+msgid "Vertical"
+msgstr "Lodrät"
+
+#: libgnomeui/gnome-pouch.c:808
+msgid "Icon position"
+msgstr "Ikonposition"
+
+#: libgnomeui/gnome-pouch.c:809
+msgid "Icon orientation"
+msgstr "Ikonorientering"
+
+#: libgnomeui/gnome-pouch.c:811
+msgid "Tile children"
+msgstr "Plattlägg barn"
+
+#: libgnomeui/gnome-pouch.c:812
+msgid "Cascade children"
+msgstr "Kaskadlägg barn"
+
+#: libgnomeui/gnome-pouch.c:814
+msgid "Arrange icons"
+msgstr "Arrangera ikoner"
+
+#: libgnomeui/gnome-pouch.c:815
+msgid "Autoarrange icons"
+msgstr "Arrangera ikoner automatiskt"
+
+#: libgnomeui/gnome-recently-used.c:111
+msgid "App Specific"
+msgstr "Programspecifikt"
+
+#: libgnomeui/gnome-recently-used.c:112
+msgid "Is this list application specific"
+msgstr "Är den här listan programspecifik"
+
+#: libgnomeui/gnome-recently-used.c:893
+#, c-format
+msgid "bad GnomeRecentDocument attribute: %s\n"
+msgstr "felaktigt GnomeRecentDocument-attribut: %s\n"
+
+#: libgnomeui/gnome-recently-used.c:1123
+msgid "Unknown"
+msgstr "Okänd"
+
+#: libgnomeui/gnome_segv.c:92
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"GNOMEs sessionshanterare (process %d) har kraschat\n"
+"på grund av ett allvarligt fel (%s).\n"
+"När du stänger den här dialogrutan kommer alla program att stängas och din session avslutas.\n"
+"Var vänlig och spara dina filer innan du stänger den här dialogrutan."
+
+#: libgnomeui/gnome_segv.c:102
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Programmet \"%s\" (process %d) har kraschat\n"
+"på grund av ett allvarligt fel.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:111
+msgid "Usage: gnome_segv appname signum\n"
+msgstr "Användning: gnome_segv programnamn signalnummer\n"
+
+#: libgnomeui/gnome_segv.c:127
+msgid "Submit a bug report"
+msgstr "Skicka in en felrapport"
+
+#: libgnomeui/gnome_segv.c:138
+msgid "Debug"
+msgstr "Felsök"
+
+#: libgnomeui/gnome_segv.c:146
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:152
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "Besök GNOMEs programkraschsida för mer information"
+
+#: libgnomeui/oafgnome.c:242
+msgid "Username:"
+msgstr "Användarnamn:"
+
+#: libgnomeui/oafgnome.c:256
+msgid "Password:"
+msgstr "Lösenord:"
+
+#: libgnomeui/gnome-stock-icons.c:258
+msgid "Add"
+msgstr "Lägg till"
+
+#: libgnomeui/gnome-stock-icons.c:259
+msgid "Clear"
+msgstr "Töm"
+
+#: libgnomeui/gnome-stock-icons.c:260
+msgid "Select Color"
+msgstr "Välj färg"
+
+#: libgnomeui/gnome-stock-icons.c:262
+msgid "Table Borders"
+msgstr "Tabellkanter"
+
+#: libgnomeui/gnome-stock-icons.c:263
+msgid "Table Fill"
+msgstr "Fyll tabell"
+
+#: libgnomeui/gnome-stock-icons.c:264
+msgid "Bulleted List"
+msgstr "Onumrerad lista"
+
+#: libgnomeui/gnome-stock-icons.c:265
+msgid "Numbered List"
+msgstr "Numrerad lista"
+
+#: libgnomeui/gnome-stock-icons.c:266
+msgid "Indent"
+msgstr "Gör indrag"
+
+#: libgnomeui/gnome-stock-icons.c:267
+msgid "Un-Indent"
+msgstr "Ta bort indrag"
+
+#: libgnomeui/gnome-stock-icons.c:268
+msgid "OK"
+msgstr "OK"
+
+#: libgnomeui/gnome-stock-icons.c:269
+msgid "Apply"
+msgstr "Verkställ"
+
+#: libgnomeui/gnome-stock-icons.c:270
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: libgnomeui/gnome-stock-icons.c:271
+msgid "Close"
+msgstr "Stäng"
+
+#: libgnomeui/gnome-stock-icons.c:272
+msgid "Yes"
+msgstr "Ja"
+
+#: libgnomeui/gnome-stock-icons.c:273
+msgid "No"
+msgstr "Nej"
+
+#: libgnomeui/gnome-stock-icons.c:274
+msgid "Help"
+msgstr "Hjälp"
+
+#: libgnomeui/gnome-stock-icons.c:275
+msgid "Next"
+msgstr "Nästa"
+
+#: libgnomeui/gnome-stock-icons.c:276
+msgid "Prev"
+msgstr "Föreg"
+
+#: libgnomeui/gnome-stock-icons.c:277
+msgid "Up"
+msgstr "Upp"
+
+#: libgnomeui/gnome-stock-icons.c:278
+msgid "Down"
+msgstr "Ner"
