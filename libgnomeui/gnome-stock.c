@@ -954,16 +954,8 @@ accel_to_string(AccelEntry *entry)
 	} else if ((entry->key >= 'A') && (entry->key <= 'Z')) {
 		s[strlen(s) + 1] = 0;
 		s[strlen(s)] = entry->key;
-	} else if ((entry->key >= GDK_F1) && (entry->key <= GDK_F9)) {
-		strcat(s, "F0");
-		s[strlen(s)] = entry->key - GDK_F1 + 1;
-	} else switch (entry->key) {
-		case GDK_F10:
-			strcat(s, "F10");
-			break;
-		default:
-			return NULL;
-			break;
+	} else {
+		return NULL;
 	}
 	return s;
 }
@@ -1003,13 +995,10 @@ accel_from_string(char *s, guchar *key, guint8 *mod)
 	} while (*p);
 	if (p1[1] == 0) {
 		*key = *p1;
-	} else if ((*p1 == 'F') || (*p1 == 'f')) {
-		*key = atoi(p1 + 1);
-		if (!*key) {
-			*mod = 0;
-			return;
-		}
-		*key += GDK_F1 - 1;
+	} else {
+		*key = 0;
+		*mod = 0;
+		return;
 	}
 }
 
@@ -1068,12 +1057,243 @@ gnome_stock_menu_accel(char *type, guchar *key, guint8 *mod)
 void
 gnome_stock_menu_accel_parse(char *section)
 {
-	char *s;
-
 	g_return_if_fail(section != NULL);
-
 	g_hash_table_foreach(accel_hash(), accel_read_rc,
 			     section);
 }
 
+
+
+/********************************/
+/*  accelerator definition box  */
+/********************************/
+
+#include <libgnomeui/gnome-messagebox.h>
+#include <libgnomeui/gnome-propertybox.h>
+
+static void
+accel_dlg_apply(GtkWidget *box)
+{
+	GtkCList *clist;
+	char *section, *key, *s;
+	int i;
+
+	clist = gtk_object_get_data(GTK_OBJECT(box), "clist");
+	section = gtk_object_get_data(GTK_OBJECT(box), "section");
+	for (i = 0; i < clist->rows; i++) {
+		gtk_clist_get_text(clist, i, 0, &s);
+		key = g_copy_strings(section, s, NULL);
+		gtk_clist_get_text(clist, i, 1, &s);
+		gnome_config_set_string(key, s);
+		g_free(key);
+	}
+	gnome_config_sync();
+}
+
+
+
+static void
+accel_dlg_ok(GtkWidget *box)
+{
+	accel_dlg_apply(box);
+	gtk_widget_destroy(box);
+}
+
+
+
+static void
+accel_dlg_help(GtkWidget *box)
+{
+	GtkWidget *w;
+	
+	w = gnome_message_box_new("No help available yet!", "info",
+				 GNOME_STOCK_BUTTON_OK, NULL);
+	gtk_widget_show(w);
+}
+
+
+
+static void
+accel_dlg_select_ok(GtkWidget *widget, GtkWindow *window)
+{
+	AccelEntry entry;
+	GtkToggleButton *check;
+	gchar *key, *s;
+	int row;
+
+	key = gtk_entry_get_text(GTK_ENTRY(gtk_object_get_data(GTK_OBJECT(window), "key")));
+	if (!key) {
+		entry.key = 0;
+		entry.mod = 0;
+		return;
+	}
+	accel_from_string(key, &entry.key, &entry.mod);
+	entry.mod = 0;
+	check = gtk_object_get_data(GTK_OBJECT(window), "shift");
+	if (check->active)
+		entry.mod |= GDK_SHIFT_MASK;
+	check = gtk_object_get_data(GTK_OBJECT(window), "control");
+	if (check->active)
+		entry.mod |= GDK_CONTROL_MASK;
+	check = gtk_object_get_data(GTK_OBJECT(window), "alt");
+	if (check->active)
+		entry.mod |= GDK_MOD1_MASK;
+	row = (int)gtk_object_get_data(GTK_OBJECT(window), "row");
+	gtk_clist_get_text(GTK_CLIST(gtk_object_get_data(GTK_OBJECT(window), "clist")),
+			   row, 1, &s);
+	if (!s) s = "";
+	if (!accel_to_string(&entry)) return;
+	if (g_strcasecmp(accel_to_string(&entry), s)) {
+		gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_object_get_data(GTK_OBJECT(window), "box")));
+		gtk_clist_set_text(GTK_CLIST(gtk_object_get_data(GTK_OBJECT(window),
+								 "clist")),
+					     row, 1, accel_to_string(&entry));
+	}
+}
+
+
+
+static void
+accel_dlg_select(GtkCList *widget, int row, int col, GdkEventButton *event)
+{
+	AccelEntry entry;
+	GtkTable *table;
+	GtkWidget *window, *w;
+	char *s;
+
+	gtk_clist_unselect_row(widget, row, col);
+	gtk_clist_get_text(widget, row, col, &s);
+	accel_from_string(s, &entry.key, &entry.mod);
+	window = gtk_dialog_new();
+	gtk_window_set_title(GTK_WINDOW(window), "Menu Accelerator");
+	gtk_object_set_data(GTK_OBJECT(window), "clist", widget);
+	gtk_object_set_data(GTK_OBJECT(window), "row", (gpointer)row);
+	gtk_object_set_data(GTK_OBJECT(window), "col", (gpointer)col);
+	gtk_object_set_data(GTK_OBJECT(window), "box",
+			    gtk_object_get_data(GTK_OBJECT(widget), "box"));
+
+	table = (GtkTable *)gtk_table_new(0, 0, FALSE);
+	gtk_widget_show(GTK_WIDGET(table));
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(window)->vbox),
+			  GTK_WIDGET(table));
+
+	gtk_clist_get_text(GTK_CLIST(widget), row, 0, &s);
+	s = g_copy_strings("Accelerator for ", s, NULL);
+	w = gtk_label_new(s);
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 0, 2, 0, 1);
+
+	w = gtk_label_new("Key:");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 0, 1, 1, 2);
+	w = gtk_entry_new();
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 1, 2, 1, 2);
+	gtk_object_set_data(GTK_OBJECT(window), "key", w);
+	s = g_strdup(accel_to_string(&entry));
+	if (strrchr(s, '+'))
+		gtk_entry_set_text(GTK_ENTRY(w), strrchr(s, '+') + 1);
+	else
+		gtk_entry_set_text(GTK_ENTRY(w), s);
+	g_free(s);
+
+	w = gtk_check_button_new_with_label("Control");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 0, 2, 2, 3);
+	gtk_object_set_data(GTK_OBJECT(window), "control", w);
+	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(w),
+				    entry.mod & GDK_CONTROL_MASK);
+
+	w = gtk_check_button_new_with_label("Shift");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 0, 2, 3, 4);
+	gtk_object_set_data(GTK_OBJECT(window), "shift", w);
+	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(w),
+				    entry.mod & GDK_SHIFT_MASK);
+
+	w = gtk_check_button_new_with_label("Alt");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 0, 2, 4, 5);
+	gtk_object_set_data(GTK_OBJECT(window), "alt", w);
+	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(w),
+				    entry.mod & GDK_MOD1_MASK);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
+	gtk_widget_show(w);
+	gtk_signal_connect_object(GTK_OBJECT(w), "clicked",
+				  (GtkSignalFunc)gtk_widget_destroy,
+				  GTK_OBJECT(window));
+	gtk_box_pack_end_defaults(GTK_BOX(GTK_DIALOG(window)->action_area), w);
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
+	gtk_widget_show(w);
+	gtk_signal_connect(GTK_OBJECT(w), "clicked",
+			   (GtkSignalFunc)accel_dlg_select_ok,
+			   window);
+	gtk_signal_connect_object(GTK_OBJECT(w), "clicked",
+				  (GtkSignalFunc)gtk_widget_destroy,
+				  GTK_OBJECT(window));
+	gtk_box_pack_end_defaults(GTK_BOX(GTK_DIALOG(window)->action_area), w);
+	gtk_widget_show(window);
+}
+
+
+
+void
+gnome_stock_menu_accel_dlg(char *section)
+{
+	GnomePropertyBox *box;
+	GtkWidget *w, *label;
+	struct default_AccelEntry *p;
+	char *titles[] = {
+		"Menu Item",
+		"Accelerator"
+	};
+	char *row_data[2];
+
+	box = GNOME_PROPERTY_BOX(gnome_property_box_new());
+	gtk_window_set_title(GTK_WINDOW(box), _("Menu Accelerator Keys"));
+
+	label = gtk_label_new(_("Global"));
+	gtk_widget_show(label);
+	w = gtk_clist_new_with_titles(2, titles);
+	gtk_object_set_data(GTK_OBJECT(box), "clist", w);
+	gtk_widget_set_usize(w, -1, 170);
+	gtk_widget_show(w);
+	gtk_clist_set_column_width(GTK_CLIST(w), 0, 100);
+	gtk_signal_connect(GTK_OBJECT(w), "select_row",
+			   (GtkSignalFunc)accel_dlg_select,
+			   NULL);
+	gtk_object_set_data(GTK_OBJECT(w), "box", box);
+	for (p = default_accel_hash; p->type; p++) {
+		row_data[0] = p->type;
+		row_data[1] = g_strdup(accel_to_string(&p->entry));
+		gtk_clist_append(GTK_CLIST(w), row_data);
+		g_free(row_data[1]);
+	}
+	gnome_property_box_append_page(box, w, label);
+
+	if (!section) {
+		gtk_object_set_data(GTK_OBJECT(box), "section",
+				    "/GnomeStock/Accelerators/");
+	} else {
+		gtk_object_set_data(GTK_OBJECT(box), "section", section);
+		/* TODO: maybe add another page for the app's menu accelerator
+		 * config */
+	}
+
+	gtk_signal_connect_object(GTK_OBJECT(box->ok_button), "clicked",
+				  (GtkSignalFunc)accel_dlg_ok,
+				  GTK_OBJECT(box));
+	gtk_signal_connect_object(GTK_OBJECT(box->cancel_button), "clicked",
+				  (GtkSignalFunc)gtk_widget_destroy,
+				  GTK_OBJECT(box));
+	gtk_signal_connect_object(GTK_OBJECT(box->apply_button), "clicked",
+				  (GtkSignalFunc)accel_dlg_apply,
+				  GTK_OBJECT(box));
+	gtk_signal_connect_object(GTK_OBJECT(box->help_button), "clicked",
+				  (GtkSignalFunc)accel_dlg_help,
+				  GTK_OBJECT(box));
+
+	gtk_widget_show(GTK_WIDGET(box));
+}
 
