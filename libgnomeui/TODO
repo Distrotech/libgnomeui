@@ -1,0 +1,53 @@
+Todo and wishlist for libgnomeui. Please feel free to add, remove, or comment.
+
+Some of this may be libgnome rather than libgnomeui, but close enough.
+
+* Going through Gnome CVS and updating apps to use new libgnomeui features
+  is almost always needed.
+
+* g_return_if_fail checks are missing in many functions.
+
+* Consistently use gnome-uidefs.h instead of random constants.
+
+* There should be stock menu items (not just stock pixmaps) for things like
+  Open..., Save..., Save As..., Copy, Cut, Paste, Clear, Exit, About..., 
+  etc. Stock menu items would include pixmap, label, and accelerator.
+
+* It would be even cooler if the API enforced policy on the locations of
+  the menu items: on which menu, in which order.
+
+* gnome-app-helper stuff should right-justify the Help menu.
+
+* GnomeApp should have an optional status bar.
+
+* A GnomeApp API which configurably uses either the status bar (if
+  present) or dialogs for messages. e.g.
+
+    gnome_app_warning (GnomeApp * app, const gchar * message);
+    gnome_app_yes_no_question (GnomeApp * app, const gchar * question);
+    gnome_app_status (GnomeApp * app, const gchar * status); 
+
+* A way to configure libgnomeui. Does this exist? It would allow setting
+  global Gnome preferences. It should use gnome-config and not a gtkrc.
+  Ideally, however, it would allow setting gtkrc-type things, so 
+  editing gtkrc isn't necessary to get flashy color schemes on Gnome apps.
+
+* Stock accelerators should be configurable, this would be one use for
+  the above config mechanism. Gtk already lets you config accelerators,
+  but only on an app-by-app basis. This would be global.
+
+* gnome-less.[hc] isn't quite finished, and doesn't build by default
+  due to the feature freeze. Fix this.
+
+* gnome-dialog should have a _set_hide method to hide on any click, 
+  instead of destroying. This can be a way to speed up a program's UI,
+  with a space tradeoff of course. gnome_dialog_close() should hide
+  rather than destroy if this flag is set.
+
+* Documentation, documentation, documentation... both commenting header
+  files and writing real docs would help.
+
+
+
+
+
