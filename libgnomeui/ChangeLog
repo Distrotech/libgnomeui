@@ -3,6 +3,7 @@
 	* gnome-init.c (gnome_add_gtk_arg_callback): Add a hack to allow
 	using --gtk-debug-objects (this is required as we create GTK
 	objects before gtk_init is called).
+	(gnome_init_with_popt_table): Do this before parsing argument.s
 
 Tue Feb 23 00:31:53 1999  George Lebl  <jirka@5z.com>
 
