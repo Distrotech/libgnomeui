@@ -1,3 +1,9 @@
+2003-03-09  Narayana Pattipati <narayana.pattipati@wipro.com>
+
+	*libgnomeui/gnome-icon-entry.c (ientry_browse): Fix the problem 
+	of Browse dialog(gnome-file-entry) being non-responsive to user 
+	inputs. Fixes bugzilla bug#107255.
+		
 2003-03-08  Sebastian Rittau  <srittau@jroger.in-berlin.de>
 
 	Documentation fixes:

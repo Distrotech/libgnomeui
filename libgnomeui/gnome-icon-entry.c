@@ -719,7 +719,11 @@ ientry_browse(GnomeIconEntry *ientry)
 		}
 	}
 
-
+	/* If the parent of GnomeIconEntry is a modal window,
+	 * the GnomeFileEntry should also be modal dialog.
+	 */
+	if (GTK_WINDOW (tl)->modal)
+		gnome_file_entry_set_modal (GNOME_FILE_ENTRY(priv->fentry), TRUE);
 	if(priv->pick_dialog==NULL ||
 	   priv->pick_dialog_dir==NULL ||
 	   strcmp(p,priv->pick_dialog_dir)!=0) {
