@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
 "POT-Creation-Date: 2003-07-07 18:03+0200\n"
-"PO-Revision-Date: 2003-07-08 15:00+0200\n"
+"PO-Revision-Date: 2003-07-11 12:57+0200\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -954,7 +954,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaÁáBbCcDdEÉeéFfGgHhIÍiíJjKkLlMmNnOoÓóÖöŐőPpQqRrSsTtUuÚúüÜŰűVvWwXxYyZz"
+msgstr "AaÁáBbCcDdEÉeéFfGgHhIÍiíJjKkLlMmNnOoÓóÖöŐőPpQqRrSsTtUuÚúÜüŰűVvWwXxYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
