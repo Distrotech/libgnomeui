@@ -49,6 +49,8 @@ struct _GnomeIconList {
 	int max_icon_height;
 	int max_pixmap_width;
 	int max_pixmap_height;
+	int max_text_width;
+	int max_text_height;
 
 	int icon_rows;
 	int icon_cols;
@@ -135,26 +137,32 @@ int            gnome_icon_list_get_icon_at        (GnomeIconList *ilist, int x, 
 void           gnome_icon_list_unselect_all       (GnomeIconList *ilist, GdkEvent *event, void *keep);
 
 
-struct gnome_icon_text_info_row {
-	char *text;
-	int width;
-};
+/* Functions to wrap text as for icons, tooltips and such */
 
-struct gnome_icon_text_info {
+typedef struct {
 	GList *rows;
 	GdkFont *font;
 	int width;
 	int height;
 	int baseline_skip;
-};
+} GnomeIconTextInfo;
 
-/* Text layout routine for icons with text */
-void                         gnome_icon_text_info_free (struct gnome_icon_text_info *ti);
-struct gnome_icon_text_info *gnome_icon_layout_text    (GdkFont *font, char *text, char *separators,
-							int max_width, int confine);
-void                         gnome_icon_paint_text     (struct gnome_icon_text_info *ti,
-							GdkDrawable *drawable, GdkGC *gc,
-							int x_ofs, int y_ofs, int width);
+/* Frees a GnomeIconTextInfo structure.  You should call this instead of freeing it yourself. */
+void gnome_icon_text_info_free (GnomeIconTextInfo *ti);
+
+/* Wraps the specified text and returns a new GnomeIconTextInfo structure.  The text is word-wrapped
+ * as defined by the specified separator characters (or just at spaces if separators is NULL).  The
+ * max_width parameter specifies the width at which text will be wrapped.  If a word is too long to
+ * be wrapped and confine is TRUE, it will be force-split somewhere in the middle; if confine is
+ * FALSE, then the text may exceed the specified max_width.  */
+GnomeIconTextInfo *gnome_icon_layout_text (GdkFont *font, char *text, char *separators,
+					   int max_width, int confine);
+
+/* Paints text that was laid out by gnome_icon_layout_text().  The text is painted at the specified
+ * coordinats.
+ */
+void gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc, int x, int y);
+
 
 END_GNOME_DECLS
 

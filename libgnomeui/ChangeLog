@@ -1,3 +1,27 @@
+1998-05-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (relayout_icon): New function; recals the text
+	layout info field of an icon.
+	(reassign_max): Recomputes the max pixmap/text width/height of the ilist.
+	(finish_recalc): Calculates the max icon width/height of the ilist.
+	(recalc_max_icon_size_1): Reimplemented in terms of the three
+	functions above.
+	(recalc_max_icon_size): Reimplmented in term of the three
+	functions above.
+
+	* gnome-icon-list.h (GnomeIconList): New fields that store the max
+	text width/height.  They are needed for the new text layout stuff.
+
+	* gnome-icon-list.h (GnomeIconTextInfo): Renamed structure.
+
+	* gnome-icon-list.c (gnome_icon_layout_text): Rewrote function to
+	handle separators/max_width/confine parameters.
+
+	* gnome-icon-list.c (gnome_icon_paint_text): Now it only takes the
+	upper-left position where to paint the text block.
+
+	* gnome-icon-list.c (draw_icon): Fixed to calculate text position correctly.
+
 1998-05-19  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-icon-list.c (get_icon_num_from_xy): properly return
@@ -15,6 +39,18 @@ Tue May 19 21:38:15 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	(gnome_pixmap_button): Likewise.
 
 	* gnome-stock.[ch]: added some `const' to `char *'s.
+
+1998-05-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_layout_text): Now we can configure
+	the separators and confinement status of the wrapped text.
+
+	* gnome-icon-list.h: Added prototype for gnome_icon_list_append_imlib.
+
+	* gnome-icon-list.c (sync_selection): Removed warnings by using the
+	GPOINTER_TO_INT and GINT_TO_POINTER macros.
+	(gnome_icon_list_set_separators): New function; lets you set the
+	characters where it is fine to split the icon text rows.
 
 1998-05-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

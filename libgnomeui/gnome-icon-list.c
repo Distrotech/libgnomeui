@@ -32,7 +32,7 @@ typedef struct {
 
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
-	struct gnome_icon_text_info *ti;
+	GnomeIconTextInfo *ti;
 
 	GtkStateType state;
 
@@ -307,7 +307,7 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 	case GNOME_ICON_LIST_TEXT_BELOW:
 		xpix = (ilist->max_icon_width - width) / 2;
 		ypix = ilist->icon_border + (ilist->max_pixmap_height - height) / 2;
-		xtext = 0;
+		xtext = (ilist->max_icon_width - icon->ti->width) / 2;
 		ytext = ilist->icon_border + ilist->max_pixmap_height + ilist->text_spacing;
 
 		break;
@@ -316,7 +316,7 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 		xpix = ilist->icon_border + (ilist->max_pixmap_width - width) / 2;
 		ypix = (ilist->max_icon_height - height) / 2;
 		xtext = ilist->icon_border + ilist->max_pixmap_width + ilist->text_spacing;
-		ytext = (ilist->max_icon_height - (style->font->ascent + style->font->descent)) / 2 + style->font->ascent;
+		ytext = (ilist->max_icon_height - icon->ti->height) / 2;
 
 		break;
 
@@ -354,7 +354,7 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 	/* Text */
 
 	if (ilist->mode != GNOME_ICON_LIST_ICONS)
-		gnome_icon_paint_text (icon->ti, ilist->ilist_window, fg_gc, xtext, ytext, ilist->max_icon_width);
+		gnome_icon_paint_text (icon->ti, ilist->ilist_window, fg_gc, xtext, ytext);
 }
 
 static void
@@ -627,6 +627,8 @@ gnome_icon_list_init (GnomeIconList *ilist)
 	ilist->max_icon_height = 0;
 	ilist->max_pixmap_width = 0;
 	ilist->max_pixmap_height = 0;
+	ilist->max_text_width = 0;
+	ilist->max_text_height = 0;
 
 	ilist->icon_rows = 0;
 	ilist->icon_cols = 0;
@@ -715,89 +717,107 @@ gnome_icon_list_new (void)
 }
 
 static void
-calc_icon_size (GnomeIconList *ilist, Icon *icon, int *width, int *height)
+relayout_icon (GnomeIconList *ilist, Icon *icon)
 {
 	GdkFont *font;
-	int pixmap_w, pixmap_h;
-	int text_w, text_h;
 	static int desired_size;
 
 	if (!GTK_WIDGET_REALIZED (ilist))
-		g_warning ("calc_icon_size: oops, ilist not realized");
+		g_warning ("relayout_icon: oops, ilist not realized");
 
 	font = GTK_WIDGET (ilist)->style->font;
-	if (!desired_size){
+
+	if (!desired_size) {
 		desired_size = gdk_string_width (font, "XXXXXXXXXX");
-		if (desired_size == 0){
+		if (desired_size == 0)
 			desired_size = 80;
-		}
 	}
 
+	if (icon->ti)
+		gnome_icon_text_info_free (icon->ti);
+
 	icon->ti = gnome_icon_layout_text (font, icon->text, ilist->separators, desired_size, TRUE);
+}
+
+static void
+reassign_max (GnomeIconList *ilist, Icon *icon)
+{
+	int pixmap_w, pixmap_h;
+	int text_w, text_h;
 
 	pixmap_w = icon->im ? icon->im->rgb_width : 0;
 	pixmap_h = icon->im ? icon->im->rgb_height : 0;
 	text_w = icon->ti->width;
 	text_h = icon->ti->height;
 
+	if (pixmap_w > ilist->max_pixmap_width)
+		ilist->max_pixmap_width = pixmap_w;
+
+	if (pixmap_h > ilist->max_pixmap_height)
+		ilist->max_pixmap_height = pixmap_h;
+
+	if (text_w > ilist->max_text_width)
+		ilist->max_text_width = text_w;
+
+	if (text_h > ilist->max_text_height)
+		ilist->max_text_height = text_h;
+}
+
+static void
+finish_recalc (GnomeIconList *ilist)
+{
 	switch (ilist->mode) {
 	case GNOME_ICON_LIST_ICONS:
-		*width = pixmap_w;
-		*height = pixmap_h;
+		ilist->max_icon_width = ilist->max_pixmap_width;
+		ilist->max_icon_height = ilist->max_pixmap_height;
 		break;
 
 	case GNOME_ICON_LIST_TEXT_BELOW:
-		*width = MAX (pixmap_w, text_w);
-		*height = pixmap_h + ilist->text_spacing + text_h;
+		ilist->max_icon_width = MAX (ilist->max_pixmap_width, ilist->max_text_width);
+		ilist->max_icon_height = ilist->max_pixmap_height + ilist->text_spacing + ilist->max_text_height;
 		break;
 
 	case GNOME_ICON_LIST_TEXT_RIGHT:
-		*width = pixmap_w + ilist->text_spacing + text_w;
-		*height = MAX (pixmap_h, text_h);
+		ilist->max_icon_width = ilist->max_pixmap_width + ilist->text_spacing + ilist->max_text_width;
+		ilist->max_icon_height = MAX (ilist->max_pixmap_height, ilist->max_text_height);
 		break;
 
 	default:
 		g_assert_not_reached ();
 	}
 
-	*width += 2 * ilist->icon_border;
-	*height += 2 * ilist->icon_border;
+	ilist->max_icon_width += 2 * ilist->icon_border;
+	ilist->max_icon_height += 2 * ilist->icon_border;
 }
 
 static void
 recalc_max_icon_size_1 (GnomeIconList *ilist, Icon *icon)
 {
-	int width, height;
-	int w, h;
-
-	calc_icon_size (ilist, icon, &width, &height);
-
-	if (width > ilist->max_icon_width)
-		ilist->max_icon_width = width;
-
-	if (height > ilist->max_icon_height)
-		ilist->max_icon_height = height;
-
-	w = icon->im ? icon->im->rgb_width : 0;
-	h = icon->im ? icon->im->rgb_height : 0;
-
-	if (w > ilist->max_pixmap_width)
-		ilist->max_pixmap_width = w;
-
-	if (h > ilist->max_pixmap_height)
-		ilist->max_pixmap_height = h;
+	relayout_icon (ilist, icon);
+	reassign_max (ilist, icon);
+	finish_recalc (ilist);
 }
 
 static void
 recalc_max_icon_size (GnomeIconList *ilist)
 {
 	GList *list;
+	Icon *icon;
 
 	ilist->max_icon_width = 0;
 	ilist->max_icon_height = 0;
+	ilist->max_pixmap_width = 0;
+	ilist->max_pixmap_height = 0;
+	ilist->max_text_width = 0;
+	ilist->max_text_height = 0;
 
-	for (list = ilist->icon_list; list; list = list->next)
-		recalc_max_icon_size_1 (ilist, list->data);
+	for (list = ilist->icon_list; list; list = list->next) {
+		icon = list->data;
+		relayout_icon (ilist, icon);
+		reassign_max (ilist, icon);
+	}
+
+	finish_recalc (ilist);
 }
 
 static void
@@ -1507,6 +1527,8 @@ icon_new_from_imlib (GnomeIconList *ilist, GdkImlibImage *im, char *text)
 		icon->pixmap = NULL;
 		icon->mask = NULL;
 	}
+
+	icon->ti = NULL;
 
 	icon->text = g_strdup (text);
 
@@ -2250,10 +2272,15 @@ gnome_icon_list_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpointe
 	(* rfunc) (object, GTK_VALUE_INT (args[0]), GTK_VALUE_POINTER (args[1]), func_data);
 }
 
+typedef struct {
+	char *text;
+	int width;
+} GnomeIconTextInfoRow;
+
 static void
 free_row (gpointer data, gpointer user_data)
 {
-	struct gnome_icon_text_info_row *row;
+	GnomeIconTextInfoRow *row;
 
 	if (data) {
 		row = data;
@@ -2263,13 +2290,14 @@ free_row (gpointer data, gpointer user_data)
 }
 
 void
-gnome_icon_text_info_free (struct gnome_icon_text_info *ti)
+gnome_icon_text_info_free (GnomeIconTextInfo *ti)
 {
 	g_list_foreach (ti->rows, free_row, NULL);
 	g_list_free (ti->rows);
 	g_free (ti);
 }
 
+#if 0
 struct gnome_icon_text_info *
 gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_width, int confine)
 {
@@ -2388,21 +2416,166 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 	return ti;
 }
+#endif
+
+GnomeIconTextInfo *
+gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_width, int confine)
+{
+	GnomeIconTextInfo *ti;
+	GnomeIconTextInfoRow *row;
+	char *row_end;
+	int row_len;
+	char *s, *word_start, *word_end, *old_word_end;
+	char *sub_text;
+	int sub_len;
+	int i, w_len, w;
+
+	g_return_val_if_fail (font != NULL, NULL);
+	g_return_val_if_fail (text != NULL, NULL);
+
+	if (!separators)
+		separators = " ";
+
+	ti = g_new (GnomeIconTextInfo, 1);
+
+	ti->rows = NULL;
+	ti->font = font;
+	ti->width = 0;
+	ti->height = 0;
+	ti->baseline_skip = font->ascent + font->descent;
+
+	word_end = NULL;
+
+	while (*text) {
+		row_end = strchr (text, '\n');
+		if (!row_end)
+			row_end = strchr (text, '\0');
+
+		row_len = row_end - text;
+
+		/* Accumulate words from this row until they don't fit in the max_width */
+
+		s = text;
+
+		while (s < row_end) {
+			word_start = s;
+			old_word_end = word_end;
+			word_end = word_start + strcspn (word_start, separators);
+			if (word_end == text)
+				word_end++;
+			if (word_end > row_end)
+				word_end = row_end;
+
+			if (gdk_text_width (font, text, word_end - text) > max_width)
+				if (word_start == text) {
+					if (confine) {
+						/* We must force-split the word.  Look for a proper
+                                                 * place to do it.
+						 */
+
+						w_len = word_end - word_start;
+
+						for (i = 1; i < w_len; i++) {
+							w = gdk_text_width (font, word_start, i);
+							if (w > max_width)
+								if (i == 1)
+									/* Shit, not even a single character fits */
+									max_width = w;
+								else
+									break;
+						}
+
+						/* Create sub-row with the chars that fit */
+
+						sub_text = g_malloc (i * sizeof (char));
+						memcpy (sub_text, word_start, (i - 1) * sizeof (char));
+						sub_text[i - 1] = 0;
+
+						row = g_new (GnomeIconTextInfoRow, 1);
+						row->text = sub_text;
+						row->width = gdk_string_width (font, sub_text);
+
+						ti->rows = g_list_append (ti->rows, row);
+
+						if (row->width > ti->width)
+							ti->width = row->width;
+
+						ti->height += ti->baseline_skip;
+
+						/* Bump the text pointer */
+
+						text += i - 1;
+						s = text;
+
+						continue;
+					} else
+						max_width = gdk_text_width (font, word_start, word_end - word_start);
+
+					continue; /* Retry split */
+				} else {
+					word_end = old_word_end; /* Restore to region that does fit */
+					break; /* Stop the loop because we found something that doesn't fit */
+				}
+
+			s = word_end + 1;
+		}
+
+		/* Append row */
+
+		if (text == row_end) {
+			/* We are on a newline, so append an empty row */
+
+			ti->rows = g_list_append (ti->rows, NULL);
+			ti->height += ti->baseline_skip / 2;
+
+			/* Next! */
+
+			text = row_end + 1;
+		} else {
+			/* Create subrow and append it to the list */
+
+			sub_len = word_end - text;
+
+			sub_text = g_malloc ((sub_len + 1) * sizeof (char));
+			memcpy (sub_text, text, sub_len * sizeof (char));
+			sub_text[sub_len] = 0;
+
+			row = g_new (GnomeIconTextInfoRow, 1);
+			row->text = sub_text;
+			row->width = gdk_string_width (font, sub_text);
+
+			ti->rows = g_list_append (ti->rows, row);
+
+			if (row->width > ti->width)
+				ti->width = row->width;
+
+			ti->height += ti->baseline_skip;
+
+			/* Next! */
+
+			text = word_end;
+		}
+	}
+
+	return ti;
+}
 
 void
-gnome_icon_paint_text (struct gnome_icon_text_info *ti, GdkDrawable *drawable, GdkGC *gc,
-		       int x_ofs, int y_ofs, int width)
+gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc, int x, int y)
 {
-	int y;
 	GList *item;
-	struct gnome_icon_text_info_row *row;
+	GnomeIconTextInfoRow *row;
 
-	y = y_ofs + ti->font->ascent;
+	g_return_if_fail (ti != NULL);
+	g_return_if_fail (drawable != NULL);
+	g_return_if_fail (gc != NULL);
+
+	y += ti->font->ascent;
 
 	for (item = ti->rows; item; item = item->next) {
 		if (item->data) {
 			row = item->data;
-			gdk_draw_string (drawable, ti->font, gc, x_ofs + (width - row->width) / 2, y, row->text);
+			gdk_draw_string (drawable, ti->font, gc, x + (ti->width - row->width) / 2, y, row->text);
 			y += ti->baseline_skip;
 		} else
 			y += ti->baseline_skip / 2;
