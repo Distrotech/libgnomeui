@@ -21,8 +21,7 @@
  */
 
 #include <config.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkcompat.h>
+#include <gtk/gtk.h>
 #include "gnome-popup-menu.h"
 
 static GtkWidget* global_menushell_hack = NULL;

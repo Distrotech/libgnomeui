@@ -1,3 +1,8 @@
+1999-06-10  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome-popup-menu.c: 
+	Include <gtk/gtk.h> instead of individual subheaders.
+
 1999-06-10  Tuomas J. Lukka <lukka@iki.fi>
 
 	* gnome-popup-menu.c: remove reference to gtkfeatures.h
