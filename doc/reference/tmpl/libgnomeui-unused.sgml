@@ -51,6 +51,16 @@
 </para>
 
 
+<!-- ##### FUNCTION gnome_appbar_construct ##### -->
+<para>
+
+</para>
+
+@ab: 
+@has_progress: 
+@has_status: 
+@interactivity: 
+
 <!-- ##### VARIABLE gnome_icon_size_toolbar ##### -->
 <para>
 

@@ -1,3 +1,13 @@
+2001-12-07  jacob berkman  <jacob@ximian.com>
+
+	* Makefile.am:
+	* configure.in: add tests/
+
+	* glade/glade-gnome.c: implement a lot of missing things and fix
+	what was in there (but broken)
+
+	* tests/: test libglade support
+
 2001-12-04  Murray Cumming  <murrayc@usa.net>
 
 	* libgnomeui/gnome-about.h/.c: Added gnome_about_construct(), for

@@ -166,14 +166,3 @@ GnomeAppBar
 @Returns: 
 
 
-<!-- ##### FUNCTION gnome_appbar_construct ##### -->
-<para>
-
-</para>
-
-@ab: 
-@has_progress: 
-@has_status: 
-@interactivity: 
-
-

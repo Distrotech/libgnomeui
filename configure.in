@@ -69,6 +69,10 @@ AC_SUBST(LIBGNOMEUI_DEMOS_LIBS)
 PKG_CHECK_MODULES(LIBGNOMEUI_GLADE, $GNOMEUI_MODULES libglade-2.0 >= 1.99.3 gnome-vfs-module-2.0 >= 1.9.3)
 AC_SUBST(LIBGNOMEUI_GLADE_CFLAGS)
 AC_SUBST(LIBGNOMEUI_GLADE_LIBS)
+AC_PATH_PROG(LIBGLADE_CONVERT, libglade-convert)
+if test -z "$LIBGLADE_CONVERT" ; then
+	AC_MSG_WARN([libglade-convert (from libglade 2.0) is needed for the checks in the tests directory.])
+fi
 
 dnl
 dnl Check for gtk-doc
@@ -174,6 +178,7 @@ glade/Makefile
 images/Makefile
 demos/Makefile
 test-gnome/Makefile
+tests/Makefile
 doc/Makefile
 doc/reference/Makefile
 ])
