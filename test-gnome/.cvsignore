@@ -1,0 +1,4 @@
+.deps
+.libs
+*.o
+test-gnome
