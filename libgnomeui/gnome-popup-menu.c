@@ -24,6 +24,8 @@
 #include <gtk/gtkmain.h>
 #include "gnome-popup-menu.h"
 
+static GtkWidget* global_menushell_hack = NULL;
+#define TOPLEVEL_MENUSHELL_KEY "gnome-popup-menu:toplevel_menushell_key"
 
 /* This is our custom signal connection function for popup menu items -- see below for the
  * marshaller information.  We pass the original callback function as the data pointer for the
@@ -35,6 +37,11 @@ popup_connect_func (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData 
 	g_assert (uibdata->is_interp);
 
 	if (uiinfo->moreinfo)
+          {
+                gtk_object_set_data (GTK_OBJECT (uiinfo->widget), 
+                                     TOPLEVEL_MENUSHELL_KEY, 
+                                     global_menushell_hack);
+
 		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
 					 NULL,
 					 uibdata->relay_func,
@@ -42,6 +49,14 @@ popup_connect_func (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData 
 					 uibdata->destroy_func,
 					 FALSE,
 					 FALSE);
+          }
+}
+
+static GtkWidget* 
+get_toplevel(GtkWidget* menuitem)
+{
+  return gtk_object_get_data (GTK_OBJECT (menuitem),
+                              TOPLEVEL_MENUSHELL_KEY);
 }
 
 /* Our custom marshaller for menu items.  We need it so that it can extract the per-attachment
@@ -58,9 +73,9 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
 	gpointer user_data;
 
 	func = (ActivateFunc) data;
-	user_data = gtk_object_get_data (GTK_OBJECT (GTK_WIDGET (object)->parent), "gnome_popup_menu_do_popup_user_data");
+	user_data = gtk_object_get_data (GTK_OBJECT (get_toplevel(GTK_WIDGET (object))), "gnome_popup_menu_do_popup_user_data");
 
-	gtk_object_set_data (GTK_OBJECT (GTK_WIDGET (object)->parent), "gnome_popup_menu_active_item", object);
+	gtk_object_set_data (GTK_OBJECT (get_toplevel(GTK_WIDGET (object))), "gnome_popup_menu_active_item", object);
 	(* func) (object, user_data);
 }
 
@@ -83,7 +98,9 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 	uibdata.destroy_func = NULL;
 
 	menu = gtk_menu_new ();
+        global_menushell_hack = menu;
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo, &uibdata, NULL, FALSE, 0);
+        global_menushell_hack = NULL;
 
 	return menu;
 }

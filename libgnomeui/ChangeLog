@@ -1,5 +1,14 @@
 1998-12-15  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-popup-menu.c (gnome_popup_menu_new): Set global variable
+	for use by connect function.
+	(popup_connect_func): Attach a pointer to the toplevel menu shell
+	to each menu item.
+	(popup_marshal_func): Get pointer to toplevel shell, instead of
+	immediate parent.
+
+1998-12-15  Havoc Pennington  <hp@pobox.com>
+
 	* gnome-dock-item.h: Change GNOME_DOCK_ITEM_BEH_NEVER_DETACH 
 	to GNOME_DOCK_ITEM_BEH_NEVER_FLOATING for Ettore; add
 	GNOME_DOCK_ITEM_BEH_LOCKED. 
