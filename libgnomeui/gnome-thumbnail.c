@@ -858,7 +858,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
   int width, height, size;
   double scale;
   int exit_status;
-  char tmpname[50];
+  char *tmpname;
 
   /* Doesn't access any volatile fields in factory, so it's threadsafe */
   
@@ -875,10 +875,9 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
   if (script)
     {
       int fd;
+      GError *error = NULL;
 
-      strcpy (tmpname, "/tmp/.gnome_thumbnail.XXXXXX");
-
-      fd = mkstemp(tmpname);
+      fd = g_file_open_tmp (".gnome_thumbnail.XXXXXX", &tmpname, &error);
 
       if (fd)
 	{
@@ -896,6 +895,8 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 	  
 	  unlink(tmpname);
 	}
+      if (tmpname)
+        g_free (tmpname);
     }
 
   /* Fall back to gdk-pixbuf */

@@ -1,3 +1,9 @@
+2004-05-02  Fernando Herrera  <fherrera@onirica.com>
+ 
+ 	* libgnomeui/gnome-thumbnail.c:
+ 	(gnome_thumbnail_factory_generate_thumbnail): 
+	Use g_file_open_tmp. Fix #133927
+ 
 2004-05-02  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-authentication-manager.c:
