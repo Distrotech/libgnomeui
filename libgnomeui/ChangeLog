@@ -1,5 +1,10 @@
 1999-10-25  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-stock.h: Further enhance the gnome-stock header. Remove
+	all functions that spew "don't use me" when used; group things
+	logically; add new _at_size() constructor and mutator for the
+	GnomeStock widget.
+
 	* gnome-pixmap.h, gnome-pixmap.c: Rewrite. Now supports a
 	different pixmap for every state, so we can migrate this
 	functionality out of GnomeStock. Also, uses gdk-pixbuf instead of

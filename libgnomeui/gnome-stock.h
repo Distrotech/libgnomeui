@@ -30,7 +30,39 @@
 
 BEGIN_GNOME_DECLS
 
-/* some internal definitions */
+/*
+ * The GnomeStock widget
+ */
+
+
+#define GNOME_STOCK(obj)         GTK_CHECK_CAST(obj, gnome_stock_get_type(), GnomeStock)
+#define GNOME_STOCK_CLASS(klass) GTK_CHECK_CAST_CLASS(obj, gnome_stock_get_type(), GnomeStock)
+#define GNOME_IS_STOCK(obj)      GTK_CHECK_TYPE(obj, gnome_stock_get_type())
+
+typedef struct _GnomeStock       GnomeStock;
+typedef struct _GnomeStockClass  GnomeStockClass;
+
+struct _GnomeStock {
+	GnomePixmap pixmap;
+        char *icon;
+};
+
+struct _GnomeStockClass {
+	GnomePixmapClass pixmap_class;
+};
+
+guint         gnome_stock_get_type(void);
+GtkWidget    *gnome_stock_new(void);
+GtkWidget    *gnome_stock_new_with_icon(const char *icon);
+GtkWidget    *gnome_stock_new_with_icon_at_size(const char *icon, int width, int height);
+gboolean      gnome_stock_set_icon(GnomeStock *stock, const char *icon);
+gboolean      gnome_stock_set_icon_at_size(GnomeStock *stock, const char *icon, int width, int height);
+
+
+
+
+
+/* Structures for the internal stock image hash table entries */
 
 typedef struct _GnomeStockPixmapEntryAny     GnomeStockPixmapEntryAny;
 typedef struct _GnomeStockPixmapEntryData    GnomeStockPixmapEntryData;
@@ -108,70 +140,12 @@ union _GnomeStockPixmapEntry {
         GnomeStockPixmapEntryGPixmap gpixmap;
 };
 
-GtkWidget *gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon);
-
-/* The new GnomeStock widget */
 
 
-#define GNOME_STOCK(obj)         GTK_CHECK_CAST(obj, gnome_stock_get_type(), GnomeStock)
-#define GNOME_STOCK_CLASS(klass) GTK_CHECK_CAST_CLASS(obj, gnome_stock_get_type(), GnomeStock)
-#define GNOME_IS_STOCK(obj)      GTK_CHECK_TYPE(obj, gnome_stock_get_type())
 
-typedef struct _GnomeStock       GnomeStock;
-typedef struct _GnomeStockClass  GnomeStockClass;
-
-struct _GnomeStock {
-	GnomePixmap pixmap;
-        char *icon;
-};
-
-struct _GnomeStockClass {
-	GnomePixmapClass pixmap_class;
-};
-
-guint         gnome_stock_get_type(void);
-GtkWidget    *gnome_stock_new(void);
-GtkWidget    *gnome_stock_new_with_icon(const char *icon);
-gboolean      gnome_stock_set_icon(GnomeStock *stock, const char *icon);
-
-
-/* the utility functions */
-
-/* just fetch a pixmap */
-/* window isn't needed for pixmap creation but for the style
- * when a disabled icon is automatically created */
-/* okay, since there are many problems with this function (realization issues),
- * don't use it. Use gnome_stock_pixmap_widget instead -- it's far more save and
- * the result is the same */
-#if 0
-GnomePixmap           *gnome_stock_pixmap          (GtkWidget *window,
-                                                    const char *icon,
-                                                    const char *subtype);
-#endif
-
-/* just fetch a GnomeStock(PixmapWidget) */
-/* It is possible to specify a filename instead of an icon name. Gnome stock
- * will use gnome_pixmap_file to find the pixmap and return a GnomeStock widget
- * from that file. */
-GtkWidget             *gnome_stock_pixmap_widget   (GtkWidget *window,
-                                                    const char *icon);
-
-/* This function loads that file scaled to the specified size. Unlike
- * gnome_pixmap_new_from_file_at_size this function uses antializing and stuff
- * to scale the pixmap */
-GtkWidget             *gnome_stock_pixmap_widget_at_size(GtkWidget *window,
-							 const char *icon,
-				  			 guint width,
-							 guint height);
-
-/* change the icon/look of a GnomeStockPixmapWidget */
-#if USE_NEW_GNOME_STOCK
-void gnome_stock_pixmap_widget_set_icon(GnomeStock *widget,
-					const char *icon);
-#else
-void gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
-					const char *icon);
-#endif
+/*
+ * The stock pixmap hash table
+ */
 
 /* register a pixmap. returns non-zero, if successful */
 gint                   gnome_stock_pixmap_register (const char *icon,
@@ -188,9 +162,20 @@ gint                   gnome_stock_pixmap_change   (const char *icon,
 GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (const char *icon,
 						    const char *subtype);
 
+/* Return a GdkPixmap and GdkMask for a stock pixmap */
+void gnome_stock_pixmap_gdk (const char *icon,
+			     const char *subtype,
+			     GdkPixmap **pixmap,
+			     GdkPixmap **mask);
 
 
-/*  buttons  */
+
+
+
+
+/*
+ * Utility functions to retrieve buttons
+ */
 
 /* this function returns a button with a pixmap (if ButtonUseIcons is enabled)
  * and the provided text */
@@ -211,9 +196,18 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 
 
 
+
+
+/*
+ * Menu item utility function
+ */
+
 /* returns a GtkMenuItem with an stock icon and text */
 GtkWidget             *gnome_stock_menu_item       (const char *type,
 						    const char *text);
+
+
+
 
 
 /*
@@ -241,19 +235,20 @@ gboolean	       gnome_stock_menu_accel      (const char *type,
  * both the leading and trailing `/' */
 void                   gnome_stock_menu_accel_parse(const char *section);
 
+
+
+
+
+/* Should this be deprecated? Is anyone using it? -hp */
+
 /*
  * Creates a toplevel window with a shaped mask.  Useful for making the DnD
  * windows
  */
 GtkWidget *gnome_stock_transparent_window (const char *icon, const char *subtype);
 
-/*
- * Return a GdkPixmap and GdkMask for a stock pixmap
- */
-void gnome_stock_pixmap_gdk (const char *icon,
-			     const char *subtype,
-			     GdkPixmap **pixmap,
-			     GdkPixmap **mask);
+
+
 
 END_GNOME_DECLS
 
