@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-09 13:27+0200\n"
+"POT-Creation-Date: 2004-06-21 19:21+0200\n"
 "PO-Revision-Date: 2003-06-27 21:59--100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -33,6 +33,33 @@ msgstr "1. element podrzędny"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Podpowiedź do 2. elementu"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "System plików"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1507
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Zachowanie Ulubionych nie powiodło się (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Nie można pobrać informacji dla pliku \"%s\": %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Nie powiodło się otwarcie pliku \"%s\": %s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Wczytanie obrazu \"%s\" nie powiodło się: przyczyna nieznana, prawdopodobnie "
+"uszkodzony plik."
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
