@@ -1,13 +1,14 @@
-# gnome-lib translation for zh_CN
+# libgnomeui translation for zh_CN
 # Copyright 1999-2001 Free Software Foundation, Inc.
 # Wang Li <charlesw1234@163.com>, 2001
+# Sun Gl0n <gnome_int_l10n@ireland.sun.com>, 2002
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-libs\n"
-"POT-Creation-Date: 2002-08-06 15:26+0200\n"
-"PO-Revision-Date: 2002-02-17 23:52+0800\n"
-"Last-Translator: Wang Li <charlesw1234@163.com>\n"
+"Project-Id-Version: libgnomeui\n"
+"POT-Creation-Date: 2002-08-19 20:22+0000\n"
+"PO-Revision-Date: 2002-08-19 21:01+0800\n"
+"Last-Translator: Wang Li <charles@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,26 +18,26 @@ msgstr ""
 msgid "Credits"
 msgstr "感谢"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:223
-#, fuzzy
 msgid "_Written by"
-msgstr "编写"
+msgstr "作者(_W)"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "_Documented by"
-msgstr "文档"
+msgstr "文档编写者(_D)"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:253
-#, fuzzy
 msgid "_Translated by"
-msgstr "译者"
+msgstr "翻译(_T)"
 
+# SUN CHANGED MESSAGE
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
-#, fuzzy
 msgid "_Credits"
-msgstr "感谢"
+msgstr "感谢(_C)"
 
 #: libgnomeui/gnome-about.c:352
 msgid "Program name"
@@ -78,13 +79,15 @@ msgstr "作者"
 msgid "List of authors of the programs"
 msgstr "程序作者的列表"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:385
 msgid "Author entry"
-msgstr "作者条目"
+msgstr "作者项"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:386
 msgid "A single author entry"
-msgstr "单个作者条目"
+msgstr "单个作者项"
 
 #: libgnomeui/gnome-about.c:393
 msgid "Documenters"
@@ -94,13 +97,15 @@ msgstr "文档编写者"
 msgid "List of people documenting the program"
 msgstr "程序文档的编写者列表"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
-msgstr "文档编写者条目"
+msgstr "文档编写者项"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-about.c:397
 msgid "A single documenter entry"
-msgstr "单个文档编写者条目"
+msgstr "单个文档编写者项"
 
 #: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
@@ -109,7 +114,7 @@ msgstr "翻译"
 #: libgnomeui/gnome-about.c:406
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "Wang Li <charlesw1234@163.com>"
+msgstr "译者的姓名。这个字符串应标为可以翻译"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -180,14 +185,15 @@ msgstr "放弃注销"
 msgid "Received invalid color data\n"
 msgstr "收到无效的颜色数据\n"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-color-picker.c:464
-#, fuzzy
 msgid "Color Selector"
-msgstr "清除选定内容"
+msgstr "颜色选择器"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "打开指定颜色的对话框"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -209,21 +215,25 @@ msgstr "日期编辑标志"
 msgid "Flags for how DateEdit looks"
 msgstr "关于日期编辑外观的标志"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
-msgstr ""
+msgstr "较低小时"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
-msgstr ""
+msgstr "时间弹出选择器中的较低小时"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
-msgstr ""
+msgstr "较高小时"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr ""
+msgstr "时间弹出选择器中的较高小时"
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
@@ -237,28 +247,30 @@ msgstr "初始化时间"
 msgid "Date"
 msgstr "日期"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "选择文件"
+msgstr "选择日期"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "从日历中选择日期"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
 msgstr "日历"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "选择文件"
+msgstr "选择时间"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "从列表中选择时间"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -387,19 +399,19 @@ msgstr "按钮上的文本"
 msgid "End World Hunger"
 msgstr "结束这世界上的饥饿"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Link color"
-msgstr "连接颜色"
+msgstr "链接颜色"
 
 #: libgnomeui/gnome-href.c:139
-#, fuzzy
 msgid "Color used to draw the link"
 msgstr "用于绘制链接的颜色"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "此按钮将把您定向到它显示的 URI。"
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
@@ -422,12 +434,12 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI 库"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:591
+#: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "发生了多个段错误； 无法显示错误对话框\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:632
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -626,11 +638,11 @@ msgstr "还原(_R)"
 msgid "Revert to a saved version of the file"
 msgstr "恢复为已保存的文件"
 
+# SUN CHANGED MESSAGE
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
 msgid "_Print..."
-msgstr "打印(_P)"
+msgstr "打印(_P)..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -654,25 +666,25 @@ msgstr "关闭(_C)"
 msgid "Close the current file"
 msgstr "关闭当前文件"
 
+# SUN CHANGED MESSAGE
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "剪切(_U)"
+msgstr "退出(_Q)"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "关于本应用程序"
+msgstr "退出应用程序"
 
+# SUN CHANGED MESSAGE
 #.
 #. * The "Edit" menu
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-#, fuzzy
 msgid "Cu_t"
-msgstr "剪切(_U)"
+msgstr "剪切(_T)"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
@@ -733,20 +745,21 @@ msgstr "查找(_F)..."
 msgid "Search for a string"
 msgstr "搜索一个字符串"
 
+# SUN NEW TRANSLATION
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "查找下一个(_X)"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
 msgstr "再次搜索相同的字符串"
 
+# SUN CHANGED MESSAGE
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
 msgid "R_eplace..."
-msgstr "替换(_R)..."
+msgstr "替换(_E)..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -754,7 +767,6 @@ msgstr "替换字符串"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
 msgstr "属性(_P)"
 
@@ -767,9 +779,8 @@ msgstr "修改文件属性"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "选项(_P)..."
+msgstr "首选项(_N)..."
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -788,10 +799,10 @@ msgstr "关于(_A)"
 msgid "About this application"
 msgstr "关于本应用程序"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
 msgid "Select _All"
-msgstr "全选(_S)"
+msgstr "全部选择(_A)"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
@@ -886,30 +897,32 @@ msgstr "结束当前游戏"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr ""
+msgstr "内容(_C)"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-app-helper.c:1146
-#, fuzzy
 msgid "View help for this application"
-msgstr "关于本应用程序"
+msgstr "查看此应用程序的帮助"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr ""
+msgstr "文字在图标之下"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr ""
+msgstr "文字在图标之后"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-app-helper.c:2568
-#, fuzzy
 msgid "Icons Only"
-msgstr "仅图标"
+msgstr "仅有图标"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-app-helper.c:2569
-#, fuzzy
 msgid "Text Only"
-msgstr "仅文字"
+msgstr "仅有文字"
 
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
@@ -976,107 +989,123 @@ msgstr "GTK 项"
 msgid "The GTK entry"
 msgstr "GTK 项"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
-#, fuzzy
 msgid "History ID"
-msgstr "历史 id"
+msgstr "历史 ID"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:221
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
+msgstr "文件项的唯一标识符。它用于保存历史列表。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr ""
+msgstr "浏览对话框标题"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-file-entry.c:230
-#, fuzzy
 msgid "Title for the Browse file dialog."
-msgstr "选择对话框的标题"
+msgstr "浏览文件对话框的标题。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr ""
+msgstr "目录项"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
+msgstr "文件项是否用于输入目录名称或完整的文件名。"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-file-entry.c:246
-#, fuzzy
 msgid "Modal"
-msgstr "模式"
+msgstr "模态"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr ""
+msgstr "浏览文件窗口是否为模态。"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
-#, fuzzy
 msgid "Filename"
-msgstr "文件(_F)"
+msgstr "文件名"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
-msgstr ""
+msgstr "应该显示在文件项中的文件名。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
-msgstr ""
+msgstr "默认路径"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "浏览文件窗口的默认路径。"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-file-entry.c:271
-#, fuzzy
 msgid "GnomeEntry"
-msgstr "GTK 项"
+msgstr "GnomeEntry"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:272
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
+"文件项用来输入文件名的 GnomeEntry。如果您需要修改或查询 GnomeEntry 的任何参"
+"数，可以使用此属性来获得GnomeEntry。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
-msgstr ""
+msgstr "GtkEntry"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:283
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
+"文件项用来输入文件名的 GtkEntry。如果您需要修改或查询 GtkEntry 的任何参数，可"
+"以使用此属性来获得GtkEntry。"
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
 msgstr "选择文件"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path"
-msgstr "粘贴(_P)"
+msgstr "路径"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path to file"
-msgstr "保存当前文件"
+msgstr "文件路径"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-file-entry.c:672
-#, fuzzy
 msgid "_Browse..."
-msgstr "浏览..."
+msgstr "浏览(_B)..."
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "弹出用于选择文件的文件选择器"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1154,20 +1183,23 @@ msgstr "显示字体信息模式中的尺寸"
 msgid "GNOME GConf UI Support"
 msgstr "GNOME GConf UI 支持"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "细节(_D)"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-gconf-ui.c:169
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"您试图修改您的系统管理员或操作系统供应商不允许您修改的配置。部分您选定了的选"
-"项可能不会生效，或者会在您下次使用该应用程序 (%s) 的时候恢复原值。"
+"应用程序“%s”试图更改您的一部分配置，而系统管理员或操作系统厂商不允许您更改这"
+"部分配置。您所选择的一部分设置可能不会生效，或者在您下次使用该应用程序时不会"
+"恢复。"
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1177,39 +1209,46 @@ msgid ""
 msgstr ""
 "在为 %s 装入或保存配置信息时发生错误。您的某些配置设置可能不能正常工作。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
+msgstr "图标项的唯一标识符。它用于保存历史列表。"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-icon-entry.c:186
-#, fuzzy
 msgid "Title for the Browse icon dialog."
-msgstr "选择对话框的标题"
+msgstr "浏览图标对话框的标题。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
-msgstr ""
+msgstr "像素图目录"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr ""
+msgstr "在其中搜索图标的目录。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
-msgstr ""
+msgstr "应该在图标项中显示的文件名。"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-icon-entry.c:210
-#, fuzzy
 msgid "Picker dialog"
-msgstr "选取颜色"
+msgstr "选取器对话框"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"图标选取器对话框。如果您需要修改或查询 GtkDialog 的任何参数，可以使用此属性来"
+"获得 GtkDialog。"
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
@@ -1223,44 +1262,51 @@ msgstr "无法找到 hbox，使用普通文件选择"
 msgid "Preview"
 msgstr "预览"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-icon-entry.c:750
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "选择对话框的标题"
+msgstr "图标选择对话框"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "您可以通过此对话框选择图标。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
-msgstr ""
+msgstr "图标选择器"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "请选取需要的图标。"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
-msgstr ""
+msgstr "图标选择器"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "此按钮将打开一个窗口，您可以从中选择图标。"
 
 #: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
 msgstr "浏览..."
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
-msgstr ""
+msgstr "图标路径"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
+msgstr "您应该在此输入图标图像所在目录的名称。"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1296,28 +1342,29 @@ msgstr "问题"
 msgid "Message"
 msgstr "消息"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-pixmap-entry.c:113
-#, fuzzy
 msgid "Do Preview"
-msgstr "预览"
+msgstr "执行预览"
 
+# SUN NEW TRANSLATION
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "像素图项是否有预览。"
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "无图像"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "预览"
+msgstr "图像预览"
 
+# SUN CHANGED MESSAGE
 #: libgnomeui/gnome-pixmap-entry.c:206
-#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr "当前选中的时间"
+msgstr "当前指定图像的预览"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1341,6 +1388,9 @@ msgstr "%Y-%m-%d(%a) %T"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Exit the test"
+#~ msgstr "退出测试"
 
 #~ msgid "Find _Again"
 #~ msgstr "查找下一个(A)"
@@ -1410,9 +1460,6 @@ msgstr "Sans 14"
 
 #~ msgid "GTK+"
 #~ msgstr "GTK+"
-
-#~ msgid "Exit the test"
-#~ msgstr "退出测试"
 
 #~ msgid "Author"
 #~ msgstr "作者"
