@@ -369,12 +369,12 @@ gnome_app_set_statusbar (GnomeApp *app,
 	gtk_widget_show(app->statusbar);
 
 	frame = gtk_frame_new(NULL);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_OUT);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_NONE);
 	gtk_container_set_border_width(GTK_CONTAINER(frame), 0);
 	gtk_widget_show(frame);
 
 	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(hbox), 1);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);
 	gtk_box_pack_start(GTK_BOX(hbox), statusbar, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);
 

@@ -1,3 +1,10 @@
+1999-01-06  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-app.c (gnome_app_set_statusbar): Changed beveling.  Now
+	it's GTK_SHADOW_NONE.  I also changed the spacing to be 4 pixels.
+	It'd be good if all applicable apps used this spacing, as well as
+	the statusbar.  There are a lot of inconsistent apps out there...
+
 1999-01-06  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.c (gnome_client_get_flags): New function.  Returns
