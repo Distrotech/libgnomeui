@@ -375,8 +375,8 @@ gnome_canvas_render_svp (GnomeCanvasBuf *buf, ArtSVP *svp, guint32 rgba)
 			int fg_r, fg_g, fg_b;
 			int tmp;
 
-			bg_r = bg_color & 0xff;
-			fg_r = (rgba >> 8) & 0xff;
+			bg_r = (bg_color >> 16) & 0xff;
+			fg_r = (rgba >> 24) & 0xff;
 			tmp = (fg_r - bg_r) * alpha;
 			fg_r = bg_r + ((tmp + (tmp >> 8) + 0x80) >> 8);
 
@@ -385,8 +385,8 @@ gnome_canvas_render_svp (GnomeCanvasBuf *buf, ArtSVP *svp, guint32 rgba)
 			tmp = (fg_g - bg_g) * alpha;
 			fg_g = bg_g + ((tmp + (tmp >> 8) + 0x80) >> 8);
 
-			bg_b = (bg_color >> 16) & 0xff;
-			fg_b = (rgba >> 24) & 0xff;
+			bg_b = bg_color & 0xff;
+			fg_b = (rgba >> 8) & 0xff;
 			tmp = (fg_b - bg_b) * alpha;
 			fg_b = bg_b + ((tmp + (tmp >> 8) + 0x80) >> 8);
 

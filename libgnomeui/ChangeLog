@@ -1,3 +1,8 @@
+1999-06-21  Raph Levien  <raph@acm.org>
+
+	* gnome-canvas-util.c (gnome_canvas_render_svp): Duuh, I had RGB
+	reversed (as BGR) in the compositing code.
+
 1999-06-20  Michael Zucchi  <mzucchi@zedzone.mmc.com.au>
 
 	* Makefile.am (INCLUDES): Added AUDIOFILE/ESD_CFLAGS to includes,
