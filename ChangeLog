@@ -1,3 +1,7 @@
+2002-11-23  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* configure.in: Fix gtk-doc version detection.
+
 2002-11-22  Pasupathi Duraisamy <pasupathi.duraisamy@wipro.com>
 
 	* libgnomeui/gnome-font-picker.c:
