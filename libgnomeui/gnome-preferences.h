@@ -39,6 +39,9 @@ void              gnome_preferences_set_toolbar_handlebox    (gboolean b);
 gboolean          gnome_preferences_get_menubar_handlebox    (void);
 void              gnome_preferences_set_menubar_handlebox    (gboolean b);
 
+/* Whether toolbar buttons have a beveled edge */
+gboolean          gnome_preferences_get_toolbar_relief    (void);
+void              gnome_preferences_set_toolbar_relief    (gboolean b);
 
 END_GNOME_DECLS
 

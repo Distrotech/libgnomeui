@@ -97,9 +97,9 @@ gint       gnome_dialog_run	       (GnomeDialog *dialog);
 /* Run the dialog with gnome_dialog_run, and also call set_modal */
 gint       gnome_dialog_run_modal      (GnomeDialog *dialog);
 /* Run the dialog, and hide it afterwards */
-gint       gnome_dialog_run_and_hide (GnomeDialog * dialog);
+gint       gnome_dialog_run_and_hide   (GnomeDialog * dialog);
 /* Run the dialog, and destroy it afterwards */
-gint       gnome_dialog_run_and_die  (GnomeDialog * dialog);
+gint       gnome_dialog_run_and_destroy(GnomeDialog * dialog);
 
 /* Set the default button. - it will have a little highlight, 
    and pressing return will activate it. */

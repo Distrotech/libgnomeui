@@ -415,7 +415,7 @@ gnome_dialog_run_and_hide (GnomeDialog * dialog)
 }
 
 gint 
-gnome_dialog_run_and_die (GnomeDialog * dialog)
+gnome_dialog_run_and_destroy (GnomeDialog * dialog)
 {
   gint r;
 
@@ -721,6 +721,29 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.30  1998/07/03 00:51:57  hp
+
+
+  This fixes a couple of bugs in my Sunday commits, but breaks things: namely,
+  your handlebox preferences if you've set them, and gnome_dialog_run_and_die
+  is renamed if anyone had used it. Sorry it didn't get in on Monday, all that
+  CVS confusion.
+
+  Mon Jun 29 14:10:48 1998  Havoc Pennington  <hp@pobox.com>
+
+  * gnome-preferences.h, gnome-preferences.c
+  (gnome_preferences_get_toolbar_relief,
+  gnome_preferences_set_toolbar_relief): Whether the toolbar buttons
+  have the beveled edge.
+  * gnome-app.c (gnome_app_set_toolbar): Turn off the toolbar button
+  relief if user requested it.
+  * gnome-preferences.c (gnome_preferences_load): Oops, forgot to
+  push a new prefix for the GnomeApp stuff, it was being saved under
+  Dialog prefs.
+  * gnome-dialog.h, gnome-dialog.c (gnome_dialog_run_and_die):
+  Renamed to run_and_destroy - run_and_die was cute at 2 am, but
+  probably not a good name. ;-)
+
   Revision 1.29  1998/06/29 08:06:27  hp
 
 
