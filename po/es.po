@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-09-13 18:30+0200\n"
-"PO-Revision-Date: 2004-07-25 16:10+0200\n"
+"PO-Revision-Date: 2004-09-19 13:01+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "%s no es una carpeta"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:875
 msgid "Filesystem"
-msgstr "Sistema de archi_vos"
+msgstr "Sistema de archivos"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:1539
 #, c-format
@@ -65,8 +65,7 @@ msgstr "Falló al abrir el archivo «%s»:%s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Falló al cargar la imagen «%s»: razón no conocida, probablemente un archivo "
 "de imagen corrupto"
@@ -160,8 +159,7 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -622,7 +620,7 @@ msgstr "Tiene estado"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Crear un widget de estado"
+msgstr "Crear un widget de estado."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -931,7 +929,7 @@ msgstr "Título del diálogo de selección"
 
 #: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
-msgstr "El título para la ventana de diálogo de selección"
+msgstr "El título el diálogo del visor de iconos."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
@@ -959,7 +957,7 @@ msgstr "Nombre del archivo"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
-msgstr "Nombre del archivo que debería mostrarse en la entrada de archivos"
+msgstr "Nombre del archivo que debería mostrarse en la entrada del archivo."
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
@@ -1027,7 +1025,7 @@ msgstr "E_xaminar..."
 
 #: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
-msgstr "Aparece un selector de archivo para elegir un archivo."
+msgstr "Emerger un selector de archivos para elegir un archivo"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1083,8 +1081,7 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
-"Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1184,7 +1181,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
-msgstr "El título de la ventana de diálogo de iconos"
+msgstr "Título para el diálogo del visor de iconos."
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
@@ -1322,7 +1319,7 @@ msgstr "Previsualizar"
 
 #: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Indique si la entrada de la imagen debe tener una vista preliminar"
+msgstr "Indica si la entrada de la imagen debe tener una vista preliminar."
 
 #: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
@@ -1509,3 +1506,4 @@ msgstr "_Depurar"
 
 #~ msgid "_Credits"
 #~ msgstr "_Créditos"
+
