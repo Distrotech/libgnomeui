@@ -772,6 +772,13 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			set_line_gc_foreground (line);
 
 		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
+
+		if (line->first_svp) 
+			gnome_canvas_item_request_redraw_svp (item, line->first_svp);
+
+		if (line->last_svp) 
+			gnome_canvas_item_request_redraw_svp (item, line->last_svp);
+
 	}
 }
 

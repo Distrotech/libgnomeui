@@ -1,3 +1,14 @@
+2001-02-11  Rusty Conover  <rconover@zootweb.com>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_rect_update): Added
+	fix for proper stroking of the rectangle's outlines.  Thre
+	previous implementation was broken when the canvas's pixels per
+	unit != 1.0
+
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Added fix for
+	when the color of a line changes the SVP's of teh arrowheads also
+	change color.  They didn't change color before.
+
 2001-02-11  Ettore Perazzoli  <ettore@ximian.com>
 
 	* gnome-dock-item.c (gnome_dock_item_button_changed): When

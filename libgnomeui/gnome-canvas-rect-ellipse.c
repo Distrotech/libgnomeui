@@ -860,10 +860,8 @@ gnome_canvas_rect_update (GnomeCanvasItem *item, double affine[6], ArtSVP *clip_
 	GnomeCanvasRE *re;
 	ArtVpath vpath[11];
 	ArtVpath *vpath2;
+	ArtSVP *stroke_svp;
 	double x0, y0, x1, y1;
-	double dx, dy;
-	double halfwidth;
-	int i;
 
 #ifdef VERBOSE
 	{
@@ -917,69 +915,42 @@ gnome_canvas_rect_update (GnomeCanvasItem *item, double affine[6], ArtSVP *clip_
 			gnome_canvas_item_update_svp (item, &re->fill_svp, NULL);
 
 		if (re->outline_set) {
-			/* We do the stroking by hand because it's simple enough
-			   and could save time. */
-
-			if (re->width_pixels)
-				halfwidth = (re->width / item->canvas->pixels_per_unit) * 0.5;
-			else {
-				halfwidth = re->width * item->canvas->pixels_per_unit * 0.5;
-				if (halfwidth < 0.25)
-					halfwidth = 0.25;
+			/* If the item is filled, the vpath will
+			 * already be built so whats the point in
+			 * rebuilding it?  If its not already built
+			 * then lets build it. */
+			
+			if (!re->fill_set) {
+				vpath[0].code = ART_MOVETO;
+				vpath[0].x = x0;
+				vpath[0].y = y0;
+				vpath[1].code = ART_LINETO;
+				vpath[1].x = x0;
+				vpath[1].y = y1;
+				vpath[2].code = ART_LINETO;
+				vpath[2].x = x1;
+				vpath[2].y = y1;
+				vpath[3].code = ART_LINETO;
+				vpath[3].x = x1;
+				vpath[3].y = y0;
+				vpath[4].code = ART_LINETO;
+				vpath[4].x = x0;
+				vpath[4].y = y0;
+				vpath[5].code = ART_END;
+				vpath[5].x = 0;
+				vpath[5].y = 0;					
 			}
-
-			i = 0;
-			vpath[i].code = ART_MOVETO;
-			vpath[i].x = x0 - halfwidth;
-			vpath[i].y = y0 - halfwidth;
-			i++;
-			vpath[i].code = ART_LINETO;
-			vpath[i].x = x0 - halfwidth;
-			vpath[i].y = y1 + halfwidth;
-			i++;
-			vpath[i].code = ART_LINETO;
-			vpath[i].x = x1 + halfwidth;
-			vpath[i].y = y1 + halfwidth;
-			i++;
-			vpath[i].code = ART_LINETO;
-			vpath[i].x = x1 + halfwidth;
-			vpath[i].y = y0 - halfwidth;
-			i++;
-			vpath[i].code = ART_LINETO;
-			vpath[i].x = x0 - halfwidth;
-			vpath[i].y = y0 - halfwidth;
-			i++;
-
-			if (x1 - halfwidth > x0 + halfwidth &&
-			    y1 - halfwidth > y0 + halfwidth) {
-				vpath[i].code = ART_MOVETO;
-				vpath[i].x = x0 + halfwidth;
-				vpath[i].y = y0 + halfwidth;
-				i++;
-				vpath[i].code = ART_LINETO;
-				vpath[i].x = x1 - halfwidth;
-				vpath[i].y = y0 + halfwidth;
-				i++;
-				vpath[i].code = ART_LINETO;
-				vpath[i].x = x1 - halfwidth;
-				vpath[i].y = y1 - halfwidth;
-				i++;
-				vpath[i].code = ART_LINETO;
-				vpath[i].x = x0 + halfwidth;
-				vpath[i].y = y1 - halfwidth;
-				i++;
-				vpath[i].code = ART_LINETO;
-				vpath[i].x = x0 + halfwidth;
-				vpath[i].y = y0 + halfwidth;
-				i++;
-			}
-			vpath[i].code = ART_END;
-			vpath[i].x = 0;
-			vpath[i].y = 0;
 
 			vpath2 = art_vpath_affine_transform (vpath, affine);
+			
+			stroke_svp = art_svp_vpath_stroke (vpath2,
+							   ART_PATH_STROKE_JOIN_MITER,
+							   ART_PATH_STROKE_CAP_BUTT,
+							   (re->width_pixels) ? re->width : (re->width * item->canvas->pixels_per_unit),
+							   4,
+							   0.25);
 
-			gnome_canvas_item_update_svp_clip (item, &re->outline_svp, art_svp_from_vpath (vpath2), clip_path);
+			gnome_canvas_item_update_svp_clip (item, &re->outline_svp, stroke_svp, clip_path);
 			art_free (vpath2);
 		} else
 			gnome_canvas_item_update_svp (item, &re->outline_svp, NULL);
