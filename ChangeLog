@@ -1,3 +1,10 @@
+2004-09-13  J.H.M. Dassen (Ray) <jdassen@debian.org>
+
+	* configure.in: Bumped the gnome-vfs version requirement to 2.7.1 as
+	that is the first release to have GNOME_VFS_MODULE_CALLBACK_QUESTION
+	which is used in libgnomeui/gnome-authentication-manager.c's
+	gnome_authentication_manager_init().
+
 ==================== 2.8.0 ====================
 
 2004-09-13  Anders Carlsson  <andersca@gnome.org>
