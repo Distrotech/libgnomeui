@@ -30,6 +30,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+
 gchar *GTK_CAULDRON_ENTER = "GTK_CAULDRON_ENTER";
 gchar *GTK_CAULDRON_ESCAPE = "GTK_CAULDRON_ESCAPE";
 
@@ -40,7 +41,7 @@ enum {
     HORIZONTAL
 };
 
-#define CAULDRON_FMT_OPTIONS "xfpseocrdqjhvag"
+#define CAULDRON_FMT_OPTIONS "xfpseocrdqjhvagn"
 
 struct cauldron_result {
     void (*get_result) (GtkWidget *, void *);
@@ -204,31 +205,32 @@ gint space_after (gchar * p)
 
 /* {{{ a simple stack */
 
-static gint widget_stack_pointer = 0;
-static GtkWidget *widget_stack[256] =
-{0};
+typedef struct _GtkCauldronStack {
+    gint widget_stack_pointer;
+    GtkWidget *widget_stack[256];
+} GtkCauldronStack;
 
-static void widget_stack_push (GtkWidget * x)
+static void widget_stack_push (GtkCauldronStack * s, GtkWidget * x)
 {
-    if (widget_stack_pointer >= 250)
+    if (s->widget_stack_pointer >= 250)
 	g_error ("to many widget's in gtk_dialog_cauldron()");
-    widget_stack[widget_stack_pointer++] = x;
-    widget_stack[widget_stack_pointer] = 0;
+    s->widget_stack[s->widget_stack_pointer++] = x;
+    s->widget_stack[s->widget_stack_pointer] = 0;
 }
 
-static GtkWidget *widget_stack_pop (void)
+static GtkWidget *widget_stack_pop (GtkCauldronStack * s)
 {
-    if (widget_stack_pointer <= 0)
+    if (s->widget_stack_pointer <= 0)
 	g_error ("bracketing error in call to gtk_dialog_cauldron()");
-    return widget_stack[--widget_stack_pointer];
+    return s->widget_stack[--(s->widget_stack_pointer)];
 }
 
-static GtkWidget *widget_stack_top (void)
+static GtkWidget *widget_stack_top (GtkCauldronStack * s)
 {
-    if (widget_stack_pointer <= 0)
+    if (s->widget_stack_pointer <= 0)
 	g_error ("bracketing error in call to gtk_dialog_cauldron()");
-    widget_stack[widget_stack_pointer] = 0;
-    return widget_stack[widget_stack_pointer - 1];
+    s->widget_stack[s->widget_stack_pointer] = 0;
+    return s->widget_stack[s->widget_stack_pointer - 1];
 }
 
 /* }}} a simple stack */
@@ -300,9 +302,12 @@ static void gtk_cauldron_box_add (GtkWidget * b, GtkWidget * w, gchar ** p, gint
 	    break;
 	}
     }
-    if (GTK_IS_BOX (b))
+    if (GTK_IS_BOX (b)) {
+/* special hack for notebooks */
+	if (GTK_IS_NOTEBOOK (w))
+	    expand = fill = TRUE;
 	gtk_box_pack_start (GTK_BOX (b), w, expand, fill, padding);
-    else if (GTK_IS_CONTAINER (b))
+    } else if (GTK_IS_CONTAINER (b))
 	gtk_container_add (GTK_CONTAINER (b), w);
 }
 
@@ -396,6 +401,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     struct cauldron_result *r = 0;
     struct key_press_event_data d;
     GtkAccelGroup *accel_table;
+    GtkCauldronStack *stack;
 
 /* text widgets may only add text after the widget is realized,
    so we store text to be added in these, and then add it 
@@ -403,6 +409,9 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     GtkWidget *text_widget[MAX_TEXT_WIDGETS];
     gint ntext_widget = 0;
     gchar *text[MAX_TEXT_WIDGETS];
+
+    stack = malloc (sizeof (*stack));
+    memset (stack, 0, sizeof (*stack));
 
     if (options & GTK_CAULDRON_SPACE_MASK)
 	pixels_per_space = (options & GTK_CAULDRON_SPACE_MASK) >> GTK_CAULDRON_SPACE_SHIFT;
@@ -432,7 +441,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     gtk_signal_connect (GTK_OBJECT (window), "key_press_event",
 			(GtkSignalFunc) key_press_event, (gpointer) & d);
 
-    widget_stack_push (window);
+    widget_stack_push (stack, window);
 
 /* add outermost brackets to make parsing easier : */
     p = fmt = malloc (strlen (format) + 8);
@@ -452,14 +461,14 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 	    switch (find_breaker (p)) {
 	    case VERTICAL:
 	    case VERTICAL_HOMOGENOUS:
-		widget_stack_push (gtk_vpaned_new ());
+		widget_stack_push (stack, gtk_vpaned_new ());
 		break;
 	    case HORIZONTAL:
 	    case HORIZONTAL_HOMOGENOUS:
-		widget_stack_push (gtk_hpaned_new ());
+		widget_stack_push (stack, gtk_hpaned_new ());
 		break;
 	    }
-	    gtk_container_border_width (GTK_CONTAINER (widget_stack_top ()), pixels_per_space * space_after (p));
+	    gtk_container_border_width (GTK_CONTAINER (widget_stack_top (stack)), pixels_per_space * space_after (p));
 	    break;
 	case '(':
 	    if (strchr ("% \t([{<>}])", p[1])) {
@@ -471,16 +480,16 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		s = space_after (q) * pixels_per_space;
 		switch (find_breaker (p)) {
 		case VERTICAL:
-		    widget_stack_push (gtk_vbox_new (FALSE, s));
+		    widget_stack_push (stack, gtk_vbox_new (FALSE, s));
 		    break;
 		case VERTICAL_HOMOGENOUS:
-		    widget_stack_push (gtk_vbox_new (TRUE, s));
+		    widget_stack_push (stack, gtk_vbox_new (TRUE, s));
 		    break;
 		case HORIZONTAL:
-		    widget_stack_push (gtk_hbox_new (FALSE, s));
+		    widget_stack_push (stack, gtk_hbox_new (FALSE, s));
 		    break;
 		case HORIZONTAL_HOMOGENOUS:
-		    widget_stack_push (gtk_hbox_new (TRUE, s));
+		    widget_stack_push (stack, gtk_hbox_new (TRUE, s));
 		    break;
 		}
 	    } else {
@@ -496,21 +505,21 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		w = gtk_label_new (label);
 		free (label);
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		gtk_widget_show (w);
 		break;
 	    }
-	    gtk_container_border_width (GTK_CONTAINER (widget_stack_top ()), pixels_per_space * space_after (p));
+	    gtk_container_border_width (GTK_CONTAINER (widget_stack_top (stack)), pixels_per_space * space_after (p));
 	    break;
 	case '[':
-	    widget_stack_push (gtk_frame_new (NULL));
+	    widget_stack_push (stack, gtk_frame_new (NULL));
 	    break;
 	case '%':
 	    switch (c = *(++p)) {
 	    case '[':{
 		    char *label;
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
-		    widget_stack_push (gtk_frame_new (label));
+		    widget_stack_push (stack, gtk_frame_new (label));
 		    break;
 		}
 	    case 'L':{
@@ -518,7 +527,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
 		    w = gtk_label_new (label);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		    break;
 		}
@@ -559,13 +568,13 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    }
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		    if (table) {
-			gtk_cauldron_box_add (widget_stack_top (), table, &p, pixels_per_space);
+			gtk_cauldron_box_add (widget_stack_top (stack), table, &p, pixels_per_space);
 			gtk_table_attach (GTK_TABLE (table), w, 0, 1, 0, 1,
 				      GTK_EXPAND | GTK_SHRINK | GTK_FILL,
 			       GTK_EXPAND | GTK_SHRINK | GTK_FILL, 0, 0);
 			gtk_widget_show (table);
 		    } else {
-			gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+			gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    }
 		    gtk_widget_show (w);
 		    if (*result) {
@@ -640,7 +649,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 			gtk_entry_set_text (GTK_ENTRY (w), *result);
 #endif
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		    break;
 		}
@@ -670,7 +679,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 			      GTK_SIGNAL_FUNC (gtk_cauldron_button_exit),
 					(gpointer) & b[ncauldron_button]);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		    ncauldron_button++;
 		    break;
@@ -687,7 +696,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    GTK_TOGGLE_BUTTON (w)->active = *result;
 		    new_result (r, get_check_result, w, result);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		    break;
 		}
@@ -716,16 +725,16 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 			w = gtk_spin_button_new (0, climb_rate, digits);
 		    }
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		} else {
-		    if (GTK_IS_HBOX (widget_stack_top ())) {
+		    if (GTK_IS_HBOX (widget_stack_top (stack))) {
 			w = gtk_vseparator_new ();
 		    } else {
 			w = gtk_hseparator_new ();
 		    }
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		}
 		break;
@@ -742,7 +751,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), *result);
 		    new_result (r, get_check_result, w, result);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		    gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		    break;
 		}
@@ -753,7 +762,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    next_arg (GTK_CAULDRON_TYPE_USERDATA_P, user_data, &data);
 		    w = (*func) (window, data);		/* `window' is just to fill the first arg and shouldn't be needed by the user */
 		    if (w) {
-			gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+			gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 			gtk_widget_show (w);
 		    } else {
 			g_warning ("user callback GtkCauldronCustomCallback returned null");
@@ -766,8 +775,32 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 	case ')':
 	case ']':
 	    radio_group = 0;
-	    w = widget_stack_pop ();
-	    if (option_is_present (p + 1, 'v') || option_is_present (p + 1, 'h')) {
+	    w = widget_stack_pop (stack);
+	    if (GTK_IS_NOTEBOOK(w)) {
+		gtk_notebook_set_page (GTK_NOTEBOOK (w), 0);
+		w = widget_stack_pop (stack);
+	    }
+	    if (option_is_present (p + 1, 'n')) {
+		gchar *label;
+/* adding to a notebook requires special handling : */
+		if (!GTK_IS_NOTEBOOK(widget_stack_top (stack))) {
+		    GtkWidget *notebook;
+		    notebook = gtk_notebook_new ();
+		    if (option_is_present (p + 1, 'v'))
+			gtk_notebook_set_tab_pos (GTK_NOTEBOOK (notebook), GTK_POS_LEFT);
+		    while (p[1] && strchr (CAULDRON_FMT_OPTIONS, p[1]))
+			p++;
+		    gtk_cauldron_box_add (widget_stack_top (stack), notebook, &p, pixels_per_space);
+		    gtk_widget_show (notebook);
+		    widget_stack_push (stack, notebook);
+		} else {
+		    while (p[1] && strchr (CAULDRON_FMT_OPTIONS, p[1]))
+			p++;
+		}
+		next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
+		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
+		gtk_notebook_append_page (GTK_NOTEBOOK (widget_stack_top (stack)), w, gtk_label_new (label));
+	    } else if (option_is_present (p + 1, 'v') || option_is_present (p + 1, 'h')) {
 		GtkWidget *scrolled_window;
 		scrolled_window = gtk_scrolled_window_new (NULL, NULL);
 		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
@@ -776,10 +809,10 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		gtk_container_add (GTK_CONTAINER (scrolled_window), w);
 		gtk_widget_show (scrolled_window);
 		user_callbacks (scrolled_window, p + 1, next_arg, user_data, accel_table);
-		gtk_cauldron_box_add (widget_stack_top (), scrolled_window, &p, pixels_per_space);
+		gtk_cauldron_box_add (widget_stack_top (stack), scrolled_window, &p, pixels_per_space);
 	    } else {
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		gtk_cauldron_box_add (widget_stack_top (), w, &p, pixels_per_space);
+		gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 	    }
 	    gtk_widget_show (w);
 	    break;
@@ -794,11 +827,11 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 	    }
 	}
     }
-    if (widget_stack_pointer != 1) {
+    if (stack->widget_stack_pointer != 1) {
 	g_error ("bracketing error in call to gtk_dialog_cauldron()");
 	return 0;
     }
-    w = widget_stack_pop ();
+    w = widget_stack_pop (stack);
     gtk_widget_show (w);
 
     while (ntext_widget-- > 0) {
@@ -823,6 +856,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 	}
     }
     free (fmt);
+    free (stack);
     return return_result;
 }
 
