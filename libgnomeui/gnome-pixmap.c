@@ -44,7 +44,7 @@ static void
 check_hash_table(void)
 {
 	if (!pixmap_hash)
-		pixmap_hash = g_hash_table_new (g_string_hash, g_string_equal);
+		pixmap_hash = g_hash_table_new (g_str_hash, g_str_equal);
 }
 
 static void

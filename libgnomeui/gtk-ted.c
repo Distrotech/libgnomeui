@@ -79,7 +79,7 @@ gtk_ted_init (GtkTed *ted)
 	ted->need_gui = 0;
 	ted->in_gui   = 0;
 	
-	ted->widgets = g_hash_table_new (g_string_hash, g_string_equal);
+	ted->widgets = g_hash_table_new (g_str_hash, g_str_equal);
 
 	return table;
 }
