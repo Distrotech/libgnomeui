@@ -9,10 +9,12 @@ struct _GnomeUIInfo {
   enum {
     GNOME_APP_UI_ENDOFINFO = 0,
     GNOME_APP_UI_ITEM = 1,
-    GNOME_APP_UI_SUBTREE = 2,
-    GNOME_APP_UI_SEPARATOR = 3,
-    GNOME_APP_UI_HELP = 4,
-    GNOME_APP_UI_LAST = 4
+    GNOME_APP_UI_TOGGLEITEM = 2, /* check item for menu - no toolbar support */
+    GNOME_APP_UI_RADIOITEMS = 3, /* no toolbar support */
+    GNOME_APP_UI_SUBTREE = 4,
+    GNOME_APP_UI_SEPARATOR = 5,
+    GNOME_APP_UI_HELP = 6,
+    GNOME_APP_UI_LAST = 6
   } type;
 
   gchar *label;
@@ -20,14 +22,24 @@ struct _GnomeUIInfo {
   gchar *hint; /* For toolbar items, the tooltip.
 		  For menu items, the status bar message */
 
-  /* For an item, procedure to call when activated.
+  /* For an item, toggleitem, or radioitem, procedure to call when activated.
      
      For a subtree, point to the GnomeUIInfo array for
      that subtree.
 
+     For a radioitem lead entry, point to the GnomeUIInfo array for
+     the radio item group.  For the radioitem array, procedure to
+     call when activated.
+     
      For a help item, specifies the help node to load
      (or NULL for main prog's name) */
-  gpointer moreinfo; 
+  gpointer moreinfo;
+
+  /* Value for pass to gtk_signal_connect() */
+  gpointer user_data;
+
+  /* Unsed - for future expansion.  Should always be NULL. */
+  gpointer unsed_data;
 
   enum {
     GNOME_APP_PIXMAP_NONE,
@@ -50,6 +62,44 @@ struct _GnomeUIInfo {
 };
 typedef struct _GnomeUIInfo GnomeUIInfo;
 
+
+/* Handy GnomeUIInfo macros */
+
+#define GNOMEUIINFO_END       {GNOME_APP_UI_ENDOFINFO, NULL, NULL, NULL, \
+                               NULL, NULL, 0, NULL, 0, 0, NULL}
+#define GNOMEUIINFO_SEPARATOR {GNOME_APP_UI_SEPARATOR, NULL, NULL, NULL, \
+                               NULL, NULL, 0, NULL, 0, 0, NULL}
+#define GNOMEUIINFO_ITEM(label, tip, cb, xpm) \
+                              {GNOME_APP_UI_ITEM, label, tip, cb, \
+			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
+			       0, 0, NULL}
+#define GNOMEUIINFO_ITEM_DATA(label, tip, cb, data, xpm) \
+                              {GNOME_APP_UI_ITEM, label, tip, cb, \
+			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
+			       0, 0, NULL}
+#define GNOMEUIINFO_TOGGLEITEM(label, tip, cb, xpm) \
+                              {GNOME_APP_UI_TOGGLEITEM, label, tip, cb, \
+			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
+			       0, 0, NULL}
+#define GNOMEUIINFO_TOGGLEITEM_DATA(label, tip, cb, data, xpm) \
+                              {GNOME_APP_UI_TOGGLEITEM, label, tip, cb, \
+			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
+			       0, 0, NULL}
+#define GNOMEUIINFO_RADIOLIST(list) \
+                              {GNOME_APP_UI_RADIOITEMS, NULL, NULL, list, \
+                               NULL, NULL, 0, NULL, 0, 0, NULL}
+#define GNOMEUIINFO_RADIOITEM(label, tip, cb, xpm) \
+                              {GNOME_APP_UI_RADIOITEMS, label, tip, cb, \
+			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
+			       0, 0, NULL}
+#define GNOMEUIINFO_RADIOITEM_DATA(label, tip, cb, data, xpm) \
+                              {GNOME_APP_UI_RADIOITEMS, label, tip, cb, \
+			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
+			       0, 0, NULL}
+
+
+/* Functions */
+    
 typedef struct _GnomeUIBuilderData *GnomeUIBuilderData;
 typedef void (*GnomeUISignalConnectFunc)(GnomeApp *app,
 					 GnomeUIInfo *info_item,

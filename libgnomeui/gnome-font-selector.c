@@ -96,10 +96,10 @@ typedef struct {
 static GnomeUIInfo size_metric_items[] =
 {
   { GNOME_APP_UI_ITEM, "Pixels", "Use pixels as the unit of measurement",
-    text_pixels_callback, GNOME_APP_PIXMAP_NONE,
+    text_pixels_callback, NULL, NULL, GNOME_APP_PIXMAP_NONE,
     NULL, 0, 0, NULL},
   { GNOME_APP_UI_ITEM, "Points", "Use points as the unit of measurement",
-    text_pixels_callback, GNOME_APP_PIXMAP_NONE,
+    text_pixels_callback, NULL, NULL, GNOME_APP_PIXMAP_NONE,
     NULL, 0, 0, NULL},
   { GNOME_APP_UI_ENDOFINFO, NULL, NULL, NULL }
 };
