@@ -394,13 +394,18 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	GtkFileSelection *fs;
 	GnomeFileEntry *fentry;
 	GtkWidget *entry;
+	gchar *locale_filename;
+	gchar *utf8_filename;
 
 	fs = GTK_FILE_SELECTION (data);
 	fentry = GNOME_FILE_ENTRY (g_object_get_data (G_OBJECT (fs), "gnome_file_entry"));
 	entry = gnome_file_entry_gtk_entry (fentry);
 
-	gtk_entry_set_text (GTK_ENTRY (entry),
-			    gtk_file_selection_get_filename (fs));
+	locale_filename = gtk_file_selection_get_filename (fs);
+	utf8_filename = g_filename_to_utf8 (locale_filename, -1, NULL,
+					    NULL, NULL);
+	gtk_entry_set_text (GTK_ENTRY (entry), utf8_filename);
+	g_free (utf8_filename);
 	/* Is this evil? */
 	g_signal_emit_by_name (entry, "activate");
 	gtk_widget_destroy (GTK_WIDGET (fs));

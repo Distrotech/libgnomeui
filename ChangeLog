@@ -1,5 +1,7 @@
 2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-file-entry.c: Merge fix for
+	bug #110500 from stable.
 	* libgnomeui/gnome-icon-entry.c: Merge fix for
 	bug #106298 from stable branch.
 	* libgnomeui/gnome-icon-entry.c: Merge fix for
