@@ -143,7 +143,7 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
 	guint i;
 	static GHashTable *formats = NULL;
 	static const char *types [] = {
-		"image/x-bmp", "image/x-ico", "image/jpeg",
+		"image/x-bmp", "image/x-ico", "image/jpeg", "image/gif",
 		"image/png", "image/pnm", "image/ras", "image/tga",
 		"image/tiff", "image/wbmp", "image/x-xbitmap",
 		"image/x-xpixmap"

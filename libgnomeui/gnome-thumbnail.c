@@ -37,6 +37,8 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <libgnome/gnome-macros.h>
+#include <libgnome/gnome-init.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 #include "gnome-thumbnail.h"
 
 #ifdef HAVE_LIBJPEG
@@ -68,6 +70,8 @@ struct _GnomeThumbnailFactoryPrivate {
   long last_failed_time;
 
   pthread_mutex_t lock;
+
+  GHashTable *scripts_hash;
 };
 
 struct ThumbnailInfo {
@@ -99,25 +103,34 @@ static void
 gnome_thumbnail_factory_finalize (GObject *object)
 {
   GnomeThumbnailFactory *factory;
+  GnomeThumbnailFactoryPrivate *priv;
   
   factory = GNOME_THUMBNAIL_FACTORY (object);
+
+  priv = factory->priv;
   
-  g_free (factory->priv->application);
-  factory->priv->application = NULL;
+  g_free (priv->application);
+  priv->application = NULL;
   
-  if (factory->priv->existing_thumbs)
+  if (priv->existing_thumbs)
     {
-      g_hash_table_destroy (factory->priv->existing_thumbs);
-      factory->priv->existing_thumbs = NULL;
+      g_hash_table_destroy (priv->existing_thumbs);
+      priv->existing_thumbs = NULL;
     }
   
-  if (factory->priv->failed_thumbs)
+  if (priv->failed_thumbs)
     {
-      g_hash_table_destroy (factory->priv->failed_thumbs);
-      factory->priv->failed_thumbs = NULL;
+      g_hash_table_destroy (priv->failed_thumbs);
+      priv->failed_thumbs = NULL;
+    }
+
+  if (priv->scripts_hash)
+    {
+      g_hash_table_destroy (priv->scripts_hash);
+      priv->scripts_hash = NULL;
     }
   
-  g_free (factory->priv);
+  g_free (priv);
   factory->priv = NULL;
   
   if (G_OBJECT_CLASS (parent_class)->finalize)
@@ -150,6 +163,61 @@ md5_equal (gconstpointer  a,
 }
 
 static void
+read_scripts_file (GnomeThumbnailFactory *factory, const char *file)
+{
+  FILE *f;
+  char buf[1024];
+  char *p;
+  gchar **mime_types;
+  int i;
+    
+  f = fopen (file, "r");
+
+  if (f)
+    {
+      while (fgets (buf, 1024, f) != NULL)
+	{
+	  if (buf[0] == '#')
+	    continue;
+
+	  p = strchr (buf, ':');
+
+	  if (p == NULL)
+	    continue;
+
+	  *p++ = 0;
+	  while (g_ascii_isspace (*p))
+	    p++;
+	  
+	  mime_types = g_strsplit (buf, ",", 0);
+
+	  for (i = 0; mime_types[i] != NULL; i++)
+	    g_hash_table_insert (factory->priv->scripts_hash,
+				 mime_types[i], g_strdup (p));
+
+	  /* The mimetype strings are owned by the hash table now */
+	  g_free (mime_types);
+	}
+      fclose (f);
+    }
+}
+
+static void
+read_scripts (GnomeThumbnailFactory *factory)
+{
+  char *file;
+  
+  read_scripts_file (factory, SYSCONFDIR "/gnome/thumbnailrc");
+
+  file = g_build_filename (g_get_home_dir (),
+			   GNOME_DOT_GNOME,
+			   "thumbnailrc",
+			   NULL);
+  read_scripts_file (factory, file);
+  g_free (file);
+}
+
+static void
 gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory *factory)
 {
   factory->priv = g_new0 (GnomeThumbnailFactoryPrivate, 1);
@@ -163,7 +231,14 @@ gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory *factory)
   factory->priv->failed_thumbs = g_hash_table_new_full (md5_hash,
 							md5_equal,
 							g_free, NULL);
+  
+  factory->priv->scripts_hash = g_hash_table_new_full (g_str_hash,
+						       g_str_equal,
+						       g_free, g_free);
 
+
+  read_scripts (factory);
+  
   pthread_mutex_init (&factory->priv->lock, NULL);
 }
 
@@ -481,10 +556,10 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
 	guint i;
 	static GHashTable *formats = NULL;
 	static const char *types [] = {
-		"image/x-bmp", "image/x-ico", "image/jpeg",
-		"image/png", "image/pnm", "image/ras", "image/tga",
-		"image/tiff", "image/wbmp", "image/x-xbitmap",
-		"image/x-xpixmap"
+	  "image/x-bmp", "image/x-ico", "image/jpeg", "image/gif",
+	  "image/png", "image/pnm", "image/ras", "image/tga",
+	  "image/tiff", "image/wbmp", "image/x-xbitmap",
+	  "image/x-xpixmap"
 	};
 
 	if (!formats) {
@@ -517,7 +592,8 @@ gnome_thumbnail_factory_can_thumbnail (GnomeThumbnailFactory *factory,
   
   /* TODO: Replace with generic system */
   if (mime_type != NULL &&
-      mimetype_supported_by_gdk_pixbuf (mime_type))
+      (mimetype_supported_by_gdk_pixbuf (mime_type) ||
+       g_hash_table_lookup (factory->priv->scripts_hash, mime_type)))
     {
       return !gnome_thumbnail_factory_has_valid_failed_thumbnail (factory,
 								  uri,
@@ -527,6 +603,74 @@ gnome_thumbnail_factory_can_thumbnail (GnomeThumbnailFactory *factory,
   return FALSE;
 }
 
+static char *
+expand_thumbnailing_script (const char *script,
+			    const char *inuri,
+			    const char *outfile)
+{
+  GString *str;
+  const char *p, *last;
+  char *localfile, *quoted;
+  gboolean got_in;
+
+  str = g_string_new (NULL);
+  
+  got_in = FALSE;
+  last = script;
+  while ((p = strchr (last, '%')) != NULL)
+    {
+      g_string_append_len (str, last, p - last);
+      p++;
+
+      switch (*p) {
+      case 'u':
+	quoted = g_shell_quote (inuri);
+	g_string_append (str, quoted);
+	g_free (quoted);
+	got_in = TRUE;
+	p++;
+	break;
+      case 'i':
+	localfile = gnome_vfs_get_local_path_from_uri (inuri);
+	if (localfile)
+	  {
+	    quoted = g_shell_quote (localfile);
+	    g_string_append (str, quoted);
+	    got_in = TRUE;
+	    g_free (quoted);
+	    g_free (localfile);
+	  }
+	p++;
+	break;
+      case 'o':
+	quoted = g_shell_quote (outfile);
+	g_string_append (str, quoted);
+	g_free (quoted);
+	p++;
+	break;
+      case 's':
+	g_string_append (str, "128");
+	p++;
+	break;
+      case '%':
+	g_string_append_c (str, '%');
+	p++;
+	break;
+      case 0:
+      default:
+	break;
+      }
+      last = p;
+    }
+  g_string_append (str, last);
+
+  if (got_in)
+    return g_string_free (str, FALSE);
+
+  g_string_free (str, TRUE);
+  return NULL;
+}
+
 
 GdkPixbuf *
 gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
@@ -534,8 +678,11 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 					    const char            *mime_type)
 {
   GdkPixbuf *pixbuf, *scaled;
+  char *script, *expanded_script;
   int width, height, size;
   double scale;
+  int exit_status;
+  char tmpname[50];
 
   /* Doesn't access any volatile fields in factory, so it's threadsafe */
   
@@ -543,14 +690,46 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
   if (factory->priv->size == GNOME_THUMBNAIL_SIZE_LARGE)
     size = 256;
 
+  pixbuf = NULL;
+  
+  script = g_hash_table_lookup (factory->priv->scripts_hash, mime_type);
+  if (script)
+    {
+      int fd;
 
+      strcpy (tmpname, "/tmp/.gnome_thumbnail.XXXXXX");
+
+      fd = mkstemp(tmpname);
+
+      if (fd)
+	{
+	  close (fd);
+
+	  expanded_script = expand_thumbnailing_script (script, uri, tmpname);
+	  if (expanded_script != NULL &&
+	      g_spawn_command_line_sync (expanded_script,
+					 NULL, NULL, &exit_status, NULL) &&
+	      exit_status == 0)
+	    {
+	      pixbuf = gdk_pixbuf_new_from_file (tmpname, NULL);
+	      g_free (expanded_script);
+	    }
+	  
+	  unlink(tmpname);
+	}
+    }
+
+  /* Fall back to gdk-pixbuf */
+  if (pixbuf == NULL)
+    {
 #ifdef HAVE_LIBJPEG
-  if (strcmp (mime_type, "image/jpeg") == 0)
-    pixbuf = _gnome_thumbnail_load_scaled_jpeg (uri, size, size);
-  else
+      if (strcmp (mime_type, "image/jpeg") == 0)
+	pixbuf = _gnome_thumbnail_load_scaled_jpeg (uri, size, size);
+      else
 #endif
-    pixbuf = gnome_thumbnail_load_pixbuf (uri);
-
+	pixbuf = gnome_thumbnail_load_pixbuf (uri);
+    }
+      
   if (pixbuf == NULL)
     return NULL;
 
@@ -636,7 +815,7 @@ make_thumbnail_fail_dirs (GnomeThumbnailFactory *factory)
   app_dir = g_build_filename (fail_dir,
 			      factory->priv->application,
 			      NULL);
-  if (!g_file_test (fail_dir, G_FILE_TEST_IS_DIR))
+  if (!g_file_test (app_dir, G_FILE_TEST_IS_DIR))
     {
       mkdir (app_dir, 0700);
       res = TRUE;
