@@ -43,6 +43,9 @@ static void
 gtk_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info);
 
 static struct poptOption gtk_options [] = {
+    { NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE,
+      &add_gtk_arg_callback, 0, NULL, NULL },
+
     { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL },
 
     { "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
@@ -133,15 +136,17 @@ typedef struct {
 static void
 gtk_pre_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
 {
-    struct poptOption *options = g_new0 (struct poptOption, 3);
+    struct poptOption *options, *ptr;
     gnome_gtk_init_info *init_info = g_new0 (gnome_gtk_init_info, 1);
+    guint count = 1;
 
-    options [0].argInfo = POPT_ARG_INCLUDE_TABLE;
-    options [0].arg = gtk_options;
+    for (ptr = gtk_options;
+	 (ptr->argInfo != POPT_ARG_NONE) || (ptr->descrip != NULL);
+	 ptr++)
+	count++;
 
-    options [1].argInfo = POPT_ARG_CALLBACK|POPT_CBFLAG_PRE;
-    options [1].arg = &add_gtk_arg_callback;
-    options [1].descrip = (const char *) init_info;
+    options = g_memdup (gtk_options, sizeof (struct poptOption) * count);
+    options->descrip = (const char *) init_info;
 
     init_info->gtk_args = g_ptr_array_new ();
 
@@ -157,7 +162,7 @@ gtk_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
 
     g_message (G_STRLOC);
 
-    init_info = (gnome_gtk_init_info *) mod_info->options [1].descrip;
+    init_info = (gnome_gtk_init_info *) mod_info->options [0].descrip;
 
     g_ptr_array_add (init_info->gtk_args, NULL);
 
