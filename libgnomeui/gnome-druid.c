@@ -175,7 +175,6 @@ gnome_druid_instance_init (GnomeDruid *druid)
 	GTK_WIDGET_SET_FLAGS (druid->back, GTK_CAN_DEFAULT);
 	druid->next = gtk_button_new_from_stock (GTK_STOCK_GO_FORWARD);
 	GTK_WIDGET_SET_FLAGS (druid->next, GTK_CAN_DEFAULT);
-	GTK_WIDGET_SET_FLAGS (druid->next, GTK_HAS_FOCUS);
 	druid->cancel = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
 	GTK_WIDGET_SET_FLAGS (druid->cancel, GTK_CAN_DEFAULT);
 	druid->finish = gtk_button_new_from_stock (GTK_STOCK_APPLY);
@@ -228,6 +227,8 @@ gnome_druid_instance_init (GnomeDruid *druid)
 			  G_CALLBACK (gnome_druid_next_callback), druid);
 	g_signal_connect (druid->help, "clicked",
 			  G_CALLBACK (gnome_druid_help_callback), druid);
+
+	gtk_widget_grab_focus (druid->next);
 }
 
 
