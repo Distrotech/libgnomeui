@@ -2530,7 +2530,7 @@ gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 static void
 scroll_to (GnomeCanvas *canvas, int cx, int cy)
 {
-	int scroll_maxx, scroll_maxy;
+	int scroll_width, scroll_height;
 	int right_limit, bottom_limit;
 	int old_zoom_xofs, old_zoom_yofs;
 	int changed, changed_x, changed_y;
@@ -2539,18 +2539,25 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 	canvas_width = GTK_WIDGET (canvas)->allocation.width;
 	canvas_height = GTK_WIDGET (canvas)->allocation.height;
 
-	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2, &scroll_maxx, &scroll_maxy);
+	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2,
+			  &scroll_width, &scroll_height);
 
-	right_limit = scroll_maxx - canvas_width;
-	bottom_limit = scroll_maxy - canvas_height;
+	/* The values computed indicate the maximum pixel offset, so we add one
+	 * to get the width and height.
+	 */
+	scroll_width++;
+	scroll_height++;
+
+	right_limit = scroll_width - canvas_width;
+	bottom_limit = scroll_height - canvas_height;
 
 	old_zoom_xofs = canvas->zoom_xofs;
 	old_zoom_yofs = canvas->zoom_yofs;
 
 	if (right_limit < 0) {
 		cx = 0;
-		canvas->zoom_xofs = (canvas_width - scroll_maxx) / 2;
-		scroll_maxx = canvas_width;
+		canvas->zoom_xofs = (canvas_width - scroll_width) / 2;
+		scroll_width = canvas_width;
 	} else if (cx < 0) {
 		cx = 0;
 		canvas->zoom_xofs = 0;
@@ -2562,8 +2569,8 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 
 	if (bottom_limit < 0) {
 		cy = 0;
-		canvas->zoom_yofs = (canvas_height - scroll_maxy) / 2;
-		scroll_maxy = canvas_height;
+		canvas->zoom_yofs = (canvas_height - scroll_height) / 2;
+		scroll_height = canvas_height;
 	} else if (cy < 0) {
 		cy = 0;
 		canvas->zoom_yofs = 0;
@@ -2583,9 +2590,9 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 	if (changed)
 		gtk_layout_freeze (GTK_LAYOUT (canvas));
 
-	if ((scroll_maxx != (int) canvas->layout.width)
-	    || (scroll_maxy != (int) canvas->layout.height))
-		gtk_layout_set_size (GTK_LAYOUT (canvas), scroll_maxx, scroll_maxy);
+	if ((scroll_width != (int) canvas->layout.width)
+	    || (scroll_height != (int) canvas->layout.height))
+		gtk_layout_set_size (GTK_LAYOUT (canvas), scroll_width, scroll_height);
 
 	if (changed_x) {
 		canvas->layout.hadjustment->value = cx;

@@ -1,3 +1,8 @@
+1999-09-18  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (scroll_to): Fixed little off-by-one error in
+	size computation.
+
 1999-09-17  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas.c (gnome_canvas_expose): Process exposures
