@@ -138,17 +138,38 @@ enum {
 };
 static int gnome_entry_signals[LAST_SIGNAL] = {0};
 
+static gboolean
+gnome_entry_mnemonic_activate (GtkWidget *widget,
+			       gboolean   group_cycling)
+{
+	gboolean handled;
+	GnomeEntry *entry;
+	
+	entry = GNOME_ENTRY (widget);
+
+	group_cycling = group_cycling != FALSE;
+
+	if (!GTK_WIDGET_IS_SENSITIVE (GTK_COMBO (entry)->entry))
+		handled = TRUE;
+	else
+		g_signal_emit_by_name (GTK_COMBO (entry)->entry, "mnemonic_activate", group_cycling, &handled);
+
+	return handled;
+}
+
 static void
 gnome_entry_class_init (GnomeEntryClass *class)
 {
 	GtkObjectClass *object_class;
+	GtkWidgetClass *widget_class;
 	GObjectClass *gobject_class;
 
 	parent_class = g_type_class_peek_parent (class);
 
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
-
+	widget_class = (GtkWidgetClass *) class;
+	
 	gnome_entry_signals[ACTIVATE_SIGNAL] =
 		g_signal_new("activate",
 			     G_TYPE_FROM_CLASS (gobject_class),
@@ -164,7 +185,8 @@ gnome_entry_class_init (GnomeEntryClass *class)
 	gobject_class->finalize = gnome_entry_finalize;
 	gobject_class->set_property = gnome_entry_set_property;
 	gobject_class->get_property = gnome_entry_get_property;
-
+	widget_class->mnemonic_activate = gnome_entry_mnemonic_activate;
+	
 	g_object_class_install_property (gobject_class,
 					 PROP_HISTORY_ID,
 					 g_param_spec_string ("history_id",

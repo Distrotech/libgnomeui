@@ -106,8 +106,8 @@ static void ientry_set_property		(GObject *object, guint param_id,
 					 const GValue *value, GParamSpec *pspec);
 static void ientry_get_property		(GObject *object, guint param_id,
 					 GValue *value, GParamSpec *pspec);
-
 static void ientry_browse               (GnomeIconEntry *ientry);
+static gboolean ientry_mnemonic_activate (GtkWidget *widget, gboolean group_cycling);
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
@@ -136,7 +136,8 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *)class;
 	GObjectClass *gobject_class = (GObjectClass *)class;
-
+	GtkWidgetClass *widget_class = (GtkWidgetClass *)class;
+	
 	gnome_ientry_signals[CHANGED_SIGNAL] =
 		g_signal_new("changed",
 			     G_TYPE_FROM_CLASS (gobject_class),
@@ -163,6 +164,8 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	gobject_class->set_property = ientry_set_property;
 	gobject_class->get_property = ientry_get_property;
 
+	widget_class->mnemonic_activate = ientry_mnemonic_activate;
+	
 	g_object_class_install_property (gobject_class,
 					 PROP_HISTORY_ID,
 					 g_param_spec_string (
@@ -641,6 +644,25 @@ delete_event_handler (GtkWidget   *widget,
 	
 	/* Don't destroy the dialog since we want to keep it around. */
 	return TRUE;
+}
+
+static gboolean
+ientry_mnemonic_activate (GtkWidget *widget,
+			  gboolean   group_cycling)
+{
+	gboolean handled;
+	GnomeIconEntry *entry;
+	
+	entry = GNOME_ICON_ENTRY (widget);
+
+	group_cycling = group_cycling != FALSE;
+
+	if (!GTK_WIDGET_IS_SENSITIVE (entry->_priv->pickbutton))
+		handled = TRUE;
+	else
+		g_signal_emit_by_name (entry->_priv->pickbutton, "mnemonic_activate", group_cycling, &handled);
+
+	return handled;
 }
 
 static void

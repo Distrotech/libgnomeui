@@ -153,22 +153,45 @@ enum {
 
 static int gnome_file_entry_signals[LAST_SIGNAL] = {0};
 
+static gboolean
+gnome_file_entry_mnemonic_activate (GtkWidget *widget,
+				   gboolean   group_cycling)
+{
+	gboolean handled;
+	GnomeFileEntry *entry;
+	
+	entry = GNOME_FILE_ENTRY (widget);
+
+	group_cycling = group_cycling != FALSE;
+
+	if (!GTK_WIDGET_IS_SENSITIVE (entry->_priv->gentry))
+		handled = TRUE;
+	else
+		g_signal_emit_by_name (entry->_priv->gentry, "mnemonic_activate", group_cycling, &handled);
+
+	return handled;
+}
+
 static void
 gnome_file_entry_class_init (GnomeFileEntryClass *class)
 {
 	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
-
+	GtkWidgetClass *widget_class;
+	
 	parent_class = g_type_class_peek_parent (class);
 
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
-
+	widget_class = (GtkWidgetClass *) class;
+	
 	object_class->destroy = gnome_file_entry_destroy;
 
 	gobject_class->finalize = gnome_file_entry_finalize;
 	gobject_class->set_property = fentry_set_property;
 	gobject_class->get_property = fentry_get_property;
+
+	widget_class->mnemonic_activate = gnome_file_entry_mnemonic_activate;
 	
 	gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL] =
 		g_signal_new("browse_clicked",

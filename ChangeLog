@@ -1,3 +1,17 @@
+2002-04-29  Anders Carlsson  <andersca@gnu.org>
+
+	* libgnomeui/gnome-dateedit.c: (gnome_date_edit_mnemonic_activate),
+	(gnome_date_edit_class_init):
+	* libgnomeui/gnome-entry.c: (gnome_entry_mnemonic_activate),
+	(gnome_entry_class_init):
+	* libgnomeui/gnome-file-entry.c:
+	(gnome_file_entry_mnemonic_activate),
+	(gnome_file_entry_class_init):
+	* libgnomeui/gnome-icon-entry.c: (gnome_icon_entry_class_init),
+	(delete_event_handler), (ientry_mnemonic_activate):
+	Connect to ::mnemonic_activate so that mnemonic activation will work
+	for the entries. Fixes #78941.
+	
 2002-04-29  Glynn Foster  <glynn.foster@sun.com>
 
 	* libgnomeui/gnome-app-helper.c: Change to use the HIG
@@ -27,6 +41,7 @@
 	* glade/glade-gnome.c: Fixed use of GladeWidgetInfo "class" field
 	name now that libglade no longer uses that reserved C++ keyword.
 	
+>>>>>>> 1.156
 2002-04-23  Jody Goldberg <jody@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c (browse_clicked) : suppress warning on

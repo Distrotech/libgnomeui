@@ -435,9 +435,29 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (gde->_priv->time_popup), menu);
 }
 
+static gboolean
+gnome_date_edit_mnemonic_activate (GtkWidget *widget,
+				   gboolean   group_cycling)
+{
+	gboolean handled;
+	GnomeDateEdit *gde;
+	
+	gde = GNOME_DATE_EDIT (widget);
+
+	group_cycling = group_cycling != FALSE;
+
+	if (!GTK_WIDGET_IS_SENSITIVE (gde->_priv->date_entry))
+		handled = TRUE;
+	else
+		g_signal_emit_by_name (gde->_priv->date_entry, "mnemonic_activate", group_cycling, &handled);
+
+	return handled;
+}
+
 static void
 gnome_date_edit_class_init (GnomeDateEditClass *class)
 {
+	GtkWidgetClass *widget_class = (GtkWidgetClass *) class;
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 	GObjectClass *gobject_class = (GObjectClass *) class;
 
@@ -449,6 +469,7 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 	gobject_class->get_property = gnome_date_edit_get_property;
 	gobject_class->set_property = gnome_date_edit_set_property;
 
+	widget_class->mnemonic_activate = gnome_date_edit_mnemonic_activate;
 	g_object_class_install_property (gobject_class,
 					 PROP_TIME,
 					 g_param_spec_ulong ("time",
