@@ -1,3 +1,13 @@
+1998-05-15  Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-icon-list.c (gnome_icon_list_button_press): pressing non-left mouse button
+	on a selected icon now calls toggle_icon() immediately and not upon button release.
+	* gnome-icon-list.c (toggle_icon): changed behavior so that only left mouse button
+	can SHIFT- or CTRL-select and that pressing a non-left button on a selected icon does
+	not unselect other selected icons. this seems more appropriate to me.
+	* gnome-icon-list.c: changed all initializations of last_selected member from -1 to 0.
+	This prevents segfaults when SHIFT-selecting before any icons have been selected.
+	
 Thu May 14 12:31:28 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-dialog.c (gnome_dialog_close): changed type of close_handled
