@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-15 23:38+0100\n"
-"PO-Revision-Date: 2004-02-18 09:04+0300\n"
+"POT-Creation-Date: 2004-02-18 09:01+0300\n"
+"PO-Revision-Date: 2004-03-18 07:41+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -139,6 +139,7 @@ msgstr "О программе \"%s\""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -196,6 +197,7 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Справка"
 
@@ -233,7 +235,7 @@ msgstr "Сохранить текущий файл под другим имен�
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
-msgstr "Восста_новить"
+msgstr "_Восстановить"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
@@ -379,18 +381,18 @@ msgstr "_Изменить настройки"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Настроить приложение"
+msgstr "Изменить настройки приложения"
 
 #. 20
 #.
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_О программе"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Получить информацию об этой программе"
 
@@ -417,7 +419,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "_Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -852,11 +854,11 @@ msgstr "Строка GTK"
 msgid "The GTK entry"
 msgstr "Строка GTK"
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "Идентификатор истории"
 
-#: libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:227
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -864,19 +866,19 @@ msgstr ""
 "Уникальный идентификатор для файловой строки. Он будет использован для "
 "сохранения истории."
 
-#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Заголовок диалога выбора файла"
 
-#: libgnomeui/gnome-file-entry.c:239
+#: libgnomeui/gnome-file-entry.c:236
 msgid "Title for the Browse file dialog."
 msgstr "Заголовок для диалога выбора файла."
 
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:243
 msgid "Directory Entry"
 msgstr "Строка каталога"
 
-#: libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:244
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -884,35 +886,35 @@ msgstr ""
 "Будет ли файловая строка использоваться для ввода названия каталога или "
 "полного имени файла."
 
-#: libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
 msgstr "Модальный"
 
-#: libgnomeui/gnome-file-entry.c:256
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Whether the Browse file window should be modal."
 msgstr "Должно ли окно выбора файла быть модальным."
 
-#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Имя файла"
 
-#: libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Filename that should be displayed in the file entry."
 msgstr "Имя файла, которое должно быть отображено в строке файла."
 
-#: libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:269
 msgid "Default Path"
 msgstr "Исходный путь"
 
-#: libgnomeui/gnome-file-entry.c:273
+#: libgnomeui/gnome-file-entry.c:270
 msgid "Default path for the Browse file window."
 msgstr "Исходный путь для окна выбора файла."
 
-#: libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:277
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:281
+#: libgnomeui/gnome-file-entry.c:278
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -922,11 +924,11 @@ msgstr ""
 "Можно использовать это свойство для получения строки GnomeEntry, если "
 "необходимо модифицировать или запросить любой из параметров."
 
-#: libgnomeui/gnome-file-entry.c:291
+#: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:292
+#: libgnomeui/gnome-file-entry.c:289
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -936,11 +938,11 @@ msgstr ""
 "Можно использовать это свойство для получения строки GtkEntry, если "
 "необходимо модифицировать или запросить любой из параметров."
 
-#: libgnomeui/gnome-file-entry.c:302
+#: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
 msgstr "Использовать GtkFileChooser"
 
-#: libgnomeui/gnome-file-entry.c:303
+#: libgnomeui/gnome-file-entry.c:300
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -948,23 +950,23 @@ msgstr ""
 "Следует ли использовать новый виджет GtkFileChooser или виджет "
 "GtkFileSelection для выбора файлов."
 
-#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
+#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
 msgstr "Выбрать файл"
 
-#: libgnomeui/gnome-file-entry.c:786
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path"
 msgstr "Путь"
 
-#: libgnomeui/gnome-file-entry.c:786
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path to file"
 msgstr "Путь к файлу"
 
-#: libgnomeui/gnome-file-entry.c:813
+#: libgnomeui/gnome-file-entry.c:775
 msgid "_Browse..."
 msgstr "П_росмотреть..."
 
-#: libgnomeui/gnome-file-entry.c:814
+#: libgnomeui/gnome-file-entry.c:776
 msgid "Pop up a file selector to choose a file"
 msgstr "Вызвать диалог для выбора файла"
 
@@ -1341,7 +1343,6 @@ msgstr "Библиотека пользовательского интерфей
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Возникли множественные ошибки сегментации; невозможно отобразить диалог об "
@@ -1349,7 +1350,6 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1406,8 +1406,9 @@ msgstr "_Сообщить разработчикам"
 msgid "_Debug"
 msgstr "_Отладить"
 
-#~ msgid "Exit the test"
-#~ msgstr "Выйти из теста"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Выйти из теста"
 
 #~ msgid "Color Selector"
 #~ msgstr "Выбор цвета"
