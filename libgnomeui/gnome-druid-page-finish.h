@@ -1,5 +1,6 @@
 /* gnome-druid-page-finish.h
  * Copyright (C) 1999  Red Hat, Inc.
+ * All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,6 +17,9 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+/*
+  @NOTATION@
+*/
 #ifndef __GNOME_DRUID_PAGE_FINISH_H__
 #define __GNOME_DRUID_PAGE_FINISH_H__
 

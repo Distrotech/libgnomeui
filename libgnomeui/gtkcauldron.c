@@ -1,5 +1,6 @@
 /* gtkcauldron.c - creates complex dialogs from a format string in a single line
  * Copyright (C) 1998 Paul Sheer
+ * All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,7 +17,9 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-
+/*
+  @NOTATION@
+*/
 #include "gtkcauldron.h"
 #define HAVE_GNOME
 #include <gtk/gtk.h>

@@ -1,5 +1,6 @@
 /* GNOME GUI Library
  * Copyright (C) 1998, 1999 the Free Software Foundation
+ * All rights reserved
  *
  * Authors: Cody Russell  (bratsche@dfw.net)
  *          Ettore Perazzoli (ettore@comm2000.it)
@@ -17,6 +18,9 @@
  * You should have received a copy of the GNU Library General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
+ */
+/*
+  @NOTATION@
  */
 
 #ifndef _GNOME_ANIMATOR_H

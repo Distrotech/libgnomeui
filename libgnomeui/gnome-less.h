@@ -1,8 +1,11 @@
 /* DEPRECATED */
-/* gnome-less.h: Copyright (C) 1998 Free Software Foundation
- *  A simple GtkText wrapper with a scroll bar, convenience functions,
- *   and a right-click popup menu. For displaying info to the user,
- *   like a license agreement for example. OK, bad example. :-)
+/* gnome-less.h:
+ * Copyright (C) 1998 Free Software Foundation
+ * All rights reserved.
+ *
+ * A simple GtkText wrapper with a scroll bar, convenience functions,
+ * and a right-click popup menu. For displaying info to the user,
+ * like a license agreement for example. OK, bad example. :-)
  * Written by: Havoc Pennington
  *
  * This library is free software; you can redistribute it and/or
@@ -19,6 +22,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+/*
+  @NOTATION@
+*/
 
 #ifndef GNOME_LESS_H
 #define GNOME_LESS_H

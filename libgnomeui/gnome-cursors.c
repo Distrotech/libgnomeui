@@ -2,6 +2,7 @@
 /* gnome-cursors.c - Stock GNOME cursors
    
    Copyright (C) 1999 Iain Holmes
+   All rights reserved.
    Contains code by Miguel de Icaza
    
    The Gnome Library is free software; you can redistribute it and/or
@@ -18,6 +19,9 @@
    License along with the Gnome Library; see the file COPYING.LIB.  If not,
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
+/*
+  @NOTATION@
+*/
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>

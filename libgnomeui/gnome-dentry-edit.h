@@ -1,4 +1,5 @@
 /* gnome-dentry-edit.h: Copyright (C) 1998 Free Software Foundation
+ * All rights reserved.
  *
  * Written by: Havoc Pennington, based on code by John Ellis.
  *
@@ -16,6 +17,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+/*
+  @NOTATION@
+*/
 
 /******************** NOTE: this is an object, not a widget.
  ********************       You must supply a GtkNotebook.

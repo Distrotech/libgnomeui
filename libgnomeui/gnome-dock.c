@@ -19,6 +19,9 @@
 
    Author: Ettore Perazzoli <ettore@comm2000.it>
 */
+/*
+  @NOTATION@
+*/
 
 #include <gtk/gtk.h>
 

@@ -1,6 +1,7 @@
 /* Popup menus for GNOME
  * 
  * Copyright (C) 1998 Jonathan Blandford
+ * All rights reserved.
  *
  * Authors: Jonathan Blandford <jrb@mit.edu>
  *
@@ -18,6 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+/*
+  @NOTATION@
+*/
 
 #ifndef GNOME_POPUP_HELP_H
 #define GNOME_POPUP_HELP_H

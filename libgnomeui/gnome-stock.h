@@ -1,6 +1,7 @@
 /*  -*- Mode: C; c-set-style: linux; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* Stock icons, buttons, and menu items.
    Copyright (C) 1997, 1998 Free Software Foundation
+   All rights reserved.
 
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -17,7 +18,11 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
 
-   Author: Eckehard Berns  */
+   Author: Eckehard Berns
+*/
+/*
+  @NOTATION@
+*/
 
 #ifndef __GNOME_STOCK_H__
 #define __GNOME_STOCK_H__

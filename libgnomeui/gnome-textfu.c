@@ -1,5 +1,6 @@
 /* gnome-textfu.c
  * Copyright (C) 2000 Red Hat, Inc.
+ * All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,6 +17,9 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+/*
+  @NOTATION@
+*/
 /* Written by Elliot Lee <sopwith@redhat.com>. This code is pretty aweful, but so is all my other code. */
 
 #include <gnome.h>

@@ -1,5 +1,6 @@
 /* gnome-druid.h
  * Copyright (C) 1999  Red Hat, Inc.
+ * All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,6 +17,10 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+/*
+  @NOTATION@
+*/
+/* TODO: allow setting bgcolor for all pages globally */
 #ifndef __GNOME_DRUID_H__
 #define __GNOME_DRUID_H__
 

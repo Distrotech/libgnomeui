@@ -1,6 +1,7 @@
 /* gnome-propertybox.h - Property dialog box.
 
    Copyright (C) 1998 Tom Tromey
+   All rights reserved.
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -16,6 +17,9 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
    02111-1307, USA.  */
+/*
+  @NOTATION@
+*/
 
 #ifndef __GNOME_PROPERTY_BOX_H__
 #define __GNOME_PROPERTY_BOX_H__

@@ -2,6 +2,7 @@
 /* gnome-mdi.h - definition of a Gnome MDI object
 
    Copyright (C) 1997, 1998, 1999 Free Software Foundation
+   All rights reserved.
 
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -19,6 +20,9 @@
    Boston, MA 02111-1307, USA.
 
    Author: Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
+*/
+/*
+  @NOTATION@
 */
 
 #ifndef __GNOME_MDI_H__

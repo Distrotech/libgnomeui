@@ -2,6 +2,7 @@
 /* WARNING ____ IMMATURE API ____ liable to change */
 
 /* gnome-guru.h: Copyright (C) 1998 Free Software Foundation
+ * All rights reserved.
  *  A wizard widget
  * Written by: Havoc Pennington, based on John Ellis's code.
  *
@@ -19,6 +20,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+/*
+  @NOTATION@
+*/
 
 #ifndef GNOME_GURU_H
 #define GNOME_GURU_H

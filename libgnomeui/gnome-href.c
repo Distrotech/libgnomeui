@@ -1,5 +1,6 @@
 /* gnome-href.c
  * Copyright (C) 1998, James Henstridge <james@daa.com.au>
+ * All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -15,6 +16,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+/*
+  @NOTATION@
+*/
 
 #include <string.h> /* for strlen */
 

@@ -2,6 +2,7 @@
 /* gnome-mdi.c - implementation of the GnomeMDI object
 
    Copyright (C) 1997, 1998 Free Software Foundation
+   All rights reserved.
 
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -22,6 +23,9 @@
 
    see gnome-libs/gnome-hello/gnome-hello-7-mdi.c or gnome-utils/ghex for an example
    of its use & gnome-mdi.h for a short explanation of the signals
+*/
+/*
+  @NOTATION@
 */
 
 #define GNOME_ENABLE_DEBUG

@@ -1,6 +1,7 @@
 /*  -*- Mode: C; c-set-style: linux; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* GNOME GUI Library - gnome-file-saver.c
- * Copyright (C) 2000  Red Hat Inc.,
+ * Copyright (C) 2000  Red Hat Inc.
+ * All rights reserved.
  *
  * Author: Havoc Pennington <hp@redhat.com>
  *
@@ -18,6 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+/*
+  @NOTATION@
+*/
 
 #include "gnome-file-saver.h"
 #include "gnome-gconf.h"

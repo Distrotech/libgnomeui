@@ -69,6 +69,7 @@ libgnomeui_1_0_compat_2_0_a_SOURCES =\
 	gnome-canvas-image.c		\
 	gnome-canvas-load.c		\
 	gnomeui10-compat.c		\
+	gnome-dns.c			\
 	gnome-druid-page-start.c	\
 	gnome-druid-page-finish.c
 
@@ -82,6 +83,7 @@ libgnomeui10compatinclude_HEADERS = \
 	gnome-canvas-image.h		\
 	gnome-canvas-load.h		\
 	gnomeui10-compat.h		\
+	gnome-dns.h			\
 	gnome-druid-page-start.h	\
 	gnome-druid-page-finish.h	\
 	gnome-icon-list.h		\
@@ -116,7 +118,6 @@ libgnomeui_2_0_la_SOURCES = \
 	gnome-ditem-edit.c		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
-	gnome-dns.c			\
 	gnome-dock.c			\
 	gnome-dock-band.c		\
 	gnome-dock-item.c		\
@@ -193,7 +194,6 @@ gnome_headers = \
 	gnome-ditem-edit.h		\
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
-	gnome-dns.h			\
 	gnome-dock.h			\
 	gnome-dock-band.h		\
 	gnome-dock-item.h		\

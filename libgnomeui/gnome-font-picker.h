@@ -1,7 +1,8 @@
 /* GNOME font picker button.
- (C) David Abilleira Freijeiro 1998 <odaf@nexo.es>
- Based on gnome-color-picker by Federico Mena <federico@nuclecu.unam.mx>
- 
+ * Copyright (C) 1998 David Abilleira Freijeiro <odaf@nexo.es>
+ * All rights reserved
+ * Based on gnome-color-picker by Federico Mena <federico@nuclecu.unam.mx>
+ * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either

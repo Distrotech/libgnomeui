@@ -2,6 +2,7 @@
 /* gnome-mdi-generic-child.h - definition of a generic MDI child class
 
    Copyright (C) 1997, 1998 Free Software Foundation
+   All rights reserved.
 
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -20,6 +21,9 @@
 
    Author: Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
    Interp modifications: James Henstridge <james@daa.com.au>
+*/
+/*
+  @NOTATION@
 */
 
 #ifndef __GNOME_MDI_GENERIC_CHILD_H__

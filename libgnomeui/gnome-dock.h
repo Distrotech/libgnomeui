@@ -4,6 +4,8 @@
 
    Copyright (C) 1998 Free Software Foundation
 
+   All rights reserved.
+
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
    published by the Free Software Foundation; either version 2 of the
@@ -20,6 +22,9 @@
    Boston, MA 02111-1307, USA.
 
    Author: Ettore Perazzoli <ettore@comm2000.it>
+*/
+/*
+  @NOTATION@
 */
 
 #ifndef _GNOME_DOCK_H

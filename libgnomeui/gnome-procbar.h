@@ -3,6 +3,7 @@
 /* gnome-procbar.h - Gnome Process Bar.
 
    Copyright (C) 1998 Martin Baulig
+   All rights reserved.
 
    Based on the orignal gtop/procbar.c from Radek Doulik.
 
@@ -20,6 +21,9 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
    02111-1307, USA.
+*/
+/*
+  @NOTATION@
 */
 
 #ifndef __GNOME_PROCBAR_H__

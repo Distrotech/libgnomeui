@@ -1,7 +1,7 @@
-
 /* gnome-client.c - GNOME session management client support
  *
  * Copyright (C) 1998, 1999 Carsten Schaar
+ * All rights reserved.
  *
  * Author: Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>
  *
@@ -19,6 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+/*
+  @NOTATION@
+*/
 
 #include <config.h>
 #include <stdlib.h>

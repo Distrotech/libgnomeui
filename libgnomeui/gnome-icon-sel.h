@@ -1,5 +1,8 @@
-/* gnome-icon-sel.h: Copyright (C) 1998 Free Software Foundation
- *  For selecting an icon.
+/* gnome-icon-sel.h:
+ * Copyright (C) 1998 Free Software Foundation
+ * All rights reserved.
+ *
+ * For selecting an icon.
  * Written by: Havoc Pennington, based on John Ellis's code.
  *
  * This library is free software; you can redistribute it and/or
@@ -16,6 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+/*
+  @NOTATION@
+*/
 
 #ifndef GNOME_ICON_SEL_H
 #define GNOME_ICON_SEL_H

@@ -1,6 +1,7 @@
 /*  -*- Mode: C; c-set-style: linux; indent-tabs-mode: nil; c-basic-offset: 8 -*-
 
-   Copyright (C) 1999 Red Hat, Inc.
+   Copyright (C) 1999, 2000 Red Hat, Inc.
+   All rights reserved.
     
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -18,6 +19,9 @@
    Boston, MA 02111-1307, USA.
 
    GnomePixmap Developers: Havoc Pennington, Jonathan Blandford
+*/
+/*
+  @NOTATION@
 */
 
 #ifndef GNOME_PIXMAP_H
