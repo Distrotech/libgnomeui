@@ -356,7 +356,7 @@ static GList *gnome_mdi_generic_child_create_menus(GnomeMDIGenericChild *child, 
 		GTK_VALUE_OBJECT(args[0]) = GTK_OBJECT(child);
 		args[1].name = NULL;
 		args[1].type = gtk_widget_get_type();
-		GTK_VALUE_OBJECT(args[0]) = GTK_OBJECT(view);
+		GTK_VALUE_OBJECT(args[1]) = GTK_OBJECT(view);
 		args[2].name = NULL;
 		args[2].type = GTK_TYPE_POINTER; /* should we have a boxed type? */
 		GTK_VALUE_POINTER(args[2]) = &ret;
