@@ -1,3 +1,8 @@
+2003-10-08  Mark McLoughlin  <markmc@sun.com>
+
+	* libgnomeui/libgnomeui-access.[ch]: re-license to LGPL.
+	It should never have been GPL ...
+
 2003-10-06  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "mr" to ALL_LINGUAS.
