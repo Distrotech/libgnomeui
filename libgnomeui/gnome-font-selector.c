@@ -386,6 +386,11 @@ gnome_font_selector_init(GtkWidget *widget)
     text_load_font (text_tool);
 }
 
+/**
+ * gnome_font_selector_new:
+ *
+ * Returns: a newly created font selector widget
+ */
 GtkWidget *
 gnome_font_selector_new(void)
 {
@@ -1249,6 +1254,14 @@ text_load_font (GnomeFontSelector *text_tool)
 }
 
 
+/**
+ * gnome_font_selector_get_selected:
+ * @text_tool: a font selector
+ *
+ * Returns the name of the font currently selected.  The value returned
+ * is allocated with g_malloc.  The font name is in the format expected
+ * by Gdk.
+ */
 gchar *
 gnome_font_selector_get_selected (GnomeFontSelector *text_tool)
 {
@@ -1299,7 +1312,15 @@ gnome_font_select_quit(GtkWidget *widget,
 		      widget);
 }
 
-gchar *gnome_font_select(void)
+/**
+ * gnome_font_select:
+ *
+ * Pops up a font selector and lets the user choose the font.
+ *
+ * Returns: A g_malloc()ed string with the X font name that was selected
+ */
+gchar *
+gnome_font_select(void)
 {
   GnomeFontSelector *font_sel;
   gchar *retval = NULL;
@@ -1334,6 +1355,14 @@ gchar *gnome_font_select(void)
   return retval;
 }
 
+/**
+ * gnome_font_select:
+ * @default_font: The font chosen by default.
+ *
+ * Pops up a font selector and lets the user choose the font.  
+ *
+ * Returns: A g_malloc()ed string with the X font name that was selected
+ */
 gchar *gnome_font_select_with_default(const gchar *default_font)
 {
   GnomeFontSelector *text_tool;
