@@ -78,6 +78,7 @@
       &libgnomeui-gnome-app-helper;
       &libgnomeui-gnome-window;
       &libgnomeui-GnomeAbout;
+      &libgnomeui-gnome-popup-menu;
     </sect1>
     <sect1>
       <title>Druids</title>
@@ -118,9 +119,17 @@
       &libgnomeui-GnomeMessageBox;
       &libgnomeui-GnomePixmap;
       &libgnomeui-GnomePixmapEntry;
-      &libgnomeui-gnome-popup-menu;
       &libgnomeui-GnomePropertyBox;
       &libgnomeui-GnomeScores;
+    </sect1>
+    <sect1>
+      <title>Miscellaneous utility functions and macros</title>
+      <para>
+      This section collects together a number of useful auxillary functions
+      that do not really fit into any other place in the hierarchy. These
+      include the standard constants for icons, some standard type macros,
+      function templates and functions for loading images.
+      </para>
       &libgnomeui-gnome-stock-icons;
       &libgnomeui-gnometypebuiltins;
       &libgnomeui-gnome-types;

@@ -2,7 +2,7 @@
 GnomeDruid
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Widget for sequentially stepping through some pages.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -16,7 +16,9 @@ GnomeDruid
 
 <!-- ##### STRUCT GnomeDruid ##### -->
 <para>
-
+The widget which ultimately holds all of the druid's pages and information.
+This is the widget which the application developer then places inside an outer
+widget, such as a dialog box for ultimate display.
 </para>
 
 

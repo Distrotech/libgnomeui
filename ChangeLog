@@ -1,3 +1,28 @@
+2002-06-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
+	* doc/reference/libgnomeui-docs.sgml:
+	  Make a miscellaneous section to aid the reading of said document.
+
+	* doc/reference/libgnomeui-sections.txt:
+	  Hide a few more functions.
+
+	* doc/reference/tmpl/gnome-druid-page-edge.sgml,
+	  doc/reference/tmpl/gnome-druid-page-standard.sgml,
+	  doc/reference/tmpl/gnome-druid-page.sgml,
+	  doc/reference/tmpl/gnome-druid.sgml,
+	  libgnomeui/gnome-druid-page-edge.c,
+	  libgnomeui/gnome-druid-page-edge.h,
+	  libgnomeui/gnome-druid-page-standard.c,
+	  libgnomeui/gnome-druid-page-standard.h,
+	  libgnomeui/gnome-druid-page.c,
+	  libgnomeui/gnome-druid.c:
+	  All the druid stuff should now make approximate sense.
+	  
+	* doc/reference/tmpl/gnome-href.sgml:
+	  I think gtk-doc just hates me and changes files at random sometimes.
+
+	* libgnomeui/gnome-druid-page-standard.h:
+	  Removed useless declaration of gnome_druid_page_standard_construct().
+
 2002-06-07  Anders Carlsson  <andersca@gnu.org>
 
 	* Release 2.0.0

@@ -2,12 +2,29 @@
 GnomeDruidPageStandard
 
 <!-- ##### SECTION Short_Description ##### -->
-
+A widget used to implement the middle pages in a druid's sequence.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+This widget provides similar functionality to that in #GnomeDruidPageEdge. It
+is used for pages that are not the initial or terminal pages of a druid.
 </para>
+
+<para>
+The main difference between an edge and a standard druid page (in a display
+sense) is that standard pages do not have a left-side watermark and the body of
+the contents section is a bit more arbitrary (it is a GTK+ vbox widget), rather
+than just displaying text (which is the common case for edge pages).
+</para>
+
+<note>
+  <para>
+  There are some differences in the programming API between #GnomeDruidEdgePage
+  and #GnomeDruidStandardPage in GNOME 2 because the latter has been heavily
+  redesigned internally, whereas the former has not been. Later versions of
+  GNOME (2.2 and beyond) may contain further refinements to edge pages).
+  </para>
+</note>
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
@@ -30,21 +47,24 @@ GnomeDruidPageStandard
 
 <!-- ##### MACRO gnome_druid_page_standard_set_bg_color ##### -->
 <para>
-
+This just calls gnome_druid_page_standard_set_background() and new code should
+use that function directly.
 </para>
 
 
 
 <!-- ##### MACRO gnome_druid_page_standard_set_logo_bg_color ##### -->
 <para>
-
+This just calls gnome_druid_page_standard_set_logo_background() and new code
+should use that function directly.
 </para>
 
 
 
 <!-- ##### MACRO gnome_druid_page_standard_set_title_color ##### -->
 <para>
-
+This just calls gnome_druid_page_standard_set_title_foregournd() and new code
+should use that function directly.
 </para>
 
 
@@ -66,17 +86,6 @@ GnomeDruidPageStandard
 @logo: 
 @top_watermark: 
 @Returns: 
-
-
-<!-- ##### FUNCTION gnome_druid_page_standard_construct ##### -->
-<para>
-
-</para>
-
-@druid_page_standard: 
-@title: 
-@logo: 
-@top_watermark: 
 
 
 <!-- ##### FUNCTION gnome_druid_page_standard_set_title ##### -->

@@ -729,19 +729,20 @@ gnome_druid_new (void)
 
 /**
  * gnome_druid_new_with_window:
- * @title: A title of the window
- * @parent: The parent of this window (transient_for)
- * @close_on_cancel: Close the window when cancel is pressed
- * @window: Optional return of the #GtkWindow created
+ * @title: A title of the window.
+ * @parent: The parent of this window (transient_for).
+ * @close_on_cancel: %TRUE if the window should be closed when cancel is
+ * pressed.
+ * @window: Optional return of the #GtkWindow created.
  *
- * Description: Creates a new #GnomeDruid widget.  It also creates a new
+ * Description: Creates a new #GnomeDruid widget. It also creates a new
  * toplevel window with the title of @title (which can be %NULL) and a parent
- * of @parent (which also can be %NULL).  The window and the druid will both be
+ * of @parent (which also can be %NULL). The window and the druid will both be
  * shown.  If you need the window widget pointer you can optionally get it
  * through the last argument.  When the druid gets destroyed, so will the
  * window that is created here.
  *
- * Returns:  A new #GnomeDruid widget
+ * Returns:  A new #GnomeDruid widget.
  **/
 GtkWidget *
 gnome_druid_new_with_window (const char *title,
@@ -771,19 +772,21 @@ gnome_druid_new_with_window (const char *title,
 
 /**
  * gnome_druid_construct_with_window:
- * @druid: The #GnomeDruid
- * @title: A title of the window
- * @parent: The parent of this window (transient_for)
- * @close_on_cancel: Close the window when cancel is pressed
- * @window: Optional return of the #GtkWindow created
+ * @druid: The #GnomeDruid.
+ * @title: A title of the window.
+ * @parent: The parent of this window (transient_for).
+ * @close_on_cancel: %TRUE if the window should be closed when cancel is
+ * pressed.
+ * @window: Optional return of the #GtkWindow created.
  *
  * Description: Creates a new toplevel window with the title of @title (which
  * can be %NULL) and a parent of @parent (which also can be %NULL).  The @druid
- * will be placed inside this window.  The window and the druid will both be
- * shown.  If you need the window widget pointer you can optionally get it
- * through the last argument.  When the druid gets destroyed, so will the
+ * will be placed inside this window. The window and the druid will both be
+ * shown. If you need the window widget pointer you can optionally get it
+ * through the last argument. When the druid gets destroyed, so will the
  * window that is created here.
- * See #gnome_druid_new_with_window.
+ *
+ * See also gnome_druid_new_with_window().
  **/
 void
 gnome_druid_construct_with_window (GnomeDruid *druid,
@@ -840,13 +843,13 @@ gnome_druid_construct_with_window (GnomeDruid *druid,
 /**
  * gnome_druid_set_buttons_sensitive
  * @druid: A Druid.
- * @back_sensitive: The sensitivity of the back button.
- * @next_sensitive: The sensitivity of the next button.
- * @cancel_sensitive: The sensitivity of the cancel button.
- * @help_sensitive: The sensitivity of the help button.
+ * @back_sensitive: %TRUE if the back button is sensitive.
+ * @next_sensitive: %TRUE if the next button is sensitive.
+ * @cancel_sensitive: %TRUE if the cancel button is sensitive.
+ * @help_sensitive: %TRUE if the help button is sensitive.
  *
- * Description: Sets the sensitivity of the @druid's control-buttons.  If the
- * variables are TRUE, then they will be clickable.  This function is used
+ * Description: Sets the sensitivity of @druid's control-buttons.  If the
+ * variables are %TRUE, then they will be clickable. This function is used
  * primarily by the actual GnomeDruidPage widgets.
  **/
 
@@ -869,10 +872,10 @@ gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 /**
  * gnome_druid_set_show_finish
  * @druid: A #GnomeDruid widget.
- * @show_finish: If %TRUE, then the "Cancel" button is changed to be "Finish"
+ * @show_finish: If %TRUE, then the "Next" button is changed to be "Finish"
  *
- * Sets the "Help" button on the druid to be visible in the lower left corner of
- * the widget, if @show_finish is %TRUE.
+ * Used to specify if @druid is currently showing the last page of the sequence
+ * (and hence should display "Finish", rather than "Next").
  **/
 void
 gnome_druid_set_show_finish (GnomeDruid *druid,
@@ -895,9 +898,11 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
 
 /**
  * gnome_druid_set_show_help
- * @druid: A #GnomeDruid
+ * @druid: A #GnomeDruid.
  * @show_help: %TRUE, if the "Help" button is to be shown, %FALSE otherwise.
  *
+ * Sets the "Help" button on the druid to be visible in the lower left corner of
+ * the widget, if @show_help is %TRUE.
  **/
 void
 gnome_druid_set_show_help (GnomeDruid *druid,
@@ -923,8 +928,8 @@ gnome_druid_set_show_help (GnomeDruid *druid,
  * @page: The page to be inserted.
  *
  * Description: This will prepend a GnomeDruidPage into the internal list of
- * pages that the @druid has.  Since #GnomeDruid is just a container, you will
- * need to also call #gtk_widget_show on the page, otherwise the page will not
+ * pages that the @druid has. Since #GnomeDruid is just a container, you will
+ * need to also call gtk_widget_show() on the page, otherwise the page will not
  * be shown.
  **/
 void
@@ -940,14 +945,14 @@ gnome_druid_prepend_page (GnomeDruid *druid,
 }
 /**
  * gnome_druid_insert_page:
- * @druid: A Druid widget.
+ * @druid: A #GnomeDruid widget.
  * @back_page: The page prior to the page to be inserted.
  * @page: The page to insert.
  *
  * Description: This will insert @page after @back_page into the list of
- * internal pages that the @druid has.  If @back_page is not present in the list
- * or %NULL, @page will be prepended to the list.  Since #GnomeDruid is just a
- * container, you will need to also call #gtk_widget_show on the page,
+ * internal pages that the @druid has.  If @back_page is not present in the
+ * list or %NULL, @page will be prepended to the list.  Since #GnomeDruid is
+ * just a container, you will need to also call gtk_widget_show() on the page,
  * otherwise the page will not be shown.
  **/
 void
@@ -992,12 +997,12 @@ gnome_druid_insert_page (GnomeDruid *druid,
 
 /**
  * gnome_druid_append_page:
- * @druid: A Druid widget.
+ * @druid: A #GnomeDruid widget.
  * @page: The #GnomeDruidPage to be appended.
  *
  * Description: This will append @page onto the end of the internal list.
  * Since #GnomeDruid is just a container, you will need to also call
- * #gtk_widget_show on the page, otherwise the page will not be shown.
+ * gtk_widget_show() on the page, otherwise the page will not be shown.
  **/
 void
 gnome_druid_append_page (GnomeDruid *druid,
@@ -1018,7 +1023,7 @@ gnome_druid_append_page (GnomeDruid *druid,
 }
 /**
  * gnome_druid_set_page:
- * @druid: A Druid widget.
+ * @druid: A #GnomeDruid widget.
  * @page: The #GnomeDruidPage to be brought to the foreground.
  *
  * Description: This will make @page the currently showing page in the druid.

@@ -260,13 +260,11 @@ GNOME_DIALOG_GET_CLASS
 <SECTION>
 <FILE>gnome-druid-page-edge</FILE>
 GnomeEdgePosition
-GnomeDruidPageEdgePrivate
 <TITLE>GnomeDruidPageEdge</TITLE>
 GnomeDruidPageEdge
 gnome_druid_page_edge_new
 gnome_druid_page_edge_new_aa
 gnome_druid_page_edge_new_with_vals
-gnome_druid_page_edge_construct
 gnome_druid_page_edge_set_bg_color
 gnome_druid_page_edge_set_textbox_color
 gnome_druid_page_edge_set_logo_bg_color
@@ -285,6 +283,10 @@ gnome_druid_page_edge_get_type
 GNOME_DRUID_PAGE_EDGE_CLASS
 GNOME_IS_DRUID_PAGE_EDGE_CLASS
 GNOME_DRUID_PAGE_EDGE_GET_CLASS
+
+<SUBSECTION Private>
+GnomeDruidPageEdgePrivate
+gnome_druid_page_edge_construct
 </SECTION>
 
 <SECTION>
@@ -296,7 +298,6 @@ gnome_druid_page_standard_set_logo_bg_color
 gnome_druid_page_standard_set_title_color
 gnome_druid_page_standard_new
 gnome_druid_page_standard_new_with_vals
-gnome_druid_page_standard_construct
 gnome_druid_page_standard_set_title
 gnome_druid_page_standard_set_logo
 gnome_druid_page_standard_set_top_watermark
@@ -316,12 +317,12 @@ GNOME_DRUID_PAGE_STANDARD_GET_CLASS
 
 <SUBSECTION Private>
 GnomeDruidPageStandardPrivate
+gnome_druid_page_standard_construct
 
 </SECTION>
 
 <SECTION>
 <FILE>gnome-druid-page</FILE>
-GnomeDruidPagePrivate
 <TITLE>GnomeDruidPage</TITLE>
 GnomeDruidPage
 gnome_druid_page_new
@@ -338,6 +339,9 @@ gnome_druid_page_get_type
 GNOME_DRUID_PAGE_CLASS
 GNOME_IS_DRUID_PAGE_CLASS
 GNOME_DRUID_PAGE_GET_CLASS
+
+<SUBSECTION Private>
+GnomeDruidPagePrivate
 </SECTION>
 
 <SECTION>

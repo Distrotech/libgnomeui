@@ -37,6 +37,20 @@ G_BEGIN_DECLS
 #define GNOME_IS_DRUID_PAGE_EDGE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE_EDGE))
 #define GNOME_DRUID_PAGE_EDGE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DRUID_PAGE_EDGE, GnomeDruidPageEdgeClass))
 
+/**
+ * GnomeEdgePosition:
+ * @GNOME_EDGE_START: The current page is at the beginning of the druid.
+ * @GNOME_EDGE_FINISH: The current page is at the end of the druid.
+ * @GNOME_EDGE_OTHER: The current page is neither the first nor the last page
+ * (usually not required).
+ * @GNOME_EDGE_LAST: Used internally to indicate the last value of the
+ * enumeration. This should not be passed in to any function expecting a
+ * #GnomeEdgePosition value.
+ *
+ * Used to pass around information about the position of a #GnomeDruidPage
+ * within the overall #GnomeDruid. This enables the correct "surrounding"
+ * content for the page to be drawn.
+ */
 typedef enum {
   /* update structure when adding enums */
 	GNOME_EDGE_START,
@@ -50,6 +64,25 @@ typedef struct _GnomeDruidPageEdge        GnomeDruidPageEdge;
 typedef struct _GnomeDruidPageEdgePrivate GnomeDruidPageEdgePrivate;
 typedef struct _GnomeDruidPageEdgeClass   GnomeDruidPageEdgeClass;
 
+/**
+ * GnomeDruidPageEdge:
+ * @title: The current title of the displayed page.
+ * @text: The current text of the displayed page.
+ * @logo_image: The logo of the displayed page.
+ * @watermark_image: The watermark on the left side of the displayed page.
+ * @top_watermark_image: The watermark on the top of the displayed page.
+ * @background_color: The color of the edge of the current page (outside the
+ * text area).
+ * @textbox_color: The color of the textbox area of the displayed page.
+ * @logo_background_color: The background color of the displayed page's logo.
+ * @title_color: The color of the title text.
+ * @text_color: The color of the body text.
+ * @position: The position of the current page within the druid (a
+ * #GnomeEdgePosition value).
+ *
+ * A widget holding information about the overall look of the currently
+ * displaying druid page.
+ */
 struct _GnomeDruidPageEdge
 {
 	GnomeDruidPage parent;

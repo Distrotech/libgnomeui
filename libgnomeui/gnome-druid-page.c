@@ -292,7 +292,8 @@ gnome_druid_page_next     (GnomeDruidPage *druid_page)
  * @druid_page: A DruidPage widget.
  *
  * Description: This emits the "prepare" signal for the page.  It is called by
- * gnome-druid exclusively.
+ * gnome-druid exclusively. This function is called immediately prior to a druid
+ * page being shown so that it can "prepare" for display.
  **/
 void
 gnome_druid_page_prepare  (GnomeDruidPage *druid_page)

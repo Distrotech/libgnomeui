@@ -481,6 +481,13 @@ gnome_druid_page_standard_prepare (GnomeDruidPage *page,
 		gtk_widget_grab_default (GNOME_DRUID (druid)->next);
 }
 
+/**
+ * gnome_druid_page_standard_new
+ *
+ * Construct a new #GnomeDruidPageStandard.
+ *
+ * Returns: A new #GnomeDruidPageStandard as a #GtkWidget pointer.
+ */
 GtkWidget *
 gnome_druid_page_standard_new (void)
 {
@@ -491,6 +498,17 @@ gnome_druid_page_standard_new (void)
 	return GTK_WIDGET (retval);
 }
 
+/**
+ * gnome_druid_page_standard_new_with_vals:
+ * @title: The title of the druid page.
+ * @logo: The logo to put on the druid page.
+ * @top_watermark: The watermark to put at the top of the druid page.
+ *
+ * Like gnome_druid_page_standard_new(), but allows the caller to fill in some
+ * of the values at the same time.
+ *
+ * Returns: A new #GnomeDruidPageStandard as a #GtkWidget pointer.
+ */
 GtkWidget *
 gnome_druid_page_standard_new_with_vals (const gchar *title,
 					 GdkPixbuf   *logo,
@@ -510,10 +528,10 @@ gnome_druid_page_standard_new_with_vals (const gchar *title,
 
 /**
  * gnome_druid_page_standard_set_title:
- * @druid_page_standard: the #GnomeDruidPageStandard to work on
- * @title: the string to use as the new title text
+ * @druid_page_standard: A #GnomeDruidPageStandard instance.
+ * @title: The string to use as the new title text.
  *
- * Description:  Sets the title #GtkLabel to display the passed string.
+ * Description:  Sets the title to the value of @title.
  **/
 void
 gnome_druid_page_standard_set_title (GnomeDruidPageStandard *druid_page_standard,
@@ -536,8 +554,8 @@ gnome_druid_page_standard_set_title (GnomeDruidPageStandard *druid_page_standard
 
 /**
  * gnome_druid_page_standard_set_logo:
- * @druid_page_standard: the #GnomeDruidPageStandard to work on
- * @logo_image: The #GdkPixbuf to use as a logo
+ * @druid_page_standard: A #GnomeDruidPageStandard instance.
+ * @logo_image: The #GdkPixbuf to use as a logo.
  *
  * Description:  Sets a #GdkPixbuf as the logo in the top right corner.
  * If %NULL, then no logo will be displayed.
@@ -562,8 +580,8 @@ gnome_druid_page_standard_set_logo (GnomeDruidPageStandard *druid_page_standard,
 
 /**
  * gnome_druid_page_standard_set_top_watermark:
- * @druid_page_standard: the #GnomeDruidPageStandard to work on
- * @top_watermark_image: The #GdkPixbuf to use as a top watermark
+ * @druid_page_standard: A #GnomeDruidPageStandard instance.
+ * @top_watermark_image: The #GdkPixbuf to use as a top watermark.
  *
  * Description:  Sets a #GdkPixbuf as the watermark on top of the top
  * strip on the druid.  If #top_watermark_image is %NULL, it is reset
@@ -586,6 +604,13 @@ gnome_druid_page_standard_set_top_watermark (GnomeDruidPageStandard *druid_page_
 	g_object_notify (G_OBJECT (druid_page_standard), "top_watermark");
 }
 
+/**
+ * gnome_druid_page_standard_set_title_foreground:
+ * @druid_page_standard: A #GnomeDruidPageStandard instance.
+ * @color: The new color of the title text.
+ *
+ * Sets the title text to the specified color.
+ */
 void
 gnome_druid_page_standard_set_title_foreground (GnomeDruidPageStandard *druid_page_standard,
 						GdkColor               *color)
@@ -604,6 +629,13 @@ gnome_druid_page_standard_set_title_foreground (GnomeDruidPageStandard *druid_pa
 	}
 }
 
+/**
+ * gnome_druid_page_standard_set_background:
+ * @druid_page_standard: A #GnomeDruidPageStandard instance.
+ * @color: The new background color.
+ *
+ * Sets the background color of the top section of the druid page to @color.
+ */
 void
 gnome_druid_page_standard_set_background (GnomeDruidPageStandard *druid_page_standard,
 					  GdkColor               *color)
@@ -621,6 +653,13 @@ gnome_druid_page_standard_set_background (GnomeDruidPageStandard *druid_page_sta
 	}
 }
 
+/**
+ * gnome_druid_page_standard_set_logo_background:
+ * @druid_page_standard: A #GnomeDruidPageStandard instance.
+ * @color: The new color for the logo background.
+ *
+ * Sets the background of the logo to @color.
+ */
 void
 gnome_druid_page_standard_set_logo_background (GnomeDruidPageStandard *druid_page_standard,
 					       GdkColor               *color)
@@ -639,6 +678,13 @@ gnome_druid_page_standard_set_logo_background (GnomeDruidPageStandard *druid_pag
 }
 
 
+/**
+ * gnome_druid_page_standard_set_contents_background:
+ * @druid_page_standard: A #GnomeDruidPageStandard instance.
+ * @color: The new color for the main body's background.
+ *
+ * Sets the color of the main contents section's background to @color.
+ */
 void
 gnome_druid_page_standard_set_contents_background (GnomeDruidPageStandard *druid_page_standard,
 					       GdkColor               *color)
@@ -660,14 +706,19 @@ gnome_druid_page_standard_set_contents_background (GnomeDruidPageStandard *druid
 
 /**
  * gnome_druid_page_standard_append_item:
- * @druid_page_standard: The #GnomeDruidPageStandard to work on
- * @question: The text to place above the item
- * @item: The #GtkWidget to be included
+ * @druid_page_standard: A #GnomeDruidPageStandard instance.
+ * @question: The text to place above the item.
+ * @item: The #GtkWidget to be included.
  * @additional_info: The text to be placed below the item in a smaller
- * font
+ * font.
  *
  * Description: Convenience function to add a #GtkWidget to the
- * #GnomeDruidPageStandard vbox.  WRITEME
+ * #GnomeDruidPageStandard vbox. This function creates a new contents section
+ * that has the @question text followed by the @item widget and then the
+ * @addition_info text, all stacked vertically from top to bottom. 
+ *
+ * The @item widget could be something like a set of radio checkbuttons
+ * requesting a choice from the user.
  **/
 void
 gnome_druid_page_standard_append_item (GnomeDruidPageStandard *druid_page_standard,

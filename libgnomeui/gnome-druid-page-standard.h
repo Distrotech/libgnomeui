@@ -41,6 +41,20 @@ typedef struct _GnomeDruidPageStandard        GnomeDruidPageStandard;
 typedef struct _GnomeDruidPageStandardPrivate GnomeDruidPageStandardPrivate;
 typedef struct _GnomeDruidPageStandardClass   GnomeDruidPageStandardClass;
 
+/**
+ * GnomeDruidPageStandard
+ * @vbox: A packing widget that holds the contents of the page.
+ * @title: The title of the displayed page.
+ * @logo: The logo of the displayed page.
+ * @top_watermark: The watermark at the top of the displated page.
+ * @title_foreground: The color of the title text.
+ * @background: The color of the background of the top section and title.
+ * @logo_background: The background color of the logo.
+ * @contents_background: The background color of the contents section.
+ *
+ * A widget representing pages that are not initial or terminal pages of a
+ * druid.
+ */
 struct _GnomeDruidPageStandard
 {
 	GnomeDruidPage parent;
@@ -80,10 +94,6 @@ GType      gnome_druid_page_standard_get_type                (void) G_GNUC_CONST
 GtkWidget *gnome_druid_page_standard_new                     (void);
 GtkWidget *gnome_druid_page_standard_new_with_vals           (const gchar            *title,
 							      GdkPixbuf              *logo,
-							      GdkPixbuf              *top_watermark);
-void       gnome_druid_page_standard_construct               (GnomeDruidPageStandard *druid_page_standard,
-							      const gchar	    *title,
-							      GdkPixbuf		    *logo,
 							      GdkPixbuf              *top_watermark);
 
 void       gnome_druid_page_standard_set_title               (GnomeDruidPageStandard *druid_page_standard,

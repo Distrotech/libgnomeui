@@ -188,16 +188,17 @@ gnome_druid_page_edge_instance_init (GnomeDruidPageEdge *page)
 
 /**
  * gnome_druid_page_edge_construct:
- * @druid_page_edge:
- * @position:
- * @antialiased:
- * @title:
- * @text:
- * @logo:
- * @watermark:
- * @top_watermark:
+ * @druid_page_edge: A #GnomeDruidPageEdge instance.
+ * @position: The position of @druid_page_edge within the druid.
+ * @antialiased: Unused in the current implementation. Set to %FALSE.
+ * @title: The title of the page.
+ * @text: The text in the body of the page.
+ * @logo: The logo on the page.
+ * @watermark: The watermark on the side of the page.
+ * @top_watermark: The watermark on the top of the page.
  *
- * Description:  Useful for subclassing and binding only
+ * Description: Useful for subclassing and language bindings, this function
+ * fills the given pieces of information into the existing @druid_page_edge.
  **/
 void
 gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge,
@@ -320,7 +321,7 @@ gnome_druid_page_edge_prepare (GnomeDruidPage *page,
 
 /**
  * gnome_druid_page_edge_new:
- * @position: Position in druid
+ * @position: Position in druid.
  *
  * Description: Creates a new GnomeDruidPageEdge widget.
  *
@@ -351,7 +352,7 @@ gnome_druid_page_edge_new (GnomeEdgePosition position)
 
 /**
  * gnome_druid_page_edge_new_aa:
- * @position: Position in druid
+ * @position: Position in druid.
  *
  * Description: Creates a new GnomeDruidPageEdge widget.  The
  * internal canvas is created in an antialiased mode.
@@ -383,7 +384,7 @@ gnome_druid_page_edge_new_aa (GnomeEdgePosition position)
 
 /**
  * gnome_druid_page_edge_new_with_vals:
- * @position: Position in druid
+ * @position: Position in druid.
  * @antialiased: Use an antialiased canvas
  * @title: The title.
  * @text: The introduction text.
@@ -391,10 +392,9 @@ gnome_druid_page_edge_new_aa (GnomeEdgePosition position)
  * @watermark: The watermark on the left.
  * @top_watermark: The watermark on the left.
  *
- * Description: This will create a new GNOME Druid Edge page, with the values
- * given.  It is acceptable for any of them to be %NULL.
- * Position should be %GNOME_EDGE_START, %GNOME_EDGE_FINISH
- * or %GNOME_EDGE_OTHER.
+ * This will create a new GNOME Druid Edge page, with the values given.  It is
+ * acceptable for any of them to be %NULL.  Position should be
+ * %GNOME_EDGE_START, %GNOME_EDGE_FINISH or %GNOME_EDGE_OTHER.
  *
  * Returns: #GtkWidget pointer to a new #GnomeDruidPageEdge.
  **/
@@ -427,7 +427,7 @@ gnome_druid_page_edge_new_with_vals (GnomeEdgePosition position,
 
 /**
  * gnome_druid_page_edge_set_bg_color:
- * @druid_page_edge: A DruidPageEdge.
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
  * @color: The new background color.
  *
  * Description:  This will set the background color to be the @color.  You do
@@ -446,6 +446,13 @@ gnome_druid_page_edge_set_bg_color      (GnomeDruidPageEdge *druid_page_edge,
 	gtk_widget_modify_bg (druid_page_edge->_priv->background, GTK_STATE_NORMAL, color);
 }
 
+/**
+ * gnome_druid_page_edge_set_textbox_color
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
+ * @color: The new textbox color.
+ *
+ * Sets the color of the background in the main text area of the page.
+ */
 void
 gnome_druid_page_edge_set_textbox_color (GnomeDruidPageEdge *druid_page_edge,
 					 GdkColor *color)
@@ -459,6 +466,13 @@ gnome_druid_page_edge_set_textbox_color (GnomeDruidPageEdge *druid_page_edge,
 	gtk_widget_modify_bg (druid_page_edge->_priv->contents, GTK_STATE_NORMAL, color);
 }
 
+/**
+ * gnome_druid_page_edge_set_logo_bg_color
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
+ * @color: The new color of the logo's background.
+ *
+ * Set the color behind the druid page's logo.
+ */
 void
 gnome_druid_page_edge_set_logo_bg_color (GnomeDruidPageEdge *druid_page_edge,
 					 GdkColor *color)
@@ -472,6 +486,13 @@ gnome_druid_page_edge_set_logo_bg_color (GnomeDruidPageEdge *druid_page_edge,
 	gtk_widget_modify_bg (druid_page_edge->_priv->logo, GTK_STATE_NORMAL, color);
 }
 
+/**
+ * gnome_druid_page_edge_set_title_color
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
+ * @color: The color of the title text.
+ *
+ * Sets the color of the title text on the current page.
+ */
 void
 gnome_druid_page_edge_set_title_color   (GnomeDruidPageEdge *druid_page_edge,
 					 GdkColor *color)
@@ -485,6 +506,13 @@ gnome_druid_page_edge_set_title_color   (GnomeDruidPageEdge *druid_page_edge,
 	gtk_widget_modify_fg (druid_page_edge->_priv->title_label, GTK_STATE_NORMAL, color);
 }
 
+/**
+ * gnome_druid_page_edge_set_text_color
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
+ * @color: The new test color.
+ *
+ * Sets the color of the text in the body of the druid page.
+ */
 void
 gnome_druid_page_edge_set_text_color    (GnomeDruidPageEdge *druid_page_edge,
 					 GdkColor *color)
@@ -498,6 +526,13 @@ gnome_druid_page_edge_set_text_color    (GnomeDruidPageEdge *druid_page_edge,
 	gtk_widget_modify_fg (druid_page_edge->_priv->text_label, GTK_STATE_NORMAL, color);
 }
 
+/**
+ * gnome_druid_page_edge_set_text
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
+ * @text: The text contents.
+ *
+ * Sets the contents of the text portion of the druid page.
+ */
 void
 gnome_druid_page_edge_set_text (GnomeDruidPageEdge *druid_page_edge,
 				const gchar *text)
@@ -509,6 +544,13 @@ gnome_druid_page_edge_set_text (GnomeDruidPageEdge *druid_page_edge,
 	gtk_label_set_text (GTK_LABEL (druid_page_edge->_priv->text_label), text);
 }
 
+/**
+ * gnome_druid_page_edge_set_title
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
+ * @title: The title text
+ *
+ * Sets the contents of the page's title text.
+ */
 void
 gnome_druid_page_edge_set_title         (GnomeDruidPageEdge *druid_page_edge,
 					 const gchar *title)
@@ -525,8 +567,8 @@ gnome_druid_page_edge_set_title         (GnomeDruidPageEdge *druid_page_edge,
 
 /**
  * gnome_druid_page_edge_set_logo:
- * @druid_page_edge: the #GnomeDruidPageEdge to work on
- * @logo_image: The #GdkPixbuf to use as a logo
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
+ * @logo_image: The #GdkPixbuf to use as a logo.
  *
  * Description:  Sets a #GdkPixbuf as the logo in the top right corner.
  * If %NULL, then no logo will be displayed.
@@ -548,12 +590,11 @@ gnome_druid_page_edge_set_logo (GnomeDruidPageEdge *druid_page_edge,
 
 /**
  * gnome_druid_page_edge_set_watermark:
- * @druid_page_edge: the #GnomeDruidPageEdge to work on
- * @watermark: The #GdkPixbuf to use as a watermark
+ * @druid_page_edge: A @GnomeDruidPageEdge instance.
+ * @watermark: The #GdkPixbuf to use as a watermark.
  *
- * Description:  Sets a #GdkPixbuf as the watermark on the left
- * strip on the druid.  If #top_watermark_image is %NULL, it is reset
- * to the normal color.
+ * Description: Sets a #GdkPixbuf as the watermark on the left strip on the
+ * druid. If @watermark is %NULL, it is reset to the normal color.
  **/
 void
 gnome_druid_page_edge_set_watermark (GnomeDruidPageEdge *druid_page_edge,
@@ -583,7 +624,7 @@ gnome_druid_page_edge_set_watermark (GnomeDruidPageEdge *druid_page_edge,
  * @top_watermark_image: The #GdkPixbuf to use as a top watermark
  *
  * Description:  Sets a #GdkPixbuf as the watermark on top of the top
- * strip on the druid.  If #top_watermark_image is %NULL, it is reset
+ * strip on the druid.  If @top_watermark_image is %NULL, it is reset
  * to the normal color.
  **/
 void

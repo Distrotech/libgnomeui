@@ -2,10 +2,15 @@
 GnomeDruidPage
 
 <!-- ##### SECTION Short_Description ##### -->
-
+A widget representing a single page inside a druid.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
+The functions in this page are mostly only for the information of developers --
+they should never needt o call them directly. Typically, a druid will connect
+to the various signals described here as a way of controlling the behaviour of
+druids that do not just proceed in a front-to-back fashion (for example, where
+the subsequent pages depend upon the choice made at some point).
 
 </para>
 
@@ -14,15 +19,9 @@ GnomeDruidPage
 
 </para>
 
-<!-- ##### STRUCT GnomeDruidPagePrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### STRUCT GnomeDruidPage ##### -->
 <para>
-
+The widget for a aprticular page in a druid.
 </para>
 
 
@@ -83,8 +82,9 @@ GnomeDruidPage
 </para>
 
 @druidpage: the object which received the signal.
-@widget: 
-@Returns: 
+@widget: The #GnomeDruid containg this page.
+@Returns: %TRUE if the signal handler has changed the page (since this stops
+all further emission of the signal), %FALSE otherwise.
 
 <!-- ##### SIGNAL GnomeDruidPage::cancel ##### -->
 <para>
@@ -92,8 +92,9 @@ GnomeDruidPage
 </para>
 
 @druidpage: the object which received the signal.
-@widget: 
-@Returns: 
+@widget: The #GnomeDruid containg this page.
+@Returns: %TRUE if the druid does not want to exit yet, %FALSE if the exit
+should continue.
 
 <!-- ##### SIGNAL GnomeDruidPage::finish ##### -->
 <para>
@@ -101,7 +102,7 @@ GnomeDruidPage
 </para>
 
 @druidpage: the object which received the signal.
-@widget: 
+@widget: The #GnomeDruid containg this page.
 
 <!-- ##### SIGNAL GnomeDruidPage::next ##### -->
 <para>
@@ -109,8 +110,9 @@ GnomeDruidPage
 </para>
 
 @druidpage: the object which received the signal.
-@widget: 
-@Returns: 
+@widget: The #GnomeDruid containg this page.
+@Returns: %TRUE if the signal handler has changed the page (since this stops
+all further emission of the signal), %FALSE otherwise.
 
 <!-- ##### SIGNAL GnomeDruidPage::prepare ##### -->
 <para>
@@ -118,5 +120,5 @@ GnomeDruidPage
 </para>
 
 @druidpage: the object which received the signal.
-@widget: 
+@widget: The #GnomeDruid containg this page.
 

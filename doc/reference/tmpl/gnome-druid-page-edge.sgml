@@ -2,11 +2,19 @@
 GnomeDruidPageEdge
 
 <!-- ##### SECTION Short_Description ##### -->
-
+A widget used to implement first and last pages in a druid's sequence.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+A druid can be thought of as having a page that starts the sequence, one or
+more pages that end the sequences (there can be multiple end pages if the flow
+of pages diverges at some point) and some pages that are in between the start
+and end pages. 
+</para>
+<para>
+The #GnomeDruidPageEdge widget is for the first and last pages in a druid's
+sequence of pages. Pages in the "middle" of a sequence should use
+#GnomeDruidPageStandard.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -23,12 +31,6 @@ GnomeDruidPageEdge
 @GNOME_EDGE_FINISH: 
 @GNOME_EDGE_OTHER: 
 @GNOME_EDGE_LAST: 
-
-<!-- ##### STRUCT GnomeDruidPageEdgePrivate ##### -->
-<para>
-
-</para>
-
 
 <!-- ##### STRUCT GnomeDruidPageEdge ##### -->
 <para>
@@ -78,23 +80,6 @@ GnomeDruidPageEdge
 @watermark: 
 @top_watermark: 
 @Returns: 
-
-
-<!-- ##### FUNCTION gnome_druid_page_edge_construct ##### -->
-<para>
-
-</para>
-
-@druid_page_edge: 
-@position: 
-@antialiased: 
-@title: 
-@text: 
-@logo: 
-@watermark: 
-@top_watermark: 
-<!-- # Unused Parameters # -->
-@antialiaed: 
 
 
 <!-- ##### FUNCTION gnome_druid_page_edge_set_bg_color ##### -->
