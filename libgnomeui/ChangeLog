@@ -1,5 +1,11 @@
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
+	* gnome-rexec-server.oafinfo: Removed.
+
+	* gnome-remote-bootstrap.c: Removed.
+
+2001-08-11  Martin Baulig  <baulig@suse.de>
+
 	* wap-textfu.[ch]: Removed.
 
 	* gnome-ditem-edit.[ch]: Removed.
