@@ -39,6 +39,7 @@
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-selector.h>
 #include "gnome-macros.h"
 #include "gnome-entry.h"
 
@@ -69,10 +70,10 @@ static void   entry_activated_cb       (GtkWidget       *widget,
 
 static GnomeSelectorClientClass *parent_class;
 
-guint
+GType
 gnome_entry_get_type (void)
 {
-	static guint entry_type = 0;
+	static GType entry_type = 0;
 
 	if (!entry_type) {
 		GtkTypeInfo entry_info = {
@@ -140,6 +141,7 @@ GtkWidget *
 gnome_entry_new (const gchar *history_id)
 {
 	GnomeSelector *selector;
+	BonoboEventSource *event_source;
 	GnomeEntry *gentry;
 	GtkWidget *entry_widget;
 
@@ -165,8 +167,12 @@ gnome_entry_new (const gchar *history_id)
 
 	gentry->_priv->control = bonobo_control_new (entry_widget);
 
+	event_source = bonobo_event_source_new ();
+
+	gnome_selector_construct (selector, event_source);
+
 	gnome_selector_bind_to_control (selector,
-					BONOBO_OBJREF (gentry->_priv->control));
+					BONOBO_OBJECT (gentry->_priv->control));
 
 	g_signal_connect_data (selector, "get_entry_text",
 			       G_CALLBACK (get_entry_text_handler),

@@ -1,5 +1,9 @@
 2001-05-08  Martin Baulig  <baulig@suse.de>
 
+	* gnome-entry.[ch]: Reflect latest GnomeSelector API changes.
+
+2001-05-08  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector-client.h (gnome_selector_client_set_uri):
 	Added `GDestroyNotify destroy_fn' argument.
 
