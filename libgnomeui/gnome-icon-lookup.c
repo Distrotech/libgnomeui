@@ -134,6 +134,32 @@ make_mime_name (const char *mime_type)
   return icon_name;
 }
 
+static char *
+make_generic_mime_name (const char *mime_type)
+{
+  char *generic_mime_type, *icon_name;
+  char *p;
+
+  
+  if (mime_type == NULL) {
+    return NULL;
+  }
+
+  generic_mime_type = g_strdup (mime_type);
+  
+  icon_name = NULL;
+  if ((p = strchr(generic_mime_type, '/')) != NULL)
+    {
+      *p = 0;
+  
+      icon_name = g_strconcat (ICON_NAME_MIME_PREFIX, generic_mime_type, NULL);
+    }
+  g_free (generic_mime_type);
+  
+  return icon_name;
+}
+
+
 static gboolean
 mimetype_supported_by_gdk_pixbuf (const char *mime_type)
 {
@@ -217,13 +243,16 @@ gnome_icon_lookup (GnomeIconLoader            *icon_loader,
   if (mime_type)
     {
       mime_name = get_vfs_mime_name (mime_type);
-      
       if (mime_name && gnome_icon_loader_has_icon (icon_loader, mime_name))
 	return mime_name;
       g_free (mime_name);
       
       mime_name = make_mime_name (mime_type);
+      if (mime_name && gnome_icon_loader_has_icon (icon_loader, mime_name))
+	return mime_name;
+      g_free (mime_name);
       
+      mime_name = make_generic_mime_name (mime_type);
       if (mime_name && gnome_icon_loader_has_icon (icon_loader, mime_name))
 	return mime_name;
       g_free (mime_name);
