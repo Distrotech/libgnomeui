@@ -168,7 +168,6 @@ gnome_dialog_init (GnomeDialog *dialog)
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  dialog->modal = FALSE;
   dialog->just_hide = FALSE;
   dialog->click_closes = FALSE;
   dialog->buttons = NULL;
@@ -394,10 +393,9 @@ gnome_dialog_set_modal (GnomeDialog * dialog)
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  dialog->modal = TRUE;
+  g_warning("Please use gtk_window_set_modal() instead of gnome_dialog's.");
 
-  /* This is needed if someone shows before calling the function. */
-  if (GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog))) gtk_grab_add(GTK_WIDGET(dialog));
+  gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
 }
 
 struct GnomeDialogRunInfo {
@@ -450,7 +448,7 @@ gnome_dialog_run_modal(GnomeDialog *dialog)
   g_return_val_if_fail(dialog != NULL, -1);
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
-  gnome_dialog_set_modal(dialog);
+  gtk_window_set_modal(dialog);
   return gnome_dialog_run(dialog);
 }
 
@@ -464,8 +462,8 @@ gnome_dialog_run(GnomeDialog *dialog)
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
   was_only_hidden = dialog->just_hide || !dialog->click_closes;
-  was_modal = dialog->modal;
-  if (!was_modal) gnome_dialog_set_modal(dialog);
+  was_modal = GTK_WINDOW(dialog)->modal;
+  if (!was_modal) gtk_window_set_modal(dialog,TRUE);
 
   ri.clicked_id =
     gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
@@ -485,10 +483,7 @@ gnome_dialog_run(GnomeDialog *dialog)
   if(was_only_hidden) {
     if(!was_modal)
       {
-	/* It would be nicer if gnome_dialog_set_modal() took a
-	   bool value to indicate yes/no modal */
-	dialog->modal = FALSE;
-	gtk_grab_remove(GTK_WIDGET(dialog));
+	gtk_window_set_modal(GTK_WINDOW(dialog),FALSE);
       }
     
     if(ri.close_id >= 0)
@@ -773,11 +768,6 @@ void gnome_dialog_close_real(GnomeDialog * dialog)
 
   gtk_widget_hide(GTK_WIDGET(dialog));
 
-  if ( dialog->modal ) 
-    gtk_grab_remove(GTK_WIDGET(dialog)); /* Otherwise the hidden
-					    widget would still have
-					    the grab - very weird. */
-
   if ( ! dialog->just_hide ) {
     gtk_widget_destroy (GTK_WIDGET (dialog));
   }
@@ -799,263 +789,8 @@ void gnome_dialog_close(GnomeDialog * dialog)
 }
 
 static void gnome_dialog_show (GtkWidget * d)
-{
-  /* _set_modal() could always do this on the first _show(), but
-     if the dialog is hidden then shown it wouldn't work. Thus this
-     function. */
-  
-  if (GNOME_DIALOG(d)->modal) gtk_grab_add (d);
-  
+{  
   if (GTK_WIDGET_CLASS(parent_class)->show)
     (* (GTK_WIDGET_CLASS(parent_class)->show))(d);
 }
 
-
-/****************************************************************
-  $Log$
-  Revision 1.39  1998/09/18 23:25:39  unammx
-  Popup menus work.  The API is very simple, and I think it is enough
-  for most purposes -- if language binding writers think there is
-  additional stuff that could be done to them, please feel free to add
-  it.
-
-  I am writing some DocBook documentation for GnomeAppHelper and popup
-  menus; hopefully it will be finished during the weekend.  People
-  should add underlined letters and accelerators to their menus as soon
-  as possible -- the arrangement of the menus and accelerators still
-  needs to be settled in the UI Guidelines, but that's another story :-)
-
-    Federico
-
-  1998-09-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
-
-  	* configure.in: Removed generation of list of canvas files.
-
-  1998-09-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
-
-  	* gnome-popup-menu.c (gnome_popup_menu_new): New public function
-  	to create a popup menu from a GnomeUIInfo array.
-  	(gnome_popup_menu_attach): New public function to attach a popup
-  	menu to a widget -- the popup menu can be called by pressing mouse
-  	button 3 over the widget.  The menu can be shared between multiple
-  	widgets and it will be destroyed when the last widget it is
-  	attached to is destroyed.
-  	(gnome_popup_menu_do_popup): New public function to explicitly
-  	popup a menu.
-
-  	* gnome-app-helper.c (do_ui_signal_connect): Use
-  	gtk_signal_connect_full() instead of gtk_signal_connect_interp(),
-  	since the latter is obsolete (but works anyway...).
-
-  	* stock_demo.c:
-  	* gnome-stock.c:
-  	* gnome-number-entry.c:
-  	* gnome-init.c:
-  	* gnome-dialog.h:
-  	* gnome-dialog.c:
-  	* gnome-dentry-edit.c:
-  	* gnome-client.c (gnome_client_init):
-  	* gnome-calculator.c:
-  	* gnome-app.c:
-  	* libgnomeui.h: Removed occurrences of #ifdef GTK_HAVE_FEATURES_1_1_0.
-  	We require it, anyways.
-
-  	* Makefile.am: Moved all the conditional canvas files into the
-  	main list of sources -- they are always compiled now.
-
-  1998-09-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
-
-  	* testgnome.c (create_app_helper): Added tests for popup menus.
-
-  	* canvas-fifteen.c:
-  	* canvas-arrowhead.c:
-  	* canvas-primitives.c: Removed occurrences of #ifdef GTK_HAVE_FEATURES_1_1_0.
-
-  Revision 1.38  1998/08/16 04:11:11  sopwith
-
-
-  libgnomeui:
-  	gnome-dialog.c: gnome_dialog_run_and_destroy() doesn't try to
-  			destroy the dialog if it already was destroyed by
-  			the click. (Havoc, can you review please?)
-  	gnome-preferences.c: Remove memory leaks. Some still
-  		             supposedly exist in the
-  			     gnome_config_get_boolean() calls, but I
-  			     couldn't see them.
-
-  			     Please try to do smart things with return
-  			     values :-)
-  	gnome.defs, gnometypebuiltins_evals.c:
-  		I didn't make these changes, but these files have diffs.
-  		Did someone put autogenerated files into CVS?
-
-  Revision 1.37  1998/08/05 15:17:09  owen
-  Wed Aug  5 11:19:56 1998  Owen Taylor  <otaylor@redhat.com>
-
-  	* gnome-dialog.c (gnome_dialog_destroy): Don't remove
-  	  the accelerator group - GTK+ handles it for us.
-
-  	* gnome-app.c gnome-app-helper.c: Added gtk-1.1 code to check
-  	  if AccelGroup is already attached before attaching it
-  	  again.
-
-  Revision 1.36  1998/07/27 14:37:10  pavlov
-  replaced GTK_HAVE_ACCEL_GROUP with GTK_HAVE_FEATURES_1_1_0
-
-  This should allow it to compile correctly with the new gtk 1.1.0 that timj
-  broke changed on us ;)
-
-  -pav
-
-  Revision 1.35  1998/07/25 03:07:40  hp
-
-
-  Fri Jul 24 19:54:43 1998  Havoc Pennington  <hp@pobox.com>
-
-          * gnome-scores.c (gnome_scores_new): Use construct to set
-          the title and buttons.
-
-          * gnome-app-util.c: Switch to parented dialogs.
-
-  	* gnome-dialog-util.h, gnome-dialog-util.c: Added "parented"
-  	versions of these. The old versions are not really necessary
-  	anymore because you can just pass NULL for parent, but they
-  	save typing I guess.
-
-  	* gnome-preferences.h: New functions for dialog position, whether
-  	to attempt dialog-over-parent centering, whether dialogs are
-  	TOPLEVEL or DIALOG.
-
-  	* gnome-dialog.c (gnome_dialog_newv): Remove unused variable.
-  	(gnome_dialog_set_parent): New function, allows setting a parent
-  	the dialog should be centered over.
-
-  Sat Jul 25 02:51:12 1998  Simon Kagedal  <simon@sdf.se>
-
-          * gnome-scores.c, gnome-scores.h:
-          made the GnomeScore dialog inherit from GnomeDialog
-          instead of GtkWindow
-
-  Revision 1.34  1998/07/18 17:53:31  hp
-
-
-  Um, someone broke every dialog in Gnome without so much as a change log
-  entry. However, the vector constructor is nice.
-
-  Sat Jul 18 12:42:09 1998  Havoc Pennington  <hp@pobox.com>
-
-  * gnome-dialog.c (gnome_dialog_constructv): Use append_button,
-  not append_buttons without NULL termination.
-  (gnome_dialog_construct): Same.
-  (gnome_dialog_new): Reverted last change. Use the construct
-  function rather than cut-and-pasting it.
-
-  Revision 1.33  1998/07/17 23:37:03  yacc
-  provide ...v-forms of functions using varargs.
-
-  Revision 1.32  1998/07/15 03:59:15  hp
-
-
-  Tue Jul 14 22:47:33 1998  Havoc Pennington  <hp@pobox.com>
-
-  * gnome-app.h, gnome-app.c, gnome-dialog.h, gnome-dialog.c:
-  Added "construct" functions. The gnome-dialog one takes a va_list
-  which is kind of weird; if there's a good alternative I'd like
-  to use it instead.
-
-  Revision 1.31  1998/07/10 08:53:22  timj
-  Fri Jul 10 10:19:38 1998  Tim Janik  <timj@gtk.org>
-
-          * gnome-app-helper.c (gnome_app_do_menu_creation):
-          * gnome-stock.c (gnome_stock_menu_item):
-          create GtkAccelLabel if GTK_HAVE_FEATURES_1_1_0, so accelerators are
-          visible.
-
-  Revision 1.30  1998/07/03 00:51:57  hp
-
-
-  This fixes a couple of bugs in my Sunday commits, but breaks things: namely,
-  your handlebox preferences if you've set them, and gnome_dialog_run_and_die
-  is renamed if anyone had used it. Sorry it didn't get in on Monday, all that
-  CVS confusion.
-
-  Mon Jun 29 14:10:48 1998  Havoc Pennington  <hp@pobox.com>
-
-  * gnome-preferences.h, gnome-preferences.c
-  (gnome_preferences_get_toolbar_relief,
-  gnome_preferences_set_toolbar_relief): Whether the toolbar buttons
-  have the beveled edge.
-  * gnome-app.c (gnome_app_set_toolbar): Turn off the toolbar button
-  relief if user requested it.
-  * gnome-preferences.c (gnome_preferences_load): Oops, forgot to
-  push a new prefix for the GnomeApp stuff, it was being saved under
-  Dialog prefs.
-  * gnome-dialog.h, gnome-dialog.c (gnome_dialog_run_and_die):
-  Renamed to run_and_destroy - run_and_die was cute at 2 am, but
-  probably not a good name. ;-)
-
-  Revision 1.29  1998/06/29 08:06:27  hp
-
-
-  I think Elliot and I talked about the dialog changes this time, and there
-  are now two functions to make both of us happy. The other change allows
-  turning off the handlebox for the menubar and toolbar, I think that was
-  mentioned recently.
-
-  Mon Jun 29 03:04:30 1998  Havoc Pennington  <hp@pobox.com>
-
-  * TODO: Updated a little.
-
-  Mon Jun 29 02:58:15 1998  Havoc Pennington  <hp@pobox.com>
-
-  * gnome-preferences.h, gnome-preferences.c
-  (gnome_preferences_get_toolbar_handlebox,
-  gnome_preferences_set_toolbar_handlebox,
-  gnome_preferences_get_menubar_handlebox,
-  gnome_preferences_set_menubar_handlebox): New functions.
-
-  * gnome-app.c (gnome_app_set_menus): Obey preferences for
-  handlebox.
-  (gnome_app_set_toolbar): Obey handlebox prefs.
-
-  Mon Jun 29 02:52:10 1998  Havoc Pennington  <hp@pobox.com>
-
-  * gnome-dialog.h, gnome-dialog.c (gnome_dialog_run): Take out the
-  hide stuff.
-  (gnome_dialog_run_and_hide): Do what gnome_dialog_run used to do.
-  (gnome_dialog_run_and_die):  Run and then destroy the dialog.
-  (gnome_dialog_button_connect_object): Someone requested this.
-
-  Revision 1.28  1998/06/11 02:26:50  yosh
-  changed things to use GTK_HAVE_FEATURES_1_1_0 instead of HAVE_DEVGTK...
-  installed headers depending on config.h stuff is bad.
-
-  -Yosh
-
-  Revision 1.27  1998/06/10 17:15:25  gregm
-  Wed Jun 10 13:07:09 EDT 1998 Gregory McLean <gregm@comstar.net>
-
-          * Wheee libgnomeui now compiles (with the exception of the
-            canvas stuff) under 1.0.x again. It also compiles under 1.1
-            for thoose of you that like to bleed. Please please if you
-            add code that _requires_ gtk 1.1 shield it with GTK_HAVE_FEATURES_1_1_0
-            so us boring folks can continue to get stuff done.
-
-  Revision 1.26  1998/06/07 17:58:21  pavlov
-  updates to make gnome-libs compile with new gtk1.1
-
-  i havn't tested this yet, other than knowing it compiles.  i will in a minute,
-  but my gtk is fooed at the moment, and button's arn't showing labels :)
-
-  -pav
-
-  Revision 1.25  1998/05/25 16:31:18  sopwith
-  Move log msgs to bottom
-
-  Revision 1.24  1998/05/25 16:15:57  sopwith
-
-
-  gnome_dialog_run_*(): Fixes for Havoc's bugs
-  Also added CVS log recording at the top :)
-
-*****************************************************************/

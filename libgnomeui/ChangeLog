@@ -1,3 +1,21 @@
+1998-09-29  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.c, gnome-dialog.h: Replace dialog's modality
+	facilities with the ones from GtkWindow. Since GtkWindow's were
+	exactly the same nothing should break (unless you accessed the
+	modal flag directly and then you deserve breakage). Also blew away
+	that log stuff on the bottom, for better or worse.
+	(struct _GnomeDialog): Nuke modal field.
+	(gnome_dialog_init): Don't init the modal field.
+	(gnome_dialog_set_modal): Call gtk_window_set_modal and spew
+	irritating warning to stop using this function.
+	(gnome_dialog_run_modal): Use gtk_window_set_modal
+	(gnome_dialog_run): Use GTK_WINDOW(dialog)->modal and
+	gtk_window_set_modal.
+	(gnome_dialog_close_real): Don't remove grab, GtkWindow does it on
+	hide.
+	(gnome_dialog_show): Don't add grab.
+	
 1998-09-28  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-animator.c, gnome-animator.h: Misspell private, so C++
