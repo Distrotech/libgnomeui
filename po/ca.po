@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.117.2\n"
 "POT-Creation-Date: 2002-06-02 17:24+0200\n"
-"PO-Revision-Date: 2002-06-02 20:11+0200\n"
+"PO-Revision-Date: 2002-06-03 16:07+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <gnome@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -981,7 +981,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
 msgid "Browse Dialog Title"
-msgstr "Títol del diàleg Ves a"
+msgstr "Títol del diàleg Vés a"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
@@ -1065,7 +1065,7 @@ msgstr "Camí al fitxer"
 
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
-msgstr "_Ves a..."
+msgstr "_Vés a..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
@@ -1254,7 +1254,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
-msgstr "Ves a"
+msgstr "Vés a"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
