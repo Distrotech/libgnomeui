@@ -1,9 +1,16 @@
+1999-01-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-init.c (gnome_init_cb): If gdk_imlib_set_cache_info has
+	been called before, then we do not reset it to the value set in
+	disable_imlib_cache. 
+
 1999-01-23  The Rasterman <raster@redhat.com>
-	* gnome-init.c: disable setting of cache - this is the most evil 
-	thing I've ever seen. There is an imlib perefercnes (imlib_config) 
-	program to dojust this for every setting of imlib - and overriding it 
-	like this is not just bad coding but bad policy since now a users 
-	preferences dont count anymore.
+	
+	* gnome-init.c: disable setting of cache - this is the most evil
+	thing I've ever seen. There is an imlib perefercnes (imlib_config)
+	program to dojust this for every setting of imlib - and overriding
+	it like this is not just bad coding but bad policy since now a
+	users preferences dont count anymore.
 					   
 1999-01-23  Felix Bellaby <felix@pooh.u-net.com>
 

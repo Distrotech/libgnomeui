@@ -202,8 +202,19 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 		 *
 		 * Last I checked, there was no imlib-capplet
 		 */
-		if (gnome_preferences_get_disable_imlib_cache ())
-			gdk_imlib_set_cache_info (0, 1);
+		if (gnome_preferences_get_disable_imlib_cache ()){
+			int pixmaps, images;
+			
+			/*
+			 * If cache info has been set to -1, -1, it
+			 * means something initialized before us and
+			 * is requesting the cache to not be touched
+			 */
+			gdk_imlib_get_cache_info (&pixmaps, &images);
+
+			if (pixmaps != -1 && images != -1)
+				gdk_imlib_set_cache_info (0, 1);
+		}
 	  
 #ifdef USE_SEGV_HANDLE
 		memset(&sa, 0, sizeof(sa));

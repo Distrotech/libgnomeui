@@ -100,7 +100,8 @@
    (waiting-for-phase-2 GNOME_CLIENT_WAITING_FOR_PHASE_2)
    (saving-phase-2 GNOME_CLIENT_SAVING_PHASE_2)
    (frozen GNOME_CLIENT_FROZEN)
-   (disconnected GNOME_CLIENT_DISCONNECTED))
+   (disconnected GNOME_CLIENT_DISCONNECTED)
+   (registering GNOME_CLIENT_REGISTERING))
 
 (define-flags GnomeClientFlags
    (is-connected GNOME_CLIENT_IS_CONNECTED)
