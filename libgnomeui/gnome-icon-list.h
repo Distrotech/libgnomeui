@@ -12,6 +12,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-canvas.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 BEGIN_GNOME_DECLS
 
@@ -43,34 +44,8 @@ typedef struct {
 	/* Private data */
 	gpointer priv; /* was GList *icon_list */
 
-	int pad3; /* was int frozen */
-	int pad4; /* was int dirty */
-	int pad5; /* was int row_spacing */
-	int pad6; /* was int col_spacing */
-	int pad7; /* was int text_spacing */
-	int pad8; /* was int icon_border */
-	gpointer pad9; /* was char *separators */
-	GnomeIconListMode pad10; /* was GnomeIconListMode mode */
-	GtkSelectionMode pad11; /* was GtkSelectionMode selection_mode */
-
 	/* A list of integers with the indices of the currently selected icons */
 	GList *selection;
-
-	gpointer pad12; /* was GList *preserve_selection */
-	int pad13; /* was int icon_width */
-	unsigned int pad14 : 1; /* was unsigned int is_editable : 1 */
-	unsigned int pad15 : 1; /* was unsigned int static_text : 1 */
-	int pad16; /* was int last_selected */
-	gpointer pad17; /* was void *last_clicked */
-	int pad18; /* was int timer_tag */
-	int pad19; /* was int value_diff */
-	gdouble pad20; /* was gdouble event_last_x */
-	gdouble pad21; /* was gdouble event_last_y */
-	gpointer pad22; /* was GList *lines */
-	int pad23; /* was int total_height */
-	double pad24; /* was double sel_start_x */
-	double pad25; /* was double sel_start_y */
-	gpointer pad26; /* was GnomeCanvasItem *sel_rect */
 } GnomeIconList;
 
 typedef struct {
@@ -112,17 +87,16 @@ void           gnome_icon_list_insert              (GnomeIconList *gil,
 						    int pos, const char *icon_filename,
 						    const char *text);
 
-
-void           gnome_icon_list_insert_imlib        (GnomeIconList *gil,
-						    int pos, GdkImlibImage *im,
-						    const char *text);
+void           gnome_icon_list_insert_pixbuf        (GnomeIconList *gil,
+						     int pos, GdkPixbuf *im,
+						     const char *text);
 
 int            gnome_icon_list_append              (GnomeIconList *gil,
 						    const char *icon_filename,
 						    const char *text);
-int            gnome_icon_list_append_imlib        (GnomeIconList *gil,
-						    GdkImlibImage *im,
-						    const char *text);
+int            gnome_icon_list_append_pixbuf        (GnomeIconList *gil,
+						     GdkPixbuf *im,
+						     const char *text);
 void           gnome_icon_list_clear               (GnomeIconList *gil);
 void           gnome_icon_list_remove              (GnomeIconList *gil, int pos);
 

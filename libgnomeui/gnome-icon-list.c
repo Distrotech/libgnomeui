@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * GnomeIconList widget - scrollable icon list
  *
@@ -10,17 +11,17 @@
  * Rewrote from scratch from the code written by Federico Mena
  * <federico@nuclecu.unam.mx> to be based on a GnomeCanvas, and
  * to support banding selection and allow inline icon renaming.
+ *
+ * Redone somewhat to support gdk-pixbuf, and to use GArray instead of GList for item storage.
  */
 
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
-#include <gtk/gtkadjustment.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmain.h>
+#include <gtk/gtk.h>
 #include "gnome-icon-list.h"
 #include "gnome-icon-item.h"
-#include "gnome-canvas-image.h"
+#include "gnome-canvas-pixbuf.h"
 #include "gnome-canvas-rect-ellipse.h"
 
 
@@ -71,7 +72,7 @@ static GtkContainerClass *parent_class;
 /* Icon structure */
 typedef struct {
 	/* Icon image and text items */
-	GnomeCanvasImage *image;
+	GnomeCanvasPixbuf *image;
 	GnomeIconTextItem *text;
 
 	/* User data and destroy notify function */
@@ -97,8 +98,10 @@ typedef struct {
 
 /* Private data of the GnomeIconList structure */
 typedef struct {
-	/* List of icons and list of rows of icons */
-	GList *icon_list;
+	/* List of icons */
+	GArray *icon_list;
+
+	/* List of rows of icons */
 	GList *lines;
 
 	/* Max of the height of all the icon rows and window height */
@@ -185,7 +188,9 @@ icon_line_height (Gil *gil, IconLine *il)
 static void
 icon_get_height (Icon *icon, int *icon_height, int *text_height)
 {
-	*icon_height = icon->image->height;
+	double d_icon_height;
+	gtk_object_get(GTK_OBJECT(icon->image), "height", &d_icon_height, NULL);
+	*icon_height = d_icon_height;
 	*text_height = icon->text->ti->height;
 }
 
@@ -224,18 +229,24 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 {
 	GilPrivate *priv;
 	int y_offset;
+	double d_icon_image_height;
+	int icon_image_height;
 
 	priv = gil->priv;
 
-	if (icon_height > icon->image->height)
-		y_offset = (icon_height - icon->image->height) / 2;
+	gtk_object_get(GTK_OBJECT(icon->image), "height", &d_icon_image_height, NULL);
+	icon_image_height = d_icon_image_height;
+	g_assert(icon_image_height != 0);
+	if (icon_height > icon_image_height)
+		y_offset = (icon_height - icon_image_height) / 2;
 	else
 		y_offset = 0;
 
 	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
-			       "x",  (double) x + priv->icon_width / 2,
-			       "y",  (double) y + y_offset,
-			       "anchor", GTK_ANCHOR_N,
+			       "x",  (double) (x + priv->icon_width / 2),
+			       "y",  (double) (y + y_offset),
+			       "x_set", TRUE,
+			       "y_set", TRUE,
 			       NULL);
 	gnome_icon_text_item_setxy (icon->text,
 				    x,
@@ -285,7 +296,7 @@ gil_relayout_icons_at (Gil *gil, int pos, int y)
 	GilPrivate *priv;
 	int col, row, text_height, icon_height;
 	int items_per_line, n;
-	GList *line_icons, *l;
+	GList *line_icons;
 
 	priv = gil->priv;
 	items_per_line = gil_get_items_per_line (gil);
@@ -293,10 +304,8 @@ gil_relayout_icons_at (Gil *gil, int pos, int y)
 	col = row = text_height = icon_height = 0;
 	line_icons = NULL;
 
-	l = g_list_nth (priv->icon_list, pos);
-
-	for (n = pos; l; l = l->next, n++) {
-		Icon *icon = l->data;
+	for (n = pos; n < priv->icon_list->len; n++) {
+		Icon *icon = g_array_index(priv->icon_list, Icon*, n);
 		int ih, th;
 
 		if (!(n % items_per_line)) {
@@ -477,7 +486,6 @@ int
 gnome_icon_list_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep)
 {
 	GilPrivate *priv;
-	GList *l;
 	Icon *icon;
 	int i, idx = 0;
 
@@ -486,8 +494,8 @@ gnome_icon_list_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep
 
 	priv = gil->priv;
 
-	for (l = priv->icon_list, i = 0; l; l = l->next, i++) {
-		icon = l->data;
+	for (i = 0; i < priv->icon_list->len; i++) {
+		icon = g_array_index(priv->icon_list, Icon*, i);
 
 		if (icon == keep)
 			idx = i;
@@ -527,14 +535,12 @@ static int
 gil_icon_to_index (Gil *gil, Icon *icon)
 {
 	GilPrivate *priv;
-	GList *l;
 	int n;
 
 	priv = gil->priv;
 
-	n = 0;
-	for (l = priv->icon_list; l; n++, l = l->next)
-		if (l->data == icon)
+	for (n = 0; n < priv->icon_list->len; n++)
+		if (g_array_index(priv->icon_list, Icon*, n) == icon)
 			return n;
 
 	g_assert_not_reached ();
@@ -623,7 +629,6 @@ select_range (Gil *gil, Icon *icon, int idx, GdkEvent *event)
 {
 	GilPrivate *priv;
 	int a, b;
-	GList *l;
 	Icon *i;
 
 	priv = gil->priv;
@@ -641,10 +646,8 @@ select_range (Gil *gil, Icon *icon, int idx, GdkEvent *event)
 		b = idx;
 	}
 
-	l = g_list_nth (priv->icon_list, a);
-
-	for (; a <= b; a++, l = l->next) {
-		i = l->data;
+	for (; a <= b; a++) {
+		i = g_array_index(priv->icon_list, Icon*, a);
 
 		if (!i->selected)
 			emit_select (gil, TRUE, a, NULL);
@@ -907,7 +910,7 @@ height_changed (GnomeCanvasItem *item, Icon *icon)
 }
 
 static Icon *
-icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
+icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im, const char *text)
 {
 	GilPrivate *priv;
 	GnomeCanvas *canvas;
@@ -920,14 +923,14 @@ icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 
 	icon = g_new0 (Icon, 1);
 
-	icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
+	icon->image = GNOME_CANVAS_PIXBUF (gnome_canvas_item_new (
 		group,
-		gnome_canvas_image_get_type (),
+		gnome_canvas_pixbuf_get_type (),
 		"x", 0.0,
 		"y", 0.0,
-		"width", (double) im->rgb_width,
-		"height", (double) im->rgb_height,
-		"image", im,
+		"width", (double) im->art_pixbuf->width,
+		"height", (double) im->art_pixbuf->height,
+		"pixbuf", im,
 		NULL));
 
 	icon->text = GNOME_ICON_TEXT_ITEM (gnome_canvas_item_new (
@@ -969,14 +972,20 @@ icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 static Icon *
 icon_new (Gil *gil, const char *icon_filename, const char *text)
 {
-	GdkImlibImage *im;
+	GdkPixbuf *im;
+	Icon *retval;
 
 	if (icon_filename)
-		im = gdk_imlib_load_image ((char *) icon_filename);
+		im = gdk_pixbuf_new_from_file (icon_filename);
 	else
 		im = NULL;
 
-	return icon_new_from_imlib (gil, im, text);
+	retval = icon_new_from_pixbuf (gil, im, text);
+
+	if(im)
+		gdk_pixbuf_unref(im);
+
+	return retval;
 }
 
 static int
@@ -988,7 +997,7 @@ icon_list_append (Gil *gil, Icon *icon)
 	priv = gil->priv;
 
 	pos = gil->icons++;
-	priv->icon_list = g_list_append (priv->icon_list, icon);
+	g_array_append_val(priv->icon_list, icon);
 
 	switch (priv->selection_mode) {
 	case GTK_SELECTION_BROWSE:
@@ -1021,7 +1030,7 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 		return;
 	}
 
-	priv->icon_list = g_list_insert (priv->icon_list, icon, pos);
+	g_array_insert_val(priv->icon_list, pos, icon);
 	gil->icons++;
 
 	switch (priv->selection_mode) {
@@ -1046,17 +1055,17 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 }
 
 /**
- * gnome_icon_list_insert_imlib:
+ * gnome_icon_list_insert_pixbuf:
  * @gil:  An icon list.
  * @pos:  Position at which the new icon should be inserted.
- * @im:   Imlib image with the icon image.
+ * @im:   Pixbuf image with the icon image.
  * @text: Text to be used for the icon's caption.
  *
  * Inserts an icon in the specified icon list.  The icon is created from the
  * specified Imlib image, and it is inserted at the @pos index.
  */
 void
-gnome_icon_list_insert_imlib (GnomeIconList *gil, int pos, GdkImlibImage *im, const char *text)
+gnome_icon_list_insert_pixbuf (GnomeIconList *gil, int pos, GdkPixbuf *im, const char *text)
 {
 	Icon *icon;
 
@@ -1064,7 +1073,7 @@ gnome_icon_list_insert_imlib (GnomeIconList *gil, int pos, GdkImlibImage *im, co
 	g_return_if_fail (IS_GIL (gil));
 	g_return_if_fail (im != NULL);
 
-	icon = icon_new_from_imlib (gil, im, text);
+	icon = icon_new_from_pixbuf (gil, im, text);
 	icon_list_insert (gil, pos, icon);
 	return;
 }
@@ -1095,14 +1104,14 @@ gnome_icon_list_insert (GnomeIconList *gil, int pos, const char *icon_filename, 
 /**
  * gnome_icon_list_append_imlib:
  * @gil:  An icon list.
- * @im:   Imlib image with the icon image.
+ * @im:   Pixbuf image with the icon image.
  * @text: Text to be used for the icon's caption.
  *
  * Appends an icon to the specified icon list.  The icon is created from
  * the specified Imlib image.
  */
 int
-gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
+gnome_icon_list_append_pixbuf (GnomeIconList *gil, GdkPixbuf *im, const char *text)
 {
 	Icon *icon;
 
@@ -1110,7 +1119,7 @@ gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, const char 
 	g_return_val_if_fail (IS_GIL (gil), -1);
 	g_return_val_if_fail (im != NULL, -1);
 
-	icon = icon_new_from_imlib (gil, im, text);
+	icon = icon_new_from_pixbuf (gil, im, text);
 	return icon_list_append (gil, icon);
 }
 
@@ -1125,7 +1134,7 @@ gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, const char 
  */
 int
 gnome_icon_list_append (GnomeIconList *gil, const char *icon_filename,
-			 const char *text)
+			const char *text)
 {
 	Icon *icon;
 
@@ -1160,7 +1169,6 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 {
 	GilPrivate *priv;
 	int was_selected;
-	GList *list;
 	Icon *icon;
 
 	g_return_if_fail (gil != NULL);
@@ -1171,8 +1179,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 
 	was_selected = FALSE;
 
-	list = g_list_nth (priv->icon_list, pos);
-	icon = list->data;
+	icon = g_array_index(priv->icon_list, Icon*, pos);
 
 	if (icon->selected) {
 		was_selected = TRUE;
@@ -1190,8 +1197,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 		}
 	}
 
-	priv->icon_list = g_list_remove_link (priv->icon_list, list);
-	g_list_free_1(list);
+	g_array_remove_index(priv->icon_list, pos);
 	gil->icons--;
 
 	sync_selection (gil, pos, SYNC_REMOVE);
@@ -1239,21 +1245,21 @@ void
 gnome_icon_list_clear (GnomeIconList *gil)
 {
 	GilPrivate *priv;
-	GList *l;
+	int i;
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
 
 	priv = gil->priv;
 
-	for (l = priv->icon_list; l; l = l->next)
-		icon_destroy (l->data);
+	for (i = 0; i < priv->icon_list->len; i++)
+		icon_destroy (g_array_index (priv->icon_list, Icon*, i));
 
 	gil_free_line_info (gil);
 
 	g_list_free (gil->selection);
 	gil->selection = NULL;
-	priv->icon_list = NULL;
+	g_array_set_size(priv->icon_list, 0);
 	gil->icons = 0;
 	priv->last_selected_idx = -1;
 	priv->last_selected_icon = NULL;
@@ -1273,6 +1279,7 @@ gil_destroy (GtkObject *object)
 	priv->frozen = 1;
 	priv->dirty  = TRUE;
 	gnome_icon_list_clear (gil);
+	g_array_free(priv->icon_list, TRUE);
 
 	if (priv->timer_tag != 0) {
 		gtk_timeout_remove (priv->timer_tag);
@@ -1296,7 +1303,6 @@ select_icon (Gil *gil, int pos, GdkEvent *event)
 {
 	GilPrivate *priv;
 	gint i;
-	GList *list;
 	Icon *icon;
 
 	priv = gil->priv;
@@ -1306,13 +1312,11 @@ select_icon (Gil *gil, int pos, GdkEvent *event)
 	case GTK_SELECTION_BROWSE:
 		i = 0;
 
-		for (list = priv->icon_list; list; list = list->next) {
-			icon = list->data;
+		for (i = 0; i < priv->icon_list->len; i++) {
+			icon = g_array_index (priv->icon_list, Icon*, i);
 
 			if (i != pos && icon->selected)
 				emit_select (gil, FALSE, i, event);
-
-			i++;
 		}
 
 		emit_select (gil, TRUE, pos, event);
@@ -1455,7 +1459,7 @@ real_select_icon (Gil *gil, gint num, GdkEvent *event)
 
 	priv = gil->priv;
 
-	icon = g_list_nth (priv->icon_list, num)->data;
+	icon = g_array_index (priv->icon_list, Icon*, num);
 
 	if (icon->selected)
 		return;
@@ -1477,7 +1481,7 @@ real_unselect_icon (Gil *gil, gint num, GdkEvent *event)
 
 	priv = gil->priv;
 
-	icon = g_list_nth (priv->icon_list, num)->data;
+	icon = g_array_index (priv->icon_list, Icon*, num);
 
 	if (!icon->selected)
 		return;
@@ -1492,13 +1496,13 @@ static void
 store_temp_selection (Gil *gil)
 {
 	GilPrivate *priv;
-	GList *l;
+	int i;
 	Icon *icon;
 
 	priv = gil->priv;
 
-	for (l = priv->icon_list; l; l = l->next) {
-		icon = l->data;
+	for (i = 0; i < priv->icon_list->len; i++) {
+		icon = g_array_index(priv->icon_list, Icon*, i);
 
 		icon->tmp_selected = icon->selected;
 	}
@@ -1600,7 +1604,6 @@ update_drag_selection (Gil *gil, int x, int y)
 {
 	GilPrivate *priv;
 	int x1, x2, y1, y2;
-	GList *l;
 	int i;
 	Icon *icon;
 	int additive, invert;
@@ -1649,8 +1652,8 @@ update_drag_selection (Gil *gil, int x, int y)
 	additive = priv->sel_state & GDK_SHIFT_MASK;
 	invert = priv->sel_state & GDK_CONTROL_MASK;
 
-	for (l = priv->icon_list, i = 0; l; l = l->next, i++) {
-		icon = l->data;
+	for (i = 0; i < priv->icon_list->len; i++) {
+		icon = g_array_index(priv->icon_list, Icon*, i);
 
 		if (icon_is_in_area (icon, x1, y1, x2, y2)) {
 			if (invert) {
@@ -1941,6 +1944,7 @@ gil_init (Gil *gil)
 	priv = g_new0 (GilPrivate, 1);
 	gil->priv = priv;
 
+	priv->icon_list = g_array_new(FALSE, FALSE, sizeof(gpointer));
 	priv->row_spacing = DEFAULT_ROW_SPACING;
 	priv->col_spacing = DEFAULT_COL_SPACING;
 	priv->text_spacing = DEFAULT_TEXT_SPACING;
@@ -2185,8 +2189,8 @@ gnome_icon_list_new_flags (guint icon_width, GtkAdjustment *adj, int flags)
 {
 	Gil *gil;
 
-	gtk_widget_push_visual (gdk_imlib_get_visual ());
-	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
+	gtk_widget_push_visual (gdk_rgb_get_visual ());
+	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 	gil = GIL (gtk_type_new (gnome_icon_list_get_type ()));
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
@@ -2326,7 +2330,7 @@ gnome_icon_list_set_icon_data_full (GnomeIconList *gil,
 
 	priv = gil->priv;
 
-	icon = g_list_nth (priv->icon_list, pos)->data;
+	icon = g_array_index (priv->icon_list, Icon*, pos);
 	icon->data = data;
 	icon->destroy = destroy;
 }
@@ -2365,7 +2369,7 @@ gnome_icon_list_get_icon_data (GnomeIconList *gil, int pos)
 
 	priv = gil->priv;
 
-	icon = g_list_nth (priv->icon_list, pos)->data;
+	icon = g_array_index (priv->icon_list, Icon*, pos);
 	return icon->data;
 }
 
@@ -2381,7 +2385,6 @@ int
 gnome_icon_list_find_icon_from_data (GnomeIconList *gil, gpointer data)
 {
 	GilPrivate *priv;
-	GList *list;
 	int n;
 	Icon *icon;
 
@@ -2390,8 +2393,8 @@ gnome_icon_list_find_icon_from_data (GnomeIconList *gil, gpointer data)
 
 	priv = gil->priv;
 
-	for (n = 0, list = priv->icon_list; list; n++, list = list->next) {
-		icon = list->data;
+	for (n = 0; n < priv->icon_list->len; n++) {
+		icon = g_array_index(priv->icon_list, Icon*, n);
 		if (icon->data == data)
 			return n;
 	}
@@ -2630,7 +2633,6 @@ int
 gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 {
 	GilPrivate *priv;
-	GList *l;
 	double wx, wy;
 	double dx, dy;
 	int cx, cy;
@@ -2649,8 +2651,8 @@ gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), dx, dy, &wx, &wy);
 	gnome_canvas_w2c (GNOME_CANVAS (gil), wx, wy, &cx, &cy);
 
-	for (n = 0, l = priv->icon_list; l; l = l->next, n++) {
-		Icon *icon = l->data;
+	for (n = 0; n < priv->icon_list->len; n++) {
+		Icon *icon = g_array_index(priv->icon_list, Icon*, n);
 		GnomeCanvasItem *image = GNOME_CANVAS_ITEM (icon->image);
 		GnomeCanvasItem *text = GNOME_CANVAS_ITEM (icon->text);
 

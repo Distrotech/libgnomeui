@@ -32,6 +32,7 @@
 #include "gnome-icon-list.h"
 #include "gnome-icon-sel.h"
 #include "gnome-icon-entry.h"
+#include "gnome-pixmap.h"
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
@@ -153,9 +154,8 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	}
 	if(GNOME_IS_PIXMAP(child)) {
                 gnome_pixmap_clear(GNOME_PIXMAP(child));
-		gnome_pixmap_set_pixbuf_at_size (GNOME_PIXMAP(child),
-                                                 GTK_STATE_NORMAL,
-                                                 pixbuf, w, h);
+		gnome_pixmap_set_pixbuf(GNOME_PIXMAP(child), pixbuf);
+		gnome_pixmap_set_pixbuf_size (GNOME_PIXMAP(child), w, h);
         } else {
 		gtk_widget_destroy(child);
 		child = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
@@ -337,7 +337,7 @@ icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 	}
 
 	gtk_signal_emit(GTK_OBJECT(ientry),
-			gnome_calculator_signals[CHANGED_SIGNAL]);
+			gnome_ientry_signals[CHANGED_SIGNAL]);
 }
 
 static void
@@ -378,7 +378,7 @@ gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEnt
 	}
 
 	gtk_signal_emit(GTK_OBJECT(ientry),
-			gnome_calculator_signals[CHANGED_SIGNAL]);
+			gnome_ientry_signals[CHANGED_SIGNAL]);
 }
 
 static void
@@ -767,7 +767,7 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 			    filename);
 	entry_changed (NULL, ientry);
 	gtk_signal_emit(GTK_OBJECT(ientry),
-			gnome_calculator_signals[CHANGED_SIGNAL]);
+			gnome_ientry_signals[CHANGED_SIGNAL]);
 }
 
 /**

@@ -1,3 +1,12 @@
+2000-01-06  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-icon-list.[ch]: Port to gdk-pixbuf. Switch from a linked list to an array for storing the icons (faster!)
+	* gnome-icon-entry.[ch], gnome-icon-sel.[ch]: Port to gdk-pixbuf.
+
+	* gnome-canvas-pixbuf.[ch]: Pull updates from gdk-pixbuf module.
+
+	* gnome-druid.c: When going to a new page, unmap the old one unconditionally.
+
 Wed Jan 05 23:41:20 2000  George Lebl <jirka@5z.com>
 
 	* gnome-client.[ch]: the save_yourself signal has a return value but

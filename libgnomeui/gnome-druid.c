@@ -763,7 +763,7 @@ gnome_druid_set_page (GnomeDruid *druid,
 	gnome_druid_page_prepare (druid->current);
 	if (GTK_WIDGET_VISIBLE (druid->current) && (GTK_WIDGET_MAPPED (druid))) {
 		gtk_widget_map (GTK_WIDGET (druid->current));
-		if (old)
-			gtk_widget_unmap (old);
 	}
+	if (old && GTK_WIDGET_MAPPED (old))
+	  gtk_widget_unmap (old);
 }

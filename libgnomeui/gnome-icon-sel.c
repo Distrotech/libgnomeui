@@ -180,18 +180,18 @@ void  gnome_icon_selection_add_defaults   (GnomeIconSelection * gis)
 static void 
 append_an_icon(GnomeIconSelection * gis, const gchar * path)
 {
-	GdkImlibImage *iml;
-	GdkImlibImage *im;
+	GdkPixbuf *iml;
+	GdkPixbuf *im;
 	int pos;
 	int w,h;
 	
-	iml = gdk_imlib_load_image((char *)path);
+	iml = gdk_pixbuf_new_from_file(path);
 	/*if I can't load it, ignore it*/
 	if(!iml)
 		return;
 	
-	w = iml->rgb_width;
-	h = iml->rgb_height;
+	w = iml->art_pixbuf->width;
+	h = iml->art_pixbuf->height;
 	if(w>h) {
 		if(w>ICON_SIZE) {
 			h = h*((double)ICON_SIZE/w);
@@ -206,21 +206,17 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	w = w>0?w:1;
 	h = h>0?h:1;
 	
-	im = gdk_imlib_clone_scaled_image(iml,w,h);
-	gdk_imlib_destroy_image(iml);
+	im = gdk_pixbuf_scale_simple(iml, w, h, ART_FILTER_BILINEAR);
+	gdk_pixbuf_unref(iml);
 	if(!im)
 		return;
 	
-	pos = gnome_icon_list_append_imlib(GNOME_ICON_LIST(gis->gil),im,
-					   g_basename(path));
+	pos = gnome_icon_list_append_pixbuf(GNOME_ICON_LIST(gis->gil), im,
+					    g_basename(path));
 	gnome_icon_list_set_icon_data_full(GNOME_ICON_LIST(gis->gil), pos, 
 					   g_strdup(path),
 					   (GtkDestroyNotify) g_free );
-	/*FIXME: sort of hack*/
-	gtk_signal_connect_object(GTK_OBJECT(gis->gil),"destroy",
-				  GTK_SIGNAL_FUNC(gdk_imlib_destroy_image),
-				  (GtkObject *)im);
-/* 	gdk_imlib_destroy_image(im); */ /* FIXME: this needs ref/unref capabilities in imlib */
+	gdk_pixbuf_unref(im); /* I'm so glad that gdk-pixbuf has eliminated the former lameness of imlib! :) */
 }
 
 static int sort_file_list( gconstpointer a, gconstpointer b)

@@ -41,8 +41,6 @@ typedef struct {
 
 	/* Private data */
 	gpointer priv; /* was GtkEntry *entry */
-	gpointer pad1; /* was GtkWidget *entry_top */
-	gpointer pad2; /* was GdkFont *font */
 
 	/* Actual text */
 	char *text;
@@ -55,8 +53,6 @@ typedef struct {
 
 	/* Whether the text item is selected */
 	unsigned int selected : 1;
-
-	unsigned int pad3; /* was unsigned int unselected_click : 1 */
 
 	/* Whether the user is select-dragging a block of text */
 	unsigned int selecting : 1;
@@ -109,4 +105,3 @@ void     gnome_icon_text_item_stop_editing  (GnomeIconTextItem *iti,
 END_GNOME_DECLS
 
 #endif /* _GNOME_ICON_ITEM_H_ */
-

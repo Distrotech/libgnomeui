@@ -64,11 +64,7 @@ libgnomeui10compat_a_SOURCES =\
 	gnome-canvas-load.c		\
 	gnomeui10-compat.c		\
 	gnome-druid-page-start.c	\
-	gnome-druid-page-finish.c	\
-	gnome-icon-list.c		\
-	gnome-icon-item.c		\
-	gnome-icon-sel.c		\
-	gnome-icon-text.c
+	gnome-druid-page-finish.c
 
 libgnomeui10compatinclude_HEADERS = \
 	libgnomeui10compat.h		\
@@ -130,7 +126,7 @@ libgnomeui_la_SOURCES = \
 	gnome-helpsys.c			\
 	gnome-href.c			\
 	gnome-ice.c			\
-##	gnome-icon-entry.c		\
+	gnome-icon-entry.c		\
 	gnome-init.c			\
 	gnome-less.c			\
 	gnome-mdi.c			\
@@ -159,6 +155,10 @@ libgnomeui_la_SOURCES = \
 	gtkdial.c			\
 	gtkpixmapmenuitem.c		\
 	oafgnome.c			\
+	gnome-icon-list.c		\
+	gnome-icon-item.c		\
+	gnome-icon-sel.c		\
+	gnome-icon-text.c		\
 	$(gnorba_built)
 
 ## this lists all the non-generated headers
