@@ -1047,6 +1047,9 @@ gtk_layout_gravity_works (void)
 
   gdk_window_get_geometry (child, NULL, &y, NULL, NULL, NULL);
 
+  gdk_window_unref (parent);
+  gdk_window_unref (child);
+  
   return  (y == -20);
 }
 
