@@ -102,8 +102,6 @@ void         gnome_entry_prepend_history  (GnomeEntry  *gentry,
 void         gnome_entry_append_history   (GnomeEntry  *gentry,
 					   gboolean     save,
 					   const gchar *text);
-void         gnome_entry_load_history     (GnomeEntry  *gentry);
-void         gnome_entry_save_history     (GnomeEntry  *gentry);
 void         gnome_entry_clear_history    (GnomeEntry  *gentry);
 
 G_END_DECLS

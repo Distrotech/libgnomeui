@@ -30,6 +30,7 @@
 
 #include <libgnomeui/gnome-uidefs.h>
 
+#include <libgnomeui/gnome-about.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 #include <libgnomeui/gnome-app-util.h>

@@ -22,6 +22,11 @@
    Author: Anders Carlsson <andersca@codefactory.se>
 */
 
+#include <config.h>
+#include "gnome-macros.h"
+
+#include "gnome-i18nP.h"
+
 #include "gnome-about.h"
 
 #include <gtk/gtkbox.h>
@@ -80,12 +85,11 @@ enum {
 	PROP_LOGO_RIGHT_PADDING,
 };
 
-/* FIXME: Remove! */
-#define _(x) (x)
-
 static void gnome_about_init (GnomeAbout *about);
 static void gnome_about_class_init (GnomeAboutClass *klass);
+/* FIXME:
 static void gnome_about_finalize (GObject *object);
+ */
 static void gnome_about_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
 static void gnome_about_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
 
@@ -395,9 +399,11 @@ gnome_about_get_widest_entry (GnomeAbout *about)
 			break;
 		case DISPLAYING_TRANSLATOR_CREDITS:
 			/* Don't do anything for the translator credits */
+			list = NULL;
 			break;
 		default:
 			g_assert_not_reached ();
+			list = NULL; /* silence warning */
 		}
 		
 		for (; list; list = list->next) {
@@ -658,6 +664,7 @@ gnome_about_draw_name_header (GnomeAbout *about, GdkRectangle *area)
 		break;
 	default:
 		g_assert_not_reached ();
+		header_str = NULL; /* silence warning */
 	}
 	
  	pango_layout_set_text (name_header_layout, header_str, -1);
@@ -985,12 +992,13 @@ gnome_about_set_persons (GnomeAbout *about, guint prop_id, const GValue *persons
 		break;
 	default:
 		g_assert_not_reached ();
+		list = NULL; /* silence warning */
 	}
 
 	gnome_about_free_person_list (list);
+	list = NULL;
 	
 	value_array = g_value_get_boxed (persons);
-	list = NULL;
 
 	if (value_array == NULL) {
 		return;

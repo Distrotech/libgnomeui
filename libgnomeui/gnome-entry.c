@@ -86,6 +86,8 @@ static void gnome_entry_set_property (GObject        *object,
 				      const GValue   *value,
 				      GParamSpec     *pspec);
 static void gnome_entry_editable_init (GtkEditableClass *iface);
+static void gnome_entry_load_history (GnomeEntry *gentry);
+static void gnome_entry_save_history (GnomeEntry *gentry);
 
 static char *build_gconf_key (GnomeEntry *gentry);
 
