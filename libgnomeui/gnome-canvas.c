@@ -2303,9 +2303,11 @@ gnome_canvas_init (GnomeCanvas *canvas)
 	gtk_layout_set_hadjustment (GTK_LAYOUT (canvas), NULL);
 	gtk_layout_set_vadjustment (GTK_LAYOUT (canvas), NULL);
 
+#if 0
 	canvas->ic = NULL;
 	canvas->ic_attr = NULL;
-
+#endif
+	
 	canvas->cc = gdk_color_context_new (gtk_widget_get_visual (GTK_WIDGET (canvas)),
 					    gtk_widget_get_colormap (GTK_WIDGET (canvas)));
 
@@ -2500,6 +2502,7 @@ gnome_canvas_realize (GtkWidget *widget)
 				 | GDK_LEAVE_NOTIFY_MASK
 				 | GDK_FOCUS_CHANGE_MASK));
 
+#if 0
 	if (gdk_im_ready () && (canvas->ic_attr = gdk_ic_attr_new ()) != NULL) {
 		GdkEventMask mask;
 		GdkICAttr *attr = canvas->ic_attr;
@@ -2524,7 +2527,8 @@ gnome_canvas_realize (GtkWidget *widget)
 		} else
 			g_warning ("Can't create input context.");
 	}
-
+#endif
+	
 	/* Create our own temporary pixmap gc and realize all the items */
 
 	canvas->pixmap_gc = gdk_gc_new (canvas->layout.bin_window);
@@ -2545,6 +2549,7 @@ gnome_canvas_unrealize (GtkWidget *widget)
 
 	shutdown_transients (canvas);
 
+#if 0
 	if (canvas->ic) {
 		gdk_ic_destroy (canvas->ic);
 		canvas->ic = NULL;
@@ -2553,7 +2558,8 @@ gnome_canvas_unrealize (GtkWidget *widget)
 		gdk_ic_attr_destroy (canvas->ic_attr);
 		canvas->ic_attr = NULL;
 	}
-
+#endif
+	
 	/* Unrealize items and parent widget */
 
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->unrealize) (canvas->root);
@@ -3127,8 +3133,11 @@ gnome_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
 
 	canvas = GNOME_CANVAS (widget);
 
+#if 0
 	if (canvas->ic)
 		gdk_im_begin (canvas->ic, canvas->layout.bin_window);
+#endif
+	
 	if (canvas->focused_item)
 		return emit_event (canvas, (GdkEvent *) event);
 	else

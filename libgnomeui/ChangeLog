@@ -1,3 +1,16 @@
+2000-06-29  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-canvas.c (gnome_canvas_focus_in): Comment out the ic code
+	until it is made bin-compat
+
+2000-04-16  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-calculator.c (put_led_font): Use our own GC that is
+	prepared for this pixmap
+	(gnome_calculator_new): Push visuals here, pop visuals
+	afterwards.  Now all the happy familiy will be running under the
+	same visual
+
 2000-06-28  Peter Teichman (peter@helixcode.com)
 
 	* gnome-messagebox.c: Do not focus the default button when there
