@@ -2,6 +2,7 @@
 
 	* gnome-color-picker.c (gnome_color_picker_init): Changed the shadow.
 	(render): now draws a stipple when insensitive
+	(render): let's remove the commment... S-:
 
 1999-02-17  Sergey Panov  <sipan@mit.edu>
 
