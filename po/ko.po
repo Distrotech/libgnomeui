@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.3\n"
-"POT-Creation-Date: 2002-11-27 22:03+0100\n"
+"POT-Creation-Date: 2002-12-09 21:29+0100\n"
 "PO-Revision-Date: 2002-08-20 19:06+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -399,9 +399,10 @@ msgid "This button will take you to the URI that it displays."
 msgstr "이 버튼을 누르면 버튼이 표시하는 URI로 이동합니다."
 
 #: libgnomeui/gnome-href.c:393
+#, fuzzy
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "URL 처리기를 시작하려는 데 오류가 발생했습니다.\n"
 "조종 센터에서 설정사항이 올바른 지 확인하십시오."

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-11-27 22:03+0100\n"
+"POT-Creation-Date: 2002-12-09 21:29+0100\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Anurag Seetha <anuragseetha@yahoo.com>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -495,9 +495,10 @@ msgstr ""
 
 # libgnomeui/gnome-href.c:396
 #: libgnomeui/gnome-href.c:393
+#, fuzzy
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "URL नियंत्रणकर्ता को प्रस्तुत करने में त्रुटि किरपया कंट्रोल सेन्टर को समायोजन की जांच करें कि "
 "वह सही हो"

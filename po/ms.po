@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-11-27 22:03+0100\n"
+"POT-Creation-Date: 2002-12-09 21:29+0100\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -431,9 +431,10 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Butang ini akan membawa anda ke URI yang dipaparkan."
 
 #: libgnomeui/gnome-href.c:393
+#, fuzzy
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Ralat berlaku bila mencuba untuk melancarkan oengendali URL.\n"
 "Sila periksa tetapan pada Pusat Kawalan samada ianya betul."

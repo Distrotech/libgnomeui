@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.1\n"
-"POT-Creation-Date: 2002-11-27 22:03+0100\n"
+"POT-Creation-Date: 2002-12-09 21:29+0100\n"
 "PO-Revision-Date: 2002-09-02 20:30+0300\n"
 "Last-Translator: Mugurel Tudor <mugurelu@go.ro>\n"
 "Language-Team: română <ro@li.org>\n"
@@ -398,9 +398,10 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Acest buton te va duce către URI afişat."
 
 #: libgnomeui/gnome-href.c:393
+#, fuzzy
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Eroare la lansarea descriptorului URL.\n"
 "Vă rugăm verificaţi corectitudinea setărilor din Centrul de Control."

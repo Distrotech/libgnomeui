@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-11-27 22:03+0100\n"
+"POT-Creation-Date: 2002-12-09 21:29+0100\n"
 "PO-Revision-Date: 2002-11-15 12:57+0200\n"
 "Last-Translator: Benjamin Greiner <benjamin.greiner@gmx.net>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -403,9 +403,10 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Dieser Knopf wird Sie zur URI, die er anzeigt, bringen."
 
 #: libgnomeui/gnome-href.c:393
+#, fuzzy
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Ein Fehler ist beim Versuch, den URL-Handler zu starten, aufgetreten.\n"
 "Bitte überprüfen Sie die diesbezüglichen Einstellungen im Kontrollzentrum "

@@ -1,3 +1,7 @@
+2002-12-09  Anders Carlsson  <andersca@gnu.org>
+
+	* configure.in: Release 2.1.4
+
 2002-12-06  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-theme.c:
