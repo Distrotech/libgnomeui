@@ -12,7 +12,6 @@ libgnomeui/gnome-druid-page-edge.c
 libgnomeui/gnome-druid-page-standard.c
 libgnomeui/gnome-druid.c
 libgnomeui/gnome-font-picker.c
-libgnomeui/gnome-gconf.c
 libgnomeui/gnome-helpsys.c
 libgnomeui/gnome-href.c
 libgnomeui/gnome-init.c
