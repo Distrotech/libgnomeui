@@ -1,3 +1,8 @@
+Sun Jul  5 18:12:24 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.c (master_environment): Removed DISPLAY, HOME,
+	PATH, LD_LIBRARY_PATH.
+
 1998-07-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch]: added child_changed signal and did some extensive

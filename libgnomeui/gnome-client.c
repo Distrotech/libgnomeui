@@ -150,13 +150,13 @@ static gboolean gnome_client_auto_connect_master= TRUE;
 
 /* The following environment variables will be set on the master
    client, if they are defined the programs environment.  The array
-   must end with a NULL entry.  */
+   must end with a NULL entry.
+   For now we have no entries.  You might think that saving DISPLAY,
+   or HOME, or something like that would be right.  It isn't.  We
+   definitely want to inherit these values from the user's (possibly
+   changing) environment.  */
 static char* master_environment[]=
 {
-  "DISPLAY", 
-  "HOME",
-  "PATH",
-  "LD_LIBRARY_PATH",
   NULL
 };
 
