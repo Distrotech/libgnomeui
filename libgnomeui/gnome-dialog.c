@@ -968,6 +968,7 @@ gnome_dialog_button_clicked (GtkWidget   *button,
 			     GtkWidget   *dialog)
 {
   GList *list;
+  gboolean click_closes;
   int which = 0;
 
   g_return_if_fail(dialog != NULL);
