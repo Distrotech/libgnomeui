@@ -1,5 +1,11 @@
 2001-03-24  Martin Baulig  <baulig@suse.de>
 
+	* maketypes.awk, makeenums.pl: Removed, we now use
+	gnome-maketypes.awk and gnome-makeenums.pl which gets
+	installed by libgnome-2.
+
+2001-03-24  Martin Baulig  <baulig@suse.de>
+
 	* gnome-app-helper.c (setup_uline_accel): Commented out
 	for the moment [FIXME: fix this].
 
