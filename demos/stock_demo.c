@@ -360,71 +360,136 @@ static void
 fill_table(GtkWidget *window, GtkTable *table)
 {
 	GtkWidget *w, *button;
+	gint row, column;
+
+	row = column = 0;
 
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_HELP));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 0, 1, 0, 1);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
 	w = gtk_label_new("Help");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 0, 1, 2, 3);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_SEARCH));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 1, 2, 0, 1);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_SEARCH));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 1, 2, 1, 2);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
 	w = gtk_label_new("Search");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 1, 2, 2, 3);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_PRINT));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 2, 3, 0, 1);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
 	w = gtk_label_new("Print");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 2, 3, 2, 3);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_BACK));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 3, 4, 0, 1);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_BACK));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 3, 4, 1, 2);
-	w = gtk_label_new("Backward");
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 3, 4, 2, 3);
-
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_FORWARD));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 4, 5, 0, 1);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_FORWARD));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 4, 5, 1, 2);
-	w = gtk_label_new("Forward");
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 4, 5, 2, 3);
-
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_PREFERENCES));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 5, 6, 0, 1);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
 	w = gtk_label_new("Preferences");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 5, 6, 2, 3);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_UNDO));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 6, 7, 0, 1);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
 	w = gtk_label_new("Undo");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 6, 7, 2, 3);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_TRASH));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_TRASH));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Trash");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_TRASH_FULL));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_TRASH_FULL));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Trash Full");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column = 0; row += 3;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_BACK));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_BACK));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Backward");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_FORWARD));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_FORWARD));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Forward");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_HOME));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_HOME));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Home");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_STOP));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_STOP));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Stop");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_REFRESH));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_REFRESH));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Refresh");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column = 0; row += 3;
 	button = gtk_button_new();
 	gtk_widget_show(button);
 	w = gnome_stock_pixmap_widget(button, GNOME_STOCK_PIXMAP_TIMER_STOP);
 	gtk_widget_show(w);
 	gtk_container_add(GTK_CONTAINER(button), w);
-	gtk_table_attach_defaults(table, button, 0, 1, 3, 4);
+	gtk_table_attach_defaults(table, button, column, column + 1, row, row + 1);
 	gtk_signal_connect(GTK_OBJECT(button), "clicked",
 			   GTK_SIGNAL_FUNC(toggle_button), w);
 
@@ -433,89 +498,68 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = gnome_stock_pixmap_widget(button, GNOME_STOCK_PIXMAP_TIMER);
 	gtk_widget_show(w);
 	gtk_container_add(GTK_CONTAINER(button), w);
-	gtk_table_attach_defaults(table, button, 0, 1, 4, 6);
+	gtk_table_attach_defaults(table, button, column, column + 1, row + 1, row + 3);
 	gtk_signal_connect(GTK_OBJECT(button), "clicked",
 			   GTK_SIGNAL_FUNC(toggle_button), w);
 
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_HOME));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 1, 2, 3, 4);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_HOME));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 1, 2, 4, 5);
-	w = gtk_label_new("Home");
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 1, 2, 5, 6);
-
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_STOP));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 2, 3, 3, 4);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_STOP));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 2, 3, 4, 5);
-	w = gtk_label_new("Stop");
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 2, 3, 5, 6);
-
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_REFRESH));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 3, 4, 3, 4);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_REFRESH));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 3, 4, 4, 5);
-	w = gtk_label_new("Refresh");
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 3, 4, 5, 6);
-
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL_SND));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 4, 5, 3, 4);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL_SND));
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 4, 5, 4, 5);
-	w = gtk_label_new("Send Mail");
-	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 4, 5, 5, 6);
-
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 5, 6, 3, 4);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 5, 6, 4, 5);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
 	w = gtk_label_new("Mail");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 5, 6, 5, 6);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL_SND));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL_SND));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Send Mail");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL_RCV));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 6, 7, 3, 4);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL_RCV));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 6, 7, 4, 5);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
 	w = gtk_label_new("Receive Mail");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 6, 7, 5, 6);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_TRASH));
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL_RPL));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 7, 8, 0, 1);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_TRASH));
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL_RPL));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 7, 8, 1, 2);
-	w = gtk_label_new("Trash");
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Reply to Mail");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 7, 8, 2, 3);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_TRASH_FULL));
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL_FWD));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 7, 8, 3, 4);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_TRASH_FULL));
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL_FWD));
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 7, 8, 4, 5);
-	w = gtk_label_new("Trash Full");
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Forward Mail");
 	gtk_widget_show(w);
-	gtk_table_attach_defaults(table, w, 7, 8, 5, 6);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	gtk_table_set_col_spacings(table, 10);
+	gtk_table_set_row_spacing(table, 2, 10);
+	gtk_table_set_row_spacing(table, 5, 10);
 }
 
 
