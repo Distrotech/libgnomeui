@@ -4,5 +4,6 @@ test-druid
 test-entry
 test-gnome
 test-iconlist
+test-password-dialog
 Makefile
 Makefile.in
