@@ -1,3 +1,7 @@
+2002-04-27  Simos Xenitellis  <simos@hellug.gr>
+
+	* el.po: Added Greek translation. 
+
 2002-04-27  Carlos Perello Marin <carlos@gnome-db.org>
 
 	* es.po: Fixed an error with encoding.
@@ -27,6 +31,7 @@
 
 	* ko.po: Updated Korean translation.
 
+>>>>>>> 1.134
 2002-04-20  Christophe Merlet  <christophe@merlet.net>
 
 	* fr.po: Updated French translation.
