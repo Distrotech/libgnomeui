@@ -1,3 +1,9 @@
+1999-12-12  Elliot Lee  <sopwith@redhat.com>
+
+	* gtkpixmapmenuitem.c: OK, size_allocate was just not making
+	things look nice. It seems that the hack with the toggle_size is
+	"the way" - at least it looks nice now.
+
 Sun Dec 12 10:57:40 1999  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c: check for number on stack AFTER we reduce
