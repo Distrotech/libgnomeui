@@ -1,3 +1,7 @@
+1999-10-20  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-init.c: Fix the memory leak AND avoid the bug from the first fix.
+
 Mon Oct 18 21:51:43 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-app-util.c: use gnome_request_dialog directly instead
