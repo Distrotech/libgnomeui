@@ -1,3 +1,10 @@
+1998-05-21  John Ellis  <johne@bellatlantic.net>
+
+	* gnome-pixmap.h: changed char *data in
+	gnome_pixmap_new_from_rgb_d_at_size to unsigned char *data.
+	* gnome-pixmap.c: added missing definition of
+	GtkWidget *gnome_pixmap_new_from_rgb_d_at_size(...).
+
 1998-05-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_paint_text): Added justification
