@@ -253,6 +253,16 @@ GnomeClientFlags gnome_client_get_flags            (GnomeClient *client);
 void         gnome_client_set_restart_style      (GnomeClient *client,
 						  GnomeRestartStyle style);
 
+/* The gnome-session manager includes an extension to the protocol which
+   allows the order in which clients are started up to be organised into
+   a number of run levels. This function may be used to inform the
+   gnome-session manager of where this client should appear in this
+   run level ordering. The priority runs from 0 (started first) to 99
+   (started last) and defaults to 50. Users may override the value
+   that is suggested to gnome-session by calling this function. */
+void         gnome_client_set_priority      (GnomeClient *client,
+					     guint priority);
+
 /* Executing the restart command on the local host should reproduce
    the state of the client at the time of the session save as closely
    as possible. Saving config info under the gnome_client_get_config_prefix

@@ -1087,6 +1087,8 @@ gnome_client_class_init (GnomeClientClass *klass)
 static void
 gnome_client_object_init (GnomeClient *client)
 {
+  struct passwd *pwd;
+
   client->smc_conn          = NULL;
   client->client_id         = NULL;
   client->previous_id       = NULL;
@@ -1700,7 +1702,32 @@ gnome_client_set_restart_command (GnomeClient *client,
 #endif /* HAVE_LIBSM */
 }
 
+/**
+ * gnome_client_set_priority
+ * @client: Pointer to GNOME session client object.
+ * @priority: Position of client in session start up ordering.
+ *
+ * Description: 
+ *
+ * The gnome-session manager restarts clients in order of their
+ * priorities in a similar way to the start up ordering in SysV.
+ * This function allows the app to suggest a position in this
+ * ordering. The value should be between 0 and 99. A default
+ * value of 50 is assigned to apps that do not provide a value. 
+ * The user may assign a different priority.
+ **/
 
+void 
+gnome_client_set_priority (GnomeClient *client, guint priority)
+{
+  g_return_if_fail (client != NULL);
+  g_return_if_fail (GNOME_IS_CLIENT (client));
+
+  if (priority > 99)
+    priority = 99;
+
+  client_set_gchar (client, "Priority", (gchar) priority);
+}
 
 /**
  * gnome_client_set_restart_style
