@@ -668,6 +668,9 @@ iti_event (GnomeCanvasItem *item, GdkEvent *event)
 		if (!iti->is_editable)
 			return FALSE;
 
+		if (event->button.button != 1)
+			return FALSE;
+		
 		if (!iti->selected) {
 			iti->unselected_click = TRUE;
 			return FALSE;
