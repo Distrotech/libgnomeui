@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
   mystr = g_string_new(NULL);
   args = poptGetArgs(ctx);
   g_string_sprintf(mystr, _("Application \"%s\" has a bug.\nSIGSEGV received at PC %#lx in PID %d.\n\n\nDo you want to exit this program?"),
-		   args[0], atoi(args[1]), getppid());
+		   args[0], (unsigned long)atoi(args[1]), getppid());
   poptFreeContext(ctx);
   lbl = gtk_label_new(mystr->str);
   gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->vbox),

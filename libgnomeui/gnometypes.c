@@ -4,13 +4,14 @@
 
 #include "gnometypebuiltins_vars.c"
 #include "gnometypebuiltins_evals.c"
+void gnome_type_init(void);
 
 /* maybe this should be put in GTK */
 static GtkType
-gnome_type_register_boxed (gchar *name) {
+gnome_type_register_boxed (const gchar *name) {
   GtkTypeInfo info;
 
-  info.type_name = name;
+  info.type_name = (char *)name;
   info.object_size = 0;
   info.class_size = 0;
   info.class_init_func = NULL;
@@ -25,11 +26,11 @@ void
 gnome_type_init() {
   int i;
 
-  struct {
-    gchar * type_name;
+  static struct {
+    const gchar * type_name;
     GtkType *type_id;
     GtkType parent;
-    GtkEnumValue *values;
+    const GtkEnumValue *values;
   } builtin_info[GNOME_TYPE_NUM_BUILTINS + 1] = {
 #include "gnometypebuiltins_ids.c"
     { NULL }
@@ -40,9 +41,9 @@ gnome_type_init() {
       GtkType type_id = GTK_TYPE_INVALID;
       g_assert (builtin_info[i].type_name != NULL);
       if ( builtin_info[i].parent == GTK_TYPE_ENUM )
-      	type_id = gtk_type_register_enum (builtin_info[i].type_name, builtin_info[i].values);
+      	type_id = gtk_type_register_enum (builtin_info[i].type_name, (GtkEnumValue *)builtin_info[i].values);
       else if ( builtin_info[i].parent == GTK_TYPE_FLAGS )
-      	type_id = gtk_type_register_flags (builtin_info[i].type_name, builtin_info[i].values);
+      	type_id = gtk_type_register_flags (builtin_info[i].type_name, (GtkFlagValue *)builtin_info[i].values);
       else if ( builtin_info[i].parent == GTK_TYPE_BOXED )
         type_id = gnome_type_register_boxed (builtin_info[i].type_name);
 

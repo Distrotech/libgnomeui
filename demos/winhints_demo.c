@@ -11,8 +11,8 @@ void skip_cb (GtkWidget *widget, void *data);
 void protocols_cb (GtkWidget *widget, void *data);
 void workspace_cb (GtkWidget *widget, void *data);
 void quit_cb (GtkWidget *widget, void *data);
-GList* get_workspaces();
-void prepare_app();
+static GList* get_workspaces();
+static void prepare_app();
 
 GtkWidget *app;
 GtkWidget *lbox, *wsbox;
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-void prepare_app()
+static void prepare_app()
 {
   GtkWidget *vb,*vb1, *hb, *hb1, *mvb;
   GtkWidget *list_box;
@@ -338,7 +338,7 @@ void workspace_cb (GtkWidget *widget, void *data)
   return;
 }
 
-GList *get_workspaces()
+static GList *get_workspaces()
 {
   GList *tmp_list, *tmp_list2, *ptr;
   gint i;

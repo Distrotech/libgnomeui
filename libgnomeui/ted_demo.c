@@ -6,13 +6,13 @@
 #include <gnome.h>
 #include "gtk-ted.h"
 
-void
+static void
 clicked ()
 {
 	printf ("Button clicked\n");
 }
 
-void
+static void
 xrandom_widgets (GtkTed *t)
 {
 	GtkWidget *l;
