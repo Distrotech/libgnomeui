@@ -1,3 +1,14 @@
+1998-05-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c gnome-canvas.h: The GnomeCanvas widget!  This is
+	still not finished and is not ready for general consumption.  I
+	need it on cvs to hack on it a bit while being at the Linux Expo :-)
+
+	* gnome-canvas-rect-ellipse.c: Rectangle and ellipse primitives
+	for the canvas; still not finished.
+
+	* Makefile.am: Added the canvas files to the listing.
+
 1998-05-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (relayout_icon), gnome-icon-list.h: add
