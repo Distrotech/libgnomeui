@@ -1,3 +1,11 @@
+Sun Jul 19 18:06:38 1998  Tom Tromey  <tromey@cygnus.com>
+
+	Reverted change of July 7:
+	* gnome-client.c (gnome_client_save): Removed.
+	(gnome_client_restart_session): Removed.
+	* gnome-client.h (gnome_client_save,
+	gnome_client_restart_session): Removed.
+
 1998-07-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_raise
