@@ -1,3 +1,9 @@
+2000-01-06  Federico Mena Quintero  <federico@helixcode.com>
+
+	* gnome-canvas.c (gnome_canvas_group_bounds): Do update the child
+	pointer when we walk the list.  Thanks to Richard Hult for
+	pointing this out.
+
 1999-12-15  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_rect_contains):
