@@ -1,5 +1,55 @@
 2000-09-16  Martin Baulig  <baulig@suse.de>
 
+	* gnome-file-selector.c: Use the boilerplate macros.
+
+2000-09-16  Martin Baulig  <baulig@suse.de>
+
+	* gnome-file-selector.c: Started to asyncify this file.
+	(gnome_file_selector_add_filter): New function; this lets you
+	specify a GnomeVFSDirectoryFilter which is used when adding
+	files etc.
+	(gnome_file_selector_clear_filter): New function; removes the
+	filter again.
+	(add_file_handler): Implement handler for the "add_file" signal
+	of the GnomeFileSelector; call gnome_vfs_async_get_file_info()
+	with `add_file_async_cb' as async callback function.
+	(add_file_async_cb): New static function;
+	- if the URI is a directory, gnome_selector_add_directory() it.
+	- otherwise, apply the filter to it and, if it passes, emit the
+	"do_add" signal.
+	(add_directory_handler): Implement handler for the "add_directory"
+	signal; call gnome_vfs_async_load_directory_uri() on it with
+	`add_directory_async_cb' as async callback function.
+	(add_directory_async_cb): New static function; apply the filter
+	to each of the files and emit the "add_file" signal for those who
+	pass it [FIXME: at this point we already have the GnomeVFSFileInfo
+	for the files, so basically we can filter here and emit "do_add"
+	directly  ....?].
+	(activate_entry_handler): Just call gnome_selector_add_file();
+	this should "do the right thing" even if it's actually a directory
+	[FIXME: should we better async get the file info here and then
+	distinguish between files and directories?].
+	(check_filename_handler): If a filter is set, use it. Note
+	that this is still a synchronous operation (because of the
+	return value) and may block.
+	(check_directory_handler): This is a synchronous operation
+	as well and thus may block.
+
+2000-09-11  Martin Baulig  <baulig@suse.de>
+
+	* gnome-file-selector.h (GnomeFileSelector): Derive from GnomeEntry.
+
+	* gnome-file-selector.c (GnomeFileSelectorPrivate): Removed the
+	`combo' and `entry' fields.
+	(get_entry_text_handler, set_entry_text_handler): Removed.
+	(history_changed_handler): Removed.
+	(entry_activated_cb): Moved all its functionality into the
+	`activate_entry_handler' and then removed this function.
+	(gnome_file_selector_construct): Don't create the entry widget here
+	but pass GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET down to the parent class.
+
+2000-09-16  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector.h (GnomeSelector):
 	- Added `position' argument to the "add", "add_default",
 	"add_directory" and "add_directory_default" signals; this is
