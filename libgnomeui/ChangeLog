@@ -1,3 +1,8 @@
+1999-10-11  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-messagebox.c (gnome_message_box_new): add a label field to
+	GnomeMessagebox.  Removed gnome_message_box_set_{modal,default}.
+
 1999-10-10  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-less.c: Remove the stupid popup menu, breaks binary

@@ -40,6 +40,7 @@ typedef struct _GnomeMessageBoxButton  GnomeMessageBoxButton;
 struct _GnomeMessageBox
 {
   GnomeDialog dialog;
+  GtkWidget *label;
 };
 
 struct _GnomeMessageBoxClass
@@ -56,14 +57,8 @@ GtkWidget* gnome_message_box_new         (const gchar           *message,
 GtkWidget* gnome_message_box_newv        (const gchar           *message,
 					  const gchar           *messagebox_type,
 					  const gchar 	      **buttons);
-#ifndef GNOME_EXCLUDE_DEPRECATED
-/* Deprecated in favor of gtk_window's version. Don't use. */
-void       gnome_message_box_set_modal   (GnomeMessageBox *messagebox);
 
-/* Deprecated in favor of gnome_dialog_ variant. Don't use. */
-void       gnome_message_box_set_default (GnomeMessageBox *messagebox,
-					  gint            button);
-#endif
+GtkWidget *gnome_message_box_get_label   (GnomeMessageBox *messagebox);
 
 END_GNOME_DECLS
 

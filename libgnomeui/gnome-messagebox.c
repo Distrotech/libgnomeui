@@ -91,7 +91,7 @@ gnome_message_box_new (const gchar           *message,
 {
 	va_list ap;
 	GnomeMessageBox *message_box;
-	GtkWidget *label, *hbox;
+	GtkWidget *hbox;
 	GtkWidget *pixmap = NULL;
 	GtkWidget *alignment;
 	char *s;
@@ -168,11 +168,11 @@ gnome_message_box_new (const gchar           *message,
 		gtk_widget_show (pixmap);
 	}
 
-	label = gtk_label_new (message);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_padding (GTK_MISC (label), GNOME_PAD, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
-	gtk_widget_show (label);
+	message_box->label = gtk_label_new (message);
+	gtk_label_set_justify (GTK_LABEL (message_box->label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_padding (GTK_MISC (message_box->label), GNOME_PAD, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), message_box->label, TRUE, TRUE, 0);
+	gtk_widget_show (message_box->label);
 
 	/* Add some extra space on the right to balance the pixmap */
 	if (pixmap) {
@@ -330,5 +330,11 @@ gnome_message_box_set_default (GnomeMessageBox     *message_box,
   gnome_dialog_set_default(GNOME_DIALOG(message_box), button);
 }
 
+GtkWidget *
+gnome_message_box_get_label (GnomeMessageBox *messagebox)
+{
+	g_return_val_if_fail (messagebox != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_MESSAGE_BOX (messagebox), NULL);
 
-
+	return messagebox->label;
+}
