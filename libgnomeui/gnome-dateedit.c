@@ -98,6 +98,8 @@ static void gnome_date_edit_get_property    (GObject            *object,
 					  GValue             *value,
 					  GParamSpec         *pspec);
 
+static void create_children (GnomeDateEdit *gde);
+
 /* to get around warnings */
 static const char *strftime_date_format = "%x";
 

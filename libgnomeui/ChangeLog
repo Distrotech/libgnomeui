@@ -1,5 +1,7 @@
 2001-12-07  jacob berkman  <jacob@ximian.com>
 
+	* gnome-dateedit.c (create_children): add a forward decl
+
 	* gnome-messagebox.c (gnome_message_box_construct): make public
 	and fix some bugs
 
