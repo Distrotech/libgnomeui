@@ -32,7 +32,9 @@
 
 #include <libgnomevfs/gnome-vfs.h>
 #include <gconf/gconf-client.h>
+#include <libgnomeui/gnome-icon-lookup.h>
 
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -58,6 +60,8 @@ struct _GtkFileSystemGnomeVFS
   GConfClient *client;
   guint client_notify_id;
   GSList *bookmarks;
+
+  GnomeIconTheme *icon_theme;
 
   guint locale_encoded_filenames : 1;
 };
@@ -144,6 +148,12 @@ static GtkFilePath *gtk_file_system_gnome_vfs_uri_to_path      (GtkFileSystem   
 								const gchar       *uri);
 static GtkFilePath *gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem     *file_system,
 								const gchar       *filename);
+
+static GdkPixbuf *gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
+							 const GtkFilePath *path,
+							 GtkWidget         *widget,
+							 gint               pixel_size,
+							 GError           **error);
 
 static gboolean gtk_file_system_gnome_vfs_add_bookmark    (GtkFileSystem     *file_system,
 							   const GtkFilePath *path,
@@ -306,6 +316,7 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
   iface->path_to_filename = gtk_file_system_gnome_vfs_path_to_filename;
   iface->uri_to_path = gtk_file_system_gnome_vfs_uri_to_path;
   iface->filename_to_path = gtk_file_system_gnome_vfs_filename_to_path;
+  iface->render_icon = gtk_file_system_gnome_vfs_render_icon;
   iface->add_bookmark = gtk_file_system_gnome_vfs_add_bookmark;
   iface->remove_bookmark = gtk_file_system_gnome_vfs_remove_bookmark;
   iface->list_bookmarks = gtk_file_system_gnome_vfs_list_bookmarks;
@@ -333,6 +344,9 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 							  system_vfs,
 							  NULL,
 							  NULL);
+
+  system_vfs->icon_theme = gnome_icon_theme_new ();
+  /* FIXME: listen for the "changed" signal in the icon theme? */
 }
 
 static void
@@ -346,6 +360,8 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
   gconf_client_notify_remove (system_vfs->client, system_vfs->client_notify_id);
   g_object_unref (system_vfs->client);
   gtk_file_paths_free (system_vfs->bookmarks);
+
+  g_object_unref (system_vfs->icon_theme);
 
   /* XXX Assert ->roots and ->folders should be empty
    */
@@ -848,6 +864,83 @@ gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem *file_system,
     return gtk_file_path_new_steal (uri);
   else
     return NULL;
+}
+
+static GdkPixbuf *
+gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
+				       const GtkFilePath *path,
+				       GtkWidget         *widget,
+				       gint               pixel_size,
+				       GError           **error)
+{
+  GtkFileSystemGnomeVFS *system_vfs;
+  const char *uri;
+  GdkPixbuf *pixbuf;
+  char *icon_name;
+
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
+
+  pixbuf = NULL;
+
+  uri = gtk_file_path_get_string (path);
+  icon_name = gnome_icon_lookup_sync (system_vfs->icon_theme,
+				      NULL,
+				      uri,
+				      NULL,
+				      GNOME_ICON_LOOKUP_FLAGS_NONE,
+				      NULL);
+  if (icon_name)
+    {
+      GdkPixbuf *unscaled;
+
+      if (icon_name[0] != '/')
+	{
+	  char *lookup;
+
+	  lookup = gnome_icon_theme_lookup_icon (system_vfs->icon_theme,
+						 icon_name,
+						 pixel_size,
+						 NULL,
+						 NULL);
+	  g_free (icon_name);
+	  icon_name = lookup;
+	}
+
+      /* FIXME: Use a cache */
+      unscaled = gdk_pixbuf_new_from_file (icon_name, error);
+      g_free (icon_name);
+
+      if (unscaled)
+	{
+	  int uw, uh;
+
+	  uw = gdk_pixbuf_get_width (unscaled);
+	  uh = gdk_pixbuf_get_height (unscaled);
+
+	  if (uw <= pixel_size && uh <= pixel_size)
+	    pixbuf = unscaled;
+	  else
+	    {
+	      int w, h;
+
+	      w = pixel_size;
+	      h = floor ((double) (uh * w) / uw + 0.5);
+
+	      if (h > pixel_size)
+		{
+		  h = pixel_size;
+		  w = floor ((double) (uw * h) / uh + 0.5);
+		}
+
+	      g_assert (w <= pixel_size && h <= pixel_size);
+
+	      pixbuf = gdk_pixbuf_scale_simple (unscaled, w, h, GDK_INTERP_BILINEAR);
+	      gdk_pixbuf_unref (unscaled);
+	    }
+	}
+    }
+
+  return pixbuf;
 }
 
 static gboolean

@@ -1,3 +1,14 @@
+2003-11-18  Federico Mena Quintero  <federico@ximian.com>
+
+	* configure.ac: Added a libgnomeui dependency.
+
+	* gtkfilesystemgnomevfs.c (struct _GtkFileSystemGnomeVFS): Added a
+	field for a GnomeIconTheme.  This sort of sucks, as we should be
+	using GtkIconTheme, but GnomeIconLookup uses GnomeIconTheme...
+	(gtk_file_system_gnome_vfs_init): Create an icon theme.
+	(gtk_file_system_gnome_vfs_finalize): Unref the icon theme.
+	(gtk_file_system_gnome_vfs_render_icon): Implement.
+
 2003-11-03  Federico Mena Quintero  <federico@ximian.com>
 
 	* TODO: Removed the point about sensitizing the toolbar items -
