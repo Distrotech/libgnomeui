@@ -356,15 +356,6 @@ GnomeIconList
 @iconlist: the object which received the signal.
 @arg1: 
 
-<!-- ##### SIGNAL GnomeIconList::move-cursor ##### -->
-<para>
-
-</para>
-
-@iconlist: the object which received the signal.
-@arg1: 
-@arg2: 
-
 <!-- ##### SIGNAL GnomeIconList::select-icon ##### -->
 <para>
 

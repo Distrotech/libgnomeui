@@ -1560,44 +1560,31 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 	
 	switch (dir) {
 	case GTK_DIR_RIGHT:
-		if (priv->focus_icon + 1 < priv->icons - 1 &&
-			priv->focus_icon % items_per_line != (items_per_line - 1)) {
+		if (priv->focus_icon + 1 < priv->icons &&
+		    priv->focus_icon % items_per_line != (items_per_line - 1))
 			new_focus_icon++;
-		}
 		else
 			return;
 		break;
 
 	case GTK_DIR_LEFT:
 		if (priv->focus_icon - 1 >= 0 &&
-		    priv->focus_icon % items_per_line != 0) {
+		    priv->focus_icon % items_per_line != 0)
 			new_focus_icon--;
-		}
 		else
 			return;
 		break;
 		
 	case GTK_DIR_DOWN:
-		if (priv->focus_icon + items_per_line < priv->icons) {
+		if (priv->focus_icon + items_per_line < priv->icons)
 			new_focus_icon += items_per_line;
-
-#if 0
-			if (gnome_icon_list_icon_is_visible (gil, priv->focus_icon) != GTK_VISIBILITY_FULL)
-				gnome_icon_list_moveto (gil, priv->focus_icon, 1.0);
-#endif
-		}
 		else
 			return;
 		break;
 
 	case GTK_DIR_UP:
-		if (priv->focus_icon - items_per_line >= 0) {
+		if (priv->focus_icon - items_per_line >= 0)
 			new_focus_icon -= items_per_line;
-#if 0
-			if (gnome_icon_list_icon_is_visible (gil, priv->focus_icon) != GTK_VISIBILITY_FULL)
-				gnome_icon_list_moveto (gil, priv->focus_icon, 0.0);
-#endif
-		}
 		else
 			return;
 		break;
