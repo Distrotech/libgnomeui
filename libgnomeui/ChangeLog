@@ -1,3 +1,14 @@
+1998-04-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-dateedit.c, gnome-dateedit.h: New widget for editing a
+	date/time. 
+
+	* gtkcalendar.c (gtk_calendar_class_init): Declare signal
+	"day_selected"; 
+	(gtk_calendar_marshall_date): Marshaller for new signal.
+	(gtk_calendar_main_button): when a click happens in a day, emit
+	the signal day_changed.
+	
 1998-04-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtkcalendar.[ch]: Updated to latest version from gcalendar

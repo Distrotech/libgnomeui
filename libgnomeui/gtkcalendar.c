@@ -72,7 +72,10 @@ static GtkWidgetClass *parent_class = NULL;
 /* Signals -------------------------------------------- */
 
 enum {
-  MONTH_CHANGED_SIGNAL, DAY_SELECTED_SIGNAL, LAST_SIGNAL };
+  MONTH_CHANGED_SIGNAL,
+  DAY_SELECTED_SIGNAL,
+  LAST_SIGNAL
+};
 
 /*
   YEAR_CHANGED_SIGNAL,
@@ -81,34 +84,34 @@ enum {
 };*/
 
 static gint gtk_calendar_signals[LAST_SIGNAL] = { 0 };
-                                          
+
+typedef void (*GtkCalendarSignalDate) (GtkObject *object, guint arg1, guint arg2, guint arg3, gpointer data);
 /*
  *    -------------------
  *    Function prototypes
  *    -------------------
  */
-
-static void gtk_calendar_class_init (GtkCalendarClass *class);
-static void gtk_calendar_init (GtkCalendar *gcal);
-static void gtk_calendar_realize (GtkWidget *widget);
-static void gtk_calendar_size_request (GtkWidget *widget, GtkRequisition *requisition);
-static void gtk_calendar_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
-static gint gtk_calendar_expose (GtkWidget *widget, GdkEventExpose *event);
-static gint gtk_calendar_button_press (GtkWidget *widget, GdkEventButton *event);
-static gint gtk_calendar_header_button (GtkWidget *widget, GdkEventButton *event);
-static gint gtk_calendar_main_button (GtkWidget *widget, GdkEventButton *event);
+static void gtk_calendar_class_init     (GtkCalendarClass *class);
+static void gtk_calendar_init           (GtkCalendar *gcal);
+static void gtk_calendar_realize        (GtkWidget *widget);
+static void gtk_calendar_size_request   (GtkWidget *widget, GtkRequisition *requisition);
+static void gtk_calendar_size_allocate  (GtkWidget *widget, GtkAllocation *allocation);
+static gint gtk_calendar_expose         (GtkWidget *widget, GdkEventExpose *event);
+static gint gtk_calendar_button_press   (GtkWidget *widget, GdkEventButton *event);
+static gint gtk_calendar_header_button  (GtkWidget *widget, GdkEventButton *event);
+static gint gtk_calendar_main_button    (GtkWidget *widget, GdkEventButton *event);
 static gint gtk_calendar_button_release (GtkWidget *widget, GdkEventButton *event);
-static gint gtk_calendar_motion_notify (GtkWidget  *widget, GdkEventMotion *event);
-static gint gtk_calendar_enter_notify (GtkWidget  *widget, GdkEventCrossing *event);
-static gint gtk_calendar_leave_notify (GtkWidget  *widget, GdkEventCrossing *event);
-static void gtk_calendar_paint (GtkWidget *widget, GdkRectangle *area);
-static void gtk_calendar_paint_arrow (GtkWidget *widget, guint arrow);
-void gtk_calendar_paint_header (GtkWidget *widget);
-void gtk_calendar_paint_day_names (GtkWidget *widget);
-void gtk_calendar_paint_main (GtkWidget *widget);
-static void gtk_calendar_draw (GtkWidget *widget, GdkRectangle *area);
-static void gtk_calendar_map (GtkWidget *widget);
-static void gtk_calendar_unmap (GtkWidget *widget);
+static gint gtk_calendar_motion_notify  (GtkWidget  *widget, GdkEventMotion *event);
+static gint gtk_calendar_enter_notify   (GtkWidget  *widget, GdkEventCrossing *event);
+static gint gtk_calendar_leave_notify   (GtkWidget  *widget, GdkEventCrossing *event);
+static void gtk_calendar_paint          (GtkWidget *widget, GdkRectangle *area);
+static int  gtk_calendar_paint_arrow    (GtkWidget *widget, guint arrow);
+void gtk_calendar_paint_header          (GtkWidget *widget);
+void gtk_calendar_paint_day_names       (GtkWidget *widget);
+void gtk_calendar_paint_main            (GtkWidget *widget);
+static void gtk_calendar_draw           (GtkWidget *widget, GdkRectangle *area);
+static void gtk_calendar_map            (GtkWidget *widget);
+static void gtk_calendar_unmap          (GtkWidget *widget);
 
 
 
@@ -260,6 +263,7 @@ gtk_calendar_init (GtkCalendar *gcal)
   gcal->foreground_color = black;
   gcal->background_color = white;
   gcal->highlight_back_color = gray90;
+
 
   gcal->month_font = heading;
   gcal->day_name_font = heading;
@@ -1048,7 +1052,7 @@ gtk_calendar_button_press (GtkWidget      *widget,
       gtk_calendar_paint (widget , NULL);
   }
 
-  if ( event->window == gcal->main_win )
+  if (event->window == gcal->main_win)
     gtk_calendar_main_button (widget, event);
 
   return FALSE;
@@ -1068,10 +1072,6 @@ gtk_calendar_main_button (GtkWidget      *widget,
   gint row, col;
   gint day;
 
-  g_return_val_if_fail (widget != NULL, FALSE);
-  g_return_val_if_fail (GTK_IS_CALENDAR (widget), FALSE);
-  g_return_val_if_fail (event != NULL, FALSE);
-  
   gcal = GTK_CALENDAR (widget);
    
   x = (gint) (event->x);
@@ -1257,7 +1257,7 @@ gtk_calendar_leave_notify (GtkWidget      *widget,
   return TRUE;
 }
 
-static void
+static int
 gtk_calendar_paint_arrow (GtkWidget *widget, guint arrow)
 {
   GdkWindow *window;
@@ -1288,6 +1288,6 @@ gtk_calendar_paint_arrow (GtkWidget *widget, guint arrow)
   } else {
     draw_arrow_right(window, gc, width/2 - 2, height/2 - 4, 8);
   }
-   
+  return FALSE;   
 }
 

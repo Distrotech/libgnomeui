@@ -28,6 +28,7 @@
 #include "libgnomeui/gtk-plug.h"
 #include "libgnomeui/gtk-socket.h"
 #include "libgnomeui/gtkcalendar.h"
+#include "libgnomeui/gnome-dateedit.h"
 
 BEGIN_GNOME_DECLS
 

@@ -728,7 +728,7 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
 		g_return_val_if_fail(window != NULL, NULL);
 		g_return_val_if_fail(GTK_IS_WIDGET(window), NULL);
 	}
-
+	
 	pixmap = NULL;
 	switch (entry->type) {
 	 case GNOME_STOCK_PIXMAP_TYPE_DATA:
