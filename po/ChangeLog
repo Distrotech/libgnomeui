@@ -1,3 +1,7 @@
+2002-04-20  Christophe Merlet  <christophe@merlet.net>
+
+	* fr.po: Updated French translation.
+
 2002-04-19  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian (bokmål) translation.
@@ -35,7 +39,7 @@
 
 	* de.po: Updated German translation.
 
-2002-04-11  Christophe Merlet  <redfox@eikonex.org>
+2002-04-11  Christophe Merlet  <christophe@merlet.net>
 
 	* fr.po: Updated French translation from work of
 	Christophe Fergeau <teuf@users.sourceforge.net>.
@@ -479,7 +483,7 @@ Mon Sep 03 05:32:28 2001  George Lebl <jirka@5z.com>
 	* tr.po: Added preliminary Turkish translation
 		by Görkem.
 
-2001-05-30  Christophe Merlet  <redfox@eikonex.org>
+2001-05-30  Christophe Merlet  <christophe@merlet.net>
 
 	* fr.po: Added French translation.
 
