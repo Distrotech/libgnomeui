@@ -375,17 +375,17 @@ gnome_druid_page_edge_prepare (GnomeDruidPage *page,
 {
 	switch (GNOME_DRUID_PAGE_EDGE (page)->position) {
 	case GNOME_EDGE_START:
-		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), FALSE, TRUE, TRUE);
+		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), FALSE, TRUE, TRUE, TRUE);
 		gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
 		gtk_widget_grab_default (GNOME_DRUID (druid)->next);
 		break;
 	case GNOME_EDGE_FINISH:
-		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, FALSE, TRUE);
+		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, FALSE, TRUE, TRUE);
 		gnome_druid_set_show_finish (GNOME_DRUID (druid), TRUE);
 		gtk_widget_grab_default (GNOME_DRUID (druid)->finish);
 		break;
 	case GNOME_EDGE_OTHER:
-		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, TRUE, TRUE);
+		gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, TRUE, TRUE, TRUE);
 		gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
 	default:
 		break;

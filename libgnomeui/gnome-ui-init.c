@@ -418,11 +418,6 @@ libgnomeui_rc_parse (gchar *command)
 		gtk_rc_add_default_file (file);
 		g_free (file);
 	}
-
-#warning gtk_rc_init removed, is this correct ?
-/*
-	gtk_rc_init ();
-*/
 }
 
 /* crash handler */

@@ -45,6 +45,7 @@ typedef struct _GnomeDruidClass   GnomeDruidClass;
 struct _GnomeDruid
 {
 	GtkContainer parent;
+	GtkWidget *help;
 	GtkWidget *back;
 	GtkWidget *next;
 	GtkWidget *cancel;
@@ -58,6 +59,7 @@ struct _GnomeDruidClass
 	GtkContainerClass parent_class;
 	
 	void     (*cancel)	(GnomeDruid *druid);
+	void     (*help)	(GnomeDruid *druid);
 };
 
 
@@ -66,8 +68,10 @@ GtkWidget *gnome_druid_new                   (void);
 void	   gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 					      gboolean back_sensitive,
 					      gboolean next_sensitive,
-					      gboolean cancel_sensitive);
+					      gboolean cancel_sensitive,
+					      gboolean help_sensitive);
 void	   gnome_druid_set_show_finish       (GnomeDruid *druid, gboolean show_finish);
+void	   gnome_druid_set_show_help         (GnomeDruid *druid, gboolean show_help);
 void       gnome_druid_prepend_page          (GnomeDruid *druid, GnomeDruidPage *page);
 void       gnome_druid_insert_page           (GnomeDruid *druid, GnomeDruidPage *back_page, GnomeDruidPage *page);
 void       gnome_druid_append_page           (GnomeDruid *druid, GnomeDruidPage *page);

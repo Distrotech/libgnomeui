@@ -34,39 +34,59 @@ struct _GnomeDruidPrivate
 	GList *children;
 
 	gboolean show_finish : 1; /* if TRUE, then we are showing the finish button instead of the next button */
+	gboolean show_help : 1;
 };
 
 enum {
 	CANCEL,
+	HELP,
 	LAST_SIGNAL
 };
-static void gnome_druid_init		(GnomeDruid		 *druid);
-static void gnome_druid_class_init	(GnomeDruidClass	 *klass);
-static void gnome_druid_destroy         (GtkObject               *object);
-static void gnome_druid_finalize        (GObject                 *object);
-static void gnome_druid_size_request    (GtkWidget               *widget,
-					 GtkRequisition          *requisition);
-static void gnome_druid_size_allocate   (GtkWidget               *widget,
-					 GtkAllocation           *allocation);
-static gint gnome_druid_expose          (GtkWidget               *widget,
-					 GdkEventExpose          *event);
-static void gnome_druid_map             (GtkWidget               *widget);
-static void gnome_druid_unmap           (GtkWidget               *widget);
-static GtkType gnome_druid_child_type   (GtkContainer            *container);
-static void gnome_druid_add             (GtkContainer            *widget,
-					 GtkWidget               *page);
-static void gnome_druid_remove          (GtkContainer            *widget,
-					 GtkWidget               *child);
-static void gnome_druid_forall          (GtkContainer            *container,
-					 gboolean                include_internals,
-					 GtkCallback             callback,
-					 gpointer                callback_data);
-static void gnome_druid_back_callback   (GtkWidget               *button,
-					 GnomeDruid              *druid);
-static void gnome_druid_next_callback   (GtkWidget               *button,
-					 GnomeDruid              *druid);
-static void gnome_druid_cancel_callback (GtkWidget               *button,
-					 GtkWidget               *druid);
+enum {
+  PROP_0,
+  PROP_SHOW_FINISH,
+  PROP_SHOW_HELP,
+};
+
+
+static void    gnome_druid_init            (GnomeDruid      *druid);
+static void    gnome_druid_class_init      (GnomeDruidClass *klass);
+static void    gnome_druid_destroy         (GtkObject       *object);
+static void    gnome_druid_finalize        (GObject         *object);
+static void    gnome_druid_set_property    (GObject         *object,
+					    guint            prop_id,
+					    const GValue    *value,
+					    GParamSpec      *pspec);
+static void    gnome_druid_get_property    (GObject         *object,
+					    guint            prop_id,
+					    GValue          *value,
+					    GParamSpec      *pspec);
+static void    gnome_druid_size_request    (GtkWidget       *widget,
+					    GtkRequisition  *requisition);
+static void    gnome_druid_size_allocate   (GtkWidget       *widget,
+					    GtkAllocation   *allocation);
+static gint    gnome_druid_expose          (GtkWidget       *widget,
+					    GdkEventExpose  *event);
+static void    gnome_druid_map             (GtkWidget       *widget);
+static void    gnome_druid_unmap           (GtkWidget       *widget);
+static GtkType gnome_druid_child_type      (GtkContainer    *container);
+static void    gnome_druid_add             (GtkContainer    *widget,
+					    GtkWidget       *page);
+static void    gnome_druid_remove          (GtkContainer    *widget,
+					    GtkWidget       *child);
+static void    gnome_druid_forall          (GtkContainer    *container,
+					    gboolean         include_internals,
+					    GtkCallback      callback,
+					    gpointer         callback_data);
+static void    gnome_druid_back_callback   (GtkWidget       *button,
+					    GnomeDruid      *druid);
+static void    gnome_druid_next_callback   (GtkWidget       *button,
+					    GnomeDruid      *druid);
+static void    gnome_druid_cancel_callback (GtkWidget       *button,
+					    GtkWidget       *druid);
+static void    gnome_druid_help_callback   (GtkWidget       *button,
+					    GnomeDruid      *druid);
+
 
 static guint druid_signals[LAST_SIGNAL] = { 0 };
 
@@ -94,8 +114,33 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
 	
-	
+	druid_signals[HELP] = 
+		gtk_signal_new ("help",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeDruidClass, help),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE, 0);
+
+	g_object_class_install_property (gobject_class,
+					 PROP_SHOW_FINISH,
+					 g_param_spec_boolean ("show_finish",
+							       _("Show Finish"),
+							       _("Show the 'Finish' button instead of the 'Next' button"),
+							       FALSE,
+							       G_PARAM_READWRITE));
+
+	g_object_class_install_property (gobject_class,
+					 PROP_SHOW_HELP,
+					 g_param_spec_boolean ("show_help",
+							       _("Show Help"),
+							       _("Show the 'Help' button"),
+							       FALSE,
+							       G_PARAM_READWRITE));
+
 	object_class->destroy = gnome_druid_destroy;
+	gobject_class->set_property = gnome_druid_set_property;
+	gobject_class->get_property = gnome_druid_get_property;
 	gobject_class->finalize = gnome_druid_finalize;
 	widget_class->size_request = gnome_druid_size_request;
 	widget_class->size_allocate = gnome_druid_size_allocate;
@@ -128,19 +173,25 @@ gnome_druid_init (GnomeDruid *druid)
 	GTK_WIDGET_SET_FLAGS (druid->cancel, GTK_CAN_DEFAULT);
 	druid->finish = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_APPLY);
 	GTK_WIDGET_SET_FLAGS (druid->finish, GTK_CAN_DEFAULT);
+	druid->help = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_HELP);
+	GTK_WIDGET_SET_FLAGS (druid->help, GTK_CAN_DEFAULT);
 	gtk_widget_set_parent (druid->back, GTK_WIDGET (druid));
 	gtk_widget_set_parent (druid->next, GTK_WIDGET (druid));
 	gtk_widget_set_parent (druid->cancel, GTK_WIDGET (druid));
 	gtk_widget_set_parent (druid->finish, GTK_WIDGET (druid));
+	gtk_widget_set_parent (druid->help, GTK_WIDGET (druid));
 	gtk_widget_show (druid->back);
 	gtk_widget_show (druid->next);
 	gtk_widget_show (druid->cancel);
 	gtk_widget_show (druid->finish);
+	gtk_widget_show (druid->help);
 
 	/* other flags */
 	druid->_priv->current = NULL;
 	druid->_priv->children = NULL;
 	druid->_priv->show_finish = FALSE;
+	druid->_priv->show_help = FALSE;
+
 	gtk_signal_connect (GTK_OBJECT (druid->back),
 			    "clicked",
 			    GTK_SIGNAL_FUNC (gnome_druid_back_callback),
@@ -156,6 +207,10 @@ gnome_druid_init (GnomeDruid *druid)
 	gtk_signal_connect (GTK_OBJECT (druid->finish),
 			    "clicked",
 			    GTK_SIGNAL_FUNC (gnome_druid_next_callback),
+			    druid);
+	gtk_signal_connect (GTK_OBJECT (druid->help),
+			    "clicked",
+			    GTK_SIGNAL_FUNC (gnome_druid_help_callback),
 			    druid);
 }
 
@@ -189,6 +244,10 @@ gnome_druid_destroy (GtkObject *object)
 		gtk_widget_destroy (druid->finish);
 		druid->finish = NULL;
 	}
+	if(druid->help) {
+		gtk_widget_destroy (druid->help);
+		druid->help = NULL;
+	}
 
 	/* Remove all children, we set current to NULL so
 	 * that the remove code doesn't try to do anything funny */
@@ -215,6 +274,45 @@ gnome_druid_finalize (GObject *object)
 	druid->_priv = NULL;
 
 	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+}
+
+static void
+gnome_druid_set_property (GObject      *object,
+			  guint         prop_id,
+			  const GValue *value,
+			  GParamSpec   *pspec)
+{
+  switch (prop_id)
+    {
+    case PROP_SHOW_FINISH:
+      gnome_druid_set_show_finish (GNOME_DRUID (object), g_value_get_boolean (value));
+      break;
+    case PROP_SHOW_HELP:
+      gnome_druid_set_show_help (GNOME_DRUID (object), g_value_get_boolean (value));
+      break;
+    default:
+      break;
+    }
+}
+
+static void
+gnome_druid_get_property (GObject    *object,
+			  guint       prop_id,
+			  GValue     *value,
+			  GParamSpec *pspec)
+{
+	switch (prop_id)
+	{
+	case PROP_SHOW_FINISH:
+		g_value_set_boolean (value, GNOME_DRUID (object)->_priv->show_finish);
+		break;
+	case PROP_SHOW_HELP:
+		g_value_set_boolean (value, GNOME_DRUID (object)->_priv->show_help);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		break;
+	}
 }
 
 static void
@@ -254,8 +352,8 @@ gnome_druid_size_request (GtkWidget *widget,
 	/* In an Attempt to show how the widgets are packed,
 	 * here's a little diagram.
 	 * 
-	 * ------------- [  Back  ] [  Next  ]    [ Cancel ]
-	 *    \
+	 * [  Help  ] ------------- [  Back  ] [  Next  ]    [ Cancel ]
+	 *             / 
 	 *     This part needs to be at least 1 button width.
 	 *     In addition, there is 1/4 X Button width between Cancel and Next,
 	 *     and a GNOME_PAD_SMALL between Next and Back.
@@ -280,10 +378,14 @@ gnome_druid_size_request (GtkWidget *widget,
 	temp_width = MAX (temp_width, child_requisition.width);
 	temp_height = MAX (temp_height, child_requisition.height);
 
+	gtk_widget_size_request (druid->help, &child_requisition);
+	temp_width = MAX (temp_width, child_requisition.width);
+	temp_height = MAX (temp_height, child_requisition.height);
+
 	temp_width += border * 2;
 	temp_height += GNOME_PAD_SMALL;
 
-	temp_width = temp_width * 17/4  + GNOME_PAD_SMALL * 3;
+	temp_width = temp_width * 21/4  + GNOME_PAD_SMALL * 3;
 
 	/* pick which is bigger, the buttons, or the GnomeDruidPages */
 	requisition->width = MAX (temp_width, requisition->width);
@@ -313,13 +415,17 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	child_allocation.width = druid->back->requisition.width;
 	child_allocation.height = druid->back->requisition.height;
 	child_allocation.width = MAX (child_allocation.width,
-			    druid->next->requisition.width);
+				      druid->next->requisition.width);
 	child_allocation.height = MAX (child_allocation.height,
-			    druid->next->requisition.height);
+				       druid->next->requisition.height);
 	child_allocation.width = MAX (child_allocation.width,
-			    druid->cancel->requisition.width);
+				      druid->cancel->requisition.width);
 	child_allocation.height = MAX (child_allocation.height,
-			    druid->cancel->requisition.height);
+				       druid->cancel->requisition.height);
+	child_allocation.width = MAX (child_allocation.width,
+				      druid->help->requisition.width);
+	child_allocation.height = MAX (child_allocation.height,
+				       druid->help->requisition.height);
 
 	child_allocation.height += GNOME_PAD_SMALL;
 	button_height = child_allocation.height;
@@ -332,7 +438,9 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	gtk_widget_size_allocate (druid->finish, &child_allocation);
 	child_allocation.x -= (GNOME_PAD_SMALL + child_allocation.width);
 	gtk_widget_size_allocate (druid->back, &child_allocation);
-
+	child_allocation.x = allocation->x + border;
+	gtk_widget_size_allocate (druid->help, &child_allocation);
+	
 	/* Put up the GnomeDruidPage */
 	child_allocation.x = allocation->x + border;
 	child_allocation.y = allocation->y + border;
@@ -372,6 +480,8 @@ gnome_druid_map (GtkWidget *widget)
 		gtk_widget_map (druid->finish);
 	else
 		gtk_widget_map (druid->next);
+	if (druid->_priv->show_help)
+		gtk_widget_map (druid->help);
 	gtk_widget_map (druid->cancel);
 	if (druid->_priv->current &&
 	    GTK_WIDGET_VISIBLE (druid->_priv->current) &&
@@ -396,7 +506,9 @@ gnome_druid_unmap (GtkWidget *widget)
 		gtk_widget_unmap (druid->finish);
 	else
 		gtk_widget_unmap (druid->next);
-	gtk_widget_unmap (druid->cancel);
+	gtk_widget_unmap (druid->cancel);	
+	if (druid->_priv->show_help)
+		gtk_widget_unmap (druid->help);
 	if (druid->_priv->current &&
 	    GTK_WIDGET_VISIBLE (druid->_priv->current) &&
 	    GTK_WIDGET_MAPPED (druid->_priv->current))
@@ -468,6 +580,7 @@ gnome_druid_forall (GtkContainer *container,
 		(* callback) (druid->next, callback_data);
 		(* callback) (druid->cancel, callback_data);
 		(* callback) (druid->finish, callback_data);
+		(* callback) (druid->help, callback_data);
 	}
 }
 
@@ -502,6 +615,8 @@ gnome_druid_expose (GtkWidget      *widget,
 						druid->cancel, event);
 		gtk_container_propagate_expose (GTK_CONTAINER (widget),
 						druid->finish, event);
+		gtk_container_propagate_expose (GTK_CONTAINER (widget),
+						druid->help, event);
 	}
 	return FALSE;
 }
@@ -558,6 +673,13 @@ gnome_druid_cancel_callback (GtkWidget *button, GtkWidget *druid)
 
 	     gtk_signal_emit (GTK_OBJECT (druid), druid_signals [CANCEL]);
      }
+}
+
+static void
+gnome_druid_help_callback (GtkWidget  *button,
+			   GnomeDruid *druid)
+{
+	gtk_signal_emit (GTK_OBJECT (druid), druid_signals [HELP]);
 }
 
 /* Public Functions */
@@ -693,6 +815,7 @@ gnome_druid_construct_with_window (GnomeDruid *druid,
  * @back_sensitive: The sensitivity of the back button.
  * @next_sensitive: The sensitivity of the next button.
  * @cancel_sensitive: The sensitivity of the cancel button.
+ * @help_sensitive: The sensitivity of the help button.
  *
  * Description: Sets the sensitivity of the @druid's control-buttons.  If the
  * variables are TRUE, then they will be clickable.  This function is used
@@ -703,7 +826,8 @@ void
 gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 				   gboolean back_sensitive,
 				   gboolean next_sensitive,
-				   gboolean cancel_sensitive)
+				   gboolean cancel_sensitive,
+				   gboolean help_sensitive)
 {
 	g_return_if_fail (druid != NULL);
 	g_return_if_fail (GNOME_IS_DRUID (druid));
@@ -711,6 +835,7 @@ gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 	gtk_widget_set_sensitive (druid->back, back_sensitive);
 	gtk_widget_set_sensitive (druid->next, next_sensitive);
 	gtk_widget_set_sensitive (druid->cancel, cancel_sensitive);
+	gtk_widget_set_sensitive (druid->help, help_sensitive);
 }
 
 static void
@@ -729,18 +854,19 @@ undefault_button (GtkWidget *widget)
 /**
  * gnome_druid_set_show_finish
  * @druid: A Druid widget.
- # @show_finish: If TRUE, then the "Cancel" button is changed to be "Finish"
+ # @show_finish: If %TRUE, then the "Cancel" button is changed to be "Finish"
  *
- * Description: Sets the text on the last button on the @druid.  If @show_finish
- * is TRUE, then the text becomes "Finish".  If @show_finish is FALSE, then the
- * text becomes "Cancel".
+ * Sets the "Help" button on the druid to be visible in the lower left corner of
+ * the widget, if @show_finish is %TRUE.
  **/
 void
 gnome_druid_set_show_finish (GnomeDruid *druid,
-			     gboolean show_finish)
+			     gboolean    show_finish)
 {
-	g_return_if_fail (druid != NULL);
 	g_return_if_fail (GNOME_IS_DRUID (druid));
+
+	if ((show_finish?TRUE:FALSE) == druid->_priv->show_finish)
+		return;
 
 	if (show_finish) {
 		undefault_button (druid->next);
@@ -757,8 +883,37 @@ gnome_druid_set_show_finish (GnomeDruid *druid,
 			gtk_widget_map (druid->next);
 		}
 	}
-	druid->_priv->show_finish = show_finish;
+	druid->_priv->show_finish = show_finish?TRUE:FALSE;
 }
+
+/**
+ * gnome_druid_set_show_finish
+ * @druid: A #GnomeDruid.
+ # @show_finish: TRUE, if the "Help" button is to be shown.
+ *
+ * Sets the 
+ **/
+void
+gnome_druid_set_show_help (GnomeDruid *druid,
+			   gboolean    show_help)
+{
+	g_return_if_fail (GNOME_IS_DRUID (druid));
+
+	if ((show_help?TRUE:FALSE) == druid->_priv->show_help)
+		return;
+
+	if (show_help) {
+		if (GTK_WIDGET_MAPPED (druid))
+			gtk_widget_map (druid->help);
+	} else {
+		undefault_button (druid->help);
+		if (GTK_WIDGET_MAPPED (druid->help))
+			gtk_widget_unmap (druid->help);
+	}
+	druid->_priv->show_finish = show_help?TRUE:FALSE;
+}
+
+
 /**
  * gnome_druid_prepend_page:
  * @druid: A Druid widget.

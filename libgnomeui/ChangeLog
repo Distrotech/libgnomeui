@@ -1,3 +1,16 @@
+Tue Jun 26 23:27:58 2001  Jonathan Blandford  <jrb@redhat.com>
+ 
+ 	* gnome-druid.c (gnome_druid_set_property): Add Param support.
+ 	(gnome_druid_get_property): Add Param support.
+ 	(gnome_druid_init): Add a Help button.
+ 
+ 	* gnome-druid.h: Add a Help button.
+
+Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
+
+	* gnome-init.c (libgnomeui_rc_parse): removed #warning, as
+	gtk_rc_init is dead.
+
 2001-06-28  Cody Russell  <bratsche@gnome.org>
 
 	* libgnomeui-2.0.pc.in: Add gconf-2.0 dependency.

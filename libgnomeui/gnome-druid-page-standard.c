@@ -319,7 +319,7 @@ gnome_druid_page_standard_prepare (GnomeDruidPage *page,
 				   GtkWidget *druid,
 				   gpointer *data)
 {
-	gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, TRUE, TRUE);
+	gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, TRUE, TRUE, TRUE);
 	gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
 	gtk_widget_grab_default (GNOME_DRUID (druid)->next);
 }
