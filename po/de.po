@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the libgnomeui package.
 # Benjamin Greiner <benjamin.greiner@gmx.net>, 2002.
 # Christian Meyer <chrisime@gnome.org>, 2002.
+# Christian Neumair <chris@gnome-de.org>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.2\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2002-12-20 17:48+0100\n"
-"Last-Translator: Christian Meyer <chrisime@gnome,org>\n"
+"Project-Id-Version: libgnomeui 2.4.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-07-06 15:52+0200\n"
+"PO-Revision-Date: 2003-07-06 15:52+0200\n"
+"Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,9 +50,8 @@ msgid "Translated by"
 msgstr "Übersetzung von"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Mitwirkende"
+msgstr "_Mitwirkende"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -143,6 +144,7 @@ msgstr "Info zu %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datei"
 
@@ -200,6 +202,7 @@ msgid "_Game"
 msgstr "_Spiel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -390,11 +393,11 @@ msgstr "Die Anwendung konfigurieren"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Über diese Anwendung"
 
@@ -421,7 +424,7 @@ msgstr "Ein neues Fenster öffnen"
 msgid "_Close This Window"
 msgstr "Fenster _schließen"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Das aktuelle Fenster schließen"
 
@@ -596,7 +599,7 @@ msgstr "Grad an benötigter Benutzeraktivität"
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Ihr HTTP-Proxy macht es erforderlich, dass Sie sich anmelden.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -604,18 +607,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Sie müssen sich anmelden, um auf »%s« zuzugreifen.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Ihr Passwort wird unverschlüsselt übertragen."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Ihr Passwort wird verschlüsselt übertragen."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Legitimation erforderlich"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1224,11 +1229,11 @@ msgstr "Nachricht"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Benutzername:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Passwort:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1378,8 +1383,9 @@ msgstr ""
 "Bitte besuchen Sie die GNOME-Webseite über abgestürzte Anwendungen, um "
 "weitere Informationen zu erhalten."
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Den Test beenden"
+
 #~ msgid "_Credits"
 #~ msgstr "_Mitwirkende"
-
-#~ msgid "Exit the test"
-#~ msgstr "Den Test beenden"
