@@ -150,7 +150,7 @@ gboolean gnome_less_show_file(GnomeLess * gl, const gchar * path)
     return FALSE;
   }
 
-  f = fopen(path, "r");
+  f = fopen(path, "rt");
 
   if ( f == NULL ) {
     /* Leave errno */
@@ -180,7 +180,7 @@ gboolean gnome_less_show_command(GnomeLess * gl,
   g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
   g_return_val_if_fail(command_line != NULL, FALSE);
   
-  p = popen(command_line, "r");
+  p = popen(command_line, "rt");
 
   if ( p == NULL ) {
     return FALSE;

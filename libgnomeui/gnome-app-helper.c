@@ -1075,7 +1075,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 
 	topic_file = gnome_help_file_find_file (uiinfo->moreinfo, "topic.dat");
 
-	if (!topic_file || !(file = fopen (topic_file, "r"))) {
+	if (!topic_file || !(file = fopen (topic_file, "rt"))) {
 		g_warning ("Could not open help topics file %s", 
 				topic_file ? topic_file : "NULL");
 

@@ -1,3 +1,9 @@
+Fri Apr  2 21:03:56 1999  ape@spacetec.no  (Asbjorn Pettersen)
+
+	* gnome-less.c (gnome_less_show_command): 
+	* gnome-app-helper.c (create_help_entries): Open file in TEXT mode.
+	This is for the OS/2 version.
+
 1999-03-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-color-picker.c (gnome_color_picker_init): Use the Imlib
