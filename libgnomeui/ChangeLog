@@ -1,3 +1,8 @@
+1998-06-10  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (EXTRA_libgnomeui_la_SOURCES): Add gnome-canva-*
+	here.  These files are conditionally built.
+
 Wed Jun 10 14:19:39 EDT 1998 Gregory McLean <gregm@comstar.net>
 
 	* gnome-canvas-* stuff gets automaticly turned on and off
@@ -1827,8 +1832,8 @@ Thu Feb 26 18:07:40 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	(gnome_pixmap_new_from_rgb_d_at_size): Likewise.
 	(gnome_pixmap_load_rgb_d): Likewise.
 	(gnome_pixmap_load_rgb_d_at_size): Likewise, you know it!
-	(finish_load): New misc. internal function that does all the boilerplate
-	image loading finalization.
+	(finish_load): New misc. internal function that does all the
+	boilerplate image loading finalization.
 	(load_file): Modified to use finish_load().
 	(load_xpm_d): New internal function.
 	(load_rgb_d): Likewise.
@@ -1866,13 +1871,13 @@ Thu Feb 26 18:07:40 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 1998-02-23  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.c (gnome_default_client_init): New function.
-  	Creates a new client without connection to a session manager.
-  	This client is called the 'default client'. (Not used yet)
+	Creates a new client without connection to a session manager.
+	This client is called the 'default client'. (Not used yet)
 	(default_client_connect): New callback function.  This callback is
- 	registered to the connect signal of the default client and sets
- 	the SM_CLIENT_ID property to the gdk client leader window.
+	registered to the connect signal of the default client and sets
+	the SM_CLIENT_ID property to the gdk client leader window.
 	(default_client_disconnect): New callback function.  Removes
- 	SM_CLIENT_ID property.
+	SM_CLIENT_ID property.
 	(gnome_get_default_client): New function.
 
 	* gnome-app-helper.h: Removed comma in pixmap_type.
@@ -1915,6 +1920,7 @@ Thu Feb 26 18:07:40 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	* gnome-session.h: same as above.
 
 Wed Feb 18 13:52:00 PST 1998  Christoph Toshok  <toshok@hungry.com>
+
 	* gnome-app-helper.c (gnome_app_do_menu_creation): If any items in
 	a menu have GNOME_APP_PIXMAP_STOCK, use gnome_stock_menu_item for
 	all of them, so the left side of the labels line up.
@@ -1925,7 +1931,7 @@ Wed Feb 18 17:03:13 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gnome-about.c (gnome_destroy_about): Fixed refcounting.
 	(gnome_fill_info, gnome_about_new): Fixed I18N problem.  (but a
- 	dirty hack, it uses ONLY the fonts from gtkrc.).
+	dirty hack, it uses ONLY the fonts from gtkrc.).
 	* gtkrc: Moved GnomeAbout styles to here.
 
 1998-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -1942,11 +1948,11 @@ Tue Feb 17 00:16:49 KST 1998  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 	buttonnumber counting.
 
 	* gnome-scores.[ch]: Fixed i18n problem.  All color/font settings
- 	are in gtkrc.
+	are in gtkrc.
 	(gnome_scores_set_logo_label_title): New function
 	(gnome_scores_set_current_player): New function.
 	* gnome-scores.c (gnome_scores_display): Use the above new
-	functions. 
+	functions.
 
 	* gtkrc: New file, the global gtk+ rc file of GNOME.
 	* Makefile.am: Added gtkrc. 
@@ -2001,6 +2007,7 @@ Sat Feb 14 17:15:18 1998  Tom Tromey  <tromey@cygnus.com>
 	'user_id'.
 
 1998-02-14  Christoph Toshok <toshok@hungry.com>
+
 	* gnome-app-helper.c (gnome_app_create_menus_with_data): new
 	function, to handle the (common) case of creating an entire menu
 	system with the same callback data.

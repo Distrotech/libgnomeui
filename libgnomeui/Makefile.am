@@ -15,6 +15,10 @@ noinst_PROGRAMS = ted_demo stock_demo
 bin_PROGRAMS    = gnome_segv
 lib_LTLIBRARIES = libgnomeui.la
 
+# these files are `autoconf'ed in.
+EXTRA_libgnomeui_la_SOURCES = gnome-canvas.c gnome-canvas.h \
+		gnome-canvas-rect-ellipse.c gnome-canvas-rect-ellipse.h
+
 libgnomeui_la_SOURCES = \
 	gnome-actionarea.c		\
 	gnome-app.c			\
@@ -60,7 +64,7 @@ libgnomeui_la_SOURCES = \
 
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
-        gnome-actionarea.h     		\
+	gnome-actionarea.h     		\
 	@GNOME_CANVAS_HED@		\
 	gnome-app.h			\
 	gnome-app-helper.h		\
