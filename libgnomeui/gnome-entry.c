@@ -312,6 +312,7 @@ set_combo_items (GnomeEntry *gentry)
 
 	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
 	g_free (tmp);
+
 	gentry->changed = FALSE;
 }
 

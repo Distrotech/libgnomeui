@@ -310,7 +310,7 @@ gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
 }
 
 void
-gnome_proc_bar_start (GnomeProcBar *pb, gint time, gpointer data)
+gnome_proc_bar_start (GnomeProcBar *pb, gint gtime, gpointer data)
 
 {
     g_return_if_fail (pb != NULL);
@@ -321,7 +321,7 @@ gnome_proc_bar_start (GnomeProcBar *pb, gint time, gpointer data)
 
     if (pb->cb) {
 	pb->cb (data);
-	pb->tag = gtk_timeout_add (time, pb->cb, data);
+	pb->tag = gtk_timeout_add (gtime, pb->cb, data);
     }
 }
 
