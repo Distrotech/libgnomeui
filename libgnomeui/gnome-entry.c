@@ -591,6 +591,10 @@ set_combo_items (GnomeEntry *gentry)
 
 		g_list_free (strings);
 	}
+	else
+	{
+		gtk_list_clear_items (GTK_LIST (GTK_COMBO (gentry)->list), 0, -1);
+	}
 
 	/* Restore the text in the entry and clear our changed flag. */
 
