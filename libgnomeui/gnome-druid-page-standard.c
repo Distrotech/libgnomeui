@@ -152,7 +152,11 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 static void
 gnome_druid_page_standard_finalize (GtkObject *object)
 {
-	g_free (GNOME_DRUID_PAGE_STANDARD (object)->title);
+	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD (object);
+
+	g_free (druid_page_standard->title);
+	druid_page_standard->title = NULL;
+	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 static void

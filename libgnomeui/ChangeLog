@@ -1,6 +1,11 @@
+2000-11-28  Morten Welinder  <terra@diku.dk>
+
+	* gnome-druid-page-standard.c
+ 	(gnome_druid_page_standard_finalize): Call parent's finalize also.
+
 2000-11-28  Ramiro Estrugo  <ramiro@eazel.com>
 
-	* libgnomeui/gnome-druid.c: (gnome_druid_destroy):
+	* gnome-druid.c: (gnome_druid_destroy):
 	Fix tiny mistake from the last change.  GnomeDruid in this branch
 	doesnt have a '_priv' structure.
 	
