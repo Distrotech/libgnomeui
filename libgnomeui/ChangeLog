@@ -1,3 +1,19 @@
+1998-08-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c: Updates to the to-do list.
+
+	* gnome-canvas-text.c (gnome_canvas_text_class_init): Added
+	clip_width, clip_height, clip, x_offset, and y_offset arguments.
+	These are used to define an optional clip rectangle and offset
+	distance for the text.  Please see the comments in
+	gnome-canvas-text.h for an explanation of these.
+	(split_into_lines): Added support for multiline text; this
+	function splits the text into an array of lines.
+	(gnome_canvas_text_draw): Changed to draw
+	multiline/justified/clipped text.
+	(gnome_canvas_text_point): Modified to calculate the distance to
+	multiline clipped text.
+
 Thu Aug 20 15:44:22 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_filter_func): Small

@@ -20,6 +20,15 @@ BEGIN_GNOME_DECLS
 
 
 /* Text item for the canvas.  Text items are positioned by an anchor point and an anchor direction.
+ *
+ * A clipping rectangle may be specified for the text.  The rectangle is anchored at the text's anchor
+ * point, and is specified by clipping width and height parameters.  If the clipping rectangle is
+ * enabled, it will clip the text.
+ *
+ * In addition, x and y offset values may be specified.  These specify an offset from the anchor
+ * position.  If used in conjunction with the clipping rectangle, these could be used to implement
+ * simple scrolling of the text within the clipping rectangle.
+ *
  * The following object arguments are available:
  *
  * name			type			read/write	description
@@ -33,8 +42,12 @@ BEGIN_GNOME_DECLS
  * justification	GtkJustification	RW		Justification for multiline text
  * fill_color		string			W		X color specification for text
  * fill_color_gdk	GdkColor*		RW		Pointer to an allocated GdkColor
+ * clip_width		double			RW		Width of clip rectangle
+ * clip_height		double			RW		Height of clip rectangle
+ * clip			boolean			RW		Use clipping rectangle?
+ * x_offset		double			RW		Horizontal offset distance from anchor position
+ * y_offset		double			RW		Vertical offset distance from anchor position
  */
-
 
 #define GNOME_TYPE_CANVAS_TEXT            (gnome_canvas_text_get_type ())
 #define GNOME_CANVAS_TEXT(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CANVAS_TEXT, GnomeCanvasText))
@@ -50,18 +63,29 @@ struct _GnomeCanvasText {
 	GnomeCanvasItem item;
 
 	char *text;			/* Text to display */
+	gpointer lines;			/* Text split into lines (private field) */
+	int num_lines;			/* Number of lines of text */
 
 	double x, y;			/* Position at anchor */
 	GdkFont *font;			/* Font for text */
 	GtkAnchorType anchor;		/* Anchor side for text */
 	GtkJustification justification;	/* Justification for text */
 
+	double clip_width;		/* Width of optional clip rectangle */
+	double clip_height;		/* Height of optional clip rectangle */
+
+	double xofs, yofs;		/* Text offset distance from anchor position */
+
 	gulong pixel;			/* Fill color */
 	GdkGC *gc;			/* GC for drawing text */
 
-	int width;			/* Rendered width in pixels */
-	int height;			/* Rendered height in pixels */
-	int cx, cy;			/* Top-left canvas coordinates for display */
+	int cx, cy;			/* Top-left canvas coordinates for text */
+	int clip_cx, clip_cy;		/* Top-left canvas coordinates for clip rectangle */
+	int clip_cwidth, clip_cheight;	/* Size of clip rectangle in pixels */
+	int max_width;			/* Maximum width of text lines */
+	int height;			/* Rendered text height in pixels */
+
+	int clip : 1;			/* Use clip rectangle? */
 };
 
 struct _GnomeCanvasTextClass {

@@ -13,6 +13,13 @@
 #include "gnome-canvas-text.h"
 
 
+/* This defines a line of text */
+struct line {
+	char *text;	/* Line's text, it is a pointer into the text->text string */
+	int length;	/* Line's length in characters */
+	int width;	/* Line's width in pixels */
+};
+
 enum {
 	ARG_0,
 	ARG_TEXT,
@@ -22,6 +29,11 @@ enum {
 	ARG_FONT_GDK,
 	ARG_ANCHOR,
 	ARG_JUSTIFICATION,
+	ARG_CLIP_WIDTH,
+	ARG_CLIP_HEIGHT,
+	ARG_CLIP,
+	ARG_X_OFFSET,
+	ARG_Y_OFFSET,
 	ARG_FILL_COLOR,
 	ARG_FILL_COLOR_GDK
 };
@@ -84,13 +96,18 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasText::text", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_TEXT);
-	gtk_object_add_arg_type ("GnomeCanvasText::x", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X);
-	gtk_object_add_arg_type ("GnomeCanvasText::y", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y);
+	gtk_object_add_arg_type ("GnomeCanvasText::text", GTK_TYPE_STRING, GTK_ARG_READWRITE, ARG_TEXT);
+	gtk_object_add_arg_type ("GnomeCanvasText::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
+	gtk_object_add_arg_type ("GnomeCanvasText::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
 	gtk_object_add_arg_type ("GnomeCanvasText::font", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONT);
 	gtk_object_add_arg_type ("GnomeCanvasText::font_gdk", GTK_TYPE_GDK_FONT, GTK_ARG_READWRITE, ARG_FONT_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasText::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_WRITABLE, ARG_ANCHOR);
-	gtk_object_add_arg_type ("GnomeCanvasText::justification", GTK_TYPE_JUSTIFICATION, GTK_ARG_WRITABLE, ARG_JUSTIFICATION);
+	gtk_object_add_arg_type ("GnomeCanvasText::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_READWRITE, ARG_ANCHOR);
+	gtk_object_add_arg_type ("GnomeCanvasText::justification", GTK_TYPE_JUSTIFICATION, GTK_ARG_READWRITE, ARG_JUSTIFICATION);
+	gtk_object_add_arg_type ("GnomeCanvasText::clip_width", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_CLIP_WIDTH);
+	gtk_object_add_arg_type ("GnomeCanvasText::clip_height", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_CLIP_HEIGHT);
+	gtk_object_add_arg_type ("GnomeCanvasText::clip", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_CLIP);
+	gtk_object_add_arg_type ("GnomeCanvasText::x_offset", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X_OFFSET);
+	gtk_object_add_arg_type ("GnomeCanvasText::y_offset", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y_OFFSET);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
 
@@ -115,6 +132,10 @@ gnome_canvas_text_init (GnomeCanvasText *text)
 	g_assert (text->font != NULL);
 	text->anchor = GTK_ANCHOR_CENTER;
 	text->justification = GTK_JUSTIFY_LEFT;
+	text->clip_width = 0.0;
+	text->clip_height = 0.0;
+	text->xofs = 0.0;
+	text->yofs = 0.0;
 }
 
 static void
@@ -130,12 +151,19 @@ gnome_canvas_text_destroy (GtkObject *object)
 	if (text->text)
 		g_free (text->text);
 
+	if (text->lines)
+		g_free (text->lines);
+
 	gdk_font_unref (text->font);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/* Recalculates the bounding box of the text item.  The bounding box is defined by the text's
+ * extents if the clip rectangle is disabled.  If it is enabled, the bounding box is defined by the
+ * clip rectangle itself.
+ */
 static void
 recalc_bounds (GnomeCanvasText *text)
 {
@@ -144,20 +172,25 @@ recalc_bounds (GnomeCanvasText *text)
 
 	item = GNOME_CANVAS_ITEM (text);
 
-	/* Get world coordinates */
+	/* Get canvas pixel coordinates for text position */
 
 	wx = text->x;
 	wy = text->y;
 	gnome_canvas_item_i2w (item, &wx, &wy);
+	gnome_canvas_w2c (item->canvas, wx + text->xofs, wy + text->yofs, &text->cx, &text->cy);
 
-	/* Get canvas pixel coordinates */
+	/* Get canvas pixel coordinates for clip rectangle position */
 
-	gnome_canvas_w2c (item->canvas, wx, wy, &text->cx, &text->cy);
+	gnome_canvas_w2c (item->canvas, wx, wy, &text->clip_cx, &text->clip_cy);
+	text->clip_cwidth = text->clip_width * item->canvas->pixels_per_unit;
+	text->clip_cheight = text->clip_height * item->canvas->pixels_per_unit;
 
 	/* Calculate text dimensions */
 
-	text->width = text->text ? gdk_string_width (text->font, text->text) : 0;
-	text->height = text->font->ascent + text->font->descent;
+	if (text->text)
+		text->height = (text->font->ascent + text->font->descent) * text->num_lines;
+	else
+		text->height = 0;
 
 	/* Anchor text */
 
@@ -170,13 +203,15 @@ recalc_bounds (GnomeCanvasText *text)
 	case GTK_ANCHOR_N:
 	case GTK_ANCHOR_CENTER:
 	case GTK_ANCHOR_S:
-		text->cx -= text->width / 2;
+		text->cx -= text->max_width / 2;
+		text->clip_cx -= text->clip_cwidth / 2;
 		break;
 
 	case GTK_ANCHOR_NE:
 	case GTK_ANCHOR_E:
 	case GTK_ANCHOR_SE:
-		text->cx -= text->width;
+		text->cx -= text->max_width;
+		text->clip_cx -= text->clip_cwidth;
 		break;
 	}
 
@@ -190,23 +225,106 @@ recalc_bounds (GnomeCanvasText *text)
 	case GTK_ANCHOR_CENTER:
 	case GTK_ANCHOR_E:
 		text->cy -= text->height / 2;
+		text->clip_cy -= text->clip_cheight / 2;
 		break;
 
 	case GTK_ANCHOR_SW:
 	case GTK_ANCHOR_S:
 	case GTK_ANCHOR_SE:
 		text->cy -= text->height;
+		text->clip_cy -= text->clip_cheight;
 		break;
 	}
 
 	/* Bounds */
 
-	item->x1 = text->cx;
-	item->y1 = text->cy;
-	item->x2 = text->cx + text->width;
-	item->y2 = text->cy + text->height;
+	if (text->clip) {
+		item->x1 = text->clip_cx;
+		item->y1 = text->clip_cy;
+		item->x2 = text->clip_cx + text->clip_cwidth;
+		item->y2 = text->clip_cy + text->clip_cheight;
+	} else {
+		item->x1 = text->cx;
+		item->y1 = text->cy;
+		item->x2 = text->cx + text->max_width;
+		item->y2 = text->cy + text->height;
+	}
 
 	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
+}
+
+/* Calculates the line widths (in pixels) of the text's splitted lines */
+static void
+calc_line_widths (GnomeCanvasText *text)
+{
+	struct line *lines;
+	int i;
+
+	lines = text->lines;
+	text->max_width = 0;
+
+	if (!lines)
+		return;
+
+	for (i = 0; i < text->num_lines; i++) {
+		if (lines->length != 0) {
+			lines->width = gdk_text_width (text->font, lines->text, lines->length);
+
+			if (lines->width > text->max_width)
+				text->max_width = lines->width;
+		}
+
+		lines++;
+	}
+}
+
+/* Splits the text of the text item into lines */
+static void
+split_into_lines (GnomeCanvasText *text)
+{
+	char *p;
+	struct line *lines;
+	int len;
+
+	/* Free old array of lines */
+
+	if (text->lines)
+		g_free (text->lines);
+
+	text->lines = NULL;
+	text->num_lines = 0;
+
+	if (!text->text)
+		return;
+
+	/* First, count the number of lines */
+
+	for (p = text->text; *p; p++)
+		if (*p == '\n')
+			text->num_lines++;
+
+	text->num_lines++;
+
+	/* Allocate array of lines and calculate split positions */
+
+	text->lines = lines = g_new0 (struct line, text->num_lines);
+	len = 0;
+
+	for (p = text->text; *p; p++) {
+		if (*p == '\n') {
+			lines->length = len;
+			lines++;
+			len = 0;
+		} else if (len == 0) {
+			len++;
+			lines->text = p;
+		} else
+			len++;
+	}
+
+	lines->length = len;
+
+	calc_line_widths (text);
 }
 
 static void
@@ -214,14 +332,12 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasText *text;
-	int calc_bounds;
 	int calc_gcs;
 	GdkColor color;
 
 	item = GNOME_CANVAS_ITEM (object);
 	text = GNOME_CANVAS_TEXT (object);
 
-	calc_bounds = FALSE;
 	calc_gcs = FALSE;
 
 	switch (arg_id) {
@@ -230,17 +346,18 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			g_free (text->text);
 
 		text->text = g_strdup (GTK_VALUE_STRING (*arg));
-		calc_bounds = TRUE;
+		split_into_lines (text);
+		recalc_bounds (text);
 		break;
 
 	case ARG_X:
 		text->x = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+		recalc_bounds (text);
 		break;
 
 	case ARG_Y:
 		text->y = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+		recalc_bounds (text);
 		break;
 
 	case ARG_FONT:
@@ -253,7 +370,8 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			g_assert (text->font != NULL);
 		}
 
-		calc_bounds = TRUE;
+		calc_line_widths (text);
+		recalc_bounds (text);
 		break;
 
 	case ARG_FONT_GDK:
@@ -262,16 +380,42 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 		text->font = GTK_VALUE_BOXED (*arg);
 		gdk_font_ref (text->font);
-		calc_bounds = TRUE;
+		calc_line_widths (text);
+		recalc_bounds (text);
 		break;
 
 	case ARG_ANCHOR:
 		text->anchor = GTK_VALUE_ENUM (*arg);
-		calc_bounds = TRUE;
+		recalc_bounds (text);
 		break;
 
 	case ARG_JUSTIFICATION:
 		text->justification = GTK_VALUE_ENUM (*arg);
+		break;
+
+	case ARG_CLIP_WIDTH:
+		text->clip_width = fabs (GTK_VALUE_DOUBLE (*arg));
+		recalc_bounds (text);
+		break;
+
+	case ARG_CLIP_HEIGHT:
+		text->clip_height = fabs (GTK_VALUE_DOUBLE (*arg));
+		recalc_bounds (text);
+		break;
+
+	case ARG_CLIP:
+		text->clip = GTK_VALUE_BOOL (*arg);
+		recalc_bounds (text);
+		break;
+
+	case ARG_X_OFFSET:
+		text->xofs = GTK_VALUE_DOUBLE (*arg);
+		recalc_bounds (text);
+		break;
+
+	case ARG_Y_OFFSET:
+		text->yofs = GTK_VALUE_DOUBLE (*arg);
+		recalc_bounds (text);
 		break;
 
 	case ARG_FILL_COLOR:
@@ -294,9 +438,6 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	if (calc_gcs)
 		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
-
-	if (calc_bounds)
-		recalc_bounds (text);
 }
 
 static void
@@ -330,6 +471,26 @@ gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_JUSTIFICATION:
 		GTK_VALUE_ENUM (*arg) = text->justification;
+		break;
+
+	case ARG_CLIP_WIDTH:
+		GTK_VALUE_DOUBLE (*arg) = text->clip_width;
+		break;
+
+	case ARG_CLIP_HEIGHT:
+		GTK_VALUE_DOUBLE (*arg) = text->clip_height;
+		break;
+
+	case ARG_CLIP:
+		GTK_VALUE_BOOL (*arg) = text->clip;
+		break;
+
+	case ARG_X_OFFSET:
+		GTK_VALUE_DOUBLE (*arg) = text->xofs;
+		break;
+
+	case ARG_Y_OFFSET:
+		GTK_VALUE_DOUBLE (*arg) = text->yofs;
 		break;
 
 	case ARG_FILL_COLOR_GDK:
@@ -391,21 +552,77 @@ gnome_canvas_text_unrealize (GnomeCanvasItem *item)
 		(* parent_class->unrealize) (item);
 }
 
+/* Calculates the x position of the specified line of text, based on the text's justification */
+static int
+get_line_xpos (GnomeCanvasText *text, struct line *line)
+{
+	int x;
+
+	x = text->cx;
+
+	switch (text->justification) {
+	case GTK_JUSTIFY_RIGHT:
+		x += text->max_width - line->width;
+		break;
+
+	case GTK_JUSTIFY_CENTER:
+		x += (text->max_width - line->width) / 2;
+		break;
+
+	default:
+		/* For GTK_JUSTIFY_LEFT, we don't have to do anything.  We do not support
+		 * GTK_JUSTIFY_FILL, yet.
+		 */
+		break;
+	}
+
+	return x;
+}
+
 static void
 gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			int x, int y, int width, int height)
 {
 	GnomeCanvasText *text;
+	GdkRectangle rect;
+	struct line *lines;
+	int i;
+	int xpos, ypos;
 
 	text = GNOME_CANVAS_TEXT (item);
 
-	if (text->text)
-		gdk_draw_string (drawable,
-				 text->font,
-				 text->gc,
-				 text->cx - x,
-				 text->cy - y + text->font->ascent,
-				 text->text);
+	if (!text->text)
+		return;
+
+	if (text->clip) {
+		rect.x = text->clip_cx - x;
+		rect.y = text->clip_cy - y;
+		rect.width = text->clip_cwidth;
+		rect.height = text->clip_cheight;
+
+		gdk_gc_set_clip_rectangle (text->gc, &rect);
+	}
+
+	lines = text->lines;
+	ypos = text->cy + text->font->ascent;
+
+	for (i = 0; i < text->num_lines; i++) {
+		xpos = get_line_xpos (text, lines);
+
+		gdk_draw_text (drawable,
+			       text->font,
+			       text->gc,
+			       xpos - x,
+			       ypos - y,
+			       lines->text,
+			       lines->length);
+
+		ypos += text->font->ascent + text->font->descent;
+		lines++;
+	}
+
+	if (text->clip)
+		gdk_gc_set_clip_rectangle (text->gc, NULL);
 }
 
 static double
@@ -413,83 +630,82 @@ gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
 			 int cx, int cy, GnomeCanvasItem **actual_item)
 {
 	GnomeCanvasText *text;
-	double w, h;
-	double x1, y1, x2, y2;
-	double dx, dy;
+	int i;
+	struct line *lines;
+	int x1, y1, x2, y2;
+	int font_height;
+	int dx, dy;
+	double dist, best;
 
 	text = GNOME_CANVAS_TEXT (item);
 
 	*actual_item = item;
 
-	w = text->width / item->canvas->pixels_per_unit;
-	h = text->height / item->canvas->pixels_per_unit;
+	/* The idea is to build bounding rectangles for each of the lines of text (clipped by the
+	 * clipping rectangle, if it is activated) and see whether the point is inside any of these.
+	 * If it is, we are done.  Otherwise, calculate the distance to the nearest rectangle.
+	 */
 
-	x1 = text->x;
-	y1 = text->y;
+	font_height = text->font->ascent + text->font->descent;
 
-	switch (text->anchor) {
-	case GTK_ANCHOR_NW:
-	case GTK_ANCHOR_W:
-	case GTK_ANCHOR_SW:
-		break;
+	best = 1.0e36;
 
-	case GTK_ANCHOR_N:
-	case GTK_ANCHOR_CENTER:
-	case GTK_ANCHOR_S:
-		x1 -= w / 2.0;
-		break;
+	lines = text->lines;
 
-	case GTK_ANCHOR_NE:
-	case GTK_ANCHOR_E:
-	case GTK_ANCHOR_SE:
-		x1 -= w;
-		break;
+	for (i = 0; i < text->num_lines; i++) {
+		/* Compute the coordinates of rectangle for the current line, clipping if appropriate */
+
+		x1 = get_line_xpos (text, lines);
+		y1 = text->cy + i * font_height;
+		x2 = x1 + lines->width;
+		y2 = y1 + font_height;
+
+		if (text->clip) {
+			if (x1 < text->clip_cx)
+				x1 = text->clip_cx;
+
+			if (y1 < text->clip_cy)
+				y1 = text->clip_cy;
+
+			if (x2 > (text->clip_cx + text->clip_width))
+				x2 = text->clip_cx + text->clip_width;
+
+			if (y2 > (text->clip_cy + text->clip_height))
+				y2 = text->clip_cy + text->clip_height;
+
+			if ((x1 >= x2) || (y1 >= y2))
+				continue;
+		}
+
+		/* Calculate distance from point to rectangle */
+
+		if (cx < x1)
+			dx = x1 - cx;
+		else if (cx >= x2)
+			dx = cx - x2 + 1;
+		else
+			dx = 0;
+
+		if (cy < y1)
+			dy = y1 - cy;
+		else if (cy >= y2)
+			dy = cy - y2 + 1;
+		else
+			dy = 0;
+
+		if ((dx == 0) && (dy == 0))
+			return 0.0;
+
+		dist = sqrt (dx * dx + dy * dy);
+		if (dist < best)
+			best = dist;
+
+		/* Next! */
+
+		lines++;
 	}
 
-	switch (text->anchor) {
-	case GTK_ANCHOR_NW:
-	case GTK_ANCHOR_N:
-	case GTK_ANCHOR_NE:
-		break;
-
-	case GTK_ANCHOR_W:
-	case GTK_ANCHOR_CENTER:
-	case GTK_ANCHOR_E:
-		y1 -= h / 2.0;
-		break;
-
-	case GTK_ANCHOR_SW:
-	case GTK_ANCHOR_S:
-	case GTK_ANCHOR_SE:
-		y1 -= h;
-		break;
-	}
-
-	x2 = x1 + w;
-	y2 = y1 + h;
-
-	/* Is point inside text bounds? */
-
-	if ((x >= x1) && (y >= y1) && (x <= x2) && (y <= y2))
-		return 0.0;
-
-	/* Point is outside text bounds */
-
-	if (x < x1)
-		dx = x1 - x;
-	else if (x > x2)
-		dx = x - x2;
-	else
-		dx = 0.0;
-
-	if (y < y1)
-		dy = y1 - y;
-	else if (y > y2)
-		dy = y - y2;
-	else
-		dy = 0.0;
-
-	return sqrt (dx * dx + dy * dy);
+	return best / item->canvas->pixels_per_unit;
 }
 
 static void

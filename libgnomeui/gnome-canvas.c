@@ -12,8 +12,6 @@
  *
  * - Implement hiding/showing of items.
  *
- * - Implement "all_items_that_are_over_some_other_item_and_overlap_it()"
- *
  * - Implement gnome_canvas_item_reparent().
  *
  * - GC put functions for items.
@@ -31,8 +29,6 @@
  * - Polygon item.
  *
  * - Arc item.
- *
- * - Text item: wrapped and clipped text, support (multiline) justification.
  *
  * - Sane font handling API.
  *
