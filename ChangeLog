@@ -1,3 +1,7 @@
+2001-08-14  Martin Baulig  <baulig@suse.de>
+
+	* NEWS: Start to write the NEWS file for the release.
+
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
 	* configure.in: Require libgnome >= 1.101.0, libgnomecanvas >= 1.96.2
