@@ -1,5 +1,7 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* gnome-dock*.[ch]: Removed; use BonoboDock instead.
+
 	* gnome-app.[ch], gnome-app-helper.[ch], gnome-appbar.[ch],
 	gnome-stock.[ch]: Removed.
 

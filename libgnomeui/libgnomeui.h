@@ -41,9 +41,6 @@
 #include <libgnomecanvas/gnome-canvas-widget.h>
 #include <libgnomeui/gnome-color-picker.h>
 #include <libgnomeui/gnome-cursors.h>
-#include <libgnomeui/gnome-dock.h>
-#include <libgnomeui/gnome-dock-band.h>
-#include <libgnomeui/gnome-dock-item.h>
 #include <libgnomeui/gnome-entry.h>
 #include <libgnomeui/gnome-selector.h>
 #include <libgnomeui/gnome-file-selector.h>

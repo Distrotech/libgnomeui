@@ -76,10 +76,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-cursors.c			\
 	gnome-dateedit.c		\
 	gnome-ditem-edit.c		\
-	gnome-dock.c			\
-	gnome-dock-band.c		\
-	gnome-dock-item.c		\
-	gnome-dock-layout.c		\
 	gnome-druid.c			\
 	gnome-druid-page.c		\
 	gnome-druid-page-edge.c		\
@@ -122,10 +118,6 @@ gnome_headers = \
 	gnome-cursors.h			\
 	gnome-dateedit.h		\
 	gnome-ditem-edit.h		\
-	gnome-dock.h			\
-	gnome-dock-band.h		\
-	gnome-dock-item.h		\
-	gnome-dock-layout.h		\
 	gnome-druid.h			\
 	gnome-druid-page.h		\
 	gnome-druid-page-edge.h		\
