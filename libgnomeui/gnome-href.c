@@ -32,6 +32,7 @@
 #include <libgnome/gnome-url.h>
 #include "gnome-href.h"
 #include "libgnomeui-access.h"
+#include "gnome-url.h"
 
 struct _GnomeHRefPrivate {
 	gchar *url;
@@ -386,8 +387,8 @@ gnome_href_clicked (GtkButton *button)
 
   g_return_if_fail(href->_priv->url != NULL);
 
-  /* FIXME: Use the error variable from gnome_url_show */
-  if(!gnome_url_show(href->_priv->url, NULL)) {
+  /* FIXME: Use the error variable from gnome_url_show_on_screen */
+  if(!gnome_url_show_on_screen (href->_priv->url, gtk_widget_get_screen (GTK_WIDGET (href)), NULL)) {
     GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR,
 					       GTK_BUTTONS_OK,
 					       _("An error has occured while trying to launch the "

@@ -1,5 +1,11 @@
 2004-05-02  Anders Carlsson  <andersca@gnome.org>
 
+	* libgnomeui/gnome-href.c: (gnome_href_clicked):
+	Use gnome_url_show_on_screen.
+	(#111923, Leena Gunda)
+	
+2004-05-02  Anders Carlsson  <andersca@gnome.org>
+
 	* libgnomeui/gnome-thumbnail.c: (gnome_thumbnail_has_uri),
 	(gnome_thumbnail_is_valid):
 	Handle invalid values from gdk_pixbuf_get_option.
