@@ -53,7 +53,9 @@ libgnomeui_la_SOURCES = \
 	gnome-dateedit.c		\
 	gnome-lamp.c			\
 	gnome-calculator.c              \
-	gtkdial.c
+	gtkdial.c                       \
+	gnome-mdi.c			\
+	gnome-mdi-child.c
 
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
@@ -94,7 +96,9 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-dateedit.h		\
 	gnome-lamp.h			\
 	gnome-calculator.h              \
-	gtkdial.h
+	gtkdial.h			\
+	gnome-mdi.h			\
+	gnome-mdi-child.h
 
 gnome_segv_SOURCES = gnome_segv.c
 

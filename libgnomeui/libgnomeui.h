@@ -43,6 +43,8 @@
 #include "libgnomeui/gnome-calculator.h"
 #include "libgnomeui/gnome-lamp.h"
 #include "libgnomeui/gtkdial.h"
+#include "libgnomeui/gnome-mdi.h"
+#include "libgnomeui/gnome-mdi-child.h"
 
 BEGIN_GNOME_DECLS
 

@@ -1,3 +1,12 @@
+1998-06-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: a configurable MDI object.
+	see gnome-hello/gnome-hello-7-mdi.c or gnome-utils/ghex for an
+	example of its use.
+ 	* gnome-mdi-child.[ch]: an MDI child object
+	* libgnomeui.h: includes above headers
+	* Makefile.am: changed to include above sources in libgnomeui
+
 1998-06-07  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.c: Inclueded 'stdarg.h'.
