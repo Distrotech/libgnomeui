@@ -1,5 +1,8 @@
 2001-12-10  jacob berkman  <jacob@ximian.com>
 
+	* tests/test-libglade-gnome-noupgrade.c (main): test
+	libglade-convert --noupgrade
+
 	* glade/glade-gnome.c (gnome_add_dock_item): fix dock item
 	placement
 	

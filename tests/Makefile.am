@@ -1,8 +1,10 @@
 check_PROGRAMS = \
-	test-libglade-gnome
+	test-libglade-gnome	\
+	test-libglade-gnome-noupgrade
 
 check_DATA = \
-	test-libglade-gnome.glade2
+	test-libglade-gnome.glade2	\
+	test-libglade-gnome-noupgrade.glade2
 
 TESTS = $(check_PROGRAMS)
 
@@ -15,11 +17,18 @@ INCLUDES = \
 	$(LIBGNOMEUI_GLADE_CFLAGS)
 
 test-libglade-gnome.glade2: test-libglade-gnome.glade $(LIBGLADE_CONVERT)
-	$(LIBGLADE_CONVERT) --verbose --no-upgrade \
+	$(LIBGLADE_CONVERT) \
 		$(srcdir)/test-libglade-gnome.glade \
 		> test-libglade-gnome.glade2.tmp \
 	&& mv test-libglade-gnome.glade2.tmp \
 		test-libglade-gnome.glade2
+
+test-libglade-gnome-noupgrade.glade2: test-libglade-gnome.glade $(LIBGLADE_CONVERT)
+	$(LIBGLADE_CONVERT) --no-upgrade \
+		$(srcdir)/test-libglade-gnome.glade \
+		> test-libglade-gnome-noupgrade.glade2.tmp \
+	&& mv test-libglade-gnome-noupgrade.glade2.tmp \
+		test-libglade-gnome-noupgrade.glade2
 
 LDADD = \
 	$(top_builddir)/libgnomeui/libgnomeui-2.la \
@@ -28,8 +37,11 @@ LDADD = \
 LDFLAGS = -export-dynamic
 
 test_libglade_gnome_SOURCE = test-libglade-gnome.c
+test_libglade_gnome_noupgrade_SOURCE = test-libglade-gnome-noupgrade.c
 
-EXTRA_DIST = test-libglade-gnome.glade
+EXTRA_DIST = \
+	test-libglade-gnome.glade	\
+	test-libglade-gnome-noupgrade.glade
 
 distclean-local:
-	rm -f test-libglade-gnome.glade2
+	rm -f test-libglade-gnome.glade2 test-libglade-gnome-noupgrade.glade
