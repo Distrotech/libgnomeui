@@ -54,84 +54,130 @@ typedef struct _GnomeSelectorPrivate  GnomeSelectorPrivate;
 typedef struct _GnomeSelectorClass    GnomeSelectorClass;
 
 enum {
-	GNOME_SELECTOR_DEFAULT_SELECTOR_WIDGET	= 1 << 0,
-	GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG	= 1 << 1,
-	GNOME_SELECTOR_WANT_BROWSE_BUTTON	= 1 << 2,
-	GNOME_SELECTOR_WANT_CLEAR_BUTTON	= 1 << 3
+        GNOME_SELECTOR_DEFAULT_SELECTOR_WIDGET  = 1 << 0,
+        GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG    = 1 << 1,
+        GNOME_SELECTOR_WANT_BROWSE_BUTTON       = 1 << 2,
+        GNOME_SELECTOR_WANT_CLEAR_BUTTON        = 1 << 3
 };
 
 struct _GnomeSelector {
-	GtkVBox vbox;
-	
-	/*< private >*/
-	GnomeSelectorPrivate *_priv;
+        GtkVBox vbox;
+        
+        /*< private >*/
+        GnomeSelectorPrivate *_priv;
 };
 
 struct _GnomeSelectorClass {
-	GtkVBoxClass parent_class;
+        GtkVBoxClass parent_class;
 
-	void (*changed) (GnomeSelector *selector);
-	void (*browse) (GnomeSelector *selector);
-	void (*clear) (GnomeSelector *selector);
+        void (*changed) (GnomeSelector *selector);
+        void (*browse) (GnomeSelector *selector);
+        void (*clear) (GnomeSelector *selector);
 
-	void (*freeze) (GnomeSelector *selector);
-	void (*update) (GnomeSelector *selector);
-	void (*thaw) (GnomeSelector *selector);
+        void (*freeze) (GnomeSelector *selector);
+        void (*update) (GnomeSelector *selector);
+        void (*thaw) (GnomeSelector *selector);
 
-	gboolean (*check_filename) (GnomeSelector *selector,
-				    const gchar *filename);
-	gboolean (*set_filename) (GnomeSelector *selector,
-				  const gchar *filename);
-	void (*add_directory) (GnomeSelector *selector,
-			       const gchar *directory);
+        gboolean (*set_filename) (GnomeSelector *selector,
+                                  const gchar *filename);
+
+        gboolean (*check_filename) (GnomeSelector *selector,
+                                    const gchar *filename);
+	void (*add_file) (GnomeSelector *selector,
+			  const gchar *filename);
+
+	gboolean (*check_directory) (GnomeSelector *selector,
+				     const gchar *directory);
+        void (*add_directory) (GnomeSelector *selector,
+                               const gchar *directory);
+
+	void (*update_file_list) (GnomeSelector *selector);
+
+	void (*set_selection_mode) (GnomeSelector *selector,
+				    guint mode);
+	GSList * (*get_selection) (GnomeSelector *selector);
 };
 
 
-guint        gnome_selector_get_type         (void);
+guint        gnome_selector_get_type           (void);
 
 /* This is a purely virtual class, so there is no _new method.
  * Use gnome_{file,icon,pixmap}_selector_new instead. */
 
-void         gnome_selector_construct        (GnomeSelector *selector,
-                                              const gchar *history_id,
-					      const gchar *dialog_title,
-					      GtkWidget *selector_widget,
-					      GtkWidget *browse_dialog,
-					      guint32 flags);
+void         gnome_selector_construct          (GnomeSelector *selector,
+                                                const gchar *history_id,
+                                                const gchar *dialog_title,
+                                                GtkWidget *selector_widget,
+                                                GtkWidget *browse_dialog,
+                                                guint32 flags);
 
 /*only return a file if the `check_filename' method succeeded. */
-gchar       *gnome_selector_get_filename     (GnomeSelector *selector);
+gchar       *gnome_selector_get_filename       (GnomeSelector *selector);
 
 /* checks whether this is a valid filename. */
-gboolean     gnome_selector_check_filename   (GnomeSelector *selector,
-                                              const gchar *filename);
+gboolean     gnome_selector_check_filename     (GnomeSelector *selector,
+                                                const gchar *filename);
+
+/* Append/prepend filename to file list, return TRUE on success. */
+gboolean     gnome_selector_prepend_file       (GnomeSelector *selector,
+                                                const gchar *filename);
+gboolean     gnome_selector_append_file        (GnomeSelector *selector,
+					        const gchar *filename);
+
+/* Get/set file list (set will replace the old file list). */
+GSList *     gnome_selector_get_file_list      (GnomeSelector *selector,
+						gboolean include_dir_list);
+void         gnome_selector_set_file_list      (GnomeSelector *selector,
+						GSList *file_list);
 
 /* set the filename to something, returns TRUE on success. */
-gboolean     gnome_selector_set_filename     (GnomeSelector *selector,
-                                              const gchar *filename);
+gboolean     gnome_selector_set_filename       (GnomeSelector *selector,
+                                                const gchar *filename);
 
 /* Remove all entries from the selector. */
-void         gnome_selector_clear            (GnomeSelector *selector);
+void         gnome_selector_clear              (GnomeSelector *selector);
 
-/* Add all files from this directory. */
-void         gnome_selector_add_directory    (GnomeSelector *selector,
-					      const gchar *directory);
+/* Checks whether it's ok to add this directory. */
+gboolean     gnome_selector_check_directory    (GnomeSelector *selector,
+                                                const gchar *directory);
+
+/* Append/prepend directory to directory list, return TRUE on success. */
+gboolean     gnome_selector_prepend_directory  (GnomeSelector *selector,
+                                                const gchar *directory);
+gboolean     gnome_selector_append_directory   (GnomeSelector *selector,
+					        const gchar *directory);
+
+/* Get/set directory list (set will replace the old directory list). */
+GSList *     gnome_selector_get_directory_list (GnomeSelector *selector);
+void         gnome_selector_set_directory_list (GnomeSelector *selector,
+                                                GSList *directory_list);
+
+/* Updates the internal file list. This will also read all the directories
+ * from the directory list and add the files to an internal list. */
+void         gnome_selector_update_file_list   (GnomeSelector *selector);
+
+/* Sets the selection mode. */
+void         gnome_selector_set_selection_mode (GnomeSelector *selector,
+						GtkSelectionMode mode);
+
+/* Returns the current selection. */
+GSList *     gnome_selector_get_selection      (GnomeSelector *selector);
 
 /* To avoid excesive recomputes during insertion/deletion */
-void         gnome_selector_freeze           (GnomeSelector *selector);
-gboolean     gnome_selector_is_frozen        (GnomeSelector *selector);
-void         gnome_selector_thaw             (GnomeSelector *selector);
+void         gnome_selector_freeze             (GnomeSelector *selector);
+gboolean     gnome_selector_is_frozen          (GnomeSelector *selector);
+void         gnome_selector_thaw               (GnomeSelector *selector);
 
 /* Perform an update (also works in frozen state). */
-void         gnome_selector_update           (GnomeSelector *selector);
+void         gnome_selector_update             (GnomeSelector *selector);
 
 /* get/set the dialog title. */
-const gchar *gnome_selector_get_dialog_title (GnomeSelector *selector);
-void         gnome_selector_set_dialog_title (GnomeSelector *selector,
-					      const gchar *dialog_title);
+const gchar *gnome_selector_get_dialog_title   (GnomeSelector *selector);
+void         gnome_selector_set_dialog_title   (GnomeSelector *selector,
+                                                const gchar *dialog_title);
 
 /* returns the GnomeEntry widget of this selector. */
-GtkWidget   *gnome_selector_get_gnome_entry  (GnomeSelector *selector);
+GtkWidget   *gnome_selector_get_gnome_entry    (GnomeSelector *selector);
 
 
 END_GNOME_DECLS

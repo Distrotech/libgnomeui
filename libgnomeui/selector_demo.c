@@ -25,10 +25,36 @@
 #include "gnome-file-selector.h"
 #include "gnome-icon-selector.h"
 
+static GtkWidget *iselector;
+
 static void
 quit_cb (void)
 {
         gtk_main_quit ();
+}
+
+static void
+file_list_cb (void)
+{
+	GSList *list, *c;
+
+	list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector), TRUE);
+
+	for (c = list; c; c = c->next) {
+		g_print ("FILE: `%s'\n", c->data);
+	}
+}
+
+static void
+selection_cb (void)
+{
+	GSList *list, *c;
+
+	list = gnome_selector_get_selection (GNOME_SELECTOR (iselector));
+
+	for (c = list; c; c = c->next) {
+		g_print ("SELECTION: `%s'\n", c->data);
+	}
 }
 
 static GnomeUIInfo file_menu[] = {
@@ -38,8 +64,18 @@ static GnomeUIInfo file_menu[] = {
         { GNOME_APP_UI_ENDOFINFO }
 };
 
+static GnomeUIInfo test_menu[] = {
+	{ GNOME_APP_UI_ITEM, "Display file list", NULL, file_list_cb, NULL,
+	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 'f', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, "Display selection", NULL, selection_cb, NULL,
+	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 's', GDK_CONTROL_MASK, NULL },
+        { GNOME_APP_UI_ENDOFINFO }
+};
+
 static GnomeUIInfo main_menu[] = {
         { GNOME_APP_UI_SUBTREE, ("File"), NULL, file_menu, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+        { GNOME_APP_UI_SUBTREE, ("Test"), NULL, test_menu, NULL, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
         { GNOME_APP_UI_ENDOFINFO }
 };
@@ -110,7 +146,7 @@ main (int argc, char **argv)
     GtkWidget *app;
     GtkWidget *vbox;
     GtkWidget *frame1, *frame2;
-    GtkWidget *fselector, *iselector;
+    GtkWidget *fselector;
     GtkWidget *selector;
     gchar *pixmap_dir;
 
@@ -145,7 +181,10 @@ main (int argc, char **argv)
 
     pixmap_dir = gnome_unconditional_datadir_file ("pixmaps");
   
-    gnome_selector_add_directory (GNOME_SELECTOR (iselector), pixmap_dir);
+    gnome_selector_append_directory (GNOME_SELECTOR (iselector), pixmap_dir);
+
+    gnome_selector_set_selection_mode (GNOME_SELECTOR (iselector),
+				       GTK_SELECTION_MULTIPLE);
 
     g_free(pixmap_dir);
 

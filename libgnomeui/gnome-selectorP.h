@@ -44,6 +44,7 @@ struct _GnomeSelectorPrivate {
 
 	GSList      *dir_list;
 	GSList      *file_list;
+	GSList      *total_list;
 
 	GtkWidget   *selector_widget;
 	GtkWidget   *browse_dialog;
@@ -56,9 +57,10 @@ struct _GnomeSelectorPrivate {
 	guint32      flags;
 
 	guint32      changed : 1;
+	guint32      need_rebuild : 1;
+	guint32      dirty : 1;
 
 	guint        frozen;
-	gboolean     dirty;
 };
 	
 END_GNOME_DECLS
