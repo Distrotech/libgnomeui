@@ -2,13 +2,14 @@
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Tino Meinen <a.t.meinen@chello.nl>, 2002.
 # Ronald Hummelink <ronald@hummelink.xs4all.nl>, 2002
+# Reinout van Schouwen <reinout@cs.vu.nl>, 2002
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
-"POT-Creation-Date: 2002-05-29 09:30+0200\n"
-"PO-Revision-Date: 2002-05-29 15:59+02:00\n"
-"Last-Translator: Ronald Hummelink <ronald@hummelink.xs4all.nl>\n"
+"POT-Creation-Date: 2002-12-26 06:06+0100\n"
+"PO-Revision-Date: 2002-12-26 20:19+0100\n"
+"Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,19 +17,19 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:194
 msgid "Credits"
-msgstr "Credits"
+msgstr "Met dank aan"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
-msgstr "_Geschreven door"
+msgid "Written by"
+msgstr "Geschreven door"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
-msgstr "Ge_documenteerd door"
+msgid "Documented by"
+msgstr "Gedocumenteerd door"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
-msgstr "_Vertaald door"
+msgid "Translated by"
+msgstr "Vertaald door"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -101,7 +102,7 @@ msgstr "Een enkele documentator"
 
 #: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
-msgstr "Vertaler-credits"
+msgstr "Vertaler-bedankjes"
 
 #: libgnomeui/gnome-about.c:406
 msgid ""
@@ -121,23 +122,23 @@ msgstr "Een logo voor het info venster"
 #: libgnomeui/gnome-about.c:493
 #, c-format
 msgid "About %s"
-msgstr "Over %s"
+msgstr "%s-info"
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
-msgstr "Heeft Voortgang"
+msgstr "Boekt vooruitgang"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Maak een voortgangswidget"
+msgstr "Een voortgangswidget creëren."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
-msgstr "Heeft Status"
+msgstr "Heeft status"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Maak een statuswidget"
+msgstr "Een statuswidget creëren"
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -149,7 +150,7 @@ msgstr "Benodigd niveau van gebruikersactiviteit"
 
 #: libgnomeui/gnome-client.c:860
 msgid "Specify session management ID"
-msgstr "Geef sessiemanagement ID"
+msgstr "Sessiebeheer-ID specificeren"
 
 #: libgnomeui/gnome-client.c:860
 msgid "ID"
@@ -165,29 +166,29 @@ msgstr "VOORVOEGSEL"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Disable connection to session manager"
-msgstr "Sluit de verbinding met de sessie-manager"
+msgstr "Verbinding met het sessiebeheer uitschakelen"
 
 #: libgnomeui/gnome-client.c:972
 msgid "Session management"
 msgstr "Sessie-management"
 
-#: libgnomeui/gnome-client.c:2510
+#: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
-msgstr "Uitloggen Annuleren"
+msgstr "Afmelden annuleren"
 
-#: libgnomeui/gnome-color-picker.c:407
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Ongeldige kleurgegevens ontvangen\n"
 
-#: libgnomeui/gnome-color-picker.c:457
+#: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
 msgstr "Kleurselectie"
 
-#: libgnomeui/gnome-color-picker.c:458
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "Open een dialoogvenster voor het kiezen van een kleur"
+msgstr "Een venster openen om de kleur te specificeren"
 
-#: libgnomeui/gnome-color-picker.c:480
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Kies een kleur"
 
@@ -197,35 +198,35 @@ msgstr "Tijd"
 
 #: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
-msgstr "De huidige geselecteerde tijd"
+msgstr "De momenteel geselecteerde tijd"
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
-msgstr "DatumBewerkings Vlaggen"
+msgstr "DateEdit-vlaggen"
 
 #: libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
-msgstr "Vlaggen die bepalen hoe DatumBewerking er uit ziet"
+msgstr "Vlaggen die bepalen hoe DateEdit er uit ziet"
 
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
-msgstr "Verlaag Uur"
+msgstr "Uur verlagen"
 
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
-msgstr "Verlaag het uur in het tijdkeuze dialoogvenster"
+msgstr "Uur verlagen in het tijdkeuze-opduikvenster"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
-msgstr "Verhoog Uur"
+msgstr "Uur ophogen"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr "Verhoog het uur in het tijdkeuze dialoogvenster"
+msgstr "Uur ophogen in het tijdkeuze-opduikvenster"
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
-msgstr "Start Tijd"
+msgstr "Starttijd"
 
 #: libgnomeui/gnome-dateedit.c:525
 msgid "The initial time"
@@ -237,11 +238,11 @@ msgstr "Datum"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select Date"
-msgstr "Kies Datum"
+msgstr "Datum kiezen"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr "Kies een datum uit de kalender"
+msgstr "Een datum kiezen uit de kalender"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -250,13 +251,13 @@ msgstr "Kalender"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
-msgstr "Kies Tijd"
+msgstr "Tijd kiezen"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr "Kies een tijd uit een lijst"
+msgstr "De tijd kiezen uit een lijst"
 
-#: libgnomeui/gnome-dateedit.c:1001
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date is verouderd, gebruik gnome_date_edit_get_time"
@@ -272,19 +273,19 @@ msgstr "Titel van de druïde"
 
 #: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr "Logo"
+msgstr "Logo-afbeelding"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
-msgstr "Top Watermerk"
+msgstr "Boven-watermerk"
 
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr "Watermerk voor de bovenkant"
+msgstr "Watermerkafbeelding voor de bovenkant"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
-msgstr "Titel Voorgrond"
+msgstr "Titel-voorgrond"
 
 #: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
@@ -292,7 +293,7 @@ msgstr "Voorgrondkleur van de titel"
 
 #: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
-msgstr "Titel Voorgrondkleur"
+msgstr "Titel-voorgrondkleur"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
@@ -300,11 +301,11 @@ msgstr "Voorgrondkleur van de titel als een GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
-msgstr "Titel Voorgrondkleur aangezet"
+msgstr "Titel-voorgrondkleur ingesteld"
 
 #: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
-msgstr "Voorgrond kleur van de titel is aangezet"
+msgstr "Voorgrondkleur van de titel is ingesteld"
 
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
@@ -321,48 +322,48 @@ msgstr "Achtergrondkleur als een GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr "Achtergrondkleur aangezet"
+msgstr "Achtergrondkleur ingesteld"
 
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr "Achtergrondkleur is aangezet."
+msgstr "Achtergrondkleur is ingesteld"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
-msgstr "Achtergrondkleur Logo"
+msgstr "Logo-achtergrondkleur"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
-msgstr "Achtergrondkleur Logo"
+msgstr "Logo-achtergrondkleur"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
-msgstr "Achtergrondkleur Logo als GdkColor"
+msgstr "Logo-achtergrondkleur als GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
-msgstr "Achtergrondkleur Logo aangezet"
+msgstr "Logo-achtergrondkleur ingesteld"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Logo Background color is set"
-msgstr "Achtergrondkleur Logo is aangezet"
+msgstr "Logo-achtergrondkleur is ingesteld"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr "Toon Voltooien"
+msgstr "'Voltooien' tonen"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Toon de 'Voltooien' knop in plaats van de 'Volgende' knop"
+msgstr "De 'Voltooien'-knop tonen in plaats van de 'Volgende'-knop"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr "Toon Hulp"
+msgstr "'Hulp' tonen"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr "Toon de 'Hulp' knop"
+msgstr "De 'Hulp'-knop tonen"
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -382,7 +383,7 @@ msgstr "De tekst op de knop"
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
-msgstr "Beëindig de Honger in de wereld"
+msgstr "De honger in de wereld beëindigen"
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
@@ -390,41 +391,42 @@ msgstr "Link-kleur"
 
 #: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
-msgstr "Kleur die voor de link wordt gebruikt"
+msgstr "Kleur voor het weergeven van de link"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
 msgstr "Deze knop brengt u bij de URI die het weergeeft."
 
-#: libgnomeui/gnome-href.c:392
+#: libgnomeui/gnome-href.c:393
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Bij het openen van de URL trad een fout op.\n"
-"Controleer of de instellingen in de Control Center juist zijn."
+"Er is een fout opgetreden bij een poging de standaard webbrowser te "
+"starten.\n"
+"Gaat u na of de instellingen in de 'Voorkeurstoepassingen' juist zijn."
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "Het te gebruiken X-display"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
-msgstr "GNOME GUI Bibliotheek"
+msgstr "GNOME GUI-bibliotheek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:563
+#: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Er traden meerdere segmentatiefouten op; kan het fout-dialoogvenster niet "
 "tonen\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:577
+#: libgnomeui/gnome-ui-init.c:631
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -441,11 +443,11 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"De GNOME Session Manager (proces %d) is gecrashed\n"
+"GNOME-sessiebeheer (proces %d) is afgesloten\n"
 "ten gevolge van een fatale fout (%s).\n"
-"Als u dit dialoogvenster sluit, zullen alle applicaties sluiten en zal de "
-"Gnome-sessie beëindigd worden. \n"
-"Bewaar al uw bestanden voordat u dit dialoogvenster sluit."
+"Zodra u dit dialoogvenster sluit, zullen alle toepassingen sluiten en zal uw "
+"sessie afsluiten.\n"
+"Bewaart u al uw bestanden voordat u dit dialoogvenster sluit."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -454,7 +456,7 @@ msgid ""
 "due to a fatal error.\n"
 "(%s)"
 msgstr ""
-"Applicatie \"%s\" (proces %d) is gecrashed\n"
+"Toepassing \"%s\" (proces %d) is afgesloten\n"
 "ten gevolge van een fatale fout.\n"
 "(%s)"
 
@@ -464,7 +466,7 @@ msgstr "Gebruik: gnome_segv2 appnaam signum\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
-msgstr "Rapporteer een bug"
+msgstr "Een foutrapport insturen"
 
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
@@ -476,7 +478,7 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Bekijk de GNOME Application Crash pagina voor meer informatie"
+msgstr "Bekijk de 'GNOME Application Crash'-pagina voor meer informatie"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -484,15 +486,15 @@ msgstr "Tabelranden"
 
 #: libgnomeui/gnome-stock-icons.c:138
 msgid "Table Fill"
-msgstr "Tabel Vullen"
+msgstr "Tabelvulling"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Bulleted List"
-msgstr "Gestipte Lijst"
+msgstr "Puntenlijst"
 
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Numbered List"
-msgstr "Genummerde Lijst"
+msgstr "Genummerde lijst"
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Indent"
@@ -500,7 +502,7 @@ msgstr "Inspringen"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Un-Indent"
-msgstr "Inspringen weghalen"
+msgstr "Uitspringen"
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "About"
@@ -508,7 +510,7 @@ msgstr "Info"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "Dochter-Item 1"
+msgstr "Dochter-item 1"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
@@ -516,14 +518,14 @@ msgstr "Hint voor item 1"
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr "Dochter-Item 2"
+msgstr "Dochter-item 2"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Hint voor item 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 #: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Bestand"
@@ -532,7 +534,7 @@ msgstr "_Bestand"
 msgid "_File/"
 msgstr "_Bestand/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "B_ewerken"
 
@@ -540,15 +542,15 @@ msgstr "B_ewerken"
 msgid "_Edit/"
 msgstr "B_ewerken/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_Weergave"
+msgstr "Bee_ld"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "_Weergave/"
+msgstr "Bee_ld/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Instellingen"
 
@@ -557,7 +559,7 @@ msgid "_Settings/"
 msgstr "_Instellingen/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Nieuw"
 
@@ -565,7 +567,7 @@ msgstr "_Nieuw"
 msgid "_New/"
 msgstr "_Nieuw/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "_Bestanden"
 
@@ -573,15 +575,15 @@ msgstr "_Bestanden"
 msgid "Fi_les/"
 msgstr "_Bestanden/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Vensters"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Spel"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hulp"
@@ -597,7 +599,7 @@ msgstr "_Openen..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr "Open een bestand"
+msgstr "Bestand openen"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
@@ -606,16 +608,16 @@ msgstr "Op_slaan"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "Sla het huidige bestand op"
+msgstr "Huidige bestand opslaan"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Opslaan _Als..."
+msgstr "Opslaan _als..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Sla het huidige bestand op onder een andere naam"
+msgstr "Het huidige bestand opslaan onder een andere naam"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -633,16 +635,16 @@ msgstr "Af_drukken..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "Druk het huidige bestand af"
+msgstr "Het huidige bestand afdrukken"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Pagina Inst_ellingen..."
+msgstr "Pagina-inst_ellingen..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Pagina instellingen voor de huidige printer"
+msgstr "Pagina-instellingen voor de huidige printer"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -651,7 +653,7 @@ msgstr "Sl_uiten"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Sluit het huidige bestand"
+msgstr "Het huidige bestand sluiten"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
@@ -672,7 +674,7 @@ msgstr "K_nippen"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "Knip de selectie"
+msgstr "Selectie knippen"
 
 #. 10
 #. Copy
@@ -682,7 +684,7 @@ msgstr "_Kopiëren"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Kopieer de selectie"
+msgstr "Selectie kopiëren"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -691,7 +693,7 @@ msgstr "_Plakken"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "Plak vanuit het klembord"
+msgstr "Vanaf het klembord plakken"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
@@ -700,16 +702,16 @@ msgstr "_Wissen"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr "Wis de selectie"
+msgstr "Selectie wissen"
 
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "_Herstellen"
+msgstr "_Ongedaan maken"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Herstel de laatste bewerking"
+msgstr "Laatste bewerking ongedaan maken"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
@@ -718,7 +720,7 @@ msgstr "He_rhalen"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Herhaal de laatste laatste bewerking"
+msgstr "Herhaal de ongedaan gemaakte bewerking"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -727,12 +729,12 @@ msgstr "_Zoeken..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr "Zoek naar een string"
+msgstr "Naar een tekenreeks zoeken"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "_Volgende Zoeken"
+msgstr "_Volgende zoeken"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -741,28 +743,28 @@ msgstr "Opnieuw zoeken naar dezelfde tekenreeks"
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "_Vervangen..."
+msgstr "V_ervangen..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr "Vervang een string"
+msgstr "Tekenreeks vervangen"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
-msgstr "_Eigenschappen..."
+msgid "_Properties"
+msgstr "_Eigenschappen"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Verander de eigenschappen van het bestand"
+msgstr "Eigenschappen van het bestand wijzigen"
 
 #.
 #. * The Settings menu
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
-msgstr "_Instellingen..."
+msgid "Prefere_nces"
+msgstr "Voorkeure_n"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -783,30 +785,30 @@ msgstr "Over dit programma"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
-msgstr "_Alles Selecteren"
+msgstr "_Alles selecteren"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr "Selecteer alles"
+msgstr "Alles selecteren"
 
 #.
 #. * Window menu
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr "Maak Nieuw _Vemster"
+msgstr "Nieuw _venster creëren"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr "Maak een nieuw venster"
+msgstr "Een nieuw venster creëren"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "Sluit Dit Venster"
+msgstr "Dit venster _sluiten"
 
 #: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "Sluit het huidige venster"
+msgstr "Het huidige venster sluiten"
 
 #.
 #. * The "Game" menu
@@ -817,19 +819,19 @@ msgstr "_Nieuw spel"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Begin een nieuw spel"
+msgstr "Nieuw spel beginnen"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr "_Pauzeer spel"
+msgstr "Spel _pauzeren"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Pauzeer het spel"
+msgstr "Het spel pauzeren"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
-msgstr "Speel _Opnieuw"
+msgstr "Spel he_rstarten"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
@@ -837,19 +839,19 @@ msgstr "Spel opnieuw starten"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr "Herstellen"
+msgstr "Zet _ongedaan maken"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Herstel de laatste zet"
+msgstr "De laatste zet ongedaan maken"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "Opnieuw"
+msgstr "Zet he_rhalen"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "De zet opniew uitvoeren"
+msgstr "De ongedaan gemaakte zet opnieuw uitvoeren"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -857,7 +859,7 @@ msgstr "_Hint"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr "Vraag een hint voor de volgende zet"
+msgstr "Hint voor de volgende zet vragen"
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
@@ -866,48 +868,48 @@ msgstr "_Scores..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr "Bekijk de scores"
+msgstr "Scores bekijken"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr "B_eëindig spel"
+msgstr "Spel b_eëindigen"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "Het huidige spel beëindigen"
 
-#: libgnomeui/gnome-app-helper.c:1130
+#: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
 msgstr "_Inhoud"
 
-#: libgnomeui/gnome-app-helper.c:1131
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr "Toon de hulp bij dit programma"
+msgstr "De hulp bij deze toepassing bekijken"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr "Tekst Onder Iconen"
+msgstr "Tekst onder pictogrammen"
 
-#: libgnomeui/gnome-app-helper.c:2519
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr "Belangrijke Tekst Naast Iconen"
+msgstr "Prioriteitstekst naast pictogrammen"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
-msgstr "Aleen Iconen"
+msgstr "Alleen pictogrammen"
 
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
-msgstr "Aleen Tekst"
+msgstr "Aleen tekst"
 
-#: libgnomeui/gnome-app-helper.c:2582
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr "Gebruik desktopstandaard (%s)"
+msgstr "Bureaubladstandaard (%s) gebruiken"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
-msgstr " (geef return)"
+msgstr " (druk op Enter)"
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
@@ -947,55 +949,55 @@ msgstr "Voortgang"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr "App ID"
+msgstr "Toepassings-ID"
 
 #: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr "De ID string van het programma"
+msgstr "De ID-tekenreeks van de toepassing"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr "History id"
+msgstr "Geschiedenis-ID"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr "GTK entry"
+msgstr "GTK-invoerveld"
 
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr "De GTK entry"
+msgstr "Het GTK-invoerveld"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:175
+#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
-msgstr "Historie ID"
+msgstr "Geschiedenis-ID"
 
 #: libgnomeui/gnome-file-entry.c:221
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Unieke naam voor bestands-entries. Dit zal gebruikt worden om de "
-"historielijst op te slaan."
+"Unieke naam voor het bestandsinvoerveld. Dit dient om de geschiedenislijst "
+"op te slaan."
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr "Titel van Browsedialoogvenster"
+msgstr "Titel van Bladeren-dialoogvenster"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
-msgstr "De titel van het Bestand-dialoogvenster"
+msgstr "De titel van de Bladeren-bestandskiezer"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr "Map-Entry"
+msgstr "Map-invoerveld"
 
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Of de bestands-entry gebruikt wordt om mapnamen of complete bestandsnamen in "
-"te voeren."
+"Of het bestandsinvoerveld gebruikt wordt om mapnamen of complete "
+"bestandsnamen in te voeren."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1003,23 +1005,23 @@ msgstr "Modaal"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr "Of het bestand-bladervenster modaal moet zijn."
+msgstr "Of de Bladeren-bestandskiezer modaal moet zijn."
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:200
+#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Bestandsnaam"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
-msgstr "Bestandsnaam die weergegeven moet worden in de bestand-entry"
+msgstr "Bestandsnaam die weergegeven moet worden in de bestands-invoerveld"
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
-msgstr "Standaard Pad"
+msgstr "Standaardpad"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr "Standaard Pad voor het Bestands blader venster"
+msgstr "Standaardpad voor de Bestandskiezer"
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
@@ -1031,9 +1033,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry dat het bestand gebruikt om bestandsnamen n te voeren. Je kunt "
-"deze eigenschap gebruiken om de GnomeEntry te krijgen als je zijn parameters "
-"wil opvragen of wijzigen."
+"GnomeEntry dat het bestandsinvoerveld gebruikt om bestandsnamen in te "
+"voeren. U kunt deze eigenschap gebruiken om zonodig de GnomeEntry op te "
+"vragen voor het aanpassen of opvragen van zijn parameters."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1045,9 +1047,9 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry dat het bestand gebruikt om bestandnamen in te voeren. Je kunt deze "
-"eigenschap gebruiken om de GtkEntry te krijgen als je zijn parameters wil "
-"opvragen of wijzigen."
+"GtkEntry dat het bestand gebruikt om bestandsnamen in te voeren. U kunt deze "
+"eigenschap gebruiken om zonodig de GtkEntry op te vragen voor het aanpassen "
+"of opvragen van zijn parameters."
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
@@ -1067,7 +1069,7 @@ msgstr "_Bladeren..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr "Open een bestandskiezer om een bestand te selecteren"
+msgstr "Bestandskiezer tonen om een bestand te selecteren"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1079,7 +1081,7 @@ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr "Kies een Lettertype"
+msgstr "Kies een lettertype"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -1095,11 +1097,11 @@ msgstr "De modus operandi van de lettertypekiezer"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr "Font naam"
+msgstr "Lettertypenaam"
 
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr "Naam van het lettertype"
+msgstr "Naam van het geselecteerde lettertype"
 
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
@@ -1115,35 +1117,35 @@ msgstr "Voorbeeldtekst"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Voorbeeldtekst tonen in het dialoogvenster"
+msgstr "Voorbeeldtekst getoond in het dialoogvenster"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "Gebruik lettertype in label"
+msgstr "Lettertype in label gebruiken"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Gebruik lettertype in het label bij de font-info-modus"
+msgstr "Lettertype in het label gebruiken in de lettertype-infomodus"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "Grootte van lettertype voor label"
+msgstr "Lettertypegrootte voor label"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Grootte van het lettertype voor het label in font-info-modus"
+msgstr "Grootte van het lettertype voor het label in lettertype-infomodus"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "Toon afmeting"
+msgstr "Afmetingen tonen"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "Toon de afmeting in font-info-modus"
+msgstr "Afmetingen tonen in lettertype-infomodus"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr "GNOME GConf UI Ondersteuning"
+msgstr "GNOME GConf-UI-ondersteuning"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
@@ -1157,10 +1159,11 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"De applicatie \"%s\" probeerde een onderdeel van uw configuratie te "
-"veranderen dat uw systeembeheerder of computerleverancier u niet toelaat te "
-"veranderen. Sommige van de instellingen die u heeft gekozen worden mogelijk "
-"genegeerd of zullen zijn vergeten, de volgende keer het programma gebruikt."
+"De toepassing \"%s\" trachtte een onderdeel van uw configuratie te "
+"veranderen dat uw systeembeheerder of besturingssysteemleverancier u niet "
+"toelaat te veranderen. Sommige van de instellingen die u heeft gekozen "
+"worden mogelijk genegeerd of zullen zijn vergeten, de volgende keer dat u de "
+"toepassing gebruikt."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1171,138 +1174,140 @@ msgstr ""
 "Er trad een fout op bij het laden of opslaan van configuratieinformatie voor "
 "%s. Sommige configuratieinstellingen werken mogelijk niet juist."
 
-#: libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Unieke naam voor de icoon entry. Dit zal gebruikt worden om de historie "
-"lijst te bewaren."
+"Unieke naam voor het pictograminvoerveld. Dit dient om de geschiedenislijst "
+"te bewaren."
 
-#: libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
-msgstr "De titel van het icoon selectie venster"
-
-#: libgnomeui/gnome-icon-entry.c:192
-msgid "Pixmap Directory"
-msgstr "Pixmap Map"
+msgstr "De titel van het pictogrammen-bladervenster"
 
 #: libgnomeui/gnome-icon-entry.c:193
+msgid "Pixmap Directory"
+msgstr "Afbeeldingenmap"
+
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr "Map waarin gezocht zal worden voor iconen"
+msgstr "Map om pictogrammen in te zoeken"
 
-#: libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Bestandsnaam die weergegeven moet worden in het icoon-veld."
+msgstr "Bestandsnaam die in het pictogram-invoerveld dient te staan."
 
-#: libgnomeui/gnome-icon-entry.c:209
+#: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
 msgstr "Kiesvenster"
 
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Icoon kies-dialoogvenster. Je kunt deze eigenschap gebruiken om de GtkDialog "
-"te krijgen als je zijn parameters wil opvragen of wijzigen."
+"Pictogramkiesvenster. U kunt deze eigenschap gebruiken om zonodig de "
+"GtkDialog op te vragen voor het opvragen of aanpassen van zijn eigenschappen."
 
-#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
-msgstr "Geen Icoon"
+msgstr "Geen pictogram"
 
-#: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Kon geen hbox vinden, gebruik een normale bestandselectie"
+msgstr "Kon geen hbox vinden, gebruik een normale bestandsselectie"
 
-#: libgnomeui/gnome-icon-entry.c:536 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Voorbeeld"
 
-#: libgnomeui/gnome-icon-entry.c:752
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
-msgstr "Icoon-selectie dialoogvenster"
+msgstr "Pictogram-selectievenster"
 
-#: libgnomeui/gnome-icon-entry.c:753
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr "Dit dialoogvenster biedt de mogelijkheid een icoon te kiezen."
+msgstr "Dit dialoogvenster biedt de mogelijkheid een pictogram te selecteren."
 
-#: libgnomeui/gnome-icon-entry.c:759
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
-msgstr "Icoon-kiezer"
+msgstr "Pictogramkiezer"
 
-#: libgnomeui/gnome-icon-entry.c:760
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr "Kies het gewenste icoon."
+msgstr "Kies het gewenste pictogram."
 
-#: libgnomeui/gnome-icon-entry.c:984
+#: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
-msgstr "Icoon-Kiezer"
+msgstr "Pictogramkiezer"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
 msgstr ""
-"Deze knop zal een selectievenster openen voor het kiezen van een icoon."
+"Deze knop zal een selectievenster openen voor het kiezen van een pictogram."
+
+#: libgnomeui/gnome-icon-entry.c:1006
+msgid "Browse"
+msgstr "Bladeren"
 
 #: libgnomeui/gnome-icon-entry.c:1008
-msgid "Browse"
-msgstr "Browse"
-
-#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
-msgstr "Icoon-pad"
+msgstr "Pictogram-pad"
 
-#: libgnomeui/gnome-icon-entry.c:1011
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Hier moet u de naam van de map geven waar iconen zijn opgeslagen."
+msgstr ""
+"Hier dient u de naam van de map geven waar pictogramafbeeldingen zich "
+"bevinden."
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: '%s' bestaat niet of is geen map"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: kon map '%s' niet openen"
 
-#: libgnomeui/gnome-icon-sel.c:407
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr "Bezig met laden Iconen..."
+msgstr "Bezig met laden pictogrammen..."
 
-#: libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
 msgstr "Informatie"
 
-#: libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
 msgstr "Fout"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
 msgstr "Vraag"
 
-#: libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Bericht"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
-msgstr "Maak Voorbeeld"
+msgstr "Maak voorbeeld"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Of de pixmap entry een voorbeeld moet weergeven."
+msgstr "Of het afbeeldings-invoerveld een voorbeeld moet weergeven."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
-msgstr "Geen Afbeelding"
+msgstr "Geen afbeelding"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
@@ -1318,27 +1323,23 @@ msgstr "Top Tien"
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
-msgstr "User"
+msgstr "Gebruiker"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
 msgstr "Score"
 
-#. the localized string should fit (after replacing the %a %b
-#. etc) in ~18 chars.
-#. %a is abbreviated weekday, %A is full weekday,
-#. %b %B are abbreviated and full monthname, %Y is year,
-#. %d is day of month, %m is month number, %T full hour,
-#. %H hours, %M minutes, %S seconds
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
-#: libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
-msgstr "Sluit de test"
+msgstr "Test afsluiten"
