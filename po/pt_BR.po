@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-07-05 05:36-0300\n"
+"POT-Creation-Date: 2002-07-21 06:04-0300\n"
 "PO-Revision-Date: 2002-07-05 05:34-0300\n"
 "Last-Translator: Evandro F. Giovanini <evandrofg@ig.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -745,8 +745,8 @@ msgstr "Substituir uma expressão"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
-msgstr "_Propriedades..."
+msgid "_Properties"
+msgstr "_Propriedades"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -757,8 +757,8 @@ msgstr "Modificar as propriedades do arquivo"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
-msgstr "_Preferências..."
+msgid "Prefere_nces"
+msgstr "_Preferências"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
