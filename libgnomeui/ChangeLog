@@ -1,3 +1,17 @@
+1999-02-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dateedit.c (create_children): Set the proper flags for the
+	Gtk calendar.
+	(gnome_date_edit_new_flags): New function to create a date edit
+	widget with flags.
+	(gnome_date_edit_new): Use gnome_date_edit_new_flags().
+	(gnome_date_edit_forall): Handle the internal widgets properly.
+	(gnome_date_edit_set_flags): New function to change the flags in
+	the date edit widget.
+
+	* gnome-dateedit.h (GnomeDateEditFlags): New enumeration with
+	configuration options for the date edit widget.
+
 1999-02-04  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-color-picker.[ch]:
