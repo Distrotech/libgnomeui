@@ -597,69 +597,69 @@ relay_gtk_signal(GtkObject *object,
 }
 
 static void
-initialize_gtk_signal_relay(void)
+initialize_gtk_signal_relay (void)
 {
 #ifdef HAVE_ESD
-  gpointer iter_signames;
-  char *signame;
-  char *ctmp, *ctmp2;
-
-  if(gnome_sound_connection < 0)
-    return;
-
-  if(!gnome_config_get_bool("/sound/system/settings/event_sounds=true"))
-    return;
-
-  ctmp = gnome_config_file("/sound/events/gtk-events.soundlist");
-  ctmp2 = g_strconcat ("=", ctmp, "=");
-  g_free (ctmp);
-  iter_signames = gnome_config_init_iterator_sections(ctmp2);
-  gnome_config_push_prefix(ctmp2);
-  g_free (ctmp2);
-
-  while((iter_signames = gnome_config_iterator_next(iter_signames,
-						    &signame, NULL))) {
-    int signums[5];
-    int nsigs, i;
-
-    /*
-     * XXX this is an incredible hack based on a compile-time
-     * knowledge of what gtk widgets do what, rather than
-     * anything based on the info available at runtime.
-     */
-    if(!strcmp(signame, "activate")) {
-      gtk_type_class(gtk_menu_item_get_type());
-      signums[0] = gtk_signal_lookup(signame, gtk_menu_item_get_type());
-						
-      gtk_type_class(gtk_editable_get_type());
-      signums[1] = gtk_signal_lookup(signame, gtk_editable_get_type());
-      nsigs = 2;
-    } else if(!strcmp(signame, "toggled")) {
-      gtk_type_class(gtk_toggle_button_get_type());
-      signums[0] = gtk_signal_lookup(signame,
-				     gtk_toggle_button_get_type());
-						
-      gtk_type_class(gtk_check_menu_item_get_type());
-      signums[1] = gtk_signal_lookup(signame,
-				     gtk_check_menu_item_get_type());
-      nsigs = 2;
-    } else if(!strcmp(signame, "clicked")) {
-      gtk_type_class(gtk_button_get_type());
-      signums[0] = gtk_signal_lookup(signame, gtk_button_get_type());
-      nsigs = 1;
-    } else {
-      gtk_type_class(gtk_widget_get_type());
-      signums[0] = gtk_signal_lookup(signame, gtk_widget_get_type());
-      nsigs = 1;
-    }
-
-    for(i = 0; i < nsigs; i++)
-      if(signums[i] > 0)
-	gtk_signal_add_emission_hook(signums[i],
-				     (GtkEmissionHook)relay_gtk_signal,
-				     signame);
-  }
-  gnome_config_pop_prefix();
-
+	gpointer iter_signames;
+	char *signame;
+	char *ctmp, *ctmp2;
+	
+	if (gnome_sound_connection < 0)
+		return;
+	
+	if (!gnome_config_get_bool ("/sound/system/settings/event_sounds=true"))
+		return;
+	
+	ctmp = gnome_config_file ("/sound/events/gtk-events.soundlist");
+	ctmp2 = g_strconcat ("=", ctmp, "=", NULL);
+	g_free (ctmp);
+	iter_signames = gnome_config_init_iterator_sections (ctmp2);
+	gnome_config_push_prefix (ctmp2);
+	g_free (ctmp2);
+	
+	while ((iter_signames = gnome_config_iterator_next (iter_signames,
+							    &signame, NULL))) {
+		int signums [5];
+		int nsigs, i;
+		
+		/*
+		 * XXX this is an incredible hack based on a compile-time
+		 * knowledge of what gtk widgets do what, rather than
+		 * anything based on the info available at runtime.
+		 */
+		if(!strcmp (signame, "activate")){
+			gtk_type_class (gtk_menu_item_get_type ());
+			signums [0] = gtk_signal_lookup (signame, gtk_menu_item_get_type ());
+			
+			gtk_type_class (gtk_editable_get_type ());
+			signums [1] = gtk_signal_lookup (signame, gtk_editable_get_type ());
+			nsigs = 2;
+		} else if(!strcmp(signame, "toggled")){
+			gtk_type_class (gtk_toggle_button_get_type ());
+			signums [0] = gtk_signal_lookup (signame,
+							 gtk_toggle_button_get_type ());
+			
+			gtk_type_class (gtk_check_menu_item_get_type ());
+			signums [1] = gtk_signal_lookup (signame,
+							 gtk_check_menu_item_get_type ());
+			nsigs = 2;
+		} else if (!strcmp (signame, "clicked")){
+			gtk_type_class (gtk_button_get_type ());
+			signums [0] = gtk_signal_lookup (signame, gtk_button_get_type ());
+			nsigs = 1;
+		} else {
+			gtk_type_class (gtk_widget_get_type ());
+			signums [0] = gtk_signal_lookup (signame, gtk_widget_get_type ());
+			nsigs = 1;
+		}
+		
+		for(i = 0; i < nsigs; i++)
+			if (signums [i] > 0)
+				gtk_signal_add_emission_hook (signums [i],
+							      (GtkEmissionHook)relay_gtk_signal,
+							      signame);
+	}
+	gnome_config_pop_prefix ();
+	
 #endif
 }
