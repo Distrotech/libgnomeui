@@ -1,3 +1,14 @@
+1998-07-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_group_translate): Implemented
+	translate method.
+
+	* gnome-canvas-rect-ellipse.c (recalc_bounds): Whoops, we were
+	doing everything in world coordinates.  Now it takes item
+	coordinates into account.
+	(gnome_canvas_re_translate): Implemented translate method.
+	(recalc_bounds): Don't forget to notify parent that our bounds changed.
+
 1998-07-01  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.[ch]: changed

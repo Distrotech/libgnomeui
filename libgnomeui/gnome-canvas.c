@@ -235,6 +235,17 @@ gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
 }
 
 void
+gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
+{
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->translate) (item, dx, dy);
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+}
+
+void
 gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
 {
 	GnomeCanvasGroup *group;
@@ -271,6 +282,7 @@ static void   gnome_canvas_group_draw        (GnomeCanvasItem *item, GdkDrawable
 					      int x, int y, int width, int height);
 static double gnome_canvas_group_point       (GnomeCanvasItem *item, double x, double y, int cx, int cy,
 					      GnomeCanvasItem **actual_item);
+static void   gnome_canvas_group_translate   (GnomeCanvasItem *item, double dx, double dy);
 
 
 GtkType
@@ -309,6 +321,7 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 	item_class->unmap = gnome_canvas_group_unmap;
 	item_class->draw = gnome_canvas_group_draw;
 	item_class->point = gnome_canvas_group_point;
+	item_class->translate = gnome_canvas_group_translate;
 }
 
 static void
@@ -481,6 +494,20 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 	}
 
 	return best;
+}
+
+static void
+gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
+{
+	GnomeCanvasGroup *group;
+
+	group = GNOME_CANVAS_GROUP (item);
+
+	group->xpos += dx;
+	group->ypos += dy;
+
+	if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure)
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
 
 void

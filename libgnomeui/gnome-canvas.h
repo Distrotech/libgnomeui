@@ -99,7 +99,7 @@ struct _GnomeCanvasItemClass {
 	 */
 	double (* point) (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item);
 
-	/* Translate an item by the specified amount */
+	/* Move an item by the specified amount */
 	void (* translate) (GnomeCanvasItem *item, double dx, double dy);
 
 	/* Signal: an event ocurred for an item of this type */
@@ -126,6 +126,9 @@ void gnome_canvas_item_set (GnomeCanvasItem *item, ...);
 /* Same as above, with parsed args */
 void gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args);
 
+/* Move an item by the specified amount */
+void gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy);
+
 /* Convert item coordinates (relative to its parent) to world coordinates */
 void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
 
@@ -138,9 +141,9 @@ void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
  * Consider a circuit editor application that uses the canvas for its schematic display.
  * Hierarchically, there would be canvas groups that contain all the components needed for an
  * "adder", for example -- this includes some logic gates as well as wires.  You can move stuff
- * around in a convenient way by doing a gnome_canvas_move() of the hierarchical groups -- to move
- * an adder, simply move the group that represents the adder.  However, you may also want to say,
- * "make all the wires in the schematic have a red color".  Since the wires may be at different
+ * around in a convenient way by doing a gnome_canvas_item_move() of the hierarchical groups -- to
+ * move an adder, simply move the group that represents the adder.  However, you may also want to
+ * say, "make all the wires in the schematic have a red color".  Since the wires may be at different
  * levels in the hierarchy, you can instead store them separately in a set of wires and then call
  * gnome_canvas_configure() just for that set.
  *

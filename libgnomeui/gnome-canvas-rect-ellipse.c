@@ -38,6 +38,7 @@ static void gnome_canvas_re_set_arg    (GtkObject          *object,
 static void gnome_canvas_re_reconfigure (GnomeCanvasItem *item);
 static void gnome_canvas_re_realize     (GnomeCanvasItem *item);
 static void gnome_canvas_re_unrealize   (GnomeCanvasItem *item);
+static void gnome_canvas_re_translate   (GnomeCanvasItem *item, double dx, double dy);
 
 
 
@@ -87,6 +88,7 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	item_class->reconfigure = gnome_canvas_re_reconfigure;
 	item_class->realize = gnome_canvas_re_realize;
 	item_class->unrealize = gnome_canvas_re_unrealize;
+	item_class->translate = gnome_canvas_re_translate;
 }
 
 static void
@@ -103,6 +105,7 @@ static void
 recalc_bounds (GnomeCanvasRE *re)
 {
 	GnomeCanvasItem *item;
+	double x1, y1, x2, y2;
 	double hwidth;
 
 	item = GNOME_CANVAS_ITEM (re);
@@ -112,8 +115,15 @@ recalc_bounds (GnomeCanvasRE *re)
 	else
 		hwidth = re->width / 2.0;
 
-	gnome_canvas_w2c (item->canvas, re->x1 - hwidth, re->y1 - hwidth, &item->x1, &item->y1);
-	gnome_canvas_w2c (item->canvas, re->x2 + hwidth, re->y2 + hwidth, &item->x2, &item->y2);
+	x1 = re->x1;
+	y1 = re->y1;
+	x2 = re->x2;
+	y2 = re->y2;
+
+	gnome_canvas_item_i2w (item, &x1, &y1);
+	gnome_canvas_item_i2w (item, &x2, &y2);
+	gnome_canvas_w2c (item->canvas, x1 - hwidth, y1 - hwidth, &item->x1, &item->y1);
+	gnome_canvas_w2c (item->canvas, x2 + hwidth, y2 + hwidth, &item->x2, &item->y2);
 
 	/* Some safety fudging */
 
@@ -121,6 +131,8 @@ recalc_bounds (GnomeCanvasRE *re)
 	item->y1 -= 2;
 	item->x2 += 2;
 	item->y2 += 2;
+
+	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 }
 
 static void
@@ -261,6 +273,22 @@ gnome_canvas_re_unrealize (GnomeCanvasItem *item)
 
 	gdk_gc_unref (re->fill_gc);
 	gdk_gc_unref (re->outline_gc);
+}
+
+static void
+gnome_canvas_re_translate (GnomeCanvasItem *item, double dx, double dy)
+{
+	GnomeCanvasRE *re;
+
+	re = GNOME_CANVAS_RE (item);
+
+	re->x1 += dx;
+	re->y1 += dy;
+	re->x2 += dx;
+	re->y2 += dy;
+
+	if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure)
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
 
 
@@ -526,7 +554,71 @@ gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, 
 static double
 gnome_canvas_ellipse_point (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item)
 {
-	/* FIXME */
+	GnomeCanvasRE *re;
+	double dx, dy;
+	double scaled_dist;
+	double outline_dist;
+	double center_dist;
+	double width;
+	double a, b;
+	double diamx, diamy;
 
-	return 10000.0;
+	re = GNOME_CANVAS_RE (item);
+
+	*actual_item = item;
+
+	if (re->outline_set) {
+		if (re->width_pixels)
+			width = re->width / item->canvas->pixels_per_unit;
+		else
+			width = re->width;
+	} else
+		width = 0.0;
+
+	/* Compute the distance between the center of the ellipse and the point, with the ellipse
+	 * considered as being scaled to a circle.
+	 */
+
+	dx = x - (re->x1 + re->x2) / 2.0;
+	dy = y - (re->y1 + re->y2) / 2.0;
+	center_dist = sqrt (dx * dx + dy * dy);
+
+	a = dx / ((re->x2 + width - re->x1) / 2.0);
+	b = dy / ((re->y2 + width - re->y1) / 2.0);
+	scaled_dist = sqrt (a * a + b * b);
+
+	/* If the scaled distance is greater than 1, then we are outside.  Compute the distance from
+	 * the point to the edge of the circle, then scale back to the original un-scaled coordinate
+	 * system.
+	 */
+
+	if (scaled_dist > 1.0)
+		return (center_dist / scaled_dist) * (scaled_dist - 1.0);
+
+	/* We are inside the outer edge of the ellipse.  If it is filled, then we are "inside".
+	 * Otherwise, do the same computation as above, but also check whether we are inside the
+	 * outline.
+	 */
+
+	if (re->fill_set)
+		return 0.0;
+
+	if (scaled_dist > GNOME_CANVAS_EPSILON)
+		outline_dist = (center_dist / scaled_dist) * (1.0 - scaled_dist) - width;
+	else {
+		/* Handle very small distance */
+
+		diamx = re->x2 - re->x1;
+		diamy = re->y2 - re->y1;
+
+		if (diamx < diamy)
+			outline_dist = (diamx - width) / 2.0;
+		else
+			outline_dist = (diamy - width) / 2.0;
+	}
+
+	if (outline_dist < 0.0)
+		return 0.0;
+
+	return outline_dist;
 }
