@@ -30,6 +30,9 @@ typedef struct {
   GnomeAppsMenuGtkMenuItemFunc menu_item_func;
 } GnomeAppsMenuVariety;
 
+/* If there are going to be more than a few varieties,
+   this should be a GTree or something. But I don't 
+   think there will be, so it's not worth it. */
 static GList * varieties = NULL; /* list of above struct */
 
 static GnomeAppsMenuVariety * 
@@ -96,35 +99,40 @@ static void clear_varieties(void)
   varieties = NULL;
 }
 
+static GtkWidget * gtk_menu_item_new_from_dentry(GnomeAppsMenu * gam)
+{
+  g_warning("not implemented");
+  return NULL;
+}
+
 static void make_default_varieties(void)
 {
   gnome_apps_menu_register_variety( GNOME_APPS_MENU_DENTRY_EXTENSION,
 				    gnome_desktop_entry_load,
-				    NULL /* FIXME */ );
+				    gtk_menu_item_new_from_dentry );
+  /* .directory files are also handled by default, 
+     but they don't use the registration mechanism */
+  /* Perhaps I could do "/.directory" as extension? */
 }
 
-static GnomeAppsMenuLoadFunc get_func(const gchar * filename,
-				      /* load_func if TRUE,
-					 menu_item_func if FALSE */
-				      gboolean load_func)
+static GnomeAppsMenuVariety * 
+find_variety_with_extension(const gchar * extension)
 {
   GList * list;
   GnomeAppsMenuVariety * v;
 
-  list = varieties;
+  g_return_val_if_fail(extension != NULL, NULL);
 
+  list = varieties;
+  
   while ( list ) {
     v = (GnomeAppsMenuVariety *)list->data;
     g_assert ( v != NULL );
 
-    if ( strstr(filename, 
-		v->extension) ) {
-      if (load_func) {
-	return v->load_func;
-      }
-      else {
-	return v->menu_item_func;
-      }
+    /* FIXME make sure extension is on the end, not just contained */
+    if ( strcmp (extension, 
+		 v->extension) == 0 ) {
+      return v;
     }
     
     list = g_list_next(list);
@@ -133,12 +141,165 @@ static GnomeAppsMenuLoadFunc get_func(const gchar * filename,
   return NULL; /* didn't find an appropriate extension */
 }
 
-/* FIXME these two will be based on the panel/menu.c code */
+static GnomeAppsMenuLoadFunc 
+get_load_func_and_set_extension( const gchar * filename,
+				 GnomeAppsMenu * dest )
+{
+  GnomeAppsMenuVariety * v;
+  gint len;
+  gchar * extension = NULL;
+
+  g_return_val_if_fail(filename != NULL, NULL);
+  g_return_val_if_fail(dest != NULL, NULL);
+
+  /* Extract extension from filename */
+  len = strlen(filename);
+
+  while ( len >= 0 ) {
+    --len; /* always skip last character, because if
+	      the filename ends in . it doesn't count. */
+    if (filename[len] == '.') {
+      extension = &filename[len + 1]; /* without period */
+      break;
+    }
+  }
+  
+  if ( extension == NULL ) {
+    g_warning("gnome-appsmenu: file %s has no extension", filename);
+    return NULL;
+  }
+
+  v = find_variety_with_extension(extension);
+
+  /* set extension */
+  dest->extension = g_strdup(v->extension);
+
+  /* return function. */
+  return v->load_func;
+}
+
+/* Function based on panel code, Miguel de Icaza and Federico Mena */
 
 GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
 {
-  GnomeAppsMenuLoadFunc load_func;
-  g_warning("Not implemented\n");
+  GnomeAppsMenu * root_apps_menu;
+  struct dirent * dir_entry;
+  DIR * dir;
+  gchar * dentry_name;
+
+  dir = opendir(directory);
+
+  if (dir == NULL) {
+    g_warning("gnome-appsmenu: error on directory %s: %s",
+	      directory, strerror(errno));
+    return NULL;
+  }
+
+  /* .directory files are special-cased, rather than using
+     the Variety mechanism - maybe change this? */
+
+  root_apps_menu = gnome_apps_menu_new();
+
+  /* extension is not relevant, but it's needed as a flag
+     for the type. Note that the extension field 
+     has no period. */
+  root_apps_menu->extension = g_strdup("directory");
+
+  dentry_name = g_concat_dir_and_file(directory, ".directory");
+
+  root_apps_menu->data = gnome_desktop_entry_load(dentry_name);
+
+  if ( root_apps_menu->data == NULL ) {
+    g_warning("Failure loading .directory file for directory %s",
+	      directory);
+    g_free(dentry_name);
+    gnome_apps_menu_destroy(root_apps_menu);
+    return NULL;
+  }
+
+  g_free(dentry_name);  
+
+  while ( (dir_entry = readdir(dir)) != NULL) {
+    GnomeAppsMenuLoadFunc load_func;
+    gchar * thisfile;
+    GnomeAppsMenu * sub_apps_menu;
+    gchar * filename;
+    struct stat s;
+
+    thisfile = dir_entry->d_name;
+
+    /* Skip . and .. */
+
+    if ((thisfile[0] == '.' && thisfile[1] == '\0') ||
+	(thisfile[0] == '.' && thisfile[1] == '\0' && 
+	 thisfile[2] == 0)) {
+      continue;
+    }
+
+    filename = g_concat_dir_and_file(directory, thisfile);
+
+    if (stat (filename, &s) == -1) {
+      g_free(filename);
+      g_warning("gnome-appsmenu: error on file %s: %s\n", 
+		filename, strerror(errno));
+      continue;
+    }
+
+    /* If it's a directory, recursively descend into it */
+    if (S_ISDIR (s.st_mode)) {
+
+      sub_apps_menu = gnome_apps_menu_load(filename);
+      
+      /* Load failed for some reason. */
+      if ( submenu == NULL ) {
+	g_free(filename);
+	continue;
+      }
+      
+    }
+
+    /* If it's not a directory, load it up */
+    else {
+      sub_apps_menu = gnome_apps_menu_new();
+      load_func = get_load_func_and_set_extension( filename, 
+						   sub_apps_menu ); 
+
+      if ( load_func != NULL ) {
+	sub_apps_menu->data = load_func(filename);
+      }
+
+      /* if load_func == NULL this will be true too, 
+	 because of the default initialization of AppsMenu 
+	 in _new() */
+      /* This situation means the file type was unrecognized,
+	 perhaps belonging to another app, so we want 
+	 to ignore this file. */
+      if ( sub_apps_menu->data == NULL ) {
+	gnome_apps_menu_destroy(sub_apps_menu);
+	g_free(filename);
+	continue;
+      }
+
+      gnome_apps_menu_append( root_apps_menu,
+			      sub_apps_menu );
+    }
+
+    g_free(filename);
+
+  } /* while (there are files in the directory) */
+
+  closedir(dir);
+
+  /* The panel code destroyed the directory menu if it was empty,
+     may want to do that.
+
+     if ( root_apps_menu->submenus == NULL ) {
+     gnome_apps_menu_destroy(root_apps_menu);
+     return NULL;
+     }
+     */
+
+  return root_apps_menu;
 }
 
 
@@ -166,10 +327,84 @@ GnomeAppsMenu * gnome_apps_menu_load_system(void);
   g_free(s);
 }
 
+GtkWidget * gtk_menu_item_new_from_directory(GnomeAppsMenu * gam)
+{
+  GtkWidget * menuitem;
+  GtkWidget * submenu = NULL;
+  GtkWidget * submenuitem = NULL;
+  GList * list = NULL;
+  
+  menuitem = 
+    gtk_menu_item_new_with_label(((GnomeDesktopEntry *)gam->data)->name );
+  if (gam->submenus) {
+    submenu = gtk_menu_new();
+    gtk_menu_item_set_submenu ( GTK_MENU_ITEM(menuitem), submenu );
+    list = gam->submenus;
+    
+    while (list) {
+      submenuitem = 
+	gtk_menu_item_new_from_apps_menu((GnomeAppsMenu *)list->data);
+					
+      gtk_menu_append( GTK_MENU(submenu), submenuitem );
+      gtk_widget_show(submenuitem);
+      list = g_list_next(list);
+    }
+    gtk_widget_show(submenu);
+  }
+  return menuitem; 
+}
+
+GnomeAppsMenuGtkMenuItemFunc *
+get_menu_item_func(GnomeAppsMenu * gam)
+{
+  GnomeAppsMenuVariety * v;
+
+  g_return_val_if_fail(gam != NULL, NULL);
+  g_assert(gam->extension != NULL);
+
+  /* Part of somewhat hideous special casing of .directory */
+  if ( strcmp(gam->extension, "directory") == 0 ) {
+    return gtk_menu_item_new_from_directory;
+  }
+
+  v = find_variety_with_extension(gam->extension);
+  return v->menu_item_func;
+}
+
+GtkWidget * gtk_menu_item_new_from_apps_menu(GnomeAppsMenu * gam)
+{
+  GtkWidget * menuitem = NULL;
+  GnomeAppsMenuGtkMenuItemFunc menu_item_func;
+
+  g_return_val_if_fail(gam != NULL, NULL);
+
+  menu_item_func = get_menu_item_func(gam);
+  
+  if (menu_item_func == NULL) {
+    /* This kind of thing shouldn't show up on menus. */
+    return NULL;
+  }
+  
+  return menu_item_func(gam);
+}
+
 GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam)
 {
-  GnomeAppsMenuGtkMenuItemFunc menu_item_func;
-  g_warning("Not implemented\n");
+  GtkWidget * root_menu;
+  GtkWidget * menuitem;
+
+  g_return_val_if_fail(gam != NULL, NULL);    
+
+  root_menu = gtk_menu_new();
+
+  menuitem = gtk_menu_item_new_from_apps_menu(gam);
+  
+  if (menuitem != NULL) {
+    gtk_menu_append( GTK_MENU(root_menu), menuitem );
+    gtk_widget_show(menuitem);
+  }
+
+  return root_menu;
 }
 
 /****************************************************

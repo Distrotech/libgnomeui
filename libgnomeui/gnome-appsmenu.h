@@ -30,10 +30,10 @@
 
    Menus are saved as directories containing .desktop entries. Each
    directory is a submenu. This is just like share/apps is now. I
-   imagine this will be rooted in .gnome/AppsMenu or somewhere. Each
-   directory also contains a desktop entry for itself, in case users
-   want to customize folder icons or whatever. (Might also save
-   info about separators and the order of the items, eventually.)
+   imagine this will be rooted in .gnome/AppsMenu or somewhere.
+
+   Directories have .directory files in them; these are handled by
+   default.
 
    Applications can register their own types of apps menu items by
    providing an extension other than .desktop, and a function to load
@@ -52,8 +52,7 @@
    might store special icewm info, like an "Exit icewm" menu item.
    When icewm calls gnome_apps_menu_load it will get a menu
    containing these items; when another app calls it, the
-   icewm files will be ignored.
-*/
+   icewm files will be ignored.  */
 
 #include <gtk/gtk.h>
 #include "libgnome/gnome-defs.h"
@@ -115,7 +114,8 @@ void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
 			     GFunc func, gpointer data);
 
 /* The load func takes a filename as argument and returns 
-   whatever should go in the data field, above */
+   whatever should go in the data field, above.
+   Should return NULL if it fails. */
 
 typedef gpointer (GnomeAppsMenuLoadFunc *)(const gchar *);
 
@@ -130,9 +130,8 @@ typedef GtkWidget * (GnomeAppsMenuGtkMenuItemFunc *)(GnomeAppsMenu *);
    with gnome_desktop_entry_load () as LoadFunc,
    and GNOME_APPS_MENU_DENTRY_EXTENSION as extension,
    and a private function to create menuitems. 
-   
-   This function owns and will destroy your variety, so
-   no need to. The destroy function isn't even public. */
+
+   .directory files are also handled by default. */
 
 void 
 gnome_apps_menu_register_variety( const gchar * extension,
@@ -152,10 +151,11 @@ GnomeAppsMenu * gnome_apps_menu_load_default(void);
 
 GnomeAppsMenu * gnome_apps_menu_load_system(void);
 
-/* Create a GtkMenu from a GnomeAppsMenu, complete with
-   callbacks */
+/* Create a GtkMenu or MenuItem from a GnomeAppsMenu, complete with
+   callbacks. */
 
 GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam);
+GtkWidget * gtk_menu_item_new_from_apps_menu(GnomeAppsMenu * gam);
 
 /* Functions to save GnomeAppsMenu to be added. */
 
