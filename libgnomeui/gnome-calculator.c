@@ -1271,7 +1271,7 @@ create_button(GnomeCalculator *gc, GtkWidget *table, int x, int y)
 			 0, 2, 2);
 
 	/* if this is the DRG button, remember it's pointer */
-	if(but->signal_func == drg_toggle)
+	if(but->signal_func == GTK_SIGNAL_FUNC(drg_toggle))
 		gc->_priv->drg_button = w;
 }
 
