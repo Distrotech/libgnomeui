@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.117.2\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
-"PO-Revision-Date: 2002-05-30 15:32+0900\n"
+"POT-Creation-Date: 2002-06-07 11:42+0200\n"
+"PO-Revision-Date: 2002-07-11 15:55+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1072,7 +1072,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLl 무궁화 꽃이 피었습니다"
+msgstr "가나다라마바사AaBbCcDdEeFfGgHhIiJjKkLlMm"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
