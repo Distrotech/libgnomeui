@@ -1,3 +1,8 @@
+Tue Jun 30 22:02:34 PDT 1998 Manish Singh <yosh@gimp.org>
+
+	* Makefile.am: added back in the optional gnome-canvas sources
+	so they get installed too
+
 1998-06-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c:
