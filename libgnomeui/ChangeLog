@@ -1,3 +1,7 @@
+2001-10-13  Bastien Nocera  <hadess@hadess.net>
+
+	* libgnomeui.h: gnome-font-picker.h was missing from the include
+
 Thu Oct 11 03:09:08 2001  George Lebl <jirka@5z.com>
 
 	* gnome-mdi.c, gnome-mdi-child.c:  Make

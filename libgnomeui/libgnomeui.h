@@ -46,7 +46,7 @@
 #include <libgnomeui/gnome-color-picker.h>
 #include <libgnomeui/gnome-entry.h>
 #include <libgnomeui/gnome-file-entry.h>
-
+#include <libgnomeui/gnome-font-picker.h>
 #include <libgnomeui/gnome-icon-entry.h>
 #include <libgnomeui/gnome-icon-list.h>
 #include <libgnomeui/gnome-icon-sel.h>
