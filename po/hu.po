@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2002-11-27 22:03+0100\n"
-"PO-Revision-Date: 2002-07-28 21:20+0100\n"
+"POT-Creation-Date: 2002-12-04 15:43+0100\n"
+"PO-Revision-Date: 2002-12-04 15:47+0100\n"
 "Last-Translator: Szabolcs Ban <shooby@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -19,19 +19,16 @@ msgid "Credits"
 msgstr "Köszönet"
 
 #: libgnomeui/gnome-about.c:223
-#, fuzzy
 msgid "Written by"
-msgstr "Ír_ta"
+msgstr "Írta"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "Documented by"
-msgstr "_Dokumentáció"
+msgstr "Dokumentáció"
 
 #: libgnomeui/gnome-about.c:253
-#, fuzzy
 msgid "Translated by"
-msgstr "_Fordította"
+msgstr "Fordította"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -400,11 +397,12 @@ msgstr "Ez a gomb a rajta található URL-re visz."
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Hiba történt a URL-kezelő indításakor.\n"
-"Ellenőrizd a beállításokat a Vezérlőpulton."
+"Hiba történt az alapértelmezett webböngésző indításakor.\n"
+"Ellenőrizd a beállításokat a Vezérlőpult 'Alapértelmezett alkalmazások' "
+"részében."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -525,6 +523,7 @@ msgstr "Hint a 2. gyermekelemhez"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fájl"
 
@@ -582,6 +581,7 @@ msgid "_Game"
 msgstr "_Játék"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Súgó"
 
@@ -772,11 +772,11 @@ msgstr "Az alkalmazás beállításai"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Névjegy"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
@@ -803,7 +803,7 @@ msgstr "Új ablakot hoz létre"
 msgid "_Close This Window"
 msgstr "_Ablak bezárása"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "A jelenlegi ablak bezárása"
 
@@ -1333,8 +1333,9 @@ msgstr "%Y %b %d, %a, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Kilépés a tesztből"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Kilépés a tesztből"
 
 #~ msgid "Find _Again"
 #~ msgstr "Következő _találat"
