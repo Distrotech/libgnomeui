@@ -162,6 +162,7 @@ free_all_frames (GnomeAnimator *animator)
 
       pnext = p->next;
       g_free (p);
+      p = pnext;
     }
 }
 
