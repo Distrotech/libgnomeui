@@ -748,8 +748,8 @@ gnome_canvas_pixbuf_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	pixbuf = gdk_pixbuf_new_from_data (buf, GDK_COLORSPACE_RGB,
 					   TRUE,
-					   w, h,
-					   8, w * 4,
+					   8, w, h,
+					   w * 4,
 					   NULL, NULL);
 
 	gdk_pixbuf_render_to_drawable_alpha (pixbuf, drawable,
