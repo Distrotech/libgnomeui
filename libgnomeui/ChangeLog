@@ -1,3 +1,7 @@
+1999-01-05  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-dentry-edit.c (gnome_dentry_edit_new_notebook): Text change
+
 Tue Jan 05 02:12:52 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap-entry.c,gnome-icon-entry.c: accept drops of

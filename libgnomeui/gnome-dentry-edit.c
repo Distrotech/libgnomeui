@@ -307,7 +307,7 @@ GtkObject * gnome_dentry_edit_new_notebook (GtkNotebook * notebook)
 
   gtk_notebook_append_page ( GTK_NOTEBOOK(notebook), 
 			     dee->child1, 
-			     gtk_label_new(_("Easy")) );
+			     gtk_label_new(_("Basic")) );
 
   gtk_notebook_append_page ( GTK_NOTEBOOK(notebook), 
 			     dee->child2, 
