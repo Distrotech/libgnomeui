@@ -1,3 +1,21 @@
+1998-10-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c: I am an idiot.  I did not think anyone would
+	ever override the canvas event handlers, so I was happily
+	returning FALSE from all of them.
+	(gnome_canvas_button): Return the appropriate value from
+	emit_event().
+	(gnome_canvas_motion): Likewise.
+	(gnome_canvas_key): Likewise.
+	(gnome_canvas_focus_in): Likewise.
+	(gnome_canvas_focus_out): Likewise.
+	(gnome_canvas_crossing): Return the appropriate value from
+	pick_current_item().
+
+	(emit_event): Now it returns a boolean value that indicates
+	whether the event was handled by someone or not.
+	(pick_current_item): Likewise.
+
 1998-10-19  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (book_drop): something seems to have been screwed

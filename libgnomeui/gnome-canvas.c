@@ -88,7 +88,7 @@ static void gnome_canvas_item_unrealize (GnomeCanvasItem *item);
 static void gnome_canvas_item_map       (GnomeCanvasItem *item);
 static void gnome_canvas_item_unmap     (GnomeCanvasItem *item);
 
-static void emit_event (GnomeCanvas *canvas, GdkEvent *event);
+static int emit_event (GnomeCanvas *canvas, GdkEvent *event);
 
 static guint item_signals[ITEM_LAST_SIGNAL] = { 0 };
 
@@ -1798,7 +1798,7 @@ gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	gtk_signal_emit_by_name (GTK_OBJECT (canvas->layout.vadjustment), "changed");
 }
 
-static void
+static int
 emit_event (GnomeCanvas *canvas, GdkEvent *event)
 {
 	GdkEvent ev;
@@ -1809,7 +1809,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	/* Perform checks for grabbed items */
 
 	if (canvas->grabbed_item && !is_descendant (canvas->current_item, canvas->grabbed_item))
-		return;
+		return FALSE;
 
 	if (canvas->grabbed_item) {
 		switch (event->type) {
@@ -1849,7 +1849,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 		}
 
 		if (!(mask & canvas->grabbed_event_mask))
-			return;
+			return FALSE;
 	}
 
 	/* Convert to world coordinates -- we have two cases because of diferent offsets of the
@@ -1891,14 +1891,19 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 		gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
 				 &ev,
 				 &finished);
+
+	return finished;
 }
 
-static void
+static int
 pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 {
 	int button_down;
 	double x, y;
 	int cx, cy;
+	int retval;
+
+	retval = FALSE;
 
 	/*
 	 * If a button is down, we'll perform enter and leave events on the current item, but not
@@ -1950,7 +1955,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 	/* Don't do anything else if this is a recursive call */
 
 	if (canvas->in_repick)
-		return;
+		return retval;
 
 	/* LeaveNotify means that there is no current item, so we don't look for one */
 
@@ -1986,7 +1991,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		canvas->new_current_item = NULL;
 
 	if ((canvas->new_current_item == canvas->current_item) && !canvas->left_grabbed_item)
-		return; /* current item did not change */
+		return retval; /* current item did not change */
 
 	/* Synthesize events for old and new current items */
 
@@ -2003,7 +2008,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 
 		new_event.crossing.detail = GDK_NOTIFY_ANCESTOR;
 		canvas->in_repick = TRUE;
-		emit_event (canvas, &new_event);
+		retval = emit_event (canvas, &new_event);
 		canvas->in_repick = FALSE;
 	}
 
@@ -2011,7 +2016,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 
 	if ((canvas->new_current_item != canvas->current_item) && button_down) {
 		canvas->left_grabbed_item = TRUE;
-		return;
+		return retval;
 	}
 
 	/* Handle the rest of cases */
@@ -2025,8 +2030,10 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		new_event = canvas->pick_event;
 		new_event.type = GDK_ENTER_NOTIFY;
 		new_event.crossing.detail = GDK_NOTIFY_ANCESTOR;
-		emit_event (canvas, &new_event);
+		retval = emit_event (canvas, &new_event);
 	}
+
+	return retval;
 }
 
 static gint
@@ -2034,15 +2041,18 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 {
 	GnomeCanvas *canvas;
 	int mask;
+	int retval;
 
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_CANVAS (widget), FALSE);
 	g_return_val_if_fail (event != NULL, FALSE);
 
+	retval = FALSE;
+
 	canvas = GNOME_CANVAS (widget);
 
 	if (event->window != canvas->layout.bin_window)
-		return FALSE;
+		return retval;
 
 	switch (event->button) {
 	case 1:
@@ -2076,7 +2086,7 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 		canvas->state = event->state;
 		pick_current_item (canvas, (GdkEvent *) event);
 		canvas->state ^= mask;
-		emit_event (canvas, (GdkEvent *) event);
+		retval = emit_event (canvas, (GdkEvent *) event);
 		break;
 
 	case GDK_BUTTON_RELEASE:
@@ -2086,7 +2096,7 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 		 */
 		
 		canvas->state = event->state;
-		emit_event (canvas, (GdkEvent *) event);
+		retval = emit_event (canvas, (GdkEvent *) event);
 		event->state ^= mask;
 		canvas->state = event->state;
 		pick_current_item (canvas, (GdkEvent *) event);
@@ -2097,7 +2107,7 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 		g_assert_not_reached ();
 	}
 
-	return FALSE;
+	return retval;
 }
 
 static gint
@@ -2116,9 +2126,7 @@ gnome_canvas_motion (GtkWidget *widget, GdkEventMotion *event)
 
 	canvas->state = event->state;
 	pick_current_item (canvas, (GdkEvent *) event);
-	emit_event (canvas, (GdkEvent *) event);
-
-	return FALSE;
+	return emit_event (canvas, (GdkEvent *) event);
 }
 
 static gint
@@ -2158,9 +2166,7 @@ gnome_canvas_key (GtkWidget *widget, GdkEventKey *event)
 	if (event->window != canvas->layout.bin_window)
 		return FALSE;
 
-	emit_event (canvas, (GdkEvent *) event);
-
-	return FALSE;
+	return emit_event (canvas, (GdkEvent *) event);
 }
 
 static gint
@@ -2178,9 +2184,7 @@ gnome_canvas_crossing (GtkWidget *widget, GdkEventCrossing *event)
 		return FALSE;
 
 	canvas->state = event->state;
-	pick_current_item (canvas, (GdkEvent *) event);
-
-	return FALSE;
+	return pick_current_item (canvas, (GdkEvent *) event);
 }
 
 static gint
@@ -2190,12 +2194,10 @@ gnome_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
 	
 	canvas = GNOME_CANVAS (widget);
 
-	if (canvas->focused_item){
-		emit_event (canvas, (GdkEvent *) event);
-
-		return TRUE;
-	}
-	return FALSE;
+	if (canvas->focused_item)
+		return emit_event (canvas, (GdkEvent *) event);
+	else
+		return FALSE;
 }
 
 static gint
@@ -2204,12 +2206,11 @@ gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
 	GnomeCanvas *canvas;
 	
 	canvas = GNOME_CANVAS (widget);
-	if (canvas->focused_item){
-		emit_event (canvas, (GdkEvent *) event);
-		return TRUE;
-	}
-	
-	return FALSE;
+
+	if (canvas->focused_item)
+		return emit_event (canvas, (GdkEvent *) event);
+	else
+		return FALSE;
 }
 
 static void
