@@ -1,3 +1,9 @@
+2002-01-31  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-icon-list.c (real_move_cursor): Fixed
+	off-by-one error; you could not focus the last icon in the list by
+	pressing the Right arrow key.  Removed some ifdefed code.
+
 2002-01-29  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Up version to 1.110.0
