@@ -50,22 +50,43 @@ struct _GnomeLessClass {
   GtkVBoxClass parent_class;
 };
 
-guint gnome_less_get_type(void);
+guint gnome_less_get_type       (void);
 
-GtkWidget * gnome_less_new(void);
+GtkWidget * gnome_less_new      (void);
 
-/* All these clear any existing text and show whatever you pass in. */
-void gnome_less_show_file       (GnomeLess * gl, const gchar * path);
-void gnome_less_show_command    (GnomeLess * gl, const gchar * command_line);
-void gnome_less_show_string     (GnomeLess * gl, const gchar * s);
-void gnome_less_show_filestream (GnomeLess * gl, FILE * f);
+/* Clear the text */
+void gnome_less_clear (GnomeLess * gl);
+
+/* FIXME maybe add "append" equivalents to these */
+/* All these clear any existing text and show whatever you pass in. 
+   When applicable, they return TRUE on success, FALSE and set errno 
+   on failure. */
+gboolean gnome_less_show_file       (GnomeLess * gl, const gchar * path);
+gboolean gnome_less_show_command    (GnomeLess * gl, const gchar * command_line);
+void     gnome_less_show_string     (GnomeLess * gl, const gchar * s);
+gboolean gnome_less_show_filestream (GnomeLess * gl, FILE * f);
+gboolean gnome_less_show_fd         (GnomeLess * gl, int file_descriptor);
+
+/* Write a file; returns FALSE and sets errno if either open
+   or close fails on the file. write_file overwrites any existing file. */
+gboolean gnome_less_write_file   (GnomeLess * gl, const gchar * path);
+gboolean gnome_less_write_fd     (GnomeLess * gl, int fd);
+
+/* Set an arbitrary font */
+void gnome_less_set_font        (GnomeLess * gl, GdkFont * font);
 
 /*
- * Use a fixed font for any future showings. 
+ * Whether to use a fixed font for any future showings. 
  * Recommended for anything that comes in columns, program code,
- * etc.
+ * etc. Just loads a fixed font and calls set_font above.
  */
-void gnome_less_fixed_font(GnomeLess * gl);
+void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed);
+
+/* Re-insert the text with the current font settings. */
+void gnome_less_reshow          (GnomeLess * gl);
+
+/* Replaced by the more versatile set_fixed_font - avoid. */
+void gnome_less_fixed_font      (GnomeLess * gl);
 
 END_GNOME_DECLS
    

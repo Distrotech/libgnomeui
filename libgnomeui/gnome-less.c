@@ -24,18 +24,21 @@
 
 #include "libgnome/gnome-i18nP.h"
 
+#include "libgnomeui/gnome-uidefs.h"
+
+#include <unistd.h>
 #include <time.h>
 #include <string.h> /* memset */
-#include "libgnomeui/gnome-uidefs.h"
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 
 static void gnome_less_class_init (GnomeLessClass *klass);
 static void gnome_less_init       (GnomeLess      *messagebox);
 
 static void gnome_less_destroy (GtkObject *gl);
-
-static void gnome_less_clear (GnomeLess * gl);
-static void gnome_less_set_font(GnomeLess * gl, GdkFont * font);
 
 static gint text_clicked_cb(GtkText * text, GdkEventButton * e, 
 			    GnomeLess * gl);
@@ -134,94 +137,114 @@ static void gnome_less_destroy (GtkObject *gl)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(gl);
 }
 
-static void do_error_message(GnomeLess * gl, const gchar * format, 
-			     const gchar * string)
-{
-  gint len;
-  gchar * error_string;
-
-  len = strlen(string) + strlen(format);
-  error_string = g_malloc(len);
-  g_snprintf(error_string, len, format, string);
-  gnome_less_show_string(gl, error_string);
-  g_free(error_string);
-}
-
-void gnome_less_show_file(GnomeLess * gl, const gchar * path)
+gboolean gnome_less_show_file(GnomeLess * gl, const gchar * path)
 {
   FILE * f;
-  gchar * not_found = 
-    _("This should have displayed the file:\n %s\n"
-      "but that file could not be found.");
 
-  g_return_if_fail(gl != NULL);
-  g_return_if_fail(GNOME_IS_LESS(gl));
-  g_return_if_fail(path != NULL);
+  g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+  g_return_val_if_fail(path != NULL, FALSE);
 
   if ( ! g_file_exists(path) ) {
-    do_error_message(gl, not_found, path);
-    return;
+    /* Leave errno from the stat in g_file_exists */
+    return FALSE;
   }
 
   f = fopen(path, "r");
 
   if ( f == NULL ) {
-    g_warning("Couldn't open file %s\n", path);
-    return;
+    /* Leave errno */
+    return FALSE;
   }
 
-  gnome_less_show_filestream(gl, f);
+  if ( ! gnome_less_show_filestream(gl, f) ) {
+    /* Starting to feel like exceptions would be nice. */
+    int save_errno = errno;
+    fclose(f); /* nothing to do if it fails */
+    errno = save_errno;  /* Want to report the root cause of the error */
+    return FALSE;
+  }
 
-  fclose(f);
+  if (fclose(f) != 0) {
+    return FALSE;
+  }
+  else return TRUE;
 }
 
-void gnome_less_show_command(GnomeLess * gl,
-			     const gchar * command_line)
+gboolean gnome_less_show_command(GnomeLess * gl,
+				 const gchar * command_line)
 {
   FILE * p;
-  gchar * no_pipe = 
-    _("This should have displayed output from the command:\n %s\n"
-      "but there was an error.");
 
-  g_return_if_fail(gl != NULL);
-  g_return_if_fail(GNOME_IS_LESS(gl));
-  g_return_if_fail(command_line != NULL);
+  g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+  g_return_val_if_fail(command_line != NULL, FALSE);
   
   p = popen(command_line, "r");
 
   if ( p == NULL ) {
-    do_error_message(gl, no_pipe, command_line);
-    return;
+    return FALSE;
   }
 
-  gnome_less_show_filestream(gl, p);
+  if ( ! gnome_less_show_filestream(gl, p) ) {
+    int save_errno = errno;
+    pclose(p); /* nothing to do if it fails */
+    errno = save_errno; /* Report the root cause of the error */
+    return FALSE;
+  }
 
-  pclose(p);
+  if ( pclose(p) == -1 ) {
+    return FALSE;
+  }
+  else return TRUE;
 }
 
-void gnome_less_show_filestream(GnomeLess * gl, FILE * f)
+gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
 {
   static const gint bufsize = 1024;
-  gchar buffer[bufsize + 1];
-  gint bytes_read = bufsize; /* So the while loop starts. */
+  gchar buffer[bufsize];
+  gchar * s;
 
-  g_return_if_fail(gl != NULL);
-  g_return_if_fail(GNOME_IS_LESS(gl));
-  g_return_if_fail(f != NULL);
-
-  memset(buffer, '\0', sizeof(buffer));
+  g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
+  g_return_val_if_fail(f != NULL, FALSE);
 
   gtk_text_freeze(gl->text);
   
   gnome_less_clear(gl);
   
-  while (bytes_read == bufsize) {
-    bytes_read = fread(buffer, sizeof(char), bufsize, f);
+  errno = 0; /* Reset it to detect errors */
+  while (TRUE) {
+    s = fgets(buffer, bufsize, f);
+
+    if ( s == NULL ) break;
     
-    gtk_text_insert(gl->text, gl->font, NULL, NULL, buffer, bytes_read);
+    gtk_text_insert(gl->text, gl->font, NULL, NULL, buffer, strlen(s));
   }
 
   gtk_text_thaw(gl->text);
+
+  if ( errno != 0 ) {
+    /* We quit on an error, not EOF */
+    return FALSE;
+  }
+  else {
+    return TRUE;
+  }
+}
+
+gboolean gnome_less_show_fd         (GnomeLess * gl, int file_descriptor)
+{
+  FILE * f;
+
+  g_return_val_if_fail(gl != NULL, FALSE);
+
+  f = fdopen(file_descriptor, "r");
+
+  if ( f && gnome_less_show_filestream(gl, f) ) {
+    return TRUE;
+  }
+  else return FALSE;
 }
 
 static void gnome_less_append_string(GnomeLess * gl, const gchar * s)
@@ -246,7 +269,7 @@ void gnome_less_show_string(GnomeLess * gl, const gchar * s)
   gtk_text_thaw(gl->text);
 }
 
-static void gnome_less_clear (GnomeLess * gl)
+void gnome_less_clear (GnomeLess * gl)
 {
   g_return_if_fail(gl != NULL);
   g_return_if_fail(GNOME_IS_LESS(gl));
@@ -255,7 +278,7 @@ static void gnome_less_clear (GnomeLess * gl)
 			   gtk_text_get_length(GTK_TEXT(gl->text)));
 }
 
-static void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
+void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
 {
   g_return_if_fail(gl != NULL);
   g_return_if_fail(GNOME_IS_LESS(gl));
@@ -265,33 +288,105 @@ static void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
   if (gl->font) gdk_font_unref(gl->font);
   gl->font = font;
   if (gl->font) {
-    gchar eighty_ems[81];
     gdk_font_ref(gl->font);
-    /* This is sort of a silly hack, just for now since horizontal
-       scroll is broken. */
-    memset(eighty_ems, 'M', sizeof(gchar) * 80);
-    eighty_ems[80] = '\0';
-    gtk_widget_set_usize(GTK_WIDGET(gl->text), 
-			 gdk_string_width(font, eighty_ems) + 10,
-			 -1);
   }
 }
 
 void gnome_less_fixed_font(GnomeLess * gl)
 {
+  g_warning("Please use gnome_less_set_fixed_font instead. Sorry!\n");
+  gnome_less_set_fixed_font(gl, TRUE);
+}
+
+void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
+{
   GdkFont * font;
   g_return_if_fail(gl != NULL);
   g_return_if_fail(GNOME_IS_LESS(gl));
 
-  /* Is this a standard X font? Fixme */
-  font = gdk_font_load("-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*");
-
-  if ( font == NULL ) {
-    g_warning("Couldn't load fixed font\n");
-    return;
+  if ( fixed == FALSE ) {
+    font = NULL; /* Note that a NULL string to gtk_text_insert_text 
+		    uses the default font. */
+  }
+  else {
+    /* FIXME maybe try loading a nicer font first? */
+    /* Is this a standard X font in every respect? */
+    /* I'm told that "fixed" is the standard X font, but
+       "fixed" doesn't appear to be fixed-width; courier does though. */
+    font = gdk_font_load("-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*");
+    
+    if ( font == NULL ) {
+      g_warning("GnomeLess: Couldn't load fixed font\n");
+      return;
+    }
   }
 
-  gnome_less_set_font(gl, font);
+  gnome_less_set_font(gl, font);  
+}
+
+gboolean gnome_less_write_fd (GnomeLess * gl, int fd)
+{
+  gchar * contents;
+  gint len;
+  gint bytes_written;
+
+  g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(fd >= 0, FALSE);
+
+  contents = 
+    gtk_editable_get_chars(GTK_EDITABLE(gl->text), 0,
+			   gtk_text_get_length(GTK_TEXT(gl->text)));
+  len = strlen(contents);
+
+  if ( contents && (len > 0)  ) {
+    bytes_written = write (fd, contents, len);
+    g_free(contents); 
+    
+    if ( bytes_written != len ) return FALSE;
+    else return TRUE;
+  }
+  else return TRUE; /* Nothing to write. */
+}
+
+gboolean gnome_less_write_file   (GnomeLess * gl, const gchar * path)
+{
+  int fd;
+
+  g_return_val_if_fail(gl != NULL, FALSE);
+  g_return_val_if_fail(path != NULL, FALSE);
+  
+  fd = open( path, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR );
+
+  if ( fd == -1 ) return FALSE; /* Leaving errno set */
+
+  if ( ! gnome_less_write_fd(gl, fd) ) {
+    int save_errno = errno;
+    close(fd); /* If it fails, nothing to do */
+    errno = save_errno; /* Return root cause of problem. */
+    return FALSE;
+  }
+
+  if ( close(fd) != 0 ) {
+    /* Error, leave errno and return */
+    return FALSE;
+  }
+  else return TRUE;
+}
+
+void gnome_less_reshow          (GnomeLess * gl)
+{
+  gchar * contents;
+
+  g_return_if_fail(gl != NULL);
+
+  contents = gtk_editable_get_chars(GTK_EDITABLE(gl->text), 0,
+				    gtk_text_get_length(GTK_TEXT(gl->text)));
+
+  if ( contents && (strlen(contents) != 0)  ) {
+    gnome_less_show_string(gl, contents);
+  }
+
+  g_free(contents);
 }
 
 static gint text_clicked_cb(GtkText * text, GdkEventButton * e, 
@@ -309,3 +404,6 @@ static gint text_clicked_cb(GtkText * text, GdkEventButton * e,
                  NULL, e->button, time(NULL));
   return TRUE; 
 }
+
+
+

@@ -1,3 +1,22 @@
+Mon Jun  8 19:27:17 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-less.h, gnome-less.c: Changed error handling; rather than
+	have the widget report errors, return FALSE from show functions if
+	there is an error and set errno if applicable.
+	(gnome_less_show_file): add return value. 
+	(gnome_less_show_command): add return value.
+	(gnome_less_show_filestream): add return value. Use fgets instead
+	of fread because a book I have here says fread isn't portable. (?)
+	(gnome_less_show_fd): New function, for file descriptors.
+	(gnome_less_write_file): New function, writes contents to a
+	filename.
+	(gnome_less_write_fd): New, for file descriptor.
+	(gnome_less_set_font): Put in header, no longer static. Set
+	arbitrary font.
+	(gnome_less_set_fixed_font): allow turning fixed font on and off. 
+	(gnome_less_reshow): Reshow contents with current font, etc.
+	(gnome_less_fixed_font): Deprecated warning.
+
 Mon Jun  8 19:22:03 1998  Havoc Pennington  <hp@pobox.com>
 
 	 * gnome-app-helper.h (GNOMEUIINFO_JUSTIFY_RIGHT): New macro for a
