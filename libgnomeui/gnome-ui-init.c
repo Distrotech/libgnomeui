@@ -266,8 +266,6 @@ libgnomeui_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_info)
 static void
 libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
-        gboolean ctype_set;
-        char *ctype, *old_ctype = NULL;
         gboolean do_crash_dialog = TRUE;
         const char *envar;
 
@@ -281,30 +279,6 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 
         if(do_crash_dialog)
                 libgnomeui_segv_setup (app, FALSE);
-
-        /* Begin hack to propogate an en_US locale into Gtk+ if LC_CTYPE=C, so that non-ASCII
-           characters will display for as many people as possible. Related to bug #1979 */
-        ctype = setlocale (LC_CTYPE, NULL);
-
-        if (strcmp (ctype, "C") == 0) {
-                old_ctype = g_strdup (g_getenv ("LC_CTYPE"));
-                gnome_setenv ("LC_CTYPE", "en_US", TRUE);
-                ctype_set = TRUE;
-        } else {
-                ctype_set = FALSE;
-	}
-
-        gtk_set_locale ();
-
-        if (ctype_set) {
-                if (old_ctype) {
-			gnome_setenv ("LC_CTYPE", old_ctype, TRUE);
-                        g_free (old_ctype);
-                } else {
-			gnome_unsetenv ("LC_CTYPE");
-		}
-        }
-        /* End hack */
 }
 
 static gboolean
