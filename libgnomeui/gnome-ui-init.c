@@ -170,11 +170,11 @@ gnome_init (char *app_id, struct argp *app_args,
 
 	/* Now parse command-line arguments.  */
 	retval = gnome_parse_arguments (app_args, argc, argv, flags, arg_index);
-
+#if 0
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = (gpointer)gnome_segv_handle;
 	sigaction(SIGSEGV, &sa, NULL);
-
+#endif
 	return retval;
 }
 
