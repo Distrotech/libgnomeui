@@ -26,6 +26,7 @@
 #include "libgnomeui/gnome-stock.h"
 #endif
 #include <gdk/gdkkeysyms.h>
+#include <glib.h>
 #include <string.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -87,7 +88,7 @@ static void gtk_cauldron_button_exit (GtkWidget * w, struct cauldron_button *b)
 static void get_entry_result (GtkWidget * w, void *x)
 {
     gchar **result = (gchar **) x;
-    *result = strdup (gtk_entry_get_text (GTK_ENTRY (w)));
+    *result = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
 }
 
 #ifdef HAVE_GNOME
@@ -100,7 +101,7 @@ static void get_gnome_entry_result (GtkWidget * w, void *x)
     GtkWidget *entry;
     gentry = GNOME_ENTRY (w);
     entry = gnome_entry_gtk_entry (gentry);
-    *result = strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+    *result = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
 }
 
 /* get text of an gnome file entry widget */
@@ -111,7 +112,7 @@ static void get_gnome_file_entry_result (GtkWidget * w, void *x)
     GtkWidget *entry;
     gentry = GNOME_FILE_ENTRY (w);
     entry = gnome_file_entry_gtk_entry (gentry);
-    *result = strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+    *result = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
 }
 
 /* get text of an gnome number entry widget */
@@ -122,7 +123,7 @@ static void get_gnome_number_entry_result (GtkWidget * w, void *x)
     GtkWidget *entry;
     gentry = GNOME_NUMBER_ENTRY (w);
     entry = gnome_number_entry_gtk_entry (gentry);
-    *result = strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+    *result = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
 }
 
 #endif
@@ -366,7 +367,7 @@ static gint key_press_event (GtkWidget * window, GdkEventKey * event, struct key
 	(l)->w = (w);						\
 	(l)->result = (void *) (d);
 
-static gchar *convert_label_with_ampersand (gchar * label, gint * accelerator_key, gint * underbar_pos);
+static gchar *convert_label_with_ampersand (const gchar * label, gint * accelerator_key, gint * underbar_pos);
 
 static void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback next_arg, gpointer user_data, GtkAccelGroup * accel_table)
 {
@@ -390,7 +391,7 @@ static void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback
 	next_arg (GTK_CAULDRON_TYPE_INT, user_data, &mods);
 	label = convert_label_with_ampersand (label, &accelerator_key, &underbar_pos);
 	gtk_widget_add_accelerator (w, signal, accel_table, accelerator_key, mods, GTK_ACCEL_VISIBLE);
-	free (label);
+	g_free (label);
     }
     if (option_is_present (p, 'c')) {
 	GtkCauldronCustomCallback fud;
@@ -401,11 +402,11 @@ static void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback
     }
 }
 
-/* result must be free'd */
-static gchar *convert_label_with_ampersand (gchar * label, gint * accelerator_key, gint * underbar_pos)
+/* result must be g_free'd */
+static gchar *convert_label_with_ampersand (const gchar * _label, gint * accelerator_key, gint * underbar_pos)
 {
     gchar *p;
-    label = strdup (label);
+    gchar *label = g_strdup (_label);
     for (p = label;; p++) {
 	if (!*p)
 	    break;
@@ -457,7 +458,7 @@ static void get_child_entry (GtkWidget * widget, gpointer data)
 static gchar *create_label_pattern (gchar * label, gint underbar_pos)
 {
     gchar *pattern;
-    pattern = strdup (label);
+    pattern = g_strdup (label);
     memset (pattern, ' ', strlen (label));
     if (underbar_pos < strlen (pattern) && underbar_pos >= 0)
 	pattern[underbar_pos] = '_';
@@ -472,26 +473,27 @@ static void add_accelerator_with_underbar (GtkWidget * widget, GtkAccelGroup * a
     find_label (widget, (void *) &d);
     gtk_widget_add_accelerator (widget, "clicked",
 	 accel_table, accelerator_key, GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
-    free (d.pattern);
+    g_free (d.pattern);
 }
 
-static GtkWidget *gtk_label_new_with_ampersand (gchar * label)
+static GtkWidget *gtk_label_new_with_ampersand (const gchar * _label)
 {
     GtkWidget *widget;
     gchar *pattern;
     gint accelerator_key = 0, underbar_pos = -1;
-    label = convert_label_with_ampersand (label, &accelerator_key, &underbar_pos);
+    gchar *label = convert_label_with_ampersand (_label, &accelerator_key,
+    						 &underbar_pos);
     pattern = create_label_pattern (label, underbar_pos);
     widget = gtk_label_new (label);
     if (underbar_pos != -1)
 	gtk_label_set_pattern (GTK_LABEL (widget), pattern);
-    free (label);
+    g_free (label);
     return widget;
 }
 
 #define MAX_TEXT_WIDGETS 64
 
-gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * format,
+gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gchar * format,
 		 GtkCauldronNextArgCallback next_arg, gpointer user_data)
 {
     GtkWidget *w = 0, *window, *f = 0;
@@ -599,7 +601,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 	    } else {
 /* place a label right in here */
 		gchar *label;
-		label = strdup (p + 1);
+		label = g_strdup (p + 1);
 		p = strchr (p, ')');
 		if (!p) {
 		    g_error ("bracketing error in call to gtk_dialog_cauldron()");
@@ -607,7 +609,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		}
 		*(strchr (label, ')')) = '\0';
 		w = gtk_label_new_with_ampersand (label);
-		free (label);
+		g_free (label);
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		gtk_widget_show (w);
@@ -784,7 +786,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    if (accelerator_key)
 			add_accelerator_with_underbar (w, accel_table, accelerator_key, label, underbar_pos);
 		    if (label)
-			free (label);
+			g_free (label);
 		    if (option_is_present (p + 1, 'r'))
 			b[ncauldron_button].r = r;
 		    else
@@ -823,7 +825,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		    if (label)
-			free (label);
+			g_free (label);
 		    break;
 		}
 	    case 'S':
@@ -888,7 +890,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
 		    if (label)
-			free (label);
+			g_free (label);
 		    break;
 		}
 	    case 'X':{
@@ -1051,7 +1053,7 @@ static void next_arg (gint type, va_list * ap, void *result)
     return;
 }
 
-gchar *gtk_dialog_cauldron (gchar * title, glong options, const gchar * format,...)
+gchar *gtk_dialog_cauldron (const gchar * title, glong options, const gchar * format,...)
 {
     gchar *r;
     va_list ap;

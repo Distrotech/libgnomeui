@@ -277,7 +277,7 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
 	if ( S_ISREG(statbuf.st_mode) ) {
 	  /* Image filename, exists, regular file, go for it. */
           gis->file_list = g_list_insert_sorted(gis->file_list,
-            (gchar *)strdup(full_path), sort_file_list);
+            g_strdup (full_path), sort_file_list);
 	}
       }
       g_free(full_path);

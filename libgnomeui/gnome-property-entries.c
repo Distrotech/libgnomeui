@@ -317,7 +317,7 @@ gnome_property_entry_colors (GnomePropertyObject *object, const gchar *label,
 
 	table = gtk_table_new (rows, columns, TRUE);
 	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
-	gtk_container_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 
 	for (i = 0; i < num_colors; i++) {
 		ColorsCbData *cb_data;

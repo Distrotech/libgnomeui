@@ -777,7 +777,7 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	if ((uiinfo->type == GNOME_APP_UI_TOGGLEITEM) || is_radio) {
 		gtk_check_menu_item_set_show_toggle
 			(GTK_CHECK_MENU_ITEM(uiinfo->widget), TRUE);
-		gtk_check_menu_item_set_state
+		gtk_check_menu_item_set_active
 			(GTK_CHECK_MENU_ITEM (uiinfo->widget), FALSE);
 	}
 

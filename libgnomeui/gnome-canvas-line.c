@@ -1112,13 +1112,13 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 			 int cx, int cy, GnomeCanvasItem **actual_item)
 {
 	GnomeCanvasLine *line;
-	double *line_points, *coords;
+	double *line_points = NULL, *coords;
 	double static_points[2 * NUM_STATIC_POINTS];
 	double poly[10];
 	double best, dist;
 	double dx, dy;
 	double width;
-	int num_points, i;
+	int num_points = 0, i;
 	int changed_miter_to_bevel;
 
 #ifdef VERBOSE

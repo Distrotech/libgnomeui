@@ -726,6 +726,9 @@ gtk_ted_save (GtkWidget *widget, GtkTed *ted)
 		case label_widget:
 			kind = "Label";
 			break;
+		default:
+			kind = "UNKNOWN";
+			break;
 		}
 
 		key = g_strconcat ("=", filename, "=/", ted->dialog_name, "-", kind, "-", wi->name, "/", NULL);

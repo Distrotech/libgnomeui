@@ -75,11 +75,14 @@ typedef GtkWidget *(*GtkCauldronCustomCallback) (GtkWidget * widget, gpointer us
 
 
 /* for straight C usage */
-gchar *gtk_dialog_cauldron (gchar * title, glong options, const gchar * fmt,...);
+gchar *gtk_dialog_cauldron (const gchar * title, glong options,
+			    const gchar * fmt, ...);
 
 /* for interpreters */
-gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * format,
-		GtkCauldronNextArgCallback next_arg, gpointer user_data);
+gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options,
+				  const gchar * format,
+				  GtkCauldronNextArgCallback next_arg,
+				  gpointer user_data);
 
 #ifdef __cplusplus
 }
