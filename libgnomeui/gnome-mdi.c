@@ -549,9 +549,9 @@ static void book_add_view(GtkNotebook *book, GtkWidget *view) {
 
 static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page_num, GnomeMDI *mdi) {
   GnomeApp *app;
-
+#ifdef GNOME_ENABLE_DEBUG
   g_message("GnomeMDI: switching pages");
-
+#endif
   app = GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(book)));
 
   if(page_num != -1)
@@ -563,9 +563,9 @@ static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page
 static void toplevel_focus(GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi) {
   /* updates active_view and active_child when a new toplevel receives focus */
   g_return_if_fail(GNOME_IS_APP(app));
-
+#ifdef GNOME_ENABLE_DEBUG
   g_message("GnomeMDI: toplevel receiving focus");
-
+#endif
   mdi->active_window = app;
 
   if((mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL))
