@@ -1,3 +1,9 @@
+Fri Apr 24 16:32:33 1998  Owen Taylor  <otaylor@gtk.org>
+
+	* gtk-socket.c: Re-fixed destroy handling on the socket
+	so that it can be destroyed correctly _and_ notifies
+	the child correctly of the destruction.
+
 Thu Apr 23 20:50:56 1998  George Lebl  <jirka@5z.com>
 
 	* gtk-socket.c: fixed destroy handeling on the socket,

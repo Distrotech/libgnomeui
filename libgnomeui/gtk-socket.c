@@ -44,7 +44,6 @@ static gint gtk_socket_focus                    (GtkContainer *container,
 static GdkFilterReturn gtk_socket_filter_func   (GdkXEvent *gdk_xevent, 
 						 GdkEvent *event, 
 						 gpointer data);
-static void gtk_socket_destroy			(GtkObject *object); 
 
 #ifdef DEBUG_PLUGSOCKET
 #define DPRINTF(arg) g_print arg
@@ -103,8 +102,6 @@ gtk_socket_class_init (GtkSocketClass *class)
   widget_class->focus_out_event = gtk_socket_focus_out_event;
 
   container_class->focus = gtk_socket_focus;
-
-  object_class->destroy = gtk_socket_destroy;
 }
 
 static void
@@ -133,13 +130,13 @@ gtk_socket_new ()
 }
 
 void           
-gtk_socket_steal (GtkSocket *socket, guint32 wid)
+gtk_socket_steal (GtkSocket *socket, guint32 id)
 {
   GtkWidget *widget;
 
   widget = GTK_WIDGET (socket);
   
-  socket->plug_window = gdk_window_lookup (wid);
+  socket->plug_window = gdk_window_lookup (id);
 
   if (socket->plug_window && socket->plug_window->user_data)
     {
@@ -151,9 +148,13 @@ gtk_socket_steal (GtkSocket *socket, guint32 wid)
     }
   else
     {
-      socket->plug_window = gdk_window_foreign_new (wid);
+      socket->plug_window = gdk_window_foreign_new (id);
       socket->same_app = FALSE;
       socket->have_size = FALSE;
+
+      XSelectInput (GDK_DISPLAY (),
+		    GDK_WINDOW_XWINDOW(socket->plug_window),
+		    StructureNotifyMask);
 
       gtk_widget_queue_resize (widget);
     }
@@ -484,6 +485,10 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 	  {
 	    socket->plug_window = gdk_window_foreign_new (xevent->xcreatewindow.window);
 	    socket->same_app = FALSE;
+
+	    XSelectInput (GDK_DISPLAY (),
+			  GDK_WINDOW_XWINDOW(socket->plug_window),
+			  StructureNotifyMask);
 	  }
 	
 	gdk_window_move_resize(socket->plug_window,
@@ -539,10 +544,7 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 	XDestroyWindowEvent *xdwe = &xevent->xdestroywindow;
 	if (xdwe->window == GDK_WINDOW_XWINDOW (socket->plug_window))
 	  {
-	    gdk_window_destroy_notify (socket->plug_window);
-	    gdk_window_destroy (socket->plug_window);
 	    socket->plug_window = NULL;
-
 	    gtk_widget_destroy (widget);
 	    
 	    return_val = GDK_FILTER_REMOVE;
@@ -587,16 +589,3 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 
   return return_val;
 }
-
-static void
-gtk_socket_destroy(GtkObject *object)
-{
-  GtkSocket *socket = GTK_SOCKET(object);
-  gdk_window_destroy_notify (socket->plug_window);
-  gdk_window_destroy (socket->plug_window);
-  socket->plug_window = NULL;
-
-  gtk_widget_destroy (GTK_WIDGET(object));
-}
-	    
-
