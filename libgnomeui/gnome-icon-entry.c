@@ -69,29 +69,7 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
 }
-static void
-entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
-{
-	struct stat buf;
-	GnomeIconSelection * gis;
-	gchar *filename = gtk_entry_get_text (GTK_ENTRY (widget));
 
-	if (!filename)
-		return;
-
-	stat (filename, &buf);
-	if (S_ISDIR (buf.st_mode)) {
-		gis = gtk_object_get_user_data(GTK_OBJECT(ientry));
-		gnome_icon_selection_clear (gis, TRUE);
-		gnome_icon_selection_add_directory (gis, filename);
-		if (gis->file_list)
-			gnome_icon_selection_show_icons(gis);
-	} else {
-		/* We pretend like ok has been called */
-		entry_changed (NULL, ientry);
-		gtk_widget_hide (ientry->pick_dialog);
-	}
-}
 static void
 entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 {
@@ -102,7 +80,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	GdkBitmap *mask;
 	GtkWidget *child;
 	int w,h;
-	
+
 	child = GTK_BIN(ientry->pickbutton)->child;
 	
 	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
@@ -143,6 +121,30 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	}
 	g_free(t);
 	gdk_imlib_destroy_image(im);
+}
+
+static void
+entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
+{
+	struct stat buf;
+	GnomeIconSelection * gis;
+	gchar *filename = gtk_entry_get_text (GTK_ENTRY (widget));
+
+	if (!filename)
+		return;
+
+	stat (filename, &buf);
+	if (S_ISDIR (buf.st_mode)) {
+		gis = gtk_object_get_user_data(GTK_OBJECT(ientry));
+		gnome_icon_selection_clear (gis, TRUE);
+		gnome_icon_selection_add_directory (gis, filename);
+		if (gis->file_list)
+			gnome_icon_selection_show_icons(gis);
+	} else {
+		/* We pretend like ok has been called */
+		entry_changed (NULL, ientry);
+		gtk_widget_hide (ientry->pick_dialog);
+	}
 }
 
 static void
@@ -590,7 +592,6 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 	gtk_entry_set_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (ientry)),
 			    filename);
 	entry_changed (NULL, ientry);
-	
 }
 
 /**
