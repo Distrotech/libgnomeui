@@ -38,7 +38,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
 #include <gdk/gdkkeysyms.h>

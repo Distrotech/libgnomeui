@@ -1,3 +1,10 @@
+2002-01-25  Darin Adler  <darin@bentspoon.com>
+
+	* libgnomeui/gnome-app-helper.c: Remove unused include <ctype.h>.
+	* libgnomeui/gnome-dateedit.c: (gnome_date_edit_get_time): Use
+	g_ascii_isdigit instead of isdigit and remove include of <ctype.h>.
+	* libgnomeui/gnome-font-picker.c: Remove unused include <ctype.h>.
+
 2002-01-23  Laszlo Peter  <laca@ireland.sun.com>
 
 	* libgnomeui/gnome-client.c: use g_get_prgname() instead of

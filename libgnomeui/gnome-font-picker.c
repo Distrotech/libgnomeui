@@ -42,7 +42,6 @@
 
 #include <string.h>
 #include <stdio.h>
-#include <ctype.h>
 
 struct _GnomeFontPickerPrivate {
         gchar         *title;

@@ -34,7 +34,6 @@
 #include <time.h>
 #include <string.h>
 #include <stdlib.h> /* atoi */
-#include <ctype.h> /* isdigit */
 #include <stdio.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
@@ -903,10 +902,10 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 			tm.tm_hour = atoi (temp);
 			temp = strtok_r (NULL, ": ", &tokp);
 			if (temp) {
-				if (isdigit (*temp)) {
+				if (g_ascii_isdigit (*temp)) {
 					tm.tm_min = atoi (temp);
 					flags = strtok_r (NULL, ": ", &tokp);
-					if (flags && isdigit (*flags)) {
+					if (flags && g_ascii_isdigit (*flags)) {
 						tm.tm_sec = atoi (flags);
 						flags = strtok_r (NULL, ": ", &tokp);
 					}
