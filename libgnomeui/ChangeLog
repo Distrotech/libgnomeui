@@ -1,3 +1,9 @@
+Sun Sep 10 14:30:33 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dateedit.c:  Make sure that input to gtkcalendar is legal
+	  to avoid warnings.  Also use a separate GtkRequisition for
+	  gtk_widget_size_request for the calendar to avoid GTK+ warning.
+
 2000-08-30  Federico Mena Quintero  <federico@helixcode.com>
 
 	* gnome-dock-item.c (gnome_dock_item_size_allocate): Fix unsigned
