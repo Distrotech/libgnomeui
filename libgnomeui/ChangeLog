@@ -1,3 +1,11 @@
+2001-08-30  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-href.c (gnome_href_class_init): Make the properties 
+	actually work.
+	(gnome_href_construct): Remove this function, since we can
+	do everything with properties now.
+	(gnome_href_new): Use g_object_new.
+
 Thu Aug 30 05:42:06 2001  George Lebl <jirka@5z.com>
 
 	* gnome-winhints.[ch], gnome-client.c, gnome-ui-init.c: drop

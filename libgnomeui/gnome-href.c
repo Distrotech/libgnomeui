@@ -103,33 +103,34 @@ gnome_href_class_init (GnomeHRefClass *klass)
 	GObjectClass *gobject_class = (GObjectClass *)klass;
 	GtkWidgetClass *widget_class = (GtkWidgetClass *)klass;
 	GtkButtonClass *button_class = (GtkButtonClass *)klass;
-
-	/* By default we link to The World Food Programme */
-	g_object_class_install_property (gobject_class,
-				      PROP_URL,
-				      g_param_spec_string ("url",
-							   _("URL"),
-							   _("The URL that GnomeHRef activates"),
-							   "http://www.wfp.org",
-							   (G_PARAM_READABLE |
-							    G_PARAM_WRITABLE)));
-	g_object_class_install_property (gobject_class,
-				      PROP_TEXT,
-				      g_param_spec_string ("text",
-							   _("Text"),
-							   _("The text on the button"),
-							   _("End World Hunger"),
-							   (G_PARAM_READABLE |
-							    G_PARAM_WRITABLE)));
-
+	
 	object_class->destroy = gnome_href_destroy;
-
+	
 	gobject_class->finalize = gnome_href_finalize;
 	gobject_class->set_property = gnome_href_set_property;
 	gobject_class->get_property = gnome_href_get_property;
 
 	widget_class->realize = gnome_href_realize;
 	button_class->clicked = gnome_href_clicked;
+
+	/* By default we link to The World Food Programme */
+	g_object_class_install_property (gobject_class,
+					 PROP_URL,
+					 g_param_spec_string ("url",
+							      _("URL"),
+							      _("The URL that GnomeHRef activates"),
+							      "http://www.wfp.org",
+							      (G_PARAM_READABLE |
+							       G_PARAM_WRITABLE)));
+	g_object_class_install_property (gobject_class,
+					 PROP_TEXT,
+					 g_param_spec_string ("text",
+							      _("Text"),
+							      _("The text on the button"),
+							      _("End World Hunger"),
+							      (G_PARAM_READABLE |
+							       G_PARAM_WRITABLE)));
+
 }
 
 static void
@@ -182,34 +183,6 @@ drag_data_get(GnomeHRef          *href,
 }
 
 /**
- * gnome_href_construct
- * @href: Pointer to GnomeHRef widget
- * @url: URL assigned to this object.
- * @text: Text associated with the URL.
- *
- * Description:
- * For bindings and subclassing, in C you should use #gnome_href_new
- *
- * Returns:
- **/
-
-void
-gnome_href_construct (GnomeHRef *href, const gchar *url, const gchar *text)
-{
-  g_return_if_fail(href != NULL);
-  g_return_if_fail(GNOME_IS_HREF(href));
-  g_return_if_fail(url != NULL);
-
-  gnome_href_set_url(href, url);
-
-  if ( ! text)
-    text = url;
-
-  gnome_href_set_text(href, text);
-}
-
-
-/**
  * gnome_href_new
  * @url: URL assigned to this object.
  * @text: Text associated with the URL.
@@ -222,16 +195,19 @@ gnome_href_construct (GnomeHRef *href, const gchar *url, const gchar *text)
  * Returns:  Pointer to new GNOME href widget.
  **/
 
-GtkWidget *gnome_href_new(const gchar *url, const gchar *text) {
+GtkWidget *
+gnome_href_new(const gchar *url, const gchar *text)
+{
   GnomeHRef *href;
 
   g_return_val_if_fail(url != NULL, NULL);
 
-  href = gtk_type_new(gnome_href_get_type());
+  href = g_object_new (GNOME_TYPE_HREF,
+		       "url", url,
+		       "text", text,
+		       NULL);
 
-  gnome_href_construct(href, url, text);
-
-  return GTK_WIDGET(href);
+  return GTK_WIDGET (href);
 }
 
 
