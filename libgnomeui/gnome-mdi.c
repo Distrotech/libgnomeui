@@ -602,7 +602,7 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 					book_add_view(GTK_NOTEBOOK(new_book), view);
 		
 					if(old_book->cur_page == NULL) {
-						app = GNOME_APP(GTK_WIDGET(old_book)->parent->parent);
+						app = GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(old_book)));
 						mdi->windows = g_list_remove(mdi->windows, app);
 						gtk_widget_destroy(GTK_WIDGET(app));
 					}
@@ -1020,28 +1020,29 @@ static void top_add_view (GnomeMDI *mdi, GnomeMDIChild *child, GtkWidget *view)
 
 static void set_active_view (GnomeMDI *mdi, GtkWidget *view)
 {
-	GnomeMDIChild *child, *old_child;
+	GnomeMDIChild *old_child;
 	GtkWidget *old_view;
 
 #ifdef GNOME_ENABLE_DEBUG
-	g_message("GnomeMDI: set_active_view() called");
+	g_message("setting active_view to %08lx\n", view);
 #endif
 
 	if(view == mdi->active_view)
 		return;
-
-	if(view)
-		child = gnome_mdi_get_child_from_view(view);
-	else
-		child = NULL;
 	
 	old_child = mdi->active_child;
 	old_view = mdi->active_view;
 
-	mdi->active_view = view;
-	mdi->active_child = child;
+	if(view) {
+		mdi->active_child = gnome_mdi_get_child_from_view(view);
+		mdi->active_window = gnome_mdi_get_app_from_view(view);
+	}
+	else
+		mdi->active_child = NULL;
 
-	if(child != old_child)
+	mdi->active_view = view;
+
+	if(mdi->active_child != old_child)
 		gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[CHILD_CHANGED], old_child);
 
 	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[VIEW_CHANGED], old_view);

@@ -1,3 +1,10 @@
+1998-12-10  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (book_button_release): fixed some weird code that
+	caused mayhem when the last page of a notebook was being dragged
+	away. did I do this? ;)
+	(set_active_view): update mdi->active_window.
+
 1998-12-09  Dave Camp  <campd@oit.edu>
         * gnome-dateedit.c (select_clicked):
 
