@@ -55,7 +55,9 @@ const GnomeModuleInfo *
 gnome_gconf_ui_module_info_get (void)
 {
 	static GnomeModuleInfo module_info = {
-		"gnome-gconf-ui", VERSION, N_("GNOME GConf UI Support"),
+		"gnome-gconf-ui",
+		/* FIXME: figure out how to snarfe this from gconf */"1.1.1",
+		N_("GNOME GConf UI Support"),
 		NULL,
 		NULL /* instance init */,
 		gnome_gconf_ui_pre_args_parse,

@@ -181,7 +181,7 @@ struct _GnomeClientClass
 };
 
 const GnomeModuleInfo *gnome_client_module_info_get (void) G_GNUC_CONST;
-#define GNOME_CLIENT_PARAM_SM_CONNECT "B:libgnomeui/gnome-client/sm_connect"
+#define GNOME_CLIENT_PARAM_SM_CONNECT "sm-connect"
 
 /* For internal use by the gnome-libs: */
 guint        gnome_client_get_type (void) G_GNUC_CONST;
@@ -383,11 +383,15 @@ void	     gnome_client_request_save (GnomeClient	       *client,
    get committed.  */
 void         gnome_client_flush (GnomeClient *client);
 
+#ifndef GNOME_DISABLE_DEPRECATED
+/* Note: Use the GNOME_CLIENT_PARAM_SM_CONNECT property
+ * of GnomeProgram */
 /* Normally the master client is connected to the session manager
    automatically, when calling 'gnome_init'.  One can disable this
    automatic connect by calling this function. Using this function
    should definitely be an exception.  */
 void         gnome_client_disable_master_connection (void);
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 /* Create a new session management client and try to connect to a
    session manager. This is useful if you are acting as a proxy for

@@ -100,13 +100,13 @@ libgnomeui_module_info_get (void)
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[5];
 
-		req[0].required_version = VERSION;
+		req[0].required_version = "1.3.7";
 		req[0].module_info = gnome_gtk_module_info_get ();
 
-		req[1].required_version = VERSION;
+		req[1].required_version = "1.102.0";
 		req[1].module_info = libgnome_module_info_get ();
 
-		req[2].required_version = VERSION;
+		req[2].required_version = "1.1.1";
 		req[2].module_info = gnome_gconf_ui_module_info_get ();
 
 		req[3].required_version = VERSION;
@@ -185,10 +185,8 @@ libgnomeui_set_property (GObject *object, guint param_id,
 		priv->show_crash_dialog = g_value_get_boolean (value);
 	else if (param_id == cdata->display_id)
 		priv->display = g_strdup (g_value_get_string (value));
-	else {
-                g_message(G_STRLOC);
+	else
                 G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
-        }
 }
 
 static void
@@ -221,7 +219,8 @@ libgnomeui_class_init (GnomeProgramClass *klass, const GnomeModuleInfo *mod_info
                 klass,
                 libgnomeui_get_property,
                 libgnomeui_set_property,
-                g_param_spec_string (LIBGNOMEUI_PARAM_DISPLAY, NULL, NULL, NULL,
+                g_param_spec_string (LIBGNOMEUI_PARAM_DISPLAY, NULL, NULL, 
+				     g_getenv ("DISPLAY"),
                                      (G_PARAM_READABLE | G_PARAM_WRITABLE |
                                       G_PARAM_CONSTRUCT_ONLY)));
 
@@ -253,9 +252,10 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
         envar = g_getenv("GNOME_DISABLE_CRASH_DIALOG");
         if(envar)
                 do_crash_dialog = atoi(envar)?FALSE:TRUE;
-        g_object_set (G_OBJECT(app), LIBGNOMEUI_PARAM_CRASH_DIALOG,
-                      do_crash_dialog, LIBGNOMEUI_PARAM_DISPLAY,
-                      g_getenv("DISPLAY"), NULL);
+	if ( ! do_crash_dialog)
+		g_object_set (G_OBJECT(app),
+			      LIBGNOMEUI_PARAM_CRASH_DIALOG, FALSE,
+			      NULL);
 
         if(do_crash_dialog)
                 libgnomeui_segv_setup(FALSE);
@@ -664,8 +664,6 @@ gtk_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
 	int final_argc;
 	char **final_argv;
 
-	g_message (G_STRLOC);
-
 	init_info = (gnome_gtk_init_info *) mod_info->options [0].descrip;
 
 	g_ptr_array_add (init_info->gtk_args, NULL);
@@ -694,8 +692,6 @@ add_gtk_arg_callback (poptContext con, enum poptCallbackReason reason,
 {
 	gnome_gtk_init_info *init_info = data;
 	char *newstr;
-
-	g_message (G_STRLOC ": %p", data);
 
 	switch (reason) {
 	case POPT_CALLBACK_REASON_PRE:

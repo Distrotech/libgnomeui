@@ -1,3 +1,14 @@
+Mon Sep 03 02:17:59 2001  George Lebl <jirka@5z.com>
+
+	* gnome-client.[ch]: Add the sm-connect property, deprecate disable
+	  master connection call since the sm-connect property does the same.
+	  Get versions right.
+
+	* gnome-ui-init.c: Fix properties to actually read app specified
+	  values.  Remove some debugging output.
+
+	* gnome-gconf-ui.c: get versions right
+
 Mon Sep 03 00:48:06 2001  George Lebl <jirka@5z.com>
 
 	* gnome-ui-init.c: fix gtk version, duh!

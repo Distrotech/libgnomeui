@@ -53,6 +53,7 @@ extern char *program_invocation_short_name;
 #endif /* HAVE_LIBSM */
 
 static GtkWidget *client_grab_widget = NULL;
+static gboolean sm_connect_default = TRUE;
 
 enum {
   SAVE_YOURSELF,
@@ -844,24 +845,122 @@ static const struct poptOption options[] = {
   {NULL, '\0', 0, NULL, 0}
 };
 
+typedef struct {
+	guint sm_connect_id;
+} GnomeProgramClass_gnome_client;
+
+typedef struct {
+        gboolean sm_connect;
+} GnomeProgramPrivate_gnome_client;
+
+static GQuark quark_gnome_program_private_gnome_client = 0;
+static GQuark quark_gnome_program_class_gnome_client = 0;
+
+static void
+gnome_client_module_get_property (GObject *object, guint param_id, GValue *value,
+			   GParamSpec *pspec)
+{
+        GnomeProgramClass_gnome_client *cdata;
+        GnomeProgramPrivate_gnome_client *priv;
+        GnomeProgram *program;
+
+        g_return_if_fail (object != NULL);
+        g_return_if_fail (GNOME_IS_PROGRAM (object));
+
+        program = GNOME_PROGRAM (object);
+
+        cdata = g_type_get_qdata (G_OBJECT_TYPE (program),
+				  quark_gnome_program_class_gnome_client);
+        priv = g_object_get_qdata (G_OBJECT (program),
+				   quark_gnome_program_private_gnome_client);
+
+	if (param_id == cdata->sm_connect_id)
+		g_value_set_boolean (value, priv->sm_connect);
+	else 
+        	G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
+}
+
+static void
+gnome_client_module_set_property (GObject *object, guint param_id,
+			   const GValue *value, GParamSpec *pspec)
+{
+        GnomeProgramClass_gnome_client *cdata;
+        GnomeProgramPrivate_gnome_client *priv;
+        GnomeProgram *program;
+
+        g_return_if_fail (object != NULL);
+        g_return_if_fail (GNOME_IS_PROGRAM (object));
+
+        program = GNOME_PROGRAM (object);
+
+        cdata = g_type_get_qdata (G_OBJECT_TYPE (program),
+				  quark_gnome_program_class_gnome_client);
+        priv = g_object_get_qdata (G_OBJECT (program),
+				   quark_gnome_program_private_gnome_client);
+
+	if (param_id == cdata->sm_connect_id) {
+		priv->sm_connect = g_value_get_boolean (value);
+	} else {
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	}
+}
+
+static void
+gnome_client_module_init_pass (const GnomeModuleInfo *mod_info)
+{
+    if (!quark_gnome_program_private_gnome_client)
+	quark_gnome_program_private_gnome_client = g_quark_from_static_string
+	    ("gnome-program-private:gnome_client");
+
+    if (!quark_gnome_program_class_gnome_client)
+	quark_gnome_program_class_gnome_client = g_quark_from_static_string
+	    ("gnome-program-class:gnome_client");
+}
+
+static void
+gnome_client_module_class_init (GnomeProgramClass *klass, const GnomeModuleInfo *mod_info)
+{
+        GnomeProgramClass_gnome_client *cdata = g_new0 (GnomeProgramClass_gnome_client, 1);
+
+        g_type_set_qdata (G_OBJECT_CLASS_TYPE (klass), quark_gnome_program_class_gnome_client, cdata);
+
+        cdata->sm_connect_id = gnome_program_install_property (
+                klass,
+                gnome_client_module_get_property,
+                gnome_client_module_set_property,
+                g_param_spec_boolean (GNOME_CLIENT_PARAM_SM_CONNECT, NULL, NULL,
+                                      sm_connect_default,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				       G_PARAM_CONSTRUCT_ONLY)));
+}
+
+static void
+gnome_client_module_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_info)
+{
+    GnomeProgramPrivate_gnome_client *priv = g_new0 (GnomeProgramPrivate_gnome_client, 1);
+
+    g_object_set_qdata (G_OBJECT (program), quark_gnome_program_private_gnome_client, priv);
+}
+
 const GnomeModuleInfo *
 gnome_client_module_info_get (void)
 {
 	static GnomeModuleInfo module_info = {
 		"gnome-client", VERSION, N_("Session management"),
-		NULL, NULL,
+		NULL, gnome_client_module_instance_init,
 		gnome_client_pre_args_parse, gnome_client_post_args_parse,
 		(struct poptOption *)options,
-		NULL, NULL, NULL, NULL
+		gnome_client_module_init_pass, gnome_client_module_class_init,
+		NULL, NULL
 	};
 
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[3];
 
-		req[0].required_version = VERSION;
+		req[0].required_version = "1.3.7";
 		req[0].module_info = gnome_gtk_module_info_get ();
 
-		req[1].required_version = VERSION;
+		req[1].required_version = "1.102.0";
 		req[1].module_info = libgnome_module_info_get ();
 
 		req[2].required_version = NULL;
@@ -887,7 +986,8 @@ client_parse_func (poptContext ctx,
       gnome_client_set_id (master_client, arg);
       break;
     case ARG_SM_DISABLE:
-      gnome_client_disable_master_connection ();
+      g_object_set (G_OBJECT (gnome_program_get()),
+		    GNOME_CLIENT_PARAM_SM_CONNECT, FALSE, NULL);
       break;
     case ARG_SM_CONFIG_PREFIX:
       if(master_client->config_prefix)
@@ -942,8 +1042,6 @@ gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
       g_free (cwd);
     }
 
-  g_object_set (G_OBJECT (app), GNOME_CLIENT_PARAM_SM_CONNECT, TRUE, NULL);
-
   /* needed on non-glibc systems: */
   gnome_client_set_program (master_client, program_invocation_name);
   /* Argument parsing is starting.  We set the restart and the
@@ -969,6 +1067,7 @@ gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
     gnome_client_connect (master_client);
 }
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 /**
  * gnome_client_disable_master_connection
  *
@@ -976,12 +1075,17 @@ gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
  * invoked by users when they pass the --sm-disable argument to a Gnome application.
  **/
 
-void         
+void
 gnome_client_disable_master_connection (void)
 {
-    g_object_set (G_OBJECT (gnome_program_get()),
-		  GNOME_CLIENT_PARAM_SM_CONNECT, FALSE, NULL);
+	if (gnome_program_get () == NULL) {
+		sm_connect_default = FALSE;
+	} else {
+		g_object_set (G_OBJECT (gnome_program_get()),
+			      GNOME_CLIENT_PARAM_SM_CONNECT, FALSE, NULL);
+	}
 }
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
 
 /* Called at exit to ensure the ice connection is closed cleanly
  * This avoids io errors on the session manager side */
