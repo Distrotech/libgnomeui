@@ -375,8 +375,15 @@ finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int
 
 	gdk_imlib_destroy_image (im);
 
-	if (GTK_WIDGET_REALIZED (gpixmap))
+	if (GTK_WIDGET_REALIZED (gpixmap)) {
+		if (GTK_WIDGET_MAPPED (gpixmap))
+			gdk_window_hide (GTK_WIDGET (gpixmap)->window);
+
 		setup_window_and_style (gpixmap);
+	}
+
+	if (GTK_WIDGET_MAPPED (gpixmap))
+		gdk_window_show (GTK_WIDGET (gpixmap)->window);
 
 	if (GTK_WIDGET_VISIBLE (gpixmap))
 		gtk_widget_queue_resize (GTK_WIDGET (gpixmap));

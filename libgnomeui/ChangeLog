@@ -1,3 +1,9 @@
+1998-04-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-pixmap.c (finish_load): Hide the old window and show the
+	new one if the widget is mapped.  Otherwise reloading a new pixmap
+	won't work right.
+
 Wed Apr 29 21:16:28 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-dialog.c (gnome_dialog_append_buttons): changed signal_connect
