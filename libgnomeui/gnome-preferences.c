@@ -79,7 +79,7 @@ static GnomePreferences prefs =
   TRUE,               /* Menus have a tearoff bar */
   TRUE,               /* Menu items have icons in them */
   TRUE,               /* Disable the Imlib cache */
-  GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
+  GTK_WINDOW_TOPLEVEL,/* Dialogs are treated specially */
   GTK_WIN_POS_CENTER, /* Put dialogs in center of screen. */
   GNOME_MDI_NOTEBOOK, /* Use notebook MDI mode. */
   GTK_POS_TOP         /* Show tabs on top of MDI notebooks. */
