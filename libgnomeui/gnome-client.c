@@ -737,7 +737,7 @@ gnome_client_set_restart_command (GnomeClient *client,
   /* Set the '--sm-client-id' option, if we are connected.  We set it
      in a copy, though, and not the original.  This lets us re-use the
      original for the clone command if we must.  */
-  if (GNOME_CLIENT_CONNECTED (client))
+  if (GNOME_CLIENT_CONNECTED (client) && client->restart_command)
     {
       gchar **dup = array_copy (client->restart_command);
       array_insert_sm_client_id_arg (&dup, client->client_id);
@@ -918,11 +918,14 @@ gnome_real_client_connect (GnomeClient *client,
   client_set_prop_from_array (client, SmResignCommand,
 			      client->resign_command);
 
-  {
-    gchar **dup = array_copy (client->restart_command);
-    array_insert_sm_client_id_arg (&dup, client->client_id);
-    client_set_prop_from_array (client, SmRestartCommand, dup);
-  }
+  if (client->restart_command != NULL)
+    {
+      gchar **dup = array_copy (client->restart_command);
+      array_insert_sm_client_id_arg (&dup, client->client_id);
+      client_set_prop_from_array (client, SmRestartCommand, dup);
+    }
+  else
+    client_set_prop_from_array (client, SmRestartCommand, NULL);
 
   if (client->restart_style != -1)
     client_set_prop_from_gchar (client, SmRestartStyleHint,
@@ -1506,7 +1509,7 @@ array_insert_sm_client_id_arg (gchar ***array, gchar *client_id)
   gchar **ptr1;
   gchar **ptr2;
   gint    argc;
-      
+
   g_return_if_fail (client_id != NULL);
 
   for (ptr1 = *array, argc = 0; *ptr1 ; ptr1++ , argc++) /* LOOP */;
