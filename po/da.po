@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
-"POT-Creation-Date: 2002-11-27 00:18+0100\n"
-"PO-Revision-Date: 2002-11-27 00:19+0100\n"
+"POT-Creation-Date: 2002-11-27 00:22+0100\n"
+"PO-Revision-Date: 2002-11-27 00:22+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -22,16 +22,16 @@ msgid "Credits"
 msgstr "Medvirkende"
 
 #: libgnomeui/gnome-about.c:223
-msgid "Written by"
-msgstr "Skrevet af"
+msgid "_Written by"
+msgstr "_Skrevet af"
 
 #: libgnomeui/gnome-about.c:238
-msgid "Documented by"
-msgstr "Dokumenteret af"
+msgid "_Documented by"
+msgstr "_Dokumenteret af"
 
 #: libgnomeui/gnome-about.c:253
-msgid "Translated by"
-msgstr "Oversat af"
+msgid "_Translated by"
+msgstr "_Oversat af"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -418,12 +418,12 @@ msgid "GNOME GUI Library"
 msgstr "Gnome GUI-bibliotek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
+#: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmentfejl opstod; kan ikke vise fejlvinduet\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
+#: libgnomeui/gnome-ui-init.c:632
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
