@@ -26,16 +26,37 @@
 #include <config.h>
 #include <gobject/genums.h>
 #include <gobject/gboxed.h>
+#include <gtk/gtk.h>
 
 #include <libgnomecanvas/libgnomecanvas.h>
 #include <libgnome/libgnome.h>
 
-static void libgnomecanvas_pre_args_parse (GnomeProgram *,
-					   const GnomeModuleInfo *);
+static void
+gtk_post_args_parse (GnomeProgram *program,
+		     const GnomeModuleInfo *mod_info);
+
+static void
+libgnomecanvas_pre_args_parse (GnomeProgram *program,
+			       const GnomeModuleInfo *mod_info);
+
+static GnomeModuleRequirement gtk_requirements[] = {
+    /* We require libgnome setup to be run first as it
+     * sets some strings for us, and inits user
+     * directories */
+    {VERSION, &libgnome_module_info},
+    {NULL, NULL}
+};
+
+GnomeModuleInfo gtk_module_info = {
+    "gtk", GTK_VERSION, "GTK+",
+    gtk_requirements,
+    NULL, gtk_post_args_parse,
+    NULL, NULL, NULL, NULL, NULL
+};
 
 static GnomeModuleRequirement libgnomecanvas_requirements[] = {
-    {VERSION, &libgnome_module_info},
-    {NULL}
+    {GTK_VERSION, &gtk_module_info},
+    {NULL, NULL}
 };
 
 GnomeModuleInfo libgnomecanvas_module_info = {
@@ -43,7 +64,21 @@ GnomeModuleInfo libgnomecanvas_module_info = {
     libgnomecanvas_requirements,
     libgnomecanvas_pre_args_parse, NULL, NULL,
     NULL,
+    NULL, NULL, NULL
 };
+
+static void
+gtk_post_args_parse (GnomeProgram *app, const GnomeModuleInfo *mod_info)
+{
+    int argc = 0;
+    gchar **argv = NULL;
+
+    g_message (G_STRLOC);
+
+    gtk_init (&argc, &argv);
+
+    gdk_rgb_init();
+}
 
 static void
 libgnomecanvas_pre_args_parse (GnomeProgram *program,
