@@ -127,7 +127,7 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 					padding = strtol(attr->value, NULL, 0);
 				else if (!strcmp(attr->name, "pack"))
 					start = strcmp(attr->value,
-						       "GTK_PACK_START");
+						       "GTK_PACK_START") == 0;
 				break;
 			}
 		}
@@ -515,6 +515,108 @@ pixmap_entry_build_children (GladeXML *xml, GtkWidget *w,
 	}
 	glade_xml_set_common_params(xml, GTK_WIDGET(entry), cinfo, longname);
 }
+
+static void
+druid_build_children(GladeXML *xml, GtkWidget *w,
+		     GladeWidgetInfo *info, const char *longname)
+{
+	GList *tmp;
+
+	for (tmp = info->children; tmp; tmp = tmp->next) {
+		GladeWidgetInfo *cinfo = tmp->data;
+		GtkWidget *child = glade_xml_build_widget(xml,cinfo, longname);
+
+		gnome_druid_append_page(GNOME_DRUID(w),
+					GNOME_DRUID_PAGE(child));
+		if (tmp->prev == NULL)
+			gnome_druid_set_page(GNOME_DRUID(w),
+					     GNOME_DRUID_PAGE(child));
+	}
+}
+
+static void
+druidpage_build_children(GladeXML *xml, GtkWidget *w,
+			 GladeWidgetInfo *info, const char *longname)
+{
+	GList *tmp;
+	GladeWidgetInfo *cinfo = info->children->data;
+	GtkBox *vbox= GTK_BOX(GNOME_DRUID_PAGE_STANDARD(w)->vbox);
+	gchar *vboxname = g_strconcat(longname, ".", cinfo->name, NULL);
+
+	for (tmp = cinfo->children; tmp; tmp = tmp->next) {
+		GList *tmp2;
+		GtkWidget *child;
+		gboolean expand = TRUE, fill = TRUE, start = TRUE;
+		gint padding = 0;
+		cinfo = tmp->data;
+
+		child = glade_xml_build_widget(xml, cinfo, vboxname);
+		for (tmp2 = cinfo->child_attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+
+			switch(attr->name[0]) {
+			case 'e':
+				if (!strcmp(attr->name, "expand"))
+					expand = attr->value[0] == 'T';
+				break;
+			case 'f':
+				if (!strcmp(attr->name, "fill"))
+					fill = attr->value[0] == 'T';
+				break;
+			case 'p':
+				if (!strcmp(attr->name, "padding"))
+					padding = strtol(attr->value, NULL, 0);
+				else if (!strcmp(attr->name, "pack"))
+					start = strcmp(attr->value,
+						       "GTK_PACK_START") == 0;
+				break;
+			}
+		}
+		if (start)
+			gtk_box_pack_start(vbox, child, expand, fill, padding);
+		else
+			gtk_box_pack_end(vbox, child, expand, fill, padding);
+	}
+	g_free(vboxname);
+}
+
+static void
+propbox_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
+			const char *longname)
+{
+	/*
+	 * the notebook tabs are listed after the pages, and have
+	 * child_name set to Notebook:tab.  We store pages in a GList
+	 * while waiting for tabs
+	 */
+
+	GList *pages = NULL;
+	GladeWidgetInfo *ninfo = info->children->data;
+	GList *tmp;
+
+	for (tmp = ninfo->children; tmp; tmp = tmp->next) {
+		GladeWidgetInfo *cinfo = tmp->data;
+		GtkWidget *child = glade_xml_build_widget (xml,cinfo,longname);
+		GList *tmp2;
+		GladeAttribute *attr = NULL;;
+
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			attr = tmp2->data;
+			if (!strcmp(attr->name, "child_name"))
+				break;
+		}
+		if (tmp2 == NULL || strcmp(attr->value, "Notebook:tab") != 0)
+			pages = g_list_append (pages, child);
+		else {
+			GtkWidget *page = pages->data;
+
+			pages = g_list_remove (pages, page);
+			gnome_property_box_append_page (GNOME_PROPERTY_BOX(w),
+							page, child);
+		}
+	}
+}
+
 /* -- routines to build widgets -- */
 
 /* this is for the GnomeStockButton widget ... */
@@ -1237,6 +1339,75 @@ canvas_new(GladeXML *xml, GladeWidgetInfo *info)
 }
 
 static GtkWidget *
+iconlist_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid;
+	GList *tmp;
+	guint icon_width = 78;
+	GtkSelectionMode mode = GTK_SELECTION_SINGLE;
+	int row_spacing = 4, col_spacing = 2, text_spacing = 2;
+	int flags = 0;
+
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+
+		if (!strcmp(attr->name, "icon_width"))
+			icon_width = strtoul(attr->value, NULL, 0);
+		else if (!strcmp(attr->name, "selection_mode"))
+			mode = glade_enum_from_string(GTK_TYPE_SELECTION_MODE,
+						      attr->value);
+		else if (!strcmp(attr->name, "row_spacing"))
+			row_spacing = strtol(attr->value, NULL, 0);
+		else if (!strcmp(attr->name, "column_spacing"))
+			col_spacing = strtol(attr->value, NULL, 0);
+		else if (!strcmp(attr->name, "text_spacing"))
+			text_spacing = strtol(attr->value, NULL, 0);
+		else if (!strcmp(attr->name, "text_editable")) {
+			if (attr->value[0] == 'T')
+				flags |= GNOME_ICON_LIST_IS_EDITABLE;
+		} else if (!strcmp(attr->name, "text_static")) {
+			if (attr->value[0] == 'T')
+				flags |= GNOME_ICON_LIST_STATIC_TEXT;
+		}
+	}
+	wid = gnome_icon_list_new_flags(icon_width, NULL, flags);
+	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(wid), mode);
+	gnome_icon_list_set_row_spacing(GNOME_ICON_LIST(wid), row_spacing);
+	gnome_icon_list_set_col_spacing(GNOME_ICON_LIST(wid), col_spacing);
+	gnome_icon_list_set_text_spacing(GNOME_ICON_LIST(wid), text_spacing);
+	return wid;
+}
+
+static GtkWidget *
+iconsel_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	return gnome_icon_selection_new();
+}
+
+static GtkWidget *
+pixmap_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid;
+	GList *tmp;
+	gchar *filename = NULL;
+
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+
+		if (!strcmp(attr->name, "filename")) {
+			g_free(filename);
+			filename = glade_xml_relative_file(xml, attr->value);
+		}
+	}
+	if (filename)
+		wid = gnome_pixmap_new_from_file(filename);
+	else
+		wid = gtk_type_new(gnome_pixmap_get_type());
+	g_free(filename);
+	return wid;
+}
+
+static GtkWidget *
 appbar_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
@@ -1634,6 +1805,155 @@ app_new(GladeXML *xml, GladeWidgetInfo *info)
 	return win;
 }
 
+static GtkWidget *
+propbox_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	return gnome_property_box_new();
+}
+
+static GtkWidget *
+druid_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	return gnome_druid_new();
+}
+
+static GdkColor *
+parse_colour(GtkWidget *wid, const gchar *tuple) {
+	static GdkColor colour;
+	gchar *tmp;
+
+	colour.red = strtoul(tuple, &tmp, 0) * 256;
+	tmp++;
+	colour.green = strtoul(tmp, &tmp, 0) * 256;
+	tmp++;
+	colour.blue = strtoul(tmp, &tmp, 0) * 256;
+	if (gdk_color_alloc(gtk_widget_get_colormap(wid), &colour))
+		return &colour;
+	else
+		return NULL;
+}
+
+static GtkWidget *
+druidpagestart_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid = gnome_druid_page_start_new();
+	GnomeDruidPageStart *page = GNOME_DRUID_PAGE_START(wid);
+	GList *tmp;
+
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+
+		if (!strcmp(attr->name, "title"))
+			gnome_druid_page_start_set_title(page, _(attr->value));
+		else if (!strcmp(attr->name, "text"))
+			gnome_druid_page_start_set_text(page, _(attr->value));
+		else if (!strcmp(attr->name, "title_color"))
+			gnome_druid_page_start_set_title_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "text_color"))
+			gnome_druid_page_start_set_text_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "background_color"))
+			gnome_druid_page_start_set_bg_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "logo_background_color"))
+			gnome_druid_page_start_set_logo_bg_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "textbox_color"))
+			gnome_druid_page_start_set_textbox_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "logo_image")) {
+			gchar *image =glade_xml_relative_file(xml,attr->value);
+			gnome_druid_page_start_set_logo(page,
+					gdk_imlib_load_image(image));
+			g_free(image);
+		} else if (!strcmp(attr->name, "watermark_image")) {
+			gchar *image =glade_xml_relative_file(xml,attr->value);
+			gnome_druid_page_start_set_watermark(page,
+					gdk_imlib_load_image(image));
+			g_free(image);
+		}
+	}
+	return wid;
+}
+
+static GtkWidget *
+druidpagefinish_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid = gnome_druid_page_finish_new();
+	GnomeDruidPageFinish *page = GNOME_DRUID_PAGE_FINISH(wid);
+	GList *tmp;
+
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+
+		if (!strcmp(attr->name, "title"))
+			gnome_druid_page_finish_set_title(page,_(attr->value));
+		else if (!strcmp(attr->name, "text"))
+			gnome_druid_page_finish_set_text(page, _(attr->value));
+		else if (!strcmp(attr->name, "title_color"))
+			gnome_druid_page_finish_set_title_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "text_color"))
+			gnome_druid_page_finish_set_text_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "background_color"))
+			gnome_druid_page_finish_set_bg_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "logo_background_color"))
+			gnome_druid_page_finish_set_logo_bg_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "textbox_color"))
+			gnome_druid_page_finish_set_textbox_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "logo_image")) {
+			gchar *image =glade_xml_relative_file(xml,attr->value);
+			gnome_druid_page_finish_set_logo(page,
+					gdk_imlib_load_image(image));
+			g_free(image);
+		} else if (!strcmp(attr->name, "watermark_image")) {
+			gchar *image =glade_xml_relative_file(xml,attr->value);
+			gnome_druid_page_finish_set_watermark(page,
+					gdk_imlib_load_image(image));
+			g_free(image);
+		}
+	}
+	return wid;
+}
+
+static GtkWidget *
+druidpagestandard_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid = gnome_druid_page_standard_new();
+	GnomeDruidPageStandard *page = GNOME_DRUID_PAGE_STANDARD(wid);
+	GList *tmp;
+
+	for (tmp = info->attributes; tmp; tmp = tmp->next) {
+		GladeAttribute *attr = tmp->data;
+
+		if (!strcmp(attr->name, "title"))
+			gnome_druid_page_standard_set_title(page,
+							    _(attr->value));
+		else if (!strcmp(attr->name, "title_color"))
+			gnome_druid_page_standard_set_title_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "background_color"))
+			gnome_druid_page_standard_set_bg_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "logo_background_color"))
+			gnome_druid_page_standard_set_logo_bg_color(page,
+					parse_colour(wid, attr->value));
+		else if (!strcmp(attr->name, "logo_image")) {
+			gchar *image =glade_xml_relative_file(xml,attr->value);
+			gnome_druid_page_standard_set_logo(page,
+					gdk_imlib_load_image(image));
+			g_free(image);
+		}
+	}
+	return wid;
+}
+
+
 /* -- routines to initialise these widgets with libglade -- */
 
 static const GladeWidgetBuildData widget_data [] = {
@@ -1655,6 +1975,9 @@ static const GladeWidgetBuildData widget_data [] = {
 	{ "GnomeSpell",         spell_new,          NULL },
 	{ "GtkDial",            dial_new,           NULL },
 	{ "GnomeCanvas",        canvas_new,         NULL },
+	{ "GnomeIconList",      iconlist_new,       NULL },
+	{ "GnomeIconSelection", iconsel_new,        NULL },
+	{ "GnomePixmap",        pixmap_new,         NULL },
 	{ "GnomeAppBar",        appbar_new,         NULL },
 
 	{ "GnomeDock",          dock_new,           dock_build_children},
@@ -1668,6 +1991,13 @@ static const GladeWidgetBuildData widget_data [] = {
 	{ "GnomeDialog",        gnomedialog_new,   gnomedialog_build_children},
 	{ "GnomeMessageBox",    messagebox_new,     messagebox_build_children},
 	{ "GnomeApp",           app_new,            app_build_children},
+	{ "GnomePropertyBox",   propbox_new,        propbox_build_children},
+
+	{ "GnomeDruid",         druid_new,          druid_build_children},
+	{ "GnomeDruidPageStart",druidpagestart_new, NULL },
+	{ "GnomeDruidPageFinish", druidpagefinish_new, NULL },
+	{ "GnomeDruidPageStandard", druidpagestandard_new,
+	  druidpage_build_children},
 	{ NULL, NULL, NULL }
 };
 
