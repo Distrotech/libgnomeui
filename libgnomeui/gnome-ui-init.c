@@ -10,7 +10,6 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <alloca.h>
 
 #include <gtk/gtk.h>
 #include <gdk_imlib.h>
