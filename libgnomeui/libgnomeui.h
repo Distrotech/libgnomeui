@@ -33,7 +33,6 @@
 #include <libgnomeui/gnome-animator.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-appbar.h>
-#include <libgnomeui/gnome-app-helper.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-line.h>
@@ -44,8 +43,6 @@
 #include <libgnomecanvas/gnome-canvas-widget.h>
 #include <libgnomeui/gnome-color-picker.h>
 #include <libgnomeui/gnome-cursors.h>
-#include <libgnomeui/gnome-dialog.h>
-#include <libgnomeui/gnome-dialog-util.h>
 #include <libgnomeui/gnome-dock.h>
 #include <libgnomeui/gnome-dock-band.h>
 #include <libgnomeui/gnome-dock-item.h>
@@ -65,7 +62,6 @@
 #include <libgnomeui/gnome-init.h>
 #include <libgnomeui/gnome-less.h>
 #include <libgnomeui/gnome-macros.h>
-#include <libgnomeui/gnome-messagebox.h>
 /* Considering moving this to gnome-print, so this file 
    is deprecated but the API isn't */
 #include <libgnomeui/gnome-paper-selector.h>
@@ -73,8 +69,6 @@
 #include <libgnomeui/gnome-popup-menu.h>
 #include <libgnomeui/gnome-popup-help.h>
 #include <libgnomeui/gnome-pixmap.h>
-#include <libgnomeui/gnome-propertybox.h>
-#include <libgnomeui/gnome-scores.h>
 #include <libgnomeui/gnome-types.h>
 #include <libgnomeui/gnome-stock.h>
 #include <libgnomeui/gnome-client.h>

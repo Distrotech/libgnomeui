@@ -1,5 +1,11 @@
 2001-04-26  Martin Baulig  <baulig@suse.de>
 
+	* libgnomeui.h: Don't Include gnome-app-helper.h,
+	gnome-dialog.h, gnome-dialog-util.h, gnome-messagebox.h,
+	gnome-propertybox.h and gnome-scores.h.
+
+2001-04-26  Martin Baulig  <baulig@suse.de>
+
 	* gnome-stock.c: Comment out everything which was using code from
 	gnome-messagebox.[ch] and gnome-propertybox.[ch].
 
