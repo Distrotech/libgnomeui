@@ -252,9 +252,11 @@ static void
 gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 {
 	GnomeIconListPrivate *priv;
-	int y_offset;
+	int x_offset, y_offset;
 	double d_icon_image_height;
+	double d_icon_image_width;
 	int icon_image_height;
+	int icon_image_width;
 
 	priv = gil->_priv;
 
@@ -266,8 +268,17 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 	else
 		y_offset = 0;
 
+	gtk_object_get(GTK_OBJECT(icon->image), "width", &d_icon_image_width, NULL);
+	icon_image_width = d_icon_image_width;
+	g_assert(icon_image_width != 0);
+	if (priv->icon_width > icon_image_width)
+		x_offset = (priv->icon_width - icon_image_width) / 2;
+	else
+		x_offset = 0;
+
 	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
-			       "x",  (double) (x + priv->icon_width / 2),
+			       // "x",  (double) (x + priv->icon_width / 2),
+			       "x",  (double) (x + x_offset),
 			       "y",  (double) (y + y_offset),
 			       "x_set", TRUE,
 			       "y_set", TRUE,

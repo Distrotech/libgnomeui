@@ -1,5 +1,10 @@
 2000-07-25  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-list.c (gil_place_icon): Correctly halign the
+	icons at the middle of their labels.
+
+2000-07-25  Martin Baulig  <baulig@suse.de>
+
 	Added new GnomeSelector widget. We'll subclass this for
 	files, directories, icons, pixmaps and so on.
 
