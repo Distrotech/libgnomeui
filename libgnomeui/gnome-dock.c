@@ -60,6 +60,7 @@ static void     gnome_dock_size_request        (GtkWidget *widget,
 static void     gnome_dock_size_allocate       (GtkWidget *widget,
                                                 GtkAllocation *allocation);
 static void     gnome_dock_map                 (GtkWidget *widget);
+static void     gnome_dock_unmap               (GtkWidget *widget);
 static void     gnome_dock_draw                (GtkWidget *widget,
                                                 GdkRectangle *area);
 static gint     gnome_dock_expose              (GtkWidget *widget,
@@ -87,6 +88,10 @@ static void     map_widget                     (GtkWidget *w);
 static void     map_widget_foreach             (gpointer data,
                                                 gpointer user_data);
 static void     map_band_list                  (GList *list);
+static void     unmap_widget                     (GtkWidget *w);
+static void     unmap_widget_foreach             (gpointer data,
+                                                gpointer user_data);
+static void     unmap_band_list                  (GList *list);
 static void     draw_widget                    (GtkWidget *widget,
                                                 GdkRectangle *area);
 static void     draw_band_list                 (GList *list,
@@ -168,6 +173,7 @@ gnome_dock_class_init (GnomeDockClass *class)
   widget_class->size_request = gnome_dock_size_request;
   widget_class->size_allocate = gnome_dock_size_allocate;
   widget_class->map = gnome_dock_map;
+  widget_class->unmap = gnome_dock_unmap;
   widget_class->draw = gnome_dock_draw;
   widget_class->expose_event = gnome_dock_expose;
 
@@ -394,10 +400,24 @@ map_widget (GtkWidget *w)
 }
 
 static void
+unmap_widget (GtkWidget *w)
+{
+  if (w != NULL && GTK_WIDGET_VISIBLE (w) && GTK_WIDGET_MAPPED (w))
+    gtk_widget_unmap (w);
+}
+
+static void
 map_widget_foreach (gpointer data,
                     gpointer user_data)
 {
   map_widget (GTK_WIDGET (data));
+}
+
+static void
+unmap_widget_foreach (gpointer data,
+                      gpointer user_data)
+{
+  unmap_widget (GTK_WIDGET (data));
 }
 
 static void
@@ -415,9 +435,26 @@ map_band_list (GList *list)
 }
 
 static void
+unmap_band_list (GList *list)
+{
+  while (list != NULL)
+    {
+      GtkWidget *w;
+
+      w = GTK_WIDGET (list->data);
+      unmap_widget (w);
+
+      list = list->next;
+    }
+}
+
+static void
 gnome_dock_map (GtkWidget *widget)
 {
   GnomeDock *dock;
+
+  g_return_if_fail (widget != NULL);
+  g_return_if_fail (GNOME_IS_DOCK(widget));
 
   if (GTK_WIDGET_CLASS (parent_class)->map != NULL)
     (* GTK_WIDGET_CLASS (parent_class)->map) (widget);
@@ -432,6 +469,29 @@ gnome_dock_map (GtkWidget *widget)
   map_band_list (dock->right_bands);
 
   g_list_foreach (dock->floating_children, map_widget_foreach, NULL);
+}
+
+static void
+gnome_dock_unmap (GtkWidget *widget)
+{
+  GnomeDock *dock;
+
+  g_return_if_fail (widget != NULL);
+  g_return_if_fail (GNOME_IS_DOCK(widget));
+
+  dock = GNOME_DOCK (widget);
+
+  unmap_widget (dock->client_area);
+
+  unmap_band_list (dock->top_bands);
+  unmap_band_list (dock->bottom_bands);
+  unmap_band_list (dock->left_bands);
+  unmap_band_list (dock->right_bands);
+
+  g_list_foreach (dock->floating_children, unmap_widget_foreach, NULL);
+
+  if (GTK_WIDGET_CLASS (parent_class)->unmap != NULL)
+    (* GTK_WIDGET_CLASS (parent_class)->unmap) (widget);
 }
 
 

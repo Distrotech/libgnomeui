@@ -1,3 +1,12 @@
+1999-01-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-dock-band.c (gnome_dock_band_unmap): new function.
+	now a dock band can be properly hidden.
+	* gnome-dock.c (gnome_dock_unmap): new function.
+	(unmap_widget, unmap_band_list, unmap_widget_foreach): new
+	helper functions.
+	now a dock can be properly hidden.
+
 1999-01-27  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-app-helper.c, gnome-init.c, gnome-spell.c:

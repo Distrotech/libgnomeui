@@ -57,6 +57,7 @@ static void     gnome_dock_band_size_allocate (GtkWidget *widget,
                                                GtkAllocation *allocation);
                                               
 static void     gnome_dock_band_map           (GtkWidget *widget);
+static void     gnome_dock_band_unmap         (GtkWidget *widget);
                                               
 static void     gnome_dock_band_draw          (GtkWidget *widget,
                                                GdkRectangle *area);
@@ -151,6 +152,7 @@ gnome_dock_band_class_init (GnomeDockBandClass *class)
   /* object_class->destroy = destroy; */
 
   widget_class->map = gnome_dock_band_map;
+  widget_class->unmap = gnome_dock_band_unmap;
   widget_class->draw = gnome_dock_band_draw;
   widget_class->expose_event = gnome_dock_band_expose;
   widget_class->size_request = gnome_dock_band_size_request;
@@ -480,13 +482,17 @@ gnome_dock_band_size_allocate (GtkWidget *widget,
 
 
 
-void
+static void
 gnome_dock_band_map (GtkWidget *widget)
 {
   GnomeDockBand *band = GNOME_DOCK_BAND (widget);
   GList *lp;
 
-  GTK_WIDGET_SET_FLAGS (widget, GTK_MAPPED);
+  g_return_if_fail(widget != NULL);
+  g_return_if_fail(GNOME_IS_DOCK_BAND(widget));
+
+  if (GTK_WIDGET_CLASS (parent_class)->map != NULL)
+    (* GTK_WIDGET_CLASS (parent_class)->map) (widget);
 
   for (lp = band->children; lp != NULL; lp = lp->next)
     {
@@ -498,7 +504,27 @@ gnome_dock_band_map (GtkWidget *widget)
     }
 }
 
-/* FIXME: unmap */
+static void
+gnome_dock_band_unmap (GtkWidget *widget)
+{
+  GnomeDockBand *band = GNOME_DOCK_BAND (widget);
+  GList *lp;
+
+  g_return_if_fail(widget != NULL);
+  g_return_if_fail(GNOME_IS_DOCK_BAND(widget));
+
+  if (GTK_WIDGET_CLASS (parent_class)->unmap != NULL)
+    (* GTK_WIDGET_CLASS (parent_class)->unmap) (widget);
+
+  for (lp = band->children; lp != NULL; lp = lp->next)
+    {
+      GnomeDockBandChild *c;
+
+      c = lp->data;
+      if (GTK_WIDGET_VISIBLE (c->widget) && GTK_WIDGET_MAPPED (c->widget))
+        gtk_widget_unmap (c->widget);
+    }
+}
 
 void
 gnome_dock_band_draw (GtkWidget *widget, GdkRectangle *area)
