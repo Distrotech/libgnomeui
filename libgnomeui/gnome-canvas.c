@@ -1601,9 +1601,9 @@ gnome_canvas_group_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		if (item->xform == NULL)
 			GTK_VALUE_DOUBLE (*arg) = 0;
 		else if (object->flags & GNOME_CANVAS_ITEM_AFFINE_FULL)
-			GTK_VALUE_DOUBLE (*arg) = item->xform[4];
+			GTK_VALUE_DOUBLE (*arg) = item->xform[5];
 		else
-			GTK_VALUE_DOUBLE (*arg) = item->xform[0];
+			GTK_VALUE_DOUBLE (*arg) = item->xform[1];
 #endif
 		break;
 

@@ -1,3 +1,9 @@
+Fri Jan  1 13:13:04 1999  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas.c (gnome_canvas_group_get_arg): fixed a bug
+	spotted by Centove: getting GROUP_ARG_Y was getting the X
+	value.
+
 1999-01-02  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-dock-item.c (gnome_dock_item_motion): don't subtract
