@@ -28,11 +28,6 @@
 #define GNOME_PAD_SMALL    4
 #define GNOME_PAD_BIG      12
 
-/* Standard button size; if button size doesn't matter, use these, just
-   for a nice uniform look. */
-#define GNOME_BUTTON_WIDTH 100
-#define GNOME_BUTTON_HEIGHT 40
-
 /* These are the button numbers on a yes-no or ok-cancel GnomeDialog,
    and in the gnome-app-util callbacks. Make the program more
    readable, is all. */ 

@@ -1,3 +1,22 @@
+1998-10-17  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-stock.c: Removed `BUTTON_DEFBRD_WIDTH' and
+	`BUTTON_DEFBRD_HEIGHT' constants.
+
+	* gnome-uidefs.h: Removed `GNOME_BUTTON_WIDTH' and
+ 	`GNOME_BUTTON_HEIGHT' constants.  These are not used by any
+ 	application AFAIK.
+
+	* gnome-stock.c (gnome_pixmap_button): Do not force the button
+ 	size anymore.
+
+	* gnome-dialog.c (gnome_dialog_append_button): Use
+ 	`GTK_WIDGET_SET_FLAGS()' instead of `gnome_button_can_default()'
+	to set the `GTK_CAN_DEFAULT' flag.
+
+	* gnome-stock.c (gnome_button_can_default): Do nothing.  Just spit 
+	out a warning, saying that this function is now deprecated.
+
 1998-10-16    <jrb@aware-of-vacuity.labs.redhat.com>
 
 	* gnome-messagebox.h: changed comment to redirect user to the

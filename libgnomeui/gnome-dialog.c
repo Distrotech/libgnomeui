@@ -361,9 +361,9 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
     GtkWidget *button;
     
     button = gnome_stock_or_ordinary_button (button_name);
-    gnome_button_can_default (GTK_BUTTON(button), TRUE);
-    gtk_container_add (GTK_CONTAINER(dialog->action_area), 
-		       button);
+    GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
+    gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
+
     gtk_widget_grab_default (button);
     gtk_widget_show (button);
     

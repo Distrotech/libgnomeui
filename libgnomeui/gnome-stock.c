@@ -36,20 +36,7 @@
 #include "gnome-pixmap.h"
 #include "gnome-uidefs.h"
 
-
-/*
- * BUTTON_DEFBRD_WIDTH/HEIGHT is the value that is added to GNOME_BUTTON_WIDTH
- * and GNOME_BUTTON_HEIGHT to emulate the real visual width and height of
- * buttons without the GTK_CAN_DEFAULT flag.
- */
-#define BUTTON_DEFBRD_WIDTH 3
-#define BUTTON_DEFBRD_HEIGHT (-11)
-
-
-
 #include "pixmaps/gnome-stock-imlib.h"
-
-
 
 #define STOCK_SEP '.'
 #define STOCK_SEP_STR "."
@@ -1262,27 +1249,7 @@ gnome_stock_pixmap_checkfor(const char *icon, const char *subtype)
 void
 gnome_button_can_default(GtkButton *button, gboolean can_default)
 {
-	GtkRequisition req;
-
-	g_return_if_fail(button != NULL);
-	g_return_if_fail(GTK_IS_BUTTON(button));
-
-	if (can_default) {
-		GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
-		gtk_widget_size_request(GTK_WIDGET(button), &req);
-		if (req.width < GNOME_BUTTON_WIDTH)
-			req.width = GNOME_BUTTON_WIDTH;
-		if (req.height < GNOME_BUTTON_HEIGHT)
-			req.height = GNOME_BUTTON_HEIGHT;
-	} else {
-		GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
-		gtk_widget_size_request(GTK_WIDGET(button), &req);
-		if (req.width < GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH)
-			req.width = GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH;
-		if (req.height < GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT)
-			req.height = GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT;
-	}
-	gtk_widget_set_usize(GTK_WIDGET(button), req.width, req.height);
+        g_warning ("gnome_button_can_default() is now deprecated.\n");
 }
 
 
@@ -1304,7 +1271,7 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 	gtk_widget_show(hbox);
 	gtk_box_pack_start(GTK_BOX(w), hbox, TRUE, FALSE, 7);
 
-	use_icon = gnome_config_get_bool("/Gnome/Icons/ButtonUseIcons=true");
+	use_icon = FALSE; /* gnome_config_get_bool("/Gnome/Icons/ButtonUseIcons=true"); */
 	use_label = gnome_config_get_bool("/Gnome/Icons/ButtonUseLabels=true");
 
 	if ((use_label) || (!use_icon) || (!pixmap)) {
@@ -1343,13 +1310,6 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 		gtk_box_pack_start(GTK_BOX(hbox), pixmap,
 				   FALSE, FALSE, 0);
 	}
-
-	gtk_widget_size_request(button, &req);
-	if (req.width < GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH)
-		req.width = GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH;
-	if (req.height < GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT)
-		req.height = GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT;
-	gtk_widget_set_usize(GTK_WIDGET(button), req.width, req.height);
 
 	return button;
 }
