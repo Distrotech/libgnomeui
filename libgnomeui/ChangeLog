@@ -1,5 +1,9 @@
 1999-03-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-dock-item.c (draw_textured_frame): Actually make use of
+	the clip parameter.  No more flicker on repeated exposures of the
+	handle.
+
 	* gnome-dock-item.c (gnome_dock_item_paint): Eliminate flicker
 	by only painting the handle if the expose area intersects it.
 

@@ -596,7 +596,7 @@ draw_textured_frame (GtkWidget *widget, GdkWindow *window, GdkRectangle *rect, G
 		     GdkRectangle *clip)
 {
   gtk_paint_handle(widget->style, window, GTK_STATE_NORMAL, shadow,
-                   NULL, widget, "dockitem",
+                   clip, widget, "dockitem",
                    rect->x, rect->y, rect->width, rect->height, 
                    GTK_ORIENTATION_VERTICAL);
 }
