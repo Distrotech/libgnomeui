@@ -1,3 +1,8 @@
+2004-01-08  David Coulthart  <davec@columbia.edu>
+
+	* libgnomeui/gnome-authentication-manager.c (construct_full_password_dialog):
+	s/gnome_keyring_is_availible/gnome_keyring_is_available/
+
 2004-01-06  Alexander Larsson <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-lookup.c (gnome_icon_lookup): 
