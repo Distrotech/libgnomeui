@@ -293,7 +293,7 @@ gnome_selector_get_history_id     (GnomeSelector             *selector);
 
 void
 gnome_selector_set_history_id     (GnomeSelector             *selector,
-                                   const gchar               *dialog_title);
+                                   const gchar               *history_id);
 
 /* Get/set the text in the entry widget. */
 gchar *
