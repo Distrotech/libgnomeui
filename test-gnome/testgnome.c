@@ -671,30 +671,31 @@ create_font_selector (void)
 /*
  * FontPicker
  */
-#if 0
 static void
 cfp_ck_UseFont(GtkWidget *widget,GnomeFontPicker *gfp)
 {
 	gboolean show;
-	gint size;
 
-	show=!gfp->use_font_in_label;
-	size=gfp->use_font_in_label_size;
+	g_object_get (G_OBJECT (gfp),
+		      "use-font-in-label", &show,
+		      NULL);
+	show = ! show;
 
-	gnome_font_picker_fi_set_use_font_in_label(gfp,show,size);
-
+	g_object_set (G_OBJECT (gfp),
+		      "use-font-in-label", show,
+		      NULL);
 }
 
 static void
 cfp_sp_value_changed(GtkAdjustment *adj,GnomeFontPicker *gfp)
 {
-	gboolean show;
 	gint size;
 
-	show=gfp->use_font_in_label;
 	size=(gint)adj->value;
 
-	gnome_font_picker_fi_set_use_font_in_label(gfp,show,size);
+	g_object_set (G_OBJECT (gfp),
+		      "label-font-size", size,
+		      NULL);
 
 }
 
@@ -707,7 +708,7 @@ cfp_ck_ShowSize(GtkWidget *widget,GnomeFontPicker *gfp)
 
 	gnome_font_picker_fi_set_show_size(gfp,tb->active);
 }
-#endif
+
 static void
 cfp_set_font(GnomeFontPicker *gfp, gchar *font_name, GtkLabel *label)
 {
@@ -758,6 +759,8 @@ create_font_picker (void)
 	gtk_container_set_border_width(GTK_CONTAINER(vbox2),5);
 	gtk_container_add(GTK_CONTAINER(frFontInfo),vbox2);
 
+	fontpicker2 = gnome_font_picker_new();
+
 	/* GnomeFontPicker with fontinfo */
 	hbox1=gtk_hbox_new(FALSE,5);
 	gtk_box_pack_start(GTK_BOX(vbox2),hbox1,FALSE,FALSE,0);
@@ -765,14 +768,25 @@ create_font_picker (void)
 	gtk_box_pack_start(GTK_BOX(hbox1),ckUseFont,TRUE,TRUE,0);
 
 	adj=GTK_ADJUSTMENT(gtk_adjustment_new(14,5,150,1,1,1));
+	gtk_signal_connect (GTK_OBJECT (adj), "value_changed",
+			    GTK_SIGNAL_FUNC (cfp_sp_value_changed),
+			    fontpicker2);
 	spUseFont=gtk_spin_button_new(adj,1,0);
 	gtk_box_pack_start(GTK_BOX(hbox1),spUseFont,FALSE,FALSE,0);
+	gtk_object_set_data (GTK_OBJECT (fontpicker2), "spUseFont", spUseFont);
+
+	gtk_signal_connect (GTK_OBJECT (ckUseFont), "toggled",
+			    GTK_SIGNAL_FUNC (cfp_ck_UseFont),
+			    fontpicker2);
 
 	ckShowSize=gtk_check_button_new_with_label("Show font size");
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ckShowSize),TRUE);
 	gtk_box_pack_start(GTK_BOX(vbox2),ckShowSize,FALSE,FALSE,5);
 
-	fontpicker2 = gnome_font_picker_new();
+	gtk_signal_connect (GTK_OBJECT (ckShowSize), "toggled",
+			    GTK_SIGNAL_FUNC (cfp_ck_ShowSize),
+			    fontpicker2);
+
 	gnome_font_picker_set_mode(GNOME_FONT_PICKER(fontpicker2),GNOME_FONT_PICKER_MODE_FONT_INFO);
 	gtk_box_pack_start(GTK_BOX(vbox2),fontpicker2,TRUE,TRUE,0);
 
@@ -796,7 +810,7 @@ create_font_picker (void)
 
 	hbox3=gtk_hbox_new(FALSE,0);
 	gtk_box_pack_start(GTK_BOX(hbox3),gtk_image_new_from_stock
-                           (GNOME_STOCK_PIXMAP_SPELLCHECK, 32),
+                           (GNOME_STOCK_PIXMAP_SPELLCHECK, GTK_ICON_SIZE_BUTTON),
 			   FALSE,FALSE,5);
 	gtk_box_pack_start(GTK_BOX(hbox3),gtk_label_new("This is an hbox with pixmap and text"),
 			   FALSE,FALSE,5);

@@ -1,3 +1,8 @@
+Sun Oct 21 01:57:03 2001  George Lebl <jirka@5z.com>
+
+	* testgnome.c: fix the font picker stuff, bind the signals
+	  and make the whole font picker test work
+
 2001-10-14  Bastien Nocera  <hadess@hadess.net>
 
 	* testgnome.c: (create_font_picker), (main):
