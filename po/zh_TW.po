@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.1.90\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
-"PO-Revision-Date: 2003-01-21 13:28+0800\n"
-"Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
+"Project-Id-Version: libgnomeui 2.2.0.1\n"
+"POT-Creation-Date: 2003-02-01 00:07+0800\n"
+"PO-Revision-Date: 2003-02-01 02:13+0800\n"
+"Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,7 @@ msgstr "備註字串"
 
 #: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
-msgstr "此程式的備註"
+msgstr "有關本程式的說明文字"
 
 #: libgnomeui/gnome-about.c:382
 msgid "Authors"
@@ -73,7 +73,7 @@ msgstr "作者"
 
 #: libgnomeui/gnome-about.c:383
 msgid "List of authors of the programs"
-msgstr "程式作者的清單"
+msgstr "程式作者清單"
 
 #: libgnomeui/gnome-about.c:385
 msgid "Author entry"
@@ -454,7 +454,7 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "用法：gnome_segv2 程式名稱 錯誤訊號\n"
+msgstr "用法：gnome_segv2 程式名稱 訊號號碼\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
@@ -478,7 +478,7 @@ msgstr "表格邊框"
 
 #: libgnomeui/gnome-stock-icons.c:138
 msgid "Table Fill"
-msgstr ""
+msgstr "填充表格"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Bulleted List"
@@ -518,6 +518,7 @@ msgstr "項目二的提示"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "檔案(_F)"
 
@@ -575,6 +576,7 @@ msgid "_Game"
 msgstr "遊戲(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "求助(_H)"
 
@@ -664,7 +666,7 @@ msgstr "剪下(_T)"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "剪下選擇範圍"
+msgstr "剪下選定的內容"
 
 #. 10
 #. Copy
@@ -674,7 +676,7 @@ msgstr "複製(_C)"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "複製選擇範圍"
+msgstr "複製選定的內容"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -683,7 +685,7 @@ msgstr "貼上(_P)"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "貼上剪貼板上的內容"
+msgstr "貼上剪貼板中的內容"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
@@ -701,7 +703,7 @@ msgstr "復原(_U)"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "取消上一次操作"
+msgstr "取消上一個操作程序"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
@@ -710,7 +712,7 @@ msgstr "取消復原(_R)"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "重複進行上一次操作"
+msgstr "重複進行上一個操作程序"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -724,7 +726,7 @@ msgstr "搜尋字串"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "重覆搜尋(_X)"
+msgstr "繼續搜尋(_X)"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -758,24 +760,24 @@ msgstr "偏好設定(_N)"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "設定此程式"
+msgstr "修改有關本程式的設定"
 
 #. 20
 #.
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "關於(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "顯示有關此程式的資訊"
+msgstr "顯示有關本程式的資訊"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
-msgstr "全選(_A)"
+msgstr "全部選取(_A)"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
@@ -790,13 +792,13 @@ msgstr "新增視窗(_W)"
 
 #: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr "建立新的視窗"
+msgstr "顯示新的視窗"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "關閉此視窗(_C)"
+msgstr "關閉本視窗(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "關閉目前的視窗"
 
@@ -817,7 +819,7 @@ msgstr "暫停遊戲(_P)"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "暫停此遊戲"
+msgstr "暫停今局遊戲"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
@@ -825,7 +827,7 @@ msgstr "重新開始遊戲(_R)"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "重新開始此遊戲"
+msgstr "重新開始今局遊戲"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
@@ -833,15 +835,15 @@ msgstr "還原上一步(_U)"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "取消剛才那一步"
+msgstr "取消剛進行的一步"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "取消還原上一步(_R)"
+msgstr "取消還原(_R)"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "重新執行已取消那一步"
+msgstr "重新執行剛取消的一步"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -874,7 +876,7 @@ msgstr "內容(_C)"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr "顯示有關此程式的說明文件"
+msgstr "顯示有關本程式的說明文件"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
@@ -983,11 +985,11 @@ msgstr "目錄欄位"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "該檔案欄位是否用來輸入目錄名稱或是用來自動完成檔案名稱。"
+msgstr "該檔案欄位是否用來輸入目錄名稱，或是用來自動完成檔案名稱。"
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
-msgstr ""
+msgstr "Modal"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
@@ -1069,7 +1071,7 @@ msgstr "選取字型"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "字型選擇程式的對話窗標題"
+msgstr "字型選擇窗的標題"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -1077,7 +1079,7 @@ msgstr "模式"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr "字型選擇程式的執行模式"
+msgstr "字型選擇窗的執行模式"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
@@ -1093,7 +1095,7 @@ msgstr "字型"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "選定的字型"
+msgstr "選定的 GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
@@ -1129,7 +1131,7 @@ msgstr "在字型資訊模式中，顯示字型的大小"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr "GNOME GConf 圖形介面支換"
+msgstr "GNOME GConf 用戶介面支換"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
@@ -1177,15 +1179,15 @@ msgstr "在圖示項目中顯示的檔案名稱。"
 
 #: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
-msgstr "圖示選擇對話窗"
+msgstr "圖示選擇窗"
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"圖示選擇對話窗。如果閣下想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬"
-"性進行。"
+"圖示選擇窗。如果閣下想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
+"行。"
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
@@ -1201,11 +1203,11 @@ msgstr "預覽"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
-msgstr "圖示選擇對話窗"
+msgstr "圖示選擇窗"
 
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr "此對話窗可用來選取圖示。"
+msgstr "本對話窗可用來選取圖示。"
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
@@ -1314,11 +1316,9 @@ msgstr "%x(%a) %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "結束測試"
-
-#~ msgid "Find _Again"
-#~ msgstr "找下一個(_A)"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "結束測試"
 
 #~ msgid "E_xit"
 #~ msgstr "結束(_X)"
@@ -1326,68 +1326,11 @@ msgstr "Sans 14"
 #~ msgid "Exit the program"
 #~ msgstr "結束程式"
 
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "GConf 詳細錯誤：%s\n"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "設置 Gdk 除錯選項"
-
-#~ msgid "FLAGS"
-#~ msgstr "除錯選項"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "取消設置 Gdk 除錯選項"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "將 X 的呼叫同步"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "不要使用 X 的共用延伸記憶體"
-
 #~ msgid "Program name as used by the window manager"
 #~ msgstr "視窗管理員所使用的程式名稱"
-
-#~ msgid "NAME"
-#~ msgstr "程式名稱"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "視窗管理員所使用的程式類別"
-
-#~ msgid "CLASS"
-#~ msgstr "類別"
-
-#~ msgid "HOST"
-#~ msgstr "主機名稱"
-
-#~ msgid "PORT"
-#~ msgstr "埠號"
-
-#~ msgid "STYLE"
-#~ msgstr "樣式"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "設置 Gtk+ 除錯選項"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "取消設置 Gtk+ 除錯選項"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "將所有警告視為嚴重錯誤"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "載入另外的 Gtk 模組"
 
 #~ msgid "MODULE"
 #~ msgstr "模組"
 
 #~ msgid "Unknown"
 #~ msgstr "不詳"
-
-#~ msgid "If you choose a font it will appear here"
-#~ msgstr "在這裡將會顯示您所選定的字型"
-
-#~ msgid "Use Font in button with size"
-#~ msgstr "在按鈕內使用具有字體大小的字型"
-
-#~ msgid "This is an hbox with pixmap and text"
-#~ msgstr "這是一個具有圖示及文字的水平容器元件"
