@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* gnome-mdi-generic-child.h - definition of a generic MDI child class
 
-   Copyright (C) 1997, 1998 Free Software Foundation
+   Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
    All rights reserved.
 
    The Gnome Library is free software; you can redistribute it and/or
@@ -45,26 +45,15 @@ BEGIN_GNOME_DECLS
 /* The source backward-compatibility macro GNOME_IS_MDI_MDI_CHILD(obj)
    is in gnome-compat.h.  */
 
-typedef struct _GnomeMDIGenericChild       GnomeMDIGenericChild;
-typedef struct _GnomeMDIGenericChildClass  GnomeMDIGenericChildClass;
+typedef struct _GnomeMDIGenericChild        GnomeMDIGenericChild;
+typedef struct _GnomeMDIGenericChildClass   GnomeMDIGenericChildClass;
+
+typedef struct _GnomeMDIGenericChildPrivate GnomeMDIGenericChildPrivate;
 
 struct _GnomeMDIGenericChild {
 	GnomeMDIChild mdi_child;
 
-	/* if any of these are set they override the virtual functions
-	   in GnomeMDIChildClass. create_view is mandatory, as no default
-	   handler is provided, others may be NULL */
-	GnomeMDIChildViewCreator create_view;
-	GnomeMDIChildMenuCreator create_menus;
-	GnomeMDIChildConfigFunc  get_config_string;
-	GnomeMDIChildLabelFunc   set_label;
-
-	GtkCallbackMarshal create_view_cbm, create_menus_cbm,
-		               get_config_string_cbm, set_label_cbm;
-	GtkDestroyNotify   create_view_dn, create_menus_dn,
-		               get_config_string_dn, set_label_dn;
-	gpointer           create_view_data, create_menus_data,
-		               get_config_string_data, set_label_data;
+	GnomeMDIGenericChildPrivate *priv;
 };
 
 struct _GnomeMDIGenericChildClass {

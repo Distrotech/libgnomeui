@@ -44,8 +44,10 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_MDI_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MDI))
 #define GNOME_MDI_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_MDI, GnomeMDIClass))
 
-typedef struct _GnomeMDI       GnomeMDI;
-typedef struct _GnomeMDIClass  GnomeMDIClass;
+typedef struct _GnomeMDI        GnomeMDI;
+typedef struct _GnomeMDIClass   GnomeMDIClass;
+
+typedef struct _GnomeMDIPrivate GnomeMDIPrivate;
 
 typedef enum {
 	/* update struct when adding enums */
@@ -61,34 +63,7 @@ typedef enum {
 struct _GnomeMDI {
 	GtkObject object;
 
-	gchar *appname, *title;
-
-	GnomeUIInfo *menu_template;
-	GnomeUIInfo *toolbar_template;
-
-    /* probably only one of these would do, but... redundancy rules ;) */
-	GnomeMDIChild *active_child;
-	GtkWidget *active_view;  
-	GnomeApp *active_window;
-
-	GList *windows;     /* toplevel windows - GnomeApp widgets */
-	GList *children;    /* children - GnomeMDIChild objects*/
-
-	GSList *registered; /* see comment for gnome_mdi_(un)register() functions below for an explanation. */
-	
-    /* paths for insertion of mdi_child specific menus and mdi_child list
-	   menu via gnome-app-helper routines */
-	gchar *child_menu_path;
-	gchar *child_list_path;
-
-	GtkPositionType tab_pos;
-
-	GnomeMDIMode mode : 3;
-
-	guint signal_id;
-	guint in_drag : 1;
-
-	guint has_user_refcount : 1;
+	GnomeMDIPrivate *priv;
 };
 
 struct _GnomeMDIClass {
@@ -138,15 +113,13 @@ struct _GnomeMDIClass {
 
 guint          gnome_mdi_get_type            (void);
 
-GnomeMDI       *gnome_mdi_new                (const gchar *appname, const gchar *title);
+GnomeMDI      *gnome_mdi_new                 (const gchar *appname, const gchar *title);
 void           gnome_mdi_construct           (GnomeMDI *mdi, const gchar *appname, const gchar *title);
 
 /* setting the mdi mode */
 void           gnome_mdi_set_mode            (GnomeMDI *mdi, GnomeMDIMode mode);
 
-/* setting the menu and toolbar stuff */
-void           gnome_mdi_set_menubar_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl);
-void           gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl);
+/* setting the menu paths */
 void           gnome_mdi_set_child_menu_path (GnomeMDI *mdi, const gchar *path);
 void           gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path);
 
@@ -189,6 +162,13 @@ GnomeApp      *gnome_mdi_get_app_from_view   (GtkWidget *view);
 GnomeMDIChild *gnome_mdi_get_child_from_view (GtkWidget *view);
 GtkWidget     *gnome_mdi_get_view_from_window(GnomeMDI *mdi, GnomeApp *app);
 
+/* the following API is used for easy creation of menus and toolbars
+   via GnomeUIInfo structures */
+
+/* setting the GnomeUIInfo templates for menu and toolbar */
+void           gnome_mdi_set_menubar_template   (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl);
+void           gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl);
+
 /* the following functions are used to obtain pointers to the GnomeUIInfo
  * structures for a specified MDI GnomeApp widget. this might be useful for
  * enabling/disabling menu items (via ui_info[i]->widget) when certain events
@@ -201,12 +181,11 @@ GnomeUIInfo   *gnome_mdi_get_toolbar_info      (GnomeApp *app);
 GnomeUIInfo   *gnome_mdi_get_child_menu_info   (GnomeApp *app);
 GnomeUIInfo   *gnome_mdi_get_child_toolbar_info(GnomeApp *app);
 
-/* extracting the menu/toolbar GnomeUIInfos (when they are set)
- * from the views.
+/* extracting the child menu/toolbar GnomeUIInfos (when they are set)
+ * via a pointer to a views.
  */
 GnomeUIInfo   *gnome_mdi_get_view_menu_info    (GtkWidget *view);
 GnomeUIInfo   *gnome_mdi_get_view_toolbar_info (GtkWidget *view);
-
 
 END_GNOME_DECLS
 

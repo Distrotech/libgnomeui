@@ -144,22 +144,22 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 			gnome_mdi_add_view (mdi, mdi_child);
 			
 			gtk_widget_set_usize
-				(GTK_WIDGET (mdi->active_window),
+				(GTK_WIDGET (mdi->priv->active_window),
 				 width, height);
 
 			gtk_widget_set_uposition
-				(GTK_WIDGET (mdi->active_window), x, y);
+				(GTK_WIDGET (mdi->priv->active_window), x, y);
 			
 			*init = TRUE;
 
 			g_hash_table_insert (window_hash,
 					     (gpointer) window,
-					     mdi->active_window);
+					     mdi->priv->active_window);
 		}
 
 		g_hash_table_insert (view_hash,
 				     views->pdata [k],
-				     mdi->active_view);
+				     mdi->priv->active_view);
 
 		if(new_window)
 			gtk_widget_show(new_window);
@@ -188,13 +188,14 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 	if(child_list->len == 0) {	
 		gnome_mdi_open_toplevel (mdi);
 
-		gtk_widget_set_usize (GTK_WIDGET (mdi->active_window), w, h);
+		gtk_widget_set_usize (GTK_WIDGET (mdi->priv->active_window),
+				      w, h);
 
-		gtk_widget_set_uposition (GTK_WIDGET (mdi->active_window),
+		gtk_widget_set_uposition (GTK_WIDGET (mdi->priv->active_window),
 					  x, y);
 
 		g_hash_table_insert (window_hash, (gpointer) window,
-				     mdi->active_window);
+				     mdi->priv->active_window);
  	}
 	else
 		for (j = 0; j < child_list->len; j++)
@@ -204,19 +205,20 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 					      (glong) child_list->pdata [j],
 					      &init, x, y, w, h);
 
-	g_snprintf (key, sizeof(key), "%s/mdi_window_layout_%lx", section, window);
+	g_snprintf (key, sizeof(key), "%s/mdi_window_layout_%lx", section,
+		    window);
 	string = gnome_config_get_string (key);
 	if (!string) return;
 
 #if 0
 	{
-		GnomeApp *app = mdi->active_window;
+		GnomeApp *app = mdi->priv->active_window;
 		GnomeDockLayout *layout;
 
 		/* this should be a nasty hack before dock-layout gets a bit better
 		   don't even know if it works, though ;) */
 		layout = gnome_dock_get_layout(GNOME_DOCK(app->dock));
-		gnome_dock_layout_parse_string(mdi->active_window->layout, string);
+		gnome_dock_layout_parse_string(mdi->priv->active_window->layout, string);
 		gtk_container_forall(GTK_CONTAINER(app->dock), remove_items, app->dock);
 		gnome_dock_add_from_layout(GNOME_DOCK(app->dock), layout);
 		gtk_object_unref(GTK_OBJECT(layout));
@@ -424,33 +426,35 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 
 	/* save MDI mode */
 	g_snprintf (key, sizeof(key), "%s/mdi_mode", section);
-	gnome_config_set_int (key, mdi->mode);
+	gnome_config_set_int (key, mdi->priv->mode);
 
 	/* Write list of children. */
 
 	g_snprintf (key, sizeof(key), "%s/mdi_children", section);
-	config_set_list (key, mdi->children, NULL);
+	config_set_list (key, mdi->priv->children, NULL);
 
 	/* Write list of windows. */
 
 	g_snprintf (key, sizeof(key), "%s/mdi_windows", section);
-	config_set_list (key, mdi->windows, NULL);
+	config_set_list (key, mdi->priv->windows, NULL);
 
 	/* Save active window. */
 
 	g_snprintf (key, sizeof(key), "%s/mdi_active_window", section);
-	g_snprintf (value, sizeof(value), "%lx", (glong) mdi->active_window);
+	g_snprintf (value, sizeof(value), "%lx",
+		    (glong) mdi->priv->active_window);
 	gnome_config_set_string (key, value);
 
 	/* Save active view. */
 
 	g_snprintf (key, sizeof(key), "%s/mdi_active_view", section);
-	g_snprintf (value, sizeof(value), "%lx", (glong) mdi->active_view);
+	g_snprintf (value, sizeof(value), "%lx",
+		    (glong) mdi->priv->active_view);
 	gnome_config_set_string (key, value);
 
 	/* Walk list of children. */
 
-	child = mdi->children;
+	child = mdi->priv->children;
 	while (child) {
 		GnomeMDIChild *mdi_child;
 		gchar *string;
@@ -462,7 +466,8 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 		string = gnome_mdi_child_get_config_string(mdi_child);
 
 		if (string) {
-			g_snprintf (key, sizeof(key), "%s/mdi_child_config_%lx",
+			g_snprintf (key, sizeof(key),
+				    "%s/mdi_child_config_%lx",
 				    section, (long) mdi_child);
 			gnome_config_set_string (key, string);
 			g_free (string);
@@ -472,18 +477,18 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 
 		g_snprintf (key, sizeof(key), "%s/mdi_child_windows_%lx",
 			    section, (long) mdi_child);
-		config_set_list (key, mdi_child->views, view_window_func);
+		config_set_list (key, mdi_child->priv->views, view_window_func);
 
 		g_snprintf (key, sizeof(key), "%s/mdi_child_views_%lx",
 			    section, (long) mdi_child);
-		config_set_list (key, mdi_child->views, NULL);
+		config_set_list (key, mdi_child->priv->views, NULL);
 
 		child = g_list_next (child);
 	}
 
 	/* Save list of toplevel windows. */
 
-	window = mdi->windows;
+	window = mdi->priv->windows;
 	while (window) {
 		GnomeApp *app;
 		GnomeDockLayout *layout;

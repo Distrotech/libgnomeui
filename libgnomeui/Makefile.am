@@ -5,6 +5,9 @@ SUBDIRS = pixmaps
 LIB_VERSION=0:0:0
 LIB_VERSION_NUM=0.0.0
 
+
+GDK_PIXBUF_LIBS=
+
 #
 # The targets
 #
@@ -154,6 +157,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-popup-menu.c		\
 	gnome-popup-help.c		\
 	gnome-pouch.c			\
+	gnome-pouchP.h			\
 	gnome-preferences.c		\
 	gnome-propertybox.c		\
 	gnome-roo.c			\

@@ -42,18 +42,12 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomePouch       GnomePouch;
 typedef struct _GnomePouchClass  GnomePouchClass;
 
+typedef struct _GnomePouchPrivate GnomePouchPrivate;
+
 struct _GnomePouch {
 	GtkFixed fixed;
 
-	GnomeRoo *selected;
-	GList *arranged;
-
-	gboolean auto_arrange : 1;
-	GtkCornerType icon_corner;
-	GtkOrientation icon_orientation;
-
-	GtkWidget *popup_menu;
-	GtkCheckMenuItem *oitem[2], *citem[4], *aitem;
+	GnomePouchPrivate *priv;
 };
 
 struct _GnomePouchClass {
@@ -68,18 +62,20 @@ struct _GnomePouchClass {
 	void (*unselect_child)(GnomePouch *pouch, GnomeRoo *roo);
 };
 
-guint     gnome_pouch_get_type(void);
+guint      gnome_pouch_get_type(void);
 GtkWidget *gnome_pouch_new(void);
-void      gnome_pouch_select_roo(GnomePouch *pouch, GnomeRoo *roo);
-void      gnome_pouch_move(GnomePouch *pouch, GnomeRoo *roo, gint x, gint y);
-void      gnome_pouch_set_icon_arrangement(GnomePouch *pouch,
-										   GtkCornerType corner,
-										   GtkOrientation orientation);
-void      gnome_pouch_arrange_icons(GnomePouch *pouch);
-void      gnome_pouch_enable_auto_arrange(GnomePouch *pouch, gboolean auto_arr);
-void      gnome_pouch_enable_popup_menu(GnomePouch *pouch, gboolean enable);
-void      gnome_pouch_tile_children(GnomePouch *pouch);
-void      gnome_pouch_cascade_children(GnomePouch *pouch);
+void       gnome_pouch_select_roo(GnomePouch *pouch, GnomeRoo *roo);
+GnomeRoo  *gnome_pouch_get_selected(GnomePouch *pouch);
+void       gnome_pouch_move(GnomePouch *pouch, GnomeRoo *roo, gint x, gint y);
+void       gnome_pouch_set_icon_arrangement(GnomePouch *pouch,
+											GtkCornerType corner,
+											GtkOrientation orientation);
+void       gnome_pouch_arrange_icons(GnomePouch *pouch);
+void       gnome_pouch_enable_auto_arrange(GnomePouch *pouch,
+										   gboolean auto_arr);
+void       gnome_pouch_enable_popup_menu(GnomePouch *pouch, gboolean enable);
+void       gnome_pouch_tile_children(GnomePouch *pouch);
+void       gnome_pouch_cascade_children(GnomePouch *pouch);
 
 END_GNOME_DECLS
 

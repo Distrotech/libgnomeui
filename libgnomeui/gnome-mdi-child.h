@@ -43,8 +43,10 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_MDI_CHILD_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MDI_CHILD))
 #define GNOME_MDI_CHILD_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_MDI_CHILD, GnomeMDIChildClass))
 
-typedef struct _GnomeMDIChild       GnomeMDIChild;
-typedef struct _GnomeMDIChildClass  GnomeMDIChildClass;
+typedef struct _GnomeMDIChild        GnomeMDIChild;
+typedef struct _GnomeMDIChildClass   GnomeMDIChildClass;
+
+typedef struct _GnomeMDIChildPrivate GnomeMDIChildPrivate;
 
 /* GnomeMDIChild
  * is an abstract class. In order to use it, you have to either derive a
@@ -57,20 +59,7 @@ struct _GnomeMDIChild
 {
 	GtkObject object;
 
-	GtkObject *parent;               /* a pointer to the MDI */
-
-	gchar *name;
-
-	GList *views;
-
-	GnomeUIInfo *menu_template;
-	GnomeUIInfo *toolbar_template;
-
-	/* default values for insertion of the child toolbar */
-	GnomeDockItemBehavior behavior;
-	GnomeDockPlacement placement;
-
-	gint band_num, band_pos, offset;
+	GnomeMDIChildPrivate *priv;
 };
 
 typedef GtkWidget   *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);
@@ -93,17 +82,22 @@ struct _GnomeMDIChildClass
 	GnomeMDIChildLabelFunc   set_label;
 };
 
-guint     gnome_mdi_child_get_type    (void);
-GtkWidget *gnome_mdi_child_add_view   (GnomeMDIChild *mdi_child);
-void      gnome_mdi_child_remove_view (GnomeMDIChild *mdi_child, GtkWidget *view);
-void      gnome_mdi_child_set_name    (GnomeMDIChild *mdi_child, const gchar *name);
-void      gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl);
-void      gnome_mdi_child_set_toolbar_template(GnomeMDIChild *mdi_child, GnomeUIInfo *toolbar_tmpl);
-void      gnome_mdi_child_set_toolbar_position(GnomeMDIChild *mdi_child,
-											   GnomeDockItemBehavior behavior,
-											   GnomeDockPlacement placement,
-											   gint band_num, gint band_pos,
-											   gint offset);
+guint        gnome_mdi_child_get_type    (void);
+GtkWidget   *gnome_mdi_child_add_view   (GnomeMDIChild *mdi_child);
+void         gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view);
+
+const gchar *gnome_mdi_child_get_name   (GnomeMDIChild *mdi_child);
+void         gnome_mdi_child_set_name   (GnomeMDIChild *mdi_child, const gchar *name);
+const GList *gnome_mdi_child_get_views  (GnomeMDIChild *mdi_child);
+ 
+void         gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl);
+void         gnome_mdi_child_set_toolbar_template(GnomeMDIChild *mdi_child, GnomeUIInfo *toolbar_tmpl);
+void         gnome_mdi_child_set_toolbar_position(GnomeMDIChild *mdi_child,
+												  GnomeDockItemBehavior behavior,
+												  GnomeDockPlacement placement,
+												  gint band_num, gint band_pos,
+												  gint offset);
+
 
 END_GNOME_DECLS
 

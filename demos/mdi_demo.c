@@ -28,7 +28,7 @@ view_creator(GnomeMDIChild *child, gpointer user_data)
 {
 	GtkWidget *label;
 
-	label = gtk_label_new(child->name);
+	label = gtk_label_new(gnome_mdi_child_get_name(child));
 	
 	return label;
 }
@@ -88,10 +88,10 @@ increase_cb(GtkWidget *w, gpointer user_data)
 	name = g_strdup_printf("Child #%d", *counter);
 	gnome_mdi_child_set_name(child, name);
 	g_free(name);
-	view_node = child->views;
+	view_node = gnome_mdi_child_get_views(child);
 	while(view_node) {
 		view = view_node->data;
-		gtk_label_set(GTK_LABEL(view), child->name);
+		gtk_label_set(GTK_LABEL(view), gnome_mdi_child_get_name(child));
 		view_node = view_node->next;
 	}
 }

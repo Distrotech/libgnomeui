@@ -1,3 +1,16 @@
+2000-07-19  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi*.[ch]: "privatized" all structures. code cleanup.
+	added necessary accessor functions for the now hidden members.
+	fixed all the code to (hopefully) work with the above changes.
+	* gnome-pouch.[ch]: likewise.
+	* gnome-roo.[ch]: likewise.
+	* gnome-pouchP.h: new file. contains private parts ;) of the
+	GnomePouch and GnomeRoo widgets.
+	* Makefile.am: added gnome-pouchP.h to libgnomeui_2_la_SOURCES.
+	* mdi-demo.c: fixed to use the accessor functions instead of
+	directly accessing the members.
+
 Tue Jul 18 00:46:14 2000  George Lebl <jirka@5z.com>
 
 	* gnome-gconf.c:  don't ref/sink, and use gconf_client_get_default
