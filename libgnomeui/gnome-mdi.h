@@ -21,8 +21,8 @@
  *   template is not sufficient. This signal is emitted when a new GnomeApp that
  *   needs new menubar is created but ONLY if the menu template is NULL!
  *
- * GtkToolBar *create_toolbar(GnomeMDI *)
- *   should return a GtkToolBar for the GnomeApps when the GnomeUIInfo way with using toolbar
+ * GtkToolbar *create_toolbar(GnomeMDI *)
+ *   should return a GtkToolbar for the GnomeApps when the GnomeUIInfo way with using toolbar
  *   template is not sufficient. This signal is emitted when a new GnomeApp that
  *   needs new toolbar is created but ONLY if the toolbar template is NULL!
  *
