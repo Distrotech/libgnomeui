@@ -1,3 +1,9 @@
+1998-12-27  Tuomas Kuosmanen  <tigert@fun112.koivukyla.hoas.fi>
+
+	* Replaced the offending-to-some-ethnic-groups Yes/No -buttons
+	with hopefully nicer looking red/green circles (streetlights _are_
+	universal, right? :)
+
 1998-12-23  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_remove_menu[s|range]):
