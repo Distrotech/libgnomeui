@@ -46,9 +46,6 @@
 
 #include <libgnomeuiP.h>
 
-extern char *program_invocation_name;
-extern char *program_invocation_short_name;
-
 #ifdef HAVE_LIBSM
 #include <X11/SM/SMlib.h>
 #endif /* HAVE_LIBSM */
@@ -1041,7 +1038,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
     }
 
   /* needed on non-glibc systems: */
-  gnome_client_set_program (master_client, program_invocation_name);
+  gnome_client_set_program (master_client, g_get_prgname ());
   /* Argument parsing is starting.  We set the restart and the
      clone command to a default value, so other functions can use
      the master client while parsing the command line.  */
@@ -2250,9 +2247,17 @@ gnome_client_get_global_config_prefix (GnomeClient *client)
 {
   if (client == NULL)
     {
-      if (!config_prefix)
-	config_prefix= g_strconcat ("/", program_invocation_short_name, "/",
-				       NULL);
+      if (!config_prefix) {
+	char *prgname, *name;
+	prgname = g_get_prgname ();
+
+	g_assert (prgname != NULL);
+
+	name= strrchr (prgname, '/');
+	name= name ? (name+1) : prgname;
+
+	config_prefix= g_strconcat ("/", name, "/", NULL);
+      }
 
       return config_prefix;
     }
