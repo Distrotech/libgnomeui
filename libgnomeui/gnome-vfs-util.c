@@ -259,7 +259,8 @@ free_pixbuf_load_handle (GnomeGdkPixbufAsyncHandle *handle)
     if (handle->done_callback)
 	(* handle->done_callback) (handle, handle->callback_data);
     if (handle->loader != NULL) {
-	gtk_object_unref (GTK_OBJECT (handle->loader));
+	gdk_pixbuf_loader_close (handle->loader, NULL);
+	g_object_unref (G_OBJECT (handle->loader));
     }
     g_free (handle);
 }
