@@ -1,3 +1,8 @@
+2002-05-12  Glynn Foster  <glynn.foster@sun.com>
+
+	* gnome-about.c: (gnome_about_display_credits_dialog): Set the 
+	default response.
+
 2002-04-23  jacob berkman  <jacob@ximian.com>
 
 	* gnome_segv.c (main): set the default button to close

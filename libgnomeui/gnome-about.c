@@ -198,6 +198,7 @@ gnome_about_display_credits_dialog (GnomeAbout *about)
 					      NULL);
 	about->_priv->credits_dialog = dialog;
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 360, 260);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy), dialog);
 	g_signal_connect (dialog, "destroy",
