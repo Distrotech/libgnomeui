@@ -2709,8 +2709,6 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
         /* Attach GConf settings */
 
         if (dock_item != NULL) { /* Dock item bevel */
-                gboolean bevels = TRUE;
-
 		g_object_ref (G_OBJECT (conf));
 		gtk_object_set_data_full(GTK_OBJECT(dock_item), gnome_app_helper_gconf_client,
 					 conf, (GtkDestroyNotify)g_object_unref);

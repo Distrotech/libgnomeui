@@ -384,7 +384,7 @@ gnome_about_free_person_list (GSList *list)
 	if (list == NULL)
 		return;
 	
-	g_slist_foreach (list, g_free, NULL);
+	g_slist_foreach (list, (GFunc) g_free, NULL);
 	g_slist_free (list);
 }
 
