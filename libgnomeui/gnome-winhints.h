@@ -74,7 +74,8 @@ typedef enum
   WIN_HINTS_SKIP_FOCUS      = (1<<0), /* "alt-tab" skips this win */
   WIN_HINTS_SKIP_WINLIST    = (1<<1), /* not in win list */
   WIN_HINTS_SKIP_TASKBAR    = (1<<2), /* not on taskbar */
-  WIN_HINTS_GROUP_TRANSIENT = (1<<3)  /* ??????? */
+  WIN_HINTS_GROUP_TRANSIENT = (1<<3), /* ??????? */
+  WIN_HINTS_FOCUS_ON_CLICK  = (1<<4)  /* app only accepts focus when clicked */
 } GnomeWinHints;
 
 typedef enum
