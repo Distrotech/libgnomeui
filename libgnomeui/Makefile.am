@@ -9,7 +9,7 @@ LIB_VERSION_NUM=0.0.0
 # The targets
 #
 noinst_PROGRAMS = test-recently-used test-file-saver stock_demo winhints_demo dock_demo \
-	animator_demo
+	animator_demo mdi_demo
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
 lib_LTLIBRARIES = libgnomeui-2.la
 
@@ -323,6 +323,8 @@ animator_demo_SOURCES = animator_demo.c
 
 dock_demo_SOURCES = dock_demo.c
 
+mdi_demo_SOURCES = mdi_demo.c
+
 gtkrcdir = $(datadir)
 gtkrc_DATA = gtkrc gtkrc.el gtkrc.eo gtkrc.he gtkrc.hy gtkrc.ja \
 	gtkrc.ko gtkrc.ru gtkrc.tr gtkrc.th gtkrc.uk \
@@ -409,3 +411,11 @@ dock_demo_LDADD =	\
 	$(GDK_PIXBUF_LIBS) \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
+
+mdi_demo_LDADD =       \
+        libgnomeui-$(GNOME_INTERFACE_VERSION).la                                        \
+        $(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la                 \
+        $(GDK_PIXBUF_LIBS) \
+        $(LIBGNOMEUI_LIBS) \
+        $(INTLLIBS)
+

@@ -21,7 +21,7 @@
    Author: Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
 */
 
-#undef GNOME_ENABLE_DEBUG
+#define GNOME_ENABLE_DEBUG
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
@@ -970,6 +970,9 @@ static void gnome_roo_select(GnomeRoo *roo)
 {
 	GtkWidget *w = GTK_WIDGET(roo);
 
+#ifdef GNOME_ENABLE_DEBUG
+	g_message("GnomeRoo: select");
+#endif
 	roo->flags |= ROO_SELECTED;
 
 	if(GTK_WIDGET_MAPPED(roo)) {
@@ -985,6 +988,9 @@ static void gnome_roo_deselect(GnomeRoo *roo)
 {
 	GtkWidget *w = GTK_WIDGET(roo);
 
+#ifdef GNOME_ENABLE_DEBUG
+	g_message("GnomeRoo: deselect");
+#endif
 	roo->flags &= ~ROO_SELECTED;
 
 	if(GTK_WIDGET_MAPPED(roo)) {

@@ -21,7 +21,7 @@
    Author: Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
 */
 
-#undef GNOME_ENABLE_DEBUG
+#define GNOME_ENABLE_DEBUG
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
@@ -60,8 +60,8 @@ static void gnome_pouch_init(GnomePouch *pouch);
 static gboolean gnome_pouch_button_press(GtkWidget *w, GdkEventButton *e);
 
 static void gnome_pouch_add(GtkContainer *container, GtkWidget *child);
+static void gnome_pouch_remove(GtkContainer *container, GtkWidget *child);
 
-static void gnome_pouch_close_child(GnomePouch *pouch, GnomeRoo *roo);
 static void gnome_pouch_maximize_child(GnomePouch *pouch, GnomeRoo *roo);
 static void gnome_pouch_unmaximize_child(GnomePouch *pouch, GnomeRoo *roo);
 static void gnome_pouch_iconify_child(GnomePouch *pouch, GnomeRoo *roo);
@@ -161,8 +161,8 @@ static void gnome_pouch_class_init(GnomePouchClass *klass)
 	widget_class->button_press_event = gnome_pouch_button_press;
 
 	container_class->add = gnome_pouch_add;
+	container_class->remove = gnome_pouch_remove;
 
-	klass->close_child = gnome_pouch_close_child;
 	klass->iconify_child = gnome_pouch_iconify_child;
 	klass->uniconify_child = gnome_pouch_uniconify_child;
 	klass->maximize_child = gnome_pouch_maximize_child;
@@ -195,16 +195,35 @@ static void gnome_pouch_add(GtkContainer *container, GtkWidget *child)
 	gtk_fixed_put(GTK_FIXED(container), child, 0, 0);
 }
 
+static void gnome_pouch_remove(GtkContainer *container, GtkWidget *child)
+{
+	GnomeRoo *roo;
+	GnomePouch *pouch;
+
+	g_return_if_fail(child != NULL);
+	g_return_if_fail(GNOME_IS_ROO(child));
+
+	pouch = GNOME_POUCH(container);
+	roo = GNOME_ROO(child);
+
+	if(pouch->selected == roo)
+		gnome_pouch_select_roo(pouch, NULL);
+
+	if(gnome_roo_is_iconified(roo))
+		pouch->arranged = g_list_remove(pouch->arranged, roo);
+
+	(*GTK_CONTAINER_CLASS(parent_class)->remove)(container, child);
+}
+
 static gboolean gnome_pouch_button_press(GtkWidget *w, GdkEventButton *e)
 {
 	GnomePouch *pouch = GNOME_POUCH(w);
 
 	if(e->button == 1) {
-		/* deselect a possibly selected child */
+		/* unselect a possibly selected child */
 		if(pouch->selected) {
 			gtk_signal_emit_by_name(GTK_OBJECT(pouch->selected), "deselect",
 									NULL);
-			return TRUE;
 		}
 	}
 	else if(e->button == 3 && pouch->popup_menu) {
@@ -216,17 +235,6 @@ static gboolean gnome_pouch_button_press(GtkWidget *w, GdkEventButton *e)
 	}
 
 	return FALSE;
-}
-
-static void gnome_pouch_close_child(GnomePouch *pouch, GnomeRoo *roo)
-{
-	if(pouch->selected == roo)
-		pouch->selected = NULL;
-
-	if(gnome_roo_is_iconified(roo))
-		pouch->arranged = g_list_remove(pouch->arranged, roo);
-
-	gtk_container_remove(GTK_CONTAINER(pouch), GTK_WIDGET(roo));
 }
 
 static void gnome_pouch_maximize_child(GnomePouch *pouch, GnomeRoo *roo)
@@ -301,19 +309,27 @@ static void gnome_pouch_select_child(GnomePouch *pouch, GnomeRoo *roo)
 	if(pouch->selected == roo)
 		return;
 
-	if(pouch->selected && gnome_roo_is_maximized(pouch->selected))
-		gnome_roo_set_maximized(roo, TRUE);
-
-	gdk_window_raise(GTK_WIDGET(roo)->window);
-
-	if(pouch->selected)
+#ifdef GNOME_ENABLE_DEBUG
+	g_message("GnomePouch: select");
+#endif
+	if(pouch->selected) 
 		gtk_signal_emit_by_name(GTK_OBJECT(pouch->selected), "deselect", NULL);
-
+	if(roo) {
+		if(pouch->selected && gnome_roo_is_maximized(pouch->selected))
+			gnome_roo_set_maximized(roo, TRUE);
+		gdk_window_raise(GTK_WIDGET(roo)->window);
+	}
 	pouch->selected = roo;
 }
 
 static void gnome_pouch_unselect_child(GnomePouch *pouch, GnomeRoo *roo)
 {
+	g_return_if_fail(roo != NULL);
+	g_return_if_fail(GNOME_IS_ROO(roo));
+
+#ifdef GNOME_ENABLE_DEBUG
+	g_message("GnomePouch: unselect");
+#endif
 	if(pouch->selected == roo)
 		pouch->selected = NULL;
 
@@ -635,7 +651,8 @@ void gnome_pouch_move(GnomePouch *pouch, GnomeRoo *roo, gint x, gint y)
 /**
  * gnome_pouch_select_roo:
  * @pouch: A pointer to a GnomePouch widget.
- * @roo: A pointer to a GnomeRoo widget that should be selected.
+ * @roo: A pointer to a GnomeRoo widget that should be selected or NULL
+ * for no selected GnomeRoo.
  *
  * Description:
  * Selects @roo.
@@ -644,11 +661,11 @@ void gnome_pouch_select_roo(GnomePouch *pouch, GnomeRoo *roo)
 {
 	g_return_if_fail(pouch != NULL);
 	g_return_if_fail(GNOME_IS_POUCH(pouch));
-	g_return_if_fail(roo != NULL);
-	g_return_if_fail(GNOME_IS_ROO(roo));
-	g_return_if_fail(GTK_WIDGET(roo)->parent == GTK_WIDGET(pouch));
 
-	gtk_signal_emit_by_name(GTK_OBJECT(roo), "select", NULL);
+	if(roo)
+		gtk_signal_emit_by_name(GTK_OBJECT(roo), "select", NULL);
+	else if(pouch->selected)
+		gtk_signal_emit_by_name(GTK_OBJECT(pouch->selected), "deselect", NULL);
 }
 
 /**

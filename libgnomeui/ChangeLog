@@ -1,3 +1,10 @@
+2000-03-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c: various small fixes.
+	* gnome-pouch.c, gnome-roo.c: shuffled the way signals get
+	emitted; removed default signal handler for GnomePouch::close-child.
+	* Makefile.am: as mdi_demo source was committed, build it.
+
 Wed, 15 Mar 2000 14:03:46 +0100 Paolo Molaro <lupus@linuxcare.com>
 
 	* gnome-font-picker.c: avoid checking all the memory for '-'.

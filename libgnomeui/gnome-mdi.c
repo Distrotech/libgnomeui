@@ -25,7 +25,7 @@
   @NOTATION@
 */
 
-#undef GNOME_ENABLE_DEBUG
+#define GNOME_ENABLE_DEBUG
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
@@ -874,7 +874,10 @@ static void pouch_unselect_child(GnomePouch *pouch, GnomeRoo *roo, GnomeMDI *mdi
 
 static void pouch_select_child(GnomePouch *pouch, GnomeRoo *roo, GnomeMDI *mdi)
 {
-	set_active_view(mdi, GTK_BIN(roo)->child);
+	if(roo)
+		set_active_view(mdi, GTK_BIN(roo)->child);
+	else
+		set_active_view(mdi, NULL);
 }
 
 static void pouch_close_child(GnomePouch *pouch, GnomeRoo *roo, GnomeMDI *mdi)
@@ -1016,8 +1019,6 @@ static gint app_toplevel_delete_event (GnomeApp *app, GdkEventAny *event, GnomeM
 	if(g_list_length(mdi->windows) == 1) {
 		if(!gnome_mdi_remove_all(mdi))
 			return TRUE;
-
-		gnome_mdi_remove_view(mdi, app->contents);
 
 		mdi->windows = g_list_remove(mdi->windows, app);
 		gtk_widget_destroy(GTK_WIDGET(app));
@@ -1299,7 +1300,6 @@ static void remove_view (GnomeMDI *mdi, GtkWidget *view)
 	else if(mdi->mode == GNOME_MDI_WIW) {
 		/* remove the roo from the pouch */
 		GtkFixed *fixed  = GTK_FIXED(parent->parent);
-
 		gtk_container_remove(GTK_CONTAINER(fixed), parent);
 		if(fixed->children == NULL) {
 			set_active_view(mdi, NULL);
@@ -1309,10 +1309,6 @@ static void remove_view (GnomeMDI *mdi, GtkWidget *view)
 				mdi->windows = g_list_remove(mdi->windows, window);
 				gtk_widget_destroy(GTK_WIDGET(window));
 			}
-		}
-		else {
-			gnome_pouch_select_roo(GNOME_POUCH(fixed),
-								   fixed->children?GNOME_ROO(fixed->children->data):NULL);
 		}
 	}
 
