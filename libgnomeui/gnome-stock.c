@@ -104,7 +104,7 @@ static void
 gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
 {
         GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
-        GtkPixmap *pixmap;
+        GnomePixmap *pixmap;
 
         if (!GTK_WIDGET_REALIZED(widget)) return;
         pixmap = NULL;
@@ -249,7 +249,7 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
 	p->width = entry->any.width;
 	p->height = entry->any.height;
         p->window = window;
-#ifdef USE_GDK_IMLIB
+#if defined(USE_GDK_IMLIB) && 0
 	{
 		GnomeStockPixmapEntry *entry;
 		entry = gnome_stock_pixmap_checkfor(icon, GNOME_STOCK_PIXMAP_REGULAR);
@@ -298,6 +298,7 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_MENU_COPY, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_copy, 16, 16},
         {GNOME_STOCK_MENU_PASTE, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_paste, 16, 16},
         {GNOME_STOCK_MENU_PROP, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_prop, 16, 16},
+        {GNOME_STOCK_MENU_SCORES, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_scores, 20, 20},
         {GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_about, 16, 16},
 	/* TODO: I shouldn't waste a pixmap for that */
         {GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_blank, 16, 16},
@@ -406,62 +407,40 @@ lookup(char *icon, char *subtype, int fallback)
 
 
 
-static GtkPixmap *
+static GnomePixmap *
 create_pixmap_from_data(GtkWidget *window, GnomeStockPixmapEntryData *data)
 {
-        GtkPixmap *pixmap;
+	GnomePixmap *pixmap;
 
-	pixmap = GTK_PIXMAP(gnome_create_pixmap_widget_d(window, window,
-                                                         data->xpm_data));
-        return pixmap;
+	pixmap = GNOME_PIXMAP(gnome_pixmap_new_from_xpm_d(data->xpm_data));
+	return pixmap;
 }
 
 
 
 #ifdef USE_GDK_IMLIB
-static GtkPixmap *
+static GnomePixmap *
 create_pixmap_from_imlib(GtkWidget *window, GnomeStockPixmapEntryImlib *data)
 {
-        GtkPixmap *pixmap;
-	GdkPixmap *pmap;
-	GdkBitmap *bmap;
-	GdkImlibImage *im;
-
-	im = gdk_imlib_create_image_from_data(data->rgb_data, NULL,
-					      data->width, data->height);
-	gdk_imlib_set_image_shape(im, &data->shape);
-	gdk_imlib_render(im, data->width, data->height);
-	pmap = gdk_imlib_move_image(im);
-	bmap = gdk_imlib_move_mask(im);
-	gdk_imlib_kill_image(im);
-	pixmap = GTK_PIXMAP(gtk_pixmap_new(pmap, bmap));
-        return pixmap;
+	return (GnomePixmap *)gnome_pixmap_new_from_rgb_d(data->rgb_data,
+							  NULL,
+							  data->width,
+							  data->height);
 }
 
 
 
-static GtkPixmap *
+static GnomePixmap *
 create_pixmap_from_path(GnomeStockPixmapEntryPath *data)
 {
-        GtkPixmap *pixmap;
-	GdkPixmap *pmap;
-	GdkBitmap *bmap;
-	GdkImlibImage *im;
-
-	im = gdk_imlib_load_image(data->pathname);
-	gdk_imlib_render(im, im->rgb_width, im->rgb_height);
-	pmap = gdk_imlib_move_image(im);
-	bmap = gdk_imlib_move_mask(im);
-	gdk_imlib_kill_image(im);
-	pixmap = GTK_PIXMAP(gtk_pixmap_new(pmap, bmap));
-        return pixmap;
+	return GNOME_PIXMAP(gnome_pixmap_new_from_file(data->pathname));
 }
 #endif /* USE_GDK_IMLIB */
 
 
 
 static void
-build_disabled_pixmap(GtkWidget *window, GtkPixmap **inout_pixmap)
+build_disabled_pixmap(GtkWidget *window, GnomePixmap **inout_pixmap)
 {
         GdkGC *gc;
         GdkWindow *pixmap = (*inout_pixmap)->pixmap;
@@ -535,11 +514,11 @@ build_disabled_pixmap(GtkWidget *window, GtkPixmap **inout_pixmap)
 
 
 
-GtkPixmap *
+GnomePixmap *
 gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
 {
         GnomeStockPixmapEntry *entry;
-        GtkPixmap *pixmap;
+        GnomePixmap *pixmap;
 
         g_return_val_if_fail(icon != NULL, NULL);
         /* subtype can be NULL, so not checked */

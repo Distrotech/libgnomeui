@@ -1,3 +1,7 @@
+1998-02-26  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.[ch]: made gnome-stock use gnome-pixmap.
+
 Thu Feb 26 18:07:40 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-about.c: Undefine _ when compiling to avoid clash with

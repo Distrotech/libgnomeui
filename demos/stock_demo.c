@@ -133,6 +133,15 @@ create_menu(GtkWidget *window)
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
+	w = gtk_menu_item_new();
+	gtk_widget_show(w);
+	gtk_menu_append(GTK_MENU(menu), w);
+
+        w = gnome_stock_menu_item(GNOME_STOCK_MENU_SCORES, _("Scores..."));
+        gtk_widget_show(w);
+        gtk_menu_append(GTK_MENU(menu), w);
+	menu_items[i++] = w;
+
         w = gtk_menu_item_new_with_label(_("Edit"));
         gtk_widget_show(w);
         gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
@@ -155,6 +164,7 @@ create_menu(GtkWidget *window)
         gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
 
 	menu_items[i] = NULL;
+	g_print("%d menu items\n", i);
 	gtk_window_add_accelerator_table(GTK_WINDOW(window), accel);
 	return menubar;
 }

@@ -2,19 +2,9 @@
 #define __GNOME_STOCK_H__
 
 
-/*
- * If defined, gdk_imlib is used for the pixmap stuff. That will help alot.
- * As well for colormaps, as for determining the size of a pixmap before a
- * GdkWindow is created.
- * 
- * TODO: I cannot define this here permanently because it will require,
- * that all apps link against gdk_imlib. We will require a check, if
- * gdk_imlib is installed on the particular system and include -lgdk_imlib
- * in LIBS for that.
+/* Use of gdk_imlib can be disabled here.
  */
-#ifdef HAS_GDK_IMLIB
-#define USE_GDK_IMLIB
-#endif
+#undef USE_GDK_IMLIB
 
 
 #include <libgnome/gnome-defs.h>
@@ -22,6 +12,7 @@
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkbutton.h>
+#include <libgnomeui/gnome-pixmap.h>
 
 #ifdef USE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -198,11 +189,11 @@ struct _GnomeStockPixmapWidget {
 	GtkVBox parent_object;
 
         char *icon;
-	int width, height;    /* needed to answer size_requests even before
-			       * a pixmap is loaded/created */
-        GtkWidget *window;    /* needed for style and gdk_pixmap_create... */
-        GtkPixmap *pixmap;    /* the pixmap currently shown */
-        GtkPixmap *regular, *disabled, *focused;  /* pixmap cache */
+	int width, height;      /* needed to answer size_requests even before
+			         * a pixmap is loaded/created */
+        GtkWidget   *window;    /* needed for style and gdk_pixmap_create... */
+        GnomePixmap *pixmap;    /* the pixmap currently shown */
+        GnomePixmap *regular, *disabled, *focused;  /* pixmap cache */
 };
 
 struct _GnomeStockPixmapWidgetClass {
@@ -217,7 +208,9 @@ GtkWidget *gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon);
 /* the utility functions */
 
 /* just fetch a pixmap */
-GtkPixmap             *gnome_stock_pixmap          (GtkWidget *window,
+/* window isn't needed for pixmap creation but for the style
+ * when a disabled icon is automatically created */
+GnomePixmap           *gnome_stock_pixmap          (GtkWidget *window,
                                                     char *icon,
                                                     char *subtype);
 
