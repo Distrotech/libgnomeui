@@ -1,5 +1,8 @@
 2000-07-27  Martin Baulig  <baulig@suse.de>
 
+	* gnome-canvas.c (gnome_canvas_destroy): Destroy may run
+	multiple times nowadays.
+
 	* gnome-icon-list.c (gnome_icon_list_clear): This needs to
 	mark the icon list as dirty.
 

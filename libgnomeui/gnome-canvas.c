@@ -2380,14 +2380,25 @@ gnome_canvas_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (object));
 
+	/* remember, destroy can be run multiple times! */
+
 	canvas = GNOME_CANVAS (object);
 
-	gtk_signal_disconnect (GTK_OBJECT (canvas->root), canvas->root_destroy_id);
-	gtk_object_unref (GTK_OBJECT (canvas->root));
+	if (canvas->root_destroy_id) {
+		gtk_signal_disconnect (GTK_OBJECT (canvas->root), canvas->root_destroy_id);
+		canvas->root_destroy_id = 0;
+	}
+	if (canvas->root) {
+		gtk_object_unref (GTK_OBJECT (canvas->root));
+		canvas->root = NULL;
+	}
 
 	shutdown_transients (canvas);
 
-	gdk_color_context_free (canvas->cc);
+	if (canvas->cc) {
+		gdk_color_context_free (canvas->cc);
+		canvas->cc = NULL;
+	}
 
 	if (GTK_OBJECT_CLASS (canvas_parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (canvas_parent_class)->destroy) (object);
