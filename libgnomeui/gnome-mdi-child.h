@@ -1,7 +1,25 @@
-/*
- * gnome-mdi-child.h - definition of a Gnome MDI Child object
- * written by Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
- */
+/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
+/* gnome-mdi-child.h - definition of a Gnome MDI Child object
+
+   Copyright (C) 1997, 1998 Free Software Foundation
+
+   The Gnome Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The Gnome Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the Gnome Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+
+   Author: Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
+*/
 
 #ifndef __GNOME_MDI_CHILD_H__
 #define __GNOME_MDI_CHILD_H__
@@ -22,24 +40,24 @@ typedef struct _GnomeMDIChildClass  GnomeMDIChildClass;
 
 struct _GnomeMDIChild
 {
-  GtkObject object;
+	GtkObject object;
 
-  GtkObject *parent;
+	GtkObject *parent;
 
-  gchar *name;
+	gchar *name;
 
-  GList *views;
+	GList *views;
 
-  GnomeUIInfo *menu_template;
+	GnomeUIInfo *menu_template;
 };
 
 struct _GnomeMDIChildClass
 {
-  GtkObjectClass parent_class;
+	GtkObjectClass parent_class;
 
-  GtkWidget * (*create_view)(GnomeMDIChild *); 
-  GList     * (*create_menus)(GnomeMDIChild *, GtkWidget *); 
-  gchar     * (*get_config_string)(GnomeMDIChild *);
+	GtkWidget * (*create_view)(GnomeMDIChild *); 
+	GList     * (*create_menus)(GnomeMDIChild *, GtkWidget *); 
+	gchar     * (*get_config_string)(GnomeMDIChild *);
 };
 
 guint         gnome_mdi_child_get_type         (void);
