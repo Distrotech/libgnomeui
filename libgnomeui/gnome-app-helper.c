@@ -897,6 +897,7 @@ gnome_app_configure_toolbar (GtkToolbar *toolbar)
 		
 		if (!child || !child->widget ||
 		    child->type != GTK_TOOLBAR_CHILD_WIDGET ||
+		    !GTK_IS_SEPARATOR(child->widget) ||
 		    ((orientation == GTK_ORIENTATION_VERTICAL &&
 		      GTK_IS_HSEPARATOR (child->widget)) ||
 		     (orientation == GTK_ORIENTATION_HORIZONTAL &&
@@ -904,7 +905,7 @@ gnome_app_configure_toolbar (GtkToolbar *toolbar)
 			continue;
 
 		widget = child->widget;
-		
+
 		/* Remove widget from toolbar */
 		gtk_container_remove (GTK_CONTAINER (toolbar), widget);
 		
