@@ -86,7 +86,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, back),
 				gnome_marshal_BOOLEAN__OBJECT,
 				GTK_TYPE_WIDGET, 1,
-				GTK_TYPE_POINTER);
+				GTK_TYPE_WIDGET);
 	druid_page_signals[FINISH] = 
 		gtk_signal_new ("finish",
 				GTK_RUN_LAST,

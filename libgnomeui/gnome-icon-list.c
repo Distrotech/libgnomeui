@@ -1892,7 +1892,7 @@ gnome_icon_list_class_init (GilClass *gil_class)
 			gnome_marshal_BOOLEAN__INT_STRING,
 			GTK_TYPE_BOOL, 2,
 			GTK_TYPE_INT,
-			GTK_TYPE_POINTER);
+			GTK_TYPE_STRING);
 
 
 	object_class->destroy = gil_destroy;

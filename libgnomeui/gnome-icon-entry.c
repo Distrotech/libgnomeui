@@ -170,7 +170,7 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 				GTK_ARG_READWRITE,
 				ARG_FILENAME);
 	gtk_object_add_arg_type("GnomeIconEntry::pick_dialog",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_WIDGET,
 				GTK_ARG_READABLE,
 				ARG_PICK_DIALOG);
 

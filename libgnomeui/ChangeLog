@@ -1,3 +1,19 @@
+2001-10-04  James Henstridge  <james@daa.com.au>
+
+	* gnome-icon-list.c (gnome_icon_list_class_init): change second
+	argument of "text_changed" signal from GTK_TYPE_POINTER to
+	GTK_TYPE_STRING.
+
+	* gnome-icon-entry.c (gnome_icon_entry_class_init): change
+	pick_dialog property type to GTK_TYPE_WIDGET.
+
+	* gnome-file-entry.c (gnome_file_entry_class_init): fix up
+	property types for gnome_entry and gtk_entry properties.
+
+	* gnome-druid-page.c (gnome_druid_page_class_init): change
+	argument type from GTK_TYPE_POINTER to GTK_TYPE_WIDGET for "back"
+	signal.
+
 Sun Sep 30 12:55:02 2001  George Lebl <jirka@5z.com>
 
 	* gnome-icon-entry.c: eliminate warning on icon select

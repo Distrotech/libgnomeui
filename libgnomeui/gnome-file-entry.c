@@ -209,11 +209,11 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 				GTK_ARG_WRITABLE,
 				ARG_FILENAME);
 	gtk_object_add_arg_type("GnomeFileEntry::gnome_entry",
-				GTK_TYPE_POINTER,
+				GNOME_TYPE_ENTRY,
 				GTK_ARG_READABLE,
 				ARG_GNOME_ENTRY);
 	gtk_object_add_arg_type("GnomeFileEntry::gtk_entry",
-				GTK_TYPE_POINTER,
+				GTK_TYPE_ENTRY,
 				GTK_ARG_READABLE,
 				ARG_GTK_ENTRY);
 
