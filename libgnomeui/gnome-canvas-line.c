@@ -185,7 +185,7 @@ recalc_bounds (GnomeCanvasLine *line)
 	x1 = x2 = line->coords[0];
 	y1 = y2 = line->coords[1];
 
-	for (i = 1, coords = line->coords; i < line->num_points; i++, coords += 2)
+	for (i = 1, coords = line->coords + 2; i < line->num_points; i++, coords += 2)
 		GROW_BOUNDS (x1, y1, x2, y2, coords[0], coords[1]);
 
 	/* Add possible over-estimate for wide lines */
@@ -474,19 +474,19 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 	/* Compute a polygon for each edge of the line and test the point against it */
 
 	if (line->width_pixels)
-		width = line->width_pixels / item->canvas->pixels_per_unit;
+		width = line->width / item->canvas->pixels_per_unit;
 	else
 		width = line->width;
 
 	changed_miter_to_bevel = 0;
 
-	for (i = 0, coords = line_points; i < (num_points - 2); i++, coords += 2) {
+	for (i = num_points, coords = line_points; i >= 2; i--, coords += 2) {
 		/* If rounding is done around the first point, then compute distance between the
 		 * point and the first point.
 		 */
 
-		if (((line->cap == GDK_CAP_ROUND) && (i == 0))
-		    || ((line->join == GDK_JOIN_ROUND) && (i != 0))) {
+		if (((line->cap == GDK_CAP_ROUND) && (i == num_points))
+		    || ((line->join == GDK_JOIN_ROUND) && (i != num_points))) {
 			dx = coords[0] - x;
 			dy = coords[1] - y;
 			dist = sqrt (dx * dx + dy * dy) - width / 2.0;
@@ -497,11 +497,11 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 				best = dist;
 		}
 
-		/* Compute the polygonal shape corresponding to this edge, with two points
-		 * corresponding to each of the vertices
+		/* Compute the polygonal shape corresponding to this edge, with two points for the
+		 * first point of the edge and two points for the last point of the edge.
 		 */
 
-		if (i == 0)
+		if (i == num_points)
 			gnome_canvas_get_butt_points (coords[2], coords[3], coords[0], coords[1],
 						      width, (line->cap == GDK_CAP_PROJECTING),
 						      poly, poly + 1, poly + 2, poly + 3);
@@ -535,9 +535,9 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 			}
 		}
 
-		if (i == (line->num_points - 2))
+		if (i == 2)
 			gnome_canvas_get_butt_points (coords[0], coords[1], coords[2], coords[3],
-						      width, FALSE,
+						      width, (line->cap == GDK_CAP_PROJECTING),
 						      poly + 4, poly + 5, poly + 6, poly + 7);
 		else if (line->join == GDK_JOIN_MITER) {
 			if (!gnome_canvas_get_miter_points (coords[0], coords[1],
@@ -610,5 +610,28 @@ done:
 static void
 gnome_canvas_line_translate (GnomeCanvasItem *item, double dx, double dy)
 {
-	/* FIXME */
+	GnomeCanvasLine *line;
+	int i;
+	double *coords;
+
+	line = GNOME_CANVAS_LINE (item);
+
+	for (i = 0, coords = line->coords; i < line->num_points; i++, coords += 2) {
+		coords[0] += dx;
+		coords[1] += dy;
+	}
+
+	if (line->first_arrow)
+		for (i = 0, coords = line->first_coords; i < NUM_ARROW_POINTS; i++, coords += 2) {
+			coords[0] += dx;
+			coords[1] += dy;
+		}
+
+	if (line->last_arrow)
+		for (i = 0, coords = line->last_coords; i < NUM_ARROW_POINTS; i++, coords += 2) {
+			coords[0] += dx;
+			coords[1] += dy;
+		}
+
+	recalc_bounds (line);
 }

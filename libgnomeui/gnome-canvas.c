@@ -20,7 +20,7 @@
  *
  * - Stipple for filling items.
  *
- * - Line/Curve item.
+ * - Curve support for line item.
  *
  * - Polygon item.
  *
@@ -1422,6 +1422,16 @@ window_to_world (GnomeCanvas *canvas, double *x, double *y)
 	*y = canvas->scroll_y1 + (*y + canvas->display_y1) / canvas->pixels_per_unit;
 }
 
+static int
+is_descendant (GnomeCanvasItem *item, GnomeCanvasItem *parent)
+{
+	for (; item; item = item->parent)
+		if (item == parent)
+			return TRUE;
+
+	return FALSE;
+}
+
 static void
 emit_event (GnomeCanvas *canvas, GdkEvent *event)
 {
@@ -1432,7 +1442,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 
 	/* Perform checks for grabbed items */
 
-	if (canvas->grabbed_item && (canvas->grabbed_item != canvas->current_item))
+	if (canvas->grabbed_item && !is_descendant (canvas->current_item, canvas->grabbed_item))
 		return;
 
 	if (canvas->grabbed_item) {
@@ -1850,7 +1860,16 @@ paint (GnomeCanvas *canvas)
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->draw) (canvas->root, pixmap,
 									draw_x1, draw_y1,
 									width, height);
-
+#if 0
+	gdk_draw_line (pixmap,
+		       widget->style->black_gc,
+		       0, 0,
+		       width - 1, height - 1);
+	gdk_draw_line (pixmap,
+		       widget->style->black_gc,
+		       width - 1, 0,
+		       0, height - 1);
+#endif
 	/* Copy the pixmap to the window and clean up */
 
 	gdk_draw_pixmap (widget->window,

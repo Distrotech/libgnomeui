@@ -1,3 +1,29 @@
+1998-07-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (emit_event): When there is a grabbed item, the
+	event should also be propagated upwards in the item hierarchy, not
+	just when the current item is actually the grabbed item.
+	(is_descendant): New function that returns whether an item is a
+	descendant of some parent group.
+
+	* gnome-canvas-line.c (gnome_canvas_line_point): Fixed effective
+	width calculation.  Doh.
+
+	* gnome-canvas-util.c (gnome_canvas_polygon_to_point): Fixed typo
+	(y -> py).
+
+	* gnome-canvas-line.c (gnome_canvas_line_translate): Implemented
+	translate method.
+	(recalc_bounds): Doh.  Fixed off-by-one error when growing
+	bounding box.
+
+	* gnome-canvas-util.c (gnome_canvas_get_miter_points): Fixed typo
+	(x2 -> x3).
+
+	* gnome-canvas-line.c (gnome_canvas_line_point): When on the last
+	edge, projecting the butt points depends on whether we are using
+	GDK_CAP_PROJECTING.
+
 Fri Jul 24 02:34:31 1998  John Ellis  <johne@bellatlantic.net>
 
 	* gnome-dentry-edit.c:

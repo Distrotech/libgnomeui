@@ -57,7 +57,7 @@ gnome_canvas_get_miter_points (double x1, double y1, double x2, double y2, doubl
 	else if (x2 == x1)
 		theta1 = (y2 < y1) ? M_PI_2 : -M_PI_2;
 	else
-		theta1 = atan2 (y1 - y2, x2 - x2);
+		theta1 = atan2 (y1 - y2, x1 - x2);
 
 	if (y3 == y2)
 		theta2 = (x3 > x2) ? 0 : M_PI;
@@ -76,7 +76,7 @@ gnome_canvas_get_miter_points (double x1, double y1, double x2, double y2, doubl
 	if ((theta < ELEVEN_DEGREES) && (theta > -ELEVEN_DEGREES))
 		return FALSE;
 
-	dist = width / (2.0 * sin (theta / 2.0));
+	dist = 0.5 * width / sin (0.5 * theta);
 	if (dist < 0.0)
 		dist = -dist;
 
@@ -148,7 +148,7 @@ gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y)
 	best = 1.0e36;
 	intersections = 0;
 
-	for (i = 0, p = poly; i < (num_points - 1); i++, p += 2) {
+	for (i = num_points, p = poly; i > 1; i--, p += 2) {
 		double px, py, dist;
 
 		/* Compute the point on the current edge closest to the point and update the
@@ -202,7 +202,7 @@ gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y)
 			b2 = y - m2 * x;
 
 			px = (b2 - b1) / (m1 - m2);
-			y = m1 * px + b1;
+			py = m1 * px + b1;
 
 			if (p[0] > p[2]) {
 				if (px > p[0]) {
