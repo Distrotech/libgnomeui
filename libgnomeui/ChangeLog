@@ -1,3 +1,8 @@
+2000-07-07  Chema Celorio  <chema@celorio.com>
+
+	* gnome_segv.c: add a "DEBUG" button to the segv dialog if the program
+	pointed by the enviromental variable "GNOME_DEBUGGER" is found.
+
 2000-07-03  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-druid-page-standard.c
