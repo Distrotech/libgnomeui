@@ -189,27 +189,28 @@ libgnomeui_constructor (GType type, guint n_construct_properties,
 
         pclass = GNOME_PROGRAM_CLASS(g_type_class_peek(type));
 
-        gnome_program_install_property(pclass,
-                                       libgnomeui_get_property,
-                                       libgnomeui_set_property,
-                                       g_param_spec_boolean("show_crash_dialog", NULL, NULL,
-                                                            TRUE,
-                                                            (G_PARAM_READABLE | G_PARAM_WRITABLE |
-                                                             G_PARAM_CONSTRUCT_ONLY)));
-        gnome_program_install_property(pclass,
-                                       libgnomeui_get_property,
-                                       libgnomeui_set_property,
-                                       g_param_spec_string("display", NULL, NULL,
-                                                           NULL,
-                                                           (G_PARAM_READABLE | G_PARAM_WRITABLE |
-                                                            G_PARAM_CONSTRUCT_ONLY)));
-        gnome_program_install_property(pclass,
-                                       libgnomeui_get_property,
-                                       libgnomeui_set_property,
-                                       g_param_spec_string("default_icon", NULL, NULL,
-                                                           NULL,
-                                                           (G_PARAM_READABLE | G_PARAM_WRITABLE |
-                                                            G_PARAM_CONSTRUCT_ONLY)));
+        gnome_program_install_property (
+                pclass,
+                libgnomeui_get_property,
+                libgnomeui_set_property,
+                g_param_spec_boolean (LIBGNOMEUI_PARAM_CRASH_DIALOG, NULL, NULL,
+                                      TRUE, (G_PARAM_READABLE | G_PARAM_WRITABLE |
+                                             G_PARAM_CONSTRUCT_ONLY)));
+        gnome_program_install_property (
+                pclass,
+                libgnomeui_get_property,
+                libgnomeui_set_property,
+                g_param_spec_string (LIBGNOMEUI_PARAM_DISPLAY, NULL, NULL, NULL,
+                                     (G_PARAM_READABLE | G_PARAM_WRITABLE |
+                                      G_PARAM_CONSTRUCT_ONLY)));
+
+        gnome_program_install_property (
+                pclass,
+                libgnomeui_get_property,
+                libgnomeui_set_property,
+                g_param_spec_string (LIBGNOMEUI_PARAM_DEFAULT_ICON, NULL, NULL, NULL,
+                                     (G_PARAM_READABLE | G_PARAM_WRITABLE |
+                                      G_PARAM_CONSTRUCT_ONLY)));
 }
 
 static void
