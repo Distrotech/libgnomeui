@@ -684,6 +684,8 @@ static GtkWidget *book_create (GnomeMDI *mdi)
 
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(us), mdi->tab_pos);
 	
+	gtk_widget_show(us);
+
 	gnome_app_set_contents(mdi->active_window, us);
 	
 	gtk_widget_add_events(us, GDK_BUTTON1_MOTION_MASK);
@@ -696,8 +698,6 @@ static GtkWidget *book_create (GnomeMDI *mdi)
 					   GTK_SIGNAL_FUNC(book_button_release), mdi);
 
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(us), TRUE);
-	
-	gtk_widget_show(us);
 	
 	return us;
 }
@@ -1065,18 +1065,21 @@ static void set_active_view (GnomeMDI *mdi, GtkWidget *view)
 	g_message("setting active_view to %08lx\n", view);
 #endif
 
-	if(view == mdi->active_view)
-		return;
-	
 	old_child = mdi->active_child;
 	old_view = mdi->active_view;
 
+	if(!view) {
+		mdi->active_view = NULL;
+		mdi->active_child = NULL;
+	}
+
+	if(view == old_view)
+		return;
+	
 	if(view) {
 		mdi->active_child = gnome_mdi_get_child_from_view(view);
 		mdi->active_window = gnome_mdi_get_app_from_view(view);
 	}
-	else
-		mdi->active_child = NULL;
 
 	mdi->active_view = view;
 
@@ -1325,7 +1328,7 @@ gint gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view, gint force)
 	gtk_container_remove(GTK_CONTAINER(parent), view);
 
 	if(view == mdi->active_view)
-		mdi->active_view = NULL;
+	   mdi->active_view = NULL;
 
 	if( (mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL) ) {
 		window->contents = NULL;
@@ -1340,17 +1343,20 @@ gint gnome_mdi_remove_view (GnomeMDI *mdi, GtkWidget *view, gint force)
 		else
 			app_set_view(mdi, window, NULL);
 	}
-	else if( (mdi->mode == GNOME_MDI_NOTEBOOK) &&
-			 (GTK_NOTEBOOK(parent)->cur_page == NULL) ) {
-		if(g_list_length(mdi->windows) > 1) {
-			/* if this is NOT the last toplevel, destroy it! */
-			mdi->windows = g_list_remove(mdi->windows, window);
-			gtk_widget_destroy(GTK_WIDGET(window));
-			if(mdi->active_window && view == mdi->active_view)
-				mdi->active_view = gnome_mdi_get_view_from_window(mdi, mdi->active_window);
+	else if(mdi->mode == GNOME_MDI_NOTEBOOK) {
+		if(GTK_NOTEBOOK(parent)->cur_page == NULL) {
+			if(g_list_length(mdi->windows) > 1) {
+				/* if this is NOT the last toplevel, destroy it! */
+				mdi->windows = g_list_remove(mdi->windows, window);
+				gtk_widget_destroy(GTK_WIDGET(window));
+				if(mdi->active_window && view == mdi->active_view)
+					mdi->active_view = gnome_mdi_get_view_from_window(mdi, mdi->active_window);
+			}
+			else
+				app_set_view(mdi, window, NULL);
 		}
 		else
-			app_set_view(mdi, window, NULL);
+			app_set_view(mdi, window, gtk_notebook_get_nth_page(GTK_NOTEBOOK(parent), gtk_notebook_get_current_page(GTK_NOTEBOOK(parent))));
 	}
 
 	/* remove this view from the child's view list unless in MODAL mode */
@@ -1691,10 +1697,10 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 		else if(mode == GNOME_MDI_NOTEBOOK)
 			gtk_signal_connect(GTK_OBJECT(mdi->active_window), "delete_event",
 							   GTK_SIGNAL_FUNC(app_close_book), mdi);
-		
+
 		mdi->windows = g_list_append(NULL, mdi->active_window);
 
-		if(mode == GNOME_MDI_NOTEBOOK)
+		if(mode == GNOME_MDI_NOTEBOOK) 
 			book_create(mdi);
 	}
 

@@ -1,3 +1,11 @@
+1999-08-31  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (book_create): show notebook before adding it to
+	the gnome-app in case the former will be mapped.
+	(set_active_view): fixed a bug that caused active_child not to get
+	properly set on rare occasions.
+	(gnome_mdi_remove_view): a fix similar to the above.
+
 1999-08-30  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-file-entry.c (gnome_file_entry_get_full_path): Use
