@@ -67,7 +67,7 @@ static GnomeUIInfo     *copy_ui_info_tree        (GnomeUIInfo *);
 static void             free_ui_info_tree        (GnomeUIInfo *);
 static gint             count_ui_info_items      (GnomeUIInfo *);
 
-#define DND_DATA_TYPE            "mdi/bookpage"
+#define DND_TYPE            "mdi/bookpage"
 
 /* key for stuff that we'll assign to our GnomeApps */
 #define TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
@@ -80,10 +80,6 @@ static gint             count_ui_info_items      (GnomeUIInfo *);
 /* hmmm... is it OK to have these two widgets (used for notebook page DnD)
    as global vars? */
 static GtkWidget *drag_page = NULL, *drag_page_ok = NULL;
-
-/* accepted DND types for the Notebook */
-static char *possible_drag_types[] = { DND_DATA_TYPE };
-static char *accepted_drop_types[] = { DND_DATA_TYPE };
 
 enum {
   CREATE_MENUS,
@@ -258,13 +254,14 @@ static void gnome_mdi_destroy(GtkObject *object) {
 
   g_free (mdi->appname);
   g_free (mdi->title);
+  g_free (mdi->dnd_type);
 
   if(GTK_OBJECT_CLASS(parent_class)->destroy)
     (* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }
 
 static void gnome_mdi_init (GnomeMDI *mdi) {
-  GTK_WIDGET_SET_FLAGS (mdi, GTK_BASIC);
+  gchar hostname[128] = "\0", pid[12];
 
   mdi->flags = 0;
 
@@ -282,6 +279,10 @@ static void gnome_mdi_init (GnomeMDI *mdi) {
   mdi->child_menu_path = NULL;
   mdi->child_menu_label = NULL;
   mdi->child_list_path = NULL;
+
+  gethostname(hostname, 127);
+  sprintf(pid, "%d", getpid());
+  mdi->dnd_type = g_copy_strings(DND_TYPE, hostname, pid, NULL);
 }
 
 GtkObject *gnome_mdi_new(gchar *appname, gchar *title) {
@@ -537,13 +538,13 @@ static GtkWidget *book_create(GnomeMDI *mdi) {
 			GTK_SIGNAL_FUNC(rootwin_drop), mdi);
     
     gtk_widget_realize (rw);
-    gtk_widget_dnd_drop_set (rw, TRUE, accepted_drop_types, 1, FALSE);
+    gtk_widget_dnd_drop_set (rw, TRUE, &mdi->dnd_type, 1, FALSE);
     gtk_widget_show (rw);
     mdi->root_window = GNOME_ROOTWIN (rw);
   }
 
-  gtk_widget_dnd_drop_set (us, TRUE, accepted_drop_types, 1, FALSE);
-  gtk_widget_dnd_drag_set (us, TRUE, possible_drag_types, 1);
+  gtk_widget_dnd_drop_set (us, TRUE, &mdi->dnd_type, 1, FALSE);
+  gtk_widget_dnd_drag_set (us, TRUE, &mdi->dnd_type, 1);
 
   gtk_widget_show(us);
 
@@ -625,7 +626,7 @@ static void book_drop(GtkNotebook *book, GdkEvent *event, GnomeMDI *mdi) {
   GtkNotebook *old_book;
   GnomeApp *app;
 
-  if(strcmp(event->dropdataavailable.data_type, DND_DATA_TYPE) != 0)
+  if(strcmp(event->dropdataavailable.data_type, mdi->dnd_type) != 0)
     return;
 
 #if 0
@@ -657,7 +658,7 @@ static void rootwin_drop(GtkWidget *rw, GdkEvent *event, GnomeMDI *mdi) {
   GtkWidget *view, *new_book;
   GtkNotebook *old_book;
 
-  if(strcmp(event->dropdataavailable.data_type, DND_DATA_TYPE) != 0)
+  if(strcmp(event->dropdataavailable.data_type, mdi->dnd_type) != 0)
     return;
 
 #if 0

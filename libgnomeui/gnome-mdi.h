@@ -58,6 +58,7 @@ struct _GnomeMDI {
   gint32 flags;
 
   gchar *appname, *title;
+  gchar *dnd_type;
 
   /* probably only one of these would do, but... redundancy rules ;) */
   GnomeMDIChild *active_child;

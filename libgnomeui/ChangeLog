@@ -1,3 +1,9 @@
+1998-06-29  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: dnd types now differ for each process using MDI.
+	this prevents false impression that dragging a notebook page from
+	MDI of one process to MDI of another will work.
+
 1998-06-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-entry.c: Remove the prefix_list get/set stuff.
