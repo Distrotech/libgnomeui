@@ -1,3 +1,7 @@
+1999-06-13  Robert Brady  <rwb197@ecs.soton.ac.uk>
+
+	* gnome-calculator.c (c_fact): fix factorial bug (for real this time).
+
 Sun Jun 13 01:54:58 1999  Raph Levien  <raph@gimp.org>
 
 	* gnome-canvas-polygon.c (gnome_canvas_polygon_[sg]et_arg): added

@@ -770,12 +770,11 @@ c_fact(gdouble arg1)
 		errno=ERANGE;
 		return 0;
 	}
-	i = (int)arg1;
-        if(fabs(arg1-i)<1e-9) {
+	i = (int)(arg1+0.5);
+	if((fabs(arg1-i))>1e-9) {
 		errno=ERANGE;
 		return 0;
 	}
-        i = (int)(arg1+0.5);
 	for(r=1;i>0;i--)
 		r*=i;
 
