@@ -1,3 +1,12 @@
+1998-12-23  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_remove_menu[s|range]):
+	if the item widget is a GtkAccelLabel, set its accel_widget
+	to NULL, thus unreferencing the item properly.
+	(gnome_app_find_menu_pos): trash the outdated checking for
+	gtkhbox since gtkpixmapmenuitem replaced it.
+	* gnome-mdi.c (app_set_view): set accel_widget to NULL.
+
 Mon Dec 21 01:27:23 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-entry.c: accept double click on the icon list for

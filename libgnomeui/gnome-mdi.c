@@ -866,13 +866,18 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 	if(items > 0 && parent) {
 		GtkWidget *widget;
 
-		/* remove items */
+		/* remove items; should be kept in sync with gnome_app_remove_menus! */
 		children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
 		while(children && items > 0) {
 			widget = GTK_WIDGET(children->data);
 			children = children->next;
+
+			/* if this item contains a gtkaccellabel, we have to set its
+			   accel_widget to NULL so that the item get unrefeds. */
+			if(GTK_IS_ACCEL_LABEL(GTK_BIN(widget)->child))
+				gtk_accel_label_set_accel_widget(GTK_ACCEL_LABEL(GTK_BIN(widget)->child), NULL);
+
 			gtk_container_remove(GTK_CONTAINER(parent), widget);
-			gtk_widget_destroy(widget);
 			items--;
 		}
 	}

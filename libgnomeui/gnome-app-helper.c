@@ -1336,24 +1336,11 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
       label = NULL;
 		else if(!item->child)          /* this is a separator, right? */
       label = "<Separator>";
-		else if(GTK_IS_LABEL(item->child))  /* a simple item with a 
-						       label */
+		else if(GTK_IS_LABEL(item->child)) /* a simple item with a label */
 			label = GTK_LABEL (item->child)->label;
-		else if(GTK_IS_HBOX(item->child)) { /* an item with a hbox 
-						       (pixmap + label) */
-			hbox_children = gtk_container_children
-				(GTK_CONTAINER(item->child));
-			while( hbox_children && (label == NULL) ) {
-				if(GTK_IS_LABEL(hbox_children->data))
-					label = GTK_LABEL
-						(hbox_children->data)->label;
-
-				hbox_children = g_list_next(hbox_children);
-			}
-		}
 		else                  /* something that we just can't handle */
 			label = NULL;
-		
+
 		if( label && (path_len == strlen(label)) && (strncmp(path, label, path_len) == 0) ) {
 			if(name_end == NULL) {
 				*pos = p;
@@ -1411,6 +1398,11 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
 	while(children && items > 0) {
 		child = GTK_WIDGET(children->data);
 		children = children->next;
+    /* if this item contains a gtkaccellabel, we have to set its
+       accel_widget to NULL so that the item gets unrefed. */
+    if(GTK_IS_ACCEL_LABEL(GTK_BIN(child)->child))
+      gtk_accel_label_set_accel_widget(GTK_ACCEL_LABEL(GTK_BIN(child)->child), NULL);
+
 		gtk_container_remove(GTK_CONTAINER(parent), child);
 		items--;
 	}
@@ -1462,6 +1454,10 @@ gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items)
   while(children && items > 0) {
     child = GTK_WIDGET(children->data);
     children = children->next;
+    /* if this item contains a gtkaccellabel, we have to set its
+       accel_widget to NULL so that the item gets unrefed. */
+    if(GTK_IS_ACCEL_LABEL(GTK_BIN(child)->child))
+      gtk_accel_label_set_accel_widget(GTK_ACCEL_LABEL(GTK_BIN(child)->child), NULL);
     gtk_container_remove(GTK_CONTAINER(parent), child);
     items--;
   }
