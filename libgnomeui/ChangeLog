@@ -1,3 +1,8 @@
+Thu Jun 01 02:47:22 2000  George Lebl <jirka@5z.com>
+
+	* gnome-color-picker.[ch]: add accessors for attributes, and add
+	  GtkArg stuff
+
 2000-05-31  Jon K Hellan  <hellan@acm.org>
 
 	* gnome-messagebox.c (gnome_message_box_construct,

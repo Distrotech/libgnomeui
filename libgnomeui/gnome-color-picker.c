@@ -51,6 +51,16 @@
 #define CHECK_LIGHT (2.0 / 3.0)
 
 
+enum {
+	ARG_0,
+	ARG_DITHER,
+	ARG_USE_ALPHA,
+	ARG_TITLE,
+	ARG_RED,
+	ARG_GREEN,
+	ARG_BLUE,
+	ARG_ALPHA
+};
 
 enum {
 	COLOR_SET,
@@ -90,6 +100,12 @@ static void drag_data_received		(GtkWidget        *widget,
 					 guint             info,
 					 guint32           time,
 					 GnomeColorPicker *cpicker);
+static void gnome_color_picker_set_arg (GtkObject *object,
+					GtkArg *arg,
+					guint arg_id);
+static void gnome_color_picker_get_arg (GtkObject *object,
+					GtkArg *arg,
+					guint arg_id);
 
 
 static guint color_picker_signals[LAST_SIGNAL] = { 0 };
@@ -147,7 +163,38 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 
 	gtk_object_class_add_signals (object_class, color_picker_signals, LAST_SIGNAL);
 
+	gtk_object_add_arg_type("GnomeColorPicker::dither",
+				GTK_TYPE_BOOL,
+				GTK_ARG_READWRITE,
+				ARG_DITHER);
+	gtk_object_add_arg_type("GnomeColorPicker::use_alpha",
+				GTK_TYPE_BOOL,
+				GTK_ARG_READWRITE,
+				ARG_USE_ALPHA);
+	gtk_object_add_arg_type("GnomeColorPicker::title",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READWRITE,
+				ARG_TITLE);
+	gtk_object_add_arg_type("GnomeColorPicker::red",
+				GTK_TYPE_UINT,
+				GTK_ARG_READWRITE,
+				ARG_RED);
+	gtk_object_add_arg_type("GnomeColorPicker::green",
+				GTK_TYPE_UINT,
+				GTK_ARG_READWRITE,
+				ARG_GREEN);
+	gtk_object_add_arg_type("GnomeColorPicker::blue",
+				GTK_TYPE_UINT,
+				GTK_ARG_READWRITE,
+				ARG_BLUE);
+	gtk_object_add_arg_type("GnomeColorPicker::alpha",
+				GTK_TYPE_UINT,
+				GTK_ARG_READWRITE,
+				ARG_ALPHA);
+
 	object_class->destroy = gnome_color_picker_destroy;
+	object_class->get_arg = gnome_color_picker_get_arg;
+	object_class->set_arg = gnome_color_picker_set_arg;
 	widget_class->state_changed = gnome_color_picker_state_changed;
 	widget_class->realize = gnome_color_picker_realize;
 	widget_class->style_set = gnome_color_picker_style_set;
@@ -334,7 +381,6 @@ drag_data_received (GtkWidget        *widget,
 		    GnomeColorPicker *cpicker)
 {
 	guint16 *dropped;
-	gushort alpha;
 
 	g_return_if_fail (cpicker != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cpicker));
@@ -817,6 +863,27 @@ gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither)
 
 
 /**
+ * gnome_color_picker_get_dither
+ * @cp: Pointer to GNOME color picker widget.
+ *
+ * Description:
+ * Does the picker dither the color sample or just paint
+ * a solid rectangle.
+ *
+ * Returns: %TRUE if color sample is dithered, %FALSE if not.
+ */
+
+gboolean
+gnome_color_picker_get_dither (GnomeColorPicker *cp)
+{
+	g_return_val_if_fail (cp != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_COLOR_PICKER (cp), FALSE);
+
+	return cp->dither ? TRUE : FALSE;
+}
+
+
+/**
  * gnome_color_picker_set_use_alpha
  * @cp: Pointer to GNOME color picker widget.
  * @use_alpha: %TRUE if color sample should use alpha channel, %FALSE if not.
@@ -835,6 +902,24 @@ gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha)
 
 	render (cp);
 	gtk_widget_draw (cp->drawing_area, NULL);
+}
+
+/**
+ * gnome_color_picker_get_use_alpha
+ * @cp: Pointer to GNOME color picker widget.
+ *
+ * Description:  Does the picker use the alpha channel?
+ *
+ * Returns:  %TRUE if color sample uses alpha channel, %FALSE if not.
+ */
+
+gboolean
+gnome_color_picker_get_use_alpha (GnomeColorPicker *cp)
+{
+	g_return_val_if_fail (cp != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_COLOR_PICKER (cp), FALSE);
+
+	return cp->use_alpha ? TRUE : FALSE;
 }
 
 
@@ -863,6 +948,25 @@ gnome_color_picker_set_title (GnomeColorPicker *cp, const gchar *title)
 		gtk_window_set_title (GTK_WINDOW (cp->cs_dialog), cp->title);
 }
 
+/**
+ * gnome_color_picker_get_title
+ * @cp: Pointer to GNOME color picker widget.
+ *
+ * Description:
+ * Gets the title of the color selection dialog.
+ *
+ * Returns:  An internal string, do not free the return value
+ */
+
+const char *
+gnome_color_picker_get_title (GnomeColorPicker *cp)
+{
+	g_return_val_if_fail (cp != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_COLOR_PICKER (cp), NULL);
+
+	return cp->title;
+}
+
 static void
 gnome_color_picker_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpointer func_data, GtkArg *args)
 {
@@ -875,4 +979,91 @@ gnome_color_picker_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoi
 		   GTK_VALUE_UINT (args[2]),
 		   GTK_VALUE_UINT (args[3]),
 		   func_data);
+}
+
+static void
+gnome_color_picker_set_arg (GtkObject *object,
+			    GtkArg *arg,
+			    guint arg_id)
+{
+	GnomeColorPicker *self;
+	gushort r, g, b, a;
+
+	self = GNOME_COLOR_PICKER (object);
+
+	switch (arg_id) {
+	case ARG_DITHER:
+		gnome_color_picker_set_dither(self, GTK_VALUE_BOOL(*arg));
+		break;
+	case ARG_USE_ALPHA:
+		gnome_color_picker_set_use_alpha(self, GTK_VALUE_BOOL(*arg));
+		break;
+	case ARG_TITLE:
+		gnome_color_picker_set_title(self, GTK_VALUE_POINTER(*arg));
+		break;
+	case ARG_RED:
+		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
+		gnome_color_picker_set_i16(self,
+					   GTK_VALUE_UINT(*arg), g, b, a);
+		break;
+	case ARG_GREEN:
+		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
+		gnome_color_picker_set_i16(self,
+					   r, GTK_VALUE_UINT(*arg), b, a);
+		break;
+	case ARG_BLUE:
+		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
+		gnome_color_picker_set_i16(self,
+					   r, g, GTK_VALUE_UINT(*arg), a);
+		break;
+	case ARG_ALPHA:
+		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
+		gnome_color_picker_set_i16(self,
+					   r, g, b, GTK_VALUE_UINT(*arg));
+		break;
+	default:
+		break;
+	}
+}
+
+static void
+gnome_color_picker_get_arg (GtkObject *object,
+			    GtkArg *arg,
+			    guint arg_id)
+{
+	GnomeColorPicker *self;
+	gushort val;
+
+	self = GNOME_COLOR_PICKER (object);
+
+	switch (arg_id) {
+	case ARG_DITHER:
+		GTK_VALUE_BOOL(*arg) = gnome_color_picker_get_dither(self);
+		break;
+	case ARG_USE_ALPHA:
+		GTK_VALUE_BOOL(*arg) = gnome_color_picker_get_use_alpha(self);
+		break;
+	case ARG_TITLE:
+		GTK_VALUE_POINTER(*arg) =
+			(char *)gnome_color_picker_get_title(self);
+		break;
+	case ARG_RED:
+		gnome_color_picker_get_i16(self, &val, NULL, NULL, NULL);
+		GTK_VALUE_UINT(*arg) = val;
+		break;
+	case ARG_GREEN:
+		gnome_color_picker_get_i16(self, NULL, &val, NULL, NULL);
+		GTK_VALUE_UINT(*arg) = val;
+		break;
+	case ARG_BLUE:
+		gnome_color_picker_get_i16(self, NULL, NULL, &val, NULL);
+		GTK_VALUE_UINT(*arg) = val;
+		break;
+	case ARG_ALPHA:
+		gnome_color_picker_get_i16(self, NULL, NULL, NULL, &val);
+		GTK_VALUE_UINT(*arg) = val;
+		break;
+	default:
+		break;
+	}
 }

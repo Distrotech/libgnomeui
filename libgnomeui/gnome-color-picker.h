@@ -58,6 +58,7 @@ typedef struct _GnomeColorPickerClass GnomeColorPickerClass;
 struct _GnomeColorPicker {
 	GtkButton button;
 
+	/*< private >*/
 	GdkPixbuf *pixbuf;	/* Pixbuf for rendering dithered sample */
 	GdkGC *gc;		/* GC for drawing */
 
@@ -75,9 +76,10 @@ struct _GnomeColorPicker {
 struct _GnomeColorPickerClass {
 	GtkButtonClass parent_class;
 
-	/* Signal that is emitted when the color is set.  The rgba values are in the [0, 65535]
-	 * range.  If you need a different color format, use the provided functions to get the
-	 * values from the color picker.
+	/* Signal that is emitted when the color is set.  The rgba values
+	 * are in the [0, 65535] range.  If you need a different color
+	 * format, use the provided functions to get the values from the
+	 * color picker.
 	 */
         /*  (should be gushort, but Gtk can't marshal that.) */
 	void (* color_set) (GnomeColorPicker *cp, guint r, guint g, guint b, guint a);
@@ -104,12 +106,15 @@ void gnome_color_picker_get_i16 (GnomeColorPicker *cp, gushort *r, gushort *g, g
 
 /* Sets whether the picker should dither the color sample or just paint a solid rectangle */
 void gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither);
+gboolean gnome_color_picker_get_dither (GnomeColorPicker *cp);
 
 /* Sets whether the picker should use the alpha channel or not */
 void gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha);
+gboolean gnome_color_picker_get_use_alpha (GnomeColorPicker *cp);
 
 /* Sets the title for the color selection dialog */
 void gnome_color_picker_set_title (GnomeColorPicker *cp, const gchar *title);
+const char * gnome_color_picker_get_title (GnomeColorPicker *cp);
 
 
 END_GNOME_DECLS
