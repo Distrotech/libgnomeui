@@ -1,3 +1,8 @@
+2002-01-04  Laszlo Peter <laca@ireland.sun.com>
+
+	* doc/reference/Makefile.am: pass CFLAGS and LDFLAGS to the gtk-doc
+	scan program
+
 2002-01-04  Duarte Loreto <happyguy_pt@hotmail.com>
 
         * configure.in: Added Portuguese (pt) to ALL_LINGUAS
