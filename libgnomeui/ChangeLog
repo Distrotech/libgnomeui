@@ -1,3 +1,8 @@
+Wed Jan 06 16:40:29 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-app-helper.h: added some defines to make adding
+	  standard items easier
+
 1999-01-06  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-app.c (gnome_app_set_statusbar): Changed beveling.  Now

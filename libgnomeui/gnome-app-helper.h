@@ -183,6 +183,85 @@ typedef struct {
 					{ GNOME_APP_UI_RADIOITEMS, label, tooltip, callback,	\
 					  user_data, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,	\
 					  0, (GdkModifierType) 0, NULL }
+					  
+/* Stock menu item macros for some common menu items */
+#define GNOMEUIINFO_MENU_EXIT_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("E_xit"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT,        \
+          GNOME_KEY_NAME_EXIT, GNOME_KEY_MOD_EXIT, NULL }
+#define GNOMEUIINFO_MENU_CLOSE_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("_Close"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,        \
+          GNOME_KEY_NAME_CLOSE, GNOME_KEY_MOD_CLOSE, NULL }
+#define GNOMEUIINFO_MENU_CUT_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("C_ut"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,        \
+          GNOME_KEY_NAME_CUT, GNOME_KEY_MOD_CUT, NULL }
+#define GNOMEUIINFO_MENU_COPY_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("_Copy"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,        \
+          GNOME_KEY_NAME_COPY, GNOME_KEY_MOD_COPY, NULL }
+#define GNOMEUIINFO_MENU_PASTE_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("_Paste"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,        \
+          GNOME_KEY_NAME_PASTE, GNOME_KEY_MOD_PASTE, NULL }
+#define GNOMEUIINFO_MENU_CLEAR_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("C_lear"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLEAR,        \
+          GNOME_KEY_NAME_CLEAR, GNOME_KEY_MOD_CLEAR, NULL }
+#define GNOMEUIINFO_MENU_UNDO_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("_Undo"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UNDO,        \
+          GNOME_KEY_NAME_UNDO, GNOME_KEY_MOD_UNDO, NULL }
+#define GNOMEUIINFO_MENU_REDO_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("_Redo"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,        \
+          GNOME_KEY_NAME_REDO, GNOME_KEY_MOD_REDO, NULL }
+#define GNOMEUIINFO_MENU_NEW_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("_New"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,        \
+          GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL }
+#define GNOMEUIINFO_MENU_SAVE_ITEM(cb, data)                    \ 
+        { GNOME_APP_UI_ITEM, N_("_Save"), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,        \
+          GNOME_KEY_NAME_SAVE, GNOME_KEY_MOD_SAVE, NULL }
+#define GNOMEUIINFO_MENU_SAVE_AS_ITEM(cb, data)                       \ 
+        { GNOME_APP_UI_ITEM, N_("Save _As..."), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS,           \
+          GNOME_KEY_NAME_SAVE_AS, GNOME_KEY_MOD_SAVE_AS, NULL }
+#define GNOMEUIINFO_MENU_OPEN_ITEM(cb, data)                       \ 
+        { GNOME_APP_UI_ITEM, N_("_Open..."), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,           \
+          GNOME_KEY_NAME_OPEN, GNOME_KEY_MOD_OPEN, NULL }
+#define GNOMEUIINFO_MENU_PREFERENCES_ITEM(cb, data)                       \ 
+        { GNOME_APP_UI_ITEM, N_("Preferences..."), NULL, cb, data, NULL,  \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREFERENCES,           \
+          0,  (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_PROPERTIES_ITEM(cb, data)                      \ 
+        { GNOME_APP_UI_ITEM, N_("Properties..."), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROPERTIES,          \
+          0,  (GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_ABOUT_ITEM(cb, data)                       \ 
+        { GNOME_APP_UI_ITEM, N_("_About..."), NULL, cb, data, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,           \
+          0,  (GdkModifierType) 0, NULL }
+	  
+/* Some standard menus */
+#define GNOMEUIINFO_MENU_FILE_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("_File"), NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_EDIT_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("_Edit"), NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_VIEW_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("_View"), NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_WINDOWS_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("_Windows"), NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_HELP_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("_Help"), NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 
 
 /* Types useful to language bindings */
