@@ -23,6 +23,7 @@
 #include <gnome.h>
 
 #include "gnome-file-selector.h"
+#include "gnome-icon-selector.h"
 
 int
 main (int argc, char **argv)
@@ -32,6 +33,7 @@ main (int argc, char **argv)
     GtkWidget *frame1, *frame2;
     GtkWidget *fselector, *iselector;
     GtkWidget *selector;
+    gchar *pixmap_dir;
 
     gnome_program_init ("selector_demo", "1.0", argc, argv,
 			GNOMEUI_INIT, NULL);
@@ -61,6 +63,13 @@ main (int argc, char **argv)
 			GNOME_PAD);
 
     iselector = gnome_icon_selector_new ("test2", NULL);
+
+    pixmap_dir = gnome_unconditional_datadir_file ("pixmaps");
+  
+    gnome_selector_add_directory (GNOME_SELECTOR (iselector), pixmap_dir);
+    gnome_selector_update_file_list (GNOME_SELECTOR (iselector));
+
+    g_free(pixmap_dir);
 
     gtk_container_add (GTK_CONTAINER (frame2), iselector);
 

@@ -66,6 +66,7 @@ struct _GnomeSelectorClass {
 	void (*changed) (GnomeSelector *selector);
 	void (*browse) (GnomeSelector *selector);
 
+	void (*update_filelist) (GnomeSelector *selector);
 	gboolean (*check_filename) (GnomeSelector *selector,
 				    const gchar *filename);
 };
@@ -92,6 +93,13 @@ gboolean     gnome_selector_check_filename   (GnomeSelector *selector,
 /* set the filename to something, returns TRUE on success. */
 gboolean     gnome_selector_set_filename     (GnomeSelector *selector,
                                               const gchar *filename);
+
+/* Add all files from this directory. */
+void         gnome_selector_add_directory    (GnomeSelector *selector,
+					      const gchar *directory);
+
+/* Update file list. */
+void         gnome_selector_update_file_list (GnomeSelector *selector);
 
 /* get/set the dialog title. */
 const gchar *gnome_selector_get_dialog_title (GnomeSelector *selector);

@@ -34,6 +34,9 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkbutton.h>
@@ -67,6 +70,8 @@ enum {
 
 enum {
 	BROWSE_SIGNAL,
+	CHECK_FILENAME,
+	UPDATE_FILELIST,
 	LAST_SIGNAL
 };
 
@@ -108,14 +113,32 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
 	gnome_selector_signals [BROWSE_SIGNAL] =
-		gtk_signal_new("browse",
-			       GTK_RUN_LAST,
-			       GTK_CLASS_TYPE (object_class),
-			       GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-						  browse),
-			       gtk_signal_default_marshaller,
-			       GTK_TYPE_NONE,
-			       0);
+		gtk_signal_new ("browse",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   browse),
+				gtk_signal_default_marshaller,
+				GTK_TYPE_NONE,
+				0);
+	gnome_selector_signals [UPDATE_FILELIST] =
+		gtk_signal_new ("update_filelist",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   update_filelist),
+				gtk_signal_default_marshaller,
+				GTK_TYPE_NONE,
+				0);
+	gnome_selector_signals [CHECK_FILENAME] =
+		gtk_signal_new ("check_filename",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   check_filename),
+				gtk_marshal_BOOL__POINTER,
+				GTK_TYPE_BOOL, 1,
+				GTK_TYPE_STRING);
 	gtk_object_class_add_signals (object_class,
 				      gnome_selector_signals,
 				      LAST_SIGNAL);
@@ -221,35 +244,38 @@ gnome_selector_construct (GnomeSelector *selector,
 	priv->is_popup = is_popup;
 
 	if (priv->is_popup) {
-		priv->entry_hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+		priv->box = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 		priv->browse_button = gtk_button_new_with_label
 			(_("Browse..."));
 
 		gtk_signal_connect (GTK_OBJECT (priv->browse_button),
 				    "clicked", browse_signal, selector);
 
-		gtk_box_pack_start (GTK_BOX (priv->entry_hbox),
+		gtk_box_pack_start (GTK_BOX (priv->box),
 				    priv->gentry, TRUE, TRUE, 0);
-		gtk_box_pack_start (GTK_BOX (priv->entry_hbox),
+		gtk_box_pack_start (GTK_BOX (priv->box),
 				    priv->browse_button, FALSE, FALSE, 0);
 
-		gtk_widget_show_all (priv->entry_hbox);
+		gtk_widget_show_all (priv->box);
 
-		gtk_box_pack_start (GTK_BOX (selector),
-				    priv->entry_hbox,
+		gtk_box_pack_start (GTK_BOX (selector), priv->box,
 				    FALSE, FALSE, 0);
 	} else {
-		gtk_widget_show (priv->gentry);
+		priv->box = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 
-		gtk_box_pack_start (GTK_BOX (selector),
-				    priv->gentry,
-				    FALSE, FALSE, GNOME_PAD_SMALL);
-
-		gtk_box_pack_start (GTK_BOX (selector),
+		gtk_box_pack_start (GTK_BOX (priv->box),
 				    priv->selector_widget,
 				    TRUE, TRUE, GNOME_PAD_SMALL);
 
-		gtk_widget_show (priv->selector_widget);
+		gtk_widget_show_all (priv->box);
+
+		gtk_widget_show (priv->gentry);
+
+		gtk_box_pack_start (GTK_BOX (selector), priv->gentry,
+				    FALSE, FALSE, GNOME_PAD_SMALL);
+
+		gtk_box_pack_start (GTK_BOX (selector), priv->box,
+				    TRUE, TRUE, GNOME_PAD_SMALL);
 	}
 }
 
@@ -357,3 +383,93 @@ gnome_selector_set_dialog_title (GnomeSelector *selector,
 	selector->_priv->dialog_title = g_strdup (dialog_title);
 }
 
+
+/**
+ * gnome_selector_add_directory
+ * @selector: Pointer to GnomeSelector object.
+ * @directory: The directory to add.
+ *
+ * Description: Adds @directory to the file list.
+ *
+ * Returns:
+ */
+void
+gnome_selector_add_directory (GnomeSelector *selector,
+			      const gchar *directory)
+{
+	struct dirent *de;
+	DIR *dp;
+
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+	g_return_if_fail (directory != NULL);
+
+	if (!g_file_test (directory, G_FILE_TEST_ISDIR)) {
+		g_warning ("GnomeSelector: '%s' is not a directory",
+			   directory);
+		return;
+	}
+
+	dp = opendir (directory);
+
+	if (dp == NULL) {
+		g_warning ("GnomeSelector: couldn't open directory '%s'",
+			   directory);
+		return;
+	}
+
+	while ((de = readdir (dp)) != NULL) {
+		gchar *full_path = g_concat_dir_and_file
+			(directory, de->d_name);
+		gboolean file_ok = FALSE;
+
+#ifdef GNOME_ENABLE_DEBUG
+		g_print ("File: %s\n", de->d_name);
+#endif
+		if (*(de->d_name) == '.') continue; /* skip dotfiles */
+
+		if (!g_file_test (full_path, G_FILE_TEST_ISFILE))
+			continue;
+
+		gtk_signal_emit (GTK_OBJECT (selector),
+				 gnome_selector_signals [CHECK_FILENAME],
+				 full_path, &file_ok);
+
+		if (!file_ok)
+			continue;
+
+#ifdef GNOME_ENABLE_DEBUG
+		g_print ("Full path: %s\n", full_path);
+#endif
+
+		selector->_priv->file_list = g_slist_prepend
+			(selector->_priv->file_list, g_strdup (full_path));
+
+		g_free (full_path);
+	}
+
+	closedir (dp);
+
+	selector->_priv->dir_list = g_slist_prepend
+		(selector->_priv->dir_list, g_strdup (directory));
+}
+
+
+/**
+ * gnome_selector_update_file_list
+ * @selector: Pointer to GnomeSelector object.
+ *
+ * Description: Updates the file list.
+ *
+ * Returns:
+ */
+void
+gnome_selector_update_file_list (GnomeSelector *selector)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [UPDATE_FILELIST]);
+
+}

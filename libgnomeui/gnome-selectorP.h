@@ -41,10 +41,13 @@ struct _GnomeSelectorPrivate {
 
 	gchar       *dialog_title;
 
+	GSList      *dir_list;
+	GSList      *file_list;
+
 	GtkWidget   *selector_widget;
 	guint32      is_popup : 1;
 
-	GtkWidget   *entry_hbox;
+	GtkWidget   *box;
 	GtkWidget   *browse_button;
 
 	guint32      changed : 1;
