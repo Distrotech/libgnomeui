@@ -1087,6 +1087,9 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 	if (gil->selection_mode != GTK_SELECTION_MULTIPLE)
 		return FALSE;
 
+	if (gil->sel_rect)     /* Already selecting */
+	        return FALSE;
+
 	gnome_canvas_window_to_world (
 		GNOME_CANVAS (gil),
 		event->x, event->y, 

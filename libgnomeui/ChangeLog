@@ -1,3 +1,11 @@
+1998-10-16  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-icon-list.c (gil_button_press): If there's already a
+	gil->sel_rect (i.e. we are already rubberbanding) don't create a
+	second rubberband if the user clicks one of the other mouse
+	buttons. Clicking another button now ends the select due to the 
+	button release event.
+
 1998-10-15  Mark Galassi  <rosalia@cygnus.com>
 
 	* Makefile.am (gnome_headers): fixed a typo: a \ was missing after
