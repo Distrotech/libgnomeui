@@ -326,8 +326,30 @@ GtkWidget             *gnome_stock_or_ordinary_button (char *type);
 /* returns a GtkMenuItem with an stock icon and text */
 GtkWidget             *gnome_stock_menu_item       (char *type, char *text);
 
+
+/*
+ * Stock menu accelerators
+ */
+
+/* To customize the accelerators add a file ~/.gnome/GnomeStock, wich looks
+ * like that:
+ *
+ * [Accelerators]
+ * Menu_New=Shft+Ctl+N
+ * Menu_About=Ctl+A
+ * Menu_Save As=Ctl+Shft+S
+ * Menu_Quit=Alt+X
+ */
+
+/* this function returns the stock menu accelerators for the menu type in key
+ * and mod */
 gboolean	       gnome_stock_menu_accel      (char *type, guchar *key,
 						    guint8 *mod);
+
+/* apps can call this function at startup to add per app accelerator
+ * redefinitions. section should be something like "/filename/section/" with
+ * both the leading and trailing `/' */
+void                   gnome_stock_menu_accel_parse(char *section)
 
 END_GNOME_DECLS
 

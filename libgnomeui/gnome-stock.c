@@ -25,11 +25,13 @@
 #include <glib.h>
 #include <gdk/gdk.h>
 #include <gdk/gdktypes.h>
+#include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18n.h"
+#include "libgnome/gnome-config.h"
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
 
@@ -911,7 +913,7 @@ struct default_AccelEntry default_accel_hash[] = {
 	{GNOME_STOCK_MENU_NEW, {'N', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_OPEN, {'O', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_SAVE, {'S', GDK_CONTROL_MASK}},
-	{GNOME_STOCK_MENU_SAVE_AS, {'A', GDK_CONTROL_MASK}},
+	{GNOME_STOCK_MENU_SAVE_AS, {'S', GDK_SHIFT_MASK | GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_QUIT, {'Q', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_CUT, {'X', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_COPY, {'C', GDK_CONTROL_MASK}},
@@ -924,6 +926,113 @@ struct default_AccelEntry default_accel_hash[] = {
 	{NULL}
 };
 
+
+static char *
+accel_to_string(AccelEntry *entry)
+{
+	static char s[30];
+
+	s[0] = 0;
+	if (!entry->key) return NULL;
+	if (entry->mod & GDK_CONTROL_MASK)
+		strcat(s, "Ctl+");
+	if (entry->mod & GDK_MOD1_MASK)
+		strcat(s, "Alt+");
+	if (entry->mod & GDK_SHIFT_MASK)
+		strcat(s, "Shft+");
+	if (entry->mod & GDK_MOD2_MASK)
+		strcat(s, "Mod2+");
+	if (entry->mod & GDK_MOD3_MASK)
+		strcat(s, "Mod3+");
+	if (entry->mod & GDK_MOD4_MASK)
+		strcat(s, "Mod4+");
+	if (entry->mod & GDK_MOD5_MASK)
+		strcat(s, "Mod5+");
+	if ((entry->key >= 'a') && (entry->key <= 'z')) {
+		s[strlen(s) + 1] = 0;
+		s[strlen(s)] = entry->key - 'a' + 'A';
+	} else if ((entry->key >= 'A') && (entry->key <= 'Z')) {
+		s[strlen(s) + 1] = 0;
+		s[strlen(s)] = entry->key;
+	} else if ((entry->key >= GDK_F1) && (entry->key <= GDK_F9)) {
+		strcat(s, "F0");
+		s[strlen(s)] = entry->key - GDK_F1 + 1;
+	} else switch (entry->key) {
+		case GDK_F10:
+			strcat(s, "F10");
+			break;
+		default:
+			return NULL;
+			break;
+	}
+	return s;
+}
+
+
+static void
+accel_from_string(char *s, guchar *key, guint8 *mod)
+{
+	char *p, *p1;
+
+	*mod = 0;
+	*key = 0;
+	if (!s) return;
+	p = s;
+	do {
+		p1 = p;
+		while ((*p) && (*p != '+')) p++;
+		if (*p == '+') {
+			*p = 0;
+			if (0 == g_strcasecmp(p1, "Ctl"))
+				*mod |= GDK_CONTROL_MASK;
+			else if (0 == g_strcasecmp(p1, "Alt"))
+				*mod |= GDK_MOD1_MASK;
+			else if (0 == g_strcasecmp(p1, "Shft"))
+				*mod |= GDK_SHIFT_MASK;
+			else if (0 == g_strcasecmp(p1, "Mod2"))
+				*mod |= GDK_MOD2_MASK;
+			else if (0 == g_strcasecmp(p1, "Mod3"))
+				*mod |= GDK_MOD3_MASK;
+			else if (0 == g_strcasecmp(p1, "Mod4"))
+				*mod |= GDK_MOD4_MASK;
+			else if (0 == g_strcasecmp(p1, "Mod5"))
+				*mod |= GDK_MOD5_MASK;
+			*p = '+';
+			p++;
+		}
+	} while (*p);
+	if (p1[1] == 0) {
+		*key = *p1;
+	} else if ((*p1 == 'F') || (*p1 == 'f')) {
+		*key = atoi(p1 + 1);
+		if (!*key) {
+			*mod = 0;
+			return;
+		}
+		*key += GDK_F1 - 1;
+	}
+}
+
+
+static void
+accel_read_rc(gpointer key, gpointer value, gpointer data)
+{
+	char *path, *s;
+	AccelEntry *entry = value;
+	gboolean got_default;
+
+	path = g_copy_strings(data, key, "=", accel_to_string(value), NULL);
+	s = gnome_config_get_string_with_default(path, &got_default);
+	g_free(path);
+	if (got_default) {
+		g_free(s);
+		return;
+	}
+	accel_from_string(s, &entry->key, &entry->mod);
+	g_free(s);
+}
+
+
 static GHashTable *
 accel_hash(void) {
 	static GHashTable *hash = NULL;
@@ -933,6 +1042,8 @@ accel_hash(void) {
 		hash = g_hash_table_new(g_str_hash, g_str_equal);
 		for (p = default_accel_hash; p->type; p++)
 			g_hash_table_insert(hash, p->type, &p->entry);
+		g_hash_table_foreach(hash, accel_read_rc,
+				     "/GnomeStock/Accelerators/");
 	}
 	return hash;
 }
@@ -953,4 +1064,16 @@ gnome_stock_menu_accel(char *type, guchar *key, guint8 *mod)
 	*mod = entry->mod;
 	return (*key != 0);
 }
+
+void
+gnome_stock_menu_accel_parse(char *section)
+{
+	char *s;
+
+	g_return_if_fail(section != NULL);
+
+	g_hash_table_foreach(accel_hash(), accel_read_rc,
+			     section);
+}
+
 

@@ -1,3 +1,10 @@
+Sun Mar 22 19:16:58 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.[ch]: Added gnome_stock_menu_accel_parse.
+
+	* gnome-stock.c: Added parsing of default accelerators in rc
+	GnomeStock.
+
 Sun Mar 22 16:04:00 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.[ch]: Added gnome_stock_menu_accel
