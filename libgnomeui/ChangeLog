@@ -1,3 +1,8 @@
+1998-04-01  Arturo Espinosa  <arturo@nuclecu.unam.mx>
+
+	* gtkcalendar.c (gtk_calendar_select_month,
+	gtk_calendar_select_day): Don't paint unless the widget is drawable!
+
 1998-04-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-dateedit.c, gnome-dateedit.h: New widget for editing a

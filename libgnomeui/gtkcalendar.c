@@ -947,7 +947,8 @@ gtk_calendar_select_month (GtkCalendar *calendar, gint month, gint year)
 
   calendar->month = month;
   calendar->year  = year;
-  gtk_calendar_paint(GTK_WIDGET(calendar), NULL);
+  if (GTK_WIDGET_DRAWABLE (calendar))
+    gtk_calendar_paint(GTK_WIDGET(calendar), NULL);
 
   gtk_signal_emit (GTK_OBJECT (calendar), 
        	           gtk_calendar_signals[MONTH_CHANGED_SIGNAL]);
@@ -959,7 +960,8 @@ gtk_calendar_select_day (GtkCalendar *calendar, gint day)
   g_return_val_if_fail (calendar != NULL, FALSE);
 
   calendar->selected_day = day;
-  gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  if (GTK_WIDGET_DRAWABLE (calendar))
+    gtk_calendar_paint_main(GTK_WIDGET(calendar));
 
   gtk_signal_emit (GTK_OBJECT (calendar), 
       gtk_calendar_signals[DAY_SELECTED_SIGNAL]);
