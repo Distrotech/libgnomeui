@@ -1,3 +1,13 @@
+1999-02-08  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock.c (drag_snap): New function: contains the code from
+ 	`drag_motion()'.  This is does not change anything in the
+ 	behavior, but makes it more simple to implement outline movement
+ 	later.
+
+	* gnome-dock-item.c (gnome_dock_item_delete_event): Do nothing for 
+	now.
+
 1999-02-07  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-app.c (gnome_app_realize): Removed.
@@ -1071,13 +1081,13 @@ Thu Dec 31 17:37:31 1998  George Lebl  <jirka@5z.com>
 1998-12-17  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-app.c (gnome_app_realize): Simply show the dock, instead
-	of showing_all.
+ 	of showing_all.
 	(gnome_app_set_contents): Show the contents.
-	(gnome_app_set_menus): Show the dock item.  Put the dock item into a
-	new dock band.  The menubar now goes into
-	band 0 (instead of band -1).
+	(gnome_app_set_menus): Show the dock item.  Put the dock item into
+ 	a new dock band.  The menubar now goes into band 0 (instead of
+ 	band -1).
 	(gnome_app_add_toolbar): Put the dock item into a new dock band.
-	The toolbar now goes into band 1 (instead of band 0).
+  	The toolbar now goes into band 1 (instead of band 0).
 
 1998-12-17  Andrew T. Veliath  <andrewtv@usa.net>
 

@@ -134,6 +134,9 @@ static gboolean drag_check                     (GnomeDock *dock,
                                                 GList **area,
                                                 gint x, gint y,
                                                 gboolean is_vertical);
+static void     drag_snap                      (GnomeDock *dock,
+                                                GtkWidget *widget,
+                                                gint x, gint y);
 static void     drag_motion                    (GtkWidget *widget,
                                                 gint x, gint y,
                                                 gpointer data);
@@ -944,6 +947,93 @@ drag_check (GnomeDock *dock,
   return FALSE;
 }
 
+/* Snap the GnomeDockItem `widget' to `dock' at the specified
+   position.  */
+static void
+drag_snap (GnomeDock *dock,
+           GtkWidget *widget,
+           gint x, gint y)
+{
+#define SNAP 20
+  GnomeDockItem *item;
+  GnomeDockItemBehavior item_behavior;
+  gint win_x, win_y;
+  gint rel_x, rel_y;
+  gboolean item_allows_horizontal, item_allows_vertical;
+
+  item = GNOME_DOCK_ITEM (widget);
+
+  item_behavior = gnome_dock_item_get_behavior (item);
+  item_allows_horizontal = ! (item_behavior
+                              & GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL);
+  item_allows_vertical = ! (item_behavior
+                            & GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+
+  gdk_window_get_origin (GTK_WIDGET (dock)->window, &win_x, &win_y);
+  rel_x = x - win_x;
+  rel_y = y - win_y;
+
+  DEBUG (("(%d,%d)", x, y));
+  DEBUG (("relative (%d,%d)", rel_x, rel_y));
+
+  if (item_allows_horizontal
+      && rel_x >= 0 && rel_x < GTK_WIDGET (dock)->allocation.width)
+    {
+      /* Check prepending to top/bottom bands.  */
+      if (rel_y < 0 && rel_y >= -SNAP
+          && drag_new (dock, item, &dock->top_bands, NULL,
+                       rel_x, rel_y, FALSE))
+        return;
+      else if (rel_y >= dock->client_rect.y + dock->client_rect.height - SNAP
+               && rel_y < dock->client_rect.y + dock->client_rect.height
+               && drag_new (dock, item, &dock->bottom_bands, NULL,
+                            rel_x, rel_y, FALSE))
+        return;
+    }
+
+  if (item_allows_vertical
+      && rel_y >= dock->client_rect.y
+      && rel_y < dock->client_rect.y + dock->client_rect.height)
+    {
+      /* Check prepending to left/right bands.  */
+      if (rel_x < 0 && rel_x >= -SNAP
+          && drag_new (dock, item, &dock->left_bands, NULL,
+                       rel_x, rel_y, TRUE))
+        return;
+      else if (rel_x >= dock->client_rect.x + dock->client_rect.width - SNAP
+               && rel_x < dock->client_rect.x + dock->client_rect.width
+               && drag_new (dock, item, &dock->right_bands, NULL,
+                            rel_x, rel_y, TRUE))
+        return;
+    }
+
+  /* Check dragging into bands.  */
+  if (item_allows_horizontal
+      && drag_check (dock, item, &dock->top_bands, rel_x, rel_y, FALSE))
+    return;
+  else if (item_allows_horizontal
+           && drag_check (dock, item, &dock->bottom_bands, rel_x, rel_y, FALSE))
+    return;
+  else if (item_allows_vertical
+           && drag_check (dock, item, &dock->left_bands, rel_x, rel_y, TRUE))
+    return;
+  else if (item_allows_vertical
+           && drag_check (dock, item, &dock->right_bands, rel_x, rel_y, TRUE))
+    return;
+
+  /* We are not in any "interesting" area: the item must be floating
+     if allowed to.  */
+  if (dock->floating_items_allowed
+      && ! (item_behavior & GNOME_DOCK_ITEM_BEH_NEVER_DETACH))
+    drag_floating (dock, item, x, y, rel_x, rel_y);
+
+  /* If still not floating, fall back to moving the item in its own
+     band.  */
+  if (! item->is_floating)
+    gnome_dock_band_drag_to (GNOME_DOCK_BAND (GTK_WIDGET (item)->parent),
+                             item, rel_x, rel_y);
+}
+
 
 
 /* "drag_begin" signal handling.  */
@@ -1032,86 +1122,7 @@ drag_motion (GtkWidget *widget,
              gint x, gint y,
              gpointer data)
 {
-#define SNAP 20
-  GnomeDockItem *item;
-  GnomeDockItemBehavior item_behavior;
-  GnomeDock *dock;
-  gint win_x, win_y;
-  gint rel_x, rel_y;
-  gboolean item_allows_horizontal, item_allows_vertical;
-
-  dock = GNOME_DOCK (data);
-  item = GNOME_DOCK_ITEM (widget);
-
-  item_behavior = gnome_dock_item_get_behavior (item);
-  item_allows_horizontal = ! (item_behavior
-                              & GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL);
-  item_allows_vertical = ! (item_behavior
-                            & GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
-
-  gdk_window_get_origin (GTK_WIDGET (dock)->window, &win_x, &win_y);
-  rel_x = x - win_x;
-  rel_y = y - win_y;
-
-  DEBUG (("(%d,%d)", x, y));
-  DEBUG (("relative (%d,%d)", rel_x, rel_y));
-
-  if (item_allows_horizontal
-      && rel_x >= 0 && rel_x < GTK_WIDGET (dock)->allocation.width)
-    {
-      /* Check prepending to top/bottom bands.  */
-      if (rel_y < 0 && rel_y >= -SNAP
-          && drag_new (dock, item, &dock->top_bands, NULL,
-                       rel_x, rel_y, FALSE))
-        return;
-      else if (rel_y >= dock->client_rect.y + dock->client_rect.height - SNAP
-               && rel_y < dock->client_rect.y + dock->client_rect.height
-               && drag_new (dock, item, &dock->bottom_bands, NULL,
-                            rel_x, rel_y, FALSE))
-        return;
-    }
-
-  if (item_allows_vertical
-      && rel_y >= dock->client_rect.y
-      && rel_y < dock->client_rect.y + dock->client_rect.height)
-    {
-      /* Check prepending to left/right bands.  */
-      if (rel_x < 0 && rel_x >= -SNAP
-          && drag_new (dock, item, &dock->left_bands, NULL,
-                       rel_x, rel_y, TRUE))
-        return;
-      else if (rel_x >= dock->client_rect.x + dock->client_rect.width - SNAP
-               && rel_x < dock->client_rect.x + dock->client_rect.width
-               && drag_new (dock, item, &dock->right_bands, NULL,
-                            rel_x, rel_y, TRUE))
-        return;
-    }
-
-  /* Check dragging into bands.  */
-  if (item_allows_horizontal
-      && drag_check (dock, item, &dock->top_bands, rel_x, rel_y, FALSE))
-    return;
-  else if (item_allows_horizontal
-           && drag_check (dock, item, &dock->bottom_bands, rel_x, rel_y, FALSE))
-    return;
-  else if (item_allows_vertical
-           && drag_check (dock, item, &dock->left_bands, rel_x, rel_y, TRUE))
-    return;
-  else if (item_allows_vertical
-           && drag_check (dock, item, &dock->right_bands, rel_x, rel_y, TRUE))
-    return;
-
-  /* We are not in any "interesting" area: the item must be floating
-     if allowed to.  */
-  if (dock->floating_items_allowed
-      && ! (item_behavior & GNOME_DOCK_ITEM_BEH_NEVER_DETACH))
-    drag_floating (dock, item, x, y, rel_x, rel_y);
-
-  /* If still not floating, fall back to moving the item in its own
-     band.  */
-  if (! item->is_floating)
-    gnome_dock_band_drag_to (GNOME_DOCK_BAND (GTK_WIDGET (item)->parent),
-                             item, rel_x, rel_y);
+  drag_snap (GNOME_DOCK (data), widget, x, y);
 }
 
 

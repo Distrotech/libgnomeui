@@ -951,26 +951,6 @@ gnome_dock_item_delete_event (GtkWidget *widget,
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (widget), FALSE);
   g_return_val_if_fail (event != NULL, FALSE);
 
-  di = GNOME_DOCK_ITEM (widget);
-  g_return_val_if_fail (event->window == di->float_window, FALSE);
-  
-  di->is_floating = FALSE;
-  gdk_window_hide (di->float_window);
-  gdk_window_reparent (di->bin_window, widget->window, 0, 0);
-  di->float_window_mapped = FALSE;
-
-  if (GTK_WIDGET_REALIZED (widget))
-    gdk_window_show (widget->window);
-
-  if (di->in_drag)
-    {
-      gdk_pointer_ungrab (GDK_CURRENT_TIME);
-      gtk_grab_remove (widget);
-      di->in_drag = FALSE;
-    }
-  
-  gtk_widget_queue_resize (GTK_WIDGET (di));
-
   return TRUE;
 }
 
