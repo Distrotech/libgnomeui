@@ -369,7 +369,7 @@ set_result(GnomeCalculator *gc)
 static void
 unselect_invert(GnomeCalculator *gc)
 {
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(gc->invert_button),
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gc->invert_button),
 				    FALSE);
 	gc->invert=FALSE;
 }

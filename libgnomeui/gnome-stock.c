@@ -1735,21 +1735,21 @@ accel_dlg_select(GtkCList *widget, gint row, gint col, GdkEventButton *event)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 0, 2, 2, 3);
 	gtk_object_set_data(GTK_OBJECT(window), "control", w);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(w),
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(w),
 				    entry.mod & GDK_CONTROL_MASK);
 
 	w = gtk_check_button_new_with_label("Shift");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 0, 2, 3, 4);
 	gtk_object_set_data(GTK_OBJECT(window), "shift", w);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(w),
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(w),
 				    entry.mod & GDK_SHIFT_MASK);
 
 	w = gtk_check_button_new_with_label("Alt");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 0, 2, 4, 5);
 	gtk_object_set_data(GTK_OBJECT(window), "alt", w);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(w),
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(w),
 				    entry.mod & GDK_MOD1_MASK);
 
 	w = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);

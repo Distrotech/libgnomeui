@@ -360,7 +360,7 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
   gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(dee->type_combo)->entry),
 			       dentry->type ? dentry->type : "");
 
-  gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(dee->terminal_button),
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->terminal_button),
 			      dentry->terminal);
 }
 

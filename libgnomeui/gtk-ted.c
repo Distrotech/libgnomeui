@@ -1077,7 +1077,7 @@ gtk_ted_new_checkbox (GtkWidget *box, struct ted_widget_info *wi, char *string, 
 #endif
 	
 	check = gtk_check_button_new_with_label (string);
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (check), toggle_val);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), toggle_val);
 	gtk_box_pack_end_defaults (GTK_BOX (box), check);
 	gtk_widget_show (check);
 	gtk_signal_connect (GTK_OBJECT (check), "toggled", GTK_SIGNAL_FUNC (gtk_ted_checkbox_toggled), ci);

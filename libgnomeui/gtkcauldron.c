@@ -882,7 +882,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 			add_accelerator_with_underbar (w, accel_table, accelerator_key, label, underbar_pos);
 		    radio_group = gtk_radio_button_group (GTK_RADIO_BUTTON (w));
 		    next_arg (GTK_CAULDRON_TYPE_INT_P, user_data, &result);
-		    gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), *result);
+		    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), *result);
 		    new_result (r, get_check_result, w, result);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
