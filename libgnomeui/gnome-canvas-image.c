@@ -326,6 +326,9 @@ gnome_canvas_image_realize (GnomeCanvasItem *item)
 
 	image = GNOME_CANVAS_IMAGE (item);
 
+	if (parent_class->realize)
+		(* parent_class->realize) (item);
+
 	image->gc = gdk_gc_new (item->canvas->layout.bin_window);
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
@@ -338,6 +341,9 @@ gnome_canvas_image_unrealize (GnomeCanvasItem *item)
 	image = GNOME_CANVAS_IMAGE (item);
 
 	gdk_gc_unref (image->gc);
+
+	if (parent_class->unrealize)
+		(* parent_class->unrealize) (item);
 }
 
 static void

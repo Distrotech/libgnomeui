@@ -634,6 +634,9 @@ gnome_canvas_line_realize (GnomeCanvasItem *item)
 
 	line = GNOME_CANVAS_LINE (item);
 
+	if (parent_class->realize)
+		(* parent_class->realize) (item);
+
 	line->gc = gdk_gc_new (item->canvas->layout.bin_window);
 	line->arrow_gc = gdk_gc_new (item->canvas->layout.bin_window);
 
@@ -649,6 +652,9 @@ gnome_canvas_line_unrealize (GnomeCanvasItem *item)
 
 	gdk_gc_unref (line->gc);
 	gdk_gc_unref (line->arrow_gc);
+
+	if (parent_class->unrealize)
+		(* parent_class->unrealize) (item);
 }
 
 static void

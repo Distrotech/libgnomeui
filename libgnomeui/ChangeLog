@@ -1,3 +1,11 @@
+1998-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-line.c: 
+	* gnome-canvas-image.c: 
+	* gnome-canvas-text.c:
+	* gnome-canvas-rect-ellipse.c: Call the parent class
+	realize/unrealize/map/unmap methods in the overriden methods.
+
 Wed Aug  5 23:08:53 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock*: added tigert's undelete icon, changed yes/no buttons,

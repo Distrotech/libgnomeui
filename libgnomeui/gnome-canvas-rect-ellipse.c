@@ -44,6 +44,8 @@ static void gnome_canvas_re_unrealize   (GnomeCanvasItem *item);
 static void gnome_canvas_re_translate   (GnomeCanvasItem *item, double dx, double dy);
 
 
+static GnomeCanvasItemClass *re_parent_class;
+
 
 GtkType
 gnome_canvas_re_get_type (void)
@@ -76,6 +78,8 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
+
+	re_parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
 	gtk_object_add_arg_type ("GnomeCanvasRE::x1", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X1);
 	gtk_object_add_arg_type ("GnomeCanvasRE::y1", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y1);
@@ -285,6 +289,9 @@ gnome_canvas_re_realize (GnomeCanvasItem *item)
 
 	re = GNOME_CANVAS_RE (item);
 
+	if (re_parent_class->realize)
+		(* re_parent_class->realize) (item);
+
 	re->fill_gc = gdk_gc_new (item->canvas->layout.bin_window);
 	re->outline_gc = gdk_gc_new (item->canvas->layout.bin_window);
 
@@ -300,6 +307,9 @@ gnome_canvas_re_unrealize (GnomeCanvasItem *item)
 
 	gdk_gc_unref (re->fill_gc);
 	gdk_gc_unref (re->outline_gc);
+
+	if (re_parent_class->unrealize)
+		(* re_parent_class->unrealize) (item);
 }
 
 static void

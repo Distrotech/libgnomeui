@@ -338,6 +338,9 @@ gnome_canvas_text_realize (GnomeCanvasItem *item)
 
 	text = GNOME_CANVAS_TEXT (item);
 
+	if (parent_class->realize)
+		(* parent_class->realize) (item);
+
 	text->gc = gdk_gc_new (item->canvas->layout.bin_window);
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
@@ -350,6 +353,9 @@ gnome_canvas_text_unrealize (GnomeCanvasItem *item)
 	text = GNOME_CANVAS_TEXT (item);
 
 	gdk_gc_unref (text->gc);
+
+	if (parent_class->unrealize)
+		(* parent_class->unrealize) (item);
 }
 
 static void
