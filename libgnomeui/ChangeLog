@@ -1,5 +1,16 @@
 2000-09-16  Martin Baulig  <martin@home-of-linux.org>
 
+	* gnome-file-selector.c (activate_entry_handler): Just call
+	gnome_selector_add_file(); this should "do the right thing"
+	even if it's actually a directory [FIXME: should we better
+	async get the file info here and then distinguish between
+	files and directories?].
+	(check_filename_handler): If a filter is set, use it. Note
+	that this is still a synchronous operation (because of the
+	return value) and may block.
+	(check_directory_handler): This is a synchronous operation
+	as well and thus may block.
+
 	* gnome-file-selector.c: Started to asyncify this file.
 	(gnome_file_selector_add_filter): New function; this lets you
 	specify a GnomeVFSDirectoryFilter which is used when adding
