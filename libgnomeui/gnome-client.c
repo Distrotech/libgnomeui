@@ -1091,10 +1091,12 @@ gnome_client_get_config_prefix (GnomeClient *client)
   
   if (!client->config_prefix)
     {
-      char *name;
-      name= strrchr (client->program, '/');
+      char *name, *program;
+      program = client->program ? client->program :
+	program_invocation_short_name;
+      name= strrchr (program, '/');
 
-      name= name ? (name+1) : client->program;
+      name= name ? (name+1) : program;
             
       if (client->client_id)
 	client->config_prefix= g_copy_strings ("/", name, "-id#", 

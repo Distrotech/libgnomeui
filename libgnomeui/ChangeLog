@@ -1,3 +1,8 @@
+1998-10-03  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-client.c (gnome_client_get_config_prefix): Use
+	`program_invocation_short_name' if `client->program' is NULL.
+
 1998-10-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtklayout.c (gtk_layout_move): Provide a default value. 
