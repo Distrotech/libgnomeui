@@ -150,7 +150,10 @@ gnome_canvas_text_init (GnomeCanvasText *text)
 {
 	text->x = 0.0;
 	text->y = 0.0;
-	text->font = gdk_font_load ("fixed"); /* lame default */
+	text->font = gdk_fontset_load (
+		"-*-*-medium-r-normal-*-13-*-*-*-*-*-*-*,"
+		"-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*");
+		/* lame default */
 	g_assert (text->font != NULL);
 	text->anchor = GTK_ANCHOR_CENTER;
 	text->justification = GTK_JUSTIFY_LEFT;
@@ -533,10 +536,9 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 		text->font = gdk_fontset_load (GTK_VALUE_STRING (*arg));
 		if (!text->font) {
-			text->font = gdk_fontset_load ("-*-fixed-medium-r-semicondensed--13-120-75-75-c-60-*-*,*");
-		}
-		if (!text->font) {
-			text->font = gdk_font_load ("fixed");
+			text->font = gdk_fontset_load (
+				"-*-*-medium-r-normal-*-13-*-*-*-*-*-*-*,"
+				"-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*");
 			g_assert (text->font != NULL);
 		}
 		if (item->canvas->aa) {

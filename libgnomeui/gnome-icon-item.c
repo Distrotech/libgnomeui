@@ -41,21 +41,22 @@ static GdkFont *default_font;
 static char *
 iti_default_font_name (void)
 {
-	return "-adobe-helvetica-medium-r-normal--*-100-*-*-*-*-*-*";
+	return "-adobe-helvetica-medium-r-normal--*-100-*-*-*-*-*-*,"
+		"-*-*-medium-r-normal--10-*-*-*-*-*-*-*,*";
 }
 
 static void
 font_load (Iti *iti)
 {
 	if (iti->fontname){
-		iti->font = gdk_font_load (iti->fontname);
+		iti->font = gdk_fontset_load (iti->fontname);
 		g_free (iti->fontname);
 		iti->fontname = NULL;
 	}
 	
 	if (!iti->font){
 		if (!default_font)
-			default_font = gdk_font_load (iti_default_font_name ());
+			default_font = gdk_fontset_load (iti_default_font_name ());
 		
 		iti->font = gdk_font_ref (default_font);
 	}

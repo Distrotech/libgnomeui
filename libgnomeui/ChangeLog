@@ -1,3 +1,10 @@
+1999-06-01  Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
+
+	* libgnomeui/gnome-canvas-text.c:
+	* libgnomeui/gnome-icon-item.c:
+	* libgnomeui/gnome-less.c: Replace some gdk_font_load() calls with
+	gdk_fontset_load.    Use a more open fontset rule to load the fonts.
+
 1999-05-31  Nat Friedman  <nat@gnome-support.com>
 
 	* gnome-popup-menu.c: Include gtk/gtkcompat.h.
