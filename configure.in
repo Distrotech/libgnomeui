@@ -32,15 +32,6 @@ AC_SUBST(LDFLAGS)
 
 GNOME_COMPILE_WARNINGS(maximum)
 
-AC_PATH_PROG(GNOME_MAKETYPES, gnome-maketypes.awk)
-AC_PATH_PROG(GNOME_MAKEENUMS, gnome-makeenums.pl)
-if test -z "$GNOME_MAKETYPES" || test -z "$GNOME_MAKEENUMS" ; then
-  AC_MSG_ERROR([
-*** Cannot find the gnome-maketypes.awk and gnome-makeenums.pl scripts
-*** which are installed from libgnome-2
-])
-fi
-
 dnl Utility conditional
 AM_CONDITIONAL(FALSE, test x = y)
 
