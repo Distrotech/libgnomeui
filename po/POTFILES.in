@@ -22,3 +22,6 @@ libgnomeui/gnome-pouch.c
 libgnomeui/gnome-recently-used.c
 libgnomeui/gnome_segv.c
 libgnomeui/oafgnome.c
+components/gnome-image-entry-component.c
+libgnomeui/gnome-selector-component.c
+libgnomeui/gnome-stock-icons.c
