@@ -1,5 +1,7 @@
 2003-05-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-about.c: Pass NULL to g_string_new.
+	* libgnomeui/gnome-app-helper.c: Same
 	* libgnomeui/gnome-client.c: Reapply Arjan's leak
 	patch. And don't break it in the process this time :-)
 	Fixes bug #104986.
