@@ -1,3 +1,8 @@
+Mon Oct 19 11:57:51 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-mdi.c: Change "drag_data_received" callback
+	to have proper signature.
+
 1998-10-19  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch]: removed dnd_type member and g_free()ing

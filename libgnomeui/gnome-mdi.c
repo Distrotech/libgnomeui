@@ -99,6 +99,7 @@ static void             book_drag_req            (GtkWidget *,
 												  GnomeMDI *);
 static void             book_drop                (GtkNotebook *,
 												  GdkDragContext *,
+												  gint, gint,
 												  GtkSelectionData *,
 												  guint, guint,
 												  GnomeMDI *);
@@ -659,11 +660,21 @@ book_drag_req  (GtkWidget          *widget,
 }
 
 static void book_drop (GtkNotebook        *book,
+<<<<<<< gnome-mdi.c
+		       GdkDragContext     *context,
+		       gint                x,
+		       gint                y,
+		       GtkSelectionData   *selection_data,
+		       guint               info,
+		       guint               time,
+		       GnomeMDI           *mdi)
+=======
 					   GdkDragContext     *context,
 					   GtkSelectionData   *selection_data,
 					   guint               info,
 					   guint               time,
 					   GnomeMDI           *mdi)
+>>>>>>> 1.46
 {
 	GtkWidget *view;
 	GtkNotebook *old_book;
