@@ -1,8 +1,8 @@
 # Translation into the walloon language.
 #
 # Si vos voloz donner on côp di spale pol ratournaedje di Gnome (ou des
-# ôtes libes programes) sicrijhoz mu a l' adresse emile
-# <srtxg@chanae.alphanet.ch>; nos avans co bråmint di l' ovraedje a fé.
+# ôtes libes programes) sicrijhoz mu a l' adresse emile
+# <srtxg@chanae.alphanet.ch>; nos avans co bråmint di l' ovraedje a fé.
 #
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Pablo Saratxaga <srtxg@chanae.alphanet.ch> 2001-2003
@@ -10,505 +10,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-29 03:40+0200\n"
+"POT-Creation-Date: 2003-06-29 11:41+0200\n"
 "PO-Revision-Date: 2003-01-14 15:27+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: libgnomeui/gnome-about.c:194
-msgid "Credits"
-msgstr "Gråces"
-
-#: libgnomeui/gnome-about.c:223
-msgid "Written by"
-msgstr "Sicrît pa"
-
-#: libgnomeui/gnome-about.c:238
-msgid "Documented by"
-msgstr "Documinté pa"
-
-#: libgnomeui/gnome-about.c:253
-msgid "Translated by"
-msgstr "Ratourné pa"
-
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "_Gråces"
-
-#: libgnomeui/gnome-about.c:352
-msgid "Program name"
-msgstr "No do programe"
-
-#: libgnomeui/gnome-about.c:353
-msgid "The name of the program"
-msgstr "Li no do programe"
-
-#: libgnomeui/gnome-about.c:360
-msgid "Program version"
-msgstr "Modêye do programe"
-
-#: libgnomeui/gnome-about.c:361
-msgid "The version of the program"
-msgstr "Li modêye do programe"
-
-#: libgnomeui/gnome-about.c:367
-msgid "Copyright string"
-msgstr "Tchinne di copyright"
-
-#: libgnomeui/gnome-about.c:368
-msgid "Copyright information for the program"
-msgstr "Informåcion so ls abondroets do programe"
-
-#: libgnomeui/gnome-about.c:375
-msgid "Comments string"
-msgstr "Tchinne di rawete"
-
-#: libgnomeui/gnome-about.c:376
-msgid "Comments about the program"
-msgstr "Rawetes å dfait do programe"
-
-#: libgnomeui/gnome-about.c:382
-msgid "Authors"
-msgstr "Oteurs"
-
-#: libgnomeui/gnome-about.c:383
-msgid "List of authors of the programs"
-msgstr "Djivêye des oteurs do programe"
-
-#: libgnomeui/gnome-about.c:385
-msgid "Author entry"
-msgstr "Intrêye oteur"
-
-#: libgnomeui/gnome-about.c:386
-msgid "A single author entry"
-msgstr "Ene intrêye po èn oteur"
-
-#: libgnomeui/gnome-about.c:393
-msgid "Documenters"
-msgstr "Documintåcion"
-
-#: libgnomeui/gnome-about.c:394
-msgid "List of people documenting the program"
-msgstr "Djiveye des djins k' on fwait li documintåcion do programe"
-
-#: libgnomeui/gnome-about.c:396
-msgid "Documenter entry"
-msgstr "Intrêye fijheu d' documintåcion"
-
-#: libgnomeui/gnome-about.c:397
-msgid "A single documenter entry"
-msgstr "Ene intrêye po on fjheu d' documintåcion"
-
-#: libgnomeui/gnome-about.c:405
-msgid "Translator credits"
-msgstr "Gråces po les ratourneus"
-
-#: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come "
-"ratournåve."
-
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
-msgid "Logo"
-msgstr "Imådjete"
-
-#: libgnomeui/gnome-about.c:414
-msgid "A logo for the about box"
-msgstr "Ene imådjete pol purnea «å dfait»"
-
-#: libgnomeui/gnome-about.c:493
-#, c-format
-msgid "About %s"
-msgstr "Å dfait di %s"
-
-#: libgnomeui/gnome-appbar.c:747
-msgid "Has Progress"
-msgstr "Avou bår d' avançmint"
-
-#: libgnomeui/gnome-appbar.c:748
-msgid "Create a progress widget."
-msgstr "Fé ene ahesse ki mostere l' avançmint."
-
-#: libgnomeui/gnome-appbar.c:755
-msgid "Has Status"
-msgstr "Avou bår di messaedjes"
-
-#: libgnomeui/gnome-appbar.c:756
-msgid "Create a status widget."
-msgstr "Fé ene ahesse ki mostere les messaedjes el bår di messaedjes."
-
-#: libgnomeui/gnome-appbar.c:763
-msgid "Interactivity"
-msgstr ""
-
-#: libgnomeui/gnome-appbar.c:764
-msgid "Level of user activity required."
-msgstr ""
-
-#: libgnomeui/gnome-client.c:863
-msgid "Specify session management ID"
-msgstr "Dire l' ID pol manaedjmint del session"
-
-#: libgnomeui/gnome-client.c:863
-msgid "ID"
-msgstr "ID"
-
-#: libgnomeui/gnome-client.c:866
-msgid "Specify prefix of saved configuration"
-msgstr "Dire li betchete di l' apontiaedje schapé"
-
-#: libgnomeui/gnome-client.c:866
-msgid "PREFIX"
-msgstr "BETCHETE"
-
-#: libgnomeui/gnome-client.c:869
-msgid "Disable connection to session manager"
-msgstr "Essocter l' adjondaedje å manaedjeu di sessions"
-
-#: libgnomeui/gnome-client.c:975
-msgid "Session management"
-msgstr "Manaedjmint des sessions"
-
-#: libgnomeui/gnome-client.c:2473
-msgid "Cancel Logout"
-msgstr "Rinoncî a moussî foû"
-
-#: libgnomeui/gnome-color-picker.c:414
-msgid "Received invalid color data\n"
-msgstr "Dinêye di coleur nén valide di rçuvowe\n"
-
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Tchoezixheu di coleurs"
-
-#: libgnomeui/gnome-color-picker.c:465
-msgid "Open a dialog to specify the color"
-msgstr "Drovi on purnea po tchoezi l' coleur"
-
-#: libgnomeui/gnome-color-picker.c:487
-msgid "Pick a color"
-msgstr "Tchoezixhoz ene coleur"
-
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
-msgid "Time"
-msgstr "Eure"
-
-#: libgnomeui/gnome-dateedit.c:480
-msgid "The time currently selected"
-msgstr "L' eure tchoezeye pol moumint"
-
-#: libgnomeui/gnome-dateedit.c:492
-msgid "DateEdit Flags"
-msgstr ""
-
-#: libgnomeui/gnome-dateedit.c:493
-msgid "Flags for how DateEdit looks"
-msgstr ""
-
-#: libgnomeui/gnome-dateedit.c:502
-msgid "Lower Hour"
-msgstr "Eure li pus timpe"
-
-#: libgnomeui/gnome-dateedit.c:503
-msgid "Lower hour in the time popup selector"
-msgstr "L' eure li pus timpe pol purnea di tchoezixhaedje di l' eure"
-
-#: libgnomeui/gnome-dateedit.c:513
-msgid "Upper Hour"
-msgstr "Eure li pus tård"
-
-#: libgnomeui/gnome-dateedit.c:514
-msgid "Upper hour in the time popup selector"
-msgstr "L' eure li pus tård pol purnea di tchoezixhaedje di l' eure"
-
-#: libgnomeui/gnome-dateedit.c:524
-msgid "Initial Time"
-msgstr "Eure di cminçmint:"
-
-#: libgnomeui/gnome-dateedit.c:525
-msgid "The initial time"
-msgstr "L' eure di cminçmint"
-
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
-msgid "Date"
-msgstr "Date"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select Date"
-msgstr "Tchoezi l' date"
-
-#: libgnomeui/gnome-dateedit.c:752
-msgid "Select the date from a calendar"
-msgstr "Tchoezixhoz l' date dins l' calindrî"
-
-#. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
-msgid "Calendar"
-msgstr "Calindrî"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select Time"
-msgstr "Tchoezi l' eure"
-
-#: libgnomeui/gnome-dateedit.c:784
-msgid "Select the time from a list"
-msgstr "Tchoezixhoz l' eure dins l' djivêye"
-
-#: libgnomeui/gnome-dateedit.c:1003
-msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date a stî abandné, eployîz purade gnome_date_edit_get_time"
-
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
-msgid "Title"
-msgstr "Tite"
-
-#: libgnomeui/gnome-druid-page-standard.c:122
-msgid "Title of the druid"
-msgstr "Tite do macrea"
-
-#: libgnomeui/gnome-druid-page-standard.c:130
-msgid "Logo image"
-msgstr "Imådje"
-
-#: libgnomeui/gnome-druid-page-standard.c:137
-msgid "Top Watermark"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-standard.c:138
-msgid "Watermark image for the top"
-msgstr ""
-
-#: libgnomeui/gnome-druid-page-standard.c:145
-msgid "Title Foreground"
-msgstr "Coleur do tite"
-
-#: libgnomeui/gnome-druid-page-standard.c:146
-msgid "Foreground color of the title"
-msgstr "Coleur di dvant pol tite"
-
-#: libgnomeui/gnome-druid-page-standard.c:153
-msgid "Title Foreground Color"
-msgstr "Coleur di dvant pol tite"
-
-#: libgnomeui/gnome-druid-page-standard.c:154
-msgid "Foreground color of the title as a GdkColor"
-msgstr "Coleur di dvant pol tite come valixhance GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:161
-msgid "Title Foreground color set"
-msgstr "Coleur di dvant pol tite metowe"
-
-#: libgnomeui/gnome-druid-page-standard.c:162
-msgid "Foreground color of the title is set"
-msgstr "Li coleur di dvant pol tite a stî metowe"
-
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
-msgid "Background Color"
-msgstr "Coleur di fond"
-
-#: libgnomeui/gnome-druid-page-standard.c:170
-msgid "Background color"
-msgstr "Coleur di fond"
-
-#: libgnomeui/gnome-druid-page-standard.c:178
-msgid "Background color as a GdkColor"
-msgstr "Coleur di fond come valixhance GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:185
-msgid "Background color set"
-msgstr "Coleur di fond pol tite metowe"
-
-#: libgnomeui/gnome-druid-page-standard.c:186
-msgid "Background color is set"
-msgstr "Li coleur di fond pol tite a stî metowe"
-
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
-msgid "Logo Background Color"
-msgstr "Coleur di fond po l' imådjete"
-
-#: libgnomeui/gnome-druid-page-standard.c:194
-msgid "Logo Background color"
-msgstr "Coleur di fond po l' imådjete"
-
-#: libgnomeui/gnome-druid-page-standard.c:202
-msgid "Logo Background color as a GdkColor"
-msgstr "Coleur di fond po l' imådjete come ene valixhance GdkColor"
-
-#: libgnomeui/gnome-druid-page-standard.c:209
-msgid "Logo Background color set"
-msgstr "Coleur di fond pol imådjete metowe"
-
-#: libgnomeui/gnome-druid-page-standard.c:210
-msgid "Logo Background color is set"
-msgstr "Li coleur di fond pol imådjete a stî metowe"
-
-#: libgnomeui/gnome-druid.c:150
-msgid "Show Finish"
-msgstr "Mostrer «Fini»"
-
-#: libgnomeui/gnome-druid.c:151
-msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Mostrer li boton «Fini» el plaece do boton «Shuvant»"
-
-#: libgnomeui/gnome-druid.c:158
-msgid "Show Help"
-msgstr "Mostrer «Aidance»"
-
-#: libgnomeui/gnome-druid.c:159
-msgid "Show the 'Help' button"
-msgstr "Mostrer li boton «Aidance»"
-
-#: libgnomeui/gnome-href.c:122
-msgid "URL"
-msgstr "Hårdêye"
-
-#: libgnomeui/gnome-href.c:123
-msgid "The URL that GnomeHRef activates"
-msgstr "Li hårdêye ki GnomeHRef mete en alaedje"
-
-#: libgnomeui/gnome-href.c:130
-msgid "Text"
-msgstr "Tecse"
-
-#: libgnomeui/gnome-href.c:131
-msgid "The text on the button"
-msgstr "Li tecse el boton"
-
-#: libgnomeui/gnome-href.c:132
-msgid "End World Hunger"
-msgstr "Fini avou l' fwin dins l' monde"
-
-#: libgnomeui/gnome-href.c:138
-msgid "Link color"
-msgstr "Coleur do loyén"
-
-#: libgnomeui/gnome-href.c:139
-msgid "Color used to draw the link"
-msgstr "Coleur eployeye po dessiner l' loyén"
-
-#: libgnomeui/gnome-href.c:170
-msgid "This button will take you to the URI that it displays."
-msgstr "Ci boton chal vos frè potchî al hårdêye k' i mostere."
-
-#: libgnomeui/gnome-href.c:393
-msgid ""
-"An error has occured while trying to launch the default web browser.\n"
-"Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"Åk n' a nén stî tot sayant d' enonder li prémetou betchteu waibe.\n"
-"Verifyîz vos apontiaedjes avou l' usteye «Programes favorits» s' i vs plait."
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "X display to use"
-msgstr "Håynaedje X a eployî"
-
-#: libgnomeui/gnome-ui-init.c:113
-msgid "DISPLAY"
-msgstr "HÅYNAEDJE"
-
-#: libgnomeui/gnome-ui-init.c:121
-msgid "GNOME GUI Library"
-msgstr "Livreye di l' eterface grafike di GNOME"
-
-#. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"I gn a yeu pus d' ene aroke di segmentåcion; dji n' pou mostrer li purnea "
-"d' aroke\n"
-
-#. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"I gn a yeu pus d' ene aroke di segmentåcion!\n"
-"Dji n' pou mostrer li purnea d' aroke\n"
-
-#: libgnomeui/gnome_segv.c:100
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"Li Manaedjeu di Session di GNOME (processus lº %d) s' est crashé\n"
-"a cåze d' ene aroke moirt (%s).\n"
-"Cwand vos alez clôre ci purnea chal, tos les ôtes programes et vosse session "
-"vont esse cloyous eto.\n"
-"Schapez tos vos fitchîs dvant di clôre ci purnea chal."
-
-#: libgnomeui/gnome_segv.c:110
-#, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Li programe «%s» (processus lº %d)\n"
-"s' est crashé a cåze d' ene aroke moirt.\n"
-"(%s)"
-
-#: libgnomeui/gnome_segv.c:122
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Po s' è siervi: gnome_segv2 nodoprograme limsign\n"
-
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Evoyî on rapoirt di bug"
-
-#: libgnomeui/gnome_segv.c:151
-msgid "Debug"
-msgstr "Disbugaedje"
-
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Loukîz li pådje GNOME Application Crash po pus d' informåcion"
-
-#: libgnomeui/gnome-stock-icons.c:137
-msgid "Table Borders"
-msgstr "Boirds del tåve"
-
-#: libgnomeui/gnome-stock-icons.c:138
-msgid "Table Fill"
-msgstr "Rimplixhaedje del tåve"
-
-#: libgnomeui/gnome-stock-icons.c:139
-msgid "Bulleted List"
-msgstr "Djivêye avou des ponts"
-
-#: libgnomeui/gnome-stock-icons.c:140
-msgid "Numbered List"
-msgstr "Djivêye avou des limeros"
-
-#: libgnomeui/gnome-stock-icons.c:141
-msgid "Indent"
-msgstr "Ritrait"
-
-#: libgnomeui/gnome-stock-icons.c:142
-msgid "Un-Indent"
-msgstr "Disfé li Ritrait"
-
-#: libgnomeui/gnome-stock-icons.c:143
-msgid "About"
-msgstr "Å dfait"
+"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -525,6 +34,114 @@ msgstr "Cayet efant 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Racsegne pol cayet 2"
+
+#: libgnomeui/gnome-about.c:198
+msgid "Credits"
+msgstr "Gråces"
+
+#: libgnomeui/gnome-about.c:230
+msgid "Written by"
+msgstr "Sicrît pa"
+
+#: libgnomeui/gnome-about.c:245
+msgid "Documented by"
+msgstr "Documinté pa"
+
+#: libgnomeui/gnome-about.c:260
+msgid "Translated by"
+msgstr "Ratourné pa"
+
+#: libgnomeui/gnome-about.c:323
+msgid "C_redits"
+msgstr "_Gråces"
+
+#: libgnomeui/gnome-about.c:378
+msgid "Program name"
+msgstr "No do programe"
+
+#: libgnomeui/gnome-about.c:379
+msgid "The name of the program"
+msgstr "Li no do programe"
+
+#: libgnomeui/gnome-about.c:386
+msgid "Program version"
+msgstr "Modêye do programe"
+
+#: libgnomeui/gnome-about.c:387
+msgid "The version of the program"
+msgstr "Li modêye do programe"
+
+#: libgnomeui/gnome-about.c:393
+msgid "Copyright string"
+msgstr "Tchinne di copyright"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright information for the program"
+msgstr "Informåcion so ls abondroets do programe"
+
+#: libgnomeui/gnome-about.c:401
+msgid "Comments string"
+msgstr "Tchinne di rawete"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments about the program"
+msgstr "Rawetes å dfait do programe"
+
+#: libgnomeui/gnome-about.c:408
+msgid "Authors"
+msgstr "Oteurs"
+
+#: libgnomeui/gnome-about.c:409
+msgid "List of authors of the programs"
+msgstr "Djivêye des oteurs do programe"
+
+#: libgnomeui/gnome-about.c:411
+msgid "Author entry"
+msgstr "Intrêye oteur"
+
+#: libgnomeui/gnome-about.c:412
+msgid "A single author entry"
+msgstr "Ene intrêye po èn oteur"
+
+#: libgnomeui/gnome-about.c:419
+msgid "Documenters"
+msgstr "Documintåcion"
+
+#: libgnomeui/gnome-about.c:420
+msgid "List of people documenting the program"
+msgstr "Djiveye des djins k' on fwait li documintåcion do programe"
+
+#: libgnomeui/gnome-about.c:422
+msgid "Documenter entry"
+msgstr "Intrêye fijheu d' documintåcion"
+
+#: libgnomeui/gnome-about.c:423
+msgid "A single documenter entry"
+msgstr "Ene intrêye po on fjheu d' documintåcion"
+
+#: libgnomeui/gnome-about.c:431
+msgid "Translator credits"
+msgstr "Gråces po les ratourneus"
+
+#: libgnomeui/gnome-about.c:432
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come "
+"ratournåve."
+
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Imådjete"
+
+#: libgnomeui/gnome-about.c:440
+msgid "A logo for the about box"
+msgstr "Ene imådjete pol purnea «å dfait»"
+
+#: libgnomeui/gnome-about.c:519
+#, c-format
+msgid "About %s"
+msgstr "Å dfait di %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
@@ -957,6 +574,273 @@ msgstr "ID do programe"
 msgid "The application ID string"
 msgstr "Li tchinne di l' idintifiant do programe"
 
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "Avou bår d' avançmint"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "Fé ene ahesse ki mostere l' avançmint."
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "Avou bår di messaedjes"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "Fé ene ahesse ki mostere les messaedjes el bår di messaedjes."
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:60
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:61
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"Vos vs divoz elodjî po-z aveur accès a «%s».\n"
+"%s"
+
+#: libgnomeui/gnome-authentication-manager.c:64
+msgid "Your password will be transmitted unencrypted."
+msgstr "Vosse sicret serè-st evoyî nén ecripté."
+
+#: libgnomeui/gnome-authentication-manager.c:65
+msgid "Your password will be transmitted encrypted."
+msgstr "Vosse sicret serè-st evoyî ecripté."
+
+#: libgnomeui/gnome-authentication-manager.c:68
+msgid "Authentication Required"
+msgstr "Otintifiaedje obligatwere"
+
+#: libgnomeui/gnome-client.c:863
+msgid "Specify session management ID"
+msgstr "Dire l' ID pol manaedjmint del session"
+
+#: libgnomeui/gnome-client.c:863
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:866
+msgid "Specify prefix of saved configuration"
+msgstr "Dire li betchete di l' apontiaedje schapé"
+
+#: libgnomeui/gnome-client.c:866
+msgid "PREFIX"
+msgstr "BETCHETE"
+
+#: libgnomeui/gnome-client.c:869
+msgid "Disable connection to session manager"
+msgstr "Essocter l' adjondaedje å manaedjeu di sessions"
+
+#: libgnomeui/gnome-client.c:975
+msgid "Session management"
+msgstr "Manaedjmint des sessions"
+
+#: libgnomeui/gnome-client.c:2473
+msgid "Cancel Logout"
+msgstr "Rinoncî a moussî foû"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Dinêye di coleur nén valide di rçuvowe\n"
+
+#: libgnomeui/gnome-color-picker.c:464
+msgid "Color Selector"
+msgstr "Tchoezixheu di coleurs"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Drovi on purnea po tchoezi l' coleur"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Tchoezixhoz ene coleur"
+
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "Eure"
+
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "L' eure tchoezeye pol moumint"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "Eure li pus timpe"
+
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr "L' eure li pus timpe pol purnea di tchoezixhaedje di l' eure"
+
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "Eure li pus tård"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr "L' eure li pus tård pol purnea di tchoezixhaedje di l' eure"
+
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "Eure di cminçmint:"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "L' eure di cminçmint"
+
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Date"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select Date"
+msgstr "Tchoezi l' date"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "Tchoezixhoz l' date dins l' calindrî"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "Calindrî"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select Time"
+msgstr "Tchoezi l' eure"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "Tchoezixhoz l' eure dins l' djivêye"
+
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date a stî abandné, eployîz purade "
+"gnome_date_edit_get_time"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Tite"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Tite do macrea"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Imådje"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr ""
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr ""
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Coleur do tite"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Coleur di dvant pol tite"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Coleur di dvant pol tite"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Coleur di dvant pol tite come valixhance GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Coleur di dvant pol tite metowe"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Li coleur di dvant pol tite a stî metowe"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Coleur di fond"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Coleur di fond"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Coleur di fond come valixhance GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Coleur di fond pol tite metowe"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Li coleur di fond pol tite a stî metowe"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "Coleur di fond po l' imådjete"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "Coleur di fond po l' imådjete"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "Coleur di fond po l' imådjete come ene valixhance GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "Coleur di fond pol imådjete metowe"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "Li coleur di fond pol imådjete a stî metowe"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "Mostrer «Fini»"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Mostrer li boton «Fini» el plaece do boton «Shuvant»"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "Mostrer «Aidance»"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "Mostrer li boton «Aidance»"
+
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr ""
@@ -1072,7 +956,7 @@ msgstr "sans 12"
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr ""
-"Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
+"Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1112,7 +996,7 @@ msgstr "Tecse d' egzimpe"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Tecse d' egzimpe ki mostere çou ki l' fonte ravize"
+msgstr "Tecse d' egzimpe ki mostere çou ki l' fonte ravize"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1161,6 +1045,46 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
+
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "Hårdêye"
+
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "Li hårdêye ki GnomeHRef mete en alaedje"
+
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "Tecse"
+
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "Li tecse el boton"
+
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "Fini avou l' fwin dins l' monde"
+
+#: libgnomeui/gnome-href.c:138
+msgid "Link color"
+msgstr "Coleur do loyén"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Color used to draw the link"
+msgstr "Coleur eployeye po dessiner l' loyén"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "Ci boton chal vos frè potchî al hårdêye k' i mostere."
+
+#: libgnomeui/gnome-href.c:393
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Åk n' a nén stî tot sayant d' enonder li prémetou betchteu waibe.\n"
+"Verifyîz vos apontiaedjes avou l' usteye «Programes favorits» s' i vs plait."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
@@ -1279,6 +1203,14 @@ msgstr "Kesse"
 msgid "Message"
 msgstr "Messaedje"
 
+#: libgnomeui/gnome-password-dialog.c:253
+msgid "_Username:"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:254
+msgid "_Password:"
+msgstr ""
+
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
 msgstr "Permete li vey divant"
@@ -1324,6 +1256,111 @@ msgstr "%d di %B %Y a %H e"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Boirds del tåve"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Rimplixhaedje del tåve"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Djivêye avou des ponts"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Djivêye avou des limeros"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Ritrait"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Disfé li Ritrait"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Å dfait"
+
+#: libgnomeui/gnome-ui-init.c:117
+msgid "X display to use"
+msgstr "Håynaedje X a eployî"
+
+#: libgnomeui/gnome-ui-init.c:117
+msgid "DISPLAY"
+msgstr "HÅYNAEDJE"
+
+#: libgnomeui/gnome-ui-init.c:125
+msgid "GNOME GUI Library"
+msgstr "Livreye di l' eterface grafike di GNOME"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:623
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+"I gn a yeu pus d' ene aroke di segmentåcion; dji n' pou mostrer li purnea "
+"d' aroke\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:637
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"I gn a yeu pus d' ene aroke di segmentåcion!\n"
+"Dji n' pou mostrer li purnea d' aroke\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"Li Manaedjeu di Session di GNOME (processus lº %d) s' est crashé\n"
+"a cåze d' ene aroke moirt (%s).\n"
+"Cwand vos alez clôre ci purnea chal, tos les ôtes programes et vosse session "
+"vont esse cloyous eto.\n"
+"Schapez tos vos fitchîs dvant di clôre ci purnea chal."
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Li programe «%s» (processus lº %d)\n"
+"s' est crashé a cåze d' ene aroke moirt.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Po s' è siervi: gnome_segv2 nodoprograme limsign\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "Evoyî on rapoirt di bug"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "Disbugaedje"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "Loukîz li pådje GNOME Application Crash po pus d' informåcion"
+
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
-msgstr ""
+msgstr "Moussî foû do sayaedje"
+
+#~ msgid "_Credits"
+#~ msgstr "_Gråces"
