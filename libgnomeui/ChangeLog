@@ -1,3 +1,13 @@
+1998-04-15  Arturo Espinosa Aldama  <arturo@nuclecu.unam.mx>
+
+	* gtkcalendar.c (gtk_calendar_size_allocate): just an if to
+	avoid a warning when not using the header window.
+	
+	* gtkcalendar.c (gtk_calendar_select_day): another if for added
+	functionality: gtk_calendar_select_day (my_widget, 0) now eliminates
+	any selected day in the calendar. This was already possible, but
+	generated a warning.
+
 1998-04-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dateedit.c (day_selected): Use gtk_calendar_get_date ().
