@@ -1,5 +1,10 @@
 2002-02-27  Mark McLoughlin  <mark@skynet.ie>
 
+	* gnome-entry.c: (set_combo_items): don't set the popdown
+	list if there's nothing in it.
+
+2002-02-27  Mark McLoughlin  <mark@skynet.ie>
+
 	* gnome-icon-entry.c: (gnome_icon_entry_class_init): set
 	property handlers berfore installing properties.
 

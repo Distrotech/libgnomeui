@@ -528,7 +528,6 @@ static void
 set_combo_items (GnomeEntry *gentry)
 {
 	GnomeEntryPrivate *priv;
-	GList *strings;
 	GList *l;
 	char *text;
 
@@ -542,26 +541,26 @@ set_combo_items (GnomeEntry *gentry)
 
 	/* Build the list of strings out of our items */
 
-	strings = NULL;
+	if (priv->items) {
+		GList *strings = NULL;
 
-	for (l = priv->items; l; l = l->next) {
-		struct item *item;
+		for (l = priv->items; l; l = l->next) {
+			struct item *item = l->data;
 
-		item = l->data;
+			strings = g_list_prepend (strings, item->text);
+		}
 
-		strings = g_list_prepend (strings, item->text);
+		strings = g_list_reverse (strings);
+	
+		gtk_combo_set_popdown_strings (GTK_COMBO (gentry), strings);
+
+		g_list_free (strings);
 	}
-
-	strings = g_list_reverse (strings);
-
-	gtk_combo_set_popdown_strings (GTK_COMBO (gentry), strings);
 
 	/* Restore the text in the entry and clear our changed flag. */
 
 	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (gentry)->entry), text);
 	g_free (text);
-
-	g_list_free (strings);
 
 	priv->changed = FALSE;
 }
