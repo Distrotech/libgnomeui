@@ -236,8 +236,9 @@ icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 static void
 gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEntry *ientry)
 {
+	icon_selected_cb(NULL, ientry);
+
 	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
-		icon_selected_cb(NULL, ientry);
 		gtk_widget_hide(ientry->pick_dialog);
 	}
 }
@@ -302,8 +303,10 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 						   ientry->pick_dialog_dir);
 
 
-		gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(ientry->pick_dialog)->vbox),
-				  iconsel);
+		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->pick_dialog)->vbox),
+				   ientry->fentry, TRUE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->pick_dialog)->vbox),
+				   iconsel, TRUE, TRUE, 0);
 
 		gtk_widget_show_all(ientry->pick_dialog);
 
@@ -359,6 +362,7 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 {
 	static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 	GtkWidget *w;
+	GtkWidget *align;
 	char *p;
 
 	gtk_box_set_spacing (GTK_BOX (ientry), 4);
@@ -369,7 +373,7 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 	ientry->pick_dialog = NULL;
 	ientry->pick_dialog_dir = NULL;
 	
-	w = gtk_hbox_new(FALSE,0);
+	w = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
 	gtk_widget_show(w);
 	gtk_box_pack_start (GTK_BOX (ientry), w, TRUE, TRUE, 0);
 	ientry->pickbutton = gtk_button_new_with_label(_("No Icon"));
@@ -385,15 +389,14 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 	/*FIXME: 60x60 is just larger then default 48x48, though icon sizes
 	  are supposed to be selectable I guess*/
 	gtk_widget_set_usize(ientry->pickbutton,60,60);
-	gtk_box_pack_start (GTK_BOX (w), ientry->pickbutton,
-			    TRUE, FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (w), ientry->pickbutton);
 	gtk_widget_show (ientry->pickbutton);
 
 	ientry->fentry = gnome_file_entry_new (NULL,NULL);
 	gtk_signal_connect_after(GTK_OBJECT(ientry->fentry),"browse_clicked",
 				 GTK_SIGNAL_FUNC(browse_clicked),
 				 ientry);
-	gtk_box_pack_start (GTK_BOX (ientry), ientry->fentry, FALSE, FALSE, 0);
+	/*gtk_box_pack_start (GTK_BOX (ientry), ientry->fentry, FALSE, FALSE, 0);*/
 	gtk_widget_show (ientry->fentry);
 	
 	p = gnome_pixmap_file(".");

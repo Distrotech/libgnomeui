@@ -1,3 +1,9 @@
+1999-01-26  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-icon-entry.c (gnome_icon_entry_init): Now it looks
+	better.  If anyone wanted to make it even cooler, it might be good
+	to have it inherit from gtk_button, instead of hbox.
+
 1999-01-26  Radek Doulik  <rodo@aquarius>
 
 	* gnome-app-helper.h: added some casts to (GdkModifierType) to
