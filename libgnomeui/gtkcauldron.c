@@ -62,6 +62,8 @@ struct cauldron_button {
 /* loop through all widgets that must return a value - is called before exit */
 static void gtk_cauldron_get_results (struct cauldron_result *r)
 {
+    if (!r)
+	return;
     while (r->prev)
 	r = r->prev;
     while (r) {
@@ -840,6 +842,8 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 	gtk_text_thaw (GTK_TEXT (text_widget[ntext_widget]));
     }
 
+    if (options & GTK_CAULDRON_GRAB)
+	gtk_grab_add (window);
     gtk_main ();
 
     gtk_window_remove_accel_group (GTK_WINDOW (window), accel_table);
