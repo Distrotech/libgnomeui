@@ -374,7 +374,7 @@ static GnomeStockCursor default_cursors[] = {
                 GNOME_CURSOR_XPM /* type */
         },
         {
-                GNOME_STOCK_CURSOR_ZOOM_IN, /* name */
+                GNOME_STOCK_CURSOR_ZOOM_OUT, /* name */
                 cursor_zoom_out_xpm, /* cursor_data */
                 NULL, /* xbm mask */
                 NULL, NULL, /* bitmap/mask */
