@@ -30,7 +30,7 @@
 
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
-#include "libgnome/gnome-i18n.h"
+#include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-config.h"
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"

@@ -6,8 +6,10 @@
  * Licensed under the terms of the GNU LGPL
  */
 
+#include <config.h>
+
 #include <gtk/gtk.h>
-#include "libgnome/libgnome.h"
+#include "libgnome/libgnomeP.h"
 #include <string.h>
 #include "gtk-ted.h"
 

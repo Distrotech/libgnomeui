@@ -17,13 +17,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
+#include <config.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <X11/Xlib.h>
 #include <gdk/gdkx.h>
 #include "gnome-font-selector.h"
-#include "libgnome/libgnome.h"
+#include "libgnome/libgnomeP.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gdk/gdkkeysyms.h"

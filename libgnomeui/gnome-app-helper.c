@@ -12,6 +12,9 @@
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-help.h"
+/* Note that this file must include gnome-i18n, and not gnome-i18nP,
+   so that _() is the same as the one seen by the application.  This
+   is moderately bogus; we should just call gettext() directly here.  */
 #include "libgnome/gnome-i18n.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"

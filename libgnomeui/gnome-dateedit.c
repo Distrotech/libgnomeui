@@ -7,11 +7,12 @@
 #include <config.h>
 #include <string.h>
 #include <stdlib.h> /* atoi */
+#include <stdio.h>
 #include <time.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
-#include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-i18nP.h>
 #include <libgnomeui/gtkcalendar.h>
 #include <libgnomeui/gnome-stock.h>
 

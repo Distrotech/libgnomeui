@@ -8,12 +8,14 @@
  *		(the file entry which was a base for this)
  */
 
+#include <config.h>
+
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
-#include "libgnome/libgnome.h"
+#include "libgnome/libgnomeP.h"
 #include "gnome-number-entry.h"
 #include "gnome-calculator.h"
 #include "gnome-dialog.h"

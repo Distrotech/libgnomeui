@@ -5,7 +5,10 @@
 
 
 #include <config.h>
+
+#include <stdio.h>
 #include <gtk/gtk.h>
+
 #include "libgnome/gnome-defs.h"
 #include "gnome-color-selector.h"
 

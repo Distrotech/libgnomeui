@@ -1,3 +1,20 @@
+Tue Jun 30 16:13:19 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-color-selector.c: Include <stdio.h>.
+	* gnome-stock.c: Include libgnome/gnome-i18nP.h.
+	* gnome-mdi.c: Include libgnome/gnome-i18nP.h.
+	* gnome-dateedit.c: Include libgnome/gnome-i18nP.h, <stdio.h>.
+	* gtk-ted.c: Include libgnome/libgnomeP.h.
+	* gnome-startup.c: Include libgnome/libgnomeP.h.
+	* gnome-pixmap.c: Include libgnome/libgnomeP.h.
+	* gnome-number-entry.c: Include libgnome/libgnomeP.h.
+	* gnome-init.c: Include libgnome/libgnomeP.h.
+	* gnome-font-selector.c: Include libgnome/libgnomeP.h.
+	* gnome-entry.c: Include libgnome/libgnomeP.h.
+	* gnome-dentry-edit.c: Include libgnome/libgnomeP.h.
+	* gnome-client.c: Include libgnome/libgnomeP.h.
+	* gnome-calculator.c: Include libgnome/libgnomeP.h.
+
 1998-06-30  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.[ch]: Modified menu and toolbar creation functions

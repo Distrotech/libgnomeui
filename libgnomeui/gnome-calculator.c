@@ -3,14 +3,14 @@
  * Author: George Lebl <jirka@5z.com>
  */
 
-#include "config.h"
+#include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
 #include <errno.h>
 #include <signal.h>
 #include <gtk/gtk.h>
-#include "libgnome/libgnome.h"
+#include "libgnome/libgnomeP.h"
 #include "gnome-calculator.h"
 
 typedef void (*sighandler_t)(int);

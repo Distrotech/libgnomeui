@@ -1,15 +1,16 @@
 /* GNOME GUI Library
- * Copyright (C) 1997 the Free Software Foundation
+ * Copyright (C) 1997, 1998 the Free Software Foundation
  *
  * Authors: Miguel de Icaza
  *          Federico Mena
  */
 
+#include <config.h>
 
 #include <gdk_imlib.h>
 #include "libgnome/gnome-defs.h"
 #include <gtk/gtk.h>                  /* These two includes should be remove once everyting */
-#include "libgnome/libgnome.h"        /* is switched to use the GnomePixmap widget.         */
+#include "libgnome/libgnomeP.h"        /* is switched to use the GnomePixmap widget.         */
 #include "gnome-pixmap.h"
 
 

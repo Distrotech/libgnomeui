@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <gdk_imlib.h>
-#include "libgnome/libgnome.h"
+#include "libgnome/libgnomeP.h"
 #include <argp.h>
 #include <signal.h>
 #include <sys/types.h>

@@ -1,7 +1,9 @@
 /* gnome-startup.c - Functions for handling one-time startups in sessions.
    Written by Tom Tromey <tromey@cygnus.com>.  */
 
-#include "libgnome/libgnome.h"
+#include <config.h>
+
+#include "libgnome/libgnomeP.h"
 #include "gnome-startup.h"
 
 #include <string.h>

@@ -3,13 +3,15 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+#include <config.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtklist.h>
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
-#include "libgnome/libgnome.h"
+#include "libgnome/libgnomeP.h"
 #include "gnome-entry.h"
 
 

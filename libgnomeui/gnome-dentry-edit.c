@@ -16,14 +16,11 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "gnome-dentry-edit.h"
-
 #include <config.h>
 
-#include "libgnome/gnome-util.h"
-#include "libgnome/gnome-string.h"
-#include "libgnome/gnome-i18nP.h"
-#include "libgnome/gnome-dentry.h"
+#include "gnome-dentry-edit.h"
+
+#include "libgnome/libgnomeP.h"
 
 #ifdef TEST_DENTRY_EDIT
 #define  GTK_HAVE_ACCEL_GROUP /* Hack for my own use */
@@ -629,8 +626,6 @@ static void show_icon_selection(GtkButton * b,
 
 #ifdef TEST_DENTRY_EDIT
 
-#define  __GNOME_I18N_H__ /* Already include P version */
-#include "libgnome/libgnome.h"
 #include "libgnomeui.h"
 
 static void changed_callback(GnomeDEntryEdit * dee, gpointer data)
