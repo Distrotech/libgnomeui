@@ -1,3 +1,15 @@
+2000-04-18  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-about.c (gnome_about_load_logo): Determing the size of the
+	logo used some elements of the GdkPixbuf struct directly. Bad
+	Cactus, no cookie!
+	* gnome-icon-sel.c: gdk_pixbuf API changes
+
+	* gnome-canvas-pixbuf.c: ditto
+
+	* gnome-stock.c (stock_pixmaps): ditto, plus included
+	gnome-preferences.h to get rid of a warning
+
 Wed Apr 19 05:29:24 2000  George Lebl <jirka@5z.com>
 
 	* gnome-winhints.c: add preconditions all over the place
