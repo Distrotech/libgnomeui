@@ -1,3 +1,7 @@
+Mon Sep 03 00:12:44 2001  George Lebl <jirka@5z.com>
+
+	* testgnome.c: make it compile
+
 Fri Aug 31 04:00:30 2001  George Lebl <jirka@5z.com>
 
 	* testgnome.c: remove the test of the image entry since it no longer
