@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-02-18 23:03+0100\n"
+"POT-Creation-Date: 2004-06-04 12:05+0200\n"
+"PO-Revision-Date: 2004-06-04 12:06+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -146,6 +146,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -203,6 +204,7 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -393,11 +395,11 @@ msgstr "Konfigurera programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om detta program"
 
@@ -424,7 +426,7 @@ msgstr "Skapa ett nytt fönster"
 msgid "_Close This Window"
 msgstr "_Stäng detta fönster"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Stäng det aktuella fönstret"
 
@@ -521,7 +523,7 @@ msgid "Text Only"
 msgstr "Endast text"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Använd skrivbordsstandard (%s)"
 
@@ -624,14 +626,14 @@ msgid "Authentication Required"
 msgstr "Autentisering krävs"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Du måste logga in för att komma åt %s.\n"
+msgstr "Du måste logga in för att komma åt %s-domänen %s\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "Du måste logga in för att komma åt %s.\n"
+msgstr "Du måste logga in för att komma åt %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -811,22 +813,43 @@ msgstr "Bakgrundsfärg är inställd"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Innehållsbakgrundsfärg"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Innehållsbakgrundsfärg"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Innehållsbakgrundsfärg som en GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Innehållsbakgrundsfärg inställd"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Innehållsbakgrundsfärg är inställd"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Logotypbakgrundsfärg"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Logotypbakgrundsfärg"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Logotypbakgrundsfärg som en GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Logotypbakgrundsfärg är inställd"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Logotypbakgrundsfärg är inställd"
 
@@ -1414,11 +1437,36 @@ msgstr "_Meddela utvecklarna"
 msgid "_Debug"
 msgstr "_Felsök"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avsluta testet"
+
+#~ msgid "Filesystem"
+#~ msgstr "Filsystem"
+
+#~ msgid "Bookmark saving failed (%s)"
+#~ msgstr "Sparande av bokmärke misslyckades (%s)"
+
+#~ msgid "Could not get information for file '%s': %s"
+#~ msgstr "Kunde inte hämta information om filen \"%s\": %s"
+
+#~ msgid "Failed to open file '%s': %s"
+#~ msgstr "Misslyckades med att öppna filen \"%s\": %s"
+
+#~ msgid ""
+#~ "Failed to load image '%s': reason not known, probably a corrupt image file"
+#~ msgstr ""
+#~ "Misslyckades med att läsa in bilden \"%s\": orsaken okänd, kanske en "
+#~ "trasig bildfil"
+
+#~ msgid "Use desktop default (%s)"
+#~ msgstr "Använd skrivbordsstandard (%s)"
+
+#~ msgid "You must log in to access %s.\n"
+#~ msgstr "Du måste logga in för att komma åt %s.\n"
+
 #~ msgid " domain %s"
 #~ msgstr " domän %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Avsluta testet"
 
 #~ msgid "Restart Application"
 #~ msgstr "Starta om programmet"

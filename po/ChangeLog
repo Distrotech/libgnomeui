@@ -1,3 +1,7 @@
+2004-06-04  Christian Rose  <menthos@menthos.com>
+
+	* sv.po: Updated Swedish translation.
+
 2004-06-02  Adam Weinberger  <adamw@gnome.org>
 
 	* en_CA.po: Updated Canadian English translation.
@@ -15,7 +19,8 @@
 	* cs.po: Updated Czech translation.
 
 ==================== 2.7.1 ====================
-2004-06010 Pawan Chitrakar <pawan@nplinux.com>
+2004-06-01  Pawan Chitrakar  <pawan@nplinux.com>
+
 	* ne.po: Added Nepali Translation by
 	Pawan Chitrkar <pawan@nplinux.org>
 
