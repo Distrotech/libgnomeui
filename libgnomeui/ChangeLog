@@ -1,3 +1,8 @@
+Fri Mar  6 18:06:32 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock{,-imlib,-xpm}.[ch]: reorganized pixmaps.
+	./pixmaps/ isn't needed any longer
+
 Wed Mar  4 00:14:01 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtk-ted.c (gtk_ted_new_layout): create widgets with an argument

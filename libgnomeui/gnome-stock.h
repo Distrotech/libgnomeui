@@ -1,3 +1,9 @@
+/* GNOME GUI Library
+ * Copyright (C) 1997 the Free Software Foundation
+ *
+ * Authors: Eckehard Berns
+ */
+
 #ifndef __GNOME_STOCK_H__
 #define __GNOME_STOCK_H__
 
@@ -20,54 +26,55 @@
 
 
 /* A short description:
-
-   These functions provide an applications programmer with default
-   icons for toolbars, menu pixmaps, etc. One such `icon' should have
-   at least three pixmaps to reflect it's state. There is a `regular'
-   pixmap, a `disabled' pixmap and a `focused' pixmap. You can get
-   either each of these pixmaps by calling gnome_stock_pixmap or you
-   can get a widget by calling gnome_stock_pixmap_widget. This widget
-   is a container which gtk_widget_shows the pixmap, that is
-   reflecting the current state of the widget. If for example you
-   gtk_container_add this widget to a button, which is currently not
-   sensitive, the widget will just show the `disabled' pixmap. If the
-   state of the button changes to sensitive, the widget will change to
-   the `regular' pixmap. The `focused' pixmap will be shown, when the
-   mouse pointer enters the widget.
-
-   To support themability, we use (char *) to call those functions. A
-   new theme might register new icons by calling
-   gnome_stock_pixmap_register, or may change existing icons by
-   calling gnome_stock_pixmap_change. An application should check (by
-   calling gnome_stock_pixmap_checkfor), if the current theme supports
-   an uncommon icon, before using it. The only icons an app can rely
-   on, are those defined in this haeder file.
-
-   We now have stock buttons too. To use them, just replace any
-   gtk_button_new{_with_label} with
-   gnome_stock_button(GNOME_STOCK_BUTTON_...).  This function returns
-   a GtkButton with a gettexted default text and an icon.
-
-   There's an additional feature, which might be interesting. If an
-   application calls gnome_stock_pixmap_register and uses it by
-   calling gnome_stock_pixmap_widget, it doesn't have to care about
-   the state_changed signal to display the appropriate pixmap
-   itself. Additionally gnome-stock generates a disabled version of a
-   pixmap automatically, when no pixmap for a disabled state is
-   provided. */
+ *
+ *  These functions provide an applications programmer with default
+ *  icons for toolbars, menu pixmaps, etc. One such `icon' should have
+ *  at least three pixmaps to reflect it's state. There is a `regular'
+ *  pixmap, a `disabled' pixmap and a `focused' pixmap. You can get
+ *  either each of these pixmaps by calling gnome_stock_pixmap or you
+ *  can get a widget by calling gnome_stock_pixmap_widget. This widget
+ *  is a container which gtk_widget_shows the pixmap, that is
+ *  reflecting the current state of the widget. If for example you
+ *  gtk_container_add this widget to a button, which is currently not
+ *  sensitive, the widget will just show the `disabled' pixmap. If the
+ *  state of the button changes to sensitive, the widget will change to
+ *  the `regular' pixmap. The `focused' pixmap will be shown, when the
+ *  mouse pointer enters the widget.
+ *
+ *  To support themability, we use (char *) to call those functions. A
+ *  new theme might register new icons by calling
+ *  gnome_stock_pixmap_register, or may change existing icons by
+ *  calling gnome_stock_pixmap_change. An application should check (by
+ *  calling gnome_stock_pixmap_checkfor), if the current theme supports
+ *  an uncommon icon, before using it. The only icons an app can rely
+ *  on, are those defined in this haeder file.
+ *
+ *  We now have stock buttons too. To use them, just replace any
+ *  gtk_button_new{_with_label} with
+ *  gnome_stock_button(GNOME_STOCK_BUTTON_...).  This function returns
+ *  a GtkButton with a gettexted default text and an icon.
+ *
+ *  There's an additional feature, which might be interesting. If an
+ *  application calls gnome_stock_pixmap_register and uses it by
+ *  calling gnome_stock_pixmap_widget, it doesn't have to care about
+ *  the state_changed signal to display the appropriate pixmap
+ *  itself. Additionally gnome-stock generates a disabled version of a
+ *  pixmap automatically, when no pixmap for a disabled state is
+ *  provided.
+ */
 
 /* State:
-
-   currently implemented:
-     - gnome_stock_pixmap
-     - gnome_stock_pixmap_widget
-     - gnome_stock_pixmap_checkfor
-     - GnomeStockPixmapWidget
-     - gnome_stock_button
-     - gnome_stock_pixmap_register
-
-   not implemented:
-     - gnome_stock_pixmap_change
+ *
+ *  currently implemented:
+ *    - gnome_stock_pixmap
+ *    - gnome_stock_pixmap_widget
+ *    - gnome_stock_pixmap_checkfor
+ *    - GnomeStockPixmapWidget
+ *    - gnome_stock_button
+ *    - gnome_stock_pixmap_register
+ *
+ *  not implemented:
+ *    - gnome_stock_pixmap_change
  */
 
 BEGIN_GNOME_DECLS
@@ -83,6 +90,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_PASTE       "Paste"
 #define GNOME_STOCK_PIXMAP_PROPERTIES  "Properties"
 #define GNOME_STOCK_PIXMAP_HELP        "Help"
+#define GNOME_STOCK_PIXMAP_SCORES      "Scores"
 #define GNOME_STOCK_PIXMAP_EXIT        "Exit"
 
 
@@ -234,13 +242,13 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
 
 /*  buttons  */
 
-#define GNOME_STOCK_BUTTON_OK     "Ok"
-#define GNOME_STOCK_BUTTON_CANCEL "Cancel"
-#define GNOME_STOCK_BUTTON_YES    "Yes"
-#define GNOME_STOCK_BUTTON_NO     "No"
-#define GNOME_STOCK_BUTTON_CLOSE  GNOME_STOCK_PIXMAP_EXIT
-#define GNOME_STOCK_BUTTON_APPLY  "Apply"
-#define GNOME_STOCK_BUTTON_HELP   GNOME_STOCK_PIXMAP_HELP
+#define GNOME_STOCK_BUTTON_OK     "Button_Ok"
+#define GNOME_STOCK_BUTTON_CANCEL "Button_Cancel"
+#define GNOME_STOCK_BUTTON_YES    "Button_Yes"
+#define GNOME_STOCK_BUTTON_NO     "Button_No"
+#define GNOME_STOCK_BUTTON_CLOSE  "Button_Exit"
+#define GNOME_STOCK_BUTTON_APPLY  "Button_Apply"
+#define GNOME_STOCK_BUTTON_HELP   "Button_Help"
 
 /* returns a default button widget for dialogs */
 GtkWidget             *gnome_stock_button          (char *type);
