@@ -66,18 +66,17 @@ EXTRA_DIST = \
 	AUTHORS
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs) $(LIBGNOME_LIBS) \
-	$(DL_LIB)
+libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS) 
 
 ted_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
-	$(GTK_LIBS) $(X_LIBS) $(x_libs) $(LIBGNOME_LIBS)
+	$(LIBGNOMEUI_LIBS) $(INTLLIBS)
 
 stock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
-	$(GTK_LIBS) $(X_LIBS) $(x_libs) $(INTLLIBS)
+	$(LIBGNOMEUI_LIBS) $(INTLLIBS)
 
 dist-hook:
 	mkdir $(distdir)/pixmaps
