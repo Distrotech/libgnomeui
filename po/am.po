@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
+"POT-Creation-Date: 2004-02-03 11:16+0100\n"
 "PO-Revision-Date: 2003-02-03 10:16+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
@@ -497,23 +497,23 @@ msgstr "_ይዞታዎች"
 msgid "View help for this application"
 msgstr "ለእዚህ መጠቀሚያ ፕሮግራም መረጃ አሳይ"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "ጽሑፍ ከምልክቶቹ ስር"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "ከምልክቶቹ ጐን ቀዳሚ ጽሑፍ"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "ምልክቶችን ብቻ"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "ጽሑፉን ብቻ"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "ነባሩን ሠሌዳ ይጠቀሙ (%s)"
@@ -648,7 +648,7 @@ msgstr "ለአስተዳደሩ ጉባኤ ግንኙነቱን አቋርጥ "
 msgid "Session management"
 msgstr "የመምሪያው ጉባኤ"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "መዝጊያውን ይሰርዙ"
 
@@ -1300,25 +1300,29 @@ msgstr "አንቀጽ የሌለው"
 msgid "About"
 msgstr "ስለ"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr ""
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "Xን ለመጠቀም አሳይ"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "አሳይ"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "የGNOME GUI ስብስብ"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "የተለያዩ ክፍሎች ላይ ስህተት ተከስቷል፥ ስሕተቱን ማሳየት አልተቻለም\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1326,7 +1330,7 @@ msgstr ""
 "የተወሰነ ክፍል ስህተት!\n"
 "ግጭቱን ማውጫ ማሳየት አይቻልም\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1340,36 +1344,51 @@ msgstr ""
 "ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞችይዘጉና ከውይይትዎ ይወጣሉ።እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ "
 "ከመዝጋትዎ በፊት ያስቀምጧቸው።"
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
 msgstr ""
-"በአደገኛ ስሕተት ምክንያት።\n"
-"የመጠቀሚያ ፕሮግራሞች \"%s\" (ድርጊት %d) ተቋርጧል\n"
-"(%s)"
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "አጠቃቀም፦ gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "የስሕተቱን ጉዳይ አቅርብ"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr ""
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "አስተካክል"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "በአደገኛ ስሕተት ምክንያት።\n"
+#~ "የመጠቀሚያ ፕሮግራሞች \"%s\" (ድርጊት %d) ተቋርጧል\n"
+#~ "(%s)"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "ለበለጠ መረጃ እባክዎን የGNOMEን ፕሮግራም ይጎብኙ"
+#~ msgid "Submit a bug report"
+#~ msgstr "የስሕተቱን ጉዳይ አቅርብ"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "ለበለጠ መረጃ እባክዎን የGNOMEን ፕሮግራም ይጎብኙ"
 
 #~ msgid "_Credits"
 #~ msgstr "_ተሳታፊዎች"

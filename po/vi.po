@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
+"POT-Creation-Date: 2004-02-03 11:16+0100\n"
 "PO-Revision-Date: 2003-01-10 22:03+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
@@ -498,23 +498,23 @@ msgstr "_Nội Dung"
 msgid "View help for this application"
 msgstr "Xem trợ giúp cho ứng dụng này"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Văn bản bên dưới Biểu tượng"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Văn bản ưu tiên cạnh biểu tượng"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Chỉ có các Biểu tượng"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Chỉ có Văn bản"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Dùng Màn Hình Nền mặc định (%s)"
@@ -649,7 +649,7 @@ msgstr "Tắt kết nối với trình quản lý phiên làm việc"
 msgid "Session management"
 msgstr "Quản lý phiên làm việc"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Bỏ qua việc Thoát ra"
 
@@ -1310,27 +1310,31 @@ msgstr "Không-lùi "
 msgid "About"
 msgstr "Về chủ đề"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr ""
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "Dùng hiển thị X"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "HIỂN THỊ"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "Thư viện của GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Nhiều lỗi trong truy cập bộ nhớ xuất hiện; không hiển thị được đối thoại "
 "lỗi\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1338,7 +1342,7 @@ msgstr ""
 "Sự truy cập bộ nhớ có lỗi!\n"
 "Không thể hiển thị đối thoại đổ vỡ\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1353,36 +1357,51 @@ msgstr ""
 "quá trình tác vụ của bạn sẽ bị ngừng lại.\n"
 "Hãy nhớ tất cả các văn bản của bạn trước khi đóng đối thoại này."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
 msgstr ""
-"Ứng dụng \"%s\" (quá trình %d) đã bị đổ vỡ\n"
-"do một sai lầm nguy hiểm.\n"
-"(%s)"
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Sử dụng: gnome_segv appname signum\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Trình ra một báo cáo rối "
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr ""
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Gỡ rối"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Ứng dụng \"%s\" (quá trình %d) đã bị đổ vỡ\n"
+#~ "do một sai lầm nguy hiểm.\n"
+#~ "(%s)"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Hãy xem trang the GNOME Application Crash để có thêm thông tin"
+#~ msgid "Submit a bug report"
+#~ msgstr "Trình ra một báo cáo rối "
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "Hãy xem trang the GNOME Application Crash để có thêm thông tin"
 
 #~ msgid "_Credits"
 #~ msgstr "_Công lao"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
+"POT-Creation-Date: 2004-02-03 11:16+0100\n"
 "PO-Revision-Date: 2003-06-19 23:27+0300\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -500,23 +500,23 @@ msgstr "_תכנים"
 msgid "View help for this application"
 msgstr "מציג עזרה עבור יישום זה"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "טקסט מתחת לסמלים"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "עדיפות טקסט ליד סמלים"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "סמלים בלבד"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "טקסט בלבד"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "השתמש בברירת המחדל של שולחן העבודה (%s)"
@@ -655,7 +655,7 @@ msgstr "כבה התחברות למנהל התצורה"
 msgid "Session management"
 msgstr "ניהול תצורות הפעלה"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "בטל התחברות"
 
@@ -1310,25 +1310,29 @@ msgstr "ביטול הזחה"
 msgid "About"
 msgstr "אודות"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr ""
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "תצוגת X לשימוש"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "תצוגה"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "ספריית ממשק המשתמש של GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "מספר תקלות הקטעה אירעו בו זמנית; לא ניתן להציג תיבת דו-שיח לשגיאה\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1336,7 +1340,7 @@ msgstr ""
 "תקלת הקטעה!\n"
 "לא ניתן להציג את דו-שיח ההתרסקות\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1350,36 +1354,51 @@ msgstr ""
 "כאשר תסגור את תיבת דו-שיח זו, כל היישומים יסגרו ותצורת ההפעלה שלך תסתיים.\n"
 "אנא שמור את כל הקבצים שלך לפני סגירת תיבת דו-שיח זו."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
 msgstr ""
-"היישום \"%s\" (תהליך %d) התרסק\n"
-"עקב שגיאה חמורה.\n"
-"(%s)"
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "שימוש: gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "שלח דו\"ח באג"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr ""
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "נפה"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "היישום \"%s\" (תהליך %d) התרסק\n"
+#~ "עקב שגיאה חמורה.\n"
+#~ "(%s)"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "אנא בקר בעמוד ריסוק היישומים של GNOME לעוד מידע"
+#~ msgid "Submit a bug report"
+#~ msgstr "שלח דו\"ח באג"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "אנא בקר בעמוד ריסוק היישומים של GNOME לעוד מידע"
 
 #~ msgid "Exit the test"
 #~ msgstr "יציאה מהבדיקה"

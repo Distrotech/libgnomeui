@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
+"POT-Creation-Date: 2004-02-03 11:16+0100\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Jitendra Shah <jitendras@vsnl.com>\n"
 "Language-Team: Marathi <www.indictrans.org>\n"
@@ -611,28 +611,28 @@ msgstr "अनुक्रमणीका"
 msgid "View help for this application"
 msgstr "या कार्यक्रमाची मदतपुस्तिका पहा"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "चिन्हांखाली गद्य दाखवा "
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "चिन्हांच्या बाजुला प्राध्यान्यक्रमातिल गद्य दाखवा"
 
 # libgnomeui/gnome-app-helper.c:2564
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 #, fuzzy
 msgid "Icons Only"
 msgstr "फक्त चिन्ह दाखवा"
 
 # libgnomeui/gnome-app-helper.c:2565
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 #, fuzzy
 msgid "Text Only"
 msgstr "फक्त गद्य दाखवा"
 
 # libgnomeui/gnome-app-helper.c:2616
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "डेस्कटाॅपचे सर्वसाधानरण समायोजन वापरा(%s)"
@@ -792,7 +792,7 @@ msgid "Session management"
 msgstr "सत्र संचालन"
 
 # libgnomeui/gnome-client.c:2483
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "लाॅगआउट उद्द करा"
 
@@ -1592,31 +1592,35 @@ msgstr "मांडणी रद्द करा"
 msgid "About"
 msgstr "आम्ही कोन?"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr ""
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "वापरण्यासाठीचे X दृश्य"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "दाखवा"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "ग्नोम GUI लाइब्रेरी"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "बऱ्याच ठीकाणी चुका झाल्याः चुक संदेश दाखवता येत नाही\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr "बऱ्याच ठिकाणी चुका झाल्याः चुक संदेशदाखवता येत नाही\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, fuzzy, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1629,36 +1633,52 @@ msgstr ""
 "कारण एक गंभीर चुक झाली कारण सर्व कार्यक्ररम बंद होतीलकृपया हा संवाद बंद करण्यापूर्वी "
 "आपल्या सर्व फाइल संचयीत करा"
 
-#: libgnomeui/gnome_segv.c:110
-#, fuzzy, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
+#: libgnomeui/gnome_segv.c:112
+#, c-format
+msgid "The Application \"%s\" has quit unexpectedly."
 msgstr ""
-" \"%1s\"हा कार्यक्रम (प्रक्रीया %d) बंद पडला आहे\n"
-"कारण एक गंभीर चुक झाली आहे\n"
-"(%2s)"
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "असा वापर करा:gnome_segv2 कार्यक्रमाचे नाव संकेत-क्रमांक\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "चुक अहवालजम करा"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr ""
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "चुक सुधारा"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#, fuzzy
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ " \"%1s\"हा कार्यक्रम (प्रक्रीया %d) बंद पडला आहे\n"
+#~ "कारण एक गंभीर चुक झाली आहे\n"
+#~ "(%2s)"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "अधिकमाहितीकरता कृपया ग्नोम कार्यक्रम बिधाड पानावरजा"
+#~ msgid "Submit a bug report"
+#~ msgstr "चुक अहवालजम करा"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "अधिकमाहितीकरता कृपया ग्नोम कार्यक्रम बिधाड पानावरजा"
 
 #~ msgid "_Credits"
 #~ msgstr "श्रेय"

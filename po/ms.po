@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
+"POT-Creation-Date: 2004-02-03 11:16+0100\n"
 "PO-Revision-Date: 2003-07-20 22:54+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -572,24 +572,24 @@ msgstr "_Kandungan"
 msgid "View help for this application"
 msgstr "Lihat bantuan bagi aplikasi ini"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Teks di Bawah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Teks Prioriti di Sebelah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Ikon Sahaja"
 
 # libgnomeui/gnome-stock.c:844
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Teks Sahaja"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Guna default desktop (%s)"
@@ -750,7 +750,7 @@ msgid "Session management"
 msgstr "Pengurusan sessi"
 
 # libgnomeui/gnome-client.c:2348
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Batal Logkeluar"
 
@@ -1465,30 +1465,34 @@ msgstr "Nyah-inden"
 msgid "About"
 msgstr "Perihal"
 
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr ""
+
 # libgnomeui/gnome-init.c:165
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "Antaramuka X yang hendak diguna"
 
 # libgnomeui/gnome-init.c:165
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "PAPARAN"
 
 # libgnomeui/gnome-init.c:298
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "Pustaka GUI GNOME"
 
 # libgnomeui/gnome-init.c:642
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Beberapa ralat segmentasi berlaku; tidak dapat paparkan dialog ralat\n"
 
 # libgnomeui/gnome-init.c:642
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1497,7 +1501,7 @@ msgstr ""
 "tidak dapat paparkan dialog jahanam\n"
 
 # libgnomeui/gnome_segv.c:62
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1511,42 +1515,57 @@ msgstr ""
 "Semua aplikasi akan ditutup dan sesi akan tamat setelah dialog ini ditutup.\n"
 "Sila simpan semua fail sebelum anda tutup dialog ini."
 
-# libgnomeui/gnome_segv.c:72
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
 msgstr ""
-"Aturcara \"%s\" (process %d) telah musnah\n"
-"akibat ralat yang tidak dapat diselesaikan.\n"
-"(%s)"
+
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
 
 # libgnomeui/gnome_segv.c:80
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Penggunaan: gnome_segv appname signum\n"
 
-# libgnomeui/gnome_segv.c:94
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Hantar laporan pepijat"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr ""
 
 # libgnomeui/gnome_segv.c:104
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Nyahpepijat"
 
+# libgnomeui/gnome_segv.c:72
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Aturcara \"%s\" (process %d) telah musnah\n"
+#~ "akibat ralat yang tidak dapat diselesaikan.\n"
+#~ "(%s)"
+
+# libgnomeui/gnome_segv.c:94
+#~ msgid "Submit a bug report"
+#~ msgstr "Hantar laporan pepijat"
+
 # libgnomeui/gnome_segv.c:111
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 # libgnomeui/gnome_segv.c:117
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Sila lawat laman Aplikasi Musnah GNOME untuk maklumat lanjut"
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "Sila lawat laman Aplikasi Musnah GNOME untuk maklumat lanjut"
 
 # libgnomeui/gnome-app-helper.c:160
 #~ msgid "Exit the test"

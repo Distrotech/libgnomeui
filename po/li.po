@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
+"POT-Creation-Date: 2004-02-03 11:16+0100\n"
 "PO-Revision-Date: 2003-05-15 16:03+0000\n"
 "Last-Translator: Mathieu van Woerkom <mathieu.brabants.org>\n"
 "Language-Team: Limburgish <li.org>\n"
@@ -493,23 +493,23 @@ msgstr "_Inhaud"
 msgid "View help for this application"
 msgstr "De hulp bie dees toepassing bezeen"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Teks ónger piktogramme"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Prioriteitsteks naeve piktogramme"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Allein piktogramme"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Allein teks"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Beroblaadsjtanderd (%s) gebroeke"
@@ -648,7 +648,7 @@ msgstr "Verbènjing mit de sessiemeister oetsjakele"
 msgid "Session management"
 msgstr "Sessie-meister"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Aafmèljen annelere"
 
@@ -1314,27 +1314,31 @@ msgstr "Oetsjpringe"
 msgid "About"
 msgstr "Euver"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr ""
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "de te gebroeke X-display"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibeleteek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "'t goof mierdere segmentasiefaelers; kèn 't faeler-dialoogvinster neet "
 "tuine\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1342,7 +1346,7 @@ msgstr ""
 "Segmentasiefaeler!\n"
 "Kèn 't crash-dialoogvinster neet tuine\n"
 
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1357,36 +1361,51 @@ msgstr ""
 "eur sessie aafsjloete.\n"
 "Verweurt uch al eur besjtenj ierdet geer dit dialoogvinster sjloet."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
 msgstr ""
-"Toepassing \"%s\" (proces %d) is aafgesjlaote\n"
-"door ein fatale faeler.\n"
-"(%s)"
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "gebroek: gnome_segv2 appnaam signum\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Ein faelerreport insjikke"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr ""
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Debug"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Toepassing \"%s\" (proces %d) is aafgesjlaote\n"
+#~ "door ein fatale faeler.\n"
+#~ "(%s)"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Bezuug de 'GNOME Application Crash'-pagina veur mie infermasie"
+#~ msgid "Submit a bug report"
+#~ msgstr "Ein faelerreport insjikke"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "Bezuug de 'GNOME Application Crash'-pagina veur mie infermasie"
 
 #~ msgid "Exit the test"
 #~ msgstr "Tes aafsjloete"

@@ -1,3 +1,7 @@
+2004-02-03  Anders Carlsson  <andersca@gnome.org>
+
+	* configure.in: Release 2.5.4
+
 2004-01-21  Iain <iain@prettypeople.org>
 
 	* libgnomeui/gnome_segv.c (main): Remove the separator from the window

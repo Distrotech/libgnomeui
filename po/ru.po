@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-22 09:23+0300\n"
+"POT-Creation-Date: 2004-02-03 11:16+0100\n"
 "PO-Revision-Date: 2004-01-22 12:32+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -139,7 +139,6 @@ msgstr "О программе \"%s\""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -197,7 +196,6 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Справка"
 
@@ -388,11 +386,11 @@ msgstr "Настроить приложение"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_О программе"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Получить информацию об этой программе"
 
@@ -419,7 +417,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "_Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -1394,9 +1392,8 @@ msgstr "Сообщить разработчикам"
 msgid "Debug"
 msgstr "Отладить"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Выйти из теста"
+#~ msgid "Exit the test"
+#~ msgstr "Выйти из теста"
 
 #~ msgid ""
 #~ "Application \"%s\" (process %d) has crashed\n"

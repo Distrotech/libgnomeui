@@ -4,14 +4,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-31 07:35+0900\n"
+"POT-Creation-Date: 2004-02-03 11:16+0100\n"
 "PO-Revision-Date: 2004-01-31 07:37+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: demos/mdi_demo.c:128
@@ -138,7 +138,6 @@ msgstr "%s 정보"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -196,7 +195,6 @@ msgid "_Game"
 msgstr "게임(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -387,11 +385,11 @@ msgstr "프로그램을 설정합니다"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "정보(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "이 프로그램에 대한 정보"
 
@@ -418,7 +416,7 @@ msgstr "새로운 창을 만듭니다"
 msgid "_Close This Window"
 msgstr "창 닫기(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "현재 창을 닫습니다"
 
@@ -1331,14 +1329,12 @@ msgstr "그놈 GUI 라이브러리"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "여러 개의 세그먼테이션 오류가 발생했습니다; 애러 창을 보여줄 수 없습니다\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1375,7 +1371,9 @@ msgstr "프로세스 %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "개발자에게 무슨 일이 일어났는 지 알려주면 이 문제점을 고치는 데 도움이 됩니다.  아니면 지금 프로그램을 다시 시작할 수 있습니다."
+msgstr ""
+"개발자에게 무슨 일이 일어났는 지 알려주면 이 문제점을 고치는 데 도움이 됩니"
+"다.  아니면 지금 프로그램을 다시 시작할 수 있습니다."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1389,6 +1387,5 @@ msgstr "개발자에게 알리기"
 msgid "Debug"
 msgstr "디버그"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "테스트 끝내기"
+#~ msgid "Exit the test"
+#~ msgstr "테스트 끝내기"
