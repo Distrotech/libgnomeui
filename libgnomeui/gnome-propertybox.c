@@ -96,42 +96,29 @@ gnome_property_box_instance_init (GnomePropertyBox *property_box)
 
 	property_box->notebook = gtk_notebook_new ();
 
-	/* FIXME!
-	* if (gnome_preferences_get_property_box_apply ()){ */
-		gnome_dialog_append_buttons (GNOME_DIALOG (property_box),
-					     GNOME_STOCK_BUTTON_OK,
-					     GNOME_STOCK_BUTTON_APPLY,
-					     GNOME_STOCK_BUTTON_CLOSE,
-					     GNOME_STOCK_BUTTON_HELP,
-					     NULL);
-	/*} else {
-		gnome_dialog_append_buttons (GNOME_DIALOG (property_box),
-					     GNOME_STOCK_BUTTON_OK,
-					     GNOME_STOCK_BUTTON_CANCEL,
-					     GNOME_STOCK_BUTTON_HELP,
-					     NULL);
-	} */
+	gnome_dialog_append_buttons (GNOME_DIALOG (property_box),
+				     GNOME_STOCK_BUTTON_HELP,
+				     GNOME_STOCK_BUTTON_APPLY,
+				     GNOME_STOCK_BUTTON_CLOSE,
+				     GNOME_STOCK_BUTTON_OK,
+				     NULL);
 
-	gnome_dialog_set_default (GNOME_DIALOG (property_box), 0);
+	gnome_dialog_set_default (GNOME_DIALOG (property_box), 3);
 
 	/* This is sort of unattractive */
 
 	button_list = GNOME_DIALOG(property_box)->buttons;
 
-	property_box->ok_button = GTK_WIDGET(button_list->data);
+	property_box->help_button = GTK_WIDGET(button_list->data);
 	button_list = button_list->next;
 	
-	/* FIXME!
-	if (gnome_preferences_get_property_box_apply ()){ */
-		property_box->apply_button = GTK_WIDGET(button_list->data);
-		button_list = button_list->next;
-		gtk_widget_set_sensitive (property_box->apply_button, FALSE);
-	/*} else
-		property_box->apply_button = 0; */
+	property_box->apply_button = GTK_WIDGET(button_list->data);
+	button_list = button_list->next;
+	gtk_widget_set_sensitive (property_box->apply_button, FALSE);
 	
 	property_box->cancel_button = GTK_WIDGET(button_list->data);
 	button_list = button_list->next;
-	property_box->help_button = GTK_WIDGET(button_list->data);
+	property_box->ok_button = GTK_WIDGET(button_list->data);
 	
 
 	gtk_signal_connect ( GTK_OBJECT(property_box), "clicked",
@@ -196,44 +183,25 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
                 dirty = FALSE;
         }
                 
-	/* Choose which style we did */
-	if (pbox->apply_button){
-		switch(button) {
-		case 0:
-			if (dirty)
-				apply_and_close (GNOME_PROPERTY_BOX (dialog));
-			else
-				just_close (GNOME_PROPERTY_BOX (dialog));
-			break;
-		case 1:
-			global_apply (GNOME_PROPERTY_BOX (dialog));
-			break;
-		case 2:
+	switch(button) {
+	case 0:
+		help (GNOME_PROPERTY_BOX (dialog));
+		break;
+	case 1:
+		global_apply (GNOME_PROPERTY_BOX (dialog));
+		break;
+	case 2:
+		just_close (GNOME_PROPERTY_BOX (dialog));
+		break;
+	case 3:
+		if (dirty)
+			apply_and_close (GNOME_PROPERTY_BOX (dialog));
+		else
 			just_close (GNOME_PROPERTY_BOX (dialog));
-			break;
-		case 3:
-			help (GNOME_PROPERTY_BOX (dialog));
-			break;
-		default:
-			g_assert_not_reached();
-		}
-	} else {
-		switch(button) {
-		case 0:
-			if (dirty)
-				apply_and_close (GNOME_PROPERTY_BOX (dialog));
-			else
-				just_close (GNOME_PROPERTY_BOX (dialog));
-			break;
-		case 1:
-			just_close (GNOME_PROPERTY_BOX (dialog));
-			break;
-		case 2:
-			help (GNOME_PROPERTY_BOX (dialog));
-			break;
-		default:
-			g_assert_not_reached();
-		}
+		break;
+
+	default:
+		g_assert_not_reached();
 	}
 }
 

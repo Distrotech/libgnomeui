@@ -156,6 +156,12 @@ static void
 dialog_reply_callback (GnomeMessageBox * mbox, gint button, callback_info* data)
 {
   GnomeReplyCallback func = (GnomeReplyCallback) data->function;
+
+  if (button == 0)
+	  button = 1;
+  else
+	  button = 0;
+  
   (* func)(button, data->data);
 }
  
@@ -168,13 +174,13 @@ reply_dialog (const gchar * question, GnomeReplyCallback callback, gpointer data
 
   if (yes_or_ok) {
     mbox = gnome_message_box_new(question, GNOME_MESSAGE_BOX_QUESTION,
-				 GNOME_STOCK_BUTTON_YES, 
-				 GNOME_STOCK_BUTTON_NO, NULL);
+				 GNOME_STOCK_BUTTON_NO, 
+				 GNOME_STOCK_BUTTON_YES, NULL);
   }
   else {
     mbox = gnome_message_box_new(question, GNOME_MESSAGE_BOX_QUESTION,
-				 GNOME_STOCK_BUTTON_OK, 
-				 GNOME_STOCK_BUTTON_CANCEL, NULL);
+				 GNOME_STOCK_BUTTON_CANCEL, 
+				 GNOME_STOCK_BUTTON_OK, NULL);
   }
 
   if (callback != NULL) {
@@ -395,7 +401,7 @@ dialog_string_callback (GnomeMessageBox * mbox, gint button, callback_info * dat
   const char * tmp;
   GnomeStringCallback func = (GnomeStringCallback)data->function;
 
-  if (button == 0) {
+  if (button == 1) {
     tmp = gtk_entry_get_text (data->entry);
     if (tmp) s = g_strdup(tmp);
   }
@@ -414,10 +420,10 @@ request_dialog (const gchar * request, const gchar * default_text, const guint16
   GtkWidget * entry;
 
   mbox = gnome_message_box_new ( request, GNOME_MESSAGE_BOX_QUESTION,
-				 GNOME_STOCK_BUTTON_OK, 
-				 GNOME_STOCK_BUTTON_CANCEL,
+				 GNOME_STOCK_BUTTON_CANCEL, 
+				 GNOME_STOCK_BUTTON_OK,
 				 NULL );
-  gnome_dialog_set_default ( GNOME_DIALOG(mbox), 0 );
+  gnome_dialog_set_default ( GNOME_DIALOG(mbox), 1 );
 
   /* set up text entry widget */
   entry = gtk_entry_new();

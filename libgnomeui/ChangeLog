@@ -1,3 +1,17 @@
+2001-11-28  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-href.c (gnome_href_realize): Set the cursor on the input
+	window.
+
+	* gnome-propertybox.c: Add patch from Gediminas Paulauskas to change
+	button order to conform with the usability guidelines.
+
+	* gnome-dialog-util.c: Change button order to conform with the
+	usability guidelines.
+
+	* gnome-entry.c (build_gconf_key): Update gconf key to match
+	the specifications.
+
 2001-11-28  jacob berkman  <jacob@ximian.com>
 
 	* Makefile.am (EXTRA_DIST): add libgnomeui.schemas

@@ -449,7 +449,7 @@ gnome_href_realize(GtkWidget *widget)
 	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, realize, (widget));
 
 	cursor = gdk_cursor_new(GDK_HAND2);
-	gdk_window_set_cursor(widget->window, cursor);
+	gdk_window_set_cursor(GTK_BUTTON (widget)->event_window, cursor);
 	gdk_cursor_destroy(cursor);
 }
 
