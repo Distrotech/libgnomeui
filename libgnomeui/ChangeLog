@@ -1,3 +1,14 @@
+1998-04-17  Arturo Espinosa  <arturo@nuclecu.unam.mx>
+
+	* gtkcalendar.[hc]: display option GTK_CALENDAR_NO_MONTH_CHANGE to 
+	avoid undesired month changings.
+
+1998-04-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dateedit.c (gnome_date_edit_new): Now gets a show_time
+	flag that indicates show the time part (or just the date).
+	(gnome_date_edit_init): Fix cut&paste typo when showing time_entry.
+
 1998-04-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dateedit.c (gnome_date_edit_set_time): Print the date correctly.

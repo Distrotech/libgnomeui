@@ -299,80 +299,8 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 static void
 gnome_date_edit_init (GnomeDateEdit *gde)
 {
-	GtkWidget *frame;
-	GtkWidget *hbox;
-	GtkWidget *label;
-	GtkWidget *arrow;
-
 	gde->lower_hour = 7;
 	gde->upper_hour = 19;
-	
-	gde->date_entry  = gtk_entry_new ();
-	gtk_widget_set_usize (gde->date_entry, 90, 0);
-	gtk_box_pack_start (GTK_BOX (gde), gde->date_entry, TRUE, TRUE, 0);
-	gtk_widget_show (gde->date_entry);
-	
-	gde->date_button = gtk_button_new ();
-	gtk_signal_connect (GTK_OBJECT (gde->date_button), "clicked",
-			    GTK_SIGNAL_FUNC (select_clicked), gde);
-	gtk_box_pack_start (GTK_BOX (gde), gde->date_button, FALSE, FALSE, 0);
-
-	hbox = gtk_hbox_new (FALSE, 3);
-	gtk_container_add (GTK_CONTAINER (gde->date_button), hbox);
-	gtk_widget_show (hbox);
-
-	label = gtk_label_new (_("Calendar"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
-	gtk_widget_show (label);
-
-	arrow = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
-	gtk_box_pack_start (GTK_BOX (hbox), arrow, FALSE, FALSE, 0);
-	gtk_widget_show (arrow);
-	
-	gtk_widget_show (gde->date_button);
-
-	gde->time_entry = gtk_entry_new_with_max_length (9);
-	gtk_widget_set_usize (gde->time_entry, 88, 0);
-	gtk_box_pack_start (GTK_BOX (gde), gde->time_entry, TRUE, TRUE, 0);
-	gtk_widget_show (gde->date_entry);
-
-	gde->time_popup = gtk_option_menu_new ();
-	gtk_box_pack_start (GTK_BOX (gde), gde->time_popup, FALSE, FALSE, 0);
-	gtk_widget_show (gde->time_popup);
-
-	/* We do not create the popup menu with the hour range until we are
-	 * realized, so that it uses the values that the user might supply
-	 * in a future call to gnome_date_edit_set_popup_range
-	 */
-	gtk_signal_connect (GTK_OBJECT (gde), "realize",
-			    GTK_SIGNAL_FUNC (fill_time_popup), gde);
-
-	gde->cal_popup = gtk_window_new (GTK_WINDOW_POPUP);
-	gtk_widget_set_events (gde->cal_popup, gtk_widget_get_events (gde->cal_popup) | GDK_KEY_PRESS_MASK);
-	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "delete_event",
-			    (GtkSignalFunc) delete_popup,
-			    gde);
-	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "key_press_event",
-			    (GtkSignalFunc) key_press_popup,
-			    gde);
-	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "button_press_event",
-			    (GtkSignalFunc) button_press_popup,
-			    gde);
-	gtk_window_set_policy (GTK_WINDOW (gde->cal_popup), FALSE, FALSE, TRUE);
-
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_add (GTK_CONTAINER (gde->cal_popup), frame);
-	gtk_widget_show (frame);
-
-	gde->calendar = gtk_calendar_new ();
-	gtk_calendar_display_options (GTK_CALENDAR (gde->calendar),
-				      GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_HEADING);
-	gtk_signal_connect (GTK_OBJECT (gde->calendar), "day_selected",
-			    GTK_SIGNAL_FUNC (day_selected), gde);
-	gtk_container_add (GTK_CONTAINER (frame), gde->calendar);
-	gtk_widget_show (gde->calendar);
 }
 
 static void
@@ -407,9 +335,11 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	sprintf (buffer, "%d/%d/%d", mytm->tm_mon + 1, mytm->tm_mday, 1900 + mytm->tm_year);
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 
-	/* Set the time */
-	strftime (buffer, sizeof (buffer), "%I:%M %p", mytm);
-	gtk_entry_set_text (GTK_ENTRY (gde->time_entry), buffer);
+	if (gde->time_entry) {
+		/* Set the time */
+		strftime (buffer, sizeof (buffer), "%I:%M %p", mytm);
+		gtk_entry_set_text (GTK_ENTRY (gde->time_entry), buffer);
+	}
 }
 
 void
@@ -419,12 +349,97 @@ gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour)
 	gde->upper_hour = up_hour;
 }
 
+static void
+create_children (GnomeDateEdit *gde, int show_time)
+{
+	GtkWidget *frame;
+	GtkWidget *hbox;
+	GtkWidget *label;
+	GtkWidget *arrow;
+
+	gde->date_entry  = gtk_entry_new ();
+	gtk_widget_set_usize (gde->date_entry, 90, 0);
+	gtk_box_pack_start (GTK_BOX (gde), gde->date_entry, TRUE, TRUE, 0);
+	gtk_widget_show (gde->date_entry);
+	
+	gde->date_button = gtk_button_new ();
+	gtk_signal_connect (GTK_OBJECT (gde->date_button), "clicked",
+			    GTK_SIGNAL_FUNC (select_clicked), gde);
+	gtk_box_pack_start (GTK_BOX (gde), gde->date_button, FALSE, FALSE, 0);
+
+	hbox = gtk_hbox_new (FALSE, 3);
+	gtk_container_add (GTK_CONTAINER (gde->date_button), hbox);
+	gtk_widget_show (hbox);
+
+	if (show_time) {
+		/* Only add the label if all the children are to be shown.  Otherwise
+		 * things look too wide; in that case just show the arrow.
+		 */
+		label = gtk_label_new (_("Calendar"));
+		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+		gtk_widget_show (label);
+	}
+
+	arrow = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+	gtk_box_pack_start (GTK_BOX (hbox), arrow, FALSE, FALSE, 0);
+	gtk_widget_show (arrow);
+	
+	gtk_widget_show (gde->date_button);
+
+	if (show_time) {
+		gde->time_entry = gtk_entry_new_with_max_length (9);
+		gtk_widget_set_usize (gde->time_entry, 88, 0);
+		gtk_box_pack_start (GTK_BOX (gde), gde->time_entry, TRUE, TRUE, 0);
+		gtk_widget_show (gde->time_entry);
+
+		gde->time_popup = gtk_option_menu_new ();
+		gtk_box_pack_start (GTK_BOX (gde), gde->time_popup, FALSE, FALSE, 0);
+		gtk_widget_show (gde->time_popup);
+
+		/* We do not create the popup menu with the hour range until we are
+		 * realized, so that it uses the values that the user might supply
+		 * in a future call to gnome_date_edit_set_popup_range
+		 */
+		gtk_signal_connect (GTK_OBJECT (gde), "realize",
+				    GTK_SIGNAL_FUNC (fill_time_popup), gde);
+	}
+
+	gde->cal_popup = gtk_window_new (GTK_WINDOW_POPUP);
+	gtk_widget_set_events (gde->cal_popup, gtk_widget_get_events (gde->cal_popup) | GDK_KEY_PRESS_MASK);
+	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "delete_event",
+			    (GtkSignalFunc) delete_popup,
+			    gde);
+	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "key_press_event",
+			    (GtkSignalFunc) key_press_popup,
+			    gde);
+	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "button_press_event",
+			    (GtkSignalFunc) button_press_popup,
+			    gde);
+	gtk_window_set_policy (GTK_WINDOW (gde->cal_popup), FALSE, FALSE, TRUE);
+
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+	gtk_container_add (GTK_CONTAINER (gde->cal_popup), frame);
+	gtk_widget_show (frame);
+
+	gde->calendar = gtk_calendar_new ();
+	gtk_calendar_display_options (GTK_CALENDAR (gde->calendar),
+				      GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_HEADING);
+	gtk_signal_connect (GTK_OBJECT (gde->calendar), "day_selected",
+			    GTK_SIGNAL_FUNC (day_selected), gde);
+	gtk_container_add (GTK_CONTAINER (frame), gde->calendar);
+	gtk_widget_show (gde->calendar);
+}
+
 GtkWidget *
-gnome_date_edit_new (time_t the_time)
+gnome_date_edit_new (time_t the_time, int show_time)
 {
 	GnomeDateEdit *gde;
 
 	gde = gtk_type_new (gnome_date_edit_get_type ());
+
+	create_children (gde, show_time);
 	gnome_date_edit_set_time (gde, the_time);
 
 	return GTK_WIDGET (gde);
@@ -447,19 +462,24 @@ gnome_date_edit_get_date (GnomeDateEdit *gde)
 	if (tm.tm_year >= 1900)
 		tm.tm_year -= 1900;
 
-	str = g_strdup (gtk_entry_get_text (GTK_ENTRY (gde->time_entry)));
-	tm.tm_hour = atoi (strtok (str, ":"));
-	tm.tm_min  = atoi (strtok (NULL, ": "));
-	flags = strtok (NULL, ":");
+	if (gde->time_entry) {
+		str = g_strdup (gtk_entry_get_text (GTK_ENTRY (gde->time_entry)));
+		tm.tm_hour = atoi (strtok (str, ":"));
+		tm.tm_min  = atoi (strtok (NULL, ": "));
+		flags = strtok (NULL, ":");
 
-	if (flags && (strcasecmp (flags, "PM") == 0)){
-		if (tm.tm_hour < 12)
-			tm.tm_hour += 12;
+		if (flags && (strcasecmp (flags, "PM") == 0)){
+			if (tm.tm_hour < 12)
+				tm.tm_hour += 12;
+		}
+		g_free (str);
+	} else {
+		tm.tm_hour = 0;
+		tm.tm_min  = 0;
 	}
-	g_free (str);
+
 	tm.tm_sec = 0;
 	tm.tm_isdst = -1;
 
 	return mktime (&tm);
 }
-

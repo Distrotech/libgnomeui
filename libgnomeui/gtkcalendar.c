@@ -418,6 +418,10 @@ draw_arrow_left(GdkWindow *window, GdkGC *gc, gint x, gint y, gint size)
 
 static void
 gtk_calendar_set_month_prev (GtkCalendar *calendar) {
+	
+     if (calendar->display_flags & GTK_CALENDAR_NO_MONTH_CHANGE)
+       return;
+	
      if (calendar->month == 0) {
 	  calendar->month = 11;
 	  calendar->year--;
@@ -435,6 +439,10 @@ gtk_calendar_set_month_prev (GtkCalendar *calendar) {
 
 static void
 gtk_calendar_set_month_next (GtkCalendar *calendar) {
+	
+     if (calendar->display_flags & GTK_CALENDAR_NO_MONTH_CHANGE)
+       return;
+	
      if (calendar->month == 11) {
          calendar->month = 0;
          calendar->year++;

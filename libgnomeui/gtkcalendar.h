@@ -38,7 +38,8 @@ extern "C" {
 typedef enum
 {
   GTK_CALENDAR_SHOW_HEADING = 1,
-  GTK_CALENDAR_SHOW_DAY_NAMES = 2
+  GTK_CALENDAR_SHOW_DAY_NAMES = 2,
+  GTK_CALENDAR_NO_MONTH_CHANGE = 4
 } GtkCalendarDisplayOptions;
 
 typedef enum
