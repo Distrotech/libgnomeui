@@ -1,13 +1,14 @@
 # Turkish translation of libgnomeui2.
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Görkem Çetin <gorkem@gelecek.com.tr>, 2001.
-# 
+# Ömer Fadýl USTA <omer_fad@hotmail.com>, 2001 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2001-08-14 16:53+0200\n"
-"PO-Revision-Date: 2001-06-02 14:12+0200\n"
-"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Project-Id-Version: libgnomeui2 1.102.0\n"
+"POT-Creation-Date: 2001-08-16 12:51+0200\n"
+"PO-Revision-Date: 2001-08-16 14:12+0200\n"
+"Last-Translator: Ömer Fadýl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
@@ -230,7 +231,7 @@ msgstr ""
 
 #: libgnomeui/gnome-client.c:837
 msgid "PREFIX"
-msgstr "ÖNEK"
+msgstr "ÖnSabit"
 
 #: libgnomeui/gnome-client.c:840
 msgid "Disable connection to session manager"
@@ -246,7 +247,7 @@ msgstr "Çýkmayý Ýptal Et"
 
 #: libgnomeui/gnome-color-picker.c:421
 msgid "Received invalid color data\n"
-msgstr ""
+msgstr "Geçersiz bir renk verisi alýndý\n"
 
 #: libgnomeui/gnome-color-picker.c:485
 msgid "Pick a color"
@@ -254,7 +255,7 @@ msgstr "Bir renk seçin"
 
 #: libgnomeui/gnome-dateedit.c:407
 msgid "Time"
-msgstr ""
+msgstr "Saat"
 
 #: libgnomeui/gnome-dateedit.c:408
 msgid "The time currentlyselected"
@@ -312,20 +313,19 @@ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 
 #: libgnomeui/gnome-druid.c:128
 msgid "Show Finish"
-msgstr ""
+msgstr "Sonu Göster"
 
 #: libgnomeui/gnome-druid.c:129
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr ""
 
 #: libgnomeui/gnome-druid.c:136
-#, fuzzy
 msgid "Show Help"
-msgstr "Yardým"
+msgstr "Yardým ekranýný göster"
 
 #: libgnomeui/gnome-druid.c:137
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "'Yardým' Tuþunu göster"
 
 #: libgnomeui/gnome-href.c:110
 msgid "URL"
@@ -398,7 +398,7 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:152
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
+msgstr "Lütfen ayrýntýlý bilgi için Gnome Uygulama göçmesi sayfasýný ziyaret edin"
 
 #: libgnomeui/gnome-stock-icons.c:136
 msgid "Table Borders"
@@ -406,7 +406,7 @@ msgstr "Tablo Kenarlarý"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Fill"
-msgstr ""
+msgstr "Masayý Doldur"
 
 #: libgnomeui/gnome-stock-icons.c:138
 msgid "Bulleted List"
@@ -414,7 +414,7 @@ msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Numbered List"
-msgstr ""
+msgstr "Numaralanmýþ Liste"
 
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Indent"
@@ -423,253 +423,3 @@ msgstr ""
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Un-Indent"
 msgstr ""
-
-#~ msgid "Author:"
-#~ msgstr "Yazar:"
-
-#~ msgid "Authors:"
-#~ msgstr "Yazarlar:"
-
-#~ msgid "Authors: "
-#~ msgstr "Yazarlar: "
-
-#~ msgid "Direction"
-#~ msgstr "Yön"
-
-#~ msgid "Animation direction"
-#~ msgstr "Canlandýrma yönü"
-
-#~ msgid "Number of frames"
-#~ msgstr "Çerçeve sayýsý"
-
-#~ msgid "Current frame"
-#~ msgstr "Þimdiki çerçeve"
-
-#~ msgid "Current frame number"
-#~ msgstr "Þimdiki çerçeve numarasý"
-
-#~ msgid "Animation status"
-#~ msgstr "Canlandýrma durumu"
-
-#~ msgid "Speed"
-#~ msgstr "Hýz"
-
-#~ msgid "Animation speed"
-#~ msgstr "Canlandýrma hýzý"
-
-#~ msgid "Name:"
-#~ msgstr "Ýsim:"
-
-#~ msgid "Comment:"
-#~ msgstr "Açýklama:"
-
-#~ msgid "Command:"
-#~ msgstr "Komut:"
-
-#~ msgid "Type:"
-#~ msgstr "Tür:"
-
-#~ msgid "Icon:"
-#~ msgstr "Simge:"
-
-#~ msgid "Run in Terminal"
-#~ msgstr "Terminalde Çalýþtir"
-
-#~ msgid "Simple drag and drop"
-#~ msgstr "Basit sürükle ve býrak"
-
-#~ msgid "Command for file drops:"
-#~ msgstr "Dosya taþýmalarý için komut:"
-
-#~ msgid "Drop one file at a time only."
-#~ msgstr "Ayný anda sadece bir dosya taþýyýn."
-
-#~ msgid "Drop one URL at a time only."
-#~ msgstr "Ayný anda sadece bir URL taþýyýn."
-
-#~ msgid "Documentation:"
-#~ msgstr "Belgeler"
-
-#~ msgid "Language"
-#~ msgstr "Dil"
-
-#~ msgid "Name"
-#~ msgstr "Ýsim"
-
-#~ msgid "Comment"
-#~ msgstr "Açýklama"
-
-#~ msgid "Add/Set"
-#~ msgstr "Ekle/Uygula"
-
-#~ msgid "Remove"
-#~ msgstr "Kaldýr"
-
-#~ msgid "Basic"
-#~ msgstr "Temel"
-
-#~ msgid "Drag and Drop"
-#~ msgstr "Sürükle ve Býrak"
-
-#~ msgid "Advanced"
-#~ msgstr "Geliþmiþ"
-
-#~ msgid "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
-#~ msgstr "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-*-*"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "AaBbCcÇçDdEeFfGgÐðHhIýÝiJjKkLlMmNnOoÖöPpRrSsÞþTtUuÜüVvYyZz"
-
-#~ msgid "Pick a Font"
-#~ msgstr "Bir Yazýtipi Seçin"
-
-#~ msgid "Font"
-#~ msgstr "Yazýtipi"
-
-#~ msgid "GNOME GConf Support"
-#~ msgstr "GNOME GConf Desteði"
-
-#~ msgid ""
-#~ "An error occurred while loading or saving configuration information for %"
-#~ "s. Some of your configuration settings may not work properly."
-#~ msgstr ""
-#~ "%s için yapýlandýrma bilgilerinin kaydedilmesi sýrasýnda bir hata oluþtu. "
-#~ "Bazý yapýlandýrma ayalarlarý düzgün iþlemeyebilir."
-
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "GConf hata ayrýntýlarý: %s\n"
-
-#~ msgid "_Embedded"
-#~ msgstr "_Gömülü"
-
-#~ msgid "_Browser"
-#~ msgstr "_Tarayýcý"
-
-#~ msgid "Style"
-#~ msgstr "Stil"
-
-#~ msgid "Paper Size"
-#~ msgstr "Sayfa Boyu"
-
-#~ msgid "Portrait"
-#~ msgstr "Portre"
-
-#~ msgid "Top:"
-#~ msgstr "Üst:"
-
-#~ msgid "Bottom:"
-#~ msgstr "Alt:"
-
-#~ msgid "Left:"
-#~ msgstr "Sol:"
-
-#~ msgid "Right:"
-#~ msgstr "Sað:"
-
-#~ msgid "Scaling"
-#~ msgstr "Oranlama"
-
-#~ msgid "Fit to Page"
-#~ msgstr "Sayfaya Sýðdýr"
-
-#~ msgid "Page Setup"
-#~ msgstr "Sayfa Ayarlarý"
-
-#~ msgid "_Help with this"
-#~ msgstr "Y_ardýmý göster"
-
-#~ msgid "Cu_t"
-#~ msgstr "K_es"
-
-#~ msgid "_Copy"
-#~ msgstr "_Kopyala"
-
-#~ msgid "_Paste"
-#~ msgstr "_Yapýþtýr"
-
-#~ msgid "Top left"
-#~ msgstr "Üst sol"
-
-#~ msgid "Bottom left"
-#~ msgstr "Alt sol"
-
-#~ msgid "Top right"
-#~ msgstr "Üst sað"
-
-#~ msgid "Bottom right"
-#~ msgstr "Alt sað"
-
-#~ msgid "Horizontal"
-#~ msgstr "Yatay"
-
-#~ msgid "Vertical"
-#~ msgstr "Dikey"
-
-#~ msgid "Icon position"
-#~ msgstr "Simge konumu"
-
-#~ msgid "Arrange icons"
-#~ msgstr "Simgeleri düzenle"
-
-#~ msgid "Autoarrange icons"
-#~ msgstr "Simgeleri otomatik düzenle"
-
-#~ msgid "App Specific"
-#~ msgstr "Uygulamaya Özel"
-
-#~ msgid "bad GnomeRecentDocument attribute: %s\n"
-#~ msgstr "hatalý GnomeRecentDocument özelliði: %s\n"
-
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgid "Username:"
-#~ msgstr "Kullanýcý adý:"
-
-#~ msgid "Browse..."
-#~ msgstr "Gözat..."
-
-#~ msgid "Default..."
-#~ msgstr "Öntanýmlý..."
-
-#~ msgid "Clear..."
-#~ msgstr "Temizle..."
-
-#~ msgid "Add"
-#~ msgstr "Ekle"
-
-#~ msgid "Clear"
-#~ msgstr "Temizle"
-
-#~ msgid "Select Color"
-#~ msgstr "Rengi Seç"
-
-#~ msgid "OK"
-#~ msgstr "Tamam"
-
-#~ msgid "Apply"
-#~ msgstr "Uygula"
-
-#~ msgid "Cancel"
-#~ msgstr "Ýptal"
-
-#~ msgid "Close"
-#~ msgstr "Kapat"
-
-#~ msgid "Yes"
-#~ msgstr "Evet"
-
-#~ msgid "No"
-#~ msgstr "Hayýr"
-
-#~ msgid "Next"
-#~ msgstr "Ýleri"
-
-#~ msgid "Prev"
-#~ msgstr "Geri"
-
-#~ msgid "Up"
-#~ msgstr "Yukarý"
-
-#~ msgid "Down"
-#~ msgstr "Aþaðý"
