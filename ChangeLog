@@ -1,3 +1,8 @@
+2002-11-01  Dennis Cranston <dennis_cranston@yahoo.com>
+
+	* images/gnome-about-logo.png:  Replace about logo
+	with the GNOME 2.x image.  Fixes #95764.
+
 2002-11-01  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Release 2.1.2
