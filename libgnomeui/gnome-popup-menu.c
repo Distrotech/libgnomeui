@@ -84,6 +84,8 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 {
 	GtkWidget *menu;
 	GnomeUIBuilderData uibdata;
+	GnomeUIInfo *actualinfo;
+	gint i, length;
 
 	g_return_val_if_fail (uiinfo != NULL, NULL);
 
@@ -97,10 +99,29 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 	uibdata.relay_func = popup_marshal_func;
 	uibdata.destroy_func = NULL;
 
+	for( length = 0; uiinfo[length].type != GNOME_APP_UI_ENDOFINFO; length ++ )
+	  {
+	    if ( uiinfo[length].type == GNOME_APP_UI_ITEM_CONFIGURABLE )
+	      gnome_app_ui_configure_configurable( uiinfo + length );
+	  }
+
+	length ++;
+
+	actualinfo = g_new( GnomeUIInfo, length );
+	
+	for ( i = 0; i < length; i++ )
+	  {
+	    actualinfo[i] = uiinfo[i];
+	    actualinfo[i].accelerator_key = 0;
+	    actualinfo[i].ac_mods = 0;
+	  }
+	
 	menu = gtk_menu_new ();
         global_menushell_hack = menu;
-	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo, &uibdata, NULL, FALSE, 0);
+	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), actualinfo, &uibdata, NULL, FALSE, 0);
         global_menushell_hack = NULL;
+
+	g_free( actualinfo );
 
 	return menu;
 }

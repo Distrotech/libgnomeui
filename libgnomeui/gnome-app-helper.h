@@ -548,6 +548,16 @@ void gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 				 GtkAccelGroup *accel_group,
 				 gboolean insert_shortcuts, gint pos);
 
+/* Converts GNOME_APP_UI_ITEM_CONFIGURABLE menu GnomeUIInfos to the
+   corresponding standard GNOME_APP_UI_ITEMs.  gnome_app_create_menus
+   calls this for you, but if you need to alter something afterwards,
+   you can call this function first.  The main reason for this being a
+   public interface is so that it can be called from
+   gnome_popup_menu_new which clears a copy of the passed
+   GnomeUIInofs. */
+void gnome_app_ui_configure_configurable (GnomeUIInfo* uiinfo);
+
+
 /* Constructs a menu bar and attaches it to the specified application window */
 void gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo);
 

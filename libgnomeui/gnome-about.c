@@ -238,7 +238,6 @@ gnome_about_display_comments (GdkWindow *win,
 	par = (GList *)NULL;
 
 	for (tok = strtok (buffer, "\n"); tok; tok = strtok (NULL, "\n")) {
-	        p1 = g_strdup(tok);
 		par = g_list_append (par, g_strdup(tok));
 	}
 

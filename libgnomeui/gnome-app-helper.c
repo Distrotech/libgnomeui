@@ -556,9 +556,11 @@ install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
     }
 }
 
-static void
+void
 gnome_app_ui_configure_configurable (GnomeUIInfo* uiinfo)
 {
+  if (uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE)
+  {
         GnomeUIInfoConfigurableTypes type = (GnomeUIInfoConfigurableTypes) uiinfo->accelerator_key;
 	
 	gboolean accelerator_key_def;
@@ -626,6 +628,7 @@ gnome_app_ui_configure_configurable (GnomeUIInfo* uiinfo)
 
 	
 	uiinfo->type = GNOME_APP_UI_ITEM;
+  }
 }
 
 void

@@ -1,3 +1,16 @@
+1999-01-15  Chris Lahey  <clahey@umich.edu>
+
+	* gnome-popup-menu.c (gnome_popup_menu_new): Altered this so that
+	it would clear out the menu accelerators and ac_mods (in a copy
+	of the GnomeUIInfos.)
+
+	* gnome-app-helper.h, gnome-app-helper.c
+	(gnome_app_ui_configure_configurable): Made this a public
+	interface so that gnome-popup-menu.c could use it.
+
+	* gnome-about.c (gnome_about_display_comments): Killed a blatant
+	memory leak.
+
 1999-01-15  Szekeres István <szekeres@cyberspace.mht.bme.hu>
 	* gtk-clock.c: the widget is now destroyed correctly. 
 
