@@ -1,3 +1,9 @@
+2001-05-19  Martin Baulig  <baulig@suse.de>
+
+	* Makefile.am: Comment out animator_demo.
+
+	* selector_demo.c: Added FTP test.
+
 2001-05-02  Martin Baulig  <baulig@suse.de>
 
 	* libgnomeui-demos-server.c, libgnomeui-demos.oafinfo: New files.

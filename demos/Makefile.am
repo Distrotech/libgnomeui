@@ -22,11 +22,11 @@ LDADD =	\
 noinst_PROGRAMS = \
 	libgnomeui-demos-server	\
 	selector_demo		\
-	winhints_demo		\
-	animator_demo
+	winhints_demo
 
 EXTRA_PROGRAMS = \
-	mdi_demo
+	mdi_demo		\
+	animator_demo
 
 selector_demo_SOURCES = selector_demo.c
 
