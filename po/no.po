@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2002-12-02 21:48+0100\n"
+"POT-Creation-Date: 2003-08-20 15:15+0200\n"
+"PO-Revision-Date: 2003-08-20 15:16+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,9 +46,8 @@ msgid "Translated by"
 msgstr "Oversatt av"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Bidragsytere"
+msgstr "Bid_ragsytere"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -138,6 +137,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -195,6 +195,7 @@ msgid "_Game"
 msgstr "_Spill"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -385,11 +386,11 @@ msgstr "Konfigurer applikasjonen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om denne applikasjonen"
 
@@ -416,7 +417,7 @@ msgstr "Opprett et nytt vindu"
 msgid "_Close This Window"
 msgstr "L_ukk dette vinduet"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Lukk aktivt vindu"
 
@@ -591,7 +592,7 @@ msgstr "Nivå for brukeraktivitet som kreves."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Din HTTP-proxy krever at du logger inn.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -599,18 +600,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Du må logge in for å aksessere «%s».\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Passordet ditt vil bli overført ukryptert."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Passordet ditt vil bli overført kryptert."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Autentisering kreves"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1208,11 +1211,11 @@ msgstr "Beskjed"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "Br_ukernavn"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Passord"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1357,8 +1360,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Vennligst besøk GNOME Applikasjonskrasj-siden for mer informasjon"
 
-#~ msgid "_Credits"
-#~ msgstr "_Bidragsytere"
-
-#~ msgid "Exit the test"
-#~ msgstr "Avslutt testprogrammet"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avslutt testprogrammet"
