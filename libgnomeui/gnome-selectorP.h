@@ -38,6 +38,7 @@ BEGIN_GNOME_DECLS
 
 struct _GnomeSelectorPrivate {
 	GtkWidget   *gentry;
+	GtkWidget   *entry;
 
 	gchar       *dialog_title;
 
@@ -45,10 +46,12 @@ struct _GnomeSelectorPrivate {
 	GSList      *file_list;
 
 	GtkWidget   *selector_widget;
-	guint32      is_popup : 1;
+	GtkWidget   *browse_dialog;
 
 	GtkWidget   *box;
+	GtkWidget   *hbox;
 	GtkWidget   *browse_button;
+	GtkWidget   *clear_button;
 
 	guint32      changed : 1;
 };

@@ -65,10 +65,15 @@ struct _GnomeSelectorClass {
 
 	void (*changed) (GnomeSelector *selector);
 	void (*browse) (GnomeSelector *selector);
+	void (*clear) (GnomeSelector *selector);
 
 	void (*update_filelist) (GnomeSelector *selector);
 	gboolean (*check_filename) (GnomeSelector *selector,
 				    const gchar *filename);
+	gboolean (*set_filename) (GnomeSelector *selector,
+				  const gchar *filename);
+	void (*add_directory) (GnomeSelector *selector,
+			       const gchar *directory);
 };
 
 
@@ -81,7 +86,7 @@ void         gnome_selector_construct        (GnomeSelector *selector,
                                               const gchar *history_id,
 					      const gchar *dialog_title,
 					      GtkWidget *selector_widget,
-					      gboolean is_popup);
+					      GtkWidget *browse_dialog);
 
 /*only return a file if the `check_filename' method succeeded. */
 gchar       *gnome_selector_get_filename     (GnomeSelector *selector);
@@ -93,6 +98,9 @@ gboolean     gnome_selector_check_filename   (GnomeSelector *selector,
 /* set the filename to something, returns TRUE on success. */
 gboolean     gnome_selector_set_filename     (GnomeSelector *selector,
                                               const gchar *filename);
+
+/* Remove all entries from the selector. */
+void         gnome_selector_clear            (GnomeSelector *selector);
 
 /* Add all files from this directory. */
 void         gnome_selector_add_directory    (GnomeSelector *selector,
