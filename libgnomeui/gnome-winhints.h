@@ -23,11 +23,6 @@
 
 #include <gnome.h>
 #include <gtk/gtk.h>
-#include <X11/Xlib.h>
-#include <X11/Xmd.h>
-#include <X11/Xatom.h>
-#include <gdk/gdkx.h>
-#include <gdk/gdkprivate.h>
 
 BEGIN_GNOME_DECLS
 
@@ -71,15 +66,6 @@ BEGIN_GNOME_DECLS
 
     
     
-/* these are the X atoms for the hints we use */
-extern Atom _XA_WIN_WORKSPACE;
-extern Atom _XA_WIN_WORKSPACE_COUNT;
-extern Atom _XA_WIN_WORKSPACE_NAMES;
-extern Atom _XA_WIN_STATE;
-extern Atom _XA_WIN_HINTS;
-extern Atom _XA_WIN_PROTOCOLS;
-extern Atom _XA_WIN_LAYER;
-
 typedef struct _GnomeWinHintsSkip {
     gboolean skipFocus;
     gboolean skipWinMenu;
@@ -148,5 +134,3 @@ gnome_win_hints_get_state(GtkWidget *window);
 END_GNOME_DECLS
 
 #endif
-
-    

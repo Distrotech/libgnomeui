@@ -6,6 +6,7 @@
 #include <gdk/gdkprivate.h>
 #include "gnome-winhints.h"
 
+/* these are the X atoms for the hints we use */
 Atom _XA_WIN_WORKSPACE;
 Atom _XA_WIN_WORKSPACE_COUNT;
 Atom _XA_WIN_WORKSPACE_NAMES;

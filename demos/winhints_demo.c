@@ -1,4 +1,5 @@
 #include <gnome.h>
+#include <gdk/gdkx.h>
 #include "gnome-winhints.h"
 
 
@@ -333,11 +334,13 @@ GList *get_workspaces()
     GList *tmp_list;
     GtkWidget *item;
     XTextProperty tp;
+    GdkAtom workspace_names_atom;
     char **list;
     int count, i;
     char tmpbuf[1024];
 
-    XGetTextProperty(GDK_DISPLAY(), GDK_ROOT_WINDOW(), &tp, _XA_WIN_WORKSPACE_NAMES);
+    workspace_names_atom = gdk_atom_intern (XA_WIN_WORKSPACE_NAMES, FALSE);
+    XGetTextProperty(GDK_DISPLAY(), GDK_ROOT_WINDOW(), &tp, workspace_names_atom);
 
     if(tp.value==NULL) return NULL;  /* current wm does not support this! */
        

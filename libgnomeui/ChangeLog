@@ -1,3 +1,9 @@
+Thu Aug 20 18:40:38 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* winhints_demo.c gnome-wmhints.[ch]: Removed
+	excess header file includes from gnome-wmhints.h,
+	fixed a few things so the result compiles.
+
 1998-08-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c: Updates to the to-do list.
