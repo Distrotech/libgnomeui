@@ -1,3 +1,8 @@
+2002-02-11  Richard Hult  <rhult@codefactory.se>
+
+	* libgnomeui/gnome-about.c: Escape strings before using them in
+	markup.
+
 2002-02-10  Cody Russell  <bratsche@gnome.org>
 
 	* libgnomeui/gnome-dateedit.c: Fixed a warning.

@@ -83,6 +83,7 @@ gnome_about_update_authors_label (GnomeAbout *about, GtkWidget *label)
 {
 	GString *string;
 	GSList *list;
+	gchar *tmp;
 	
 	if (about->_priv->authors == NULL) {
 		gtk_widget_hide (label);
@@ -97,8 +98,10 @@ gnome_about_update_authors_label (GnomeAbout *about, GtkWidget *label)
 	g_string_append (string, "</b>\n");
 
 	for (list = about->_priv->authors; list; list = list->next) {
-		g_string_append (string, list->data);
+		tmp = g_markup_escape_text (list->data, -1);
+		g_string_append (string, tmp);
 		g_string_append (string, "\n");
+		g_free (tmp);
 	}
 	
 	gtk_label_set_markup (GTK_LABEL (label), string->str);
@@ -110,7 +113,8 @@ gnome_about_update_documenters_label (GnomeAbout *about, GtkWidget *label)
 {
 	GString *string;
 	GSList *list;
-	
+	gchar *tmp;
+		
 	if (about->_priv->documenters == NULL) {
 		gtk_widget_hide (label);
 		return;
@@ -124,8 +128,10 @@ gnome_about_update_documenters_label (GnomeAbout *about, GtkWidget *label)
 	g_string_append (string, "</b>\n");
 
 	for (list = about->_priv->documenters; list; list = list->next) {
-		g_string_append (string, list->data);
+		tmp = g_markup_escape_text (list->data, -1);
+		g_string_append (string, tmp);
 		g_string_append (string, "\n");
+		g_free (tmp);
 	}
 	
 	gtk_label_set_markup (GTK_LABEL (label), string->str);
@@ -136,6 +142,7 @@ static void
 gnome_about_update_translation_information_label (GnomeAbout *about, GtkWidget *label)
 {
 	GString *string;
+	gchar *tmp;
 	
 	if (about->_priv->translator_credits == NULL) {
 		gtk_widget_hide (label);
@@ -148,11 +155,13 @@ gnome_about_update_translation_information_label (GnomeAbout *about, GtkWidget *
 	string = g_string_new ("<b>");
 	g_string_append (string, _("Translated by"));
 	g_string_append (string, "</b>\n");
-	g_string_append (string, about->_priv->translator_credits);
+
+	tmp = g_markup_escape_text (about->_priv->translator_credits, -1);
+	g_string_append (string, tmp);
+	g_free (tmp);
+	
 	gtk_label_set_markup (GTK_LABEL (label), string->str);
 	g_string_free (string, TRUE);
-		
-	
 }
 
 static GtkWidget *
@@ -386,12 +395,15 @@ gnome_about_set_translator_credits (GnomeAbout *about, const gchar *translator_c
 static void
 gnome_about_set_copyright (GnomeAbout *about, const gchar *copyright)
 {
-	char *copyright_string;
+	char *copyright_string, *tmp;
+	
 	g_free (about->_priv->copyright);
 	about->_priv->copyright = copyright ? g_strdup (copyright) : NULL;
 
 	if (about->_priv->copyright != NULL) {
-		copyright_string = g_strdup_printf ("<span size=\"small\">%s</span>", about->_priv->copyright);
+		tmp = g_markup_escape_text (about->_priv->copyright, -1);
+		copyright_string = g_strdup_printf ("<span size=\"small\">%s</span>", tmp);
+		g_free (tmp);
 	}
 	else {
 		copyright_string = NULL;
@@ -405,21 +417,25 @@ gnome_about_set_copyright (GnomeAbout *about, const gchar *copyright)
 static void
 gnome_about_set_version (GnomeAbout *about, const gchar *version)
 {
-	gchar *name_string;
+	gchar *name_string, *tmp_name, *tmp_version;
 	
 	g_free (about->_priv->version);
 	about->_priv->version = version ? g_strdup (version) : NULL;
 
+	tmp_name = g_markup_escape_text (about->_priv->name, -1);
+	
 	if (about->_priv->version != NULL) {
-		name_string = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">%s %s</span>", about->_priv->name, about->_priv->version);
+		tmp_version = g_markup_escape_text (about->_priv->version, -1);
+		name_string = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">%s %s</span>", tmp_name, tmp_version);
+		g_free (tmp_version);
 	}
 	else {
-		name_string = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">%s</span>", about->_priv->name);
+		name_string = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">%s</span>", tmp_name);
 	}
 
 	gtk_label_set_markup (GTK_LABEL (about->_priv->name_label), name_string);
 	g_free (name_string);
-
+	g_free (tmp_name);
 }
 
 static void
@@ -427,6 +443,7 @@ gnome_about_set_name (GnomeAbout *about, const gchar *name)
 {
 	gchar *title_string;
 	gchar *name_string;
+	gchar *tmp_name, *tmp_version;
 	
 	g_free (about->_priv->name);
 	about->_priv->name = g_strdup (name ? name : "");
@@ -435,15 +452,20 @@ gnome_about_set_name (GnomeAbout *about, const gchar *name)
 	gtk_window_set_title (GTK_WINDOW (about), title_string);
 	g_free (title_string);
 
+	tmp_name = g_markup_escape_text (about->_priv->name, -1);
+
 	if (about->_priv->version != NULL) {
-		name_string = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">%s %s</span>", about->_priv->name, about->_priv->version);
+		tmp_version = g_markup_escape_text (about->_priv->version, -1);
+		name_string = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">%s %s</span>", tmp_name, tmp_version);
+		g_free (tmp_version);
 	}
 	else {
-		name_string = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">%s</span>", about->_priv->name);
+		name_string = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">%s</span>", tmp_name);
 	}
 
 	gtk_label_set_markup (GTK_LABEL (about->_priv->name_label), name_string);
 	g_free (name_string);
+	g_free (tmp_name);
 }
 
 static void
