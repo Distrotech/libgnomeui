@@ -159,7 +159,7 @@ void           gnome_icon_list_moveto              (GnomeIconList *gil,
 GtkVisibility  gnome_icon_list_is_visible          (GnomeIconList *gil,
 						    int pos);
 
-#endif _GNOME_ICON_LIST_H_
+#endif /* _GNOME_ICON_LIST_H_ */
 
 
 
