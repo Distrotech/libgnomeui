@@ -90,6 +90,7 @@ intl/Makefile
 libgnomeui/Makefile
 libgnomeui/libgnomeui-2.0.pc
 libgnomeui/pixmaps/Makefile
+components/Makefile
 images/Makefile
 demos/Makefile
 doc/Makefile

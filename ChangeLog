@@ -1,3 +1,7 @@
+2001-05-19  Martin Baulig  <baulig@suse.de>
+
+	* components/: New directory.
+
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
 	* configure.in: Depend on libbonoboui.
