@@ -1,3 +1,9 @@
+1999-09-17  Havoc Pennington  <hp@pobox.com>
+
+	* gnome_segv.c (main): If the crashing process is called
+	"gnome-session," tell the user that they are totally hosed and 
+	should save docs in all apps.
+
 1999-09-17  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dateedit.c (gnome_date_edit_set_date): New function, same

@@ -45,8 +45,16 @@ int main(int argc, char *argv[])
   args = poptGetArgs(ctx);
   if (args && args[0] && args[1])
     {
-      msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed\ndue to a fatal error.\n(%s)"),
-                            args[0], getppid(), g_strsignal(atoi(args[1])));
+      if (strcmp(args[0], "gnome-session") == 0)
+        {
+          msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\ndue to a fatal error (%s).\nWhen you close this dialog, all applications will close and your session will exit.\nPlease save all your files before closing this dialog."),
+                                getppid(), g_strsignal(atoi(args[1])));
+        }
+      else
+        {
+          msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed\ndue to a fatal error.\n(%s)"),
+                                args[0], getppid(), g_strsignal(atoi(args[1])));
+        }
     }
   else
     {
