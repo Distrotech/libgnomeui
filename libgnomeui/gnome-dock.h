@@ -47,19 +47,9 @@ typedef enum
 
 typedef struct _GnomeDock GnomeDock;
 typedef struct _GnomeDockClass GnomeDockClass;
-typedef struct _GnomeDockChild GnomeDockChild;
 
 #include "gnome-dock-band.h"
 #include "gnome-dock-layout.h"
-
-struct _GnomeDockChild
-{
-  GnomeDockBand *band;
-
-  GtkAllocation drag_allocation;
-
-  gboolean new_for_drag;
-};
 
 struct _GnomeDock
 {
@@ -67,11 +57,11 @@ struct _GnomeDock
 
   GtkWidget *client_area;
 
-  /* GnomeDockBands associated to this dock.  */
-  GList *top_bands;             /* GnomeDockChild */
-  GList *bottom_bands;          /* GnomeDockChild */
-  GList *right_bands;           /* GnomeDockChild */
-  GList *left_bands;            /* GnomeDockChild */
+  /* GnomeDockBands associated with this dock.  */
+  GList *top_bands;
+  GList *bottom_bands;
+  GList *right_bands;
+  GList *left_bands;
 
   /* Children that are currently not docked.  */
   GList *floating_children;     /* GtkWidget */

@@ -210,11 +210,9 @@ size_request_v (GList *list, GtkRequisition *requisition)
 {
   for (; list != NULL; list = list->next)
     {
-      GnomeDockChild *child;
       GtkWidget *w;
 
-      child = list->data;
-      w = GTK_WIDGET (child->band);
+      w = GTK_WIDGET (list->data);
       gtk_widget_size_request (w, &w->requisition);
       requisition->width += w->requisition.width;
       requisition->height = MAX (requisition->height, w->requisition.height);
@@ -226,11 +224,9 @@ size_request_h (GList *list, GtkRequisition *requisition)
 {
   for (list = list; list != NULL; list = list->next)
     {
-      GnomeDockChild *child;
       GtkWidget *w;
 
-      child = (GnomeDockChild *) list->data;
-      w = GTK_WIDGET (child->band);
+      w = GTK_WIDGET (list->data);
       gtk_widget_size_request (w, &w->requisition);
       requisition->height += w->requisition.height;
       requisition->width = MAX (requisition->width, w->requisition.width);
@@ -280,11 +276,9 @@ size_allocate_h (GList *list, gint start_x, gint start_y, guint width,
     list = g_list_last (list);
   while (list != NULL)
     {
-      GnomeDockChild *child;
       GtkWidget *w;
 
-      child = (GnomeDockChild *) list->data;
-      w = GTK_WIDGET (child->band);
+      w = GTK_WIDGET (list->data);
       allocation.height = w->requisition.height;
 
       if (direction > 0)
@@ -319,11 +313,9 @@ size_allocate_v (GList *list, gint start_x, gint start_y, guint height,
 
   while (list != NULL)
     {
-      GnomeDockChild *child;
       GtkWidget *w;
 
-      child = (GnomeDockChild *) list->data;
-      w = GTK_WIDGET (child->band);
+      w = GTK_WIDGET (list->data);
       allocation.width = w->requisition.width;
 
       if (direction > 0)
@@ -413,11 +405,9 @@ map_band_list (GList *list)
 {
   while (list != NULL)
     {
-      GnomeDockChild *child;
       GtkWidget *w;
 
-      child = (GnomeDockChild *) list->data;
-      w = GTK_WIDGET (child->band);
+      w = GTK_WIDGET (list->data);
       map_widget (w);
 
       list = list->next;
@@ -460,11 +450,9 @@ draw_band_list (GList *list, GdkRectangle *area)
 {
   while (list != NULL)
     {
-      GnomeDockChild *child;
       GtkWidget *w;
 
-      child = (GnomeDockChild *) list->data;
-      w = GTK_WIDGET (child->band);
+      w = GTK_WIDGET (list->data);
       draw_widget (w, area);
 
       list = list->next;
@@ -509,10 +497,7 @@ expose_band_list (GList *list, GdkEventExpose *event)
 {
   while (list != NULL)
     {
-      GnomeDockChild *child;
-
-      child = (GnomeDockChild *) list->data;
-      expose_widget (GTK_WIDGET (child->band), event);
+      expose_widget (GTK_WIDGET (list->data), event);
 
       list = list->next;
     }
@@ -558,14 +543,10 @@ remove_from_band_list (GList **list, GnomeDockBand *child)
 
   for (lp = *list; lp != NULL; lp = lp->next)
     {
-      GnomeDockChild *c;
-
-      c = (GnomeDockChild *) lp->data;
-      if (c->band == child)
+      if (lp->data == child)
         {
           gtk_widget_unparent (GTK_WIDGET (child));
           *list = g_list_remove_link (*list, lp);
-          g_free (c);
           g_list_free (lp);
 
           return TRUE;
@@ -639,11 +620,11 @@ forall_helper (GList *list,
 {
   while (list != NULL)
     {
-      GnomeDockChild *c;
+      GtkWidget *w;
 
-      c = list->data;
+      w = GTK_WIDGET(list->data);
       list = list->next;
-      (* callback) (GTK_WIDGET (c->band), callback_data);
+      (* callback) (w, callback_data);
     }
 }
 
@@ -703,15 +684,15 @@ drag_new (GnomeDock *dock,
           gint x, gint y,
           gboolean is_vertical)
 {
-  GnomeDockChild *new;
+  GnomeDockBand *new_band;
   GList *next;
 
-  DEBUG (("drag_new"));
+  DEBUG (("entering function"));
 
   x -= item->dragoff_x;
   y -= item->dragoff_y;
 
-  new = NULL;
+  new_band = NULL;
 
   /* We need a new band next to `where', but we try to re-use the band
      next to it if either it contains no children, or it only contains
@@ -724,59 +705,57 @@ drag_new (GnomeDock *dock,
     next = where->next;
   if (next != NULL)
     {
-      GnomeDockChild *c;
+      GnomeDockBand *band;
       guint num_children;
 
-      c = (GnomeDockChild *) next->data;
+      band = GNOME_DOCK_BAND (next->data);
 
-      num_children = gnome_dock_band_get_num_children (c->band);
+      num_children = gnome_dock_band_get_num_children (band);
 
       if (num_children == 0
           || (num_children == 1
-              && GTK_WIDGET (c->band) == GTK_WIDGET (item)->parent))
-        new = (GnomeDockChild *) next->data;
+              && GTK_WIDGET (band) == GTK_WIDGET (item)->parent))
+        new_band = GNOME_DOCK_BAND (next->data);
     }
 
   /* Create the new band and make it our child if we cannot re-use an
      existing one.  */
-  if (new == NULL)
+  if (new_band == NULL)
     {
-      new = g_new (GnomeDockChild, 1);
-
-      new->band = GNOME_DOCK_BAND (gnome_dock_band_new ());
-      gnome_dock_band_set_orientation (new->band,
+      new_band = GNOME_DOCK_BAND (gnome_dock_band_new ());
+      gnome_dock_band_set_orientation (new_band,
                                        (is_vertical
                                         ? GTK_ORIENTATION_VERTICAL
                                         : GTK_ORIENTATION_HORIZONTAL));
 
       if (where == NULL)
-        *area = where = g_list_prepend (*area, new);
+        *area = where = g_list_prepend (*area, new_band);
       else if (where->next == NULL)
-        g_list_append (where, new);
+        g_list_append (where, new_band);
       else
-        g_list_prepend (where->next, new);
+        g_list_prepend (where->next, new_band);
 
-      gtk_widget_set_parent (GTK_WIDGET (new->band), GTK_WIDGET (dock));
-      gtk_widget_queue_resize (GTK_WIDGET (new->band));
-      gtk_widget_show (GTK_WIDGET (new->band));
+      gtk_widget_set_parent (GTK_WIDGET (new_band), GTK_WIDGET (dock));
+      gtk_widget_queue_resize (GTK_WIDGET (new_band));
+      gtk_widget_show (GTK_WIDGET (new_band));
     }
 
   /* Move the item to the new band.  (This is a no-op if we are using
      `where->next' and it already contains `item'.)  */
-  gnome_dock_item_attach (item, GTK_WIDGET (new->band), x, y);
+  gnome_dock_item_attach (item, GTK_WIDGET (new_band), x, y);
 
   /* Prepare the band for dragging of `item'.  */
-  gnome_dock_band_drag_begin (new->band, item);
+  gnome_dock_band_drag_begin (new_band, item);
 
   /* Reparenting will remove the grab, so we need to redo it.  */
   gnome_dock_item_grab_pointer (item);
 
   /* Set the offset of `item' in the band.  */
   if (is_vertical)
-    gnome_dock_band_set_child_offset (new->band, GTK_WIDGET (item),
+    gnome_dock_band_set_child_offset (new_band, GTK_WIDGET (item),
                                       y - dock->client_rect.y);
   else
-    gnome_dock_band_set_child_offset (new->band, GTK_WIDGET (item),
+    gnome_dock_band_set_child_offset (new_band, GTK_WIDGET (item),
                                       x - GTK_WIDGET (dock)->allocation.x);
 
   return TRUE;
@@ -790,15 +769,12 @@ drag_to (GnomeDock *dock,
          gint x, gint y,
          gboolean is_vertical)
 {
-  GnomeDockChild *child;
-
   x -= item->dragoff_x;
   y -= item->dragoff_y;
 
   DEBUG (("x %d y %d", x, y));
-  child = (GnomeDockChild *) where->data;
 
-  return gnome_dock_band_drag_to (child->band, item, x, y);
+  return gnome_dock_band_drag_to (GNOME_DOCK_BAND (where->data), item, x, y);
 }
 
 /* Case (III): Move a floating (i.e. floating) item.  */
@@ -841,8 +817,6 @@ drag_floating (GnomeDock *dock,
               && rel_y >= client_allocation->y
               && rel_y < client_allocation->y + client_allocation->height))
         {
-          GnomeDockChild *new;
-
           gtk_widget_ref (item_widget);
 
           gnome_dock_item_detach (item, x, y);
@@ -881,33 +855,30 @@ drag_check (GnomeDock *dock,
 {
 #define NEW_BAND_SNAP 4
   GList *lp;
-  GnomeDockChild *child;
   GtkAllocation *alloc;
 
   for (lp = *area; lp != NULL; lp = lp->next)
     {
-      child = (GnomeDockChild *) lp->data;
-
-      alloc = &(GTK_WIDGET(child->band)->allocation);
+      alloc = &(GTK_WIDGET(lp->data)->allocation);
 
       if (x >= alloc->x && x < alloc->x + alloc->width &&
-	  y >= alloc->y && y < alloc->y + alloc->height)
-	{
-	  if (is_vertical)
-	    {
-	      if (x > alloc->x + alloc->width - NEW_BAND_SNAP)
-		return drag_new (dock, item, area, lp, x, y, TRUE);
-	      else
-		return drag_to (dock, item, lp, x, y, TRUE);
-	    }
-	  else
-	    {
-	      if (y > alloc->y + alloc->height  - NEW_BAND_SNAP)
-		return drag_new (dock, item, area, lp, x, y, FALSE);
-	      else
-		return drag_to (dock, item, lp, x, y, FALSE);
-	    }
-	}
+          y >= alloc->y && y < alloc->y + alloc->height)
+        {
+          if (is_vertical)
+            {
+              if (x > alloc->x + alloc->width - NEW_BAND_SNAP)
+                return drag_new (dock, item, area, lp, x, y, TRUE);
+              else
+                return drag_to (dock, item, lp, x, y, TRUE);
+            }
+          else
+            {
+              if (y > alloc->y + alloc->height  - NEW_BAND_SNAP)
+                return drag_new (dock, item, area, lp, x, y, FALSE);
+              else
+                return drag_to (dock, item, lp, x, y, FALSE);
+            }
+        }
     }
   
   return FALSE;
@@ -916,30 +887,6 @@ drag_check (GnomeDock *dock,
 
 
 /* "drag_begin" signal handling.  */
-
-static void
-drag_begin_foreach_func (gpointer data, gpointer user_data)
-{
-  GnomeDockChild *child;
-  GtkWidget *widget;
-
-  child = (GnomeDockChild *) data;
-  widget = GTK_WIDGET (child->band);
-
-  /* Remember the allocation before the drag begin: this is necessary
-     because we actually decide what docking action happens depending
-     on it, instead of using the current allocation (which might be
-     constantly changing while the user drags things around).  */
-#if 0
-  child->drag_allocation = widget->allocation;
-#endif
-
-  /* Tell the band that this child is being dragged.  The function
-     will simply ignore the information if the item is not the band's
-     child.  */
-  gnome_dock_band_drag_begin (child->band, GNOME_DOCK_ITEM (user_data));
-}
-
 static void
 drag_begin (GtkWidget *widget, gpointer data)
 {
@@ -953,13 +900,10 @@ drag_begin (GtkWidget *widget, gpointer data)
 
   /* Communicate all the bands that `widget' is currently being
      dragged.  */
-  g_list_foreach (dock->top_bands, drag_begin_foreach_func, item);
-  g_list_foreach (dock->bottom_bands, drag_begin_foreach_func, item);
-  g_list_foreach (dock->right_bands, drag_begin_foreach_func, item);
-  g_list_foreach (dock->left_bands, drag_begin_foreach_func, item);
-
-  /*   if(dock->client_area)
-       dock->client_rect = dock->client_area->allocation; */
+  g_list_foreach (dock->top_bands, (GFunc)gnome_dock_band_drag_begin, item);
+  g_list_foreach (dock->bottom_bands, (GFunc)gnome_dock_band_drag_begin, item);
+  g_list_foreach (dock->right_bands, (GFunc)gnome_dock_band_drag_begin, item);
+  g_list_foreach (dock->left_bands, (GFunc)gnome_dock_band_drag_begin, item);
 }
 
 
@@ -970,28 +914,22 @@ static void
 drag_end_bands (GList **list, GnomeDockItem *item)
 {
   GList *lp;
+  GnomeDockBand *band;
 
   lp = *list;
   while (lp != NULL)
     {
-      GnomeDockChild *child;
+      band = GNOME_DOCK_BAND(lp->data);
+      gnome_dock_band_drag_end (band, item);
 
-      child = (GnomeDockChild *) lp->data;
-
-      gnome_dock_band_drag_end (child->band, item);
-
-#if 0
-      child->new_for_drag = FALSE;
-#endif
-
-      if (gnome_dock_band_get_num_children (child->band) == 0)
+      if (gnome_dock_band_get_num_children (band) == 0)
         {
           GList *next;
 
           next = lp->next;
 
           /* This will remove this link, too.  */
-          gtk_widget_destroy (GTK_WIDGET (child->band));
+          gtk_widget_destroy (GTK_WIDGET (band));
 
           lp = next;
         }
@@ -1150,11 +1088,11 @@ get_docked_item_by_name (GnomeDock *dock,
              lp != NULL;
              lp = lp->next, num_band++)
           {
-            GnomeDockChild *child;
+            GnomeDockBand *band;
             GnomeDockItem *item;
 
-            child = lp->data;
-            item = gnome_dock_band_get_item_by_name (child->band,
+            band = GNOME_DOCK_BAND(lp->data);
+            item = gnome_dock_band_get_item_by_name (band,
                                                      name,
                                                      band_position_return,
                                                      offset_return);
@@ -1267,7 +1205,7 @@ gnome_dock_add_item (GnomeDock *dock,
                      guint offset,
                      gboolean in_new_band)
 {
-  GnomeDockChild *c;
+  GnomeDockBand *band;
   GList **band_ptr;
   GList *p;
 
@@ -1300,27 +1238,20 @@ gnome_dock_add_item (GnomeDock *dock,
   if (in_new_band || p == NULL)
     {
       GtkWidget *new_band;
-      GnomeDockChild *new_child;
 
       new_band = gnome_dock_band_new ();
-
-      new_child = g_new (GnomeDockChild, 1);
-      new_child->band = GNOME_DOCK_BAND (new_band);
-#if 0
-      new_child->new_for_drag = FALSE;
-#endif
 
       /* FIXME: slow.  */
       if (in_new_band)
         {
-          *band_ptr = g_list_insert (*band_ptr, new_child, band_num);
+          *band_ptr = g_list_insert (*band_ptr, new_band, band_num);
           p = g_list_nth (*band_ptr, band_num);
           if (p == NULL)
             p = g_list_last (*band_ptr);
         }
       else
         {
-          *band_ptr = g_list_append (*band_ptr, new_child);
+          *band_ptr = g_list_append (*band_ptr, new_band);
           p = g_list_last (*band_ptr);
         }
 
@@ -1337,8 +1268,8 @@ gnome_dock_add_item (GnomeDock *dock,
       gtk_widget_queue_resize (GTK_WIDGET (dock));
     }
 
-  c = (GnomeDockChild *) p->data;
-  gnome_dock_band_insert (c->band, GTK_WIDGET(item), offset, position);
+  band = GNOME_DOCK_BAND(p->data);
+  gnome_dock_band_insert (band, GTK_WIDGET(item), offset, position);
 
   connect_drag_signals (dock, GTK_WIDGET(item));
 
@@ -1491,10 +1422,10 @@ layout_add_bands (GnomeDock *dock,
        lp != NULL;
        lp = lp->next, band_num++)
     {
-      GnomeDockChild *child;
+      GnomeDockBand *band;
 
-      child = lp->data;
-      gnome_dock_band_layout_add (child->band, layout, placement, band_num);
+      band = GNOME_DOCK_BAND(lp->data);
+      gnome_dock_band_layout_add (band, layout, placement, band_num);
     }
 }
 

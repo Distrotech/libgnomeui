@@ -1,3 +1,9 @@
+1999-01-03  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-dock.[ch]: removed all traces of struct _GnomeDockChild.
+	use GnomeDockBands directly instead, as drag_allocation is no
+	longer needed.
+	
 Sat Jan  2 15:00:19 1999  Raph Levien  <raph@gimp.org>
 
 	* gnome-canvas-line.c: Minor tweaks and tunes. The set_arg
