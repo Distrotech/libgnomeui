@@ -159,9 +159,10 @@ GnomeIconTextInfo *gnome_icon_layout_text (GdkFont *font, char *text, char *sepa
 					   int max_width, int confine);
 
 /* Paints text that was laid out by gnome_icon_layout_text().  The text is painted at the specified
- * coordinats.
+ * coordinates, with the specified justification.
  */
-void gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc, int x, int y);
+void gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc,
+			    int x, int y, GtkJustification just);
 
 
 END_GNOME_DECLS

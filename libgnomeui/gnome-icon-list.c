@@ -354,7 +354,10 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 	/* Text */
 
 	if (ilist->mode != GNOME_ICON_LIST_ICONS)
-		gnome_icon_paint_text (icon->ti, ilist->ilist_window, fg_gc, xtext, ytext);
+		gnome_icon_paint_text (icon->ti, ilist->ilist_window, fg_gc, xtext, ytext,
+				       ((ilist->mode == GNOME_ICON_LIST_TEXT_BELOW)
+					? GTK_JUSTIFY_CENTER
+					: GTK_JUSTIFY_LEFT));
 }
 
 static void
@@ -2561,10 +2564,12 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 }
 
 void
-gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc, int x, int y)
+gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc,
+		       int x, int y, GtkJustification just)
 {
 	GList *item;
 	GnomeIconTextInfoRow *row;
+	int xpos;
 
 	g_return_if_fail (ti != NULL);
 	g_return_if_fail (drawable != NULL);
@@ -2575,7 +2580,29 @@ gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc, 
 	for (item = ti->rows; item; item = item->next) {
 		if (item->data) {
 			row = item->data;
-			gdk_draw_string (drawable, ti->font, gc, x + (ti->width - row->width) / 2, y, row->text);
+
+			switch (just) {
+			case GTK_JUSTIFY_LEFT:
+				xpos = 0;
+				break;
+
+			case GTK_JUSTIFY_RIGHT:
+				xpos = ti->width - row->width;
+				break;
+
+			case GTK_JUSTIFY_CENTER:
+				xpos = (ti->width - row->width) / 2;
+				break;
+
+			default:
+				/* Anyone care to implement GTK_JUSTIFY_FILL? */
+				g_warning ("Justification type %d not supported.  Using left-justification.",
+					   (int) just);
+				xpos = 0;
+			}
+
+			gdk_draw_string (drawable, ti->font, gc, x + xpos, y, row->text);
+
 			y += ti->baseline_skip;
 		} else
 			y += ti->baseline_skip / 2;

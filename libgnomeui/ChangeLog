@@ -1,3 +1,10 @@
+1998-05-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_paint_text): Added justification
+	parameter.  This is generally useful to have.  It is also required
+	for when the icon list is in GNOME_ICON_LIST_TEXT_RIGHT mode.
+	(draw_icon): Use the proper justification for text.
+
 Wed May 20 17:30:19 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-pixmap.[ch] (gnome_pixmap_new_from_gnome_pixmap): new
