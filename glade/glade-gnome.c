@@ -1691,6 +1691,7 @@ pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 		gchar *iconfile = glade_xml_relative_file(xml, user_icon);
 		GtkWidget *iconw = gnome_pixmap_new_from_file(iconfile);
 
+		g_free(iconfile);
 		gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(wid),
 						iconw);
 		gtk_widget_show(iconw);
