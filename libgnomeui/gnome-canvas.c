@@ -2268,6 +2268,10 @@ gnome_canvas_init (GnomeCanvas *canvas)
 
 	canvas->pixels_per_unit = 1.0;
 
+	canvas->pick_event.type = GDK_LEAVE_NOTIFY;
+	canvas->pick_event.crossing.x = 0;
+	canvas->pick_event.crossing.y = 0;
+
 	gtk_layout_set_hadjustment (GTK_LAYOUT (canvas), NULL);
 	gtk_layout_set_vadjustment (GTK_LAYOUT (canvas), NULL);
 
