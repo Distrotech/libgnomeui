@@ -1,3 +1,10 @@
+2000-02-24  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-about.c (gnome_about_fill_options): New function to set
+	user-settable values using GConf and gtkrc
+	(gnome_about_item_cb): Since gnome_canvas_item_pixbuf has no
+	fill_color_rgba value, the underline color is passed to the callback
+
 2000-02-19  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* oafgnome.c (rcmd_handle_connecting): use ri->in_buf->str as an
