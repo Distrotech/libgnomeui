@@ -1,3 +1,31 @@
+1998-09-30  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-animator.c: Turned `GnomeAnimator' into a windowless
+ 	widget.
+	(struct _GnomeAnimatorPrivate): New field `area'.
+	(realize): Removed function.
+	(state_or_style_changed): New function.
+	(style_set): New function.
+	(state_changed): New function.
+	(init): Set the `GTK_NO_WINDOW' widget flag.  Do not handle
+ 	parent's signals anymore; install `style_set()' and
+ 	`state_changed()' in the widget class description instead.
+	(draw_background_pixmap): Use the new `area' field in
+ 	`GnomeAnimatorPrivate' to set the tile/stipple origin.
+	(size_allocate): Clear the parent widget's window area.  Set
+ 	`area' in the private part.
+	(paint, draw): Updated to draw in the parent's window.
+	(setup_window_and_style): Removed.
+	(gnome_animator_new_with_size): Do not touch the widget's window.
+	(expose): Redraw only the part that is being exposed.
+
+	* gnome-animator.c
+	(gnome_animator_append_frames_from_imlib_at_size): Made a lot
+ 	faster by rendering the GdkImlibImage once, and copying areas from
+ 	the generated Pixmap.  Refuse to append frames
+ 	(and return FALSE) if the width of the image is not a multiple of
+ 	`x_unit'.
+
 Wed Sep 30 01:52:39 PDT 1998 Manish Singh <yosh@gimp.org>
 
 	* gnome-animator.h: whitespace changes so makeenums.pl doesn't barf

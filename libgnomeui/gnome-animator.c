@@ -20,16 +20,10 @@
 
 /* This is a simple widget for adding animations to GNOME
    applications.  It is updated using double buffering for maximum
-   smoothness.
-   Notice that, although its window is not shaped, the widget tries to
-   emulate a shaped window as closely as possible by updating the
-   background whenever the parent's background changes.  We don't want
-   to use a real shaped window here because changing the shape in the
-   middle of the animations causes some ugly flickering.  */
+   smoothness.  */
 
 #include <config.h>
 #include <gtk/gtkmain.h>
-#include <gtk/gtksignal.h>
 
 #include "gnome-animator.h"
 
@@ -65,12 +59,14 @@ struct _GnomeAnimatorPrivate
     /* Timeout callback ID used for advancing playback.  */
     guint timeout_id;
 
+    /* Rectangle being used for the animation.  */
+    GdkRectangle area;
+
     /* Pixmap used for drawing offscreen.  */
     GdkPixmap *offscreen_pixmap;
 
     /* Pixmap storing the window's background.  This is kept in sync
-       with the parent's window background using the "style_set" and
-       "state_changed" signals.  */
+       with the parent's window background.  */
     GdkPixmap *background_pixmap;
 
     /* Pointer to the first frame.  */
@@ -90,7 +86,6 @@ static void                init                    (GnomeAnimator *animator);
 static void                destroy                 (GtkObject *object);
 static void                prepare_aux_pixmaps     (GnomeAnimator *animator);
 static void                draw_background_pixmap  (GnomeAnimator *animator);
-static void                realize                 (GtkWidget *widget);
 static void                size_allocate           (GtkWidget *widget,
                                                     GtkAllocation *allocation);
 static void                draw                    (GtkWidget *widget,
@@ -98,13 +93,13 @@ static void                draw                    (GtkWidget *widget,
 static gint                expose                  (GtkWidget *widget,
                                                     GdkEventExpose *event);
 static void                update                  (GnomeAnimator *animator);
-static void                setup_window_and_style  (GnomeAnimator *animator);
 static GnomeAnimatorFrame *append_frame            (GnomeAnimator *animator);
+static void                state_or_style_changed  (GnomeAnimator *animator);
+static void                state_changed           (GtkWidget *widget,
+                                                    guint previous_state);
+static void                style_set               (GtkWidget *widget,
+                                                    GtkStyle *previous_style);
 static gint                timer_cb                (gpointer data);
-static void                parent_state_changed_cb (GtkWidget *widget,
-                                                    void *data);
-static void                parent_style_set_cb     (GtkWidget *widget,
-                                                    void *data);
 
 static GtkWidgetClass *parent_class;
 
@@ -113,7 +108,7 @@ static GtkWidgetClass *parent_class;
 static void
 init (GnomeAnimator *animator)
 {
-  GTK_WIDGET_SET_FLAGS (animator, GTK_BASIC);
+  GTK_WIDGET_SET_FLAGS (animator, GTK_NO_WINDOW);
 
   animator->num_frames = 0;
   animator->current_frame_number = 0;
@@ -129,13 +124,6 @@ init (GnomeAnimator *animator)
   animator->privat->first_frame = NULL;
   animator->privat->last_frame = NULL;
   animator->privat->current_frame = NULL;
-
-  /* This allows us to "emulate" a transparent window, by making our
-     background look exactly like the parent's background.  */
-  gtk_signal_connect (GTK_OBJECT (animator), "state_changed",
-                      GTK_SIGNAL_FUNC (parent_state_changed_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (animator), "style_set",
-                      GTK_SIGNAL_FUNC (parent_style_set_cb), NULL);
 }
 
 static void
@@ -149,10 +137,12 @@ class_init (GnomeAnimatorClass *class)
 
   parent_class = gtk_type_class (gtk_widget_get_type ());
 
-  widget_class->realize = realize;
   widget_class->size_allocate = size_allocate;
   widget_class->draw = draw;
   widget_class->expose_event = expose;
+  widget_class->style_set = style_set;
+  widget_class->state_changed = state_changed;
+
   object_class->destroy = destroy;
 }
 
@@ -222,13 +212,13 @@ prepare_aux_pixmaps (GnomeAnimator *animator)
           && widget->requisition.height > 0)
         {
           privat->offscreen_pixmap = gdk_pixmap_new (widget->window,
+                                                     widget->requisition.width,
+                                                     widget->requisition.height,
+                                                     visual->depth);
+          privat->background_pixmap = gdk_pixmap_new (widget->window,
                                                       widget->requisition.width,
                                                       widget->requisition.height,
                                                       visual->depth);
-          privat->background_pixmap = gdk_pixmap_new (widget->window,
-                                                       widget->requisition.width,
-                                                       widget->requisition.height,
-                                                       visual->depth);
         }
     }
 }
@@ -264,8 +254,9 @@ draw_background_pixmap (GnomeAnimator *animator)
       else
         gdk_gc_set_fill (gc, GDK_SOLID);
 
-      gdk_window_get_position (widget->window, &x, &y);
-      gdk_gc_set_ts_origin (gc, -x, -y);
+      gdk_gc_set_ts_origin (gc,
+                            -animator->privat->area.x,
+                            -animator->privat->area.y);
 
       gdk_draw_rectangle (privat->background_pixmap,
                           gc,
@@ -279,22 +270,6 @@ draw_background_pixmap (GnomeAnimator *animator)
 }
 
 static void
-realize (GtkWidget *widget)
-{
-  GnomeAnimator *animator;
-
-  g_return_if_fail (widget != NULL);
-  g_return_if_fail (GNOME_IS_ANIMATOR (widget));
-
-  animator = GNOME_ANIMATOR (widget);
-  GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
-
-  setup_window_and_style (animator);
-
-  update (animator);
-}
-
-static void
 size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
   GnomeAnimator *animator;
@@ -305,19 +280,25 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation)
   g_return_if_fail (allocation != NULL);
 
   animator = GNOME_ANIMATOR (widget);
+
+  gdk_window_clear_area (widget->window,
+                         widget->allocation.x, widget->allocation.y,
+                         widget->allocation.width, widget->allocation.height);
+
   widget->allocation = *allocation;
 
-  /* The animator's window always has the specified size, but is
-     centered in the given allocation.  */
-  /* FIXME: This does not handle the case when the size is smaller
-     than requested very well...  */
+  gdk_window_clear_area (widget->window,
+                         widget->allocation.x, widget->allocation.y,
+                         widget->allocation.width, widget->allocation.height);
 
-  x = widget->allocation.x + (widget->allocation.width
-                              - widget->requisition.width) / 2;
-  y = widget->allocation.y + (widget->allocation.height
-                              - widget->requisition.height) / 2;
-
-  gdk_window_move (widget->window, x, y);
+  animator->privat->area.x = (widget->allocation.x
+                              + (widget->allocation.width
+                                 - widget->requisition.width) / 2);
+  animator->privat->area.y = (widget->allocation.y
+                              + (widget->allocation.height
+                                 - widget->requisition.height) / 2);
+  animator->privat->area.width = widget->requisition.width;
+  animator->privat->area.height = widget->requisition.height;
 
   prepare_aux_pixmaps (animator);
   draw_background_pixmap (animator);
@@ -328,7 +309,8 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 static void
 paint (GnomeAnimator *animator, GdkRectangle *area)
 {
-  if (animator->num_frames > 0)
+  if (animator->num_frames > 0
+      && animator->privat->offscreen_pixmap != NULL)
     {
       GtkWidget *widget;
       GnomeAnimatorPrivate *privat;
@@ -345,10 +327,10 @@ paint (GnomeAnimator *animator, GdkRectangle *area)
       gdk_draw_pixmap (privat->offscreen_pixmap,
                        widget->style->black_gc,
                        privat->background_pixmap,
-                       0, 0,
-                       0, 0,
-                       widget->requisition.width,
-                       widget->requisition.height);
+                       area->x - privat->area.x, area->y - privat->area.y,
+                       area->x - privat->area.x, area->y - privat->area.y,
+                       area->width,
+                       area->height);
 
       /* Draw the (shaped) frame into the offscreen pixmap.  */
       gdk_gc_set_clip_mask (widget->style->black_gc, frame->mask);
@@ -358,7 +340,7 @@ paint (GnomeAnimator *animator, GdkRectangle *area)
                             widget->style->black_gc,
                             frame->x_offset, frame->y_offset,
                             frame->pixmap,
-                            area->x, area->y,
+                            0, 0,
                             frame->width, frame->height);
       gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
 
@@ -366,7 +348,7 @@ paint (GnomeAnimator *animator, GdkRectangle *area)
       gdk_draw_pixmap (widget->window,
                        widget->style->black_gc,
                        privat->offscreen_pixmap,
-                       area->x, area->y,
+                       area->x - privat->area.x, area->y - privat->area.y,
                        area->x, area->y,
                        area->width, area->height);
     }
@@ -388,18 +370,14 @@ draw (GtkWidget *widget, GdkRectangle *area)
 
   if (GTK_WIDGET_DRAWABLE (widget))
     {
+      GdkRectangle p_area;
+
       animator = GNOME_ANIMATOR (widget);
 
-      area->x -= (widget->allocation.width - widget->requisition.width) / 2;
-      area->y -= (widget->allocation.height - widget->requisition.height) / 2;
+      if (gdk_rectangle_intersect (area, &animator->privat->area, &p_area))
+          paint (animator, &p_area);
 
-      w_area.x = 0;
-      w_area.y = 0;
-      w_area.width = widget->requisition.width;
-      w_area.height = widget->requisition.height;
-
-      if (gdk_rectangle_intersect (area, &w_area, &p_area))
-        paint (animator, &p_area);
+      gdk_flush ();
     }
 }
 
@@ -411,8 +389,7 @@ expose (GtkWidget *widget, GdkEventExpose *event)
   g_return_val_if_fail (event != NULL, FALSE);
 
   if (GTK_WIDGET_REALIZED (widget))
-    /* FIXME: We could be smarter here.  */
-    gtk_widget_queue_draw (widget);
+    draw (widget, &event->area);
 
   return FALSE;
 }
@@ -425,53 +402,14 @@ update (GnomeAnimator *animator)
   if (GTK_WIDGET_REALIZED (widget))
     {
       if (animator->num_frames > 0)
-        {
-          gdk_window_show (widget->window);
-          gtk_widget_queue_draw (widget);
-        }
+        gtk_widget_queue_draw (widget);
       else
-        {
-          /* We don't want any window to be visible if there are no
-             frames to play; this way, we are 100% transparent.  */
-          gdk_window_hide (widget->window);
-        }
+        gdk_window_clear_area (widget->window,
+                               widget->allocation.x,
+                               widget->allocation.y,
+                               widget->allocation.width,
+                               widget->allocation.height);
     }
-}
-
-static void
-setup_window_and_style (GnomeAnimator *animator)
-{
-  GdkWindowAttr attr;
-  gint attr_mask;
-  GtkWidget *widget;
-
-  widget = GTK_WIDGET (animator);
-
-  if (widget->window)
-    gdk_window_unref (widget->window);
-
-  attr.window_type = GDK_WINDOW_CHILD;
-  attr.wclass = GDK_INPUT_OUTPUT;
-  attr.visual = gtk_widget_get_visual (widget);
-  attr.colormap = gtk_widget_get_colormap (widget);
-  attr.width = widget->requisition.width;
-  attr.height = widget->requisition.height;
-  attr.x = (widget->allocation.x
-            + (widget->allocation.width - attr.width) / 2);
-  attr.y = (widget->allocation.y
-            + (widget->allocation.height - attr.height) / 2);
-  attr.event_mask = gtk_widget_get_events (widget) | GDK_EXPOSURE_MASK;
-
-  attr_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-
-  widget->window = gdk_window_new (gtk_widget_get_parent_window (widget),
-                                   &attr, attr_mask);
-  gdk_window_set_user_data (widget->window, widget);
-
-  widget->style = gtk_style_attach (widget->style, widget->window);
-
-  /* Set back pixmap to the parent's one.  */
-  gdk_window_set_back_pixmap (widget->window, NULL, TRUE);
 }
 
 static GnomeAnimatorFrame *
@@ -501,9 +439,28 @@ append_frame (GnomeAnimator *animator)
   return new_frame;
 }
 
-/* ------------------------------------------------------------------------- */
+static void
+state_or_style_changed (GnomeAnimator *animator)
+{
+  prepare_aux_pixmaps (animator);
+  draw_background_pixmap (animator);
+}
 
-/* Callbacks.  */
+static void
+state_changed (GtkWidget *widget, guint previous_state)
+{
+  g_assert (GNOME_IS_ANIMATOR (widget));
+  state_or_style_changed (GNOME_ANIMATOR (widget));
+}
+
+static void
+style_set (GtkWidget *widget, GtkStyle *previous_style)
+{
+  g_assert (GNOME_IS_ANIMATOR (widget));
+  state_or_style_changed (GNOME_ANIMATOR (widget));
+}
+
+/* ------------------------------------------------------------------------- */
 
 static gint
 timer_cb (gpointer data)
@@ -515,30 +472,6 @@ timer_cb (gpointer data)
     gnome_animator_advance (animator, +1);
 
   return FALSE;
-}
-
-static void
-parent_state_changed_cb (GtkWidget *widget, void *data)
-{
-  GnomeAnimator *animator;
-
-  g_assert (GNOME_IS_ANIMATOR (widget));
-
-  animator = GNOME_ANIMATOR (widget);
-  prepare_aux_pixmaps (animator);
-  draw_background_pixmap (animator);
-}
-
-static void
-parent_style_set_cb (GtkWidget *widget, void *data)
-{
-  GnomeAnimator *animator;
-
-  g_assert (GNOME_IS_ANIMATOR (widget));
-
-  animator = GNOME_ANIMATOR (widget);
-  prepare_aux_pixmaps (animator);
-  draw_background_pixmap (animator);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -579,17 +512,6 @@ gnome_animator_new_with_size (guint width, guint height)
   widget = GTK_WIDGET (animator);
 
   gtk_widget_set_usize (widget, width, height);
-
-  if (GTK_WIDGET_REALIZED (widget))
-    {
-      if (GTK_WIDGET_MAPPED (widget))
-        gdk_window_hide (widget->window);
-
-      setup_window_and_style (animator);
-    }
-
-  if (GTK_WIDGET_MAPPED (widget))
-    gdk_window_show (widget->window);
 
   if (GTK_WIDGET_VISIBLE (widget))
     gtk_widget_queue_resize (widget);
@@ -738,28 +660,88 @@ gnome_animator_append_frames_from_imlib_at_size (GnomeAnimator *animator,
                                                  guint width,
                                                  guint height)
 {
-  gint i;
+  GtkWidget *widget = GTK_WIDGET (animator);
+  GdkPixmap *tmp_pixmap;
+  GdkBitmap *tmp_mask;
+  GdkGC *pixmap_gc, *mask_gc;
+  GdkGCValues gc_values;
+  guint num_frames;
+  guint render_width;
+  guint rest;
+  guint offs;
+  guint i;
+  guint depth;
+
+  rest = image->rgb_width % x_unit;
+  g_return_val_if_fail (rest == 0, FALSE);
 
   if (width == 0)
     width = x_unit;
   if (height == 0)
     height = image->rgb_height;
 
-  for (i = 0; i + x_unit < image->rgb_width; i += x_unit)
-    {
-      GdkImlibImage *tmp;
+  num_frames = image->rgb_width / x_unit;
+  render_width = width * num_frames;
 
-      /* FIXME: This is slow.  */
-      tmp = gdk_imlib_crop_and_clone_image (image, i, 0, x_unit,
-                                            image->rgb_height);
-      gnome_animator_append_frame_from_imlib_at_size (animator,
-                                                      tmp,
-                                                      x_offset,
-                                                      y_offset,
-                                                      interval,
-                                                      width,
-                                                      height);
-      gdk_imlib_destroy_image (tmp);
+  gdk_imlib_render (image, render_width, height);
+
+  tmp_pixmap = gdk_imlib_move_image (image);
+  tmp_mask = gdk_imlib_move_mask (image);
+
+  depth = gtk_widget_get_visual (widget) -> depth;
+
+  gc_values.function = GDK_COPY;
+
+  pixmap_gc = gdk_gc_new_with_values (tmp_pixmap, &gc_values, GDK_GC_FUNCTION);
+
+  if (tmp_mask != NULL)
+    mask_gc = gdk_gc_new_with_values (tmp_mask, &gc_values, GDK_GC_FUNCTION);
+  else
+    mask_gc = NULL;             /* Make compiler happy.  */
+
+  for (i = offs = 0; i < num_frames; i++, offs += width)
+    {
+      GnomeAnimatorFrame *new_frame;
+
+      new_frame = append_frame (animator);
+
+      new_frame->pixmap = gdk_pixmap_new (tmp_pixmap, width, height, depth);
+      gdk_window_copy_area (new_frame->pixmap,
+                            pixmap_gc,
+                            0, 0,
+                            tmp_pixmap,
+                            offs, 0,
+                            width, height);
+
+      if (tmp_mask != NULL)
+        {
+          new_frame->mask = gdk_pixmap_new (tmp_pixmap, width, height, 1);
+          gdk_window_copy_area (new_frame->mask,
+                                mask_gc,
+                                0, 0,
+                                tmp_mask,
+                                offs, 0,
+                                width, height);
+        }
+      else
+        new_frame->mask = NULL;
+
+      new_frame->width = width;
+      new_frame->height = height;
+
+      new_frame->x_offset = x_offset;
+      new_frame->y_offset = y_offset;
+
+      new_frame->interval = interval;
+    }
+
+  gdk_gc_unref (pixmap_gc);
+  gdk_imlib_free_pixmap (tmp_pixmap);
+
+  if (tmp_mask != NULL)
+    {
+      gdk_imlib_free_bitmap (tmp_mask);
+      gdk_gc_unref (mask_gc);
     }
 
   return TRUE;
@@ -981,8 +963,7 @@ gnome_animator_advance (GnomeAnimator *animator, gint num)
             stop = FALSE;
             break;
           default:
-            g_error ("Unknown GnomeAnimatorLoopType %d",
-                     animator->loop_type);
+            g_error ("Unknown GnomeAnimatorLoopType %d", animator->loop_type);
             stop = TRUE;
             new_frame = animator->current_frame_number;
             break;
@@ -1012,7 +993,7 @@ gnome_animator_goto_frame (GnomeAnimator *animator, guint frame_number)
 
   privat = animator->privat;
 
-  /* Try to be smart and minimize the number of steps spent walking in
+  /* Try to be smart and minimize the number of steps spent walking on
      the linked list.  */
 
   dist1 = frame_number - animator->current_frame_number;
