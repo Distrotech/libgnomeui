@@ -173,8 +173,6 @@ gnome_dialog_init (GnomeDialog *dialog)
   dialog->click_closes = FALSE;
   dialog->buttons = NULL;
   
-  dialog->default_button = NULL;
-
   GTK_WINDOW(dialog)->type = gnome_preferences_get_dialog_type();
   gtk_window_set_position(GTK_WINDOW(dialog), 
 		      gnome_preferences_get_dialog_position());
@@ -435,22 +433,6 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
   va_end(ap);
 }
 
-static int
-button_focus_in(GtkWidget *w, GdkEvent *fevent, gpointer data)
-{
-	gtk_widget_grab_default (w);
-	return FALSE;
-}
-
-static int
-button_focus_out(GtkWidget *w, GdkEvent *fevent, gpointer data)
-{
-	GnomeDialog *dialog = data;
-	if(dialog->default_button)
-		gtk_widget_grab_default (dialog->default_button);
-	return FALSE;
-}
-
 /**
  * gnome_dialog_append_button: Add a button to a dialog after its initial construction.
  * @dialog: &GnomeDialog to add button to.
@@ -473,16 +455,9 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
     gnome_dialog_init_action_area (dialog);    
 
     button = gnome_stock_or_ordinary_button (button_name);
-    gtk_signal_connect(GTK_OBJECT(button),"focus_in_event",
-		       GTK_SIGNAL_FUNC(button_focus_in),
-		       dialog);
-    gtk_signal_connect(GTK_OBJECT(button),"focus_out_event",
-		       GTK_SIGNAL_FUNC(button_focus_out),
-		       dialog);
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
 
-    dialog->default_button = button;
     gtk_widget_grab_default (button);
     gtk_widget_show (button);
     
@@ -528,7 +503,6 @@ void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
 
-    dialog->default_button = button;
     gtk_widget_grab_default (button);
     gtk_widget_show (button);
     
@@ -767,7 +741,6 @@ gnome_dialog_set_default (GnomeDialog *dialog,
   list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
-    dialog->default_button = list->data;
     gtk_widget_grab_default (GTK_WIDGET (list->data));
     return;
   }

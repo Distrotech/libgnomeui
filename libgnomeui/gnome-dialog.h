@@ -51,7 +51,7 @@ struct _GnomeDialog
   unsigned int click_closes : 1;
   unsigned int just_hide : 1;
 
-  GtkWidget *default_button;
+  gpointer padding;
 };
 
 struct _GnomeDialogClass
