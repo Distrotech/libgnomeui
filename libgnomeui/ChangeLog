@@ -1,3 +1,9 @@
+Tue Jun 20 14:11:17 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dock*.[ch]: remove the dock hiding patch as it seems to not
+	  be looked upon favorably (especially by Ettore and it's his widget
+	  thingie).  Thus reverting until discussed further.
+
 Mon Jun 19 22:17:01 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dock-item.[ch]: add a hidden state, add a signal

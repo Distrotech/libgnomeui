@@ -45,7 +45,6 @@ enum {
   DOCK_DRAG_BEGIN,
   DOCK_DRAG_END,
   DOCK_DRAG_MOTION,
-  DOCK_TOGGLE_STATE,
   DOCK_DETACH,
   ORIENTATION_CHANGED,
   LAST_SIGNAL
@@ -88,16 +87,6 @@ static gint gnome_dock_item_motion         (GtkWidget         *widget,
 static gint gnome_dock_item_delete_event   (GtkWidget         *widget,
                                             GdkEventAny       *event);
 
-/* Signal wrappers */
-static void gnome_dock_item_dock_drag_begin    (GnomeDockItem *item);
-static void gnome_dock_item_dock_drag_motion   (GnomeDockItem *item,
-						gint x, gint y);
-static void gnome_dock_item_dock_drag_end      (GnomeDockItem *item);
-static void gnome_dock_item_dock_toggle_state  (GnomeDockItem *item);
-
-static void gnome_dock_item_dock_detach        (GnomeDockItem *item);
-static void gnome_dock_item_orientation_changed(GnomeDockItem *item,
-						GtkOrientation new_orientation);
 
 static GtkBinClass *parent_class;
 static guint        dock_item_signals[LAST_SIGNAL] = { 0 };
@@ -182,14 +171,6 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
                     GTK_RUN_LAST,
                     object_class->type,
                     GTK_SIGNAL_OFFSET (GnomeDockItemClass, dock_detach),
-                    gtk_marshal_NONE__NONE,
-                    GTK_TYPE_NONE, 0);
-
-  dock_item_signals[DOCK_TOGGLE_STATE] =
-    gtk_signal_new ("dock_toggle_state",
-                    GTK_RUN_LAST,
-                    object_class->type,
-                    GTK_SIGNAL_OFFSET (GnomeDockItemClass, dock_toggle_state),
                     gtk_marshal_NONE__NONE,
                     GTK_TYPE_NONE, 0);
 
@@ -473,50 +454,6 @@ gnome_dock_item_style_set (GtkWidget *widget,
 }
 
 static void
-get_handle_width_and_height(GnomeDockItem *item,
-			    int in_width, int in_height,
-			    int in_hidden_width, int in_hidden_height,
-			    int take_off_border,
-			    int *width, int *height)
-{
-  if (item->is_hidden && ! item->is_floating)
-    {
-      GtkBin *bin = GTK_BIN(item);
-      if (item->orientation == GTK_ORIENTATION_HORIZONTAL)
-        {
-          if(in_hidden_height > 0)
-	    *width = in_hidden_height;
-	  else
-	    *width = bin->child ? bin->child->allocation.height: 
-		    DRAG_HANDLE_SIZE * 3;
-          *height = DRAG_HANDLE_SIZE - take_off_border;
-        }
-      else
-        {
-          *width = DRAG_HANDLE_SIZE - take_off_border;
-          if(in_hidden_width > 0)
-            *height = in_hidden_width;
-	  else
-            *height = bin->child ? bin->child->allocation.width: 
-		  DRAG_HANDLE_SIZE * 3;
-        }
-    }
-  else
-    {
-      if (item->orientation == GTK_ORIENTATION_HORIZONTAL)
-        {
-          *height = in_height;
-          *width = DRAG_HANDLE_SIZE - take_off_border;
-        }
-      else
-        {
-          *width = in_width;
-          *height = DRAG_HANDLE_SIZE - take_off_border;
-        }
-    }
-}
-
-static void
 gnome_dock_item_size_request (GtkWidget      *widget,
                               GtkRequisition *requisition)
 {
@@ -541,20 +478,7 @@ gnome_dock_item_size_request (GtkWidget      *widget,
       child_requisition.height = 0;
     }
 
-  if (dock_item->is_hidden)
-    {
-      int width, height;
-      get_handle_width_and_height(dock_item,
-				  child_requisition.width,
-				  child_requisition.height,
-				  child_requisition.width,
-				  child_requisition.height,
-				  GTK_CONTAINER (dock_item)->border_width * 2,
-				  &width, &height);
-      requisition->width = width;
-      requisition->height = height;
-    }
-  else if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       requisition->width = 
         GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
@@ -626,33 +550,7 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
             child_allocation.y += DRAG_HANDLE_SIZE;
         }
 
-      /* When hidden, make sure the child is out of the way */
-      if (di->is_hidden)
-        {
-          GtkRequisition child_requisition;
-
-          child_allocation.x = widget->allocation.width + 1;
-          child_allocation.y = widget->allocation.height + 1;
-
-	  gtk_widget_get_child_requisition (child, &child_requisition);
-
-          child_allocation.width = child_requisition.width;
-          child_allocation.height = child_requisition.height;
-
-	  if (GTK_WIDGET_REALIZED (di))
-	    {
-	      if (di->is_floating)
-	        gdk_window_resize (di->float_window,
-				   widget->allocation.width,
-				   widget->allocation.height);
-	      gdk_window_move_resize (di->bin_window,
-				      0,
-				      0,
-				      widget->allocation.width,
-				      widget->allocation.height);
-	    }
-        }
-      else if (di->is_floating)
+      if (di->is_floating)
 	{
           GtkRequisition child_requisition;
 	  guint float_width;
@@ -778,23 +676,28 @@ gnome_dock_item_paint (GtkWidget      *widget,
   if (GNOME_DOCK_ITEM_NOT_LOCKED (di))
     {
       GdkRectangle dest;
-      int w, h;
 
       rect.x = 0;
       rect.y = 0;
-
-      get_handle_width_and_height(di, width, height, 0, 0, 0, &w, &h);
-
-      rect.width = w;
-      rect.height = h;
+      
+      if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
+        {
+          rect.width = DRAG_HANDLE_SIZE;
+          rect.height = height;
+        }
+      else
+        {
+          rect.width = width;
+          rect.height = DRAG_HANDLE_SIZE;
+        }
 
       if (gdk_rectangle_intersect (event ? &event->area : area, &rect, &dest))
 	draw_textured_frame (widget, di->bin_window, &rect,
-			     di->button_down ? GTK_SHADOW_IN : GTK_SHADOW_OUT,
+			     GTK_SHADOW_OUT,
 			     event ? &event->area : area);
     }    
   
-  if ( ! di->is_hidden && bin->child && GTK_WIDGET_VISIBLE (bin->child))
+  if (bin->child && GTK_WIDGET_VISIBLE (bin->child))
     {
       GdkRectangle child_area;
       GdkEventExpose child_event;
@@ -862,34 +765,13 @@ gnome_dock_item_expose (GtkWidget      *widget,
   return FALSE;
 }
 
-static void
-draw_handle(GnomeDockItem *item)
-{
-  GdkRectangle rect;
-  int width, height;
-  GtkWidget *widget = GTK_WIDGET(item);
-
-  rect.x = 0;
-  rect.y = 0;
-
-  get_handle_width_and_height(item,
-			      widget->allocation.width,
-			      widget->allocation.height,
-			      0, 0, 0,
-			      &width, &height);
-  rect.width = width;
-  rect.height = height;
-
-  gnome_dock_item_paint(widget, NULL, &rect);
-}
-
 static gint
 gnome_dock_item_button_changed (GtkWidget      *widget,
                                 GdkEventButton *event)
 {
   GnomeDockItem *di;
   gboolean event_handled;
-
+  
   g_return_val_if_fail (widget != NULL, FALSE);
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (widget), FALSE);
   g_return_val_if_fail (event != NULL, FALSE);
@@ -908,66 +790,52 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
     {
       GtkWidget *child;
       gboolean in_handle;
-      int width, height;
       
       child = GTK_BIN (di)->child;
-
-      get_handle_width_and_height(di,
-				  widget->allocation.width,
-				  widget->allocation.height,
-				  0, 0, 0,
-				  &width, &height);
-      if (event->x < width && event->y < height)
-	in_handle = TRUE;
-      else
-	in_handle = FALSE;
       
+      switch (di->orientation)
+	{
+	case GTK_ORIENTATION_HORIZONTAL:
+	  in_handle = event->x < DRAG_HANDLE_SIZE;
+	  break;
+	case GTK_ORIENTATION_VERTICAL:
+	  in_handle = event->y < DRAG_HANDLE_SIZE;
+	  break;
+	default:
+	  in_handle = FALSE;
+	  break;
+	}
+
       if (!child)
 	{
 	  in_handle = FALSE;
 	  event_handled = TRUE;
 	}
-
-      di->button_down = 0;
-
+      
       if (in_handle)
 	{
-	  di->button_down = 1;
-
-	  draw_handle(di);
-
-	  /* we set these even if we weren't going to drag */
-          di->dragoff_x = event->x;
+	  di->dragoff_x = event->x;
 	  di->dragoff_y = event->y;
+
+	  di->in_drag = TRUE;
+
+          gnome_dock_item_grab_pointer (di);
+
+          gtk_signal_emit (GTK_OBJECT (widget),
+                           dock_item_signals[DOCK_DRAG_BEGIN]);
 
 	  event_handled = TRUE;
 	}
     }
-  else if (event->type == GDK_BUTTON_RELEASE)
+  else if (event->type == GDK_BUTTON_RELEASE && di->in_drag)
     {
-      if (di->in_drag)
-	{
-          gdk_pointer_ungrab (GDK_CURRENT_TIME);
+      gdk_pointer_ungrab (GDK_CURRENT_TIME);
       
-          di->in_drag = FALSE;
+      di->in_drag = FALSE;
 
-	  /* call the signal emit wrapper */
-	  gnome_dock_item_dock_drag_end (di);
-
-          event_handled = TRUE;
-	}
-      else if (di->button_down)
-	{
-	  di->button_down = 0;
-	  di->is_hidden = !di->is_hidden;
-	  /* no need to draw the handle, queue resize will do a redraw it
-	   * for us*/
-	  gtk_widget_queue_resize(widget->parent);
-          event_handled = TRUE;
-
-	  /* call the signal emit wrapper */
-	  gnome_dock_item_dock_toggle_state (di);
-	}
+      gtk_signal_emit (GTK_OBJECT (widget),
+                       dock_item_signals[DOCK_DRAG_END]);
+      event_handled = TRUE;
     }
 
   return event_handled;
@@ -985,25 +853,10 @@ gnome_dock_item_motion (GtkWidget      *widget,
   g_return_val_if_fail (event != NULL, FALSE);
 
   di = GNOME_DOCK_ITEM (widget);
-
-  if (event->window != di->bin_window)
+  if (!di->in_drag)
     return FALSE;
 
-  if (di->button_down)
-    {
-      di->button_down = 0;
-
-      di->in_drag = TRUE;
-
-      gnome_dock_item_grab_pointer (di);
-
-      /* call the signal emit wrapper */
-      gnome_dock_item_dock_drag_begin (di);
-
-      draw_handle(di);
-    }
-
-  if (!di->in_drag)
+  if (event->window != di->bin_window)
     return FALSE;
 
   gdk_window_get_pointer (NULL, &new_x, &new_y, NULL);
@@ -1011,8 +864,9 @@ gnome_dock_item_motion (GtkWidget      *widget,
   new_x -= di->dragoff_x;
   new_y -= di->dragoff_y;
 
-  /* call the signal emit wrapper */
-  gnome_dock_item_dock_drag_motion (di, new_x, new_y);
+  gtk_signal_emit (GTK_OBJECT (widget),
+                   dock_item_signals[DOCK_DRAG_MOTION],
+                   new_x, new_y);
 
   return TRUE;
 }
@@ -1230,8 +1084,7 @@ gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
         gtk_widget_queue_clear (GTK_WIDGET (dock_item));
       gtk_widget_queue_resize (GTK_WIDGET (dock_item));
 
-      /* call the signal emit wrapper */
-      gnome_dock_item_orientation_changed (dock_item, orientation);
+      gtk_signal_emit(GTK_OBJECT(dock_item), dock_item_signals[ORIENTATION_CHANGED], orientation);
     }
 
   return TRUE;
@@ -1338,9 +1191,6 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   gdk_window_set_transient_for(item->float_window,
                                gdk_window_get_toplevel(GTK_WIDGET (item)->window));
 
-  /* call the signal emit wrapper */
-  gnome_dock_item_dock_detach (item);
-
   return TRUE;
 }
 
@@ -1392,26 +1242,10 @@ gnome_dock_item_handle_size_request (GnomeDockItem *item,
   if (bin->child != NULL)
     gtk_widget_size_request (bin->child, requisition);
 
-  if (item->is_hidden)
-    {
-      int width, height;
-      get_handle_width_and_height(item,
-				  requisition->width,
-				  requisition->height,
-				  requisition->width,
-				  requisition->height,
-				  GTK_CONTAINER (item)->border_width * 2,
-				  &width, &height);
-      requisition->width = width;
-      requisition->height = height;
-    }
+  if (item->orientation == GTK_ORIENTATION_HORIZONTAL)
+    requisition->width += DRAG_HANDLE_SIZE;
   else
-    {
-      if (item->orientation == GTK_ORIENTATION_HORIZONTAL)
-        requisition->width += DRAG_HANDLE_SIZE;
-      else
-        requisition->height += DRAG_HANDLE_SIZE;
-    }
+    requisition->height += DRAG_HANDLE_SIZE;
 
   requisition->width += container->border_width * 2;
   requisition->height += container->border_width * 2;
@@ -1428,51 +1262,4 @@ gnome_dock_item_get_floating_position (GnomeDockItem *item,
       *x = item->float_x;
       *y = item->float_y;
     }
-}
-
-/* Signal wrappers */
-
-static void
-gnome_dock_item_dock_drag_begin(GnomeDockItem *item)
-{
-  gtk_signal_emit (GTK_OBJECT (item),
-		   dock_item_signals[DOCK_DRAG_BEGIN]);
-}
-
-static void
-gnome_dock_item_dock_drag_motion(GnomeDockItem *item, gint x, gint y)
-{
-  gtk_signal_emit (GTK_OBJECT (item),
-		   dock_item_signals[DOCK_DRAG_MOTION],
-		   x, y);
-}
-
-static void
-gnome_dock_item_dock_drag_end(GnomeDockItem *item)
-{
-  gtk_signal_emit (GTK_OBJECT (item),
-		   dock_item_signals[DOCK_DRAG_END]);
-}
-
-static void
-gnome_dock_item_dock_toggle_state(GnomeDockItem *item)
-{
-  gtk_signal_emit (GTK_OBJECT (item),
-		   dock_item_signals[DOCK_TOGGLE_STATE]);
-}
-
-static void
-gnome_dock_item_dock_detach(GnomeDockItem *item)
-{
-  gtk_signal_emit (GTK_OBJECT (item),
-		   dock_item_signals[DOCK_DETACH]);
-}
-
-static void
-gnome_dock_item_orientation_changed(GnomeDockItem *item,
-				    GtkOrientation new_orientation)
-{
-  gtk_signal_emit (GTK_OBJECT (item),
-		   dock_item_signals[ORIENTATION_CHANGED],
-		   new_orientation);
 }
